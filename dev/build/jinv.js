@@ -15,12 +15,12 @@ function kitInvGrid(o){o=o||{};const key=o.key||"bag";KINV.reg[key]=o;
  const L=(o.items||[]).filter(x=>cur==="all"||x.cat===cur);
  const cnt=k=>(o.items||[]).filter(x=>k==="all"||x.cat===k).reduce((a,x)=>a+(x.qty||1),0);
  const row=kitTabRowHTML(tabs.map(t=>{const n=cnt(t.k);return{k:t.k,label:t.label,n,tip:`${n} món`}}),cur,`data-kinvkey="${key}" data-kinvtab`);
- const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,sel:x.sel,size:"slot",
+ const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,sel:x.sel||(o.inline&&typeof kinlIsSel==="function"&&kinlIsSel(key,x)),size:"slot",
    tip:x.tip||x.name,data:`data-kinvkey="${key}" data-kinvi="${(o.items||[]).indexOf(x)}" role="button" tabindex="0"`})).join("");
  return `<div class="kinv" data-kinv="${key}" data-min="${o.minRows||4}"><div class="pctabs kcattabs kinvtabs" role="tablist">${row}</div>`+
   `<div class="kinvbody${o.side?" kinvws":""}">${o.side?`<div class="kinvside">${o.side}</div>`:""}<div class="kinvmain">`+
   `<div class="kinvg" data-n="${L.length}">${slots}${kitInvEmpty(Math.max(0,(o.minSlots||24)-L.length))}</div>`+
-  `${o.sum?`<div class="keqsum kinvsum">${o.sum}</div>`:""}${o.below||""}</div></div></div>`}
+  `${o.inline&&typeof kinlStrip==="function"?kinlStrip(o):(o.sum?`<div class="keqsum kinvsum">${o.sum}</div>`:"")}${o.below||""}</div></div></div>`}
 function kitInvEmpty(n){let h="";for(let i=0;i<n;i++)h+=kitItem({empty:true,size:"slot",tip:"Ô trống"});return h}
 /* fill the grid to whole rows (≥ minRows rows) once its column count is known; inside the panel, the grid also GROWS by whole rows into
    any free height left at the bottom of the panel (owner 11/15: no big empty gap under the bag; equipment panel stays below it). */
@@ -68,7 +68,7 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
 addEventListener("resize",()=>{clearTimeout(window.__kinvT);window.__kinvT=setTimeout(kitInvFit,60)});
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kinvtab]");if(t){e.stopPropagation();const k=t.dataset.kinvkey;KINV.cur[k]=t.dataset.kinvtab;
   try{localStorage.setItem("hclh-kinv-"+k,t.dataset.kinvtab)}catch(x){}try{render()}catch(x){}return}
- const s=e.target.closest&&e.target.closest("[data-kinvi]");if(s){e.stopPropagation();const o=KINV.reg[s.dataset.kinvkey];const it=o&&o.items&&o.items[+s.dataset.kinvi];if(it&&o.onPick)o.onPick(it)}},true);
+ const s=e.target.closest&&e.target.closest("[data-kinvi]");if(s){e.stopPropagation();const o=KINV.reg[s.dataset.kinvkey];const it=o&&o.items&&o.items[+s.dataset.kinvi];if(it&&o.onPick){if(o.inline&&typeof kinlPick==="function")kinlPick(o,it);else o.onPick(it)}}},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.kinvi!=null){e.preventDefault();e.target.click()}});
 (function(){const st=document.createElement("style");st.id="kinv-css";st.textContent=`
 .kinv{display:flex;flex-direction:column;gap:0;margin:0 0 10px}
@@ -356,7 +356,7 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
 if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0.apply(this,arguments);try{
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
   const bag=kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(itm(e.k).kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
-   items:kinvItems(),minRows:2,onPick:kinvOpen,side:keqTT()+(typeof petSideHTML==="function"?petSideHTML():""),sum:(KEQ.reg.tutrang||{}).sum});
+   items:kinvItems(),minRows:2,inline:true,onPick:kinvOpen,side:keqTT()+(typeof petSideHTML==="function"?petSideHTML():""),sum:(KEQ.reg.tutrang||{}).sum});
   return kinvSubHTML(h,bag)}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
 /* ---------- Tư trang SUB-TABS (owner 11/15): the ONE sub-tab control (.ksub > .ksubb, KIT 20 — same as Hậu cung) at the top:
    "Túi đồ" | "Thú cưng" (all her pets as kit cards + care/buy/follow/send back, jpet petPanelHTML; the left-column pet box opens it) | "Việc"; "Túi đồ" (default: the bag grid with its category chips + the "Bên mình" equipment slots, seen without scrolling past any act) ·

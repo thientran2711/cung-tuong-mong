@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"161dc482+","t":"2026-11-21T02:35Z","c":"KIT REQUEST: inline item strip (bag-inline, owner mark 21)","b":"9dff546ccb66","h":[{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"}]};
+window.CTM_BI={"s":"67eb7b98+","t":"2026-11-21T02:38Z","c":"Tu trang Viec: act cards get their pictures (code-side alias for 6 acts + kpanec on the Viec pane); mark #23","b":"4cab2ffe05cf","h":[{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -40780,12 +40780,12 @@ function kitInvGrid(o){o=o||{};const key=o.key||"bag";KINV.reg[key]=o;
  const L=(o.items||[]).filter(x=>cur==="all"||x.cat===cur);
  const cnt=k=>(o.items||[]).filter(x=>k==="all"||x.cat===k).reduce((a,x)=>a+(x.qty||1),0);
  const row=kitTabRowHTML(tabs.map(t=>{const n=cnt(t.k);return{k:t.k,label:t.label,n,tip:`${n} món`}}),cur,`data-kinvkey="${key}" data-kinvtab`);
- const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,sel:x.sel,size:"slot",
+ const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,sel:x.sel||(o.inline&&typeof kinlIsSel==="function"&&kinlIsSel(key,x)),size:"slot",
    tip:x.tip||x.name,data:`data-kinvkey="${key}" data-kinvi="${(o.items||[]).indexOf(x)}" role="button" tabindex="0"`})).join("");
  return `<div class="kinv" data-kinv="${key}" data-min="${o.minRows||4}"><div class="pctabs kcattabs kinvtabs" role="tablist">${row}</div>`+
   `<div class="kinvbody${o.side?" kinvws":""}">${o.side?`<div class="kinvside">${o.side}</div>`:""}<div class="kinvmain">`+
   `<div class="kinvg" data-n="${L.length}">${slots}${kitInvEmpty(Math.max(0,(o.minSlots||24)-L.length))}</div>`+
-  `${o.sum?`<div class="keqsum kinvsum">${o.sum}</div>`:""}${o.below||""}</div></div></div>`}
+  `${o.inline&&typeof kinlStrip==="function"?kinlStrip(o):(o.sum?`<div class="keqsum kinvsum">${o.sum}</div>`:"")}${o.below||""}</div></div></div>`}
 function kitInvEmpty(n){let h="";for(let i=0;i<n;i++)h+=kitItem({empty:true,size:"slot",tip:"Ô trống"});return h}
 /* fill the grid to whole rows (≥ minRows rows) once its column count is known; inside the panel, the grid also GROWS by whole rows into
    any free height left at the bottom of the panel (owner 11/15: no big empty gap under the bag; equipment panel stays below it). */
@@ -40833,7 +40833,7 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
 addEventListener("resize",()=>{clearTimeout(window.__kinvT);window.__kinvT=setTimeout(kitInvFit,60)});
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kinvtab]");if(t){e.stopPropagation();const k=t.dataset.kinvkey;KINV.cur[k]=t.dataset.kinvtab;
   try{localStorage.setItem("hclh-kinv-"+k,t.dataset.kinvtab)}catch(x){}try{render()}catch(x){}return}
- const s=e.target.closest&&e.target.closest("[data-kinvi]");if(s){e.stopPropagation();const o=KINV.reg[s.dataset.kinvkey];const it=o&&o.items&&o.items[+s.dataset.kinvi];if(it&&o.onPick)o.onPick(it)}},true);
+ const s=e.target.closest&&e.target.closest("[data-kinvi]");if(s){e.stopPropagation();const o=KINV.reg[s.dataset.kinvkey];const it=o&&o.items&&o.items[+s.dataset.kinvi];if(it&&o.onPick){if(o.inline&&typeof kinlPick==="function")kinlPick(o,it);else o.onPick(it)}}},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.kinvi!=null){e.preventDefault();e.target.click()}});
 (function(){const st=document.createElement("style");st.id="kinv-css";st.textContent=`
 .kinv{display:flex;flex-direction:column;gap:0;margin:0 0 10px}
@@ -41121,7 +41121,7 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
 if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0.apply(this,arguments);try{
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
   const bag=kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(itm(e.k).kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
-   items:kinvItems(),minRows:2,onPick:kinvOpen,side:keqTT()+(typeof petSideHTML==="function"?petSideHTML():""),sum:(KEQ.reg.tutrang||{}).sum});
+   items:kinvItems(),minRows:2,inline:true,onPick:kinvOpen,side:keqTT()+(typeof petSideHTML==="function"?petSideHTML():""),sum:(KEQ.reg.tutrang||{}).sum});
   return kinvSubHTML(h,bag)}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
 /* ---------- Tư trang SUB-TABS (owner 11/15): the ONE sub-tab control (.ksub > .ksubb, KIT 20 — same as Hậu cung) at the top:
    "Túi đồ" | "Thú cưng" (all her pets as kit cards + care/buy/follow/send back, jpet petPanelHTML; the left-column pet box opens it) | "Việc"; "Túi đồ" (default: the bag grid with its category chips + the "Bên mình" equipment slots, seen without scrolling past any act) ·
@@ -52651,6 +52651,49 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§70",title:"kitIt
  html:()=>`<div class="kitpg-row" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">${["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).map(k=>kitItemDetail(k,{cls:"kidet-strip"})).join("")}</div>`+
   `<div class="kitpg-row">${["tramngoc","boodieu","y_saxanh"].map(k=>kitItem(Object.assign(kitItemInfo(k),{name:kitItemInfo(k).name,size:"md",data:kitItemTap(k)}))).join(" ")}</div>`})}catch(e){}
 window.kitItemRef=kitItemRef;window.kitItemDetail=kitItemDetail;window.kitItemDetailRows=kitItemDetailRows;window.kitItemCard=kitItemCard;window.kitItemCardClose=kitItemCardClose;window.kitItemTap=kitItemTap;
+/* ================= KIT §70.6 · INLINE ITEM STRIP · kinlStrip / kinlPick / kinlIsSel (owner mark #21, OD 21/11 ~02:45Z, review/bag-inline) =================
+   Owner (verbatim): "khi mà tao bấm vào một cái món đồ nào đó thì nó sẽ hiện cái hình ô hình vuông nhỏ đó. Bên cái khung bên phải sẽ là thông tin của cái món đồ đó,
+   không cần pop up ra một cái khung nào hết, tại vì nó sẽ che mất những cái hình khác ... bấm một hình một xem thông tin, bấm hình hai xem thông tin. Người ta sẽ không
+   thích cái kiểu mà pop up lên rồi phải tắt đi ... Sau đó là cái phần sắc, xa xỉ, đã biết, đúng phẩm nè. Cái này là mình sẽ đưa qua cái khung bên phải kế bên cái khung thông tin ...
+   xếp vào một cái khung nhỏ, hoặc là xếp vào hàng dọc".
+   ONE kit part = the strip UNDER an item grid (`kitInvGrid({inline:true})`): LEFT a small SQUARE picture of the tapped item, MIDDLE its info (the same
+   kit rows + act buttons the old pop-up held), RIGHT the grid's summary chips (Sắc +N · Xa xỉ N · ✓ Đã biết: Đúng phẩm …) as ONE vertical column. No pop-up, no ✕: tapping
+   another tile swaps the strip in place. Empty state "Chạm một món để xem." (the chips stay).
+   HOW (whole group, one code path): the grid's `onPick(item)` still builds its pop-up with kitModal({kind:"info",...}); while a pick is CAPTURED (KINL.cap) that call is
+   diverted into the strip instead of opening a modal, so every older opener wrapped around kinvOpen (works, recipe books, shelf, Dấu ấn, wardrobe, …) fills the strip too.
+   The selection is remembered per grid (KINL.sel[key] = item id) and re-captured on every render, so the strip always shows the live state (Đeo → Tháo, sold item → gone). */
+const KINL={sel:{},cap:null};
+function kinlId(x){try{if(x.g)return(x.g.wk?"w":"i")+x.g.i+":"+(x.g.k||"");if(x.mme!=null)return"m"+x.mme;if(x.k)return"k"+x.k+":"+(x.ix!=null?x.ix:"");}catch(e){}return"t"+(x.tip||x.name||"")}
+function kinlIsSel(key,x){return KINL.sel[key]!=null&&KINL.sel[key]===kinlId(x)}
+function kinlCapture(o,x){KINL.cap={};try{o.onPick(x)}catch(e){console.error("kinlCapture",e)}const c=KINL.cap;KINL.cap=null;return c&&c.spec?c.spec:null}
+function kinlStrip(o){const key=o.key||"bag";let spec=null;const id=KINL.sel[key];
+ if(id!=null){const x=(o.items||[]).find(y=>kinlId(y)===id);spec=x?kinlCapture(o,x):null;if(!spec)delete KINL.sel[key]}
+ const body=spec?`<div class="kinlpic">${spec.itemPic||""}</div><div class="kinlinfo"><b class="kinln">${spec.title||""}</b>${spec.sub?`<span class="kinlsub">${spec.sub}</span>`:""}${spec.html||""}</div>`
+  :`<div class="kinlempty">Chạm một món để xem.</div>`;
+ return `<div class="kidet kidet-inline kinldet" data-kinl="${key}">${body}${o.sum?`<div class="kinlchips">${o.sum}</div>`:""}</div>`}
+/* tap = select + swap the strip in place (no re-render of the grid: the page keeps its scroll and the tab row stays put) */
+function kinlPick(o,x){const key=o.key||"bag";KINL.sel[key]=kinlId(x);const spec=kinlCapture(o,x);
+ if(!spec){delete KINL.sel[key];o.onPick(x);return}
+ const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
+ document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=e.dataset.kinvi!=null&&(o.items||[])[+e.dataset.kinvi]===x;e.classList.toggle("kitem-sel",on);if(on)e.setAttribute("aria-pressed","true");else e.removeAttribute("aria-pressed")});
+ try{if(typeof sfx==="function")sfx("tap")}catch(e){}try{if(typeof kitFix==="function")kitFix(document.getElementById("panel"))}catch(e){}try{kitInvFit()}catch(e){}}
+/* the capture: an info pop-up built while a pick is captured goes to the strip, nowhere else */
+(function(){if(typeof kitModal!=="function")return;const k0=kitModal;kitModal=function(spec){if(KINL.cap&&spec&&spec.kind==="info"&&!KINL.cap.spec){KINL.cap.spec=spec;return null}return k0.apply(this,arguments)};window.kitModal=kitModal})();
+(function(){const st=document.createElement("style");st.id="kinl-css";st.textContent=`
+.kinldet{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;margin:8px 0 0;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf3e3;box-shadow:inset 0 1px 3px #5a3a2018;min-width:0}
+.kinldet .kinlpic{width:var(--kinlsz,88px);aspect-ratio:1/1;flex:none}
+.kinldet .kinlpic .kitem{--isz:100%;width:100%}
+.kinldet .kinlinfo{min-width:0;display:flex;flex-direction:column;gap:3px}
+.kinldet .kinln{font-family:var(--font-d,inherit);font-size:1.02rem;line-height:1.2}
+.kinldet .kinlsub{font-size:.78rem;opacity:.75}
+.kinldet .kinvacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;margin-top:6px}
+.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
+.kinldet .kinlchips .chip{white-space:normal}
+.kinldet .kinlempty{grid-column:1/2;align-self:center;padding:10px 4px;opacity:.7}
+.kinldet .kinlempty+.kinlchips{grid-column:3}
+.kinldet:has(.kinlempty){grid-template-columns:minmax(0,1fr) auto}
+.kinldet:has(.kinlempty) .kinlchips{grid-column:2}
+`;document.head.appendChild(st)})();
 /* ================= jpromo: PROMOTION REWARDS (owner 15/11 20:05Z #9, review/promo-rules) — KIT §65 =================
    Every rank-up gives the FULL SET of the new rank as real items, on every road:
    - Consort ranks (Đáp ứng … Hoàng hậu; also a cung nữ raised to Đáp ứng): y phục + trâm of the rank (j92 WD store, phẩm P = rank+1, the trâm in
@@ -85833,7 +85876,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9dff546ccb66";window.CTM_BUILD=BUILD;
+const BUILD="4cab2ffe05cf";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
