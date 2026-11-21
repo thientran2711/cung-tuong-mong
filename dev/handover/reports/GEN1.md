@@ -281,3 +281,13 @@ gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr eac
 | t5 Phi COMOIj | mEZp0UIhJQ (31af161 text) | tCRpHb6mZJ | https://www.magnific.com/app/creation/tCRpHb6mZJ |
 Sheets OLD|NEW (big Vietnamese labels: tên, model, 55 cr/tấm, TỔNG 110 cr): dev/handover/review-sheets/thu_t4_t5_CHECK2_be1ec9e/sheet_t4_OLD_NEW.png, sheet_t5_OLD_NEW.png
 Look: t4 NEW – 3/4 left, hair up, ONE lotus, bare ears, lotus lamp held, one jade pendant set; the flowered sash is cream-gold and tied with a small decorative bow (rule: NO bow, flat; also reads as a third colour). t5 NEW – frontal, ONE hollyhock, bare ears, letter in both hands, blush flowered girdle now flat (as asked), two jade pendants, shoulder layers; FAULTS: two jade hairpins lie horizontally across the top of the bun (rule: no horizontal hairpin), the pearl swag across the chest is hard to see (OLD showed it), fine loose wisps by the ears.
+
+## MAID DRAFTS (CHECK2 job 2 PASS 2c75a81, released by Foreman C #17) — tam / nhị / nhất, NEW draft vs OLD
+Settings: gpt-2-6, 9:16, 1k, quality low, seed 7172, ref s7IPw0Ll8e (m18 face), 55 cr each = 165 cr (the old gens were 2k/135 cr). Prompts (all unchanged since 2c75a81, no conflict markers; tam file identical to the one I drew on 32123e246): dev/art/maid7/test3_tm1_g43.txt, test7_nhi_L1656.txt, test6_nhat_L1653.txt. Gates (check_store --scope mama --age a18): nhất PASS; tam/nhị FAIL only S01+S32 (= same as their approved bases, accepted by Foreman); keep_check --sidecar PASS ×3.
+| rank | OLD | NEW (draft) | link |
+|---|---|---|---|
+| tam đẳng | Tdw9BE8VNR | KLpEwy4kqp | https://www.magnific.com/app/creation/KLpEwy4kqp |
+| nhị đẳng | dt4ZloSXSL | 6Ab7cMSiJO | https://www.magnific.com/app/creation/6Ab7cMSiJO |
+| nhất đẳng | ov6GUhR829 | 4RFSnTa9Aa | https://www.magnific.com/app/creation/4RFSnTa9Aa |
+Sheets OLD|NEW (big Vietnamese labels + TỔNG 165 cr): dev/handover/review-sheets/maid_drafts_CHECK2_2c75a81/sheet_tam_OLD_NEW.png, sheet_nhi_OLD_NEW.png, sheet_nhat_OLD_NEW.png
+Look: all three NEW show the small embroidered sachet + tassel and no jade disc. tam – short wrap jacket ending at the hip, blue sash tied at the waist, wood comb box; a few silver hairpins stick out sideways at the top of the bun. nhị – jacket now ends at the waist, sash wraps around it, no hanging panels (as the L1656 text asks); the held envelope is mauve (close to the rose jacket, weak contrast). nhất – vest + two front panels + a matching back tà visible at both sides behind the legs (as the L1653 text asks), bow sash, sachet at centre between the panels. No other faults seen.
