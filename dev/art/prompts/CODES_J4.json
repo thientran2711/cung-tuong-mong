@@ -1,0 +1,11 @@
+{
+"AJ4-KPOCH-07": "dev/art/prompts/J4/kpo-ch.txt",
+"AJ4-KPOCN-04": "dev/art/prompts/J4/kpo-cn.txt",
+"AJ4-KPODTQ-02": "dev/art/prompts/J4/kpo-dtq.txt",
+"AJ4-KPOMUOI-03": "dev/art/prompts/J4/kpo-muoi.txt",
+"AJ4-KPONC-05": "dev/art/prompts/J4/kpo-nc.txt",
+"AJ4-KPOSRV-09": "dev/art/prompts/J4/kpo-srv.txt",
+"AJ4-KPOTD-06": "dev/art/prompts/J4/kpo-td.txt",
+"AJ4-KPOTHD-08": "dev/art/prompts/J4/kpo-thd.txt",
+"AJ4-KPOTT-01": "dev/art/prompts/J4/kpo-tt.txt"
+}
