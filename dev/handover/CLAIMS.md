@@ -655,7 +655,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | SẴN SÀNG KIỂM d4c723d4 (reports/map-places.md MEM FIX r2) | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED (rv PASS 0d60ae54, LIVE with tap-word) | 21/11 |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | PASS 688a5667 (handed to MAIN) | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 410c4f44 (small; quickcheck PASS) | 21/11 |
 | kit-dialog (sonnet; OWNER marks #44 seal, #47 figure size, #49 option card/fixed dialog — split from keeper) | review/kit-dialog; briefs/main86-kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:15Z |
@@ -725,8 +725,8 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | MAIN CHÍNH 88 (coordinator; land queue + owner marks) | handover branch | MAIN CHÍNH 88 | session_01Rc5AsL9RckY86bdwv8NheC | RUNNING | 21/11 04:25Z |
 kit-rankunit rv2 | review/kit-rankunit-rv2 d3f5ea28 | rv session | PASS | 21/11
-| REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | RUNNING | 21/11 04:43Z |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | PASS 688a5667 | 21/11 04:43Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | PASS 688a5667 (handed to MAIN) | 21/11 03:14Z |
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
@@ -752,7 +752,7 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
 jagday-walk-rv stale re-merge | review/jagday-walk-rv | session_01964izGLLhhhTBcSZM9UCJ2 | RUNNING | 21/11 04:04Z (D #13; succeeds GHdj1g2L)
 | calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | PASS 688a5667 (handed to MAIN) | 21/11 03:14Z |
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
