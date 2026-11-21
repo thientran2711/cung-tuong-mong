@@ -1,0 +1,31 @@
+Bạn là chuyên gia màu sắc trang phục cho game cung đấu anime (áo Đường – Minh lãng mạn, vải lụa mỏng bay). Hãy tự chọn màu và làm BẢNG MÀU cho 90 phi tần, chia theo NHÓM TÍNH CÁCH và theo 4 MÙA.
+
+6 nhóm tính cách (số người) — chỉ là tính cách, bạn tự quyết màu:
+- Quyến rũ (18 người): cuốn hút, nồng nàn, biết mình đẹp, ánh mắt đưa tình.
+- Sắc sảo (15 người): thông minh, nhanh nhạy, tính toán, ăn nói sắc bén.
+- Kiêu kỳ (15 người): cao ngạo, tự tôn, thích được ngưỡng mộ, khó gần.
+- Lạnh lùng (15 người): ít nói, xa cách, bình thản, khó đoán.
+- Dịu dàng (14 người): hiền hậu, mềm mỏng, ân cần, dễ thương.
+- Đoan trang (13 người): đứng đắn, nề nếp, chừng mực, đáng tin.
+
+4 mùa — mỗi mùa phải cho cảm giác thật khác nhau: Xuân (tươi mới, đâm chồi), Hạ (rực nắng, mát mẻ), Thu (chín, ấm, lắng), Đông (tĩnh, trong, sang).
+
+Mỗi người, mỗi mùa có đủ các màu sau (tên màu tiếng Việt + mã HEX):
+1. Màu chính (áo ngoài, tay áo)
+2. Màu phụ (áo trong, viền, lót) — tương phản đẹp với màu chính
+3. Màu nhấn, đậm hơn một nấc
+4. Màu hoa (hoa thêu + hoa cài tóc)
+5. Màu khăn voan mỏng khoác hai tay
+6. Bộ màu lông phượng: lông ngoài / lông trong / đầu lông — phải KHÁC rõ màu chính để con phượng thêu nổi trên áo
+
+Yêu cầu:
+- Màu dịu, sáng vừa, trong và sạch; không chói, không nhạt bệch, không xỉn bẩn, không quá tối.
+- Trong CÙNG một nhóm, mỗi người phải khác nhau rõ khi nhìn bằng mắt (khác họ màu), không phải cả nhóm chung một tông.
+- Trong cùng một mùa, không có 2 người nào trong 90 người mặc giống nhau khi nhìn bằng mắt.
+- Cùng một người qua 4 mùa: được đổi sang họ màu khác cho hợp mùa, miễn vẫn hợp tính cách của họ.
+- Giữ một màu riêng cho Hoàng hậu: không ai trong 90 người dùng màu đó làm màu chính (bạn ghi rõ là màu nào).
+
+Cách trình bày:
+- Trước tiên: giải thích ngắn bạn phân biệt 4 mùa bằng cách nào, và mỗi nhóm có bao nhiêu họ màu.
+- Sau đó: bảng theo từng nhóm, mỗi dòng một người, cột = 4 mùa, mỗi ô đủ 6 mục (tên + HEX).
+- Cuối cùng: hình ô màu cho từng nhóm và từng mùa để tôi nhìn bằng mắt.
