@@ -1,0 +1,4 @@
+base: dev/art/maid7/test7_nhi_L1656.txt
+allow: the pink jacket is the ONLY layer over the blue ruqun and ends at the waist   # owner Lượt 1685 (Foreman C #18): nhị tà too short vs old dt4ZloSXSL -> jacket continues below the sash to mid-thigh, longer than tam
+allow: nothing of the jacket hangs below the sash   # owner Lượt 1685 (Foreman C #18): same
+allow: no second layer   # owner Lượt 1685 (Foreman C #18): kept as 'never a separate second layer below the sash'
