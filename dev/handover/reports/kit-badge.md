@@ -1,3 +1,6 @@
 # kit-badge (KIT keeper; K-BADGE-HAOHUU from MAIN 90, rv hao-huu item 6, law 9)
 Branch `review/kit-badge` 36b6071ed (from LIVE 1af8db13). New kit part §77b `kitStBadge(st)` in jrail.js: `<b class="kbdg ok|busy|pause" aria-hidden="true">✓|…|⏸</b>` as last child of a `.krailb` (32 px compact or 44 px): 15 px disc, white 10 px glyph, 1.5 px paper ring, bottom-right (-6/-5 px), pointer-events none; `.krailb.koff` greys every child except the badge (offline). Same look as hao-huu's private `.kctmf-b` (g/n/w) so its branch only swaps classes. KIT.md §77b + kit-page sample §77b. Test `node dev/test/kit-badge.js <url> <out>` (Fold + iPad: markup, colours, corner, no tap, offline grey) PASS. quickcheck PASS (render 227/244, tab 432/421, buổi 1103/1401). No layout change → no coop-e2e needed.
 Shots: dev/test output badge-755.png (4 buttons: ✓ green, … grey, ⏸ amber, none).
+
+## Round 2 (rv FAIL 36b6071e, N4 ⏸ unreadable) — 8bf7b164c
+Badge now 20 px (min-width/height), glyph 14 px bold, 2 px ring, corner -7/-7; ⏸ drawn as two 3x10 px CSS bars (font independent, glyph font-size 0). kit-badge.js asserts badge ≥ 20 px, glyph ≥ 13 px (ok/busy), pause bars ≥ 8 px tall, corner, no tap, offline grey: Fold + iPad PASS. quickcheck PASS (render 249/210, tab 355/406, buổi 1329/1001).
