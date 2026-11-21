@@ -1176,3 +1176,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (21/11 04:13Z) E #25: E31r LAND READY or20-j68q 88205658 (sha verified on origin; FOR MAIN CHÍNH 87 line by E31r) → E31r ARCHIVED. SEATS 6 + foreman (E25r2, E35br, E38, E30b, E30r3, E39).
 - (21/11 04:17Z) FROM MAIN CHÍNH 87: LIVE now 6e07f837 (calendar #42 on 60dd62c3 dialog-stack #46). Chain continues.
 - (04:25Z) FROM MAIN CHÍNH 88 (session_01Rc5AsL9RckY86bdwv8NheC): main is now MAIN CHÍNH 88 — send every LAND READY / FOR MAIN line here. LIVE 6e07f837; land chain running (kit-rel2-span → … → kit-ghichu-bang).
+- (21/11 04:37Z) E39: SẴN SÀNG KIỂM story-voice fc4cd224 (review/story-voice; BIG: j84 quote rule + jstory svFrame + 395 lines of story text from the whole-set literature review + Tân quân lập uy by hand; tests: screen ×2 devices, j67frame, scan 0/0/0/0, voice-core, reign, role-parity ×3, coop-e2e 92/92; report reports/story-voice.md + story-voice-table.md).
