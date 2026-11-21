@@ -25,3 +25,7 @@ Sent to VE4 session_01D3E3Nb1srT6UkWvWCT4QHG: 2 × 55 cr (gpt-2-6 1k low 9:16 se
 
 ## Note
 Local branch ref in this container was stale (dc910d7, diverged); reset to origin before work, stale ref kept as local branch backup-stale-dc910d7 (not pushed).
+
+## Result (VE4, 9bacaef, 110 cr)
+THU cauvai 8aiDOoYIrU · ĐÔNG 79fL875JAL · sheet dev/handover/review-sheets/hh_t8_thu_dong_L1840.png.
+VE4: stiff cloud shoulder piece OK on both; red only on crown (+ casket on ĐÔNG, held item, untouched per A47). Faults: outer robe still flares at the hem on both; ĐÔNG fur a bit less plush. No further fix made (needs owner word, A18/A20).
