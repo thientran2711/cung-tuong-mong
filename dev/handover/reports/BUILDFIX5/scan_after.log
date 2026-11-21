@@ -1,0 +1,11 @@
+dong t6 {'TWO-TIER t7': 112}
+dong t7 {'SINGLE-TIER': 112}
+ha t6 {'TWO-TIER t7': 112}
+ha t7 {'SINGLE-TIER': 112}
+root t6 {'TWO-TIER t7': 112}
+root t7 {'SINGLE-TIER': 112}
+thu t6 {'TWO-TIER t7': 112}
+thu t7 {'SINGLE-TIER': 112}
+thu t8 {'TWO-TIER t7': 112}
+xuan t6 {'TWO-TIER t7': 112}
+xuan t7 {'SINGLE-TIER': 112}

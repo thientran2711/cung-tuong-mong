@@ -48,10 +48,25 @@ Push 1 = 29f7d431 (items 1–5); push 2 = items 6–7 + tables.
 | rule | G37 'one tier … HH a little STIFFER' | G37 rewritten via rule.py set (quotes L2105 + L2119; L1543 'stiffer' superseded; t6 two-tier L1847/L2088, t8 two-tier L2099, t7 one tier) | ART_RULES + _HISTORY |
 
 ## LUẬT SỬA CẢ NHÓM — scan (dev/handover/reports/BUILDFIX5/scan.py, 112 persons × t6–t8 × root+4 seasons) — cells with the word
-SCAN_TABLE
+| cell | before | after |
+|---|---|---|
+| root/xuân/hạ/đông t6 | 'cape' 112 · 'any cape' 112 | 0 · 0 (TWO-TIER cloud collar 112) |
+| root/xuân/hạ/đông t7 | 'cape' 112 | 0 (SINGLE-TIER 112) |
+| thu t6 | TWO-TIER 112 (L2088 words) | TWO-TIER 112 (L1893 words), cape 0 |
+| thu t7 | STIFF 112 · never hugging 112 · TWO-TIER 112 · cape 112 · gem-line cape 112 | all 0 · SINGLE-TIER 112 |
+| thu t8 | STIFF 112 · never hugging 112 · TWO-TIER 112 · cape 112 · gem-line cape 112 | all 0 · TWO-TIER 112 (kept, L2099) |
+| t6–t8 any season | cloak 0 · capelet 0 | cloak 0 · capelet 0 |
+| thu t1–t8 'brocade'/'gấm' (brscan.py) | t3 girdle 112 · t5 robe/cuffs/girdle 112 · t6–t8 fabric+noun 112 | 0 (only 't3 ceremonial front panel', not fabric) |
+Files: scan_before/after.json, brscan_thu_after.log.
 
 ## Real-gate sweep (gsweep.py, 112 p, a18, t1–t8) — FAIL per rank
-SWEEP_TABLE
+| season | before (HEAD d1c7e56, clean worktree, t6–t8) | after (all t1–t8) |
+|---|---|---|
+| root / xuân / hạ / đông | 0 everywhere | 0 everywhere |
+| thu | t6 3 · t7 14 · t8 15 (LEN only) | t1–t6 0 · t7 31 · t8 28 (LEN only) |
+NON-LEN FAIL after: 0. LEN is still a FAIL (LEN-warning job cancelled, A55): the M06 thu fabric sentence is ~180 ch longer than the brocade line; thu t6 went 3 → 0 (L1893 base is shorter).
+LEN cells thu t7: c06 10477, s44 10418, s60 10371, s57 10323, s45 10305, s36 10304, s58 10299, s56 10288, s41 10285, s61 10271, s54 10209, s38 10198, s40 10184, s59 10166, s33 10153, s09 10145, s35 10141, s43 10113, s39 10097, s27 10090, s07 10080, s42 10078, s24 10072, s17 10068, s21 10063, s47 10057, s34 10039, s49 10030, s51 10021, s46 10017, s08 10007
+LEN cells thu t8: s58 10472, c06 10418, s61 10417, s38 10322, s57 10288, s42 10284, s56 10277, s45 10277, s44 10239, s33 10223, s59 10201, s08 10197, s60 10188, s41 10186, s36 10185, s35 10129, s43 10123, s34 10118, s25 10105, s39 10102, s51 10091, s54 10084, s09 10058, s07 10057, m20 10045, s40 10041, s37 10021, s30 10009
 
 ## Not done / for ROOT-B3
 - Triều phục: S28 done (item 6). The old triều prompt sets (r19…r26) fail many newer gates (NOEAR, M01, G57); a real triều rebuild is a separate job.
