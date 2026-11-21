@@ -1377,3 +1377,5 @@ Next Lượt 1953.
 #27 ~11:48Z: OWNER L2000 (angry): HQP/HH keep THEIR OWN approved vân kiên (L1924 stiff, standing out, clasp) — NOT QP's flat one; she only meant the SQUARE neckline design. → VE10 corrected. Next Lượt 2001.
 #27 ~11:55Z: OWNER L2002: L1997 t7/t8 vân kiên OK (b80f839); only QP t6 not rendering as approved. Rerun QP + HQP + HH with latest prompts @135 → VE10: t6 fixed QP words, t7/t8 = b80f839 (undo 2b194953), 3@135=405. VE10 upscale eIPcGThdqL done anyway (93 cr, not sent). Next Lượt 2003.
 #27 ~11:58Z: SENT L2003 thu Tần L1994 VX7nsw2MMU (VE11 135): more lotus; lamp still at front waist + short bow (the 2 rule fixes not applied before gen). Next Lượt 2004.
+#27 HANDOVER ~12:00Z: depth 8 (LIMIT), ctx 46.6 % (START ~4 % → over 29 % line). Cannot open child. Takeover = dev/handover/TAKEOVER_FOREMAN_C_27.md. No schedules owned. Next Lượt 2004.
+⚠ FOR MAIN: Foreman C #27 at depth 8 cannot open a successor — owner please open a ROOT Foreman C from claude.ai with: read dev/handover/TAKEOVER_FOREMAN_C_27.md and do exactly what it says. All designer workers rolled; the ROOT must open fresh workers.
