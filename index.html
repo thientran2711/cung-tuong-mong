@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"df5dbf30+","t":"2026-11-21T16:19Z","c":"jemo-bal: jemoact eaN prints her Sủng via sgStat (apply() scales it by her nết; NPC amounts stay raw)","b":"1c0f06129c83","h":[{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"}]};
+window.CTM_BI={"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)","b":"532eba7d7bce","h":[{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -16702,11 +16702,11 @@ RD97L.push(rdRare({a:"cn_than_11",tag:"Cố nhân của cha thành chỗ dựa",
    carry NCW(k), Bắc Địch openings BDW(k) (the bd premise ended differently). Helpers RDW / rdRel / rdOan come from jrd_tt.js (same script). */
 const ncBd=()=>{try{return S.origin.k==="bd"}catch(e){return false}};
 RDQ.ncvBL=()=>RD_FL("nc_vuong.bought")||RD_FL("nc_vuong.loser");/* named predicate an odds term in BAL.road.fx reads (rdOdds "q") */
-const NCL={nc:{land:"Cao Ly",pv:"Phụ vương",mh:"Vương hậu",quan:"Quốc vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"canh rong biển",laq:"lá tía tô dại",nden:"thắp đèn Nhiên Đăng",kha:"Phác"},
- bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa",kha:"Kha"}};
+const NCL={nc:{land:"Cao Ly",pv:"Phụ vương",mh:"Vương hậu",quan:"Quốc vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"canh rong biển",laq:"lá tía tô dại",nden:"thắp đèn Nhiên Đăng",kha:"Phác",dien:"vương điện",huong:"phương đông"},
+ bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa",kha:"Kha",dien:"kim trướng",huong:"phương bắc"}};
 if(typeof TOK67==="object")Object.assign(TOK67,{land:()=>NCL[ncBd()?"bd":"nc"].land,pv:()=>NCL[ncBd()?"bd":"nc"].pv,mh:()=>NCL[ncBd()?"bd":"nc"].mh,
  quan:()=>NCL[ncBd()?"bd":"nc"].quan,pa:()=>NCL[ncBd()?"bd":"nc"].pa,pb:()=>NCL[ncBd()?"bd":"nc"].pb,
- canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden,kha:()=>NCL[ncBd()?"bd":"nc"].kha});
+ canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden,kha:()=>NCL[ncBd()?"bd":"nc"].kha,dien:()=>NCL[ncBd()?"bd":"nc"].dien,huong:()=>NCL[ncBd()?"bd":"nc"].huong});
 /* opening filters of chapter .5: NCW after a Nam Chiếu premise, BDW after a Bắc Địch premise (k as RDW) */
 const NCW=k=>()=>!ncBd()&&RDW(k)();
 /* months of cấm túc a road ending applies (S.confined, j3 counts it down): BAL.road.ncConf (jbal2.js) */
@@ -17107,7 +17107,7 @@ rdDef("nc_su",9,{t:"Điều ước chợ biên",w:"emp",sj:"điều ước chợ
  B:{s1:{h:"Bộ Hộ hỏi ý ngươi",w:"emp",if:RDW(1),t:"Sau đại yến, Hoàng thượng mang bản thảo điều ước của bộ Hộ về cung ngươi, bảo ngươi xem trước một lượt.",o:[
   {n:"Đọc kỹ, ghi chú từng điều",f:"terms",wx:"biết rõ chỗ nào lệch",lx:"mỏi mắt, mất sức",rt:"Ngươi ghi chú ba chỗ: giá muối, cân sắt, ngày mở chợ."},
   {n:"Gửi bản thảo cho {pa} xem",f:"home",wx:"{pa} biết trước để bàn",lx:"bộ Hộ biết ngươi đưa bản thảo ra",rt:"{pa} gửi lại lời cảm tạ và hai điều xin sửa.",rf:"Bộ Hộ biết, hỏi ngươi đứng về phía ai."},
-  {n:"Trả lại, xin không xem",wx:"không ai nói ngươi xen việc nước",lx:"bỏ lỡ một lần nói được",rt:"Ngươi trả bản thảo nguyên niêm."}]},
+  {n:"Trả lại, xin không xem",wx:"không ai nói ngươi xen việc nước",lx:"bỏ lỡ một lần nói được",rt:"Ngươi trả lại bản thảo, niêm phong như cũ."}]},
  s2:{h:"Hai bên không chịu nhau",w:"emp",if:RDW(0),t:"Bàn đã mười ngày mà chưa xong điều nào. Bộ Hộ chê {land} đòi nhiều, {pa} chê Đại Hy cân thiếu. Tiết Sương giáng chỉ còn một tháng.",o:[
   {n:"Gửi trà và một lời khuyên nhường cho cả hai bên",f:"bridge",wx:"hai bên dịu lại",lx:"bị nói là phi tần xen việc nước",rt:"Thượng thư và {pa} cùng nhận trà; buổi bàn hôm sau bớt gắt.",rf:"Thượng thư trả trà về: việc nước không nhận quà hậu cung."},
   {n:"Xin Hoàng thượng định một hạn",wx:"hai bên phải gấp",lx:"ngài thấy ngươi giục",rt:"Hoàng thượng phán: “Trước Sương giáng phải xong.”",rf:"Hoàng thượng bảo: “Việc của bộ Hộ.”"},
@@ -17115,7 +17115,7 @@ rdDef("nc_su",9,{t:"Điều ước chợ biên",w:"emp",sj:"điều ước chợ
  c1:{h:"Thượng thư bộ Hộ",w:"emp",t:"Hoàng thượng kể lời Thượng thư bộ Hộ: Đại Hy không bán sắt cho nước ngoài. Sắt thành nông cụ hôm nay, mai có thể thành giáo mác.",o:[
   {n:"Đề nghị chỉ bán nông cụ đã rèn",f:"terms",wx:"có sắt mà không có giáo",lx:"{pa} chê ít",rt:"Hoàng thượng đem ý ấy hỏi Thượng thư; ông vuốt râu: “Thế thì được.”",rf:"Thượng thư lắc đầu."},
   {n:"Thưa: Thượng thư nói phải",f:"law",wx:"Hoàng thượng thấy ngươi lo cho Đại Hy",lx:"{land} không có sắt",rt:"Hoàng thượng gật đầu."},
-  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có sắt, Đại Hy có ngựa",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
+  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có ngựa, Đại Hy có sắt",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
  c2:{h:"Nhà {v} buôn muối",w:"v",need:["v"],t:"Nhà {v} giữ giấy phép buôn muối ở biên ải. Chợ biên mở thì muối của họ mất giá. Cha nàng ta đã dâng sớ: chợ biên là cửa cho gian tế.",o:[
   {n:"Tâu rõ nhà {v} có lợi riêng",wx:"sớ của nhà {v} mất sức nặng",lx:"hai nhà thành thù",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Hoàng thượng gác sớ của nhà {v}.",rf:"Hoàng thượng chán chuyện bè phái."},
   {n:"Chia cho nhà {v} một phần chợ muối",wx:"nhà {v} thôi cản",lx:"chợ biên có thêm một kẻ ăn chia",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Nhà {v} rút sớ.",rf:"Nhà {v} nhận phần, rồi vẫn cản."},
@@ -17725,7 +17725,7 @@ const bdTxt=(oldW,newW)=>bdLegacy()?oldW:newW;
 /* a text property that follows the switch (getter: every reader of o[k] gets the right words, nothing copied per screen) */
 const bdTxtProp=(o,k,oldW,newW)=>{try{Object.defineProperty(o,k,{get:()=>bdTxt(oldW,newW),enumerable:true,configurable:true})}catch(e){}return o};
 const bdCountry=()=>{try{return S.origin.k==="bd"?(bdLegacy()?"bd":"bt"):"nc"}catch(e){return"nc"}};
-if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò"};
+if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò",dien:"vương điện",huong:"phương tây"};
  if(typeof TOK67==="object")for(const k of Object.keys(NCL.bt))TOK67[k]=()=>NCL[bdCountry()][k]}
 /* a new life's premise pool (j67 arcIds67 → jst14 roll, j67 phase-1 frame): old bd premises out; saves keep the ids already written in their plan */
 (function(){if(typeof arcIds67!=="function")return;const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
@@ -18900,7 +18900,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
   {n:"Không đáp",wx:"không lỡ lời",lx:"{v} đứng đó đến cuối",rt:"Ngươi nhìn theo sứ đoàn."}]},
  t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Mật Hồ Đạt.",o:[/*bd6b: the letter speaks of him alive or dead (both options fit either)*/
-  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin phụ vương che chở người ấy.”"},
+  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin {pv} che chở người ấy.”"},
   {n:"Xin {pv} không quên ai đã hại chàng",f:"uy",wx:"{land} sẽ nhớ",lx:"thư ấy là mồi lửa",rt:"Ngươi viết, rồi đóng dấu bằng sáp đỏ."},
   {n:"Không nhắc đến chàng",f:"phan",wx:"thư nhà sạch",lx:"chuyện của chàng không ai kể",rt:"Thư nhà chỉ kể chuyện trong cung."}]},
  x1:{h:"Cổng thành lúc bình minh",w:"emp",t:"Bình minh. Sứ đoàn {land} qua cổng Tây. Hoàng thượng đứng cạnh ngươi trên lầu cổng, không nói gì, chờ xem ngươi làm gì.",o:[
@@ -29648,7 +29648,55 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 
 /* when(): the full date in the wording guide's words, season kept */
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
-(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{flex:1 1 0;min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+/* KIT §6.2b-1 TITLE ROOM BESIDE THE ODDS METER (review/kit-opt-title-wrap, MAIN 94 21/11; owner OD 18/11 ~09:02Z «title never squeezed by the odds chip» + OD 21/11 ~04:00Z #49a
+   «the odds sit ON THE TITLE ROW»). ONE rule for EVERY button.ka whose title row (.kat) carries the meter (.kodds): dialog option cards (.kopt), act cards (.kart), compact pane cards.
+   The choice reads the TITLE ROOM (title row width − meter − gap), never the card width: when the title does not fit on one line beside the meter in a row (bar + word) AND that room is
+   under KIT_ODFIT.room em, the card gets .kodstk = the meter stacks (bar over word; a long word «Năm ăn năm thua» wraps under the bar at KIT_ODFIT.word em) so the title keeps its width
+   and the odds stay on the title row; only a title row too narrow even for that (< stacked meter + KIT_ODFIT.min em, e.g. a person card pane on a 390 px phone) puts the meter under the title (.kodrow). Measured with the fonts (canvas), so the result does not depend on the current state; ResizeObserver (on the title row) re-runs it when the row changes width, web fonts arriving re-run every card, and every fit is VERIFIED on the real layout (a meter still under the title → stack, then .kodrow),
+   kaNorm when its title / odds change. The title is flex 1 1 0 (kp-kat-css): the meter drops under it only when even 9 em + meter do not fit (was: whenever the title did not fit on ONE line, #49a). (Was: kitOptTier stacked under a 430 px CARD and only in dialogs, and the stack never showed: `.oc` (inline-block) won over `.kodm` (inline-flex).) */
+const KIT_ODFIT={room:12,word:5.4,gap:5,min:7.5,pad:4};window.KIT_ODFIT=KIT_ODFIT;
+let kitOdCv=null;function kitOdTextW(el,t){try{kitOdCv=kitOdCv||document.createElement("canvas").getContext("2d");const c=getComputedStyle(el);kitOdCv.font=c.fontStyle+" "+c.fontWeight+" "+c.fontSize+" "+c.fontFamily;return kitOdCv.measureText(t).width}catch(e){return 0}}
+function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
+ if(!kan||!m||!od.textContent.trim()){b.classList.remove("kodstk");return}const cw=kat.clientWidth;if(!cw)return;const kc=getComputedStyle(kat);const cbw=cw-parseFloat(kc.paddingLeft)-parseFloat(kc.paddingRight);kat.__kodW=Math.round(cbw);/* the width this choice was made for (= the observer's contentRect): a fit made inside kitOptTier's trial layouts is redone when the row ends at another width (rv round 1: kodrow stuck from a 180 px trial on a 204 px row) */const room0=cbw-(parseFloat(kc.columnGap)||6);
+ const seg=m.querySelector(".kseg"),w=m.querySelector("b");const segW=seg?seg.offsetWidth:0,wordW=w?kitOdTextW(w,w.textContent.trim()):0;
+ let rest=0;for(const c of od.children)if(c!==m&&c.getClientRects().length)rest+=c.offsetWidth+4;/* a note beside the meter («· 2 khắc») */
+ const rowW=segW+(w?KIT_ODFIT.gap+wordW:0)+rest;const fs=parseFloat(getComputedStyle(kan).fontSize)||13;const natW=kitOdTextW(kan,kan.textContent.replace(/\s+/g," ").trim());
+ const room=room0-rowW;let stk=room<natW+KIT_ODFIT.pad&&room<KIT_ODFIT.room*fs;/* pad: canvas vs DOM text widths differ by sub-pixels / hinting (rv round 1) */
+ const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
+ /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
+ let row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
+ b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
+ if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row);
+ /* VERIFY against the real layout (rv round 1): a meter that still drops under the title without .kodrow (a title min-width, a font that differs from the canvas) → next step: stack, then under the title */
+ const own=()=>{const K=kan.getBoundingClientRect(),O=od.getBoundingClientRect();return O.height>0&&(O.top>=K.bottom-2||O.bottom<=K.top+2)};
+ if(!row&&own()){if(!stk){stk=true;b.classList.add("kodstk");b.__kodRoom=sroom/fs}if(own()){row=true;b.classList.add("kodrow")}
+  /* the layout seen may be a passing one (kitOptTier trying 2 columns, a picture not in yet): fit again from scratch a moment later, so a step taken for a passing layout never sticks */
+  if((b.__kodN=(b.__kodN||0)+1)<=3)setTimeout(()=>kitOdFit1(b),120)}else b.__kodN=0
+ if(window.__kotwDbg)(b.__kodHist=b.__kodHist||[]).push(Math.round(performance.now())+":cw"+cw+" r"+Math.round(room)+" n"+Math.round(natW)+" s"+Math.round(sroom)+(stk?" S":"")+(row?" R":"")+" N"+b.__kodN+" "+(b.className.includes("kart")?"kart":"-"))}catch(e){console.error("kitOdFit1",e)}}
+let kitOdRO=null,kitOdQ=new Set(),kitOdRaf=0;
+/* no layout read on the kaNorm path (it runs on every DOM change): a new card is only observed (the ResizeObserver's first call fits it); a card whose title / odds TEXT changed is fitted in the next frame */
+function kitOdFlush(){kitOdRaf=0;const q=[...kitOdQ];kitOdQ.clear();for(const b of q)kitOdFit1(b)}
+function kitOdFit(root){try{const r=root&&root.querySelectorAll?root:document;if(!kitOdRO&&typeof ResizeObserver==="function")kitOdRO=new ResizeObserver(es=>{for(const e of es){const k=e.target,b=k.closest("button.ka");if(!b)continue;const w=Math.round(e.contentRect.width);if(k.__kodW!==w){k.__kodW=w;kitOdFit1(b)}}});/* observes the TITLE ROW (.kat): its width is what the choice reads (a picture box or a card that changes size moves it) */
+ const bs=[...r.querySelectorAll(".kat>.kodds")].map(o=>o.closest("button.ka")).filter(Boolean);if(r.matches&&r.matches("button.ka")&&r.querySelector(".kat>.kodds"))bs.push(r);
+ for(const b of bs){const kat=b.querySelector(".kat");if(kat&&!kat.__kodObs&&kitOdRO){kat.__kodObs=1;kitOdRO.observe(kat);continue}const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent:"";if(b.__kodTxt!==k)kitOdQ.add(b)}
+ if(kitOdQ.size&&!kitOdRaf)kitOdRaf=requestAnimationFrame(kitOdFlush)}catch(e){console.error("kitOdFit",e)}}
+window.kitOdFit=kitOdFit;window.kitOdFit1=kitOdFit1;
+/* the web fonts arrive after the first fit: fit every card again (canvas widths change with the font) */
+/* re-fit cards after a layout pass that tried other widths (kitOptTier): the observer stays silent when the row ends at the width it last reported, so the caller asks for it — next frame and once more after the late changes */
+function kitOdRefit(bs){try{bs.forEach(b=>kitOdQ.add(b));if(kitOdQ.size&&!kitOdRaf)kitOdRaf=requestAnimationFrame(kitOdFlush);setTimeout(()=>bs.forEach(b=>{if(b.isConnected)kitOdFit1(b)}),200)}catch(e){}}
+window.kitOdRefit=kitOdRefit;
+function kitOdAll(){document.querySelectorAll(".kat>.kodds").forEach(o=>{const b=o.closest("button.ka");if(b)kitOdQ.add(b)});if(kitOdQ.size&&!kitOdRaf)kitOdRaf=requestAnimationFrame(kitOdFlush)}
+try{if(document.fonts){document.fonts.ready.then(kitOdAll);if(document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",kitOdAll)}}catch(e){}
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
+(function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
+.kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
+button.ka.kodstk .kat>.kodds .kodm.kodm{flex-direction:column!important;align-items:flex-end!important;gap:1px!important}
+button.ka.kodstk .kat>.kodds .kodm>b{white-space:normal!important;max-width:${KIT_ODFIT.word}em;text-align:right;line-height:1.1}
+/* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
+button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
+button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
+button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
 if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: ${sgStat(NG.sung)}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */
@@ -57698,6 +57746,16 @@ function svFrame(h){if(h==null)return h;const s=String(h);if(/<(?:div|p|table|ul
  const pool=x.endQ?(/\?\s*$/.test(x.inQ)?SVFR.ask:SVFR.bid):SVFR.sc;let n=0;for(const c of x.t)n=(n*31+c.charCodeAt(0))>>>0;return s.replace(/\s*$/,"")+" "+pool[n%pool.length]}
 (function(){if(typeof showModal!=="function")return;const sm=showModal;showModal=function(){try{const m=Q&&Q[0];
  if(m&&!m.svfr&&m.opts&&m.opts.length>1&&/^(?:Chính|Phụ) tuyến · /.test(m.t||"")){m.svfr=1;m.h=svFrame(m.h)}}catch(e){console.error("jstory svFrame",e)}return sm.apply(this,arguments)}})();
+/* bang-words review (E40r, law 11 whole group): a chapter TITLE may carry a token («Lão {kha} bị bắt» nc_gian .9, «Nhà {v} trong án cũ» cn_than .6);
+   the 23 places that print ARC67[id].t (story card, chapter card, log lines, past-chapter list, hồi header…) showed it raw. ONE fix here: every
+   titled arc whose t holds a {token} gets a getter that fills it through the one token table TOK67 with that arc's live thread (S.st.M or a
+   side thread); no thread (a past chapter) → the same table with an empty thread (nm67 says «một phi tần»). Runs after every arc file loaded. */
+function arcTitleFill67(){try{if(typeof ARC67!=="object"||typeof TOK67!=="object")return;
+ const thr=id=>{try{const L=[S&&S.st&&S.st.M].concat((S&&S.st&&S.st.X)||[]);return L.find(A=>A&&A.a===id)||{}}catch(e){return{}}};
+ for(const id of Object.keys(ARC67)){const a=ARC67[id];if(!a||typeof a!=="object")continue;const d=Object.getOwnPropertyDescriptor(a,"t");
+  if(!d||!("value" in d)||typeof d.value!=="string"||!/\{\w+\}/.test(d.value))continue;const raw=d.value;
+  Object.defineProperty(a,"t",{get:()=>{const A=thr(id);return raw.replace(/\{(\w+)\}/g,(m,k)=>{try{return TOK67[k]?String(TOK67[k](A)):m}catch(e){return m}})},enumerable:true,configurable:true})}}catch(e){console.error("arcTitleFill67",e)}}
+arcTitleFill67();setTimeout(arcTitleFill67,0);
 /* ================= jreign: TÂN QUÂN LẬP UY — the Emperor's side story + her faction road (owner 16/11, D5) =================
    New games only (S.ps + S.reign, review/palace-start). Old saves never see any of this.
    (1) WORLD (shared court, co-op: lives in S.trieu.rg, a W_KEYS world key → host-authoritative; numbers merge as deltas):
@@ -65155,7 +65213,7 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8,stackW:430};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
@@ -65178,10 +65236,10 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>b.classList.toggle("kodstk",b.clientWidth<KIT_OPT.stackW));void g.offsetHeight};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>{if(typeof kitOdFit1==="function")kitOdFit1(b)});/* KIT §6.2b-1: the meter stacks by the TITLE ROOM (j79 kitOdFit1), one rule for every card */void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
@@ -65191,7 +65249,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
- g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
+ g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
 window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 /* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
@@ -65222,7 +65280,6 @@ ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:
 ${O} .kat>.kan{line-height:1.15;text-align:left}/* one alignment for every card title (owner via MAIN 88: «Đeo ngay» left vs «Để sau» centred) */
 ${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
 ${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
-${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
@@ -66964,7 +67021,7 @@ Object.assign(GE_DATA,{
    cond:[["s","duc"],["s","tamco"]],fo:[],
    cw:"cần Đức đủ để Hoàng thượng thả và đủ khôn để cố quốc thôi tìm",
    t:"Ngươi xin Hoàng thượng cho đi tu ở một ngôi chùa nơi biên giới, không thuộc hẳn bên nào. Ngài chuẩn. Từ đó không còn mật lệnh, không còn thư giả; chỉ có tiếng chuông sớm vọng sang cả hai bờ sông, người hai nước đều đến thắp hương.",
-   a:"Ngươi lấy vàng của phụ vương, lấy ân thưởng của Hoàng thượng, rồi biến mất ở một trạm dịch phía tây. Hai triều cùng truy tìm, cùng mất mặt. Có người nói đã thấy ngươi ở một thành buôn bên kia sa mạc, sống như một bà chủ giàu có không quê.",
+   a:"Ngươi lấy vàng của phụ vương, lấy ân thưởng của Hoàng thượng, rồi biến mất ở một trạm dịch phía tây. Hai triều cùng truy tìm, cùng mất mặt. Có người nói đã thấy ngươi ở một thành buôn xa tận phía tây, sống như một bà chủ giàu có không quê.",
    ht:"thoát khỏi vòng mật lệnh của hai nước, sống yên nơi biên giới",ha:"lấy vàng của cả hai vua rồi biến mất, để hai triều cùng mất mặt",
    fail:"Lưới hai triều",ft:"Ngươi muốn thoát, nhưng cả hai triều đều không buông. Phụ vương gửi thư trách, Hoàng thượng cho người canh cửa; ngươi kẹt giữa như trước."},
   {pull:["Nhờ người nói xấu nhà {v} một câu","Mời {v} sang uống trà, nói chuyện quê nhà","Nhận lão {kha} làm người đưa thư riêng","Hứa lo cho lão","Nhắn lại: lão sẽ không chết","Xin Hoàng thượng ân cho thương nhân quê nhà","Sai cung nữ thân tín ra Hội Đồng quán nghe lời","Xin Hoàng thượng cho gặp trong buổi gia lễ ở nội điện, có ngài ngồi đó","Nhờ sứ thần {land} lo","Đưa vợ con lão về {land}","Viết thư về {land} báo tin","Hồi thư cho {mh}, kể chuyện bình yên","Còn, và cũng là người Đại Hy","Còn. Xin chuyển lời: con vẫn là con của {pv}","Viết bằng lời con gái","Gửi tin giả để cứu cả hai",
@@ -67027,9 +67084,9 @@ Object.assign(GE_DATA,{
    close:["Để mặc cố quốc","Thưa: việc nước, thần thiếp không dám nói","Thưa mẹ: việc Đại Hy, con không xen","Khuyên để {land} tự định"],
    cond:[["s","tamco"],["s","danh"]],fo:[["e",11,"lose"]],
    cw:"cần Tâm cơ sâu và Danh vang về tận cố quốc",
-   a:"Các trưởng làng biên mở cổng cho đoàn kiệu của ngươi. Tân vương yếu đuối nhường ngôi trong một đêm, phe thua bị xử ngay trước trướng vàng. Ngươi ngồi lên ngai cố quốc, và từ đó không ai ở phương đông dám nói chữ “hòa” khi chưa hỏi ngươi.",
+   a:"Các trưởng làng biên mở cổng cho đoàn kiệu của ngươi. Tân vương yếu đuối nhường ngôi trong một đêm, phe thua bị xử ngay trước {dien}. Ngươi ngồi lên ngai cố quốc, và từ đó không ai ở {huong} dám nói chữ “hòa” khi chưa hỏi ngươi.",
    t:"Các trưởng làng biên rước ngươi về như rước mưa sau hạn. Ngươi lên ngôi cố quốc, tha cho phe thua, mở kho lương nuôi những làng cháy vì chiến sự. Đêm đăng quang, ngươi gửi sang Đại Hy một bức thư: hai nước, từ nay một lời.",
-   ht:"về cố quốc lên ngôi nữ vương, tha phe thua và mở kho nuôi dân",ha:"về cố quốc lên ngôi nữ vương, xử phe thua ngay trước trướng vàng",
+   ht:"về cố quốc lên ngôi nữ vương, tha phe thua và mở kho nuôi dân",ha:"về cố quốc lên ngôi nữ vương, xử phe thua ngay trước {dien}",
    fail:"Ngai xa vạn dặm",ft:"Cố quốc không rước ngươi về. Tân vương gửi thư lạnh lùng, và Đại Hy bắt đầu nhìn ngươi như một người có hai lòng."},
   {pull:["Nhận trang ấp","Trả nửa trước, hứa nửa sau","Trình cả hai thư lên Hoàng thượng","Quỳ xin Hoàng thượng cứu","Khuyên ủng hộ thế tử huynh","Tâu xin Hoàng thượng phong sớm","Khuyên phong, buộc tân {quan} tha phe thua","Nhắc Hoàng thượng lời hứa trong sắc phong","Xin Hoàng thượng trao ấn trước, bàn đất sau","Thưa với Hoàng thượng: đổi đất lấy chợ biên","Viết hai chữ: giữ tín","Xin Hoàng thượng cho quân biên hộ tống đoàn lương","Khuyên chiêu hàng trước, đánh sau","Trình lời khai của người lính","Khuyên mở hội thề ở biên ải, Đại Hy làm chứng","Tiếp cả hai đoàn cùng lúc, cách rèm","Thưa: không muốn gì, chỉ muốn cố quốc yên",
     /* ác side (ha: hai ngai một chủ) */"Khuyên tân {quan} dâng thêm cống phẩm","Khuyên phong ngay, kèm lệ cống mới","Nhận vàng, hứa nói giúp"],
@@ -67045,9 +67102,9 @@ Object.assign(GE_DATA,{
    close:["Viết hai chữ: giữ tín","Nhắc Hoàng thượng lời hứa trong sắc phong","Khuyên để {land} tự định"],
    cond:[["s","sung"],["s","tamco"],["s","mat"]],fo:[],
    cw:"cần Sủng cao, Tâm cơ sâu và Tai mắt trong triều",
-   a:"Bản đồ phương đông được vẽ lại bằng mực của Đại Hy. Cố quốc thành một trấn biên, cờ cũ bị hạ, trướng vàng thành dinh quan trấn thủ. Ngươi đứng bên Hoàng thượng trong lễ khải hoàn, và chưa từng quay về nhìn nơi mình sinh ra.",
+   a:"Bản đồ {huong} được vẽ lại bằng mực của Đại Hy. Cố quốc thành một trấn biên, cờ cũ bị hạ, {dien} thành dinh quan trấn thủ. Ngươi đứng bên Hoàng thượng trong lễ khải hoàn, và chưa từng quay về nhìn nơi mình sinh ra.",
    t:"Cố quốc về với Đại Hy không qua một trận đánh lớn: ngươi đổi đất lấy chợ, đổi ấn lấy lời hứa giữ lễ cũ, giữ tiếng nói cũ. Người phương đông vẫn hát bài của mình trong ngày hội, chỉ khác là lá cờ trên thành giờ mang hai màu.",
-   ht:"đưa hai cõi về một mối mà không để cố quốc mất tiếng nói của mình",ha:"giúp Đại Hy nuốt trọn cố quốc, hạ cờ cũ và xóa trướng vàng",
+   ht:"đưa hai cõi về một mối mà không để cố quốc mất tiếng nói của mình",ha:"giúp Đại Hy nuốt trọn cố quốc, hạ cờ cũ, biến {dien} thành dinh quan",
    fail:"Mộng lớn hóa tro",ft:"Quân Đại Hy sa lầy ở phương đông. Triều thần đổ tội cho người đã khuyên đánh, và ngươi bị cấm bàn việc binh từ đó."},
   {pull:["Nhận trang ấp","Bỏ bạc chuộc người","Xin Hoàng thượng cho để tang","Gửi bạc riêng giúp huynh","Nói theo lòng mình","Khuyên đứng ngoài","Gửi thư mừng tân {quan}","Sai người mang trà sữa ra sứ quán","Hứa với mẹ sẽ giục cho sớm","Khóc một đêm, sáng ra tính việc","Xin Thái hậu một lời","Quỳ xin Hoàng thượng cho quân biên đón mẹ về ải","Nuốt nước mắt, không xin gì","Gửi thư hỏi {mh}","Nghe lời mẹ","Xin được về thăm mẹ một lần","Gửi quà cho cả hai đoàn",
     /* ác side (ha: lưu vong phục thù) */"Đòi thả người trước, rồi mới nói","Giữ mật thư, dùng khi cần","Đòi trả người làm điều kiện trước hội"],
@@ -67939,13 +67996,16 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
  res.ex=out}
 /* ---------- the result event (kit dialog; serialisable) ---------- */
 function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close")return true;if(A==="stay")return false;return GB().exitSum.includes(C(s).e[res.i][5])}
+/* bang-words: ending texts carry the road's land tokens ({kha} {land} {quan} {dien} …) — filled by the one filler (j67 fill67), never shown raw */
+function geF(x){try{return typeof fill67==="function"&&/\{\w+\}/.test(x||"")?fill67(x,(S&&S.st&&S.st.M)||{}):x}catch(e){return x}}
+window.geF=geF;
 PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e[res.i];
  const rows=[];if(res.fx&&Object.keys(res.fx).length)rows.push([res.ok?"Được":"Mất",fmt(res.fx),res.ok?"g":"r"]);(res.ex||[]).forEach(x=>rows.push(["",x,"t"]));
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
-  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${res.sh==="t"?e.t:e.a}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
-   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,res.sh==="t"?e.t:e.a,`Đại kết cục: ${res.ti}`,true)}}]}}
- return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":e.ft}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
+  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
+   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
+ return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;
 function geStore(){const g=store.get("ctm-ge");return g&&typeof g==="object"?Object.assign({t:{},g:{},f:{}},g):{t:{},g:{},f:{}}}
@@ -67957,7 +68017,7 @@ window.geStore=geStore;
 /* ---------- titles: the jdh catalogue group «Thiên mệnh» (one step, tier BAL.ge.title.tier, no bonus: cosmetic) ---------- */
 function geTitles(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const b in GE_DATA){const Cb=GE_CAT[b];if(!Cb)continue;Cb.e.forEach((e,i)=>{["t","a"].forEach(sh=>{
   const key=geKey(b,i,sh),nm=e[sh==="t"?6:7],how=GE_DATA[b].e[i][sh==="t"?"ht":"ha"];
-  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${how}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
+  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${geF(how)}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
   BAL.dh.T[key]={n:[1],b:GB().title.tier,ch:[]}})})}}catch(e){console.error("ge",e)}}
 geTitles();
 /* carry (D5): a new life may wear the grand title of the life before ("prev") or any title ever earned ("any"); cosmetic only */
@@ -72028,6 +72088,14 @@ const BEAT={
  cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
   sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
   tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
+/* bang-words review (E40r, law 6b / 11): BEAT.bd above is the Bắc Địch (old-premise) line; a NEW bd life is the Ba Tư princess
+   (owner OD 19/11) and reads the Ba Tư line through THE one switch bdTxtProp (jrd_bd.js). Phù Tang (pf) has its own row. */
+if(typeof bdTxtProp==="function"){const B=BEAT.bd;
+ bdTxtProp(B,"nhap14",B.nhap14,"Phụ vương gửi {x} sang cầu Đại Hy làm đồng minh, Lễ bộ nhìn xem người Ba Tư có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai bảo người phương tây thô lỗ.");
+ bdTxtProp(B,"sung14",B.sung14,"Mang theo của hồi môn từ Ba Tư, tấm thảm hay chuỗi ngọc nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.")}
+BEAT.pf={nhap14:"Thuyền sứ đoàn đưa {x} qua bể sang Đại Hy, Lễ bộ nhìn xem người Phù Tang có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai cười là người bên kia bể.",
+ sung14:"Mang theo của hồi môn từ Phù Tang, món nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.",
+ tap14:"Xa quê thì phải có người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận."};
 /* a road's person is cast only when the road starts (j67 newThread67 fill67), so a {v}/{foe}/{mis} subject is told without a name: the
    person stays unnamed here and is named by the road itself (law 6b: nobody is made up); any other {tag} → no road line */
 const SJ0={v:"một phi tần",foe:"một phi tần",mis:"chủ nhân"};
@@ -90861,7 +90929,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1c0f06129c83";window.CTM_BUILD=BUILD;
+const BUILD="532eba7d7bce";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
