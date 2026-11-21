@@ -706,6 +706,8 @@ window.kitScrollCues=kitScrollCues;
 .knr .knr-ta{display:block;font-size:.76rem;font-weight:700;letter-spacing:.02em;opacity:.85;line-height:1.1}
 #mb .kfact.kfav-off>.md{display:none!important}
 #mb .kfact.kfav-off:not(.kfnodot){padding-left:0}
+#mb .kfact.kfav-off,#mb .kfact.kfnodot{grid-template-columns:minmax(0,1fr)!important}/* avatar column gone: the text takes the whole row (was squeezed into the 34px avatar column, one word per line) */
+#mb .kfact.kfav-off>.kft,#mb .kfact.kfnodot>.kft{grid-column:1/-1}
 .k3ev{position:relative}
 .k3ev>.kevav{position:absolute;left:6px;top:6px;z-index:3;display:flex;gap:4px;pointer-events:none}
 .k3ev>.kevav>span.md.kmini.kmini{width:clamp(34px,11%,62px)!important;max-width:62px;filter:drop-shadow(0 2px 4px #0006)}

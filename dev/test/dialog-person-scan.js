@@ -55,6 +55,7 @@ const OLDN={news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evid
     const rows=[...dlg.querySelectorAll('#mb .kfact[data-kfp]')];const vis=r=>{const c=r.querySelector(':scope > .md');return c&&!r.classList.contains('kfav-off')};
     rec.dupLeft=rows.filter(r=>{const q=kfpGet(r.dataset.kfp);return vis(r)&&who&&q&&(q.__kp||q)===sub}).length;rec.many=rows.filter(r=>vis(r)&&(+r.dataset.kfn||1)>=2).length;rec.lineAv=who?rows.filter(vis).length:0;
     rec.onPic=dlg.querySelectorAll('.kevav .md').length;rec.ta=(sub===S)?(dlg.querySelectorAll('.knr-ta').length>0):true;
+    rec.sq=[...dlg.querySelectorAll('#mb .kfact')].filter(r=>{const t=r.querySelector(':scope > .kft');const rw=r.getBoundingClientRect().width;return t&&rw>0&&t.getBoundingClientRect().width<rw*0.4}).length;
     rec.srcs=[...dlg.querySelectorAll('#mb .md img, #mb .kevav img')].map(im=>im.getAttribute('src')||"");
     window.__DP.push(rec)}catch(e){window.__DP.push({id:"ERR",err:String(e).slice(0,200)})}return r}},OLDN);
   /* (1) every PEND builder */
@@ -76,7 +77,7 @@ const OLDN={news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evid
   console.log("subject transitions:",JSON.stringify(t));
   const ch=rowsT.filter(r=>r.before!==r.after);console.log(`changed (${ch.length}): `+ch.slice(0,40).map(r=>`${r.id}[${r.kind}] ${r.before} -> ${r.after}`).join(" ; "));
   sweepRows.push({tag,rowsT});
-  for(const r of rowsT){note(!r.afterIsElder,`${tag} C: ${r.id} subject is an elder/default narrator`);note(r.dupLeft===0,`${tag} C: ${r.id} same person twice (left + line avatar)`);note(r.many===0,`${tag} C: ${r.id} avatar on a line naming many people`);note(r.lineAv===0,`${tag} C: ${r.id} line avatar while the left slot shows a person`);note(r.ta,`${tag} C: ${r.id} her own frame has no «(ta)»`);note(!r.broken.length,`${tag} C: ${r.id} broken avatar image ${r.broken.join(",")}`)}
+  for(const r of rowsT){note(!r.afterIsElder,`${tag} C: ${r.id} subject is an elder/default narrator`);note(r.dupLeft===0,`${tag} C: ${r.id} same person twice (left + line avatar)`);note(r.many===0,`${tag} C: ${r.id} avatar on a line naming many people`);note(r.lineAv===0,`${tag} C: ${r.id} line avatar while the left slot shows a person`);note(!r.sq,`${tag} C: ${r.id} line text squeezed (kft < 40% of its row)`);note(r.ta,`${tag} C: ${r.id} her own frame has no «(ta)»`);note(!r.broken.length,`${tag} C: ${r.id} broken avatar image ${r.broken.join(",")}`)}
   note(errs.length===0,`${tag} page errors: ${errs.join(" | ")}`);await ctx.close()}
  await b.close();
  if(fails.length){console.log("\nFAIL");fails.slice(0,60).forEach(f=>console.log(" - "+f));if(fails.length>60)console.log(` … ${fails.length-60} more`);process.exit(1)}console.log("\nPASS")})();
