@@ -85,3 +85,4 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - FOUND: keep_check --all FAILs on dev/art/thu_comoi/s62_t4_THU_COMOIk.txt and s62_t5_THU_COMOIj.txt (old texts, the .keep bases of COMOIl/COMOIk). They are "glued" again: the text is in there 3× (29 713 B).
   - Unrelated commits glued them again: 61e890b (CLAIMS) and caca8f3 (rv-chiton-name), after #17's restore 69c7aa6.
   - Fix = restore both (and their .keep) from be1ec9e. The final set is not affected.
+- 04:37Z MAIDFIX1: owner L1687 approved nhất as drawn; 92317b9 removes test8_nhat_L1685. Verdict stands for tam + nhị (PASS).
