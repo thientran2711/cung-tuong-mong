@@ -3998,16 +3998,32 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
   ready / her week end is out), "Đợi hảo hữu" (host's places / a step after a dialog), "Hảo hữu đang vắng", "Đang nối lại…", "Đợi cùng bản mới".
   Khắc spent and she can still press "Sẵn sàng": #next gets the kit selected look `.ksel` (§31.13).
   Freeze panel (#coopfz, peer): "Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; …".
-- §69.2 FRIEND CHIP · kitCoopFriend(o) · kitCoopFriendPanel(o) (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu
-  đâu…", coordinator spec): `#kctmf`, top of the screen, always on in co-op (hidden only under the title, the freeze panel, the hold panel).
-  `button.kchips.kctmf[data-ctm=fr]` = her face `kitFaceH(friend,"xs")` (grey silhouette until met: stranger rule §49.3) + name (`k61Named`,
-  else "Hảo hữu của ta") + ONE status chip + the shared countdown chip (`Còn m:ss` / `Đợi m:ss` while stopped / `.r` "Hết buổi").
-  Status (o.st): ready `.g` "✓ Đã sẵn sàng" · busy `.w` "! Đang bận" (a dialog / event / mini game open: generic, never what) · work `.n`
-  "… Đang làm việc" (still has khắc) · away `.r` "✕ Đang vắng" · hold `.w` "⏸ Tạm dừng". Pushed at once: each client sends {mode:"st",bz,kh,…}
-  on change (checked every 250 ms). Place: in the bar right-aligned on the "Buổi …" line when free (checked against every leaf of the bar and the
-  seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
-  Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
-  waiting notice only. Samples on the kit page "§69".
+- §69.2 «HẢO HỮU» ICON · kitCoopFriend(o) (CANON OVERWRITE, owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... off là màu
+  xám ... On là sẽ màu tươi hơn ... xong thì có một cái dấu tích màu xanh kế bên ... đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó
+  thì nó ra thông tin"; review/hao-huu): `#kctmf`, a CHILD of the FIXED TOP BAR `header.hud` (like the §42.2 «!» box), always on in co-op (hidden only
+  under the title). While the room is frozen (`#coopfz`, she is away) or held (the hold panel) the bar's own icon stays in the bar under the panel and a
+  COPY `#kctmfu.kup` (body child, fixed, z 9600, aria-hidden, tap inert) stands at the SAME spot above the panel, so the grey icon / ⏸ are seen.
+  `#kctmf` / `#kctmfu` carry `data-k61skip` and the partner sheet's title puts her name in a `data-k61skip` span: her name is written only once she
+  is known by name (k61Named), so the j61 DOM name mask must not re-map those words to another record (rv r2 A).
+  `button.krailb.kctmf[data-ctm=fr]` = the §77 kit square icon button `.krailb`, compact 32 px like `#kntbox` / `.krail.khud` (padding 3 px): her portrait
+  `kitFaceH(friend,"xs")` once met (`isKnown61`), the painted kit icon `img/kit/ico-friend.webp` (K-ICO-HAOHUU) while she is a stranger (no face
+  before meeting, §49.3). GREY = the kit's `.krailb.koff` (§77b) when she is offline (away), full colour when online. Badge = the kit's §77b `kitStBadge(st)`
+  (K-BADGE-HAOHUU, the button's LAST child, the only round part): ready → `ok` "✓" green · busy / work → `busy` "…" · hold → `pause` "⏸" ·
+  away: none (the grey icon says it). NO name and NO status words on
+  screen: they are the aria-label / title and a visually hidden span (`.kctmf-vh`, "<name or Hảo hữu của ta> · ✓ Đã sẵn sàng" …). Beside it the
+  shared buổi countdown as ONE short kit chip `.kctmf-t` (`m:ss` / `⏸ m:ss` while stopped / `.r` "Hết buổi") — owner 16/11 countdown rule kept.
+  Status is pushed at once: each client sends {mode:"st",bz,kh,…} on change (checked every 250 ms). Place = ONE FIXED SLOT per viewport
+  (innerWidth x innerHeight, kept per viewport): found once, right → left / top → bottom, against the whole boxes of the bar's direct children (a word
+  growing inside its block cannot reach it), every word (text-node rects), every picture / button, the seal and the «!» box; sized for the widest
+  content (icon + «⏸ 0:00» / «Hết buổi»); kept across her page reloads (localStorage `ctmHhSlot`, UI only); never re-placed on a content change, only when a word or picture of the bar really lies under it. No free
+  slot → a strip under the bar at the right edge (`header.hud.kctm-pad`). Being a bar child, the «!» box, the notice chip and the rail dock keep clear of it.
+  Tap → the «Hảo hữu» partner sheet `kitHaoHuuOpen()` (`dev/build/jhaohuu.js`, ONE panel): `kitPanel({kind:"info"})` with her full-body figure
+  (stranger: the kit `unknown-fig-f` as a stage pseudo person, never her entry), Thân phận (Danh vị = `kitName` rank unit, Cung) · Tư chất
+  (`kitPersonStats`) · Sức khỏe · Trong cung của nàng (Con cái, Cung nữ thân cận) · Lúc này (Hảo hữu = this status `COOPW.frInfo` + `frWord`, Ngươi,
+  Đang ở, one kpnote of what to do meanwhile); options «Tạm dừng» (when the room may pause) + «Đóng». Stranger rule OD:L165: «Hảo hữu của ta»,
+  every field «chưa rõ» but what anyone sees. Servant road: Danh vị Cung nữ / Hầu hạ / Cung; home road: «ở phủ nhà, chờ kỳ tuyển tú».
+  `kitCoopFriendPanel(o)` (the old status-only notice `#kctmp`) is only the fallback when jhaohuu is absent. Samples on the kit page "§69".
+  Test: `COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <outdir>`.
 
 - §69.3 INVITE GUIDE · kitCoopSteps({sent, joined, wait, you}) (owner 16/11 "Rồi sao nữa", C43 review/coop-invite-ux) — `jcooptimer.js`: the 1-2-3
   guide of the lobby's "Mời hảo hữu" screen as `kitRows` rows (joined to the Ám hiệu / Hảo hữu rows with `kitRowsJoin`): "1 · Gửi lời mời" (`.w`
@@ -4217,6 +4233,7 @@ The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.k
 
 ### §77b kitStBadge · round status badge on a rail button (K-BADGE-HAOHUU, rv hao-huu item 6) — `dev/build/jrail.js`
 `kitStBadge(st)` → `<b class="kbdg ok|busy|pause" aria-hidden="true">✓|…|⏸</b>` (st = `ok` green ✓ ready · `busy` grey … at work · `pause` amber ⏸ she paused · anything else = "" no badge). Put it as the LAST child of a `.krailb` (compact 32 px in `.krail.khud`, 44 px on the stage rail): 20 px disc, white 14 px glyph (⏸ is drawn as two 3x10 px CSS bars, font independent; rv N4: readable on a phone), 2 px card-paper ring, bottom-right corner (-7/-7 px), never takes the tap. Offline = add class `koff` to the `.krailb`: every child except the badge goes grey (grayscale + opacity .7). Kit-page sample §77b. No private badge CSS: a feature that needs a status corner uses this part (law 9).
+- PAUSE SIGN IN CHIP TEXT (K-CHIP-PAUSE, MAIN 92): never the ⏸ font glyph inside a chip / row text (it reads as a smudge at chip size). Use `<i class="kpzb" aria-hidden="true"></i>` = the same two CSS bars as the badge (3 x 10 px, currentColor, 4 px right gap), e.g. the friend clock chip «▮▮ 1:05» (clock pz) and the friend status `hold` glyph (FST, chip + panel row + jhaohuu now-rows). Test `node dev/test/kit-chip-pause.js <url> <out>`.
 
 ## 80. CO-OP CHAT "Thư từ" · kitChatBtn · kitChatPanel · kitChatList · kitChatBubble (owner 16/11, review/coop-chat) — `dev/build/jcoopchat.js` (after jcooptimer)
 Registry: §80 (KIT_NUMBERS.md). KIT REQUEST filed in KIT_REQUESTS.md (chat bubble + list part was missing; built here as a proper kit part, no private chat UI).
