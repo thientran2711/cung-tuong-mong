@@ -42,7 +42,7 @@ function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
 function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyRoll(a,t):oSpy(a);/* the roll's own odds (lá số included; review/shown-odds-one-path) */A0.why=(a,t)=>spyFactors(a,t);
- A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
+ A0.f=(a,t)=>{ap(a,{bac:-actBac("spy",a,t)})/* one core: the jecon §5 price the card shows (was a flat 15) */;const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
 (function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
 /* her maid at home: "Sai đi dò la" — SHE chooses whom (owner 08:45Z: never a silent random target for a player act).

@@ -212,6 +212,7 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
+  if(a&&a.src&&!a.mark&&typeof emoEvMark==="function"){const x=emoEvMark(m);if(x)a=Object.assign({},a,x)}/* mark #68: the seal of the feeling the event comes from */
   /* owner 16/11 07:35Z (OD:L448) + reviewer popup-fullbody-r1 #2: EVERY person pop-up has the event picture RIGHT TOP — a kind without its own picture (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt) gets its default banner by kind */
   if(!a||!a.src)a=kitDefaultBanner(m,dlg.dataset.kind||"");
   if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
@@ -661,7 +662,7 @@ const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh t
 function kitDedupRank(rank,name){try{const r=String(rank||"").replace(/<[^>]*>/g,"").trim(),n=String(name==null?"":name);if(!r||!n||/</.test(n))return n;let m=typeof kitTitledName==="function"?kitTitledName(r,n):n;
  if(m===n&&/\s/.test(r)&&n.toLowerCase().startsWith(r.toLowerCase()+" "))m=n.slice(r.length+1).trim();return m||n}catch(e){return name}}
 window.kitDedupRank=kitDedupRank;
-function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);if(rank)name=kitDedupRank(rank,name);
+function kitNameRank(rank,name,col,me,small){try{/* rank == name («Hoàng thượng» as both; only him): ONE title line in its rank tone, never the title over the same word in ink (hoangthuong-gold) */const rr=String(rank||"").replace(/<[^>]*>/g,"").trim().toLowerCase(),nn=String(name==null?"":name).replace(/<[^>]*>/g,"").trim().toLowerCase();if(rr&&rr===nn&&nn==="hoàng thượng"){rank=""}}catch(e){}const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);if(rank)name=kitDedupRank(rank,name);
  /* KIT 48.1i (owner 11/16 15:00Z 2.4): a person whose NAME is the title (Hoàng thượng, Thái hậu) is painted as a rank title (imperial gold), never black ink */
  if(!rank&&name&&KIT_TITLE_ONLY.test(String(name).replace(/<[^>]*>/g,"").trim()))return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}"><b class="knr-r krt knr-only" style="--rt:${kitRankTone(name,col)}">${name}</b></div>`;
  return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
@@ -748,6 +749,8 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
+/* owner 21/11 (OD:L1362, hoangthuong-gold): the EMPEROR's name («Hoàng thượng» as the card head, .pcname.krt[data-imp=emp]) is painted as a TITLE in its rank tone (imperial yellow KIT_IMP), never ink: the name rule above must not win over the title rule. ONLY him: Thái hậu keeps her own look (KIT 33.5) */
+html body .pc .pcl .pcname.krt[data-imp="emp"]{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;font-family:var(--display,"Noto Serif",Georgia,serif)!important;letter-spacing:.03em!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
@@ -803,7 +806,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 #modal .dlg.kdper.kdpbanner>#mb{grid-template-rows:max-content max-content minmax(0,1fr)!important}
 #modal .dlg.kdper>#mb>.kdlgart.kdpban{grid-column:2!important;grid-row:1!important;margin:0 0 8px!important;padding:0!important;min-width:0;width:auto!important;height:auto!important;max-height:none!important}
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,calc(24*var(--kvh,1vh)),190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
-html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
+html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img:not(.ksart-mark){width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
 /* KIT 32.7d (owner 15/11 end card "Kiếp này", D36; kit-keeper-1): a 32.7 dialog with NO option list (end card, Đã rõ cards) — the TEXT side scrolls by
@@ -1016,7 +1019,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
  ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
  ${B}>.kaart>.ksart>:not(img){display:none!important}
- ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kaart>.ksart>img:not(.ksart-mark){position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
  ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
  ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
  ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
@@ -1065,7 +1068,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
 function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(".pc>.pcr button.ka")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.pcr,.kpanec) button.ka:not(.kopt)")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -1106,21 +1109,22 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",84,84)}
+${kitCompactCSS(":is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)",84,84)}
 /* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (per-device size: 68 on a narrow pane, 84 normal, 96 on a wide pane — the sizing of the approved «Dò hỏi gia thế» card; one size per device, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
    UNDER both, ONE full-width info box (.kpabox: the lead sentence, Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, every other row). kitPcActSplit builds the box. */
-html body .pc>.pcr button.ka.kart{--kpa:84px;display:grid!important;grid-template-columns:var(--kpa) minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:var(--kpa)!important;--kah:var(--kpa)!important;min-height:0!important}
-html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:var(--kpa)!important;height:var(--kpa)!important;flex-basis:var(--kpa)!important;flex:none!important;align-self:start!important}
-html body .pc>.pcr button.ka.kart>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
-html body .pc>.pcr button.ka.kart>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
-html body .pc>.pcr button.ka.kart>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
-html body .pc>.pcr button.ka.kart>.kpabox small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
-html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
-html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
-html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
-html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
-@container kpane (max-width:420px){html body .pc>.pcr button.ka.kart{--kpa:68px}}
-html.kv2 body .pc>.pcr button.ka.kart,html.kv2 body .pc>.pcr button.ka.kart.kart{--kpa:96px}/* iPad (two pages): the bigger card, as the approved «Dò hỏi gia thế» */
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt){--kpa:var(--kpa-d,84px);display:grid!important;grid-template-columns:var(--kpa) minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:var(--kpa)!important;--kah:var(--kpa)!important;min-height:0!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kaart{grid-column:1!important;grid-row:1!important;width:var(--kpa)!important;height:var(--kpa)!important;flex-basis:var(--kpa)!important;flex:none!important;align-self:start!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+html body :is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)>.kpabox:empty{display:none!important}
+.kpanec .rbtn{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
+.kpanec .rbtn>button.ka{width:100%!important;max-width:none!important;flex:0 0 auto!important;box-sizing:border-box}/* one act card per line in a Việc list too */
+html{--kpa-d:84px}html.kv2{--kpa-d:96px}html.kpnarrow{--kpa-d:72px}/* ONE picture size per device for every act card (person tabs, Tài nghệ, Tư trang › Việc …): iPad 96, Fold 84, a narrow panel 72 (html.kpnarrow, set by kitActPicSize from the measured panel width) */
 `;document.head.appendChild(st)})();
 /* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
    Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
@@ -1133,7 +1137,7 @@ function kitPcActSplit(b){try{if(!b||!b.isConnected||!b.classList.contains("kart
  if(mv.length){let bk=box.querySelector(":scope > small.kb");if(!bk){bk=document.createElement("small");bk.className="kb";box.appendChild(bk)}mv.forEach(r=>bk.appendChild(r))}
  if(kb&&!kb.children.length)kb.remove()}catch(e){console.error("kitPcActSplit",e)}}
 window.kitPcActSplit=kitPcActSplit;
-function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc>.pcr button.ka.kart").forEach(kitPcActSplit)}catch(e){}}
+function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(":is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)").forEach(kitPcActSplit)}catch(e){}}
 window.kitPcActScan=kitPcActScan;
 /* KIT §6.3b-1 (owner 21/11 ~02:10Z, review/kit-pcrow-square): NO bullet info box on a person card. The descriptive note (.pcn.kpres: «Người chạy việc của cung… / Gặp nàng ta ở tẩm cung…», Chí tôn «Trọng tài… / Mê sắc…»)
    is hidden and the kit yellow «!» (.khap, §78) sits on the TOP-RIGHT corner of the left avatar/figure (.pcp); tap → the same text in the kit info popup. An act RESULT («…: thành / hỏng», popMsg) stays on the card
@@ -1177,6 +1181,23 @@ window.kitPcIntroBang=kitPcIntroBang;
 document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
  const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
  if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+/* KIT §6.3h PERSON INFO BLOCK = FIXED HEIGHT, ONE LINE PER ROW (owner 21/11 ~05:15Z #86 option A, her words: the info block must not grow with text and push the action buttons down; «Dạo này» = a headline + a «!»):
+   every row of the person info block (.pc .pcf .kr: Sở trường · Tính nết · Đã biết · Dạo này …) is ONE line; a value longer than its line is cut with «…» and a kit «!» (kitNoteBang, .kgnb) at the end of the row opens the FULL text in the kit popup.
+   kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
+function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv").forEach(v=>{
+  if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
+  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+window.kitInfoOneLine=kitInfoOneLine;
+(function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
+.pc .pcf .kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.pc .pcf .kr>.krv>*{white-space:nowrap!important}
+.pc .pcf .kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+/* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
+.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
@@ -1190,8 +1211,11 @@ html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
 window.kitPcFrameMark=kitPcFrameMark;
 (function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
+/* KIT §6.3g: html.kpnarrow = a narrow panel (phone, < 480 px measured on #panel; iPad is html.kv2): the ONE act-card picture size per device (--kpa-d) is 72 instead of 84 */
+function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
+window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
 (function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */

@@ -87,15 +87,16 @@ function nhSbMonth(){const mo=nhB().sb.mo;for(const [p,nm] of nhPeople()){try{co
 /* ---------- (e) Mệnh truyện › Phụ tuyến ---------- */
 function nhList(){try{return (S&&Array.isArray(S.nrpt)?S.nrpt:[]).filter(e=>e&&Array.isArray(e.hp)&&e.hp.length).slice().sort((a,b)=>(b.lt||0)-(a.lt||0))}catch(e){return[]}}
 function nhChs(r){const L=[];for(let n=BAL.road.first-1;n<=BAL.road.last;n++)if(nrCh(r,n))L.push(n);return L}
-function nhCard(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=nhChs(e.r);
+function nhSlide(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=nhChs(e.r);
  const st=e.x?"đã khép":e.np?`đang ở chương ${chs.find(n=>n>e.c)||e.c}`:"chưa mở chương nào";
- const img=typeof kitOriginArt==="function"&&!(typeof NRM==="object"&&NRM[e.r])&&e.o?kitOriginArt(e.o):"";
+ let img=typeof kitOriginArt==="function"&&!(typeof NRM==="object"&&NRM[e.r])&&e.o?kitOriginArt(e.o):"";if(!img){try{img=kitInfoArt("Phụ tuyến").src||""}catch(x){}}
  const did=e.hp.map(([n,s])=>`${s===2?"mách tin giúp":s>0?"giúp":"bán đứng"} ở chương ${n}`).join(" · ");const s0=e.hp[e.hp.length-1][1];
  const R=[["Chương đã qua",e.c?`Chương ${e.c}${e.e?` — ${e.e}`:""}`:"chưa qua chương nào"],["Ngươi đã",did,s0>0?"g":"r"],
   e.hr!=null?["Kết quả",nhRes(s0,e.hr,he,"","chương ấy"),(s0>0)===(e.hr>0)?(s0>0?"g":"r"):""]:["Kết quả","chương ấy chưa tới hồi phân định"],
   e.f?["Trọn tuyến",`${he} đi trọn tuyến và nhớ công ngươi`,"g"]:null,e.sb?["Ghi hận",`${he} đã biết ngươi bán đứng`,"r"]:null];
- return kitSkillCard({kind:"story",k:"pt",kicker:`Phụ tuyến · «${T}»`,name:e.nm,level:Math.min(e.np||0,chs.length),max:chs.length,word:"Đã qua",bar:false,next:"",img,desc:st})+rows67(R)}
-function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Phụ tuyến","Ngươi chưa nhúng tay vào tuyến riêng của ai.");return L.map(nhCard).join("")}
+ return {tap:"chapOpen",kicker:`Phụ tuyến · «${T}»`,title:e.nm,sub:`${Math.min(e.np||0,chs.length)}/${chs.length} chương · ${st}`,img,body:rows67(R),toc:[e.x?"done":"now",e.nm,st]}}
+function nhCard(e){return kitSlide("story-pt-"+(e.nm||""),[nhSlide(e)])}
+function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Ta chưa nhúng tay vào tuyến riêng của ai",["Khi ta can dự vào chuyện riêng của một người trong cung, tuyến của người ấy hiện ở đây."],{topic:"Phụ tuyến"});return kitSlide("story-pt",L.map(nhSlide),{tocTitle:"Mục lục tuyến"})}
 try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đã nhúng tay: giúp hay bán đứng ở chương nào, chương ấy ra sao. Người được giúp mà đi trọn tuyến thì nhớ công ngươi; kẻ bị bán đứng chỉ biết khi có người đem chuyện đến tai, biết rồi thì ghi hận."}catch(e){}
 (function(){if(typeof ktStoryHTML!=="function"||typeof kitSubTabs!=="function")return;const k0=kitSubTabs;
  const has=()=>{try{return !nhOff()&&!!S&&nhList().length>0}catch(e){return false}};

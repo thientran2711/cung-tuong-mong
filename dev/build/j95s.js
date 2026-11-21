@@ -177,10 +177,10 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
   const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
   const ret={};/* id → [i...] */const why={};
   for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
-   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
+   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&(x[1]==="follow"||x[1]==="go"&&x[0]===k)&&x[2]===oid}).map(q=>q.id)/* on her way to her (jwalk, review/jagday-walk) = in the retinue */}
    const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
    for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
-    for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
+    for(let j=Math.max(i,kh);j<=e0;j++){const bj=base[q.id][j];if(bj&&bj[1]==="go"&&bj[0]===k&&bj[2]===oid){(ret[q.id]=ret[q.id]||{})[j]=bj;continue}/* still on her way to her (jwalk) */if(j95sKeep(bj))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
     st.ret++;if(q.close)st.close++}
    i=e0+1}
   /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */

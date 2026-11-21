@@ -148,7 +148,7 @@ function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="funct
 function menWatch(k,from){if(!menRoad()||S.dead)return;const Y=S.menWhy||{};S.menMet=S.menMet||{};const now=used,arr=S.menArr&&S.menArr.k===S.place?S.menArr.t:now;
  for(const id in Y){const y=Y[id];const m=manById(id);if(!m||y.w!=="stray"||(S.menW||{})[id]!==y.k)continue;const kk=bkey()+":"+id;if(S.menMet[kk])continue;const h=y.h||2;
   const at=S.place===y.k&&now>=h-1&&arr<h+1;
-  const on=!at&&from&&from.k!=null&&k!==y.k&&from.t<h&&now>=h-1&&(travel(y.k,k)===1||travel(y.k,from.k||"home")===1)&&menZone(y.k)==="hc";
+  const on=!at&&from&&from.k!=null&&k!==y.k&&from.t<h&&now>=h-1&&(travel(y.k,k,null)===1||travel(y.k,from.k||"home",null)===1)&&menZone(y.k)==="hc";
   if(!at&&!on)continue;S.menMet={[kk]:1};
   const v=y.v!=null?RV(y.v):null;if(v&&(!v.alive||v.out))continue;menStat(at?"enc":"encPath");
   const sees=menEye(S)>=(y.hide||0);menStat(sees?"recog":"blur");menCard(m,sees?v:null,Object.assign({},y,{p:on?1:0,hv:!sees&&v?v.id:null}),0);break}}

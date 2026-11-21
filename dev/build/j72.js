@@ -106,7 +106,10 @@ function q72OkDef(X){return X.T.ok||{}}
 function q72NoDef(X){const n=X.T.no||{};return Object.assign({r:-6},n)}
 /* rough chance of finishing (only rolled steps that can end it), for the ladder word on the offer */
 function q72Est(X){let p=1;for(const st of X.T.s){if(st.ch){const os=st.ch.filter(o=>o.p!=null);if(os.length===st.ch.length){p*=Math.max(...os.map(o=>q72Odds(o.p,o.sk,X)))/100}}else if(!st.w){const o=q72Odds(st.b,st.sk,X)/100;p*=st.f==="r"?Math.min(1,o+.35):o}}return Math.round(p*100)}
-function q72Steps(X){return X.T.s.map((st,i)=>{const pl=q72StepPl(st,X);return `${i+1}. ${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}).join("<br>")}
+function q72StepTxt(st,X){const pl=q72StepPl(st,X);return `${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}
+function q72Steps(X){return X.T.s.map((st,i)=>`${i+1}. ${q72StepTxt(st,X)}`).join("<br>")}
+/* owner 21/11 #66 FINAL: the offer's type + deadline are TWO tags on its event picture (m.qtags → kitArtTags); the steps are kit label|value rows (never a chip cloud) */
+function q72InfoRows(X){const T=X.T;return `<div class="kpsec">${kitRows(T.s.map((st,i)=>[`Bước ${i+1}`,q72StepTxt(st,X)]))}</div>`}
 
 /* ---------- candidates ---------- */
 function q72Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.place,or:S.origin&&S.origin.k,bac:S.bac,sung:S.sung,kids:(S.kids||[]).length,fest:(()=>{try{return festToday()}catch(e){return null}})()}}
@@ -134,12 +137,12 @@ function q72Tone(X,pool,key){try{if(!X||!X.A||Q72_TONED.indexOf(X.A.k)<0||!windo
 function q72Lead(X,txt){try{if(typeof txt!=="string"||!/^[“"]/.test(txt))return txt;const l=q72Tone(X,"askLead","q72:ask");return l?`${X.A.n} ${l} ${txt}`:txt}catch(e){return txt}}
 /* ---------- the offer (a person comes to her, or she asked around) ---------- */
 function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off++;q.cd[x.tid]=wk();evHistMark("j72:"+x.tid);const d=mkP("q72o",{x,how:how||""});if(!d)return false;
- Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return true}
+ {const X=q72X(x);Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,qtags:X?[KIND72[X.T.kind],`Hạn ${X.T.dl||6} tuần`]:null})}return true}
 PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
-  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
+  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${q72InfoRows(X)}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
   const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
@@ -252,7 +255,7 @@ function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ 
  const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
  let B=[];const pl=q72StepPl(st,X);
  if(st.w)B.push([q72Txt(st.n,X),`còn ${Math.max(0,(x.wt||wk())-wk())} tuần`,"t"]);
- else{if(pl&&S.place!==pl&&!S.out){const tc=pl==="home"?0:travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":pl!=="home"&&!can(tc+1)?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
+ else{if(pl&&S.place!==pl&&!S.out){const tc=travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":!(pl==="home"?walkBlock(pl,tc)==="":can(tc+1))?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
@@ -285,12 +288,12 @@ function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);kitFix(el);panelScrollKeep(el,keep,rk)}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-q72d],[data-q72x],[data-q72a],[data-q72c],[data-q72g]");if(!b||b.disabled)return;e.stopPropagation();try{
  if(b.dataset.q72d!=null)q72Do(+b.dataset.q72d,b.dataset.q72o!=null?+b.dataset.q72o:null);else if(b.dataset.q72x!=null)q72Drop(+b.dataset.q72x);else if(b.dataset.q72a)q72Ask();else if(b.dataset.q72c)q72Call(b.dataset.q72c);
- else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")goTo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);
+ else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")walkGo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);
 /* test hooks (in-page): q72Test(id) offers that template now; q72Count() counts; q72Bot() plays one open step like a careful player */
 window.q72Test=function(id,force){const T=T72I[id];if(!T)return false;const q=q72();if(force)q.cd={};const x=q72Make(T);if(!x)return false;q72Offer(x,"");showModal();return true};
 window.q72Count=function(){const by={};for(const T of T72)by[T.kind]=(by[T.kind]||0)+1;return{templates:T72.length,followUps:T72.filter(t=>t.fu).length,byKind:by,steps:T72.reduce((a,t)=>a+t.s.length,0)/T72.length}};
 window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=q72();for(const x of q.a){const X=q72X(x);if(!X)continue;const st=X.T.s[x.st];if(!st||st.w)continue;const pl=q72StepPl(st,X);
-  if(pl&&S.place!==pl){if(pl==="home"){goTo("home");}else if(can(travel(S.place,pl)+1)&&!S.confined&&(q72Host(pl,X)||typeof accessOf!=="function"||accessOf(S,pl).ok)){q72Pass(pl);goTo(pl)}else continue}
+  if(pl&&S.place!==pl){if(pl==="home"){walkGo("home");if(S.place!=="home")continue}else if(can(travel(S.place,pl)+1)&&!S.confined&&(q72Host(pl,X)||typeof accessOf!=="function"||accessOf(S,pl).ok)){q72Pass(pl);goTo(pl)}else continue}
   if(st.ch){let bi=-1,bv=-1;st.ch.forEach((o,i)=>{if(q72Why(x,X,st,o))return;const v=(o.p==null?100:q72Odds(o.p,o.sk,X))-(o.c&&o.c.bac?-o.c.bac/4:0)-((o.lto==="bad")?20:0);if(v>bv){bv=v;bi=i}});if(bi>=0){q72Do(x.u,bi);return true}}
   else if(!q72Why(x,X,st,null)){q72Do(x.u,null);return true}}return false};
 

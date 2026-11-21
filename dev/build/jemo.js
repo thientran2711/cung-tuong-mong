@@ -14,23 +14,22 @@ const EMO_GHEN="Chạnh lòng";
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu"};/* FEELINGS-18 (owner OD 17/11 ~19:10Z): the full 18-kind set, levels, heavy names and the old-key conversion live in jfeel.js (FEEL_N, BAL.feel); Toan tính is an intent there, Đau khổ = Buồn at the heavy level */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
- kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
+ kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],neglect:["buon",30],ill:["lo",35],
  friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["buon",90],
  motherCold:["buon",50],clanUp:["vui",35],clanDown:["lo",40]};
 /* personality filter: trait → event → [emotion, ×strength] (null emotion = shrugs it off) */
 const EMO_TR={
- "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
+ "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4]},
  "Khiêm nhường":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
- "Tham vọng":{rivalUp:["ghen",1.3],otherKid:["ghen",1.2],selfUp:["vui",1.3],punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
- "Xảo quyệt":{rivalUp:["ghen",1.2],slight:["gian",1.1],punished:["gian",.9],otherKid:["ghen",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Tham vọng":{punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
+ "Xảo quyệt":{slight:["gian",1.1],punished:["gian",.9],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
  "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["buon",1.6]},
  "Kín đáo":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
- "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
  "Thù dai":{slight:["gian",1.4],foeDown:["vui",1.3]},
  "Ham lợi":{gift:["vui",1.6]},
  "Trọng nghĩa":{friendDie:["buon",1.7],friendUp:["vui",1.4]},
  "Rộng lượng":{slight:["buon",.8]},
- "Thật thà":{slight:["gian",1.1],rivalUp:["ghen",.6]},
+ "Thật thà":{slight:["gian",1.1]},
  "Mê tín":{ill:["so",1.2],kidDie:["buon",1]},
  /* servants (j10 STR) */
  trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["lo",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
@@ -43,15 +42,13 @@ const EMO_DK={"Thù dai":{gian:.4},"Ân cần":{gian:1.6,ghen:1.6},"Khiêm như�
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
-const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,humiliate:1.3,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
- so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
- };/* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
+const EMO_W={};/* ONE CORE (emo-balance): every kind's act weights live in BAL.feel.w (jfeel) + BAL.emo2.w (jmoodknow), copied in at load *//* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:1,binh:0,buon:0,gian:-1,so:-1,ghen:0,lo:0};
+const EMO_OD={};/* BAL.feel.odAll (jfeel) + BAL.emo2.od */
 /* the Emperor's tablet chance by her mood */
 const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
 /* servants' Lòng per month by their own mood */
-const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1};
+const EMO_LOY={};/* BAL.feel.loy (jfeel) + BAL.emo2.loy */
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
 function emoOn(){return !!(typeof S!=="undefined"&&S&&!window.__emoOff)}
 /* ---------- who ---------- */
@@ -138,11 +135,11 @@ function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mi
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}
- if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=1.4;/* high Đức: anger makes her withdraw instead */
+ if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=BAL.feel.wd;/* high Đức: anger makes her withdraw instead */
  return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
-/* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
+/* anger and jealousy aimed at someone raise the danger toward that person: + v/BAL.feel.dg.div × brake, capped at BAL.feel.dg.cap */
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0){const G=BAL.feel.dg;return d+Math.min(G.cap,Math.round(e.v/G.div*f))}}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return oddsCl(r+m)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return oddsCl(r+m)}}catch(e){}return r}})();
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if(e.k==="buon"&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;

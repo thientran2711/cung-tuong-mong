@@ -32,6 +32,7 @@ const NWB={
 .nwb-btn{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:48px}.nwb-btn .nwb-i{width:1.8em;height:1.8em}
 .nwb-pips{display:inline-flex;gap:5px;align-items:center;vertical-align:middle}.nwb-pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--k-hair,#b59a6a);box-sizing:border-box;background:transparent}
 .nwb-pip.on{background:var(--gold,#d99a1e);border-color:var(--gold,#d99a1e)}
+.nwb-cap{font:700 .75rem/1.25 var(--body,sans-serif);color:var(--ink,#3a1a0c);text-align:center;overflow-wrap:anywhere}/* huong-cue-2: the one-line guiding caption beside pips (needs / left) */
 .nwb-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0}.nwb-row .nwb-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
 .nwb-row .nwb-who .nwb-i{width:2.2em;height:2.2em}
 .nwb-pool{display:flex;gap:4px;justify-content:center;align-items:center;margin:4px 0;flex-wrap:wrap}.nwb-pool .nwb-i{width:1.6em;height:1.6em}
@@ -169,9 +170,9 @@ const NWB={
 /* doi */
 .nd-doi .nd-sc{top:8px;width:56px;height:70px;border:1.5px solid #b59a6a;border-radius:8px;background:rgba(255,252,242,.7)}.nd-doi .nd-sc.l{left:22%}.nd-doi .nd-sc.r{right:22%;border-style:dashed}
 .nd-doi .nd-sc svg{width:100%;height:100%}.nd-doi .nd-axis{left:50%;top:6px;height:74px;border-left:2px dashed rgba(194,59,34,.6)}
-.nd-doi .nd-tl{width:56px;height:56px;border:1.5px solid #b59a6a;border-radius:8px;background:#fffdf6;animation:ndx5T 8s infinite}.nd-doi .nd-tl svg{width:100%;height:100%}
-@keyframes ndx5T{0%,40%{left:calc(50% - 28px);top:72px}58%,92%{right:auto;left:calc(78% - 56px);top:14px}100%{left:calc(50% - 28px);top:72px}}
-.nd-doi .nd-hand{left:calc(50% - 6px);top:86px;animation:ndx5D 8s infinite}@keyframes ndx5D{0%,38%{opacity:0;left:calc(50% - 6px);top:86px}42%{opacity:1}58%,64%{opacity:1;left:calc(78% - 34px);top:28px}70%,100%{opacity:0}}
+.nd5.nd-doi{height:146px}.nd-doi .nd-tl{width:44px;height:44px;border:1.5px solid #b59a6a;border-radius:8px;background:#fffdf6;animation:ndx5T 8s infinite}.nd-doi .nd-tl svg{width:100%;height:100%}
+@keyframes ndx5T{0%,40%{left:calc(50% - 22px);top:78px}58%,92%{right:auto;left:calc(78% - 56px);top:14px}100%{left:calc(50% - 22px);top:78px}}
+.nd-doi .nd-hand{left:calc(50% - 6px);top:86px;animation:ndx5D 8s infinite}@keyframes ndx5D{0%,38%{opacity:0;left:calc(50% - 6px);top:92px}42%{opacity:1}58%,64%{opacity:1;left:calc(78% - 34px);top:28px}70%,100%{opacity:0}}
 /* hoadien */
 .nd-hd .nd-face{left:50%;top:4px;width:78px;height:84px;margin-left:-39px;border-radius:50% 50% 46% 46%;background:#f1dfc3;border:2px solid #8a6a30}
 .nd-hd .nd-br{position:absolute;top:34px;width:26px;height:5px;border-radius:5px;background:#3a2412}.nd-hd .nd-br.l{left:8px;transform:rotate(-8deg)}.nd-hd .nd-br.r{right:8px;transform:rotate(8deg)}
