@@ -51,3 +51,16 @@ BASE per file: M2191-01 t5 = M2189-05 · M2191-02 t6 = M2187-06 VERBATIM (locked
 ## M2191 redo 2 (owner L2193: M2189 pictures had NO clasp → L2189 clasp edit void) — keep_check PASS ×4, pushed
 - t5 / t7 / t8: clasp + vân kiên-neck sentences restored VERBATIM from M2187-05/-07/-08 (checked identical by diff), incl. '; the vân kiên is ONE continuous piece around the base of the neck, never split into two separate shoulder pieces' and t8 'small and gold, CLEARLY drawn where the two front edges of the vân kiên meet under the chin'. t8 only: '…small and gold, set with small pearls, CLEARLY drawn…'. t6 (M2187-06 verbatim) already identical. A/B/C fixes kept. Lesson: the plain clasp without the 'ONE continuous piece' sentence drew NO clasp.
 ## STATUS · depth 4 · START_CTX ~3 % · now ~25 % — pushed; idle.
+
+## M2194-01..08 = t1..t8 (owner L2194: sash ties end in tassels at every rank; HQP/HH ties not floor) — 0 cr, keep_check PASS ×8
+Maker dev/art/thu_comoi/M2194/make_M2194.py; attach M2194_ATTACH.md (ALL = 1 mau_net_ve); MA_HINH +8.
+- 01 base LOCKED_t1 (M2187-01): 'two LONG plain silk ties trailing down the skirt well past the knees (thướt tha)' → '…well past the knees, each ending in a pretty silk tassel (thướt tha)'.
+- 02 base LOCKED_t2 (M2187-02): '(thướt tha), each tip embroidered with one tiny flower' → '… one tiny flower and ending in a pretty silk tassel'.
+- 03 base LOCKED_t3 (M2187-03): already 'each ending in a small silk tassel' → byte-identical except CAPTION code.
+- 04 base LOCKED_t4 (M2187-04): already 'with small silk tassels' → byte-identical except CAPTION.
+- 05 base M2191-01: already 'with small silk tassels' (Tần words) → identical except CAPTION.
+- 06 base M2191-02: '…to well past the knees' → '…to well past the knees, each ending in a pretty silk tassel'.
+- 07 base M2191-03: streamers 'all the way down to the floor, their ends touching the floor, soft and flowing (thướt tha)' → 'to well past the knees, each ending in a pretty silk tassel, soft and flowing (thướt tha)'.
+- 08 base M2191-04: 'all the way down to the floor, one either side of centre, their tips capped in gold and touching the floor, soft and flowing' → 'to well past the knees, one either side of centre, each ending in a pretty silk tassel capped in gold, soft and flowing'.
+t5–t8 carry L2193 (M2187 clasp + 'ONE continuous piece' verbatim, HH clasp 'set with small pearls'). Note: t7/t8 colour rule still names 'the yellow streamers' (colour only).
+## STATUS · depth 4 · START_CTX ~3 % · now ~28 % = roll line → HANDOVER: this worker is done; coordinator ROOT-B5 opens the successor (THUROOT7) for any new job. Nothing running, all pushed.

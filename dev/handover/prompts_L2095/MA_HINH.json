@@ -152,5 +152,13 @@
  "M2191-01": "M2191-01_s62_t5_thu.txt (bộ thu s62 t5 Phi = M2189-05, eo/thắt lưng/áo/váy theo Tần M2189-04, vân kiên dài bằng Tần) [L2192: vân kiên MỘT tầng như Tần] [L2193: khuy + câu vân kiên liền quanh cổ M2187 nguyên văn]",
  "M2191-02": "M2191-02_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2189-06 + thêm chút vàng (~nửa HQP) + thêm ngọc trên áo) [L2192 làm lại: gốc M2187-06 nguyên văn (ảnh chủ khen) + chỉ thay đổi L2191, tua ngọc = chữ HQP M2187-07]",
  "M2191-03": "M2191-03_s62_t7_thu.txt (bộ thu s62 t7 HQP = M2189-07, eo như QP (không bó ngực), phượng dưới lưới như HH M2187-08, tua ngọc dài hơn QP, thêm ngọc, tay áo tới mắt cá) [L2193: khuy + câu vân kiên liền quanh cổ M2187 nguyên văn]",
- "M2191-04": "M2191-04_s62_t8_thu.txt (bộ thu s62 t8 HH = M2189-08, khuy vàng đính ngọc trai, eo như QP, phượng dưới lưới, tua ngọc dài nhất, ngọc nhiều nhất, tay áo tới mắt cá) [L2193: khuy + câu vân kiên liền quanh cổ M2187 nguyên văn, khuy đính ngọc trai]"
+ "M2191-04": "M2191-04_s62_t8_thu.txt (bộ thu s62 t8 HH = M2189-08, khuy vàng đính ngọc trai, eo như QP, phượng dưới lưới, tua ngọc dài nhất, ngọc nhiều nhất, tay áo tới mắt cá) [L2193: khuy + câu vân kiên liền quanh cổ M2187 nguyên văn, khuy đính ngọc trai]",
+ "M2194-01": "M2194-01_s62_t1_thu.txt (bộ thu s62 t1 = LOCKED M2187-01 + tua dải lụa; L2194)",
+ "M2194-02": "M2194-02_s62_t2_thu.txt (bộ thu s62 t2 = LOCKED M2187-02 + tua dải lụa; L2194)",
+ "M2194-03": "M2194-03_s62_t3_thu.txt (bộ thu s62 t3 = LOCKED M2187-03 nguyên văn (đã có tua); L2194)",
+ "M2194-04": "M2194-04_s62_t4_thu.txt (bộ thu s62 t4 = LOCKED M2187-04 nguyên văn (đã có tua); L2194)",
+ "M2194-05": "M2194-05_s62_t5_thu.txt (bộ thu s62 t5 = M2191-01 nguyên văn (đã có tua); L2194)",
+ "M2194-06": "M2194-06_s62_t6_thu.txt (bộ thu s62 t6 = M2191-02 + tua dải lụa; L2194)",
+ "M2194-07": "M2194-07_s62_t7_thu.txt (bộ thu s62 t7 = M2191-03, dải lụa tới quá gối + tua (không chạm đất); L2194)",
+ "M2194-08": "M2194-08_s62_t8_thu.txt (bộ thu s62 t8 = M2191-04, dải lụa tới quá gối + tua bọc vàng (không chạm đất); L2194)"
 }
