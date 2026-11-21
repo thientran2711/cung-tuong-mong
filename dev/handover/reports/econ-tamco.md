@@ -95,3 +95,24 @@ Branch review/econ-tamco @ d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (TIER BIG, 9
 - Shots (not in git): /home/user/wt/econ-tamco-shots/roadpick-755x1000.jpg + roadpick-1180x820.jpg.
 
 SẴN SÀNG KIỂM review/econ-tamco d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (TIER BIG) — non-blocking KIT REQUEST open (visible «paid only on success» word)
+
+## ECON TAMCO #4 (session_01964izEeakvu1zSofrTWNJJ) — RE-CHECK #2 F2 + F3 + minor (21/11)
+depth 5 · START_CTX ~3 % (get_session read 0; estimate).
+PRIORITY #1 CHECK ('aOdd|rcvMaidBribe|rcvJudge|stf2Bribe|econRoad'): OD 0 | ledger 0 | claims D #13 | main: j9 aOdd/fzRun (shown-odds one path), jrcv rcvMaidBribe/rcvJudge, jagstf2 stf2BribeW, j29 stf2Bribe | review/* only this branch.
+Branch review/econ-tamco @ ea374de9c23eabe947b775cacece8127cb652067 (final-merged LIVE d31c8ec0; db6ae2a0 before it). TIER BIG.
+- **F2 (laws 2/3/1/11)** every success decision of a road scheme now reads aOdd (her frozen shown odds / an NPC road's +up): bribe (j8 → rcvMaidBribe take weight), xinhh + trinhhh (jaudit → rcvJudge and the fallback roll), whole group: bribel (jecon, same maid pick) and j29 sent-servant stf2Bribe (same odds as its aRoll fallback). A scheme whose odds do not roll gets NO road (jtamco `econRoadRolls`: odds null or ≥100 → musk, catswap; a judge request decided by HER as Hoàng hậu): no road card for her, no NPC road.
+- **Group scan** dev/test/econ-tamco-scan.js: every priced scheme, her AND an NPC, odds frozen 0 vs 100 (her fzRun, NPC road bonus), N runs each from one saved state, seeded; a road scheme must move the outcome (TVD ≥ 0.4), a no-road scheme must have no card / no NPC road.
+  | scheme | before d07e20bb her/npc TVD | after her/npc TVD |
+  |---|---|---|
+  | bribe | 0.10 / 0.13 FAIL | 1.0 / 0.9 |
+  | xinhh | 0.17 / 0 FAIL | 1.0 / 1.0 |
+  | musk, catswap | roads on a no-roll act FAIL | no roads (no card, NPC "") |
+  | spy poison block lygian slowpoison huydung giahoa rash laydo | 0.67–1.0 | 0.67–1.0 (unchanged) |
+- **F3** (shown = charged): the card's numbers {pr, tc, hire} ride with the road (ECON_HER.c, the co-op intent and the ptime deed carry them) and ARE what is paid: the road at econRoadPay, the scheme price frozen for her act on that target (ECON_PRFZ over econSchemePrice). The plain road carries them too. econ-tamco.test.js pinned: seeded rolls, each road from one saved state (ser/deser, khắc reset — the old flake was the tc road using up the buổi, then the hire road silently not running); charges checked against the card's Tốn + «thành» price at the click; new 3d: base price doubled after the card (94 → 188) → charged 94; 3c bribe forced 0/100 now decides the outcome exactly.
+- N3: jwhy spy typed `:15` fallback dropped (actBac only).
+- **Minor (Fold «Bạc / -94» wrap)**: it is the kit option card (j63 `button.ka .krv .ef` has no no-break rule) → KIT REQUEST (non-blocking) in dev/kit/KIT_REQUESTS.md, not hacked (law 9).
+- Revert audit `git diff d31c8ec0..HEAD` (and db6ae2a0..): 15 files, 12 removed lines, all this branch's own edits (assemble list +jtamco, j17, j29, j8, jaudit ×2, jcoopthinf, jecon ×3, jwhy, KIT_REQUESTS row) — no LIVE hunk reverted.
+- Gates on ea374de9: econ-tamco.test.js PASS ×3 (each run Fold 755x1000@2 + iPad 1180x820@2; also ×3 on the db6ae2a0 merge) · econ-tamco-scan PASS Fold + iPad (11 her + 11 NPC road schemes, N 40) · econ-tamco-coop PASS 17 (2 players, both seats; first run on the db6ae2a0 merge failed at staging only: the guest life had 2 bạc, no priced scheme open; rerun PASS) · solo = econ-tamco.test · coop-e2e 92/92 · kit-ton-row PASS 14 · roadhp-unit PASS · quickcheck PASS 225 s, core gates PASS, old save ok · roadhp-scan FAIL 10 is pre-existing on LIVE (bd_* «Nhờ», not ours).
+- N1 (every road «Liều» at low odds) stands, non-blocking (law 7).
+
+SẴN SÀNG KIỂM review/econ-tamco ea374de9c23eabe947b775cacece8127cb652067 (TIER BIG) — non-blocking KIT REQUESTs open (visible «paid only on success» word; row item no-break)
