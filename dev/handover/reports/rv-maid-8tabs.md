@@ -41,3 +41,11 @@ on the cung nữ road give the guard act a maid-true version from the SAME act (
 - The consort panels now open on the maid road with all consort acts (Chủ tử card: «Mời nàng ta sang cung», «Sát hại»…). Per her 03:15Z words the content mapping is hers to rule later («đổi cái gì vào trong cái tab gì … tôi sẽ báo bạn sau»); no errors in the probe. Flag for her mapping pass.
 - iPad Chủ tử / Phi tần card: long act titles wrap word-per-line («Sai tai mắt dò nơi ở») in the narrow title column — same consort layout, pre-existing, not this branch.
 - Chủ card «Dạo này» shows her own entry log deltas (Sủng 8→0 …) — the shared «Dạo này» reader, pre-existing.
+
+---
+## ROUND 2 — PASS → LAND READY **561e3f47** (FF of main aee7ff84)
+Fix 941c1367 (worker maid-8tabs-2) for FAIL 1: jts tsGuardW = ONE act, two roads — cung nữ «Nép mình theo hầu chủ» (Chủ tin −BAL.tsGuard.tin, need «không ở Tân Giả khố», log phòng hạ nhân / theo sát chủ), consort unchanged words with Sủng −BAL.tsGuard.sung; same s.guard gain BAL.tsGuard.wk weeks; NPC tsNpcDanger reads the same BAL (typed 2/2 gone, law 4). Group: Biếu quà làm lành (real bạc cost, no consort words) kept; tsDangerOmen consort-only. Verified Fold + iPad: card «Nép mình theo hầu chủ · TỐN Chủ tin −2 · ĐƯỢC 2 tuần: mưu hại … ít đi một nửa», no Sủng, no «cung / kẻ hầu».
+Reviewer fix 7dabdd53: maid kèm «ít được chủ sai việc, …» was read by the kit option parser as a gain (green Được row, word «được»); now kèm «chủ ít thấy mặt ngươi» → same render path as the consort's «ít gặp Hoàng thượng».
+Merged origin/main 2bf59027 then aee7ff84 (assemble: main's list + jroad8; index/sw rebuilt).
+Gates: quickcheck 561e3f47 PASS (render 255/238, tab 516/470, buổi 1886/1460 — one slow run 3998 in 3; the two earlier quickchecks this round/last round were 1278/1228 and 1138/1290, box noise) · maid-8tabs.js 59/59 · coop tt+cnv 94/94 (561e3f47); on 4fb5312b: quickcheck PASS, ag-stf2 23/23, tab-pairs 56×2 0 mismatch, coop tt+nc 94/94, tt+cnv 94/94, role-parity ALONE ALL PASS.
+Notes for MAIN (not blocking, pre-existing kit): the dialog option card drops a «kèm» line with no number (jk2b kitParse → notes): the consort's «ít gặp Hoàng thượng» never shows; the Sủng cost shows −3 for BAL 2 on the consort (a Sủng cost scaler) — worth a look by the kit keeper.
