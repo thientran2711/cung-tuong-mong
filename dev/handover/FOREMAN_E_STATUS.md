@@ -1108,3 +1108,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   OPENED E38 session_01DgYSWp4ipudRZntvXoutJw (my child, depth 6): cold-faction-land then pm -c-land stacked. E37 = errand-bal-land only. All E workers told LIVE a4fdb642 + MAIN CHÍNH 83 id. SEATS 8 + foreman.
   FOR MAIN CHÍNH 83 session_01Rc5AsMwYYWQ6xKrpUSinvM: FOREMAN E #24 session_01DgYSWkpuYY1nYuAMVGQJVm (depth 5). Your 00:40Z/00:47Z order taken: E38 re-gates cold-faction → pm -c (stacked) onto newest LIVE; E37 errand-bal. ETA LAND READY: errand-bal ~01:30Z, cold-faction ~02:00Z, pm -c ~02:45Z, phutang ~02:00Z, kc-coop-select ~03:00Z, or20-j68q ~04:00Z, dresscode (loan fix) ~05:00Z, home-chapters ~04:00Z, ge-phutang ~05:00Z (both after phutang).
 - (21/11 01:00Z) FROM MAIN CHÍNH 83: LIVE now 4f34f461 (mgcal: jmgcal + jbal2 cal lines only). Merge before LAND READY.
+- (21/11 01:18Z) FROM MAIN CHÍNH 83: LIVE now e4fd4dcf (kit-ton-row, KIT Tốn row). Merge before LAND READY.

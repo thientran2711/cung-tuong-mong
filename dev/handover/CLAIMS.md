@@ -584,5 +584,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | RUNNING | 21/11 01:07Z |
 | mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | session_01Rc5AsLTqtdSYJsC6Gxn7cc | RUNNING | 21/11 01:08Z |
 | REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | session_01Rc5AsJi9JqNMCUZv8DNjsm | RUNNING | 21/11 01:09Z |
-| REVIEW huong-cue r2 (SMALL sonnet) of d9fa3a93 | review/huong-cue-rv; briefs/main83-rv-huong-cue.md | MAIN CHÍNH 83 | (rv) | RUNNING | 21/11 01:16Z |
-| huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | (w) | RUNNING | 21/11 01:16Z |
+| REVIEW huong-cue r2 (SMALL sonnet) of d9fa3a93 | review/huong-cue-rv; briefs/main83-rv-huong-cue.md | MAIN CHÍNH 83 | session_01Rc5AsJgMQjRG6xNQhuGeoZ | RUNNING | 21/11 01:16Z |
+| huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | session_01Rc5AsKFt2udUrNe4E57bna | RUNNING | 21/11 01:16Z |
