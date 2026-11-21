@@ -18,6 +18,13 @@ FIX LIST for the successor (branch review/hao-huu; start from review/hao-huu-rv 
 Then: re-run COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js + coop-e2e + coop-chat + quickcheck; Fold + iPad shots both seats incl. away / hold / ready states; SẴN SÀNG KIỂM to MAIN CHÍNH 89 session_01Rc5AsN8weZNZcjxNiCsivs. Note coop-sleep fails on main too (baseline), not this branch.
 Worktree /home/user/wt/hh (sparse) is clean at the last push; scratch shots /home/user/wt/hh-shots.
 
+## r4 — hao-huu-2: K-BADGE-HAOHUU wired (keeper KIT READY 36b6071e, review/kit-badge merged in)
+- Merged review/kit-badge 36b6071e (assemble list union +j68q.js; index.html/sw.js rebuilt). The kit part is under its own review (rv MSxp, via MAIN 91).
+- jcooptimer: private `.kctmf-b` badge and `.kctmf.koff` look DELETED; badge = `kitStBadge(ready→ok · hold→pause · busy/work→busy · away→"")` as the button's LAST child; grey = the kit `.krailb.koff`. The picture span clips the portrait → the kit cord no longer pokes under the button (rv N3). N4 (⏸ glyph size) belongs to the kit part (10 px in §77b) — the keeper's call.
+- KIT.md §69.2 badge/grey lines now point to §77b (in place). Test: badge must be `.kbdg ok|busy|pause`.
+- coop-haohuu (tt/nc, HH_DSF=2): **319/319 ok**. quickcheck HEAD 16110bc8: **QUICKCHECK PASS** · open 1848 ms · old save ok · perf new/live render 245/266, tab 564/518, buổi 1078/1351 · core gates PASS.
+- Shots CDN `img/_review/hao-huu/r4-*` (ready ✓ / hold ⏸ / away grey / met, Fold + iPad, both seats; looked at).
+
 ## r3 — hao-huu-2: rv r2 FAIL A + N1 + N2 (base review/hao-huu-rv2 dfd14ac7)
 PRIORITY #1 CHECK ('k61skip' / 'K61MAP' / 'krn'): rv-hao-huu.md «r2» (A, N1–N4), j61 k61Table/k61Scrub/K61SKIP, jaudit KRN rank-name pass, j79 kitName, jnamefix | main + review/hao-huu-rv2 | review/kit-badge 36b6071e (keeper, K-BADGE-HAOHUU, not yet KIT READY) | claims: hao-huu-2.
 - **A (title masked «Hàn lâm học sĩ ???»)**: jhaohuu sheet title + «Danh vị» = `kitName(her entity,{cap:true})` (rank + name in the rank colours: owner 15/11 "phẩm và tên người lúc nào cũng phải đi chung"; the same on both seats — a bare string was given a rank by the jaudit rank-name pass on one seat only) inside a `data-k61skip` span, so the j61 DOM mask cannot re-map her words to another record. Unmet = «Hảo hữu của ta» (already the mask). Whole group: `#kctmf` + `#kctmfu` carry `data-k61skip` (button aria-label / title / hidden words: her name is written there only once k61Named); other names in the sheet belong to other people (her maid, a servant's mistress) and keep their own knowledge rule.
