@@ -159,5 +159,11 @@ const CLASH=w=>{try{let who=S.maid||null;if(!who||typeof who!=='object'){return{
    const gm=await B.p.evaluate(()=>S.maid&&S.maid.fid||null);
    ok(hw===1&&gm&&gm!==clash.k,'RF_CLASH: the world person on the host keeps her face (host-canon), the guest\'s maid moved to a free face',{hw,guestMaid:gm,k:clash.k})}
   await audit(A,B,'after week '+(w+1))}
+ /* review: the repairs (guest rfYield, host rfWorldDup) fire ONLY on a real clash: a room with no clash moves nobody (no false hit on a copy /
+    log entry / ref of a person that carries her fid); with RF_CLASH the guest yields (her maid), the host never yields */
+ {const ya=await A.p.evaluate(()=>({y:COOPW.faceYield||[],d:COOPW.faceDup||[]})),yb=await B.p.evaluate(()=>({y:COOPW.faceYield||[],d:COOPW.faceDup||[]}));
+  console.log('repairs host',JSON.stringify(ya),'guest',JSON.stringify(yb));const clashRun=+process.env.RF_CLASH;
+  ok(!ya.y.length&&!yb.d.length,'repairs by role: host never yields, guest never runs the world dup repair',{ya,yb});
+  ok(clashRun?(yb.y.length>=1&&!ya.d.length):(!yb.y.length&&!ya.d.length),clashRun?'RF_CLASH: the guest yields, no world dup repair':'no clash: nobody moved (no false repair)',{host:ya,guest:yb})}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,4));
  await b.close();const bad=res.filter(r=>!r[0]);console.log((bad.length?'FAIL':'PASS')+' '+(res.length-bad.length)+'/'+res.length);process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
