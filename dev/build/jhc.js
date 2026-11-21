@@ -72,7 +72,7 @@ const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
- if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":RANKS[S.rank].n,col:fcol(f),pid:"me"}}
+ if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":(typeof isSrv==="function"&&isSrv())?srvRkN()/* cung nữ road (maid-8tabs) */:RANKS[S.rank].n,col:fcol(f),pid:"me"}}
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
@@ -151,14 +151,13 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
  const rl=T0.querySelector('[data-tab="rel"]'),fc=T0.querySelector('[data-tab="fac"]');if(rl&&st)st.after(rl);if(fc&&rl)rl.after(fc);
- /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
 try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
-(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
+(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const r8=k=>typeof road8Label==="function"&&road8Label(k);/* her road names its own sub-tab (jroad8 ROAD8) */const b=!r8("court")&&P&&P.querySelector('.ksub [data-ksub="court"]');
   if(b){/* oi-render: both widths say "Chí tôn": no width read (it forced a layout), no rewrite when equal */if(b.innerHTML!=="Chí tôn")b.innerHTML="Chí tôn";if(b.title!=="Chí tôn")b.title="Chí tôn"}
-  const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
+  const r2=!r8("rel")&&P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
@@ -196,7 +195,7 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=tab==="court"?courtTabHTML():menTabHTML();
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* servant road keeps its own tab set */
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const srv=typeof isSrv==="function"&&isSrv();document.querySelectorAll('#tabs [data-tab="court"],#tabs [data-tab="men"]').forEach(b=>{if(srv)b.style.display="none"})}catch(e){}return r}})();
+/* maid-8tabs (owner 21/11 ~03:15Z): Chí tôn and Nam nhân are sub-tabs on the cung nữ road too (no servant-only hiding) */
 
 /* ---------- 4. Người chạy việc ---------- */
 if(typeof bestSent==="function"){const b0=bestSent;bestSent=function(p){try{if(p===S&&S.runner!=null){const s=(S.staff||[]).find(x=>x.sid===S.runner&&!x.spyFor);if(s)return s;S.runner=null}}catch(e){}return b0.apply(this,arguments)}}
