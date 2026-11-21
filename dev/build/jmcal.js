@@ -1,5 +1,5 @@
 /* ================= jmcal: LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, KIT §58) =================
-   A wall calendar: one month = 3 rows (thượng / trung / hạ tuần) x 10 squares (days 1-30). Only the FIXED YEARLY festivals of the game
+   A wall calendar: one month = 3 tuần (thượng / trung / hạ), each a light label + 2 rows x 5 equal squares (days 1-30), a normal phone month view (owner 21/11 #42): header with arrows + swipe, no month chips. Only the FIXED YEARLY festivals of the game
    calendar (FEST, j31 + j71 Thánh thọ Thái hậu while she lives) are marked; private contests, tea parties, private banquets and every other
    surprise event never appear (they are not in FEST).
    TIME MODEL: the game has no day of the month; a turn is a tuần (S.tuan 0/1/2). Day squares map to tuần as 1-10 = thượng, 11-20 = trung,
@@ -163,24 +163,22 @@ function mcDayBox(o,d){const n=mcNow();const {m,y}=mcMY(o);const t=mcTuanOf(d);c
 /* ---------- the calendar (pure HTML; o = months from the current month, -1 = last month (her log), 0..11 ahead; sel = the tapped day) ---------- */
 function kitMonthCal(opt){opt=opt||{};const n=mcNow();const o=Math.max(-1,Math.min(11,opt.o|0));const {m,y}=mcMY(o);const F=mcFests(m);const X=mcExtra(o);const sel=+opt.sel||0;
  const at={};F.forEach(f=>f.days.forEach(d=>{(at[d]=at[d]||[]).push(f)}));
- const tabs=[];for(let i=-1;i<12;i++){const mm=mcMY(i).m;const c=i<0?0:mcFests(mm).length;tabs.push({k:String(i),label:i<0?"Tháng trước":`Tháng ${typeof KP_MON!=="undefined"?KP_MON[mm-1]:mm}`,n:c||null,tip:c?`${c} lễ hội`:""})}
- const tabRow=typeof kitTabRowHTML==="function"?kitTabRowHTML(tabs,String(o),"data-kmcm"):"";
- let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const T=(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t]).split(" ");const q=mcQue(o,t);
-  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${T[0][0].toUpperCase()+T[0].slice(1)}</span><span>${T[1]}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}${mcQueChip(q)}</div>`;
+ let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const q=mcQue(o,t);
+  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${mcCap(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t])}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}${mcQueChip(q)}</div><div class="kmc-cells">`;
   for(let d=t*10+1;d<=t*10+10;d++){const past=o<0||(o===0&&t<n.t);const L=at[d];const E=(X[d]||[]).filter(x=>x.k!=="cy");const cy=(X[d]||[]).some(x=>x.k==="cy");
    const mo=MCX.moon[d]?`<span class="kmc-mo p${d}" aria-hidden="true"></span>`:"";const cnt=(L?L.length-1:0)+E.length-(L?0:1);
    const badge=cnt>0?`<span class="kmc-c">+${cnt}</span>`:"";const cls=`kmc-d${L?" f":""}${E.length?" x":""}${cy?" cy":""}${past?" past":""}${sel===d?" sel":""}`;
    const lab=[mcDayName(d)].concat((L||[]).map(x=>x.name),E.map(x=>x.txt),cy?["Nguyệt tín"]:[]).join(": ");
    if(L){const f=L[0];g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmcf="${f.k}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><img src="img/ev-fest-${f.k}.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="kmc-n">${d}</span>${badge}${mo}<span class="kmc-fn">${mcEsc(f.short)}</span></button>`}
    else g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><span class="kmc-n">${d}</span>${badge}${mo}${E.length?`<span class="kmc-tg t-${E[0].k}">${MCX.tag[E[0].k]||""}</span>`:""}</button>`}
-  g+=`</div>`}
+  g+=`</div></div>`}
  const rows=[];for(let d=1;d<=30;d++){(at[d]||[]).forEach(f=>{if(f.days[0]===d)rows.push([d,mcDaysName(f.days),`<span class="kmc-lk" role="button" tabindex="0" data-kmcf="${f.k}" data-kmco="${o}">${mcEsc(f.name)}</span> · ${mcLeftText(o,f)}`])});
   (X[d]||[]).forEach(x=>{if(x.k!=="cy"&&x.k!=="bong")rows.push([d,mcDayName(d),mcEsc(x.txt)])})}
  const rr=rows.map(r=>[r[1],r[2]]);
  const list=rr.length?(typeof kitRows==="function"?kitRows(rr):rr.map(r=>`<div>${r[0]} · ${r[1]}</div>`).join("")):`<div class="kmc-none">${o<0?"Tháng trước không có lễ hội lớn.":"Tháng này không có lễ hội lớn."}</div>`;
- return `<div class="kmc" data-kmc="${o}"><div class="pctabs kcattabs kmc-tabs" role="tablist">${tabRow}</div>`+
-  `<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o<0?"đã qua":o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>`+
-  `<div class="kmc-grid">${g}</div>${sel?mcDayBox(o,sel):`<div class="kmc-hint">Chạm vào một ngày để xem việc ngày ấy, ghi sổ hẹn.</div>`}<div class="kmc-list">${list}</div></div>`}
+ const ar=(to,cap,sym)=>`<button type="button" class="kbtn alt kmc-ar" data-kmcm="${to}" aria-label="${cap}" title="${cap}"${to<-1||to>11?" disabled":""}>${sym}</button>`;
+ return `<div class="kmc" data-kmc="${o}"><div class="kmc-nav">${ar(o-1,"Tháng trước","‹")}<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o<0?"đã qua":o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>${ar(o+1,"Tháng sau","›")}</div>`+
+  `<div class="kmc-grid">${g}</div>${sel?mcDayBox(o,sel):`<div class="kmc-hint">Chạm vào một ngày để xem việc ngày ấy, ghi sổ hẹn. Lướt ngang hoặc bấm mũi tên để đổi tháng.</div>`}<div class="kmc-list">${list}</div></div>`}
 /* the popover of one festival (kit kpPop) */
 function mcPopHTML(k,o){const mm=mcMY(o).m;const f=mcFests(mm).find(x=>x.k===k);if(!f)return"";const A=mcActs(k),pz=mcPrize(k);
  const T=f.t.map(t=>typeof TUAN!=="undefined"?TUAN[t]:"").filter(Boolean).join(", ");const P=o<0?[]:mcPrep(k);const ok=P.filter(x=>x[0]).length;
@@ -191,12 +189,12 @@ function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({
 try{KP_SEAL.cal="LỊCH"}catch(e){}
 window.kitMonthCal=kitMonthCal;window.kitMonthCalOpen=kitMonthCalOpen;
 /* re-draw the calendar in place (month tab, tapped day, a note saved), keeping the tab row's scroll */
-function mcRedraw(c,o,sel,focusDay){const sx=(c.querySelector(".kmc-tabs")||{}).scrollLeft||0;const w=document.createElement("div");w.innerHTML=kitMonthCal({o,sel});const nc=w.firstElementChild;c.replaceWith(nc);
- const tr=nc.querySelector(".kmc-tabs");if(tr){tr.scrollLeft=sx;const on=tr.querySelector(".pct.on");if(on&&on.scrollIntoView&&!sel)on.scrollIntoView({block:"nearest",inline:"nearest"})}
+function mcRedraw(c,o,sel,focusDay,dir){const w=document.createElement("div");w.innerHTML=kitMonthCal({o,sel});const nc=w.firstElementChild;c.replaceWith(nc);
+ if(dir){const g=nc.querySelector(".kmc-grid");if(g)g.classList.add(dir>0?"kmc-in-r":"kmc-in-l")}
  if(sel&&focusDay!==false){const b=nc.querySelector(".kmc-day");if(b&&b.scrollIntoView)b.scrollIntoView({block:"nearest"})}return nc}
-/* month tabs, day taps, festival popover, sổ hẹn (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
+/* month arrows + swipe, day taps, festival popover, sổ hẹn (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
 document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)return;const c=T.closest(".kmc");
- const tb=T.closest("[data-kmcm]");if(tb&&c){e.stopPropagation();e.preventDefault();mcRedraw(c,+tb.dataset.kmcm,0);return}
+ const tb=T.closest("[data-kmcm]");if(tb&&c){e.stopPropagation();e.preventDefault();if(tb.disabled)return;const to=+tb.dataset.kmcm;mcRedraw(c,to,0,false,to>+c.dataset.kmc?1:-1);return}
  const pre=T.closest("[data-kmcpre]");if(pre&&c){e.preventDefault();const i=c.querySelector("#kmc-note");if(i){i.value=pre.dataset.kmcpre;i.focus()}return}
  const sv=T.closest("[data-kmcsave]");if(sv&&c){e.preventDefault();const i=c.querySelector("#kmc-note");const d=+sv.dataset.kmcsave,o=+sv.dataset.kmco;if(i&&mcNoteAdd(o,d,i.value)){const sh=c.querySelector("#kmc-share");if(sh&&sh.checked){const x=S.calNotes[S.calNotes.length-1];if(x)x.share=1}try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,o,d)}return}
  const dl=T.closest("[data-kmcdel]");if(dl&&c){e.preventDefault();e.stopPropagation();mcNoteDel(dl.dataset.kmcdel);const b=c.querySelector(".kmc-day");try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,+c.dataset.kmc,b?+b.dataset.kmcday:0);return}
@@ -205,6 +203,10 @@ document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)r
  const f=T.closest("[data-kmcf]");if(f&&typeof kpPop==="function"){e.stopPropagation();e.preventDefault();const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h)}});
 document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const f=e.target.closest&&e.target.closest(".kmc-lk[data-kmcf]");if(f){e.preventDefault();f.click()}
  if(e.key==="Enter"&&e.target&&e.target.id==="kmc-note"){const c=e.target.closest(".kmc");const b=c&&c.querySelector("[data-kmcsave]");if(b){e.preventDefault();b.click()}}});
+/* swipe the grid sideways = the next / last month (a tap is not a swipe: no click is made after a drag, so the day squares keep working) */
+(function(){let x0=0,y0=0,live=null;document.addEventListener("touchstart",e=>{const t=e.touches&&e.touches[0];const c=e.target.closest&&e.target.closest(".kmc-grid,.kmc-nav");live=t&&c?c.closest(".kmc"):null;if(t){x0=t.clientX;y0=t.clientY}},{passive:true});
+ document.addEventListener("touchend",e=>{const c=live;live=null;const t=e.changedTouches&&e.changedTouches[0];if(!c||!t||!c.isConnected)return;const dx=t.clientX-x0,dy=t.clientY-y0;if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.5)return;
+  const o=+c.dataset.kmc,to=o+(dx<0?1:-1);if(to<-1||to>11)return;mcRedraw(c,to,0,false,dx<0?1:-1)},{passive:true})})();
 /* hover (mouse) shows the same popover */
 document.addEventListener("mouseover",e=>{try{if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;const f=e.target.closest&&e.target.closest(".kmc-d[data-kmcf]");if(!f||f.__kmh)return;f.__kmh=1;
  const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h);f.addEventListener("mouseleave",()=>{f.__kmh=0;const p=document.getElementById("kpop");if(p)p.hidden=true},{once:true})}catch(x){}});
@@ -232,15 +234,21 @@ window.kitDeskCal=kitDeskCal;
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitDeskCal();return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
-.kmc{display:grid;gap:8px;min-width:0}
-.kmc-tabs{display:flex!important;flex-wrap:wrap!important;gap:5px;overflow:visible!important}
-.kmc-head{font-family:var(--display);color:var(--ink);font-size:.95rem}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
-.kmc-grid{display:grid;grid-template-columns:auto repeat(10,minmax(0,1fr));gap:3px;min-width:0}
-.kmc-row{display:contents}
-.kmc-tl{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;font-family:var(--display);font-size:.72rem;line-height:1.1;color:var(--dim);padding:0 4px;border-radius:6px}
+.kmc{display:grid;gap:8px;min-width:0;container-type:inline-size}
+.kmc-nav{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:8px}
+.kmc-ar{min-width:44px;min-height:44px;padding:0;font-size:1.5rem;line-height:1;font-weight:700}.kmc-ar[disabled]{opacity:.35;cursor:default}
+.kmc-head{font-family:var(--display);color:var(--ink);font-size:1rem;text-align:center}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
+.kmc-grid{display:grid;gap:6px;min-width:0;max-width:560px;width:100%;justify-self:center}
+.kmc-grid.kmc-in-r{animation:kmcInR .2s ease both}.kmc-grid.kmc-in-l{animation:kmcInL .2s ease both}
+@keyframes kmcInR{from{opacity:.3;transform:translateX(18px)}to{opacity:1;transform:none}}@keyframes kmcInL{from{opacity:.3;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.kmc-grid.kmc-in-r,.kmc-grid.kmc-in-l{animation:none}}
+.kmc-row{display:grid;gap:4px;min-width:0}
+.kmc-cells{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;min-width:0}
+@container (min-width:470px){.kmc-cells{grid-template-columns:repeat(10,minmax(0,1fr))}}
+.kmc-tl{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:.76rem;line-height:1.2;color:var(--dim);padding:1px 4px;border-radius:6px}
 .kmc-row.on .kmc-tl{color:var(--gold);background:#f0d07033;box-shadow:inset 0 0 0 1px var(--gold)}
 .kmc-now{font-size:.62rem!important;white-space:nowrap}
-.kmc-d{position:relative;min-width:0;aspect-ratio:1/1.08;min-height:46px;max-height:96px;display:flex;flex-direction:column;justify-content:flex-end;margin:0;padding:0;border:1px solid var(--k-hair);border-radius:6px;background:var(--k-card);color:var(--ink);font:inherit;overflow:hidden}
+.kmc-d{position:relative;min-width:0;min-height:0;aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:flex-end;margin:0;padding:0;border:1px solid var(--k-hair);border-radius:6px;background:var(--k-card);color:var(--ink);font:inherit;overflow:hidden}
 .kmc-row.on .kmc-d{border-color:var(--gold);box-shadow:inset 0 0 0 1px #f0d07088}
 .kmc-d.past{opacity:.5}
 .kmc-n{position:absolute;top:2px;left:3px;font-weight:700;font-size:.74rem;line-height:1.1}
@@ -279,7 +287,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§47) ---------- */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§58",title:"kitMonthCal: lịch tháng (3 tuần × 10 ngày, lễ hội cố định)",html:()=>kitMonthCal({o:0})},
+ {id:"§58",title:"kitMonthCal: lịch tháng (mũi tên đổi tháng, ô vuông đều, 3 tuần × 10 ngày, lễ hội cố định)",html:()=>kitMonthCal({o:0})},
  {id:"§58.1",title:"kitMonthCal: tháng có lễ hội (tháng giêng)",html:()=>{const n=mcNow();return kitMonthCal({o:(13-n.m)%12})}},
  {id:"§58.3",title:"kitMonthCal: những ngày ngươi biết (bổng lộc, sinh thần, sổ hẹn, quẻ, trăng) và ô ngày đã chọn",html:()=>{const n=mcNow();return kitMonthCal({o:0,sel:n.t*10+1})}},
  {id:"§58.2",title:"kitDeskCal: lịch để bàn ở góc phòng (thường · lãnh cung)",html:()=>`<div class="kmc-strow"><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="img/kit/desk-cal.webp" alt=""></button><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="img/kit/desk-cal-plain.webp" alt=""></button></div>`});
