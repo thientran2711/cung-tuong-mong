@@ -54,6 +54,8 @@ function figGC(){try{if(!S||(window.COOPW&&COOPW.on&&COOPW.seat==="b"))return 0;
  const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
   for(const k in o){if(SKIP[k])continue;const v=o[k];if(typeof v==="string"){if(k==="fid"||k==="pid"||k==="fromMaid")held.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};
  walk(S,0);walk(typeof rivals!=="undefined"?rivals:[],0);
+ /* coop-room-faces: in a co-op room the friend's own people (her P blob) and the room's world hold faces too: never freed while held */
+ try{if(window.COOPW&&COOPW.on&&COOPW.roomFaces)for(const k of COOPW.roomFaces())held.add(k)}catch(e){}
  const keep=U.filter(k=>!FIG_SERV.includes(String(k).split(":")[0])||held.has(k));const n=U.length-keep.length;
  if(n){S.fidUsed=keep}figGC.sig=S.turn+"|"+S.fidUsed.length;return n}catch(e){console.error("figGC",e);return 0}}
 (function(){const p0=figPick;figPick=function(who){try{if(who&&!who.fid&&S&&who!==S){const roles=figRoles(who).map(norm).filter(r=>FIG_SERV.includes(r));

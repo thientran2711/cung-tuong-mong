@@ -278,7 +278,7 @@ function r97After(A,d){let ex=[];try{if(d.go){const g=d.go(A);if(g)ex.push(g)}}c
 PEND.j97x=p=>{const d=R97[p.a];if(!d||!d.exit||S.dead)return null;const A={act:{},a:p.a};
  return {who:who67(d.w,A),t:`<b>${ARC67[p.a].t}</b><br>${fill67(d.t,A,d.w)}`,o:[
   {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>{if(typeof kitEndNext==="function")kitEndNext("rare");over(d.exit[2],fill67(d.exit[3],A),d.exit[4],true)}},
-  {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{const W=BAL.arc.r97.stay;apply(W);log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. Sủng +${W.sung}.`)}}]}};
+  {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{const W=BAL.arc.r97.stay;apply(W);log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. ${sgStat(W.sung)}.`)}}]}};
 /* ---------- Sổ luân hồi: rare endings met across lives (memory only, no carry-over) ---------- */
 function r97Book(){try{return JSON.parse(localStorage.getItem("ctm-rare97")||"{}")||{}}catch(e){return {}}}
 function r97Meet(id,tag){try{const b=r97Book();const e=b[id]||{n:0};e.n++;e.tag=tag||e.tag;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-rare97",JSON.stringify(b))}catch(e){}}
