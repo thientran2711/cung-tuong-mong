@@ -235,7 +235,7 @@ CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
 CW.netWrap=function(f,self,args){if(!CW.on||host()||stateOn("netWrap")){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
-function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
+function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */||cyHer())return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
 /* P0 (co-op thin part B, jcoopthinb): the person the HOST built for her (her Luân hồi on the host); sent as it is, never re-serialized here */
 function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
@@ -249,7 +249,11 @@ function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
   if(home&&CW.fNote!==fk){CW.fNote=fk;pushModal({t:"Hảo hữu chọn thân phận",h:`<p>Hảo hữu ngươi đã chọn xong thân phận, nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`});try{showModal()}catch(e){}}}}catch(e){console.error(e)}
  /* a new life starts in the room's CURRENT buổi (the friend may already be in buổi chiều / tối) */
  if(CW.p2&&typeof CW.rbuoi==="number"&&(S.buoi||0)!==CW.rbuoi&&CW.rweek===wk()){S.buoi=CW.rbuoi;used=0;try{placeWhere()}catch(e){console.error(e)}}
- if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()}
+ if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()
+ /* review/coop-week-stall: the gate above is reset (nrdy / ngoW) and nothing looked at it again: a life that ended in her night (died at
+    the week end, reborn) landed in the room's buổi tối while the friend's end was already out (= the host's commit, nCheck) and sat there
+    for ever, her end never sent (coop-e2e fixE3 r9 "week 3 advanced"; the reviewer's "after rebirth" stalls). Look once the new life is in. */
+ setTimeout(()=>{try{nCheck();soonEnd()}catch(e){console.error(e)}},0)}
 function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","rank"])o[k]=S[k];return o}
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
@@ -392,8 +396,10 @@ const askWhat=(k,item)=>k==="gift"?`muốn tặng ngươi ${esc(item||"một mó
    the reader also offers «Nhường bề trên», the same answer as on an NPC's challenge (jpma pmCoopYield); ok:"yield" rides back like Nhận / Từ chối */
 /* review r1 fix 1 + 2 (person-minigame-acts): a Cùng chơi / Thách đấu ask carries her pick x = {a, kind, ak, n, s} in every carrier (old relay act,
    part-D host D.kind inv, guest doSend inv, the pp of the card) and the card is the NPC's card (jpma pmCoopCard); send(ok) = the relay's answer */
+/* Q-C2: the live raws ride on the pm pick (jpma pmLvSan checks them); any other act keeps its extra as it is */
+const pmLvX=(ex,lv)=>{try{const z=lv&&ex&&typeof ex==="object"&&typeof pmLvSan==="function"?pmLvSan(lv):null;return z?Object.assign({},ex,{live:z}):ex}catch(e){return ex}};
 const askX=(k,extra)=>typeof pmCoopX==="function"?pmCoopX(k,extra):null;
-const askCard=(k,x,send)=>{try{const c=typeof pmCoopCard==="function"&&x?pmCoopCard(friendEntry(),k,x):null;if(!c)return null;return{h:c.h,o:c.o.map(o=>({n:o.n,fx:{},x:o.x,need:o.need,tsDis:o.tsDis,go:()=>send(o.ok)}))}}catch(e){console.error(e);return null}};
+const askCard=(k,x,send)=>{try{const c=typeof pmCoopCard==="function"&&x?pmCoopCard(friendEntry(),k,x):null;if(!c)return null;return{h:c.h,o:c.o.map(o=>({n:o.n,fx:{},x:o.x,need:o.need,tsDis:o.tsDis,go:()=>{if(typeof pmLiveAns==="function")pmLiveAns(k,x,o.ok,send);else send(o.ok)}}))}}catch(e){console.error(e);return null}};/* Q-C2: «Nhận» on a pm ask opens the live board first (jpma pmLiveAns); send(ok, lv) then carries the two raws */
 const askYield=(k,go)=>{try{const y=k==="pmduel"&&typeof pmCoopYield==="function"?pmCoopYield(friendEntry(),S):null;return y?[{n:y.n,fx:{},x:y.x,go}]:[]}catch(e){return[]}};
 /* part D (review/coop-thin-d): the cards between the two are built on the host in her context (jcoopthin §6); dOn() = that path is on */
 const dOn=()=>!!(CW.thin&&CW.thin.dOn&&CW.thin.dOn());
@@ -525,7 +531,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
 
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
- const c=askCard(m.k,m.x,ok=>COOP.send({t:"actr",id:m.id,ok,k:m.k}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
+ const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
  const what=askWhat(m.k,m.item);
  pushModal({act:1,t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
@@ -556,15 +562,15 @@ function resApply(m){if(fW()&&!host()&&!CW.ctx){oldRan("actApply");return}if(S.d
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
  if(note&&gotItem&&m.k==="gift"&&!g.dead&&!g.cold){showModal();render();return}  /* the Quà tặng dialog is her note */
  if(note){pushModal({t:m.tt?String(m.tt):m.k==="petcare"?"Hảo hữu sang giúp":m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
-function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}invRun(m.id,m.ok)}
+function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}invRun(m.id,m.ok,null,m.lv)}
 /* her answer to my invite (old relay: actr; part D: her card's choice, run by the host after her context closes) */
-function invRun(id,ok,pp){let a=CW.acts[id];delete CW.acts[id];
+function invRun(id,ok,pp,lv){let a=CW.acts[id];delete CW.acts[id];
  /* part D r1: after a host reload CW.acts is empty: rebuild from the card's pp (target id, the item itself found by value, like invHer) */
  if(!a&&pp&&pp.v!=null&&pp.k){let extra=askX(pp.k,pp.x)||undefined;if(!extra&&pp.he){const t=SJ(pp.he);extra=(S.inv||[]).findIndex(x=>SJ(x)===t);if(extra<0)extra=-1}
   if(extra===-1){pushModal({t:"Hảo hữu nhận lời",h:`<p>Món quà ấy nay không còn trong rương của ngươi.</p>`});showModal();render();return}a={k:pp.k,v:pp.v,extra}}
  if(!a)return;const v=RV(a.v);const m={id};
  if(!ok||!v||!v.alive){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
- CW.inv=m.id;CW.yd=ok==="yield";let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false;CW.yd=false}if(r)log(r);
+ CW.inv=m.id;CW.yd=ok==="yield";let r="";try{r=runAct(S,v,a.k,pmLvX(a.extra,lv))}finally{CW.inv=false;CW.yd=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`});showModal();render()}
 COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
@@ -635,8 +641,13 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
  if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
- /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
- if(CW.sent>=0&&m.week>CW.sent&&m.week!==CW.wkIn){onWeek({state:C,week:m.week});return}
+ /* review/coop-week-stall: the Worker builds the snapshot across awaits (acceptWebSocket → loadC → chat …); a week merge that lands in
+    between reaches this socket FIRST and the snapshot then holds the room's NEW week number with the OLD week's world (C.week behind
+    m.week). Such a world is older than what this seat already has: never take it (no catch-up from it, no base from it). */
+ if(typeof C.week==="number"&&typeof m.week==="number"&&C.week!==m.week){T("room stale "+C.week+"<"+m.week);syncRoom(m);return}
+ /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week (never a week this seat already applied
+    or is past: m.week must be AHEAD of the last merged week here) */
+ if(CW.sent>=0&&m.week>CW.sent&&m.week!==CW.wkIn&&!(typeof CW.wkIn==="number"&&m.week<CW.wkIn)){onWeek({state:C,week:m.week});return}
  /* review/coop-stable: her new character (first / reborn) whose `state` broadcast came while my socket was down rides only this snapshot:
     place her now, as onState does (before: she stayed missing / under her old name on my side until the next week merge) */
  const fP=C.P&&C.P[fs()],fe=CW.base&&S&&!S.dead&&!CW.inLife?(friendEntry()||rivals.flatMap(v=>v.staff||[]).find(isF)||null):undefined;
@@ -980,6 +991,20 @@ function cyFe(){const L=CW.pulled;return (L&&(L.find(x=>x[0]>=0)||[])[1])||frien
 function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(cyFe()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
  const c=S.cyb||{},g=window.cyWk();/* her own maid card still open: its answer runs the flip */if(!(c.df===g&&c.rk!==g))try{flip()}catch(e){console.error(e)}
  try{render()}catch(e){}soonEnd()}
+/* review/coop-week-stall (thin E, level >= 5, HER phone): at his week end the HOST asks things in her context (her maid's Kỳ nguyệt sự
+   card: E-fix cyAsk on host, CW.herCy from his draw; any part-D card his endTurn queues for her). Her own night ran on her phone at the
+   same go and her week end went out at once, so such a card reached a seat that was already "waiting" (#next "Chờ hảo hữu…") while his
+   end waited for her answer (cyHold): a modal open, the week end never sent (coop-bot THIN=9: 2 of 4 runs on main). A real choice is
+   never made for her (jcooptimer), so the order is fixed instead: at level >= 5 her week end goes only once the HOST'S end is out
+   (room ended[host]); his end never waits for hers, so this cannot turn around. A card he asks reaches her while her end is still hers to
+   send: she answers, his draw runs, his end goes, then hers (one presence later). Not when his seat is empty or his person is dead (his
+   end does not come then). (First try r1 held only in her cycle tuần: her phone reads the cycle on the old date at that point — the host
+   owns the date — so it missed: pF2 b8.) */
+function cyHer(){if(!eW()||host()||CW.ctx||!S||S.dead)return false;const e=COOP.state.ended||{};if(e[fs()])return false;
+ if(nOtherGone())return false;const fP=CW.base&&CW.base.P&&CW.base.P[fs()];if(!fP||fP.dead)return false;
+ const k=wk();if(CW.cyHerT!==k){CW.cyHerT=k;T("hostEnd wait "+k)}return true}
+CW.cyHer=()=>cyHer();
+{const go=()=>{if(CW.on&&CW.pend&&CW.cyHerT!=null&&!host())soonEnd()};COOP.on("thinview",go);COOP.on("presence",go)}
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
 P2H.cyb=m=>{if(typeof m.w!=="number")return;CW.fcy={w:m.w,c:m.c&&typeof m.c==="object"?m.c:{},pend:!!m.pend,life:m.life||0};cyFree()};
 COOP.on("presence",()=>{if(CW.on&&CW.cyHold!=null)cyFree()});
@@ -1093,18 +1118,19 @@ CW.hrCardTest=h=>hrCard(h);   /* test hook (dev/test/coop-thin-d.js): her heir c
 /* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
 const otherSide=(fn,k,a,lf)=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.kind(fs(),k,a,undefined,lf)/* r3: lf = the life that made her offer */};
 /* Kết giao / Tặng quà: pp {id, k, item, who, e (the guest's item, when she gives it)} */
-PEND.thInv=pp=>{if(!pp||!pp.id)return null;const c=askCard(pp.k,pp.x,ok=>otherSide(()=>invRun(pp.id,ok,pp),"invHer",{pp,ok},pp.lf));if(c)return{t:c.h,o:c.o};const what=askWhat(pp.k,pp.item);
+PEND.thInv=pp=>{if(!pp||!pp.id)return null;const ctx0=!!CW.ctx;/* Q-C2: a live board answers later, after her context closed: then the host runs it as D.after would */
+ const c=askCard(pp.k,pp.x,(ok,lv)=>{if(ctx0&&!CW.ctx){invRun(pp.id,ok,pp,lv);return}otherSide(()=>invRun(pp.id,ok,pp,lv),"invHer",{pp,ok,lv},pp.lf)});if(c)return{t:c.h,o:c.o};const what=askWhat(pp.k,pp.item);
  return {t:`<p><b>${esc(pp.who||friendName())}</b> ${what}.</p>`,o:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>invRun(pp.id,true,pp),"invHer",{pp,ok:true},pp.lf)},
   ...askYield(pp.k,()=>otherSide(()=>invRun(pp.id,"yield",pp),"invHer",{pp,ok:"yield"},pp.lf)),
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>invRun(pp.id,false,pp),"invHer",{pp,ok:false},pp.lf)}]}};
 /* her invite accepted / refused by the host: run in HER context (she is the actor, the host's entry the target) */
-function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
+function invHer(pp,ok,lv){if(!S||S.dead)return;const v=friendEntry();
  if(!ok||!v||v.alive===false){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});return}
  /* thin F1 (level 6): her offer was made on the host in her context (jcoopworld runAct → D.kind inv), so the item rides as pp.he, as the host's own offer */
  let extra=askX(pp.k,pp.x)||undefined;const pe=extra?null:pp.e||pp.he;if(pe){S.inv=S.inv||[];const t=SJ(pe);extra=S.inv.findIndex(x=>SJ(x)===t);
   if(extra<0){/* bought after the week's base: put it in her stored chest first, so the patch takes it out of her live one */S.inv.push(J(pe));extra=S.inv.length-1;try{CW.thin.D.rebase()}catch(e){}}}
- CW.inv=pp.id;CW.yd=ok==="yield";let r="";try{r=runAct(S,v,pp.k,extra)}finally{CW.inv=false;CW.yd=false}if(r)log(r);
+ CW.inv=pp.id;CW.yd=ok==="yield";let r="";try{r=runAct(S,v,pp.k,pmLvX(extra,lv))}finally{CW.inv=false;CW.yd=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`})}
 /* Mua chuộc on a player who serves as a cung nữ: pp {rid, who, pay, o (her mistress)} — the j42 card with the other player as the buyer */
 PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBribe,pay=+pp.pay||B.pay,nm=esc(pp.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
@@ -1117,7 +1143,7 @@ CW.dInit=function(T){
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
  Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),
   bribe:a=>{const d=!S.dead&&isSrvMe()?mkP("thBribe",a):null;if(d)pushDil(d,"Bạc lạ");else T.D.after(()=>briberRes({rid:a.rid,o:a.o,no:1}))},
-  nbribe:a=>nbribeIn(a.r),ev:a=>evIn(a.tg,a.n),hr:a=>hrCard(a.h),invHer:a=>invHer(a.pp,a.ok),briber:a=>briberRes(a)});
+  nbribe:a=>nbribeIn(a.r),ev:a=>evIn(a.tg,a.n),hr:a=>hrCard(a.h),invHer:a=>invHer(a.pp,a.ok,a.lv),briber:a=>briberRes(a)});
  /* a Mua chuộc card she can no longer answer (no longer a cung nữ after a new life): the buyer still gets "no longer serves there" */
  T.D.GONE.thBribe=pp=>briberRes({rid:pp.rid,o:pp.o,no:1});
  /* the guest's offers to the host: the host's own card (his context); her side runs in her context when he answers */
