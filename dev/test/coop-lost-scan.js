@@ -5,7 +5,7 @@
    Traffic is forced on both seats through the game's own roads: loLose (real causes, loCauseOf for a rival thief) on her and NPCs each week,
    Kỳ ngộ «Ngọc rơi trên lối» / «Của mình tìm lại» kept eligible (seen reset, odds BAL.kyngo.p0 raised) so NPC finders return or keep.
    Harness helpers copied from coop-dresscode-scan.js (E30r3, review/dresscode-fix-r3 aa3c6854).
-   usage: python3 dev/build/assemble.py && node dev/test/coop-lost-scan.js [outdir] [workerURL] [weeks=76]   (env LOST_DBG=1: dump each fault) */
+   usage: python3 dev/build/assemble.py && node dev/test/coop-lost-scan.js [outdir] [workerURL] [weeks=76]   (env LOST_DBG=1: dump each fault; COOP_SKEW=N: guest life clock N months ahead) */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
 const {serve,BASE}=require('./coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop-lost-scan'));fs.mkdirSync(OUT,{recursive:true});
@@ -94,7 +94,8 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   const D={};for(const id of ids){const e=(S.lost||[]).map(c=>c.e).find(e=>e&&e.iu===id);const lg=((S.il&&S.il.log)||[]).find(l=>l[1]===id);D[id]=ilDur(e||{k:lg&&lg[2]})}/* a used-up kind may end at 0 */
   const ky=((S.il&&S.il.log)||[]).filter(l=>/kyngo/.test(String(l[5]))).length;
   const NETL=((S.il&&S.il.log)||[]).filter(l=>l[5]==='net').map(l=>[l[0],l[1],l[2],l[3],ids.has(l[1])?'LOST-CASE':'other']);
-  return{NETL,ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
+  /* E42r: a host case held by a friend ENTRY (v.coop: a copy of the other seat) would live nowhere real */const coopHeld=world?(S.lost||[]).filter(c=>c&&c.at&&c.st!=='done'&&rivals.some(v=>v&&v.coop&&key(v)===c.at)).length:0;
+  return{NETL,ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,coopHeld,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
  window.__why=id=>{const L=((S.il&&S.il.log)||[]).filter(l=>l[1]===id);const C=(S.lost||[]).filter(c=>c.e&&c.e.iu===id).map(c=>({id:c.id,own:c.own,st:c.st,at:c.at,how:c.how,keep:c.keep,by:c.by,cause:c.cause,w:c.w,end:c.end}));return{L,C}};
  return true};
 (async()=>{const b=await chromium.launch();
@@ -107,14 +108,16 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  ok(await A.p.evaluate(INST,['A',true,!!process.env.LOST_DBG])&&await B.p.evaluate(INST,['B',false,!!process.env.LOST_DBG]),'scan hooks on both seats');
+ /* COOP_SKEW=N (as coop-dresscode-scan, E30r3): the guest's life clock N months AHEAD of the host's (S.turn is each seat's own) */
+ const SKEW=+process.env.COOP_SKEW||0;if(SKEW)ok(await B.p.evaluate(n=>{S.turn=(S.turn|0)+n;return true},SKEW),'guest life clock '+SKEW+' months ahead of the host');
  let rs=4242;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
- const prev={};const dups=[],vans=[],seen={};let weeksOk=0,lost={A:0,B:0},net0=null;const t0=Date.now();
+ const prev={};const dups=[],vans=[],seen={};let coopH=0,weeksOk=0,lost={A:0,B:0},net0=null;const t0=Date.now();
  for(let w=0;w<NW;w++){
   for(const o of [A,B])await o.p.evaluate(()=>{S.suc=Math.max(S.suc||0,80);S.out=0;S.confined=0;__kyReset()});
   const la=await A.p.evaluate(r=>__lose(r),rnd()),lb=rnd()<.5?await B.p.evaluate(r=>__lose(r),rnd()):[];lost.A+=la.length;lost.B+=lb.length;
   const unstick=async()=>{for(const o of [A,B])await o.p.evaluate(()=>{for(let i=0;i<6&&Q.length&&Q[0]&&Array.isArray(Q[0].opts)&&Q[0].opts.length;i++){try{chooseM(Q[0].opts.length-1)}catch(e){Q.shift()}}try{showModal()}catch(e){}}).catch(()=>{})};
   await unstick();let okw=await weekAll(A,B,'w'+w);if(!okw){await unstick();okw=await untilC(A,x=>__co().week>=x,w+1,60000).catch(()=>false)}if(okw)weeksOk++;await sleep(1200);
-  const ca=await A.p.evaluate(()=>__lc()),cb=await B.p.evaluate(()=>__lc());if(net0==null)net0=[ca.net,cb.net];
+  const ca=await A.p.evaluate(()=>__lc()),cb=await B.p.evaluate(()=>__lc());if(net0==null)net0=[ca.net,cb.net];coopH=Math.max(coopH,ca.coopHeld||0);
   const ids=new Set(ca.ids.concat(cb.ids));
   for(const id of ids){const L=(ca.M[id]||[]).map(x=>'A:'+x).concat((cb.M[id]||[]).map(x=>'B:'+x));seen[id]=1;
    const dur=(ca.D[id]!==undefined?ca.D[id]:cb.D[id])!==false;
@@ -129,6 +132,7 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  ok(!vI.size,`no durable piece vanished (${vI.size} pieces, ${vans.length} piece-weeks)`,vans.slice(0,4).map(x=>({w:x.w,id:x.id})));
  const NL=ca.NETL.map(x=>['A'].concat(x)).concat(cb.NETL.map(x=>['B'].concat(x)));console.log('NET lines',JSON.stringify(NL));const nlo=NL.filter(x=>x[5]==='LOST-CASE');
  ok(!nlo.length,`ledger net: no unrouted removal of a lost-case piece on either seat (${nlo.length}; all pieces host +${ca.net-net0[0]} guest +${cb.net-net0[1]}, the others are outside jlost: reported)`,nlo);
+  ok(!coopH,`no host lost case held by a friend entry in any week (max ${coopH})`);
  console.log('SUMMARY',JSON.stringify({weeks:weeksOk,ids:Object.keys(seen).length,dupPieces:dI.size,dupWeeks:dups.length,vanPieces:vI.size,vanWeeks:vans.length,casesA:ca.cases,casesB:cb.cases,kyA:ca.ky,kyB:cb.ky,lost}));
  fs.writeFileSync(OUT+'/faults.json',JSON.stringify({dups,vans},null,1));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
