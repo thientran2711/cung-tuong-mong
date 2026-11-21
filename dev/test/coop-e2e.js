@@ -5,7 +5,7 @@
    B comes back → resumes same week, B dies → normal rebirth choice → new person in the SAME world, single-player + old save still load.
    Hooks used (PROTOCOL.md / jcoop.js): window.COOP {code,seat,week,online,ended,frozen,waiting,on}, rivals entry coop:true id 901/902. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
-const {serve,BASE}=require('./coop-serve.js');
+const {serve,BASE}=require('./coop-serve.js');const K61P=require('./k61-coop-probe.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const ROOT=path.resolve(__dirname,'../..');
@@ -159,6 +159,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
     ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y])}
+   /* coop-guest-names (K61MAP collision log, both seats): no shared person's name masked through another record, one j61 key = one person */
+   for(const o of [A,B]){const r=await o.p.evaluate(K61P);if(r&&!r.skip&&!r.err){ok(!r.coll.length,tag+' '+o.name+': mask never prints another record\'s title over a shared person (K61MAP)',r.coll.length?r.coll.slice(0,4):undefined);ok(!r.keyDup.length,tag+' '+o.name+': one j61 key = one person',r.keyDup.length?r.keyDup.slice(0,4):undefined);if(r.scrub)ok(r.scrub.ok,tag+' '+o.name+': friend\'s name after the mask',r.scrub)}else console.log('K61 probe '+tag+' '+o.name+' '+JSON.stringify(r))}
    const okS=a.fr===c.me&&c.fr===a.me;ok(okS,tag+': each sees the other as a person',okS?[a.me,a.fr,c.me,c.fr]:{n:[a.me,a.fr,c.me,c.fr],trA:await A.p.evaluate(()=>COOPW.tr.slice(-14)),wsA:await A.p.evaluate(()=>window.__wsLog),trB:await B.p.evaluate(()=>COOPW.tr.slice(-8))});return[a,c]};
  /* "world" = each seat has its base; the friend's character (her `me` → the room's state) reaches the other seat a moment later: wait for it, as a player would see her appear */
  {const fr=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop);return[S.name,f?f.name:null]});const t0=Date.now();
