@@ -809,3 +809,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 kit-info-fixed rv2 | review/kit-info-fixed-rv2 191c94f4 | rv session | PASS | 21/11
 | B LANDER #2c coop-host-lag-r2 (opus; successor of #2b 6cqrrDPR; merge LIVE into f13d8932 + rerun) | review/coop-host-lag-r2 | B | session_01N1tNP5ihpHbBRmxrezPTPd | RUNNING | 21/11 07:34Z |
 | jlost-kyngo E42 fixer (OPUS BIG; law 6c lost-case item duplicate, co-op both seats; MAIN 91 ORDER) | review/jlost-kyngo; briefs/E42-jlost-kyngo.md | FOREMAN E #26 | session_01DgYSWo2PtuCgvYCBtqoEdV | RUNNING | 21/11 07:50Z |
+kit-mark-fix rv | review/kit-mark-fix-rv 0e7561c9 | rv session | FAIL (portrait shrink vs older figure rule; stray jpgs) | 21/11
