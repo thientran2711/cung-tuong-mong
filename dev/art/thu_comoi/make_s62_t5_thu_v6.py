@@ -11,11 +11,12 @@ thu s62 t5 Phi v6 = thu_comoi/s62_t5_THU_COMOId.txt (KHO2) with ONLY:
 import os, re, sys
 ART = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ART)
-from master_common import OUTER_IN, OUTER_TIED
+from master_common import OUTER_IN, OUTER_TIED, OUTER_WRAP
 src = open(os.path.join(ART, "t8-prompt-B/build.py"), encoding="utf-8").read()
 EXTRA = eval(re.search(r'^CAPE5_V4_EXTRA=(".*?")\n', src, re.M).group(1))
-V7 = "--v7" in sys.argv   # v7 = COMOIf: t4 COMOIg capelet (cord across the chest, jade in the middle) + t3 apron panels/jade sets (Foreman C #15 01:39Z, G47)
-t4 = open(os.path.join(ART, "thu_comoi/s62_t4_THU_COMOI" + ("g" if V7 else "f") + ".txt"), encoding="utf-8").read()
+V8 = "--v8" in sys.argv   # v8 = COMOIg: + G40 WRAP clause (Foreman C #15 01:51Z after v6 drafts both_L1638), t4 capelet from COMOIh
+V7 = "--v7" in sys.argv or V8   # v7 = COMOIf: t4 COMOIg capelet (cord across the chest, jade in the middle) + t3 apron panels/jade sets (Foreman C #15 01:39Z, G47)
+t4 = open(os.path.join(ART, "thu_comoi/s62_t4_THU_COMOI" + ("h" if V8 else "g" if V7 else "f") + ".txt"), encoding="utf-8").read()
 a = t4.index("a short round embroidered silk capelet"); END = "no cloud collar, vest or stiff shoulder pieces"
 TAN_CAPE = t4[a:t4.index(END, a) + len(END)]
 cape = TAN_CAPE + EXTRA   # verbatim (L1626 "từng câu từng chữ")
@@ -53,12 +54,16 @@ if V7:
         ("hem bands on the outer and the inner robe", "hem bands on outer and inner robe")]:
         assert s.count(x) == 1, x; s = s.replace(x, y)
     TRIM6 += TRIM7
+if V8:
+    for x, y in [(OUTER_TIED, OUTER_WRAP), ("outer robe worn OPEN at the front,", "outer robe open above the waist,"),
+                 ("the skirt embroidered with large double hollyhock medallions", "large double hollyhock medallions on the skirt")]:
+        assert s.count(x) == 1, x; s = s.replace(x, y)
 for x in TRIM6:
     assert s.count(x) == 1, x; s = s.replace(x, "")
 CAP = "Mùa Thu · Thiết kế hiện tại · Phi · 2 lớp choàng (Quý phi cũ) + lưới ngọc trai + cổ mở"; assert s.count(CAP) == 1
-s = s.replace(CAP, "Mùa Thu · Phi · v7" if V7 else "Mùa Thu · Phi · v6")
+s = s.replace(CAP, "Mùa Thu · Phi · v8" if V8 else "Mùa Thu · Phi · v7" if V7 else "Mùa Thu · Phi · v6")
 if "--raw" in sys.argv: print(s); sys.exit()
 if "--len" in sys.argv: print(len(s)); sys.exit()
 assert len(s) <= 9990, len(s)
-out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOI" + ("f" if V7 else "e") + ".txt")
+out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOI" + ("g" if V8 else "f" if V7 else "e") + ".txt")
 open(out, "w", encoding="utf-8").write(s); print(len(s), out)

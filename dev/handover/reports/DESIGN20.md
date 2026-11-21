@@ -65,3 +65,14 @@ Correction to the handover above: the context window is 1M → I was ≈15 %, no
 - Length (Foreman 01:47Z decision, NOT the S12 shawl words, NOT dropping the shawl): A capelet "(never hiding the neck or the square inner neckline)" · D t4 "neck and collarbones visible;" (t5 has none) · C pose tail (t4 ", skirt swirling, the robe hem stirring slightly"; t5 ", the robe hem stirring slightly") + own words compacted.
 - Gates: tp4/tp5 a22 PASS; s62 v0 --low 4/5 only the Outfit sentence [0.70]/[0.73] (COMOIc exemption); keep sidecars PASS (base = v6 files), --all 278 PASS. v6 outputs byte-identical after the builder edits.
 - Checklist row update: t4 + t5 now also have apron panels ×2 + jade sets at both sides (= t3 v5), cord across the chest with jade in the middle.
+
+## JOB 4 — t4 + t5 v8 (Foreman C #15 01:51Z after v6 drafts both_L1638: G40 still an open coat; t4 vase banned L1438) — 0 gens
+GEN1 told to HOLD v7 (COMOIg/COMOIf). New shared clause **master_common.OUTER_WRAP** (226 ch; OUTER_IN/OUTER_TIED kept):
+"the outer robe is a WRAP robe HELD IN by the sash: its front edges overlap at the waist, bound CLOSED under the sash lying ON TOP of it, outer robe fabric on both sides of the waist above and below the sash, never an open coat"
+- thu t1–t3 v5 checked as the foreman asked: they only have OUTER_IN (same short clause), nothing extra to copy → wrap wording written new.
+- "outer robe worn OPEN at the front," → "outer robe open above the waist," (t4 + t5).
+- t4 item: "a small white-jade vase with blossoms" → "a small white-jade lotus lamp" (owner L1438, B26FAB4 rank-4 replacement list).
+- t5 own-words compaction: "the skirt embroidered with large double hollyhock medallions" → "large double hollyhock medallions on the skirt".
+- Files: **t4 v8 = thu_comoi/s62_t4_THU_COMOIh.txt (9 988)** (make_s62_t4_thu.py V8 stage) · **t5 v8 = thu_comoi/s62_t5_THU_COMOIg.txt (9 982)** (make_s62_t5_thu_v6.py --v8). Earlier outputs rebuild byte-identical.
+- Gates: tp4/tp5 a22 PASS; store only the Outfit exemption [0.70]/[0.73]; keep sidecars PASS, --all 280 PASS.
+- CONFLICT (not changed, A18/A39): approved S13 (t4 CAPELET CUT, gated) says "the outer robe closes only at the sash … opening gradually in a long soft V toward the hem" — so the outer robe parts again BELOW the sash; removing it = S13 FAIL. OUTER_WRAP therefore says "outer robe fabric on both sides of the waist above and below the sash", not "closed to the hem". If the owner wants it closed down to the hem, S13 needs her update.

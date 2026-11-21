@@ -258,6 +258,10 @@ OUTER_IN = "the outer robe HELD IN by the sash or girdle tied OVER it, hugging t
 # all 8 tiers): DESIGN20 + LADDER2 shared stronger clause; replaces OUTER_IN in rebuilt prompts (keeps "HELD IN by the sash" for check_store OUT1).
 OUTER_TIED = ("the outer robe HELD IN by the sash tied OVER it: its front edges meet at the waist under the sash, which wraps over BOTH layers, "
               "so the robe is closed and fitted at the waist, never a loose open coat or jacket")
+# G40 WRAP (Foreman C #15 01:51Z after v6 drafts both_L1638: OUTER_TIED still drew an open coat; outer robe described as a WRAP robe closed under
+# the sash, the sash ON TOP of the outer fabric). Kept compatible with approved S13 (t4 "opening gradually in a long soft V toward the hem"). DESIGN20.
+OUTER_WRAP = ("the outer robe is a WRAP robe HELD IN by the sash: its front edges overlap at the waist, bound CLOSED under the sash lying ON TOP of it, "
+              "outer robe fabric on both sides of the waist above and below the sash, never an open coat")
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
 
 

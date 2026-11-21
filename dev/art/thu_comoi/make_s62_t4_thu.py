@@ -92,3 +92,19 @@ if __name__ == "__main__":
     print(len(s)); assert len(s) <= 10000, len(s)
     out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIg.txt")
     open(out, "w", encoding="utf-8").write(s); print(len(s), out)
+
+# ---- v8 = COMOIh (Foreman C #15 01:51Z after the v6 drafts both_L1638: G40 still an open coat -> WRAP robe clause master_common.OUTER_WRAP,
+#      'worn OPEN at the front' -> 'open only above the waist'; owner L1438 no vase -> B26FAB4 t4 item 'a small white-jade lotus lamp') ----
+from master_common import OUTER_WRAP
+V8 = [
+    (OUTER_TIED, OUTER_WRAP),
+    ("outer robe worn OPEN at the front,", "outer robe open above the waist,"),
+    ("walking with a small white-jade vase with blossoms held upright in one hand", "walking with a small white-jade lotus lamp held upright in one hand"),
+]
+if __name__ == "__main__":
+    for a, b in V8:
+        assert s.count(a) == 1, a; s = s.replace(a, b)
+    s = s.replace("Mùa Thu · Tần · v7", "Mùa Thu · Tần · v8")
+    assert len(s) <= 9990, len(s)
+    out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIh.txt")
+    open(out, "w", encoding="utf-8").write(s); print(len(s), out)

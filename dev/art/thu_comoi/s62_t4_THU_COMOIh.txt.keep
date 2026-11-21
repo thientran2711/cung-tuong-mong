@@ -1,0 +1,9 @@
+base: dev/art/thu_comoi/s62_t4_THU_COMOIg.txt
+allow: under the light plum outer robe worn OPEN at the front  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: the outer robe HELD IN by the sash tied OVER it  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: its front edges meet at the waist under the sash  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: which wraps over BOTH layers  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: so the robe is closed and fitted at the waist  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: never a loose open coat or jacket  # Foreman C #15 01:51Z G40 (owner L1592/L1625-1627) still an open coat in v6 drafts -> master_common.OUTER_WRAP wrap-robe clause, DESIGN20
+allow: walking with a small white-jade vase with blossoms held upright in one hand  # owner L1438 no vase -> B26FAB4 t4 item white-jade lotus lamp (Foreman C #15 01:51Z), DESIGN20
+allow: "Mùa Thu · Tần · v7"  # caption v8, DESIGN20
