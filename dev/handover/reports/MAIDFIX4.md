@@ -76,3 +76,9 @@ E13 + `check_store --maid-items` (items differ per rank inside a person, thân c
 | G63 / G64 frozen | untouched (t6 QP / winter t1 files not edited) | untouched |
 | length | A38 trim "An imperial consort." (as HHCOL2 L1971) → 9995 | 9983 |
 Gates: keep PASS ×2, check_store tp7/tp8 PASS ×2. Old pictures 0eUA2SkTfW / CqnI8nxEEy were 1k low @55 (refs nVsrRMPYQD, TdwDfOyVNR, kseQCFw16B, seed 7172).
+
+## OWNER L1982 (via #27) — NO outer cloak on QP/HQP/HH → rule G67
+- Cause in t7 L1973 + t8 OLD_clasp L1976 (both from L1903): "a LAYERED NECKLINE: a lilac inner top with a low straight SQUARE neckline …, under the OPEN outer robe, its front edges (slim, pearl-edged) falling from both shoulders" = a third, open outer robe over everything (drawn in nVsREKcYQD / jUo5nRNLD0). My 5b47b72e audit missed it (it is not a "cloak/cape" word).
+- Fix (both files): → "ONLY TWO LAYERS: this one robe worn over a lilac inner dress, NO outer robe, NO open coat, NO cloak or mantle over it; a low straight SQUARE neckline edged by a pearl-edged gold band, neck and collarbones visible;". t7 also "wide yellow borders along the front opening" → "along the neckline". Kept: vân kiên + throat clasp, old sash/belt (t7 + "tied at the centre front with long ties"), held items. t7 S14 store sentence "pearl and jade trims along the cape edges" must stay (gate), the NO-cloak words override it.
+- t6 QP frozen (THU_QP_t6_L1933_FROZEN, G63): one HEAVY brocade robe + square collar + flat two-tier vân kiên; NO open outer robe / cloak words → no outer layer (not edited).
+- Rule G67 added (rule.py, quoting her). Gates: keep PASS ×2, check_store tp7/tp8 PASS ×2 (t7 9974, t8 9967).

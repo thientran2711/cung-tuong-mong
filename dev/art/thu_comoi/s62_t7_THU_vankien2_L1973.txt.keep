@@ -5,3 +5,9 @@ allow: beautiful/handsome romantic-lead looks for everyone.  # boilerplate trimm
 allow: CAPTION: large bold, top-left, never over her, exactly (with accents): "Mùa Thu · Hoàng quý phi · vân kiên L1903"  # caption renamed L1973 with collar type (G63)
 allow: a jade flute with gold-filigree bands and gem tassels held low at her side  # G57 (owner L1851 + L1973): "(no jade ornament)" added, tassels kept
 allow: An imperial consort   # owner L1979/L1980 via #27: re-check current rules (see MAIDFIX4.md)
+allow: a LAYERED NECKLINE   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
+allow: a lilac inner top with a low straight SQUARE neckline edged by a pearl-edged gold band   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
+allow: under the OPEN outer robe   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
+allow: its front edges   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
+allow: falling from both shoulders   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
+allow: wide yellow borders along the front opening   # owner L1982 (via #27): NO outer cloak / áo choàng on QP/HQP/HH, only 2 layers (L1714 row 15, L1971)
