@@ -2240,3 +2240,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Owner answered this session (no pending question): servant ranks per consort rank (jpromo cap + j14 srkMax table), new servants always enter Tam đẳng / «Thái giám» (no odds; any change = parking lot). PARKING_LOT #12 = whole-frame animation.
 - coop-home 50/51 «A has the home tabs» fails on LIVE (pre-existing since 20/11) — not routed yet; check if a foreman owns it.
 - TRIGGERS: 99 wake trig_01VfqE4kuCN9CnQDzjHp9X73 (min 32) → 100 DISABLES it and creates its own. Push tool template dev/tools/main-hpush.sh. NOTE: never `git pull` in the worktree (fetches every ref, 150k objects) — use fetch --depth=30 of the branch only.
+- (19:52Z) Opened MAIN CHÍNH 100 = session_01Rc5AsKuzxwdM8AiqjeHhFW (child, depth 2). 99 stops; relays late messages to 100 only.
