@@ -2223,3 +2223,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:30Z) OWNER: no separate pendant layer; whole frame animates (parked #12) → OD + PARKING_LOT overwritten in place; keeper #6 + C told.
 - (19:22Z) KIT KEEPER #6 SSK kit-pframe-overlay 8f5676ed (label centred, rows 10 px under band over tassel; before −3 px/105–122 px gap → 0/10–11 px) BUT with halo → told keeper r2 without halo; rv MSxp told to HOLD 8f5676ed and review r2.
 - (19:24Z) KIT KEEPER #6: kit-pframe-overlay r1 1f90a2b8 (no halo, frame whole) → rv MSxp.
+- (19:28Z) Owner shot uploaded to CDN img/_review/owner-refs/owner-2111-pframe-tassel-overlay.jpg (git drops images); OD row path fixed; keeper #6 told.
