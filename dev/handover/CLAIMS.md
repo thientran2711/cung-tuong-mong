@@ -769,7 +769,7 @@ bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip 
 | REVIEW ending-screens rv (opus BIG; MAIN 88 ORDER 04:46Z) of bffc0a56 | review/ending-screens-rv; briefs/b5-rv-ending-screens.md | B | session_01N1tNP2Z5YHxBZcLFzY5BEH | PASS c073f8d4 | 21/11 05:13Z |
 | ending-screens-2 (opus; owner marks #52 #84; MAIN 88 ORDER) | review/ending-screens-2; briefs/b5-ending-screens-2.md; reports/ending-screens-2.md | B | session_01N1tNP62bqNSeKx77seTxeP | SẴN SÀNG KIỂM e8847011 (BIG; base 666def0c; ART REQUEST posted to C) | 21/11 06:05Z |
 | REVIEW mg-intro-2 (sonnet SMALL; #55; MAIN 88 ORDER) of b21609fc | review/mg-intro-2-rv; briefs/b5-rv-mg-intro-2.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | PASS 18d1b014 | 21/11 05:13Z |
-| dialog-person-3 (sonnet; #73 + eye checks; MAIN 88 ORDER) | review/dialog-person-3; briefs/b5-dialog-person-3.md | B | session_01N1tNP2WnsRXnfw6mNSQXFw | RUNNING | 21/11 05:13Z |
+| dialog-person-3 (sonnet; #73 + eye checks; MAIN 88 ORDER) | review/dialog-person-3; briefs/b5-dialog-person-3.md | B | session_01N1tNP2WnsRXnfw6mNSQXFw | PASS b187ecdc (handed to MAIN) | 21/11 05:13Z |
 | huong-cue-2-r2 fixer (sonnet; jnwp/mg-noword-b conflict vs mg-5s-clear; MAIN 88 ORDER) | review/huong-cue-2-r2; briefs/b5-huong-cue-2-r2.md | B | session_01N1tNP2UKo2mtcZUCmPW2tC | PASS 3be6edad (handed to MAIN) | 21/11 05:13Z |
 kit-act-grid rv | review/kit-act-grid-rv d65e535b | rv session | PASS | 21/11
 bag-inline-2 rv2 | review/bag-inline-2-rv2 c1f7733b | rv session | PASS | 21/11
@@ -780,7 +780,7 @@ bag-inline-2 rv2 | review/bag-inline-2-rv2 c1f7733b | rv session | PASS | 21/11
 kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session | PASS | 21/11
 | REVIEW kit-dialog-2 (SMALL sonnet) 198825c5 (#71 #75 #76 #80 #82) | review/kit-dialog-2-rv; briefs/main89-rv-kit-dialog-2.md | MAIN CHÍNH 89 | session_01Rc5AsMaLLvZ2wrtmc2Tjti | RUNNING | 21/11 05:41Z |
 | REVIEW ending-screens-2 r1 (opus BIG) of e8847011 | review/ending-screens-2-r1 | B | session_01N1tNP2Qz7ZpRucbeYRu2hN | PASS da613d5a1cf086298eec3149bdd6e58244d6a533 (FF of main 068662ad; KIT OK pending keeper) | 21/11 07:10Z |
-| REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | RUNNING | 21/11 05:50Z |
+| REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | PASS b187ecdc | 21/11 05:50Z |
 | REVIEW chapter-card-3 (SMALL sonnet) 4771570e (#27 rest) | review/chapter-card-3-rv; briefs/main89-rv-chapter-card-3.md | MAIN CHÍNH 89 | session_01Rc5AsLEAMwsLLk9M3n7ZPx | RUNNING | 21/11 05:50Z |
 kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! under dialog close on Fold) | 21/11
 | REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | session_01Rc5AsL294sG5kphwVE5b5S | RUNNING | 21/11 05:54Z |
