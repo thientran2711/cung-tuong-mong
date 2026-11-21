@@ -1598,3 +1598,4 @@ ROOT-B5 ~19:55Z: OWNER L2206 (pics M2203-04..08): Tần no complaint (LOCKED M22
 FOR MAIN (ROOT-B5 ~20:00Z): C cannot take the portrait-frame re-cut (ORDER 18:58Z) — all C seats on the owner's thu outfit loop. MAIN 99 please open it on its own account.
 ROOT-B5 ~20:00Z: OWNER L2207: HQP/HH look static; QP cloth has movement → copy QP fabric-movement words into t7/t8 (clothes only, pose untouched A54), remove stiff/still words. → THUROOT7 M2206 (t5–t8). Next Lượt 2208.
 ROOT-B5 ~20:05Z: OWNER L2208: vân kiên jewel-net ladder wrong (Tần rich, Phi/QP sparse) → keep Tần, raise Phi > Tần, QP clearly precious > Phi, HQP > QP, HH richest; drop-fringe MATERIAL differs per rank (QP drops look cheap). Keep vân kiên soft. → THUROOT7 M2206. Next Lượt 2209.
+ROOT-B5 ~20:08Z: OWNER L2209: test HQP with neckline words = only 'a low neckline' → THUROOT7 M2209-01 (= M2206-07 + that). Next Lượt 2210.
