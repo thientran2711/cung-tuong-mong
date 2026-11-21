@@ -661,6 +661,9 @@ ONE look for every in-play cue on any mini-game canvas (every engine family call
 - Rules-screen demos `NWB_DEMO.aim / slapbar(kind) / cook / tspluck / doiline / hoadien` (jnwb): the object, a hand doing the move, the ✓ (still under Cảnh động off).
 - Used by: ban, tat, ne, banh, duho, doi, hoadien, td_ngon. Tests: `mg-noword-a/b` whitelist exactly these strings (GUIDE table).
 
+#### 13.7.3 FIGURE-COLUMN BACKDROP PER SUBJECT (owner OD 21/11 ~03:48Z + ~03:50Z, review/mg-5s-clear) — `dev/build/j82.js` KG82_MGBG, `j79.js` kitGameFig
+On the wide screen (html.kv2) the figure column of every mini-game frame (intro AND playing) stands on a NEW tall painting per subject, not the board picture, not the flat yellow. ONE table `KG82_MGBG[kind]` → `img/mgbg-<kind>.webp` (art: Foreman C). `kg82Pic(kind)` records the kind, `kg82Open` passes it, `kitGameFig` sets `--mgbg` + `.kgf-bg`; a missing file = the old cream gradient (CSS layered fallback). Fold (html.kv1) has no figure column: unchanged.
+
 ### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
 ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
 - `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
