@@ -921,3 +921,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW ksz-lost-tap (sonnet SMALL reviewer-lander) of 3bcc7e13 | review/ksz-lost-tap-rv | B | session_01N1tNP2Zz7SKdJfLpjrSzuw | RUNNING | 21/11 18:10Z |
 | KIT KEEPER #6 (opus; successor of #5 Jexz; KP09 body-fit first) | review/kit-body-fit; reports/kit-keeper-6.md | MAIN CHÍNH 98 | session_01Rc5AsMcbXamjsY8CHXdjGN | RUNNING | 21/11 18:11Z |
 | E44b coop-famops fixer (opus BIG co-op; successor of E44; seed 4242 vanish + res no-retry lead) | review/coop-famops; briefs/E44b-coop-famops-fixer.md | FOREMAN E #29 | session_01DgYSWpsqWVG7nn7zh9VgW3 | RUNNING | 21/11 18:20Z |
+| RELAND podium-wire r2 (opus BIG; OR09/J8; LRRY FAIL jentry.js vs 70375dbf) | review/podium-wire-r2; briefs/M99-podium-wire-relander.md | MAIN CHÍNH 99 | session_01Rc5AsJzz5VENRwKX6fKout | RUNNING | 21/11 18:46Z |
