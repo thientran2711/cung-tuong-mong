@@ -10,6 +10,15 @@ R=[
  (r"held at her waist with both hands", "held at her side in one hand"),
  (r"hand held upright in front of her", "hand held upright to the side of her"),
  (r"(\bholding [^.;]{3,140}?) in both hands(?=, )", r"\1 in both hands raised at chest height"),
+ # face-common FULL (G61, #27)
+ (r" in both hands at (?:her )?waist(?: height)?", " in one hand raised at chest height"),
+ (r" in one hand at (?:her )?waist(?: height)?", " in one hand out to her side"),
+ (r"\bheld (?:lightly |loosely )?(?:at|against) her waist", "held out to her side"),
+ (r" of one hand at her waist", " of one hand out to her side"),
+ (r"the other hand (?:resting (?:lightly |softly )?)?at her (?:sash|waist)", "the other hand resting lightly at her side"),
+ (r"dangling at her waist", "dangling at her side"),
+ (r"at waist height", "at chest height"),
+ (r"resting at her sash", "resting at her side"),
  # POSES_30.md (store pose table)
  (r"the item in the other hand at her waist", "the item in the other hand held out to her side"),
  (r"the item held at her waist with both hands", "the item held in one hand raised at her side"),
