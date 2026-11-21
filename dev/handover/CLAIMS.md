@@ -619,7 +619,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | MAIN CHÍNH 86 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 86 | session_01Rc5AsMD1wiu8K7eDmipUR4 | RUNNING | 21/11 03:15Z |
 | calendar (sonnet; OWNER mark #42 21/11 ~03:43Z: Lịch tháng = phone-calendar month view) | review/calendar; briefs/main86-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:10Z |
 | dialog-stack (sonnet; OWNER mark #46 21/11 ~03:52Z: never two dialogs overlapping) | review/dialog-stack; briefs/main86-dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:10Z |
-| calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
+| calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | SẴN SÀNG KIỂM 40d20ee1 (quickcheck PASS, coop 92/92) | 21/11 |
 | map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 410c4f44 (small; quickcheck PASS) | 21/11 |
