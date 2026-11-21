@@ -23,7 +23,7 @@ keep_check --sidecar PASS x20; check_store PASS x20 (--scope maid --age a18; chu
 - ma ma: builder (D16) wording used, not the ChatGPT mama_gpt_v6 (those FAIL the mama gate: E1/C5/S19/S36/X19). Say if a65 is also wanted (+270).
 - thô sử/chưởng sự bases were last drawn at earlier rounds; owner verdict on them not found in repo.
 
-## AUDIT (owner L1840) — before any drawing
+## AUDIT L1840 (before any drawing)
 Full per-file word-diff (every removed → added hunk, new file vs its approved base): `dev/handover/reports/MAIDFIX3_audit_worddiff.md` (script dev/art/maid7/audit8_prod.py).
 Runs: keep_check --all 582 sidecars PASS; check_store PASS on all 8 approved bases (maid scope) and all 20 new files; keep_check unallowed drops = 0 on all 20.
 Classes of change (all intended, none an unintended drop):
@@ -33,3 +33,5 @@ Classes of change (all intended, none an unintended drop):
 4. **FIX found by this audit — ma ma a51**: first version came from build.py, which is a DIFFERENT look from the approved drawn ma ma (gpt/mama_gpt_v6_a51: square/stand-collar vest + abacus + 3/4-right + coral/teal) and dropped ~30 phrases of it. Rebuilt: m18_/m09_mama_a51 = mama_gpt_v6_a51 with ONLY: ChatGPT header, CAPTION and transparent-background sentences removed (ChatGPT-only; X19 bans them), angle → store angle ANG14[11] (same 3/4-RIGHT, gate E1 rejects the old wording), + gate sentences C5 / S36 STYLE LOCK / S19 feet (G23), face + colours swapped to the person (m05 coral red/teal → person). All garment/hair/item words kept. keep PASS (allow lines: gate form vs person swap), check_store mama a51 PASS.
 5. **OPEN — ma ma a36**: approved a36 look (test5_mama: single closed jade dress) FAILS the mama gate (S32 hai tà, S36), so m18_/m09_mama_a36 are the build.py wording, NOT the approved look. Recommend NOT drawing a36 until the foreman decides (gate vs look conflict); a51 is the approved look. a65 (mama_gpt_v6_a65) can be built the same way on request.
 Cost: 20 files x 135 = 2 700; drawable now without a36: 18 x 135 = 2 430.
+6. m09 vs m18 same rank (9 pairs): every differing hunk is a face-line or colour-name/hex token; 0 unexplained hunks. thô sử base test3_tm0 = the prompt_file of the drawn round-3 picture hu2cFrpvqL in gen_ledger (verified). ma ma a51 base mama_gpt_v6_a51 has no ledger row (ChatGPT-drawn); a36 build.py wording is the builder recipe (see 5).
+All DROPPED = none; all removed/changed phrases are ALLOWED (port / person swap / ChatGPT-only removal) and listed as allow lines in each .keep.
