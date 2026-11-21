@@ -65,6 +65,9 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   /* 15 a person carrying ANOTHER case's lo mark (the host's numbering) with a piece of another kind is not this case's holder */
   reset();const u1=pc(P);const C15=mkc(P,Object.assign({},u1),"me");const other=Object.keys(IT).find(k=>k!==P&&loOk({k})&&ilDur({k}));S.inv.push({k:other,iu:++n,lo:C15.id});
   const at0=C15.at,on0=CW.on;CW.on=true;const x15=loEntry(C15);CW.on=on0;ck("15 loEntry (co-op on): a piece of another kind with the same lo mark is no entry, case untouched",!x15&&C15.at===at0&&C15.e.iu===u1.iu,{at:C15.at,iu:C15.e.iu});
+  /* 16 (c): a piece OWNED by the friend that leaves me with no live owner entry never goes into MY box as «di vật» (seed 4242 vanish 148) */
+  reset();const bx0=ilS().box.length;const on1=CW.on;CW.on=true;let r16;try{r16=ilGone(S,{k:P,iu:++n},"dead",{own:901})}finally{CW.on=on1}
+  ck("16 friend-owned piece, owner gone here: not in my box (sent to her seat)",r16==null&&ilS().box.length===bx0,{box:ilS().box.length-bx0});
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

@@ -576,6 +576,13 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
    A piece of another kind is never that case's piece: no entry (c.at kept) */
 (function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
  try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
+/* E44b (c) (seed 4242 vanish 148 on 24196bf0, hoadien_bac on a211fcf0): a piece OWNED by the friend that leaves my hands with nobody to take
+   it (jlost lostReturn with no live owner entry on this seat — her entry is pulled out at the week end, or her copy is not loAlive) went
+   into MY ledger box as «di vật» (ilGone dead, own = her key): sold on my market while her side still showed it «held» by me = vanish.
+   Her piece is hers to count: it goes to her seat as the same «ret» (b4Send), my census routes it «sang hảo hữu». Two-way: either seat. */
+(function(){if(typeof ilGone!=="function")return;const g0=ilGone;ilGone=function(p,e,how,o){
+ try{if(CW.on&&!CW.ctx&&how==="dead"&&o&&o.own!=null&&e&&e.k&&String(o.own)===String(fp())){b4Send([famRet(e)],{});if(typeof ilSent==="function")ilSent(e,friendEntry());return null}}catch(z){console.error("famops dead",z)}
+ return g0.apply(this,arguments)};window.ilGone=ilGone})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
