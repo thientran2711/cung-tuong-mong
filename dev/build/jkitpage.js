@@ -105,6 +105,13 @@ KIT_SAMPLES.push({id:"§28.8d",title:"kitFigSeal: biểu tượng tâm trạng c
  if(!live)return `<div class="kitpg-row"><span>Mở một ván để xem: hình toàn thân đứng trong phòng, Dư đồ và hộp thoại đều có biểu tượng tâm trạng ở bên đầu (cùng ấn với khung chân dung).</span></div>`;
  const v=typeof rivals!=="undefined"?rivals.filter(x=>x.alive)[0]:null;
  return `<div class="kitpg-row" style="align-items:flex-start;gap:24px"><div style="width:230px;height:420px;position:relative">${kitStageFig(S,{cap:false})}</div>${v?`<div style="width:230px;height:420px;position:relative">${kitStageFig(v,{cap:false})}</div>`:""}</div>`}});
+/* §4.1c frame column (review/kit-pframe-overlay): label centred on the frame axis, rows over the pendant + tassel at band + KIT_PFO.gap */
+KIT_SAMPLES.push({id:"§4.1c",title:"Cột khung chân dung: tên giữa trục khung · dòng tin đè lên ngọc bội + tua rua",where:"<b>KIT_PFO</b> (jk2b §20b) — <code>KIT_PFO.fit(pc)</code> in the kitPcFix hook; band per frame <code>KIT_PFO.band</code>, gap <code>KIT_PFO.gap</code>.",html:()=>{
+ const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
+ const em=live?pEmp():sf("emp","Hoàng thượng","Đế","img/kit/unknown-m.webp","#f0d070"),me=live?pMe():sf("c3","Quý nhân","Ta","img/kit/unknown-f.webp","#c9a0e0");
+ const col=(f,nm,rows)=>`<div class="pc kpwide kpfo-demo" data-k2="1" style="--kpcw:200px;display:grid;grid-template-columns:200px;overflow:visible;max-width:220px"><div class="pcl" style="display:flex;flex-direction:column;gap:3px"><b class="pcname krt" style="justify-content:center;text-align:center">${nm}</b>${pcPort(f)}<div class="kpkey" data-k="1" style="order:1">${rows}</div></div></div>`;
+ setTimeout(()=>{try{document.querySelectorAll("#kitpage .kpfo-demo").forEach(pc=>KIT_PFO.fit(pc))}catch(e){}},50);
+ return `<div class="kitpg-row" style="align-items:flex-start;gap:24px">${col(em,"Hoàng thượng",`<div class="kpk-st"><span class="chip">Đã quen</span></div><div>Hoàng thượng → ta · Sủng <b>7</b></div>`)}${col(me,"Quý nhân",`<div class="kpk-st"><span class="chip">Biết tên</span></div><div>Nàng → ta · Thiện cảm <b>12</b></div>`)}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
