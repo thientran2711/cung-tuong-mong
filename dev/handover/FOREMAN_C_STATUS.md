@@ -1274,3 +1274,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #26 ~08:42Z: VE6 m11 ×9 drawn before HOLD (1215, old poses) → SENT L1907. HHCOL1 L1903 t7/t8 → VE8 @55×2 (crop ref kseQCFw16B); GO t6 QP same. VE10 holding m12. Next Lượt 1908.
 #26 ~08:42Z: OWNER L1908: hạ Đường t1–t3 L1890 WRONG — old Tần yiugBgJPW9 copied EXACT = new Đáp ứng t1; design ranks ABOVE it richer (not below). → HADUONG1 L1908 → VE6 @55 t2/t3. Also L1900 = she had approved (HQP/HH L1887b?). Next Lượt 1909.
 #26 ~08:43Z: MAIDFIX3 L1905 poses 094c8bb93 (54 files). Released: VE8 m10+m18×8, VE10 m12, VE7 m13 (L1905 files). m09/m11 redraw (2430) ASKED owner L1910. HHCOL1 t6 QP L1903 (camellia, not phoenix) → VE8. NGOCBOI1 G61 814b5d335. Next Lượt 1911.
+#26 ~08:44Z: VE7 m13 ×9 drawn pre-hold (old poses, 1215) → SENT L1911. Owner asked: redraw m09/m11/m13 with L1905 poses (3645)? VE7 idle. Next Lượt 1912.
