@@ -43,6 +43,13 @@ R=[ # (regex, replacement) – ordered, specific first
  (r"ONE jade disc at the centre and a long (?:ceremonial )?jade pendant set on each side down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels", "no pendant"),
  (r"a long (?:ceremonial )?jade pendant set on each side down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels", "no pendant"),
  (r"a jade belt", "a plain gold belt"),
+ (r"on each outer side of the two panels hangs a long (?:ceremonial )?jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels"+S, "the two panels hang plain to the knees"),
+ (r"a soft silk sash with a small carved jade pendant \(ngọc bội\) on a silk cord with a silk tassel at each side", "a soft silk sash tied flat at the waist"),
+ (r"a wide gold-and-jade belt with long tassels and jade pendants hanging at the front", "a wide plain gold belt"),
+ (r"one hand adjusting her belt pendant", "one hand resting lightly at her belt"),
+ (r"(sash|girdle) with a (?:small )?(?:white jade|amethyst|jade) pendant on a silk cord(?: with a tassel(?: at the (?:centre|sash))?)?", r"\1"),
+ (r"[,;] a jade pendant on a silk cord with a tassel(?: hanging)?(?: at the (?:centre|sash))?", ""),
+ (r"(sash|girdle) with a small (?:white jade|amethyst) pendant", r"\1"),
  (r",? the jade pendants never covered by sleeve or shawl", ""),
  (r",? (?:its )?(?:jade )?pendants never covered by (?:the )?sleeves?", ""),
  (r"NEVER on the robe, (cape, )?collar, belt or pendants", r"NEVER on the robe, \1collar or belt"),
@@ -51,7 +58,7 @@ R=[ # (regex, replacement) – ordered, specific first
 def strip(t):
     for a,b in R: t=re.sub(a,b,t)
     return t
-DET=re.compile(r"ngọc bội|ngoc boi|yupei|zupei|jinbu|(?<!no )pendants?\b|jade discs?|jade plaques?|jade rings?|jade[- ]and[- ]gold belt|jade belt|belt jade|long jade|jade (?:disc|rings?)",re.I)
+DET=re.compile(r"ngọc bội|ngoc boi|yupei|zupei|jinbu|(?<!no )(?<!or )pendants?\b|jade discs?|jade plaques linked|jade rings?|jade[- ]and[- ]gold belt|jade belt|belt jade|long jade|jade (?:disc|rings?)",re.I)
 if __name__=="__main__":
     w=sys.argv[1]=="--write"; n=0
     for f in sys.argv[1+w:]:
