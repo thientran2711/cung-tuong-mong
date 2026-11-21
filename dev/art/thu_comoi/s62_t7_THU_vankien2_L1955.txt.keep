@@ -1,0 +1,7 @@
+base: dev/art/thu_comoi/s62_t7_THU_vankien2_L1924b.txt
+# owner L1955 (via #27 09:23Z) on hu2BC0ivqL: t7 'đẹp', collar+clasp right; faults (a) sash must bind the OUTER robe closed at the waist (b) HQP/HH became bulky/fat — slim fitted silhouette, square neckline (cổ vuông), bow centre (G60). Collar/clasp + no-tassel words unchanged.
+allow: a near-empress ceremonial robe of light olive silk  # owner L1955 bulky -> 'a SLIM, FITTED near-empress robe of light olive silk, never bulky'
+allow: under the OPEN outer robe, its front edges (slim, pearl-edged) falling from both shoulders  # owner L1955 (a): outer robe hung open -> 'under the outer robe, its slim pearl-edged fronts closing below the bust'
+allow: a plain gold belt, floor-length robe  # owner L1955 (a): belt on the inner dress only -> 'the sash tied OVER the outer robe at the waist, closing it, bow centred' ('floor-length robe' still in the tail sentence)
+allow: Everyone beautiful at every age.  # boilerplate trimmed for 10 000
+allow: CAPTION: bold, top-left, never over her, exactly (with accents): "Mùa Thu · Hoàng quý phi · vân kiên L1924b"  # caption renamed L1955 with collar type (G63 labels), 'exactly'/'Mùa' trimmed

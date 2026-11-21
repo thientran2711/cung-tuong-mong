@@ -35,3 +35,12 @@ Insert (owner L1924, like image 3 kseQCFw16B): "the two fronts joined at the thr
 - t7 (9260), t8 (9468): the approved prompts had NO phi bạch → byte-identical copies.
 - Gates: keep PASS ×6. Store: exactly the same fails as each approved base (t3 M06/W01/W04, t4 M06/W02/S13, t5 M06/W02, t6 W02, t7 S14; t8 PASS) = approved-original waiver.
 - Sent VE6 t3–t6 (4 × 55). t7/t8 SKIPPED (#27 09:22Z: no phi bạch, stay as approved 8aizA8UIrU / KLpI8Vqkqp).
+
+## OWNER L1955 (via #27 09:23Z) — thu t7 HQP: sash binds outer robe + not bulky
+New dev/art/thu_comoi/s62_t7_THU_vankien2_L1955.txt (9996; base L1924b = clasp + no-tassel kept unchanged):
+- "a near-empress ceremonial robe" → "a SLIM, FITTED near-empress robe … never bulky"
+- "under the OPEN outer robe, its front edges (slim, pearl-edged) falling from both shoulders" → "under the outer robe, its slim pearl-edged fronts closing below the bust" (the OPEN outer robe = cause of (a) + width)
+- "a plain gold belt, floor-length robe" → "the sash tied OVER the outer robe at the waist, closing it, bow centred" (G60)
+- trims: "Everyone beautiful at every age." + caption → "Thu · Hoàng quý phi · cổ vuông + vân kiên + khuy cài L1955".
+- store PASS, keep PASS. Sent VE11 1 sample @55 + sheet CŨ hu2BC0ivqL | MỚI. t8 waits for owner OK.
+- Other bulk words NOT touched (rank/owner law, flag only): SLEEVE LENGTH "very long, very wide sleeves … touch the floor"; FABRIC "thick gold-embroidered brocade"; collar "standing slightly OUT past the shoulders" (collar kept per order).
