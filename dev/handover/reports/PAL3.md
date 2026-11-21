@@ -52,3 +52,6 @@ Skins total 243 (c06 126 = mostly the 19/11 triều phục / rank design rounds 
 
 ## Files
 four_season_L1583.py · g50_skins_L1645.py (new) · palettes_season_L1583.json · diff_L1583.json · g50_skins_L1645.json (new) · SKINS.md · L1583 sheets 00–06 (re-rendered, not sent). Commits a884067fb + report fix.
+
+## JOB 2 — owner L1675 (via Foreman C #17): readable sheets of the new palette
+`dev/art/palettes3/sheet_G50_L1675.py` → `dev/handover/review-sheets/palette_G50_L1675/bang_mau_moi_01..06.png` (6 sheets × 15 people, ordered by group). One row per person, columns XUÂN | HẠ | THU | ĐÔNG, big main + small phụ swatch + Vietnamese names, ★ gốc / ★ gốc (đổi) marks, season banner with a short feel line, title "Bảng màu mới (G50) · 0 cr". Looked at tờ 1 and tờ 5 (banner fixed). Not sent to the owner by me. 0 cr.
