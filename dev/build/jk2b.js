@@ -223,7 +223,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
   /* an unlabelled segment with no number after the effects = a reading of the moment ("ngài trọng tài, rất hợp") */
-  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&!/^(nàng|hắn|các|Thái hậu|Hoàng hậu|Hoàng thượng|chứng cứ)/.test(body)){M.notes.push(body);continue}
+  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&/^(ngài |an toàn$)/i.test(body)){M.notes.push(body);continue}/* K-OPT-KEM: ONLY the night «reading of the moment» (nx: «ngài …, rất hợp», «an toàn») is a note; every other number-less kèm / hỏng phrase («ít gặp Hoàng thượng», «chủ ít thấy mặt ngươi») is a real side effect and gets its row */
   for(const sc of body.split(/; /)){const P=[];for(const v of sc.split(/, (?![^(]*\))/)){const p=v.trim();if(!p)continue;if(P.length&&!/\d/.test(p)&&!/\d/.test(P[P.length-1])&&!/^(Sủng|Danh|Đức|Bạc|Sức|Ân tình|Thái hậu|Hoàng hậu|chứng cứ|nàng|hắn|các)/.test(p))P[P.length-1]+=", "+p;else P.push(p)}
    P.forEach(p=>M.items.push({p,l:lab||"thành"}))}}
  return M}

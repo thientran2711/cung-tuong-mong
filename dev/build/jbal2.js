@@ -1734,7 +1734,7 @@ BAL.tdCourt={giftAf:20,backs:40};
    stake.bac[R] = V, the value of a duel stake by the higher rank (law 5: rises with rank); band = an item stake's price within V·(1 ± band);
    val = the exchange rates the equal-value measure (dev/measure/pm-equal.js) uses: Danh in bạc (charity BAL.charity 35 bạc → Danh 5 + Đức 3),
          one point of someone's liking in bạc («Giúp đỡ nàng» 20 bạc → thiện cảm 10 both ways), oán, khắc, Sức. eqTol = the most two answers / stakes may differ (bạc).
-   duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
+   duel: (round C: the public Danh ± now comes from the real watchers, BAL.pm.eye) shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
    yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
    refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
    npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
@@ -1749,15 +1749,31 @@ BAL.pm={kc:1,luck:30,minLv:1,
  play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
  stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
  val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
- duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ duel:{shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
  refuse:{up:1},
- pub:["vuon","kn","tn"],
  mem:{pmplay:6,pmwin:10,pmyield:10},
  npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
 BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
 BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
+/* ROUND C (owner OD 20/11 ~01:00Z "Làm cả 4 luôn đi"; review/person-minigame-acts-c, jpma §C):
+   live = the co-op live board (Q-C2): tx = ms between two running-score sends, wait = ms the friend has to open the board / send her end before the
+     own-hand path, mv = ms of her silence on her Cờ turn before the AI takes her side with her own hand;
+   ky = the real 7×7 Cờ board (j5 gKy rules) in a person act: the white AI's noise = base − k·(opponent's duel score − her talent) − rankN·R, clamped
+     min..max (less noise = fewer blunders); tut = the noise of the guided round; guard = ms before an unfinished board ends; win / draw / lose[her longest
+     run] = her raw (0–10) for the result card and «Cùng chơi»;
+   eye = onlookers (real people at that place): max watchers counted, danh = Danh per watcher to the winner and from the loser (≤ danhMax), kinh = liking
+     of a watcher who likes the winner (≥ likeMin), ghen / oan = a watcher who resents the winner (spite ≥ spite): jealousy toward her / grudge toward an NPC;
+   lad = the per-art palace ladder: arts on the ladder, top = Danh each month for places 1..n, reach = how many places above an NPC may challenge,
+     gapW = weeks between two ladder challenges of one NPC, refuseDrop = places a refused ladder challenge costs (0: pm-equal law 2 — a drop made «Từ chối» worth
+     13 bạc less than «Nhận lời»), g = day-plan weight (need danh). One place is worth mean(top) Danh a month (pmPlaceBac); «Nhường» a place earns that much liking. */
+Object.assign(BAL.pm,{live:{tx:700,wait:45000,mv:90000},
+ ky:{base:120,k:3,min:10,max:220,rankN:8,tut:220,guard:1800000,win:10,draw:5,lose:[0,0,1,2,3,4],
+  ai:{w:[0,1,8,60,600,9000],atk:1.1,mid:3,midW:6,lvN:35,lvN0:10,think:420,endMs:600,loseMs:800}},/* ai = j5 gKy's own scoring (run weights, attack ×, centre pull) and pacing (ms), kept */
+ eye:{max:6,danh:1,danhMax:4,kinh:1,likeMin:20,ghen:3,oan:2,spite:3},
+ lad:{arts:["dan","co","ve","mua","tho","huong","banh","theu","dauho"],top:[3,2,1],reach:2,gapW:3,refuseDrop:0,g:{danh:5}}});
+Object.assign(BAL.pm.mem,{pmsaw:4,pmlad:8});
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
