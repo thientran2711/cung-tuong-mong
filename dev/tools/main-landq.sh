@@ -1,10 +1,14 @@
 #!/bin/bash
-# landq.sh queuefile : each line "branch|sha|topic|change". Lands sequentially; stops at first failure.
+# landq.sh queuefile : lines "branch|sha|topic|change". Lands sequentially; perf-only quickcheck FAIL retried once; stops at first real failure.
 Q=$1
 while IFS='|' read -r BR SHA T CH; do
   [ -z "$BR" ] && continue
   L=/home/user/wt/sland-$T.log
-  bash /home/user/wt/sland.sh "$BR" "$SHA" "$T" "$CH" > $L 2>&1
+  for try in 1 2; do
+    bash /home/user/wt/sland.sh "$BR" "$SHA" "$T" "$CH" > $L 2>&1
+    if grep -q 'QUICKCHECK FAIL' $L && grep -q 'core gates PASS' $L && grep -q 'perf:' $L && [ $try = 1 ]; then echo "RETRY $T (perf-only)"; continue; fi
+    break
+  done
   H=$(grep '^HEAD ' $L | awk '{print $2}')
   if grep -q 'QUICKCHECK PASS' $L && grep -q 'checks OK' $L && [ -n "$H" ]; then
     cd /home/user/wt/live && flock /home/user/wt/fetch.lock git fetch -q --depth=30 origin main

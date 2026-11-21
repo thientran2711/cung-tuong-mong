@@ -1,0 +1,16 @@
+review/mg-5s-clear-rv2|8d4f9919|mg-5s-clear-2|Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)
+review/kit-ghichu-bang-rv|6fb2f34aed3a7a32ab87bc09830e3b250f732293|kit-ghichu-bang|Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»
+review/main84-land-wear-slots|31114358|wear-slots|Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)
+review/mood-seal-2-rv|38e0fd93|mood-seal-2|Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay
+review/chapter-card-2-rv|4a638700|chapter-card-2|Thẻ chương / đời khuê các: khung trượt mới, sửa «NaN», tranh Fold không co
+review/dialog-dedup-rv|61fdc000|dialog-dedup|Hộp thoại: bỏ câu lặp lại hai lần
+review/kit-dialog-rv2|1fa28148|kit-dialog|Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56
+review/jagday-walk-rv|6ada1cb74c7ce882aa2efe0b82ea2eee1b7d87b1|jagday-walk|Đi lại trong cung: tốn khắc theo đường đi (D)
+review/main85-land-errand-bal|1d30dfe956d557d0b5c084541611659b068d2439|errand-bal|Việc vặt: cân lại tiền công / số (E)
+review/kc-coop-select-r1|2eb1ac5f|kc-coop-select|Khuê các chơi chung: chọn đúng người (E)
+review/person-minigame-acts-c-land|c45ba8cb|pm-c|Trò tài nghệ với người: phần C (E)
+review/kit-rankunit-rv2|d3f5ea2815f3fde5603969bc106c6bfca9b77e80|kit-rankunit|Chức vị người: một kiểu chữ; tên nơi chốn để thường
+review/quest-rows-rv|05e1cf15|quest-rows|Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng
+review/kit-act-grid-rv|d65e535b31d3af99d32c869509958c2faa595def|kit-act-grid|Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)
+review/main84-land-coop-week-stall|abcd23bf|coop-week-stall|Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)
+review/dialog-person-rv2|aae7b0f64|dialog-person|Hộp thoại: bỏ hẳn «ma ma»; một luật avatar; «(ta)»; chữ không bị ép cột
