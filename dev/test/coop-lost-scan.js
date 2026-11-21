@@ -142,7 +142,7 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   for(const id of ids){const L=(ca.M[id]||[]).map(x=>'A:'+x).concat((cb.M[id]||[]).map(x=>'B:'+x));seen[id]=1;
    const dur=(ca.D[id]!==undefined?ca.D[id]:cb.D[id])!==false;
    const bad=L.length>1?'dup':(!L.length&&dur?'van':'');
-   if(bad){if(prev[id]===bad){const x={w,id,bad,at:L};const why=await (ca.ids.includes(id)?A:B).p.evaluate(id=>__why(id),id);x.why=why;if(process.env.LOST_DBG)x.st=await A.p.evaluate(id=>(window.__gst||[]).filter(g=>g[0]===id).slice(0,3),id);(bad==='dup'?dups:vans).push(x);if(!prev['!'+id]){console.log('PERSIST',JSON.stringify(x).slice(0,1800));prev['!'+id]=1}}prev[id]=bad}else{delete prev[id];delete prev['!'+id]}}
+   if(bad){if(prev[id]===bad){const x={w,id,bad,at:L};/* E44b (d): both seats' ledger lines + cases for the id (the host side alone could not trace a piece gone from her seat) */x.why=await A.p.evaluate(id=>__why(id),id);x.whyB=await B.p.evaluate(id=>__why(id),id);if(process.env.LOST_DBG)x.st=await A.p.evaluate(id=>(window.__gst||[]).filter(g=>g[0]===id).slice(0,3),id);(bad==='dup'?dups:vans).push(x);if(!prev['!'+id]){console.log('PERSIST',JSON.stringify(x).slice(0,1800));prev['!'+id]=1}}prev[id]=bad}else{delete prev[id];delete prev['!'+id]}}
   if(w%8===7)console.log('week',w,'ids',Object.keys(seen).length,'dups',new Set(dups.map(x=>x.id)).size,'vanish',new Set(vans.map(x=>x.id)).size,'kyA',ca.ky,'kyB',cb.ky,'cases',ca.cases,cb.cases,Math.round((Date.now()-t0)/1000)+'s')}
  const ca=await A.p.evaluate(()=>__lc()),cb=await B.p.evaluate(()=>__lc());
  const dI=new Set(dups.map(x=>x.id)),vI=new Set(vans.map(x=>x.id));

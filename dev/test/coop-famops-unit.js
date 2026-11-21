@@ -51,6 +51,16 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   reset();const k1=pc(P);S.inv.push(k1);FA([{op:"plant",e:{k:P,iu:k1.iu,h:1}}]);ck("11 plant of an id already hers: none",cnt(k1.iu)===1);
   /* 12 famRet strips marks, keeps the id */
   const fr=CW.famRet({k:P,iu:5,lo:3,gh:902,by:"me",h:1,w:1,ci:2});ck("12 famRet: id kept, lo/gh/by/h/w/ci dropped",fr.iu===5&&fr.e.iu===5&&!("lo" in fr.e)&&!("ci" in fr.e)&&!("gh" in fr.e));
+  /* E44b 13 (E44r seed 4242 dup 10000054): the host's act takes a piece that on her seat already sits in HER open «thất lạc» case (no holder):
+     the case is held by the thief (lost) / closes «mất dấu» (any other road); no famMiss, no copy anywhere on her side */
+  reset();const m1=pc(P);const C13={id:(S.loSeq=(S.loSeq||0)+1),k:P,e:Object.assign({},m1),own:"me",w:wk(),due:wk()+9,st:"lost",kn:{},open:0,cev:0,hear:0};loL().push(C13);
+  FA([{op:"rm",ci:0,k:P,iu:m1.iu,how:"lost"}]);ck("13 rm of a piece in her own lost case: case held by the thief, no miss",C13.st==="held"&&C13.at&&CW.famMiss.length===0&&cnt(m1.iu)===0,{st:C13.st,at:C13.at,miss:CW.famMiss});
+  reset();const m2=pc(P);const C13b={id:(S.loSeq=(S.loSeq||0)+1),k:P,e:Object.assign({},m2),own:"me",w:wk(),due:wk()+9,st:"lost",kn:{},open:0,cev:0,hear:0};loL().push(C13b);
+  FA([{op:"rm",ci:0,k:P,iu:m2.iu,how:"gone"}]);ck("13b same, another road: her case closes «mất dấu», no miss",C13b.st==="done"&&C13b.how==="matdau"&&CW.famMiss.length===0,{st:C13b.st,how:C13b.how});
+  /* E44b 14 (E44r seed 4242 vanish 1073 / 144): the returned piece carries another id than the case on this seat; `alt` names the case's id */
+  reset();const q1=pc(P);const C14=mkc(P,Object.assign({},q1));const r14=FA([{op:"ret",k:P,iu:88888,alt:[q1.iu],e:{k:P,iu:88888}}]);
+  ck("14 ret with a split id: alt finds her case, it closes, one piece home",C14.st==="done"&&S.inv.length===1&&r14.loud,{st:C14.st,inv:S.inv.map(e=>[e.k,e.iu]),miss:CW.famMiss});
+  const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
  console.log(bad?`FAIL ${bad}`:`PASS ${R.length}/${R.length}`);await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
