@@ -2036,3 +2036,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (12:42Z) First actions done: «main is now 94» sent to 89 (chain relay; 89 ack landq23, ctx ~47 %), LtG4, MC6N, KoUp, MSxp, Ji75, MAIN 93. Hourly wake trig_01CbswFdi7Gx6PdAcZPZVeah (min 32); 93's trig_01HfRe37 DISABLED. START_* read in full. No owner question pending.
 - (12:50Z) keeper #3: kit-ef-unit r2 bb00fc02 SSK → rv MSxp. Queued for keeper after kitRelRows: Fold option-title one-word-per-line wrap beside odds meter (LIVE group fault). rv duodo-focus MC6N ack (FAIL stands, waits re-SSK).
 - (12:58Z) duodo-focus #2 LtG4 SSK 4e9257b0 → rv MC6N (both rv faults fixed as families + speaker-without-figure → centre card; merged LIVE ee02e8c0 + kit-focus r5; gates PASS; mp4 redone on CDN).
+- (13:08Z) rv MSxp LAND READY mg-intro-2 da3aa72d (review/mg-intro-2-rv2) → 89 chain. LIVE test fault mg-ui-rest pet bath (line 45 /Đã vuốt 0\/5/, likely stale after mg-noword-care) → ORDER Foreman B.
