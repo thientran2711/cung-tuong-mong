@@ -58,3 +58,23 @@ Original sash words back, "flowered brocade" carry-up removed, the blush change 
 | t8 | v10i → v10j | "a wide yellow sash" | already WRAP HELD IN | "Pose: weight on one leg," restored (room again) | 10000 |
 G52/G49/master line kept. check_store ×5 PASS (t6/t7 OUT1 WARN only: the long master OUTER_IN clause is not used, by owner "no emphasis"). keep --all 358 PASS. 0 gens.
 NOTE: the t5 sash is gold again (COMOIe words), as the Foreman asked. Owner L1656 called the yellow girdle ugly → owner should confirm.
+
+## Job 4 — owner L1666 "thon gọn?" — OK'd versions + THICKNESS AUDIT (no edits, 0 gens)
+### A) Owner-OK'd thu s62 versions from 20/11 (before G40/G47/G51/G52/capelet)
+Set A (strongest): store-builder run 20/11 07:31–07:38Z. The owner had ROOT-68 cut every rank into combined transparent images (ledger RANK8-CUT 07:43Z). Prompt dev/art/rank8-s62/s62_tN.txt (old ice-blue palette, crossed collar):
+t1 mEZiZ8ShJQ · t2 9ZHuqIGNYZ · t3 vQARGIUa47 · t4 SyhIap2Ub8 · t5 xSBe8KVjfW · t6 1ldDonjr4r · t7 nVsxSZNYQD · t8 KLpVBAXkqp. The owner also kept t1 and t2 as skins (SKIN-1120 "kept as skin (owner 20/11)").
+Square-neck variants the same morning, all kept as skins: t1 xSBeugTjfW (test-square/s62_t1_sq), t4 eIPOIm2dqL (test-square456/s62_t4_sq), t5 MBJwQZqDCm, t6 SyhtzkOUb8 (test-square56b). For t2 the owner rejected style 2 nVsx9M3YQD ("rộng quá").
+Set B (later, light plum, never said "duyệt"): L1576 finals t1–t6, 21/11 ~00:20Z: iG5w9iB3uK / xSBQkx1jfW / gOm5sZ5SXO / SyhKlGwUb8 / 6AbU9EpiJO / bxMvHW65Y2, prompts dapung4 t1 v2d, t2 v2d, t3 v2e, thu_comoi t4 COMOIc, t5 COMOIc, t6 COMOId. Owner reaction L1580: Phi cape weird, t1–t3 too dense. ChatGPT praise, no Magnific id: t7 thu_comoi/s62_t7_THU_COMOI.txt L1383 "rất đẹp"; t8 s62_t8_THU_COMOI_v2.txt L1394 "ổn nhất".
+### B) Thickness: Set A prompt vs CURRENT (t1–t3 dapung4 v10, t4 COMOIl, t5 COMOIk, t6 COMOIm, t7 v8l, t8 v10j)
+| tier | added since OK'd (thick/bulky) | slim words |
+|---|---|---|
+| all t1–t8 | NEW "LAYERED NECKLINE (two-garment look)": inner top + "light plum outer robe … OVER it" (0→1 each). G40 "outer robe HELD IN by the sash … wraps over BOTH layers" = an extra robe layer over the whole torso on every tier. | "healthy slender figure" + "elegant, slim" master lines kept in all |
+| t1 | outer robe 0→3 mentions; Tang "snug crossed-collar upper garment" → layered neckline + outer robe | "snug" LOST |
+| t2 | OK = "a fine silk robe … soft silk sash" (simple). Now "structured, rich COURTLY palace consort dress", girdle + APRON PANEL, wide 4→7, outer robe | — |
+| t3 | + outer robe (3), "two or three" layers 0→1 | — |
+| t4 | fabric "thin, light, flowing silk and gauze" → "silk SATIN (đoạn)" + "layered satin robe of two or three visible layers" + outer robe; capelet words 8→3 (fewer) | — |
+| t5 | THICKEST: layers 5→9, + capelet (0→4), beaded yoke/net over it, + "extra small SOFT layer on EACH shoulder", fringe, satin, outer robe, wide 5→7 | — |
+| t6 | OK "HEAVY silk brocade" → now "LIGHT brocade" (thinner); + outer robe, cloud collar wording, fringe | — |
+| t7 | + outer robe, broad 1→3 ("broad royal-yellow brocade band" collar), brocade 1→2 | — |
+| t8 | + outer robe, cloud collar "moderately firm", cape 0→2, wide 10→11 | OK "slim tall silhouette" → now "slim, hanging close, never bell-wide" (kept, reworded) |
+FABRIC t7/t8 = "thick gold-embroidered brocade" in BOTH (unchanged). No version has a separate "slim outfit" line except t8. Main cause of the thick look = the two-garment layered neckline + outer robe held in over both layers (all tiers) and the t4/t5 satin + 2–3 layers (+ the t5 capelet/yoke/shoulder layers).
