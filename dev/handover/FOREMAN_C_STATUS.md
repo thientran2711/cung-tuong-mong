@@ -1026,3 +1026,4 @@ NEWACCT#15 ~02:42Z: HAIR1 83d55ab44 hair table per season (90×8×4, check PASS,
 NEWACCT#15 ~02:45Z: OWNER L1634 'B05 bật thực tại, 6 bỏ' → read as t2 Thường tại drop B05+B06 → HAIR1 replace with 2 new shapes.
 NEWACCT#15 ~02:48Z: OWNER L1635 CANCELLED hair project (angry: 'gớm'); prompts unchanged (no builder used hair table); G48 set CANCELLED; HAIR1 stopped.
 NEWACCT#15 ~02:50Z: DESIGN20 continues (ctx 15 % real). t4/t5 v7 (apron panels + jade set carried, G47) 132 over → trims A+D+C + compact own words; NOT B (approved S12) / E. v6 drafts running in GEN1.
+NEWACCT#15 ~02:53Z: HAIR1 archived (nothing wired). LADDER2: t7 v8e + t8 v10d ready (OUTER_TIED, old fails fixed, repeat trims) → CHECK1; t6 v6 11 041 ch → B (expression repeat) + compress own copied words; no shawl cut without owner.
