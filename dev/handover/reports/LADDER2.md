@@ -56,3 +56,5 @@ t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jad
 | thu_comoi/s62_t7_THU_COMOI_v8g | 9984 | outfit "floor-length robe with slippers visible" → "floor-length robe" (repeat of S19 tail) |
 | thu_comoi/s62_t8_THU_COMOI_v10f | 9982 | — |
 GEN-READY set (after CHECK1 + Foreman's look at the t4/t5 v8 drafts): t6 COMOIh, t7 v8g, t8 v10f. Gens still HELD.
+
+## Step 8 — CHECK1 01:58Z: OUTER_WRAP swap ×9 PASS; Foreman released t6–t8 (~01:56Z, v8 drafts proved OUTER_WRAP) → CHECK1 sent GEN1 3 drafts (t6 COMOIh, t7 v8g, t8 v10f, 165 cr). t1–t3 thu + xuân = prompt files only. LADDER2 0 gens. Remaining: GEN1 sheet → Foreman/owner.
