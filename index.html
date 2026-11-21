@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1cf68329+","t":"2026-11-21T01:58Z","c":"rv or20-j68q r6: co-op test both seat orders (COOP_SWAP=1: guest in lanh cung, host Hoang hau); KIT REQUEST: hint words for servant stats C…","b":"9a22db0ff08c","h":[{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"}]};
+window.CTM_BI={"s":"1ac9eb88+","t":"2026-11-21T02:33Z","c":"rv or20-j68q r6: co-op test both seat orders (COOP_SWAP=1: guest in lanh cung, host Hoang hau); KIT REQUEST: hint words for servant stats C…","b":"8daa2b5d911c","h":[{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -966,6 +966,117 @@ function kRxEmu(src,flags){flags=flags||"";
    result card ......... resultShow(title,before,ok)  THÀNH / BẠI seal + coloured deltas + why
    dialog .............. showModal()  speaker portrait frame or place art, options through dilLine()
    Defined in j15 (cards, pager, bars), j17 (lines), j19 (kit core), j21 (relations). */
+/* jname.js — ONE NAME CORE (owner rule 16/11 ~20:20Z, last line of OWNER_DECISIONS: "mỗi người một cái tên, không ai giống ai";
+   no Vietnamese-style surnames; ancient Chinese court names written in Hán-Việt). Research + exclusion reasons: dev/handover/reports/names-expert.md.
+   This file is the ONLY name list in the game. Older pool names (SURN, GIVEN, MALEN, MAIDS, EUN, PRINCE, PRINCESS, QNG, CTG, KCMN, KCFN,
+   J59*) are aliases of these arrays. Every place that makes a person calls nmNew(kind); jnamefix.js (assembled last) keeps the save-wide
+   registry S.nmReg, renames duplicates / excluded names in old saves once, and sweeps every month as a safety net. Loaded right after j0. */
+/* excluded surnames: the 14 surnames that cover ~90 % of Vietnamese people (Nguyễn … Lý), their Vietnamese-only readings (Huỳnh, Võ)
+   and the surnames of Vietnamese ruling houses (Đinh, Mạc, Trịnh) — a Vietnamese reader hears "người Việt" first */
+const NM_BAN_SUR=["Nguyễn","Trần","Lê","Phạm","Hoàng","Huỳnh","Phan","Vũ","Võ","Đặng","Bùi","Đỗ","Hồ","Ngô","Dương","Lý","Đinh","Mạc","Trịnh"];
+/* Vietnamese middle-name markers (never the first syllable of a given name) and modern Vietnamese given names */
+const NM_BAN_G1=["Thị","Văn","Hữu","Đình","Công","Quang","Duy"];
+const NM_BAN_GIVEN=["Thu Thủy","Bích Hà","Minh Châu","Ngọc Lan","Thu Cúc","Hồng Liên","Xuân Hạnh","Bích Ngọc","Ngọc Anh","Thanh Hà","Thu Hà","Kim Anh","Phương Anh","Thùy Linh","Minh Anh","Bảo Ngọc","Thanh Tâm","Thanh Thủy","Hoài An","Đức Minh","Hữu Chính","Gia Huy","Minh Triết","Tuấn Dật","Cẩm Tú","Lan Chi","Thủy Tiên","Tố Tâm","Họa Mi","Diễm Thu","Ngọc Dung","Phương Hoa","Hồng Diệp","Băng Tâm","Hải Đường","Minh Ngọc","Thu Cúc","Ngọc Hà","Kim Ngân","Thanh Hương","Mỹ Linh","Hồng Nhung"];
+/* surnames: classic Chinese houses as they read in dubbed court dramas (Thẩm, Chân, Niên, Tô, Lâm, Phú Sát …) */
+const NM_SUR=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Bạch","Liễu","Cố","Tạ","Vân","Chu","Phùng","Lục","Tống","Hàn","Đường","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Chân","Niên","Vương","Lưu","Triệu","Tôn","Mã","Quách","Cao","La","Lương","Hứa","Tào","Bành","Tăng","Tiêu","Điền","Đổng","Viên","Vu","Tưởng","Dư","Trình","Ngụy","Lữ","Nhâm","Diêu","Lư","Thôi","Chung","Uông","Thạch","Liêu","Phó","Phương","Tiết","Khâu","Giang","Doãn","Lôi","Sử","Đào","Thiệu","Nghiêm","Khổng","Tề","Yến","Hách","Đậu","Trương","Mộ Dung","Thượng Quan","Đoan Mộc","Tư Mã","Nam Cung","Độc Cô","Trưởng Tôn","Phú Sát"];
+/* noble ladies (consorts, quý nữ, sisters, friends) */
+const NM_F=["Mi Trang","Uyển Nhi","Thanh Ca","Như Ý","Nguyệt Hoa","Tuyết Dao","Ngọc Hành","Tịnh Nghi","Thục Nghi","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Mạn Châu","Tử Yên","Vân Thường","Nhược Lan","Mộng Điệp","Ngưng Sương","Tú Uyển","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Tịch Nhan","Lạc Anh","Ngọc Dao","Dao Cầm","Uyển Ninh","Tư Dao","Thanh Hoan","Cẩm Sắt","Nhã Như","Vân Tịch","Ngọc Khê","Lạc Y","Tri Ý","Hoán Khê","Ninh Hương","Thục Hoa","Diệu Âm","Cầm Thư","Như Yên","Uyển Thanh","Linh Tê","Tịnh Dung","Mạn Ca","Kiều Ân","Hân Duyệt","Ngọc Nhu","Tĩnh Uyển","Tuyết Nhạn","Lạc Yên","Uyển Dung","Dung Âm","Lang Hoa","Hải Lan","Ý Hoan","Hi Nguyệt","Hàm Yên","Thanh Uyển","Nghiên Thu","Mặc Lan","Tố Nga","Vân La","Sương Hoa","Chỉ Nhược","Thi Hàm","Lạc Tuyết","Tâm Duyệt","Mộng Dao","Kinh Hồng","Chiêu Hoa","Ngữ Yên","Khê Nguyệt","Nhã Ninh","Tĩnh Thù","Hàn Yên","Trầm Bích","Thải Vi","Lệ Hoa","Anh Ninh","Thần Hi","Chỉ Lan","Sơ Ảnh","Như Sương","Liên Y","Tuyết Kiến","Mạn Nhu","Ngọc Chiêu","Quân Dao","Uyển Hề","Hàm Chương","Tố Huyên","Cẩm Sương","Lưu Ly","Vân Yên","Doanh Nguyệt","Thanh Từ","Nghi Tu","Thuần Nguyên","Nhu Tắc","Tinh Diêu","Ngưng Hoa","Tố Tuyết","Thanh Diên","Uyển Âm","Như Mặc","Dao Quang","Tương Quân","Mạn Sương","Nhạn Hồi","Lan Âm","Phù Dung","Diệu Hoa","Sở Sở","Thanh Nhã","Ngọc Thù","Ngân Chúc","Tố Ngưng","Yên La","Hương Ngưng","Tử Đàn","Linh Vận","Thục Ý","Nguyệt Thiền","Vãn Tình","Lăng Ba","Nghê Thường","Bích Lạc","Hàn Tuyết","Ngọc Huyền","Thư Dao","Tịnh Sơ","Cẩm Tâm","Uyển Đình","Kính Nghi","Nhu Gia","Chiêu Nghi","Thái Vi"];
+/* men (officials, guards, the men of S.men, sons of the great houses, fathers, brothers) — courtesy-name style */
+const NM_M=["Tử Khiêm","Minh Viễn","Thừa Chí","Kính Chi","Bá Ngôn","Tử Hiên","Cẩn Ngôn","Thừa Ân","Hạo Nhiên","Vân Khởi","Duệ Trạch","Tư Viễn","Bách Xuyên","Thanh Hành","Dịch Chi","Trác Nhiên","Ngọc Đường","Hoài Cẩn","Mộ Bạch","Quân Diệc","Thận Hành","Khải Trạch","Cảnh Hoài","Dật Thanh","Quân Hạo","Thanh Diễn","Hựu Ninh","Tấn Lương","Cẩn Du","Hoằng Nghị","Thiệu Khang","Kính Đường","Bác Văn","Thế Khanh","Trọng Lễ","Tế An","Hoài Nhân","Tử Kỳ","Trọng Hoa","Thúc Dạ","Quý Thường","Bá Cơ","Tử Mặc","Tư Nguyên","Cảnh Diễm","Hành Chi","Cửu Tư","Diệc Thần","Tuân Lễ","Thủ Chuyết","Lập Chi","Kính Đình","Tông Hàn","Triệt Ngôn","Thịnh Đình","Thiệu Khiêm","Uẩn Chi","Diên Niên","Hy Bạch","Lăng Tiêu","Tĩnh Viễn","Mạnh Chương","Thủ Nhân","Tri Viễn","Thanh Viễn","Vọng Thư","Thành Ngọc","Tề Quang","Kỳ Niên","Tử Thường","Thúc Nghi","Nguyên Lãng","Phụng Chi","Tùng Niên","Huyền Độ","Tử Uyên","Học Nghiêm","Chính Khanh","Hàm Chi","Cảnh Minh","Trường Khanh","Dực Chi","Thiếu Lăng","Bá Ước","Trọng Đạt","Thúc Hành","Quý Ngọc","Tử Kính","Tử Chiêm","Cảnh Thăng","Hoằng Độ","Diễn Chi","Tu Viễn","Khắc Kỷ","Sĩ Hành","Tư Cung","Tử Do","Nghĩa Sơn","Trọng Khanh","Uyên Minh","Mậu Tiên","Kính Phu","Thiếu Bạch","Tử Lăng"];
+/* palace maids: one given name, as masters named them (Hồng Lâu Mộng / Qing palace style); a surname is added only when these run out */
+const NM_MAID=["Tiểu Đào","Xuân Đào","Hoán Bích","Lưu Chu","Cận Tịch","Bội Nhi","Hoa Tuệ","Tiễn Thu","Phẩm Nhi","Cẩm Tịch","Nhĩ Tình","Trân Châu","Hổ Phách","Thải Bình","Thải Nguyệt","Lục Châu","Tố Cầm","Thanh Trúc","Tử Đằng","Lạc Mai","Thúy Vi","Bảo Châu","Liên Tâm","Họa Bình","Thải Vân","Ngọc Tranh","Linh Chi","Tuyết Cầu","Thu Lộ","Hương Lăng","Tình Văn","Tập Nhân","Xạ Nguyệt","Tử Quyên","Oanh Nhi","Bình Nhi","Uyên Ương","Ngọc Xuyến","Kim Xuyến","Tú Quất","Tư Kỳ","Nhập Họa","Bão Cầm","Tố Vân","Thu Văn","Bích Ngân","Thải Liên","Châu Nhi","Lục Liễu","Hồng Tiêu","Bích Đào","Tịch Nguyệt","Hàm Thúy","Quế Nhi","Tố Nguyệt","Băng Nhi","Cúc Nhi","Đông Tuyết","Thu Sương","Xuân Liễu","Hạ Hà","Thúy Bình","Ngân Linh","Tiểu Hoàn","Tiểu Điệp","Tiểu Liên","Tiểu Mãn","Tiểu Dung","Thúy Lũ","Xuân Yến","Thu Đồng","Hạnh Nhi","Mạch Nhi","Sơ Tuyết","Thải Chi","Tú Châu","Ngọc Lộ","Vân Nhi","Liễu Nhi","Đào Diệp","Phỉ Thúy","San Hô","Lưu Tô","Thúy Mặc","Bạch Chỉ","Phục Linh","Bán Hạ","Tử Tô","Kim Quất","Ngân Hạnh","Hồng Ngọc","Thanh Đại","Yên Chi","Tịch Lam","Nguyệt Quế","Mộc Cận","Hàm Tiếu","Tuyết Liên","Xảo Nhi","Thải Hà","Ỷ Thúy","Uyển Tâm","Thu Thiền","Chi Nhi","Họa Nhi","Hà Nhi","Thư Nhi","Kỳ Nhi","Cầm Nhi","Mặc Nhi","Như Họa","Tố Trân","Lan Tâm","Huệ Tâm"];
+/* young eunuchs: "Tiểu X Tử" (as the palace called them); senior eunuchs: surname + given (Tô Bồi Thịnh style) */
+const NM_EUNX=["Lộ","Phúc","Thuận","An","Hỉ","Quế","Ngân","Hải","Toàn","Bình","Kiệt","Minh","Ninh","Lộc","Thọ","Khang","Đức","Trụ","Xuân","Lâm","Thành","Cát","Tường","Khánh","Bảo","Trung","Tín","Hòa","Kính","Cẩn","Lương","Tiến","Vượng","Hưng","Thịnh","Lai","Đắc","Song","Quý","Ngọc","Thạch","Trác","Tùng","Mậu","Nguyên","Lợi","Toại","Duyệt","Xương","Thái","Sơn","Hà","Liên","Mãn","Doanh","Điền","Phong","Tài","Chính","Nghĩa"];
+const NM_EUNG=["Phúc An","Bảo Thuận","Đức Hải","Kính Trung","Trường An","Tiến Hỷ","Thủ Nghĩa","Lộc Toàn","Bồi Thịnh","Tiến Trung","Ngọc Trụ","Đức Thọ","Vĩnh Lộc","Liên Thuận","Thường Hỷ","Bảo Hòa","Thuận Đức","Phúc Thọ","Hỷ Lâm","Trung Cẩn","Quế Lâm","Toàn Phúc","An Thái","Cát Tường","Thọ Khang","Đắc Lộc","Hưng Nghĩa","Khánh Dư","Vượng Tài"];
+/* imperial physicians (Thái y): courtesy-name style of the Thái y viện */
+const NM_DOC=["Tế An","Thế Khanh","Hoài Nhân","Bá Ngôn","Tử Hiên","Minh Viễn","Thừa Ân","Tư Thiện","Bách Thảo","Tế Thế","Nhân Phủ","Thận Vi","Hòa Chi","Thanh Nang","Diệu Thủ"];
+/* princes: one generation character per generation (Qing practice: Dận, Hoằng, Vĩnh, Miên …) + a second character */
+const NM_PGEN=["Vĩnh","Hoằng","Miên","Dận","Dịch","Tái"];
+const NM_PX=["Kỳ","Diễm","Trú","Thành","Ninh","Tinh","Chiêm","Dung","Tường","Lân","Khải","Diệu","Cơ","Hoán","Thụy","Tông","Hiên","Cảnh","Huyên","Lịch","Chương","Diễn","Hạo","Tuấn","Thừa","Bích","Trinh","Nghiêm","Mẫn","Tuyên","Kính","Chính","Khôi","Lâm","Quỳ","Duệ","Hành","Cẩn","Chiếu","Hy"];
+/* princesses: title names (Hòa Kính, Hòa Thạc … Qing style) */
+const NM_PRINCESS=["Hòa Kính","Hòa Gia","Tĩnh An","Hòa Thạc","Ninh Thọ","Thục Thận","Hòa Khác","An Lạc","Vĩnh Gia","Uyển Trinh","Hòa Huệ","Đoan Mẫn","Thục Tuệ","Hòa Uyển","Thọ Ân","Thọ An","Hòa Tĩnh","Hòa Đoan","Đoan Nhu","Vinh Hiến","Hòa Thục","Đoan Tĩnh","Ôn Hiến","Thuần Hy","Hòa Duyệt","Trang Kính","Trang Tĩnh","Vinh An","Thọ Ninh","Đoan Thuận","Hòa Mục","Thục Gia","Ninh Khang","Hòa Thuận","Tuệ Khánh","Ôn Khác","Thục Mẫn","Gia Hòa"];
+/* --- helpers --- */
+const NM_TITLES=["Tổng quản thái giám","Thái giám Kính sự phòng","Thái giám Nội vụ phủ","Tổng quản","Thái giám","Hoàng tử","Công chúa","Thị vệ","thị vệ","Hàn lâm","Thái y","Vương gia","Nhạc sư","Sứ thần","Họa sư","Phế phi","Cung nữ","Ma ma"];
+function nmBare(n){let s=String(n||"").trim();for(let k=0;k<3;k++){let hit=0;for(const t of NM_TITLES)if(s.startsWith(t+" ")&&s.length>t.length+1){s=s.slice(t.length+1).trim();hit=1;break}if(!hit)break}return s}
+/* "Tiểu X Tử" and a maid's one given name have no surname; "Hoàng tử Vĩnh Kỳ" -> given "Vĩnh Kỳ" */
+function nmNoSur(b){const w=String(b||"").split(" ");return w.length<=2||((w[0]==="Tiểu"||w[0]==="Lão")&&w[w.length-1]==="Tử"&&w.length===3)}
+function nmSurOf(b){b=String(b||"");if(/ (thị|gia)$/.test(b))return b.replace(/^Lão phu nhân /,"").replace(/ (thị|gia)$/,"");if(nmNoSur(b))return b.split(" ").length===1?b:"";
+ const w=b.split(" ");return w.slice(0,w.length-2).join(" ")}
+function nmGivenOf(b){b=String(b||"");if(nmNoSur(b))return b;return b.split(" ").slice(-2).join(" ")}
+/* same short forms the masking code uses (jht nVars): full, given, surname + last word */
+function nmVars(b){const w=String(b||"").split(" ").filter(Boolean);const V=[w.join(" ")];if(w.length>=3&&!nmNoSur(b)){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}
+ /* j25 ageInit turns "Tiểu X Tử" into "Lão X Tử" at 45: one living "X" eunuch at a time (internal key, never a real name) */
+ if(w.length===3&&(w[0]==="Tiểu"||w[0]==="Lão")&&w[2]==="Tử")V.push("@eun "+w[1]);return V}
+function nmBad(b){b=nmBare(b);if(!b)return"";const su=nmSurOf(b);if(su&&NM_BAN_SUR.includes(su))return"sur";
+ const g=nmGivenOf(b);if(g&&!/ (thị|gia)$/.test(b)){const g1=g.split(" ")[0];if(NM_BAN_G1.includes(g1)&&!/^(Tiểu|Lão) /.test(b))return"g1";if(NM_BAN_GIVEN.includes(g))return"given"}return""}
+/* every person the save holds, one entry per person (first entry of a name keeps it). f = the field holding the personal name. */
+function nmPeople(){const L=[];if(typeof S==="undefined"||!S)return L;const seen=new Set();
+ const add=(o,kind,f,x)=>{if(!o||typeof o!=="object"||seen.has(o))return;const v=o[f||"name"];if(typeof v!=="string"||!v.trim())return;seen.add(o);L.push(Object.assign({o,kind,f:f||"name"},x||{}))};
+ add(S,"f","name",{me:1});
+ try{(rivals||[]).forEach(v=>add(v,"f",null,v.coop?{guest:1,fp:"name"}:null))}catch(e){}
+ /* coop-name-clash: a player serving as cung nữ is ONE coop entry in her mistress's staff (jcoopworld buildFriendSrv): she is the friend herself */
+ try{(rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>{if(s&&s.coop)add(s,"f",null,{guest:1,fp:"name"})}))}catch(e){}
+ try{allKids().forEach(([k,v])=>add(k,k.sex==="m"?"prince":"princess",null,v&&v.coop?{guest:1,fp:"kids."+(v.kids||[]).indexOf(k)}:null))}catch(e){}
+ try{const C=S.court||{};for(const k in C){const c=C[k];if(!c||typeof c!=="object")continue;add(c,k==="ty"?"doc":k==="ped"?"eun":"eunE",c.pn?"pn":"name",{court:k})}}catch(e){}
+ try{(S.men||[]).forEach(m=>add(m,"m"))}catch(e){}
+ try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c],"m",null,{fam:T.H[c]&&T.H[c].dadOf==="me"})}catch(e){}
+ try{(S.kc&&S.kc.fam||[]).forEach(p=>add(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m",null,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}))}catch(e){}
+ try{(S.hPool||[]).forEach(p=>add(p,"m"))}catch(e){}
+ try{(S.qPool||[]).forEach(p=>add(p,"f"))}catch(e){}
+ try{add(S.maid,"maid");const sk=s=>s.role==="eunuch"?"eun":s.eid?"f":"maid";(S.staff||[]).forEach(s=>add(s,sk(s)));(rivals||[]).forEach(v=>{add(v.maid,"maid",null,v.coop?{guest:1,fp:"maid"}:null);(v.staff||[]).forEach((s,i)=>add(s,sk(s),null,v.coop?{guest:1,fp:"staff."+i}:null))});try{(S.thO&&S.thO.staff||[]).forEach(s=>add(s,sk(s)))}catch(e){}}catch(e){}
+ try{nmFrPeople(add)}catch(e){}
+ return L}
+/* coop-name-clash (law 6b, one living person = one full name, on BOTH seats): the personal people of an S-shaped object (a player and
+   the people only her own seat holds: her maid, her household servants, her children, her home family, her marriage pools), with their
+   path inside it ("name" = the player herself). One list for the host's view of the friend (nmFrPeople) and the new-life check (nmBirth). */
+function nmPers(s){const out=[];if(!s||typeof s!=="object")return out;const sk=x=>x.role==="eunuch"?"eun":x.eid?"f":"maid";const one=(o,kind,p,x)=>{if(o&&typeof o==="object"&&typeof o.name==="string"&&o.name.trim())out.push(Object.assign({o,kind,f:"name",fp:p},x||{}))};
+ one(s,"f","name");one(s.maid,"maid","maid");(s.staff||[]).forEach((x,i)=>{if(x&&!x.coop)one(x,sk(x),"staff."+i)});
+ (s.kids||[]).forEach((k,i)=>one(k,k&&k.sex==="m"?"prince":"princess","kids."+i));
+ ((s.kc&&s.kc.fam)||[]).forEach((p,i)=>one(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m","kc.fam."+i,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}));
+ (s.hPool||[]).forEach((p,i)=>one(p,"m","hPool."+i));(s.qPool||[]).forEach((p,i)=>one(p,"f","qPool."+i));return out}
+/* the friend's blob (co-op host only): the room's last P of the other seat */
+function nmFrBlob(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P||!nmOwner())return null;const P=W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead&&!P.S.dead?P:null}catch(e){return null}}
+/* HOST: the friend's own people (on her seat only) join the one name list as hers (guest, never renamed here: nmFix sends her a rename
+   order instead); the ones her coop entry already shows on this seat (her name, maid, children) are not added twice */
+function nmFrPeople(add){const P=nmFrBlob();if(!P)return;const ent=(rivals||[]).find(v=>v&&v.coop),srv=!ent&&(rivals||[]).some(v=>(v.staff||[]).some(x=>x&&x.coop));
+ for(const e of nmPers(P.S)){if(e.fp==="name"&&(ent||srv))continue;if(ent&&(e.fp==="maid"||/^kids\./.test(e.fp)))continue;add(e.o,e.kind,null,{guest:1,fr:1,fp:e.fp,fam:e.fam})}}
+function nmAlive(e){const o=e.o;return o.alive!==false&&o.alive!==0&&!o.dead&&!o.out}
+function nmReg(){if(typeof S==="undefined"||!S)return null;if(!S.nmReg||typeof S.nmReg!=="object")S.nmReg={};return S.nmReg}
+/* co-op: the host owns the one registry (owner rule); a guest never writes it (worldOn() of the one-world co-op, review/coop-one-world: true = solo or host; before it lands: COOPW seat "a" = host). A guest's new person is
+   named on her side without registering; the host's sweep (jnamefix, after every rebuild) renames any clash once it reaches the world. */
+function nmOwner(){try{if(typeof worldOn==="function")return !!worldOn()}catch(e){}try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")return false}catch(e){}return true}
+/* taken = every name ever given in this save (registry) + every name held now; vars = short forms of the LIVING (no "Uyển Nhi" beside "Thẩm Uyển Nhi") */
+function nmTaken(){const full=new Set(),vars=new Set(),sur=new Set();const R=nmReg();if(R)for(const k in R)full.add(k);
+ for(const e of nmPeople()){const b=nmBare(e.o[e.f]);full.add(b);if(nmAlive(e)){nmVars(b).forEach(v=>vars.add(v));const s=nmSurOf(b);if(s)sur.add(s)}}
+ try{if(S&&S.st){if(S.st.guard)full.add(nmBare(S.st.guard));if(S.st.stu)full.add(nmBare(S.st.stu))}}catch(e){}
+ /* the fallen consort of Trường Môn viện (j59 S.lcfPn) lives outside nmPeople: her given name stays taken, living or dead, as LIVE j59 kept it (j61 mask, review r1) */
+ try{if(S&&S.lcfPn){const b=nmBare(S.lcfPn);full.add(b);nmVars(b).forEach(v=>vars.add(v))}}catch(e){}return{full,vars,sur}}
+/* no word twice in one name ("Kiều Kiều Ân", "Lục Lục Trường") */
+function nmTwice(n){const w=String(n).split(" ");return new Set(w).size===w.length}
+function nmPickA(a){return a[Math.floor(Math.random()*a.length)]}
+function nmCand(kind,o){const sing=()=>{const L=NM_SUR.filter(s=>s.indexOf(" ")<0&&!(o.avoidSur&&o.avoidSur.has(s)));return o.sur||nmPickA(L.length?L:NM_SUR)};
+ switch(kind){case"f":return (o.sur?o.sur:Math.random()<.12?nmPickA(NM_SUR.filter(s=>s.indexOf(" ")>0)):sing())+" "+nmPickA(NM_F);
+  case"maid":return o.wide?sing()+" "+nmPickA(NM_MAID):nmPickA(NM_MAID);
+  case"eun":return o.wide?sing()+" "+nmPickA(NM_EUNG):"Tiểu "+nmPickA(NM_EUNX)+" Tử";
+  case"eunE":return sing()+" "+nmPickA(NM_EUNG);
+  case"doc":return sing()+" "+nmPickA(NM_DOC);
+  case"prince":return (o.gen||nmGen())+" "+nmPickA(NM_PX);
+  case"princess":return o.wide?nmPickA(NM_PGEN.concat(["Hòa","Thục","Đoan","An","Tĩnh","Uyển"]))+" "+nmPickA(NM_PX):nmPickA(NM_PRINCESS);
+  case"mo":return sing()+" thị";
+  default:return sing()+" "+nmPickA(NM_M)}}
+/* the Emperor's children of one generation share the generation character (stored per save; a new reign may move it on) */
+function nmGen(){try{if(S){if(!S.nmGen)S.nmGen=NM_PGEN[0];return S.nmGen}}catch(e){}return NM_PGEN[0]}
+/* nmNew(kind, opts): a name nobody in this save has ever had. kinds: f (lady/consort), m (man/official), maid, eun (young eunuch),
+   eunE (senior eunuch), doc (physician), prince, princess (given part only; the caller adds "Hoàng tử"/"Công chúa"), mo ("X thị").
+   opts.sur = family surname to keep; opts.avoidSur = Set of surnames to avoid; opts.more = people/names made in the same batch, not stored yet; opts.reg=false = do not register (a guest's draft). */
+function nmNew(kind,opts){const o=opts||{};const T=nmTaken();(o.more||[]).forEach(m=>{const b=nmBare(m&&m.name!=null?m.name:m);if(b){T.full.add(b);nmVars(b).forEach(v=>T.vars.add(v));const s=nmSurOf(b);if(s)T.sur.add(s)}});const ok=n=>!T.full.has(n)&&!nmBad(n)&&nmTwice(n)&&(kind==="mo"?!T.sur.has(nmSurOf(n)):!nmVars(n).some(v=>T.vars.has(v)));
+ let n="";for(let t=0;t<400&&!n;t++){const c=nmCand(kind,Object.assign({},o,{wide:t>=300}));if(ok(c))n=c}
+ if(!n){/* exhaustive: every surname x every given of the kind, then the wide form */const G=kind==="f"?NM_F:kind==="maid"?NM_MAID:kind==="eun"||kind==="eunE"?NM_EUNG:kind==="doc"?NM_DOC:kind==="prince"?NM_PX:kind==="princess"?NM_PRINCESS:NM_M;
+  const SS=o.sur?[o.sur]:NM_SUR;outer:for(const s of SS)for(const g of G){const c=kind==="princess"?g:s+" "+g;if(kind!=="prince"&&ok(c)){n=c;break outer}}
+  if(!n&&kind==="prince")outer3:for(const a of NM_PGEN)for(const g of NM_PX){const c=a+" "+g;if(ok(c)){n=c;break outer3}}
+  if(!n)outer2:for(const s of NM_SUR)for(const a of NM_SUR)for(const g of (kind==="f"||kind==="maid"?NM_F:NM_M)){const c=s+" "+a.split(" ")[0]+" "+g.split(" ")[1];if(!T.full.has(c)&&!nmBad(c)){n=c;break outer2}}}
+ if(o.reg!==false&&nmOwner()){const R=nmReg();if(R){R[n]=kind;const m=/^Tiểu (.+) Tử$/.exec(n);if(m)R["Lão "+m[1]+" Tử"]=kind/* j25 ageInit: the same eunuch at 45 */}}return n}
+window.nmNew=nmNew;window.nmPers=nmPers;window.nmBare=nmBare;window.nmBad=nmBad;window.nmPeople=nmPeople;
 /* ONE per-life registry (review/newlife-reset, owner bug 17/11): S and rivals are rebuilt by start() / deser(); every OTHER store that belongs to one
    life (module-level lets, window.* holding people, timers, scenes) registers itself here: lifeStore(name, reset). j93 kmReset runs every reset on
    start() (new game, Luân hồi rebirth, co-op new life), on a slot load and on the title screen. LIFE_STORES = the names (dev/test/newlife-leak.js
@@ -1006,9 +1117,9 @@ function originRoot(k){const b=ORIGIN_BR[k];return b?b.par:k}
 /* branch of origin k for a roll r in [0,1): weights BAL.orig.br[k] ({branch key: weight}); an origin without branches is itself */
 function originBrPick(k,r){try{const W=BAL.orig.br[k];if(!W)return k;const L=Object.keys(W).filter(b=>W[b]>0&&originByKey(b));const tot=L.reduce((a,b)=>a+W[b],0);
  let x=r*tot;for(const b of L){x-=W[b];if(x<0)return b}return L.length?L[L.length-1]:k}catch(e){return k}}
-const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
-const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
-const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];
+const SURN=NM_SUR;/* one name core: jname.js */
+const GIVEN=NM_F;
+const MALEN=NM_M;
 /* TRAITS = figure LOOK keys only (FIGURES.json trait tags via TRK) + old malice; nết come from the ONE pool BAL.net (jnet.js) */
 const TRAITS=[["Xảo quyệt",80],["Kiêu ngạo",55],["Ân cần",15],["Kín đáo",45],["Tham vọng",65],["Khiêm nhường",25]];
 /* ONE trait-label map (owner 17/11 05:35Z): "Hiểm độc" renamed "Xảo quyệt" everywhere the player reads it. Old saves/codes store the old word: deser() runs trMigrate() so they load as the new label (behaviour keys unchanged). Add future renames HERE only. */
@@ -1019,9 +1130,9 @@ function trMigrate(o){const OLD=Object.keys(TRAIT_OLD);const fx=s=>{for(const k 
   for(const k0 of Object.keys(x)){let k=k0;if(TRAIT_OLD[k0]&&!(TRAIT_OLD[k0] in x)){x[TRAIT_OLD[k0]]=x[k0];delete x[k0];k=TRAIT_OLD[k0]}const v=x[k];if(typeof v==="string"){const n=fx(v);if(n!==v)x[k]=n}else w(v,d+1)}};w(o,0);return o}
 const SEASON=["Xuân","Xuân","Xuân","Hạ","Hạ","Hạ","Thu","Thu","Thu","Đông","Đông","Đông"];
 const TUAN=["thượng tuần","trung tuần","hạ tuần"];
-const MAIDS=["Tiểu Đào","Bích Ngọc","Xuân Hạnh","Thu Cúc","Hồng Liên","Tiểu Thúy","Lục Châu","Hạ Vân","Tố Cầm","Ngọc Lan"];
-const PRINCE=["Vĩnh Kỳ","Vĩnh Diễm","Hoằng Trú","Vĩnh Thành","Miên Ninh","Vĩnh Tinh","Hoằng Chiêm","Vĩnh Dung","Dận Tường","Vĩnh Lân","Miên Khải","Hoằng Diệu"];
-const PRINCESS=["Hòa Kính","Hòa Gia","Ngọc Dung","Tĩnh An","Hòa Thạc","Ninh Thọ","Thục Thận","Hòa Khác","An Lạc","Vĩnh Gia","Thục Nghi","Uyển Trinh"];
+const MAIDS=NM_MAID;
+const PRINCE=NM_PX;
+const PRINCESS=NM_PRINCESS;
 const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu → ta: thiện cảm",hh:"Hoàng hậu → ta: thiện cảm",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Lòng cung nữ"};
 const ETRAITS={
  danghi:["Đa nghi","Mưu kế dễ bị lộ hơn, nhưng lời vu cáo khó gỡ hơn."],
@@ -1120,8 +1231,8 @@ function fx(cls,el){const e=el||$("game");e.classList.remove(cls);void e.offsetW
 
 /* people helpers */
 function allKids(){const a=[];if(S&&S.kids)S.kids.forEach(k=>a.push([k,null]));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>a.push([k,v])));return a}
-function mkKid(sex,age){const used=allKids().map(([k])=>k.name);const pre=sex==="m"?"Hoàng tử ":"Công chúa ";const pool=(sex==="m"?PRINCE:PRINCESS).filter(n=>!used.includes(pre+n));
-  return {name:pre+(pool.length?pick(pool):pick(sex==="m"?PRINCE:PRINCESS)+" "+(R(9)+2)),sex,age,hp:80+R(21),tal:20+R(50),fond:30+R(30),alive:true,heir:false,fv:1+R(2)}}
+function mkKid(sex,age){const used=allKids().map(([k])=>k.name);const pre=sex==="m"?"Hoàng tử ":"Công chúa ";/* one name core (jname.js) */
+  return {name:pre+nmNew(sex==="m"?"prince":"princess"),sex,age,hp:80+R(21),tal:20+R(50),fond:30+R(30),alive:true,heir:false,fv:1+R(2)}}
 /* palace-start (owner 16/11 "game starts right after the accession", amended: "about 4 small children, close in age"): a new game seeds
    BAL.ps.kidN-weighted 3–5 children in the whole palace, ages kidAge (1–4), princes and princesses mixed (sonP each, at least one of each),
    mothers in BAL.ps rank ranges; the Hoàng hậu never has a son at the start (no đích tử) and nobody is grown, so the player can still compete.
@@ -1158,10 +1269,7 @@ function pgUp(v,n,why){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.p
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(S,d,why,v)}catch(e){}return d}
 function ghenAll(n,why){const d=ghenN(n);liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
-function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>n.startsWith(x+" "))).filter(Boolean);
-  let ss=SURN.filter(x=>!sur.includes(x));if(!ss.length)ss=SURN;
-  for(let t=0;t<200;t++){const n=pick(ss)+" "+pick(GIVEN);if(!used.includes(n)&&!used.some(u=>u.endsWith(" "+n.split(" ").slice(-2).join(" "))))return n}
-  for(const a of SURN)for(const b of GIVEN){const n=a+" "+b;if(!used.includes(n))return n}return pick(SURN)+" "+pick(GIVEN)+" "+(R(90)+10)}
+function freshName(){return nmNew("f")}/* one name core (jname.js): unique across the save, living + dead */
 function ghenNew0(){return R(BAL.ghenNew)}/* ONE CORE: the jealousy a new face starts with (newRival + co-op part B rebase) */
 function newRival(rank,isQueen){const t=pick(TRAITS);
   return rstats({id:++rid,name:freshName(),rank,queen:!!isQueen,trait:t[0],malice:t[1]+R(20)-10,sung:20+rank*9+R(10),rel:isQueen?-5:R(20)-10,ev:0,alive:true,out:false,
@@ -1204,7 +1312,7 @@ function start(){
   try{if(typeof kmReset==="function")kmReset()}catch(e){}/* a new life starts with no scene / overlay / queued job of the last one (j93 kmReset) */
   const o=(window.__forceOrigin&&originByKey(window.__forceOrigin))||(o0=>originByKey(originBrPick(o0.k,Math.random()))||o0)(pick(ORIGINS));/* hòa thân: country branch (j1) */quiet=true;Q=[];popIdx=null;popMsg="";
   S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,th:o.th,hh:o.hh,tai:30+R(50),sac:40+R(55),tamco:10+R(20),duc:30,thu:0,
-     schemes:0,moreRivals:0,maid:newMaid(pick(MAIDS),50+R(31)),origin:o,name:"",
+     schemes:0,moreRivals:0,maid:newMaid(nmNew("maid"),50+R(31)),origin:o,name:"",
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false,lad6:1/* maid-ladder-6: born on the six-rung maid ladder */};
@@ -1336,7 +1444,7 @@ function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
  if(k==="tyv")ppl.push({kind:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
  if(k==="ksp")ppl.push({kind:"ksp",name:(S.court&&S.court.ksp&&S.court.ksp.name)||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
- /* D4 (owner OD:L641): Phế phi họ Lý STAYS beside fallen rivals until she dies; then the post is empty until a real person arrives */
+ /* D4 (owner OD:L641): Phế phi họ Tần STAYS beside fallen rivals until she dies; then the post is empty until a real person arrives */
  if(k==="lc")lcPeople("Phế phi").forEach(x=>ppl.push(x));
  if(!msg){msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";cap.cnt=1}
  if(cap.emp)cap.cur=msg;S.visit={k,people:ppl,talked:false,tk:{},msg,cap};log(`Đến ${P.n}.`);render()}
@@ -1588,7 +1696,7 @@ muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. D
   else A.push({n:"Xin phong tước cho cha",t:S.th>=30?"Nhờ Thái hậu nói giúp trước mặt Hoàng thượng.":`Cần Thái hậu ủng hộ 30 (nay ${S.th}).`,c:{suc:-5},o:od(BAL.odb.j4.odO_4+S.danh/4+S.th/5),w:{danh:10},l:{th:-8},lock:S.th<30,x:"cha được phong tước",go:()=>{st.step=3;stEnd(1,"Nhà được phong tước")}});
   return A}},
 cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một mối tình cũ đe dọa hủy ngươi. Lên tới bậc Phi để rửa sạch thân phận.",
- init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+pick(SURN)+" "+pick(MALEN);S.st.secret=0},
+ init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+nmNew("m");S.st.secret=0},
  hint:()=>["Chủ cũ sắp làm khó ngươi","Chuyện cũ sắp bị khơi lại",`Lên bậc Phi (nay ${RANKS[S.rank].n})`][S.st.step]||"",
  month(){const st=S.st,m=st.mis;
   /* npc-purpose: only the old mistress knows (her eunuch sniffed it out, PEND.cn2); she carries the letters when her plan is ripe (story clock cn3) and she has a reason (npcTell) */
@@ -1639,7 +1747,7 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
   if(st.step===1&&qOn()&&npcWhy("story",npw1Sc(st,"ch2",{q}))){const o=od(BAL.odb.j4.odO_11+eyes(S)*5+S.tamco/4+S.th/5-(DG()?6:0));return setDil(mkP("ch2",{o}))}
   return""}},
 thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Được phong Tài nữ, rồi xin khắc in sách của cha. Coi chừng kẻ vu ngươi đạo thơ.",
- init(){S.st.stu="Hàn lâm "+pick(SURN)+" "+pick(MALEN);S.st.frames=0;S.st.title=0},
+ init(){S.st.stu="Hàn lâm "+nmNew("m");S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
   if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
@@ -1960,7 +2068,7 @@ function NM(p){return p===S?"ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu
 function NMc(p){return p===S?"Ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
 function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
-function maidMk(p){const mn=pick(MAIDS);/* a new maid's NAME only (name generation, not an NPC act) */return p===S?newMaid(mn,45):{name:mn,loyal:50}}
+function maidMk(p){const mn=nmNew("maid");/* a new maid's NAME only (name generation, not an NPC act) */return p===S?newMaid(mn,45):{name:mn,loyal:50}}
 function consorts(){const L=[S].concat(liveRivals(true));for(const p of L){if(!p.maid)p.maid=maidMk(p);if(!p.staff)p.staff=[]}return L}
 function others(p){return consorts().filter(x=>x!==p)}
 function kidsOf(p){return (p.kids||[]).filter(k=>k.alive)}
@@ -1976,7 +2084,7 @@ function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
  d("age",18+R(8));d("sac",40+R(55));d("tai",30+R(50));d("tamco",Math.round((v.malice||40)/3)+R(20));d("duc",Math.max(5,65-Math.round((v.malice||40)/2))+R(15));
  if(typeof tmInstall==="function")tmInstall(v);/* 2f2: Tai mắt = her real placed spies, none at birth */d("danh",8+rank*8);d("bac",40+rank*20);d("suc",80);d("arts",{cam:R(3),ky:R(2),thi:R(3),hoa:R(2),vu:R(3),y:R(2)});d("artp",{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0});
- d("maid",{name:pick(MAIDS),loyal:50+R(31)});d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
+ d("maid",{name:nmNew("maid"),loyal:50+R(31)});d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
  d("lastPromo",0);d("inv",[]);d("evm",{});d("rl",{});d("ro",{});d("oan",0);d("an",0);d("nightLog",[]);d("th",R(20)-5);d("hh",R(20)-5);d("schemes",0);d("hieu","");d("dress",null);d("asthma",R(7)===0);d("pray",0);d("fert",0);d("thu",0);
  return v}
 function normAll(){const d=(k,x)=>{if(S[k]==null)S[k]=x};
@@ -2314,7 +2422,7 @@ function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSa
  if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){apply({sung:BAL.eff.j8.sungRivalNight});if(eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi. Sủng ${balSg(BAL.eff.j8.sungRivalNight)}. `}else if(DG()){ap(v,{sung:-6});}}
  if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(empGive(v,8,"night"))bestow(v,"night");return r}
-function sendMaid(a){const m=a.maid;const rise=roll(30);a.maid=a===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};if(a===S)S.tonight=null;
+function sendMaid(a){const m=a.maid;const rise=roll(30);a.maid=a===S?newMaid(nmNew("maid"),45):{name:nmNew("maid"),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=BAL.loy.close?BAL.eff.j8.sendMaid[0]:BAL.eff.j8.sendMaid[1]);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=BAL.loy.close?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}
  return `Cung nữ ${m.name} của ${NM(a)} hầu thay một đêm rồi được thả ra cung với chút bạc. `}
 function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length;p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
@@ -2370,8 +2478,8 @@ function maidMonthP(p){if(!p.maid)p.maid=maidMk(p);const m=p.maid;m.loyal=cl(m.l
  const pr=x=>Math.round(-BAL.tw.maid.bac*econSchemeMul(x,p));/* two-way law: buying a maid costs the player's price (Mua người trong cung nàng, Dùng bạc, same rank/guard multiplier); an NPC who cannot pay does not buy */const a=mindPickBy(pool.filter(x=>(x.bac||0)>=pr(x)),x=>Math.max(BAL.mind.pick.j8buy.floor,BAL.mind.pick.j8buy.top-rel(x,p))*mindW(x,"bribe"),null);/* npc-mind: was ARGMIN rel */if(!a)return"";ap(a,{bac:-pr(a)});const me=p===S;let ev;
  if(p.schemes>0){ap(p,{danh:-10});evA(a,p,BAL.eff.j8.evMaidMonthP);relAdd(a,p,BAL.eff.j8.maidMonthP);ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, đem chuyện ngươi bày mưu hại người kể ra ngoài.</span> Danh ${balSg(BAL.eff.j8.maidMonthP)}. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ. `;punish(p,"bị cung nữ tố giác mưu kế",2)}
  else{const g=Math.min(30,p.bac);ap(p,{bac:-g});ap(a,{bac:g});ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, lấy trộm hộp trang sức của ngươi rồi bỏ trốn.</span> Bạc -30. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, trộm bạc bỏ trốn. `}
- if(me){S.maid=newMaid(pick(MAIDS.filter(x=>x!==m.name)),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
- p.maid={name:pick(MAIDS),loyal:40};return eyes(S)>=3?ev:""}
+ if(me){S.maid=newMaid(nmNew("maid"),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
+ p.maid={name:nmNew("maid"),loyal:40};return eyes(S)>=3?ev:""}
 function maidMonth(){return maidMonthP(S)}
 function kidsMonth(){let ev="";const moms=[[S,S.kids]].concat(worldOn()?rivals.map(v=>[v,v.kids]):[]);/* NPC kids: host only */
  for(const [p,ks] of moms)for(const k of ks)if(k.alive){k.hp=Math.min(100,k.hp+BAL.eff.j8.hpKidsMonth);
@@ -3601,7 +3709,7 @@ A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&
 A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamco/5),f:(a,t)=>trip(a,t)});
 /* ================= HOUSEHOLDS: maids and eunuchs, one rule for every consort ================= */
 
-const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
+const EUN=NM_EUNX.map(x=>"Tiểu "+x+" Tử");/* one name core: jname.js (nmNew("eun")) */
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
    for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; Nữ đế (succession path c) = BAL.promo.capNd; a cung nữ (servant road) keeps no household.
@@ -3609,9 +3717,13 @@ let sidN=0;
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
  if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
-function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
-function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
- const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
+/* coop-staff-split: a co-op PLAYER serving as cung nữ is her coop entry in her mistress's staff on the OTHER seat only (on her own seat she is S),
+   and only while the world loops do not run (jcoopworld withoutFriend pulls her out); she is never one of the household's allotted servants
+   (as in solo, where the cung-nữ player is not in m.staff). Counted, she made the host trim a real servant at her arrival (that person
+   vanished) and every month the fill (her pulled) and the trim (her back) made and dropped one more — on the host only, so the two seats split. */
+function hhHas(p){const L=((p&&p.staff)||[]).filter(s=>s&&!s.coop);return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
+function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;
+ const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
 /* perf (review ag-all-2 r2 B5): the last owner found is checked first (one includes on one list); a moved servant falls through to the full scan */
 const OWN_C=new WeakMap();
@@ -3619,7 +3731,7 @@ function ownerOf(s){const o=s&&typeof s==="object";if(o){const c=OWN_C.get(s);if
  for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s)){if(o)OWN_C.set(s,p);return p}return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
 function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
- if(!S.court)S.court={tq:{name:"Tổng quản Lý Liên Anh",n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:"Tiểu Ngân Tử",n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
+ if(!S.court)S.court={tq:{name:"Tổng quản "+nmNew("eunE"),n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:nmNew("eun"),n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
  const L=allServ();if(!L.some(s=>s.af&&Object.keys(s.af).length))for(const s of L){const o=pick(L.filter(x=>ownerOf(x)!==ownerOf(s)));if(o){s.af[o.sid]=30;o.af[s.sid]=30}
   if(s.role==="eunuch"&&!(typeof asOn==="function"&&asOn())&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
@@ -4702,7 +4814,7 @@ SCIMG.home="tam-cung-dem";
 const MROLES=[["Thị vệ","thị vệ",["vuon","thu"],24,8],["Thái y","thái y",["tyv"],29,6],["Vương gia","vương gia",["vuon","tn"],27,6],["Nhạc sư","nhạc sư",["vuon"],31,10],["Sứ thần","sứ thần",["thu","vuon"],34,8],["Họa sư","họa sư",["vuon","tn"],30,10]];
 const MTR=["phong lưu","trung hậu","tham vọng","đa tình","cẩn trọng"];
 FPOOL.man=rng(1,8,i=>"face-man-"+i);
-function menInit(){if(!S||S.men)return;const sur=["Tiêu","Lục","Hàn","Thẩm","Bùi","Tống","Mạnh"];S.men=MROLES.map((r,i)=>({id:"m"+i,role:r[0],rw:r[1],haunts:r[2],age:r[3]+R(r[4]),name:`${r[0]} ${pick(sur)} ${MALEN[(i*3+R(3))%MALEN.length]}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]}));S.menW={};S.aff={}}
+function menInit(){if(!S||S.men)return;S.men=MROLES.map((r,i)=>({id:"m"+i,role:r[0],rw:r[1],haunts:r[2],age:r[3]+R(r[4]),name:`${r[0]} ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]}));S.menW={};S.aff={}}
 function manById(id){return (S.men||[]).find(m=>m.id===id&&m.alive)||null}
 function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(AV.emperor||[]).filter((x,i)=>i!==S.emp.face)[Number(m.id.slice(1))%3]||"";return{rk:"off",rw:m.role,src:fsrc(m.fc,fb),hue:0,ini:m.name.split(" ").pop()[0],col:"#6a8aa0"}}
 /* where the men are this buổi (silhouettes on the map, revealed on arrival) */
@@ -4781,7 +4893,7 @@ function manCard(m){const f=pMan(m);const known=m.seen===bkey();
    const tw=watcher();const tw0=tw?(tw.s||S.maid):(S.maid||(S.staff||[]).find(x=>x&&x.name));/* G1 #9 (RE-CHECK 3 item 3): her own people (the loyal watcher first, else her maid / a servant of her house) pick up the talk; the finding = the old odds (done roll) */if(tw0&&npcWhy("taimat",{w:tw0,v},()=>roll(npw1B("j22").see+eyes(S)*npw1B("j22").seeEye))){/*evok: pregMismatch (deedSync)*/evA(S,v,BAL.eff.j22.evTop_3);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ ${balSg(BAL.eff.j22.evTop_3)})`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
   if(!v.preg){v.pregMismatch=false;v.trueFather=null}}}catch(e){}return ev}})();
 /* older lives get the men added later (the họa sư) */
-(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&S.men.length<MROLES.length){for(let i=S.men.length;i<MROLES.length;i++){const r2=MROLES[i];S.men.push({id:"m"+i,role:r2[0],rw:r2[1],haunts:r2[2],age:r2[3]+R(r2[4]),name:`${r2[0]} ${pick(["Tiêu","Lục","Hàn","Bùi","Tống","Mạnh"])} ${pick(MALEN)}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
+(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&S.men.length<MROLES.length){for(let i=S.men.length;i<MROLES.length;i++){const r2=MROLES[i];S.men.push({id:"m"+i,role:r2[0],rw:r2[1],haunts:r2[2],age:r2[3]+R(r2[4]),name:`${r2[0]} ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 /* ================= LEARNING: three roads, a milestone at every grade, gains shown on the button ================= */
 const ARTDO={cam:"Tài: thơ, đàn, thi tài; dễ được Hoàng thượng để ý",ky:"Tài và Tâm cơ: đánh cờ, đoán ý người",thi:"Tài: làm thơ, bàn chuyện với Hoàng thượng",hoa:"Tài: vẽ tranh dâng tặng, Thái hậu quý",vu:"Sắc: múa ở yến tiệc, được chú ý",y:"Sắc: điều hương, nhận ra độc, chữa bệnh"};
 const ARTMS={
@@ -6079,7 +6191,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  gtDays:4,
  posts:[
   {id:"gt",title:"Giáo tập ma ma",palace:"Nội vụ phủ",master:"th",tr:"trung",rk:5,age:[50,55],
-   names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
+   names:[["Tống Quế Chi","Tống ma ma"],["Lạc Uyển Hề","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
    duties:["dạy tú nữ mới vào cung","giữ lễ nghi, cung quy","coi việc tuyển tú","dặn dò người mới"]},
   {id:"tn",title:"Chưởng sự cô cô",palace:"Đức Thọ cung",master:"th",tr:"lanh",rk:4,age:[44,49],
    names:[["Hà Tú Dung","Hà cô cô"],["Mạnh Bích Liên","Mạnh cô cô"],["Kiều Thanh Đào","Kiều cô cô"]],
@@ -7347,7 +7459,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
 
 /* ---------- rising: she joins the consort game ---------- */
 function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
- S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
+ S.maid=newMaid(nmNew("maid"),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
  if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
@@ -7979,8 +8091,8 @@ function h54Pool(){S.hPool=S.hPool||[];return S.hPool}
 function h54Son(id){return h54Pool().find(s=>s.id===id)||null}
 function h54Q(s){return (3-s.tier)*20+s.sac/5+s.tai/5}
 function h54NewSon(){const P=h54Pool();const used=namesInUse().concat(P.map(s=>s.name),allKids().map(([k])=>k.hW&&k.hW.s?k.hW.s.name:"")).filter(Boolean);
- const house=pick(CLANS);const surU=P.filter(s=>!s.taken).map(s=>s.name.split(" ").slice(0,-2).join(" "));const SS=SURN.filter(x=>!surU.includes(x));const head=P.some(s=>!s.taken&&s.house===house&&s.tier===0);let tier=R(100)<20&&!head?0:R(100)<45?1:2;
- let name="";for(let t=0;t<80&&!name;t++){const n=pick(SS.length?SS:SURN)+" "+pick(MALEN);if(!used.includes(n))name=n}if(!name)name=pick(SURN)+" "+pick(MALEN)+" "+(R(80)+10);
+ const house=pick(CLANS);const surU=P.filter(s=>!s.taken).map(s=>s.name.split(" ").slice(0,-2).join(" "));const head=P.some(s=>!s.taken&&s.house===house&&s.tier===0);let tier=R(100)<20&&!head?0:R(100)<45?1:2;
+ const name=nmNew("m",{avoidSur:new Set(surU)});
  S.hSid=(S.hSid||0)+1;const s={id:S.hSid,name,house,tier,off:H54OFF[house][tier],age:18+R(6),sac:40+R(56),tai:30+R(66),taken:null};P.push(s);return s}
 function h54PoolUp(){const P=h54Pool();for(let i=P.length-1;i>=0;i--){const s=P[i];if(!s.taken&&s.age>27){h54FreeFace(s);P.splice(i,1)}}let n=P.filter(s=>!s.taken).length;while(n<8){h54NewSon();n++}}
 function h54FreeFace(s){try{if(s.fid){const U=figUsed();const i=U.indexOf(s.fid);if(i>=0)U.splice(i,1)}}catch(e){}}
@@ -8205,9 +8317,9 @@ function tdOn(){return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
 function tdSur(n){const w=String(n||"").split(" ");return w.length>2?w.slice(0,w.length-2).join(" "):w[0]}
 function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;
  const T={H:{},rel:{},bien:58+R(10),kho:58+R(10),news:[],de:{},clean:{},soT:-9,tyY:-9,praise:null};S.trieu=T;
- const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));const sur=shuf(SURN.filter(x=>!usedS.has(x)));const giv=shuf(MALEN.slice());
+ const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));
  CLANS.forEach((c,i)=>{const mine=(c==="Tể tướng"&&S.origin.k==="tt")||(c==="Đại tướng quân"&&S.origin.k==="dtq");
-  const h={c,isMin:1,name:(mine?tdSur(S.name):(sur[i]||pick(SURN)))+" "+(giv[i]||pick(MALEN)),age:46+R(20),sex:"m",pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
+  const h={c,isMin:1,name:nmNew("m",mine?{sur:tdSur(S.name)}:{avoidSur:usedS}),age:46+R(20),sex:"m",pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
   h.corrupt=roll(BAL.odb.j55.rbCorrupt+(nv(h,"corrupt")));T.H[c]=h});
  const k=(a,b)=>[a,b].sort().join("|");T.rel[k("Tể tướng","Đại tướng quân")]=-30;T.rel[k("Lễ bộ","Hàn lâm")]=30;
  for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const kk=k(CLANS[i],CLANS[j]);if(T.rel[kk]==null)T.rel[kk]=R(41)-20}
@@ -8915,24 +9027,18 @@ j59dock();
 /* ---------- PERSONAL NAMES (owner 11/15 07:30Z): a post is never a name. Line 1 of the chip = the post ("Tổng quản Kính sự phòng"),
    line 2 = a real personal name. Court officers without one get a stable cổ trang name, unique in this life, saved in S.court (old saves
    get theirs on the first render after loading); the stage, the person card and every dialog read the same p.name. ---------- */
-const J59SUR=["Lưu","Tô","Cao","Thôi","Đặng","Mã","Phùng","Lương","Tào","Viên","Hà","Khổng","Diêu","Phó","Lục","Tiền","Mạc","Đổng"];
-const J59EUN=["Phúc An","Bảo Thuận","Đức Hải","Kính Trung","Trường An","Tiến Hỷ","Thủ Nghĩa","Lộc Toàn","Vĩnh Thọ","Ngọc Thành","Thuận Đức","Hỷ Lâm"];
-const J59DOC=["Tế An","Thế Khanh","Hoài Nhân","Bá Ngôn","Tử Hiên","Văn Chiêu","Minh Viễn","Thừa Ân"];
-const J59FAL=["Uyển Dung","Tố Tâm","Nhược Lan","Thục Hoa","Ngọc Dao","Tĩnh Nghi"];
-function j59taken(){const T=new Set();const add=n=>{if(n)T.add(String(n).trim())};try{add(S.name);(rivals||[]).forEach(v=>add(v.name));(S.men||[]).forEach(m=>add(m.name));if(S.maid)add(S.maid.name);
- (rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>add(s.name)));const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)add(C[k].pn);(S.dnames||[]).forEach(add)/* D4: never a dead person's name */}catch(e){}return T}
-function j59gen(sur,given){const T=j59taken();const L=[];/* r1 npc-death: never the given name of a living 3-word name either (j61 masks "Nhược Lan" of an unknown "Mạnh Nhược Lan" inside "Lý Nhược Lan" → "Lý Đáp ứng ???") */const G=new Set([...T].map(n=>n.split(" ")).filter(w=>w.length>=3).map(w=>w.slice(-2).join(" ")));for(const a of sur)for(const b of given)if(!T.has(a+" "+b)&&!G.has(b))L.push(a+" "+b);if(!L.length)for(const a of sur)for(const b of given)if(!T.has(a+" "+b))L.push(a+" "+b);return L.length?L[Math.floor(Math.random()*L.length)]:sur[0]+" "+given[0]}
+function j59gen(kind){return nmNew(kind)}/* one name core (jname.js) */
 function j59CourtNames(){/* was a second global kitNames (j65 owns that name for log lines and won, so court officers were never named; review/pick-hint-r1) */try{const C=S&&S.court;if(!C)return;
- if(C.tq&&!C.tq.pn){const n=String(C.tq.name||"").replace(/^Tổng quản\s+(thái giám\s+)?/i,"").trim();C.tq.pn=n&&n.split(" ").length>=2?n:j59gen(J59SUR,J59EUN)}
- if(C.ksp&&!C.ksp.pn)C.ksp.pn=j59gen(J59SUR,J59EUN);
- if(C.ped&&!C.ped.pn){const n=String(C.ped.name||"");C.ped.pn=n&&!/^Thái giám|Tổng quản/.test(n)?n:j59gen(J59SUR,J59EUN)}
- if(C.ty&&!C.ty.pn)C.ty.pn=j59gen(["Trương"],J59DOC);
- if(C.lcf&&C.lcf.pn&&!S.lcfPn)S.lcfPn=C.lcf.pn;if(C.lcf)delete C.lcf;if(!S.lcfPn)S.lcfPn=j59gen(["Lý"],J59FAL);
+ if(C.tq&&!C.tq.pn){const n=String(C.tq.name||"").replace(/^Tổng quản\s+(thái giám\s+)?/i,"").trim();C.tq.pn=n&&n.split(" ").length>=2?n:j59gen("eunE")}
+ if(C.ksp&&!C.ksp.pn)C.ksp.pn=j59gen("eunE");
+ if(C.ped&&!C.ped.pn){const n=String(C.ped.name||"");C.ped.pn=n&&!/^Thái giám|Tổng quản/.test(n)?n:j59gen("eunE")}
+ if(C.ty&&!C.ty.pn)C.ty.pn=nmNew("doc",{sur:"Trương"});
+ if(C.lcf&&C.lcf.pn&&!S.lcfPn)S.lcfPn=C.lcf.pn;if(C.lcf)delete C.lcf;if(!S.lcfPn)S.lcfPn=nmNew("f",{sur:"Tần"});/* the cold-palace stand-in is "Phế phi họ Tần" (jly) */
  /* the post stays in c.n; c.name becomes the personal name, so every reader (cards, the name table of j79, texts) sees the same name */
  for(const k of ["tq","ksp","ped","ty"])if(C[k]&&C[k].pn&&C[k].name!==C[k].pn)C[k].name=C[k].pn;
  const V=S.visit;if(V&&V.people)for(const p of V.people){if(!p)continue;const k=p.kind==="srv"?p.sk:p.kind;
   if(k==="ksp"&&C.ksp&&!p.ref)p.name=C.ksp.pn;else if(k==="peddler"&&C.ped&&!p.ref)p.name=C.ped.pn;else if(k==="ty"&&C.ty)p.name=C.ty.pn;else if(k==="fallen"&&!p.ref)p.name=S.lcfPn}}catch(e){}}
-window.j59CourtNames=j59CourtNames;window.j59gen=j59gen;window.J59N={SUR:J59SUR,EUN:J59EUN,DOC:J59DOC,FAL:J59FAL};/* D4 npc-death: jmort names a replacement officer with the same rule */
+window.j59CourtNames=j59CourtNames;window.j59gen=j59gen;/* D4 npc-death: jmort names a replacement officer with the same rule */
 /* ---------- ONE HEAD COUNT (owner 11/15 06:55Z): kitHereCount() = the OTHER people (not her, not a chest or an errand) on the stage
    of the place she stands in. The stage title ("Ở đây còn N người"), the page chips and the Dư đồ label of that place all read it;
    Dư đồ counts other people only (her own place wears her own mark). ---------- */
@@ -10020,7 +10126,7 @@ ARC67.cn_chu=arcFx("cn_chu",{o:"cn",t:"Chủ cũ",w:"v",sj:"chuyện ngươi t�
   mid:{tag:"Nước sông không phạm nước giếng",t:"Ngươi và {v} giữ lễ với nhau, không hơn."},
   lose:{tag:"Mang tiếng hẹp lượng",t:"Người ta nói ngươi lên cao rồi quay lại trả thù chủ cũ. Thái hậu lạnh nhạt, {v} hận ngươi đến xương.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])}}});
 ARC67.cn_tinh=arcFx("cn_tinh",{o:"cn",t:"Mối tình thuở hầu trà",w:"maid",sj:"mối tình cũ của ngươi",g:"Thuở còn hầu trà, ngươi từng hẹn ước với một thị vệ. Nay hắn gác cửa cung ngươi, và vài bức thư cũ vẫn còn đâu đó. Chôn quá khứ cho sạch, trước khi kẻ khác đào nó lên.",
- cast(A){A.n1="thị vệ "+pick(SURN)+" "+pick(MALEN);return true},
+ cast(A){A.n1="thị vệ "+nmNew("m");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.ill"],["t1"],["x1"]],
  B:{
  s1:{h:"Người cũ gác cửa",w:"maid",t:"{maid} tái mặt: {n1}, người năm xưa hẹn ước với ngươi, vừa được đổi về gác cửa cung ngươi.",o:[
@@ -10466,7 +10572,7 @@ ARC67.ch_bi=arcFx("ch_bi",{o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật n
   lose:{tag:"Liên lụy chuyện cũ",t:"Hoàng thượng xa lánh Thái hậu, kéo theo cả ngươi. Đức Thọ cung không còn đủ sức che chở."}}});
 /* ================= CON GÁI THẦY ĐỒ ================= */
 ARC67.thd_tho=arcFx("thd_tho",{o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi",g:"Thơ ngươi có thể làm rạng danh người cha nghèo. Hàn lâm viện sắp mở kỳ thi Tài nữ trong cung, và có kẻ đang chờ vu ngươi đạo thơ.",
- cast(A){A.n1="Hàn lâm "+pick(SURN)+" "+pick(MALEN);castRv67(A,"v");return true},
+ cast(A){A.n1="Hàn lâm "+nmNew("m");castRv67(A,"v");return true},
  p:[["s1","s2"],["c1","c2","c3","G.rival","G.night"],["t1"],["x1"]],
  B:{
  s1:{h:"Bài thơ lọt ra ngoài",w:"maid",t:"Một bài thơ ngươi viết trên quạt lọt ra ngoài cung. {n1}, học trò cũ của cha, đem bình khắp kinh thành.",o:[
@@ -10525,7 +10631,7 @@ ARC67.thd_sach=arcFx("thd_sach",{o:"thd",t:"Bản thảo của cha",w:"maid",sj:
   mid:{tag:"Sách cha còn một nửa",t:"Sách cha còn lại một nửa trên đời. Ngươi giữ được mình."},
   lose:{tag:"Sách bị cấm",t:"Sách bị cấm, ngươi bị Hoàng thượng trách là để sách phỉ báng triều thần lọt vào cung."}}});
 ARC67.thd_tro=arcFx("thd_tro",{o:"thd",t:"Học trò của cha",w:"maid",sj:"chuyện khoa thi và học trò của cha",g:"Một học trò nghèo của cha thi Hội đỗ đầu, rồi bị đánh trượt vì có kẻ mua đề. Hắn xin ngươi giúp. Chuyện khoa cử là việc lớn, chạm vào là chạm đến cả triều.",
- cast(A){A.n1=pick(SURN)+" "+pick(MALEN);return true},
+ cast(A){A.n1=nmNew("m");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.emp"],["t1"],["x1"]],
  B:{
  s1:{h:"Lá thư của học trò",w:"maid",t:"Thư của {n1}: ‘Con đỗ đầu mà bị đánh trượt. Bài của con bị đổi tên.’",o:[
@@ -10709,7 +10815,7 @@ ARC67.cnv_ma=arcFx("cnv_ma",{o:"cnv",t:"Ma ma dạy việc",w:"maid",sj:"chuyệ
 /* ================= SHARED ARCS (any origin, drawn later in the life) ================= */
 const nsrv67=()=>!(typeof isSrv==="function"&&isSrv());
 ARC67.s_than=arcFx("s_than",{o:"*",ok:nsrv67,t:"Người thân thất lạc",w:"eun",sj:"chuyện người tự nhận là thân thích",g:"Một tiểu thái giám mới vào cung lén tìm ngươi, nói hắn là em họ thất lạc từ nạn lụt năm xưa. Thật hay giả, ơn hay họa, chưa ai biết.",
- cast(A){A.n1="Tiểu "+pick(["Lục","An","Phúc","Thuận","Hỉ"])+" Tử";return true},
+ cast(A){A.n1=nmNew("eun");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.rumor"],["t1"],["x1"]],
  B:{
  s1:{h:"Một tiểu thái giám tìm ngươi",w:"eun",t:"{n1} quỳ trước ngươi, nước mắt lưng tròng, đọc đúng tên làng quê mẹ ngươi.",o:[
@@ -15494,7 +15600,7 @@ RD97L.push(rdRare({a:"cn_chu_11",tag:"Chủ cũ tạ lỗi trước Hoàng hậu
    every chapter (taken from the .4 thread when it is still reachable, else a new name). {v} = the consort whose people held the letter
    in .4 (introduced here from .5 on and carried by rdCast). */
 const CNTINH_G=A=>{try{const f=S.st.f14||{};if(!f.cnG){let n=f.n1||"";if(!n)for(const t of [S.st.M].concat(S.st.X||[]))if(t&&t.a==="cn_tinh"&&t.n1){n=t.n1;break}
-  f.cnG=n||("thị vệ "+pick(SURN)+" "+pick(MALEN))}A.n1=f.cnG}catch(e){A.n1="thị vệ năm xưa"}return true};
+  f.cnG=n||("thị vệ "+nmNew("m"))}A.n1=f.cnG}catch(e){A.n1="thị vệ năm xưa"}return true};
 
 rdDef("cn_tinh",5,{t:"Thư cũ",w:"maid",sj:"những bức thư năm xưa",cast(A){return CNTINH_G(A)&&rdCast(A,["v"])},
  g:"Một bức thư đã từng bị trình lên Hoàng thượng. Những bức còn lại vẫn trôi nổi đâu đó, và người của {v}, kẻ đứng sau lần trình thư trước, cũng đang tìm. Phải tìm thấy trước họ.",
@@ -18442,7 +18548,7 @@ rdDef("td_an",5,{t:"Bản sớ gốc",w:"eun",sj:"tờ sớ vu cáo năm xưa",c
   {n:"Đáp: tìm để thắp hương cho cha",wx:"không lộ ý",lx:"{foe} không tin",rt:"{foe} không hỏi thêm."},
   {n:"Đáp thẳng: để lật án",wx:"{foe} chột dạ, lộ ra nỗi sợ",lx:"{foe} báo cha",go:(A,ok,G)=>{const e=foe67();if(e)oanAdd(e,S,ok?G[0]:G[1])},rt:"Người đưa tin kể: {foe} làm rơi chén trà.",rf:"Ngay chiều ấy, phủ {foed} đóng cổng."},
   {n:"Không đáp",wx:"giữ kín",lx:"{foe} càng nghi",rt:"Người đưa tin đứng chờ rồi về."}]},
- t1:{h:"Son phê và ấn giả",w:"maid",t:"{maid} lén xem được bản gốc: ấn Binh bộ lệch một nét ở chữ “Binh”. Thợ khắc ấn năm ấy họ Lý, nay mở hàng khắc dấu ở ngoại thành.",o:[
+ t1:{h:"Son phê và ấn giả",w:"maid",t:"{maid} lén xem được bản gốc: ấn Binh bộ lệch một nét ở chữ “Binh”. Thợ khắc ấn năm ấy họ Tần, nay mở hàng khắc dấu ở ngoại thành.",o:[
   {n:"Tìm thợ Lý",f:"seal",wx:"có người làm chứng về ấn",lx:"thợ Lý bỏ trốn",rt:"Thợ Lý nhìn bản dập rồi tái mặt: “Nét này là tay tiểu nhân.”",rf:"Hàng khắc dấu đóng cửa từ hôm qua."},
   {n:"Nhờ người đối chiếu với ấn thật ở Binh bộ",f:"seal",wx:"chứng được ấn giả bằng mắt",lx:"Binh bộ hỏi ai sai người xem ấn",rt:"Hai bản dập đặt cạnh nhau: lệch đúng một nét.",rf:"Binh bộ không cho dập ấn."},
   {n:"Chỉ ghi lại, chưa động",wx:"không ai biết ngươi đã thấy",lx:"chứng cứ mới chỉ là lời",rt:"Ngươi vẽ lại nét lệch vào sổ riêng."}]},
@@ -21136,7 +21242,7 @@ RD97L.push(rdRare({a:"thd_sach_11",tag:"Sách mở đường cải cách, cha v�
    {n2} = the false Tiến sĩ of an earlier exam, elder cousin (biểu huynh) of {v}, from {v}'s maternal house (engine-carried S.st.f14.n2).
    Enemy house = {v}'s maternal house (bought the paper in .4); the official behind the leak = "Thị lang bộ Lễ" (Phó chủ khảo), never named. */
 function thdTroCast(A){/* {n1}/{n2} are carried by the engine (jroad: S.st.f14.n1/n2, saved at each chapter end); a name is made only when none exists yet */
- try{const f=(S.st&&S.st.f14)||{};const nm=()=>pick(SURN)+" "+pick(MALEN);A.n1=A.n1||f.n1||nm();A.n2=A.n2||f.n2||nm()}catch(e){A.n1=A.n1||"học trò của cha";A.n2=A.n2||"biểu huynh của nàng ta"}
+ try{const f=(S.st&&S.st.f14)||{};const nm=()=>nmNew("m");A.n1=A.n1||f.n1||nm();A.n2=A.n2||f.n2||nm()}catch(e){A.n1=A.n1||"học trò của cha";A.n2=A.n2||"biểu huynh của nàng ta"}
  return rdCast(A,["v"])}
 
 rdDef("thd_tro",5,{t:"Đề thi bị bán",w:"maid",sj:"kẻ bán đề thi trong Lễ bộ",cast:thdTroCast,
@@ -24234,7 +24340,7 @@ giaothua:[["C","doi","Đêm giao thừa, Hoàng thượng ra vế đối tiễn 
 const FBIG7=["newyear","trungthu","vantho","thanhtho","giaothua"];
 const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ngựa Hoàng Phiêu"],rong:["rồng cửa Đông Hoa","rồng cửa Tây Hoa","rồng cửa Thần Vũ","rồng Ngọ Môn"],dieu:["diều phượng","diều rồng","diều hạc","diều bướm"],
  thuyen:["đội Thanh Long","đội Bạch Hổ","đội Chu Tước","đội Huyền Vũ"],thuyen2:["thuyền Ngự thiện phòng","thuyền Nội vụ phủ","thuyền Kính sự phòng","thuyền Ngự mã giám"],thuyen3:["thuyền đèn sen","thuyền đèn cá chép","thuyền đèn rồng","thuyền đèn thỏ ngọc"],
- xa:["thị vệ họ Lý","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
+ xa:["thị vệ họ Hách","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
 function form7(s){return s>=BAL.cut.form[2]?"phong độ rất tốt":s>=BAL.cut.form[1]?"phong độ tốt":s>=BAL.cut.form[0]?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>statTxt(k,v)).join(", ")}
@@ -26984,10 +27090,10 @@ function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
- const t=o.noTitle?"":kitTitleOf(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
+ const t=o.noTitle?"":kitTitleOf(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Tào Đức Hải" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
-/* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Lý Liên Anh"): ONE rule for every title + name builder —
-   some names carry their own title ("Tổng quản Lý Liên Anh"); the words of the name's start that the title already says are dropped.
+/* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Tào Đức Hải"): ONE rule for every title + name builder —
+   some names carry their own title ("Tổng quản Tào Đức Hải"); the words of the name's start that the title already says are dropped.
    kitTitledName(t,n) → the name part to print after t; kitTitled(t,n) → "t n" without a repeat (case ignored). */
 /* only words that are titles, never a surname that is also a rank word (Tần Khinh Vũ, rank Tần) */
 const KIT_NAME_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|vương gia|hoàng tử|công chúa|phế phi|quản sự|sứ thần|quan)$/;
@@ -32866,21 +32972,21 @@ function faceChoose(id){if(!faceOn()||!id||id===S.pid||!f88List(id).length)retur
    F.fidUsed=S.fidUsed.slice();store.set(NL_KEY,d)}}catch(e){console.error(e)}
  try{const src=faceImg(id,S,"por");if(src&&typeof PORK!=="undefined"&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1};im.src=src}}catch(e){}
  return true}
-/* owner 16:40Z: "Phế phi họ Lý" (the cold-palace stand-in shown while no rival has fallen) had an empty frame — no ref, so figRoles gave
+/* owner 16:40Z: "Phế phi họ Tần" (the cold-palace stand-in shown while no rival has fallen) had an empty frame — no ref, so figRoles gave
    no role. She is now ONE persistent person (S.lyF, saved; same face every visit) drawn from the cold-palace consort art (tier cold:
    plain clothes, no jewellery, no forehead mark), with the matching round portrait in the talk panel.
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
-/* B-answers art (D50): Phế phi họ Lý, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
+/* B-answers art (D50): Phế phi họ Tần, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
    fallen/steward/tutor, 4 age bands each, same manifest format). Until the manifest lists them, Lý keeps the cold-palace consort art. */
 const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:BAL.ly.npcAge.tgk,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:BAL.ly.npcAge.ttp,role:"tutor"}};
 function lyArt(){try{return !!(FIGIX&&FIGIX.fallen)}catch(e){return false}}
 function npcFixOf(p){if(!p||p.kind!=="npc"||p.sid)return null;const k=Object.keys(NPCFIX).find(k=>NPCFIX[k].name===p.name);if(!k||!(FIGIX&&FIGIX[NPCFIX[k].role]))return null;S.npcFix=S.npcFix||{};if(!S.npcFix[k])S.npcFix[k]={name:NPCFIX[k].name,age:NPCFIX[k].age,npcFix:k};return S.npcFix[k]}
-function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.age)||34,lyF:1};return S.lyF}
-/* D4 (owner OD:L641–642): who is in Trường Môn viện = the fallen rivals (up to BAL.mort.ly.lcShow) AND Phế phi họ Lý while she lives;
+function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Tần",age:(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.age)||34,lyF:1};return S.lyF}
+/* D4 (owner OD:L641–642): who is in Trường Môn viện = the fallen rivals (up to BAL.mort.ly.lcShow) AND Phế phi họ Tần while she lives;
    after her death (or her release in an old save) nobody stands in for her: the place is empty until a real person is sent there. */
 /* npc-death-wire: ONE Lý (alive or null) and ONE stage entry for her (record id c:ly, read by j95ppl / j95stage / j95ledObj / lcPeople) */
 function lyAlive(){const y=S&&lyFallen();return y&&!y.dead&&!y.freed?y:null}
-function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name:y.name,ini:"Lý",col:"#6a7a8a",info:info||"Phế phi"}:null}
+function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name:y.name,ini:"Tần",col:"#6a7a8a",info:info||"Phế phi"}:null}
 function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
  const q=lyEntry("Phế phi");if(q)L.push(q);return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
@@ -33327,7 +33433,7 @@ BAL.mort={on:1,playerFloorYears:0,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
  fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
- /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Lý in Trường Môn viện: age when the game starts, floor = minimum years she lives
+ /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Tần in Trường Môn viện: age when the game starts, floor = minimum years she lives
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
  ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
@@ -35584,13 +35690,13 @@ function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;co
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
 function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals||[]).forEach(v=>{if(v.alive&&!v.coop)L.push(v);(v.kids||[]).forEach(k=>k.alive&&L.push(k));(v.staff||[]).forEach(s=>!s.coop&&L.push(s))});
  const C=S.court||{};for(const k in C)L.push(C[k]);(S.men||[]).forEach(m=>m.alive!==false&&L.push(m));
- /* D4: Phế phi họ Lý is a world person (co-op: S.lyF is a world key, she rolls and dies on the host only) */
+ /* D4: Phế phi họ Tần is a world person (co-op: S.lyF is a world key, she rolls and dies on the host only) */
  if(typeof lyFallen==="function"){const y=lyFallen();if(y&&!y.dead&&!y.freed)L.push(y)}return L}
 function myPeople(){const L=[S];if(S.maid)L.push(S.maid);(S.staff||[]).forEach(s=>!s.coop&&L.push(s));(S.kids||[]).forEach(k=>k.alive&&L.push(k));return L}
 function people(){return (host()?worldPeople():[]).concat(myPeople())}
 function initAll(){if(!S||!M.on)return;const old=!S.mort;if(!S.mort)S.mort={v:1,old:old&&S.turn>0?1:0};const K=kidSet();for(const p of people())assign(p,K,S.mort.old)}
 const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
-const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
+const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"};
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
 /* death ledger for audits / bots: S.mort.dl = [{g group, a age, c cause, y year}] (last 300) */
 function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF===1?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
@@ -35605,9 +35711,9 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
- if(p===S.maid){const o=S.maid.name;S.maid=newMaid(typeof npcFreshName==="function"?npcFreshName(MAIDS,[o]):pick(MAIDS.filter(x=>x!==o)),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
+ if(p===S.maid){const o=S.maid.name;S.maid=newMaid(nmNew("maid"),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
- const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.name=`${pre} ${typeof npcFreshName==="function"?npcFreshName(HEIRN,[String(o).replace(pre+" ","")],pre+" "):pick(HEIRN)}`;p.af={};p.gen=(p.gen||0)+1;if(typeof window.j59gen==="function"&&window.J59N){const N=window.J59N;p.pn=window.j59gen(N.SUR,k==="ty"?N.DOC:N.EUN);p.name=p.pn}else delete p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
+ const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.af={};p.gen=(p.gen||0)+1;p.pn=nmNew(k==="ty"?"doc":k==="ped"?"eun":"eunE");p.name=p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.pn?pre+" "+p.name:p.name} lên thay. `}
  if((S.men||[]).includes(p)){p.alive=false;return ""}
  return ev}
@@ -36825,7 +36931,7 @@ function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v
  const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
- let nm="";for(let i=0;i<20;i++){const s=pick(V.sur||SURN.filter(x=>x.indexOf(" ")<0)),g=pick(MALEN);nm=`${s} ${g}`;if(!used.has(g))break}
+ const nm=nmNew("m",V.sur?{sur:pick(V.sur)}:{});
  const age=Math.max(19,Math.min(30,(S.age||18)+2+R(6)));const tr=k==="td"||k==="thd"?pick(["trung hậu","cẩn trọng"]):pick(MTR.filter(x=>x!=="phong lưu"));
  const m={id:"m96",role:V.role,rw:V.role.toLowerCase(),haunts:V.haunts.slice(),age,name:nm,trait:tr,loyal:70+R(25),af:20,tinh:62+R(14),letters:0,trysts:0,alive:true,knowsMe:[],tm96:k,known:1};
  S.men=S.men.filter(x=>x.id!=="m96");S.men.push(m);return m}
@@ -38504,7 +38610,7 @@ kitStageScale=function(){try{kitFigFx()}catch(e){}};kitStageEdge=function(){};
 (function(){if(typeof window.j59lay!=="function")return;const l0=window.j59lay;window.j59lay=function(){const r=l0.apply(this,arguments);try{kitFigFx()}catch(e){}return r}})();
 (function(){const st=$("stage");if(st)st.classList.remove("kscale")})();
 
-/* ---------- 17. kitName / kitTitle: never double a title. A name that already starts with its title ("Thái y Bùi Thừa Chí") or with any role
+/* ---------- 17. kitName / kitTitle: never double a title. A name that already starts with its title ("Thái y Tống Thừa Chí") or with any role
    word (thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, họa sư, công tử, ma ma, cô cô…) gets no extra title. ---------- */
 const KIT_ROLEPRE=/^(Hoàng thượng|Thái hậu|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi|Thái tử|Hoàng tử|Công chúa|Thái y|Ngự y|Thái giám|Tổng quản|Thủ lĩnh|Tiểu thái giám|Thị vệ|Thống lĩnh|Vương gia|Thân vương|Quận vương|Tể tướng|Đại tướng quân|Thượng thư|Thị lang|Tướng quân|Quan|Đại nhân|Nhạc sư|Họa sư|Sứ thần|Công tử|Ma ma|Cô cô|Cung nữ|Nữ quan|Chưởng sự)(?=\s|$)/i;
 (function(){const t0=kitTitle;kitTitle=function(p){const t=t0.apply(this,arguments);try{if(!t||!p||!p.name)return t;const nm=String(p.name).replace(/<[^>]*>/g,"").trim();
@@ -42775,7 +42881,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
 const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
 /* KIT 48.5 (owner 17/11 ~16:20Z, kit-rank-name): the rank is never printed twice. kitDedupRank(rank,name) drops the rank / title words a plain-text name already starts with
-   ("Hoàng hậu Lý Ngưng Sương" under the rank "Hoàng hậu" → "Lý Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
+   ("Hoàng hậu Tần Ngưng Sương" under the rank "Hoàng hậu" → "Tần Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
 function kitDedupRank(rank,name){try{const r=String(rank||"").replace(/<[^>]*>/g,"").trim(),n=String(name==null?"":name);if(!r||!n||/</.test(n))return n;let m=typeof kitTitledName==="function"?kitTitledName(r,n):n;
  if(m===n&&/\s/.test(r)&&n.toLowerCase().startsWith(r.toLowerCase()+" "))m=n.slice(r.length+1).trim();return m||n}catch(e){return name}}
 window.kitDedupRank=kitDedupRank;
@@ -43714,8 +43820,8 @@ function menVT(v){if(!v)return"";if(v===S)return"ngươi";try{return k61Named(v)
 const menCap=s=>s?s[0].toUpperCase()+s.slice(1):s;
 /* four named guards share the two guard pictures (coordinator 11/15: many guards may share the 2 looks) */
 function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
-(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;const sur=["Chu","Hà","Lâm","Ninh","Phan","Từ"];
-  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${pick(sur)} ${pick(MALEN)}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
+(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;
+  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 /* who a man fancies: set once from his nature (phong lưu / đa tình) and the consorts' looks; renewed if she is gone */
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
   if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
@@ -45011,8 +45117,8 @@ window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
    ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd"];  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -45156,7 +45262,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
- S=keep;const sS=J(ser().S);
+ S=keep;try{if(typeof nmBirth==="function")nmBirth(C)}catch(e){console.error("nmBirth",e)}/* coop-name-clash: her new life's people never repeat a name the room already holds (law 6b) */const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
@@ -45578,7 +45684,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
- if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
+ if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);try{if(host()&&typeof nmFix==="function")nmFix("join")}catch(e){console.error(e)}/* coop-name-clash: her new person against the one name list, at once */
   const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
   if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
@@ -46554,12 +46660,12 @@ window.courtTabHTML=function(){const L=[{f:pEmp(),name:"Hoàng thượng",mk:emp
 
 /* ---------- 5. men: unique names, only the ones she has met ---------- */
 /* (MALEN "Lục Trường", "Tiêu Viễn" carry a surname: "Lục Lục Trường" is renamed too) */
-const MALEN2=["Cảnh Hoài","Tĩnh An","Dật Thanh","Mặc Trần","Quân Hạo","Thanh Diễn","Hựu Ninh","Tấn Lương","Cẩn Du","Hoằng Nghị","Thiệu Khang","Diệp Tùng"];
-function menUnique(){try{if(!S||!S.men)return;const used=new Set();const pool=MALEN.concat(MALEN2);
- for(const m of S.men){const w=m.name.split(" ");const giv=w.slice(-2).join(" "),last=w[w.length-1];
-  if(!used.has(last)&&w[w.length-3]!==w[w.length-2]){used.add(last);continue}
-  const nw=pool.find(g=>!used.has(g.split(" ").pop())&&g.split(" ")[0]!==w[w.length-3]&&!S.men.some(x=>x!==m&&x.name.endsWith(" "+g)));if(!nw){continue}
-  m.name=w.slice(0,-2).concat([nw]).join(" ");used.add(nw.split(" ").pop())}}catch(e){}}
+const MALEN2=[];/* retired: one name core (jname.js); jnamefix renames any clash */
+function menUnique(){try{if(!S||!S.men)return;const used=new Set();/* the last word of a man's name stays unique among the men; new names from the one name core */
+ for(const m of S.men){const raw=String(m.name||"");const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);const last=b.split(" ").pop();
+  if(!used.has(last)&&nmTwice(b)){used.add(last);continue}
+  let nb="";for(let t=0;t<40;t++){const c=nmNew("m",{reg:false});if(!used.has(c.split(" ").pop())){nb=c;break}}if(!nb)continue;
+  const R=nmReg();if(R&&nmOwner())R[nb]="m";m.name=pre+nb;used.add(nb.split(" ").pop())}}catch(e){}}
 window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}
@@ -46727,12 +46833,12 @@ function qnPool(){S.qPool=S.qPool||[];return S.qPool}
 function qnById(id){return qnPool().find(q=>q.id===id)||null}
 function qnQ(q){return (3-q.tier)*20+q.sac/5+q.tai/5}
 /* names never share a "given name" / "surname + last word" with anyone in the game (j61 masks a stranger's name everywhere it appears) */
-const QNG=["Uyển Ninh","Tư Dao","Thanh Hoan","Cẩm Sắt","Nhã Như","Vân Tịch","Ngọc Khê","Lạc Y","Tri Ý","Hoán Khê","Ninh Hương","Thục Hoa","Diệu Âm","Cầm Thư","Như Yên","Uyển Thanh","Tố Vân","Linh Tê","Tịnh Dung","Mạn Ca","Kiều Ân","Hân Duyệt"];
-const CTG=["Tử Hiên","Cẩn Ngôn","Thừa Ân","Hạo Nhiên","Vân Khởi","Kỳ Dương","Duệ Trạch","Tư Viễn","Bách Xuyên","Thanh Hành","Dịch Chi","Trác Nhiên","Ngọc Đường","Hoài Cẩn","Mộ Bạch","Văn Cảnh","Quân Diệc","Tuấn Dật","Khải Trạch","Thận Hành","Minh Triết","Gia Huy"];
+const QNG=NM_F;/* one name core: jname.js */
+const CTG=NM_M;
 function nVars(n){const w=String(n||"").split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V}
 function nUsed(skip){const S0=new Set();const all=[];try{all.push(...namesInUse())}catch(e){}(S.men||[]).forEach(m=>all.push(m.name));(S.staff||[]).forEach(x=>all.push(x.name));(rivals||[]).forEach(v=>all.push(v.name));
  h54Pool().forEach(x=>x!==skip&&all.push(x.name));qnPool().forEach(x=>x!==skip&&all.push(x.name));all.filter(Boolean).forEach(n=>nVars(n).forEach(v=>S0.add(v)));return S0}
-function nPick(G,skip){const U=nUsed(skip);for(let t=0;t<120;t++){const su=pick(SURN),g=pick(G);const n=su+" "+g;if(su.split(" ").some(w=>g.split(" ").includes(w)))continue;if(!nVars(n).some(v=>U.has(v)))return n}return pick(SURN)+" "+pick(G)}
+function nPick(G){return nmNew(G===CTG?"m":"f")}/* one name core (jname.js): unique across the save */
 function qnNew(){const P=qnPool();
  const house=pick(CLANS);const head=P.some(q=>!q.taken&&q.house===house&&q.tier===0);const tier=R(100)<20&&!head?0:R(100)<45?1:2;
  const name=nPick(QNG);
@@ -49088,13 +49194,10 @@ Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"�
 if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
 /* the runner is household info (owner 10:10Z): not a line of the maid's card but "Người chạy việc của cung: X" with the household block; jhc's line (tap = meaning, "Đổi ›") is kept */
 (function(){const r0=window.runnerLine;window.runnerHouse=function(){try{return typeof r0==="function"?String(r0()).replace("Người chạy việc:","Người chạy việc của cung:"):""}catch(e){return""}};window.runnerLine=function(){return""}})();
-/* names: unique, never "Thúy 2" — larger pools, and any old numbered name is renamed once */
-(function(){const xm=["Thanh Trúc","Bạch Lan","Tử Đằng","Hải Đường","Lạc Mai","Diệu Âm","Thúy Vi","Như Ý","Bảo Châu","Kim Chi","Ngân Hạnh","Mộc Lan","Uyển Thanh","Tú Cầm","Phương Thảo","Thanh Hà","Tịnh Hương","Vân Anh","Hồng Ngọc","Lam Ngọc","Thu Thủy","Xuân Đào","Liên Hoa","Hạnh Dung","Cẩm Tú","Ngọc Bích","Tố Như","Song Hỷ","Bích Hà","Quỳnh Chi","Tuyết Mai","Hương Lan","Tiểu Nguyệt","Tiểu Cúc","Tiểu Hoa","Tiểu Linh","Nhã Thanh","Ánh Tuyết","Ngọc Nhi","Khánh Vân"];
- const xe=["Tiểu Hải Tử","Tiểu Toàn Tử","Tiểu Bình Tử","Tiểu Kiệt Tử","Tiểu Minh Tử","Tiểu Ninh Tử","Tiểu Phong Tử","Tiểu Sơn Tử","Tiểu Tường Tử","Tiểu Vinh Tử","Tiểu Lạc Tử","Tiểu Khang Tử","Tiểu Trung Tử","Tiểu Bảo Tử","Tiểu Hưng Tử","Tiểu Cát Tử","Tiểu Long Tử","Tiểu Nghĩa Tử","Tiểu Trí Tử","Tiểu Lễ Tử","Tiểu Thành Tử","Tiểu Đông Tử","Tiểu Thu Tử","Tiểu Hạ Tử","Tiểu Nguyên Tử","Tiểu Quý Tử","Tiểu Hòa Tử","Tiểu Lợi Tử","Tiểu Mãn Tử","Tiểu Tài Tử"];
- try{for(const n of xm)if(!MAIDS.includes(n))MAIDS.push(n);for(const n of xe)if(!EUN.includes(n))EUN.push(n)}catch(e){}})();
+/* names: unique, never "Thúy 2" — any old numbered name is renamed once (from the one name core, jname.js) */
 function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid]:[]);const used=new Set(all.map(s=>s.name));
- for(const s of all){if(!/\d/.test(s.name||""))continue;const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(!pool.length)continue;const n=pool[Math.floor(Math.random()*pool.length)];used.add(n);s.name=n}}catch(e){}}
-(function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name)){const used=new Set(allServ().map(x=>x.name).concat(S&&S.maid?[S.maid.name]:[]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(pool.length)s.name=pool[Math.floor(Math.random()*pool.length)]}}catch(e){}return s}}
+ for(const s of all){if(!/\d/.test(s.name||""))continue;const n=nmNew(s.role==="eunuch"?"eun":"maid");used.add(n);s.name=n}}catch(e){}}
+(function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name))s.name=nmNew(s.role==="eunuch"?"eun":"maid")}catch(e){}return s}}
  if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);aaNamesFix();return r}}})();
 /* strip label = the NAME only (owner): a title is dropped ("Thái y Trương" → "Trương Bá"; "Tiểu Ngân Tử" → "Ngân Tử" as before).
    Someone known only by title + surname gets a fixed given name (same every time). One label function for every strip: shortN. */
@@ -50785,14 +50888,14 @@ KIT_SAMPLES.push(
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
 KIT_SAMPLES.push(
- {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu",kitRankCol(2))}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành",kitRankCol(0))}${kitNameRank("","Hoàng thượng",KIT_ROLE.emp)}</div>`},
- {id:"§48.6",title:"kitRankName: HAI dạng duy nhất — XẾP CHỒNG (danh hiệu / phẩm / tên) và MỘT DÒNG (phẩm tên, chỉ dòng kết quả + Tuần lục); phẩm không bao giờ hiện hai lần",html:()=>`<div class="kitpg-row">${kitRankName(null,{parts:{rank:"Hoàng hậu",name:"Hoàng hậu Lý Ngưng Sương",col:kitRankCol(7)}})}${kitRankName(null,{parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}${kitRankName(null,{parts:{rank:"Hoàng thượng",name:"Hoàng thượng",col:KIT_ROLE.emp}})}</div><div class="kitpg-row" style="padding:6px 10px;background:#fbf3e2">${kitRankName(null,{form:"line",parts:{rank:"Hoàng hậu",name:"Hoàng hậu Lý Ngưng Sương",col:kitRankCol(7)}})} · ${kitRankName(null,{form:"line",parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}</div>`},
+ {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu",kitRankCol(2))}${kitNameRank("Đáp ứng","Tần Ngọc Hành",kitRankCol(0))}${kitNameRank("","Hoàng thượng",KIT_ROLE.emp)}</div>`},
+ {id:"§48.6",title:"kitRankName: HAI dạng duy nhất — XẾP CHỒNG (danh hiệu / phẩm / tên) và MỘT DÒNG (phẩm tên, chỉ dòng kết quả + Tuần lục); phẩm không bao giờ hiện hai lần",html:()=>`<div class="kitpg-row">${kitRankName(null,{parts:{rank:"Hoàng hậu",name:"Hoàng hậu Tần Ngưng Sương",col:kitRankCol(7)}})}${kitRankName(null,{parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}${kitRankName(null,{parts:{rank:"Hoàng thượng",name:"Hoàng thượng",col:KIT_ROLE.emp}})}</div><div class="kitpg-row" style="padding:6px 10px;background:#fbf3e2">${kitRankName(null,{form:"line",parts:{rank:"Hoàng hậu",name:"Hoàng hậu Tần Ngưng Sương",col:kitRankCol(7)}})} · ${kitRankName(null,{form:"line",parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}</div>`},
  {id:"§1.3",title:"Bảng màu phẩm DUY NHẤT (RCOL · MRCOL · ERCOL · lãnh cung): màu gốc tươi + màu chữ trên giấy (kitToneOf) + hàng chọn",html:()=>{
   const S3=[["Đáp ứng",RCOL[0]],["Thường tại",RCOL[1]],["Quý nhân",RCOL[2]],["Tần",RCOL[3]],["Phi",RCOL[4]],["Quý phi",RCOL[5]],["Hoàng quý phi",RCOL[6]],["Hoàng hậu",RCOL[7]],["Lãnh cung",RCOL_COLD],
    ...SRK.maid.map((n,i)=>[n,kitServCol("maid",i)]),["Tiểu thái giám",ERCOL[0]],["Thái giám",ERCOL[1]],["Thủ lĩnh",ERCOL[2]],["Tổng quản",ERCOL[3]]];
   const sw=([n,c])=>`<span style="display:inline-flex;align-items:center;gap:6px;margin:3px 10px 3px 0"><i class="rk-swatch" style="display:inline-block;width:22px;height:22px;border-radius:50%;background:${c};border:2px solid #fff;box-shadow:0 0 0 1px ${c}"></i><b class="kname"><span class="kti" style="--rt:${kitToneOf(c)}">${n}</span></b></span>`;
   return `<div style="padding:10px;border-radius:8px;background:#fbf3e2">${S3.map(sw).join("")}</div><div style="padding:10px;margin-top:8px;border-radius:8px;background:#fbf3e2">${RCOL.map((c,i)=>`<span class="md rk-c${i}" style="display:inline-block;width:34px;height:34px;border-radius:50%;margin:2px 6px 2px 0;border:2px solid;--c:${c}"></span>`).join("")}</div>`}},
- {id:"§48.1",title:"Danh hiệu phẩm (kitRankTone): mọi phẩm · nền sáng, nền tối, cảnh",html:()=>{const L=[["Đáp ứng","Trịnh Ngọc Hành"],["Thường tại","Lâm Uyển"],["Quý nhân","Khương Mạn Châu"],["Tần","Tô Vân"],["Phi","Mộ Dung Yên"],["Quý phi","Hàn Hồng Diệp"],["Hoàng quý phi","Thẩm Khinh Vũ"],["Hoàng hậu","Phó Thanh"],["Phế phi · lãnh cung","Lục Ca"],["Thái hậu","Thái hậu"],["Hoàng thượng","Hoàng thượng"],["Cung nữ thô sử","Tiểu Đào"],["Cung nữ tam đẳng","Hồng Ngọc"],["Cung nữ nhị đẳng","Bích Hà"],["Cung nữ nhất đẳng","Thanh Trúc"],["Chưởng sự cô cô","Tần cô cô"],["Nữ quan","Bạch Lộ"],["Ma ma","Quế ma ma"],["Tiểu thái giám","Tiểu Lộc"],["Thái giám","Phúc An"],["Thủ lĩnh thái giám","Lý Trung"],["Tổng quản thái giám","Lý Liên Anh"],["Thái y","Thẩm Minh"],["Thị vệ","Mạc Thừa Vũ"],["Lễ bộ thượng thư","Vương Tuấn"],["Hoàng tử","Dận Hữu"],["Công chúa","Minh Châu"],["Người lạ","???"]];
+ {id:"§48.1",title:"Danh hiệu phẩm (kitRankTone): mọi phẩm · nền sáng, nền tối, cảnh",html:()=>{const L=[["Đáp ứng","Tần Ngọc Hành"],["Thường tại","Lâm Uyển"],["Quý nhân","Khương Mạn Châu"],["Tần","Tô Vân"],["Phi","Mộ Dung Yên"],["Quý phi","Hàn Hồng Diệp"],["Hoàng quý phi","Thẩm Khinh Vũ"],["Hoàng hậu","Phó Thanh"],["Phế phi · lãnh cung","Lục Ca"],["Thái hậu","Thái hậu"],["Hoàng thượng","Hoàng thượng"],["Cung nữ thô sử","Tiểu Đào"],["Cung nữ tam đẳng","Hồng Ngọc"],["Cung nữ nhị đẳng","Bích Hà"],["Cung nữ nhất đẳng","Thanh Trúc"],["Chưởng sự cô cô","Tần cô cô"],["Nữ quan","Bạch Lộ"],["Ma ma","Quế ma ma"],["Tiểu thái giám","Tiểu Lộc"],["Thái giám","Phúc An"],["Thủ lĩnh thái giám","Tào Trung"],["Tổng quản thái giám","Tào Đức Hải"],["Thái y","Thẩm Minh"],["Thị vệ","Tạ Thừa Tông"],["Lễ bộ thượng thư","Vương Tuấn"],["Hoàng tử","Dận Hữu"],["Công chúa","Minh Châu"],["Người lạ","???"]];
   const row=cls=>`<div class="kitpg-row ${cls}" style="padding:10px;border-radius:8px;${cls==="krs"?KP_PAINT():"background:#fbf3e2"}">${L.map(([r,n])=>kitNameRank(r,r===n?"":n)).join("")}</div>`;
   const me=cls=>`<div class="kitpg-row ${cls}" style="margin-top:8px;padding:10px;border-radius:8px;${cls==="krs"?KP_PAINT():"background:#fbf3e2"}">${kitNameRank("Tần","Tên của nàng (48.1b)","",true)}${kitNameRank("Tần","Người khác","")}</div>`;
   const night=`<div class="modal night" style="position:static;display:block;background:none;margin-top:8px"><div class="kitpg-row" style="padding:10px;border-radius:8px;background:#140b08">${L.map(([r,n])=>kitNameRank(r,r===n?"":n)).join("")}</div></div>`;
@@ -55107,7 +55210,7 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
    Event dialogs are PEND items (pid "rg") → the kit hides outcomes (KIT §28.6), titles "Phụ tuyến · Tân quân lập uy · Chương c · Hồi i/n".
    Every Bạc option has a non-Bạc road (Sức / risk) of the same weight (owner 15/11 20:30Z). Numbers: BAL.rg (jbal2.js).
    (4) TÂM NGUYỆN: every named person carries a life goal; jreign adds 3-step j72 quest lines (rgL) for the 6 most important people
-       (Thái hậu, Hoàng hậu, Phế phi họ Lý, her cung nữ thân tín, Tổng quản thái giám, Thái y). The Emperor's line is (1)-(2).
+       (Thái hậu, Hoàng hậu, Phế phi họ Tần, her cung nữ thân tín, Tổng quản thái giám, Thái y). The Emperor's line is (1)-(2).
    Measure: dev/measure/reign.js (bots per side). Test: dev/test/reign.js. ================================================= */
 const RGT="Tân quân lập uy";
 const RGS={emp:{n:"Hoàng thượng",tag:"theo Hoàng thượng",cls:"g"},th:{n:"Thái hậu",tag:"theo Thái hậu",cls:"g"},quyen:{n:"quyền thần",tag:"theo quyền thần",cls:"g"},ngoai:{n:"đứng ngoài",tag:"đứng ngoài",cls:"n"}};
@@ -55380,16 +55483,16 @@ function rgLate(){const W=rgW(),r=rgMe();if(!W)return 0;let n=0;for(let c=0;c<Ma
 const RGL={
  th:{who:"Thái hậu",g:"Giữ yên xã tắc cho con, nhìn thấy hoàng tôn đầy nhà, rồi yên lòng niệm Phật.",q:["rgl_th1","rgl_th2","rgl_th3"]},
  hh:{who:"Hoàng hậu",g:"Sinh đích tử, giữ vững Trung cung.",q:["rgl_hh1","rgl_hh2","rgl_hh3"]},
- ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
+ ly:{who:"Phế phi họ Tần",g:"Rửa oan án năm xưa trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
  maid:{who:"Cung nữ thân tín",g:"Lo cho mẹ già ở quê, đến tuổi được xuất cung về nhà.",q:["rgl_mb1","rgl_mb2","rgl_mb3"]},
  eun:{who:"Tổng quản thái giám",g:"Có người nối dõi hương khói, về già có đất dưỡng lão.",q:["rgl_tq1","rgl_tq2","rgl_tq3"]},
  doc:{who:"Thái y",g:"Soạn xong bộ y thư thầy truyền lại, dâng lên cho đời sau dùng.",q:["rgl_ty1","rgl_ty2","rgl_ty3"]}};
 function rgL(){S.rgL=S.rgL||{};return S.rgL}
 function rgLStep(k){const L=rgL()[k];return L?L.st:0}
 function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="function"&&qOn();if(k==="ly")return !(S.lyF&&S.lyF.dead)&&!(S.lyF&&S.lyF.freed);if(k==="maid")return !!S.maid;return true}
-/* "ly": Phế phi họ Lý as a j72 requester (one persistent person, S.lyF) */
+/* "ly": Phế phi họ Tần as a j72 requester (one persistent person, S.lyF) */
 (function(){if(typeof q72A!=="function")return;const a0=q72A;q72A=function(k,id){if(k==="ly"){try{const o=lyFallen();if(o.dead||o.freed)return null;let f=null;try{f=pFaceOf({kind:"fallen",name:o.name})}catch(e){}
-  return{o,n:o.name,f:Object.assign({ini:"Lý",col:"#6a7a8a",rw:"Phế phi"},f||{}),k:"ly",id:null}}catch(e){return null}}return a0.apply(this,arguments)};
+  return{o,n:o.name,f:Object.assign({ini:"Tần",col:"#6a7a8a",rw:"Phế phi"},f||{}),k:"ly",id:null}}catch(e){return null}}return a0.apply(this,arguments)};
  const h0=q72Home;q72Home=function(a){if(a&&a.k==="ly")return"lc";return h0.apply(this,arguments)};
  const k0=q72Key;q72Key=function(a){if(a&&a.k==="ly")return"ly";return k0.apply(this,arguments)};
  const H0=q72Host;q72Host=function(k,X){if(X&&X.A&&X.A.k==="ly"&&k==="lc")return true;return H0.apply(this,arguments)};
@@ -55419,16 +55522,16 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
  T7("rgl_hh3","pro",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (3/3): Giữ yên Trung cung",h:"“Có kẻ đồn bổn cung hiếm muộn để mưu ngôi Trung cung. {Goi} giúp bổn cung tra ra ai tung tin.”",dl:5,
   s:[C("Tra nguồn tin",O("Nghe ngóng các cung",{p:45,sk:"mat",lto:"stay"}),O("Hỏi cung nữ các cung, ban chút quà",{c:{bac:-30},p:70,lto:"stay"})),G("kn","Báo lại cho Hoàng hậu","",100,1)],
   ok:{fx:{hh:10,danh:2},r:12,d:1,fn:fin("hh")},no:{r:-5}},ln("hh",3)));
- /* Phế phi họ Lý: an old wrong set right */
- T7("rgl_ly1","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (1/3): Chuyện năm xưa",h:"“Năm ấy ta bị gán tội dùng bùa ếm. Cung nữ của ta, A Hạnh, biết sự thật, nhưng đã bị đuổi đi. Nếu tìm được nàng...”",dl:6,
+ /* Phế phi họ Tần: an old wrong set right */
+ T7("rgl_ly1","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (1/3): Chuyện năm xưa",h:"“Năm ấy ta bị gán tội dùng bùa ếm. Cung nữ của ta, A Hạnh, biết sự thật, nhưng đã bị đuổi đi. Nếu tìm được nàng...”",dl:6,
   s:[G("lc","Ngồi nghe Phế phi kể chuyện cũ","duc",80,1),C("Tìm A Hạnh",O("Dò hỏi ở Kính sự phòng",{t:()=>S.place==="ksp",tw:"phải đến Kính sự phòng",p:45,sk:"mat",lto:"stay"}),O("Nhờ người ngoài cung tìm",{c:{bac:-30},p:70,lto:"stay"}))],
   ok:{fx:{duc:2,tamco:1},r:12,ch:"rgl_ly2"},no:{r:-5}},ln("ly",1)));
- T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. {Goi} giữ lời khai này cho kín, kẻ hại {xung} năm xưa vẫn còn tai mắt.”",dl:6,
+ T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. {Goi} giữ lời khai này cho kín, kẻ hại {xung} năm xưa vẫn còn tai mắt.”",dl:6,
   s:[G("home","Chép lại lời khai, giấu kỹ","tamco",60,1),W("Đợi A Hạnh điểm chỉ",1)],
   ok:{fx:{tamco:1},r:10,ch:"rgl_ly3"},no:{r:-5},bad:{fx:{danh:-3}},badT:"Lời khai lọt ra ngoài."},ln("ly",2)));
- T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
+ T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
   s:[G("","Dâng lời khai lên Hoàng thượng","sung",45,1,{},"b",{emp:1,pl:null})],
-  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.cleared=1;return fin("ly")(X)+" Hoàng thượng hạ chỉ rửa oan cho Phế phi họ Lý. Bà xin ở lại Trường Môn viện, sớm hôm niệm Phật đến ngày nhắm mắt."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
+  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.cleared=1;return fin("ly")(X)+" Hoàng thượng hạ chỉ rửa oan cho Phế phi họ Tần. Bà xin ở lại Trường Môn viện, sớm hôm niệm Phật đến ngày nhắm mắt."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
  /* her maid: her mother at home */
  T7("rgl_mb1","fam",Object.assign({fu:1,r:"maid",t:"Tâm nguyện {A} (1/3): Thư nhà",h:"“Nô tỳ đã ba năm không có tin mẹ. Nghe nói quê nhà mất mùa... {Nc} cho nô tỳ gửi một lá thư.”",dl:4,
   s:[C("Gửi thư",O("Nhờ người Nội vụ phủ chuyển thư",{c:{bac:-15},p:90,lto:"stay"}),O("Đợi ngày mệnh phụ vào cung, nhờ mang ra",{c:{suc:-4},p:60,sk:"danh",lto:"stay"})),W("Đợi thư hồi âm",2)],
@@ -66675,7 +66778,12 @@ function elders(){try{return allServ().filter(s=>s&&s.eid&&postOf(s.eid))}catch(
 function elderBy(id){return elders().find(s=>s.eid===id)||null}
 function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;/* a queen in the cold palace keeps no palace office (review/staff-root): the woman goes back to Thái hậu's household */if(q&&!q.out&&(q===S||q.alive!==false))return q}return thH()}
 function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)return"ngươi";return m.queen?`Hoàng hậu ${m.name}`:m.name}
-function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
+/* one name core (jname.js): the BAL names are the first holders; a name already held or ever given goes to a new name from the core,
+   addressed by her surname + the post's call word ("Tô ma ma") — no successor ever repeats a predecessor's name */
+function elderName(post,i){const nm=post.names[i%post.names.length];let T=null;try{T=nmTaken()}catch(e){}
+ if(i<post.names.length&&(!T||!T.full.has(nm[0])&&!nmVars(nm[0]).some(v=>T.vars.has(v)))&&!nmBad(nm[0])){try{const R=nmReg();if(R&&nmOwner())R[nm[0]]="f"}catch(e){}return nm}
+ const nb=nmNew("f");return[nb,nmSurOf(nb)+" "+nm[1].split(" ").slice(-2).join(" ")]}
+function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
@@ -67249,7 +67357,7 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
  if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn");const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
- /* npc-death-wire (owner OD:L641): Phế phi họ Lý lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
+ /* npc-death-wire (owner OD:L641): Phế phi họ Tần lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
  try{const y=typeof lyAlive==="function"&&lyAlive();if(y)add("c:ly",y.name,"Phế phi","ly","lc",y)}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
@@ -68120,7 +68228,7 @@ function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()
 function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)+":"+v.rank+(v.queen?"q":"")):"x").join(",")+"|"+(S.out?1:0)+":"+S.rank}catch(e){return""}}
 /* servant names: unique among every servant and every cung nữ thân tín */
 function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
- for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){/* port 16/11: names carry no numbers (main jaudit aaNamesFix): take an unused name from the same pool */const used=new Set(allServ().map(x=>x&&x.name).concat([...seen]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!used.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];n++}}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
+ for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){/* port 16/11: names carry no numbers (main jaudit aaNamesFix): take an unused name from the same pool */s.name=nmNew(s.role==="eunuch"?"eun":"maid",{more:[...seen]});n++}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
  if(n)J95C.stat.dedupe+=n;return n}
 (function(){
  /* ---- 1. giá họa: the gate, the record, the reason kept ---- */
@@ -68159,7 +68267,7 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
    try{sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
  const d0=deser;deser=function(){J95C.loading=1;let r;try{r=d0.apply(this,arguments)}finally{J95C.loading=0}J95C.lastV=null;try{j95cVisitFix();if(j95cCur())j95sync()}catch(e){j95cErr("deserVisit",e)}try{J95C.sig=j95cSig();if(j95cCur()&&S.visit&&S.visit.k===S.place){J95C.lastV=S.visit;j95stage(S.roster,j95kh())}}catch(e){j95cErr("deser",e)}return r};
  if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{const taken=new Set(allServ().map(x=>x.name).concat([S&&S.maid&&S.maid.name],(rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
-   if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!taken.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];J95C.stat.dedupe++}}}catch(e){}return s}}
+   if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */s.name=nmNew(s.role==="eunuch"?"eun":"maid",{more:[...taken]});J95C.stat.dedupe++}}catch(e){}return s}}
  if(typeof ageInit==="function"){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);if(!J95C.loading)j95cDedupe();return r}}
  if(typeof start==="function"){const st0=start;start=function(){J95C.lastV=null;J95C.sig="";const r=st0.apply(this,arguments);try{j95cDedupe();if(j95cCur())j95sync()}catch(e){j95cErr("start",e)}return r}}
 })();
@@ -69341,8 +69449,7 @@ const KCDAD={tt:["Tể tướng","phủ Tể tướng"],dtq:["Đại tướng qu
 const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
 /* KC LORE: new games run lore v2 (the td house falls only when she leaves for the palace; one father, one brother, one dress). Old saves (S.kc.v 1) keep their old rules. At the identity card S.kc does not exist yet: that is always a new game. */
 function kcLore(){return !S||!S.kc||(S.kc.v||1)>=2}
-const KCMN=["Đức Minh","Hữu Chính","Kính Đường","Bác Văn","Thế Khanh","Trọng Lễ","Hoài An","Tư Viễn","Thừa Tông","Bảo Thành","Gia Mậu","Duy Nhạc"];
-const KCFN=["Ngọc Nhu","Tĩnh Uyển","Bích Hà","Thu Thủy","Minh Châu","Lạc Yên","Hoài Ngọc","Tuyết Nhạn","Vân Khanh","Mộ Tình","Thanh Đại","Liên Kiều"];
+/* home names come from the one name core (jname.js nmNew) */
 const KCGTU={tt:80,dtq:65,muoi:90,thd:25,ch:75,td:55};
 /* places: key -> [name, scene code, in the house?, line] (scenes are placeholders until the gpt-2-6 set, OUTSIDE_PLAN §14) */
 const KCPL={
@@ -69432,23 +69539,20 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.close
 
 function kcSnapReset(){try{S.wkSnap=wkSnap()}catch(e){}try{KMS=S;KMSNAP=kmSnap()}catch(e){}}
 /* r2: a home name never repeats a palace name (j61 hides the names of palace people she does not know, in any text: "Thăm cung nữ ???") */
-function kcFreeName(mk,more){const used=new Set();const tail=n=>String(n).split(" ").slice(-2).join(" ");const add=n=>{if(n){used.add(n);used.add(tail(n))}};
- try{(typeof k61All==="function"?k61All():[]).forEach(e=>e&&add(e.name));(more||[]).forEach(m=>add(m.name))}catch(e){}
- let n=mk();for(let i=0;i<40&&(used.has(n)||used.has(tail(n)));i++)n=mk();return n}
 function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;
  const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||undefined,af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
- const fam=[];const gl=shuf(KCMN.slice());const g=()=>gl.pop();
- fam.push(T("cha","Phụ thân",nm(g()),48+R(8),"official",[],null,35+R(25)));
+ const fam=[];
+ fam.push(T("cha","Phụ thân",nmNew("m",{sur,more:fam}),48+R(8),"official",[],null,35+R(25)));
  /* KC LORE: the father of tt / dtq is the head of that house in the court (j55 trS, j67 {dad}): one name, one age, in the home and in the palace */
  try{const hd=(k==="tt"||k==="dtq")?tdHead(KCCLAN[k]):null;if(hd&&hd.dadOf==="me"){fam[0].name=hd.name;fam[0].age=Math.min(56,Math.max(46,hd.age||50));fam[0].net=netOf(hd).slice()}}catch(e){console.error("kc lore dad",e)}
  const momAlive=roll(60);
- if(momAlive)fam.push(T("me","Mẫu thân",`${pick(SURN)} thị`,38+R(6),"mama",[],pick(["Ân cần","Khiêm nhường","Kín đáo"]),55+R(25)));
- fam.push(T("di",momAlive?"Di nương":"Kế mẫu",`${pick(SURN)} thị`,33+R(6),"mama",[],pick(["Xảo quyệt","Tham vọng","Kiêu ngạo","Ân cần"]),R(25)));
+ if(momAlive)fam.push(T("me","Mẫu thân",nmNew("mo",{more:fam,avoidSur:new Set([sur])}),38+R(6),"mama",[],pick(["Ân cần","Khiêm nhường","Kín đáo"]),55+R(25)));
+ fam.push(T("di",momAlive?"Di nương":"Kế mẫu",nmNew("mo",{more:fam,avoidSur:new Set([sur])}),33+R(6),"mama",[],pick(["Xảo quyệt","Tham vọng","Kiêu ngạo","Ân cần"]),R(25)));
  fam.push(T("to","Tổ mẫu",`Lão phu nhân ${sur} gia`,66+R(8),"mama",[],pick(["Cương trực","Ân cần","Kín đáo"]),40+R(20)));
- fam.push(T("huynh","Huynh trưởng",nm(g()),21+R(4),"man",["man:thive-1","man:thive-2"],pick(["phong lưu","trung hậu","tham vọng","cẩn trọng"]),40+R(30)));
- const sis=T("muoi","Thứ muội",kcFreeName(()=>nm(pick(KCFN)),fam),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Khiêm nhường","Xảo quyệt","Ân cần"]),R(30));
+ fam.push(T("huynh","Huynh trưởng",nmNew("m",{sur,more:fam}),21+R(4),"man",["man:thive-1","man:thive-2"],pick(["phong lưu","trung hậu","tham vọng","cẩn trọng"]),40+R(30)));
+ const sis=T("muoi","Thứ muội",nmNew("f",{sur,more:fam}),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Khiêm nhường","Xảo quyệt","Ân cần"]),R(30));
  sis.sac=40+R(50);sis.tai=30+R(50);sis.danh=4+R(8);fam.push(sis);
- for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",kcFreeName(()=>`${pick(SURN)} ${pick(KCFN)}`,fam),18+R(2),"consort",[],pick(["Ân cần","Khiêm nhường","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
+ for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",nmNew("f",{more:fam,avoidSur:new Set([sur])}),18+R(2),"consort",[],pick(["Ân cần","Khiêm nhường","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
  S.kc={v:2,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
  S.kgt=BAL.kc2.st.kc.kgt[0]+R(BAL.kc2.st.kc.kgt[1])+(k==="tt"||k==="ch"?BAL.kc2.st.kc.kgtBr[0]:k==="td"?BAL.kc2.st.kc.kgtBr[1]:0);S.kap=BAL.kc2.st.kc.kap[0]+R(BAL.kc2.st.kc.kap[1]);S.khm=Math.round((KCGTU[k]||50)*1.2);S.kld=0;S.kgtu=KCGTU[k]||50;
  S.age=18;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
@@ -70473,7 +70577,7 @@ function cmInfo(m){m=m||S.maid;if(!m||!m.src)return"";return ` · ${CM_LBL[m.src
 function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB().pickAlone)}
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
-function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
+function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){const nm=nmNew("maid");
  L.push({name:nm,loy:cmRange(B.loy.pick),age:BAL.cmaidx.age+R(BAL.cmaidx.ageR)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
@@ -70508,7 +70612,7 @@ PEND.cmSec=pp=>{const B=cmB(),m=S.maid;if(!m||!m.sec)return null;const k=m.sec.k
  const o=k==="spy"?[{n:"Giữ lại, dặn nàng ta chỉ báo chuyện vô hại",fx:{maid:B.secLoy},x:"từ nay không còn lộ chuyện"},{n:"Trả nàng ta về Nội vụ phủ",fx:{danh:-B.spyDanh},x:"Nội vụ phủ đưa người khác đến",go:()=>cmReplace("noi")}]:
   [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*BAL.cv.secPayMul},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:`thành: giữ lại ${B.secPay} lượng bạc · kèm: ${k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}`}];
  return{who:pMaid(),t,o:o.map(x=>Object.assign(x,{go:(g=>()=>{if(g)g();if(S.maid===m)m.sec.done=1})(x.go)}))}};
-function cmReplace(src){const B=cmB();const m=newMaid(pick(MAIDS.filter(x=>x!==(S.maid&&S.maid.name))),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
+function cmReplace(src){const B=cmB();const m=newMaid(nmNew("maid"),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
 
 /* ---------- dtq: the martial maid stands in the way (called by jmline when an NPC's harm is aimed at her household) ---------- */
 function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.origin||S.origin.k!=="dtq"||!roll(cmB().dtqGuard))return"";cmC("guard");
@@ -72142,15 +72246,8 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- /* a name no person shares in any form the name mask (j61 k61Vars) reads: full name, given name (last two words), first + last word.
-    MALEN holds only 10 given names and every other man of the world draws from it, so the censor's given name joins two MALEN
-    syllables into a name that is NOT in MALEN (review r1: the old filter fell back to MALEN in 28 of 30 lives) */
- let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
- const V=new Set(),us=new Set();for(const p of P){const w=String(p.name).split(" ").filter(Boolean);V.add(w.join(" "));if(w.length>=2){V.add(w.slice(-2).join(" "));V.add(w[0]+" "+w[w.length-1])}us.add(tdSur(p.name))}
- const A=[...new Set(MALEN.map(x=>x.split(" ")[0]))],B=[...new Set(MALEN.map(x=>x.split(" ").pop()))];
- const sur=SURN.filter(x=>!us.has(x));const s0=pick(sur.length?sur:SURN);const f0=s0.split(" ")[0];
- const giv=[];for(const a of A)for(const z of B){const g=a+" "+z;if(a!==z&&!MALEN.includes(g)&&!V.has(g)&&!V.has(f0+" "+z)&&!V.has(s0+" "+g))giv.push(g)}
- const h={c:MINC,ns:1,isMin:1,name:s0+" "+(giv.length?pick(giv):pick(MALEN)),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
+ const us=new Set([S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean)).filter(p=>p&&p.name).map(p=>tdSur(p.name)));/* one name core (jname.js): a name no person shares in any form; the censor's surname is not a house head's */
+ const h={c:MINC,ns:1,isMin:1,name:nmNew("m",{avoidSur:us}),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
 function minAll(){const T=trS();if(!T)return[];return CLANS.map(c=>T.H[c]).filter(Boolean).concat([minNs()])}
@@ -72278,7 +72375,7 @@ function amCh(m){const C=amD().ch,st=amSt(m);return cl(Math.round(amSung(m)/C.su
 function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="s"){const s=servById(+k.slice(1));return s&&s.role==="maid"?{m:s,o:ownerOf(s)}:null}return null}
 /* ---------- 4 a maid's night ---------- */
 function amNightGain(m){const st=amSt(m);const q=Math.round(st.sac/20+R(4)-1);amAdd(m,amD().night.b+Math.max(0,Math.round(q/2)))}
-function amName(m){try{const used=namesInUse();const sur=freshName().split(" ")[0];const n=sur+" "+m.name;return used.includes(n)?freshName():n}catch(e){return m.name}}
+function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());const n=sur+" "+m.name;if(used.includes(n)||nmTaken().full.has(n)||nmBad(n))return freshName();try{if(nmOwner()){const R0=nmReg();if(R0)R0[n]="f"}}catch(e){}return n}catch(e){return m.name}}/* one name core: maid's own name + a fresh surname, registered */
 /* ROLE PARITY (OD 18/11 ~21:30Z, law 1 + law 4): ONE promotion rule for a maid raised to consort — the player (j42 srvRise) and an NPC maid
    (amRise; j14 eye path) — so a promoted maid starts EXACTLY like a born Đáp ứng with the same gains: n = the new consort record (S for her),
    m = the maid she was (S for her), o = her old master, loy0 = her loyalty measure if the caller read it before the change (hers = Chủ tin, an NPC's = lòng).
@@ -72290,7 +72387,7 @@ function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(lo
  if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
  return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
- if(close)o.maid=o===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};
+ if(close)o.maid=o===S?newMaid(nmNew("maid"),45):{name:nmNew("maid"),loyal:45};
  else if(o&&o.staff){const i=o.staff.indexOf(m);if(i>=0)o.staff.splice(i,1);try{if(typeof mlRose==="function")mlRose(o,m)}catch(e){}}
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
@@ -73992,25 +74089,25 @@ function kc2T(r,t,name,age,role,tr,af,more){return Object.assign({id:"f"+r,r,t,n
 function kc2Due(){return (S.turn||0)+(KC.ty-S.year)*12+(KC.tm-1-S.month)}
 /* reviewer r1: a home person whose title IS her name (Xuân Đào, Bà Tư) keeps its capitals in running text; role titles go lower case */
 function kc2Lt(m){return m&&/^(xd|ba)$/.test(m.r)?String(m.t):String(m&&m.t||"").toLowerCase()}
-function kc2Init(d){const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;const gl=shuf(KCMN.slice());const g=()=>gl.pop();const fam=[];
+function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",{sur,more:fam});const gv=()=>nmGivenOf(nmBare(nmNew("m",{more:fam})));const gf=()=>nmGivenOf(nmBare(nmNew("f",{more:fam})));const gx=()=>nmNew("m",{more:fam,avoidSur:new Set([sur])});const gmo=()=>nmNew("mo",{more:fam,avoidSur:new Set([sur])});
  const T=(r,t,name,age,role,trs,af,more)=>kc2T(r,t,name,age,role,pick(trs),af,more);
  if(d==="dan"){
-  fam.push(T("cha","Phụ thân",nm(g()),44+R(8),"official",["Ân cần","Cương trực","Kín đáo","Nóng nảy"],40+R(30)));
-  fam.push(T("me","Mẫu thân",`${pick(SURN)} thị`,40+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo"],55+R(25)));
-  fam.push(T("huynh","Huynh trưởng",nm(g()),21+R(4),"man",["trung hậu","nóng nảy","Ham vui","Kín đáo"],35+R(30)));
+  fam.push(T("cha","Phụ thân",gm(),44+R(8),"official",["Ân cần","Cương trực","Kín đáo","Nóng nảy"],40+R(30)));
+  fam.push(T("me","Mẫu thân",gmo(),40+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo"],55+R(25)));
+  fam.push(T("huynh","Huynh trưởng",gm(),21+R(4),"man",["trung hậu","nóng nảy","Ham vui","Kín đáo"],35+R(30)));
   /* Xuân Đào: the girl from the same village who enters the palace in the same draft (j67 cnv_ban names her) — one person, one name */
   /* the palace has no other Xuân Đào: a palace maid who drew that name gets another one (j61 hides strangers' names in any text) */
-  try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){const f=(typeof MAIDS!=="undefined"?MAIDS:[]).filter(n=>!used.has(n)&&n!=="Xuân Đào");if(f.length){e.name=pick(f);used.add(e.name)}}}catch(e){console.error("kc2 xd name",e)}
+  try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){e.name=nmNew("maid",{more:[{name:"Xuân Đào"}]});used.add(e.name)}}catch(e){console.error("kc2 xd name",e)}
   fam.push(T("xd","Xuân Đào","Xuân Đào",18+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
-  fam.push(T("ly","Lý trưởng",`${pick(SURN)} ${g()}`,50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
-  fam.push(T("ba","Bà Tư",`Bà Tư ${pick(SURN)} thị`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
+  fam.push(T("ly","Lý trưởng",gx(),50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
+  fam.push(T("ba","Bà Tư",`Bà Tư ${gmo()}`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
  }else{const L=kc2L(),bd=kc2Br()==="bd";
-  const gn=g();fam.push(T("cha",L.dad,bd?bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`):nm(gn),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
-  const fn=pick(KCFN);fam.push(T("me",L.mom,bd?bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`):`Vương hậu ${fn}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
-  if(bd){fam.push(T("huynh","Trưởng huynh",`${g()}`,26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",`${g()}`,23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
-  else{fam.push(T("huynh","Thế tử huynh",nm(g()),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc","Vương thúc",nm(g()),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
-  const mu=T("muoi",bd?"Muội muội":"Vương muội",kcFreeName(()=>bd?pick(KCFN):nm(pick(KCFN)),fam),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
-  fam.push(T("sx","Sứ thần Đại Hy",`${pick(SURN)} ${g()}`,45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
+  fam.push(T("cha",L.dad,bd?(gn=>bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`))(gv()):gm(),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
+  fam.push(T("me",L.mom,bd?(fn=>bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`))(gf()):`Vương hậu ${gf()}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
+  if(bd){fam.push(T("huynh","Trưởng huynh",gv(),26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",gv(),23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
+  else{fam.push(T("huynh","Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc","Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
+  const mu=T("muoi",bd?"Muội muội":"Vương muội",(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
+  fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
  S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
  if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
@@ -79963,10 +80060,10 @@ if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.app
 })();
 /* ================= jnpcd: NPC DEATH → NEW FACES + PHẾ PHI HỌ LÝ (D4, orphan audit #18, review/npc-death) =================
    Owner 15/11 ~20:40Z (OD:L641–643):
-     - Lãnh cung: when a real rival is sent to the cold palace, Phế phi họ Lý STAYS too (two people there). She only leaves when she dies.
+     - Lãnh cung: when a real rival is sent to the cold palace, Phế phi họ Tần STAYS too (two people there). She only leaves when she dies.
      - ALL NPCs can die. After a death: maids and eunuchs are replaced right away by a NEW person (new face/picture — never reuse the dead
-       person's picture); some posts have no replacement (e.g. Phế phi họ Lý in lãnh cung: empty until a real person arrives).
-     - Phế phi họ Lý gets her own story line (a real side-story quest) → the 3-part Tâm nguyện line already lives in jreign (rgl_ly1–3).
+       person's picture); some posts have no replacement (e.g. Phế phi họ Tần in lãnh cung: empty until a real person arrives).
+     - Phế phi họ Tần gets her own story line (a real side-story quest) → the 3-part Tâm nguyện line already lives in jreign (rgl_ly1–3).
    Built ON jmort (BAL.mort lifespans; its kill() calls npcRetire / npcRoleGone / npcFreshName / lyDie below).
    1. RETIRED FACES (whole family, LUẬT SỬA CẢ NHÓM): a person who leaves for good (death in jmort, a servant beaten to death, a maid who
       flees, any servant who vanishes from every palace) has their portrait (fc), full-body figure (fid) and name retired:
@@ -79984,11 +80081,6 @@ const push=(k,v)=>{if(!v||!S)return;const L=S[k]=S[k]||[];if(!L.includes(v)){L.p
 /* retire one person's face, figure and name */
 window.npcRetire=function(p){try{if(!p||p===S)return;push("fdead",p.fc);push("fidDead",p.fid);push("dnames",p.name);
  if(p.fid&&typeof figUsed==="function"){const U=figUsed();if(!U.includes(p.fid))U.push(p.fid)}}catch(e){}};
-/* a name from L that no living or dead holder carries (prefix = title before the name, for officials) */
-window.npcFreshName=function(L,not,prefix){const D=new Set((S&&S.dnames)||[]);(not||[]).forEach(n=>D.add(n));const pre=prefix||"";
- const live=new Set();try{if(S.maid)live.add(S.maid.name);(typeof allServ==="function"?allServ():[]).forEach(s=>live.add(s.name));for(const k in (S.court||{}))live.add(S.court[k].name)}catch(e){}
- const ok=L.filter(n=>!D.has(n)&&!D.has(pre+n)&&!live.has(pre+n)&&!live.has(n));if(ok.length)return pick(ok);
- const ok2=L.filter(n=>!(not||[]).includes(n)&&!live.has(pre+n)&&!live.has(n));return pick(ok2.length?ok2:L)};
 /* the person in a post died: their requests and life-goal line end with them */
 window.npcRoleGone=function(k){try{if(!S||!k)return;if(S.rgL&&S.rgL[k])delete S.rgL[k];
  if(typeof q72!=="function")return;const q=q72();if(!q)return;const T=typeof T72I==="object"?T72I:{};
@@ -80002,8 +80094,6 @@ window.npcRoleGone=function(k){try{if(!S||!k)return;if(S.rgL&&S.rgL[k])delete S.
 /* children: a new child's figure variant avoids dead same-sex children's variants while one is free */
 (function(){if(typeof kidVar!=="function")return;const v0=kidVar;kidVar=function(k){const r=v0.apply(this,arguments);try{const all=allKids().map(([x])=>x).filter(x=>x!==k&&x.sex===k.sex&&x.fv);
  const live=new Set(all.filter(x=>x.alive).map(x=>x.fv)),dead=new Set(all.filter(x=>!x.alive).map(x=>x.fv));if(r&&dead.has(r)){const c=[1,2,3,4].filter(v=>!live.has(v)&&!dead.has(v));if(c.length)return pick(c)}}catch(e){}return r}})();
-/* new maids never take a dead maid's name (every newMaid caller: jmort, j8 flight, j42 new life) */
-(function(){if(typeof newMaid!=="function")return;const n0=newMaid;newMaid=function(name,loyal,age){try{if(S&&S.dnames&&S.dnames.includes(name))name=npcFreshName(MAIDS,[name])}catch(e){}return n0.call(this,name,loyal,age)}})();
 /* WHOLE FAMILY: a servant / maid who vanishes from every palace during a turn AND whose name the turn's text links to a death
    (beaten to death in Thận Hình ti, poisoned, any path outside jmort) is retired too. One who only moved palace, went back to the
    Nội vụ phủ pool, was married off or fled stays a living person: not retired (her face can come back with her). */
@@ -80020,18 +80110,18 @@ if(typeof monthTick==="function")window.monthTick=monthTick=watched(monthTick);
 /* a person with no portrait left whose fallback picture is a retired face shows the kit silhouette (https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-f|m), never the dead's face */
 (function(){const f0=fsrc;fsrc=function(fc,fb){const r=f0.apply(this,arguments);try{if(!fc&&fb&&S&&S.fdead&&S.fdead.length){const m=/^img\/(face-[^/]+)\.webp$/.exec(fb);
  if(m&&S.fdead.includes(m[1]))return (typeof KIT_DIR==="string"?KIT_DIR:"https://ctm-img.victoria-tntt.workers.dev/img/kit/")+(/maid|woman|mama|consort|th/.test(m[1])?"unknown-f":"unknown-m")+".webp"}}catch(e){}return r}})();
-/* r1 (whole family, names): new consorts (freshName → namesInUse) also avoid the j59 personal names of Phế phi họ Lý and the court officers and the
+/* r1 (whole family, names): new consorts (freshName → namesInUse) also avoid the j59 personal names of Phế phi họ Tần and the court officers and the
    names of the dead, so no two people share a given name (j61 masks a stranger's given name inside the other's: "Lý Đáp ứng ???") */
 (function(){if(typeof namesInUse!=="function")return;const n0=namesInUse;namesInUse=function(){const a=n0.apply(this,arguments);try{if(S){if(S.lcfPn)a.push(S.lcfPn);
  const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)a.push(C[k].pn);(S.dnames||[]).forEach(n=>{if(n&&String(n).split(" ").length>=3)a.push(n)})}}catch(e){}return a}})();
 /* old saves (and any start where Lý was named before the rivals): if her given name is a living consort's, she gets a fresh j59 name */
 window.lyNameFix=function(){try{if(!S||!S.lcfPn||typeof window.j59gen!=="function")return;const g=S.lcfPn.split(" ").slice(-2).join(" ");
- if((rivals||[]).some(v=>v&&v.name&&v.name!==S.lcfPn&&v.name.split(" ").length>=3&&v.name.endsWith(" "+g))){const o=S.lcfPn;delete S.lcfPn;S.lcfPn=window.j59gen(["Lý"],(window.J59N&&J59N.FAL)||[]);if(!S.lcfPn)S.lcfPn=o}}catch(e){}}
-/* ---------- Phế phi họ Lý ---------- */
+ if((rivals||[]).some(v=>v&&v.name&&v.name!==S.lcfPn&&v.name.split(" ").length>=3&&v.name.endsWith(" "+g))){const o=S.lcfPn;delete S.lcfPn;S.lcfPn=nmNew("f",{sur:"Tần"});if(!S.lcfPn)S.lcfPn=o}}catch(e){}}
+/* ---------- Phế phi họ Tần ---------- */
 window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const L=S.rgL&&S.rgL.ly;const cleared=p.cleared||(L&&L.done);
  /* a cold-palace death (the jmort accident texts — Nam Uyển, yến tiệc — do not fit a prisoner) */
  const how=pick(["lâm bệnh, không thuốc thang,","nhiễm phong hàn giữa đêm đông,","trượt chân bên giếng cạn trong viện,"]);
- const t=`Phế phi ${S.lcfPn||"họ Lý"} ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
+ const t=`Phế phi ${S.lcfPn||"họ Tần"} ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
  try{if(L&&!L.done)delete S.rgL.ly}catch(e){}
  return `<span class="r">${t}</span> `};
 /* she exists from the first day (so she ages and rolls a lifespan), on new games and old saves alike */
@@ -84389,6 +84479,120 @@ function thcLookKey(s){const p=thcMasterOf(s);if(!p)return null;let m,t;
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead&&(typeof worldOn!=="function"||worldOn()))thcNpcAll()}catch(e){}return ev}}
 })();
 function thcOld(){if(!S)return;for(const p of [S].concat(rivals||[])){if(!p||p.thcV)continue;p.thcV=1;if(p.maid&&p.maid.name&&p.thc==null)p.thc="m:"+p.maid.name}}
+/* jnamefix.js — ONE NAME CORE, part 2 (assembled LAST so every older fixer has run first). Pools + nmNew live in jname.js.
+   nmFix(): one sweep over every person of the save (nmPeople):
+     - an excluded (Vietnamese-style) name or a name someone else already holds (living or dead, the player first) is renamed with nmNew;
+       the player's own name is NEVER changed (an NPC who collides with her is renamed instead); her own family keeps her surname;
+     - when the old name belonged to that one person only, every text of the save that names her (ledger, notes, relations, roads,
+       letters…) is rewritten to the new name; a shared old name stays with the person who keeps it (texts cannot tell them apart); when no one keeps it, its texts go to the first holder renamed;
+     - every name now held is written to the registry S.nmReg (so a name is never given again, even after its holder dies).
+   Runs after a save loads (the one-time migration, then a no-op), after start(), and at every month end (safety net for any place
+   that might still make a name by itself). Co-op: only the world owner (host or solo) sweeps; a guest keeps the host's names. */
+function nmEsc(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+/* rewrite old -> neu in every string of the save, whole words only; other people's longer names that contain old are protected */
+function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new RegExp("(?<![\\p{L}\\p{N}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","gu");
+ const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0&&nmBare(p)!==old)/* review r1: never protect the renamed person's own titled name ("Thị vệ X", "Công chúa X"), else her titled texts were never rewritten */.sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
+ const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
+  return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
+ const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg||o===S.nmOrd)return;seen.add(o);/* the registry keeps old names: never rewritten; nor the host's rename orders (coop-name-clash: her seat rewrote its own copy of an order, o became n) */
+  if(Array.isArray(o)){for(let i=0;i<o.length;i++){const v=o[i];if(typeof v==="string")o[i]=fix(v);else walk(v)}return}
+  for(const k of Object.keys(o)){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v);
+   if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
+ try{walk(S);walk(rivals)}catch(e){console.error("nmRewrite",e)}return n}
+const NM_FIX={runs:0,renamed:[]};
+function nmFix(why){if(typeof S==="undefined"||!S)return null;if(!nmOwner()){nmOrdApply(why);return null}const out=[];nmOrdPrune();
+ /* co-op: the friend's own people (e.guest: her coop entry and its maid/staff/kids) are named on her seat and never renamed here (a rename
+   on the host copy would be undone by her next sync and the two seats would read different names); they hold their names first and the
+   host's world people (which sync to both seats) give way */
+ /* first sweep of an old save (no registry yet): people who already left the save (sold, dead, sent home) still name their records
+    (S.dnames, name keys of S.npw "Name|kind"); their names go into the registry first so no one is renamed into them (review r1) */
+ try{if(!S.nmV){const R0=nmReg();(S.dnames||[]).forEach(n=>{const b=nmBare(n);if(b&&!R0[b])R0[b]="gone"});
+  for(const k in (S.npw||{})){const n=k.split("|")[0];if(n&&n!=="*"&&n!=="me"&&/^\p{Lu}/u.test(n)&&!/\d/.test(n)&&!R0[n])R0[n]="gone"}}}catch(e){}
+ try{const L0=nmPeople();const L=L0.filter(e=>e.me).concat(L0.filter(e=>!e.me&&e.guest),L0.filter(e=>!e.me&&!e.guest));const me=L.find(e=>e.me);const meSur=me?nmSurOf(nmBare(S.name)):"";
+  const held=new Map();for(const e of L){const b=nmBare(e.o[e.f]);held.set(b,(held.get(b)||0)+1)}
+  const full=new Set(),vars=new Set(),sur=new Set(),vby=new Map();const todo=[];
+  for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);if(e.guest&&!e.me&&full.has(b))bad="dup";/* coop-name-clash: her person behind a higher holder (the host herself / the friend / an earlier person of hers) */
+   if(bad==="sur"&&e.fam&&nmSurOf(b)===meSur)bad="";/* her own family keeps her surname */
+   if(!e.me&&!e.guest&&!bad){if(full.has(b))bad="dup";else if(nmAlive(e)&&(e.kind==="mo"?sur.has(nmSurOf(b)):nmVars(b).some(v=>vars.has(v)))){bad="like";e.by=(nmVars(b).map(v=>vby.get(v)).find(Boolean))||""}}
+   if(bad){todo.push([e,bad]);continue}
+   full.add(b);if(nmAlive(e)&&!e.fr/* coop-name-clash: the friend's people seen only through her blob (her servants, home family, marriage pools) hold their FULL names; a world person is not renamed for a short form one of them shares (her seat's own nmNew keeps short forms apart; host-side churn of living consorts for a pool candidate = a world rename every merge) */){nmVars(b).forEach(v=>{vars.add(v);if(!vby.has(v))vby.set(v,(e.guest?(e.fr?"fr:":"g:"):e.me?"me:":"")+(e.fp?e.fp+":":"")+b)});if(e.kind==="mo")sur.add(nmSurOf(b))}}
+  /* the storyline people kept as plain text (j4 S.st.guard / S.st.stu) and the fallen consort's name (j59 S.lcfPn) */
+  const txt=[];try{if(S.st){if(S.st.guard)txt.push([S.st,"guard","m"]);if(S.st.stu)txt.push([S.st,"stu","m"])}if(S.lcfPn)txt.push([S,"lcfPn","f",{sur:"Tần"}])}catch(e){}
+  for(const [o,f,kind,op] of txt){const b=nmBare(o[f]);const bad=nmBad(b)||(full.has(b)?"dup":"");if(bad)todo.push([{o,f,kind,txt:1,op},bad]);else full.add(b)}
+  const names=L.map(e=>String(e.o[e.f]));const shared=new Map();
+  for(const [e,bad] of todo){if(e.guest){nmOrder(e);continue}const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
+   const keepSur=e.fam&&nmSurOf(b)&&!NM_BAN_SUR.includes(nmSurOf(b))?nmSurOf(b):e.fam&&meSur&&!NM_BAN_SUR.includes(meSur)&&e.kind!=="mo"?meSur:null;
+   let nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.op||(keepSur?{sur:keepSur}:{}));
+   e.o[e.f]=pre+nb;if(e.f==="pn"&&e.o.name===b)e.o.name=nb;
+   if(e.o.eid&&typeof e.o.call==="string"){const oc=e.o.call;e.o.call=nmSurOf(nb)+" "+oc.split(" ").slice(-2).join(" ");if(held.get(b)===1&&oc!==e.o.call&&nmSurOf(b)!==nmSurOf(nb))nmRewrite(oc,e.o.call,names)}
+   let refs=0;if(bad!=="dup"&&held.get(b)===1)refs=nmRewrite(b,nb,names);else if(bad!=="dup"&&!shared.has(b))shared.set(b,{nb,x:null});
+   const x={old:raw,neu:pre+nb,why:bad,kind:e.kind,refs};if(e.by)x.by=e.by;/* who keeps the short form (diagnostics) */if(shared.has(b)&&!shared.get(b).x&&shared.get(b).nb===nb)shared.get(b).x=x;out.push(x)}
+  /* a name two people shared, and every holder was renamed (e.g. two maids "Thu Thủy"): texts and name keys (S.npw "Thu Thủy|maidSell")
+     cannot tell them apart, but they must not keep naming nobody (law 6b: a person named in any road really exists) -> they go to the
+     first holder renamed (the player's family / the friend's people / the world, in that order); if someone still holds it, they stay */
+  if(shared.size){const now=new Set(nmPeople().map(e=>nmBare(e.o[e.f])));for(const [b,v] of shared)if(!now.has(b)){const k=nmRewrite(b,v.nb,names.concat([...now]));if(v.x)v.x.refs=k}}
+  /* "Phế phi họ X" label of the cold palace */
+  try{const o="Phế phi họ Lý",n2="Phế phi họ Tần";if(S.lyF&&S.lyF.name===o)S.lyF.name=n2;const k=nmRewrite(o,n2,[]);if(k)out.push({old:o,neu:n2,why:"sur",kind:"lbl",refs:k})}catch(e){}
+  const R=nmReg();for(const e of nmPeople())R[nmBare(e.o[e.f])]=R[nmBare(e.o[e.f])]||e.kind;
+  try{if(S.st){if(S.st.guard)R[nmBare(S.st.guard)]="m";if(S.st.stu)R[nmBare(S.st.stu)]="m"}if(S.lcfPn)R[nmBare(S.lcfPn)]="f"}catch(e){}
+  S.nmV=1;NM_FIX.runs++;if(out.length){NM_FIX.renamed.push(...out.map(x=>Object.assign({at:why||""},x)));if(NM_FIX.renamed.length>400)NM_FIX.renamed.splice(0,NM_FIX.renamed.length-400)}
+ }catch(e){console.error("nmFix",e)}return out}
+window.nmFix=nmFix;window.NM_FIX=NM_FIX;
+/* ---------- coop-name-clash: the two players' people in ONE name list (law 6b), the HOST decides, the guest reads the same ----------
+   S.nmReg and S.nmOrd are WORLD keys (jcoopworld W_KEYS + HOST_ONLY): the guest's new names avoid every name the host ever gave, and
+   the host's rename orders reach her. A person of the friend (her coop entry, her maid / servants / children / home family, read from
+   the room's P of her seat) holds her name before every world person and the host's own people (they give way: nmFix renames them, texts
+   follow). Only behind the host player herself (or an earlier person of the friend) does one of hers give way; the host cannot rename a
+   person that lives on her seat, so it writes an ORDER S.nmOrd[her pid] = [{p:path in her S, o:old, n:new}] (n registered at once) and
+   her seat applies it (nmOrdApply, after every rebuild and on the host-lag relay); the host drops an order once her blob shows it done. */
+const nmPidF=()=>{try{return window.COOPW.seat==="a"?902:901}catch(e){return 0}},nmPidMe=()=>{try{return window.COOPW.seat==="a"?901:902}catch(e){return 0}};
+function nmAt(s,p){let o=s;if(p==="name")return s;for(const k of String(p).split(".")){if(!o||typeof o!=="object")return null;o=o[k]}return o&&typeof o==="object"?o:null}
+function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&typeof S.nmOrd==="object"?S.nmOrd:{};const L=S.nmOrd[pid]=Array.isArray(S.nmOrd[pid])?S.nmOrd[pid]:[];
+ const raw=String(e.o[e.f]),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);let x=L.find(z=>z.p===e.fp&&z.o===b);
+ if(!x){const n=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.fam&&nmSurOf(b)?{sur:nmSurOf(b)}:{});x={p:e.fp,o:b,n};L.push(x);NM_FIX.orders=(NM_FIX.orders||0)+1}
+ if(!e.fr)e.o[e.f]=pre+x.n/* her coop entry on this seat (a display copy) shows the new name at once; her seat sends it back after she applies */}
+function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
+ for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
+  const hers=nmPers(P.S);O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)||hers.some(e=>nmBare(e.o.name)===z.o)/* review r1: a path from her entry's copy can miss her real S (kidsCopy drops dead children: "kids.i" shifts) -> still pending while any of her people holds the old name (nmOrdApply finds it by name the same way) */});if(!O[k].length)delete O[k]}}catch(e){}}
+/* the other player's own people from the room's P (on the guest too: the host at home is not on her stage, yet she holds her name) */
+function nmOtherHeld(b){try{const W=window.COOPW;const P=W&&W.on&&W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead?nmPers(P.S).filter(e=>nmBare(e.o.name)===b).length:0}catch(e){return 0}}
+/* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
+const NM_ORD={applied:0,last:null};
+function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Array.isArray(L)||!L.length)return 0;let n=0;const mine=nmPers(S);
+  for(const z of L){if(!z||!z.o||z.o===z.n)continue;let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
+   const raw=String(o.name),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);o.name=pre+z.n;n++;
+   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length+nmOtherHeld(z.o);if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
+  if(n){NM_ORD.applied+=n;NM_ORD.last={why:why||"",n}}return n}catch(e){console.error("nmOrdApply",e);return 0}}
+/* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
+   held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
+   C.W.S.nmReg + dnames) is renamed now, before it is sent (jcoopworld attach). Her own name too: the new character is not yet anyone. */
+function nmNamesOfC(C){const A=[],V=new Set();try{const W=C.W||{},WS=W.S||{};const live=x=>x.alive!==false&&x.alive!==0&&!x.dead&&!x.out;
+  const b=(x,lv)=>{if(x&&typeof x==="object"&&typeof x.name==="string"){const n=nmBare(x.name);A.push(n);if(lv!==false&&live(x))nmVars(n).forEach(v=>V.add(v))}};
+  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(x=>b(x))}
+  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn){A.push(nmBare(c.pn));nmVars(nmBare(c.pn)).forEach(v=>V.add(v))}else b(c)}}
+  (WS.men||[]).forEach(x=>b(x));try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(x=>b(x))}catch(e){}
+  for(const k in WS.nmReg||{})A.push(k);(WS.dnames||[]).forEach(n=>A.push(nmBare(n)));
+  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>b(e.o))}}catch(e){console.error("nmNamesOfC",e)}
+ return{full:A.filter(Boolean),vars:V}}
+const NM_BIRTH={runs:0,renamed:[]};
+/* her person is a clash when the full name is taken (living or dead, ever given) or, as nmFix judges the living, a short form of it is a
+   living person's (no "Phương Hoa" beside "Bạch Phương Hoa"): checked here so the host's join sweep has nothing of the room to rename */
+function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const T=nmNamesOfC(C);const taken=new Set(T.full);const mine=nmPers(S);const own=new Set(),ownV=new Set();let n=0;NM_BIRTH.runs++;
+ const hit=(b,kind)=>taken.has(b)||own.has(b)||(kind!=="mo"&&nmVars(b).some(v=>T.vars.has(v)||ownV.has(v)));
+ for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!hit(b,e.kind)){own.add(b);nmVars(b).forEach(v=>ownV.add(v));continue}
+  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...T.vars,...own,...ownV];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
+  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);nmVars(nb).forEach(v=>ownV.add(v));n++;
+  try{nmRewrite(b,nb,mine.map(m=>String(m.o.name)))}catch(x){}NM_BIRTH.renamed.push({p:e.fp,old:b,neu:nb})}
+ return n}
+window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
+(function(){
+ const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{nmFix("load")}catch(e){}return r};
+ const s0=start;start=function(){const r=s0.apply(this,arguments);try{nmFix("start")}catch(e){}return r};
+ /* coop-name-clash: an order the host relays inside the week (review/coop-host-lag ops carry the world key nmOrd) is applied at the next
+    render on her seat, as a sync from the host (CW.inFC: the guest tripwire counts only writes outside a sync); no orders = one lookup */
+ if(typeof render==="function"){const r0=render;render=function(){try{const W=window.COOPW;if(W&&W.on&&S&&S.nmOrd&&!nmOwner()){const L=S.nmOrd[nmPidMe()];if(Array.isArray(L)&&L.length){W.inFC=(W.inFC||0)+1;try{nmOrdApply("relay")}finally{W.inFC--}}}}catch(e){}return r0.apply(this,arguments)}}
+ if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{nmFix("month")}catch(e){}return r}}
+})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -84925,8 +85129,7 @@ function worldNames(){const own=new Set([S,S.maid,...(S.staff||[]),...(S.kids||[
  try{for(const r of (CW.base&&CW.base.W&&CW.base.W.R)||[]){if(r&&r.name&&!r.coop)a.push(r.name);for(const x of r&&r.staff||[])if(x&&x.name&&!x.coop)a.push(x.name)}}catch(e){}
  return a}
 function clash(n,L,full){return L.includes(n)||(full&&L.some(u=>tail(u)===tail(n)))}
-function freeMaid(L){const f=MAIDS.filter(x=>!L.includes(x)&&x!==S.name);let n=f.length?pick(f):"";
- for(let i=0;!n&&i<60;i++){const c=pick(MAIDS)+" "+(R(8)+2+Math.floor(i/10)*8);if(!L.includes(c))n=c}return n}
+function freeMaid(L){return nmNew("maid",{more:L,reg:false})}/* one name core (jname.js); a guest draft is not registered */
 function checkNames(){const L=worldNames();
  if(clash(S.name,L,true)){const was=S.name;let n=was;for(let i=0;i<50&&clash(n,L,true);i++){S.name="";n=freshName()}S.name=n;TB.stat.rename++;TB.renamed=[was,n]}
  /* her maid: a free name of the maids' list, else the list name + a number (the same rule as mkServ j10), never one already in the world */
@@ -85970,7 +86173,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9a22db0ff08c";window.CTM_BUILD=BUILD;
+const BUILD="8daa2b5d911c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
