@@ -1,3 +1,5 @@
 base: dev/art/thu_comoi/s62_t4_THU_sqtest_L1834.txt
 allow: soft snow-violet silk   # owner L1847: 3rd hue must differ from main AND secondary -> soft 月白 #B6D3DB
 allow: phi bạch tím tuyết L1834   # owner L1847 caption
+allow: an embroidered silk sash with hanging jade belt pendants and tassels   # owner L1851 G57: no jade pendant in any prompt
+allow: never covered by sleeve or shawl   # owner L1851 G57
