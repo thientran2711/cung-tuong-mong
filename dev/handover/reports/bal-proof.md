@@ -27,7 +27,7 @@ Measured build: **review/bal-proof 985a0904** = night-balance-bundle 21703845 (H
 | gap HOME − DIRECT | | **−15.4 ±10.4** (95% CI −36..+5) | | | | **+12.0 ±11.6** (95% CI −11..+35) | |
 
 How to read it (OUTSIDE_PLAN §12 «HH reach after outside route: within ±5 of the same origin's direct entry»):
-- Per life started, the home road gives fewer HH. That is by design: 40% of home lives end outside (married; the §12 palace share is 70–75%, here 60% at n=47, inside the measured outside-nums band ±7).
+- Per life started, the home road gives fewer HH. That is by design: 40% of home lives end outside (married; the §12 palace share is 70–75%, here 60% ±7 at n=47: about 1.5 SE under 70; outside-nums measured 76.7% at n=180 with kcbot, which plays the home road differently from kchh nha, so this is not an OR12 split miss).
 - A home-road girl who reaches the palace does better than a direct starter (+12). She enters with higher rank, Danh 42 and Tài 100 (the kc2val «value of waiting»).
 - **Neither gap is a proven miss.** Both 95% CIs include the ±5 band (all lives −36..+5; reached the palace −11..+35). One SE is about 10 points, so proving ±5 needs about 250 lives per arm (≈80 browser-h for the direct arm alone). **No retune.** A tune now would chase noise, and the HH gate moves tonight anyway.
 - Lean to watch: if the «reached the palace» +12 holds on more lives, the home road is the stronger palace entry (Tài 100 at entry is the outlier). The knob would be the home stat gains (kc2val-home, LIVE), not this job's scope.
