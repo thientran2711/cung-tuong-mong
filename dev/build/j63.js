@@ -101,7 +101,9 @@ function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.ma
 const KA_BLK=[["duoc","Được"],["mat","Mất"],["kem","Kèm"]];
 function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
-function kaUnit(h){const t=kaPlain(h).trim();return t.length<=28&&(/^[\p{L}][\p{L}\s]{0,22}(?:\s*[+\-−]\s?|\s)\d+(?:\s*khắc)?$/u.test(t)||/^\d+\s*khắc$/u.test(t)||/^[\p{L}][\p{L}\s]{0,22}\s\d+\s*→\s*\d+(\s*\([+\-−]\d+\))?$/u.test(t))}
+/* r3 perf (LAND CHAIN 2 QC): one result per item text, cached — the same items are re-rendered every render()/buổi (5.8k calls ≈ 86 ms at CPU x4 before) */
+function kaUnit(h){const C=kaUnit.c||(kaUnit.c=new Map()),k=String(h);let v=C.get(k);if(v===undefined){if(C.size>3000)C.clear();v=kaUnit0(k);C.set(k,v)}return v}
+function kaUnit0(h){const t=kaPlain(h).trim();return t.length<=28&&(/^[\p{L}][\p{L}\s]{0,22}(?:\s*[+\-−]\s?|\s)\d+(?:\s*khắc)?$/u.test(t)||/^\d+\s*khắc$/u.test(t)||/^[\p{L}][\p{L}\s]{0,22}\s\d+\s*→\s*\d+(\s*\([+\-−]\d+\))?$/u.test(t))}
 /* kit-thanh-bai: [Cần][Tốn] once, then THÀNH block (Được/Mất/Kèm), then BẠI block; a sure act (R.one) has the THÀNH block only; an empty BẠI says so in one dim line */
 function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  for(const [k,lab] of [["why","Cần"],["ton","Tốn"]])if(R[k].length)h+=kaRowH(k,lab,R[k]);

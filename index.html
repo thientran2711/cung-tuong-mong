@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"93d4ce9b","t":"2026-11-21T16:43Z","c":"kit-ef-unit r2: unit nowrap wins over the square-card !important rules; kitRows tags stat items; test on real .kopt/.kart cards","b":"a42e01f0b41d","h":[{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"}]};
+window.CTM_BI={"s":"a43e5421+","t":"2026-11-21T16:43Z","c":"kit-ef-unit r3: build line","b":"c66b920d8924","h":[{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28285,7 +28285,9 @@ function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.ma
 const KA_BLK=[["duoc","Được"],["mat","Mất"],["kem","Kèm"]];
 function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
-function kaUnit(h){const t=kaPlain(h).trim();return t.length<=28&&(/^[\p{L}][\p{L}\s]{0,22}(?:\s*[+\-−]\s?|\s)\d+(?:\s*khắc)?$/u.test(t)||/^\d+\s*khắc$/u.test(t)||/^[\p{L}][\p{L}\s]{0,22}\s\d+\s*→\s*\d+(\s*\([+\-−]\d+\))?$/u.test(t))}
+/* r3 perf (LAND CHAIN 2 QC): one result per item text, cached — the same items are re-rendered every render()/buổi (5.8k calls ≈ 86 ms at CPU x4 before) */
+function kaUnit(h){const C=kaUnit.c||(kaUnit.c=new Map()),k=String(h);let v=C.get(k);if(v===undefined){if(C.size>3000)C.clear();v=kaUnit0(k);C.set(k,v)}return v}
+function kaUnit0(h){const t=kaPlain(h).trim();return t.length<=28&&(/^[\p{L}][\p{L}\s]{0,22}(?:\s*[+\-−]\s?|\s)\d+(?:\s*khắc)?$/u.test(t)||/^\d+\s*khắc$/u.test(t)||/^[\p{L}][\p{L}\s]{0,22}\s\d+\s*→\s*\d+(\s*\([+\-−]\d+\))?$/u.test(t))}
 /* kit-thanh-bai: [Cần][Tốn] once, then THÀNH block (Được/Mất/Kèm), then BẠI block; a sure act (R.one) has the THÀNH block only; an empty BẠI says so in one dim line */
 function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  for(const [k,lab] of [["why","Cần"],["ton","Tốn"]])if(R[k].length)h+=kaRowH(k,lab,R[k]);
@@ -90857,7 +90859,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a42e01f0b41d";window.CTM_BUILD=BUILD;
+const BUILD="c66b920d8924";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
