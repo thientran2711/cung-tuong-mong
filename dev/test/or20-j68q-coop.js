@@ -113,17 +113,19 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const t0=Date.now();while(Date.now()-t0<30000){const f=o=>o.p.evaluate(()=>!!rivals.find(v=>v.coop));if(await f(A)&&await f(B))break;await clear(A);await clear(B);await sleep(400)}}
  for(const o of [A,B])await o.p.evaluate(()=>{window.__F=[];const m0=e68Make;e68Make=function(s){const d=m0.apply(this,arguments);if(d)window.__F.push([s.id,q6life()]);return d}});
  const fid=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f?f.id:null});const fA=await fid(A),fB=await fid(B);
- await A.p.evaluate(fA=>{S.rank=5;cold("Bị vu yểm bùa");S.coldRank=5;S.framedBy=fA;render()},fA);
- await B.p.evaluate(()=>{for(const v of rivals)if(!v.coop)v.queen=false;S.rank=BAL.voice.hq;render()});
+ /* COOP_SWAP=1: the other seat order — seat B (guest) in lãnh cung, seat A (host) Hoàng hậu */
+ const SW=+process.env.COOP_SWAP||0;const CO=SW?B:A,HH=SW?A:B,fCO=SW?fB:fA;console.log('seat order',SW?'B cold / A queen':'A cold / B queen');
+ await CO.p.evaluate(fA=>{S.rank=5;cold("Bị vu yểm bùa");S.coldRank=5;S.framedBy=fA;render()},fCO);
+ await HH.p.evaluate(()=>{for(const v of rivals)if(!v.coop)v.queen=false;S.rank=BAL.voice.hq;render()});
  for(let w=0;w<4;w++){for(const o of [A,B])await o.p.evaluate(()=>{const e=e68();e.nx=0;for(const k of Object.keys(e.cd))if(/^q6/.test(k))delete e.cd[k];if(!S.out&&window.__seatCold){S.rank=5;cold("x");S.coldRank=5}});
-  await A.p.evaluate(()=>{window.__seatCold=1});await weekBoth(A,B,w+1)}
- const ra=await A.p.evaluate(()=>({F:window.__F,life:q6life(),cand:e68Cands(null).map(x=>x[0].id),gloat:(E68I.q6coldGloat.pp()||{}).a0}));
- const rb=await B.p.evaluate(()=>{const f=rivals.find(v=>v.coop);const o={F:window.__F,life:q6life(),hh:q6hh(),cand:e68Cands(null).map(x=>x[0].id),fOut:!!(f&&f.out)};if(f){f.coldBy='me';o.visit=(E68I.q6visitCold.pp()||{}).a0;o.fid=f.id}return o});
+  await CO.p.evaluate(()=>{window.__seatCold=1});await weekBoth(A,B,w+1)}
+ const ra=await CO.p.evaluate(()=>({F:window.__F,life:q6life(),cand:e68Cands(null).map(x=>x[0].id),gloat:(E68I.q6coldGloat.pp()||{}).a0}));
+ const rb=await HH.p.evaluate(()=>{const f=rivals.find(v=>v.coop);const o={F:window.__F,life:q6life(),hh:q6hh(),cand:e68Cands(null).map(x=>x[0].id),fOut:!!(f&&f.out)};if(f){f.coldBy='me';o.visit=(E68I.q6visitCold.pp()||{}).a0;o.fid=f.id}return o});
  console.log(JSON.stringify({ra,rb}).slice(0,1500));
  ok(ra.life==='cold'&&ra.F.some(f=>/^q6cold/.test(f[0])),'A in lãnh cung: a lãnh cung j68 card fired in co-op weeks',ra.F);
  ok(ra.F.filter(f=>f[1]==='cold').every(f=>/^q6cold/.test(f[0]))&&ra.cand.every(id=>/^q6cold/.test(id)),'A: only lãnh cung cards while there',ra);
  ok(rb.hh&&rb.cand.some(id=>/^q6hh/.test(id))&&!rb.cand.some(id=>/^q6(cold|srv)/.test(id)),'B Hoàng hậu: duty cards among her candidates, no cold / servant card',rb.cand);
- ok(ra.gloat===fA,'two-way: on A, the framer who gloats over her is B (the other player)',[ra.gloat,fA]);
+ ok(ra.gloat===fCO,'two-way: on A, the framer who gloats over her is B (the other player)',[ra.gloat,fCO]);
  ok(rb.fOut&&rb.visit===rb.fid,'two-way: on B, A (in lãnh cung) is the consort B can visit as the one she sent there',rb);
  for(const o of [A,B])ok(o.errs.filter(e=>!/WebSocket|net::|Failed to fetch/.test(e)).length===0,o.name+': no page errors',o.errs.slice(0,5));
  const f=res.filter(r=>!r[0]).length;console.log(`${res.length-f}/${res.length} passed`);await b.close();process.exit(f?1:0)})();
