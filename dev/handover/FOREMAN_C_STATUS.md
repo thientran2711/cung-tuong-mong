@@ -956,3 +956,4 @@ NEWACCT#13 HANDOVER ~02:40Z: depth 3, ctx 27 % (START ~4 % + 25 % → roll). TAK
 NEWACCT#13 ~02:42Z: opened #14 session_01D3E3NauaLGHu8gXNd9siaj. GEN1 + CHECK1 told to report to #14. #13 stops.
 NEWACCT#14 ~00:16Z: START depth 4, START_CTX ~4 % (used_tokens read 0; estimate) → roll at ~29 %, ceiling 60 %. No schedules. Waiting GEN1 thu finals (L1576) + owner answer on xuân t1/t3 collars.
 NEWACCT#14 ~00:20Z: GEN1 ac9aef9 thu s62 t1–t6 FINALS (810 cr) LOOKED + sent L1578 (L1577 = takeover note). Notes: t5/t6 tassels near ears may read as earrings; t6 yellow leans orange-gold. Wait owner.
+NEWACCT#13 ~02:50Z: OWNER L1577 (in #13 chat): t2 xuân collar = what she likes BUT a diagonal crossed line at the neck (inner robe crossed collar from DESIGN17 inner sentence) is a fault; #13 missed it. Forwarded to #14: inner garment straight top edge, no crossed collar at neck; t1/t3 = t2 outer collar.
