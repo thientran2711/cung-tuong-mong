@@ -1835,3 +1835,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:15Z) + rv kit-dialog-2 session_01Rc5AsMaLLvZ2wrtmc2Tjti (198825c5). Queue + or20-j68q d11280f5 (E-LANDER).
 - (06:20Z) keeper review/kit-mark-fix 569259cb (on kit-info-fixed d7adcc1b): rank+name one colour on person tag, #38 left column fits/scrolls with card; #17 not reproduced → NH8m sent repro (reports/mark-verify-shots/, dev/test/fixback-2111.js) to keeper. NH8m archived (verify done).
 - (06:25Z) gold r2 94a37f51 (Emperor only) → rv LhrW re-review. chapter-card-3 4771570e (#27 rest) → rv session_01Rc5AsLEAMwsLLk9M3n7ZPx. Queue + coop-guest-agent f7e54803 (B lander). cold-faction 5168e396 re-gating at E-LANDER.
+- (06:30Z) kit-info-fixed d7adcc1b FAIL (Fold: «!» under dialog ✕) → keeper fixing. hao-huu f654456a (#2, BIG) → opus rv session_01Rc5AsL294sG5kphwVE5b5S. LANDED wear-slots 8acb2bef.
