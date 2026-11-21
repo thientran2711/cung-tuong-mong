@@ -2182,3 +2182,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:57Z) LAND CHAIN 2: co-op Worker REDEPLOYED from 9c5b6de3 (coop-room-faces merge.js) by GitHub Action coop-worker.yml run #9 (44932651661) success 17:55Z; no manual deploy.
 - (21/11 18:08Z) GAP v4 01df2e49: DONE 47 / IN WORK 19 (all waiting on landing; D bundle gates 6) / NO OWNER 27 = 11 jobs. SPREAD: C J1–J5 ORDER (22 art rows; C had 0 workers on them), B J10 KP01 after D bundle, E J11 M83, MAIN: J7 KP09 body-fit → keeper #5 after relrows, J8 podium-wire d6868a02 → LRRY queue, J9 M14 PDF SENT to owner. Worker JNTe7U11 done (archive).
 - (18:06Z) LAND CHAIN 2: LANDED dresscode-r4-land 0faf7a05. Queued podium-wire-r1 d6868a02 after kit-win-pay.
+- (18:08Z) KIT KEEPER #5 SSK kit-relrows-ms1word 36032ad2 → rv MSxp. «Lòng» game-code family (jtin/j15/j10/j1/j19/j2/j14) ORDERed to B (law 11, after rel-men r4). LANDED dresscode 0faf7a05.
