@@ -11,9 +11,9 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | 7 | 02:12 | Cung nhân: small portrait floating; act cards | owner-2111-cungnhan.jpg | keeper | in work | — |
 | 8 | 02:14 | Rank+name tag not centred | owner-2111-cungnhan.jpg | keeper | in work | — |
 | 9 | 02:10 | «Người chạy việc…» info box → «!» on avatar top-right corner | owner-2111-infobox-bang.jpg | keeper | in work | — |
-| 10 | 02:12 | Ân oán picker too big (3rd time) → one compact row | owner-2111-anoan-picker.jpg | rel-picker-r3 session_01Rc5AsJZRwZRBfh2sUuQErH | in work | — |
-| 11 | 02:14 | Ân oán relation card: 2 rows take half the frame → compact | owner-2111-anoan-card.jpg | rel-picker-r3 | in work | — |
-| 12 | 02:16 | «Cùng Cảnh Phúc cung với ta» for a chủ vị → «Chủ vị Cảnh Phúc cung, nơi ta ở» | owner-2111-chuvi-line.jpg | rel-picker-r3 | in work | — |
+| 10 | 02:12 | Ân oán picker too big (3rd time) → one compact row | owner-2111-anoan-picker.jpg | rel-picker-r3 session_01Rc5AsJZRwZRBfh2sUuQErH | LIVE | 56ff0db0 |
+| 11 | 02:14 | Ân oán relation card: 2 rows take half the frame → compact | owner-2111-anoan-card.jpg | rel-picker-r3 | LIVE | 56ff0db0 |
+| 12 | 02:16 | «Cùng Cảnh Phúc cung với ta» for a chủ vị → «Chủ vị Cảnh Phúc cung, nơi ta ở» | owner-2111-chuvi-line.jpg | rel-picker-r3 | LIVE | 56ff0db0 |
 | 13 | 02:18 | Place label order: palace on top, hall below | owner-2111-place-order.jpg | chiton-name | in work | — |
 | 14 | 02:20 | Show EVERY frame state (filled) in a separate PDF; fix-back file separate; fix whole group | owner-2111-phephai-empty.jpg | ui-tour-states session_01Rc5AsMRxZnFfU6zhm7mvad | in work | — |
 | 15 | 02:22 | Empty tabs (Phe phái…) need picture card «Ta chưa có …» like «Ta chưa có con» | owner-2111-empty-state.jpg | empty-states session_01Rc5AsMTnwmUdoGmZsd4Uvk | in work | — |
@@ -63,3 +63,4 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 47 | 03:54 | Same dialog frame size, but the left figure has a different size/position per dialog → one size + position (Hoàng hậu standard) | img/_review/refs/owner-2111-figure-size.jpg | keeper | in work | — |
 | 48 | 03:56 | Death «Kiếp này» frame: white mourning flower top centre + white drapes hanging around the frame (her sketch), phone + iPad | img/_review/refs/owner-2111-death-frame.jpg | Foreman C art + keeper frame (85) | to open | — |
 | 49 | 04:00 | REPEAT/angry: option card odds meter on its own row → on the title row; iPad 2 columns when text fits; phone picture fills card; dialog picture+info FIXED, only buttons scroll (rules OD L1867/L1878 regressed) + regression test | img/_review/refs/owner-2111-optcard-row.jpg + dialog-fixed.jpg | keeper | in work | — |
+| 48 | 03:56 | Death «Kiếp này» frame: white mourning flower top centre + white drapes hanging around the frame (her sketch), phone + iPad | img/_review/refs/owner-2111-death-frame.jpg | art: Foreman C ART REQUEST (86); wiring: dialog-stack worker session_01Rc5AsMKqxj4qxqFG31WLXb as kit frame variant (keeper checks) | routed | — |

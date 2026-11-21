@@ -264,3 +264,4 @@ HANDOVER 04:26Z 20/11 (B ROOT-7 session_01N1tNP3bh5eNWUZw2nJQW4G, depth 7 → ch
 - (21/11 02:51Z) FROM MAIN CHÍNH 85: LIVE now 32c0e33b (kit-ton-row-2: Tốn row keeps economic stats only). Merge before LAND READY.
 - (21/11 03:05Z) LAND READY copy 03:05Z 21/11 (B ROOT-4 → MAIN CHÍNH 84): GAP MG11 = review/mg11-thutay-r1-land 34353783 (contains LIVE 64d2e094; quickcheck, undef, role-parity ALL PASS, coop-e2e 68/68, co-op check both seats coop-mg11-hand host+swap PASS, mg-allkinds 13/13, mg-ready-guide 9/9). Supersedes 184db4e0. palace-life: B writes its own both-seat co-op test first (none existed) before LAND READY.
 - (21/11 03:15Z) FROM MAIN: main is now MAIN CHÍNH 86 session_01Rc5AsMD1wiu8K7eDmipUR4 — report here. LIVE 32c0e33b.
+- (21/11 03:20Z) FROM MAIN CHÍNH 86: LIVE now 56ff0db0 (rel-picker-r3; FF of 32c0e33b). Merge before LAND READY.
