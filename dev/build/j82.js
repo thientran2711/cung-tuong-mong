@@ -172,14 +172,16 @@ window.kg82FxPop=kg82FxPop;window.kg82FxRing=kg82FxRing;
 /* mg-play2 (kit, BAL.mgFx): THE lit path to follow — the board OUTSIDE [x0,x1] is darkened by laneDim, the path gets a bright core (glow colour × lane) and two bright
    glowing edges (ring colour), so it reads at a glance on every painting; vertical band, full height unless y0/y1 given */
 function kg82FxLane(g,x0,x1,y0,y1,W){const F=BAL.mgFx;if(y0==null)y0=0;if(W==null)W=g.canvas.width;g.save();
- g.fillStyle=`rgba(10,6,20,${F.laneDim})`;if(x0>0)g.fillRect(0,y0,x0,y1-y0);if(x1<W)g.fillRect(x1,y0,W-x1,y1-y0);
- const gr=g.createLinearGradient(x0,0,x1,0),c=F.glow,h=x=>Math.round(x*255).toString(16).padStart(2,"0");gr.addColorStop(0,c+h(F.lane*.55));gr.addColorStop(.5,c+h(F.lane));gr.addColorStop(1,c+h(F.lane*.55));
- g.fillStyle=gr;g.fillRect(x0,y0,x1-x0,y1-y0);g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y1);g.moveTo(x1,y0);g.lineTo(x1,y1);g.stroke();g.restore()}
-/* mg-play2 (kit, BAL.mgFx): THE «avoid this» look — a red (kit --bad) danger ring with a small ✕ round a thing the player must NOT touch; hitAt = when it was hit
+ /* den-look (owner 21/11: no hard white edge lines): the dimmed board fades in over laneFade·width beside the path, the core keeps its brightness and fades softly to nothing at the sides */
+ const wd=x1-x0,fd=Math.max(8,wd*F.laneFade),hx=x=>Math.round(x*255).toString(16).padStart(2,"0"),dim=a=>`rgba(10,6,20,${a})`;
+ if(x0>0){const l=Math.max(0,x0-fd*2),gl=g.createLinearGradient(l,0,x0,0);gl.addColorStop(0,dim(F.laneDim));gl.addColorStop(1,dim(F.laneDim*.35));if(l>0){g.fillStyle=dim(F.laneDim);g.fillRect(0,y0,l,y1-y0)}g.fillStyle=gl;g.fillRect(l,y0,x0-l,y1-y0)}
+ if(x1<W){const r=Math.min(W,x1+fd*2),gr2=g.createLinearGradient(x1,0,r,0);gr2.addColorStop(0,dim(F.laneDim*.35));gr2.addColorStop(1,dim(F.laneDim));g.fillStyle=gr2;g.fillRect(x1,y0,r-x1,y1-y0);if(r<W){g.fillStyle=dim(F.laneDim);g.fillRect(r,y0,W-r,y1-y0)}}
+ const gr=g.createLinearGradient(x0,0,x1,0),c=F.glow;gr.addColorStop(0,c+hx(F.lane*.12));gr.addColorStop(.28,c+hx(F.lane*.85));gr.addColorStop(.5,c+hx(F.lane));gr.addColorStop(.72,c+hx(F.lane*.85));gr.addColorStop(1,c+hx(F.lane*.12));
+ g.fillStyle=gr;g.fillRect(x0,y0,wd,y1-y0);g.restore()}
+/* mg-play2 (kit, BAL.mgFx): THE «avoid this» hit cue (den-look: the static danger ring + ✕ badge was removed, the thing keeps its plain picture) — hitAt = when it was hit
    → a red burst that blooms and fades over badMs (the hit cue). Returns the shake offset (px) to give the hit thing / the player's piece. */
-function kg82FxBad(g,x,y,r,now,hitAt){const F=BAL.mgFx,red=kg82Col("--bad",kg82Col("--red","#c23b22"));g.save();g.strokeStyle=red;g.lineWidth=Math.max(2.5,r*2*F.bad);g.shadowColor="rgba(0,0,0,.35)";g.shadowBlur=4;
- g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();const k=r*.3,bx=x+r*.72,by=y-r*.72;g.fillStyle=red;g.beginPath();g.arc(bx,by,k*1.15,0,Math.PI*2);g.fill();
- g.strokeStyle="#fff";g.lineWidth=Math.max(2,k*.42);g.beginPath();g.moveTo(bx-k*.5,by-k*.5);g.lineTo(bx+k*.5,by+k*.5);g.moveTo(bx+k*.5,by-k*.5);g.lineTo(bx-k*.5,by+k*.5);g.stroke();g.restore();
+function kg82FxBad(g,x,y,r,now,hitAt){const F=BAL.mgFx,red=kg82Col("--bad",kg82Col("--red","#c23b22"));
+ /* den-look (owner 21/11): NO symbol drawn over the thing to avoid — the picture is clear; only the hit burst remains */
  if(!hitAt)return 0;const e=now-hitAt;if(e<0||e>=F.badMs)return 0;const q=e/F.badMs;g.save();g.globalAlpha=1-q;g.strokeStyle=red;g.shadowColor=red;g.shadowBlur=F.blur*.5;g.lineWidth=Math.max(4,r*.3*(1-q));
  g.beginPath();g.arc(x,y,r*(1+q),0,Math.PI*2);g.stroke();g.restore();return Math.sin(e/26)*F.badShake*(1-q)}
 kg82FxBad.shake=(now,hitAt)=>{const F=BAL.mgFx,e=now-hitAt;return e<0||e>=F.badMs?0:Math.sin(e/26)*F.badShake*(1-e/F.badMs)};
@@ -187,14 +189,14 @@ kg82FxBad.shake=(now,hitAt)=>{const F=BAL.mgFx,e=now-hitAt;return e<0||e>=F.badM
    bright core (glow × lane), two glowing edges — same numbers, same look as the straight kg82FxLane */
 kg82FxLane.path=(g,top,bot)=>{const F=BAL.mgFx,W=g.canvas.width,H=g.canvas.height;if(!top.length)return;const poly=()=>{g.moveTo(top[0][0],top[0][1]);for(const p of top)g.lineTo(p[0],p[1]);for(let i=bot.length-1;i>=0;i--)g.lineTo(bot[i][0],bot[i][1]);g.closePath()};
  const h=x=>Math.round(x*255).toString(16).padStart(2,"0");g.save();g.beginPath();g.rect(0,0,W,H);poly();g.fillStyle=`rgba(10,6,20,${F.laneDim})`;g.fill("evenodd");
- g.beginPath();poly();g.fillStyle=F.glow+h(F.lane);g.fill();g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;
- for(const L of [top,bot]){g.beginPath();L.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}g.restore()};
+ /* den-look: no white edge lines — the core glows softly into the board (shadow bloom only) */
+ g.beginPath();poly();g.shadowColor=F.glow;g.shadowBlur=F.blur*.5;g.fillStyle=F.glow+h(F.lane);g.fill();g.shadowBlur=0;g.fill();g.restore()};
 /* mg-play2 (law 11): the SAME lit path along a stroke to trace (thư pháp …): P = [[x,y]…], w = the path width — glow core × lane + glowing ring edge */
 kg82FxLane.stroke=(g,P,w)=>{const F=BAL.mgFx,h=x=>Math.round(x*255).toString(16).padStart(2,"0");if(!P.length)return;const go=()=>{g.beginPath();P.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()};
- g.save();g.lineCap="round";g.lineJoin="round";g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=w+2*F.laneEdge;go();g.shadowBlur=0;g.strokeStyle=F.glow;g.lineWidth=w;go();g.restore()};
+ /* den-look: soft glow halo (no white ring line): a wide faint pass, then the core */
+ g.save();g.lineCap="round";g.lineJoin="round";g.shadowColor=F.glow;g.shadowBlur=F.blur*.5;g.strokeStyle=F.glow+h(F.lane*.5);g.lineWidth=w+2*F.laneEdge;go();g.shadowBlur=0;g.strokeStyle=F.glow+h(F.lane);g.lineWidth=w;go();g.restore()};
 /* mg-play2 (law 11): the «keep it here» zone of a gauge (nấu / Tu đức level …): kit --good × BAL.mgFx.zone + glowing ring edges, one look for every gauge */
-kg82FxLane.zone=(g,x,y,w,h)=>{const F=BAL.mgFx;g.save();g.globalAlpha=F.zone;g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(x,y,w,h);g.globalAlpha=1;g.shadowColor=F.glow;g.shadowBlur=F.blur*.3;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge*.7;
- g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.moveTo(x,y+h);g.lineTo(x+w,y+h);g.stroke();g.restore()};
+kg82FxLane.zone=(g,x,y,w,h)=>{const F=BAL.mgFx;g.save();g.shadowColor=F.glow;g.shadowBlur=F.blur*.3;g.globalAlpha=F.zone;g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(x,y,w,h);g.restore()};/* den-look: no white edge lines, soft glow only */
 window.kg82FxLane=kg82FxLane;window.kg82FxBad=kg82FxBad;
 function kg82SprR(n){const im=kg82Img(n);return im.naturalWidth?im.naturalHeight/im.naturalWidth:1}
 /* label on a painting: light halo (or dark halo on night boards) so text always reads */
@@ -519,7 +521,7 @@ window.startContest=startContest;window.playArt=playArt;
    kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
      · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
        (.kgr-demo, one of six motions by engine group: fall / swing / hold / drag / tap / dodge; still under Cảnh động off / reduced motion;
-      dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a thing with the kit danger ring ✕ comes down it, the hand drags the player's piece aside and back);
+      dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a plain lotus comes down it, the hand drags the player's piece aside and back);
      · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
      · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
        a ghost hand (.kgt-hand) shows each move from the engine's own hint hook KG82.peek (point / drag path / button sel / hold-release), unscored, nothing
@@ -646,11 +648,9 @@ body.kg82cf #modal{z-index:40}
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
-.kgr-demo[data-m=dodge] .kgr-line{opacity:1;top:0;bottom:0;height:auto;left:36%;right:36%;border-radius:0;background:var(--gold);opacity:.5;box-shadow:0 0 14px var(--gold);border-left:3px solid var(--k-card);border-right:3px solid var(--k-card)}
-.kgr-demo[data-m=dodge] .kgr-obj{opacity:1;left:calc(50% - 13px);width:26px;height:26px;background:var(--k-card);box-shadow:none;border:3px solid var(--bad,#c23b22);animation:kgrDrop 2.4s linear infinite}
-.kgr-demo[data-m=dodge] .kgr-obj::after{content:"✕";position:absolute;right:-9px;top:-9px;width:14px;height:14px;border-radius:50%;background:var(--bad,#c23b22);color:var(--k-card);font:700 10px/14px var(--body);text-align:center}
+.kgr-demo[data-m=dodge] .kgr-line{opacity:1;top:0;bottom:0;height:auto;left:36%;right:36%;border-radius:0;background:linear-gradient(90deg,transparent,var(--gold) 28%,var(--gold) 72%,transparent);opacity:.5;box-shadow:none}/* den-look: soft glow edges, no white edge lines */
+.kgr-demo[data-m=dodge] .kgr-obj{opacity:1;left:calc(50% - 13px);width:26px;height:26px;background:#e48aa4;box-shadow:none;border:0;animation:kgrDrop 2.4s linear infinite}/* den-look: a plain lotus, no danger ring / ✕ */
 .kgr-demo[data-m=dodge] .kgr-o2{top:auto;bottom:16%;width:20px;height:20px;background:var(--gold);border:0;box-shadow:0 0 10px var(--gold);animation:kgrDodge 2.4s ease-in-out infinite}
-.kgr-demo[data-m=dodge] .kgr-o2::after{content:none}
 .kgr-demo[data-m=dodge] .kgr-o3{display:none}
 .kgr-demo[data-m=dodge] .kgr-hand{top:auto;bottom:-22%;animation:kgrDodgeH 2.4s ease-in-out infinite}
 @keyframes kgrDrop{0%{top:-24%}100%{top:112%}}
