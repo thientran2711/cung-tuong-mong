@@ -2045,3 +2045,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (13:19Z) rv MSxp PASS kit-ef-unit r2 → LAND READY d46ad6de (review/kit-ef-unit-rv2) → 89 chain.
 - (13:19Z) LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W READY (depth 6, START_CTX ~6 %, roll ≤31 %): /home/user/wt/live + sland/landq scripts set up; waits 89 TAKE OVER, lands nothing before.
 - (13:21Z) rv MC6N PASS duodo-focus r2 → LAND READY 5e7dae26 (review/duodo-focus-rv) → 89 chain (early slot asked). rv MC6N ARCHIVED. LtG4 kept to record LIVE mp4 after land (CDN review folder wiped). Art still open: Tát hand / NPC slap (C).
+- (13:28Z) 89: LANDED ending-screens-2 fc7f98f6; ban-cung QC timeout → moved to queue end. CHAIN HANDED to LAND CHAIN 2 LRRY (queue: duodo-focus, kit-mark-fix, kit-dialog-2, coop-emo-seat, mg-intro-2, coop-guest-names, cold-faction-land2, jlost-kyngo, kit-ef-unit, ban-cung). 89 trig_01AYa1kW confirmed OFF; MAIN 89 + MAIN 93 ARCHIVED. All LAND READY now → LRRY.

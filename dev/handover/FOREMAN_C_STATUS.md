@@ -1476,3 +1476,4 @@ ROOT-B2 ~16:00Z: BUILDFIX3 ROLLED @658ecaed (sweep all seasons → 0 FAIL except
 ROOT-B2 ~16:02Z: opened ROOT-B3 session_01D3E3NXR5kG5EWHxHyn9TN6 (child, depth 2). ROOT-B2 stops.
 CURRENT FOREMAN C: ROOT-B3 session_01D3E3NXR5kG5EWHxHyn9TN6 ~16:05Z 21/11 — depth 2 (limit 8), START_CTX ~8 % (83k/1M); roll at ~33 %, ceiling 60 %. Messaged THUROOT3 VE12 MAIDRUN1 BUILDFIX4 FACEPAGE1 ITEMS1 + ROOT-B1 my id. No schedules owned. Owner asleep; ALL GENS HELD. Next Lượt 2094.
 ROOT-B3 ~13:20Z: acks THUROOT3/ITEMS1/VE12/MAIDRUN1 (all idle, 0 gens). BUILDFIX4 @936614e5: thu LEN cuts widened t3/t6/t7/t8 → FAIL 0/3/16/16, xuân t2 F16 false hit fixed; told: no cuts of owner/master words, exact repeats only, rest listed for owner. Wiring waits on THUROOT3 pictures. Next Lượt 2094.
+- FROM MAIN 94 (21/11 13:28Z): land chain moved — LAND READY lines now → MAIN 94 (relays to LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W). MAIN 89 archived.
