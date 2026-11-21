@@ -20,7 +20,7 @@ Only huong lost a live continuous closeness cue.
 mg-allkinds 7/7, mgcal-redo 10/10, mg-noword-a/b/kit pass (31 kinds 0 words), quickcheck ALL OK. coop-e2e NOT run (no origins here; engine change is canvas-only, no sync). Shots Fold 755x1000 + iPad 1180x820 far/near/vnear/match looked: steps read clearly (empty / brown 1 / gold 2 / green 3 + ring). Shots not in git.
 
 # ROUND 2 — WIDENED (owner 21/11 ~00:50Z: guiding words come back; reading-heavy text stays out)
-Branch review/huong-cue (merged LIVE a4fdb642). New sha in HANDOVER_SESSION9.md.
+Branch review/huong-cue @ d9fa3a93 (merged LIVE a4fdb642). Tests: mg-noword-a/b/kit pass, mg-allkinds 7/7, mgcal-redo 12/12, coop-e2e 68/68.
 
 ## What changed (one place first, then per engine)
 - **kg82Sym (j82)**: the ONE filter that turned every pop/verdict word into a sign now keeps the word when it is short (BAL.mgFx.popMax = 30 chars); longer lines still fall back to a sign. This restores every short pop/verdict word of group a at once ("Vừa khéo!", "Trượt", "Khớp hương mẫu!", "Gần giống", "Lệch hương", "Xa quá…").
