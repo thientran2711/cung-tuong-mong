@@ -398,6 +398,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- **TAGS ON THE PICTURE (KIT 8.10, owner 21/11 mark #66 FINAL; jk2b.js `kitSceneArt` o.tags / `kitArtTags`, test dev/test/quest-chips-scan.js):** a dialog whose queue item has `qtags:[type, deadline]` (quest offer: «Giao thiệp» / «Hạn 4 tuần») shows exactly those TWO words as `.ksart-tag` on the TOP-LEFT of its event picture; no picture → kit rows «Loại | Hạn» above the text. All other quest info = kit label|value rows («Bước 1 | …»). Never a chip cloud in a quest / request / phụ tuyến dialog (phụ tuyến news lines `p.past.nochip` stay plain notes). KIT KEEPER to check: new option of the existing scene-art part, not a new part.
 - Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`

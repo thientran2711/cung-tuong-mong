@@ -344,7 +344,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(n.nodeType!==1)continue;const tg=n.tagName;
   if(tg==="P"&&n.classList.contains("past")){const pl=kpPlain(n.innerHTML);
    if(first&&!sub&&pl.length<90){sub=n.innerHTML;first=false;continue}
-   flush();if((pl.match(/ · /g)||[]).length>=2){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
+   flush();if((pl.match(/ · /g)||[]).length>=2&&!n.classList.contains("nochip")){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
    else blocks.push(`<div class="kpnote">${kpChipify(n.innerHTML)}</div>`);continue}
   first=false;
   if(tg==="P"||tg==="SPAN"&&!n.className||tg==="B"||tg==="I"||tg==="EM"||tg==="STRONG"||tg==="SMALL"&&!n.className||tg==="A"){prose.push(tg==="P"?n.innerHTML:n.outerHTML);if(tg==="P")flush();continue}
