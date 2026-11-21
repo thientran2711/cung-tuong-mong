@@ -1,4 +1,4 @@
-# rv-td-dung-clear — reviewer verdict: FAIL (one narrow law-9 item; everything else PASS)
+# rv-td-dung-clear — reviewer verdict: PASS after reviewer fix (c2aacf88)
 
 PRIORITY #1 CHECK: brief main83-rv-td-dung-clear.md, worker report td-dung-clear.md, OD td_dung row (21/11 ~00:50Z) + words row 1998, main LIVE 4f34f461, review/td-dung-clear 03ba85c3; git grep origin/main for roundRect/pill in dev/build: none before this branch (it introduces the first private canvas chip and framed buttons).
 
@@ -16,3 +16,8 @@ Merged: review/td-dung-clear-rv @ 9fb6dcd5 = LIVE 4f34f461 + 03ba85c3 + rebuilt 
 If main waives law 9 for this board, the sha above can be FF'd as is (all else green); if not, a worker needs ~1 small edit in kgTdWalk (pill + pads) then re-shoot.
 
 ~100% xong (review) / ~85% chơi được.
+
+## UPDATE — law 9 fixed by the reviewer on review/td-dung-clear-rv @ c2aacf88 (MAIN 84 order: law 9 not waived)
+- pill() now draws kit kg82Lbl text (no private chip); the two canvas pads are replaced by kit buttons (.kgbtn.nwb-btn, icon-only ‹ ›, in .kg82act like td_ngon); the one to hold gets the kit gold .ksel ring; canvas halves still work. Bowl lowered onto the head. Icon-only because the kit no-text-in-play pass turns lettered buttons into ●.
+- Gates re-run on the fixed build: mgcal-redo 12/12, ag-mgcal 0 FAIL, mg-ui-rest 39/39, mg-noword-b ALL OK, coop-e2e 68/68, quickcheck PASS. Fold + iPad play shots looked.
+- Verdict: PASS c2aacf88 (FF of LIVE 4f34f461).
