@@ -1,8 +1,8 @@
-# REVIEW kc-coop-select r1 (E36r, opus BIG) — of 8b26815f → PASS 30cc71b2ca67475678ae63dd916162555e6400ef
+# REVIEW kc-coop-select r1 (E36r, opus BIG) — of 8b26815f → PASS 2eb1ac5f1f0d559256667cdaef170d86281b4e65
 
-PRIORITY #1 CHECK ('kc-coop-select|jcoopthinb|coop-thin|kc2Sel|nlAcc0'): OD 3 | ledger 5 | claims E36 (SSK 8b26815f, archived), E36r row 572 | main a4fdb642→c3a398dd: jcoopthinb unchanged vs 548dcd0d | review/* review/coop-thin-g (Foreman B, G #8): no edit in jcoopthinb.js / coop-together / accept-scan (checked, below) | reused: worker's coop-together.js / accept-scan.js, no new test files.
+PRIORITY #1 CHECK ('kc-coop-select|jcoopthinb|coop-thin|kc2Sel|nlAcc0'): OD 3 | ledger 5 | claims E36 (SSK 8b26815f, archived), E36r row 572 | main a4fdb642→64d2e094: jcoopthinb unchanged vs 548dcd0d | review/* review/coop-thin-g (Foreman B, G #8): no edit in jcoopthinb.js / coop-together / accept-scan (checked, below) | reused: worker's coop-together.js / accept-scan.js, no new test files.
 
-Reviewer session_01DgYSWp7ktXYqaHyYiXStGA, depth 6 (limit 8). Branch review/kc-coop-select-r1 = 8b26815f + final-merges of LIVE b1033eb0, a4fdb642, 8c8b8b6b, c3a398dd (index.html/sw.js only conflicts, rebuilt with build_site.sh). FF on LIVE c3a398dd. LIVE moved to 64d2e094 while the last gates ran: not merged (main re-merges; only index/sw expected to conflict).
+Reviewer session_01DgYSWp7ktXYqaHyYiXStGA, depth 6 (limit 8). Branch review/kc-coop-select-r1 = 8b26815f + final-merges of LIVE b1033eb0, a4fdb642, 8c8b8b6b, c3a398dd, 64d2e094 (index.html/sw.js only conflicts, rebuilt with build_site.sh). FF on LIVE 64d2e094.
 
 ## Verdict: PASS (no fix needed)
 
@@ -34,7 +34,8 @@ Reviewer session_01DgYSWp7ktXYqaHyYiXStGA, depth 6 (limit 8). Branch review/kc-c
 | one-core-guard | da370d3b | PASS (fails 0) |
 | quickcheck (open, old save, perf, core gates) | a32dbf9e | PASS · open 1676 ms · old save ok |
 | 354a572b (LIVE 8c8b8b6b: den-look, kit-ton-row, mgcal b4 — disjoint): coop-together default + muoi/bd home=b + thin=8, coop-e2e ×2, accept-scan, quickcheck | 354a572b | 29/29 ×3, 68/68 ×2, 0/17 skipped, PASS |
-| FINAL 30cc71b2 (LIVE c3a398dd: kit-kg82-stack CSS / td-dung rows / kit-progress-run — not the ✕ path): coop-together default + muoi/bd home=b + thin=8, coop-e2e ×2, quickcheck | 30cc71b2 | 29/29 ×3, 68/68 ×2, PASS (open 1600 ms, old save ok) |
+| 30cc71b2 (LIVE c3a398dd: kit-kg82-stack CSS / td-dung rows / kit-progress-run — not the ✕ path): coop-together default + muoi/bd home=b + thin=8, coop-e2e ×2, quickcheck | 30cc71b2 | 29/29 ×3, 68/68 ×2, PASS (open 1600 ms, old save ok) |
+| FINAL 2eb1ac5f (LIVE 64d2e094: huong-cue, dauho-lv5, thancan; j82/jcoopthinf edits not on the ✕ / life path): accept-scan, coop-together default + muoi/bd home=b + thin=8, coop-e2e ×2, quickcheck | 2eb1ac5f | 0/17 skipped, 29/29 ×3, 68/68 ×2, PASS (open 1530 ms, old save ok) |
 
 ## Shots (local only; CDN 401) — LOOKED 3×
 Fold 755x1000 + iPad 1180x820, guest seat in a thin-8 room: 01b-selection «Lễ ra mắt» (Dâng điệu múa / Dâng khúc đàn cố quốc / Cúi đầu chờ xét, kit option cards, odds ladder word «Nắm chắc», no overflow; figure = silhouette because CDN art is 401 locally); exam-result moment (gate cover over the result, as in solo). Scratch only, deleted.
