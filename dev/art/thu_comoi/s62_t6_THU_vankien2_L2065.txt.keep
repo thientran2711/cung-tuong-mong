@@ -1,0 +1,10 @@
+base: dev/art/thu_comoi/s62_t6_THU_vankien2_L2055ref.txt
+allow: the two-tier cloud collar  # owner L2065 via ROOT: crop ref for tier SHAPE only + rich embroidery on vân kiên
+allow: vân kiên) exactly like image 3  # same
+allow: same two tiers  # same
+allow: same slim shape  # same
+allow: same pearl fringe  # same (pearl fringes still named in the same sentence)
+allow: "Thu · Quý phi · L2055 mẫu cổ"  # caption
+allow: her own colour stays clearly the main robe colour  # dedup trim to fit 10 000 (same idea in the next COLOUR RULE sentence), for owner L2066 chest-centre embroidery
+allow: much less yellow than an imperial noble consort's robe  # same trim
+allow: gold only as thin accents on the borders  # dedup ("gold only as thin accents" stays in the next COLOUR RULE)
