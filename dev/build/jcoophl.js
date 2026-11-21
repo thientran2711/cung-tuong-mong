@@ -91,9 +91,10 @@ function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function"
      portrait S.pid, her maid / servants / children) — given before her person reached the host — is wiped on HER seat by j88's figPick guard
      (who.fid===S.pid -> null) and kept on the host: one consort, two faces for ever (r5 consort:c19 host / none guest). The host owns world
      faces, so the world person yields: her face is dropped here and the host draws a new one (figFill), which the diff sends. */
-  /* only her portrait: j88 wipes nothing else (a world face equal to her maid's / servant's is a duplicate, not a split; left as a note) */
+  /* only her portrait: j88 wipes nothing else (a world face equal to her maid's / servant's, or the Thái hậu's, is a duplicate, not a split; left as a note) */
   const pid=typeof P.S.pid==="string"&&POOLF.test(P.S.pid)?P.S.pid:null;
-  if(pid)for(const p of worldPeople())if(p&&p.fid===pid){const k=whoKey(p);HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;
+  /* rivals only: j88's guard is (rivals||[]).includes(who); the Thái hậu / a servant holding her portrait is the same face twice, not a split (note) */
+  if(pid)for(const p of rivals||[])if(p&&!p.coop&&p.fid===pid){const k=whoKey(p);HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;
    if(k){FLAST.delete(k);FID.delete(k)/* fidBack must not put her portrait back after the next merged week */}clash++;HL.stat.clash=(HL.stat.clash||0)+1}}catch(e){}}
 let clash=0;
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
