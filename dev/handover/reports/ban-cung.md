@@ -1,0 +1,2 @@
+# BAN CUNG — worker report (D #14)
+- (21/11 ~09:20Z) START: id session_01964izDzJ9DZJRZ4MUStHk6, depth 6, START_CTX ~5 % (est; get_session reads 0). Rollover at ~30 %, ceiling 60 %. PRIORITY #1 CHECK ('ban cung'/'xin cung'): OD 1 (21/11 ~04:12Z) | main origin/main:dev/build/j10.js j27.js j41.js j42.js j53.js | review/* none | claims none (D claims). Step 1 research → step 2 build on review/ban-cung.
