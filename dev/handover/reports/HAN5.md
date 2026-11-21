@@ -81,3 +81,7 @@ dev/art/seasons4/s62_t5_HAN_PHISIMPLE_L1880.txt (make_han_phisimple_L1880.py) = 
 9172 ch; keep PASS; check_store M06/M07 (= Phi).
 ### PHISIMPLE_PEARL_L1884 (owner L1884 via #25): PHISIMPLE_L1861 + ONE addition only
 Added after the band colours: ", small pearls stitched along the collar bands on the crossed collar edge itself" (no yoke, no fringe, not the L1880 words). keep PASS; check_store M06/M07.
+### Results L1880 / L1884 (VE9, sheet han_phisimple_L1880_L1884_VE9.png)
+- L1880 3zKyLD3REY: WIDE neckline. The collar edges reach the shoulder tips, the whole collarbone is bare, and the wide pink collar lies across the shoulders, the closest to Phi CqnIKlAEEy's silhouette so far WITHOUT a yoke. Bands: outer plum and pink visible, the pale purple inner band hardly separate.
+- L1884 YMlRJFKWeC: pearls show along the collar edge, but the V is narrower (ordinary crossed collar). The pearls alone do not give the shape.
+HAN5 read: the collarbone words (L1880) are the lever for the shape. The next step could be L1880 + pearls on the bands, plus a stronger band separation if the owner wants it.
