@@ -1367,10 +1367,10 @@ let kitRpKey="",kitRpRe=null,kitRpMap=null,kitRpHasKnown=false;lifeStore("kitRpM
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
   /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)").
-     KIT §48.3 (owner 21/11 ~04:33Z, #61): a person NOT in the people list (a story NPC: «Tể tướng Trịnh Thừa Chí») is still ONE unit — "title Capitalised Name (2–4 words)" (m[5], m[6]) in the title's colour;
+     KIT §48.3 (owner 21/11 ~04:33Z, #61): a person NOT in the people list (a story NPC: «Tể tướng Trịnh Thừa Chí») is still ONE unit — "title Capitalised Name (3–4 words: family + 2 given, e.g. Trịnh Thừa Chí; a 2-word «name» is a PLACE: Ma ma Đức Thọ, Thái giám Càn Thanh, Công chúa Cao Ly)" (m[5], m[6]) in the title's colour;
      a court post alone («nhà Tể tướng», Thượng thư, Thị lang, Tướng quân; m[7]) carries its colour too. Known people win (the alternatives are tried in order). */
   const known=L.length?`(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·])|`:"(?:";
-  kitRpRe=kRx(`(?<![\\p{L}])${known}(${KIT_RP_TITLES}) (\\p{Lu}\\p{Ll}+(?: \\p{Lu}\\p{Ll}+){1,3})|([Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân))(?![\\p{L}])`,"gu");
+  kitRpRe=kRx(`(?<![\\p{L}])${known}(${KIT_RP_TITLES}) (\\p{Lu}\\p{Ll}+(?: \\p{Lu}\\p{Ll}+){2,3})(?! (?:cung|điện|khố|viện|quốc|phủ|các|lâu|môn|hiên|quán|sảnh)(?![\\p{L}]))|([Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân))(?![\\p{L}])`,"gu");
   kitRpHasKnown=!!L.length}
  return kitRpRe}
 /* the kit markup for one "title name" pair (= kitName with the text's own title) */
@@ -1379,11 +1379,13 @@ function kitRankNameH(p,title,name){const col=typeof kitPersonCol==="function"?k
  return `<b class="kname${me?" kmy":""}" style="--rc:${col}"><span class="kti" style="--rt:${rt}">${esc(title)}</span> ${esc(name)}</b>`}
 window.kitRankNameH=kitRankNameH;
 /* one match → kit html: "title name" = kitRankNameH; "name (title" = the name block + " (" + the title in its tone */
+/* palace / country names that can look like a 3-word name (never a person) */
+const KIT_RP_PLACES=/(?:Càn Thanh|Càn Ninh|Khôn Ninh|Dưỡng Tâm|Đức Thọ|Tân Giả|Đại Hy|Cao Ly|Ba Tư|Bắc Địch|Thần Vũ|Nội Vụ|Từ Ninh|Thọ Khang|Cảnh Phúc|Chung Túy|Hàm An|Diên Khánh)/;
 function kitRpOne(t,n,n2,t2,u,un,ct){if(n){const p=kitRpMap&&kitRpMap.get(n);return p?kitRankNameH(p,t,n):""}if(n2){const p=kitRpMap&&kitRpMap.get(n2);if(!p)return"";
  const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;
  return `<b class="kname${me?" kmy":""}" style="--rc:${col}">${n2}</b> (<b class="kname" style="--rc:${col}"><span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(t2,col):""}">${t2}</span></b>`}
  const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- if(u&&un){const tone=typeof kitRankTone==="function"?kitRankTone(u,"#8a7350"):"";return `<b class="kname" style="--rc:${tone||"#8a7350"}"><span class="kti" style="--rt:${tone}">${esc(u)}</span> ${esc(un)}</b>`}
+ if(u&&un){if(KIT_RP_PLACES.test(un))return"";const tone=typeof kitRankTone==="function"?kitRankTone(u,"#8a7350"):"";return `<b class="kname" style="--rc:${tone||"#8a7350"}"><span class="kti" style="--rt:${tone}">${esc(u)}</span> ${esc(un)}</b>`}
  if(ct){const tone=typeof kitRankTone==="function"?kitRankTone(ct,"#8a7350"):"";return tone?`<b class="kname" style="--rc:${tone}"><span class="kti" style="--rt:${tone}">${esc(ct)}</span></b>`:""}return""}
 /* regex groups -> kitRpOne arguments (the known-people alternatives exist only when the people list is not empty) */
 function kitRpArgs(m){return kitRpHasKnown?[m[1],m[2],m[3],m[4],m[5],m[6],m[7]]:[undefined,undefined,undefined,undefined,m[1],m[2],m[3]]}
