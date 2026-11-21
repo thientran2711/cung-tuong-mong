@@ -395,5 +395,6 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===
   if(k==="home"&&!S.out&&typeof homePeople==="function")return homePeople().filter(j59person).length}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 try{const st=document.getElementById("stage");if(st&&window.ResizeObserver)new ResizeObserver(j59sched).observe(st)}catch(e){}
 addEventListener("resize",j59sched);
-window.j59lay=j59lay;/* the kit focus view (jfocus K-FOCUS-1) draws the SAME stage name tag + figure scale: it calls these three by name */window.j59tagHTML=j59tagHTML;window.j59col=j59col;window.j59fac=j59fac;
+window.j59lay=j59lay;
+window.j59tagHTML=j59tagHTML;window.j59col=j59col;window.j59fac=j59fac;
 })();

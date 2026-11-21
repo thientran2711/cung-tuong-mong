@@ -374,9 +374,12 @@ if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0
    "Việc" (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ… — the act cards, doable ones first: kitDoableFirst, KIT 37.1).
    The pick is remembered per viewer (hclh-inv-sub); both panes are rendered, the other one is hidden. ---------- */
 let KINV_SUB=(()=>{try{return localStorage.getItem("hclh-inv-sub")||"tui"}catch(e){return"tui"}})();
-function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],[["viec","Việc"]]);
+/* KINV_XTRA: more Tư trang sub-tabs a road registers ({k,label,on(),html()}, e.g. jkcg «Thư nhà»); same .ksubb control, same pane */
+const KINV_XTRA=[];
+function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const X=KINV_XTRA.filter(x=>{try{return x.on()}catch(e){return false}}).map(x=>{let h="";try{h=x.html()}catch(e){console.error("kinv xtra",e)}return[x.k,x.label,h]}).filter(x=>x[2]);
+ const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":X.some(x=>x[0]===KINV_SUB)?KINV_SUB:"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],X.map(x=>[x[0],x[1]]),[["viec","Việc"]]);
  const nav=`<div class="kinvsubw"><nav class="ksub kinvsub" role="tablist">${P.map(([k,l])=>`<button type="button" class="ksubb${k===cur?" on":""}" role="tab" aria-selected="${k===cur}" data-kinvsub="${k}">${l}</button>`).join("")}</nav></div>`;
- return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}<div class="kinvpane kdoable kpanec" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
+ return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}${X.map(x=>`<div class="kinvpane" data-kinvpane="${x[0]}"${cur===x[0]?"":" hidden"}>${x[2]}</div>`).join("")}<div class="kinvpane kdoable kpanec" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
 function kinvDoable(){try{const pane=document.querySelector('#panel [data-kinvpane="viec"]');if(!pane)return;
  const first=typeof kitDoableFirst==="function"?kitDoableFirst:function(box,sel){const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return;
    const off=e=>e.disabled||e.classList.contains("kdis")||e.getAttribute("aria-disabled")==="true"||(!/^(BUTTON|A)$/.test(e.tagName)&&!!(e.querySelector("button")&&e.querySelector("button").disabled));

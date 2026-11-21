@@ -215,11 +215,10 @@ function rtRefresh(){try{if(!S||!Array.isArray(deck))return;const d=deck.filter(
 /* category «Lối riêng» for the kit act art / category tabs */
 try{KIT_CAT["loi-rieng"]=["Lối riêng","#2c6e5a"]}catch(e){}
 (function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const s=window.__rtArt&&window.__rtArt[name];if(s)return{src:s,cat:"loi-rieng",label:"Lối riêng",col:"#2c6e5a"};return k0.apply(this,arguments)}})();
-/* the Cần row of a route card (kit j63 data-kneed) + its own failure line in Mất */
+/* the Cần row of a route card (kit j63 data-kneed) */
 (function(){const c0=cardH;cardH=function(a,i){if(!a||!a.rt)return c0.apply(this,arguments);let h=c0.call(this,Object.assign({},a,{t:a.lock?"":a.t}),i);
  try{if(a.lock&&a.t)h=h.replace(/<p><\/p>/,`<p>${a.t}</p>`);const L=kaTimeNeeds(cardCost(a),a.c&&a.c.bac<0?-a.c.bac:0);if(a.done)L.push({t:"chưa làm trong tuần này",ok:false});L.push(...a.rtNeed);
-  h=h.replace(/^<button( data-kneed="[^"]*")?/,`<button${kaNeedAttr(L)}`);
-  if(a.lx){const nm=effList(fmt(a.l||{})||"không mất gì","r");const lx=effList([fmt(a.l||{}),a.lx].filter(Boolean),"r");if(h.includes(nm))h=h.replace(nm,lx)}}catch(e){console.error(e)}return h}})();
+  h=h.replace(/^<button( data-kneed="[^"]*")?/,`<button${kaNeedAttr(L)}`);}catch(e){console.error(e)}return h}})();/* its lx failure line: the kit card j19 prints it (J3c) */
 /* ---------- dialogs (PEND: survive save / load; full act cards, not hidden: owner rule for route choices) ---------- */
 function rtPush(id,pp){const d=mkP(id,pp);if(!d)return;Q.push({t:d.ti,h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});if(!window.__bot)try{showModal()}catch(e){}}
 function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"":word(o)+" · "}thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
