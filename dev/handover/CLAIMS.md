@@ -732,3 +732,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
 | REVIEW dialog-person part 1 (SMALL sonnet) de1d7e11 (#58 #59 #67 ma-ma gone) | review/dialog-person-rv; briefs/main87-rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | RUNNING | 21/11 04:08Z |
 | REVIEW dialog-dedup (SMALL sonnet) 2a5997df (#85) | review/dialog-dedup-rv; briefs/main87-rv-dialog-dedup.md | MAIN CHÍNH 87 | session_01Rc5AsMG7xwmZZoHcPKThD4 | RUNNING | 21/11 04:11Z |
+| kit-dialog-2 worker (sonnet; #71 #75 #76 #80 #82 + KIT §6.2b overwrite; succeeds McXo2) | review/kit-dialog-2; briefs/main87-kit-dialog-2.md | MAIN CHÍNH 87 | session_01Rc5AsLvRJSwBGGefPUEw8B | RUNNING | 21/11 04:13Z |
