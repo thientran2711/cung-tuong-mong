@@ -756,6 +756,7 @@ window.kszListCols3=kszListCols3;
 (function(){const st=document.createElement("style");st.id="k-dialog-person";st.textContent=`
 .knr .knr-ta{display:block;font-size:.76rem;font-weight:700;letter-spacing:.02em;opacity:.85;line-height:1.1}
 #mb .kfact.kfav-off>.md{display:none!important}
+#mb .kfact.kfav-off{grid-template-columns:minmax(0,1fr)}
 #mb .kfact.kfav-off:not(.kfnodot){padding-left:0}
 .k3ev{position:relative}
 .k3ev>.kevav{position:absolute;left:6px;top:6px;z-index:3;display:flex;gap:4px;pointer-events:none}
