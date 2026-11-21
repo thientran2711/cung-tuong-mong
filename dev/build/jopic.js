@@ -361,11 +361,17 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
   +set("Một hàng dài, bậc M","1","M",[["Cúi đầu nhận lỗi","tốn: "+BAL.kitpage.demo.k+" khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -"+BAL.kitpage.demo.gift.bac+", "+BAL.kitpage.demo.k+" khắc"]])
   +set("Một hàng dài, bậc L (chữ dài nhất)","1","L",[["Xin về tảo mộ tổ tiên cho trọn đạo hiếu","tốn: Sức -"+BAL.kitpage.demo.tomb.suc+" · được: Đức +"+BAL.kitpage.demo.tomb.duc+", cha mẹ vui lòng"]])}})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
 (function(){const p0=kitOptPic;kitOptPic=function(title,b){const t=kitOptPlain(title),m=/^Đi làm:\s*(.+)$/i.exec(t);if(!m)return p0.apply(this,arguments);
  const r0=p0.apply(this,arguments);if(r0&&r0.src&&r0.how!=="ph")return r0;const r=p0.call(this,m[1],b);if(r&&r.src&&r.how!=="ph")return r;try{const a=kitActArt(m[1]);if(a&&a.src&&!/\/ph-(?:act-|event-|[plws]-)/.test(a.src)&&kitOptOnCdn(a.src))return{src:a.src,key:"",how:"cat"}}catch(e){}return r0&&r0.how==="ph"?r0:r};/* nothing yet (e.g. the person chip is painted later): "none" lets kpOptArt run again */window.kitOptPic=kitOptPic})();
+/* bag-inline (owner mark #23, 21/11 ~02:50Z "Tư trang › Việc: act cards have no picture"): the six Việc acts had no ACTS.json entry, so they showed the placeholder.
+   Code-side alias (no CDN manifest push; ACTS.json wins when it gains the same title): each reuses the picture of its meaning group
+   (owner 15/11: one picture per meaning group). Chợ đen has no picture of its own yet (ART REQUEST in FOREMAN_C_STATUS) and uses "buôn bán lén". */
+const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong-h","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
+try{const kak0=kitActKey;kitActKey=function(name){try{const a=KIT_ACT_ALIAS[kpPlain(name)];if(a&&!((KIT_ACTS.acts||{})[kpPlain(name)]))return a}catch(e){}return kak0.apply(this,arguments)}}catch(e){}
+try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,arguments);try{const n=kpPlain(name),a=KIT_ACT_ALIAS[n];if(a&&r&&!((KIT_ACTS.acts||{})[n]))r.src=`img/act-${a}.webp`}catch(e){}return r};window.kitActArt=kitActArt}catch(e){}

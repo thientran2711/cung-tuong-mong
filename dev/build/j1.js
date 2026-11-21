@@ -199,6 +199,9 @@ function newRival(rank,isQueen){const t=pick(TRAITS);
 function mkEmp(){const t=[];const ks=Object.keys(ETRAITS);
   while(t.length<2){const k=pick(ks);if(t.includes(k)||CLASH.some(([a,b])=>(a===k&&t.includes(b))||(b===k&&t.includes(a))))continue;t.push(k)}
   return {era:pick(ERA),age:BAL.ps.empAge[0]+R(BAL.ps.empAge[1]+1),reignY:1,traits:t,mood:1,likes:{flower:pick(LIKES.flower),music:pick(LIKES.music),dish:pick(LIKES.dish)},known:{}}}
+/* owner 21/11: «Hoàng thượng» is the NAME the game shows (it never tells her his name); the niên hiệu is a detail row (empEra). empName() = the STORY phrase only (băng hà, lên ngôi…) */
+function empEra(){return S.emp.era}
+function empNm(){return "Hoàng thượng"}
 function empName(){return `Hoàng thượng niên hiệu ${S.emp.era}`}
 function discover(){const u=Object.keys(LIKES).filter(k=>!S.emp.known[k]);if(!u.length)return false;const k=pick(u);S.emp.known[k]=true;
   log(`<span class="g">Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.</span>`);return true}
