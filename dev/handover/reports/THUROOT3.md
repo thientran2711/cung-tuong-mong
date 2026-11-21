@@ -36,3 +36,6 @@ Note: the files still carry a top-left CAPTION line (test label); drop it if Cha
 dev/art/thu_comoi/refs/hqp_t7_collar_kseQCFw16B_crop.jpg (250×100): PIL crop of kseQCFw16B (CDN preview, 340×255) box (88,0,338,100); the jade-drop necklace painted out with sampled skin colour (blurred mask). LOOKED: one-tier scalloped vân kiên with upright back band and pearl/gold edge, shoulder to shoulder; no chest panel, no peony, no necklace. Note: the throat clasp was hidden under the necklace, so it is not in the crop (the prompt still says "one small horizontal clasp"). Small source (kseQCFw16B is itself a 340×255 crop) → soft image, fine for SHAPE.
 HQP s62_t7_THU_L2105 attach list now: 1 nVsrRMPYQD (style) · 2 TdwDfOyVNR (royal-yellow colour) · 3 refs/hqp_t7_collar_kseQCFw16B_crop.jpg (collar SHAPE).
 B12/S07 gate = BUILDFIX4's job (B27/B28 update).
+## STEP 7 — owner L2111 no 'cape' word (0 cr)
+HQP s62_t7_THU_L2105: gem line "NEVER on the robe, cape, collar or belt" → "NEVER on the robe, collar or belt" (= L2106 gem line). keep PASS.
+Tần/Phi L2079 grep: no 'cape' in gem/shawl lines. Only hit = COLOUR RULE "main colour of the robe, sleeves and any cape" (builder sentence, 158 files) — left as is (not a gem/shawl line; for Tần it keeps the capelet in the robe colour). Flag for ROOT/BUILDFIX if the owner wants it gone family-wide. CAPELET CUT (L2041) untouched.
