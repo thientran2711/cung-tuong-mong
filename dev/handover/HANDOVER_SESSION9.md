@@ -2220,3 +2220,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:11Z) LAND CHAIN 2: LANDED kit-relrows-ms1word f44060d4.
 - (19:14Z) rv MSxp PASS kit-body-fit (KP09/J7) 821727de → LRRY after podium-wire-r2. C art (fx-hair/fx-cloth + body-fit.json) may start now (order 18:52Z in C STATUS).
 - (19:25Z) OWNER: no halo on the rows over the tassel → keeper #6 told; OD 18:55Z row overwritten in place.
+- (19:30Z) OWNER: no separate pendant layer; whole frame animates (parked #12) → OD + PARKING_LOT overwritten in place; keeper #6 + C told.
