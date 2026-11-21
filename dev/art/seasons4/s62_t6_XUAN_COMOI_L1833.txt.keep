@@ -1,5 +1,9 @@
 base: dev/art/seasons4/s62_t6_XUAN_COMOI_L1803s.txt
-allow: lower a little longer   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
-allow: both on the shoulders   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
-allow: never covering the neck or the square inner neckline   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
-allow: a pearl-edged collar trim   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: lower a little longer   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: both on the shoulders   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: never covering the neck or the square inner neckline   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: a pearl-edged collar trim   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: in LARGE bold letters   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: on the plain background   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: never over her body   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: write exactly this Vietnamese text WITH accents   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)

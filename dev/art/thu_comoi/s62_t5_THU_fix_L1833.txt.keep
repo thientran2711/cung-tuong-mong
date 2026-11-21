@@ -1,5 +1,5 @@
 base: dev/art/thu_comoi/s62_t5_THU_fix_L1803s.txt
-allow: highly translucent gauze shawl in pale IVORY-CREAM silk with a THIN GOLD EDGE along its borders   # owner L1829 drift fix (JOB6) + owner L1834 phi bạch snow-violet #C6BAE0 (colour words only) + boilerplate/caption trim for length
-allow: a soft neutral   # owner L1829 drift fix (JOB6) + owner L1834 phi bạch snow-violet #C6BAE0 (colour words only) + boilerplate/caption trim for length
-allow: so it reads as a light airy ivory veil   # owner L1829 drift fix (JOB6) + owner L1834 phi bạch snow-violet #C6BAE0 (colour words only) + boilerplate/caption trim for length
-allow: "Mùa Thu · Phi · ngọc trai nhỏ L1797 · phi bạch ngà L1804"   # owner L1829 drift fix (JOB6) + owner L1834 phi bạch snow-violet #C6BAE0 (colour words only) + boilerplate/caption trim for length
+allow: highly translucent gauze shawl in pale IVORY-CREAM silk with a THIN GOLD EDGE along its borders   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: a soft neutral   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: so it reads as a light airy ivory veil   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
+allow: "Mùa Thu · Phi · ngọc trai nhỏ L1797 · phi bạch ngà L1804"   # owner L1829 drift fix (JOB6) + L1834 phi bạch colour + A38 caption/boilerplate trim to stay under 10 000 bytes (Foreman C #24)
