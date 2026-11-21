@@ -60,4 +60,4 @@ Remaining families: LEN = old a51/a65 debt + the longer thu ladder words (most a
 - G69 chest-centre embroidery t2–t8 (owner L2054), F21 birds t4–t6 (season_birds_L2040.json prompt_words[season][first species][tK]) — both cost ~150–300 chars at t4/t5 (cells now ~9950): needs a length decision (owner) first.
 - person_gate a22 gap; LEN a51/a65; X08 m13 / X11 m43 face words (BUILDFIX1 list).
 - Other ages for items_per_person (a26–a65).
-Commits: fceb69d1, 04e23f3f, REPORT_COMMIT.
+Commits (on the force-updated branch): 076fc03c, 25dba2c3, 133c5e60. Context at end ~29 % → rollover: the COORDINATOR opens BUILDFIX3 with the HANDOVER list above.
