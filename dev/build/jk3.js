@@ -455,7 +455,7 @@ window.kitTabRowHTML=function(list,cur,attr){return list.map(x=>`<button class="
 function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollHeight>P.clientHeight*1.5;P.querySelectorAll(".kcattabs").forEach(r=>r.classList.toggle("kstick",long))}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
 /* tab-underline (C39): chip/tab rows that scroll sideways show NO scrollbar track or thumb (the grey bar / brown stub the owner saw); the overflow is hinted by a soft edge fade on the side that has more chips (.kfl / .kfr, set by kitTabFade) */
-const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip";
+const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip";
 function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{const o=r.scrollWidth>r.clientWidth+2&&getComputedStyle(r).overflowX!=="visible";r.classList.toggle("kfl",o&&r.scrollLeft>2);r.classList.toggle("kfr",o&&r.scrollLeft+r.clientWidth<r.scrollWidth-2)})}catch(e){}}
 let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
 document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
@@ -493,7 +493,7 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .cards>button.ka[hidden]{display:none!important}
 html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important}#panel .kcattabs .pct{flex:0 0 auto}
 /* tab-underline (C39): no scrollbar on any chip row; edge fade instead */
-.pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
+.pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
 .pctabs::-webkit-scrollbar,.kcattabs::-webkit-scrollbar,.ksub::-webkit-scrollbar,.ksubs::-webkit-scrollbar,.kmc-tabs::-webkit-scrollbar,.kchips::-webkit-scrollbar,.chips::-webkit-scrollbar,.relsel::-webkit-scrollbar,.hud2::-webkit-scrollbar,.j59strip::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;background:transparent!important}
 .kfr:not(.kfl){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
 .kfl:not(.kfr){-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px);mask-image:linear-gradient(90deg,transparent,#000 22px)}
@@ -616,7 +616,7 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>{x.classList.remove("k3long");const a=x.querySelector(":scope>.kaart");if(a&&a.dataset.k3t){a.style.removeProperty("flex");a.style.removeProperty("width");a.style.removeProperty("height");delete a.dataset.k3t}});
-  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.style.setProperty("height","84px","important");a.dataset.k3t="1"}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.dataset.k3t="1"/* #49c: the height is the card height (kitOptTier), never a fixed 84 */}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
@@ -630,7 +630,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
 html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important}
 html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
-html body #modal .opts.opts.opts.opts.k3tight>button.ka.kart>.kaart.kaart,html body #modal .kpscopts.kpscopts.kpscopts.k3tight>button.ka.kart>.kaart.kaart{flex:0 0 62px!important;width:62px!important;height:84px!important}html body #modal .opts.k3tight>button.ka.kart,html body #modal .kpscopts.k3tight>button.ka.kart{gap:7px!important}
+html body #modal .opts.opts.opts.opts.k3tight>button.ka.kart>.kaart.kaart,html body #modal .kpscopts.kpscopts.kpscopts.k3tight>button.ka.kart>.kaart.kaart{flex:0 0 62px!important;width:62px!important}html body #modal .opts.k3tight>button.ka.kart,html body #modal .kpscopts.k3tight>button.ka.kart{gap:7px!important}
 html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
 html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}

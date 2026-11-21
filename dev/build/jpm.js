@@ -120,7 +120,7 @@ function kpmRoomImg(k,part){try{const a=part==="cungnhan"?residenceArt(null,"cun
 (function(){const p0=placeOf;placeOf=function(k){const P=p0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||k!==h.k||!P)return P;
   const im=kpmRoomImg(k,h.part);const sc="kpm-"+h.part;if(im)SCIMG[sc]=im;
   const sl=kpmSlotOf(k);const base=sl!=null&&!kpmIsPlace(sl)?kpmName(sl):k==="home"?HOMEN:P.n;
-  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"&&!HALL_PN[base]?base:`${hallName(base,h.part)} · ${base}`})}catch(e){return P}}})();
+  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"&&!HALL_PN[base]?base:`${base} · ${hallName(base,h.part)}`})}catch(e){return P}}})();
 (function(){const c0=curPeople;curPeople=function(){const L=c0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||!S.visit||S.visit.k!==h.k)return L;
   if(h.part==="cungnhan")return L.filter(kpmIsSrv);
   const hd=kpmHead(h.k);return L.filter(p=>{const r=p&&p.ref;if(r&&rivals.includes(r)&&p.kind!=="chest")return kpmHallOf(r,h.k)===h.part;
