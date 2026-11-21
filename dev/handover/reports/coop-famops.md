@@ -1,6 +1,6 @@
 # coop-famops — co-op friend-act item ops move THAT piece, by identity (E44, opus BIG, FOREMAN E #26)
 PRIORITY #1 CHECK ('famApply|famDiff|b4Ops|RMHOW|loLose|jcoopworld'): OD 8 (law 6c) | main jcoopworld.js:476 «ret», :490 famDiff «rm» | review/* review/jlost-kyngo 2fa2e667 (E42, base of this branch; unchanged on origin at 11:20Z), review/dresscode-fix-r4 (E30d, scan reused) | claims: this row only (E44).
-Branch review/coop-famops FROM review/jlost-kyngo 2fa2e667 (E42's one owner change reused: loCaseOf / lostReturn / loKeepBy / loLedgerBack; no second owner-change path).
+Branch review/coop-famops FROM review/jlost-kyngo 2fa2e667, then MERGED review/jlost-kyngo-r1 8527f09c (PASS base, FOREMAN E #27; merge, no rewrite) (E42's one owner change reused: loCaseOf / lostReturn / loKeepBy / loLedgerBack; no second owner-change path).
 Head: see «STATUS» at the end. Files: dev/build/jcoopworld.js (+ site build), dev/test/coop-lost-scan.js (E42's scan + COOP_FAM driver), NEW dev/test/coop-famops-unit.js.
 
 ## Root cause (law 6c REAL OBJECTS, law 1 TWO-WAY)
@@ -25,38 +25,52 @@ Head: see «STATUS» at the end. Files: dev/build/jcoopworld.js (+ site build), 
 | 6 | «plant» | always pushed | id already hers → none |
 | 7 | lostReturn to the friend's ENTRY outside an act (Lén trả lại, Trả lại, nộp, hearing, holder dies…) | piece stayed in the entry copy (vanish) | hook: «ret» op to her seat (b4Send) + jil ilSent «sang hảo hữu»; inside an act the act's own diff sends it (famIn/famBk), inside a host NPC turn b4Ops «add» (b4in) |
 | 8 | loWeek on cases owned by the friend | closed «mat» (owner gone) every week end | wait (her seat keeps her side); expiry still ends them |
+| 9 | r2: her piece numbered on both seats (her entry got a host id before her own census numbered it) | (r1) id not found → nothing moved (coop-b1 «1 laydo» regression: host +1, her chest +0) | no piece of hers has that id → same slot + same kind; her id kept, the host's rides as `hiu`; every match (rm / ret / add / famWhere / famCase) reads iu OR hiu |
+| 10 | r2: the host's side of HER case closes without a return (his chest searched: her xạ hương seized as tang vật; holder gone = mất dấu) | hers stayed «thất lạc» while the piece sat in the host's evidence box (COOP_SWAP run: dup host box + guest case) | host famSweep after every act / buổi / week end: a friend-owned case newly done without a return how → «gone» op; her seat closes that case the same way (by id), the holder copy on her seat leaves, nothing comes home |
+| 12 | r2: «gone» on her seat | her census netted the closed case to Nội vụ phủ (dup with the host box) | routed «mất dấu bên hảo hữu» in her ledger |
+| 13 | r2: loWeek on MY pieces HELD by the friend (her entry pulled out at week end) | «mất dấu» = vanish | waits like the friend-owned ones |
+| 11 | r2: her lost piece leaves MY slots inside a host NPC turn (b4in: hearing / holder move → b4Ops «add») | my census netted it («mkt» net line, COOP_SKEW) | the lostReturn hook routes it «sang hảo hữu» (jil ilSent) when it was in my slots |
 Not changed: gifts (res.items → «Quà tặng», jil ilSent), kids/preg/art ops, pets (petApply), thin L6 rooms (famApply runs on the host in her context; the hook skips CW.ctx).
 No new number (law 4), no new player word (the «ret» line is the old one).
 
-## Scans (before = review/jlost-kyngo 2fa2e667, after = this branch; same scan file)
-coop-lost-scan.js (E42) + COOP_FAM=1 driver (default on): each week on BOTH seats — she may first put on a piece from her chest (B), I steal from the
-friend's entry (laydo/laydol), I hand back what I hold of hers (Cài đồ onto her / Lén trả lại / Trả lại), a host NPC steals from her entry. Census: host world + guest's own S by ledger id.
-| run | before | after |
-|---|---|---|
-| 20 wk smoke | 2 pieces dup (17 piece-weeks: host chest + guest case «lost») | (first fix) 1 dup same shape → fix 3 |
-| 12 wk | — | 0 dup · 0 vanish · net 0 |
-| 76 wk default | RUNNING | RUNNING |
-| 76 wk COOP_SWAP=1 | — | TODO |
-| 76 wk COOP_SKEW=24 | — | TODO |
-| coop-dresscode-scan 76 wk (r4 + this, tmp merge, not pushed) | E30d: guest trâm dup/vanish | RUNNING |
+
+## Scans (coop-lost-scan.js, E42's scan + COOP_FAM driver, default on; census by ledger id on both seats)
+Driver each week on BOTH seats: she may put on a chest piece (B); I steal from the friend's entry (laydo/laydol, up to 4 tries: LIVE theft odds
+are hard); I hand back what I hold of hers (Cài đồ onto her / Lén trả lại / Trả lại); a host NPC steals from her entry (host only).
+| run | base | dup pieces / piece-weeks | vanish | notes |
+|---|---|---|---|---|
+| 20 wk | before (2fa2e667) | 2 / 17 | 0 | host chest + guest case «lost» |
+| 63 wk (76 killed by timeout at w63) | before (2fa2e667) | 0 | 5 | returns outside acts never reached her seat |
+| 63 wk (76 killed by timeout) | after r1 (pre-merge) | 0 | 0 | |
+| 76 wk default | after r1 + merge 8527f09c | 0 | 0 | weak traffic (LIVE theft odds) → driver retries added |
+| 76 wk COOP_SWAP=1 | after r1 + merge | 1 / persistent | 0 | host's chest searched, her xạ hương seized → fix 10; run stalled w29 (both «Chờ hảo hữu…») |
+| 76 wk COOP_SWAP=1 | after r2 (b4e24258) | 0 | 0 | 90/90 PASS, traffic A steal 11 / npc 32 / ui 8 / plant 3, B steal 7 / ui 37 / plant 5 / wear 26 |
+| 76 wk COOP_SKEW=24 | after r2 (b4e24258) | 0 | 0 | 90/91: one host net line (her đàn) → fix 11 |
+| 76 wk default | after r2 (b4e24258) | 0 | 0 | that run's host life had no friend entry (A.nofriend 76) + one host page error «stip show rkOf null queen» (LIVE stipend code, not jcoopworld) + stall w37 → re-run |
+| 76 wk default | r2 (e3282a03) | 2 / 9 | 2 / 20 | (a) her xạ hương seized on the host again, her census netted the closed case → fix 12; (b) MY piece held by the friend read «mất dấu» at week end → fix 13; (c) OPEN: hoadien_bac (host's piece she stole) in her chest AND her box «nvp:dead» (her seat's copy of the host entry carried it when that copy was rebuilt) |
+| 76 wk COOP_SKEW=24 | r2 (e3282a03) | 0 | 0 | 91/91 PASS |
+| 76 wk default | r2 final (a211fcf0) | 0 | 2 / 9 | 89/90. OPEN: (d) id 555 (host piece held by her since w14, case still «held» = fix 13 holds) gone from her seat at w61, no ledger line on the host; (e) her maitrang handed back by the host at w80 («sang hảo hữu» on his ledger, his case done «nha») never seen on her seat in the last 2 weeks |
+| 76 wk SEED=9001 | r2 final (a211fcf0) | 0 | 0 | 88/91 (74 weeks run; 2 stalls w54/w60) |
+Stalls «week advanced for both» (both seats «Chờ hảo hữu…»): seen at w29 / w38 / w37 in 3 of 9 long runs, on runs with and without these
+changes' traffic; nothing of famops runs in the buổi handshake. OPEN item for the coop-sync owner (not this row).
+coop-dresscode-scan COOP_DBG=1, 76 wk (asked by E30r4 via E #28): BEFORE = review/dresscode-r4-land 0620c318 alone: 87/90 — «every lent piece in exactly ONE place»
+FAIL (6 persistent, 9 one-week transients) + 2 harness «#next enabled» waits. AFTER = 0620c318 + coop-famops a211fcf0 (local tmp merge, never pushed): 88/88 PASS.
+(Earlier r1 tmp merge with r4: 87/90 — the 7 persistent weeks are ONE loan piece A4 kimthoa_phuong (lender v1 → v8, lo:false)
+at a host NPC AND in the guest's il.box from w9: a dresscode / jil guest-box matter, not a friend-act op. OPEN item for dresscode (E30d).
 
 ## Gates
 | gate | result |
 |---|---|
-| coop-famops-unit (NEW, 13 checks) | PASS 13/13 |
-| one-core-guard | PASS (fails 0) |
-| kyngo-unit | PASS |
-| lost-items 755x1000 | 44 bool checks identical to 2fa2e667 (diffs = random names/ids only) |
-| quickcheck + old save | TODO |
-| coop-e2e 92/92 | TODO |
-| coop-b1 (famApply's own test) | TODO |
-| role-parity ×2 (alone) | TODO |
-
-## HANDOVER (if rolled)
-Worktrees: /home/user/wt/famops (review/coop-famops), /home/user/wt/famops-base (2fa2e667 + new scan, for «before»), /home/user/wt/famops-dc
-(tmp/famops-dc = this + review/dresscode-fix-r4, LOCAL ONLY, never push), /home/user/wt/famops-ho (handover). Logs /home/user/wt/fo-out/*.log.
-Local servers: python http.server 8744 (famops root) / 8745 (base root) for kyngo-unit / lost-items / unit test.
-Left: finish the scan rows above (76 wk default, SWAP, SKEW, dresscode), gates TODO, fill STATUS, FOREMAN_E_STATUS line, send_message FOREMAN E #26.
+| coop-famops-unit (NEW, 15 checks) | PASS 15/15 (a211fcf0) |
+| quickcheck + old save | PASS (c3d3020e build; core gates PASS, old save ok, perf within live) |
+| coop-b1 (famApply's own test, incl. 7b Lén trả lại) | 43/43 (b4e24258); 41/43 (e3282a03: step 8 «Người cùng cung, ngươi không thể ra tay» = both in one palace, room roll) · 43/43 (a211fcf0) |
+| coop-e2e | 94/94 (b4e24258; the suite now has 94 checks); 94/94 (e3282a03) |
+| role-parity ×2, alone | ALL PASS ×2 (b4e24258) |
+| kyngo-unit / one-core / lost-guest-probe | PASS (merged base, r1) |
+| lost-items 755x1000 | 44 bool checks identical to base (r1) |
 
 ## STATUS
-WIP.
+READY FOR REVIEW — review/coop-famops a211fcf0 (base: review/jlost-kyngo-r1 8527f09c merged in, no history rewrite).
+Long scans on the final head: SWAP/SKEW (r2 code, 1 commit before final) clean; default SEED=9001 clean; default seed 4242: 0 dup, 2 vanish (OPEN d/e above).
+OPEN for the reviewer / next row: (c) her seat's copy of the host entry re-carrying a piece she stole (1 piece, 1 run); (d)/(e) two vanishes in one 76-wk run;
+buổi-handshake stalls in 4 of 12 long runs (coop sync, not famops); dresscode loan piece row now clean with this branch.
