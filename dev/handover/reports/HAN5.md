@@ -90,3 +90,5 @@ From L1880, collar words only:
 - early NECKLINE sentence: "…opens WIDE and lies FLAT and SECURE on the shoulders, its edges reaching about TWO-THIRDS of the way out along both collarbones: the inner part of the collarbones visible, their outer ends covered, never slipping, never off the shoulders."
 - collar clause: "…lie flat and secure on the shoulders about two-thirds of the way out along the collarbones (inner part visible, outer ends covered) and meet a little above the bust in a broad V,"
 keep PASS; check_store M06/M07.
+### L1893 drawn (VE9): aFGoe7afSh 55 cr, sheet han_phisimple_L1893_VE9.png (3zKyLD3REY | new)
+Collar sits flat and secure on the shoulders, higher than L1880. The inner collarbones show, the outer ends are covered, and the V meets just above the bust. The wide pink-banded collar is kept. Open: the 3rd (pale purple) band is not readable (it is too close to the plum robe), but the pink band reads wide.
