@@ -860,3 +860,4 @@ FOR MAIN open: KIT REQUEST faded «Nắm chắc» meter on greyed/disabled optio
 LESSON: read EVERY «ORDER from MAIN» / «FROM MAIN» line at pickup and each wake (main changes number often — 92 → 93 at 11:20Z). Roll over a little BEFORE the line: each worker message costs ~5–10k context.
 PUSH RECIPE: worktree under /home/user/wt; flock fetch --depth=30 → checkout -f -B <b> origin/<b> → append → commit → push → on reject redo (capture your line in a variable first). Never rebase.
 Hourly wake: D #15 trigger trig_01HpDbJQ8T1XRwJbxVatMA2A is deleted at rollover; D #16 creates its own.
+- (21/11 12:16Z, D #15) ROLLED OVER → **FOREMAN D #16 = session_01964izEETBrWc48AZ1jsSvM** (child of D #15, depth 7). D #15 hourly trigger deleted; D #15 stops. Seats: report to D #16.
