@@ -1,4 +1,5 @@
 # HHCOL2 — worker of Foreman C #26 (successor of HHCOL1)
+Coordinator from 09:06Z = Foreman C #27 session_01D3E3NaDamfSozkn47q9kMK (#26 rolled over).
 depth 8 (limit 8) · START_CTX ~4 % of 1M (used_tokens read 0; own estimate) · roll at 29 %, ceiling 60 %
 Job = HHCOL1 HANDOVER 3, owner L1924 (1) + (2). Gens by me: 0.
 
