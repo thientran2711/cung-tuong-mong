@@ -38,7 +38,26 @@ PRIORITY #1 CHECK: review/kit-mark-fix-rv4 123c4572 (keeper #2 r3 + rv merge) re
 Merge: rv4 123c4572 + LIVE 99795d67 (newest; contains 419079d7). One conflict, jk4.js `kit-info-one` style block: kept LIVE's wider hosts (`.pc .pcb>.kb.kpkb>.kr>.krv` on the two `.pcpop` lines, K-INFO-TAP) AND kit-mark-fix's resize callback `kitInfoOneLine();kitPcMore()` + `kitPcTagColour` + `kitPcMore` (§6.3i/§6.3j). Everything else auto-merged (LIVE kszOwnAct3 + kitInfoOneLine selector, KIT.md). index/sw rebuilt.
 Tests: kit-mark-fix.js Fold 4/4 PASS every run; iPad 4 scenes: 3 runs → 1 run all PASS, 2 runs one card FAIL (first scenes, `more:false` + rank/name colour not yet applied = observer timing, random world). The SAME flake shows on rv4 123c4572 (iPad pop-maid FAIL) → pre-existing, not from the merge. kit-info-tap.js (LIVE side) PASS (0 FAIL). quickcheck: run 1 FAIL perf tab 569/422 (limit 549), run 2 PASS (render 233/250, tab 438/430, buổi 1308/1047, core gates PASS) — perf noise.
 
+## 3. kit-opt-title-wrap r2 — SẴN SÀNG KIỂM `review/kit-opt-title-wrap-r2` @ 486b922a (rv round 1 FAIL: flaky «meter on its own row», rv-kit-opt-title-wrap.md)
+PRIORITY #1 CHECK: rv-kit-opt-title-wrap.md round 1 | main d3f44022 (merged in) | review/kit-opt-title-wrap bb52274d (base) | claims #4.
+Root cause found with a decision log (debug only, `window.__kotwDbg`): NOT only canvas rounding. kitOptTier tries layouts synchronously (2 cols S → 1 col M → 1 col L) and calls kitOdFit1 in each trial; a trial row of 165/180 px set `kodrow`, the row then ended at 189/204 px — the ResizeObserver stays SILENT when the final size equals the size it last reported, so nothing refitted and the meter stayed under the title (`kodstk kodrow` on a 204 px row; the card had no picture yet in rv's file:// runs = .kopt without .kart → general wrap rule).
+Fix (j79 kitOdFit1 / jopic kitOptTier, one rule for every card with a meter):
+1. canvas compare with a 4 px pad (KIT_ODFIT.pad);
+2. VERIFY on the real layout after every choice: a meter still under the title → next step (kodstk, then kodrow), and that card is fitted again from scratch 120 ms later (max 3) so a step taken on a passing layout never sticks;
+3. kitOdFit1 records the width it decided for; the observer watches the title row (.kat), not the card;
+4. kitOptTier re-fits every card after its trial layouts (`kitOdRefit`: next frame + 200 ms);
+5. web fonts arriving (document.fonts.ready / loadingdone) re-fit every card.
+Test (rv ask): every dialog opened REP=5 times per device, each width measured after 250/0/60/150/400 ms and then on the SETTLED layout (same boxes 150 ms; kitOptTier re-picks 50 ms after a resize, so a 0 ms read is a passing state).
+Stability: before the fix (this harness, 4 parallel runs = busy CPU): 1180 dlg0 w320 FAIL 1 in 8 runs, 755 dlg0 w280 FAIL 2 in 8. After: 16/16 iPad-only + 16/16 Fold-only (REP=1, 4 parallel, debug on) + 8/8 full runs both devices (REP=5, 3 parallel + 1 file://dev/index.html) PASS; secondary 412/390/1366 PASS. Table unchanged from §1 (all titles ≥ 7.7 em, ≤ 3 lines).
+Gates: quickcheck PASS (render 236/237, tab 450/515, buổi 1038/1278, core gates PASS) · coop-e2e 124/124 (one run 120/138 while another build ran on the box; LIVE 124/124 alone, branch re-run alone 124/124).
+
+## 4. kit-mark-fix r5 (round 2) — SẴN SÀNG KIỂM `review/kit-mark-fix-r5` @ b4d82057 (MAIN 96: re-merge onto LIVE d3f44022)
+Merge 4a1b2450 + LIVE d3f44022 (coop-guest-names): only index/sw conflicted → rebuilt.
+Test flake fixed (it was pre-existing on rv4): kit-mark-fix.js iPad/Fold cards sometimes had NO rank colour and NO «more» cue — the person-card observer pass ran before the rank colour / card height settled, or not at all on that page. jk4: `kitPcTagColour` + `kitPcMore` now also run straight after every render / renderStage, once more 500 ms later (`kitPcLate`), and `kitPcMore` whenever a block of the card changes size (ResizeObserver on the card's children; pictures, fonts, late rows) + on picture load. Test: a world without the scene's person (popKind 'none') = SKIP, not FAIL. KIT.md §6.3i updated.
+Results: kit-mark-fix.js 8 full runs: card checks 0 FAIL (before: 1–2 card FAILs in most runs, rv4 too); 2/8 runs iPad pop-maid «cards 0» (no person card on screen after the scene call = scene setup, not the card rule; seen on rv4 / first r5 too). kit-info-tap.js PASS. quickcheck PASS (render 215/251, tab 475/443). coop-e2e 124/124 (one run 123/124 «week after rebirth advances», re-run 124/124; LIVE worker).
+
 ## Queue status
 - (1) kit-opt-title-wrap → SSK sent (§1).
-- (2) kit-mark-fix r5 → SSK sent (§2). Coordinator is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr.
+- (2) kit-mark-fix r5 → SSK sent (§2); round 2 b4d82057 (§4).
+- (3) kit-opt-title-wrap r2 486b922a → SSK (§3). Coordinator now MAIN CHÍNH 96 session_01Rc5AsNBD5TsxWsYmh8ZkSJ. Coordinator is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr.
 - Waiting rv verdicts: kit-ef-unit-r2 bb00fc02, kit-relrows-ms d80b9d2b (keeper #3); kit-focus r5 da873b4b, kit-win-pay 0e6fe923, kit-mark-fix-r3 99f1e576, kit-g4-plate 03181881 (keeper #2).
