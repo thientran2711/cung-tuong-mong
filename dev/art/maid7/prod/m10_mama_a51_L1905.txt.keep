@@ -1,0 +1,8 @@
+base: dev/art/maid7/prod/m10_mama_a51_L1895.txt
+allow: a clear THREE-QUARTER view toward the RIGHT side of the picture   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: her whole body   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: hips and face turned about 45 degrees so that her chest and face point toward the right edge of the picture   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the shoulder on the picture's left side nearer the viewer   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: never side view   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the item held below the chin   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the item held in both hands lowered before her at waist height   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist

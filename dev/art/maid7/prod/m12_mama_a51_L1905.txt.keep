@@ -1,0 +1,3 @@
+base: dev/art/maid7/prod/m12_mama_a51_L1895.txt
+allow: the item held below the chin   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the item held in both hands lowered before her at waist height   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist

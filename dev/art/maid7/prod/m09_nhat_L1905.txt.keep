@@ -1,0 +1,10 @@
+base: dev/art/maid7/prod/m09_nhat_L1869.txt
+allow: same for every palace maid   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: all her clothes are matte silk crepe   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: soft and drapey   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the item held below the chin   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: turning or touching it   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: lively and natural   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: while her head stays up facing the viewer   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: never looking down   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist
+allow: the item held in both hands lowered before her at waist height   # pose fix owner L1905: rank-specific angle + hands/item away from the front waist

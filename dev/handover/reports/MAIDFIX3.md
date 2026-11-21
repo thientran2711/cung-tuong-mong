@@ -57,3 +57,19 @@ All 10 *_L1869: keep_check PASS, check_store PASS (maid a18/a26, mama a51). Colo
 | m13 | slim V-shaped, phoenix eyes (mass v3) | VX7IB7sMMU | lilac #C3A1CE | lilac |
 Ranks: tam, nhi, nhat, tam/nhi/nhat_thancan, thosu, chuongsu, mama_a51. MAIN uniform blue #A7BAD2, thân cận flip, chưởng sự tím cà, ma ma jade #4E8FA3. Source = m18 L1836 files (no sachet G59, no pendant G57, bow at the front) with face line + secondary tokens only. Gates: keep_check PASS, check_store PASS x37.
 m18 redraw candidates (judged from the PROMPTS; pictures not opened): every m18 prompt that carried a túi thơm = tam, nhi, nhat, tam/nhi/nhat_thancan, chuongsu (7, now sachet-free in the L1836 files at commit of this section) + m18_mama_a51_L1869 (wrong colour + sachet). m18 thô sử never had one → keep.
+
+## L1905 POSE FIX (owner: all maids same stance; hands covered the waist)
+54 files prod/<pid>_<rank>_L1905.txt (+.keep) = 6 persons x 9 ranks; supersede every L1836/L1869/L1895 file (those are now OLD). Script make11_poses.py; table prod/POSE_TABLE_L1905.tsv.
+Changed (pose slot only): (1) ANGLE sentence = ANG14 entry idx=(3*rank+5*person)%14 → 9 ranks of one person all different, same rank differs across persons (E1); (2) "the item held below the chin" removed; "Her hands and body" sentence rewritten per rank (item raised or held to the SIDE, never in front of the waist) + "Hands and item stay clear of the front waist: nothing covers the sash, the bow or the centre front." (3) nhất files were over 10 000: A38 boilerplate trim only, listed as allow lines (the "hands interact naturally… never looking down" sentence shortened; the duplicated "FABRIC (same for every palace maid)" line removed where still over — crepe sentence stays in the master block).
+| rank | hands (item) | ANG14 idx m09 / m10 / m11 / m12 / m13 / m18 |
+|---|---|---|
+| thosu | carried low in one hand at the side, other hand holds skirt | 0 / 5 / 10 / 1 / 6 / 11 |
+| tam | raised in both hands at chest height | 3 / 8 / 13 / 4 / 9 / 0 |
+| tam_thancan | on one open palm at shoulder height, other hand lifts sleeve | 6 / 11 / 2 / 0 / 12 / 3 |
+| nhi | one hand out to the side at hip height | 9 / 0 / 5 / 10 / 1 / 6 |
+| nhi_thancan | raised in one hand beside shoulder/cheek | 12 / 3 / 8 / 13 / 4 / 9 |
+| nhat | fingertips of a raised hand beside shoulder, other lifts sleeve | 1 / 6 / 11 / 2 / 0 / 12 |
+| nhat_thancan | hanging low at the side, other hand at collar | 4 / 9 / 0 / 5 / 10 / 1 |
+| chuongsu | keys hang from one hand at hip height, other hand behind back | 2 / 12 / 3 / 8 / 13 / 4 |
+| mama_a51 | abacus raised in both hands at chest height | 10 / 1 / 6 / 11 / 2 / 5 |
+Gates: keep_check PASS x54, check_store PASS x54 (E1 angles valid).
