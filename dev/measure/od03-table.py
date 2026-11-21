@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""OD03 before/after table from run5b shards with EXTRA=od03-count.js. usage: od03-table.py <dir> <labelA> <labelB> ..."""
+"""OD03 before/after table from run5b shards with EXTRA=od03-count.js. usage: od03-table.py <dir> <labelA[+labelA2]> <labelB> ..."""
 import json,sys,glob,os
 D=sys.argv[1]
 def load(lab):
     tr={};mo={};lives=[]
-    for f in sorted(glob.glob(os.path.join(D,f'{lab}_*.json'))):
+    for f in sorted(sum((glob.glob(os.path.join(D,f'{l}_*.json')) for l in lab.split('+')),[])):
         if f.endswith('.ext.json'):continue
         ext=f[:-5]+'.ext.json'
         try:L=json.load(open(f))
