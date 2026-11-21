@@ -574,7 +574,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-progress-run KIT KEEPER (sonnet; owner bug, MAIN ROOT-82 fast lane) | review/kit-progress-run; reports/kit-progress-run.md | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM d19741dc (waits rv MSxpxbsA) | 21/11 |
 | B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | DONE ARCHIVED 21/11 04:30Z | 21/11 00:25Z |
 | B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | DONE ARCHIVED 21/11 04:30Z | 21/11 00:25Z |
-| B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | RUNNING | 21/11 00:25Z |
+| B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | ROLLED → 5ihpHbBR | 21/11 00:25Z |
 | MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | ROLLED OVER → MAIN CHÍNH 84 KwFNncn5 | 21/11 00:40Z |
 | OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | session_01Rc5AsJcZhVHQUYhZunHGJr | SSK d9fa3a93 → rolled over, archived | 21/11 00:45Z |
 | kit-kg82-stack KIT KEEPER (sonnet; owner Fold shot, MAIN CHÍNH 82/83) | review/kit-kg82-stack; reports/kit-kg82-stack.md | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 50751774 (waits rv MSxpxbsA) | 21/11 |
@@ -807,3 +807,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW quest-rows-2 re-merge (SONNET SMALL; #66) 2fc4a277 | review/quest-rows-2-rv; briefs/main91-rv-quest-rows-2.md | MAIN CHÍNH 91 | session_01Rc5AsNT2KxMEmhx8b9Pm1j | RUNNING | 21/11 07:28Z |
 | REVIEW hao-huu r2 (OPUS BIG co-op) d41876c9 (+ badge follow-up) | review/hao-huu-rv2; briefs/main91-rv-hao-huu-2.md | MAIN CHÍNH 91 | session_01Rc5AsJeK88vMSezSQUhfso | RUNNING | 21/11 07:31Z |
 kit-info-fixed rv2 | review/kit-info-fixed-rv2 191c94f4 | rv session | PASS | 21/11
+| B LANDER #2c coop-host-lag-r2 (opus; successor of #2b 6cqrrDPR; merge LIVE into f13d8932 + rerun) | review/coop-host-lag-r2 | B | session_01N1tNP5ihpHbBRmxrezPTPd | RUNNING | 21/11 07:34Z |
