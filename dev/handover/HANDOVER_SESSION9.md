@@ -2167,3 +2167,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY. No owner question pending.
 - FOR MAIN: owner opens ROOT «MAIN CHÍNH 98» from claude.ai with the paste block given in 97 chat (17:25Z).
 - (17:30Z) OWNER: «mở phiên dự phòng» rule (OD row + START_MAIN SLEEP line). Gave STANDBY paste blocks for B, D, E (TAKEOVER_FOREMAN_STANDBY.md). D LAND READY coop-room-faces-rv 500dffbd → relayed to LRRY.
+- (17:26Z) KIT KEEPER #5 SSK kit-ef-unit r3 a42ca838 to rv MSxp (quickcheck ×3 PASS; buổi 1630/1943; unblocks kit-win-pay). Next mark-fix r6, then kitRelRows one-word.
