@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1d3bda38+","t":"2026-11-21T10:40Z","c":"coop-guest-names r1: two-way mirror — the host player's people copies get an 'h' key namespace on the guest seat","b":"a61536e83585","h":[{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"}]};
+window.CTM_BI={"s":"25f89559+","t":"2026-11-21T11:10Z","c":"coop-guest-names r1: two-way mirror — the host player's people copies get an 'h' key namespace on the guest seat","b":"9d4e8f1ccef7","h":[{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -39797,7 +39797,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
   /* an unlabelled segment with no number after the effects = a reading of the moment ("ngài trọng tài, rất hợp") */
-  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&!/^(nàng|hắn|các|Thái hậu|Hoàng hậu|Hoàng thượng|chứng cứ)/.test(body)){M.notes.push(body);continue}
+  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&/^(ngài |an toàn$)/i.test(body)){M.notes.push(body);continue}/* K-OPT-KEM: ONLY the night «reading of the moment» (nx: «ngài …, rất hợp», «an toàn») is a note; every other number-less kèm / hỏng phrase («ít gặp Hoàng thượng», «chủ ít thấy mặt ngươi») is a real side effect and gets its row */
   for(const sc of body.split(/; /)){const P=[];for(const v of sc.split(/, (?![^(]*\))/)){const p=v.trim();if(!p)continue;if(P.length&&!/\d/.test(p)&&!/\d/.test(P[P.length-1])&&!/^(Sủng|Danh|Đức|Bạc|Sức|Ân tình|Thái hậu|Hoàng hậu|chứng cứ|nàng|hắn|các)/.test(p))P[P.length-1]+=", "+p;else P.push(p)}
    P.forEach(p=>M.items.push({p,l:lab||"thành"}))}}
  return M}
@@ -89686,7 +89686,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a61536e83585";window.CTM_BUILD=BUILD;
+const BUILD="9d4e8f1ccef7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
