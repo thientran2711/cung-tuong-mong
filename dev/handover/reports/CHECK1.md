@@ -138,3 +138,24 @@ Verdict: **PASS ×3**.
 Notes (not blocking):
 - The density words are the same at t2 and t3 ("many small …"). Nothing says t3 is "a little denser" than t2 (G42), and the motif size does not rise either (H6).
 - t2 lost "never back-turned, never in profile" (it was the only copy). Low risk, because t2 is FULLY FRONTAL.
+
+## JOB 6 (Foreman C #15) — thu s62 t5 THU_COMOId (KHO2, CAPE5_V3) · checked at d248d96 · 0 gens
+Gates:
+- approved+master tp5 a22 PASS; keep PASS vs COMOIc (9943 chars).
+- Store mode (`s62 v0 --low 5 --season thu`) has 1 FAIL: the Outfit sentence [0.66]. This is the same pre-existing case as production COMOIc (COMOI neckline rewrite, G38); c FAILs it too at [0.57] → accepted exemption.
+- The new CAPE5_V3 sentences match the store: c FAILed the "UNDER it the LOWER layer…" sentence [0.47], and d passes it.
+- G40: OUTER_IN verbatim ✓.
+- Cape = V3 shape (upper Tần-like capelet + small scalloped lower flaps) + V2 pearls/fringe/net (L1596/L1598) ✓.
+- Caption updated.
+
+**G42 (L1605, ladder carries up) — FAIL.** t5 is missing 3 placements that thu t1–t3 v5 already have:
+1. Front-edge embroidery shoulder→past waist. t5 has only `its two straight front edges (a slim gold-edged band)`. t1–t3 have "a narrow blush band embroidered with small <flower>, from the shoulders down past the waist".
+2. Chest embroidery on the inner top: missing. t3 has "the inner top also embroidered across the chest".
+3. Embroidered sleeves/cuffs. t5 has only `deep brocade cuffs`. t1–t3 have "wide embroidered <flower> cuff bands", and owner L1605 says "Tay áo là cũng phải thêu đàng hoàng". H6 also asks for a little sparse motif on the t5 sleeve body.
+OK: inner neckline band ("wide gold-embroidered band (the Phi edge)"), jade pendants, a denser body (richly embroidered + medallions).
+Fix (A39 delta, a bit denser than t3), for example:
+- front edges "(a gold-edged blush band embroidered with small double hollyhocks, from the shoulders down past the waist)";
+- add "the inner top also richly embroidered across the chest";
+- "deep brocade cuffs" → "deep embroidered double hollyhock cuff bands, a few small double hollyhocks on the sleeves".
+Trim the repeats if it goes over 10 000.
+Note: thu t4 COMOIc probably lacks the same 3 placements (not checked in this job).
