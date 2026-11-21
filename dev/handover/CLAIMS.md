@@ -586,3 +586,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | session_01Rc5AsJi9JqNMCUZv8DNjsm | RUNNING | 21/11 01:09Z |
 | REVIEW huong-cue r2 (SMALL sonnet) of d9fa3a93 | review/huong-cue-rv; briefs/main83-rv-huong-cue.md | MAIN CHÍNH 83 | session_01Rc5AsJgMQjRG6xNQhuGeoZ | RUNNING | 21/11 01:16Z |
 | huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | session_01Rc5AsKFt2udUrNe4E57bna | RUNNING | 21/11 01:16Z |
+| mg-craft Thêu keep-memory (opus; OWNER OD 21/11 ~01:05Z: keep «Nhớ mẫu thêu» pattern; stitch → Công «Thêu theo nét») | review/mg-craft-r2-land; briefs/b-mgcraft-theu.md | B | session_01N1tNP3uti359quj6nveReC | RUNNING | 21/11 01:18Z |
