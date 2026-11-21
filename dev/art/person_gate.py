@@ -29,16 +29,16 @@ def _builder():
         _B=B
     return _B
 # MAID file names (MAIDRUN1 / G72 gap, BUILDFIX3): <pid>_<rank>[_ha_DUONG]_L<n>.txt (maid7/prod) and <pid>_<rank>_<age>_L<n>.txt (maid7/prod_ages).
-# Rank key = 'maid:<rank>@<age>' (season variant _ha_DUONG compared with the same rank; prod/ = a18). Maids have no t1-t8 item/angle/face data
+# Rank key = 'maid:<rank>[/DUONG-ha]@<age>' (Tang hạ set _ha_DUONG compared only with Tang, ROOT-B2 21/11; prod/ = a18). Maids have no t1-t8 item/angle/face data
 # in the builder, so person_check skips them; batch still runs the same-rank ANGLE / Pose cross-person check.
 MAID_RANKS=("tam_thancan","nhi_thancan","nhat_thancan","mama_a36","mama_a51","thosu","tam","nhi","nhat","chuongsu")
-MAID_RE=re.compile(r"(m\d\d)_("+"|".join(MAID_RANKS)+r")(?:_ha_DUONG)?(?:_(a\d\d))?_L\d+")
+MAID_RE=re.compile(r"(m\d\d)_("+"|".join(MAID_RANKS)+r")(_ha_DUONG)?(?:_(a\d\d))?_L\d+")
 def pid_rank(fn,text=""):
     b=os.path.basename(fn)
     m=re.match(r"([cmsp]\d\d)_t([1-8])(?!\d)",b)
     if m: return m.group(1),int(m.group(2))
     m=MAID_RE.match(b)
-    if m: return m.group(1),f"maid:{m.group(2)}@{m.group(3) or ('a51' if m.group(2)=='mama_a51' else 'a36' if m.group(2)=='mama_a36' else 'a18')}"
+    if m: return m.group(1),f"maid:{m.group(2)}{'/DUONG-ha' if m.group(3) else ''}@{m.group(4) or ('a51' if m.group(2)=='mama_a51' else 'a36' if m.group(2)=='mama_a36' else 'a18')}"   # ROOT-B2 21/11: compare only within the same era+season set (Tang _ha_DUONG with Tang, standard with standard)
     return None,None
 def _norm(s): return re.sub(r"\s+"," ",re.sub(r"\(.*?\)","",s.lower())).strip(" .,;")
 def _key(item):   # first words of an item phrase, article dropped: 'a thread-bound book tied with …' -> 'thread-bound book'
