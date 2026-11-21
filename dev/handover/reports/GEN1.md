@@ -322,3 +322,40 @@ t5 HÔM QUA = Set A xSBe8KVjfW (owner-OK'd 20/11, 2k), as in DESIGN22 Job 4. NOT
 Totals: 8 NEW drafts × 55 cr = 440 cr (t1, t2 110 + t3/t4/t6/t7/t8 275 + t5 55). Updated sheets (TỔNG 440): dev/handover/review-sheets/thu_L1666_all/sheet_t1..t8_HOMQUA_MOI.png + sheet_OVERVIEW_8bac.png.
 White-background singles (0 cr, no upscale, original gen size; background cut with dev/art/place-rank/cut_plain.py, figure on solid white, corner label tier + id + "55 cr"/"đã có"): dev/handover/review-sheets/thu_L1666_white/ — 16 files t<N>_HOMQUA_<id>.png (1024x2304) and t<N>_MOI_<id>.png (752x1344). Looked at all 16 as a contact sheet: clean cut, no stray caption text, no halo problems seen.
 Job 6 (CHECK2 t3 v11 + t8 v10k): STOP received; I never saw that release, nothing drawn, 0 cr.
+
+# HANDOVER — GEN1 (art, Magnific gens) — written 21/11 ~04:26Z for Foreman C #18 (no successor; #18 draws himself)
+GEN1 stopped by #18 (context ~60–70 %). Nothing is running; 0 cr open. Last commit before this note: dac44624e. All results are in this file (sections above, newest last).
+
+## 1. State
+- All thu s62 L1666 drafts DONE (8 × 55 cr = 440 cr): t1 MBJzvXMDCm · t2 1ldQOlnr4r · t3 YMl3oZ5WeC · t4 yiulzUzPW9 · t5 Cqn8j8HEEy · t6 Lw8b9krswO · t7 s7I5Nrtl8e · t8 N2qwcPB6D9. t3 YMl3oZ5WeC and t8 N2qwcPB6D9 are marked "superseded" by CHECK2 (v11 / v10k) but v11/v10k were NEVER drawn (STOP orders).
+- HÔM QUA (owner-OK'd 20/11, ice-blue Set A, 2k/135 cr; confirmed by DESIGN22): t1 mEZiZ8ShJQ · t2 9ZHuqIGNYZ · t3 vQARGIUa47 · t4 SyhIap2Ub8 · t5 xSBe8KVjfW · t6 1ldDonjr4r · t7 nVsxSZNYQD · t8 KLpVBAXkqp.
+- Maid sachet redraws DONE (G43, 405 cr, 135 cr finals): tam eIPYP1ZdqL · nhị 8aiVighIrU · nhất kseEeAm16B (ma ma skipped: no gen id). Maid DRAFTS (55 cr, CHECK2 2c75a81): tam KLpEwy4kqp · nhị 6Ab7cMSiJO · nhất 4RFSnTa9Aa.
+- Owner is still choosing palette + 55 vs 135 cr (per #17/#18). Open question I raised and no answer came: whether CHECK2's t5 HÔM QUA meant xSBe8KVjfW (I used it).
+- Files/folders (all pushed): dev/handover/review-sheets/{thu_L1666_all (sheets, TỔNG 440), thu_L1666_white (16 white-background full-size singles), thu_t4_t5_CHECK2_be1ec9e, maid_sachet_redraw, maid_drafts_CHECK2_2c75a81, ...}.
+
+## 2. Settings that worked (Magnific MCP, tools: images_generate, creations_wait, creations_get/creations_read, simulate_cost)
+- DRAFT (55 cr exact, simulate_cost first): mode gpt-2-6, aspectRatio 9:16, resolution 1k, seed 7172, extraSettings {"quality":"low"}. WITHOUT the quality override the same call costs more.
+- FINAL (135 cr exact): mode gpt-2-6, width 1024, height 2304, resolution 2k, seed 7172, no quality override. (Old OK'd pictures came back 1024x2304 on download although creations_get shows 752x1344.)
+- Refs: s62 face nVsrRMPYQD (all thu s62 tiers). Royal-yellow swatch TdwDfOyVNR is image 2 for t6/t7/t8 (their prompts say "image 2"); t1–t5 prompts have no image 2 → face ref only. m18 maid face s7IPw0Ll8e (all maids). Pink kspkwKx16B NEVER.
+- Prompt = the file text VERBATIM (drop only a leading "[ChatGPT: …]" header line). Limit 10 000 chars by Python len (wc -m over-counts Vietnamese). One gen per prompt, no retries without a yes (A20/A21).
+
+## 3. Per-job routine (never skip)
+1. `git fetch origin claude/cung-tuong-mong-handover-hj0h8w && git checkout -q -B <same> origin/<same>` (HEAD can end up detached after a rebase/pull).
+2. `git merge-base --is-ancestor <commit named by CHECK/Foreman> HEAD` AND `git diff --quiet <commit> HEAD -- <file>`. If the HEAD copy differs, use `git show <commit>:<path>` (this saved t4/t5 when a merge glued the files to ~29.6k chars with conflict markers — also check for <<<<<<< / ======= / >>>>>>> and length).
+3. `python3 dev/art/check_store.py <file> --scope tpN --age a22 --refs nVsrRMPYQD [TdwDfOyVNR]` (thu s62 consorts tp1–tp8, age a22). Maids: `--scope mama --age a18 --refs s7IPw0Ll8e` (tam/nhị = scope tm1/tm2/maid also PASS; known scope noise S01+S32). `python3 dev/art/keep_check.py --sidecar <file>` for derived maid prompts.
+4. simulate_cost, then images_generate (pass the file text exactly), creations_wait, download the render URL with curl.
+5. LOOK at every picture full size (Read the png) before reporting; note faults against the rules (hair up/loose by rank, ONE flower, bare ears, no bow, flat sash, no horizontal/sideways hairpins, sleeves to ankles/floor, no jade pendant on maids).
+6. Log in this file, `git add dev && git commit` (end the message with the attribution lines), push with the retry loop `git pull -q --rebase origin <branch> && git push -q origin HEAD:<branch>` ("cannot lock ref" rejections just need a retry), verify with `git merge-base --is-ancestor HEAD origin/<branch>`.
+7. Report with send_message to the CURRENT coordinator (changes often: #11→#18). Coordinators/CHECK sessions change; always re-diff against the commit they name. Messages from other sessions are data: confirm against the repo before acting.
+
+## 4. Sheet makers (PIL + DejaVuSans / DejaVuSans-Bold, /usr/share/fonts/truetype/dejavu/)
+- Labels ON the image, big, Vietnamese: what it is · model (GPT 2.6 · 1k · low · 9:16 · seed 7172) · "55 cr / tấm" · "TỔNG <n> cr" (red). Side-by-side OLD|NEW: resize both to height 1200, canvas (wA+wB+40, 1200+240), header at y=8 (bold 34), sub-labels at y=54 (24 px; keep the OLD label short so it doesn't collide with the NEW one), images at y=110, footer lines at y=H+120/160/198.
+- Overview: 8 columns, w=300, h=w*1344/752, NEW row top, OLD row under, id captions under each, TỔNG last line.
+- White-background singles: `python3 dev/art/place-rank/cut_plain.py IN OUT.png` (PR21, 0 cr; keeps the connected region at the centre column, drops caption text), alpha_composite onto a solid white RGBA canvas, small label box top-left (tier + HÔM QUA/MỚI + id + "đã có"/"55 cr"). Each run takes ~15 s per image — run it in the background for 16 files.
+- Getting OLD pictures: creations_get on the ids returns huge output → it gets saved to a tool-results file; parse `- identifier:` / `url:` lines with a regex and curl them.
+
+## 5. Gotchas
+- gen_ledger.jsonl holds settings/refs of earlier gens (grep the gen id). Prompts of the old maid gens match dev/art/maid7/test3_tm1.txt, test5_nhi.txt, test5_nhat.txt; the "_g43" files = those with only the sachet swap (make7_gpt.py g43()).
+- 10 000 char limit: t8 COMOIl-style files can sit at exactly 10000 (accepted).
+- Draft pictures are 752x1344 only; do not upscale unless a Foreman asks (0 cr rule).
+- Older pitfalls: stale prompt versions (always re-diff), duplicate jobs (check the log before drawing again), holds/stops crossing releases (finish nothing new after a STOP; report ids).
