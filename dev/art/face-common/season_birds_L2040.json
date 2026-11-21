@@ -1,10 +1,13 @@
 {
- "_note": "L2040 SEASON BIRD TABLE — DRAFT (owner OK pending; no prompt edits, 0 gens). Research: web search found NO canonical 'one bird per season' set in Chinese embroidery; only 喜鹊登梅 (magpie + plum) is firmly attested as a fixed motif (bird of joy + flower of spring). The pairs below are built from classical seasonal imagery (poetry: 燕/黄莺 spring, 荷塘鸳鸯/翠鸟 summer, 雁/鹤 autumn migration + 秋词, 喜鹊+梅 winter) = a design convention, not a museum canon. Sources checked: chinasage.info/symbols/birds, theworldofchinese birds-and-their-meanings, Nelson-Atkins four-seasons flower-and-bird embroidery (no species named).",
+ "_note": "L2040 SEASON BIRD TABLE — ACCEPTED with change by owner L2043 \"Nếu như vậy thì từ bậc Tần là đã theo chim đi\" (birds start at t4 Tần); prompt wiring pending (orig draft: owner OK pending; no prompt edits, 0 gens). Research: web search found NO canonical 'one bird per season' set in Chinese embroidery; only 喜鹊登梅 (magpie + plum) is firmly attested as a fixed motif (bird of joy + flower of spring). The pairs below are built from classical seasonal imagery (poetry: 燕/黄莺 spring, 荷塘鸳鸯/翠鸟 summer, 雁/鹤 autumn migration + 秋词, 喜鹊+梅 winter) = a design convention, not a museum canon. Sources checked: chinasage.info/symbols/birds, theworldofchinese birds-and-their-meanings, Nelson-Atkins four-seasons flower-and-bird embroidery (no species named).",
  "ranks": {
-  "t1-t4": "no birds (as now)",
-  "t5-t6": "ONE small pair of birds, picked from the season's list, small & clear (F13 spirit: not cluttered)",
-  "t7-t8": "phoenix is the only bird (I3); no season birds on t7/t8 or triều phục",
-  "never": "no phoenix on t1-t6; season birds never long-tailed or gold-multicolour (phoenix look); never on maids' sleeves/skirts (keep maid ranks simple)"
+  "t1-t3": "no birds",
+  "t4 Tần": "season birds START here: ONE small pair (2 birds), the smallest and fewest",
+  "t5 Phi": "one pair + one single bird (3 birds), small",
+  "t6 Quý phi": "two pairs (4 birds), small, never crowded; crane only here",
+  "t7-t8": "phoenix is the only bird (I3); no season birds",
+  "maids": "none",
+  "never": "no phoenix on t1-t6; season birds never long-tailed or gold-multicolour; fewer birds than flowers' visual weight (F13 spirit: not cluttered)"
  },
  "colour_logic": "Same tone logic as F20. Plumage body = the embroidery-flower colour of that outfit (flower_colours_L2013.json embroidery_hex) so bird and flower belong together; one small accent (beak/breast/cheek) from the species' natural hue CLAMPED to the outfit's tone class (soft outfit → pale accent); gold-thread outline on every bird; bird never darker than the robe pattern around it and never the main robe colour. Winter/dark robes: bird lighter than robe, as flowers.",
  "xuan": [
@@ -100,7 +103,7 @@
    },
    "en_words": "one small white crane with a long thin neck and long thin legs, short plain tail feathers (no ornate tail), tiny red crown, outlined in gold thread, small and clear, not a phoenix",
    "status_vi": "vừa — «một hạc lên trời xanh», trường thọ",
-   "motif_vi": "một con đứng hoặc bay; chỉ cấp 6"
+   "motif_vi": "một con đứng hoặc bay; chỉ cấp 6 Quý phi"
   }
  ],
  "dong": [
@@ -134,5 +137,58 @@
    "status_vi": "yếu — lựa chọn thiết kế, không có chuẩn cổ",
    "motif_vi": "một con sẻ tròn trên cành mai/thông có tuyết"
   }
- ]
+ ],
+ "tier_phrase": {
+  "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only",
+  "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded",
+  "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded"
+ },
+ "prompt_words": {
+  "xuan": {
+   "en": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: a small pair of swallows in flight with short forked tails and pale cream bellies, tiny and clear, tone-on-tone with the robe, outlined in gold thread, not long-tailed, not a phoenix",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: a small pair of swallows in flight with short forked tails and pale cream bellies, tiny and clear, tone-on-tone with the robe, outlined in gold thread, not long-tailed, not a phoenix",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: a small pair of swallows in flight with short forked tails and pale cream bellies, tiny and clear, tone-on-tone with the robe, outlined in gold thread, not long-tailed, not a phoenix"
+   },
+   "oanh": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: a small round oriole perched on a blossoming branch, soft apricot-gold plumage with a dark eye-stripe, short tail, outlined in gold thread, small and clear",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: a small round oriole perched on a blossoming branch, soft apricot-gold plumage with a dark eye-stripe, short tail, outlined in gold thread, small and clear",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: a small round oriole perched on a blossoming branch, soft apricot-gold plumage with a dark eye-stripe, short tail, outlined in gold thread, small and clear"
+   }
+  },
+  "ha": {
+   "uyen_uong": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: a small pair of mandarin ducks swimming beside a lotus leaf, rounded duck bodies with a soft sail-like wing, short tail, outlined in gold thread, compact and clear, not a phoenix",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: a small pair of mandarin ducks swimming beside a lotus leaf, rounded duck bodies with a soft sail-like wing, short tail, outlined in gold thread, compact and clear, not a phoenix",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: a small pair of mandarin ducks swimming beside a lotus leaf, rounded duck bodies with a soft sail-like wing, short tail, outlined in gold thread, compact and clear, not a phoenix"
+   },
+   "boi_ca": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: a small kingfisher perched on a lotus stem, short body, long thin beak, soft turquoise back and pale apricot breast, short tail, outlined in gold thread, small and clear",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: a small kingfisher perched on a lotus stem, short body, long thin beak, soft turquoise back and pale apricot breast, short tail, outlined in gold thread, small and clear",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: a small kingfisher perched on a lotus stem, short body, long thin beak, soft turquoise back and pale apricot breast, short tail, outlined in gold thread, small and clear"
+   }
+  },
+  "thu": {
+   "nhan": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: two small wild geese in flight, wings spread, long necks, short tails, soft grey-brown with pale bellies, outlined in gold thread, small and clear, not a phoenix",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: two small wild geese in flight, wings spread, long necks, short tails, soft grey-brown with pale bellies, outlined in gold thread, small and clear, not a phoenix",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: two small wild geese in flight, wings spread, long necks, short tails, soft grey-brown with pale bellies, outlined in gold thread, small and clear, not a phoenix"
+   },
+   "hac": {
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: one small white crane with a long thin neck and long thin legs, short plain tail feathers (no ornate tail), tiny red crown, outlined in gold thread, small and clear, not a phoenix"
+   }
+  },
+  "dong": {
+   "hi_thuoc": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: a small pair of magpies perched on a plum-blossom branch, dark blue-black wings with a white belly, medium tail, outlined in gold thread, small and clear, not a phoenix",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: a small pair of magpies perched on a plum-blossom branch, dark blue-black wings with a white belly, medium tail, outlined in gold thread, small and clear, not a phoenix",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: a small pair of magpies perched on a plum-blossom branch, dark blue-black wings with a white belly, medium tail, outlined in gold thread, small and clear, not a phoenix"
+   },
+   "se_tuyet": {
+    "t4": "a few tiny embroidered birds: exactly ONE small pair (two birds) in total, placed high on the front or on one shoulder area only: one small round sparrow on a snowy plum twig, plump body, short tail, soft brown with a pale belly, outlined in gold thread, tiny and clear",
+    "t5": "small embroidered birds: one pair plus one more single bird (three birds in total), scattered lightly among the other embroidery, never crowded: one small round sparrow on a snowy plum twig, plump body, short tail, soft brown with a pale belly, outlined in gold thread, tiny and clear",
+    "t6": "small embroidered birds: two pairs (four birds in total), spaced apart among the other embroidery, never crowded: one small round sparrow on a snowy plum twig, plump body, short tail, soft brown with a pale belly, outlined in gold thread, tiny and clear"
+   }
+  }
+ }
 }

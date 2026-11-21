@@ -7,7 +7,7 @@ rows=[(s,b) for s in SN for b in J[s]]
 W=1400;rh=118;H=210+len(rows)*rh+150
 im=Image.new('RGB',(W,H),'#f6f3f4');d=ImageDraw.Draw(im)
 d.text((20,14),"Bảng chim theo mùa trên áo — BẢN NHÁP (chờ chủ nhân duyệt)",font=F(26,True),fill='#2a2226')
-d.text((20,52),"Chỉ cấp 5–6: một đôi chim nhỏ, chọn trong danh sách của mùa. Cấp 1–4: không chim. Cấp 7–8: chỉ có phượng (I3). Không phượng ở cấp 1–6.",font=F(14),fill='#7b6e74')
+d.text((20,52),"Từ cấp 4 Tần: chim nhỏ theo mùa (Tần 1 đôi, Phi 3 con, Quý phi 4 con). Cấp 1–3: không chim. Cấp 7–8: chỉ có phượng (I3). Không phượng ở cấp 1–6.",font=F(14),fill='#7b6e74')
 d.text((20,74),"Màu chim: thân = màu hoa thêu của bộ đồ (bảng F20), điểm nhấn nhỏ theo màu thật của loài nhưng nhạt đi theo độ rực của áo; viền chỉ vàng.",font=F(14),fill='#7b6e74')
 for t,x in (("Mùa",20),("Chim",110),("Độ chắc / căn cứ",400),("Cách đặt trên áo",690),("Màu thật: thân / bụng / điểm nhấn",1060)): d.text((x,114),t,font=F(14,True),fill='#9b2f4c')
 for i,(s,b) in enumerate(rows):

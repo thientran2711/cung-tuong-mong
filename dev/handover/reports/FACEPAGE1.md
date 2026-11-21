@@ -36,3 +36,6 @@ Thêm enforce(): hoa tóc luôn sáng hơn hoa thêu (OKLCH L, chênh >=0.02) ch
 
 ## L2040 — chim theo mùa (0 gen, không sửa prompt)
 dev/art/face-common/season_birds_L2040.json (bản nháp: 8 loài, 2/mùa, cấp 5–6 một đôi, t7/t8 chỉ phượng, màu chim theo F20) + PNG dev/handover/review-sheets/season_birds_L2040/season_birds_L2040.png. Tìm web: KHÔNG có bộ chim–mùa cổ chuẩn; chỉ hỉ thước + mai là mô-típ cố định; còn lại là quy ước thiết kế từ ý thơ mùa.
+
+## L2043 — chim từ bậc Tần
+season_birds_L2040.json cập nhật: t4 Tần 1 đôi (2 con), t5 Phi 3 con, t6 Quý phi 4 con; t1–t3 không chim; t7/t8 chỉ phượng; có prompt_words[mùa][loài][t4|t5|t6] cho builder. Rule F21 đã add (L2040+L2043). PNG dựng lại.
