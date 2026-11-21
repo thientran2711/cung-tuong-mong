@@ -71,6 +71,8 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both in the shared world');await clear(A);await clear(B);
 
  const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?{id:f.id,out:!!f.out}:null});
+ /* harness: the friend's consort entry arrives with the next world sync (flaked 2/3 under load at SETUP) → wait for it on both seats */
+ for(const o of [A,B])await o.p.waitForFunction(()=>!!COOPW.friend(),null,{timeout:60000}).catch(()=>{});
  ok(!!await fr(A)&&!!await fr(B),'each has the other as a consort entry');
  /* each seat: a faction of her own with the friend's entry + one NPC (she leads) */
  for(const o of [A,B])await o.p.evaluate(()=>{const f=COOPW.friend();S.facs=[];S.rank=6;f.rank=Math.min(f.rank||0,2);const n=liveRivals(true).find(x=>!x.coop&&!x.queen&&!sameHouse(S,x));n.rank=1;found(S,f);joinFac(n,facOf(S));render()});
