@@ -91,9 +91,9 @@ function dhConfiscate(p,kind,why){if(!p||!alive(p))return null;const P=(C().p||{
  const fx={danh:-C().danh,sung:-C().sung};ap(p,fx);
  const tn=out.title&&window.DH_CAT&&DH_CAT[out.title]?DH_CAT[out.title].n:"";
  const what=[out.hieu?`hiệu «${out.hieu}»`:"",out.items.length?out.items.map(e=>itm(e.k).n).join(", "):"",tn?`danh hiệu «${tn}»`:""].filter(Boolean).join(", ");
- if(p===S){log(`<span class="r">Ngươi ${c.why}: bị thu ${what}. Danh -${C().danh}, Sủng -${C().sung}.</span>`);
+ if(p===S){log(`<span class="r">Ngươi ${c.why}: bị thu ${what}. Danh -${C().danh}, ${sgStat(-C().sung)}.</span>`);
   if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Bị thu hiệu ban",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
-   sections:[{h:"",html:out.items.map(itTag).join("")},{h:"",rows:[["Vì sao",esc(c.why)],["Bị thu",esc(what)],["Mất",`Danh -${C().danh} · Sủng -${C().sung}`],
+   sections:[{h:"",html:out.items.map(itTag).join("")},{h:"",rows:[["Vì sao",esc(c.why)],["Bị thu",esc(what)],["Mất",`Danh -${C().danh} · ${sgStat(-C().sung)}`],
     ["Lấy lại",`sau ${C().wait} tháng, khi không còn bị phạt: chép kinh sám hối hoặc lập công (Nhiệm vụ › Danh hiệu)`]]}],btn:"Đã hiểu"})}
  else{const t=`${p.name} ${c.why}, bị thu ${what}.`;try{newsAdd(p,"conf",t)}catch(e){}}
  return out}
