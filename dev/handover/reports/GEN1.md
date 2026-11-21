@@ -291,3 +291,12 @@ Settings: gpt-2-6, 9:16, 1k, quality low, seed 7172, ref s7IPw0Ll8e (m18 face), 
 | nhất đẳng | ov6GUhR829 | 4RFSnTa9Aa | https://www.magnific.com/app/creation/4RFSnTa9Aa |
 Sheets OLD|NEW (big Vietnamese labels + TỔNG 165 cr): dev/handover/review-sheets/maid_drafts_CHECK2_2c75a81/sheet_tam_OLD_NEW.png, sheet_nhi_OLD_NEW.png, sheet_nhat_OLD_NEW.png
 Look: all three NEW show the small embroidered sachet + tassel and no jade disc. tam – short wrap jacket ending at the hip, blue sash tied at the waist, wood comb box; a few silver hairpins stick out sideways at the top of the bun. nhị – jacket now ends at the waist, sash wraps around it, no hanging panels (as the L1656 text asks); the held envelope is mauve (close to the rose jacket, weak contrast). nhất – vest + two front panels + a matching back tà visible at both sides behind the legs (as the L1653 text asks), bow sash, sachet at centre between the panels. No other faults seen.
+
+## L1666 (Foreman C #17, owner L1666): draw the rest of s62 thu — NOW t1 + t2 (drafts)
+gpt-2-6, 9:16, 1k, low, seed 7172, face ref nVsrRMPYQD, 55 cr each = 110 cr. Files dev/art/dapung4/s62_t1_COMOI_v10.txt (9860 chars) + s62_t2_COMOI_v10.txt (9983), identical to 4c07bdf (ancestor), no conflict markers, check_store PASS tp1/tp2.
+| tier | creation | link |
+|---|---|---|
+| t1 Đáp ứng | MBJzvXMDCm | https://www.magnific.com/app/creation/MBJzvXMDCm |
+| t2 Thường tại | 1ldQOlnr4r | https://www.magnific.com/app/creation/1ldQOlnr4r |
+Sheets (NEW only for now; HÔM QUA | MỚI + the 8-tier overview wait for DESIGN22's OK'd gen ids): dev/handover/review-sheets/thu_t1_t2_L1666/sheet_t1_NEW.png, sheet_t2_NEW.png
+Look: t1 – frontal, long loose hair, ONE small lilac flower, square neckline with the two-band border, sash on top with plum robe above/below, two small jade plaques + tassels at the sides, thread-bound book held at the side, sheer blush shawl. t2 – frontal, long loose hair, ONE tiger lily, one apron panel to the ankles with jade/pearl sets either side, girdle on top, pellet drum with lacquered handle held up on the left. Both: fine hairpin dangles by the ears, no earrings. No faults seen.
