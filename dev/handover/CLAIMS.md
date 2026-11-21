@@ -606,4 +606,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | kit-pcrow-square KIT KEEPER (sonnet; OWNER-URGENT person-card layout, MAIN 84/85 addenda 1–7) | review/kit-pcrow-square; reports/kit-pcrow-square.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | code done; quickcheck + coop-e2e running, then SẴN SÀNG KIỂM | 21/11 |
 | FOREMAN E #25 (opus; child of E #24, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #24 | session_01DgYSWmm3tPLnLMUtPofz2g | RUNNING | 21/11 02:55Z |
 | FOREMAN E #25 (opus; child of E #24, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #24 | session_PENDING_E25 | RUNNING | 21/11 02:55Z |
-| bag-inline (sonnet; OWNER mark #21 21/11 ~02:45Z: Túi đồ inline strip, no popup, whole group) | review/bag-inline; briefs/main85-bag-inline.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:32Z |
+| bag-inline (sonnet; OWNER mark #21 21/11 ~02:45Z: Túi đồ inline strip, no popup, whole group) | review/bag-inline; briefs/main85-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsJTtZMnTMg6ibPv5H7 | RUNNING | 21/11 02:32Z |
