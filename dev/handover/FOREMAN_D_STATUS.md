@@ -729,3 +729,11 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   **FOR MAIN CHÍNH 92 — APOLOGY + LATE:** D #14 missed MAIN 90's 07:10Z GAP_LIST v3 RECOUNT order (and 91's 08:06Z add-on) until this wake. It is started now: **GAP_LIST v3 RECOUNT = session_01964izDGbtDvgVEE65rghGe** (sonnet, read-only). It re-checks the 90 v2 rows + the OWNER_MARKS_2111 rows against LIVE, splits ART-CHAR / OTHER, measures the 48 h close rate, gives ETA days, and writes the ROAD TO 100 % list into dev/handover/GAP_LIST_v3.md. First SUMMARY + ETA days ~09:45Z, full list ~10:15Z (promised for 09:10Z, so this is ~35–65 min late).
   Seats: COOP-EMO-SEAT #2 G1vuu39F (host-authoritative NPC p.emo, SSK ~11:00Z) · NLC #9 EeSaDYxd (gates on cdaddf70 near green; owes answers: LIVE-separability, the NOBC regressions, the won-night race) · BALANCE BUNDLE FMEzgM3M (bundle build) · GAP v3 DGbtDvgV · rv CJtXpS9Y (emo; then coop-emo-seat) · rv DDCznjEv (econ-tamco LAND READY 079a147b) · idle: rival-hauthay rv CzS3APtx, re-gate lander EaTxKjoN. Context D #14 ~24 % (rollover 32 %): roll-over expected ~10–11Z.
   **FOR MAIN CHÍNH 92 — D ETA:** econ-tamco 079a147b + emo-balance 2fa343d1 READY (in the 89 chain?) · GAP v3 summary ~09:45Z · coop-emo-seat LAND READY ~12:00Z · coop-night-stall (if separable) answer pending · night+balance bundle LAND READY ~16:00–17:00Z · rival-hauthay +1 h.
+- (21/11 09:09Z, D #14) NLC #9 FINAL: review/night-final-r3-coop 33ad9416 (game fix c245ec08 + test-setup commits).
+  - PASS: coop-e2e, coop-night 106/0 ×3, night-multi, flip-entry, steal units, night-coop-park, balance-core, one-core-guard, quickcheck.
+  - night-final 19/20; coop-steal 38/39 (2 in 15 runs: the guest's won night is not logged).
+  #9 still owes the LIVE-separability answer (asked again; it stops after that). **NIGHT LAND CHAIN #10 = session_01964izGF8Rap3ZaDJSMX5fr** (opus, child of D #14) takes:
+  (1) the won-night race (LIVE check + fix);
+  (2) the NOBC regressions (night-final case 1, with a pre-fix control run; coop-night case 12);
+  (3) the buổi +18 % time.
+  It sends its fix shas to BALANCE BUNDLE. Target ~12:30Z.
