@@ -84,7 +84,10 @@ function realFlip(){S.nfP=null;S.nfF=day();
  try{const x=X();if(x&&x.st==="wait")for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}}catch(e){console.error(e)}
  return r}
 flip=function(){if(!S||REAL||!nfOn())return f0.apply(this,arguments);
- if(guest()){S.tonight=null;S.nfP=day();return}               /* co-op guest: the host's Emperor turns the card (relayed) */
+ if(guest()){S.tonight=null;S.nfP=day();                       /* co-op guest: the host's Emperor turns the card (relayed) */
+  /* her maid's Kỳ nguyệt sự card (jcycle cyAsk) is asked at HER flip as on the live night (the jcycle flip wrapper sits inside this one):
+     her answer travels to the host (jcoopworld cySend → ctm-p2 "cyb") and the host's draw waits for it (cyWait / cyFree) */
+  try{if(typeof window.cyAsk==="function")window.cyAsk()}catch(e){console.error(e)}return}
  if(S.nfC===day()&&S.nfX&&S.nfX.d===day()&&S.nfX.st==="wait")return realFlip.apply(this,arguments);   /* inside the commit, before the choice (the cycle answer re-flips) */
  if(S.nfC===day())return;                                      /* the choice is running / done: tonight stays */
  S.tonight=null;S.nfP=day()};                                  /* the tablet waits for the end of tối */
@@ -186,7 +189,11 @@ let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
- if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;openChoice()}
+ if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
+  /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
+     waits for that card, at most choice.waitMs (she never answers: the night goes on without a card, as the live night did) */
+  if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<B().choice.waitMs)return;
+  openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
@@ -290,7 +297,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */

@@ -4,6 +4,12 @@
      the NPC gets nothing.
    2 NPC flipped: both Tranh sủng and both succeed → the higher Sủng (host) wins; the guest gets "cũng mời được…", no Sủng loss.
    3 the GUEST flipped: guest Giữ chân Hoàng thượng (holds) / host Tranh sủng (fails) → the guest keeps it + the defence line; host's stealFail.
+   4 the HOST flipped (mirror of 3): host Giữ chân Hoàng thượng (holds) / guest Tranh sủng (fails) → the host keeps it + the defence gain line;
+     the guest's stealFail line on her own seat.
+   5 AFK guest: an NPC flipped, the host Thôi, the guest never touches her choice → her own 10-second clock answers Thôi → the host resolves
+     (long before the host's choice.waitMs cap); the NPC keeps the night.
+   Every case (owner gate, MAIN ROOT-82 20/11 22:58Z): the night record of the day (nightWhy: the card turned, who holds it, why) is the SAME on both
+   seats (seat-neutral: host / guest / NPC id); case 1 also plays the guest's won night to its end in the live room (her Kính sự phòng book).
    usage: node dev/build/assemble.py && node dev/test/coop-steal.js [outdir] [workerURL]   (LIVE Worker, like coop-night.js) */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const {serve,BASE}=require('./coop-serve.js');
@@ -71,14 +77,15 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
     odds unchanged) through jsmg's own test hook, so the guest's choice goes out after her game exactly as in play (smg "mg" → "up" → jnf "ch") */
  for(const o of [A,B])await o.p.evaluate(()=>{window.__smgFake=()=>({skipped:true,sync:true})});
  /* the host's Emperor turns the card of `who` at the END of tối (forced weights; no mùng 1 / rằm custom); NPCs do not attack on their own */
- const force=(who)=>A.p.evaluate(who=>{const f=liveRivals(false).find(v=>v.coop);const tgt=who==="friend"?f:(liveRivals(false).find(x=>x&&!x.coop&&nightCh(x)>0)||liveRivals(false).find(x=>x&&!x.coop));
-   window.__T=window.__T||{nc:nightCh,rl:roll,cu:BAL.ag.emp.custom,vc:BAL.visit.cap,os:oSteal,ok:oKeep,sw:window.stealWant};const T=window.__T;
+ const force=(who)=>A.p.evaluate(who=>{const f=liveRivals(false).find(v=>v.coop);const tgt=who==="friend"?f:who==="host"?S:(liveRivals(false).find(x=>x&&!x.coop&&nightCh(x)>0)||liveRivals(false).find(x=>x&&!x.coop));
+   window.__T=window.__T||{nc:nightCh,rl:roll,cu:BAL.ag.emp.custom,vc:BAL.visit.cap,os:oSteal,ok:oKeep,sw:window.stealWant,es:typeof empSummon==='function'?empSummon:null,ea:window.__eaOff};const T=window.__T;
    const isT=p=>p===tgt||(who==="friend"&&!!p&&!!p.coop)/* the friend entry is rebuilt at each merged week (pushFriend): match by role, not object */;nightCh=function(p){p=p||S;return isT(p)?100:(T.nc(p)>0?1e-9:0)};roll=function(x){return x===90||x===65?true:T.rl.apply(this,arguments)};BAL.ag.emp.custom=[0,0];BAL.visit.cap=0;/* his own visit (jvisit) would take the night before the flip: no choice (same as night-final.js) */
-   window.stealWant=()=>({u:0,p:0,mode:null});S.cyb=Object.assign(S.cyb||{},{lie:wk()});return{id:tgt.id,n:tgt.nights||0,coop:!!tgt.coop}},who);
- const unforce=()=>A.p.evaluate(()=>{const T=window.__T;if(!T)return;nightCh=T.nc;roll=T.rl;BAL.ag.emp.custom=T.cu;BAL.visit.cap=T.vc;oSteal=T.os;oKeep=T.ok;window.stealWant=T.sw});
+   window.stealWant=()=>({u:0,p:0,mode:null});/* the card is TURNED tonight: his rest roll (jagemp empSummon: busy/mood) and the emotion no-flip (jemoact eaQ) are live-game randomness that turn no card at all — held off here, the choice itself is the thing under test */if(T.es)empSummon=function(){try{const z=empWhyZ();z.k='call';z.busy=false}catch(e){}return true};window.__eaOff=true;S.cyb=Object.assign(S.cyb||{},{lie:wk()});return{id:tgt===S?"me":tgt.id,n:(tgt===S?S.nights:tgt.nights)||0,coop:!!tgt.coop}},who);
+ const unforce=()=>A.p.evaluate(()=>{const T=window.__T;if(!T)return;nightCh=T.nc;roll=T.rl;BAL.ag.emp.custom=T.cu;BAL.visit.cap=T.vc;oSteal=T.os;oKeep=T.ok;window.stealWant=T.sw;if(T.es)empSummon=T.es;window.__eaOff=T.ea});
  const noCyc=o=>o.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk()})});
  /* answer the flip choice (pid nfch) with `name`; the card-flip scene (if on screen) is closed by its own button first */
  async function answer(o,name,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(name=>{const i=Q.findIndex(m=>m&&m.pid==="nfch");
+    if(i>=0&&name===null){if(i>0){Q.unshift(Q.splice(i,1)[0]);showModal()}else if(document.getElementById('modal').hidden)showModal();return Q[0].opts.map(x=>x.n).join("/")}/* AFK: the choice is on her screen, untouched */
     if(i>=0){if(i>0)Q.unshift(Q.splice(i,1)[0]);const O=Q[0].opts;const names=O.map(x=>x.n).join("/");let j=O.findIndex(x=>x.n===name);if(j<0)j=O.findIndex(x=>x.n==="Thôi");chooseM(j);return names}
     const dw=document.getElementById('dawn');if(dw&&!dw.hidden&&dw.classList.contains('on')){const nb=[...dw.querySelectorAll('button')].find(x=>x.getClientRects().length);if(nb)nb.click();else{dw.classList.remove('on');dw.hidden=true}try{kmPump()}catch(e){}return ''}/* the morning panel («Tiếp theo») a player taps through; while it is on, the scene queue waits (kmFree) */
     const b=[...document.querySelectorAll('.kmov.kcf button')].find(x=>x.getClientRects().length);if(b){b.click();return ''}/* real buttons only: a [role=button] there is a mood seal (img.kemo), not the scene's end button */
@@ -91,30 +98,46 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
      modal:!document.getElementById('modal').hidden&&document.getElementById('mt').textContent,Q:Q.map(m=>m.pid||m.t),busy:window.cfBusy&&cfBusy(),cf:(window.__cfdbg||[]).slice(-6),x:S.nfX})).catch(e=>e.message);console.log('STUCK',o.name,JSON.stringify(STUCK[o.name]).slice(0,900))}
    await sleep(300)}return null}
  const STUCK={};
+ /* why a night turned no card (fixture diagnosis only; printed with a failed choice assert) */
+ const DG=()=>A.p.evaluate(()=>({x:S.nfX,nw:S.nightWhy&&{wk:S.nightWhy.wk,c:S.nightWhy.cause,f:S.nightWhy.flip0,emp:S.nightWhy.emp},cyb:S.cyb,cyc:window.cycOn&&cycOn(S),hold:COOPW.cyHold,fcy:COOPW.fcy,tr:(COOPW.tr||[]).slice(-12),buoi:S.buoi,tq:S.tuan,lg:S.logs.slice(0,5)})).catch(e=>e.message);
  /* both press "Sang ngày mới" at tối: the host's commit turns the card and opens the choice on both seats */
  async function endEvening(){await setTm(A,{buoiMs:120000});await reset(A);await press1(A);await press1(B)}
  const nightOf=(o,id)=>o.p.evaluate(id=>(liveRivals(false).find(v=>v.id===id)||{}).nights||0,id);
  async function nextNight(tag){for(let i=0;i<40;i++){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.b===0&&c.b===0&&!a.Q&&!c.Q&&a.w===c.w)break;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await press(A);await press(B);await bothPast(A,B,k,30000)}
   return toNight(tag)}
+ /* the night record of day d on one seat, seat-neutral (host / guest / NPC id): the card turned, who holds the night, why */
+ const rec=(o,d)=>o.p.evaluate(d=>{const SEAT=COOP.seat==="a"?"host":"guest",OTH=SEAT==="host"?"guest":"host";const f=liveRivals(false).find(v=>v&&v.coop);
+   const n=id=>id==null?null:id==="me"?SEAT:(f&&id===f.id)?OTH:id;const w=S.nightWhy;if(!w||w.wk!==d)return{none:1,wk:w&&w.wk};return{flip0:n(w.flip0),pick:n(w.pick),cause:w.cause}},d);
+ async function sameRec(tag,d){let a=null,c=null;const t0=Date.now();while(Date.now()-t0<20000){a=await rec(A,d);c=await rec(B,d);if(JSON.stringify(a)===JSON.stringify(c))break;await sleep(500)}
+  return ok(!a.none&&JSON.stringify(a)===JSON.stringify(c),tag+': the night record of the day is the same on both seats (card turned, holder, why)',[a,c])}
+ /* play one seat's dialogs / scenes the way a player does (first offered option) until cond holds */
+ async function drive(o,cond,arg,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){if(await o.p.evaluate(cond,arg).catch(()=>false))return true;
+   await o.p.evaluate(()=>{const dw=document.getElementById('dawn');if(dw&&!dw.hidden&&dw.classList.contains('on')){const nb=[...dw.querySelectorAll('button')].find(x=>x.getClientRects().length);if(nb)nb.click()}
+     const k=[...document.querySelectorAll('.kmov')].find(e=>e.getClientRects().length);if(k){const bb=[...k.querySelectorAll('button')].find(x=>x.getClientRects().length);if(bb)bb.click()}}).catch(()=>{});
+   await clear(o,2);await sleep(300)}return false}
  /* 1. the host's Emperor turns an NPC's card; BOTH seats get the choice; the guest's Tranh sủng is resolved once on the host → her night */
  let H=await force("npc");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>100;oKeep=()=>0/* the flipped NPC's own defence (nfOdds keep → rung down) never holds here */});/* the friend's odds are read on the host */
  await endEvening();
  const [c1,h1]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Thôi")]);/* both seats at the same time (order never matters) */
- ok(c1==="Tranh sủng/Chặn ngự giá/Thôi"&&h1==="Tranh sủng/Chặn ngự giá/Thôi",'1: both seats get the attacker choice after the flip',[c1,h1]);
+ ok(c1==="Tranh sủng/Chặn ngự giá/Thôi"&&h1==="Tranh sủng/Chặn ngự giá/Thôi",'1: both seats get the attacker choice after the flip',[c1,h1,c1&&h1?'':await DG()]);
  const fid=await A.p.evaluate(()=>(liveRivals(false).find(v=>v.coop)||{}).id);const d1=await A.p.evaluate(()=>S.nfX&&S.nfX.d);
  ok(await until(A,`S.ntk&&S.ntk.w===${d1}&&S.ntk.who===${fid}&&S.nfX&&S.nfX.d===${d1}&&S.nfX.st==="done"`,null,30000),'1: host gives the night to the friend (decided once: the night record of that day = the friend; S.tonight itself is cleared on the host once her night is hers)',await A.p.evaluate(()=>nfDebug()));
  ok(await until(B,()=>S.tonight==="me"&&(S.nfN===wk()||Q.some(m=>m.pid==="nfsum"||m.pid==="prep")),null,30000),'1: guest plays her own night (summons → sequence)',await B.p.evaluate(()=>({d:nfDebug(),Q:Q.map(m=>m.pid)})));
  ok(await nightOf(A,H.id)===H.n,'1: the flipped NPC got no night',[H.n,await nightOf(A,H.id)]);
+ await sameRec('1',d1);
+ ok(await drive(B,d=>(S.nightLog||[]).includes(d)&&S.nfN===d,d1),'1: the guest\'s won night plays to its end on HER seat (her Kính sự phòng book has the night)',await B.p.evaluate(()=>({d:nfDebug(),log:(S.nightLog||[]).slice(-3)})));
  await unforce();
  /* 2. both seats attack: two successes → the higher Sủng (host) takes it; the guest's success that lost the tie costs nothing */
  ok(await nextNight('2'),'2: at tối again');
  H=await force("npc");await A.p.evaluate(()=>{oSteal=()=>100;oKeep=()=>0;S.sung=80;const f=liveRivals(false).find(v=>v.coop);if(f)f.sung=20});
  const s0=await B.p.evaluate(()=>{S.sung=20;S.cyb=Object.assign(S.cyb||{},{lie:wk()});return S.sung});
  await endEvening();
- const [c2,h2]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Tranh sủng")]);ok(!!c2&&!!h2,'2: both chose Tranh sủng',[c2,h2]);
+ const [c2,h2]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Tranh sủng")]);ok(!!c2&&!!h2,'2: both chose Tranh sủng',[c2,h2,c2&&h2?'':await DG()]);
  ok(await until(A,()=>S.tonight==="me"||S.nfN===wk(),null,30000),'2: the higher Sủng (host) wins',await A.p.evaluate(()=>nfDebug()));
- ok(await until(B,()=>S.tonight&&S.tonight!=="me"&&S.tonight.coop,null,30000),'2: guest sees the host holding it',await B.p.evaluate(()=>nfDebug()));
+ const d2=await A.p.evaluate(()=>S.nfX&&S.nfX.d);
+ ok(await until(B,d=>(S.tonight&&S.tonight!=="me"&&S.tonight.coop)||(S.ntk&&S.ntk.w===d&&S.ntk.who===(liveRivals(false).find(v=>v&&v.coop)||{}).id),d2,30000),'2: guest sees the host holding it (her record of the day: the host)',await B.p.evaluate(()=>nfDebug()));
+ await sameRec('2',d2);
  const g=await B.p.evaluate(()=>{const i=S.logs.findIndex(l=>/cũng mời được/.test(l));const newer=i<0?[]:S.logs.slice(0,i);
    /* the weekly fade («ân sủng nhạt dần») that can land after her night is not a steal loss: added back */
    const fade=newer.reduce((s,l)=>{const m=/nhạt dần: <span class="r">Sủng -(\d+)/.exec(l);return s+(m?+m[1]:0)},0);return{sung:S.sung,fade,line:i<0?S.logs.slice(0,8).join(" "):S.logs[i]}});
@@ -125,10 +148,39 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  H=await force("friend");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>1;oKeep=()=>99});
  await endEvening();
  const [c3,h3]=await Promise.all([answer(B,"Giữ chân Hoàng thượng"),answer(A,"Tranh sủng")]);
- ok(c3==="Giữ chân Hoàng thượng/Thôi"&&h3==="Tranh sủng/Chặn ngự giá/Thôi",'3: the flipped guest gets the defence choice, the host the attack',[c3,h3]);
+ ok(c3==="Giữ chân Hoàng thượng/Thôi"&&h3==="Tranh sủng/Chặn ngự giá/Thôi",'3: the flipped guest gets the defence choice, the host the attack',[c3,h3,c3&&h3?'':await DG()]);
  ok(await until(B,()=>S.tonight==="me"&&(S.nfN===wk()||Q.some(m=>m.pid==="ksp"||m.pid==="prep"))&&S.logs.slice(0,10).join(" ").includes("không ai giành được"),null,30000),'3: guest keeps her night, the defence gain line',await B.p.evaluate(()=>({d:nfDebug(),Q:Q.map(m=>m.pid),L:S.logs.slice(0,6)})));
  const d3=await A.p.evaluate(()=>S.nfX&&S.nfX.d);
  ok(await until(A,`S.nfX&&S.nfX.d===${d3}&&S.nfX.st==="done"&&S.nfX.fr==="keep"&&S.nfX.def&&S.nfX.def.ok===1&&S.nfX.me==="feign"&&S.logs.slice(0,40).join(" ").includes("không động lòng")`,null,30000),'3: host: the friend still holds, the host\'s try failed (stealFail line)',await A.p.evaluate(()=>({d:nfDebug(),L:S.logs.slice(0,6)})));
+ await sameRec('3',d3);
+ await unforce();
+ /* 4. the HOST is flipped (mirror of 3): the host presses Giữ chân Hoàng thượng (forced to hold); the guest's Tranh sủng fails (odds read on the host)
+    → the host keeps it + the defence gain line; the guest gets her own stealFail line on her seat; no night for her */
+ ok(await nextNight('4'),'4: at tối again');
+ H=await force("host");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>1;oKeep=()=>99});
+ const n4=await B.p.evaluate(()=>(S.nightLog||[]).length);
+ await endEvening();
+ const [c4,h4]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Giữ chân Hoàng thượng")]);
+ ok(h4==="Giữ chân Hoàng thượng/Thôi"&&c4==="Tranh sủng/Chặn ngự giá/Thôi",'4: the flipped host gets the defence choice, the guest the attack',[h4,c4,c4&&h4?'':await DG()]);
+ const d4=await A.p.evaluate(()=>S.nfX&&S.nfX.d);
+ ok(await until(A,`S.nfX&&S.nfX.d===${d4}&&S.nfX.st==="done"&&S.nfX.me==="keep"&&S.nfX.fr==="feign"&&S.nfX.def&&S.nfX.def.ok===1&&S.logs.slice(0,40).join(" ").includes("không ai giành được Hoàng thượng khỏi ngươi")`,null,30000),'4: host keeps his night, the defence gain line',await A.p.evaluate(()=>({d:nfDebug(),L:S.logs.slice(0,6)})));
+ ok(await until(B,d=>S.nfFin===d&&S.logs.slice(0,40).join(" ").includes("không động lòng")&&!(S.nightLog||[]).includes(d),d4,30000),'4: guest: her try failed (her own stealFail line), no night for her',await B.p.evaluate(()=>({d:nfDebug(),L:S.logs.slice(0,6)})));
+ await sameRec('4',d4);
+ await unforce();
+ /* 5. AFK guest: an NPC is flipped, the host answers Thôi at once, the guest never touches her choice → HER 10-second clock (BAL.steal.choice.ms)
+    answers Thôi → the host resolves long before its own cap (choice.waitMs); the NPC keeps the night */
+ ok(await nextNight('5'),'5: at tối again');
+ H=await force("npc");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>100;oKeep=()=>0});
+ await endEvening();
+ const [c5,h5]=await Promise.all([answer(B,null),answer(A,"Thôi")]);
+ const t5=Date.now();const CH=await A.p.evaluate(()=>BAL.steal.choice);
+ ok(c5==="Tranh sủng/Chặn ngự giá/Thôi"&&!!h5,'5: the guest\'s choice is on her screen (she does not touch it)',[c5,h5,c5&&h5?'':await DG()]);
+ const d5=await A.p.evaluate(()=>S.nfX&&S.nfX.d);
+ ok(await until(B,d=>S.nfX&&S.nfX.d===d&&S.nfX.me===null&&S.nfX.st==="done"&&!Q.some(m=>m&&m.pid==="nfch"),d5,CH.ms+20000),'5: guest: her clock answered Thôi (no choice left on her screen)',await B.p.evaluate(()=>nfDebug()));
+ ok(await until(A,`S.nfX&&S.nfX.d===${d5}&&S.nfX.st==="done"&&S.nfX.fr===null`,null,CH.ms+20000),'5: host: the friend counted as Thôi, resolved once',await A.p.evaluate(()=>nfDebug()));
+ const dt5=Date.now()-t5;ok(dt5<CH.waitMs,'5: resolved by her own 10-second clock, not the host\'s cap',{ms:dt5,clock:CH.ms,cap:CH.waitMs});
+ ok(await nightOf(A,H.id)>=H.n&&await B.p.evaluate(d=>!(S.nightLog||[]).includes(d),d5),'5: no night for the AFK guest');
+ await sameRec('5',d5);
  await unforce();
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
