@@ -8,7 +8,7 @@ git merge --abort 2>/dev/null; git checkout -q -- . ; git checkout -q --detach "
 if git merge-base --is-ancestor origin/main HEAD; then echo "ALREADY-CONTAINS LIVE (FF candidate)"; MERGED=0; else
   git merge --no-edit -q origin/main >/dev/null 2>&1; MERGED=1
   U=$(git diff --name-only --diff-filter=U)
-  for f in $U; do case $f in index.html|sw.js) git checkout --theirs $f;; dev/build/assemble.py) python3 dev/tools/asmunion.py $f || { echo "REAL CONFLICT $f"; exit 2; };; dev/kit/KIT.md|*.md) sed -i '/^<<<<<<< /d;/^=======$/d;/^>>>>>>> /d' $f;; *) echo "REAL CONFLICT $f"; exit 2;; esac; git add $f; done
+  for f in $U; do case $f in index.html|sw.js) git checkout --theirs $f;; dev/build/assemble.py) python3 /home/user/wt/ho/dev/tools/asmunion.py $f || { echo "REAL CONFLICT $f"; exit 2; };; dev/kit/KIT.md|*.md) sed -i '/^<<<<<<< /d;/^=======$/d;/^>>>>>>> /d' $f;; *) echo "REAL CONFLICT $f"; exit 2;; esac; git add $f; done
 fi
 python3 dev/build/assemble.py >/dev/null && CTM_CHANGE="$CH" bash dev/site/build_site.sh >/dev/null 2>&1
 git add -A index.html sw.js
