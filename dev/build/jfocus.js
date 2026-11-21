@@ -5,14 +5,14 @@
    PURE DISPLAY: no game logic, no numbers of its own — counts / odds words / costs come in the data. Every knob is in KIT_FOC (like KIT_EMOSEAL).
    kitIdle  (K-FOCUS-1b): CSS-only idle life on every stage figure (breath / sway / rare head turn), per kind, off with reduced motion / «Cảnh động» off / Gọn.
    kitMoodSay(figEl,text,{seal}) (K-FOCUS-1b): ONE short rare bubble beside a figure's head.
-   API:  const F=kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose});  F.setGroup(k) · F.say(lines,{onDone}) · F.choices(list,onPick) · F.play() · F.hud(mark,clock)
+   API:  const F=kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose});  F.setGroup(k) · F.setGroups(G) · F.say(lines,{onDone}) · F.choices(list,onPick) · F.play({skip:{n,sub,onSkip},onBack}) · F.hud(mark,clock)
          · F.endPlay() · F.react({seal,line,deltas}) · F.close() (animated) · F.destroy() (instant) · F.figRect().
    groups:[{k,n,can,tot,acts:[{id,n,pic,word,ton,off,why,info}]}]  (info = §6.3 rows html shown by the «!» popover; why = reason shown when the act is off).
    Test: dev/test/kit-focus.js. */
 (function(){try{
 const KIT_FOC=window.KIT_FOC=window.KIT_FOC||{
  veilMs:360,walkMs:700,tabsAt:600,tabsMs:200,fanMs:220,fanStagger:40,foldOpenMs:120,foldCloseMs:160,closeMs:600,veilOutMs:300,fadeMs:150,reactMs:1600,sayRiseMs:220,
- col:{kv1:168,kv2:300},btnH:{kv1:64,kv2:72},pic:{kv1:56,kv2:64},floorPad:{kv1:64,kv2:56},tabH:34,tabGap:8,headGap:8,colGap:12,
+ col:{kv1:236,kv2:300},btnH:{kv1:64,kv2:72},pic:{kv1:56,kv2:64},floorPad:{kv1:64,kv2:56},tabH:34,tabGap:8,headGap:8,colGap:12,
  motion:null /* test hook: true = ignore reduced motion */,
  idle:{breath:[3.6,4.4],breathKid:[2.8,3.2],sway:[7,9],turnEvery:[9000,15000],turnGapMs:4000,turnMs:1200,sayMs:3500,sayFadeMs:300,sayMax:22}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -25,27 +25,29 @@ function area(){const g=document.getElementById("game")||document.body,gr=g.getB
  const top=Math.max(sr.top,gr.top)-gr.top,bot=(br?br.top:gr.bottom)-gr.top-6;return {g,left:4,top,w:gr.width-8,h:Math.max(200,bot-top)}}
 function picHTML(a){const u=a.pic;if(u&&/^(https?:|img\/|data:)/.test(u))return `<img class="kfoc-pic" alt="" src="${esc(u)}" draggable="false">`;if(u&&/^</.test(u))return `<span class="kfoc-pic">${u}</span>`;return `<span class="kfoc-pic kfoc-ph" aria-hidden="true"></span>`}
 function btnHTML(a,i){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");
- return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}" data-i="${i}" data-id="${esc(a.id)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${esc(sub)}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
+ const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${esc(sub)}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
 function fac(F){try{if(typeof j59fac==="function")return j59fac(F.src,F.p)||1}catch(e){}return 1}
 function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig&&(o.fig.currentSrc||o.fig.src))||(typeof o.fig==="string"?o.fig:"")||"";
  const F={o,A,m,src,p:o.p,groups:o.groups||[],group:o.group||(o.groups&&o.groups[0]&&o.groups[0].k),anims:[],open:true,playing:false};CUR=F;
  const el=F.el=document.createElement("div");el.className="kfoc kfoc-"+m;el.setAttribute("role","dialog");el.setAttribute("aria-label","Gặp riêng");
  el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;
- el.innerHTML=`<div class="kfoc-veil"></div><img class="kfoc-fig" alt="" draggable="false"><div class="kfoc-tabs pctabs"></div><div class="kfoc-col kfoc-l"></div><div class="kfoc-col kfoc-r"></div><div class="kfoc-plate"></div><div class="kfoc-play" hidden></div><div class="kfoc-hud kgame" hidden><span class="kgmk"></span><span class="kgclk"></span></div><div class="kfoc-say" hidden></div><button type="button" class="kit-x kfoc-x" aria-label="Lui" title="Lui">✕</button>`;
+ el.innerHTML=`<div class="kfoc-bg" aria-hidden="true"></div><div class="kfoc-veil"></div><img class="kfoc-fig" alt="" draggable="false"><div class="kfoc-tabs pctabs"></div><div class="kfoc-col kfoc-l"></div><div class="kfoc-col kfoc-r"></div><div class="kfoc-plate"></div><div class="kfoc-play" hidden></div><div class="kfoc-hud kgame" hidden><span class="kgmk"></span><span class="kgclk"></span></div><div class="kfoc-say" hidden></div><div class="kfoc-skipw" hidden></div><button type="button" class="kit-x kfoc-x" aria-label="Lui" title="Lui">✕</button>`;
  try{const tk=o.fig&&o.fig.closest&&o.fig.closest(".tok");if(tk){F.tok=tk;F.tokVis=tk.style.visibility;tk.style.visibility="hidden"}}catch(e){}
+ try{const si=document.getElementById("scimg");const bi=si&&(si.style.backgroundImage||getComputedStyle(si).backgroundImage);if(bi&&bi!=="none"){el.querySelector(".kfoc-bg").style.backgroundImage=bi;el.classList.add("kfoc-hasbg")}}catch(e){}
+ if(still())el.classList.add("kfoc-still");
  A.g.appendChild(el);F.q=s=>el.querySelector(s);F.img=F.q(".kfoc-fig");F.tabs=F.q(".kfoc-tabs");F.cl=F.q(".kfoc-l");F.cr=F.q(".kfoc-r");F.plate=F.q(".kfoc-plate");
  F.img.src=src;
  const plate=o.plate||{};try{const p=o.p;F.plate.innerHTML=plate.html||(typeof j59tagHTML==="function"&&p?`<span class="kfoc-tag" style="--tc:${typeof j59col==="function"?j59col(p):"#5a6878"}">${j59tagHTML(p,p.name)}</span>`:`<span class="kfoc-tag"><span class="j59n">${esc(plate.name||"Người lạ")}</span></span>`)}catch(e){}
  const body=typeof kitFigBody==="function"&&src?kitFigBody(src,()=>{if(CUR===F&&F.open)layout(F)}):null;F.body=body;
  layout(F);build(F);
- F.q(".kfoc-x").addEventListener("click",()=>{F.playing?F.endPlay():F.close()});
+ F.q(".kfoc-x").addEventListener("click",()=>{if(F.playing){const ob=F.playO&&F.playO.onBack;if(ob){try{ob()}catch(e){}}if(F.playing)F.endPlay()}else F.close()});
  el.addEventListener("click",e=>{const b=e.target.closest(".kfoc-b");if(!b)return;const a=F.cur[+b.dataset.i];if(!a)return;
-  if(e.target.closest(".kfoc-i")){e.stopPropagation();try{kpPop(b,a.off&&a.why?`<div class="kpopt">${esc(a.why)}</div>`+(a.info||""):a.info,{})}catch(x){}return}
+  if(e.target.closest(".kfoc-i")){e.stopPropagation();const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const head=b.classList.contains("kfoc-clamp")?`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`:"";try{kpPop(b,head+(a.off&&a.why?`<div class="kpopt">${esc(a.why)}</div>`:"")+(a.info||""),{})}catch(x){}return}
   if(a.off){try{kpPop(b,`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`,{})}catch(x){}return}
   if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}
   if(o.onAct)o.onAct(a.id)});
  el.addEventListener("click",e=>{if(F.opening&&e.target.closest(".kfoc"))F.skipOpen()},true);
- F.setGroup=k=>setGroup(F,k);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=()=>playOn(F);F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
+ F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
@@ -59,13 +61,18 @@ function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:
   if(side==="l")cs.left=(cx-(Z.cw/2+K.colGap)-cw)+"px";else cs.left=(cx+(Z.cw/2+K.colGap))+"px"}
  F.plate.style.top=(floor+6)+"px";F.plate.style.left=cx+"px";
  const pl=F.q(".kfoc-play").style;pl.left=Math.max(0,cx-iw/2-40)+"px";pl.width=(iw+80)+"px";pl.top=top+"px";pl.height=ih+"px";
- el_btn(F)}
+ el_btn(F);if(F.cur)clampMark(F)}
 function el_btn(F){const h=KIT_FOC.btnH[F.m],p=KIT_FOC.pic[F.m];F.el.style.setProperty("--kfh",h+"px");F.el.style.setProperty("--kfp",p+"px")}
 function build(F){const G=F.groups,g=G.find(x=>x.k===F.group)||G[0];F.cur=g?g.acts:[];
  F.tabs.innerHTML=G.length>1?G.map(x=>`<button type="button" class="pct${x.k===(g&&g.k)?" on":""}" data-k="${esc(x.k)}">${esc(x.n)}${x.tot!=null?` ${x.can!=null?x.can+"/":""}${x.tot}`:""}</button>`).join(""):"";
  F.tabs.onclick=e=>{const b=e.target.closest(".pct");if(b&&b.dataset.k!==F.group)setGroup(F,b.dataset.k)};
  fill(F,F.cur)}
-function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("")}
+function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
+/* text never cut: title max 2 lines + ONE sub-line (CSS clamp/ellipsis); a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */
+function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
+  b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`)}})}
+/* replace the groups (caller's live counts); keeps the current group if it still exists; no fold animation; during choices/play the acts wait until play/choices end */
+function setGroups(F,G){F.groups=G||[];if(!F.groups.find(x=>x.k===F.group))F.group=F.groups[0]&&F.groups[0].k;if(F.pick||F.playing){F.saved=1;return}build(F)}
 function wa(F,el,kf,opt){if(!el.animate)return null;const a=el.animate(kf,Object.assign({fill:"both"},opt));F.anims.push(a);a.onfinish=()=>{const i=F.anims.indexOf(a);if(i>=0)F.anims.splice(i,1)};return a}
 function feetDelta(F){const f=F.o.from,r=F.img.getBoundingClientRect();if(!f)return null;const s=f.height/Math.max(1,r.height);return {dx:(f.left+f.width/2)-(r.left+r.width/2),dy:f.bottom-r.bottom,s}}
 function animateOpen(F){const K=KIT_FOC,veil=F.q(".kfoc-veil");F.opening=true;const done=()=>{F.opening=false};
@@ -85,16 +92,22 @@ function setGroup(F,k){if(!F.open||k===F.group)return;const K=KIT_FOC;F.group=k;
  const bs=[...F.el.querySelectorAll(".kfoc-b")];bs.forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.9)"}],{duration:K.foldOpenMs}));setTimeout(()=>{if(F.open)swap()},K.foldOpenMs)}
 function fan2(F){const K=KIT_FOC;if(still())return;[...F.el.querySelectorAll(".kfoc-b")].forEach((b,n)=>wa(F,b,[{opacity:0,transform:"scale(.9)"},{opacity:1,transform:"none"}],{duration:K.fanMs,delay:n*K.fanStagger*.5}))}
 function say(F,L,oo){const box=F.q(".kfoc-say");const lines=(L||[]).slice();let i=0;F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.plate.hidden=true;
- const show=()=>{const l=lines[i];if(!l){box.hidden=true;F.plate.hidden=false;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");if(oo.onDone)oo.onDone();return}
+ const show=()=>{const l=lines[i];if(!l){box.hidden=true;F.plate.hidden=false;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");sayLift(F,0);if(oo.onDone)oo.onDone();return}
   const face=l.face&&typeof kitFaceH==="function"?kitFaceH(l.face,"xs"):"";const last=i===lines.length-1;
   box.innerHTML=`<span class="kfoc-sayf">${face}</span><span class="kfoc-sayn">${esc(l.who||"")}</span><p>${esc(l.text)}</p><button type="button" class="kfoc-next">${last?"Tiếp ▸":"Tiếp ▸"}</button>`;box.hidden=false;
   if(!still())wa(F,box,[{opacity:0,translate:"0 12px"},{opacity:1,translate:"0 0"}],{duration:KIT_FOC.sayRiseMs});
-  box.querySelector(".kfoc-next").onclick=()=>{i++;show()}};
+  sayLift(F,1);box.querySelector(".kfoc-next").onclick=()=>{i++;show()}};
  const go=()=>show();if(F.opening)setTimeout(go,KIT_FOC.walkMs);else go()}
-function choices(F,L,cb){const box=F.q(".kfoc-say");box.hidden=true;F.plate.hidden=false;F.cur=L;F.pick=cb;fill(F,L);F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");fan2(F)}
-function playOn(F){F.playing=true;F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";
+/* SAY box never covers the figure: while it shows, the tabs hide and the figure (individual `translate`, composes with the walk transform) rises by the overlap, never above the layer top */
+function sayLift(F,on){const box=F.q(".kfoc-say");let dy=0;if(on&&!box.hidden){const bt=box.offsetTop,feet=F.geo.floor+4;dy=Math.max(0,Math.min(feet-bt,F.geo.top+F.geo.ih*(F.body?F.body.t:.02)-4))}
+  F.tabs.style.visibility=dy?"hidden":"";F.img.style.translate=dy?`0 ${-dy}px`:"";F.lift=dy}
+function choices(F,L,cb){sayLift(F,0);const box=F.q(".kfoc-say");box.hidden=true;F.plate.hidden=false;F.cur=L;F.pick=cb;fill(F,L);F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");fan2(F)}
+function playOn(F,oo){F.playing=true;F.playO=oo;const sw=F.q(".kfoc-skipw");sw.innerHTML="";sw.hidden=true;
+  if(oo.skip){const k=oo.skip;sw.innerHTML=`<button type="button" class="kfoc-b kfoc-skip" aria-label="${esc([k.n,k.sub].filter(Boolean).join(" · "))}"><span class="kfoc-t"><b>${esc(k.n||"Làm luôn")}</b>${k.sub?`<small>${esc(k.sub)}</small>`:""}</span></button>`;sw.hidden=false;
+   sw.firstChild.onclick=e=>{e.stopPropagation();try{if(k.onSkip)k.onSkip()}catch(x){}}}
+F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";
  const x=F.q(".kfoc-x");x.classList.add("kfoc-back");x.textContent="◂";x.setAttribute("aria-label","Quay lại");x.title="Quay lại";return pl}
-function playOff(F){if(!F.playing)return;F.playing=false;const pl=F.q(".kfoc-play");pl.hidden=true;pl.innerHTML="";F.q(".kfoc-hud").hidden=true;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");F.tabs.hidden=false;F.plate.hidden=false;
+function playOff(F){if(!F.playing)return;F.playing=false;F.playO=null;const sw=F.q(".kfoc-skipw");sw.hidden=true;sw.innerHTML="";if(F.saved&&!F.pick){F.saved=null;build(F)}const pl=F.q(".kfoc-play");pl.hidden=true;pl.innerHTML="";F.q(".kfoc-hud").hidden=true;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");F.tabs.hidden=false;F.plate.hidden=false;
  const x=F.q(".kfoc-x");x.classList.remove("kfoc-back");x.textContent="✕";x.setAttribute("aria-label","Lui");x.title="Lui"}
 function hud(F,mk,ck){const h=F.q(".kfoc-hud");h.hidden=false;try{if(mk!=null)kitGameMark(mk);if(ck!=null)kitGameClock(ck)}catch(e){}}
 function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoSeal.lean)kitEmoSeal.lean(F.img)}catch(e){}
@@ -141,7 +154,9 @@ window.kitIdle={scan:idleScan};
 
 const css=document.createElement("style");css.id="kit-focus";css.textContent=`
 .kfoc{position:absolute;z-index:46;overflow:hidden;border-radius:10px;touch-action:manipulation}
+.kfoc-bg{position:absolute;inset:-12px;background-size:cover;background-position:center;filter:blur(6px)}.kfoc-still .kfoc-bg,html.kf-still .kfoc-bg{filter:none;inset:0}
 .kfoc-veil{position:absolute;inset:0;background:rgba(20,12,8,.62);-webkit-backdrop-filter:blur(6px) brightness(.45);backdrop-filter:blur(6px) brightness(.45)}
+.kfoc-hasbg .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,8,.55)}
 html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,8,.62)}
 .kfoc-fig{position:absolute;display:block;max-width:none!important;max-height:none!important;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .kfoc-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:${KIT_FOC.tabGap}px;padding:0 10px;margin:0;z-index:3}
@@ -151,7 +166,9 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-b{position:relative;flex:none;display:flex;align-items:center;gap:8px;width:100%;height:var(--kfh,64px);min-height:var(--kfh,64px);box-sizing:border-box;padding:4px 8px 4px 4px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),0 2px 6px rgba(0,0,0,.25)}
 .kfoc-pic{flex:none;width:var(--kfp,56px);height:var(--kfp,56px);border-radius:8px;object-fit:cover;display:block;background:#efe3c8;overflow:hidden}
 .kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}
-.kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;line-height:1.15}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:anywhere}.kfoc-t small{font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal}
+.kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;line-height:1.15}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.3em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kfoc-b.kfoc-hasi{padding-right:20px}
+.kfoc-skipw{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:6}.kfoc-skipw .kfoc-skip{width:auto;min-width:150px;max-width:280px;padding:4px 18px;justify-content:center;text-align:center;background:#fff3c4}
 .kfoc-b .kfoc-i{position:absolute;top:-6px;right:-4px}
 .kfoc-b.kfoc-off{filter:grayscale(.85);opacity:.78}
 .kfoc-plate{position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;text-align:center}
@@ -159,9 +176,9 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;color:var(--ink,#3a2418);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
 .kfoc-tag .j59n{display:block;line-height:1.2;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 .kfoc-play{position:absolute;z-index:4}
-.kfoc-hud{position:absolute;left:0;right:0;top:0;display:flex;justify-content:center;gap:10px;padding:6px;z-index:5}
+.kfoc-hud{position:absolute;left:56px;right:56px;top:0;display:flex;justify-content:center;gap:10px;padding:6px;z-index:5}
 .kfoc-say{position:absolute;left:12px;right:12px;bottom:10px;margin:0 auto;max-width:760px;min-height:84px;max-height:132px;box-sizing:border-box;padding:18px 14px 10px 76px;border-radius:12px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);z-index:6;box-shadow:0 4px 14px rgba(0,0,0,.35)}
-.kfoc-say p{margin:0;font-size:.95rem;line-height:1.35;max-height:3 .0em}
+.kfoc-say p{margin:0;font-size:.95rem;line-height:1.35;}
 .kfoc-say p{max-height:none;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .kfoc-sayf{position:absolute;left:10px;top:12px}
 .kfoc-sayn{position:absolute;left:12px;top:-12px;padding:1px 10px;border-radius:999px;background:var(--gold,#b8892b);color:#fff;font-weight:800;font-size:.8rem}
