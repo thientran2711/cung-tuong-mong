@@ -1054,3 +1054,4 @@ NEWACCT#16 ~02:09Z: GEN1 maids: originals were 135 cr finals (gpt-2-6 2k, ref s7
 NEWACCT#16 ~02:10Z: DESIGN20 61a5551 t4 COMOIj + t5 COMOIi (base v6 COMOIf/COMOIe, OUTER_TIED kept as OK'd, fixes: 1 flower, no ear dangles, lotus lamp, G49 pearl swag) → CHECK1 → GEN1 110 cr. DESIGN20 ROLLED (~30 %, handover reports/DESIGN20.md) — successor only for next prompt job.
 NEWACCT#16 ~02:12Z: GEN1 32123e2 maids sachet redraw 3×135 = 405 cr (tam eIPYP1ZdqL, nhị 8aiVighIrU, nhất kseEeAm16B) LOOKED + sent L1650. Next Lượt 1651.
 NEWACCT#16 ~02:13Z: DESIGN21 356ce76 t6 COMOIk (base COMOId L1576) + t7 v8j (base v8c) reverted; prompt files sent owner L1651; CHECK1 checking; no gen until owner. Next Lượt 1652.
+NEWACCT#16 ~02:14Z: CHECK1 job 20 t6 COMOIk + t7 v8j PASS (G45 jade-not-covered words lost in revert; left out — owner 'don't over-constrain'; POSEFIX1 handles poses at source). Waiting owner on L1651.
