@@ -15,4 +15,4 @@ Owner (verbatim): "Cho tôi cái file PDF before after. Before chính là nhữn
 3. Refs: `curl https://ctm-img.victoria-tntt.workers.dev/img/_review/refs/<name>` into <refs>.
 4. `python3 compose.py dev/handover/OWNER_MARKS_2111.md <refs> <shots> <work> <main sha>` then `node render.js <work>/fixback.html fixback-2111.pdf` (keep < 25 MB).
 
-Not captured as AFTER (no fix live and no reachable review screen yet): every dialog-family mark (#38, #44, #46–#85 except #42) — shown as worker + status only.
+Not captured as AFTER (no fix live and no reachable review screen yet): the not-LIVE dialog-family marks (#44, #47–#85) — shown as worker + status only.

@@ -40,7 +40,7 @@ const M={
  26:{steps:[[sub('story','story')]]},27:{steps:[[sub('story','story')],[sub('story','story','Sắc phong')]]},28:{steps:[[sub('story','story')]]},29:{steps:[[sub('story','story')]]},
  38:{keep:1,steps:[[sub('act'),click('button.tok.fig[data-p="0"]')]]},
  39:{keep:1,steps:[[sub('act'),async f=>{await f.evaluate(()=>{const K=[...document.querySelectorAll('img.kemo')];const k=K.find(e=>e.dataset.kemop&&e.dataset.kemop!=='me'&&e.getClientRects().length)||K.find(e=>e.dataset.kemop!=='me')||K[0];if(k)k.click()});await f.waitForTimeout(900)}]]},
- 46:{keep:1,steps:[[sub('act'),click('button.tok.fig[data-p="0"]'),async f=>{await f.evaluate(()=>{try{die('Bệnh nặng')}catch(e){console.log(e.message)}});await f.waitForTimeout(2500);await f.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>{e.hidden=true;e.classList.remove('on')})});await f.waitForTimeout(800)}]]},
+ 46:{keep:1,noflat:1,steps:[[sub('act'),click('button.tok.fig[data-p="0"]'),async f=>{await f.evaluate(()=>{setTimeout(()=>{try{die('Bệnh nặng')}catch(e){}},0)});await f.waitForTimeout(4000);await f.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>{e.hidden=true;e.classList.remove('on')})});await f.waitForTimeout(800)}]]},
  42:{keep:1,steps:[[sub('act'),click('button[aria-label="Lịch tháng"]')]]},
 };
 /* the flat 16-button bottom bar (Chí tôn … Sổ ghi as top tabs) sometimes shows instead of the 8 group tabs: retake */
@@ -58,7 +58,7 @@ async function quiet(p,f,keep){for(let r=0;r<3;r++){await f.waitForTimeout(900);
     for(let r=0;r<4;r++){await f.evaluate(SEC.DISMISS);await SEC.h.clean(f);await f.waitForTimeout(400)}
     LIST[k][dev]=[];let n=0;
     for(const st of m.steps){n++;await SEC.h.clean(f);await f.evaluate(SEC.DISMISS);await quiet(p,f);for(const a of st)await a(f);
-     await quiet(p,f,m.keep);if(await f.evaluate(FLAT)){flat=true;break}const fn=`${DIR}/${k}-${dev}-${n}.jpg`;await p.screenshot({path:fn,type:'jpeg',quality:80});LIST[k][dev].push(fn)}
+     await quiet(p,f,m.keep);if(!m.noflat&&await f.evaluate(FLAT)){flat=true;break}const fn=`${DIR}/${k}-${dev}-${n}.jpg`;await p.screenshot({path:fn,type:'jpeg',quality:80});LIST[k][dev].push(fn)}
     if(p.errs.length)console.log(k,dev,'errs',JSON.stringify(p.errs.slice(0,2)))}catch(e){console.log('FAIL',k,dev,e.message.split('\n')[0])}
    await ctx.close();if(!flat)break;console.log('flat nav, retry',k,dev,tr)}
   console.log('mark',k,JSON.stringify(LIST[k]));fs.writeFileSync(DIR+'/shots.json',JSON.stringify(LIST,null,1))}
