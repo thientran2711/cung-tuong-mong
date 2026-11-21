@@ -1047,3 +1047,4 @@ NEWACCT#16 ~02:03Z: DESIGN20 702cdfe t4 COMOIi lotus-embroidered PASS (text). LA
 NEWACCT#16 ~02:05Z: LADDER2 81644d3 DESIGN20-wording ear/flower fix → current thu t1 v7, t2 v9, t3 v9, xuân v10, t6 COMOIj, t7 v8i, t8 v10h → CHECK1. GEN1 redrafts t6 COMOIi/t7 v8h (EAR_FREE) already running = OK as ear test. LADDER2 ~33 % → no new jobs; successor when needed.
 NEWACCT#16 ~02:06Z: DESIGN20 9214db6 JOB 7 NO VASE: 75 figure files fixed (L1438 lotus-lamp list), check_store F19 NOVASE gate, scan 0 left → CHECK1. Told owner L1646.
 NEWACCT#16 ~02:06Z: GEN1 e6406bd t6 COMOIi UPv1mtdwny + t7 v8h 5jDfVT5Kxe (110 cr) LOOKED + sent L1647: bare ears, t7 no bow. Current text set t6 COMOIj / t7 v8i / t8 v10h (CHECK1 PASS, no regen). Next Lượt 1648.
+NEWACCT#16 ~02:07Z: CHECK1 job 18 NO VASE PASS (0 held vases left, F19 gate). DESIGN20 57ddfa0 t4 COMOIi full shared ear/flower wording. All workers idle; waiting owner on L1642/L1644/L1645/L1647.
