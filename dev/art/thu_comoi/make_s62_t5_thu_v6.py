@@ -35,7 +35,9 @@ for x, y in [
      "a broad gold brocade girdle tied flat at the CENTRE front, NO bow, with two long carved jade pendant sets (ngọc bội) and tassels in front, never covered by sleeve or shawl,"),
 ]:
     assert s.count(x) == 1, x; s = s.replace(x, y)
-TRIM7 = []   # v7 length trims (Foreman decision pending)
+TRIM7 = [   # Foreman C #15 01:47Z A + D + C: A comes already dropped with the t4 COMOIg capelet copy; D not in t5; C = t5 pose tail
+    ", the robe hem stirring slightly",
+]
 TRIM6 = [   # A38: repeats only, gate-checked (DESIGN20 sentence scan)
     " Hair: her own hair colour, decorated with ONE fresh flower and several gold hairpins (trâm) with dangles, rich like her rank.",
     " (her secondary colour, clearly different from her main robe colour light plum)",
@@ -43,8 +45,13 @@ TRIM6 = [   # A38: repeats only, gate-checked (DESIGN20 sentence scan)
 if V7:
     x = "with two long carved jade pendant sets (ngọc bội) and tassels in front, never covered by sleeve or shawl, the front of the skirt embroidered with large double hollyhock medallions,"
     assert s.count(x) == 1
-    s = s.replace(x, "with TWO embroidered blush APRON PANELS (double hollyhocks, gold-braid edge) hanging side by side to the ankles, a long jade pendant set (ngọc bội) "
+    s = s.replace(x, "with TWO embroidered blush APRON PANELS (double hollyhocks, gold-braid edge) side by side to the ankles, a long jade pendant set (ngọc bội) "
                      "of jade plaques on pearl strings with tassels at each outer side, never covered by sleeve or shawl, the skirt embroidered with large double hollyhock medallions,")
+    for x, y in [   # compacting OUR OWN v6 words (Foreman C #15 01:47Z), same meaning
+        ("of double hollyhock embroidery from shoulder to hem)", "of double hollyhocks, shoulder to hem)"),
+        ("many small double hollyhocks embroidered below it", "small double hollyhocks below it"),
+        ("hem bands on the outer and the inner robe", "hem bands on outer and inner robe")]:
+        assert s.count(x) == 1, x; s = s.replace(x, y)
     TRIM6 += TRIM7
 for x in TRIM6:
     assert s.count(x) == 1, x; s = s.replace(x, "")

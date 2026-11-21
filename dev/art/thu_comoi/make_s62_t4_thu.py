@@ -71,14 +71,18 @@ if __name__ == "__main__":
 #      capelet cord across the chest with the jade in the middle (G46, owner L1626 'nối nhau bằng một cái sợi dây. Ở giữa có cái ngọc')) ----
 V7 = [
     ("linked low on the chest by a small jade clasp on a short silk cord",
-     "linked across the chest by a short silk cord with a small jade clasp in the middle"),
+     "linked across the chest by a silk cord with a jade clasp in the middle"),
     ("WIDE gold-thread embroidered borders of lotus flowers at sleeves and hem,",
      "WIDE gold-thread embroidered borders of lotus flowers at sleeves and outer hem,"),
     ("with a carved jade pendant set (ngọc bội) and tassels in front, never covered by sleeve or shawl",   # t3 v5 apron panels + jade sets, lotus
-     "with TWO embroidered blush APRON PANELS (lotus, gold-braid edge) hanging side by side to the ankles, a long jade pendant set (ngọc bội) "
+     "with TWO embroidered blush APRON PANELS (lotus, gold-braid edge) side by side to the ankles, a long jade pendant set (ngọc bội) "
      "of jade plaques on pearl strings with tassels at each outer side, never covered by sleeve or shawl"),
 ]
-TRIM7 = []
+TRIM7 = [   # Foreman C #15 01:47Z: A + D + C (repeats / pose tail) — NOT the S12 shawl words
+    " (never hiding the neck or the square inner neckline)",   # A: repeat of 'neck and collarbones visible' / layered neckline
+    " neck and collarbones visible;",                          # D: repeat (layered neckline + capelet OPEN at the front)
+    ", skirt swirling, the robe hem stirring slightly",        # C: pose tail
+]
 if __name__ == "__main__":
     for a, b in V7:
         assert s.count(a) == 1, a; s = s.replace(a, b)
