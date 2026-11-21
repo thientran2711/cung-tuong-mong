@@ -857,5 +857,5 @@ kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
 | REVIEW coop-arrive-see (opus BIG) of 8ee5f709 | review/coop-arrive-see-r1 | B | session_01N1tNP5qTMitGkZJgmbbcTW | RUNNING | 21/11 11:28Z |
 | REVIEW duodo-focus (OPUS BIG) of 43bc4ba2 | review/duodo-focus-rv; briefs/main93-rv-duodo-focus.md | MAIN CHÍNH 93 | session_01Rc5AsMC6NdEnc5VsL1xzk6 | RUNNING | 21/11 11:36Z |
 | REVIEW coop-host-lag-r2 (opus BIG) of 70309b27 | review/coop-host-lag-r2-r1 | B | session_01N1tNP2pAt8zEYzvzn4yUxb | RUNNING | 21/11 11:36Z |
-| FOREMAN E #27 (opus; child of E #26, depth 8 LAST) | handover FOREMAN_E_STATUS | FOREMAN E #26 | session_01DgYSWm9AdaKw5vcJA3B9eS | RUNNING | 21/11 11:44Z |
+| FOREMAN E #27 (opus; child of E #26, depth 8 LAST) | handover FOREMAN_E_STATUS | FOREMAN E #26 | session_01DgYSWm9AdaKw5vcJA3B9eS | DONE → handed to standby E #28 session_01DgYSWmZdYn5y3yDw6o778C 11:50Z | 21/11 11:44Z |
 kit-mark-fix rv4 | review/kit-mark-fix-rv4 123c4572 | rv session | PASS (re-merge) | 21/11
