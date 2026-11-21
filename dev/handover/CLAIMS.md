@@ -609,4 +609,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | bag-inline (sonnet; OWNER mark #21 21/11 ~02:45Z: Túi đồ inline strip, no popup, whole group) | review/bag-inline; briefs/main85-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsJTtZMnTMg6ibPv5H7 | RUNNING | 21/11 02:32Z |
 | REVIEW rel-picker-r3 (SMALL sonnet) of 295c7cb3 | review/rel-picker-r3-rv; briefs/main85-rv-rel-picker-r3.md | MAIN CHÍNH 85 | session_01Rc5AsNR8EMo2pDti8PoLLf | RUNNING | 21/11 02:35Z |
 | REVIEW chiton-name (SMALL sonnet) of a41b3891 + merge LIVE | review/chiton-name-rv; briefs/main85-rv-chiton-name.md | MAIN CHÍNH 85 | session_01Rc5AsJd4iSwgSQHpoPQtqh | RUNNING | 21/11 02:36Z |
-| chapter-card (sonnet; OWNER marks #26/#27 21/11 ~02:58Z–03:02Z: every Mệnh truyện sub-tab big picture card) | review/chapter-card; briefs/main85-chapter-card.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:41Z |
+| chapter-card (sonnet; OWNER marks #26/#27 21/11 ~02:58Z–03:02Z: every Mệnh truyện sub-tab big picture card) | review/chapter-card; briefs/main85-chapter-card.md | MAIN CHÍNH 85 | session_01Rc5AsMDAsVpNsL2CKbpUuC | RUNNING | 21/11 02:41Z |
