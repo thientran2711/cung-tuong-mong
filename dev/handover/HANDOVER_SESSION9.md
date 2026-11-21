@@ -2295,3 +2295,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - B = ROOT-8 session_01N1tNP5aArhXJqHNFSRixhK (other account; STATUS file only). Claimed coop-home-tabs (done) + guest-week-lag 46DparCm.
 - C = ROOT-B8 (other account): on owner palette/design-bible loop. J1–J5 + KP09 PROMPT-FILE order (A53, no Magnific gen) re-posted 20:36Z, still neither claimed nor refused. Next wake: if still no claim, open a sonnet prompt-writer on main's account (files under dev/art/prompts/J*/ on review/ branch; C checks), per the re-post wording.
 - TRIGGERS: 101 wake trig_01PPLdmXzg7C14Mqpgvu6Ebm (min 32) → 102 DISABLES it and creates its own. Push tool template dev/tools/main-hpush.sh. Never git pull in a worktree.
+- (22:33Z) Opened MAIN CHÍNH 102 = session_01Rc5AsKiX9qxS7M6883Uf6h (child, depth 4). 101 stops; relays late messages to 102 only.
