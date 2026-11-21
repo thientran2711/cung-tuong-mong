@@ -74,3 +74,44 @@ Status in 5d0ac1c6:
 - **#35 ONE SHELL**: DONE: one tab bar for every status (j79 KG + kgOn everywhere; j42 srvTabs / jkc kcTabs bar relabel+hide removed, SRVTABS/KCTABS guards removed, jhc court/men hide removed, jht HTK srv-off removed); co-op guest uses the same code (both-seat check in coop-e2e). TO DO: (a) delete the leftover stubs (j42 `srvTabs` + SRVTABS const + its jgoal/j84 references; jkc `kcTabs`); (b) Đồng liêu in the SHARED person-tab layout (pager strip + one pcard per colleague, same as Cung nhân tab — find the Cung nhân renderer, likely jaudit/jstaff/j14 staffTab) instead of j42 `srvStaffHTML` .srvrow list: build pcard per colleague with the same act buttons (data-cnv chat/gift/ask/frame/poison) as groups; delete srvStaffHTML/.srvrow CSS; (c) report a scan: `git grep -nE "SRVTABS|KCTABS\\[|kcTabs|srvTabs|data-tab=.*display|style.display=.*isSrv|isKc\\(\\)\\?.*tab" dev/build` → no status-specific tab bar; list every removed path (file:function): j42 srvTabs/SRVTABS guard/srvHead, jkc kcTabs/KCTABS guard/kgOn override/ksub removal, jhc render court/men hide, jht render HTK srv-off + panel srv bail, j79 kgOn isSrv, jpet isSrv bails.
 - Tests to re-run after: dev/test/maid-8tabs.js (update: Phi tần label «Chủ tử», right column «Đồng liêu N» + master row with Chủ tin), coop-e2e tt+nc and tt+cnv (both-seat check), tab-pairs (+maid copy), role-parity, quickcheck (re-measure buổi), Fold+iPad shots of all 8 tabs → CDN img/_review/maid-8tabs/ (wipe old first).
 Scratch tools I used (not in git, recreate if wanted): a shots script walking every bar tab + .ksub sub-tab per road (srv via __forceOrigin='cnv'; kc via start() until kcOk && !S.srv, nlCard(), click [data-kcp="nha"], click [data-nl="ok"]).
+
+---
+# maid-8tabs-2 — report (worker session_01Rc5AsKY5rVpiLYpPGJuZPT, MAIN CHÍNH 87 → 88)
+
+PRIORITY #1 CHECK: OD 21/11 marks #32–#36 (rows ~03:15Z–03:25Z verbatim) | main LIVE 6e07f837 (merged first) | review/maid-8tabs 5d0ac1c6 → this work | claims: maid-8tabs row (this session). START_CTX ~3 % (1M window); finished well under the rollover line.
+
+Branch **review/maid-8tabs** @ **7d68436b** (merge of origin/main 6e07f837 + 3 work commits). TIER BIG.
+Shots (Fold 755x1000@2 + iPad 1180x820@2 side by side, real pictures): CDN `img/_review/maid-8tabs/` (old 11 wiped; 14 new: m8-01-home … m8-14-duđo). Looked at all 3×.
+
+## #32–#36 — where and how tested
+| Mark | What | Where (file:function) | Tested by |
+|---|---|---|---|
+| #32 | same 8 bottom tabs + sub-tabs on every road | jroad8 ROAD8 + j79 kgOn/kgKeys (from 5d0ac1c6) | maid-8tabs.js bar + key walk srv/kc/consort, tab-pairs consort + maid copy (56 pairs ×2 sizes, 0 mismatch) |
+| #33 | no strip; right column = consort's | j42 srvHead gone (5d0ac1c6); jk3 kitGroupBtns now exactly the consort's two buttons (extra «Chủ tin» button + phone rail item removed) | maid-8tabs.js #33 rows |
+| #34 | her chủ = court box row «<phẩm> <tên>» + «Chủ tin N», tap → her card | j42 srvCourtRow + kitCourtRows/kitCourtOpen("mis") wrappers; j61 k61Own (law 6b: a maid knows her own chủ and the colleagues she serves with / has met: no grey «Người lạ» on stage, chủ row, Đồng liêu pager or greyed card buttons) | maid-8tabs.js #34 (row text, tap → Hậu cung › Chủ tử on her, card name); shots m8-02, m8-04 |
+| #35 | Đồng liêu = shared person-tab layout; stubs gone | j42 srvStaffTabHTML (kit pager + one pcard, act buttons in card groups «Giao thiệp»/«Mưu kế»); deleted srvStaffHTML, .srvrow/.srvhead CSS, SRVTABS, srvTabs, jkc kcTabs | maid-8tabs.js #35 (strip, faces = colleagues, 1 pcard, no .srvrow, «Trò chuyện» spends 1 khắc); ag-stf2 23/23; shot m8-05 |
+| #36 | same boxes, words from ONE table | jroad8 ROAD8_LAB (cn/ct labels) + road8Lab; ROAD8.srv.rv «Chủ tử»; jk3 kgfLab/k3crewList/kgfCount/kgfDrop/kgfRail read it; jts tsBoxOn: Nguy hiểm chung + Xét phẩm on her road, tsSrvRows/tsSrvPromoPanel = her next rung (Công lao, bậc cung chủ cho phép, Chủ tin ≥ BAL.srvx.tinUp — new BAL key replacing the typed 35 in j42 srvMonth, law 4) | maid-8tabs.js #36 (fold = colleagues, tap → her card, labels, chips + panels); shots m8-01/03/07/08 |
+
+## Group bugs found on the way (fixed whole group, law 11)
+| # | Bug (pre-existing, also on the consort road) | Fix |
+|---|---|---|
+| 1 | j79 kgBar: a member tab that was once a group head kept data-kg (rv headed Hậu cung before jhc rebuilt KG) → a tap on it (kitCourtOpen Hoàng hậu / chủ) opened the group's LAST sub-tab (Cung nhân) | member branch drops the stale head mark |
+| 2 | jk3: a tap on a person INSIDE the open fold (Cung nhân chips, Hoàng hậu row) only closed the fold — the «tap outside closes» guard ate the tab click it sends | kgfShut() before navigating (k3go + kitCourtOpen wrapper) |
+| 3 | j27: PG.rv is the palace-grouped STRIP position; kitCourtOpen set rivals.indexOf → Hoàng hậu / chủ row opened another consort's card | rvOrd()/rvPgOf(v), used by jk2b (hh) and j42 (chủ) |
+
+## Removal list + scan
+Removed: j42 SRVTABS, srvTabs (+ its render call), srvStaffHTML, .srvrow/.srvhead CSS; jkc kcTabs (+ call); jk3 «Chủ tin» group button + kgf-tin rail item. (From 5d0ac1c6: j42 srvHead, SRVTABS guard; jkc KCTABS guard / kgOn override / ksub removal; jhc court/men hide; jht HTK srv-off + panel bail; j79 kgOn isSrv; jpet isSrv bails.) KCTABS stays = her home panel NAMES read by ROAD8.kc labels and her goal lines (no bar code).
+`git grep -nE "SRVTABS|KCTABS\[|kcTabs|srvTabs|srvStaffHTML|srvrow|srvhead|style.display=.*isSrv|isKc\(\)\?.*tab" -- 'dev/build/j*.js'` → only j84 comment + jkc2 KCTABS[t] (variant names) + jht kgOn (always on). No status-specific tab bar left.
+Test tools updated to the new renderer: dev/tools/role-parity-scan.js (tabAll("srvStaffTabHTML")), dev/test/ag-stf2.js.
+
+## Tests (on 7d68436b unless noted)
+- quickcheck 7d68436b: PASS (render 231/286, tab 455/520, buổi 1531/1214 ms, tasks>200ms 19/23; core gates PASS). Earlier a0e3590f: PASS (buổi 1293/1690).
+- coop-e2e tt+nc 94/94 (a0e3590f); tt+cnv both-seat on 7d68436b: 92/94 then 94/94 on re-run (the 2 lines = «same Thái hậu picture» on the maid seat, the known flaky S.thO timing noted in 5d0ac1c6, not tab related).
+- maid-8tabs.js 57/57 (Fold + iPad, old save from LIVE 6e07f837, rank-up, home road).
+- tab-pairs consort 56×2 0 mismatch; maid copy 56×2 0 mismatch.
+- ag-stf2 23/23.
+- role-parity: ALL PASS (peak RAM ~13.6 GB used on the box). First runs failed «maid:N-ONLY ask / frame / poison»: the scan read the deleted srvStaffHTML, then the shared pcard greyed buttons of met colleagues as strangers — fixed (k61Own: her chủ + colleagues she serves with / met = known; scan uses tabAll("srvStaffTabHTML")).
+
+## Notes for the reviewer
+- No save field changed. Co-op sends no UI state.
+- Her chủ's card still says «Ghen/Đức/Tính nết: chưa rõ» (knowledge rules of j25/k61, unchanged — not in these marks).
