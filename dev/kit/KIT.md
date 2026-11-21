@@ -398,6 +398,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- **ONE DIALOG STACK (KIT 8.9, owner 21/11 mark #46; jk4.js `kitDialogStack`, test dev/test/dialog-stack-scan.js):** a newer dialog is always the TOP layer (`#modal` z 42, above the room person card `#popw` z 41 and every second-layer pop-up); a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) first closes every other second-layer pop-up (person card `popIdx`, kitCloseLayer layers incl. game result `#ov`, word pop-up `#kpop`, podium `#kpodov`, open kit book). Never two dialogs overlapping; no opener patches it, it runs in showModal for all of them.
 - Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`
