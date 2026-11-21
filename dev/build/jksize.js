@@ -536,7 +536,8 @@ function kszFigFill3(dlg,cap,lay,cRef){const B=dlg.querySelector(".k3body"),L=B&
  const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});
  const pad=(parseFloat(getComputedStyle(B).paddingTop)||0)+(parseFloat(getComputedStyle(B).paddingBottom)||0);const M=document.getElementById("modal");if(!(cap>0))cap=M?M.clientHeight-24:0;if(!(cap>0))return;const room=cap-fixed-pad-4;
  const mh=R.style.minHeight,mx=R.style.maxHeight,ov=R.style.overflow;R.style.minHeight="";R.style.maxHeight="";R.style.overflow="visible";const want=Math.ceil(R.scrollHeight);R.style.minHeight=mh;R.style.maxHeight=mx;R.style.overflow=ov;
- const lh=L.offsetHeight,target=Math.min(room,want);if(target<=lh+2)return;
+ const tall=dlg.dataset.ksz==='XL'||dlg.dataset.ksz==='L';/* OD 21/11 ~03:54Z (#47): every L / XL frame of a device has the SAME figure size + position: the figure column always fills the room the frame cap leaves, whatever the info / options say */
+ const lh=L.offsetHeight,target=tall?room:Math.min(room,want);if(target<=lh+2)return;
  const tg=L.querySelector(":scope>.kt3"),part=lh-fs.offsetHeight+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(target-part)/(1+cRef);
  if(allow>body0*dlg.__kszShrink+.5){dlg.__kszShrink=allow/body0;kszFigFit(dlg)}}
 window.kszFigFill3=kszFigFill3;
