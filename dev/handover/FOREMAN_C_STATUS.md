@@ -1064,3 +1064,4 @@ NEWACCT#16 ~02:38Z: CHECK1 job 21: GEN1 t4 COMOIk + t5 COMOIj drafts sent (110 c
 - (21/11 02:39Z) FROM MAIN CHÍNH 85: LIVE now a88b14f0 (coop-name-clash + thancan module list; FF of 64d2e094). Merge before LAND READY.
 NEWACCT#16 ~02:40Z: MAIDFIX1 e40bb3a maid prompts test6_nhi/nhat/tam_L1653 (+.keep) ready; 3 design Qs asked owner L1654 (nhị blue sleeves?, tam vs nhị difference, nhất back tà 1 or 2). Drafts 55 cr each after answers.
 NEWACCT#16 ~02:42Z: GEN1 7972b90 t4 9ZHSjoTNYZ + t5 mEZp0UIhJQ (110 cr, from 31af161 text) LOOKED + sent L1655: embroidery inside bands OK; Tần sash pink lightly patterned + small knot (brocade weak); Phi gold brocade girdle; pearl swag weak. Next Lượt 1656.
+NEWACCT#16 HANDOVER ~02:42Z: depth 6, ctx 31 % (START ~4 % + 25 % → roll). TAKEOVER_FOREMAN_C_NEWACCT17.md written; opening #17 as my child. No schedules owned. Next Lượt 1656.
