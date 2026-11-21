@@ -42,7 +42,7 @@ function mgIdShift(kind,p){const c=I();if(!c.on||!p||typeof p!=="object")return 
 function mgIdRes(kind,g,o){o=o||{};KG82.idNote=null;const c=I();g=cl(+g||0,0,10);if(!c.on||o.raw||typeof S==="undefined"||!S)return g;
  const T=KG82.tier&&typeof KG82.tier==="object"&&KG82.tier.kind===kind?KG82.tier:null,d=T&&isFinite(+T.d)?+T.d:0;
  const cls=mgIdClass(S,kind),b=mgIdB(kind,S),off=mgIdOff(kind,S),r=cl(Math.round(g+off),c.lo!=null?c.lo:0,c.hi!=null?c.hi:10);
- learn(kind,cl(g-(mgMedD(d)-mgMedD(0)),0,10),S);
+ learn(kind,cl(g-(mgMedD(d,kind)-mgMedD(0,kind)),0,10),S);
  KG82.idNote={kind,cls,b:Math.round(b*10)/10,g,r,off:Math.round(off*10)/10};return r}
 /* the kit row of the result (kitRows via kg82Rows, law 9): which identity class, her usual hand, graded play → result. Player words: VANPHONG (no %) */
 function mgIdRow(n){if(!n||n.g===n.r)return"";const L={tr:"Sở trường",doan:"Sở đoản","":"Thân phận"}[n.cls],W={tr:"thân phận này vốn giỏi môn ấy",doan:"thân phận này vốn kém môn ấy","":"môn thường của thân phận này"}[n.cls];
