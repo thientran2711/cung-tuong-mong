@@ -83,7 +83,7 @@ def build(pid, k):
     t = sub1(t, "TWO-COLOUR RULE:", f20 + "TWO-COLOUR RULE:", 1)
     # caption: season + rank + collar + person code
     t = re.sub(r'write exactly this Vietnamese text WITH accents: "[^"]*"',
-               f'write exactly this Vietnamese text WITH accents: "Mùa Thu · {RANK[k]} · cổ vuông · {pid}"', t)
+               f'write exactly this Vietnamese text WITH accents: "Mùa Thu · {RANK[k]} · cổ vuông{" + vân kiên" if k == 5 else ""} · {pid}"', t)
     # fit the gen tool limit (10 000): trim ONLY duplicate boilerplate (A38), listed in .keep
     for bp in ("Everyone beautiful at every age. ", "beautiful/handsome romantic-lead looks for everyone. ",
                "do NOT copy poses, outfit, HAIRSTYLE, hair ornaments or accessories of the reference, dress her in the NEW outfit below. "):
