@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bffc0a56+","t":"2026-11-21T04:03Z","c":"kitEndScreen: canvas-safe units, KIT.md §91, ending-scan (law 11 table), coop ending test, site rebuilt","b":"f6f7103eecee","h":[{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"}]};
+window.CTM_BI={"s":"7df97682+","t":"2026-11-21T05:16Z","c":"kitEndScreen: canvas-safe units, KIT.md §91, ending-scan (law 11 table), coop ending test, site rebuilt","b":"cddbc4b75f9a","h":[{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -86325,6 +86325,7 @@ function kesLife(h,fate,live){const s=`${h||""} · ${fate||""}`;
  if(/^Đại kết cục/.test(String(h||""))||/Đại kết cục:/.test(String(fate||"")))return"grand";
  if(!live)return"death";
  if(/phế|đuổi|lãnh cung|điên|tuổi xuân qua đi|thứ dân|tân giả|lưu đày/i.test(s))return"exile";
+ if(/ban hôn|ban gả|xuất giá|thành thân/i.test(s))return"leave";/* a marriage granted BY Thái hậu is a leave, not a throne (rv) */
  if(/thái hậu|mẫu hậu|mẫu nghi|thái phi|lên ngôi|đăng cơ|nữ vương/i.test(s))return"throne";
  return"leave"}
 window.kesLife=kesLife;
@@ -88016,7 +88017,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f6f7103eecee";window.CTM_BUILD=BUILD;
+const BUILD="cddbc4b75f9a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

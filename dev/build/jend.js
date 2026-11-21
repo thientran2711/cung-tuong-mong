@@ -33,6 +33,7 @@ function kesLife(h,fate,live){const s=`${h||""} · ${fate||""}`;
  if(/^Đại kết cục/.test(String(h||""))||/Đại kết cục:/.test(String(fate||"")))return"grand";
  if(!live)return"death";
  if(/phế|đuổi|lãnh cung|điên|tuổi xuân qua đi|thứ dân|tân giả|lưu đày/i.test(s))return"exile";
+ if(/ban hôn|ban gả|xuất giá|thành thân/i.test(s))return"leave";/* a marriage granted BY Thái hậu is a leave, not a throne (rv) */
  if(/thái hậu|mẫu hậu|mẫu nghi|thái phi|lên ngôi|đăng cơ|nữ vương/i.test(s))return"throne";
  return"leave"}
 window.kesLife=kesLife;
