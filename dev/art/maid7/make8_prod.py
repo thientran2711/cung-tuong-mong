@@ -43,7 +43,7 @@ def port_thosu(t):
     t = sub(t, "fine smooth plain cotton-silk in powder blue", "fine smooth plain matte silk crepe in powder blue")
     t = sub(t, "From the reference image take ONLY", "From the reference image take ONLY") if False else t
     t = sub(t, "closed-lip smile, lips closed, no teeth, mouth never open;", "closed-lip smile, lips closed, no teeth, mouth never open;") 
-    t = sub(t, "nowhere else; hair in a simple bun", "nowhere else; that sash is tied at the FRONT of the waist in a small, pretty, graceful bow, the sash deep rose and the front BOW in the opposite colour powder blue so the bow stands out, never white; hair in a simple bun")
+    t = sub(t, "nowhere else; hair in a simple bun", "nowhere else; that sash is tied at the FRONT of the waist in a small, pretty, graceful bow with two long soft ties trailing down from the bow, the sash deep rose and the front BOW in the opposite colour powder blue so the bow stands out, never white; hair in a simple bun")
     t = sub(t, " HAIR: ALL her hair", " " + EDGES + " " + FABSAME + " HAIR: ALL her hair")
     return t
 def port_chuongsu(t):
