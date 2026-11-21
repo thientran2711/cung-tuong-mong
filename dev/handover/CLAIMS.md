@@ -824,7 +824,7 @@ kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text c
 | REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
 | ban-cung (owner mark #53 / GAP M53; MAIN 86 03:45Z order; history expert + real odds, opus) | review/ban-cung | D #14 | session_01964izDzJ9DZJRZ4MUStHk6 | RUNNING | 21/11 09:14Z |
 | KIT KEEPER #2 (OPUS; successor of MtjP at 78 %) | review/kit-focus d3f02bcc (r2 SSK); reports/kit-keeper-2.md | MAIN CHÍNH 92 | session_01Rc5AsMF9SLrWM4NQM9zGGz | RUNNING (kit-focus r2 at rv) | 21/11 09:21Z |
-| coop-guest-names (opus BIG; MAIN 91 ORDER 08:34Z: guest k61 name mask misses shared-world people + jnamefix cross-seat) | review/coop-guest-names; briefs/b5-coop-guest-names.md | B | session_01N1tNP4yDu6wnmaLKhzumGM | RUNNING | 21/11 09:21Z |
+| coop-guest-names (opus BIG; MAIN 91 ORDER 08:34Z: guest k61 name mask misses shared-world people + jnamefix cross-seat) | review/coop-guest-names; briefs/b5-coop-guest-names.md | B | session_01N1tNP4yDu6wnmaLKhzumGM | SSK 3ffea799 (reports/coop-guest-names.md) | 21/11 10:40Z |
 | ending-screens-land (opus BIG re-merge; MAIN 92 ORDER 08:53Z: G4 80-dialog-fixed fail; + ending-screens-2 on top) | review/ending-screens-land, review/ending-screens-2-land; briefs/b5-ending-screens-land.md | B | session_01N1tNP6MabVX7Umpx2XWEzo | RUNNING | 21/11 09:21Z |
 | mg-noword-care (sonnet SMALL; MAIN 92 ORDER 09:14Z: thu_tam/thu_choi/tuoi words + whole family) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP2S5rf5Z5gTFLmPZaf | RUNNING | 21/11 09:21Z |
 kit-opt-kem rv | review/kit-opt-kem-rv e09fd19a | rv session | PASS (+law-4 finding for MAIN) | 21/11
