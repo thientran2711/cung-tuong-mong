@@ -945,7 +945,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 ## 21. SKILL CARD = THE ONE HEAD CARD (kit 2; one form since review/tabs-kit r7, owner 11/15) — `dev/build/j79.js`
 `kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels:[text per level], acts:[pbtn…], img, stepsAttr, can})` → `.kskill`
 - ONE card for every art and Tứ đức course (Tài nghệ), every Tác phẩm line, the Mệnh truyện chapter head and the Sắc phong head, and every
-  empty state (`kitEmpty(title,line)` = this card with `max:0`, the topic's kitInfoArt picture and one short line). No other head / empty frame.
+  empty state (`kitEmpty(title,lines,o)` = the big empty card of §37.2). No other head / empty frame.
 - LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
   (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
@@ -2851,9 +2851,12 @@ for a living player; nothing is lost: each fact now sits on a person card.
 - **Quý tộc kén rể · kén dâu** (`qt`): unpromised công tử (`S.hPool`) then quý nữ (`S.qPool`); card = Nhà (con trai/gái <chức>), Phe, Tuổi,
   Sắc · Tài (or "chưa rõ"), "Hỏi được cho: <con>" when a match fits her child; act "Dò hỏi gia thế" (1 khắc, Bạc -5, sure) for a stranger.
 
-### 37.2 Empty sub-tab = ONE kit card (`htEmpty(art, title, lines)` → `.khtempty`)
-`kitArtFrame` picture (act-cat-cham-con / act-phong-tuoc / act-hon-su / act-cat-trieu-chinh) + title (seal colour) + 2–3 bullet lines
-saying how the tab fills. Never a blank panel, never a run-on paragraph. Narrow container (≤ 420 px): picture over text.
+### 37.2 Empty tab / sub-tab / panel = ONE kit card (`kitEmpty(title, lines, {art|topic, acts})` → `.kempty`, j79 §21; `htEmpty` = thin alias)
+Owner 21/11: "khi không có thông tin thì hiện như «Ta chưa có con»: nhìn cái trang cho nó đỡ trống". Picture LEFT (`o.art` path, else
+`kitInfoArt(o.topic||title)`, else neutral tile; narrow container ≤ 420 px: picture over text) + title «Ta chưa có …» / «Chưa có …» (seal colour) +
+2–3 hint bullets saying how it fills. Never a blank panel, a lone `<p class="past">` or a run-on paragraph. Used by every empty state: Phe phái hậu cung,
+Nam nhân, Hoàng tự (Con của ta / Kế vị / Hoàng tự trong cung / Hôn sự / Kén rể), Thư từ, Mệnh truyện (Chương / Sắc phong / Đã qua), Việc nhờ (3 tabs), Gia tộc,
+Phụ tuyến, Triều cục, bảng xếp hạng. Scan: `node dev/test/empty-scan.js`; forced-empty shots: `node dev/test/empty-shots.js`.
 
 ### 37.3 Strangers (owner "mọi tên có mặt", "Người lạ")
 Công tử / quý nữ are strangers until seen in a marriage talk, met by a daughter, promised / married, or asked about: grey kit silhouette
