@@ -41,3 +41,31 @@ jstory svFrame: every Chính tuyến / Phụ tuyến choice dialog whose last wo
 
 ## TESTS (sample)
 story-voice/screen.js 755x1000 PASS (VP.fix, 80 reign dialogs × sides read in the real modal, c1a reads right, seat address ái phi/nàng by each seat's Sủng) · j67frame.js PASS · shots looked at (Fold c1a/c2a/c4b, scratch only).
+
+## WHOLE SET (all story / road / phụ tuyến narration, 22 files ≈ 2.2 MB of strings)
+Method: the strings of every story file were dumped (scratch) and read in full by 8 literature reviewers (opus, read-only, one brief: VANPHONG + owner verbatim; kinds OBSCURE / ADDRESS / MODERN / DIGIT; no restyling of clear lines). E39 reviewed every proposal and applied it with a guard script: the old text must be unique in its file, no code token can be dropped, an added token must exist in that file's filler, a text that another module matches (jgedata option keys, tests) is refused, and `node --check` must pass. 395 lines applied, ~25 refused by the guard (listed below), 2 refused by E39 (hand-typed «Tỷ/Muội» where the rank decides → kAddr law).
+| file | OBSCURE | ADDRESS | MODERN | total |
+|---|---|---|---|---|
+| j67.js | 26 | 3 | 9 | 38 |
+| j72.js | 3 | 3 | 3 (+3 typed silver amounts → words) | 12 |
+| jend14.js | 1 | 1 | 0 | 2 |
+| jnrask.js | 12 | 0 | 0 | 12 |
+| jnrask_b.js | 26 | 0 | 1 | 27 |
+| jnrask_m.js | 20 | 1 | 0 | 21 |
+| jnroade.js | 1 | 0 | 4 | 5 |
+| jrd_bd.js | 9 | 1 | 4 | 14 |
+| jrd_bd2.js | 9 | 2 | 0 | 11 |
+| jrd_ch.js | 11 | 17 | 1 | 29 |
+| jrd_cn.js | 6 | 31 | 4 | 41 |
+| jrd_cnv.js | 12 | 2 | 5 | 19 |
+| jrd_dtq.js | 11 | 17 | 5 | 33 |
+| jrd_muoi.js | 21 | 12 | 4 | 37 |
+| jrd_nc.js | 4 | 2 | 5 | 11 |
+| jrd_td.js | 19 | 8 | 0 | 27 |
+| jrd_thd.js | 11 | 8 | 16 | 35 |
+| jrd_tt.js | 19 | 5 | 3 | 27 |
+| jreign.js (by hand) | all hồi + errands rewritten, see SAMPLE | | | ~30 |
+Full before/after list, every line: reports/story-voice-table.md.
+Families found and fixed whole: (1) «{xung}» (= the SPEAKER's self word in fill67) used where the line means HER → screen showed «Nô tỳ, việc này mà lộ…», a Hoàng hậu saying «cung của bổn cung» about the player (jrd_ch/jrd_cn/jrd_td, 20 lines → {goi} / «ngươi»); (2) the player saying «thiếp» to the Emperor → «thần thiếp» (where not a code key); (3) «bản cung» → «bổn cung»; (4) servants' hard «nương nương / tiểu chủ» → {N} (by rank); (5) modern words (điểm, kiểm, lượt, ván, phiếu, mama, điểm yếu, quan hệ…); (6) images that need decoding («nhổ răng» = give up troops, «nửa con dao», «giữ lửa», «tờ thiếp» = a note…).
+Final scan: Q3P on screen 0 · NOFR on screen 0 (2509 road hồi + 80 reign dialogs) · DIG 0 narration (2 hits = code templates) · OBS 0.
+NOT DONE / for others: option labels that other modules match word for word (jgedata_*, ~14 «Thưa: thiếp …» lines) keep «thiếp» — changing them needs both sides moved together (next pass); rivals' hostile «ta/ngươi» to the player kept as characterisation; jrd_nc Cao Ly branch shows «thảo nguyên / trà sữa» (content mismatch, not wording → FOR MAIN); jnroad L207 letters through «Kính sự phòng» (fact check); typed numbers in j72 RESULT lines («trả 66 bạc», «(+15)») are law-4 BAL work, not text. KIT dependency: rank+name colour unit («Tể tướng Trịnh Thừa Chí» in the Tể tướng colour) = keeper (part 1).
