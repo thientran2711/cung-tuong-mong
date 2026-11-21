@@ -342,3 +342,23 @@ Notes:
 - The Phi shoulder layers are not carried. They did not fit, and they would sit under the vân kiên; they are the Phi's own G46 piece, not a G42 placement.
 - "her head never back-turned" was dropped (low risk).
 - The pendant words were compacted.
+
+## JOB 13 (LADDER2 6406244e9) — OUTER_WRAP swap, 9 files, diff-only · checked at 3f6b85c · 0 gens
+Files:
+- thu t6 COMOIh (9999)
+- thu t7 v8g (9984)
+- thu t8 v10f (9982)
+- thu dapung4 t1–t3 COMOI_v7 (9820 / 9917 / 9978)
+- xuân seasons4 t1–t3 HAN_BAC_v8 (9568 / 9838 / 9973)
+
+All 9 pass these checks:
+- check_store tpN a22 PASS; keep PASS.
+- master_common.OUTER_WRAP verbatim; no OUTER_TIED left; no vase.
+
+The diff is only:
+- OUTER_TIED → OUTER_WRAP;
+- "worn OPEN at the front" → "open above the waist" (thu files);
+- tiny A38 compressions:
+  - t6 "pearl-and-jade net" → "pearl-jade net", "small chrysanthemums on the sleeves" → "small sleeve chrysanthemums";
+  - xuân t3 dropped "(one single visible sleeve layer)", but the ONE SINGLE SLEEVE LAYER rank law is still in the file.
+Verdict: **PASS ×9.** Per the Foreman release (~01:56Z), t6/t7/t8 → GEN1, 3 drafts (165 cr). t1–t3 and xuân = text only.
