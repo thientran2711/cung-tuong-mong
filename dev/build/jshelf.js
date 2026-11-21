@@ -404,7 +404,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
   const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
-  kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
+  kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",ev:false,timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
     KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
     return()=>{stop();KG82.hint=null;SHPC.game="rules"}}});
   try{const t=box.querySelector("#kgrtut")||box.querySelector("#kshpgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
