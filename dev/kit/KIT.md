@@ -151,7 +151,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | plain button | `.btn` | `#fffaf0`, `1px --line`, radius 6, min-height 40 |
 | tabs inside a person card | `pcard({groups})` → `.pctabs .pct` (+ count `<i>`), active `.pct.on` = gold fill | groups for rivals come from `RVGRP` (Giao thiệp / Hại nhỏ / Hại nặng / Sát hại) |
 | main tabs | `#tabs [data-tab]` (Hành động, Bản đồ, Phi tần, Quan hệ, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Tuyến truyện, Nhật ký) | servant-start uses `SRVTABS` |
-| person card | `pcard({f,name,rank,status,ghen,lines,chips,note,groups,empty,close})` → `.pc` | portrait (kit frame) left, info under it, actions right; one card at a time with `pager(key,items,mk)` face strip |
+| person card | `pcard({f,name,rank,status,ghen,lines,chips,rows,note,groups,empty,close})` → `.pc` | portrait (kit frame) left, info under it (optional `rows:[[label,value,cls]]` → `kitRows` in `.pcrows` under the chips, e.g. Chí tôn «Niên hiệu | Vĩnh An»; the name slot of the Emperor is always «Hoàng thượng», owner 21/11), actions right; one card at a time with `pager(key,items,mk)` face strip |
 | labelled bar | `ghenBar(n)`, `fbar(v,lo,hi,good)`, `sbar(label,v,cls)` | always label + number beside the bar |
 | chip | `chip(text,cls)` → `.chip` (`.hot` red, `.ok` green) | |
 | modal / dialog / panel | `kitPanel(spec)` / `kitModal(spec)` (j79) → `.dlg.kpanel` | section 8. Legacy `Q.push({t,h,opts,who})` is converted automatically; `pframeArt(placeArt)` / random room art is never shown |
@@ -398,6 +398,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- **ONE DIALOG STACK (KIT 8.9, owner 21/11 mark #46; jk4.js `kitDialogStack`, test dev/test/dialog-stack-scan.js):** a newer dialog is always the TOP layer (`#modal` z 42, above the room person card `#popw` z 41 and every second-layer pop-up); a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) first closes every other second-layer pop-up (person card `popIdx`, kitCloseLayer layers incl. game result `#ov`, word pop-up `#kpop`, podium `#kpodov`, open kit book). Never two dialogs overlapping; no opener patches it, it runs in showModal for all of them.
 - Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`
@@ -655,6 +656,16 @@ ONE look for every in-play cue on any mini-game canvas (every engine family call
 - `kg82FxBad(g,x,y,r,now,hitAt)` (mg-play2): THE «avoid this» look — kit `--bad` danger ring + small ✕ badge round any thing she must NOT touch; `hitAt` → red burst over `badMs`, returns a shake offset (`badShake`) for the hit thing / her piece. Never on a pickup. Today: den lotus pads.
 - Test: `node dev/test/mg-play2.js` (lane contrast ≥ laneMin, danger ring red rim, hit = penalty, dodge demo, guided hand).
 
+#### 13.7.2 MINI-GAME GUIDING LINE + «Vì sao» ROW (owner OD 21/11 ~00:50Z «guiding words stay», review/mg-5s-clear) — `dev/build/j82.js`
+- `kg82Guide(g, text, cx, cy, tone, sz, maxW)`: ONE pill (kit card ground, coloured rim) on any mini-game canvas = the single short, state-driven guiding line. `tone` is a WORD — `"wait"` (neutral, `--k-lab`) · `"go"` (tap now, `--good`) · `"bad"` (danger, `--bad`); colours are tokens, never typed in an engine (a ready colour string still works). Kit page sample §13.7.2. Type shrinks to fit `maxW` (not below 10 px); a longer line is cut with «…» — a guiding line is ONE SHORT line (≤ ~34 characters). No engine draws its own pill (td_dung's local pill() still has to be switched to it: rv branch review/td-dung-clear-rv).
+- `KG82.why = "…"`: an engine sets it when it ends; `kg82ShowRes` shows it as the kit row «Vì sao» above the button, then clears it (also cleared at `kg82Play`).
+- A DOM button in play may keep a short word: set `data-kgkeep="1"` (kit pass in j82 «NO TEXT IN PLAY» skips it). Used: «Quạt lửa», «Thưa», «✓ Dán».
+- Rules-screen demos `NWB_DEMO.aim / slapbar(kind) / cook / tspluck / doiline / hoadien` (jnwb): the object, a hand doing the move, the ✓ (still under Cảnh động off).
+- Used by: ban, tat, ne, banh, duho, doi, hoadien, td_ngon. Tests: `mg-noword-a/b` whitelist exactly these strings (GUIDE table).
+
+#### 13.7.3 FIGURE-COLUMN BACKDROP PER SUBJECT (owner OD 21/11 ~03:48Z + ~03:50Z, review/mg-5s-clear) — `dev/build/j82.js` KG82_MGBG, `j79.js` kitGameFig
+On the wide screen (html.kv2) the figure column of every mini-game frame (intro AND playing) stands on a NEW tall painting per subject, not the board picture, not the flat yellow. ONE table `KG82_MGBG[kind]` → `img/mgbg-<kind>.webp` (art: Foreman C). `kg82Pic(kind)` records the kind, `kg82Open` passes it, `kitGameFig` sets `--mgbg` + `.kgf-bg`; a missing file = the old cream gradient (CSS layered fallback). Fold (html.kv1) has no figure column: unchanged.
+
 ### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
 ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
 - `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
@@ -846,6 +857,7 @@ the `.pcb` / `.rbtn` / `.kskacts` auto-fill grids won.
 - §6.3c ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình `.krelpg`, Hoàng tự ×5) the TOP BLOCK (pane bar, sub-tabs, face / mother strip) is FIXED, only the person card below scrolls INSIDE itself (`#panel.kpfr` set by `kitPcFrameMark` after every render / panel mutation; NO `:has()` on #panel — it cost +30 % tab time in quickcheck). The left column is part of the card and scrolls with it.
 - §6.3d INTRO LINES BEHIND «!» (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (`.pgwrap > .ph`: Hoàng tự tabs, counts) are not drawn; a round «!» (`.kppbang`) at the top-right of the top block opens them in the kit info popup (`kitPcIntroBang`), so the top block is ONE fixed height whatever the text (strip top 229 px in kin / kvo / qt, Fold + iPad).
 - §6.3e FIGURE FILLS THE LEFT COLUMN (owner 21/11, Cung nhân + Hoàng tự shots): the figure is always the full column width (`kitPcKeyFit` no longer shrinks it for the key lines; the old 100 px portrait with empty bands is gone); the mother block (`.kpl`) always stands ABOVE the facts table in the info group, Fold and iPad alike.
+- §6.3f LEFT COLUMN: NO EMPTY BAND, READABLE ROWS (owner 21/11 ~03:32Z, person dialog «Bảo Châu»: figure, an empty band, then tiny relation rows squeezed at the bottom): the relation / key rows (`.kpkey`: Nàng → ta, Ta → nàng, Thích, Ghét, status chip) sit RIGHT UNDER the figure (10 px) at a readable size (>= 11.5 px; was ≈ 9 px: `.kpkey` .92rem, `.kr2-cp` 1em, heads .8em, chips >= .8rem). Same rule in every person card / dialog (the stage pop-up, every tab). Test `node dev/test/kit-leftcol-read.js <url> <out> 755x1000,1180x820 pop-maid,tab-rv,tab-court,tab-staff,tab-kin`.
 - HOW (one place): CSS `#kit-pcard-actrow` (jk4) + `kaNorm` now ends with `kitActCompactOn(root)`, so any host that normalises its cards (pop-up, tabs, dialogs
   that embed a person card) gets the picture slot and the row form with no call of its own. Nobody writes act markup / grid CSS for a person card by hand.
 - NOT in this rule (own approved kit parts): the Hành sự deck (`.cards` in #panel, §6/§6.1 big card and its category tabs), dialog options (`.kopt`, §6.2), the
@@ -936,7 +948,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 ## 21. SKILL CARD = THE ONE HEAD CARD (kit 2; one form since review/tabs-kit r7, owner 11/15) — `dev/build/j79.js`
 `kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels:[text per level], acts:[pbtn…], img, stepsAttr, can})` → `.kskill`
 - ONE card for every art and Tứ đức course (Tài nghệ), every Tác phẩm line, the Mệnh truyện chapter head and the Sắc phong head, and every
-  empty state (`kitEmpty(title,line)` = this card with `max:0`, the topic's kitInfoArt picture and one short line). No other head / empty frame.
+  empty state (`kitEmpty(title,lines,o)` = the big empty card of §37.2). No other head / empty frame.
 - LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
   (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
@@ -2842,9 +2854,12 @@ for a living player; nothing is lost: each fact now sits on a person card.
 - **Quý tộc kén rể · kén dâu** (`qt`): unpromised công tử (`S.hPool`) then quý nữ (`S.qPool`); card = Nhà (con trai/gái <chức>), Phe, Tuổi,
   Sắc · Tài (or "chưa rõ"), "Hỏi được cho: <con>" when a match fits her child; act "Dò hỏi gia thế" (1 khắc, Bạc -5, sure) for a stranger.
 
-### 37.2 Empty sub-tab = ONE kit card (`htEmpty(art, title, lines)` → `.khtempty`)
-`kitArtFrame` picture (act-cat-cham-con / act-phong-tuoc / act-hon-su / act-cat-trieu-chinh) + title (seal colour) + 2–3 bullet lines
-saying how the tab fills. Never a blank panel, never a run-on paragraph. Narrow container (≤ 420 px): picture over text.
+### 37.2 Empty tab / sub-tab / panel = ONE kit card (`kitEmpty(title, lines, {art|topic, acts})` → `.kempty`, j79 §21; `htEmpty` = thin alias)
+Owner 21/11: "khi không có thông tin thì hiện như «Ta chưa có con»: nhìn cái trang cho nó đỡ trống". Picture LEFT (`o.art` path, else
+`kitInfoArt(o.topic||title)`, else neutral tile; narrow container ≤ 420 px: picture over text) + title «Ta chưa có …» / «Chưa có …» (seal colour) +
+2–3 hint bullets saying how it fills. Never a blank panel, a lone `<p class="past">` or a run-on paragraph. Used by every empty state: Phe phái hậu cung,
+Nam nhân, Hoàng tự (Con của ta / Kế vị / Hoàng tự trong cung / Hôn sự / Kén rể), Thư từ, Mệnh truyện (Chương / Sắc phong / Đã qua), Việc nhờ (3 tabs), Gia tộc,
+Phụ tuyến, Triều cục, bảng xếp hạng. Scan: `node dev/test/empty-scan.js`; forced-empty shots: `node dev/test/empty-shots.js`.
 
 ### 37.3 Strangers (owner "mọi tên có mặt", "Người lạ")
 Công tử / quý nữ are strangers until seen in a marriage talk, met by a daughter, promised / married, or asked about: grey kit silhouette
@@ -3098,7 +3113,7 @@ so the shop and a full person dialog share the same box; a two-choice visit is a
 ## 49. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
 ### 49.1 kitRel2 — ONE relation component everywhere (owner 11/16 15:00Z 4.6–4.8; replaces kitRelRow + the 3-column kitRelTable; bars are gone)
 `kitRel2([{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}, …], {week})` (jkrel.js) → `.kr2`: TWO column boxes side by side —
-LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta).
+LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta) — a LONE box spans the WHOLE row width (owner 21/11 ~02:14Z: half a frame left empty is wrong; overwrites the 16/11 «one column wide» rule); test `dev/test/kit-rel2-span.js`.
 Rows use SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Ân tình / Tin cậy; tap = kit gloss), the NUMBER in its meaning colour (thiện cảm > 10 green, < −10 red; oán/ghen ≥ 20 red; sủng green), NO bars, no mixed rows.
 `week:true` adds the "Hiện nay" and "Tuần này" columns, aligned inside each box (Tuần này = green/red change or "—"). Unknown value → "chưa rõ". Container < 260 px: the two boxes stack (left first).
 `kitRelTable(kitRelRows(p,snap),{head})` builds the two columns from the fixed rows of §52. Callers (the full list, all via kitRel2): Ân oán pair view (`relRows`, jhc), week-book person pages (j87), person-card left key block (`pcfKey`, compact), Gia tộc card (jkc), kit sample §49.1 / §52.
@@ -3554,11 +3569,14 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   A festival sits on its traditional day (`MCAL.days`: Nguyên đán 1–3, Thanh minh 5, Đoan ngọ 5, Thất tịch 7, Lạp bát 8, Trùng cửu 9,
   Nguyên tiêu / Vu Lan / Trung thu / Thánh thọ / Đông chí 15, Vạn thọ 25, Giao thừa 30) when that day is inside the tuần FEST holds it in
   (FEST.t, the tuần the festival event really fires); otherwise on the first day of each of its tuần (Hội Phượng 1, 11, 21 — all month).
-- `kitMonthCal({o})` → HTML; `o` = months ahead of the current month (0..11). Parts: 12 month tabs (`kitTabRowHTML` in `.pctabs.kcattabs`,
-  count = festivals in that month; wrapped = the year at a glance; one scrolling row when the screen is under 520 px tall), the month head
-  (`Tháng giêng · năm thứ hai (10 tháng nữa)`), the grid (3 rows × [tuần label + 10 squares]; current tuần row gold + `kchip g` "Tuần này";
-  earlier tuần of this month dimmed), festival squares = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name
-  (`MCAL.short`), and under the grid one `kitRows` table (day | name · "còn N tuần" / "tuần này" / "đã qua").
+- `kitMonthCal({o})` → HTML; `o` = months from the current month (-1 = last month, 0..11 ahead). A normal PHONE MONTH VIEW (owner 21/11 ~03:43Z mark #42,
+  review/calendar; the old wall of 13 month chips is gone, nothing may bring a month chip row back): header row `‹  Tháng ba · năm thứ nhất  ›` (date text from
+  `mcMonName` / `mcYearName`, never typed; `(tháng sau)` / `(N tháng nữa)` / `(đã qua)` when not this month; two 44 px `kbtn alt .kmc-ar` arrows, `data-kmcm` = target
+  month, disabled at -1 / 11; SWIPE the grid sideways = next / last month, with a short slide that respects reduced motion), then the grid: per tuần one light label
+  strip (`Thượng tuần` + `kchip g` "Tuần này" + quẻ chip; the current tuần strip is gold = today, the game has no day inside a tuần) over 2 rows x 5 EQUAL SQUARE
+  cells (`aspect-ratio:1`, days 1–30; 5 columns by default because the Fold dialog is only ~290 px wide, 10 columns gave 27 px squares; a container query (`.kmc` width ≥ 470 px = iPad) switches to ONE row of 10 per tuần, ~50 px squares, whole month without scrolling; grid capped at 560 px wide),
+  festival cells = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name (`MCAL.short`); other known days = tag + count + moon / cycle marks.
+  Tap a day = that day's box below the grid (`mcDayBox`, kit rows); under it one `kitRows` table of the month's festivals (day | name · "còn N tuần" / "tuần này" / "đã qua").
 - A festival square or list name opens the kit popover (`kpPop`, hover too with a mouse): name, day + tuần + time left, one line
   (`MCAL.line`), "Có thể thi" (the SC7 contests of its j71 pool FV7, same Thái hậu filter as fvPick), "Còn có" (wagers, banquets, gifts,
   rites), "Thắng thi" (`prize7`). Short; no paragraph.
@@ -3569,7 +3587,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   top-right; the first one that covers no name tag, side card, title, chip, "+N"/"‹" page chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
   re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
 - No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
-- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped
+- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (opens from the rail "Lịch tháng" button; the room desk calendar is retired by jrail; 2 arrows ≥ 44 px, no chip row, 30 equal squares in 6 rows (narrow) or 3 rows (wide ≥ 470 px), swipe both ways, arrow disabled before last month; every month; no clipped
   text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
   390x844 = rotate prompt).
 
@@ -4022,7 +4040,7 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 Composition only: NO new component. **17/11 (owner ~04:26Z + ~04:40Z, option 1 compact) the card is split in two; the mood card and the "Lòng người" block/tab are gone (mood already sits on the portrait frame, the relation block IS the left block):**
 - **LEFT, under the portrait, always in view (`.kpkey`, built by `pcfKey`, completed by `kitPcKey`)**: the acquaintance chip (`k61StChip`, moved from the chips), ONE compact two-way relation block `kitRelTable(rows,{compact:true})` (§52.2: one line per direction, no box), and the Thích / Ghét lines once known (moved from the right panel; unknown ones are dropped, not shown as "chưa rõ"). It sits before the wear slots and the stat chips; the relation chips of `.kpgrid` (rowA) are not drawn when the key block exists (one fact, one place). Numbers glow green / red when an action changes them (`pcfStatWatch`, key = direction + word).
 - **Fit (`kitPcKeyFit`, kit only)**: the key block must be visible without scrolling the left column. When the card is too short for portrait + key, the figure (`--kpcw`, min 112 px) gets smaller by exactly the missing height, never per screen; the left column is at least 172 px wide (`--kpcl`) so the key text does not wrap to one word a line. iPad 1180x820 card 429 px: figure 150-180 px wide; Fold 755x1000: full 240 px.
-- **RIGHT**: the info panel `.pcf` (Sở trọng = Sở trường / Tính nết / Hay, Đã biết ≤ 2 rows (1 line each), Dạo này 1 row) stays FIXED: `kitPcFix` moves it into the sticky `.kpstick` above the act tabs; heading and rows share one line; the act cards below are the only scrolling area. Extra blocks of other modules (`PCF_X`: Kỷ niệm, Ân oán chưa dứt) + Việc nhanh go in the tab "Chuyện cũ" (2+ act groups) or under the acts (one group / none).
+- **RIGHT**: the info panel `.pcf` (ONE label column, no block headings since owner 21/11 ~02:00Z: rows Sở trường / Tính nết / Trọng / Hay, Đã biết ≤ 2 rows (1 line each), Dạo này 1 row) stays FIXED: `kitPcFix` moves it into the sticky `.kpstick` above the act tabs; heading and rows share one line; the act cards below are the only scrolling area. Extra blocks of other modules (`PCF_X`: Kỷ niệm, Ân oán chưa dứt) + Việc nhanh go in the tab "Chuyện cũ" (2+ act groups) or under the acts (one group / none).
 Narrow cards (< 440 px container: unsupported phone portrait): the key block is a full-width row under the portrait row (`grid-area:key`, jk4 narrow template).
 Old list (kept for the right panel): 3. **Sở trọng** `kitRows`: known tính nết + "Hay: …" (PERS tend); the Emperor: known likes + habits (+ jmind Sở trường). 4. **Đã biết** `kitRows` of the newest intel + the `.kchipb` chips opening "Đã biết về X" / "Chứng cứ về X". 5. **Dạo này** `kitRows` (week | line). 6. **Việc nhanh** act cards (`pbtn` in `.kskacts`), only when the card has no live act of its own.
 Not filled: her own card, children, "Người lạ". Dislikes/likes (review/pcard-dislikes, `jdis.js`) are rows of the Sở trọng block; `kitPcKey` lifts the known ones to the left.

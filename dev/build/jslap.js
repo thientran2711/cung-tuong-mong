@@ -52,13 +52,18 @@ function kg82SlapBar(box,env){KG82.slapHint=false;KG82.slapEnd=null;KG82.slapDem
   const idle=!lock&&!(dm&&dm.on)&&now-tAct>B.hint[tier];if(idle)KG82.slapHint=true;
   if(idle){const hw=A*(dodge?zr:za),x=(dodge?zx:cx);if(still){g.save();g.strokeStyle="#e0a526";g.lineWidth=3.5;g.strokeRect(x-hw-3,by-bh/2-3,hw*2+6,bh+6);g.restore()}else if(typeof k91Glow==="function")k91Glow(g,x-hw,by-bh/2,hw*2,bh,now)}
   const x=lock?hitX:pos(now);
-  if(!kg82Spr(g,"tat-hand",x,by-bh/2-4,null,bh*1.25,{ay:1})){g.fillStyle="#3a2412";g.beginPath();g.moveTo(x,by-bh/2-2);g.lineTo(x-9,by-bh/2-18);g.lineTo(x+9,by-bh/2-18);g.closePath();g.fill()}
+  if(!kg82Spr(g,"tat-hand",x,by-bh/2-4,null,bh*1.25,{ay:1})){/* no painted hand yet: a drawn palm (tát) / fist (đòn) coming down on the ruler, so the object is a hand, not a bare needle (mg-5s-clear) */const y0=by-bh/2-3,rr=(X,Y,w,h,r)=>{g.beginPath();if(g.roundRect)g.roundRect(X,Y,w,h,r);else g.rect(X,Y,w,h)};g.save();g.fillStyle="#ecd0a8";g.strokeStyle="#5a3a14";g.lineWidth=2;
+   if(dodge){rr(x-13,y0-32,26,20,8);g.fill();g.stroke();for(let i=0;i<3;i++){g.beginPath();g.moveTo(x-5+i*5,y0-30);g.lineTo(x-5+i*5,y0-16);g.stroke()}rr(x-9,y0-14,18,10,4);g.fill();g.stroke()}
+   else{rr(x-12,y0-34,24,16,6);g.fill();g.stroke();for(let i=0;i<4;i++){rr(x-12+i*6.2,y0-20,5,17,2.5);g.fill();g.stroke()}}g.restore()}
   g.fillStyle="#3a2412";g.fillRect(x-1.5,by-bh/2-2,3,bh+4);
   g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=ink;
-  /* huong-cue: the guiding line is back */if(!resT)kg82Lbl(g,idle?(dodge?"Vùng xanh đang sáng: chạm khi kim vào đó":"Giữa thước đang sáng: chạm khi kim lướt qua vùng đỏ"):(dodge?"Chạm khi kim vào vùng xanh":"Chạm khi kim lướt qua giữa vùng đỏ"),W/2,H*.2,W-24);
+  if(!(dm&&dm.on)){/* owner 21/11 ~00:50Z (mg-5s-clear): the hand / the blow is named, the zones are labelled, one state-driven guiding line */
+   const inz=!lock&&zoneOf(x)>=R[3],gd=good,fz=Math.max(11,Math.min(14,W/30));g.font=`700 ${fz}px ${kg82Col("--body","sans-serif")}`;g.textAlign="center";g.fillStyle=ink;
+   if(dodge)kg82Lbl(g,"Né",zx,by+bh/2+16,60);else{kg82Lbl(g,"Nặng",cx,by+bh/2+16,60);const ox=A*(za+zr)/2;if(ox>38){kg82Lbl(g,"Vừa",cx-ox,by+bh/2+16,50);kg82Lbl(g,"Vừa",cx+ox,by+bh/2+16,50)}}
+   if(!lock)kg82Guide(g,dodge?(inz?"Chạm ngay để né!":idle?"Vùng xanh đang sáng: chạm khi kim vào đó":"Đòn đang lướt qua thước · chạm khi kim vào vùng xanh"):(inz?"Chạm ngay!":idle?"Giữa thước đang sáng: chạm khi kim lướt qua vùng đỏ":"Tay đang lướt qua thước · chạm khi kim vào vùng đỏ"),W/2,H*.15,inz?gd:"wait",14,W-16)}
   if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,kg82Sym(resT[0]),W/2,H*.82)}else kg82DrawPops(g,pops,now);
   if(dm&&dm.on)dm.draw(g,W,H,now)}
- function end(raw,txt,col){if(stop)return;lock=true;env.hud({score:mgLive(env,raw)});/* review/mg-score-same: the mark given, on the board at the tap */KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
+ function end(raw,txt,col){if(stop)return;lock=true;KG82.why=dodge?(raw?"Kim dừng trong vùng xanh · né kịp":"Không chạm đúng lúc kim vào vùng xanh · không né kịp"):(raw>=R[3]-1?"Kim dừng giữa vùng đỏ · tay nặng":raw>=R[2]-1?"Kim dừng ở vùng vàng · tay vừa":raw>R[0]?"Kim dừng ngoài vùng · tay nhẹ":"Chậm quá, không chạm · tay nhẹ");env.hud({score:mgLive(env,raw)});/* review/mg-score-same: the mark given, on the board at the tap */KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
  function tap(){if(lock||stop||(dm&&dm.on))return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;
   if(dodge)end(raw,raw?"Né kịp!":"Không kịp",raw?good:red);else{const s=slapTierOf(raw);end(raw,["","Nhẹ tay","Vừa tay","Nặng tay!"][s],[ink,ink,gold,red][s])}}
  function frame(now){if(stop)return;if(lock||(dm&&dm.on)){draw(now);raf=requestAnimationFrame(frame);return}const tt=now-t0;
