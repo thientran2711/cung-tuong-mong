@@ -46,3 +46,13 @@ t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jad
 - Fit: extra A38 "; her head never back-turned" (ANGLE table words kept), our jade-set words shortened ("a long jade pendant set (ngọc bội) at each outer side").
 - COMOIf stays in the repo as the FAILed version (do not gen).
 - NEXT on Foreman GO: OUTER_TIED → master_common.OUTER_WRAP (DESIGN20 9db802f) + "outer robe worn OPEN at the front," → "outer robe open above the waist," in t1–t3 v6, xuân v7, t6 COMOIg, t7 v8f, t8 v10e (net +5 ch each; t6 then needs 1 char).
+
+## Step 7 — Foreman GO 01:56Z: OUTER_TIED → master_common.OUTER_WRAP (DESIGN20 9db802f) + "outer robe worn OPEN at the front," → "outer robe open above the waist," — builder thu_comoi/make_g40_wrap.py; all 9 gates PASS (check_store tpN a22 STORE+APPROVED), keep_check --all 301 PASS
+| new file | chars | extra A38 (our words / exact repeats) |
+|---|---|---|
+| dapung4/s62_t1_COMOI_v7 / t2_v7 / t3_v7 | 9820 / 9917 / 9978 | — |
+| seasons4/s62_t1_HAN_BAC_v8 / t2_v8 / t3_v8 | 9568 / 9838 / 9973 | t3: " (one single visible sleeve layer)" = repeat of S11 (xuân has no "worn OPEN" phrase; wrap collar already) |
+| thu_comoi/s62_t6_THU_COMOIh | 9999 | "small chrysanthemums on the sleeves" → "small sleeve chrysanthemums"; "pearl-and-jade net" → "pearl-jade net" |
+| thu_comoi/s62_t7_THU_COMOI_v8g | 9984 | outfit "floor-length robe with slippers visible" → "floor-length robe" (repeat of S19 tail) |
+| thu_comoi/s62_t8_THU_COMOI_v10f | 9982 | — |
+GEN-READY set (after CHECK1 + Foreman's look at the t4/t5 v8 drafts): t6 COMOIh, t7 v8g, t8 v10f. Gens still HELD.

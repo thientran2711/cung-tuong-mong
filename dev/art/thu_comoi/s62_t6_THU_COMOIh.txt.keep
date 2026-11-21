@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t6_THU_COMOIg.txt
+allow: the outer robe HELD IN by the sash tied OVER it  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; replaced by OUTER_WRAP
+allow: its front edges meet at the waist under the sash, which wraps over BOTH layers, so the robe is closed and fitted at the waist, never a loose open coat or jacket  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; replaced by OUTER_WRAP
+allow: outer robe worn OPEN at the front  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; open-coat cue removed
+allow: small chrysanthemums on the sleeves  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; A38: our builder words (G47 sleeve flowers) compressed
+allow: a pearl-and-jade net over it  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; A38: our builder words (G47 Phi net) compressed

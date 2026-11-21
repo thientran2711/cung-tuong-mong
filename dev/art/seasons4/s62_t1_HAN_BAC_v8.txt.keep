@@ -1,0 +1,3 @@
+base: dev/art/seasons4/s62_t1_HAN_BAC_v7.txt
+allow: the outer robe HELD IN by the sash tied OVER it  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; replaced by OUTER_WRAP
+allow: its front edges meet at the waist under the sash, which wraps over BOTH layers, so the robe is closed and fitted at the waist, never a loose open coat or jacket  # owner L1627 G40 all 8 tiers: OUTER_TIED -> master_common.OUTER_WRAP + 'open above the waist' (DESIGN20 v8 wording, Foreman GO 01:56Z), LADDER2; replaced by OUTER_WRAP
