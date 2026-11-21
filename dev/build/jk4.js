@@ -1138,16 +1138,12 @@ html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!impo
 /* KIT §6.3c — ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình, Hoàng tự ×5, Nhân sự …) the TOP BLOCK (pane bar, sub-tabs, the headline, the face/mother strip) is FIXED and only the person card
    below it scrolls (inside itself), never the whole panel — the strip is never cut off. Pure CSS on the shared wrappers (.pgwrap > .pc), no host calls it. */
 (function(){const st=document.createElement("style");st.id="kit-pc-frame";st.textContent=`
-#panel:has(> .pgwrap > .pc){display:flex!important;flex-direction:column!important;overflow:hidden!important}
-#panel:has(> .pgwrap > .pc) > *{flex:0 0 auto}
-#panel:has(> .pgwrap > .pc) > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
-#panel > .pgwrap:has(> .pc) > *{flex:0 0 auto}
-#panel > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
-#panel:has(> .pgwrap.krelpg){display:flex!important;flex-direction:column!important;overflow:hidden!important}
-#panel:has(> .pgwrap.krelpg) > *{flex:0 0 auto}
-#panel:has(> .pgwrap.krelpg) > .pgwrap.krelpg{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
-#panel > .pgwrap.krelpg > *{flex:0 0 auto}
-#panel > .pgwrap.krelpg > :last-child{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+#panel.kpfr{display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#panel.kpfr > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
+#panel.kpfr > .pgwrap > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+#panel.kpfr > .pgwrap.krelpg > :last-child{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
 /* KIT §6.3d (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (Hoàng tự tabs: «Con các nhà quyền thần chưa hứa hôn…», «Con của các phi tần khác…», counts) are NOT drawn: a kit round «!» sits at the TOP-RIGHT corner of
    the top block and opens them in the kit info popup, so the top block has ONE fixed size whatever the text length. */
 #panel > .pgwrap{position:relative}
@@ -1162,8 +1158,20 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
  const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
  if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
+/* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
+   the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(nat&&pc.classList.contains("kpwide"))pc.style.setProperty("--kpcw",nat+"px")}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
+html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
+html body .pc>.pcr .pcg.on{display:block!important}
+html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+`;document.head.appendChild(st)})();
+/* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
+function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
+window.kitPcFrameMark=kitPcFrameMark;
+(function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();return r};window.render=render}})();
 (function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
