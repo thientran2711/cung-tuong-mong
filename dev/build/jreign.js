@@ -401,7 +401,7 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Kiếp này 
  /* chapter-card (owner #28/#29): the six chapters are ONE SLIDE (kitSlide), not a list «Chương 1 … Chương 6» */
  const art0=typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):(typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"");
  const sl=RGC.map((ch,i)=>{const dn=ch.b.filter(id=>r.done[id]).length;const st=ch.b.length&&dn===ch.b.length?"done":i<c?"now":"next";
-  return{kicker:`${RGT} · Chương ${i+1}`,title:ch.t,sub:i<c||st==="done"?`Hồi ${dn}/${ch.b.length}`:"chưa tới",img:art0,
+  return{tap:"chapOpen",kicker:`${RGT} · Chương ${i+1}`,title:ch.t,sub:i<c||st==="done"?`Hồi ${dn}/${ch.b.length}`:"chưa tới",img:art0,
    body:kitChecks(ch.b.map((id,j)=>[!!r.done[id],`Hồi ${j+1}/${ch.b.length}${r.done[id]?"":i<c?" · đang tới":" · chưa tới"}`])),toc:[st,`Chương ${i+1} «${ch.t}»`,st==="done"?"đã xong":i<c?"đang tới":"chưa tới"]}});
  let h=kitSlide("story-rg",sl,{cur:Math.max(0,c-1)})+hd;
  if(rgSideNow()&&!W.out)h+=`<div class="kskacts pcb"><div class="kpanec">${pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())}</div></div>`;
@@ -416,7 +416,7 @@ function rgGoalHTML(){const L=rgL();const R=[];let n=0;
  for(const k in RGL){const l=L[k]||{st:0};const ok=rgLOk(k)||l.done;const who=k==="maid"&&S.maid?`${S.maid.name} (cung nữ thân tín)`:RGL[k].who;
   if(l.done)n++;const st=l.done?"đã thành tâm nguyện":ok?`bước ${Math.min(3,l.st+1)}/3: ${plain(String(T72I[RGL[k].q[Math.min(l.st,2)]].t).replace(/^Tâm nguyện [^:]*: /,"").replace(/\{A\}/g,who))}`:"người này không còn ở đây";
   const sub=`${RGL[k].g} · ${st}`;const A=ok&&!l.done?rgLA(k):null;R.push(`<div class="ktprow">${A&&typeof ktPerson==="function"?ktPerson(A,sub):`<div class="kpl"><span class="kplt"><b>${who}</b><small>${sub}</small></span></div>`}</div>`)}
- return kitSlide("story-rgl",[{kicker:"Phụ tuyến",title:"Tâm nguyện",sub:`Xong ${n}/${Object.keys(RGL).length}`,img:typeof kitInfoArt==="function"?(kitInfoArt("Tâm nguyện").src||""):"",
+ return kitSlide("story-rgl",[{tap:"chapOpen",kicker:"Phụ tuyến",title:"Tâm nguyện",sub:`Xong ${n}/${Object.keys(RGL).length}`,img:typeof kitInfoArt==="function"?(kitInfoArt("Tâm nguyện").src||""):"",
    body:rows67([["Tâm nguyện","mỗi người một tâm nguyện; giúp trọn ba việc nhờ thì tâm nguyện thành."],["Đã thành",`${n}/${Object.keys(RGL).length} tâm nguyện`,n?"g":""],["Còn lại",`${Object.keys(RGL).length-n} người đang chờ ngươi giúp`]])}])+
   `<div class="ktpeople">${R.join("")}</div>`}
 try{KIT_GLOSS["Tâm nguyện"]="Mỗi người có một tâm nguyện. Họ sẽ tự tìm đến nhờ ngươi từng việc (mục Việc nhờ). Giúp trọn ba việc thì tâm nguyện thành."}catch(e){}
