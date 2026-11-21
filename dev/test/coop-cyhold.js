@@ -114,6 +114,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   if(process.env.CY_DBG)console.log('t',Date.now()-tH,JSON.stringify(await A.p.evaluate(()=>{const v=COOPW.tm.view();return [v.left,v.run,v.pz,v.hold,COOPW.tm.myKey(),COOPW.cyHold,COOPW.ngo]})));
   if(s.hold==null&&(s.sent===hw||s.end||s.week>hw)){freed=Date.now()-tH;break}await sleep(1000)}
  const tr=await A.p.evaluate(()=>(COOPW.tr||[]).filter(x=>/cy/.test(x)).slice(-6));
+ if(freed>=0){await shot(A,'cyhold-note-host-755x1000');await shot(B,'cyhold-note-guest-1180x820')}/* reviewer: the kit notice on both seats, right when the wait runs out */
+ if(freed>=0)for(const o of [A,B]){await sleep(1500);const nl=await o.p.evaluate(()=>(typeof kitNoticeList==='function'?kitNoticeList():[]).map(x=>x.line||x.t||'').filter(t=>/Quá giờ chờ/.test(t)));ok(nl.length>=1,o.name+': the «no answer» line is in her kit notice box (§42.2 «!»)',nl)}
  if(process.env.CY_DBG)console.log('dbg2',JSON.stringify(await A.p.evaluate(()=>({tr:(COOPW.tr||[]).slice(-12),ended:COOP.state.ended,week:COOP.state.week,sent:COOPW.sent,pend:COOPW.pend,inTurn:COOPW.inTurn,b:S.buoi,tn:S.tn,Q:Q.length,tm:COOPW.tm.view(),mk:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),next:document.getElementById('next').textContent,E:COOPW.thin.E&&COOPW.thin.E.log.slice(-8)}))),JSON.stringify(await B.p.evaluate(()=>({b:S.buoi,pend:COOPW.pend,next:document.getElementById('next').textContent,ended:COOP.state.ended}))));
  ok(freed>=0||(!held&&!THIN),'AFK guest: the host\'s week end goes out within the bound (+45 s slack)',{freed,WAIT,tr});
  ok(freed>=WAIT-8000||(!held&&!THIN),'the host waited about the bound before going on (not at once)',{freed,WAIT});
