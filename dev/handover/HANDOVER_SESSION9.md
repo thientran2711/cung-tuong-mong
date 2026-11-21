@@ -2219,3 +2219,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:12Z) LAND CHAIN 2: LANDED kit-relrows-ms1word f44060d4 = LIVE. Next podium-wire-r2 (last).
 - (19:11Z) LAND CHAIN 2: LANDED kit-relrows-ms1word f44060d4.
 - (19:14Z) rv MSxp PASS kit-body-fit (KP09/J7) 821727de → LRRY after podium-wire-r2. C art (fx-hair/fx-cloth + body-fit.json) may start now (order 18:52Z in C STATUS).
+- (19:25Z) OWNER: no halo on the rows over the tassel → keeper #6 told; OD 18:55Z row overwritten in place.
