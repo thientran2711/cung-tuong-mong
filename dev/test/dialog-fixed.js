@@ -40,6 +40,8 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   await grab('1-hoi-nga-re-1');
   await p.evaluate(()=>chooseM(0));await grab('2-hoi-nga-re-2');
   await p.evaluate(()=>{const r0=window.roll;window.roll=()=>true;chooseM(0);window.roll=r0});await grab('3-dai-ket-cuc');
+  await p.evaluate(()=>chooseM(0));await grab('4-danh-hieu-moi');
+  {const c=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg'),ev=d&&d.querySelector('.k3ev'),pl=ev&&ev.querySelector('.kt3');if(!ev||!pl)return{ev:!!ev,kt3:[...d.querySelectorAll('.kt3')].map(e=>e.className+'|'+e.parentElement.className),kdh:d.querySelectorAll('.kdh').length,title:(d.querySelector('.kph')||{}).textContent};const a=ev.getBoundingClientRect(),b=pl.getBoundingClientRect();return{a:[a.left,a.top,a.right,a.bottom].map(Math.round),b:[b.left,b.top,b.right,b.bottom].map(Math.round),in:b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1}});chk(`${tag} (#54) the new-title plate sits ON the event picture`,c&&c.in===true,c)}
   await p.evaluate(()=>{Q.length=0;S.ge=null;const s=geS();s.st[0]='f';geAnswer(1,1);showModal()});await grab('7-ket-cuc-thua');
   await p.evaluate(()=>{Q.length=0;S.ge=null;const s=geS();s.pull=[0,3,0,0];geAnswer(3,0);showModal()});await grab('8-quiet');
   /* (f) same frame size => same figure size + position on this device */
