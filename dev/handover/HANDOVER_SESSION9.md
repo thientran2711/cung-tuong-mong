@@ -2272,3 +2272,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - ORDERS not yet claimed (other accounts; send_message cannot reach B/C foremen — STATUS only): C = J1–J5 + KP09 fx-hair/fx-cloth PROMPT FILES (A53, no Magnific gen) — C ROOT-B7 has not claimed; B = coop-home 50/51 (19:42Z) + guest week-lag co-op bug (20:35Z, found by E47). Check claims every wake.
 - D bundle fe634e0f not LAND READY: co-op split blocker, fix place jnf (D #17). E: coop-famops SSK 6b11f8fa (E44r), bongloc r3.
 - TRIGGERS: 100 wake trig_01KABF9TjF5Q8cVy8A1niSEH (min 32) → 101 DISABLES it and creates its own. Push tool: dev/tools/main-hpush.sh template. Never `git pull` in the worktree.
+- (20:37Z) Opened MAIN CHÍNH 101 = session_01Rc5AsMRFeDBQBWgSKZa58Q (child, depth 3). 100 stops; relays late messages to 101 only.
