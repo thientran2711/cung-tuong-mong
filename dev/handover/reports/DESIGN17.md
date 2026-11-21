@@ -29,3 +29,7 @@ D1 OPEN-NECK line (Hán set; L1565 words) · D2 store fabric → master_common.B
 Sentences NOT verbatim from master/store, each an approved delta: OPEN-NECK line (Hán), B29 fabric (L1556), the Hán outfit design incl. rank edge / sash / girdle (L1554/L1555), collar + INNER ROBE words (L1565), DENSE density sentence (H6/H12 via the Hán t4), colours (B20), COLLAR CUT (Hán), CAPTION (G31). New words written here: collar + inner robe only.
 Chars 9473 / 9711 / 9983. Gates: check_store tpN a22 STORE CHECK PASS ×3; keep_check --all 237 PASS (.keep base = s62_tN_HAN_BAC.txt).
 Note for C #13: the t1 caption still says "Nhu quần hai mảnh" although the Hán t1 design is a straight-hem zhiju (caption unchanged, owner did not raise it).
+
+## C #13 00:09Z quick fixes
+1. t1 caption → "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Trực cư, cổ viền trơn" (make_han_xuan_t13.py rerun; t1 9463 chars; .keep updated; check_store tp1 a22 PASS).
+2. THU t3 final: dev/art/dapung4/s62_t3_COMOI_v2d.txt (+ .keep base _v2c) = _v2c with the G39 hairpin words; A38 same-prompt-repeat trims: "Full-body standing figure … fair porcelain skin;" (= master full-body + skin), "; face clearly visible, 3/4 or frontal view" (= whole-face + ANGLE), ", never a pair", ", no cluster" (= "exactly ONE fresh flower"). 9983 chars; keep_check PASS; check_store tp3 a22 PASS; keep_check --all 234 PASS.

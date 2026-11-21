@@ -1,0 +1,6 @@
+base: dev/art/dapung4/s62_t3_COMOI_v2c.txt
+allow: Full-body standing figure head to feet   # owner L1566+L1568 via Foreman C #13 (G39/X20): t3 hairpin wording from the store; A38 same-prompt-repeat trims to fit 10 000 (DESIGN17)
+allow: soft even light   # owner L1566+L1568 via Foreman C #13 (G39/X20): t3 hairpin wording from the store; A38 same-prompt-repeat trims to fit 10 000 (DESIGN17)
+allow: fair porcelain skin   # owner L1566+L1568 via Foreman C #13 (G39/X20): t3 hairpin wording from the store; A38 same-prompt-repeat trims to fit 10 000 (DESIGN17)
+allow: 3/4 or frontal view   # owner L1566+L1568 via Foreman C #13 (G39/X20): t3 hairpin wording from the store; A38 same-prompt-repeat trims to fit 10 000 (DESIGN17)
+allow: never a pair   # owner L1566+L1568 via Foreman C #13 (G39/X20): t3 hairpin wording from the store; A38 same-prompt-repeat trims to fit 10 000 (DESIGN17)

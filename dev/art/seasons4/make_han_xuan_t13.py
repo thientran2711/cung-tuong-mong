@@ -55,7 +55,7 @@ RANK = {
          rest=("a wide stiff mint mist silk girdle at the natural waist with a long ceremonial jade pendant set on each side down to the knees: small carved jade "
                "plaques linked by strings of pearls, ending in silk tassels; no signature piece; ")),
 }
-CAPS = {1: "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Nhu quần hai mảnh, cổ viền trơn",
+CAPS = {1: "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Trực cư, cổ viền trơn",
         2: "Mùa Xuân · Thiết kế thời Hán · Thường tại · Trực cư, cổ viền hai lớp hoa",
         3: "Mùa Xuân · Thiết kế thời Hán · Quý nhân · Trực cư, cổ viền thêu rộng"}
 HELD_END = "her secondary colour mint mist."
