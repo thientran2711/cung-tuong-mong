@@ -75,6 +75,19 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
    const bad=rows.filter(r=>r.err||r.none||!r.ok);
    console.log(tag,'(#71) dialogs measured:',rows.map(r=>`${r.name}:${r.ksz}/${r.w}`).join(' | '));
    chk(`${tag} (#71) every dialog (${rows.length} opened, ${new Set(rows.map(r=>r.name)).size} kinds) uses a kit frame size S/M/L/XL and its width`,!bad.length,bad.slice(0,6))}
+  /* (j) #75 #76 #80 owner 21/11: the LEFT SLOT of a small frame = the main subject (person portrait / ITEM tile / matter picture) on EVERY device, and the event picture is the TOP of the right column (no empty band above it) */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const A=rivals.filter(v=>v&&v.name)[0],e=S.inv.find(x=>x&&IT[x.k]);const out={};
+    const cases={result:()=>kitPanel({kind:'result',title:'Bị từ chối',facts:['Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”'],who:pv(A)},true),
+     lohen:()=>Q.push({t:'Lỡ hẹn',btn:'Đã hiểu',who:pv(A),h:`<p>Đã quá hạn việc ${A.name} nhờ: <b>Mời Thường tại cùng nhau uống trà</b>.</p><p>Thiện cảm −3</p>`}),
+     lost:()=>Q.push({t:'Đồ thất lạc',who:pMe(),h:`${loTag(e)}<p><b>${loNm(e.k)}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao.</p>`,btn:'Đã hiểu'}),
+     matter:()=>kitPanel({kind:'news',title:'Tin cung',facts:['Mưa lớn suốt đêm, ngự hoa viên ngập nước.']},true)};
+    for(const k in cases){Q.length=0;cases[k]();showModal();await sleep(1700);const d=document.querySelector('#modal .dlg');const R=x=>x?x.getBoundingClientRect():null;const rc=R(d.querySelector('.k3right')),ev=R(d.querySelector('.k3right>.k3ev'));
+     out[k]={ksz:d.dataset.ksz,left:(d.querySelector('.k3body>:first-child')||{}).className||'',evTop:ev&&rc?Math.round(ev.top-rc.top):null,kievInText:d.querySelectorAll('.k3right .kiev').length,picLeft:!!d.querySelector('.k3body>.k3mpic')};Q.length=0;document.getElementById('modal').hidden=true}
+    return out});
+   chk(`${tag} (#75) small notice «Lỡ hẹn»: the person is the left slot (portrait) on this device`,r.lohen.ksz==='S'&&/k3mpor/.test(r.lohen.left),r.lohen);
+   chk(`${tag} (#80) event picture is the TOP of the right column (result + notice with a person)`,r.result.evTop!==null&&r.result.evTop<=3&&r.lohen.evTop!==null&&r.lohen.evTop<=3,[r.result,r.lohen]);
+   chk(`${tag} (#76) «Đồ thất lạc»: the ITEM tile is the left slot, not in the text, not a generic picture`,r.lost.ksz==='S'&&/k3mitem/.test(r.lost.left)&&r.lost.kievInText===0&&!r.lost.picLeft,r.lost);
+   chk(`${tag} (#76) no person / item: the matter (event picture) is the left slot`,r.matter.picLeft,r.matter)}
   chk(`${tag} (#56) ${evs.length} dialogs with unlisted option titles, ${nCards} option cards: none without a picture`,!noPic.length,noPic.slice(0,6));
   console.log(tag,'summary',JSON.stringify(R.map(m=>[m.name,m.ksz,m.D.w+'x'+m.D.h,m.kol,m.fig&&m.fig.w+'x'+m.fig.h+'@'+(m.fig.y-m.D.y)])));
   chk(`${tag}: no page errors`,!errs.length,errs.slice(0,3));await ctx.close()}
