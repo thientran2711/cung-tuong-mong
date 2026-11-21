@@ -154,3 +154,16 @@ Look:
 - t1: light plum outer robe open over a blush inner top with a straight SQUARE neckline + a small lilac band, edges on the shoulders (covered); blush bow sash tied OVER the outer robe so it is held in (the robe still opens below the sash and flares wide); sheer blush shawl over the arms; small lilac sprays on the upper body and vine on the front edges; one lilac in hair; book.
 - t2: same layered neckline, square inner top with a flower band; outer robe held in by a blush sash bow + jade disc; ONE wide blush front panel (single dải vạt) with a vertical tiger-lily vine down the skirt front, jade/pearl pendants beside it; pink-coral tiger lilies, one in hair; navy drum; sheer shawl.
 - t3: 3/4 right; square inner top with a rose band; wide blush girdle over the outer robe; TWO long blush front panels side by side with roses + jade/pearl pendants outside them; roses at hem + sleeves; ONE slim pin (raised hand) + pink rose, no spiky crown; flute; sheer shawl. Fault-ish: the plum skirt behind the panels is very wide and trails, like a bell.
+
+# JOB L1608 — thu s62 t1–t3 v5 drafts (gpt-2-6 low 1k; CHECK1 PASS ×3 @9c3fe47)
+Pulled to 7f06615 (9c3fe47 is an ancestor); dapung4/s62_t{1,2,3}_COMOI_v5.txt UNCHANGED since 9c3fe47 (9591 / 9963 / 9984 ch). check_store (tp1/tp2/tp3 a22, ref nVsrRMPYQD) PASS ×3 before each gen. gpt-2-6, quality low via extraSettings, 1k 9:16 (752x1344), seed 7172, ref nVsrRMPYQD only (no image 2 in these prompts). simulate exact 55 each, total 165 cr.
+| pic | creation | link |
+|---|---|---|
+| Thu t1 v5 | lJt5zqygv9 | https://www.magnific.com/app/creation/lJt5zqygv9 |
+| Thu t2 v5 | 0eUZuRITfW | https://www.magnific.com/app/creation/0eUZuRITfW |
+| Thu t3 v5 | 1ldu35sr4r | https://www.magnific.com/app/creation/1ldu35sr4r |
+Sheet dev/handover/review-sheets/thu_t13_v5_L1608/sheet.jpg (+ thu_tN_v5.webp), 'Thu tN · s62 · v5 · GPT 2.6 low · 55 cr' per picture + 'Tổng: 165 cr'. Viewed each picture once at 1024, not the finished sheet.
+Look (v5 adds embroidered edges + many small sprays over robe and skirt):
+- t1: plum open outer robe with an embroidered blush edge band running from the shoulders down past the waist; blush inner top with straight square neckline + lilac band; bow sash tied over the outer robe, jade disc + teal tassels each side; small lilac sprays over body and skirt (visible, sparse-to-medium); sheer blush shawl on the arms; one lilac in hair; teal book. Skirt still flares wide below the sash.
+- t2: square neckline with flower band across the chest, inner top embroidered with small lilies; bow girdle over the outer robe; ONE embroidered blush apron panel with big tiger lilies down the skirt front, jade/pearl pendants each side; wide embroidered cuff and hem bands; scattered coral lilies over the plum robe/skirt; one coral lily in hair; navy drum; skirt flares wide at the hem.
+- t3: 3/4 right; square neckline with rose band, inner top embroidered; wide girdle over the outer robe; TWO long embroidered blush panels side by side with roses, jade/pearl pendants outside them; many small China roses + a bird/butterfly scattered over the robe and skirt; wide rose bands at sleeves/hem; ONE slim pin (raised hand) + pink rose, no spiky crown; flute. Most embroidered of the three; skirt still wide and trailing.
