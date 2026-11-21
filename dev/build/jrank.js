@@ -156,9 +156,9 @@ function rkNameOpen(){RK.msg="";
   <p class="kpnote">Từ hai đến hai mươi bốn chữ; không trùng tên người khác, không dùng lời tục.</p>${rkMsgH()}<button class="kbtn" data-krk="save">Ghi tên</button>`}]});
  const inp=document.getElementById("krk-in");if(inp){inp.maxLength=24;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},80)}}
 function rkBodyH(){const tab=RK.tab,d=RK.data[tab];
- if(!d)return kitEmpty(RK_T.screen,RK.err?`Mạng đứt, chưa mở được ${RK_T.screen}.`:"Đang mở bảng.");
+ if(!d)return kitEmpty(RK.err?`Chưa mở được ${RK_T.screen}`:`Đang mở ${RK_T.screen}`,RK.err?["Mạng đứt: thử lại sau ít phút."]:["Chờ một lát."],{topic:RK_T.screen});
  const rows=d.rows||[];const note=RK.err?`<p class="kpnote">Mạng đứt: đây là bảng lần trước.</p>`:"";
- if(!rows.length)return note+kitEmpty(RK_T.screen,`Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng.`);
+ if(!rows.length)return note+kitEmpty(`Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng`,["Mỗi kiếp khép lại được chấm điểm rồi ghi lên bảng."],{topic:RK_T.screen});
  const pod=rows.length>=2?`<div class="kpod-stage krk-stage">${(()=>{const L=rkPodList(rows,tab);const t=[L[1],L[0],L[2]].filter(Boolean);return t.map(kpodCol).join("")})()}</div>`:"";
  return note+pod+`<div class="krk-list">${kitRankList({head:rkHeadH(tab),rows:rows.map(x=>rkRowH(x,tab))})}</div>`}
 function rkMeH(){const tab=RK.tab,d=RK.data[tab]||{};const q=rkQ().length;
