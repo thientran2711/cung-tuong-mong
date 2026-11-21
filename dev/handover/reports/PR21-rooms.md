@@ -29,3 +29,9 @@ STATUS 21/11 ~02:30Z: depth 6 (limit 8), START_CTX ~3 % (get_session used_tokens
 - Stage: dev/art/place-rank/stage_one.py = nf_tags.py live iPad stage numbers (1162×599, figure 438.7 high, feet 69.7 above bottom) at x 421 (in front of the doorway, between dressing table and bed) + soft contact shadow; figure not recoloured.
 - Sheet CDN img/_review/place-rank/pr21/room33-tuoi-nhe-ghep-tan-phi-lbl.jpg (two panels Tần | Phi, big labels, "0 cr … TỔNG 0 cr").
 - LOOK: both stand on the floorboards at a believable size (head about at the lantern bottoms, a little below the bed canopy top); plum/blush robes read clearly against the dark wood + pink silks of the graded room; the stage crop (iPad shape) trims the room's sides a little.
+
+## 4th grade "rất nhẹ" + composites on rất nhẹ and nhẹ (owner L1659 via Foreman C #17: "Thêm cho tôi một cái màu nhẹ hơn cái tươi nhẹ nữa.") — 0 cr
+- room_vivid.py preset ratnhe (about half of nhe): sat 1.11 · curve 0.05 · levels 0.2/99.85 % · sharp 18. Room 33: C* 17.9 → 19.1 (nhe 20.0, manh 21.1); S 27.1 → 28.9 (30.7, 33.4); L* 60.2.
+- Sheet CDN img/_review/place-rank/pr21/room33-4muc-tuoi-lbl.jpg (CŨ | TƯƠI rất nhẹ | TƯƠI nhẹ | TƯƠI mạnh, 0 cr). File pr21/chung-tu-cung-tan-ngu-tuoi-ratnhe.webp.
+- Composite sheet CDN img/_review/place-rank/pr21/room33-ghep-ratnhe-nhe-lbl.jpg (2×2: rows Tần t4 / Phi t5, columns nền rất nhẹ | nền nhẹ; same cut-outs + stage numbers as before, 0 cr).
+- LOOK: rất nhẹ sits clearly between CŨ and nhẹ (veil lifted, colours only a little richer); with the figures the difference between rất nhẹ and nhẹ is small, the robes read well on both.

@@ -3,10 +3,11 @@ cái tông màu ... đổi cái saturate chẳng hạn"). 0 cr local colour grad
   1. veil removal (then a gamma so the mean brightness stays the same or a touch lighter): per-picture levels on luminance only (black point at the 0.4 % low, white point at the 99.7 % high), same gain on R,G,B
      so hues stay;  2. contrast: gentle S-curve on luminance;  3. saturation: chroma x k in Lab-like YCbCr space (hue angle kept),
      with a soft limit so already-strong colours do not clip;  4. clarity: unsharp mask (radius 2, small amount).
-python3 room_vivid.py IN OUT {nhe|manh}"""
+python3 room_vivid.py IN OUT {ratnhe|nhe|manh}"""
 import sys, numpy as np
 from PIL import Image, ImageFilter
-P = {'nhe': dict(sat=1.22, curve=0.10, lo=0.4, hi=99.7, sharp=35),
+P = {'ratnhe': dict(sat=1.11, curve=0.05, lo=0.2, hi=99.85, sharp=18),   # owner L1659 'màu nhẹ hơn cái tươi nhẹ' (~half of nhe)
+     'nhe': dict(sat=1.22, curve=0.10, lo=0.4, hi=99.7, sharp=35),
      'manh': dict(sat=1.42, curve=0.18, lo=0.8, hi=99.5, sharp=55)}
 def grade(im, sat, curve, lo, hi, sharp):
     a = np.asarray(im.convert('RGB'), dtype=float) / 255
