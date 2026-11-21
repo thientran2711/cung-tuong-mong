@@ -1165,7 +1165,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
 .pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
 /* owner 21/11: the info panel has ONE label column (the row labels): a section without a heading uses the whole width */
-.pc[data-k2] .kpstick .pcf .kpsec:not(:has(>.kpst)){grid-template-columns:minmax(0,1fr)}.pc[data-k2] .kpstick .pcf .kpsec:not(:has(>.kpst))>*{grid-column:1}
+.pc[data-k2] .kpstick .pcf .kpsec.kpno{grid-template-columns:minmax(0,1fr)}.pc[data-k2] .kpstick .pcf .kpsec.kpno>*{grid-column:1}
 .pc[data-k2] .kpstick .pcf .krv{overflow-wrap:anywhere}/* pcard-facts: the fact is shown whole, never cut with "…" (details sit behind the tap) */
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}

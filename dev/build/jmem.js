@@ -385,11 +385,11 @@ function pcfMem(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk
  if(!rows.length)return"";const top=memTop(k,"me");const md=memMod(k,"me");
  const say=top&&top.g>=B().recallMin?`<div class="kpnote">“${memLine(k,"me",top)}”</div>`:"";
  const lean=md?[["Lòng nhớ",md>0?`ơn cũ khiến ${pr} dễ nghe ngươi hơn`:`hận cũ khiến ${pr} khó nghe ngươi hơn`,md>0?"g":"r"]]:[];
- return `<div class="kpsec">${say}${kitRows(rows.concat(lean))}</div>`}catch(x){return""}}
+ return `<div class="kpsec kpno">${say}${kitRows(rows.concat(lean))}</div>`}catch(x){return""}}
 function pcfHook(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk(e);if(!k||k==="me")return"";
  const L=hookQuery({who:k}).filter(h=>h.by==="me"||h.on==="me");if(!L.length)return"";
  const rows=L.slice(0,4).map(h=>[hookLabel(h),hookText(h)+(h.due!=null?` (còn ${Math.max(0,h.due-nowW())} tuần)`:""),h.by==="me"&&h.k!=="promise"?"g":h.on==="me"&&(h.k==="threat"||h.k==="debt")?"r":"n"]);
- return `<div class="kpsec">${kitRows(rows)}</div>`}catch(x){return""}}
+ return `<div class="kpsec kpno">${kitRows(rows)}</div>`}catch(x){return""}}
 const PX=window.PCF_X=window.PCF_X||[];PX.push(pcfMem,pcfHook);
 window.pcfMem=pcfMem;window.pcfHook=pcfHook;
 })();

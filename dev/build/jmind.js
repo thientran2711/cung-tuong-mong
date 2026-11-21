@@ -114,7 +114,7 @@ window.mindWho=mindWho;function mindWho(o){if(o.name===S.name||o.me)return S;if(
  if(!who)return p0.apply(this,arguments);
  try{const rows=mindRows(who);const h0=p0.call(this,Object.assign({},o,{__mind:1}));
   if(who!==S&&!isKid(who)&&/<div class="pcf">/.test(h0)){const kr=kitRows(rows);
-   return h0.replace('<div class="pcf">',`<div class="pcf"><div class="kpsec">${kr}</div>`)}/* owner 21/11: one label column, no block heading */
+   return h0.replace('<div class="pcf">',`<div class="pcf"><div class="kpsec kpno">${kr}</div>`)}/* owner 21/11: one label column, no block heading */
   const L=(o.lines||[]).slice();for(const [k,v,c] of rows)if(c==="t"&&!L.some(x=>new RegExp("^"+k).test(String(x))))L.push(`${k}: <b>${v}</b>`);
   if(isKid(who)&&!L.some(x=>/Tính nết/.test(x))){const n=traitsOf(who)[0];if(n)L.push(`Tính nết: <b>${n}</b>`)}
   return p0.call(this,Object.assign({},o,{__mind:1,lines:L}))}catch(e){console.error("jmind card",e);return p0.apply(this,arguments)}}})();
