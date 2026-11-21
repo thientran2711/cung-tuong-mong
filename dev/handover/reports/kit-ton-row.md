@@ -27,3 +27,8 @@ In `PEND.roadpick` (jtamco.js): replace the «tốn: Tâm cơ -${c.tc}» text in
 ## Honest limits
 - I did not run econ-tamco's real PEND.roadpick card (the branch is not merged here); I tested the generic option shape with the same fields on both seats. D should re-run its own test after the 2-line swap.
 - The fx-consequence of a hidden-outcome card is deliberately still hidden; if road-b2 wanted THAT shown it is an owner/design question (it would reveal event outcomes).
+
+## kit-ton-row-2 (MAIN CHÍNH 83 follow-ups, after rv PASS fc854210 + self-merge e4fd4dcf)
+Branch `review/kit-ton-row-2` @ f8d36f6b (from review/kit-ton-row-land e4fd4dcf = LIVE 4f34f461 + kit-ton-row). quickcheck f8d36f6b: everything PASS (207 s, old save ok, perf like live) except G4 50-coop-one-world seed 3 «guest week changes the world» = the known flake; re-ran SEED=7 PASS, SEED=3 PASS ×3 on this build. golive.sh not run (classifier refuses).
+1. DECISION applied: the Tốn keep-rule of a hidden-outcome card (kitHideOut, jk2b) covers ECONOMIC stats only (khắc / Sức / Bạc / Hồi môn / Tâm cơ / Đức / Danh / Sủng); a relation / liking price («thiện cảm -3», «quý ngươi -3», Ân tình …) stays words only, no number («mất lòng bề trên»). Before (e4fd4dcf) the new relation check FAILED («thiện cảm -3» shown in Tốn); after PASS.
+2. dev/test/kit-ton-row.js: number-agnostic regex (Sủng price scales per life: -3/-4) — 14/14, run 4× stable. KIT §13.16 updated.
