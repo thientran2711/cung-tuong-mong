@@ -1773,4 +1773,4 @@ BAL.dc={on:1,
   dongchi:{need:["lam","den"],ky:[],gate:0},lapbat:{need:["nau","vang"],ky:[],gate:0},giaothua:{need:["do","vang"],ky:["trang"],gate:0}},
  needN:[1,1,1,2,2,2,2,2],
  cut:{phan:[3,3,4,5,6,7,8,9],danh:[1,1,1,2,2,2,3,3]},
- bor:{sl:["tram"],fav:20,use:6,thanks:5,khac:1,max:2},chg:{khac:1,max:2},buy:{khac:1},stay:{suc:8},kyOn:0};
+ bor:{sl:["tram"],fav:20,use:6,thanks:5,khac:1,max:2,wait:4/* tuần a loan to the other co-op seat waits for its «dcin» before the book line is dropped */},chg:{khac:1,max:2},buy:{khac:1},stay:{suc:8},kyOn:0};
