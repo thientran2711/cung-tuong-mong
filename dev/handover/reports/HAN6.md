@@ -71,3 +71,26 @@ HAN6 read:
   - t1/t2/t4/t6/t7/t8 Pose + ", her free hand at her side, never at the front waist". t3 (one hand at the hairpin + flute) and t5 (both hands on the letter) have no free hand.
   - Shortened my own L1965 additions to fit 10 000 (t6 bu yao "with swaying pearl dangles", t7/t8 "Han cloud-riding embroidery", t8 "hairpins", hem "(narrower than cuffs, wider than collar)"). The fit-trim threshold is now 9900.
   - ch 9915/9953/9875/9879/9556/9967/9973/9994. keep PASS ×8; check_store = base waived FAILs ×8.
+
+## OWNER L1971 (via #27): Hán t1–t8 L1971 files (words only, no gen)
+make_han_L1971.py, base = the L1965 files. After the generator runs, CUT lines from keep_check are appended to the .keep as owner-L1971 allows (re-run that step if you regenerate).
+1. t6 ball tassels back ("NO tassels" removed); the hand-at-side fix is kept.
+2. Bows = LONG trailing ties: "tied in a bow at the CENTRE front of the waist with two LONG silk ties trailing gracefully down the skirt (thướt tha)", in t3 (girdle) and t2 (sash). t5 has a flat knot (not a bow), left as is.
+3. Density:
+   - t1–t3: the rank's own flower (lilac / tiger lily / China rose) "WOVEN INTO the silk all over as a faint tone-on-tone pattern (flat, same colour, not embroidered); embroidery ONLY on the cuff, hem and collar bands". t3 sleeve flowers removed.
+   - t4: woven tone-on-tone all over + medium embroidered spring flowers + brocade cuff and hem bands.
+   - t5: the same with magnolias and peach blossoms, deep brocade border.
+   - t6–t8: dense gold embroidery.
+4. Jewellery from t4 (wording modelled on HQP_LUX):
+   - TẦN LUXURY: a few pearls and jade beads in her hair, slim gold bangles.
+   - PHI LUXURY: more pearls and jade in her hair, gold-and-jade bangles.
+   - QUÝ PHI LUXURY: many pearls and jade on the headdress, pearl trims on the cuffs and hem, gold-and-jade bangles.
+   - t7/t8 LUXURY: + pearl (and jade) trims on the cuffs and hem, gold-and-jade bangles.
+   - No necklace, no earrings, no pendant (G57).
+5. Own flowers back as the main motif, clouds/birds as additions:
+   - t6: large camellia medallions + crabapple, with clouds and small birds between.
+   - t7: large peonies, with clouds and small phoenixes between.
+   - t8: phoenixes among large peonies and flowing clouds.
+6. Drama verdict (pheasant OK / no deep blue / necklines kept / Tang 5→9 hairpin test tomorrow) is for Đường; nothing changed in the Hán files.
+Fit: t6–t8 dropped the duplicate fabric-weight sentence "it hangs in fuller, rounder, heavier folds…" (the same meaning is in "The satin has real weight…"). check_store-tested.
+ch 9872/9970/9831/9923/9803/9994/9926/9966. keep PASS ×8; check_store = the base waived FAILs ×8. Collar (G62) + t1–t3 bands (G66) verbatim.
