@@ -56,7 +56,7 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 /* kit-progress-run (owner 21/11, «cứ đứng ở một chỗ … chớp tại chỗ, không phải chạy tới»): the shown value only ever moves FORWARD (the total grows while pictures are discovered, so have / total can fall: the shown max keeps the best, per key); the HTML form
    animates from the value it replaced (--v0 → --v); a live caller builds it once and then calls kitProgressSet(root, o) which updates the same elements in place (no innerHTML rebuild → the CSS transition + sheen play). Words stay dlPart (no %). */
 const KPMAX={};
-function kpShown(o){const v=o.total?Math.min(100,o.have/o.total*100):0;const k=o.key||o.label||"_";const m=Math.max(KPMAX[k]||0,v);return{k,v:m,v0:KPMAX[k]||0,r:v}}
+function kpShown(o){const v=o.total?Math.min(100,o.have/o.total*100):0;const k=o.key||o.label||"_";/* forward-only is per RUN: a snapshot (a panel built on the state of now, o.fresh) shows the real value, never an old max (new life / new pictures wanted → it drops back); it still animates from what it showed before, so an open panel does not restart from 0 */const m=o.fresh?v:Math.max(KPMAX[k]||0,v);return{k,v:m,v0:KPMAX[k]||0,r:v}}
 function kitProgress(o){const s=kpShown(o);KPMAX[s.k]=s.v;const w={have:s.v,total:100};
  return `<div class="kprog" data-kpk="${s.k}">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(s.v)}"><u style="--v:${s.v.toFixed(1)}%;--v0:${s.v0.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(w)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 function kitProgressSet(root,o){const k=root&&root.querySelector(".kprog");if(!k){if(root)root.insertAdjacentHTML("afterbegin",kitProgress(o));return}
@@ -108,7 +108,7 @@ function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
   (IOSB?`<div class="kpnote">Safari và ứng dụng ở màn hình chính cất tranh riêng: nếu sau này ngươi thêm vào màn hình chính, ứng dụng sẽ thỉnh lại một lần nữa.</div>`:"");
  /* kit-progress-run: the bar is built once and updated in place; the notes are rewritten only when their text changes */
  if(b.querySelector(".kprog")&&b.dataset.kpn!==undefined){kitProgressSet(b,po);if(b.dataset.kpn!==notes){b.dataset.kpn=notes;b.querySelectorAll(":scope > .kpnote").forEach(e=>e.remove());b.insertAdjacentHTML("beforeend",notes)}}
- else{b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
+ else{KPMAX.core=0;/* a (re)built cover = a new load: forward-only starts again */b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
  const stuck=KLOAD.err&&KLOAD.phase!=="done";
  o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
 function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTimeout(()=>e.remove(),500);enterCb.splice(0).forEach(f=>{try{f()}catch(x){}})}
@@ -189,7 +189,7 @@ const dlWords=s=>s.done?CTM_WAIT.dlDone:s.paused?CTM_WAIT.dlPaused:KLOAD.err==="
 function dlPanel(){const s=dlState(),g=s.g;
  const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":CTM_WAIT.dlPauseX,fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
  return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
-  {h:"Tiến độ",html:kitProgress({key:"fig",have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
+  {h:"Tiến độ",html:kitProgress({key:"fig",fresh:true,have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
   {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],[CTM_WAIT.dlGot,dlPortion(g)],[CTM_WAIT.dlLeft,s.done?CTM_WAIT.dlNone:CTM_WAIT.dlLeftN.replace("{n}",g.left)]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();

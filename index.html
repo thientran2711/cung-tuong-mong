@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b1033eb0+","t":"2026-11-20T23:13Z","c":"Merge review/jtq14-addr-land 672e9841 (= LIVE 24dd2c62 + jtq14-addr) into ge-rank c5ebab9a (assemble = main's list; index.html/sw.js rebuil…","b":"0ede412274f1","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
+window.CTM_BI={"s":"d19741dc+","t":"2026-11-21T00:16Z","c":"kit-progress-run: kitProgress built once + updated in place (kitProgressSet), forward-only, grow + sheen; all 3 callers (life cover, first-…","b":"1965011bb08d","h":[{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46800,7 +46800,7 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 /* kit-progress-run (owner 21/11, «cứ đứng ở một chỗ … chớp tại chỗ, không phải chạy tới»): the shown value only ever moves FORWARD (the total grows while pictures are discovered, so have / total can fall: the shown max keeps the best, per key); the HTML form
    animates from the value it replaced (--v0 → --v); a live caller builds it once and then calls kitProgressSet(root, o) which updates the same elements in place (no innerHTML rebuild → the CSS transition + sheen play). Words stay dlPart (no %). */
 const KPMAX={};
-function kpShown(o){const v=o.total?Math.min(100,o.have/o.total*100):0;const k=o.key||o.label||"_";const m=Math.max(KPMAX[k]||0,v);return{k,v:m,v0:KPMAX[k]||0,r:v}}
+function kpShown(o){const v=o.total?Math.min(100,o.have/o.total*100):0;const k=o.key||o.label||"_";/* forward-only is per RUN: a snapshot (a panel built on the state of now, o.fresh) shows the real value, never an old max (new life / new pictures wanted → it drops back); it still animates from what it showed before, so an open panel does not restart from 0 */const m=o.fresh?v:Math.max(KPMAX[k]||0,v);return{k,v:m,v0:KPMAX[k]||0,r:v}}
 function kitProgress(o){const s=kpShown(o);KPMAX[s.k]=s.v;const w={have:s.v,total:100};
  return `<div class="kprog" data-kpk="${s.k}">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(s.v)}"><u style="--v:${s.v.toFixed(1)}%;--v0:${s.v0.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(w)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 function kitProgressSet(root,o){const k=root&&root.querySelector(".kprog");if(!k){if(root)root.insertAdjacentHTML("afterbegin",kitProgress(o));return}
@@ -46852,7 +46852,7 @@ function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
   (IOSB?`<div class="kpnote">Safari và ứng dụng ở màn hình chính cất tranh riêng: nếu sau này ngươi thêm vào màn hình chính, ứng dụng sẽ thỉnh lại một lần nữa.</div>`:"");
  /* kit-progress-run: the bar is built once and updated in place; the notes are rewritten only when their text changes */
  if(b.querySelector(".kprog")&&b.dataset.kpn!==undefined){kitProgressSet(b,po);if(b.dataset.kpn!==notes){b.dataset.kpn=notes;b.querySelectorAll(":scope > .kpnote").forEach(e=>e.remove());b.insertAdjacentHTML("beforeend",notes)}}
- else{b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
+ else{KPMAX.core=0;/* a (re)built cover = a new load: forward-only starts again */b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
  const stuck=KLOAD.err&&KLOAD.phase!=="done";
  o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
 function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTimeout(()=>e.remove(),500);enterCb.splice(0).forEach(f=>{try{f()}catch(x){}})}
@@ -46933,7 +46933,7 @@ const dlWords=s=>s.done?CTM_WAIT.dlDone:s.paused?CTM_WAIT.dlPaused:KLOAD.err==="
 function dlPanel(){const s=dlState(),g=s.g;
  const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":CTM_WAIT.dlPauseX,fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
  return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
-  {h:"Tiến độ",html:kitProgress({key:"fig",have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
+  {h:"Tiến độ",html:kitProgress({key:"fig",fresh:true,have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
   {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],[CTM_WAIT.dlGot,dlPortion(g)],[CTM_WAIT.dlLeft,s.done?CTM_WAIT.dlNone:CTM_WAIT.dlLeftN.replace("{n}",g.left)]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
@@ -85634,7 +85634,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0ede412274f1";window.CTM_BUILD=BUILD;
+const BUILD="1965011bb08d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

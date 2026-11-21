@@ -21,15 +21,24 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    KLOAD.core.have=1;KLOAD.core.total=10;KLOAD.phase="download";KLOAD.paintHook();const cb=document.querySelector('#kload .klb');const c0=U(cb);o.core={built:!!c0,v:[V(c0)]};
    for(const [h,t] of [[3,10],[3,20],[8,20],[20,20]]){KLOAD.core.have=h;KLOAD.core.total=t;KLOAD.paintHook();await sleep(40);o.core.v.push(V(U(cb)))}
    o.core.same=U(cb)===c0;o.core.mono=o.core.v.every((x,i,a)=>i===0||x>=a[i-1]);o.core.words=cb.querySelector('.kprog-n').textContent;o.core.notes=cb.querySelectorAll('.kpnote').length;
+   /* a NEW load on the first-load cover (the bar is rebuilt) starts again from its own value, not the old max */
+   cb.querySelectorAll('.kprog').forEach(e=>e.remove());KLOAD.core.have=0;KLOAD.core.total=20;KLOAD.paintHook();await sleep(40);o.core.again=V(U(cb));
    /* 3. HTML form (sổ panel): animates from the previous value, never backwards */
    const h1=kitProgress({key:"figT",have:6,total:10,sub:"x"}),h2=kitProgress({key:"figT",have:1,total:10,sub:"x"});const v=h=>[+/--v:([\d.]+)%/.exec(h)[1],+/--v0:([\d.]+)%/.exec(h)[1]];o.html={first:v(h1),second:v(h2)};
+   /* rv FAIL fix: forward-only is per RUN — a snapshot (fresh) never inherits an old max: 10/10 then 0/20 on the SAME key reads 0 %, 5/20 reads 25 %; the running cover (no fresh) still keeps its max */
+   const w=h=>/class="kprog-n">([^<]+)</.exec(h)[1];const s1=kitProgress({key:"figS",fresh:true,have:10,total:10}),s2=kitProgress({key:"figS",fresh:true,have:0,total:20}),s3=kitProgress({key:"figS",fresh:true,have:5,total:20});
+   o.snap={a:v(s1),b:v(s2),c:v(s3),wa:w(s1),wb:w(s2),wc:w(s3)};const r1=kitProgress({key:"runK",have:10,total:10}),r2=kitProgress({key:"runK",have:0,total:20});o.run={b:v(r2),wb:w(r2)};
+   /* the real sổ panel caller passes fresh: dlPanel's source line */
    o.kf=!!([...document.styleSheets].some(s=>{try{return [...s.cssRules].some(r=>r.name==='kprogGrow'||r.name==='kprogSheen')}catch(e){return false}}));return o});
   ok(R.life.u0&&R.life.same,`${tag} life cover: the fill element is built once and kept (same node across ticks)`,R.life.same);
   ok(R.life.mono&&R.life.v[R.life.v.length-1]>R.life.v[0],`${tag} life cover: the shown value only moves forward although the total grows`,R.life.v);
   ok(!R.life.pct&&R.life.noteOnce===1&&/[a-zà-ỹ]/i.test(R.life.words),`${tag} life cover: words (no %), the note is not duplicated`,[R.life.words,R.life.noteOnce]);
   ok(R.core.built&&R.core.same&&R.core.mono&&R.core.v[R.core.v.length-1]>R.core.v[0],`${tag} first-load cover: built once, in place, forward only`,[R.core.same,R.core.v]);
+  ok(R.core.again===0,`${tag} first-load cover: a new load (bar rebuilt) starts again from its own value, not the old max`,R.core.again);
   ok(R.core.notes>=1&&R.core.notes<=3&&/đủ|gần|quá|phần|chút/.test(R.core.words),`${tag} first-load cover: notes not duplicated, words follow the value`,[R.core.notes,R.core.words]);
   ok(R.html.second[0]>=R.html.first[0]&&R.html.second[1]===R.html.first[0],`${tag} sổ panel (HTML form): never backwards (6/10 → 1/10 still ${R.html.first[0]}), animates from the previous value`,R.html);
+  ok(R.snap.a[0]===100&&R.snap.b[0]===0&&R.snap.c[0]===25&&R.snap.wa==='đủ cả'&&R.snap.wb==='mới chút ít',`${tag} snapshot (fresh): 10/10 then 0/20 on the same key reads 0 %-wide «mới chút ít», 5/20 reads a quarter — never the old max`,R.snap);
+  ok(R.run.b[0]===100&&R.run.wb==='đủ cả',`${tag} a running bar (no fresh) still never goes backwards`,R.run);
   ok(R.kf,`${tag} CSS: grow + sheen keyframes present`);
   if(!rm)ok(/kprogSheen/.test(R.life.after)&&/width/.test(R.life.tr),`${tag} sheen runs over the fill and width transitions`,[R.life.after,R.life.tr]);else ok(R.life.after==='none','reduced motion: no sheen',R.life.after);
   ok(errs.length===0,`${tag} no page errors`,errs.slice(0,2));await ctx.close()}
