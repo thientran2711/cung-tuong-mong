@@ -595,7 +595,7 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
  body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
- kitFrameApplyLive3(dlg)}
+ kszListCols3(dlg);kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
    the option cards BELOW it full width, 1 column (kszBtnGridLive3), cards = ONE size per dialog (kitOptFill, tall 3:4 for person dialogs). The figure ladder
@@ -703,6 +703,17 @@ window.kitScrollCues=kitScrollCues;
 KIT_SIZE.legacy={size:"L"};
 (function(){const css=[];css.push("html body .modal.kpscene .dlg.kpsc:not(.kszf)[data-ksz]{width:var(--kpw)!important;max-width:var(--kpw)!important}");/* the scene cover frames (loading cover …): the kit width, never a width of their own */for(const m of["kv1","kv2"])css.push(`html.${m}{${["S","M","L","XL"].map(k=>`--kszW-${k}:${KIT_SIZE.frame[k].w[m]}px`).join(";")}}`);
  const st=document.createElement("style");st.id="k-size-every";st.textContent=css.join("\n");document.head.appendChild(st)})();
-function kitFrameTagAll(){try{document.querySelectorAll(".dlg:not([data-ksz]),.dbox.kpanel:not([data-ksz])").forEach(d=>{d.dataset.ksz=KIT_SIZE.legacy.size})}catch(e){}}
+function kitFrameTagAll(){try{document.querySelectorAll(".dlg:not([data-ksz]),.dbox.kpanel:not([data-ksz])").forEach(d=>{d.dataset.ksz=KIT_SIZE.legacy.size});if(typeof kszListCols3==="function")document.querySelectorAll(".dlg:not(.kszlive) .kfacts:not([data-kcols])").length&&kszListCols3(document.querySelector(".dlg:not(.kszlive)")||document)}catch(e){}}
 window.kitFrameTagAll=kitFrameTagAll;
 (function(){const go=()=>{kitFrameTagAll();try{new MutationObserver(()=>{kitFrameTagAll()}).observe(document.body,{childList:true,subtree:true})}catch(e){}};if(document.body)go();else addEventListener("DOMContentLoaded",go)})();
+
+/* ================= #82 KIT LIST RULE (owner 21/11 ~05:37Z, «Sổ nguyệt sự», people lists) =================
+   A list of SHORT rows (kit facts: .kfacts > .kfact, one person / one line each) on the iPad (kv2: the frame's text column is wide) is laid in TWO columns so it does not scroll
+   a long way for nothing; the phone (kv1) keeps ONE column. Rule (KIT_SIZE.list): kv2 only · the list has at least minRows rows · every row is at most maxChars characters ·
+   the list is wide enough for two columns of colMin px + gap. The whole group = every .kfacts in every frame (kszLiveLay3 runs it before the frame size is picked, so the
+   smaller height can choose a smaller frame; the tag pass runs it for page frames). Test: dialog-fixed (k). */
+KIT_SIZE.list={colMin:260,gap:12,minRows:3,maxChars:110};
+function kszListCols3(root){try{const L=KIT_SIZE.list,two=kitSzMode()==="kv2";(root||document).querySelectorAll(".kfacts").forEach(f=>{f.removeAttribute("data-kcols");if(!two)return;const rows=[...f.children].filter(c=>c.classList.contains("kfact"));
+ if(rows.length>=L.minRows&&f.clientWidth>=2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars))f.setAttribute("data-kcols","2")})}catch(e){}}
+window.kszListCols3=kszListCols3;
+(function(){const st=document.createElement("style");st.id="k-list-cols";st.textContent=`.kfacts[data-kcols="2"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:${KIT_SIZE.list.gap}px;align-items:start}`;document.head.appendChild(st)})();

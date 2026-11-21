@@ -88,6 +88,16 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
    chk(`${tag} (#80) event picture is the TOP of the right column (result + notice with a person)`,r.result.evTop!==null&&r.result.evTop<=3&&r.lohen.evTop!==null&&r.lohen.evTop<=3,[r.result,r.lohen]);
    chk(`${tag} (#76) «Đồ thất lạc»: the ITEM tile is the left slot, not in the text, not a generic picture`,r.lost.ksz==='S'&&/k3mitem/.test(r.lost.left)&&r.lost.kievInText===0&&!r.lost.picLeft,r.lost);
    chk(`${tag} (#76) no person / item: the matter (event picture) is the left slot`,r.matter.picLeft,r.matter)}
+  /* (k) #82 owner 21/11 ~05:37Z: a list of SHORT rows (Sổ nguyệt sự, people lists) is in TWO columns on the iPad, ONE on the phone */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const rv=rivals.filter(v=>v&&v.name).slice(0,5);
+    const facts=[{who:S,text:'Ta: tháng này đã báo, ngày 13-19 · tháng trước: đã báo, ngày 13-19'},...rv.map(v=>({who:v,text:`${v.name}: tháng này đã báo, mong 3-8 · tháng trước: đã báo, mong 3-9`}))];
+    const long=[{who:S,text:'Một hàng rất dài. '.repeat(12)},...rv.slice(0,3).map(v=>({who:v,text:'Một hàng rất dài. '.repeat(12)}))];
+    const one=async(f)=>{Q.length=0;kitModal({kind:'intel',title:'Sổ nguyệt sự',sub:'Kính sự phòng',facts:f});await sleep(1800);const d=document.querySelector('#modal .dlg');const L=[...d.querySelectorAll('.kfacts')].map(x=>{const rs=[...x.children].filter(c=>c.classList.contains('kfact'));const xs=new Set(rs.map(c=>Math.round(c.getBoundingClientRect().left)));return{rows:rs.length,cols:xs.size,attr:x.dataset.kcols||''}});const sc=d.querySelector('.k3right');const o={ksz:d.dataset.ksz,L,scroll:sc?sc.scrollHeight-sc.clientHeight:0};Q.length=0;document.getElementById('modal').hidden=true;return o};
+    return{short:await one(facts),long:await one(long)}});
+   const big=r.short.L.find(x=>x.rows>=3);
+   if(z.w>=1100)chk(`${tag} (#82) iPad: a list of short rows is in 2 columns (${big&&big.rows} rows, ${big&&big.cols} columns), the frame needs no scroll`,big&&big.cols===2&&big.attr==='2'&&r.short.scroll<=2,r.short);
+   else chk(`${tag} (#82) phone: the same list stays in 1 column`,big&&big.cols===1&&!big.attr,r.short);
+   chk(`${tag} (#82) long rows stay in 1 column`,r.long.L.every(x=>x.cols===1),r.long)}
   chk(`${tag} (#56) ${evs.length} dialogs with unlisted option titles, ${nCards} option cards: none without a picture`,!noPic.length,noPic.slice(0,6));
   console.log(tag,'summary',JSON.stringify(R.map(m=>[m.name,m.ksz,m.D.w+'x'+m.D.h,m.kol,m.fig&&m.fig.w+'x'+m.fig.h+'@'+(m.fig.y-m.D.y)])));
   chk(`${tag}: no page errors`,!errs.length,errs.slice(0,3));await ctx.close()}
