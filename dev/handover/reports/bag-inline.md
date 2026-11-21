@@ -37,3 +37,10 @@ Scan (Fold 755x1000, fresh save, every bottom tab + Tư trang sub-panes): `butto
 ## Evidence
 Shots (scratch, not in git): /home/user/wt/bag-inline-shots/bag-after-{755x1000,1180x820}-*.jpg, viec-755x1000.jpg. Looked at: Fold grid+strip, second tap swap, slot strip, sell (strip empties, grid regrows), iPad strip.
 Known: iPad 1180x820 — the strip with 3 act cards makes the panel scroll a little (long item text + 3 acts); strip keeps the grid ≥ 2 rows. A «Bên mình» slot strip also scrolls (worn item + chooser inside).
+
+## Tests (final)
+Branch review/bag-inline @ a8ef23ce (base LIVE a88b14f0, merged; assemble = main's list + jkinl.js; index.html/sw.js rebuilt).
+- quickcheck a8ef23ce: PASS (204 s, open 1651 ms, old save ok, core gates PASS; perf render 263/204 ms, tab 551/440 ms, buổi 1276/1117 ms vs live)
+- coop-e2e (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc): 92/92 passed
+- Fold bag flow after the merge: tap, second tap, slot tap, sell → no page errors.
+Not run: dev/test/item-info.js / item-info-scan.js (the bag pop-up site is now a strip; reviewer may adapt), iPad act-pictures shot.
