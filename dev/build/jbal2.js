@@ -1915,6 +1915,23 @@ BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:
  so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
  rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
  join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
+/* jkc3 HOME CHAPTERS (GAP OR03–OR10): the calendar of the home arcs, the roster people, the home events E9 / E15 / E28, the early roads.
+   cal: o0 months to the first beat · gap [min, +roll] months between beats · tP odds of a turn beat · min beats an unopened arc needs · fin spare months before Sơ tuyển.
+   win Lợi thế for the win ending of an arc with no fixed ending · scOdds odds per Lợi thế at a climax · plan.ke odds of «Kế mẫu» over «Hôn sự» when the mother lives.
+   ros: starting favour [base, +roll] · me = her own liking · baSanh odds the bà mối sits in the chính sảnh while a match is open.
+   thay: t favour for tier 1 / 2 · mul lesson speed per tier · hau / bieu / truyen the three teacher acts. entry: rank index of the early roads (1 = Thường tại). fx: every arc's option / ending numbers (BAL.arc.fx format). */
+Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1,nc:[1,2]},win:3,mid:1,scOdds:7,plan:{ke:50},
+ ros:{me:[30,20],nm:[60,25],ba:[25,20],thay:[20,20],sx:[30,30],baSanh:60,age:{nm:[56,10],ba:[40,9],thay:[34,12],le:[52,12]},
+  sxAge:{hau:[20,5],quan:[22,5],than:[24,4],thuong:[30,8],lao:[56,8],def:[24,6]},
+  pool:{mama:["mama","maid"],maid:["maid","mama"],man:["man","official"],official:["official","man"]},noFid:["man:vuonggia","man:thaiy","emperor:","thaihau:"],pref:{hoa:["man:hoasu-1"]}},
+ thay:{t:[45,75],mul:[1,1.25,1.5],hau:{k:2,suc:-10,af:7},bieu:{k:1,bac:-15,af:7},truyen:{k:2,suc:-15,danh:3,art:8,tier:2},leMax:5},
+ nm:{ke:{k:1,tamco:1,af:3},do:{k:1,od:40,afD:4,proof:1,oan:6,af:-5,oanMin:12},an:{k:2,suc:20}},
+ ba:{bieu:{k:1,bac:-20,af:10,q:10},khe:{k:2,suc:-10,kap:-8,af:4}},
+ ev:{mebenh:{t0:6,p:6,af:10,y:{bac:-40,od:55},hau:{suc:-30,od:50}},divat:{hua:{duc:3},hoi:{tamco:3,proof:1}},
+  xemmat:{dep:{suc:-10,od:45,sacD:3,kgt:4,kap:10,af:8,kgtF:-3},gian:{duc:2,kap:3},muoi:{af:8,danh:2,kap:-4,p:50}},
+  hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
+  vh:{duc:3},th:{go:10,wait:6,duc:2},qMax:2},
+ entry:{th:1,vh:1},tier:{win:1,mid:0,lose:-1},seedP:50,thdTro:40,rare:{dtqSuc:90,muoiTc:60,dtqOc:1,r4:.6,r6:.8,r1:{h:80,loyal:60,kld:55,p:.6}},gtuMin:10,know:{foe:2},intel:{n:1,st:2},fx:{}}});
 /* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
    owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
    Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
