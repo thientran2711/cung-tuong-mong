@@ -16,3 +16,13 @@ Tried and rejected (check_store FAIL): fabric "real cloth…" clause (M08), the 
 
 ch (check_store) 9613/9789/9843/9690/9344/9936/9957/9991; keep_check --sidecar PASS ×8 (.keep = LADDER5 .keep + 2 allow lines);
 check_store --scope tpN --age a18 shows only the waived FAILs, the same as LADDER5: M06/M07/S06 t1–t3, M06/M07 t4–t5, S13 t4, B12/M07/S07 t6–t8, S14 t7.
+
+## LADDER7 (owner L1847 via Foreman C #24): "the collar set still doesn't have that vibe"
+Sheet han_ladder6_t2_t8_L1832.png (L6 t2 kseQG8Z16B, t8 KLpuAI0kqp vs Phi t5 CqnIKlAEEy).
+CAUSE (word level): Phi CqnIKlAEEy was drawn from s62_t5_HAN_LADDER4_L1773.txt, and its collar words are the SAME as t2/t8 LADDER5. Phi's wide flat shoulder-to-shoulder neckline came from its bead yoke lying ON the collar line ("over both shoulders … lying outside the collar"), which pushed the collar flat across the shoulders. t1–t3 have no yoke, and LADDER6 moved the t4–t8 yoke off the collar, so the model drew an ordinary diagonal V from the neck with thin bands. No word described the SHAPE itself.
+Fix (generator make_han_ladder7_L1847.py, built from LADDER5 files; hair, pose, angle, held item, crown and captions byte-identical):
+1. Shape ×8: "the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V" → "the opening runs almost straight across the tops of both shoulders to the shoulder points, the bands lying flat ON the shoulders, then drops in one wide V meeting low at the chest".
+2. Bands ×8: "THREE stacked WIDE gold-edged collar bands in the wide V (" → "THREE BOLD flat collar bands of EQUAL width side by side, each two fingers wide and gold-edged, unbroken from the neck over each shoulder down to the V, never thin, never two (" (colours unchanged).
+3. Yoke t4–t7 = back to Phi's own LADDER5 words (they drew the Phi look). t8 → "a small flat gold-and-pearl bead yoke along the outer edge of the bands with a very short pearl fringe, never covering the bands".
+4. t8: "her plum is the clear second colour in LARGE areas (inner robe, skirt front, wide plum collar band, borders)"; inner-collar clause shortened on t7 and t8. Same t7/t8 trims as LADDER6 (18K/hex clauses, shorter yellow negatives, INNER LAYER sentence removed).
+ch 9690/9866/9920/9754/9408/10000/9998/9998; keep_check PASS ×8; check_store shows only the same waived FAILs as LADDER5/6.
