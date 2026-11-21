@@ -450,6 +450,11 @@ Object.assign(BAL,{nroad:{
  org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
+ /* OR19 (OD:L1288, STORY_ROADS_PLAN §3.0): an NPC consort may be a foreign princess (Công chúa hòa thân) — rolled ONCE at game start (or on
+    arrival) with the SAME share as the player's pool: BAL.orig.ow.nc out of the consort origins of BAL.orig.ow (cnv = a servant, never a
+    consort), country by BAL.orig.br.nc; max = princesses of one country in one game (the player counts); faces = princess faces per country
+    (shared by player and NPC rolls, never the same face twice in one game; stand-in = her drawn face until the princess art ships) */
+ fp:{max:1,faces:3,no:["cnv"]},
  /* at most this many NPC roads have the player as their rival at one time */
  meMax:3,
  /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
