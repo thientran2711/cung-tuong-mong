@@ -2149,3 +2149,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:01Z) LRRY FAIL ui-leftover-fold a6b5fd3c perf (buổi 2984 vs 1426) → ORDER B perf fix. Chain: mg-craft-r3 → bang-words-land3. LIVE c9ae030e.
 - (17:00Z) LAND CHAIN 2: FAIL ui-leftover-fold a6b5fd3c (QC perf twice: buoiMs 2984 vs live 1426, limit 2926) → B. Chain continues q1f (mg-craft-r3, bang-words-land3).
 - (17:01Z) LAND CHAIN 2: FAIL mg-craft-r3 973b5ba7 REAL CONFLICT jtd.js vs LIVE c9ae030e → B. Running bang-words-land3.
+- (17:02Z) LRRY FAIL mg-craft-r3 973b5ba7 (conflict jtd.js) → ORDER B r4. LRRY now on bang-words-land3 (last in queue).
