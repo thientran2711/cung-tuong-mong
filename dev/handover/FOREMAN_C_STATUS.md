@@ -1122,3 +1122,4 @@ NEWACCT#18 HANDOVER ~07:15Z: depth 8 (LAST), ctx 44 % (START ~4 % + 25 % → ove
 NEWACCT#18 ~07:20Z: CHECK2 also over roll (40 %) → L1699 job NOT started; spec in CHECK2.md §L1699 (2ea21e6). TAKEOVER_FOREMAN_C_ROOT19.md updated: #19 first job = open Opus worker for L1699. Owner asked (L1700) to open ROOT #19. Next Lượt 1701.
 NEWACCT#18 ~07:25Z: OWNER L1701: try-on page sloppy (not fitted per flap/hand; last maid worst). #18 admits it sent without its own LOOK. Added REDO spec to ROOT19 takeover. Next Lượt 1703.
 NEWACCT#18 ~07:30Z: L1703 sent per-season family sheet pal_L1679/bangmau_theomua.png (0 cr). Next Lượt 1704.
+NEWACCT#18 ~07:35Z: OWNER L1704: L1679 palette too vivid/garish ('rực kinh khủng', esp. s33–s42), drifting from game style → NOT approved; rework spec added to ROOT19 takeover. Next Lượt 1705.
