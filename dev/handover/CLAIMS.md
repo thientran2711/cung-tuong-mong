@@ -867,3 +867,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW coop-pool-face (opus BIG co-op) | review/coop-pool-face-rv; reports/review-coop-pool-face.md | FOREMAN D #16 | session_01964izF6yWRxrNN3RCvPXFx | RUNNING | 21/11 12:21Z |
 | rv-kit-focus r5 | PASS | review/kit-focus-rv5 f6d0af801ed507b37395d57c54ac12e55259dc36 | quickcheck+coop-e2e 94/94 |
 | rv-mg-intro-2 re-check | PASS | review/mg-intro-2-rv da3aa72d2f8f72167d25025ad6c7cc08476154f1 | mg-intro-2 ok, mg-ui-rest = LIVE, quickcheck ok |
+| KIT KEEPER #4 (OPUS; successor of keeper #3) | review/kit-*; reports/kit-keeper-4.md | MAIN CHÍNH 94 | session_01Rc5AsJkj5hx1zShFY8KnYZ | RUNNING | 21/11 13:13Z |
