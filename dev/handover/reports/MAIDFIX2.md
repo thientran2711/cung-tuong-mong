@@ -70,3 +70,7 @@ test17_{tam,nhi,nhat}(+_thancan)_L1785 from test16:
 4. NHẤT tone: nhất had "(a touch deeper than a lower maid's blue)" → thân cận "deeper than … deep rose" + "RECOLOUR the whole costume to her colour …" on skirt + WHOLE sleeves = the most saturated. → "(the same soft tone as the other maids)" in both nhất files.
 Why bleed: tam text named sash+ties one colour and bow the other in one phrase; the sash (main colour) wraps over the jacket (other colour) right where the short jacket ends; nhất's "TWO colours that clearly interact"; collar borders "in a lighter tone"/"cream-and-blush" next to the other colour. No rule ever asked for clean edges, and the 55-cr draft model blends neighbouring colours more → both.
 keep_check --all 496 PASS; check_store maid a18 ×6 PASS; nhất 9.93k (limit 10k), others 7.4–8.2k.
+
+## JOB 9 — owner L1797 (via Foreman C #22), 0 gens
+- test18_nhat_L1797 + test18_nhat_thancan_L1797 = test17 nhất files with ONE change: "a small embroidered silk fragrant sachet (túi thơm) on a silk cord with a tassel hanging at the centre between the two panels" → "... (túi thơm) with a tassel hanging from the sash at the waist on a short silk cord looped over the sash, never low at the knees". Everything else byte-identical; tc word diff = colour only.
+- keep PASS ×2 (all 502), check_store maid a18 PASS ×2; 9974 / 9981 chars (limit 10 000, ~20 chars left).
