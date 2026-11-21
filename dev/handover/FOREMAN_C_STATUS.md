@@ -1349,3 +1349,4 @@ Next Lượt 1953.
  11. Face page: I gave only 5 faces and never resent link after fix → need full maid face page link.
  NOW: send her the THU outfit list (what we have).
 #27 ~10:30Z: OWNER L1973: HQP t7 = keep OLD HOÀNG QUÝ PHI outfit (not Quý phi), only fix collar; go back to previous version (L1903 0eUA2SkTfW base) + collar only → HHCOL2 → VE11 1@135. FACEPAGE1 full page v3 (51 faces) SENT L1972; m11 label → 'đã bỏ'. Next Lượt 1974.
+#27 ~10:35Z: SENT L1974 thu 8-rank current sheet thu_8bac_hientai_L1971.png (t1 0eUAUEbTfW t2 EbYtnSSuuO t3 dt40zTaXSL t4 WDgZlfCcXe t5 tCReAHamZJ t6 eIPcGThdqL locked, t7 fixing, t8 Tdwzp62VNR waiting). Next Lượt 1975.
