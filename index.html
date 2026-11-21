@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b5abf6e2+","t":"2026-11-21T18:53Z","c":"rv mg-craft-r4: mg-craft + mg-craft-hoa rules-screen check follows LIVE mg-intro-2 (kit tap-word «!» .kfx on the rules title, no .kgr-demo;…","b":"5171d95477d3","h":[{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"}]};
+window.CTM_BI={"s":"d8742d58+","t":"2026-11-21T18:54Z","c":"rv mg-craft-r4: mg-craft + mg-craft-hoa rules-screen check follows LIVE mg-intro-2 (kit tap-word «!» .kfx on the rules title, no .kgr-demo;…","b":"08f3f4394a69","h":[{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"},{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"},{"s":"c37b7713+","t":"2026-11-21T18:42Z","c":"Hàng quan hệ: một chữ thống nhất"},{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4401,7 +4401,7 @@ function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div c
 function pcHead(o){const rk=String(o.rank||"").replace(/<[^>]*>/g,"").trim();const raw=o.name==null?"":String(o.name);const same=rk&&!/</.test(raw)&&raw.trim().toLowerCase()===rk.toLowerCase();
  const nm=same?raw:(typeof kitDedupRank==="function"?kitDedupRank(rk,raw):raw);const kmy=o.me||(o.f&&typeof pMe==="function"&&o.name===S.name);const tone=typeof kitRankTone==="function"&&o.rank?kitRankTone(rk,o.col):"";
  const tonly=!same&&/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim());/* OD:L1362: ONLY the Emperor's name is the bright imperial yellow (Thái hậu keeps her own look, KIT 33.5 amber / 83.1) */
- return `<b class="pcname${kmy?" kmy":""}${same||tonly?" krt":""}" data-krn-skip${same||tonly?` style="--rt:${tone}"`:""}${/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim())?" data-imp=\"emp\"":""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
+ return `<b class="pcname${kmy?" kmy":""}${same||tonly?" krt":""}" data-krn-skip${tone?` style="--rt:${tone}"`:""}${/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim())?" data-imp=\"emp\"":""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
 function pcard(o){/* the road act table (jroad8 road8Acts, owner 21/11 ~03:15Z «chả cần phải khóa»): on the cung nữ road a person card keeps only the acts she really has; innermost, so every wrapper's added button passes it */try{if(typeof road8Acts==="function")o=road8Acts(o)}catch(e){}const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=(o.chips||[]).filter(Boolean);
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];
@@ -36283,6 +36283,16 @@ BAL.entry.w.kc={sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:
  /* reviewer origin-intros-r1: the extras jkc kcMyScore typed by hand (same values): way = Tài/Đức added by "Đối đáp lanh lợi" / "Đáp lời khiêm nhường", chTh = Thái hậu added for Cháu gái Thái hậu, rW = per origin rank r, vh / tdFall = sớ tiến cử / td fall */
  way:6,chTh:15,rW:4,vh:6,tdFall:-6};
 BAL.entry.why={ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}};
+/* review/podium-wire (GAP OR09, OUTSIDE_PLAN §9 "Thứ muội and friends compete under the same rule, and the podium screen is used"):
+   phuc = the Phúc tuyển marks of the thứ muội and the khuê hữu (family records S.kc.fam), drawn ONCE from their own stats and kept on the
+   record (law 6b), shown on the kit podium (KIT §20.1) and read again by kcEnter (Điện tuyển), never re-rolled.
+   lv = [tai at art level 0, tai per level, top level]: her art level from her own Tài (Tài 30..80 -> level 2..5; lv[0] 11 (review r1, was 20) keeps the mean mark = the old live 3+R(6) mean 5.5, bots n>=300/origin), top = level 5; her mark uses the SAME
+   NPC curve as HER "Để tài nghệ quyết định" (kg82NpcMean, BAL.mgTier.npc) + a spread of ±sp (sum of three draws, like kg82NpcRaw); max = top mark.
+   duc / pow = [base, range]: her own Đức and (khuê hữu only: her own house's) thế lực, drawn once (the numbers kcEnter typed as 30+R(30) /
+   40+R(30), moved here unchanged); the thứ muội shares HER house (kcPow()).
+   foul = law 1 two-way: she can "Ngáng chân thứ muội" (jkc, Sắc -3 / Danh -3 of the sister); a thứ muội who holds oan >= foul.oan against her
+   tries the same on her in the Phúc tuyển week: odds od + oan/oanDiv, her Sắc -sac / Danh -danh (same sizes as her card). */
+BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{oan:20,od:40,oanDiv:3,sac:3,danh:3}};
 /* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, 13:55Z s17, 14:10Z; FOREMAN_C 14:15Z/14:35Z/14:45Z s17; review/title-sys): achievement titles.
    n0 = the counts that open the 3 steps of a title (1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8).
    T[id] = per title: b base tier, n own counts, st own step, ch = the bonus TYPES this title may give (the PLAYER picks ONE while it is worn; NPCs pick by need).
@@ -45661,6 +45671,8 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
 /* owner 21/11 (OD:L1362, hoangthuong-gold): the EMPEROR's name («Hoàng thượng» as the card head, .pcname.krt[data-imp=emp]) is painted as a TITLE in its rank tone (imperial yellow KIT_IMP), never ink: the name rule above must not win over the title rule. ONLY him: Thái hậu keeps her own look (KIT 33.5) */
 html body .pc .pcl .pcname.krt[data-imp="emp"]{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;font-family:var(--display,"Noto Serif",Georgia,serif)!important;letter-spacing:.03em!important}
+/* kit-mark-fix r6 (rv round 5: no JS timing for the name colour): a card head NAME followed by its RANK line (.pcname ~ .pcrk, also inside .kpnm) takes the RANK colour in pure CSS — pcHead (j15) puts the same --rt on both, and the expression is the rank line's own (T) fallback, so they match from the first paint; kitPcTagColour stays only as a fallback for a rank line built elsewhere */
+html body .pc .pcl .pcname:has(~ .pcrk){color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
@@ -46107,7 +46119,18 @@ window.kitInfoOneLine=kitInfoOneLine;
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
 .pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
 .pcpop .pc .pcf .kr>.krv>.kgnb,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{right:46px}
-`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();kitPcMore()},100)})}catch(e){}})();
+/* KIT §6.3j RANK + NAME = ONE COLOUR on the person-card tag (owner OD 16/11 16:10Z «rank+name one colour: OK» + 21/11 04:33Z; MAIN 89 check #3): the name under the rank line takes the rank colour (--rt of .pcrk). The same unit as the story text (§48.3). */
+function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const n=r.parentElement.querySelector(":scope > .pcname");if(!n||n.classList.contains("krt"))return;const c=r.style.getPropertyValue("--rt")||getComputedStyle(r).color;if(!c)return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
+window.kitPcTagColour=kitPcTagColour;
+let kitPcMoreRO=null;/* r5: the card's content grows after the pass (pictures, fonts, late rows) without any DOM mutation → watch the card's blocks, re-check when one changes size */
+function kitPcMore(){try{if(!kitPcMoreRO&&typeof ResizeObserver==="function")kitPcMoreRO=new ResizeObserver(()=>{clearTimeout(window.__kpmR);window.__kpmR=setTimeout(kitPcMore,30)});
+ document.querySelectorAll(".pc.kpwide[data-k2]").forEach(pc=>{if(kitPcMoreRO&&!pc.__kpmObs){pc.__kpmObs=1;kitPcMoreRO.observe(pc);for(const c of pc.children)kitPcMoreRO.observe(c)}const m=pc.scrollHeight>pc.clientHeight+3&&pc.scrollTop+pc.clientHeight<pc.scrollHeight-3;if(pc.classList.contains("kpmore")!==m)pc.classList.toggle("kpmore",m)})}catch(e){}}
+window.kitPcMore=kitPcMore;/* r6 (test re-assert 1 s later caught it): some pages rebuild their person card every few seconds (tab-rv ≈ 2.7 s); the NEW card had no cue for 125–260 ms until a timer pass ran = the fade blinked off. A card that becomes .pc.kpwide[data-k2] (added, or its class / data-k2 set by a kit scan) is checked in the SAME microtask, before the next paint */
+try{new MutationObserver(r=>{let go=false;const isPc=e=>e&&e.nodeType===1&&e.classList.contains("pc")&&e.classList.contains("kpwide")&&e.hasAttribute("data-k2");
+ for(let i=0;i<r.length&&!go;i++){const m=r[i];if(m.type==="attributes"){if(isPc(m.target)&&!m.target.__kpmSeen)go=true}else for(const n of m.addedNodes){if(n.nodeType===1&&(isPc(n)||n.firstElementChild&&n.querySelector(".pc.kpwide[data-k2]"))){go=true;break}}}
+ if(go){kitPcMore();for(const pc of document.querySelectorAll(".pc.kpwide[data-k2]"))pc.__kpmSeen=1}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["class","data-k2"]})}catch(e){}
+/* r6: web fonts arriving change every card height without a mutation → re-check the cue */try{document.fonts.ready.then(()=>kitPcMore());document.fonts.addEventListener("loadingdone",()=>{clearTimeout(window.__kpmF);window.__kpmF=setTimeout(kitPcMore,30)})}catch(e){}document.addEventListener("scroll",e=>{const pc=e.target;if(pc&&pc.classList&&pc.classList.contains("kpwide"))kitPcMore()},{capture:true,passive:true});
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
@@ -46116,16 +46139,29 @@ window.kitInfoOneLine=kitInfoOneLine;
 html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
 html body .pc>.pcr .pcg.on{display:block!important}
 html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+/* the info group of a person card (.pcb) is a generic auto-fill grid: on Fold it put the mother block (.kpl) and the facts table (.kpkb) side by side, on iPad stacked. One layout: every non-button child spans the whole row, so mother is ALWAYS above the facts (mark 17). */
+html body .pc>.pcr>.pcb{align-content:start!important}
+html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
+/* a card that still does not fit scrolls: make the scroller visible (thin always-on bar) so nothing looks cut (mark 38) */
+html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
+/* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
+html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
 window.kitPcFrameMark=kitPcFrameMark;
 (function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
+/* §6.3i/§6.3j (kit-mark-fix r5): the rank colour + «more below» cue also run straight after every render / renderStage (and late), not only from the mutation observer — the test caught whole pages where they never ran */
+(function(){const k=()=>{try{kitPcTagColour(document);kitPcMore();requestAnimationFrame(()=>requestAnimationFrame(kitPcMore));if(typeof kitPcLate==="function")kitPcLate()}catch(e){}};for(const f of ["render","renderStage"]){if(typeof window[f]!=="function")continue;const f0=window[f];window[f]=function(){const r=f0.apply(this,arguments);k();return r};try{if(f==="render")render=window[f];else renderStage=window[f]}catch(e){}}})();
 /* KIT §6.3g: html.kpnarrow = a narrow panel (phone, < 480 px measured on #panel; iPad is html.kv2): the ONE act-card picture size per device (--kpa-d) is 72 instead of 84 */
 function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
 window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
-(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal,.pcpop,.j59dock"))return true}return false};
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcTagColour(document);kitPcMore();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document);kitPcLate()},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ /* §6.3i/§6.3j late pass (kit-mark-fix r5: the test caught a card with no rank colour + no «more» cue): the rank colour (--rt, a style attribute) and the card height (pictures, fonts) settle AFTER
+    the last childList burst, which the observer does not see → the tag colour and the «more below» cue run again 500 ms later, and kitPcMore again whenever a picture inside a card finishes loading */
+ let t2=0;function kitPcLate(){clearTimeout(t2);t2=setTimeout(()=>{kitPcTagColour(document);kitPcMore()},500)}window.kitPcLate=kitPcLate;
+ let t3=0;try{document.addEventListener("load",e=>{const x=e.target;if(x&&x.tagName==="IMG"&&x.closest&&x.closest(".pc.kpwide")){clearTimeout(t3);t3=setTimeout(kitPcMore,60)}},true)}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
@@ -52611,7 +52647,7 @@ function netMigrateAll(){if(!S)return;try{const L=[S].concat(typeof rivals!=="un
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
 /* KIT §52 / §49 (rewrite, owner 11/16 15:00Z 4.6–4.8): the SHORT word of a relation row — "Nàng → ta: thiện cảm" → Thiện cảm, "Nàng oán ta" → Oán, "Nàng ghen" → Ghen, "Hoàng thượng → ta: sủng" → Sủng, "Ta tin cậy" → Tin cậy */
-function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":/lòng/.test(l)?"Lòng":"Thiện cảm"}
+function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":"Thiện cảm"}/* OD:L352: no «Lòng» word; a «lòng» label reads Thiện cảm */
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
  /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
  let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
@@ -52631,7 +52667,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[3]);return R}
   /* KIT_REQUESTS 20/11 rel-men-servants (§52): a man, a servant, a maid, a court official reads the ONE relation model (j9 aff / oan, review/rel-men-servants)
      — never p.loyal as «Thiện cảm» beside a second aff number (law 4). men: Thiện cảm + Oán toward her, her Thiện cảm toward him; servants / officials:
-     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Lòng» = p.loyal (j15 bondBars word) and «Ta tin cậy»; not met yet → «chưa rõ».
+     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Ta tin cậy» (kit-relrows-ms1word, OD:L352 «only ONE word Thiện cảm; drop Lòng»: no «Lòng» row — p.loyal is not shown beside Thiện cảm); not met yet → «chưa rõ».
      Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
   const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
   if(isMS){const man=typeof relMan==="function"&&relMan(p);
@@ -52641,7 +52677,6 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("them",`${sj} → ta: ${(typeof KIT_REL==="object"&&KIT_REL.aff)||"thiện cảm"}`,aff(p,S),o&&o[0]);
    row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[1],"bad");
    const own=!man&&(p===S.maid||(typeof ownerOf==="function"&&ownerOf(p)===S));
-   if(own&&typeof p.loyal==="number")row("them",`${sj} → ta: lòng`,p.loyal,o&&o[2]);
    if(own&&typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[3]);
    if(man)row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[4]);
    return R}
@@ -53921,6 +53956,11 @@ KIT_SAMPLES.push({id:"§28.8d",title:"kitFigSeal: biểu tượng tâm trạng c
  if(!live)return `<div class="kitpg-row"><span>Mở một ván để xem: hình toàn thân đứng trong phòng, Dư đồ và hộp thoại đều có biểu tượng tâm trạng ở bên đầu (cùng ấn với khung chân dung).</span></div>`;
  const v=typeof rivals!=="undefined"?rivals.filter(x=>x.alive)[0]:null;
  return `<div class="kitpg-row" style="align-items:flex-start;gap:24px"><div style="width:230px;height:420px;position:relative">${kitStageFig(S,{cap:false})}</div>${v?`<div style="width:230px;height:420px;position:relative">${kitStageFig(v,{cap:false})}</div>`:""}</div>`}});
+/* §28.8e KIT_BODY body-fit box (KP09, review/kit-body-fit): every zone outlined on a woman, a maid, a eunuch, the emperor, a child + a portrait */
+KIT_SAMPLES.push({id:"§28.8e",title:"KIT_BODY: ô thân theo hình (tóc · đầu · ngực · eo · tay áo · váy · gấu)",where:"<b>KIT_BODY</b> (jbody) — rows from img/body-fit.json (Foreman C) or measured from the picture (kitFigBody + veil-fit). Layers: <code>KIT_BODY.img(cls,src,file,zone)</code> inside the one kitFxLayers stack.",html:()=>{
+ if(typeof KIT_BODY==="undefined")return "";const F=["fig-consort-c01-t1-a18.webp","fig-maid-m01-a26.webp","fig-eunuch-u01-a26.webp","fig-emperor-a26-1.webp","fig-kid-f01-a14.webp"];
+ setTimeout(()=>KIT_BODY.debugFill(document.getElementById("kitpage")),0);
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap">${F.map(f=>KIT_BODY.debugHtml(f,130)).join("")}${KIT_BODY.debugHtml("por-consort-c01-t1-a18.webp",130)}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
@@ -73269,7 +73309,7 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
  const mom=me||di;
  if(mom)X.push(kcNeed(kcCard({g:"fam",who:mom.id,n:`Làm vừa lòng ${mom.t.toLowerCase()}`,t:`Dâng quà, hầu thuốc, cùng ${mom.t.toLowerCase()} thêu thùa.`,k:2,c:{suc:-10,bac:-10},o:od(BAL.kc2.kcCard.lamVuaLong_od+mom.af/5),w:{khm:BAL.kc2.kcCard.lamVuaLong_w_khm},l:{},x:`${mom.t} với ngươi ${balSg(BAL.eff.jkc.go_4)}`,go:()=>kcAf(mom,BAL.eff.jkc.go_4)}),mom));
  for(const m of [hu,mu].filter(Boolean))X.push(kcNeed(kcCard({g:"fam",who:m.id,n:`Kết thân ${m.t.toLowerCase()}`,t:`Trò chuyện, tặng quà nhỏ cho ${m.name}.`,k:2,c:{suc:-5,bac:-5},o:od(BAL.kc2.kcCard.ketThan_od+m.af/4),w:{},l:{},x:`${m.t} với ngươi ${balSg(BAL.eff.jkc.go_5)}`,go:()=>{kcAf(m,BAL.eff.jkc.go_5);m.me+=BAL.eff.jkc.meGo},lf:[["af",m,BAL.eff.jkc.fail_6]]}),m));
- if(mu)X.push(kcNeed(kcCard({g:"fam",who:mu.id,n:"Ngáng chân thứ muội",t:"Đổi hộp phấn, giấu thiệp mời hội thơ của nàng.",k:2,c:{suc:-10,bac:-5},o:od(BAL.kc2.kcCard.ngangChanThuMuoi_od+S.tamco/3),w:{},l:{duc:-5,kgt:BAL.kc2.kcCard.ngangChanThuMuoi_l_kgt},x:"thứ muội: Sắc của nàng -3 · Danh của nàng -3 (kỳ tuyển tú)",go:()=>{mu.sac=Math.max(10,mu.sac-3);mu.danh=Math.max(0,mu.danh-3);mu.oan+=BAL.eff.jkc.oanGo},lf:[["oan",mu,BAL.eff.jkc.oanFail],["af",mu,BAL.eff.jkc.fail_7],to&&["af",to,BAL.eff.jkc.fail_8]],fail:()=>{log("Chuyện vỡ lở; tổ mẫu nhìn ngươi bằng ánh mắt khác.")}}),mu));
+ if(mu)X.push(kcNeed(kcCard({g:"fam",who:mu.id,n:"Ngáng chân thứ muội",t:"Đổi hộp phấn, giấu thiệp mời hội thơ của nàng.",k:2,c:{suc:-10,bac:-5},o:od(BAL.kc2.kcCard.ngangChanThuMuoi_od+S.tamco/3),w:{},l:{duc:-5,kgt:BAL.kc2.kcCard.ngangChanThuMuoi_l_kgt},x:`thứ muội: Sắc của nàng -${BAL.entry.phuc.foul.sac} · Danh của nàng -${BAL.entry.phuc.foul.danh} (kỳ tuyển tú)`,go:()=>{kcFoulOn(mu);mu.oan+=BAL.eff.jkc.oanGo},lf:[["oan",mu,BAL.eff.jkc.oanFail],["af",mu,BAL.eff.jkc.fail_7],to&&["af",to,BAL.eff.jkc.fail_8]],fail:()=>{log("Chuyện vỡ lở; tổ mẫu nhìn ngươi bằng ánh mắt khác.")}}),mu));
  if(di)X.push(kcNeed(kcCard({g:"fam",who:di.id,n:`Dò la viện ${di.t.toLowerCase()}`,t:`Rình xem ${di.t.toLowerCase()} bàn tính gì.`,k:2,c:{suc:-10,bac:-5},o:od(BAL.kc2.kcCard.doLaVien_od+S.tamco/3+mz/10),w:{},l:{},x:"có chứng cứ mưu tính của nàng",go:()=>{S.kc.proof[di.id]=(S.kc.proof[di.id]||0)+1},lf:[["ld",BAL.eff.jkc.kldDl],["af",di,BAL.eff.jkc.fail_9]],fail:()=>{log(`Bị ${di.t.toLowerCase()} bắt gặp.`)}}),null,"kc_di"));
  if(to&&di&&(S.kc.proof[di.id]||0)>0)X.push(kcNeed(kcCard({g:"fam",who:to.id,n:`Tố ${di.t.toLowerCase()} trước tổ mẫu`,t:`Đem chứng cứ trình tổ mẫu.`,k:2,c:{suc:-15},o:od(BAL.kc2.kcCard.toTruocToMau_od+S.kc.proof[di.id]*12+to.af/5),w:{kgt:BAL.kc2.kcCard.toTruocToMau_w_kgt},l:{duc:-3},x:`${di.t} bị tổ mẫu răn dạy, thôi hại ngươi một thời gian`,go:()=>{S.kc.proof[di.id]=0;di.oan+=BAL.eff.jkc.oanGo_2;S.kc.diBan=S.turn+4;kcAf(to,BAL.eff.jkc.go_6)},lf:[["oan",di,BAL.eff.jkc.oanFail_2],["proof",di.id]]}),to));
  if(cha||mom)X.push(kcNeed(kcCard({g:"fam",n:"Quản việc nhà",t:"Giữ sổ chi tiêu, sai bảo gia nhân.",k:3,c:{suc:-15},o:od(BAL.kc2.kcCard.quanViecNha_od+S.tamco/3),w:{tamco:2,kgt:BAL.kc2.kcCard.quanViecNha_w_kgt},l:{kgt:BAL.kc2.kcCard.quanViecNha_l_kgt},x:"Gia tư +2",go:()=>{S.kgtu=Math.min(100,S.kgtu+2)}}),null,"kc_sanh"));
@@ -73304,7 +73344,7 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
  {const mzL=n=>{if(S.maid)S.maid.loyal=cl(S.maid.loyal-n,0,100)};
   if(mom)X.push(kcNeed(kcCard({g:"fam",who:mom.id,tw:`Làm vừa lòng ${mom.t.toLowerCase()}`,n:`Hầu ${mom.t.toLowerCase()} trọn buổi`,t:`Không quà cáp: ngồi hầu thuốc, đấm lưng, thêu cùng ${mom.t.toLowerCase()} cả buổi.`,k:3,c:{suc:-20},o:od(BAL.kc2.kcCard.hauTronBuoi_od+mom.af/5),w:{khm:BAL.kc2.kcCard.hauTronBuoi_w_khm},l:{},x:`${mom.t} với ngươi ${balSg(BAL.eff.jkc.go_13)}`,go:()=>kcAf(mom,BAL.eff.jkc.go_13)}),mom));
   for(const m of [hu,mu].filter(Boolean))X.push(kcNeed(kcCard({g:"fam",who:m.id,tw:`Kết thân ${m.t.toLowerCase()}`,n:`Giúp ${m.t.toLowerCase()} một việc`,t:`Chép sách, khâu áo giúp ${m.name}, không tặng quà.`,k:3,c:{suc:-10},o:od(BAL.kc2.kcCard.giupMotViec_od+m.af/4),w:{},l:{},x:`${m.t} với ngươi ${balSg(BAL.eff.jkc.go_14)}`,go:()=>{kcAf(m,BAL.eff.jkc.go_14);m.me+=BAL.eff.jkc.meGo_3},lf:[["af",m,BAL.eff.jkc.fail_14]]}),m));
-  if(mu&&S.maid)X.push(kcNeed(kcCard({g:"fam",who:mu.id,tw:"Ngáng chân thứ muội",n:"Sai tỳ nữ ngáng chân thứ muội",t:`${S.maid.name} lén đổi hộp phấn, giấu thiệp mời hội thơ của nàng; không phải mua chuộc ai.`,k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.saiTyNuNgang_od+S.tamco/3),w:{},l:{duc:-5,kgt:BAL.kc2.kcCard.saiTyNuNgang_l_kgt},x:`thứ muội: Sắc của nàng -3 · Danh của nàng -3 (kỳ tuyển tú) · kèm: ${S.maid.name} thiện cảm ${balSg(-BAL.eff.jkc.mzL)}`,go:()=>{mzL(BAL.eff.jkc.mzL);mu.sac=Math.max(10,mu.sac-3);mu.danh=Math.max(0,mu.danh-3);mu.oan+=BAL.eff.jkc.oanGo_3},lf:[["oan",mu,BAL.eff.jkc.oanFail_3],["af",mu,BAL.eff.jkc.fail_15],to&&["af",to,BAL.eff.jkc.fail_16]],fail:()=>{mzL(BAL.eff.jkc.mzL);log("Chuyện vỡ lở; tổ mẫu nhìn ngươi bằng ánh mắt khác.")}}),mu));
+  if(mu&&S.maid)X.push(kcNeed(kcCard({g:"fam",who:mu.id,tw:"Ngáng chân thứ muội",n:"Sai tỳ nữ ngáng chân thứ muội",t:`${S.maid.name} lén đổi hộp phấn, giấu thiệp mời hội thơ của nàng; không phải mua chuộc ai.`,k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.saiTyNuNgang_od+S.tamco/3),w:{},l:{duc:-5,kgt:BAL.kc2.kcCard.saiTyNuNgang_l_kgt},x:`thứ muội: Sắc của nàng -${BAL.entry.phuc.foul.sac} · Danh của nàng -${BAL.entry.phuc.foul.danh} (kỳ tuyển tú) · kèm: ${S.maid.name} thiện cảm ${balSg(-BAL.eff.jkc.mzL)}`,go:()=>{mzL(BAL.eff.jkc.mzL);kcFoulOn(mu);mu.oan+=BAL.eff.jkc.oanGo_3},lf:[["oan",mu,BAL.eff.jkc.oanFail_3],["af",mu,BAL.eff.jkc.fail_15],to&&["af",to,BAL.eff.jkc.fail_16]],fail:()=>{mzL(BAL.eff.jkc.mzL);log("Chuyện vỡ lở; tổ mẫu nhìn ngươi bằng ánh mắt khác.")}}),mu));
   if(di)X.push(kcNeed(kcCard(S.maid?{g:"fam",who:di.id,tw:`Dò la viện ${di.t.toLowerCase()}`,n:`Sai tỳ nữ nghe ngóng viện ${di.t.toLowerCase()}`,t:`${S.maid.name} làm quen a hoàn bên ấy, nghe xem ${di.t.toLowerCase()} bàn tính gì.`,k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.kcCards_od+S.tamco/3+mz/10),w:{},l:{},x:`có chứng cứ mưu tính của nàng · kèm: ${S.maid.name} thiện cảm ${balSg(-BAL.eff.jkc.mzL)}`,go:()=>{mzL(BAL.eff.jkc.mzL);S.kc.proof[di.id]=(S.kc.proof[di.id]||0)+1},lf:[["ld",BAL.eff.jkc.kldDl],["af",di,BAL.eff.jkc.fail_17]],fail:()=>{mzL(BAL.eff.jkc.mzL);log(`${S.maid.name} bị ${di.t.toLowerCase()} bắt gặp.`)}}
    :{g:"fam",who:di.id,tw:`Dò la viện ${di.t.toLowerCase()}`,n:`Rình viện ${di.t.toLowerCase()} cả đêm`,t:`Không đút lót gia nhân: tự nấp ngoài song cửa, đợi ${di.t.toLowerCase()} bàn chuyện.`,k:3,c:{suc:-15},o:od(BAL.kc2.kcCard.kcCards_od_2+S.tamco/3),w:{},l:{},x:"có chứng cứ mưu tính của nàng",go:()=>{S.kc.proof[di.id]=(S.kc.proof[di.id]||0)+1},lf:[["ld",BAL.eff.jkc.kldDl],["af",di,BAL.eff.jkc.fail_18]],fail:()=>{log(`Bị ${di.t.toLowerCase()} bắt gặp.`)}}),null,"kc_di"));
   X.push(kcNeed(kcCard({inner:1,g:"soc",tw:"Đi lễ chùa",n:"Lên chùa chép kinh",t:"Không dâng lễ: quét sân, chép kinh giúp nhà chùa, nghe giảng kinh.",k:4,c:{suc:-20},w:{duc:2,danh:1},go:()=>kcChance("chua")}),null,"kc_chua"));
@@ -73565,6 +73605,21 @@ function kcPhucPlay(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;/* r2-r1: 
  if(skip||window.__bot||typeof playArt!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* fix: the ONE exam seam (jkc2 kc2Play contract) — kind = origin key, info.art = the art she offered, info.phuc = this is the tiểu thư Phúc tuyển */
  if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam(S.origin&&S.origin.k,raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",phuc:1});return}catch(e){console.error(e)}}
  try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
+/* review/podium-wire (OR09): the Phúc tuyển of the thứ muội + khuê hữu. Each girl is a real record with her OWN marks (law 6b), drawn once
+   from her own stats through BAL.entry.phuc (ONE CORE), kept on the record and read again by kcEnter (Điện tuyển). */
+function kcRivalsTT(){return((S.kc&&S.kc.fam)||[]).filter(x=>x&&x.alive&&(x.r==="muoi"||/^ban/.test(x.r)))}
+function kcFoulOn(m){const F=BAL.entry.phuc.foul;m.sac=Math.max(0,(m.sac||0)-F.sac);m.danh=Math.max(0,(m.danh||0)-F.danh)}
+function kcPhucLv(m){const L=BAL.entry.phuc.lv;return cl(Math.round(((m.tai||0)-L[0])/L[1]),0,L[2])}
+function kcPhucMark(m){const P=BAL.entry.phuc;if(m.praw==null){const r=(Math.random()+Math.random()+Math.random())/3;let mean;try{mean=kg82NpcMean(kcPhucLv(m))}catch(e){mean=P.max/2}
+  m.praw=cl(Math.round(mean+(r-.5)*2*P.sp),0,P.max)}
+ if(m.pduc==null)m.pduc=P.duc[0]+R(P.duc[1]);if(m.ppow==null)m.ppow=m.r==="muoi"?null:P.pow[0]+R(P.pow[1]);return m.praw}
+/* law 1 two-way: a thứ muội who holds a grudge does to her what she can do to the thứ muội (Ngáng chân) — once, in the Phúc tuyển week */
+function kcFoulBack(){const F=BAL.entry.phuc.foul;const mu=kcRivalsTT().find(x=>x.r==="muoi");if(!mu||S.kc.tt.foul!=null)return null;S.kc.tt.foul=0;
+ if((mu.oan||0)<F.oan||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
+ log(`Phúc tuyển: ${mu.name} lén đổi hộp phấn, giấu trâm của ngươi. Sắc -${F.sac} · Danh -${F.danh}.`);return mu}
+/* the ONE podium result: her mark + each girl's mark, places by mark (tie: higher Sắc, then her) — stored in S.kc.tt.pod, read by every place */
+function kcPhucPod(){const T=S.kc.tt;if(T.pod)return T.pod;const L=[{id:"me",raw:T.raw,sac:S.sac}].concat(kcRivalsTT().map(m=>({id:m.id,raw:kcPhucMark(m),sac:m.sac||0})));
+ L.sort((a,b)=>b.raw-a.raw||b.sac-a.sac||(a.id==="me"?-1:b.id==="me"?1:0));L.forEach((x,i)=>x.place=i+1);T.pod=L;T.place=(L.find(x=>x.id==="me")||{}).place;return L}
 function kcScore(st){/* st: {sac,tai,duc,danh,arts?} — the same rule for her and for the other girls */
  const W=BAL.entry.w.kc;/* ONE CORE (review/origin-intros): weights in BAL.entry.w.kc, unchanged */const arts=st.arts?Math.max(0,...Object.values(st.arts)):0;
  return st.sac*W.sac+st.tai*W.tai+st.duc*W.duc+Math.min(W.danhCap,st.danh)*W.danh+arts*W.arts+(st.raw||W.raw0)*W.raw+(st.le||0)*W.le+(st.pow||W.pow0)*W.pow+(st.th||0)*W.th+(st.ld||0)*W.ld+(st.bonus||0)}
@@ -73595,7 +73650,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
- const L=[];for(const m of S.kc.fam.filter(x=>x.alive&&(x.r==="muoi"||/^ban/.test(x.r)))){const sc=kcScore({sac:m.sac,tai:m.tai,duc:30+R(30),danh:m.danh,raw:entBotRaw()/* one bot / not-played exam score (BAL.entry.bot) */,pow:40+R(30)})+R(9)-4;
+ const L=[];for(const m of kcRivalsTT()){const raw=kcPhucMark(m);/* review/podium-wire: the same Phúc tuyển mark the podium showed (S.kc.tt.pod) */const sc=kcScore({sac:m.sac,tai:m.tai,duc:m.pduc,danh:m.danh,raw,pow:m.ppow==null?kcPow():m.ppow})+R(9)-4;
   if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(18,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=pick(TRAITS)[0];v.net=netOf(m).slice();delete v.trong;if(m.danh)v.danh=m.danh;
    rivals.push(v);try{affAdd(v,S,Math.round(m.af/2))}catch(e){}try{k61Know(v,"người nhà",true,3)}catch(e){}m.pal=v.id;L.push(v)}catch(e){console.error(e)}}}
  try{palFix()}catch(e){}deal();
@@ -78373,9 +78428,20 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 /* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
- const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
+ const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;let foul=null;try{foul=kcFoulBack();kcPhucPod()}catch(e){console.error(e)}
+  pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");/* review/podium-wire (OR09, KIT §20.1): the thứ muội + khuê hữu competed under the same rule — the podium first, then Điện tuyển */
+  let ov=null;if(!window.__bot)try{ov=kcPhucShow(k,foul,()=>{try{showModal()}catch(e){}})}catch(e){console.error(e)}if(!ov)try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
  try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(entSkipRaw())}};
+/* review/podium-wire (OR09): the Phúc tuyển podium = the ONE stored result S.kc.tt.pod (jkc kcPhucPod), on the kit podium (KIT §20.1:
+   family records carry fig / face / nameH / sub / score); faces through kcFace, never a private frame. */
+function kcPhucPod2List(k,foul){const T=S.kc.tt;const pod=T.pod||kcPhucPod();const A=(typeof ARTS!=="undefined"?ARTS:[]).find(a=>a.k===(k||T.art));
+ return pod.map(x=>{if(x.id==="me")return{who:S,place:x.place,score:`${x.raw} phần`,sub:foul?`bị ${foul.t.toLowerCase()} ngáng chân`:A?`dâng ${A.n}`:"dâng tài nghệ",you:"Ngươi"};
+  const m=kcF(x.id);if(!m)return null;let face="";try{face=kitFaceH(kcFace(m),"lg")}catch(e){}/* KIT §20.1 face = kitFaceH */
+  let nameH="";try{nameH=kitName(m)}catch(e){}if(!nameH)nameH=`<b class="kname">${m.name}</b>`;
+  return{who:m,place:x.place,score:`${x.raw} phần`,sub:/^(thứ muội|khuê hữu)$/i.test(m.t||"")?"":m.r==="muoi"?"thứ muội":"khuê hữu",fig:(()=>{try{return kitFigOf(m)||""}catch(e){return""}})()/* her own full-body home figure (fig-<fid>-kc-a18, same set as hers); "" = face only *//* the role is already the title of kitName (m.t): never twice */,face,nameH}}).filter(Boolean)}
+function kcPhucShow(k,foul,onNext){if(typeof kitPodiumShow!=="function")return null;return kitPodiumShow(kcPhucPod2List(k,foul),{title:"Phúc tuyển",sub:"Tuyển tú · Nội vụ phủ",next:"Tiếp",onNext})}
+window.kcPhucShow=kcPhucShow;window.kcPhucPod2List=kcPhucPod2List;
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();
@@ -85930,8 +85996,8 @@ if(typeof shelfWaterGame==="function"&&!KG82_KIND.tuoi){const W=SHELF_CARE.cay;
    Causes: the weather of the moment (C-AG currentWeather() / .lv when present, else S.wx) whenever someone is OUTDOORS (her outdoor acts — jweather
    wxOutActAny —, NPCs in Ngự hoa viên each buổi); garden branches, mud after rain, kitchen smoke, a fall (jweather slip), crying, and three harm acts
    played as minigames on the slap/dodge kit (jslap slapGame): Hắt nước, Hắt trà, Quạt mực.
-   Pictures: Foreman C (Magnific gpt-2-6, OD:L1196). A slot draws NOTHING until its file is in LOOKS_ART; hair / clothes slots also wait for the body-fit
-   KIT REQUEST. LAYER LAW: the last kitFxLayers wrap puts every makeup tag (img.kmkl) under every mark. ================= */
+   Pictures: Foreman C (Magnific gpt-2-6, OD:L1196). A slot draws NOTHING until its file is in LOOKS_ART; hair / clothes slots are placed by the
+   body-fit kit part KIT_BODY (jbody.js, KIT §28.8e). LAYER LAW: the last kitFxLayers wrap puts every makeup tag (img.kmkl) under every mark. ================= */
 Object.assign(BAL,{looks:{
  /* catalog: part, sac = Sắc lost per level step (lost = round(sac × level)), t = buổi until it wears off by itself per level (0 = stays until cleared) */
  cat:{smu:{part:"face",sac:2.3,t:[0,0,0,0]},bui:{part:"face",sac:1,t:[0,2,3,4]},muoi:{part:"face",sac:1.4,t:[0,0,0,0]},
@@ -86632,6 +86698,93 @@ if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
  /* hide the plain picture under a finished cloth layer; toggled on every put so a cleared effect shows the picture again */
  (function(){if(typeof kitFxPut!=="function")return;const p0=kitFxPut;kitFxPut=function(img,p,host){const r=p0.apply(this,arguments);try{if(img)img.classList.toggle("kclo-on",!!(host&&host.querySelector(".kfxf img.kclo:not(.kclo-wait)")))}catch(e){}return r}})();
  window.clothXocLayer=clothXocLayer;window.clothCacheReset=function(){for(const k of CLQ.splice(0))delete CLO[k]}/* tests: a cold cache on demand */}
+/* ================= jbody: BODY-FIT BOX · KIT_BODY (KP09, GAP v4 J7; KIT REQUEST looks-2 17/11, KIT_REQUESTS.md "BODY-FIT BOX per figure picture") — KIT §28.8e =================
+   ONE kit part that says WHERE a body part sits on any person picture, so a painted overlay (hair look, clothes look, any later robe / hair decal) lands
+   on the right place of EVERY figure and portrait, the way img/veil-fit.json does it for the lower face. Only the kit keeper changes this part (OD:L1103).
+   ZONES (KIT_BODY.zones): hair · head · chest · waist · sleeveL · sleeveR (viewer's left / right) · skirt · hem.
+   A zone row = [left%, top%, width%, height%, rotateDeg] in % of the picture box — the SAME unit as a veil-fit row (fig-*: % of the figure image box;
+   por-*: % of the portrait picture), so it drops into the one face-fx box (.kfxf over a stage figure / podium / mirror, KIT_AV over an avatar).
+   WHERE THE NUMBERS COME FROM (first hit wins):
+   1. img/body-fit.json { "<por-/fig- file>": { "<zone>": [l,t,w,h,deg], … } } — per-figure measures (Foreman C fills / corrects; a partial row overrides only its zones).
+   2. MEASURED from the picture itself (BAL.body.auto = 1): fig-* = kitFigBody (jkit: alpha bbox, head top from img/fig-ht.json, head x, torso core column,
+      width profile) + the veil-fit face box when the picture has one; por-* = the veil-fit face box only (a portrait has no feet). Ratios: BAL.body.
+      A picture with neither (no fit row, no measure yet) gets NOTHING (never a guessed place). The measure is async: a layer asked before it lands is emitted
+      hidden (img.kbody-wait) and is placed the moment the measure arrives (no re-render).
+   API: KIT_BODY.rect(file, zone) → row | null · KIT_BODY.style(file, zone) → "left:..%;top:..%;width:..%;height:..%;transform:rotate(..deg)" | "" ·
+        KIT_BODY.img(cls, src, file, zone, extraCss) → the layer <img> for a .kfxf / KIT_AV box (vars form, §28.8b CSS) ·
+        KIT_BODY.rows(file) → {zone: row} · KIT_BODY.want(file, cb) → starts the measure, cb when rows are known · KIT_BODY.debugHtml(file) (kit sample §28.8e).
+   USERS (whole group, law 11): every place that shows a person picture already runs the ONE kitFxLayers stack (stage tokens + her figure kitFigFx, event stage
+   kitStageFig .kesfx, podium kitFxPut, mirror zoom, every avatar through KIT_AV), so a KIT_FACEFX entry that emits KIT_BODY.img reaches all of them.
+   Wired here: looks-2 HAIR slots (lkhair: Tóc rối / Tóc ẩm / Hoa lá vương tóc → zone hair, file fx-hair-<id>-<lv>.png) and the CLOTHES slots the jcloth
+   bake does not paint (khoi, moc on figures; every clothes look on portraits → zone per BAL.body.cloth, file fx-cloth-<id>-<lv>.png). A slot draws only when
+   its file is in LOOKS_ART (Foreman C art; none yet → same as before: chip + Sắc). jcloth's tea / wet / mud / crease bake keeps its own cloth mask (owner-approved). ================= */
+Object.assign(BAL,{body:{auto:1,
+ /* ratios on the FIGURE body H = feet − head top (fractions of H, from the head top down); x from the measured torso core column (cl..cr) or bbox (l..r) */
+ fig:{chin:.135/* head top → chin when no face box (≈ 1 / 7.4 body) */,headW:.4/* head half-width / head height */,hairUp:.035/* hair above the skull top (buns, pins) */,
+  hairW:1.45/* hair box width / face width */,chestW:2.6/* chest half-width / head half-width */,waistW:2/* waist half-width / head half-width */,chestH:.17,waistY:.34,waistH:.08,sleeveY:.04/* below the chin */,sleeveB:.6,sleeveMin:.06/* min sleeve width, share of picture */,skirtY:.42,skirtB:.06,hemH:.1},
+ /* veil-fit face box → face: band (nose bridge) at KIT_VEIL.B0 of the box; chin at chinK of the box height; face width = box width */
+ face:{chinK:.86,eyeUp:.12/* eye line above the band, share of box height */,headK:1.5/* skull top above the eye line, × (chin − eye) */},
+ /* portrait (por-*): only head / hair / chest from the face box */
+ por:{chestH:1.1/* × face box height below the chin */,chestW:2.2/* × face width */},
+ /* clothes look → zone (looks-2 LK_CLOTH) */
+ cloth:{uot:"hem",tra:"chest",bun:"hem",xoc:"waist",khoi:"chest",moc:"hem"}}});
+window.KIT_BODY={zones:["hair","head","chest","waist","sleeveL","sleeveR","skirt","hem"],fitUrl:"https://ctm-img.victoria-tntt.workers.dev/img/body-fit.json",fit:null,A:{},AF:{},P:{},W:{},
+ load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{KIT_BODY.fit=j||{};KIT_BODY.flush()}).catch(()=>{KIT_BODY.fit={};KIT_BODY.flush()})}catch(e){this.fit={}}},
+ name:f=>String(f||"").split("?")[0].split("/").pop(),
+ /* measured rows from a kitFigBody result v (fractions) + the veil-fit face box f (% or null) */
+ calc:function(file,v,f){const B=BAL.body,R={},q=x=>+(x*100).toFixed(2),box=(l,t,r,b)=>[q(l),q(t),q(Math.max(0,r-l)),q(Math.max(0,b-t)),0],cl=(x,a,z)=>Math.max(a,Math.min(z,x));
+  const por=/^por-/.test(file);let fx=null;/* face: cx, eye y, chin y, half-width (fractions) */
+  if(f){const F=B.face,t=f[1]/100,h=f[3]/100,band=t+((window.KIT_VEIL&&KIT_VEIL.B0)||.165)*h;fx={cx:(f[0]+f[2]/2)/100,eye:band-F.eyeUp*h,chin:t+F.chinK*h,hw:f[2]/200,rot:f[4]||0,h};fx.top=fx.eye-F.headK*(fx.chin-fx.eye)}
+  if(por){if(!fx)return null;const P=B.por,G=B.fig;const ht=Math.max(0,fx.top);
+   R.head=box(fx.cx-fx.hw*1.15,ht,fx.cx+fx.hw*1.15,fx.chin);R.hair=box(fx.cx-fx.hw*G.hairW,Math.max(0,ht-G.hairUp),fx.cx+fx.hw*G.hairW,fx.eye);
+   R.chest=box(cl(fx.cx-fx.hw*P.chestW,0,1),fx.chin,cl(fx.cx+fx.hw*P.chestW,0,1),Math.min(1,fx.chin+P.chestH*fx.h));
+   for(const z of["head","hair"])R[z][4]=fx.rot;return R}
+  if(!v||!(v.b>v.t))return null;const G=B.fig,top=v.ht!=null&&v.ht>v.t?v.ht:v.t,H=v.b-top;if(H<=.05)return null;
+  const ccl=v.cl!=null?v.cl:v.l,ccr=v.cr!=null?v.cr:v.r,hx=fx?fx.cx:(v.hx!=null?v.hx:(ccl+ccr)/2);
+  const chin=fx?Math.max(fx.chin,top+.06*H):top+G.chin*H,hhw=fx?fx.hw*1.15:G.headW*(chin-top)/(v.ar||.4),headT=fx?Math.max(v.t,Math.min(top,fx.top)):top;
+  const fhw=fx?fx.hw:hhw/1.15;
+  R.hair=box(hx-fhw*G.hairW,Math.max(v.t,headT-G.hairUp*H),hx+fhw*G.hairW,fx?fx.eye:headT+(chin-headT)*.45);
+  R.head=box(hx-hhw,headT,hx+hhw,chin);
+  const xs=k=>[Math.max(ccl,hx-hhw*k),Math.min(ccr,hx+hhw*k)],cx=xs(G.chestW),wx=xs(G.waistW);/* the torso core, never wider than the shoulders / waist of THIS head */
+  R.chest=box(cx[0],chin,cx[1],chin+G.chestH*H);
+  R.waist=box(wx[0],top+(G.waistY-G.waistH/2)*H,wx[1],top+(G.waistY+G.waistH/2)*H);
+  const sy=chin+G.sleeveY*H,sb=top+G.sleeveB*H,mw=G.sleeveMin;
+  R.sleeveL=box(v.l,sy,Math.min(v.r,Math.max(cx[0],v.l+mw)),sb);R.sleeveR=box(Math.max(v.l,Math.min(cx[1],v.r-mw)),sy,v.r,sb);/* outer paint edge → the chest side, inside the body */
+  R.skirt=box(ccl,top+G.skirtY*H,ccr,v.b-G.skirtB*H);
+  const wl=v.wl&&v.wl.length?v.wl[v.wl.length-1]:v.l,wr=v.wr&&v.wr.length?v.wr[v.wr.length-1]:v.r;R.hem=box(Math.min(wl,ccl),v.b-G.hemH*H,Math.max(wr,ccr),v.b);
+  if(fx)for(const z of["head","hair"])R[z][4]=fx.rot;
+  for(const z in R){const r=R[z];r[0]=cl(r[0],0,100);r[1]=cl(r[1],0,100);r[2]=Math.min(r[2],100-r[0]);r[3]=Math.min(r[3],100-r[1])}return R},
+ faceRow:function(file){try{return window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file]||null}catch(e){return null}},
+ /* rows known now (sync); null = not yet (start the measure with want) */
+ rows:function(file){file=this.name(file);if(!file||!/^(por|fig)-/.test(file)||/unknown/.test(file))return null;this.load();
+  const J=this.fit&&this.fit[file];let A=this.A[file];if(A!==undefined&&!this.AF[file]&&this.faceRow(file)){A=undefined;delete this.A[file]}/* the face table landed after the measure */
+  if(A===undefined&&BAL.body.auto){if(/^por-/.test(file)){const f=this.faceRow(file);if(f){A=this.A[file]=this.calc(file,null,f);this.AF[file]=1}else if(window.KIT_VEIL&&KIT_VEIL.fit)A=this.A[file]=null}
+   else if(typeof kitFigBody==="function"){const src=typeof IMG_U==="function"?IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file):"https://ctm-img.victoria-tntt.workers.dev/img/"+file;const v=kitFigBody(src,this.P[file]?null:()=>KIT_BODY.landed(file,src));this.P[file]=1;if(v){const f=this.faceRow(file);A=this.A[file]=this.calc(file,v,f);this.AF[file]=f?1:0}}}
+  if(!J&&!A)return null;return Object.assign({},A||{},J||{})},
+ landed:function(file,src){try{const v=window.__KITFB&&__KITFB[src]&&__KITFB[src].v;const f=this.faceRow(file);this.A[file]=v?this.calc(file,v,f):null;this.AF[file]=f?1:0;this.flush(file)}catch(e){}},
+ want:function(file,cb){file=this.name(file);const r=this.rows(file);if(r){cb&&cb(r);return r}(this.W[file]||(this.W[file]=[])).push(cb);return null},
+ rect:function(file,zone){const r=this.rows(file);return r&&r[zone]||null},
+ style:function(file,zone){const r=this.rect(file,zone);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]||0}deg);transform-origin:50% 50%`},
+ vars:function(file,zone){const s=this.style(file,zone);return s&&typeof kitFxVars==="function"?kitFxVars(s):s},
+ img:function(cls,src,file,zone,extra){file=this.name(file);const st=this.vars(file,zone);
+  if(!st&&!(BAL.body.auto&&/^fig-/.test(file)||this.fit===null))return "";/* nothing to wait for: no row, no measure */
+  return `<img class="kbody ${cls}${st?"":" kbody-wait"}" data-kbz="${zone}" data-kbf="${file}"${extra?` data-kbx="${extra}"`:""} src="${src}" alt="" aria-hidden="true" style="${st}${extra||""}" onerror="this.remove()">`},
+ /* place the waiting layers of one file (or all) once rows are known; wake the want() callers */
+ flush:function(file){try{const L=file?[file]:Object.keys(this.W).concat([...document.querySelectorAll("img.kbody-wait")].map(i=>i.dataset.kbf));
+  for(const f of new Set(L)){const r=this.rows(f);if(!r)continue;const w=this.W[f];if(w){delete this.W[f];w.forEach(c=>{try{c&&c(r)}catch(e){}})}
+   document.querySelectorAll(`img.kbody-wait[data-kbf="${f}"]`).forEach(im=>{const st=this.vars(f,im.dataset.kbz);if(!st){im.remove();return}im.setAttribute("style",st+(im.dataset.kbx||""));im.classList.remove("kbody-wait")})}}catch(e){}},
+ /* kit sample / tests: the picture with every zone outlined */
+ debugHtml:function(file,w){file=this.name(file);const src=typeof IMG_U==="function"?IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file):"https://ctm-img.victoria-tntt.workers.dev/img/"+file,col={hair:"#e0a030",head:"#f06070",chest:"#40a0f0",waist:"#a060e0",sleeveL:"#30c090",sleeveR:"#30c090",skirt:"#7080a0",hem:"#e07030"};
+  return `<div class="kbody-dbg" data-kbf="${file}" style="position:relative;display:inline-block;width:${w||180}px"><img src="${src}" alt="" style="display:block;width:100%;height:auto">${this.zones.map(z=>`<i class="kbody-z" data-kbz="${z}" title="${z}" style="position:absolute;box-sizing:border-box;border:2px solid ${col[z]};background:${col[z]}22;${this.style(file,z)||"display:none"}"></i>`).join("")}</div>`},
+ debugFill:function(root){try{(root||document).querySelectorAll(".kbody-dbg").forEach(d=>{const f=d.dataset.kbf;KIT_BODY.want(f,()=>d.querySelectorAll(".kbody-z").forEach(i=>{const s=KIT_BODY.style(f,i.dataset.kbz);if(s)i.setAttribute("style",i.getAttribute("style").replace(/display:none|left:.*$/,"")+s)}))})}catch(e){}}};
+try{KIT_BODY.load()}catch(e){}
+(function(){const st=document.createElement("style");st.id="kbody-css";st.textContent=`.kfxf>img.kbody-wait,.kfx>img.kbody-wait{visibility:hidden!important}`;document.head.appendChild(st)})();
+/* ---- looks-2 slots (jlooks lkhair / lkcloth): painted overlays per zone, only for files Foreman C delivered (LOOKS_ART) ---- */
+(function(){if(!window.KIT_FACEFX||typeof KIT_FACEFX.get!=="function")return;const art=f=>!!(window.LOOKS_ART&&LOOKS_ART[f]);
+ const hair=KIT_FACEFX.get("lkhair");if(hair)hair.html=(p,file,z)=>z.L.map(([id,x])=>{const f=`fx-hair-${id}-${x.lv}.png`;return art(f)?KIT_BODY.img("klk klk-"+id,"https://ctm-img.victoria-tntt.workers.dev/img/"+f,file,"hair"):""}).join("");
+ const clo=KIT_FACEFX.get("lkcloth");if(clo){const h0=clo.html;clo.html=(p,file,z)=>{const fn=KIT_BODY.name(file),fig=/^fig-/.test(fn);let h=h0(p,file,z)||"";const baked=fig&&/kclo/.test(h);
+  for(const [id,x] of z.L){if(baked&&/^(xoc|tra|uot|bun)$/.test(id)&&BAL.looks&&(id==="xoc"?BAL.looks.xoc&&BAL.looks.xoc.on:BAL.looks.stain&&BAL.looks.stain.on&&BAL.looks.stain.on[id]))continue;/* jcloth painted it */
+   const f=`fx-cloth-${id}-${x.lv}.png`;if(art(f))h+=KIT_BODY.img("klk klk-"+id,"https://ctm-img.victoria-tntt.workers.dev/img/"+f,fn,BAL.body.cloth[id]||"chest")}return h}}})();
 /* ================= jdc: SEASON + COLOUR DRESS CODE (PARKING #11, review/dresscode; owner 20/11 ~19:00Z + ~19:20Z, verbatim dev/PARKING_LOT.md rows 11 / 11b) =================
    Expert pass first (OD:L1327): dev/handover/reports/dresscode-expert.md. Every number: BAL.dc (jbal2). Same rule for her and every consort (law 1).
    1. COLOURS. Ten basic families (BAL.dc.fam). A person SHOWS: the two colours of her robe = the colours of the PAINTING she wears (Foreman C's
@@ -92035,7 +92188,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5171d95477d3";window.CTM_BUILD=BUILD;
+const BUILD="08f3f4394a69";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
