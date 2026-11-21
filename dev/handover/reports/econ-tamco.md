@@ -116,3 +116,14 @@ Branch review/econ-tamco @ ea374de9c23eabe947b775cacece8127cb652067 (final-merge
 - N1 (every road «Liều» at low odds) stands, non-blocking (law 7).
 
 SẴN SÀNG KIỂM review/econ-tamco ea374de9c23eabe947b775cacece8127cb652067 (TIER BIG) — non-blocking KIT REQUESTs open (visible «paid only on success» word; row item no-break)
+
+## ECON TAMCO #4 — RE-CHECK #3 F4 (21/11) + HANDOVER
+PRIORITY #1 CHECK ('canPay|Thiếu bạc|withSeat|econRoadPay'): main j2 canPay / j19 «Thiếu bạc (cần N)» lock words, jcoopthin TH.withSeat | review/econ-tamco-rv 7752aa5b (reviewer merge, built on) | claims D #14.
+Branch review/econ-tamco @ 9f6f99c193dcca7b9cf2855aea611e2400c06b01 (TIER BIG; final-merged LIVE 666def0c; revert audit `git diff 666def0c..HEAD`: 15 files, 12 removed lines, all this branch's own — no LIVE hunk reverted).
+- **F4 fix (whole group: every frozen charge paid outside the card's own tick)**: jtamco `econLack(a,k,t,road,c)` = can she still pay the card's cost NOW (Tâm cơ road: Tâm cơ ≥ tc; bạc ≥ price (+ hire on the hire road) — ACT.ok needs bạc ≥ price for pay-on-success schemes too). Checked (1) in the runAct wrapper before econRoadPay / the frozen price: her solo act AND the co-op guest's act run on the host in her context (the host's copy of her is the authority); (2) in ptLand for a sent deed landing later. Fail → the act stops «Thiếu bạc (cần N): <act> không thành, chưa tốn gì.» / «Thiếu Tâm cơ (cần n) …» (the j19 lock words), nothing charged; the deed comes back undone. NPC roads: econRoadNpc checks and pays in the same tick (no gap).
+- econ-tamco-coop.js: staging pinned on the HOST seat (`COOPW.thin.withSeat('b')`: bạc 600, Tâm cơ 40) after every reset; new check: no step leaves bạc or Tâm cơ < 0 (her on the host, her phone, the host player). econ-tamco.test.js 3e: frozen hire / plain / tc road she can no longer pay → «Thiếu …», 0 charged, never < 0.
+- Gates (99ad3034 = same code on LIVE fafe0f62): econ-tamco-coop PASS ×3 in a row (18/19/18; 18 = the two-way step skipped, no priced scheme on the friend that moment) · econ-tamco PASS ×3 (Fold + iPad) · scan PASS Fold + iPad · kit-ton-row 14 · coop-e2e 92/92 · roadhp-unit PASS ×3 alone (1 FAIL in the long batch run; known load flake) · quickcheck PASS 244 s. On 9f6f99c1 (after the 666def0c merge): econ-tamco PASS, coop PASS 18, scan PASS, quickcheck PASS 238 s.
+
+SẴN SÀNG KIỂM review/econ-tamco 9f6f99c193dcca7b9cf2855aea611e2400c06b01 (TIER BIG)
+
+HANDOVER: context at the rollover line (START ~3 % + 25 %); this round is done (push + report). Next fixer (opened by D #14): worktree /home/user/wt/econ-tamco (sparse; server `node dev/test/sw-serve.js 8931 /home/user/wt/econ-tamco`), handover worktree /home/user/wt/ho-et. Open non-blocking KIT REQUESTs: «paid only on success» word; row item no-break (Fold «Bạc / -94»).
