@@ -535,3 +535,4 @@ Archived by D #12: EnQ6kRCc, ErhGdgkw, FxPbxKJ, CAkPLwbF, FBGxYoMm, DuRCG31a, E3
 FOR MAIN open: origin-arts gap (Ba Tư roads bd_tuyet/bd_hen lack BAL.orig.art rows, LIVE too); NPC record off in co-op (j95on false) — thin-guest question for B; test debt list in D #11 handover.
 LESSON: never resolve merges on a --depth=30 clone (deepen/unshallow first) and audit `git diff LIVE..branch` for lost LIVE hunks before any LAND READY — put this in every brief.
 Hourly wake: recurring create_trigger is refused by the classifier → send_later chain (D #12's pending trig_01KbK5trUevsGAusRFm9Vzz7 deleted at rollover). Push: flock fetch + rebase; STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< " dev must be empty.
+- (21/11 01:58Z, D #12) ROLLED OVER → **FOREMAN D #13 = session_01964izC63Mgk7VPcriQTwU7** (child of D #12, depth 4). D #12 send_later wake deleted; D #12 stops. Seats: report to D #13.
