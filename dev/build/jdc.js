@@ -93,8 +93,12 @@ function dcAsk(k,o){try{S.coopAsk=Array.isArray(S.coopAsk)?S.coopAsk:[];const a=
 /* a thiện cảm change as the kit words it (jaudit pvQuy, KIT_REL) */
 function dcRelW(v,n){try{if(typeof pvQuy==="function")return pvQuy(v,n)}catch(e){}return `thiện cảm ${n>0?"+":""}${n}`}
 /* the tuần clock of a loan («qua tuần sau trả»): S.turn counts MONTHS (j3 monthTick), S.tuan the tuần in it (0..2); before r4 the due
-   date was S.turn, so a loan stayed out a whole month (old saves: their small month-scale dates come due at once) */
-function dcWk(){return (S.turn|0)*10+(S.tuan|0)}
+   date was S.turn, so a loan stayed out a whole month. r3 review: LINEAR (= j8 wk(), 3 tuần a month) so a count of tuần can be added.
+   S.turn is each seat's OWN life clock (co-op never syncs it): a loan handed to the other seat carries the room week (cw) and the receiver
+   moves its due onto its own clock (dcDueIn) — before, a seat whose clock ran behind kept a returned piece for good (coop-dresscode-scan). */
+function dcWk(){return (S.turn|0)*3+(S.tuan|0)}
+function dcCW(){try{return (window.COOP&&COOP.state&&COOP.state.week)|0}catch(e){return 0}}
+function dcDueIn(a){return dcWk()-(a&&a.cw!=null?Math.max(0,dcCW()-(a.cw|0)):0)}
 function dcBid(e){return e&&e.bor&&e.bor.id}
 /* the third road (same for everyone): buy a trâm of a missing colour at her own phẩm or under it from Nội vụ phủ — the cheapest that fits; a real new piece */
 function dcBuyFit(p,fams){try{const P=Math.min(8,wdPOf(p));let best=null;for(let q=Math.max(0,P);q>=0;q--)for(const k of wdPool("tram",q,true)){const w=WD_ITEMS[k];const c=dcPiece(k);if(!w||w.nt||!c||!fams.includes(c[0]))continue;if(!best||w.pr<best.pr)best={k,f:c[0],pr:w.pr|0,w}}return best}catch(e){return null}}
@@ -111,7 +115,7 @@ function dcBorrow(to,from,e){const D=BAL.dc;const inv=dcInv(from);const i=inv.in
  const gLend=dcGuest()&&from===S&&to!==S&&!to.coop;
  if(!gLend){if(sl==="tram"){const prev=w.tram;if(prev)dcInv(to).push(Object.assign(prev,{dcPrev:1}));w.tram=b}else dcInv(to).push(b)}
  dcRec(from,b);
- if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k,due:b.bor.due,b:dcSnap(b)});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,wear:sl==="tram"?1:0})}
+ if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k,due:b.bor.due,cw:dcCW(),b:dcSnap(b)});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,cw:dcCW(),wear:sl==="tram"?1:0})}
  try{affAdd(from,to,-D.bor.use);affAdd(to,from,D.bor.thanks)}catch(x){}/* the same for everyone: the lender spends goodwill, the borrower owes thanks */
  return true}
 /* give back every piece whose festival tuần has passed (her seat handles the pieces she holds and the pieces she lent) */
@@ -155,7 +159,7 @@ function dcLedger(back){const L=[S].concat(dcWorld()?(typeof rivals!=="undefined
    if(own===S&&dcCoop()){S.dcGot=Array.isArray(S.dcGot)?S.dcGot:[];if(S.dcGot.includes(r.bid))continue;S.dcGot=S.dcGot.slice(-19).concat([r.bid])}
    dcInv(own).push(e);back.push([e,F&&F.p||own,own])}}}
 function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
- const scan=(p,mine)=>{if(!p)return;const w=wdOf(p);const W=dcWorld(),G=dcGuest();const isMe=f=>f===me||f==='me'||/^me:/.test(f||'');const due=e=>e&&e.bor&&e.bor.due<dcWk()&&(mine||(W&&(isMe(e.bor.from)||/^id:/.test(e.bor.from)))||(G&&isMe(e.bor.from)));
+ const scan=(p,mine)=>{if(!p)return;const w=wdOf(p);const W=dcWorld(),G=dcGuest();const isMe=f=>f===me||f==='me'||/^me:/.test(f||'');const due=e=>e&&e.bor&&e.bor.due<dcWk()&&(mine||(W&&(isMe(e.bor.from)||/^id:/.test(e.bor.from))));/* r3: the guest's lent pieces on her copies of NPCs: her book (dcLedger, her clock) settles them, not the host's due on the copy */
   if(w&&due(w.tram)){const e=w.tram;const o=dcGiveBack(p,e,"slot");back.push([e,p,o])}
   for(const e of dcInv(p).slice())if(due(e)){const o=dcGiveBack(p,e,"inv");back.push([e,p,o])}};
  const sc=(p,m)=>{try{scan(p,m)}catch(x){console.error("dcReturn",x)}};/* one odd chest never stops the others' returns */
@@ -276,9 +280,10 @@ function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);retu
   for(const t of (a.b?[e=>!!iu&&e.iu===iu,e=>!e.iu]:[()=>true])/* a request without the piece (old client): any of that kind, as before */){const i=inv.findIndex(e=>m(e)&&t(e));if(i>=0){inv.splice(i,1);ok=1;break}if(w&&m(w.tram)&&t(w.tram)){w.tram=null;ok=1;break}}
   if(!ok&&a.bid)v.dcNo=(Array.isArray(v.dcNo)?v.dcNo:[]).slice(-19).concat([a.bid]);
   if(ok&&a.b&&a.bid){/* the NPC's loan book (the guest's copy of the NPC is not the world): the piece comes back through her «dcin» */const L=v.dcLent=Array.isArray(v.dcLent)?v.dcLent:[];
-   if(!L.some(r=>r&&r.bid===a.bid))L.push({bid:a.bid,k:a.pk,iu:a.b.iu||0,to:"id:"+(window.COOPW.seat==="a"?902:901),due:a.due!=null?a.due:dcWk(),e:a.b})}return ok};
+   if(!L.some(r=>r&&r.bid===a.bid))L.push({bid:a.bid,k:a.pk,iu:a.b.iu||0,to:"id:"+(window.COOPW.seat==="a"?902:901),due:dcDueIn(a),e:a.b})}return ok};
  /* dcin: a piece goes into the NPC's chest; a loan TO the NPC is worn (her own trâm kept aside, dcPrev, as dcBorrow does) */
- CW.askH.dcin=function(a){const v=npc(a.to);if(!v||!a.e||!a.e.k)return 0;const e=JSON.parse(JSON.stringify(a.e));const w=wdOf(v);const bid=dcBid(e);
+ CW.askH.dcin=function(a){const v=npc(a.to);if(!v||!a.e||!a.e.k)return 0;const e=JSON.parse(JSON.stringify(a.e));
+  if(e.bor&&!a.rb){e.bor.due=dcDueIn(a);if(e.bor.due<dcWk())return 1}/* r3: a loan TO the NPC on this seat's clock; arrived after its tuần (at the merge): it is over, the lender's book takes it home on her seat */const w=wdOf(v);const bid=dcBid(e);
   if(a.rb)dcUnrec(v,a.rb);/* the guest gave back what she borrowed: off the NPC's book */
   if(a.rb&&Array.isArray(v.dcNo)&&v.dcNo.includes(a.rb))return 1;/* r3: that loan was refused here (dcout above): the piece never left this NPC, nothing comes back */
   if(bid&&((w.tram&&dcBid(w.tram)===bid)||dcInv(v).some(x=>dcBid(x)===bid)))return 1;

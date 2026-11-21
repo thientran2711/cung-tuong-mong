@@ -109,7 +109,7 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
  ok(await A.p.evaluate(INST,['A',true])&&await B.p.evaluate(INST,['B',false]),'scan hooks on both seats');
  await A.p.evaluate(()=>__stock(1));await B.p.evaluate(()=>__stock(2));
  const FS=await A.p.evaluate(()=>Object.keys(BAL.dc.fest).filter(k=>FEST[k]));let rs=4242;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
- let prev=new Set(),persist=[],trans=0,weeksOk=0,dist={move:0,box:0,pid:0};const t0=Date.now();
+ let prev=new Set(),persist=[],jl=[],clk=[],trans=0,weeksOk=0,dist={move:0,box:0,pid:0};const t0=Date.now();
  for(let w=0;w<NW;w++){if(w%12===0){await A.p.evaluate(r=>__stock(r),w);await B.p.evaluate(r=>__stock(r),w+5)}
   const yr=await A.p.evaluate(()=>S.year);const fk=rnd()<.6?FS[Math.floor(rnd()*FS.length)]:null;
   for(const o of [A,B])await o.p.evaluate(fk=>{window.__FK=fk},fk);
@@ -122,14 +122,17 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
   const okw=await weekAll(A,B,'w'+w);if(okw)weeksOk++;await sleep(1200);
   for(const o of [A,B])await o.p.evaluate(()=>{window.__FK=null});
   /* the count: host world + the guest's own S */
+  {const ka=await A.p.evaluate(()=>[dcWk(),S.turn,S.tuan,__co().week]),kb=await B.p.evaluate(()=>[dcWk(),S.turn,S.tuan,__co().week]);if(ka[0]!==kb[0]){clk.push([w,ka,kb]);console.log('CLOCK',w,JSON.stringify(ka),JSON.stringify(kb))}}
   const ca=await A.p.evaluate(()=>__census()),cb=await B.p.evaluate(()=>__census());const ta=await A.p.evaluate(()=>__T),tb=await B.p.evaluate(()=>__T);
   const all=Object.assign({},ta,tb);const now=new Set();
-  for(const sc in all){const L=(ca[sc]||[]).map(x=>'A:'+x).concat((cb[sc]||[]).map(x=>'B:'+x));if(L.length!==1){now.add(sc);if(prev.has(sc)){const x={w,sc,k:all[sc].k,lender:all[sc].lender,to:all[sc].to,lw:all[sc].wk,at:L};persist.push(x);if(!prev.has('!'+sc))console.log('PERSIST',JSON.stringify(x));if(process.env.COOP_DBG)console.log('DBG',JSON.stringify(await A.p.evaluate(sc=>{const I=S.il||{};const bx=(I.box||[]).filter(x=>x&&x.e&&x.e.sc===sc).map(x=>({at:x.at,why:x.why,own:x.own,w:x.w,by:x.by,iu:x.e.iu,bor:x.e.bor}));const ius=[...new Set(bx.map(x=>x.iu))];const ppl=[S].concat(rivals).map(p=>[p.id,p.alive,(p.inv||[]).filter(e=>e&&e.sc===sc).map(e=>[e.iu,e.bor])]).filter(x=>x[2].length);return{bx,ppl,log:(I.log||[]).filter(l=>ius.includes(l[1])).slice(-12),lent:rivals.filter(v=>(v.dcLent||[]).some(r=>r.e&&r.e.sc===sc)).map(v=>[v.id,v.alive,v.dcLent.filter(r=>r.e&&r.e.sc===sc)])}},sc)));now.add('!'+sc)}else{trans++;console.log('trans',w,sc,JSON.stringify(all[sc]),JSON.stringify(L))}}}
+  for(const sc in all){const L=(ca[sc]||[]).map(x=>'A:'+x).concat((cb[sc]||[]).map(x=>'B:'+x));if(L.length!==1){now.add(sc);if(prev.has(sc)){const x={w,sc,k:all[sc].k,lender:all[sc].lender,to:all[sc].to,lw:all[sc].wk,at:L};x.lo=await A.p.evaluate(sc=>{const I=S.il||{};const ius=new Set();for(const b of I.box||[])if(b&&b.e&&b.e.sc===sc&&b.e.iu)ius.add(b.e.iu);for(const p of [S].concat(rivals))for(const e of p.inv||[])if(e&&e.sc===sc&&e.iu)ius.add(e.iu);return (I.log||[]).some(l=>ius.has(l[1])&&(/^lo\d/.test(String(l[3]))||/^lo\d/.test(String(l[4]))))&&![S].concat(rivals).some(p=>[wdOf(p).tram].concat(p.inv||[]).some(e=>e&&e.sc===sc&&e.bor))},sc);(x.lo?jl:persist).push(x);if(!prev.has('!'+sc))console.log('PERSIST',JSON.stringify(x));if(process.env.COOP_DBG)console.log('DBG',JSON.stringify(await A.p.evaluate(sc=>{const I=S.il||{};const bx=(I.box||[]).filter(x=>x&&x.e&&x.e.sc===sc).map(x=>({at:x.at,why:x.why,own:x.own,w:x.w,by:x.by,iu:x.e.iu,bor:x.e.bor}));const ius=[...new Set(bx.map(x=>x.iu))];const ppl=[S].concat(rivals).map(p=>[p.id,p.alive,(p.inv||[]).filter(e=>e&&e.sc===sc).map(e=>[e.iu,e.bor])]).filter(x=>x[2].length);return{bx,ppl,log:(I.log||[]).filter(l=>ius.includes(l[1])).slice(-12),lent:rivals.filter(v=>(v.dcLent||[]).some(r=>r.e&&r.e.sc===sc)).map(v=>[v.id,v.alive,v.dcLent.filter(r=>r.e&&r.e.sc===sc)])}},sc)));now.add('!'+sc)}else{trans++;console.log('trans',w,sc,JSON.stringify(all[sc]),JSON.stringify(L))}}}
   prev=now;if(w%8===7)console.log('week',w,'tags',Object.keys(all).length,'persist',persist.length,'trans',trans,Math.round((Date.now()-t0)/1000)+'s')}
  const sa=await A.p.evaluate(()=>__st),sb=await B.p.evaluate(()=>__st);
  ok(weeksOk>=72,`≥ 2 bot years merged (${weeksOk}/${NW} weeks advanced for both)`);
  ok(sa.her+sb.her>=3&&sa.lend+sb.lend>=3&&sa.npc>=10&&sb.her>=1,`loans on every road (host her ${sa.her} lend ${sa.lend} NPC↔NPC ${sa.npc} · guest her ${sb.her} lend ${sb.lend})`,{sa,sb,dist});
+ ok(!clk.length,`both seats on the same loan clock (dcWk) after every merged week (${clk.length} weeks differ)`,clk.slice(0,4));
  ok(!persist.length,`every lent piece in exactly ONE place over both seats after each merged week (${persist.length} persistent, ${trans} one-week transients)`,persist.slice(0,6));
+ console.log(`PRE-EXISTING outside the loan code (the piece, no longer lent, went through a jlost «thất lạc» case on the host: jky «giữ lại» / jlost lostReturn): ${jl.length} tuần`,JSON.stringify(jl.slice(0,4)));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
