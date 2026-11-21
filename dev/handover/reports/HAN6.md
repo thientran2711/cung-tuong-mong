@@ -49,3 +49,14 @@ STATUS: waiting for the owner's verdict via Foreman C #27 (session_01D3E3NaDamfS
 The deeper band (s62_t3_HAN_BOW_L1955.txt) is NOT drawn; it needs a new gen + the owner's/#27's OK.
 
 ## OWNER L1958 (via #27): Tang drama vs history costume research → dev/handover/reports/HAN6_TANG_DRAMA_RESEARCH_L1958.md (VN, words only)
+
+## OWNER L1965 (via #27)
+(1) Research suggestions approved, applied to Hán t1–t8 → s62_t{1,2}_HAN_COLLAR_L1965, s62_t3_HAN_BOW_L1965, s62_t{4..8}_HAN_COLLAR_L1965 (+.keep). Generator: make_han_L1965.py.
+Bases: t1/t2 L1955, t3 BOW_L1955, t4–t8 L1915.
+- Trims: cuffs get ", the widest trim"; the hem border gets "(narrower than the cuffs, wider than the collar)". t1 "narrow" cuffs/hem → wide / plain wording. Collar and band words untouched (G62/G66 verified verbatim).
+- t6/t7/t8 embroidery: "flowing cloud scrolls and small birds (t7 + small phoenixes; t8 phoenixes among cloud scrolls), Han cloud-riding embroidery, no large flowers".
+- Head ornaments by rank: t3 + one small gold hairpin; t5 + a pair of small gold bu yao; t6 + gold bu yao; t7 + tall gold bu yao; t8 + the tallest gold bu yao. t1/t2/t4 unchanged (already stepped).
+- Fit trims (only in files > 9995, check_store-tested): "her head turns together… never in profile." and "the small embroidered motifs are stitched in fine gold thread." (both duplicates).
+- ch 9870/9971/9946/9834/9564/9937/9956/9987. keep PASS ×8. check_store = exactly the base FAILs (waived) ×8. No pendant word. G60/G61 untouched.
+- A49 sample: t6 sent to VE7 (1 @55), sheet han_t6_L1965.png (CŨ SyhrsOsUb8 | MỚI).
+(2) Weave vs embroidery vs print research (VN): dev/handover/reports/HAN6_WEAVE_VS_EMBROIDERY_L1965.md.
