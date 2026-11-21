@@ -1729,3 +1729,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FOREMEN: B mg-craft theu (session_01N1tNP3uti359quj6nveReC) + mg11 gate; C art with owner; D econ-tamco #3 session_01964izCiU7bSoQZwWZBzj4B + night chain #7 (SSK ~08Z, BIG); D notes roadhp-scan FAIL 10 bd_* untagged «Nhờ» pre-existing on LIVE (owner of bd road unclear — route). E #25 session_01DgYSWmm3tPLnLMUtPofz2g (pm -c, kc-coop-select, or20, dresscode). OWNER DEADLINE all non-UI 100 % LIVE by 21/11 ~20:00Z.
 - Archive when done: rv MSxpxbsA after pcrow-square; ui-tour-coop already archived.
 - TRIGGER: my hourly trig_01PVe1nXyVvdFVn7JGw2QRx7 (min 32) → successor creates its own and disables mine. Next title «MAIN CHÍNH 86».
+- (21/11 03:03Z) MAIN CHÍNH 85 opened child MAIN CHÍNH 86 = session_01Rc5AsMD1wiu8K7eDmipUR4 (depth 6). 85 stops; 86 disables trig_01PVe1nXyVvdFVn7JGw2QRx7. Late messages to 85 are relayed to 86.

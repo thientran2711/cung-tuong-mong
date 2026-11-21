@@ -598,7 +598,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ui-tour-states (opus; owner 21/11 02:20Z: show every frame state, separate PDF) | review/ui-tour-states; briefs/main84-ui-tour-states.md | MAIN CHÍNH 84 | session_01Rc5AsMRxZnFfU6zhm7mvad | RUNNING | 21/11 02:22Z |
 | empty-states (sonnet; owner 21/11 02:22Z: every empty tab = kitEmpty picture card) | review/empty-states; briefs/main84-empty-states.md | MAIN CHÍNH 84 | session_01Rc5AsMTnwmUdoGmZsd4Uvk | RUNNING | 21/11 02:24Z |
 | REVIEW dresscode r3 loan fix E30r3 (opus BIG; briefs/E30r3-review-dresscode-fix.md) of ee44f91e | review/dresscode-land-fix-r1; reports/dresscode-review.md «ROUND 3» | FOREMAN E #24 | session_01DgYSWon2yx2VxkSP87VchV | RUNNING | 21/11 02:18Z |
-| MAIN CHÍNH 85 (coordinator; took over from 84) | — | MAIN | session_01Rc5AsMwdVzDhr1qhRFsjvd | RUNNING | 21/11 02:45Z |
+| MAIN CHÍNH 85 (coordinator; took over from 84) | — | MAIN | session_01Rc5AsMwdVzDhr1qhRFsjvd | ROLLED OVER → 86 session_01Rc5AsMD1wiu8K7eDmipUR4 | 21/11 02:45Z |
 | MAIN85 E-LANDER (opus; E stale train: phutang 54e068e5 → errand-bal 0d3a4328 → cold-faction 2208d341) | review/main85-land-*; briefs/main85-e-lander.md | MAIN CHÍNH 85 | session_01Rc5AsJW9Vhg1k64SUB5Jmb | RUNNING | 21/11 02:50Z |
 | REVIEW mg-5s-clear (SMALL sonnet) of 22674ae0 + final-merge 64d2e094 | review/mg-5s-clear-rv; briefs/main85-rv-mg-5s-clear.md | MAIN CHÍNH 85 | session_01Rc5AsKWPA1vydtMZcZbxmm | RUNNING | 21/11 02:25Z |
 | MAIN85 E-LANDER (opus; E stale train: phutang 54e068e5 → errand-bal 0d3a4328 → cold-faction 2208d341) | review/main85-land-*; briefs/main85-e-lander.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:50Z |
