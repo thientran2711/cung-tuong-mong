@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t7_THU_COMOI_v8d.txt
+allow: the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2): replaced by OUTER_TIED
+allow: with stately grace, the robe falling still and straight.  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); G23 gate: walking pose + 'still and straight' contradict
+allow: mirrored: her weight and the item on her LEFT side  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); E1 gate: 14-angle table words
+allow: eyes open, floor-length robe with slippers visible, no train  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); S19 gate: store feet tail (G23 owner 20/11)
+allow: never copy anything but its colour  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of 'Image 2 is only a colour reference' (A38 std trim list)
