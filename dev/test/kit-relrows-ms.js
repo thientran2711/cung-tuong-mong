@@ -1,7 +1,7 @@
 /* review/kit-relrows-ms (KIT §52 kitRelRows, KIT_REQUESTS 20/11 rel-men-servants): a man / servant / maid / court official reads the ONE relation model (j9 aff/oan)
    — ONE «Thiện cảm» number per pair (law 4). Whole family scan over relMSAll() + every man:
    - «→ ta: thiện cảm» == aff(p,S); «oán ta» == oan(p,S); no row shows p.loyal under «thiện cảm» (unless it equals aff);
-   - men: «Ta → hắn: thiện cảm» == aff(S,p), no «Tin cậy»; her own servants (S.maid / ownerOf(p)===S): «Lòng» == p.loyal + «Ta tin cậy» == tinOf(p);
+   - men: «Ta → hắn: thiện cảm» == aff(S,p), no «Tin cậy»; her own servants (S.maid / ownerOf(p)===S): NO «Lòng» row (OD:L352, kit-relrows-ms1word) + «Ta tin cậy» == tinOf(p);
      other servants / officials: Thiện cảm + Oán only; not met (relMSMet false) → one «chưa rõ» row;
    - the person card left key (pcfKey) shows the same numbers (rendered, Fold + iPad shots).
    Needs a build WITH review/rel-men-servants (relMSAll); on LIVE it prints SKIP (old branch kept, guarded).
@@ -27,7 +27,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
     if(!o||o.now!==Math.round(oan(x,S)))f.push(lab+': Oán '+(o&&o.now)+' != oan '+oan(x,S));
     const th=R.filter(z=>z.dir==='them'&&z.w==='Thiện cảm');if(th.length!==1)f.push(lab+': '+th.length+' «Thiện cảm» rows toward her');
     if(man){const m=g(/Ta → .*thiện cảm/,'me');if(!m||m.now!==Math.round(aff(S,x)))f.push(lab+': Ta → hắn '+(m&&m.now)+' != '+aff(S,x));if(g(/tin cậy/i))f.push(lab+': man has Tin cậy')}
-    else if(own){const l=g(/lòng/,'them');if(typeof x.loyal==='number'&&(!l||l.now!==Math.round(x.loyal)||l.w!=='Lòng'))f.push(lab+': Lòng row wrong');const t=g(/tin cậy/i,'me');if(typeof tinOf==='function'&&(!t||t.now!==Math.round(tinOf(x))))f.push(lab+': Ta tin cậy wrong')}
+    else if(own){if(g(/lòng/i)||R.some(r=>/lòng/i.test(r.w||'')))f.push(lab+': shows a Lòng row (OD:L352: one word Thiện cảm)');const t=g(/tin cậy/i,'me');if(typeof tinOf==='function'&&(!t||t.now!==Math.round(tinOf(x))))f.push(lab+': Ta tin cậy wrong')}
     else{if(g(/lòng|tin cậy/i))f.push(lab+': not her servant but shows Lòng/Tin cậy')}
     tab.push(pass+' '+(man?'man':own?'own':'srv')+' '+lab+' → '+R.map(z=>z.w+'='+(z.now==null?'?':z.now)).join(' '))}}
    window.relMSMet=met0;const kinds={};tab.forEach(t=>{const k=t.split(' ').slice(0,2).join(' ');kinds[k]=(kinds[k]||0)+1});tab.unshift('kinds '+JSON.stringify(kinds));

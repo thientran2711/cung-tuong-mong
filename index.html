@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)","b":"532eba7d7bce","h":[{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"}]};
+window.CTM_BI={"s":"7af6a13f+","t":"2026-11-21T17:22Z","c":"SELF-MERGE LAND jemo-bal: merge LIVE 93704ee1 (index.html/sw.js rebuilt)","b":"1c61ffa81287","h":[{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -52031,7 +52031,7 @@ function netMigrateAll(){if(!S)return;try{const L=[S].concat(typeof rivals!=="un
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
 /* KIT §52 / §49 (rewrite, owner 11/16 15:00Z 4.6–4.8): the SHORT word of a relation row — "Nàng → ta: thiện cảm" → Thiện cảm, "Nàng oán ta" → Oán, "Nàng ghen" → Ghen, "Hoàng thượng → ta: sủng" → Sủng, "Ta tin cậy" → Tin cậy */
-function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":/lòng/.test(l)?"Lòng":"Thiện cảm"}
+function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":"Thiện cảm"}/* OD:L352: no «Lòng» word; a «lòng» label reads Thiện cảm */
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
  /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
  let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
@@ -52051,7 +52051,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[3]);return R}
   /* KIT_REQUESTS 20/11 rel-men-servants (§52): a man, a servant, a maid, a court official reads the ONE relation model (j9 aff / oan, review/rel-men-servants)
      — never p.loyal as «Thiện cảm» beside a second aff number (law 4). men: Thiện cảm + Oán toward her, her Thiện cảm toward him; servants / officials:
-     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Lòng» = p.loyal (j15 bondBars word) and «Ta tin cậy»; not met yet → «chưa rõ».
+     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Ta tin cậy» (kit-relrows-ms1word, OD:L352 «only ONE word Thiện cảm; drop Lòng»: no «Lòng» row — p.loyal is not shown beside Thiện cảm); not met yet → «chưa rõ».
      Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
   const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
   if(isMS){const man=typeof relMan==="function"&&relMan(p);
@@ -52061,7 +52061,6 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("them",`${sj} → ta: ${(typeof KIT_REL==="object"&&KIT_REL.aff)||"thiện cảm"}`,aff(p,S),o&&o[0]);
    row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[1],"bad");
    const own=!man&&(p===S.maid||(typeof ownerOf==="function"&&ownerOf(p)===S));
-   if(own&&typeof p.loyal==="number")row("them",`${sj} → ta: lòng`,p.loyal,o&&o[2]);
    if(own&&typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[3]);
    if(man)row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[4]);
    return R}
@@ -90929,7 +90928,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="532eba7d7bce";window.CTM_BUILD=BUILD;
+const BUILD="1c61ffa81287";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

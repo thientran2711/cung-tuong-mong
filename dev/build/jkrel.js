@@ -17,7 +17,7 @@
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
 /* KIT §52 / §49 (rewrite, owner 11/16 15:00Z 4.6–4.8): the SHORT word of a relation row — "Nàng → ta: thiện cảm" → Thiện cảm, "Nàng oán ta" → Oán, "Nàng ghen" → Ghen, "Hoàng thượng → ta: sủng" → Sủng, "Ta tin cậy" → Tin cậy */
-function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":/lòng/.test(l)?"Lòng":"Thiện cảm"}
+function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":"Thiện cảm"}/* OD:L352: no «Lòng» word; a «lòng» label reads Thiện cảm */
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
  /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
  let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
@@ -37,7 +37,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[3]);return R}
   /* KIT_REQUESTS 20/11 rel-men-servants (§52): a man, a servant, a maid, a court official reads the ONE relation model (j9 aff / oan, review/rel-men-servants)
      — never p.loyal as «Thiện cảm» beside a second aff number (law 4). men: Thiện cảm + Oán toward her, her Thiện cảm toward him; servants / officials:
-     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Lòng» = p.loyal (j15 bondBars word) and «Ta tin cậy»; not met yet → «chưa rõ».
+     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Ta tin cậy» (kit-relrows-ms1word, OD:L352 «only ONE word Thiện cảm; drop Lòng»: no «Lòng» row — p.loyal is not shown beside Thiện cảm); not met yet → «chưa rõ».
      Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
   const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
   if(isMS){const man=typeof relMan==="function"&&relMan(p);
@@ -47,7 +47,6 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("them",`${sj} → ta: ${(typeof KIT_REL==="object"&&KIT_REL.aff)||"thiện cảm"}`,aff(p,S),o&&o[0]);
    row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[1],"bad");
    const own=!man&&(p===S.maid||(typeof ownerOf==="function"&&ownerOf(p)===S));
-   if(own&&typeof p.loyal==="number")row("them",`${sj} → ta: lòng`,p.loyal,o&&o[2]);
    if(own&&typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[3]);
    if(man)row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[4]);
    return R}
