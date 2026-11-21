@@ -22,3 +22,4 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ramp, Thử tay overlap, trò Dung, loading bar c3a398dd; Điều hương, Đầu hồ + Bắn cung (red for re-test), Thân cận 64d2e094.
 | 18 | 02:36 | Hoàng tự: top strip (sub-tabs + portraits) scrolls away; must be FIXED like Hậu cung (one shared person-tab frame). Also: no files until she says done | owner-2111-strip-fixed-1/2.jpg | keeper | in work | — |
 | 19 | 02:38 | Intro text lines above person strips (Kén rể «Con các nhà quyền thần…», «Con của các phi tần khác…») → into a round «!» top-right; top block ONE fixed size in every person tab, never grows | owner-2111-intro-text.jpg | keeper | in work | — |
+| 20 | 02:40 | APPROVED example: Kén rể «Dò hỏi gia thế» card — size per device (iPad bigger/taller, phone smaller) → reference for all person-tab cards | owner-2111-card-good.jpg | keeper (reference) | noted | — |
