@@ -20,3 +20,4 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | 16 | 02:24 | Panel scrolls with no extra content → must stand still | owner-2111-noscroll.jpg | empty-states | in work | — |
 | 17 | 02:30 | Hoàng tự card: Fold vs iPad different layouts; tiny avatar + empty bands → one shared person layout | owner-2111-hoangtu-fold/ipad.jpg | keeper | in work | — |
 Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ramp, Thử tay overlap, trò Dung, loading bar c3a398dd; Điều hương, Đầu hồ + Bắn cung (red for re-test), Thân cận 64d2e094.
+| 18 | 02:36 | Hoàng tự: top strip (sub-tabs + portraits) scrolls away; must be FIXED like Hậu cung (one shared person-tab frame). Also: no files until she says done | owner-2111-strip-fixed-1/2.jpg | keeper | in work | — |
