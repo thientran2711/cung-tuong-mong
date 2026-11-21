@@ -1161,8 +1161,8 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
        (it may be a few px wider than the column's content box; it overflows equally on both sides, never only to the right);
    (2) every row under the frame (.pcrows niên hiệu, .kpkey Biết tên / X → ta / Sủng, .kpgrid, .kpfacts, .kwear) starts ONE gap (KIT_PFO.gap) under the frame's
        carved BAND bottom = the frame's real bottom edge, so the rows lie over the pendant + tassel (no empty band); band = KIT_PFO.band[frame] in canvas units
-       (550x1037), measured on every frame picture (alpha: first row under the opening narrower than 60 % of the canvas). The pendant / tassel stays part of the
-       frame picture (its own layer later, PARKING_LOT #12 animation); the rows read on it through the kit text halo (--kts). */
+       (550x1037), measured on every frame picture (alpha: first row under the opening narrower than 60 % of the canvas). The frame stays ONE
+       whole picture (border + pendant + tassel; a later animation moves the whole frame, PARKING_LOT #12); the rows lie on top of it in the NORMAL kit text, no halo (owner 21/11 ~19:25Z / ~19:30Z). */
 const KIT_PFO={gap:10,dflt:770,band:{cold:763,"consort-0":751,"consort-1":750,"consort-2":756,"consort-3":760,"consort-4":763,"consort-5":775,"consort-6":775,"consort-7":786,emp:784,
  "eunuch-0":762,"eunuch-1":762,"eunuch-2":762,"eunuch-3":764,guard:760,heir:779,"maid-0":763,"maid-1":763,"maid-2":763,"maid-3":763,"maid-4":763,"mama-0":771,"mama-1":771,"mama-2":771,"mama-3":771,"mama-4":771,
  man:771,official:769,physician:774,prince:765,princess:760,royal:769,thaihau:771,unknown:764},
@@ -1189,10 +1189,9 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
 .pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
 .pc.kpwide[data-k2]>.pcl>.kpkey{order:1!important}
-/* §4.1c frame column: the frame is centred on the column (overflows both sides equally); the rows after it sit ABOVE the pendant + tassel with the kit text halo */
+/* §4.1c frame column: the frame is centred on the column (overflows both sides equally); the rows after it sit ABOVE the pendant + tassel in the NORMAL kit text (owner 21/11 ~19:25Z: no halo / glow / outline) */
 html body .pc[data-k2]>.pcl>.pcp.kit.kit.kpfo,html body .pc>.pcl>.pcp.kit.kit.kpfo{align-self:center!important;justify-self:center!important;margin-left:0!important;margin-right:0!important;flex-shrink:0}/* auto side margins would pin an overflowing frame to the left */
 .pc>.pcl>.pcp.kit.kpfo~:is(.pcrows,.kpkey,.kpgrid,.kpfacts,.kwear){position:relative;z-index:2}
-.pc>.pcl>.pcp.kit.kpfo~:is(.pcrows,.kpkey,.kpgrid,.kpfacts) :is(span,b,i,small,div){text-shadow:var(--kts,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc)}
 .pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
 .pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
 .pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
