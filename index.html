@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"475d23d1","t":"2026-11-21T08:46Z","c":"hao-huu r4: report","b":"7ef277fd7623","h":[{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"}]};
+window.CTM_BI={"s":"90ccc476+","t":"2026-11-21T09:11Z","c":"hao-huu r4: report","b":"acb24c9654b7","h":[{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2190,7 +2190,7 @@ A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x()
 A("bribe","Mua chuộc cung nữ",{c:{get bac(){return -BAL.actBac.bribe}},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{/* AG-ALL-2f3 (OD 17/11 ~17:10Z): the 40 bạc are paid only when the maid takes them; a refusal costs no bạc (her report + the sent servant's fear stay) */
   /* RECEIVER CHOICE (jrcv rcvMaidBribe over jagstf2 stf2BribeW, G10): the maid chooses (her own maid too) among the maid player's cnvBribeOpts
      take / tell / quiet with ITS numbers (the pay goes to the maid, she becomes the briber's tai mắt; tell = Chủ tin +, the master's chứng cứ) */
-  const pay=(typeof econSchemePrice==="function"?econSchemePrice("bribe",a,t):0)||BAL.actBac.bribe;const mn=t.maid.name;const mc=rcvMaidBribe(a,t,oddsCl(oBribe(a,t)),pay);
+  const pay=(typeof econSchemePrice==="function"?econSchemePrice("bribe",a,t):0)||BAL.actBac.bribe;const mn=t.maid.name;const mc=rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)),a),pay);/* the take weight = the act's own odds: the frozen shown odds (fzRun) / an NPC road's +up (jtamco aOdd), econ-tamco F2 */
   if(mc==="quiet")return `Cung nữ ${mn} của ${NM(t)} từ chối bạc của ${NM(a)}, không nói với ai. `;
   if(mc==="take"){econPayWin(a,"bribe",t,BAL.actBac.bribe);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.j8.evF_3);return `Cung nữ ${mn} của ${NM(t)} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ: ${NM(a)} nắm ${balAb(BAL.eff.j8.evF_3)} chứng cứ. `}return `Cung nữ ${mn} của ${NM(t)} nhận bạc của ${NM(a)}, thành tai mắt. `}
   const fr=typeof tmFear==="function"?tmFear(a,1):"";return `Cung nữ ${mn} từ chối bạc của ${NM(a)} và báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ.${fr?" "+fr+".":""} `}});
@@ -4554,7 +4554,7 @@ const AOUT={spy:aoLz(()=>`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2
  vp:aoLz("đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt",()=>`Danh -3, nàng thù ${balSg(BAL.eff.j8.vpAccuse_2)}`),plant:aoLz("món đồ nằm trong rương nàng",()=>`kẻ cài bị bắt: nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ, thù ${balSg(BAL.eff.j8.plantItem)}`),steal:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),road:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
-function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"","không mất bạc"].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
+function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"",ECON_WIN_FAIL].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
 function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
  return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
@@ -5368,7 +5368,7 @@ function bribeOdds(a,s){return odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,
 function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=aOdd(bribeOdds(a,s),a);/* her Mua chuộc: the odds she saw (j9 fzRun), also as the take weight below */
  /* AG-ALL-2 G10: with the loop on the servant CHOOSES among the player maid's own "Bạc lạ" options (j42 cnvBribeOpts: Nhận bạc / Từ chối, bẩm chủ /
     Từ chối, im lặng) — take weighs as these odds, the refusal splits by her lòng (jagstf2 stf2Bribe); off → the old roll */
- if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,odds,cost);if(r!=null)return r}
+ if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,aOdd(odds,a),cost);/* the same odds as the aRoll fallback below (econ-tamco F2, whole group) */if(r!=null)return r}
  if(aRoll(odds,a)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
 /* what one sees of a servant: hidden trait until learned; at hire only age, origin and a vague impression */
 const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","con nhà buôn ở kinh thành","mồ côi, được Nội vụ phủ nuôi","con nhà thợ thêu Tô Châu","quê miền núi phía Bắc"];
@@ -43623,7 +43623,7 @@ function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21):
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 /* AG-ALL-2f3 (OD 17/11 ~17:10Z): acts whose WHOLE price is paid only on success (the act pays econSchemePrice itself when it lands) */
-const ECON_WIN=["bribe","block","xinhh","thathu"];/* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
+const ECON_WIN=["bribe","block","xinhh","thathu"];const ECON_WIN_FAIL="không mất bạc";/* the ONE failure wording of a pay-on-success scheme (j17 actLine, jtamco road card) *//* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
 /* the act landed: pay its whole price now (her and every NPC) and mark the win for a scheme chain that pays its route bạc on success (j70 exec70) */
 function econPayWin(a,k,t,base){const pr=(typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0)||base||0;if(pr>0)ap(a,{bac:-Math.min(pr,Math.max(0,a.bac||0))});if(a)a.__won=1;return pr}
 /* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */
@@ -43632,7 +43632,10 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
   const ok0=A0.ok;A0.ok=function(a,t){ECON_AT=[a,t];if(!ok0.apply(this,arguments))return false;return (a.bac||0)>=econSchemePrice(k,a,t)};
-  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac;if(extra>0&&!ECON_WIN.includes(k))ap(a,{bac:-extra});return f0.apply(this,arguments)}}})();
+  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac,pay=extra>0&&!ECON_WIN.includes(k);if(pay)ap(a,{bac:-extra});const g0=econVeto();const r=f0.apply(this,arguments);
+   if(pay&&econVeto()!==g0)ap(a,{bac:extra});/* the act's own gate stopped it (j95c: no motive to frame) → no price paid for nothing (law 3) */return r}}})();
+/* acts whose own f can still refuse after the price is taken: the j95c giá họa motive gate (counted in J95C.stat.frameGate) */
+function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
@@ -43643,7 +43646,7 @@ A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),
    tell, the same as every sent servant); the target's maid answers through the SAME pick as «Mua chuộc cung nữ» (jrcv rcvMaidBribe, cnvBribeOpts with pay 0) */
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>oddsCl(oBribe(a,t)-BAL.selfMinus),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);const mn=t.maid.name;
- const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,oddsCl(oBribe(a,t)-BAL.selfMinus),0):"quiet";
+ const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)-BAL.selfMinus),a),0)/* the frozen shown odds (econ-tamco F2, whole group) */:"quiet";
  if(mc==="take"){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${mn}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${mn} của ${NM(t)}; nàng ấy thành tai mắt. `}
  if(mc==="quiet")return `${mn} không mặn mà với ${m.name}, cũng không nói với ai. `;
  return `${mn} nhận ra ${m.name} đến dò, báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ. `}});
@@ -43658,6 +43661,84 @@ try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["block
 /* watched more at high rank */
 (function(){const c0=caught;caught=function(a,t,ps,desc){const r=c0.apply(this,arguments);try{if(r&&a&&rkOf(a)>=BAL.watchRank){const n=rkOf(a)-BAL.watchRank+1;ap(a,{danh:-n});return r+`Phẩm cao, nhiều mắt nhìn: Danh -${n}. `}}catch(e){}return r}})();
 window.econSchemePrice=econSchemePrice;window.econSchemeMul=econSchemeMul;
+/* ================= jtamco: ECONOMY §5 — TÂM CƠ AS ITS OWN COST + BUYING SAFETY WITH BẠC (ECONOMY.md §5 «Chưa làm», GAP OR21) =================
+   Every scheme priced by its target (jecon §5: ACT[k].__c0, the bạc schemes) can be done three ways, one rule for her and every NPC (law 1):
+     «Làm như thường»        : the price jecon §5 already charges, the shown odds (unchanged);
+     «Hao tâm cơ»            : she plots every step herself: Tâm cơ −tc (the stat really drops, so later schemes lose its odds), odds +BAL.tcroad.up;
+     «Thuê người làm thay»   : she hires a hand: bạc −hire on top of the price, odds +BAL.tcroad.up.
+   EQUAL VALUE (law 2): tc and hire come from ONE exchange rate, BAL.tcroad.rate bạc per Tâm cơ point (the arc table's own rate: {bac:-30} ⇔ {tamco:3},
+   jbalarc s2/x1), so hire = tc × rate exactly; both buy the SAME odds. GAIN AND LOSS (law 3): each road has a cost and a gain. ONE CORE (law 4):
+   every number is BAL.tcroad. NPCs (law 1) pick a road in the act itself (econRoadNpc): the same costs, the same odds, the same rate.
+   Her choice: doAct (j8) for a priced scheme opens a kit choice (PEND.roadpick, the same dilemma card as «Cài đồ vào rương»); the odds printed on
+   each option = the odds rolled (fzRun freezes them, j9). */
+BAL.tcroad={rate:10,share:.5,tcMin:1,up:12,npcP:50,npcKeep:30,npcTcMin:25};
+let ECON_RB=null;/* the NPC road bonus in force for one act: {a, b} (her rolls use the frozen shown odds instead) */
+function econRoadCost(k,a,t){const pr=typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0;const R=BAL.tcroad;
+ const tc=Math.max(R.tcMin,Math.round(pr*R.share/R.rate));return{pr,tc,hire:tc*R.rate}}
+/* a road sells odds (+up), so it exists only where the act's success really rolls on its odds (law 3, econ-tamco F2): the act shows odds below 100
+   (musk / catswap: o null, no roll → no road), and no PLAYER decides the outcome (a judge request whose Hoàng hậu is her: her own card, no roll).
+   Every success decision of a road scheme reads aOdd (the frozen shown odds / the NPC road's +up): bribe + bribel (jrcv rcvMaidBribe weight),
+   xinhh + trinhhh (jaudit → rcvJudge), the rest aRoll; dev/test/econ-tamco-scan.js checks it per scheme for her and an NPC */
+function econRoadRolls(k,a,t){if(!a||!t||!ACT[k]||!ACT[k].__c0)return false;let o=null;try{o=actOdds(a,t,k)}catch(e){}if(o==null||o>=100)return false;
+ if(typeof RCVJ==="object"&&RCVJ[k]&&typeof queenP==="function"&&queenP()===S&&a!==S)return false;return true}
+function econRoadOk(k,a,t,road){if(!econRoadRolls(k,a,t))return false;const c=econRoadCost(k,a,t);
+ if(road==="tc")return (a.tamco||0)>=c.tc;if(road==="hire")return (a.bac||0)>=c.pr+c.hire;return true}
+/* an NPC picks her road (law 1): spare silver → hire; a sharp mind → plot it herself; else as usual */
+function econRoadNpc(a,k,t){if(!econRoadRolls(k,a,t))return"";const R=BAL.tcroad,c=econRoadCost(k,a,t);
+ if((a.bac||0)>=c.pr+c.hire+R.npcKeep&&roll(R.npcP))return"hire";
+ if((a.tamco||0)>=c.tc+R.npcTcMin&&roll(R.npcP))return"tc";return""}
+function econRoadPay(a,k,t,road,c0){const c=c0||econRoadCost(k,a,t);/* c0: the cost she SAW on the card (F3: khắc spent before the act can move the price) */if(road==="tc")ap(a,{tamco:-c.tc});else if(road==="hire")ap(a,{bac:-c.hire});return c}
+/* the NPC act: pay the road, the act's own success roll gets +up (aOdd, below) */
+function econRoadWrapF(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.__c0||(A0.f&&A0.f.__road))continue;const f0=A0.f;/* again at the script end: later modules replace some f (jwhy spy) */
+  const f=function(a,t){if(!a||a===S||ECON_RB)return f0.apply(this,arguments);let road="";try{road=econRoadNpc(a,k,t)}catch(e){}
+   if(!road)return f0.apply(this,arguments);const c=econRoadPay(a,k,t,road),g0=econVeto();ECON_RB={a,b:BAL.tcroad.up,road};try{return f0.apply(this,arguments)}finally{ECON_RB=null;if(econVeto()!==g0)ap(a,road==="tc"?{tamco:c.tc}:{bac:c.hire})/* the act's own gate stopped it: the road is given back */}};f.__road=1;A0.f=f}}
+econRoadWrapF();setTimeout(econRoadWrapF,0);
+(function(){const o0=aOdd;aOdd=function(o,a){const z=o0.apply(this,arguments);
+ if(ECON_RB&&!(ACTX&&ACTX.fz!=null)&&(a===undefined||a===ECON_RB.a))return oddsCl(z+ECON_RB.b);return z}})();
+/* her choice: a priced scheme from doAct opens the road card first */
+let ECON_ROADGO=0;
+PEND.roadpick=p=>{const v=RV(p.v),k=p.k,A0=ACT[k];if(!v||!A0)return null;const c=econRoadCost(k,S,v),o0=actOdds(S,v,k),R=BAL.tcroad;
+ const up=oddsCl(o0+R.up),win=typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k),pr=c.pr>0&&!win?{bac:-c.pr}:{},
+  /* pay-on-success schemes (ECON_WIN: the price is paid only when it works): the price sits on «thành», not in Tốn; «hỏng» says what a failure keeps */
+  wT=win&&c.pr>0?`, Bạc -${c.pr}`:""/* KIT §88: a cost under «thành:» of a roll act = THÀNH Mất (paid only when it lands), not Tốn */,wH=hire=>win?` · hỏng: ${hire?"chỉ mất tiền thuê, ":""}${ECON_WIN_FAIL}${hire?" giá mưu kế":""}`:"",go=road=>()=>econRoadGo(rivals.indexOf(v),k,road,road?up:o0,c);
+ const O=[{n:"Làm như thường",fx:{},p:oddsCl(o0),ton:pr,x:`thành: giá mưu kế như cũ, không hao gì thêm${wT}${wH(0)}`,go:go("")}];
+ O.push({n:"Hao tâm cơ, tự mình sắp đặt",fx:{},p:up,off:!econRoadOk(k,S,v,"tc"),ton:Object.assign({tamco:-c.tc},pr),x:`thành: tự tay sắp đặt từng bước, chắc tay hơn${wT}${wH(0)}`,go:go("tc")});/* kit Tốn row (KIT §13.16 ton field): a price paid elsewhere — Tâm cơ is paid in econRoadGo, the scheme price by the act */
+ O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(win?c.hire:c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn${wT}${wH(1)}`,go:go("hire")});
+ O.push({n:"Thôi",fx:{}});
+ /* the queued item gets act:1 (KIT §28.6 data flag, set where doAct pushes it): the scheme act's OWN picker, not an event → the open act card (Tốn · THÀNH · BẠI with numbers, §88), so a pay-on-success price shows as THÀNH «Bạc -N» */
+ return{who:pv(v),t:`<p>${A0.n} — ${v.name}: tự tay làm, hao tâm cơ mà sắp đặt, hay bỏ bạc thuê người làm thay?</p>`,o:O}};
+/* her road travels with her act as ECON_HER {k, t: rival id, road, fz: the odds she saw}; runAct (below) pays it and rolls the odds she saw.
+   Co-op (owner CO-OP LAND GATE): a thin guest's runAct is an intent run on the HOST; ECON_HER rides in that intent's ctx (jcoopthinf F1
+   runAct "econ"), so the host computes the cost and the roll in her context — the same road on both seats, nothing paid on the guest phone. */
+window.ECON_HER=null;
+/* SHOWN = CHARGED (F3): the card's numbers {pr, tc, hire} ride with the road (c) and are what is paid — the road (econRoadPay) and the scheme
+   price (econSchemePrice for her act on that target, frozen by ECON_PRFZ while her act runs); the plain road carries them too (road "") */
+let ECON_PRFZ=null;
+(function(){if(typeof econSchemePrice!=="function")return;const p0=econSchemePrice;econSchemePrice=function(k,a,t){const z=ECON_PRFZ;
+ if(z&&a===S&&k===z.k&&t&&t.id===z.t&&z.pr!=null)return z.pr;return p0.apply(this,arguments)}})();
+/* F4: a frozen cost is paid only if she can still pay it NOW (the host's copy of her in co-op, a deed landing weeks later): else the act stops,
+   nothing is charged (the same words as the j19 lock, «Thiếu bạc (cần N)»). The act's own check (ACT.ok) needs bạc ≥ price for every scheme, pay-on-success too */
+function econLack(a,k,t,road,c){if(!a||!c)return"";if(road==="tc"&&(a.tamco||0)<c.tc)return `Thiếu Tâm cơ (cần ${c.tc})`;
+ const need=(road==="hire"?c.hire:0)+(c.pr||0);return (a.bac||0)<need?`Thiếu bạc (cần ${need})`:""}
+function econPrFz(h,fn){const z0=ECON_PRFZ;ECON_PRFZ=h&&h.c?{k:h.k,t:h.t,pr:h.c.pr}:null;try{return fn()}finally{ECON_PRFZ=z0}}
+function econRoadGo(i,k,road,fz,c){const v=rivals[i];window.ECON_HER=v?{k,t:v.id,road:road||"",fz,c:c||null}:null;ECON_ROADGO=1;try{fzRun(fz,k,()=>doAct(i,k))}finally{ECON_ROADGO=0;window.ECON_HER=null}}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const h=window.ECON_HER;
+ if(!h||a!==S||!t||t.id!==h.t||k!==h.k||!ACT[k]||!ACT[k].__c0)return r0.apply(this,arguments);window.ECON_HER=null;
+ const A=arguments,run=()=>econPrFz(h,()=>r0.apply(this,A));const lack=econLack(S,k,t,h.road,h.c||econRoadCost(k,S,t));if(lack)return `${lack}: ${ACT[k].n} không thành, chưa tốn gì. `;econRoadPay(S,k,t,h.road,h.c);/* tc: Tâm cơ · hire: the hired hand (the scheme price is the act's own) */
+ return ACTFZ||h.fz==null?run():fzRun(h.fz,k,run)}})();
+/* parallel time (jptime): a scheme SENT with a servant (ptHarmSend, the spy deed…) lands later. The deed sent while her road is pending
+   carries it (a.econ) and pays it when it lands (ptLand), before the deed's own run; the odds she saw are the deed's fz. Co-op: the landing
+   runs on the host in her context (ptTickHer intent), so the host pays it. */
+setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")return;
+ const s0=ptSend;ptSend=function(o){const h=window.ECON_HER,a=s0.apply(this,arguments);
+  try{if(a&&h&&o&&o.tgt==="v"+h.t&&(!o.a||o.a.k==null||o.a.k===h.k)){a.econ={k:h.k,t:h.t,road:h.road,c:h.c||null};window.ECON_HER=null}}catch(e){}return a};
+ const l0=ptLand;ptLand=function(a){let e=null;try{e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k]){const lack=econLack(S,e.k,t,e.road,e.c||econRoadCost(e.k,S,t));
+   if(lack){a.back=1;try{PT.stat.back++}catch(x){}a.rep={t:a.lbl||"Đã về",ok:false,L:[`${lack}: ${ACT[e.k].n} không thành, chưa tốn gì.`],d:[]};return}/* F4: she cannot pay it any more → the deed comes back undone */econRoadPay(S,e.k,t,e.road,e.c)}}else e=null}catch(x){console.error("econ road land",x)}
+  const A=arguments;return econPrFz(e,()=>l0.apply(this,A))}}catch(e){console.error("econ road ptime",e)}},0);
+(function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
+  if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}
+  return d0.apply(this,arguments)}})();
+window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc=econRoadNpc;
 /* ================= jstip: BỔNG LỘC = REAL GOODS + NỘI VỤ PHỦ CẮT XÉN (owner 15/11 17:30Z + 17:33Z, review/econ-stipend) =================
    Notes + numbers: dev/ECONOMY.md §6–§7. ONE SOURCE: every number in BAL.stip (below, read through BAL like every jecon knob).
    1. GOODS (17:30Z): the monthly goods of her rank are real items in p.inv (picture j98 itemArt, grade, use): cloth (may áo / tặng / bán),
@@ -50907,7 +50988,7 @@ function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
 function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyRoll(a,t):oSpy(a);/* the roll's own odds (lá số included; review/shown-odds-one-path) */A0.why=(a,t)=>spyFactors(a,t);
- A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
+ A0.f=(a,t)=>{ap(a,{bac:-actBac("spy",a,t)})/* one core: the jecon §5 price the card shows (was a flat 15) */;const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
 (function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
 /* her maid at home: "Sai đi dò la" — SHE chooses whom (owner 08:45Z: never a silent random target for a player act).
@@ -51240,10 +51321,10 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
  const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
   X.f=(a,t)=>{/* AG-ALL-2d4 (OD 17/11 ~17:10Z (1)): the gift is taken only when the Empress agrees; refused → returned */const q=queenP();const o=odA(a,raw(a,t));
    /* RECEIVER CHOICE (jrcv RCVJ.xinhh, review FAIL 6 #3): the Hoàng hậu decides — she as the Hoàng hậu gets the card; an NPC queen the SAME options, yes at these odds */
-   if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,o);if(roll(o)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
+   const oz=aOdd(o,a);/* the frozen shown odds (fzRun) / an NPC road's +up (jtamco), econ-tamco F2 */if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,oz);if(roll(oz)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
  const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
   T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,BAL.eff.jaudit.evF);/* RECEIVER CHOICE (jrcv RCVJ.trinhhh): she as the Hoàng hậu gets the card */
-   if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,o);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
+   const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
@@ -67861,12 +67942,15 @@ html body .mapv.kside>:not(#kshR):not(#krail):not(.kl-tone){margin-left:56px!imp
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§33.10",title:"Nơi chốn toàn màn hình · tầng cuối Dư đồ",
  html:()=>`<p style="max-width:52em">Ở mọi nơi không phải phòng mình: tranh nơi chốn chiếm trọn trang, cột trái (lối tắt + nút về Dư đồ) và cột phải y như phòng ngủ, người đứng theo tỉ lệ chuẩn, cột cố định, vuốt sang trái/phải, chip "+N" hai bên; chạm người → thẻ người ấy; "Hành sự" = trang thẻ việc riêng. Phòng mình giữ sân khấu Hành sự (iPad: sân khấu | thẻ).</p>`})}catch(e){}
 /* ================= jplx: NƠI CHỐN CÒN THIẾU TRÊN DƯ ĐỒ (D42, owner 14-15/11: OD L82, L86, L87) =================
-   Five places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
+   Seven places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
      cnh  Tích Cần viện (role: dãy nhà cung nhân; servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
      tgk  Tân Giả khố        (= Hoán y cục, the laundry; picture tan-gia-kho already existed; now a place on the map)
      ttp  Thượng thư phòng   (the princes' study hall = "học đường"; new picture)
      acs  A ca sở            (where the princes from 6 years old live; new picture)
      dc   Đông cung          (where the crown prince lives; new picture)
+     nth  Ngự thiện phòng    (the imperial kitchen; review/map-places 20/11, OD:L82; STAND-IN picture, tạm: the painted kitchen board room img/kit/mg-banh-bg-hoc; ART REQUEST in reports/map-places.md)
+     pd   Phật đường         (the Buddha hall; review/map-places 20/11, OD:L82; STAND-IN picture, tạm: Đức Thọ cung with its golden Buddha altar, tu-ninh-cung-*; ART REQUEST in the report)
+   (Nội vụ phủ `nvp` is already a map place in jact.js:90-97 with its peddler and rare item; not touched here.)
    Pictures: img/<tên>-<mùa>-<buổi>.webp (gpt-2-6 EDITS of approved game rooms, CDN). Everything else is wrapped, no old module edited:
    places / PLNAME / MAPH.places (map hotspots + names) · mapPos (walk cost) · SCN_HAVE + SCIMG + KIT_FLOOR (pictures) · ACC_ROLE (who may enter)
    · goTo + countAt (people at the place) · homePeople (children who moved out are not at home).
@@ -67880,8 +67964,11 @@ const PLX={
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
  acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
- dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62}};
+ dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62},
+ nth:{n:"Ngự thiện phòng",fn:"bếp ngự, lo bữa cho Hoàng thượng",d:"Bếp lớn của cung, thái giám bếp nhóm lửa từ tờ mờ sáng.",img:"kit/mg-banh-bg-hoc",box:{x:.733,y:.455,w:.052,h:.137},anchor:{x:.758,y:.49},pos:[1,4],fl:.74,stand:1},
+ pd:{n:"Phật đường",fn:"nơi lễ Phật, tụng kinh",d:"Điện có tượng Phật mạ vàng, khói hương không dứt.",img:"tu-ninh-cung",box:{x:.77,y:.235,w:.065,h:.155},anchor:{x:.80,y:.29},pos:[0,4],stand:1}};
 const PLX_NEW=["cnh","ttp","acs","dc"]; /* places with their own picture file; tgk keeps j94's */
+const PLX_STAND=["nth","pd"]; /* places on a STAND-IN picture (tạm) until Foreman C paints their own: SCIMG only, the stand-in's own seasons/floor come from j94 / jk2b */
 const PLX_AGE=6,PLX_ADULT=18;
 (function(){
  /* names and map hotspots */
@@ -67889,9 +67976,9 @@ const PLX_AGE=6,PLX_ADULT=18;
  /* pictures: 16 season x buổi variants each; SCIMG base name, floor line for the kit stage */
  const V=[];["xuan","ha","thu","dong"].forEach(s=>["sang","trua","chieu","toi"].forEach(t=>V.push(s+"-"+t)));
  if(typeof SCN_HAVE==="object")PLX_NEW.forEach(k=>V.forEach(v=>{SCN_HAVE[PLX[k].img+"-"+v]=1}));
- if(typeof SCIMG==="object")PLX_NEW.forEach(k=>{SCIMG["plx-"+k]=PLX[k].img});
+ if(typeof SCIMG==="object")PLX_NEW.concat(PLX_STAND).forEach(k=>{SCIMG["plx-"+k]=PLX[k].img});
  const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};
- PLX_NEW.forEach(k=>{const n=PLX[k].img;if(F[n]==null)F[n]=PLX[k].fl||.6;if(!A[n])A[n]={x:.5,feet:.9}});
+ PLX_NEW.concat(PLX_STAND).forEach(k=>{const n=PLX[k].img;if(F[n]==null)F[n]=PLX[k].fl||.6;if(!A[n])A[n]={x:.5,feet:.9}});
  /* the list of places (Dư đồ list, placeOf) */
  const p0=places;places=function(){const L=p0.apply(this,arguments);
   for(const k in PLX)if(!L.some(x=>x.k===k))L.push({k,n:PLX[k].n,fn:PLX[k].fn,d:PLX[k].d,sc:k==="tgk"?"tgk":"plx-"+k});
@@ -67899,7 +67986,7 @@ const PLX_AGE=6,PLX_ADULT=18;
  /* walk cost: own cells outside the old 3x3 + rival rows (west cluster cnh/tgk next to tyv/kn; east column ttp/dc/acs next to tn/ksp/home) */
  const m0=mapPos;mapPos=function(k){return k&&PLX[k]?PLX[k].pos:m0.apply(this,arguments)};
  /* the list view shows them too (MAPL rows are only borrowed for the call: mapPos must not read them) */
- const g0=mapHTMLgrid;mapHTMLgrid=function(){MAPL.push(["cnh","tgk","ttp"],["acs","dc"]);try{return g0.apply(this,arguments)}finally{MAPL.length-=2}};
+ const g0=mapHTMLgrid;mapHTMLgrid=function(){MAPL.push(["cnh","tgk","ttp"],["acs","dc","nth"],["pd"]);try{return g0.apply(this,arguments)}finally{MAPL.length-=3}};
  /* small labels on the plan, like the lãnh cung */
  const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);L.forEach(s=>{if(s&&PLX[s.k]){s.small=s.k!=="dc";s.fn=PLX[s.k].fn}});return L};
 })();
@@ -67922,8 +68009,13 @@ function bkeyNow(){try{return `${S.year}/${S.month}/${S.tuan}`}catch(e){return""
 function plxTgk(){const out=[];try{out.push({kind:"npc",name:"Quản sự Tân Giả khố",ini:"Quản",col:"#8a8aa0",info:"Quản sự · trông coi việc giặt giũ"});
  const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&(s.lau>0||s.trouble))L.push(s);
  L.slice(0,3).forEach(s=>out.push({kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:"Cung nữ bị phạt giặt giũ"}))}catch(e){}return out}
+/* Ngự thiện phòng / Phật đường: the one who keeps the place (always there by day, like the Quản sự of Tân Giả khố). No servants are drawn here by sampling: every servant has ONE place per buổi in the j95 ledger (law 6), so an errand-runner shows here only when j95 sends her (follow-up: ledger rows for these two places, plan §2) */
+function plxNth(){return [{kind:"npc",name:"Quản sự Ngự thiện phòng",ini:"Quản",col:"#8a8aa0",info:"Quản sự · trông coi bếp ngự"}]}
+function plxPd(){return [{kind:"npc",name:"Sư cô Phật đường",ini:"Sư",col:"#9a9a8a",info:"Sư cô · giữ hương đèn, tụng kinh"}]}
 function plxPeople(k){try{
  if(k==="cnh")return plxServants();
+ if(k==="nth")return plxNth();
+ if(k==="pd")return plxPd();
  if(k==="tgk")return plxTgk();
  const L=[];for(const [kid,v] of plxKids(k)){const mine=v==null;L.push(mine?plxHomeKid(kid):plxKidEntry(kid,v))}
  if(k==="ttp"&&L.length)L.unshift({kind:"npc",name:"Thầy dạy Thượng thư phòng",ini:"Thầy",col:"#8a9ab0",info:"Thầy dạy · giảng sách cho các hoàng tử, công chúa"});
@@ -67931,7 +68023,7 @@ function plxPeople(k){try{
 /* her own children keep the line the home stage gives them (Văn/Võ/Đức bars): take it from the unfiltered home list */
 let plxHomeFull=null;
 function plxHomeKid(kid){try{const f=plxHomeFull?plxHomeFull():[];const p=f.find(x=>x.kind==="kid"&&x.ref===kid);if(p)return p}catch(e){}return plxKidEntry(kid,null)}
-function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
+function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao.",nth:"Bếp ngự vắng người, lửa trong lò đã tàn.",pd:"Phật đường vắng, chỉ còn khói hương lẩn quẩn."})[k]||""}
 
 /* her palace: children who live elsewhere this buổi are not on the home stage (and not in its head count) */
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;plxHomeFull=()=>h0.apply(null,[]);
@@ -67947,6 +68039,9 @@ function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhâ
 /* the Dư đồ count of these places = the people she meets on arrival (outermost wrap: after j59's own, which is queued at load) */
 setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length+(k==="tgk"&&typeof elderBy==="function"&&elderBy("tn")?1:0)}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 
+/* nth / pd are not in the j95 ledger (j95.js:113 / :371 only know cnh tgk ttp acs dc): j95's countAt wrap (j95.js:656) would read 0 for them, so their count is wrapped once more, one tick later (outside j95's) */
+setTimeout(()=>setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if((k==="nth"||k==="pd")&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length}catch(e){}return c1.apply(this,arguments)}}catch(e){}},0),0);
+
 /* ---------- who may enter (j41 ACC_ROLE; the servant road keeps j42's hook, patched for her own quarters) ---------- */
 (function(){
  const day=()=>(S.buoi||0)<(typeof B4L==="number"?B4L:3);
@@ -67960,6 +68055,9 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.v
   if(k==="ttp"||k==="acs"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
    if(r>=3||p.queen||(k==="acs"?hasPrince(p):hasStudent(p)))return{ok:true};
    return{ok:false,why:k==="ttp"?"chỉ Tần trở lên hoặc người có con đang học":"chỉ Tần trở lên hoặc mẹ của hoàng tử",kind:"rule"}}
+  if(k==="nth"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
+   if(r>=2||p.queen)return{ok:true};return{ok:false,why:"bếp ngự: cần phẩm Quý nhân",kind:"rule"}}
+  if(k==="pd")return day()?{ok:true}:{ok:false,why:"đóng cửa tối",kind:"hour"};
   if(k==="dc"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
    if(p.queen||r>=7||mumOfHeir(p))return{ok:true};
    return{ok:false,why:"điện của Thái tử: chỉ mẹ Thái tử và Hoàng hậu; người khác xin bái kiến",kind:"rule",ask:"bk"}}
@@ -71281,7 +71379,8 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const 
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
 const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
- ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
+ ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
+ nth:"suc",pd:"duc"}; /* nth/pd: STAND-IN glyphs (suc = health/food, duc = virtue, as Đức Thọ) until KIT REQUEST place-nth / place-pd is painted (dev/kit/KIT_REQUESTS.md 20/11 map-places) */
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
 /* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
@@ -88483,7 +88582,9 @@ F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
  dec:a=>{if(!a||!ACT[a.k])return null;const t=(rivals||[]).find(v=>v&&v.id===a.t);if(!t||t===S)return null;let x=a.xv;
   if(a.xe){const i=itemFind(a.xe,a.x);if(i<0)return null;x=i}
   else if(typeof a.x==="number")x=a.x;return [S,t,a.k,x]},
- ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}]]});
+ ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}],
+  /* econ-tamco: her scheme road (Tâm cơ / hired hand + the odds she saw) rides with the act; the host pays and rolls it in her context (jtamco runAct) */
+  ["econ",()=>window.ECON_HER||null,v=>{window.ECON_HER=v||null}]]});
 function C0(e){const o=Object.assign({},e);delete o.ci;return o}
 /* F3 (whole family, F1's runAct item too): the item she tapped, found in her stored bag on the host. Tiers: the same index and the same
    item (keys in any order: a patch / ilUid can add a key in another order on one phone), any same item, then the same index with the same
@@ -88712,7 +88813,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7ef277fd7623";window.CTM_BUILD=BUILD;
+const BUILD="acb24c9654b7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
