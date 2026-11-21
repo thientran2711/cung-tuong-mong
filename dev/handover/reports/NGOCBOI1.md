@@ -16,3 +16,6 @@ START_CTX ~5 %, depth: worker (child of Foreman C #24).
 4. Maid files (maid7) not touched (G43 already none; sachet OK).
 5. Held-out dirs listed above hold pendant text in history/proof prompts; say if the owner wants those scrubbed too.
 Coordination: pulled/rebased between each push; HAN5 LADDER8 files landed mid-run, sidecars fixed.
+
+## Addendum (#25 request, drawn pendants)
+Drawn "pendants" came from jade clasp on silk cord + tú cầu "jade tassels" + jade disc. Now stripped everywhere live (jade clasp -> gold clasp, tú cầu -> silk tassels) and G57 also FAILs jade tassel/clasp/disc/ring. strip_pendant.py updated.

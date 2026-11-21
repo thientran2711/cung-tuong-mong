@@ -20,3 +20,4 @@ allow: The item is in a contrasting colour  # repeat of HELD ITEM COLOUR rule (<
 allow: not the robe colour  # same repeat
 allow: and the hand really grips it  # kept as "The hand really grips it"
 allow: an embroidered silk sash with jade belt pendants and tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
+allow: a gold clasp at the throat   # G57 owner L1851: no jade pendant/disc/clasp/tassel (removal only)

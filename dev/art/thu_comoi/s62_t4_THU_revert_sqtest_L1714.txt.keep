@@ -41,3 +41,4 @@ allow: a silver-mounted book box held near her shoulder  # owner L1714 row 23 ne
 allow: the robe hem stirring slightly  # owner L1714 row 23 new pose/held item
 allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
 allow: an embroidered silk sash with hanging jade belt pendants and tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
+allow: fastened at the throat with a gold clasp   # G57 owner L1851: no jade pendant/disc/clasp/tassel (removal only)

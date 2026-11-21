@@ -1080,7 +1080,7 @@ def g45_fails(text):
 # G57 NO JADE PENDANT ANYWHERE (owner L1851 21/11, verbatim: "tất cả các cái prompt loại bỏ hết ngọc bội, không có cái prompt nào có ngọc bội để cho sau này mình chơi cái game gắn ngọc bội"):
 # NO prompt (any scope / rank / season) may name a jade pendant / yupei / zupei / jinbu / ngọc bội / jade disc|plaque|ring on cords / jade(-and-gold) belt / belt pendant.
 # Negated wording ("no pendants", "never on ... belt or pendants") passes. The hà bí chui (bí trụy) of the trieu block is a cape-band tip, not a waist pendant: exempt (foreman to confirm).
-G57_RX = re.compile(r"\b(?:yu ?pei|zupei|jinbu|ngọc bội|ngoc boi)\b|(?<!\bno )(?<!\bor )(?<!\bear )(?<!\bear drop/)\bpendants?\b|\bjade (?:discs?|plaques? linked|rings?)\b", re.I)
+G57_RX = re.compile(r"\b(?:yu ?pei|zupei|jinbu|ngọc bội|ngoc boi)\b|(?<!\bno )(?<!\bor )(?<!\bear )(?<!\bear drop/)\bpendants?\b|\bjade (?:discs?|plaques? linked|rings?|tassels?|clasps?)\b", re.I)
 def g57_fails(text):
     t = re.sub(r"\bbí trụy \(帔坠\) pendant\b|\bthe pendant\b(?= hanging| hangs)|\bbelow the pendant\b", "", text)
     m = G57_RX.search(t)
@@ -1195,7 +1195,7 @@ def selftest():
                     ("the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it.", 0), ("no shawl or stole draped across her waist.", 0)]:   # G45 (owner L1622)
         if bool(g45_fails(norm(t))) != bool(want): print("G45 SELFTEST", want, t); bad += 1
     for t, want in [("a soft silk sash with a small jade pendant on a silk cord.", 1), ("belt pendants and tassels", 1), ("a set of jade discs and pearl strands (zupei)", 1), ("a carved jade pendant set (ngọc bội)", 1),
-                    ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
+                    ("a small jade clasp at the chest", 1), ("a silk ball with jade tassels", 1), ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
         if bool(g57_fails(norm(t))) != bool(want): print("G57 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
