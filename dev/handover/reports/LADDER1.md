@@ -74,3 +74,10 @@ Open: sheet label t1 row B slightly clipped ("dải buộc ngực"). No commit o
 - thu t4–t8 (`thu_comoi/s62_t4_THU_COMOIc`, `t5_COMOIc`, `t6_COMOId`, `t7_v8c`, `t8_v10c`): "outer robe worn OPEN at the front … straight down each side", no held-in clause; pictures show the robe outside → OUT1 WARN ×5. t4 also has the S13_COMOI "closes only at the sash" (fits G40, keep).
 - xuân Hán t4–t8 (open5c/open3c/open5c/open8c/open11c): wrap crossing low at the sash = already held in → OK.
 - đông dong_hientai t4 "closes only at the sash" = OK under G40.
+
+## JOB 3 — G40 clause into thu t4/t6/t7/t8 (Foreman C #14 order after L1596; t5 = KHO2) — 0 gens
+- `master_common.OUTER_IN` SHORTENED (t6/t7/t8 sit at the 10 000 limit with only outfit words left, A38): now "the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat" (100 chars). Xuân t1–t3 _v3 rebuilt with it (9456 / 9662 / 9955, fewer trims). The thu t1–t3 v2e/v2f (DESIGN18's now) still carry the older long wording; DESIGN18 copies the constant.
+- `thu_comoi/make_thu_g40_L1596.py` puts the clause right after the "outer robe worn OPEN at the front …;" clause:
+  t4 COMOIc→**COMOId** (9958, no trim) · t6 COMOId→**COMOIe** (9970, A38 trims: never a pair / never in profile / Everyone beautiful… / never copy anything but its colour) · t7 v8c→**v8d** (9917, trim: Full-body… boilerplate).
+- **t8 v10c NOT built:** with the clause it is 10 073 chars, every A38 trim is already used, and only owner outfit words are left, so it is 39 over even at PROMPT_MAX 10 000. **Needs your/owner call on what to shorten.**
+- Gates: t4 d / t6 e STORE+APPROVED PASS, no OUT1 warn. t7 v8d FAILS with exactly the 3 faults its base v8c already had (G23 walk+still, E1 angle, S19 tail; listed in COLORFIX1.md:74). Under A39 these were not touched, so t7 is not gen-ready until they are fixed. keep_check --all 247 PASS.

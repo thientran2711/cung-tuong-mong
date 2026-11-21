@@ -1,0 +1,5 @@
+base: dev/art/thu_comoi/s62_t6_THU_COMOId.txt
+allow: never copy anything but its colour  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
+allow: never a pair  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
+allow: never in profile  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
+allow: Everyone beautiful at every age  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)

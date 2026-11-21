@@ -252,8 +252,8 @@ B29_C_GAM = "The FABRIC is the LIGHTEST brocade (gấm): thin, supple Song broca
 # G40 OUTER LAYER HELD IN BY THE SASH (owner L1592, 21/11, corrects L1590; verbatim: "… tất cả các bậc đều là ôm vô như thế này chứ không phải là áo khoác
 # ngoài nữa."; look = her ChatGPT picture of dapung4/s62_t1_tu_thuongtai_C.txt): the ONE shared clause for every rank t1–t8 of every season that has an
 # outer robe over an inner garment; copied verbatim by the season make scripts (LADDER1). check_store OUT1 checks it.
-OUTER_IN = ("the outer robe's open front edges fall from the shoulders and are HELD IN by the sash, girdle or ribbon band tied OVER the outer robe, "
-            "so the outer robe hugs the body, never a loose open coat hanging outside the sash")
+# short form (LADDER1 L1596): thu t6/t7/t8 sit at the 10 000 limit with only outfit words left (A38), so the clause is kept short.
+OUTER_IN = "the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat"
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
 
 

@@ -1,0 +1,4 @@
+base: dev/art/thu_comoi/s62_t7_THU_COMOI_v8c.txt
+allow: Full-body standing figure head to feet  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
+allow: soft even light  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
+allow: fair porcelain skin  # owner L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 L1596 order; A38 boilerplate trim (LADDER1)
