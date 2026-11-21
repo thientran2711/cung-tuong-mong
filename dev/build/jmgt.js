@@ -22,7 +22,10 @@ function mgRankOf(p){try{p=p||S;if(typeof rkOf==="function")return cl(+rkOf(p)||
 function mgTier(kind,o){o=o||{};const B=BAL.mgTier;const occ=B.occ[o.occ]?o.occ:"hoc";const [b0,pr]=B.occ[occ];
  const rank=o.rank!=null?cl(+o.rank||0,0,7):mgRankOf(o.p);
  let lv=o.lv;if(lv==null){try{lv=kg82LvFor(o.p||S,kind)}catch(e){lv=0}}lv=cl(+lv||0,0,5);
- const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=o.d!=null&&isFinite(+o.d)?+o.d:stake-lv;/* o.d: a fixed gap (jmgcal rounds) */
+ const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);let d=o.d!=null&&isFinite(+o.d)?+o.d:stake-lv;/* o.d: a fixed gap (jmgcal rounds) */
+ /* dauho-lv5 (owner 21/11): a kind with BAL.mgTier.base starts its real-play board at that Thử tay round's gap for everyone, then climbs with rank to the gap of ease lo */
+ const bs=(B.base||{})[kind];if(bs&&!(o.d!=null&&isFinite(+o.d))){const D=BAL.ag.mg2.cal.d,dR=D[cl(Math.round(bs.r),1,D.length)-1],dLo=(B.mid+((B.kAdj||{})[kind]||0)-bs.lo)/B.slope;
+  d=dR+(dLo-dR)*cl((rank+(o.big?B.big:0))/bs.n,0,1)}
  const ease=cl(B.mid-B.slope*d+((B.kAdj||{})[kind]||0),B.easeMin,5);
  const tier=d<=-B.band?0:d>=B.band?2:1;
  return{kind,occ,occName:MGT_OCCN[occ],rank,stake,lv,d,tier,word:["Dễ","Vừa","Khó"][tier],ease:Math.round(ease*10)/10}}
@@ -80,13 +83,15 @@ function mgPace(env,kind,el,lim){const P=BAL.mgTier.pace,e=cl(env&&env.lv!=null?
 const MGX={o:null,n:0};
 function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.on)}catch(e){return false}}
 function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
-function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
+function mgMedP(P,d){let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return ma+(mb-ma)*(d-a)/(b-a)}
+/* dauho-lv5: a kind with its own measured rows BAL.ag.mg2.medK[kind] keeps the shared level at the matching board (med at gap 0) but moves with ITS OWN board shift (skilled bot, n ≥ 300 per gap) */
+function mgMedD(d,kind){const M=BAL.ag.mg2,P=M.med,K=kind&&(M.medK||{})[kind];d=+d||0;return cl(K?mgMedP(P,0)+mgMedP(K,d)-mgMedP(K,0):mgMedP(P,d),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
 function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const H=BAL.ag.mg2.hand;if(H&&H.on&&o.lv==null&&p&&typeof p==="object"&&p!==S&&typeof mgOrgLv==="function"){const ol=mgOrgLv(p,kind);if(ol){let v=0;try{v=kg82LvFor(p,kind)}catch(e){}if(ol>v)o.lv=ol}}/* upbringing start bậc (OD 20/11 ~01:50Z): her board as the player's, whose arts hold it; part of the hand rule, so off with BAL.ag.mg2.hand.on = 0 (rv) */
  const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
  if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
-  const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))+mgIdSh(kind,p)),0,10)}
- return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w+mgIdSh(kind,p)),0,10)}
+  const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d,kind)-mgMedD(0,kind))+mgIdSh(kind,p)),0,10)}
+ return cl(Math.round(mgMedD(d,kind)+(u-.5)*BAL.ag.mg2.w+mgIdSh(kind,p)),0,10)}
 /* cal-p2c (law 1): the identity class shift of a person's play (sở trường / sở đoản, jmgid mgIdShift; 0 for no person / off) */
 function mgIdSh(kind,p){try{return p&&typeof p==="object"&&typeof mgIdShift==="function"?mgIdShift(kind,p):0}catch(e){return 0}}/* o.d: a known gap (no person: the matching level 0) */
 /* ===== AG-ALL-2d · MINIGAME HAND CEILING (owner OD 17/11 ~16:00Z L1640, verbatim key words: "tất cả NPC đều phải có một cái mức trần chơi game, rồi
@@ -138,7 +143,7 @@ function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")r
  return Math.round((h+(H.art||0)*(lp-lv(R)))*100)/100}
 window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgOrgLv=mgOrgLv;
 window.mgHand=mgHand;
-function mgSkipRaw(t){const k=t&&t.kind,sh=k&&typeof mgIdShift==="function"?mgIdShift(k,S):0;return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)+sh),0,10)}/* cal-p2c: her skip = her identity level on this board (law 2: equal to her expected play, jmgid) */
+function mgSkipRaw(t){const k=t&&t.kind,sh=k&&typeof mgIdShift==="function"?mgIdShift(k,S):0;return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0,k)+sh),0,10)}/* cal-p2c: her skip = her identity level on this board (law 2: equal to her expected play, jmgid) */
 window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;
 /* the ONE trace score (review/mg-snap, owner 17/11 07:10Z: a traced line is judged by where HER finger went, never snapped onto the guide):
    G = the guide path (dense points), U = her line (points [x,y,…]), tol = px. coverage = share of the guide within tol of her line; accuracy = share of
