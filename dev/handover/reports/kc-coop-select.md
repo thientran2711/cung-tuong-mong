@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK ('coop-together|selx|kc-roads|kc2Sel|nlAccept|jcoopthinb'): OD 0 | ledger 0 | claims 8 (only the reports of this bug: STATUS E21r2/E25r2; row E36 RUNNING) | main dev/test/kc-roads/coop-together.js, jkc2.js:514 (kc2Sel), jcoopthinb.js accept()/core() | review/* none touches jcoopthinb (checked coop-thin-g 78583e92, coop-thin-laydo f4fad288: no diff in jcoopthinb.js) | reused: kc2Sel / jentry / joi hooks as they are, coop-together.js extended (no new test file except the static scan).
 
-Branch: review/kc-coop-select, base LIVE 548dcd0d. SHA for review: see the SẴN SÀNG KIỂM line at the end (code final at 0ac6a33f; later commits = test-only).
+Branch: review/kc-coop-select, base LIVE 548dcd0d. SHA for review: 8b26815f3f083f0778b8a6550ffdcf73c1244abf (code + build final at 0ac6a33f; later commits = test-only).
 
 ## Root cause (two parts)
 
@@ -35,7 +35,7 @@ Branch: review/kc-coop-select, base LIVE 548dcd0d. SHA for review: see the SẴN
 `--home=b` (guest takes the home road, host enters at once: both seats, both ways) · `--thin=n` (host asks thin level n) · both identity cards checked (an origin with no home road — cn — has no road card, as solo) · both seats must carry the solo new-life marks (entV, oiV, kpR0, rkSeed, diff) · palace seat waits for the selection result · `CT_SELSHOT=1` holds the selection card for a shot (after the life-gate cover and the entry-gate moment) · `CT_SWAPVP=1` guest on the Fold.
 
 ## Gates (this box, LIVE Worker)
-- coop-together matrix, normal rooms: 9 home-road origins (tt dtq muoi thd ch td cnv nc bd) × both seat directions, palace origins rotating over all 10 (cn included) = 18 pairs. Pass 1: 17/18 PASS + 1 test check (cn has no road card) → fixed. Passes 2 + 3: see the SSK line (≥ 3 runs per pair). Default pair cnv+nc: 26/26, 29/29 ×2 (+ shots runs 31/31 ×2).
+- coop-together matrix, normal rooms: 9 home-road origins (tt dtq muoi thd ch td cnv nc bd) × both seat directions, palace origins rotating over all 10 (cn included) = 18 pairs. Pass 1: 17/18 PASS + 1 test check (cn has no road card) → fixed. Passes 2 + 3 (final test): 18/18 + 18/18 PASS → every pair ≥ 3 runs, 0 game fails, no flake. Default pair cnv+nc: 26/26, 29/29 ×2 (+ shots runs 31/31 ×2).
 - coop-together matrix, thin=8: 15/18 PASS; every selection / new-life check passes in all 18; the 3 fails are «week 2 advanced» stalls (home=a direction). Same stall on LIVE: thin=8 baseline with main's jcoopthinb 1/6 week-2 stall (and 6/6 «went through the selection card» FAIL = the bug). = pre-existing, Foreman B's coop-week-stall (CLAIMS L509), not this branch.
 - coop-thin-b.js (level 2, all origins forced on the host) 136/136 · coop-thin-b-r1.js 39/39.
 - coop-e2e 68/68 ×2.
@@ -49,3 +49,5 @@ CDN upload refused (cdn_sync HTTP 401 on this account, as FOREMAN E noted); imag
 - jcoopthinb.js is Foreman B's coop-thin line (thin-b): please tell B (coop-thin-g owner) this branch changes `accept()` / `core()` / `qSer` / `show` / `rollAsk`; no conflict with review/coop-thin-g or coop-thin-laydo today.
 - thin=8 week-2 stall reproduces on LIVE (above) → coop-week-stall.
 - kin-known.js FAIL on LIVE → kc-roads owner.
+
+SẴN SÀNG KIỂM kc-coop-select 8b26815f3f083f0778b8a6550ffdcf73c1244abf
