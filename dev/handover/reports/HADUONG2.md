@@ -36,3 +36,6 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 - check_store tp1/tp2/tp3 a18: FAIL only S08 (ankle sleeves) + S20 (buns, not loose) on all 3, + S06 (store fabric sentence) on t1. Same as L1908 (t1 = verbatim old Tần). Waiver 17 names S08 only → asked #26 to extend it to S20 (+S06 t1).
 - t1 hair flower → SMALL (#26 relaying owner, F13; 9866 chars). Waiver 17 extended to S20 (+S06 t1) by #26 and logged. VE10 told GO L1924 ×3 @55.
 - m18 maids L1919 DRAWN by VE10 (220 cr): thô sử yiugOhNPW9 · tam lJtksBRgv9 · nhị bxMCq0Z5Y2 · nhất Lw85jBbswO · sheet ha_maid_L1919.png. VE10 nit: nhị chest band reads a bit tall.
+
+# OWNER L1933 (via #26): Tang maids NO phi bạch at all, every rank
+- dev/art/maid7/prod/m18_{thosu,tam,nhi,nhat}_ha_DUONG_L1933.txt = L1919 with the phi bạch phrase replaced by "NO shawl, NO phi bạch, NO scarf (palace maids never wear one, unlike consorts)" + caption L1933; nothing else changed (nhất keeps its band, bán tý, pins). keep PASS ×4, check_store maid a18 PASS ×4. HOLD: no draw until the owner has reviewed the L1927 sheet / #26 says go.
