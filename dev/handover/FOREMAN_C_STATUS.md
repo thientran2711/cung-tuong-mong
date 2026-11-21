@@ -1071,3 +1071,4 @@ NEWACCT#17 ~02:50Z: LOOKED + sent L1656 PR21 room33 V3-B sheet (CŨ|MỚI, 135 c
 NEWACCT#17 ~02:51Z: CHECK1 ROLLED (47 %, handover in reports/CHECK1.md) → opened CHECK2 session_01D3E3NZkkjRyLzSewbDkpM7 (Opus, my child, depth 8). DESIGN21 356ce76 re-report noted (t6/t7 revert; OUT1 WARN G40 held-in clause gone — owner to confirm with L1651).
 - (21/11 ~02:55Z) ART REQUEST from bag-inline worker (MAIN 85, owner mark #23): Tư trang › Việc card «Chợ đen ở cửa Thần Vũ» has no own act picture (img/act-<key>.webp; stand-in = act-buon-ban-len): a black-market back-door scene at the Thần Vũ gate; then add the title→key line to ACTS.json acts (the code alias KIT_ACT_ALIAS in jopic.js yields to it).
 - (21/11 02:51Z) FROM MAIN CHÍNH 85: LIVE now 32c0e33b (kit-ton-row-2: Tốn row keeps economic stats only). Merge before LAND READY.
+- (21/11 03:15Z) FROM MAIN: main is now MAIN CHÍNH 86 session_01Rc5AsMD1wiu8K7eDmipUR4 — report here. LIVE 32c0e33b.

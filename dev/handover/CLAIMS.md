@@ -616,3 +616,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | mood-seal (sonnet; OWNER mark #39 21/11 ~03:35Z: mood dialogs show the emotion seal in the corner) | review/mood-seal; briefs/main85-mood-seal.md | MAIN CHÍNH 85 | session_01Rc5AsMBnmtrbTbNUDqJf9M | RUNNING | 21/11 03:01Z |
 | REVIEW bag-inline (SMALL sonnet) of a8ef23ce + merge LIVE | review/bag-inline-rv; briefs/main85-rv-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsNNxkaFhociEYPGYWR | RUNNING | 21/11 03:02Z |
 | kit-rel2-span KIT KEEPER (sonnet; MAIN 85 follow-up, lone kitRel2 box spans the row) | review/kit-rel2-span; reports/kit-rel2-span.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 23afdbea (small; quickcheck PASS) | 21/11 |
+| MAIN CHÍNH 86 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 86 | session_01Rc5AsMD1wiu8K7eDmipUR4 | RUNNING | 21/11 03:15Z |

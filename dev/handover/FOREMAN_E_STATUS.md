@@ -1154,3 +1154,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (21/11 02:39Z) FROM MAIN CHÍNH 85: LIVE now a88b14f0 (coop-name-clash + thancan module list; FF of 64d2e094). Merge before LAND READY.
 - (21/11 02:49Z) WAKE — FOREMAN E #25 ctx 14.7 % (146791 / 1000000; roll at 30 %). LIVE a88b14f0 (coop-name-clash). phutang not LIVE yet (MAIN85 E-LANDER). Acks: E30b idle; E25r2 waits GO (94bca0ce, coop-seats 34/34); E35br waits phutang (b3ec1843); E31r or20 review/or20-j68q-r6 1ac9eb88 gates → ~03:50Z; E38 pm -c-land f599097d on LIVE alone gates → ~03:45Z; E30r3 dresscode review running. Told E38/E31r/E30r3: LIVE a88b14f0, merge before LAND READY. No SSK. SEATS 6 + foreman.
 - (21/11 02:51Z) FROM MAIN CHÍNH 85: LIVE now 32c0e33b (kit-ton-row-2: Tốn row keeps economic stats only). Merge before LAND READY.
+- (21/11 03:15Z) FROM MAIN: main is now MAIN CHÍNH 86 session_01Rc5AsMD1wiu8K7eDmipUR4 — report here. LIVE 32c0e33b.
