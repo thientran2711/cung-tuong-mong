@@ -1136,6 +1136,142 @@ def g61_fails(text, scope=None):
             return [("G61", "HAND/ITEM AT FRONT WAIST", f"no hand or held item in front of the waist (owner L1905: the ngọc bội slot stays free; hold it at the side / chest height): …{s.group(0)[max(0, m.start()-30):m.end()+20]}…")]
     return []
 
+# ======== GATE7 (owner L2021 via Foreman C ROOT: "những cái gì mà tao kêu là ghi xuống vô cái bộ máy prompt để duyệt đi đã đưa vào chưa?") ========
+# Every owner prompt-word ruling of L1935–L2020 that had NO check is enforced here. Rank / season / era scoping is explicit per check.
+def _rank(scope):
+    m = re.match(r"(?:tp|pr|t)(\d)$", str(scope or "")); return int(m.group(1)) if m else None
+def _sentences(text): return [s for s in re.split(r"(?<=\.)\s+", text) if s.strip()]
+def _clause(text, a, b):
+    lo = max(text.rfind(c, 0, a) for c in ".;:"); hi = [text.find(c, b) for c in ".;:"]; hi = min([h for h in hi if h >= 0] or [len(text)])
+    return text[lo + 1:hi]
+def _ctx(text, m, l=50, r=40): return text[max(0, m.start() - l):m.end() + r]
+HAN_RX = re.compile(r"Han-dynasty|Thiết kế thời Hán|\bquju\b|khúc cư", re.I)
+def is_han(text): return bool(HAN_RX.search(text))
+def is_maid_text(text, scope=None): return scope in ("maid", "mama") or bool(G43_MAID_RX.search(text))
+SQ_RX = re.compile(r"\bsquare (?:neckline|neck|collar|opening)\b|\bSQUARE (?:NECKLINE|collar|neckline)\b", re.I)
+def _square_neck(text):
+    """first NON-negated square-neckline mention (the gate's 'this file says square neck')."""
+    for m in SQ_RX.finditer(text):
+        if re.search(r"\b(?:no|never|not|without|instead of)\b[^.;,:]{0,25}$", text[max(0, m.start() - 30):m.start()], re.I): continue
+        return m
+    return None
+
+# G35 NO CLEAVAGE WORDS (owner L1442 'bỏ cái câu prompt liên quan tới cái khe ngực ra, không có nhắc gì tới hết'; again L1990/L1996 on thu t7/t8):
+# ANY scope: the word itself is banned, negated or not ('không có nhắc gì tới hết' = never mention it). A42 standard phrase is REVOKED.
+G35_RX = re.compile(r"\bcleavage\b|khe ngực|khe nguc|\bd[ée]collet(?:é|e|age)\b|\bbust(?:line)?\b[^.;,]{0,20}\b(?:pushed|lifted|squeezed)\b|\bpush(?:ed)?[- ]up (?:bust|chest|breasts?)\b", re.I)
+def g35_fails(text):
+    m = G35_RX.search(text)
+    return [("G35", "CLEAVAGE WORD", f"no cleavage / khe ngực wording at all, not even negated (owner L1442 'không có nhắc gì tới hết', L1996): …{_ctx(text, m)}…")] if m else []
+
+# L1996 t7/t8 CHEST = LOWER-RANK NECKLINE (owner L1996 angry, via #27: t7/t8 chest words vs lower ranks; remove the inner-top / layered neckline and the pearl swags across the chest):
+# scope tp7-8 / pr7-8 (everyday, every season/era; triều phục not touched). Supersedes the 'pearl strands across the chest' half of G35 (A48 later wins).
+G96_INNER = re.compile(r"\bLAYERED NECKLINE\b|\binner top\b|\btube[- ]top\b|\bbodice\b|\btwo-garment look\b", re.I)
+G96_PEARL = re.compile(r"\b(?:pearls?|pearl[- ]and[- ]gold)\b[^.;:]{0,40}\b(?:swags?|swagged|strands?|ropes?|festoons?|strings?|chains?|garlands?)\b[^.;:]{0,60}\b(?:across|over|on) (?:the |her )?(?:upper )?(?:chest|bust|bodice|breast)\b"
+                       r"|\b(?:swags?|strands?|ropes?|festoons?|strings?|chains?|garlands?) of (?:small |fine |many |large )?pearls?\b[^.;:]{0,60}\b(?:across|over|on) (?:the |her )?(?:upper )?(?:chest|bust|bodice|breast)\b", re.I)
+def g96_fails(text, scope):
+    if _rank(scope) not in (7, 8): return []
+    out = []
+    for rx, kind, why in ((G96_INNER, "INNER TOP", "no layered neckline / inner top / bodice words at t7/t8: copy the lower-rank neckline"), (G96_PEARL, "PEARL SWAG", "no pearl swags / strands across the chest at t7/t8 (pearls may lie on the vân kiên)")):
+        for m in rx.finditer(text):
+            if negated(text, m.start(), m.end()): continue
+            out.append(("L1996", kind, f"{why} (owner L1996): …{_ctx(text, m)}…")); break
+    return out
+
+# G67 NO OUTER CLOAK FOR QP / HQP / HH (owner L1982 + L1714 row 15 + L1971 'only 2 layers'): t6/t7/t8 everyday, every season/era = the one robe over the inner dress;
+# NO open outer robe, open coat, cloak, cape falling from the shoulders, mantle. Triều phục (trieu scopes) keep their cloak. Hán's quju + inner robe = the 2 layers (allowed).
+G67_RX = re.compile(r"\b(?:cloaks?|mantles?|overcoats?|surcoats?|open coats?|open outer robes?|OPEN outer robe)\b|\bouter robe\b[^.;:]{0,40}\b(?:worn open|open at the front|OPEN at the front|falling (?:open )?from the shoulders)\b"
+                    r"|\b(?:long|ceremonial|floor-length|full-length)\b[^.;:]{0,25}\bcape\b|\bcape\b[^.;:]{0,30}\b(?:falling|reaching|trailing) (?:from the shoulders |down )?to the (?:floor|ground|hem|ankles)\b|\ba third (?:robe|layer)\b", re.I)
+def g67_fails(text, scope):
+    if _rank(scope) not in (6, 7, 8): return []
+    for m in G67_RX.finditer(text):
+        if negated(text, m.start(), m.end()): continue
+        if re.search(r"vân kiên|cloud[- ]collar|yunjian", _clause(text, m.start(), m.end()), re.I) and not re.search(r"cloak|mantle|coat|outer robe", m.group(0), re.I): continue
+        return [("G67", "OUTER CLOAK", f"QP/HQP/HH = TWO layers only: no open outer robe / coat / cloak / long cape / mantle (owner L1982; triều phục keep the cloak): …{_ctx(text, m)}…")]
+    return []
+
+# G68 TẦN t4 DENSITY LOCK (owner L2006 on VX7nsw2MMU): everyday t4 a18/a26 (not Hán, not winter): the store words
+# 'clearly more than at Thường tại, still fewer than the Phi' must be there and the superseded 'a few LARGE embroidered' must not.
+G68_NEED = "(clearly more than at Thường tại, still fewer than the Phi)"
+def g68_fails(text, scope, age=None, winter=False):
+    if _rank(scope) != 4 or is_han(text) or winter or (age and age not in ("a18", "a26")) or is_maid_text(text, scope): return []
+    if re.search(r"\ba few LARGE embroidered\b", text): return [("G68", "TẦN DENSITY", "old t4 words 'a few LARGE embroidered …' (owner L2006: a few MEDIUM … scattered on the robe body and the sleeves (clearly more than at Thường tại, still fewer than the Phi) and sprays … on the skirt front)")]
+    if not _square_neck(text): return []   # G68 = the a18/a26 square-cut t4 words; the crossed-collar a36+ t4 is unchanged
+    if G68_NEED not in text or not re.search(r"\ba few MEDIUM embroidered\b", text): return [("G68", "TẦN DENSITY", f"t4 Tần embroidery density lock missing: 'a few MEDIUM embroidered … {G68_NEED}' (owner L2006)")]
+    return []
+
+# G69 ĐÁP ỨNG t1 CHEST FLOWER (owner L2008): everyday t1 a18/a26 with the square-neckline words (not Hán, not winter, not maids): a small embroidered flower cluster at the CENTRE of the chest.
+G69_RX = re.compile(r"\b(?:at|on) the (?:CENTRE|centre|CENTER|center) of (?:the|her) chest\b|\bchest[- ]cent(?:re|er)\b", re.I)
+def g69_fails(text, scope, age=None, winter=False):
+    if _rank(scope) != 1 or is_han(text) or winter or (age and age not in ("a18", "a26")) or is_maid_text(text, scope) or not _square_neck(text): return []
+    return [] if G69_RX.search(text) else [("G69", "T1 CHEST FLOWER", "Đáp ứng t1 needs a sparse small embroidered flower cluster at the CENTRE of the chest (owner L2008)")]
+
+# F19 HAIR FLOWER = BLOOM ONLY, NO LEAVES (owner L1723, again L2011; L2015: ONLY hair flowers; robe embroidery may keep leaves) + NO CHRYSANTHEMUM anywhere (L1723/L1726).
+HAIRFL_RX = re.compile(r"\bfresh flower\b|\bhair[- ]flower\b|\bflowers? (?:tucked |pinned |set )?(?:in|into|beside|behind) (?:her|the) (?:hair|bun|ear)\b|\btucked beside the bun\b", re.I)
+LEAF_RX = re.compile(r"\bleaf\b|\bleaves\b|\bleafy\b|\bfoliage\b|\bsprigs?\b|\bsprays?\b|\bgreen stems?\b|\bwith (?:its |a )?stem\b", re.I)
+NOLEAF_RX = re.compile(r"\b(?:no|without) leaves\b|\bbloom only\b|\bbloom ONLY\b|\bleafless\b|\bonly the bloom\b|\bnever (?:any )?leaves\b", re.I)
+def f19_hair_fails(text, scope=None):
+    out = []
+    hits = [m for m in HAIRFL_RX.finditer(text) if not negated(text, m.start(), m.end())]
+    if hits:
+        for m in hits:
+            cl = _clause(text, m.start(), m.end())
+            for lm in LEAF_RX.finditer(cl):
+                if re.search(r"\b(?:no|never|without|not)\b[^,;]{0,25}$", cl[:lm.start()], re.I): continue
+                out.append(("F19", "HAIR FLOWER LEAVES", f"hair flower = the bloom ONLY, no leaves / sprigs (owner L1723/L2011; embroidery may keep leaves, L2015): …{cl.strip()[:160]}…")); break
+            if out: break
+        if not out and not NOLEAF_RX.search(text):
+            out.append(("F19", "HAIR FLOWER NO-LEAF WORDS", f"a hair flower is written but no 'bloom only, no leaves' words (owner L2011: the picture kept leaves): …{_ctx(text, hits[0])}…"))
+    m = re.search(r"\bchrysanthemums?\b|\bhoa cúc\b", text, re.I)
+    if m and not negated(text, m.start(), m.end()): out.append(("F19", "CHRYSANTHEMUM", f"no chrysanthemum anywhere, hair or embroidery (owner L1723/L1726): …{_ctx(text, m)}…"))
+    return out
+
+# L1990 / L1992 SQUARE NECKLINE = A FRAMED neckline (owner L1990: 'a FULL embroidered square frame (horizontal band + vertical bands up to the shoulders), not one horizontal band';
+# L1992: the approved Quý phi eIPcGThdqL collar). Every consort file that says square neck (not maids): the square neckline sentence must say it is framed / edged by a band;
+# t7/t8 (where L1990 was raised): the FULL frame words 'up both sides to the shoulders' must be there.
+SQFRAME_RX = re.compile(r"\b(?:framed|edged|bordered|outlined|trimmed)\b[^.;]{0,150}\bband\b|\bband\b[^.;]{0,40}\b(?:framing|edging|bordering)\b", re.I)
+SQFULL_RX = re.compile(r"\bup both sides\b[^.;]{0,30}\bshoulders\b|\bon ALL sides\b|\bframed on all four sides\b", re.I)
+def l1990_fails(text, scope, winter=False):
+    r = _rank(scope)
+    if r is None or is_maid_text(text, scope): return []
+    m = _square_neck(text)
+    if not m: return []
+    out = []
+    if winter and r <= 5: out.append(("G25", "WINTER SQUARE NECK", f"winter = crossed collar (cổ chéo) for t1–t5, never a square neckline (G25; owner L1971 #4 'winter t4 square collar WRONG'): …{_ctx(text, m)}…")); return out
+    s = next((x for x in _sentences(text) if _square_neck(x)), "")
+    if not SQFRAME_RX.search(s): out.append(("L1990", "SQUARE NOT FRAMED", f"the square neckline must be framed by an embroidered band (owner L1990/L1992): …{_ctx(text, m, 10, 160)}…"))
+    elif r in (7, 8) and not SQFULL_RX.search(s): out.append(("L1990", "SQUARE FRAME NOT FULL", "t7/t8 square neckline = FULL frame: 'framed on ALL sides (across the chest AND up both sides to the shoulders)' (owner L1990)"))
+    return out
+
+# G60b LONG TRAILING BOW TIES (owner L1971 #2: 'everyone with a bow in game -> long trailing ties, thướt tha'): a prompt that ties a (non-negated) bow must
+# give that bow LONG trailing ties somewhere in the prompt (a 'BOW POSITION' line may stand apart from the bow description). Cupid's bow / archery bows are not bows.
+BOW_RX = re.compile(r"(?<!cupid's )(?<!cupid’s )\bbows?\b(?! (?:her|their|his) head)(?! and arrows?)", re.I)
+LONGTIE_RX = re.compile(r"\blong\b[^.;]{0,60}\b(?:ties|tails|ribbon ends|ends|streamers|ribbons|loops and ties)\b|\btrailing\b[^.;]{0,40}\b(?:ties|tails|ends|ribbons|streamers)\b|\b(?:ties|tails|ends|ribbons|streamers)\b[^.;]{0,40}\b(?:trailing|flowing down|falling (?:long|to)|thướt tha)\b", re.I)
+def g60b_fails(text):
+    for m in BOW_RX.finditer(text):
+        if negated(text, m.start(), m.end()): continue
+        if re.search(r"\b(?:archery|arrows?|bowstring|bowman)\b", _clause(text, m.start(), m.end()), re.I): continue
+        if LONGTIE_RX.search(text): return []
+        return [("G60", "BOW TIES NOT LONG", f"every bow has LONG trailing silk ties, thướt tha (owner L1971): …{_ctx(text, m, 60, 60)}…")]
+    return []
+
+# G62 HÁN COLLAR FROZEN WORDS (owner L1915, locked; G66 t1–t3): every Hán prompt carries the frozen NECKLINE sentence + collar clause verbatim.
+def _han_frozen():
+    t = open(os.path.join(ART, "seasons4", "HAN_COLLAR_L1915_FROZEN.txt"), encoding="utf-8").read().splitlines()
+    return [norm(t[i + 1]) for i, l in enumerate(t) if l.startswith(("EARLY", "COLLAR CLAUSE"))]
+def g62_fails(text):
+    if not is_han(text): return []
+    return [("G62", "HÁN COLLAR WORDS", f"Hán collar words changed / missing (frozen dev/art/seasons4/HAN_COLLAR_L1915_FROZEN.txt, owner L1915): '{w[:70]}…'") for w in _han_frozen() if w.rstrip(".") not in text]
+
+def gate7_fails(text, scope, age=None):
+    import winter_g28; w = winter_g28.is_winter(text)
+    f = []
+    f += g35_fails(text); f += g96_fails(text, scope); f += g67_fails(text, scope)
+    f += g68_fails(text, scope, age, w); f += g69_fails(text, scope, age, w)
+    f += f19_hair_fails(text, scope); f += l1990_fails(text, scope, w); f += g60b_fails(text); f += g62_fails(text)
+    return f
+# ======== /GATE7 ========
+
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1151,6 +1287,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
     fails += g61_fails(text, scope)   # G61 front waist free (owner L1905)
     fails += g60_fails(text)   # G60 bow centred (owner L1890)
+    fails += gate7_fails(text, scope, age)   # GATE7 (owner L2021): G35 no cleavage · L1996 t7/t8 chest · G67 no cloak t6–t8 · G68 Tần density · G69 t1 chest flower · F19 hair no leaves + no chrysanthemum · L1990 square frame (+G25 winter crossed) · G60 long bow ties · G62 Hán collar words
     fails += g59_fails(text)   # G59 no sachet anywhere (owner L1874)
     fails += g65_fails(text, scope)   # G65 (t4+ exempt, owner L1971) embroidery placement + size (owner L1952)
     fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
@@ -1260,6 +1397,40 @@ def selftest():
     for t, want in [("Pose: one hand touching her hairpin, a flute in the other hand at her waist, the hem swinging.", 1), ("Pose: standing, a letter held level at her waist with both hands.", 1), ("Her hands and body: the item held in both hands lowered before her at waist height, head tilted.", 1),
                     ("Pose: the item held in one hand out to her side at chest height, her sleeves kept clear of the front of her waist.", 0), ("Pose: a flute held low at her side, never in front of her waist.", 0)]:   # G61 (owner L1905)
         if bool(g61_fails(norm(t))) != bool(want): print("G61 SELFTEST", want, t); bad += 1
+    # GATE7 (owner L2021): each new check fires on the owner's fault words and stays quiet on the fixed words
+    for t, sc, age, ids in [
+        ("the square neckline shows a soft, natural hint of cleavage, tasteful and elegant.", "tp6", "a18", {"G35", "L1990"}),   # G35 (L1442/L1996)
+        ("a modest neckline (no cleavage).", "maid", "a18", {"G35"}),   # G35: not even negated
+        ("a LAYERED NECKLINE: a lilac inner top with a low square neckline framed on ALL sides (across the chest AND up both sides to the shoulders) by a wide band.", "tp7", "a18", {"L1996"}),
+        ("strands of pearls swagged across the chest from collar edge to collar edge.", "tp8", "a18", {"L1996"}),
+        ("many pearl strands lying flat on the vân kiên.", "tp8", "a18", set()),
+        ("strands of pearls across the chest.", "tp5", "a18", set()),   # L1996 is t7/t8 only
+        ("over it a long ceremonial silk mantle falling from the shoulders to the floor.", "tp8", "a18", {"G67"}),   # G67 (L1982)
+        ("under the OPEN outer robe, its fronts falling from the shoulders.", "tp7", "a18", {"G67"}),
+        ("this one robe worn over a lilac inner dress, NO outer robe, NO open coat, NO cloak or mantle over it.", "tp8", "a18", set()),
+        ("a jewelled cloud-collar cape edged with pearls over the shoulders.", "tp7", "a18", set()),   # vân kiên is a collar
+        ("over it a long ceremonial silk mantle falling from the shoulders to the floor.", "trieu8", "a18", set()),   # triều phục keeps the cloak
+        ("a straight SQUARE collar framed by a wide stiff lilac band, a few LARGE embroidered lotus flowers on the robe (fewer than Phi).", "tp4", "a18", {"G68"}),   # G68 (L2006)
+        ("a straight SQUARE collar framed by a wide stiff lilac band, a few MEDIUM embroidered lotus flowers scattered on the robe body and the sleeves (clearly more than at Thường tại, still fewer than the Phi).", "tp4", "a18", set()),
+        ("a LOW open square neckline framed by a wide flat lilac band, small lilac flowers at the hem.", "tp1", "a18", {"G69"}),   # G69 (L2008)
+        ("a LOW open square neckline framed by a wide flat lilac band, a sparse small cluster of embroidered lilac flowers at the CENTRE of the chest.", "tp1", "a18", set()),
+        ("a modest snug crossed collar, small lilac flowers at the hem.", "tp1", "a51", set()),
+        ("silver hairpins and a fresh flower (a lilac spray with leaves).", "tp1", "a18", {"F19"}),   # F19 (L2011)
+        ("silver hairpins and a fresh flower (a tiger lily).", "tp2", "a18", {"F19"}),   # no 'bloom only' words
+        ("silver hairpins and a fresh flower (a tiger lily, bloom only, no leaves); embroidered lilies with leaves on the hem.", "tp2", "a18", set()),   # L2015: embroidery leaves OK
+        ("embroidered golden chrysanthemums on the hem.", "tp5", "a18", {"F19"}),
+        ("a LOW open square neckline across the upper chest, neck and collarbones bare.", "tp5", "a18", {"L1990"}),   # L1990/L1992
+        ("a LOW open square neckline across the upper chest, framed by a wide flat lilac band.", "tp7", "a18", {"L1990"}),   # t7/t8 need the full frame
+        ("a LOW open square neckline, framed on ALL sides (across the chest AND up both sides to the shoulders) by a wide flat embroidered lilac band.", "tp8", "a18", set()),
+        ("WINTER: a WIDE band of soft plain ivory-white fur trim. a straight SQUARE collar framed by a wide band.", "tp4", "a18", {"G25"}),   # winter = crossed collar
+        ("the sash tied at the front in a small, pretty bow.", "maid", "a18", {"G60"}),   # G60b (L1971)
+        ("the sash tied at the centre front in a bow with two long trailing ties.", "maid", "a18", set()),
+        ("thin lips with a sharp defined cupid's bow.", "maid", "a18", set()),
+        ("sash tied flat at the CENTRE front, NO bow.", "tp3", "a18", set()),
+        ("a full Han-dynasty court look in TWO visible robes.", "tp5", "a18", {"G62"}),   # G62 frozen Hán collar words missing
+    ]:
+        got = {i for i, k, d in gate7_fails(norm(t), sc, age)}
+        if got != ids: print("GATE7 SELFTEST want", sorted(ids), "got", sorted(got), sc, t[:80]); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
