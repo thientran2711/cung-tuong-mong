@@ -9,4 +9,5 @@
  const sF0=stealFail;stealFail=function(a,t,mode){rec(a,mode,0);return sF0.apply(this,arguments)};
  let cur=null;const close=()=>{if(!cur||cur.S!==S)return;const c=C.mo[cur.k]=C.mo[cur.k]||{n:0,sung:0,danh:0,nights:0,hh:0};c.n++;c.sung+=(S.sung||0)-cur.sung;c.danh+=(S.danh||0)-cur.danh;c.nights+=(S.nights||0)-cur.nights;c.hh+=S.rank>=7&&cur.rank<7?1:0};
  const mT=monthTick;monthTick=function(){const ev=mT.apply(this,arguments);try{close();if(S&&!S.dead)cur={S,k:kind(S),sung:S.sung||0,danh:S.danh||0,nights:S.nights||0,rank:S.rank}}catch(e){}return ev};
+ const P0=window.__res.push;window.__res.push=function(x){try{x.od3=JSON.parse(JSON.stringify(C))}catch(e){}return P0.apply(this,arguments)};/* each finished life carries the running totals */
  const ex=window.__bot.extra;window.__bot.extra=function(){const o=ex.apply(this,arguments);o.od3=C;return o}})();
