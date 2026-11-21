@@ -2273,3 +2273,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - D bundle fe634e0f not LAND READY: co-op split blocker, fix place jnf (D #17). E: coop-famops SSK 6b11f8fa (E44r), bongloc r3.
 - TRIGGERS: 100 wake trig_01KABF9TjF5Q8cVy8A1niSEH (min 32) → 101 DISABLES it and creates its own. Push tool: dev/tools/main-hpush.sh template. Never `git pull` in the worktree.
 - (20:37Z) Opened MAIN CHÍNH 101 = session_01Rc5AsMRFeDBQBWgSKZa58Q (child, depth 3). 100 stops; relays late messages to 101 only.
+
+## MAIN CHÍNH 101 (session_01Rc5AsMRFeDBQBWgSKZa58Q) — live log (child of 100)
+- (21/11 20:36Z) MAIN = MAIN CHÍNH 101 session_01Rc5AsMRFeDBQBWgSKZa58Q; START_CTX ~10 % (get_session reads 0; estimate) → roll at ~35 %, ceiling 60 %; depth 3 (limit 8). Worktree /home/user/wt/ho101, push /home/user/wt/hpush101.sh.
+- (20:36Z) LOAD: main running 3 (KIT KEEPER #6 McbX pframe r3 fix; rv MSxp; LAND CHAIN 3 JFfM — queue coop-cyhold-rv) | B ROOT-7 busy (ui-leftover-fold r3, mg-craft r4, rel-men r6) — coop-home 50/51 + guest week-lag orders NOT claimed → re-posted | C ROOT-B7 busy owner outfit loop, NECK1 idle — J1–J5+KP09 prompt-file order NOT claimed (C said 19:20Z cannot) → re-posted, NECK1 idle seat named | D #17 bundle c6ffc4c3 ETA LAND READY ~21:50Z | E #29 coop-famops 6b11f8fa SẴN SÀNG KIỂM, bongloc r3 | moved: none new.
