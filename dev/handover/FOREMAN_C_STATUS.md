@@ -1280,3 +1280,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #26 ~08:45Z: OWNER L1915: Hán collar L1893 aFGoe7afSh = EXACT, LOCK it (HAN5 rule + frozen snippet); inner band → try WHITE; roll out 8 Hán ranks, each step tiny more collar ornament, cực kỳ tiết chế → HAN5 → VE7 @55×8 (440). Next Lượt 1916.
 #26 ~08:47Z: SENT L1916 hạ Đường L1908 t1 yiugBgJPW9 | t2 0eUAAiwTfW | t3 6AbJJSriJO (VE6 110). Notes: t1 old pic has jade pendant (G57), t2 tassels from bow. HHCOL1 winter L1912 → VE6. VE8 rolled → VE11. Next Lượt 1917.
 #26 ~08:47Z: SENT L1917 winter t1 L1912 rgXHHk0xtc (VE6 55; thick, no phi bạch). If OK → sweep all winter files (HHCOL1 list) + winter_g28.py + W04/M06. Next Lượt 1918.
+#26 ~08:49Z: SENT L1918 m12 ×9 L1905 poses (VE10 1215, pushed 871520647). VE10 free. Next Lượt 1919.
