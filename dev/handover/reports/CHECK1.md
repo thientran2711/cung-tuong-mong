@@ -332,3 +332,13 @@ Fixes:
   - The G23-type "robe falling still and straight" was dropped.
 
 Verdict: **t7 PASS · t8 PASS — HOLD, not to GEN1** (Foreman). They still carry OUTER_TIED. When t4/t5 v8 proves OUTER_WRAP, LADDER2 swaps it in and I re-check. t6 COMOIf stays FAIL (G1 vân kiên).
+
+## JOB 11 re-check (LADDER2 76bd17b9c) — thu s62 t6 COMOIg · checked at 76521e1 · 0 gens · ON HOLD
+Gates: tp6 a22 PASS; keep PASS. Chars: 9996. No vase.
+- G1 / G37: the one-tier VÂN KIÊN is back, word for word as in the old COMOIe (scalloped gold-thread edge, gold tassel fringe, pearl-edged, small jade + pearl drops) ✓.
+- G47 Phi items carried onto it: "a pearl-and-jade net over it, its fronts linked across the chest by a silk cord with a jade clasp in the middle" ✓. The rest of the checklist is as in job 11 ✓.
+Verdict: **t6 PASS — HOLD** (it still has OUTER_TIED; the OUTER_WRAP swap is to come).
+Notes:
+- The Phi shoulder layers are not carried. They did not fit, and they would sit under the vân kiên; they are the Phi's own G46 piece, not a G42 placement.
+- "her head never back-turned" was dropped (low risk).
+- The pendant words were compacted.
