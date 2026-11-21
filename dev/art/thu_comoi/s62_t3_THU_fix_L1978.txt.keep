@@ -1,0 +1,13 @@
+base: dev/art/thu_comoi/s62_t3_THU_fix_L1893.txt
+allow: a little DENSER than the rank below   # owner L1978: t3 clearly denser than t2 + chest-centre embroidery
+allow: Everyone beautiful at every age   # boilerplate trim to stay < 10 000 chars
+allow: no hairpin horizontal   # boilerplate trim (duplicate of 'Every hairpin points upward or backward')
+allow: in the other hand at her waist   # owner L1905 G61
+allow: nơ giữa L1893   # caption L1978
+allow: Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down   # boilerplate trim (duplicate of 'Every hairpin points upward or backward')
+allow: Every hairpin points upward or backward   # boilerplate trim (the longer hairpin sentence stays)
+allow: never sticking out sideways   # boilerplate trim
+allow: "Mùa Thu · Quý nhân · nơ eo   # caption L1978 (shortened label)
+allow: a fresh flower   # trim: duplicate of the HAIR FLOWER SIZE sentence (same rose, bloom only, no leaves)
+allow: a soft rose-pink semi-double China rose   # trim: duplicate of HAIR FLOWER SIZE
+allow: bloom only   # trim duplicate
