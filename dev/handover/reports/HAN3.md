@@ -20,3 +20,7 @@ depth 3 (get_session lineage.depth) · START_CTX ~3 % of 1M (get_session read 0 
 
 ## Open questions
 1. HQP necklace (L1745 keep neck jewels vs A41). 2. HQP shoulder fringe: thu t7 has none — which fringe? 3. Diagonal wrap sentence for QP/HQP (above). 4. Fabric waivers M06/M07/S06.
+
+# HAN3 job 6b (L1753 via #21): quju wrap QP + HQP, HQP fringe. 0 gens.
+- s62_t6_HAN_QP_quju_L1753.txt (+.keep, base t6 LADDER): zhiju → "wrapped outer robe (quju, khúc cư) … its front panel wraps ONCE across the front in one crisp diagonal to a softly curved hem edge (never a spiral, petal panels or swallowtail points)"; collar unchanged; dup "Full-body standing figure…" line trimmed (S18 kept). keep PASS, check_store tp6 PASS, 9925 ch.
+- s62_t7_HAN_HQP_collar_quju_L1753.txt: DRAFT, not pushed — 10187 ch (>10 000). Waiting #21 pick A/B/C for the last ~190 ch.
