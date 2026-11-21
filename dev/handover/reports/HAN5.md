@@ -85,3 +85,8 @@ Added after the band colours: ", small pearls stitched along the collar bands on
 - L1880 3zKyLD3REY: WIDE neckline. The collar edges reach the shoulder tips, the whole collarbone is bare, and the wide pink collar lies across the shoulders, the closest to Phi CqnIKlAEEy's silhouette so far WITHOUT a yoke. Bands: outer plum and pink visible, the pale purple inner band hardly separate.
 - L1884 YMlRJFKWeC: pearls show along the collar edge, but the V is narrower (ordinary crossed collar). The pearls alone do not give the shape.
 HAN5 read: the collarbone words (L1880) are the lever for the shape. The next step could be L1880 + pearls on the bands, plus a stronger band separation if the owner wants it.
+### PHISIMPLE_L1893 (owner L1893: "bắt đầu ra cái cổ rồi" for L1880, but the collar must sit a little higher)
+From L1880, collar words only:
+- early NECKLINE sentence: "…opens WIDE and lies FLAT and SECURE on the shoulders, its edges reaching about TWO-THIRDS of the way out along both collarbones: the inner part of the collarbones visible, their outer ends covered, never slipping, never off the shoulders."
+- collar clause: "…lie flat and secure on the shoulders about two-thirds of the way out along the collarbones (inner part visible, outer ends covered) and meet a little above the bust in a broad V,"
+keep PASS; check_store M06/M07.
