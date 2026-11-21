@@ -49,3 +49,17 @@ Prompts pasted verbatim: reconstructed from the m09_*_L1869 text with rose pink�
 | mama_a51 | TdwG2ntVNR | ✓ jade blue-green + lilac, silver streaks, 3/4 right, abacus |
 Looks only (sheet at ~1084px), check_store not run. Not drawn: m09_mama_a51_L1895 (m09 mama was already drawn from L1869, eIPcztbdqL; MAIDFIX3 says L1869 had a token bug; redraw needs the owner's OK, 135 cr).
 VE7 total: 810 + 55 + 1215 + 1215 = 3295 cr.
+
+## JOB 4 — Hán collar t1–t8 (L1915, HAN5 via #26, commit be4378f) — 8 × 55 = 440 cr
+gpt-2-6 1k low 9:16 seed 7172 · refs t1–t5 nVsrRMPYQD; t6–t8 nVsrRMPYQD + TdwDfOyVNR · files dev/art/seasons4/s62_t{1..8}_HAN_COLLAR_L1915.txt pasted verbatim incl. CAPTION line (grep: "pendant" only inside "no pendants"; no sachet) · sheet dev/handover/review-sheets/han_collar_L1915_t1_t8.png (one row t1→t8 + Phi L1893 ref aFGoe7afSh at the end)
+| rank | id | look |
+|---|---|---|
+| t1 Đáp ứng | gOm1jngSXO | ✓ wide V collar on shoulders, 3 bands, peach-pink + ivory, loose hair, blue book, frontal mid-step; caption ok |
+| t2 Thường tại | 1ldFbR1r4r | ✓ wide V, tiger lilies, pale-jade pellet drum at chest, ivory sash; caption ok |
+| t3 Quý nhân | fHz8mJ5CDY | ✓ wide V, 3/4 right, hand on hairpin, bamboo flute out to the side, China roses |
+| t4 Tần | P3QS7XQ42C | ✓ plum + blush, 3/4 left, white-jade lotus lamp, wide belt with gold plaque |
+| t5 Phi | eIPcM8vdqL | ✓ frontal, letter in both hands at chest, plum + blush, bow sash; matches the Phi ref style |
+| t6 Quý phi | SyhrsOsUb8 | ✓ slight turn left, jade tú cầu ball, yellow sash/inner panel, big gold headdress |
+| t7 Hoàng quý phi | gOm1LOuSXO | ✓ 3/4 left, teal parasol held low, phoenix crown, wide yellow borders, sleeves reach the floor |
+| t8 Hoàng hậu | cpS2nen0eP | ✓ yellow dominant with plum + blush, gold phoenixes, jade fan held low, nine-phoenix crown |
+Collar check on all 8: wide V, flat on the shoulders. Captions are readable and match the file text at sheet size (not zoomed to letter level). Looks only; check_store not run by VE7 (HAN5 reports gates PASS with the waived FAILs). VE7 total: 3295 + 440 = 3735 cr.
