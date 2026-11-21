@@ -13,8 +13,8 @@ M11_NEW = ("Her face: a soft rounded oval face with gently full cheeks and a sof
 M11_AGE = {"mama_a51": "a real 51-year-old woman with a mature adult face, never a baby face, never chibi, never a big head on a small body",
            "chuongsu": "an adult woman of about 28, adult face and body proportions, never a baby face, never chibi, never a big head on a small body"}
 M11_AGE_DEF = "an adult young woman of about 20, adult face and body proportions, never a baby face, never chibi, never a big head on a small body"
-picks = M.pick_all(PERS); rows = []
-for pid in PERS:
+picks = M.pick_all(PERS); rows = []   # m11 stays in the pick order (so the other persons' picks never move) but is NOT written: owner L1925 dropped person m11
+for pid in [p for p in PERS if p != "m11"]:
     for rk in M.RANKS:
         b = P + f"{pid}_{rk}_L1905.txt"; s = open(b, encoding="utf-8").read()
         old = M.item_of(s); assert old, (pid, rk)
