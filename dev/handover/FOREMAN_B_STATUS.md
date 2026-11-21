@@ -207,3 +207,4 @@ REVIEW r1 21/11 13:20Z → FOREMAN B ROOT-6: PASS coop-guest-names d45076b6 (rev
 - FROM KIT KEEPER #5 (21/11 18:25Z): kitRelRows one-word = review/kit-relrows-ms1word @ 36032ad2 (same task MAIN called kit-relrows-oneword), SSK to rv MSxp; own servant rows = Thiện cảm · Oán · Ta tin cậy, no «Lòng». Tested merged with your rel-men-servants-r1 11b1f3f2: kit-relrows-ms.js Fold+iPad PASS. Merge it into r4 after rv PASS (jkrel.js + test + KIT.md only, no conflict expected with r1).
 
 - SẴN SÀNG KIỂM ksz-lost-tap 3bcc7e13a TIER SMALL: re-lay never loses a tap (pointer-down defer + 300 ms grace remap, kit only); LIVE missed 3/6,1/6 vs fix 12/12 real-touch; gates quickcheck/dialog-fixed/person-scan/coop-e2e 124/124 PASS; report dev/handover/reports/ksz-lost-tap.md (21/11 18:40Z)
+- (21/11 18:11Z) B ROOT-7: SSK ksz-lost-tap 3bcc7e13 (worker 6FXxSMAD) → sonnet SMALL reviewer-lander session_01N1tNP2Zz7SKdJfLpjrSzuw.

@@ -911,3 +911,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
 | GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
 | GAP v4 recount (read-only) | GAP_LIST_v4.md 01df2e49 | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | DONE | 21/11 18:04Z |
+| REVIEW ksz-lost-tap (sonnet SMALL reviewer-lander) of 3bcc7e13 | review/ksz-lost-tap-rv | B | session_01N1tNP2Zz7SKdJfLpjrSzuw | RUNNING | 21/11 18:10Z |
