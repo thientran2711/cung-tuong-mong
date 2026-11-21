@@ -11,7 +11,8 @@ function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div c
    the rank-name paint (jaudit) from adding a title in front of the name again. */
 function pcHead(o){const rk=String(o.rank||"").replace(/<[^>]*>/g,"").trim();const raw=o.name==null?"":String(o.name);const same=rk&&!/</.test(raw)&&raw.trim().toLowerCase()===rk.toLowerCase();
  const nm=same?raw:(typeof kitDedupRank==="function"?kitDedupRank(rk,raw):raw);const kmy=o.me||(o.f&&typeof pMe==="function"&&o.name===S.name);const tone=typeof kitRankTone==="function"&&o.rank?kitRankTone(rk,o.col):"";
- return `<b class="pcname${kmy?" kmy":""}${same?" krt":""}" data-krn-skip${same?` style="--rt:${tone}"`:""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
+ const tonly=!same&&/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim());/* OD:L1362: ONLY the Emperor's name is the bright imperial yellow (Thái hậu keeps her own look, KIT 33.5 amber / 83.1) */
+ return `<b class="pcname${kmy?" kmy":""}${same||tonly?" krt":""}" data-krn-skip${same||tonly?` style="--rt:${tone}"`:""}${/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim())?" data-imp=\"emp\"":""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
 function pcard(o){const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=(o.chips||[]).filter(Boolean);
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];

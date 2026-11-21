@@ -125,6 +125,11 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 |---|---|---|---|---|---|
 | 20/11 | wk mg-craft-hoa (filed by the group-2 reviewer: the HOA report and jcraft_hoa.js named this request, but it was never written here) | **KG82_DEMO "cut" motion** (j82 KG82_DEMO + kgReady picture): the ghost hand SLASHES across a lying stem (a swipe that crosses a line), + the kgTut step sign for it on `.kgt-bar`. No existing demo group shows a slash; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» shows the generic "drag" demo until then (KG82_CRAFT.hoa.demo "drag" → "cut"). Optional, same table: "hold" for Vẽ «Thủy mặc» (press-hold-release on the inkstone). | Cắm hoa (hoa) rules screen + «Hướng dẫn»; Vẽ (ve) optional | kit keeper | open |
 
+## 20/11 wear-slots (GAP IT03, Foreman B ROOT) — the wear column must hold 8 slots + the pet box
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | wk wear-slots | **KIT 33b kitEquipSlots col:true + kitInvFit (jinv)**: KEQ_TT now has 8 slots (Cài tóc · Hoa tai · Đeo tay · Đeo eo · Túi thơm · Khăn che mặt · Y phục · Giày) + the pet box (jpet). Fold 755x1000 and iPad 1366x1024 fit (column ends 21 px inside the panel); iPad **1180x820 overflows 96 px** even at the 40 px floor (with the old 6 slots it ended 16 px inside), so the panel scrolls and Giày + pet box sit below the fold. Ask: the wear column wraps to 2 slot columns (or the fit floor/label rule changes) when one column cannot fit the panel height — one kit rule for every kitEquipSlots col:true place (Tư trang; Chọn y phục jtoil now 7 slots). Measure: dev/test/wear-slots.js "wear column leaves the panel". | Tư trang, Chọn y phục | MAIN kit keeper | OPEN |
+
 ## 20/11 kit-cost-rows-home (MAIN ROOT-80 order; E25 «KR home-stat rows», E22t «quý nhau»)
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
