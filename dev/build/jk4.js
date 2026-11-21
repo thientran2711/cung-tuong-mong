@@ -1045,7 +1045,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
 function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(".pc>.pcr button.ka")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -1086,12 +1086,55 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
-@container kpane (max-width:420px){
- .pc>.pcr button.ka.kart{--kaw:72px!important;--kah:96px!important}
- .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
-}
+${kitCompactCSS(".pc>.pcr button.ka.kart",76,76)}
+/* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (76x76, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
+   UNDER both, ONE full-width info box (.kpabox: the lead sentence, Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, every other row). kitPcActSplit builds the box. */
+html body .pc>.pcr button.ka.kart{display:grid!important;grid-template-columns:76px minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:76px!important;--kah:76px!important;min-height:0!important}
+html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:76px!important;height:76px!important;flex:none!important;align-self:start!important}
+html body .pc>.pcr button.ka.kart>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
+html body .pc>.pcr button.ka.kart>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
 `;document.head.appendChild(st)})();
+/* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
+   Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
+function kitPcActSplit(b){try{if(!b||!b.isConnected||!b.classList.contains("kart"))return;const body=b.querySelector(":scope > .kabody");if(!body)return;
+ const kb=body.querySelector(":scope > small.kb"),lead=body.querySelector(":scope > .klead");
+ const keep=r=>/\bkr-(ton|duoc|thanh)\b/.test(r.className)&&!r.classList.contains("kofold");const mv=kb?[...kb.children].filter(r=>r.classList.contains("kr")&&!keep(r)):[];
+ if(!lead&&!mv.length)return;/* nothing to move: no box is made (no DOM churn for the observer) */
+ let box=b.querySelector(":scope > .kpabox");if(!box){box=document.createElement("span");box.className="kpabox";b.appendChild(box)}
+ if(lead)box.prepend(lead);
+ if(mv.length){let bk=box.querySelector(":scope > small.kb");if(!bk){bk=document.createElement("small");bk.className="kb";box.appendChild(bk)}mv.forEach(r=>bk.appendChild(r))}
+ if(kb&&!kb.children.length)kb.remove()}catch(e){console.error("kitPcActSplit",e)}}
+window.kitPcActSplit=kitPcActSplit;
+function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc>.pcr button.ka.kart").forEach(kitPcActSplit)}catch(e){}}
+window.kitPcActScan=kitPcActScan;
+(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcActScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+/* KIT §6.3b-1 (owner 21/11 ~02:10Z, review/kit-pcrow-square): NO bullet info box on a person card. The descriptive note (.pcn.kpres: «Người chạy việc của cung… / Gặp nàng ta ở tẩm cung…», Chí tôn «Trọng tài… / Mê sắc…»)
+   is hidden and the kit yellow «!» (.khap, §78) sits on the TOP-RIGHT corner of the left avatar/figure (.pcp); tap → the same text in the kit info popup. An act RESULT («…: thành / hỏng», popMsg) stays on the card
+   (feedback to a tap is not a description). Every left-avatar host, one rule. */
+function kitPcNoteBang(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp");const nt=pc.querySelector(":scope > .pcr > .pcn.kpres");
+ if(!pcp){return}const have=pcp.querySelector(":scope > .kpcbang");
+ if(!nt||/:\s*(thành|hỏng)/i.test(nt.textContent)){if(have&&!nt)have.remove();return}
+ nt.hidden=true;nt.classList.add("kpcnote");pc.__kpnote=nt.innerHTML;
+ if(!have){const i=document.createElement("i");i.className="khap kpcbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";pcp.appendChild(i)}}catch(e){console.error("kitPcNoteBang",e)}}
+window.kitPcNoteBang=kitPcNoteBang;
+function kitPcNoteScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc").forEach(kitPcNoteBang)}catch(e){}}
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest(".pc > .pcl > .pcp > .kpcbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
+(function(){const st=document.createElement("style");st.id="kit-pc-bang";st.textContent=`
+.pc>.pcl>.pcp.kit{position:relative}
+.pc>.pcl>.pcp>.kpcbang{position:absolute;top:-6px;right:-4px;margin:0;z-index:6;cursor:pointer}
+.pc>.pcr>.pcn.kpcnote{display:none!important}
+/* KIT §6.3b-2 (owner 21/11 ~02:14Z): the rank + name tag at the top of the left column is CENTRED over the figure, in every left-avatar tab */
+html body .pc[data-k2].kpwide>.pcl>:is(.pcname,.pcrk,b:first-of-type){text-align:center!important;justify-content:center!important;align-self:stretch!important}
+html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important}
+`;document.head.appendChild(st)})();
+(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
