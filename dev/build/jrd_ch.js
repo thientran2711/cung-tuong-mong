@@ -20,7 +20,7 @@ const CHR_BV=A=>{try{return S.st.f14.chbv!=null&&A.act.v===S.st.f14.chbv}catch(e
    climax that still run if she died mid-road (if:()=>S.thDead); beats/options that need her carry need:["th"]. Hoàng hậu beats carry
    need:["hh"]; a no-queen fallback (if:()=>!qOn()) keeps every slot fillable. */
 rdDef("ch_co",5,{t:"Tai mắt Đức Thọ cung",w:"th",sj:"tai mắt của Đức Thọ cung",cast(A){return rdCast(A,["v"])},
- g:A=>S.thDead?"Thái hậu đã băng hà, nhưng tai mắt bà cài khắp lục cung vẫn còn đó. Họ cần một chủ mới. Nhận họ, hay để họ tan.":`Thái hậu có tai mắt khắp lục cung: một ma ma ở ${CHR_Q()}, một thái giám giữ sổ ở Nội vụ phủ, mấy cung nữ hầu trà. Từ nay họ nghe ngươi, hay chỉ nghe bà, là điều phải phân.`,
+ g:A=>S.thDead?"Thái hậu đã băng hà, nhưng tai mắt bà cài khắp lục cung vẫn còn đó. Họ cần một chủ mới. Nhận họ, hay để họ tan.":`Thái hậu có tai mắt khắp lục cung: một ma ma ở ${CHR_Q()}, một thái giám giữ sổ ở Nội vụ phủ, mấy cung nữ hầu trà. Từ nay họ nghe ngươi, hay chỉ nghe bà, là việc ngươi phải định.`,
  p:[["s1","s2","s3"],["c1","c2","c3"],["t1","t2"],["x1"]],
  B:{s1:{h:"Cô mẫu trao danh sách",w:"th",need:["th"],if:RDW(1),t:"Sau buổi yến, Thái hậu dúi vào tay ngươi một mảnh giấy ghi năm cái tên. “Từ nay họ báo tin cho con. Đừng để ai gia thất vọng.”",o:[
   {n:"Gặp từng người, nhận mặt",f:"obey",wx:"tai mắt nhận mặt chủ mới",lx:"có kẻ báo về Đức Thọ cung rằng ngươi vội",rt:"Năm người lần lượt đến thỉnh an, ai cũng cúi đầu thật thấp.",rf:()=>`Một cung nữ hầu trà lỡ miệng trước mặt người của ${CHR_Q()}.`},
@@ -79,8 +79,8 @@ rdDef("ch_co",6,{t:"Tai mắt bị lộ",w:"me",sj:"những tai mắt bị lộ"
   {n:"Xin {v} nể mặt Đức Thọ cung",need:["th"],wx:"{v} lùi một bước",lx:"Thái hậu không muốn bị đem ra làm khiên",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} thả người: “Nể Thái hậu.”",rf:"{v} cười: “Thái hậu sai muội đến nói sao?”"}]},
  c1:{h:"Hoàng hậu mời trà",w:"hh",need:["hh","th"],t:"Hoàng hậu {hh} mời riêng ngươi: “Muội vào cung là để làm cái bóng của Thái hậu sao? Bóng thì không có ngày mai.”",o:[
   {n:"Ngầm nhận một mối giao hảo",f:"two",wx:"có đường lui ở Càn Ninh cung",lx:"Đức Thọ cung biết ngươi ngồi uống trà lâu",rt:"Hoàng hậu cười, đổi chén trà nguội lấy chén nóng.",rf:"Thái hậu biết ngay trong chiều."},
-  {n:"Đáp khéo, không nhận không chối",wx:"không mắc lời nào",lx:"Hoàng hậu thấy ngươi trơn",rt:"Hoàng hậu gật đầu: “Muội giỏi lắm.”"},
-  {n:"Thưa thẳng: thiếp là cháu Thái hậu",f:"obey",wx:"giữ trọn một lòng",lx:"Hoàng hậu thôi ngọt",go:()=>{if(!S.thDead)ap67({th:CHTH("ch_co_6.c1.2.th")})},rt:"Hoàng hậu đặt chén xuống, tiễn ngươi ra tận cửa."}]},
+  {n:"Đáp khéo, không nhận không chối",wx:"không mắc lời nào",lx:"Hoàng hậu thấy ngươi khó nắm thóp",rt:"Hoàng hậu gật đầu: “Muội giỏi lắm.”"},
+  {n:"Thưa thẳng: thần thiếp là cháu Thái hậu",f:"obey",wx:"giữ trọn một lòng",lx:"Hoàng hậu thôi ngọt",go:()=>{if(!S.thDead)ap67({th:CHTH("ch_co_6.c1.2.th")})},rt:"Hoàng hậu đặt chén xuống, tiễn ngươi ra tận cửa."}]},
  c2:{h:"{v} ra mặt làm chứng",w:"v",need:["v"],t:"{v} nói với cả cung rằng nàng thấy người của ngươi ra vào Nội vụ phủ lúc nửa đêm.",o:[
   {n:"Đòi {v} đối chất",wx:"lời gièm bị lật",lx:"thành ra cãi nhau",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} không nói được giờ nào, người nào.",rf:"{v} đưa ra một thái giám chịu làm chứng."},
   {n:"Mời {v} đến, hỏi nàng muốn gì",wx:"{v} thôi nói",lx:"{v} thấy ngươi sợ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} chỉ muốn một chỗ ngồi gần Thái hậu hơn.",rf:"{v} cười, không đáp."},
@@ -109,7 +109,7 @@ rdDef("ch_co",7,{t:"Hai chủ",w:"emp",sj:"ghế Cửu môn đề đốc",cast(A
  p:[["s1","s2","s3"],["c1","c2","c3"],["t1","t2"],["x1"]],
  B:{s1:{h:"Hai lời nhờ một ngày",w:"th",need:["th"],if:RDW(1),t:"Sáng, Thái hậu bảo: “Con nói với Hoàng đế, ghế ấy để cho người nhà.” Tối, Hoàng thượng hỏi: “Nàng thấy mẫu hậu có nên buông tay chưa?”",o:[
   {n:"Thưa với vua đúng lời cô mẫu",f:"obey",wx:"cô mẫu biết ngươi làm",lx:"ngài thấy ngươi nói thay Đức Thọ cung",rt:"Hoàng thượng nghe, không đáp."},
-  {n:"Thưa với vua lời của chính mình",f:"own",wx:"ngài nghe ngươi như nghe một người",lx:"lời đến tai Đức Thọ cung",rt:"Hoàng thượng nhìn ngươi lâu: “Nàng nói được.”",rf:"Hoàng thượng chỉ ừ."},
+  {n:"Thưa với vua lời của chính mình",f:"own",wx:"ngài thấy ngươi có chủ kiến riêng",lx:"lời đến tai Đức Thọ cung",rt:"Hoàng thượng nhìn ngươi lâu: “Nàng nói được.”",rf:"Hoàng thượng chỉ ừ."},
   {n:"Xin không nói, để hai bên tự bàn",wx:"không mắc lỗi với ai",lx:"không ai mang ơn ngươi",rt:"Ngươi rót trà, im lặng."}]},
  s2:{h:"Cô mẫu tìm người khác nói",w:"th",need:["th","v"],if:RDW(0),t:"Thái hậu không nhờ ngươi. Bà gọi {v} sang, dặn nàng thưa với Hoàng thượng chuyện ghế Cửu môn.",o:[
   {n:"Xin cô mẫu giao lại việc ấy",f:"obey",wx:"lấy lại chỗ đứng",lx:"cả cung thấy ngươi chen",rt:"Thái hậu gật đầu: “Thử lần nữa.”",rf:"Thái hậu bảo: “Đã có {v}.”"},
@@ -143,7 +143,7 @@ rdDef("ch_co",7,{t:"Hai chủ",w:"emp",sj:"ghế Cửu môn đề đốc",cast(A
   {n:"Tiến cử tướng trẻ của Hoàng thượng",e:["win","mid"],go:(_A,_ok,G)=>CHR_TH(G[0]),rt:"Hoàng thượng phê tên tướng trẻ. Hoàng thượng tin ngươi hơn tin bất kỳ ai trong họ ngoại.",rf:"Tướng trẻ nhận ấn, nhưng ai cũng biết ngươi bỏ người nhà."},
   {n:"Xin chia: một chính một phó",e:["win","mid"],rt:"Hoàng thượng phê một chính một phó: hai người cùng giữ cửa kinh thành. Cả hai bên đều còn mặt mũi.",rf:"Chia rồi, hai bên cùng không vui."},
   {n:"Không dám bàn việc triều",e:"mid",lx:"không ai mang ơn ngươi",rt:"Ngươi cúi đầu lui."}]}},
- E:{win:{tag:"Vẹn cả hai chủ",w:"emp",t:A=>S.thDead?"Hoàng thượng và họ ngoại đều biết ghế Cửu môn yên là nhờ ngươi. Ngươi đứng được giữa long án và bài vị cô mẫu.":"Hoàng thượng và Thái hậu đều biết ghế Cửu môn yên là nhờ ngươi. Lần đầu, cả hai cùng nể một người."},
+ E:{win:{tag:"Vẹn cả hai chủ",w:"emp",t:A=>S.thDead?"Hoàng thượng và họ ngoại đều biết ghế Cửu môn yên là nhờ ngươi. Ngươi giữ được lòng Hoàng thượng mà không phụ cô mẫu đã khuất.":"Hoàng thượng và Thái hậu đều biết ghế Cửu môn yên là nhờ ngươi. Lần đầu, cả hai cùng nể một người."},
   mid:{tag:"Một bên vừa lòng",t:"Một bên vừa lòng, một bên im lặng. Ngươi qua được lần này, nhưng bên im lặng không quên."},
   lose:{tag:"Kẹt giữa hai chủ",w:"emp",t:"Hoàng thượng thấy ngươi là người của họ ngoại; họ ngoại thấy ngươi không giữ được ghế. Ngươi mất mặt ở cả hai nơi.",go:()=>{if(S.thDead)return"";ap67({th:CHTH("ch_co_7.E.lose.th")});return fmt({th:CHTH("ch_co_7.E.lose.th")})}}}});
 
@@ -166,7 +166,7 @@ rdDef("ch_co",8,{t:"Lệnh khó",w:"th",sj:"lệnh hại {v}",cast(A){return rdC
   {n:"Dò xem ai đặt người canh",wx:"biết lưới của ai",lx:"người của {v} thấy ngươi dò",rt:"Người canh là do chính {v} xin Nội vụ phủ: nàng đã sợ từ trước.",rf:"Người canh bắt gặp người của ngươi lảng vảng."},
   {n:"Gửi lễ mừng {v}",wx:"{v} bớt nghi ngươi",lx:"tốn bạc, cô mẫu cho là ngươi mềm",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhận lễ, cảm ơn khách sáo."},
   {n:"Không để tâm",wx:"không dao động",lx:"nếu bị bắt, tội càng nặng",rt:"Ngươi gạt chuyện ấy sang một bên."}]},
- c2:{h:"Cung nữ của ngươi biết",w:"maid",t:"{maid} thấy gói vải. Nàng quỳ: “{Xung}, việc này mà lộ thì cả cung ta chết.”",o:[
+ c2:{h:"Cung nữ của ngươi biết",w:"maid",t:"{maid} thấy gói vải. Nàng quỳ: “{Goi}, việc này mà lộ thì cả cung ta chết.”",o:[
   {n:"Bảo nàng giữ kín",wx:"không thêm ai biết",lx:"nàng sợ, có thể lỡ lời",rt:"{maid} gật đầu, tay run."},
   {n:"Cho nàng về quê một thời gian",wx:"nàng không bị liên lụy",lx:"tốn bạc lộ phí cho nàng",rt:"{maid} khóc khi lên xe."},
   {n:"Bảo nàng đi chôn thay",wx:"tay ngươi không dính",lx:"nàng bị bắt thì khai ra ngươi",rt:"Nàng đi rồi về trong đêm, không ai thấy.",rf:"Nàng bị thị vệ hỏi ở cửa hậu."}]},
@@ -261,7 +261,7 @@ rdDef("ch_co",10,{t:"Người đánh cờ",w:"hh",sj:"thọ yến Đức Thọ c
   {n:"Kể hết kế của mình",f:"own",wx:"bà gật đầu cho ngươi đi",lx:"bà muốn tự đi",rt:"Thái hậu nghe xong, cười: “Đi đi.”",rf:"Thái hậu bảo: “Để ai gia.”"},
   {n:"Xin bà tin, không kể",wx:"nước đi giữ kín",lx:"bà không thích bị giấu",rt:"Thái hậu nhìn ngươi lâu: “Được.”",rf:"Thái hậu cau mày."},
   {n:"Xin bà ra tay, con theo",f:"obey",wx:"bà vui",lx:"nước đi lại là của bà",rt:"Thái hậu gật đầu."}]},
- t2:{h:"Người cũ hỏi",w:"me",if:()=>S.thDead,t:"Ma ma già hỏi: “Nương nương định giữ chúng tôi, hay để chúng tôi đi?”",o:[
+ t2:{h:"Người cũ hỏi",w:"me",if:()=>S.thDead,t:"Ma ma già hỏi: “{Goi} định giữ bọn nô tỳ, hay để bọn nô tỳ đi?”",o:[
   {n:"Giữ, ta lo",f:"own",wx:"người cũ một lòng",lx:"gánh thêm người",rt:"Ma ma quỳ lạy."},
   {n:"Đi thì có bạc, ở thì có việc",wx:"ai cũng có đường",lx:"tốn bạc",rt:"Một nửa ở, một nửa đi."}]},
  x1:{h:"Giữa thọ yến",w:"emp",t:A=>S.thDead?`Giữa lễ giỗ, ${CHR_Q()} dâng sớ xin giải tán Đức Thọ cung. Hoàng thượng nhìn ngươi.`:"Giữa thọ yến, tờ sớ xin Thái hậu an dưỡng được dâng lên. Cả điện im lặng. Thái hậu nhìn ngươi.",o:[
@@ -299,7 +299,7 @@ rdDef("ch_co",11,{t:"Cô cháu",w:"th",sj:"cô cháu Đức Thọ cung",cast(A){
  c3:{h:"Hoàng thượng hỏi về họ ngoại",w:"emp",t:"Hoàng thượng hỏi: “Họ ngoại của mẫu hậu, sau này nàng định để họ thế nào?”",o:[
   {n:"Xin ngài giữ họ, ngươi gánh",wx:"họ ngoại còn chỗ",lx:"ngài thấy ngươi giữ phe",rt:"Hoàng thượng gật: “Có nàng thì được.”",rf:"Hoàng thượng không đáp."},
   {n:"Xin ngài xử theo phép",wx:"ngài tin ngươi",lx:"họ ngoại có kẻ mất ghế",rt:"Hoàng thượng cười, nắm tay ngươi."},
-  {n:"Thưa: việc triều thiếp không dám bàn",wx:"giữ phép",lx:"không giúp ai",rt:"Ngài gật đầu."}]},
+  {n:"Thưa: việc triều thần thiếp không dám bàn",wx:"giữ phép",lx:"không giúp ai",rt:"Ngài gật đầu."}]},
  t1:{h:"Câu hỏi cuối của cô mẫu",w:"th",need:["th"],t:"Thái hậu hỏi: “Cả đời ai gia dạy con đánh cờ. Giờ con muốn làm cháu, làm quân cờ, hay làm người ngồi bên kia bàn?”",o:[
   {n:"Làm người ngồi bên kia bàn",f:"own",wx:"bà nể ngươi",lx:"gánh nặng như bà",rt:"Thái hậu đẩy hộp gỗ về phía ngươi một tấc."},
   {n:"Làm cháu của cô mẫu",f:"obey",wx:"bà cười",lx:"vẫn trong ván cờ của bà",rt:"Thái hậu xoa đầu ngươi như ngày ngươi mới vào cung."},
@@ -346,7 +346,7 @@ rdDef("ch_benh",5,{t:"Thuốc thang",w:"doc",sj:"phương thuốc cho Thái hậ
  c1:{h:"Hai thầy hai bệnh",w:"doc",need:["th"],t:"Viện phán nói bệnh Thái hậu do nhiệt, phải dùng thuốc mát. Lương y họ Tôn nói do hàn, phải dùng thuốc ấm. Uống sai thì nặng thêm.",o:[
   {n:"Tin Viện phán",f:"vien",wx:"Thái y viện vui",lx:"nếu sai, lương y không còn đường nói",rt:"Thái y viện sắc thuốc mát."},
   {n:"Tin lương y họ Tôn",f:"ton",wx:"theo người ngươi tin",lx:"Thái y viện oán ngươi",rt:"Thuốc ấm vào, đêm ấy bà ngủ yên.",rf:"Thái y viện tâu lên: phi tần chọn thuốc thay thái y."},
-  {n:"Đọc sách thuốc, tự xét",wx:"tự biết ai đúng",lx:"đọc mãi không ra",rt:"Ngươi tìm ra một dòng trong Thương hàn luận khớp với bệnh.",rf:"Sách thuốc nói cả hai đều có lý."}]},
+  {n:"Đọc sách thuốc, tự xét",wx:"tự biết ai đúng",lx:"đọc mãi không ra",rt:"Ngươi tìm ra một dòng trong sách thuốc cổ «Thương hàn luận» khớp với bệnh.",rf:"Sách thuốc nói cả hai đều có lý."}]},
  c2:{h:"{v} dâng thầy",w:"v",need:["v","th"],t:"{v} tiến một vị đạo sĩ “chữa bệnh bằng bùa”, nói đã cứu mẹ nàng. Nàng muốn có công với Đức Thọ cung.",o:[
   {n:"Chặn đạo sĩ ngoài cửa",wx:"Đức Thọ cung khỏi trò bùa chú",lx:"{v} nói ngươi giành công",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Hoàng thượng nghe chuyện bùa, phẩy tay đuổi đạo sĩ.",rf:"{v} khóc trước mặt Hoàng thượng."},
   {n:"Để đạo sĩ làm lễ, thuốc vẫn của ngươi",wx:"{v} có công, ngươi giữ thuốc",lx:"cả cung tưởng bùa chữa khỏi",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Đạo sĩ đốt bùa, khói mù cả điện."},
@@ -440,7 +440,7 @@ rdDef("ch_benh",7,{t:"Đầu độc?",w:"doc",sj:"chén thuốc có độc",cast
   {n:"Mua bã thuốc từ người đổ",wx:"có bã thuốc trong tay",lx:"người đổ nhận bạc rồi đổ",rt:"Một gói bã thuốc ướt được đưa đến cửa sau.",rf:"Bã thuốc đã đổ sớm một ngày."},
   {n:"Xin Hoàng thượng niêm Ngự dược phòng",wx:"không ai được đổ gì",lx:"ngài thấy ngươi làm lớn",rt:"Thị vệ niêm cửa Ngự dược phòng.",rf:"Ngài bảo: “Đừng làm cả cung sợ.”"},
   {n:"Tự đi lúc canh ba",wx:"không ai biết",lx:"bị bắt gặp ở Ngự dược phòng lúc nửa đêm",rt:"Ngươi tự tay gói bã thuốc mang về.",rf:"Thị vệ tuần đêm thấy ngươi."}]},
- t1:{h:"Ai muốn Đức Thọ cung sớm trống",w:"me",t:()=>`Ngươi ngồi nghĩ: Thái hậu mất thì ai được lợi nhất? ${qOn()?"Càn Ninh cung được trọn quyền lục cung; ":""}nhà {v} được ghế cung dược liệu; người khác nữa thì chưa rõ.`,o:[
+ t1:{h:"Ai muốn Đức Thọ cung sớm trống",w:"me",t:()=>`Ngươi ngồi nghĩ: Thái hậu mất thì ai được lợi nhất? ${qOn()?"Càn Ninh cung được trọn quyền lục cung; ":""}nhà {v} được giữ mối bán dược liệu cho cung; người khác nữa thì chưa rõ.`,o:[
   {n:"Nghi Càn Ninh cung",need:["hh"],f:"hh",wx:"đề phòng nơi mạnh nhất",lx:"nếu sai thì hại mình",rt:"Ngươi ghi tên Càn Ninh cung."},
   {n:"Nghi nhà {v}",f:"vfam",wx:"theo dấu bạc",lx:"{v} có thể bị oan",rt:"Ngươi ghi tên hiệu thuốc cửa Đông."},
   {n:"Không nghi ai, chỉ theo chứng",wx:"không oan người",lx:"chậm",rt:"Ngươi chỉ ghi những gì đã thấy."}]},
@@ -449,7 +449,7 @@ rdDef("ch_benh",7,{t:"Đầu độc?",w:"doc",sj:"chén thuốc có độc",cast
   {n:"Đặt bẫy bắt người đưa thuốc",e:["win","mid"],rt:"Người đưa gói thuốc bị bắt ở cửa sau Ngự dược phòng, trong người còn gói phụ tử.",rf:"Người đưa thuốc không đến nữa. Kẻ đứng sau đã đề phòng."},
   {n:"Lặng lẽ thay người sắc thuốc",e:"mid",lx:"kẻ đứng sau vẫn còn",rt:"Tiểu thái giám bị điều đi, người của ngươi vào thay."},
   {n:"Tâu ngay lên Hoàng thượng dù chưa đủ chứng",e:["mid","lose"],go:(A,_ok,G)=>{if(A.f.vfam)rdOan(A,"v",G[0])},rt:"Hoàng thượng cho tra Ngự dược phòng; chưa ra ai, nhưng không ai dám bỏ thêm gì.",rf:"Hoàng thượng thấy ngươi đổ tội không chứng, cả cung xì xào."}]}},
- E:{win:{tag:"Nắm được bã thuốc có độc",w:"doc",t:"Ngươi có bã thuốc, có lời của lương y, có người đưa thuốc. Kẻ đứng sau chưa lộ mặt, nhưng đã biết ngươi đang cầm sợi dây.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
+ E:{win:{tag:"Nắm được bã thuốc có độc",w:"doc",t:"Ngươi có bã thuốc, có lời của lương y, có người đưa thuốc. Kẻ đứng sau chưa lộ mặt, nhưng đã biết ngươi đang nắm đầu mối.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
   mid:{tag:"Nghi mà chưa có chứng",t:"Chén thuốc đã sạch, nhưng ngươi chưa biết ai đã làm bẩn nó."},
   lose:{tag:"Bị vu là kẻ đổi thuốc",w:"doc",t:"Thái y viện tâu ngươi tự ý lấy bã thuốc, đổi thuốc của Đức Thọ cung. Không ai kết tội, nhưng ai cũng nhớ."}}});
 
@@ -471,8 +471,8 @@ rdDef("ch_benh",8,{t:"Hầu bệnh",w:"th",sj:"những đêm bên giường bệ
  c1:{h:"{v} ở Dưỡng Tâm điện",w:"v",need:["v","th"],t:"Những đêm ngươi ở Đức Thọ cung, {v} được gọi sang Dưỡng Tâm điện. Nàng đang lên.",o:[
   {n:"Nhờ Hoàng thượng nhớ lại ngươi bằng một món quà",wx:"ngài nhớ",lx:"quà bị để quên",rt:"Hoàng thượng đeo túi thơm ngươi thêu.",rf:"Túi thơm nằm trên bàn, chưa mở."},
   {n:"Để {v} lên, ngươi giữ đạo hiếu",wx:"tiếng hiếu thảo",lx:"{v} chiếm chỗ",rt:"Ngươi không nói gì."},
-  {n:"Cho {v} biết ngươi thấy",wx:"{v} biết dừng",lx:"{v} càng lấn",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} cười gượng, thưa dần.",rf:"{v} đáp: “Tỷ cứ hầu Thái hậu cho trọn.”"}]},
- c2:{h:"Sức người có hạn",w:"maid",t:"{maid} quỳ khuyên: “{Xung} đã ba đêm không ngủ.”",o:[
+  {n:"Cho {v} biết ngươi thấy",wx:"{v} biết dừng",lx:"{v} càng lấn",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} cười gượng, rồi ít sang dần.",rf:"{v} đáp: “Tỷ cứ hầu Thái hậu cho trọn.”"}]},
+ c2:{h:"Sức người có hạn",w:"maid",t:"{maid} quỳ khuyên: “{Goi} đã ba đêm không ngủ.”",o:[
   {n:"Cho {maid} thay một đêm",wx:"lại sức",lx:"đêm ấy không phải ngươi",rt:"{maid} ngồi quạt thay ngươi."},
   {n:"Cố thêm",wx:"lòng hiếu",lx:"sức cạn",rt:"Ngươi ngủ gục bên giường."},
   {n:"Mua sâm bồi bổ",wx:"giữ sức",lx:"tốn bạc",rt:"Sâm vào, mắt đỡ quầng."}]},
@@ -552,7 +552,7 @@ rdDef("ch_benh",10,{t:"Hồi phục hay băng hà",w:"th",sj:"đêm quyết đ�
  s2:{h:"Hơi thở yếu dần",w:"th",need:["th"],if:RDW(0),t:"Thái hậu chỉ còn tỉnh vài khắc mỗi ngày. Ngoài sân, người Nội vụ phủ đã lặng lẽ may đồ tang.",o:[
   {n:"Đuổi người may đồ tang đi",wx:"không ai được trù bà",lx:"bị nói là không biết lệ",rt:"Người Nội vụ phủ dọn đi.",rf:"Họ chỉ dời sang gian khác."},
   {n:"Hầu bà từng khắc tỉnh",f:"stay",wx:"bà có ngươi",lx:"mệt",rt:"Mỗi lần tỉnh, bà đều thấy ngươi."},
-  {n:"Lo hậu sự từ bây giờ",wx:"không bị động",lx:"bà biết ngươi đã chuẩn bị",rt:"Ngươi lặng lẽ kiểm lại đồ của Đức Thọ cung."}]},
+  {n:"Lo hậu sự từ bây giờ",wx:"không bị động",lx:"bà biết ngươi đã chuẩn bị",rt:"Ngươi lặng lẽ soát lại đồ của Đức Thọ cung."}]},
  s3:{h:"Linh cữu Đức Thọ cung",w:"me",if:()=>S.thDead,t:"Linh cữu Thái hậu quàn ở Đức Thọ cung. Lễ bộ tâu lên: việc tang trong hậu cung giao ai giữ?",o:[
   {n:"Xin Hoàng thượng cho giữ việc tang",f:"stay",wx:"ngươi đứng đầu tang",lx:()=>`${CHR_Q()} thấy ngươi giành`,rt:"Hoàng thượng chuẩn.",rf:()=>`Lễ bộ tâu theo lệ, Hoàng thượng giao cho ${qOn()?"Trung cung":"người giữ việc lục cung"}.`},
   {n:"Phụ việc, không đứng đầu",wx:"giữ phép",lx:"không có quyền gì",rt:"Ngươi lo phần kinh kệ."}]},
@@ -711,7 +711,7 @@ rdDef("ch_ho",6,{t:"Quà mừng thọ",w:"th",sj:"lễ mừng thọ Thái hậu"
  c1:{h:"Bánh của mẹ bà",w:"maid",need:["th"],t:"Một ma ma già ở Đức Thọ cung kể: thuở nhỏ Thái hậu thích món bánh hạnh nhân quê nhà. Từ khi vào cung, bà chưa được ăn lại.",o:[
   {n:"Tự học làm bánh",wx:"có món quà không ai nghĩ đến",lx:"bánh chưa đúng vị",f:"know",rt:"Lò bánh thứ bảy, ma ma nếm rồi rơm rớm: “Đúng vị rồi.”",rf:"Bánh khét, ma ma lắc đầu."},
   {n:"Nhờ nhà ngoại gửi người làm bánh vào",wx:"đúng vị quê",lx:"tốn bạc, người ngoài vào cung phải xin phép",f:"know",rt:"Một bà già quê nhà được vào Ngự thiện phòng ba ngày."},
-  {n:"Kể lại với {v}",wx:"{v} biết ngươi không giấu",lx:"mất một nước hơn người",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} ngạc nhiên: “Sao lại nói cho ta?”"}]},
+  {n:"Kể lại với {v}",wx:"{v} biết ngươi không giấu",lx:"mất một nước hơn người",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} ngạc nhiên: “Sao tỷ lại nói cho muội biết?”"}]},
  c2:{h:"Quà bị hỏng",w:"v",need:["v","th"],t:"Còn bảy ngày đến thọ yến, món quà của ngươi bị đổ nước lên. Cung nữ nói thấy một người lạ đi ngang kho.",o:[
   {n:"Tra cho ra kẻ phá",wx:"bắt được tay",lx:"tra không ra, cả cung xì xào",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Là một tiểu thái giám nhận bạc của cung {v}.",rf:"Không ai nhận."},
   {n:"Lặng lẽ làm lại",wx:"không ai biết ngươi bị hại",lx:"bảy ngày, mệt rã",rt:"Ngươi thức bảy đêm làm lại."},
@@ -746,7 +746,7 @@ rdDef("ch_ho",7,{t:"Lời gièm",w:"v",sj:"lời gièm đến tai Thái hậu",c
   {n:"Tung một lời đồn khác đè lên",wx:"cả cung nói chuyện khác",lx:"bị lộ là ngươi tung",rt:"Ba ngày sau, cả cung chỉ nói chuyện một con mèo lạc vào Dưỡng Tâm điện.",rf:"Có kẻ nhận ra lời đồn mới đến từ cung ngươi."}]},
  c2:{h:"{v} đến thăm",w:"v",need:["v"],t:"{v} mang trà sang, nói như vô tình: “Muội cũng nghe người ta nói xấu tỷ. Tỷ đừng để bụng.”",o:[
   {n:"Cảm ơn, giữ lại nói chuyện",wx:"{v} lỡ lời",lx:"nàng ra về mà ngươi không biết thêm gì",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Nói một hồi, {v} lỡ lời nhắc đúng câu ngươi nói với {maid}.",rf:"{v} nói chuyện khác, rồi về."},
-  {n:"Đáp thẳng: lời ấy từ cung muội ra",wx:"{v} biết ngươi đã biết",lx:A=>S.thDead?"thành ra cãi nhau, đến tai nhà ngoại":"thành ra cãi nhau, đến tai Thái hậu",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tái mặt, đặt chén trà xuống.",rf:A=>S.thDead?"{v} khóc, viết thư về nhà ngoại.":"{v} khóc chạy sang Đức Thọ cung."},
+  {n:"Đáp thẳng: lời ấy từ cung {tg} ra",wx:"{v} biết ngươi đã biết",lx:A=>S.thDead?"thành ra cãi nhau, đến tai nhà ngoại":"thành ra cãi nhau, đến tai Thái hậu",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tái mặt, đặt chén trà xuống.",rf:A=>S.thDead?"{v} khóc, viết thư về nhà ngoại.":"{v} khóc chạy sang Đức Thọ cung."},
   {n:"Tiếp trà, không nói gì",wx:"không lộ ý",lx:"{v} cho là ngươi chưa biết",rt:"Ngươi rót thêm trà, mỉm cười."}]},
  t1:{h:"Chiếc trâm bạc",w:"maid",t:"Chiếc trâm bạc trả cho kẻ tung tin có khắc hoa văn của Nội vụ phủ, chỉ phát cho cung có phẩm từ bậc nhất định trở lên.",o:[
   {n:"Tra sổ phát trâm của Nội vụ phủ",wx:"có chứng cứ",lx:"Nội vụ phủ báo lên",f:"proof",rt:"Sổ ghi: trâm ấy phát cho cung {v} mùa xuân năm ngoái.",rf:"Quản sự Nội vụ phủ nói sổ đã nộp lên."},
@@ -797,7 +797,7 @@ rdDef("ch_ho",9,{t:"Kẻ thù chung",w:"emp",sj:"tờ sớ hặc họ ngoại Th
  B:{s1:{h:"Tờ sớ nêu tên phụ thân",w:"emp",if:RDW(1),t:"Vì nhà ngoại dồn sức cho ngươi, tờ sớ nêu tên phụ thân ngươi trước: Quốc cữu kết bè, mượn thế Đức Thọ cung.",o:[
   {n:"Viết thư dặn phụ thân lui một bước",wx:"phụ thân không bị bắt lỗi thêm",lx:"phụ thân cho là con dạy cha",rt:"Phụ thân dâng sớ xin bớt việc. Ngự sử đài khó nói tiếp.",rf:"Phụ thân hồi: “Cha không có tội, sao phải lui?”"},
   {n:"Xin Thái hậu lên tiếng",need:["th"],wx:"một lời của bà nặng hơn mười tờ sớ",lx:"bà bực vì ngoại thích làm phiền",f:"th",rt:"Thái hậu bảo Hoàng thượng: “Nhà ai gia không ai tham.”",rf:"Thái hậu đáp: “Ai làm thì người ấy chịu.”"},
-  {n:"Tìm {v} bàn cách",wx:"hai nhà cùng một lời",lx:"{v} chỉ chờ nhà ngươi ngã",f:"ally",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} đến ngay: “Nhà ta cũng bị nêu tên. Lúc này không tranh nữa.”",rf:"{v} cáo bệnh không gặp."}]},
+  {n:"Tìm {v} bàn cách",wx:"hai nhà cùng một lời",lx:"{v} chỉ chờ nhà ngươi ngã",f:"ally",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} đến ngay: “Nhà muội cũng bị nêu tên. Lúc này không tranh nữa.”",rf:"{v} cáo bệnh không gặp."}]},
  s2:{h:"Tờ sớ nêu tên nhà {v}",w:"emp",if:RDW(0),t:"Tờ sớ nêu tên nhà {v} trước: nhà nàng được nhà ngoại dồn sức, lại nhận đất phong quá phép. Nhà ngươi chỉ được nhắc ở dòng cuối.",o:[
   {n:"Đứng ngoài, để nhà nàng chịu",wx:"nhà ngươi yên",lx:"{v} nhớ ngươi đứng nhìn",f:"apart",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi không nói một lời nào."},
   {n:"Sang an ủi {v}",wx:"{v} cảm động",lx:"người ta nói ngươi cùng phe với nhà bị hặc",f:"ally",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nắm tay ngươi: “Không ngờ người đến là tỷ.”"},
@@ -894,7 +894,7 @@ RD97L.push(rdRare({a:"ch_ho_11",tag:"Hai người cháu cùng cầm họ ngoại
 rdDef("ch_bi",5,{t:"Người trình thư",w:"th",sj:"kẻ đã đưa bản sao thư vào cung",cast(A){return rdCast(A,["v"])},
  g:"Bản sao lá thư cũ đã đến tay Hoàng thượng một lần. Kẻ dâng thư chỉ là một bàn tay; người đưa thư vào cung vẫn chưa ai biết. Lần ra hắn, trước khi một bản sao nữa xuất hiện.",
  p:[["s1","s2","s3"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Kẻ dâng thư bị phạt, mà thư vẫn còn",w:"eun",if:()=>rdPrev()==="win"||rdPrev()==="r97",t:()=>(CHR_LAM()?"Lâm thị năm xưa còn sống, và bí mật hóa ra là một ân tình; tên thái giám dâng thư bị đánh rồi đuổi đi.":"Thái hậu đã được minh oan, tên thái giám dâng thư bị đánh rồi đuổi đi.")+" Trước khi ra cửa cung, hắn nói với {eun}: “Thư không phải của tôi. Tôi chỉ được trả bạc.”",o:[
+ B:{s1:{h:"Kẻ dâng thư bị phạt, mà thư vẫn còn",w:"eun",if:()=>rdPrev()==="win"||rdPrev()==="r97",t:()=>(CHR_LAM()?"Lâm thị năm xưa còn sống, và bí mật hóa ra là một ân tình; tên thái giám dâng thư bị đánh rồi đuổi đi.":"Thái hậu đã được minh oan, tên thái giám dâng thư bị đánh rồi đuổi đi.")+" Trước khi ra cửa cung, hắn nói với {eun}: “Thư không phải của nô tài. Nô tài chỉ được trả bạc.”",o:[
   {n:"Cho người theo tên thái giám ra ngoài",wx:"biết hắn nhận bạc của ai",lx:"hắn biết bị theo, kêu oan khắp phố",f:"trace",rt:"Hắn ghé một hiệu sách gần Hàn lâm viện, nhận một túi bạc.",rf:"Hắn lẫn vào chợ, mất dấu."},
   {n:"Hỏi {eun} hắn còn nói gì",wx:"không tốn bạc",lx:"Tổng quản chỉ nói nửa lời",rt:"{eun} thì thầm: “Hắn nhận thư từ một cung nữ, áo màu của cung {v}.”"},
   {n:"Báo Thái hậu: việc chưa xong",need:["th"],wx:"bà biết ngươi còn canh cho bà",lx:"bà vừa yên lòng, không muốn nghe",rt:"Thái hậu đặt chén trà xuống: “Tra tiếp. Đừng để ai gia phải hỏi lần hai.”",rf:"Thái hậu phẩy tay: “Xong rồi thì thôi.”"}]},
@@ -904,7 +904,7 @@ rdDef("ch_bi",5,{t:"Người trình thư",w:"th",sj:"kẻ đã đưa bản sao t
   {n:"Đóng cửa cung, không cho lục",wx:"cả cung thấy ngươi không sợ",lx:"bà tin ngươi giấu điều tệ hơn",rt:"Ma ma đứng ngoài cửa một canh giờ rồi về."}]},
  s3:{h:"Bản sao vẫn đi lại",w:"emp",if:A=>RDW(0)()||S.thDead,t:A=>S.thDead?"Thái hậu đã băng hà, nhưng bản sao thư vẫn đi lại trong cung: tiếng của bà sau khi khuất vẫn có thể bị bôi. Trong cung có người thì thầm: bản sao không chỉ có một.":"Hoàng thượng chưa nói gì thêm, nhưng ngài thôi sang Đức Thọ cung thỉnh an mỗi sớm. Trong cung có người thì thầm: bản sao không chỉ có một.",o:[
   {n:"Khéo hỏi Hoàng thượng ai đã dâng",wx:"biết tên kẻ dâng",lx:"ngài thấy ngươi bênh nhà ngoại",rt:"Ngài nói: “Một tiểu thái giám. Trẫm không hỏi hắn ai sai.”",rf:"Ngài đổi chuyện."},
-  {n:"Thay cô mẫu sang thỉnh an Hoàng thượng",need:["th"],wx:"Thái hậu biết ngươi giữ cầu cho bà",lx:"mệt người, ngài thấy ngươi làm sứ cho mẫu hậu",rt:"Hoàng thượng nhận trà ngươi dâng, không nói gì về Đức Thọ cung."},
+  {n:"Thay cô mẫu sang thỉnh an Hoàng thượng",need:["th"],wx:"Thái hậu biết ngươi giữ tình mẹ con cho bà với Hoàng thượng",lx:"mệt người, ngài thấy ngươi làm sứ cho mẫu hậu",rt:"Hoàng thượng nhận trà ngươi dâng, không nói gì về Đức Thọ cung."},
   {n:"Lặng lẽ dò ai còn bản sao",wx:"có dấu",lx:"lộ là ngươi đang lo",f:"trace",rt:"Có cung nữ ở cung {v} hay ra cửa Tây Hoa.",rf:"Không ai chịu nói."}]},
  c1:{h:"Xe sách của Hàn lâm viện",w:"eun",t:"{eun} kể: mỗi tháng có một xe sách từ Hàn lâm viện vào cung đổi kinh. Năm nay xe ấy hay dừng ở cửa Tây Hoa lâu hơn lệ.",o:[
   {n:"Xin Tổng quản cho người khám xe",wx:"bắt được tờ thư kẹp sách",lx:"Hàn lâm viện kêu bị làm nhục",f:"trace",rt:"Trong một quyển kinh có kẹp tờ giấy chép tay: một đoạn của lá thư cũ.",rf:"Xe sạch, Hàn lâm viện dâng sớ trách cung cấm."},
@@ -930,11 +930,11 @@ rdDef("ch_bi",6,{t:"Người nhà họ Lâm",w:"th",sj:"cháu của phi tần h�
  g:A=>CHR_LAM()?"Phi tần họ Lâm của tiên đế bị coi là đã chết năm ấy; ngươi biết bà còn sống, mang thân lão cung nữ ở Thọ Khang cung. Cả nhà bà bị đày đi Lĩnh Nam, không ai biết bà còn. Đứa cháu năm tuổi khi đó, Lâm Khải, nay là Biên tu Hàn lâm viện. Hắn gửi vào một lời: trước tiết Thanh minh, nếu Đức Thọ cung không trả lại tên cho cô hắn, bản sao cuối sẽ đến Ngự sử đài.":"Phi tần họ Lâm của tiên đế chết năm ấy; cả nhà bị đày đi Lĩnh Nam. Đứa cháu năm tuổi khi đó, Lâm Khải, nay là Biên tu Hàn lâm viện. Hắn gửi vào một lời: trước tiết Thanh minh, nếu Đức Thọ cung không trả lại tên cho cô hắn, bản sao cuối sẽ đến Ngự sử đài.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ngươi viết thư trước",w:"maid",if:RDW(1),t:"Ngươi biết tên hắn trước khi hắn biết ngươi. Một lá thư từ cung cháu gái Thái hậu sẽ làm hắn sợ, hoặc làm hắn tin.",o:[
-  {n:"Viết thư mời nói chuyện",wx:"hắn chịu nghe",lx:"hắn cho là bẫy",f:"talk",rt:"Lâm Khải hồi thư: “Thanh minh còn ba tháng. Tôi chờ.”",rf:"Thư không có hồi âm."},
+  {n:"Viết thư mời nói chuyện",wx:"hắn chịu nghe",lx:"hắn cho là bẫy",f:"talk",rt:"Lâm Khải hồi thư: “Thanh minh còn ba tháng. Hạ thần chờ.”",rf:"Thư không có hồi âm."},
   {n:"Viết thư răn đe",wx:"hắn biết ngươi không yếu",lx:"hắn rút ngắn hạn",f:"hard",rt:"Lâm Khải im lặng một tháng.",rf:"Lâm Khải hồi thư: “Hạn đổi: rằm tháng hai.”"},
   {n:"Gửi bạc nuôi mẹ già hắn",wx:"hắn biết ngươi có lòng",lx:"tốn bạc, hắn có thể cho là mua chuộc",f:"talk",rt:"Mẹ Lâm Khải nhận bạc. Hắn thì không viết gì."}]},
  s2:{h:"Tờ giấy trong quyển kinh",w:"maid",if:RDW(0),t:"Trong quyển kinh ngươi đang chép có một tờ giấy lạ: “Thanh minh còn ba tháng. Người nhà họ Lâm chờ một lời của Đức Thọ cung.” Ký tên Lâm Khải.",o:[
-  {n:"Hồi thư qua đường kinh",wx:"giữ được đường nói chuyện",lx:"thư hồi có thể lọt ra",f:"talk",rt:()=>`Lâm Khải viết lại: “Tôi không muốn hại ai. Tôi muốn cô tôi ${CHR_LAM()?"được trả lại tên":"được nằm trong lăng phi tần"}.”`,rf:"Thư hồi bị một cung nữ lạ nhặt được."},
+  {n:"Hồi thư qua đường kinh",wx:"giữ được đường nói chuyện",lx:"thư hồi có thể lọt ra",f:"talk",rt:()=>`Lâm Khải viết lại: “Hạ thần không muốn hại ai. Hạ thần chỉ muốn cô của hạ thần ${CHR_LAM()?"được trả lại tên":"được nằm trong lăng phi tần"}.”`,rf:"Thư hồi bị một cung nữ lạ nhặt được."},
   {n:"Đốt tờ giấy",wx:"không để lại dấu",lx:"hắn cho là ngươi khinh",rt:"Tờ giấy cháy. Hạn Thanh minh thì không cháy."},
   {n:"Đưa tờ giấy cho cô mẫu",need:["th"],wx:"bà biết ngươi trung",lx:"bà sẽ muốn hắn câm, theo cách của bà",f:"trust",rt:"Thái hậu đọc, gấp tờ giấy làm tư."}]},
  c1:{h:"Lão cung nữ kể",w:"maid",t:()=>CHR_LAM()?"Đàm ma ma, tức Lâm thị năm xưa, kể: bà có tội thật, nhưng cha mẹ, anh em bà không ai biết gì. Cả nhà bị đày vì một câu của Thái hậu.":"Đàm ma ma, lão cung nữ từng biết chuyện năm xưa, kể thêm: Lâm thị có tội thật, nhưng cha mẹ, anh em nàng không ai biết gì. Cả nhà bị đày vì một câu của Thái hậu.",o:[
@@ -942,16 +942,16 @@ rdDef("ch_bi",6,{t:"Người nhà họ Lâm",w:"th",sj:"cháu của phi tần h�
   {n:"Xin ma ma giữ kín",wx:"bớt một miệng",lx:"tốn bạc, ma ma buồn vì không ai nghe bà",rt:"Đàm ma ma gật đầu, nhận bạc mà không nhìn ngươi."},
   {n:"Hỏi ma ma Lâm Khải là người thế nào",wx:"hiểu người mình phải đối",lx:"ma ma không biết",f:"talk",rt:"Ma ma nói: “Thằng bé ấy năm tuổi đã biết cõng em. Nó không ác.”",rf:"Ma ma chỉ lắc đầu."}]},
  c2:{h:"{v} gửi bạc cho họ Lâm",w:"v",need:["v"],t:"Nghe nói {v} sai người mang bạc ra nhà họ Lâm, hứa sẽ giúp họ đưa thư lên Ngự sử đài trước hạn.",o:[
-  {n:"Cho Lâm Khải biết {v} muốn dùng hắn",wx:"hắn thôi tin {v}",lx:"hắn thôi tin cả ngươi",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Lâm Khải trả lại bạc cho cung {v}.",rf:"Lâm Khải bảo: “Cung nào cũng dùng tôi.”"},
+  {n:"Cho Lâm Khải biết {v} muốn dùng hắn",wx:"hắn thôi tin {v}",lx:"hắn thôi tin cả ngươi",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Lâm Khải trả lại bạc cho cung {v}.",rf:"Lâm Khải bảo: “Cung nào cũng muốn dùng hạ thần.”"},
   {n:"Báo Hoàng hậu {v} thông đồng người ngoài",need:["hh"],wx:"{v} bị cấm túc",lx:"Hoàng hậu biết có chuyện họ Lâm",go:(A,ok,G)=>{if(!ok)return"";rdOan(A,"v",G[0]);const v=rv67(A,"v");if(v)v.confined=Math.max(v.confined||0,BAL.road.ch_bi.conf);return""},rt:()=>`Hoàng hậu cấm túc {v} ${kitNumVi(BAL.road.ch_bi.conf)} tháng vì tự ý đưa bạc ra cung.`,rf:"Hoàng hậu chỉ cười: “Chuyện nhà Đức Thọ cung, bổn cung không xen.”"},
   {n:"Để mặc",wx:"không gây thêm",lx:"{v} và họ Lâm gần nhau thêm",rt:"Ngươi không làm gì."}]},
  t1:{h:"Hạn Thanh minh",w:"maid",t:"Thanh minh còn hơn hai tháng. Lâm Khải không đòi bạc: hắn đòi một lời. Ngươi phải chọn đi đường nào trước.",o:[
   {n:"Tìm cách để cô mẫu chịu nghe",need:["th"],f:"trust",wx:"đi đường gần nhất",lx:"cô mẫu là người khó nghe nhất",rt:"Ngươi chọn ngày rằm để vào Đức Thọ cung."},
   {n:"Tìm bản sao cuối trước hạn",wx:"biết bản sao ở đâu",lx:"không thấy",f:"hold",rt:"Bản sao cuối không ở nhà Lâm Khải, mà gửi ở một ngôi chùa.",rf:"Không ai biết bản sao ở đâu."},
-  {n:"Xin Lâm Khải lùi hạn",wx:"có thêm thời gian",lx:"hắn cho là ngươi kéo dài",f:"talk",rt:"Lâm Khải viết: “Thêm một tháng. Không hơn.”",rf:"Lâm Khải viết: “Cô tôi đã chờ hai mươi năm.”"}]},
+  {n:"Xin Lâm Khải lùi hạn",wx:"có thêm thời gian",lx:"hắn cho là ngươi kéo dài",f:"talk",rt:"Lâm Khải viết: “Thêm một tháng. Không hơn.”",rf:"Lâm Khải viết: “Cô của hạ thần đã chờ hai mươi năm.”"}]},
  x1:{h:"Gặp ở chùa Hộ Quốc",w:"me",t:()=>`Ngươi xin lên chùa Hộ Quốc ${S.thDead?"cầu siêu":"cầu an"} cho Thái hậu. ${CHR_LAM()?"Ngày họ Lâm vẫn làm giỗ cho bà":"Ngày giỗ phi tần họ Lâm"}, Lâm Khải cũng đến thắp hương. Cách nhau một tấm bình phong.`,o:[
-  {n:()=>CHR_LAM()?"Hứa sẽ xin cho cô hắn được phục danh":"Hứa sẽ xin cho cô hắn một chỗ trong lăng",e:["win","lose"],rt:"Lâm Khải im lâu, rồi nói: “Tôi tin nương nương một lần.”",rf:"Lâm Khải nói: “Lời hứa của người trong cung, nhà tôi nghe đủ rồi.”"},
-  {n:"Đặt lời khai của Đàm ma ma trước hắn",e:["win","mid"],rt:"Đọc xong, Lâm Khải khóc: hắn chưa từng biết cô mình đã làm gì trước.",rf:"Lâm Khải đọc xong, nói: “Có tội thì một người chịu. Sao cả nhà tôi chịu?”"},
+  {n:()=>CHR_LAM()?"Hứa sẽ xin cho cô hắn được phục danh":"Hứa sẽ xin cho cô hắn một chỗ trong lăng",e:["win","lose"],rt:"Lâm Khải im lâu, rồi nói: “Hạ thần tin nương nương một lần.”",rf:"Lâm Khải nói: “Lời hứa của người trong cung, nhà hạ thần nghe đủ rồi.”"},
+  {n:"Đặt lời khai của Đàm ma ma trước hắn",e:["win","mid"],rt:"Đọc xong, Lâm Khải khóc: hắn chưa từng biết cô mình đã làm gì trước.",rf:"Lâm Khải đọc xong, nói: “Có tội thì một người chịu. Sao cả nhà hạ thần phải chịu?”"},
   {n:"Chỉ thắp hương, không nói",e:"mid",lx:"hạn vẫn chạy",rt:"Ngươi thắp một nén hương cho phi tần họ Lâm rồi về."}]}},
  E:{win:{tag:"Lâm Khải chịu chờ",w:"th",t:"Lâm Khải hứa không dâng thư trước khi ngươi có lời. Hạn Thanh minh vẫn đó, nhưng bên kia bình phong là một người chịu nói chuyện."},
   mid:{tag:"Hạn vẫn còn đó",t:"Lâm Khải không đổi ý, cũng không vội. Ngày Thanh minh đến gần từng ngày."},
@@ -1024,7 +1024,7 @@ rdDef("ch_bi",8,{t:"Thư bị đánh cắp",w:"maid",sj:"hộp gấm bị lấy 
   {n:"Giao nàng cho Thận hình ty",wx:"cả cung biết phép",lx:"{v} biết ngươi đã biết",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Tiểu cung nữ bị đưa đi."}]},
  t1:{h:"Hộp sẽ đi đâu",w:"v",t:()=>`Người trong cung {v} nói: nàng định đưa hộp sang ${CHR_Q()} vào ngày mồng một, khi các phi tần thỉnh an ${CHR_H()}.`,o:[
   {n:"Chặn trước ngày mồng một",f:"search",wx:"còn đúng một đêm",lx:"phải liều",rt:"Ngươi chọn đêm cuối tháng."},
-  {n:"Để hộp đến Càn Ninh cung, rồi xin Hoàng hậu trả",need:["hh"],wx:"Hoàng hậu nợ ngươi một lần nghe",lx:"Hoàng hậu biết hết",rt:"Ngươi chuẩn bị lời nói với Hoàng hậu.",rf:"Hoàng hậu không tiếp ngươi."},
+  {n:"Để hộp đến Càn Ninh cung, rồi xin Hoàng hậu trả",need:["hh"],wx:"Hoàng hậu chịu nghe ngươi một lần",lx:"Hoàng hậu biết hết",rt:"Ngươi chuẩn bị lời nói với Hoàng hậu.",rf:"Hoàng hậu không tiếp ngươi."},
   {n:"Báo Thái hậu, để bà tự đòi",need:["th"],wx:"không phải tự ra tay",lx:"bà đòi thì sẽ có người bị phạt nặng",f:"loyal",rt:"Thái hậu chỉ nói: “Biết rồi.”"}]},
  x1:{h:"Đêm cuối tháng",w:"v",t:()=>`Đêm cuối tháng. Hộp gấm nằm trong cung {v}. Sáng mai nó sẽ sang ${CHR_Q()}.`,o:[
   {n:"Đến cung {v} đòi lại",e:["win","lose"],rt:"{v} tái mặt, đưa hộp ra: “Tỷ thắng.”",rf:"{v} mở hộp trước mặt ngươi: trống. Hộp đã đi trước một đêm."},
@@ -1039,7 +1039,7 @@ rdDef("ch_bi",9,{t:"Bảo vệ hay dùng",w:"emp",sj:"lá thư cũ và người 
  p:[["s1","s2","s3"],["c1","c2"],["t1","t2"],["x1"]],
  B:{s3:{h:"Bí mật của người đã khuất",w:"me",if:()=>S.thDead,t:"Thái hậu đã khuất, nhưng tên bà vẫn có thể bị bôi. Thanh minh còn một tháng.",o:[
   {n:"Giữ tiếng cho cô mẫu",f:"protect",wx:"người cũ của bà tin ngươi",lx:"mệt người",rt:"Ngươi cho người dập mọi lời đồn trong cung."},
-  {n:"Viết thư cho Lâm Khải xin hắn chờ",f:"just",wx:"hắn chịu chờ",lx:"hắn không tin",rt:"Lâm Khải hồi: “Tôi chờ đến Thanh minh.”",rf:"Thư không có hồi âm."},
+  {n:"Viết thư cho Lâm Khải xin hắn chờ",f:"just",wx:"hắn chịu chờ",lx:"hắn không tin",rt:"Lâm Khải hồi: “Hạ thần chờ đến Thanh minh.”",rf:"Thư không có hồi âm."},
   {n:"Dò xem bản sao còn ở tay ai",f:"use",wx:"biết ai còn cầm",lx:"tốn bạc",rt:"Một trang chép còn ở cung {v}."}]},
  t2:{h:"Lời dặn cuối của cô mẫu",w:"me",if:()=>S.thDead,t:"Ma ma Đức Thọ cung nhắc: trước khi đi, Thái hậu dặn “đốt hết đi”.",o:[
   {n:"Vâng lời người đã khuất",f:"protect",wx:"đi trọn ý bà",lx:"họ Lâm không còn gì để đòi",rt:"Ngươi lạy ba lạy trước bài vị."},
@@ -1048,15 +1048,15 @@ rdDef("ch_bi",9,{t:"Bảo vệ hay dùng",w:"emp",sj:"lá thư cũ và người 
  s1:{h:"Bí mật trong tay",w:"th",need:["th"],if:RDW(1),t:"Hộp gấm trong tay ngươi. Thái hậu biết, {v} biết. Từ hôm ấy ai gặp ngươi cũng cười nhiều hơn một chút.",o:[
   {n:"Dâng hộp cho Thái hậu",need:["th"],wx:"bà tin ngươi tuyệt đối",lx:"con bài rời tay ngươi",f:"protect",rt:"Thái hậu nhận hộp, không mở: “Con giữ hộ ai gia thêm ít lâu.”"},
   {n:"Giữ hộp, không nói gì",f:"use",wx:"ai cũng phải nể ngươi",lx:"ai cũng muốn lấy nó",rt:"Ngươi khóa hộp vào nơi chỉ ngươi biết."},
-  {n:"Cho Lâm Khải biết hộp vẫn nằm yên chỗ kín",wx:"hắn thôi lo",lx:"Thái hậu biết thì cho là ngươi hai lòng",f:"just",rt:"Lâm Khải hồi: “Tôi chờ đến Thanh minh.”",rf:"Thư lọt đến tai ma ma Đức Thọ cung."}]},
+  {n:"Cho Lâm Khải biết hộp vẫn nằm yên chỗ kín",wx:"hắn thôi lo",lx:"Thái hậu biết thì cho là ngươi hai lòng",f:"just",rt:"Lâm Khải hồi: “Hạ thần chờ đến Thanh minh.”",rf:"Thư lọt đến tai ma ma Đức Thọ cung."}]},
  s2:{h:"Bí mật trong tay người khác",w:"th",need:["th"],if:RDW(0),t:"Hộp gấm không còn trong tay ngươi. Thái hậu bắt đầu ho về đêm. Ma ma nói bà không ngủ được từ hôm nghe tin.",o:[
   {n:"Ở lại hầu bà",wx:"bà có người bên cạnh",lx:"mệt người, Hoàng thượng thấy ngươi vắng",f:"protect",rt:"Ngươi sắc thuốc, ngồi bên giường đến sáng."},
-  {n:"Viết thư cho Lâm Khải xin hắn đừng vội",wx:"bên ngoài chưa nổ",lx:"hắn không còn tin",f:"just",rt:"Lâm Khải hồi: “Tôi không vội. Nhưng người khác vội.”",rf:"Thư không có hồi âm."},
+  {n:"Viết thư cho Lâm Khải xin hắn đừng vội",wx:"bên ngoài chưa nổ",lx:"hắn không còn tin",f:"just",rt:"Lâm Khải hồi: “Hạ thần không vội. Nhưng người khác vội.”",rf:"Thư không có hồi âm."},
   {n:"Tìm cách mua lại bản sao",wx:"có lại con bài",lx:"bạc đi, bản sao không về",f:"use",rt:()=>`Một thái giám ${CHR_Q()} bán cho ngươi một trang chép lại.`,rf:"Thái giám lấy bạc rồi biến mất."}]},
  c1:{h:"Hoàng thượng hỏi riêng",w:"emp",t:"Đêm khuya, Hoàng thượng hỏi khẽ: “Mẫu hậu năm xưa có làm gì không? Trẫm muốn nghe từ nàng.”",o:[
   {n:"Thưa thật cả hai phía",wx:"ngài tin ngươi không giấu ngài",lx:A=>S.thDead?"họ ngoại trách ngươi kể":"Thái hậu biết ngươi kể",f:"just",rt:"Hoàng thượng nghe xong, ngồi rất lâu: “Mẫu hậu đã sợ vì trẫm.”",rf:"Hoàng thượng đứng dậy, ra khỏi cung không nói gì."},
   {n:"Thưa: mẫu hậu chỉ tự vệ",f:"protect",wx:"che được cho bà",lx:"ngài biết ngươi chỉ nói một nửa",rt:"Hoàng thượng gật đầu, không hỏi thêm."},
-  {n:"Thưa: thiếp không dám bàn chuyện tiên đế",wx:"không sai lời",lx:"ngài thấy ngươi lảng",rt:"Hoàng thượng cười nhạt."}]},
+  {n:"Thưa: thần thiếp không dám bàn chuyện tiên đế",wx:"không sai lời",lx:"ngài thấy ngươi lảng",rt:"Hoàng thượng cười nhạt."}]},
  c2:{h:"{v} ra giá",w:"v",need:["v"],t:"{v} nhắn: nàng còn giữ một trang chép từ hộp gấm. Trước rằm, đưa một món bạc lớn thì trang ấy về tay ngươi; qua rằm, nó sang Ngự sử đài.",o:[
   {n:"Trả bạc trước rằm",wx:"trang chép về tay ngươi",lx:"tốn bạc lớn, {v} biết ngươi chịu trả",f:"use",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Trang chép được gói trong khăn lụa gửi sang."},
   {n:"Tìm chứng {v} đưa bạc ra cung để đổi lại",wx:"hai bên cùng cầm thóp nhau",lx:"không đủ chứng thì nàng làm thật",f:"use",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} thấy sổ bạc của nàng trong tay ngươi, gửi trang chép sang không đòi gì.",rf:"{v} cười: “Rằm.”"},
@@ -1090,7 +1090,7 @@ rdDef("ch_bi",10,{t:"Đêm Thanh minh",w:"emp",sj:"hạn Thanh minh của Lâm K
  c1:{h:"Người của {v} ở cửa Ngự sử đài",w:"v",need:["v"],t:"Một thái giám của cung {v} sắp ra cổng cung với một gói giấy, mang đến cửa Ngự sử đài. Nếu Lâm Khải không đến, gói giấy ấy sẽ vào thay.",o:[
   {n:"Cho người chặn tên thái giám ở cổng cung",wx:"gói giấy không vào được",lx:"giữ người của cung khác là phạm phép",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Tên thái giám bị giữ đến sáng vì “không có thẻ ra cung”.",rf:"Hắn có thẻ thật. Người của ngươi phải thả."},
   {n:"Báo Tổng quản: có kẻ mang giấy tờ ra cung",wx:"Tổng quản ra tay, không phải ngươi",lx:"Tổng quản ngại cung {v}",rt:"{eun} cho gọi tên thái giám về.",rf:"{eun} nói: “Không có lệnh, nô tài không bắt.”"},
-  {n:"Để hắn vào",wx:"không ai nói ngươi ngăn đường tấu",lx:"Ngự sử đài có thêm một bản",rt:"Tên thái giám ra cổng, đứng chờ ở cửa Ngự sử đài đến sáng."}]},
+  {n:"Để hắn vào",wx:"không ai nói ngươi ngăn người dâng tấu",lx:"Ngự sử đài có thêm một bản",rt:"Tên thái giám ra cổng, đứng chờ ở cửa Ngự sử đài đến sáng."}]},
  c2:{h:"Thái hậu không ngủ",w:"th",need:["th"],t:"Thái hậu ngồi trước bàn thờ tiên đế cả đêm. Bà hỏi ngươi: “Sáng mai, cả kinh thành sẽ biết ai gia đã làm gì?”",o:[
   {n:"Thưa: con sẽ không để thế",f:"stay",wx:"bà yên lòng",lx:"lời hứa nặng hơn sức ngươi",rt:"Thái hậu gật đầu, nhắm mắt niệm Phật."},
   {n:"Xin bà viết một dòng cho họ Lâm",wx:"có lời của bà trong tay",lx:"bà thấy bị ép",f:"word",rt:"Thái hậu cầm bút, viết tám chữ: “Năm ấy ai gia quá tay. Xin yên nghỉ.”",rf:"Thái hậu đặt bút xuống: “Ai gia không viết.”"},
@@ -1113,7 +1113,7 @@ rdDef("ch_bi",11,{t:"Bí mật được chôn",w:"th",sj:"bí mật năm xưa c�
  p:[["s1","s2","s3"],["c1","c2"],["t1","t2"],["x1","x2"]],
  B:{s3:{h:"Bài vị cô mẫu",w:"me",if:()=>S.thDead,t:"Thái hậu đã khuất. Chuyện năm xưa còn đó, và giờ chỉ ngươi quyết nó kết thế nào.",o:[
   {n:"Chép kinh cho cô mẫu",f:"bury",wx:"lòng yên",lx:"mệt người",rt:"Ngươi chép kinh trước bài vị đến khuya."},
-  {n:"Viết thư hỏi thăm mẹ Lâm Khải",f:"amend",wx:"họ Lâm thấy ngươi có lòng",lx:"thư bị người khác đọc",rt:"Lâm Khải hồi: “Mẹ tôi cảm ơn nương nương.”",rf:"Thư lọt đến tai họ ngoại."},
+  {n:"Viết thư hỏi thăm mẹ Lâm Khải",f:"amend",wx:"họ Lâm thấy ngươi có lòng",lx:"thư bị người khác đọc",rt:"Lâm Khải hồi: “Mẹ của hạ thần đội ơn nương nương.”",rf:"Thư lọt đến tai họ ngoại."},
   {n:"Giữ kín mọi giấy tờ",f:"power",wx:"con bài trong tay",lx:"ai cũng đoán ngươi cầm gì",rt:"Ngươi khóa rương."}]},
  t2:{h:"Lá thư cuối cùng",w:"me",if:()=>S.thDead,t:"Chỉ còn một thứ: lá thư gốc, hoặc trang chép cuối, trong tay ngươi. Không còn ai đòi nữa.",o:[
   {n:"Đốt trước bài vị cô mẫu",f:"bury",go:A=>{A.f.lgone=1},wx:"lòng nhẹ",lx:"không còn gì trong tay",rt:"Lá thư cháy trước bài vị."},
