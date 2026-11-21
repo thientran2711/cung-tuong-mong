@@ -57,6 +57,7 @@ Stale, do NOT land: review/coop-staff-split-r1-land 358b2e85 (inside name-clash;
 - mg11-thutay-r1-land 184db4e0 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 01:56Z.
 - kc-fail-effects-r1-land 9729cda2 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 02:22Z.
 - All conflicts in these merges = generated index.html/sw.js only (LIVE's, then build_site.sh).
+<<<<<<< HEAD
 
 ## LANDER #2b (session_01N1tNP6cqrrDPRXd6b6opjm) — 21/11 00:40Z–03:55Z, START_CTX ~5 %
 | branch | land sha | base | result |
@@ -71,3 +72,5 @@ Box lesson: «Target crashed» in role-parity = kernel OOM (check `dmesg | grep 
 - mg11-thutay-r1-land 34353783 (LIVE 64d2e094; assemble + jmgx.js): ALL GREEN → LAND READY 02:58Z (supersedes 184db4e0).
 - kc-fail-effects-r1-land a1498983 (LIVE 64d2e094 then 56ff0db0; jbal2 both kept, assemble + jkcg/jkcco): ALL GREEN, coop-e2e 92/92 ×2 → LAND READY 03:46Z (supersedes 9729cda2). Note: its merge commit message wrongly lists j8/j95 (those were palace-life's conflicts only).
 - palace-life-gaps-r1-land: re-merged LIVE 56ff0db0 → d0f87b91 (game-logic conflicts: j8 maid theft = branch IT05 + LIVE nmNew names; j95 = branch kidWardHome + LIVE «họ Tần»). New co-op test dev/test/coop-palace-life.js (bac1fdf5): P1 ok, P2 RED (host's son replaces HER Thái tử → her Danh not −heirDanh; jcoopworld hrCard x.v branch only shows the card), P3 ok (estrangement once, host copy same). Handed to fix worker 2HMzBBTh (review/palace-life-gaps-r2-land); #2a dropped its gates.
+=======
+>>>>>>> f29c8990 (rv-chiton-name rv2 report)

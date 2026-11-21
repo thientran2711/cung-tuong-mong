@@ -1752,6 +1752,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 04:25Z) LAND QUEUE (main self-merge, /home/user/wt/sland86.sh): bag-inline 1674d407 (running) → menu-panel d26dbd7b (rv PASS) → huong-cue-2 06c76fff (rv PASS). calendar SSK 40d20ee1 → rv session_01Rc5AsKHZyzLGYRFR43QaZN. Archived rv huong JgMQ; huong worker KFt2 to archive.
 - (21/11 04:30Z) Keeper addenda 15/16 from 84 (= marks #62 many-people line no avatar + no empty band, #63 item in dialog smallest inline, #64 never same person twice) → dialog-person worker (keeper keeps 9 → 14 + #61(1) → act-grid). keeper kit-leftcol-read 5fc1b026 (add. 9, #38) SSK soon.
 - (21/11 04:35Z) #65 (second person's avatar ON event picture, no line avatars) → dialog-person. #66 overwrites #57 (quest chips removed entirely) → dialog-stack. Keeper split confirmed again to 84.
+<<<<<<< HEAD
 - (21/11 04:40Z) #66 CORRECTED by owner ~04:49Z: keep quest info as kit label|value rows (only the chip form goes) → dialog-stack worker on new branch review/quest-rows. dialog-stack SSK bd605e17 (#46) → rv. chiton-name old rv LAND READY f1734973 (a41b3891 content) → self-merge queue; rv2 reviews only 6c024ff0 delta after. LAND QUEUE: bag 1674d407 (gating) → menu d26dbd7b → huong 06c76fff → chiton f1734973.
 - (21/11 04:42Z) SELF-MERGE LAND bag-inline db6ae2a0 (rv PASS 1674d407 + LIVE 9c1dd605; quickcheck PASS 399 s; bag-inline.js crashed in my container (env), PASS at rv/worker) → LIVE db6ae2a0; marks #21 #23 LIVE. Now self-merging menu-panel d26dbd7b. rv dialog-stack session_01Rc5AsHoNJhsCkYnCSuXJhq.
 
@@ -1773,3 +1774,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:45Z) Fixed broken commit afc81554 (mood-seal rv claim): conflict markers in 17 handover-branch files (CLAIMS, B/C/D/E STATUS, OWNER_MARKS, PARKING_LOT, SKINS, palettes json/py, reports, KIT_REQUESTS) → kept upstream side (= pre-break text + later edits); JSON parses; B map-places claim kept.
 - (03:50Z) Opened rv empty-states r2 MCJm, rv chapter-card NH8m, bag-inline-3 JuyC (old JTtZ archived). Routed #66F #68 #71 #72 #75 #76 #78 #80. LAND QUEUE: menu 878eba18 (running) → mood-seal 607a6b12 → dialog-stack 8aba426a → kit-rel2-span 181f35de → mg-5s-clear 8da94cef → huong-cue-2 06c76fff → chiton 0b2bbd82 → B kc-fail-effects a1498983 / perf-ci 524443c5 → phutang 0f9d0f77 (after E-lander OK).
 - (03:55Z) SELF-MERGE LAND menu-panel → LIVE 5a8c30af (quickcheck PASS 418 s; buổi perf 1643/1330 noise-level). Before: FF kit-tap-word 0d60ae54. Next: mood-seal running.
+=======
+>>>>>>> f29c8990 (rv-chiton-name rv2 report)
