@@ -72,3 +72,30 @@ ROOT of the face FAIL (law 6b, co-op only): FIGIX.mama has 8 faces; one home hou
 FIX (reviewer small fix, whole group): jkc.js kcFreeFid (every family picker: jkc T(), jkc2 kc2T) now walks the ONE chain BAL.kc3.ros.pool (mama→maid, man→official …) exactly as kc3Fid; the role's own pool is still first, so a solo life with free mama faces is unchanged. After fix: faces.js PASS · one-core-guard PASS · laws.js PASS · smoke 6 origins × 2 lives errs [] fails 0 · coop-e2e 68 ok · coop-seats 34/34.
 Note for art (Foreman C, not a gate): the mama pool (8) is thin for two households; the fallback uses maid faces of the right age band.
 NEXT: WAIT for FOREMAN E #23 GO → one re-merge of 94bca0ce onto newest LIVE (+ KR «thế lực nhà» kit r2 if KIT READY), full gate list (handover step 3) + coop-e2e + coop-seats, verdict + LAND READY.
+
+## E25r2 final — 21/11 — PASS 5acae7c54 (review/home-chapters-r1) · LAND READY 5acae7c54 (FF on LIVE 8acb2bef)
+PRIORITY #1 CHECK ('home-chapters|jkc3|kcFreeName|nmNew|kpfr|dinhhon2'): OD L594 co-op gate | main jname.js nmNew (1ecdfb9d one name core), jk4.js KIT §6.3c kpfr, kit-e-rows «thế lực nhà» LIVE | review/* kc-coop-select 2eb1ac5f (not LIVE yet) | claims FOREMAN E #25.
+GO from FOREMAN E #25 (phutang LIVE 666def0c). ONE re-merge of 94bca0ce onto LIVE 8acb2bef = bd84201a3; conflicts: assemble.py list (union + jbalkc3, jkc3, jkc3a, jkc3b), jbal2.js (both blocks), KIT_REQUESTS.md (READY line kept, old KR dropped — law 14), index.html/sw.js/assets.json rebuilt. KR «thế lực nhà» (kit-e-rows) was already LIVE.
+Reviewer fixes after the merge (all on the branch, whole group each):
+| # | fault (found on the merge) | fix | proof |
+|---|---|---|---|
+| 1 | LIVE removed kcFreeName (one name core): every new home life lost its roster + chapter plan (S.kc.ar undefined, costrows crashed) | jkc3 names via nmNew (teachers f/m, ma ma + bà mối surname via nmSurOf(nmNew("mo")), nhũ mẫu nmNew("mo"), suitors nmNew("m",{sur})) | 6 origins: c3 + ar + roster 12–13 people; laws/faces PASS |
+| 2 | smoke 1/117 lives: «Cha định hôn» (dinhhon2) crash reading s.n — the suitor list emptied between dinhhon and dinhhon2 (E15 «thứ muội tiếp trà», bà mối, thứ muội shift it) | dinhhon2 carries the father's house in its payload; dinhhon / dinhhon2 / tranhmoi / bà mối cards return no card when no suitor is left; kc_hon x1 marry guarded | unit probe: empty list → no card ×3, carried house named; smoke 72 + 18 lives fails 0 |
+| 3 | smoke «road thd_tho != seed thd_hoc»: the seeded arc is not open at entry by its own world rule (thd_hoc needs a royal child of vỡ lòng age; 6/60 thd lives) — seed correctly unused (law 6b), test read arcOk at the END | kc3Seed records s.off when the arc is not open at entry; smoke skips those | probe 60 lives; smoke clean |
+| 4 | LIVE KIT §6.3c person-tab frame (#panel.kpfr) took the home Tài nghệ / Giao du tabs: the roster strip squeezed to 0 px over «Thầy dạy ở nhà», panel stopped scrolling (Fold + iPad shots) | home roster strip wrapped one level below #panel (kc3pgw); Gia tộc (a real person tab) keeps the frame | reshoot Fold + iPad: strip + teacher card under the lessons, bà mối card whole |
+Gates on 5acae7c54 / its build:
+| gate | result |
+|---|---|
+| one-core-guard · laws.js · faces.js | PASS · PASS · PASS |
+| costrows.js --list | 381 choices, 0 hidden number, 0 «Tốn: không» (events too: «thế lực nhà» now shown) |
+| kit-cost-rows-home.js | PASS 15 |
+| smoke 6 origins (72 + 18 lives) | errs [] · fails 0 (32/72 enter the palace) |
+| outside/oldsave.js LIVE 5569adb6 → this (one origin) | fail [] errs [] · home reload same |
+| quickcheck ALONE | PASS · buổi 1322/1123 ms, tab 455/393 (within gate; watch) |
+| coop-e2e.js (LIVE Worker) | 92 ok, exit 0 |
+| home-chapters/coop-seats.js (both seats at home) | 34/34 |
+| kc-roads/coop-together.js | 25/26 — the known pre-existing «B went through the selection card» (same on LIVE; fixed by kc-coop-select 2eb1ac5f, not LIVE yet) |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (20 screens, bad 0), LOOKED | E28 «Cha bị hặc tội»: TỐN/ĐƯỢC true incl. «nhà ta thêm vững thế / sút thế»; Kế mẫu s1: «tổn danh giá gia môn» shown; bà mối «Áp lực hôn sự −8 · bà mối thiện cảm +4»; teachers strip fixed |
+Laws: 1 (kc_ke two-way, E28 hit back) · 2/3 laws.js + costrows · 4 one-core + names from the one name core · 6b every roster person a face, both seats · 7 odds words only · 9 kit only (no private part; the wrapper div has no style) · co-op gate: both seats run + sync the home chapters.
+Notes, not gates: iPad two-column lesson card «Phát bạc cứu giúp cung nhân nghèo» wraps its title one word per line (LIVE kit layout, not this branch); a seeded arc that is closed at entry loses its Lợi thế (design note for FOREMAN E); mama face pool (8) thin for two households (Foreman C art).
+VERDICT: PASS 5acae7c54 · LAND READY 5acae7c54 (origin/main 8acb2bef is its ancestor; LIVE has since moved to 5569adb6 — FOREMAN E #25: main self-merges index/sw-only moves).
