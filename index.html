@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"25f89559+","t":"2026-11-21T11:10Z","c":"coop-guest-names r1: two-way mirror — the host player's people copies get an 'h' key namespace on the guest seat","b":"9d4e8f1ccef7","h":[{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"}]};
+window.CTM_BI={"s":"996915e4+","t":"2026-11-21T11:25Z","c":"coop-guest-names r1: two-way mirror — the host player's people copies get an 'h' key namespace on the guest seat","b":"0f9c6d8bbcbc","h":[{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -63918,9 +63918,18 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail.kstdock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700}
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
+/* KIT §77b kitStBadge: the round STATUS BADGE at the bottom-right corner of a kit square rail button (.krailb): ✓ green = ready, … grey = busy, ⏸ amber = paused; none = no badge. Offline = class koff on the button (picture goes grey). K-BADGE-HAOHUU */
+.krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
+.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+/* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+.krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
+.krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${t.charAt(0)}" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+function kitStBadge(st){const m={ok:"✓",busy:"…",pause:"⏸"};return m[st]?`<b class="kbdg ${st}" aria-hidden="true">${m[st]}</b>`:""}window.kitStBadge=kitStBadge;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77b",title:"kitStBadge · huy hiệu trạng thái ở góc nút vuông (✓ sẵn sàng · … đang bận · ⏸ tạm dừng · xám = ngoại tuyến)",
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;padding:8px">${[["ok",""],["busy",""],["pause",""],["","koff"]].map(([st,c])=>`<button type="button" class="krailb ${c}" aria-label="${st||"ngoại tuyến"}"><span class="krailg">♥</span>${kitStBadge(st)}</button>`).join("")}</div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
 /* ================= jstatus: kitStatusIcon — ONE status icon (KIT §77.1, owner 16/11 16:25Z, review/status-icons) =================
    Owner: "nhiều game bây giờ nó làm rất là đơn giản. Nó chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi
@@ -89686,7 +89695,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9d4e8f1ccef7";window.CTM_BUILD=BUILD;
+const BUILD="0f9c6d8bbcbc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
