@@ -1914,3 +1914,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:19Z) KIT READY K-BADGE-HAOHUU 36b6071ed (review/kit-badge) → rv MSxp (small; checks OD 06:30Z + ⏸ size); hao-huu-2 told to merge it + drop .kctmf-b + FAIL A fix → SSK to rv JeK8. Keeper now on kit-mark-fix fix.
 - (08:22Z) rv MSxp FAIL kit-badge 36b6071e (⏸ 10 px unreadable) → keeper: badge fix first, then kit-mark-fix, then K-FOCUS-1.
 - (08:28Z) maid-acts-a merged 561e3f47 → 90c83c93; rv KbS4 told to review that sha (+ rerun coop-e2e).
+- (08:32Z) Keeper SSK kit-mark-fix r2 b5dbeb7e5 (review/kit-mark-fix-r2; shrink removed, kpmore fade cue) → rv MSxp. Asked keeper whether kit-badge fix done (before K-FOCUS-1).
