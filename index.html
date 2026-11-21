@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f2048810+","t":"2026-11-21T00:14Z","c":"night-final-r3 co-op UNPARK (MAIN ROOT-82 20/11 22:58Z): the new night runs on both seats — WIP, coop-steal 19-21/23","b":"efafa1cfe689","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
+window.CTM_BI={"s":"72a1728f","t":"2026-11-21T01:36Z","c":"coop-steal deterministic: toNight never commits a seat already at tối (unforced flip), Emperor picks the forced card (no maid-pool night), …","b":"b8280bc7dc93","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -74815,7 +74815,10 @@ function realFlip(){S.nfP=null;S.nfF=day();
  try{const x=X();if(x&&x.st==="wait")for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}}catch(e){console.error(e)}
  return r}
 flip=function(){if(!S||REAL||!nfOn())return f0.apply(this,arguments);
- if(guest()){S.tonight=null;S.nfP=day();return}               /* co-op guest: the host's Emperor turns the card (relayed) */
+ if(guest()){S.tonight=null;S.nfP=day();                       /* co-op guest: the host's Emperor turns the card (relayed) */
+  /* her maid's Kỳ nguyệt sự card (jcycle cyAsk) is asked at HER flip as on the live night (the jcycle flip wrapper sits inside this one):
+     her answer travels to the host (jcoopworld cySend → ctm-p2 "cyb") and the host's draw waits for it (cyWait / cyFree) */
+  try{if(typeof window.cyAsk==="function")window.cyAsk()}catch(e){console.error(e)}return}
  if(S.nfC===day()&&S.nfX&&S.nfX.d===day()&&S.nfX.st==="wait")return realFlip.apply(this,arguments);   /* inside the commit, before the choice (the cycle answer re-flips) */
  if(S.nfC===day())return;                                      /* the choice is running / done: tonight stays */
  S.tonight=null;S.nfP=day()};                                  /* the tablet waits for the end of tối */
@@ -74917,7 +74920,11 @@ let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
- if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;openChoice()}
+ if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
+  /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
+     waits for that card, at most choice.waitMs (she never answers: the night goes on without a card, as the live night did) */
+  if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<B().choice.waitMs)return;
+  openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
@@ -75021,7 +75028,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
@@ -86181,7 +86188,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="efafa1cfe689";window.CTM_BUILD=BUILD;
+const BUILD="b8280bc7dc93";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
