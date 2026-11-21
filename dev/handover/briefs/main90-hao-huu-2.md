@@ -1,0 +1,6 @@
+# WORKER hao-huu-2 (OPUS, BIG co-op — successor of KMNB; fixes the rv FAIL on f654456a) — MAIN CHÍNH 90, 21/11
+PRIORITY #1 CHECK ('hao-huu'): OD 3 (21/11 ~06:05Z, ~06:30Z canon overwrite, OD:L165) | main jcooptimer kitCoopFriend | review/hao-huu 9ae5101d + review/hao-huu-rv 6c38f01b | claims hao-huu (KMNB rolled, archived).
+You are an OPUS worker for MAIN CHÍNH 90 (session_01Rc5AsNEH8KAYFNdKY97PeC; send_message there). Never talk to the owner, never push main, no PRs.
+YOUR BRIEF = the «## HANDOVER» section at the top of dev/handover/reports/hao-huu.md on branch review/hao-huu (9ae5101d): 6 fixes, start from review/hao-huu-rv 6c38f01b, merge newest origin/main, tests listed. Reviewer FAIL list: dev/handover/reports/rv-hao-huu.md (handover branch). Read also CLAUDE.md, dev/rules/START_CORE.md (18 laws) + START_WORKER.md, dev/kit/KIT.md §69.2, OD rows 21/11 ~06:05Z + ~06:30Z verbatim.
+Item 6 badge: MAIN has sent KIT REQUEST K-BADGE-HAOHUU to the keeper (session_01Rc5AsMtjP4KTgBZVjENGLs); build the icon on kit .krailb compact now, wire the registered badge when keeper says KIT READY (ask keeper directly for the class name).
+Send SẴN SÀNG KIỂM <sha> to MAIN CHÍNH 90 (not 89). Report: append r2 to reports/hao-huu.md; CLAIMS row.
