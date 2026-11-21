@@ -1318,3 +1318,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
  → MAIDFIX4: nhị files fix (bow centre + sash closes jacket) m09 m10 m12 m13 + thân cận hair sample → VE10 4×135 + 55 = 595 cr.
 Next Lượt 1953.
 #27 ~09:32Z: OWNER L1953 on L1940: Hán t1–t3 collar APPROVED (lock). Loose hair OK (she likes it). Band-merge issue: ignore. t3 Quý nhân add sash bow → HAN6 → VE7 1@55. NEW: HAN6 research Han full-outfit wearing (layers, embroidery/trim placement) VN summary. Next Lượt 1954.
+#27 ~09:35Z: MAIDFIX4 L1952 nhị + thân cận hair (single high bun + braid) 4843ff7 → VE10 595 cr; bow-centre sweep all ranks ordered. HHCOL2: winter t1 locked G64; t3–t6 L1952 (no phi bạch) → VE6 4@55 (t7/t8 already no phi bạch → skip). HADUONG2 embroidery research part 3 af43a09 → G65 rule + gate + live prompt fix ordered. SENT L1954 summary. Next Lượt 1955.
