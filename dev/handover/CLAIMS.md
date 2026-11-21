@@ -842,3 +842,4 @@ kit-focus rv2 | review/kit-focus-rv2 6291a355 | rv session | FAIL (Fold sub-line
 | ui-leftover-fold (sonnet SMALL; GAP MG12+KP05+KP14+M17, MAIN 92 ORDER 09:50Z via D; reuse mg-ui-rest + kit-opt-text) | review/ui-leftover-fold; briefs/b6-ui-leftover-fold.md | B | session_01N1tNP2bJj9FqZNTvhAgTmS | RUNNING | 21/11 10:12Z |
 | REVIEW jlost-kyngo E42r (opus BIG) of 2fa2e667 | review/jlost-kyngo-r1; reports/jlost-kyngo-review.md | FOREMAN E #26 | session_01DgYSWogzcg1vAwJPLueGcM | RUNNING | 21/11 10:17Z |
 | REVIEW coop-guest-names (opus BIG) of 3ffea799 | review/coop-guest-names-r1 | B | session_01N1tNP4xhQc6kgxpjhWCyYJ | RUNNING | 21/11 10:22Z |
+kit-focus rv3 | review/kit-focus-rv3 a1e2abc8 | rv session | PASS | 21/11
