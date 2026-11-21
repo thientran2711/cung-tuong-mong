@@ -95,7 +95,7 @@ function nhCard(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=n
   e.hr!=null?["Kết quả",nhRes(s0,e.hr,he,"","chương ấy"),(s0>0)===(e.hr>0)?(s0>0?"g":"r"):""]:["Kết quả","chương ấy chưa tới hồi phân định"],
   e.f?["Trọn tuyến",`${he} đi trọn tuyến và nhớ công ngươi`,"g"]:null,e.sb?["Ghi hận",`${he} đã biết ngươi bán đứng`,"r"]:null];
  return kitSkillCard({kind:"story",k:"pt",kicker:`Phụ tuyến · «${T}»`,name:e.nm,level:Math.min(e.np||0,chs.length),max:chs.length,word:"Đã qua",bar:false,next:"",img,desc:st})+rows67(R)}
-function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Phụ tuyến","Ngươi chưa nhúng tay vào tuyến riêng của ai.");return L.map(nhCard).join("")}
+function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Ta chưa nhúng tay vào tuyến riêng của ai",["Khi ta can dự vào chuyện riêng của một người trong cung, tuyến của người ấy hiện ở đây."],{topic:"Phụ tuyến"});return L.map(nhCard).join("")}
 try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đã nhúng tay: giúp hay bán đứng ở chương nào, chương ấy ra sao. Người được giúp mà đi trọn tuyến thì nhớ công ngươi; kẻ bị bán đứng chỉ biết khi có người đem chuyện đến tai, biết rồi thì ghi hận."}catch(e){}
 (function(){if(typeof ktStoryHTML!=="function"||typeof kitSubTabs!=="function")return;const k0=kitSubTabs;
  const has=()=>{try{return !nhOff()&&!!S&&nhList().length>0}catch(e){return false}};
