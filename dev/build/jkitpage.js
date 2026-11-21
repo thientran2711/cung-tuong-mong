@@ -105,6 +105,11 @@ KIT_SAMPLES.push({id:"§28.8d",title:"kitFigSeal: biểu tượng tâm trạng c
  if(!live)return `<div class="kitpg-row"><span>Mở một ván để xem: hình toàn thân đứng trong phòng, Dư đồ và hộp thoại đều có biểu tượng tâm trạng ở bên đầu (cùng ấn với khung chân dung).</span></div>`;
  const v=typeof rivals!=="undefined"?rivals.filter(x=>x.alive)[0]:null;
  return `<div class="kitpg-row" style="align-items:flex-start;gap:24px"><div style="width:230px;height:420px;position:relative">${kitStageFig(S,{cap:false})}</div>${v?`<div style="width:230px;height:420px;position:relative">${kitStageFig(v,{cap:false})}</div>`:""}</div>`}});
+/* §28.8e KIT_BODY body-fit box (KP09, review/kit-body-fit): every zone outlined on a woman, a maid, a eunuch, the emperor, a child + a portrait */
+KIT_SAMPLES.push({id:"§28.8e",title:"KIT_BODY: ô thân theo hình (tóc · đầu · ngực · eo · tay áo · váy · gấu)",where:"<b>KIT_BODY</b> (jbody) — rows from img/body-fit.json (Foreman C) or measured from the picture (kitFigBody + veil-fit). Layers: <code>KIT_BODY.img(cls,src,file,zone)</code> inside the one kitFxLayers stack.",html:()=>{
+ if(typeof KIT_BODY==="undefined")return "";const F=["fig-consort-c01-t1-a18.webp","fig-maid-m01-a26.webp","fig-eunuch-u01-a26.webp","fig-emperor-a26-1.webp","fig-kid-f01-a14.webp"];
+ setTimeout(()=>KIT_BODY.debugFill(document.getElementById("kitpage")),0);
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap">${F.map(f=>KIT_BODY.debugHtml(f,130)).join("")}${KIT_BODY.debugHtml("por-consort-c01-t1-a18.webp",130)}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
