@@ -174,8 +174,11 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  /* thin guest part C (jcoopthinc): in a C room the guest's NPC list is the read-only lens, installed before deser resolves refs / rebuilds cards */
  try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R:CW.lensR?CW.lensR(R):R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
  try{CW.lensW&&CW.lensW()}catch(e){console.error("lens W",e)}
- try{CW.emoReplay&&CW.emoReplay(C)}catch(e){console.error("emoReplay",e)}/* coop-emo-seat r2: her acts' feelings on world people, replayed the same on both seats (jcoopone) */
  if(!opt.keepUsed)used=0;else used=keepUsed;
+ /* coop-emo-seat r2: her acts' feelings on world people, replayed the same on both seats (jcoopone), then ONE cause sweep. AFTER `used` is set:
+    the cause clock mkNow counts the khắc used this buổi (j95kh), and before r1 each seat swept with its own leftover `used` (review r1: after a
+    rejoin the guest's clock ran ahead and ended a live vui cause on her seat only: host vui 40 | guest khochiu 22) */
+ try{CW.emoReplay&&CW.emoReplay(C)}catch(e){console.error("emoReplay",e)}
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,LASTB());
