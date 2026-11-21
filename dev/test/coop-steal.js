@@ -92,10 +92,12 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    /* fixture diagnosis: her eligibility at the moment the choice opens */window.__ELsnap=window.__ELsnap||{};if(!window.__ELint)window.__ELint=setInterval(()=>{try{const x=S.nfX;if(x&&x.st!=="wait"&&!__ELsnap[x.d])__ELsnap[x.d]=Object.assign(window.EL?EL():{},{role:x.role,t:x.t,st:x.st,nfC:S.nfC})}catch(e){}},50);window.__eaOff=true;S.cyb=Object.assign(S.cyb||{},{lie:wk()});return{id:tgt===S?"me":tgt.id,n:(tgt===S?S.nights:tgt.nights)||0,coop:!!tgt.coop}},who);
  const unforce=async()=>{await B.p.evaluate(()=>{if(window.__TB)nightCh=window.__TB.nc});return unforce0()};
  const unforce0=()=>A.p.evaluate(()=>{const T=window.__T;if(!T)return;nightCh=T.nc;roll=T.rl;BAL.ag.emp.custom=T.cu;BAL.visit.cap=T.vc;oSteal=T.os;oKeep=T.ok;window.stealWant=T.sw;if(T.es)empSummon=T.es;if(T.ep)empPick=T.ep;window.__eaOff=T.ea;if(T.mr){Math.random=T.mr;T.mr=null}});
- const noCyc=o=>o.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk()})});
+ /* not her Kỳ nguyệt tuần (as night-final T.noCyc): with only {lie} the cycle could still ask, the fixture's clear() answered «Báo đúng ngày» and
+    Kính sự phòng put her card away → another card was turned (case 3 «flipped guest gets the defence choice» red, NLC #7/#8/#9) */
+ const noCyc=o=>o.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"})});
  /* each case starts with both players able to serve tonight: a night played to its end in an earlier case (case 1 her won night, case 2 his)
     can leave a seat pregnant / ill, and then that seat is rightly offered no attack — fixture state, not the rule under test */
- const fit=o=>o.p.evaluate(()=>{const c=p=>{if(!p)return;p.preg=0;p.pregUnk=0;p.ill=null;p.confined=0;p.block=0};c(S);c(liveRivals(false).find(v=>v&&v.coop));S.cyb=Object.assign(S.cyb||{},{lie:wk()});
+ const fit=o=>o.p.evaluate(()=>{const c=p=>{if(!p)return;p.preg=0;p.pregUnk=0;p.ill=null;p.confined=0;p.block=0};c(S);c(liveRivals(false).find(v=>v&&v.coop));S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"});
    return nightCh(S)>0});
  const fitBoth=async tag=>{const a=await fit(A),c=await fit(B);if(!a||!c)console.log('fit',tag,a,c);
    /* the guest's own role is read on her seat (roleOf → canAtt → her nightCh): she may try tonight too (restored by unforce) */
