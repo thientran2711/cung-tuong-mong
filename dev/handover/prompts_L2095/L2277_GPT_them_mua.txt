@@ -1,0 +1,13 @@
+Ngoài 6 nhóm tính cách, hãy thiết kế thêm theo 4 MÙA. Mỗi người trong game có trang phục riêng cho từng mùa: Xuân, Hạ, Thu, Đông.
+
+Cảm giác của từng mùa:
+- Xuân: tươi mới, đâm chồi, ấm áp nhẹ nhàng.
+- Hạ: rực nắng, mát mẻ, thoáng đãng.
+- Thu: chín, ấm, lắng đọng.
+- Đông: tĩnh, trong, sang trọng; trang phục mùa đông có thêm một lớp áo lông khoác ngoài.
+
+Mỗi bộ phải giữ cùng lúc 3 thứ: tính cách của nhóm, thứ bậc (bậc càng cao càng sang), và cảm giác của mùa.
+
+Bạn cho tôi:
+1. Với mỗi mùa: ý tưởng ngắn, mùa đó làm trang phục khác đi như thế nào.
+2. Prompt vẽ hình (tiếng Anh) cho từng nhóm × từng bậc × từng mùa, dùng được ngay để tạo hình.
