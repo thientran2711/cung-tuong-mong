@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"602ce49e+","t":"2026-11-21T08:32Z","c":"coop-emo-seat r2: rebuild on merged LIVE a66b5a49","b":"d2ecf29047e8","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
+window.CTM_BI={"s":"a4457e49+","t":"2026-11-21T09:19Z","c":"coop-emo-seat r2: rebuild on merged LIVE a66b5a49","b":"b9701d986ebd","h":[{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2190,7 +2190,7 @@ A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x()
 A("bribe","Mua chuộc cung nữ",{c:{get bac(){return -BAL.actBac.bribe}},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{/* AG-ALL-2f3 (OD 17/11 ~17:10Z): the 40 bạc are paid only when the maid takes them; a refusal costs no bạc (her report + the sent servant's fear stay) */
   /* RECEIVER CHOICE (jrcv rcvMaidBribe over jagstf2 stf2BribeW, G10): the maid chooses (her own maid too) among the maid player's cnvBribeOpts
      take / tell / quiet with ITS numbers (the pay goes to the maid, she becomes the briber's tai mắt; tell = Chủ tin +, the master's chứng cứ) */
-  const pay=(typeof econSchemePrice==="function"?econSchemePrice("bribe",a,t):0)||BAL.actBac.bribe;const mn=t.maid.name;const mc=rcvMaidBribe(a,t,oddsCl(oBribe(a,t)),pay);
+  const pay=(typeof econSchemePrice==="function"?econSchemePrice("bribe",a,t):0)||BAL.actBac.bribe;const mn=t.maid.name;const mc=rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)),a),pay);/* the take weight = the act's own odds: the frozen shown odds (fzRun) / an NPC road's +up (jtamco aOdd), econ-tamco F2 */
   if(mc==="quiet")return `Cung nữ ${mn} của ${NM(t)} từ chối bạc của ${NM(a)}, không nói với ai. `;
   if(mc==="take"){econPayWin(a,"bribe",t,BAL.actBac.bribe);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.j8.evF_3);return `Cung nữ ${mn} của ${NM(t)} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ: ${NM(a)} nắm ${balAb(BAL.eff.j8.evF_3)} chứng cứ. `}return `Cung nữ ${mn} của ${NM(t)} nhận bạc của ${NM(a)}, thành tai mắt. `}
   const fr=typeof tmFear==="function"?tmFear(a,1):"";return `Cung nữ ${mn} từ chối bạc của ${NM(a)} và báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ.${fr?" "+fr+".":""} `}});
@@ -4554,7 +4554,7 @@ const AOUT={spy:aoLz(()=>`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2
  vp:aoLz("đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt",()=>`Danh -3, nàng thù ${balSg(BAL.eff.j8.vpAccuse_2)}`),plant:aoLz("món đồ nằm trong rương nàng",()=>`kẻ cài bị bắt: nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ, thù ${balSg(BAL.eff.j8.plantItem)}`),steal:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),road:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
-function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"","không mất bạc"].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
+function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"",ECON_WIN_FAIL].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
 function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
  return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
@@ -5368,7 +5368,7 @@ function bribeOdds(a,s){return odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,
 function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=aOdd(bribeOdds(a,s),a);/* her Mua chuộc: the odds she saw (j9 fzRun), also as the take weight below */
  /* AG-ALL-2 G10: with the loop on the servant CHOOSES among the player maid's own "Bạc lạ" options (j42 cnvBribeOpts: Nhận bạc / Từ chối, bẩm chủ /
     Từ chối, im lặng) — take weighs as these odds, the refusal splits by her lòng (jagstf2 stf2Bribe); off → the old roll */
- if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,odds,cost);if(r!=null)return r}
+ if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,aOdd(odds,a),cost);/* the same odds as the aRoll fallback below (econ-tamco F2, whole group) */if(r!=null)return r}
  if(aRoll(odds,a)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
 /* what one sees of a servant: hidden trait until learned; at hire only age, origin and a vague impression */
 const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","con nhà buôn ở kinh thành","mồ côi, được Nội vụ phủ nuôi","con nhà thợ thêu Tô Châu","quê miền núi phía Bắc"];
@@ -35365,6 +35365,11 @@ Object.assign(BAL,{nroad:{
  org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
+ /* OR19 (OD:L1288, STORY_ROADS_PLAN §3.0): an NPC consort may be a foreign princess (Công chúa hòa thân) — rolled ONCE at game start (or on
+    arrival) with the SAME share as the player's pool: BAL.orig.ow.nc out of the consort origins of BAL.orig.ow (cnv = a servant, never a
+    consort), country by BAL.orig.br.nc; max = princesses of one country in one game (the player counts); faces = princess faces per country
+    (shared by player and NPC rolls, never the same face twice in one game; stand-in = her drawn face until the princess art ships) */
+ fp:{max:1,faces:3,no:["cnv"]},
  /* at most this many NPC roads have the player as their rival at one time */
  meMax:3,
  /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
@@ -36864,8 +36869,24 @@ BAL.ge={
  bd_soi_1:{danh:36,sung:18,rel:8},bd_soi_2:{rank:1,danh:30,duc:10,rel:8},bd_soi_3:{rank:1,danh:30,tamco:10,rel:8},bd_soi_4:{seat:"TM",danh:30,sung:15,rel:8},
  bd_tuyet_1:{danh:36,duc:12,rel:8},bd_tuyet_2:{rank:1,danh:30,tamco:10,rel:8},bd_tuyet_3:{danh:30,mat:2,tamco:10,rel:8},bd_tuyet_4:{danh:30,tai:10,rel:8},
  bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8}},
- help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
- npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
+ /* GE10 (design §2.9 "Helping"): her help on an NPC's road (the jnroad help hồi) moves that NPC's grand ending — help = +pull on the ending
+    the NPC leans toward most (it stays open), a betrayal = −push on it (at 0 pull it turns fail-only: sabotage can close one); the rival she
+    told gets the same +pull (two-way, laws 1–2, like BAL.nroad.help). rw = her reward when an NPC she helped (no betrayal) then unlocks. */
+ help:{rw:{danh:6,duc:3},pull:2,push:2},
+ /* GE09 NPC parity (design §2.9, OD:L1386/L1403/L1601 (4)): an NPC consort whose road is a live branch (GE_DATA) gets the same funnel —
+    pull / closing / lean from HER choices (each stage of each chapter she plays: she picks one option of that stage, weighted by her nature
+    via jmind mindPick, no flat roll) + her own Đức + the chapter ends; at the end of HER road (the chapter that closes it) the Hồi kết nhánh:
+    Ngã rẽ 1/2 picked from her nature (nat: trait → [weights of the 4 / 3 answers]) × (1 + pull of the open ending that owns the pair × pw);
+    «Theo người ấy» only with a real bond (BAL.ge.bond.sis toward a living consort). Same resolve, odds, shading, seat locks as hers.
+    w.lean = weight an option tagged to her nature's side gets; w.pull = weight of an option that pulls an ending her nature points to;
+    w.close = factor on an option that would close / doom an open ending her nature points to (she shies away, like a player aiming at it).
+    leave = summits after which an NPC leaves the palace (a Hoàng hậu never leaves this way); news = the world news pop-up for an NPC unlock (GE08). */
+ npc:{on:true,
+  nat:{"Ân cần":{r1:[3,1,1,1],r2:[4,1,1]},"Khiêm nhường":{r1:[3,1,1,1],r2:[3,1,2]},"Tham vọng":{r1:[1,4,1,1],r2:[1,4,1]},
+   "Kiêu ngạo":{r1:[2,3,1,1],r2:[1,4,1]},"Xảo quyệt":{r1:[1,3,1,1],r2:[1,4,1]},"Kín đáo":{r1:[1,1,3,1],r2:[1,1,4]}},
+  kind:["Ân cần","Khiêm nhường"],cruel:["Xảo quyệt","Kiêu ngạo","Tham vọng"],
+  w:{lean:3,pull:3,close:.25},pw:1,bondMul:2,
+  leave:["FREE","NUN","FOLLOW","REUNION","NV"],news:true},
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
     a random bot rarely does; the funnel leaves 1–2 open by .11; a bot that plays kindly / cruelly for most of a life gets that shading */
  target:{inChar:[.30,.60],random:[0,.20],open11:[1,2.6],shade:.70},
@@ -41817,23 +41838,22 @@ const EMO_GHEN="Chạnh lòng";
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu"};/* FEELINGS-18 (owner OD 17/11 ~19:10Z): the full 18-kind set, levels, heavy names and the old-key conversion live in jfeel.js (FEEL_N, BAL.feel); Toan tính is an intent there, Đau khổ = Buồn at the heavy level */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
- kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
+ kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],neglect:["buon",30],ill:["lo",35],
  friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["buon",90],
  motherCold:["buon",50],clanUp:["vui",35],clanDown:["lo",40]};
 /* personality filter: trait → event → [emotion, ×strength] (null emotion = shrugs it off) */
 const EMO_TR={
- "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
+ "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4]},
  "Khiêm nhường":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
- "Tham vọng":{rivalUp:["ghen",1.3],otherKid:["ghen",1.2],selfUp:["vui",1.3],punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
- "Xảo quyệt":{rivalUp:["ghen",1.2],slight:["gian",1.1],punished:["gian",.9],otherKid:["ghen",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Tham vọng":{punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
+ "Xảo quyệt":{slight:["gian",1.1],punished:["gian",.9],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
  "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["buon",1.6]},
  "Kín đáo":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
- "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
  "Thù dai":{slight:["gian",1.4],foeDown:["vui",1.3]},
  "Ham lợi":{gift:["vui",1.6]},
  "Trọng nghĩa":{friendDie:["buon",1.7],friendUp:["vui",1.4]},
  "Rộng lượng":{slight:["buon",.8]},
- "Thật thà":{slight:["gian",1.1],rivalUp:["ghen",.6]},
+ "Thật thà":{slight:["gian",1.1]},
  "Mê tín":{ill:["so",1.2],kidDie:["buon",1]},
  /* servants (j10 STR) */
  trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["lo",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
@@ -41846,15 +41866,13 @@ const EMO_DK={"Thù dai":{gian:.4},"Ân cần":{gian:1.6,ghen:1.6},"Khiêm như�
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
-const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,humiliate:1.3,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
- so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
- };/* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
+const EMO_W={};/* ONE CORE (emo-balance): every kind's act weights live in BAL.feel.w (jfeel) + BAL.emo2.w (jmoodknow), copied in at load *//* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:1,binh:0,buon:0,gian:-1,so:-1,ghen:0,lo:0};
+const EMO_OD={};/* BAL.feel.odAll (jfeel) + BAL.emo2.od */
 /* the Emperor's tablet chance by her mood */
 const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
 /* servants' Lòng per month by their own mood */
-const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1};
+const EMO_LOY={};/* BAL.feel.loy (jfeel) + BAL.emo2.loy */
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
 function emoOn(){return !!(typeof S!=="undefined"&&S&&!window.__emoOff)}
 /* ---------- who ---------- */
@@ -41941,11 +41959,11 @@ function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mi
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}
- if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=1.4;/* high Đức: anger makes her withdraw instead */
+ if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=BAL.feel.wd;/* high Đức: anger makes her withdraw instead */
  return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
-/* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
+/* anger and jealousy aimed at someone raise the danger toward that person: + v/BAL.feel.dg.div × brake, capped at BAL.feel.dg.cap */
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0){const G=BAL.feel.dg;return d+Math.min(G.cap,Math.round(e.v/G.div*f))}}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return oddsCl(r+m)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return oddsCl(r+m)}}catch(e){}return r}})();
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if(e.k==="buon"&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
@@ -43623,7 +43641,7 @@ function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21):
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 /* AG-ALL-2f3 (OD 17/11 ~17:10Z): acts whose WHOLE price is paid only on success (the act pays econSchemePrice itself when it lands) */
-const ECON_WIN=["bribe","block","xinhh","thathu"];/* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
+const ECON_WIN=["bribe","block","xinhh","thathu"];const ECON_WIN_FAIL="không mất bạc";/* the ONE failure wording of a pay-on-success scheme (j17 actLine, jtamco road card) *//* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
 /* the act landed: pay its whole price now (her and every NPC) and mark the win for a scheme chain that pays its route bạc on success (j70 exec70) */
 function econPayWin(a,k,t,base){const pr=(typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0)||base||0;if(pr>0)ap(a,{bac:-Math.min(pr,Math.max(0,a.bac||0))});if(a)a.__won=1;return pr}
 /* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */
@@ -43632,7 +43650,10 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
   const ok0=A0.ok;A0.ok=function(a,t){ECON_AT=[a,t];if(!ok0.apply(this,arguments))return false;return (a.bac||0)>=econSchemePrice(k,a,t)};
-  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac;if(extra>0&&!ECON_WIN.includes(k))ap(a,{bac:-extra});return f0.apply(this,arguments)}}})();
+  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac,pay=extra>0&&!ECON_WIN.includes(k);if(pay)ap(a,{bac:-extra});const g0=econVeto();const r=f0.apply(this,arguments);
+   if(pay&&econVeto()!==g0)ap(a,{bac:extra});/* the act's own gate stopped it (j95c: no motive to frame) → no price paid for nothing (law 3) */return r}}})();
+/* acts whose own f can still refuse after the price is taken: the j95c giá họa motive gate (counted in J95C.stat.frameGate) */
+function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
@@ -43643,7 +43664,7 @@ A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),
    tell, the same as every sent servant); the target's maid answers through the SAME pick as «Mua chuộc cung nữ» (jrcv rcvMaidBribe, cnvBribeOpts with pay 0) */
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>oddsCl(oBribe(a,t)-BAL.selfMinus),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);const mn=t.maid.name;
- const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,oddsCl(oBribe(a,t)-BAL.selfMinus),0):"quiet";
+ const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)-BAL.selfMinus),a),0)/* the frozen shown odds (econ-tamco F2, whole group) */:"quiet";
  if(mc==="take"){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${mn}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${mn} của ${NM(t)}; nàng ấy thành tai mắt. `}
  if(mc==="quiet")return `${mn} không mặn mà với ${m.name}, cũng không nói với ai. `;
  return `${mn} nhận ra ${m.name} đến dò, báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ. `}});
@@ -43658,6 +43679,84 @@ try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["block
 /* watched more at high rank */
 (function(){const c0=caught;caught=function(a,t,ps,desc){const r=c0.apply(this,arguments);try{if(r&&a&&rkOf(a)>=BAL.watchRank){const n=rkOf(a)-BAL.watchRank+1;ap(a,{danh:-n});return r+`Phẩm cao, nhiều mắt nhìn: Danh -${n}. `}}catch(e){}return r}})();
 window.econSchemePrice=econSchemePrice;window.econSchemeMul=econSchemeMul;
+/* ================= jtamco: ECONOMY §5 — TÂM CƠ AS ITS OWN COST + BUYING SAFETY WITH BẠC (ECONOMY.md §5 «Chưa làm», GAP OR21) =================
+   Every scheme priced by its target (jecon §5: ACT[k].__c0, the bạc schemes) can be done three ways, one rule for her and every NPC (law 1):
+     «Làm như thường»        : the price jecon §5 already charges, the shown odds (unchanged);
+     «Hao tâm cơ»            : she plots every step herself: Tâm cơ −tc (the stat really drops, so later schemes lose its odds), odds +BAL.tcroad.up;
+     «Thuê người làm thay»   : she hires a hand: bạc −hire on top of the price, odds +BAL.tcroad.up.
+   EQUAL VALUE (law 2): tc and hire come from ONE exchange rate, BAL.tcroad.rate bạc per Tâm cơ point (the arc table's own rate: {bac:-30} ⇔ {tamco:3},
+   jbalarc s2/x1), so hire = tc × rate exactly; both buy the SAME odds. GAIN AND LOSS (law 3): each road has a cost and a gain. ONE CORE (law 4):
+   every number is BAL.tcroad. NPCs (law 1) pick a road in the act itself (econRoadNpc): the same costs, the same odds, the same rate.
+   Her choice: doAct (j8) for a priced scheme opens a kit choice (PEND.roadpick, the same dilemma card as «Cài đồ vào rương»); the odds printed on
+   each option = the odds rolled (fzRun freezes them, j9). */
+BAL.tcroad={rate:10,share:.5,tcMin:1,up:12,npcP:50,npcKeep:30,npcTcMin:25};
+let ECON_RB=null;/* the NPC road bonus in force for one act: {a, b} (her rolls use the frozen shown odds instead) */
+function econRoadCost(k,a,t){const pr=typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0;const R=BAL.tcroad;
+ const tc=Math.max(R.tcMin,Math.round(pr*R.share/R.rate));return{pr,tc,hire:tc*R.rate}}
+/* a road sells odds (+up), so it exists only where the act's success really rolls on its odds (law 3, econ-tamco F2): the act shows odds below 100
+   (musk / catswap: o null, no roll → no road), and no PLAYER decides the outcome (a judge request whose Hoàng hậu is her: her own card, no roll).
+   Every success decision of a road scheme reads aOdd (the frozen shown odds / the NPC road's +up): bribe + bribel (jrcv rcvMaidBribe weight),
+   xinhh + trinhhh (jaudit → rcvJudge), the rest aRoll; dev/test/econ-tamco-scan.js checks it per scheme for her and an NPC */
+function econRoadRolls(k,a,t){if(!a||!t||!ACT[k]||!ACT[k].__c0)return false;let o=null;try{o=actOdds(a,t,k)}catch(e){}if(o==null||o>=100)return false;
+ if(typeof RCVJ==="object"&&RCVJ[k]&&typeof queenP==="function"&&queenP()===S&&a!==S)return false;return true}
+function econRoadOk(k,a,t,road){if(!econRoadRolls(k,a,t))return false;const c=econRoadCost(k,a,t);
+ if(road==="tc")return (a.tamco||0)>=c.tc;if(road==="hire")return (a.bac||0)>=c.pr+c.hire;return true}
+/* an NPC picks her road (law 1): spare silver → hire; a sharp mind → plot it herself; else as usual */
+function econRoadNpc(a,k,t){if(!econRoadRolls(k,a,t))return"";const R=BAL.tcroad,c=econRoadCost(k,a,t);
+ if((a.bac||0)>=c.pr+c.hire+R.npcKeep&&roll(R.npcP))return"hire";
+ if((a.tamco||0)>=c.tc+R.npcTcMin&&roll(R.npcP))return"tc";return""}
+function econRoadPay(a,k,t,road,c0){const c=c0||econRoadCost(k,a,t);/* c0: the cost she SAW on the card (F3: khắc spent before the act can move the price) */if(road==="tc")ap(a,{tamco:-c.tc});else if(road==="hire")ap(a,{bac:-c.hire});return c}
+/* the NPC act: pay the road, the act's own success roll gets +up (aOdd, below) */
+function econRoadWrapF(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.__c0||(A0.f&&A0.f.__road))continue;const f0=A0.f;/* again at the script end: later modules replace some f (jwhy spy) */
+  const f=function(a,t){if(!a||a===S||ECON_RB)return f0.apply(this,arguments);let road="";try{road=econRoadNpc(a,k,t)}catch(e){}
+   if(!road)return f0.apply(this,arguments);const c=econRoadPay(a,k,t,road),g0=econVeto();ECON_RB={a,b:BAL.tcroad.up,road};try{return f0.apply(this,arguments)}finally{ECON_RB=null;if(econVeto()!==g0)ap(a,road==="tc"?{tamco:c.tc}:{bac:c.hire})/* the act's own gate stopped it: the road is given back */}};f.__road=1;A0.f=f}}
+econRoadWrapF();setTimeout(econRoadWrapF,0);
+(function(){const o0=aOdd;aOdd=function(o,a){const z=o0.apply(this,arguments);
+ if(ECON_RB&&!(ACTX&&ACTX.fz!=null)&&(a===undefined||a===ECON_RB.a))return oddsCl(z+ECON_RB.b);return z}})();
+/* her choice: a priced scheme from doAct opens the road card first */
+let ECON_ROADGO=0;
+PEND.roadpick=p=>{const v=RV(p.v),k=p.k,A0=ACT[k];if(!v||!A0)return null;const c=econRoadCost(k,S,v),o0=actOdds(S,v,k),R=BAL.tcroad;
+ const up=oddsCl(o0+R.up),win=typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k),pr=c.pr>0&&!win?{bac:-c.pr}:{},
+  /* pay-on-success schemes (ECON_WIN: the price is paid only when it works): the price sits on «thành», not in Tốn; «hỏng» says what a failure keeps */
+  wT=win&&c.pr>0?`, Bạc -${c.pr}`:""/* KIT §88: a cost under «thành:» of a roll act = THÀNH Mất (paid only when it lands), not Tốn */,wH=hire=>win?` · hỏng: ${hire?"chỉ mất tiền thuê, ":""}${ECON_WIN_FAIL}${hire?" giá mưu kế":""}`:"",go=road=>()=>econRoadGo(rivals.indexOf(v),k,road,road?up:o0,c);
+ const O=[{n:"Làm như thường",fx:{},p:oddsCl(o0),ton:pr,x:`thành: giá mưu kế như cũ, không hao gì thêm${wT}${wH(0)}`,go:go("")}];
+ O.push({n:"Hao tâm cơ, tự mình sắp đặt",fx:{},p:up,off:!econRoadOk(k,S,v,"tc"),ton:Object.assign({tamco:-c.tc},pr),x:`thành: tự tay sắp đặt từng bước, chắc tay hơn${wT}${wH(0)}`,go:go("tc")});/* kit Tốn row (KIT §13.16 ton field): a price paid elsewhere — Tâm cơ is paid in econRoadGo, the scheme price by the act */
+ O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(win?c.hire:c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn${wT}${wH(1)}`,go:go("hire")});
+ O.push({n:"Thôi",fx:{}});
+ /* the queued item gets act:1 (KIT §28.6 data flag, set where doAct pushes it): the scheme act's OWN picker, not an event → the open act card (Tốn · THÀNH · BẠI with numbers, §88), so a pay-on-success price shows as THÀNH «Bạc -N» */
+ return{who:pv(v),t:`<p>${A0.n} — ${v.name}: tự tay làm, hao tâm cơ mà sắp đặt, hay bỏ bạc thuê người làm thay?</p>`,o:O}};
+/* her road travels with her act as ECON_HER {k, t: rival id, road, fz: the odds she saw}; runAct (below) pays it and rolls the odds she saw.
+   Co-op (owner CO-OP LAND GATE): a thin guest's runAct is an intent run on the HOST; ECON_HER rides in that intent's ctx (jcoopthinf F1
+   runAct "econ"), so the host computes the cost and the roll in her context — the same road on both seats, nothing paid on the guest phone. */
+window.ECON_HER=null;
+/* SHOWN = CHARGED (F3): the card's numbers {pr, tc, hire} ride with the road (c) and are what is paid — the road (econRoadPay) and the scheme
+   price (econSchemePrice for her act on that target, frozen by ECON_PRFZ while her act runs); the plain road carries them too (road "") */
+let ECON_PRFZ=null;
+(function(){if(typeof econSchemePrice!=="function")return;const p0=econSchemePrice;econSchemePrice=function(k,a,t){const z=ECON_PRFZ;
+ if(z&&a===S&&k===z.k&&t&&t.id===z.t&&z.pr!=null)return z.pr;return p0.apply(this,arguments)}})();
+/* F4: a frozen cost is paid only if she can still pay it NOW (the host's copy of her in co-op, a deed landing weeks later): else the act stops,
+   nothing is charged (the same words as the j19 lock, «Thiếu bạc (cần N)»). The act's own check (ACT.ok) needs bạc ≥ price for every scheme, pay-on-success too */
+function econLack(a,k,t,road,c){if(!a||!c)return"";if(road==="tc"&&(a.tamco||0)<c.tc)return `Thiếu Tâm cơ (cần ${c.tc})`;
+ const need=(road==="hire"?c.hire:0)+(c.pr||0);return (a.bac||0)<need?`Thiếu bạc (cần ${need})`:""}
+function econPrFz(h,fn){const z0=ECON_PRFZ;ECON_PRFZ=h&&h.c?{k:h.k,t:h.t,pr:h.c.pr}:null;try{return fn()}finally{ECON_PRFZ=z0}}
+function econRoadGo(i,k,road,fz,c){const v=rivals[i];window.ECON_HER=v?{k,t:v.id,road:road||"",fz,c:c||null}:null;ECON_ROADGO=1;try{fzRun(fz,k,()=>doAct(i,k))}finally{ECON_ROADGO=0;window.ECON_HER=null}}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const h=window.ECON_HER;
+ if(!h||a!==S||!t||t.id!==h.t||k!==h.k||!ACT[k]||!ACT[k].__c0)return r0.apply(this,arguments);window.ECON_HER=null;
+ const A=arguments,run=()=>econPrFz(h,()=>r0.apply(this,A));const lack=econLack(S,k,t,h.road,h.c||econRoadCost(k,S,t));if(lack)return `${lack}: ${ACT[k].n} không thành, chưa tốn gì. `;econRoadPay(S,k,t,h.road,h.c);/* tc: Tâm cơ · hire: the hired hand (the scheme price is the act's own) */
+ return ACTFZ||h.fz==null?run():fzRun(h.fz,k,run)}})();
+/* parallel time (jptime): a scheme SENT with a servant (ptHarmSend, the spy deed…) lands later. The deed sent while her road is pending
+   carries it (a.econ) and pays it when it lands (ptLand), before the deed's own run; the odds she saw are the deed's fz. Co-op: the landing
+   runs on the host in her context (ptTickHer intent), so the host pays it. */
+setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")return;
+ const s0=ptSend;ptSend=function(o){const h=window.ECON_HER,a=s0.apply(this,arguments);
+  try{if(a&&h&&o&&o.tgt==="v"+h.t&&(!o.a||o.a.k==null||o.a.k===h.k)){a.econ={k:h.k,t:h.t,road:h.road,c:h.c||null};window.ECON_HER=null}}catch(e){}return a};
+ const l0=ptLand;ptLand=function(a){let e=null;try{e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k]){const lack=econLack(S,e.k,t,e.road,e.c||econRoadCost(e.k,S,t));
+   if(lack){a.back=1;try{PT.stat.back++}catch(x){}a.rep={t:a.lbl||"Đã về",ok:false,L:[`${lack}: ${ACT[e.k].n} không thành, chưa tốn gì.`],d:[]};return}/* F4: she cannot pay it any more → the deed comes back undone */econRoadPay(S,e.k,t,e.road,e.c)}}else e=null}catch(x){console.error("econ road land",x)}
+  const A=arguments;return econPrFz(e,()=>l0.apply(this,A))}}catch(e){console.error("econ road ptime",e)}},0);
+(function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
+  if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}
+  return d0.apply(this,arguments)}})();
+window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc=econRoadNpc;
 /* ================= jstip: BỔNG LỘC = REAL GOODS + NỘI VỤ PHỦ CẮT XÉN (owner 15/11 17:30Z + 17:33Z, review/econ-stipend) =================
    Notes + numbers: dev/ECONOMY.md §6–§7. ONE SOURCE: every number in BAL.stip (below, read through BAL like every jecon knob).
    1. GOODS (17:30Z): the monthly goods of her rank are real items in p.inv (picture j98 itemArt, grade, use): cloth (may áo / tặng / bán),
@@ -50910,7 +51009,7 @@ function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
 function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyRoll(a,t):oSpy(a);/* the roll's own odds (lá số included; review/shown-odds-one-path) */A0.why=(a,t)=>spyFactors(a,t);
- A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
+ A0.f=(a,t)=>{ap(a,{bac:-actBac("spy",a,t)})/* one core: the jecon §5 price the card shows (was a flat 15) */;const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
 (function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
 /* her maid at home: "Sai đi dò la" — SHE chooses whom (owner 08:45Z: never a silent random target for a player act).
@@ -51243,10 +51342,10 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
  const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
   X.f=(a,t)=>{/* AG-ALL-2d4 (OD 17/11 ~17:10Z (1)): the gift is taken only when the Empress agrees; refused → returned */const q=queenP();const o=odA(a,raw(a,t));
    /* RECEIVER CHOICE (jrcv RCVJ.xinhh, review FAIL 6 #3): the Hoàng hậu decides — she as the Hoàng hậu gets the card; an NPC queen the SAME options, yes at these odds */
-   if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,o);if(roll(o)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
+   const oz=aOdd(o,a);/* the frozen shown odds (fzRun) / an NPC road's +up (jtamco), econ-tamco F2 */if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,oz);if(roll(oz)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
  const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
   T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,BAL.eff.jaudit.evF);/* RECEIVER CHOICE (jrcv RCVJ.trinhhh): she as the Hoàng hậu gets the card */
-   if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,o);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
+   const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
@@ -57678,7 +57777,7 @@ function nrRoads(o){const M=Object.keys(NRM).filter(id=>NRM[id].k===o);if(M.leng
 function nrCh(r,n){if(NRM[r])return NRM[r].c[n]||null;if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
 function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
 /* origin of an NPC woman (canon ROAD_MAP §5.2: one father = one record) */
-function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
+function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";try{const f=typeof nrFpRoll==="function"?nrFpRoll(v):"";if(f)return f}catch(e){}/* OR19 foreign princess (jgenpc.js) */let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
  let L=(nrB().org[c]||nrB().org[""]).filter(([o])=>!(nrB().uniq.includes(o)&&o===me));if(!L.length)L=nrB().org[""];
  const tot=L.reduce((a,z)=>a+z[1],0);let x=Math.random()*tot;for(const [o,w] of L){if((x-=w)<0)return o}return L[0][0]}
 /* a road of that origin: avoid the player's road and roads other NPCs of the same origin already live (variety) */
@@ -57708,7 +57807,7 @@ function nrHe(p){try{if(!p)return"nàng";if(p.role==="eunuch"||p.sex==="m")retur
 /* r2 fix (F8): some chapter tags / titles of the roads are functions (()=>`… ${CN_Q()}`) — read their value, never their source text */
 function nrS(x,A){try{return typeof x==="function"?String(x(A)||""):String(x||"")}catch(e){return""}}
 function nrEnd(A,k,he,who){const E=A&&A.E||{};const tg=x=>plain(nrS(E[x].tag,A));const ks=Object.keys(E).filter(x=>(E[x].k||0)===k&&tg(x)&&!/✦/.test(tg(x)));
- const x=ks.length?pick(ks):null;return x?nrFill(nrTag(tg(x),he),who):""}
+ const x=ks.length?pick(ks):null;nrEnd.k=x;/* the ending key, read by the NPC grand-ending funnel (jgenpc.js «@arc=end») */return x?nrFill(nrTag(tg(x),he),who):""}
 /* r2 fix (whole group F7: 51 ending tags + 1 chapter title of the roads NPCs read carry the player's cast tokens {v} {v2} {foe} {foed} {mis}):
    an NPC's line names HER OWN cast — her rival (the player = «ngươi», j84 turns it to «ta») and, for a maid, her mistress — never a raw token */
 function nrWho(p){const o={v:"",mis:""};try{const N=p&&p.nr;if(!N)return o;
@@ -67197,7 +67296,9 @@ const D=s=>GE_DATA[s.b],C=s=>GE_CAT[s.b];
 const chN=()=>{try{return S.st.ch.n|0}catch(e){return 0}};
 /* ---------- the world: seats, people ---------- */
 function geMis(){try{const id=S.st.f14.act&&S.st.f14.act.mis;return id!=null?RV(id):null}catch(e){return null}}
-function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};return !!W[X]&&W[X]!=="me"}catch(e){return false}}
+/* GE09 seat locks both ways: a seat an NPC took by her own grand ending (v.ge.seat, jgenpc.js; rides the rivals in co-op) is taken for her too */
+function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};if(!!W[X]&&W[X]!=="me")return true;
+ return (typeof rivals==="object"&&rivals||[]).some(v=>v&&v.alive!==false&&v.ge&&v.ge.seat===X)}catch(e){return false}}
 function geStat(k){try{if(k==="dad")return S.dad||0;if(k==="maid")return S.maid?S.maid.loyal||0:0;if(k==="mis"){const v=geMis();return v?aff(v,S):-100}return S[k]||0}catch(e){return 0}}
 const gate=(s,i)=>(GB().gate[s.b+"_"+(i+1)]||{});
 function geTerm(s,i,t){const k=t[0];
@@ -67335,7 +67436,11 @@ if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(
 window.geBookHTML=geBookHTML;
 /* ---------- Bảng «Thiên mệnh»: who reached a grand ending in THIS life ---------- */
 function geBoardAdd(p,ti,sh,b){S.geBoard=S.geBoard||[];S.geBoard.push({id:p===S?"me":String(p.id),ti,sh,b,when:(typeof VP==="object"&&VP.date?VP.date(S.month,S.year):`Tháng ${S.month}, năm thứ ${S.year}`),pt:GB().pt})}
-function geBoardList(){return (S&&S.geBoard||[]).map((x,i)=>{const p=x.id==="me"?S:(typeof RV==="function"?RV(+x.id)||RV(x.id):null);return p?Object.assign({},x,{who:p,place:i+1}):null}).filter(Boolean).sort((a,b)=>(a.id==="me"?-1:0)-(b.id==="me"?-1:0))}
+/* GE09: NPC rows come from the NPCs themselves (v.ge.res, jgenpc.js) so the co-op friend sees the same Bảng; her row first, then in order reached */
+function geBoardList(){const L=(S&&S.geBoard||[]).filter(x=>x.id==="me").map(x=>Object.assign({},x,{who:S}));
+ try{for(const v of (typeof rivals==="object"&&rivals||[])){const r=v&&v.ge&&v.ge.res;if(!r||!r.ok||!v.name)continue;L.push({id:String(v.id),ti:r.ti,sh:r.sh,b:v.ge.b,when:r.when||"",pt:GB().pt,t:r.t||0,who:v})}}catch(e){}
+ const me=L.filter(x=>x.id==="me"),np=L.filter(x=>x.id!=="me").sort((a,b)=>(a.t||0)-(b.t||0));return me.concat(np).map((x,i)=>Object.assign(x,{place:i+1}))}
+window.geBoardList=geBoardList;
 function geBoardPanel(tabs){if(!S||typeof kitPanel!=="function")return;const L=geBoardList();const sec=[];if(tabs)sec.push({h:"",html:tabs});
  const rows=L.map(x=>{const o=typeof dhObj==="function"?dhObj(x.who,geKey(x.b,GE_CAT[x.b].e.findIndex(e=>e[6]===x.ti||e[7]===x.ti),x.sh)):null;
   const plate=o&&typeof kitTitlePlate==="function"?kitTitlePlate(o):`«${esc(x.ti)}»`;const nm=typeof kitName==="function"?kitName(x.who,x.who===S?{named:true}:{}):esc(x.who.name);
@@ -67399,6 +67504,8 @@ window.geMapPageHTML=geMapPageHTML;
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
 /* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
 window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:()=>geMis()};
+/* shared with the NPC parity module (jgenpc.js): the same names, keys, odds and lean formulas — nothing copied */
+window.geK={R1N,R2N,SHN,STATK,key:geKey,store:geStore,seatTaken:geSeatTaken,lifeNo:geLifeNo};
 }catch(e){console.error("jge",e)}})();
 /* ================= jdemo: GIÁNG PHẨM / LÃNH CUNG — Nội vụ phủ thu đồ vượt phẩm (review/scenes-3, sweep S3-82, owner OD:L374 08:35Z) =================
    "Demoted / sent to cold palace: above-rank items are CONFISCATED in a scene — Nội vụ phủ eunuch (person dialog) takes each item cell onto a tray,
@@ -79465,6 +79572,175 @@ try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đ
  const h0=ktStoryHTML;ktStoryHTML=function(){try{if(has()){const B=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)}];
    if(ktSubGet("story",B.concat([{k:"pt"},{k:"rg"},{k:"rgl"}]))==="pt"){const sub=kitSubTabs("story",B,kitInfo("Phụ tuyến"));return sub.html+nhPaneHTML()}}}catch(e){console.error(e)}return h0.apply(this,arguments)}})();
 Object.assign(window,{nhTip,nhHp,nhList,nhPaneHTML,nhSbMonth,nhCarrier,nhAfter,nhFlush,nhSnap});
+/* ================= jgenpc: GRAND ENDINGS — NPC PARITY (GE09), her help moves an NPC's ending (GE10), world news pop-up (GE08),
+   NPC foreign princesses (OR19) — design dev/design/GRAND_ENDINGS.md §2.5 (1), §2.9; STORY_ROADS_PLAN.md §3.0; OD:L1288 (NPC identities from
+   the player's pool), OD:L1386 / L1403 (NPCs by the same rules), OD:L1601 (4) (her help / sabotage, the NPC strikes back) =================
+   Builds on jge.js (engine, GE_DATA / GE_CAT, BAL.ge), jnroad.js (NPC roads: v.nr) and jnroadhp.js (help record, strike-back) — nothing copied:
+   names, pairs, titles, odds, lean and seat rules are read from them; every number lives in BAL.ge.npc / BAL.ge.help / BAL.nroad.fp.
+   STATE v.ge (an NPC consort whose road v.nr.r is a live branch; saved with her, rides the rivals in co-op):
+     {b branch, st[4] o/f/x, cx[4], pull[4], lt lean tally, d0 Đức at her start, en {chapter: ending key}, r1, r2, res, done, seat}
+   FLOW (host only, like the NPC roads): every chapter she plays off-screen (nrPlay) → for each stage of that chapter she picks ONE option of the
+     stage, weighted by her nature (jmind mindPick: lean side + the endings her nature points to — no flat roll) → pull / push / close / doom /
+     lean like the player's choices, + «@<chapter>=<ending>» → fail-only checks (her chapter ends, seats) → when her road closes: the Hồi kết
+     nhánh = Ngã rẽ 1/2 picked from her nature × pull → the SAME resolve as hers (open → odds → grand in a shading or fail; no owner → quiet).
+   SUCCESS: her stats + rank step (seat rules), Hoàng hậu through the lập hậu pattern (j8), a seat ending holds the seat (v.ge.seat: locks the
+     player's endings that need it, jge geSeatTaken), a leave ending takes her out of the palace, the shading title on her (jdh), a Kim sách
+     in her chest (real object, law 6c), her row on the Bảng Thiên mệnh, world news = the centre kit pop-up (GE08, both co-op players).
+   FAIL: her loss; a public fall (rank lost) is a palace news line only.
+   HELP (GE10): the jnroad help hồi → +BAL.ge.help.pull on the ending she leans to most; a betrayal → −push (0 → fail-only); the rival told
+     gets +pull (two-way); she unlocks after the player's help and no betrayal → BAL.ge.help.rw to the player.
+   OR19: at game start (and on arrival) an NPC consort may be a foreign princess with the player's pool share; v.fpk origin key, v.fpf face no.
+   Kill switch: BAL.ge.npc.on false. Kit only: Q centre pop-up (kitModal through showModal), log lines, jdh title, j90 podium (jge). */
+(function(){try{
+const GB=()=>BAL.ge,NB=()=>BAL.ge.npc;
+const on=()=>{try{return !!(GB().on&&NB().on&&typeof GE_DATA==="object"&&typeof GE_CAT==="object")}catch(e){return false}};
+const host=()=>{try{return !(typeof nrGuest==="function"&&nrGuest())}catch(e){return true}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const K=()=>window.geK;
+/* ---------- OR19: foreign princess identity ---------- */
+/* share of the player's pool (BAL.orig.ow): hòa thân's weight over every consort origin's weight */
+function fpShare(){const W=BAL.orig.ow,no=BAL.nroad.fp.no||[];let t=0;for(const k in W)if(!no.includes(k))t+=W[k]||0;return t>0?(W.nc||0)/t*100:0}
+function fpUsed(){const U={};try{const me=S.origin&&S.origin.k;if(me&&originRoot(me)==="nc")(U[me]=U[me]||[]).push(S.fpf||1)}catch(e){}
+ for(const v of (rivals||[]))if(v&&v.fpk)(U[v.fpk]=U[v.fpk]||[]).push(v.fpf||0);return U}
+/* one roll per consort, kept: "" = not a princess; else the country branch key (nc / bd …) */
+function nrFpRoll(v){if(!v||v===S)return"";if(v.fpk!==undefined)return v.fpk||"";v.fpk="";
+ try{if(!on()&&!(BAL.nroad&&BAL.nroad.fp))return"";if(v.fromMaid||v.wasMaid||v.coop||v.queen)return"";
+  /* a house's own daughter (j55: the house sent her, n.dad set) is that house's record, never a princess */
+  if(v.dad!=null&&v.clan)return"";if(!roll(fpShare()))return"";
+  const k=originBrPick("nc",Math.random());const F=BAL.nroad.fp,U=fpUsed();const used=U[k]||[];if(used.length>=F.max)return"";
+  const free=[];for(let i=1;i<=F.faces;i++)if(!used.includes(i))free.push(i);if(!free.length)return"";
+  const o=originByKey(k);v.fpk=k;v.fpf=pick(free);v.clan=(o&&o.land)||"";/* her house is abroad: no court house (tdHouse null) */return k}catch(e){console.error("fp",e);return""}}
+window.nrFpRoll=nrFpRoll;
+/* the player's own princess face takes one of the same faces (never twice in one game) */
+function fpMine(){try{const me=S.origin&&S.origin.k;if(!me||originRoot(me)!=="nc"||S.fpf)return;const U=fpUsed();const used=(U[me]||[]).filter(x=>x);
+ const free=[];for(let i=1;i<=BAL.nroad.fp.faces;i++)if(!used.includes(i))free.push(i);S.fpf=free.length?pick(free):1}catch(e){}}
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);
+ try{if(S&&!S.dead&&host()){fpMine();for(const v of rivals.slice())if(v&&v.alive&&!v.out&&!v.coop&&v.fpk===undefined)nrFpRoll(v)}}catch(e){console.error("fp",e)}return r}})();
+/* ---------- GE09: NPC state ---------- */
+function nBranch(v){const r=v&&v.nr&&v.nr.r;return r&&GE_DATA[r]&&GE_CAT[r]&&r.split("_")[0]===v.nr.o?r:null}
+function nS(v){if(!v||v===S||v.coop)return null;if(v.ge&&v.ge.b)return v.ge;if(!on())return null;const b=nBranch(v);if(!b)return null;
+ v.ge={b,st:["o","o","o","o"],cx:[0,0,0,0],pull:[0,0,0,0],lt:0,d0:v.duc|0,en:{},done:0};return v.ge}
+const D=g=>GE_DATA[g.b],C=g=>GE_CAT[g.b];
+/* her stats for the gates (same keys as the player's; a field she lacks counts 0) */
+function nStat(v,k){try{if(k==="dad")return v.dad||0;if(k==="maid"){let m=0;try{for(const s of (typeof knStaff==="function"?knStaff(v):[]))m=Math.max(m,s.loyal||0)}catch(e){}return m}
+ if(k==="mis")return -100;if(k==="mat")return +v.mat||0;return v[k]||0}catch(e){return 0}}
+const gate=(g,i)=>(GB().gate[g.b+"_"+(i+1)]||{});
+function nSeatTaken(X,v){try{if(X==="HH"){if(v.queen)return false;return (typeof qOn==="function"&&qOn())||(S.rank>=RANKS.length-1&&!S.cold)}
+ const W=S.geSeat||{};if(W[X])return true;return rivals.some(w=>w&&w!==v&&w.alive!==false&&w.ge&&w.ge.seat===X)}catch(e){return false}}
+function nSon(v){try{return allKids().some(([k,m])=>m===v&&k.sex==="m"&&k.alive)}catch(e){return false}}
+const ENDK={1:"win",0:"mid","-1":"lose"};
+function nTerm(v,g,i,t){const k=t[0];
+ if(k==="s")return nStat(v,t[1])>=(gate(g,i)[t[1]]||0);
+ if(k==="e"){const e=g.en[t[1]];return !!e&&String(t[2]).split("|").includes(e)}
+ if(k==="seat")return !nSeatTaken(t[1],v);
+ if(k==="seatT")return nSeatTaken(t[1],v);
+ if(k==="mis")return false;/* a consort has no mistress: a {mis} condition never holds for her */
+ if(k==="misD")return false;
+ if(k==="son")return nSon(v);
+ return false}
+const nCond=(v,g,i)=>(D(g).e[i].cond||[]).every(t=>nTerm(v,g,i,t));
+function nLive(v,g){(D(g).e||[]).forEach((e,i)=>{if(g.st[i]==="o"&&(e.fo||[]).some(t=>nTerm(v,g,i,t)))g.st[i]="f"})}
+/* one option name taken → the branch (the player's geNote rules, on her state) */
+function nNote(g,n,ch){const B=D(g),P=GB().pull;
+ B.e.forEach((e,i)=>{if((e.pull||[]).includes(n))g.pull[i]+=P.step;if((e.push||[]).includes(n))g.pull[i]=Math.max(0,g.pull[i]-P.push);
+  if((e.close||[]).includes(n)&&g.st[i]!=="x"){g.st[i]="x";g.cx[i]=ch}else if((e.doom||[]).includes(n)&&g.st[i]==="o")g.st[i]="f"});
+ if((B.lean.p||[]).includes(n))g.lt++;if((B.lean.m||[]).includes(n))g.lt--}
+/* her nature (traits) */
+function nTraits(v){let t=[];try{t=typeof traitsOf==="function"?traitsOf(v)||[]:[]}catch(e){}if(!t.length&&v.trait)t=[v.trait];return t}
+function nNat(v){const N=NB().nat,T=nTraits(v);const r1=[0,0,0,0],r2=[0,0,0];let n=0;
+ for(const t of T){const x=N[t];if(!x)continue;n++;x.r1.forEach((w,i)=>r1[i]+=w);x.r2.forEach((w,i)=>r2[i]+=w)}
+ if(!n){r1.fill(1);r2.fill(1)}return {r1,r2,kind:T.some(t=>NB().kind.includes(t)),cruel:T.some(t=>NB().cruel.includes(t))}}
+/* the weight of an option for HER: base 1, + her side of the lean, + endings her nature points to (their pair weight) */
+function nOptW(v,g,n,nat){const B=D(g),W=NB().w;let w=1;
+ if(nat.kind&&(B.lean.p||[]).includes(n))w+=W.lean;if(nat.cruel&&(B.lean.m||[]).includes(n))w+=W.lean;
+ const top1=Math.max(...nat.r1),top2=Math.max(...nat.r2);
+ C(g).e.forEach((e,i)=>{if(g.st[i]==="x")return;const a=nat.r1[e[3]]||0,b=nat.r2[e[4]]||0;const mine=a>=top1&&b>=top2,half=a>=top1||b>=top2;
+  if((B.e[i].pull||[]).includes(n))w+=mine?W.pull:half?W.pull/2:0;
+  /* she shies away from what would close or doom an ending her nature points to (a player who aims at one does the same) */
+  if(g.st[i]==="o"&&(mine||half)&&((B.e[i].close||[]).includes(n)||(B.e[i].doom||[]).includes(n)))w*=W.close});return w}
+const RAWN=o=>{try{return typeof o.n==="function"?"":String(o.n||"")}catch(e){return""}};
+/* she plays chapter A: one option per stage of the chapter's path, picked by her nature */
+function nChoose(v,g,A,ch){try{const nat=nNat(v);const P=Array.isArray(A.p)?A.p:[[Object.keys(A.B||{})[0]]];
+ for(const stage of P){const L=[];for(const bid of [].concat(stage)){const b=A.B&&A.B[bid];if(!b||!Array.isArray(b.o))continue;for(const o of b.o){const n=RAWN(o);if(n&&!L.some(x=>x[0]===n))L.push([n,nOptW(v,g,n,nat)])}}
+  if(!L.length)continue;const n=typeof mindPick==="function"?mindPick(L,v):wpick(L);if(n)nNote(g,n,ch)}}catch(e){console.error("ge npc",e)}}
+/* ---------- the Hồi kết nhánh of an NPC ---------- */
+function nBond(v){try{const s=GB().bond.sis;for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop&&aff(v,x)>=s)return x.name;
+ if(aff(v,S)>=s&&!S.dead)return S.name}catch(e){}return null}
+function nPair(v,g){const nat=nNat(v),E=C(g).e,pw=NB().pw;const bond=nBond(v);const L=[];
+ for(let a=0;a<4;a++)for(let b=0;b<3;b++){let w=(nat.r1[a]||0)*(nat.r2[b]||0);if(a===3)w=bond?w*NB().bondMul:0;if(w<=0)continue;
+  const j=E.findIndex(e=>e[3]===a&&e[4]===b);if(j>=0&&g.st[j]==="o")w*=1+g.pull[j]*pw;L.push([[a,b],w])}
+ const p=L.length?(typeof mindPick==="function"?mindPick(L,v):wpick(L)):[0,2];g.who=bond||"";return p||[0,2]}
+function nLean(v,g){const V=GB().var;const last=g.r2===0?1:g.r2===1?-1:0;return g.lt*V.tag+((v.duc|0)-(g.d0|0))*V.duc+last*V.last}
+function nShade(v,g,i){const L=nLean(v,g),c=GB().var.cut;if(L>=c)return"t";if(L<=-c)return"a";return C(g).e[i][2]==="A"?"a":"t"}
+function nOdds(v,g,i){const O=GB().odds;let p=O.base+g.pull[i]*O.per;p=Math.max(O.min,Math.min(O.max,p));if(!nCond(v,g,i))p=Math.min(p,O.noCond);return Math.round(p)}
+function nWhen(){try{return typeof VP==="object"&&VP.date?VP.date(S.month,S.year):`Tháng ${S.month}, năm thứ ${S.year}`}catch(e){return""}}
+function nResolve(v,force){const g=nS(v);if(!g||g.done)return null;nLive(v,g);const [r1,r2]=nPair(v,g);g.r1=r1;g.r2=r2;const E=C(g).e,Bd=D(g);
+ const i=E.findIndex(e=>e[3]===r1&&e[4]===r2);let res;
+ if(i<0){let j=-1,best=-1;g.pull.forEach((p,k)=>{if(p>best||(p===best&&j>=0&&g.st[j]!=="o"&&g.st[k]==="o")){best=p;j=k}});if(best<=0){j=g.st.indexOf("o");if(j<0)j=0}res={i:j,ok:0,quiet:1}}
+ else if(g.st[i]==="o"){const p=nOdds(v,g,i);res={i,ok:(force!=null?!!force:roll(p))?1:0,odds:p}}
+ else res={i,ok:0,st:g.st[i]};
+ res.lean=nLean(v,g);if(res.ok){res.sh=nShade(v,g,res.i);res.ti=E[res.i][res.sh==="t"?6:7]}
+ res.n=E[res.i][0];res.fail=Bd.e[res.i].fail;res.t=S.turn;res.when=nWhen();g.res=res;g.done=1;
+ try{nApply(v,g,res)}catch(e){console.error("ge npc",e)}return res}
+window.geNpcResolve=nResolve;
+/* ---------- reward / loss on the NPC ---------- */
+function nRank(v,n){try{if(!n||v.queen)return"";const r0=v.rank|0;
+ if(n>0){const r=Math.min(RANKS.length-2,r0+n);if(r>r0&&(typeof seatHas!=="function"||seatHas(v,r))){if(typeof seatUp==="function"&&r<RANKS.length-1)seatUp(v,r,"ge");else v.rank=r;v.lastPromo=S.turn}}
+ else v.rank=Math.max(0,r0+n);return v.rank!==r0?`${RANKS[r0].n} → ${RANKS[v.rank].n}`:""}catch(e){return""}}
+function nCrown(v){if(v.queen||(typeof qOn==="function"&&qOn())||S.rank>=RANKS.length-1)return false;
+ v.rank=RANKS.length-2;v.queen=true;const i=rivals.indexOf(v);if(i>0){rivals.splice(i,1);rivals.unshift(v)}v.lastPromo=S.turn;return true}
+function nApply(v,g,res){const id=g.b+"_"+(res.i+1),sum=C(g).e[res.i][5];const out=[];res.fx={};
+ if(res.ok){const W=GB().rw[id]||{};const fx={};for(const k of K().STATK)if(W[k]&&k in v)fx[k]=W[k];if(Object.keys(fx).length)ap(v,fx);res.fx=fx;
+  const rk=nRank(v,W.rank||0);if(rk)out.push(rk);
+  if((W.seat==="HH"||sum==="HH")&&nCrown(v))out.push("lập làm Hoàng hậu");
+  else if(GB().seat.includes(sum)&&sum!=="HH"&&!nSeatTaken(sum,v)){g.seat=sum}
+  if(W.rel){for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop){if(res.sh==="t")affAdd(x,v,W.rel);else oanAdd(x,v,W.rel)}}
+  /* the one treasure, a real object in HER chest (law 6c; cannot be sold, given or lost) */
+  const kk=GB().kimsach;if(IT[kk]){v.inv=v.inv||[];v.inv.push({k:kk,from:"ge",ti:res.ti,d:S.turn,nt:true})}
+  try{if(typeof dhInc==="function")dhInc(v,K().key(g.b,res.i,res.sh))}catch(e){}
+  if(NB().leave.includes(sum)&&!v.queen){v.alive=false;v.left=sum;if(sum==="NUN")v.nun=1;g.left=1}
+  /* GE10: her help on this road (no betrayal) is remembered */
+  try{const H=v.nr&&Array.isArray(v.nr.hp)?v.nr.hp:[];if(H.some(x=>x[1]>0)&&!H.some(x=>x[1]<0)&&!v.nr.geRw){v.nr.geRw=1;const R=GB().help.rw;apply(R);res.help=fmt(R)}}catch(e){console.error(e)}
+  log(`<b class="g">Thiên hạ truyền tin · Đại kết cục:</b> ${esc(v.name)} đã thành “${esc(res.ti)}”${out.length?` (${out.join(", ")})`:""}.${res.help?` Nhờ ngươi từng giúp một tay, nàng nhớ ơn: ${res.help}.`:""}`)}
+ else{const L=res.quiet?{}:(GB().fail[id]||{});const fx={};for(const k of K().STATK)if(L[k]&&k in v)fx[k]=L[k];if(Object.keys(fx).length)ap(v,fx);res.fx=fx;
+  const rk=nRank(v,L.rank||0);if(rk){out.push(rk);res.fall=1;log(`<span class="past">Tin trong cung · ${esc(v.name)} · ${esc(res.fail)}: bị giáng ${rk}.</span>`)}}
+ res.ex=out}
+/* ---------- the funnel rides her road ---------- */
+function nAfterCh(v,A,cid,n,r){if(!r||!A)return;const g=nS(v);if(!g||g.done)return;nChoose(v,g,A,n);
+ const x=nrEnd.k;if(x){g.en[n]=String(x);nNote(g,"@"+cid+"="+x,n)}nLive(v,g);
+ if(v.nr.x&&v.alive&&!v.out)nResolve(v)}
+(function(){if(typeof nrPlay!=="function")return;const f=nrPlay;nrPlay=function(v){let A=null,cid="",n=0;
+ try{if(on()&&v&&v.nr&&nBranch(v)){n=v.nr.n;A=nrCh(v.nr.r,n);cid=typeof nrAskId==="function"?nrAskId(v.nr.r,n):v.nr.r;nrEnd.k=null}}catch(e){}
+ const r=f.apply(this,arguments);try{if(A&&on())nAfterCh(v,A,cid,n,r)}catch(e){console.error("ge npc",e)}return r}})();
+/* ---------- GE10: her help / betrayal on an NPC road ---------- */
+function nLeadI(g){let j=-1,b=-1;g.st.forEach((s,i)=>{if(s==="o"&&g.pull[i]>b){b=g.pull[i];j=i}});return j}
+function nHelpMove(v,sign){const g=nS(v);if(!g||g.done)return"";const j=nLeadI(g);if(j<0)return"";const H=GB().help;
+ if(sign>0){g.pull[j]+=H.pull;return ` Ngả đường «${esc(C(g).e[j][0])}» của ${typeof nrHe==="function"?nrHe(v):"nàng"} thêm vững.`}
+ g.pull[j]=Math.max(0,g.pull[j]-H.push);if(g.pull[j]<=0){g.st[j]="f";g.cx[j]=v.nr?v.nr.n:0}return""}
+(function(){if(typeof nrHelped!=="function")return;const h0=nrHelped;nrHelped=function(X,how){const r=h0.apply(this,arguments);
+ try{if(!on()||!how||!host())return r;const v=X&&X.A&&X.A.o;let add="";if(v&&rivals.includes(v))add+=nHelpMove(v,how>0?1:-1);
+  if(how<0){const o=X.B&&X.B.o;if(o&&o!==v&&rivals.includes(o))nHelpMove(o,1)}return (r||"")+add}catch(e){console.error("ge npc",e);return r}}})();
+/* ---------- GE08: world news = centre kit pop-up (both co-op players read the same NPC state) ---------- */
+function nSum(v,g,res){const sum=C(g).e[res.i][5];if(v.queen&&(sum==="HH"))return"Thánh chỉ lập nàng làm Hoàng hậu, chủ trì lục cung.";
+ if(g.left)return sum==="NUN"?"Nàng xin xuất gia, rời cung cấm.":sum==="FOLLOW"?"Nàng theo người mình gắn bó rời khỏi cung cấm.":sum==="NV"?"Nàng về cố quốc, lên ngôi nữ vương.":"Nàng rời khỏi cung cấm.";
+ if(g.seat)return {NDE:"Ngôi nữ đế từ nay thuộc về nàng.",THH:"Nàng buông rèm nhiếp chính.",TM:"Con nàng nối ngôi, nàng thành mẹ của vua."}[g.seat]||"";return""}
+function nNews(){if(!S||S.dead||!on()||!NB().news)return 0;S.geNs=S.geNs||{};let n=0;
+ for(const v of (rivals||[])){const g=v&&v.ge,res=g&&g.res;if(!res||!res.ok||!v.name)continue;const id=String(v.id)+":"+g.b;if(S.geNs[id])continue;S.geNs[id]=1;
+  const ident=(typeof GE_ID==="object"&&GE_ID[g.b.split("_")[0]])||"";const s2=nSum(v,g,res);
+  /* the kit news panel (KIT §kitModal, kind "news"): the person = the full-body figure column (subject), one fact per line, the date on the sub line */
+  const facts=[`${v.name} đi trọn con đường «${C(g).n}»${ident?` (${ident})`:""}, tới Đại kết cục «${res.n}».`,`Thiên hạ gọi nàng là “${res.ti}”.`];
+  if(s2)facts.push(s2);if(res.help)facts.push(`Nàng nhớ ơn ngươi từng giúp một tay: ${res.help}.`);
+  /* the news names her in public: the player now knows her name (j61 reveal stage 2 «Biết tên»; true information) */
+  try{if(typeof k61Know==="function")k61Know(v,"Thiên hạ truyền tin về nàng.",true,2)}catch(e){}
+  if(typeof kitPanel==="function")kitPanel({kind:"result",title:"Thiên hạ truyền tin",sub:res.when||"",subject:v,facts,btn:"Đã rõ"});
+  else Q.push({t:"Thiên hạ truyền tin",who:v,h:facts.map(f=>`<p>${esc(typeof f==="string"?f:v.name+" "+f.text)}</p>`).join("")});n++}
+ return n}
+window.geNpcNews=nNews;
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(nNews()&&typeof showModal==="function"&&$("modal")&&$("modal").hidden)showModal()}catch(e){console.error("ge npc",e)}return r}})();
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg&&nNews()&&$("modal").hidden)showModal()}catch(e){}return r}})();
+/* old saves: a road already past its finale with no v.ge stays as it was (nothing to resolve); dbg for tests / bots */
+window.geNpcDbg={state:nS,choose:nChoose,pair:nPair,odds:nOdds,lean:nLean,term:nTerm,live:nLive,help:nHelpMove,share:fpShare,used:fpUsed};
+}catch(e){console.error("jgenpc",e)}})();
 
 /* ================= jmoodknow: NGUYÊN DO TÂM TRẠNG — who knows WHY a person feels so (owner OD 17/11 ~17:55Z item (1)) =================
    Owner: the mood seal is seen by anyone who SEES the person; the CAUSE shows only when she KNOWS it, else "Nguyên do chưa rõ".
@@ -79786,12 +80062,17 @@ Object.assign(BAL,{feel:{
   hon:{c:["giao-thiep"],p:[-1,-2,-3]},
   ghen:{c:["giao-thiep"],p:[0,-1,-2]}},
  /* act weights of NPCs (jemo EMO_W shape: harm / kind / idle / an act key), scaled by strength like every feeling */
- w:{tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
+ w:{vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.35,kind:.6,provoke:1.15,humiliate:1.15,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
+  so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
+  tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
   tinhnghich:{kind:1.3,visit:1.3,harm:.8},hothen:{visit:.5,idle:1.4,kind:.8,harm:.8},chan:{idle:1.3,visit:1.2},khochiu:{harm:1.1,idle:1.3,kind:.9},
-  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.15,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+ /* anger / jealousy / sulk aimed at someone: danger toward that person + strength/div × the Đức brake, capped at cap (jemo danger wrap);
+    wd = idle weight of a high-Đức consort who withdraws instead of lashing out when angry or jealous (jemo emoMul) */
+ dg:{cap:5,div:8},wd:1.4,
  /* odds points of any act at strength 100 (jemo EMO_OD shape, "a little") and servants' Lòng a month by their own feeling (EMO_LOY shape) */
- odAll:{tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
- loy:{tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
+ odAll:{vui:1,binh:0,buon:0,gian:-1,so:-1,lo:0,tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
+ loy:{vui:2,binh:0,buon:-1,gian:-2,so:-1,lo:-1,tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
  /* the Emperor's tablet chance × (Tình tứ of the consort, by level) */
  night:{tinhtu:[1.03,1.06,1.1]},
  /* thiện cảm gains of others toward a joyful person × (1 + this, by level); a sulk drifts the sulker's thiện cảm toward its target by this a day */
@@ -88406,7 +88687,9 @@ F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
  dec:a=>{if(!a||!ACT[a.k])return null;const t=(rivals||[]).find(v=>v&&v.id===a.t);if(!t||t===S)return null;let x=a.xv;
   if(a.xe){const i=itemFind(a.xe,a.x);if(i<0)return null;x=i}
   else if(typeof a.x==="number")x=a.x;return [S,t,a.k,x]},
- ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}]]});
+ ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}],
+  /* econ-tamco: her scheme road (Tâm cơ / hired hand + the odds she saw) rides with the act; the host pays and rolls it in her context (jtamco runAct) */
+  ["econ",()=>window.ECON_HER||null,v=>{window.ECON_HER=v||null}]]});
 function C0(e){const o=Object.assign({},e);delete o.ci;return o}
 /* F3 (whole family, F1's runAct item too): the item she tapped, found in her stored bag on the host. Tiers: the same index and the same
    item (keys in any order: a patch / ilUid can add a key in another order on one phone), any same item, then the same index with the same
@@ -88635,7 +88918,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d2ecf29047e8";window.CTM_BUILD=BUILD;
+const BUILD="b9701d986ebd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
