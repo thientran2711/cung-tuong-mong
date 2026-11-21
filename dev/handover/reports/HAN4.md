@@ -19,3 +19,35 @@ Diff vs LADDER3 (A17):
 | t8 | CURVED longest | 4 | 9998 | B12/M07/S07 |
 Waivers = same as LADDER3, all owner-ordered: one Phi satin fabric for 8 (M06/M07/S06, B12/S07), t4 capelet store S13 (none in Hán), t7 necklace S14.
 Open: none. t8 at 9998 ch — any add needs a trim.
+
+# HAN4 job 2 — Hán LADDER5 t1–t8 (owner L1794 via #22, sheet han_ladder4_L1773.png). 0 gens.
+Files dev/art/seasons4/s62_t{1..8}_HAN_LADDER5_L1794.txt + .keep (keep PASS ×8); generator make_han_ladder5_L1794.py (= LADDER4 + L1794 block).
+## WHY Thường tại did not get Phi's collar although the collar words were byte-identical
+All 8 had the SAME ref (nVsrRMPYQD) + seed 7172 and the same collar core sentence, so the difference came from the OTHER words around the collar:
+1. Phi has the flat bead yoke "over both shoulders" — on the picture it runs along the collar edge and pulls the neckline out flat across the shoulders. t1–t3 have "no shoulder piece", so the model fell back to an ordinary narrow crossed V. Nothing in the text described the SHAPE Phi got (collar flat on the shoulders); "open WIDE … toward the edge of the SHOULDERS" alone is too weak.
+2. Loose hair at t1–t3 (rank law) falls over the shoulders and hides the shoulder line.
+3. Held item at chest: t2 drum "close to her chest", t4 lamp upright at the chest → covers the V.
+4. Angle: t3/t4/t7/t8 three-quarter turn (against FG 3d2 "frontal only") → the V is foreshortened; Phi is FULLY FRONTAL.
+5. Band count: Phi THREE bands, t1–t3 TWO → narrower collar block.
+6. t6–t8: long/layered fringe + "a breeze lifts her long stole" (t6) → cape-like mass over the shoulders.
+Not a cause: refs (same image for all), caption, char cuts (collar words untouched).
+## Fixes (diff vs LADDER4)
+- A: new identical sentence ×8 "COLLAR AND SHOULDERS (every rank, exactly like the Phi): the wide crossed collar lies FLAT on top of both shoulders, its edges reaching almost to the shoulder points and dipping in one broad shallow V low at the chest; soft sloping shoulders; nothing covers the collar or shoulder line: loose hair falls BEHIND the shoulders, hands and held item stay below the collar, any bead yoke lies flat along the collar edge." + Phi ANGLE "FULLY FRONTAL … no turn;" ×8; t2 drum held low at waist; t6 stole removed. Band count 2/3/4 kept (L1772).
+- B: wraps/robe shapes unchanged.
+- C/D/E: identical ×8 "JEWELLERY: every jewel SMALL and delicate, never chunky or showy; NO red anywhere (no red gems, beads or tassels), no faceted gems, no necklace." t7 lux: rubies/sapphires + "a layered pearl-and-gold necklace" removed (A41) → small pearls and jade; t8 lux same; t8 yoke ruby drops → tiny jade drops; t5 "bigger pearls" → small pearls; t6 zupei "SMALL thin jade discs and fine pearl strands"; t7/t8 bands "small pearls".
+- F: item-rank-age.md "t6+ never basket": t7 basket → closed kingfisher-feather gold silk parasol (t7 list #10), t8 basket → phoenix-embroidered imperial silk round fan (t8 list #1), t6 tú cầu kept (t6 list #4) held low; all items below the collar.
+- G: t8 = HAN_BAC HH colour rule restored: outer robe royal golden yellow, "DOMINANT colour of the over-robe, sleeves and skirt (more than half…, the most of all ranks)", plum second (inner robe, collar edge, borders), pink third; THREE-COLOUR rule reworded to match; embroidery "many clearly visible gold PHOENIXES in flight on the robe body, sleeves and wrap edge, among large peonies and clouds"; item = phoenix fan.
+- H: t4 sleeves "the same flowers embroidered all over the sleeves" + EMB "over EVERY part of the garment (robe body, sleeves, inner robe and skirt, like the Quý nhân)".
+- I: captions all "Mùa Xuân" (= original HAN_BAC ladder t1–t8 all Xuân; t6–t8 Thu came from LADDER2 sources); EMB "autumn flowers" → "flowers" (t6/t7).
+- Trims (in .keep, each checked with check_store): t4/t5 the LADDER4 t6+ boilerplate trims; t4–t6 sleeve-layer paren, label tail, RANK BLOCK label, signature-colour sentence (colour paragraph says it), fringe "never touching…" clause; t7/t8 "18K tone" clause, "WRAP CUT:" label, INNER LAYER (G20 kept, shorter), luxury lines shorter, t8 "(not only the borders)", "one foot ahead".
+| t | ch | check_store --scope tpN --age a18 |
+|---|---|---|
+| 1 | 9746 | M06/M07/S06 |
+| 2 | 9887 | M06/M07/S06 |
+| 3 | 9775 | M06/M07/S06 |
+| 4 | 9507 | M06/M07/S13 |
+| 5 | 9424 | M06/M07 |
+| 6 | 9800 | B12/M07/S07 |
+| 7 | 9989 | B12/M07/S07/S14 (S14 now = necklace removed per A41 + rubies removed) |
+| 8 | 9994 | B12/M07/S07 |
+Open: (1) t1–t3 band count stays TWO (L1772) though Phi has THREE — ask owner if she wants 3 for all. (2) t8 outer robe now yellow (collar = yellow outer, plum inner) — OK with "Phi collar"? (3) t6 motif osmanthus is an autumn flower under Mùa Xuân.
