@@ -63,3 +63,18 @@ Reviewer merge: a4457e49 + final-merge LIVE 92633f1d -> review/coop-emo-seat-r1 
 - L4 ONE CORE: OK — no balance number added; the 60-entry queue cap (jcoopone emoRec) is a buffer size, not a game number.
 - Design matches the HOST_ONLY / stateOn pattern (jcoopworld.js:136/143); C rooms skip the guest replay (lens) and the host replays.
 - quickcheck on bfa6852d (alone): PASS · open 2037 ms · old save ok · perf new/live render 336/323, tab 656/688, buổi 2213/2232 · core gates PASS · 643 s. (A first run made while 6 co-op browsers were running failed G4 dialog-fixed #54 on 755x1000 and 1180x820. Run alone, dialog-fixed passes on both the branch and LIVE, so that failure was machine load, not this branch.) FAIL item 1 stands.
+
+## REVIEW coop-emo-seat r2 round 2 (317f7c5a) — 2026-11-21 ~11:45Z — VERDICT: PASS (TIER BIG, co-op) — LAND READY review/coop-emo-seat-r2 29bc6813622d88b1acc886241397a0414f8df227
+Reviewer merge: 317f7c5a + final-merge LIVE 31fcfe30 (only the generated index.html/sw.js conflicted -> rebuilt; Vietnamese build line). LIVE-revert audit CLEAN: the dev/ diff vs LIVE is byte-identical to the branch's own (jcoopone.js +58, jcoopworld.js +6, coop-emo-seat.js +11).
+Newest LIVE d2b97854: merge-tree vs 29bc6813 = only the generated index.html/sw.js conflict. LIVE's jcoopworld.js change (pm-c Q-C2 live raws: askCard/invRun/invHer/pmLvX) auto-merges and is independent (minigame invitation path, not toCanon/fromCanon0/feelings) -> MAIN lands it with a rebuild.
+Fix checked (code read):
+- FAIL item 1 (rejoin mismatch) is fixed at the root: emoReplay plus the one mkSync sweep now run AFTER `used` is set in fromCanon0 (jcoopworld.js:177 -> :181), so both seats sweep the causes at the same clock (mkNow counts `used`, j95kh). The worker's traces show no feelLife roll on the guest, so my earlier guess (a guest roll in the rejoin window) was wrong.
+- Second leak (found by quickcheck G4 coop-one-world seed 7): on the guest, a READ (emoGet -> mkSync) wrote emo/__mkAt/__mkL. mkSync on the guest now touches only her own people (except inside her own act and the merge sweep), and __mkAt/__mkL join the host-only group EMO_G. OK.
+- Observation, not blocking: a fromCanon with opt.keepUsed still sweeps at that seat's own leftover `used`. Any drift this causes is overwritten by the host-authoritative emo group at the next merged week, which is the point the probe compares.
+- L1 TWO-WAY: OK (her act on an NPC: recorded, replayed on both seats, checked by the probe's 3 her-act checks; NPCs' writes on her are never blocked). L4 ONE CORE: OK (no game number added). Host-only pattern = HOST_ONLY/stateOn.
+Gates on 29bc6813 (each run alone except the seat probe):
+- coop-emo-seat ×12 (3 in parallel × 4): **12/12 PASS 25/25, 0 FAIL** (rejoin steps included in every run).
+- coop-e2e 94/94 · coop-night 105/105 · feel-shown 6/6 · feelings18 34/34 · emo-men errs [] · emo-seal-persist errs [] · game-feel fold/ipad/phone errs [], old save loads, offline errs [].
+- quickcheck PASS · open 1913 ms · old save ok · perf new/live render 305/318, tab 602/525, buổi 1675/1636 · core gates PASS (incl. G4 coop-one-world) · 582 s.
+- The «start»/bac miss named in the brief did not appear in my 12 runs (not a feeling field anyway).
+OVERLAP: review/coop-host-lag-r2 (Foreman B) is still NOT on LIVE. This lands first; when B lands second, it re-runs coop-emo-seat + coop-hl (D #14 rule: "a rebuild must create no feeling").
