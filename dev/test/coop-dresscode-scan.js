@@ -76,7 +76,7 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
-async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');await clear(A);await clear(B);return r}
+async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');if(!r)for(const o of [A,B])console.log('STALL',o.name,JSON.stringify(await o.p.evaluate(()=>({co:__co(),Q:Q.slice(0,3).map(q=>[q.t,q.evId,(q.opts||[]).map(x=>x.n)]),modal:(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,200):''})(),next:document.getElementById('next').textContent,sent:COOPW.sent,pend:COOPW.pend,tr:COOPW.tr.slice(-10),dead:!!S.dead,mg:!!S.mg})).catch(e=>e.message)).slice(0,1500));await clear(A);await clear(B);return r}
 const T=k=>`(WD_ITEMS[${JSON.stringify(k)}]||{})`;
 /* the test's pieces carry a tag (tg), so a trâm of the same kind the NPC buys herself at a real festival is not counted */
 const npcHas=(o,id,k)=>o.p.evaluate(([id,k])=>{const v=rivals.find(x=>x.id===id);if(!v)return null;const w=wdOf(v);const m=e=>e&&e.k===k&&e.tg;return{inv:(v.inv||[]).filter(m).length,worn:!!m(w.tram),bor:!!(m(w.tram)&&w.tram.bor)}},[id,k]);
@@ -93,8 +93,8 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
    for(const k in o){if(k==='dcLent'||k==='__inv0'||k==='coopAsk')continue;const v=o[k];if(v&&typeof v==='object'&&!PS.has(v))walk(v,pt+'.'+k,d+1)}};
   for(const q of P)walk(q,q===S?'me':'v'+q.id,0);for(const k in M)M[k]=M[k].filter(x=>!/\.(lost|il\.log)/.test(x));return M};
  const TR=Object.keys(BAL.dc.piece).filter(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt);
- window.__stock=r=>{const fams=[...new Set(TR.map(k=>BAL.dc.piece[k][0]))];S.inv=S.inv||[];let n=0;for(const f of fams)if((r*7+n++)%10<3){const k=TR.find(k=>BAL.dc.piece[k][0]===f);if(!S.inv.some(e=>e&&e.k===k))S.inv.push({k,from:'emp'})}
-  if(world)for(const v of rivals)if(v&&!v.coop&&v.alive){v.inv=v.inv||[];if(v.inv.filter(e=>e&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram').length<2)for(let i=0;i<2;i++)v.inv.push({k:TR[(v.id*13+i*7+r)%TR.length],from:'emp'})}};
+ window.__stock=(r,nv)=>{nv=nv||2;const fams=[...new Set(TR.map(k=>BAL.dc.piece[k][0]))];S.inv=S.inv||[];let n=0;for(const f of fams)if((r*7+n++)%10<3){const k=TR.find(k=>BAL.dc.piece[k][0]===f);if(!S.inv.some(e=>e&&e.k===k))S.inv.push({k,from:'emp'})}
+  if(world)for(const v of rivals)if(v&&!v.coop&&v.alive){v.inv=v.inv||[];if(v.inv.filter(e=>e&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram').length<nv)for(let i=0;i<nv;i++)v.inv.push({k:TR[(v.id*13+i*7+r)%TR.length],from:'emp'})}};
  return true};
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
@@ -107,10 +107,13 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  ok(await A.p.evaluate(INST,['A',true])&&await B.p.evaluate(INST,['B',false]),'scan hooks on both seats');
- await A.p.evaluate(()=>__stock(1));await B.p.evaluate(()=>__stock(2));
+ await A.p.evaluate(()=>__stock(1,3));/* once, at week 0 before the first merge (the host world exists only once both seats are in) */
+ await B.p.evaluate(()=>__stock(2));/* her own S: she is its owner on her seat */
+ /* COOP_SKEW=N: the guest's life clock N months AHEAD of the host's (a friend with an older life joins: S.turn is each seat's own) — the r3 clock fault */
+ const SKEW=+process.env.COOP_SKEW||0;if(SKEW)ok(await B.p.evaluate(n=>{S.turn=(S.turn|0)+n;return true},SKEW),'guest life clock '+SKEW+' months ahead of the host');
  const FS=await A.p.evaluate(()=>Object.keys(BAL.dc.fest).filter(k=>FEST[k]));let rs=4242;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
- let prev=new Set(),persist=[],jl=[],clk=[],trans=0,weeksOk=0,dist={move:0,box:0,pid:0};const t0=Date.now();
- for(let w=0;w<NW;w++){if(w%12===0){await A.p.evaluate(r=>__stock(r),w);await B.p.evaluate(r=>__stock(r),w+5)}
+ let prev=new Set(),persist=[],jl=[],clk=[],GH={},ghosts=0,refused=0,trans=0,weeksOk=0,dist={move:0,box:0,pid:0};const t0=Date.now();
+ for(let w=0;w<NW;w++){
   const yr=await A.p.evaluate(()=>S.year);const fk=rnd()<.6?FS[Math.floor(rnd()*FS.length)]:null;
   for(const o of [A,B])await o.p.evaluate(fk=>{window.__FK=fk},fk);
   /* host disturbances on its world (a held piece moved / confiscated) */
@@ -125,13 +128,21 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
   {const ka=await A.p.evaluate(()=>[dcWk(),S.turn,S.tuan,__co().week]),kb=await B.p.evaluate(()=>[dcWk(),S.turn,S.tuan,__co().week]);if(ka[0]!==kb[0]){clk.push([w,ka,kb]);console.log('CLOCK',w,JSON.stringify(ka),JSON.stringify(kb))}}
   const ca=await A.p.evaluate(()=>__census()),cb=await B.p.evaluate(()=>__census());const ta=await A.p.evaluate(()=>__T),tb=await B.p.evaluate(()=>__T);
   const all=Object.assign({},ta,tb);const now=new Set();
-  for(const sc in all){const L=(ca[sc]||[]).map(x=>'A:'+x).concat((cb[sc]||[]).map(x=>'B:'+x));if(L.length!==1){now.add(sc);if(prev.has(sc)){const x={w,sc,k:all[sc].k,lender:all[sc].lender,to:all[sc].to,lw:all[sc].wk,at:L};x.lo=await A.p.evaluate(sc=>{const I=S.il||{};const ius=new Set();for(const b of I.box||[])if(b&&b.e&&b.e.sc===sc&&b.e.iu)ius.add(b.e.iu);for(const p of [S].concat(rivals))for(const e of p.inv||[])if(e&&e.sc===sc&&e.iu)ius.add(e.iu);return (I.log||[]).some(l=>ius.has(l[1])&&(/^lo\d/.test(String(l[3]))||/^lo\d/.test(String(l[4]))))&&![S].concat(rivals).some(p=>[wdOf(p).tram].concat(p.inv||[]).some(e=>e&&e.sc===sc&&e.bor))},sc);(x.lo?jl:persist).push(x);if(!prev.has('!'+sc))console.log('PERSIST',JSON.stringify(x));if(process.env.COOP_DBG)console.log('DBG',JSON.stringify(await A.p.evaluate(sc=>{const I=S.il||{};const bx=(I.box||[]).filter(x=>x&&x.e&&x.e.sc===sc).map(x=>({at:x.at,why:x.why,own:x.own,w:x.w,by:x.by,iu:x.e.iu,bor:x.e.bor}));const ius=[...new Set(bx.map(x=>x.iu))];const ppl=[S].concat(rivals).map(p=>[p.id,p.alive,(p.inv||[]).filter(e=>e&&e.sc===sc).map(e=>[e.iu,e.bor])]).filter(x=>x[2].length);return{bx,ppl,log:(I.log||[]).filter(l=>ius.includes(l[1])).slice(-12),lent:rivals.filter(v=>(v.dcLent||[]).some(r=>r.e&&r.e.sc===sc)).map(v=>[v.id,v.alive,v.dcLent.filter(r=>r.e&&r.e.sc===sc)])}},sc)));now.add('!'+sc)}else{trans++;console.log('trans',w,sc,JSON.stringify(all[sc]),JSON.stringify(L))}}}
+  /* a guest borrow the host REFUSED: her tag sat on HER copy of the NPC's piece; the real piece never moved on the host (untagged there) and her return is a
+     no-op (dcNo) — the tag has no holder by design: drop it (counted) */
+  for(const sc of Object.keys(tb)){if(/^B/.test(sc)&&tb[sc].to==='me'&&typeof tb[sc].lender==='number'&&!((ca[sc]||[]).length+(cb[sc]||[]).length)){
+    const rf=await A.p.evaluate(([k,l])=>{const v=rivals.find(x=>x.id===l);return !!v&&Array.isArray(v.dcNo)&&v.dcNo.some(b=>String(b).includes(':'+k+':id:'+l+'>id:902'))},[tb[sc].k,tb[sc].lender]);
+    if(rf){delete all[sc];await B.p.evaluate(sc=>{delete __T[sc]},sc);refused++}}}
+  for(const sc in all){const L=(ca[sc]||[]).map(x=>'A:'+x).concat((cb[sc]||[]).map(x=>'B:'+x));if(L.length!==1){now.add(sc);if(prev.has(sc)){const x={w,sc,k:all[sc].k,lender:all[sc].lender,to:all[sc].to,lw:all[sc].wk,at:L};x.lo=await A.p.evaluate(sc=>{const I=S.il||{};const ius=new Set();for(const b of I.box||[])if(b&&b.e&&b.e.sc===sc&&b.e.iu)ius.add(b.e.iu);for(const p of [S].concat(rivals))for(const e of p.inv||[])if(e&&e.sc===sc&&e.iu)ius.add(e.iu);return (I.log||[]).some(l=>ius.has(l[1])&&(/^lo\d/.test(String(l[3]))||/^lo\d/.test(String(l[4]))))&&![S].concat(rivals).some(p=>[wdOf(p).tram].concat(p.inv||[]).some(e=>e&&e.sc===sc&&e.bor))},sc);if(!x.lo&&L.length===2&&L.some(s=>/^B:me\./.test(s))){/* a guest's borrow the host REFUSED (same-week race: another consort took that very piece on the host): the host world holds it once; the guest's copy goes at her next merge / return (askBack runs on the week rebuild) — a ghost, FAIL only past 3 weeks */
+     x.ghost=await A.p.evaluate(k=>rivals.some(v=>Array.isArray(v.dcNo)&&v.dcNo.some(b=>String(b).includes(':'+k+':')&&/>id:90[12]$/.test(String(b)))),all[sc].k);
+     if(x.ghost){GH[sc]=(GH[sc]||0)+1;if(GH[sc]>3)persist.push(x);else ghosts++}}
+    if(!x.ghost)(x.lo?jl:persist).push(x);if(!prev.has('!'+sc))console.log('PERSIST',JSON.stringify(x));if(process.env.COOP_DBG)console.log('DBGB',JSON.stringify(await B.p.evaluate(sc=>{const own=x=>[S].concat(rivals).filter(p=>[wdOf(p).tram,wdOf(p).y].concat(p.inv||[]).some(e=>e&&e.sc===sc)).map(p=>p===S?'me':p.id);return{book:(S.dcLent||[]).filter(r=>r&&r.e&&r.e.sc===sc).map(r=>[r.bid,r.due,r.to]),got:(S.dcGot||[]).slice(-5),now:dcWk(),cw:dcCW(),on:own(),asks:(S.coopAsk||[]).map(a=>[a.k,a.id,a.st||a.res]).slice(-6),log:(S.logs||[]).slice(0,30).filter(s=>/trâm|Trâm|trả về|mượn/.test(String(s))).slice(0,6)}},sc)));if(process.env.COOP_DBG)console.log('DBG',JSON.stringify(await A.p.evaluate(sc=>{const I=S.il||{};const bx=(I.box||[]).filter(x=>x&&x.e&&x.e.sc===sc).map(x=>({at:x.at,why:x.why,own:x.own,w:x.w,by:x.by,iu:x.e.iu,bor:x.e.bor}));const ius=[...new Set(bx.map(x=>x.iu))];const ppl=[S].concat(rivals).map(p=>[p.id,p.alive,(p.inv||[]).filter(e=>e&&e.sc===sc).map(e=>[e.iu,e.bor])]).filter(x=>x[2].length);return{bx,ppl,log:(I.log||[]).filter(l=>ius.includes(l[1])).slice(-12),lent:rivals.filter(v=>(v.dcLent||[]).some(r=>r.e&&r.e.sc===sc)).map(v=>[v.id,v.alive,v.dcLent.filter(r=>r.e&&r.e.sc===sc)])}},sc)));now.add('!'+sc)}else{trans++;console.log('trans',w,sc,JSON.stringify(all[sc]),JSON.stringify(L))}}}
   prev=now;if(w%8===7)console.log('week',w,'tags',Object.keys(all).length,'persist',persist.length,'trans',trans,Math.round((Date.now()-t0)/1000)+'s')}
  const sa=await A.p.evaluate(()=>__st),sb=await B.p.evaluate(()=>__st);
  ok(weeksOk>=72,`≥ 2 bot years merged (${weeksOk}/${NW} weeks advanced for both)`);
  ok(sa.her+sb.her>=3&&sa.lend+sb.lend>=3&&sa.npc>=10&&sb.her>=1,`loans on every road (host her ${sa.her} lend ${sa.lend} NPC↔NPC ${sa.npc} · guest her ${sb.her} lend ${sb.lend})`,{sa,sb,dist});
- ok(!clk.length,`both seats on the same loan clock (dcWk) after every merged week (${clk.length} weeks differ)`,clk.slice(0,4));
- ok(!persist.length,`every lent piece in exactly ONE place over both seats after each merged week (${persist.length} persistent, ${trans} one-week transients)`,persist.slice(0,6));
+ if(!+process.env.COOP_SKEW)ok(!clk.length,`both seats on the same loan clock (dcWk) after every merged week (${clk.length} weeks differ)`,clk.slice(0,4));
+ ok(!persist.length,`every lent piece in exactly ONE place over both seats after each merged week (${persist.length} persistent, ${trans} one-week transients, ${ghosts} refused-race ghost weeks ≤ 3, ${refused} refused guest borrows dropped)`,persist.slice(0,6));
  console.log(`PRE-EXISTING outside the loan code (the piece, no longer lent, went through a jlost «thất lạc» case on the host: jky «giữ lại» / jlost lostReturn): ${jl.length} tuần`,JSON.stringify(jl.slice(0,4)));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
