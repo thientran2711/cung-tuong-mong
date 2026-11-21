@@ -45,3 +45,15 @@ No GEN1 release sent (not asked for job 3).
 - check_store tp5 a22 PASS. keep --sidecar PASS (allow line owner L1668).
 - Store mode: Outfit [0.73] + "PLUS ONE" [0.85]. That sentence holds the girdle words and was changed by the owner, so this is accepted.
 - Released to GEN1: t5 draft, 55 cr, joining the job 3 set (now 6 × 55 = 330 cr, as the Foreman first ordered).
+
+## Job 6 — DESIGN22 e1b1774 sash = Set A rank8-s62 (owner L1673) — t3 + t8 PASS; t4 + t5 HOLD (G44) (04:30Z)
+Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt. No conflict markers; all ≤ 10 000; held-in clause ×1 in each.
+- t3 v10→v11 (9993): "wide soft blush silk girdle" → "wide stiff blush brocade girdle". Set A = "wide stiff mint mist brocade girdle"; the colour follows the palette swap (DESIGN22's open question to the owner). tp3 PASS, keep PASS. Store G15 [0] = the same as v10 (pre-existing). PASS.
+- t8 v10j→v10k (9994): "yellow sash" dropped from the colour list; Set A "a jade-and-gold belt with long tassels and jade pendants" restored.
+  - A38 trims: "floor-length" (the S19 tail covers it), "(t7/t8)", "Pose: weight on one leg," (covered by "weight resting on one leg" and "weight resting on her RIGHT foot").
+  - The held-in clause still says "HELD IN by the sash", although the outfit list no longer names a sash. Minor.
+  - tp8 PASS, keep PASS. PASS.
+- t4 COMOIl→COMOIm (9936) / t5 COMOIl→COMOIm (9927): Set A "an embroidered silk sash with hanging jade belt pendants and tassels" (t5 uses the old Tần original, per L1668). DESIGN22 also removed "tied flat at the CENTRE front, NO bow".
+  - Now neither prompt has any bow words. G44 (bow only centred or none for t1–t6, owner after L1611) has no guard left.
+  - Gates PASS, but I HOLD these two for the Foreman: re-add ", NO bow" (G44, a standing owner rule), or accept as Set A?
+- Released to GEN1: t3 v11 + t8 v10k = 2 × 55 = 110 cr. t4/t5 wait for the Foreman.
