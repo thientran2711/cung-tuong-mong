@@ -49,6 +49,11 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
     /* strike the incoming hand */const h=DFG.cur;if(h){const q=h.peek();const cv=h.canvas,rc=cv.getBoundingClientRect();const f=(t,x,y)=>cv.dispatchEvent(new PointerEvent(t,{clientX:rc.left+x,clientY:rc.top+y,bubbles:true,pointerId:1}));
      f('pointerdown',q.x,q.y-80);f('pointermove',q.x,q.y);f('pointerup',q.x,q.y+80)}await sl(80);
     out.enc.after={dodge:window.__dodge,raw3:BAL.slap.raw[3],cur:!!DFG.cur,log:(S.logs||[]).slice(0,2).map(x=>String(x).replace(/<[^>]+>/g,"").slice(0,90)),slap:S.slap&&S.slap.sev||0,q:Q.length,qt:Q[0]&&Q[0].t}}}
+  /* (5d) an NPC card whose speaker has NO stage figure (the «+N» overflow): the centre card, never an empty focus frame */
+  {Q.length=0;try{if(DF.F)DF.F.destroy()}catch(e){}DF.F=null;DF.p=null;DF.i=null;DF.tk=null;await sl(50);document.getElementById('modal').hidden=true;
+   const P=curPeople();const j=P.findIndex(x=>x.kind==="rival"&&x.ref);const t=document.querySelector(`#tokens .tok[data-p="${j}"]`);if(t)t.remove();const v=P[j].ref;__K.calls.length=0;
+   pushModal({t:"Thử",who:pv(v),h:`<p>${v.name} bước tới.</p>`,opts:[{n:"Ừ",fx:{},go:()=>{}}]});showModal();await sl(200);
+   out.nofig={opened:__K.calls.includes('open'),modal:!document.getElementById('modal').hidden,focus:!!document.querySelector('.kfoc-veil')};Q.length=0;document.getElementById('modal').hidden=true;renderStage()}
   /* (6) mood bubble picker: a known, non-calm person gets a line of her feeling group */
   {const pp=curPeople().find(x=>x.ref&&x.kind==="rival");if(pp){emoSet(pp.ref,"gian",80,"thử");const kn=window.emoKnown;window.emoKnown=()=>true;const groups=Object.keys(DF_MOOD);let x=null;for(let k=0;k<20&&!(x&&x.i===curPeople().indexOf(pp));k++)x=dfMoodPick();window.emoKnown=kn;
    out.mood={x:x&&{text:x.text,i:x.i},want:DF_MOOD[typeof feelGrp==="function"?feelGrp("gian"):"gian"]||null,groups}}}
@@ -67,4 +72,5 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  ok(r.enc&&r.enc.calls.includes('open')&&r.enc.calls.includes('say')&&r.enc.modalHidden&&r.enc.lines.length>0,'(5a) NPC slap card plays in the scene: no centre modal, say lines',r.enc);
  ok(r.enc&&r.enc.choices&&r.enc.choices.some(c=>/Né/.test(c)),'(5b) the card options fan out as choices',r.enc&&r.enc.choices);
  ok(r.enc&&r.enc.dodgeGame&&r.enc.after&&!r.enc.after.cur&&r.enc.after.dodge&&!r.enc.after.dodge.skipped&&r.enc.after.dodge.raw>=r.enc.after.raw3,'(5c) the dodge plays on the figure; struck = dodged',r.enc&&r.enc.after);
+ ok(r.nofig&&!r.nofig.opened&&r.nofig.modal&&!r.nofig.focus,'(5d) speaker without a stage figure → centre card, no empty focus',r.nofig);
  ok(errs.length===0,'no page error',errs.slice(0,3));await b.close();srv.close();console.log(bad?'FAILED '+bad:'ALL OK');process.exit(bad?1:0)})();
