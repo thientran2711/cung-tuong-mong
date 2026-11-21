@@ -155,3 +155,42 @@ P2 (co-op latency, bounded): a guest borrow the host refuses (same-week race) le
 Shots: none needed (no UI part changed; two log lines + the existing gate frame re-opened).
 
 FOR E30b (F1): build on review/dresscode-fix-r3 aa3c6854; after F1 rerun dresscode-loan-scan ×3, coop-dresscode-scan 76 weeks (COOP_DBG=1) + one run COOP_SKEW=24, coop-dresscode ×10, coop-e2e, role-parity ×2 (alone), quickcheck.
+
+## ROUND 4 (E30r4, opus BIG, session_01DgYSWo5nZ3yPQ2hdAEtXFQ, depth 7) — re-review of review/dresscode-fix-r4 cabfcad8 (E30c F1 + E30d gates) · FOREMAN E #28 · 21/11
+PRIORITY #1 CHECK ('dresscode|loan|dcBorrow|tsB|Hội phối đồ'): OD rows 11/11b/11c read | prior rounds reports/dresscode-review.md R1–R3, reports/dresscode.md «r5 (E30c)» + «r5 gates (E30d)» | main: no jdc; jts tsB LIVE (replaced here) | review/* dresscode-fix-r3 aa3c6854, dresscode-fix-r4 cabfcad8, coop-famops (E44) | claims E30c/E30d fixers, E44 famops.
+
+### VERDICT: PASS → LAND READY dresscode 0620c318 (review/dresscode-r4-land)
+Branch review/dresscode-r4-land = cabfcad8 + LIVE merges d03fa792 (LIVE ee02e8c0) · e4334244 (LIVE 99795d67) · 60659e65 (LIVE 270c6251, carries jlost-kyngo) — each: assemble.py = main's list + jdc0 before j31 + jdc after jcloth, index.html/sw.js rebuilt — + 0620c318 (test only: coop-dresscode-scan host trace + ledger-id follow). Game build of 0620c318 = 60659e65 (gated).
+vs LIVE now 93704ee1: conflicts index.html/sw.js only; its build changes in touched files = wording (sgStat/sgOf in j92/jts) + co-op presence (jcoopworld refreshHere/presAll), no item op → self-merge.
+
+### (1) F1 one loan rule — OK
+git grep: no e.tsB / tsDressReturn mark left except the old-save migration dcMigTs (deser + dcTurn + tsDressReturn). jts «Mượn … để dự hội phối đồ» → dcBorrow(S,v,e,{due: contest tuần, why:"ts", chest:1, aff:false}); tsDressReturn → dcGiveBack (book, co-op «dcin», ledger when lender gone); jevb «Cho mượn» → dcBorrow(v,S,e,{why:"ev"}); stale dialogs move nothing (log). Guest: dcout carries dur so the host NPC book keeps the contest length; dcFree (one test) used by dcOwnFit / jts / jevb. Both seats: coop-dresscode step 6 (Hội phối đồ loan on BOTH seats, back at contest end) 48/48 ×9 of 10 + ×6/6 on the later shas; scans count «ts» loans on both seats (host 1 · guest 1 per run) with 0 loan faults.
+### (2) ROUND 3 fixes — all present (diff aa3c6854..cabfcad8 = rewrites only): season per tuần (S.dcSw=dcWk), jlost loOk/loLoseE guard, dcout same piece + dcNo, dcWk linear + cw/dcDueIn, dcOwnFit via dcFree (bor/lo/dcPrev/h), jts stale-dialog guard, dcPrev heal, gate re-open «đã có người mượn trước».
+### (3) Objects (law 6c)
+dresscode-loan-scan 108 tuần: 3/3 PASS (d03f), 1 coverage-only miss + 2 PASS (e433: Hội phối đồ loans 2 < 3 wanted, objects 0 bad), 2/2 PASS (6065) — every run 0 bad, 181–293 loans incl. ts 2–6 and visit 13–33.
+coop-dresscode-scan 76 w ×4 (+1 running): loan code 0 lasting. Every lasting count traced to a piece NOT on loan at that moment:
+| run | seat | piece | trace | family |
+|---|---|---|---|---|
+| d03f DBG | guest | her own trâm (loan over w1) | lost by thất lạc w12, gone with its case w25 | co-op guest × jlost case (E44 family, E30d run 4) |
+| d03f SKEW | host | NPC1 trâm, home 7 w after loan | untraced then (no host hook) | = j8 giveTo, see last row |
+| e433 SKEW+DBG | guest | B1 own trâm / B3 own trâm (home from loans) | B1 2nd copy pushed by famApply←resApply←onRes; B3 spliced by famApply | E44 «ret» / «rm» |
+| 6065 DBG | guest | B3 / B1 own trâm | famApply «rm» / famApply «ret» push | E44 |
+| 6065 DBG | host | NPC1 trâm, home 3 w | untraced then | = giveTo, see next row |
+| 6065 DBG + NEW host trace | host | NPC1 trâm home since tuần 43 | tuần 63 out by j8 giveTo (gift road): it rebuilds the piece as {k,from,iu} — the scan's tag was not carried → false vanish (or given up to Hoàng thượng / Thái hậu); scan now follows iu (0620c318) | NOT dresscode (gift road); FOR MAIN: giveTo to emp/th ends a piece with no ledger line (law 6c question for the item owner) |
+| 6065 DBG | guest | B1 (after the famApply dup) | loans in between are moves (lent 73, home by her book 74, hair→chest by «Mượn» 75); a 3rd copy appears at the w75 merge with no push | E44 merge × item ops |
+Clocks 0/76 differ every run. Transients 3–21 (relay in flight). SKEW=24 runs: loans on every road both seats.
+### (4) Laws on changed lines
+1 ✓ she borrows (gate, Hội phối đồ) ↔ NPCs borrow hers (ask, visit), NPC↔NPC · 2/3 ✓ every loan option: goodwill cost + real gain; «Cho mượn» visit now really costs the piece one tuần · 4 ✓ one-core PASS (BAL.cv.tsBorrow.aff replaces literal 25) · 6c ✓ (above) · 7 ✓ new lines cổ trang, no % («đã không còn trong rương ngươi; … về tay không», «… không còn chủ để trả, đã nộp về Nội vụ phủ.») · 9 ✓ loan row via kitRows/kitItemDetailRows, no new UI part.
+### Gates (final game build 60659e65; also green on d03fa792 and e4334244)
+| gate | d03fa792 | e4334244 | 60659e65 |
+|---|---|---|---|
+| dresscode.test / dresscode-loans / dresscode-ts-loan | PASS ×3 | PASS ×3 | PASS ×3 |
+| kit-dress-picker / one-core-guard | 19 / PASS | 19 / PASS | 19 / PASS |
+| kyngo-unit / kyngo-eq / lost-items (Fold) / lost-one-home-scan | — | — | PASS / PASS / ok / PASS |
+| coop-dresscode | 9×48/48 + 1×48/49 (harness «#next enabled» wait, every object check passed) | 3×48/48 | 3×48/48 |
+| coop-e2e | 94/94 | 94/94 | 124/124 |
+| role-parity ×2 (alone) | ALL PASS ×2 | ALL PASS ×2 | ALL PASS ×2 |
+| quickcheck + old save | PASS | PASS | PASS (render 261/247 tab 433/440 buổi 1101/1283) |
+Shots: none (no UI part changed).
+### FOR E44 (coop-famops): rerun coop-dresscode-scan COOP_DBG=1 after the famApply fix — the B1/B3 rows above must go to 0. FOR MAIN: j8 giveTo «dâng lên Hoàng thượng / Thái hậu» ends a piece with no ledger line (6c owner question, not dresscode).
+FOR MAIN CHÍNH 97 session_01Rc5AsLuG71zn8SX9tkLTWk: LAND READY dresscode 0620c318 (review/dresscode-r4-land; FF on LIVE 270c6251; vs LIVE 93704ee1 index.html/sw.js only → self-merge; coop-e2e 124/124; both-seat coop-dresscode 48/48 ×15 of 16 + 1 harness wait).
