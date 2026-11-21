@@ -45,3 +45,6 @@ Owner L1814: t1–t3 fabric = G28 opaque → the _g28 twins became s62_t{1,2,3}_
 - seasons4/make_comoi.py: t5 slot swaps the ladder_base two capes back to the vân kiên (open front), t6 slot swaps the cloud collar back to two capes (open front); outputs renamed seasons4/s62_t{5,6}_XUAN_COMOI_L1803s.txt (9 223 / 9 985; t6 PASS, t5 B26/M06 like its base). NOTE: the script as a whole already stops at t3 (len 10 126 > 10 000, pre-existing); I ran only t5/t6.
 - store-all/build_all.py phi_bach(person,has_shawl,rank): G56 ivory + thin gold edge; rank 6 = thick form; rank ≥7 → "". Output equals the L1804 hand files exactly. check_store S12 text = G56 words with {colour} slot (X03 slot still works: colour = "pale IVORY-CREAM silk").
 - Rules: G1 + G56 notes updated. keep --all PASS.
+
+## JOB 4 — winter fur = approved G26 ladder (owner L1825) — DONE (0 gens)
+dev/art/winter1/s62_tN_dong_L1825.txt = the _L1803 files with ONLY the fur sentence replaced by the gate text VERBATIM: t1–t3 W01 (Lông 1, about a hand's width), t4–t6 W02 (Lông 2, VERY WIDE, about two and a half hands), t7 + t8 W03 (Lông 3, WIDEST, THICKEST, about three and a half hands = seasons4/s62_t8_dong_LONG3moi.txt, checked identical). Chars t1–t8: 8998 8510 9399 9695 8762 9552 9592 9795. Gate PASS ×8, keep PASS ×8. G55 + W_L1803 gate forms marked SUPERSEDED.
