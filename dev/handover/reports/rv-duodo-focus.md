@@ -51,3 +51,13 @@ START_CTX ≈ 3 % (rollover 28 %, ceiling 60 %).
 - Worker LtG4 fixes FAIL 1 + 2 (each with a test that fails before / passes after) → MAIN opens re-review; on PASS the reviewer final-merges newest origin/main into review/duodo-focus-rv (not FF today: main moved to ba9b6243), rebuilds index.html / sw.js, reruns quickcheck.
 - CDN img/_review/duodo-focus/ kept (the worker's videos are needed for the re-review); wipe at the final verdict.
 - No commit pushed to review/duodo-focus-rv (FAIL; nothing to land).
+
+## RE-REVIEW r2 — review/duodo-focus @ 4e9257b0 → VERDICT: PASS · LAND READY 5e7dae26 (review/duodo-focus-rv, FF from origin/main 6f4e8d70)
+PRIORITY #1 CHECK: this report §FAIL LIST | worker report §RV FIX ROUND | main 6f4e8d70 | claims: this review.
+- FAIL 1 (stale index) FIXED: focus holds DF.p, index looked up at each use (dfIdx/dfHere in dfTap, run on landing, dfAfter, encounter choice, renderStage wrapper); gone → dfGone closes. My probe: focus her → unshift the Emperor → DF.i/popIdx follow her, the act (talk) runs on HER. Worker tests view (1d)/(3b).
+- FAIL 2 (info chip) FIXED: ONE rule dfIsAct (no tabs/✕/.chip/.kchipb/[data-kintel]/[data-kev]/.pcinfo). My probe: one-pane card with notes → fan = «Kết giao, Tặng quà», no «Đã biết». Worker data (1b).
+- Extra (worker): «+N» overflow speaker without a stage figure → centre card / pop-up (dfHasFig), view (5d); kit-focus rv5 merged → Fold 2nd cost now whole (seen in the new mp4).
+- Gates (mine): duodo-focus-view 2/2 ALL OK · games ALL OK · data 5/6 ALL OK (1 run: (1b) got null = no named consort in that random world — test-setup nit, product verified by my probe; worker may harden the fixture later) · merged LIVE 6f4e8d70 (only index.html/sw.js conflicted → rebuilt) · quickcheck on 5e7dae26 PASS incl. core gates (render 245/291, tab 554/578, buổi 1217/2026 ms, old save ok) · coop-e2e 94/94 on 5e7dae26.
+- New mp4s (Fold + iPad) watched frame by frame: walk-in, head tabs, L/R fan, play + «Làm luôn», reaction, bottom say box, Né/Chịu, dodge.
+- STILL OPEN (art, not this branch): Tát hand (df-hand) + NPC slap animation during Né (df-npc-hand); BAL.df.art=0. Do not tell the owner these are in. Row 11 note (only consort speakers use the scene) unchanged — MAIN's call.
+- CDN img/_review/duodo-focus/ wiped with this verdict.
