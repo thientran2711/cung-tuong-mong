@@ -43,7 +43,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
  const slotAtPt=(x,y)=>{let bi=-1,bd=1e9;P.slots.forEach((s,i)=>{const inside=Math.abs(x-s.x)<=s.w/2*1.12&&Math.abs(y-s.y)<=s.h/2*1.12;const d=inside?0:k91Dist(x,y,s.x,s.y)-Math.max(s.w,s.h)*.6;if(d<bd){bd=d;bi=i}});return bd<=0?bi:-1};
- const tip=()=>{}/* mg-noword-b: no tip words in play (the bounce / the glow say it) */;
+ const tip=(t,c)=>{P.tip={t,c:c||K91C.red(),until:performance.now()+2400}}/* huong-cue-2: guiding tip words back (short, <= BAL.mgFx.popMax) */;
  function drop(it,si){const s=P.slots[si];tAct=performance.now();
   if(imm){if(!s.ok(it)){P.miss++;P.glow=null;tip(cfg.wrong(it,s,P));kg82Pluck(0,false);home(it,true);return}
    if(!s.multi&&s.list.length){home(it,true);return}
@@ -54,7 +54,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
   P.glow={it,si,until:now+(auto?5000:6500)};P.cost+=auto?B.auto:B.hint;tAct=now;if(P.peekAt!=null)P.peekAt=now;tip(cfg.hint(it,P.slots[si],P),K91C.gold())}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
  function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost)*(P.sp=mgPace(env,kind,performance.now()-t0,LIM));/* review/mg-tune: time part */tot+=n;P.glow=null;
-  P.say=[ok===n?(P.miss||P.cost?NWB.POP.s2:NWB.POP.s3):`${ok}/${n}`,ok===n&&P.sp>=.995?K91C.good():K91C.gold()];hb.querySelector("#nwqhint").disabled=true;const d=hb.querySelector("#nwqdone");if(d)d.disabled=true;setTimeout(next,1800)}
+  P.say=[ok===n?(P.miss||P.cost?cfg.fine:cfg.perfect):`Đúng ${ok}/${n}`,ok===n&&P.sp>=.995?K91C.good():K91C.gold()];hb.querySelector("#nwqhint").disabled=true;const d=hb.querySelector("#nwqdone");if(d)d.disabled=true;setTimeout(next,1800)}
  const dn=hb.querySelector("#nwqdone");if(dn)dn.onclick=()=>{if(phase==="play")judge()};
  const pos=(it,now)=>{if(!it.bk)return[it.x,it.y];const k=Math.min(1,(now-it.bk.a)/300),e=1-Math.pow(1-k,3);if(k>=1){delete it.bk;return[it.x,it.y]}return[it.bk.x+(it.x-it.bk.x)*e,it.bk.y+(it.y-it.bk.y)*e]};
  const stop=k91Loop(now=>{if(!P)return;kg82Bg(g,W,H,kind,cfg.veil,cfg.ay);
@@ -82,7 +82,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
 /* ---- shared paints ---- */
 let NWQ_LBL=false;/* panel captions are drawn on the rules card only (mg-noword-b) */
 function nwqPanel(g,x,y,w,h,label,fs){g.save();k91RR(g,x,y,w,h,10);g.fillStyle="rgba(255,250,236,.8)";g.fill();g.lineWidth=2;g.strokeStyle=K91C.hair;g.stroke();
- if(label&&NWQ_LBL){g.fillStyle="#5a3a0c";g.font=k91F(700,fs||11,1);g.textAlign="left";g.textBaseline="top";g.fillText(label,x+8,y+5)}g.restore()}
+ if(label){g.fillStyle="#5a3a0c";g.font=k91F(700,fs||11,1);g.textAlign="left";g.textBaseline="top";g.fillText(label,x+8,y+5)}g.restore()}
 function nwqSlotRing(g,s,st){g.save();g.setLineDash(st==="n"?[5,4]:[]);g.lineWidth=st==="n"?1.6:3;g.strokeStyle=st==="ok"?K91C.good():st==="bad"?K91C.red():K91C.hair;k91RR(g,s.x-s.w/2,s.y-s.h/2,s.w,s.h,Math.min(s.w,s.h)*.2);g.fillStyle="rgba(255,250,236,.45)";g.fill();g.stroke();g.restore()}
 function nwqSprItem(name){return(g,it,x,y,s,st)=>{g.save();if(st==="on"){g.shadowColor="#2a1a1288";g.shadowBlur=12;g.shadowOffsetY=4}
  if(!nwqFit(g,name,x,y,s)){g.fillStyle="#d9c08a";k91RR(g,x-s/2,y-s/2,s,s,6);g.fill()}g.restore();
@@ -91,7 +91,7 @@ function nwqSprItem(name){return(g,it,x,y,s,st)=>{g.save();if(st==="on"){g.shado
 /* =============== 1. LAY (Lễ nghi): the model altar is shown; drag every object to its place on the table =============== */
 const NWQ_LE=["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan","ve-inkstone","mua-bell","banh-pot"];
 const NWQ_LAY={3:[[.5,.28],[.24,.72],[.76,.72]],4:[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],5:[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]]};
-function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem lại tờ mẫu.",hintT:"Vật đang sáng đặt vào chỗ đang sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
+function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem tờ mẫu.",hintT:"Vật sáng đặt vào chỗ sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
  demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-92,42,184,58,"MẪU",10);const m=[[cx-48,74],[cx+48,74]],nm=["huong-censer","hoa-vase"];m.forEach(([x,y],i)=>nwqFit(g,nm[i],x,y,34));
    nwqPanel(g,cx-92,110,184,58,"BÀN LỄ",10);const sx=[cx-48,cx+48],sy=142;sx.forEach(x=>{nwqSlotRing(g,{x,y:sy,w:40,h:40},"n")});
@@ -117,7 +117,7 @@ const NWQ_CAT={luong:{n:"Kho lương",s:["banh-gao","banh-botgao","banh-muoi","b
  chi:{n:"Kho chỉ lụa",s:["kim-spool","kim-knot","theu-peony","theu-crane","theu-cloud","theu-butterfly"]},
  tuoi:{n:"Kho thịt cá rau",s:["banh-ga","banh-suon","banh-xuong","banh-caque","banh-cachua","banh-hanh"]}};
 const NWQ_SPLIT={5:[2,2,1],6:[2,2,2],7:[3,2,2],8:[3,3,2]};
-function nwqSort(box,env){return nwqPlace(box,env,{ratio:1.12,hMax:540,veil:.2,ay:.9,hintSub:"chỉ kho đúng, bớt một ít phần",wrongT:"Chưa đúng loại, xem hàng mẫu ở cửa kho.",hintT:"Món đang sáng cất vào kho đang sáng.",perfect:"Vào kho đủ cả!",fine:"Vào kho xong!",
+function nwqSort(box,env){return nwqPlace(box,env,{ratio:1.12,hMax:540,veil:.2,ay:.9,hintSub:"chỉ kho đúng, bớt một ít phần",wrongT:"Chưa đúng loại, xem hàng mẫu.",hintT:"Món sáng cất vào kho sáng.",perfect:"Vào kho đủ cả!",fine:"Vào kho xong!",
  demo:{title:"CÁCH CHƠI: PHÂN KHO",lines:["Mỗi cửa kho có hàng mẫu và tên kho. Hàng cùng loại với mẫu thì cất vào kho ấy.","Kéo từng món ở dưới vào cửa kho đúng loại.","Cất sai thì món tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-100,42,96,76,"Kho lương",10);nwqPanel(g,cx+4,42,96,76,"Kho hương",10);nwqFit(g,"banh-gao",cx-52,86,40);nwqFit(g,"huong-tram",cx+52,86,40);
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx-52,hy=170,tx=hx+(cx-52-hx)*e,ty=hy+(98-hy)*e;nwqFit(g,"banh-muoi",tx,ty,34);return 196}},
@@ -135,7 +135,7 @@ function nwqSort(box,env){return nwqPlace(box,env,{ratio:1.12,hMax:540,veil:.2,a
 function nwqPins(g,x,y,w,h,n,st){const per=n>4?Math.ceil(n/2):n,rows=n>4?2:1,pr=Math.min(h*.11,w/(per*2.6));
  for(let i=0;i<n;i++){const row=Math.floor(i/per),inRow=Math.min(per,n-row*per),col=i%per;const cx=x+w/2+(col-(inRow-1)/2)*pr*2.5,cy=y+h*(rows>1?.3+row*.24:.38);
   g.save();g.fillStyle=st==="bad"?"#b0463a":"#c9a03a";g.strokeStyle="#6e4d0e";g.lineWidth=1.2;g.beginPath();g.arc(cx,cy,pr,0,Math.PI*2);g.fill();g.stroke();g.fillStyle="#fff3c2";g.beginPath();g.arc(cx-pr*.28,cy-pr*.28,pr*.3,0,Math.PI*2);g.fill();g.restore()}}
-function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay:.8,hintSub:"chỉ ghế đúng, bớt một ít phần",wrongT:"Ghế này chưa hợp phẩm: nhiều ngọc ghim ngồi gần Thái hậu hơn.",hintT:"Người đang sáng ngồi vào ghế đang sáng.",perfect:"Xếp chỗ đúng lễ!",fine:"Xếp chỗ xong!",
+function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay:.8,hintSub:"chỉ ghế đúng, bớt một ít phần",wrongT:"Chưa hợp phẩm: nhiều ngọc ghim ngồi gần hơn.",hintT:"Người sáng ngồi ghế sáng.",perfect:"Xếp chỗ đúng lễ!",fine:"Xếp chỗ xong!",
  demo:{title:"CÁCH CHƠI: XẾP CHỖ NGỒI YẾN",lines:["Thái hậu ngồi bên trái. Người nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu nhất.","Kéo từng người ở dưới vào ghế. Hai người ngang phẩm thì người phong trước (năm nhỏ hơn) ngồi trước.","Xếp sai thì người tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,tw=50,th=42;nwqPanel(g,cx-118,40,236,70,null);g.fillStyle="#5a3a0c";g.font=k91F(700,10,1);g.textAlign="left";g.fillText("Thái hậu",cx-110,56);
    [[cx-40,3],[cx+22,1]].forEach(([x,n])=>{k91Tile(g,x,60,tw,th,"","n",12,"tho-slip");nwqPins(g,x,60,tw,th,n,"n")});
@@ -149,8 +149,8 @@ function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay
   const items=kg82Shuf(guests).map((q,i,a)=>{q.size=tw;q.hx=(W-12)/N*(i+.5)+6;q.hy=H*.82;q.paint=(g,it,x,y,s,st)=>{const w=s,h=s*th/tw;g.save();if(st==="on"){g.shadowColor="#2a1a1288";g.shadowBlur=12;g.shadowOffsetY=4}k91Tile(g,x-w/2,y-h/2,w,h,"",st==="ok"||st==="bad"?st:st==="on"?"on":"n",12,"tho-slip");g.restore();
     nwqPins(g,x-w/2,y-h/2,w,h*(tier>=B.free?.82:1),it.s,st);if(tier>=B.free){g.fillStyle=K91C.ink;g.font=k91F(700,Math.max(9,w*.17),1);g.textAlign="center";g.textBaseline="alphabetic";g.fillText(`◷ ${it.yr}`,x,y+h*.4)}};return q});
   const P={items,slots,tipY:.275};P.draw=(g,P,now,o)=>{g.save();g.fillStyle="rgba(255,250,236,.5)";g.fillRect(0,H*.68,W,H*.32);g.restore();
-   const cy=sy-sh/2-2;k91Tile(g,8,sy-sh/2,cw,sh,"","n",12,"tho-slip");g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(13,cw/5.5),1);g.textAlign="center";g.textBaseline="middle";g.font=k91F(700,Math.min(26,cw/2.4),1);g.fillText("♛",8+cw/2,sy);
-   g.textBaseline="alphabetic";
+   const cy=sy-sh/2-2;k91Tile(g,8,sy-sh/2,cw,sh,"","n",12,"tho-slip");g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(13,cw/5.5),1);g.textAlign="center";g.textBaseline="middle";g.fillText("Thái",8+cw/2,sy-8);g.fillText("hậu",8+cw/2,sy+10);
+   g.textBaseline="alphabetic";g.fillStyle="#5a3a0c";g.font=k91F(700,Math.min(12,W/30),1);kg82Lbl(g,"GẦN THÁI HẬU · PHẨM CAO  →  XA · PHẨM THẤP",W/2,H*.16,W-16);
    g.strokeStyle=K91C.gold();g.lineWidth=2;g.beginPath();g.moveTo(8+cw+10,H*.2);g.lineTo(W-14,H*.2);g.stroke();g.beginPath();g.moveTo(W-14,H*.2);g.lineTo(W-22,H*.2-5);g.moveTo(W-14,H*.2);g.lineTo(W-22,H*.2+5);g.stroke()};return P}})}
 
 /* =============== 4. CLUE (Xử án): tap the suspect whose robe and carried thing match the pictured evidence =============== */
@@ -185,23 +185,24 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
   P={S:L,att,cul,cost:0,miss:0,glow:null,tip:null,say:null,title:NWQ_CASE[r%NWQ_CASE.length],cw,ch};phase="play";t0=tAct=performance.now();hb.querySelector("#nwqhint").disabled=false}
  const live=()=>P.S.filter(q=>!q.gone);
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=live().filter(q=>!q.cul);if(!w.length)return;const q=w[Math.floor(Math.random()*w.length)];q.gone=true;P.cost+=auto?B.auto:B.hint;tAct=performance.now();
-  if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
+  P.tip={t:auto?"Ma ma nhắc: chưa khớp.":"Người này chưa khớp, bỏ đi.",c:K91C.gold(),until:performance.now()+2600};if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
  function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(B.xaFloor,2-P.cost-P.miss*B.xaMiss)*(P.sp=mgPace(env,"xa",performance.now()-t0,LIM));/* review/mg-tune: time part */
-  P.say=[ok?(P.miss||P.cost?NWB.POP.s2:NWB.POP.s3):NWB.POP.bad,ok?(P.sp<.995?K91C.gold():K91C.good()):K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
- function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);}}
+  P.say=[ok?(P.miss||P.cost?"Đúng người rồi!":"Khớp vật chứng, đúng người!"):"Hết giờ: người khớp đã hiện",ok?(P.sp<.995?K91C.gold():K91C.good()):K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
+ function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);P.tip={t:"Chưa khớp, thử người khác.",c:K91C.red(),until:performance.now()+2200};if(live().length<=1&&live()[0]&&live()[0].cul){P.tip={t:"Chỉ còn một người, chạm người ấy.",c:K91C.gold(),until:performance.now()+2600}}}}
  const lab=(c)=>c[0],thN=t=>t[1];
  const stop=k91Loop(now=>{if(!P)return;kg82Bg(g,W,H,"xa",.22,.85);if(dm&&dm.on){NWQ_LBL=true;try{dm.draw(g,W,H,now)}finally{NWQ_LBL=false}env.hud({score:"0/10",round:`Hồi 1/${NR}`,time:"–"});return}
   const left=LIM-(now-t0);if(phase==="play"){if(left<=0)end(false);else if(IDLE&&now-tAct>IDLE&&live().filter(q=>!q.cul).length>1)hint(true)}
   if(P.tip&&now>P.tip.until)P.tip=null;
   nwqPanel(g,6,H*.02,W-12,H*.3,P.title.toUpperCase()+" · VẬT CHỨNG",11);
   const ey=H*.02+H*.3*.46,es=Math.min(H*.13,(W-40)/(NC*1.5));const cx0=W/2-(NC-1)*es*.85;
-  P.att.forEach((a,i)=>{const x=cx0+i*es*1.7;if(a==="c"){nwqScrap(g,x,ey,es,P.cul.c[1],null);}
-   else if(a==="t"){nwqFit(g,P.cul.t[0],x,ey,es);}
+  P.att.forEach((a,i)=>{const x=cx0+i*es*1.7;if(a==="c"){nwqScrap(g,x,ey,es,P.cul.c[1],null);if(tier===0){g.fillStyle=K91C.ink;g.font=k91F(700,11,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,"mảnh áo "+lab(P.cul.c),x,ey+es*.78,es*1.6)}}
+   else if(a==="t"){nwqFit(g,P.cul.t[0],x,ey,es);if(tier===0){g.fillStyle=K91C.ink;g.font=k91F(700,11,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,"đồ rơi: "+thN(P.cul.t),x,ey+es*.78,es*1.6)}}
    else{g.save();g.fillStyle="#f6eedc";g.strokeStyle=K91C.hair;g.lineWidth=2;g.beginPath();g.arc(x,ey,es*.5,0,Math.PI*2);g.fill();g.stroke();g.restore();nwqFit(g,P.cul.e,x,ey,es*.8)}});
+  g.fillStyle="#5a3a0c";g.font=k91F(700,Math.min(12,W/30),1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,"AI MẶC ÁO VÀ MANG VẬT KHỚP VẬT CHỨNG?",W/2,H*.37,W-16);
     P.S.forEach(q=>{g.save();k91RR(g,q.x,q.y,q.w,q.h,10);g.fillStyle="rgba(255,250,236,.82)";g.fill();g.lineWidth=q.res==="ok"?3.5:2;g.strokeStyle=q.res==="ok"?K91C.good():q.res==="bad"?K91C.red():K91C.hair;g.stroke();g.restore();
    g.save();if(q.gone)g.globalAlpha=.4;nwqRobe(g,q.x+q.w*.02,q.y+q.h*.04,q.w*.62,q.h*.84,q.c[1],P.att.includes("e")?q.e:null);nwqFit(g,q.t[0],q.x+q.w*.78,q.y+q.h*.52,q.w*.36);
-   g.restore();
+   if(tier===0){g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(11,q.w/9),1);g.textAlign="center";g.textBaseline="alphabetic";g.fillText(`áo ${lab(q.c)} · ${thN(q.t)}`,q.x+q.w/2,q.y+q.h-5)}g.restore();
    if(q.gone&&q.res!=="ok"){g.save();g.strokeStyle=K91C.red();g.lineWidth=4;g.beginPath();g.moveTo(q.x+q.w*.18,q.y+q.h*.2);g.lineTo(q.x+q.w*.82,q.y+q.h*.8);g.moveTo(q.x+q.w*.82,q.y+q.h*.2);g.lineTo(q.x+q.w*.18,q.y+q.h*.8);g.stroke();g.restore()}});
   const ty=H*.355-1;
   if(phase==="judge"&&P.say){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);k91Say(g,P.say[0],P.say[1],W/2,H*.36+15,W-24)}
