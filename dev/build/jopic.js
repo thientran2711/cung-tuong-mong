@@ -210,6 +210,7 @@ window.kitPicZoom=kitPicZoom;
 document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
+button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
@@ -270,7 +271,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
- {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}gain.classList.toggle("kwinrow",!sure&&gain.classList.contains("kr-thanh"))/* K-WIN-PAY (KIT_REQUESTS 21/11 econ-tamco F1): on a rolled card the Được slot IS the Thành row, so a red item there (a price paid only when it works, §88 THÀNH Mất) reads «… khi thành» */;kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
@@ -285,7 +286,7 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8,stackW:430};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
@@ -308,10 +309,10 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>b.classList.toggle("kodstk",b.clientWidth<KIT_OPT.stackW));void g.offsetHeight};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>{if(typeof kitOdFit1==="function")kitOdFit1(b)});/* KIT §6.2b-1: the meter stacks by the TITLE ROOM (j79 kitOdFit1), one rule for every card */void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
@@ -321,7 +322,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
- g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
+ g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
 window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 /* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
@@ -352,7 +353,6 @@ ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:
 ${O} .kat>.kan{line-height:1.15;text-align:left}/* one alignment for every card title (owner via MAIN 88: «Đeo ngay» left vs «Để sau» centred) */
 ${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
 ${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
-${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
