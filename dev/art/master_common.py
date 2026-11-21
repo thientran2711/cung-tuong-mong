@@ -70,12 +70,12 @@ LEN_SCOPES = {f"{k}{n}" for k in ("tp", "pr") for n in range(1, 9)}   # B26FAB3 
 # (exact store words, what stays, what it repeats, ranks). ITEM works on the N1 result (chained).
 LEN_CUTS2 = [
  (", and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face.",
-  "; the head up toward the viewer, never looking down, nothing covering the face.", "N1 (S16 tail: 'EXACTLY ONE held item, the hand really gripping it' + 'The whole face clearly visible, eyes fully open' + 'MOUTH FULLY CLOSED')", (5, 7)),
- ("The item is in a contrasting colour, not the robe colour; the head up toward the viewer", "The head up toward the viewer", "ITEM (HELD ITEM COLOUR law)", (5,)),
+  "; the head up toward the viewer, never looking down, nothing covering the face.", "N1 (S16 tail: 'EXACTLY ONE held item, the hand really gripping it' + 'The whole face clearly visible, eyes fully open' + 'MOUTH FULLY CLOSED')", (3, 5, 6, 7, 8)),   # BUILDFIX4 (thu LEN, Foreman C ROOT-B2 'trim only duplicated boilerplate'): + t3 t6 t8
+ ("The item is in a contrasting colour, not the robe colour; the head up toward the viewer", "The head up toward the viewer", "ITEM (HELD ITEM COLOUR law)", (3, 5, 6, 7, 8)),   # BUILDFIX4: + t3 t6 t7 t8 (every such cell carries the HELD ITEM COLOUR law, checked in the sweep)
  ("Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe, only slipper toe tips peeking under the hem, no train, no cup, nothing covering the face.",
-  "Luminous smooth porcelain skin, no flower mark, floor-length robe, only slipper toe tips peeking under the hem, no train.", "N2 (S19 tail: 'Bare clean forehead, no forehead mark' + 'NOTHING on the forehead' + 'eyes open' + 'no cup' + 'nothing covering the face')", (5, 7)),
+  "Luminous smooth porcelain skin, no flower mark, floor-length robe, only slipper toe tips peeking under the hem, no train.", "N2 (S19 tail: 'Bare clean forehead, no forehead mark' + 'NOTHING on the forehead' + 'eyes open' + 'no cup' + 'nothing covering the face')", (3, 5, 6, 7, 8)),   # BUILDFIX4: + t3 t6 t8
  ("(medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, never bright, never pastel; ", "(medium-light tone); ", "E1 (elder COLOUR RULE: 'all colours in the DEEPER, DARKER mature shades described above (... never bright, never pastel ...)')", (5,)),
- ("; gold only as thin accents.", ".", "E2 ('gold only as embroidery accents' + TWO-COLOUR 'gold or silver only as thin accents')", (5,)),
+ ("; gold only as thin accents.", ".", "E2 ('gold only as embroidery accents' + TWO-COLOUR 'gold or silver only as thin accents')", (5,)),   # BUILDFIX4: NOT widened (its kept part '.' is in every prompt -> check_store doan_cuts_made reads it as made -> t8 prefix FAIL)
 ]
 
 
