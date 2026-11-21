@@ -1006,13 +1006,23 @@ CW.hrApply=function(){if(!CW.on||!S)return;const h=S.hr||null;for(const [k] of a
 CW.hrSync=function(){if(!CW.on||!S||S.dead)return;S.hr=hrStr();if(!host())CW.hrPrev=S.hr};
 (function(){if(typeof heirMonth!=="function")return;const f=heirMonth;heirMonth=function(){if(!CW.on)return f.apply(this,arguments);if(!host())return "";
  const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());if(CW.dHr===undefined)CW.dHr=S.hr||null;let r;try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}try{S.hr=hrStr()}catch(e){}
- try{const h=S.hr||null,was=CW.dHr;CW.dHr=h;if(dOn()&&h&&h!==was)CW.thin.D.kind(fs(),"hr",{h})}catch(e){console.error(e)}return r}})();
+ try{const h=S.hr||null,was=CW.dHr;CW.dHr=h;if(dOn()&&h&&h!==was)CW.thin.D.kind(fs(),"hr",{h,was:was===undefined?null:was})}catch(e){console.error(e)}return r}})();
 /* guest, merged week: the host named a new heir → her card (her own son: the j1 gain on her side) */
-CW.hrWeek=function(){if(!CW.on||!S||S.dead||host())return;const h=S.hr||null,was=CW.hrPrev;CW.hrPrev=h;if(dOn())return;/* part D: the host builds her card */if(was===undefined||h===was||!h)return;hrCard(h)};
+CW.hrWeek=function(){if(!CW.on||!S||S.dead||host())return;const h=S.hr||null,was=CW.hrPrev;CW.hrPrev=h;if(dOn())return;/* part D: the host builds her card */if(was===undefined||h===was||!h)return;hrCard(h,was)};
 /* her "Lập Thái tử" card (old: built on the guest after the merged week; part D: built on the host in her context the month it happens) */
-function hrCard(h){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;
- if(!x.v){const d0=S.danh||0;try{setHeir(x.k,null)}catch(e){console.error(e)}const dd=(S.danh||0)-d0;/* reviewer r2: print what setHeir gave (ONE CORE), not a typed 10 */pushModal({t:"Lập Thái tử",h:`<p><b class="g">Hoàng thượng lập ${esc(x.k.name)}, con của ngươi, làm Thái tử.</b></p>${dd?`<p>${fmt({danh:dd})}</p>`:""}`});return}
- pushModal({t:"Lập Thái tử",h:`<p>Hoàng thượng lập ${esc(x.k.name)}, con của ${esc(x.v===friendEntry()?friendName():x.v.name)}, làm Thái tử.</p>`})}
+/* CO-OP HEIR FIX r2: her Thái tử of BEFORE this card, read on her side = solo's old S.heir in the jkidlife setHeir wrap. was = the host's S.hr
+   before the change (sent with the card; the merged-week road: CW.hrPrev); without it (test hook) her own son still flagged heir. A dead son counts
+   for nothing (solo: heirMonth clears a dead heir first, kidDie clears the flag), so she loses only a LIVING Thái tử put aside. */
+function hrMine(was){const L=S.kids||[];if(was===undefined)return L.find(k=>k&&k.heir&&k.alive!==false)||null;
+ if(!was||typeof was!=="string"||was.indexOf("p"+me()+"|")!==0)return null;const n=was.slice(was.indexOf("|")+1);return L.find(k=>k&&k.alive!==false&&kidId(k)===n)||null}
+function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const om=hrMine(was);
+ /* her own son: setHeir in her context (the wrap gives her +heirDanh once; her old Thái tử given as S.heir, so a son already heir, or another son
+    of hers put aside for him, gives nothing, as solo) */
+ if(!x.v){const d0=S.danh||0;S.heir=om?{k:om,v:null}:null;try{setHeir(x.k,null)}catch(e){console.error(e)}const dd=(S.danh||0)-d0;/* reviewer r2: print what setHeir gave (ONE CORE), not a typed 10 */pushModal({t:"Lập Thái tử",h:`<p><b class="g">Hoàng thượng lập ${esc(x.k.name)}, con của ngươi, làm Thái tử.</b></p>${dd?`<p>${fmt({danh:dd})}</p>`:""}`});return}
+ /* another mother's son (the host's, an NPC's): her living Thái tử put aside → she loses BAL.kid.heirDanh ONCE, here on her own side (the other
+    mother's gain ran in the host's heirMonth); her son's flag is cleared, so the card never takes it twice */
+ let dd=0;if(om){const d0=S.danh||0;for(const k of S.kids||[])if(k)k.heir=false;S.heir={k:x.k,v:x.v};try{ap(S,{danh:-BAL.kid.heirDanh})}catch(e){console.error(e)}dd=(S.danh||0)-d0}
+ pushModal({t:"Lập Thái tử",h:`<p>Hoàng thượng lập ${esc(x.k.name)}, con của ${esc(x.v===friendEntry()?friendName():x.v.name)}, làm Thái tử.</p>${om?`<p><span class="r">${esc(om.name)}, con của ngươi, mất ngôi Đông cung.</span>${dd?` ${fmt({danh:dd})}`:""}</p>`:""}`})}
 (function(){const f=CW.seatWeek;CW.seatWeek=function(){try{CW.hrWeek()}catch(e){console.error(e)}return f.apply(this,arguments)}})();
 
 /* ---------- (4) B4: what the host's NPCs do to her ITEMS / CHILDREN, her own festival entry ----------
@@ -1089,7 +1099,7 @@ CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o
 CW.X.resApply=resApply;
 CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}};
 CW.soonEnd=soonEnd;
-CW.hrCardTest=h=>hrCard(h);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
+CW.hrCardTest=(h,was)=>hrCard(h,was);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
 /* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
 const otherSide=(fn,k,a,lf)=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.kind(fs(),k,a,undefined,lf)/* r3: lf = the life that made her offer */};
 /* Kết giao / Tặng quà: pp {id, k, item, who, e (the guest's item, when she gives it)} */
@@ -1117,7 +1127,7 @@ CW.dInit=function(T){
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
  Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),
   bribe:a=>{const d=!S.dead&&isSrvMe()?mkP("thBribe",a):null;if(d)pushDil(d,"Bạc lạ");else T.D.after(()=>briberRes({rid:a.rid,o:a.o,no:1}))},
-  nbribe:a=>nbribeIn(a.r),ev:a=>evIn(a.tg,a.n),hr:a=>hrCard(a.h),invHer:a=>invHer(a.pp,a.ok),briber:a=>briberRes(a)});
+  nbribe:a=>nbribeIn(a.r),ev:a=>evIn(a.tg,a.n),hr:a=>hrCard(a.h,a.was),invHer:a=>invHer(a.pp,a.ok),briber:a=>briberRes(a)});
  /* a Mua chuộc card she can no longer answer (no longer a cung nữ after a new life): the buyer still gets "no longer serves there" */
  T.D.GONE.thBribe=pp=>briberRes({rid:pp.rid,o:pp.o,no:1});
  /* the guest's offers to the host: the host's own card (his context); her side runs in her context when he answers */
