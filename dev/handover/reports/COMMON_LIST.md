@@ -291,7 +291,7 @@ Kiểu chung: **A** = giữa các tuổi (cùng mùa + bậc) · **S** = giữa 
 | t1–t8 | 'Bare clean forehead, no forehead mark, no moles.' | 'Luminous … bare clean forehead with no forehead mark and no flower mark' · 'NOTHING on the forehead (no hoa điền, …)' |
 | t1–t8 | 'EXACTLY ONE held item, the hand really gripping it; no cup, …' | 'The item is in a contrasting colour, …, and the hand really grips it; …nothing covering the face' · Luminous '…no cup, nothing covering the face' |
 | t1–t8 | 'The whole face clearly visible, eyes fully open…' | 'the whole face fully visible with the head up toward the viewer, eyes open, lips closed' · Luminous '…eyes open' |
-| t1–t8 | 'The FABRIC is thin, light, flowing silk and gauze…' | 'Light, soft, thin flowing silk: …' · 'The fabric is exactly the cloth written in her outfit…' · t1–t5 'The silk has real weight…' / t7–t8 'The silk is light and supple…' |
+| t1–t8 | 'The FABRIC is thin, light, flowing silk and gauze…' | 'Light, soft, thin flowing silk: …' · 'The fabric is exactly the cloth written in her outfit…' · t1–t5 'The silk has real weight…' / t6–t8 'The silk is light and supple…' |
 | t1–t3 | 'Hair: her own hair colour, LOOSE and flowing (at most the top half gathered up…)' | 'HAIR (rank law): her hair stays LOOSE and flowing…' |
 | t4–t6 | 'Hair: … swept UP into a high bun / chignon' | 'HAIR (rank law): ALL her hair is swept UP into a high bun / chignon…' |
 | t4, t5 | hair flower named in Hair line | HAIR FLOWER SIZE line names the same flower again |
