@@ -148,10 +148,9 @@
  "M2189-05": "M2189-05_s62_t5_thu.txt (bộ thu s62 t5 Phi = M2187-05 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
  "M2189-06": "M2189-06_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2179-03 y nguyên, chỉ bỏ chữ \"image 2\" swatch; màu chờ chủ)",
  "M2189-07": "M2189-07_s62_t7_thu.txt (bộ thu s62 t7 HQP = M2187-07 + khuy cũ, cổ/áo trong/eo như QP M2179-03, phượng mờ dưới lưới ngọc)",
- "M2189-08": "M2189-08_s62_t8_thu.txt (bộ thu s62 t8 HH = M2187-08 + khuy cũ, cổ/áo trong/eo như QP M2179-03, vân kiên mềm dài như HQP, phượng mây mờ dưới lưới ngọc)"
-}
- "M2163-05": "M2163-05_s62_t8_thu.txt (sửa M2150-08: khuy cổ vàng rõ, vân kiên tối đa 2 tầng, lụa nhẹ, đuôi dài nhất)"
- "M2170-08": "M2170-08_s62_t8_thu.txt (bộ thu s62 t8: HH: lụa mỏng nhẹ như HQP, dải lụa chạm đất; bỏ chữ ngực)"
- "M2174-08": "M2174-08_s62_t8_thu.txt (bộ thu s62 t8: M2170-08 + cổ vuông chuẩn, 1 viền hẹp, áo trong mép mỏng; màu giữ nguyên)"
- "M2176-01": "M2176-01_s62_t8_thu.txt (HH thu s62 t8 = M2174-08 + vân kiên MỘT tầng như HQP)"
+ "M2189-08": "M2189-08_s62_t8_thu.txt (bộ thu s62 t8 HH = M2187-08 + khuy cũ, cổ/áo trong/eo như QP M2179-03, vân kiên mềm dài như HQP, phượng mây mờ dưới lưới ngọc)",
+ "M2191-01": "M2191-01_s62_t5_thu.txt (bộ thu s62 t5 Phi = M2189-05, eo/thắt lưng/áo/váy theo Tần M2189-04, vân kiên dài bằng Tần)",
+ "M2191-02": "M2191-02_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2189-06 + thêm chút vàng (~nửa HQP) + thêm ngọc trên áo)",
+ "M2191-03": "M2191-03_s62_t7_thu.txt (bộ thu s62 t7 HQP = M2189-07, eo như QP (không bó ngực), phượng dưới lưới như HH M2187-08, tua ngọc dài hơn QP, thêm ngọc, tay áo tới mắt cá)",
+ "M2191-04": "M2191-04_s62_t8_thu.txt (bộ thu s62 t8 HH = M2189-08, khuy vàng đính ngọc trai, eo như QP, phượng dưới lưới, tua ngọc dài nhất, ngọc nhiều nhất, tay áo tới mắt cá)"
 }
