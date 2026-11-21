@@ -815,3 +815,4 @@ kit-mark-fix rv | review/kit-mark-fix-rv 0e7561c9 | rv session | FAIL (portrait 
 kit-badge rv | review/kit-badge-rv 8e440a19 | rv session | FAIL (N4 ⏸ unreadable at 10 px) | 21/11
 | dresscode-fix-r4 gates E30d (opus; successor of E30c) | review/dresscode-fix-r4; reports/dresscode.md | FOREMAN E #26 | session_01DgYSWkaEjsg1aJWvkGTjny | RUNNING | 21/11 08:21Z |
 kit-mark-fix rv3 | review/kit-mark-fix-rv3 db138921 | rv session | PASS | 21/11
+| cold-faction re-land E43 (opus; j42.js real conflict; MAIN 91 ORDER 08:16Z) | review/cold-faction-land2; reports/relander-e43.md | FOREMAN E #26 | session_01DgYSWm9MJSmYC8cYxWWRUE | RUNNING | 21/11 08:50Z |
