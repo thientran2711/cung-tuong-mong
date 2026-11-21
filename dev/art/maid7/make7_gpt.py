@@ -715,11 +715,11 @@ def nhat_tc3(): return tc3('nhat_thancan_gpt', TC_EXTRA_NHAT % 'deep rose like #
 G43_SACHET = 'a small embroidered silk fragrant sachet (túi thơm)'
 G43_SWAPS = [
     ('a decorative sash with a small jade or tassel pendant',            # tam đẳng (+ thân cận)
-     'a decorative sash with ' + G43_SACHET + ' hanging from it'),
+     'a decorative sash'),   # G59 (owner L1874): no sachet either
     ('an embroidered silk sash with a jade pendant on a silk cord',      # nhị đẳng (+ thân cận)
-     'an embroidered silk sash with ' + G43_SACHET + ' hanging from it on a silk cord'),
+     'an embroidered silk sash'),
     ('a jade pendant on a silk cord with a tassel hanging at the centre between the two panels',   # nhất / thân cận / chưởng sự / ma ma
-     G43_SACHET + ' on a silk cord with a tassel hanging at the centre between the two panels'),
+     ''),   # G59: clause removed; the dangling ', ;' is cleaned in g43()
 ]
 G43_JOBS = {   # current file -> next version (mama v5 is SUPERSEDED, so ma ma goes v4 -> v6)
     'tamdang_gpt': 'tamdang_gpt_v2', 'tamdang_thancan_gpt_v3': 'tamdang_thancan_gpt_v4',
@@ -735,6 +735,7 @@ def g43(t):
     """Apply the G43 sachet swap to any maid prompt text (use it in every future maid build)."""
     for old, new in G43_SWAPS:
         if old in t: t = swap(t, old, new)
+    t = re.sub(r',\s*(?=;)', '', t)   # G59: drop the comma left by the removed clause
     assert not G43_RX.search(t), G43_RX.search(t).group(0)
     return t
 

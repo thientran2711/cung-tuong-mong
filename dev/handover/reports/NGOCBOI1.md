@@ -19,3 +19,10 @@ Coordination: pulled/rebased between each push; HAN5 LADDER8 files landed mid-ru
 
 ## Addendum (#25 request, drawn pendants)
 Drawn "pendants" came from jade clasp on silk cord + tú cầu "jade tassels" + jade disc. Now stripped everywhere live (jade clasp -> gold clasp, tú cầu -> silk tassels) and G57 also FAILs jade tassel/clasp/disc/ring. strip_pendant.py updated.
+
+## G59 no sachet (owner L1874) — #25 job
+- check_store.py: G59 `g59_fails` (all scopes) FAILs sachet/túi thơm/scent pouch/perfume bag/hà bao/embroidered pouch; G43 text no longer permits sachet; 4 selftests.
+- dev/art/strip_sachet.py: worn sachets deleted (sash left plain); held sachets (rank8-m19/s62 t2, KC_REFS pose, face-common s45/s58/m35, store-all/test) swapped to "a small round embroidered silk fan with a silk tassel" — owner/foreman may choose another held item.
+- maid7 non-prod + prod/base stripped (maid7/prod done by MAIDFIX3 63f8a93c5); maid7/make7_gpt.py G43 swaps now delete instead of adding a sachet.
+- ART_RULES: G59 added, G43 marked REPLACED.
+- Not touched: t8-prompt-B/golden_low, owner-copy, _retired, sachet-tryon dirs, approved/proof (history); item_spec.py/ITEM_ART.md item-art catalogue ("tuithom", "huong" Túi hương, item-rank-age.md) are game ITEM pictures, not people prompts — foreman to decide. keep_check --all PASS.
