@@ -630,7 +630,8 @@ function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div cl
    g.fig = true (her) | a person; g.pic = the prop picture. kitGameFigRefresh(p) redraws the figure in place after an outfit / makeup change. */
 function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=="undefined"?S:null);if(!p||typeof kitStageFig!=="function")return"";const f=kitStageFig(p,{cap:false});if(!f)return"";
  const an=typeof OPT!=="undefined"&&OPT.fxon&&!(typeof RM!=="undefined"&&RM);
- return `<div class="kgfig${an?" kgf-anim":""}" data-kgf="${p===S?"me":"other"}">${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
+ const bgk=g.kind&&typeof KG82_MGBG!=="undefined"?KG82_MGBG[g.kind]:"",bgu=bgk?(typeof IMG_U==="function"?IMG_U(bgk):bgk):"";
+ return `<div class="kgfig${an?" kgf-anim":""}${bgu?" kgf-bg":""}" data-kgf="${p===S?"me":"other"}"${bgu?` data-mgbg="${g.kind}" style="--mgbg:url('${bgu}')"`:""}>${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
 function kitGameFigRefresh(p,o){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,Object.assign({cap:false},o&&o.src?{src:o.src}:{}));/* kit-dress-picker: o.src = a preview figure (the dress she is trying on) */if(!f)return;
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
@@ -667,6 +668,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 (function(){const st=document.createElement("style");st.id="kgfig-css";st.textContent=`
 .kgame .kgbody.kgfig-on{display:grid;grid-template-columns:minmax(150px,30%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;overflow:hidden}
 .kgfig{position:relative;margin:10px 0 10px 14px;min-height:240px;border:1px solid var(--line);border-radius:var(--k-rad);overflow:hidden;background:linear-gradient(#f8efdc,#ecdcbc);box-shadow:0 0 0 2px #fffaf0 inset}
+.kgfig.kgf-bg{background:var(--mgbg) center/cover no-repeat,linear-gradient(#f8efdc,#ecdcbc)}/* per-subject tall backdrop (KG82_MGBG); no file yet = the gradient */
 .kgfig>.kesf{position:absolute;inset:8px 6px 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:none}
 .kgfig .kesfi{position:relative;display:flex;height:calc(100%*var(--kfr,1));max-width:100%;justify-content:center}
 .kgfig .kesfi>.kesimg{display:block;height:100%;width:auto;max-width:100%;max-height:none;object-fit:contain;object-position:50% 100%}
@@ -1210,8 +1212,20 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
   `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
-/* kitEmpty(title,line): an empty state = the same card with no steps: the topic's painted picture (kitInfoArt) + one short line */
-function kitEmpty(title,line){const a=typeof kitInfoArt==="function"?kitInfoArt(title):{src:""};return kitSkillCard({kind:"empty",name:"",max:0,img:a&&a.src||"",desc:line})}
+/* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
+   (o.art = an img path, else kitInfoArt(o.topic||title), else the kit's neutral tile), the title «Ta chưa có …» / «Chưa có …», 2–3 short hint bullets
+   (how to get it; `lines` = string | array), optional act cards o.acts (HTML of pbtn). Every tab / sub-tab / panel that can be empty uses it; no other empty frame. */
+function kitEmpty(title,lines,o){o=o||{};const ls=(Array.isArray(lines)?lines:[lines]).filter(Boolean);
+ const a=o.art!=null?{src:o.art}:(typeof kitInfoArt==="function"?kitInfoArt(o.topic||title):{src:""});
+ return `<div class="kempty" data-empty="${String(o.topic||title).replace(/[^\wÀ-ỹ ]/g,"").slice(0,40)}"><div class="kempty-art">${kitArtFrame(a&&a.src||"","")}</div><div class="kempty-b"><b class="kempty-t">${title}</b>${ls.length?`<ul class="kempty-l">${ls.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}${o.acts?`<div class="pcb">${o.acts}</div>`:""}</div></div>`}
+/* kitEmptyTab(title,lines,o,actsHtml) = THE empty-tab layout (owner 21/11 #30): the big kitEmpty card ON TOP, the tab's act card(s) BELOW it (like Thú cưng «Nhờ thái giám…») */
+function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<div class="pcb ktacts"><div class="kpanec">${acts}</div></div>`:"")}
+(function(){const st=document.createElement("style");st.id="kit2-empty";st.textContent=`
+.kempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
+.kempty-art{min-width:0}.kempty-b{min-width:0;display:flex;flex-direction:column;gap:6px}.kempty-t{font-size:1rem;color:var(--k-seal,#9a2c1c)}
+.kempty-l{margin:0;padding:0 0 0 1.05em;display:flex;flex-direction:column;gap:4px;font-size:.86rem}.kempty-l li{line-height:1.35}
+@container (max-width:420px){.kempty{grid-template-columns:1fr;justify-items:center}.kempty-art{width:min(170px,60%)}.kempty-b{width:100%}}
+`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
 .kskill{display:flex;flex-direction:column;gap:8px;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
