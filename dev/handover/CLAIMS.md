@@ -583,4 +583,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | OWNER BUG den-look (sonnet; hoa đăng: no avoid symbol on lotus, no white edges on light streak + group; briefs/main83-den-look.md) | review/den-look | MAIN CHÍNH 83 | session_01Rc5AsJdVWQcwwxJVzK3N16 | RUNNING | 21/11 01:00Z |
 | REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | RUNNING | 21/11 01:07Z |
 | mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | session_01Rc5AsLTqtdSYJsC6Gxn7cc | RUNNING | 21/11 01:08Z |
-| REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | (opening) | RUNNING | 21/11 01:09Z |
+| REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | session_01Rc5AsJi9JqNMCUZv8DNjsm | RUNNING | 21/11 01:09Z |
