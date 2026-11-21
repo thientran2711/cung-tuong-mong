@@ -1961,3 +1961,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:47Z) keeper #2 SSK kit-focus r2 d3f02bcc (5 items: Fold clamp 2 + «!», cols 236; iPad say lifts figure; F.play skip slot; F.setGroups; blurred place backdrop) → rv MSxp + duodo-focus #2 pinged. Keeper next: kit-info-tap subGo, kchip ⏸.
 - (09:53Z) rv MSxp PASS kit-badge r2 → LAND READY 9a05a707 (review/kit-badge-rv2) → 89 chain; rv JeK8 unblocked for hao-huu f21bd515. LIVE now 35232176 (kit-info-fixed).
 - (09:58Z) rv MSxp FAIL kit-focus r2 d3f02bcc (1 small item: Fold sub-line ellipsis cuts the price «Năm ăn năm thua · Tố…»; price never cut) → keeper #2 (fix + assert). 8/9 rest verified.
+- (10:03Z) rv MBXt PASS mg-intro-2 → LAND READY 847a5934 (review/mg-intro-2-rv3) → 89 chain. rv MBXt ARCHIVED; worker Ji75 → archive after land.
