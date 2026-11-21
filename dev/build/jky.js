@@ -241,6 +241,10 @@ function book(){try{return JSON.parse(localStorage.getItem("ctm-kyngo")||"{}")||
 function meet(c,opt){try{const b=book();const e=b[c.id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[c.id]=e;localStorage.setItem("ctm-kyngo",JSON.stringify(b))}catch(e){}}
 const TITLE={ma_phe:"Hương cũ Trường Môn",ma_giao:"Sổ tay giáo tập",ma_nhac:"Khúc đàn đêm vườn ngự",ma_hoa:"Họa sư bên hàng liễu",ma_ty:"Phương thuốc gia truyền",ma_co:"Ván cờ tiên đế",ma_lao:"Hiên Phật đường",vat_lac:"Ngọc rơi trên lối",vat_minh:"Của mình tìm lại",vat_cu:"Di vật người đã khuất",vat_thu:"Con vật lạc chủ",vat_chung:"Lá thư trong chậu lan",vat_ngu:"Món quý để dành",de_mua:"Chung áo dưới mưa",de_but:"Nét ngự bút",de_den:"Điều ước hoa đăng",de_su:"Câu hỏi của sứ thần",th_kinh:"Sớm mai Phật đường",th_tham:"Bánh trung thu có thư",th_chi:"Lời dặn Đoan ngọ",th_sao:"Đêm Thất tịch",sv_den:"Đèn rơi cứu người",sv_tuyet:"Đêm tuyết người gác cổng",sv_co:"Cô cô để mắt",sv_tre:"Hoàng tử lạc đường"};
 KY.TITLE=TITLE;
+/* E42 (law 6c, jlost one owner change): «Giữ lại» keeps the piece through jlost's ONE keep road (loKeepBy): only while the case still holds it
+   (st "lost"); a card answered after the piece moved on (found / returned / held) moves nothing. Before: an own copy pushed with no check (2–7 copies
+   with the «dead» box copies; lost-one-home-scan / coop-lost-scan). «Mang trả» / «Của mình tìm lại» go through lostReturn (jlost finds the case). */
+{const it0=SPEC.item;SPEC.item=function(c,O){if(c&&c.X&&c.X.lc&&c.oi!==0&&typeof loKeepBy==="function"){const L=c.X.lc,F=c.F;return loKeepBy(L,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:""}return it0.apply(this,arguments)}}
 function bookHTML(){const b=book();const ids=Object.keys(b).filter(id=>DEF[id]);const y=Object.keys(DEF).length;
  const rows=[["Kỳ ngộ đã gặp",`<b>${ids.length}/${y}</b> kỳ ngộ đã gặp`,ids.length?"g":""]].concat(ids.map(id=>[`✧ ${TITLE[id]}`,`${b[id].n>1?`${b[id].n} lần · `:""}${b[id].first?`lần đầu: ${b[id].first.who||""}${b[id].first.o?", "+b[id].first.o:""}`:""}`]));
  rows.push(["Ghi chú","Sổ chỉ để nhớ: kỳ ngộ không mang lợi thế nào sang kiếp sau."]);
