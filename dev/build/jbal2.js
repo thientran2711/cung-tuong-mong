@@ -172,7 +172,7 @@ BAL.mort={on:1,playerFloorYears:0,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
  fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
- /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Lý in Trường Môn viện: age when the game starts, floor = minimum years she lives
+ /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Tần in Trường Môn viện: age when the game starts, floor = minimum years she lives
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
  ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
