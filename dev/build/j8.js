@@ -41,12 +41,12 @@ function od(b){return odA(S,b)}
 function cx2O(p,k){const X=BAL.ag.cx2[k],M=S.emp?mm():0;const A=p.arts||{};
  if(k==="flat"||k==="favor")return X.o+(p.sung||0)/X.sd+M;
  if(k==="true")return X.o+(p.duc||0)/X.dd+M+(has("nhantu")?X.nt:0);
- if(k==="show"){let w=0;if(p===S){const b=bestArt();w=b.k?artOE(S,b.k):0}else for(const a in A)w=Math.max(w,artOE(p,a));return X.o+w+M}/* the one course ladder (jbalcore artOE) */
- if(k==="court")return X.o+(p.tamco||0)/X.td+artO(p,"thi")+M;
+ if(k==="show"){let w=0;if(p===S)w=bestArt().w;else for(const a in A)w=Math.max(w,artW2(p,a));return X.o+w*X.k+M}
+ if(k==="court")return X.o+(p.tamco||0)/X.td+(A.thi||0)*X.thi+M;
  if(k==="chest")return X.o+eyes(p)*X.mat;
  if(k==="old")return X.o+(p.tamco||0)/X.td;
  if(k==="kidGreet")return X.o+(p.sung||0)/X.sd+M;
- if(k==="nurse")return X.o+artO(p,"y");
+ if(k==="nurse")return X.o+(A.y||0)*X.y;
  if(k==="maidSpy")return X.o+((p.maid&&p.maid.loyal)||0)/X.ld;
  return X.o||100}
 /* AG-ALL-2: the Emperor's (and Thái hậu's) bestowal = his choice from his regard of that person (jagacts2 overrides while the loop is on) */

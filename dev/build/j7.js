@@ -51,7 +51,7 @@ ev("eunuch",()=>typeof tmVol==="function"&&!!tmVol(),()=>{const s=tmVol();return
  {n:"Thử lòng trước",fx:{},x:`${word(agOdd(p.o))} · thành: ${s.name} làm tai mắt cho ngươi · bại: kẻ hai lòng, mang chuyện cung ngươi đi bán`,go:()=>{if(roll(agOdd(p.o)))tmTake(S,s);else{apply({danh:-3});log(`<span class="r">${s.name} mang chuyện cung ngươi đi bán.</span>`)}}},
  {n:"Đuổi đi",fx:{duc:1}}]}});
 /* the Emperor */
-ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+artOE(S,bestArt().k)+mm())}),p=>({who:pEmp(),
+ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+bestArt().w*BAL.visit.show.w+mm())}),p=>({who:pEmp(),
  t:"Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”",o:[
  {n:"Thắp đèn hầu rượu",fx:{},x:"được thị tẩm",go:()=>{S.tonight="me";nightScene()}},
  {n:`Phô tài: ${bestArt().n}`,fx:{suc:-BAL.visit.show.suc},x:`${word(p.o)} · thành: Sủng +${BAL.visit.show.sung}, Danh +${BAL.visit.show.danh}`,go:()=>{if(roll(p.o))apply({sung:BAL.visit.show.sung,danh:BAL.visit.show.danh})}},

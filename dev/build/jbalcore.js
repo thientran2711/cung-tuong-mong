@@ -1,12 +1,12 @@
 /* ================= jbalcore: BALANCE CORE (review/balance-core) =================
    Owner OD 16/11 23:00Z (arts start too high, reach 100 too fast), 23:08Z (ALL start stats + growth fit the origin, one table, NPCs the same),
    23:05Z (the Emperor's month art in the night choices), 22:50Z (Tranh sủng vs Chặn ngự giá a real trade-off; Giữ chân Hoàng thượng rolls).
-   Every number: BAL.start / BAL.art / BAL.grow / BAL.steal (jbal2.js). This file only reads them.
+   Every number: BAL.art / BAL.steal / BAL.start.npc (jbal2.js). This file only reads them.
    1. ONE course ladder for every art (p.arts / p.artp) and every Tứ đức course (p.vir / p.virp): p.arts[k] = bậc 0..5 (every old reader keeps
       working), p.artp[k] = points inside that bậc; points = BAL.art.tier[bậc] + artp (0–100). crsPush() is the only way points grow (her lessons,
       events, NPC study: addArt / addArtP / addVir call it). artO(p,k) = the ONE odds bonus of a course (BAL.art.odds[bậc]).
-   2. Start values (Tai mắt is not a start number: it is her real spy list, main AG-ALL-2f2): origSet(p,k) from BAL.start for her (j2 start) and for every new NPC consort (rstats, origin drawn by BAL.start.npcW).
-   3. Growth curve BAL.grow on every gain of Sắc / Tài / Tâm cơ (apply for her, ap for NPCs: one rule).
+   2. Start ARTS: origArtSet(p,k,road) puts her BAL.orig.art row on the one ladder. Start VALUES and growth are LIVE's (j2 start + ORIGINS o, j8 rstats; no growth curve)
+      — review/night-final-r3-nobc, D ruling «A + drop growth/start».
    4. Night choices: oSteal(a,mode) (j8, reads BAL.steal.m), oKeep(p), stealFail(a,t,mode), keepNoSteal / keepRobbed, rungDown(o,n) for jnf.
       The Emperor's month art S.emp.ea {m,f,d} (empArtMonth, host only in co-op); who knows it: p.eaK === S.turn (eaLearn).
    Old saves: vNorm moves the old progress (0..bậc+1) onto the new bậc width once (p.crsV = 1); bậc never drops. */
@@ -33,10 +33,7 @@ function nightArt(p){let b={k:null,l:0,w:0};for(const a of ARTS){if(a.k==="theu"
 function xWord(m){return m===2?"gấp đôi":m===1.5?"gấp rưỡi":m===3?"gấp ba":`gấp ${String(m).replace(".",",")} lần`}
 function artSide(p,k){return Math.round(artO(p,k)*BAL.art.side*10)/10}
 function virO(p,k){const l=((p&&p.vir)||{})[k]||0;return BAL.art.odds[Math.min(l,BAL.art.odds.length-1)]||0}
-/* ---- start values: one table for her and every NPC ---- */
-function origRow(k){return (BAL.start&&BAL.start[k])||BAL.start.quan}
-function origRoll(x){return Array.isArray(x)?x[0]+R(x[1]-x[0]+1):x}
-function origPickNpc(){const W=BAL.start.npcW;const ks=Object.keys(W).filter(k=>W[k]>0);let r=Math.random()*ks.reduce((a,k)=>a+W[k],0);for(const k of ks){if((r-=W[k])<0)return k}return "quan"}
+/* ---- start arts: one table BAL.orig.art for her (start VALUES are LIVE's: j2 start + ORIGINS o; NPCs j8 rstats — nobc, D «drop growth/start») ---- */
 /* start arts / tứ đức: ONE table BAL.orig.art (jbal.js; identity = origin × story road, in bậc) — j1 originArts reads the row; here a bậc becomes
    the floor points of that bậc on the one ladder (BAL.art.tier), so she starts AT that bậc with no progress */
 function origArtRow(k,road){return typeof originArts==="function"?originArts(k,road):{}}
@@ -44,35 +41,10 @@ function origArtPts(l){const T=BAL.art.tier;return T[Math.max(0,Math.min(T.lengt
 /* her start once STORY init has rolled her road (j2 start): every art / tứ đức back to 0, then the row of her identity */
 function origArtSet(p,k,road){const R0=origArtRow(k,road);for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
  for(const a in R0){if(ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,origArtPts(R0[a]));else crsSet(p.vir,p.virp,a,origArtPts(R0[a]))}return p}
-/* npc: {rank, malice, road?} — her own start passes nothing */
-function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.artp||{};p.vir=p.vir||{};p.virp=p.virp||{};
- for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
- p.sac=origRoll(o.sac);p.tai=origRoll(o.tai);p.tamco=origRoll(o.tamco);p.duc=origRoll(o.duc);p.suc=origRoll(o.suc);
- const ap0={},R0=origArtRow(k,npc&&npc.road);for(const a in R0)if(ARTS.some(x=>x.k===a))ap0[a]=origArtPts(R0[a]);
- if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?N.mal0:npc.malice;
-  p.tamco=cl(p.tamco+Math.round((mal-N.mal0)/N.mal),0,100);p.duc=cl(p.duc+Math.round((N.mal0-mal)/N.malDuc)+R(2*N.ducJ+1)-N.ducJ+N.duc,0,100);
-  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(N.favJ[0])-N.favJ[1];p.hh=origRoll(o.hh)+R(N.favJ[0])-N.favJ[1];
-  const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
- else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
- for(const a in ap0)if(p.arts[a]!=null||ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,ap0[a]);
- for(const v in R0)if(!ARTS.some(x=>x.k===v))crsSet(p.vir,p.virp,v,origArtPts(R0[v]));
- p.crsV=1;return p}
 /* ---- old saves: progress (0..bậc+1 of the old 'bậc+2' step) onto the new bậc width, once ---- */
 function crsMigrate(p){if(!p||p.crsV)return;const f=(lv,pt)=>{if(!lv||!pt)return;for(const k in lv){const l=Math.min(lv[k]|0,5);lv[k]=l;const o=+pt[k]||0;pt[k]=l>=5?0:Math.min(artNeed(l)-.1,Math.round(o/(l+2)*artNeed(l)*10)/10)}};
  f(p.arts,p.artp);f(p.vir,p.virp);p.crsV=1}
 (function(){const v0=vNorm;vNorm=function(p){const r=v0.apply(this,arguments);try{crsMigrate(p)}catch(e){}return r}})();
-/* NPC consorts: an origin from the same table (only for a new person: one with no Sắc yet) */
-(function(){const r0=rstats;rstats=function(v,rank){try{if(v&&v.sac==null&&!v.org){const rk=rank==null?(v.queen?7:v.rank):rank;origSet(v,origPickNpc(),{rank:rk,malice:v.malice})}}catch(e){console.error("origSet npc",e)}return r0.apply(this,arguments)}})();
-/* ---- growth curve: Sắc / Tài / Tâm cơ (BAL.grow), her and NPCs alike ---- */
-function growMul(v){const G=BAL.grow;let i=0;for(const b of G.band)if(v>=b)i++;return G.mul[Math.min(i,G.mul.length-1)]}
-function growScale(p,o){if(!o||typeof o!=="object"||!p)return o;let c=null;const pk=p.pk=p.pk||{};
- for(const k of BAL.grow.keys){const v=o[k];if(!(v>0))continue;let cur=p[k]||0,left=v,got=0;const top=Math.max(pk[k]||0,cur);
-  for(let i=0;i<v;i++){const m=cur+got<top?BAL.grow.back:growMul(cur+got);got+=m}  /* each point of gain at the mul of the value it lands on; below her own peak (a loss being regained) at grow.back */
-  const n=Math.floor(got)+(Math.random()<got-Math.floor(got)?1:0);if(n!==v){c=c||Object.assign({},o);c[k]=n}}
- return c||o}
-function growPeak(p){if(!p)return;const pk=p.pk=p.pk||{};for(const k of BAL.grow.keys)if((p[k]||0)>(pk[k]||0))pk[k]=p[k]||0}
-(function(){const a0=apply;apply=function(o){try{growPeak(S);if(S&&!S.dead&&!window.__noGrow)o=growScale(S,o)}catch(e){}return a0.apply(this,[o].concat([].slice.call(arguments,1)))}})();
-(function(){const a0=ap;ap=function(p,o){try{growPeak(p);if(p&&p!==S&&!window.__noGrow)o=growScale(p,o)}catch(e){}return a0.apply(this,arguments.length>2?[p,o].concat([].slice.call(arguments,2)):[p,o])}})();
 /* ---- the Emperor's month art (owner 23:05Z) ---- */
 function empArtMonth(){if(!S||S.dead||!S.emp)return"";const E=S.emp;if(E.ea&&E.ea.m===S.turn)return"";
  const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=BAL.steal.ea.w}catch(e){}return [a.k,w]});
@@ -121,7 +93,7 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
   s=s.replace(/\(mỗi bậc \+[\d,]+\)/g,()=>`(+${(SIDE[k]||[]).includes(l)?String(side(O[l])).replace(".",","):O[l]})`);
   arr[i]=s})}/* in place: ARTMS (j82) holds the same arrays */
  /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
- {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.art.gate.yCure-1;const at=Y.findIndex(t=>t.includes(cure));
+ {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.ag.par3.anthai.self.y-1;/* the gate the LIVE readers use (BAL.ag.par3.anthai.self.y = BAL.ag.cx2.kidHeal.y) */const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
  for(const k of ["theu","nau"])if(ARTFX[k])ARTFX[k][0]=ARTFX[k][0].replace(/phẩm \+\d+ mỗi bậc \(thang 100\)/,`phẩm theo điểm môn, Tông sư +${Math.round(100*BAL.art.fx.q)} (thang 100)`);
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));

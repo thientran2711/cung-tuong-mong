@@ -160,7 +160,7 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
 const EFF={"Tham vọng":.35,"Nóng nảy":.25,"Kiêu ngạo":.25,"Ân cần":.1,"Khiêm nhường":.1};
 /* the act she would do now (her best art, else a small gift) — read by the weekly pass below and by the NPC agent loop (jagent, AG1) */
 /* ONE table (BAL.deck, jbal2) and ONE odds formula for her cards (j2 artActs) and the NPC's same act (r1 fault 7) */
-function deckOdds(p,k){const D=BAL.deck[k];return D.o[0]+artOE(p,k)/* the one course ladder (jbalcore, balance-core) */+(D.st?(+p[D.st[0]]||0)/D.st[1]:0)+mm()}
+function deckOdds(p,k){const D=BAL.deck[k];const l=typeof artW2==="function"&&p&&p.arts?artW2(p,k):(p.arts&&p.arts[k]||0);return D.o[0]+l*D.o[1]+(D.st?(+p[D.st[0]]||0)/D.st[1]:0)+mm()}
 function deckGain(k){const D=BAL.deck[k];return k==="ky"?Object.assign({},D.w,{danh:BAL.tw.g.ky[0],tamco:BAL.tw.g.ky[1]}):Object.assign({},D.w)}
 function deckLoss(k){return k==="vu"?{danh:-BAL.tw.g.vu[2]}:Object.assign({},BAL.deck[k].l||{})}
 const DECKN={vu:"múa Kinh hồng vũ trong yến tiệc",cam:"đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện",ky:"đánh cờ cùng Hoàng thượng"};

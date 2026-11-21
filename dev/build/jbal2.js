@@ -207,7 +207,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's t
    stealS = the night score the Tranh sủng / Chặn ngự giá line (j79 stealX) prices the reward chance at. */
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
- show:{o:40,suc:5,sung:6,danh:2},tea:{minSung:60,sung:2,an:2}},
+ show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,sung:2,an:2}},
  night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,vO:[40,50,60,75,85] /* night score v ≤-1 / 0 / 1 / 2 / ≥3 → odds read by word() (Khó … Rất chắc) */,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, tam đẳng, nhị đẳng, nhất đẳng = đại cung nữ, chưởng sự, nữ quan; maid-ladder-6 inserted nhị đẳng .4; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
@@ -518,27 +518,10 @@ BAL.relOan={hurt:.6,doer:.2,mend:.3};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
 /* ================= BALANCE CORE (review/balance-core, owner OD 16/11 23:00Z / 23:05Z / 23:08Z, 22:50Z) =================
-   ONE table for every start value, ONE ladder for every art and Tứ đức course, ONE growth curve, the night-choice odds.
-   orig.<k>: the start of a girl of that origin — the player AND every NPC consort (NPCs draw an origin by orig.npcW; "quan" = daughter of a
-     mid official, the usual consort, NPC-only). Ranges [lo,hi] roll evenly; th / hh = Thái hậu / Hoàng hậu → her at entry (the court mood adjusts it after). Start ARTS / tứ đức are NOT here: ONE table BAL.orig.art (jbal.js, origin × story road, bậc; owner OD 20/11 ~02:05Z, law 4/14), read by origSet / origArtSet (jbalcore) at the floor points of that bậc.
-     Bạc / Danh / Sủng / rank keep the approved origin odds (OD:L19/L43, owner OD:L1218: old origins are not re-tested);
-     Sắc / Tài / Tâm cơ / Đức / Sức fit the origin (history check: dev/handover/reports/balance-core.md §1).
-   NPCs: their own rank adds what years in the palace give (npc: danh/bac per rank, art points per rank to their best courses of their BAL.orig.art row). */
+   (nobc, D ruling «A + drop growth/start»: start values and growth are LIVE's again; kept here: the course ladder §7 (owner: learning times) and the night-choice odds §4.)
+   ONE ladder for every art and Tứ đức course, the night-choice odds. */
 BAL.start={
- tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,th:5,hh:-15},
- dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,th:0,hh:0},
- muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:30,danh:8,sung:8,bac:380,suc:80,th:-5,hh:0},
- cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,th:5,hh:0},
- nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,th:-15,hh:0},
- bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,th:-20,hh:0},
- td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,th:0,hh:0},
- ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,th:40,hh:-5},
- thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,th:0,hh:5},
- cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,th:0,hh:0},
- quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,th:0,hh:0},
- npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
- npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4,mal0:40,malDuc:2,ducJ:5,favJ:[20,5]}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
-   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick; mal0 = the neutral malice (no NPC given one), malDuc = its Đức divisor, ducJ = Đức jitter ±, favJ = Thái hậu / Hoàng hậu favour jitter R(favJ[0])−favJ[1] */
+ npc:{study:60,focus:4}  /* study = % a month an NPC takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick (§7 course ladder). Start VALUES are LIVE's (j2 start + ORIGINS o, j8 rstats for NPCs: review/night-final-r3-nobc, D ruling «A + drop growth/start») */
 };
 /* ONE ladder for every art (ARTS) and every Tứ đức course (VIR): points 0–100, bậc 0–5 by floor (tier), named (nm); bậc 5 Tông sư = 100 points = a lifetime's mastery.
    gain: points per lesson point (the lesson game gives 1–3; teachers more) at each bậc — the higher, the slower (bot table in the report).
@@ -546,16 +529,12 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6},
+ gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{3:3,5:6},
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
- gate:{yCure:3,thiFame:3} /* course gates moved with the slower ladder (report §F6 table): self-made medicine for a child / an thai at Tinh thông (was bậc 4, ~10 lessons; Xuất chúng now ≥ 1 year); "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry) */,
+ gate:{thiFame:3} /* course gate moved with the slower ladder (report §F6 table): "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry); the Y thuật self-medicine gates are LIVE's BAL.ag.par3.anthai.self.y / BAL.ag.cx2.kidHeal.y (nobc) */,
  fx:{q:.7,cong:.2,hanh:3,gift:{hoa:.5,theu:.4}} /* per POINT of a course: handmade quality q × points (+ Công × cong), gift bonus × points; hanh = Đức per bậc of Hạnh (monthly) */};
-/* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
-   (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).
-   Sủng / Danh are NOT on the curve (they gate promotion; owner proposal first, see the report): adding "sung" to keys is the whole change. */
-BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1],back:1 /* regaining a lost value (poison, scar, illness, age) below her own peak: × back (owner note r1 #7: a loss heals, only new heights are slow) */};
 /* NIGHT CHOICES after the card flip (owner 22:45Z / 22:50Z / 23:05Z). Odds of each choice = b + Σ w[stat]×stat + art + trait fit + Emperor mood
    (window.nfOdds in jnf reads these through oSteal(a,mode) / oKeep(p)). No khắc, no Sức, no Đức is paid: only gain / loss (cost 0).
    feign = Tranh sủng: favour pulls him (Sủng), safer, small loss, small extra prize. road = Chặn ngự giá: beauty + art on his path, bolder:
@@ -687,7 +666,7 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
        ≤ ageMax years.  recDefend = added to her "nghiệm lại bằng bát nước mới" odds when the child really came early or late AND the thái y mạch án
        holds the month the pregnancy was found (S.pregDisc at birth).  khRecOff: the book's night lies recMin..recMax tuần before the real conception
        (recSlack tuần = still the same night).
-       drug = thuốc thúc sinh (owner PARKING_LOT #1): bạc, odds base + Y thuật artO (the one course ladder), Sức lost on success / failure; npcDrug % an NPC in that spot takes it.
+       drug = thuốc thúc sinh (owner PARKING_LOT #1): bạc, odds base + Y thuật × perY, Sức lost on success / failure; npcDrug % an NPC in that spot takes it.
    pgRisk  miscarriage causes (owner 19:15Z), added to the monthly risk while pregnant, capped at cap: khac % per khắc walked beyond freeKhac in the month;
        rain % per walk in harsh weather; work % per Sức spent on cards beyond freeSuc; lowSuc2 under lowSuc2At Sức; an thai halves it.
        lowSuc under lowSucAt and misSuc (Sức lost at a miscarriage) are the base pregnancy month's own numbers (j8 pregMonthP reads them too). */
@@ -697,7 +676,7 @@ BAL.kh={on:1,ageFrom:30,agePer:1.2,capMin:30,maxBase:40,maxPer:.6,tmpMax:40,
  illLo:50,illP:4,thyLo:80,thyBad:50,faceLo:45};
 BAL.preT={m8:1.5,m9:4,lowSuc:3,lowSucAt:30,lowKh:3,khLo:40,age:.2,ageFrom:35,die8:40,die9:15,od:8,odHard:1.5,odStill:3,odOmen:30,omenDanh:2,
  evi:2,lsW:3,accEv:3,accP:20,ageMax:3,recDefend:20,recSlack:1,recMin:2,recMax:9,
- mot:{rkGap:1,aff:0,hate:-30,oan:45},drug:{bac:40,o:60,suc:10,sucF:25},npcDrug:60};
+ mot:{rkGap:1,aff:0,hate:-30,oan:45},drug:{bac:40,o:60,perY:6,suc:10,sucF:25},npcDrug:60};
 BAL.pgRisk={freeKhac:6,khac:.25,rain:1,freeSuc:40,work:.05,lowSuc2:3,lowSuc2At:50,lowSucAt:30,lowSuc:8,misSuc:20,cap:4};
 /* review/suc-khoe-fix (F4, ONE CORE OD:L1267): THE BLOOD TEST (trích huyết nghiệm thân) — one block read by jroute (her child, her demand on an NPC's
    child, an NPC mother's child) AND jkh (a rival's demand after a 'lệch sổ' birth). Before this, jkh held a copy of jroute's numbers.
@@ -821,13 +800,13 @@ Object.assign(BAL,{mind:{seen:{cap:3,fade:.85}/* 2f3: a servant's record of her 
   j8ev:{ev:2,rel:5},j83:{base:1},j96:{base:40,ghen:2,floor:1},lost1:{base:1},lost2:{base:2},tin:{floor:1,pow:2},wd:{base:1},ag:{base:1}},
  men:{report:[1,25],hide:[2,.6],listen:[2,.5],ignore:[2.5,1.2,.3,80],keep:4}}});
 /* BAL.deck — the Sủng deck acts, ONE table for her cards (j2 artActs + the Emperor talk "Dâng một cành hoa") and an NPC's same deed
-   (j75 npcEffortKind, the agent loop). r1 fault 7 (OD:L1386 "same odds" + ONE CORE). Odds = deckOdds(p,k): base o[0] + artOE(p,k) (the one course ladder BAL.art.odds, balance-core) + stat / div + mood
+   (j75 npcEffortKind, the agent loop). r1 fault 7 (OD:L1386 "same odds" + ONE CORE). Odds = deckOdds(p,k): base + artW2(p,k) × per + stat / div + mood
    (od for her, odA for an NPC). lv = art level the card needs; sucMin = Sức an NPC keeps before she spends on it (her card: the khắc / Sức rule);
    c / w / l = cost / gain / loss (vu's loss and side effects: BAL.tw.g.vu; ky's Danh / Tâm cơ: BAL.tw.g.ky).
    qf = a small gift to the Emperor (her "Dâng một cành hoa"): bac cost, o odds when his flower is not known, w gain (wKnown when it is) */
-Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40],st:["sac",5],w:{sung:15,danh:3}},
- cam:{lv:3,sucMin:30,c:{suc:-10},o:[40],st:["tai",5],w:{sung:12},l:{sung:-2}},
- ky:{lv:3,sucMin:25,c:{suc:-5},o:[45],st:null,w:{sung:5},l:{sung:-1}},
+Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40,8],st:["sac",5],w:{sung:15,danh:3}},
+ cam:{lv:3,sucMin:30,c:{suc:-10},o:[40,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
+ ky:{lv:3,sucMin:25,c:{suc:-5},o:[45,8],st:null,w:{sung:5},l:{sung:-1}},
  qf:{bac:5,o:50,w:2,wKnown:6}}});
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
@@ -1061,7 +1040,7 @@ BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,"sung":1.2,_:.8},buon:{rest:1.6,ally:1.
 BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
 /* AG-ALL consort cards (jagacts "more"; the player's j2 / j9 cards read the same): portrait = Vẽ chân dung tặng Thái hậu (Họa ≥ hoa, odds o + artW × k);
    humble = Nhún nhường (cost, oán −oanDown, quý +aff; an NPC does it before someone whose oán toward her ≥ oan; g = safety points) */
-Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{"suc":-10,"bac":-10},get o(){return BAL.odb.j2.odO_10},w:{"th":10},l:{"th":-1}},humble:{c:{"danh":-2},get oanDown(){return -BAL.eff.j9.run_9},get aff(){return BAL.eff.j9.run_10},oan:20,g:4}/* one number with the player's Nhún nhường (BAL.eff.j9) */});
+Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{"suc":-10,"bac":-10},get o(){return BAL.odb.j2.odO_10},k:8,w:{"th":10},l:{"th":-1}},humble:{c:{"danh":-2},get oanDown(){return -BAL.eff.j9.run_9},get aff(){return BAL.eff.j9.run_10},oan:20,g:4}/* one number with the player's Nhún nhường (BAL.eff.j9) */});
 /* AG-ALL part C (jagharm.js; design dev/handover/reports/ag-all.md §1d/§8/§9/§10): the player's scheme / harm acts as every consort's own options.
    needs   the needs a scheme can serve (her pick of WHAT she wants this buổi comes first, jagent agDecide)
    g       per act key (ACT, j8 + modules): g = need points it closes when it works (BAL.ag.unit points = one whole need), l = points lost when it fails,
@@ -1095,11 +1074,11 @@ Object.assign(BAL.ag.day,{intentW:3});/* the 2nd goal of the day = BAL.ag.why.g3
    give    his bestowal = his choice from his regard (was a flat roll of the same %): × cl(b + (Sủng − ref)/div + Ân tình/anDiv, lo, hi) × his memory (jagemp) ×
            his mood × trait tr; th = the Thái hậu's (regard = her Thái hậu value) */
 BAL.ag.cx2={flat:{get o(){return BAL.odb.j2.odO_12},sd:5,w:{"sung":3},l:{"sung":-1},disc:25,g:{"sung":3}},true:{get o(){return BAL.odb.j2.odO_13},dd:3,nt:10,w:{"sung":2,"danh":2},l:{"sung":-2},disc:50,g:{"sung":2,"danh":2}},
- show:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_14},w:{"sung":4,"danh":1},l:{"danh":-2},g:{"sung":4,"danh":1}},favor:{min:30,get o(){return BAL.odb.j2.odO_15},sd:3,w:{"bac":60},l:{"sung":-4},angry:40,g:{bac:6}},
- court:{get o(){return BAL.odb.j2.odO_16},td:2,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},get rel(){return -BAL.eff.j2.go_3},g:{spite:5}},chest:{get o(){return BAL.odb.j2.odO_21},mat:5,get rel(){return -BAL.eff.j2.run},g:{spite:3,safe:3}},
+ show:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_14},k:10,w:{"sung":4,"danh":1},l:{"danh":-2},g:{"sung":4,"danh":1}},favor:{min:30,get o(){return BAL.odb.j2.odO_15},sd:3,w:{"bac":60},l:{"sung":-4},angry:40,g:{bac:6}},
+ court:{get o(){return BAL.odb.j2.odO_16},td:2,thi:3,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},get rel(){return -BAL.eff.j2.go_3},g:{spite:5}},chest:{get o(){return BAL.odb.j2.odO_21},mat:5,get rel(){return -BAL.eff.j2.run},g:{spite:3,safe:3}},
  fert:{c:{"bac":-40},m:3,g:{kid:4}},doctor:{c:{"bac":-50},g:{safe:2,kid:3}},kidMed:{c:{"bac":-30},hp:80,get up(){return BAL.eff.j2.hpGo_2},g:{kid:4}},likes:{c:{"bac":-15},get o(){return BAL.odb.j2.odO_5},g:{"sung":2}},
- old:{get o(){return BAL.odb.j2.odO_22},td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},get o(){return BAL.odb.j20.odO},w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{get aff(){return BAL.bacFee.lendAff},p:50,get bac(){return BAL.bacFee.lend},get fail(){return -BAL.eff.j9.run_5},g:{bac:4,safe:2}},
- kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},get fond(){return BAL.eff.j2.fondGo},g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},hp:70,get up(){return BAL.eff.j2.hpGo},g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
+ old:{get o(){return BAL.odb.j2.odO_22},td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},get o(){return BAL.odb.j20.odO},y:5,w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{get aff(){return BAL.bacFee.lendAff},p:50,get bac(){return BAL.bacFee.lend},get fail(){return -BAL.eff.j9.run_5},g:{bac:4,safe:2}},
+ kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},get fond(){return BAL.eff.j2.fondGo},g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,get up(){return BAL.eff.j2.hpGo},g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
 BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
 BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};
 /* AG-ALL-2 consort ↔ servants (jagacts2): maidTalk = Tâm sự with her confidant maid (below = her lòng under which she bothers), maidSpy = Sai đi dò la
@@ -1288,7 +1267,7 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  day:{npcW:{give:[1.2,.6],cold:[1.5,.3],skip:.4},coldOan:30,delay:3,len:1,kho:[3,1],mDanh:[3,1],mSung:[3,1],npcGift:.08,big:40,mid:15,bigAff:12,midAff:5,skipOan:8,coldGhen:60,feastBac:60,feastDanh:3,plainDuc:1,place:{tn:1.3},act:{social:1.3,greet:1.3,harm:1.2},force:[{b:1,pl:"$",deed:"gift",why:"Dự yến đầy tháng",g:["consort","queen"]}]},
  lap:{len:1,pow:8,npcGift:.1,sonHarm:[1.5,.4],xaP:40,gift:30,giftAff:10,place:{thu:1.5},act:{scheme:1.4,frame:1.3,ally:1.3,greet:1.3}},
  hau:{len:1,rise:10,fall:-15,gift:30,giftAff:12,place:{kn:2},act:{ally:1.5,social:1.3,greet:1.4}},
- thb:{st:2,len:3,cd:18,npcW:{suc:40,weak:.3,no:.6},nightMul:.5,mood:1,qDanh:2,nurse:{suc:12,o:[40],th:8},pray:{suc:4,duc:1,th:3},med:{bac:25,th:4},npcTh:[5,2],place:{tn:1.8,cnh:1.4},act:{pray:1.6,social:.8,greet:1.3,scheme:1.2},force:[{b:0,pl:"tn",deed:"routine",why:"Phiên hầu bệnh Thái hậu",g:["consort","queen"],rank:2}]},
+ thb:{st:2,len:3,cd:18,npcW:{suc:40,weak:.3,no:.6},nightMul:.5,mood:1,qDanh:2,nurse:{suc:12,o:[40,8],th:8},pray:{suc:4,duc:1,th:3},med:{bac:25,th:4},npcTh:[5,2],place:{tn:1.8,cnh:1.4},act:{pray:1.6,social:.8,greet:1.3,scheme:1.2},force:[{b:0,pl:"tn",deed:"routine",why:"Phiên hầu bệnh Thái hậu",g:["consort","queen"],rank:2}]},
  thi:{every:3,off:1,dflt:40,hanlam:30,month:3,len:1,pow:[6,2],danh:2,letter:{bac:30,o:[35,5],pow:5},place:{thu:1.4},act:{court:1.4,art:1.2,social:1.1}},
  vuong:{every:3,off:2,month:10,len:1,bien:40,mood:2,sungDiv:100,meet:{o:[45,4],tinh:8,danh:-4},gossip:30,place:{tn:1.5,vuon:1.3},act:{social:1.3,spy:1.3,ally:1.2}},
  ret:{run:2,cd:54,len:2,phongP:25,rank:2,suc:6,maidCatch:5,maidSuc:60,ill:"phonghan",catch:10,lcCatch:25,share:{bac:40,duc:2,danh:2},buy:{bac:20},cold:{suc:8},place:{vuon:.3},act:{help:1.3,social:.7,greet:.8},srvAct:{work:1.2}},
@@ -1300,7 +1279,7 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  hon:{len:1,kho:4,mDanh:3,gift:25,giftAff:10,npcAff:5,npcGift:.06,place:{tn:1.4},act:{social:1.3,greet:1.2}},
  ngoai:{pow:85,young:30,illSt:2,keepPow:-10,cd:72,len:2,purge:[50,25],fall:-30,rise:5,sung:-8,danh:-5,mood:3,toCam:60,advise:{o:[40,5],pow:-10},act:{ally:1.4,scheme:1.3,warn:1.3,social:.8}},
  phat:{month:4,t:1,len:1,cd:24,afterP:50,endDis:50,big:{bac:40,th:5},sutra:{suc:8,duc:2,th:2},npcGive:.1,npcTh:3,place:{cnh:2,tn:1.3},act:{pray:2,social:1.2,scheme:.8},force:[{b:0,pl:"cnh",deed:"pray",why:"Lễ Phật",g:["consort","queen"]}]},
- benh:{st:2,len:3,cd:18,mood:2,nurse:{suc:12,o:[45],sung:4},gin:{bac:30,sung:2},pray:{duc:2},npcSung:[3,1],place:{dtd:1.6,cnh:1.3},act:{social:1.2,greet:1.4,scheme:1.4,pray:1.5,art:.5},force:[{b:2,pl:"dtd",deed:"routine",why:"Hầu thuốc Hoàng thượng",g:["consort","queen"],rank:3}]},
+ benh:{st:2,len:3,cd:18,mood:2,nurse:{suc:12,o:[45,6],sung:4},gin:{bac:30,sung:2},pray:{duc:2},npcSung:[3,1],place:{dtd:1.6,cnh:1.3},act:{social:1.2,greet:1.4,scheme:1.4,pray:1.5,art:.5},force:[{b:2,pl:"dtd",deed:"routine",why:"Hầu thuốc Hoàng thượng",g:["consort","queen"],rank:3}]},
  tinh:{month:1,t:2,len:1,cd:24,bacK:.4,base:20,showPow:70,showDanh:1,ask:{o:[35,5],danh:3},act:{social:1.3,scheme:1.2,bribe:1.2}}};
 /* ---- review/one-core-jkc-2: BAL.odb (one-core-odb-move.js) ---- */
 /* BAL.odb.<module>.<site> = the odds base N of od(N…) (key od<Site>) / roll(N±…) (key rb<Site>) the module rolls (the guard's odb kind);
@@ -1358,14 +1337,14 @@ Object.assign(BAL.ag,{ev:{judge:2,one:1,two:2,all:-99,get rel(){return -BAL.eff.
    staff  her own-staff buttons (j10 servDo): thuong bac; hoi af (a friend), dt (đối thực rumour odds); che danh; NPC master: below = lòng under which she acts
    use / sell (inventory Dùng / Bán), charity (j85 charityFx), restLat (Nghỉ ngơi một lát), tyGift (Biếu Thái y, courtGive), work (Tự học nghề: tác phẩm, wkMake) */
 BAL.ag.par3={on:1,
- dance:{c:{"suc":-20,"bac":-10},get o(){return BAL.odb.j2.odO_3},sacD:2,mesac:1.3,w:{"sung":12,"danh":4},l:{"danh":-6},g:{"sung":12,"danh":4}},
+ dance:{c:{"suc":-20,"bac":-10},get o(){return BAL.odb.j2.odO_3},sacD:2,mesac:1.3,vu:4,w:{"sung":12,"danh":4},l:{"danh":-6},g:{"sung":12,"danh":4}},
  eyes:{l:{"danh":-3},g:{"safe":2,"spite":1},max:6},/* 2f2: a real person (tmBest) at her own price (nv bribeCost) and tmOdds; no flat roll, no +2 */
- anthai:{self:{c:{"suc":-5}}/* gate: BAL.art.gate.yCure (balance-core) */,buy:{c:{"bac":-20},w:{"suc":10}},g:{"kid":3}},
+ anthai:{self:{c:{"suc":-5},y:4},buy:{c:{"bac":-20},w:{"suc":10}},g:{"kid":3}},
  tell:{get o(){return BAL.odb.j2.odO_18},ev:10,thD:5,w:{"th":2,"duc":-2},l:{"th":-4},rel:15,sung:10,g:{"spite":4,"th":1}},
  treat:{c:{"bac":-30},g:{"rest":4}},
  staff:{thuong:{below:55},phat:{below:30},doi:{below:15},/* bạc / Danh: BAL.house.thuongBac / BAL.eff.j10.danhServAct (merge r2) */hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
- cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
+ cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
   sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
  talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
@@ -1392,7 +1371,7 @@ BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{get o(){return BAL.odb.j42.odO
  black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
 /* 2e4: Đánh đàn chờ ngự giá (qinCard, her garden pop-up and NPC cx3:qin): odds o + Tài/taiD + cầm × cam (× tt with Trống tài) + like when she knows his music; Sủng w / wLike, fail −l; Sức suc; NPC needs cầm ≥ minCam
    study: an NPC lesson (j85 npcStudyDo) — pays a teacher only keeping keep bạc; teacher / self weights for mindPick */
-Object.assign(BAL.ag.par3,{qin:{get o(){return BAL.odb.jact.odO},taiD:3,like:15,w:7,wLike:9,get l(){return -BAL.eff.jact.sungGo},suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
+Object.assign(BAL.ag.par3,{qin:{get o(){return BAL.odb.jact.odO},taiD:3,cam:4,tt:2,like:15,w:7,wLike:9,get l(){return -BAL.eff.jact.sungGo},suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
 BAL.ag.cx2.maidTalk.hear=15;
 BAL.kidTeach={get suc(){return BAL.sucNeed.kid},k:2,age:3};
 BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */

@@ -16,16 +16,15 @@ window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô 
 window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
 const KIT_IMP="#ffd400";/* ONE imperial yellow token (owner 11/16 16:10Z: "màu vàng của hoàng gia, màu vàng tươi") for Hoàng thượng AND Hoàng thái hậu; kitToneOf keeps it as is, the ink edge is in jk4 */
 const KIT_ROLE={emp:KIT_IMP,th:KIT_IMP,ty:"#12b5ac",prince:"#1f9be8",princess:"#f0543c",stranger:"#6e7681",official:"#3a6fe0",guard:"#5879a8",mama:"#b97a2a",slate:"#5a7a9a"};/* non-rank roles (never pink/purple for men) */
-/* every start NUMBER of an origin lives in BAL.start (jbal2, review/balance-core); here: key, name, rank, ally, text */
 const ORIGINS=[
- {k:"tt",n:"Con gái Tể tướng",r:2,t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
- {k:"dtq",n:"Con gái Đại tướng quân",r:1,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
- {k:"muoi",n:"Con gái nhà buôn muối",r:0,t:"Giàu mà xuất thân thấp. Có bạc để mua lòng người."},
- {k:"cn",n:"Cung nữ được sủng hạnh",r:1,ally:1,t:"Từng hầu trà ở Càn Thanh cung. Quen biết khắp đám cung nhân."},
- {k:"nc",on:"Công chúa hòa thân",land:"Cao Ly",n:"Công chúa nước Cao Ly hòa thân",r:3,t:"Người nước phiên. Thái hậu không ưa."},
- {k:"td",n:"Con gái tội thần",r:0,x:{thu:1},ally:1,t:"Cả nhà bị xử trảm. Ngươi vào cung để báo thù."},
- {k:"ch",n:"Cháu gái Thái hậu",r:2,t:"Có Thái hậu chống lưng."},
- {k:"thd",n:"Con gái thầy đồ nghèo",r:0,t:"Thơ văn hơn người, ngoài ra không có gì."}
+ {k:"tt",n:"Con gái Tể tướng",r:2,o:{danh:25,bac:150},hh:-15,th:5,t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
+ {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
+ {k:"muoi",n:"Con gái nhà buôn muối",r:0,o:{bac:320},hh:0,th:-5,t:"Giàu mà xuất thân thấp. Có bạc để mua lòng người."},
+ {k:"cn",n:"Cung nữ được sủng hạnh",r:1,o:{sung:20,bac:60,danh:6,suc:10},hh:0,th:5,ally:1,t:"Từng hầu trà ở Càn Thanh cung. Quen biết khắp đám cung nhân."},
+ {k:"nc",on:"Công chúa hòa thân",land:"Cao Ly",n:"Công chúa nước Cao Ly hòa thân",r:3,o:{danh:30,bac:120},hh:0,th:-15,t:"Người nước phiên. Thái hậu không ưa."},
+ {k:"td",n:"Con gái tội thần",r:0,o:{bac:70,sung:10,thu:1,tamco:15,tai:15,danh:6},hh:0,th:0,ally:1,t:"Cả nhà bị xử trảm. Ngươi vào cung để báo thù."},
+ {k:"ch",n:"Cháu gái Thái hậu",r:2,o:{danh:20,bac:100},hh:-5,th:40,t:"Có Thái hậu chống lưng."},
+ {k:"thd",n:"Con gái thầy đồ nghèo",r:0,o:{bac:20,tai:20,duc:10},hh:5,th:0,t:"Thơ văn hơn người, ngoài ra không có gì."}
 ];
 /* HÒA THÂN = ONE origin with COUNTRY BRANCHES (owner OD:L1213–L1216): the roulette and every origin-level table show ONE card, the ORIGINS
    entry nc ("on" = the origin's own name, Công chúa hòa thân). A life plays one country branch: nc itself (Nam Chiếu) or a branch in ORIGIN_BR

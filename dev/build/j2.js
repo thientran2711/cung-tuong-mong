@@ -4,12 +4,12 @@ function allyBond(L){const v=pick(L||[]);if(v){relAdd(S,v,BAL.allyRel);v.ghen=0;
 function start(){
   try{if(typeof kmReset==="function")kmReset()}catch(e){}/* a new life starts with no scene / overlay / queued job of the last one (j93 kmReset) */
   const o=(window.__forceOrigin&&originByKey(window.__forceOrigin))||(o0=>originByKey(originBrPick(o0.k,Math.random()))||o0)(pick(ORIGINS));/* hòa thân: country branch (j1) */quiet=true;Q=[];popIdx=null;popMsg="";
-  S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,th:0,hh:0,tai:0,sac:0,tamco:0,duc:30,thu:0,
+  S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,th:o.th,hh:o.hh,tai:30+R(50),sac:40+R(55),tamco:10+R(20),duc:30,thu:0,
      schemes:0,moreRivals:0,maid:newMaid(nmNew("maid"),50+R(31)),origin:o,name:"",
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false,lad6:1/* maid-ladder-6: born on the six-rung maid ladder */};
-  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();origSet(S,o.k);/* every start value from BAL.start (one table, jbalcore); o.x = what the origin brings beyond the table (td: thu) */if(o.x)apply(o.x);S.ally=o.ally?1:0;
+  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();apply(o.o);S.ally=o.ally?1:0;
   for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
   /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
   rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
@@ -59,7 +59,7 @@ function artActs(){const A=[],r=S.arts;
  if(r.cam>=D.cam.lv)A.push({n:"Đàn khúc Phượng cầu hoàng",t:"Tiếng đàn đêm trăng vọng đến Dưỡng Hòa điện.",c:Object.assign({},D.cam.c),o:od(deckOdds(S,"cam")),w:deckGain("cam"),l:deckLoss("cam")});
  if(r.vu>=D.vu.lv)A.push({n:"Kinh hồng vũ",t:"Điệu múa trong yến tiệc khiến cả điện lặng người.",c:Object.assign({},D.vu.c),o:od(deckOdds(S,"vu")),w:deckGain("vu"),l:deckLoss("vu"),x:`các phi tần ghen +${ghenN(BAL.tw.g.vu[0])}, thiện cảm -${BAL.tw.g.vu[1]}`,go:()=>{ghenAll(BAL.tw.g.vu[0],"ngươi múa Kinh hồng vũ được ngài khen");liveRivals(true).forEach(v=>v.rel-=BAL.tw.g.vu[1])}});
  if(r.ky>=D.ky.lv)A.push({n:"Đánh cờ với Hoàng thượng",t:"Biết lúc thắng, biết lúc nhường.",c:Object.assign({},D.ky.c),o:od(deckOdds(S,"ky")),w:deckGain("ky"),l:deckLoss("ky")});
- if(r.hoa>=BAL.ag.cx.portrait.hoa)A.push({n:"Vẽ chân dung tặng Thái hậu",t:"Mất nửa tháng, từng sợi tóc bạc.",c:{...BAL.ag.cx.portrait.c},o:od(BAL.ag.cx.portrait.o+artOE(S,"hoa")),w:{...BAL.ag.cx.portrait.w},l:{...BAL.ag.cx.portrait.l}});
+ if(r.hoa>=BAL.ag.cx.portrait.hoa)A.push({n:"Vẽ chân dung tặng Thái hậu",t:"Mất nửa tháng, từng sợi tóc bạc.",c:{...BAL.ag.cx.portrait.c},o:od(BAL.ag.cx.portrait.o+artW("hoa",r.hoa)*BAL.ag.cx.portrait.k),w:{...BAL.ag.cx.portrait.w},l:{...BAL.ag.cx.portrait.l}});
  return A}
 function deal(){
  const X=[];
@@ -74,7 +74,7 @@ function deal(){
  if(ed.length){const k=ed[0],g=4+Math.round(S.tai/20);X.push({n:`Dạy dỗ ${k.sex==="m"?"hoàng tử":"công chúa"}`,t:`Tự tay dạy ${k.name} chữ nghĩa, lễ nghi.`,c:{suc:-10},o:100,w:{},x:`Tài ${k.name} +${g}`,go:()=>{k.tal=cl(k.tal+g,0,100)}})}
  if(live.length){const k=live.slice().sort((a,b)=>a.fond-b.fond)[0];X.push({n:"Đưa con đến thỉnh an Hoàng thượng",t:`Dắt ${k.name} đến Dưỡng Hòa điện.`,c:{...BAL.ag.cx2.kidGreet.c},o:od(cx2O(S,"kidGreet")),w:{...BAL.ag.cx2.kidGreet.w},l:{},x:`Hoàng thượng thương ${k.name} +${BAL.ag.cx2.kidGreet.fond}`,go:()=>{k.fond=cl(k.fond+BAL.ag.cx2.kidGreet.fond,0,100)}})}
  const sick=live.filter(k=>k.hp<BAL.ag.cx2.kidHeal.hp).sort((a,b)=>a.hp-b.hp)[0];
- if(sick&&S.arts.y>=BAL.art.gate.yCure)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{...BAL.ag.cx2.kidHeal.c},o:100,w:{},x:`Sức khỏe ${sick.name} +${BAL.ag.cx2.kidHeal.up}`,go:()=>{sick.hp=Math.min(100,sick.hp+BAL.ag.cx2.kidHeal.up)}});
+ if(sick&&S.arts.y>=BAL.ag.cx2.kidHeal.y)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{...BAL.ag.cx2.kidHeal.c},o:100,w:{},x:`Sức khỏe ${sick.name} +${BAL.ag.cx2.kidHeal.up}`,go:()=>{sick.hp=Math.min(100,sick.hp+BAL.ag.cx2.kidHeal.up)}});
  if(S.preg&&!S.fake)X.push(P3C.anthai(S));
  if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,fix:1,w:{sung:BAL.tw.g.ann[0],th:BAL.tw.g.ann[1]},x:`kèm: mọi phi tần ghen +${ghenN(BAL.tw.g.ann[2])}, ai cũng biết ngươi mang thai`,go:()=>{S.hidden=false;ghenAll(BAL.tw.g.ann[2],"ngươi mang long thai")}});
  const s=STORY[S.origin.k];if(!S.st.done&&s.acts)X.push(...s.acts());
