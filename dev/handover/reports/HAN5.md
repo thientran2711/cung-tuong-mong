@@ -26,3 +26,11 @@ Fix (generator make_han_ladder7_L1847.py, built from LADDER5 files; hair, pose, 
 3. Yoke t4–t7 = back to Phi's own LADDER5 words (they drew the Phi look). t8 → "a small flat gold-and-pearl bead yoke along the outer edge of the bands with a very short pearl fringe, never covering the bands".
 4. t8: "her plum is the clear second colour in LARGE areas (inner robe, skirt front, wide plum collar band, borders)"; inner-collar clause shortened on t7 and t8. Same t7/t8 trims as LADDER6 (18K/hex clauses, shorter yellow negatives, INNER LAYER sentence removed).
 ch 9690/9866/9920/9754/9408/10000/9998/9998; keep_check PASS ×8; check_store shows only the same waived FAILs as LADDER5/6.
+### LADDER7 G57 (owner L1851 via #24): no jade pendant in any prompt
+Belt-pendant words removed ×8 (folded into make_han_ladder7_L1847.py, same file names):
+- t2: "with ONE small jade disc on a silk cord" → "no pendants".
+- t3: the side jade pendant sets → girdle "edged with small pearls, no pendants".
+- t4/t6: the zupei sets → ", no pendants".
+- t5: "TWO long jade pendants" → ", no pendants".
+- t7/t8: the zupei sets → "WIDE jade-and-gold belt, no pendants"; "belt or pendants" → "belt"; LUXURY sentence ", long jade-and-gold belt pendants with pearl tassels" removed.
+ch 9690/9839/9878/9689/9379/9922/9877/9877; keep PASS ×8 (t5 +1 allow); check_store shows only the waived FAILs. No pendant/zupei/jade-disc words are left except "no pendants".

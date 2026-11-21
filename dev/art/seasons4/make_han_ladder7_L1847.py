@@ -29,4 +29,13 @@ for n in range(1,9):
     if n==7: t=rep(t,'the pink inner collar showing as a wide layered edge inside the plum outer collar','the pink inner collar showing inside the plum outer collar')
     if n in (7,8):
         for a,b in T78: t=rep(t,a,b)
+    # G57 (owner L1851 via #24): NO jade pendant (ngọc bội) in any prompt
+    G57={2:[(" with ONE small jade disc on a silk cord",""),("; no belt plaque;","; no belt plaque, no pendants;")],
+         3:[(" with a small carved jade pendant set on each side, linked by strings of pearls"," edged with small pearls, no pendants")],
+         4:[(" and one set of jade discs and pearl strands (zupei) on silk cords to the knee",", no pendants")],
+         5:[(" with TWO long jade pendants on silk cords",", no pendants")],
+         6:[(" and a long set of SMALL thin jade discs and fine pearl strands (zupei) hanging to the knee",", no pendants")],
+         7:[(" with two long sets of jade discs and pearl strands (zupei) to the knee",", no pendants"),("collar, belt or pendants","collar or belt"),(", long jade-and-gold belt pendants with pearl tassels","")],
+         8:[(" with two long sets of jade discs and pearl strands (zupei) to the knee",", no pendants"),("collar, belt or pendants","collar or belt"),(", long jade-and-gold belt pendants with pearl tassels","")]}
+    for a,b in G57.get(n,[]): t=rep(t,a,b)
     open(D+f's62_t{n}_HAN_LADDER7_L1847.txt','w').write(t)
