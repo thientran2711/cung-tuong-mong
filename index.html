@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3d1183ed+","t":"2026-11-21T00:23Z","c":"LAND mg-craft-r2: co-op land gate test coop-craft-hand.js (both seats list the 4 craft kinds; each seat's craft plays go to her own hand b …","b":"f1d0c1addadf","h":[{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"}]};
+window.CTM_BI={"s":"7e5f7fcb","t":"2026-11-21T02:10Z","c":"mg-craft-r2-land: td_cong stitch levers tuned to the Công lesson curve (mg-bots graded Dễ/Vừa/Khó 8.8/8.1/5.4 vs old trace 9.3/7.9/5.5); sh…","b":"79927d3c14db","h":[{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -30049,9 +30049,9 @@ const KG82_KIND={
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
  doi:{e:"doiline"},/* filled by jnwp */
  doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý. Làm nhanh thì được trọn phần."},
- ve:{e:"trace",n:"Vẽ",t:"",how:""},/* the live engine + rules text of the four craft kinds: j91 KG82_CRAFT (review/mg-craft) */
+ ve:{e:"trace",n:"Vẽ",t:"",how:""},/* the live engine + rules text of the craft kinds ve / hoa / kim: j91 KG82_CRAFT (review/mg-craft); Thêu keeps «Nhớ mẫu thêu» (owner 21/11 ~01:05Z) */
  hoa:{e:"arrange",n:"Cắm hoa",t:"",how:""},
- theu:{e:"stitch",n:"Thêu",t:"",how:""},
+ theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
  kim:{e:"papercut",n:"Khéo tay",t:"",how:""},
  mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn. Mỗi bước phải chạm kịp nhịp, chậm nhịp là hồi ấy dừng; bàn dễ cho lỡ một bước mỗi hồi."},
  banh:{e:"cook"},/* filled by j91 */
@@ -30328,8 +30328,41 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
-/* 4. (was PATTERN, remember the lit cells — vẽ / cắm hoa / thêu / khéo tay): removed by review/mg-craft; no kind used it any more (caller scan in
-   dev/handover/reports/mg-craft.md). Thêu → jcraft_theu "stitch", Khéo tay → jcraft_kim "papercut", Vẽ / Cắm hoa → j91 then jcraft_ve / jcraft_hoa (KG82_CRAFT). */
+/* 4. PATTERN (Thêu «Nhớ mẫu thêu»; once also vẽ / cắm hoa / khéo tay): remember which cells were painted. review/mg-craft removed it; the owner kept it
+   (21/11 ~01:05Z "Cái trò đó hay nha, không bỏ nha"): Thêu plays it everywhere (Tài nghệ, contests, Thử tay); the craft stitch board went to Công «Thêu theo nét» (jtd). */
+function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
+ const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
+ const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
+ function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34*(ghost?1:kg82FxPop(press[i],performance.now()));if(!ghost&&press[i])kg82FxRing(g,x,y,c*.4,press[i],performance.now());
+  if(ghost){g.strokeStyle=kg82Col("--good","#2d7a52");g.setLineDash([5,4]);g.lineWidth=2;g.strokeRect(x-r,y-r,r*2,r*2);g.restore();return}
+  if(kg82Spr(g,["theu-peony","theu-butterfly","theu-crane","theu-cloud"][i%4],x,y,r*2.3,r*2.3)){g.restore();return}
+  if(mot==="ink"){/* three bamboo leaves in one brush stroke each, tapered, ink wash */
+   g.lineCap="round";g.strokeStyle="#3a2a1e";g.lineWidth=Math.max(1.5,r*.06);g.beginPath();g.moveTo(x-r*.9,y+r*.95);g.quadraticCurveTo(x-r*.2,y+r*.1,x+r*.05,y-r*.2);g.stroke();
+   [[-.15,1.0,.0],[.55,.9,-.9],[-.85,.85,-2.0]].forEach(([ang,len,rot],j)=>{g.save();g.translate(x+r*.05,y-r*.2);g.rotate(ang+rot*.35);const L=r*1.05*len,w=r*.24;
+    const gr=g.createLinearGradient(0,0,L,0);gr.addColorStop(0,"#1e140e");gr.addColorStop(1,"#5a4636");g.fillStyle=gr;g.globalAlpha=a*(j===2?.7:1);
+    g.beginPath();g.moveTo(0,0);g.quadraticCurveTo(L*.45,-w,L,0);g.quadraticCurveTo(L*.45,w*.55,0,0);g.fill();g.restore()});
+   g.globalAlpha=a;g.fillStyle="#c23b22";g.fillRect(x+r*.62,y+r*.55,r*.26,r*.26)}
+  else if(mot==="flower"){kg82Blossom(g,x,y,r*.95,kg82Col("--peony","#e48aa4"),false);g.strokeStyle="#5fa58c";g.lineWidth=3;g.beginPath();g.moveTo(x,y+r*.5);g.quadraticCurveTo(x+r*.4,y+r,x+r*.1,y+r*1.2);g.stroke()}
+  else{g.strokeStyle="#c23b22";g.lineWidth=r*.16;g.lineCap="round";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x-r*.7+d*r,y-r*.7);g.lineTo(x+r*.7+d*r,y+r*.7);g.stroke()}g.strokeStyle="#c9a03a";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x+r*.7+d*r,y-r*.7);g.lineTo(x-r*.7+d*r,y+r*.7);g.stroke()}}
+  g.restore()}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}pat=kg82Shuf([...Array(n*n).keys()]).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
+ function judge(){phase="judge";const ok=tapped.filter(i=>pat.includes(i)).length;const got=2*ok/pat.length;pts+=got;
+  kg82Pop(pops,W/2,oy+18,ok===pat.length?"Đúng cả!":`Đúng ${ok}/${pat.length}`,ok===pat.length?kg82Col("--good","#2d7a52"):kg82Col("--gold","#8f5f0c"));round++;setTimeout(next,1100)}
+ function draw(now){kg82Bg(g,W,H,env.kind,0,1);
+  /* stitch guide on the painted silk: hairline cells only */
+  g.save();g.strokeStyle="#b8935588";g.lineWidth=1;g.setLineDash([3,4]);for(let i=0;i<n*n;i++){const x=ox+(i%n)*c,y=oy+Math.floor(i/n)*c;g.fillStyle=KG82.ctx==="hoc"?"rgba(255,250,236,.5)":"rgba(255,252,240,.3)";g.fillRect(x+3,y+3,c-6,c-6);g.strokeRect(x+3,y+3,c-6,c-6)}g.restore();
+  if(phase==="show"){const k=(now-t0)/SHOW;const a=k<.1?k*10:k>.85?Math.max(0,(1-k)/.15):1;pat.forEach(i=>motif(i,a))}
+  else{tapped.forEach(i=>motif(i,pat.includes(i)||phase==="play"?1:.35));if(phase==="judge")pat.filter(i=>!tapped.includes(i)).forEach(i=>motif(i,1,true));
+   if(phase==="judge")tapped.filter(i=>!pat.includes(i)).forEach(i=>{g.strokeStyle=kg82Col("--red","#c23b22");g.lineWidth=3;const x=cx(i),y=cy(i),d=c*.18;g.beginPath();g.moveTo(x-d,y-d);g.lineTo(x+d,y+d);g.moveTo(x+d,y-d);g.lineTo(x-d,y+d);g.stroke()})}
+  kg82DrawPops(g,pops,now)}
+ function frame(now){if(stop&&phase!=="judge")return;let left=0;if(phase==="show"&&now-t0>SHOW){phase="play";t0=now}
+  if(phase==="play"){left=LIM-(now-t0);if(left<=0)judge()}
+  env.hud({score:mgLive(env,mgReach(pts,round,R0.length)),round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"nhìn kỹ":phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);const cc=Math.floor((x-ox)/c),rr=Math.floor((y-oy)/c);if(cc<0||rr<0||cc>=n||rr>=n)return;const i=rr*n+cc;if(tapped.includes(i))return;
+  tapped.push(i);press[i]=performance.now();kg82Pluck(tapped.length,pat.includes(i));if(tapped.length>=pat.length)judge()});
+ KG82.peek=()=>{if(phase!=="play")return null;const i=pat.find(k=>!tapped.includes(k));return i==null?null:C.client(cx(i),cy(i))};
+ next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
+
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
@@ -30379,7 +30412,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
  /* hint hook (KIT §13.7 guided round): tap anywhere on the board; soon = the marker reaches the centre within a reaction time */
  KG82.hint=()=>{if(lock||stop)return null;const now=performance.now(),w=.0021+k*.00028,th=((now-t0)*w)%Math.PI,c=C.client(W/2,H*.8);return{x:c.x,y:c.y,soon:(Math.PI-th)/w<BAL.mgTier.tut.lead||th/w<40}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
-const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,steps:kg82Steps,aim:kg82Aim};
+const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd,po){KG82.setup=0;kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
@@ -30703,7 +30736,7 @@ function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
      tho verse (kéo chữ vào câu bát, đúng vần) · doi pair (nối chữ đối) · doden lamp (jlant.js: thắp đèn theo mẫu) ·
-     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu stitch (jcraft_theu) · kim papercut (jcraft_kim) · mua steps ·
+     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern (nhớ mẫu thêu, j82) · kim papercut (jcraft_kim) · mua steps ·
      banh cook (giữ lửa + thứ tự nguyên liệu) · huong blend (thanh trượt pha hương).
    Engines follow the j82 contract: eng(box, env{kind, lv 0–5, hud(o), end(raw0to10)}) -> stop(); KG82.peek() is the test oracle:
      {x,y} tap · {sel} click · {drag:[[x,y],…]} drag path (client px) · {hold:bool, hsel|x,y} keep a pointer down or not.
@@ -31000,23 +31033,24 @@ Object.assign(KG82_KIND,{
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
  huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
+KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
 /* ---------- mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN real mechanic, tracing only for Chép kinh; dev/design/MG_CRAFTS.md) ----------
-   THE ONE PLACE that maps the four craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
-   jcraft_theu / jcraft_kim / jcraft_ve / jcraft_hoa); until then it keeps the engine above. Kind KEYS stay (theu, ve, hoa, kim): every caller (startContest,
+   THE ONE PLACE that maps the craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
+   jcraft_kim / jcraft_ve / jcraft_hoa, and by jtd for td_cong = the stitch board of jcraft_theu; owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game); until then it keeps the engine above. Kind KEYS stay (ve, hoa, kim, td_cong): every caller (startContest,
    playArt, lessons, jexam, jentry, Thử tay, works j83) and old saves keep working. e = engine · t / how = the rules screen (kgReady; text is allowed there,
    never in play, OD 20/11 ~05:10Z) · demo = the KG82_DEMO move picture · mgl = the lesson label (KG82_MGL) when the kind is a lesson art · spr = the sprites preloaded (KG82_SPR; [] while the board draws stand-ins). */
 const KG82_CRAFT={
- theu:{e:"stitch",t:"Thêu lướt sắc",demo:"tap",spr:[],mgl:"Thêu: thêu lướt sắc",
-  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."},
  kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",spr:[],
   how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
  ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
   how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi chạm ✓: giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
  hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
-  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."}};
+  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."},
+ td_cong:{e:"stitch",t:"Thêu theo nét",demo:"tap",spr:[],/* owner 21/11 ~01:05Z: Thêu keeps «Nhớ mẫu thêu»; the stitch board serves the Công lesson (jtd registers it) */
+  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
 /* ================= jmgt: MINIGAME DIFFICULTY TIERS (owner 16/11 07:10Z "lên chơi càng cao thì nó khó hơn", 07:25Z "mức vừa", ONE CORE) =================
@@ -31175,7 +31209,7 @@ window.mgTraceScore=mgTraceScore;window.mgTier=mgTier;window.mgPace=mgPace;windo
    design dev/design/MG_CRAFTS.md; review/mg-craft lead + review/mg-craft-ve + review/mg-craft-hoa) =================
    Engines (same KG82 contract as j82 / j91: eng(box, env{kind, lv = board ease, hud, end(raw 0..10)}) → stop; KG82.peek = the test oracle / the guided round's
    hand; KG82.hint = a timing game's «tap now» point):
-     jcraft_theu.js  theu  «Thêu lướt sắc»   engine "stitch"    (lead)
+     jcraft_theu.js  td_cong «Thêu theo nét» engine "stitch" (lead; owner 21/11 ~01:05Z: Thêu keeps the j82 memory game, the stitch board serves Công, jtd registers it)
      jcraft_kim.js   kim   «Cắt hoa giấy»    engine "papercut"  (lead)
      jcraft_ve.js    ve    «Thủy mặc»        engine "inkwash"   (review/mg-craft-ve)
      jcraft_hoa.js   hoa   «Chọn mùa · cắt cành · nghiêng thế»  engine "ikebana" (review/mg-craft-hoa)
@@ -31209,26 +31243,27 @@ function crLoop(fn){let stop=false,raf=0;const L=()=>{if(stop)return;fn(crNow())
 function crLater(f,ms){return setTimeout(f,Math.max(0,ms/(CRAFT.speed||1)))}
 /* the HUD of a round-based craft board (kit chips). x = the raw float if the rest of the play goes perfectly (mgReach + the open round's reach): the score
    cell shows the ONE grade mgLive(env, x) like every other mini-game (review/mg-score-same, owner bug 20/11 ~06:50Z; dev/test/mg-score-same-scan.py) */
-function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,x),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
+function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,Math.max(0,x-(env.hintCut?env.hintCut():0))),/* hintCut: the hints taken in the Tứ đức wrapper (jtd tdWrap), as its env.end */round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
 /* the pop colour of a judged round (one rule for the family, review/mg-score-same C-AG #29): good work the time part cut shows gold, not green */
 function crCol(q,sp){return q>=.55?(sp<.995?K91C.gold():K91C.good()):q>=.3?K91C.gold():K91C.red()}
 const crStars=q=>q>=.85?"★★★":q>=.55?"★★":q>=.3?"★":"✗";
 /* colour helpers (stand-in drawing) */
 function crMix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
 const crRGB=c=>`rgb(${c.join(",")})`;
-/* a small stand-in spool of silk (theu) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
+/* a small stand-in spool of silk (stitch) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
 function crTmp(g,x,y,w,h){g.save();g.setLineDash([3,3]);g.strokeStyle="rgba(143,95,12,.45)";g.lineWidth=1;g.strokeRect(x,y,w,h);g.restore()}
 window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window.crNow=crNow;
-/* ================= jcraft_theu: Thêu «Thêu lướt sắc» (kind theu, engine "stitch"; MG_CRAFTS.md §1; owner OD 20/11 ~08:15Z: «choose the right thread
+/* ================= jcraft_theu: the stitch board, Công «Thêu theo nét» (kind td_cong, engine "stitch"; MG_CRAFTS.md §1 — built for Thêu, moved to the Công
+   lesson by the owner 21/11 ~01:05Z: Thêu keeps the j82 memory game «Nhớ mẫu thêu»; registered by jtd: crReg("td_cong","stitch",tdWrap(crtStitch)). owner OD 20/11 ~08:15Z: «choose the right thread
    colour and stitch along a lit pattern in rhythm») =================
    Real craft (Su xiu long-and-short shading): a petal is built from bands of ONE hue, dark at the rim to light at the heart; the colour order is the skill,
    the even stitch rhythm is the hand. Board: the hoop with the flower cut into bands, the finished sample in the corner (covered by its cloth after
    lev.peek ms), a row of silk spools (the right shades shuffled + lev.alike decoys half a shade step off). Per band: tap the spool of that band's shade,
    then lev.st stitches: the needle dips on a steady beat (lev.beat ms); tap the hoop as it dips onto the lit dot (±lev.win ms = on-beat 1, ±near·win = 0.6,
    else a loose loop 0 that must be re-stitched). 3 pieces (mai 3 · mẫu đơn 4 · phượng 5 bands, + mgMore with rank).
-   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, "theu", el, lim). No words in play: ★ / ✗ signs only. */
+   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). No words in play: ★ / ✗ signs only. */
 const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
-function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K="theu",L=n=>crLev(env,K,n);
+function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K=env.kind||"td_cong",L=n=>crLev(env,K,n);
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
  /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
  const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
@@ -31256,7 +31291,7 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
   else{/* the silk cloth over the sample (memory at high rank) */g.save();g.beginPath();g.arc(x,y,R*1.1,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.clip();g.globalAlpha=.3;g.strokeStyle="#6e4d0e";g.lineWidth=1;
    for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(x-R*1.1,y+k*R*.28);g.quadraticCurveTo(x,y+k*R*.28+R*.12,x+R*1.1,y+k*R*.28);g.stroke()}g.restore()}
   crTmp(g,x-R*1.12,y-R*1.12,R*2.24,R*2.24);return hid}
- function draw(now){kg82Bg(g,W,H,"theu",.1,.6);if(!P)return;const x=hx(now),y=HY;
+ function draw(now){kg82Bg(g,W,H,K,.1,.6);if(!P)return;const x=hx(now),y=HY;
   /* hoop: stand-in wooden ring + silk */
   crArt(g,"theu-hoop",x,y,R0*2.3,R0*2.3,{},()=>{g.save();g.beginPath();g.arc(x,y,R0*1.08,0,Math.PI*2);g.fillStyle="#fffaf0";g.fill();g.lineWidth=R0*.07;g.strokeStyle="#a8743a";g.stroke();g.restore();crTmp(g,x-R0*1.12,y-R0*1.12,R0*2.24,R0*2.24)});
   /* the bands: stitched ones in the chosen silk, the band being stitched half filled, the next one lit, the rest a faint outline */
@@ -31302,7 +31337,7 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
  KG82.hint=()=>{if(phase!=="play"||!P||P.ph!=="stitch"||P.k>=ST)return null;const now=crNow();let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;
   const d=dots(P.band,hx(now),HY)[P.k];if(!d)return null;const c=C.client(d[0],d[1]);return{x:c.x,y:c.y,soon:dipAt(di)-now<BAL.mgTier.tut.lead}};
  piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;if(stop)stop()}}
-crReg("theu","stitch",crtStitch);
+window.crtStitch=crtStitch;/* registered by jtd (loads later): crReg("td_cong","stitch",tdWrap(crtStitch,"stitch")) */
 /* ================= jcraft_kim: Khéo tay «Cắt hoa giấy» (kind kim, engine "papercut"; MG_CRAFTS.md §4; Khất xảo paper-cut, UNESCO ICH 2009) =================
    Real craft: red paper folded 2, 4 or 8 times and snipped; unfolded it becomes a symmetric window-flower. The skill is seeing, while folded, what each
    snip becomes once opened. Board: the finished window-flower (sample) on the left — covered by its cloth after lev.peek ms; on the right the same paper
@@ -32475,7 +32510,7 @@ bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){
    frame (j82 kg82Open / kitGameFrame, KIT §13): the same engine contract as j82 / j91 — eng(box, env) -> stop(), env.hud, env.end(raw 0..10), KG82.peek.
    Own file (after j91 + j85, before j83): nothing in j82 / j91 is edited, so review/mg-easy cannot conflict.
    | course            | game                | how (every rule is on screen before and during play)                                            |
-   | Công · Nữ công    | Thêu theo nét       | match the sample thread colour, then drag the needle along the dotted pattern (glowing dot = next stitch) |
+   | Công · Nữ công    | Thêu theo nét       | (owner 21/11) the craft stitch board: tap the spool of the lit band's shade, then tap the hoop as the needle dips on the beat |
    | Dung · Dung nghi  | Đi đứng giữ bát     | hold LEFT / RIGHT half of the board to keep the bowl upright; each floor mark shows which way the next step leans it |
    | Ngôn · Lời nói    | Nói đúng lúc        | (mg-balance-2, no words) wait for the speaker (and an upset one to calm), then HOLD «Thưa» and let go in the voice band of that listener |
    | Hạnh · Đức hạnh   | Làm phúc            | share the portions among the waiting people (+ / −) so that everyone gets enough of what they need  |
@@ -32485,14 +32520,14 @@ bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){
 const TD_BG={td_cong:"theu-bg-hoc",td_dung:"mua-bg-hoc",td_ngon:"tho-bg-hoc",td_hanh:"ve-bg-hoc"};
 const TD_OF={cong:"td_cong",dung:"td_dung",ngon:"td_ngon",hanh:"td_hanh"};
 Object.assign(KG82_KIND,{
- td_cong:{e:"tdthread",n:"Công",t:"Thêu theo nét",how:"Chạm sợi chỉ cùng màu chỉ mẫu, rồi kéo kim theo nét chấm. Ba mảnh thêu."},
+ td_cong:{e:"stitch",n:"Công",t:"Thêu theo nét",how:""},/* engine, rules text: j91 KG82_CRAFT.td_cong (crReg below) */
  td_dung:{e:"tdwalk",n:"Dung",t:"Đi đứng giữ bát",how:"Dấu trên sàn chỉ bên bát sắp nghiêng. Giữ nửa khung bên kia để đỡ bát thẳng lại."},
  td_ngon:{e:"tdtalk",n:"Ngôn",t:"Nói đúng lúc, vừa tiếng",how:"Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa; buông khi tiếng nói vào dải xanh."},
  td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓. Ba lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the picture of the move is drawn by NWB_DEMO (jnwb) */
- cong:[["1","Chạm sợi chỉ cùng màu chỉ mẫu."],["2","Kéo kim theo nét chấm, từ chấm xanh tới chấm đỏ."]],
+ cong:[["1","Chạm cuộn chỉ cùng sắc với dải sáng trong mẫu."],["2","Chạm khung đúng lúc kim chúc xuống chấm sáng."]],
  dung:[["1","Dấu trên sàn chỉ bên bát sắp nghiêng."],["2","Giữ nửa khung bên kia để đỡ bát thẳng lại."]],
  ngon:[["1","Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa."],["2","Buông khi tiếng nói vào dải xanh."]],
  hanh:[["1","Chạm + hoặc − để chia phần cho đủ số chấm."],["2","Xong thì chạm ✓, trước khi hết giờ."]]};
@@ -32500,49 +32535,9 @@ const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát gi�
 function tdEase(lv){return cl(Math.round(lv||0),0,5)}
 
 /* ---------- 1. Công: Thêu theo nét ---------- */
-const TD_THREAD=[["đỏ son","#c23b22"],["lam ngọc","#2f6aa5"],["vàng nghệ","#e0a526"],["lục","#2f8a5a"],["tím","#7a4a9a"]];
-const TD_PATH=[t=>[.1+.8*t,.5+.2*Math.sin(Math.PI*4*t)],t=>{const a=Math.PI*(-.85+1.7*t);return[.5+.34*Math.sin(a)*1.0,.62-.34*Math.cos(a)]},t=>[.5+.27*Math.sin(Math.PI*2*t),.12+.76*t]];
-/* review/mg-snap (owner 17/11 07:10Z, OD:L1571): the stitch follows HER finger. Before, the thread was drawn along the dotted path and the needle
-   jumped to the next path dot whenever the finger came near it, so a scribble looked and scored like a clean line. Now every point she draws is
-   kept and drawn: inside the tolerance in the thread colour, outside it as a red stitch; a piece is scored by the ONE trace score mgTraceScore
-   (jmgt, the same as Đồ nét bút / Chép kinh / May áo): path covered by her line × her line lying on the path. Tolerance = BAL.mgTier.lev.td_cong.tol
-   (share of the board width, by the board ease = rank / skill, mgLev; calibrated with dev/measure/mg-bots.js: skilled ≈ 25 % Xuất sắc at the matching level). The bright dot still shows the first part of the path not yet covered. */
-function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const N=44,TOL=W*mgLev(env,"td_cong","tol"),LIM=26000;
- const order=kg82Shuf([0,1,2]);let piece=0,pts=0,phase="pick",stop=false,raf=0,t0=0,i=0,down=false,px=0,py=0,tgt=0,choice=[],P=[],D=[],cov=[],ink=null,inks=[],colOk=false;const pops=[];
- const pc=kg82Col("--good","#2d7a52"),rc=kg82Col("--red","#c23b22");const lv=tdEase(env.lv);
- function samples(k){return Array.from({length:N},(_,j)=>{const [x,y]=TD_PATH[order[k]](j/(N-1));return[x*W,(.1+.8*y)*H]})}
- /* the path densified to ~4 px for scoring (the 44 dots stay the picture) */
- function dense(Q){const R=[Q[0]];for(let j=1;j<Q.length;j++){const n=Math.max(1,Math.ceil(Math.hypot(Q[j][0]-Q[j-1][0],Q[j][1]-Q[j-1][1])/4));for(let s=1;s<=n;s++)R.push([Q[j-1][0]+(Q[j][0]-Q[j-1][0])*s/n,Q[j-1][1]+(Q[j][1]-Q[j-1][1])*s/n])}return R}
- const near=(x,y)=>{let m=1e9;for(const q of D){const d=(q[0]-x)**2+(q[1]-y)**2;if(d<m)m=d}return Math.sqrt(m)};
- function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end((pts)),350)}P=samples(piece);D=dense(P);cov=P.map(()=>false);i=0;ink=null;inks=[];down=false;colOk=false;phase="pick";
-  const ids=kg82Shuf([0,1,2,3,4]).slice(0,lv>=3?2:3);tgt=ids[Math.floor(Math.random()*ids.length)];choice=kg82Shuf(ids)}
- function endPiece(){if(phase!=="stitch")return;phase="judge";if(ink){inks.push(ink);ink=null}down=false;const U=[].concat(...inks);const q=mgTraceScore(D,U,TOL);const got=((colOk?.2:0)+.8*q)*10/3;pts+=got;
-  kg82Pop(pops,W/2,H*.5,q>=.85?NWB.POP.s3:q>=.6?NWB.POP.s2:q>=.3?NWB.POP.s1:NWB.POP.bad,q>=.6?pc:rc);piece++;setTimeout(begin,1100)}
- /* her point at (x,y): marks the path dots it covers; i = the first dot not yet covered (the bright dot) */
- function stitch(x,y){const l=ink[ink.length-1];if(l&&Math.hypot(x-l[0],y-l[1])<2)return;ink.push([x,y,near(x,y)<=TOL]);for(let j=0;j<N;j++)if(!cov[j]&&Math.hypot(P[j][0]-x,P[j][1]-y)<TOL)cov[j]=true;while(i<N&&cov[i])i++}
- const sw=()=>{const r=Math.min(W*.085,34),n=choice.length,gap=(W-n*2*r)/(n+1);return choice.map((id,k)=>({id,x:gap*(k+1)+r*(2*k+1),y:H*.72,r}))};
- function draw(now){kg82Bg(g,W,H,"td_cong",.1,.6);g.textAlign="center";g.textBaseline="alphabetic";
-  if(phase==="pick"){g.beginPath();g.arc(W/2,H*.34,Math.min(W*.1,40),0,Math.PI*2);g.fillStyle=TD_THREAD[tgt][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke();
-   g.fillStyle="#3a1a0c";g.font=`700 22px ${kg82Col("--body","sans-serif")}`;g.fillText("▼",W/2,H*.58);sw().forEach(s=>{g.beginPath();g.arc(s.x,s.y,s.r,0,Math.PI*2);g.fillStyle=TD_THREAD[s.id][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke()})}
-  else{g.save();g.lineCap="round";g.lineJoin="round";g.setLineDash([2,9]);g.lineWidth=4;g.strokeStyle="rgba(58,26,12,.75)";g.beginPath();P.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();g.restore();
-   /* her own line: on the path in the thread colour, off the path a thin dashed red line (an off stitch shows and costs; dashed so it reads apart from a red thread) */
-   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";for(let j=1;j<U.length;j++){const ok=U[j][2]&&U[j-1][2];g.lineWidth=ok?5.5:2.5;g.strokeStyle=ok?useCol:rc;g.globalAlpha=ok?1:.9;g.setLineDash(ok?[]:[5,4]);g.beginPath();g.moveTo(U[j-1][0],U[j-1][1]);g.lineTo(U[j][0],U[j][1]);g.stroke()}g.restore()});
-   if(phase==="stitch"&&i<N){const nx=P[Math.min(N-1,i)];g.save();g.globalAlpha=.55+.4*Math.sin(now/180);g.fillStyle="#ffe08a";g.shadowColor="#ffe08a";g.shadowBlur=16;g.beginPath();g.arc(nx[0],nx[1],8,0,Math.PI*2);g.fill();g.restore()}
-   g.fillStyle="#2d7a52";g.beginPath();g.arc(P[0][0],P[0][1],9,0,Math.PI*2);g.fill();g.fillStyle="#c23b22";g.beginPath();g.arc(P[N-1][0],P[N-1][1],9,0,Math.PI*2);g.fill();
-   g.fillStyle="#fff6dc";g.font=`700 11px ${kg82Col("--body","sans-serif")}`;g.textBaseline="middle";g.fillText("▶",P[0][0]+1,P[0][1]+.5);g.fillText("■",P[N-1][0],P[N-1][1]+.5);g.textBaseline="alphabetic";
-   const tip=ink&&ink.length?ink[ink.length-1]:null;if(tip)kg82Spr(g,"kim-needle",tip[0],tip[1],W*.2,null,{ax:.08,ay:.92})}
-  kg82DrawPops(g,pops,now)}
- let useCol="#c23b22";
- function frame(now){if(stop&&phase!=="judge")return;if(phase==="stitch"){const left=LIM-(now-t0);if(left<=0||(i>=N&&!down))endPiece()}
-  env.hud({score:mgReach(pts,piece,3),round:`Hồi ${Math.min(piece+1,3)}/3`,time:phase==="stitch"?`${Math.max(0,Math.ceil((LIM-(now-t0))/1000))} giây`:phase==="pick"?"chọn chỉ":"–"});draw(now);raf=requestAnimationFrame(frame)}
- function move(e){if(phase!=="stitch"||!down||!ink)return;[px,py]=C.at(e);stitch(px,py)}
- C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x,y]=C.at(e);if(phase==="pick"){const s=sw().find(s=>Math.hypot(s.x-x,s.y-y)<s.r*1.4);if(!s)return;colOk=s.id===tgt;useCol=TD_THREAD[s.id][1];kg82Pluck(colOk?3:0,colOk);kg82Pop(pops,W/2,H*.5,colOk?NWB.POP.ok:NWB.POP.bad,colOk?pc:rc);phase="stitch";t0=performance.now();return}
-  if(phase!=="stitch")return;px=x;py=y;down=true;ink=[];stitch(x,y);try{C.cv.setPointerCapture(e.pointerId)}catch(_){}});
- C.cv.addEventListener("pointermove",move);const up=()=>{down=false;if(ink){if(ink.length)inks.push(ink);ink=null}};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
- const act=document.createElement("div");act.className="kg82act";act.innerHTML=NWB.btn("tdthx","check",{label:"Xong mảnh này"});box.appendChild(act);act.querySelector("button").onclick=()=>{if(phase==="stitch")endPiece()};
- KG82.peek=()=>{if(phase==="pick"){const s=sw().find(s=>s.id===tgt);return s?C.client(s.x,s.y):null}if(phase!=="stitch"||down||i>=N)return null;return{drag:P.slice(Math.max(0,i)).filter((_,j,a)=>j%2===0||j===a.length-1).map(([x,y])=>{const c=C.client(x,y);return[c.x,c.y]})}};
- KG82.dbg=()=>({phase,i,down,TOL,p0:P[0],piece,ink:inks.reduce((a,u)=>a+u.length,0)});
- begin();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
+/* owner 21/11 ~01:05Z ("Ủa đâu cái trò mà nhớ ô hoa … Cái trò đó hay nha, không bỏ nha"): Thêu keeps the j82 memory game «Nhớ mẫu thêu»; the craft
+   stitch board of review/mg-craft (jcraft_theu crtStitch: shade order + stitch on the beat) serves Công «Thêu theo nét» instead of the old dotted-line
+   trace (kgTdThread, review/mg-snap; removed: no caller left). Levers BAL.mgTier.lev.td_cong (board ease from the tier, harder with rank: law 5). */
 
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
 function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
@@ -32674,8 +32669,8 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
  render();return()=>{stop=true;clearInterval(tm)}}
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
 /* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
-const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
-const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:`Người ghi cần ${BAL.td.exNeed} phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong.`};
+const TD_HINT={stitch:"Viền vàng chỉ cuộn chỉ đúng sắc, hoặc chỗ chạm khung khi kim chúc xuống.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
+const TD_EX={cong:"Dải sáng ở mép cánh hoa là sắc đậm nhất trong mẫu: chạm cuộn chỉ đậm ấy, rồi chạm khung mỗi lần kim chúc xuống chấm sáng.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:`Người ghi cần ${BAL.td.exNeed} phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong.`};
 function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
 function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
 function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
@@ -32691,8 +32686,9 @@ function tdWrap(eng,ek){return function(box,env){let hints=0,last=performance.no
  env.end=raw=>end0(Math.max(0,raw-Math.min(2,hints)));/* review/mg-balance-2-r1: keep the float (kg82Play grades it with mgGrade); rounding here made the 4 Tứ đức grades jump 9→10 */
  /* review/mg-score-same: the four Tứ đức engines give the board a FLOAT (the raw reachable); the mark in hand = the ONE grade of it minus the hints taken so far, as env.end above */
  const hud0=env.hud;env.hud=o=>{if(o&&typeof o.score==="number")o=Object.assign({},o,{score:mgLive(env,Math.max(0,o.score-Math.min(2,hints)))});hud0(o)};
- const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
-Object.assign(KG82_ENG,{tdthread:tdWrap(kgTdThread,"tdthread"),tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
+ env.hintCut=()=>Math.min(2,hints);/* crHud (jcraft, the stitch board) takes the hints off before it grades */const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
+Object.assign(KG82_ENG,{tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
+crReg("td_cong","stitch",tdWrap(crtStitch,"stitch"));/* the stitch board inside the Tứ đức wrapper (hint button + idle hints, like Dung / Ngôn / Hạnh) */
 
 /* ---------- layout only (colours and chrome come from the kit) ---------- */
 (function(){const st=document.createElement("style");st.id="td-css";st.textContent=`
@@ -32712,7 +32708,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const kind=TD_OF[k],K=KG82_KIND[kind];if(window.__bot||typeof kg82Open!=="function"){tdFinish(k,mode,5,true);return}
  TDS.busy=true;KG82.ctx="hoc";kg82Preload(kind);mgSet(kind,{occ:"hoc",lv:l});/* mg-balance: board ease from the tier (jmgt) */
- const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="tdthread"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
+ const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="stitch"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
@@ -33634,7 +33630,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tc:{fast:[.3,.45],keep:[.3,.3]},xa:{fast:[.25,.4],keep:[.4,.4]},thq:{fast:[.5,.65],keep:[.5,.5]},
   kim:{fast:[.25,.4],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.4,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220],darkCap:[.6,.6]},
-  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
+  td_hanh:{lim:[8000,20000],short:[2,0]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  /* review/cal-p2b (owner OD 20/11 ~07:35Z: fix the broken games only) — three board faults, BAL only:
@@ -33676,7 +33672,8 @@ BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timin
 /* mg-craft (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm": each craft its OWN real mechanic; design dev/design/MG_CRAFTS.md):
    the board levers of the four craft boards, each [at ease 0 (hard), at ease 5 (easy)], read through mgLev(env, kind, name) — ONE CORE: no board number is typed in
    the engines. Each kind's builder adds knobs ONLY inside its own block. Kind keys, kG / kAdj, cal.k and the hand band are unchanged (MAIN ROOT-75 order).
-   theu «Thêu lướt sắc» (jcraft_theu): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · st = stitches per band · alike = decoy spools one
+   td_cong «Thêu theo nét» (jcraft_theu stitch board; built as Thêu «Thêu lướt sắc», moved to the Công lesson by the owner 21/11 ~01:05Z — Thêu keeps the j82
+     memory game; was td_cong tol = the old dotted-line trace tolerance): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · st = stitches per band · alike = decoy spools one
      shade step off the right one · sway = hoop drift as a share of the hoop · peek = ms the finished sample stays before its cloth covers it (≥ round time = stays) ·
      wC / wS = weight of the right colour / the stitch rhythm in a piece · lim = ms per piece (the time part mgPace) · fast / keep = mgPace of that time.
    kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · holes = cuts of a sheet before mgMore · size = a cutter's size as a share of the wedge radius · place = snap tolerance as a share of
@@ -33687,7 +33684,7 @@ BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timin
    hoa 8.4 / 7.5 / 7.2 (old rings 8.5 / 7.8 / 7.7) after hoa ease-0 cutTol .12 · angTol 16 · sway .01 · limStem 10000 (was 4.4 / 4.7 at Vừa / Khó).
    ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
 Object.assign(BAL.mgTier.lev,{
- theu:{beat:[520,900],win:[45,75],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[30000,30000],fast:[.8,.8],keep:[.6,.6]},
+ td_cong:{beat:[440,850],win:[20,65],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[18000,30000],fast:[.8,.8],keep:[.6,.6]},/* td_cong tune 21/11 (Công lesson kG 1.3; mg-bots skilled graded Dễ/Vừa/Khó 8.8 / 8.1 / 5.4 vs the old dotted-line trace 9.3 / 7.9 / 5.5): beat 520→440 | 900→850 · win 45→20 | 75→65 · lim ease-0 30000→18000 */
  ve:{place:[.012,.14],tones:[5,3],ramp:[220,2600],dry:[150,30000],peek:[3000,40000],bleed:[.07,.03],flick:[420,420],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},/* mg-craft-ve «Thủy mặc» [ease 0, ease 5]: place = hit radius, share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = ms before the loaded brush pales one tone · peek = ms the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share · flick = ms a person takes to flick (bot oracle) · holdMin = ms a press counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = score parts · lim/limBase = ms per motif / fixed · fast/keep = mgPace */
  hoa:{ghost:[0,1],cutTol:[.12,.15],angTol:[16,20],alike:[3,0],sway:[.01,0],limStem:[10000,17000]}});
 Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
@@ -86074,7 +86071,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f1d0c1addadf";window.CTM_BUILD=BUILD;
+const BUILD="79927d3c14db";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
