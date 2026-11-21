@@ -3,13 +3,13 @@
      death (die) · exile (Phế làm thứ dân) · leave (Xuất cung) · throne (Hoàng thái hậu) · grand (Đại kết cục, stay ending; Tạ ơn) · grand-exit (Đại kết cục that closes the life)
      · fail (Kết cục of the Hồi kết nhánh; Tiếp tục) · fate (Bảng Thiên mệnh; Đóng) · rare (a rare ending's result card, real r97Take) · rare-exit (Nữ vương Cao Ly leaves the palace)
    Checks: #modal has kes + kes-<tone> + kes-t-<type>; the background layer covers the whole screen (top bar / bottom bar hidden: the point on the HUD hits #modal);
-   the frame is inside the screen, ≥ 80 % of the width; overlay pieces (served as stand-in pictures by route, the real art comes from Foreman C) sit on the frame:
+   the frame is inside the screen at the kit XL width (--kszw, no ending-only size) and every ending of one device shows the same kit figure slot; overlay pieces (served as stand-in pictures by route, the real art comes from Foreman C) sit on the frame:
    flower centred on the top edge, drapes on the left / right edges; without the art: no piece, no error. The button acts (new life / closes) and the next dialog is NOT an ending screen.
    Old save: a save written WITHOUT S.kesT and with a pending Hồi kết nhánh result (pid geR) reloads into the full-screen Đại kết cục. No page errors, no horizontal overflow.
    usage: node dev/test/ending-screens.js [outdir|-] [url] [WxH@dpr,…] [--noart]       (shots go OUTSIDE the repo) */
 const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
 const A=process.argv.slice(2).filter(x=>!x.startsWith('--'));const NOART=process.argv.includes('--noart');
-const OUT=A[0]&&A[0]!=='-'?A[0]:null;const URL=A[1]&&A[1]!=='-'?A[1]:'file://'+path.resolve(__dirname,'../index.html');
+const FIGS=[];const OUT=A[0]&&A[0]!=='-'?A[0]:null;const URL=A[1]&&A[1]!=='-'?A[1]:'file://'+path.resolve(__dirname,'../index.html');
 const SIZES=(A[2]||'755x1000@1,1180x820@1').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return {w:+m[1],h:+m[2],d:+m[3]}});
 if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,x===undefined?'':JSON.stringify(x).slice(0,500))};
@@ -58,7 +58,8 @@ const CASES=[
    await p.waitForTimeout(1400);await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(2200);await p.evaluate(()=>{try{kmReset()}catch(e){}});await p.waitForTimeout(300);
    const R=await p.evaluate(()=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg'),bg=M.querySelector(':scope>.kes-bg'),ov=d&&d.querySelector('.kes-ov');const r=x=>{if(!x)return null;const b=x.getBoundingClientRect();return {l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height}};
      const hud=document.querySelector('header.hud,#hud');const hb=hud&&hud.getBoundingClientRect();const hit=hb?document.elementFromPoint(Math.max(2,hb.left+8),Math.max(2,hb.top+8)):null;
-     return {cls:M.className,hid:M.hidden,err:window.__kesErr||'',d:r(d),bg:r(bg),fl:r(ov&&ov.querySelector('.kes-fl')),dl:r(ov&&ov.querySelector('.kes-drl')),dr:r(ov&&ov.querySelector('.kes-drr')),miss:!!(ov&&ov.classList.contains('kes-miss')),
+     const fg=d&&(d.querySelector('.kszfig .kszfs')||d.querySelector('.kszfig'));const kw=d?parseFloat(getComputedStyle(d).getPropertyValue('--kszw'))||0:0;
+     return {ksz:d&&d.dataset.ksz||'',live:!!(d&&d.classList.contains('kszlive')),kw,fig:r(fg),cls:M.className,hid:M.hidden,err:window.__kesErr||'',d:r(d),bg:r(bg),fl:r(ov&&ov.querySelector('.kes-fl')),dl:r(ov&&ov.querySelector('.kes-drl')),dr:r(ov&&ov.querySelector('.kes-drr')),miss:!!(ov&&ov.classList.contains('kes-miss')),
       hudHidden:!hit||!!hit.closest('#modal'),title:(document.getElementById('mt')||{}).textContent||(M.querySelector('.kptitle')||{}).textContent||'',ov:document.documentElement.scrollWidth>innerWidth+1,vw:innerWidth,vh:innerHeight,
       btns:[...M.querySelectorAll('button')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,30))}});
    chk(`${N}: opened without error`,!R.err&&!R.hid,R.err);
@@ -66,7 +67,10 @@ const CASES=[
    chk(`${N}: full-screen ending screen kes-t-${C.type} (${C.tone})`,new RegExp(`\\bkes\\b.*\\bkes-${C.tone}\\b.*\\bkes-t-${C.type}\\b`).test(R.cls),R.cls);
    chk(`${N}: background covers the whole screen`,R.bg&&R.bg.l<=0&&R.bg.t<=0&&R.bg.r>=R.vw-1&&R.bg.b>=R.vh-1,R.bg);
    chk(`${N}: top bar hidden under the ending screen`,R.hudHidden);
-   chk(`${N}: frame inside the screen, ≥ 80 % of its width`,R.d&&R.d.l>=0&&R.d.r<=R.vw&&R.d.t>=0&&R.d.b<=R.vh+1&&R.d.w>=.8*R.vw,R.d);
+   chk(`${N}: frame inside the screen`,R.d&&R.d.l>=0&&R.d.r<=R.vw&&R.d.t>=0&&R.d.b<=R.vh+1,R.d);
+   /* ending-screens-land (KIT §91.4b canon overwrite): the frame is the KIT dialog frame at its own size — no ending-only width/height — so the left figure is the kit XL figure slot */
+   if(R.live)chk(`${N}: kit frame ${R.ksz} at the kit width --kszw (${R.kw}px), no ending-only size`,R.ksz==='XL'&&Math.abs(R.d.w-Math.min(R.kw,R.vw-16))<=2,{ksz:R.ksz,kw:R.kw,d:R.d});
+   FIGS.push([N,R.ksz,R.live,R.fig&&Math.round(R.fig.w)+'x'+Math.round(R.fig.h),R.fig&&Math.round(R.fig.t-R.d.t),R.fig&&Math.round(R.fig.l-R.d.l),Math.round(R.d.w)+'x'+Math.round(R.d.h)]);
    if(!NOART){const cx=R.d.l+R.d.w/2;
     chk(`${N}: flower centred on the frame's top edge`,R.fl&&Math.abs(R.fl.l+R.fl.w/2-cx)<3&&R.fl.t<R.d.t&&R.fl.b>R.d.t&&R.fl.t>=-1,{fl:R.fl,d:R.d});
     chk(`${N}: drapes hang on the left / right edges`,R.dl&&R.dr&&R.dl.l<R.d.l&&R.dl.r>R.d.l&&R.dr.r>R.d.r&&R.dr.l<R.d.r&&R.dl.h>R.d.h*.6,{dl:R.dl,dr:R.dr,d:R.d});}
@@ -85,4 +89,8 @@ const CASES=[
    else chk(`${N}: «${want||'close'}» closes; the next dialog is not an ending screen`,S2.hid||(!/\bkes\b/.test(S2.cls)&&!S2.bg),S2);
    chk(`${N}: no page errors`,!errs.length,errs.slice(0,4));
    await ctx.close()}}
+ /* law 11 family: every ending of one device in the same kit frame size = the same left figure slot (size + place in the frame) */
+ const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1];(G[k]=G[k]||[]).push(f)});
+ for(const k in G){const L=G[k],r=L[0];chk(`${k}: every ending shows the same kit figure slot (${L.length} endings, ${r[3]} @${r[4]},${r[5]})`,L.every(f=>f[3]===r[3]&&Math.abs(f[4]-r[4])<=2&&Math.abs(f[5]-r[5])<=2),L)}
+ console.log('figure table [case, ksz, kit live frame, figure, fig top in frame, fig left in frame, frame]');FIGS.forEach(f=>console.log(JSON.stringify(f)));
  await b.close();const nb=ok.filter(x=>!x[1]).length;console.log(`ending-screens: ${ok.length-nb}/${ok.length} pass${NOART?' (no art)':''}`);process.exit(nb?1:0)})();

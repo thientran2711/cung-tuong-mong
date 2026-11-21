@@ -100,8 +100,9 @@ const css=`
 .modal.kes-fest>.kes-bg.kes-bgfb>.kes-bgi{filter:blur(3px) brightness(.7) saturate(1.05)}
 .modal.kes>.kes-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(10,6,4,.5) 100%)}
 /* beats the kit size system's !important frame rules (html body #modal .dlg.kszlive.kszlive, #modal:not(.pcm) .dlg.kpanel): the ending frame is ONE size */
-html body #modal.modal.kes>.dlg.dlg.dlg.dlg{position:relative;z-index:1;box-sizing:border-box;width:min(calc(100% - 2*clamp(22px,5.5%,64px)),1180px)!important;max-width:none!important;
- height:auto!important;min-height:0!important;max-height:calc(100% - var(--kes-top) - var(--kes-bot))!important;min-width:0!important;margin:calc(var(--kes-top) - var(--kes-bot)) 0 0!important;overflow:visible!important;
+/* the frame = the kit dialog at the kit's own XL size (width --kszw, height = content up to the kit limit, KIT §8.4 / §6.2f): NO ending-only size,
+   so the left figure is the kit XL figure slot of every other XL dialog (dialog-fixed (f)); only the ring + a top offset for the flower room are added */
+html body #modal.modal.kes>.dlg{position:relative;z-index:1;margin:calc(var(--kes-top) - var(--kes-bot)) 0 0!important;overflow:visible!important;
  box-shadow:0 0 0 2px var(--kes-ring),0 0 0 5px var(--kes-ring2),0 0 0 7px var(--kes-ring),0 18px 48px rgba(0,0,0,.55)!important}
 .modal.kes>.dlg>.kes-ov{position:absolute;inset:0;pointer-events:none;z-index:6}
 .kes-ov>.kes-fl{position:absolute;left:50%;top:0;width:clamp(130px,26%,250px);height:auto;transform:translate(-50%,-64%);filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
