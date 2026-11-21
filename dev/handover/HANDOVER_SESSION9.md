@@ -1976,3 +1976,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (10:59Z) 89: LANDED self-word 31fcfe30 (E, + story-voice); FAIL kit-mark-fix db138921 (jk4.js) → keeper #2 re-merge → rv MSxp quick re-check. Chain landq18 from pm-c.
 - (11:03Z) rv MSxp PASS kit-focus r4 → LAND READY 4c1105d8 (review/kit-focus-rv4) REPLACES r3 in 89 chain; duodo-focus #2 told.
 - (11:09Z) 89: LANDED pm-c 75ad237d (E); FAIL bang-words cba883e0 (jrd_bd2.js) → ORDER E re-merge. Chain landq19 from home-chapters.
+- (11:10Z) 89: FAIL home-chapters 5acae7c5 (assets.json) → ORDER E re-merge (priority, GAP ROAD #2). Chain landq20 from ge-phutang.
