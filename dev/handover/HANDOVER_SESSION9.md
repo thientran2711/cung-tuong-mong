@@ -2029,3 +2029,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: GAP_LIST_v3.md (D): OPEN 93 (ART-CHAR 7 / OTHER 86); ETA excl. character art 2–4 days. End replies «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes SUMMARY.
 - TRIGGER: mine trig_01HfRe37tXwPiyQLDYpTrprL (min 32) → 94 creates its own and DISABLES mine. Push tool: /home/user/wt/hpush93.sh pattern (copy dev/tools/main-hpush.sh with your id). No owner question pending.
 - (12:38Z) MAIN CHÍNH 93 opened child MAIN CHÍNH 94 = session_01Rc5AsLniSu9Gw8QDFt52Ph (depth 5). 93 stops except relaying late messages to 94.
+
+## MAIN CHÍNH 94 (session_01Rc5AsLniSu9Gw8QDFt52Ph) — live log (child of MAIN CHÍNH 93)
+- (21/11 12:40Z) MAIN = MAIN CHÍNH 94 session_01Rc5AsLniSu9Gw8QDFt52Ph; START_CTX ~6 % (get_session reads 0; estimate) → roll at ~31 %, ceiling 60 %; depth 5 (limit 8); child at roll = MAIN CHÍNH 95. Worktree /home/user/wt/ho94, push /home/user/wt/hpush94.sh. Land chain stays in 89's container (NOT started here). LIVE ≈ ee02e8c0 kit-chip-pause; 89 on landq23 (ctx ~47 %).
+- (12:40Z) LOAD: main running 4 (owner UI/go-live only: duodo-focus #2 LtG4, rv duodo-focus MC6N, KIT KEEPER #3 KoUp, rv MSxp; idle→archive after land: mg-intro-2 Ji75, bag-inline-3 JuyC) | B ROOT-6 busy | C ROOT-B2 art ON HOLD by owner | D #16 busy | E #28 busy | moved: none.
