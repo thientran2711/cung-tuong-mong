@@ -157,3 +157,41 @@ Then «SẴN SÀNG KIỂM dresscode-fix-r4 <sha>» + STATUS to E #25. Target ~09
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
+
+## r5 (E30c) — F1 one loan rule · FOREMAN E #25→#26 · 21/11 ~08:25Z · branch review/dresscode-fix-r4 8d12e509ffa0a74a67f623f2b8462742fbb4fe8b
+PRIORITY #1 CHECK ('dresscode|dcBorrow|tsB|Hội phối đồ|loan'): review/dresscode-fix-r3 aa3c6854 (E30r3 FAIL F1 only) | main jts.js:381-383 (e.tsB + tsDressReturn), jevb.js borrowDress (names her piece, nothing moves) | claims E30b rolled → E30c. Reused: jdc dcBorrow / loan book dcLent / dcGiveBack / dcLedger / co-op dcout-dcin, jil ilUid/ilGone, jlost lostReturn.
+Base: review/dresscode-fix-r3 aa3c6854 + LIVE origin/main 90da39e3 (66e9c26b: only assemble.py (main's list + jdc0 + jdc) and index.html/sw.js conflicted, rebuilt).
+### What (one loan rule, law 6c / 11 / 14 / 1)
+| # | place | before | after |
+|---|---|---|---|
+| 1 | jts Hội phối đồ «Mượn … để dự hội phối đồ» | own mark e.tsB + own return tsDressReturn; no book; co-op guest spliced HER copy of the NPC (host never knew: 2 copies in the room) | dcBorrow(S,v,e,{due: the contest tuần (tsBorDue), why:"ts", chest:1, aff:false}) → loan mark e.bor, lender's book, ilUid, guest «dcout» (dur carried so the host's NPC book keeps the contest's length); only a dcFree piece; not from the co-op player; off where dcLend() is off (thin room); aff gate now BAL.cv.tsBorrow.aff (was a literal 25) |
+| 2 | jts tsDressReturn (contest end, also «Cáo bệnh» / away) | splice + push to RV(tsB) / ilGone | every e.bor.why "ts" piece → dcGiveBack (book cleared, co-op «dcin» rb, ledger when lender gone); safety net = the book: due passed → dcReturn |
+| 3 | old saves holding e.tsB | — | dcMigTs (deser + dcTurn + tsDressReturn): → e.bor {from id:tsB, to her, due = pending contest tuần or past, why ts} + lender's book; on the co-op guest her old copy is the 2nd one (host's NPC still holds it) → dropped |
+| 4 | j68g/jevb «Cho mượn» visit (borrowDress vi 0-2: robe / đàn / trâm named from HER chest) | a loan with no object: dialog named her real piece, nothing moved; «cây đàn tỳ bà» offered with no đàn at all | both «Cho mượn» options → dcBorrow(v,S,e,{why:"ev",aff:false}) (own numbers shown on the option stay), back the next tuần; only a dcFree, unworn piece; đàn only when she owns one; stale dialog (piece gone) → nothing moves + log |
+| 5 | jdc dcGiveBack, lender no longer in the world | piece pushed back to the BORROWER (kept) | ilGone "dead" → ledger box (as the old ts return did); log «… không còn chủ để trả, đã nộp về Nội vụ phủ.» |
+| 6 | jdc dcOwnFit's e.tsB guard | one rule's mark read by the other | dcFree(e) (one test: !h !bor !dcPrev !lo), used by dcOwnFit, jts and jevb |
+| 7 | jdc kit rows | loan row only for WD items, «qua tuần sau trả» always; return log name WD only («Món đồ») | loan row for any borrowed piece (kitRows via kitItemDetailRows), «xong hội phối đồ thì trả» for why ts; names via itm |
+| 8 | jdc dcTurn with BAL.dc.on off | no returns at all | returns still run (loans come home whatever the switch) |
+| 9 | askBack dcout note | always «Món trâm … cài lại trâm của mình» | the piece's own name; trâm clause only for a festival loan |
+| 10 | jky Kỳ ngộ × jlost (reviewer P1, law 6c, same group: a temporary move that wrote a 2nd copy) | lostReturn(L.e): the case's bare object (no lo) → «case gone» branch → «dead» copy to the box (owner unknown → her), owner got nothing, case stayed open → next Kỳ ngộ another copy (coop-dresscode-scan: 2–3 copies per case; caller chain kyArrive→fireNpc→runOpt→SPEC.item/ev→lostReturn) | kyLc(L): the case's piece WITH its mark, only while the case is still «lost» (stale dialog moves nothing, result text true) → jlost's one return closes it |
+Whole-group scan (every `inv.splice` site in dev/build/j*.js, 36 files): temporary person-to-person moves = jdc (dresscode), jts (#1), jevb/j68g (#4) → all on dcBorrow now. Not loans (own traceable records, unchanged): j92 wdPawn (pawn book + redeem), jil box fix/conf (ret), jlost cases (#10 fixed the only caller that broke it), jdisp/jshelf (her own display), jtsb batnat (a taking, give-back road), j24 bạc loans (money, S.loans). Law 1: she borrows from NPCs (dresscode gate, Hội phối đồ) ↔ NPCs borrow hers (dresscode ask, «Cho mượn» visit); NPC↔NPC (dcNpcFest).
+### Gates on 8d12e509 (code = eb2c0f41 + site rebuild)
+| gate | result |
+|---|---|
+| dresscode.test.js | ALL PASS (53) |
+| dresscode-loans.js | ALL PASS |
+| dresscode-ts-loan.js (NEW) | ALL PASS: borrow one copy why ts due = contest tuần + book; 3 real tuần still hers, not lendable/sold/given; real tsDressHold (away) → lender once, book empty; stale dialog no move; old e.tsB (deser) → e.bor + book → home; old e.tsB no contest → home next tuần; lender gone → box; «Cho mượn» visit real move + back next tuần + stale; no tsB left; (8) Kỳ ngộ lost case home once, no box copy, twice-found no copy |
+| dresscode-loan-scan.js (108 tuần, extended: Hội phối đồ + visit roads, contest dialogs answered/dropped) | ALL PASS: 313 loans (her 38 · lends 49 · NPC↔NPC 226; ts 5 · visit 26), 0 bad (run on 4707ba6e; jky fix after) |
+| coop-dresscode.js ×3 (+ step 6: Hội phối đồ loan on BOTH seats, return at contest end) | 48/48 · 48/48 (COOP_SWAP=1, iPad hosts) · 48/48 (on 06469d9d) |
+| coop-dresscode-scan.js 76 w (extended roads) | run 1+2 BEFORE the jky fix: every lasting count = a piece that went through a jlost case found by Kỳ ngộ (#10; caller chain logged), loan code 0; clocks 0/76 differ; run 2 also 1 harness «#next enabled» wait. Run 3 after the fix: NOT DONE (rollover) |
+| kyngo-unit / kyngo-eq | PASS / PASS |
+| NOT YET (successor) | coop-dresscode-scan 76 w on eb2c0f41+ (COOP_DBG=1) + one COOP_SKEW=24 · coop-e2e · role-parity ×2 (alone) · quickcheck (bash, alone) + old save · one-core-guard · dresscode-loan-scan ×2 more |
+Shots: none (no UI part; log lines + an existing kit row).
+
+## HANDOVER (E30c → successor, 21/11 ~08:25Z) — context 32 % of 1M (start ~3 %, roll point 28 % passed). FOREMAN E #26 session_01DgYSWmdwFouxeXFnpi6Nbb opens the successor (depth 7/8: the successor is the LAST allowed depth — finish, do not roll again).
+JOB: finish the gates on review/dresscode-fix-r4 8d12e509 (all code done and pushed), then «SẴN SÀNG KIỂM dresscode-fix-r4 <sha>» via send_message to FOREMAN E #26 + reviewer E30r3 session_01DgYSWon2yx2VxkSP87VchV + a STATUS line in FOREMAN_E_STATUS.md; replace my «NOT DONE / NOT YET» rows above with results. MAIN = MAIN CHÍNH 91 session_01Rc5AsN37AKrBbpxbDUo18L.
+Run sequentially, ALONE (box OOMs 2-seat co-op beside role-parity): (1) `COOP_DBG=1 node dev/test/coop-dresscode-scan.js <out>` (76 w, ~35 min; PERSIST lines print the caller chain «ilg» + last place); (2) `COOP_SKEW=24` run of it; (3) coop-e2e.js; (4) role-parity.test.js ×2; (5) `sh dev/test/quickcheck.sh` + old save; (6) one-core-guard; (7) dresscode-loan-scan ×2. Before co-op runs: `bash dev/site/build_site.sh` (coop-serve uses root index.html). Worktree: sparse under /home/user/wt (exclude dev/figwork dev/art dev/shots dev/review).
+If a co-op scan PERSIST remains: look at its «ilg» chain and «last»; a lost case path = jlost/jky family (#10), a loan path = mine (jdc/jts/jevb).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
