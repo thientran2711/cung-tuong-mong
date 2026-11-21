@@ -631,6 +631,8 @@ def _sec_slot(person,rank,S):
     else:   # t4-t6 (HAIR_HIGH rank law): hair UP, said in words, not "her own hairstyle"
         _h="Hair: her own hairstyle decorated with"; assert S.count(_h)==1,("t4-6 hair slot",person,rank)
         S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with",1)
+    _w=_season_pal(person); _m=re.search(r"with ([^;]+?) in the inner robe and linings",S)
+    if _w and _m and " like #" in _m.group(1) and " like #" not in sec: sec=f"{sec} like {_w['sec_hex']}"   # BUILDFIX3: ORIG1 persons (s22 s27 s29 s32 s38 s51 s61): the store clause carries 'secondary like #hex' (season palette swap) -> keep her season hex, as at her root
     S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
     for _a,_b in F13_SWAP: S=S.replace(_a,_b)   # F13 one hair flower
     return _t3_slot(person,rank,S)
@@ -676,15 +678,20 @@ def season_post(S,person,season,strict=True):
     if m and any(g in m for g in ("green","celadon","jade","teal","mint","sage","aqua")):
         S,k=re.subn(r"\("+re.escape(m)+r", NOT green\)","("+m+")",S)
         if k: notes.append("season: NOT green dropped (green main)")
-    if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=6: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
+    if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=8: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
     if season=="thu" and strict:
-        for bp in THU_TRIMS:   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
+        for bp in THU_TRIMS+THU_TRIMS_RANK.get(_SP_RANK[0],()):   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
             if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
     return S,notes
 THU_TRIMS=("An imperial consort. ","Everyone beautiful at every age. ","Everyone beautiful at every age.")
+# BUILDFIX3: t6 = the dedup trim of the approved VE12 L2088 file (.keep allow 'Image 2 is only a colour reference for the royal yellow' …: the Outfit words
+# already say 'the royal yellow is exactly the colour of the flat colour swatch image (image 2 …)')
+THU_TRIMS_RANK={6:("Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour. ",
+                   "Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."),
+                7:("; the royal yellow in the robe is exactly that colour",), 8:("; the royal yellow in the robe is exactly that colour",)}   # t7/t8: approved L2023 form keeps 'Image 2 is only a colour reference …, never copy anything but its colour' and drops this clause
 _SP_RANK=[None]   # rank of the season cell being built (set by _build_season2)
 CAPTION='CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents: "{}"'   # approved thu-file sheet label form
-THU_MARK=("straight SQUARE collar","straight SQUARE NECKLINE")   # G53 thu ladder words (t1-t5)
+THU_MARK=("straight SQUARE collar","straight SQUARE NECKLINE (a LOW open square neckline")   # G53 thu ladder words (t1-t6); BUILDFIX3: the bare 'straight SQUARE NECKLINE' is also in the G15 t3 option-B words of EVERY season -> every t3 cell was read as thu (t3 store gate FAIL 112/112 in root/xuân/hạ)
 def is_thu(text): return any(m in text for m in THU_MARK) and "WINTER:" not in text
 def season_store(store,person,rank,season):
     """check_store STORE part: the same season words on the store text (palette swap + season_post) as the builder used."""
@@ -707,18 +714,32 @@ def thu_slots(person,rank):
     assert sp,("thu slots: no F2 species",person,rank)
     g=any(x in main for x in ("green","celadon","jade","teal","mint","sage","aqua"))
     return dict(main=main,sec=sec,notgreen="" if g else ", NOT green",sp=sp[0],hsp=sp[0],spl=sp[1],hc=f20_name(hx) if hx else "fresh")
+def thu_slots78(person,S):
+    """t7/t8 slots: main / secondary names (palette thu EXACT, as t1-t6) + main hex from her own builder COLOUR RULE (maids without palette: their own)."""
+    p=ALIAS.get(person,person); main=main_name(p); sec=secondary(p)[0]
+    m=re.search(r"COLOUR RULE: all colours[^.]*?silk like (#[0-9A-Fa-f]{6})",S); w=_season_pal(p)
+    hx=(w or {}).get("main_hex") or (m.group(1) if m else None); assert hx,("thu t7/t8: no main hex",person)
+    return dict(main=main,sec=re.sub(r" like #[0-9A-Fa-f]{6}$","",sec),hex=hx)
 def _sent_rx(kind): return re.compile(r"(?:(?<=^)|(?<=\. ))"+re.escape(kind)+r"[^\n]*?\.(?= [A-Z]|$)")
 def thu_sentences(S,person,rank,strict=True):
-    notes=[]; new=THU.fill(rank,thu_slots(person,rank))
+    notes=[]; sl=thu_slots(person,rank) if rank<=6 else thu_slots78(person,S)
+    new=THU.fill(rank,sl)
     for kind,sent in new.items():
         m=_sent_rx(kind).search(S)
         if m: S=S[:m.start()]+sent+S[m.end():]; notes.append("thu ladder "+kind.strip(" (:"))
         elif kind=="NO BIG FLOWERS: ":
             h=_sent_rx("Hair: ").search(S); assert h or not strict,("thu: no Hair sentence",person,rank)
             if h: S=S[:h.end()]+" "+sent+S[h.end():]; notes.append("thu ladder NO BIG FLOWERS (added)")
+        elif kind in THU.ADD_R.get(rank,()):
+            j=S.find(" No text, no labels."); j=j if j>=0 else len(S.rstrip())
+            S=S[:j]+" "+sent+S[j:]; notes.append("thu ladder ADD "+kind.strip(" :"))
         elif strict: raise AssertionError(("thu: builder sentence not found",kind,person,rank))
+    for kind in THU.DROP_R.get(rank,()):
+        m=_sent_rx(kind).search(S)
+        if m: S=(S[:m.start()]+S[m.end():]).replace("  "," "); notes.append("thu ladder DROP "+kind)
     if rank==4: S=THU.capelet_thu(S); notes.append("thu L2041 CAPELET CUT (open front)")
     if rank==6: S=THU.colour_t6(S); notes.append("thu L2088 COLOUR RULE cloud collar; refs "+" + ".join(THU.refs(6)))
+    if rank>=7: notes.append("thu refs "+" + ".join(THU.refs(rank)))
     return S,notes
 def _build_season2(person,rank,age,season):
     assert isinstance(rank,int), "season: ranks 1-8 only"
@@ -953,6 +974,7 @@ PEOPLE+=S_NEW   # appended LAST so the global plan of everyone before them is un
 S_NEW2=["s%02d"%i for i in range(7,62)]+["s63"]   # T78-PREP (Foreman C ROOT 20/11): s07-s61 + s63, data rows in S_NEW_ROWS, appended LAST again (nobody else's plan changes)
 PEOPLE+=S_NEW2; S_NEW+=S_NEW2
 import subprocess,tempfile
+GATE_SEASON=None
 def gate(person,rank,age,text):
     """dev/art/check_store.py (owner Lượt 375 STORE GATE, reused) on this exact prompt with the SAME person's store args; PASS required."""
     sp=ALIAS.get(person,person)
@@ -961,7 +983,7 @@ def gate(person,rank,age,text):
         if m and re.search(PET_RX,m.group(1),re.I): return False,"PET GATE FAIL: pet in the t%d pose (owner: no pet at t7/t8): %s"%(rank,m.group(1)[:120])
     with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
     try:
-        args=[sp,"v0"]+(["--nostyle"] if NOSTYLE_FOR(rank) else [])+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
+        args=[sp,"v0"]+(["--nostyle"] if NOSTYLE_FOR(rank) else [])+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])+(["--season",GATE_SEASON] if GATE_SEASON else [])   # BUILDFIX3: the store gate is told the season (xuân/hạ palette; thu ladder only for thu)
         p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
@@ -1024,6 +1046,7 @@ if __name__=="__main__":
         print(msg,file=sys.stderr)
         print(out,end=""); sys.exit(0)
     season=a[a.index("--season")+1] if "--season" in a else None   # SEASON: --season dong (winter, G25/G26/G28)
+    GATE_SEASON=season
     out=(build_season(pos[0],int(pos[1]),age,season) if season else build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age))[1]
     if "--caption" in a:   # BUILDFIX2: sheet label for a test picture (approved thu-file CAPTION form); only when it fits the 10 000 gen limit
         _c=CAPTION.format(a[a.index("--caption")+1])

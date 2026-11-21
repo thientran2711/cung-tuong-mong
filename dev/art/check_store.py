@@ -776,6 +776,14 @@ def hqp_store(store,prompt):
         if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:
             return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
     return store
+def thu_fabric_waiver(text, scope):
+    """BUILDFIX3 (ROOT-B2 answer 1): a thu t4/t5 ladder prompt (G53 square-collar words, no WINTER) carrying the approved M06 thin-silk FABRIC sentence."""
+    import winter_g28
+    if scope not in ("tp4", "tp5") or winter_g28.is_winter(text): return False
+    sys.path.insert(0, os.path.join(ART, "store-all")); import build_all as _ba
+    m06 = master_common.sentences()[master_common.ids().index(master_common.M06_ID)]
+    return _ba.is_thu(text) and m06 in text
+SEASON_ARG = None   # BUILDFIX3: --season xuan|ha|thu|dong given to the store gate
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
@@ -791,9 +799,12 @@ def store_check(pf, prompt, args):
         _wp=_ba.winter_pairs(args[0])
         if _wp: store=_ba.b20_winter_words(store,_wp)
     sys.path.insert(0,os.path.join(ART,"store-all")); import build_all as _ba
-    if not winter_g28.is_winter(prompt) and _ba.is_thu(prompt) and args and not args[0].startswith("-") and '--low' in args and int(args[args.index('--low')+1])<=6:   # BUILDFIX2 THU: palette + thu ladder words (G53) on the store text, as the builder
-        store=_ba.season_store(store,args[0],int(args[args.index('--low')+1]),"thu")
-        for _bp in _ba.THU_TRIMS:   # BUILDFIX2: thu length trims (boilerplate the approved thu files go without) are optional
+    if SEASON_ARG in ("xuan","ha") and args and not args[0].startswith("-") and not winter_g28.is_winter(prompt):   # BUILDFIX3: xuân / hạ cells = her season palette on the store text (as the builder); before, the gate compared them with root colours
+        store=_ba.season_store(store,args[0],int(args[args.index('--low')+1]) if '--low' in args else 7 if '--t7' in args else 8,SEASON_ARG)
+    if not winter_g28.is_winter(prompt) and (SEASON_ARG=="thu" or (SEASON_ARG is None and _ba.is_thu(prompt))) and args and not args[0].startswith("-") and ('--low' not in args or int(args[args.index('--low')+1])<=6):   # BUILDFIX3: t7 (--t7) / t8 (no rank arg) too; BUILDFIX2 THU: palette + thu ladder words (G53) on the store text, as the builder
+        _rk=int(args[args.index('--low')+1]) if '--low' in args else 7 if '--t7' in args else 8
+        store=_ba.season_store(store,args[0],_rk,"thu")
+        for _bp in _ba.THU_TRIMS+_ba.THU_TRIMS_RANK.get(_rk,()):   # BUILDFIX2: thu length trims (boilerplate the approved thu files go without) are optional
             if _bp.strip() not in prompt: store=store.replace(_bp,"",1)
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
@@ -925,7 +936,7 @@ HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
 FRUIT_FROZEN = {"s44": "small red pomegranate (s44.v5 Sắc sảo 79foGbpJAL + s44.qr Quyến rũ DoOgxICpcl)", "s64": "golden-orange loquats (s64.v5 JNChlRROq4, Lượt 1046)"}
 FRUIT_RX = re.compile(r"\b(?:fruits?|peach(?:es)?|pomegranates?|persimmons?|loquats?|lychees?|litchis?|longans?|grapes?|jujubes?|kumquats?|tangerines?|mandarin oranges?"
                       r"|citrons?|buddha'?s[- ]hands?|apples?|pears?|plums|cherries|melons?|gourds?|figs|dates|bananas?|mangoes|mangos?|trái cây|hoa quả|quả)\b"
-                      r"(?![- ]?(?:blossoms?|flowers?|wood|pink|orange|cream|ivory|silk|colou?r|tone|tint|shade|coral|salmon|beige|gold|shaped|cheeks?|red|rose|blush|sorbet|ribbons?|sash|skirt|robe|top|trim|cord|tassels?|thread|satin|brocade|cotton|lining|border|hem|bow|apricot|sand|tan|nude|doorway|door|window|arch))", re.I)
+                      r"(?![- ]?(?:blossoms?|flowers?|wood|pink|orange|cream|ivory|silk|colou?r|tone|tint|shade|coral|salmon|beige|gold|shaped|cheeks?|red|rose|blush|sorbet|ribbons?|sash|skirt|robe|top|trim|cord|tassels?|thread|satin|brocade|cotton|lining|border|hem|bow|apricot|sand|tan|nude|doorway|door|window|arch|tinged))", re.I)   # BUILDFIX3: 'peach-tinged' = a palette colour word (thu m20/m29/c06 t6)
 HOLD_RX = re.compile(r"\bPose:|\b(?:hold(?:s|ing)?|held|cradl(?:es|ing)|carr(?:y|ies|ying)|hugg?(?:s|ing)|grips?|gripping|rais(?:es|ing)|lift(?:s|ing)|offer(?:s|ing)|present(?:s|ing)|show(?:s|ing)|tw(?:irl|irling|irls)|clasp(?:s|ing)?|(?:in|with) (?:her|his|one|both|each) hands?|in her palm|cầm|ôm|bưng)\b", re.I)
 def fruit_fails(text, scope=None, pid=None):
     out = []
@@ -1313,7 +1324,9 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             if negated(text, m.start(), m.end()): continue
             fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
     import winter_g28; _winter = winter_g28.is_winter(text)   # SEASON đông: G26 fur sentence present -> winter twins (W*) replace S06/S12, M06 in its G28 form
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=master_common.doan_scope(scope), scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    _doan = master_common.doan_scope(scope)
+    if _doan and thu_fabric_waiver(text, scope): _doan = False; warns.append(("B26", "THU WAIVER", "thu t4/t5: approved thin-silk FABRIC words (L2041/L2050 pictures) kept, B26 satin đoạn waived (ROOT-B2 answer 1, 21/11)"))
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=_doan, scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
@@ -1614,6 +1627,8 @@ def main():
         if f: print('STORE CHECK FAIL',pf,'— APPROVED CHECK FAIL: do NOT generate'); return 1
         print('STORE CHECK PASS',pf,'(approved_check PASS, scope',scope+')'); return 0
     args=a[1:]
+    global SEASON_ARG
+    if "--season" in args: i=args.index("--season"); SEASON_ARG=args[i+1]; args=args[:i]+args[i+2:]   # BUILDFIX3: season cell (builder gate passes it): the same palette + season words on the store text
     bad=store_check(pf,prompt,args)
     if bad:
         print('STORE CHECK FAIL',pf,'—',len(bad),'store sentence(s) missing or rewritten:')

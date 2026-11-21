@@ -8,16 +8,26 @@ s62 (main + secondary colour, F2 flower species of the rank, hair-flower colour,
 build_all.season_post (season thu, t1-t5) puts them in place of the builder's sentences of the same kind, filled with HER slots:
   main/sec = palettes_season.json thu names EXACT; species = build.py F2_FL (hairflower_species); hair colour = F20 hair_by_tier tN (f20_name).
 t4 CAPELET CUT: the approved L2041 form drops the throat-clasp / long-V clause (capelet open at the front); her own lower-edge shape stays.
-t6 QP = s62_t6_THU_vankien2_L2088 (VE12, owner L2088; BUILDFIX3) + refs(6). t7, t8: not in this table yet (builder words + palette)."""
+t6 QP = s62_t6_THU_vankien2_L2088 (VE12, owner L2088), t7 HQP = L2050, t8 HH = L2023 (BUILDFIX3) + refs(k)."""
 import os, re
 ART = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = {1: "s62_t1_THU_fix_L2008.txt", 2: "s62_t2_THU_fix_L1847.txt", 3: "s62_t3_THU_fix_L1978.txt",
        4: "s62_t4_THU_L2041.txt", 5: "s62_t5_THU_L2050.txt",
-       6: "s62_t6_THU_vankien2_L2088.txt"}   # BUILDFIX3: t6 QP = VE12 L2088 words (owner L2088 direction: SMALL slim two-tier collar, image 3 = collar crop YMl2p0yWeC)
+       6: "s62_t6_THU_vankien2_L2088.txt",   # BUILDFIX3: t6 QP = VE12 L2088 words (owner L2088 direction: SMALL slim two-tier collar, image 3 = collar crop YMl2p0yWeC)
+       7: "s62_t7_THU_vankien2_L2050.txt",   # BUILDFIX3: t7 HQP = L2050 (owner L2050: no second yellow collar; ROOT G67 'vân kiên edges'), refs image 2 swatch + image 3 collar kseQCFw16B
+       8: "s62_t8_THU_vankien2_L2023.txt"}   # BUILDFIX3: t8 HH = L2023 (lJt1uiYgv9 words), same refs
 # reference images per rank in the gen path (image 1 = HER OWN KC_REFS cut, never s62's); t6 QP owner L2066/L2088: image 2 royal-yellow swatch, image 3 collar crop (shape only)
-REFS = {6: ["<her KC_REFS cut>", "TdwDfOyVNR", "YMl2p0yWeC"]}
+REFS = {6: ["<her KC_REFS cut>", "TdwDfOyVNR", "YMl2p0yWeC"], 7: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"], 8: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"]}
 def refs(k): return REFS.get(k, ["<her KC_REFS cut>"])
 KINDS = ("Outfit (", "Hair: ", "HAIR FLOWER SIZE: ", "NO BIG FLOWERS: ")
+# per-rank sentence kinds (default KINDS): t7 its own COLOUR RULE + HQP LUXURY sentence; t8 HH carries its COLOUR RULE inside the Outfit sentence
+# (the builder's separate 'COLOUR RULE: all colours' sentence is DROPPED at t8, as in the approved file). ADD = approved sentences the builder lacks
+# (put before 'No text, no labels.'): the JEWELLERY law (A46: red gems only on the crown) + the image-3 collar SHAPE line that goes with ref kseQCFw16B.
+# ROOT-B2 answer 1 (21/11, BUILDFIX3 brief): thu t4 Tần / t5 Phi = the APPROVED pictures' fabric words (L2041 CqnmunHEEy / L2050: master M06 thin silk +
+# gauze) win over B26 satin đoạn (approved = law) -> 'The FABRIC is ' sentence taken from the approved file; check_store waives B26 for these thu cells.
+KINDS_R = {4: KINDS + ("The FABRIC is ",), 5: KINDS + ("The FABRIC is ",), 7: ("Outfit (", "COLOUR RULE: all colours", "HOÀNG QUÝ PHI LUXURY: "), 8: ("Outfit (",)}
+DROP_R = {8: ("COLOUR RULE: all colours",)}
+ADD_R = {7: ("JEWELLERY: ", "Collar SHAPE exactly as in image 3"), 8: ("JEWELLERY: ", "Collar SHAPE exactly as in image 3")}
 # s62 slot words per rank, longest first: (s62 words, slot). Species words of s62 (F2): t1 lilac, t2 tiger lily, t3 semi-double China rose,
 # t4 lotus flower, t5 double hollyhock. Hair-flower colour words of s62 as approved: t1 pure white, t2 soft peach-coral, t3 soft rose-pink, t5 deep rose-pink.
 S62 = {
@@ -36,6 +46,8 @@ S62 = {
  6: [("ivory-white formal double camellia with a soft pink blush", "{hc} {hsp}"), ("formal double camellias", "{spl}"), ("camellia sprigs", "{sp} sprigs"),
      ("light olive and lilac", "{main} and {sec}"), ("light olive silk", "{main} silk"), ("light olive TWO-TIER", "{main} TWO-TIER"),
      ("light olive and gold thread", "{main} and gold thread"), ("lilac only as a small accent", "{sec} only as a small accent")],
+ 7: [("light olive silk like #9FB577", "{main} silk like {hex}"), ("deeper olive", "deeper {main}"), ("light olive", "{main}"), ("lilac", "{sec}")],
+ 8: [("(never olive)", "(never {main})"), ("light olive silk like #9FB577", "{main} silk like {hex}"), ("deeper olive", "deeper {main}"), ("light olive", "{main}"), ("lilac", "{sec}")],
 }
 SENT = re.compile(r"(?<=[.])\s+(?=[A-Z])")
 def _sents(t): return [s for s in SENT.split(t) if s.strip()]
@@ -48,14 +60,15 @@ def templates():
     for k, f in SRC.items():
         t = open(os.path.join(ART, "thu_comoi", f), encoding="utf-8").read(); d = {}
         for s in _sents(t):
-            kind = next((x for x in KINDS if s.startswith(x)), None)
+            kind = next((x for x in KINDS_R.get(k, KINDS) + ADD_R.get(k, ()) if s.startswith(x)), None)
             if kind: d[kind] = s
+        for x in KINDS_R.get(k, KINDS) + ADD_R.get(k, ()): assert x in d or x == "NO BIG FLOWERS: " or k <= 6, ("thu_ladder: approved sentence not found", k, x)
         joined = " ".join(d.values()); used = set()
         for a, b in S62[k]:
             n = 0
             for kind in d:
                 n += d[kind].count(a); d[kind] = d[kind].replace(a, "\x00" + str(len(used)) + "\x00")
-            assert n or a in ("lilac",), ("thu_ladder: s62 slot word not found", k, a)
+            assert n or a in ("lilac", "deeper olive"), ("thu_ladder: s62 slot word not found", k, a)
             used.add(a)
         for kind in d:
             for i, (a, b) in enumerate(S62[k]): d[kind] = d[kind].replace("\x00" + str(i) + "\x00", b)
