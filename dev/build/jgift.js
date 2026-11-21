@@ -126,7 +126,7 @@ function kitOtherItem(v,x,sl){try{/* KIT §70: the shared item detail card (who 
   html:`${own}${rows?`<div class="kinvrows">${rows}</div>`:""}${kitFacts(F)}`,btn:"Lui"})}catch(e){console.error("kitOtherItem",e)}}
 addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t||t.dataset.kwho==="me")return;
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===t.dataset.kwho))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===t.dataset.kwear);if(!x||x.empty)return;
- ev.stopPropagation();ev.preventDefault();kitOtherItem(v,x,t.dataset.kwear)},true);
+ ev.stopPropagation();ev.preventDefault();if(typeof kinlWear==="function"&&kinlWear(t,v,t.dataset.kwear))return;kitOtherItem(v,x,t.dataset.kwear)},true);
 /* ✕ for kitOtherItem: the kit (32.10) already turns its "Lui" button into kit-x; the private ✕ that stood beside it is gone (reviewer r6) */
 /* a gift that ARRIVES (PEND.giftin) shows the item, too */
 (function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
