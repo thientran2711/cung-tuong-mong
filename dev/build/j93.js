@@ -60,6 +60,33 @@ window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelec
 function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".kmhint").forEach(h=>h.remove());let b=ov.querySelector(":scope > .kmend");
  if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
 window.kitSceneEnd=kitSceneEnd;
+/* ---------- KIT 81c kitFullPic (owner 21/11 marks #52 «Học thành tài» + #84 «Sang buổi», review/ending-screens-2): THE full-screen scene PICTURE ----------
+   Owner: "trên iPad là phải ngang nguyên một cái màn hình, full nguyên cái màn hình luôn" / Sang buổi: "picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background".
+   ONE picture layer for every full-bleed scene (81b .km-full): it covers the WHOLE screen (no frame, no border, no dark band), a soft top + bottom shade keeps the
+   title and the words on it readable, the scene's own title / card / ONE kit button (.kmend) lie ON the picture.
+   ORIENTATION (KIT §0: html.kv1 / kv2, never a width test): phone portrait (kv1) = the PORTRAIT painting `img/<key>-port.webp`, iPad landscape (kv2) = the LANDSCAPE one
+   `img/<key>-land.webp` — used only when listed in the art manifest img/INFO.json {have:[…]} (Foreman C adds the key when the picture is on the CDN: no code change,
+   no 404). Until then the scene's own picture `fb`: mode "cover" (a big painting: cropped to fill, focus --kfx/--kfy) or "blur" (a small card picture: the same
+   picture blurred fills the screen, the sharp one sits whole in the middle — never stretched into mush).
+   While a full-screen picture is open the room's lean-in emotion seal (span.kemo-big, jemoseal) is hidden: nothing of the room floats over it.
+   kitFullOri() = "port" | "land"; kitFullSrc(key, fb) = {src, art}; kitFullPicHTML({key, fb, mode, cls, fx, fy, extra, img}) = the layer's HTML (img = extra attributes of the sharp <img>). */
+function kitFullOri(){try{return (typeof kitSzMode==="function"?kitSzMode()==="kv2":document.documentElement.classList.contains("kv2"))?"land":"port"}catch(e){return"port"}}
+function kitFullSrc(key,fb){const k=key?`${key}-${kitFullOri()}`:"";let have=[];try{have=(typeof KIT_INFOM!=="undefined"&&KIT_INFOM&&KIT_INFOM.have)||[]}catch(e){}
+ return k&&have.includes(k)?{src:`img/${k}.webp`,art:1}:{src:fb||"",art:0}}
+function kitFullPicHTML(o){o=o||{};const P=kitFullSrc(o.key,o.fb);const blur=!P.art&&o.mode==="blur";
+ return `<div class="kfull${blur?" kfull-blur":""}${P.art?" kfull-art":""}${o.cls?" "+o.cls:""}" style="--kfx:${o.fx==null?50:o.fx}%;--kfy:${o.fy==null?50:o.fy}%" aria-hidden="true">`+
+  `${blur&&P.src?`<img class="kfull-bk" src="${P.src}" alt="" draggable="false" decoding="async">`:""}${P.src?`<img class="kfull-img" src="${P.src}" alt="" draggable="false" decoding="async" ${o.img||""}>`:""}`+
+  `${o.extra||""}<i class="kfull-shade"></i></div>`}
+window.kitFullOri=kitFullOri;window.kitFullSrc=kitFullSrc;window.kitFullPicHTML=kitFullPicHTML;
+(function(){const st=document.createElement("style");st.id="kfull-css";st.textContent=`
+.kfull{position:absolute;inset:0;z-index:0;overflow:hidden;background:#17110d;border:0;border-radius:0;box-shadow:none;margin:0;pointer-events:none}
+.kfull>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--kfx,50%) var(--kfy,50%);display:block}
+.kfull.kfull-blur>.kfull-bk{filter:blur(14px) brightness(.72) saturate(.9);transform:scale(1.08)}
+.kfull.kfull-blur>.kfull-img{object-fit:contain;object-position:50% 50%;filter:drop-shadow(0 8px 24px #000a)}
+/* nothing of the room floats over a full-screen picture: the lean-in emotion seal clone (jemoseal span.kemo-big, fixed, above every UI) hides while one is open */
+body:has(.kmov.km-full .kfull) span.kemo-big,body:has(.dawn.kne-day.on) span.kemo-big{visibility:hidden}
+.kfull>.kfull-shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(12,8,5,.55) 0,rgba(12,8,5,0) 20%,rgba(12,8,5,0) 52%,rgba(12,8,5,.72) 100%)}
+`;document.head.appendChild(st)})();
 
 /* ---------- KIT §81.1 kitEntryGate (K-OI-1 / KP07, review/kit-podium-gate; OD:L1244 + L1261): the ENTRY animation «palace gate → selection hall» ----------
    kitEntryGate({kind, origin, road, to}) — kind "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc bd) · "maid" (cnv: maids behind a mama) · "corridor" (cn: the Càn Thanh corridor);
@@ -281,7 +308,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
- W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{if(S&&S.dead&&!was&&!window.__bot)kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
+ W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
    const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
