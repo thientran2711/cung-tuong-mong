@@ -30,6 +30,13 @@ JOBS = [
   (", smooth cabochon rubies and pearls,", ", pearls and jade,"),
   (OLDGEM, NEWGEM), ("Mùa Thu · Hoàng hậu · cổ vuông L1747", "Mùa Thu · Hoàng hậu · L1794")]),
 ]
+# owner L1799 (via Foreman C #22): red gems MAY be on the CROWN of HQP t7 / HH t8, NEVER on clothing -> t7/t8 own jewellery sentence
+NEWGEM78 = " JEWELLERY: only jade, pearls and gold, Chinese court style; red gems ONLY on the crown, NEVER on the robe, cape, collar, belt or pendants; NO sapphires, NO faceted or sparkling gems, nothing European."
+for j in JOBS:
+    if j[1].startswith(("s62_t7", "s62_t8")):
+        j[2][:] = [(o, NEWGEM78 if n == NEWGEM else n) for o, n in j[2]]
+JOBS[2][2][:] = [(o, "more jade, pearls, gold and a few smooth red gems on the phoenix crown," if o.startswith("more jewels on the phoenix crown") else n) for o, n in JOBS[2][2]]
+JOBS[3][2][:] = [(o, ", a few smooth red gems, pearls and jade," if o == ", smooth cabochon rubies and pearls," else n) for o, n in JOBS[3][2]]
 for src, dst, R in JOBS:
     t = open(os.path.join(D, src + '.txt')).read().strip()
     for o, n in R: t = rep(t, o, n)

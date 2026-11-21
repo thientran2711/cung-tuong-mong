@@ -861,7 +861,7 @@ def negated(text, a, b):
     return bool(NEG.search(text[lo + 1:hi]))
 
 
-S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls and gold on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'   # owner L1794 (THU @135 sheet): no rubies/sapphires/European gems; S14 override OK'd by Foreman C #22
+S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls, gold and a few smooth red gems on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'   # owner L1794 + L1799: jade/pearl/gold; red gems only on the crown, never on clothing; S14 override OK'd by Foreman C #22
 S13_COMOI = 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; the outer robe closes only at the sash, never at the throat, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.'
 
 def best_overlap(sentence, text):
