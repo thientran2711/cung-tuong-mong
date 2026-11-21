@@ -621,3 +621,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | dialog-stack (sonnet; OWNER mark #46 21/11 ~03:52Z: never two dialogs overlapping) | review/dialog-stack; briefs/main86-dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:10Z |
 | calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
 | map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
