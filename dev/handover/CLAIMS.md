@@ -855,4 +855,4 @@ kit-focus rv4 | review/kit-focus-rv4 4c1105d8 | rv session | PASS (supersedes rv
 | RELAND mg-craft Thêu r3 (opus BIG reviewer-lander; MAIN 92 ORDER 10:50Z jtd conflict) | review/mg-craft-r3; briefs/b6-relander-mg-craft.md | B | session_01N1tNP3ZWMeRDarhzz276Yb | RUNNING | 21/11 11:20Z |
 kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
 | REVIEW coop-arrive-see (opus BIG) of 8ee5f709 | review/coop-arrive-see-r1 | B | session_01N1tNP5qTMitGkZJgmbbcTW | RUNNING | 21/11 11:28Z |
-| REVIEW duodo-focus (OPUS BIG) of 43bc4ba2 | review/duodo-focus-rv; briefs/main93-rv-duodo-focus.md | MAIN CHÍNH 93 | (pending) | RUNNING | 21/11 11:36Z |
+| REVIEW duodo-focus (OPUS BIG) of 43bc4ba2 | review/duodo-focus-rv; briefs/main93-rv-duodo-focus.md | MAIN CHÍNH 93 | session_01Rc5AsMC6NdEnc5VsL1xzk6 | RUNNING | 21/11 11:36Z |
