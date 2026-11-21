@@ -1188,6 +1188,9 @@ window.kitInfoOneLine=kitInfoOneLine;
 .pc .pcf .kr>.krv>*{white-space:nowrap!important}
 .pc .pcf .kr>.krv.kone{padding-right:26px}
 .pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+/* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
+.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
 `;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();try{document.querySelectorAll(".pc.kpwide[data-k2]").forEach(kitPcKeyFit)}catch(e){}},100)})}catch(e){}})();
 /* KIT §6.3j RANK + NAME = ONE COLOUR on the person-card tag (owner OD 16/11 16:10Z «rank+name one colour: OK» + 21/11 04:33Z; MAIN 89 check #3): the name under the rank line takes the rank colour (--rt of .pcrk). The same unit as the story text (§48.3). */
 function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const n=r.parentElement.querySelector(":scope > .pcname");if(!n||n.classList.contains("krt"))return;const c=r.style.getPropertyValue("--rt")||getComputedStyle(r).color;if(!c)return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
