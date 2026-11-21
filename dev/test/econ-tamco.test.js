@@ -7,7 +7,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const fails=[];const F=(sz,m)=>fails.push(`${sz}: ${m}`);let first=true;
  for(const sz of (SIZES||"755x1000@2,1180x820@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr||1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
-  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.addInitScript(()=>{window.__nlInner=1});
+  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.addInitScript(()=>{window.__nlInner=1;/* F3: pinned state — the same life, khắc and rolls every run (seeded Math.random) */let s=20261121>>>0;Math.random=()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}});
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof econRoadCost==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul,.kroul{display:none!important}'});
   const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
@@ -48,16 +48,19 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.screenshot({path:`${OUT}/roadpick-${wh}.jpg`,type:'jpeg',quality:55});
   if(!ui.shown)F(sz,"road card not shown");else{if(/%/.test(ui.txt))F(sz,"% in road card");if(!ui.inView)F(sz,"road card out of view");if(ui.pageOvf)F(sz,"page overflow")}
   /* 3. each road charges what it prints and freezes the odds it prints */
-  const pay=await p.evaluate(()=>{const res={};const m0=Q[0];if(!m0)return null;const v=RV(m0.pp.v),k=m0.pp.k;const snap=()=>JSON.stringify([S,rivals].map(x=>x));
-   for(const [ix,lab] of [[1,"tc"],[2,"hire"]]){const b0=S.bac,t0=S.tamco,pr=econSchemePrice(k,S,v),c0=econRoadCost(k,S,v);/* the cost as shown, before the act changes the state */let seen=null;const r0=runAct;
+  const pay=await p.evaluate(()=>{const res={};const m0=Q[0];if(!m0)return null;const vid=m0.pp.v,k=m0.pp.k;let v=RV(vid);
+   /* F3: every road starts from the SAME saved state (a road that landed changes the target, the khắc used, …) */S.bac=2000;S.tamco=60;S.khac=99;try{used=0}catch(e){}const q0=quiet;quiet=true;const D=JSON.stringify(ser());quiet=q0;const snap=()=>JSON.stringify([S,rivals].map(x=>x));
+   for(const [ix,lab] of [[0,"plain"],[1,"tc"],[2,"hire"]]){deser(JSON.parse(D));Q.length=0;try{used=0}catch(e){}v=RV(vid);const b0=S.bac,t0=S.tamco,pr=econSchemePrice(k,S,v),c0=econRoadCost(k,S,v);let seen=null;const r0=runAct;S.__won=0;
     runAct=function(a,t,kk){seen=ACTFZ?ACTFZ.o:null;return r0.apply(this,arguments)};
-    const ptS=window.ptHarmSend;window.ptHarmSend=null;try{Q.length=0;pushDil(mkP("roadpick",{v:v.id,k}),ACT[k].n);const o=Q[0].opts[ix];chooseM(ix);
-     res[lab]={dBac:S.bac-b0,dTc:S.tamco-t0,pr,tc:c0.tc,hire:c0.hire,fx:o.fx,p:o.p,seen}}finally{runAct=r0;window.ptHarmSend=ptS}
+    const ptS=window.ptHarmSend;window.ptHarmSend=null;try{Q.length=0;pushDil(mkP("roadpick",{v:v.id,k}),ACT[k].n);const o=Q[0].opts[ix];/* F3: the numbers the card SHOWS at the click (Tốn + the pay-on-success price on «thành») */const ton=Object.assign({},o.ton||{}),wp=+(((o.x||"").replace(/<[^>]+>/g,"").match(/thành:[^·]*Bạc -(\d+)/)||[])[1]||0);chooseM(ix);
+     res[lab]={dBac:S.bac-b0,dTc:S.tamco-t0,pr,tc:c0.tc,hire:c0.hire,fx:o.fx,p:o.p,seen,ton,wp,won:!!S.__won}}finally{runAct=r0;window.ptHarmSend=ptS}
     S.bac=2000;S.tamco=60;S.khac=99;Q.length=0;v.block=0;}
    return res});
   if(first)console.log("pay",JSON.stringify(pay));
   if(pay){const t=pay.tc,h=pay.hire;if(t.seen!==t.p)F(sz,`tc road rolled ${t.seen} vs shown ${t.p}`);if(h.seen!==h.p)F(sz,`hire road rolled ${h.seen} vs shown ${h.p}`);
-   if(t.dTc>-t.tc||t.dTc<-t.tc-3)F(sz,`tc road Tâm cơ change ${t.dTc} vs ${-t.tc}`);if(h.dBac>-h.hire||h.dBac<-(h.hire+h.pr))F(sz,`hire road bạc change ${h.dBac} vs hire ${h.hire} (+ price ${h.pr} when the act pays it)`);}
+   /* F3: charged = exactly what the card showed at the click: Tốn either way, the «thành» price only when the act landed (S.__won); a scheme's own gain (spy: Tâm cơ +2 on success) is allowed on top */
+   for(const lab of ["plain","tc","hire"]){const x=pay[lab];if(!x)continue;const wantB=(x.ton.bac||0)-(x.won?x.wp:0),wantT=x.ton.tamco||0;
+    if(x.dBac!==wantB||(x.dTc!==wantT&&!(x.won&&x.dTc>wantT)))F(sz,`${lab} road charged bạc ${x.dBac} Tâm cơ ${x.dTc}, the card showed bạc ${wantB} Tâm cơ ${wantT} (Tốn ${JSON.stringify(x.ton)}, thành price ${x.wp}, won ${x.won})`)}}
   /* 3b. parallel time: a scheme SENT with a servant (ptHarmSend) carries the road in the deed and pays it when the deed lands */
   const dd=await p.evaluate(()=>{if(typeof ptHarmSent!=='function'||typeof ptOn!=='function'||!ptOn())return {skip:'ptime off'};S.bac=2000;S.tamco=60;S.khac=99;
    const priced=Object.keys(ACT).filter(k=>ACT[k].__c0);let k=null,v=null;for(const kk of priced){v=liveRivals(true).find(x=>{try{return ACT[kk].ok(S,x)&&ptHarmSent(x,kk)}catch(e){return false}});if(v){k=kk;break}}
@@ -78,11 +81,21 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    for(const kk of ks){v=liveRivals(true).find(x=>{try{return ACT[kk].ok(S,x)}catch(e){return false}});if(v){k=kk;break}}if(!v)return {skip:'no pay-on-success scheme open'};
    const pH=window.ptHarmSend;window.ptHarmSend=null;const out=[];try{for(const road of ['','tc','hire'])for(const fz of [0,100]){S.bac=2000;S.tamco=60;v.block=0;try{used=0}catch(e){}S.confined=0;S.mg=null;Q.length=0;
     const c=econRoadCost(k,S,v),i=rivals.indexOf(v);let seen=null;const r0=runAct;runAct=function(){seen=ACTFZ?ACTFZ.o:null;return r0.apply(this,arguments)};
-    const b0=S.bac,t0=S.tamco;let ok=null;try{econRoadGo(i,k,road,fz);ok=window.__lastOk}finally{runAct=r0}
-    const want={dTc:road==='tc'?-c.tc:0,dBac:-(road==='hire'?c.hire:0)-(fz?c.pr:0),pr:c.pr};out.push({road,fz,seen,ok,dTc:S.tamco-t0,dBac:S.bac-b0,want})}}finally{window.ptHarmSend=pH}
+    const b0=S.bac,t0=S.tamco;S.__won=0;try{econRoadGo(i,k,road,fz,c)}finally{runAct=r0}const won=!!S.__won;
+    const want={dTc:road==='tc'?-c.tc:0,dBac:-(road==='hire'?c.hire:0)-(fz?c.pr:0),pr:c.pr};out.push({road,fz,seen,won,dTc:S.tamco-t0,dBac:S.bac-b0,want})}}finally{window.ptHarmSend=pH}
    return {k,v:v.name,out}});
   if(first)console.log('pay-on-success',JSON.stringify(wv));
-  if(wv&&!wv.skip){for(const x of wv.out)if(x.seen===x.fz&&(!(x.fz?[x.want.dBac,x.want.dBac+x.want.pr]:[x.want.dBac,x.want.dBac-x.want.pr]).includes(x.dBac)||(x.road==='tc'&&x.dTc>x.want.dTc)))/* bribe: the maid decides (receiver choice, her own odds), not the roll: every outcome is either «thành» (road + price) or «hỏng» (road only) — never anything else */F(sz,`${wv.k} road «${x.road||'plain'}» ${x.fz?'success':'fail'}: charged bạc ${x.dBac} Tâm cơ ${x.dTc}, card says bạc ${x.want.dBac} Tâm cơ ${x.want.dTc}`);
+  /* 3d. F3 shown = charged even when the price moves between the card and the payment (khắc spent, ranks change…): the base price doubles after the card */
+  const mv=await p.evaluate(()=>{const k=["bribe","block","spy","poison"].find(k=>ACT[k]&&ACT[k].__c0&&liveRivals(true).some(x=>ACT[k].ok(S,x)&&econRoadRolls(k,S,x)));if(!k)return {skip:'no road scheme'};
+   const out=[];for(const road of ['','tc','hire']){S.bac=3000;S.tamco=60;try{used=0}catch(e){}S.confined=0;S.mg=null;Q.length=0;const v=liveRivals(true).find(x=>ACT[k].ok(S,x)&&econRoadRolls(k,S,x));v.block=0;
+    const c=econRoadCost(k,S,v),b0=S.bac,t0=S.tamco,base=ACT[k].__c0.bac;ACT[k].__c0.bac=base*2;const moved=econSchemePrice(k,S,v);const pH=window.ptHarmSend;window.ptHarmSend=null;S.__won=0;
+    try{econRoadGo(rivals.indexOf(v),k,road,100,c)}finally{ACT[k].__c0.bac=base;window.ptHarmSend=pH}const won=!!S.__won,win=ECON_WIN.includes(k);
+    const want={dTc:road==='tc'?-c.tc:0,dBac:-(road==='hire'?c.hire:0)-(!win||won?c.pr:0)};out.push({road,won,dBac:S.bac-b0,dTc:S.tamco-t0,want,moved,shown:c.pr})}return {k,out}});
+  if(first)console.log('price moved after the card',JSON.stringify(mv));
+  if(mv&&!mv.skip)for(const x of mv.out)if(x.moved===x.shown)F(sz,'3d: the price did not move, the check proves nothing');else if(x.dBac!==x.want.dBac||(x.dTc!==x.want.dTc&&!(x.won&&x.dTc>x.want.dTc)))F(sz,`${mv.k} road «${x.road||'plain'}»: the price moved after the card and the charge followed it (bạc ${x.dBac} Tâm cơ ${x.dTc}, card bạc ${x.want.dBac} Tâm cơ ${x.want.dTc})`);
+  if(wv&&!wv.skip){for(const x of wv.out){/* F2: the frozen odds decide (bribe: the maid's take weight = the frozen odds) — 0 never lands; 100 lands unless caught first (block) */const wantB=x.won?x.want.dBac:x.want.dBac+(x.fz?x.want.pr:0);
+    if(x.fz===0&&x.won||wv.k==='bribe'&&x.fz===100&&!x.won)F(sz,`${wv.k} road «${x.road||'plain'}»: frozen odds ${x.fz} but landed=${x.won} (the road's odds do not reach the outcome)`);
+    if(x.dBac!==wantB||x.dTc!==x.want.dTc)F(sz,`${wv.k} road «${x.road||'plain'}» ${x.won?'success':'fail'}: charged bạc ${x.dBac} Tâm cơ ${x.dTc}, card says bạc ${wantB} Tâm cơ ${x.want.dTc}`)}
    if(!wv.out.some(x=>x.seen===x.fz))F(sz,'pay-on-success: forced odds never reached the roll '+JSON.stringify(wv.out));}
   else if(first)console.log('NOTE pay-on-success check skipped:',wv&&wv.skip);
   /* 4. NPC roads (law 1): same price, same bonus */
