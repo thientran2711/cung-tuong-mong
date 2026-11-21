@@ -783,7 +783,6 @@ def hqp_store(store,prompt):
         rx=re.escape(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ").replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
         pm=re.search(rx,prompt)
         if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:   # BUILDFIX5: + the L2119 one-tier vân kiên form
-        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:
             return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
     return store
 def thu_fabric_waiver(text, scope):
