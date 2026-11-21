@@ -46,3 +46,15 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 
 # OWNER L1952 (via #27): L1924 t1–t3 OK (no redraw); embroidery research + G64 draft
 - research part 3 in dev/art/research_tang_maids_L1939.md; draft gate dev/art/g64_check.py (standalone, selftest ok; L1924 t1–t3 + t4 L1890 FAIL on 'LARGE … on the robe', maids L1933 PASS, 28 old seasons4/thu_comoi files FAIL). Not wired into check_store; G64 text drafted for #27 (rule.py add is the foreman's).
+
+# #27 order (owner L1952 "apply the experts"): G65
+- DONE @ffcf727: rule G65 added (rule.py add; G64 was taken by HHCOL2), gate dev/art/g65_check.py (renamed from g64_check.py) wired into check_store.py as g65_fails (FAIL only; the WARN "band motifs with no SMALL word" prints only in g65_check.py itself). Verified: L1924 t3 FAILs G65, maid L1933 PASS.
+- NOT DONE (step 3): fix the words in LIVE, UNDRAWN consort prompts that FAIL G65. 59 tracked prompt files FAIL now — list in dev/handover/reports/HADUONG2_G65_FAILS.txt (seasons4 13, thu_comoi 16, dong_hientai 9, winter1 8, rank8-s62 3, tang1 3, b26 2, f2 2, flower 2, itemfix2 1). Most are OLD or already drawn → leave. Successor: for each, grep gen_ledger.jsonl for the file name; only edit files with no gen yet that are the CURRENT version of their rank; never touch FROZEN files (G62/G63/G64) or drawn/approved ones. Typical fix: "a few LARGE embroidered plum blossoms on the robe" → "a few LARGE plum blossoms repeated on the skirt panels, only SMALL scattered blossoms on the robe"; band wording add "SMALL". Each fix = new file + .keep (allow line "# owner L1952 G65") + keep_check + check_store.
+
+# HANDOVER (HADUONG2 → successor) · depth 8 · START_CTX ≈ 3 % · now ≈ 26 % (rollover at 28 %; stopping cleanly before the big step 3)
+Coordinator: Foreman C #27 session_01D3E3NaDamfSozkn47q9kMK (opens the successor). Push tip: `git fetch -q --filter=blob:none origin <branch> && git rebase -q origin/<branch>` (retry on reject).
+Open:
+1. G65 step 3 (above).
+2. WAITING on the owner: thô sử design A/B/C + fabric ladder (dev/art/research_tang_maids_L1939.md parts 1–2). Then rebuild the maid ladder from the chosen option (base = m18_*_ha_DUONG_L1933.txt, no phi bạch, G65 small motifs).
+3. HOLD: L1933 maids (dev/art/maid7/prod/m18_{thosu,tam,nhi,nhat}_ha_DUONG_L1933.txt) — draw only on #27 GO (VE10 session_01D3E3NaakFbargWadMNeWzZ).
+Done: L1919 maids drawn · L1924 consorts drawn + owner OK (L1952) · waivers 17/18 · research parts 1–3 · G65 rule + gate.
