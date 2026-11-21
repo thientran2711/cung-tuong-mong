@@ -26,7 +26,7 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
 function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,odP=b=>odA(p,b),f=facOf(p),A=[],say=r=>{if(me&&r)log(r);return r||""};
  let mds=[];try{mds=(me?(S.staff||[]).concat(S.maid&&!(S.staff||[]).includes(S.maid)?[S.maid]:[]):(p.staff||[])).filter(m=>m&&m.role!=="eunuch"&&(m===S.maid||m.role==="maid")).filter(m=>m&&m.alive!==false&&!m.coop&&(m.loyal||0)>=BAL.loy.trust).sort((a,b)=>(b.loyal||0)-(a.loyal||0))}catch(e){}
  const m=mds[0],R=[{w:"thái giám đưa cơm",c:{bac:-L.bac},o:odP(L.euO)}];
- if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Lòng trung ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} lòng trung ${balSg(-L.maidLoy)}`});
+ if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Thiện cảm ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} thiện cảm ${balSg(-L.maidLoy)}`});
  const card=(n,t,x,ag,go)=>R.map(r=>({n:`${n} (nhờ ${r.w})`,t,c:{...r.c},o:r.o,k:2,w:{},l:{},ag,x:x+(r.fx||""),go:()=>say(go()),fail:r.fail}));
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
    ()=>leaveFacSelf(p)));

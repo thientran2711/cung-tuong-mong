@@ -371,7 +371,7 @@ function btRaw(s,m,kind){return btTerms(s,m,kind).reduce((a,f)=>a+f[1],0)}
 function btOdds(s,m,kind){return agOdd(btRaw(s,m,kind))}
 /* a failed approach: the servant SHE (or the NPC) sent with the offer is afraid of being dragged in → lòng −fear (more for a timid one); 17:00Z */
 function tmFear(p,quietLog){try{const sv=typeof bestSent==="function"?bestSent(p):null;if(!sv)return"";const B=btB();const d=Math.round(B.fear*(netIs(sv,"timid")?B.fearTimid:1));
- sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: lòng ${balSg(-d)}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
+ sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: thiện cảm ${balSg(-d)}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
 function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}

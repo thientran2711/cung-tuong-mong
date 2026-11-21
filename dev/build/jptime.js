@@ -61,7 +61,7 @@ function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&
  try{r=a.fz!=null&&typeof fzRun==="function"?fzRun(a.fz,null,()=>fn(a)):fn(a)}catch(e){ptErr("run "+a.kind,e)}
  if(!me)return;
  const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-s0));const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
- const d=[];try{if(b)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b[k]||0);if(x)d.push([nm,x])}if(b&&S.maid&&S.maid.loyal!==b.maid)d.push(["Lòng cung nữ",S.maid.loyal-b.maid])}catch(e){}
+ const d=[];try{if(b)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b[k]||0);if(x)d.push([nm,x])}if(b&&S.maid&&S.maid.loyal!==b.maid)d.push(["Thiện cảm của cung nữ",S.maid.loyal-b.maid])}catch(e){}
  const ok=r&&typeof r==="object"&&"ok" in r?r.ok:(r===false?false:r===true?true:window.__lastOk!=null?!!window.__lastOk:null);
  a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
  try{if(typeof window.kitNoticeDrop==="function")window.kitNoticeDrop("pt:go:"+a.id)}catch(e){}
@@ -398,7 +398,7 @@ function ptGBack(L){/* the real pieces again (law 6c): by index when it still ho
    return Object.assign({},o,{x:ptX("ask",o.x)},why?{lock:true,x:why,go:()=>{}}:{go:()=>{ptSend({who:"mm:me",nm:m.name,kind:"ask",place:"nvp",a:{G:ptGLite(G),bac:SK.bac||0,sup:SK.sup?key(SK.sup):null},lbl:"đến Nội vụ phủ đòi phần"});if(ptRow("ask").o)spend(ptRow("ask").o)}})})}catch(e){ptErr("stipEvent",e)}return ev}}catch(e){ptErr("stip wire",e)}})();
 ptReg("ask",a=>{const m=S.maid;if(!m){return{ok:null}}const SK={bac:a.a.bac,sup:a.a.sup?byKey(a.a.sup):null};const od=stipAskOdds(m,SK);const eun=stipEunName();const st=stipSt(S);
  if(roll(od)){if(SK.bac)apply({bac:SK.bac});stipRestore(S,ptGBack(a.a.G));log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`);return{ok:true,t:`${m.name} đi đòi trở về`}}
- m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`);return{ok:false,t:`${m.name} đi đòi trở về`}});
+ m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Thiện cảm của cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`);return{ok:false,t:`${m.name} đi đòi trở về`}});
 /* ---- 13. Sai người mua lén ngoài cung (jveil PEND.vlout): the bạc is paid at the order (the card's fx), the person brings the veil at due ---- */
 (function(){try{const v0=PEND.vlout;if(!v0)return;PEND.vlout=function(pp){const d=v0.apply(this,arguments);try{if(!d||!ptOn()||PT.landing)return d;const ag=vlAgent(S);if(!ag)return d;const id=ptPid(ag);const why=ptLockWhy(id);
   d.o=(d.o||[]).map(o=>{const m=o&&o.fx&&o.fx.bac<0?/^(.+?) · /.exec(o.n||""):null;const k=m?(vlOutList(S)||[]).find(x=>itm(x).n===m[1]):null;if(!k)return o;

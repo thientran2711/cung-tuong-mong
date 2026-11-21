@@ -238,7 +238,6 @@ const KIT_GLOSS={
  "Sức khỏe":"Thân thể lâu dài, định Sức tối đa. Tuổi càng cao, sinh nở, bệnh nặng, trúng độc càng hạ; nghỉ ngơi, ở cữ trọn tháng, thuốc bổ chỉ bù lại phần hao tạm, không vượt mức tuổi và vết thương cũ cho phép.",
  "Bạc":"Tiền riêng của ngươi: bổng lộc hằng tháng, ban thưởng. Dùng để mua đồ, đút lót, thưởng kẻ hầu.",
  "Chủ tin":`Chủ nhân tin ngươi bao nhiêu (0–100). Cao thì được thưởng, tiến cử; dưới ${BAL.srvx.tinOut} dễ bị đày Tân Giả khố.`,
- "Lòng":`Kẻ hầu trung thành với ngươi bao nhiêu (0–100). Dưới ${balAb(BAL.loy.warn)} dễ bị người khác mua chuộc.`,
  "Ghen":"Người ấy ghen với ngươi bao nhiêu. Ghen cao thì dễ ra tay hại ngươi.",
  "Oán":"Người ấy oán hận ngươi bao nhiêu (vì ngươi từng hại họ). Oán cao thì dễ trả thù.",
  "Thù":"Như Oán: người ấy thù ghét ngươi bao nhiêu. Cao thì dễ trả thù.",

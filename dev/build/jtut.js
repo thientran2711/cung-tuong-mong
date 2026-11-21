@@ -196,7 +196,7 @@ const R=(k,v,c)=>[k,v,c||"n"];
 /* ---------- tab groups, read live (data-tab, KG, .ksub .ksubb[data-ksub]) ---------- */
 const GROUP_ANCHORS=["rv","rel","staff"];
 const SUBSAY={rv:"thẻ từng phi tần: chạm mặt để xem, giao thiệp hay ra tay",rel:"ai thương, ai ghen, ai oán {x}",fac:"các phe trong cung và chỗ đứng của {x}",
- staff:`kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Lòng dưới ${balAb(BAL.loy.warn)} dễ bị mua chuộc`,
+ staff:`kẻ hầu của {x}: Thiện cảm là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Thiện cảm dưới ${balAb(BAL.loy.warn)} dễ bị mua chuộc`,
  court:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",emp:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",th:"Thái hậu: thỉnh an, xem lòng người",men:"nam nhân trong cung: thái y, thị vệ, quan viên",
  story:"truyện riêng của thân phận {x}",log:"mọi việc đã qua",kid:"con của {x}",art:"các môn tài nghệ",inv:"rương đồ của {x}"};
 function grpOf(k){try{for(const g in KG)if(KG[g].keys.includes(k))return g}catch(e){}return null}
@@ -314,7 +314,7 @@ const TIPS={
  "tab-fac":{t:"Phe phái",h:"Trong cung ai cũng có chỗ dựa. Theo một phe thì được che chở, nhưng phe đối nghịch sẽ để mắt tới {x}."},
  "tab-court":{t:"Chí tôn",h:"Hoàng thượng và Thái hậu: hầu hạ, thỉnh an, xem lòng người trên. Người trên thương thì đường tấn phong rộng mở."},
  "tab-men":{t:"Nam nhân",h:"Thái y, thị vệ, quan viên trong cung. Giao thiệp có ích, nhưng gần gũi quá dễ sinh lời ra tiếng vào."},
- "tab-staff":{t:"Cung nhân",h:`Lòng là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Lòng dưới ${balAb(BAL.loy.warn)} thì dễ bị người khác mua chuộc.`},
+ "tab-staff":{t:"Cung nhân",h:`Thiện cảm là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Thiện cảm dưới ${balAb(BAL.loy.warn)} thì dễ bị người khác mua chuộc.`},
  "tab-kid":{t:"Hoàng tự",h:"Con của {x} ở đây: Sức khỏe, Tài và lòng Hoàng thượng thương. Chăm dạy con chu đáo; con được trọng thì mẫu thân cũng được nể."},
  "tab-inv":{t:"Tư trang",h:"Rương đồ của {x}: trâm cài, y phục, quà được ban. Mặc vượt phẩm hay quá giản dị đều có người để ý; đồ ngự tứ không được bán."},
  "tab-art":{t:"Tài nghệ",h:"Mỗi môn có bậc; mỗi bài học là một trò nhỏ, chơi khéo thì lên bậc nhanh. Bậc cao mở việc mới và giúp thắng thi tài."},
