@@ -1,0 +1,60 @@
+<title>%%TITLE%%</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{--bg:#f6f3f4;--panel:#fff;--fg:#2a2226;--muted:#7b6e74;--line:#e3dadd;--accent:#9b2f4c;--tick:#c0392b;--tick-soft:#fbe3df;--f-head:"Noto Serif",Georgia,serif;--f-body:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1719;--panel:#262023;--fg:#efe6e9;--muted:#a8999f;--line:#3a3135;--accent:#e08aa3;--tick:#ff7a6b;--tick-soft:#43241f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1719;--panel:#262023;--fg:#efe6e9;--muted:#a8999f;--line:#3a3135;--accent:#e08aa3;--tick:#ff7a6b;--tick-soft:#43241f;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);padding:16px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left));margin:0}
+h1{font-family:var(--f-head);font-weight:600;font-size:1.5rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 10px;max-width:70ch;line-height:1.5}
+.status{color:var(--muted);font-size:.85rem;margin:0 0 12px}.sum{font-weight:600;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
+.card img{display:block;width:100%;aspect-ratio:300/340;object-fit:cover;background:var(--line)}
+.meta{padding:8px 10px 10px}.id{font-weight:700}.g{color:var(--accent);font-size:.85rem}
+.card label{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.95rem;cursor:pointer;min-height:32px}
+.card input{width:22px;height:22px;accent-color:var(--tick)}
+.card label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
+<h1>%%H1%%</h1>
+<p class="sub">%%SUB%%</p>
+<p class="sum" id="sum"></p>
+<p class="status" id="status">Đang nối kho lưu tick…</p>
+<main class="grid" id="grid"></main>
+<script>
+const FACES=%%FACES%%, VERB="%%VERB%%", LABEL="%%LABEL%%", MARK="%%MARK%%";
+let picks={},db=null,canWrite=false;const $=s=>document.querySelector(s);
+function draw(){
+  const m=$("#grid");m.textContent="";let n=0;
+  for(const f of FACES){const on=!!picks[f.id];if(on)n++;
+    const c=document.createElement("article");c.className="card"+(on?" on":"");
+    const img=document.createElement("img");img.src=f.img;img.alt=f.id+" "+f.group;
+    const meta=document.createElement("div");meta.className="meta";
+    const a=document.createElement("div");a.className="id";a.textContent=f.id;
+    const g=document.createElement("div");g.className="g";g.textContent=f.group;
+    const lab=document.createElement("label");const cb=document.createElement("input");cb.type="checkbox";cb.id="pick-"+f.id;cb.checked=on;cb.disabled=!canWrite;
+    const sp=document.createElement("span");sp.textContent=MARK+" "+LABEL;cb.onchange=()=>save(f,cb.checked);
+    lab.append(cb,sp);meta.append(a,g,lab);c.append(img,meta);m.append(c);}
+  $("#sum").textContent=n+" / "+FACES.length+" mặt đã tick "+MARK+" "+LABEL;
+}
+async function save(f,on){
+  picks[f.id]=on;draw();if(!db)return;
+  try{await db.doc("picks/"+f.id).set({id:f.id,group:f.group,action:VERB,on:on,at:new Date().toISOString()});}
+  catch(e){$("#status").textContent="Không lưu được tick cho "+f.id+". Thử lại sau.";}
+}
+draw();
+(async()=>{
+  const timer=setTimeout(()=>{$("#status").textContent="Chưa nối được kho lưu tick — tick sẽ không được lưu."},10000);
+  try{
+    db=await claude.use("db");const user=await claude.use("user");
+    if(!db){clearTimeout(timer);$("#status").textContent="Chỉ xem: không có kho lưu tick ở chế độ này.";return;}
+    canWrite=user?(user.can("data.write")!==false):true;
+    db.collection("picks").onSnapshot(snap=>{clearTimeout(timer);const p={};
+      for(const d of snap.docs){const v=d.data();if(v&&v.on)p[d.id]=true}
+      picks=p;$("#status").textContent=canWrite?"Tick được lưu tự động.":"Chỉ xem: bạn không có quyền tick.";draw();},
+      err=>{clearTimeout(timer);$("#status").textContent="Lỗi đọc tick.";});
+  }catch(e){clearTimeout(timer);$("#status").textContent="Chưa nối được kho lưu tick.";}
+})();
+</script>
