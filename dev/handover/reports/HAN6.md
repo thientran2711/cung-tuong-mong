@@ -94,3 +94,35 @@ make_han_L1971.py, base = the L1965 files. After the generator runs, CUT lines f
 6. Drama verdict (pheasant OK / no deep blue / necklines kept / Tang 5→9 hairpin test tomorrow) is for Đường; nothing changed in the Hán files.
 Fit: t6–t8 dropped the duplicate fabric-weight sentence "it hangs in fuller, rounder, heavier folds…" (the same meaning is in "The satin has real weight…"). check_store-tested.
 ch 9872/9970/9831/9923/9803/9994/9926/9966. keep PASS ×8; check_store = the base waived FAILs ×8. Collar (G62) + t1–t3 bands (G66) verbatim.
+
+# HANDOVER (HAN6 → HAN7), 21/11 ~09:46Z
+depth 8 (get_session lineage.depth; limit 8) · START_CTX ~3 % · now ~25 % of 1M (roll line START+25 = 28 %, ceiling 60 %). Coordinator = Foreman C #27 session_01D3E3NaDamfSozkn47q9kMK (#26 rolled). The COORDINATOR opens HAN7.
+STATE: nothing half-written. Everything is pushed. HOLD: the owner is on THU; wait for #27's word.
+NEXT STEP (only on the owner's word via #27): 1 sample of t6 Quý phi s62_t6_HAN_COLLAR_L1971.txt @55 at VE7 session_01D3E3NahACvw1Z1FUUXG1eB. Sheet CŨ dt4THLQXSL (L1965) | MỚI, labels: season + rank + collar type.
+CURRENT HÁN SET = L1971: s62_t{1,2,4..8}_HAN_COLLAR_L1971.txt + s62_t3_HAN_BOW_L1971.txt (make_han_L1971.py).
+- After regenerating, append keep_check CUT lines as owner-L1971 allows (see the L1971 section above).
+- Supersedes L1965 / L1955 / L1928 / L1915 for prompt work.
+LOCKS:
+- G62: frozen collar words (HAN_COLLAR_L1915_FROZEN.txt).
+- G66 (= "G62b"): t1–t3 bands (HAN_COLLAR_L1953_T1T3_FROZEN.txt: deep dusky rose / pale blush pink / ivory).
+- t1–t3 loose hair over the shoulders is fine; never flag it.
+OWNER RULES MET THIS SESSION:
+- L1971: beauty > history; held-item tassels are fine; bows have LONG trailing ties (ask #27 to log the rule); each rank keeps its own flowers (big flowers only t4+).
+- G57: no pendants. G60: centred bow. G61: free hand at the side, never at the front waist.
+GENS THIS SESSION (VE7):
+- L1928: t1 nVsR0B0YQD · t2 MBJYdaFDCm · t3 gOmr7RDSXO (collar APPROVED L1953).
+- t3 bow L1953: WDg2oC9cXe.
+- t6 L1965: dt4THLQXSL.
+RESEARCH (VN, words only), in dev/handover/reports/:
+- HAN6_HAN_DRESS_RESEARCH_L1953.md (Han dress + embroidery by rank)
+- HAN6_TANG_DRAMA_RESEARCH_L1958.md (Tang dramas vs history)
+- HAN6_WEAVE_VS_EMBROIDERY_L1965.md (woven / embroidered / printed)
+OPEN:
+- Tang hairpin 5→9 test: the owner wants it tomorrow (no files yet).
+- t2/t3 L1955 band deeper: never drawn alone; it is included in L1971.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
