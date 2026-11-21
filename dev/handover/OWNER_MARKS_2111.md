@@ -1,0 +1,22 @@
+# Owner marks 21/11 (ui-tour PDF review) — running list for «tổng hợp đi»
+Keep one row per mark; update Status/LIVE when it moves. Summary to her = short Vietnamese from this table.
+| # | Time Z | Problem (short) | Ref shot | Worker / session | Status | LIVE sha |
+|---|---|---|---|---|---|---|
+| 1 | 01:42 | Send the frames PDF | — | ui-tour (82) | SENT in 84 chat | — |
+| 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF in work; ASKED her: add «Hảo hữu» sheet? | — |
+| 3 | 01:58 | Chí tôn: «Hoàng thượng» not centred; niên hiệu shown as name → name «Hoàng thượng», niên hiệu row below | owner-2111-chiton-nienhieu.jpg | chiton-name session_01Rc5AsJe31NLb75JMbggVQc (centring → keeper) | in work | — |
+| 4 | 02:00 | Sở trường/Hay/Chuyện doubled labels → one column «Sở trường · Trọng · Dạo này» | owner-2111-sotrong-dup.jpg | chiton-name | in work | — |
+| 5 | 02:02 | Trait box «Trọng tài / Mê sắc…» repeats → into «!» | owner-2111-trait-box-dup.jpg | keeper kit-pcrow-square (merged with #9) | in work | — |
+| 6 | 02:08 | Person-card act picture stretched tall → SQUARE + Tốn/Được only + full-width info box (approved before, applied only to dialogs) | owner-2111-pcrow-square.jpg | keeper session_01Rc5AsMtjP4KTgBZVjENGLs | in work | — |
+| 7 | 02:12 | Cung nhân: small portrait floating; act cards | owner-2111-cungnhan.jpg | keeper | in work | — |
+| 8 | 02:14 | Rank+name tag not centred | owner-2111-cungnhan.jpg | keeper | in work | — |
+| 9 | 02:10 | «Người chạy việc…» info box → «!» on avatar top-right corner | owner-2111-infobox-bang.jpg | keeper | in work | — |
+| 10 | 02:12 | Ân oán picker too big (3rd time) → one compact row | owner-2111-anoan-picker.jpg | rel-picker-r3 session_01Rc5AsJZRwZRBfh2sUuQErH | in work | — |
+| 11 | 02:14 | Ân oán relation card: 2 rows take half the frame → compact | owner-2111-anoan-card.jpg | rel-picker-r3 | in work | — |
+| 12 | 02:16 | «Cùng Cảnh Phúc cung với ta» for a chủ vị → «Chủ vị Cảnh Phúc cung, nơi ta ở» | owner-2111-chuvi-line.jpg | rel-picker-r3 | in work | — |
+| 13 | 02:18 | Place label order: palace on top, hall below | owner-2111-place-order.jpg | chiton-name | in work | — |
+| 14 | 02:20 | Show EVERY frame state (filled) in a separate PDF; fix-back file separate; fix whole group | owner-2111-phephai-empty.jpg | ui-tour-states session_01Rc5AsMRxZnFfU6zhm7mvad | in work | — |
+| 15 | 02:22 | Empty tabs (Phe phái…) need picture card «Ta chưa có …» like «Ta chưa có con» | owner-2111-empty-state.jpg | empty-states session_01Rc5AsMTnwmUdoGmZsd4Uvk | in work | — |
+| 16 | 02:24 | Panel scrolls with no extra content → must stand still | owner-2111-noscroll.jpg | empty-states | in work | — |
+| 17 | 02:30 | Hoàng tự card: Fold vs iPad different layouts; tiny avatar + empty bands → one shared person layout | owner-2111-hoangtu-fold/ipad.jpg | keeper | in work | — |
+Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ramp, Thử tay overlap, trò Dung, loading bar c3a398dd; Điều hương, Đầu hồ + Bắn cung (red for re-test), Thân cận 64d2e094.
