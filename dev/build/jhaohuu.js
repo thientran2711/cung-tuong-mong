@@ -1,18 +1,16 @@
-/* ================= jhaohuu: «Hảo hữu» — THE partner sheet in co-op (owner 21/11 ~06:05Z, mark #2, verbatim:
-   "Làm khung Hảo hữu đi, nhưng Làm thành một cái icon để ở bên trái của cái nền phòng á. Bên trái mình đang có một cái mấy cái icon đó, để ở dưới luôn.")
-   ENTRY = one kitStageRail item (KIT §77, the LEFT icon column of every stage), id "haohuu", order 90 = the BOTTOM of the column; co-op only
-   (when: CW.on), both seats (host + guest run the same code on their own screen). Solo: never registered as visible (when() false).
-   ICON: KIT REQUEST K-ICO-HAOHUU (img/kit/ico-friend.webp) is with the kit keeper; until it is on the CDN the rail shows the KIT §77.1 glyph
-   fallback «友» (same precedent as K-ICO-ALERT). Swap = set ICO below.
-   PANEL = the kit info panel (kitPanel, §8): subject = her FULL-BODY figure (the stranger rule turns it into the grey silhouette, j61 figFor),
-   sections of kitRows + kitPersonStats (§49 knowledge: unknown stats read «chưa rõ») only. No new part, no own CSS.
-   DATA (law 6b real data, law 4 numbers from game state): her entry in the shared world (CW.friend(): rivals, or a consort's staff on the
-   servant road), her place (S.where, the same source as the stage), the live status of the header chip (CW.frInfo, jcooptimer — ONE source).
-   STRANGER RULE (OD:L165 / OD:L1061): unmet = «Hảo hữu của ta», grey silhouette, rank / name / stats / health / household / place «chưa rõ»;
+/* ================= jhaohuu: «Hảo hữu» — THE partner sheet in co-op
+   Owner 21/11 ~06:05Z (mark #2): "Làm khung Hảo hữu đi ..." + CANON OVERWRITE ~06:30Z (OD verbatim): the entry is NOT on the room stage — it is
+   the «Hảo hữu» ICON in the fixed TOP BAR (= the friend chip, KIT §69.2 kitCoopFriend in jcooptimer: grey offline, full colour online, ✓ / «…»
+   badge), and "khi mà cần thông tin của người đó thì mình bấm vô người đó thì nó ra thông tin": tapping it opens THIS sheet. Co-op only, both
+   seats (each seat runs it on its own screen); solo: no icon, no sheet.
+   PANEL = the kit info panel (kitPanel, §8): her FULL-BODY figure (kit stage), sections of kitRows + kitPersonStats (§49 knowledge: unknown
+   stats read «chưa rõ») only. It also carries what the old status-only chip panel had (her status, «Ngươi», the «Tạm dừng» option): ONE panel.
+   DATA (law 6b real data, law 4 numbers from game state): her entry in the shared world (COOPW.friend(): rivals, or a consort's staff on the
+   servant road), her place (S.where, the same source as the stage), the live status of the chip (COOPW.frInfo, jcooptimer — ONE source).
+   STRANGER RULE (OD:L165 / OD:L1061): unmet = «Hảo hữu của ta», the kit stranger figure, rank / name / stats / health / household / place «chưa rõ»;
    only what anyone sees (her status in this buổi) shows. Reborn friend = unknown again (jcoopworld forgetFriend). ================= */
 (function(){try{
 const CW=window.COOPW||{};
-const ICO="img/kit/ico-friend.webp";/* KIT READY K-ICO-HAOHUU (keeper 21/11); the §77.1 glyph «友» stays only as the fallback if ICO is empty */
 const UNK="chưa rõ";
 const on=()=>!!CW.on&&typeof S!=="undefined"&&!!S&&!S.dead;
 const es=t=>typeof esc==="function"?esc(String(t==null?"":t)):String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -35,8 +33,14 @@ function healthRows(e){const R=[];let known=true;try{known=typeof kitStatKnown0=
  if(known&&e.preg&&!e.fake)R.push(["Thai","đang mang thai","g"]);return R}
 /* the live status of this buổi = the header chip's own data (anyone sees it: the chip shows it to strangers too) */
 function nowRows(e){const R=[];let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():null}catch(x){}
- if(o){R.push(["Lúc này",`${o.glyph} ${es(o.word)}`,o.tone]);R.push(["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${typeof CW.tm==="object"&&CW.tm.fmtT?CW.tm.fmtT(o.left):Math.ceil((o.left||0)/1000)+" giây"}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"])}
+ if(o){R.push(["Hảo hữu",`${o.glyph} ${es(o.word)}`,o.tone]);R.push(["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"])}
  if(e&&met(e)){const w=placeWord(e);if(w)R.push(["Đang ở",es(w),"n"])}else if(e)R.push(["Đang ở",UNK,"t"]);return R}
+/* the one line of what to do meanwhile (the old chip panel's note, same words) */
+function nowNote(){let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():null}catch(x){}if(!o)return"";
+ return o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
+  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
+  "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang."}
+function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:n?`<p class="kpnote">${n}</p>`:""}}
 /* the figure on the panel: met = her own entry (full body, kit stage); unmet = the kit stranger figure as a stage pseudo person ({__fig,__cap}, the kitShop seller form, jinv),
    never her entry: the stage would resolve her real art and name from it */
 function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||18}]}}
@@ -46,12 +50,12 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
  if(!e){/* no entry: she lives at her father's house (tiểu thư road, before the tuyển tú) or her life has ended */
   const home=!!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead),dead=!!(P&&(P.dead||(P.S&&P.S.dead)));
   sec.push({h:"Thân phận",rows:[["Nơi ở",home?"ở phủ nhà, chờ kỳ tuyển tú":dead?"đã khuất":UNK,dead?"r":"n"]]});
-  sec.push({h:"Lúc này",rows:nowRows(null)});
+  sec.push(nowSec(null));
   return {kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec}}
  if(!isRival(e)){/* servant road: a cung nữ in a consort's palace */
   const m=mistress(e);
   sec.push({h:"Thân phận",rows:[["Danh vị",known?"Cung nữ":UNK,known?"n":"t"],["Hầu hạ",known&&m?(typeof kitName==="function"?kitName(m,{cap:true}):es(m.name)):UNK,known?"n":"t"],["Cung",known&&m?es(palWord(m)):UNK,known?"n":"t"]]});
-  sec.push({h:"Lúc này",rows:nowRows(e)});
+  sec.push(nowSec(e));
   if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
   return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
  /* consort road: rank + name (kit rank unit), her palace, stats, health, household, what she does now */
@@ -60,13 +64,11 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
  const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;
  sec.push({h:"Trong cung của nàng",rows:[["Con cái",kidsWord(e),"n"],["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});
- sec.push({h:"Lúc này",rows:nowRows(e)});
+ sec.push(nowSec(e));
  if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
  return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
-function open(){try{if(!on()||typeof kitPanel!=="function")return;const sp=spec();sp.opts=[{n:"Đóng",fx:{},go:()=>{}}];/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
+function open(){try{if(!on()||typeof kitPanel!=="function")return;const sp=spec();let o=null;try{o=CW.frInfo()}catch(x){}
+ sp.opts=(o&&o.canHold&&typeof CW.frHold==="function"?[{n:"Tạm dừng",x:"Hậu cung dừng lại cho cả hai đến khi ngươi trở lại",fx:{},go:()=>CW.frHold(true)}]:[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
  window.__hhOpen=1;kitPanel(sp,true);if(typeof showModal==="function")showModal()}catch(e){console.error("haohuu",e)}}
-function mount(){try{if(typeof kitStageRail==="undefined"||typeof kitStageRail.add!=="function")return false;
- const it={id:"haohuu",order:90,title:"Hảo hữu",when:on,onTap:open};if(ICO)it.icon=ICO;else it.glyph="友";kitStageRail.add(it);return true}catch(e){return false}}
-if(!mount())addEventListener("load",mount,{once:true});
 window.kitHaoHuuOpen=open;window.kitHaoHuuSpec=spec;
 }catch(e){console.error(e)}})();

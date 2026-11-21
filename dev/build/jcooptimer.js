@@ -184,16 +184,17 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 #kctmh,#kctmp{z-index:9400}
 #kctmp .dlg #kctmpb{padding:8px 12px 2px}#kctmp .dlg #kctmpb .kpnote{margin:6px 0 0}
 #kctmp .dlg #kctmpr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
-.kctmf{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:5px;margin:0;padding:2px 6px 2px 2px;border:1px solid var(--gold,#b8892b);border-radius:16px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;font:inherit;color:var(--ink,#3a2418);cursor:pointer;min-height:24px;max-width:100%;line-height:1.2}
-.kctmf .kctmf-f{flex:0 0 auto;display:inline-flex;width:20px;height:20px;border-radius:50%;overflow:hidden}
-.kctmf .kctmf-f>*{width:20px!important;height:20px!important;min-width:0!important;margin:0!important}
-.kctmf .kctmf-n{font-size:.74rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9em}
-.kctmf .kchip{margin:0;white-space:nowrap;font-size:.7rem;padding-top:0;padding-bottom:0}
+.kctmf{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin:0;padding:2px;border:1px solid var(--gold,#b8892b);border-radius:8px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;cursor:pointer;flex:0 0 auto}
+.kctmf .kctmf-a{position:relative;display:block;width:30px;height:30px;border-radius:6px;overflow:visible}
+.kctmf .kctmf-a>img,.kctmf .kctmf-a>:not(.kctmf-b){width:30px!important;height:30px!important;min-width:0!important;margin:0!important;border-radius:6px;object-fit:cover;display:block}
+.kctmf.koff .kctmf-a>img,.kctmf.koff .kctmf-a>:not(.kctmf-b){filter:grayscale(1) brightness(.92);opacity:.7}
+.kctmf .kctmf-b{position:absolute;right:-7px;bottom:-6px;min-width:15px;height:15px;padding:0 2px;border-radius:50%;font:700 10px/15px system-ui,sans-serif;text-align:center;color:#fff;box-shadow:0 0 0 1.5px #fffaf0;background:#8a7350}
+.kctmf .kctmf-b.g{background:#2f8a4a}.kctmf .kctmf-b.w{background:#b07a18}.kctmf .kctmf-b.n{background:#7a6a58;letter-spacing:-1px}
+.kctmf .kctmf-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#kctmf{display:flex;align-items:center;gap:6px}#kctmf .kctmf-t{margin:0;white-space:nowrap;font-size:.72rem;padding-top:0;padding-bottom:0;background:#fffaf0f2}
 #kctmf{position:fixed;z-index:24;max-width:calc(100vw - 16px)}
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
-.kctmf .kctmf-sh{display:none}
-/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:9em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -227,9 +228,20 @@ function kitCoopLenRow(){css();const cur=lenPick()||Math.round(TB().buoiMs/60000
    + one status chip + the shared buổi countdown. st: ready ✓ / busy ! / work … / away / hold ⏸. Tap → kitCoopFriendPanel. */
 const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w","⏸","Tạm dừng"]};
 const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
-function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;
- const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t">${o.clock==="pz"?"Đợi":"Còn"} ${mmss(o.left)}</span>`;
- return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${o.name?esc(o.name):`<span class="kctmf-l">Hảo hữu của ta</span><span class="kctmf-sh">Hảo hữu</span>`}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
+/* §69.2 CANON OVERWRITE (owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... người đó off là màu xám ... On là sẽ màu tươi hơn ...
+   xong thì có một cái dấu tích màu xanh kế bên ... vẫn còn đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó thì nó ra thông tin"):
+   the friend chip IS the «Hảo hữu» icon: ONE square kit icon button in the fixed top bar (placeF below) = her portrait once met (kitFaceH),
+   the painted kit icon img/kit/ico-friend.webp while she is a stranger (OD:L165: no face before meeting); GREY when she is offline (away),
+   full colour when online; a small badge at its corner: ✓ green = ready / sang buổi, «…» = busy or still at work, ⏸ = she asked to pause;
+   no name, no status words on screen (they stay in aria-label / title + a visually hidden span for screen readers); the shared buổi
+   countdown stays beside it as one short kit chip (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu?", OD rule kept). Tap → the
+   partner sheet kitHaoHuuOpen (jhaohuu.js), which also holds the old chip panel's rows (her status, Ngươi) and «Tạm dừng». */
+function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
+ const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?"⏸ ":""}${mmss(o.left)}</span>`;
+ const av=o.known&&o.face?o.face:`<img src="img/kit/ico-friend.webp" alt="" decoding="async">`;
+ const bd=o.st==="ready"?`<b class="kctmf-b g" aria-hidden="true">✓</b>`:o.st==="hold"?`<b class="kctmf-b w" aria-hidden="true">⏸</b>`:o.st==="away"?"":`<b class="kctmf-b n" aria-hidden="true">…</b>`;
+ const lab=esc(nm+": "+s[2]);
+ return `<button type="button" class="kctmf${o.st==="away"?" koff":""}" data-ctm="fr" aria-label="${lab}" title="${lab}"><span class="kctmf-a">${av}${bd}</span><span class="kctmf-vh">${esc(nm)} · ${s[1]} ${s[2]}</span></button>${clk}`}
 /* the friend's status in words (ONE table: the chip panel below + the «Hảo hữu» partner sheet, jhaohuu.js) */
 function frWord(o){o=o||{};return {ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
   away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc"}
@@ -264,11 +276,11 @@ function hideChip(){if(EL&&!EL.hidden)EL.hidden=true;if(FE&&!FE.hidden)FE.hidden
 /* the friend's state as one word (FST) */
 function frSt(v){if(!COOP.state.peerOnline)return"away";if(frReady())return"ready";const k=v?v.key:roomKey();const h=v?v.hold:HOLD;
  if(h&&h!==CW.seat)return"hold";if(FS.key===k&&(FS.pz||FS.bz||FS.lf))return"busy";return"work"}
-function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend():null;let name="",face="";
- try{if(f){const named=typeof k61Named==="function"?k61Named(f):true;if(named)name=f.name||"";face=typeof kitFaceH==="function"?kitFaceH(f,"xs"):""}}catch(e){}
+function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend():null;let name="",face="",known=false;
+ try{if(f){const named=typeof k61Named==="function"?k61Named(f):true;if(named)name=f.name||"";known=typeof isKnown61==="function"?isKnown61(f):true;face=typeof kitFaceH==="function"?kitFaceH(f,"xs"):""}}catch(e){}
  if(!name){try{const so=(COOP.state.seats||{})[other()];void so}catch(e){}}
  const clock=!v?null:(v.up||(v.run&&v.left<=0))?"up":(v.pz||v.hold||!v.run||frozenRoom())?"pz":"run";
- return {name,face,st:frSt(v),left:v?v.left:0,clock,kh:FS.kh,meRd:myRd(),myKh:myKh(),canHold:!!v&&!v.up&&!frozenRoom()&&!HOLD}}
+ return {name,face,known,st:frSt(v),left:v?v.left:0,clock,kh:FS.kh,meRd:myRd(),myKh:myKh(),canHold:!!v&&!v.up&&!frozenRoom()&&!HOLD}}
 /* top of the screen, INSIDE the bar (never over the stage or the panel): the first free spot of the bar (scanned top → bottom, right → left,
    checked against every visible leaf of the bar and the seal); when the bar has none (iPad portrait, phones), the bar gets a strip of its own
    (class kctm-pad = padding-bottom) and the chip sits in it at the right. */
@@ -290,7 +302,9 @@ function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)||documen
  const o=frInfo();const h=kitCoopFriend(o);
  if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");document.body.appendChild(FE)}
  if(h!==lastF){FE.innerHTML=h;lastF=h}if(FE.hidden)FE.hidden=false;placeF();if(FP)FP.innerHTML=kitCoopFriendPanel(o)}
-function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}if(!FP){FP=document.createElement("div");FP.id="kctmp";FP.className="modal kpscene";FP.setAttribute("role","dialog");document.body.appendChild(FP);
+function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}
+ /* §69.2 overwrite 21/11: ONE panel = the «Hảo hữu» partner sheet (jhaohuu.js); the old status-only notice is only the fallback */
+ if(typeof window.kitHaoHuuOpen==="function"){window.kitHaoHuuOpen();return}if(!FP){FP=document.createElement("div");FP.id="kctmp";FP.className="modal kpscene";FP.setAttribute("role","dialog");document.body.appendChild(FP);
  FP.addEventListener("click",e=>{if(e.target===FP)frPanel(false)})}FP.innerHTML=kitCoopFriendPanel(frInfo());const s=FP.querySelector(".kpseal");if(s)s.remove()}
 function paint(force){if(!live()||S.dead){hideChip();return}try{paintF()}catch(e){console.error(e)}const v=view();const M=$("modal"),T=$("title"),nx=$("next");
  if(!v||!nx||!nx.offsetParent||(M&&!M.hidden)||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(EL&&!EL.hidden)EL.hidden=true;return}
@@ -313,6 +327,7 @@ function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
+CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
 }catch(e){console.error(e)}})();

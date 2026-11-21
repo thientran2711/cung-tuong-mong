@@ -3973,16 +3973,24 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
   ready / her week end is out), "Đợi hảo hữu" (host's places / a step after a dialog), "Hảo hữu đang vắng", "Đang nối lại…", "Đợi cùng bản mới".
   Khắc spent and she can still press "Sẵn sàng": #next gets the kit selected look `.ksel` (§31.13).
   Freeze panel (#coopfz, peer): "Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; …".
-- §69.2 FRIEND CHIP · kitCoopFriend(o) · kitCoopFriendPanel(o) (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu
-  đâu…", coordinator spec): `#kctmf`, top of the screen, always on in co-op (hidden only under the title, the freeze panel, the hold panel).
-  `button.kchips.kctmf[data-ctm=fr]` = her face `kitFaceH(friend,"xs")` (grey silhouette until met: stranger rule §49.3) + name (`k61Named`,
-  else "Hảo hữu của ta") + ONE status chip + the shared countdown chip (`Còn m:ss` / `Đợi m:ss` while stopped / `.r` "Hết buổi").
-  Status (o.st): ready `.g` "✓ Đã sẵn sàng" · busy `.w` "! Đang bận" (a dialog / event / mini game open: generic, never what) · work `.n`
-  "… Đang làm việc" (still has khắc) · away `.r` "✕ Đang vắng" · hold `.w` "⏸ Tạm dừng". Pushed at once: each client sends {mode:"st",bz,kh,…}
-  on change (checked every 250 ms). Place: in the bar right-aligned on the "Buổi …" line when free (checked against every leaf of the bar and the
-  seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
-  Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
-  waiting notice only. Samples on the kit page "§69".
+- §69.2 «HẢO HỮU» ICON · kitCoopFriend(o) (CANON OVERWRITE, owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... off là màu
+  xám ... On là sẽ màu tươi hơn ... xong thì có một cái dấu tích màu xanh kế bên ... đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó
+  thì nó ra thông tin"; review/hao-huu): `#kctmf`, in the FIXED TOP BAR, always on in co-op (hidden only under the title, the freeze panel, the hold panel).
+  `button.kctmf[data-ctm=fr]` = ONE square kit icon button (36 px, radius 8 px like the rail / `.kit-x`; no round tap target): her portrait
+  `kitFaceH(friend,"xs")` once met (`isKnown61`), the painted kit icon `img/kit/ico-friend.webp` (K-ICO-HAOHUU) while she is a stranger (no face
+  before meeting, §49.3). GREY (`.koff`: grayscale) when she is offline (away), full colour when online. Badge at its corner (`.kctmf-b`, a dot, the
+  only round part): ready `.g` "✓" · busy / work `.n` "…" · hold `.w` "⏸" · away: none (the grey icon says it). NO name and NO status words on
+  screen: they are the aria-label / title and a visually hidden span (`.kctmf-vh`, "<name or Hảo hữu của ta> · ✓ Đã sẵn sàng" …). Beside it the
+  shared buổi countdown as ONE short kit chip `.kctmf-t` (`m:ss` / `⏸ m:ss` while stopped / `.r` "Hết buổi") — owner 16/11 countdown rule kept.
+  Status is pushed at once: each client sends {mode:"st",bz,kh,…} on change (checked every 250 ms). Place: the first free spot of the bar from the
+  top-right corner (checked against every leaf of the bar and the seal), else a strip under the bar at the right edge.
+  Tap → the «Hảo hữu» partner sheet `kitHaoHuuOpen()` (`dev/build/jhaohuu.js`, ONE panel): `kitPanel({kind:"info"})` with her full-body figure
+  (stranger: the kit `unknown-fig-f` as a stage pseudo person, never her entry), Thân phận (Danh vị = `kitName` rank unit, Cung) · Tư chất
+  (`kitPersonStats`) · Sức khỏe · Trong cung của nàng (Con cái, Cung nữ thân cận) · Lúc này (Hảo hữu = this status `COOPW.frInfo` + `frWord`, Ngươi,
+  Đang ở, one kpnote of what to do meanwhile); options «Tạm dừng» (when the room may pause) + «Đóng». Stranger rule OD:L165: «Hảo hữu của ta»,
+  every field «chưa rõ» but what anyone sees. Servant road: Danh vị Cung nữ / Hầu hạ / Cung; home road: «ở phủ nhà, chờ kỳ tuyển tú».
+  `kitCoopFriendPanel(o)` (the old status-only notice `#kctmp`) is only the fallback when jhaohuu is absent. Samples on the kit page "§69".
+  Test: `COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <outdir>`.
 
 - §69.3 INVITE GUIDE · kitCoopSteps({sent, joined, wait, you}) (owner 16/11 "Rồi sao nữa", C43 review/coop-invite-ux) — `jcooptimer.js`: the 1-2-3
   guide of the lobby's "Mời hảo hữu" screen as `kitRows` rows (joined to the Ám hiệu / Hảo hữu rows with `kitRowsJoin`): "1 · Gửi lời mời" (`.w`
@@ -4156,7 +4164,6 @@ SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình v
   (2) **Chat** (co-op only) — added by review/coop-chat through the API, `order:20`, icon `img/kit/ico-chat.webp`.
   (3) **Mục tiêu chương** `img/kit/ico-goal.webp` (K-ICO-1; `mo-edict-closed.webp` stays the wide scroll of the goal flip) → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she
   last opened it (`S.goalSeen`, optional, old saves fine). It REPLACES the goal strip (§72.2): no strip on the stage, none on top of Hành sự.
-  (4) **Hảo hữu** (co-op only, both seats; owner 21/11 ~06:05Z mark #2 "để ở dưới luôn") — added by review/hao-huu through the API, `order:90` = the BOTTOM of the rail, `when` = co-op on; icon `img/kit/ico-friend.webp` (KIT REQUEST K-ICO-HAOHUU; until KIT READY the §77.1 glyph fallback «友») → `kitHaoHuuOpen()` (`dev/build/jhaohuu.js`): the partner sheet = `kitPanel({kind:"info",subject:<her entry>})` with `kitRows` (Thân phận: Danh vị = `kitName` rank unit, Cung · Sức khỏe · Trong cung của nàng: Con cái, Cung nữ thân cận · Lúc này: the header chip's live status via `COOPW.frInfo`, Buổi này, Đang ở) + `kitPersonStats` tiles. Stranger rule OD:L165: unmet = «Hảo hữu của ta», grey silhouette, every field «chưa rõ» but Lúc này / Buổi này. Servant road: Danh vị Cung nữ, Hầu hạ, Cung; home road (tiểu thư before tuyển tú): «ở phủ nhà, chờ kỳ tuyển tú». No new part. Test: `COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <outdir>`.
 - API: `kitStageRail.add({id, icon, title, onTap, badge:()=>bool, when:()=>bool, order})` · `kitStageRail.remove(id)` · `kitStageRail.paint()`.
   Re-drawn after every `renderStage` / `render` and on resize. Nobody draws another floating stage button; new ones go into the rail.
 - The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).

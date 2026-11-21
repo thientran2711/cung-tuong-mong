@@ -1,7 +1,10 @@
 /* «Hảo hữu» partner sheet (owner 21/11 ~06:05Z mark #2; dev/build/jhaohuu.js) — BOTH seats, two Playwright browsers in one room on the LIVE Worker.
    usage: python3 dev/build/assemble.py && COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <outdir> [workerURL]
-   Checks: (1) SOLO: no «Hảo hữu» rail icon; (2) co-op, host A + guest B, each at Fold 755x1000 AND iPad 1180x820:
-   the icon is the LAST (bottom) button of the stage's left rail (#krail), inside the stage; tap → ONE kit info panel (.dlg.kpanel, seal + ✕);
+   Owner canon overwrite 21/11 ~06:30Z: the entry is the «Hảo hữu» ICON in the fixed TOP BAR (KIT §69.2 kitCoopFriend), not on the stage.
+   Checks: (1) SOLO: no «Hảo hữu» icon; (2) co-op, host A + guest B, each at Fold 755x1000 AND iPad 1180x820:
+   the icon (#kctmf .kctmf) sits inside the top bar (header.hud), square (radius ≠ 50%), no name / status words visible, a badge (✓ / … / ⏸)
+   for an online friend, grey (.koff) markup for an offline one, the stage rail has no «haohuu» item; tap → ONE kit info panel (.dlg.kpanel, seal + ✕)
+   with «Hảo hữu» / «Ta» rows;
    STRANGER (unmet): title «Hảo hữu của ta», her real name nowhere in the panel, grey silhouette figure, rank/stats «chưa rõ»;
    MET: title = her name, kit rank unit (.kname) in «Danh vị», stats tiles = her real numbers, Sức khỏe = her number, Lúc này row;
    ✕ and Esc close it; no page errors; no horizontal overflow. Shots <outdir>/hh-<seat>-<dev>-<stranger|met>.jpg (scratch, never git). */
@@ -39,18 +42,27 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
 
 const clearAll=o=>clear(o);
 /* a story card (.kmov) of the running game may cover the screen a moment later: clear it, then tap the icon */
-async function tapHH(o){for(let i=0;i<4;i++){await clear(o);await bare(o);await sleep(300);try{await o.p.click('#krail [data-rail=haohuu]',{timeout:5000});return true}catch(e){}}return false}
+/* an open partner sheet is closed by its ✕ first: the generic clear() presses a card's first option, which on this sheet is «Tạm dừng» (pauses both seats) */
+const shut=o=>o.p.evaluate(()=>{const M=document.getElementById('modal');const x=!M.hidden&&M.querySelector('.dlg.kpanel .kph .kit-x');if(x&&/Hảo hữu cùng chơi/.test(M.textContent))x.click();try{if(COOPW.tm.dbg().HOLD===COOPW.seat)COOPW.frHold(false)}catch(e){}});
+async function tapHH(o){for(let i=0;i<4;i++){await shut(o);await clear(o);await bare(o);await sleep(300);try{await o.p.click('#kctmf .kctmf',{timeout:5000});return true}catch(e){}}return false}
 /* the icon + panel on one seat at one device */
 async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewportSize({width:W,height:H});await sleep(700);await bare(o);await sleep(900);
  await o.p.evaluate(()=>{try{kitStageRail.paint()}catch(e){}});await sleep(300);
- const r=await o.p.evaluate(()=>{const rail=document.getElementById('krail'),st=document.getElementById('stage');const B=rail?[...rail.querySelectorAll('[data-rail]')].filter(x=>x.getClientRects().length):[];
-  const hh=rail&&rail.querySelector('[data-rail=haohuu]');const q=e=>{const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
-  const sr=st&&st.getBoundingClientRect();const inside=!!(hh&&sr&&(()=>{const r=hh.getBoundingClientRect();return r.left>=sr.left-1&&r.right<=sr.right+1&&r.top>=sr.top-1&&r.bottom<=sr.bottom+1})());
-  return{n:B.length,ids:B.map(x=>x.dataset.rail),last:B.length?B[B.length-1].dataset.rail:null,box:hh?q(hh):null,inside,tag:hh&&hh.tagName,sq:hh?getComputedStyle(hh).borderRadius:null}});
- ok(!!r.box,`${seat} ${dev} ${phase}: «Hảo hữu» icon on the stage rail`,r);
- ok(r.last==='haohuu',`${seat} ${dev} ${phase}: icon is the BOTTOM of the left rail`,r.ids);
- ok(r.inside,`${seat} ${dev} ${phase}: icon inside the stage`,r.box);
- ok(r.sq&&!/50%/.test(r.sq),`${seat} ${dev} ${phase}: square kit rail button (no round tap target)`,r.sq);
+ const r=await o.p.evaluate(()=>{const b=document.querySelector('#kctmf .kctmf'),hud=document.querySelector('header.hud');const q=e=>{const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
+  if(!b||!b.getClientRects().length)return{box:null};const R=b.getBoundingClientRect(),H=hud.getBoundingClientRect();const inBar=R.top>=H.top-1&&R.bottom<=H.bottom+1&&R.left>=H.left-1&&R.right<=H.right+1;
+  const vis=[...b.querySelectorAll('*')].filter(e=>!e.closest('.kctmf-vh')&&e.children.length===0&&e.getClientRects().length).map(e=>e.textContent.trim()).filter(Boolean);
+  const bd=b.querySelector('.kctmf-b');const st=COOPW.frInfo().st;
+  return{box:q(b),inBar,sq:getComputedStyle(b).borderRadius,vis,badge:bd&&bd.textContent,st,off:b.classList.contains('koff'),img:(b.querySelector('img')||{}).getAttribute&&b.querySelector('img').getAttribute('src'),
+   rail:!!document.querySelector('#krail [data-rail=haohuu]'),offMk:kitCoopFriend({st:'away'}).includes('koff')&&!/kctmf-b/.test(kitCoopFriend({st:'away'})),readyMk:/kctmf-b g[^>]*>✓/.test(kitCoopFriend({st:'ready'})),busyMk:/>…</.test(kitCoopFriend({st:'busy'}))}});
+ ok(!!r.box,`${seat} ${dev} ${phase}: «Hảo hữu» icon shown`,r);
+ ok(r.inBar,`${seat} ${dev} ${phase}: icon inside the fixed top bar`,r.box);
+ ok(r.sq&&!/50%/.test(r.sq),`${seat} ${dev} ${phase}: square kit icon button (no round tap target)`,r.sq);
+ ok(r.vis.every(t=>/^[✓…⏸]$|^⏸?\s?\d+:\d\d$|^Hết buổi$/.test(t)),`${seat} ${dev} ${phase}: no name / status words on screen (badge + clock only)`,r.vis);
+ ok(r.st==='away'?(r.off&&!r.badge):(!r.off&&(r.st==='ready'?r.badge==='✓':r.st==='hold'?r.badge==='⏸':r.badge==='…')),`${seat} ${dev} ${phase}: online colour + badge matches her status`,{st:r.st,badge:r.badge,off:r.off});
+ ok(r.offMk&&r.readyMk&&r.busyMk,`${seat} ${dev} ${phase}: kit markup: away = grey no badge, ready = green ✓, busy = …`);
+ ok(phase==='stranger'?/ico-friend/.test(r.img||''):!/ico-friend/.test(r.img||''),`${seat} ${dev} ${phase}: icon = ${phase==='stranger'?'painted kit icon (no face before meeting)':'her portrait'}`,r.img);
+ ok(!r.rail,`${seat} ${dev} ${phase}: no «Hảo hữu» item left on the stage rail`);
+ ok(await o.p.evaluate(()=>typeof COOPW.hold!=='function'&&!COOPW.hold&&!/bản mới/.test(document.getElementById('next').textContent)),`${seat} ${dev} ${phase}: room not held (COOPW.hold untouched, Sẵn sàng button free)`,await o.p.evaluate(()=>[typeof COOPW.hold,document.getElementById('next').textContent]));
  if(!r.box)return;
  await tapHH(o);await sleep(1400);const d=await o.p.evaluate(()=>{const M=document.getElementById('modal');const dl=M&&!M.hidden&&M.querySelector('.dlg.kpanel');if(!dl)return null;
   const f=(!!window.COOPW&&COOPW.friend&&COOPW.friend())||null;const txt=dl.textContent;const rows={};dl.querySelectorAll('.kr').forEach(r=>{const l=r.querySelector('.krl'),v=r.querySelector('.krv');if(l&&v)rows[l.textContent.trim()]=v.textContent.trim()});
@@ -62,7 +74,7 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
  ok(!!d,`${seat} ${dev} ${phase}: tap → kit info panel`,d?undefined:await o.p.evaluate(()=>{const M=document.getElementById('modal');return{on:!!(COOPW&&COOPW.on),S:!!S,dead:S&&S.dead,Q:Q.length,q0:Q[0]&&(Q[0].t||''),hidden:M.hidden,cls:M.className,dlg:M.querySelector('.dlg')&&M.querySelector('.dlg').className,hh:window.__hhOpen||0,fz:!!document.getElementById('coopfz')}}));if(!d)return;
  ok(d.seal&&d.x,`${seat} ${dev} ${phase}: kit header seal + ✕`,{seal:d.seal,x:d.x});
  ok(!d.ov,`${seat} ${dev} ${phase}: no horizontal overflow`);
- ok(!!d.rows['Lúc này'],`${seat} ${dev} ${phase}: live status row (Lúc này)`,d.rows['Lúc này']);
+ ok(!!d.rows['Hảo hữu']&&!!(d.rows['Ta']||d.rows['Ngươi']),`${seat} ${dev} ${phase}: live status rows (Hảo hữu / Ta, ex chip panel)`,[d.rows['Hảo hữu'],d.rows['Ta']||d.rows['Ngươi']]);
  if(phase==='stranger'){
   ok(d.title==='Hảo hữu của ta',`${seat} ${dev} stranger: title «Hảo hữu của ta»`,d.title);
   ok(!d.hasName,`${seat} ${dev} stranger: her real name nowhere in the panel`,d.fname);
@@ -78,6 +90,9 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
   ok(!!d.rows['Cung']&&!!d.rows['Con cái'],`${seat} ${dev} met: palace + household rows`,{cung:d.rows['Cung'],con:d.rows['Con cái'],maid:d.rows['Cung nữ thân cận']});
  }
  await o.p.screenshot({path:`${OUT}/hh-${seat}-${dev}-${phase}.jpg`,type:'jpeg',quality:72});
+ await o.p.evaluate(()=>{const d=document.querySelector('#modal .dlg');[d,...d.querySelectorAll('*')].forEach(e=>{if(e.scrollHeight>e.clientHeight+4&&/auto|scroll/.test(getComputedStyle(e).overflowY))e.scrollTop=e.scrollHeight})});await sleep(400);
+ await o.p.screenshot({path:`${OUT}/hh-${seat}-${dev}-${phase}-end.jpg`,type:'jpeg',quality:72});
+ ok(await o.p.evaluate(()=>[...document.querySelectorAll('#modal .kpopts button')].some(b=>/Tạm dừng/.test(b.textContent))),`${seat} ${dev} ${phase}: «Tạm dừng» option on the sheet (ex chip panel)`,await o.p.evaluate(()=>({b:[...document.querySelectorAll('#modal button')].map(b=>b.textContent.trim().slice(0,30)),can:COOPW.frInfo().canHold,clock:COOPW.frInfo().clock})));
  await o.p.click('#modal .kph .kit-x').catch(()=>{});await sleep(500);ok(await o.p.evaluate(()=>document.getElementById('modal').hidden),`${seat} ${dev} ${phase}: ✕ closes`);
  await tapHH(o);await sleep(900);await o.p.keyboard.press('Escape');await sleep(500);
  ok(await o.p.evaluate(()=>document.getElementById('modal').hidden),`${seat} ${dev} ${phase}: Esc closes`);
@@ -87,8 +102,8 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
  {const S0=await mk(b,'solo',DEV.fold);await S0.p.goto(BASE,DCL);await booted(S0);
   await S0.p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   await sleep(1500);await bare(S0);await sleep(900);
-  const r=await S0.p.evaluate(()=>({reg:typeof kitStageRail!=='undefined'&&kitStageRail.items().some(x=>x.id==='haohuu'),shown:!!document.querySelector('#krail [data-rail=haohuu]'),rail:!!document.getElementById('krail'),coop:!!window.COOPW&&!!COOPW.on}));
-  ok(r.rail&&!r.shown&&!r.coop,'solo: no «Hảo hữu» icon (rail present, co-op off)',r);ok(!S0.errs.length,'solo: no page errors',S0.errs);await S0.ctx.close()}
+  const r=await S0.p.evaluate(()=>{const e=document.getElementById('kctmf');return{shown:!!(e&&!e.hidden&&e.getClientRects().length),rail:!!document.getElementById('krail'),hhRail:!!document.querySelector('#krail [data-rail=haohuu]'),coop:!!window.COOPW&&!!COOPW.on}});
+  ok(r.rail&&!r.shown&&!r.hhRail&&!r.coop,'solo: no «Hảo hữu» icon (co-op off)',r);ok(!S0.errs.length,'solo: no page errors',S0.errs);await S0.ctx.close()}
  /* (2) co-op room: A host (Fold), B guest (iPad) */
  const A=await mk(b,'host',DEV.fold),B=await mk(b,'guest',DEV.ipad);
  for(const [o,k] of [[A,process.env.COOP_A_ORIGIN],[B,process.env.COOP_B_ORIGIN]])if(k)await o.ctx.addInitScript(k=>{window.__forceOrigin=k},k);
