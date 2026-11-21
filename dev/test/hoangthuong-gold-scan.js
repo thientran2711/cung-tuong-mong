@@ -8,7 +8,7 @@ const MEAS=()=>{const out=[];const rgb=c=>{const m=/rgba?\((\d+),\s*(\d+),\s*(\d
  const els=[...document.querySelectorAll('body *')].filter(e=>e.offsetParent!==null||getComputedStyle(e).position==='fixed');
  for(const e of els){const own=[...e.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();if(!/^(Hoàng thượng|Thái hậu|Hoàng thái hậu)$/.test(own))continue;/* a title / name, not a sentence that mentions them */if(e.closest('script,style,.kofold')||/\bkpsub\b|\bkrl\b/.test(e.className&&e.className.toString()||''))continue;/* a sub-title / a row LABEL is not the name */
   const cs=getComputedStyle(e);let col=rgb(cs.color);if(!col)continue;/* a gradient / background-clip text paints with its own colour */ if(cs.webkitTextFillColor&&rgb(cs.webkitTextFillColor))col=rgb(cs.webkitTextFillColor)||col;
-  out.push({txt:own.slice(0,28),cls:(e.className&&e.className.toString()||e.tagName).slice(0,40),col:col.join(','),lum:Math.round(lum(col))})}
+  out.push({th:/Thái hậu/.test(own),pn:!!e.closest('.pc')&&/pcname/.test(e.className.toString()),imp:e.hasAttribute&&e.hasAttribute('data-imp'),txt:own.slice(0,28),cls:(e.className&&e.className.toString()||e.tagName).slice(0,40),col:col.join(','),lum:Math.round(lum(col))})}
  return out};
 (async()=>{const T=await boot(ROOT,DEV);const g=T.g,p=T.p;const rows=[];
  const add=async(view)=>{const r=await g.evaluate(MEAS);r.forEach(x=>rows.push(Object.assign({view},x)))};
@@ -26,6 +26,8 @@ const MEAS=()=>{const out=[];const rgb=c=>{const m=/rgba?\((\d+),\s*(\d+),\s*(\d
  await p.waitForTimeout(900);await add('title-only variants');if(SH)await p.screenshot({path:`${SH}/${DEV}-variants.png`});await g.evaluate(()=>{try{Q.length=0;document.getElementById('modal').hidden=true}catch(e){}});
  /* 3. dư đồ / Chí tôn group */
  await g.evaluate(()=>{try{kitGroupOpen&&kitGroupOpen('ct')}catch(e){}try{tab="map";render()}catch(e){}});await p.waitForTimeout(900);await add('map');
- const bad=rows.filter(r=>r.lum<150);const off=rows.filter(r=>r.lum>=150&&fixed&&r.col!==(()=>{const h=fixed.replace('#','');return [0,2,4].map(i=>parseInt(h.substr(i,2),16)).join(',')})());
- console.log('KIT_IMP',fixed);console.log('view | text | class | colour | luminance');rows.forEach(r=>console.log([r.view,r.txt,r.cls,r.col,r.lum].join(' | ')));
+ /* RULE (OD:L1362 + KIT 33.5): ONLY Hoàng thượng is the bright imperial yellow; Thái hậu keeps her own look (her CARD NAME stays ink and carries no data-imp; her kit tone elsewhere is not changed by this branch) */
+const emp=rows.filter(r=>!r.th),th=rows.filter(r=>r.th);const thBad=th.filter(r=>r.pn&&(r.lum>=150||r.imp));
+const bad=emp.filter(r=>r.lum<150).concat(thBad);const off=emp.filter(r=>r.lum>=150&&fixed&&r.col!==(()=>{const h=fixed.replace('#','');return [0,2,4].map(i=>parseInt(h.substr(i,2),16)).join(',')})());
+ console.log('KIT_IMP',fixed);console.log('view | text | class | colour | luminance');rows.forEach(r=>console.log([r.view,r.txt,r.cls,r.col,r.lum,r.th?'(Thái hậu: must NOT be changed)':'(Emperor: must be KIT_IMP)'].join(' | ')));
  console.log(`hoangthuong-gold-scan ${DEV}: ${rows.length} elements, ${bad.length} dark, ${off.length} bright-but-not-token, page errors ${T.errs.length}`);await T.close();process.exit(bad.length||off.length||T.errs.length||!rows.length?1:0)})();
