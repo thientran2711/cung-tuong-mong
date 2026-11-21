@@ -2,6 +2,6 @@ base: dev/art/thu_comoi/s62_t7_THU_vankien2_L2079.txt
 allow: an embroidered light olive TWO-TIER cloud collar  # owner L2099: HQP vân kiên = ONE tier (HH = two)
 allow: vân kiên hai tầng  # owner L2099: một tầng
 allow: a little LONGER and STIFF, standing slightly OUT past the shoulders, never hugging them  # owner L2105: no stiff / no hugging words, just 'a little LONGER, extending slightly OUT past the shoulders'
-allow: FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.  # B27/B28 + owner L2106: lightest gấm, never thick/heavy (same sentence as ROOT-B2 s62_t7_THU_gamnhe_L2106)
+allow: FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.  # B32 owner L2122 chốt: thu t1–t8 thường phục = exactly the t1–t5 thu fabric sentence (master 'The FABRIC is thin, light, flowing silk and gauze …' added)
 allow: CAPTION: top-left, with accents: "Thu · Hoàng quý phi · L2079"  # A53 owner L2110: ChatGPT paste file, no test-label text
 allow: NEVER on the robe, cape, collar or belt  # owner L2111 via ROOT-B2/B3: no "cape" word (t7 has no cape); same as L2106 gem line
