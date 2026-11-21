@@ -789,7 +789,7 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW hoangthuong-gold r2 PASS → LAND READY 1e826e29 (Emperor only; Thái hậu = LIVE) | review/hoangthuong-gold-rv2 | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:57Z |
 | huong-cue-2-r2 review | sonnet reviewer (Foreman B ROOT-5) | PASS 3be6edad review/huong-cue-2-r2-rv | 21/11 |
 | REVIEW bang-words E40r (BIG opus) 927ac123 | review/bang-words-r; reports/bang-words-review.md | FOREMAN E #26 | session_01DgYSWqAzt8MGwYMUsFUXN5 | PASS cba883e0 (LAND READY) | 21/11 05:59Z |
-| coop-thin-g F1 week-stall fix (opus BIG; L13 cyHold=w no card; + check ccd41e45 in main) | review/coop-thin-g-f1 | B | session_01N1tNP4qNNZGeU813sVfsMD | RUNNING | 21/11 06:02Z |
+| coop-thin-g F1 week-stall fix (opus BIG; L13 cyHold=w no card; + check ccd41e45 in main) | review/coop-thin-g-f1 | B | session_01N1tNP4qNNZGeU813sVfsMD | ROLLOVER @792b8e7c: F1 fixed+proven on 56828ae6 (night 5/5, TRIP 2/2 0 stall); LIVE 74cea8bf merge → cyc/cycs/timer red + TRIP wk9 desync to bisect (HANDOVER F1 #1→#2 in reports/coop-thin-g.md) | 21/11 |
 | rv-ending-screens OPUS BIG reviewer (Foreman B; MAIN 88 order) | review/ending-screens-rv; reports/rv-ending-screens.md | B | session_01N1tNP2Z5YHxBZcLFzY5BEH | PASS c073f8d4 → LAND READY (FF of 2021e23f) | 21/11 |
 | REVIEW tinh-net-word PASS → LAND READY 72b0bdb7 (#4 note) | review/tinh-net-word-rv | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS (archived) | 21/11 06:06Z |
 | REVIEW maid-8tabs (BIG opus) 7d68436b (#32–#36) | review/maid-8tabs-rv; briefs/main89-rv-maid-8tabs.md | MAIN CHÍNH 89 | session_01Rc5AsMYd9YDaGJ8Zvocx99 | PASS r2 → LAND READY 561e3f47 FF of main aee7ff84 (reports/rv-maid-8tabs.md §ROUND 2) | 21/11 06:09Z |

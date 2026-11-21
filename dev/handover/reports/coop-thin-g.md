@@ -330,3 +330,72 @@ Branch **review/coop-thin-g-r1** = 7fcae66b + merges of LIVE b1033eb0 and 5a8c30
 - FOR MAIN: deploy the Worker with THINMAX 13 at landing.
 
 **FAIL coop-thin-g → review/coop-thin-g-r1 @695414cf** (contains origin/main 666def0c): ONE item F1 (week stall at L13). Everything else checked is green; the r1 fixes (seat desync e7b996f2, family sites jky / jnamefix, test twins) stay on review/coop-thin-g-r1 — the worker continues from it. Scratch shots / probe copies deleted after the verdict (none in git).
+
+## F1 FIX — worker session_01N1tNP4qNNZGeU813sVfsMD (opus), Foreman B ROOT-5 lane, 11/21/2026
+PRIORITY #1 CHECK ('week stall'): OD 0 | ledger 0 | claims 4 (coop-week-stall worker 6if7E7NX, REVIEW 3HM21Jne PASS ccd41e45, MAIN84 lander) | main 1 | review/* review/coop-thin-g-r1 695414cf | archive 6. START_CTX ≈ 3 % of 1M (own estimate).
+Branch **review/coop-thin-g-f1** from 695414cf (all r1 fixes kept: e7b996f2 seat desync, jky / jnamefix seat-guard sites, test twins).
+
+### STEP 1 — coop-week-stall ccd41e45 on main?
+NOT on origin/main (git merge-base --is-ancestor on depth 200 = no; `git grep cyHer|rxQ` origin/main = 0 hits, origin/review/coop-week-stall-r1 = 8). Merged into this branch (861b51e3). One conflict: jcoopworld sendEnd — kept part G's two gates (gG / gHold) and added the stall branch's cyHer() to the first guard. Then merge LIVE.
+
+### STEP 2 — root cause (reproduced, dump below)
+Repro on 861b51e3+main (ccd41e45 IN): `THIN=13 node dev/test/coop-night.js` 2 runs, 1 stall (case 3, then case 4 fails «both at buổi tối» as a follow-on). Host dump (coop-night dbg, now with cyHold / cyb / D.log):
+`cyHold:3, cyA:3, cyb:{df:3, rk:3, rv:"dung"}, D.log … ["pick","cyrep",0]`, G done[2] true, her thq empty, gHold false, frPz false, sent 1, pend true; her phone «Chờ hảo hữu…», hostEnd wait 2.
+→ **her answer IS in (rk = g) but the held draw never looks again.** At eW (level ≥ 5) her Kỳ nguyệt sự answer is a part-D PICK run on the host (E-fix cyAsk on host); her `do cyb` intent is OFF at eW (jcoopworld cySend returns at eW), so the only things that called cyFree were P2H.cyb (L < 5 relay) and a presence event. At L13 with ccd41e45 her end waits for his (cyHer) and his end waits for the draw → nobody changes presence → permanent stall. The faster ccd41e45 ordering makes it MORE likely (no presence after the pick), not less.
+Second door, same family (reviewer's TRIP wk31 dump `df=g, no rk, no card`): the card is gone with no answer — her ✕ (closeModal → `pick i:-1`: the host drops the card, chooses nothing), a stale pick (PEND.cyrep null: maid gone / cycle off → no D.GONE.cyrep), or a card lost with her store. herCy asks once per week (E.cyA) → the draw waits on a card that is not there.
+
+### Fix (jcoopthin.js +2 lines, jcoopthine.js +9, jcoopworld.js +4; no number, no word, no UI)
+| # | where | what |
+|---|---|---|
+| 1 | jcoopthin TH.onDo("pick") (answer + stale paths) | after her pick the host runs cyFree (setTimeout 0; no-op when nothing is held) |
+| 2 | jcoopworld | 1 s check while CW.cyHold is set (host, eW, outside her context): cyFree — belt for any answer path that makes no event |
+| 3 | jcoopthine CW.cyLost / CW.cyReask + jcoopworld cyWait | the ask ran (E.cyR = g), her open cards hold no cyrep, nothing deferred for her seat, seat not held → df cleared on her stored person, E.cyA reset → herCy asks again (card back on her phone; maid gone / no cycle → cyAsk false → cyNo → free). Never frees without her answer while a card can still be shown. |
+
+### Law 11 — every wait that holds a seat / the week on something from the OTHER seat (scan: `grep -on 'CW\.[a-zA-Z]*(Hold|Wait|wait|hold|owe|pend[A-Za-z]*)' dev/build/jcoop*.js` + herCy / gNight / D.DF)
+| # | wait | waits for | what wakes it — before | can the awaited thing be lost? before | after |
+|---|---|---|---|---|---|
+| 1 | **cyHold, eW host (L ≥ 5)** jcoopworld cyWait | her Kỳ nguyệt sự answer (stored S.cyb.rk = g) | presence only (her `do cyb` is off at eW; P2H.cyb is the L < 5 relay) → **STALL** (repro: rk = g, held) | **yes**: ✕ (pick −1), stale pick, lost store → df = g, no rk, no card → **STALL** (TRIP wk31) | wake on pick + 1 s check; lost card → asked again |
+| 2 | cyHold, L < 5 | relay cyb (fcy) or her end | P2H.cyb + presence (her end) | relay lost on reconnect → cyK reset on room / peer, sent again | ok (unchanged) |
+| 3 | gNight / gHold (L13, jcoopthing) | her week end done + her open cards answered + no mini game | own 500 ms poll | a card in her thq is always on her phone (gSync); ✕ removes it → free | ok (unchanged) |
+| 4 | cyHer (guest, L ≥ 5, ccd41e45) | the host's end (ended[host]) | thinview + presence | released when his seat is empty / his person dead | ok (merged) |
+| 5 | rpend / resWait | her ack of a res | 10 s expiry | — | ok |
+| 6 | CW.pend (end sent → merged week) | Worker merge | `week` frame; syncRoom re-end | — | ok |
+| 7 | eWait / F.pend (her phone's #next lock) | host's answer dr | 8 s resend × 3, then «Việc ấy chưa thành» | — | ok |
+| 8 | E.owe (host owes her buổi step during her mini game) | her `rd` after the game | her rd catch-up | — | ok |
+| 9 | pendBuoi | her OWN open dialog / game | her taps; timer autoRead (one-road cards) | own screen | ok |
+| 10 | D.DF (work for a held seat) | hold end | 1 s flush | — | ok |
+| 11 | night gate nrdy / ngo | both ready or the host's clock (forceNight) | presence / timer | — | ok |
+| 12 | herNight (Kính sự phòng card, E.nk) | no host wait of its own (row 3 covers its card) | — | ✕ → card gone → row 3 frees | ok |
+| 13 | D.ANS cards (thInv / thBribe) closed with ✕ | (no seat wait: his rpend expires 10 s) | — | his offer gets no answer (not a stall; pre-existing, D.GONE answers only stale) | FOR B: not this lane |
+Only row 1 could wait forever; both its doors are closed.
+
+### Merges on this branch
+| sha | what |
+|---|---|
+| 861b51e3 | merge review/coop-week-stall-r1 ccd41e45 (sendEnd conflict: G gates kept + cyHer) |
+| 2e89f9bc | merge LIVE 2021e23f |
+| 56828ae6 | **F1 fix** (jcoopthin / jcoopthine / jcoopworld) + coop-night dump fields |
+| 8b96b6d5 | merge LIVE fc0867ca |
+| (test) | bot family after LIVE fc0867ca: g4 / g4s / TRIP all stuck in WEEK 1 on her phone (G hold 1195, her pz true). Two causes, both test bot, no game fault: (a) kc-coop-select now shows the Luân hồi roulette on the thin seats; the shared clear() (coop-e2e, eval'd by every coop-thin-* test) never tapped it, and coop-thin-g's mgSkip hit-test then saw the roulette over every frame button; (b) kit-dialog folds the mini-game result's «Đã hiểu» into the frame's ✕ (j82: ✕ on a result screen presses #kg82ok, the result applies) — mgSkip only knew «Đã hiểu». Fix: clear() taps `#kroul .krskip` first (as coop-night's clear does); mgSkip presses the ✕ only on a result screen (#kg82ok / #kg92ok present), after skip / done / «Đã hiểu». g4 WEEKS=2: 10/12 → 14/14. |
+| 792b8e7c | merge LIVE 74cea8bf (coop-week-stall + coop-guest-agent now on main). jagent conflict: main's agent block kept (agLive / agMine / agSelfRun / agSelf), agGuest() = coopGuest() (seat-guard family: at L13 her week end on the host must count as her seat, else agOn() runs every NPC in her context = a second NPC month). |
+
+### Tests
+| test | build | result |
+|---|---|---|
+| coop-night THIN=13 (case 4 + all) | 861b51e3+2e89f9bc (no F1 fix, ccd41e45 in) | 2 runs: **1 stall** (case 3 → case 4 «both at buổi tối» follow-on), dump above |
+| coop-night THIN=13 | 56828ae6 (F1 fix) | **5 runs, 0 stall** (4× 105/105; 1× 97/98: case 8 «same buổi + same clock» ["5:3","5:2"] = leave/return snapshot at the clock's end under 4 lanes, next check «both step» ok, not a week stall) |
+| TRIP=1 WEEKS=36 coop-thin-g swap 1 | 56828ae6 | **2 runs 82/82, 83/83, 0 stall** (72 stress weeks) |
+| coop-e2e level 0 (tt / nc) both seat orders | 56828ae6 | 92/92 + 92/92 |
+| one-core / undef-scan | 56828ae6, 8b96b6d5, 792b8e7c | PASS / PASS |
+| g4 / g4s | 792b8e7c | **18/18, 18/18** |
+| f3s | 792b8e7c | PASS |
+| cyc / cycs THIN=13 | 792b8e7c | **RED 37 fails each**: «B (guest) gets her maid's Kỳ nguyệt sự card» fails, host cyHold null (no hold) — NOT checked on 56828ae6 (pre-merge); suspect LIVE kc-coop-select (jcoopthinb: her life built on the host with her own stored marks) un-stages the test's cycle setup, or a bot-family gap; could also be F1 (cyWait) — first thing to bisect |
+| timer THIN=13 | 792b8e7c | **RED 6** (case 2 AFK time-out «-1», cases 3/4 follow-on) — not run pre-merge; same bisect |
+| TRIP swap 1 | 792b8e7c | **RED** week 9 seat desync after 10 s (t3 danh 32/31, t4 bạc 17/2) — r1's desync signature back after LIVE 74cea8bf (coop-guest-agent: her servants' agent month on the host in her context at L13 — suspect: a write that is not in the patch / blob) |
+
+## ROLLOVER HANDOVER F1 #1 → #2 (11/21/2026; context ≈ START 3 % + 25 %) — Foreman B opens the successor
+Branch **review/coop-thin-g-f1 @792b8e7c** (pushed; contains LIVE 74cea8bf). F1 itself is FIXED and proven on 56828ae6 (night 5/5, TRIP 2/2, 0 stall; root cause reproduced and dumped). NOT ready for review: the LIVE 74cea8bf merge brought 3 reds (table above). Successor:
+1. Bisect cyc / timer: run `THIN=13 node dev/test/coop-cyc.js <out> http://127.0.0.1:8787` and coop-timer on 56828ae6 (F1 fix, pre-LIVE-merge) vs 8b96b6d5 (LIVE fc0867ca) vs 792b8e7c. If 56828ae6 is red → F1 code (cyWait / herCy E.cyR / cyLost) is the cause; else the LIVE kc-coop-select / kit-dialog / coop-guest-agent change (bot family or a real G × LIVE fault). Keep the bot fixes of 8b96b6d5+ (roulette krskip in shared clear, ✕ on result screens).
+2. TRIP week-9 desync (bạc / danh differ host vs her phone after 10 s): dump as r1 did (E.base / thpn / D.PQ); suspect coop-guest-agent's agSelf at L13 (her household month on the host in her context: wage / Sức / secrets) writing her S outside the patch, or agGuest()=coopGuest() choice at the jagent merge (try main's raw seat check for agGuest + see if agOn runs NPCs in her context).
+3. Then: night ×5, TRIP swap ×5, g4/g4s, coop-e2e ×3 both orders, cyc/cycs, timer, f3s–f6s, perf (coop-thin-g-perf.js MONTH=1 CPU=4, ≤ +40 %), quickcheck, role-parity, old save; '## F1 FIX' verdict line; SẴN SÀNG KIỂM.
+Local Worker: `cd coop/worker && npm install && npx wrangler dev --port 8787 --ip 127.0.0.1` (THINMAX 13). Lane script: copy dev/test/coop-thin-g-reg.sh, set cd/O paths. Not yet run here: f4s/f5s/f6s/night on 792b8e7c (lane was cut), quickcheck, role-parity, perf.
