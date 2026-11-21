@@ -34,4 +34,5 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 - s62_t3 (9995): as t2 + one small peony spray + two skirt sprays + two small birds on the band; faint tone-on-tone weave in the skirt; band 1⅓ palm; silver+pearl pins, one gold pin, never spiky (G39); + CHEST BAND ON TOP.
 - Trimmed boilerplate (t2/t3, to stay under 10 000): "a NEW outfit, a full Tang-dynasty court look", "her signature colour family … stays the MAIN robe colour", "(her first reference)" — colour still stated in the COLOUR RULE.
 - check_store tp1/tp2/tp3 a18: FAIL only S08 (ankle sleeves) + S20 (buns, not loose) on all 3, + S06 (store fabric sentence) on t1. Same as L1908 (t1 = verbatim old Tần). Waiver 17 names S08 only → asked #26 to extend it to S20 (+S06 t1).
-- Not changed: t1 hair flower is still LARGE (old Tần); F13 says t1 small, but the owner raised only the hairpins.
+- t1 hair flower → SMALL (#26 relaying owner, F13; 9866 chars). Waiver 17 extended to S20 (+S06 t1) by #26 and logged. VE10 told GO L1924 ×3 @55.
+- m18 maids L1919 DRAWN by VE10 (220 cr): thô sử yiugOhNPW9 · tam lJtksBRgv9 · nhị bxMCq0Z5Y2 · nhất Lw85jBbswO · sheet ha_maid_L1919.png. VE10 nit: nhị chest band reads a bit tall.
