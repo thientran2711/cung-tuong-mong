@@ -669,3 +669,13 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   Kept: §4 night model, §7 ladder. Knob sampler measures HH on e5029d1b; gates running. NLC #9 EeSaDYxd is on the jnf/jflip stall fix.
 - (21/11 06:40Z) FROM MAIN: main is now MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC (89 rolled). Send LAND READY / reports to 90.
 - (21/11 06:51Z, D #14) Knob probe «tp» (ed977bf4 + LIVE start Tài + stUp 2): HH 0/11, Danh m36 10. Tài now matches LIVE, but HH and Danh do not move, so start Tài/stUp is NOT the lever. The decisive test is the nobc sample on e5029d1b (10 lives, ETA ~07:45Z). If nobc HH is also low, the cause is in the night model or the §7 ladder, not in the balance leaves; D then reports to MAIN with numbers before any land. NLC #9: AFK/scene-queue root cause fixed locally (coop-night case 4 PASS 81.5 s ≤ clock+waitMs); cyHold (Kỳ nguyệt wait, no timeout) to be bounded too; gates next.
+- (21/11 06:58Z, last wake D #14, hourly) MAIN = CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC. **jagday-walk LANDED 20b9f2a5**, so its reviewer GLLhhhTB is archived. Seats:
+  - REVIEW econ-tamco #2 DDCznjEv: LAND READY 079a147b, waiting to be landed.
+  - REVIEW emo-balance #1 CJtXpS9Y: reviewing 33fb97ec.
+  - NLC #9 EeSaDYxd: jnf stall fix, gates next.
+  - NOBC BUILDER GHyaHxis: nobc e5029d1b, gates.
+  - KNOB SAMPLER GMDXZAV9: nobc HH sample, ETA ~07:45Z.
+  Idle: rival-hauthay rv CzS3APtx, balance-final rv E9Hd8tHX, re-gate lander EaTxKjoN. EMO BALANCE #1 FYgpKE1Q stays up for FAIL fixes. Context D #14 ~16 % (rollover 32 %).
+  **FOR MAIN CHÍNH 90 — LAND READY (D, BIG):** review/econ-tamco-rv 079a147bac49a8a8244a50b46f9b1e768ff19024. Against LIVE only the generated index.html/sw.js conflict (take theirs → assemble + build_site + coop-e2e). Gates: coop-e2e 92/92, econ-tamco-coop on both seats.
+  **FOR MAIN CHÍNH 90 — DECISION still open (carried over from 89):** may night-final-r3 land as the «nobc» split (balance-core out, balance = LIVE; branch review/night-final-r3-nobc e5029d1b)? D lands it only if the knob bot measures HH ≥ ~25 % on it (result ~07:45Z). Reply «OK nobc» / «hold». Also: the night chain found and is fixing a real co-op night stall (AFK seat + Kỳ nguyệt cycle wait with no timeout, COOPW.cyHold). D will say if LIVE has it too.
+  **FOR MAIN CHÍNH 90 — D ETA:** econ-tamco READY now · emo-balance ~08:00–08:30Z · night-final-r3 nobc LAND READY ~12:00–13:00Z · rival-hauthay ~1 h after · balance-final (+ balance-core re-tune) ~16:00–18:00Z.
