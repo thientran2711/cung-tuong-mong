@@ -1,0 +1,9 @@
+# rv-kit-ef-unit — FAIL (the fix is overridden on the real option / act cards)
+
+PRIORITY #1 CHECK: grepped OWNER_DECISIONS/CLAIMS/KIT_REQUESTS (21/11 econ-tamco RE-CHECK #2 «Bạc -94» split on Fold), KIT.md §6.2b; reuses kaRowH / kaPlain, adds kaUnit + .kef1; no custom chip.
+
+Branch: review/kit-ef-unit-rv = keeper#2 9fd26c14 + LIVE 0046a920 (index/sw rebuilt), sha 0620a05d9b05d42292a97742885a6b1756317a9d. kit-ef-unit.js PASS (145 units, 0 split) — but it renders kaRowH inside a bare button.ka.
+
+FAIL — on the REAL cards the nowrap does not apply. Real option dialog on Fold (755x1000), «Mua chuộc người Nội vụ phủ»: kaUnit marks every item .kef1 (computed class «ef g kef1») but getComputedStyle(white-space) = normal, and the card still shows «Sức 80→98 (+18) · Sủng / +2 · Danh +1» — «Sủng» at the end of one line, «+2» on the next (shot branch-fold; identical to LIVE). Cause (CSS cascade dump on that element): the new rule «button.ka .krv .ef.kef1, .kr .krv .ef.kef1 { white-space: nowrap }» loses to the existing «button.ka.kart small.kb > .kr > .krv > * { white-space: normal !important }» and «button.ka.kart.kopt small.kb > .kr > .krv > * { white-space: normal !important }» (the §6.3 square-card CSS). So the unit never holds on the option cards (.kopt) or the act cards (.kart), which are the cards the econ-tamco request is about.
+Fix: raise the rule above those two: «button.ka.kart small.kb > .kr > .krv > .ef.kef1, button.ka.kart.kopt small.kb > .kr > .krv > .ef.kef1 { white-space: nowrap !important }» (keep the general one for other hosts); then make kit-ef-unit.js render in a real .kart / .kopt card (an option dialog: Q with the sample x lines, and the Hành sự act tab) and assert for every .kef1 that getComputedStyle(white-space)==nowrap and getClientRects().length==1 on Fold + iPad (widths 150..320 px too).
+Not run after the FAIL: quickcheck/coop-e2e (stopped). Merge was clean (index/sw only).
