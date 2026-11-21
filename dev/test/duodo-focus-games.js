@@ -36,7 +36,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   if(safe&&!held){await g.evaluate(([x,y])=>__fire('pointerdown',x,y),[q.x,q.y]);held=true}else if(!safe&&held){await g.evaluate(([x,y])=>__fire('pointerup',x,y),[q.x,q.y]);held=false}await wait(10)}});
  R.earBad=await play('ear',async()=>{for(let i=0;i<10;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;await g.evaluate(([x,y])=>__fire('pointerdown',x,y),[q.x,q.y]);await wait(500)}});
  /* words: tap only the good signs vs only the wrong ones */
- const words=okWant=>async()=>{for(let i=0;i<120;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;/* read + tap in ONE page call (the signs move between round trips) */await g.evaluate(w=>{const q=__h.peek();const s=q.L.find(s=>s.ok===w&&s.y>40);if(s)__fire('pointerdown',s.x,s.y)},okWant);await wait(40)}};
+ const words=okWant=>async()=>{for(let i=0;i<120;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;/* read + tap in ONE page call (the signs move between round trips) */await g.evaluate(w=>{const q=__h.peek();/* the wanted sign farthest from any other-kind sign (two signs can overlap: the tap must not land on both) */const far=s=>Math.min(1e9,...q.L.filter(o=>o.ok!==s.ok).map(o=>Math.hypot(o.x-s.x,o.y-s.y)));const C=q.L.filter(s=>s.ok===w&&s.y>40).sort((a,b)=>far(b)-far(a));const s=C[0];if(s)__fire('pointerdown',s.x,s.y)},okWant);await wait(40)}};
  R.wGood=await play('words',words(true));R.wBad=await play('words',words(false));
  /* stare: hold when under the band, release when over it vs hold all the time */
  R.stGood=await play('stare',async()=>{let held=false;for(let i=0;i<500;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;const want=q.p<(q.lo+q.hi)/2;

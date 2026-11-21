@@ -88,7 +88,7 @@ DFG.ENG.ear=c=>{const B=c.B,G=BAL.df.geo,z=c.P(G.ear,G.earX),r=B.zone*c.fh,sp=df
 DFG.ENG.words=c=>{const B=c.B,G=BAL.df.geo,good=dfgL(B.good,c.e),sp=dfgL(B.spd,c.e)*c.fh,sz=B.size*c.fh;let score=0,hits=0;const L=[];
  const spawn=t=>{const p=c.P(G.chest,0);return{x:p.x+(Math.random()*2-1)*c.fh*G.amp*B.spread,y:p.y+c.fh*G.amp*(1+Math.random()),born:t,ok:Math.random()<good}};
  for(let k=0;k<B.n;k++){const s=spawn(0);s.y-=k*c.fh*G.amp*.6;L.push(s)}
- c.down=(x,y,t)=>{const i=L.findIndex(s=>Math.hypot(s.x-x,s.y-y)<=sz*B.hit);if(i<0)return;const s=L[i];if(s.ok){score+=2;hits++}else score-=2;L[i]=spawn(t);if(hits>=B.goal)c.end(score)};
+ c.down=(x,y,t)=>{/* the NEAREST sign under the finger (two signs can overlap: the one she aims at counts, not the first in the list) */let i=-1,dm=sz*B.hit;L.forEach((s,k)=>{const d=Math.hypot(s.x-x,s.y-y);if(d<=dm){dm=d;i=k}});if(i<0)return;const s=L[i];if(s.ok){score+=2;hits++}else score-=2;L[i]=spawn(t);if(hits>=B.goal)c.end(score)};
  c.tick=(dt,t)=>{for(let i=0;i<L.length;i++){L[i].y-=sp*dt/DFG_MS;if(L[i].y<c.P(0,0).y)L[i]=spawn(t)}};
  c.draw=g=>{for(const s of L){dfgDot(g,s.x,s.y,sz/2,c.col.paper);dfgRing(g,s.x,s.y,sz/2,s.ok?c.col.green:c.col.red,2);dfgSign(g,s.ok?"check":"cross",s.x,s.y,sz*.6,s.ok?c.col.green:c.col.red)}};
  c.timeout=()=>c.end(score);c.peek=()=>({L:L.map(s=>({x:s.x,y:s.y,ok:s.ok})),score,hits})};

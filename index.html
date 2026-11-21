@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f6222f54+","t":"2026-11-21T10:10Z","c":"duodo-focus: fan text fields are plain text (fmt / whyTime / choice x give HTML; the kit escapes n/word/ton/why, so «\u003cspan class=r>Đức…» le…","b":"cc513c88603c","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
+window.CTM_BI={"s":"493368b3+","t":"2026-11-21T10:15Z","c":"duodo-focus: an NPC card playing in the scene stays there when showModal / render runs again (the centre modal rose over the say box); view…","b":"66fc8f0776a5","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -87456,7 +87456,7 @@ DFG.ENG.ear=c=>{const B=c.B,G=BAL.df.geo,z=c.P(G.ear,G.earX),r=B.zone*c.fh,sp=df
 DFG.ENG.words=c=>{const B=c.B,G=BAL.df.geo,good=dfgL(B.good,c.e),sp=dfgL(B.spd,c.e)*c.fh,sz=B.size*c.fh;let score=0,hits=0;const L=[];
  const spawn=t=>{const p=c.P(G.chest,0);return{x:p.x+(Math.random()*2-1)*c.fh*G.amp*B.spread,y:p.y+c.fh*G.amp*(1+Math.random()),born:t,ok:Math.random()<good}};
  for(let k=0;k<B.n;k++){const s=spawn(0);s.y-=k*c.fh*G.amp*.6;L.push(s)}
- c.down=(x,y,t)=>{const i=L.findIndex(s=>Math.hypot(s.x-x,s.y-y)<=sz*B.hit);if(i<0)return;const s=L[i];if(s.ok){score+=2;hits++}else score-=2;L[i]=spawn(t);if(hits>=B.goal)c.end(score)};
+ c.down=(x,y,t)=>{/* the NEAREST sign under the finger (two signs can overlap: the one she aims at counts, not the first in the list) */let i=-1,dm=sz*B.hit;L.forEach((s,k)=>{const d=Math.hypot(s.x-x,s.y-y);if(d<=dm){dm=d;i=k}});if(i<0)return;const s=L[i];if(s.ok){score+=2;hits++}else score-=2;L[i]=spawn(t);if(hits>=B.goal)c.end(score)};
  c.tick=(dt,t)=>{for(let i=0;i<L.length;i++){L[i].y-=sp*dt/DFG_MS;if(L[i].y<c.P(0,0).y)L[i]=spawn(t)}};
  c.draw=g=>{for(const s of L){dfgDot(g,s.x,s.y,sz/2,c.col.paper);dfgRing(g,s.x,s.y,sz/2,s.ok?c.col.green:c.col.red,2);dfgSign(g,s.ok?"check":"cross",s.x,s.y,sz*.6,s.ok?c.col.green:c.col.red)}};
  c.timeout=()=>c.end(score);c.peek=()=>({L:L.map(s=>({x:s.x,y:s.y,ok:s.ok})),score,hits})};
@@ -89139,7 +89139,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cc513c88603c";window.CTM_BUILD=BUILD;
+const BUILD="66fc8f0776a5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
