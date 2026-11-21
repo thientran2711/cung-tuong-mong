@@ -438,3 +438,9 @@ Old colours → new colours per person: dev/handover/review-sheets/thu_palette_L
 - **s61** Hạ ★GỐC #D2906C+#EDDCC6 → #E6976E+#FFF2EF · 1 picture(s)
   - s61 | t?  ? (NEWFACE-761, 2026-11-19) | gen gOme1k6SXO cut SyhdxtJUb8 | dev/art/face-common/s61.v5.FULL.txt | drawn #D2906C; replaced by G50 new palette (redraw pending)
 <!-- G50-L1645 END -->
+<!-- L1787 THU OLD → SKINS (owner L1787 verbatim: "Những cái bản cũ này nè, đưa hết về làm skin, không có bỏ cái nào hết đó" — overrides A45 for these) -->
+- s62 | thu t1 Đáp ứng a18 (prompt L1723) | fHzo0AZCDY | dev/handover/review-sheets/thu_t1t3_L1778.png | replaced by s62_t1_THU_fix_L1776 (square neck)
+- s62 | thu t2 Thường tại a18 (prompt L1723) | Syh1EQKUb8 | dev/handover/review-sheets/thu_t1t3_L1778.png | replaced by s62_t2_THU_fix_L1776
+- s62 | thu t3 Quý nhân a18 (prompt L1723) | 79fjFlBJAL | dev/handover/review-sheets/thu_t1t3_L1778.png | replaced by s62_t3_THU_fix_L1776
+- s62 | thu t8 Hoàng hậu a18 old (L1723) | jUoqvBPLD0 | dev/handover/review-sheets/thu_hh_fix6_L1775.png | replaced by fix6 jUobgIELD0
+- s62 | thu t8 Hoàng hậu a18 fix4 (L1735) | gOmkqTkSXO | dev/handover/review-sheets/thu_hh_fix6_L1775.png | replaced by fix6 jUobgIELD0
