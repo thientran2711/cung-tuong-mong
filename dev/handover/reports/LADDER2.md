@@ -40,3 +40,9 @@ t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jad
 - HOLD (Foreman 01:53Z): no t6–t8 gens until DESIGN20's new G40 wording is proven on t4/t5 v8 drafts; then swap into OUTER_TIED source + t1–t3, xuân, t6–t8, re-gate, CHECK1.
 - Vase check (owner L1438): none in t1–t3 v6, xuân v7, t6 COMOIf, t7 v8f, t8 v10e. Only DESIGN20's t4 COMOIf / COMOIg hold "a small white-jade vase" (pose).
 - CHECK1 rule question for the owner: "strands of pearls across the chest" (t6–t8) vs A41 no necklaces.
+
+## Step 6 — CHECK1 job 11 FAIL t6 COMOIf (G1 vân kiên dropped) → t6 COMOIg 9996, gates PASS, keep --all 292 PASS
+- Quý phi one-tier VÂN KIÊN kept word for word (G1/G37 signature; Foreman 01:53Z agrees); Phi cape items carried ONTO it: "a pearl-and-jade net over it, its fronts linked across the chest by a silk cord with a jade clasp in the middle". Small shoulder layers did NOT fit (Foreman: "if they fit").
+- Fit: extra A38 "; her head never back-turned" (ANGLE table words kept), our jade-set words shortened ("a long jade pendant set (ngọc bội) at each outer side").
+- COMOIf stays in the repo as the FAILed version (do not gen).
+- NEXT on Foreman GO: OUTER_TIED → master_common.OUTER_WRAP (DESIGN20 9db802f) + "outer robe worn OPEN at the front," → "outer robe open above the waist," in t1–t3 v6, xuân v7, t6 COMOIg, t7 v8f, t8 v10e (net +5 ch each; t6 then needs 1 char).
