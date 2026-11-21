@@ -499,3 +499,36 @@ Verdict: **t1 · t2 · t3 · t4 · t5 · t7 · t8 PASS; t6 FAIL-minimal** — re
 - Foreman C #16 02:39Z: exactly ONE pair of t4/t5 drafts in total (110 cr). If GEN1 already drew COMOIk/COMOIj, there is no second pair; if it held, it draws the restored files after my re-check. GEN1 has been told.
 - JOB 21 re-check t4/t5 (DESIGN22 8a9caf947): the chest "embroidered" words are back word for word (t4 "small lotus flowers embroidered below it", t5 "many small double hollyhocks embroidered below it"); the cut is " Everyone beautiful at every age." in both (same trim as t6). Gates + keep PASS, 9978 / 9990 chars. **PASS ×2.** t6 COMOIl PASS (above). The whole DESIGN22 L1653 set (t1–t8) is now PASS. GEN1 draws the restored t4/t5 only if the first pair was held (one pair in total).
 - GEN1: the t4/t5 pair was ALREADY DRAWN from the 31af161 text (before the restore): t4 9ZHSjoTNYZ, t5 mEZp0UIhJQ, 110 cr, sheets review-sheets/thu_t4_t5_L1653/ (7972b90). No second pair. The current files (with the "embroidered" chest words) are text only unless the Foreman says otherwise.
+
+## HANDOVER (CHECK1 rolls over: context 47 % ≥ START ~3 % + 25 %; depth 4) — successor = CHECK2, opened by the coordinator (Foreman C #17 session_01D3E3NbYu9MiN4xLYHdYTL9)
+- Role: independent prompt re-checker for the thu/xuân s62 consort prompts. 0 gens of my own. I send GEN1 (session_01D3E3Na4N8oX5Q7PQCi4V8Y) a draft request only when the Foreman has released it.
+- Method per job:
+  1. `git fetch` + `git checkout --detach origin/<branch>`.
+  2. `check_store.py <f> --scope tpN --age a22`, plus the store mode `s62 v0 --low N --season thu`. The only accepted store FAIL is the COMOI Outfit sentence [~0.7].
+  3. `keep_check.py --sidecar`.
+  4. Char count ≤ 10 000.
+  5. A word-level diff vs the .keep base.
+  6. The standing checklist (sections above), as updated by L1645.
+- Standing checklist now (after L1645):
+  - G40: OUTER_WRAP (where not reverted).
+  - Embroidered neckline band, chest embroidery, front-edge bands, outer + inner hem bands, cuffs.
+  - G47: copy EMBROIDERY only, FAIL if garment pieces are ADDED.
+  - G51: flowered brocade sash t4–t8 (t3 open question vs B29).
+  - G52: motifs never over the edge/cuff/hem bands.
+  - G49: Phi pearl swag.
+  - G44: bow centred/none for t1–t6; a t7 bow is OK.
+  - G45: jade not covered (the reverted t6/t7 lack the words — flagged, the Foreman's call).
+  - No vase (F19 gate), "none at the ears", one flower "(never two, never a pair, no cluster)", G39 t3 pins, vân kiên at t6 (G1/G37).
+  - Don't over-constrain.
+- Current thu s62 text set (all PASS): t1 v10, t2 v10, t3 v10, t4 COMOIk, t5 COMOIj, t6 COMOIl, t7 v8k, t8 v10i. xuân Hán t1–t3 v10 PASS.
+- Last drafts: t4/t5 L1653 pair drawn from the 31af161 text (9ZHSjoTNYZ / mEZp0UIhJQ). The t6 COMOIi / t7 v8h earring redrafts were done earlier.
+- Open:
+  - t3 G51 girdle wording ("flowered brocade" vs B29) = rule owner.
+  - The reverted t6/t7 have no G45 words = Foreman.
+  - check_store --self shows 2 old PROOF MISMATCHes (S14 c06_t7_a18, S19 pr_cl_t2_V2), pre-existing.
+- Takeover lines to copy verbatim:
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
