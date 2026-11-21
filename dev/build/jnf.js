@@ -173,7 +173,15 @@ function roleOf(a,t){if(!t)return null;if(a===t)return "def";return canAtt(a,t)?
 const VALID=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 /* S.nfX: st "wait" (flip done, the dialogs it pushed first) → "open" (choices running) → "done" */
 function X(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
-const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf:not(.km-out)")/* a closing scene (km-out fade, removed 240 ms later) no longer holds the choice back */}catch(e){return false}};
+/* a card-flip scene (the flip, the seal) holds the choice / the night step only while it is LIVE and younger than BAL.steal.choice.waitMs −
+   choice.ms (NLC #9, coop-night case 4): a scene queued behind something an AFK seat never clears (the #dawn morning panel the room clock
+   walked past, the co-op merged week) or left on screen is dropped at that bound (jflip cfDrop: closed / voided, never played after the
+   choice) → her choice shows and its 10-second clock ends it, so every seat's choice is in by waitMs from the flip and the host resolves then */
+const CAP=()=>Math.max(0,B().choice.waitMs-B().choice.ms);
+const scene=()=>{try{const on=()=>!!document.querySelector(".kmov.kcf:not(.km-out)")/* a closing scene (km-out fade, removed 240 ms later) no longer holds the choice back */;
+ const q=typeof window.cfBusy==="function"&&window.cfBusy();
+ if(q&&typeof window.cfAge==="function"&&window.cfAge()>=CAP()){if(typeof window.cfDrop==="function")window.cfDrop();return on()&&window.cfBusy()}
+ return q||on()}catch(e){return false}};
 /* no dialog may cover the flip choice (night-final #4, coop-steal family): while the card-flip scene or the choice is on screen, a tap on a
    look-up opener (mood seal → "Tâm trạng · X" jevb/jpcf, servant look j29) does nothing — the scene / the choice owns the screen; the seal's
    own popover (jemo emoTip) is a tooltip, not a dialog, and is not what is stopped here: the whole tap is. Window capture = before every other listener. */
@@ -195,9 +203,9 @@ function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.
   if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<B().choice.waitMs)return;
   openChoice()}
  if(x.st!=="open")return;
- if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
+ if(x.me===undefined&&!x.dlg){if(scene())return;showChoice()}   /* scene() is bounded (CAP): never a choice held past it */
  if(guest())return;
- if(x.me!==undefined&&x.fr===undefined&&x.myAt&&Date.now()-x.myAt>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi */
+ if(x.me!==undefined&&x.fr===undefined&&Date.now()-(Math.max(x.at||0,x.mgAt||0)||x.myAt||0)>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi — counted from the moment the choice opened (x.at) or a steal game ended / ran (jsmg x.mgAt: active play), never from the host's own answer: an AFK friend holds the night at most waitMs (NLC #9) */
  if(x.me!==undefined&&x.fr!==undefined)resolveAll()}catch(e){console.error(e)}}
 /* the tablet's result is out and no other dialog waits: the choices open (host / single player) */
 function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
