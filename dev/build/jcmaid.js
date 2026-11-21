@@ -120,7 +120,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  /* secret: costs her until known; she confides when she trusts her */
  const s=m.sec;if(s&&!s.done){if(!m.secKn){if(m.loyal>=B.secTrust&&npcWhy("cmConf",{p:m},()=>roll(B.secTell))){m.secKn=1;cmC("secTell");if(s.k==="lover"){m.loyal=cl(m.loyal+B.secLoy,0,100);s.done=1;ev+=`${m.name} thú thật với ngươi chuyện đối thực với một thái giám; ngươi giữ kín cho nàng ta (thiện cảm +${B.secLoy}). `}else if(cdOk){dil("cmSec");return ev}}
    else if(cmLeakCh(m,s)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
-    else if(s.k==="debt"){const g=Math.min(B.secBac,S.bac||0);apply({bac:-g});ev+=`Hộp trang sức vơi đi ${g} lượng; không ai biết ai lấy. `}
+    else if(s.k==="debt"){const g=Math.min(B.secBac,S.bac||0);apply({bac:-g});ev+=`Bạc cất trong hộp trang sức vơi đi ${g} lượng; không ai biết ai lấy. `}
     else if(s.k==="family"){m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}
     else if(s.k==="spy"){const v=RV(s.by);if(v&&v.alive){const d=evA(v,S,BAL.eff.jcmaid.evD_2);if(d)cmC("spyLeak",d)}}}}
   else if(cdOk&&s.k!=="lover"&&npcWhy("cmConf",{p:m},()=>roll(B.secTell))){dil("cmSec");return ev}}

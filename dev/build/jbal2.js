@@ -629,6 +629,16 @@ BAL.entry.w.kc={sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:
  /* reviewer origin-intros-r1: the extras jkc kcMyScore typed by hand (same values): way = Tài/Đức added by "Đối đáp lanh lợi" / "Đáp lời khiêm nhường", chTh = Thái hậu added for Cháu gái Thái hậu, rW = per origin rank r, vh / tdFall = sớ tiến cử / td fall */
  way:6,chTh:15,rW:4,vh:6,tdFall:-6};
 BAL.entry.why={ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}};
+/* review/podium-wire (GAP OR09, OUTSIDE_PLAN §9 "Thứ muội and friends compete under the same rule, and the podium screen is used"):
+   phuc = the Phúc tuyển marks of the thứ muội and the khuê hữu (family records S.kc.fam), drawn ONCE from their own stats and kept on the
+   record (law 6b), shown on the kit podium (KIT §20.1) and read again by kcEnter (Điện tuyển), never re-rolled.
+   lv = [tai at art level 0, tai per level, top level]: her art level from her own Tài (Tài 30..80 -> level 2..5; lv[0] 11 (review r1, was 20) keeps the mean mark = the old live 3+R(6) mean 5.5, bots n>=300/origin), top = level 5; her mark uses the SAME
+   NPC curve as HER "Để tài nghệ quyết định" (kg82NpcMean, BAL.mgTier.npc) + a spread of ±sp (sum of three draws, like kg82NpcRaw); max = top mark.
+   duc / pow = [base, range]: her own Đức and (khuê hữu only: her own house's) thế lực, drawn once (the numbers kcEnter typed as 30+R(30) /
+   40+R(30), moved here unchanged); the thứ muội shares HER house (kcPow()).
+   foul = law 1 two-way: she can "Ngáng chân thứ muội" (jkc, Sắc -3 / Danh -3 of the sister); a thứ muội who holds oan >= foul.oan against her
+   tries the same on her in the Phúc tuyển week: odds od + oan/oanDiv, her Sắc -sac / Danh -danh (same sizes as her card). */
+BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{oan:20,od:40,oanDiv:3,sac:3,danh:3}};
 /* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, 13:55Z s17, 14:10Z; FOREMAN_C 14:15Z/14:35Z/14:45Z s17; review/title-sys): achievement titles.
    n0 = the counts that open the 3 steps of a title (1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8).
    T[id] = per title: b base tier, n own counts, st own step, ch = the bonus TYPES this title may give (the PLAYER picks ONE while it is worn; NPCs pick by need).
@@ -1842,6 +1852,61 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* KP03 children living rules (jkidlife; OD:L87 + PLACES_PLAN §5 "Móc lối chơi"): Mẫu tử = k.hM (the same bar the princesses have, j54) for every child.
+   estr  = Mẫu tử per month a child who lives away (prince 6+ at A ca sở / Đông cung, a mother in lãnh cung) was not seen · visit / call = Mẫu tử when she
+   goes to see the child / calls the child home (once a month each child) · callK = khắc of «Cho gọi con về» · callTal = the lesson the child misses (Tài) ·
+   npcSee = an NPC mother's monthly chance to see her son who lives away (two-way) · heirDanh = Danh of the mother when her son is made Thái tử (lost again
+   when he is put aside) · heirGhen = envy of the others at that day · ward = an orphan (mother dead / lãnh cung) goes to the Hoàng hậu (her or an NPC; none
+   → Thái hậu): Danh of the foster mother on the day · succHoa = Mẫu tử ≥ hi / < lo moves the succession "mẹ con" (j99succ hoa) +1 / −1 · hm0 = first value */
+BAL.kid={estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]};
+/* DRESS CODE (PARKING #11, review/dresscode, jdc.js; owner 20/11 ~19:00Z, verbatim dev/PARKING_LOT.md rows 11 + 11b; expert pass dev/handover/reports/dresscode-expert.md).
+   fam  = the ONE small set of basic colour families (owner: "những cái màu cơ bản thôi"); every shade maps to one (hồng phấn / hồng đào / peach → hong …). hex = the dot colour (KIT REQUEST kitColDot).
+   who  = Foreman C's palette per painted identity [main, secondary] (consorts c01–c32: handover dev/art/t8-prompt-B/build.py DATA; maids m01–m52: dev/art/face-common/m_colours_proposed.json FINAL Lượt 603;
+          old looks: dev/figwork/jobs.json signature colour). tier: t7 (Hoàng quý phi) adds gold as the secondary, t8 (Hoàng hậu) is gold first (Foreman C t7/t8 colour rule); cold = the undyed lãnh cung linen.
+   piece= [main, secondary] of every trâm / hoa điền (from the piece's name and its j92 colour word); a robe's colours are the colours of the PAINTING the wearer shows (owner 11b: screen = rule),
+          wcol maps the j92 one-word colour for a person with no painted identity (fallback only).
+   season: a robe's season = its fabric (Qing 換季: gauze in summer, fur in winter, announced by the court); fab = the seasons as letters of k (x Xuân · h Hạ · t Thu · đ = d Đông). Cost per tuần worn off-season, by rank 0..7 (law 5),
+          the same for every consort (law 1); npcMiss = % (per consort, per season, hashed) that an NPC forgets to change.
+   fest: per festival (FEST key): need = the two families of the day, ky = taboo robe colours, gate 1 = turned away at the door when she shows NONE of the need (the only turn-away rule).
+   kyOn: a taboo robe counts as one more missing colour ONLY when the robe colour can be changed (PARKING 11c recolour); 0 until then — the robe is her painting (review r1 fix 4).
+   needN by rank: how many of the two she must show (Đáp ứng–Quý nhân 1, Tần and up 2; law 5). cut = per missing colour (a taboo robe counts as one more): phần off her festival-contest score, Danh off.
+   bor: borrow an accessory (slot list sl; only pieces shown on her: owner 11b) from a consort whose thiện cảm toward her ≥ fav; it costs khac khắc and use thiện cảm of the lender; she lends back the same way (thanks). max lenders offered.
+   chg: change to her own trâm of a needed colour (khac khắc; max pieces offered). Borrowing is offered only for a needed colour her own chest cannot cover (law 2). buy: the third road for her AND NPCs — the cheapest trâm of a missing colour at or under her phẩm from Nội vụ phủ (its j92 price in Bạc + khac khắc). stay: excuse herself at a strict festival (Sức gain; the festival's events are missed). */
+BAL.dc={on:1,
+ fam:{hong:{n:"Hồng",hex:"#e48aa4"},cam:{n:"Cam",hex:"#e0904a"},do:{n:"Đỏ",hex:"#c8372d"},vang:{n:"Vàng",hex:"#e7b93e"},luc:{n:"Lục",hex:"#5f9a5f"},
+  lam:{n:"Lam",hex:"#4f74a8"},tim:{n:"Tím",hex:"#8a5fa8"},trang:{n:"Trắng",hex:"#f4efe4"},den:{n:"Đen",hex:"#2a2420"},nau:{n:"Nâu",hex:"#8a5a3a"}},
+ who:{c01:["do","vang"],c02:["lam","trang"],c03:["luc","trang"],c04:["tim","tim"],c05:["lam","vang"],c06:["do","trang"],c07:["tim","hong"],c08:["hong","luc"],
+  c09:["lam","trang"],c10:["hong","trang"],c11:["tim","trang"],c12:["luc","trang"],c13:["cam","trang"],c14:["vang","trang"],c15:["hong","trang"],c16:["luc","trang"],
+  c17:["hong","vang"],c18:["hong","tim"],c19:["tim","hong"],c20:["hong","luc"],c21:["do","hong"],c22:["tim","hong"],c23:["do","vang"],c24:["do","trang"],
+  c25:["do","den"],c26:["do","vang"],c27:["do","trang"],c28:["luc","trang"],c29:["lam","trang"],c30:["lam","trang"],c31:["luc","trang"],c32:["trang","lam"],
+  m01:["luc","tim"],m02:["luc","hong"],m03:["lam","trang"],m04:["cam","lam"],m05:["do","lam"],m06:["lam","cam"],m07:["luc","do"],m08:["hong","luc"],m09:["hong","lam"],
+  m10:["luc","hong"],m11:["lam","hong"],m12:["cam","tim"],m13:["tim","lam"],m14:["trang","luc"],m15:["hong","lam"],m16:["tim","luc"],m17:["luc","hong"],m18:["lam","hong"],
+  m19:["cam","lam"],m20:["lam","cam"],m21:["luc","hong"],m22:["hong","luc"],m23:["cam","lam"],m24:["luc","tim"],m25:["tim","do"],m26:["hong","lam"],m27:["luc","do"],
+  m28:["hong","lam"],m29:["luc","hong"],m30:["tim","luc"],m31:["cam","tim"],m32:["luc","tim"],m33:["tim","cam"],m34:["hong","lam"],m35:["luc","hong"],m36:["trang","lam"],
+  m37:["lam","do"],m38:["cam","luc"],m39:["lam","trang"],m40:["hong","lam"],m41:["luc","hong"],m42:["cam","luc"],m43:["lam","hong"],m44:["trang","hong"],m45:["lam","tim"],
+  m46:["do","lam"],m47:["tim","luc"],m48:["trang","luc"],m49:["lam","trang"],m50:["hong","lam"],m51:["luc","do"],m52:["tim","luc"],
+  look1:["tim","trang"],look2:["hong","trang"],look3:["luc","trang"],look4:["hong","trang"]},
+ tier:{t7:"sec-vang",t8:"main-vang"},cold:["trang","trang"],
+ piece:{tram_dao:["nau","nau"],tram_dong:["vang","trang"],tramngoc:["luc","trang"],tram_hoalua:["hong","luc"],tram_ngoclan:["trang","trang"],thoa_diep:["trang","lam"],
+  tram_hong:["hong","trang"],thoa_vang:["vang","vang"],tram_phithuy:["luc","hong"],boodieu:["vang","vang"],dientu_thuy:["lam","vang"],bd_phuong:["vang","trang"],
+  tram_maudon:["do","vang"],diemthuy_cuu:["lam","vang"],kimthoa_phuong:["vang","do"],tramphuong:["vang","do"],phuongquan:["vang","do"],
+  nt_nhuy:["luc","vang"],nt_haiduong:["hong","vang"],nt_dongchau:["trang","vang"],
+  hd_mai:["trang","vang"],hd_dao:["hong","vang"],hoadien_bac:["lam","trang"],hd_diep:["lam","vang"],hd_lan:["luc","vang"],hd_sen:["hong","do"],hd_maudon:["do","lam"],hd_phuong:["vang","do"]},
+ wcol:{nau:"nau",vang:"vang",xanh:"luc",hong:"hong",trang:"trang",lam:"lam",do:"do",tim:"tim"},
+ season:{n:["Xuân","Hạ","Thu","Đông"],
+  k:"xhtd",fab:{vai:"xhtd",lua:"xht",sa:"h",the:"h",gam:"xtd",cat:"xhtd",trieu:"xhtd",long:"d"},
+  fabN:{vai:"vải",lua:"lụa",sa:"sa mỏng",the:"the mỏng",gam:"gấm dày",cat:"cát phục (may theo mùa)",trieu:"triều phục (may theo mùa)",long:"lông thú"},
+  y:{y_cungnu:"vai",y_luamoc:"lua",y_chuongsu:"vai",y_nuquan:"vai",y_mama:"vai",y_hoanho:"lua",y_saxanh:"sa",y_maimai:"gam",y_vanthuy:"lua",y_lan:"the",y_tramnep:"lua",
+   y_haiduong:"gam",y_chimen:"lua",y_maudon:"gam",y_hac:"cat",y_kimtuyen:"cat",y_vancam:"gam",y_trieutim:"trieu",y_bachdieu:"gam",y_minhhoang:"trieu",y_phuongbao:"trieu",
+   nt_longchon:"long",nt_bachhoa:"cat",nt_hocuu:"long",y_tang:"vai"},
+  danh:[0,0,1,1,2,2,3,3],th:[0,0,1,1,1,2,2,2],npcMiss:15},
+ fest:{newyear:{need:["do","vang"],ky:["trang","den"],gate:1},nguyentieu:{need:["do","cam"],ky:[],gate:0},thanhminh:{need:["luc","trang"],ky:["do"],gate:0},
+  doanngo:{need:["luc","vang"],ky:[],gate:0},thattich:{need:["hong","tim"],ky:[],gate:0},vulan:{need:["trang","lam"],ky:["do"],gate:0},trungthu:{need:["trang","vang"],ky:[],gate:0},
+  vantho:{need:["vang","do"],ky:["trang","den"],gate:1},trungcuu:{need:["vang","do"],ky:[],gate:0},thanhtho:{need:["do","vang"],ky:["trang","den"],gate:1},
+  dongchi:{need:["lam","den"],ky:[],gate:0},lapbat:{need:["nau","vang"],ky:[],gate:0},giaothua:{need:["do","vang"],ky:["trang"],gate:0}},
+ needN:[1,1,1,2,2,2,2,2],
+ cut:{phan:[3,3,4,5,6,7,8,9],danh:[1,1,1,2,2,2,3,3]},
+ bor:{sl:["tram"],fav:20,use:6,thanks:5,khac:1,max:2,wait:4/* tuần a loan to the other co-op seat waits for its «dcin» before the book line is dropped */},chg:{khac:1,max:2},buy:{khac:1},stay:{suc:8},kyOn:0};
 /* jkcg (GAP OR01/OR06/OR08/OR14, review/outside-gaps; OUTSIDE_PLAN §6 §9 §11): fest = home festivals played as the real mini-game: raw 0..10 ≥ top = first
    (Danh +danh[0]), ≥ ok = praised (+danh[1]), else Danh −danh[2]; skip = the quick option's score (same 5/10 as Phúc tuyển), bot = [base, spread] quick score;
    sister moves sisP % of the time (+sis[0] when she lost, +sis[1] when she did well). vpSac / vpRare = the old kcFest gate to the Vương phi rare.
@@ -1874,6 +1939,23 @@ BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:
  so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
  rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
  join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
+/* jkc3 HOME CHAPTERS (GAP OR03–OR10): the calendar of the home arcs, the roster people, the home events E9 / E15 / E28, the early roads.
+   cal: o0 months to the first beat · gap [min, +roll] months between beats · tP odds of a turn beat · min beats an unopened arc needs · fin spare months before Sơ tuyển.
+   win Lợi thế for the win ending of an arc with no fixed ending · scOdds odds per Lợi thế at a climax · plan.ke odds of «Kế mẫu» over «Hôn sự» when the mother lives.
+   ros: starting favour [base, +roll] · me = her own liking · baSanh odds the bà mối sits in the chính sảnh while a match is open.
+   thay: t favour for tier 1 / 2 · mul lesson speed per tier · hau / bieu / truyen the three teacher acts. entry: rank index of the early roads (1 = Thường tại). fx: every arc's option / ending numbers (BAL.arc.fx format). */
+Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1,nc:[1,2]},win:3,mid:1,scOdds:7,plan:{ke:50},
+ ros:{me:[30,20],nm:[60,25],ba:[25,20],thay:[20,20],sx:[30,30],baSanh:60,age:{nm:[56,10],ba:[40,9],thay:[34,12],le:[52,12]},
+  sxAge:{hau:[20,5],quan:[22,5],than:[24,4],thuong:[30,8],lao:[56,8],def:[24,6]},
+  pool:{mama:["mama","maid"],maid:["maid","mama"],man:["man","official"],official:["official","man"]},noFid:["man:vuonggia","man:thaiy","emperor:","thaihau:"],pref:{hoa:["man:hoasu-1"]}},
+ thay:{t:[45,75],mul:[1,1.25,1.5],hau:{k:2,suc:-10,af:7},bieu:{k:1,bac:-15,af:7},truyen:{k:2,suc:-15,danh:3,art:8,tier:2},leMax:5},
+ nm:{ke:{k:1,tamco:1,af:3},do:{k:1,od:40,afD:4,proof:1,oan:6,af:-5,oanMin:12},an:{k:2,suc:20}},
+ ba:{bieu:{k:1,bac:-20,af:10,q:10},khe:{k:2,suc:-10,kap:-8,af:4}},
+ ev:{mebenh:{t0:6,p:6,af:10,y:{bac:-40,od:55},hau:{suc:-30,od:50}},divat:{hua:{duc:3},hoi:{tamco:3,proof:1}},
+  xemmat:{dep:{suc:-10,od:45,sacD:3,kgt:4,kap:10,af:8,kgtF:-3},gian:{duc:2,kap:3},muoi:{af:8,danh:2,kap:-4,p:50}},
+  hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
+  vh:{duc:3},th:{go:10,wait:6,duc:2},qMax:2},
+ entry:{th:1,vh:1},tier:{win:1,mid:0,lose:-1},seedP:50,thdTro:40,rare:{dtqSuc:90,muoiTc:60,dtqOc:1,r4:.6,r6:.8,r1:{h:80,loyal:60,kld:55,p:.6}},gtuMin:10,know:{foe:2},intel:{n:1,st:2},fx:{}}});
 /* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
    owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
    Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank

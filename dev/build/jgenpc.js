@@ -43,7 +43,7 @@ function fpMine(){try{const me=S.origin&&S.origin.k;if(!me||originRoot(me)!=="nc
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);
  try{if(S&&!S.dead&&host()){fpMine();for(const v of rivals.slice())if(v&&v.alive&&!v.out&&!v.coop&&v.fpk===undefined)nrFpRoll(v)}}catch(e){console.error("fp",e)}return r}})();
 /* ---------- GE09: NPC state ---------- */
-function nBranch(v){const r=v&&v.nr&&v.nr.r;return r&&GE_DATA[r]&&GE_CAT[r]&&r.split("_")[0]===v.nr.o?r:null}
+function nBranch(v){const r=v&&v.nr&&v.nr.r;return r&&GE_DATA[r]&&GE_CAT[r]&&geOrig(r)===v.nr.o?r:null}/* origin from ARC67[r].o (pt_* roads are origin pf), like the player (jge.js geOrig) */
 function nS(v){if(!v||v===S||v.coop)return null;if(v.ge&&v.ge.b)return v.ge;if(!on())return null;const b=nBranch(v);if(!b)return null;
  v.ge={b,st:["o","o","o","o"],cx:[0,0,0,0],pull:[0,0,0,0],lt:0,d0:v.duc|0,en:{},done:0};return v.ge}
 const D=g=>GE_DATA[g.b],C=g=>GE_CAT[g.b];
@@ -152,7 +152,7 @@ function nSum(v,g,res){const sum=C(g).e[res.i][5];if(v.queen&&(sum==="HH"))retur
  if(g.seat)return {NDE:"Ngôi nữ đế từ nay thuộc về nàng.",THH:"Nàng buông rèm nhiếp chính.",TM:"Con nàng nối ngôi, nàng thành mẹ của vua."}[g.seat]||"";return""}
 function nNews(){if(!S||S.dead||!on()||!NB().news)return 0;S.geNs=S.geNs||{};let n=0;
  for(const v of (rivals||[])){const g=v&&v.ge,res=g&&g.res;if(!res||!res.ok||!v.name)continue;const id=String(v.id)+":"+g.b;if(S.geNs[id])continue;S.geNs[id]=1;
-  const ident=(typeof GE_ID==="object"&&GE_ID[g.b.split("_")[0]])||"";const s2=nSum(v,g,res);
+  const ident=(typeof GE_ID==="object"&&GE_ID[geOrig(g.b)])||"";const s2=nSum(v,g,res);
   /* the kit news panel (KIT §kitModal, kind "news"): the person = the full-body figure column (subject), one fact per line, the date on the sub line */
   const facts=[`${v.name} đi trọn con đường «${C(g).n}»${ident?` (${ident})`:""}, tới Đại kết cục «${res.n}».`,`Thiên hạ gọi nàng là “${res.ti}”.`];
   if(s2)facts.push(s2);if(res.help)facts.push(`Nàng nhớ ơn ngươi từng giúp một tay: ${res.help}.`);

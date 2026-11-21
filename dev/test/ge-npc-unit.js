@@ -8,6 +8,7 @@
    (6) OR19: share = the player pool (BAL.orig.ow.nc / consort origins); forced roll → a princess with the country's land as house, nrOrigin gives
        her origin, max per country (the player counts), faces never twice; a house daughter (dad + clan) never;
    (7) BAL.ge.npc.on false → no v.ge; an old save rival with nr but no ge loads and plays a month; no page errors.
+   (8) a branch whose road prefix is not its origin (pt_* = pf) gets the same parity;
    usage: node dev/test/ge-npc-unit.js <url> */
 const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -83,6 +84,8 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
   /* (7) */
   BAL.ge.npc.on=false;const v9=mk();ok(geNpcDbg.state(v9)===null,'BAL.ge.npc.on false → no v.ge');Object.assign(BAL.ge.npc,JSON.parse(JSON.stringify(G0)));
   const v10=mk();delete v10.ge;v10.nr.n=nrNext(v10.nr.r,8);v10.nr.t=0;let e10=0;try{monthTick();Q.length=0}catch(e){e10++}ok(e10===0,'old save (road mid-way, no v.ge) plays a month');
+  /* (8) a country branch whose roads carry another prefix (Phù Tang: origin pf, roads pt_*, ARC67[road].o) gets the same parity (law 1) */
+  for(const b of Object.keys(GE_DATA).filter(b=>geOrig(b)!==b.split('_')[0])){const o=geOrig(b);if(!nrRoads(o).includes(b))continue;const w=newRival(2);Object.assign(w,drawFace());w.fpk='';rivals.push(w);w.nr=nrNew(o,b);const g=geNpcDbg.state(w);let k=0;while(!w.nr.x&&k++<20){w.nr.t=0;nrPlay(w)}ok(!!g&&g.b===b&&Object.keys(w.ge.en).length>0&&w.ge.done===1,'NPC of origin '+o+' on '+b+' gets v.ge, feeds it and resolves the Hồi kết');w.alive=false}
  }catch(e){fail.push('EXC '+e.message+' '+(e.stack||'').split('\n')[1])}return{out,fail}});
  r.out.forEach(x=>console.log(x));if(errs.length)console.log('page errors:',errs.slice(0,5));
  console.log(r.fail.length||errs.length?'FAIL '+r.fail.length+' + page errors '+errs.length:'ALL OK ('+r.out.length+')');await b.close();process.exit(r.fail.length||errs.length?1:0)})();

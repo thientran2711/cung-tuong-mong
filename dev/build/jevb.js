@@ -114,13 +114,23 @@ function evbMood0(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split("
  const P0=PEND.e68doubtVisit;PEND.e68doubtVisit=function(p){const d=P0.apply(this,arguments);try{if(!d||p.vi!==2)return d;const v=RV(p.a0);const i=v?(v.inv||[]).findIndex(e=>e.from==="me"):-1;
   if(i<0&&!p.gk)return null;const k=p.gk||v.inv[i].k;p.gk=k;d.t=String(d.t).replace("trả lại quà ngươi tặng",`trả lại ${IT[k]?itm(k).n:"món quà"} ngươi tặng`);
   d.o=d.o.map(o=>Object.assign({},o,{go:()=>{try{if(!p.back){const j=(v.inv||[]).findIndex(e=>e.from==="me"&&e.k===k);if(j>=0){const x=v.inv.splice(j,1)[0];x.from="back";S.inv.push(x);p.back=1;log(`${itm(k).n} trở về rương của ngươi.`)}}}catch(e){}if(o.go)return o.go()}}))}catch(e){console.error(e)}return d}}catch(e){}})();
+/* r4b (F1 whole group, law 6c): «Cho mượn» names a REAL piece of hers — and now it really goes: through THE ONE LOAN RULE (jdc dcBorrow: the NPC
+   holds it, the loan book, back the next tuần; co-op guest → the host's «dcin»). Before, the dialog named her piece and nothing moved (a loan
+   with no object). Only a piece she may lend (dcFree, not worn); the đàn only when she owns one (before: «cây đàn tỳ bà» with no đàn at all). */
 (function(){try{const s=E68I&&E68I.borrowDress;if(!s)return;const vf0=s.vf;
- const own=()=>{const L=(S.inv||[]).filter(e=>!e.h&&IT[e.k]);return{robe:L.find(e=>itm(e.k).kd==="Y phục"),pin:L.find(e=>itm(e.k).kd==="Trâm cài"||itm(e.k).sl==="hair"),inst:L.find(e=>e.k==="dancoc")||((S.arts&&S.arts.cam)>=1?{k:null}:null)}};
- s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[0,1,2,3];const o=own();return all.filter(i=>i===0?!!o.robe:i===1?!!o.inst:i===2?!!o.pin:!!S.maid)};
+ const lend=()=>typeof dcBorrow==="function"&&(typeof dcLend!=="function"||dcLend());
+ const own=()=>{const L=(S.inv||[]).filter(e=>e&&!e.w&&IT[e.k]&&(typeof dcFree==="function"?dcFree(e):!e.h));return{robe:L.find(e=>itm(e.k).kd==="Y phục"),pin:L.find(e=>itm(e.k).kd==="Trâm cài"||itm(e.k).sl==="hair"),inst:L.find(e=>e.k==="dancoc")}};
+ const pc=(o,vi)=>vi===0?o.robe:vi===1?o.inst:vi===2?o.pin:null;
+ s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[0,1,2,3];const o=own();const L=lend();return all.filter(i=>i===3?!!S.maid:L&&!!pc(o,i))};
  const P0=PEND.e68borrowDress;PEND.e68borrowDress=function(p){const d=P0.apply(this,arguments);try{if(!d)return d;const o=own();
-  if(p.vi===0&&o.robe)d.t=String(d.t).replace("bộ y phục thêu phượng của ngươi",`bộ ${itm(o.robe.k).n.replace(/^Áo /,"áo ")} của ngươi`);
-  if(p.vi===2&&o.pin)d.t=String(d.t).replace("chiếc trâm ngọc",`chiếc ${itm(o.pin.k).n.replace(/^Trâm/,"trâm")}`);
-  if(p.vi===1&&o.inst&&o.inst.k)d.t=String(d.t).replace("cây đàn tỳ bà của ngươi",`cây ${itm(o.inst.k).n.replace(/^Đàn/,"đàn")} của ngươi`)}catch(e){}return d}}catch(e){}})();
+  if(p.vi<=2){const e0=pc(o,p.vi);if(!e0&&!p.bk)return null;p.bk=p.bk||e0.k;const v=RV(p.a0);
+   /* the two «Cho mượn» options move the piece (their own thiện cảm / bạc numbers stay as shown: aff:false); «Từ chối» moves nothing */
+   d.o=d.o.map((x,i)=>i>1?x:Object.assign({},x,{go:()=>{const e=(S.inv||[]).find(y=>y&&y.k===p.bk&&!y.w&&dcFree(y));
+    if(!v||!v.alive||!e||!dcBorrow(v,S,e,{why:"ev",aff:false})){log(`${itm(p.bk).n} đã không còn trong rương ngươi; ${v?v.name:"nàng"} về tay không.`);return}
+    log(`${v.name} mượn ${itm(p.bk).n} của ngươi, qua tuần sau trả.`);if(x.go)return x.go()}}))}
+  if(p.vi===0&&p.bk)d.t=String(d.t).replace("bộ y phục thêu phượng của ngươi",`bộ ${itm(p.bk).n.replace(/^Áo /,"áo ")} của ngươi`);
+  if(p.vi===2&&p.bk)d.t=String(d.t).replace("chiếc trâm ngọc",`chiếc ${itm(p.bk).n.replace(/^Trâm/,"trâm")}`);
+  if(p.vi===1&&p.bk)d.t=String(d.t).replace("cây đàn tỳ bà của ngươi",`cây ${itm(p.bk).n.replace(/^Đàn/,"đàn")} của ngươi`)}catch(e){}return d}}catch(e){}})();
 /* ---------- (5) HINTS THAT TELL OPTIONS APART (coordinator 15/11 after opt-render r7; owner 15:10Z "reading hints must clearly beat random") ----------
    kitHint (jk2b, pure) at the VAGUE level (Tâm cơ < BAL.hintMid, most new lives) often gives two or more options of one dialog the same words
    (night1 talk, giu "có phúc con cái" ×2, prep, festival invitations…). Before a dialog shows, options whose hints collide get a per-option
