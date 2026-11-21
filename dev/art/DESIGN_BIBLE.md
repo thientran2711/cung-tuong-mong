@@ -42,6 +42,7 @@ This file is an INDEX + the current core. It does NOT copy rules: it points at r
 - L2242: when she only ASKS ("có…chưa?", "có sửa gì không?") → ANSWER ONLY. Change nothing unless she says sửa/đổi/làm.
 - L2251: compare pictures with HER runs of the same prompt (dev/art/owner_runs/), never old L1576 sheets.
 - L2247: don't blame prompt length; describe GPT style faithfully.
+- L2281 (her GPT Tần, sage+ivory): "Theo thùa mọi thứ đều rất là có cái sự tiết chế và đẹp … cái mà làm cho nó bị AI chính là các cái mẫu theo random." → embroidery follows the garment structure (borders/bands), one motif family, tone-on-tone, calm empty areas; random scattered motifs = "AI look". (Lesson only, no change ordered.)
 - Lượt 777: no regen/redraw without her yes; say the credit cost first.
 - Never re-ask an approved thing: `rule.py find` first.
 - To her: Vietnamese only, very short; pictures via SendUserFile; every message "Lượt N", ends "~X% xong / ~Y% chơi được".
