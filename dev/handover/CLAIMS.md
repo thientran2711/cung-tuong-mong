@@ -641,7 +641,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | REVIEW chiton-name rv2 (SMALL sonnet) | review/chiton-name-rv2; briefs/main86-rv-chiton-name.md | MAIN CHÍNH 86 | session_01Rc5AsJz4mUrjazcfdR5JPr | RUNNING | 21/11 03:15Z |
 | REVIEW menu-panel (SMALL sonnet) | review/menu-panel-rv; briefs/main86-rv-menu-panel.md | MAIN CHÍNH 86 | session_01Rc5AsLEtGvABQjjGRj13hB | RUNNING | 21/11 03:13Z |
 | REVIEW menu-panel (sonnet SMALL; every ☰ menu panel = wide kit frame, Fold+iPad) | review/menu-panel-rv | MAIN CHÍNH 86 | session_01Rc5AsLEtGvABQjjGRj13hB | PASS review/menu-panel-rv 878eba18 | 21/11 03:15Z |
-| ending-screens (OPUS; OWNER marks #48 #50 #51 full-screen endings) | review/ending-screens; briefs/main86-ending-screens.md | MAIN CHÍNH 86 | session_01Rc5AsKeKeU4YfrthgxjKW7 | RUNNING | 21/11 03:17Z |
+| ending-screens (OPUS; OWNER marks #48 #50 #51 full-screen endings) | review/ending-screens; briefs/main86-ending-screens.md; reports/ending-screens.md | MAIN CHÍNH 86 | session_01Rc5AsKeKeU4YfrthgxjKW7 | SẴN SÀNG KIỂM bffc0a56 (BIG; base 56ff0db0) | 21/11 03:56Z |
 | kit-dialog (sonnet; OWNER marks #44 seal, #47 figure, #49 option card/fixed picture) | review/kit-dialog; briefs/main86-kit-dialog.md; reports/kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:16Z |
 | REVIEW mood-seal (SMALL sonnet) | review/mood-seal-rv; briefs/main86-rv-mood-seal.md | MAIN CHÍNH 86 | session_01Rc5AsNSULxyLkcFZCVytcA | DONE PASS 607a6b12 | 21/11 03:20Z |
 | palace-life co-op heir fix (opus; guest put-aside mother −heirDanh skipped in hrCard; brief briefs/b-palace-heir-coop.md) | review/palace-life-gaps-r2-land | B | session_01N1tNP2HMzBBThVa1dWSodb | RUNNING | 21/11 03:23Z |
