@@ -574,3 +574,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | RUNNING | 21/11 00:25Z |
 | B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | RUNNING | 21/11 00:25Z |
 | MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | RUNNING | 21/11 00:40Z |
+| OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | (opening) | RUNNING | 21/11 00:45Z |
