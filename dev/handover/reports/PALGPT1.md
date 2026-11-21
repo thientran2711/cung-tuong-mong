@@ -41,4 +41,4 @@ Machine copy: dev/art/palette_gpt_L2272/mapping_L2274.json. Swatch sheets (our i
 Đã đưa bảng màu ChatGPT v3 vào game: màu chính, phụ, hoa, voan (phi bạch), lông phượng cho 90 phi tần × 4 mùa. Bảng cũ vẫn giữ lại. Ghép mã: trong mỗi nhóm, người theo thứ tự số ↔ GPT 01…N (xem 6 tấm bảng màu có tên sNN cạnh mã GPT). Vàng hoàng hậu giữ nguyên. Cần chị chốt: voan và hoa của GPT cùng họ màu với áo chính (trái luật cũ) — giữ vậy hay chỉnh? Bảng lông phượng GPT thay 10 bộ đã duyệt L2235 — đồng ý không?
 
 ## Commit
-(see below)
+6c65db7 (data + rules + report; this line added in the follow-up commit)
