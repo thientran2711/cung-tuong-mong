@@ -49,7 +49,7 @@ const NWB={
  const wrap=(c,inner)=>`<div class="kgr-demo nwb-demo" aria-hidden="true"><div class="kgr-st nwb-st ${c}">${inner}</div></div>`;
  const bowl='<svg viewBox="0 0 60 40"><path d="M4 12h52c0 16-12 26-26 26S4 28 4 12z" fill="#b07a3a" stroke="#5a3a0c" stroke-width="2"/><ellipse cx="30" cy="12" rx="26" ry="5" fill="#d9a85a" stroke="#5a3a0c" stroke-width="2"/></svg>';
  window.NWB_DEMO={
-  tdwalk:()=>wrap("nd-dung",`<i class="nd-half l"></i><i class="nd-half r"></i><b class="nd-mark m1">◀</b><b class="nd-mark m2">▶</b><span class="nd-bowl">${bowl}</span>${hand("h1")}${hand("h2")}`),
+  tdwalk:()=>{let f="";try{f=kitFigOf(S)}catch(e){}return wrap("nd-dung",`<i class="nd-half l"></i><i class="nd-half r"></i>${f?`<img class="nd-fig" src="${f}" alt="">`:""}<b class="nd-mark m1">◀</b><b class="nd-mark m2">▶</b><span class="nd-bowl">${bowl}</span><span class="nd-gauge"><i class="nd-gz"></i><i class="nd-needle"></i></span><b class="nd-ok">✓</b>${hand("h1")}${hand("h2")}`)},/* td-dung-clear: HER with the bowl on her head, the floor arrow, the held half, the bowl stands again (✓) */
   tdalms:()=>wrap("nd-hanh",`<span class="nd-pool">${NWB.ic("bowl")}</span><span class="nd-btn">−</span><span class="nd-who">${NWB.ic("elder")}</span><span class="nd-need"><i class="nwb-pip"></i><i class="nwb-pip"></i><i class="nwb-pip on nd-f1"></i><i class="nwb-pip on nd-f2"></i></span><span class="nd-btn nd-plus">+</span>${hand("h1")}<b class="nd-ok">✓</b>`),
   tdtalk:()=>wrap("nd-ngon",`<span class="nd-bub"><i></i><i></i><i></i></span><span class="nd-ring"></span><span class="nd-say">${NWB.ic("voice")}</span><span class="nd-bar"><i class="nd-band"></i><i class="nd-fill"></i></span>${hand("h1")}<b class="nd-ok">✓</b>`),
   groom:()=>wrap("nd-groom",`<span class="nd-zb"><i class="z1"></i><i class="z2"></i><i class="z3"></i><b class="nd-nd">▼</b></span>${hand("h1")}<b class="nd-ok">✓</b>`),
@@ -60,13 +60,23 @@ const NWB={
 .nwb-st>*{position:absolute;display:block}
 .nwb-st .nd-hand{width:38px;height:44px;opacity:0;filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}.nwb-st .nd-hand svg{width:100%;height:100%;display:block}.nwb-st .nd-hand .kgr-ring{left:36%;top:6%}
 .nwb-st .nd-ok{right:7%;top:8%;font-size:30px;color:var(--good,#2d7a52);opacity:0}
-/* td_dung */
-.nd-dung .nd-half{top:8%;bottom:8%;width:46%;border:2px dashed #b8935588;border-radius:10px;opacity:0}.nd-dung .nd-half.l{left:2%}.nd-dung .nd-half.r{right:2%}
-.nd-dung .nd-mark{left:50%;top:6%;transform:translateX(-50%);font-size:26px;color:var(--red,#c23b22);opacity:0}
-.nd-dung .nd-bowl{left:50%;bottom:10px;width:58px;margin-left:-29px;transform-origin:50% 100%;animation:ndBowl 8s infinite}
-.nd-dung .nd-hand.h1{right:18%;top:40%;animation:ndH1 8s infinite}.nd-dung .nd-hand.h2{left:18%;top:40%;animation:ndH2 8s infinite}
+/* td_dung (td-dung-clear): she stands, the bowl sits on her head; mark ◀ = it leans left; the hand holds the OTHER half; the bowl stands again */
+.nwb-st.nd-dung{height:168px}
+.nd-dung .nd-half{top:34px;bottom:4px;width:30%;border:2px dashed #b8935588;border-radius:10px;opacity:0}.nd-dung .nd-half.l{left:2%}.nd-dung .nd-half.r{right:2%}
+.nd-dung .nd-fig{left:50%;bottom:2px;height:112px;width:auto;margin-left:-26px;transform-origin:50% 100%;animation:ndFig 8s infinite}
+.nd-dung .nd-bowl{left:50%;bottom:112px;width:44px;margin-left:-22px;margin-bottom:-2px;transform-origin:50% 100%;animation:ndBowl 8s infinite}
+.nd-dung .nd-mark{left:50%;bottom:4px;margin-left:-60px;font-size:22px;color:#fff3d6;background:var(--red,#c23b22);border-radius:12px;padding:0 10px;opacity:0}
+.nd-dung .nd-mark.m2{margin-left:36px}
+.nd-dung .nd-gauge{left:10%;right:10%;top:6px;height:12px;border:2px solid #5a3a1a;border-radius:3px;background:rgba(194,59,34,.3);overflow:visible}
+.nd-dung .nd-gz{position:absolute;left:35%;right:35%;top:0;bottom:0;background:rgba(76,160,110,.85)}
+.nd-dung .nd-needle{position:absolute;top:10px;left:50%;margin-left:-6px;border:6px solid transparent;border-bottom:9px solid var(--good,#2d7a52);border-top:0;animation:ndNeedle 8s infinite}
+.nd-dung .nd-ok{right:6%;top:30px;animation:ndOk2 8s infinite}
+.nd-dung .nd-hand.h1{right:12%;top:90px;animation:ndH1 8s infinite}.nd-dung .nd-hand.h2{left:12%;top:90px;animation:ndH2 8s infinite}
 .nd-dung .m1{animation:ndM1 8s infinite}.nd-dung .m2{animation:ndM2 8s infinite}.nd-dung .nd-half.r{animation:ndH1 8s infinite}.nd-dung .nd-half.l{animation:ndH2 8s infinite}
-@keyframes ndBowl{0%,8%{transform:rotate(0)}20%,30%{transform:rotate(-24deg)}45%,55%{transform:rotate(0)}62%,72%{transform:rotate(24deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndBowl{0%,8%{transform:rotate(0)}20%,30%{transform:translateX(-5px) rotate(-26deg)}45%,55%{transform:rotate(0)}62%,72%{transform:translateX(5px) rotate(26deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndFig{0%,8%{transform:rotate(0)}20%,30%{transform:rotate(-3deg)}45%,55%{transform:rotate(0)}62%,72%{transform:rotate(3deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndNeedle{0%,8%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}20%,30%{margin-left:-62px;border-bottom-color:var(--red,#c23b22)}45%,55%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}62%,72%{margin-left:50px;border-bottom-color:var(--red,#c23b22)}90%,100%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}}
+@keyframes ndOk2{0%,40%{opacity:0}46%,56%{opacity:1}60%,90%{opacity:0}92%,100%{opacity:0}}
 @keyframes ndM1{0%,4%{opacity:0}8%,30%{opacity:1}36%,100%{opacity:0}}@keyframes ndM2{0%,54%{opacity:0}58%,80%{opacity:1}86%,100%{opacity:0}}
 @keyframes ndH1{0%,24%{opacity:0}28%,46%{opacity:1}52%,100%{opacity:0}}@keyframes ndH2{0%,72%{opacity:0}76%,94%{opacity:1}98%,100%{opacity:0}}
 /* td_hanh */
