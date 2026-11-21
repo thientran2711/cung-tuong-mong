@@ -1019,3 +1019,4 @@ NEWACCT#15 ~02:20Z: OWNER L1627 (angry: fix everywhere, not only what she names)
 NEWACCT#15 ~02:22Z: OWNER L1628: Phi + Tần inner-top horizontal chest band not embroidered, no chest embroidery → DESIGN20 full t1–t8 ladder checklist table; CHECK1 standing full-checklist on every consort prompt.
 NEWACCT#15 ~02:27Z: HAIR1 fb020d68c hair table (90×8, 10 shapes/rank ×pos×wrap, check PASS) catalogue LOOKED + sent L1629; default same style all 4 seasons. JOB2 (t1–t3 bun text) waits owner. DESIGN20 t4 COMOIe 2fb3a91 predates L1626/L1628 → CHECK1 HOLD, DESIGN20 redo t4+t5 (carry t3 apron panels + long jade up, G47).
 NEWACCT#15 ~02:30Z: OWNER L1630: hair table is just words; wants 8 ChatGPT prompts (one per rank), each a sheet of the 10 bun shapes → HAIR1 JOB 1b (chatgpt/hair_t1..8.txt).
+NEWACCT#15 ~02:32Z: OWNER L1631: hair differs per SEASON too → G48; HAIR1 told rebuild person×rank×season.
