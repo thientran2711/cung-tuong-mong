@@ -1,0 +1,30 @@
+muoi LIFECAP
+muoi - direct
+{
+ "path": "cung",
+ "lives": 0,
+ "HH": 0,
+ "outside": 0,
+ "byOrigin": {},
+ "entry": {
+  "n": 1,
+  "rank": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sac": 61,
+  "tai": 30,
+  "danh": 8,
+  "bac": 380,
+  "arts": 1,
+  "intel": 0,
+  "monthsOutside": 0
+ },
+ "lifeMonths": 0,
+ "errs": [
+  "life cap muoi"
+ ],
+ "secs": 2414
+}

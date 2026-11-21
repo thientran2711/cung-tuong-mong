@@ -1,0 +1,51 @@
+dtq HH maxRank 7 direct
+thd Hồng nhan bạc mệnh maxRank 4 direct
+muoi HH maxRank 7 direct
+tt Xuất gia maxRank 5 direct
+{
+ "path": "cung",
+ "lives": 4,
+ "HH": 50,
+ "outside": 25,
+ "byOrigin": {
+  "dtq": {
+   "n": 1,
+   "HH": 100,
+   "out": 0
+  },
+  "thd": {
+   "n": 1,
+   "HH": 0,
+   "out": 0
+  },
+  "muoi": {
+   "n": 1,
+   "HH": 100,
+   "out": 0
+  },
+  "tt": {
+   "n": 1,
+   "HH": 0,
+   "out": 100
+  }
+ },
+ "entry": {
+  "n": 4,
+  "rank": [
+   2,
+   1,
+   1,
+   0
+  ],
+  "sac": 69,
+  "tai": 69,
+  "danh": 18,
+  "bac": 203,
+  "arts": 2,
+  "intel": 0,
+  "monthsOutside": 0
+ },
+ "lifeMonths": 89,
+ "errs": [],
+ "secs": 2579
+}
