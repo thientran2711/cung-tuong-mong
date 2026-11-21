@@ -54,3 +54,12 @@ GATES on da27c7e2: quickcheck ×2 PASS (core gates, time-spill, old save ok, per
 - Shots Fold 755x1000@2 + iPad 1180x820@2, LOOKED 3×: Hoàng tự trong cung card — mother block ABOVE the facts on both (mom x = facts x: Fold 273/273, iPad 828/828), no h-overflow; Điểm trang opens on the kit rules screen («Sẵn sàng», used=0), no overflow, 0 page errors. Shots local only.
 CO-OP GATE: coop-e2e 124/124 PASS; both-seat n/a (UI only).
 LAWS touched: 9/10 KIT FIRST (kit CSS in jk4 kit-pc-fill only, KIT §6.3e, §13.7) OK; 11 whole group (scan by r1) OK; 12 two devices OK; 7 wording unchanged.
+
+## RELAND r3 (opus reviewer-lander; ORDER MAIN 100 20:01Z via Foreman B ROOT-7)
+LAND CHAIN 3 FAIL on da27c7e2 = real conflict dev/build/jk4.js vs LIVE (kit-mark-fix r6 9d6005b8/1013d49b).
+Branch review/ui-leftover-fold-r3 @ bca0052c3 = da27c7e2 + merge LIVE d0f75fa4.
+Conflict resolution (LAW 14 one rule, LAW 9 kit first): LIVE kit-mark-fix already holds the SAME M17 fix as a general kit rule (mark 17: `.pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1}` → every .pcb child spans the row, mother ALWAYS above the facts) plus mark 38 (thin scrollbar + kpmore «more below» fade). Kept LIVE's block whole; dropped the branch's narrower duplicate M17 rule (2 selectors + margin), so jk4 = LIVE. Branch diff vs LIVE is now jtoil.js (MG12 rules screen) + 6 tests only.
+Shots Fold 755x1000@2 + iPad 1180x820@2 looked 3×: Hoàng tự / Công chúa card mother block ABOVE facts on both (mom x = facts x: Fold 273/273, iPad 828/828; gap 8 px), iPad shows the LIVE kpmore fade at the card bottom, no h-overflow; Điểm trang opens on the kit rules screen («Sẵn sàng», used=0), 0 page errors.
+GATES on bca0052c: quickcheck ×2 PASS (buổi new/live 1137/1349, 1303/1166 ms; render 281/263, 269/245; tab 450/461, 421/470; core gates PASS; old save ok); mg-ui-rest 39/39; kit-opt-text 5/5; coop-e2e 124/124.
+CO-OP GATE: coop-e2e PASS + both-seat n/a (UI only).
+LIVE moved to e804edfc (home-chapters) after the gates: git merge-tree = only index.html/sw.js conflict (build files), no source conflict → usual SELF-MERGE + rebuild at land.
