@@ -2075,3 +2075,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 13:50Z) LRRY: LANDED kit-dialog-2 f85cba97 → ORDER B dialog-person-3 re-merge now.
 - (21/11 13:55Z) duodo-focus LIVE mp4 done by LtG4 (CDN img/_review/duodo-focus-live/, local serve of LIVE 419079d7 since github.io 403 in container); main LOOKED at both frame sheets (stage→walk-in→act fan→mini-game Hỏi han→result→NPC walk-up say box→choices); Fold clip focus target is a 'Người lạ' grey figure (not-yet-met rule, ok). Sent to owner «Dư đồ đã lên game». Tát hand / NPC slap art still missing (C on hold). LtG4 ARCHIVED.
 - (14:00Z) LAND CHAIN 2: LANDED coop-emo-seat 8f435841.
+- (21/11 14:00Z) LRRY: LANDED coop-emo-seat 8f435841. Next mg-intro-2.
