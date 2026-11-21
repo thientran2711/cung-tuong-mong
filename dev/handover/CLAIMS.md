@@ -571,3 +571,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-mgcal-redo REVIEWER (sonnet; small owner-bug) | review/mgcal-redo-rv; reports/rv-mgcal-redo.md | MAIN ROOT-82 | rv-signs session | DONE FAIL cc50a8ee (code carries stale tries) | 21/11 00:16Z |
 | REVIEW kc-coop-select r1 E36r (opus BIG; briefs/E36r-review-kc-coop-select.md) of 8b26815f | review/kc-coop-select-r1; reports/kc-coop-select-review.md | FOREMAN E #24 | session_01DgYSWp7ktXYqaHyYiXStGA | RUNNING | 21/11 00:22Z |
 | kit-progress-run KIT KEEPER (sonnet; owner bug, MAIN ROOT-82 fast lane) | review/kit-progress-run; reports/kit-progress-run.md | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM d19741dc (waits rv MSxpxbsA) | 21/11 |
+| B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | RUNNING | 21/11 00:25Z |
+| B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | RUNNING | 21/11 00:25Z |
