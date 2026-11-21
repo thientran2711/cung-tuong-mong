@@ -122,25 +122,25 @@ function kc2T(r,t,name,age,role,tr,af,more){return Object.assign({id:"f"+r,r,t,n
 function kc2Due(){return (S.turn||0)+(KC.ty-S.year)*12+(KC.tm-1-S.month)}
 /* reviewer r1: a home person whose title IS her name (Xuân Đào, Bà Tư) keeps its capitals in running text; role titles go lower case */
 function kc2Lt(m){return m&&/^(xd|ba)$/.test(m.r)?String(m.t):String(m&&m.t||"").toLowerCase()}
-function kc2Init(d){const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;const gl=shuf(KCMN.slice());const g=()=>gl.pop();const fam=[];
+function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",{sur,more:fam});const gv=()=>nmGivenOf(nmBare(nmNew("m",{more:fam})));const gf=()=>nmGivenOf(nmBare(nmNew("f",{more:fam})));const gx=()=>nmNew("m",{more:fam,avoidSur:new Set([sur])});const gmo=()=>nmNew("mo",{more:fam,avoidSur:new Set([sur])});
  const T=(r,t,name,age,role,trs,af,more)=>kc2T(r,t,name,age,role,pick(trs),af,more);
  if(d==="dan"){
-  fam.push(T("cha","Phụ thân",nm(g()),44+R(8),"official",["Ân cần","Cương trực","Kín đáo","Nóng nảy"],40+R(30)));
-  fam.push(T("me","Mẫu thân",`${pick(SURN)} thị`,40+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo"],55+R(25)));
-  fam.push(T("huynh","Huynh trưởng",nm(g()),21+R(4),"man",["trung hậu","nóng nảy","Ham vui","Kín đáo"],35+R(30)));
+  fam.push(T("cha","Phụ thân",gm(),44+R(8),"official",["Ân cần","Cương trực","Kín đáo","Nóng nảy"],40+R(30)));
+  fam.push(T("me","Mẫu thân",gmo(),40+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo"],55+R(25)));
+  fam.push(T("huynh","Huynh trưởng",gm(),21+R(4),"man",["trung hậu","nóng nảy","Ham vui","Kín đáo"],35+R(30)));
   /* Xuân Đào: the girl from the same village who enters the palace in the same draft (j67 cnv_ban names her) — one person, one name */
   /* the palace has no other Xuân Đào: a palace maid who drew that name gets another one (j61 hides strangers' names in any text) */
-  try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){const f=(typeof MAIDS!=="undefined"?MAIDS:[]).filter(n=>!used.has(n)&&n!=="Xuân Đào");if(f.length){e.name=pick(f);used.add(e.name)}}}catch(e){console.error("kc2 xd name",e)}
+  try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){e.name=nmNew("maid",{more:[{name:"Xuân Đào"}]});used.add(e.name)}}catch(e){console.error("kc2 xd name",e)}
   fam.push(T("xd","Xuân Đào","Xuân Đào",18+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
-  fam.push(T("ly","Lý trưởng",`${pick(SURN)} ${g()}`,50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
-  fam.push(T("ba","Bà Tư",`Bà Tư ${pick(SURN)} thị`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
+  fam.push(T("ly","Lý trưởng",gx(),50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
+  fam.push(T("ba","Bà Tư",`Bà Tư ${gmo()}`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
  }else{const L=kc2L(),bd=kc2Br()==="bd",pf=kc2Br()==="pf";
-  const gn=g();fam.push(T("cha",L.dad,pf?L.tx.dadN:bd?bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`):nm(gn),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
-  const fn=pick(KCFN);fam.push(T("me",L.mom,pf?`${L.tx.momN} ${fn}`:bd?bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`):`Vương hậu ${fn}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
-  if(bd){fam.push(T("huynh","Trưởng huynh",`${g()}`,26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",`${g()}`,23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
-  else{fam.push(T("huynh",pf?L.tx.huynh:"Thế tử huynh",nm(g()),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc",pf?L.tx.thuc:"Vương thúc",nm(g()),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
-  const mu=T("muoi",kc2Muoi(),kcFreeName(()=>bd?pick(KCFN):nm(pick(KCFN)),fam),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
-  fam.push(T("sx","Sứ thần Đại Hy",`${pick(SURN)} ${g()}`,45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
+  fam.push(T("cha",L.dad,pf?L.tx.dadN:bd?(gn=>bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`))(gv()):gm(),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
+  fam.push(T("me",L.mom,pf?`${L.tx.momN} ${gf()}`:bd?(fn=>bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`))(gf()):`Vương hậu ${gf()}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
+  if(bd){fam.push(T("huynh","Trưởng huynh",gv(),26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",gv(),23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
+  else{fam.push(T("huynh",pf?L.tx.huynh:"Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc",pf?L.tx.thuc:"Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
+  const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
+  fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
  S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
  if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
