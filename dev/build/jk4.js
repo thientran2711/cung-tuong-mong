@@ -1100,7 +1100,7 @@ html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!importa
 html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
 html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
 @container kpane (max-width:420px){html body .pc>.pcr button.ka.kart{--kpa:68px}}
-@container kpane (min-width:600px){html body .pc>.pcr button.ka.kart{--kpa:96px}}
+html.kv2 body .pc>.pcr button.ka.kart,html.kv2 body .pc>.pcr button.ka.kart.kart{--kpa:96px}/* iPad (two pages): the bigger card, as the approved «Dò hỏi gia thế» */
 `;document.head.appendChild(st)})();
 /* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
    Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
