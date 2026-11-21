@@ -60,7 +60,7 @@ function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v
  const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
- let nm="";for(let i=0;i<20;i++){const s=pick(V.sur||SURN.filter(x=>x.indexOf(" ")<0)),g=pick(MALEN);nm=`${s} ${g}`;if(!used.has(g))break}
+ const nm=nmNew("m",V.sur?{sur:pick(V.sur)}:{});
  const age=Math.max(19,Math.min(30,(S.age||18)+2+R(6)));const tr=k==="td"||k==="thd"?pick(["trung hậu","cẩn trọng"]):pick(MTR.filter(x=>x!=="phong lưu"));
  const m={id:"m96",role:V.role,rw:V.role.toLowerCase(),haunts:V.haunts.slice(),age,name:nm,trait:tr,loyal:70+R(25),af:20,tinh:62+R(14),letters:0,trysts:0,alive:true,knowsMe:[],tm96:k,known:1};
  S.men=S.men.filter(x=>x.id!=="m96");S.men.push(m);return m}
