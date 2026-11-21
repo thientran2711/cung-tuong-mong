@@ -54,8 +54,18 @@ function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi
    every patch; else the copy she last sent, with the host's patches she applied since put on it too. Before: two diffs sent before the view
    caught up both carried the same change (a number added twice on the host). */
 E.bs=null;E.pn=0;E.last="";E.curP=curP;E.packs=packs;
+/* review coop-guest-week-lag: a view of an OLDER week than the room's (the host's new snapshot has not reached her yet: her first ready /
+   act right after the merge) is never her baseline. Before, her first diff of the new week was taken against the last view of the old week
+   (her person before her week end), so it carried her whole week end again (Sủng −1, Sức, stipend, month card, wages: 225 ops, «+ bạc 12»)
+   and the host added it on top of his copy rebuilt from the merged week → his copy of her = phone + her week end once more, until the next
+   merge (E47 drift, dev/test/coop-week-lag.js REAL=1). Then her baseline is the merged person itself (CW.base.P[seat]: exactly what the host
+   rebuilds his copy from, TH.seatOf), patches she had applied when she sent her week (its thpn) counted in. */
+function mergedP(){const C=CW.base,P=C&&C.P&&C.P[CW.seat];if(!P||!P.S)return null;const b=J(P.S);
+ for(const k of ["empKnown","cmP","menP","cnews","heir"])delete b[k];for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];return {b,pn:(P.S.thpn|0)}}
 E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n|0)):0;const done=!E.last||!!(o&&o.dr&&o.dr.id===E.last);
- if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
+ const old=!!o&&(o.w|0)<(COOP.state.week||0);
+ if(!E.bs||done&&!old&&(S.thpn||0)>=mx){const P=!old&&o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}
+  else if(!E.bs&&old){const m=mergedP();if(m){E.bs=m.b;E.pn=m.pn;E.stat.wkBase=(E.stat.wkBase|0)+1;lg(["wk-base",o.w|0,COOP.state.week||0])}}}
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
 COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
