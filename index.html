@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1af8db13+","t":"2026-11-21T07:55Z","c":"SELF-MERGE LAND coop-guest-agent: merge LIVE d6f23858 (index.html/sw.js rebuilt)","b":"42d8c5727cd0","h":[{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"},{"s":"d3f5ea28+","t":"2026-11-21T04:23Z","c":"Chức vị người: một kiểu chữ; tên nơi chốn để thường"},{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"}]};
+window.CTM_BI={"s":"36b6071e+","t":"2026-11-21T08:08Z","c":"kit-badge: kitStBadge round status badge on .krailb (ok/busy/pause) + .koff offline grey; KIT 77b + sample; test kit-badge.js (K-BADGE-HAOH…","b":"2c7f51ca5d32","h":[{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -63500,8 +63500,10 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 /* KIT §77b kitStBadge: the round STATUS BADGE at the bottom-right corner of a kit square rail button (.krailb): ✓ green = ready, … grey = busy, ⏸ amber = paused; none = no badge. Offline = class koff on the button (picture goes grey). K-BADGE-HAOHUU */
-.krailb .kbdg{position:absolute;right:-6px;bottom:-5px;min-width:15px;height:15px;padding:0 2px;border-radius:50%;box-sizing:border-box;font:700 10px/15px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 1.5px var(--k-card,#fffaf0);pointer-events:none;z-index:2}
-.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+.krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
+.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+/* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+.krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
 .krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
@@ -88408,7 +88410,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="42d8c5727cd0";window.CTM_BUILD=BUILD;
+const BUILD="2c7f51ca5d32";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
