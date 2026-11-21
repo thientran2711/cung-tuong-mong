@@ -1,3 +1,6 @@
 # KIT KEEPER #2 (session_01Rc5AsMF9SLrWM4NQM9zGGz) — report
 START_CTX ~8 % (estimate). Successor of kit-keeper-1 (MtjP). Coordinator MAIN CHÍNH 92 session_01Rc5AsMUHiJKCMiCjnzdhii.
 - 21/11: kit-focus round 2 pushed review/kit-focus d3f02bcc → SSK rv MSxp (details in reports/kit-focus.md ROUND 2).
+- 21/11: K-CHIP-PAUSE (MAIN 92, low prio) → `review/kit-chip-pause` 8d624b8a, based on review/hao-huu f21bd515 (the «⏸ m:ss» clock chip exists only there; hao-huu already carries kit-badge). PRIORITY #1 CHECK: OD L742/L1035/L1061 (pause button + friend chip spec, no glyph rule) | main: FST hold ⏸ (jcooptimer.js:228) | review/hao-huu jcooptimer.js:240 «⏸ » prefix, kit-badge jrail.js badge bars | claims none.
+  Family scan (`git grep ⏸` dev/build, rendered strings): before = 3 text glyphs (friend clock chip pz, FST hold → status chip, panel row, jhaohuu now-rows) + §77b badge (already CSS bars, glyph at font-size 0); after = 0 text glyphs, all show `.kpzb` (two CSS bars 3x10, currentColor; new kit class in jrail.js next to the badge bars). KIT §77b note.
+  Test `node dev/test/kit-chip-pause.js` Fold + iPad PASS (no ⏸ text, bars 3x10, chips not cut); kit-badge.js PASS; quickcheck PASS. Shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-chip-pause/755x1000-chip.png · 1180x820-chip.png. Merge order: land after hao-huu (or hao-huu merges this branch).
