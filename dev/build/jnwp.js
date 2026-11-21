@@ -150,7 +150,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
    if(P.glow&&phase==="play"&&!t.locked&&okFor(t,P.glow.i))k91Glow(g,tx,ty,t.w0,t.h0,now)});
   if(drag)drawT(drag,drag.x,drag.y,"on");
   {/* owner 21/11 ~00:50Z (mg-5s-clear): the two scrolls are named, one state-driven guiding line */g.font=`700 12px ${kg82Col("--body","sans-serif")}`;g.fillStyle="#6b4a1c";kg82Lbl(g,"Nét mẫu",P.lx+P.ts/2,P.top-8,P.ts+14);kg82Lbl(g,"Nét đối",P.rx+P.ts/2,P.top-8,P.ts+14);
-   if(phase==="play")kg82Guide(g,drag?"Thả vào ô trống bên phải, cùng hàng":sel?"Chạm ô trống bên phải, cùng hàng, để đặt":"Kéo nét lật gương của bên trái sang ô bên phải",(wide?WL:W)/2,14,drag||sel?K91C.good():"#6b4a1c",12,(wide?WL:W)-12)}
+   if(phase==="play")kg82Guide(g,drag?"Thả vào ô trống bên phải, cùng hàng":sel?"Chạm ô trống bên phải, cùng hàng, để đặt":"Kéo nét lật gương của bên trái sang ô bên phải",(wide?WL:W)/2,14,drag||sel?K91C.good():"wait",12,(wide?WL:W)-12)}
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,(()=>{const j=cl(r+(phase==="judge"?1:0),0,R.length),pl=phase==="play"&&P&&j<R.length?1:0,all=R.reduce((a,b)=>a+b,0);return 10*(pts+(pl?Math.max(0,P.n-P.miss*T.miss-P.cost)*mgPace(env,"doi",now-t0,R[r]*nwP(T.sec,tier)*1000):0)+R.slice(j+pl).reduce((a,b)=>a+b,0))/Math.max(1,all)})()),round:`Hồi ${Math.min(r+1,R.length)}/${R.length}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  let dn=null;k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();const t=tileAt(x,y);dn={x,y,t,moved:false};if(t){drag=t;delete t.bk;t.ox=x-t.x;t.oy=y-t.y}},
   move:(x,y)=>{if(!dn||!drag)return;if(k91Dist(x,y,dn.x,dn.y)>6)dn.moved=true;drag.x=x-drag.ox;drag.y=y-drag.oy},

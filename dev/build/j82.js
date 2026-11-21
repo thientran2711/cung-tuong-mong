@@ -203,9 +203,11 @@ function kg82Lbl(g,t,x,y,maxW,dark){g.save();g.lineJoin="round";g.lineWidth=3.5;
  g.strokeText(t,x,y);g.fillText(t,x,y);g.restore()}
 /* KIT §13.7.2 GUIDING LINE (owner OD 21/11 ~00:50Z, review/mg-5s-clear; the pill of td_dung-clear made shared): ONE short state-driven line on the mini-game canvas,
    a cream pill with a coloured rim (neutral = brown, "tap now" = good green, "wrong / danger" = red). Every engine calls this; none draws its own pill. maxW shrinks the type to fit. */
+/* kit-guide review (kit keeper, 21/11): colours are TOKENS, never typed in an engine — `col` is a tone word «wait» (neutral, --k-lab) · «go» (tap now, --good) · «bad» (danger, --bad), or a ready colour (kg82Col("--good") …); the pill ground is the kit card token */
 function kg82Guide(g,t,cx,cy,col,sz,maxW){g.save();let px=sz||14;const F=kg82Col("--body","sans-serif");g.font=`700 ${px}px ${F}`;const lim=Math.max(120,maxW||(g.canvas.width/(g.getTransform?g.getTransform().a:1)-16));
- while(px>10&&g.measureText(t).width+22>lim){px-=1;g.font=`700 ${px}px ${F}`}const w=g.measureText(t).width+22,h=px+14;g.fillStyle="rgba(255,250,238,.95)";g.strokeStyle=col||"#6b4a1c";g.lineWidth=2;g.beginPath();
- if(g.roundRect)g.roundRect(cx-w/2,cy-h/2,w,h,h/2);else g.rect(cx-w/2,cy-h/2,w,h);g.fill();g.stroke();g.fillStyle=col||"#6b4a1c";g.textAlign="center";g.textBaseline="middle";g.fillText(t,cx,cy+1);g.restore()}
+ const TONE={wait:kg82Col("--k-lab","#6b4a1c"),go:kg82Col("--good","#2d7a52"),bad:kg82Col("--bad","#c23b22")},rim=TONE[col]||col||TONE.wait;
+ while(px>10&&g.measureText(t).width+22>lim){px-=1;g.font=`700 ${px}px ${F}`}/* still too wide at the smallest size: cut with «…» (a guiding line is ONE SHORT line; keep it ≤ ~34 characters) so the pill never runs past maxW */while(t.length>4&&g.measureText(t).width+22>lim)t=t.slice(0,-2).replace(/\s+$/,"")+"…";const w=g.measureText(t).width+22,h=px+14;g.fillStyle=kg82Col("--k-card","#fffaee");g.strokeStyle=rim;g.lineWidth=2;g.beginPath();
+ if(g.roundRect)g.roundRect(cx-w/2,cy-h/2,w,h,h/2);else g.rect(cx-w/2,cy-h/2,w,h);g.fill();g.stroke();g.fillStyle=rim;g.textAlign="center";g.textBaseline="middle";g.fillText(t,cx,cy+1);g.restore()}
 /* the pictures each kind needs (preloaded before the game starts) */
 const KG82_SPR={dan:["dan-blossom","dan-bridge"],hat:["hat-lotus"],co:["co-board","co-black","co-white"],dauho:["dauho-pot","dauho-arrow"],ban:["ban-target","ban-arrow"],
  tho:["tho-slip"],doi:["doi-slip"],doden:["doden-lantern"],ve:["ve-brush","ve-inkstone"],
@@ -381,7 +383,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
   if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+((pot?ty-50*kz:ty)-H*.16)*kk;if(!kg82Spr(g,an,flyX,yy,46*kz,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
   if(!pot){/* owner 21/11 ~00:50Z: the moving aim is traced down onto the target + one guiding line (mg-5s-clear) */const near=!lock&&Math.abs(x-cx)<A*.16,gd=kg82Col("--good","#2d7a52");
    g.save();g.setLineDash([4,5]);g.strokeStyle=lock?"rgba(138,42,30,.25)":near?gd:"rgba(138,42,30,.55)";g.lineWidth=2;g.beginPath();g.moveTo(x,H*.16+8);g.lineTo(x,ty-64*kz);g.stroke();g.restore();
-   if(!lock)kg82Guide(g,near?"Chạm ngay!":k===0?"Chờ mũi ngắm vào giữa hồng tâm, rồi chạm":"Chạm khi mũi ngắm ở giữa hồng tâm",W/2,H*.065,near?gd:"#6b4a1c",14,W-16)}
+   if(!lock)kg82Guide(g,near?"Chạm ngay!":k===0?"Chờ mũi ngắm vào giữa hồng tâm, rồi chạm":"Chạm khi mũi ngắm ở giữa hồng tâm",W/2,H*.065,near?gd:"wait",14,W-16)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
  function shoot(){if(lock||stop)return;const now=performance.now();const x=pos(now);const d=Math.abs(x-cx)/A/(1+(env.lv||0)*.06)/mgTol(env);const q=d<.08?1:d<.2?.75:d<.35?.5:d<.55?.25:0;lock=true;flyAt=now;flyX=x;
@@ -600,6 +602,8 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  KG82.tutSteps=()=>steps}
 function kgTutDrop(){if(KG82.tut&&KG82.tut.stop){try{KG82.tut.stop()}catch(e){}}}/* a screen that leaves the rules screen without «Sẵn sàng» (quick roll, redraw, ✕) drops a running guided round */
 window.kgReady=kgReady;window.kgTut=kgTut;window.kgTutDrop=kgTutDrop;window.KG82_DEMO=KG82_DEMO;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7.2",title:"kg82Guide · dòng dẫn một câu trên mọi màn chơi (chờ / chạm ngay / nguy)",where:"mọi trò tài nghệ có một câu dẫn theo trạng thái trên khung vẽ (Bắn cung, Tát, Né, Nấu, Hái sen, Đối, Hoa điền, Thái hậu …): viên thuốc kem viền màu — nâu = chờ, xanh = chạm ngay, đỏ = nguy; chữ tự co cho vừa. Màu lấy từ token, không trò nào tự gõ màu",
+ html:()=>{requestAnimationFrame(()=>{try{document.querySelectorAll("canvas[data-kgguide-demo]").forEach(c=>{const W=c.width=Math.min(520,c.parentNode.clientWidth||520),H=c.height=150,g=c.getContext("2d");[["Chờ mũi ngắm vào giữa hồng tâm, rồi chạm","wait"],["Chạm ngay!","go"],["Đòn đang tới · tránh ngay","bad"]].forEach(([t,k],i)=>kg82Guide(g,t,W/2,26+i*44,k,14,W-16))})}catch(e){}});return `<div class="kgbox"><canvas data-kgguide-demo style="width:100%;max-width:520px;display:block;margin:0 auto"></canvas></div>`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgReady · màn Luật chơi (Sẵn sàng / Hướng dẫn) trước MỌI trò tài nghệ",where:"mọi trò tài nghệ, mọi chỗ mở (thi, học, Thử tay, khảo hạch, tuyển chọn, Tát, Tu đức, Hoàng thượng triệu, Chải chuốt, mưu kế, Nghiệm thân); chưa chạm «Sẵn sàng» thì chưa tính giờ",
  html:()=>{try{return ["dan","ban","co"].map(k=>{const b=document.createElement("div");b.className="kgbox";b.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${typeof kitQuick==="function"?kitQuick({n:"Để trời định",sub:"tính 5/10"}):""}</div>`;
   kgReady(b,{kind:k});b.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:560px;margin:0 auto 12px"><div class="kgame"><div class="kgbody"><div class="kginfo">${b.outerHTML}</div></div></div></div>`}).join("")}catch(e){return ""}}})}catch(e){}

@@ -58,7 +58,7 @@ function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,
   for(const s of L){if(s.st)continue;if(!kg82Spr(g,"hat-lotus",s.x,s.y,s.r*2.2,null,{alpha:s.big?1:.88}))kg82Blossom(g,s.x,s.y,s.r*.8,"#e48aa4",false)}
   if(alarm&&!alarm.done){g.font=`700 26px ${kg82Col("--display","serif")}`;g.textAlign="left";g.fillStyle="#d9482b";kg82Lbl(g,"!",14,28,40,true)}
   {/* owner 21/11 ~00:50Z (mg-5s-clear): the reach zone is named, one state-driven guiding line */const inz=L.some(s=>!s.st&&s.x>=zx0&&s.x<=zx1);g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="center";g.fillStyle="#6b4a1c";kg82Lbl(g,"Vùng hái",(zx0+zx1)/2,zy-8,120);
-   kg82Guide(g,inz?"Chạm đóa sen trong vùng sáng!":tt<4500?"Sen trôi từ phải sang · chạm khi vào vùng sáng":"Chờ sen trôi vào vùng sáng rồi chạm",W/2,H*.09,inz?kg82Col("--good","#2d7a52"):"#6b4a1c",14,W-16)}
+   kg82Guide(g,inz?"Chạm đóa sen trong vùng sáng!":tt<4500?"Sen trôi từ phải sang · chạm khi vào vùng sáng":"Chờ sen trôi vào vùng sáng rồi chạm",W/2,H*.09,inz?"go":"wait",14,W-16)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;
   if(!alarm||alarm.done){if(tt>next&&made<N){spawn(tt);next=tt+1500+Math.random()*700}}

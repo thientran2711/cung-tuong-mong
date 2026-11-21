@@ -226,7 +226,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
  function paint(gg){gg.fillStyle="#efe0c6";gg.fillRect(0,0,W,H);const bg=kg82Img("chai-bg");if(bg.complete&&bg.naturalWidth)gg.drawImage(bg,G.bg.x,G.bg.y,G.bg.s,G.bg.s);
   gg.save();gg.beginPath();gg.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);gg.clip();gg.fillStyle="#d9c7a3";gg.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);
   if(face.complete&&face.naturalWidth)gg.drawImage(face,G.img.x,G.img.y,G.img.w,G.img.h);gg.restore();
-  kg82Guide(gg,moved?"Thả vào giữa hai đầu mày, rồi bấm ✓ Dán":"Kéo hoa điền vào giữa hai đầu mày",W/2,16,moved?kg82Col("--good","#2d7a52"):"#6b4a1c",13,W-16);/* owner 21/11 ~00:50Z: one guiding line (mg-5s-clear); clarity only, the board is unchanged */
+  kg82Guide(gg,moved?"Thả vào giữa hai đầu mày, rồi bấm ✓ Dán":"Kéo hoa điền vào giữa hai đầu mày",W/2,16,moved?"go":"wait",13,W-16);/* owner 21/11 ~00:50Z: one guiding line (mg-5s-clear); clarity only, the board is unchanged */
   }
  /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
  function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||(typeof HD_ANC!=="undefined"&&HD_ANC[file])||now-t0>BAL.toil.meshWait){/* rv mg-play2: a spot-table row = no wait for the face-points file */let sk=0;try{sk=toilSkill().sk}catch(e){}
