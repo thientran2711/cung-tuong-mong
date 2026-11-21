@@ -118,3 +118,26 @@ HAN5 read (zoomed collar crops):
 - All 8 have a wide crossed collar on the shoulders and the WHITE innermost band now reads clearly. t4/t5/t6 are closest to aFGoe7afSh.
 - t7/t8 V a little narrower/deeper and t1–t3 slightly less flat (pink-on-pink).
 - POSSIBLE G61: t4 lotus and t6 jade ball held near the front waist. The pose words are LADDER4 byte-identical (A47), so the owner/#26 decides.
+
+# HANDOVER (HAN5 → HAN6), 21/11 ~08:58Z
+depth 5 (get_session lineage.depth) · START_CTX ~3 % · now ~40 % of 1M (past roll line START+25 = 28 %, under the 60 % ceiling). Coordinator = Foreman C #26 session_01D3E3NXDFbJUswJKxtfWLwX (#23 → #24 → #25 → #26); the COORDINATOR opens HAN6.
+STATE: nothing half-written. Last push 4a7d4e7. Hán collar LOCKED (G62 + dev/art/seasons4/HAN_COLLAR_L1915_FROZEN.txt, owner L1915). Current Hán set = s62_t{1..8}_HAN_COLLAR_L1915.txt (generator make_han_collar9_L1915.py), drawn by VE7 (ids above). Waiting for the owner's verdict on that sheet.
+SUPERSEDED (do not use): LADDER6/7/8, PHICOPY, han_phi_simplified. Test chain kept for reference: PHISIMPLE_L1861 (8aiDRlmIrU) → L1880 (3zKyLD3REY) → L1884 pearl (YMlRJFKWeC) → L1893 (aFGoe7afSh = APPROVED).
+KEY LESSONS:
+- The wide flat collar came from the bead yoke in the old Phi prompt; without a yoke only the explicit collarbone words draw it (L1880/L1893).
+- Pale rank colours (L1863) are unreadable as the innermost band; ivory white reads (L1915 test).
+- Never change the frozen collar words.
+RULES:
+- Owner hard lines: hair/pose/angle/held item = LADDER4 byte-identical (A47). G57 no pendant, G59 no sachet, G60 centred bow, G61 front waist free, G62 locked collar.
+- Waivers: M06/M07/S06 t1–t3, S13 t4, M06/M07 t5, B12/M07/S07 t6–t8, S14 t7.
+- Trims: test each with check_store; build .keep from keep_check CUT lines.
+OPEN:
+- t4/t6 held items near the front waist (G61?): owner/#26 decides.
+- The 3-band rule L1863 (innermost = rank colour) vs the L1915 white test: owner to confirm white as final.
+- Workers: VE7 session_01D3E3NahACvw1Z1FUUXG1eB, VE9 session_01D3E3NY6tdajnq7tHvQhexg.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
