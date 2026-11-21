@@ -640,7 +640,8 @@ function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div cl
    g.fig = true (her) | a person; g.pic = the prop picture. kitGameFigRefresh(p) redraws the figure in place after an outfit / makeup change. */
 function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=="undefined"?S:null);if(!p||typeof kitStageFig!=="function")return"";const f=kitStageFig(p,{cap:false});if(!f)return"";
  const an=typeof OPT!=="undefined"&&OPT.fxon&&!(typeof RM!=="undefined"&&RM);
- return `<div class="kgfig${an?" kgf-anim":""}" data-kgf="${p===S?"me":"other"}">${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
+ const bgk=g.kind&&typeof KG82_MGBG!=="undefined"?KG82_MGBG[g.kind]:"",bgu=bgk?(typeof IMG_U==="function"?IMG_U(bgk):bgk):"";
+ return `<div class="kgfig${an?" kgf-anim":""}${bgu?" kgf-bg":""}" data-kgf="${p===S?"me":"other"}"${bgu?` data-mgbg="${g.kind}" style="--mgbg:url('${bgu}')"`:""}>${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
 function kitGameFigRefresh(p,o){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,Object.assign({cap:false},o&&o.src?{src:o.src}:{}));/* kit-dress-picker: o.src = a preview figure (the dress she is trying on) */if(!f)return;
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
@@ -677,6 +678,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 (function(){const st=document.createElement("style");st.id="kgfig-css";st.textContent=`
 .kgame .kgbody.kgfig-on{display:grid;grid-template-columns:minmax(150px,30%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;overflow:hidden}
 .kgfig{position:relative;margin:10px 0 10px 14px;min-height:240px;border:1px solid var(--line);border-radius:var(--k-rad);overflow:hidden;background:linear-gradient(#f8efdc,#ecdcbc);box-shadow:0 0 0 2px #fffaf0 inset}
+.kgfig.kgf-bg{background:var(--mgbg) center/cover no-repeat,linear-gradient(#f8efdc,#ecdcbc)}/* per-subject tall backdrop (KG82_MGBG); no file yet = the gradient */
 .kgfig>.kesf{position:absolute;inset:8px 6px 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:none}
 .kgfig .kesfi{position:relative;display:flex;height:calc(100%*var(--kfr,1));max-width:100%;justify-content:center}
 .kgfig .kesfi>.kesimg{display:block;height:100%;width:auto;max-width:100%;max-height:none;object-fit:contain;object-position:50% 100%}
@@ -1247,7 +1249,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
-.kskacts.pcb{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important;gap:6px}
+.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.
@@ -1385,11 +1387,15 @@ function kitVeiled(p){if(!(window.KIT_VEIL&&(KIT_VEIL.por||KIT_VEIL.fig)))return
    stage tags .j59t/.j59n, podium plates), [data-vp-skip], [data-norank], form fields, script/style. */
 const KIT_RP_TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Cc]ung nữ (?:tam|nhị|nhất) đẳng|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
 const KIT_RP_SKIP=".kname,.knr,.krt,.krn,.kpsn,.pcrk,.pcname,.j59t,.j59n,.kpod-plq,.kbk-pname,[data-vp-skip],[data-norank],[contenteditable]";
-let kitRpKey="",kitRpRe=null,kitRpMap=null;lifeStore("kitRpMap name -> person",()=>{kitRpKey="";kitRpRe=null;kitRpMap=null});
+let kitRpKey="",kitRpRe=null,kitRpMap=null,kitRpHasKnown=false;lifeStore("kitRpMap name -> person",()=>{kitRpKey="";kitRpRe=null;kitRpMap=null});
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
-  /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */
-  kitRpRe=L.length?kRx(`(?<![\\p{L}])(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·]))(?![\\p{L}])`,"gu"):null}
+  /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)").
+     KIT §48.3 (owner 21/11 ~04:33Z, #61): a person NOT in the people list (a story NPC: «Tể tướng Trịnh Thừa Chí») is still ONE unit — "title Capitalised Name (3–4 words: family + 2 given, e.g. Trịnh Thừa Chí; a 2-word «name» is a PLACE: Ma ma Đức Thọ, Thái giám Càn Thanh, Công chúa Cao Ly)" (m[5], m[6]) in the title's colour;
+     a court post alone («nhà Tể tướng», Thượng thư, Thị lang, Tướng quân; m[7]) carries its colour too. Known people win (the alternatives are tried in order). */
+  const known=L.length?`(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·])|`:"(?:";
+  kitRpRe=kRx(`(?<![\\p{L}])${known}(${KIT_RP_TITLES}) (\\p{Lu}\\p{Ll}+(?: \\p{Lu}\\p{Ll}+){2,3})(?! (?:cung|điện|khố|viện|quốc|phủ|các|lâu|môn|hiên|quán|sảnh)(?![\\p{L}]))|([Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân))(?![\\p{L}])`,"gu");
+  kitRpHasKnown=!!L.length}
  return kitRpRe}
 /* the kit markup for one "title name" pair (= kitName with the text's own title) */
 function kitRankNameH(p,title,name){const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;
@@ -1397,12 +1403,19 @@ function kitRankNameH(p,title,name){const col=typeof kitPersonCol==="function"?k
  return `<b class="kname${me?" kmy":""}" style="--rc:${col}"><span class="kti" style="--rt:${rt}">${esc(title)}</span> ${esc(name)}</b>`}
 window.kitRankNameH=kitRankNameH;
 /* one match → kit html: "title name" = kitRankNameH; "name (title" = the name block + " (" + the title in its tone */
-function kitRpOne(t,n,n2,t2){if(n){const p=kitRpMap&&kitRpMap.get(n);return p?kitRankNameH(p,t,n):""}const p=kitRpMap&&kitRpMap.get(n2);if(!p)return"";
+/* palace / country names that can look like a 3-word name (never a person) */
+const KIT_RP_PLACES=/(?:Càn Thanh|Càn Ninh|Khôn Ninh|Dưỡng Tâm|Đức Thọ|Tân Giả|Đại Hy|Cao Ly|Ba Tư|Bắc Địch|Thần Vũ|Nội Vụ|Từ Ninh|Thọ Khang|Cảnh Phúc|Chung Túy|Hàm An|Diên Khánh)/;
+function kitRpOne(t,n,n2,t2,u,un,ct){if(n){const p=kitRpMap&&kitRpMap.get(n);return p?kitRankNameH(p,t,n):""}if(n2){const p=kitRpMap&&kitRpMap.get(n2);if(!p)return"";
  const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;
  return `<b class="kname${me?" kmy":""}" style="--rc:${col}">${n2}</b> (<b class="kname" style="--rc:${col}"><span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(t2,col):""}">${t2}</span></b>`}
+ const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ if(u&&un){if(KIT_RP_PLACES.test(un))return"";const tone=typeof kitRankTone==="function"?kitRankTone(u,"#8a7350"):"";return `<b class="kname" style="--rc:${tone||"#8a7350"}"><span class="kti" style="--rt:${tone}">${esc(u)}</span> ${esc(un)}</b>`}
+ if(ct){const tone=typeof kitRankTone==="function"?kitRankTone(ct,"#8a7350"):"";return tone?`<b class="kname" style="--rc:${tone}"><span class="kti" style="--rt:${tone}">${esc(ct)}</span></b>`:""}return""}
+/* regex groups -> kitRpOne arguments (the known-people alternatives exist only when the people list is not empty) */
+function kitRpArgs(m){return kitRpHasKnown?[m[1],m[2],m[3],m[4],m[5],m[6],m[7]]:[undefined,undefined,undefined,undefined,m[1],m[2],m[3]]}
 /* the same on an HTML string (text segments only): every later mention too, BEFORE kpChipify, so a delta chip never eats the end of a name
    ("(Thường tại Bạch Thục Nghi thiện cảm +8)" made the chip "Thục Nghi thiện cảm +8" and left the title plain) */
-function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapText(h,s=>s.replace(re,(m,t,n,n2,t2)=>kitRpOne(t,n,n2,t2)||m))}catch(e){return h}}
+function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;let inK=0;return String(h).split(/(<[^>]+>)/).map(x=>{if(!x)return x;if(x[0]==="<"){if(/^<b class="kname/.test(x))inK=1;else if(inK&&x==="</b>")inK=0;return x}return inK?x:x.replace(re,(...m)=>kitRpOne(...kitRpArgs(m))||m[0])}).join("")}catch(e){return h}}/* text inside an existing unit (.kname) is never wrapped again */
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
@@ -1411,7 +1424,7 @@ function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;co
   return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
-  while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
+  while((m=re.exec(v))){const h=kitRpOne(...kitRpArgs(m));if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
    const t=document.createElement("template");t.innerHTML=h;f.appendChild(t.content);last=m.index+m[0].length;k++}
   if(!last)continue;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}
  return k}catch(e){return 0}}
