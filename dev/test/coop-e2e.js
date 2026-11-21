@@ -263,7 +263,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    console.log('   NC force',JSON.stringify(NCF))}
   if(HLF&&w===0){const g=o=>o.p.evaluate(()=>{const F=window.__hlF;const v=F&&rivals.find(x=>x.id===F.id);const s=v&&(v.staff||[]).find(x=>x.sid===F.sid);
      const h=F&&F.hid!=null&&rivals.find(x=>x.id===F.hid);const mn=F&&F.mid&&(S.men||[]).find(x=>x.id===F.mid);if(mn&&typeof tinOf==='function')tinOf(mn);/* her screen reads it */
-     return{wk:__co().week,fid:S.thO&&S.thO.fid||null,name:s&&s.name,txt:S.hlTxt||null,house:h?[h.resHead===h.id?'self':h.resHead,h.resHall||null,h.pal==null?null:h.pal]:null,
+     return{wk:__co().week,fid:S.thO&&S.thO.fid||null,name:s&&s.name,txt:S.hlTxt||null,house:h?[h.resHead===h.id?'self':h.resHead==='me'?(COOP.seat==='a'?901:902)/* r2c: "me" on a seat = that seat's own pid in the canon (jcoopworld REFF); a consort housed under the GUEST reads 902 on the host, me on her seat */:h.resHead,h.resHall||null,h.pal==null?null:h.pal]:null,
       tin:mn?(mn.tin==null?null:mn.tin):'-',emo:h&&F.emo?((h.emoH||[]).some(e=>e&&e.why===F.emo)?1:0):'-',hl:COOPW.hl&&COOPW.hl.stat}});let x,y;const t0=Date.now();
    const done=()=>x.fid&&x.fid===y.fid&&x.name&&x.name===y.name&&x.name!=='Nguyễn Thị Hoa'&&y.txt&&y.txt.includes(y.name)&&JSON.stringify(x.house)===JSON.stringify(y.house)&&x.tin===y.tin&&x.emo===y.emo;
    while(Date.now()-t0<20000){x=await g(A);y=await g(B);if(done())break;await sleep(400)}
