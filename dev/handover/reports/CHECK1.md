@@ -461,3 +461,20 @@ The diff is only:
 - A38 trims: pose tails; the t5 panel stays "embroidered with double hollyhocks"; "framing the bordered square neckline" and the capelet neck repeat dropped.
 - No garment pieces added (G47 corrected) ✓. Embroidery placements are as in v6 ✓.
 Verdict: **PASS ×2** → GEN1, 2 drafts × 55 cr (Foreman C #16 standing OK).
+
+## JOB 20 (DESIGN21 356ce76, owner L1645 revert) — thu t6 COMOIk (base COMOId) + t7 v8j (base v8c), diff-only · 0 gens
+Gates:
+- tp6 / tp7 a22 STORE + APPROVED PASS; keep PASS. Chars: 9977 / 9956. No vase.
+- The OUT1 WARN is expected: the revert removed the G40 clause.
+The diff is only what was asked:
+- t6:
+  - ", nothing at the ears" on the trâm dangles ✓
+  - G47 embroidery-only "(also on the chest, both front edges, wide outer and inner hem bands, cuffs and skirt-front medallions)" ✓ — no garment piece added
+  - flower "(never two, never a pair, no cluster)" ✓
+  - A38 trims: "never copy anything but its colour", "gold only as thin accents on the borders", "never in profile", "Everyone beautiful…"
+  - vân kiên kept
+- t7:
+  - ", none at the ears" on the crown tassels ✓
+  - gate repairs as in v8e: E1 "the LEFT side of the picture", G23 "robe falling still" cut, S19 slipper-toe tail ✓
+Verdict: **PASS ×2** (diff-only; the reverted base text itself was not judged, per the owner). Report only, no gen.
+Note for the Foreman: by the revert, both no longer carry the G45 "jade never covered" words (t7 pendants / belt). G45 is still a rule (L1622), so the draft should be watched.
