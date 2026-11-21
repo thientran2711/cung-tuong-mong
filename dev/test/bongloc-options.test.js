@@ -12,12 +12,14 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
-  Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(500);
+  Q.length=0;document.getElementById('modal').hidden=true;render();
+  /* deterministic staging (no retries): roll() is capped at BAL.odds.hi, so a cut month pins Math.random low for this ONE stipend call */
+  window.__st=cut=>{const mr=Math.random;if(cut)Math.random=()=>0.001;try{return stipend(S)}finally{Math.random=mr}}});await sleep(500);
  const R=await p.evaluate(()=>{const out=[];const B0=JSON.parse(JSON.stringify(BAL.stip));
   for(const rank of [0,3,6])for(const st of ["normal","cut","confined","confined+cut","out"])for(let m=1;m<=12;m++){
    S.rank=rank;S.month=m;S.out=st==="out"?1:0;S.confined=/confined/.test(st)?2:0;S.bac=500;S.cutPay=0;const sp=stipSt(S);delete sp.tip;sp.tips=0;delete sp.fault;
    const W=stipW();if(/cut/.test(st)){S.sung=5;W.greedy=1;delete W.pun;BAL.stip.cap=100;BAL.stip.w.sung=100}else{S.sung=80;W.greedy=0;Object.assign(BAL.stip,JSON.parse(JSON.stringify(B0)))}
-   Q.length=0;let line="";try{line=stipend(S)}catch(e){line="ERR "+e.message}
+   Q.length=0;let line="";try{line=__st(/cut/.test(st))}catch(e){line="ERR "+e.message}
    const c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t));const f=Q.find(q=>/Lễ nghĩa$/.test(q.t||""));const sep=Q.some(q=>q.t==="Bổng lộc bị cắt xén");
    const h=c?c.h:"";const said=/không có việc gì để chọn/.test(h);
    const O=(c&&c.opts||[]).map(o=>o.n);
@@ -37,13 +39,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  /* every option of a cut month and of a normal month runs */
  const run=await p.evaluate(()=>{const o=[];for(const st of ["cut","normal"]){for(let i=0;i<6;i++){S.rank=3;S.month=4;S.out=0;S.confined=0;S.bac=500;S.cutPay=0;const W=stipW();const sp=stipSt(S);delete sp.tip;sp.tips=0;
    if(st==="cut"){S.sung=5;W.greedy=1;delete W.pun;BAL.stip.cap=100;BAL.stip.w.sung=100}else{S.sung=80;W.greedy=0}
-   Q.length=0;stipend(S);const c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||""));const op=(c.opts||[])[i];if(!op)continue;try{if(op.go)op.go();o.push([st,op.n,"ok"])}catch(e){o.push([st,op.n,"ERR "+e.message])}}}
+   Q.length=0;__st(st==="cut");const c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||""));const op=(c.opts||[])[i];if(!op)continue;try{if(op.go)op.go();o.push([st,op.n,"ok"])}catch(e){o.push([st,op.n,"ERR "+e.message])}}}
   Q.length=0;return o});
  ok(run.length>=6&&run.every(x=>x[2]==="ok")&&run.some(x=>/^Lót tay/.test(x[1]))&&run.some(x=>/^Chu toàn/.test(x[1])),"every option runs",run);
  /* the maid-less road: she goes herself */
  const selfRun=conf=>p.evaluate(conf=>{const m0=S.maid,sf=m0&&m0.spyFor;if(m0)m0.spyFor="x";const B0=JSON.stringify(BAL.stip);let c=null;
-  for(let k=0;k<40;k++){S.rank=2;S.month=6;S.out=0;S.confined=conf?2:0;S.sung=5;S.bac=500;BAL.stip.cap=100;BAL.stip.w.sung=100;(S.staff||[]).forEach(x=>x.loyal=40);const W=stipW();W.greedy=1;delete W.pun;const st=stipSt(S);delete st.tip;st.tips=0;
-   Q.length=0;stipend(S);c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t));if(c&&(c.opts||[]).some(o=>/^Lót tay/.test(o.n)))break}
+  for(let k=0;k<1;k++){S.rank=2;S.month=6;S.out=0;S.confined=conf?2:0;S.sung=5;S.bac=500;BAL.stip.cap=100;BAL.stip.w.sung=100;(S.staff||[]).forEach(x=>x.loyal=40);const W=stipW();W.greedy=1;delete W.pun;const st=stipSt(S);delete st.tip;st.tips=0;
+   Q.length=0;__st(true);c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t))}
   Object.assign(BAL.stip,JSON.parse(B0));if(m0)m0.spyFor=sf;S.confined=0;Q.length=0;return c?(c.opts||[]).map(o=>o.n+" | "+(o.lock?"LOCK ":"")+o.x):[]},conf);
  const self=await selfRun(false);const selfC=await selfRun(true);
  ok(selfC.some(s=>/^Đòi lại phần bị cắt xén \| LOCK đang cấm túc/.test(s)),"no cung nữ + cấm túc: «Đòi lại phần bị cắt xén» locked with the reason (law 6: cannot leave her palace)",selfC);
@@ -53,7 +55,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    await p.setViewportSize({width:W,height:H});for(let k=0;k<40;k++){const bt=p.locator('text=Vào cung ngay');if(await bt.count()&&await bt.first().isVisible()){await bt.first().click().catch(()=>{});await sleep(1500)}else break}
    await p.evaluate(st=>{document.querySelectorAll('.kmov,#kroul,.kroul').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}
     S.rank=3;S.month=5;S.out=0;S.confined=st==="confined"?2:0;S.bac=300;const W=stipW();if(st==="cut"){S.sung=5;W.greedy=1;delete W.pun;BAL.stip.cap=100;BAL.stip.w.sung=100}else{S.sung=80;W.greedy=0}
-    document.getElementById('title').hidden=true;document.querySelectorAll('#klife,.klife').forEach(e=>e.remove());for(let k=0;k<30;k++){delete stipSt(S).tip;delete W.pun;Q.length=0;S.bac=300;stipend(S);if(st!=='cut'||(Q[0].opts||[]).some(o=>/^Lót tay/.test(o.n)))break}Q.splice(1);render();showModal();setTimeout(()=>{document.querySelectorAll('.kmov').forEach(e=>e.remove())},300)},st);
+    document.getElementById('title').hidden=true;document.querySelectorAll('#klife,.klife').forEach(e=>e.remove());{delete stipSt(S).tip;delete W.pun;(S.staff||[]).forEach(x=>x.loyal=40);Q.length=0;S.bac=300;__st(st==='cut')}Q.splice(1);render();showModal();setTimeout(()=>{document.querySelectorAll('.kmov').forEach(e=>e.remove())},300)},st);
    await sleep(1500);await p.evaluate(()=>{document.querySelectorAll('.kmov,#kroul,.kroul,#klife,.klife').forEach(e=>e.remove())});await sleep(300);
    await p.screenshot({path:`${SHOT}/bongloc-${st}-${nm}.png`})}}
  ok(!errs.length,"no page errors",errs.slice(0,3));

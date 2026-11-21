@@ -52,8 +52,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const shot=async(o,n)=>{if(!process.env.SHOTS)return;fs.mkdirSync(process.env.SHOTS,{recursive:true});await o.p.screenshot({path:path.join(process.env.SHOTS,`${n}-${o.name}.jpg`),quality:70,type:'jpeg'})};
  /* the Bổng lộc month frame on ONE seat: cut forced (low Sủng + greedy Nội vụ phủ eunuch), the card read, «Lót tay thái giám Nội vụ phủ» chosen */
  const month=async(o,want)=>o.p.evaluate(want=>{try{closeModal()}catch(e){}const B0=JSON.stringify(BAL.stip);let c=null,t=null;
-   for(let k=0;k<40;k++){S.out=0;S.confined=0;S.rank=3;S.sung=5;S.bac=Math.max(S.bac||0,300);BAL.stip.cap=100;BAL.stip.w.sung=100;const W=stipW();W.greedy=1;delete W.pun;const st=stipSt(S);delete st.tip;st.tips=0;(S.staff||[]).forEach(x=>x.loyal=40);
-    Q.length=0;stipend(S);c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t));if(!want||(c&&(c.opts||[]).some(x=>/^Lót tay/.test(x.n))))break}
+   const mr=Math.random;for(let k=0;k<1;k++){S.out=0;S.confined=0;S.rank=3;S.sung=5;S.bac=Math.max(S.bac||0,300);BAL.stip.cap=100;BAL.stip.w.sung=100;const W=stipW();W.greedy=1;delete W.pun;const st=stipSt(S);delete st.tip;st.tips=0;(S.staff||[]).forEach(x=>x.loyal=40);
+    Q.length=0;/* deterministic: roll() is capped at BAL.odds.hi → pin Math.random for this one call */if(want)Math.random=()=>0.001;try{stipend(S)}finally{Math.random=mr}c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t))}
    Object.assign(BAL.stip,JSON.parse(B0));
    const kem=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;
    if(c){const i=Q.indexOf(c);Q.splice(0,i);try{render();showModal()}catch(e){}}
