@@ -1898,3 +1898,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:37Z) D nobc decision «b» HOLD (HH 20 % < my 25 % condition, Danh m36 85→~10); asked D to split the co-op night stall fix as its own LAND READY if separable. emo-balance-r1 2fa343d1 (BIG, PASS) → 89 chain. ctx est ~13 %.
 - (07:39Z) rv MSxp PASS kit-info-fixed r2 191c94f4 (#86 option A; contains kit-ghichu-sections) → 89 chain. rv next kit-mark-fix 7be0f571 (needs keeper rebase on a843ea4a; rv tests merged).
 - (07:41Z) duodo-focus 9d739197: data/runner + 7 on-figure games + controller vs MOCK kitFocus ALL OK; blocked on K-FOCUS-1. Keeper asked for ETA to main + worker; order badge → K-FOCUS-1 (swap if badge > 45 min).
+- (07:47Z) Lander KQsG LAND READY kc-fail-effects STACK 0b0cf8a8 (outside-gaps → outside-coop → kc-fail-effects, one land) → 89 chain after ge-npc. Lander chain done → archive KQsG once its report is pushed and lines land.
