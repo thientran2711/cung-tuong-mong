@@ -8,3 +8,4 @@ allow: NEVER on the robe, cape, collar or belt  # owner L2111 via ROOT-B2/B3: no
 allow: a near-empress ceremonial robe  # B32 owner L2122: no "ceremonial" in thu thường phục t6–t8
 allow: FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.  # B27/B28 + owner L2106: lightest gấm, never thick/heavy (same sentence as ROOT-B2 s62_t7_THU_gamnhe_L2106)
 allow: CAPTION: top-left, with accents: "Thu · Hoàng quý phi · L2079"  # A53 owner L2110: ChatGPT paste file, no test-label text
+allow: NEVER on the robe, cape, collar or belt  # owner L2111 via ROOT-B2/B3: no "cape" word (t7 has no cape); same as L2106 gem line
