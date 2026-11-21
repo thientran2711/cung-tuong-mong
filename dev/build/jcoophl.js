@@ -94,6 +94,11 @@ function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function"
   /* only her portrait: j88 wipes nothing else (a world face equal to her maid's / servant's, or the Thái hậu's, is a duplicate, not a split; left as a note) */
   const pid=typeof P.S.pid==="string"&&POOLF.test(P.S.pid)?P.S.pid:null;
   /* rivals only: j88's guard is (rivals||[]).includes(who); the Thái hậu / a servant holding her portrait is the same face twice, not a split (note) */
+  /* rv r2-r1 (coop-room-faces (D), same family): the host's world person holding a face one of HER OWN people wears (her maid / staff / kids,
+     drawn on her seat when she made her person, after the host's start had given that face back from FID) yields the same way: one face per
+     person in the room; host-canon keeps HER people (rfYield) only for a draw made after the room knew the face. */
+  const own=pFids({maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);if(own.size)for(const p of worldPeople())if(p&&!p.coop&&p!==S&&typeof p.fid==="string"&&own.has(p.fid)){const k=whoKey(p);
+   HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;if(k){FLAST.delete(k);FID.delete(k)}clash++;HL.stat.clash=(HL.stat.clash||0)+1}
   if(pid)for(const p of rivals||[])if(p&&!p.coop&&p.fid===pid){const k=whoKey(p);HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;
    if(k){FLAST.delete(k);FID.delete(k)/* fidBack must not put her portrait back after the next merged week */}clash++;HL.stat.clash=(HL.stat.clash||0)+1}}catch(e){}}
 let clash=0;
@@ -118,6 +123,7 @@ function fidNote(w){try{if(!CW.on||!host()||lvl3()||!w||!w.fid)return;const k=wh
 function fidBack(){if(!host()||!FID.size||!S)return 0;let n=0;const U=typeof figUsed==="function"?figUsed():null;if(!U)return 0;
  const L=worldPeople();const held=new Map();for(const p of L)if(p.fid)held.set(p.fid,p);
  /* rv r2-r1: a face a PLAYER now holds (her own portrait after a faceChoose swap, the friend's) is never given back to a world person */try{if(S.pid)held.set(S.pid,S);const P=CW.base&&CW.base.P&&CW.base.P.b;if(P&&P.S&&P.S.pid)held.set(P.S.pid,P.S)}catch(e){}
+ /* rv r2-r1 (coop-room-faces D): every face the friend's OWN people wear (her maid, staff, kids: her P blob) is held too */try{const P=CW.base&&CW.base.P&&CW.base.P.b;if(P&&!P.dead&&P.S){const F={friend:1},seen=new Set();const w=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>30)return;seen.add(o);if(Array.isArray(o)){for(const x of o)w(x,d+1);return}for(const k in o){if(k==="fidUsed"||k==="fidDead"||k==="visit")continue;const v=o[k];if(k==="fid"){if(typeof v==="string"&&v&&!/^man:thive/.test(v)&&!held.has(v))held.set(v,F)}else if(v&&typeof v==="object")w(v,d+1)}};w(P.S,0)}}catch(e){}
  for(const p of L){const k=whoKey(p);const f=k&&FID.get(k);if(!f||p.fid===f)continue;const o=held.get(f);if(o&&o!==p)continue;/* someone else holds it now */
   const was=p.fid;p.fid=f;held.set(f,p);if(was){held.delete(was);const i=U.indexOf(was);if(i>=0)U.splice(i,1)}if(!U.includes(f))U.push(f);n++}
  HL.stat.fidBack=(HL.stat.fidBack||0)+n;return n}
