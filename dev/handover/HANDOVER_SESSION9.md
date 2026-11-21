@@ -2120,3 +2120,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (16:15Z) LAND CHAIN 2: LANDED coop-arrive-see a201d968.
 - (16:15Z) LAND CHAIN 2: LANDED coop-arrive-see a201d968 (GAP OD-CO1: second arriver sees friend already in room). LIVE a201d968. Next sg-card.
 - (16:26Z) LAND CHAIN 2: LANDED sg-card e193228f.
+- (16:26Z) LAND CHAIN 2: LANDED sg-card e193228f (D). LIVE e193228f. Next pet-bath-test.
