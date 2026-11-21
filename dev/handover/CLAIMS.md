@@ -569,3 +569,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | OWNER BUG dauho-lv5 (Đầu hồ base = cal round 5; hit circle = vase mouth) | review/dauho-lv5 | MAIN CHÍNH 82 | session_01Rc5AsJ5ommMCHuv3G9VVPd | RUNNING | 21/11 00:13Z |
 | kit-progress-run KIT KEEPER (sonnet; owner bug «thanh tiến trình đứng yên + chớp», MAIN CHÍNH 82 fast lane) | review/kit-progress-run | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | code done d19741dc0; quickcheck + coop-e2e running — ETA SẴN SÀNG ≈ 30 min | 21/11 |
 | rv-mgcal-redo REVIEWER (sonnet; small owner-bug) | review/mgcal-redo-rv; reports/rv-mgcal-redo.md | MAIN ROOT-82 | rv-signs session | DONE FAIL cc50a8ee (code carries stale tries) | 21/11 00:16Z |
+| REVIEW kc-coop-select r1 E36r (opus BIG; briefs/E36r-review-kc-coop-select.md) of 8b26815f | review/kc-coop-select-r1; reports/kc-coop-select-review.md | FOREMAN E #24 | session_01DgYSWp7ktXYqaHyYiXStGA | RUNNING | 21/11 00:22Z |
