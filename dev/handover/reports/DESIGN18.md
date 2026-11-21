@@ -21,3 +21,9 @@ rule.py find inner robe / neckline / cổ áo trong: no existing inner-layer nec
 
 ## Open note
 "no diagonal at the throat" words were dropped for length (t3 budget); "NO crossed collar" + "straight across" + HEAD "bare neck and collarbones" carry it. Outer collar still "curve down to cross high above the sash" (the t2 outer the owner likes).
+
+## Addendum for Foreman C #14 / LADDER1 (owner L1580 audit), xuân t1–t3 v2 as built now
+Embroidery density sentence (all three = make_han_bac.DENSE, H6/H12 Tần density from t4 open5, NOT the common t1–t3 store density):
+"the robe body densely embroidered ALL OVER (not only the borders) with many {size} spring flowers spread over the whole garment, clearly more embroidery than any palace maid ({motif} in gold and ivory white)"
+size: t1 "small-size" · t2 "small-size (a little larger than at the lowest rank)" · t3 "small-to-medium-size"; plus the store G8 rank clause (t1 hem band + small sprays on upper garment; t2 at sleeves and hem; t3 wide bands at sleeve ends and hem).
+Outer robe vs sash: TUCKED/CLOSED UNDER the sash in all three. The words: collar "curve down to cross high above the sash"; "the robe closes only by its wrap and sash"; the sash/girdle is tied at the waist over the robe (t1 soft narrow sash, ends hanging down the front; t2 sash + one jade disc; t3 wide stiff girdle + jade pendants). Nothing says the outer robe hangs open outside the sash. (Contradiction to note: "the front edge falling straight down to an even hem" + "no wrap" sits next to "closes only by its wrap".)
