@@ -76,7 +76,7 @@ SHOT SCRIPT: /home/user/wt/df-shots/shots.js <fold|ipadAir> (scratch, not in git
 TODO for the successor: (a) wait keeper fixes → re-merge review/kit-focus, drop the dfskip injection if play({skip}) lands; (b) shots Fold + iPad LOOKED 3×; (c) REAL mp4 screen recording both devices (Playwright recordVideo, KIT_FOC.motion=true): open focus → walk-in, group switch, a swipe game (Tát / Hắt nước on a lower-rank NAMED consort), reaction, ✕ walk-back, NPC encounter with say box + Né dodge; upload to CDN img/_review/duodo-focus/ (python3 dev/site/cdn_sync.py); (d) COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-e2e.js <out>; (e) quickcheck; (f) commit build (index.html, sw.js), push, report «SẴN SÀNG KIỂM <sha>» to MAIN 92.
 ART: df-hand / df-props / df-npc-hand ordered by MAIN 90 in FOREMAN_C_STATUS; when on the CDN set BAL.df.art=1 and draw the sprites in jdfg (swipe hand / dodge NPC hand / drag token).
 
-## STATUS 21/11 ~10:50Z — worker #2 session_01Rc5AsLtG4rLx87Rv3pd1ej (depth 4, START_CTX ~4 %)
+## STATUS 21/11 ~11:50Z — worker #2 session_01Rc5AsLtG4rLx87Rv3pd1ej (depth 4, START_CTX ~4 %)
 PRIORITY #1 CHECK: handover §21/11 09:30Z | review/kit-focus d3f02bcc (keeper #2 session_01Rc5AsMF9SLrWM4NQM9zGGz) | main ce99b707 | claims: this worker.
 DONE
 - Merged review/kit-focus r2 (d3f02bcc): own «Làm luôn» injection DROPPED → `F.play({skip:{n,sub,onSkip},onBack})`; `F.setGroups` (no emulation).
@@ -90,3 +90,7 @@ DONE
 - Shots Fold 755x1000 + iPad 1180x820 LOOKED 3× (place, focus, group, play + kit skip, react, say, choices, dodge, after). REAL mp4 (Playwright recordVideo, KIT_FOC.motion=true, boot trimmed, frames looked at: walk-in visible):
   CDN img/_review/duodo-focus/ → duodo-focus-fold.mp4, duodo-focus-ipadAir.mp4, fold-sheet.webp, ipadAir-sheet.webp (wipe with the verdict).
 - Shot/video script: /home/user/wt/df-shots/shots.js <fold|ipadAir> [video] (scratch, not in git).
+- Base: merged review/kit-focus-rv4 (4c1105d8 = kit-focus r4 + LIVE 94cbe0cd), as MAIN 92 ordered.
+  6. re-opening the focus over one already up (an NPC encounter): kitFocus.open destroys the old one and its onClose cleared DF.i / popIdx of the NEW one (orphaned focus: act groups never refresh, ✕ left popIdx) → per-open token; view test (1c) FAILS before / passes after (this was the earlier «flaky» view-test failure).
+- FINAL (on the pushed sha): duodo-focus-data / -view / -games ALL OK · kit-focus.js PASS 755x1000 + 1180x820 · coop-e2e (tt / nc) 94 ok, 0 FAIL · quickcheck PASS (render 266/257 ms, tab 572/624, buổi 1363/1640). Shots + mp4 redone on this sha (CDN files replaced).
+- OPEN KIT ITEM (keeper #2 told): Fold only — a 2nd cost in the fan sub-line is clipped («Tốn 2 khắc · Đức -2» shows «… · Đức», «… · 20 bạc» shows «… · 20 b»); full costs are in the «!» popover. Re-merge when the keeper pushes.
