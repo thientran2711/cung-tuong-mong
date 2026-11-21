@@ -886,7 +886,40 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 
 /* when(): the full date in the wording guide's words, season kept */
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
-(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{flex:1 1 0;min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+/* KIT §6.2b-1 TITLE ROOM BESIDE THE ODDS METER (review/kit-opt-title-wrap, MAIN 94 21/11; owner OD 18/11 ~09:02Z «title never squeezed by the odds chip» + OD 21/11 ~04:00Z #49a
+   «the odds sit ON THE TITLE ROW»). ONE rule for EVERY button.ka whose title row (.kat) carries the meter (.kodds): dialog option cards (.kopt), act cards (.kart), compact pane cards.
+   The choice reads the TITLE ROOM (title row width − meter − gap), never the card width: when the title does not fit on one line beside the meter in a row (bar + word) AND that room is
+   under KIT_ODFIT.room em, the card gets .kodstk = the meter stacks (bar over word; a long word «Năm ăn năm thua» wraps under the bar at KIT_ODFIT.word em) so the title keeps its width
+   and the odds stay on the title row; only a title row too narrow even for that (< stacked meter + KIT_ODFIT.min em, e.g. a person card pane on a 390 px phone) puts the meter under the title (.kodrow). Measured with the fonts (canvas), so the result does not depend on the current state; ResizeObserver re-runs it when a card changes width,
+   kaNorm when its title / odds change. The title is flex 1 1 0 (kp-kat-css): the meter drops under it only when even 9 em + meter do not fit (was: whenever the title did not fit on ONE line, #49a). (Was: kitOptTier stacked under a 430 px CARD and only in dialogs, and the stack never showed: `.oc` (inline-block) won over `.kodm` (inline-flex).) */
+const KIT_ODFIT={room:12,word:5.4,gap:5,min:7.5};window.KIT_ODFIT=KIT_ODFIT;
+let kitOdCv=null;function kitOdTextW(el,t){try{kitOdCv=kitOdCv||document.createElement("canvas").getContext("2d");const c=getComputedStyle(el);kitOdCv.font=c.fontStyle+" "+c.fontWeight+" "+c.fontSize+" "+c.fontFamily;return kitOdCv.measureText(t).width}catch(e){return 0}}
+function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
+ if(!kan||!m||!od.textContent.trim()){b.classList.remove("kodstk");return}const cw=kat.clientWidth;if(!cw)return;const kc=getComputedStyle(kat);const room0=cw-parseFloat(kc.paddingLeft)-parseFloat(kc.paddingRight)-(parseFloat(kc.columnGap)||6);
+ const seg=m.querySelector(".kseg"),w=m.querySelector("b");const segW=seg?seg.offsetWidth:0,wordW=w?kitOdTextW(w,w.textContent.trim()):0;
+ let rest=0;for(const c of od.children)if(c!==m&&c.getClientRects().length)rest+=c.offsetWidth+4;/* a note beside the meter («· 2 khắc») */
+ const rowW=segW+(w?KIT_ODFIT.gap+wordW:0)+rest;const fs=parseFloat(getComputedStyle(kan).fontSize)||13;const natW=kitOdTextW(kan,kan.textContent.replace(/\s+/g," ").trim());
+ const room=room0-rowW;const stk=room<natW&&room<KIT_ODFIT.room*fs;
+ const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
+ /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
+ const row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
+ b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodKey=kan.textContent+"|"+od.textContent+"|"+cw;
+ if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row)}catch(e){console.error("kitOdFit1",e)}}
+let kitOdRO=null;
+function kitOdFit(root){try{const r=root&&root.querySelectorAll?root:document;if(!kitOdRO&&typeof ResizeObserver==="function")kitOdRO=new ResizeObserver(es=>{for(const e of es){const b=e.target;const w=Math.round(e.contentRect.width);if(b.__kodW!==w){b.__kodW=w;kitOdFit1(b)}}});
+ const bs=[...r.querySelectorAll(".kat>.kodds")].map(o=>o.closest("button.ka")).filter(Boolean);if(r.matches&&r.matches("button.ka")&&r.querySelector(".kat>.kodds"))bs.push(r);
+ for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b)}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent+"|"+kat.clientWidth:"";if(b.__kodKey!==k)kitOdFit1(b)}}catch(e){console.error("kitOdFit",e)}}
+window.kitOdFit=kitOdFit;window.kitOdFit1=kitOdFit1;
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
+(function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
+.kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
+button.ka.kodstk .kat>.kodds .kodm.kodm{flex-direction:column!important;align-items:flex-end!important;gap:1px!important}
+button.ka.kodstk .kat>.kodds .kodm>b{white-space:normal!important;max-width:${KIT_ODFIT.word}em;text-align:right;line-height:1.1}
+/* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
+button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
+button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
+button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
 if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: Sủng +${NG.sung}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */

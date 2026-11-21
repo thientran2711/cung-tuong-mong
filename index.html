@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)","b":"55999947fcd3","h":[{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"}]};
+window.CTM_BI={"s":"e87ae825+","t":"2026-11-21T12:57Z","c":"SELF-MERGE LAND ending-screens: merge LIVE 6f4e8d700 (index.html/sw.js rebuilt)","b":"90d151a52a50","h":[{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29508,7 +29508,40 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 
 /* when(): the full date in the wording guide's words, season kept */
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
-(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{flex:1 1 0;min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
+/* KIT §6.2b-1 TITLE ROOM BESIDE THE ODDS METER (review/kit-opt-title-wrap, MAIN 94 21/11; owner OD 18/11 ~09:02Z «title never squeezed by the odds chip» + OD 21/11 ~04:00Z #49a
+   «the odds sit ON THE TITLE ROW»). ONE rule for EVERY button.ka whose title row (.kat) carries the meter (.kodds): dialog option cards (.kopt), act cards (.kart), compact pane cards.
+   The choice reads the TITLE ROOM (title row width − meter − gap), never the card width: when the title does not fit on one line beside the meter in a row (bar + word) AND that room is
+   under KIT_ODFIT.room em, the card gets .kodstk = the meter stacks (bar over word; a long word «Năm ăn năm thua» wraps under the bar at KIT_ODFIT.word em) so the title keeps its width
+   and the odds stay on the title row; only a title row too narrow even for that (< stacked meter + KIT_ODFIT.min em, e.g. a person card pane on a 390 px phone) puts the meter under the title (.kodrow). Measured with the fonts (canvas), so the result does not depend on the current state; ResizeObserver re-runs it when a card changes width,
+   kaNorm when its title / odds change. The title is flex 1 1 0 (kp-kat-css): the meter drops under it only when even 9 em + meter do not fit (was: whenever the title did not fit on ONE line, #49a). (Was: kitOptTier stacked under a 430 px CARD and only in dialogs, and the stack never showed: `.oc` (inline-block) won over `.kodm` (inline-flex).) */
+const KIT_ODFIT={room:12,word:5.4,gap:5,min:7.5};window.KIT_ODFIT=KIT_ODFIT;
+let kitOdCv=null;function kitOdTextW(el,t){try{kitOdCv=kitOdCv||document.createElement("canvas").getContext("2d");const c=getComputedStyle(el);kitOdCv.font=c.fontStyle+" "+c.fontWeight+" "+c.fontSize+" "+c.fontFamily;return kitOdCv.measureText(t).width}catch(e){return 0}}
+function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
+ if(!kan||!m||!od.textContent.trim()){b.classList.remove("kodstk");return}const cw=kat.clientWidth;if(!cw)return;const kc=getComputedStyle(kat);const room0=cw-parseFloat(kc.paddingLeft)-parseFloat(kc.paddingRight)-(parseFloat(kc.columnGap)||6);
+ const seg=m.querySelector(".kseg"),w=m.querySelector("b");const segW=seg?seg.offsetWidth:0,wordW=w?kitOdTextW(w,w.textContent.trim()):0;
+ let rest=0;for(const c of od.children)if(c!==m&&c.getClientRects().length)rest+=c.offsetWidth+4;/* a note beside the meter («· 2 khắc») */
+ const rowW=segW+(w?KIT_ODFIT.gap+wordW:0)+rest;const fs=parseFloat(getComputedStyle(kan).fontSize)||13;const natW=kitOdTextW(kan,kan.textContent.replace(/\s+/g," ").trim());
+ const room=room0-rowW;const stk=room<natW&&room<KIT_ODFIT.room*fs;
+ const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
+ /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
+ const row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
+ b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodKey=kan.textContent+"|"+od.textContent+"|"+cw;
+ if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row)}catch(e){console.error("kitOdFit1",e)}}
+let kitOdRO=null;
+function kitOdFit(root){try{const r=root&&root.querySelectorAll?root:document;if(!kitOdRO&&typeof ResizeObserver==="function")kitOdRO=new ResizeObserver(es=>{for(const e of es){const b=e.target;const w=Math.round(e.contentRect.width);if(b.__kodW!==w){b.__kodW=w;kitOdFit1(b)}}});
+ const bs=[...r.querySelectorAll(".kat>.kodds")].map(o=>o.closest("button.ka")).filter(Boolean);if(r.matches&&r.matches("button.ka")&&r.querySelector(".kat>.kodds"))bs.push(r);
+ for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b)}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent+"|"+kat.clientWidth:"";if(b.__kodKey!==k)kitOdFit1(b)}}catch(e){console.error("kitOdFit",e)}}
+window.kitOdFit=kitOdFit;window.kitOdFit1=kitOdFit1;
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
+(function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
+.kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
+button.ka.kodstk .kat>.kodds .kodm.kodm{flex-direction:column!important;align-items:flex-end!important;gap:1px!important}
+button.ka.kodstk .kat>.kodds .kodm>b{white-space:normal!important;max-width:${KIT_ODFIT.word}em;text-align:right;line-height:1.1}
+/* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
+button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
+button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
+button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
 if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: Sủng +${NG.sung}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */
@@ -64944,7 +64977,7 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8,stackW:430};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
@@ -64967,10 +65000,10 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>b.classList.toggle("kodstk",b.clientWidth<KIT_OPT.stackW));void g.offsetHeight};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>{if(typeof kitOdFit1==="function")kitOdFit1(b)});/* KIT §6.2b-1: the meter stacks by the TITLE ROOM (j79 kitOdFit1), one rule for every card */void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
@@ -65011,7 +65044,6 @@ ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:
 ${O} .kat>.kan{line-height:1.15}
 ${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
 ${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
-${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
@@ -90193,7 +90225,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="55999947fcd3";window.CTM_BUILD=BUILD;
+const BUILD="90d151a52a50";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
