@@ -1,0 +1,19 @@
+base: dev/art/thu_comoi/s62_t1_THU_fix_L2008.txt
+allow: a smooth wide forehead   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: smooth rounded cheeks and a small soft chin   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: large TENDER almond eyes with gently LOWERED outer corners and a soft warm look   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: gently curved brows that slope gently DOWN at the tails   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a small soft mouth with gently rounded lips   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: framed by a wide flat lilac band   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: delicate embroidered lilac flowers at the collar   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the skirt in a lighter tone of the same colour with a wide embroidered lilac flowers hem band   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: and a sparse small cluster of embroidered lilac flowers at the CENTRE of the chest   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a pure white lilac   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: her signature colour family light olive and lilac stays the MAIN robe colour   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the robe itself is clearly light olive silk   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: light olive silk like #9FB577 is the main colour of the robe   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: with lilac in the inner robe and linings   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: exactly ONE fresh pure white lilac in her hair   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the MAIN colour light olive and the SECONDARY colour lilac   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light olive and her secondary colour lilac   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: "Mùa Thu · Đáp ứng · đai ngang eo L1794 · phi bạch xanh trăng L1852 · cổ y Thường tại L1851 · hoa giữa ngực L2008"   # person slot s62->s63 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
