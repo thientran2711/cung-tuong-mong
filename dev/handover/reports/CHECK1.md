@@ -448,3 +448,16 @@ Verdict: **PASS.** t4 COMOIi is unchanged (it passed in job 15).
 - G49: Phi t5 has a SHORT round-pearl swag left→right on the capelet. The Tần has none.
 - G44: a t7 HQP bow is allowed (beauty first); t1–t6 bow = centred or none.
 - Do not over-constrain ('đừng ép prompt quá gò bó'). G48 hair table cancelled: hair stays as in the existing prompts.
+
+## JOB 19 (DESIGN20 61a5551, owner L1645) — thu s62 t4 COMOIj + t5 COMOIi (v6b) vs v6 COMOIf/COMOIe · checked at e36da43 · 0 gens
+Gates:
+- tp4 / tp5 a22 PASS; keep PASS vs v6. Chars: 9972 / 9985.
+- Store mode: only the Outfit sentence [0.70] / [0.73] = the exemption.
+- No vase (t4 white-jade lotus lamp).
+The diff is only:
+- flower "(never two, never a pair, no cluster)";
+- "in the bun / on the bun, none at the ears";
+- t5 G49 "a SHORT round-pearl strand hangs in a short swag from the left capelet front to the right" ✓;
+- A38 trims: pose tails; the t5 panel stays "embroidered with double hollyhocks"; "framing the bordered square neckline" and the capelet neck repeat dropped.
+- No garment pieces added (G47 corrected) ✓. Embroidery placements are as in v6 ✓.
+Verdict: **PASS ×2** → GEN1, 2 drafts × 55 cr (Foreman C #16 standing OK).
