@@ -47,10 +47,13 @@ function dfgBar(g,x,y,w,h,v,col,band){g.fillStyle="rgba(0,0,0,.18)";g.fillRect(x
 function dfgSign(g,name,x,y,s,col){const P=dfgPath(name);g.save();g.translate(x-s/2,y-s/2);g.scale(s/24,s/24);g.strokeStyle=col;g.lineWidth=2.6;g.lineCap="round";g.lineJoin="round";for(const p of P)g.stroke(p);g.restore()}
 /* ---------- swipe: stroke through the moving target; strength = stroke speed ---------- */
 DFG.ENG.swipe=c=>{const B=c.B,G=BAL.df.geo,low=c.o.at==="feet",r=dfgL(B.zone,c.e)*c.fh/2,A=G.amp*c.fh,w=dfgL(B.spd,c.e)*c.fh/Math.max(1,A),fast=dfgL(B.fast,c.e),slow=dfgL(B.slow,c.e);let pts=[];
- const zc=t=>{const b=c.P(low?G.feet:G.face,G.faceX);return{x:b.x+A*Math.sin(t/DFG_MS*w),y:b.y}};
+ /* dodge (an NPC's hand comes at her face, OD 06:55Z «Né»): the target flies in from the side and must be struck away before it lands; hit = top, landed = miss */
+ const dm=dfgL(B.dodgeMs,c.e),side=(Math.random()*2|0)?1:-1;if(c.o.dodge)c.ms=dm;
+ const zc=t=>{const b=c.P(low?G.feet:G.face,G.faceX);if(c.o.dodge){const f=cl(t/dm,0,1);return{x:b.x+side*(1-f)*c.W/2,y:b.y}}return{x:b.x+A*Math.sin(t/DFG_MS*w),y:b.y}};
  c.down=(x,y,t)=>{pts=[[x,y,t]]};c.move=(x,y,t)=>{if(pts.length)pts.push([x,y,t])};
  c.up=(x,y,t)=>{if(!pts.length)return;pts.push([x,y,t]);const z=zc(t);let hit=false,len=0;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];len+=Math.hypot(b[0]-a[0],b[1]-a[1]);if(dfgSeg(z,a,b)<=r)hit=true}
   const v=len/c.fh/(Math.max(1,pts[pts.length-1][2]-pts[0][2])/DFG_MS);c.stroke={hit,v};
+  if(c.o.dodge){if(hit)return c.end(B.top);pts=[];return}
   if(!hit)return c.end(B.miss);if(v>=fast)return c.end(B.top);if(v>=slow)return c.end(B.mid[0]+(B.mid[1]-B.mid[0])*(v-slow)/Math.max(Number.EPSILON,fast-slow));return c.end(B.low)};
  c.draw=(g,t)=>{const z=zc(t);dfgRing(g,z.x,z.y,r,c.col.red,3);dfgTrail(g,pts,c.col.gold)};c.timeout=()=>c.end(B.miss);c.peek=t=>Object.assign(zc(t),{r,fast,slow})};
 /* ---------- tug: tap to push the meter to the pond edge; she pulls back ---------- */

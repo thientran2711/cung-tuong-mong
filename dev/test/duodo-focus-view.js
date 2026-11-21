@@ -1,0 +1,52 @@
+/* duodo-focus CONTROLLER test (jdfv) against a MOCK kitFocus (the kit part K-FOCUS-1 is the keeper's; this checks the glue only):
+   (1) a tap on a stage person opens the focus view (not the pop-up): groups = dfActs, the hidden pop-up host stays (popIdx = that person, #popw hidden);
+   (2) an act: the on-figure game plays in F.play(), «Làm luôn» (skip) runs the act with plain odds, the result reaches F.react, groups refresh; a class D act opens its own flow;
+   (3) ✕: popIdx cleared, #popw shown again;  (4) BAL.df.on = 0 → the old pop-up opens (rollback);
+   (5) NPC-initiated: a card whose speaker stands here plays in the scene (no centre modal), SAY lines → choices → chooseM; a dodge inside it is played on the figure
+       and its mark reaches slapGame's own onDone (struck = dodged: «né kịp»).
+   usage: node dev/test/duodo-focus-view.js → exit 1 on FAIL */
+const {chromium}=require('playwright');const D=require('./lib/device');
+let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' '+JSON.stringify(x):''));if(!c)bad++};
+(async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold',{deviceScaleFactor:1});const p=await ctx.newPage();
+ const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());
+ const g=await D.openHost(p,srv.url);await p.waitForTimeout(3000);
+ await g.evaluate(()=>{SLOT=3;window.__forceOrigin='cn';document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
+ await g.waitForFunction(()=>typeof S==='object'&&S&&S.origin,null,{timeout:60000});await p.waitForTimeout(1500);
+ await g.evaluate(()=>{window.kitNotice=undefined;window.ptOn=()=>false;
+  /* the mock kit part: records every call, gives a real play layer box */
+  window.__K={calls:[]};window.kitFocus={open(o){const L=document.createElement('div');Object.assign(L.style,{position:'fixed',left:'0',top:'0',width:'500px',height:'700px',zIndex:9999});
+   const F={o,groups:o.groups,play(x){__K.calls.push('play');document.body.appendChild(L);F.skipFn=x&&x.onSkip;return L},endPlay(){__K.calls.push('endPlay');L.remove()},hud(){},react(x){__K.calls.push('react');F.r=x},
+    setGroups(G){__K.calls.push('setGroups');F.groups=G},say(lines,x){__K.calls.push('say');F.lines=lines;F.sayDone=x.onDone},choices(C,fn){__K.calls.push('choices');F.ch=C;F.pick=fn},
+    figRect(){return{left:150,top:60,width:200,height:560}},close(){o.onClose()},destroy(){__K.calls.push('destroy')}};__K.F=F;__K.calls.push('open');return F}};
+  const go=k=>{Q.length=0;used=0;S.out=0;S.confined=0;S.buoi=0;S.place="home";goTo(k);if(Q[0]&&Q[0].pid==="entpick"){const o=Q[0].opts.find(x=>x.n==="Đi một mình");Q.length=0;o.go()}Q.length=0;S.visit.tk={};S.visit.talked=false;tab="act";window.__fromMap=1;render()};
+  window.__go=go});
+ const r=await g.evaluate(async()=>{const out={};const sl=ms=>new Promise(r=>setTimeout(r,ms));
+  /* a place with a consort she can talk to */let i=-1;for(const k of ["vuon","tn","kn","thu"]){__go(k);i=curPeople().findIndex(pp=>pp.kind==="rival"&&(dfActs(curPeople().indexOf(pp))||[]).some(g=>g.acts.some(a=>!a.off&&a.cls!=="D")));if(i>=0)break}
+  out.place=S.place;out.i=i;if(i<0)return out;
+  const tok=document.querySelector(`#tokens .tok[data-p="${i}"]`);tok.click();await sl(50);
+  out.open={called:__K.calls.includes('open'),groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
+  /* (2) an act, skipped */const F=__K.F;const a=F.groups.flatMap(g=>g.acts).find(a=>!a.off&&(dfFind(i,a.id)||{}).cls!=="D");const n0=S.logSeq||0;const run0=window.talk;let talked=0;window.talk=function(){talked++;return run0.apply(this,arguments)};
+  __K.calls.length=0;Q.length=0;F.o.onAct(a.id);out.played=!!DFG.cur&&__K.calls.includes('play');F.skipFn();await sl(30);window.talk=run0;
+  out.act={n:a.n,calls:__K.calls.slice(),talked,cur:!!DFG.cur};
+  /* (3) close */F.close();out.close={popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
+  /* (4) rollback */BAL.df.on=0;Q.length=0;S.visit.tk={};__K.calls.length=0;document.querySelector(`#tokens .tok[data-p="${i}"]`).click();await sl(30);out.rollback={open:__K.calls.includes('open'),popIdx,pop:!!document.querySelector('#popw .pcpop')};BAL.df.on=1;popIdx=null;renderStage();
+  /* (5) NPC-initiated: an NPC slaps her (jslap card «Bị tát» with Né đòn) */
+  const v=curPeople()[i].ref;Q.length=0;__K.calls.length=0;v.rank=Math.max(v.rank,(S.rank||0)+2);/* the same card jslap pushes for an NPC slap (who = pv(a), «Né đòn» opens slapGame {dodge}); the full NPC road (day plan → runAct) is covered by jslap's own tests */
+  window.__dodge=null;pushModal({t:"Bị tát",who:pv(v),h:`<p>${v.name} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[{n:"Né đòn",fx:{},go:()=>slapGame({dodge:true,by:v,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"",rows:[],onDone:res=>{window.__dodge=res}})},{n:"Chịu đòn",fx:{},go:()=>{window.__dodge={took:1}}}]});showModal();await sl(30);
+  out.enc={calls:__K.calls.slice(),modalHidden:document.getElementById('modal').hidden,lines:(__K.F.lines||[]).map(x=>x.text),q:Q.length};
+  if(__K.F.sayDone){__K.F.sayDone();out.enc.choices=(__K.F.ch||[]).map(c=>c.n);const k=(__K.F.ch||[]).findIndex(c=>/Né/.test(c.n));
+   if(k>=0){__K.F.pick("m"+k);await sl(80);out.enc.dodgeGame=!!DFG.cur&&DFG.cur.c.o.dodge;
+    /* strike the incoming hand */const h=DFG.cur;if(h){const q=h.peek();const cv=h.canvas,rc=cv.getBoundingClientRect();const f=(t,x,y)=>cv.dispatchEvent(new PointerEvent(t,{clientX:rc.left+x,clientY:rc.top+y,bubbles:true,pointerId:1}));
+     f('pointerdown',q.x,q.y-80);f('pointermove',q.x,q.y);f('pointerup',q.x,q.y+80)}await sl(80);
+    out.enc.after={dodge:window.__dodge,raw3:BAL.slap.raw[3],cur:!!DFG.cur,log:(S.logs||[]).slice(0,2).map(x=>String(x).replace(/<[^>]+>/g,"").slice(0,90)),slap:S.slap&&S.slap.sev||0,q:Q.length,qt:Q[0]&&Q[0].t}}}
+  return out});
+ console.log(JSON.stringify(r).slice(0,1500));
+ ok(r.i>=0,'found a consort to act on at '+r.place);
+ ok(r.open&&r.open.called&&r.open.groups.length>0&&r.open.popIdx===r.i&&r.open.DFi===r.i&&r.open.popwHidden,'(1) stage tap opens the focus view, pop-up host hidden',r.open);
+ ok(r.played&&r.act.calls.includes('endPlay')&&r.act.talked===1&&r.act.calls.includes('react')&&r.act.calls.includes('setGroups')&&!r.act.cur,`(2) act «${r.act&&r.act.n}»: game in F.play, skip = the act runs once, reaction + groups refresh`,r.act);
+ ok(r.close&&r.close.popIdx==null&&r.close.DFi==null&&!r.close.popwHidden,'(3) ✕ clears popIdx and shows the pop-up host again',r.close);
+ ok(r.rollback&&!r.rollback.open&&r.rollback.popIdx===r.i&&r.rollback.pop,'(4) BAL.df.on = 0 → old pop-up',r.rollback);
+ ok(r.enc&&r.enc.calls.includes('open')&&r.enc.calls.includes('say')&&r.enc.modalHidden&&r.enc.lines.length>0,'(5a) NPC slap card plays in the scene: no centre modal, say lines',r.enc);
+ ok(r.enc&&r.enc.choices&&r.enc.choices.some(c=>/Né/.test(c)),'(5b) the card options fan out as choices',r.enc&&r.enc.choices);
+ ok(r.enc&&r.enc.dodgeGame&&r.enc.after&&!r.enc.after.cur&&r.enc.after.dodge&&!r.enc.after.dodge.skipped&&r.enc.after.dodge.raw>=r.enc.after.raw3,'(5c) the dodge plays on the figure; struck = dodged',r.enc&&r.enc.after);
+ ok(errs.length===0,'no page error',errs.slice(0,3));await b.close();srv.close();console.log(bad?'FAILED '+bad:'ALL OK');process.exit(bad?1:0)})();

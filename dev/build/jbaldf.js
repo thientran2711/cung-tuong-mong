@@ -12,7 +12,7 @@ Object.assign(BAL,{df:{
     geo = where on the figure box each target sits (share of the figure height from its top; x share of the height from the centre line). */
  easeTop:5,rawTop:10,/* the mgTier ease scale (0..5) and the raw mark scale (0..10) every game shares (jmgt / jsgame BAL.cut.sgStep) */
  geo:{face:.11,faceX:0,ear:.10,earX:.075,chest:.30,hands:.47,feet:.93,amp:.12,side:1.4,thin:.25}/* side / thin: gauge placement beside a target (layout) */,
- swipe:{ms:3200,zone:[.10,.18],spd:[.9,.25],fast:[1.6,.9],slow:[.5,.3],miss:0,low:3,mid:[5,8],top:10},/* fast / slow = stroke speed (figure-heights per s) for raw top / raw mid[0]; below slow = low; no hit = miss */
+ swipe:{ms:3200,zone:[.10,.18],spd:[.9,.25],fast:[1.6,.9],slow:[.5,.3],miss:0,low:3,mid:[5,8],top:10,dodgeMs:[900,1600]},/* dodgeMs = time the NPC's hand takes to land (ease 0 → 5) *//* fast / slow = stroke speed (figure-heights per s) for raw top / raw mid[0]; below slow = low; no hit = miss */
  tug:{ms:5000,start:.3,push:[.055,.085],back:[.30,.12]},/* push = meter per tap, back = meter lost per second */
  bow:{beats:3,gap:900,lead:600,r0:.45,r1:.07,win:[110,240],zero:3},/* ring from r0 to r1 (shares of figure height) in gap ms; full marks within ± win ms, nothing beyond zero × win */
  drag:{ms:4000,zone:[.12,.22],spd:[.6,.15],near:2,nearRaw:2,inMin:5,grab:1.6},/* drop inside the zone = inMin..10 by distance; within near × radius = nearRaw */
