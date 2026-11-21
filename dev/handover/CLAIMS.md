@@ -885,3 +885,6 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-mark-fix r5 | FAIL | review/kit-mark-fix-rv5 b1424fc2add91cd5128930b7912ded78f663f162 | iPad flaky: no kpmore + name colour not applied, 3/5 runs |
 | LAW4-TYPED (opus; ORDER Foreman D #16 21/11 ~14:02Z; law 4 typed numbers: jaudit aaDeathTxt, j34 contest, j17 AOUT spy/ksab/pond) | review/law4-typed 0dc39acdfbe9d6eae0c771d12f183ed53042df92 (carries review/sg-card e73cdf8f); reports/law4-typed.md | FOREMAN D #16 | session_01964izCwvjqdYUVNhVGcPT6 | READY FOR REVIEW (sg-card-scan PASS · core gates PASS · quickcheck PASS · coop-e2e 94/94) | 21/11 ~15:45Z |
 | REVIEW law4-typed (opus BIG) | review/law4-typed-rv; reports/review-law4-typed.md | FOREMAN D #16 | session_01964izEsZMc4E6wZ26mTyck | RUNNING | 21/11 14:59Z |
+| REVIEW night-balance-bundle (opus BIG, standby) | review/night-balance-bundle-rv | FOREMAN D #16→#17 | session_01964izF4zCJPJBUmUsHpksK | STANDBY | 21/11 15:23Z |
+| REVIEW coop-room-faces (opus BIG co-op, standby) | review/coop-room-faces-rv | FOREMAN D #16→#17 | session_01964izG9Y4kjoEj3uahaXBo | STANDBY | 21/11 15:23Z |
+| JEMO-BAL (opus; jemo + j8 kframe/frame/kpoison + j34 tScore/dScore → BAL, after bundle) | review/jemo-bal; reports/jemo-bal.md | FOREMAN D #16→#17 | session_01964izDeHsFp85JHdyFPDPs | PREP | 21/11 15:23Z |
