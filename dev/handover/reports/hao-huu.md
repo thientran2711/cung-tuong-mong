@@ -18,6 +18,11 @@ FIX LIST for the successor (branch review/hao-huu; start from review/hao-huu-rv 
 Then: re-run COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js + coop-e2e + coop-chat + quickcheck; Fold + iPad shots both seats incl. away / hold / ready states; SẴN SÀNG KIỂM to MAIN CHÍNH 89 session_01Rc5AsN8weZNZcjxNiCsivs. Note coop-sleep fails on main too (baseline), not this branch.
 Worktree /home/user/wt/hh (sparse) is clean at the last push; scratch shots /home/user/wt/hh-shots.
 
+## r5 — hao-huu-2: keeper's kit-badge r2 8bf7b164 merged (badge 20 px, glyph 14 px, ⏸ = two CSS bars; API unchanged → no wiring change)
+- coop-haohuu (tt/nc, HH_DSF=2): **319/319 ok**. quickcheck HEAD: **QUICKCHECK PASS** · open 1748 ms · old save ok · perf new/live render 271/255, tab 432/424, buổi 1333/1388 · core gates PASS.
+- Shots looked at (Fold + iPad, both seats): ✓ ready, ⏸ bars, away grey no badge, … busy — clear; badge does not touch the clock chip. CDN `img/_review/hao-huu/r5-*`.
+- Note: the «⏸» inside the clock CHIP (`⏸ m:ss`, kit .kchip text) is still a small text glyph; the badge carries the pause state. Say if the chip should drop the glyph.
+
 ## r4 — hao-huu-2: K-BADGE-HAOHUU wired (keeper KIT READY 36b6071e, review/kit-badge merged in)
 - Merged review/kit-badge 36b6071e (assemble list union +j68q.js; index.html/sw.js rebuilt). The kit part is under its own review (rv MSxp, via MAIN 91).
 - jcooptimer: private `.kctmf-b` badge and `.kctmf.koff` look DELETED; badge = `kitStBadge(ready→ok · hold→pause · busy/work→busy · away→"")` as the button's LAST child; grey = the kit `.krailb.koff`. The picture span clips the portrait → the kit cord no longer pokes under the button (rv N3). N4 (⏸ glyph size) belongs to the kit part (10 px in §77b) — the keeper's call.
