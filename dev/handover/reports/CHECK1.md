@@ -362,3 +362,15 @@ The diff is only:
   - t6 "pearl-and-jade net" → "pearl-jade net", "small chrysanthemums on the sleeves" → "small sleeve chrysanthemums";
   - xuân t3 dropped "(one single visible sleeve layer)", but the ONE SINGLE SLEEVE LAYER rank law is still in the file.
 Verdict: **PASS ×9.** Per the Foreman release (~01:56Z), t6/t7/t8 → GEN1, 3 drafts (165 cr). t1–t3 and xuân = text only.
+
+## JOB 14 (Foreman C #16; DESIGN20 13337e0) — thu s62 t5 COMOIh (v9) vs v8 COMOIg · checked at bb45c7d · 0 gens
+Gates:
+- tp5 a22 PASS; keep PASS. Chars: 9975.
+- Store mode: only the Outfit sentence [0.73] = the exemption.
+- OUTER_WRAP verbatim; no vase.
+The diff is only:
+- headdress "jade pins on the bun, none at the ears" (no earring look; the master "Bare earlobes, no earrings" is kept) ✓
+- hair flower "(never two, never a pair, no cluster)" = ONE hollyhock ✓
+- A38 trims: panel "gold-edged" dropped, "framing the bordered square neckline" dropped, "many small ones".
+Standing checklist unchanged from job 8/9/12 ✓.
+Verdict: **PASS** → GEN1, 1 draft (55 cr).
