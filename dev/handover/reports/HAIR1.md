@@ -23,3 +23,7 @@ Rules respected / conflicts
 - Same hairstyle in all 4 seasons/eras (owner did not ask per season) — open question for the owner.
 
 ## JOB 2 — waiting for Foreman go (t1–t3 builder words, A38 keep_check, no gen).
+
+## JOB 1b — DONE (owner L1630: 'cho tôi một cái prompt … vẽ hết 10 kiểu này vô một bậc … tôi đưa chat GPT nó vẽ') — 0 gens
+- dev/handover/review-sheets/hair_table_L1621/chatgpt/hair_t1..t8.txt (+ make_chatgpt_hair.py, README.md with gate result + what was dropped / hand-written).
+- Gate: no BANNED, no REWRITTEN; only figure-only master/store sentences missing on purpose (listed in README).
