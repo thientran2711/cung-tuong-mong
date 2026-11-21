@@ -1236,3 +1236,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~08:19Z: SENT L1862 thu s62 t1–t4 L1847 VE6 sheet (300 cr; t4 jade disc G57 ✗). VE6 now: t1 L1852 + 6 m18 maids. Next Lượt 1863.
 #25 ~08:20Z: OWNER L1863: Hán collar innermost band = TRUNG Y colour = person's RANK colour (not white; corrects L1859). → HAN5.
 #25 ~08:22Z: NGOCBOI1 G57 DONE a7be91c0a (~530 files, gate FAIL all scopes). Open: Triệu Hà Bí ankle bí trụy pendant exempt? PALBACH1 idle.
+#25 ~08:25Z: SENT L1864 thu t1 L1852 (0eUAUEbTfW) + L1865 maids m09 ×6 (VE7, 810 cr). HAN5 PHISIMPLE a6bffa6 → VE9. NGOCBOI1 done 2b3718081, stopped. VE7 done → idle. Next Lượt 1866.
