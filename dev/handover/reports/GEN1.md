@@ -271,3 +271,13 @@ gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr eac
 | t5 Phi | s62_t5_THU_COMOIj | mEZp0UIhJQ | https://www.magnific.com/app/creation/mEZp0UIhJQ |
 Sheets: dev/handover/review-sheets/thu_t4_t5_L1653/sheet_t4.png, sheet_t5.png ('… · L1653 · GPT 2.6 low · 55 cr', Tổng 110 cr). Caption inside both pictures still reads "v6b" (as in the prompt files).
 Look: t4 – 3/4 left, hair up, ONE lotus, bare ears, white lotus held on a gold stalk (reads more like a lotus flower on a handle than a lamp), flowered brocade sash at the centre (tied with a small knot and short loops – borderline "no bow"), net capelet with pearl fringe, one jade pendant set. t5 – frontal, ONE hollyhock, bare ears, letter in both hands, gold flowered girdle, short pearl swag across the chest (G49 visible), two jade pendants, shoulder layers. No other faults seen.
+
+## CHECK2 PASS be1ec9e (Foreman C #17) — thu t4 COMOIk + t5 COMOIj, NEW vs OLD
+gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr each = 110 cr. Text used = the files AS AT be1ec9e (git show be1ec9e:path; check_store PASS tp4/tp5; 9993 / 10000 chars by Python len).
+!! The copies of both files at current branch HEAD (fabf6588c, last touched by d3fcd3e8d "rv-chiton-name rv2 report") contain UNRESOLVED MERGE-CONFLICT MARKERS (<<<<<<< HEAD / ======= / >>>>>>> f29c8990), ~19.9k chars, and check_store FAILS on them. I did NOT draw from those; reported to #17. Repair = restore the be1ec9e versions.
+| pic | OLD | NEW | link |
+|---|---|---|---|
+| t4 Tần COMOIk | 9ZHSjoTNYZ (31af161 text) | jUoqy44LD0 | https://www.magnific.com/app/creation/jUoqy44LD0 |
+| t5 Phi COMOIj | mEZp0UIhJQ (31af161 text) | tCRpHb6mZJ | https://www.magnific.com/app/creation/tCRpHb6mZJ |
+Sheets OLD|NEW (big Vietnamese labels: tên, model, 55 cr/tấm, TỔNG 110 cr): dev/handover/review-sheets/thu_t4_t5_CHECK2_be1ec9e/sheet_t4_OLD_NEW.png, sheet_t5_OLD_NEW.png
+Look: t4 NEW – 3/4 left, hair up, ONE lotus, bare ears, lotus lamp held, one jade pendant set; the flowered sash is cream-gold and tied with a small decorative bow (rule: NO bow, flat; also reads as a third colour). t5 NEW – frontal, ONE hollyhock, bare ears, letter in both hands, blush flowered girdle now flat (as asked), two jade pendants, shoulder layers; FAULTS: two jade hairpins lie horizontally across the top of the bun (rule: no horizontal hairpin), the pearl swag across the chest is hard to see (OLD showed it), fine loose wisps by the ears.
