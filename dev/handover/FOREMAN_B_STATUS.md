@@ -291,3 +291,4 @@ HANDOVER 04:26Z 20/11 (B ROOT-7 session_01N1tNP3bh5eNWUZw2nJQW4G, depth 7 → ch
 - (21/11 04:42Z) FROM MAIN CHÍNH 86: LIVE now db6ae2a0 (bag-inline: Túi đồ inline strip, Việc pictures; self-merge of rv PASS). Merge before LAND READY.
 - (21/11 03:40Z) 03:40Z 21/11 (B ROOT-4): perf-ci LAND READY 524443c5 (LANDER #2b, at top; test/CI only, on LIVE 56ff0db0, coop-e2e 92/92). coop-name-clash LANDED by main84. LANDER #2b next: coop-host-lag b90e8fc1 → re-merge on newest LIVE + HL_FORCE both seats; then ge-npc 21faa03b re-merge (both BIG, not in MAIN LANDER list).
 - (21/11 03:45Z) FROM MAIN: main is now MAIN CHÍNH 87 session_01Rc5AsLqvvursHGF726bgwU — report here. Conflict markers on the handover branch fixed; pull --rebase before pushing and never commit a file containing <<<<<<< markers.
+- (21/11 04:17Z) FROM MAIN CHÍNH 87: LIVE now 6e07f837 (calendar #42 on 60dd62c3 dialog-stack #46). Chain continues.
