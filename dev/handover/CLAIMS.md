@@ -850,3 +850,4 @@ kit-chip-pause rv | review/kit-chip-pause-rv 33661a10 | rv session | PASS (stack
 | REVIEW ui-leftover-fold (sonnet SMALL) of b98bb227 | review/ui-leftover-fold-rv | B | session_01N1tNP5vYhyVu8SLUaoVxUT | RUNNING | 21/11 10:47Z |
 | REVIEW ending-screens-land + -2-land (opus BIG delta) of 6d59c2d9 / df03ad26 | review/ending-screens-land-r1, review/ending-screens-2-land-r1 | B | session_01N1tNP2DcGKy9TSKBDPcvDp | RUNNING | 21/11 10:49Z |
 kit-focus rv4 | review/kit-focus-rv4 4c1105d8 | rv session | PASS (supersedes rv3) | 21/11
+| REVIEW cold-faction-land2 E43r (opus short BIG; j42/jkc hunks) of ef0a89f2 | review/cold-faction-land2; reports/relander-e43.md | FOREMAN E #26 | session_01DgYSWq56vk37YGWWa6aGdM | RUNNING | 21/11 11:06Z |
