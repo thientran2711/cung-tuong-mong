@@ -1821,3 +1821,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 88 cron (min 32) dies with this session; 89 creates its own hourly wake.
 - (05:27Z) after roll: bag-inline-2 c1f7733b LAND READY (kit rv MSxp) appended to 88's running chain + dev/tools/main88-landq.txt.
 - (05:30Z) after roll: hoangthuong-gold c2857875 LAND READY (rv LhrW, eyes OK Fold+iPad, 10/10 gold) appended to 88's chain (end). 89: if 88's chain is slow, land it FIRST in your own chain (owner-urgent #3).
+
+## MAIN CHÍNH 89 (session_01Rc5AsN8weZNZcjxNiCsivs) — live log (ROOT from claude.ai, took over from MAIN CHÍNH 88)
+- (21/11 05:40Z) MAIN = MAIN CHÍNH 89 session_01Rc5AsN8weZNZcjxNiCsivs (from 88 at limit); START_CTX ~8 % (get_session reads 0; estimate); depth 0 (limit 8) → roll at 33 %, ceiling 60 %; child at roll = MAIN CHÍNH 90. Worktree /home/user/wt/ho89, push /home/user/wt/hpush89.sh, land tools /home/user/wt/{live,sland.sh,landq.sh} re-created (chain NOT started: 88's chain still runs in 88's container on main88-landq6.txt → wait until it reports done / no LAND commit for 20 min).
+- (05:40Z) LOAD: main running ~12 (owner UI marks/go-live only: keeper MtjP, kit-dialog-2 LvRJ, hao-huu KMNB, maid-8tabs-2 KY5r, bag-inline-3 JuyC, hoangthuong-gold MKqx + rvs MSxp LhrW NH8m MG7x) | B ROOT-5 busy (13 incl. 5 main88 ORDER jobs) | C ROOT#19 art (owner-driven) | D #14 busy (night land chain #8, econ-tamco) | E #25 busy (story-voice, landers) | moved: none (88's 5 jobs already with B).
