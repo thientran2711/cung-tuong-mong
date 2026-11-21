@@ -581,14 +581,14 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | OWNER BUG chai-ramp (opus; chải chuốt band never shrinks across hồi + whole group; briefs/main83-chai-ramp.md) | review/chai-ramp | MAIN CHÍNH 83 | session_01Rc5AsLmuLUhQcCbodJsoEB | SSK 8338d1f5 → archived | 21/11 00:55Z |
 | E RE-GATE LANDER #2 E38 (opus; cold-faction-land then person-minigame-acts-c-land stacked; ORDER MAIN CHÍNH 83 00:47Z; briefs/E38-relander.md) | review/<topic>-land | FOREMAN E #24 | session_01DgYSWp4ipudRZntvXoutJw | RUNNING | 21/11 00:50Z |
 | OWNER BUG den-look (sonnet; hoa đăng: no avoid symbol on lotus, no white edges on light streak + group; briefs/main83-den-look.md) | review/den-look | MAIN CHÍNH 83 | session_01Rc5AsJdVWQcwwxJVzK3N16 | RUNNING | 21/11 01:00Z |
-| REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | RUNNING | 21/11 01:07Z |
+| REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | LIVE c3a398dd | 21/11 01:07Z |
 | mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | session_01Rc5AsLTqtdSYJsC6Gxn7cc | RUNNING | 21/11 01:08Z |
 | REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | session_01Rc5AsJi9JqNMCUZv8DNjsm | LIVE 8c8b8b6b | 21/11 01:09Z |
 | REVIEW huong-cue r2 (SMALL sonnet) of d9fa3a93 | review/huong-cue-rv; briefs/main83-rv-huong-cue.md | MAIN CHÍNH 83 | session_01Rc5AsJgMQjRG6xNQhuGeoZ | RUNNING | 21/11 01:16Z |
 | huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | session_01Rc5AsKFt2udUrNe4E57bna | RUNNING | 21/11 01:16Z |
 | mg-craft Thêu keep-memory (opus; OWNER OD 21/11 ~01:05Z: keep «Nhớ mẫu thêu» pattern; stitch → Công «Thêu theo nét») | review/mg-craft-r2-land; briefs/b-mgcraft-theu.md | B | session_01N1tNP3uti359quj6nveReC | RUNNING | 21/11 01:18Z |
 | kit-ton-row-2 KIT KEEPER (sonnet; MAIN CHÍNH 83 follow-ups) | review/kit-ton-row-2; reports/kit-ton-row.md §kit-ton-row-2 | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM f8d36f6b | 21/11 |
-| REVIEW chai-ramp (BIG opus) of 8338d1f5 | review/chai-ramp-rv; briefs/main83-rv-chai-ramp.md | MAIN CHÍNH 83 | session_01Rc5AsJ2gFzDabLoQY1RDFP | RUNNING | 21/11 01:21Z |
+| REVIEW chai-ramp (BIG opus) of 8338d1f5 | review/chai-ramp-rv; briefs/main83-rv-chai-ramp.md | MAIN CHÍNH 83 | session_01Rc5AsJ2gFzDabLoQY1RDFP | LIVE c3a398dd | 21/11 01:21Z |
 | MAIN CHÍNH 84 (coordinator; took over from 83) | — | MAIN | session_01Rc5AsKwFNncn5NJ71zfUof | RUNNING | 21/11 01:35Z |
 | MAIN84 LANDER (opus; B stale train: thancan, coop-name-clash, wear-slots, coop-week-stall, coop-guest-agent) | review/main84-land-*; briefs/main84-lander.md | MAIN CHÍNH 84 | session_01Rc5AsHzig7NUCeaPzmEwPf | RUNNING (START_CTX ~5 %) | 21/11 01:45Z |
 | REVIEW dauho-lv5 (BIG opus) of f9ef63d0 | review/dauho-lv5-rv ceaa99e2; reports/rv-dauho-lv5.md | MAIN CHÍNH 84 | session_01Rc5AsJQhpHN5KD3jnhMy1U | DONE PASS ceaa99e2 | 21/11 02:10Z |
