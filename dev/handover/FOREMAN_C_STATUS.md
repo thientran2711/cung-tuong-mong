@@ -1350,3 +1350,4 @@ Next Lượt 1953.
  NOW: send her the THU outfit list (what we have).
 #27 ~10:30Z: OWNER L1973: HQP t7 = keep OLD HOÀNG QUÝ PHI outfit (not Quý phi), only fix collar; go back to previous version (L1903 0eUA2SkTfW base) + collar only → HHCOL2 → VE11 1@135. FACEPAGE1 full page v3 (51 faces) SENT L1972; m11 label → 'đã bỏ'. Next Lượt 1974.
 #27 ~10:35Z: SENT L1974 thu 8-rank current sheet thu_8bac_hientai_L1971.png (t1 0eUAUEbTfW t2 EbYtnSSuuO t3 dt40zTaXSL t4 WDgZlfCcXe t5 tCReAHamZJ t6 eIPcGThdqL locked, t7 fixing, t8 Tdwzp62VNR waiting). Next Lượt 1975.
+#27 ~10:37Z: MAIDFIX4 L1971: nhị drift cause (closed-jacket sentence + angles; 3zKP was 1k@55) → prod/*_nhi_L1971 fixed; thân cận hair 3 choices THANCAN_HAIR_CHOICES_L1971.md → SENT L1975; G65 big flowers t4+ allowed. HAN6 Hán L1971 t1–t8 files ready (density, jewellery t4+, flowers main, long bows) → sample HOLD for owner. NGOCBOI1 bow rule. Next Lượt 1976.
