@@ -28,7 +28,7 @@ const R={};
   const labels=()=>p.evaluate(()=>[...document.querySelectorAll('.kidrows .krl')].map(e=>e.textContent));
   const card=async()=>p.evaluate(()=>{const c=document.querySelector('#kidfl .kidc');if(!c)return null;const r=c.getBoundingClientRect();return{name:(c.querySelector('.kidn')||{}).textContent,in:r.top>=0&&r.left>=0&&r.bottom<=innerHeight+1&&r.right<=innerWidth+1,rows:[...c.querySelectorAll('.krl')].map(e=>e.textContent),acts:[...c.querySelectorAll('.kidacts button')].map(e=>e.firstChild.textContent)}});
   step(1);/* 1. dress pick */
-  out.toilErr=await p.evaluate(()=>{try{TOIL.st=null;toilOpen();return [!!document.querySelector('#kg82'),document.querySelector('#kg82')&&document.querySelector('#kg82').hidden,!!window.__bot].join()}catch(e){return e.stack.slice(0,400)}});if(process.env.DBG)console.error(out.toilErr,out.errs);await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
+  out.toilErr=await p.evaluate(()=>{try{TOIL.st=null;toilOpen();{const r=document.getElementById('toilrdy');if(r)r.click()}return [!!document.querySelector('#kg82'),document.querySelector('#kg82')&&document.querySelector('#kg82').hidden,!!window.__bot].join()}catch(e){return e.stack.slice(0,400)}});if(process.env.DBG)console.error(out.toilErr,out.errs);await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
   const before=await p.evaluate(()=>JSON.stringify(wdOf(S))+JSON.stringify(S.inv.map(e=>e.w|0)));
   out.dressHint=await p.evaluate(()=>(document.querySelector('#kg82 .toildet')||{}).textContent||'');
   await p.evaluate(()=>{const t=[...document.querySelectorAll('#kg82 [data-kinvkey="toil"][data-kinvi]')].find(e=>/Váy sa xanh/.test(e.title));t&&t.scrollIntoView({block:'center'})});
