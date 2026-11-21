@@ -181,7 +181,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- V: veil craft (the card, the held cost, the game) ---- */
  const vst=`S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;`;
  const vpre=`pushDil(mkP('vlcraft'),'Kết mạng');showModal();if(!Q.length)return 'no card';chooseM(0);if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify(Q.map(q=>q.t));`;
- const vtw=(raw,sk)=>`aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});vlCraftEnd(0,${raw},${!!sk})`;
+ /* rv coop-thin-g r1: the solo twin of «Kết nhanh» takes main's deferred charge (mg-back r3, kgDefer: khắc + Sức are taken on «Sẵn sàng» / «Kết nhanh»;
+    jveil vlCraftRun), the same twin fix coop-thin-f5 got (KGTW) */
+ const vtw=(raw,sk)=>`${sk?'S.suc-=VL.craftSuc;spend(VL.craftK);':''}aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});vlCraftEnd(0,${raw},${!!sk})`;
  await act('V1 Kết bằng vải sa, played (raw 8): the veil made, cost once, same as solo',KOK,{stage:vst,pre:vpre+KGO,raw:8,wait:900,twin:vtw(8),chk:x=>x.aaPaid===1&&x.g1.inv.length===x.g0.inv.length+1,shot:'veil'});
  await act('V2 Kết nhanh: no veil, the material back, cost once',KSK,{stage:vst,pre:vpre,twin:vtw(5,1),chk:x=>x.aaPaid===1&&x.g1.inv.length===x.g0.inv.length});
  await act('V3 over-max (vlCraftEnd raw 11): refused',`vlCraftEnd(0,11,false)`,{stage:vst,reject:1});
