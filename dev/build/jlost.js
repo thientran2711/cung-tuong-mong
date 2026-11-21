@@ -55,7 +55,7 @@ function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(l
  S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")},cz);
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
  /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else loKeepPick: keep vs her worst grudge, BAL.ag.why.loTry.keep) */
- if(c.cause==="riv"&&c.by&&(c.keep||(!force&&loKeepPick(loP(c.by),p)==="keep"))){const v=loP(c.by);if(v&&loAlive(v)){const x=Object.assign({},e,{lo:c.id,gh:c.own,by:c.by});delete x.from;delete x.giver;delete x.w;v.inv=v.inv||[];v.inv.push(x);c.keep=1;c.st="held";c.at=c.by}else c.keep=0}
+ if(c.cause==="riv"&&c.by&&(c.keep||(!force&&loKeepPick(loP(c.by),p)==="keep"))){if(!loKeepBy(c,loP(c.by)))c.keep=0}
  if(p===S){Q.push({t:"Đồ thất lạc",who:pMe(),h:`${loTag(e)}<p><b>${nm}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});log(`${nm} trong rương thất lạc.`);
   try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"thất lạc",lo:c.id})}catch(x){}}
  else{const txt=`${wdNmC(p)} báo mất ${nm}.`;try{newsAdd(p,"lo",txt);if(S.news&&S.news[0]&&S.news[0].t===txt){c.heard=1;log(txt)}}catch(x){}}
@@ -64,12 +64,26 @@ function loLoseE(p,e,cause){if(!loAlive(p)||!e)return null;if(typeof ilUid==="fu
  loL().push(c);if(p===S){try{if(typeof tsbLedger==="function")tsbLedger({what:loNm(e.k),how:"thất lạc",lo:c.id})}catch(x){}}return c}
 function loClean(e){const x=Object.assign({},e);for(const f of ["lo","gh","by","h","w"])delete x[f];return x}
 function loLedgerBack(c){try{if(c&&c.own==="me")for(const x of S.tsbLog||[])if(x&&x.lo===c.id)x.back=1}catch(e){}}
-/* the item goes back to its owner (j92 verdict, a quiet return, a search) */
-function lostReturn(e,how){const c=e&&e.lo?loGet(e.lo):null;
+/* ---------- ONE OWNER CHANGE (E42, law 6c REAL OBJECTS): a lost-case piece has exactly ONE home at any time ----------
+   home = the case itself while st "lost" (nobody holds it: ilCases counts it there), else the holder's entry (loEntry, marked e.lo).
+   Every road moves it through lostReturn (→ its owner) or loKeepBy (→ the finder / thief keeps it); each takes it from that one home.
+   A road may hold the CASE's own piece (c.e, no lo mark: Kỳ ngộ, the census): it is found by identity, and it moves only while the case
+   still holds it. A stale road (the piece already left: found, held, returned) moves nothing and says so (returns false).
+   Before: lostReturn(c.e) found no case (no lo mark) → "closed case, no owner" → a «dead» copy in the ledger box on every call while the
+   case stayed open; the next finder kept it again → 2–7 copies (coop-lost-scan / lost-one-home-scan). */
+function loCaseOf(e){if(!e)return null;if(e.lo)return loGet(e.lo);return loL().find(c=>c&&c.e===e)||null}
+function loHolds(c){return !!c&&c.st==="lost"&&!!c.e&&!loEntry(c)}
+/* the item goes back to its owner (j92 verdict, a quiet return, a search, Kỳ ngộ «Mang trả») */
+function lostReturn(e,how){const c=loCaseOf(e);
+ /* the case's own piece (not a holder's copy): only while the case still holds it */
+ if(c&&e===c.e&&c.st!=="done"&&!loHolds(c))return false;
  /* item conservation (jil): a piece whose case is closed or whose owner is gone still goes somewhere real */
- if(!c||c.st==="done"){if(e){const o=e.gh?loP(e.gh):null;const x=loClean(e);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(x)}else if(typeof ilGone==="function")ilGone(o||S,x,"dead",{own:e.gh||""})}return}
+ if(!c||c.st==="done"){if(!e||(c&&e===c.e))return false;/* a closed case's own record is not a piece */{const o=e.gh?loP(e.gh):null;const x=loClean(e);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(x)}else if(typeof ilGone==="function")ilGone(o||S,x,"dead",{own:e.gh||""})}return true}
  const o=loP(c.own);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(loClean(c.e||e))}else if(typeof ilGone==="function")ilGone(o||S,loClean(c.e||e),"dead",{own:c.own})
- c.st="done";c.end=wk();c.how=how||"tra";loLedgerBack(c);if(o===S)log(`${loNm(c.k)} đã về lại rương ngươi.`)}
+ c.st="done";c.end=wk();c.how=how||"tra";loLedgerBack(c);if(o===S)log(`${loNm(c.k)} đã về lại rương ngươi.`);return true}
+/* the piece the case holds is kept by p (a thief who keeps it, Kỳ ngộ «Giữ lại», a robber): her chest holds the one copy, marked */
+function loKeepBy(c,p,how,f){if(!loHolds(c)||!p||!loAlive(p))return null;const x=Object.assign({},c.e,{lo:c.id,gh:c.own,by:key(p)});delete x.from;delete x.giver;delete x.w;
+ p.inv=p.inv||[];p.inv.push(x);Object.assign(c,{keep:1,by:key(p),st:"held",at:key(p)},f||{});try{if(how&&typeof ilLog==="function")ilLog(c.e,"lo"+c.id,key(p),how)}catch(z){}return x}
 /* take a worn missing item off before a search (wardrobe slot or j8 worn flag) */
 function lostUnwear(t,a){if(!t)return;try{const w=typeof wdOf==="function"?wdOf(t):null;if(w)for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.lo&&(!a||e.gh===key(a))){const k=sl==="y"?wdDefault(t,"y"):null;w[sl]=k?{k,from:"base"}:null;try{wdOf(t)}catch(x){}t.inv=t.inv||[];t.inv.push(e)}}}catch(x){}
  for(const e of t.inv||[])if(e&&e.lo&&(!a||e.gh===key(a)))e.w=0}
@@ -77,7 +91,9 @@ function loEntryAt(h,c){if(!h)return null;let w=null;try{w=typeof wdOf==="functi
  const e=(h.inv||[]).find(x=>x&&x.lo===c.id);return e?{h,e,worn:!!e.w}:null}
 /* where the item is now; it may have moved (planted with "Cài đồ vào rương"): then the case follows it */
 function loEntry(c){const h=loP(c.at);const x=loEntryAt(h,c);if(x||!c.at)return x;for(const p of [S].concat(consorts())){if(p===h||!loAlive(p))continue;const y=loEntryAt(p,c);if(y){c.at=key(p);return y}}return null}
-function loHolder(c){const o=loP(c.own),cu=c.by?loP(c.by):null;const L=consorts().filter(x=>x!==o&&x!==cu&&loAlive(x));if(!L.length)return null;
+/* E42 (law 6c, co-op): on the guest seat every NPC is her copy of the host's world (ONE WORLD: the host owns NPC chests); a piece put there
+   lived nowhere real after the merge (coop-lost-scan: guest vanish). There nobody holds it: it goes to Nội vụ phủ (loFind «nvp»), as when no holder exists. */
+function loHolder(c){if(typeof worldOn==="function"&&!worldOn())return null;const o=loP(c.own),cu=c.by?loP(c.by):null;const L=consorts().filter(x=>x!==o&&x!==cu&&loAlive(x));if(!L.length)return null;
  if(cu)return mindPickBy(L,x=>BAL.mind.pick.lost2.base+danger(cu,x),cu);/* npc-mind: was ARGMAX+noise */return npwPick(L,x=>1+Math.max(0,x.bac||0))/* npc-purpose G2: a servant thief sells it to whoever can pay */}
 function loHonest(h){const tr=typeof traitsOf==="function"?traitsOf(h).join(" "):(h.trait||"");return (h.malice||0)<50&&!/Tham vọng|Kiêu ngạo/.test(tr)}
 /* where it turns up */
@@ -89,7 +105,8 @@ function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="d
  h.inv=h.inv||[];h.inv.push(e);c.st="held";c.at=key(h);
  if(h===S&&c.open){Q.push({t:"Đồ lạ trong rương",who:pMe(),h:`${loTag(e)}<p>Cung nhân thấy trong rương ngươi có <b>${loNm(c.k)}</b>, không rõ của ai.</p><p class="past">Vào Tư trang › Việc › Đồ thất lạc: đối chiếu sổ Nội vụ phủ để biết chủ, rồi trả về hay nộp lên.</p>`,btn:"Đã hiểu"});log(`Trong rương có ${loNm(c.k)} không rõ của ai.`)}
  else if(h!==S&&c.open&&loHonest(h))c.ret=wk()+1+R(3)}
-function loGoneOwner(c,o){if(c.st!=="done"||loEntry(c)||!c.e)return;if(typeof ilGone==="function")ilGone(o||S,c.e,"dead",{own:c.own})}
+/* E42: only a case that still HELD its piece (never found: no c.at) writes it to the box; a found/held case whose copy left was routed with that copy */
+function loGoneOwner(c,o){if(c.st!=="done"||c.at||loEntry(c)||!c.e)return;if(typeof ilGone==="function")ilGone(o||S,c.e,"dead",{own:c.own})}
 /* the owner learns where it is (a tip, an investigation, a recognised item) */
 function loKnowAt(c,p,how){if(!p||c.st==="done"||!c.at)return;c.kn[key(p)]=1;if(key(p)===c.own&&c.st==="held")c.st="found";
  if(p===S&&how){const h=loP(c.at);if(c.own==="me")Q.push({t:"Đồ thất lạc",who:h&&h!==S?pv(h):pMe(),h:`${loTag(c.e)}<p>${how}: <b>${loNm(c.k)}</b> của ngươi đang ở ${loPal(h)}.</p><p class="past">Đòi lại êm thấm, hay báo Cung Chính ti thu hồi (Tư trang › Việc › Đồ thất lạc, hoặc thẻ người của nàng).</p>`,btn:"Đã hiểu"});
@@ -263,4 +280,4 @@ try{AOUT.laydo=[`một món quý trong rương nàng về tay ngươi (nàng ch�
 (function(){if(typeof plantItem!=="function")return;const p0=plantItem;plantItem=function(a,t,ix){const e=a&&a.inv&&a.inv[ix];const lo=e&&e.lo?e.lo:0;const r=p0.apply(this,arguments);
  try{if(lo){const c=loGet(lo);const n=(t.inv||[])[t.inv.length-1];if(c&&n&&n.h&&n.k===e.k&&n.by===key(a)){if(c.own===key(t)){t.inv.pop();lostReturn(e,"nha")}
    else{Object.assign(n,{lo,gh:c.own});c.at=key(t);c.keep=0;c.by=key(a);c.st="held";c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}}else if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau"}}}catch(x){console.error(x)}return r}})();
-window.LO=LO;window.loLose=loLose;window.loWeek=loWeek;window.loMonth=loMonth;window.lostReturn=lostReturn;window.lostEv=lostEv;window.lostEvUse=lostEvUse;window.lostUnwear=lostUnwear;window.loKeepHear=loKeepHear;window.loSteal=loSteal;window.loEntry=loEntry;window.loGet=loGet;
+window.LO=LO;window.loLose=loLose;window.loWeek=loWeek;window.loMonth=loMonth;window.lostReturn=lostReturn;window.loKeepBy=loKeepBy;window.loCaseOf=loCaseOf;window.loHolds=loHolds;window.lostEv=lostEv;window.lostEvUse=lostEvUse;window.lostUnwear=lostUnwear;window.loKeepHear=loKeepHear;window.loSteal=loSteal;window.loEntry=loEntry;window.loGet=loGet;
