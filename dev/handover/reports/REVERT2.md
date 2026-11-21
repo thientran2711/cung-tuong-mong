@@ -83,3 +83,10 @@ Baselines (pre-swap): thu = rank8-s62/s62_t5.txt + s62_t6.txt (Set A; t6 there i
 | builder t6 | luxury | "a pearl-edged collar and cape trim" → "pearl-edged collar trim" | **DRIFT (lost during SWAP56 + length trim; QP has capes again)** |
 | builder t6 | luxury | "rich", "covering", "with more gold ornaments", "clearly", "image 2 is only a colour reference" trimmed; + "her own colour stays clearly the main robe colour…" | Foreman length trims (A38/B26FAB2), no owner order — not swap-related |
 | builder t6 | pose | + sleeves clear of the waist | pendant rule (L1627) |
+
+## JOB 6 — drift fixes from the JOB 5 audit (owner L1829) — 0 gens
+1. Phi pearl net back onto her own cloud collar: thu s62_t5_THU_fix_L1833 (9 156, B26/M06 waived); builder CAPE5_VK (+net, "never covering the neckline"); xuân s62_t5_XUAN_COMOI_L1833 (9 473, B26/M06 like base). Net words: "and laid over the cloud collar an airy open net of SMALL pearls (about the Tần's size) and small jade beads, lying flat, its short pearl fringe at the lower edge".
+2. Thu t6 s62_t6_THU_fix_L1833 (9 996, PASS): "+ both resting on the shoulders". "never covering the neckline" did not fit. CUT: "Everyone beautiful at every age." (boilerplate; the gate does not require it). Tested and refused by the gate: the 2nd hairpin line (S24), NOTHING on the forehead (S34), Bare clean forehead (M11), No text (M14).
+3. Xuân t5: pre-swap words VERBATIM "OPEN at the front (its lobes rest on the shoulders and back, never covering the neck or the square inner neckline)" + net.
+4. Xuân t6 s62_t6_XUAN_COMOI_L1833 (9 989, PASS): pre-swap cape words VERBATIM + "a pearl-edged collar and cape trim". No cuts needed.
+5. Builder YEL_T6/LUX_T6: "rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, … a grander gold headdress with more gold ornaments, … still clearly less grand" (ITEMFIX2 words restored). s62 t5 8 667 / t6 9 077, store + dong build OK.
