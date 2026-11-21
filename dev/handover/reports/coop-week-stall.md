@@ -50,3 +50,37 @@ Notes: the stock coop-bot's 120 s per week counts a slow bot as "stuck" (under 3
 
 Solo unchanged: every change is behind CW.on (co-op) — sendEnd/sendMe/room are co-op only, jcoop rx only runs with a socket; quickcheck old save + perf same as LIVE.
 No UI, no number, no player word added (laws 4/7/9/10 untouched). No shots (no visual change).
+## REVIEW r1 — BIG reviewer (opus), Foreman B ROOT-3 lane
+PRIORITY #1 CHECK ('week stall|cyHer|rxQ|room stale'): OD 0 | claims: this lane only | main: jcoopworld sendEnd/sendMe/room handler, jcoop rx (the fix's hunks only) | review/*: review/coop-week-stall 2cd0e0f1 (this) | reused the worker's dev/test/coop-bot-x.js classifier.
+Branch **review/coop-week-stall-r1** = worker 2cd0e0f1 + merge origin/main 24dd2c62 + merge origin/main a4fdb642 (index.html / sw.js rebuilt each time; no conflict in code files). No code change by the reviewer. Code diff vs main: jcoop.js +13/-3, jcoopworld.js +31/-4 only.
+
+### Focus checks (code read against the Worker coop/worker/src/index.js)
+| # | question | finding |
+|---|---|---|
+| 1a | host offline | cyHer releases when his seat is empty (nOtherGone); while he is only reconnecting the room is frozen anyway; on his return presence → `go` → soonEnd. No new wait. |
+| 1b | host slow | her end waits; her #next stays «Chờ hảo hữu…» (CW.pend) — same word as before. Worker `end`: host's end alone → `presence()` (ended[host]) → her `go` listener → tryEnd → sendEnd. |
+| 1c | host dies | dead host never sends an end (sendEnd S.dead) — the week could never merge without his end before this fix either (Worker tick needs both or an empty seat), so waiting for him adds no stall; base P[host].dead releases her; his rebirth (`me`) + fix 2 (nCheck/soonEnd in sendMe) sends his end. |
+| 1d | can his end wait for hers (cycle)? | NO: host night go = her ready (thin view a.b ≥ LAST → CW.nfr, jcoopthine:112) or force or her end — not her end only; host cyHold waits for her CARD ANSWER (do cyb), which she can give while her end is held (Q card answered, pend stays). eWait is guest-only. No cycle. |
+| 1e | her Kỳ nguyệt sự card refused / ignored | refusal = an answer (cyb) → cyFree → his end → hers. Ignored = she never answers: his end waits by design (jcooptimer never chooses for her) — same as before the fix. |
+| 1f | double end / lost week | CW.sent===wk() guard; re-end path (room ended[me] missing) goes through the same gate; Worker `end` badweek-guards an old week. No double end, no lost week found. |
+| 2 | level-0 rebirth-in-night | sendMe tail nCheck()+soonEnd() (setTimeout 0, after the gate reset) — matches the fixE3 r9 trace; coop-e2e 20/20 clean incl. the B-dies rebirth step. |
+| 3 | rx order / replaced socket | rxQ promise chain per socket, catch per frame (one bad frame never blocks the queue); frames of a socket that is no longer `ws` dropped before and after gunzip; the new socket always gets its own fresh `room` snapshot, so nothing needed is dropped. |
+| 3b | stale-world guard | Worker tick sets m.week and F.week together (saveC after); a room built between loadC and the merge holds C.week < m.week → only syncRoom (forward-only), the `week` broadcast follows. Old C without a numeric week → guard skipped (typeof). onWeek catch-up never for a week behind wkIn. |
+| solo | | every hunk behind CW.on / a live socket; quickcheck old save + perf same as LIVE. |
+
+### Tests (this box, 4 cores; main = origin/main 24dd2c62 worktree, fix = this branch)
+| test | main | fix |
+|---|---|---|
+| coop-e2e (level 0, both seats: host Fold + guest iPad, 3 weeks, leave/return, guest death → rebirth) | 20 runs: 19 clean, 1 FAIL «B reborn as a new person» (rebirth name, not a stall); **0 week stall** | **20 runs: 20 clean, 0 stall** |
+| coop-bot-x THIN=9 4 weeks (both seats play; classifier: 20 recovery steps) | 8 runs: 3 'stuck' all slow-bot (recovered, weeks advance in steps 1–6), 0 real | 8 runs: 2 'stuck' both slow-bot (recovered at step 1 / 10), **0 real**; 6 runs 4/4 weeks |
+| quickcheck | — | **PASS** (core gates PASS, old save ok, perf render 157/193 ms, buổi 1762/2110 ms new/live) |
+| role-parity | ALL PASS | **ALL PASS** (two earlier runs crashed «Target crashed» while 8 e2e browsers ran = box load; idle re-run clean) |
+| outside/coop-home | — | **51/51** |
+| coop-thin-e-net | — | **20/20** |
+| one-core-guard / undef-scan | — | **PASS (fails 0) / PASS** |
+Real THIN=9 stall rate: mine 0/8 main vs 0/8 fix (too rare to separate on 8 runs); the worker's 1/21 main vs 0/8 fix + the static proof above carry it. Note for B: coop-bot-x exits 1 on every run here (NPC places differing in buổi 1 — same on main, not this lane).
+
+### Laws
+1 two-way: both seats keep the same rules (host never waits for her end; she waits one presence for his) — ok. 4 one core: no number added (one-core 0 fails). 7/9/10/12: no player word, no UI, no picture → no shots needed. 11 whole group: worker's handler table (13 handlers) checked; ok. 13: PRIORITY line present.
+
+**VERDICT: PASS ccd41e45** (contains origin/main a4fdb642; final-sha re-check: quickcheck PASS, coop-e2e 3/3 clean, undef + one-core PASS). CO-OP LAND GATE: coop-e2e PASS (20/20, both seats) + this feature's own co-op check on both seats (coop-bot-x THIN=9, 0 real stall; coop-thin-e-net 20/20).
