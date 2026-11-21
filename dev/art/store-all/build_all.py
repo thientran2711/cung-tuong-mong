@@ -272,7 +272,7 @@ def capelet_cut(person):
 def collar_cut(person):
     return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
      "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
-HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
+HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls and gold on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."   # owner L1794: no rubies/sapphires/European gems (A46, S14_L1794)
 INNER_EMB="INNER LAYER EMBROIDERED (t7/t8): the inner robe and skirt layer is ALSO embroidered with fine silk-thread embroidery stitched into the fabric, the motifs smaller, lighter and sparser than on the outer robe."
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
