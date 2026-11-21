@@ -51,7 +51,7 @@ html body #modal .dlg .kpb.kpinfo>.kpsubj.kpiart.kpev>.ksart{position:absolute!i
 html.kv1 body #modal .dlg .kpb.kpinfo:has(>.kpsubj.kpiart.kpev){grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;height:auto!important}
 html.kv1 body #modal .dlg .kpb.kpinfo>.kpsubj.kpiart.kpev{height:auto!important;aspect-ratio:16/9;position:relative;align-self:start;width:100%!important;grid-column:1!important;grid-row:1!important}
 html.kv1 body #modal .dlg .kpb.kpinfo>.kpmain{grid-column:1!important;grid-row:2!important}
-html.kv1 body #modal .dlg .kpb.kpinfo>.kpsubj.kpiart.kpev>.ksart{position:relative!important;inset:auto!important;height:auto!important;aspect-ratio:16/9!important}
+html.kv1 body #modal .dlg .kpb.kpinfo>.kpsubj.kpiart.kpev>.ksart{position:relative!important;inset:auto!important;width:100%!important;flex:1 1 100%!important;height:auto!important;aspect-ratio:16/9!important}
 html body #modal .dlg .kpb.kpinfo>.kpsubj.kpiart.kpev>.ksart>img{position:absolute!important;inset:3px!important;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;min-height:calc(100% - 6px)!important;max-height:none!important;object-fit:cover!important}`;document.head.appendChild(si);
 window.kitSlide=kitSlide;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§21c",title:"kitSlide · chương như một trang trượt: ảnh dài, tên chương đè lên ảnh, mũi tên + vuốt, hàng thông tin dưới đi theo, góc «Mục lục»",

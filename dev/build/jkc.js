@@ -633,7 +633,7 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
  const step=S.kc.tt?(S.kc.tt.art?3:2):S.kc.soOk?2:S.kc.so?1:0;
  return kcSlideHTML([{kicker:"Chương ngoài cung",title:KCO[k].t,sub:`Hồi ${n}/3`,rl:"Hồi tới",desc:n>=3?"Đã trọn ba hồi.":`sau ${Math.max(0,nxt-S.turn)} tháng nữa.`,done:n>=3},
    {kicker:S.kc.tt?"Đang tuyển":`Còn ${left} tháng`,title:"Tuyển tú",sub:`Vòng ${step}/3`,rl:"Các vòng",desc:"Sơ tuyển · Phúc tuyển · Điện tuyển. Qua cả ba thì vào cung, phong tới Quý nhân.",done:step>=3}].concat(tm?[{kicker:tm.name,title:"Thanh mai trúc mã",sub:S.tm96.tok?"giữ tín vật":"chưa trao tín vật",rl:"Tín vật",desc:S.tm96.tok?"Ta giữ tín vật của chàng.":"Chưa trao tín vật.",done:!!S.tm96.tok}]:[]))
-  +  +kitRows([["Kết hiếm ngoài cung đã gặp",`${found} trên ${Object.keys(KCRARE).length}`,"t"],["Phúc duyên khi qua tuyển tú","qua Sơ tuyển +5 · vào cung +5, Quý nhân +10","t"]])}
+  +kitRows([["Kết hiếm ngoài cung đã gặp",`${found} trên ${Object.keys(KCRARE).length}`,"t"],["Phúc duyên khi qua tuyển tú","qua Sơ tuyển +5 · vào cung +5, Quý nhân +10","t"]])}
 /* her own card */
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isKc())return s0.apply(this,arguments);
  return pcard({f:pMe(),col:"#b08a8a",name:S.name,rank:kcTitle(),lines:[`${S.age} tuổi`,S.origin.n],note:`Kỳ tuyển tú còn ${Math.max(0,kcMonthsLeft())} tháng.`,tabKey:"kcme",
