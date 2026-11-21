@@ -4,11 +4,11 @@ allow: thick gold-embroidered brocade  # owner L2097 test: Phi fabric
 allow: slightly THICKER soft silk gauze shawl  # Phi shawl words
 allow: LESS see-through than at the lower ranks  # Phi shawl words
 allow: matching the weight of her brocade  # Phi shawl words
-allow: Every hairpin is inserted into the hair pointing upward or backward  # duplicate of earlier hairpin sentence (LEN)
-allow: NOTHING on the forehead  # duplicate of 'Bare clean forehead' (LEN)
 allow: never a stretched grin  # boilerplate trim (LEN), as THUROOT3
 allow: never cross-eyed, never wall-eyed  # boilerplate trim (LEN), as THUROOT3
 allow: Quý phi · L2095  # caption
-allow: no hairpin horizontal or sticking out to the side  # duplicate sentence trimmed (earlier hairpin sentence stays)
-allow: no hoa điền  # duplicate forehead sentence trimmed (bare clean forehead stays)
-allow: graceful adult body  # LEN trim
+allow: her own colour stays clearly the main robe colour  # VE12 dedup trim (LEN); next COLOUR RULE says it
+allow: much less yellow than an imperial noble consort's robe  # same
+allow: gold only as thin accents on the borders  # dedup ('gold only as thin accents' stays)
+allow: it keeps its soft graceful drape  # boilerplate trim (LEN)
+allow: NOT cream, NOT beige, NOT ivory, NOT an all-gold robe  # trim (LEN); 'clearly light olive silk' stays
