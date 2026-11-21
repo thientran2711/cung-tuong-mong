@@ -398,6 +398,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- **WARNING / REPORT ORDER (owner 21/11 mark #85; j70.js `thrLine70`, test dev/test/dialog-dup-scan.js):** a warning or report dialog (Lời cảnh báo, Tai mắt báo tin) reads (1) the messenger's words, (2) ONE plain fact line (who + what + when: «Tần Liễu Lạc Anh có thể hại ta mức nặng (vì ghen với ta, Ghen 52) · chưa rõ lúc nào») — no boxed `kitThreat` card inside the dialog, (3) the evidence line, then the options. The same fact is never printed twice (the maid's «thành: biết X có ý hại ngươi» row is dropped when the plain line says it).
 - Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`
