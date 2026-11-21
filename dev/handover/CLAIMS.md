@@ -827,3 +827,4 @@ kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text c
 | coop-guest-names (opus BIG; MAIN 91 ORDER 08:34Z: guest k61 name mask misses shared-world people + jnamefix cross-seat) | review/coop-guest-names; briefs/b5-coop-guest-names.md | B | session_01N1tNP4yDu6wnmaLKhzumGM | RUNNING | 21/11 09:21Z |
 | ending-screens-land (opus BIG re-merge; MAIN 92 ORDER 08:53Z: G4 80-dialog-fixed fail; + ending-screens-2 on top) | review/ending-screens-land, review/ending-screens-2-land; briefs/b5-ending-screens-land.md | B | session_01N1tNP6MabVX7Umpx2XWEzo | RUNNING | 21/11 09:21Z |
 | mg-noword-care (sonnet SMALL; MAIN 92 ORDER 09:14Z: thu_tam/thu_choi/tuoi words + whole family) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP2S5rf5Z5gTFLmPZaf | RUNNING | 21/11 09:21Z |
+kit-opt-kem rv | review/kit-opt-kem-rv e09fd19a | rv session | PASS (+law-4 finding for MAIN) | 21/11
