@@ -27,3 +27,4 @@ allow: highly translucent gauze shawl in mint mist  # owner L1714 row 21 thu pal
 allow: clearly different from her main robe colour ice blue  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
 allow: one hand holding a pearl-tasselled silk lantern with a jade top  # owner L1714 row 23 new pose/held item
 allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
+allow: standing as a breeze lifts her long stole  # foreman ROOT#19: stole moved to Phi (L1714 rows 7/8) → breeze lifts her sleeves
