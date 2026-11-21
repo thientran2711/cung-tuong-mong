@@ -55,3 +55,14 @@ dev/art/seasons4/s62_t1_HAN_PHICOPY_L1860.txt (generator make_han_phicopy_t1_L18
 - Collar = Phi's own words with her colours. 3 bands (L1859): "outer peach-blossom pink embroidered in gold, middle ivory white, innermost pure white".
 FINDING: the result is byte-identical to LADDER5 t1 except the band colours (LADDER5 was already built from the Phi base). The only Phi→t1 differences left are rank items (yoke, up-do, colours, flowers, item, pose).
 9504 ch; keep PASS; check_store M06/M07/S06 (the same t1 waivers).
+
+## PHI SIMPLIFIED (owner L1861 via #25; replaces PHICOPY t1)
+dev/art/seasons4/han_phi_simplified_L1861.txt (make_han_phi_simplified_L1861.py) = s62_t5_HAN_LADDER4_L1773.txt (drew CqnIKlAEEy) byte-for-byte with ONLY these 7 phrases DELETED (nothing added or rewritten):
+1. ", clearly much richer and more splendid than the lower ranks"
+2. " and a little more embroidery on the sleeves than the Tần"
+3. " the robe body densely embroidered ALL OVER (not only the borders) with many LARGE spring flowers … (large magnolia medallions, peach blossoms and cloud-and-swallow scrolls in gold);"
+4. " SHOULDER FRINGE: a flat pearl-and-jade bead yoke over both shoulders with a longer, fuller pearl fringe of bigger pearls, lying outside the collar, never touching or hiding the collar;"
+5. " a LARGER gold headdress with dangling gold tassels and jade pins;"
+6. " and several gold hairpins (trâm) with dangles, rich like her rank"
+7. ", BIG, a full bloom clearly bigger than at the Tần rank"
+Kept: fabric, colours, collar + 3 bands, wrap, deep border, sash, up-do + one flower, pose/letter, caption. 8830 ch; keep PASS; check_store M06/M07 (= Phi's own waivers).
