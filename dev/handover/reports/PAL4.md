@@ -70,3 +70,8 @@ L1583: same-group same-season main pairs ΔE<8 = 656; A31 people (4 mains not al
 - Xuân Lạnh lùng: 7/15 "cam đào xuân" (soft peach) — their L1583 tone is light-muted; flag if she wants fewer.
 - A few warm mains at low chroma (e.g. s33 Hạ cam đào dịu #C99670) read a little tan — L1583 tone kept exactly; can be lifted if she says so.
 - Red across the game: Xuân đỏ son 14 + Hạ san hô 19 + Thu đỏ lá phong/rượu 26 + Đông đỏ mai 12 (L1583 Đông had 1).
+
+# JOB 2 — owner L1721: RECOMMENDATIONS ONLY (season feeling → colours) · 0 cr
+- Plan changed by Foreman C (owner L1721): palettes_season_L1709.json = **DRAFT only**, not to be used until the owner picks.
+- 4 sheets (VN, phone-readable, looked): dev/handover/review-sheets/pal_L1721/khuyennghi_{xuan,ha,thu,dong}.png — feeling · NÊN DÙNG swatches (L1583 softness) · current L1583 mains grouped ✓ hợp / ✗ chưa hợp with counts + example ids · đề xuất đổi. Script dev/art/palettes3/reco_L1721.py.
+- Key points: Xuân (vui tươi, đoàn viên) — 11 heavy hồng mẫu đơn + 8 dark greens don't feel joyful; add Tết red, pale mai yellow, tangerine. Hạ (tỏa nắng + mát) — L1583 is 100 % warm (cam 67, vàng 23, mát 0) → move ~1/3 to cool: lotus green, mint, lotus pink, a few water-aqua. Thu (ấm nhưng đượm buồn) — olive 51/90, 18 near-identical dark wines; add persimmon/amber (warm) + ash-rose and muted teal (wistful). Đông (lạnh lẽo, cô đơn) — 21 warm/pink purples and 10 bright jades feel sweet/springy → cold violet, indigo, ice blue, pine; few plum-red accents. Many ✗ in Đông are drawn roots → keep unless she releases them.
