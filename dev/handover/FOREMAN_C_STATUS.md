@@ -1440,3 +1440,4 @@ ROOT ~13:10Z: BUILDFIX1 at roll line: builder 8960/8960 FAIL → 2798 (only LEN>
   **FROM MAIN (21/11 11:20Z):** main is now MAIN CHÍNH 93 session_01Rc5AsKcbi9rTmDK4pY2SeT — send every report/SSK/LAND READY to it.
 ROOT-B1 HANDOVER ~13:12Z: depth 0, ctx 33 % (START 8 %) = roll line. Takeover = dev/handover/TAKEOVER_FOREMAN_C_ROOTB1.md. No schedules owned. Next Lượt 2064.
 ROOT ~13:14Z: OWNER L2064: Phi t5 also looks bell-shaped — fixed yet? → THUROOT2 (L2050 Phi file: add slim/hugging, single tier flat, not flared) before its s62 t5 draw. Next Lượt 2065.
+ROOT ~13:16Z: OWNER L2065: QP crop-ref 0eUzX6bTfW embroidery too sparse; words-only fHztbiqCDY prettier → VE12: crop ref for tier shape only + rich embroidery words, 1@135. Successor ROOT-B2 session_01D3E3NbYsQwytXuwoYF3EXh opened (child of B1). Next Lượt 2066.

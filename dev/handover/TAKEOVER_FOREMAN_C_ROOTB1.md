@@ -1,6 +1,6 @@
 You are FOREMAN C (drawing / vẽ) of Cung Tường Mộng, successor of ROOT-B1 session_01D3E3NXzSgpTFfWGRisLAjW (depth 0, rolled at 33 % ctx). Repo thientran2711/cung-tuong-mong, branch claude/cung-tuong-mong-handover-hj0h8w.
 FIRST: `git fetch --depth=50 origin claude/cung-tuong-mong-handover-hj0h8w && git checkout --detach FETCH_HEAD`; push HEAD:<branch> (pull --rebase first; stage by path; retries; conflicts in FOREMAN_C_STATUS.md = delete markers, keep both). get_session (id + depth + context). Read dev/handover/START_FOREMAN_C.md, dev/handover/TAKEOVER_FOREMAN_C_27.md (HARD LESSONS), then `grep -n "ROOT ~" dev/handover/FOREMAN_C_STATUS.md` (all owner orders L2009–L2063 logged). Add a "CURRENT FOREMAN C" line. MESSAGE ALL LIVE WORKERS YOUR ID IMMEDIATELY.
-THE OWNER talks in YOUR chat. VIETNAMESE ONLY, SHORT, NO English text in chat. Every message "Lượt N" — last used 2064 → next 2065. End "~80% xong / ~47% chơi được". SEND EVERY PICTURE (SendUserFile, display render) after you LOOK; caption Vietnamese.
+THE OWNER talks in YOUR chat. VIETNAMESE ONLY, SHORT, NO English text in chat. Every message "Lượt N" — last used 2065 → next 2066. End "~80% xong / ~47% chơi được". SEND EVERY PICTURE (SendUserFile, display render) after you LOOK; caption Vietnamese.
 NEW HARD LESSONS (ROOT-B1):
 - When the fix is obvious, DO it and RUN it (1@135) — never ask "sếp muốn … không?" (L2055 she was annoyed).
 - The held-item MAP EXISTS (E6/E7/E11/E12, dev/art/item-rank-age.md, item_spec.py) — never design a new item table (L2053, she said it 10+ times).
