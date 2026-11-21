@@ -916,12 +916,12 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-ef-unit r3 | PASS | review/kit-ef-unit-rv3 fd8280fa3fd7eddef4245084fb86a557d3dd3326 | cache only; tests + quickcheck + coop-e2e 124/124 |
 | FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | ROLLED → E #30 | 21/11 17:52Z |
 | REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | PASS 8e452f06 → LAND READY (MAIN 99) | 21/11 17:56Z |
-| REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
+| REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | PASS 8b3aee53 (base e804edfc) → reland E48r; ARCHIVED | 21/11 17:56Z |
 | GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
 | GAP v4 recount (read-only) | GAP_LIST_v4.md 01df2e49 | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | DONE | 21/11 18:04Z |
 | REVIEW ksz-lost-tap (sonnet SMALL reviewer-lander) of 3bcc7e13 | review/ksz-lost-tap-rv | B | session_01N1tNP2Zz7SKdJfLpjrSzuw | PASS 9343d8c456ddd6ff70ce2ec14f15510dbdd8a697 | 21/11 18:10Z |
 | REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | RUNNING (prep → gates at E46 SSK) | 21/11 17:56Z |
-| REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
+| REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | PASS 8b3aee53 (base e804edfc) → reland E48r; ARCHIVED | 21/11 17:56Z |
 | GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
 | GAP v4 recount (read-only) | GAP_LIST_v4.md 01df2e49 | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | DONE | 21/11 18:04Z |
 | REVIEW ksz-lost-tap (sonnet SMALL reviewer-lander) of 3bcc7e13 | review/ksz-lost-tap-rv | B | session_01N1tNP2Zz7SKdJfLpjrSzuw | PASS 9343d8c456ddd6ff70ce2ec14f15510dbdd8a697 | 21/11 18:10Z |
@@ -947,3 +947,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | RUNNING | 21/11 20:50Z |
 | rv mg-craft-r4 (OPUS BIG reviewer-lander, MAIN 97 ORDER 17:02Z) | PASS | review/mg-craft-r4 c674cd021716bf5bf39a8239a8ad05076d6a544f | jtd.js both sides; quickcheck + coop-e2e 124/124 + coop-craft-hand both seats | session_01N1tNP3ZWMeRDarhzz276Yb | 21/11 |
 | rv-kit-pframe-overlay r3 | PASS | review/kit-pframe-overlay-rv4 95fd1253f13a033fbb343010367cdf8ce054fb9c | band within 3 units of independent measure; gap 10-12 px all cards; no halo; quickcheck + coop-e2e 124/124 |
+| REVIEW E48r coop-famops RELAND on LIVE 04afaeb7 + coop-famops-c2 BIG review (opus; briefs/E48r-review-coop-famops-reland-c2.md) | review/coop-famops-r2, review/coop-famops-c2-r | FOREMAN E #30 | session_01DgYSWpBzP3A6Bn8pRU8jcw | RUNNING | 21/11 21:17Z |
