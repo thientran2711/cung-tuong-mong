@@ -28,8 +28,8 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
    const ok0=ACT.tat.ok(S,v);const G=dfActs(pi)||[];const hasT=G.some(x=>x.acts.some(a=>a.id==="atat"));
    let t1=null,t2=null;if(ok0&&hasT){const f0=ACT.tat.f,seen=[];const r0=window.runAct;window.runAct=function(a,t,k){if(k==="tat"){seen.push(SLAP.next);return""}return r0.apply(this,arguments)};
     const trace=[];const d0=window.doAct;window.doAct=function(i,k){trace.push("doAct "+k+" can="+can(typeof harmK==="function"?harmK(rivals[i],k):1)+" Q="+Q.length);const r=d0.apply(this,arguments);trace.push("after Q="+Q.length+(Q[0]?" "+Q[0].t:""));return r};out.trace=trace;
-    try{const tryRun=rr=>{for(let k=0;k<6&&seen.length<(rr.raw?1:2);k++){used=0;S.visit.tk={};Q.length=0;v.slap=null;S.dead=false;dfRun(pi,"atat",rr)}};tryRun({raw:10});tryRun({skipped:true})}finally{window.runAct=r0;window.doAct=d0}t1=seen[0];t2=seen[1]}
-   out.B={ok0,hasT,t1,t2,want:[3,BAL.slap.def],together:together(S,v)}}
+    try{const tryRun=rr=>{for(let k=0;k<6&&seen.length<(rr.raw?1:2);k++){used=0;S.visit.tk={};Q.length=0;v.slap=null;S.dead=false;S.visit.people[pi]=fakeP;const rv=dfRun(pi,"atat",rr);(out.Btr=out.Btr||[]).push([rr.raw||"skip",rv,DF.why,Q.length,can(1),ACT.tat.ok(S,v),typeof k61Named==="function"&&k61Named(v),SLAPG.busy])}};tryRun({raw:10});tryRun({skipped:true})}finally{window.runAct=r0;window.doAct=d0}t1=seen[0];t2=seen[1]}
+   out.B={tr:out.Btr,ok0,hasT,t1,t2,want:[3,BAL.slap.def],together:together(S,v)}}
   return out});
  for(const [k,x] of Object.entries(r.places)){if(x.err){ok(false,`place ${k} opens`,x.err);continue}
   for(const row of x.rows){ok(row.n===row.tk+row.ex&&row.bad.length===0,`${k} ${row.kind}: focus acts = pop-up buttons ${row.tk} + in-person ${row.ex}; ${row.groups.join(" · ")}`,row.bad.length?row.bad:undefined)}}
