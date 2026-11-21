@@ -50,3 +50,10 @@ Stale, do NOT land: review/coop-staff-split-r1-land 358b2e85 (inside name-clash;
 2. Order: wear-slots → mg-craft (MAIN deadline) → kc → thancan → ge-npc → mg11 → map-places → perf-ci → palace-life. If LIVE moved, merge it first for BIG branches (assemble.py conflicts = LIVE list + branch modules after the same predecessor; generated index.html/sw.js/assets.json = LIVE's then `bash dev/site/build_site.sh`).
 3. Each green branch: one «LAND READY <time> (B LANDER) → MAIN: <branch>-land <sha> (contains LIVE <sha>; gates …; coop-e2e PASS; co-op both seats …)» at the TOP of FOREMAN_B_STATUS (fetch --depth=30 → reset --hard FETCH_HEAD → add line → commit → push).
 4. name-clash / host-lag: when fix worker 4qZ3DWxj reports READY, re-merge host-lag (fe7297f6 line, conflicts: jkc2 = name-clash side; coop-e2e = keep both check sets, see commit a8a9e0a2..28dd7b11) on the fixed name-clash and gate both.
+
+## LANDER #2a (session_01N1tNP3TNXAxaCbRNNS5Qcv) — 21/11, START_CTX ~5 %, done at ~10 %
+- wear-slots-r1-land 23f1e651 (re-merged LIVE b1033eb0): ALL GREEN → LAND READY 00:51Z.
+- mg-craft-r2-land 3d1183ed: gating STOPPED on Foreman B order 01:18Z (owner rule 21/11 ~01:05Z needs a code change by a worker); nothing pushed by #2a.
+- mg11-thutay-r1-land 184db4e0 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 01:56Z.
+- kc-fail-effects-r1-land 9729cda2 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 02:22Z.
+- All conflicts in these merges = generated index.html/sw.js only (LIVE's, then build_site.sh).
