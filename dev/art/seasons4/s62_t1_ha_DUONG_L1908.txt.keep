@@ -1,3 +1,5 @@
 base: dev/art/seasons4/s62_t4_ha_DUONG_L1890.txt
 allow: clearly much richer and more splendid than the lower ranks   # owner L1908: t1 = old Tần design copied exactly (rank label only); t2/t3 built richer above it (angle/grace/item from thu t2/t3, A47)
 allow: "Mùa Hạ · Thiết kế thời Đường · Tần · L1890"   # owner L1908: t1 = old Tần design copied exactly (rank label only); t2/t3 built richer above it (angle/grace/item from thu t2/t3, A47)
+allow: gold-thread embroidered borders of SMALL plum blossoms at sleeves and hem   # G65 owner L1952: base t4 L1890 small motifs on borders (base changed, derived file untouched)
+allow: a few LARGE plum blossoms repeated on the skirt panels and only SMALL scattered blossoms on the robe   # G65 owner L1952: base t4 L1890 small motifs on borders (base changed, derived file untouched)

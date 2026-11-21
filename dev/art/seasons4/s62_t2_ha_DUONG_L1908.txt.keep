@@ -22,3 +22,5 @@ allow: her face still toward the viewer   # owner L1908: t1 = old Tần design c
 allow: walking with a small white-jade lotus lamp held upright in one hand   # owner L1908: t1 = old Tần design copied exactly (rank label only); t2/t3 built richer above it (angle/grace/item from thu t2/t3, A47)
 allow: the robe hem stirring slightly   # owner L1908: t1 = old Tần design copied exactly (rank label only); t2/t3 built richer above it (angle/grace/item from thu t2/t3, A47)
 allow: "Mùa Hạ · Thiết kế thời Đường · Tần · L1890"   # owner L1908: t1 = old Tần design copied exactly (rank label only); t2/t3 built richer above it (angle/grace/item from thu t2/t3, A47)
+allow: gold-thread embroidered borders of SMALL plum blossoms at sleeves and hem   # G65 owner L1952: base t4 L1890 small motifs on borders (base changed, derived file untouched)
+allow: a few LARGE plum blossoms repeated on the skirt panels and only SMALL scattered blossoms on the robe   # G65 owner L1952: base t4 L1890 small motifs on borders (base changed, derived file untouched)
