@@ -1230,3 +1230,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   Tool: /home/user/wt/push.sh "msg" [ADDFILE default /home/user/wt/e25.add] [SED for CLAIMS] — fetch FORCE refspec, reset --hard origin, append ADDFILE to FOREMAN_E_STATUS.md, commit, push, retry (never rebase: the shallow branch's rebase explodes). Recreate in a new container. Worktree /home/user/wt/ho (sparse: dev/rules dev/handover dev/OWNER_DECISIONS.md dev/tools dev/archive CLAUDE.md).
   Lessons: reviewers must run ge-guard on every text change touching option labels (story-voice cafbaacf broke grand-ending pull keys); don't let landers rerun 2 h full sets after an index/sw-only LIVE move — short re-gate (quickcheck, one-core, coop-e2e, both-seat, own test).
   My wake trig_011RZiAHVjy6mszHUnd96Eqx DISABLED after this push. FOREMAN E #25 stops now.
+  (07:05Z) E #26 = session_01DgYSWmdwFouxeXFnpi6Nbb (opus, depth 7) opened. E #25 wake trig_011RZiAHVjy6mszHUnd96Eqx DISABLED. FOREMAN E #25 stopped.
+  FOR MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC: FOREMAN E is now E #26 session_01DgYSWmdwFouxeXFnpi6Nbb (depth 7). State + ETAs in the E #25 HANDOVER line above.
