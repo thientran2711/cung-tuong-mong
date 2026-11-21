@@ -55,3 +55,38 @@ START_CTX ~3 % (1M window). Base: worker 3af67a8e + newest origin/main 315950c2 
 - Law 6c outside this group: story roads name objects with no item behind them (jrd_cn:101 "vòng bạc", jrd_cn:574+ Tố Nga's trâm vàng, jrd_cnv:243 hộp trâm) — past-event narrative, not her chest.
 - Ward bond growth k.fM reuses BAL.kid.visit; a own key (ward.grow) would read clearer.
 - The two new act cards show the generic palace-room act picture (kit picker); a child/visit picture would fit better (Foreman C).
+
+## CO-OP HEIR FIX r2 (opus worker session_01N1tNP2HMzBBThVa1dWSodb, Foreman B ROOT-4; brief briefs/b-palace-heir-coop.md) — 0ef1b097
+PRIORITY #1 CHECK ('heirDanh hrCard setHeir hrMine'): OD 0 | ledger 0 | claims = this worker only | main: jkidlife setHeir wrap (KP03), jcoopworld hrCard | review/* none other.
+Branch review/palace-life-gaps-r2-land (from r1-land bac1fdf5 + LIVE bd03747e merged; assemble = LIVE list + jkidlife.js after jagwhy1.js; index.html/sw.js rebuilt).
+START_CTX ~3 % (1M window); depth 5.
+
+### Fix 1 — the put-aside mother (P2, the lander's red case)
+- Cause (as the lander found): jcoopworld hrCard, branch x.v (another mother's son) only pushed the modal; the jkidlife setHeir wrap never ran in her context, so her −heirDanh was skipped.
+- Fix: hrCard(h, was). Her old Thái tử is read on HER side = solo's old S.heir: `was` = the host's previous S.hr, sent with the card (heirMonth wrap → D.kind "hr" {h,was}; merged-week road: CW.hrPrev); without it (test hook) her own living son still flagged heir. A dead son counts for nothing (solo: heirMonth clears a dead heir, kidDie clears the flag).
+  - another mother's son named + her living son was Thái tử → her son's flag cleared, ap(S,{danh:-BAL.kid.heirDanh}) ONCE in her context (the patch carries it to her phone; host copy = her phone); card line "X, con của ngươi, mất ngôi Đông cung." + fmt of the real change (ONE CORE, no typed number).
+  - her own son named → S.heir set to her old Thái tử before setHeir, so the wrap gives +heirDanh only when no son of hers was Thái tử (same as solo; also stops a repeated card giving it twice).
+### Fix 2 — LAW 11 whole family (scan dev/test/scan-heir-family.py: 28 sites, 0 without a co-op road)
+| site | road in co-op | before | after |
+|---|---|---|---|
+| j3 heirMonth lập Thái tử (host, her entry in harem) | S.hr → hrCard on her side | her son named: +heirDanh ✓; her son put aside: 0 ✗ | +heirDanh ✓ / −heirDanh once ✓ (P1, P2) |
+| j51 kvDebate phế/lập (inside heirMonth) | same S.hr → hrCard | put aside: 0 ✗ | −heirDanh once ✓ |
+| host's / NPC's son put aside by HER son | host-context setHeir wrap (om = host S / NPC, shared world) | ✓ | ✓ (unchanged) |
+| j97 mật chiếu, jend14 ch14 win, j4 coup (HER own act, her context on the host) | her context S.heir was stale/stripped (seatOf drops "heir"): "no Thái tử yet" could read true while the world had one; her new heir never reached S.hr ✗ | withSeat heir mirror (CW.dInit wraps T.withSeat): S.heir = world S.hr while she acts; a Thái tử she makes → S.hr + host hrApply; the put-aside mother (NPC / host stand-in) loses via the wrap as solo ✓ (P4) |
+| j1 kidDie of the Thái tử | res.fam kdie → kidDie on her side | no Danh (as solo) ✓ | ✓; hrMine ignores a dead son |
+| j8 kframe (trù ẻo) heir deposed | res.fam kd heir0 clears her flag | no heirDanh in solo ✓ | ✓ |
+| ktake (her heir son taken to an NPC house) | S.heir.v follows | no Danh in solo ✓ | ✓ |
+| j99succ succession pick / succDebug | host world only / debug jump | no Danh ✓ | ✓ |
+Rank of mother / adopt: no heirDanh rule exists (BAL.kid has only heirDanh/heirGhen for the heir); ward Danh (kidWardHome) is her own household (runs on her side) — no cross-seat road needed.
+
+### Tests (final sha 0ef1b097)
+- quickcheck PASS (core gates PASS, old save from LIVE loads + plays a buổi, perf new/live render 227/257 ms, buổi 1096/1450 ms); undef-scan PASS (257 names); role-parity ALL PASS (no OOM, --max-old-space-size=4096).
+- coop-e2e 92/92 (live Worker).
+- coop-palace-life (now 18 checks: P0–P4 + P3): host-first 18/18; swap (`"" 9 1`) 17/18 = P3 flake only (see OPEN). P1, P2, P4 green on both seat orders in every run (6 runs on the fix).
+- palace-life.js 23/23 Fold 755x1000@2 + iPad 1180x820@2; palace-life-r1.js 5/5.
+- scan-heir-family.py: 28 sites, 0 without a co-op road.
+- Old saves: no new saved field (hrCard reads existing S.hr / kid.heir); quickcheck old-save load ok.
+- Commits: 7060b419 (hrCard loss), 76e0168d (withSeat heir mirror + scan), 6089fd84 (test P4), 80516d4d + 0ef1b097 (merges LIVE 9c1dd605, bd03747e).
+
+### OPEN (pre-existing, NOT from this fix) — P3 flake = thin-E month delta race
+coop-palace-life P3 ("the host's copy of her son reads the same Mẫu tử") fails ~1 in 3 runs, ALSO on the untouched base bac1fdf5 (base 5 runs: 2× P3 FAIL host hM 54 vs her 57). Evidence (instrumented run, dev script not committed): her phone runs her month (kidLifeMonth 60→57); her week-end "end" blob (toCanon) already gives the host's copy 57; then her first erd after the week (E.bs nulled on "week" → base = a view taken BEFORE the host's copy took her end blob) carries ["+",kids.Thử Lân.hM,-3] again → host copy 54. Same race doubles the other month "+" deltas (Danh danhMonthTick 54 vs 58 seen, kid hp/tv/tw/td). Swap run once showed the other face (her month −3 lost, hM 60). Fix belongs to the thin-E baseline (jcoopthine E.base / "week" handler: base = the blob she sent at week end, not the stale view) → needs its own worker + coop-thin-e* suites; I did not touch the engine.
