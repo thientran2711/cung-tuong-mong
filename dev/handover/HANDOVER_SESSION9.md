@@ -2209,3 +2209,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:50Z) rv MSxp PASS kit-mark-fix r6 → review/kit-mark-fix-rv7 8c480114 LAND READY → relayed to LRRY (after ge-phutang-land3). MSxp next: kitRelRows one-word, KP09 body-fit.
 - (18:52Z) KIT KEEPER #6 confirmed; KP09 body-fit SSK review/kit-body-fit f6b01506 → rv MSxp. KIT KEEPER #5 Jexz ARCHIVED. C art order (fx-hair-*/fx-cloth-* + body-fit.json) goes with J-art batch to C.
 - (18:50Z) LAND CHAIN 2 (reports to MAIN 99): LANDED ge-phutang-land3 b7041e67. Queued kit-mark-fix-rv7 8c480114.
+- (18:58Z) OWNER UI (Lượt 6 chat, OD 21/11 ~18:55Z): pframe label centred + info rows over pendant/tassel → KIT KEEPER #6 review/kit-pframe-overlay; frame re-cut with Magnific → ORDER C (fallback MAIN at 19:30Z); frame animation → PARKING_LOT #12.
