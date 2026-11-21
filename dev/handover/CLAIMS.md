@@ -613,3 +613,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | REVIEW empty-states (SMALL sonnet) of 4fe91dcc + merge LIVE | review/empty-states-rv; briefs/main85-rv-empty-states.md | MAIN CHÍNH 85 | session_01Rc5AsKYVABSkdoN1RAuKBR | RUNNING | 21/11 02:48Z |
 | maid-8tabs (OPUS; OWNER mark #32 21/11 ~03:15Z: maid road = same 8 bottom tabs, no locks, mapping table) | review/maid-8tabs; briefs/main85-maid-8tabs.md | MAIN CHÍNH 85 | session_01Rc5AsN3dAttmwAANVGfgtX | RUNNING | 21/11 02:49Z |
 | menu-panel (sonnet; OWNER mark #37 21/11 ~03:28Z: one kit menu-panel size, no narrow tall frame) | review/menu-panel; briefs/main85-menu-panel.md | MAIN CHÍNH 85 | session_01Rc5AsMQiepfa9AQYno5iem | RUNNING | 21/11 02:56Z |
+| mood-seal (sonnet; OWNER mark #39 21/11 ~03:35Z: mood dialogs show the emotion seal in the corner) | review/mood-seal; briefs/main85-mood-seal.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 03:01Z |
