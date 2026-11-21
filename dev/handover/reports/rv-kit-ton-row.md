@@ -10,3 +10,7 @@ Code read (jk2b kitHideOut): ownP = prices the option itself names (ton field + 
 ## Flake in kit-ton-row.js (keeper: fix the test)
 Runs on the same build alternate PASS 12 / FAIL 2 (fold «Sủng» cases): the test looks for «Sủng -3» but the card prints the Sủng price scaled per life (my probe: fx:{sung:-3} shows «Sủng -4» on one build and «Sủng -3» on the other, same data). Use a number-agnostic regex for Sủng (or pin the multiplier) — not a product bug.
 Limits (as the keeper): D's real PEND.roadpick not run (branch not merged here); iPad: DOM-based logic, my scan was Fold only.
+
+## kit-ton-row-2 RE-GATE — PASS edc41ba12bc8adf8f9d05b0e5a39a26501e3f373 (review/kit-ton-row-2-rv = keeper f8d36f6b + LIVE 64d2e094, index/sw rebuilt, FF of LIVE)
+Decision applied (MAIN): the Tốn keep-rule of a hidden-outcome card covers ECONOMIC stats only — ownP filter /khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/; relation prices («thiện cảm -3», «quý ngươi -3», Ân tình) stay words. kit-ton-row.js 14/14, three runs in a row stable (the Sủng -3/-4 flake is fixed by a number-agnostic regex). coop-e2e 68/68, QUICKCHECK PASS 227 s (core gates, old save ok; buổi 1730/1122 inside the limit).
+My seeded real-play scan again (3 seeds, Fold, every event modal's options → Tốn): 16 option titles, NO relation number in any Tốn row (the «Khéo từ chối» decline cards now read «kẻ hầu sinh oán» / «mất lòng người»); economic prices still show («Bạc -30», «Sức -25»). Nothing else changed.
