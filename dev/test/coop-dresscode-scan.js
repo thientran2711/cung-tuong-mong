@@ -91,7 +91,7 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
  window.__census=()=>{const M={};const seen=new Set();const P=[S].concat(world?rivals.filter(v=>v&&!v.coop):[]);const PS=new Set([S].concat(rivals));
   const walk=(o,pt,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>9)return;seen.add(o);if(typeof o.sc==='string'&&o.k)(M[o.sc]=M[o.sc]||[]).push(pt);
    for(const k in o){if(k==='dcLent'||k==='__inv0'||k==='coopAsk')continue;const v=o[k];if(v&&typeof v==='object'&&!PS.has(v))walk(v,pt+'.'+k,d+1)}};
-  for(const q of P)walk(q,q===S?'me':'v'+q.id,0);for(const k in M)M[k]=M[k].filter(x=>!/\.(lost|il\.log)/.test(x));return M};
+  for(const q of P)walk(q,q===S?'me':'v'+q.id,0);for(const k in M){const ph=M[k].filter(x=>!/\.(lost|il\.log)/.test(x));/* only in a lost case (jlost «thất lạc»: traceable, its case holds it) = one place */M[k]=ph.length?ph:(M[k].some(x=>/\.lost\./.test(x))?['lostcase']:[])}return M};
  const TR=Object.keys(BAL.dc.piece).filter(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt);
  window.__stock=(r,nv)=>{nv=nv||2;const fams=[...new Set(TR.map(k=>BAL.dc.piece[k][0]))];S.inv=S.inv||[];let n=0;for(const f of fams)if((r*7+n++)%10<3){const k=TR.find(k=>BAL.dc.piece[k][0]===f);if(!S.inv.some(e=>e&&e.k===k))S.inv.push({k,from:'emp'})}
   if(world)for(const v of rivals)if(v&&!v.coop&&v.alive){v.inv=v.inv||[];if(v.inv.filter(e=>e&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram').length<nv)for(let i=0;i<nv;i++)v.inv.push({k:TR[(v.id*13+i*7+r)%TR.length],from:'emp'})}};
