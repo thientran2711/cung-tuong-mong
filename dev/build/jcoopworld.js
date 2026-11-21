@@ -841,9 +841,14 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 /* ONE presence refresh for both seats on the host (thin level 7: both persons live here): whenever either person's place / visit / buổi
    changes (any road: walk, map jump, event sending her home, buổi step, visit), each seat's friend place is re-read and the people at
    each seat's place rebuilt; her copy goes to her phone in the next delta. Gated by a key, so a render without a move costs nothing. */
-function presAll(force){try{if(!CW.on||CW.ctx||!host()||!S||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return;const o=CW.seat==="a"?"b":"a";const B=CW.thin.seatOf(o);const H=B&&B.S;if(!H)return;
+function presAll(force){try{if(!CW.on||CW.ctx||!S)return;
  /* the key holds WHO is in each list (a later goTo wrapper, e.g. jplx, rebuilds the list to the same length without the friend) */
  const vk=x=>x&&x.visit?x.visit.k+"/"+(x.visit.people||[]).map(p=>p?(p.kind||"")+":"+(p.ref&&p.ref.id!=null?p.ref.id:p.name||""):"").join(","):"-";
+ /* rv coop-arrive-see r1: below level 7 (the LIVE default, level 0) each phone builds its OWN list from its own S.where (the friend's
+    place from her pos message): the same one refresh, on this seat only, on BOTH seats; her phone at level 7+ shows the host's (lens7) */
+ if(!(host()&&CW.thin&&CW.thin.on&&CW.thin.on(7))){if(lens7())return;const f=friendEntry();
+  const K1=()=>["L",wk(),S.buoi||0,S.place,vk(S),f&&S.where?S.where[f.id]:"",!!S.dead].join("|");if(!force&&K1()===CW.presK)return;refreshHere();CW.presK=K1();return}
+ const o=CW.seat==="a"?"b":"a";const B=CW.thin.seatOf(o);const H=B&&B.S;if(!H)return;
  const K=()=>[wk(),S.buoi||0,S.place,vk(S),H.place,H.buoi||0,vk(H),!!S.dead,!!H.dead].join("|");if(!force&&K()===CW.presK)return;
  keepFriendPos();refreshHere();CW.thin.withSeat(o,()=>{keepFriendPos();refreshHere()});CW.presK=K()}catch(e){console.error(e)}}
 CW.presAll=presAll;

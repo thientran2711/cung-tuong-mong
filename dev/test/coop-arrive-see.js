@@ -49,10 +49,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.buoi=0;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
- ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
+ const L0=LVL===0;/* level 0 = the LIVE default (no ctm-thin flag): each phone runs its own world, no host copy of her */
+ if(L0)ok(await until(G,()=>COOPW.thin.lvl===0,null,20000),'L0 room level 0 (live default)');else ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
  for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
  /* settle: the host's view of this moment has arrived */
- const sync=async(ms=15000)=>{const t0=Date.now();while(Date.now()-t0<ms){await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(500);
+ const sync=async(ms=15000)=>{if(L0){await sleep(1200);return true}const t0=Date.now();while(Date.now()-t0<ms){await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(500);
    const [hv,gv]=[await H.p.evaluate(()=>COOPW.thin.hv),await G.p.evaluate(()=>COOPW.thin.view&&COOPW.thin.view.v)];if(hv===gv)return true}return false};
  const ON=LVL>=9;/* level 9 = F4 on; below = the old road (her phone runs it: the BEFORE column of latency / tripwire) */
  const reset=async()=>{for(let i=0;i<3;i++){await clear(H);await clear(G)}await G.p.evaluate(()=>{Q.length=0;S.mg=null;used=0;try{closeModal()}catch(e){}render()});await H.p.evaluate(()=>{Q.length=0;S.mg=null;try{closeModal()}catch(e){}})};
@@ -66,23 +67,23 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    for(const s of [S,B&&B.S])try{for(const sl of ['tram','y'])if(s&&s.wd&&hit(s.wd[sl]))L.push('wd:'+sl);for(const x of (s&&s.wdPawn)||[])if(x&&hit(x.e))L.push('pawn')}catch(e){}return L}};
  await H.p.evaluate(HELP);await G.p.evaluate(HELP);
  /* stage her person in the HOST's store (her context) → the patch reaches her phone (never written on her phone) */
- const stage=async src=>{const r=await H.p.evaluate(src=>{try{return COOPW.thin.withSeat('b',()=>{const o=(0,eval)('(function(){'+src+'})')();/* every staged piece gets its ledger id now (the game gives it lazily): the same piece is traced by it after giveTo hands over a new entry */for(const e of S.inv||[])if(e&&e.tg3&&e.iu==null&&typeof ilUid==='function')ilUid(e);return o})}catch(e){return 'EXC '+e.message}},src);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(300);return r};
+ const stage=async src=>{if(L0)return G.p.evaluate(src=>{const o=(0,eval)('(function(){'+src+'})')();try{render()}catch(e){}return o},src);const r=await H.p.evaluate(src=>{try{return COOPW.thin.withSeat('b',()=>{const o=(0,eval)('(function(){'+src+'})')();/* every staged piece gets its ledger id now (the game gives it lazily): the same piece is traced by it after giveTo hands over a new entry */for(const e of S.inv||[])if(e&&e.tg3&&e.iu==null&&typeof ilUid==='function')ilUid(e);return o})}catch(e){return 'EXC '+e.message}},src);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(300);return r};
  /* her person on the HOST (seat b store) and the host's own: place, visit place, people names at the visit, khắc clock */
  const PL=()=>({place:S.place,vk:S.visit&&S.visit.k||null,ppl:((S.visit&&S.visit.people)||[]).map(p=>p.name).sort(),used:typeof used==='number'?used:null,buoi:S.buoi,turn:S.turn});
  const hostOwn=()=>H.p.evaluate(`(${PL})()`);
- const herOnHost=()=>H.p.evaluate(`COOPW.thin.withSeat('b',${PL})`);
+ const herOnHost=()=>L0?herPhone():H.p.evaluate(`COOPW.thin.withSeat('b',${PL})`);
  const herPhone=()=>G.p.evaluate(`(${PL})()`);
  /* PLACES=tgk: the same check on an old place (control) */
  const keeper={nth:'Quản sự Ngự thiện phòng',pd:'Sư cô Phật đường',tgk:'Quản sự Tân Giả khố'};
  const home=async()=>{await stage("S.place='home';S.visit=null;S.buoi=0;S.rank=3;S.confined=0;S.out=0;S.ent=null;return 1");await H.p.evaluate(()=>{S.place='home';S.visit=null;S.buoi=0;S.ent=null;used=0;try{render()}catch(e){}});await stage('used=0;return 1');await sync()};
  const walkHost=async k=>{await reset();return H.p.evaluate(k=>{S.ent={d:typeof j95sDay==='function'?j95sDay():0,ids:[],at:k};goTo(k);Q.length=0;return S.place},k)};
- const walkHer=async k=>{await reset();await G.p.evaluate(k=>{S.ent={d:typeof j95sDay==='function'?j95sDay():0,ids:[],at:k};goTo(k)},k);const ok1=await until(G,k=>S.place===k&&!COOPW.thin.F.pend,k,20000);await sync();return ok1};
+ const walkHer=async k=>{await reset();await G.p.evaluate(k=>{S.ent={d:typeof j95sDay==='function'?j95sDay():0,ids:[],at:k};goTo(k)},k);const ok1=await until(G,k=>S.place===k&&!(COOPW.thin.F&&COOPW.thin.F.pend),k,20000);await sync();return ok1};
  const counts=k=>Promise.all([H.p.evaluate(k=>({[k]:countAt(k)}),k),G.p.evaluate(k=>({[k]:countAt(k)}),k)]);
  const order=SWAP?['her','host']:['host','her'];
  const RUNS=+(process.env.RUNS||5);
  const fname=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v&&v.coop);return f?f.name:null});
  const sees=async(o,ctxHer)=>{const src=`(()=>{const f=rivals.find(v=>v&&v.coop);const P=(S.visit&&S.visit.people)||[];return {place:S.place,vk:S.visit&&S.visit.k||null,f:f?f.name:null,fw:f&&S.where?S.where[f.id]:null,saw:!!f&&P.some(p=>p&&(p.ref&&p.ref.coop||p.name===f.name)),ppl:P.map(p=>p&&p.name)}})()`;
-  return ctxHer?o.p.evaluate(`COOPW.thin.withSeat('b',()=>${src})`):o.p.evaluate(src)};
+  return ctxHer&&L0?sees(G):ctxHer?o.p.evaluate(`COOPW.thin.withSeat('b',()=>${src})`):o.p.evaluate(src)};
  const look=async()=>({host:await sees(H),herH:await sees(H,1),her:await sees(G)});
  const PLC=(process.env.PLACES||'tgk,nth').split(',');
  for(let r=1;r<=RUNS;r++)for(const first of ['host','her'])for(const k of PLC){
