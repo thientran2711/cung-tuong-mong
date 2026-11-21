@@ -47,3 +47,7 @@ BASE per file: M2191-01 t5 = M2189-05 · M2191-02 t6 = M2187-06 VERBATIM (locked
 - (C) M2191-01 Phi: 'of TWO thin soft layers of the SAME thin, light, flowing silk as her robe (the lower peeking out below the upper as a narrow wavy band) that DRAPES' → 'of ONE layer of the SAME thin, light, flowing silk as her robe that DRAPES' (Tần's words, owner L2176).
 - LOCKED (owner L2192): t1–t4 = M2187-01..04 verbatim, copied byte-identical to dev/handover/prompts_L2095/LOCKED_t1_M2187-01_s62_t1_thu.txt … LOCKED_t4_M2187-04_s62_t4_thu.txt. M2189-01..04 are VOID.
 ## STATUS · depth 4 · START_CTX ~3 % · now ~22 % — pushed; idle.
+
+## M2191 redo 2 (owner L2193: M2189 pictures had NO clasp → L2189 clasp edit void) — keep_check PASS ×4, pushed
+- t5 / t7 / t8: clasp + vân kiên-neck sentences restored VERBATIM from M2187-05/-07/-08 (checked identical by diff), incl. '; the vân kiên is ONE continuous piece around the base of the neck, never split into two separate shoulder pieces' and t8 'small and gold, CLEARLY drawn where the two front edges of the vân kiên meet under the chin'. t8 only: '…small and gold, set with small pearls, CLEARLY drawn…'. t6 (M2187-06 verbatim) already identical. A/B/C fixes kept. Lesson: the plain clasp without the 'ONE continuous piece' sentence drew NO clasp.
+## STATUS · depth 4 · START_CTX ~3 % · now ~25 % — pushed; idle.

@@ -16,7 +16,11 @@ FR8 = ", a pearl drop fringe along its scalloped edge, the LONGEST of all ranks 
 QPW = ("a slim royal-yellow silk sash wrapped all the way around the waist OVER the outer robe, sitting at the natural waist and staying there (only one belt), "
        "with ONE slim gold girdle line running along the sash (no wide plaque belt on top of it), flat, fitted to the waist, never bulky, nothing tight or binding at the chest, closed at its centre front")
 J = {}
-J[5] = [  # t5 Phi: waist / sash / robe / skirt = Tần M2189-04 structure; vân kiên length = Tần's; ONE tier like Tần (owner L2176)
+ONE = "; the vân kiên is ONE continuous piece around the base of the neck, never split into two separate shoulder pieces"
+# owner L2193: M2189 clasp edit failed (pictures had no clasp) -> M2187-05/07/08 clasp + neck sentences back VERBATIM; t8 + 'set with small pearls'
+J5C = ("joined at the throat by one small horizontal clasp (frog button), open at the front below it;", "joined at the throat by one small horizontal clasp (frog button), open at the front below it" + ONE + ";")
+J7C = ("joined at the throat by one small horizontal clasp (frog button), its front open so the square collar stays fully visible;", "joined at the throat by one small horizontal clasp (frog button), its front open so the square collar stays fully visible" + ONE + ";")
+J[5] = [J5C,  # t5 Phi: waist / sash / robe / skirt = Tần M2189-04 structure; vân kiên length = Tần's; ONE tier like Tần (owner L2176)
  ("a light olive soft vân kiên (cầu vai) of TWO thin soft layers of the SAME thin, light, flowing silk as her robe (the lower peeking out below the upper as a narrow wavy band) that DRAPES",
   "a light olive soft vân kiên (cầu vai) of ONE layer of the SAME thin, light, flowing silk as her robe that DRAPES"),
  ("a layered silk court robe of two or three visible layers, richly embroidered",
@@ -39,7 +43,7 @@ J[6] = [  # t6 QP: base M2187-06 VERBATIM (owner L2192 lock); a little more yell
  ("with tiny seed pearls among the embroidery.",
   "with tiny seed pearls among the embroidery, plus small pearls and tiny jade beads stitched along the neckline band and the borders (more pearls and jewels on the robe than the Phi, fewer than the Hoàng quý phi), light and flat, never heavy."),
 ]
-J[7] = [
+J[7] = [J7C,
  ("; " + PHX_OLD[7], "; " + PHX + FR7),
  ("a slim belt of small carved white-jade plaques in gold frames with seed pearls along both edges, over a wide royal-yellow silk sash wrapped OVER the outer robe, sitting at the natural waist and staying there, closed at the CENTRE front of the waist by a gold cloud plaque",
   QPW + " by a gold cloud plaque"),
@@ -50,7 +54,8 @@ J[7] = [
 ]
 J[8] = [
  ("joined at the throat by one small horizontal clasp (frog button), its front open",
-  "joined at the throat by one small horizontal clasp (frog button) of gold set with small pearls, its front open"),
+  "joined at the throat by one small horizontal clasp (frog button), small and gold, set with small pearls, CLEARLY drawn where the two front edges of the vân kiên meet under the chin, its front open"),
+ ("its front open so the square collar stays fully visible;", "its front open so the square collar stays fully visible" + ONE + ";"),
  ("; " + PHX_OLD[8], "; " + PHX + FR8),
  ("a slim belt of a few small carved white-jade phoenix-and-cloud plaques, each in a gold frame with pearl rims, over a narrow royal-yellow silk sash wrapped OVER the outer robe, sitting at the natural waist and staying there, closed at the CENTRE front of the waist by a small gold double-phoenix plaque set with white jade and pearls",
   QPW + " by a small gold double-phoenix plaque set with white jade and pearls"),
@@ -62,7 +67,7 @@ for i, n in enumerate((5, 6, 7, 8), 1):
     base = "M2187-06_s62_t6_thu.txt" if n == 6 else f"M2189-0{n}_s62_t{n}_thu.txt"; s = (P / base).read_text()
     for o, w in J[n]:
         assert s.count(o) == 1, (n, o[:70], s.count(o)); s = s.replace(o, w, 1)
-    assert "image 2" not in s and "image 3" not in s and (n == 6 or "continuous piece" not in s), n
+    assert "image 2" not in s and "image 3" not in s and s.count("ONE continuous piece") == 1, n
     code = f"M2191-0{i}"; out = f"{code}_s62_t{n}_thu.txt"
     s = s.replace(f'"M2189-0{n}"', f'"{code}"').replace('"M2187-06"', f'"{code}"'); assert s.rstrip().endswith(f'"{code}"'), n
     (D / out).write_text(s); (P / out).write_text(s)
