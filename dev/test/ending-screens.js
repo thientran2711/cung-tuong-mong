@@ -62,6 +62,7 @@ const CASES=[
       hudHidden:!hit||!!hit.closest('#modal'),title:(document.getElementById('mt')||{}).textContent||(M.querySelector('.kptitle')||{}).textContent||'',ov:document.documentElement.scrollWidth>innerWidth+1,vw:innerWidth,vh:innerHeight,
       btns:[...M.querySelectorAll('button')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,30))}});
    chk(`${N}: opened without error`,!R.err&&!R.hid,R.err);
+   chk(`${N}: the entrance ran once for this ending (KIT_END.log)`,await p.evaluate(t=>KIT_END.log.includes(t),C.type));
    chk(`${N}: full-screen ending screen kes-t-${C.type} (${C.tone})`,new RegExp(`\\bkes\\b.*\\bkes-${C.tone}\\b.*\\bkes-t-${C.type}\\b`).test(R.cls),R.cls);
    chk(`${N}: background covers the whole screen`,R.bg&&R.bg.l<=0&&R.bg.t<=0&&R.bg.r>=R.vw-1&&R.bg.b>=R.vh-1,R.bg);
    chk(`${N}: top bar hidden under the ending screen`,R.hudHidden);

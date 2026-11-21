@@ -89,7 +89,7 @@ if(typeof kszLivePick3_0==="function"&&typeof kszLiveLay3==="function"){const p0
 window.kitEndScreen={type:kitEndType,show:kesShow,mark:kesMark,life:kesLife};
 /* ---------- look (KIT §91) ---------- */
 const css=`
-.modal.kes{padding:0;background:#17110d;overflow:hidden;--kes-top:clamp(64px,11vh,118px);--kes-sx:clamp(22px,5.5vw,64px);--kes-bot:clamp(12px,2.6vh,26px)}
+.modal.kes{padding:0;background:#17110d;overflow:hidden;--kes-top:clamp(64px,calc(11*var(--kvh,1vh)),118px);--kes-bot:clamp(12px,calc(2.6*var(--kvh,1vh)),26px)}
 .modal.kes-mourn{--kes-ring:#f6f3ec;--kes-ring2:#8d8a86;--kes-grad:radial-gradient(ellipse at 50% 30%,#4a4850 0%,#26252b 60%,#141317 100%)}
 .modal.kes-fest{--kes-ring:#e5b53a;--kes-ring2:#9e1b1f;--kes-grad:radial-gradient(ellipse at 50% 28%,#8f2a1d 0%,#5a1410 55%,#2a0806 100%)}
 .modal.kes>.kes-bg{position:absolute;inset:0;z-index:0;background:var(--kes-grad);overflow:hidden;pointer-events:none}
@@ -99,12 +99,12 @@ const css=`
 .modal.kes-fest>.kes-bg.kes-bgfb>.kes-bgi{filter:blur(3px) brightness(.7) saturate(1.05)}
 .modal.kes>.kes-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(10,6,4,.5) 100%)}
 /* beats the kit size system's !important frame rules (html body #modal .dlg.kszlive.kszlive, #modal:not(.pcm) .dlg.kpanel): the ending frame is ONE size */
-html body #modal.modal.kes>.dlg.dlg.dlg.dlg{position:relative;z-index:1;box-sizing:border-box;width:min(calc(100vw - 2*var(--kes-sx)),1180px)!important;max-width:none!important;
- height:auto!important;min-height:0!important;max-height:calc(100dvh - var(--kes-top) - var(--kes-bot))!important;min-width:0!important;margin:calc(var(--kes-top) - var(--kes-bot)) 0 0!important;overflow:visible!important;
+html body #modal.modal.kes>.dlg.dlg.dlg.dlg{position:relative;z-index:1;box-sizing:border-box;width:min(calc(100% - 2*clamp(22px,5.5%,64px)),1180px)!important;max-width:none!important;
+ height:auto!important;min-height:0!important;max-height:calc(100% - var(--kes-top) - var(--kes-bot))!important;min-width:0!important;margin:calc(var(--kes-top) - var(--kes-bot)) 0 0!important;overflow:visible!important;
  box-shadow:0 0 0 2px var(--kes-ring),0 0 0 5px var(--kes-ring2),0 0 0 7px var(--kes-ring),0 18px 48px rgba(0,0,0,.55)!important}
 .modal.kes>.dlg>.kes-ov{position:absolute;inset:0;pointer-events:none;z-index:6}
-.kes-ov>.kes-fl{position:absolute;left:50%;top:0;width:clamp(130px,24vw,250px);height:auto;transform:translate(-50%,-64%);filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
-.kes-ov>.kes-dr{position:absolute;top:-10px;width:clamp(40px,7vw,104px);height:calc(100% + 10px);object-fit:contain;object-position:50% 0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.kes-ov>.kes-fl{position:absolute;left:50%;top:0;width:clamp(130px,26%,250px);height:auto;transform:translate(-50%,-64%);filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
+.kes-ov>.kes-dr{position:absolute;top:-10px;width:clamp(40px,7.5%,104px);height:calc(100% + 10px);object-fit:contain;object-position:50% 0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
 .kes-ov>.kes-drl{left:0;transform:translateX(-62%);transform-origin:50% 0}
 .kes-ov>.kes-drr{right:0;transform:translateX(62%);transform-origin:50% 0}
 .modal.kes .dlg>.kph{position:relative;z-index:7}
