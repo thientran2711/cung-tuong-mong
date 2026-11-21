@@ -171,7 +171,7 @@ function scan(B){
  const valOf=p=>{try{let o=BAL;for(const k of p){if(o==null)return undefined;o=o[k]}return o}catch(e){return undefined}};
  /* stat word → the BAL ladders its thresholds live in; 'any' = every threshold shape ("lòng 60+", "dưới 40", "từ 30"), 'range' = only a typed range "80–100"
     (a lone "Đức từ 40" can be an unrelated gate that happens to share the number, e.g. a road option's own requirement) */
- const STATS=[[/[Ll]òng|trung thành|thân tín/,['loy'],'any'],[/Đức|đức/,['ducLv'],'range'],[/Sủng|sủng/,['sungLv'],'range'],[/Sức|sức/,['sucLv'],'range'],[/Tâm cơ|tâm cơ/,['wit'],'range'],[/Chủ tin/,['tinLv'],'range']];
+ const STATS=[[/[Ll]òng|[Tt]hiện cảm|trung thành|thân tín/,['loy'],'any'],[/Đức|đức/,['ducLv'],'range'],[/Sủng|sủng/,['sungLv'],'range'],[/Sức|sức/,['sucLv'],'range'],[/Tâm cơ|tâm cơ/,['wit'],'range'],[/Chủ tin/,['tinLv'],'range']];
  /* the stat word closest before position i of a text (within 24 chars): the number at i belongs to THAT stat */
  const nearestStat=(txt,i)=>{const seg=txt.slice(Math.max(0,i-24),i);let best=null,at=-1;for(const [re] of STATS){const g=new RegExp(re.source,'g');let q;while((q=g.exec(seg)))if(q.index>=at){at=q.index;best=re}}return best};
  /* a cut ref is a number, or a small array / object of numbers (its leaves are what a text may copy) */
