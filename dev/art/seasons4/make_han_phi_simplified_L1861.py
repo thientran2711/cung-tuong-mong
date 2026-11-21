@@ -14,4 +14,7 @@ DEL=[
 ", BIG, a full bloom clearly bigger than at the Tần rank",
 ]
 for a in DEL: t=cut(t,a)
-open(D+'han_phi_simplified_L1861.txt','w').write(t)
+# owner L1859 + L1863: 3 bands = outer MAIN / middle SECONDARY (lining) / innermost RANK colour (trung y; Phi = pale purple, OD 10:08Z trung y table)
+a="(outer light clear warm plum embroidered in gold, inner two bright blush pink)"; assert t.count(a)==1
+t=t.replace(a,"(outer light clear warm plum embroidered in gold, middle bright blush pink, innermost pale purple)")
+open(D+'s62_t5_HAN_PHISIMPLE_L1861.txt','w').write(t)

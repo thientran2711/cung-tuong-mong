@@ -66,3 +66,8 @@ dev/art/seasons4/han_phi_simplified_L1861.txt (make_han_phi_simplified_L1861.py)
 6. " and several gold hairpins (trâm) with dangles, rich like her rank"
 7. ", BIG, a full bloom clearly bigger than at the Tần rank"
 Kept: fabric, colours, collar + 3 bands, wrap, deep border, sash, up-do + one flower, pose/letter, caption. 8830 ch; keep PASS; check_store M06/M07 (= Phi's own waivers).
+### PHISIMPLE (owner L1863 via #25): file renamed s62_t5_HAN_PHISIMPLE_L1861.txt (han_phi_simplified_L1861.txt removed)
+Same 7 deletions + ONE word change: bands "(…, inner two bright blush pink)" → "(…, middle bright blush pink, innermost pale purple)".
+RULE L1863 (replaces the L1859 white): 3 collar bands = outer MAIN / middle SECONDARY (lining) / innermost RANK colour = trung y colour (OD 10:08Z table: Đáp ứng ivory, Thường tại pale green, Quý nhân pale blue, Tần pale pink, Phi pale purple, Quý phi pale rose red, Hoàng quý phi pale amber orange, Hoàng hậu pale yellow).
+TODO: apply to all Hán ladder files when the owner picks the base (LADDER8 white is now wrong).
+8850 ch; keep PASS; check_store M06/M07 (= Phi original).
