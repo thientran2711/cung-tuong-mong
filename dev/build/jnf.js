@@ -33,7 +33,10 @@ const B=()=>BAL.steal;
    (deck j2, person menu RVGRP, NPC BANDS, ACT.ok) and jflip's pending seal. A life that joins or leaves a room mid-week switches at once:
    a tablet still waiting (S.nfP) is turned by jfe at tối; a co-op flip already made (S.nfF / nightWhy) is never turned again by jnf.
    coop-thin E: enable the co-op night by making nfParked() return false (this function) and deleting jfe.js from assemble.py. */
-function nfParked(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
+/* UNPARKED (MAIN ROOT-82 20/11 22:58Z on the owner's 20/11 ~21:30Z rule «phải chạy được trên cả hai bản»): a co-op room runs the new night on
+   BOTH seats through the host-authoritative relay below. Parked only in a THIN part-E room (dev flag ctm-thin >= 5, Foreman B's coop-thin: the host
+   runs her buổi + night in withSeat there, so the per-seat relay must not run twice); no player room reaches that level. */
+function nfParked(){try{const c=window.COOPW;return !!(c&&c.on&&c.thin&&typeof c.thin.on==="function"&&c.thin.on(5))}catch(e){return false}}
 window.nfParked=nfParked;
 /* the palace night only (servant route j42 and the home route jkc keep their own week: the flip there is unchanged) */
 function nfOn(){try{return !!(S&&!S.dead&&!nfParked()&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
@@ -122,7 +125,7 @@ function nfResolve(t,L,live,k){const out={holder:t,lines:[],tries:L.length,res:[
   else if(taken||!t)txt=`${NMc(a)} định giành đêm nhưng ${typeof ntReason==="function"?ntReason(a).replace(/^Đ/,"đ"):"đêm nay đã có người"}.`;
   else if(x.ok)txt=`${NMc(a)} cũng mời được Hoàng thượng, nhưng ngài chọn sang cung ${NM(best.a)}.`;
   else txt=(x.remote?failTxt(a,t,x.mode):stealFail(a,t,x.mode)).trim()
-  out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt,lost:!x.ok&&!taken&&!!t});
+  out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt,lost:!x.ok&&!taken&&!!t,tie:x.ok&&best&&x!==best&&!taken&&t?enc(best.a):null/* co-op: the friend's seat names the winner from HER view */});
   try{ST.push({w:day(),me:t===S,mode:x.mode,ok:x===best,live,n:L.length});if(ST.length>5000)ST.splice(0,1000)}catch(e){}
   try{if(typeof newsAdd==="function"&&a!==S&&t)newsAdd(a,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
   if(!live){out.lines.push(txt);continue}
@@ -267,7 +270,7 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  finish()}
 /* co-op: the friend's own result goes back to her seat (she applies her own Sủng and plays her own night) */
 function gres(o,def){try{const f=friend();if(!f)return;const r=o&&o.res&&o.res.find(z=>z.w===f.id);
- S.nfG={d:day(),L:r?[{k:"flip",won:r.won,mode:r.mode,lost:r.lost,txt:r.txt}]:[],def:def||null}}catch(e){}}
+ S.nfG={d:day(),L:r?[{k:"flip",won:r.won,mode:r.mode,lost:r.lost,txt:(()=>{const s=String(r.txt||""),p=NMc(f);return p&&s.startsWith(p)?"Ngươi"+s.slice(p.length):s})()/* her name → "Ngươi" (exact prefix: a name has 2-4 words) */,tie:r.tie||null}]:[],def:def||null}}catch(e){}}
 /* the choice is over: tell the guest, then the day goes on (the night, or the next morning) */
 function finish(){S.nfFin=day();visLate();send("fin");RR=day();try{render()}catch(e){}showSoon()}
 
@@ -334,7 +337,8 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
   if(Array.isArray(m.gres))for(const g of m.gres){if(S.nfR.k.includes(g.k))continue;S.nfR.k.push(g.k);
    if(g.won){won=true;log(`Ngươi ${g.mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}: Hoàng thượng sang cung ngươi.`);herWin()}
    else if(g.lost)log(stealFail(S,null,g.mode).trim())
-   else if(g.txt)log(String(g.txt).replace(/^[^ ]+ [^ ]+ /,"Ngươi "))}
+   else if(g.tie){const w=dec(g.tie);log(`Ngươi cũng mời được Hoàng thượng, nhưng ngài chọn sang cung ${w==null?"khác":w==="me"?"ngươi":NM(w)}.`)}/* the host's sentence is in HIS view ("cung ngươi" = his): rebuilt here */
+   else if(g.txt)log(String(g.txt))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
    log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
    if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}

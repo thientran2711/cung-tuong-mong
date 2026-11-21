@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fc480ca8+","t":"2026-11-20T22:22Z","c":"balance-core test: growth curve replays the same seeded draws for her and the NPC (unseeded rounding failed ~1 in 16 by chance; [0,8] seen)…","b":"6d23310da18f","h":[{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"}]};
+window.CTM_BI={"s":"b2a78e1a+","t":"2026-11-20T23:24Z","c":"balance-core test: growth curve replays the same seeded draws for her and the NPC (unseeded rounding failed ~1 in 16 by chance; [0,8] seen)…","b":"14d1040cff9b","h":[{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -45467,7 +45467,8 @@ const tnDec=w=>w==null?null:w==="p"?fp():w==="f"?me():w;
    night meanwhile (crossing), the host's word stands */
 const tnVer=()=>CW.tnV&&CW.tnV.w===wk()?CW.tnV.n:0;
 function tnFinal(re){S.tn={w:wk(),who:tnWho()};CW.tnLast=JSON.stringify([wk(),tnWho()]);CW.tnV={w:wk(),n:tnVer()+1};COOP.send({t:"act",k:TK,mode:"tn",fin:1,v:CW.tnV.n,re:re||null,week:wk(),who:tnEnc(tnWho()),id:TK+wk()+":"+newId()})}
-function tnRelay(){if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
+function tnRelay(){if(typeof window.nfOn==="function"&&window.nfOn())return;/* jnf (night-final, unparked 20/11 ROOT-82) owns the palace night in co-op: ONE relay (jnf send/apply: holder, flip, choice, result); this B2 word would undo her won night */
+ if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
  if(eW()){if(CW.ctx)return;CW.tnLast=k;if(host()){S.tn={w:wk(),who:tnWho()};CW.tnAt={w:wk(),v:(CW.thin.hv|0)+1};if(CW.tnHer()&&CW.herNight)CW.herNight()}else CW.thin.doSend("tn",{who:tnEnc(tnWho())});return}
  if(host()){tnFinal();return}
  CW.tnLast=k;const id=TK+wk()+":"+newId();CW.tnClaim=id;sentOr(COOP.send({t:"act",k:TK,mode:"claim",week:wk(),who:tnEnc(tnWho()),v:CW.tnSeen&&CW.tnSeen.w===wk()?CW.tnSeen.n:0,id}),()=>{if(CW.tnLast===k)CW.tnLast=""})}
@@ -45511,7 +45512,8 @@ CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2
  /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */
  if(t&&t!=="me"&&(isF(t)||!host())){S.tonight=null;return""}return f.apply(this,arguments)}})();
 /* the guest takes the host's night when the merged week is in (onWeek → CW.tnWeek) */
-CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
+CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;if(typeof window.nfOn==="function"&&window.nfOn()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}/* jnf owns her night (its relay) */
+ const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
  const who=tn.who===fp()?fp():tn.who;const was=S.tonight==="me";tnSet(who);
  if(S.tonight==="me"&&!was&&!eW()){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}}};
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}try{if(CW.on)cySend()}catch(e){}return r}})();
@@ -74757,7 +74759,10 @@ const B=()=>BAL.steal;
    (deck j2, person menu RVGRP, NPC BANDS, ACT.ok) and jflip's pending seal. A life that joins or leaves a room mid-week switches at once:
    a tablet still waiting (S.nfP) is turned by jfe at tối; a co-op flip already made (S.nfF / nightWhy) is never turned again by jnf.
    coop-thin E: enable the co-op night by making nfParked() return false (this function) and deleting jfe.js from assemble.py. */
-function nfParked(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
+/* UNPARKED (MAIN ROOT-82 20/11 22:58Z on the owner's 20/11 ~21:30Z rule «phải chạy được trên cả hai bản»): a co-op room runs the new night on
+   BOTH seats through the host-authoritative relay below. Parked only in a THIN part-E room (dev flag ctm-thin >= 5, Foreman B's coop-thin: the host
+   runs her buổi + night in withSeat there, so the per-seat relay must not run twice); no player room reaches that level. */
+function nfParked(){try{const c=window.COOPW;return !!(c&&c.on&&c.thin&&typeof c.thin.on==="function"&&c.thin.on(5))}catch(e){return false}}
 window.nfParked=nfParked;
 /* the palace night only (servant route j42 and the home route jkc keep their own week: the flip there is unchanged) */
 function nfOn(){try{return !!(S&&!S.dead&&!nfParked()&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
@@ -74846,7 +74851,7 @@ function nfResolve(t,L,live,k){const out={holder:t,lines:[],tries:L.length,res:[
   else if(taken||!t)txt=`${NMc(a)} định giành đêm nhưng ${typeof ntReason==="function"?ntReason(a).replace(/^Đ/,"đ"):"đêm nay đã có người"}.`;
   else if(x.ok)txt=`${NMc(a)} cũng mời được Hoàng thượng, nhưng ngài chọn sang cung ${NM(best.a)}.`;
   else txt=(x.remote?failTxt(a,t,x.mode):stealFail(a,t,x.mode)).trim()
-  out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt,lost:!x.ok&&!taken&&!!t});
+  out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt,lost:!x.ok&&!taken&&!!t,tie:x.ok&&best&&x!==best&&!taken&&t?enc(best.a):null/* co-op: the friend's seat names the winner from HER view */});
   try{ST.push({w:day(),me:t===S,mode:x.mode,ok:x===best,live,n:L.length});if(ST.length>5000)ST.splice(0,1000)}catch(e){}
   try{if(typeof newsAdd==="function"&&a!==S&&t)newsAdd(a,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
   if(!live){out.lines.push(txt);continue}
@@ -74991,7 +74996,7 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  finish()}
 /* co-op: the friend's own result goes back to her seat (she applies her own Sủng and plays her own night) */
 function gres(o,def){try{const f=friend();if(!f)return;const r=o&&o.res&&o.res.find(z=>z.w===f.id);
- S.nfG={d:day(),L:r?[{k:"flip",won:r.won,mode:r.mode,lost:r.lost,txt:r.txt}]:[],def:def||null}}catch(e){}}
+ S.nfG={d:day(),L:r?[{k:"flip",won:r.won,mode:r.mode,lost:r.lost,txt:(()=>{const s=String(r.txt||""),p=NMc(f);return p&&s.startsWith(p)?"Ngươi"+s.slice(p.length):s})()/* her name → "Ngươi" (exact prefix: a name has 2-4 words) */,tie:r.tie||null}]:[],def:def||null}}catch(e){}}
 /* the choice is over: tell the guest, then the day goes on (the night, or the next morning) */
 function finish(){S.nfFin=day();visLate();send("fin");RR=day();try{render()}catch(e){}showSoon()}
 
@@ -75058,7 +75063,8 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
   if(Array.isArray(m.gres))for(const g of m.gres){if(S.nfR.k.includes(g.k))continue;S.nfR.k.push(g.k);
    if(g.won){won=true;log(`Ngươi ${g.mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}: Hoàng thượng sang cung ngươi.`);herWin()}
    else if(g.lost)log(stealFail(S,null,g.mode).trim())
-   else if(g.txt)log(String(g.txt).replace(/^[^ ]+ [^ ]+ /,"Ngươi "))}
+   else if(g.tie){const w=dec(g.tie);log(`Ngươi cũng mời được Hoàng thượng, nhưng ngài chọn sang cung ${w==null?"khác":w==="me"?"ngươi":NM(w)}.`)}/* the host's sentence is in HIS view ("cung ngươi" = his): rebuilt here */
+   else if(g.txt)log(String(g.txt))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
    log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
    if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
@@ -86170,7 +86176,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6d23310da18f";window.CTM_BUILD=BUILD;
+const BUILD="14d1040cff9b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

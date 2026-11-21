@@ -703,7 +703,8 @@ const tnDec=w=>w==null?null:w==="p"?fp():w==="f"?me():w;
    night meanwhile (crossing), the host's word stands */
 const tnVer=()=>CW.tnV&&CW.tnV.w===wk()?CW.tnV.n:0;
 function tnFinal(re){S.tn={w:wk(),who:tnWho()};CW.tnLast=JSON.stringify([wk(),tnWho()]);CW.tnV={w:wk(),n:tnVer()+1};COOP.send({t:"act",k:TK,mode:"tn",fin:1,v:CW.tnV.n,re:re||null,week:wk(),who:tnEnc(tnWho()),id:TK+wk()+":"+newId()})}
-function tnRelay(){if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
+function tnRelay(){if(typeof window.nfOn==="function"&&window.nfOn())return;/* jnf (night-final, unparked 20/11 ROOT-82) owns the palace night in co-op: ONE relay (jnf send/apply: holder, flip, choice, result); this B2 word would undo her won night */
+ if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
  if(eW()){if(CW.ctx)return;CW.tnLast=k;if(host()){S.tn={w:wk(),who:tnWho()};CW.tnAt={w:wk(),v:(CW.thin.hv|0)+1};if(CW.tnHer()&&CW.herNight)CW.herNight()}else CW.thin.doSend("tn",{who:tnEnc(tnWho())});return}
  if(host()){tnFinal();return}
  CW.tnLast=k;const id=TK+wk()+":"+newId();CW.tnClaim=id;sentOr(COOP.send({t:"act",k:TK,mode:"claim",week:wk(),who:tnEnc(tnWho()),v:CW.tnSeen&&CW.tnSeen.w===wk()?CW.tnSeen.n:0,id}),()=>{if(CW.tnLast===k)CW.tnLast=""})}
@@ -747,7 +748,8 @@ CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2
  /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */
  if(t&&t!=="me"&&(isF(t)||!host())){S.tonight=null;return""}return f.apply(this,arguments)}})();
 /* the guest takes the host's night when the merged week is in (onWeek → CW.tnWeek) */
-CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
+CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;if(typeof window.nfOn==="function"&&window.nfOn()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}/* jnf owns her night (its relay) */
+ const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
  const who=tn.who===fp()?fp():tn.who;const was=S.tonight==="me";tnSet(who);
  if(S.tonight==="me"&&!was&&!eW()){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}}};
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}try{if(CW.on)cySend()}catch(e){}return r}})();
