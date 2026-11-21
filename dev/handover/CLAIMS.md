@@ -785,3 +785,4 @@ kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session |
 kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! under dialog close on Fold) | 21/11
 | REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | session_01Rc5AsL294sG5kphwVE5b5S | RUNNING | 21/11 05:54Z |
 | REVIEW hoangthuong-gold r2 PASS → LAND READY 1e826e29 (Emperor only; Thái hậu = LIVE) | review/hoangthuong-gold-rv2 | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:57Z |
+| huong-cue-2-r2 review | sonnet reviewer (Foreman B ROOT-5) | PASS 3be6edad review/huong-cue-2-r2-rv | 21/11 |
