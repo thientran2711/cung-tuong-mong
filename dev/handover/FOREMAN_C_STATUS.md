@@ -1204,3 +1204,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
 #22 ~07:57Z: OWNER L1799: red gems OK on CROWN of t7/t8 only, never on clothing → REVERT1 + HAN4 told. #23 = session_01D3E3NbPDzH9MSjxsnNqXEn opened; workers → #23. #22 stops. Next Lượt 1800.
 #23 ~07:15Z: depth 4, START_CTX ~3 %. Took over from #22. Ready: REVERT1 thu L1797 (t5 small pearls, belt = OLD Phi belt; t6 cloud-collar cape) + MAIDFIX2 test18 nhất ×2 (270). Waiting HAN4 LADDER5. No schedules owned. Next Lượt 1800.
 #22 ~08:05Z: OWNER L1800 (in #22 chat): winter = copy thu set + crossed collar (G25) + cloak per person; sent winter1 coLong sheet; passed cloak-picture search + plan to #23. Next Lượt 1801.
+#22 ~08:10Z: OWNER L1801: phi bạch third colour? (rec ivory/cream + thin gold edge, waiting yes); ORDER: t6–t8 phi bạch thicker, less transparent silk to match brocade → #23/REVERT1. Next Lượt 1802.
