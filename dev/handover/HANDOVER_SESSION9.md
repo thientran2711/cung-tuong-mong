@@ -2106,3 +2106,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (14:55Z) LAND CHAIN 2: LANDED jlost-kyngo 468835a7. LIVE 468835a7. Next kit-ef-unit.
 - (14:55Z) LAND CHAIN 2: LANDED jlost-kyngo 468835a7.
 - (15:19Z) LAND CHAIN 2: FAIL kit-ef-unit d46ad6de (QC perf twice: longTaskMaxMs 5349>5000, buổi 2182/1701 ms; core gates PASS) → owner. kit-win-pay HELD behind it. Chain continues q1c.
+- (15:19Z) LAND CHAIN 2: FAIL kit-ef-unit d46ad6de QUICKCHECK perf ×2 (longTask 5349>5000; buổi 2182 vs 1701 ms; render 308/271) → keeper #4 item (3) ef-unit r3 (first; blocks kit-win-pay 203cd559 HELD). Chain continues ban-cung → coop-pool-face → coop-cyhold → kit-relrows-ms → coop-arrive-see → sg-card → pet-bath-test. LIVE 468835a7.
