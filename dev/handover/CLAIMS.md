@@ -902,3 +902,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | KIT KEEPER #5 (opus; successor of #4 Jkj5; ef-unit r3 first) | review/kit-ef-unit-r3; reports/kit-keeper-5.md | MAIN CHÍNH 97 | session_01Rc5AsJexZYYx4jcgUw6Uu1 | RUNNING | 21/11 16:34Z |
 | rv-kit-opt-title-wrap r2 | PASS | review/kit-opt-title-wrap-rv2 3d8e89478942bb13c30d9472c20100b62dbe84be | 12/12 stable runs, quickcheck, coop-e2e 124/124 |
 | REVIEW ge-phutang-land3 E45r (opus short BIG; jbalge npc on:true + 18 jgedata_pt remaps) of d5331d60 | review/ge-phutang-land3-r; briefs/E45r-review-ge-phutang-land3.md | FOREMAN E #28 | session_01DgYSWp1tftExc9HqQtYtZD | RUNNING | 21/11 17:05Z |
+| rv-kit-mark-fix r6 | FAIL | review/kit-mark-fix-rv6 0052c1be017f8255c93a2280dc61c23c40a3336e | name colour fixed; fade cue flaky 15/48 |
