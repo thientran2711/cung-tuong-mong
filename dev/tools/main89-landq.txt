@@ -1,5 +1,3 @@
-review/jagday-walk-rv|6ada1cb74c7ce882aa2efe0b82ea2eee1b7d87b1|jagday-walk|Đi lại trong cung: tốn khắc theo đường đi (D)
-review/main85-land-errand-bal|1d30dfe956d557d0b5c084541611659b068d2439|errand-bal|Việc vặt: cân lại tiền công / số (E)
 review/kc-coop-select-r1|2eb1ac5f|kc-coop-select|Khuê các chơi chung: chọn đúng người (E)
 review/person-minigame-acts-c-land|c45ba8cb|pm-c|Trò tài nghệ với người: phần C (E)
 review/kit-rankunit-rv2|d3f5ea2815f3fde5603969bc106c6bfca9b77e80|kit-rankunit|Chức vị người: một kiểu chữ; tên nơi chốn để thường
