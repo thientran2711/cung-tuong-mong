@@ -74,3 +74,18 @@ After both: night-final ×10 (≥3), steal-mg-unit, steal-mg-nf (+ solo ✕ case
 - LIVE merges 270c6251 and 9c5b6de3: conflicts were jemo-bal typed→BAL moves, and every line keeps both sides (commit messages 5181eecc / fe634e0f list each line). Reviewer FAIL #1 (cnv o/hh/th) fixed; my LIVE-revert audit had missed it because the loss was older than the audited merge range.
 - After the 9c5b6de3 merge, LIVE's sg tokens made ARTFX elements getter-only and the bundle's text rewrite was silently dropped (course-card / bậc Danh showed LIVE numbers). Fixed in fe634e0f; runtime: Đánh cờ Sủng +5, Danh +3, Tâm cơ +1; Kinh hồng vũ Sủng +15, Danh +4; bậc 2/3 Danh +3/+5.
 - co-op flakes seen (not bundle regressions; same on LIVE/3e65dbe7 per the coop-cyhold reviewer): coop-night case 1/2 week-step desync, case 4 guest-night timing.
+
+## SSK FINAL — review/night-balance-bundle efea09a8 (21/11 21:36Z; D #17 session_01964izBrTYM1xdxezCgqLER; reviewer session_01964izF4zCJPJBUmUsHpksK)
+PRIORITY #1 CHECK: nobc + §7 Danh re-tune land TOGETHER; §7 learning times unchanged; NPCs on the same rules; no shields; one core BAL.
+Head efea09a8 = fe634e0f (SSK above: table, BAL scan, audits unchanged) + 2180b429 jnf late fin + c6ffc4c3 coop-cyhold test clear() (from review/bundle-nfstall 1388c7af, test only) + index/sw/assets rebuilt.
+
+**CO-OP BLOCKER closed.** Cause (coop-night case 1/2 split): the host's day moved past day d (night resolved after the cyWaitMs bound) before its fin for d was sent, so the guest (S.nfFin!==d → ask) waited for ever. Fix (jnf.js): the host records its draw per day (S.nfH); again(d) answers a past day without a kept fin from that draw (the host as holder if her night already played); the host pushes that late fin once (finLate); the guest asks again every BAL.steal.choice.ms while she waits. Serial red→green: coop-night on fe634e0f 1/3 green (run 2 case-1 split, run 3 case-2 split), on 2180b429 3/3 111/111. jsmg: no bug (✕ on the intro opens the give-up confirm); coop-cyhold's miss was its driver (now closes manual kit scenes and the #kg82 game).
+
+Gates after the fix (serial):
+- coop-night ×3 111/111 (2180b429; game code = efea09a8)
+- coop-cyhold ×3 18/18 (c6ffc4c3)
+- night-final ×3 PASS (c6ffc4c3)
+- coop-steal: 37/40 once on c6ffc4c3 (case 3: an NPC flip instead of the guest, random), then 40/40 on c6ffc4c3 and 40/40 on efea09a8; old fe634e0f 40/40
+- quickcheck PASS on efea09a8 (core gates PASS, old save ok; perf new/live render 227/268 ms, buổi 1143/1596 ms)
+- on fe634e0f (same game code except jnf): balance-core, steal-mg-unit, night-steal-unit, night-multi, night-coop-park 7/7, flip-entry, steal-mg-nf, night-final 10/10, coop-e2e 124/124; guards ×5, sg-card-scan, npc-purpose-scan PASS
+Not taken: coop-nf-stall.js (WIP; D #17: rv's 10-week drive covers it).
