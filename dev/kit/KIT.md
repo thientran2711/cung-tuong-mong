@@ -398,6 +398,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- **ONE DIALOG STACK (KIT 8.9, owner 21/11 mark #46; jk4.js `kitDialogStack`, test dev/test/dialog-stack-scan.js):** a newer dialog is always the TOP layer (`#modal` z 42, above the room person card `#popw` z 41 and every second-layer pop-up); a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) first closes every other second-layer pop-up (person card `popIdx`, kitCloseLayer layers incl. game result `#ov`, word pop-up `#kpop`, podium `#kpodov`, open kit book). Never two dialogs overlapping; no opener patches it, it runs in showModal for all of them.
 - Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`
@@ -415,6 +416,7 @@ at a given viewport; only the seal word and the content differ. Nothing sizes th
 - Scan: `node dev/test/panel-size.js <url> <out.json> [WxH@dpr,...]` opens 51 panel cases (every kind + every PEND dialog) and reports width / height per viewport; FAIL when they differ.
 
 - **COMPACT SIZE (owner 16/11, iPad title menu in a near-full-screen frame; review/kpanel-compact, `dev/build/jkpc.js`) — §8.1 amendment.** The one big size is for INFORMATION panels only. A panel with little content gets ONE compact size: the same width (`--kpw`), height fitted to its content up to `--kph`, centred (`.dlg.kpanel.kpcompact`, `.modal.kpcompactm`). One rule, decided by content, never per place: `kitPanelCompact(dlg)` runs after every `showModal` and on every change of `#mb` (j74 mounts the title sub-screens after showModal) and says compact when `#mb` holds no section / row table / `.kmlist` / table / subject / person / faces / picture (`.kpsubj .kpiart .kdlgart .kaart .ksart img figure`) / stage figure / identity / info art, AND is either the title menu (`.kpmenu`) or a title sub-screen (`.kpt-mount`: Chọn sổ, Thiết lập, Sổ luân hồi), or has at most 3 facts and at most 220 characters outside its option list (menus, confirms, short notices, pickers with a few options; options may scroll inside the max). Nobody adds `kpcompact` or a height by hand; no per-place override.
+- **MENU PANEL (owner 21/11 mark #37; review/menu-panel, `jkpc.js` + `j79.js` kpBuild + `jksize.js`).** Every panel of the ☰ / title menu (`.modal.kptitle`: home, Chọn sổ Một mình + Cùng hảo hữu, Sổ luân hồi, Thiết lập, Bảng vàng's popups) is ONE frame: the §8.1 width `--kpw` (locked with `!important` on `.modal.kptitle.kpscene`, bottom, centred), height = content up to `--kph`. Never narrow, never one word per line. Root cause of the old bug: the identity card (`kpIdLay`) set `--kpw` inline on `#modal`, and the next panel (☰ in game) inherited 307 px; `kpBuild` now clears `--kpw` / `kpside` for every non-identity panel, and `kitFrameLive3` never turns the menu into an event frame (`kszlive`).
   The title menu (`.modal.kpthome`) sits small at the bottom centre so the painting stays visible (portrait and landscape).
   **Layout is deterministic:** a menu panel never receives a picture slot from load timing. The §59 event placeholder (jph `kitEvArt`) skips panels whose `cls` has `kptitle` or whose spec has `kit.scene` / `kit.menu`; before this, the title menu got a placeholder room picture on the left (buttons squeezed to the right) only when EVART had finished loading, and none otherwise (owner shots 10:36 vs 10:39). Rule for new code: a layout choice reads structure, never "is the data loaded yet".
   Entering the game (title Tiếp tục, any reload, co-op rejoin) always opens Hành sự (her room), never the last tab (`d.tab="act"` in the slot load, j6, and the rejoin deser, jcoopworld).
@@ -3553,11 +3555,14 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   A festival sits on its traditional day (`MCAL.days`: Nguyên đán 1–3, Thanh minh 5, Đoan ngọ 5, Thất tịch 7, Lạp bát 8, Trùng cửu 9,
   Nguyên tiêu / Vu Lan / Trung thu / Thánh thọ / Đông chí 15, Vạn thọ 25, Giao thừa 30) when that day is inside the tuần FEST holds it in
   (FEST.t, the tuần the festival event really fires); otherwise on the first day of each of its tuần (Hội Phượng 1, 11, 21 — all month).
-- `kitMonthCal({o})` → HTML; `o` = months ahead of the current month (0..11). Parts: 12 month tabs (`kitTabRowHTML` in `.pctabs.kcattabs`,
-  count = festivals in that month; wrapped = the year at a glance; one scrolling row when the screen is under 520 px tall), the month head
-  (`Tháng giêng · năm thứ hai (10 tháng nữa)`), the grid (3 rows × [tuần label + 10 squares]; current tuần row gold + `kchip g` "Tuần này";
-  earlier tuần of this month dimmed), festival squares = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name
-  (`MCAL.short`), and under the grid one `kitRows` table (day | name · "còn N tuần" / "tuần này" / "đã qua").
+- `kitMonthCal({o})` → HTML; `o` = months from the current month (-1 = last month, 0..11 ahead). A normal PHONE MONTH VIEW (owner 21/11 ~03:43Z mark #42,
+  review/calendar; the old wall of 13 month chips is gone, nothing may bring a month chip row back): header row `‹  Tháng ba · năm thứ nhất  ›` (date text from
+  `mcMonName` / `mcYearName`, never typed; `(tháng sau)` / `(N tháng nữa)` / `(đã qua)` when not this month; two 44 px `kbtn alt .kmc-ar` arrows, `data-kmcm` = target
+  month, disabled at -1 / 11; SWIPE the grid sideways = next / last month, with a short slide that respects reduced motion), then the grid: per tuần one light label
+  strip (`Thượng tuần` + `kchip g` "Tuần này" + quẻ chip; the current tuần strip is gold = today, the game has no day inside a tuần) over 2 rows x 5 EQUAL SQUARE
+  cells (`aspect-ratio:1`, days 1–30; 5 columns by default because the Fold dialog is only ~290 px wide, 10 columns gave 27 px squares; a container query (`.kmc` width ≥ 470 px = iPad) switches to ONE row of 10 per tuần, ~50 px squares, whole month without scrolling; grid capped at 560 px wide),
+  festival cells = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name (`MCAL.short`); other known days = tag + count + moon / cycle marks.
+  Tap a day = that day's box below the grid (`mcDayBox`, kit rows); under it one `kitRows` table of the month's festivals (day | name · "còn N tuần" / "tuần này" / "đã qua").
 - A festival square or list name opens the kit popover (`kpPop`, hover too with a mouse): name, day + tuần + time left, one line
   (`MCAL.line`), "Có thể thi" (the SC7 contests of its j71 pool FV7, same Thái hậu filter as fvPick), "Còn có" (wagers, banquets, gifts,
   rites), "Thắng thi" (`prize7`). Short; no paragraph.
@@ -3568,7 +3573,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   top-right; the first one that covers no name tag, side card, title, chip, "+N"/"‹" page chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
   re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
 - No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
-- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped
+- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (opens from the rail "Lịch tháng" button; the room desk calendar is retired by jrail; 2 arrows ≥ 44 px, no chip row, 30 equal squares in 6 rows (narrow) or 3 rows (wide ≥ 470 px), swipe both ways, arrow disabled before last month; every month; no clipped
   text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
   390x844 = rotate prompt).
 
