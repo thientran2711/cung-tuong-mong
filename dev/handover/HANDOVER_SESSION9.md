@@ -2091,3 +2091,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - DONE this session: duodo-focus LIVE + owner got both mp4 links (Fold/iPad) with «Dư đồ đã lên game»; Tát hand / NPC slap art still missing (C on hold). LtG4 + Ji75 archived.
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY.
 - TRIGGER: mine trig_01PHZoGojNEjNy85eecCyK3A (min 32) → 96 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush95.sh). No owner question pending. MAIN 94 idle (trigger off).
+- (14:36Z) MAIN CHÍNH 95 opened child MAIN CHÍNH 96 = session_01Rc5AsNBD5TsxWsYmh8ZkSJ (depth 7). 95 stops except relaying late messages to 96.
