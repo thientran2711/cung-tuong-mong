@@ -4,7 +4,7 @@
    NPC side: the live registries — every AGREG provider of the person's group (agGrp: consort / hh / maid) called on a rich NPC of that role over many
    draws (keys o.k), plus the shared gates TW[k].req / ACT[k].ok(a,t) / hh acts over every target.
    Player side: the live builders — Hành sự deck (deal + pool + artActs + directActs + illCards), talkOpts of every person at every place (goTo),
-   topicOpts + rvCard of every consort, Kẻ hầu / phe / Tài nghệ tabs (consort life); srvCards + srvTalk + srvStaffHTML (maid life).
+   topicOpts + rvCard of every consort, Kẻ hầu / phe / Tài nghệ tabs (consort life); srvCards + srvTalk + every Đồng liêu card, srvStaffTabHTML, rvCard of every consort (Chủ tử, maid life).
    Labels → keys through the game's own label tables (TW.n, ACT.n, AGC2BTN, AGC3BTN) + the small KEYLAB table below (keys whose button text lives
    inside a builder). A row's verdict per role: SAME (both sides, ONE function) · NUM (both sides, same BAL row, two code paths) · P-ONLY / N-ONLY
    (a gap) · EXEMPT (documented, EXEMPT table) · — (neither side holds it in that role).
@@ -47,7 +47,7 @@ const CON=["t1","t2","t3","t4","t5","t6","t7"];const ROLES=["maid","t1","t2","t3
 const ROLE_N={maid:"cung nữ",t1:"Đáp ứng",t2:"Thường tại",t3:"Quý nhân",t4:"Tần",t5:"Phi",t6:"Quý phi",t7:"Hoàng quý phi",hh:"Hoàng hậu",up:"cung nữ → phi tần"};
 
 /* ---------------- in-page probes ---------------- */
-function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}};
+function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4,5,6,7];const res={P:{},N:{},err:[],cov:{}};
  /* one seeded dice for both sides: each probe starts from the same seed, so a random pick never makes a one-sided row */
  const R0=Math.random;let seed=1;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};const SEED=n=>{seed=n||1;Math.random=rnd};
  const E=(w,e)=>{if(res.err.length<30)res.err.push(w+": "+(e&&e.message||e))};
@@ -278,13 +278,16 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   S.place="home";Q.length=0;
   /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
   if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}
+  /* maid-acts-a (MAIN CHÍNH 90): the cung nữ road opens the SAME Hậu cung › Chủ tử card (j15 rvCard, act table jroad8 ROAD8.srv.acts) — scanned in the maid column
+     too, so a consort act leaking onto her card is a P-ONLY gap (it used to be read only when !isSrv(): ~50 consort acts there went unseen) */
+  if(isSrv())for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv-srv")}catch(e){E("rv-srv",e)}}
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
   /* E22e round C: the master has an errand for her this buổi (explicit world, the twin of the NPC j95 errand gate in npcOpts): SRVA.errand.offer
      forced for this read only, her drawn errand cleared before and restored after (the card was there only when the seeded draw came up) */
-  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
+  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{/* Hậu cung › Đồng liêu = the shared pager (j42 srvStaffTabHTML, one card at a time, its groups = kit sub-tabs): tabAll walks every card and every group, like the consort's Cung nhân tab */for(const h of tabAll("srvStaffTabHTML"))for(const n of lab(h))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
  const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
  if(phase==="consort"){
@@ -294,7 +297,7 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   for(const t of liveRivals(true).filter(x=>x!==q&&!x.out))(q.rl=q.rl||{})[t.id]=60;
   npcOpts("hh",q,["consort","hh"]);
   if(q===v){v.queen=false;v.rank=5}
-  for(let r=0;r<=7;r++){S.rank=r;if(r===7)for(const x of rivals)if(x!==S)x.queen=false;playerLabels(r===7?"hh":"t"+(r+1))}
+  for(let r=0;r<=7;r++){if(!RANKS_P.includes(r))continue;S.rank=r;if(r===7)for(const x of rivals)if(x!==S)x.queen=false;playerLabels(r===7?"hh":"t"+(r+1))}
   S.rank=0;
 }
  if(phase==="maid"){
@@ -326,7 +329,14 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
  const b=await chromium.launch();const out={P:{},N:{},err:[],pageErr:[]};
- for(const phase of ["consort","maid"]){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>out.pageErr.push(phase+": "+e.message));
+ /* map-places mem fix r2 (21/11): the consort phase used to run its 8 player roles in ONE page.evaluate = one synchronous task of ~1700 goTo+render.
+    Inside one task the game's own deferred UI timers (renderStage / showModal / kitFrame / kmmSched layout passes, ~150 per goTo) never run, so the
+    detached stage DOM they close over is never freed: renderer RSS grew ~1.2 GB per role (LIVE b1033eb0 peak 12.5 GB; +2 places = OOM at 13.7 GB).
+    Real play is one tap = one task (800 goTo as separate tasks: ~440 MB, LIVE = branch). The fix runs each consort player role in its own fresh page
+    (the world set-up and the NPC part run again in each page, seeded the same): every role is probed from the SAME world, whatever its order
+    (before, a later role saw the world left by the earlier ones); rows are the union, as before. */
+ const PAGES=[0,1,2,3,4,5,6,7].map(r=>["consort",[r]]).concat([["maid",null]]);
+ for(const [phase,ranks] of PAGES){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>{const x=phase+": "+e.message;if(!out.pageErr.includes(x))out.pageErr.push(x)});
   /* part 2: one deterministic page (as ag2perf-diff): seeded Math.random + crypto, frozen clocks — a row never flips between runs */
   await p.addInitScript(()=>{let x=424242;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};let y=777;crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++){y=(y*1103515245+12345)%2147483648;a[i]=Math.floor(y/2147483648*4294967296)%(a instanceof Uint8Array?256:4294967296)}return a};performance.now=()=>1000;Date.now=()=>1763000000000});
   /* part-1 fix: no network at all (as ag2perf-deeds): a CDN build (build_site.sh) otherwise loads the CDN asset index while the probe runs, so the
@@ -335,8 +345,8 @@ async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright')
   /* part 2: the same world every run (the life start() draws was unseeded: rows that depend on a draw flipped between runs) */
   await p.evaluate(({phase})=>{let sd=20261118;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();
    for(let i=0;i<60&&(phase==="maid"?!isSrv():isSrv());i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}},{phase});
-  const r=await p.evaluate(inPage,{phase,TRIES:opt.tries||4});
-  Object.assign(out.P,r.P);Object.assign(out.N,r.N);out.err.push(...r.err.map(x=>phase+": "+x));if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
+  const r=await p.evaluate(inPage,{phase,ranks,TRIES:opt.tries||4});
+  Object.assign(out.P,r.P);for(const role in r.N){const T=out.N[role]=out.N[role]||{};for(const k in r.N[role])T[k]=Object.assign(T[k]||{},r.N[role][k])}for(const x of r.err.map(x=>phase+": "+x))if(!out.err.includes(x))out.err.push(x);if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
  await b.close();return build(out)}
 
 /* ---------------- table ---------------- */
