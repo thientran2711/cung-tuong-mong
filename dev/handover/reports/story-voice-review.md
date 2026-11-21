@@ -34,3 +34,11 @@ Main moved again → merged origin/main 177a1931 (only index.html / sw.js confli
 
 ## VERDICT
 PASS cafbaacf — LAND READY story-voice cafbaacf (review/story-voice-r1). No fixes to E39's text were needed; reviewer added dev/test/story-voice/coop-seats.js. Shots were scratch only and are deleted; nothing uploaded to CDN.
+
+## LAND (E38)
+PRIORITY #1 CHECK ('story-voice|ge-guard|pull keys'): reused review/story-voice-r1 cafbaacf + fix 836eb2d6 (review/story-voice); nothing new built.
+**LAND READY review/story-voice-land @ 54af15fa99d916e5f9030f685fcd7758ca38d595** = cafbaacf + 836eb2d6 + LIVE 2021e23f (FF on 2021e23f). LIVE moved since (fc0867ca: hoangthuong-gold, dialog-dedup, kit-dialog, kc-coop-select …) — vs it the conflicts are index.html/sw.js ONLY → main self-merge + rebuild.
+- Diff vs cafbaacf before the LIVE merge = only 836eb2d6: dev/build/jgedata.js 1 line + jgedata_w2.js 3 lines (the 4 grand-ending pull keys follow the renamed «Thần thiếp…» options of tt_co / td_ke). LIVE merge: index.html/sw.js conflicts only, rebuilt.
+- Scan 1 (forward, every «before» text of reports/story-voice-table.md, 395 rows, vs every dev/build/*.js): old text left in code 1 — dev/build/jrd_pt.js:379 «Thưa: việc nước, thiếp không dám bàn» = a copy of the j67 line in the Phù Tang road (landed on LIVE after story-voice); it is its OWN option label, no matcher reads it → not a mismatch. Left as is: 113 other road labels still use «thiếp» (story-voice did not rename that word everywhere), so a one-line change here would be out of the story-voice scope → FOREMAN to decide if Phù Tang wants the same voice pass. New text missing: 0.
+- Scan 2 (reverse, every pull/close key in jgedata*.js must be a real option label {n:"…"}): cafbaacf 4 text keys with no label (the E39 FAIL: «Thiếp đứng bên Hoàng thượng», «Thiếp có chứng cứ, xin ngài xét», «Thiếp chỉ xin công bằng cho cha», «Thiếp không xin trị ai») → 54af15fa 0. (52 «@beat=win» refs are not labels; same 52 on LIVE.)
+- Gates on 54af15fa: quickcheck PASS + old save · one-core PASS · ge-guard 8/8 · ge-engine all 1328/1328 · voice-core PASS (no page errors) · story-voice/scan.js exit 0 (Q3P 0 · NOFR 0 · OBS 0 · DIG 2) · coop-e2e 92/92 · story-voice/coop-seats.js PASS (both seats) · role-parity ×2 ALL PASS byte-identical (md5 c2bd4013).
