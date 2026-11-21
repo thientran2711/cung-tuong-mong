@@ -1008,7 +1008,7 @@ CW.cyHer=()=>cyHer();
    answers a real choice for her): the hold is bounded by BAL.coop.cyWaitMs (one core). When it runs out the host draws with the «no answer»
    outcome — the same rule as when her week end frees it, whichever seat hosts — and both seats get the kit notice. Her card stays open on
    her side (never answered for her); her late answer still lands in her own S.cyb (jcycle / thin E do cyb), so nothing is lost. */
-function cyMs(){const v=BAL&&BAL.coop&&+BAL.coop.cyWaitMs;return v>0?v:90000}
+function cyMs(){return +BAL.coop.cyWaitMs}/* one core (law 4): the bound lives only in BAL.coop.cyWaitMs */
 function cyArm(){clearTimeout(CW.cyT);const g=CW.cyHold;CW.cyT=setTimeout(()=>{CW.cyT=null;if(!CW.on||CW.cyHold==null||CW.cyHold!==g)return;
  CW.cyTo=g;T("cyTimeout "+g);cyMark(g);p2say("cyto",{w:g});cyToNote(false);cyFree()},cyMs())}
 /* traceable: her cycle state keeps that week's wait ran out with no answer (S.cyb.to; an answer she still gives that week is kept beside it).
