@@ -33,3 +33,10 @@ All three: ✓ high Tang skirt tied above the bust + short blouse, NO outer robe
 - nhị **N2q7gPL6D9** ✓ rose band + pearl at bow, plum hem band, rose envelope; ✗ neckline is a ROUND scoop, not the square/low open neckline of tam/nhất; small red tassel on the envelope; a small white flower-like hairpin head.
 - nhất **CqnIXaGEEy** ✓ wide embroidered rose bands (neck, cuffs, hem, chest band with pearl), embroidered handkerchief, densest hairpins; cleanest of the three.
 Sheet: dev/handover/review-sheets/ha_maid_g1_g3_L1890.png (Tam | Nhị | Nhất, Vietnamese labels).
+
+## JOB 5 — THU t7 + t8 vankien **L1903** (HHCOL1, owner L1903+L1904; replaces L1901/L1887b/c) · gpt-2-6 1k low 9:16 seed 7172 · refs nVsrRMPYQD + TdwDfOyVNR + kseQCFw16B (collar crop, image 3) · 2×55 = **110 cr** (session total 1305 cr, +135 if the interrupted m10 thosu call went through)
+L1901/L1887c were NOT drawn. Grep for pendant/necklace/sachet/túi thơm: 1 hit per file = the prompt's own "no necklace".
+- t7 Hoàng quý phi **0eUA2SkTfW**: ✓ no pearl net; whole scalloped vân kiên round the neck, spreading out past the shoulders, front cut away, square neckline open, tiny short drops on the edge, chest pearls only, caption correct. ~ gold phoenix embroidery on the collar is faint at this size; flute still has its own jade disc + red tassel (held item).
+- t8 Hoàng hậu **CqnI8nxEEy**: ✓ no net, big two-tier scalloped vân kiên standing out past the shoulders (more than t7), front cut away, chest pearls only, no jade disc, red only on crown. ~ dragon/phoenix embroidery on the collar not clearly visible; collar is bold and shoulder-wide (reads close to a short cape).
+**Disclosure:** when pasting the t8 prompt I typed "the hand really gripps it" (one extra "p") where the file says "grips". One-letter typo, no visible effect, but it is not byte-verbatim; t7 was pasted exactly.
+Sheet: dev/handover/review-sheets/thu_t7_t8_vankien_L1903.png (MẪU kseQCFw16B | CŨ O6ElrJ3ynm | MỚI t7 | CŨ 3zKyU3rREY | MỚI t8).
