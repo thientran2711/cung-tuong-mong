@@ -262,3 +262,30 @@ STATUS: PASS → LAND READY review/jagday-walk-rv 239b22c5b9554fbb12e44a23456165
 - Gates on f0660492: ag-carry-turn 6/6 · ag-walk 2/2 · coop-e2e 92/92 · quickcheck PASS (5 runs, buổi 1023/1354).
 - Main then moved to 9c1dd605 (kit-pcrow-square). merge-tree finds conflicts in index.html / sw.js only, not in assemble.py.
 STATUS: PASS → LAND READY review/jagday-walk-rv f06604929e49a3c43c66cdb0914d7d4e7f28960a (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS (92/92) + co-op seat check (ROUND 6), LIVE-revert audit clean.
+
+## HANDOVER (reviewer session_01964izGHdj1g2LVwM27Nc3K → next reviewer; 21/11 ~04:10Z)
+Context 27 % of 1M (START_CTX 4 % → line 29 %), so I roll over. D #13 session_01964izC63Mgk7VPcriQTwU7 opens the next reviewer.
+State: ROUND 6 PASSED. The newest LAND READY is f06604929e49a3c43c66cdb0914d7d4e7f28960a (LIVE 32c0e33b + 56ff0db0 merged). Main has not landed it. LIVE is now 5a8c30af (menu-panel on 0d60ae54 kit-tap-word; db6ae2a0 bag-inline before).
+TODO (D #13 order 03:59Z): re-merge LIVE 5a8c30af (or newer) into review/jagday-walk-rv with this recipe:
+1. Worktree on a deeper history: `git worktree add --no-checkout /home/user/wt/<n> -B review/jagday-walk-rv origin/review/jagday-walk-rv`, then sparse-checkout (PREAMBLE L14), checkout, `bash dev/site/hooks/install.sh`, then `flock /home/user/wt/fetch.lock git fetch --deepen=400 origin main review/jagday-walk-rv`. `git merge-base HEAD origin/main` must be the last merged main (56ff0db0 or later). For the handover branch use `git worktree add --detach <dir> origin/claude/cung-tuong-mong-handover-hj0h8w` and push HEAD:claude/cung-tuong-mong-handover-hj0h8w. Never commit in /home/user/cung-tuong-mong: it is shallow and stale, and a pull --rebase there starts a 430-commit rebase.
+2. `git merge origin/main`. Resolve conflicts:
+   - index.html / sw.js: `git checkout --theirs`.
+   - dev/build/assemble.py (module list): take MAIN's list and append 'jwalk.js' as the last module. The branch adds no other module.
+   - Then `python3 dev/build/assemble.py && bash dev/site/build_site.sh`, commit, and check that `grep -rn "^<<<<<<< " dev index.html sw.js` is empty. `grep -c "function walkNpcPass\|knOn())knTb()" index.html` must be 2.
+3. LIVE-revert audit:
+   - (a) `git diff --name-only origin/main HEAD` minus index.html / sw.js must be the same 28 files as `git diff --name-only 56ff0db0 f0660492`.
+   - (b) Per file, the sorted ± lines of `git diff origin/main HEAD -- f` equal those of `git diff 56ff0db0 f0660492 -- f`. assemble.py may differ only by + 'jwalk.js'.
+   - (c) Lines HEAD removes from LIVE must come from the branch's own `git log --no-merges origin/main..HEAD` commits. Known exceptions: 3 walk-cost resolutions that keep LIVE text (j77 home spill, j41 k===S.place + j77When, jbal BAL.walk npc:1, pen:1).
+4. Gates, one at a time:
+   - ag-carry-turn 6/6
+   - ag-walk ×4
+   - walk-cost ALL OK (12: 0 bare far)
+   - coop-e2e (92/92 on 56ff0db0; outdir in scratch)
+   - `bash dev/tools/quickcheck.sh --cpu 4 --runs 5`. Use 5 runs: 3 runs flake on random-card buổi outliers (~3.4 s; main has them too, nextBuoi compute 426 vs 409 ms at CPU×4). G4 coop-one-world flaked once in quickcheck and passed 3/3 alone.
+5. PASS → «LAND READY review/jagday-walk-rv <sha> (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS + co-op seat check (ROUND 6), LIVE-revert audit clean», addressed to MAIN CHÍNH 87 in FOREMAN_D_STATUS.md + an addendum here. Push the handover branch (pull --rebase; STATUS conflicts append-only). Then send_message D #13.
+Co-op seat check (ROUND 6, 88412cb1): two-seat probe 15/15, coop-thin-f2 all ok. Re-run it only if a LIVE merge touches j95.js:28 (j95on), jagknow, jwalk or jcoopworld goTo: `git diff 56ff0db0 origin/main -- dev/build/j95.js dev/build/jagknow.js dev/build/jwalk.js dev/build/jcoopworld.js`.
+Rollover rules (verbatim):
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
