@@ -16,7 +16,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
   const inl=await p.evaluate(()=>{const e=document.querySelector('#panel');return{chip:!!e.querySelector('[data-chap]'),checks:e.querySelectorAll('.kchk').length,go:!!e.querySelector('[data-chapgo]'),txt:e.innerText.length}});
   chk(sn+': chip tappable + inline progress + Đi làm',inl.chip&&inl.go&&(sn==='milestone'||inl.checks>=2));
   if(SHOT){await p.screenshot({path:`${SHOT}-${sn}-tab.png`})}
-  for(const [how,sel] of [['chip','#panel [data-chap]'],['card','#panel .kskill .kskinfo'],['picture','#panel .kskill .ksart'],['check line','#panel .kchk']]){
+  for(const [how,sel] of [['chip','#panel [data-chap]'],['card','#panel .kslide .ksls:not([hidden]) .ksart'],['picture','#panel .kslide .ksart'],['check line','#panel .kchk']]){
    await reset();await p.evaluate(()=>{tab='story';render()});if(!(await p.locator(sel).count())){chk(`${sn}: ${how} exists`,false);continue}await p.locator(sel).first().click({timeout:40000});await p.waitForTimeout(500);
    const r=await p.evaluate(()=>{const m=document.getElementById('modal');const d=m.querySelector('.dlg.kpanel');return{open:!m.hidden&&!!d,title:d&&d.querySelector('.kptitle')?d.querySelector('.kptitle').innerText:'',secs:d?d.querySelectorAll('.kpst').length:0,txt:d?d.innerText:'',hasGo:!!(d&&[...d.querySelectorAll('button')].some(b=>/Đi làm/.test(b.innerText))),imgs:d?d.querySelectorAll('img').length:0}});
    chk(`${sn}: tap ${how} -> detail panel`,r.open&&/Chương/.test(r.title)&&r.secs>=3&&r.txt.length>120);
@@ -27,7 +27,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
   await reset()}
  /* rank + Việc nhờ chips */
  await reset();await p.evaluate(()=>{tab='story';render();document.querySelector('#panel [data-ktsv="rank"]').click()});await p.waitForTimeout(250);
- await p.click('#panel .kskill .ksart');await p.waitForTimeout(400);chk('rank picture -> Sắc phong panel',await p.evaluate(()=>/Sắc phong/.test((document.querySelector('#modal .kptitle')||{}).innerText||'')&&!document.getElementById('modal').hidden));
+ await p.click('#panel .kslide .ksls:not([hidden]) .ksart');await p.waitForTimeout(400);chk('rank picture -> Sắc phong panel',await p.evaluate(()=>/Sắc phong/.test((document.querySelector('#modal .kptitle')||{}).innerText||'')&&!document.getElementById('modal').hidden));
  await reset();await p.evaluate(()=>{tab='q72';render()});await p.waitForTimeout(250);await p.click('#panel .ktop .kchip');await p.waitForTimeout(300);chk('Việc nhờ counter chip -> explanation popup',await p.evaluate(()=>!!document.getElementById('kpop')&&document.getElementById('kpop').innerText.length>15));
  chk('no page errors',!errs.length);
  console.log(res.map(x=>(x[1]?'ok   ':'FAIL ')+x[0]).join('\n'));if(errs.length)console.log('ERRS',errs);await b.close();process.exit(res.every(x=>x[1])?0:1)})().catch(e=>{console.error(e);process.exit(2)});
