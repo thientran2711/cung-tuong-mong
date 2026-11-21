@@ -35,3 +35,6 @@ Faults: t2 held item is a round green-jade ball on a green handle with green bea
 ## ĐÔNG t1 L1912 (HHCOL1/#26) — 55 cr
 rgXHHk0xtc (gpt-2-6 1k low 9:16 seed 7172 ref nVsrRMPYQD). keep PASS; check_store fails only M06/W01/W04 (owner waiver). Sheet dev/handover/review-sheets/dong_t1_L1893_vs_L1912_VE6.png (CŨ SyhrbjLUb8 | MỚI), re-viewed.
 Looked: no shawl/phi bạch, ice-blue robe now opaque with a heavier lined look and bigger sleeve folds, ivory fur only on collar/cuffs/hem as before, mint bow at centre waist, book, one plum flower. Faults: inner mint skirt still reads a little light/airy at the front; no CAPTION in file so no text.
+## ĐÔNG Đáp ứng t1 L1924 (HHCOL2 via #26) — 55 cr
+KLpQriTkqp (gpt-2-6 1k low 9:16 seed 7172 ref nVsrRMPYQD). keep PASS; check_store fails only M06/W01/W04 (owner waiver). Sheet 3-up dev/handover/review-sheets/dong_t1_L1924_3up_VE6.png (duyệt 1ldmoUCr4r | L1912 rgXHHk0xtc | L1924 mới).
+Looked: mouth closed, no teeth (L1912 had a wide open smile), calm upright consort poise, thick opaque ice-blue top + mint skirt, bow at centre front of waist, ivory fur on collar/cuffs/hem only, no shawl, one plum flower. Faults: hairpins few (2–3) and thin, little pearl dangle; book is violet (differs from both robe colours, OK); right hand held out in a loose open pose; no CAPTION in file so no text.
