@@ -53,8 +53,8 @@ const OLDN={news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evid
     const old=P[0]?P[0]:(()=>{const n=OLDN[kind]||"maid";if(n==="me")return S;if(n==="emp")return S.emp;if(n==="maid")return S.maid;if(n==="tq"||n==="ksp")return S.court&&S.court[n]||S.maid;try{return elderBy(n)}catch(e){return null}})();
     const who=X.who;const sub=who&&(who.__kp||who);const rec={id:String(m.pid||m.t||"").replace(/<[^>]+>/g,"").slice(0,40),kind,before:nm(old),after:nm(who),afterIsElder:!!(sub&&sub.eid&&!P[0]),fixed:P[0]?"named":who===null?"picture":sub===S?"self":"person"};
     const rows=[...dlg.querySelectorAll('#mb .kfact[data-kfp]')];const vis=r=>{const c=r.querySelector(':scope > .md');return c&&!r.classList.contains('kfav-off')};
-    rec.dupLeft=rows.filter(r=>{const q=kfpGet(r.dataset.kfp);return vis(r)&&who&&q&&(q.__kp||q)===sub}).length;rec.many=rows.filter(r=>vis(r)&&(+r.dataset.kfn||1)>=2).length;rec.lineAv=who?rows.filter(vis).length:0;
-    rec.onPic=dlg.querySelectorAll('.kevav .md').length;rec.ta=(sub===S)?(dlg.querySelectorAll('.knr-ta').length>0):true;
+    rec.dupLeft=rows.filter(r=>{const q=kfpGet(r.dataset.kfp);return vis(r)&&who&&X.slot!=="item"&&q&&(q.__kp||q)===sub}).length;rec.many=rows.filter(r=>vis(r)&&(+r.dataset.kfn||1)>=2).length;rec.lineAv=who&&X.slot!=="item"?rows.filter(vis).length:0/* kit-dialog-2 #76: an ITEM in the left slot is the subject; a person named in the line is then a normal line avatar */;
+    rec.onPic=dlg.querySelectorAll('.kevav .md').length;rec.ta=(sub===S&&X.slot!=="item")?(dlg.querySelectorAll('.knr-ta').length>0):true;
     rec.srcs=[...dlg.querySelectorAll('#mb .md img, #mb .kevav img')].map(im=>im.getAttribute('src')||"");
     window.__DP.push(rec)}catch(e){window.__DP.push({id:"ERR",err:String(e).slice(0,200)})}return r}},OLDN);
   /* (1) every PEND builder */
