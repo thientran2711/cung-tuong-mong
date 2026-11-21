@@ -71,7 +71,8 @@ function settle(d){const L=d.S.coopAsk;if(!Array.isArray(L)||!L.length)return;co
     if(a.maid&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.maid.sid)){d.S.staff.push(srvHome(a.maid));N.returned++;
      lines.push(`${a.maid.name} được Hoàng thượng để mắt, nhưng hậu cung đã đủ người, không có chỗ phong; nàng trở về hầu ngươi như cũ.`)}continue}
    if(a.v&&!d.R.some(r=>r&&r.id===a.t)){d.R.push(J(a.v));N.ghost++}keep.push(a);continue}
-  if(res){if(res[0]===0&&a.k==="srv"&&a.s&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.s.sid)&&a.s.spyFor==null){d.S.staff.push(srvHome(a.s));N.returned++}continue}
+  if(res){try{const b=CW.askBack&&CW.askBack[a.k];if(b)b(d,a,res)}catch(e){console.error("ask back",a.k,e)}
+   if(res[0]===0&&a.k==="srv"&&a.s&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.s.sid)&&a.s.spyFor==null){d.S.staff.push(srvHome(a.s));N.returned++}continue}
   keep.push(a)}
  d.S.coopAsk=keep;if(lines.length)d.S.askNote=(d.S.askNote||[]).concat(lines)}
 /* ---------- host: apply requests ---------- */
@@ -93,7 +94,7 @@ function hSrv(a){const t=npcOf(a.to);if(!t||!a.s)return 0;t.staff=t.staff||[];if
 function hPet(a){const t=npcOf(a.to);if(!t||!a.P)return 0;t.pets=t.pets||[];if(!t.pets.some(P=>petKey(P)===petKey(a.P)))t.pets.push(toHost(J(a.P)));return 1}
 function hKid(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.kids)return 1;const i=t.kids.findIndex(k=>k&&k.name===a.name);if(i>=0)t.kids.splice(i,1);return 1}
 function hSrvOut(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.staff)return 1;const i=t.staff.findIndex(s=>s&&s.sid===a.sid&&s.name===a.name);if(i>=0)t.staff.splice(i,1);return 1}
-const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid,srvout:hSrvOut};/* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
+const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid,srvout:hSrvOut};CW.askH=H;/* other modules add their kinds here (jdc: dcout / dcin) *//* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
 function hostApply(L,why){if(!host()||!live()||!Array.isArray(L))return 0;S.askDone=S.askDone||{};let n=0;
  for(const a of L){if(!a||!a.id||S.askDone[a.id]||!H[a.k])continue;let r=0;try{r=H[a.k](a)}catch(e){console.error("ask apply",a.k,e)}
   S.askDone[a.id]=[r,wk()];n++;N.applied++;N.log=(N.log||[]).slice(-9).concat([why+' '+a.id+' w'+wk()+' r'+r]);if(r===0)N.refused++}

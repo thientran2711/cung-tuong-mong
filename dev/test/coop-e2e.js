@@ -284,6 +284,15 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    ok(!!y.txt&&y.txt.includes(y.name)&&!y.txt.includes('Nguyễn Thị Hoa'),'hl force (b): the guest\'s own text names the new name',[y.txt,x.hl,y.hl])}
   }
  if(GE)await geP('ge rank after 3 merged weeks',null,null);
+ /* COOP_GE (review/ge-phutang, E35b): a Phù Tang seat (origin pf, road pt_*) opens ITS OWN grand-ending branch (geOrig identity) and gets the Hồi kết nhánh
+    dialog; the other seat's branch / S.ge is untouched (S is personal) — then the seats swap (two-way). Each seat's life is restored after the probe. */
+ if(GE){const gePt=(o,rd)=>o.p.evaluate(rd=>{const k0=S.origin&&S.origin.k,f0=S.st.f14,g0=S.ge,ch0=S.st.ch,q0=Q.slice();
+    try{S.origin.k='pf';S.st.f14=Object.assign({},f0||{},{rd});S.ge=null;const s=geS();S.st.ch=Object.assign({},ch0||{},{all:1});Q.length=0;geAsk();const q=Q.find(m=>m.pid==='ge1');
+     return{b:s&&s.b,live:typeof geOrig==='function'&&geOrig(rd)==='pf',ask:!!q&&q.opts.length===4}}
+    finally{S.origin.k=k0;S.st.f14=f0;S.ge=g0;S.st.ch=ch0;Q.length=0;Q.push(...q0)}},rd);
+  const own=o=>o.p.evaluate(()=>{const g=S.ge;return g?g.b:null});
+  for(const [P,O,rd] of [[A,B,'pt_hai'],[B,A,'pt_dang']]){const o0=await own(O);const r=await gePt(P,rd);const o1=await own(O);
+   ok(r.b===rd&&r.live&&r.ask,`ge Phù Tang: ${P.name} on ${rd} opens its own branch + Hồi kết nhánh`,r);ok(o0===o1,`ge Phù Tang: ${O.name}'s own branch untouched by ${P.name}'s`,{o0,o1})}}
  if(NCF){/* F2 outcome: after two more merged weeks the host's order reached her seat and she renamed her person (texts follow) */
   const b=await B.p.evaluate(p=>({n:p==='maid'?S.maid&&S.maid.name:S.name,ord:window.NM_ORD,o:S.nmOrd||null}),NCF.f2.p);const a=await A.p.evaluate(()=>({ord:NM_FIX.orders||0,o:S.nmOrd||null}));
   ok(b.n&&b.n!==NCF.an,'force F2: the guest\'s person that took the host\'s name was renamed on her seat by the host\'s order',{b,a,f2:NCF.f2})}
