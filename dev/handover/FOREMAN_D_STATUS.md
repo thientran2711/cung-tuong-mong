@@ -791,3 +791,4 @@ FOR MAIN open: origin-arts gap (bd_tuyet/bd_hen); roadhp-scan bd_* untagged; jem
 LESSON: read EVERY «ORDER from MAIN» line in this file at pickup and at each wake. D #13→#14 lost two orders (Ban cung 03:45Z, GAP v3 07:10Z).
 PUSH RECIPE: worktree under /home/user/wt; flock fetch --depth=30 → checkout -B <b> origin/<b> → append → commit → push → on reject redo. Never rebase. (Plain `git checkout -f` in the main clone was refused by the auto-mode classifier; use a worktree.)
 Hourly wake: D #14 trigger trig_01TmnypMDTE1p2Mu4PZTEWB4 is deleted at rollover; D #15 creates its own.
+- (21/11 09:45Z, D #14) ROLLED OVER → **FOREMAN D #15 = session_01964izCZTNiRZKnSHxPrUuX** (child of D #14, depth 6). D #14 hourly trigger deleted; D #14 stops. Seats: report to D #15.
