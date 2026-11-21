@@ -97,3 +97,38 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - 04:45Z (Foreman #18 order): restored the glued thu_comoi s62_t4_THU_COMOIk + s62_t5_THU_COMOIj (+ .keep) from be1ec9e; keep_check --all = 386 PASS.
 - 04:58Z JOB L1689 try-on page done (Foreman #18): https://claude.ai/artifact/1Vq6sMKho8gTbHYi1DdfzN — details in PAL3.md §L1689 RESULT. 0 cr.
 - 04:50Z LESSON (Foreman #18): my 94def72 used 'commit -am' and re-committed stale palettes_season_L1583.json + four_season_L1583.py (DESIGN21 restored them in 1529c93). From now on: git status first, stage ONLY my own files by path, never -a / add -A.
+
+## §L1699 — NOT STARTED. HANDOVER (CHECK2 rolls over: context 40 % ≥ START ~3 % + 25 %; depth 8 = limit, so I cannot open a successor)
+depth 8 · START_CTX ~3 % · now 40 % of 1M (get_session context_usage 399 792). Foreman C #18 is rolling over too (also depth 8). The owner opens a ROOT Foreman C #19 from claude.ai.
+FOR MAIN: open a ROOT (Foreman C #19 or a fresh checker/prompt worker) from claude.ai for the L1699 job below. CHECK2 can take no more work.
+
+### L1699 job (from Foreman C #18 04:49Z, not started, 0 cr)
+Owner L1699 (verbatim key parts are in #18's message; summary):
+- t4–t8 (Tần, Phi, Quý phi, HQP, HH) of the s62 thu set go back to the OLD outfit text used for m19 / m29 / s65.
+  - Sources: dev/art/rank8-m19/, dev/art/rank8-old4/ (m29_t*.txt is GLUED ~18k: take the single copy), dev/art/rank8-s65/.
+  - The old text has the "thin, light, flowing silk and gauze…" fabric, the crossed collar and the simple embroidered silk sash with jade pendants.
+  - Recolour to today's s62 thu palette (olive #9FB577 + lilac).
+  - The ONLY change: SWAP the Phi and Quý phi signature pieces (Quý phi's cape/collar piece → Phi; Phi's → Quý phi).
+  - Drop today's LAYERED NECKLINE / HELD IN / long vertical panels / brocade girdle words.
+- COLLAR test: take the square-collar words of the m19 t3 and m29 t3 Quý nhân prompts.
+  - Make ONE test of Tần t4 with that square collar, plus a capelet that sits on the shoulders, open at the front, never hiding the collar.
+  - Not rolled out to other tiers yet.
+- t1 / t2 / t3 = today's dapung4 t1_v11 / t2_v11 / t3_v12, with ONLY the FABRIC sentence replaced by the m19 sentence verbatim ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."). Any "satin (đoạn)" → "silk".
+- Every file: an A38 .keep, ≤ 10 000 chars, no glue. Run keep_check + check_store (the store M06 master-fabric FAIL is expected = owner order).
+- Commit BY PATH ONLY. Report the diffs per file + the draft cost (55 cr each; Tần test first = 55 cr), then STOP: nothing is drawn without the owner's OK.
+- Report to Foreman C #18 session_01D3E3NbPQeExFnFGqi5RR2S and to whoever announces itself as Foreman C #19.
+
+### State I leave
+- Final checked thu s62 set (before L1699): t1 v11, t2 v11, t3 v12 (dapung4), t4 COMOIo, t5 COMOIo, t6 COMOIn, t7 v8m, t8 v10m. L1699 now replaces t4–t8 with the old texts.
+- Maids: r3 tam/nhị PASS (b31b625, nhất dropped by owner L1687); thân cận ×3 PASS (8312d5c). Neither released (the owner picks the quality).
+- Try-on page L1689: https://claude.ai/artifact/1Vq6sMKho8gTbHYi1DdfzN (97ef6b0).
+- Glue watch: thu_comoi s62_t4_THU_COMOIk / t5_COMOIj and palettes_season_L1583.json / four_season_L1583.py get re-glued by merges. Check them after any pull. NEVER commit with -a / add -A.
+- Standing order: release NOTHING to GEN1 without the Foreman's or the owner's OK.
+
+Takeover lines to copy verbatim:
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
