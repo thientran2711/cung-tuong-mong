@@ -103,6 +103,7 @@ V8 = [
 ]
 if __name__ == "__main__":
     for a, b in V8:
+        if "vase" in a and a not in s and b in s: continue   # novase_L1642 (JOB 7) already swapped the vase in the base files
         assert s.count(a) == 1, a; s = s.replace(a, b)
     s = s.replace("Mùa Thu · Tần · v7", "Mùa Thu · Tần · v8")
     assert len(s) <= 9990, len(s)

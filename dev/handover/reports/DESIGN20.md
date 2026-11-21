@@ -91,3 +91,87 @@ GEN1 told to HOLD v7 (COMOIg/COMOIf). New shared clause **master_common.OUTER_WR
 - t5 v9 = COMOIh (JOB 5) unchanged; its capelet is still read from t4 COMOIh (same capelet text as COMOIi).
 - Gates t4 v9: tp4 a22 PASS; store only the Outfit exemption [0.70]; keep sidecar PASS.
 - JOB 6b (Foreman C #16 02:01Z, CHECK1 job 15): t4 COMOIi rebuilt in place (not drawn yet): front edges "(each a long vertical lotus-embroidered blush panel, shoulder to hem)" ("embroidered" back); room from own words: "sleeves with small lotus flowers on them" (was "a few small"), item "a white-jade lotus lamp" (was "a small white-jade"). 9 986 chars; tp4 PASS; store only Outfit exemption [0.69]; keep PASS, --all 303.
+
+## JOB 7 — NO VASE at the source + gate (owner L1438 + L1642 "bỏ hết tất cả các món đồ mà cầm cái bình hoa", Foreman C #16 02:02Z) — 0 gens
+- SOURCE check: t8-prompt-B/build.py + item_age.py already vase-free since B26FAB4 J4 (every held vase → a lotus lamp of the rank's material, same slot; item_age 'lamp' key). The vases lived on only in SAVED figure prompts (bases, season copies, rank8 t7 lists, face-common m44, tests) that later builders read.
+- Fix: **dev/art/novase_L1642.py** = the SAME 1:1 B26FAB4 list (b26/proof/cmp10.py VASE) + the m44 face-common wordings, applied to every figure .txt/.keep under dev/art (room/place décor and flower_sheets "no vase" untouched; item_spec.py 'bhoa' gift icons = not held, untouched). 75 files changed; rerun --dry = 0 → idempotent.
+- **Gate: check_store F19 NOVASE** (every scope): a vase / bình hoa / lọ hoa in a HOLD sentence = FAIL; "no vase", décor and the maid's "flower basket … for the vases" pass. --self NOVASE selftest OK (the 2 PROOF MISMATCH S14/S19 lines are pre-existing). Scan of all figure .txt: 0 held vases left. Sample gates: each swapped file = old fails − 1 (the vase), no new fail.
+- Builders: thu_comoi/make_s62_t4_thu.py V8 vase entry skips when the base is already swapped; t4 chain rebuilt (COMOIe 9 981 / f 9 964 / g 9 973 — 8 chars shorter, lamp; h 9 988 / i 9 986 unchanged); t5 COMOIe–h byte-identical. keep_check --all 310 PASS.
+- Owner-facing items (same as B26FAB4 list): t1 a small plain clay lotus lamp · t2 a small porcelain lotus lamp · t3 a small celadon lotus lamp · t4 a small cloisonné / white-jade lotus lamp · t5 a cloisonné enamel lotus lamp with gilt petals · t6 a white-jade lotus lamp with gold mounts (phoenix mounts variant) · t7 HQP a gold lotus lamp set with gems · m44 face a small porcelain lotus lamp.
+### Table (file → item swap)
+- _retired/face-common/m44.FULL.txt | a small porcelain vase holding a single flower sprig -> a small porcelain lotus lamp
+- _retired/face-common/m44.txt | a small porcelain vase holding a single flower sprig -> a small porcelain lotus lamp
+- b26/base/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- b26/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak2.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak3.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak5.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak6.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_cloak8.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- dong_hientai/s62_t4_DONG_HIENTAI_vk.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- f2/base/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- f2/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- face-common/m44.v3.FULL.txt | a small porcelain vase with a single flower sprig -> a small porcelain lotus lamp
+- face-common/m44.v3.txt | a small porcelain vase with a single flower sprig -> a small porcelain lotus lamp
+- face-common/m44.v3b.FULL.txt | a small porcelain vase with a single flower sprig -> a small porcelain lotus lamp
+- face-common/m44.v3b.txt | a small porcelain vase with a single flower sprig -> a small porcelain lotus lamp
+- face-common/m44.v3c.FULL.txt | the small porcelain vase with a single flower sprig -> the small porcelain lotus lamp
+- flower/base/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- flower/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- owner-copy/pr-night-1119/old/bt-t2.store.txt | the vase cradled -> the lamp cradled
+- owner-copy/pr-night-1119/old/bt-t2.txt | the vase cradled -> the lamp cradled
+- rank8-old4/m13_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-old4/m20_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-old4/m29_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- rank8-s62/g20/m29_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- rank8-t78/m20_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/m28_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s09_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s12_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s15_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s18_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s44_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s46_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- rank8-t78/s51_t7.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- seasons4/han_bac_base/s62_t4_HAN_BAC_02cd263.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/han_bac_base/s62_t4_HAN_BAC_a2128fc.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/han_bac_base/s62_t4_HAN_BAC_ed3e8fd.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/ladder_base/s62_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t1_HAN_BAC.txt.keep | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t2_HAN_BAC.txt.keep | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t3_HAN_BAC.txt.keep | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_gon.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_gon2.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_open.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_open2.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_open3.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_open5.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_open5c.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_HAN_BAC_vai.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_XUAN_COMOI.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- seasons4/s62_t4_ha_DUONG.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- store-all/test/m07_t4.prompt.txt | a small cloisonné vase with flowers -> a small cloisonné lotus lamp
+- store-all/test/m07_t7.prompt.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- store-all/test/m20_t4.prompt.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- tang1/base_t4.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- tang1/s62_t4_TANG_final_xuan.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- tang1/s62_t4_tang_xuan.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/m28_t7_THU_builder.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- thu_comoi/m28_t7_THU_nn.txt | a gold-mounted jade vase with peonies -> a gold lotus lamp set with gems
+- thu_comoi/s62_t4_THU_COMOI.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOIc.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOId.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOIe.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOIf.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOIg.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- thu_comoi/s62_t4_THU_COMOIh.txt.keep | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- winter1/g28/s62_t4_dong.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- winter1/s62_t4_dong.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- winter1/s62_t4_dong_fur2.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- winter1/s62_t4_dong_fur3.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- winter1/s62_t4_dong_noangle.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
+- 75 files changed

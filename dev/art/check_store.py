@@ -919,6 +919,17 @@ def fruit_fails(text, scope=None, pid=None):
             out.append(("F16", "NOFRUIT", f"fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …{sent[max(0, m.start()-60):m.end()+30]}…")); break
         if out: break
     return out
+# NOVASE (owner L1438 20/11 "no vase for anyone" + L1642 21/11, verbatim: "bỏ hết tất cả các món đồ mà cầm cái bình hoa"): in EVERY scope a vase / flower vase
+# in a HOLD sentence (Pose: / holding / held / cradling …) = FAIL. Replacement items = lotus lamps (B26FAB4 list, dev/art/novase_L1642.py). Not a fail: "no vase",
+# room décor, and the maid's "flower basket / bundle of flowers for the vases" (the vases are not held). DESIGN20.
+VASE_RX = re.compile(r"(?<!for the )\b(?:vases?|bình hoa|lọ hoa|bình cắm hoa)\b", re.I)
+def vase_fails(text):
+    for sent in re.split(r"(?<=[.;])\s+", text):
+        if not HOLD_RX.search(sent): continue
+        for m in VASE_RX.finditer(sent):
+            if NEG.search(sent[max(0, m.start() - 30):m.start()]): continue
+            return [("F19", "NOVASE", f"held vase (owner L1438/L1642: nobody holds a vase, any rank/season/person; use the lotus lamp of the rank): …{sent[max(0, m.start()-60):m.end()+30]}…")]
+    return []
 # PETS (owner Lượt 1057/1059, 20/11, rule F17; table dev/art/t8-prompt-B/pets.py): a pet only at ages 18/26, only kc (thiếu nữ) / face and ranks 1–6;
 # none at t7 HQP, t8 HH, Thái hậu, triều phục, Nữ đế, maids/states, ages 36+; the animal only IN CONTACT, never beside her / at her feet.
 PET_RX = re.compile(r"\b(?:rabbits?|bunn(?:y|ies)|kittens?|cats?|pupp(?:y|ies)|dogs?|sparrows?|butterfl(?:y|ies)|doves?|canar(?:y|ies)|lovebirds?|parrots?|nightingales?"
@@ -1056,6 +1067,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += angle_fails(text)   # MG3 L806 (E1)
     fails += pet_fails(text, scope, age)   # F17 PETS (owner Lượt 1057/1059): ages 18/26, kc + ranks 1–6 only, in contact only
     fails += fruit_fails(text, scope, pid)
+    fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
@@ -1134,6 +1146,10 @@ def selftest():
                     ("Pose: holding a sprig of pink peach blossom; a round fan in soft peach pink silk; a carved peach-wood comb.", 0),
                     ("Pose: she holds a round jade longevity plaque carved with a round shou symbol.", 0), ("She holds nothing, no fruit in her hands.", 0)]:   # F16 NOFRUIT
         if bool(fruit_fails(norm(t))) != bool(want): print("NOFRUIT SELFTEST", want, t); bad += 1
+    for t, want in [("Pose: walking with a small white-jade vase with blossoms held upright in one hand.", 1), ("both hands holding a gold-mounted jade vase with peonies in front", 1),
+                    ("Pose: walking with a small white-jade lotus lamp held upright in one hand.", 0), ("Pose: holding a flower basket of rattan for the vases.", 0),
+                    ("Pose: holding a round fan; no vase, no cup.", 0)]:   # F19 NOVASE (owner L1438/L1642)
+        if bool(vase_fails(norm(t))) != bool(want): print("NOVASE SELFTEST", want, t); bad += 1
     for t, sc, want in [("A palace maid (cung nu, tam dang). a decorative sash with a small jade or tassel pendant.", "tp1", 1),
                         ("A palace ma ma. a wide silk sash, a jade pendant on a silk cord.", "mama", 1),
                         ("A palace maid (cung nu, nhi dang). an embroidered silk sash with a small embroidered silk fragrant sachet (túi thơm).", "mama", 0),
