@@ -95,11 +95,12 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
    ok(a.fr===c.me&&c.fr===a.me,tag+': each sees the other as a person',[a.me,a.fr,c.me,c.fr]);return[a,c]};
  /* 3 A at home, B in the palace */
- const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||null;return{kc:typeof isKc==='function'&&isKc(),end:S.kc&&S.kc.end,fam:S.kc?S.kc.fam.length:0,name:S.name,d:[S.year,S.month,S.tuan],era:S.emp.era,fr:f&&f.name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()).join('|')}});
+ const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||null;return{kc:typeof isKc==='function'&&isKc(),end:S.kc&&S.kc.end,fam:S.kc?S.kc.fam.length:0,name:S.name,d:[S.year,S.month,S.tuan],era:S.emp.era,fr:f&&f.name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()).join('|'),road:typeof road8==='function'?road8():'?',ids:[...document.querySelectorAll('#tabs [data-tab]')].filter(b=>b.offsetParent).map(b=>b.dataset.tab).join(',')}});
  {const a=await st(A),c=await st(B);ok(a.kc&&a.fam>0,'A is at home on the tiểu thư road',a);ok(!c.kc,'B is in the palace');
   ok(a.era===c.era&&a.R===c.R,'same Emperor and consorts');ok(String(a.d)===String(c.d),'same date',[a.d,c.d]);
   ok(!c.fr,'B has no palace entry for A while A is at home',c.fr);ok(a.fr===c.name,'A sees B as a palace person',[a.fr,c.name,await A.p.evaluate(()=>({P:Object.keys((COOPW.base&&COOPW.base.P)||{}),seat:COOPW.seat,inLife:COOPW.inLife,rc:rivals.filter(v=>v.coop).length,fh:COOPW.friendHome(COOPW.base.P.b),bkc:JSON.stringify(COOPW.base.P.b.S.kc||null).slice(0,80),bd:[COOPW.base.P.b.dead,COOPW.base.P.b.S.dead],brank:COOPW.base.P.b.rank,qOn:qOn(),n:rivals.length}))]);
-  ok(/Khuê phòng/.test(a.tabs),'A has the home tabs',a.tabs);
+  /* since maid-8tabs (06807c14f) every road shares ONE 8-tab bar with road-specific labels: test the road (state) and the bar's kit ids, never label words */
+  ok(a.road==='kc'&&a.ids.split(',').length===8&&a.ids.split(',')[0]==='act','A has the home tabs (road kc, 8-tab bar)',[a.road,a.ids,a.tabs]);
   const n=await B.p.evaluate(()=>[...document.querySelectorAll('#modal *')].some(e=>/ở nhà cha chờ kỳ tuyển tú/.test(e.textContent||''))||COOPW.fWasHome===true);ok(n,'B is told the friend is at home');}
  await clear(A);await clear(B);await shot(A,'05-home');await shot(B,'05-palace');
 
