@@ -2256,3 +2256,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:58Z) FRAME RE-CUT PUBLISHED by MAIN 100 (owner OD 21/11 ~18:55Z, OD:L223 main may overwrite CDN): looked at sheet-dark/light + guard old/new zoom (green fringe gone, clean); old 34 backed up CDN img/_review/frame-recut/old/; new 34 → img/kit/frame-*.webp (md5 verified on guard). M99b told to finish report + stop. Keeper #6 told KIT §4.5 overwrite.
 - (20:00Z) rv MSxp PASS 042d2b43 kit-pframe-overlay = WRONG base (8f5676ed with halo; owner 19:25Z no halo) → NOT landed. ORDER keeper #6 r2 = 1f90a2b8 + band table re-measured on the recut LIVE frames + KIT §4.5 → rv MSxp. Owner shots after that PASS.
 - (20:01Z) LC3: LANDED ksz-lost-tap ee36e62f = LIVE. FAIL ui-leftover-fold-r2 (jk4.js conflict vs kit-mark-fix r6) → ORDER B r3. LC3 continues palace-life-gaps-r4 → home-chapters-land3-r.
+- (20:00Z) LAND CHAIN 3: LANDED ksz-lost-tap ee36e62f = LIVE.
+- (20:00Z) LAND CHAIN 3: FAIL ui-leftover-fold-r2 da27c7e2 — REAL CONFLICT dev/build/jk4.js vs LIVE (kit-mark-fix r6) → B owes r3 on LIVE ee36e62f; dropped, chain continues.
