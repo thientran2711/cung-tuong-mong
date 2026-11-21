@@ -36,3 +36,11 @@ keep_check --all: 405 sidecars PASS. check_store --scope maid --age a18 --refs s
 - test12_nhat_L1731 (base test11_nhat_L1725): sleeves = WHOLE edge of BOTH sleeve layers with a WIDE small-flower cuff band all the way round, clearly wider/denser than nhị, never a plain edge; border embroidery "clearly much DENSER and RICHER, the border bands wider".
 - test12_{nhi,nhat}_thancan_L1731 = colour swap only. Tam: test11_tam_L1725 stands (already K30).
 - keep_check --all 432 PASS; check_store maid a18 ×4 PASS; 6.5–8.8k chars.
+
+## JOB 4 — owner L1734 (nhị A 1ldQhbmr4r approved), 0 gens
+- K30 updated (Lượt 1734): sash colour always named (one of her two colours, never white), front bow in the opposite colour; nhất airier.
+- test13_tam_L1736 (base test11_tam): sash + ties powder blue, front bow deep rose (was: all powder blue).
+- test13_nhi_L1736 (base test12_nhi): + "the sash is deep rose and the front BOW is in the opposite colour powder blue ..., never white" only.
+- test13_nhat_L1736 (base test12_nhat): sash powder blue / bow deep rose; borders "only a little richer than nhị, light and AIRY: NARROW bands, small flowers spaced apart, never crowded/heavy/stuffy"; cuffs narrow airy well-spaced band all round both sleeve layers; skirt hem small well-spaced flowers a little more than nhị.
+- test13_*_thancan_L1736: word diff verified = only powder blue/deep rose/hex tokens differ.
+- keep_check --all 441 PASS; check_store maid a18 ×6 PASS; 6.6–9.0k chars.
