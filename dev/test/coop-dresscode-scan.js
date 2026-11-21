@@ -86,7 +86,7 @@ const NW=+process.argv[4]||76;/* COOP_DIST=1: also raw host-side edits (a held p
 const DIST=+process.env.COOP_DIST||0;
 /* installed on each seat once its world is up: tag at lend, forced festival, census */
 const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0};let seq=0;const b0=dcBorrow;
- dcBorrow=function(to,from,e){if(e&&!e.sc)e.sc=seat+(++seq);const r=b0.apply(this,arguments);if(r){__T[e.sc]={k:e.k,lender:from===S?'me':from.id,to:to===S?'me':to.id,wk:dcWk()};__st[to===S?'her':from===S?'lend':'npc']++}else __st.fail++;return r};
+ dcBorrow=function(to,from,e){if(e&&!e.sc)e.sc=seat+(++seq);const r=b0.apply(this,arguments);if(r){__T[e.sc]={k:e.k,lender:from===S?'me':from.id,to:to===S?'me':to.id,wk:dcWk()};__st[to===S?'her':from===S?'lend':'npc']++;{const o=arguments[3];if(o&&o.why)__st['w_'+o.why]=(__st['w_'+o.why]||0)+1}}else __st.fail++;return r};
  const a0=aff;aff=(x,y)=>Math.max(a0(x,y),45);const F0=dcFestNow;window.__FK=null;dcFestNow=()=>window.__FK&&FEST[window.__FK]?Object.assign({k:window.__FK},FEST[window.__FK]):F0();
  window.__census=()=>{const M={};const seen=new Set();const P=[S].concat(world?rivals.filter(v=>v&&!v.coop):[]);const PS=new Set([S].concat(rivals));
   const walk=(o,pt,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>9)return;seen.add(o);if(typeof o.sc==='string'&&o.k)(M[o.sc]=M[o.sc]||[]).push(pt);
@@ -95,6 +95,13 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
  const TR=Object.keys(BAL.dc.piece).filter(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt);
  window.__stock=(r,nv)=>{nv=nv||2;const fams=[...new Set(TR.map(k=>BAL.dc.piece[k][0]))];S.inv=S.inv||[];let n=0;for(const f of fams)if((r*7+n++)%10<3){const k=TR.find(k=>BAL.dc.piece[k][0]===f);if(!S.inv.some(e=>e&&e.k===k))S.inv.push({k,from:'emp'})}
   if(world)for(const v of rivals)if(v&&!v.coop&&v.alive){v.inv=v.inv||[];if(v.inv.filter(e=>e&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram').length<nv)for(let i=0;i<nv;i++)v.inv.push({k:TR[(v.id*13+i*7+r)%TR.length],from:'emp'})}};
+ /* r4b (F1): the Hội phối đồ pieces in the NPC chests (host world) and her pieces a visit may ask for (each seat her own S) */
+ window.__stockTs=()=>{const tags=[...new Set(Object.values(TS_THEME).flatMap(t=>t.tags))].filter(k=>IT[k]);let n=0;if(world)for(const v of rivals)if(v&&!v.coop&&v.alive){v.inv=v.inv||[];for(let i=0;i<2;i++)v.inv.push({k:tags[(v.id*5+i*11+n++)%tags.length],from:'emp'})}
+  S.inv=S.inv||[];for(const k of [Object.keys(IT).find(k=>IT[k].kd==='Y phục'),'dancoc',Object.keys(IT).find(k=>IT[k].kd==='Trâm cài')])if(k&&!S.inv.some(e=>e&&e.k===k))S.inv.push({k,from:'emp'})};
+ /* her two new loan roads this week: the Hội phối đồ «Mượn» (a contest announced: month 4 / 10) and the «Cho mượn» visit */
+ window.__tsRoads=(r1,r2,r3)=>{try{const s=tsS();if(!s.dress){const m=S.month<4?4:S.month<10?10:16;const ths=Object.keys(TS_THEME);s.dress={th:ths[Math.floor(r1*ths.length)],m:(m-1)%12+1,y:S.year+(m>12?1:0)}}
+  if(!s.borrow&&r2<.5){const o=tsBorrowOpts(s.dress.th).find(o=>!o.tsDis);if(o)o.go()}
+  if(r3<.25){const L=rivals.filter(v=>v&&!v.coop&&v.alive&&!v.out);const v=L[Math.floor(r1*L.length)];const vi=Math.floor(r2*3);const d=v&&PEND.e68borrowDress({a0:v.id,vi});if(d&&d.o)d.o[r3<.12?0:1].go()}}catch(e){return String(e)}return null};
  return true};
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
@@ -108,7 +115,7 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
  await clear(A);await clear(B);
  ok(await A.p.evaluate(INST,['A',true])&&await B.p.evaluate(INST,['B',false]),'scan hooks on both seats');
  await A.p.evaluate(()=>__stock(1,3));/* once, at week 0 before the first merge (the host world exists only once both seats are in) */
- await B.p.evaluate(()=>__stock(2));/* her own S: she is its owner on her seat */
+ await B.p.evaluate(()=>__stock(2));for(const o of [A,B])await o.p.evaluate(()=>__stockTs());/* her own S: she is its owner on her seat */
  /* COOP_SKEW=N: the guest's life clock N months AHEAD of the host's (a friend with an older life joins: S.turn is each seat's own) — the r3 clock fault */
  const SKEW=+process.env.COOP_SKEW||0;if(SKEW)ok(await B.p.evaluate(n=>{S.turn=(S.turn|0)+n;return true},SKEW),'guest life clock '+SKEW+' months ahead of the host');
  const FS=await A.p.evaluate(()=>Object.keys(BAL.dc.fest).filter(k=>FEST[k]));let rs=4242;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
@@ -122,6 +129,7 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
     if(r1<.18){const u=rivals.filter(v=>v&&!v.coop&&v!==h.q)[3];dcInv(u).push(h.e);return'move:'+h.e.sc+'>'+u.id}ilS().box.push({e:h.e,at:'nvp',why:'scan',own:h.q.id,w:0});return'box:'+h.e.sc},[r1,r2]);if(dd){dist[dd.split(':')[0]]++;console.log('dist',w,dd)}
   if(rnd()<.08){const o=rnd()<.5?A:B;await o.p.evaluate(()=>{const ids=Object.keys(BAL.dc.who).filter(k=>/^c/.test(k));S.pid=ids[(S.year*7+S.month)%ids.length]});dist.pid++}
   for(const o of [A,B])await o.p.evaluate(()=>{S.suc=Math.max(S.suc||0,80);S.out=0;S.confined=0});
+  for(const o of [A,B]){const e=await o.p.evaluate(([a,b,c])=>__tsRoads(a,b,c),[rnd(),rnd(),rnd()]);if(e)console.log('tsRoads',o.name,e)}
   /* a choice dialog the generic clear() cannot answer (e.g. «Biếu quà làm lành»: a picker over her chest) held the week (harness stall): answer it with its last road */
   const unstick=async()=>{for(const o of [A,B])await o.p.evaluate(()=>{for(let i=0;i<6&&Q.length&&Q[0]&&Array.isArray(Q[0].opts)&&Q[0].opts.length&&Q[0].ev!=='dc';i++){try{chooseM(Q[0].opts.length-1)}catch(e){Q.shift()}}try{showModal()}catch(e){}}).catch(()=>{})};
   await unstick();let okw=await weekAll(A,B,'w'+w);if(!okw){await unstick();okw=await untilC(A,x=>__co().week>=x,w+1,60000).catch(()=>false)}if(okw)weeksOk++;await sleep(1200);
@@ -143,6 +151,7 @@ const INST=([seat,world])=>{window.__T={};window.__st={her:0,lend:0,npc:0,fail:0
   prev=now;if(w%8===7)console.log('week',w,'tags',Object.keys(all).length,'persist',persist.length,'trans',trans,Math.round((Date.now()-t0)/1000)+'s')}
  const sa=await A.p.evaluate(()=>__st),sb=await B.p.evaluate(()=>__st);
  ok(weeksOk>=72,`≥ 2 bot years merged (${weeksOk}/${NW} weeks advanced for both)`);
+ ok((sa.w_ts||0)+(sb.w_ts||0)>=2&&(sb.w_ts||0)>=1&&(sa.w_ev||0)+(sb.w_ev||0)>=3,`r4b: the Hội phối đồ loans (host ${sa.w_ts||0} · guest ${sb.w_ts||0}) and «Cho mượn» visit loans (host ${sa.w_ev||0} · guest ${sb.w_ev||0}) through the one loan rule`,{sa,sb});
  ok(sa.her+sb.her>=3&&sa.lend+sb.lend>=3&&sa.npc>=10&&sb.her>=1,`loans on every road (host her ${sa.her} lend ${sa.lend} NPC↔NPC ${sa.npc} · guest her ${sb.her} lend ${sb.lend})`,{sa,sb,dist});
  if(!+process.env.COOP_SKEW)ok(!clk.length,`both seats on the same loan clock (dcWk) after every merged week (${clk.length} weeks differ)`,clk.slice(0,4));
  ok(!persist.length,`every lent piece in exactly ONE place over both seats after each merged week (${persist.length} persistent, ${trans} one-week transients, ${ghosts} refused-race ghost weeks ≤ 3, ${refused} refused guest borrows dropped, ${flight} in-flight requests)`,persist.slice(0,6));

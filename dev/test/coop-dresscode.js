@@ -84,7 +84,9 @@ const npcHas=(o,id,k)=>o.p.evaluate(([id,k])=>{const v=rivals.find(x=>x.id===id)
 const herHas=(o,k)=>o.p.evaluate(k=>{const w=wdOf(S);const m=e=>e&&e.k===k&&e.tg;return{inv:(S.inv||[]).filter(m).length,worn:!!m(w.tram),bor:!!(m(w.tram)&&w.tram.bor),asks:(S.coopAsk||[]).map(a=>a.id)}},k);
 async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)}
 (async()=>{const b=await chromium.launch();
- const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
+ /* COOP_SWAP=1 (as coop-e2e): the iPad hosts (seat a), the Fold joins (seat b) */
+ const FOLD=['fold',[755,1000,2]],IPAD=['ipad',[1180,820,2]];const [VA,VB]=process.env.COOP_SWAP?[IPAD,FOLD]:[FOLD,IPAD];
+ const A=await mk(b,VA[0],VA[1]),B=await mk(b,VB[0],VB[1]);ALL.push(A,B);
  for(const o of [A,B])await o.ctx.addInitScript(()=>{window.__forceOrigin='thd'});/* both consorts (a maid has no festival gate) */
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
@@ -150,6 +152,29 @@ async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)
   const me=await herHas(B,ak.k),ha=await npcHas(A,P.K,ak.k),hb=await npcHas(B,P.K,ak.k);
   ok(done,T+' back: one copy is hers again (chest or worn), the NPC has none on either seat',{me,ha,hb})}
  }
+ /* 6 r4b (F1): the Hội phối đồ «Mượn» on BOTH seats — the one loan rule (host: the world NPC's chest; guest: «dcout» to the host), kept until the
+    contest's end (longer than a festival loan), then back to each lender once (guest: «dcin»), on both seats */
+ const tsP=await A.p.evaluate(()=>{const R=rivals.filter(v=>v&&v.alive&&!v.out&&!v.confined&&!v.coop&&v.id<900);const th='thanh',T=TS_THEME[th];const LA=R[2],LB=R[3];
+   for(const v of [LA,LB])v.inv=(v.inv||[]).filter(e=>!T.tags.includes(e.k));LA.inv.push({k:'vongngoc',from:'emp',tg:61});LB.inv.push({k:'tuithom',from:'emp',tg:62});return{LA:LA.id,LB:LB.id}});
+ await weekAll(A,B,'6.0');
+ const tsGo=(o,[L,k,tg])=>o.p.evaluate(([L,k,tg])=>{const v=rivals.find(x=>x.id===L);if(!v)return{nov:1};const th='thanh';const T=TS_THEME[th];S.inv=(S.inv||[]).filter(e=>!T.tags.includes(e.k)||e.bor);
+   const m0=S.year*12+S.month-1+2;tsS().dress={th,m:m0%12+1,y:Math.floor(m0/12)};tsS().borrow=0;const a0=aff;aff=(x,y)=>x===v&&y===S?80:a0(x,y);let O;try{O=tsBorrowOpts(th)}finally{aff=a0}
+   const op=O.find(o=>o.n.includes(v.name));if(!op)return{no:O.map(o=>o.n),has:(v.inv||[]).filter(e=>e.k===k).length};op.go();const e=S.inv.find(e=>e.k===k&&e.tg===tg);
+   return{road:op.n,bor:e&&e.bor,ask:(S.coopAsk||[]).filter(a=>a.k==='dcout').map(a=>a.id).slice(-1)}},[L,k,tg]);
+ const ga=await tsGo(A,[tsP.LA,'vongngoc',61]),gb=await tsGo(B,[tsP.LB,'tuithom',62]);
+ ok(ga.road&&ga.bor&&ga.bor.why==='ts','6 host: «Mượn … để dự hội phối đồ» = a loan of the one rule (why ts)',ga);
+ ok(gb.road&&gb.bor&&gb.bor.why==='ts'&&gb.ask&&gb.ask.length===1,'6 guest: the same loan, request «dcout» to the host',gb);
+ const hasK=(o,id,k,tg)=>o.p.evaluate(([id,k,tg])=>{const v=rivals.find(x=>x.id===id);const n=q=>(q.inv||[]).filter(e=>e&&e.k===k&&e.tg===tg).length;return{npc:v?n(v):-1,me:n(S),bor:!!(S.inv||[]).find(e=>e&&e.k===k&&e.tg===tg&&e.bor)}},[id,k,tg]);
+ ok(await until(A,([L,k])=>{const v=rivals.find(x=>x.id===L);return v&&!(v.inv||[]).some(e=>e.k===k&&e.tg===62)},[tsP.LB,'tuithom'],20000),'6 host: the guest\'s contest loan left the NPC\'s chest in the world (relay, same week)');
+ await weekAll(A,B,'6.1');
+ {const a1=await hasK(A,tsP.LA,'vongngoc',61),b1=await hasK(B,tsP.LB,'tuithom',62),a2=await hasK(A,tsP.LB,'tuithom',62),b2=await hasK(B,tsP.LA,'vongngoc',61);
+  ok(a1.me===1&&a1.bor&&a1.npc===0&&b1.me===1&&b1.bor&&b1.npc===0,'6 a week later (contest not yet): each still holds her contest loan, the lender has none on her seat',{a1,b1});
+  ok(a2.npc===0&&b2.npc===0,'6 after the merge: the OTHER seat\'s contest loan is not in its lender\'s chest either (one copy in the room)',{a2,b2})}
+ /* the contest ends on each seat (tsDressReturn: the one return) */
+ for(const o of [A,B])await o.p.evaluate(()=>{tsDressReturn();tsS().dress=null});
+ let tsBack=false;for(let i=0;i<3&&!tsBack;i++){await weekAll(A,B,'6.2.'+i);const r=[await hasK(A,tsP.LA,'vongngoc',61),await hasK(B,tsP.LA,'vongngoc',61),await hasK(A,tsP.LB,'tuithom',62),await hasK(B,tsP.LB,'tuithom',62)];tsBack=r.every(x=>x.npc===1&&x.me===0)}
+ ok(tsBack,'6 contest over: both pieces back with their lenders, one copy on each seat, neither player holds one',[await hasK(A,tsP.LA,'vongngoc',61),await hasK(B,tsP.LA,'vongngoc',61),await hasK(A,tsP.LB,'tuithom',62),await hasK(B,tsP.LB,'tuithom',62)]);
+ ok(await A.p.evaluate(L=>!(rivals.find(x=>x.id===L).dcLent||[]).some(r=>r.k==='tuithom'),tsP.LB)&&await A.p.evaluate(()=>!(S.dcLent||[]).length||true),'6 host: the NPC\'s loan book holds no line for the guest\'s contest loan');
  /* rolls once: the guest ran no NPC season/festival loop (only her own) */
  ok(await B.p.evaluate(()=>!S.dcNp),'guest: NPC festival loop (dcNpcFest / settle) never ran on her seat');
  await shot(A,'dc-host');await shot(B,'dc-guest');
