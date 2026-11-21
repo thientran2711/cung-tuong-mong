@@ -29,3 +29,20 @@ Earlier 1k sample m09_tam_L1869 (bxMCdqL5Y2, 55 cr) → sheet maid_m09_tam_L1869
 | m09_chuongsu_L1869 | If3pTfLtvE | ✓ eggplant vest/panels + rose, keys ring, caption "Chưởng sự cô cô" spelled right |
 | m09_mama_a51_L1869 | eIPcztbdqL | ✓ jade blue-green + rose, silver streaks, 3/4 right, abacus. Note: prompt mentions a "second reference (36-year-old)"; per the brief only gOm4HrsSXO was passed |
 No jade pendant (G57) and no sachet (G59) on any. Visual check only; check_store not run.
+
+## JOB 3 — person m13 (L1895, via MAIDFIX3, coordinator now #26) — 9 × 135 = 1215 cr
+gpt-2-6 2k medium 9:16 seed 7172 · ONE ref VX7IB7sMMU · prompt files m13_*_L1895 (commit 148e06120) · grep clean (no sachet/pendant) · sheet dev/handover/review-sheets/maid_prod_m13_L1895.png
+Prompts pasted verbatim: reconstructed from the m09_*_L1869 text with rose pink→lilac #C3A1CE and the V-shaped/phoenix-eye face block; this was checked byte-for-byte equal to every m13 file except mama (m09 mama has "pink becomes rose pink-plum"; m13 has "pink becomes deep rose-plum", used as in the m13 file).
+| rank | id | look |
+|---|---|---|
+| tam | gOm1K7pSXO | ✓ lilac jacket + blue skirt, lilac sash/bow, comb box |
+| nhi | lJtk5Jygv9 | ✓ lilac jacket / blue ruqun, coral envelope w/ tassel (not a sachet) |
+| nhat | UPvx1kBwny | ✓ lilac vest + panels, blue skirt/sleeves, handkerchief |
+| tam_thancan | JNCsj9XOq4 | ✓ blue jacket / lilac skirt, comb box |
+| nhi_thancan | 6AbJwG3iJO | ✓ blue jacket / lilac ruqun, coral envelope |
+| nhat_thancan | VX7zAANMMU | ✓ blue vest + panels, lilac skirt/sleeves, handkerchief |
+| thosu | MBJnGnmDCm | ✓ blue jacket/skirt/apron, lilac sash; hair tie shows as a ribbon with tails (minor) |
+| chuongsu | If3pMeEtvE | ✓ eggplant vest + lilac, key ring, caption "Chưởng sự cô cô" correct |
+| mama_a51 | TdwG2ntVNR | ✓ jade blue-green + lilac, silver streaks, 3/4 right, abacus |
+Looks only (sheet at ~1084px), check_store not run. Not drawn: m09_mama_a51_L1895 (m09 mama was already drawn from L1869, eIPcztbdqL; MAIDFIX3 says L1869 had a token bug; redraw needs the owner's OK, 135 cr).
+VE7 total: 810 + 55 + 1215 + 1215 = 3295 cr.
