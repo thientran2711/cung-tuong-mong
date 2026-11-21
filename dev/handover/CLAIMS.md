@@ -780,3 +780,4 @@ bag-inline-2 rv2 | review/bag-inline-2-rv2 c1f7733b | rv session | PASS | 21/11
 kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session | PASS | 21/11
 | REVIEW kit-dialog-2 (SMALL sonnet) 198825c5 (#71 #75 #76 #80 #82) | review/kit-dialog-2-rv; briefs/main89-rv-kit-dialog-2.md | MAIN CHÍNH 89 | session_01Rc5AsMaLLvZ2wrtmc2Tjti | RUNNING | 21/11 05:41Z |
 | REVIEW ending-screens-2 r1 (opus BIG) of e8847011 | review/ending-screens-2-r1 | B | session_01N1tNP2Qz7ZpRucbeYRu2hN | RUNNING | 21/11 05:45Z |
+| REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | RUNNING | 21/11 05:50Z |
