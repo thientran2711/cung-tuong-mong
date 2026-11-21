@@ -800,5 +800,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | PASS 688a5667 (reports/map-places.md REVIEW r2; GAP_LIST OD-CO1 filed) | 21/11 |
 | FOREMAN E #26 (opus; child of E #25, depth 7) | handover FOREMAN_E_STATUS | FOREMAN E #25 | session_01DgYSWmdwFouxeXFnpi6Nbb | RUNNING | 21/11 07:04Z |
 | quest-rows-2 re-merge (SONNET SMALL; #66; land FAIL jk2b.js conflict) | review/quest-rows-2; briefs/main90-quest-rows-remerge.md | MAIN CHÍNH 90 | (opening) | RUNNING | 21/11 07:05Z |
-| FOREMAN E #26 (opus; child of E #25, depth 7) | handover FOREMAN_E_STATUS | FOREMAN E #25 | session_PENDING_E26 | RUNNING | 21/11 07:04Z |
 | quest-rows-2 re-merge (SONNET SMALL; #66; land FAIL jk2b.js conflict) | review/quest-rows-2; briefs/main90-quest-rows-remerge.md | MAIN CHÍNH 90 | session_01Rc5AsKTU3gKXsto6MvXAze | RUNNING | 21/11 07:05Z |
