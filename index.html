@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"370b72b4","t":"2026-11-21T07:18Z","c":"coop-night fixture: take a reward box like a player (tap it open, then «Nhận»)","b":"deb620a4b6fd","h":[{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"}]};
+window.CTM_BI={"s":"e43b7146","t":"2026-11-21T10:04Z","c":"jnf co-op: after a host reload (LAST gone) the host still answers the guest's ask for today — the word is rebuilt from the saved state","b":"54c241171e80","h":[{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77169,7 +77169,16 @@ function nwOut(){const w=S.nightWhy;if(!w||w.wk!==day())return null;return{pick:
 function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m={t:"act",k:NK,mode:host()?"h":"g",ph:ph||null,d:day(),week:COOP.state.week,hold:enc(S.tonight),
   ntk:S.ntk&&S.ntk.w===day()?mapId(S.ntk.who):null,fin:host()&&S.nfFin===day()?1:0,open:host()&&x&&x.st!=="wait"?1:0,nw:host()?nwOut():null,
   ch:ph==="ch"&&x?{v:x.me}:null,gres:host()&&S.nfG&&S.nfG.d===day()?S.nfG.L:null,gdef:host()&&S.nfG&&S.nfG.d===day()?S.nfG.def:null,
-  id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host())LAST=m;COOP.send(m)}catch(e){console.error(e)}}
+  id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host()){LAST=m;if(m.fin)S.nfLast=m}COOP.send(m)}catch(e){console.error(e)}}
+/* the host's final word of a day (fin: holder, record, results) is kept in her save (S.nfLast) and sent again, AS IT WAS, when the guest asks
+   for a day the host has already left: the host ends its day right after fin and runs ahead to the next one while the merged week is pending,
+   so a guest who missed fin (dropped socket, reload, AFK phone) would wait for it forever — and the room with her (coop-night case 4/12, NLC #10) */
+function again(d){try{const f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);if(!f)return false;
+ COOP.send(Object.assign({},f,{id:NK+"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));return true}catch(e){console.error(e);return false}}
+/* the host answers "which word for day d?": a past day → its fin as it was; today → the last word again, or — after a reload, when LAST is gone —
+   today's word rebuilt from the saved state (the flip / the choice / fin), so a guest is never left without the host's word (NLC #10) */
+function reply(d){if(!host()||!S)return false;if(d!==day())return again(d);if(LAST&&LAST.d===d){send(LAST.ph);return true}
+ const x=X();if(S.nfFin===d||(x&&x.st!=="wait")){send(S.nfFin===d?"fin":null);return true}return false}
 function ask(){const c=CO();if(!c||!nfOn())return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
 /* the guest applies the host's word: the holder, the flip (scene + her own choice), the result */
 function apply(m){if(!S||S.dead||m.d!==day())return;
@@ -77205,13 +77214,13 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
  try{if(!window.__bot&&Q.length)showModal();render()}catch(e){}}
 try{if(typeof COOP==="object"&&COOP.on){
  COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat||!nfOn())return;
-  if(m.mode==="ask"){if(host()&&LAST&&LAST.d===day())send(LAST.ph);return}
+  if(m.mode==="ask"){if(host())reply(m.d!=null?m.d:day());return}
   if(m.mode==="h"&&guest())apply(m);
   else if(m.mode==="g"&&host()&&S&&m.d===day()){
    if(m.ph==="ch"){const x=X();if(x&&x.st==="open"&&x.fr===undefined){x.fr=m.ch?VALID(m.ch.v):null;step()}return}
    if(S.nfFin===day())return;
    apply(m);send()}}catch(e){console.error(e)}});
- const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()&&LAST&&LAST.d===day())send(LAST.ph);else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
+ const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d)}else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfSend=()=>send();/* test hook: relay the holder now */
 window.nfStep=step;
@@ -88500,7 +88509,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="deb620a4b6fd";window.CTM_BUILD=BUILD;
+const BUILD="54c241171e80";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
