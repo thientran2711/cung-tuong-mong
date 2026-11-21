@@ -73,7 +73,7 @@ function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const N=44,
  begin();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
-function kgTdWalk(box,env){const C=kg82Canvas(box,1,500),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
+function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
  const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:(.9+.4*Math.random())*KICK}));
  let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,dirAt=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
  const good=kg82Col("--good","#2d7a52"),red=kg82Col("--red","#c23b22");
@@ -82,7 +82,7 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,500),{g,W,H}=C;const lv=tdEa
  const FEET=H*.74,LAND=H*.84,FIGH=H*.45,figSrc=(()=>{try{return kitFigOf(S)}catch(e){return ""}})(),fig=new Image();if(figSrc){fig.crossOrigin="anonymous";fig.src=figSrc}
  let fb=null;try{if(figSrc)fb=kitFigBody(figSrc,()=>{try{fb=kitFigBody(figSrc)}catch(e){}})}catch(e){}
  const BAD="#c23b22",FONT=kg82Col("--body","sans-serif");
- function pill(t,cx,cy,col,sz){g.save();g.font=`700 ${sz||15}px ${FONT}`;const w=g.measureText(t).width+22,h=(sz||15)+14;g.fillStyle="rgba(255,250,238,.94)";g.strokeStyle=col;g.lineWidth=2;g.beginPath();if(g.roundRect)g.roundRect(cx-w/2,cy-h/2,w,h,h/2);else g.rect(cx-w/2,cy-h/2,w,h);g.fill();g.stroke();g.fillStyle=col;g.textAlign="center";g.textBaseline="middle";g.fillText(t,cx,cy+1);g.restore()}
+ function pill(t,cx,cy,col,sz){/* kit canvas label (kg82Lbl: outlined text), no private chip */g.save();g.font=`700 ${sz||15}px ${FONT}`;g.fillStyle=col;g.textAlign="center";g.textBaseline="middle";kg82Lbl(g,t,cx,cy,W*.94);g.restore()}
  function bowlAt(cx,cy,w,ang,hot){/* a porcelain bowl of water, drawn about its foot (cx,cy) */g.save();g.translate(cx,cy);g.rotate(ang);const h=w*.42;
   g.beginPath();g.moveTo(-w/2,-h);g.bezierCurveTo(-w/2,-h*.1,-w*.28,0,0,0);g.bezierCurveTo(w*.28,0,w/2,-h*.1,w/2,-h);g.closePath();const gr=g.createLinearGradient(-w/2,0,w/2,0);gr.addColorStop(0,"#d9cfb8");gr.addColorStop(.35,"#fbf6e8");gr.addColorStop(1,"#cfc3a8");g.fillStyle=gr;g.fill();g.strokeStyle="#3b62a0";g.lineWidth=2;g.stroke();
   g.fillStyle="#3b62a0";g.fillRect(-w*.42,-h*.62,w*.84,3);g.beginPath();g.ellipse(0,-h,w/2,w*.1,0,0,Math.PI*2);g.fillStyle="#7fb6d8";g.fill();g.strokeStyle="#3b62a0";g.stroke();
@@ -105,12 +105,10 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,500),{g,W,H}=C;const lv=tdEa
   /* her, with the bowl on her head: she and the bowl lean by x */
   const ang=Math.max(-1.2,Math.min(1.2,x))*.45,fh=FIGH,fw=fh*(fb&&fb.ar||.451);
   if(fig.complete&&fig.naturalWidth){g.save();g.translate(W/2,FEET);g.rotate(ang*.12);g.drawImage(fig,-fw/2,-fh,fw,fh);g.restore()}
-  const hx=W/2+((fb&&fb.hx!=null?fb.hx:.5)-.5)*fw+ang*.1*fh*.9,hy=FEET-fh*(1-(fb&&fb.ht||.03))+ang*.1*fh*.15;
+  const hx=W/2+((fb&&fb.hx!=null?fb.hx:.5)-.5)*fw+ang*.1*fh*.9,hy=FEET-fh*(1-(fb&&fb.ht||.03))+ang*.1*fh*.15+fh*.05;
   g.save();if(inBand&&stag<=0){g.shadowColor="rgba(60,170,110,.9)";g.shadowBlur=14}else{g.shadowColor="rgba(194,59,34,.9)";g.shadowBlur=stag>0?22:12}
   bowlAt(hx+Math.sin(ang)*W*.015,hy+3,W*.115*(dir?kg82FxPop(dirAt,now):1),ang,0);g.restore();
-  /* touch halves: two big pads, the held one lights; nothing covers the scene (OD 20/11 ~06:30Z) */
-  const PY=H-34,PW=W*.42;for(const sd of[-1,1]){const cx=sd<0?W*.25:W*.75,on=dir===sd,want=lean&&lean!==sd;g.save();g.globalAlpha=on?1:.88;g.fillStyle=on?"rgba(255,224,150,.96)":"rgba(255,250,238,.9)";g.strokeStyle=want?good:"#8f5f0c";g.lineWidth=want?4:2;g.beginPath();if(g.roundRect)g.roundRect(cx-PW/2,PY-22,PW,44,12);else g.rect(cx-PW/2,PY-22,PW,44);g.fill();g.stroke();g.restore();
-   g.fillStyle="#3a1a0c";g.font=`700 ${Math.round(Math.min(20,W/30))}px ${FONT}`;g.textBaseline="middle";g.fillText(sd<0?"◀  Đỡ bên trái":"Đỡ bên phải  ▶",cx,PY+1);g.textBaseline="alphabetic"}
+  padL.classList.toggle("ksel",lean>0);padR.classList.toggle("ksel",lean<0);
   if(dir)kg82FxRing(g,hx,hy-W*.04,W*.12,dirAt,now);/* touch feedback = the kit pop/glow on the bowl only (mg-visual), no half-screen yellow box */
   kg82DrawPops(g,pops,now)}
  function step(dt){t+=dt;
@@ -122,7 +120,11 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,500),{g,W,H}=C;const lv=tdEa
  function frame(now){if(stop)return;const dl=Math.min(.6,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;
   env.hud({score:10*Math.min(1,(inB+Math.max(0,DUR-Math.max(0,t)))/DUR),round:`Bước ${Math.min(ki+1,KN)}/${KN}`,time:`${Math.max(0,Math.ceil(DUR+1-t))} giây`});
   draw(now);if(t>=DUR+1){stop=true;KG82.tdwalkStat={ok:Math.min(DUR,Math.round(inB)),dur:DUR,spill};/* the result says why: seconds steady + spills (td-dung-clear) */return setTimeout(()=>env.end(Math.min(10,inB/DUR*10)),300)/* review/mg-score-same: the float (kg82Play grades once; a rounded raw here made the board and the result differ) */}raf=requestAnimationFrame(frame)}
- const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);d=Math.max(-1,Math.min(1,d));if(d!==dir)dirAt=performance.now();dir=d};
+ const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);d=Math.max(-1,Math.min(1,d));if(d!==dir)dirAt=performance.now();dir=d;padL.classList.toggle("on",dir<0);padR.classList.toggle("on",dir>0)};
+ /* the two pads are kit buttons (.kgbtn.nwb-btn in .kg82act, same part as td_ngon «Thưa»); the canvas halves still work too */
+ const pb=document.createElement("div");pb.className="kg82act";pb.style.cssText="display:flex;gap:10px;justify-content:center";pb.innerHTML=`<button type="button" class="kgbtn nwb-btn" id="tdhl" style="flex:1" aria-label="Đỡ bên trái" title="Đỡ bên trái">${NWB.ic("left")}</button><button type="button" class="kgbtn nwb-btn" id="tdhr" style="flex:1" aria-label="Đỡ bên phải" title="Đỡ bên phải">${NWB.ic("right")}</button>`;box.appendChild(pb);
+ const padL=pb.querySelector("#tdhl"),padR=pb.querySelector("#tdhr");
+ for(const [bn,sd] of [[padL,-1],[padR,1]]){bn.addEventListener("pointerdown",e=>{e.preventDefault();ptr.set(e.pointerId,sd);pend=sd;try{bn.setPointerCapture(e.pointerId)}catch(_){}setDir()});bn.addEventListener("pointerup",e=>{ptr.delete(e.pointerId);setDir()});bn.addEventListener("pointercancel",e=>{ptr.delete(e.pointerId);setDir()})}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);pend=px<W/2?-1:1;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
  const up=e=>{ptr.delete(e.pointerId);setDir()};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
  KG82.dbg=()=>({x,v,t,dir,inB,spill,ki,stag,n:ptr.size});KG82.peek=()=>{/* a player reads the floor mark: lean against the coming step just before it lands */const kk=kicks[ki],pre=kk&&kk.t-t<.3&&kk.t-t>0?kk.d*kk.m*1.1*.6:0;const f=x+.4*(v+pre);if(Math.abs(f)<BAND*.15)return{hold:false};const want=-Math.sign(f);const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:true,x:c.x,y:c.y}};
