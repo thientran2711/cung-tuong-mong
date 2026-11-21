@@ -112,8 +112,8 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
     and the two people fixed to a place (Quản sự Tân Giả khố, Thầy dạy): the record takes the SAME lists the stage draws (one ledger) */
  J95.px={};const PXT=typeof plxPeople==="function";if(PXT)try{for(const k of ["cnh","tgk"])for(const q of plxPeople(k))if(q&&q.sid!=null)J95.px["s"+q.sid]=k}catch(e){}
  for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const hk=p===S?(S.out?"lc":"home"):p.out?"lc":palaceOf(p);const pk=p===S?"me":p.id;const ow=p===S?"ngươi":p.name;
-  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,"Cung nữ thân tín của "+ow,"mm",hk,p);
-  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
+  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,(typeof thcIs==="function"&&thcIs(p,p.maid)?"Cung nữ thân cận của ":"Cung nữ thân tín của ")+ow,"mm",hk,p);
+  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":typeof thcIs==="function"&&thcIs(p,s)?"Cung nữ thân cận":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
  /* named palace staff (jstaff, main 16/11): the elders stand at their post (the stage draws them there); the rest of Thái hậu's household serves at Đức Thọ cung */
  J95.eld={};const eh=x=>{if(!x||x.sid==null)return;const k=j95elderK(x);if(x.eid)J95.eld["s"+x.sid]=x.eid;if(seen["s"+x.sid]){const q=L.find(z=>z.id==="s"+x.sid);if(q&&x.eid){q.kind="el";q.home=k}return}add("s"+x.sid,x.name,x.call||"Người hầu của Thái hậu","el",k,x)};
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
