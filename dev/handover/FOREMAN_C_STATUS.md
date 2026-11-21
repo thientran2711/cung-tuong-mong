@@ -1001,3 +1001,4 @@ NEWACCT#15 ~01:33Z: DESIGN19 e46271eb3 xuân Hán t1–t3 v6 (khúc cư, 2 layer
 NEWACCT#15 ~01:36Z: CHECK1 job 6 t5 COMOId FAIL G42 (edge band, chest emb, sleeve emb missing); store fail exemption accepted; fix text → KHO2. Note t4 c likely same G42 gap.
 NEWACCT#14 (after handover) ~02:25Z: owner asked in #14 chat → thu t1–t3 v5 sheet LOOKED + sent L1610. #15 told; next Lượt 1611.
 NEWACCT#15 ~01:38Z: #14 also sent thu v5 sheet as L1610 in its chat (owner asked there). #15 used L1609–L1612 here → next Lượt 1613. CHECK1 job 7 (xuân v6) queued → GEN1.
+NEWACCT#15 ~01:41Z: KHO2 9128cac t5 COMOId G42 fixed (9 986) → CHECK1 re-check → GEN1 55 cr. KHO2 ROLLED (~30 %, handover reports/KHO2.md); successor only when next job comes.
