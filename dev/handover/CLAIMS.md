@@ -973,3 +973,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | coop-guest-week-lag (opus BIG; OWNER-BUG LANE MAIN 100 ORDER 20:35Z, thin guest month card/bạc one week late on host) | review/coop-guest-week-lag; briefs/b7-coop-guest-week-lag.md | B | session_01N1tNP46DparCmsaQ6RRX48 | RUNNING | 21/11 21:18Z |
 | REVIEW coop-home-tabs (sonnet SMALL test-only) of 92df9b08 | review/coop-home-tabs-rv | B | session_01N1tNP3mBaymnqffHRXNNdB | RUNNING | 21/11 21:43Z |
 | REVIEW coop-host-lag-r2 r2 successor (opus BIG co-op; of c34efd5b, after rv 2pAt8zEY rollover) | review/coop-host-lag-r2-r1; reports/coop-host-lag.md | B | session_01N1tNP4aNyydwDP7vchNRnH | RUNNING | 21/11 22:36Z |
+| PROMPT-WRITER J1–J5+KP09 (sonnet; A53 prompt files only; C order 19:42Z/20:36Z unclaimed, no refusal) | review/art-prompts-j; reports/art-prompts-j.md | MAIN CHÍNH 102 | session_01Rc5AsMTSc7RPLZDALttbb4 | RUNNING | 21/11 23:33Z |
