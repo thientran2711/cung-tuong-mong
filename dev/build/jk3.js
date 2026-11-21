@@ -62,8 +62,12 @@ function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows(
 function kitGroupFold(key,label,n,items){if(!n||!items||window.__kgfOpen!==key)return"";
  return `<div class="k3p kgf kgfopen" data-kgfbox="${key}"><button type="button" class="k3h kgf-t" data-kgf="${key}" title="${esc(label)} · ${n} · chạm để thu lại"><span>${esc(label)} · ${n}</span><b>‹</b></button><div class="kgf-l">${items}</div></div>`}
 /* the two small group buttons (right column: top of #kshR on the stage and the iPad map): number over label, same square kit button as the rail; tap = drop list under them */
-function kitGroupBtns(){const d=[["cn","Cung nhân"],["ct","Chí tôn"]].map(([k,l])=>[k,l,kgfCount(k)]).filter(x=>x[2]>0);if(!d.length)return"";
- return `<div class="kgfbtns">${d.map(([k,l,n])=>{const on=window.__kgfOpen===k;return `<button type="button" class="krailb krailt kgfbtn${on?" kopen":""}" data-kgf="${k}" aria-pressed="${on}" title="${l} · ${n} · chạm để ${on?"thu lại":"mở"}"><b>${n}</b><span>${l}</span></button>`}).join("")}</div>`}
+/* maid-8tabs #33 (owner 21/11 ~03:18Z «layout của mọi thứ copy phải y chang nhau hết»): the cung nữ road shows the SAME two buttons; «Chủ tin N» stands where
+   the consort has «Cung nhân» (same kit button; tap = what Chủ tin means, k3Explain via the #kshR [data-k3] handler) */
+function kitGroupBtns(){const d=[["cn","Cung nhân"],["ct","Chí tôn"]].map(([k,l])=>[k,l,kgfCount(k)]).filter(x=>x[2]>0);
+ const tin=window.kitRoad&&kitRoad()==="srv"?`<button type="button" class="krailb krailt kgfbtn" data-k3="tin" title="Chủ tin ${S.tin|0} · chạm để xem"><b>${S.tin|0}</b><span>Chủ tin</span></button>`:"";
+ if(!d.length&&!tin)return"";
+ return `<div class="kgfbtns">${tin}${d.map(([k,l,n])=>{const on=window.__kgfOpen===k;return `<button type="button" class="krailb krailt kgfbtn${on?" kopen":""}" data-kgf="${k}" aria-pressed="${on}" title="${l} · ${n} · chạm để ${on?"thu lại":"mở"}"><b>${n}</b><span>${l}</span></button>`}).join("")}</div>`}
 window.kitGroupFold=kitGroupFold;window.kitGroupBtns=kitGroupBtns;
 /* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab) */
 function k3crewChip(f,name,loy,tip){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(String(loy))}</span></span></span></button>`}
@@ -104,7 +108,9 @@ function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t
  setInterval(()=>{if(!document.hidden&&document.getElementById("kgfdrop"))go()},300);
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
- [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
+ [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}));
+ /* maid-8tabs #33: the cung nữ road's «Chủ tin» button in the Cung nhân place on the phone map rail too */
+ kitStageRail.add({id:"kgf-tin",order:61,label:"Chủ tin",title:"Chủ tin · chạm để xem",count:()=>S?S.tin|0:0,active:()=>false,when:()=>kgfPhoneMap()&&!!(window.kitRoad&&kitRoad()==="srv"),onTap:()=>k3Explain("tin")})}catch(e){}}
 /* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
 function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
 document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
@@ -115,7 +121,12 @@ function kgfClearEmo(){try{if(typeof kitFigSealAll==="function")kitFigSealAll()}
 window.kgfClearEmo=kgfClearEmo;
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
-function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
+/* maid-8tabs #33: the cung nữ road keeps the same Ân sủng card: Tai mắt + her own facts (Hoàng thượng để ý, Công lao, Lương tháng; Tân Giả khố,
+   chuyện của chủ, tai mắt cho người khác when they apply) — the facts that sat in a separate servant box (srk = the header's title, not repeated) */
+const K3_SRVAS=["nt","merit","wage","lau","sec","spy"];
+function k3AsRows(){if(!S||S.dead)return[];const rd=window.kitRoad&&kitRoad();
+ if(rd==="srv"){const L=[["mat","Tai mắt",S.mat|0]];K3_SRVAS.forEach(k=>{const b=k3hc(k);if(b)L.push([k,k3lab(b),k3val(b)])});return L}
+ /* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none in lãnh cung nor at home (review/small-bugs-2) */if(rd)return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
@@ -160,7 +171,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  const hL="";{const tr=k3TopRow();const tt=tr&&tr.querySelector("#k3tt");const ht=`<span class="kstl k3l1">${t1}${x}</span><span class="kstv k3l2">${t}</span>`;if(tt&&tt.dataset.h!==ht){tt.innerHTML=ht;tt.dataset.h=ht}}
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
- let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
+ let y="";const rdS=window.kitRoad&&kitRoad()==="srv";K3_RIGHT.forEach(k=>{if(rdS&&(k==="srk"||K3_SRVAS.includes(k)))return;/* #33: in the Ân sủng card / the header */const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
  const phoneMap=!!mv&&kgfPhoneMap();const hR0=phoneMap?"":kitGroupBtns()+k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
