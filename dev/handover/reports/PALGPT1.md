@@ -42,3 +42,9 @@ Machine copy: dev/art/palette_gpt_L2272/mapping_L2274.json. Swatch sheets (our i
 
 ## Commit
 6c65db7 (data + rules + report; this line added in the follow-up commit)
+
+## PLAN — rank-tier palette (ROOT-B8 heads-up L2285; NOTE ONLY, no data change yet)
+Tiers: light = t1–t3, medium = t4–t6, deep = t7–t8 (one helper `tier_of(rank)`; Nữ đế/Thái hậu = deep).
+1. DATA (optional, fallback = today's single value): palettes_season.json `[p][season].by_tier.{light,medium,deep}` = {main_hex, sec_hex, main/sec English, *_vi, accent_*}; flower_colours `[p][season].by_tier.{tier}.embroidery_hex/_vi` (hair_by_tier t1..t6 kept, re-derived per tier from that tier's flower with the same L2013 enforce/ramp); phibach `[p][ha|thu].by_tier.{light,medium}` (no veil t7/t8, G34); plumage = deep only (phoenix only t7/t8) → `[p][season]` stays single. A missing tier key = use the season value, so a partial GPT delivery never breaks a cell. make_live_L2274.py gets a tier pass (same helper naming + uniqueness pass run per tier).
+2. BUILDER: build_all already knows the rank in _build_season (sets SEASON_PAL); add `TIER_PAL` next to SEASON_PAL and make `b20()/_season_pal()`, `f20_sentence()` and `phibach3()` read `d.get('by_tier',{}).get(TIER_PAL) or d` — one lookup function, no per-rank copies. G13 ("one main+sec pair at every rank") must be re-worded by rule.py set with the owner's L2285 verbatim before this ships.
+3. GATES: check_store root_pair/ROOT HEX keeps root_drawn (drawn pictures); store gate + winter_pairs get the tier the builder used (pass via GATE_SEASON-style arg); check_unique runs per season × tier; gsweep before/after as in this job.
