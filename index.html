@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)","b":"b8b7643ea4c7","h":[{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"}]};
+window.CTM_BI={"s":"2bab70e1+","t":"2026-11-21T09:49Z","c":"SELF-MERGE LAND kc-fail-effects: merge LIVE 352321761 (index.html/sw.js rebuilt)","b":"9620f774fab5","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -87682,6 +87682,23 @@ function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=
  /* round 4 (review/jagday-walk-rv): the deed-road guard runs here, after every row writer of the chain (j95sPass retinue / j95sGuard), then the road pass */
  try{if(typeof agWalkGuard==="function")n+=agWalkGuard(R,k0,fresh)||0}catch(e){if(JWALK.errs.length<20)JWALK.errs.push("guard: "+(e&&e.message||String(e)))}
  try{n+=walkNpcPass(R,k0,fresh,first)}catch(e){if(JWALK.errs.length<20)JWALK.errs.push(e&&e.message||String(e))}return n}})();
+/* ================= joptsg: law 4 on OPTION lines (K-OPT-SG; rv-kit-opt-kem.md follow-up, MAIN 92) =================
+   Her own Sủng change in an option's LITERAL x text («thành: Sủng +4», «hỏng: Sủng ${balSg(..)}») is drawn the way apply() really
+   changes it: through sg() (Hoàng thượng nóng nảy ×1.3, lạnh lùng ×0.7 on gains) — the same rewrite jaudit item 15 does for act cards.
+   Only the x text is rewritten (fmt(w)/fmt(fx) already goes through sg; never twice). A Sủng written after a word (a name, «nàng»)
+   is someone else's and stays as written; only a Sủng that starts a clause (start, after «·», «,», «:», «;», «(») is hers.
+   Every such option applies through apply()/ap(S,…) → sg (scan in reports/kit-keeper-2.md). Test: dev/test/kit-opt-sg.js. */
+(function(){try{
+ const RE=/(^|[·,:;(]\s*)(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu;
+ function optSgTxt(x){if(typeof x!=="string"||typeof sg!=="function"||!/Sủng/.test(x))return x;
+  return x.replace(RE,(m,p,l,g,n)=>{const v=sg((g==="+"?1:-1)*+n);return `${p}${l} ${v>0?"+":"-"}${Math.abs(v)}`})}
+ window.optSgTxt=optSgTxt;
+ const wrap=f=>function(o){if(!o||typeof o.x!=="string"||!/Sủng/.test(o.x))return f.apply(this,arguments);
+  const x0=o.x,x1=optSgTxt(x0);if(x1===x0)return f.apply(this,arguments);
+  let own=Object.prototype.hasOwnProperty.call(o,"x");try{o.x=x1;return f.apply(this,arguments)}finally{if(own)o.x=x0;else delete o.x}};
+ if(typeof optLine==="function")optLine=wrap(optLine);
+ if(typeof dilLine==="function")dilLine=wrap(dilLine);
+}catch(e){console.warn("joptsg",e)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -89283,7 +89300,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b8b7643ea4c7";window.CTM_BUILD=BUILD;
+const BUILD="9620f774fab5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
