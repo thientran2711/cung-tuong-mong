@@ -1241,3 +1241,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~08:29Z: SENT L1867 m18 maids ×6 (VE6, 810 cr) → 18 maids complete (2430 cr). VE6/VE7/VE8 idle. VE9 still on samples. Next Lượt 1868.
 #25 ~08:31Z: SENT L1868 HH t8 L1855 thu 6AbJ5aqiJO + đông rgXHB0Nxtc (VE9, 110 cr). VE9 told to draw PHISIMPLE now, then K/L/M/N, hạ t1–t3. Next Lượt 1869.
 #25 ~08:35Z: OWNER L1869: thu t1/t2 OK (Đáp ứng DONE, stop sending; purple front skirt wanted). t3 Quý nhân: shoulder slips; restore SMALL flowers (denser ok, only big banned); hairpins fewer than t2 → T1QP1 s62_t3_THU_fix_L1869 → VE6 @55. t4 Tần perfect. Q: t6/t7/t8 thu lightest brocade? (T1QP1 checking). MAIDS WRONG: m09 uses teal/pink instead of cung nữ BLUE main (K19/K24/K26/K28) → MAIDFIX3 re-audit 18 files, fix _L1869, 1 sample @55 → VE7. Next Lượt 1870.
+#25 ~08:37Z: SENT L1871 Hán PHISIMPLE 8aiDRlmIrU vs Phi CqnIKlAEEy (55 cr). 3 bands not readable. Next Lượt 1872.
