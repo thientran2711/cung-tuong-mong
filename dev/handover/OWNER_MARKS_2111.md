@@ -25,3 +25,4 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 20 | 02:40 | APPROVED example: Kén rể «Dò hỏi gia thế» card — size per device (iPad bigger/taller, phone smaller) → reference for all person-tab cards | owner-2111-card-good.jpg | keeper (reference) | noted | — |
 | 21 | 02:45 | Túi đồ: tap item → inline strip under grid (small square + info right), NO popup; Sắc/Xa xỉ/Đã biết chips → small box/column at right | owner-2111-bag-1/2.jpg | NEW worker bag-inline (85 to open) | to open | — |
 | 22 | 02:48 | Thú cưng empty «Chưa nuôi con nào» → same picture card as «Ta chưa có con»; act card «Nhờ thái giám…» stays below | owner-2111-pet-empty.jpg | empty-states session_01Rc5AsMTnwmUdoGmZsd4Uvk | in work | — |
+| 23 | 02:50 | Tư trang › Việc act cards have no picture → every act card gets its picture (scan all tabs); missing art → Foreman C | owner-2111-viec-nopic.jpg | bag-inline (85) + Foreman C | to open | — |
