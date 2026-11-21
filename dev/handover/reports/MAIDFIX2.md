@@ -30,3 +30,9 @@ keep_check --all: 405 sidecars PASS. check_store --scope maid --age a18 --refs s
 - NEW test11_nhi_L1725 (base test8_nhi_L1685 = Lw8btUtswO, "C"): borders only (collar, outer half-sleeve AND inner long-sleeve cuffs, jacket hem, skirt-hem small-flower band fuller than tam); the "few small flower sprays on the jacket" removed (no body embroidery); + front bow.
 - test11_{tam,nhi,nhat}_thancan_L1725 = colour swap of the above.
 - keep_check --all 423 PASS; check_store maid a18 ×6 PASS; 6.9–8.5k chars.
+
+## JOB 3 — owner L1731 (via Foreman C #20), 0 gens
+- test12_nhi_L1731 (base test5_nhi_g43 = liked dt4ZloSXSL + G43 sachet): ONLY K30 border embroidery (collar, outer half-sleeve + inner long-sleeve cuffs, jacket hem, small-flower skirt-hem band; the jacket flower sprays removed) + front bow. test8/test11 nhị lineage dropped.
+- test12_nhat_L1731 (base test11_nhat_L1725): sleeves = WHOLE edge of BOTH sleeve layers with a WIDE small-flower cuff band all the way round, clearly wider/denser than nhị, never a plain edge; border embroidery "clearly much DENSER and RICHER, the border bands wider".
+- test12_{nhi,nhat}_thancan_L1731 = colour swap only. Tam: test11_tam_L1725 stands (already K30).
+- keep_check --all 432 PASS; check_store maid a18 ×4 PASS; 6.5–8.8k chars.
