@@ -49,16 +49,16 @@ const {chromium}=require('playwright');const [,,URL,MON]=process.argv;const MONT
   const st={cold:()=>{window.__setup('cold')},srv:()=>{window.__setup('srv')},hh:()=>{window.__setup('hh')},pal:()=>{window.__setup('pal')}};
   for(const id of ids){const s=E68I[id];const k=s.life||'pal';st[k]();
    if(id==='q6visitCold'){const v=liveRivals(false)[0];v.out=true;v.coldBy='me'}
-   if(id==='q6hhAccused'){const v=liveRivals(false)[1];q6st().bias=[v.id]}
+   if(id==='q6hhAccused'){const v=liveRivals(false)[1];q6st().bias=[v.id]}if(id==='q6hhNew'){const v=liveRivals(false)[2];v.ttY=S.year}
    if(id==='q6coldWinter')S.month=12;
    const p=s.pp();if(!p){out.push({id,err:'pp null'});continue}p.vi=0;const d=mkP('e68'+id,p);if(!d){out.push({id,err:'build null'});continue}
    const O=d.o.map(o=>{const x=String(o.x||'');const k=Object.entries(o.fx||{}).filter(([a,b])=>b<0).length;
     return {n:o.n,gain:/class="g"/.test(x),cost:k>0||/class="r"/.test(x),x:x.replace(/<[^>]+>/g,'').slice(0,160)}});
-   let gerr=null;for(let i=0;i<d.o.length;i++){st[k]();if(id==='q6visitCold'){const v=liveRivals(false)[0];v.out=true;v.coldBy='me'}if(id==='q6hhAccused'){const v=liveRivals(false)[1];q6st().bias=[v.id]}
+   let gerr=null;for(let i=0;i<d.o.length;i++){st[k]();if(id==='q6visitCold'){const v=liveRivals(false)[0];v.out=true;v.coldBy='me'}if(id==='q6hhAccused'){const v=liveRivals(false)[1];q6st().bias=[v.id]}if(id==='q6hhNew'){const v=liveRivals(false)[2];v.ttY=S.year}
     const p2=s.pp();if(!p2)continue;p2.vi=0;const d2=mkP('e68'+id,p2);try{apply(d2.o[i].fx||{});d2.o[i].go()}catch(e){gerr=gerr||e.message}}
    out.push({id,life:k,n:O.length,O,gerr,txt:d.t.replace(/<[^>]+>/g,'').slice(0,120)})}
   return out});
- chk('every q6 template builds in its state',T.every(t=>!t.err)&&T.length>=17,T.filter(t=>t.err));
+ chk('every q6 template builds in its state',T.every(t=>!t.err)&&T.length>=18,T.filter(t=>t.err));
  chk('every option has a gain AND a cost (law 3)',T.every(t=>t.O&&t.n===3&&t.O.every(o=>o.gain&&o.cost)),T.filter(t=>t.O&&!t.O.every(o=>o.gain&&o.cost)).map(t=>[t.id,t.O.filter(o=>!(o.gain&&o.cost))]));
  chk('options of one card differ (law 2 smoke)',T.every(t=>!t.O||new Set(t.O.map(o=>o.x)).size===t.O.length),0);
  chk('every option resolves without an error',T.every(t=>!t.gerr),T.filter(t=>t.gerr).map(t=>[t.id,t.gerr]));
@@ -70,6 +70,9 @@ const {chromium}=require('playwright');const [,,URL,MON]=process.argv;const MONT
   q6st().bias=[];const pl=E68I.q6hhLedger.pp();const d2=mkP('e68q6hhLedger',Object.assign(pl,{vi:0}));d2.o[2].go();r.skimSet=q6st().skim===1;r.accSkim=(E68I.q6hhAccused.pp()||{}).why==='s';
   window.__setup('cold');S.coldRank=1;const lo=q6od(50);S.coldRank=6;const hi=q6od(50);r.rk=[lo,hi];r.harder=hi<lo;
   window.__setup('hh');S.rank=BAL.voice.hq;const a=q6od(50);S.rank=BAL.voice.hq+1;const c=q6od(50);r.rkhh=[a,c];r.harderHH=c<a;
+  window.__setup('cold');const mk=S.maid;S.maid=null;r.riceNoMaid=E68I.q6coldRice.pp()==null;S.maid=mk;
+  window.__setup('hh');const n0=rivals.length;rivals.filter(v=>v.alive).slice(3).forEach(v=>{v.alive=false});S.month=2;S.tuan=0;S.ttDone=null;S.year=Math.ceil(S.year/3)*3;quiet=true;tuyenTu();quiet=false;const nv=rivals.slice(n0);
+  r.ttStamp=nv.length>0&&nv.every(v=>v.ttY===S.year);const pn=E68I.q6hhNew.pp();r.ttCard=!!pn&&nv.some(v=>v.id===pn.a0);if(pn){const d3=mkP('e68q6hhNew',Object.assign(pn,{vi:0}));d3.o[0].go();r.ttOnce=!q6st().met||q6st().met.includes(pn.a0)}
   window.__setup('cold');const ev0=S.coldEv||0;S.coldEv=BAL.coldEvNeed-1;q6evAdd();r.evFree=!S.out;
   return r});
  console.log(JSON.stringify(W));
@@ -77,5 +80,7 @@ const {chromium}=require('playwright');const [,,URL,MON]=process.argv;const MONT
  chk('law 6a: the queen is accused only on a real wrong; the biased ruling / the skim writes that proof',W.accNone&&W.biasSet&&W.accAfter&&W.skimSet&&W.accSkim,W);
  chk('law 5: the same roll is harder at a higher rung (lãnh cung, Hoàng hậu)',W.harder&&W.harderHH,W);
  chk('law 6a: chứng cứ from the gloating framer really clears her name when full',W.evFree,W);
+ chk('lãnh cung rice card needs the one maid she still has (no null S.maid)',W.riceNoMaid,W);
+ chk('tuyển tú: the new girls are stamped and the Hoàng hậu receives each one once (q6hhNew)',W.ttStamp&&W.ttCard&&W.ttOnce,W);
  chk('no page errors',errs.length===0,errs.slice(0,5));
  const fails=ok.filter(x=>!x[1]).length;console.log(`or20-j68q: ${ok.length-fails}/${ok.length} PASS`);await b.close();process.exit(fails?1:0)})();

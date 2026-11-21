@@ -37,7 +37,7 @@ const Q6=()=>BAL.eff.j68q;
 function q6tq(){return S.court&&S.court.tq&&S.court.tq.name?0:null}
 function q6ty(){return S.court&&S.court.ty&&S.court.ty.name?0:null}
 /* ---------- LÃNH CUNG ---------- */
-EV6("q6coldRice","day",{life:"cold",cd:Q6().cd,a:["eun"],pp:()=>q6cold()&&q6tq()!=null?{a0:0}:null,w:C=>q6cold()?Q6().w.mid:0,
+EV6("q6coldRice","day",{life:"cold",cd:Q6().cd,a:["eun"],pp:()=>q6cold()&&q6tq()!=null&&S.maid?{a0:0}:null,w:C=>q6cold()?Q6().w.mid:0,
  v:["{A} sai cắt khẩu phần lãnh cung; bát cơm đưa vào chỉ còn nửa, gạo mốc lẫn trấu.","Người của {A} mang cơm đến muộn hai ngày, cháo đã chua.","Nội vụ phủ dưới tay {A} quên phát dầu đèn cho lãnh cung; đêm đến chỉ còn ánh trăng."],
  o:X=>{const E=Q6();return[c6(`Dúi bạc cho người của ${X.A.n}`,{c:{bac:-E.bac.s},w:{suc:E.suc.m},r:[[X.A,E.rel.s]]}),
   c6("Chia phần ít ỏi cho người hầu",{c:{suc:-E.suc.s},w:{maid:E.loy.s,duc:E.st.s}}),
@@ -58,7 +58,7 @@ EV6("q6coldGloat","visit",{life:"cold",cd:Q6().cd,a:["rv"],pp:()=>{const a=q6col
   c6("Mắng trả cho hả giận",{w:{suc:E.suc.s,sac:E.st.s},wt:[G6("hả giận")],r:[[X.A,-E.rel.l]],k:[R6("nàng oán thêm, còn ở ngoài kia")]}),
   c6("Quỳ xin nàng nương tay",{w:{suc:E.suc.m},r:[[X.A,E.rel.m]],k:[R6(`Danh -${E.st.m}`)],ok:()=>{apply({danh:-E.st.m});return `${X.A.n} hả hê bỏ đi.`}})]}});
 EV6("q6coldLetter","serv",{life:"cold",cd:Q6().cd,a:["maid"],pp:()=>q6cold()&&S.maid?{a0:0}:null,w:C=>Q6().w.mid,
- v:["{A} — người còn ở lại với ngươi — xin liều mang thư của ngươi ra ngoài.","{A} quen một thị vệ gác cổng; hắn chịu đưa tin, nhưng đòi bạc.","{A} lén nhặt được thuốc trị phong hàn rơi ở cổng sau, hỏi ngươi có dám dùng."],
+ v:["{A} — người còn ở lại với ngươi — xin liều mang thư của ngươi ra ngoài.","{A} quen một thị vệ gác cổng; hắn chịu đưa tin, nhưng đòi bạc.","{A} nghe tin Hoàng thượng sắp ngự giá qua Tây cung, xin mang thư của ngươi ra đón đường."],
  o:X=>{const E=Q6();return[c6("Nhờ đưa thư lên Hoàng thượng",{c:{bac:-E.bac.s},p:q6od(E.od.letter+(S.an||0)/E.dv),w:{sung:E.st.m,an:E.st.s},r:[[X.A,E.loy.s]],l:{suc:-E.suc.s},lr:[[X.A,-E.loy.m]],lt:[R6("thư bị lính gác thu")]}),
   c6("Giữ người ấy lại, không cho liều",{w:{suc:E.suc.s},r:[[X.A,E.loy.m]],k:[R6("bỏ lỡ dịp đưa tin")]}),
   c6("Thưởng hết chút bạc còn lại",{c:{bac:-E.bac.m},r:[[X.A,E.loy.l]],w:{tamco:E.st.s}})]}});
@@ -122,6 +122,14 @@ EV6("q6hhAccused","visit",{life:"hh",cd:Q6().cd,a:["rv","th"],pp:()=>{if(!q6hh()
   c6("Nhận lỗi trước Thái hậu",{w:{duc:E.st.m},r:[[X.A,E.rel.m]],k:[R6(`Danh -${E.st.m}`)],ok:()=>{apply({danh:-E.st.m});clr();return "Thái hậu gật đầu, việc khép lại."}}),
   c6("Một mực chối",{p:q6od(E.od.deny+S.tamco/E.dv),w:{danh:E.st.s},wt:[G6("Thái hậu bỏ qua")],r:[[X.A,-E.rel.m]],l:{th:-E.rel.m,danh:-E.st.l},lt:[R6("chứng cứ rõ ràng, Thái hậu không tin ngươi")],no:()=>{clr();return `${X.A.n} đưa chứng cứ ra trước mặt Thái hậu.`}}),
   c6(`Bù đắp cho ${X.A.n}`,{c:{bac:-E.bac.m},r:[[X.A,E.rel.l]],w:{th:E.st.s},ok:()=>{clr();return `${X.A.n} rút đơn, không nhắc lại.`}})]}});
+/* tuyển tú (plan point 3): the girls are real NPCs only once they have entered (j27 tuyenTu → rivals); the Hoàng hậu then receives them */
+(function(){if(typeof tuyenTu!=="function")return;const t0=tuyenTu;tuyenTu=function(){const n0=rivals.length;const r=t0.apply(this,arguments);try{if(S)rivals.slice(n0).forEach(v=>{v.ttY=S.year})}catch(x){}return r}})(); /* the stamp lives on the consort (one world: both co-op seats read it) */
+function q6new(){const q=q6st();q.met=q.met||[];const L=rivals.filter(v=>v.alive&&!v.out&&v.ttY!=null&&S.year-v.ttY<=1&&!q.met.includes(v.id));return L.length?pick(L).id:null}
+EV6("q6hhNew","day",{life:"hh",cd:Q6().cd,a:["rv"],pp:()=>{const a=q6hh()?q6new():null;return a==null?null:{a0:a}},w:C=>Q6().w.hi,
+ v:["Tân nhân của kỳ tuyển tú vào Khôn Ninh cung bái kiến; {A} quỳ hàng đầu.","{A}, tú nữ mới vào, chưa thuộc lễ nghi, đi sai chỗ trong buổi thỉnh an.","Nội vụ phủ xin Hoàng hậu định chỗ ở cho {A} và các tân nhân."],
+ o:X=>{const E=Q6(),done=()=>{const q=q6st();q.met=q.met||[];if(!q.met.includes(X.A.o.id))q.met.push(X.A.o.id)};return[c6("Tự dạy lễ nghi cho tân nhân",{c:{suc:-E.suc.m},w:{danh:E.st.m},r:[[X.A,E.rel.s]],ok:()=>{done();return `${X.A.n} khấu đầu tạ ơn Hoàng hậu.`}}),
+  c6(`Ban lễ, kéo ${X.A.n} về bên mình`,{c:{bac:-E.bac.m},r:[[X.A,E.rel.l]],k:[R6("phi tần cũ dè chừng ngươi")],ok:()=>{done();return `${X.A.n} nhận lễ, từ nay hay lui tới cung ngươi.`}}),
+  c6(`Thử tài ${X.A.n} trước lục cung`,{c:{suc:-E.suc.s},p:q6od(E.od.newT+S.tai/E.dv),w:{mat:E.st.m,danh:E.st.s},wt:[G6("biết tài tân nhân")],lr:[[X.A,-E.rel.m]],lt:[R6("nàng thấy bị làm nhục")],ok:()=>{done();return `Ngươi đã biết ${X.A.n} giỏi gì.`},no:()=>{done();return `${X.A.n} lúng túng giữa lục cung.`}})]}});
 EV6("q6hhSick","visit",{life:"hh",cd:Q6().cd,a:["rv","doc"],pp:()=>{const a=q6hh()&&q6ty()!=null?rv6(v=>!v.queen):null;return a==null?null:{a0:a,a1:0}},w:C=>Q6().w.mid,
  v:["{A} lâm bệnh đã mấy ngày; theo lệ, Hoàng hậu phải hỏi han lục cung.","Cung {A} báo nàng ho ra máu, {B} chưa kịp đến.","{A} sinh nở xong yếu sức, Thái hậu nhắc ngươi lo cho chu toàn."],
  o:X=>{const E=Q6();return[c6("Tự sang thăm, ngồi bên giường",{c:{suc:-E.suc.m},r:[[X.A,E.rel.l]],w:{duc:E.st.s}}),

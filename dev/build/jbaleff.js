@@ -40,7 +40,7 @@ Object.assign(BAL,{eff:{
     rk = odds lost per rung (law 5: cold = the rank she fell from, srv = her servant rung, hh = rungs above BAL.voice.hq + 1); od = base odds;
     rel / loy / tin / nt / st / suc / bac = small / mid / large amounts (s / m / l); ev = chứng cứ per success */
  j68q:{cd:10,w:{lo:.7,mid:1,hi:1.5},rk:{cold:2,srv:3,hh:4},dv:3,ev:1,
-  od:{talk:50,take:45,gloat:45,letter:45,credit:45,cheer:55,quan:45,pass:40,late:55,ledger:55,judge:55,deny:50,visit:50},
+  od:{talk:50,take:45,gloat:45,letter:45,credit:45,cheer:55,quan:45,pass:40,late:55,ledger:55,judge:55,deny:50,visit:50,newT:50},
   rel:{s:4,m:8,l:12},loy:{s:5,m:10,l:15},tin:{s:4,m:8,l:12},nt:{s:3,m:6},st:{s:1,m:2,l:3},suc:{s:3,m:6,l:10},bac:{s:10,m:20,l:40}},
  j7:{evGo:1,evGo_2:1,evN:2,fondGo:6,talGo:5,fondGo_2:8,hpGo:20,hpGo_2:8,hpGo_3:30,hpGo_4:10,evGo_3:2,evGo_4:1,evGo_5:2,evGo_6:2,evGo_7:2,evGo_8:2,sungGo:4,sungGo_2:-8,danhGo:3,danhGo_2:4,sungGo_3:-10,matGo:1,danhGo_3:5,sungGo_4:3,sungGo_5:-5,sungGo_6:-10,bacGo:60,danhGo_4:5,sungGo_7:2,matGo_2:1,thGo:15,danhGo_5:4,thGo_2:3,ducGo:5,matGo_3:1,sungGo_8:-5,sungGo_9:-6,ducGo_2:4,sucGo:10,sungGo_10:-4,danhGo_6:6,sucGo_2:-15,danhGo_7:-5},
  j70:{thShield:-3,thLotus:-3,step70:2,exec70:-10,no:5,no_2:8,ok:12,ok_2:8,ordMonth70:6,ok_3:-3,evNewPlot70:1,evStep70:1,evExec70:1,evExec70_2:2,evOk:1,evOk_2:1,evOk_3:2,evOk_4:-1,evTop:1,evOrdMonth70:1,evTop_2:1,evF:1,evF_2:1,loyalNewPlot70:5,loyalOk:2,loyalOk_2:10,loyalOrdMonth70:5,loyalTop:5,ducOk:1,sucC:-5,sacUse:3},
