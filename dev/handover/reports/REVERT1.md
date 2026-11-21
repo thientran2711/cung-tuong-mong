@@ -113,3 +113,42 @@ Job done (steps A+B). Open: B26 gate override for t4/t5 (Foreman). No drawing do
 ## L1716 rewrite of the step-A test (owner correction via Foreman C)
 s62_t4_THU_revert_sqtest_L1714.txt rebuilt (9827 ch): OLD Tần prompt with NO new layer words (no inner/outer robe, no layered neckline, no S13_COMOI "outer robe closes at the sash"). Only: "a crossed collar" → "a straight SQUARE NECKLINE framed by a wide stiff lilac embroidered lotus flowers band (NO crossed wrap collar)"; capelet "fastened at the throat" → "OPEN at the front … the square neckline shows fully inside it, never hidden"; CAPELET CUT says the capelet is never closed at the throat. Old-prompt words kept as they were ("a layered silk robe of two or three visible layers", "lilac in the inner robe and linings"). Builder SQ list = the diff (make_t4.py).
 Gate: FAIL B26/M06 (row 1) + S13 REWRITTEN (the approved S13 says "the robe closes only at the throat clasp", which would close over the square collar) — both need the Foreman's override. keep --all 393 PASS.
+
+## Fix: Tần sqtest file restored
+My 17ebd70 had overwritten the Foreman's own L1716 text of s62_t4_THU_revert_sqtest_L1714.txt (3c1207f, the one drawn p8yYJV3ehw, approved L1720). Restored 3c1207f text + .keep. Do not re-run revert_L1714/make_t4.py over it.
+
+## JOB L1723 (Foreman C #20, 0 gens)
+Rule F19 added (rule.py add --force; F3 overlap): hair flower = bloom only, no leaves; never a yellow chrysanthemum in the hair; colour from the table below; own flower per rank (t7/t8 embroidery: herbaceous peony / tree peony).
+
+### Hair-flower table s62 thu (outfit light olive #9FB577 + lilac)
+| tier | species (F2/F19) | hair-flower colour | where |
+|---|---|---|---|
+| t1 Đáp ứng | lilac | pure white | hair |
+| t2 Thường tại | tiger lily | soft peach-coral | hair |
+| t3 Quý nhân | semi-double China rose | soft rose-pink | hair |
+| t4 Tần | lotus | pale blush-pink (proposal; t4 file approved, NOT changed) | hair |
+| t5 Phi | double hollyhock | deep rose-pink | hair |
+| t6 Quý phi | incurved chrysanthemum | soft mauve-pink (never yellow) | hair |
+| t7 HQP | bomb-form herbaceous peony (thược dược) | soft rose-pink + ivory | embroidery only (crown, no hair flower — F2) |
+| t8 HH | tree peony (mẫu đơn) | deep rose-red + lilac | embroidery only (crown) |
+Question for the owner: should HQP/HH also wear a hair flower now? (F2 still says none at t7/t8.)
+
+### Files (dev/art/thu_comoi/, each + .keep; keep_check --all 412 PASS)
+| file | base | chars | check_store tpN a22 |
+|---|---|---|---|
+| s62_t1_THU_L1723 | rank8-s62/s62_t1 | 8781 | PASS |
+| s62_t2_THU_L1723 | rank8-s62/s62_t2 | 8573 | PASS |
+| s62_t3_THU_L1723 | rank8-s62/s62_t3 | 9574 | PASS |
+| s62_t5_THU_fix_L1723 | s62_t5_THU_revert_sq_L1719 | 9215 | FAIL only B26/M06 (same as L1719, row 1) |
+| s62_t6_THU_fix_L1723 | s62_t6_THU_revert_sq_L1719 | 9747 | PASS |
+| s62_t7_THU_fix_L1723 | s62_t7_THU_revert_sq_L1719 | 9084 | PASS |
+| s62_t8_THU_fix_L1723 | s62_t8_THU_revert_sq_L1719 | 9214 | PASS |
+Builders: thu_comoi/fix_L1723/make_t5_t8.py, make_t1_t3.py, make_keeps.py (each edit carries its reason).
+
+### Diffs
+- t5 Phi: + Tần pearl net words (t4 approved) laid over the cape, fringe "LONGER and fuller than the Tần's, with bigger pearls", never hiding the square collar; hair flower deep rose-pink, bloom only.
+- t6 Quý phi: "a few strands of pearls across the chest" + "with a little jade: small green jade beads set among the pearls"; hair flower soft mauve-pink chrysanthemum, bloom only, never yellow.
+- t7 HQP: embroidery + collar band chrysanthemums → bomb-form herbaceous peonies (soft rose-pink and ivory). Nothing else.
+- t8 HH: chrysanthemums → tree peonies (deep rose-red and lilac); cloud collar "lying FLAT and close on the shoulders … pearl fringes hanging straight down … NO cloak, NO cape, NO mantle: never a bell or flared cone shape at the neck and shoulders"; "the robe hanging close to the body, never bell-wide".
+- t1–t3 (old Set A + L1714 rows): rows 19 (none at the ears), 20 (s62 species, plum → lilac / tiger lily / China rose), 21 (olive + lilac), 22 (toe tips), 23 (angle/grace/pose/item copied from today's dapung4 s62_t1_v11 / t2_v11 / t3_v12), 24 (opening repeat), 6 (motifs never over bands), 18 (t3 jade pendants never covered), G39 (t3 hairpin words, X20), L1723 hair flower. Old collars kept: t1 crossed-collar ruqun, t2 robe, t3 already square (no record asks a square collar at t1/t2). No layer/inner/outer words added.
+- t4 Tần NOTE ONLY (approved, unchanged): L1723 would add (a) short pearl tassels — the yoke already has "its lower edge a short pearl fringe"; owner says Tần lacks pearl tassels → proposal: "+ a few short pearl tassels hanging from the capelet's lower edge" ; (b) hair flower "pale blush-pink lotus (the bloom ONLY, NO leaves…)". Foreman decides.

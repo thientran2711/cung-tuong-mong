@@ -1,0 +1,32 @@
+base: dev/art/rank8-s62/s62_t3.txt
+# REVERT1 owner L1723 (via Foreman C #20) + L1714 rows
+allow: Full-body standing figure head to feet  # owner L1714 row 24 repeat
+allow: soft even light  # owner L1714 row 24 repeat
+allow: fair porcelain skin  # owner L1714 row 24 repeat
+allow: 3/4 or frontal view  # owner L1714 row 23/24
+allow: an ankle-length ice blue silk court robe with a straight SQUARE NECKLINE framed by a wide stiff mint mist embroidered plum blossoms band  # owner L1723 hair-flower colour/no leaves + L1714 row 20 species
+allow: a wide stiff mint mist brocade girdle at the natural waist  # owner L1714 row 21 colours
+allow: from which hangs down the centre front an embroidered mint mist APRON PANEL  # owner L1714 row 21 colours
+allow: plum blossoms embroidery  # owner L1723 hair-flower colour/no leaves + L1714 row 20 species
+allow: wide embroidered plum blossoms bands at the sleeve ends and the hem  # owner L1723 hair-flower colour/no leaves + L1714 row 20 species
+allow: a plum blossom  # owner L1723 hair-flower colour/no leaves + L1714 row 20 species
+allow: her signature colour family ice blue and mint mist stays the MAIN robe colour  # owner L1714 row 21 colours
+allow: the robe itself is clearly ice blue silk  # owner L1714 row 21 colours
+allow: her ORIGINAL robe colour is kept exactly as in image 1  # owner L1714 row 21 colours
+allow: her first reference  # owner L1714 row 21 colours
+allow: ice blue silk like #71B5D7 is the main colour of the robe  # owner L1714 row 21 colours
+allow: with mint mist in the inner robe and linings  # owner L1714 row 21 colours
+allow: exactly ONE fresh flower in her hair  # owner L1723 hair-flower colour/no leaves + L1714 row 20 species
+allow: hips and face turned about 45 degrees toward the viewer's LEFT  # owner L1714 row 23 angle
+allow: her right shoulder nearer the viewer  # owner L1714 row 23 angle
+allow: never in profile  # owner L1714 row 23 angle
+allow: a gentle S-curve through her body  # owner L1714 row 23 grace/pose/item
+allow: her hips softly shifted to one side  # owner L1714 row 23 grace/pose/item
+allow: the MAIN colour ice blue and the SECONDARY colour mint mist  # owner L1714 row 21 colours
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist  # owner L1714 row 21 colours
+allow: highly translucent gauze shawl in mint mist  # owner L1714 row 21 colours
+allow: clearly different from her main robe colour ice blue  # owner L1714 row 21 colours
+allow: one hand touching her hairpin  # owner L1714 row 23 grace/pose/item
+allow: an embroidered silk ball  # owner L1714 row 23 grace/pose/item
+allow: with small silver bells in the other hand at her waist  # owner L1714 row 23 grace/pose/item
+allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips
