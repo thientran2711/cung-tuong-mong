@@ -34,6 +34,8 @@ function dfCard(i){const p=curPeople()[i];if(!p)return null;const d=document.cre
 function dfBtnTitle(b){const n=b.firstChild;return String(n&&n.nodeType===Node.TEXT_NODE?n.textContent:(b.childNodes[0]&&b.childNodes[0].textContent)||"").trim()}
 /* a button's identity = its data-* attributes (the live card may be re-split by the kit observer; data stays) */
 function dfSig(b){return Object.keys(b.dataset).filter(k=>!/^k/.test(k))/* kit decorations (ka, kart, kph, krv…) are added later by the kit observers */.sort().map(k=>k+"="+b.dataset[k]).join("&")}
+/* a card with ONE pane has no tab row: its group takes the kit category name of its acts (never a nameless head tab) */
+function dfCatName(acts){for(const a of acts){let c="";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){}if(c&&typeof KIT_CAT!=="undefined"&&KIT_CAT[c])return KIT_CAT[c][0]}return""}
 function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let T=null;try{T=talkOpts(p)}catch(e){T=[]}
  const tabs=[...d.querySelectorAll(".pctabs .pct")].map(t=>({n:t.dataset.pct||t.textContent.trim()}));
  const panes=[...d.querySelectorAll(".pcg")];const src=panes.length?panes:[d];const out=[];
@@ -42,11 +44,11 @@ function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let 
    const oo=o?(typeof oddsOf==="function"?oddsOf(o):(o.o==null?100:o.o)):null;/* 100 = the game's own «sure» mark on an option (o:100), not a balance number */
    acts.push({id:"g"+dfSig(b),n,cls:o?dfCls(o):"C",eng:dfEng(n),word:oo!=null&&oo<100?dfWord(oo):"",ton:o?[talkK(o)+" khắc",o.c&&o.c.bac?(-o.c.bac)+" bạc":""].filter(Boolean).join(" · "):"",
     off:!!b.disabled,why,info:b.outerHTML,small:sm?sm.innerHTML:"",pic:dfPic(n)})});
-  out.push({k:"g"+gi,n:(tabs[gi]||{}).n||"",acts})});
+  out.push({k:"g"+gi,n:(tabs[gi]||{}).n||dfCatName(acts),acts})});
  const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);
  if(!done)for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":whyTime(hk)||"hết khắc buổi này";
   const c=(()=>{try{return (typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){return""}})(),cn=typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:"";
-  let G=out.find(g=>g.n===cn);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
+  let G=out.find(g=>g.n===cn)||(!cn&&out[0]);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
   G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?fmt(a.c||{}):""].filter(Boolean).join(" · "),off:!!why,why,info:"",small:"",pic:dfPic(a.n)})}
  return out.filter(g=>g.acts.length).map(g=>Object.assign(g,{can:g.acts.filter(a=>!a.off).length,tot:g.acts.length}))}
 /* (2) run one act. res = {raw, skipped} from the on-figure game (undefined = no game played: plain odds) */

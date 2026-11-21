@@ -18,9 +18,9 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  const play=async(eng,how,rank=0,at)=>{const pr=g.evaluate(([e,r,a])=>__run(e,{rank:r,at:a}),[eng,rank,at]);await wait(150);await how();return await pr};
  const R={};
  /* swipe: fast stroke through the target vs a stroke far away */
- const swipe=(good,slowish)=>async()=>{const k=await g.evaluate(()=>__h.peek());const y=k.y,dur=slowish?900:60,x0=k.x-120,x1=k.x+120,n=8;
-  await g.evaluate(([x0,y0])=>__fire('pointerdown',x0,y0),[x0,good?y:y+250]);for(let i=1;i<=n;i++){await wait(dur/n);const kk=await g.evaluate(()=>__h.peek());await g.evaluate(([x,y0])=>__fire('pointermove',x,y0),[x0+(x1-x0)*i/n,good?kk.y:kk.y+250])}
-  const kk=await g.evaluate(()=>__h.peek());await g.evaluate(([x,y0])=>__fire('pointerup',x,y0),[x1,good?kk.y:kk.y+250])};
+ /* the whole stroke runs IN the page (no round trip per step: the moving target is read at each step, so a good stroke stays on it) */
+ const swipe=(good,slowish)=>async()=>{await g.evaluate(([good,dur])=>new Promise(res=>{const n=6,off=good?0:250;const k=__h.peek();const x0=k.x-180,x1=k.x+180;__fire('pointerdown',x0,k.y+off);let i=0;
+   const st=()=>{i++;const kk=__h.peek();__fire('pointermove',x0+(x1-x0)*i/n,kk.y+off);if(i<n)setTimeout(st,dur/n);else{const k2=__h.peek();__fire('pointerup',x1,k2.y+off);res()}};setTimeout(st,dur/n)}),[good,slowish?900:60])};
  R.swGood=await play('swipe',swipe(true));R.swMiss=await play('swipe',swipe(false));R.swSlow=await play('swipe',swipe(true,true));R.swFeet=await play('swipe',swipe(true),0,'feet');
  /* tug: many fast taps vs none */
  R.tugGood=await play('tug',async()=>{for(let i=0;i<40;i++){await g.evaluate(()=>{__fire('pointerdown',250,300);__fire('pointerup',250,300)});await wait(30)}});
@@ -36,7 +36,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   if(safe&&!held){await g.evaluate(([x,y])=>__fire('pointerdown',x,y),[q.x,q.y]);held=true}else if(!safe&&held){await g.evaluate(([x,y])=>__fire('pointerup',x,y),[q.x,q.y]);held=false}await wait(10)}});
  R.earBad=await play('ear',async()=>{for(let i=0;i<10;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;await g.evaluate(([x,y])=>__fire('pointerdown',x,y),[q.x,q.y]);await wait(500)}});
  /* words: tap only the good signs vs only the wrong ones */
- const words=okWant=>async()=>{for(let i=0;i<120;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;const s=q.L.find(s=>s.ok===okWant&&s.y>40);if(s)await g.evaluate(([x,y])=>__fire('pointerdown',x,y),[s.x,s.y]);await wait(40)}};
+ const words=okWant=>async()=>{for(let i=0;i<120;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;/* read + tap in ONE page call (the signs move between round trips) */await g.evaluate(w=>{const q=__h.peek();const s=q.L.find(s=>s.ok===w&&s.y>40);if(s)__fire('pointerdown',s.x,s.y)},okWant);await wait(40)}};
  R.wGood=await play('words',words(true));R.wBad=await play('words',words(false));
  /* stare: hold when under the band, release when over it vs hold all the time */
  R.stGood=await play('stare',async()=>{let held=false;for(let i=0;i<500;i++){const q=await g.evaluate(()=>__h&&__h.peek());if(!q)return;const want=q.p<(q.lo+q.hi)/2;

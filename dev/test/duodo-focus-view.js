@@ -25,8 +25,8 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   const tok=document.querySelector(`#tokens .tok[data-p="${i}"]`);tok.click();await sl(50);
   out.open={called:__K.calls.includes('open'),fans:document.querySelectorAll('.kfoc-b').length,groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
   /* (2) an act, skipped */const F=__K.F;const a=F.groups.flatMap(g=>g.acts).find(a=>!a.off&&(dfFind(i,a.id)||{}).cls!=="D");const n0=S.logSeq||0;const run0=window.talk;let talked=0;window.talk=function(){talked++;return run0.apply(this,arguments)};
-  __K.calls.length=0;Q.length=0;F.o.onAct(a.id);out.played=!!DFG.cur&&__K.calls.includes('play');out.skipBtn=!!document.querySelector('#dfskip');document.querySelector('#dfskip').click();await sl(60);window.talk=run0;
-  out.act={n:a.n,calls:__K.calls.slice(),talked,cur:!!DFG.cur,skipGone:!document.querySelector('#dfskip')};
+  __K.calls.length=0;Q.length=0;F.o.onAct(a.id);out.played=!!DFG.cur&&__K.calls.includes('play');out.skipBtn=!!document.querySelector('.kfoc-skipw:not([hidden]) button');document.querySelector('.kfoc-skipw button').click();await sl(60);window.talk=run0;
+  out.act={n:a.n,calls:__K.calls.slice(),talked,cur:!!DFG.cur,skipGone:!document.querySelector('.kfoc-skipw:not([hidden]) button')};
   /* back «◂» during a game = cancel: no act */{S.visit.tk={};Q.length=0;used=0;const b=(dfActs(i)||[]).flatMap(g=>g.acts).find(a=>!a.off&&a.cls!=="D");let t2=0;out.bAct=b&&[b.n,b.cls,DF.play?'busy':'',Q.length];const r1=window.talk;window.talk=function(){t2++;return r1.apply(this,arguments)};
    F.o.onAct(b.id);const inGame=!!DFG.cur;document.querySelector('.kfoc-x').click();await sl(60);window.talk=r1;out.back={b:out.bAct,inGame,talked:t2,cur:!!DFG.cur,open:!!document.querySelector('.kfoc-veil')}}
   /* (3) close */F.close();await sl(900);out.close={popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};

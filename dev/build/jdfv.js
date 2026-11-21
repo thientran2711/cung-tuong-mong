@@ -16,11 +16,10 @@ function dfFigBox(F,layer){/* the figure box inside the play layer (CSS px) */
 function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.tot,acts:g.acts.map(a=>({id:a.id,n:a.n,pic:a.pic,word:a.word,ton:a.ton,off:a.off,why:a.why,info:a.info}))}))}
 /* kitFocus API glue (K-FOCUS-1, review/kit-focus): hud(mark "n/10", clock "N giây"); groups refresh; the play layer + «Làm luôn» (kit kitQuick in the kit HUD strip) + the kit back «◂» = cancel, no act */
 function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
-function dfSetGroups(F,G){try{if(typeof F.setGroups==="function")return F.setGroups(G);F.groups=G;const k=F.group;F.group=null;F.setGroup(G.some(g=>g.k===k)?k:(G[0]||{}).k)}catch(e){}}
-function dfPlay(F,onSkip,onBack){const L=F.play();if(!L)return null;try{const h=F.el&&F.el.querySelector(".kfoc-hud");if(h&&typeof kitQuick==="function"&&!h.querySelector("#dfskip")){h.insertAdjacentHTML("beforeend",kitQuick({id:"dfskip",n:"Làm luôn",sub:"không chơi: như thường"}));
-  h.querySelector("#dfskip").onclick=e=>{e.stopPropagation();onSkip()}}
- const x=F.el&&F.el.querySelector(".kfoc-x");if(x){const f=e=>{x.removeEventListener("click",f,true);if(DF.play){onBack()}};x.addEventListener("click",f,true)}}catch(e){}return L}
-function dfUnplay(F){try{const b=F.el&&F.el.querySelector("#dfskip");if(b)b.remove()}catch(e){}try{F.endPlay()}catch(e){}}
+function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
+/* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Làm luôn",sub:"không chơi: như thường",onSkip},onBack})}
+function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 function dfOpen(i){const p=curPeople()[i];if(!p)return false;if(!dfViewOn()){popIdx=i;popMsg="";renderStage();return false}
  const fig=dfFig(i);DF.i=i;popIdx=i;popMsg="";renderStage();
@@ -29,7 +28,7 @@ function dfClosed(i){if(DF.i!==i)return;DF.i=null;DF.F=null;if(popIdx===i){popId
 function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id===id)return a;return null}
 function dfTap(i,id){const F=DF.F,a=dfFind(i,id);if(!F||!a||a.off||S.dead||Q.length||DF.play)return;
  if(a.cls==="D"){dfRun(i,id);dfAfter(i,a,null);return}
- const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy();try{const b=F.el.querySelector("#dfskip");if(b)b.remove()}catch(e){}});if(!layer){dfRun(i,id);dfAfter(i,a,null);return}
+ const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){dfRun(i,id);dfAfter(i,a,null);return}
  DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);dfRun(i,id,res);dfAfter(i,a,res)}});
  if(!DF.play){dfUnplay(F);dfRun(i,id);dfAfter(i,a,null)}}
