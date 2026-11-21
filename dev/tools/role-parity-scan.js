@@ -266,6 +266,15 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
      write here, so goTo walks the real path (gates, khắc, people) instead of stopping at the card. S.ent is restored after each place. */
   for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
+  /* review coop-name-clash r1: a player maid meets the Hoàng hậu only where the seeded world puts her this khắc (a names change re-draws the
+     seeded world: no place held her, so "Tố cáo … trước Hoàng hậu" was read as an NPC-only act although the player holds it). The
+     Hoàng hậu is asked directly, as a visit person (j42 srvVisitOf: {kind:"srv",sk:"hh",ref}), like every NPC maid's hh probe */
+  if(isSrv())try{const m=srvM(),q=rivals.find(v=>v&&v.queen&&v.alive!==false&&!v.out&&v!==m);if(q)for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:q.name})||[])addP(role,a.n,"talk:srv-hh")}catch(e){E("talk srv-hh",e)}
+  /* b-nameclash-rp (21/11, same family as the srv-hh fix above): her «Lục rương tìm chứng cứ» / «Lấy trộm son phấn» sit on the chest person j2 goTo puts
+     in a palace whose owner is away (P.v not here); whether any visited palace was empty this khắc hung on the seeded day plan (the coop-name-clash
+     names draw moved every owner home in the hh probe: hh N-ONLY cx2:chest / cx4:rougeSteal). The card has no rank gate; the NPC road (jagacts2
+     cx2:chest, jagacts4 p4StealT) goes to the target's palace by rule. So the chest of every other consort is asked directly (owner away) */
+  if(!isSrv())for(const v of liveRivals(true)){if(!v||v===S||v.out||v.alive===false)continue;try{for(const a of talkOpts({kind:"chest",ref:v,name:`Rương của ${v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"})||[])addP(role,a.n,"talk:chest-direct")}catch(e){E("talk chest",e)}}
   S.place="home";Q.length=0;
   /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
   if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}
