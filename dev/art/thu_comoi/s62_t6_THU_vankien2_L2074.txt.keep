@@ -1,0 +1,10 @@
+base: dev/art/thu_comoi/s62_t6_THU_vankien2_L2065.txt
+allow: a large rich cluster of formal double camellias embroidered at the CENTRE of the chest inside the square frame  # owner L2069: chest flower embroidered in the robe BELOW the neckline band, never inside the panel
+allow: above the pearl strands  # same
+allow: Image 2 is only a colour reference for the royal yellow  # dedup trim for owner L2074 silhouette words ("royal yellow exactly as image 2" stays)
+allow: never copy anything but its colour  # same
+allow: the royal yellow in the robe is exactly that colour  # same
+allow: robe, skirt, sleeves, cloud collar and train are all clearly light olive silk  # owner L2074 bell fix: 'train' word dropped (prompt also says 'no train')
+allow: with large areas of plain light olive silk visible  # shortened to 'with large plain light olive areas'
+allow: pearls only  # dedup (JEWELLERY line keeps pearls)
+allow: "Thu · Quý phi · L2066"  # caption
