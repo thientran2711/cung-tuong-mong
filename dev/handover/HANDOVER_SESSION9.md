@@ -1931,3 +1931,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - IDLE to archive after their sha lands: kit-dialog-2 worker LvRJ session_01Rc5AsLvRJSwBGGefPUEw8B, chapter-card MDAs session_01Rc5AsMDAsVpNsL2CKbpUuC, mg-intro-2 Ji75 session_01Rc5AsJi75sHocL2mwRsbkt (36b54a1b follow-up → SMALL rv after 18d1b014 lands), bag-inline-3 JuyC session_01Rc5AsJuyCsaNqz1pfQgV8q, rv MYd9. Archived by 91: lander KQsG, rv NT2K, worker KTU3, rv MaLL.
 - TRIGGER: mine trig_01TPEcfAwu7QnUBQq4AeAkTy (min 32) → 92 creates its own and DISABLES mine. MAIN 90 told to stop; owner now writes in 91 → 91 relays to 92.
 - No owner question pending.
+- (08:37Z) MAIN CHÍNH 91 opened child MAIN CHÍNH 92 = session_01Rc5AsMUHiJKCMiCjnzdhii (depth 3). 91 stops except relaying late messages to 92.
