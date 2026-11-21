@@ -70,7 +70,7 @@ HL.diff=diff;HL.canon=canon;
 
 /* r2: at a room start / rejoin / merged week / face index ready, the host sends EVERY world person's face as it holds it (idempotent "s" ops,
    on top of the diff): a face the diff could not see (the base already held it on the host only, a pick in a gap) still reaches the guest */
-const FACEW=new Set(["start","week","peer","ready","state"]);let faceDue=false;
+const FACEW=new Set(["start","week","peer","ready","state","ask"]);/* rv r2-r1: "ask" too (her first join asks; the answer carries every face, not only the diff) */let faceDue=false;
 function facePaths(){const L=[];try{const T=S.thO;if(T&&!S.thDead){if(T.fid)L.push([["S","thO","fid"],T.fid]);for(const s of T.staff||[])if(s&&s.fid&&s.sid!=null)L.push([["S","thO","staff",["s",s.sid],"fid"],s.fid])}
   for(const v of rivals||[]){if(!v||v.coop||v.id==null)continue;const R=["R",["i",v.id]];if(v.fid)L.push([R.concat(["fid"]),v.fid]);if(v.maid&&v.maid.fid)L.push([R.concat(["maid","fid"]),v.maid.fid]);
    for(const s of v.staff||[])if(s&&!s.coop&&s.fid&&s.sid!=null)L.push([R.concat(["staff",["s",s.sid],"fid"]),s.fid]);for(const k of v.kids||[])if(k&&k.fid&&k.id!=null)L.push([R.concat(["kids",["i",k.id],"fid"]),k.fid])}}catch(e){}return L}
@@ -125,7 +125,7 @@ HL.check=check;
 /* what the guest holds right after a merged week / a new world = that C's world; the host's own writes after it are the difference */
 function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
 COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host()){/* r2: a face the merged week dropped comes back (one person, one face for life) */try{if(!lvl3())fidBack()}catch(e){}baseFrom(m.state,"week")}else setTimeout(nmAgain,0)});
-COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
+COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()){if(!shared)baseFrom(m.state,"state");else soon("state")}});/* rv r2-r1 (start-window miss, probe 1/32): her person reaching the host (first pick / rebirth) = every face sent again; before, a shared base swallowed it and her "ask" 400 ms after "state" ran before her S existed (live() false), so nothing went out until a later pick or the week */
 COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host()&&!lvl3())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
 COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear();try{FLAST.clear()}catch(e){}});
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
@@ -170,8 +170,10 @@ function mine(who){try{if(!S||who===S||who===S.maid)return true;if((S.staff||[])
 function seeded(seed,fn){const r0=Math.random;let s=seed>>>0||1;Math.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296};try{return fn()}finally{Math.random=r0}}
 const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
 if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW.on&&!host()&&!lvl3()/* level >= 3: the lens drops her world writes */&&who&&typeof who==="object"&&!who.coop&&!mine(who)&&!(who.fid&&typeof figxHas==="function"&&figxHas(who.fid))){
+   if(!who.fid&&typeof who.fromMaid==="string"&&POOLF.test(who.fromMaid)&&(rivals||[]).indexOf(who)>=0&&typeof f88List==="function"&&f88List(who.fromMaid).length){HL.stat.gCarry=(HL.stat.gCarry||0)+1;return who.fromMaid}/* rv r2-r1: her raised maid shows her carried face (not stored) until the host's op */
    const U=figUsed(),n=U.length,f0=who.fid;const k=seeded(hash((who.id!=null?who.id:"")+"|"+(who.sid!=null?who.sid:"")+"|"+(who.name||"")),()=>p0.call(this,who));
    who.fid=f0;U.length=n;HL.stat.gPick=(HL.stat.gPick||0)+1;return k}}catch(e){console.error("hl gpick",e)}
+  try{if(CW.on&&host()&&!lvl3()&&who&&typeof who==="object"&&!who.fid&&who.fromMaid)carry(who,worldPeople())}catch(e){}/* rv r2-r1: the host keeps a raised maid's face before any fresh draw */
   const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid){fidNote(who);if(who.fid!==a)soon("pick")}
    else if(live()&&!host()&&who&&who.fid&&who.fid!==a&&mine(who))rsvSend(who.fid)}catch(e){}return r};window.figPick=figPick}
 /* r1 (reviewer): a face the guest gives one of HER OWN people (her new maid / servant / child, drawn on her seat) is reserved in the host's ONE
@@ -201,9 +203,16 @@ function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(cons
   for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}
   for(const s of (S.thO&&S.thO.staff)||[])L.push(s);for(const m of S.men||[])if(m)L.push(m)}catch(e){}return L}
 function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;reserveFriend();clash=0;if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
- for(const p of worldPeople()){try{if(p.alive===false||p.dead)continue;const a=p.fid;if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
+ const WP=worldPeople();for(const p of WP){try{if(p.alive===false||p.dead)continue;const a=p.fid;carry(p,WP);if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
  HL.stat.fill=(HL.stat.fill||0)+n;return n}
 HL.figFill=figFill;
+/* rv r2-r1 (#2b's note, same family): a maid raised to consort keeps her face (j88 f88Carry: n.fromMaid = her maid face). When HER seat made the
+   rise, her f88Take guard stores no face (r2), so the new consort reaches the host with fromMaid and no fid, and a plain figPick drew a NEW face
+   (the girl changes face on her rise). The host makes the same fact as j88 does: her carried face, unless another person or the friend holds it. */
+function carry(p,WP){try{if(!p||p.fid||typeof p.fromMaid!=="string"||!POOLF.test(p.fromMaid)||(rivals||[]).indexOf(p)<0)return;const k=p.fromMaid;
+  if(typeof f88List==="function"&&!f88List(k).length)return;if(WP.some(o=>o&&o!==p&&o.fid===k))return;
+  const P=CW.base&&CW.base.P&&CW.base.P.b;if(P&&P.S&&pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0).has(k))return;if(S.pid===k||(S.maid&&S.maid.fid===k))return;
+  p.fid=k;const U=figUsed();if(!U.includes(k))U.push(k);HL.stat.carry=(HL.stat.carry||0)+1}catch(e){}}
 if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(CW.on&&host()&&!lvl3()/* r1: inert at level >= 3, as the header says */&&!CW.ctx)figFill()}catch(e){console.error("hl fill",e)}return r}}
 
 /* ---------- GUEST: world housing is the host's ---------- */
@@ -271,5 +280,5 @@ COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.rsv){
 function ask(){try{if(live()&&!host()){/* r1: with the faces her own people hold (her P), so the host reserves them before it answers */
   const F=[...pFids({pid:S.pid,maid:S.maid,staff:S.staff,kids:S.kids},new Set(),0)];COOP.send({t:"act",k:K,ask:1,rsv:F,id:K+"q"+Date.now().toString(36)})}}catch(e){}}
 COOP.on("start",()=>setTimeout(ask,400));
-COOP.on("state",()=>{if(!host())setTimeout(ask,400)});
+COOP.on("state",()=>{if(host())return;let n=0;const t=()=>{if(live())ask();else if(++n<60)setTimeout(t,500)};setTimeout(t,400)});/* rv r2-r1: she asks once her S exists (her person may still be in the making 400 ms after the host's world arrived) */
 }catch(e){console.error("jcoophl",e)}})();
