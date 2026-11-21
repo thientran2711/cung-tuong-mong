@@ -994,3 +994,4 @@ NEWACCT#14 ~02:12Z: THUPAL1 rolled (7b9f0dc d9cc23a palettes_season_L1583.json, 
 NEWACCT#14 HANDOVER ~02:15Z: depth 4, ctx 31 % (START ~4 % + 25 % → roll). TAKEOVER_FOREMAN_C_NEWACCT15.md written; opening #15 as my child. No schedules owned. Next Lượt 1609.
 NEWACCT#14 ~02:17Z: opened #15 session_01D3E3NajnDsKk2KkQgXnroZ. Workers told to report to #15. #14 stops.
 NEWACCT#15 ~01:20Z: started, depth 5, START_CTX ~5 % (roll at ~30 %, ceiling 60 %). No schedules. Next Lượt 1609.
+NEWACCT#15 ~01:24Z: GEN1 10211b3 thu t1–t3 v5 sheet LOOKED + sent L1609 (165 cr). Workers GEN1/CHECK1/DESIGN19/KHO2/THUPAL2/MAIDP4 told to report to #15.
