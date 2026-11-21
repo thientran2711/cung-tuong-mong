@@ -178,4 +178,9 @@ if(typeof flip==="function"){const f=flip;flip=function(){idNow();return f.apply
 COOP.on("week",()=>{const k=wkR();for(const x of Object.keys(G.done))if(+x<k-2)delete G.done[x]});
 /* the guest: a room that reaches level 13 mid-week has no `end` of hers pending: drop any (the server refuses it: thinend) */
 COOP.on("error",m=>{if(m&&m.code==="thinend"){lg(["thinend",m.week]);}});
+/* coop-thin-g-f1 (law 11, TRIP swap wk32 staff host 1 | phone 0): her phone sheds the servants over the table at every render (jpromo render →
+   j10 capSweep → as a guest capTrim(S) only), so a demotion that lands in one of her runs (a card she answers, her week end) trims at once there;
+   the host paints nothing for her, so her store kept the extra servant until her next buổi. Every close of her context on the host (part D on:
+   her store travels as a patch) runs the same trim on HER person only — never a world person (no capSweep: outside CW.gWk that sweeps rivals). */
+TH.ctxOut.push(seat=>{try{if(!CW.on||seat===CW.seat||!S||S.dead||!(TH.dOn&&TH.dOn()))return;if(typeof capTrim==="function")capTrim(S)}catch(e){console.error("thin capTrim",e)}});
 }catch(e){console.error("jcoopthing",e)}})();

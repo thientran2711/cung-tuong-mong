@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"74f72f32+","t":"2026-11-21T16:14Z","c":"coop-thin-g-f1: test staging (review r1 FOR worker) — f6b L3 snapshot counts the sit (e.ex.n) so a second same-turn sit «Đã đỗ: chờ ghế» is…","b":"b0dab5381761","h":[{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"}]};
+window.CTM_BI={"s":"906a169e+","t":"2026-11-21T16:34Z","c":"coop-thin-g-f1: seat-guard family (law 11) on LIVE d541add9's new raw seat reads — j61 k61GuestOwn / k61HostCopy / k61CoopFr / k61Shared an…","b":"1c5f2d6d2b0a","h":[{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -91529,6 +91529,11 @@ if(typeof flip==="function"){const f=flip;flip=function(){idNow();return f.apply
 COOP.on("week",()=>{const k=wkR();for(const x of Object.keys(G.done))if(+x<k-2)delete G.done[x]});
 /* the guest: a room that reaches level 13 mid-week has no `end` of hers pending: drop any (the server refuses it: thinend) */
 COOP.on("error",m=>{if(m&&m.code==="thinend"){lg(["thinend",m.week]);}});
+/* coop-thin-g-f1 (law 11, TRIP swap wk32 staff host 1 | phone 0): her phone sheds the servants over the table at every render (jpromo render →
+   j10 capSweep → as a guest capTrim(S) only), so a demotion that lands in one of her runs (a card she answers, her week end) trims at once there;
+   the host paints nothing for her, so her store kept the extra servant until her next buổi. Every close of her context on the host (part D on:
+   her store travels as a patch) runs the same trim on HER person only — never a world person (no capSweep: outside CW.gWk that sweeps rivals). */
+TH.ctxOut.push(seat=>{try{if(!CW.on||seat===CW.seat||!S||S.dead||!(TH.dOn&&TH.dOn()))return;if(typeof capTrim==="function")capTrim(S)}catch(e){console.error("thin capTrim",e)}});
 }catch(e){console.error("jcoopthing",e)}})();
 
 try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
@@ -91560,7 +91565,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b0dab5381761";window.CTM_BUILD=BUILD;
+const BUILD="1c5f2d6d2b0a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
