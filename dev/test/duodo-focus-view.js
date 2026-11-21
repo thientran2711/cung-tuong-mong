@@ -15,7 +15,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  await g.evaluate(()=>{window.kitNotice=undefined;window.ptOn=()=>false;
   /* the REAL kit part kitFocus (review/kit-focus, K-FOCUS-1); calls recorded by wrapping its open */
   window.__K={calls:[]};KIT_FOC.motion=false;const o0=kitFocus.open;kitFocus.open=function(o){__K.calls.push('open');const F=o0.apply(this,arguments);__K.F=F;
-   for(const m of ['play','endPlay','react','say','choices','setGroup','destroy'])if(typeof F[m]==='function'){const f=F[m];F[m]=function(){__K.calls.push(m);return f.apply(this,arguments)}}
+   for(const m of ['play','endPlay','react','say','choices','setGroup','setGroups','destroy'])if(typeof F[m]==='function'){const f=F[m];F[m]=function(){__K.calls.push(m);return f.apply(this,arguments)}}
    F.ch=null;const c0=F.choices;F.choices=function(L,cb){F.ch=L;return c0.apply(this,arguments)};return F};
   const go=k=>{Q.length=0;used=0;S.out=0;S.confined=0;S.buoi=0;S.place="home";goTo(k);if(Q[0]&&Q[0].pid==="entpick"){const o=Q[0].opts.find(x=>x.n==="Đi một mình");Q.length=0;o.go()}Q.length=0;S.visit.tk={};S.visit.talked=false;tab="act";window.__fromMap=1;render()};
   window.__go=go});
