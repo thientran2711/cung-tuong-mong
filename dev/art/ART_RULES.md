@@ -57,6 +57,7 @@ A48 | LATER WORD WINS (owner L1814, angry at a 'dumb' question): when two owner 
 A49 | AUTO SAMPLE (owner L1820, angry at waiting): as soon as a prompt fix the owner ordered is finished, DRAW a sample picture right away (same price tier as that set) and send it for her approval; never wait for her to ask, never just offer. | Lượt 1820 (21/11) | FG -
 A50 | NEVER HOLD A SAMPLE FOR A SIDE ISSUE (owner L1828): a finished prompt is drawn and sent even if a colour (or other detail) is still being redesigned — the owner checks the outfit DESIGN; colour can be fixed later. Never pause drawing for that reason. | Lượt 1828 (21/11) | FG -
 A51 | PARALLEL DRAWING (owner L1832): when several prompts are ready, draw them AT THE SAME TIME — split across several picture workers (open new VE workers as needed) and start all gens of a job at once; never queue one outfit after another. | Lượt 1832 (21/11) | FG -
+A52 | DRAFTS AT 55 (owner L2088 verbatim: 'đừng có làm bằng cái credit 135 nữa, tao đã nói rồi. Những cái hình nào mà chưa duyệt là phải làm bằng credit 55.'): every picture NOT yet approved (tests, samples, fixes) = gpt-2-6 1k @55; 135 (2k medium) only for approved/production runs she orders. Overrides #27 lesson '@135 unless she says otherwise'. | Lượt 2088 (21/11) | FG -
 
 ## B. Prompt build (store, shared vs own, method)
 B1 | LAW #1: the 19/11 store prompts (dev/art/store-all/build_all.py f73a457 / dev/art/t8-prompt-B/build.py) are APPROVED; never rewrite or "improve" their fabric/brushwork sentences. | Lượt 397, 395 | FG 6-7
