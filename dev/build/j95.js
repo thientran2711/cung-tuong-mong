@@ -123,7 +123,7 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
  if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=(typeof kidWardHome==="function"&&kidWardHome(k,mo))/* KP03 orphans: the foster mother (Hoàng hậu: her or an NPC; else Thái hậu) */||(!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn"));const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
- /* npc-death-wire (owner OD:L641): Phế phi họ Lý lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
+ /* npc-death-wire (owner OD:L641): Phế phi họ Tần lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
  try{const y=typeof lyAlive==="function"&&lyAlive();if(y)add("c:ly",y.name,"Phế phi","ly","lc",y)}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
