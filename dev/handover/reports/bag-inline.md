@@ -1,0 +1,39 @@
+# bag-inline report (worker session_01Rc5AsJTtZMnTMg6ibPv5H7, MAIN CHÍNH 85) — branch review/bag-inline
+
+PRIORITY #1 CHECK: OD 21/11 ~02:45Z (mark #21) + ~02:50Z (mark #23) | main: kitItemDetail «kidet-strip» KIT §70.3 existed (beside a grid), no under-grid strip, no chip column | review/* none | claims: this row only.
+
+## Mark #21 — inline item strip (no pop-up)
+KIT: extended the EXISTING §70.3 strip family with §70.6 (`dev/build/jkinl.js`, KIT.md §70.6, kit sample §70.6). MAIN approved option (1) 21/11 ~02:35Z; the kit keeper
+(session_01Rc5AsMtjP4KTgBZVjENGLs) and the small reviewer check the kit part.
+- Tư trang › Túi đồ: tap a tile → strip UNDER the grid: small square picture LEFT, name/kind/rows/act buttons in the middle, the chips (Sắc +N · Xa xỉ N · ✓ Đã biết: Đúng phẩm) as ONE vertical box on the RIGHT. No pop-up, no ✕. Tap another tile = strip swaps in place, selected tile wears the gold ring. Empty state «Chạm một món để xem.» (chips stay).
+- ONE code path for the whole group: the pick's own `kitModal({kind:"info"})` is captured into the strip, so every opener wrapped round `kinvOpen` (jecon works, jrcp recipe books, jshelf, jmark Dấu ấn, jwdinv wardrobe garments/fabrics) fills it with no change of its own.
+- Selection is remembered per grid and re-captured on every render: Đeo → Tháo, sell → strip goes empty and the grid grows back. «Bên mình» slots (kitEquipSlots, same panel) use the same strip.
+
+### Group table (every item surface that opened an info pop-up)
+| surface | before | after |
+|---|---|---|
+| Tư trang › Túi đồ tiles (kinvOpen) | kit info pop-up + ✕ | INLINE strip (kitInvGrid inline:true) |
+| works / tác phẩm (jecon econWkOpen) | pop-up | INLINE (captured through kinvOpen) |
+| recipe books (jrcp), shelf items (jshelf), Dấu ấn (jmark), wardrobe garments (jwdinv wdOpen/wdFabOpen) | pop-ups via kinvOpen wrappers | INLINE (same capture) |
+| Bên mình slots (keqPick: veil / dress / item / empty slot) | pop-up | INLINE (kinlPickSlot). Empty-slot chooser still lists items; tapping one of those opens the kit item card with its ONE act (act pop-up stays) |
+| dress picker (jtoil), Hội phối đồ (jts), veil picker (jveil), gift picker (jgpick) | already select + `kidet-strip` beside the grid (§70.3) | unchanged (already inline, no pop-up) |
+| shelf drawer (jdisp kitItemCard with the ONE act Trưng bày / Cất xuống), other people's worn slot (jgift kitItemCard) | floating card | STAYS: the card is an ACT (place / take down) or a one-off look at another person's piece; not a grid-of-mine info pop-up. Flag to MAIN if the owner wants these inline too |
+| shop picture card, reward boxes, event item tags | card | STAYS (not an item grid) |
+| pets (jpet), kids, people | not item grids | out of scope |
+| confirm sell / pick recipient / choose person | act pop-ups | STAY |
+
+## Mark #23 — Việc act pictures
+Cause: no ACTS.json entry for the six cards + the Việc pane was not a `kpanec`, so `kitActCompactOn` never added a picture. Fix (no CDN manifest push): code-side `KIT_ACT_ALIAS` in `jopic.js` + `kpanec` on the Việc pane (`jinv.js`).
+| card | picture (existing, on CDN) |
+|---|---|
+| Nhờ thái giám mua đồ | act-mua-hang |
+| Soát đồ | act-kiem-tra-ruong-h |
+| Sai cung nữ thân tín mua lén ngoài cung | act-len-mua-ngoai-cung-h |
+| Hối lộ người ở Thái y viện | act-mua-chuoc |
+| Xin đồng minh | act-ket-minh |
+| Chợ đen ở cửa Thần Vũ | act-buon-ban-len (stand-in) → ART REQUEST in FOREMAN_C_STATUS |
+Scan (Fold 755x1000, fresh save, every bottom tab + Tư trang sub-panes): `button.ka` without picture = 0 (Hành sự 28, Hậu cung 5, Tài nghệ 13, Việc 6 checked; other tabs held no act cards in that state).
+
+## Evidence
+Shots (scratch, not in git): /home/user/wt/bag-inline-shots/bag-after-{755x1000,1180x820}-*.jpg, viec-755x1000.jpg. Looked at: Fold grid+strip, second tap swap, slot strip, sell (strip empties, grid regrows), iPad strip.
+Known: iPad 1180x820 — the strip with 3 act cards makes the panel scroll a little (long item text + 3 acts); strip keeps the grid ≥ 2 rows. A «Bên mình» slot strip also scrolls (worn item + chooser inside).
