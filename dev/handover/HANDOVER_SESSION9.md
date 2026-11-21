@@ -2168,3 +2168,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FOR MAIN: owner opens ROOT «MAIN CHÍNH 98» from claude.ai with the paste block given in 97 chat (17:25Z).
 - (17:30Z) OWNER: «mở phiên dự phòng» rule (OD row + START_MAIN SLEEP line). Gave STANDBY paste blocks for B, D, E (TAKEOVER_FOREMAN_STANDBY.md). D LAND READY coop-room-faces-rv 500dffbd → relayed to LRRY.
 - (17:26Z) KIT KEEPER #5 SSK kit-ef-unit r3 a42ca838 to rv MSxp (quickcheck ×3 PASS; buổi 1630/1943; unblocks kit-win-pay). Next mark-fix r6, then kitRelRows one-word.
+
+## MAIN CHÍNH 98 (session_01Rc5AsJU1FnPJaaFpCxikym) — live log (ROOT, opened by owner from claude.ai)
+- (21/11 17:40Z) MAIN = MAIN CHÍNH 98 session_01Rc5AsJU1FnPJaaFpCxikym; START_CTX ~10 % (get_session reads 0; estimate) → roll at ~35 %, ceiling 60 %; depth 0 (limit 8) → can open children + triggers. Worktree /home/user/wt/ho98, push /home/user/wt/hpush98.sh. Land chain = LAND CHAIN 2 LRRY (NOT started here).
+- (17:40Z) LOAD: main running 3 (owner UI/go-live only: KIT KEEPER #5 Jexz, rv MSxp, LAND CHAIN 2 LRRY) | B ROOT-7 busy (palace-life-gaps r4, mg-craft r4, ui-leftover-fold r2 perf, rel-men-servants r4 waits kitRelRows) | C ROOT-B3 art with owner (thu set, Tần trim) | D #17 LAND READY jemo-bal-rv + coop-room-faces-rv (both with LRRY) | E #28 E45r review ge-phutang-land3 (~18:30Z) | moved: none. LIVE 93704ee1.
+- (17:40Z) First actions: «main is now 98» sent to LRRY, Jexz, MSxp, MAIN 97, MAIN 96. trig_01YPhjHx DISABLED; own hourly wake trig_01Lfj2ZxzCEJWEegUie2yzLj (min 32). MAIN 96 + 97 ARCHIVED. No owner question pending.

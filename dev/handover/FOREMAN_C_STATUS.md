@@ -1539,3 +1539,4 @@ ROOT-B3 ~17:30Z: ROLLING at 33 % → takeover dev/handover/TAKEOVER_FOREMAN_C_RO
 ROOT-B2 ~22:10Z: SENT L2155 M2153-01/-02 Tần before/after. ROOT-B3 rolled → Foreman C = ROOT-B4 session_01D3E3NX7udKgKjCk21vGEJz; owner told to continue there. ROOT-B2 stops. Next Lượt 2157.
 ROOT-B4 ~17:35Z: CURRENT FOREMAN C = ROOT-B4 session_01D3E3NX7udKgKjCk21vGEJz, depth 3, START_CTX ~4 % (roll at ~29 %, ceiling 60 %). Took over from ROOT-B3. M2150-01..03 pushed by THUROOT4; t4–t8 pending. No schedules owned. Next Lượt 2157.
 ROOT-B4 ~17:40Z: SENT L2157 M2150-01..03 (+ mau_net_ve.jpg) to owner. All live workers + ROOT-B2 messaged my ID. Waiting THUROOT4 t4–t8. Next Lượt 2158.
+- FROM MAIN (21/11 17:40Z): main is now MAIN CHÍNH 98 session_01Rc5AsJU1FnPJaaFpCxikym (ROOT, depth 0); report LAND READY / KIT REQUEST lines to it.
