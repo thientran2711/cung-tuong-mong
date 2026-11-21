@@ -38,6 +38,7 @@ function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise
 /* reviewer r1 (ONE CORE): the shared odds ladder j1 word(), not a copy of its thresholds */
 function entWord(p){return word(p)}
 /* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
+function entBotRaw(){const b=BAL.entry.bot;return cl(b.min+R(b.r),0,b.max)}/* review/errand-bal: one bot / broken-round score (BAL.entry.bot) */
 function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
@@ -56,12 +57,13 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  if(X.road&&X.topN){const G=BAL.mgTier.word[3];const pS=entOdds(X.road,SK,art,2),pG=entOdds(X.road,G,art,2);
   rows.push([X.flat?"Được để mắt":X.srv?"Về hầu phi tần bậc cao":`Lên tới ${X.topN}`,`để tài nghệ quyết định: ${entWord(pS)} · chơi xuất sắc: ${entWord(pG)}`,"n"])}
  const box=kg82Box();KG82.phase="intro";
- box.innerHTML=`<h4 class="kpst">${X.head}</h4>`+kg82Rows(rows)+
+ const keepN=rows.filter(r=>r[0]==="Độ khó"||/^(Lên tới|Được để mắt|Về hầu)/.test(r[0]));/* mg-intro-2: Độ khó + the road row; the rest behind the kit «!» */
+ box.innerHTML=kgBangRows(X.head,rows,keepN.length?keepN:rows.slice(0,2))+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`tính ${SK}/10, như người cùng bậc`})}</div>`;
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
- kgReady(box,{kind:k});/* KIT §13.7 */
+ kgReady(box,{kind:k,ev:"sys:tuyen-tu"});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -70,8 +72,8 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
  const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():cl(3+R(6),0,10));return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
- try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
+ if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
+ try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(entSkipRaw())}};
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();

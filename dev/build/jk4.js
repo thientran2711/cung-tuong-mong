@@ -553,6 +553,8 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
     the player stands there only when the event is about her alone */
  try{if(L.length&&typeof S!=="undefined"&&S&&L.every(p=>p===S||p.__kp===S)&&m){const w=m.who&&(m.who.__kp||m.who);if(w&&w!==S&&typeof w==="object"&&(w.name||w.kind))L=[w].concat(L)}}catch(e){}
  try{if(L.length>1&&typeof S!=="undefined"&&S){const o=L.filter(p=>p!==S&&p.__kp!==S);if(o.length)L=o.concat(L.filter(p=>p===S||p.__kp===S))}}catch(e){}
+ /* dialog-person (owner 21/11): a choice she makes ALONE (picker she opened, act, shop: jksize kszOwnAct3) has HER OWN figure on the left — one rule with kszWho3 */
+ try{if(m&&!Array.isArray(m.stage||(m.kit&&m.kit.stage))&&typeof kszOwnAct3==="function"&&kszOwnAct3(m)&&typeof S!=="undefined"&&S)L=[S]}catch(e){}
  return window.KIT_EVENT_DP===false?L:L.slice(0,1)};window.kitStagePeople=kitStagePeople;
  if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){/* kit-rows-b KP17: an act picker / shop is not an event — never tag a guessed evId on it, never invent its picture (KIT_ACT_PIDS / act / shop, same set kitIsEventChoice excludes) */if(m&&(m.act||m.shop||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))))return a0.apply(this,arguments);try{/* review r8: a festival dialog whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ)
    takes the festival's own band (img/ev-fest-<k>-b.webp, the one the festival day already shows, j71) — not the Hoàng thượng / Thái hậu picture */
@@ -1182,19 +1184,19 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
 /* KIT §6.3h PERSON INFO BLOCK = FIXED HEIGHT, ONE LINE PER ROW (owner 21/11 ~05:15Z #86 option A, her words: the info block must not grow with text and push the action buttons down; «Dạo này» = a headline + a «!»):
    every row of the person info block (.pc .pcf .kr: Sở trường · Tính nết · Đã biết · Dạo này …) is ONE line; a value longer than its line is cut with «…» and a kit «!» (kitNoteBang, .kgnb) at the end of the row opens the FULL text in the kit popup.
    kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
-function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv").forEach(v=>{
+function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv, .pc .pcb > .kb.kpkb > .kr > .krv").forEach(v=>{/* K-INFO-TAP (law 11): the kit-rows info block of a person card body (Hoàng tự / Quý tộc cards: Tuổi · Thứ bậc · Tước vị …) is the same info block */
   if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
   const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
   if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
 window.kitInfoOneLine=kitInfoOneLine;
 (function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
-.pc .pcf .kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-.pc .pcf .kr>.krv>*{white-space:nowrap!important}
-.pc .pcf .kr>.krv.kone{padding-right:26px}
-.pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+.pc .pcf .kr>.krv,.pc .pcb>.kb.kpkb>.kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.pc .pcf .kr>.krv>*,.pc .pcb>.kb.kpkb>.kr>.krv>*{white-space:nowrap!important}
+.pc .pcf .kr>.krv.kone,.pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kgnb,.pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
-.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
-.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
+.pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{right:46px}
 `;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);

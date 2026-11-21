@@ -109,9 +109,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    await A.p.evaluate(()=>{const b=document.getElementById('next');b.click()});
    ok(await until(B,()=>/Đã sẵn sàng/.test((document.getElementById('kctmf')||{}).textContent||''),null,6000),'4: A ready → B sees "✓ Đã sẵn sàng"',await fr(B));
    await shot(B,'f-ready-1180x820');await shot(A,'f-mewait-755x1000');
-   await B.p.click('#kctmf .kctmf');ok(await until(B,()=>!!document.querySelector('#kctmp .kpanel'),null,3000),'4: tap the chip → panel');
-   await shot(B,'f-panel-1180x820');await B.p.click('#kctmp [data-ctm=frx]');
-   await A.p.click('#kctmf .kctmf');await sleep(500);await shot(A,'f-panel-755x1000');await A.p.click('#kctmp [data-ctm=frx]');
+   await B.p.click('#kctmf .kctmf');ok(await until(B,()=>{const M=document.getElementById('modal');return !M.hidden&&!!M.querySelector('.dlg.kpanel')},null,3000),'4: tap the «Hảo hữu» icon → partner sheet (KIT §69.2, owner 21/11 ~06:30Z)');
+   await shot(B,'f-panel-1180x820');await B.p.click('#modal .kph .kit-x');
+   await A.p.click('#kctmf .kctmf');await sleep(500);await shot(A,'f-panel-755x1000');await A.p.click('#modal .kph .kit-x');
    await B.p.evaluate(()=>document.querySelector('[data-ctm=hold]')&&document.querySelector('[data-ctm=hold]').click());await sleep(1500);await shot(A,'f-hold-755x1000');
    await B.p.evaluate(()=>{const g=document.querySelector('[data-ctm=go]');if(g)g.click()});await sleep(800);
    await press(B);await bothPast(A,B,k,15000)}}

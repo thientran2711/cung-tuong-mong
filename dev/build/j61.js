@@ -21,7 +21,21 @@ function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}KREG[k]=e;return k}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
+   GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
+   key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
+   name («Hàn lâm học sĩ ???», rv-hao-huu r2 A). Her people get their own namespace "g…" on BOTH seats; the host's people and the world keep
+   the solo keys (old saves, solo and the host change nothing; her own people are always known on her seat, k61Own). */
+function k61GuestOwn(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop)return false;
+  if(W.seat!=="a")return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||!!(S.kc&&(S.kc.fam||[]).includes(e));
+  for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
+/* coop-guest-names r1 (law 1 two-way): the mirror on the GUEST seat — the copies of the HOST player's people on her entry (her children, maid,
+   servants) carry keys issued by the host's counter, while this seat's own counter runs from the same shared value (S.kseq) and issues the
+   same "x<n>" to its own new records: one key, two people. They get their own namespace "h…" on the guest seat, as hers get "g…" on the host. */
+function k61HostCopy(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop||W.seat==="a")return false;
+  for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
  add(S.emp);if(!S.thDead){S.thO=S.thO||{};add(S.thO)}add(S.maid);(S.staff||[]).forEach(add);(S.kids||[]).forEach(add);
@@ -246,10 +260,27 @@ const K61T="(?:(Hoàng hậu|Hoàng quý phi|Quý phi|Phế phi|Phi|Tần|Quý n
 function k61Vars(e){const n=e&&e.name;if(!n||typeof n!=="string")return[];const w=n.split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V.filter(x=>x.length>=4&&x.split(" ").length>=2)}
 function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(rivals||[]).length;if(K61RX!==null&&K61RV===K61VER&&K61RN===rn&&now-K61RT<1500)return K61RX;K61RV=K61VER;K61RT=now;K61RN=rn;/* name-mask: a new consort (tuyển tú, a maid promoted) is in the table the same tick */
  const M={},prot=new Set();const ents=k61All();ents.push(S);
+ /* coop-guest-names: the co-op SHARED people come first (the friend + the people of hers this seat shows), so no unmet local / world record
+    with the same words takes her name (first holder wins below); her people known only through the room blob (not in this seat's list:
+    her servants, home family, the friend herself while her entry is out of rivals) are protected by full name — never masked by another's title */
+ const sh=k61Shared(ents);for(const e of sh.ents.reverse()){const i=ents.indexOf(e);if(i>=0)ents.splice(i,1);ents.unshift(e)}for(const n of sh.prot)prot.add(n);
  for(const e of ents){const kn=k61Named(e);for(const v of k61Vars(e)){if(kn){prot.add(v);M[v]=null}else if(!(v in M))M[v]=kOf61(e)}}
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
  keys.sort((a,b)=>b.length-a.length);K61MAP=M;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  K61RX=kRx(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
+/* coop-guest-names: the shared people of a co-op seat. ents = the friend (her coop entry; while it is out of rivals — at home, pulled for the week
+   end, between rebuilds — a stand-in {coop,id:pid,name} with her rivals key (a cung nữ: {coop,sid:pid}, her servant key), so she still reads «Hảo hữu của ta» until met) and the copies of
+   her people in this seat's list; prot = full names of her people this seat only knows from the room blob (P of the other seat: nmPers) */
+let K61CF=null;
+function k61CoopFr(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P)return null;const P=W.base.P[W.seat==="a"?"b":"a"];if(!P||P.dead||!P.S||P.S.dead||!P.pid)return null;
+  const nm=String(P.name||P.S.name||"");if(!nm)return null;const sv=!!(P.S.srv&&!P.S.srv.risen)/* she serves as a cung nữ: her entry is a servant {sid:pid} (key "s"+pid) */;
+  if(!K61CF||(sv?K61CF.sid:K61CF.id)!==P.pid||K61CF.name!==nm)K61CF=sv?{coop:true,sid:P.pid,name:nm,role:"maid",fr:1}:{coop:true,id:P.pid,name:nm,rank:P.S.rank||0,out:!!P.S.out,fr:1};return K61CF}catch(e){return null}}
+function k61Shared(ents){const o={ents:[],prot:[]};try{const W=window.COOPW;if(!W||!W.on)return o;let f=(rivals||[]).find(v=>v&&v.coop)||ents.find(e=>e&&e.coop)||null;
+  if(!f){f=k61CoopFr();if(f){ents.push(f);kOf61(f)}}if(f){o.ents.push(f);for(const x of [f.maid,...(f.staff||[]),...(f.kids||[])])if(x&&ents.includes(x))o.ents.push(x)}
+  if(W.seat!=="a")for(const x of [S.maid,...(S.staff||[]),...(S.kids||[])])if(x&&ents.includes(x)&&!o.ents.includes(x))o.ents.push(x);
+  const P=W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];if(P&&P.S&&!P.dead&&typeof nmPers==="function"){const have=new Set(o.ents.map(e=>e&&e.name))/* her person's own copy is here: it follows the knowledge rule itself */;
+   for(const x of nmPers(P.S)){const n=x.o&&x.o.name;if(x.fp==="name"||!n||have.has(n))continue;o.prot.push(n)}}}catch(e){}return o}
+window.k61CoopFr=k61CoopFr;window.k61Shared=k61Shared;
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
 function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";

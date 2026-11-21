@@ -111,7 +111,7 @@ function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  if(R.note.length)h+=kaRowH("note","Ghi chú",R.note);
  return `<small class="kb${dis?" kbdis":""}">`+h+`</small>`}
 /* kitParse: same input, kit rows out (odds chip first, the frame moves it to the title row) */
-(function(){const kp0=kitParse;kitParse=function(str){const s=String(str||"");if(/class="kb/.test(s))return s;const M=kaModelStr(s);const R=kaRows(M);const o=kaOdds(M);return (o?`<span class="kodds">${o}</span>`:"")+kaBody(R).replace(/^<small class="kb">/,'<span class="kb">').replace(/<\/small>$/,"</span>")}})();
+(function(){const kp0=kitParse;kitParse=function(str){const s=String(str||"");if(/class="kb/.test(s))return s;const M=kaModelStr(typeof sgTxt==="function"?sgTxt(s):s)/* SG-CARD: her literal Sủng drawn as applied (j1 sgTxt) */;const R=kaRows(M);const o=kaOdds(M);return (o?`<span class="kodds">${o}</span>`:"")+kaBody(R).replace(/^<small class="kb">/,'<span class="kb">').replace(/<\/small>$/,"</span>")}})();
 /* ---------- the frame: rebuild a button into [title + odds] + rows ---------- */
 const KA_SEL="button.kcard,.pcb button,.rbtn button,button.btn,button.opt,.opts button,.srvb button";
 function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the quick button keeps its own one look (never an option card) */if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .kat > .kan");if(kan)[...b.childNodes].reverse().forEach(n=>{if(n.nodeType===1&&!n.matches(".kat,.klead,.kb,.kinfo"))kan.prepend(n)});return}if(b.closest(".hud2,#hud2,.tabs,.mapnav"))return;

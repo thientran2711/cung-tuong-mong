@@ -11,4 +11,13 @@ assert.equal(F.W.R.length, 3);        // guest-only new NPC dropped
 assert.equal(F.P.a.S.bac, 30);
 assert.equal(F.P.b.S.bac, 5); assert.equal(F.P.b.S.sung, -1);
 assert.equal(merge3({emp:{mood:1}},{emp:{mood:3}},{emp:{mood:0}}).emp.mood,3); // enum: host wins, never 3+(0-1)
+/* coop-room-faces: face registries merge as sets (union, host-canon) */
+{ const b0 = { W: { S: { fidUsed: ["consort:c01", "maid:m02"] } } };
+  const a0 = { W: { S: { fidUsed: ["consort:c01", "mama:k03"] } } };            // host freed m02, drew k03
+  const g0 = { W: { S: { fidUsed: ["consort:c01", "maid:m02", "mama:k01", "mama:k03"] } } }; // guest drew k01 (+ the same k03)
+  assert.deepEqual(merge3(b0, a0, g0).W.S.fidUsed, ["consort:c01", "mama:k03", "mama:k01"]); // both sides, de-dup, host removal stands
+  assert.deepEqual(merge3(b0, { W: { S: { fidUsed: ["consort:c01", "maid:m02"], month: 2 } } }, { W: { S: { fidUsed: ["consort:c01"] } } }).W.S.fidUsed, ["consort:c01", "maid:m02"]); // a guest removal never applies
+  assert.deepEqual(merge3({ S: { kidUsed: [1, 2] } }, { S: { kidUsed: [1, 2, 3] } }, { S: { kidUsed: [1, 2, 4] } }).S.kidUsed, [1, 2, 3, 4]);
+  assert.deepEqual(merge3({ S: { nmOrd: ["a"] } }, { S: { nmOrd: ["a", "b"] } }, { S: { nmOrd: ["a", "c"] } }).S.nmOrd, ["a", "b"]); // other lists: host whole, unchanged
+}
 console.log("merge ok");

@@ -53,7 +53,7 @@ A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc
  f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!aRoll(tsbThuO(a,t),a)){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
-  return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, Sủng -${L.sung}, Danh -${L.danh}.</span> `}});
+  return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, ${sgOf(t,-L.sung)}, Danh -${L.danh}.</span> `}});
 AOUT.thathu=["nàng bị hủy dung (vết cào 1 đến 3 nét), Sắc giảm tới khi lành",`thú bị đuổi đi; nàng có thể nắm ${balAb(BAL.eff.jtsb.evF)} chứng cứ`];
 try{ACTDOM.thathu="Mưu kế";if(typeof ACAUGHT!=="undefined")ACAUGHT.push("thathu")}catch(e){}
 

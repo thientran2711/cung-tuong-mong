@@ -44,6 +44,8 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
   /* consort reference */
   await boot(p,URL,'cons');const cBar=await bar(p);const cW=await walk(p);
   ok(cBar===T8,sz+' consort: the 8 bottom tabs',cBar);
+  {const c=await p.evaluate(()=>{const K=new Set();for(let i=0;i<rivals.length;i++){const v=rivals[i];if(!v||v===S)continue;const re=/<button[^>]*data-(a|invite)="([^"]+)"/g;let m;const h=rvCard(v,i);while((m=re.exec(h)))K.add(m[1]==='a'?m[2]:'invite')}return['ally','steal','lygian','invite'].filter(k=>K.has(k))});
+   ok(c.length===4,sz+' maid-acts-a: the consort road keeps every consort act on Phi tần cards (Kết giao, Tranh sủng, Ly gián, Mời đến cung ta)',c)}
   /* 1 cung nữ */
   await boot(p,URL,'srv');const sBar=await bar(p);const sW=await walk(p);
   ok(await p.evaluate(()=>isSrv()),sz+' cung nữ road started');
@@ -92,6 +94,19 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
   ok(!c33.as||(c33.as[0]==='Tai mắt'&&c33.as.includes('Ngài để ý')&&c33.as.includes('Công lao')&&c33.as.includes('Lương tháng')),sz+' #33: the Ân sủng card holds Tai mắt + her facts',c33.as);
   ok(!c33.py||!c33.py.some(k=>['srk','nt','wage','merit'].includes(k)),sz+' #33: no separate servant box',c33.py);
   ok(c33.rk!=='Đáp ứng'&&/Cung nữ|Ma ma/.test(c33.rk),sz+' her own title in consort panels = her servant rung',c33.rk);
+  /* maid-acts-a (MAIN CHÍNH 90, option A): Hậu cung › Chủ tử cards on her road hold ONLY the acts in ROAD8.srv.acts (walk to her / ask who she is), maid words,
+     no consort act (Tranh sủng, Ly gián, Phạt quỳ, Rút thẻ bài, Mời đến cung ta …), no lock; the same card with the table switched off = the consort acts (the table is the switch);
+     meeting a consort she keeps her own maid acts (j42 srvTalk: Hành lễ thỉnh an · Mật báo chuyện của chủ) = what an NPC maid does to a consort (law 1) */
+  const cma=await p.evaluate(()=>{const keys=h=>{const o=[];const re=/<button[^>]*>/g;let m;while((m=re.exec(h))){const k=road8ActKey(m[0]+'</button>');if(!/^\?(pct|pg|ladder|kev|kintel|pi)$/.test(k)&&!/data-(pct|pg|ladder|kev|kintel)=/.test(m[0]))o.push(k)}return o};
+   const A=ROAD8.srv.acts.rival,K=new Set(),T=[],off=new Set();let cons=0;for(let i=0;i<rivals.length;i++){const v=rivals[i];if(!v||v===S)continue;const h=rvCard(v,i);keys(h).forEach(k=>K.add(k));T.push(h.replace(/<[^>]+>/g,' '))}
+   const a0=ROAD8.srv.acts;ROAD8.srv.acts=null;try{for(let i=0;i<rivals.length;i++){const v=rivals[i];if(!v||v===S)continue;keys(rvCard(v,i)).forEach(k=>off.add(k))}}finally{ROAD8.srv.acts=a0}
+   const t=T.join(' ');const v=rivals.find(x=>x&&x!==S&&x!==srvM()&&x.alive&&!x.out);let talk=[];try{talk=talkOpts({kind:'srv',sk:v.queen?'hh':'rv',ref:v,name:v.name}).map(a=>a.n)}catch(e){talk=['ERR '+e.message]}
+   return{K:[...K],bad:[...K].filter(k=>!A[k]),off:off.size,offHas:['ally','steal','lygian','invite'].filter(k=>off.has(k)),cw:['Tranh sủng','Ly gián','Phạt quỳ','Rút thẻ bài','Mời đến cung ta','Sai cung nữ thân tín','Kết giao','phải sai người','dễ hơn sai người'].filter(w=>t.includes(w)),
+    lock:/🔒|kitLock|klock/.test(t)||/Đến cung nàng( ta)? thăm/.test(t),visit:/Đến cung nàng( ta)? thỉnh an/.test(t),talk}});
+  ok(cma.bad.length===0&&cma.cw.length===0&&!cma.lock,sz+' maid-acts-a: Chủ tử cards on her road = only ROAD8.srv.acts keys, no consort act words, no lock',cma);
+  ok(cma.visit&&cma.K.includes('visit'),sz+' maid-acts-a: kept act in her words «Đến cung nàng thỉnh an»',cma.K);
+  ok(cma.off>10&&cma.offHas.length===4,sz+' maid-acts-a: the table is the switch (table off → the consort acts come back)',{off:cma.off,has:cma.offHas});
+  ok(cma.talk.includes('Hành lễ thỉnh an')&&cma.talk.some(n=>/^Mật báo chuyện của/.test(n)),sz+' maid-acts-a law 1: meeting a consort she keeps her maid acts (Hành lễ thỉnh an, Mật báo chuyện của chủ)',cma.talk);
   /* 4 rank-up */
   const up=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="court"]').click();const k0=tab;srvRise('Thánh thượng để mắt');Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();
    const R=document.getElementById('kshR');return{k0,srv:isSrv(),tab,rank:S.rank,st:kgLabel('staff'),sy:kgLabel('story'),rv:kgLabel('rv'),mis:kitCourtRows().some(r=>r.k==='mis'),btn:R?[...R.querySelectorAll('.kgfbtns button')].map(x=>x.textContent.trim()):null}});

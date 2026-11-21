@@ -131,7 +131,7 @@ function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
  if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */
  delete P.S.thq;/* part D r1: her open cards live only in the host's store (localStorage per room); a copy in a blob came back stale after a host reload */return P}
-function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
+function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{rfYield(CW.base)}catch(e){console.error("face yield",e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
  const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
  if(!stateOn("hostOnly")){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
@@ -139,6 +139,8 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
   if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return mapMe(r,true,mp)});
  mapMe(WS,true,mp);
+ /* coop-emo-seat r2: every world person's feelings (emo / mk / emoH / mck) are the host's in the merge; her acts' feelings ride S.coopEmo (jcoopone) */
+ if(!stateOn("emoHost")&&CW.emoHost)CW.emoHost(R,WS);
  const P={};P[CW.seat]=myBlob(sS);
  const B=CW.base&&CW.base.P&&CW.base.P[fs()];
  if(B){const fP=J(B);const f=L.find(x=>x[0]>=0);const v=f&&f[1];
@@ -153,6 +155,7 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    if(b.fx)for(const x of FXL)if(!fxEq(v[x],b.fx[x]))s[x]=v[x]==null?null:J(v[x]);/* a face mark put on her on this seat (tea, ink, slap, rash…) goes back to her (review/looks-2) */
    if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
+ if(!host()&&CW.base&&CW.base.W){try{keepFaces(WS,CW.base.W.S||{},0);keepFaces(R,CW.base.W.R||[],0)}catch(e){console.error("keepFaces",e)}}
  const out={v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P};
  /* thin guest part C (jcoopthinc): in a C room the guest's week carries the room's world unchanged (W comes from the host only) */
  return CW.cW?CW.cW(out):out}
@@ -168,16 +171,70 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  const qs=(typeof serQ==="function"&&opt.keepQ)?serQ():[];
  const fP=C.P[fs()];if(fP)freshFriend(fP,sS);
  const f=fP&&!friendSrv(fP)?buildFriend(fP,sS):null;if(f)R.push(f);
+ try{rfWorldDup(sS,R)}catch(e){console.error("face dup",e)}
  const keepTab=tab,keepUsed=used;quiet=true;
  /* thin guest part C (jcoopthinc): in a C room the guest's NPC list is the read-only lens, installed before deser resolves refs / rebuilds cards */
  try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R:CW.lensR?CW.lensR(R):R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
  try{CW.lensW&&CW.lensW()}catch(e){console.error("lens W",e)}
  if(!opt.keepUsed)used=0;else used=keepUsed;
+ /* coop-emo-seat r2: her acts' feelings on world people, replayed the same on both seats (jcoopone), then ONE cause sweep. AFTER `used` is set:
+    the cause clock mkNow counts the khắc used this buổi (j95kh), and before r1 each seat swept with its own leftover `used` (review r1: after a
+    rejoin the guest's clock ran ahead and ended a live vui cause on her seat only: host vui 40 | guest khochiu 22) */
+ try{CW.emoReplay&&CW.emoReplay(C)}catch(e){console.error("emoReplay",e)}
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,LASTB());
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
- if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}return true}
+ if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}
+ /* coop-pool-face: her own identity is never a face the room's world gives someone, nor the friend's (j66 pidRoomFix moves HER) */
+ try{if(typeof pidRoomFix==="function")pidRoomFix(roomTaken(C,host()))}catch(e){console.error("pid room",e)}
+ try{rfYield(C)}catch(e){console.error("face yield",e)}return true}
+/* coop-pool-face: the faces of the room — every fid held by a person of the world W (Thái hậu, Emperor, consorts, staff, court, men, kids)
+   + the friend's own identity. fidUsed / fidDead are lists, not holders: not counted here (her own identity sits in fidUsed). */
+function faceHeld(o,out,seen,d){if(!o||typeof o!=="object"||seen.has(o)||d>14)return;seen.add(o);if(Array.isArray(o)){for(const x of o)faceHeld(x,out,seen,d+1);return}
+ for(const k in o){const v=o[k];if(k==="fid"){if(typeof v==="string"&&v)out.add(v)}else if(v&&typeof v==="object")faceHeld(v,out,seen,d+1)}}
+/* review coop-pool-face: noFriend (the host's own room check) = the two players already share one identity (an old room from before this fix):
+   only the GUEST moves; if both moved they would land on the same next face every week, both faces changing for ever (PF_TWIN probe) */
+/* coop-room-faces (MAIN 95 (3)): the friend counts with ALL her people — her identity AND every face of her own people (maid, staff, kids,
+   households: her P blob), not her identity only. noFriend (the host's own identity check) leaves the whole friend out (twin fix above). */
+function friendFaces(C){const T=new Set();const f=C&&C.P&&C.P[fs()];if(f&&!f.dead&&f.S){faceHeld(f.S,T,new Set(),0);if(f.S.pid)T.add(f.S.pid)}return T}
+function roomTaken(C,noFriend){if(!C||!C.W)return null;const T=new Set();faceHeld(C.W,T,new Set(),0);if(!noFriend)for(const k of friendFaces(C))T.add(k);return T}
+CW.taken=()=>roomTaken(CW.base);
+/* every face of the room (world + friend + her identity), once per merged week: j66 figUsed / j39 figGC / j88 faceTaken read it */
+let RF_M=null;CW.roomFaces=()=>{const b=CW.base;if(!b||!b.W)return new Set();if(RF_M&&RF_M.b===b&&RF_M.s===CW.seat)return RF_M.T;const T=roomTaken(b)||new Set();RF_M={b,s:CW.seat,T};return T};
+/* coop-room-faces (host-canon on a clash, MAIN 95 (1)): two seats can draw the same free face in the same week (each phone only knows the
+   room as of the last merge). The GUEST yields: any of HER OWN people (her S outside the world keys) wearing a face someone else in the room
+   wears (the world, the host's people, the host's identity) is cleared and draws a fresh free face at once (figUsed now holds the whole
+   room). Run on her week end (toCanon) and on every merged week (fromCanon). The host never moves its people for the guest. */
+function rfKey(o){return o.id!=null?"i"+o.id:o.name?"n"+o.name:null}
+function rfYield(C){if(host()||!C||!C.W||!S)return 0;const M=new Map();const add=(f,k)=>{if(typeof f!=="string"||!f||/^man:thive/.test(f))return;if(!M.has(f))M.set(f,new Set());M.get(f).add(k||"?")};
+ const coll=(o,seen,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>30)return;seen.add(o);if(Array.isArray(o)){for(const x of o)coll(x,seen,d+1);return}
+  if(typeof o.fid==="string")add(o.fid,rfKey(o));for(const k in o){if(k==="visit")continue;const v=o[k];if(v&&typeof v==="object")coll(v,seen,d+1)}};
+ coll(C.W,new Set(),0);const f=C.P&&C.P[fs()];if(f&&!f.dead&&f.S){coll(f.S,new Set(),0);if(f.S.pid)add(f.S.pid,"friend")}
+ let n=0;const seen=new Set([S,...(rivals||[])]);const hit=[];/* world people reached through her own refs are not hers */const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>30||o.coop)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
+  if(typeof o.fid==="string"&&M.has(o.fid)){const k=rfKey(o);if([...M.get(o.fid)].some(x=>x!==k))hit.push(o)}for(const k in o){if(k==="visit"||k==="fidUsed"||k==="fidDead")continue;const v=o[k];if(v&&typeof v==="object")walk(v,d+1)}};
+ for(const k in S){if(W_KEYS.includes(k)||k==="fid"||k==="pid"||k==="visit")continue;const v=S[k];if(v&&typeof v==="object")walk(v,0)}
+ for(const o of hit){const old=o.fid;o.fid=null;try{if(typeof figPick==="function")figPick(o)}catch(e){}n++;CW.faceYield=(CW.faceYield||[]).concat([[old,o.fid||null]]).slice(-20)}
+ return n}
+/* host-canon for two WORLD people with one face (both seats drew it the same week): the one the host already wore before this merge keeps
+   it, the other is cleared (the host draws her a free face on display; the guest gets it with the next week). */
+function rfWorldDup(sS,R){if(!host())return 0;const pre=new Map();const keyed=(root,cb)=>{const seen=new Set();const w=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>30||o.coop)return;seen.add(o);
+   if(Array.isArray(o)){for(const x of o)w(x,d+1);return}if(typeof o.fid==="string"&&o.fid&&!/^man:thive/.test(o.fid))cb(o);for(const k in o){if(k==="visit")continue;const v=o[k];if(v&&typeof v==="object")w(v,d+1)}};
+  for(const k of W_KEYS)if(root.S&&root.S[k]&&typeof root.S[k]==="object")w(root.S[k],0);w(root.R,0)};
+ try{keyed({S,R:rivals},o=>{const k=rfKey(o);if(k)pre.set(k,o.fid)})}catch(e){}
+ const G=new Map();keyed({S:sS,R},o=>{const k=rfKey(o)||"?";if(!G.has(o.fid))G.set(o.fid,[]);G.get(o.fid).push([k,o])});let n=0;
+ for(const [fid,L] of G){if(new Set(L.map(x=>x[0])).size<2)continue;const keep=L.find(x=>pre.get(x[0])===fid)||L[0];
+  for(const x of L)if(x[0]!==keep[0]){x[1].fid=null;n++;CW.faceDup=(CW.faceDup||[]).concat([[fid,x[0]]]).slice(-20)}}
+ return n}
+CW.friendPid=()=>{const f=CW.base&&CW.base.P&&CW.base.P[fs()];return f&&!f.dead&&f.S&&f.S.pid||null};
+/* coop-pool-face backstop: the GUEST never decides a world person's face (the host draws every pool face, once). Her week end carries the
+   room's face for every world person the room's world already has a face for, whatever her phone did to it (display re-picks, a clear by
+   pidEnforce): the 3-way merge would otherwise take her change, since only she "changed" it. NPCs match by id, other world keys by path. */
+function keepFaces(n,b,d){if(!n||!b||typeof n!=="object"||typeof b!=="object"||d>14)return;
+ if(Array.isArray(n)){if(!Array.isArray(b))return;const m=new Map();for(const x of b)if(x&&typeof x==="object"&&x.id!=null)m.set(String(x.id),x);
+  for(const x of n)if(x&&typeof x==="object"&&x.id!=null&&m.has(String(x.id)))keepFaces(x,m.get(String(x.id)),d+1);return}
+ if(typeof b.fid==="string"&&b.fid&&n.fid!==b.fid){n.fid=b.fid;CW.faceKeep=(CW.faceKeep||0)+1}
+ for(const k in n){const v=n[k];if(v&&typeof v==="object"&&b[k]&&typeof b[k]==="object")keepFaces(v,b[k],d+1)}}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
 function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
@@ -283,11 +340,15 @@ function setWhere(m){if(!m||!m.W||!S||host()||m.week!==wk()||m.buoi!==(S.buoi||0
  const W=mapMe(J(m.W),false,me());const mw=W.__menW;delete W.__menW;const tl2=W.__tl2;delete W.__tl2;try{if(tl2&&typeof toil2Take==="function")toil2Take(tl2)}catch(e){}const fpl=S.where&&S.where[fp()];S.where=W;if(fpl)S.where[fp()]=fpl;if(mw)S.menW=mw;
  CW.whereKey=bkey();return true}
 function applyWhere(m){if(!m||!m.W||!S||host())return;CW.lastWhere=m;if(!setWhere(m))return;refreshHere();render()}
+/* coop-arrive-see: */const lens7=()=>!!(CW.on&&!host()&&CW.thin&&CW.thin.on&&CW.thin.on(7));/* her phone at level 7+: her visit is the host's (one source) */
 /* people at my current place, from S.where (no travel, no side effects): NPCs + the Emperor + my friend */
-function refreshHere(){if(!S||!S.visit||S.dead)return;const k=S.place||"home",W=S.where||{};const P=S.visit.people||[];
+function refreshHere(){if(!S||!S.visit||S.dead||lens7())return;const k=S.place||"home",W=S.where||{};const P=S.visit.people||[];
  const isR=p=>p&&(p.kind==="rival"||p.kind==="hh")&&p.ref;
- if(k==="home"){const f=friendEntry();const L=P.filter(p=>!(isR(p)&&isF(p.ref)));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
- const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isR(p)||(here.includes(p.ref)&&!isF(p.ref)));
+ /* coop-arrive-see: her stored person on the host keeps refs as {$r:id}; the friend entry (the host's stand-in) is re-made in every
+    withSeat, so her old entry of him comes back with ref null: it is still HIM (same name), never a second copy beside the new one */
+ const f0=friendEntry();const fN=f0?[f0.name,`Hoàng hậu ${f0.name}`]:[];const isFp=p=>!!p&&(p.kind==="rival"||p.kind==="hh")&&(p.ref?isF(p.ref):fN.includes(p.name));
+ if(k==="home"){const f=f0;const L=P.filter(p=>!isFp(p));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
+ const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isFp(p)&&(!isR(p)||here.includes(p.ref)));
  for(const v of here)if(!L.some(p=>isR(p)&&p.ref===v))L.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"}:rp(v));
  const ei=L.findIndex(p=>p.kind==="emp");if(W.emp!==k&&ei>=0&&["vuon","thu","dtd"].includes(k))L.splice(ei,1);
  else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
@@ -346,7 +407,7 @@ COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
 function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return null;const B=CW.thin.seatOf(CW.seat==="a"?"b":"a");return B&&B.S&&B.S.place||null}catch(e){return null}}
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
- let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
+ let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
 function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
@@ -931,7 +992,23 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
 /* NPC whereabouts are the host's: the guest's own placement is replaced by the host's for this buổi; the host re-sends whenever it re-places */
 (function(){const f=placeWhere;placeWhere=function(){const r=f.apply(this,arguments);if(CW.on)try{if(!host()&&CW.p2&&!eW()){if(!setWhere(CW.lastWhere))CW.whereKey=""}keepFriendPos();if(host()&&CW.p2&&!CW.pend&&!CW.inTurn)sendWhere()/* the new week's places go out with the merged week, not from inside endTurn */}catch(e){}return r}})();
-(function(){const f=goTo;goTo=function(){const r=f.apply(this,arguments);if(CW.on)try{sendPos()}catch(e){}return r}})();
+/* review/coop-arrive-see (GAP OD-CO1): the walker's list is built from S.where, so the friend's place in it is made current FIRST
+   (her walk on the host read the host's place from the last buổi step: the second to arrive never saw the first) */
+(function(){const f=goTo;goTo=function(){if(CW.on)try{keepFriendPos()}catch(e){}const r=f.apply(this,arguments);if(CW.on)try{sendPos();presAll()}catch(e){}return r}})();
+/* ONE presence refresh for both seats on the host (thin level 7: both persons live here): whenever either person's place / visit / buổi
+   changes (any road: walk, map jump, event sending her home, buổi step, visit), each seat's friend place is re-read and the people at
+   each seat's place rebuilt; her copy goes to her phone in the next delta. Gated by a key, so a render without a move costs nothing. */
+function presAll(force){try{if(!CW.on||CW.ctx||!S)return;
+ /* the key holds WHO is in each list (a later goTo wrapper, e.g. jplx, rebuilds the list to the same length without the friend) */
+ const vk=x=>x&&x.visit?x.visit.k+"/"+(x.visit.people||[]).map(p=>p?(p.kind||"")+":"+(p.ref&&p.ref.id!=null?p.ref.id:p.name||""):"").join(","):"-";
+ /* rv coop-arrive-see r1: below level 7 (the LIVE default, level 0) each phone builds its OWN list from its own S.where (the friend's
+    place from her pos message): the same one refresh, on this seat only, on BOTH seats; her phone at level 7+ shows the host's (lens7) */
+ if(!(host()&&CW.thin&&CW.thin.on&&CW.thin.on(7))){if(lens7())return;const f=friendEntry();
+  const K1=()=>["L",wk(),S.buoi||0,S.place,vk(S),f&&S.where?S.where[f.id]:"",!!S.dead].join("|");if(!force&&K1()===CW.presK)return;refreshHere();CW.presK=K1();return}
+ const o=CW.seat==="a"?"b":"a";const B=CW.thin.seatOf(o);const H=B&&B.S;if(!H)return;
+ const K=()=>[wk(),S.buoi||0,S.place,vk(S),H.place,H.buoi||0,vk(H),!!S.dead,!!H.dead].join("|");if(!force&&K()===CW.presK)return;
+ keepFriendPos();refreshHere();CW.thin.withSeat(o,()=>{keepFriendPos();refreshHere()});CW.presK=K()}catch(e){console.error(e)}}
+CW.presAll=presAll;
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
   try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
@@ -941,7 +1018,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 function qBlocked(){try{const b=document.querySelector(".kbk-bar");return !!(b&&b.offsetParent!==null)||!!(S&&S.mg)}catch(e){return false}}
 let qT=0;CW.qN=0;function reshowQ(){qT=0;CW.qN++;try{const M=$("modal");if(!(CW.on&&S&&Q.length&&M&&M.hidden))return;if(qBlocked()){qT=setTimeout(reshowQ,400);return}showModal()}catch(e){}}
 CW.reshowQ=reshowQ;CW.qArmed=()=>!!qT;/* review/coop-c4-stuck: test hooks (dev/test/coop-c4-stuck.js S1) */
-(function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos();if(Q.length&&!qT)qT=setTimeout(reshowQ,400)}catch(e){}return r}})();
+(function(){const f=render;render=function(){if(CW.on)try{presAll()}catch(e){}const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos();if(Q.length&&!qT)qT=setTimeout(reshowQ,400)}catch(e){}return r}})();
 (function(){const f=closeModal;closeModal=function(){/* the guest's "Đợi bạn" note can be closed before any world exists */
  if(CW.on&&!S){Q.shift();if(Q.length)showModal();else{const m=$("modal");if(m)m.hidden=true}return}const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});

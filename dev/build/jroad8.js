@@ -12,7 +12,20 @@
 const ROAD8={
  /* cung nữ: Phận sự → Hành sự (act), Dư đồ → Dư đồ (go), Đồng liêu → Hậu cung › Đồng liêu (staff: the shared person pager, j42 srvStaffTabHTML),
     Thân phận → Mệnh truyện › Thân phận (story), Sổ ghi → Mệnh truyện › Sổ ghi (log); Phi tần → «Chủ tử» (owner 21/11 ~03:25Z mark #36); every other tab = the consort panel */
- srv:{rv:{l:"Chủ tử"},staff:{l:"Đồng liêu"},story:{l:"Thân phận"}},
+ srv:{rv:{l:"Chủ tử"},staff:{l:"Đồng liêu"},story:{l:"Thân phận"},
+  /* ACTS = the ONE allowlist of acts on a person card on her road (MAIN CHÍNH 90 option A, interim until the owner rules her mapping; brief main90-maid-acts-a):
+     per card kind (pcard tabKey; "rival" = Hậu cung › Chủ tử, every consort) → act key (road8ActKey) → {} kept as is | {r:[[from,to],…]} kept with her words.
+     A key NOT listed is simply ABSENT on her road (owner 21/11 ~03:15Z: "tôi nghĩ cũng chả cần phải khóa nữa") — no lock, no grey button.
+     Kept = what a cung nữ really does to a consort: walk to her (khắc only, the same cost on every road) and ask a servant who she is. Meeting her, the
+     cung nữ's own talk (j42 srvTalk sk rv/hh: Hành lễ thỉnh an · Mật báo chuyện của chủ · Tố cáo chủ trước Hoàng hậu, SRVA costs) = what an NPC maid does
+     to a consort (jagstaff asOpts greet / betray / accuse: law 1 two-way). The consort acts (cost Sủng, need her own palace, servants, tai mắt, phẩm, bạc
+     sai người: Kết giao, Tranh sủng, Ly gián, Phạt quỳ, Rút thẻ bài, Mời đến cung ta …) are absent. Full kept / absent list: reports/maid-acts-a.md. */
+  acts:{rival:{
+   visit:{r:[["Đến cung nàng thăm","Đến cung nàng thỉnh an"]]},
+   see:{r:[["mọi việc làm tại chỗ, dễ hơn sai người","hành lễ, hầu chuyện tại chỗ"]]},
+   "k61:ask":{}},
+   /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
+   note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
  /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
     Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
  kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
@@ -42,3 +55,17 @@ window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Lab
  /* her own panel: the road module draws it under its own key; the bar, groups and sub-tabs keep the consort key */
  if(e.k&&e.k!==tab){const t0=tab;tab=e.k;try{return p0.apply(this,arguments)}finally{tab=t0}}
  return p0.apply(this,arguments)}})();
+/* ---- the act table on her road (ROAD8.<road>.acts): which act buttons a person card shows ---- */
+/* act key of one act button: data-a (ACT, j15 rvGroups) · data-e + data-k (Quyền Hoàng hậu: "hh:<k>") · data-see / data-visit / data-scout / data-invite (j21) ·
+   data-pma (jpma: "pm:<a>") · data-k61 (j61: "k61:<v>") · else "?<first data name>" (unknown = not listed = absent) */
+function road8ActKey(h){h=String(h||"");const m=h.match(/^\s*<button([^>]*)>/);if(!m)return"";const a=m[1];let x;
+ if((x=a.match(/\bdata-a="([^"]+)"/)))return x[1];if((x=a.match(/\bdata-e="[^"]*"[^>]*\bdata-k="([^"]+)"/)))return"hh:"+x[1];
+ for(const k of ["see","visit","scout","invite"])if(new RegExp("\\bdata-"+k+"=").test(a))return k;
+ if((x=a.match(/\bdata-pma="([^"]+)"/)))return"pm:"+x[1];if((x=a.match(/\bdata-k61="([^"]+)"/)))return"k61:"+x[1];
+ x=a.match(/\bdata-([a-z0-9]+)=/);return x?"?"+x[1]:"?"}
+function road8Acts(o){const r=road8();const T=r&&ROAD8[r]&&ROAD8[r].acts;if(!T||!o||!o.tabKey||!T[o.tabKey])return o;const A=T[o.tabKey];
+ const keep=h=>{if(typeof h!=="string"||!/^\s*<button/.test(h))return h;const e=A[road8ActKey(h)];if(!e)return"";let y=h;for(const [f,t] of e.r||[])y=y.split(f).join(t);return y};
+ const groups=(o.groups||[]).map(g=>g&&Array.isArray(g[1])?[g[0],g[1].map(keep).filter(Boolean)]:g).filter(g=>g&&Array.isArray(g[1])&&g[1].length);
+ const n=T.note&&T.note[o.tabKey];const note=o.note&&/^(Cùng chỗ: làm tại chỗ|Không gặp mặt: phải sai người)/.test(o.note)?(n||""):o.note;
+ return Object.assign({},o,{groups,note})}
+window.road8ActKey=road8ActKey;window.road8Acts=road8Acts;

@@ -17,7 +17,7 @@
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
 /* KIT §52 / §49 (rewrite, owner 11/16 15:00Z 4.6–4.8): the SHORT word of a relation row — "Nàng → ta: thiện cảm" → Thiện cảm, "Nàng oán ta" → Oán, "Nàng ghen" → Ghen, "Hoàng thượng → ta: sủng" → Sủng, "Ta tin cậy" → Tin cậy */
-function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":"Thiện cảm"}
+function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":/lòng/.test(l)?"Lòng":"Thiện cảm"}
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
  /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
  let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
@@ -35,10 +35,27 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
    row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[2],"bad");
    row("them",`${sj} ghen`,p.ghen||0,o&&o[1],"bad");
    row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[3]);return R}
+  /* KIT_REQUESTS 20/11 rel-men-servants (§52): a man, a servant, a maid, a court official reads the ONE relation model (j9 aff / oan, review/rel-men-servants)
+     — never p.loyal as «Thiện cảm» beside a second aff number (law 4). men: Thiện cảm + Oán toward her, her Thiện cảm toward him; servants / officials:
+     Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Lòng» = p.loyal (j15 bondBars word) and «Ta tin cậy»; not met yet → «chưa rõ».
+     Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
+  const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
+  if(isMS){const man=typeof relMan==="function"&&relMan(p);
+   const met=typeof relMSMet!=="function"||relMSMet(p);
+   if(!met){R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
+   const o=s.ms&&s.ms[kitRelMsKey(p)]||null;
+   row("them",`${sj} → ta: ${(typeof KIT_REL==="object"&&KIT_REL.aff)||"thiện cảm"}`,aff(p,S),o&&o[0]);
+   row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[1],"bad");
+   const own=!man&&(p===S.maid||(typeof ownerOf==="function"&&ownerOf(p)===S));
+   if(own&&typeof p.loyal==="number")row("them",`${sj} → ta: lòng`,p.loyal,o&&o[2]);
+   if(own&&typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[3]);
+   if(man)row("me",`Ta → ${ob}: thiện cảm`,aff(S,p),o&&o[4]);
+   return R}
   if(typeof p.loyal==="number"){const o=s.sp&&s.sp[p.sid!=null?p.sid:p.name]||null;
    row("them",`${sj} → ta: thiện cảm`,p.loyal,o&&o[0]);if(typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[1]);return R}
  }catch(e){console.error("kitRelRows",e)}
  R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
+function kitRelMsKey(p){try{if(typeof relKey==="function")return relKey(p)}catch(e){}return p.sid!=null?"s"+p.sid:String(p.id||p.name||"")}
 function kitRelSign(d){return d>0?"+"+d:d<0?"−"+Math.abs(d):"0"}
 function kitRelCls(d,kind){return !d?"n":(kind==="bad"?d<0:d>0)?"g":"r"}
 const kr2Num=r=>r.now==null?"—":r.now<0?"−"+Math.abs(r.now):String(r.now);
@@ -67,7 +84,7 @@ function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd"
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
   (typeof rivals!=="undefined"?rivals:[]).forEach(v=>{if(v&&v.id!=null&&s.pp){const a=s.pp[v.id]||(s.pp[v.id]=[v.rel||0,v.ghen||0,v.oan||0]);a[3]=aff(S,v)}});
-  s.sung=S.sung;s.th=S.th;s.sp={};[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")s.sp[x.sid!=null?x.sid:x.name]=[x.loyal,typeof tinOf==="function"?tinOf(x):0]})}catch(e){}return s}})();
+  s.sung=S.sung;s.th=S.th;s.sp={};[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")s.sp[x.sid!=null?x.sid:x.name]=[x.loyal,typeof tinOf==="function"?tinOf(x):0]});if(typeof relMSAll==="function"){s.ms={};relMSAll().forEach(x=>{try{s.ms[kitRelMsKey(x)]=[aff(x,S),oan(x,S),typeof x.loyal==="number"?x.loyal:null,typeof tinOf==="function"?tinOf(x):0,aff(S,x)]}catch(e){}})}}catch(e){}return s}})();
 window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRel2;window.kitRelDelta=kitRelDelta;window.kitRelSubj=kitRelSubj;
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
 /* KIT §52 kitRel2: two column boxes (that person → me | me → that person), short words, no bars; Hiện nay / Tuần này aligned inside each box */

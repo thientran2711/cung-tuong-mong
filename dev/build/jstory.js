@@ -140,3 +140,13 @@ function svFrame(h){if(h==null)return h;const s=String(h);if(/<(?:div|p|table|ul
  const pool=x.endQ?(/\?\s*$/.test(x.inQ)?SVFR.ask:SVFR.bid):SVFR.sc;let n=0;for(const c of x.t)n=(n*31+c.charCodeAt(0))>>>0;return s.replace(/\s*$/,"")+" "+pool[n%pool.length]}
 (function(){if(typeof showModal!=="function")return;const sm=showModal;showModal=function(){try{const m=Q&&Q[0];
  if(m&&!m.svfr&&m.opts&&m.opts.length>1&&/^(?:Chính|Phụ) tuyến · /.test(m.t||"")){m.svfr=1;m.h=svFrame(m.h)}}catch(e){console.error("jstory svFrame",e)}return sm.apply(this,arguments)}})();
+/* bang-words review (E40r, law 11 whole group): a chapter TITLE may carry a token («Lão {kha} bị bắt» nc_gian .9, «Nhà {v} trong án cũ» cn_than .6);
+   the 23 places that print ARC67[id].t (story card, chapter card, log lines, past-chapter list, hồi header…) showed it raw. ONE fix here: every
+   titled arc whose t holds a {token} gets a getter that fills it through the one token table TOK67 with that arc's live thread (S.st.M or a
+   side thread); no thread (a past chapter) → the same table with an empty thread (nm67 says «một phi tần»). Runs after every arc file loaded. */
+function arcTitleFill67(){try{if(typeof ARC67!=="object"||typeof TOK67!=="object")return;
+ const thr=id=>{try{const L=[S&&S.st&&S.st.M].concat((S&&S.st&&S.st.X)||[]);return L.find(A=>A&&A.a===id)||{}}catch(e){return{}}};
+ for(const id of Object.keys(ARC67)){const a=ARC67[id];if(!a||typeof a!=="object")continue;const d=Object.getOwnPropertyDescriptor(a,"t");
+  if(!d||!("value" in d)||typeof d.value!=="string"||!/\{\w+\}/.test(d.value))continue;const raw=d.value;
+  Object.defineProperty(a,"t",{get:()=>{const A=thr(id);return raw.replace(/\{(\w+)\}/g,(m,k)=>{try{return TOK67[k]?String(TOK67[k](A)):m}catch(e){return m}})},enumerable:true,configurable:true})}}catch(e){console.error("arcTitleFill67",e)}}
+arcTitleFill67();setTimeout(arcTitleFill67,0);

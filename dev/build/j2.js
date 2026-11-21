@@ -207,5 +207,5 @@ function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);op
 function hireMaster(){if(S.bac<BAL.bacFee.master||S.master||S.dead)return;apply({bac:-BAL.bacFee.master});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
-function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +${nightG(0)} đến +${nightG(10)} · Ân tình +${nightA(0)} đến +${nightA(5)}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `${sgRange(nightG(0),nightG(10))} · Ân tình +${nightA(0)} đến +${nightA(5)}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
 function stealKem(v){const B=BAL.steal;const h=BAL.relOan.hurt;let o=Math.round(B.rel*h);try{o=Math.round(B.rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${B.ghen}, quý ngươi -${B.rel}, oán ngươi +${o}`}

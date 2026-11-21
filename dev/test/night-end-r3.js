@@ -40,7 +40,7 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
    kitNewDay({host:h,night:{k:'lonely',line:'Đêm qua Hoàng thượng không lật thẻ bài nào.'},day:{k:'xuan',src:'img/kit/ne-dawn-xuan.webp',t:'Bình minh mùa xuân',sub:'Tháng 3'},wx:null,then:()=>{thenCalled++}});
    await W(9000);o.afterAuto={then:thenCalled,btn:!!h.querySelector(':scope > .kmend'),cls:h.className};
    const b=h.querySelector(':scope > .kmend');const r=b&&b.getBoundingClientRect();o.btn={txt:b&&b.textContent,cls:b&&b.className,inView:!!r&&r.bottom<=innerHeight&&r.top>=0&&r.left>=0&&r.right<=innerWidth};
-   const pic=h.querySelector('.kne-b.on .kne-pic');const pr=pic&&pic.getBoundingClientRect();o.picClearOfBtn=!!(pr&&r&&pr.bottom<=r.top+2);o.hint=!!h.querySelector('.kmhint');
+   const pic=h.querySelector('.kne-b.on .kne-pic');const pr=pic&&pic.getBoundingClientRect();/* owner 21/11 mark #84 (KIT 81c): the beat picture is full screen and the button lies ON it; the title must stay clear of the button */const cap=h.querySelector('.kne-b.on .kne-cap');const cr=cap&&cap.getBoundingClientRect();o.picFull=!!(pr&&Math.abs(pr.width-innerWidth)<2&&Math.abs(pr.height-innerHeight)<2);o.capClearOfBtn=!!(cr&&r&&cr.bottom<=r.top+2);o.hint=!!h.querySelector('.kmhint');
    window.__thenCalled=()=>thenCalled;return o});
   await SHOT(p,{path:`${OUT}/r3-B-end-${v}.jpg`,type:'jpeg',quality:60});
   Object.assign(B,await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const h=document.getElementById('dawn');const o={};h.click();await W(300);o.afterTap=__thenCalled();const b=h.querySelector(':scope > .kmend');b&&b.click();await W(300);o.afterBtn=__thenCalled();return o}));

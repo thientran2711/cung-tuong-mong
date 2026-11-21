@@ -64,7 +64,7 @@ function j95hab(v){if(!v.j95h||!v.j95h.length){v.j95h=j95genHab(v);v.j95r=rkOf(v
 function j95res(v,k){if(k==="own")return palaceOf(v);if(k.indexOf("ally:")===0){const p=byKey(k.slice(5));if(!p||p===S||!p.alive||p.out||sameHouse(v,p))return null;return palaceOf(p)}return k}
 function j95drift(){/* monthly: a habit may change; a new rank, a new life brings a new one */
  for(const v of rivals){if(!v.alive||v.out)continue;const H=j95hab(v);
-  if(v.j95r!==rkOf(v)||j95dice(15)){H.splice(Math.floor(Math.random()*H.length),1);v.j95h=j95genHab(v,H);v.j95r=rkOf(v)}
+  if(v.j95r!==rkOf(v)||j95dice(BAL.odb.j95.dcJ95drift)){H.splice(Math.floor(Math.random()*H.length),1);v.j95h=j95genHab(v,H);v.j95r=rkOf(v)}
   for(const h of v.j95h){if(h.k.indexOf("ally:")===0&&!j95res(v,h.k)){h.k="vuon";h.a="walk"}}}}
 function j95seaV(c){let m=1;try{const s=SEASON[S.month-1];m=s==="Đông"?.5:s==="Hạ"?(c>=2?1.2:.9):1.2;if(wet())m*=.25}catch(e){}return m}
 function j95likely(p,c){/* where p is LIKELY at c by habit (what another person would guess) */if(!p||p===S)return null;let b=null,bw=0;for(const h of j95hab(p)){const k=j95res(p,h.k);if(k&&h.s[c]>bw){bw=h.s[c];b=k}}return b}
@@ -136,15 +136,15 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  for(const id in z.meK){const m=z.meK[id];if(!z.me[m.c+":"+m.k]||z.me[m.c+":"+m.k]<1.5)delete z.meK[id]}
  z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=j95moodF(v);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));const n=[];for(let i=0;i<2&&L.length;i++){/* NPC-PURPOSE G3: her neighbours = the two she likes best (near-best), not a shuffle */const x=npwPick(L,y=>1+Math.max(0,aff(v,y)));if(!x)break;n.push(x.id);L.splice(L.indexOf(x),1)}z.nb[v.id]=n}
  for(const v of liveRivals(true)){if(v.confined)continue;j95hab(v);
-  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+eyes(v)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
+  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(BAL.odb.j95.dcJ95week+eyes(v)*BAL.odb.j95.dcJ95weekEye+(sp?BAL.odb.j95.dcJ95weekSpy:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
   const it=j95intent(v,cs);if(it)z.it[v.id]=it;
   /* lovers meet in hidden corners, mostly at night */
-  const m=v.affair&&manById(v.affair);if(m&&!j95men()){const n=j95dice(35)?2:1;
-   if(!v.j95spot||j95dice(15)){const L=SPOT95.slice();if(m.rw==="thái y")L.push(["tyv","phòng thuốc sau Thái y viện"]);v.j95spot=L[Math.floor(Math.random()*L.length)]}
-   const pool=cs.filter(c=>c>=2);for(let i=0;i<n&&pool.length;i++){const c=j95dice(70)?pool[pool.length-1]:pool[0];const k0=1+Math.floor(Math.random()*2);
+  const m=v.affair&&manById(v.affair);if(m&&!j95men()){const n=j95dice(BAL.odb.j95.dcN)?2:1;
+   if(!v.j95spot||j95dice(BAL.odb.j95.dcJ95week_2)){const L=SPOT95.slice();if(m.rw==="thái y")L.push(["tyv","phòng thuốc sau Thái y viện"]);v.j95spot=L[Math.floor(Math.random()*L.length)]}
+   const pool=cs.filter(c=>c>=2);for(let i=0;i<n&&pool.length;i++){const c=j95dice(BAL.odb.j95.dcC)?pool[pool.length-1]:pool[0];const k0=1+Math.floor(Math.random()*2);
     if(z.sec.some(x=>x.a==="v"+v.id&&x.c===c))continue;z.sec.push({a:"v"+v.id,b:m.id,c,kh:[k0,k0+1],k:v.j95spot[0],spot:v.j95spot[1],kind:"tryst",why:`tư tình với ${m.name}`,wk:wk()})}}
   /* a plot in preparation: an errand to the place its route names, or a word with her own eunuch in a quiet corner */
-  try{const z7=j70();const p=z7&&z7.pl.find(x=>!x.end&&x.st==="prep"&&x.a===v.id);if(p&&(window.agOn&&agOn()?ag2Ch((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||v,80*cl(((((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||{}).loyal)||50)/50,.5,1.25)):j95dice(80))){const r=pr70(p);const t=pt70(p);const s=(v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0];
+  try{const z7=j70();const p=z7&&z7.pl.find(x=>!x.end&&x.st==="prep"&&x.a===v.id);if(p&&(window.agOn&&agOn()?ag2Ch((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||v,BAL.odb.j95.dcPrepTell*cl(((((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||{}).loyal)||50)/50,.5,1.25)):j95dice(BAL.odb.j95.dcPrepTell))){const r=pr70(p);const t=pt70(p);const s=(v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0];
    /* npc-purpose: the errand goes when her palace needs her least (j95fr), to the plot's own place else the quietest hidden spot, at the first khắc it can */
    const c=npwPick(cs.slice(1),j95fr)||cs[1];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:npwPick(SPOT95,j95quiet)||SPOT95[0];const k1=npwPick([1,2,3],x=>agSoon(x,1))||1;
    z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[k1],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
@@ -172,7 +172,7 @@ function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S)
  /* npc-purpose: the buổi = where her aim is likeliest met — the Emperor's garden hours (his own vuon weight), else when her palace needs her least (j95fr) */
  if(it[0]==="ambush")s=[mk.c];else if(it[0]==="avoid")s=cs.slice();else if(it[0]==="emp"){const E=cs.filter(c=>j95empW(c).vuon>=15);const e=npwPick(E,c=>j95empW(c).vuon);s=e!=null?[e]:[]}
  else{const L=mid.length?mid:cs;const x=npwPick(L,j95fr);s=[x!=null?x:L[0]]}
- if(it[0]==="ally"&&j95dice(40)&&mid.length>1)s=mid.slice();
+ if(it[0]==="ally"&&j95dice(BAL.odb.j95.dcJ95intent)&&mid.length>1)s=mid.slice();
  return{k:it[0],t:it[2],s,why:it[3]}}
 
 /* ---------------- 5. THE PLAN OF A BUỔI (per khắc) ---------------- */
@@ -187,7 +187,7 @@ function j95planEmp(c){const W=j95empW(c);const k=j95pw(Object.entries(W));const
  if(j95dice(J95.SUR)){const alt=j95pw(Object.entries(W).filter(x=>x[0]!==k));if(alt){const s=1+Math.floor(Math.random()*3);for(let i=s;i<4;i++)P[i]=[alt,j95empAct(alt,c),null,alt==="thu"?"có tấu khẩn":alt==="vuon"?"đổi ý ra vườn":"mệt, hồi điện nghỉ"]}}
  return P}
 function j95planTH(c){let k="tn",a=["receive","pray","rest","sleep"][c],why=c===0?"giờ các cung thỉnh an":"Thái hậu ở cung";
- if((c===1||c===2)&&j95seaV(c)>=1&&j95dice(15)){k="vuon";a="walk";why="trời đẹp, Thái hậu ra vườn"}return [0,1,2,3].map(()=>[k,a,null,why])}
+ if((c===1||c===2)&&j95seaV(c)>=1&&j95dice(BAL.odb.j95.dcJ95planTH)){k="vuon";a="walk";why="trời đẹp, Thái hậu ra vườn"}return [0,1,2,3].map(()=>[k,a,null,why])}
 function j95dist(v,c,it){const own=palaceOf(v);const M={};const add=(k,w,a,why)=>{if(!k||!(w>0))return;if(k!==own&&!j95acc(v,k))return;const o=M[k];if(o){o.w+=w;if(w>o.top){o.top=w;o.a=a;o.why=why}}else M[k]={w,a,why,top:w}};
  add(own,J95.OWN[c]/((j95z().mood||{})[v.id]||1),["read","eat","rest","sleep"][c],"ở cung mình");
  try{if(qOn()&&!v.queen&&c===0)add("kn",30,"greet","lệ thỉnh an Hoàng hậu buổi sáng")}catch(e){}
@@ -224,7 +224,7 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
  if(p.kind==="emp")return j95planEmp(c);if(p.kind==="th")return j95planTH(c);
  if(p.kind==="mm"||p.kind==="st"){const o=p.ref;const oid=o===S?"me":"v"+o.id;const op=P[oid];const home=p.home;
   return kh.map(i=>{const ok=op?op[i][0]:home;if(p.kind==="mm"&&o!==S&&ok!==home&&ok!=="lc")return[ok,"follow",oid,"theo hầu chủ ra ngoài"];
-   if(p.kind==="st"&&p.__err===i)return[p.__ek,"errand",null,p.__ek==="tyv"?"chủ sai đi lấy thuốc":"chủ sai đi Kính sự phòng hỏi chuyện"];
+   if(p.kind==="st"&&p.__err===i)return[p.__ek,"errand",null,"chủ sai: "+(p.__en||"đi việc").replace(/^./,c=>c.toLowerCase())];
    return[home,i%2?"clean":"serve",oid,home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"]})}
  if(p.kind==="px"){const o=p.ref;const oid=o===S?"me":"v"+o.id;return kh.map(()=>p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"])}
  if(p.kind==="fix")return kh.map(()=>p.home===J95OUT_?[J95OUT_,"away",null,"hôm nay không có giờ giảng"]:p.id==="c:tgk"?["tgk","oversee",null,"phận sự ở Tân Giả khố"]:["ttp","teach",null,"giảng sách cho các hoàng tử, công chúa"]);
@@ -249,7 +249,7 @@ function j95plan(){/* build the whole record for the new buổi */const z=j95z()
  for(const p of ppl)if(p.kind==="rv")R.P[p.id]=j95planRival(p.ref,c);
  R.P.emp=j95planEmp(c);if(!S.thDead)R.P.th=j95planTH(c);
  R.P.me=[0,1,2,3].map(()=>[j95mePlace(),"here",null,"ngươi tự chọn"]);
- for(const p of ppl){if(R.P[p.id])continue;if(p.kind==="st"&&j95dice(15)&&p.home!=="lc"){p.__err=1+Math.floor(Math.random()*3);p.__ek=j95dice(50)?"tyv":"ksp"}R.P[p.id]=j95planOther(p,c,R.P)}
+ for(const p of ppl){if(R.P[p.id])continue;if(p.kind==="st"&&p.home!=="lc"&&p.ref&&j95dice(BAL.errand.offer)){/* law 1 + 4: the same chance and the same errand list as her maid card (SRVA.errand / srvErrList, j42) */let e=null;try{e=pick(srvErrList(p.ref))}catch(x){}if(e){p.__err=1+Math.floor(Math.random()*3);p.__ek=e.k;p.__en=e.n}}R.P[p.id]=j95planOther(p,c,R.P)}
  S.roster=R;return R}
 /* secret meetings and NPC→NPC catches, after the old placeWhere wrappers ran */
 function j95secApply(R){const z=j95z();const c=R.c;
@@ -397,9 +397,9 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
 /* what she can see happen where she stands: secret meetings (catch), people waiting for her (ambush), what she observes */
 function j95watch(R,kh){if(S.dead||S.out||(typeof isSrv==="function"&&isSrv()))return;const k=S.place;const z=j95z();const c=R.c;
  for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k||k==="home"&&sameHouse(S,v))continue;j95obs(v,c,e[kh][0],"Chính ngươi thấy");
-  const sk=R.key+":"+v.id;if(e[kh][1]==="ambush"&&!z.seen[sk]){z.seen[sk]=1;if(j95dice(35)){const g=motiveOK(v,S,"ambush");if(g.ok){let r="";try{r=npcAct(v,S)}catch(x){}if(r)Q.push({t:"Có người chờ sẵn",who:pv(v),h:`<p>${v.name} như đã đợi ngươi ở ${j95pn(k)}.</p><p>${r}</p>`})}}}}
+  const sk=R.key+":"+v.id;if(e[kh][1]==="ambush"&&!z.seen[sk]){z.seen[sk]=1;if(j95dice(BAL.odb.j95.dcJ95watch)){const g=motiveOK(v,S,"ambush");if(g.ok){let r="";try{r=npcAct(v,S)}catch(x){}if(r)Q.push({t:"Có người chờ sẵn",who:pv(v),h:`<p>${v.name} như đã đợi ngươi ở ${j95pn(k)}.</p><p>${r}</p>`})}}}}
  for(const s of z.sec){if(s.key!==R.key||s.k!==k||!s.kh.includes(kh))continue;const ck=R.key+":"+s.a+":me";if(z.seen[ck])continue;z.seen[ck]=1;j95caught(s)}
- for(const cl of z.clue)if(!cl.done){const e=R.P[cl.vid];if(e&&e[kh][0]===k&&j95dice(35)){const v=RV(+cl.vid.slice(1));if(v){cl.done=1;j95ctx({how:`Nhận ra ${cl.item} là của ${v.name}`,proves:`${v.name} là người lén hẹn ở ${cl.spot}`},()=>evA(S,v,BAL.eff.j95.evJ95watch));
+ for(const cl of z.clue)if(!cl.done){const e=R.P[cl.vid];if(e&&e[kh][0]===k&&j95dice(BAL.odb.j95.dcJ95watch_2)){const v=RV(+cl.vid.slice(1));if(v){cl.done=1;j95ctx({how:`Nhận ra ${cl.item} là của ${v.name}`,proves:`${v.name} là người lén hẹn ở ${cl.spot}`},()=>evA(S,v,BAL.eff.j95.evJ95watch));
    if(cl.kind==="tryst")v.scandal=1;Q.push({t:"Nhận ra",who:pv(v),h:`<p>Ngươi nhìn kỹ: ${cl.item} nhặt được ở ${cl.spot} hôm nọ đúng là của ${v.name}.</p>`})}}}
  if(Q.length)try{showModal()}catch(e){}}
 function j95obs(v,c,k,by){const z=j95z();const O=z.obs[v.id]=z.obs[v.id]||{};const key=c+":"+k;const R=S.roster;const once=R?R.key:"";const o=O[key]=O[key]||{n:0,w:wk(),by};if(o.bk===once)return;o.bk=once;o.n++;o.w=wk();o.by=by}
@@ -412,7 +412,7 @@ function j95catchRoll(o,v){const mat=eyes(o);let tc=0;try{tc=tc70(v)}catch(e){tc
 function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s.kind==="tryst"?manById(s.b):null;const out=j95catchRoll(S,v);const W=s.spot;const z=j95z();
  if(out==="flee"){const it=TRACE95[Math.floor(Math.random()*TRACE95.length)];z.clue.push({vid:s.a,item:it,spot:W,kind:s.kind,w:wk()});
   Q.push({t:"Bóng người trong chỗ khuất",h:`<p>Ở ${W} có hai bóng người đứng sát nhau. Nghe tiếng chân ngươi, họ vội tản ra, không kịp nhìn mặt.</p><p>Dưới đất còn rơi lại ${it}.</p>`});return}
- if(out==="one"&&j95dice(50)&&m){m.j95known=1;Q.push({t:"Bóng người trong chỗ khuất",h:`<p>Ở ${W}, ngươi nhận ra ${m.name} đang hẹn một người phụ nữ mặc áo phi tần; nàng che mặt chạy mất, ngươi không rõ là ai.</p>`});return}
+ if(out==="one"&&j95dice(BAL.odb.j95.dcJ95caught)&&m){m.j95known=1;Q.push({t:"Bóng người trong chỗ khuất",h:`<p>Ở ${W}, ngươi nhận ra ${m.name} đang hẹn một người phụ nữ mặc áo phi tần; nàng che mặt chạy mất, ngươi không rõ là ai.</p>`});return}
  const full=out!=="one";const what=s.kind==="tryst"?(full&&m?`lén hẹn hò với ${m.name}`:"lén gặp một nam nhân"):"thì thầm trao đồ với tay chân";
  noteAdd(v.id,`chính ngươi bắt gặp nàng ${what} ở ${W}`);
  if(s.kind==="tryst"){v.scandal=1;try{intelAdd(v,{k:"affair",kind:"secret",txt:`${v.name} ${what}.`},{by:"Chính ngươi",how:`Bắt gặp ở ${W}`})}catch(e){}}
@@ -449,7 +449,7 @@ function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k
  relAdd(v,S,BAL.eff.j95.j95silent_2);oanAdd(v,S,BAL.eff.j95.j95silent_3);z.owe[v.id]=(z.owe[v.id]||0)+1;log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
 /* two-way: NPCs present where she meets her lover may catch HER, same odds, same choices (decided by their real feelings) */
 function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S.place;
- for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k)continue;const out=j95catchRoll(v,S);if(out==="flee"){if(j95dice(35))evA(v,S,BAL.eff.j95.evJ95npcCatch);continue}
+ for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k)continue;const out=j95catchRoll(v,S);if(out==="flee"){if(j95dice(BAL.odb.j95.dcJ95npcCatch))evA(v,S,BAL.eff.j95.evJ95npcCatch);continue}
   if(out==="one"){evA(v,S,BAL.eff.j95.evJ95npcCatch_2);continue}evA(v,S,BAL.eff.j95.evJ95npcCatch_3);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
