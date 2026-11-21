@@ -160,5 +160,13 @@
  "M2194-05": "M2194-05_s62_t5_thu.txt (bộ thu s62 t5 = M2191-01 nguyên văn (đã có tua); L2194)",
  "M2194-06": "M2194-06_s62_t6_thu.txt (bộ thu s62 t6 = M2191-02 + tua dải lụa; L2194)",
  "M2194-07": "M2194-07_s62_t7_thu.txt (bộ thu s62 t7 = M2191-03, dải lụa tới quá gối + tua (không chạm đất); L2194)",
- "M2194-08": "M2194-08_s62_t8_thu.txt (bộ thu s62 t8 = M2191-04, dải lụa tới quá gối + tua bọc vàng (không chạm đất); L2194)"
+ "M2194-08": "M2194-08_s62_t8_thu.txt (bộ thu s62 t8 = M2191-04, dải lụa tới quá gối + tua bọc vàng (không chạm đất); L2194)",
+ "M2195-01": "M2195-01_s62_t1_thu.txt (bộ thu s62 t1 = M2194-01 + tua lụa nhỏ trơn; L2195)",
+ "M2195-02": "M2195-02_s62_t2_thu.txt (bộ thu s62 t2 = M2194-02 + tua lụa nhỏ trơn; L2195)",
+ "M2195-03": "M2195-03_s62_t3_thu.txt (bộ thu s62 t3 = M2194-03 + tua lụa nhỏ (giữ nguyên); L2195)",
+ "M2195-04": "M2195-04_s62_t4_thu.txt (bộ thu s62 t4 = M2194-04 + tua lụa có nút/hạt nhỏ; L2195)",
+ "M2195-05": "M2195-05_s62_t5_thu.txt (bộ thu s62 t5 = M2194-05 + tua lụa có nút/hạt nhỏ; L2195)",
+ "M2195-06": "M2195-06_s62_t6_thu.txt (bộ thu s62 t6 = M2194-06 + tua chụp vàng nhỏ + 1 ngọc trai; L2195)",
+ "M2195-07": "M2195-07_s62_t7_thu.txt (bộ thu s62 t7 = M2194-07 + tua chụp vàng + ngọc trai, ngọc bích; L2195)",
+ "M2195-08": "M2195-08_s62_t8_thu.txt (bộ thu s62 t8 = M2194-08 + tua đẹp nhất: chụp vàng chạm, ngọc trai, ngọc bích, dài hơn chút; L2195)"
 }

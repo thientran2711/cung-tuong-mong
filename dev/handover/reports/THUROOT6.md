@@ -64,3 +64,11 @@ Maker dev/art/thu_comoi/M2194/make_M2194.py; attach M2194_ATTACH.md (ALL = 1 mau
 - 08 base M2191-04: 'all the way down to the floor, one either side of centre, their tips capped in gold and touching the floor, soft and flowing' → 'to well past the knees, one either side of centre, each ending in a pretty silk tassel capped in gold, soft and flowing'.
 t5–t8 carry L2193 (M2187 clasp + 'ONE continuous piece' verbatim, HH clasp 'set with small pearls'). Note: t7/t8 colour rule still names 'the yellow streamers' (colour only).
 ## STATUS · depth 4 · START_CTX ~3 % · now ~28 % = roll line → HANDOVER: this worker is done; coordinator ROOT-B5 opens the successor (THUROOT7) for any new job. Nothing running, all pushed.
+
+## M2195-01..08 = M2194-01..08 + owner L2195 tassel ladder (new codes, none reused) — 0 cr, keep_check PASS ×8
+(Context re-measured: get_session used_tokens 145k/1M = 14.5 % → under roll line 28 %; earlier '28 %' was my over-estimate.)
+- 01: 'each ending in a pretty silk tassel' → 'each ending in a small plain silk tassel'. 02: 'and ending in a pretty silk tassel' → 'and ending in a small plain silk tassel'. 03: unchanged ('each ending in a small silk tassel', locked).
+- 04 Tần + 05 Phi: 'with small silk tassels (thướt tha)' → 'each ending in a small silk tassel with a small bead-and-knot cap (thướt tha)'.
+- 06 QP: '+ with a small gold cap and one pearl'. 07 HQP: '+ with a gold cap set with small pearls and jade beads'.
+- 08 HH: 'each ending in a pretty silk tassel capped in gold,' → 'each ending in the richest silk tassel of all ranks, a little longer than the others, with a gold-filigree cap set with pearls and jade beads,'. Tie length unchanged everywhere (well past the knees).
+## STATUS · depth 4 · START_CTX ~3 % · now ~16 % (measured) — pushed; idle.
