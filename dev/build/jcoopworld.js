@@ -1011,18 +1011,22 @@ CW.cyHer=()=>cyHer();
    outcome — the same rule as when her week end frees it, whichever seat hosts — and both seats get the kit notice. Her card stays open on
    her side (never answered for her); her late answer still lands in her own S.cyb (jcycle / thin E do cyb), so nothing is lost. */
 function cyMs(){return +BAL.coop.cyWaitMs}/* one core (law 4): the bound lives only in BAL.coop.cyWaitMs */
-function cyArm(){clearTimeout(CW.cyT);const g=CW.cyHold;CW.cyT=setTimeout(()=>{CW.cyT=null;if(!CW.on||CW.cyHold==null||CW.cyHold!==g)return;
+function cyArm(){clearTimeout(CW.cyT);const g=CW.cyHold;if(!eW())p2say("cyq",{w:g})/* ask her to say her flags again: a host reload / lost relay left CW.fcy empty (NLC #10 case 12) */;CW.cyT=setTimeout(()=>{CW.cyT=null;if(!CW.on||CW.cyHold==null||CW.cyHold!==g)return;
  CW.cyTo=g;T("cyTimeout "+g);cyMark(g);p2say("cyto",{w:g});cyToNote(false);cyFree()},cyMs())}
 /* traceable: her cycle state keeps that week's wait ran out with no answer (S.cyb.to; an answer she still gives that week is kept beside it).
    Thin (level >= 5): her person is the host's stored one (the patch brings it to her phone); else her phone writes it (P2H.cyto) */
 function cyMark(g){if(!eW())return;try{const T=CW.thin;T.withSeat(fs(),()=>{if(!S)return;S.cyb=S.cyb||{};if(S.cyb.rk!==g)S.cyb.to=g});T.flush()}catch(e){console.error(e)}}
 function cyToNote(her){try{if(typeof kitLine==="function")kitLine(her?"Quá giờ chờ: Kính sự phòng đã lật thẻ đêm nay khi chưa có lời báo Kỳ nguyệt của ngươi.":"Quá giờ chờ: Kính sự phòng đã lật thẻ đêm nay khi hảo hữu chưa báo Kỳ nguyệt.",4000)}catch(e){}}
+P2H.cyq=()=>{CW.cyK="";try{cySend()}catch(e){}};
 P2H.cyto=m=>{if(typeof m.w!=="number")return;if(!eW()&&S&&!S.dead){S.cyb=S.cyb||{};if(S.cyb.rk!==m.w)S.cyb.to=m.w}cyToNote(true)};
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
 P2H.cyb=m=>{if(typeof m.w!=="number")return;CW.fcy={w:m.w,c:m.c&&typeof m.c==="object"?m.c:{},pend:!!m.pend,life:m.life||0};cyFree()};
 COOP.on("presence",()=>{if(CW.on&&CW.cyHold!=null)cyFree()});
 COOP.on("stop",()=>{CW.cyHold=null;CW.fcy=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null});
-COOP.on("room",()=>{CW.cyK="";CW.posKey="";CW.famSentH=""});COOP.on("peer",on=>{if(on){CW.posKey="";CW.famSentH=""}});/* a reconnect: a relay sent while the socket was down is lost; say it again on the next render */
+COOP.on("room",()=>{CW.cyK="";CW.posKey="";CW.famSentH=""});COOP.on("peer",on=>{if(on){CW.posKey="";CW.famSentH="";
+ /* review/coop-cyhold (NLC #10 coop-night case 12): the other seat came back (a host reload loses CW.fcy, it lives in memory only): say her
+    cycle flags again at once, so a hold for an answer she already gave frees now, not at BAL.coop.cyWaitMs */
+ CW.cyK="";setTimeout(()=>{try{cySend()}catch(e){}},0)}});/* a reconnect: a relay sent while the socket was down is lost; say it again on the next render */
 /* her monthly servant life (j42 srvMonth: wage, the spy's pay and the mistress catching her) runs inside the week while the friend's
    entry is out of the harem: put it back for that call, so her buyer (me) is still there and the spy line is not dropped */
 (function(){if(typeof srvMonth!=="function")return;const f=srvMonth;srvMonth=function(){const L=CW.on&&CW.pulled;if(!L||!L.length)return f.apply(this,arguments);
