@@ -1333,3 +1333,4 @@ Next Lượt 1953.
 #27 ~10:03Z: HHCOL2 winter t2 L1965 → VE6 1@55. MAIDFIX4 Tang maid ladder HADUONG_MAID_LADDER_L1965.md + rule B31 consort ladder (overrides B12/B26/B28 for Tang) 2c45575 → SENT L1966. Next Lượt 1967.
 #27 ~10:05Z: SENT L1967 winter t2 L1965 Lw8Ki3RswO (VE6 55). Winter t1–t8 now complete pending her OK. Next Lượt 1968.
 #27 ~10:07Z: HAN6 Hán L1965 t1–t8 files (trims, clouds+birds t6–t8, bu yao ladder) → VE7 t6 sample @55. Weave vs embroidery research HAN6_WEAVE_VS_EMBROIDERY_L1965.md → SENT L1968; asks owner yes to drop 'embroidered all over' t1–t5 (+1 sample). Next Lượt 1969.
+#27 ~10:09Z: SENT L1969 Hán t6 L1965 dt4THLQXSL (VE7 55); flagged tassel on ball + hand at waist → HAN6 word fix. Next Lượt 1970.
