@@ -74,7 +74,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await setTm(A,{buoiMs:15000});await reset(A);
  {const k=(await K(A)).k;
   ok(await press(A),'2: A presses Sẵn sàng');const t0=Date.now();
-  ok(await until(B,()=>{const t=((document.getElementById('kctm')||{}).textContent||'')+((document.getElementById('kctmf')||{}).textContent||'');return /Còn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
+  /* bot family (LIVE d541add9 hao-huu chip): the clock chip shows only m:ss, «Buổi này còn» sits in its aria-label — read text + labels */
+  ok(await until(B,()=>{const el=[document.getElementById('kctm'),document.getElementById('kctmf')].filter(Boolean);const t=el.map(e=>(e.textContent||'')+' '+[e,...e.querySelectorAll('[aria-label]')].map(x=>x.getAttribute('aria-label')||'').join(' ')).join(' ');return /[Cc]òn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
   const ms=await bothPast(A,B,k,40000);ok(ms>=5000,'2: AFK B: time out steps both (not before the clock)',ms);
   const a=await K(A),bb=await K(B);ok(a.k===bb.k,'2: same buổi after time out',[a.k,bb.k])}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
