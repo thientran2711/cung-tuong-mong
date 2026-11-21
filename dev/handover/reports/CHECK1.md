@@ -273,3 +273,4 @@ FAULTS:
 - t8, F18: `a gold phoenix hairpin with pearl dangles, held in the hand raised and admired`. The held-hairpin shape words are missing; F18 + the store item (t8-prompt-B/build.py) require "slim and palm-length, held between her fingers, never a sceptre".
 Rule-owner question (pre-existing store text, not counted as a fault): t7 + t8 `strands of pearls across the chest` vs A41 (no necklaces on anyone, L1411).
 Verdict: **t7 FAIL (G45 words) · t8 FAIL (G45 words + F18)**. These are one-phrase fixes.
+- A41 settled (Foreman C #15, NEWACCT#13/L1574): the chest pearl strands on t7/t8 are KEPT, because A41 bans necklaces, not these strands. This is no longer a question.
