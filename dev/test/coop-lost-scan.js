@@ -108,7 +108,8 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   const hx=(S.inv||[]).findIndex(e=>e&&e.lo&&!e.h&&String(e.gh)===String(key(t)));
   try{if((mine.length||hx>=0)&&r<.75){const c=mine[0];
     if((r<.35||!c)&&hx>=0){runAct(S,t,"plant",hx);out.push('plant')}else if(c){Q.length=0;loUI(r<.55?"sneak":"giveback",c.id);out.push('ui')}}
-   else if((t.inv||[]).some(loOk)){const n0=(S.inv||[]).filter(e=>e&&e.lo).length;const tx=runAct(S,t,r<.8?"laydo":"laydol");out.push((S.inv||[]).filter(e=>e&&e.lo).length>n0?'steal':'steal-miss')}}catch(e){out.push('err:'+e.message)}
+   else if((t.inv||[]).some(loOk)){const n0=(S.inv||[]).filter(e=>e&&e.lo).length;/* LIVE odds are hard (odds / caught / her maid begs): up to 4 tries so the scan has traffic */
+    let g=false;for(let j=0;j<4&&!g&&(t.inv||[]).some(loOk);j++){S.bac=Math.max(S.bac||0,5000);try{used=0}catch(e){}runAct(S,t,r<.8?"laydo":"laydol");g=(S.inv||[]).filter(e=>e&&e.lo).length>n0}out.push(g?'steal':'steal-miss')}}catch(e){out.push('err:'+e.message)}
   if(world&&r>.5)try{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!x.out&&loAlive(x));if(v&&(t.inv||[]).some(loOk)){v.bac=Math.max(v.bac||0,5000);runAct(v,t,"laydo");out.push('npc')}}catch(e){out.push('nerr:'+e.message)}
   try{Q.length=Math.min(Q.length,8);showModal()}catch(e){}return out};
  window.__fmiss=()=>(COOPW.famMiss||[]).slice();
