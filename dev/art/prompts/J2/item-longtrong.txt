@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: ONE decorative display piece for the cabinet of the game, "Lồng trống" (group "Chim cá"; game meaning: Lồng chim, chậu cá bỏ trống vì không ai chăm). Painted: an EMPTY round bamboo bird cage, door ajar, a dry seed cup, a single grey feather on the floor of the cage. Quality of the piece: a humble everyday finish: plain glaze or plain wood, simple shapes, one modest accent colour (Thường tier).
+Painted like the game's existing item pictures item-*.webp (lanquy, tranhco, huongtram, dancoc, nghien: attach one of them as the second reference): soft painted gouache object, clear readable silhouette, gentle volume. Composition: ONE object only, front, slightly from the left, centred and standing as if on a shelf plank (no plank, no stand unless named above), filling about 80 percent of the square with an even margin. 1:1 square (target 512x512 master, 256x256 small).
+Background: plain solid chroma-free pure white (#FFFFFF), the object isolated on it with a soft clean edge and NO ground, NO shadow on a floor, NO table, NO other object, so the owner can cut the background out later.
+DARK mood: deep, rich, gloomy atmosphere with low light, not black and not just night (rule N2). The mood belongs to the object colours only (muted, dried, faded); the background stays pure white.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ2-KP10-73"

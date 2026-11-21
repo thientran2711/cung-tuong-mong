@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: a soft warm GLARE PATCH sprite for the nắng gắt (scorching sun) weather layer: a round soft cloud of warm cream-gold light, brightest in a pale centre and fading smoothly to nothing at the rim, with the faintest orange tint on the outer ring and a few soft lens-like ripples. No sun disc, no rays, no hard edge, no object.
+Composition: square 1:1, the glow centred with clear margin so it fades fully before the edge. Target 256x256.
+Background: plain solid chroma-free pure white (#FFFFFF), the object isolated on it with a soft clean edge and NO ground, NO shadow on a floor, NO table, NO other object, so the owner can cut the background out later. (the glow fades to white at the rim so it can be cut to alpha later)
+Mood: hot, bright, summery, soft.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ2-KP08-07"

@@ -1,0 +1,11 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: a small painted WEATHER ICON for the game's weather chip, the weather named "gió lớn / gió bấc (strong wind, cold north wind)". ONE bold wind gust drawn as three thick flowing ribbon-like swirls curling to the left in the classic Chinese wind-and-cloud style (like carved cloud scrolls), pale blue-white with soft grey-blue shading, the middle swirl longest and ending in a tight spiral; two dry leaves, one golden and one russet, tumble along inside the swirls.
+Same painted look, line weight, shading and palette family as the game's existing weather icons mo-wx-suongsom, mo-wx-muaphun and mo-wx-gioheomay (attach one as the second reference and match its painting, size of the object in the square and softness). Composition: the swirls sweeping horizontally across the square, centred, the leaves near the spirals. 1:1 square. Make it read at 24 to 64 px: a bold simple silhouette, ONE clear object, large simple shapes, no tiny detail, no thin hairlines.
+Background: plain solid chroma-free pure white (#FFFFFF), the object isolated on it with a soft clean edge and NO ground, NO shadow on a floor, NO table, NO other object, so the owner can cut the background out later.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+Mood: calm and readable; the weather is clear at a glance, not frightening.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ2-KP08-03"

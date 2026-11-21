@@ -1,0 +1,11 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: a small painted WEATHER ICON for the game's weather chip, the weather named "trời âm u / chiều âm u / đêm u ám (an overcast grey day)". ONE heavy overcast cloud: a broad, soft, rounded grey-blue cloud mass made of three or four plump lobes, flat underside, lit gently from above-left so the top is pale pearl and the underside a soft slate grey-blue. A few quiet cloud-scroll curls (xiangyun style) trace its edge. Nothing else: no sun, no rain, no bird.
+Same painted look, line weight, shading and palette family as the game's existing weather icons mo-wx-suongsom, mo-wx-muaphun and mo-wx-gioheomay (attach one as the second reference and match its painting, size of the object in the square and softness). Composition: front view, the cloud centred and filling about 70 percent of the square. 1:1 square. Make it read at 24 to 64 px: a bold simple silhouette, ONE clear object, large simple shapes, no tiny detail, no thin hairlines.
+Background: plain solid chroma-free pure white (#FFFFFF), the object isolated on it with a soft clean edge and NO ground, NO shadow on a floor, NO table, NO other object, so the owner can cut the background out later.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+Mood: calm and readable; the weather is clear at a glance, not frightening.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ2-KP08-01"

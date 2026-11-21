@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: a soft wide horizontal FOG / CLOUD BANK sprite (variant 2 of 2) that the game's weather layer drifts slowly across a picture; the code tints it grey for the overcast weather and keeps it white for fog. Painted as milky white with the faintest warm-grey and pale blue-grey shading: a long layered bank made of two overlapping bands, the upper band thinner and wispier, the lower band thicker, the whole bank slightly tilted, with a thin ragged tail at the left end. Soft feathered edges that fade out completely; no hard outline, no sun, no sky, no ground, no pavilion, no tree, nothing inside the mist.
+Composition: wide banner, the bank centred and spanning almost the full width with a clear margin top and bottom and at both ends; looks tileable (left and right ends fade to nothing). Aspect 2:1 (target 512x256; ask for 1536x768 if allowed). It must stay visible on a pure white background (the grey-blue shading carries the shape) so it can be cut out later.
+Background: plain solid chroma-free pure white (#FFFFFF), the object isolated on it with a soft clean edge and NO ground, NO shadow on a floor, NO table, NO other object, so the owner can cut the background out later.
+Mood: quiet, airy and soft, daylight.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ2-KP08-06"
