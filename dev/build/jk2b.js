@@ -316,7 +316,11 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
  b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});b.querySelectorAll(".kb .kbh").forEach(h=>h.remove());/* kit-thanh-bai r3: the THÀNH / BẠI heads go with their rows (a head with no row under it was left behind) */
- let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
+ /* kit-ton-row: a price the OPTION itself names — its `ton:{…}` field or a «tốn: …» part of its line — is known up front and stays in the Tốn row whatever the stat (Tâm cơ / Đức / Danh / Sủng …); a plain fx consequence («ngay:») of a hidden-outcome card still goes */
+ let ownP=[];try{const ob=(typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null)?Q[0].opts[+b.dataset.m]:null;if(ob){if(ob.ton)ownP=ownP.concat(String(fmt(ob.ton)).split(/<\/span>\s*·\s*<span[^>]*>/).map(kaPlain));ownP=ownP.concat(kitOptModel(ob).items.filter(i=>i.l==="tốn").map(i=>kaPlain(i.p)))}}catch(e){}
+ /* kit-ton-row-2 (MAIN CHÍNH 83 decision, per the hint rule «words only, no stat numbers» for relations): the keep-rule covers ECONOMIC stats only (khắc / Sức / Bạc / Hồi môn / Tâm cơ / Đức / Danh / Sủng); a relation / liking price («thiện cảm -3», «quý ngươi -3», Ân tình …) stays words only in a hidden-outcome card («mất lòng bề trên») */
+ ownP=ownP.filter(p=>p&&/khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/i.test(p));
+ let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;const et=kaPlain(e.textContent);if(!KIT_COSTRE.test(e.textContent)&&!ownP.some(p=>p&&(et===p||et.includes(p)||p.includes(et))))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
@@ -917,7 +921,7 @@ kitStageScale=function(){try{kitFigFx()}catch(e){}};kitStageEdge=function(){};
 (function(){if(typeof window.j59lay!=="function")return;const l0=window.j59lay;window.j59lay=function(){const r=l0.apply(this,arguments);try{kitFigFx()}catch(e){}return r}})();
 (function(){const st=$("stage");if(st)st.classList.remove("kscale")})();
 
-/* ---------- 17. kitName / kitTitle: never double a title. A name that already starts with its title ("Thái y Bùi Thừa Chí") or with any role
+/* ---------- 17. kitName / kitTitle: never double a title. A name that already starts with its title ("Thái y Tống Thừa Chí") or with any role
    word (thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, họa sư, công tử, ma ma, cô cô…) gets no extra title. ---------- */
 const KIT_ROLEPRE=/^(Hoàng thượng|Thái hậu|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi|Thái tử|Hoàng tử|Công chúa|Thái y|Ngự y|Thái giám|Tổng quản|Thủ lĩnh|Tiểu thái giám|Thị vệ|Thống lĩnh|Vương gia|Thân vương|Quận vương|Tể tướng|Đại tướng quân|Thượng thư|Thị lang|Tướng quân|Quan|Đại nhân|Nhạc sư|Họa sư|Sứ thần|Công tử|Ma ma|Cô cô|Cung nữ|Nữ quan|Chưởng sự)(?=\s|$)/i;
 (function(){const t0=kitTitle;kitTitle=function(p){const t=t0.apply(this,arguments);try{if(!t||!p||!p.name)return t;const nm=String(p.name).replace(/<[^>]*>/g,"").trim();
