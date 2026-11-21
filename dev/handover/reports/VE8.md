@@ -19,3 +19,9 @@ Grep túi thơm/pendant/necklace/sachet in both prompt files: 0 hits. check_stor
 - t8 Hoàng hậu **SyhrHMVUb8** (old 6AbJ5aqiJO): ✓ layered neckline, no cape/cloak, slim silhouette, nine-phoenix crown; ✗ jade disc hangs from the pearl strands at the waist (pendant look, G57), red gem drops on the collar front; collar again one tier, one small gold tassel.
 Verdict: neckline change OK on both; two-tier vân kiên + pendant/red-on-collar NOT clean → suggest owner/#25 decide on a redraw (would cost 2×55).
 Sheet: dev/handover/review-sheets/thu_t7_t8_vankien2_L1887.png (CŨ t7 | MỚI t7 | CŨ t8 | MỚI t8 | MẪU Xuân eIPc7xcdqL).
+
+## JOB 3 — THU t7 + t8 vankien2 **L1887b** (tua rua = pearl net) · same settings/refs · 2×55 = **110 cr** (session total 1030 cr)
+Grep túi thơm/pendant/necklace/sachet in both L1887b files: 0 hits. Files differ from L1887 only in the collar sentence (pearl net + pearl fringe, never silk tassels).
+- t7 Hoàng quý phi **O6ElrJ3ynm**: ✓ pearl-beaded net/fringe over a scalloped collar (reads as pearls, not silk tassels), layered square neckline, no waist pendant, red only on crown; ~ collar still reads close to one scalloped tier with a pearl fringe below; flute keeps its own jade ring/gold knot/tassel (held item, not a pendant).
+- t8 Hoàng hậu **3zKyU3rREY**: ✓ pearl+jade net collar, layered neckline, no jade disc / no pendant, red gems on crown only, slim silhouette, no cape.
+Both clearly better than L1887. Sheet: dev/handover/review-sheets/thu_t7_t8_vankien2b_L1887b.png (CŨ | L1887 | L1887b per rank + MẪU Xuân eIPc7xcdqL).
