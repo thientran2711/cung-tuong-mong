@@ -1328,3 +1328,4 @@ Next Lượt 1953.
 #27 ~09:53Z: SENT L1962 nhị L1952 m09 9ZH7YXSNYZ m10 dt4TCjbXSL m12 5jDuU24Kxe m13 gOmr6VKSXO + thân cận hair sample m18 vQAoKyza47 (VE10 595). Ask owner hair OK → then thân cận. Next Lượt 1963.
 #27 ~09:55Z: HAN6 did L1958 drama research (HAN6_TANG_DRAMA_RESEARCH_L1958.md @1e015d1) → SENT L1963. HAN6 ctx ~15 %. Next Lượt 1964.
 #27 ~09:57Z: SENT L1964 thu t7 L1955 rgXqyJlxtc (VE11 55): slimmer, sash+centre bow, no tassel; outer robe still open below sash, sleeves wide. t8 waits. Next Lượt 1965.
+#27 ~09:58Z: NGOCBOI1 G65 step3 3ccc4fae0: only hạ t4 L1890 live; fixed but file DOUBLED (19k) → hạ Tần needs single-copy rebuild from L1924 design when owner unholds t4/t5.
