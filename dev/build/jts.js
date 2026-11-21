@@ -8,6 +8,19 @@
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
+/* owner 21/11 ~03:25Z mark #36 (verbatim in OD): «cột ở bên phải của cái màn hình nền sân khấu đó còn có cái thông tin như là nguy hiểm … bên cung nữ cũng phải có những cái
+   cột thông tin đó». The two right-column boxes (Nguy hiểm chung, Xét phẩm) stand on the cung nữ road too, same kit rows, same panels; only what they read is hers:
+   Nguy hiểm chung = the same sum over the consorts (tsDangerOf, every person the same rule), Xét phẩm = the conditions of HER next rung (j42 srvMonth, one gate). */
+function tsBoxOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!S.out)}
+function tsSrv(){return typeof isSrv==="function"&&isSrv()}
+/* her next rung: the srvMonth gate, row by row (Công lao · bậc cung chủ cho phép · Chủ tin; then the Nội vụ phủ exam, jexam exSrv*) */
+function tsSrvNext(){try{const r=S.srv.rk|0;if(S.srv.mama||r>=SRK.maid.length-1)return null;return SRK.maid[r+1]}catch(e){return null}}
+function tsSrvRows(){const r=S.srv.rk|0,need=srvMpNeed(r),mx=srvMax(),nx=SRK.maid[r+1];const L=[];
+ L.push([Math.floor(S.srv.mp)>=need,`Công lao ${Math.floor(S.srv.mp)}/${need}`]);
+ L.push([r<mx,r<mx?`Cung chủ cho lên tới ${SRK.maid[mx]}`:`Cung chủ phẩm này chỉ cho tới ${SRK.maid[mx]||SRK.maid[r]}`]);
+ L.push([(S.tin|0)>=BAL.srvx.tinUp,`Chủ tin ${S.tin|0}/${BAL.srvx.tinUp}`]);
+ if(S.srv.lau>0)L.push([false,`Đang ở Tân Giả khố (còn ${S.srv.lau} tuần)`]);
+ return L}
 /* palace voice: the maid's warning is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {V} = who asks around */
 const TS_WARN=["“Dạo này người các cung nhìn {goi} không thiện ý. Nô tỳ nghe bên {V} hỏi giờ giấc cung ta.”","“{Goi}, người bên {V} cứ lảng vảng quanh cửa cung mình. Nô tỳ thấy không yên.”",
  "“Tai vách mạch rừng, {goi} ạ. Bên {V} vừa dò hỏi chuyện ăn uống của cung ta.”","“Nô tỳ nghe phong thanh, {V} đang để mắt đến {goi}. Mấy hôm nay {goi} nên cẩn trọng.”",
@@ -128,7 +141,7 @@ function tsDWord(n){let w=TS_DW[0][1];for(const [a,b] of TS_DW)if(n>=a)w=b;retur
 function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const facts=D.top.slice(0,6).map(x=>({who:x.v,text:`${kitName?kitName(x.v):x.v.name}: mức ${BANDS[x.b][1]} · đang ghen ${x.v.ghen||0} · oán ${Math.round(oan(x.v,S)||0)}`}));
  const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=BAL.tsDanger.hot?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
-  `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
+  `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho",tsSrv()?"mọi người trong cung, phi tần hay cung nữ, cùng một cách tính":"mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
  const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
@@ -204,22 +217,27 @@ function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.ts
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
-(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsOn()&&!S.out){const D=tsDangerOf(S,true);
+(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()){const D=tsDangerOf(S,true);
   el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=BAL.tsDanger.hot?"hot":D.n<BAL.tsDanger.calm?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
   opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:[`Sức +${BAL.cv.rest}`],kem:["kẻ muốn hại vẫn rình"],go:()=>apply({suc:BAL.cv.rest})})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
-function tsPromoPanel(pre){if(!tsOn()||S.out||S.rank>=7)return;const L=promoReqP(S);if(!L.length)return;const miss=L.filter(x=>!x[0]).length;const nx=RANKS[S.rank+1].n;
+function tsPromoPanel(pre){if(tsSrv()){if(!pre)tsSrvPromoPanel();return}if(!tsOn()||S.out||S.rank>=7)return;const L=promoReqP(S);if(!L.length)return;const miss=L.filter(x=>!x[0]).length;const nx=RANKS[S.rank+1].n;
  const m={t:`Xét phẩm cuối tháng · ${nx}`,h:`${pre?`<p>Cuối tháng này Nội vụ phủ dâng danh sách lên Hoàng thượng xét tấn phong. Còn ${3-S.tuan} tuần.</p>`:""}<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(tsPromoRows())}</div>${tsRows([["Ghi chú",miss?`thiếu ${miss} điều: đủ hết thì cuối tháng được sắc phong`:"đủ cả: cuối tháng được sắc phong nếu không gì đổi","n"]])}`,btn:"Đã hiểu",tsk:"promo"};
  if(pre)Q.push(m);else{Q.unshift(m);showModal()}}
+/* cung nữ: the same panel (title, kit rows «Đủ / Thiếu», note) on her next rung */
+function tsSrvPromoPanel(){if(!tsBoxOn()||!tsSrv())return;const nx=tsSrvNext();if(!nx)return;const L=tsSrvRows();const miss=L.filter(x=>!x[0]).length;
+ const ex=typeof exOn==="function"&&exOn();
+ Q.unshift({t:`Xét phẩm cuối tháng · ${nx}`,h:`<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"]))}</div>${tsRows([["Ghi chú",(miss?`thiếu ${miss} điều: đủ hết thì cuối tháng Nội vụ phủ ghi công`:"đủ cả: cuối tháng Nội vụ phủ ghi công")+(ex?", rồi ngươi dự khảo hạch Nội vụ phủ (Hành sự); đỗ thì được thăng":", được thăng"),"n"]])}`,btn:"Đã hiểu",tsk:"promo"});showModal()}
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
-(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
+(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()&&tsSrv()&&tsSrvNext()){const miss=tsSrvRows().filter(x=>!x[0]).length;
+  el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}else if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
 /* festivals (j3/j8 festival): the two judged banquets say beforehand what is judged and where she stands */
 const TS_FEST={1:["Yến tiệc đầu xuân","sac","Sắc và điệu múa"],7:["Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ"]};
 function tsFestScore(p,k){return k==="sac"?effSac(p)+artW2(p,"vu")*6:p.tai+(artW2(p,"cam")+artW2(p,"thi"))*3}

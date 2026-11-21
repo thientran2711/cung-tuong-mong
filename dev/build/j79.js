@@ -1174,7 +1174,8 @@ function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
   KG[g].keys.forEach(k=>{const i=vis.indexOf(k);const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
   if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
-  else b.classList.add("kghide")})}}
+  else{b.classList.add("kghide");/* maid-8tabs #34: a member that was a group head before (KG rebuilt by jhc: rv headed Hậu cung) drops its stale head mark — else a tap on it
+   (kitCourtOpen: Hoàng hậu / her chủ → rv) ran the head click and opened the group's LAST sub-tab (Cung nhân / Đồng liêu) instead of rv */if(b.dataset.kg){if(b.dataset.kl0!=null)b.textContent=b.dataset.kl0;if(b.dataset.ks0!=null)b.dataset.s=b.dataset.ks0;delete b.dataset.kg}}})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
  if(kgKeys(g).length<2){if(nav)nav.remove();return}/* one sub-tab only (a road with one member in this group, jroad8): no sub-tab row */

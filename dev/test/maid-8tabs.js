@@ -6,8 +6,13 @@
      has «Cung nhân», the Chí tôn button, the Ân sủng card (Tai mắt + her facts); no separate servant box (.k3py with srk/nt/wage/merit).
    3 OLD SAVE: a maid life saved by the LIVE build (oldURL) loads in the new build and lands on Hành sự with the 8 tabs (an old remembered
      sub-tab in localStorage is fine).
-   4 RANK-UP: the maid rises (srvRise) → consort: same 8 tabs, sub-tab labels back to the consort's (Cung nhân, Mệnh truyện), the right column shows
-     Cung nhân (her new maid) and no Chủ tin button, tab = Hành sự, no page error.
+   4 RANK-UP: the maid rises (srvRise) → consort: same 8 tabs, sub-tab labels back to the consort's (Cung nhân, Phi tần, Mệnh truyện), the right column shows
+     Cung nhân (her new maid), no Đồng liêu box and no chủ row, tab = Hành sự, no page error.
+   5 #34 (owner 21/11 ~03:20Z): her chủ = the FIRST row of the right column's court box (kit .kcrow data-kc="mis", «<phẩm> <tên>» + «Chủ tin N»); tap = Hậu cung ›
+     Chủ tử pager on her chủ. #36 (~03:25Z): the same two right-column buttons, words from ROAD8_LAB («Đồng liêu N» in the Cung nhân place, N = her colleagues;
+     its fold = colleague chips, tap = that colleague in the Đồng liêu pager); Phi tần sub-tab = «Chủ tử»; Nguy hiểm chung + Xét phẩm boxes (hud2 + right column),
+     Xét phẩm panel = her next rung. #35 (~03:22Z): Hậu cung › Đồng liêu = the shared person-tab layout (kit pager strip + ONE pcard, act buttons in card
+     groups), no private .srvrow list; one act button works from the card.
    usage: node dev/test/maid-8tabs.js <newURL> <oldURL|-> [WxH@dpr ...]   (default 755x1000@1 1180x820@1) → exit 1 on FAIL */
 const {chromium}=require('playwright');
 const [,,URL,OLD0,...SZ]=process.argv;const OLD=OLD0&&OLD0!=='-'?OLD0:null;const SIZES=SZ.length?SZ:['755x1000@1','1180x820@1'];
@@ -46,24 +51,50 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
   const keys=W=>W.map(x=>x.h+'>'+x.k).join(',');
   ok(keys(sW)===keys(cW),sz+' cung nữ: the same tabs and sub-tab keys as the consort (no locks, nothing hidden)',{srv:keys(sW),cons:keys(cW)});
   const lab=(W,k)=>(W.find(x=>x.k===k)||{}).l;
-  ok(lab(sW,'staff')==='Đồng liêu'&&lab(sW,'story')==='Thân phận'&&lab(cW,'staff')==='Cung nhân'&&lab(cW,'story')==='Mệnh truyện',sz+' ROAD8 labels: Hậu cung › Đồng liêu, Mệnh truyện › Thân phận (consort: Cung nhân, Mệnh truyện)',[lab(sW,'staff'),lab(sW,'story'),lab(cW,'staff'),lab(cW,'story')]);
+  ok(lab(sW,'staff')==='Đồng liêu'&&lab(sW,'story')==='Thân phận'&&lab(sW,'rv')==='Chủ tử'&&lab(cW,'staff')==='Cung nhân'&&lab(cW,'story')==='Mệnh truyện'&&lab(cW,'rv')==='Phi tần',sz+' ROAD8 labels: Hậu cung › Chủ tử + Đồng liêu, Mệnh truyện › Thân phận (consort: Phi tần, Cung nhân, Mệnh truyện)',[lab(sW,'rv'),lab(sW,'staff'),lab(sW,'story'),lab(cW,'rv'),lab(cW,'staff'),lab(cW,'story')]);
   ok(sW.every(x=>x.txt>0&&(x.on==null||x.k==null||x.on===x.k)),sz+' cung nữ: every tab / sub-tab opens with content',sW.filter(x=>!(x.txt>0&&(x.on==null||x.k==null||x.on===x.k))));
   /* 2 #33 */
   const c33=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="act"]').click();render();const R=document.getElementById('kshR');
-   return{strip:!!document.querySelector('#panel .srvhead'),btn:R?[...R.querySelectorAll('.kgfbtns button')].map(x=>x.textContent.trim()):null,tin:S.tin,as:R?[...R.querySelectorAll('.kas .k3l')].map(x=>x.textContent.trim()):null,
+   return{strip:!!document.querySelector('#panel .srvhead'),btn:R?[...R.querySelectorAll('.kgfbtns button')].map(x=>x.textContent.trim()):null,tin:S.tin,nCol:srvColleagues().length,nCt:kitCourtRows().length,as:R?[...R.querySelectorAll('.kas .k3l')].map(x=>x.textContent.trim()):null,
     py:R?[...R.querySelectorAll('.k3py [data-k3]')].map(x=>x.dataset.k3):null,rk:rkName(S)}});
   ok(!c33.strip,sz+' #33: no «Cung nữ … · Chủ tin» strip under the tabs',c33);
-  ok(!c33.btn||(c33.btn[0]===`${c33.tin}Chủ tin`&&c33.btn.some(x=>/Chí tôn$/.test(x))),sz+' #33: right column = «Chủ tin N» in the Cung nhân place + Chí tôn',c33.btn);
+  ok(!c33.btn||(c33.btn.length===2&&c33.btn[0]===`${c33.nCol}Đồng liêu`&&c33.btn[1]===`${c33.nCt}Chí tôn`),sz+' #33/#36: right column = the consort\'s two buttons, «Đồng liêu N» in the Cung nhân place + «Chí tôn N» (no extra button)',c33);
+  /* 5 #34: her chủ row in the court box; tap = her chủ's person card */
+  const c34=await p.evaluate(()=>{window.__kgfOpen='ct';const R0=document.getElementById('kshR');if(R0)R0.dataset.full='';k3Stage();const host=document.querySelector('#kshR .kgfopen,#kgfdrop');
+   const r=host&&host.querySelector('.kcrow');const m=srvM();const o={mis:r?r.dataset.kc:null,txt:r?r.textContent.trim():null,want:`${rkName(m)} ${shortN(m.name)}`,tin:S.tin|0,hud:!!document.querySelector('#hud2 .kcrow[data-kc="mis"],#hud2 [data-kc="mis"]')};
+   if(r){r.click();o.tab=tab;o.pg=PG.rv;o.ix=rvPgOf(m);o.card=(document.querySelector('#panel .pc')||{}).innerText||'';o.npc=document.querySelectorAll('#panel .pc').length;o.on=(document.querySelector('#panel .pface.on')||{}).innerText;o.mname=m.name;o.st=k61St(m);o.kn=kitKnown(m)}window.__kgfOpen=null;document.querySelector('#tabs [data-tab="act"]').click();return o});
+  ok(c34.mis==='mis'&&c34.txt.includes(c34.want)&&c34.txt.includes('Chủ tin '+c34.tin),sz+' #34: the court box\'s first row = her chủ «<phẩm> <tên>» + «Chủ tin N»',c34);
+  ok(c34.tab==='rv'&&c34.pg===c34.ix&&c34.on.includes(c34.want.split(' ').pop())&&c34.card.includes(c34.want.split(' ').pop()),sz+' #34: tap = her chủ\'s person card (Hậu cung › Chủ tử pager on her)',{tab:c34.tab,pg:c34.pg,ix:c34.ix,card:c34.card.slice(0,80),npc:c34.npc,on:c34.on,mname:c34.mname,st:c34.st,kn:c34.kn});
+  /* 5 #36: Đồng liêu fold = her colleagues; tap one = her card in the pager */
+  const c36=await p.evaluate(()=>{window.__kgfOpen='cn';const R0=document.getElementById('kshR');if(R0)R0.dataset.full='';k3Stage();const host=document.querySelector('#kshR .kgfopen,#kgfdrop');
+   const L=host?[...host.querySelectorAll('[data-k3go="staff"]')]:[];const o={n:L.length,want:srvColleagues().length,head:host?(host.querySelector('.kgf-t')||{}).textContent:null};
+   const c=L[1]||L[0];if(c){const j=+c.dataset.k3pi;c.click();o.tab=tab;o.pg=PG.staff;o.j=j;o.name=(document.querySelector('#panel .pc')||{}).innerText||'';o.wantName=srvColleagues()[j].name}
+   window.__kgfOpen=null;return o});
+  ok(c36.n===c36.want&&/^Đồng liêu · \d+/.test(c36.head||''),sz+' #36: the Đồng liêu fold lists her colleagues (same kit chips as Cung nhân)',c36);
+  ok(c36.tab==='staff'&&c36.pg===c36.j&&c36.name.includes(c36.wantName),sz+' #36: tap a colleague = her card in Hậu cung › Đồng liêu',{tab:c36.tab,pg:c36.pg,j:c36.j});
+  /* #35: Đồng liêu = the shared person-tab layout */
+  const c35=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="court"]').click();const b=document.querySelector('#panel .ksub [data-ksub="staff"]');if(b)b.click();const P=document.getElementById('panel');
+   const o={tab,strip:!!P.querySelector('.pgwrap .pstrip'),faces:P.querySelectorAll('.pstrip .pface').length,want:srvColleagues().length,pc:P.querySelectorAll('.pc').length,row:!!P.querySelector('.srvrow'),btn:P.querySelectorAll('.pc [data-cnv]').length};
+   const c=P.querySelector('.pc [data-cnv="chat"]:not([disabled])');if(c){const k0=used;c.click();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();o.spent=used-k0}return o});
+  ok(c35.tab==='staff'&&c35.strip&&c35.faces===c35.want&&c35.pc===1&&!c35.row&&c35.btn>=2,sz+' #35: Hậu cung › Đồng liêu = kit pager strip + ONE kit person card with her act buttons (no private list)',c35);
+  ok(c35.spent==null||c35.spent>=1,sz+' #35: «Trò chuyện» from the card spends its khắc',c35.spent);
+  /* #36: Nguy hiểm chung + Xét phẩm boxes on her road (hud2 chip + right-column row), Xét phẩm = her next rung */
+  const cts=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="act"]').click();render();k3Stage();const h=document.getElementById('hud2');
+   const o={nh:!!(h&&h.querySelector('[data-hx="tsnh"]')),xp:!!(h&&h.querySelector('[data-hx="tsxp"]')),col:[...document.querySelectorAll('#kshR [data-k3="tsnh"],#kshR [data-k3="tsxp"],#kshR [data-k3sheet]')].map(x=>x.dataset.k3||'sheet'),nx:SRK.maid[(S.srv.rk|0)+1]};
+   Q.length=0;tsSrvPromoPanel();o.t=Q[0]&&Q[0].t;o.h=Q[0]&&Q[0].h||'';Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
+   tsDangerPanel();o.d=Q[0]&&Q[0].t;Q.length=0;if(m)m.hidden=true;render();return o});
+  ok(cts.nh&&cts.xp,sz+' #36: Nguy hiểm chung + Xét phẩm chips on her road (the right column reads them)',cts);
+  ok(cts.t===`Xét phẩm cuối tháng · ${cts.nx}`&&/Công lao/.test(cts.h)&&/Chủ tin/.test(cts.h)&&cts.d==='Nguy hiểm chung',sz+' #36: Xét phẩm panel = her next rung (Công lao, bậc cung chủ cho phép, Chủ tin); Nguy hiểm chung panel opens',{t:cts.t,d:cts.d});
   ok(!c33.as||(c33.as[0]==='Tai mắt'&&c33.as.includes('Ngài để ý')&&c33.as.includes('Công lao')&&c33.as.includes('Lương tháng')),sz+' #33: the Ân sủng card holds Tai mắt + her facts',c33.as);
   ok(!c33.py||!c33.py.some(k=>['srk','nt','wage','merit'].includes(k)),sz+' #33: no separate servant box',c33.py);
   ok(c33.rk!=='Đáp ứng'&&/Cung nữ|Ma ma/.test(c33.rk),sz+' her own title in consort panels = her servant rung',c33.rk);
   /* 4 rank-up */
   const up=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="court"]').click();const k0=tab;srvRise('Thánh thượng để mắt');Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();
-   const R=document.getElementById('kshR');return{k0,srv:isSrv(),tab,rank:S.rank,st:kgLabel('staff'),sy:kgLabel('story'),btn:R?[...R.querySelectorAll('.kgfbtns button')].map(x=>x.textContent.trim()):null}});
+   const R=document.getElementById('kshR');return{k0,srv:isSrv(),tab,rank:S.rank,st:kgLabel('staff'),sy:kgLabel('story'),rv:kgLabel('rv'),mis:kitCourtRows().some(r=>r.k==='mis'),btn:R?[...R.querySelectorAll('.kgfbtns button')].map(x=>x.textContent.trim()):null}});
   const uBar=await bar(p);const uW=await walk(p);
-  ok(!up.srv&&up.tab==='act'&&uBar===T8&&up.st==='Cung nhân'&&up.sy==='Mệnh truyện',sz+' rank-up maid → consort: same 8 tabs, consort sub-tab names, lands on Hành sự',{up,uBar});
+  ok(!up.srv&&up.tab==='act'&&uBar===T8&&up.st==='Cung nhân'&&up.sy==='Mệnh truyện'&&up.rv==='Phi tần'&&!up.mis,sz+' rank-up maid → consort: same 8 tabs, consort sub-tab names, lands on Hành sự',{up,uBar});
   ok(keys(uW)===keys(cW)&&uW.every(x=>x.txt>0),sz+' rank-up: every tab / sub-tab opens',keys(uW));
-  ok(!up.btn||(!up.btn.some(x=>/Chủ tin$/.test(x))),sz+' rank-up: no Chủ tin button in the right column',up.btn);
+  ok(!up.btn||(!up.btn.some(x=>/(Chủ tin|Đồng liêu)$/.test(x))),sz+' rank-up: no Đồng liêu / Chủ tin button in the right column',up.btn);
   /* 3 old save */
   if(oldSave){const o=await p.evaluate(raw=>{try{localStorage.setItem('hclh-kg-hc','staff');localStorage.setItem('hclh-kg-mt','story')}catch(e){}tab='staff';localStorage.setItem(SK(3),raw);const d=loadSlot(3);if(!d)return{err:'loadSlot null'};deser(d);Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;tab='act';render();
     const r={srv:isSrv(),tab};document.querySelector('#tabs [data-tab="court"]').click();r.hc=tab;r.lab=kgLabel(tab);return r},oldSave);

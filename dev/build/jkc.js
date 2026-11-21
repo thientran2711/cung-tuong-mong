@@ -552,9 +552,8 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
    kitRows §51, kitSkillCard §21, pbtn / cardH act cards §6, k3row top-bar chip §31.12) ---------- */
 const KCTABS={act:"Khuê phòng",go:"Dư đồ",rv:"Gia tộc",staff:"Giao du",art:"Tài nghệ",kid:"Thư từ",inv:"Tư trang",story:"Mệnh truyện"};/* 8 tabs = today's 8-column bar (Sổ ghi stays reachable through its links) */
 const KCG={act:"khue",rv:"fam",staff:"soc",art:"art",kid:"mail"};
-function kcTabs(){/* maid-8tabs (owner 21/11 ~03:15Z): the bar is the consort's 8 tabs at home too; KCTABS names her home panels as sub-tabs (jroad8 ROAD8) */}
 (function(){const r0=render;render=function(){/* unknown keys at home: jroad8 */const r=r0.apply(this,arguments);
- try{kcTabs();if(typeof tabsFitR==="function")tabsFitR();/* fit after the home tabs are shown / hidden */if(isKc()){kcHud();document.querySelectorAll("#tokens > p.empty").forEach(e=>e.remove());/* the scene line already says "Không gặp ai" */
+ try{if(typeof tabsFitR==="function")tabsFitR();if(isKc()){kcHud();document.querySelectorAll("#tokens > p.empty").forEach(e=>e.remove());/* the scene line already says "Không gặp ai" */
 }kcChipPaint()}catch(e){console.error(e)}return r}})();
 function kcHud(){const r=$("me-r");if(r)r.textContent=kcTitle();const e=$("hud-sung");if(e){const sm=e.querySelector("small");if(sm){if(sm.dataset.ko0==null)sm.dataset.ko0=sm.innerHTML;sm.innerHTML=sm.dataset.ko0.replace(/Sủng|Chủ tin/,"Gia thanh")}const sp=e.querySelector("span");if(sp)sp.textContent=S.kgt;const u=e.querySelector("u");if(u)u.style.width=S.kgt+"%";e.title=HX.kgt}}
 (function(){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{if(isKc())kcHud2()}catch(e){console.error(e)}return r}})();

@@ -78,9 +78,15 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
 /* on a narrow screen the zoomed map opens centred on where she stands */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!document.querySelector(".game.maptab")){const sc=document.querySelector(".mapsc");const h=sc&&(sc.querySelector(".mspot.here")||sc.querySelector('[data-go="home"]'));const key=S.place+"|"+(window.__mapZ||0);if(sc&&h&&sc.scrollWidth>sc.clientWidth){const img=sc.querySelector(".mapimg");const go=()=>{sc.scrollLeft=h.offsetLeft+h.offsetWidth/2-sc.clientWidth/2;sc.scrollTop=h.offsetTop+h.offsetHeight/2-sc.clientHeight/2};if(img&&!img.complete)img.addEventListener("load",go,{once:true});else go();if(window.__mapCtr===key&&window.__mapPos){sc.scrollLeft=window.__mapPos[0];sc.scrollTop=window.__mapPos[1]}window.__mapCtr=key;sc.addEventListener("scroll",()=>{window.__mapPos=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}}catch(e){}return r}})();
 /* the Phi tần face strip, grouped by palace (12-16 consorts): Càn Ninh first, then each palace by rank, fallen and dead last */
+/* rvOrd() = the strip order (rivals indexes); PG.rv is a STRIP position, so «open X's card» (kitCourtOpen: Hoàng hậu, a cung nữ's chủ) sets PG.rv = rvPgOf(X), never rivals.indexOf(X)
+   (maid-8tabs #34: the chủ row opened another consort's card) */
+function rvOrd(){const ordG=v=>!v.alive?99:v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
+ return rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]))}
+function rvPgOf(v){try{const i=rivals.indexOf(v);if(i<0)return -1;return rvOrd().indexOf(i)}catch(e){return rivals.indexOf(v)}}
+window.rvPgOf=rvPgOf;
 (function(){const p0=pager;pager=function(key,items,mk){if(key!=="rv"||!rivals||items.length<rivals.length)return p0.apply(this,arguments);const n=rivals.length;
- const grp=v=>!v.alive?"Đã mất":v.out?"Lãnh cung":palName(palaceOf(v));const ordG=v=>!v.alive?99:v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
- const ord=rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]));let last=null;
+ const grp=v=>!v.alive?"Đã mất":v.out?"Lãnh cung":palName(palaceOf(v));
+ const ord=rvOrd();let last=null;
  const it2=ord.map(i=>{const g=grp(rivals[i]);const x=Object.assign({},items[i]);if(g!==last){x.sep=g;last=g}return x}).concat(items.slice(n));const map=ord.concat(items.slice(n).map((_,j)=>n+j));
  return p0.call(this,key,it2,i=>mk(map[i]))}})();
 /* old saves: anyone living under the Hoàng hậu / Hoàng quý phi is moved out on load (palFix logs each move) */
