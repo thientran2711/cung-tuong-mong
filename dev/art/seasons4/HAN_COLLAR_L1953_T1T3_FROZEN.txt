@@ -1,0 +1,7 @@
+# FROZEN — owner-approved L1953 (21/11, on L1940 sheet han_collar_L1928_t1_t3.png: "rất đẹp, duyệt"). NEVER CHANGE these words.
+# Hán t1 Đáp ứng nVsR0B0YQD · t2 Thường tại MBJYdaFDCm · t3 Quý nhân gOmr7RDSXO. Prompts s62_t{1,2,3}_HAN_COLLAR_L1928.txt (t3 now s62_t3_HAN_BOW_L1953.txt, sash only).
+# Same lock as G62 (HAN_COLLAR_L1915_FROZEN.txt: early NECKLINE sentence + collar clause unchanged); this file adds the t1–t3 BAND line, verbatim per rank.
+# Owner L1953: loose hair over the shoulders is FINE (never flag it); the band-merge question is closed (she does not care).
+t1 BANDS: THREE stacked WIDE gold-edged collar bands in the wide V (outer deep peach-blossom pink embroidered in gold, middle pale blush pink, innermost ivory white), never a third robe
+t2 BANDS: THREE stacked WIDE gold-edged collar bands in the wide V (outer deep peach-blossom pink embroidered in gold, middle pale blush pink, innermost ivory white), a fine gold thread line on the outer band, all tiny and flat, never bulky, never a third robe
+t3 BANDS: THREE stacked WIDE gold-edged collar bands in the wide V (outer deep peach-blossom pink embroidered in gold, middle pale blush pink, innermost ivory white), a fine gold thread line and tiny embroidered flower dots on the outer band, all tiny and flat, never bulky, never a third robe
