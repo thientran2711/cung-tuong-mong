@@ -30,24 +30,26 @@ const {chromium}=require('playwright');const path=require('path');
   kg82NpcRaw=raw0;
   /* 2 · the co-op friend never gets the NPC roll (she plays her own game) */
   reset();S.tonight=H;A.coop=true;kg82NpcRaw=()=>10;const bc=oSteal(A,"feign");cap=[];stealNight(A,H,"feign");ok("co-op friend: no NPC roll on her try",cap[0]===bc,{bc,cap});delete A.coop;kg82NpcRaw=raw0;
-  /* 3 · HER person-menu act (doAct steal / road): game → the same stealNight → roll */
+  /* 3–5 · ADAPTED to the night-final rule (owner OD 16/11 22:45Z: "Tranh sủng / Chặn ngự giá only in the flip choice … no cost"; night-final.js case 0):
+     her Tranh sủng / Chặn ngự giá are NO person-menu act and NO Hành sự deck card any more — they live ONLY in the card-flip choice at the end of tối
+     (jnf.js §2), where her game + rung + once-per-try are checked by steal-mg-nf.js. So here: the old entry points start no try and play no game. */
   const iH=rivals.indexOf(H);try{k61Meet(H,"gặp mặt",3)}catch(e){}
-  for(const k of ["steal","road"]){const mode=k==="road"?"road":"feign";
-   for(const [nm,res,want] of [["wins",{raw:8},1],["loses",{raw:2},0],["skips",{raw:9,skipped:true},0]]){reset();S.tonight=H;window.__smgFake=()=>res;/* base read in the act context runAct gives the roll (j9 ACTX: her lá số lotB on ACTDOM "Sủng", ±LVB): read outside it, a start whose lot is Sủng saw base ±5 off the roll (main too) */const n0h=__smgSt.length;const base=(()=>{const x0=ACTX;ACTX={a:S,t:H,pen:0,dom:ACTDOM[k]};try{return oSteal(S,mode)}finally{ACTX=x0}})();cap=[];
-    doAct(iH,k);await wait(30);const exp=want?stealRungUp(base,1):base;
-    ok(`HER ${k} (person menu), game ${nm}: the try's roll ${want?"one rung up":"plain"}`,cap.includes(exp)&&/* the game record carries the rung (not "base absent": an unrelated roll can equal base) */(__smgSt.slice(n0h).filter(r=>r.path==="her").slice(-1)[0]||{}).up===(want?1:0),{base,exp,cap});
+  const sn0=stealNight;let snHer=0;stealNight=function(a){if(a===S)snHer++;return sn0.apply(this,arguments)};
+  /* 3 · HER person menu (doAct steal / road): no try, no game, no token (was: game → stealNight → roll) */
+  for(const k of ["steal","road"]){
+   for(const [nm,res] of [["wins",{raw:8}],["loses",{raw:2}],["skips",{raw:9,skipped:true}]]){reset();S.tonight=H;window.__smgFake=()=>res;const n0h=__smgSt.length;snHer=0;const t0=S.tonight;
+    try{doAct(iH,k)}catch(e){}await wait(30);
+    ok(`HER ${k} (person menu), game ${nm}: no try and no game there (OD 16/11 22:45Z: only the flip choice)`,__smgSt.slice(n0h).filter(r=>r.path==="her").length===0&&snHer===0&&S.tonight===t0,{games:__smgSt.slice(n0h),snHer,tonight:S.tonight===t0});
     ok(`HER ${k} ${nm}: token gone after the try`,stealMgDebug().tok.length===0)}}
-  /* 4 · HER Hành sự deck cards (j2 deal + j75): game → runOpt roll with this try's odds; the card keeps its own odds after */
+  /* 4 · HER Hành sự deck: Tranh sủng / Chặn ngự giá are never dealt (was: dealt, game → runOpt roll) — 20 deals at buổi tối, rank 2 */
   for(const nm0 of ["Tranh sủng","Chặn ngự giá"]){
-   for(const [nm,res,want] of [["wins",{raw:7},1],["loses",{raw:3},0]]){reset();S.tonight=H;S.buoi=B4L;deal();const i=deck.findIndex(a=>a&&a.n===nm0);
-    if(i<0){ok(`deck card ${nm0} dealt`,false,{srv:isSrv(),kc:isKc(),rank:S.rank,deck:deck.map(a=>a&&a.n).slice(0,4)});continue}const a=deck[i];const ob=a.o;window.__smgFake=()=>res;cap=[];const pre={lock:a.lock,can:can(cardCost(a)),pay:canPay(a),b:[a.b,S.buoi],Q:Q.length,st:a.__steal};const m0=__smgSt.length;act(i);await wait(30);pre.games=__smgSt.slice(m0);
-    const exp0=want?stealRungUp(ob,1):ob;const exp=exp0>=100?100:cl(exp0+lotB(S,a.dom),5,95);
-    ok(`HER deck «${nm0}», game ${nm}: the try's roll ${want?"one rung up":"plain"}`,/* ag-all-2 land: the khắc the act spends ticks the NPC world (jagknow knSellTick etc. roll too) before her try: the try's roll is checked wherever it falls, like the person-menu case */cap.includes(exp)&&pre.games.filter(r=>r.path==="her").length===1&&(pre.games.find(r=>r.path==="her").up|0)===(want?1:0),{ob,exp,cap,done:a.done,pre});
-    ok(`HER deck «${nm0}» ${nm}: card odds restored, card used once`,a.o===ob&&a.done)}}
+   for(const nm of ["wins","loses"]){let seen=0;const seen4=[];for(let d=0;d<10;d++){reset();S.tonight=H;S.buoi=B4L;deal();if(deck.some(a=>a&&a.n===nm0))seen++;if(d===0)seen4.push(...deck.map(a=>a&&a.n).slice(0,4))}
+    ok(`deck card ${nm0} NOT dealt (${nm} run; OD 16/11 22:45Z: only the flip choice)`,seen===0,{seen,rank:S.rank,deck:seen4})}}
   window.__smgFake=null;
-  /* 5 · once per try: a second try the same night is closed (j75) and plays no game */
-  reset();S.tonight=H;window.__smgFake=()=>({raw:10});const n5=__smgSt.length;doAct(iH,"steal");await wait(30);doAct(iH,"steal");await wait(30);
-  ok("one try a night: the second tap plays no second game",__smgSt.slice(n5).filter(r=>r.path==="her").length===1,__smgSt.slice(n5));window.__smgFake=null;
+  /* 5 · once per try: from the person menu not even one game a night now (the once-per-try check of the flip choice is in steal-mg-nf.js) */
+  reset();S.tonight=H;window.__smgFake=()=>({raw:10});const n5=__smgSt.length;snHer=0;try{doAct(iH,"steal")}catch(e){}await wait(30);try{doAct(iH,"steal")}catch(e){}await wait(30);
+  ok("one try a night: the second tap plays no second game (person menu: none at all)",__smgSt.slice(n5).filter(r=>r.path==="her").length===0&&snHer===0,__smgSt.slice(n5));window.__smgFake=null;
+  stealNight=sn0;
   /* 6 · same code path: her rung and the NPC rung come from the one hook (oSteal wrapper → stealRungUp), equal start → equal result */
   ok("same rung function for her and NPCs",String(oSteal).includes("stealRungUp")&&typeof stealMgNpc==="function");
   /* 7 · already Nắm chắc: no game offered (nothing to win) */
