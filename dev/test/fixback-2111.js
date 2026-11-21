@@ -38,6 +38,9 @@ const M={
  15:{opt:{nofac:1},steps:[[sub('rel','fac')]]},16:{opt:{nofac:1},steps:[[sub('rel','fac')]]},
  22:{opt:{nopet:1},steps:[[sub('inv','thu')]]},30:{opt:{noq72:1},steps:[[sub('story','q72')]]},
  26:{steps:[[sub('story','story')]]},27:{steps:[[sub('story','story')],[sub('story','story','Sắc phong')]]},28:{steps:[[sub('story','story')]]},29:{steps:[[sub('story','story')]]},
+ 38:{keep:1,steps:[[sub('act'),click('button.tok.fig[data-p="0"]')]]},
+ 39:{keep:1,steps:[[sub('act'),async f=>{await f.evaluate(()=>{const K=[...document.querySelectorAll('img.kemo')];const k=K.find(e=>e.dataset.kemop&&e.dataset.kemop!=='me'&&e.getClientRects().length)||K.find(e=>e.dataset.kemop!=='me')||K[0];if(k)k.click()});await f.waitForTimeout(900)}]]},
+ 46:{keep:1,steps:[[sub('act'),click('button.tok.fig[data-p="0"]'),async f=>{await f.evaluate(()=>{try{die('Bệnh nặng')}catch(e){console.log(e.message)}});await f.waitForTimeout(2500);await f.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>{e.hidden=true;e.classList.remove('on')})});await f.waitForTimeout(800)}]]},
  42:{keep:1,steps:[[sub('act'),click('button[aria-label="Lịch tháng"]')]]},
 };
 /* the flat 16-button bottom bar (Chí tôn … Sổ ghi as top tabs) sometimes shows instead of the 8 group tabs: retake */
