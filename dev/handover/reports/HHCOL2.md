@@ -34,4 +34,4 @@ Insert (owner L1924, like image 3 kseQCFw16B): "the two fronts joined at the thr
 - t6 (9323): PHI BẠCH sentence cut + pose "a breeze lifts her long stole" → "…long sleeves" (stole = phi bạch).
 - t7 (9260), t8 (9468): the approved prompts had NO phi bạch → byte-identical copies.
 - Gates: keep PASS ×6. Store: exactly the same fails as each approved base (t3 M06/W01/W04, t4 M06/W02/S13, t5 M06/W02, t6 W02, t7 S14; t8 PASS) = approved-original waiver.
-- Sent VE6 t3–t6 (4 × 55). t7/t8 HELD (identical prompts = a pure redraw) → asked #27.
+- Sent VE6 t3–t6 (4 × 55). t7/t8 SKIPPED (#27 09:22Z: no phi bạch, stay as approved 8aizA8UIrU / KLpI8Vqkqp).
