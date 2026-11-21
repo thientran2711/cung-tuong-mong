@@ -8,6 +8,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);padding:16px
 h1{font-family:var(--f-head);font-weight:600;font-size:1.5rem;margin:0 0 4px}
 .sub{color:var(--muted);margin:0 0 10px;max-width:70ch;line-height:1.5}
 .status{color:var(--muted);font-size:.85rem;margin:0 0 12px}.sum{font-weight:600;margin:0 0 12px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.tab{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer}.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
 .card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
@@ -22,13 +23,17 @@ h1{font-family:var(--f-head);font-weight:600;font-size:1.5rem;margin:0 0 4px}
 <p class="sub">%%SUB%%</p>
 <p class="sum" id="sum"></p>
 <p class="status" id="status">Đang nối kho lưu tick…</p>
+<nav class="tabs" id="tabs"></nav>
 <main class="grid" id="grid"></main>
 <script>
 const FACES=%%FACES%%, VERB="%%VERB%%", LABEL="%%LABEL%%", MARK="%%MARK%%";
-let picks={},db=null,canWrite=false;const $=s=>document.querySelector(s);
+let cur="ALL";let picks={},db=null,canWrite=false;const $=s=>document.querySelector(s);
 function draw(){
-  const m=$("#grid");m.textContent="";let n=0;
-  for(const f of FACES){const on=!!picks[f.id];if(on)n++;
+  const m=$("#grid");m.textContent="";let n=FACES.filter(f=>picks[f.id]).length;
+  const GS=[...new Set(FACES.map(f=>f.group))];
+  const nav=$("#tabs");nav.textContent="";
+  for(const g of ["ALL",...GS]){const b=document.createElement("button");b.className="tab";b.setAttribute("aria-selected",String(g===cur));b.textContent=(g==="ALL"?"Tất cả":g)+" ("+FACES.filter(f=>g==="ALL"||f.group===g).length+")";b.onclick=()=>{cur=g;draw()};nav.append(b);}
+  for(const f of FACES.filter(f=>cur==="ALL"||f.group===cur)){const on=!!picks[f.id];
     const c=document.createElement("article");c.className="card"+(on?" on":"");
     const img=document.createElement("img");img.src=f.img;img.alt=f.id+" "+f.group;
     const meta=document.createElement("div");meta.className="meta";
