@@ -157,7 +157,7 @@ function accHostK(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)
  if(p.sk==="sv"){const s=servById(p.sid);return s?pServ(s):{src:"",ini:p.ini,col:p.col}}if(p.ref&&p.ref.id!=null){const v=RV(p.ref.id);if(v)return pv(v)}return{src:"",ini:p.ini,col:p.col}}return f0(p)}})();
 function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";const m=srvM();if(m&&k===palaceOf(m))k="home";
  if(S.srv.lau>0||k==="tgk"){S.place="tgk";S.visit=srvVisitOf("tgk");if(k!=="tgk")srvToast("Đang chịu phạt ở Tân Giả khố");render();return k==="tgk"}
- if(k==="home"){S.place="home";S.visit=srvVisitOf("home");render();return true}
+ if(k==="home"){if(S.place!=="home"&&m&&!window.__walkFree){const th=travel(S.place,palaceOf(m));if(!walkOk(th)&&!(typeof dayFit==="function"&&dayFit(th))){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast((typeof dayWhy==="function"&&dayWhy(th))||walkWhy(th));render();return false}spend(th)}S.place="home";S.visit=srvVisitOf("home");render();return true}
  const h=window.placeEnterHook(S,k);if(h&&!h.ok){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(`${placeOf(k).n}: ${h.why}`);render();return false}
  const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!walkOk(tc)&&!(typeof dayFit==="function"&&dayFit(tc))){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast((typeof dayWhy==="function"&&dayWhy(tc))||walkWhy(tc));render();return false}
  /* a walk longer than this buổi runs on into the next one (time-spill sweep 16/11: j76 carry); she is there when the buổi turns */
