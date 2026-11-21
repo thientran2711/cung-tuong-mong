@@ -208,3 +208,18 @@ Settings as L1608: gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (fa
 
 Sheets: dev/handover/review-sheets/thu_t4_t5_v8_DESIGN20/sheet_t4.png, sheet_t5.png
 Look: t4 – 3/4 left, hair up, one lotus, white-jade lotus lamp held, square inner neckline under open plum edges, sash on top with plum fabric above and below (reads as wrap), two blush apron panels, jade plaques on pearl strings at both sides, round capelet w/ net + cord clasp, sheer shawl. t5 – frontal, letter in both hands, sash on top with plum above/below, two apron panels, jade plaques both sides, shoulder layers; FAULTS: TWO hollyhocks in the hair (rule: exactly one), jade drop earrings (rule: bare earlobes).
+
+## RELEASE (CHECK1 job 13, #15 ~01:56Z) — thu t6 COMOIh + t7 v8g + t8 v10f (drafts)
+Settings as L1608: gpt-2-6, 9:16, 1k, seed 7172, quality low, 55 cr each (165 total; simulate with 2 refs = 55 exact). Refs: image 1 face nVsrRMPYQD, image 2 royal-yellow swatch TdwDfOyVNR (all three prompts name "image 2" as the colour swatch). All three CHECK1 PASS at 3f6b85c (ancestor, files unchanged), check_store PASS tp6/tp7/tp8.
+
+| pic | file | creation | link |
+|---|---|---|---|
+| t6 Quý phi | s62_t6_THU_COMOIh | VX7AgiYMMU | https://www.magnific.com/app/creation/VX7AgiYMMU |
+| t7 Hoàng quý phi | s62_t7_THU_COMOI_v8g | rgXQDfdxtc | https://www.magnific.com/app/creation/rgXQDfdxtc |
+| t8 Hoàng hậu | s62_t8_THU_COMOI_v10f | xSBFpEOjfW | https://www.magnific.com/app/creation/xSBFpEOjfW |
+
+Sheets: dev/handover/review-sheets/thu_t6_t7_t8_release/sheet_t6.png, sheet_t7.png, sheet_t8.png (label + model + cr + Tổng 165).
+Look:
+- t6: slight left turn, one big chrysanthemum, tú cầu ball held, yellow sash on top with plum robe fabric above and below, one-tier scalloped collar with gold tassels, two apron panels, jade pendants both sides. FAULT: jade drop earrings (bare earlobes).
+- t7: frontal, jade flute held low, small phoenixes, small round cape with pearl drops, sleeves to the floor, crown with phoenix. FAULTS: yellow sash tied with a BOW (rule: no bow); drop earrings.
+- t8: frontal, phoenix hairpin held, one large phoenix on the skirt, one-tier collar with longest fringe, nine-phoenix crown, sleeves to the floor, sash on top. No earrings; no faults seen.
