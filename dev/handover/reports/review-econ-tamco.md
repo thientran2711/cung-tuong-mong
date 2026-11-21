@@ -139,3 +139,30 @@ Fix:
 | shots Fold + iPad | Tốn: không / Tâm cơ -5 / Bạc -50; Được: the price in red; no %, no overflow |
 Laws 1/2/3/4/7/9: OK on the code. F4 is a co-op «shown = charged / no negative bạc» question.
 Fixer: ECON TAMCO #4 session_01964izEeakvu1zSofrTWNJJ. Build on review/econ-tamco-rv 7752aa5b (or re-merge LIVE). Next round: econ-tamco-coop ×3 + coop-e2e + econ-tamco + quickcheck.
+
+## RE-CHECK #4 21/11 — review/econ-tamco @ 9f6f99c193dcca7b9cf2855aea611e2400c06b01 (ECON TAMCO #4, F4) — REVIEW econ-tamco #2 session_01964izDDCznjEvfsCsb8aaR, FOREMAN D #14
+depth 5 · START_CTX ~3 % (get_session reads 0; estimate) · now ~8 %.
+PRIORITY #1 CHECK ('econLack|econRoadPay|ECON_PRFZ|ptLand'): OD 0 | ledger 0 | main: j9 runAct (no can-pay of its own), jptime ptLand | review/econ-tamco only | claims ECON TAMCO #4 EeakvU1z.
+The reviewer final-merged LIVE 922b36b4 (index/sw conflicts only, rebuilt; assemble.py = main's list + jtamco.js after jecon.js, assemble rebuild = no change) → **review/econ-tamco-rv 079a147bac49a8a8244a50b46f9b1e768ff19024** (pushed, fast-forward of 7752aa5b).
+Revert audit on a deepened fetch (merge-base 666def0c): `git diff 922b36b4..079a147bac49a8a8244a50b46f9b1e768ff19024` = 15 files, 477+/26−; the 12 removed non-build lines are all this branch's own edits (assemble list, j17 actLine, j29, j8, jaudit ×2, jcoopthinf, jecon ×2, jwhy spy, KIT_REQUESTS row). No LIVE hunk reverted.
+
+### VERDICT: PASS — F4 FIXED at the root (whole group).
+- jtamco `econLack` checks, before EVERY charge frozen from her card, that she can pay it NOW: Tâm cơ road tamco ≥ tc; bạc ≥ price (+ hire on the hire road; the price counted on every road, pay-on-success too, as ACT.ok needs). Both host-context paths: the runAct wrapper (her solo act and the co-op guest's act run on the host in her context) and ptLand (a sent deed landing later). Fail → «Thiếu bạc/Tâm cơ (cần N): <act> không thành, chưa tốn gì.», nothing charged, deed back undone. NPC roads: econRoadNpc picks a road only if bạc ≥ pr+hire+keep / tamco ≥ tc+min and pays in the same tick, so no NPC can go below 0.
+- Numbers come from the card cost c (BAL via econRoadCost) — law 4 OK. Law 1: her, the guest and NPCs all stop at the same can-pay line. Laws 2/3 unchanged.
+- Solo 3e: unpayable frozen hire / plain / tc → «Thiếu …», dBac 0, dTc 0 (seen in the log).
+
+### Gates on 079a147bac49a8a8244a50b46f9b1e768ff19024, one at a time
+| gate | result |
+|---|---|
+| econ-tamco-coop (2 players, host Fold + guest iPad) | PASS 18 / 18 / 18 — 3 in a row; «F4: no step leaves bạc or Tâm cơ below 0 (her on the host, her phone, the host)» ok each run |
+| econ-tamco-coop seats swapped (host iPad + guest Fold) | PASS 19 |
+| econ-tamco solo (Fold 755x1000@2 + iPad 1180x820@2) | PASS ×3 |
+| econ-tamco-scan Fold / iPad | PASS 11 her + 11 NPC road schemes (N 40), both |
+| kit-ton-row | PASS 14 |
+| roadhp-unit | PASS |
+| coop-e2e | 92/92 |
+| quickcheck | PASS 175 s, core gates PASS, time-spill guard PASS, old save ok, perf new/live render 191/178, tab 382/365 |
+| shots Fold + iPad (looked at) | road card in view; Tốn không / Tâm cơ -5 / Bạc -50; price red in Được; odds words, no %, no overflow. Fold «Bạc / -94» wrap = open non-blocking KIT REQUEST |
+Laws 1/2/3/4/7/9/11/12: OK. N1 (every road «Liều» at low odds) stands, non-blocking. Shots scratch only (/home/user/wt/rv-shots), not in git/CDN.
+
+**LAND READY review/econ-tamco-rv 079a147bac49a8a8244a50b46f9b1e768ff19024 — coop-e2e PASS + econ-tamco-coop both seats** (for MAIN CHÍNH 89 session_01Rc5AsN8weZNZcjxNiCsivs; on LIVE 922b36b4; if LIVE moved, the land merge = index/sw rebuild only).
