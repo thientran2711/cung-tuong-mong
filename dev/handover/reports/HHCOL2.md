@@ -24,3 +24,14 @@ Insert (owner L1924, like image 3 kseQCFw16B): "the two fronts joined at the thr
 - Looked at hu2BC0ivqL: a red knot + jade disc + long red tassel hang from the held jade flute. Ref kseQCFw16B (collar crop) shows only a throat drop, no flute/tassel → cause = PROMPT WORDS: Pose "a jade flute with gold-filigree bands and gem tassels held low" (+ HELD ITEM COLOUR 'any … tassel on it … different colour' → red). Same words in L1901/L1903 t7. G57 gate regex misses "gem tassels" (only jade discs/tassels/pendant).
 - Fix (words only, no gen): dev/art/thu_comoi/s62_t7_THU_vankien2_L1924b.txt (9998): "…bands and gem tassels held low" → "…bands, no tassel or pendant, held low"; caption L1924b, "large" trimmed. store PASS, keep PASS.
 - Wider: "gem tassels" is in ~137 t7 prompt files (builder pose for the jade flute, e.g. rank8-t78/*_t7.txt) → foreman call (store/builder + G57 regex).
+
+## OWNER L1952 (via #27 09:20Z)
+(1) Winter Đáp ứng t1 L1924 **KLpQriTkqp KEPT** → LOCKED: rule **G64**, frozen copy dev/art/winter1/WINTER_DAPUNG_t1_L1952_FROZEN.txt (= s62_t1_dong_L1924.txt).
+(2) Winter t3–t8 = her APPROVED sheet dong8_duyet_L1803_clean.png = the coLong WINTER1 set (20/11 18:05Z; same pictures): t3 jUoam4eLD0, t4 cpSPN2P0eP (s62_t4_dong_noangle), t5 Lw8fhqlswO, t6 1ldmIAjr4r, t7 8aizA8UIrU, t8 KLpI8Vqkqp. New files dev/art/winter1/s62_t{3..8}_dong_L1952.txt (+.keep), ONLY phi bạch removed, nothing added (no thick words):
+- t3 (9069): PHI BẠCH sentence + outfit item "a sheer silk shawl" cut.
+- t4 (9373, base noangle): PHI BẠCH sentence cut.
+- t5 (8247): PHI BẠCH sentence + ", a sheer silk shawl" cut.
+- t6 (9323): PHI BẠCH sentence cut + pose "a breeze lifts her long stole" → "…long sleeves" (stole = phi bạch).
+- t7 (9260), t8 (9468): the approved prompts had NO phi bạch → byte-identical copies.
+- Gates: keep PASS ×6. Store: exactly the same fails as each approved base (t3 M06/W01/W04, t4 M06/W02/S13, t5 M06/W02, t6 W02, t7 S14; t8 PASS) = approved-original waiver.
+- Sent VE6 t3–t6 (4 × 55). t7/t8 HELD (identical prompts = a pure redraw) → asked #27.
