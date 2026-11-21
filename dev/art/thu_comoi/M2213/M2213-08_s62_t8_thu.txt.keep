@@ -1,0 +1,40 @@
+base: dev/handover/prompts_L2095/M2211-08_s62_t8_thu.txt
+allow: Every hairpin points upward or backward  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: never sticking out sideways  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: Bare clean forehead  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: no forehead mark  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: bare clean forehead with no forehead mark and no flower mark  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: The item is in a contrasting colour  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: not the robe colour  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: and the hand really grips it  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the whole face fully visible with the head up toward the viewer  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: no cup  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: The fabric is exactly the cloth written in her outfit  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: real cloth with natural weight and soft natural folds  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: never stiff or board-like  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: Light, soft, thin flowing silk  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the long sleeves, skirt and sash are supple and airy  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: drifting softly as in a gentle breeze  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: with soft natural folds  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: never stiff, flat or board-like  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: The silk has real weight  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the wide sleeves and robe hang and fold naturally under their own weight  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: with natural creases  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: The silk is light and supple  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the wide sleeves and robe fold softly and naturally  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: eyes open  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: lips closed  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: SLIM, never covered by the sleeves  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: floor-length robe  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: The royal yellow in the robe is like #EFBD69  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: warm honey-gold  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: Nothing around the neck  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: no stand collar, no necklace  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the head inclined slightly to one side  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the MAIN colour light olive and the SECONDARY colour lilac  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: the secondary clearly visible in large areas  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: inner robe or skirt, wide borders, sash, cuffs, linings  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: inner robe, wide borders and a few panels  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: HEAD AND BODY  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: her head turns together with her shoulders and body in the same direction with natural anatomy  # owner L2213 COMMON_LIST fix via ROOT-B5
+allow: never a frontal head on a turned body  # owner L2213 COMMON_LIST fix via ROOT-B5

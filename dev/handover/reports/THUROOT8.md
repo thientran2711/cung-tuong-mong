@@ -1,0 +1,56 @@
+# THUROOT8 — art prompt worker (child of ROOT-B5 session_01D3E3NX2vVbCgi2Gfn5HX8h; reports to ROOT-B6 session_01D3E3NXtm8S6rQovWp6m1iB)
+## STATUS · depth 5 · START_CTX ~4 % (get_session read 0; own estimate) · now ~13 % · 0 Magnific credits (A53)
+
+## M2213-03..08 + M2213-T7LOW (owner L2212 + L2213) — 0 cr, keep_check PASS ×7, --all PASS (1195), ANGLE/Pose/GRACE byte-identical (asserted)
+Maker dev/art/thu_comoi/M2213/make_M2213.py (edit pairs, count==1 asserts, .keep per file). Paste files dev/handover/prompts_L2095/M2213-*.txt (A55), CAPTION = own code, MA_HINH +7 (append only), M2213_ATTACH.md (ONE image: refs/mau_net_ve.jpg; no image 2/3 words in any file).
+Bases: t3 = LOCKED M2203-03 (= M2206-03 word for word) · t4..t8 = M2211-04..08 @1eb0691 (THUROOT7 had already put the L2210 ladder + L2212 'net/fringe only inside the one vân kiên sentence' into them) · T7LOW = M2213-07.
+check_store: FAILS on every M2211/M2213 thu file for OLD reasons (LEN > 10 000, S37 floor-sleeve, M07 master, G71) — paste-only files; same as before, not caused by this job.
+
+Characters: t3 11601→10728 · t4 12232→11279 · t5 12217→11281 · t6 14371→13075 · t7 14046→12955 · t8 14031→12774 · T7LOW 12115.
+
+### (1) L2212 vân kiên jewel words (t4–t8 already done by THUROOT7 in M2211, kept) — removed duplicates that were cut there
+t4 ', and the pearl net on her vân kiên' (thread line) · t5 'the lower edge in soft rounded scallops edged with silver thread, the small gold tassels hanging lightly from the scallops and the short pearl fringe below them, all softly draped down on the shoulders;' + ', plus the pearl net and small gold tassels on her vân kiên' · t7 ', like the Phi's soft pearl-net vân kiên' + ', pearl and jade trims along the vân kiên edges' · t8 ', like the Phi's soft pearl-net vân kiên'. Checked again: no net/fringe/pearl-rim word outside each rank's vân kiên sentence (only t5 sash 'a row of small pearls along both edges' = sash, not vân kiên).
+### (2) t3 Quý nhân (only these two + COMMON_LIST items)
+- in her vân kiên sentence: 'soft and unlined, it DRAPES' → 'soft and unlined, edged along its scalloped rim with one row of small pearls, it DRAPES' (no net, no drops — and NOT the M2211-03 '(no net, no drops)' bracket: negative net words dropped).
+- clasp 'of small plain gold' → 'of gold with one tiny pearl' (M2211-03 had wrongly kept 'small plain gold with one tiny pearl').
+
+### (3) COMMON_LIST §3 fixes (owner L2213, t3..t8 only; t1/t2 untouched)
+**3a duplicates — kept one / deleted:**
+| # | files | KEPT | DELETED |
+|---|---|---|---|
+| 1 hairpin | t3–t8 | 'Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down…' | 'Every hairpin points upward or backward, never sticking out sideways.' |
+| 2 forehead | t3–t8 | 'NOTHING on the forehead (no hoa điền, …)' + 'No moles.' | 'Bare clean forehead, no forehead mark,' · Luminous 'bare clean forehead with no forehead mark and no flower mark,' |
+| 3 held item | t3–t8 | 'EXACTLY ONE held item, the hand really gripping it; no cup, …' + HELD ITEM COLOUR rule | 'The item is in a contrasting colour, not the robe colour, and the hand really grips it;' · Luminous ', no cup' |
+| 4 face | t3–t8 | 'The whole face clearly visible, eyes fully open…' + 'Her head up toward the viewer, never looking down, nothing covering the face.' | 'the whole face fully visible with the head up toward the viewer, eyes open, lips closed,' · Luminous 'eyes open,' + ', nothing covering the face' |
+| 5 fabric | t3–t8 | 'The FABRIC is thin, light, flowing silk and gauze … (thướt tha) …' + 'No sheer floating scarf … unless her outfit names one.' | 'The fabric is exactly the cloth written in her outfit, real cloth with natural weight and soft natural folds, never stiff or board-like;' · 'Light, soft, thin flowing silk: …' · t3–t5 'The silk has real weight: …' / t6–t8 'The silk is light and supple: …' (t7/t8 keep their L2207 movement words in the outfit) |
+| 6 hair loose | t3 | 'HAIR (rank law): her hair stays LOOSE…' | Hair line 'LOOSE and flowing (at most the top half gathered up, most of her hair hanging down her back),' |
+| 7 hair up | t4–t6 | 'HAIR (rank law): ALL her hair is swept UP…' | Hair line 'ALL her hair swept UP into a high bun / chignon,' |
+| 8 hair flower | t4, t5 | HAIR FLOWER SIZE line | Hair line 'ONE fresh soft pale lilac double kerria pompon (the bloom ONLY, NO leaves) and' / 'ONE fresh deep rose-pink double hollyhock (bloom only, no leaves) and' |
+| 9 head+body | t7, t8 | ANGLE '…her head turns together with her shoulders and body…' (A54) | 'HEAD AND BODY: …' sentence (t3–t6 keep it: their ANGLE has no such words) |
+| 10 t5 vân kiên | t5 | (already fixed in M2211 by L2212, see (1)) | — |
+| 11 t5 shawl | t5 | PHI BẠCH sentence | 'a sheer silk shawl' ('SLIM;' kept) |
+| 12 t6 yellow | t6 | outfit: yellow panel / borders / linings / sash / neckline edge; 'about HALF of the Hoàng quý phi's'; 'light olive clearly dominant, lilac secondary' (1st); 'the body motifs never over the borders or bands' (1st) | COLOUR RULE '(…: a wide yellow panel at the skirt front …, only a narrow yellow edge on the neckline band)' list + 2nd/3rd 'about HALF as much (yellow) as the Hoàng quý phi's' + 2nd 'light olive clearly dominant, lilac secondary' + 2nd ', the motifs never over the borders or bands' |
+| 13 t6 swags | t6 | (already one, L2212) | — |
+| 14 floor | t7, t8 | Luminous 'floor-length robe, the hem just touching the floor all round…' (S19) | outfit 'floor-length' ('SLIM, floor-length robe' → 'SLIM robe') |
+| 15 #EFBD69 | t7, t8 | t7 COLOUR RULE '(#EFBD69)' · t8 THREE-COLOUR '(honey-gold like #EFBD69)' | 'The royal yellow in the robe is like #EFBD69, warm honey-gold.' · t7 THREE-COLOUR '(honey-gold like #EFBD69)' + 'exactly #EFBD69' |
+| 16 neck | t8 | neckline '…NEVER a high stand collar…neck bare' + 'No necklace.' | 'Nothing around the neck: no stand collar,' (t7 had no such sentence) |
+
+**3b conflicts — kept side / deleted side / why:**
+| # | file | KEPT | DELETED / CHANGED | decided by |
+|---|---|---|---|---|
+| 1 robe length | t3 | 'floor-length robe, only slipper toe tips peeking under the hem' | 'an ankle-length …' → 'a light olive silk court robe' | S19/G23 approved sentence (same in t1/t2), owner FG:872 't3 robe too short vs t1/t2'; G7 'reaches the ankles' is a minimum, still met |
+| 2 apron | t3 | APRON PANEL (G15) | 'from which hangs' → '; from the girdle hangs' (apron hangs from the girdle, not from the tassel) | G15 owner L559 |
+| 3 HH main colour | t8 | COLOUR RULE 'royal golden yellow is the DOMINANT colour…' (robe 'golden yellow silk mixed with light olive', yellow vân kiên) | THREE-COLOUR 'the MAIN colour light olive and the SECONDARY colour lilac, the secondary clearly visible in large areas (…)' → 'the royal golden yellow (…) as the MAIN colour, light olive second and lilac in the inner robe and linings' | G12 owner L486: t8 = HH yellow set (yellow dominant); every M2136…M2211 t8 had DOMINANT. HELD ITEM line kept (her own two colours; adding yellow would clash with the gold hairpin Pose item, A54). ⚠ ROOT-B6: NEWACCT#9 L1429 once dropped DOMINANT in a v6 test — tell me if the owner wants olive-main instead and I flip it |
+| 4 HH inner robe | t8 | 'with lilac in the inner robe and linings' | '(inner robe, wide borders and a few panels)' → '(wide borders and a few panels)' | TWO/THREE-COLOUR rank rule: secondary lilac = inner robe |
+| 5 Tần = Phi | t4 | ladder 'shoulder-piece LENGTH rises by rank' + t5 'longer than the Tần's' | ', about as long as the Phi's' | G74 owner L2145 ranks differ by LENGTH |
+| 6 neckline standard | t4, t5 | — NO change | — | not a conflict inside a file; t4 Tần locked (A57); neck tests (T7LOW/M2209) pending — tell me if t4/t5 should get the 'LOW open square neckline…' words |
+| 7 sleeve wording | t4–t6 | G5 to the ANKLES | added ', never shorter, never touching the floor' (same stop words as t7/t8) | G5 + t7/t8 wording |
+| 8 legs vs walking | t7 | both — NO change | — | Pose untouchable (A54); legs sentence must stay unchanged (G23(3)); 'weight on one leg, other knee softly bent' fits a slow walk |
+| 9 head inclined | t8 | GRACE 'her chin lifted just a little' (A54) | Expression ', the head inclined slightly to one side' | A54 (t3–t7 kept: no GRACE/ANGLE clash) |
+| 10 'admired' vs eyes | t8 | both — NO change | — | Pose untouchable (A54); 'Both eyes look straight at the viewer' stays |
+| 11 'never covered by the sleeves' | t8 | sleeves to the ankles | ', never covered by the sleeves' | unclear words, nothing to protect |
+
+Noticed, NOT changed (not on the list): the kept FABRIC sentence says 'the small embroidered motifs are stitched in fine gold thread' while t3–t5 EMBROIDERY THREAD says 'NOT gold thread' — say if it should go; t3 still has 'a sheer silk shawl;' + PHI BẠCH (t3 not listed for it); t6 hex #EFBD69 twice (outfit + COLOUR RULE).
+
+### M2213-T7LOW = M2213-07 with the same neck cuts as M2209-01 (L2209)
+Collar sentence → 'a low neckline;' · 'below the collar' · ', never inside the neckline, never framed' · 'never rising up the neck,' · '(only a narrow yellow edge on the neckline band)' · 'the neckline band and' · INNER-robe sentence. Clasp tail 'never hiding the square collar' still there (open question from THUROOT7).
