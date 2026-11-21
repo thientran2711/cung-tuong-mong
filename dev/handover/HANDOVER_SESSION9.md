@@ -1911,3 +1911,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:11Z) Keeper ETAs: badge KIT READY ~08:20Z (review/kit-badge); kit-mark-fix fix ~08:50Z (+ bottom-fade cue); K-FOCUS-1(+1b) ~2.5–3 h, API-stable ping to duodo-focus ~45 min in; then K-OPT-KEM; kit-info-tap extra subGo taps next touch.
 - (08:16Z) 89: LANDED coop-guest-agent 1af8db13, tinh-net-word fdabfb44 (#4). FAIL cold-faction 5168e396 (j42.js real conflict) → ORDER E re-merge. Chain on landq10 from mg11.
 - (08:17Z) send_message to FOREMAN E #26 session_01DgYSWmdwFouxeXFnpi6Nbb → not found (other account) → ORDER via FOREMAN_E_STATUS only (E reads it on its wake, min 47).
+- (08:19Z) KIT READY K-BADGE-HAOHUU 36b6071ed (review/kit-badge) → rv MSxp (small; checks OD 06:30Z + ⏸ size); hao-huu-2 told to merge it + drop .kctmf-b + FAIL A fix → SSK to rv JeK8. Keeper now on kit-mark-fix fix.
