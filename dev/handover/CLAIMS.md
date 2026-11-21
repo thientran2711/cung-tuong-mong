@@ -798,3 +798,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | hao-huu-2 fixes (OPUS BIG; rv FAIL f654456a 6 items; successor of KMNB) | review/hao-huu; briefs/main90-hao-huu-2.md | MAIN CHÍNH 90 | session_01Rc5AsJ4dpczX6uEaSGaTBe | RUNNING | 21/11 06:52Z |
 | E41r BIG review self-word 2030714f (opus; briefs/E41r-review-self-word.md) | review/self-word-r1; reports/self-word-review.md | FOREMAN E #25 | session_01DgYSWkg2FBy9C5gQKL9WWq | RUNNING | 21/11 07:05Z |
 | REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | PASS 688a5667 (reports/map-places.md REVIEW r2; GAP_LIST OD-CO1 filed) | 21/11 |
+| FOREMAN E #26 (opus; child of E #25, depth 7) | handover FOREMAN_E_STATUS | FOREMAN E #25 | session_PENDING_E26 | RUNNING | 21/11 07:04Z |
