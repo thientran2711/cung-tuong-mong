@@ -30,3 +30,6 @@ Khuyến nghị: tông (đậm/nhạt của áo) quyết định độ sáng; s�
 - Rule F20 đã add (rule.py, L2025). Nháp: flower_rule_draft_L2013.md.
 - PNG 12 người mùa thu: dev/handover/review-sheets/flower_sheet_L2025/flower_sheet_thu_L2025.png. Trang màu republish v2: https://claude.ai/artifact/9CPDiiiEqgAwaq2tZESbjx
 - Còn: 3 bộ (m02 xuân, s32 hạ, s52 hạ) hoa còn gần màu áo (dE<10) — cần mắt owner; ~74/360 hoa tóc rơi về kem ngà (áo xanh lá/vàng + phụ trắng).
+
+## L2025 fix (AUDIT1: hair darker than embroidery in 12 cells)
+Thêm enforce(): hoa tóc luôn sáng hơn hoa thêu (OKLCH L, chênh >=0.02) cho cả 360 bộ và cả dãy t1–t6; kiểm lại: 0 vi phạm. Trang màu republish.

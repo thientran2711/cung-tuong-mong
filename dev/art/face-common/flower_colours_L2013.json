@@ -38,7 +38,7 @@
     "t3": "#FDE0CE",
     "t4": "#FBDCC8",
     "t5": "#F7D8C4",
-    "t6": "#F3D4C0"
+    "t6": "#F6D7C3"
    }
   },
   "ha": {
@@ -76,7 +76,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E7D6F4"
    }
   },
   "dong": {
@@ -215,7 +215,7 @@
     "t3": "#F1DEFF",
     "t4": "#EDDAFD",
     "t5": "#EAD5FB",
-    "t6": "#E7D0F9"
+    "t6": "#EBD4FD"
    }
   },
   "thu": {
@@ -253,7 +253,7 @@
     "t3": "#FEDDDF",
     "t4": "#FED8DA",
     "t5": "#FCD3D5",
-    "t6": "#FACED1"
+    "t6": "#FDD1D4"
    }
   }
  },
@@ -313,7 +313,7 @@
     "t3": "#FED9F9",
     "t4": "#FED2F8",
     "t5": "#FCCDF5",
-    "t6": "#FAC8F3"
+    "t6": "#FBC9F4"
    }
   },
   "dong": {
@@ -346,15 +346,15 @@
    "sec_vi": "xanh lá non dịu",
    "embroidery_hex": "#FDD6DC",
    "embroidery_vi": "hồng đỏ nhạt phấn",
-   "hair_hex": "#FDDAE0",
+   "hair_hex": "#FFE3E7",
    "hair_vi": "hồng đỏ nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FDE8EC",
-    "t2": "#FEE2E7",
-    "t3": "#FEDCE2",
-    "t4": "#FCD8DE",
-    "t5": "#FAD3DA",
-    "t6": "#F5CFD6"
+    "t1": "#FDF2F3",
+    "t2": "#FEECEE",
+    "t3": "#FEE6EA",
+    "t4": "#FEE1E5",
+    "t5": "#FEDFE4",
+    "t6": "#FDE0E3"
    }
   },
   "ha": {
@@ -371,9 +371,9 @@
     "t1": "#EEDDFB",
     "t2": "#EAD9F7",
     "t3": "#E6D5F3",
-    "t4": "#E2D2EF",
-    "t5": "#DECEEB",
-    "t6": "#DACAE7"
+    "t4": "#E3D3F0",
+    "t5": "#E3D3F0",
+    "t6": "#E3D3F0"
    }
   },
   "thu": {
@@ -392,7 +392,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E7D6F4"
    }
   },
   "dong": {
@@ -461,7 +461,7 @@
    "main_vi": "ô liu dịu",
    "sec_hex": "#CAEFDD",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -469,9 +469,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -502,7 +502,7 @@
    "main_vi": "xanh lá non tươi đậm",
    "sec_hex": "#F6F3FE",
    "sec_vi": "trắng hồng",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -510,9 +510,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "ha": {
@@ -569,7 +569,7 @@
     "t3": "#FEDDE3",
     "t4": "#FED8DF",
     "t5": "#FCD3DB",
-    "t6": "#FACED6"
+    "t6": "#FDD1D9"
    }
   }
  },
@@ -610,7 +610,7 @@
     "t3": "#F1DEFF",
     "t4": "#EDDAFD",
     "t5": "#EAD5FB",
-    "t6": "#E7D0F9"
+    "t6": "#EAD3FC"
    }
   },
   "thu": {
@@ -708,7 +708,7 @@
     "t3": "#FEDBEA",
     "t4": "#FCD7E6",
     "t5": "#FAD2E3",
-    "t6": "#F8CDDF"
+    "t6": "#FCD1E3"
    }
   },
   "dong": {
@@ -858,15 +858,15 @@
    "sec_vi": "xanh lá non dịu",
    "embroidery_hex": "#FEE5E1",
    "embroidery_vi": "đỏ san hô nhạt phấn",
-   "hair_hex": "#FEDBD6",
-   "hair_vi": "đỏ san hô nhạt phấn",
+   "hair_hex": "#FDF2F1",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FEE9E6",
-    "t2": "#FFE3DF",
-    "t3": "#FFDDD9",
-    "t4": "#FDD9D3",
-    "t5": "#FBD4CF",
-    "t6": "#F7D0CB"
+    "t1": "#FCF3F2",
+    "t2": "#FCF3F2",
+    "t3": "#FDF2F1",
+    "t4": "#FBF0EF",
+    "t5": "#FBEFEE",
+    "t6": "#FCEEED"
    }
   },
   "dong": {
@@ -995,8 +995,8 @@
    "main_vi": "cam đào nhạt",
    "sec_hex": "#E0F1FF",
    "sec_vi": "xanh sương",
-   "embroidery_hex": "#9FBFD8",
-   "embroidery_vi": "xanh lam sáng dịu phấn",
+   "embroidery_hex": "#93B2CB",
+   "embroidery_vi": "xanh lam vừa phấn",
    "hair_hex": "#C8AEDD",
    "hair_vi": "tím hoa cà sáng dịu dịu",
    "hair_by_tier": {
@@ -1005,7 +1005,7 @@
     "t3": "#C5B5D2",
     "t4": "#C1B1CE",
     "t5": "#BDADCA",
-    "t6": "#B9A9C6"
+    "t6": "#BDADCA"
    }
   },
   "thu": {
@@ -1016,15 +1016,15 @@
    "sec_vi": "bạc hà nhạt",
    "embroidery_hex": "#FAE2FD",
    "embroidery_vi": "hồng tím nhạt phấn",
-   "hair_hex": "#F7D9FB",
-   "hair_vi": "hồng tím nhạt dịu",
+   "hair_hex": "#FDF0FF",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FCE6FF",
-    "t2": "#F9E1FC",
-    "t3": "#F5DDF8",
-    "t4": "#F1DAF4",
-    "t5": "#EDD6F0",
-    "t6": "#E9D2EC"
+    "t1": "#FCF1FD",
+    "t2": "#FCF1FE",
+    "t3": "#FDF0FF",
+    "t4": "#FBEEFD",
+    "t5": "#FBECFD",
+    "t6": "#FCECFE"
    }
   },
   "dong": {
@@ -1076,15 +1076,15 @@
    "sec_vi": "xanh ngọc sẫm",
    "embroidery_hex": "#FEE3EE",
    "embroidery_vi": "hồng nhạt phấn",
-   "hair_hex": "#FEE8F0",
-   "hair_vi": "hồng nhạt phấn",
+   "hair_hex": "#FDF1F6",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FFF1F6",
-    "t2": "#FEF1F5",
-    "t3": "#FDEBF2",
-    "t4": "#FDE6EE",
-    "t5": "#FAE1EA",
-    "t6": "#F7DDE6"
+    "t1": "#FCF2F6",
+    "t2": "#FCF2F6",
+    "t3": "#FDF2F6",
+    "t4": "#FBEFF4",
+    "t5": "#FBEEF3",
+    "t6": "#FCEDF3"
    }
   },
   "thu": {
@@ -1302,7 +1302,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E7D6F4"
    }
   },
   "ha": {
@@ -1359,7 +1359,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EAD3FD"
    }
   }
  },
@@ -1381,7 +1381,7 @@
     "t3": "#FEF3E6",
     "t4": "#FDF2E3",
     "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t6": "#F9ECDB"
    }
   },
   "ha": {
@@ -1400,7 +1400,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EAD3FE"
    }
   },
   "thu": {
@@ -1430,15 +1430,15 @@
    "sec_vi": "tím khói nhạt",
    "embroidery_hex": "#EBE3FF",
    "embroidery_vi": "tím hoa cà nhạt phấn",
-   "hair_hex": "#E8DFFE",
-   "hair_vi": "tím hoa cà nhạt phấn",
+   "hair_hex": "#F3EFFD",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#F1EBFE",
-    "t2": "#EDE6FF",
-    "t3": "#EAE1FF",
-    "t4": "#E6DDFD",
-    "t5": "#E2D9F9",
-    "t6": "#DED5F5"
+    "t1": "#F6F3FE",
+    "t2": "#F6F3FF",
+    "t3": "#F5F1FF",
+    "t4": "#F1EDFB",
+    "t5": "#F0ECFB",
+    "t6": "#F0ECFC"
    }
   }
  },
@@ -1479,7 +1479,7 @@
     "t3": "#F1DEFE",
     "t4": "#EDDAFC",
     "t5": "#EAD5FA",
-    "t6": "#E7D0F8"
+    "t6": "#EBD4FC"
    }
   },
   "thu": {
@@ -1618,7 +1618,7 @@
     "t3": "#FFDBE5",
     "t4": "#FDD7E1",
     "t5": "#F8D3DD",
-    "t6": "#F4CFD9"
+    "t6": "#F5D0DA"
    }
   },
   "ha": {
@@ -1627,7 +1627,7 @@
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#FFE7EE",
    "sec_vi": "hồng phấn nhạt",
-   "embroidery_hex": "#F7BFD1",
+   "embroidery_hex": "#EAB2C4",
    "embroidery_vi": "hồng sáng dịu dịu",
    "hair_hex": "#F8BED1",
    "hair_vi": "hồng sáng dịu dịu",
@@ -1637,7 +1637,7 @@
     "t3": "#ECC7D3",
     "t4": "#E8C3CF",
     "t5": "#E4C0CB",
-    "t6": "#E0BCC7"
+    "t6": "#E3BFCA"
    }
   },
   "thu": {
@@ -1648,15 +1648,15 @@
    "sec_vi": "ngọc bích dịu",
    "embroidery_hex": "#FCD8CC",
    "embroidery_vi": "cam đào nhạt phấn",
-   "hair_hex": "#FFDCCF",
+   "hair_hex": "#FFE5DC",
    "hair_vi": "cam đào nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FFE9E1",
-    "t2": "#FDE5DC",
-    "t3": "#FEDFD4",
-    "t4": "#FEDACC",
-    "t5": "#FAD6C9",
-    "t6": "#F6D2C5"
+    "t1": "#FDF2EF",
+    "t2": "#FEEDE8",
+    "t3": "#FEE8E1",
+    "t4": "#FEE3D9",
+    "t5": "#FEE0D6",
+    "t6": "#FFE0D5"
    }
   },
   "dong": {
@@ -1675,7 +1675,7 @@
     "t3": "#EAE1FF",
     "t4": "#E6DDFD",
     "t5": "#E2D9F9",
-    "t6": "#DED5F5"
+    "t6": "#E1D8F8"
    }
   }
  },
@@ -1744,7 +1744,7 @@
    "main_vi": "xanh tùng trầm đậm vừa",
    "sec_hex": "#D5FAE9",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -1752,9 +1752,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   }
  },
@@ -1785,7 +1785,7 @@
    "main_vi": "hồng sen sáng",
    "sec_hex": "#DAF6EF",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#C48B96",
+   "embroidery_hex": "#BD8590",
    "embroidery_vi": "hồng đỏ vừa dịu",
    "hair_hex": "#C48B96",
    "hair_vi": "hồng đỏ vừa dịu",
@@ -1793,9 +1793,9 @@
     "t1": "#C19BA2",
     "t2": "#BD979E",
     "t3": "#BA939A",
-    "t4": "#B69097",
-    "t5": "#B28C93",
-    "t6": "#AE888F"
+    "t4": "#B79198",
+    "t5": "#B89198",
+    "t6": "#B89198"
    }
   },
   "thu": {
@@ -1855,7 +1855,7 @@
     "t3": "#ECE1FE",
     "t4": "#E9DCFE",
     "t5": "#E6D7FC",
-    "t6": "#E2D3FA"
+    "t6": "#E5D6FD"
    }
   },
   "ha": {
@@ -1874,7 +1874,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E8D7F5"
    }
   },
   "thu": {
@@ -1893,7 +1893,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E7D6F4"
    }
   },
   "dong": {
@@ -1943,8 +1943,8 @@
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#FECEC5",
    "sec_vi": "hồng đất nhạt",
-   "embroidery_hex": "#F1B7AC",
-   "embroidery_vi": "cam đào sáng dịu dịu",
+   "embroidery_hex": "#E4AAA0",
+   "embroidery_vi": "đỏ san hô sáng dịu dịu",
    "hair_hex": "#F1B7AC",
    "hair_vi": "cam đào sáng dịu dịu",
    "hair_by_tier": {
@@ -1953,7 +1953,7 @@
     "t3": "#E6BFB7",
     "t4": "#E2BBB3",
     "t5": "#DEB7AF",
-    "t6": "#DAB3AC"
+    "t6": "#DDB6AF"
    }
   },
   "thu": {
@@ -2013,7 +2013,7 @@
     "t3": "#FEDFCE",
     "t4": "#FBDBC9",
     "t5": "#F7D7C5",
-    "t6": "#F3D3C1"
+    "t6": "#F7D7C4"
    }
   },
   "ha": {
@@ -2043,15 +2043,15 @@
    "sec_vi": "tím khói nhạt",
    "embroidery_hex": "#ECD9F6",
    "embroidery_vi": "tím hoa cà nhạt phấn",
-   "hair_hex": "#F2DAFF",
-   "hair_vi": "tím hoa cà nhạt dịu",
+   "hair_hex": "#F5E4FE",
+   "hair_vi": "tím hoa cà nhạt phấn",
    "hair_by_tier": {
-    "t1": "#F6E8FE",
-    "t2": "#F4E3FE",
-    "t3": "#F1DEFB",
-    "t4": "#EDDAF7",
-    "t5": "#E9D6F3",
-    "t6": "#E5D2EF"
+    "t1": "#FAF2FE",
+    "t2": "#F8ECFE",
+    "t3": "#F6E7FD",
+    "t4": "#F3E2FD",
+    "t5": "#F3E0FD",
+    "t6": "#F3E0FD"
    }
   },
   "dong": {
@@ -2070,7 +2070,7 @@
     "t3": "#FEDDE1",
     "t4": "#FCD9DD",
     "t5": "#FAD4D8",
-    "t6": "#F6D0D4"
+    "t6": "#F9D3D7"
    }
   }
  },
@@ -2120,7 +2120,26 @@
    "main_vi": "ô liu dịu",
    "sec_hex": "#EBF9F5",
    "sec_vi": "trắng sương",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
+   "embroidery_vi": "kem trắng",
+   "hair_hex": "#FFF4E6",
+   "hair_vi": "kem trắng",
+   "hair_by_tier": {
+    "t1": "#FCF4E8",
+    "t2": "#FDF4E7",
+    "t3": "#FEF3E6",
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
+   }
+  },
+  "dong": {
+   "tone": "soft",
+   "main_hex": "#7FCBFA",
+   "main_vi": "xanh băng sáng",
+   "sec_hex": "#F3E7CE",
+   "sec_vi": "ngà",
+   "embroidery_hex": "#EFE6D8",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -2130,26 +2149,7 @@
     "t3": "#FEF3E6",
     "t4": "#FDF2E3",
     "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
-   }
-  },
-  "dong": {
-   "tone": "soft",
-   "main_hex": "#7FCBFA",
-   "main_vi": "xanh băng sáng",
-   "sec_hex": "#F3E7CE",
-   "sec_vi": "ngà",
-   "embroidery_hex": "#DFF2FE",
-   "embroidery_vi": "xanh lam nhạt phấn",
-   "hair_hex": "#EFDCFF",
-   "hair_vi": "tím hoa cà nhạt dịu",
-   "hair_by_tier": {
-    "t1": "#F4EAFE",
-    "t2": "#F2E5FD",
-    "t3": "#F0DFFD",
-    "t4": "#ECDBF9",
-    "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#F9ECDB"
    }
   }
  },
@@ -2190,7 +2190,7 @@
     "t3": "#FEF3E6",
     "t4": "#FDF2E3",
     "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t6": "#F9ECDB"
    }
   },
   "thu": {
@@ -2338,7 +2338,7 @@
    "main_vi": "cam đào nhạt",
    "sec_hex": "#9AD4B4",
    "sec_vi": "bạc hà dịu",
-   "embroidery_hex": "#CC9C80",
+   "embroidery_hex": "#C5967A",
    "embroidery_vi": "cam đào vừa dịu",
    "hair_hex": "#CC9C80",
    "hair_vi": "cam đào vừa dịu",
@@ -2346,9 +2346,9 @@
     "t1": "#CAAA97",
     "t2": "#C7A693",
     "t3": "#C3A28F",
-    "t4": "#BF9E8C",
-    "t5": "#BB9B88",
-    "t6": "#B79785"
+    "t4": "#C1A08E",
+    "t5": "#C1A08D",
+    "t6": "#C1A08E"
    }
   },
   "thu": {
@@ -2427,7 +2427,7 @@
     "t3": "#FFD9FB",
     "t4": "#FED2FA",
     "t5": "#FCCDF8",
-    "t6": "#FAC8F5"
+    "t6": "#FDCBF8"
    }
   },
   "thu": {
@@ -2496,7 +2496,7 @@
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#F6A78F",
    "sec_vi": "cam hồng",
-   "embroidery_hex": "#F3BBAA",
+   "embroidery_hex": "#E6AE9E",
    "embroidery_vi": "cam đào sáng dịu dịu",
    "hair_hex": "#F3BBAA",
    "hair_vi": "cam đào sáng dịu dịu",
@@ -2506,7 +2506,7 @@
     "t3": "#EAC1B5",
     "t4": "#E6BEB1",
     "t5": "#E2BAAE",
-    "t6": "#DEB6AA"
+    "t6": "#E1B9AD"
    }
   },
   "thu": {
@@ -2577,15 +2577,15 @@
    "sec_vi": "bạc hà",
    "embroidery_hex": "#FDD7D3",
    "embroidery_vi": "đỏ san hô nhạt phấn",
-   "hair_hex": "#FEDBD8",
+   "hair_hex": "#FDE5E2",
    "hair_vi": "đỏ san hô nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEE9E7",
-    "t2": "#FFE3E1",
-    "t3": "#FFDDDA",
-    "t4": "#FDD9D6",
-    "t5": "#FBD4D1",
-    "t6": "#F9CFCC"
+    "t1": "#FEF2F0",
+    "t2": "#FEEDEA",
+    "t3": "#FEE7E4",
+    "t4": "#FCE3E0",
+    "t5": "#FCE1DE",
+    "t6": "#FDE0DC"
    }
   },
   "thu": {
@@ -2613,7 +2613,7 @@
    "main_vi": "ngọc bích đậm vừa",
    "sec_hex": "#E9E7E2",
    "sec_vi": "trắng ngà",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -2621,9 +2621,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   }
  },
@@ -2664,7 +2664,7 @@
     "t3": "#FEDDE3",
     "t4": "#FED8DE",
     "t5": "#FCD3DA",
-    "t6": "#FACED5"
+    "t6": "#FDD1D8"
    }
   },
   "thu": {
@@ -2742,8 +2742,8 @@
     "t2": "#ECD6FE",
     "t3": "#E8D2FA",
     "t4": "#E4CEF6",
-    "t5": "#E0CBF2",
-    "t6": "#DCC7EE"
+    "t5": "#E3CEF5",
+    "t6": "#E3CEF5"
    }
   },
   "thu": {
@@ -2793,7 +2793,7 @@
    "main_vi": "xanh lá non tươi đậm",
    "sec_hex": "#D4F9E7",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -2801,9 +2801,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "ha": {
@@ -2814,15 +2814,15 @@
    "sec_vi": "kem chanh",
    "embroidery_hex": "#FED4E5",
    "embroidery_vi": "hồng nhạt dịu",
-   "hair_hex": "#FFD8E8",
+   "hair_hex": "#FDE3ED",
    "hair_vi": "hồng nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FDE8F0",
-    "t2": "#FEE2ED",
-    "t3": "#FEDCEA",
-    "t4": "#FED6E6",
-    "t5": "#FCD1E3",
-    "t6": "#FACCDF"
+    "t1": "#FFF1F6",
+    "t2": "#FFEBF2",
+    "t3": "#FEE5EF",
+    "t4": "#FCE1EB",
+    "t5": "#FCDFEA",
+    "t6": "#FDDFEB"
    }
   },
   "thu": {
@@ -2901,7 +2901,7 @@
     "t3": "#FEDAF5",
     "t4": "#FED3F4",
     "t5": "#FCCEF1",
-    "t6": "#FAC9EE"
+    "t6": "#FDCCF1"
    }
   },
   "thu": {
@@ -2961,7 +2961,7 @@
     "t3": "#FDE0D0",
     "t4": "#F9DCCC",
     "t5": "#F5D8C8",
-    "t6": "#F1D4C5"
+    "t6": "#F4D7C8"
    }
   },
   "ha": {
@@ -2980,7 +2980,7 @@
     "t3": "#FFDBE5",
     "t4": "#FDD7E1",
     "t5": "#FBD2DD",
-    "t6": "#F9CDD9"
+    "t6": "#FBCFDB"
    }
   },
   "thu": {
@@ -3008,8 +3008,8 @@
    "main_vi": "xanh băng sáng",
    "sec_hex": "#4A6D9F",
    "sec_vi": "lam ngọc đậm",
-   "embroidery_hex": "#99B7E2",
-   "embroidery_vi": "tím lam sáng dịu dịu",
+   "embroidery_hex": "#8DAAD5",
+   "embroidery_vi": "tím lam vừa dịu",
    "hair_hex": "#C3A9D7",
    "hair_vi": "tím hoa cà sáng dịu dịu",
    "hair_by_tier": {
@@ -3018,7 +3018,7 @@
     "t3": "#BFB1CA",
     "t4": "#BBADC6",
     "t5": "#B7A9C2",
-    "t6": "#B3A5BE"
+    "t6": "#B6A8C1"
    }
   }
  },
@@ -3078,7 +3078,7 @@
     "t3": "#FFDED4",
     "t4": "#FBDBD0",
     "t5": "#F7D7CC",
-    "t6": "#F3D3C8"
+    "t6": "#F5D5CA"
    }
   },
   "dong": {
@@ -3119,7 +3119,7 @@
     "t3": "#FDE0D1",
     "t4": "#F9DCCD",
     "t5": "#F5D8C9",
-    "t6": "#F1D4C5"
+    "t6": "#F4D7C8"
    }
   },
   "ha": {
@@ -3130,15 +3130,15 @@
    "sec_vi": "hồng tím phấn",
    "embroidery_hex": "#FFD2EA",
    "embroidery_vi": "hồng tím nhạt dịu",
-   "hair_hex": "#FFD8ED",
-   "hair_vi": "hồng tím nhạt dịu",
+   "hair_hex": "#FEE3F1",
+   "hair_vi": "hồng nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEE8F3",
-    "t2": "#FEE2F1",
-    "t3": "#FEDCEE",
-    "t4": "#FED6EB",
-    "t5": "#FCD1E8",
-    "t6": "#FACCE5"
+    "t1": "#FEF1F7",
+    "t2": "#FEECF5",
+    "t3": "#FDE6F2",
+    "t4": "#FDE1EF",
+    "t5": "#FCDEEE",
+    "t6": "#FDDDEE"
    }
   },
   "thu": {
@@ -3207,7 +3207,7 @@
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#ECF9F3",
    "sec_vi": "trắng sương",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -3215,9 +3215,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "thu": {
@@ -3374,8 +3374,8 @@
     "t2": "#ECD7FD",
     "t3": "#E8D4F9",
     "t4": "#E4D0F5",
-    "t5": "#E0CCF1",
-    "t6": "#DCC8ED"
+    "t5": "#E2CEF3",
+    "t6": "#E2CEF4"
    }
   },
   "thu": {
@@ -3454,7 +3454,7 @@
     "t3": "#F4DCFF",
     "t4": "#F2D8FD",
     "t5": "#EFD3FB",
-    "t6": "#ECCEF9"
+    "t6": "#F0D2FD"
    }
   },
   "thu": {
@@ -3602,7 +3602,7 @@
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#005C41",
    "sec_vi": "xanh ngọc sẫm",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -3610,9 +3610,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "thu": {
@@ -3690,8 +3690,8 @@
     "t2": "#F7C5C7",
     "t3": "#F3C1C3",
     "t4": "#EFBDBF",
-    "t5": "#EBB9BB",
-    "t6": "#E7B5B7"
+    "t5": "#EEBCBE",
+    "t6": "#EEBCBE"
    }
   },
   "thu": {
@@ -3770,7 +3770,7 @@
     "t3": "#EAE2FE",
     "t4": "#E6DDFE",
     "t5": "#E3D8FC",
-    "t6": "#DFD4FA"
+    "t6": "#E2D7FD"
    }
   },
   "thu": {
@@ -3798,7 +3798,7 @@
    "main_vi": "ngọc bích đậm",
    "sec_hex": "#A3D3BC",
    "sec_vi": "ngọc bích sáng",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -3806,9 +3806,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   }
  },
@@ -3841,15 +3841,15 @@
    "sec_vi": "vàng nhạt",
    "embroidery_hex": "#FED6D3",
    "embroidery_vi": "đỏ san hô nhạt phấn",
-   "hair_hex": "#FEDBD8",
+   "hair_hex": "#FDE5E2",
    "hair_vi": "đỏ san hô nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEE9E7",
-    "t2": "#FFE3E1",
-    "t3": "#FFDDDA",
-    "t4": "#FDD9D6",
-    "t5": "#FBD4D1",
-    "t6": "#F9CFCC"
+    "t1": "#FEF2F0",
+    "t2": "#FEEDEA",
+    "t3": "#FEE7E4",
+    "t4": "#FCE3E0",
+    "t5": "#FBE0DD",
+    "t6": "#FCE0DC"
    }
   },
   "thu": {
@@ -3920,15 +3920,15 @@
    "sec_vi": "kem chanh",
    "embroidery_hex": "#FFD4DF",
    "embroidery_vi": "hồng đỏ nhạt dịu",
-   "hair_hex": "#FEDAE2",
+   "hair_hex": "#FEE4E9",
    "hair_vi": "hồng đỏ nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEE8ED",
-    "t2": "#FFE2E8",
-    "t3": "#FFDCE4",
-    "t4": "#FDD8E0",
-    "t5": "#FBD3DC",
-    "t6": "#F9CED8"
+    "t1": "#FFF1F4",
+    "t2": "#FDEDF0",
+    "t3": "#FDE7EB",
+    "t4": "#FDE2E7",
+    "t5": "#FCDFE5",
+    "t6": "#FDDFE5"
    }
   },
   "thu": {
@@ -4026,7 +4026,7 @@
     "t3": "#EEE0FA",
     "t4": "#EADCF6",
     "t5": "#E6D8F2",
-    "t6": "#E2D4EE"
+    "t6": "#E6D8F2"
    }
   },
   "dong": {
@@ -4076,7 +4076,7 @@
    "main_vi": "xanh lá sen / bạc hà dịu",
    "sec_hex": "#DDDCC6",
    "sec_vi": "kem chanh",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -4084,9 +4084,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "thu": {
@@ -4116,15 +4116,15 @@
    "sec_vi": "chàm thẫm",
    "embroidery_hex": "#E6EAFD",
    "embroidery_vi": "tím lam nhạt phấn",
-   "hair_hex": "#F5E9FF",
-   "hair_vi": "tím hoa cà nhạt phấn",
+   "hair_hex": "#F8F2FD",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#F9F2FE",
-    "t2": "#F9F1FF",
-    "t3": "#F6ECFE",
-    "t4": "#F3E7FE",
-    "t5": "#F0E2FB",
-    "t6": "#ECDEF8"
+    "t1": "#F8F3FC",
+    "t2": "#F8F3FC",
+    "t3": "#F8F2FD",
+    "t4": "#F6F0FB",
+    "t5": "#F5EFFB",
+    "t6": "#F5EEFC"
    }
   }
  },
@@ -4176,15 +4176,15 @@
    "sec_vi": "trắng ngà",
    "embroidery_hex": "#FAD8D3",
    "embroidery_vi": "đỏ san hô nhạt phấn",
-   "hair_hex": "#FFDBD6",
+   "hair_hex": "#FEE4E1",
    "hair_vi": "đỏ san hô nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FFE9E6",
-    "t2": "#FDE4E0",
-    "t3": "#FDDEDA",
-    "t4": "#FCDAD5",
-    "t5": "#F7D6D1",
-    "t6": "#F3D2CD"
+    "t1": "#FFF1F0",
+    "t2": "#FFECE9",
+    "t3": "#FDE7E5",
+    "t4": "#FDE2DF",
+    "t5": "#FDE0DD",
+    "t6": "#FFDFDB"
    }
   },
   "dong": {
@@ -4202,8 +4202,8 @@
     "t2": "#B5A7C0",
     "t3": "#B1A3BC",
     "t4": "#ADA0B8",
-    "t5": "#A99CB5",
-    "t6": "#A698B1"
+    "t5": "#AB9EB7",
+    "t6": "#AC9EB7"
    }
   }
  },
@@ -4217,15 +4217,15 @@
    "sec_vi": "kem chanh",
    "embroidery_hex": "#F7DBCA",
    "embroidery_vi": "cam đào nhạt phấn",
-   "hair_hex": "#FDDDCA",
+   "hair_hex": "#FDE6D8",
    "hair_vi": "cam đào nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEEADE",
-    "t2": "#FEE5D6",
-    "t3": "#FCE0CF",
-    "t4": "#F8DCCB",
-    "t5": "#F4D8C7",
-    "t6": "#F0D4C4"
+    "t1": "#FFF2EB",
+    "t2": "#FFEDE3",
+    "t3": "#FEE8DB",
+    "t4": "#FCE4D5",
+    "t5": "#FCE2D3",
+    "t6": "#FDE2D1"
    }
   },
   "ha": {
@@ -4244,7 +4244,7 @@
     "t3": "#F4DCFF",
     "t4": "#F2D8FD",
     "t5": "#EFD3FB",
-    "t6": "#ECCEF9"
+    "t6": "#F0D2FD"
    }
   },
   "thu": {
@@ -4313,8 +4313,8 @@
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#EEB0C2",
    "sec_vi": "hồng dịu",
-   "embroidery_hex": "#F9BFCF",
-   "embroidery_vi": "hồng đỏ nhạt dịu",
+   "embroidery_hex": "#EBB2C2",
+   "embroidery_vi": "hồng đỏ sáng dịu dịu",
    "hair_hex": "#F9BECF",
    "hair_vi": "hồng sáng dịu dịu",
    "hair_by_tier": {
@@ -4323,7 +4323,7 @@
     "t3": "#E9C9D2",
     "t4": "#E5C5CE",
     "t5": "#E1C1CA",
-    "t6": "#DEBDC6"
+    "t6": "#E2C0C9"
    }
   },
   "thu": {
@@ -4342,7 +4342,7 @@
     "t3": "#FFDFCF",
     "t4": "#FDDBC9",
     "t5": "#FBD6C3",
-    "t6": "#F9D2BD"
+    "t6": "#FCD5C0"
    }
   },
   "dong": {
@@ -4402,7 +4402,7 @@
     "t3": "#F6DEF3",
     "t4": "#F2DAEF",
     "t5": "#EED6EB",
-    "t6": "#EAD2E7"
+    "t6": "#EDD5EA"
    }
   },
   "thu": {
@@ -4430,8 +4430,8 @@
    "main_vi": "lam ngọc sáng",
    "sec_hex": "#5D325D",
    "sec_vi": "tím mận thẫm",
-   "embroidery_hex": "#CCA5CB",
-   "embroidery_vi": "hồng tím sáng dịu dịu",
+   "embroidery_hex": "#BF99BE",
+   "embroidery_vi": "hồng tím vừa dịu",
    "hair_hex": "#CCA5CB",
    "hair_vi": "hồng tím sáng dịu dịu",
    "hair_by_tier": {
@@ -4440,7 +4440,7 @@
     "t3": "#C4AEC3",
     "t4": "#C0AABF",
     "t5": "#BCA6BB",
-    "t6": "#B8A2B7"
+    "t6": "#BCA6BB"
    }
   }
  },
@@ -4481,7 +4481,7 @@
     "t3": "#FEF3E6",
     "t4": "#FDF2E3",
     "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t6": "#F9ECDB"
    }
   },
   "thu": {
@@ -4629,8 +4629,8 @@
    "main_vi": "hồng sen nhạt",
    "sec_hex": "#555095",
    "sec_vi": "tím than",
-   "embroidery_hex": "#ACACDD",
-   "embroidery_vi": "tím lam sáng dịu dịu",
+   "embroidery_hex": "#9A99C9",
+   "embroidery_vi": "tím hoa cà vừa dịu",
    "hair_hex": "#B69CCA",
    "hair_vi": "tím hoa cà vừa dịu",
    "hair_by_tier": {
@@ -4638,8 +4638,8 @@
     "t2": "#B9A5C8",
     "t3": "#B5A1C4",
     "t4": "#B19DC1",
-    "t5": "#AD99BD",
-    "t6": "#A996B9"
+    "t5": "#B09CC0",
+    "t6": "#AF9CBF"
    }
   },
   "thu": {
@@ -4797,7 +4797,7 @@
     "t3": "#F1DEFF",
     "t4": "#EDDAFD",
     "t5": "#EAD5FB",
-    "t6": "#E7D0F9"
+    "t6": "#EAD3FC"
    }
   },
   "thu": {
@@ -4955,7 +4955,7 @@
     "t3": "#FEDBE8",
     "t4": "#FCD7E4",
     "t5": "#FAD2E0",
-    "t6": "#F8CDDD"
+    "t6": "#FBD0E0"
    }
   },
   "thu": {
@@ -5261,7 +5261,7 @@
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#F1F5FF",
    "sec_vi": "trắng sương",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -5269,9 +5269,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "thu": {
@@ -5350,7 +5350,7 @@
     "t3": "#FFDDD8",
     "t4": "#FDD9D2",
     "t5": "#FBD4CD",
-    "t6": "#F9CFC8"
+    "t6": "#FDD3CC"
    }
   },
   "thu": {
@@ -5438,7 +5438,7 @@
    "main_vi": "ô liu đậm",
    "sec_hex": "#94B594",
    "sec_vi": "rêu dịu",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -5446,9 +5446,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -5457,7 +5457,7 @@
    "main_vi": "xanh tùng trầm đậm vừa",
    "sec_hex": "#D8DEC8",
    "sec_vi": "kem chanh",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -5465,9 +5465,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   }
  },
@@ -5508,7 +5508,7 @@
     "t3": "#FEDED4",
     "t4": "#FCDACE",
     "t5": "#FAD5C9",
-    "t6": "#F8D0C3"
+    "t6": "#FCD4C7"
    }
   },
   "thu": {
@@ -5568,7 +5568,7 @@
     "t3": "#EBE1FC",
     "t4": "#E7DDF8",
     "t5": "#E3D9F4",
-    "t6": "#DFD5F0"
+    "t6": "#E3D9F4"
    }
   },
   "ha": {
@@ -5617,15 +5617,15 @@
    "sec_vi": "chàm đậm",
    "embroidery_hex": "#DEDEFB",
    "embroidery_vi": "tím hoa cà nhạt phấn",
-   "hair_hex": "#EEDCFD",
+   "hair_hex": "#F2E5FE",
    "hair_vi": "tím hoa cà nhạt phấn",
    "hair_by_tier": {
-    "t1": "#F4E9FE",
-    "t2": "#F2E4FE",
-    "t3": "#EEE0FA",
-    "t4": "#EADCF6",
-    "t5": "#E6D8F2",
-    "t6": "#E2D4EE"
+    "t1": "#F8F2FE",
+    "t2": "#F6EDFE",
+    "t3": "#F3E8FD",
+    "t4": "#F0E3FD",
+    "t5": "#EFE1FB",
+    "t6": "#EFE1FB"
    }
   }
  },
@@ -5666,7 +5666,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EAD3FD"
    }
   },
   "thu": {
@@ -5745,7 +5745,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EBD4FE"
    }
   },
   "thu": {
@@ -5754,7 +5754,7 @@
    "main_vi": "ô liu dịu",
    "sec_hex": "#DFEBBF",
    "sec_vi": "kem chanh",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -5762,9 +5762,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -5833,7 +5833,7 @@
    "main_vi": "hổ phách / đất nung sáng",
    "sec_hex": "#EDEDF8",
    "sec_vi": "trắng sương",
-   "embroidery_hex": "#FFE9E3",
+   "embroidery_hex": "#F8E2DC",
    "embroidery_vi": "cam đào nhạt phấn",
    "hair_hex": "#FEE9E4",
    "hair_vi": "kem trắng",
@@ -5841,9 +5841,9 @@
     "t1": "#FFF2EF",
     "t2": "#FDF1EF",
     "t3": "#FDECE8",
-    "t4": "#FDE7E2",
-    "t5": "#FAE2DD",
-    "t6": "#F7DED8"
+    "t4": "#FFE9E4",
+    "t5": "#FEE9E5",
+    "t6": "#FEE9E3"
    }
   },
   "dong": {
@@ -5854,15 +5854,15 @@
    "sec_vi": "trắng sương",
    "embroidery_hex": "#C7E8F4",
    "embroidery_vi": "xanh lam nhạt phấn",
-   "hair_hex": "#EEDCFD",
+   "hair_hex": "#F2E5FE",
    "hair_vi": "tím hoa cà nhạt phấn",
    "hair_by_tier": {
-    "t1": "#F4E9FE",
-    "t2": "#F2E4FE",
-    "t3": "#EEE0FA",
-    "t4": "#EADCF6",
-    "t5": "#E6D8F2",
-    "t6": "#E2D4EE"
+    "t1": "#F8F2FE",
+    "t2": "#F6EDFE",
+    "t3": "#F3E8FD",
+    "t4": "#F0E3FD",
+    "t5": "#F0E2FC",
+    "t6": "#F0E2FC"
    }
   }
  },
@@ -5874,7 +5874,7 @@
    "main_vi": "cam quýt nhạt nhạt",
    "sec_hex": "#CAEFDD",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#CD9D80",
+   "embroidery_hex": "#C6977A",
    "embroidery_vi": "cam đào vừa dịu",
    "hair_hex": "#CD9D80",
    "hair_vi": "cam đào vừa dịu",
@@ -5882,9 +5882,9 @@
     "t1": "#C7AC9C",
     "t2": "#C3A898",
     "t3": "#BFA595",
-    "t4": "#BBA191",
-    "t5": "#B89D8E",
-    "t6": "#B4998A"
+    "t4": "#BDA393",
+    "t5": "#BEA293",
+    "t6": "#BEA293"
    }
   },
   "ha": {
@@ -5903,7 +5903,7 @@
     "t3": "#FEDCED",
     "t4": "#FED6EA",
     "t5": "#FCD1E7",
-    "t6": "#FACCE4"
+    "t6": "#FCCEE6"
    }
   },
   "thu": {
@@ -5933,15 +5933,15 @@
    "sec_vi": "hồng xuân đậm vừa",
    "embroidery_hex": "#FFE2EC",
    "embroidery_vi": "hồng nhạt phấn",
-   "hair_hex": "#FFE7EF",
-   "hair_vi": "hồng nhạt phấn",
+   "hair_hex": "#FFF1F5",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FEF1F5",
-    "t2": "#FEF0F5",
-    "t3": "#FEEAF1",
-    "t4": "#FEE5ED",
-    "t5": "#FBE0E9",
-    "t6": "#F8DCE5"
+    "t1": "#FDF2F5",
+    "t2": "#FEF1F5",
+    "t3": "#FFF1F5",
+    "t4": "#FDEFF3",
+    "t5": "#FCEDF1",
+    "t6": "#FEECF1"
    }
   }
  },
@@ -5982,7 +5982,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EAD3FD"
    }
   },
   "thu": {
@@ -6061,7 +6061,7 @@
     "t3": "#FEF3E6",
     "t4": "#FDF2E3",
     "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t6": "#F9ECDB"
    }
   },
   "thu": {
@@ -6091,15 +6091,15 @@
    "sec_vi": "đất nung / gạch dịu",
    "embroidery_hex": "#FEDDD6",
    "embroidery_vi": "cam đào nhạt phấn",
-   "hair_hex": "#FEDCD4",
-   "hair_vi": "cam đào nhạt phấn",
+   "hair_hex": "#FFEEEA",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FEE9E5",
-    "t2": "#FFE4DE",
-    "t3": "#FFDED7",
-    "t4": "#FDDAD1",
-    "t5": "#FBD5CC",
-    "t6": "#F9D0C7"
+    "t1": "#FDF3F0",
+    "t2": "#FEF2EF",
+    "t3": "#FEF1EE",
+    "t4": "#FDECE8",
+    "t5": "#FAE8E3",
+    "t6": "#FBE7E2"
    }
   }
  },
@@ -6132,15 +6132,15 @@
    "sec_vi": "trắng ngà",
    "embroidery_hex": "#FDE4E7",
    "embroidery_vi": "hồng đỏ nhạt phấn",
-   "hair_hex": "#FDDAE0",
-   "hair_vi": "hồng đỏ nhạt phấn",
+   "hair_hex": "#FDF2F4",
+   "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FDE8EC",
-    "t2": "#FEE2E7",
-    "t3": "#FEDCE2",
-    "t4": "#FCD8DE",
-    "t5": "#FAD3DA",
-    "t6": "#F8CED5"
+    "t1": "#FBF3F4",
+    "t2": "#FCF2F4",
+    "t3": "#FDF2F4",
+    "t4": "#FBF0F2",
+    "t5": "#FAEEF0",
+    "t6": "#FCEEF1"
    }
   },
   "thu": {
@@ -6149,7 +6149,7 @@
    "main_vi": "ô liu đậm",
    "sec_hex": "#EADAAE",
    "sec_vi": "trắng ngà",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -6157,9 +6157,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -6200,7 +6200,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EBD4FE"
    }
   },
   "ha": {
@@ -6219,7 +6219,7 @@
     "t3": "#FFDAF6",
     "t4": "#FDD4F4",
     "t5": "#FBCFF1",
-    "t6": "#F9CAEE"
+    "t6": "#FCCDF1"
    }
   },
   "thu": {
@@ -6377,7 +6377,7 @@
     "t3": "#ECE1FE",
     "t4": "#E9DCFE",
     "t5": "#E6D7FC",
-    "t6": "#E2D3FA"
+    "t6": "#E5D6FD"
    }
   },
   "thu": {
@@ -6456,7 +6456,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EBD4FE"
    }
   },
   "thu": {
@@ -6465,7 +6465,7 @@
    "main_vi": "ô liu đậm",
    "sec_hex": "#E1FEE6",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -6473,9 +6473,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -6544,7 +6544,7 @@
    "main_vi": "ô liu đậm vừa",
    "sec_hex": "#B7DBCA",
    "sec_vi": "bạc hà nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -6552,9 +6552,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "dong": {
@@ -6585,7 +6585,7 @@
    "main_vi": "xanh lá non tươi đậm vừa",
    "sec_hex": "#E9DFB3",
    "sec_vi": "vàng nhạt",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -6593,9 +6593,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "ha": {
@@ -6614,7 +6614,7 @@
     "t3": "#F0DFFE",
     "t4": "#EDDAFE",
     "t5": "#EAD5FC",
-    "t6": "#E7D0FA"
+    "t6": "#EBD4FE"
    }
   },
   "thu": {
@@ -6772,7 +6772,7 @@
     "t3": "#FFDFCF",
     "t4": "#FDDBC9",
     "t5": "#FBD6C3",
-    "t6": "#F9D2BD"
+    "t6": "#FCD5C0"
    }
   },
   "thu": {
@@ -6870,7 +6870,7 @@
     "t3": "#F9DDF5",
     "t4": "#F5D9F1",
     "t5": "#F1D5ED",
-    "t6": "#EDD1E9"
+    "t6": "#F0D4EC"
    }
   },
   "dong": {
@@ -6889,7 +6889,7 @@
     "t3": "#F0DFFD",
     "t4": "#ECDBF9",
     "t5": "#E8D7F5",
-    "t6": "#E4D3F1"
+    "t6": "#E7D6F4"
    }
   }
  },
@@ -6903,15 +6903,15 @@
    "sec_vi": "hồng phấn nhạt",
    "embroidery_hex": "#FCD6E0",
    "embroidery_vi": "hồng đỏ nhạt phấn",
-   "hair_hex": "#FED9E3",
-   "hair_vi": "hồng nhạt phấn",
+   "hair_hex": "#FEE3EA",
+   "hair_vi": "hồng đỏ nhạt phấn",
    "hair_by_tier": {
-    "t1": "#FEE7ED",
-    "t2": "#FFE1E9",
-    "t3": "#FFDBE5",
-    "t4": "#FDD7E1",
-    "t5": "#F8D3DD",
-    "t6": "#F4CFD9"
+    "t1": "#FDF2F4",
+    "t2": "#FDECF0",
+    "t3": "#FDE6EC",
+    "t4": "#FDE1E8",
+    "t5": "#FDDFE7",
+    "t6": "#FFDEE7"
    }
   },
   "ha": {
@@ -6980,7 +6980,7 @@
    "main_vi": "hồng mẫu đơn sáng",
    "sec_hex": "#ECE2FE",
    "sec_vi": "tím khói nhạt",
-   "embroidery_hex": "#A391C0",
+   "embroidery_hex": "#9785B3",
    "embroidery_vi": "tím hoa cà vừa dịu",
    "hair_hex": "#A391C0",
    "hair_vi": "tím hoa cà vừa dịu",
@@ -6990,7 +6990,7 @@
     "t3": "#A297B4",
     "t4": "#9E93B0",
     "t5": "#9A90AD",
-    "t6": "#978CA9"
+    "t6": "#9A8FAC"
    }
   },
   "ha": {
@@ -7001,15 +7001,15 @@
    "sec_vi": "trắng hồng",
    "embroidery_hex": "#FEE5DD",
    "embroidery_vi": "cam đào nhạt phấn",
-   "hair_hex": "#FDEAE4",
+   "hair_hex": "#FEF2EE",
    "hair_vi": "kem trắng",
    "hair_by_tier": {
-    "t1": "#FEF2EE",
-    "t2": "#FFF1ED",
-    "t3": "#FEECE6",
-    "t4": "#FCE8E2",
-    "t5": "#F9E4DD",
-    "t6": "#F6DFD8"
+    "t1": "#FCF3F0",
+    "t2": "#FDF3EF",
+    "t3": "#FEF2EE",
+    "t4": "#FCF0EC",
+    "t5": "#FCEFEA",
+    "t6": "#FDEEEA"
    }
   },
   "thu": {
@@ -7059,7 +7059,7 @@
    "main_vi": "xanh lá non tươi đậm vừa",
    "sec_hex": "#ECF9F3",
    "sec_vi": "trắng sương",
-   "embroidery_hex": "#FFF4E6",
+   "embroidery_hex": "#F8EDDF",
    "embroidery_vi": "kem trắng",
    "hair_hex": "#FFF4E6",
    "hair_vi": "kem trắng",
@@ -7067,9 +7067,9 @@
     "t1": "#FCF4E8",
     "t2": "#FDF4E7",
     "t3": "#FEF3E6",
-    "t4": "#FDF2E3",
-    "t5": "#FAEEDE",
-    "t6": "#F7EAD9"
+    "t4": "#FEF3E4",
+    "t5": "#FEF4E6",
+    "t6": "#FEF3E5"
    }
   },
   "ha": {

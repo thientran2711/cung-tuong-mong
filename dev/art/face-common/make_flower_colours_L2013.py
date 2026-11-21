@@ -79,6 +79,20 @@ def flower(main,sec,group,kind,emb_L=None):
             hx=gamut(max(0.5,L0-0.03*step),max(C,0.07),H)
             if dE(hx,main)>=14: return hx
     return IVORY
+def enforce(main,ee,hh,gap=0.02):
+    """F20 hard check: hair flower is ALWAYS lighter than the embroidery flower (OKLCH L), both still >= dE 14 from the main robe."""
+    Lh=lambda x:h2o(x)[0]
+    if Lh(hh)>=Lh(ee)+gap: return ee,hh
+    Le,Ce,He=h2o(ee); Lq,Cq,Hq=h2o(hh)
+    for st in range(1,14):                                   # 1) raise the hair flower
+        c=gamut(min(0.97,Lq+0.02*st),Cq,Hq)
+        if Lh(c)>=Lh(ee)+gap and dE(c,main)>=14: return ee,c
+    if Ce>0.01:
+        for st in range(1,14):                               # 2) lower the embroidery flower (keep hue/chroma)
+            e2=gamut(max(0.5,Le-0.02*st),Ce,He)
+            if Lh(hh)>=Lh(e2)+gap and dE(e2,main)>=14: return e2,hh
+    return ("#EFE6D8",IVORY) if dE("#EFE6D8",main)>=14 else (ee,hh)
+
 def main():
     p=json.load(open(f"{D}/palettes_season_L1726.json",encoding="utf-8"))
     out={"_note":"L2013 FLOWER COLOUR TABLE (draft, owner OK pending; no prompt edits, no gens). person x season -> embroidery flower + hair flower colour matched to the outfit tone. Gold thread stays on every outfit. Hair flower = bloom only, no leaves, never yellow (F19). Flower never equals the main robe colour (dE>=14 vs main+secondary). Method: make_flower_colours_L2013.py.",
@@ -87,16 +101,22 @@ def main():
         d=p[pid]; rec={"group":d["group"]}
         for s in ("xuan","ha","thu","dong"):
             m,sc=d[s]["main_hex"],d[s]["sec_hex"]
-            cl=tone(m,sc,d["group"]); ee=flower(m,sc,d["group"],"emb"); hh=flower(m,sc,d["group"],"hair",h2o(ee)[0])
+            cl=tone(m,sc,d["group"]); ee=flower(m,sc,d["group"],"emb"); hh=flower(m,sc,d["group"],"hair",h2o(ee)[0]); ee,hh=enforce(m,ee,hh)
             # hair flower ramp t1..t6: palest -> deepest within the tone class (same hue)
             Lh,Ch,Hh=h2o(hh); ramp={}
             for t in range(1,7):
                 f=(t-1)/5; ramp[f"t{t}"]=gamut(min(0.97,Lh+0.03-0.06*f),min(CLS[cl]["cap"]*GF.get(d["group"],0.9),Ch*(0.8+0.4*f)),Hh) if Ch>0.01 else hh
+            Le=h2o(ee)[0]
+            for t_ in ramp:                                  # every tier's hair flower stays lighter than the embroidery (F20)
+                if h2o(ramp[t_])[0]<Le+0.02:
+                    Lq,Cq,Hq=h2o(ramp[t_]); ramp[t_]=gamut(min(0.97,Le+0.02),Cq,Hq)
             rec[s]={"tone":cl,"main_hex":m,"main_vi":d[s]["main_vi"],"sec_hex":sc,"sec_vi":d[s]["sec_vi"],
                     "embroidery_hex":ee,"embroidery_vi":name_vi(ee),"hair_hex":hh,"hair_vi":name_vi(hh),"hair_by_tier":ramp}
         out[pid]=rec
     json.dump(out,open(f"{D}/flower_colours_L2013.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)
     import collections
+    viol=[(k,s) for k in out if not k.startswith("_") for s in ("xuan","ha","thu","dong") if h2o(out[k][s]["hair_hex"])[0]<h2o(out[k][s]["embroidery_hex"])[0]+0.02]
+    print("hair-not-lighter violations:",len(viol),viol)
     print(collections.Counter(out[k][s]["tone"] for k in out if not k.startswith("_") for s in ("xuan","ha","thu","dong")))
     bad=[(k,s) for k in out if not k.startswith("_") for s in ("xuan","ha","thu","dong") if min(dE(out[k][s]["hair_hex"],out[k][s]["main_hex"]),dE(out[k][s]["embroidery_hex"],out[k][s]["main_hex"]))<10]
     print("close-to-main:",bad)
