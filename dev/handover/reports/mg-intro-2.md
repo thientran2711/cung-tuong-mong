@@ -26,3 +26,8 @@ KEEPER answer (session_01Rc5AsMtjP4KTgBZVjENGLs): kgBang is covered by `kitNoteB
 Re-run on 31ebca8a+: mg-intro-2 ALL OK (Fold + iPad), mg-ui-rest 39/39, mg-allkinds 7/7, mg-noword-a 0 FAIL, mg-noword-b ALL OK, mg-noword-kit PASS, mg-ready-guide 9/9, coop-e2e 92/92, quickcheck PASS.
 
 ~92% xong / ~88% chơi được
+
+## Follow-up (MAIN 89, after kit-ghichu-bang LIVE 068662ad)
+- Merged LIVE 068662ad (conflicts only index.html/sw.js/j82/jnwb; mg-5s-clear's NWB_DEMO rules demos dropped with the rest, no picture of the move remains anywhere).
+- kgBang(html,title) now = heading words + `kitNoteBang(html,title)` (the round yellow «!»; popup title = heading). kitNoteBang got the optional `title` arg here (j79.js, keeper-agreed); keeper's own version (kit-ghichu-sections cfde1cc4, not LIVE yet) does the same → on conflict in j79.js take main's. kgBangRows row logic unchanged. kitTapWord no longer used here.
+- Tests on f1b57d34: mg-intro-2 ALL OK · mg-ui-rest 39/39 · mg-allkinds 7/7 · mg-noword-a 0 FAIL · mg-noword-b ALL OK · mg-noword-kit PASS 31 · mg-ready-guide 9/9 · coop-e2e 92/92 · quickcheck PASS. Fold + iPad looked (3 rival rows visible, «!» popup works).
