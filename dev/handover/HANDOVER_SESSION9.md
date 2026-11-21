@@ -1933,3 +1933,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - No owner question pending.
 - (08:37Z) MAIN CHÍNH 91 opened child MAIN CHÍNH 92 = session_01Rc5AsMUHiJKCMiCjnzdhii (depth 3). 91 stops except relaying late messages to 92.
 - (08:39Z) 91 late relay: 89 LANDED mg11 a66b5a49, chapter-card-3 74cea8bf; FAIL mg-intro-2 18d1b014 (jnwb vs mg11) → Ji75 told to re-merge on 36b54a1b + SSK to 92; relayed to 92.
+
+## MAIN CHÍNH 92 (session_01Rc5AsMUHiJKCMiCjnzdhii) — live log (child of MAIN CHÍNH 91)
+- (21/11 08:37Z) MAIN = MAIN CHÍNH 92 session_01Rc5AsMUHiJKCMiCjnzdhii; START_CTX ~8 % (get_session reads 0; estimate — re-check on turn 2–3 and use the real reading as baseline); depth 3 (limit 8) → roll at START+25 %, ceiling 60 %; child at roll = MAIN CHÍNH 93. Worktree /home/user/wt/ho, push /home/user/wt/hpush92.sh. Land chain stays in 89's container (NOT started here).
+- (08:37Z) LOAD: main running 8 (owner UI/go-live only: duodo-focus N9Yc (waits K-FOCUS-1), hao-huu-2 J4dp (waits badge), maid-acts-a KzCE (idle), rv JeK8, rv KbS4, rv MSxp, rv MYd9 (idle), keeper MtjP) | B ROOT-5 busy (+ k61 guest-mask ORDER) | C #25 art (owner live) | D busy (GAP v3 recount ~09:10Z, nobc, coop-emo-seat) | E #26 busy (cold-faction re-merge, jlost-kyngo, dresscode E30d) | moved: none.
+- (08:37Z) First actions: «main is now 92» sent to N9Yc, J4dp, JeK8, KzCE, KbS4, MSxp, MYd9, MtjP, MAIN 89 (chain relay), MAIN 91. Hourly wake trig_01HMzZu6Y1DgamakCWWrato4 (min 32); 91's trig_01TPEcfAwu7QnUBQq4AeAkTy DISABLED. FROM MAIN lines in FOREMAN_B/C/D/E_STATUS. No owner question pending.
