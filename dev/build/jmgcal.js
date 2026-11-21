@@ -45,7 +45,7 @@ function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
 function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
 function mmdd(t){const d=new Date(t||Date.now()),p=n=>String(n).padStart(2,"0");return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()}`}
 /* the code line for the coordinator: CTM-CAL kind:b/rounds@mm/dd/yyyy … */
-function mgCalCode(r){r=r||rec();return "CTM-CAL "+Object.keys(r).filter(k=>r[k]&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}
+function mgCalCode(r){r=r||rec();/* rv mgcal-redo: a try taken before its game was fixed never goes into the code (broken-board tries are dropped) */return "CTM-CAL "+Object.keys(r).filter(k=>ok(r,k)&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}
 function nm(k){const K=KG82_KIND[k];return K&&K.n||k}
 function stat(k){const L=rec()[k],c=C().k||{};const a=L?(stale(L,k)?"đã sửa trò, cần thử lại":`đã thử, tay ${mgWord(L.b)}`):"chưa thử";return c[k]?`${a} · đã ghi vào sổ chung`:a}
 /* ---- the test (kit game frame only) ---- */
@@ -57,7 +57,7 @@ function pick(){const ks=mgCalKinds();if(typeof kg82Open!=="function")return;
   `<div class="kg82act"><button class="${kg82Btn()}" id="mgcal-seq">${nd.length?(dn.length?`Thử tiếp các môn còn lại<small>từ môn ${nm(nd[0])} · còn ${nd.length} môn</small>`:`Thử hết cả ${ks.length} môn<small>dừng lúc nào cũng được, lần sau thử tiếp</small>`):`Thử lại hết từ đầu<small>đã thử đủ ${ks.length} môn</small>`}</button></div>`+
   `<h4 class="kpst">Hoặc chọn một môn</h4>`+
   `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(ok(r,k))}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
-  (Object.keys(r).length?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"");/* no «Thôi» row: the kit ✕ «Quay lại» (§13.9, 32.10) */
+  (Object.keys(r).some(k=>ok(r,k))?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"");/* no «Thôi» row: the kit ✕ «Quay lại» (§13.9, 32.10) */
  box.querySelectorAll("[data-mgcal-k]").forEach(b=>b.onclick=()=>run(b.dataset.mgcalK));
  const sq=$("mgcal-seq");if(sq)sq.onclick=()=>run(nd.length?nd[0]:ks[0],nd.length?"seq":"all");
  const cp=$("mgcal-copy");if(cp)cp.onclick=()=>copy(cp)}
