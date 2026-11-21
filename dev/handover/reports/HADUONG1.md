@@ -48,3 +48,5 @@ depth 6 · START_CTX ≈ 3 % (get_session read 0; own estimate)
   - t3: viền thêu vàng rộng nhất (mẫu đơn + mai) cả mép trước áo, hoa lớn phủ áo và cả mặt trước váy, vải ánh kim; đai ngực ~1⅓ bàn tay thêu dày mai + chim; khóa hoa vàng đính ngọc trai; lược hoa vàng trên búi.
 - Gate: keep PASS; check_store t2/t3 FAIL only S08 (sleeves to knees t1–t3) — the owner's exact-copy order means ankle sleeves → needs a waiver; t1 also fails S06+S08 (verbatim copy). Rule conflict for #26: G58/K27 (no big flowers t1–t3) vs owner L1908 (Tần look incl. LARGE plums becomes t1).
 - WAIVER (#26, 21/11 ~08:45Z): S08 + G58/K27 waived for hạ Đường L1908 t1–t3 (owner L1908 wins); logged in dev/art/ART_RULES_CONFLICTS.md. t2/t3 sent to VE6 session_01D3E3NavF2AADAvmzPDhZC5 @55, sheet ha_t1_t3_L1908.png (t1 = yiugBgJPW9).
+- OPEN: maids got a short sheer pale powder-blue phi bạch (the Tang murals show one; the owner liked the look). Is phi bạch allowed for maids? Owner to say.
+- Draw: consort t1–t3 L1890 sent to VE9 @55 (sheet ha_t1_t3_L1890.png). Maids + t4/t5 are not sent yet; waiting for #25.
