@@ -541,10 +541,11 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;
 /* a lost-case piece handed back to the friend's ENTRY outside an act (my «Lén trả lại» from Tư trang › Việc, a hearing verdict, a holder who
    dies…): her entry is only a copy of her chest, so the piece goes to her seat as the same «ret» op (inside an act on her the act's own diff
    sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
-(function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0;
- try{if(CW.on&&!CW.b4in&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
+(function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
+ try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
  const r=f0.apply(this,arguments);
- try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
+ try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
+  if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
 /* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
    (st done «mat») — the thief's «Lén trả lại» / «Trả lại» left Tư trang › Việc a week after every theft from her. Her own seat keeps her
    side of the case; here such a case only waits (the expiry still ends it). */
