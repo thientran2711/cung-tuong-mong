@@ -1,6 +1,7 @@
 # coop-famops — co-op friend-act item ops move THAT piece, by identity (E44, opus BIG, FOREMAN E #26)
 PRIORITY #1 CHECK ('famApply|famDiff|b4Ops|RMHOW|loLose|jcoopworld'): OD 8 (law 6c) | main jcoopworld.js:476 «ret», :490 famDiff «rm» | review/* review/jlost-kyngo 2fa2e667 (E42, base of this branch; unchanged on origin at 11:20Z), review/dresscode-fix-r4 (E30d, scan reused) | claims: this row only (E44).
 Branch review/coop-famops FROM review/jlost-kyngo 2fa2e667, then MERGED review/jlost-kyngo-r1 8527f09c (PASS base, FOREMAN E #27; merge, no rewrite) (E42's one owner change reused: loCaseOf / lostReturn / loKeepBy / loLedgerBack; no second owner-change path).
+Branch review/coop-famops FROM review/jlost-kyngo 2fa2e667 (E42's one owner change reused: loCaseOf / lostReturn / loKeepBy / loLedgerBack; no second owner-change path).
 Head: see «STATUS» at the end. Files: dev/build/jcoopworld.js (+ site build), dev/test/coop-lost-scan.js (E42's scan + COOP_FAM driver), NEW dev/test/coop-famops-unit.js.
 
 ## Root cause (law 6c REAL OBJECTS, law 1 TWO-WAY)
@@ -57,6 +58,20 @@ coop-dresscode-scan COOP_DBG=1, 76 wk (asked by E30r4 via E #28): BEFORE = revie
 FAIL (6 persistent, 9 one-week transients) + 2 harness «#next enabled» waits. AFTER = 0620c318 + coop-famops a211fcf0 (local tmp merge, never pushed): 88/88 PASS.
 (Earlier r1 tmp merge with r4: 87/90 — the 7 persistent weeks are ONE loan piece A4 kimthoa_phuong (lender v1 → v8, lo:false)
 at a host NPC AND in the guest's il.box from w9: a dresscode / jil guest-box matter, not a friend-act op. OPEN item for dresscode (E30d).
+Not changed: gifts (res.items → «Quà tặng», jil ilSent), kids/preg/art ops, pets (petApply), thin L6 rooms (famApply runs on the host in her context; the hook skips CW.ctx).
+No new number (law 4), no new player word (the «ret» line is the old one).
+
+## Scans (before = review/jlost-kyngo 2fa2e667, after = this branch; same scan file)
+coop-lost-scan.js (E42) + COOP_FAM=1 driver (default on): each week on BOTH seats — she may first put on a piece from her chest (B), I steal from the
+friend's entry (laydo/laydol), I hand back what I hold of hers (Cài đồ onto her / Lén trả lại / Trả lại), a host NPC steals from her entry. Census: host world + guest's own S by ledger id.
+| run | before | after |
+|---|---|---|
+| 20 wk smoke | 2 pieces dup (17 piece-weeks: host chest + guest case «lost») | (first fix) 1 dup same shape → fix 3 |
+| 12 wk | — | 0 dup · 0 vanish · net 0 |
+| 76 wk default | RUNNING | RUNNING |
+| 76 wk COOP_SWAP=1 | — | TODO |
+| 76 wk COOP_SKEW=24 | — | TODO |
+| coop-dresscode-scan 76 wk (r4 + this, tmp merge, not pushed) | E30d: guest trâm dup/vanish | RUNNING |
 
 ## Gates
 | gate | result |
@@ -84,3 +99,20 @@ buổi-handshake stalls in 4 of 12 long runs (coop sync, not famops); dresscode 
 - (d) id 555: host piece held by her since w14 (case «held», fix 13 kept it), gone from her seat at w61, no host ledger line — needs her seat's ledger (faults.json has host side only; add B-side __why for ids).
 - (c) hoadien_bac: her seat's copy of the host entry rebuilt from the host canon while his «rm» was in flight → carried the piece she stole; the host's death (di vật) then put it into her box «nvp:dead» too.
 - Worktrees: /home/user/wt/famops (review/coop-famops a211fcf0, clean), /home/user/wt/famops-base (detached LIVE, scan copy), /home/user/wt/famops-dc (detached; tmp branches deleted, nothing pushed), /home/user/wt/famops-ho (handover). http servers stopped.
+| coop-famops-unit (NEW, 13 checks) | PASS 13/13 |
+| one-core-guard | PASS (fails 0) |
+| kyngo-unit | PASS |
+| lost-items 755x1000 | 44 bool checks identical to 2fa2e667 (diffs = random names/ids only) |
+| quickcheck + old save | TODO |
+| coop-e2e 92/92 | TODO |
+| coop-b1 (famApply's own test) | TODO |
+| role-parity ×2 (alone) | TODO |
+
+## HANDOVER (if rolled)
+Worktrees: /home/user/wt/famops (review/coop-famops), /home/user/wt/famops-base (2fa2e667 + new scan, for «before»), /home/user/wt/famops-dc
+(tmp/famops-dc = this + review/dresscode-fix-r4, LOCAL ONLY, never push), /home/user/wt/famops-ho (handover). Logs /home/user/wt/fo-out/*.log.
+Local servers: python http.server 8744 (famops root) / 8745 (base root) for kyngo-unit / lost-items / unit test.
+Left: finish the scan rows above (76 wk default, SWAP, SKEW, dresscode), gates TODO, fill STATUS, FOREMAN_E_STATUS line, send_message FOREMAN E #26.
+
+## STATUS
+WIP.
