@@ -72,7 +72,7 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
 /* KIT §52 kitRel2: two column boxes (that person → me | me → that person), short words, no bars; Hiện nay / Tuần này aligned inside each box */
 .kr2w{container-type:inline-size;min-width:0;max-width:100%;margin:.2em 0 .45em}
-.kr2{display:grid;gap:.5em;align-items:stretch;grid-auto-rows:1fr}.kr2-n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.kr2-n1{grid-template-columns:minmax(0,calc(50% - .25em))}/* boxes shown together = SAME width and height, tops aligned; a lone box is one column wide, never the whole row (owner 16:10Z) */
+.kr2{display:grid;gap:.5em;align-items:stretch;grid-auto-rows:1fr}.kr2-n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.kr2-n1{grid-template-columns:minmax(0,1fr)}/* boxes shown together = SAME width and height, tops aligned; a LONE box spans the WHOLE row — never half a frame left empty (owner 21/11 ~02:14Z «chiếm hết cả một nửa cái khung nền», overwrites the 16/11 16:10Z half-width rule) */
 .kr2b{min-width:0;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);overflow:hidden;--krc:#6a5040}
 .kr2-them{--krc:#7a4fa0}.kr2-me{--krc:#3f62a8}
 .kr2h{padding:.28em .55em;font-size:.76em;font-weight:700;letter-spacing:.02em;color:var(--krc);background:color-mix(in srgb,var(--krc) 12%,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);overflow-wrap:anywhere}
