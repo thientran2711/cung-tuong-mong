@@ -849,3 +849,4 @@ kit-chip-pause rv | review/kit-chip-pause-rv 33661a10 | rv session | PASS (stack
 | ui-leftover-fold REPORT | review/ui-leftover-fold b98bb227c | B | session_01N1tNP2bJj9FqZNTvhAgTmS | READY | 21/11 10:45Z |
 | REVIEW ui-leftover-fold (sonnet SMALL) of b98bb227 | review/ui-leftover-fold-rv | B | session_01N1tNP5vYhyVu8SLUaoVxUT | RUNNING | 21/11 10:47Z |
 | REVIEW ending-screens-land + -2-land (opus BIG delta) of 6d59c2d9 / df03ad26 | review/ending-screens-land-r1, review/ending-screens-2-land-r1 | B | session_01N1tNP2DcGKy9TSKBDPcvDp | RUNNING | 21/11 10:49Z |
+kit-focus rv4 | review/kit-focus-rv4 4c1105d8 | rv session | PASS (supersedes rv3) | 21/11
