@@ -1,0 +1,18 @@
+base: dev/art/maid7/gpt/chuongsu_gpt_v5.txt
+allow: attach Image 1 = m18 face reference   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: the same single reference used on Magnific   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: 'The reference image' and 'the identity reference' below both mean Image 1   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: Make ONE tall portrait image   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: a SLIM OVAL face with a gently pointed chin   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: large almond eyes with softly upturned outer corners   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: fully open and clear   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: softly arched thin brows   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a slim straight nose   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a small rosebud mouth   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a small playful closed-lip smile   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: head slightly tilted   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: never a stretched grin   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a long robe of fine embroidered silk brocade with a subtle woven pattern   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: a wide silk sash tied in a bow at the waist   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: the MAIN colour eggplant purple and the SECONDARY colour deep rose like   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869

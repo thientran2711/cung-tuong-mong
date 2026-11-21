@@ -38,3 +38,10 @@ All DROPPED = none; all removed/changed phrases are ALLOWED (port / person swap 
 
 ## HANDOVER (MAIDFIX3, depth 1) — JOB 10 DONE, nothing pending
 Foreman C #24 decision: draw the 18 files (VE3/VE4/VE5); ma ma a36 + a65 NOT drawn now (a51 covers ma ma). Files in dev/art/maid7/prod/, builder make8_prod.py, audit audit8_prod.py. Refs: m18 s7IPw0Ll8e, m09 gOm4HrsSXO. 0 gens by this worker. If reopened: build a65 via mama_v6(); a36 gate/look conflict still open.
+
+## L1869 COLOUR-ROLE FIX (owner L1869 angry; K19/K24/K26/K28) — files *_L1869 (script make9_fix.py)
+Rule: MAIN = cung nữ uniform powder blue #A7BAD2 always; SECONDARY = the person's OWN main (m09 rose pink #D5909C; m18 own main ≈ blue → K26 own secondary deep rose #CA7281); thân cận = flip; chưởng sự main tím cà; ma ma MAIN = xanh lam ngọc bích (jade blue-green), deeper at a51, SECONDARY = her own colour.
+WRONG (my fault: I gave m09 rose pink as MAIN and teal as secondary = her palette from m_colours_proposed, not the K19 roles): all 9 m09 files (tam, nhi, nhat, 3 thân cận, thô sử, chưởng sự, ma ma a51) → m09_*_L1869 (face kept; deep-rose/teal slot → rose pink #D5909C; main back to uniform blue; ma ma main jade).
+WRONG too: m18_mama_a51 (main was powder blue = uniform, not jade; v6 "her own colour" wording) → m18_mama_a51_L1869 (MAIN jade blue-green #4E8FA3, SECONDARY deep rose).
+RIGHT (unchanged, still L1836): m18 tam, nhi, nhat, 3 thân cận, thô sử, chưởng sự (blue/deep rose, tím cà/deep rose).
+All 10 *_L1869: keep_check PASS, check_store PASS (maid a18/a26, mama a51). Colour tokens + the ma ma "own colour" sentence only (A47). I did not look at the drawn sheet PNGs (not needed for the token fix).
