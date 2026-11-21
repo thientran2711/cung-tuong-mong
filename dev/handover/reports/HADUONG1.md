@@ -26,3 +26,15 @@ depth 6 · START_CTX ≈ 3 % (get_session read 0; own estimate)
 
 ## Draw
 - sent to VE9 session_01D3E3NY6tdajnq7tHvQhexg @55 (#25 redirect; VE6 request cancelled), sheet ha_t1_t3_L1847.png next to t4 yiugBgJPW9. Drawn by VE9 (165 cr): t1 VX7zPFbMMU · t2 mEZdzPqhJQ · t3 p8yWN9kehw · sheet dev/handover/review-sheets/ha_t1_t3_L1847.png (t1|t2|t3|t4 yiugBgJPW9). VE9 check: no jade ✓, small embroidery ✓, phi bạch sheer pine-pollen behind back/over forearms ✓. Faults (NOTE only, no redraw without owner yes, A20/A21): t2 pellet drum reads flat/paddle-like (possible item-shape words, F18); t3 not a clear 45° three-quarter. Waiting owner verdict.
+
+# OWNER L1890 (via #25): t1–t3 L1847 → hạ Đường cung nữ g1–g3; old t4 → new Đáp ứng; ladder rebuilt up to Phi
+## Research: Tang palace maids vs consorts (short, from known sources)
+- Maids (Princess Yongtai tomb murals 706, Prince Zhanghuai / Li Shou tombs, Shaanxi History Museum): short NARROW-sleeved ru + skirt tied high (chest or waist), often a short half-sleeve banbi over it, a pibo (phi bạch) over the arms; hair in simple double/high buns, few ornaments; some maids even in men's round-collar robes.
+- Consorts / noble ladies (Zhou Fang "Court Ladies Wearing Flowered Headdresses", Liaoning Museum; Zhang Xuan "Court Ladies Preparing Silk", MFA Boston): the same ruqun base but with a WIDE-sleeved sheer gauze outer robe (大袖衫, mid–late Tang), a longer pibo, big elaborate buns with flowers and buyao, richer gauze/brocade with gold embroidery.
+- Colours: Tang dress laws fixed colours mainly for officials (purple/scarlet/green/blue); maids' colours were not set by law → the game's blue uniform (K19) is a fair choice.
+- Split used here: maid = NO outer robe, NARROW sleeves, hair up in buns, small motifs, short sheer pibo; consort = sheer wide-sleeved outer robe + chest band rank block, long pibo, richer motifs (big flowers from Tần). Source for both: Shen Congwen, 中国古代服饰研究.
+## Files (all .keep; G57/G59 clean; bows at CENTRE front)
+- Consorts: dev/art/seasons4/s62_t{1..5}_ha_DUONG_L1890.txt. t1–t3 = the t4 design (outer robe + chest band) with t1–t3 rank laws (loose hair, sleeves to the knees, small flower, angle/item as thu t1–t3) + S06 fabric; gate tp1–3 PASS (9726/9956/9966). Chest band 2 fingers → 3 fingers + small pearl → half palm, gold top+bottom → t4 palm high LARGE plums → t5 1.5 palms all gold. Fabric plain → faint weave → figured silk. t4/t5 = L1834 + centred bow only; gate FAIL B26/M06(/S13) = the known waiver.
+- Maids (person m18, base prod m18_{tam,nhi,nhat}_L1836): dev/art/maid7/prod/m18_{tam,nhi,nhat}_ha_DUONG_L1890.txt, scope maid a18 PASS ×3. Powder blue #A7BAD2 main, deep rose #CA7281 (her own colour) secondary on the neckline band, cuffs, chest ribbon/band; hair, item, pose and sleeve width kept from prod. Ribbon → 2-finger band + pearl → half-palm band with small gold plums.
+- OPEN: maids got a short sheer pale powder-blue phi bạch (the Tang murals show one; the owner liked the look). Is phi bạch allowed for maids? Owner to say.
+- Draw: consort t1–t3 L1890 sent to VE9 @55 (sheet ha_t1_t3_L1890.png). Maids + t4/t5 are not sent yet; waiting for #25.
