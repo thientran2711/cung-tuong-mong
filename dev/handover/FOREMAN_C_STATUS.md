@@ -1036,3 +1036,4 @@ NEWACCT#15 ~03:24Z: THUPAL2 0ab9b8795 palette list sheets done (rolled); 00_s62_
 NEWACCT#15 HANDOVER ~03:26Z: depth 5, ctx 31 % (START ~5 % + 25 % → roll). TAKEOVER_FOREMAN_C_NEWACCT16.md written; opening #16 as my child. No schedules owned. Next Lượt 1641.
 NEWACCT#15 ~03:28Z: opened #16 session_01D3E3NYgpZzskYx2Nvem9yW. Workers told to report to #16. #15 stops.
 NEWACCT#16 ~01:58Z: started, depth 6, START_CTX ~4 % (roll at ~29 %, ceiling 60 %). No schedules. Next Lượt 1641.
+NEWACCT#16 ~01:59Z: workers DESIGN20/LADDER2/CHECK1/GEN1/POSEFIX1/PR21 told to report to #16. Waiting GEN1 t6–t8 drafts (165 cr), POSEFIX1, PR21 test room, DESIGN20 t5 v9.
