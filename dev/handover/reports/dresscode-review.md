@@ -105,3 +105,53 @@ Real tap (my probe, Fold 755x1000@2): Tư trang → tap the worn trâm cell → 
 | shots Fold 755x1000@2 + iPad 1180x820@2 | gate (Cài / Sai người mua … / Cáo lỗi, kit cards, no cut text), trâm card with dots, calendar popover with dots, real-tap dialog (no rows = item 12) — looked at; local only (/home/user/wt/e30r2-scr, deleted with verdict), never committed |
 
 LAND READY dresscode 8b46c3f0b1ab3545420833a522aad14579a280dd
+
+## ROUND 3 (E30r3, opus BIG, session_01DgYSWon2yx2VxkSP87VchV, depth 6) — review of review/dresscode-land-fix ee44f91e · FOREMAN E #24 · 21/11
+PRIORITY #1 CHECK ('dresscode|loan|dcout|dcin|mượn'): OD 16 | ledger 0 | claims 8 (E30b fixer idle) | main: no jdc.js; jts.js:378-381 Hội phối đồ borrow (tsB) LIVE = a SECOND loan rule | review/* dresscode, dresscode-land, dresscode-land-fix, dresscode-r2, dresscode-r6 | reused: loan book dcLent, jil ledger box/ids, jlost cases, jcoopask dcout/dcin.
+
+### VERDICT: FAIL (1 big item for E30b) — every other fault found is FIXED on review/dresscode-fix-r3 (build on it, do not restart from ee44f91e)
+Branch review/dresscode-fix-r3 = ee44f91e + LIVE 64d2e094 (051df34e: assemble = main's list + jdc0 before j31 + jdc after jcloth; jbal2 both blocks; index.html/sw.js rebuilt) + reviewer fixes b2bca670 · 33565dc3 · e038fca5 · 8e0cc773 (+ test commits 9f254f4c). Head: aa3c6854552061817924ac52a3dc58550278720e (+ LIVE 5569adb6 merged last: aa3c6854; contains LIVE).
+
+#### FAIL item (big → E30b)
+F1 (law 6c + law 14 + brief check 2 «one rule, one loan book»): jts.js Hội phối đồ «Mượn … để dự hội phối đồ» (LIVE) is a SECOND loan rule beside the dresscode loan book: own mark e.tsB, own return tsDressReturn, NO loan book, NO co-op path — on the guest it splices HER copy of the NPC's chest (the host never hears of it: the same piece shows on her and on the host's NPC for the contest) and puts it back into that copy (overwritten at the merge). Fix as one family: the contest borrow goes through dcBorrow / the loan book / dcout-dcin (its own return day = the contest's end), tsB becomes a reading of e.bor. Reviewer only stopped the two worst effects (below, fix 6); the unification is a feature change in a LIVE module → E30b.
+
+#### Fixed by the reviewer (whole group, scan + before/after)
+| # | fault (law) | found by | before | after |
+|---|---|---|---|---|
+| 1 | flag (3): her off-season cost charged ONCE A MONTH (S.dcSw=S.turn, turn = months; nothing at all in a season's first month after the warning) while every NPC pays EACH TUẦN (dcSeasonDue) — law 1, and the frame says «từ tuần sau … bị chê ở buổi thỉnh an»; owner 11/11c: she chooses each morning | code + scan | her −Danh 2 once a month | each tuần like NPCs (scan: 3 tuần → [2,2,2]; old code → [2,0,2] caught) |
+| 2 | a BORROWED piece could be taken by jlost «thất lạc» (loLose picks by loOk, loLoseE targeted): the case held it while the book gave the lender her copy; case solved → two (6c) | dresscode-loan-scan (solo, reproduced 56 faults) | 2 copies | loOk / loLoseE refuse e.bor (same guard family as r2 sell/pawn/give/plant); scan «thất lạc» taken 0, 0 faults |
+| 3 | co-op «dcout» took the NPC's FIRST piece of that kind, not the one the guest took; same-week race (another consort borrowed that very piece on the host) → stand-in or refusal, and her «dcin» return still pushed the piece back → one id twice (6c) | coop-dresscode-scan | dup | dcout takes only the same piece (ledger id, or the same un-numbered one); a refused loan id kept on the NPC (dcNo) → her return is a no-op |
+| 4 | ONE LOAN CLOCK: dcWk used each seat's OWN S.turn (co-op never syncs it): a friend with an older life lends → the host keeps the piece until its clock catches up while she already took it back (two) (6c) | coop-dresscode-scan (B4: host still holding a returned trâm) | per-seat clocks | dcWk linear (turn*3+tuan); every hand-over carries the room week (cw), the receiver converts the due (dcDueIn); a «dcin» arriving after its tuần is not placed; the guest's lent pieces settled only by HER book |
+| 5 | a lost case's piece (e.lo, jlost «giữ lại» = someone else's, kept) could be LENT (dcOwnFit): the case could not find it at its holder and wrote a 2nd copy to the ledger box; nor is it «của mình» to wear | coop-dresscode-scan (A3) | 2 copies | dcOwnFit skips e.lo |
+| 6 | jts Hội phối đồ «Mượn»: the option captures the NPC's piece when the dialog is built; dresscode's NPC loop lends it away meanwhile; her tap STILL pushed the captured object (if(i>=0) guarded only the splice) → two; a contest-borrowed piece (tsB) could be lent on by the dress code | coop-dresscode-scan (A2/A3 kimthoa_phuong, 2 runs) | 2 copies | jts go: road gone → log «… đã không còn trong rương nàng.», nothing moves; dcOwnFit skips e.tsB |
+| 7 | stale dcPrev: her own trâm put aside for a loan kept the mark after the borrowed one was swapped off / taken off → hidden from every road («Cài … của mình», lending) for good (law 2) | dresscode-loan-scan (282 marks / 80 tuần) | stuck marks | mark cleared on return + per-tuần heal (her; NPCs only on the world seat — the guest never writes her NPC copies, r4 lesson); 0 |
+| 8 | her gate is built in endTurn, the NPC festival loans run right after (dcWeek) — when an NPC took the offered piece, «Mượn …» silently did nothing and she went in lacking the colour (r2 item 3 fixed it only for lending) | dresscode-loan-scan (12 offered → 3 taken) | silent no-op | log «X của Y đã có người mượn trước.» + the gate re-opens with the roads still there |
+
+#### Checks (1)–(4)
+(1) objects — NEW dev/test/dresscode-loan-scan.js (solo): every lent piece tagged at lend, counted in every chest / hair / robe / pawn / ledger box EVERY tuần, 108 tuần (3 bot years) real endTurn, disturbances: moved to a 3rd chest, confiscated (box), «thất lạc», pid change, taken off; plus a death tuần (loan each way) and an old "me:<pid>" key. Result: before the reviewer fixes 56 count faults (thất lạc) + 282 stale marks + her 1 borrow of 12 offered; after: ALL PASS 8/8 runs (150–330 loans each: her 15–40 · she lends 5–32 · NPC↔NPC 130–295; «thất lạc» taken 0) + on the gate sha. A mutation (dcTake no-op) is caught (72 faults).
+NEW dev/test/coop-dresscode-scan.js (2 seats, LIVE Worker): same count over the host world + the guest's own S after each merged week, ≥ 72 weeks: first runs found fixes 3/4/5/6 (persistent dups B4, A3, A2, kimthoa ×2 runs); final run on 8e0cc773: 76/76 weeks both seats, loans on every road (host her 19 · lend 2 · NPC↔NPC 232 · guest her 4 · lend 17), both seats on one loan clock 0/76 differ, 10 one-week transients (relay in flight), 17 in-flight requests, 1 refused guest borrow; the only lasting count is P1 below (one jlost×Kỳ ngộ duplicate at week 6 whose extra box copy then lives on) + one scan false positive (her own trâm lost by «thất lạc» after it came home — scan rule fixed in 80269e52). COOP_SKEW=N (guest life clock ahead) is in the scan for E30b's rerun after F1.
+(2) one rule / one book: git grep — the dresscode book is the only one in jdc (no co-op copy: host NPC book + guest S book, each its own seat); BUT jts tsBorrow is a second rule → F1.
+(3) flag «season once per MONTH» = a fault (law 1 + her words: she chooses each morning) → fix 1, whole group (her key; tests that pinned S.dcSw).
+(4) laws on changed lines: 1 ✓ (fix 1) · 2 ✓ (fix 7/8: no hidden / dead roads) · 3 ✓ · 4 ✓ one-core PASS, BAL.dc.bor.wait in BAL · 5 unchanged · 6c ✓ except F1 · 7 ✓ new words cổ trang, no % («đã có người mượn trước», «đã không còn trong rương nàng») · 9 ✓ no UI part made (log lines + the existing gate frame).
+
+#### Found, OUTSIDE the loan code (pre-existing, for the jlost / Kỳ ngộ owner — FOR MAIN)
+P1 (6c, co-op host): a piece in HER lost case (own "me", not on loan) found by Kỳ ngộ «giữ lại» (jky.js SPEC.item lc keep) is pushed to the finder while jlost loFind/loGoneOwner writes a «dead» copy to the ledger box (own "me") — 2–3 copies (S.il.log: [w,iu,"me","nvp","dead"] ×1–2 then ["lo3",finder,"kyngo: giữ lại"]). Seen 1–3× per 76-week co-op run; the co-op scan reports it apart («PRE-EXISTING outside the loan code»).
+P2 (co-op latency, bounded): a guest borrow the host refuses (same-week race) leaves her a ghost of the piece until her next merge (askBack runs only on the week rebuild); the host world holds it once; the scan allows ≤ 3 weeks.
+
+#### Gates on aa3c6854
+| gate | result |
+|---|---|
+| dresscode.test.js | ALL PASS |
+| dresscode-loans.js | ALL PASS (52/52 festival × path) |
+| dresscode-loan-scan.js (NEW) | ALL PASS (108 tuần) |
+| kit-dress-picker.js | PASS 19 |
+| one-core-guard | PASS (fails 0) |
+| coop-dresscode.js ×4 (LIVE Worker, Fold host + iPad guest) | 38/38 · 38/39 · 38/38 · 38/38 — the miss = harness wait «#next enabled» (seat «Chờ hảo hữu…»), every object check of that run passed (same timing class as E30b's 1/12) |
+| coop-e2e.js (CO-OP LAND GATE) | 92/92 |
+| role-parity.test.js ×2 | ALL PASS both (559 s / 557 s, run alone: an earlier run beside the co-op scan was killed for memory) |
+| quickcheck (alone) | PASS · old save ok · perf new/live render 221/223, tab 408/441, buổi 1096/3693 ms · core gates PASS |
+| coop-dresscode-scan.js (NEW, 76 weeks) | see (1): no lasting fault from the loan code; P1 outside it |
+
+Shots: none needed (no UI part changed; two log lines + the existing gate frame re-opened).
+
+FOR E30b (F1): build on review/dresscode-fix-r3 aa3c6854; after F1 rerun dresscode-loan-scan ×3, coop-dresscode-scan 76 weeks (COOP_DBG=1) + one run COOP_SKEW=24, coop-dresscode ×10, coop-e2e, role-parity ×2 (alone), quickcheck.
