@@ -992,3 +992,4 @@ NEWACCT#14 ~02:05Z: DESIGN18 6f3e630 thu t1–t3 v5 (G42 L1605) gates PASS → C
 NEWACCT#14 ~02:08Z: OWNER L1608: maids no jade pendant, may wear sachet → rule G43; MAIDP4 (Opus) opened to fix maid sources/prompts.
 NEWACCT#14 ~02:12Z: THUPAL1 rolled (7b9f0dc d9cc23a palettes_season_L1583.json, sheets thu_palette_L1582/L1583/00–06; only 01 looked) → THUPAL2 opened to look/fix 00,02–06 then report. CHECK1 9c3fe47 thu v5 PASS ×3 → GEN1 running 165 cr.
 NEWACCT#14 HANDOVER ~02:15Z: depth 4, ctx 31 % (START ~4 % + 25 % → roll). TAKEOVER_FOREMAN_C_NEWACCT15.md written; opening #15 as my child. No schedules owned. Next Lượt 1609.
+NEWACCT#14 ~02:17Z: opened #15 session_01D3E3NajnDsKk2KkQgXnroZ. Workers told to report to #15. #14 stops.
