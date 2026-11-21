@@ -138,7 +138,7 @@ function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21):
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 /* AG-ALL-2f3 (OD 17/11 ~17:10Z): acts whose WHOLE price is paid only on success (the act pays econSchemePrice itself when it lands) */
-const ECON_WIN=["bribe","block","xinhh","thathu"];/* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
+const ECON_WIN=["bribe","block","xinhh","thathu"];const ECON_WIN_FAIL="không mất bạc";/* the ONE failure wording of a pay-on-success scheme (j17 actLine, jtamco road card) *//* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
 /* the act landed: pay its whole price now (her and every NPC) and mark the win for a scheme chain that pays its route bạc on success (j70 exec70) */
 function econPayWin(a,k,t,base){const pr=(typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0)||base||0;if(pr>0)ap(a,{bac:-Math.min(pr,Math.max(0,a.bac||0))});if(a)a.__won=1;return pr}
 /* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */
@@ -147,7 +147,10 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
   const ok0=A0.ok;A0.ok=function(a,t){ECON_AT=[a,t];if(!ok0.apply(this,arguments))return false;return (a.bac||0)>=econSchemePrice(k,a,t)};
-  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac;if(extra>0&&!ECON_WIN.includes(k))ap(a,{bac:-extra});return f0.apply(this,arguments)}}})();
+  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac,pay=extra>0&&!ECON_WIN.includes(k);if(pay)ap(a,{bac:-extra});const g0=econVeto();const r=f0.apply(this,arguments);
+   if(pay&&econVeto()!==g0)ap(a,{bac:extra});/* the act's own gate stopped it (j95c: no motive to frame) → no price paid for nothing (law 3) */return r}}})();
+/* acts whose own f can still refuse after the price is taken: the j95c giá họa motive gate (counted in J95C.stat.frameGate) */
+function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
@@ -158,7 +161,7 @@ A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),
    tell, the same as every sent servant); the target's maid answers through the SAME pick as «Mua chuộc cung nữ» (jrcv rcvMaidBribe, cnvBribeOpts with pay 0) */
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>oddsCl(oBribe(a,t)-BAL.selfMinus),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);const mn=t.maid.name;
- const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,oddsCl(oBribe(a,t)-BAL.selfMinus),0):"quiet";
+ const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)-BAL.selfMinus),a),0)/* the frozen shown odds (econ-tamco F2, whole group) */:"quiet";
  if(mc==="take"){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${mn}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${mn} của ${NM(t)}; nàng ấy thành tai mắt. `}
  if(mc==="quiet")return `${mn} không mặn mà với ${m.name}, cũng không nói với ai. `;
  return `${mn} nhận ra ${m.name} đến dò, báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ. `}});
