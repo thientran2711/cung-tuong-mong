@@ -101,7 +101,7 @@ document.addEventListener("click",ev=>{const t=ev.target;if(!t||!t.closest)retur
  const c=t.closest("[data-kid]");if(!c)return;ev.stopPropagation();ev.preventDefault();const ix=c.dataset.kix!=null?+c.dataset.kix:-1;
  const e=ix>=0&&typeof S!=="undefined"&&S&&S.inv[ix]&&S.inv[ix].k===c.dataset.kid?S.inv[ix]:null;
  const who=c.dataset.kidwho!=null&&typeof rivals!=="undefined"?rivals.find(r=>String(r.id)===c.dataset.kidwho):null;
- const pick=c.dataset.kidpick;kitItemCard(e?{e}:who&&c.dataset.kidsl?{wdSlot:c.dataset.kidsl,who}:{k:c.dataset.kid,who},pick&&e?{acts:kidPickActs(e,ix,pick),closeModal:true}:{})},true);
+ const pick=c.dataset.kidpick;/* bag-inline-3: a pick tile inside an inline strip (Bên mình slot) swaps the strip in place, no floating card */if(c.closest(".kinldet")&&typeof kinlPickInline==="function"&&kinlPickInline(c,e?{e}:{k:c.dataset.kid,who},pick&&e?kidPickActs(e,ix,pick):[]))return;kitItemCard(e?{e}:who&&c.dataset.kidsl?{wdSlot:c.dataset.kidsl,who}:{k:c.dataset.kid,who},pick&&e?{acts:kidPickActs(e,ix,pick),closeModal:true}:{})},true);
 /* a pick tile inside a slot panel (Bên mình: "Chạm một món để cài / đeo / may áo") → the card with the ONE act (no blind wear) */
 function kidPickActs(e,ix,pick){const W=typeof WD_ITEMS==="object"?WD_ITEMS:{};const it=IT[e.k]||{};
  try{if(W[e.k]){const w=W[e.k];if(w.sl==="hd")return[];return[pbtn(`data-wd="wear" data-ix="${ix}"`,wdSlN(w.sl,1),`tốn: 1 khắc · thành: vào ô ${wdSlN(w.sl,2)}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
