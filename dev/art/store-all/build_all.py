@@ -681,6 +681,7 @@ def season_post(S,person,season,strict=True):
         S,k=re.subn(r"\("+re.escape(m)+r", NOT green\)","("+m+")",S)
         if k: notes.append("season: NOT green dropped (green main)")
     if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=8: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
+    sys.path.insert(0,ART); import master_common as _MCb; S,_b27=_MCb.b27_post(S,_SP_RANK[0]); notes+=_b27   # BUILDFIX4 B27: again after the thu ladder words (they carry HEAVY / TWO-TIER)
     if season=="thu" and strict:
         for bp in THU_TRIMS+THU_TRIMS_RANK.get(_SP_RANK[0],()):   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
             if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
@@ -774,6 +775,7 @@ def eyes(S):
 def build(person,rank,age="a18",_season=None):
     global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
+    sys.path.insert(0,ART); import master_common as _MCb; S,_b27=_MCb.b27_post(S,rank); add=add+_b27   # BUILDFIX4 B27/B28 (owner L2099/L2100): t6-t8 light gấm, before the length fit
     _m=b26_fit_ok(person,rank,age,_season)
     if _m and len(S)>10000 and _season in (None,"dong"):   # BUILDFIX2: xuân/hạ/thu fit once, after their season words (_build_season2)
         _T,_a=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))

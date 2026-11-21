@@ -57,3 +57,33 @@ dev/handover/reports/BUILDFIX4/gsweep.py (real gate sweep; env SEASONS, RANKS), 
 | check_store --self | old 3 PROOF MISMATCH | same |
 | keep_check --all | 1051 PASS | 1051 PASS |
 | person_gate --self | PASS | PASS |
+
+## JOB 3 — owner L2099/L2100 HQP one-tier + B27/B28 light gấm (ROOT-B3 brief, words only, 0 gens)
+PRIORITY #1 CHECK: rules B12/B27/B28/B29 (ART_RULES), master_common B29 block (B29_C_GAM already a gate-accepted alternative to BROCADE since DESIGN16, never wired in the builder), ROOT-B2 samples s62_t6 L2097 / s62_t7+t8 L2099, owner L1847 (t6 phi bạch), L2088 (t6 QP two-tier).
+### What changed (ONE copy in master_common, used by build_all + check_store)
+| item | before | after | where |
+|---|---|---|---|
+| t6–t8 fabric slot, all seasons + root | 'FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.' | B27_FABRIC = B27_SHORT 'FABRIC: the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape.' (B28 meaning, short; B29_C_GAM verbatim ≈ +350 ch → hundreds of LEN cells; **choice A/B/C asked to ROOT-B3**, switch = one line master_common.B27_FABRIC) | b27_post (build + season_post); gate accepts it via b29_alts(high) |
+| t6 QP outfit | 'a HEAVY silk brocade robe in SATURATED …' | 'a light silk brocade robe in SATURATED …' (colour word kept) | B27_SWAPS |
+| t6 phi bạch | '…, matching the weight of her brocade' | dropped; owner L1847 'slightly THICKER … a little LESS see-through' KEPT | B27_SWAPS |
+| t7 HQP thu | 'TWO-TIER cloud collar (vân kiên hai tầng)' | 'SINGLE-TIER cloud collar of ONE layer only (vân kiên một tầng, never two tiers)' (L2099 words). Other seasons' t7 have no tier words. t8 HH keeps two tiers; t6 QP keeps L2088 two-tier | B27_SWAPS |
+| gate | — | check_store B27 HEAVY BROCADE FAIL: non-negated thick/heavy/stiff … brocade or 'weight of her brocade' (accessory 'stiff brocade girdle' of G15 t3 excluded); store gate reads the store's heavy words as the light ones when the prompt has them (b27_store_swap) | check_store |
+### Sweep (real gate, a18, 112 p) — FAIL t1..t8
+| season | before (after JOB 1) | after |
+|---|---|---|
+| root / xuân / hạ / đông | 0 everywhere | 0 everywhere |
+| thu | 0 0 0 0 0 3 16 16 (LEN) | 0 0 0 0 0 4 26 22 (LEN only) |
+First sweep without the girdle exclusion: t3 97–112 FAIL per season ('a wide stiff {sec} brocade girdle', G15) → excluded → t3 0.
+LEN thu (short form adds ~50): t6 c06 s44 s57 s58 · t7 26 cells (c06 10421 … s47 10001) · t8 22 cells (s58 10401 … s54 10013) — full list dev/handover/reports/BUILDFIX4/b27.json; owner/ROOT decision (no owner/master words cut by me).
+### Files with heavy words (LUẬT SỬA CẢ NHÓM scan): 778 old .txt prompt files (records: nude-B 40, owner-copy/trieu 36, golden_low 32, pr-night 21, store-all/test 13, seasons4 15 …) carry them; NOT rewritten (old drawn records / goldens; new prompts come from the builder). Other pipelines with 'plain thick brocade': emo-anim/groups/sg2_prompts.py + rank_gian_prompts.py, nude-B/mk.py S07, thu_comoi/make_thu_comoi.py — not touched, listed for ROOT.
+### Open questions for ROOT-B3 / owner
+1. Fabric sentence A (B29_C_GAM verbatim) / B (short, now wired) / C (L2099 Phi gauze words).
+2. t6 phi bạch 'slightly THICKER' (owner L1847) — keep? (kept).
+3. t6 QP two-tier (owner L2088) — keep? (kept).
+4. G15 t3 'stiff brocade girdle' — keep? (kept, gate excludes accessories).
+5. M07 'The silk has real weight' master — B27 says never heavy; kept (master).
+Self-tests: check_store --self = the old 3 PROOF MISMATCH only; person_gate --self PASS; keep_check --all FAIL only on ROOT-B2's dev/art/thu_comoi/s62_t6_THU_caovai_L2095.txt (CUT 'vân kiên hai tầng' etc. vs its base — not from this change).
+
+## HANDOVER (BUILDFIX4 → successor; the COORDINATOR opens it)
+depth 2 · START_CTX ~5 % · now ~28 % → roll. State @ this push: JOB 1 (thu LEN cuts), JOB 2 (ash rose) and JOB 3 (B27/B28 + HQP one tier) done and swept.
+Next: (a) ROOT-B3 answer to Q1 (switch master_common.B27_FABRIC; re-run gsweep.py all seasons; LEN check); (b) Q2–Q5 as answered; (c) thu LEN cells list = owner decision; (d) G69/Phi ref/HQP chest/F21 wiring after THUROOT3 pictures (owner lift). Tools: dev/handover/reports/BUILDFIX4/gsweep.py (env SEASONS, RANKS; persons as args), b27sim.py (length estimate), dump.py.
