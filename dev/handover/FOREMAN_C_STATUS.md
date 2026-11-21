@@ -1289,3 +1289,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #26 ~08:58Z: OWNER L1925: m11 NOT redrawn — person m11 DROPPED; new face from face-pick page replaces her (told MAIDFIX4). Next Lượt 1926.
 #26 ~08:59Z: SENT L1926 face pages (FACEPAGE1): maid ✗ https://claude.ai/artifact/4jD7WE84Dgb8MSyvhn5sKF ; spare ✓ https://claude.ai/artifact/7dv7xgmv261DvwFyZ9PjDv (db picks). HHCOL1 rolled (33 %) → HHCOL2 session_01D3E3NZpKJSL9JwuCgVCnWz (L1924 jobs). Next Lượt 1927.
 #26 ~08:59Z: SENT L1927 hạ Đường maids L1919 thô sử yiugOhNPW9 / tam lJtksBRgv9 / nhị bxMCq0Z5Y2 / nhất Lw85jBbswO (VE10 220). MAIDFIX4 L1919 items done 1ce6b06 (gate --maid-items, E13); waiting its L1924 colour/nhị fix before GO. Next Lượt 1928.
+#26 ~09:01Z: OWNER L1928 (on L1922 Hán): t4–t8 OK (approved); t1–t3 collar wrong → HAN6 session (opened) → VE7 @55×3. Owner angry info gets lost — keep a list of pending-review Lượt. Next Lượt 1929.
