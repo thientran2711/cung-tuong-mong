@@ -17,3 +17,6 @@ Chí tôn (Fold) has the same cause in milder form: the card is a little shorter
 Fix for the worker: only the tabs whose wrap content is a short fixed card should use `flex:1 1 0`; any `.pgwrap` with `.krelpg` / long content (rel, hon people list) must be `flex:0 0 auto` (like `:has(.ktbox)`), or `min-height:min-content` so it can scroll. Extend panel-scroll-scan with an overlap/overflow check (child.scrollHeight>clientHeight && overflow visible, or p.past bottom > its card bottom) and re-run Fold + iPad for Chí tôn, Cung nhân, Ân oán, Phi tần, Hoàng tự tabs.
 
 PASS items otherwise. Nothing pushed to review/empty-states-rv. ~92% xong / ~85% chơi được (empty states), 1 layout regression open.
+
+## Re-check bfaa400f (worker's SẴN SÀNG KIỂM, merged LIVE 32c0e33b) — still FAIL
+jpane.js kit-pane rule unchanged (`#panel.kpane>.pgwrap{height:auto;flex:1 1 0;min-height:0}`, exclusions only :has(.ktbox)/.kvbox). Fold shot of Giao tình › Ân oán (empty-scan, fold, seen) shows the SAME defect: «Còn 8 phi tần…» on the card border, «Đã biết về…» card overlapping it. FAIL 1 stands; also Chí tôn clip not re-checked. Only that tab-wrap rule needs the fix above (+ scan overlap check); rest of 4386e849/bfaa400f (kitEmptyTab, mark #30) not reviewed in depth.
