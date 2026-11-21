@@ -2,7 +2,7 @@
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
      tho verse (kéo chữ vào câu bát, đúng vần) · doi pair (nối chữ đối) · doden lamp (jlant.js: thắp đèn theo mẫu) ·
-     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern · kim untangle (gỡ rối chỉ) · mua steps ·
+     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern (nhớ mẫu thêu, j82) · kim papercut (jcraft_kim) · mua steps ·
      banh cook (giữ lửa + thứ tự nguyên liệu) · huong blend (thanh trượt pha hương).
    Engines follow the j82 contract: eng(box, env{kind, lv 0–5, hud(o), end(raw0to10)}) -> stop(); KG82.peek() is the test oracle:
      {x,y} tap · {sel} click · {drag:[[x,y],…]} drag path (client px) · {hold:bool, hsel|x,y} keep a pointer down or not.
@@ -216,31 +216,7 @@ function k91Arrange(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;const lv
  KG82.peek=()=>{if(phase!=="play"||!P||drag)return null;const f=P.F.find(f=>!f.placed);if(!f)return{sel:"#k91done"};const t=P.tg[f.ti];const a=C.client(f.hx,H*.86),b=C.client(t.x,t.y),m=C.client(MXv,MYv-U*.2);return{drag:[[a.x,a.y],[m.x,m.y],[b.x,b.y]]}};
  next();return()=>{done=true;stop()}}
 
-/* =============== 8. UNTANGLE (Khéo tay): drag the knots until no two silk threads cross =============== */
-function k91Untangle(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,NS=[6,7,8];const cx=W/2,cy=H/2,RAD=Math.min(W,H)*.38,HR=Math.max(22,Math.min(W,H)*.05);
- let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false;const pops=[];
- function tri(a){/* chords of a random triangulation of polygon vertex list a */if(a.length<4)return[];const i=Math.floor(Math.random()*a.length);let j;do j=Math.floor(Math.random()*a.length);while(Math.abs(i-j)<2||Math.abs(i-j)===a.length-1);
-  const [p,q]=i<j?[i,j]:[j,i];return[[a[p],a[q]]].concat(tri(a.slice(p,q+1)),tri(a.slice(q).concat(a.slice(0,p+1))))}
- const cross=(N,E)=>{let c=0;const X=new Set();for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const [a,b]=E[i],[c2,d]=E[j];if(a===c2||a===d||b===c2||b===d)continue;if(k91SegX([N[a].x,N[a].y],[N[b].x,N[b].y],[N[c2].x,N[c2].y],[N[d].x,N[d].y])){c++;X.add(i);X.add(j)}}return{c,X}};
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end((pts)),300)}const n=NS[r];const home=[...Array(n).keys()].map(i=>({x:cx+RAD*Math.cos(i/n*Math.PI*2-Math.PI/2),y:cy+RAD*Math.sin(i/n*Math.PI*2-Math.PI/2)}));
-  const E=[...Array(n).keys()].map(i=>[i,(i+1)%n]).concat(kg82Shuf(tri([...Array(n).keys()])).slice(0,Math.ceil(n/2)));let N;
-  for(let t=0;t<200;t++){N=[];for(let i=0;i<n;i++){let p,k=0;do{p={x:HR+Math.random()*(W-2*HR),y:HR+Math.random()*(H-2*HR)};k++}while(k<50&&N.some(q=>k91Dist(p.x,p.y,q.x,q.y)<HR*2.2));N.push(p)}if(cross(N,E).c>=n-2)break}
-  P={n,E,N,home,c0:Math.max(1,cross(N,E).c)};LIM=(30000+lv*2500)*mgTol(env);phase="play";t0=performance.now();drag=null}
- function finish(ok,t){phase="judge";const per=10/NR;let got;const sp=ok?mgPace(env,"kim",t-t0,LIM):1;if(ok)got=per*sp;/* review/mg-tune-r1: the ONE time part (was its own typed .6+.4·left/LIM) */else got=per*.5*(1-cross(P.N,P.E).c/P.c0);pts+=Math.max(0,got);
-  kg82Pop(pops,W/2,H*.08+10,ok?"Gỡ xong mối rối!":"Hết giờ",ok?(sp<.995?K91C.gold():K91C.good()):K91C.red());setTimeout(next,1200)}
- const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)finish(false,now);kg82Bg(g,W,H,"kim",.06,.7);
-  kg82Spr(g,"kim-spool",W-Math.min(W,H)*.07,Math.min(W,H)*.09,Math.min(W,H)*.1,null,{alpha:.95});
-  const {c,X}=cross(P.N,P.E);P.E.forEach(([a,b],i)=>{g.strokeStyle=X.has(i)?K91C.red():phase==="judge"&&!c?K91C.good():"#c9a03a";g.lineWidth=X.has(i)?3:3.5;g.beginPath();g.moveTo(P.N[a].x,P.N[a].y);g.lineTo(P.N[b].x,P.N[b].y);g.stroke()});
-  P.N.forEach((p,i)=>{const on=drag&&drag.i===i;/* the painted silk knot */if(kg82Spr(g,"kim-knot",p.x,p.y,HR*1.18*(on?BAL.mgFx.pop:1),null,{glow:on?BAL.mgFx.glow:null,ring:on}))return;g.save();g.shadowColor="#0005";g.shadowBlur=4;const gr=g.createRadialGradient(p.x-4,p.y-4,2,p.x,p.y,HR*.6);gr.addColorStop(0,on?"#fff3d6":"#fbe9c4");gr.addColorStop(1,on?"#e4a54a":"#b88a3a");
-   g.fillStyle=gr;g.beginPath();g.arc(p.x,p.y,HR*.55,0,Math.PI*2);g.fill();g.shadowBlur=0;g.strokeStyle="#6e4d0e";g.lineWidth=1.5;g.stroke();g.restore()});
-  g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,`Chỗ chỉ chéo: ${c}`,8,8);
-  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,mgReach(pts,cl(r+(phase==="judge"?1:0),0,NR),NR)-(phase==="play"&&r<NR?10/NR*(1-mgPace(env,"kim",now-t0,LIM)):0)),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
- k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;let bi=-1,bd=1e9;P.N.forEach((p,i)=>{const d=k91Dist(x,y,p.x,p.y);if(d<bd){bd=d;bi=i}});if(bd<HR*1.1)drag={i:bi,dx:P.N[bi].x-x,dy:P.N[bi].y-y}},
-  move:(x,y)=>{if(!drag||phase!=="play")return;const p=P.N[drag.i];p.x=cl(x+drag.dx,HR*.6,W-HR*.6);p.y=cl(y+drag.dy,HR*.6,H-HR*.6)},
-  up:()=>{if(!drag)return;drag=null;if(phase==="play"&&cross(P.N,P.E).c===0){kg82Pluck(2,true);finish(true,performance.now())}}});
- KG82.peek=()=>{if(phase!=="play"||!P||drag)return null;let bi=-1,bd=4;P.N.forEach((p,i)=>{const d=k91Dist(p.x,p.y,P.home[i].x,P.home[i].y);if(d>bd){bd=d;bi=i}});if(bi<0)return null;
-  const a=C.client(P.N[bi].x,P.N[bi].y),b=C.client(P.home[bi].x,P.home[bi].y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
- next();return()=>{done=true;stop()}}
+/* =============== 8. (was UNTANGLE, Khéo tay «Gỡ rối chỉ»): removed by review/mg-craft — Khéo tay plays jcraft_kim «Cắt hoa giấy»; no other caller =============== */
 
 /* =============== 9. COOK (Nấu ăn): hold "Quạt lửa" to keep the fire in the step's zone and put the ingredients in the recipe's order =============== */
 const K91_RC=[["Chè hạt sen long nhãn",[["Nước giếng",2],["Hạt sen",1],["Long nhãn",0],["Đường phèn",0]]],["Gà ác tần thuốc bắc",[["Gà ác",2],["Thuốc bắc",1],["Táo đỏ",1],["Kỷ tử",0]]],
@@ -343,18 +319,31 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  next();return()=>{done=true;stop()}}
 
 /* ---------- wiring: one engine per kind, new "how" lines ---------- */
-Object.assign(KG82_ENG,{hold:k91Hold,fling:k91Fling,trace:k91Trace,arrange:k91Arrange,untangle:k91Untangle,cook:k91Cook,blend:k91Blend});
+Object.assign(KG82_ENG,{hold:k91Hold,fling:k91Fling,trace:k91Trace,arrange:k91Arrange,cook:k91Cook,blend:k91Blend});
 Object.assign(KG82_KIND,{
  hat:{e:"hold",n:"Hát",t:"Giữ hơi theo giai điệu",how:"Giữ ngón tay trên ô để lên giọng, buông ra để xuống giọng; giữ đóa hoa trong dải vàng của giai điệu suốt bài ca."},
  dauho:{e:"fling",n:"Đầu hồ",t:"Ném tên vào bình",how:"Đặt ngón tay, kéo ngược về sau rồi buông để ném tên vào miệng bình. Kéo dài thì ném xa; gió đổi mỗi lần. 6 lần ném."},
  ve:{e:"trace",n:"Vẽ",t:"Đồ nét bút",how:"Đặt ngón tay ở chấm xanh rồi đưa theo nét mờ cho kín và đều tay. 4 bức."},
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
- kim:{e:"untangle",n:"Khéo tay",t:"Gỡ rối chỉ",how:"Kéo các nút chỉ cho đến khi không còn sợi nào chéo nhau (sợi đỏ là chỗ chéo). 3 mối rối. Làm nhanh thì được trọn phần."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
  huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
 KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
+/* ---------- mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN real mechanic, tracing only for Chép kinh; dev/design/MG_CRAFTS.md) ----------
+   THE ONE PLACE that maps the craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
+   jcraft_kim / jcraft_ve / jcraft_hoa, and by jtd for td_cong = the stitch board of jcraft_theu; owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game); until then it keeps the engine above. Kind KEYS stay (ve, hoa, kim, td_cong): every caller (startContest,
+   playArt, lessons, jexam, jentry, Thử tay, works j83) and old saves keep working. e = engine · t / how = the rules screen (kgReady; text is allowed there,
+   never in play, OD 20/11 ~05:10Z) · demo = the KG82_DEMO move picture · mgl = the lesson label (KG82_MGL) when the kind is a lesson art · spr = the sprites preloaded (KG82_SPR; [] while the board draws stand-ins). */
+const KG82_CRAFT={
+ kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",spr:[],
+  how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
+ ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
+  how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi chạm ✓: giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
+ hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
+  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."},
+ td_cong:{e:"stitch",t:"Thêu theo nét",demo:"tap",spr:[],/* owner 21/11 ~01:05Z: Thêu keeps «Nhớ mẫu thêu»; the stitch board serves the Công lesson (jtd registers it) */
+  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
