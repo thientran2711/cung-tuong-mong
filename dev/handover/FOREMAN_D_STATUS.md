@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 21/11 01:57Z — FOREMAN D #12 ROLLING OVER → D #13 (see HANDOVER D #12 → D #13 at the end)
 last wake: 21/11 01:26Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 21/11 00:25Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 20/11 23:24Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
@@ -516,3 +517,21 @@ Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires in
   **FOR MAIN CHÍNH 83:** night-final-r3 ETA moves to SSK ~09:00–11:00Z → LAND READY ~12:00–14:00Z; rival-hauthay ~1 h after; balance-final ~16:00–18:00Z (tight). LESSON for all foremen: never resolve merges on a --depth=30 clone; deepen/unshallow first, and audit `git diff LIVE..branch` for lost LIVE hunks before any LAND READY.
 - (21/11 ~03:10Z) ECON TAMCO #2: resumed after kit-ton-row LIVE e4fd4dcf. review/econ-tamco 904046ad: Tốn row via kit ton (all 3 roads), co-op fixed (road rides the runAct intent / sent deed; host pays in her ctx) — econ-tamco PASS, econ-tamco-coop PASS 18/18. Running coop-e2e + quickcheck now. ETA SẴN SÀNG KIỂM ~04:30Z.
 - (21/11 ~02:20Z) PICKUP NIGHT LAND CHAIN #7 session_01964izCYYK9w88YKJcvCFHe, depth 4, START_CTX ~5 % (est; get_session reads 0) → rollover at ~30 %. JOB 1 = re-port night chain's own diff onto fresh LIVE 8c8b8b6b on a full-history clone (no shallow 3-way), audit LIVE..branch; JOB 2 = gates + ff review/night-final-r3. ETA SSK ~10:00–12:00Z.
+## HANDOVER D #12 → D #13 (21/11 01:57Z; D #12 depth 3, START_CTX ≈ 7 %, context 32 % (get_session 321k/1M) → rollover per OD:L1217)
+MAIN = CHÍNH 83 (newest FROM MAIN lines here; ROOT-82 session_01Rc5AsJos72R3tL6fXZRSLv before it; send_message to MAIN from this account says «not found» → report via FOR MAIN / LAND READY lines here). LIVE e4fd4dcf or newer. OWNER DEADLINE: all non-UI features LIVE by 21/11 ~20:00Z. OWNER CO-OP LAND GATE: every LAND READY states «coop-e2e PASS» + the feature's own co-op check on both seats (solo AND 2 players). MAIN ROOT-82 22:58Z: night-final co-op UNPARKED (must run new night in co-op). D never pushes main.
+D LAND ORDER: (1) jagday-walk-rv (+walk-cost-rv2) → (2) night-final-r3 (+balance-core-r3, giữ chân, môn ưa, co-op unpark, §7 knob if needed) → (3) rival-hauthay → (4) balance-final 40775131 (reviewer E9Hd8tHX re-merges after night-final LIVE; GO from MAIN 20:40Z) · emo-balance and econ-tamco land independently when PASS.
+RUNNING (tell each ONCE «Foreman D = <D #13 id>»):
+| session | job | state / next |
+|---|---|---|
+| session_01964izGHdj1g2LVwM27Nc3K | REVIEW jagday-walk #3 (ROUND 6) | on 20c8adbf (carry-loss root fix) + final-merge LIVE → LAND READY (covers walk-cost-rv2) or FAIL → open JAGDAY-WALK #5 |
+| session_01964izCYYK9w88YKJcvCFHe | NIGHT LAND CHAIN #7 | ⛔ re-port night chain's OWN diff onto fresh LIVE (night-final-r3 line reverts LIVE hunks: jbal2 cal-p2b mgPace windows etc., BAL.orig.id, BAL.invite.wait; 58 files) on a full-history clone + revert audit; then #6's gates (coop-steal 39/39, night-coop-park 7/7 …) → SSK night-final-r3 ~09:00–11:00Z → open a BIG reviewer (needs one: none assigned yet; GMDXZAV9 may re-check balance part) |
+| session_01964izGMDXZAV9nnY7QGK4P | KNOB SAMPLER (was balance-core reviewer) | arm «rst» = balance-core + LIVE hunks restored, no knob, ETA ~03:15Z; if HH still ≪ 32 % → best of K1 (RANKS Danh Phi 36/QP 45/HQP 55/HH 63) / K2 (bậc-3 cards at bậc 2) on rst (+70 min) → table in STATUS → D tells chain #7 which knob (if any) to fold in. BAL.art.gain stays HELD |
+| session_01964izCzS3APtxAsgZxDkgd | REVIEW rival-hauthay | PASS-PENDING-BASE ff63a590; when night-final-r3 is LIVE: replay ONLY its own commits (73a09248..ff63a590) onto that head on a full clone, re-run gates + coop-hauthay vs unparked co-op night → LAND READY |
+| session_01964izFYgpKE1QKqdLq7n1c | EMO BALANCE #1 | harm +15 % → BAL.feel tune; re-measure ETA ~03:30Z, SSK ~05:00Z → open a reviewer (sonnet ok? NO: numbers = opus) |
+| session_01964izCzXkfovcY4kd6X4Mk | ECON TAMCO #2 | UNBLOCKED 01:26Z (kit-ton-row LIVE e4fd4dcf): switch to kit Tốn row, merge LIVE, co-op check → SSK → reviewer session_01964izCjh2dKcmvL4sSYKMG (idle, waiting) |
+| session_01964izE9Hd8tHXKPw8ZCAif | REVIEW (balance-final) | idle; GO after night-final-r3 LIVE: re-merge balance-final 40775131 onto LIVE (full clone + revert audit!) + re-measure + cal-p2c N1 follow-up bundled |
+| session_01964izEaTxKjoN7ddzy2sMB | D RE-GATE LANDER | idle; re-gates stale LAND READYs |
+Archived by D #12: EnQ6kRCc, ErhGdgkw, FxPbxKJ, CAkPLwbF, FBGxYoMm, DuRCG31a, E3179UkN, C1nt5SGm.
+FOR MAIN open: origin-arts gap (Ba Tư roads bd_tuyet/bd_hen lack BAL.orig.art rows, LIVE too); NPC record off in co-op (j95on false) — thin-guest question for B; test debt list in D #11 handover.
+LESSON: never resolve merges on a --depth=30 clone (deepen/unshallow first) and audit `git diff LIVE..branch` for lost LIVE hunks before any LAND READY — put this in every brief.
+Hourly wake: recurring create_trigger is refused by the classifier → send_later chain (D #12's pending trig_01KbK5trUevsGAusRFm9Vzz7 deleted at rollover). Push: flock fetch + rebase; STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< " dev must be empty.
