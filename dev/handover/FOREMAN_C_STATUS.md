@@ -1038,3 +1038,4 @@ NEWACCT#15 ~03:28Z: opened #16 session_01D3E3NYgpZzskYx2Nvem9yW. Workers told to
 NEWACCT#16 ~01:58Z: started, depth 6, START_CTX ~4 % (roll at ~29 %, ceiling 60 %). No schedules. Next Lượt 1641.
 NEWACCT#16 ~01:59Z: workers DESIGN20/LADDER2/CHECK1/GEN1/POSEFIX1/PR21 told to report to #16. Waiting GEN1 t6–t8 drafts (165 cr), POSEFIX1, PR21 test room, DESIGN20 t5 v9.
 NEWACCT#16 ~01:59Z: #16 status msg to owner = Lượt 1641 (#15 also used 1641 for its handover note) → next Lượt 1642. CHECK1 idle, LADDER2 done/idle ~25 %, GEN1 drawing t6–t8.
+NEWACCT#16 ~02:00Z: DESIGN20 13337e0 t5 v9 COMOIh (1 hollyhock, no earrings) → CHECK1 job 14 → GEN1 55 cr (standing OK L1569).
