@@ -331,7 +331,7 @@ rdDef("bd_san",11,{t:"Vi trường năm sau",w:"emp",sj:"cuộc săn thu năm sa
   lose:{tag:"Mũi tên lạc",w:"v",t:()=>"Kẻ bắn không bị bắt. Hậu cung thì thầm: mũi tên ấy nhắm vào ai, có khi chỉ người {land} biết."+BDBOW(),go:(_A,G)=>{bdO("cungvua",bdO("cungvua")?"vua":0);return e67bien(G[0])}}}});
 RD97L.push(rdRare({a:"bd_san_11",tag:"Hoàng thượng trao cương ngựa ngự",w:"emp",n:"Nhảy sang lưng ngự mã, cầm cương thay ngài",
  path:["Bắn ngay","Chọn con ngựa xấu","Tâu xin cho Bạc Đồ","Đặt bẫy","Trình sợi đai","Nhận lời, cưỡi Ngọc Câu","Xin dạy các công chúa","Dùng cách chữa xứ tây","Tự giương cung","Nhận dạy các hoàng tử","Đi sát ngự mã","Nhận cung"],
- bad:["Ngồi xe","Thưa: thiếp thôi cưỡi","Thưa: thiếp không dám"],x:[()=>S.suc>=RR("bd_san_11").bar,"Sức từ "+RR("bd_san_11").bar],
+ bad:["Ngồi xe","Thưa: thần thiếp thôi cưỡi","Thưa: thần thiếp không dám"],x:[()=>S.suc>=RR("bd_san_11").bar,"Sức từ "+RR("bd_san_11").bar],
  t:"Ngươi nhảy sang lưng ngự mã đang hoảng, ghì cương, đưa ngài ra khỏi tầm tên trong một hơi thở. Ba hôm sau, Hoàng thượng ban chiếu: phi tần {land} được giữ cương ngựa ngự trong mọi cuộc săn, đặt chức Ngự mã nữ quan đầu tiên của Đại Hy. Ngọc Câu được ăn trong máng bạc.",
  go:(_A,G)=>e67bien(G[0]),rw:"bienngu",ti:"Người giữ cương ngựa ngự"}));
 
@@ -382,7 +382,7 @@ ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Ngai vàng Tô Lận",w:"emp",sj:"ngai v�
   win2:{tag:"Ấn của Đại Hy cho Nê Niết Sư",w:"emp",t:"Nê Niết Sư có tờ chiếu của Đại Hy trong tay. Vương thúc không dám động đến em, nhưng cũng không lùi."},
   mid:{tag:"Ngai vàng chưa có chủ",t:"Đại Hy chưa nói gì. Ở {land}, vương thúc và em trai ngươi mỗi người giữ một nửa các đại tộc."},
   lose:{tag:"Vương thúc ghi nhớ ngươi",w:"emp",t:"Sứ vương thúc về tây, mang theo tên ngươi như tên một kẻ thù.",go:(_A,_ok,G)=>e67bien(G[0])}}});
-BD97.push({a:"bd_soi",tag:"Phụ vương tỉnh lại",w:"emp",n:"Xin Hoàng thượng cho thiếp tự mang thuốc sang kim điện",
+BD97.push({a:"bd_soi",tag:"Phụ vương tỉnh lại",w:"emp",n:"Xin Hoàng thượng cho thần thiếp tự mang thuốc sang kim điện",
  path:["thái y theo sứ","vòng ngọc của mẹ","Hồi thư dạy em","Đốt lời nhắn","Đưa lời nhắn lên Hoàng thượng","chờ {pv} tỉnh"],bad:["Nhận ngựa thay","Giữ lời nhắn, chưa đáp"],x:[()=>S.duc>=BAL.arc.rare.bd_soi.bar,`Đức từ ${BAL.arc.rare.bd_soi.bar}`],
  t:"Ngươi theo sứ đoàn sang tây, mang thang thuốc của Thái y viện và chiếc khăn gấm của {mh}. Đêm thứ ba ở kim điện, {pv} mở mắt, gọi tên ngươi bằng tên thuở nhỏ. Vương thúc quỳ ngoài điện đến sáng. Trước khi ngươi về, {pv} tháo chiếc nhẫn ấn khắc đôi cánh trao cho ngươi: “Con giữ. Tô Lận nhớ ai đã cứu nó.”",
  go:(_A,_ok,G)=>{bdO("ansoi","ta");return e67bien(G[0])},rw:"nt_dongchau",ti:"Người gọi Phụ vương tỉnh lại"});
@@ -502,7 +502,7 @@ rdDef("bd_soi",8,{t:"Vương hậu vào kinh",w:"emp",sj:"{mh} lánh nạn ở k
  c2:{h:"{v} nói {mh} là gián điệp",w:"v",need:["v"],if:()=>BDKD()==="kinh",t:()=>"{v} nói với Thái hậu: “{mh} {land} ở "+(RD_FL("bd_soi.chua")?"ngoài thành":"ngay trong kinh")+", ai biết bà gặp những ai?”",o:[
   {n:"Mời {v} đến thăm {mh}",wx:"{v} tận mắt thấy bà chỉ là một người mẹ",lx:"{v} có thể nói thêm",go:(A,ok,G)=>{ok?rdRel(A,"v",G[0]):rdOan(A,"v",G[1]);return""},rt:"{v} về, không nói thêm.",rf:"{v} về kể bà nói tiếng {land} với người lạ."},
   {n:"Xin Thái hậu cử người canh {mh}",wx:"không ai còn cớ",lx:"mẹ ngươi bị canh như tù",rt:"Thái hậu cử hai ma ma đến ở cùng {mh}."},
-  {n:"Đáp: mẹ {tx} gặp con gái mình",wx:"giữ được thể diện",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái hậu gật, {v} im."}]},
+  {n:"Thưa: mẹ thần thiếp gặp con gái mình",wx:"giữ được thể diện",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái hậu gật, {v} im."}]},
  c3:{h:"Đội kỵ sĩ của {mh} ở ải tây",w:"emp",if:()=>BDKD()!=="kinh",t:"Mười kỵ sĩ theo {mh} giữ trại bà ở chỗ họ ngoại. Tổng binh ải tây tâu về: có cho người của {mh} mang gươm ra vào ải không.",o:[
   {n:"Xin cho đội vệ của {mh} mang gươm ra vào ải",wx:"bà có người giữ",lx:"Binh bộ sợ",rt:"Hoàng thượng chuẩn: mười gươm, không hơn."},
   {n:"Xin lính ải Đại Hy canh trại bà",wx:"không ai nói gì",lx:"bà sống giữa người lạ",rt:"Mười kỵ sĩ giao gươm. Lính ải Đại Hy đứng ngoài trại bà."},

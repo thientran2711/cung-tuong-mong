@@ -593,7 +593,7 @@ rdDef("pt_dang",11,{t:"Luật biển",w:"emp",sj:"luật biển cho bến Minh C
   mid:{tag:"Lệ cũ",t:"Bến Minh Châu theo lệ cũ. Ngươi vẫn có tên trên bản thảo đầu tiên, dù không ai đọc."},
   lose:{tag:"Luật bị bỏ dở",w:"v",t:"Luật biển bị gác lại. {v} nói: phi tần ngoại quốc thì đừng mong soạn luật Đại Hy.",go:(_A,G)=>e67bien(G[0])}}});
 RD97L.push(rdRare({a:"pt_dang_11",tag:"Ngọn đèn ba nước",w:"emp",n:"Xin dựng ở cửa bến Minh Châu một ngọn đèn biển, ba nước cùng giữ",
- path:["Mời Kim Hựu Thành vào","Giữ thư, nhờ Kim Hựu Thành","Thưa: thiếp muốn dùng đao","Hẹn Ô Cửu","Quyết đem ngọc chuộc người","Dâng sổ thật","Trình thư của giặc","Xin tha Ô Cửu","Thêm một điều"],
+ path:["Mời Kim Hựu Thành vào","Giữ thư, nhờ Kim Hựu Thành","Thưa: thần thiếp muốn dùng đao","Hẹn Ô Cửu","Quyết đem ngọc chuộc người","Dâng sổ thật","Trình thư của giặc","Xin tha Ô Cửu","Thêm một điều"],
  bad:["Để thứ sử chém","Để Hộ bộ soạn luật","Thưa: rương bạc mất thì thôi"],x:[()=>S.tamco>=RR("pt_dang_11").bar,"Tâm cơ từ "+RR("pt_dang_11").bar],
  t:"Ngươi không xin thêm một điều luật nào, chỉ xin dựng ở cửa bến Minh Châu một ngọn đèn biển: dầu do thuyền Tân La góp, bấc do thuyền {land} góp, tháp do Đại Hy xây. Đêm đầu tiên đèn sáng, thuyền ba nước đều kéo buồm chào. Hoàng thượng đặt tên tháp là “Đăng Hải”, và cho khắc tên ngươi dưới chân tháp.",
  go:(_A,G)=>{if(PFHT())pfMove("huuthanh","cang");return e67bien(G[0])},rw:"nt_dongchau",ti:"Người thắp đèn biển"}));

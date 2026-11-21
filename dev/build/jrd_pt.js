@@ -102,7 +102,7 @@ ARC67.pt_hai=pfArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",s
   mid:{tag:"Sổ cống còn ghi thiếu",t:"Triều nghị khép lại. Sổ Hộ bộ vẫn ghi một dòng thiếu, chờ thuyền thứ tư hoặc thuyền năm sau."},
   lose:{tag:"Nửa phần cống",w:"v",t:"{v} kể khắp hậu cung: {land} gửi sang một nàng công chúa và nửa rương đồ, rồi đổ cho biển."}}});
 PF97.push({a:"pt_hai",tag:"Lửa hiệu trên Ngũ Đảo",w:"emp",n:"Xin Hoàng thượng cho đốt lửa hiệu dọc bờ Minh Châu suốt ba đêm",
- path:["Đứng cạnh đại sứ","Gửi bạc cho thuyền chài","Hỏi đại sứ","Gửi mảnh ván","Thưa: thiếp tin","Tâu: biển lấy cống"],bad:["Lặng thinh","Thưa: thiếp chờ gió mùa"],x:[()=>S.tamco>=BAL.arc.rare.pt_hai.bar,`Tâm cơ từ ${BAL.arc.rare.pt_hai.bar}`],
+ path:["Đứng cạnh đại sứ","Gửi bạc cho thuyền chài","Hỏi đại sứ","Gửi mảnh ván","Thưa: thần thiếp tin","Tâu: biển lấy cống"],bad:["Lặng thinh","Thưa: thần thiếp chờ gió mùa"],x:[()=>S.tamco>=BAL.arc.rare.pt_hai.bar,`Tâm cơ từ ${BAL.arc.rare.pt_hai.bar}`],
  t:"Ngươi nhớ lời Nham Lão kể khi còn ở Phù Tang: thuyền lạc đêm đi theo lửa. Hoàng thượng cho đốt lửa hiệu dọc bờ Minh Châu ba đêm liền. Đêm thứ ba, lính canh thấy một đốm lửa nhỏ đáp lại ngoài khơi: thuyền thứ tư còn nổi. Hoàng thượng sai thưởng cho ngươi một cây trâm đông châu: “Ngọc của biển, trả cho người biết gọi biển.”",
  go:()=>pfO("dongchau","ta")/* r2 6c: the reward is the hairpin (rw item), booked as hers */,rw:"nt_dongchau",ti:"Lửa hiệu trên Ngũ Đảo"});
 

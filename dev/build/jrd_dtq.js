@@ -953,7 +953,7 @@ rdDef("dtq_huynh",9,{t:"Anh trở về, bị nghi",w:"emp",sj:"tờ hàng thư m
   {n:"Để cha lên",wx:"uy cha làm nhiều kẻ im",lx:"vua thấy nhà ngươi dùng uy ép triều",go:(_A,_ok,G)=>e67dad(G[0]),rt:"Cha đứng giữa triều, không ai dám bước ra."}]},
  t1:{h:"Ngài hỏi ngươi",w:"emp",t:"Đêm ấy Hoàng thượng hỏi thẳng: “Nàng nói trẫm nghe: huynh nàng có hàng không?”",o:[
   {n:"Thưa thật: huynh có ký, để cứu trăm người",f:"truth",wx:"vua nghe sự thật từ ngươi trước",lx:"ngài nghe chữ “ký”",rt:"Hoàng thượng im lặng thật lâu: “Trẫm cũng có lính. Trẫm hiểu.”",rf:"Hoàng thượng đứng dậy: “Ký là ký.”"},
-  {n:"Thưa: thiếp tin huynh không hàng",wx:"lời gọn, không sai",lx:"ngài biết ngươi tránh câu hỏi, ngươi lo nghĩ hao sức",rt:"Hoàng thượng gật đầu, không hỏi nữa."},
+  {n:"Thưa: thần thiếp tin huynh không hàng",wx:"lời gọn, không sai",lx:"ngài biết ngươi tránh câu hỏi, ngươi lo nghĩ hao sức",rt:"Hoàng thượng gật đầu, không hỏi nữa."},
   {n:"Thưa: xin ngài để Đại Lý tự xét",wx:"ngươi không xen vào việc xử",lx:"ngài thấy ngươi bỏ huynh",rt:"Hoàng thượng nói: “Được.”"}]},
  x1:{h:"Tờ hàng thư trên ngự án",w:"emp",t:"Mai triều đình bàn tờ hàng thư; cha {v} sẽ xin tống giam huynh trưởng. Đêm nay, trong Ngự thư phòng, Hoàng thượng để ngươi nói một lời. Quyết là của ngài.",o:[
   {n:"Xin ngài cho thân binh vào triều kể lại đêm ấy",e:["win","lose"],rt:"Hôm sau, một thân binh cụt tay quỳ kể giữa triều. Đến câu “tướng quân ký để chúng thần sống”, cả triều cúi mặt.",rf:"Thân binh run, nói lộn xộn. Cha {v} cười: “Lính nhà ấy, nói gì chẳng được.”"},

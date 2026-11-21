@@ -497,7 +497,7 @@ rdDef("nc_su",11,{t:"Chiếc cầu hai nước",w:"emp",sj:"quốc thư của {l
   mid:{tag:"Hai nước yên, ngươi đứng giữa",t:"Hai nước giữ lễ với nhau. Không ai trách ngươi, cũng không ai cần ngươi. Ngươi tự đi đường mình trong cung."},
   lose:{tag:"Sứ tiết thưa dần",w:"emp",t:"Quốc thư đi rồi không thấy hồi âm. Năm sau {land} không sai sứ sang. Ngươi vẫn là phi tần của Đại Hy, nhưng con đường về nhà đã cỏ mọc.",go:(_A,G)=>e67bien(G[0])}}});
 RD97L.push(rdRare({a:"nc_su_11",tag:"Hai triều cùng sắc phong",w:"emp",n:"Xin Hoàng thượng cùng đóng ấn vào lá thư ngươi viết cho cha",
- path:["Tạ ơn, xin ngài giữ cầu cùng","Xin ngài cho thiếp viết thư nhà gửi kèm","cha thiếp giận, không phải","Gửi kèm bức chân dung","đi đường quan","Kể từng điều Đại Hy được lợi","nàng là cầu của hai nước"],bad:["Gửi lễ hòa giải","Xin ngài đừng nhắc đến thiếp"],x:[()=>S.danh>=RR("nc_su_11").bar,"Danh từ "+RR("nc_su_11").bar],
+ path:["Tạ ơn, xin ngài giữ cầu cùng","Xin ngài cho thần thiếp viết thư nhà gửi kèm","cha thần thiếp giận, không phải","Gửi kèm bức chân dung","đi đường quan","Kể từng điều Đại Hy được lợi","nàng là cầu của hai nước"],bad:["Gửi lễ hòa giải","Xin ngài đừng nhắc đến thần thiếp"],x:[()=>S.danh>=RR("nc_su_11").bar,"Danh từ "+RR("nc_su_11").bar],
  t:"Lá thư ngươi viết đi cùng quốc thư, dưới có ấn Đại Hy. Mùa xuân năm sau, sứ đoàn mang sang hai đạo sắc: một của cha ngươi phong ngươi làm công chúa hộ quốc, một đạo Hoàng thượng đã viết sẵn chờ, ban ngươi hiệu riêng. Hai đạo sắc treo cạnh nhau trong cung ngươi.",
  go:(_A,G)=>e67bien(G[0]),rw:"nt_dongchau",ti:"Phi tần hai triều sắc phong"}));
 /* ---------- nc_tuc · Người ngoại tộc ---------- */
