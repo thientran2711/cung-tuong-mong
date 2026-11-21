@@ -1317,3 +1317,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
  (5) L1939 m10: note — waist sash must bind the jacket inside; nhị currently looks like open outer coat → fix nhị.
  → MAIDFIX4: nhị files fix (bow centre + sash closes jacket) m09 m10 m12 m13 + thân cận hair sample → VE10 4×135 + 55 = 595 cr.
 Next Lượt 1953.
+#27 ~09:32Z: OWNER L1953 on L1940: Hán t1–t3 collar APPROVED (lock). Loose hair OK (she likes it). Band-merge issue: ignore. t3 Quý nhân add sash bow → HAN6 → VE7 1@55. NEW: HAN6 research Han full-outfit wearing (layers, embroidery/trim placement) VN summary. Next Lượt 1954.
