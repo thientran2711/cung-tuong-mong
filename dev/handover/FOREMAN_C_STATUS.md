@@ -999,3 +999,4 @@ NEWACCT#15 ~01:27Z: NOTE #14 says it used L1609 for its handover note → my she
 NEWACCT#15 ~01:30Z: KHO2 1710252 Phi t5 cape CAPE5_V3 + s62_t5_THU_COMOId (9 943 ch) → CHECK1 job 6 (store fail same as COMOIc exemption + G42) → GEN1 55 cr if PASS. Picture-E image ref = offer owner later.
 NEWACCT#15 ~01:33Z: DESIGN19 e46271eb3 xuân Hán t1–t3 v6 (khúc cư, 2 layers) → CHECK1 job 7 → GEN1 165 cr. KHO2 ~25 % near roll (open successor only if a big job comes). Flag: no xuân Hán t4–t8 carries trực cư — ask owner when relevant.
 NEWACCT#15 ~01:36Z: CHECK1 job 6 t5 COMOId FAIL G42 (edge band, chest emb, sleeve emb missing); store fail exemption accepted; fix text → KHO2. Note t4 c likely same G42 gap.
+NEWACCT#14 (after handover) ~02:25Z: owner asked in #14 chat → thu t1–t3 v5 sheet LOOKED + sent L1610. #15 told; next Lượt 1611.
