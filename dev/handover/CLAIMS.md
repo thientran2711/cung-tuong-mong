@@ -923,3 +923,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | E44b coop-famops fixer (opus BIG co-op; successor of E44; seed 4242 vanish + res no-retry lead) | review/coop-famops; briefs/E44b-coop-famops-fixer.md | FOREMAN E #29 | session_01DgYSWpsqWVG7nn7zh9VgW3 | RUNNING | 21/11 18:20Z |
 | RELAND podium-wire r2 (opus BIG; OR09/J8; LRRY FAIL jentry.js vs 70375dbf) | review/podium-wire-r2; briefs/M99-podium-wire-relander.md | MAIN CHÍNH 99 | session_01Rc5AsJzz5VENRwKX6fKout | RUNNING | 21/11 18:46Z |
 | rv-kit-mark-fix r7 | PASS | review/kit-mark-fix-rv7 8c48011473992f70d4e8b159826d30ce730a30cd | ~30 runs 0 mark FAIL; only harness splash «cards 0»; quickcheck + coop-e2e 124/124 |
+| RELAND r2 ui-leftover-fold (opus reviewer-lander; perf FAIL root cause = probe noise) | review/ui-leftover-fold-r2 da27c7e2; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 18:48Z |
