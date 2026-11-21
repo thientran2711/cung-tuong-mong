@@ -743,6 +743,7 @@ def thu_sentences(S,person,rank,strict=True):
         if m: S=(S[:m.start()]+S[m.end():]).replace("  "," "); notes.append("thu ladder DROP "+kind)
     if rank==4: S=THU.capelet_thu(S); notes.append("thu L2041 CAPELET CUT (open front)")
     if rank==6: S=THU.colour_t6(S); notes.append("thu COLOUR RULE cloud collar (no cape, L2119); refs "+" + ".join(THU.refs(6)))
+    if rank==6: S=THU.colour_t6(S); notes.append("thu L2088 COLOUR RULE cloud collar; refs "+" + ".join(THU.refs(6)))
     if rank>=7: notes.append("thu refs "+" + ".join(THU.refs(rank)))
     return S,notes
 def _build_season2(person,rank,age,season):

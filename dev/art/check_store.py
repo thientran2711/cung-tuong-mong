@@ -416,6 +416,15 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'proof': 'dev/art/owner-copy/trieu/r27/t3_c06_RAN.txt',
   'picture': 'triều phục c06 r21 (Lượt 492: t4, t6, t7, t8 OK; t4 cut u5W4dPuQLD, t6 cut N2q8sOD6D9) · https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r19/c06_sheet21.jpg',
   'vn': 'Triều phục: áo và tay bằng GẤM NHẸ NHẤT, mỏng, mềm, mặt lì, không dày/cứng/nặng, rủ thướt tha, cùng một câu ở cả 8 bậc (owner L2122).',
+  'text': 'FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as brocade flows, the same brocade on every rank, never thin, limp or flimsy.',
+  'scope': 'trieu1-8',
+  'confirm': '',
+  'ages': '',
+  'luot': '444 (H2)',
+  'source': 'dev/art/owner-copy/trieu (r17+)',
+  'proof': 'dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt',
+  'picture': 'triều phục c06 r21 (Lượt 492: t4, t6, t7, t8 OK; t4 cut u5W4dPuQLD, t6 cut N2q8sOD6D9) · https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r19/c06_sheet21.jpg',
+  'vn': 'Triều phục: áo và tay bằng GẤM dệt hoa, rủ như gấm, cùng một câu gấm ở cả 8 bậc.',
   'store': False},
  {'id': 'S29',
   'title': 'TRIỀU PHỤC sleeves to the ankles (t1-t6)',
@@ -774,6 +783,7 @@ def hqp_store(store,prompt):
         rx=re.escape(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ").replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
         pm=re.search(rx,prompt)
         if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:   # BUILDFIX5: + the L2119 one-tier vân kiên form
+        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:
             return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
     return store
 def thu_fabric_waiver(text, scope):
@@ -820,6 +830,13 @@ def store_check(pf, prompt, args):
     _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
     store=master_common.b32_store_swap(store,prompt,_sc)   # BUILDFIX5 B32 (owner L2122): thu t6-t8 brocade store words read as the t1-t5 thu fabric words
     store=master_common.l2119_store_swap(store,prompt)   # BUILDFIX5 L2105/L2119: old vân kiên / cape store words read as the new words when the prompt has them
+        _g15=g15_t3_words(_age); _g15=winter_g28.fabric_form(_g15) if winter_g28.is_winter(prompt) else _g15   # SEASON đông: G28 opaque shawl inside the t3 words
+        rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
+        store=store[:m.start()]+store[m.end():]
+        if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
+    store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
+    store=re.sub(r"(?:,|;) a sheer silk shawl(?=[;.,])","",store)   # G36 (owner L1446): the store shawl words are optional (builder xuân/đông drop them)
+    _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -1337,6 +1354,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     _high = master_common.high_scope(scope)
     if _high and master_common.thu_b32(text, scope): _high = False; warns.append(("B32", "THU FABRIC", "thu t6-t8 thường phục: the t1-t5 thu fabric sentence (M06) stands in the brocade slot (owner L2122 CHỐT)"))
     for k, kind, d in master_common.check(text, high=_high, female=not master_common.male_scope(scope), winter=_winter, doan=_doan, scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=_doan, scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))

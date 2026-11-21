@@ -3,6 +3,12 @@ allow: its lower edge cut into 5 or 6 LARGE round petal lobes  # owner L2070/L20
 allow: a pearl drop at each lobe tip  # owner L2070/L2072: back to L2041 pearl fringe
 allow: each lobe gold-edged  # owner L2070/L2072: back to L2041 edge words
 allow: (never small waves)  # owner L2070/L2072
+allow: never cross-eyed  # trim to fit 10 000: same eye sentence keeps 'never looking in two directions'
+allow: never wall-eyed  # trim to fit 10 000: same
+allow: never a stretched grin  # trim to fit 10 000: the MOUTH sentence keeps 'never a grin'
+allow: (pose variety, every rank its own)  # trim to fit 10 000: label text only
+allow: youthful adult  # trim to fit 10 000 (s65 only): "about 22" + adult body proportions kept
+allow: clearly adult  # trim to fit 10 000 (s65 only)
 allow: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:  # trim to fit 10 000: short caption form (as s65 NECK)
 allow: bold  # A53 owner L2110: ChatGPT paste file, no test-label caption
 allow: top-left  # A53 owner L2110: ChatGPT paste file, no test-label caption
