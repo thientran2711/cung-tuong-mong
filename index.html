@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e3282a03+","t":"2026-11-21T16:16Z","c":"coop-famops r2: a lost-case piece of hers that leaves MY slots inside a host NPC turn is routed «sang hảo hữu» in my census (COOP_SKEW: her…","b":"9a1e8eccf326","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
+window.CTM_BI={"s":"24196bf0","t":"2026-11-21T19:19Z","c":"coop-famops r3d (E44b, root found by E44r: SWAP vanish 399/1571): b4Send hands a res to D.resTo only on the host (as sendRes); the guest's …","b":"753ea642ee26","h":[{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -47701,7 +47701,13 @@ function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
    her ledger box). A lost-case piece handed back to her entry outside an act (Lén trả lại, a hearing, a holder who dies…) is sent the same
    way (lostReturn hook below). Before: «ret» pushed a copy of the case piece whatever was already home, «rm» took another piece of the kind
    (coop-dresscode-scan: guest trâm 2 copies / gone; a đàn case closed with the piece nowhere), and a failed loLose spliced her LAST piece. */
-function famRet(e){const x=J(e);delete x.ci;delete x.lo;delete x.by;delete x.gh;delete x.h;delete x.w;return Object.assign({op:"ret",k:e.k},e.iu?{iu:e.iu}:{},{e:x})}
+/* E44b (E44r seed 4242: host pieces 1073 / 144 gone from her seat while his case still «held by 902»): the piece and the case on the sending
+   seat may carry different ids (a census renumbered one); `alt` = every other id that names this piece (its hiu, the id of the sender's
+   case of it: FA), so the receiver finds its case by ANY of them */
+const FA=new WeakMap();
+function famRet(e){const x=J(e);delete x.ci;delete x.lo;delete x.by;delete x.gh;delete x.h;delete x.w;
+ const alt=[...new Set([e.hiu].concat(FA.get(e)||[]))].filter(i=>i&&i!==e.iu);return Object.assign({op:"ret",k:e.k},e.iu?{iu:e.iu}:{},alt.length?{alt}:{},{e:x})}
+const famIds=o=>[o.iu].concat(Array.isArray(o.alt)?o.alt:[]).filter(Boolean);
 /* hiu = the id the HOST's copy of her piece carries when it differs from hers (her entry was numbered on the host before her own census
    numbered the piece): both ids name the one piece */
 const famIs=(x,iu)=>!!x&&!!iu&&(x.iu===iu||x.hiu===iu);
@@ -47718,26 +47724,30 @@ function famOff(e){const i=(S.inv||[]).indexOf(e);if(i>=0){S.inv.splice(i,1);ret
  return false}
 function famMiss(o,why){const iu=o.iu||(o.e&&o.e.iu)||0,k=o.k||(o.e&&o.e.k);(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k,iu,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,k,iu,why)}
 /* her open case of that piece: by id; an op with no id (old room): the case of that kind the friend holds */
-function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));if(o.iu){const c=L.find(c=>famIs(c.e,o.iu));if(c)return c}
- return o.iu&&L.some(c=>c.e.iu)?L.find(c=>!c.e.iu&&c.k===o.k&&(c.by===fp()||c.at===fp()))||null:L.find(c=>c.k===o.k&&(c.by===fp()||c.at===fp()))||null}
+function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));for(const id of famIds(o)){const c=L.find(c=>famIs(c.e,id));if(c)return c}
+ /* E44b (E44r): a «ret» whose ids all miss (a census renumbered the piece on one seat) still closes THE case of that kind the friend holds
+    (an id-less one first): the piece comes home once and his side never stays «held» by her for a piece she no longer has */
+ const fh=L.filter(c=>c.k===o.k&&(c.by===fp()||c.at===fp()));
+ return o.iu&&L.some(c=>c.e.iu)?(fh.find(c=>!c.e.iu)||(o.op==="ret"?fh[0]:null)||null):fh[0]||null}
 /* the piece is back with her: close the case through the ONE owner change (jlost lostReturn), the holder's copy on this seat leaves.
    Returns the piece put in her chest, or null (already hers / nothing real to put). */
-function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;
+function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const ids=famIds(o);if(c&&c.e&&c.e.iu)ids.push(c.e.iu);const mineAny=()=>ids.some(i=>famWhere(i));
  if(c){let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
   if(x&&x.h!==S){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
-  if((x&&x.h===S)||famWhere(iu)){c.st="done";c.end=wk();c.how="nha";try{if(typeof loLedgerBack==="function")loLedgerBack(c)}catch(z){}return null}
+  if((x&&x.h===S)||mineAny()){c.st="done";c.end=wk();c.how="nha";try{if(typeof loLedgerBack==="function")loLedgerBack(c)}catch(z){}return null}
   const n=(S.inv||[]).length;if(typeof lostReturn==="function"&&lostReturn(Object.assign({},c.e,{lo:c.id}),"nha")&&S.inv.length>n)return S.inv[S.inv.length-1];
   if(c.st!=="done"){c.st="done";c.end=wk();c.how="nha"}}
- if(iu&&famWhere(iu))return null;
- if(o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;delete x.lo;delete x.by;delete x.gh;S.inv.push(x);return x}
+ if(mineAny())return null;
+ if(o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;delete x.lo;delete x.by;delete x.gh;S.inv.push(x);if(!c&&o.op==="ret")famMiss(o,"ret: no case, piece put in chest");return x}
  famMiss(o,c?"case closed, no piece":"no case, no piece");return null}
 /* a lost-case piece handed back to the friend's ENTRY outside an act (my «Lén trả lại» from Tư trang › Việc, a hearing verdict, a holder who
    dies…): her entry is only a copy of her chest, so the piece goes to her seat as the same «ret» op (inside an act on her the act's own diff
    sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
 (function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
  try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
+ let ca=[];try{const c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
  const r=f0.apply(this,arguments);
- try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
+ try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];FA.set(x,ca.filter(Boolean));/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
   if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
 /* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
    (st done «mat») — the thief's «Lén trả lại» / «Trả lại» left Tư trang › Việc a week after every theft from her. Her own seat keeps her
@@ -47745,9 +47755,23 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;
 (function(){if(typeof loWeek!=="function")return;const f0=loWeek;loWeek=function(){if(!CW.on||!S)return f0.apply(this,arguments);
  const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&(String(c.own)===F||String(c.at)===F)&&wk()-c.w<=ex);/* r2: also MY piece HELD by the friend (her entry is pulled out → «mất dấu»: vanish) */
  const sv=L.map(c=>[c.st,c.end]);for(const c of L){c.st="done";c.end=wk()}try{return f0.apply(this,arguments)}finally{L.forEach((c,i)=>{c.st=sv[i][0];c.end=sv[i][1];if(c.end===undefined)delete c.end;if(S.lost&&!S.lost.includes(c))S.lost.push(c)})}};window.loWeek=loWeek})();
+/* E44b (E44r seed 4242 dup 10000054: in the host's chest AND in her own case lo2): the host's copy of her entry still carried a piece that
+   on her seat had already gone into HER open «thất lạc» case (no holder); his act took it. The piece is now on his side: the case is held by
+   the thief (how «lost», as fix 3) or closes «mất dấu bên hảo hữu» (any other road); her census routes it, never nets it. true = handled */
+function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&c.st==="lost"&&c.e&&c.own===key(S)&&famIs(c.e,o.iu));if(!c)return false;
+ try{if(typeof loEntry==="function"&&loEntry(c))return false}catch(z){}
+ if(o.how==="lost"){const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();Object.assign(c,{keep:1,by:fk,st:"held",at:fk})}else{c.st="done";c.end=wk();c.how="matdau"}
+ try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),o.how==="lost"?"sang hảo hữu":"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}
+ return true}
+/* E44b (COOP_SWAP seed 4242 w4: her case 1 «held» was read as host case 1's piece): the two seats number lost cases on their own (S.loSeq), and
+   the copies of the host's people on her seat carry HIS «lo» marks, so jlost loEntry (holder by c.at, else any consort's piece marked
+   lo === c.id) found another case's piece: her case took its id (census c.e.iu sync) and holder (c.at), and closed onto it (dup + vanish).
+   A piece of another kind is never that case's piece: no entry (c.at kept) */
+(function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
+ try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
- const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e)famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
+ const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
  for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;if(!famOff(e)){famMiss(o,"gone meanwhile");continue}if(o.iu&&!e.iu)e.iu=o.iu;
   if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
    const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:fk,keep:1})}finally{S.inv=all.filter(x=>x!==e)}
@@ -48327,7 +48351,8 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
  if(b.K0.preg&&!v.preg)ops.push({op:"preg0"});return ops}
 function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId();CW.rpend[rid]=Date.now();(CW.b4s=CW.b4s||[]).push({ops:ops.map(x=>x.op),tt:o.tt||""});if(CW.b4s.length>20)CW.b4s.shift();
  const msg=Object.assign({t:"res",id:rid,k:o.pet&&o.pet.some(x=>x.op==="lose")?"petsteal":"npc",n:"",who:"",fx:o.fx||{},flags:{},seen:"effect",fam:ops,hd:o.hd||"",tt:o.tt||""},o.fest?{fest:o.fest}:{},o.pet&&o.pet.length?{pet:o.pet}:{});
- if(dOn()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
+ /* E44b (E44r SWAP vanish 399 / 1571): the lostReturn hook sends from the GUEST too; D.resTo runs on the host only (as sendRes) — on the guest it ran the «ret» locally and the host case stayed «held» */
+ if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
 /* r1 fix 2: an NPC's pet act on her entry (jpetcare mindMenu petsteal / thaopet) → the same res.pet ops as mine: she loses it, not a copy */
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
@@ -89762,7 +89787,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9a1e8eccf326";window.CTM_BUILD=BUILD;
+const BUILD="753ea642ee26";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
