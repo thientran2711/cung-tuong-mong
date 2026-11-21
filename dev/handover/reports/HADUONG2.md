@@ -20,3 +20,18 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 ## Draw
 - Sent to VE10 session_01D3E3NaakFbargWadMNeWzZ @55, all 4 (all changed), sheet ha_maid_L1919.png thô sử | tam | nhị | nhất.
 - VE10 holds the job until #26 says "VE10 GO m18" (its standing order).
+
+# OWNER L1924 (via #26) — hạ Đường CONSORTS t1–t3 (sheet ha_t1_t3_L1908: t1 yiugBgJPW9 · t2 0eUAAiwTfW · t3 6AbJJSriJO)
+## Research (thêu trên lụa/sa mỏng thời Đường)
+- Lụa sa (纱/罗) đời Đường mỏng nên ít thêu dày: hoa văn trên thân áo sa chủ yếu là IN/NHUỘM (giáp hiệt 夹缬 kẹp ván, lạp hiệt 蜡缬 sáp, giảo hiệt 绞缬 buộc) hoặc vẽ/in kim (描金, 印金) — vải Astana (Turfan), kho Shōsōin.
+- Thêu thật (bình thêu 平绣) đặt ở chỗ vải dày/đôi: viền cổ, viền tay, gấu, đai ngực/cạp váy (裙腰), lớp váy lụa bên trong — không thêu dày trên lớp sa ngoài.
+- Thêu kim tuyến cuộn (蹙金绣) là hàng quý nhất (Pháp Môn tự 874, đồ cúng hoàng gia) → chỉ dành cho bậc cao.
+- Họa tiết: hoa nhỏ rải (散花), đoàn hoa (团花), chim én/uyên ương nhỏ; tranh Chu Phưởng cho thấy áo sa ngoài có hoa rải thưa, hoa lớn đậm nằm ở váy/đai.
+- Áp vào bậc: t1–t3 thêu chỉ tơ ở đai ngực + viền, thân áo sa hoa thưa, vàng chỉ là đường viền mảnh; Tần–Phi thêm hoa lớn và vàng nhiều hơn; vàng cuộn (蹙金) + in kim khắp áo chỉ từ Quý phi trở lên.
+## Files (dev/art/seasons4, base = same rank L1908, .keep PASS ×3)
+- s62_t1_ha_DUONG_L1924.txt (9872): clothes = old Tần unchanged; caption exactly "Mùa Hạ · Thiết kế thời Đường · Đáp ứng"; hairpins → a few silver pins with small pearl dangles (no jade, no bu yao); ONE embroidered plum blossom at the chest band centre above the bow, no jewel/jade/clasp/pendant on band or bow; + CHEST BAND ON TOP sentence (robe tucked into the skirt under the band, nothing over the band).
+- s62_t2 (9866): borders = rank-1 level (indigo borders, silk-thread plums, thin gold outline only, no gold bands/ribbons); a few large plums on the robe as t1 + one small skirt spray; band 1¼ palm, THREE silk-thread plums, one thin gold border, centre flower, no clasp; silver pins a few more than t1, no bu yao; + CHEST BAND ON TOP.
+- s62_t3 (9995): as t2 + one small peony spray + two skirt sprays + two small birds on the band; faint tone-on-tone weave in the skirt; band 1⅓ palm; silver+pearl pins, one gold pin, never spiky (G39); + CHEST BAND ON TOP.
+- Trimmed boilerplate (t2/t3, to stay under 10 000): "a NEW outfit, a full Tang-dynasty court look", "her signature colour family … stays the MAIN robe colour", "(her first reference)" — colour still stated in the COLOUR RULE.
+- check_store tp1/tp2/tp3 a18: FAIL only S08 (ankle sleeves) + S20 (buns, not loose) on all 3, + S06 (store fabric sentence) on t1. Same as L1908 (t1 = verbatim old Tần). Waiver 17 names S08 only → asked #26 to extend it to S20 (+S06 t1).
+- Not changed: t1 hair flower is still LARGE (old Tần); F13 says t1 small, but the owner raised only the hairpins.
