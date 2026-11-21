@@ -53,7 +53,7 @@ rdDef("td_an",5,{t:"Bản sớ gốc",w:"eun",sj:"tờ sớ vu cáo năm xưa",c
   {n:"Đáp: tìm để thắp hương cho cha",wx:"không lộ ý",lx:"{foe} không tin",rt:"{foe} không hỏi thêm."},
   {n:"Đáp thẳng: để lật án",wx:"{foe} chột dạ, lộ ra nỗi sợ",lx:"{foe} báo cha",go:(A,ok,G)=>{const e=foe67();if(e)oanAdd(e,S,ok?G[0]:G[1])},rt:"Người đưa tin kể: {foe} làm rơi chén trà.",rf:"Ngay chiều ấy, phủ {foed} đóng cổng."},
   {n:"Không đáp",wx:"giữ kín",lx:"{foe} càng nghi",rt:"Người đưa tin đứng chờ rồi về."}]},
- t1:{h:"Son phê và ấn giả",w:"maid",t:"{maid} lén xem được bản gốc: ấn Binh bộ lệch một nét ở chữ “Binh”. Thợ khắc ấn năm ấy họ Lý, nay mở hàng khắc dấu ở ngoại thành.",o:[
+ t1:{h:"Son phê và ấn giả",w:"maid",t:"{maid} lén xem được bản gốc: ấn Binh bộ lệch một nét ở chữ “Binh”. Thợ khắc ấn năm ấy họ Tần, nay mở hàng khắc dấu ở ngoại thành.",o:[
   {n:"Tìm thợ Lý",f:"seal",wx:"có người làm chứng về ấn",lx:"thợ Lý bỏ trốn",rt:"Thợ Lý nhìn bản dập rồi tái mặt: “Nét này là tay tiểu nhân.”",rf:"Hàng khắc dấu đóng cửa từ hôm qua."},
   {n:"Nhờ người đối chiếu với ấn thật ở Binh bộ",f:"seal",wx:"chứng được ấn giả bằng mắt",lx:"Binh bộ hỏi ai sai người xem ấn",rt:"Hai bản dập đặt cạnh nhau: lệch đúng một nét.",rf:"Binh bộ không cho dập ấn."},
   {n:"Chỉ ghi lại, chưa động",wx:"không ai biết ngươi đã thấy",lx:"chứng cứ mới chỉ là lời",rt:"Ngươi vẽ lại nét lệch vào sổ riêng."}]},
