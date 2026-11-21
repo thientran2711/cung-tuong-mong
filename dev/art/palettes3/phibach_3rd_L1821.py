@@ -91,12 +91,15 @@ def score(c, main, sec):
     for dd, cx, hx in ((dm, cm, hm), (ds, cs, hs)):
         if dd < 12 and not (cx > 0.025 and hd(hc, hx) >= 60):
             return None
+    # L1847 (owner: 'phi bạch is a COMPLETELY DIFFERENT colour'): hue must differ >= 60deg from BOTH main and
+    # secondary whenever that colour carries any tint (OKLCH C > 0.018); near-neutral (white/ivory/mist) secondaries: dE only
+    for cx, hx in ((cm, hm), (cs, hs)):
+        if cx > 0.018 and hd(hc, hx) < 60:
+            return None
     s = min(dm, 30) * 0.8 + min(ds, 18) * 1.4
     d = hd(hc, hm)                       # harmony with the main (the robe that dominates)
-    if 25 <= d <= 70: s += 14            # analogous lighter tint
-    elif 130 <= d <= 210: s += 12        # complementary / split pastel
-    elif d < 25: s -= 4 if dm > 25 else 10
-    if cs > 0.02 and hd(hc, hs) < 18: s -= 12   # same hue as her secondary = blends in
+    if d >= 120: s += 12                 # complementary / split-complementary pastel
+    elif d >= 60: s += 9                 # triadic pastel
     return s
 
 def main():
@@ -105,6 +108,15 @@ def main():
     # s62 first, then the rest by id
     persons = ['s62'] + sorted(p for p in persons if p != 's62')
     res, use = {}, {s: {} for s in LIB}
+    # L1847: keep every owner-approved L1834 pick that still passes the new hue rule; re-pick only the collisions
+    APPR = json.load(open(os.path.join(ROOT, 'dev/art/face-common/phibach_3rd_L1834_approved.json')))
+    FORCE = {('s62', 'thu'): '#B6D3DB'}   # designer pick: soft 月白 autumn moon-white (olive main + pink-lilac secondary; Mid-Autumn)
+    VAR = {s: {c[0]: c for c in variants(s)} for s in LIB}
+    for season in LIB:
+        for p in persons:
+            q = pal[p][season]; h = FORCE.get((p, season)) or APPR.get(p, {}).get(season, {}).get('hex')
+            if h in VAR[season] and score(h, q['main_hex'], q['sec_hex']) is not None:
+                use[season][h] = use[season].get(h, 0) + 1
     for season in ('ha', 'thu'):
         # hardest persons (fewest valid candidates) first
         def nvalid(p):
@@ -112,21 +124,26 @@ def main():
         order = sorted(persons, key=lambda p: (p != 's62', nvalid(p), p))
         for p in order:
             q = pal[p][season]; best = None
-            for c in variants(season):
+            h = FORCE.get((p, season)) or APPR.get(p, {}).get(season, {}).get('hex')
+            if h in VAR[season] and score(h, q['main_hex'], q['sec_hex']) is not None:
+                best = (0, VAR[season][h])
+            for c in ([] if best else variants(season)):
                 sc = score(c[0], q['main_hex'], q['sec_hex'])
                 if sc is None: continue
                 if c[4] == 'pale': sc += 3
-                if season == 'thu' and dE(c[0], res[p]['ha']['hex']) < 8: continue
+                if season == 'thu' and dE(c[0], res[p]['ha']['hex']) < 8: sc -= 30   # ha != thu (soft)
+                if season == 'ha' and APPR.get(p, {}).get('thu') and dE(c[0], APPR[p]['thu']['hex']) < 8: sc -= 30
                 sc -= 4.5 * use[season].get(c[0], 0)
                 if best is None or sc > best[0]: best = (sc, c)
             if best is None: sys.exit(f'no candidate {p} {season}')
-            c = best[1]; use[season][c[0]] = use[season].get(c[0], 0) + 1
+            c = best[1]
+            if best[0] != 0: use[season][c[0]] = use[season].get(c[0], 0) + 1
             res.setdefault(p, {})[season] = {
                 'hex': c[0], 'name_zh': c[1], 'name_vi': f'{c[2]} ({c[1]})', 'name_en': c[3],
                 'main_hex': q['main_hex'], 'main_vi': q['main_vi'], 'sec_hex': q['sec_hex'], 'sec_vi': q['sec_vi'],
                 'dE_main': round(dE(c[0], q['main_hex']), 1), 'dE_sec': round(dE(c[0], q['sec_hex']), 1),
                 'harmony': rel(c[0], q['main_hex']), 'prompt_colour': prompt_colour(c[3], c[0])}
-    out = {'_note': 'PALBACH1 L1821 (approved L1834). Phi bach 3rd colour per '
+    out = {'_note': 'PALBACH1 L1821 (approved L1834; L1847 hue rule: 3rd hue >= 60deg from main AND tinted secondary). Phi bach 3rd colour per '
            'person x season (ha/thu only; ranks t1-t6, same colour at every rank per G13; t6 = thicker silk G54; '
            'thin gold edge kept G56; t7/t8 + xuan/dong none). Overrides only the IVORY-CREAM colour part of G56 if approved. '
            'APPROVED owner L1834 (via Foreman C #23). prompt_colour = words used by build_all phi_bach(). dE = OKLab x100. Script dev/art/palettes3/phibach_3rd_L1821.py; palette source palettes_season_L1726.json.',
@@ -143,7 +160,7 @@ def prompt_colour(en, hexv):
 
 def rel(c, main):
     d = hd(lch(c)[2], lch(main)[2])
-    return 'analogous' if d <= 70 else ('complementary' if d >= 130 else 'triadic')
+    return 'complementary' if d >= 120 else ('triadic' if d >= 60 else 'analogous')
 
 # ---------------- sheets ----------------
 F = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'; FB = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'

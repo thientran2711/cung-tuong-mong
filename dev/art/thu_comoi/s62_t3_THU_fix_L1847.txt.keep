@@ -1,0 +1,7 @@
+base: dev/art/thu_comoi/s62_t3_THU_fix_L1834.txt
+allow: soft snow-violet silk   # owner L1847: 3rd hue must differ from main AND secondary -> soft 月白 #B6D3DB
+allow: phi bạch tím tuyết L1834   # owner L1847 caption
+allow: semi-double China roses embroidery   # owner L1847: from Quý nhân down no big flowers -> small fine motifs
+allow: embroidered semi-double China roses band   # owner L1847
+allow: wide embroidered semi-double China roses bands   # owner L1847
+allow: cổ vuông L1776   # owner L1847 caption

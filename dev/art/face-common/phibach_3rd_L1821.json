@@ -1,65 +1,65 @@
 {
- "_note": "PALBACH1 L1821 (approved L1834). Phi bach 3rd colour per person x season (ha/thu only; ranks t1-t6, same colour at every rank per G13; t6 = thicker silk G54; thin gold edge kept G56; t7/t8 + xuan/dong none). Overrides only the IVORY-CREAM colour part of G56 if approved. APPROVED owner L1834 (via Foreman C #23). prompt_colour = words used by build_all phi_bach(). dE = OKLab x100. Script dev/art/palettes3/phibach_3rd_L1821.py; palette source palettes_season_L1726.json.",
+ "_note": "PALBACH1 L1821 (approved L1834; L1847 hue rule: 3rd hue >= 60deg from main AND tinted secondary). Phi bach 3rd colour per person x season (ha/thu only; ranks t1-t6, same colour at every rank per G13; t6 = thicker silk G54; thin gold edge kept G56; t7/t8 + xuan/dong none). Overrides only the IVORY-CREAM colour part of G56 if approved. APPROVED owner L1834 (via Foreman C #23). prompt_colour = words used by build_all phi_bach(). dE = OKLab x100. Script dev/art/palettes3/phibach_3rd_L1821.py; palette source palettes_season_L1726.json.",
  "_usage": {
   "ha": {
-   "#E3ECC6": 4,
-   "#9FD3C2": 3,
-   "#C8D796": 4,
-   "#C2B8E4": 4,
-   "#AFC4E5": 3,
-   "#D7BACB": 2,
-   "#D4B9E1": 3,
-   "#AECFA2": 3,
-   "#E6BBD1": 3,
-   "#E9C4A3": 2,
-   "#B6C9D8": 3,
-   "#EBC0B4": 2,
-   "#D6ECF0": 4,
-   "#E6D6EE": 4,
-   "#F6E0CC": 4,
-   "#B1D7DD": 3,
-   "#ADD4CB": 2,
-   "#E0EEE8": 4,
-   "#D9D3EE": 3,
-   "#CFDCF0": 3,
-   "#F3D9E6": 4,
-   "#D2E9E3": 4,
+   "#E3ECC6": 3,
    "#F7DDD6": 3,
+   "#F3D9E6": 3,
+   "#ADD4CB": 3,
+   "#E6BBD1": 4,
+   "#B6C9D8": 3,
    "#C8E6DC": 3,
-   "#D5E0E9": 4,
-   "#E8D6E0": 3,
+   "#D9D3EE": 3,
+   "#C8D796": 4,
+   "#D7BACB": 4,
+   "#AFC4E5": 4,
+   "#C2B8E4": 4,
+   "#9FD3C2": 3,
+   "#E6D6EE": 4,
+   "#EBC0B4": 3,
+   "#CFDCF0": 3,
+   "#E0EEE8": 4,
+   "#D2E9E3": 4,
+   "#D6ECF0": 4,
+   "#F6E0CC": 3,
+   "#AECFA2": 2,
+   "#B1D7DD": 2,
    "#C0D8CE": 3,
-   "#CFE3C8": 3
+   "#D5E0E9": 4,
+   "#E9C4A3": 1,
+   "#D4B9E1": 3,
+   "#CFE3C8": 3,
+   "#E8D6E0": 3
   },
   "thu": {
-   "#C6BAE0": 4,
+   "#B6D3DB": 4,
    "#C9C580": 5,
    "#D6AFBC": 4,
-   "#D9C486": 4,
-   "#CBCD9A": 3,
-   "#B5C8DA": 4,
-   "#B6D3DB": 3,
-   "#B3CEB8": 3,
+   "#EBD3CB": 2,
    "#D3BCDA": 4,
-   "#DEDCB4": 3,
-   "#E4CCD4": 2,
-   "#D9B79C": 5,
-   "#D8BA95": 5,
-   "#E4C49D": 5,
-   "#F2DFC8": 3,
-   "#DCBDC4": 4,
-   "#DEB7A9": 4,
-   "#DCD5EC": 2,
    "#E9DDB9": 2,
-   "#E2E4C6": 4,
-   "#D8E9EE": 3,
-   "#D3E3D6": 2,
-   "#ECD9DD": 3,
-   "#E7D5BF": 2,
+   "#E4C49D": 3,
+   "#D9C486": 5,
+   "#D8BA95": 4,
+   "#E2E4C6": 3,
    "#E7D2C2": 2,
-   "#D4DFEA": 2,
-   "#E6D8EA": 1,
-   "#EBD3CB": 2
+   "#B3CEB8": 4,
+   "#B5C8DA": 4,
+   "#D8E9EE": 3,
+   "#CBCD9A": 4,
+   "#DEB7A9": 3,
+   "#DEDCB4": 3,
+   "#D4DFEA": 4,
+   "#C6BAE0": 6,
+   "#D3E3D6": 4,
+   "#E6D8EA": 2,
+   "#DCD5EC": 2,
+   "#F2DFC8": 2,
+   "#D9B79C": 4,
+   "#ECD9DD": 1,
+   "#DCBDC4": 3,
+   "#E4CCD4": 1,
+   "#E7D5BF": 2
   }
  },
  "s62": {
@@ -74,38 +74,38 @@
    "sec_vi": "tím khói nhạt",
    "dE_main": 14.1,
    "dE_sec": 13.0,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale pine-pollen green silk (like #E3ECC6)"
   },
   "thu": {
-   "hex": "#C6BAE0",
-   "name_zh": "雪青",
-   "name_vi": "tím tuyết đậm dịu (雪青)",
-   "name_en": "snow-violet (soft-deep)",
+   "hex": "#B6D3DB",
+   "name_zh": "月白",
+   "name_vi": "xanh trăng thu đậm dịu (月白)",
+   "name_en": "autumn moon-white (soft-deep)",
    "main_hex": "#9FB577",
    "main_vi": "ô liu sáng",
    "sec_hex": "#FBE8F8",
    "sec_vi": "hồng tím phấn",
-   "dE_main": 15.8,
-   "dE_sec": 14.3,
-   "harmony": "complementary",
-   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
+   "dE_main": 14.3,
+   "dE_sec": 11.5,
+   "harmony": "triadic",
+   "prompt_colour": "soft autumn moon-white silk (like #B6D3DB)"
   }
  },
  "c02": {
   "ha": {
-   "hex": "#D6ECF0",
-   "name_zh": "月白",
-   "name_vi": "xanh trăng (月白)",
-   "name_en": "moon-white blue",
+   "hex": "#EBC0B4",
+   "name_zh": "桃夭",
+   "name_vi": "hồng đào phấn đậm dịu (桃夭)",
+   "name_en": "peach blossom (soft-deep)",
    "main_hex": "#52B584",
    "main_vi": "xanh lá sen / bạc hà dịu",
    "sec_hex": "#D6D6FE",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 25.1,
-   "dE_sec": 6.7,
-   "harmony": "analogous",
-   "prompt_colour": "pale moon-white blue silk (like #D6ECF0)"
+   "dE_main": 20.9,
+   "dE_sec": 10.0,
+   "harmony": "complementary",
+   "prompt_colour": "soft peach blossom silk (like #EBC0B4)"
   },
   "thu": {
    "hex": "#C9C580",
@@ -134,7 +134,7 @@
    "sec_vi": "ngọc dịu",
    "dE_main": 9.5,
    "dE_sec": 14.2,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale peach blossom silk (like #F7DDD6)"
   },
   "thu": {
@@ -154,32 +154,32 @@
  },
  "c05": {
   "ha": {
-   "hex": "#CFDCF0",
-   "name_zh": "菘蓝",
-   "name_vi": "lam tùng nhạt (菘蓝)",
-   "name_en": "pale woad blue",
+   "hex": "#E3ECC6",
+   "name_zh": "松花",
+   "name_vi": "xanh phấn thông (松花)",
+   "name_en": "pine-pollen green",
    "main_hex": "#FD9C7A",
    "main_vi": "san hô dưa hấu sáng",
    "sec_hex": "#49457C",
    "sec_vi": "tím than",
-   "dE_main": 18.5,
-   "dE_sec": 47.4,
-   "harmony": "complementary",
-   "prompt_colour": "pale woad blue silk (like #CFDCF0)"
+   "dE_main": 18.9,
+   "dE_sec": 52.4,
+   "harmony": "triadic",
+   "prompt_colour": "pale pine-pollen green silk (like #E3ECC6)"
   },
   "thu": {
-   "hex": "#D9B79C",
-   "name_zh": "赭白",
-   "name_vi": "son đất nhạt đậm dịu (赭白)",
-   "name_en": "pale earth-rose (soft-deep)",
+   "hex": "#B5C8DA",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh đậm dịu (天青)",
+   "name_en": "sky celadon (soft-deep)",
    "main_hex": "#79222A",
    "main_vi": "đỏ lá phong thẫm",
    "sec_hex": "#E4F1F4",
    "sec_vi": "trắng sương",
-   "dE_main": 41.9,
-   "dE_sec": 16.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
+   "dE_main": 45.5,
+   "dE_sec": 12.7,
+   "harmony": "complementary",
+   "prompt_colour": "soft sky celadon silk (like #B5C8DA)"
   }
  },
  "c06": {
@@ -214,18 +214,18 @@
  },
  "c08": {
   "ha": {
-   "hex": "#E9C4A3",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt đậm dịu (杏)",
-   "name_en": "pale apricot (soft-deep)",
+   "hex": "#EBC0B4",
+   "name_zh": "桃夭",
+   "name_vi": "hồng đào phấn đậm dịu (桃夭)",
+   "name_en": "peach blossom (soft-deep)",
    "main_hex": "#FFF2BC",
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#98CBF0",
    "sec_vi": "xanh trời dịu",
-   "dE_main": 12.1,
-   "dE_sec": 13.8,
-   "harmony": "analogous",
-   "prompt_colour": "soft apricot silk (like #E9C4A3)"
+   "dE_main": 13.2,
+   "dE_sec": 12.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft peach blossom silk (like #EBC0B4)"
   },
   "thu": {
    "hex": "#B6D3DB",
@@ -244,18 +244,18 @@
  },
  "c10": {
   "ha": {
-   "hex": "#D5E0E9",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh (天青)",
-   "name_en": "sky celadon",
+   "hex": "#E8D6E0",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen (藕荷)",
+   "name_en": "lotus-root mauve",
    "main_hex": "#DB9B66",
    "main_vi": "cam mơ sáng",
    "sec_hex": "#53ACA5",
    "sec_vi": "mòng két dịu",
-   "dE_main": 20.1,
-   "dE_sec": 22.7,
-   "harmony": "complementary",
-   "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
+   "dE_main": 18.3,
+   "dE_sec": 23.2,
+   "harmony": "triadic",
+   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
   },
   "thu": {
    "hex": "#D6AFBC",
@@ -274,18 +274,18 @@
  },
  "c11": {
   "ha": {
-   "hex": "#E0EEE8",
-   "name_zh": "鸭卵青",
-   "name_vi": "xanh trứng vịt (鸭卵青)",
-   "name_en": "duck-egg green",
+   "hex": "#E6BBD1",
+   "name_zh": "水红",
+   "name_vi": "hồng nước đậm dịu (水红)",
+   "name_en": "water pink (soft-deep)",
    "main_hex": "#7FD5D9",
    "main_vi": "xanh ngọc nước sáng",
    "sec_hex": "#FDE0B9",
    "sec_vi": "ngà",
    "dE_main": 13.6,
-   "dE_sec": 6.5,
-   "harmony": "analogous",
-   "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
+   "dE_sec": 11.8,
+   "harmony": "complementary",
+   "prompt_colour": "soft water pink silk (like #E6BBD1)"
   },
   "thu": {
    "hex": "#B6D3DB",
@@ -348,18 +348,18 @@
    "prompt_colour": "soft water pink silk (like #E6BBD1)"
   },
   "thu": {
-   "hex": "#F2DFC8",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt (杏)",
-   "name_en": "pale apricot",
+   "hex": "#D4DFEA",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh (天青)",
+   "name_en": "sky celadon",
    "main_hex": "#B0BE70",
    "main_vi": "ô liu sáng",
    "sec_hex": "#B8618C",
    "sec_vi": "hồng mẫu đơn đậm vừa",
-   "dE_main": 16.2,
-   "dE_sec": 33.0,
-   "harmony": "analogous",
-   "prompt_colour": "pale apricot silk (like #F2DFC8)"
+   "dE_main": 17.2,
+   "dE_sec": 31.9,
+   "harmony": "complementary",
+   "prompt_colour": "pale sky celadon silk (like #D4DFEA)"
   }
  },
  "c19": {
@@ -378,18 +378,18 @@
    "prompt_colour": "soft sky celadon silk (like #B6C9D8)"
   },
   "thu": {
-   "hex": "#DEDCB4",
-   "name_zh": "秋香",
-   "name_vi": "vàng thu hương (秋香)",
-   "name_en": "autumn-fragrance olive",
+   "hex": "#D9B79C",
+   "name_zh": "赭白",
+   "name_vi": "son đất nhạt đậm dịu (赭白)",
+   "name_en": "pale earth-rose (soft-deep)",
    "main_hex": "#618047",
    "main_vi": "ô liu đậm vừa",
    "sec_hex": "#CCE9FF",
    "sec_vi": "xanh sương",
-   "dE_main": 32.8,
-   "dE_sec": 9.5,
-   "harmony": "analogous",
-   "prompt_colour": "pale autumn-fragrance olive silk (like #DEDCB4)"
+   "dE_main": 25.7,
+   "dE_sec": 15.2,
+   "harmony": "triadic",
+   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
   }
  },
  "c20": {
@@ -404,7 +404,7 @@
    "sec_vi": "tím hoa cà dịu",
    "dE_main": 11.6,
    "dE_sec": 13.0,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale sky-water jade silk (like #C8E6DC)"
   },
   "thu": {
@@ -418,7 +418,7 @@
    "sec_vi": "xanh lá non dịu",
    "dE_main": 9.7,
    "dE_sec": 19.5,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft lilac silk (like #D3BCDA)"
   }
  },
@@ -448,7 +448,7 @@
    "sec_vi": "hồng đất nhạt",
    "dE_main": 23.1,
    "dE_sec": 6.1,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale incense buff silk (like #E9DDB9)"
   }
  },
@@ -464,82 +464,82 @@
    "sec_vi": "xanh sương",
    "dE_main": 9.2,
    "dE_sec": 14.3,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft pine-pollen green silk (like #C8D796)"
   },
   "thu": {
-   "hex": "#ECD9DD",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen (粉藕)",
-   "name_en": "pink lotus-root",
+   "hex": "#EBD3CB",
+   "name_zh": "檀色",
+   "name_vi": "hồng gỗ đàn (檀色)",
+   "name_en": "sandalwood rose",
    "main_hex": "#D6A3DD",
    "main_vi": "hồng tro / tím khói sáng",
    "sec_hex": "#D4F9E7",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 14.6,
-   "dE_sec": 8.2,
-   "harmony": "analogous",
-   "prompt_colour": "pale pink lotus-root silk (like #ECD9DD)"
+   "dE_main": 14.0,
+   "dE_sec": 9.4,
+   "harmony": "triadic",
+   "prompt_colour": "pale sandalwood rose silk (like #EBD3CB)"
   }
  },
  "c27": {
   "ha": {
-   "hex": "#D6ECF0",
-   "name_zh": "月白",
-   "name_vi": "xanh trăng (月白)",
-   "name_en": "moon-white blue",
+   "hex": "#F6E0CC",
+   "name_zh": "杏",
+   "name_vi": "vàng hạnh nhạt (杏)",
+   "name_en": "pale apricot",
    "main_hex": "#FCA7CC",
    "main_vi": "hồng sen sáng",
    "sec_hex": "#176A4E",
    "sec_vi": "xanh ngọc sẫm",
-   "dE_main": 16.7,
-   "dE_sec": 46.5,
-   "harmony": "complementary",
-   "prompt_colour": "pale moon-white blue silk (like #D6ECF0)"
+   "dE_main": 14.3,
+   "dE_sec": 46.2,
+   "harmony": "triadic",
+   "prompt_colour": "pale apricot silk (like #F6E0CC)"
   },
   "thu": {
-   "hex": "#E4C49D",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt đậm dịu (杏)",
-   "name_en": "pale apricot (soft-deep)",
+   "hex": "#DCBDC4",
+   "name_zh": "粉藕",
+   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
+   "name_en": "pink lotus-root (soft-deep)",
    "main_hex": "#93A869",
    "main_vi": "ô liu dịu",
    "sec_hex": "#A3DCE7",
    "sec_vi": "xanh ngọc sương",
-   "dE_main": 15.5,
-   "dE_sec": 11.7,
-   "harmony": "analogous",
-   "prompt_colour": "soft apricot silk (like #E4C49D)"
+   "dE_main": 17.0,
+   "dE_sec": 9.9,
+   "harmony": "complementary",
+   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
   }
  },
  "c28": {
   "ha": {
-   "hex": "#AECFA2",
-   "name_zh": "竹青",
-   "name_vi": "xanh trúc nhạt đậm dịu (竹青)",
-   "name_en": "pale bamboo green (soft-deep)",
+   "hex": "#ADD4CB",
+   "name_zh": "湖色",
+   "name_vi": "xanh mặt hồ đậm dịu (湖色)",
+   "name_en": "lake green (soft-deep)",
    "main_hex": "#FFF099",
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#ECE2FE",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 14.6,
-   "dE_sec": 15.5,
-   "harmony": "analogous",
-   "prompt_colour": "soft bamboo green silk (like #AECFA2)"
+   "dE_main": 15.4,
+   "dE_sec": 11.5,
+   "harmony": "triadic",
+   "prompt_colour": "soft lake green silk (like #ADD4CB)"
   },
   "thu": {
-   "hex": "#E9DDB9",
-   "name_zh": "香色",
-   "name_vi": "vàng hương trầm (香色)",
-   "name_en": "incense buff",
+   "hex": "#C9C580",
+   "name_zh": "秋香",
+   "name_vi": "vàng thu hương đậm dịu (秋香)",
+   "name_en": "autumn-fragrance olive (soft-deep)",
    "main_hex": "#D89077",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#C7E6FD",
    "sec_vi": "xanh sương",
-   "dE_main": 19.3,
-   "dE_sec": 9.2,
-   "harmony": "analogous",
-   "prompt_colour": "pale incense buff silk (like #E9DDB9)"
+   "dE_main": 13.5,
+   "dE_sec": 16.0,
+   "harmony": "triadic",
+   "prompt_colour": "soft autumn-fragrance olive silk (like #C9C580)"
   }
  },
  "c31": {
@@ -558,18 +558,18 @@
    "prompt_colour": "soft lotus-root mauve silk (like #D7BACB)"
   },
   "thu": {
-   "hex": "#E7D5BF",
-   "name_zh": "驼色",
-   "name_vi": "nâu lạc đà nhạt (驼色)",
-   "name_en": "pale camel",
+   "hex": "#DEDCB4",
+   "name_zh": "秋香",
+   "name_vi": "vàng thu hương (秋香)",
+   "name_en": "autumn-fragrance olive",
    "main_hex": "#7B2332",
    "main_vi": "đỏ lá phong thẫm",
    "sec_hex": "#DAE4FF",
    "sec_vi": "xanh sương",
-   "dE_main": 49.5,
-   "dE_sec": 8.2,
-   "harmony": "analogous",
-   "prompt_colour": "pale camel silk (like #E7D5BF)"
+   "dE_main": 50.5,
+   "dE_sec": 9.7,
+   "harmony": "triadic",
+   "prompt_colour": "pale autumn-fragrance olive silk (like #DEDCB4)"
   }
  },
  "c32": {
@@ -604,18 +604,18 @@
  },
  "m02": {
   "ha": {
-   "hex": "#F6E0CC",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt (杏)",
-   "name_en": "pale apricot",
+   "hex": "#E0EEE8",
+   "name_zh": "鸭卵青",
+   "name_vi": "xanh trứng vịt (鸭卵青)",
+   "name_en": "duck-egg green",
    "main_hex": "#FC9286",
    "main_vi": "san hô dưa hấu sáng",
    "sec_hex": "#A4D8FE",
    "sec_vi": "xanh trời dịu",
-   "dE_main": 18.2,
-   "dE_sec": 12.7,
-   "harmony": "analogous",
-   "prompt_colour": "pale apricot silk (like #F6E0CC)"
+   "dE_main": 22.1,
+   "dE_sec": 10.6,
+   "harmony": "complementary",
+   "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
   },
   "thu": {
    "hex": "#D3BCDA",
@@ -644,22 +644,22 @@
    "sec_vi": "lam ngọc đậm",
    "dE_main": 16.6,
    "dE_sec": 42.8,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale water pink silk (like #F3D9E6)"
   },
   "thu": {
-   "hex": "#D9C486",
-   "name_zh": "香色",
-   "name_vi": "vàng hương trầm đậm dịu (香色)",
-   "name_en": "incense buff (soft-deep)",
+   "hex": "#D9B79C",
+   "name_zh": "赭白",
+   "name_vi": "son đất nhạt đậm dịu (赭白)",
+   "name_en": "pale earth-rose (soft-deep)",
    "main_hex": "#84965E",
    "main_vi": "ô liu dịu",
    "sec_hex": "#F8E8FF",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 18.4,
-   "dE_sec": 16.9,
-   "harmony": "analogous",
-   "prompt_colour": "soft incense buff silk (like #D9C486)"
+   "dE_main": 17.4,
+   "dE_sec": 16.4,
+   "harmony": "triadic",
+   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
   }
  },
  "m05": {
@@ -678,18 +678,18 @@
    "prompt_colour": "soft woad blue silk (like #AFC4E5)"
   },
   "thu": {
-   "hex": "#ECD9DD",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen (粉藕)",
-   "name_en": "pink lotus-root",
+   "hex": "#E9DDB9",
+   "name_zh": "香色",
+   "name_vi": "vàng hương trầm (香色)",
+   "name_en": "incense buff",
    "main_hex": "#D4897D",
    "main_vi": "đất nung / gạch dịu",
    "sec_hex": "#499597",
    "sec_vi": "mòng két đậm vừa",
-   "dE_main": 21.2,
-   "dE_sec": 29.5,
-   "harmony": "analogous",
-   "prompt_colour": "pale pink lotus-root silk (like #ECD9DD)"
+   "dE_main": 21.1,
+   "dE_sec": 29.3,
+   "harmony": "triadic",
+   "prompt_colour": "pale incense buff silk (like #E9DDB9)"
   }
  },
  "m08": {
@@ -708,78 +708,78 @@
    "prompt_colour": "soft snow-violet silk (like #C2B8E4)"
   },
   "thu": {
-   "hex": "#D8E9EE",
-   "name_zh": "月白",
-   "name_vi": "xanh trăng thu (月白)",
-   "name_en": "autumn moon-white",
+   "hex": "#DCD5EC",
+   "name_zh": "雪青",
+   "name_vi": "tím tuyết (雪青)",
+   "name_en": "snow-violet",
    "main_hex": "#E6A189",
    "main_vi": "đất nung / gạch sáng",
    "sec_hex": "#5DAC85",
    "sec_vi": "ngọc bích dịu",
-   "dE_main": 18.8,
-   "dE_sec": 25.6,
-   "harmony": "complementary",
-   "prompt_colour": "pale autumn moon-white silk (like #D8E9EE)"
+   "dE_main": 15.3,
+   "dE_sec": 23.8,
+   "harmony": "triadic",
+   "prompt_colour": "pale snow-violet silk (like #DCD5EC)"
   }
  },
  "m09": {
   "ha": {
-   "hex": "#D4B9E1",
-   "name_zh": "丁香",
-   "name_vi": "tím đinh hương đậm dịu (丁香)",
-   "name_en": "lilac (soft-deep)",
+   "hex": "#D7BACB",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen đậm dịu (藕荷)",
+   "name_en": "lotus-root mauve (soft-deep)",
    "main_hex": "#A7D48B",
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#E8EEFF",
    "sec_vi": "xanh sương",
-   "dE_main": 17.1,
+   "dE_main": 14.6,
    "dE_sec": 13.7,
    "harmony": "complementary",
-   "prompt_colour": "soft lilac silk (like #D4B9E1)"
+   "prompt_colour": "soft lotus-root mauve silk (like #D7BACB)"
   },
   "thu": {
-   "hex": "#D4DFEA",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh (天青)",
-   "name_en": "sky celadon",
+   "hex": "#ECD9DD",
+   "name_zh": "粉藕",
+   "name_vi": "hồng ngó sen (粉藕)",
+   "name_en": "pink lotus-root",
    "main_hex": "#226973",
    "main_vi": "xanh cổ vịt trầm đậm",
    "sec_hex": "#FBEFD6",
    "sec_vi": "ngà",
-   "dE_main": 42.1,
-   "dE_sec": 7.8,
-   "harmony": "analogous",
-   "prompt_colour": "pale sky celadon silk (like #D4DFEA)"
+   "dE_main": 43.0,
+   "dE_sec": 6.6,
+   "harmony": "complementary",
+   "prompt_colour": "pale pink lotus-root silk (like #ECD9DD)"
   }
  },
  "m10": {
   "ha": {
-   "hex": "#AECFA2",
-   "name_zh": "竹青",
-   "name_vi": "xanh trúc nhạt đậm dịu (竹青)",
-   "name_en": "pale bamboo green (soft-deep)",
+   "hex": "#AFC4E5",
+   "name_zh": "菘蓝",
+   "name_vi": "lam tùng nhạt đậm dịu (菘蓝)",
+   "name_en": "pale woad blue (soft-deep)",
    "main_hex": "#FFB5C3",
    "main_vi": "hồng sen sáng",
    "sec_hex": "#DAF6EF",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 14.7,
-   "dE_sec": 14.2,
-   "harmony": "complementary",
-   "prompt_colour": "soft bamboo green silk (like #AECFA2)"
+   "dE_main": 11.8,
+   "dE_sec": 14.7,
+   "harmony": "triadic",
+   "prompt_colour": "soft woad blue silk (like #AFC4E5)"
   },
   "thu": {
-   "hex": "#DEB7A9",
-   "name_zh": "檀色",
-   "name_vi": "hồng gỗ đàn đậm dịu (檀色)",
-   "name_en": "sandalwood rose (soft-deep)",
+   "hex": "#D8BA95",
+   "name_zh": "驼色",
+   "name_vi": "nâu lạc đà nhạt đậm dịu (驼色)",
+   "name_en": "pale camel (soft-deep)",
    "main_hex": "#A76B8C",
    "main_vi": "hồng tro / tím khói đậm vừa",
    "sec_hex": "#FFF1F2",
    "sec_vi": "trắng hồng",
-   "dE_main": 22.0,
-   "dE_sec": 16.4,
-   "harmony": "analogous",
-   "prompt_colour": "soft sandalwood rose silk (like #DEB7A9)"
+   "dE_main": 22.8,
+   "dE_sec": 17.3,
+   "harmony": "triadic",
+   "prompt_colour": "soft camel silk (like #D8BA95)"
   }
  },
  "m14": {
@@ -798,18 +798,18 @@
    "prompt_colour": "soft sky-water jade silk (like #9FD3C2)"
   },
   "thu": {
-   "hex": "#E2E4C6",
-   "name_zh": "葭灰绿",
-   "name_vi": "xanh lau nhạt (葭灰绿)",
-   "name_en": "reed green",
+   "hex": "#E6D8EA",
+   "name_zh": "丁香",
+   "name_vi": "tím đinh hương (丁香)",
+   "name_en": "lilac",
    "main_hex": "#DC9A70",
    "main_vi": "cam quả hồng sáng",
    "sec_hex": "#B0DAE1",
    "sec_vi": "xanh ngọc sương",
-   "dE_main": 18.8,
-   "dE_sec": 8.1,
-   "harmony": "analogous",
-   "prompt_colour": "pale reed green silk (like #E2E4C6)"
+   "dE_main": 18.9,
+   "dE_sec": 7.2,
+   "harmony": "triadic",
+   "prompt_colour": "pale lilac silk (like #E6D8EA)"
   }
  },
  "m16": {
@@ -828,18 +828,18 @@
    "prompt_colour": "soft woad blue silk (like #AFC4E5)"
   },
   "thu": {
-   "hex": "#DEDCB4",
-   "name_zh": "秋香",
-   "name_vi": "vàng thu hương (秋香)",
-   "name_en": "autumn-fragrance olive",
+   "hex": "#D3E3D6",
+   "name_zh": "苍青",
+   "name_vi": "xanh rêu sương (苍青)",
+   "name_en": "misty sage",
    "main_hex": "#DD926F",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#FFDADC",
    "sec_vi": "hồng đất nhạt",
-   "dE_main": 18.2,
-   "dE_sec": 7.6,
-   "harmony": "analogous",
-   "prompt_colour": "pale autumn-fragrance olive silk (like #DEDCB4)"
+   "dE_main": 20.6,
+   "dE_sec": 6.5,
+   "harmony": "triadic",
+   "prompt_colour": "pale misty sage silk (like #D3E3D6)"
   }
  },
  "m18": {
@@ -874,18 +874,18 @@
  },
  "m19": {
   "ha": {
-   "hex": "#D2E9E3",
-   "name_zh": "湖色",
-   "name_vi": "xanh mặt hồ (湖色)",
-   "name_en": "lake green",
+   "hex": "#CFE3C8",
+   "name_zh": "竹青",
+   "name_vi": "xanh trúc nhạt (竹青)",
+   "name_en": "pale bamboo green",
    "main_hex": "#F39972",
    "main_vi": "cam đào sáng",
    "sec_hex": "#499597",
    "sec_vi": "mòng két đậm vừa",
-   "dE_main": 20.4,
-   "dE_sec": 29.7,
-   "harmony": "complementary",
-   "prompt_colour": "pale lake green silk (like #D2E9E3)"
+   "dE_main": 18.2,
+   "dE_sec": 27.9,
+   "harmony": "triadic",
+   "prompt_colour": "pale bamboo green silk (like #CFE3C8)"
   },
   "thu": {
    "hex": "#D8BA95",
@@ -898,7 +898,7 @@
    "sec_vi": "trắng sương",
    "dE_main": 11.7,
    "dE_sec": 17.8,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft camel silk (like #D8BA95)"
   }
  },
@@ -914,7 +914,7 @@
    "sec_vi": "bạc hà nhạt",
    "dE_main": 14.0,
    "dE_sec": 15.1,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft peach blossom silk (like #EBC0B4)"
   },
   "thu": {
@@ -928,7 +928,7 @@
    "sec_vi": "hồng tím phấn",
    "dE_main": 20.0,
    "dE_sec": 10.7,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale reed green silk (like #E2E4C6)"
   }
  },
@@ -958,7 +958,7 @@
    "sec_vi": "tím khói nhạt",
    "dE_main": 32.3,
    "dE_sec": 6.1,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale earth-rose silk (like #E7D2C2)"
   }
  },
@@ -978,18 +978,18 @@
    "prompt_colour": "pale woad blue silk (like #CFDCF0)"
   },
   "thu": {
-   "hex": "#D6AFBC",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen đậm dịu (藕荷)",
-   "name_en": "lotus-root mauve (soft-deep)",
+   "hex": "#DEDCB4",
+   "name_zh": "秋香",
+   "name_vi": "vàng thu hương (秋香)",
+   "name_en": "autumn-fragrance olive",
    "main_hex": "#67B0B2",
    "main_vi": "xanh cổ vịt trầm dịu",
    "sec_hex": "#E7DAFF",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 14.5,
-   "dE_sec": 12.7,
-   "harmony": "complementary",
-   "prompt_colour": "soft lotus-root mauve silk (like #D6AFBC)"
+   "dE_main": 19.8,
+   "dE_sec": 10.6,
+   "harmony": "triadic",
+   "prompt_colour": "pale autumn-fragrance olive silk (like #DEDCB4)"
   }
  },
  "m29": {
@@ -1008,18 +1008,18 @@
    "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
   },
   "thu": {
-   "hex": "#E4CCD4",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen (藕荷)",
-   "name_en": "lotus-root mauve",
+   "hex": "#C6BAE0",
+   "name_zh": "雪青",
+   "name_vi": "tím tuyết đậm dịu (雪青)",
+   "name_en": "snow-violet (soft-deep)",
    "main_hex": "#D8976D",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#D6D4A7",
    "sec_vi": "kem chanh",
-   "dE_main": 16.1,
-   "dE_sec": 7.5,
-   "harmony": "analogous",
-   "prompt_colour": "pale lotus-root mauve silk (like #E4CCD4)"
+   "dE_main": 15.2,
+   "dE_sec": 12.3,
+   "harmony": "triadic",
+   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
   }
  },
  "s07": {
@@ -1034,7 +1034,7 @@
    "sec_vi": "cam hồng",
    "dE_main": 12.4,
    "dE_sec": 16.2,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale sky-water jade silk (like #C8E6DC)"
   },
   "thu": {
@@ -1048,38 +1048,38 @@
    "sec_vi": "tím khói nhạt",
    "dE_main": 16.6,
    "dE_sec": 15.4,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft incense buff silk (like #D9C486)"
   }
  },
  "s08": {
   "ha": {
-   "hex": "#F3D9E6",
-   "name_zh": "水红",
-   "name_vi": "hồng nước (水红)",
-   "name_en": "water pink",
+   "hex": "#D5E0E9",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh (天青)",
+   "name_en": "sky celadon",
    "main_hex": "#F7958F",
    "main_vi": "san hô dưa hấu sáng",
    "sec_hex": "#A9E8C6",
    "sec_vi": "bạc hà",
-   "dE_main": 16.9,
-   "dE_sec": 11.7,
-   "harmony": "analogous",
-   "prompt_colour": "pale water pink silk (like #F3D9E6)"
+   "dE_main": 18.7,
+   "dE_sec": 8.2,
+   "harmony": "complementary",
+   "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
   },
   "thu": {
-   "hex": "#D9B79C",
-   "name_zh": "赭白",
-   "name_vi": "son đất nhạt đậm dịu (赭白)",
-   "name_en": "pale earth-rose (soft-deep)",
+   "hex": "#C9C580",
+   "name_zh": "秋香",
+   "name_vi": "vàng thu hương đậm dịu (秋香)",
+   "name_en": "autumn-fragrance olive (soft-deep)",
    "main_hex": "#A12E37",
    "main_vi": "đỏ lá phong đậm",
    "sec_hex": "#FED8EC",
    "sec_vi": "hồng tím phấn",
-   "dE_main": 34.2,
-   "dE_sec": 13.4,
-   "harmony": "analogous",
-   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
+   "dE_main": 37.1,
+   "dE_sec": 16.4,
+   "harmony": "triadic",
+   "prompt_colour": "soft autumn-fragrance olive silk (like #C9C580)"
   }
  },
  "s09": {
@@ -1098,34 +1098,34 @@
    "prompt_colour": "pale lake green silk (like #D2E9E3)"
   },
   "thu": {
-   "hex": "#C6BAE0",
-   "name_zh": "雪青",
-   "name_vi": "tím tuyết đậm dịu (雪青)",
-   "name_en": "snow-violet (soft-deep)",
+   "hex": "#E4C49D",
+   "name_zh": "杏",
+   "name_vi": "vàng hạnh nhạt đậm dịu (杏)",
+   "name_en": "pale apricot (soft-deep)",
    "main_hex": "#9B5F80",
    "main_vi": "hồng tro / tím khói đậm vừa",
    "sec_hex": "#E4FCF0",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 25.7,
-   "dE_sec": 17.7,
-   "harmony": "analogous",
-   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
+   "dE_main": 29.5,
+   "dE_sec": 15.0,
+   "harmony": "triadic",
+   "prompt_colour": "soft apricot silk (like #E4C49D)"
   }
  },
  "s10": {
   "ha": {
-   "hex": "#EBC0B4",
-   "name_zh": "桃夭",
-   "name_vi": "hồng đào phấn đậm dịu (桃夭)",
-   "name_en": "peach blossom (soft-deep)",
+   "hex": "#D2E9E3",
+   "name_zh": "湖色",
+   "name_vi": "xanh mặt hồ (湖色)",
+   "name_en": "lake green",
    "main_hex": "#FFEEB9",
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#C1D0F9",
    "sec_vi": "xanh sương",
-   "dE_main": 12.3,
-   "dE_sec": 10.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft peach blossom silk (like #EBC0B4)"
+   "dE_main": 8.1,
+   "dE_sec": 8.6,
+   "harmony": "triadic",
+   "prompt_colour": "pale lake green silk (like #D2E9E3)"
   },
   "thu": {
    "hex": "#B3CEB8",
@@ -1168,7 +1168,7 @@
    "sec_vi": "trắng hồng",
    "dE_main": 44.9,
    "dE_sec": 15.2,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft apricot silk (like #E4C49D)"
   }
  },
@@ -1228,7 +1228,7 @@
    "sec_vi": "xanh ngọc sương",
    "dE_main": 26.6,
    "dE_sec": 11.3,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale earth-rose silk (like #E7D2C2)"
   }
  },
@@ -1248,18 +1248,18 @@
    "prompt_colour": "soft snow-violet silk (like #C2B8E4)"
   },
   "thu": {
-   "hex": "#E7D5BF",
-   "name_zh": "驼色",
-   "name_vi": "nâu lạc đà nhạt (驼色)",
-   "name_en": "pale camel",
+   "hex": "#D4DFEA",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh (天青)",
+   "name_en": "sky celadon",
    "main_hex": "#DE957C",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#E1F5E4",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 16.1,
-   "dE_sec": 8.0,
-   "harmony": "analogous",
-   "prompt_colour": "pale camel silk (like #E7D5BF)"
+   "dE_main": 19.7,
+   "dE_sec": 6.5,
+   "harmony": "complementary",
+   "prompt_colour": "pale sky celadon silk (like #D4DFEA)"
   }
  },
  "s15": {
@@ -1308,64 +1308,64 @@
    "prompt_colour": "soft water pink silk (like #E6BBD1)"
   },
   "thu": {
-   "hex": "#D8BA95",
-   "name_zh": "驼色",
-   "name_vi": "nâu lạc đà nhạt đậm dịu (驼色)",
-   "name_en": "pale camel (soft-deep)",
+   "hex": "#CBCD9A",
+   "name_zh": "葭灰绿",
+   "name_vi": "xanh lau nhạt đậm dịu (葭灰绿)",
+   "name_en": "reed green (soft-deep)",
    "main_hex": "#C8696B",
    "main_vi": "đỏ lá phong đậm vừa",
    "sec_hex": "#E4F1F4",
    "sec_vi": "trắng sương",
-   "dE_main": 20.0,
-   "dE_sec": 16.1,
-   "harmony": "analogous",
-   "prompt_colour": "soft camel silk (like #D8BA95)"
+   "dE_main": 24.6,
+   "dE_sec": 13.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft reed green silk (like #CBCD9A)"
   }
  },
  "s17": {
   "ha": {
-   "hex": "#F6E0CC",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt (杏)",
-   "name_en": "pale apricot",
+   "hex": "#D5E0E9",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh (天青)",
+   "name_en": "sky celadon",
    "main_hex": "#E68580",
    "main_vi": "san hô dưa hấu dịu",
    "sec_hex": "#004F38",
    "sec_vi": "xanh ngọc trầm",
-   "dE_main": 22.1,
-   "dE_sec": 54.8,
-   "harmony": "analogous",
-   "prompt_colour": "pale apricot silk (like #F6E0CC)"
+   "dE_main": 22.5,
+   "dE_sec": 52.8,
+   "harmony": "complementary",
+   "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
   },
   "thu": {
-   "hex": "#C9C580",
-   "name_zh": "秋香",
-   "name_vi": "vàng thu hương đậm dịu (秋香)",
-   "name_en": "autumn-fragrance olive (soft-deep)",
+   "hex": "#C6BAE0",
+   "name_zh": "雪青",
+   "name_vi": "tím tuyết đậm dịu (雪青)",
+   "name_en": "snow-violet (soft-deep)",
    "main_hex": "#D69369",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#C0FCFB",
    "sec_vi": "xanh ngọc sương",
-   "dE_main": 12.4,
-   "dE_sec": 17.6,
-   "harmony": "analogous",
-   "prompt_colour": "soft autumn-fragrance olive silk (like #C9C580)"
+   "dE_main": 15.9,
+   "dE_sec": 16.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
   }
  },
  "s18": {
   "ha": {
-   "hex": "#B6C9D8",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh đậm dịu (天青)",
-   "name_en": "sky celadon (soft-deep)",
+   "hex": "#D7BACB",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen đậm dịu (藕荷)",
+   "name_en": "lotus-root mauve (soft-deep)",
    "main_hex": "#FFEFB8",
    "main_vi": "vàng nắng nhạt",
    "sec_hex": "#3E5A8D",
    "sec_vi": "lam ngọc trầm",
-   "dE_main": 16.0,
-   "dE_sec": 36.2,
-   "harmony": "complementary",
-   "prompt_colour": "soft sky celadon silk (like #B6C9D8)"
+   "dE_main": 16.3,
+   "dE_sec": 36.1,
+   "harmony": "triadic",
+   "prompt_colour": "soft lotus-root mauve silk (like #D7BACB)"
   },
   "thu": {
    "hex": "#D8E9EE",
@@ -1414,18 +1414,18 @@
  },
  "s20": {
   "ha": {
-   "hex": "#F7DDD6",
-   "name_zh": "桃夭",
-   "name_vi": "hồng đào phấn (桃夭)",
-   "name_en": "peach blossom",
+   "hex": "#B6C9D8",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh đậm dịu (天青)",
+   "name_en": "sky celadon (soft-deep)",
    "main_hex": "#DF8697",
    "main_vi": "hồng sen dịu",
    "sec_hex": "#D0F5E4",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 21.6,
-   "dE_sec": 7.2,
-   "harmony": "analogous",
-   "prompt_colour": "pale peach blossom silk (like #F7DDD6)"
+   "dE_main": 16.9,
+   "dE_sec": 12.2,
+   "harmony": "complementary",
+   "prompt_colour": "soft sky celadon silk (like #B6C9D8)"
   },
   "thu": {
    "hex": "#CBCD9A",
@@ -1458,18 +1458,18 @@
    "prompt_colour": "pale water pink silk (like #F3D9E6)"
   },
   "thu": {
-   "hex": "#B5C8DA",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh đậm dịu (天青)",
-   "name_en": "sky celadon (soft-deep)",
+   "hex": "#DCBDC4",
+   "name_zh": "粉藕",
+   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
+   "name_en": "pink lotus-root (soft-deep)",
    "main_hex": "#246E7E",
    "main_vi": "xanh cổ vịt trầm đậm",
    "sec_hex": "#E0D0A5",
    "sec_vi": "trắng ngà",
-   "dE_main": 32.8,
-   "dE_sec": 9.7,
-   "harmony": "analogous",
-   "prompt_colour": "soft sky celadon silk (like #B5C8DA)"
+   "dE_main": 34.4,
+   "dE_sec": 7.6,
+   "harmony": "complementary",
+   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
   }
  },
  "s22": {
@@ -1484,22 +1484,22 @@
    "sec_vi": "hồng đất nhạt",
    "dE_main": 10.6,
    "dE_sec": 9.0,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft duck-egg green silk (like #C0D8CE)"
   },
   "thu": {
-   "hex": "#D8BA95",
-   "name_zh": "驼色",
-   "name_vi": "nâu lạc đà nhạt đậm dịu (驼色)",
-   "name_en": "pale camel (soft-deep)",
+   "hex": "#D9B79C",
+   "name_zh": "赭白",
+   "name_vi": "son đất nhạt đậm dịu (赭白)",
+   "name_en": "pale earth-rose (soft-deep)",
    "main_hex": "#5D7321",
    "main_vi": "ô liu đậm",
    "sec_hex": "#B7F0FB",
    "sec_vi": "xanh ngọc sương",
    "dE_main": 29.8,
-   "dE_sec": 16.0,
-   "harmony": "analogous",
-   "prompt_colour": "soft camel silk (like #D8BA95)"
+   "dE_sec": 16.1,
+   "harmony": "triadic",
+   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
   }
  },
  "s23": {
@@ -1514,22 +1514,22 @@
    "sec_vi": "tím khói nhạt",
    "dE_main": 12.3,
    "dE_sec": 13.5,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft pine-pollen green silk (like #C8D796)"
   },
   "thu": {
-   "hex": "#E4CCD4",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen (藕荷)",
-   "name_en": "lotus-root mauve",
+   "hex": "#F2DFC8",
+   "name_zh": "杏",
+   "name_vi": "vàng hạnh nhạt (杏)",
+   "name_en": "pale apricot",
    "main_hex": "#8A5A91",
    "main_vi": "hồng tro / tím khói đậm",
    "sec_hex": "#CCE9FF",
    "sec_vi": "xanh sương",
-   "dE_main": 33.6,
+   "dE_main": 39.1,
    "dE_sec": 8.0,
-   "harmony": "analogous",
-   "prompt_colour": "pale lotus-root mauve silk (like #E4CCD4)"
+   "harmony": "triadic",
+   "prompt_colour": "pale apricot silk (like #F2DFC8)"
   }
  },
  "s24": {
@@ -1548,18 +1548,18 @@
    "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
   },
   "thu": {
-   "hex": "#D3BCDA",
-   "name_zh": "丁香",
-   "name_vi": "tím đinh hương đậm dịu (丁香)",
-   "name_en": "lilac (soft-deep)",
+   "hex": "#B3CEB8",
+   "name_zh": "苍青",
+   "name_vi": "xanh rêu sương đậm dịu (苍青)",
+   "name_en": "misty sage (soft-deep)",
    "main_hex": "#7D143D",
    "main_vi": "đỏ rượu trầm thẫm",
    "sec_hex": "#FCDEC7",
    "sec_vi": "kem đào",
-   "dE_main": 44.7,
-   "dE_sec": 12.0,
-   "harmony": "analogous",
-   "prompt_colour": "soft lilac silk (like #D3BCDA)"
+   "dE_main": 46.9,
+   "dE_sec": 11.3,
+   "harmony": "complementary",
+   "prompt_colour": "soft misty sage silk (like #B3CEB8)"
   }
  },
  "s25": {
@@ -1574,7 +1574,7 @@
    "sec_vi": "kem chanh",
    "dE_main": 15.7,
    "dE_sec": 12.1,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale snow-violet silk (like #D9D3EE)"
   },
   "thu": {
@@ -1654,18 +1654,18 @@
  },
  "s28": {
   "ha": {
-   "hex": "#E3ECC6",
-   "name_zh": "松花",
-   "name_vi": "xanh phấn thông (松花)",
-   "name_en": "pine-pollen green",
+   "hex": "#D6ECF0",
+   "name_zh": "月白",
+   "name_vi": "xanh trăng (月白)",
+   "name_en": "moon-white blue",
    "main_hex": "#E2904C",
    "main_vi": "cam đào dịu",
    "sec_hex": "#CCCCF8",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 23.1,
-   "dE_sec": 13.0,
-   "harmony": "analogous",
-   "prompt_colour": "pale pine-pollen green silk (like #E3ECC6)"
+   "dE_main": 25.3,
+   "dE_sec": 9.1,
+   "harmony": "complementary",
+   "prompt_colour": "pale moon-white blue silk (like #D6ECF0)"
   },
   "thu": {
    "hex": "#D9C486",
@@ -1678,7 +1678,7 @@
    "sec_vi": "trắng ngà",
    "dE_main": 11.2,
    "dE_sec": 13.6,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft incense buff silk (like #D9C486)"
   }
  },
@@ -1728,18 +1728,18 @@
    "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
   },
   "thu": {
-   "hex": "#CBCD9A",
-   "name_zh": "葭灰绿",
-   "name_vi": "xanh lau nhạt đậm dịu (葭灰绿)",
-   "name_en": "reed green (soft-deep)",
+   "hex": "#D3BCDA",
+   "name_zh": "丁香",
+   "name_vi": "tím đinh hương đậm dịu (丁香)",
+   "name_en": "lilac (soft-deep)",
    "main_hex": "#E5955F",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#F8ECE6",
    "sec_vi": "trắng ngà",
-   "dE_main": 13.7,
-   "dE_sec": 13.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft reed green silk (like #CBCD9A)"
+   "dE_main": 15.7,
+   "dE_sec": 13.7,
+   "harmony": "triadic",
+   "prompt_colour": "soft lilac silk (like #D3BCDA)"
   }
  },
  "s31": {
@@ -1754,22 +1754,22 @@
    "sec_vi": "hồng tím phấn",
    "dE_main": 15.2,
    "dE_sec": 15.8,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft pine-pollen green silk (like #C8D796)"
   },
   "thu": {
-   "hex": "#F2DFC8",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt (杏)",
-   "name_en": "pale apricot",
+   "hex": "#E4CCD4",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen (藕荷)",
+   "name_en": "lotus-root mauve",
    "main_hex": "#ABC994",
    "main_vi": "ô liu sáng",
    "sec_hex": "#AFEBEE",
    "sec_vi": "ngọc pastel",
-   "dE_main": 13.2,
-   "dE_sec": 8.9,
-   "harmony": "analogous",
-   "prompt_colour": "pale apricot silk (like #F2DFC8)"
+   "dE_main": 12.2,
+   "dE_sec": 9.4,
+   "harmony": "complementary",
+   "prompt_colour": "pale lotus-root mauve silk (like #E4CCD4)"
   }
  },
  "s32": {
@@ -1804,32 +1804,32 @@
  },
  "s33": {
   "ha": {
-   "hex": "#E3ECC6",
-   "name_zh": "松花",
-   "name_vi": "xanh phấn thông (松花)",
-   "name_en": "pine-pollen green",
+   "hex": "#AECFA2",
+   "name_zh": "竹青",
+   "name_vi": "xanh trúc nhạt đậm dịu (竹青)",
+   "name_en": "pale bamboo green (soft-deep)",
    "main_hex": "#CA9972",
    "main_vi": "cam đào dịu",
    "sec_hex": "#C7DDF9",
    "sec_vi": "xanh sương",
-   "dE_main": 21.7,
-   "dE_sec": 9.7,
-   "harmony": "analogous",
-   "prompt_colour": "pale pine-pollen green silk (like #E3ECC6)"
+   "dE_main": 13.7,
+   "dE_sec": 12.3,
+   "harmony": "triadic",
+   "prompt_colour": "soft bamboo green silk (like #AECFA2)"
   },
   "thu": {
-   "hex": "#DCD5EC",
-   "name_zh": "雪青",
-   "name_vi": "tím tuyết (雪青)",
-   "name_en": "snow-violet",
+   "hex": "#D3E3D6",
+   "name_zh": "苍青",
+   "name_vi": "xanh rêu sương (苍青)",
+   "name_en": "misty sage",
    "main_hex": "#935C83",
    "main_vi": "hồng tro / tím khói đậm",
    "sec_hex": "#FFDBD5",
    "sec_vi": "hồng đất nhạt",
-   "dE_main": 34.4,
-   "dE_sec": 6.2,
-   "harmony": "analogous",
-   "prompt_colour": "pale snow-violet silk (like #DCD5EC)"
+   "dE_main": 37.0,
+   "dE_sec": 6.1,
+   "harmony": "complementary",
+   "prompt_colour": "pale misty sage silk (like #D3E3D6)"
   }
  },
  "s34": {
@@ -1864,18 +1864,18 @@
  },
  "s35": {
   "ha": {
-   "hex": "#E6D6EE",
-   "name_zh": "丁香",
-   "name_vi": "tím đinh hương (丁香)",
-   "name_en": "lilac",
+   "hex": "#E8D6E0",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen (藕荷)",
+   "name_en": "lotus-root mauve",
    "main_hex": "#6AB884",
    "main_vi": "xanh lá sen / bạc hà dịu",
    "sec_hex": "#3E5A8D",
    "sec_vi": "lam ngọc trầm",
-   "dE_main": 22.9,
+   "dE_main": 22.0,
    "dE_sec": 43.3,
    "harmony": "complementary",
-   "prompt_colour": "pale lilac silk (like #E6D6EE)"
+   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
   },
   "thu": {
    "hex": "#B5C8DA",
@@ -1894,32 +1894,32 @@
  },
  "s36": {
   "ha": {
-   "hex": "#D5E0E9",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh (天青)",
-   "name_en": "sky celadon",
+   "hex": "#E0EEE8",
+   "name_zh": "鸭卵青",
+   "name_vi": "xanh trứng vịt (鸭卵青)",
+   "name_en": "duck-egg green",
    "main_hex": "#FF9E97",
    "main_vi": "san hô dưa hấu sáng",
    "sec_hex": "#3E5A8D",
    "sec_vi": "lam ngọc trầm",
-   "dE_main": 16.8,
-   "dE_sec": 43.8,
+   "dE_main": 19.2,
+   "dE_sec": 47.6,
    "harmony": "complementary",
-   "prompt_colour": "pale sky celadon silk (like #D5E0E9)"
+   "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
   },
   "thu": {
-   "hex": "#DCBDC4",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
-   "name_en": "pink lotus-root (soft-deep)",
+   "hex": "#D9B79C",
+   "name_zh": "赭白",
+   "name_vi": "son đất nhạt đậm dịu (赭白)",
+   "name_en": "pale earth-rose (soft-deep)",
    "main_hex": "#8A5F90",
    "main_vi": "hồng tro / tím khói đậm",
    "sec_hex": "#E4F1F4",
    "sec_vi": "trắng sương",
-   "dE_main": 28.6,
-   "dE_sec": 13.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
+   "dE_main": 27.7,
+   "dE_sec": 16.2,
+   "harmony": "triadic",
+   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
   }
  },
  "s37": {
@@ -1934,7 +1934,7 @@
    "sec_vi": "ngọc pastel",
    "dE_main": 16.2,
    "dE_sec": 9.2,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale apricot silk (like #F6E0CC)"
   },
   "thu": {
@@ -1968,48 +1968,48 @@
    "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
   },
   "thu": {
-   "hex": "#D8BA95",
-   "name_zh": "驼色",
-   "name_vi": "nâu lạc đà nhạt đậm dịu (驼色)",
-   "name_en": "pale camel (soft-deep)",
+   "hex": "#D9C486",
+   "name_zh": "香色",
+   "name_vi": "vàng hương trầm đậm dịu (香色)",
+   "name_en": "incense buff (soft-deep)",
    "main_hex": "#A7494F",
    "main_vi": "đỏ lá phong đậm",
    "sec_hex": "#E0C6ED",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 29.5,
-   "dE_sec": 11.7,
-   "harmony": "analogous",
-   "prompt_colour": "soft camel silk (like #D8BA95)"
+   "dE_main": 32.1,
+   "dE_sec": 13.9,
+   "harmony": "triadic",
+   "prompt_colour": "soft incense buff silk (like #D9C486)"
   }
  },
  "s39": {
   "ha": {
-   "hex": "#CFE3C8",
-   "name_zh": "竹青",
-   "name_vi": "xanh trúc nhạt (竹青)",
-   "name_en": "pale bamboo green",
+   "hex": "#E8D6E0",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen (藕荷)",
+   "name_en": "lotus-root mauve",
    "main_hex": "#CE9522",
    "main_vi": "vàng xoài dịu",
    "sec_hex": "#187E90",
    "sec_vi": "mòng két đậm",
-   "dE_main": 22.2,
-   "dE_sec": 35.8,
-   "harmony": "analogous",
-   "prompt_colour": "pale bamboo green silk (like #CFE3C8)"
+   "dE_main": 23.4,
+   "dE_sec": 36.3,
+   "harmony": "triadic",
+   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
   },
   "thu": {
-   "hex": "#D9B79C",
-   "name_zh": "赭白",
-   "name_vi": "son đất nhạt đậm dịu (赭白)",
-   "name_en": "pale earth-rose (soft-deep)",
+   "hex": "#D9C486",
+   "name_zh": "香色",
+   "name_vi": "vàng hương trầm đậm dịu (香色)",
+   "name_en": "incense buff (soft-deep)",
    "main_hex": "#1F6A6C",
    "main_vi": "xanh cổ vịt trầm đậm",
    "sec_hex": "#FFE8E9",
    "sec_vi": "hồng đất nhạt",
-   "dE_main": 34.2,
-   "dE_sec": 15.3,
-   "harmony": "complementary",
-   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
+   "dE_main": 36.5,
+   "dE_sec": 15.0,
+   "harmony": "triadic",
+   "prompt_colour": "soft incense buff silk (like #D9C486)"
   }
  },
  "s40": {
@@ -2024,7 +2024,7 @@
    "sec_vi": "tím khói nhạt",
    "dE_main": 18.7,
    "dE_sec": 14.8,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft pine-pollen green silk (like #C8D796)"
   },
   "thu": {
@@ -2088,18 +2088,18 @@
    "prompt_colour": "soft lotus-root mauve silk (like #D7BACB)"
   },
   "thu": {
-   "hex": "#ECD9DD",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen (粉藕)",
-   "name_en": "pink lotus-root",
+   "hex": "#D8E9EE",
+   "name_zh": "月白",
+   "name_vi": "xanh trăng thu (月白)",
+   "name_en": "autumn moon-white",
    "main_hex": "#CE8369",
    "main_vi": "hổ phách / đất nung dịu",
    "sec_hex": "#CBD7AC",
    "sec_vi": "kem chanh",
-   "dE_main": 23.5,
-   "dE_sec": 8.3,
-   "harmony": "analogous",
-   "prompt_colour": "pale pink lotus-root silk (like #ECD9DD)"
+   "dE_main": 26.9,
+   "dE_sec": 9.1,
+   "harmony": "complementary",
+   "prompt_colour": "pale autumn moon-white silk (like #D8E9EE)"
   }
  },
  "s43": {
@@ -2134,48 +2134,48 @@
  },
  "s44": {
   "ha": {
-   "hex": "#D2E9E3",
-   "name_zh": "湖色",
-   "name_vi": "xanh mặt hồ (湖色)",
-   "name_en": "lake green",
+   "hex": "#D6ECF0",
+   "name_zh": "月白",
+   "name_vi": "xanh trăng (月白)",
+   "name_en": "moon-white blue",
    "main_hex": "#93D895",
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#F4C1CF",
    "sec_vi": "hồng phấn nhạt",
-   "dE_main": 13.6,
-   "dE_sec": 10.3,
-   "harmony": "analogous",
-   "prompt_colour": "pale lake green silk (like #D2E9E3)"
+   "dE_main": 15.3,
+   "dE_sec": 10.7,
+   "harmony": "triadic",
+   "prompt_colour": "pale moon-white blue silk (like #D6ECF0)"
   },
   "thu": {
-   "hex": "#E4C49D",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt đậm dịu (杏)",
-   "name_en": "pale apricot (soft-deep)",
+   "hex": "#DCBDC4",
+   "name_zh": "粉藕",
+   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
+   "name_en": "pink lotus-root (soft-deep)",
    "main_hex": "#617437",
    "main_vi": "ô liu đậm",
    "sec_hex": "#94B594",
    "sec_vi": "rêu dịu",
-   "dE_main": 31.7,
-   "dE_sec": 12.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft apricot silk (like #E4C49D)"
+   "dE_main": 31.8,
+   "dE_sec": 12.6,
+   "harmony": "complementary",
+   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
   }
  },
  "s45": {
   "ha": {
-   "hex": "#E8D6E0",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen (藕荷)",
-   "name_en": "lotus-root mauve",
+   "hex": "#D4B9E1",
+   "name_zh": "丁香",
+   "name_vi": "tím đinh hương đậm dịu (丁香)",
+   "name_en": "lilac (soft-deep)",
    "main_hex": "#FB8860",
    "main_vi": "san hô dưa hấu sáng",
    "sec_hex": "#B6DDBD",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 20.3,
-   "dE_sec": 9.0,
-   "harmony": "analogous",
-   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
+   "dE_main": 17.5,
+   "dE_sec": 12.8,
+   "harmony": "triadic",
+   "prompt_colour": "soft lilac silk (like #D4B9E1)"
   },
   "thu": {
    "hex": "#B3CEB8",
@@ -2208,48 +2208,48 @@
    "prompt_colour": "pale bamboo green silk (like #CFE3C8)"
   },
   "thu": {
-   "hex": "#B5C8DA",
-   "name_zh": "天青",
-   "name_vi": "thiên thanh đậm dịu (天青)",
-   "name_en": "sky celadon (soft-deep)",
+   "hex": "#D6AFBC",
+   "name_zh": "藕荷",
+   "name_vi": "tím ngó sen đậm dịu (藕荷)",
+   "name_en": "lotus-root mauve (soft-deep)",
    "main_hex": "#4F929D",
    "main_vi": "xanh cổ vịt trầm đậm vừa",
    "sec_hex": "#FEDEC4",
    "sec_vi": "kem đào",
-   "dE_main": 21.0,
-   "dE_sec": 12.7,
-   "harmony": "analogous",
-   "prompt_colour": "soft sky celadon silk (like #B5C8DA)"
+   "dE_main": 20.6,
+   "dE_sec": 13.8,
+   "harmony": "complementary",
+   "prompt_colour": "soft lotus-root mauve silk (like #D6AFBC)"
   }
  },
  "s47": {
   "ha": {
-   "hex": "#E0EEE8",
-   "name_zh": "鸭卵青",
-   "name_vi": "xanh trứng vịt (鸭卵青)",
-   "name_en": "duck-egg green",
+   "hex": "#F7DDD6",
+   "name_zh": "桃夭",
+   "name_vi": "hồng đào phấn (桃夭)",
+   "name_en": "peach blossom",
    "main_hex": "#8ABB6B",
    "main_vi": "xanh lá sen / bạc hà dịu",
    "sec_hex": "#CDCEEE",
    "sec_vi": "tím khói nhạt",
-   "dE_main": 22.6,
-   "dE_sec": 9.3,
-   "harmony": "analogous",
-   "prompt_colour": "pale duck-egg green silk (like #E0EEE8)"
+   "dE_main": 22.0,
+   "dE_sec": 8.4,
+   "harmony": "triadic",
+   "prompt_colour": "pale peach blossom silk (like #F7DDD6)"
   },
   "thu": {
-   "hex": "#E4C49D",
-   "name_zh": "杏",
-   "name_vi": "vàng hạnh nhạt đậm dịu (杏)",
-   "name_en": "pale apricot (soft-deep)",
+   "hex": "#B5C8DA",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh đậm dịu (天青)",
+   "name_en": "sky celadon (soft-deep)",
    "main_hex": "#D48772",
    "main_vi": "hổ phách / đất nung dịu",
    "sec_hex": "#ECF7FF",
    "sec_vi": "trắng sương",
-   "dE_main": 15.3,
-   "dE_sec": 15.4,
-   "harmony": "analogous",
-   "prompt_colour": "soft apricot silk (like #E4C49D)"
+   "dE_main": 18.1,
+   "dE_sec": 14.7,
+   "harmony": "complementary",
+   "prompt_colour": "soft sky celadon silk (like #B5C8DA)"
   }
  },
  "s48": {
@@ -2264,7 +2264,7 @@
    "sec_vi": "xanh sương",
    "dE_main": 18.7,
    "dE_sec": 8.3,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale pine-pollen green silk (like #E3ECC6)"
   },
   "thu": {
@@ -2308,24 +2308,24 @@
    "sec_vi": "trắng sương",
    "dE_main": 10.9,
    "dE_sec": 17.3,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft autumn-fragrance olive silk (like #C9C580)"
   }
  },
  "s50": {
   "ha": {
-   "hex": "#D4B9E1",
-   "name_zh": "丁香",
-   "name_vi": "tím đinh hương đậm dịu (丁香)",
-   "name_en": "lilac (soft-deep)",
+   "hex": "#CFDCF0",
+   "name_zh": "菘蓝",
+   "name_vi": "lam tùng nhạt (菘蓝)",
+   "name_en": "pale woad blue",
    "main_hex": "#7AD298",
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#FFE7F3",
    "sec_vi": "hồng tím phấn",
-   "dE_main": 18.2,
-   "dE_sec": 13.5,
-   "harmony": "complementary",
-   "prompt_colour": "soft lilac silk (like #D4B9E1)"
+   "dE_main": 16.3,
+   "dE_sec": 7.3,
+   "harmony": "triadic",
+   "prompt_colour": "pale woad blue silk (like #CFDCF0)"
   },
   "thu": {
    "hex": "#B3CEB8",
@@ -2358,18 +2358,18 @@
    "prompt_colour": "pale peach blossom silk (like #F7DDD6)"
   },
   "thu": {
-   "hex": "#D9B79C",
-   "name_zh": "赭白",
-   "name_vi": "son đất nhạt đậm dịu (赭白)",
-   "name_en": "pale earth-rose (soft-deep)",
+   "hex": "#C6BAE0",
+   "name_zh": "雪青",
+   "name_vi": "tím tuyết đậm dịu (雪青)",
+   "name_en": "snow-violet (soft-deep)",
    "main_hex": "#7C2431",
    "main_vi": "đỏ lá phong thẫm",
    "sec_hex": "#D2E0CC",
    "sec_vi": "kem chanh",
-   "dE_main": 41.1,
-   "dE_sec": 10.4,
-   "harmony": "analogous",
-   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
+   "dE_main": 42.7,
+   "dE_sec": 11.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
   }
  },
  "s52": {
@@ -2388,18 +2388,18 @@
    "prompt_colour": "pale lilac silk (like #E6D6EE)"
   },
   "thu": {
-   "hex": "#DEB7A9",
-   "name_zh": "檀色",
-   "name_vi": "hồng gỗ đàn đậm dịu (檀色)",
-   "name_en": "sandalwood rose (soft-deep)",
+   "hex": "#CBCD9A",
+   "name_zh": "葭灰绿",
+   "name_vi": "xanh lau nhạt đậm dịu (葭灰绿)",
+   "name_en": "reed green (soft-deep)",
    "main_hex": "#C18BAD",
    "main_vi": "hồng tro / tím khói dịu",
    "sec_hex": "#F1F5FF",
    "sec_vi": "trắng sương",
-   "dE_main": 13.0,
-   "dE_sec": 17.1,
-   "harmony": "analogous",
-   "prompt_colour": "soft sandalwood rose silk (like #DEB7A9)"
+   "dE_main": 18.9,
+   "dE_sec": 15.8,
+   "harmony": "complementary",
+   "prompt_colour": "soft reed green silk (like #CBCD9A)"
   }
  },
  "s53": {
@@ -2448,64 +2448,64 @@
    "prompt_colour": "soft moon-white blue silk (like #B1D7DD)"
   },
   "thu": {
-   "hex": "#DCBDC4",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
-   "name_en": "pink lotus-root (soft-deep)",
+   "hex": "#C6BAE0",
+   "name_zh": "雪青",
+   "name_vi": "tím tuyết đậm dịu (雪青)",
+   "name_en": "snow-violet (soft-deep)",
    "main_hex": "#D89077",
    "main_vi": "cam quả hồng dịu",
    "sec_hex": "#F9F7D5",
    "sec_vi": "kem chanh",
-   "dE_main": 12.8,
-   "dE_sec": 15.5,
-   "harmony": "analogous",
-   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
+   "dE_main": 14.9,
+   "dE_sec": 18.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft snow-violet silk (like #C6BAE0)"
   }
  },
  "s55": {
   "ha": {
-   "hex": "#B1D7DD",
-   "name_zh": "月白",
-   "name_vi": "xanh trăng đậm dịu (月白)",
-   "name_en": "moon-white blue (soft-deep)",
+   "hex": "#D4B9E1",
+   "name_zh": "丁香",
+   "name_vi": "tím đinh hương đậm dịu (丁香)",
+   "name_en": "lilac (soft-deep)",
    "main_hex": "#5BC495",
    "main_vi": "xanh lá sen / bạc hà sáng",
    "sec_hex": "#FFF3E4",
    "sec_vi": "ngà",
-   "dE_main": 14.5,
-   "dE_sec": 13.0,
-   "harmony": "analogous",
-   "prompt_colour": "soft moon-white blue silk (like #B1D7DD)"
+   "dE_main": 19.4,
+   "dE_sec": 16.7,
+   "harmony": "complementary",
+   "prompt_colour": "soft lilac silk (like #D4B9E1)"
   },
   "thu": {
-   "hex": "#DCBDC4",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
-   "name_en": "pink lotus-root (soft-deep)",
+   "hex": "#E7D5BF",
+   "name_zh": "驼色",
+   "name_vi": "nâu lạc đà nhạt (驼色)",
+   "name_en": "pale camel",
    "main_hex": "#86608C",
    "main_vi": "hồng tro / tím khói đậm",
    "sec_hex": "#C3EEF0",
    "sec_vi": "xanh ngọc sương",
-   "dE_main": 28.8,
-   "dE_sec": 12.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
+   "dE_main": 35.2,
+   "dE_sec": 8.1,
+   "harmony": "triadic",
+   "prompt_colour": "pale camel silk (like #E7D5BF)"
   }
  },
  "s56": {
   "ha": {
-   "hex": "#E8D6E0",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen (藕荷)",
-   "name_en": "lotus-root mauve",
+   "hex": "#D2E9E3",
+   "name_zh": "湖色",
+   "name_vi": "xanh mặt hồ (湖色)",
+   "name_en": "lake green",
    "main_hex": "#E4986A",
    "main_vi": "cam đào sáng",
    "sec_hex": "#A991CA",
    "sec_vi": "tím dịu",
-   "dE_main": 18.1,
-   "dE_sec": 20.7,
-   "harmony": "analogous",
-   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
+   "dE_main": 21.2,
+   "dE_sec": 24.0,
+   "harmony": "complementary",
+   "prompt_colour": "pale lake green silk (like #D2E9E3)"
   },
   "thu": {
    "hex": "#D8BA95",
@@ -2538,18 +2538,18 @@
    "prompt_colour": "soft water pink silk (like #E6BBD1)"
   },
   "thu": {
-   "hex": "#C9C580",
-   "name_zh": "秋香",
-   "name_vi": "vàng thu hương đậm dịu (秋香)",
-   "name_en": "autumn-fragrance olive (soft-deep)",
+   "hex": "#D4DFEA",
+   "name_zh": "天青",
+   "name_vi": "thiên thanh (天青)",
+   "name_en": "sky celadon",
    "main_hex": "#527631",
    "main_vi": "ô liu đậm",
    "sec_hex": "#E1FEE6",
    "sec_vi": "bạc hà nhạt",
-   "dE_main": 29.2,
-   "dE_sec": 17.2,
-   "harmony": "analogous",
-   "prompt_colour": "soft autumn-fragrance olive silk (like #C9C580)"
+   "dE_main": 39.4,
+   "dE_sec": 8.7,
+   "harmony": "triadic",
+   "prompt_colour": "pale sky celadon silk (like #D4DFEA)"
   }
  },
  "s58": {
@@ -2564,7 +2564,7 @@
    "sec_vi": "tím mận trầm",
    "dE_main": 13.7,
    "dE_sec": 41.0,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft duck-egg green silk (like #C0D8CE)"
   },
   "thu": {
@@ -2598,18 +2598,18 @@
    "prompt_colour": "pale lake green silk (like #D2E9E3)"
   },
   "thu": {
-   "hex": "#D9B79C",
-   "name_zh": "赭白",
-   "name_vi": "son đất nhạt đậm dịu (赭白)",
-   "name_en": "pale earth-rose (soft-deep)",
+   "hex": "#D8BA95",
+   "name_zh": "驼色",
+   "name_vi": "nâu lạc đà nhạt đậm dịu (驼色)",
+   "name_en": "pale camel (soft-deep)",
    "main_hex": "#9D3B4D",
    "main_vi": "đỏ lá phong đậm",
    "sec_hex": "#AFEBEE",
    "sec_vi": "ngọc pastel",
-   "dE_main": 32.6,
-   "dE_sec": 14.6,
-   "harmony": "analogous",
-   "prompt_colour": "soft earth-rose silk (like #D9B79C)"
+   "dE_main": 33.3,
+   "dE_sec": 14.4,
+   "harmony": "triadic",
+   "prompt_colour": "soft camel silk (like #D8BA95)"
   }
  },
  "s60": {
@@ -2628,18 +2628,18 @@
    "prompt_colour": "soft woad blue silk (like #AFC4E5)"
   },
   "thu": {
-   "hex": "#EBD3CB",
-   "name_zh": "檀色",
-   "name_vi": "hồng gỗ đàn (檀色)",
-   "name_en": "sandalwood rose",
+   "hex": "#E7D5BF",
+   "name_zh": "驼色",
+   "name_vi": "nâu lạc đà nhạt (驼色)",
+   "name_en": "pale camel",
    "main_hex": "#9E5D81",
    "main_vi": "hồng tro / tím khói đậm vừa",
    "sec_hex": "#CCE9FF",
    "sec_vi": "xanh sương",
-   "dE_main": 33.2,
-   "dE_sec": 7.9,
-   "harmony": "analogous",
-   "prompt_colour": "pale sandalwood rose silk (like #EBD3CB)"
+   "dE_main": 33.4,
+   "dE_sec": 8.7,
+   "harmony": "triadic",
+   "prompt_colour": "pale camel silk (like #E7D5BF)"
   }
  },
  "s61": {
@@ -2668,24 +2668,24 @@
    "sec_vi": "tím pastel",
    "dE_main": 34.9,
    "dE_sec": 8.8,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale apricot silk (like #F2DFC8)"
   }
  },
  "s63": {
   "ha": {
-   "hex": "#E8D6E0",
-   "name_zh": "藕荷",
-   "name_vi": "tím ngó sen (藕荷)",
-   "name_en": "lotus-root mauve",
+   "hex": "#E6D6EE",
+   "name_zh": "丁香",
+   "name_vi": "tím đinh hương (丁香)",
+   "name_en": "lilac",
    "main_hex": "#A6F4B1",
    "main_vi": "xanh lá sen / bạc hà nhạt",
    "sec_hex": "#E69498",
    "sec_vi": "hồng san hô",
-   "dE_main": 14.3,
-   "dE_sec": 16.4,
+   "dE_main": 15.5,
+   "dE_sec": 17.0,
    "harmony": "complementary",
-   "prompt_colour": "pale lotus-root mauve silk (like #E8D6E0)"
+   "prompt_colour": "pale lilac silk (like #E6D6EE)"
   },
   "thu": {
    "hex": "#D6AFBC",
@@ -2698,7 +2698,7 @@
    "sec_vi": "ngà",
    "dE_main": 10.7,
    "dE_sec": 15.1,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "soft lotus-root mauve silk (like #D6AFBC)"
   }
  },
@@ -2728,7 +2728,7 @@
    "sec_vi": "trắng ngà",
    "dE_main": 20.0,
    "dE_sec": 6.4,
-   "harmony": "analogous",
+   "harmony": "triadic",
    "prompt_colour": "pale misty sage silk (like #D3E3D6)"
   }
  },
@@ -2748,18 +2748,18 @@
    "prompt_colour": "pale bamboo green silk (like #CFE3C8)"
   },
   "thu": {
-   "hex": "#DCBDC4",
-   "name_zh": "粉藕",
-   "name_vi": "hồng ngó sen đậm dịu (粉藕)",
-   "name_en": "pink lotus-root (soft-deep)",
+   "hex": "#DEB7A9",
+   "name_zh": "檀色",
+   "name_vi": "hồng gỗ đàn đậm dịu (檀色)",
+   "name_en": "sandalwood rose (soft-deep)",
    "main_hex": "#8C6393",
    "main_vi": "hồng tro / tím khói đậm",
    "sec_hex": "#F9F5EB",
    "sec_vi": "trắng ngà",
-   "dE_main": 27.5,
-   "dE_sec": 14.9,
-   "harmony": "analogous",
-   "prompt_colour": "soft pink lotus-root silk (like #DCBDC4)"
+   "dE_main": 26.6,
+   "dE_sec": 16.6,
+   "harmony": "triadic",
+   "prompt_colour": "soft sandalwood rose silk (like #DEB7A9)"
   }
  }
 }

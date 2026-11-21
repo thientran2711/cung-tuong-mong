@@ -273,7 +273,8 @@ def phi_bach(person,has_shawl=True,rank=None,season=None):
         col,kind,veil=c3,"a soft pastel","a light airy veil of that soft hue"
     else:
         col,kind,veil="pale IVORY-CREAM silk","a soft neutral","a light airy ivory veil"
-    if rank==6: return f"PHI BẠCH: {intro.replace('the sheer shawl','the shawl')} is a THICKER soft silk shawl in {col.replace('pale IVORY-CREAM silk','pale IVORY-CREAM')} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours), much less transparent, matching the weight of her brocade, never a see-through gauze veil; it keeps its soft graceful drape."
+    # L1847 (owner): t6 Quý phi = a LITTLE less see-through than Phi and below (slightly thicker), still softly translucent (replaces G54 'much less transparent ... never see-through').
+    if rank==6: return f"PHI BẠCH: {intro.replace('the sheer shawl','the shawl')} is a slightly THICKER soft silk gauze shawl in {col.replace('pale IVORY-CREAM silk','pale IVORY-CREAM')} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours), a little LESS see-through than at the lower ranks yet still softly translucent, matching the weight of her brocade; it keeps its soft graceful drape."
     return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {col} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as {veil}, never an opaque solid band of colour; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 # Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
