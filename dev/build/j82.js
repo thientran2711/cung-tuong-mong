@@ -216,6 +216,7 @@ window.kg82Img=kg82Img;window.kg82Bg=kg82Bg;window.kg82Spr=kg82Spr;
 /* NO TEXT in mini-game play (owner OD 20/11 ~05:10Z): every pop is a sign, never a word. Stars = how well (★★★ / ★★ / ★), ✗ = missed, ▼ = look here, ↻ = once more, a/b = a count. */
 function kg82Sym(t){t=String(t);if(!/\p{L}/u.test(t))return t;let m;
  if(m=t.match(/^Đúng (\d+)\/(\d+)/))return m[1]+"/"+m[2];
+ /* huong-cue (owner OD 21/11 ~00:50Z): a short guiding / result word is shown as the word it is (what she must do, how close, how it went); only a long, reading-heavy line falls back to a sign (BAL.mgFx.popMax) */if(t.length<=BAL.mgFx.popMax)return t;
  if(/^(Tuyệt|Đúng cả|Đẹp lắm|Hồng tâm|Trúng giữa|Gỡ xong|Vừa lửa|Né kịp|Nặng tay|Khớp|Thế hoa cân|Đèn đã sáng)/.test(t))return"★★★";
  if(/^(Được|Trúng|Vào bình|Vừa tay|Gần giống|Khá đẹp|Xong)/.test(t))return"★★";
  if(/^(Sượt|Vào tai|Nhẹ tay)/.test(t))return"★";
