@@ -49,7 +49,7 @@
 },
 {
 "reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
-"re": "^label:(Đến gặp|Đến cung nàng thăm)"
+"re": "^label:(Đến gặp|Đến cung nàng thăm|Đến cung nàng( ta)? thỉnh an)"
 },
 {
 "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
