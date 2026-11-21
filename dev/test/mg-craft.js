@@ -74,7 +74,7 @@ const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`
   /* open with a caller source, «Sẵn sàng», return what the board shows */
   window.__open=async(src,o)=>{o=o||{};const r={};try{kg82Close()}catch(e){}Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;
    try{(0,eval)(src)}catch(e){r.err=String(e.message||e);return r}await sleep(900);const box=kg82Box();if(!box){r.nobox=1;return r}
-   r.rules=!!box.querySelector('.kgr .kgr-demo');r.tut=!!box.querySelector('#kgrtut');const go=box.querySelector('.kgr-go');if(!go){r.nogo=1;return r}
+   r.rules=!!box.querySelector('.kgr .kpst .kfx')&&!box.querySelector('.kgr .kgr-demo');/* LIVE mg-intro-2 (same check as mg-ready-guide): rules title with the kit tap-word «!» (.kfx), no rules-demo picture */r.tut=!!box.querySelector('#kgrtut');const go=box.querySelector('.kgr-go');if(!go){r.nogo=1;return r}
    if(o.ease!=null){/* the board ease of this play (law 5 measure) */const k0=kg82Play;kg82Play=function(kind,cb){KG82.lv=o.ease;kg82Play=k0;return k0.apply(this,arguments)}}
    window.__ct=new Set();go.click();await sleep(1600);r.eng=KG82_KIND[o.kind].e;r.canvas=!!box.querySelector('canvas');r.play=KG82.phase==='play';r.words=[...new Set(__words(box))];
    if(o.bot){r.acts=await __cbot(o.bot);await sleep(1200);r.rawF=KG82.rawF;r.res=!!document.querySelector('#kg82box-res:not([hidden])')||!!document.getElementById('kg82ok')}

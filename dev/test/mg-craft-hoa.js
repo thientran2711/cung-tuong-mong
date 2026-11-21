@@ -27,7 +27,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    return{raw,trace:window.__trace.length,mode:window.__trace.slice(0,12).join(',')}}});
  /* 1 the rules screen from the contest caller (the plain art key "hoa" is Vẽ in playArt), then «Hướng dẫn» (ghost hand), then «Sẵn sàng» */
  await p.evaluate(()=>{try{kg82Close()}catch(e){}startContest({art:'hoa',title:'Hội thi',onDone:()=>{}})});await p.waitForTimeout(1200);
- const r1=await p.evaluate(()=>{const b=kg82Box();return{rules:!!b.querySelector('.kgr .kpst'),go:(b.querySelector('.kgr-go')||{}).textContent,demo:!!b.querySelector('.kgr-demo'),eng:KG82_KIND.hoa.e,tut:!!b.querySelector('#kgrtut'),run:!!KG82.run,cv:!!b.querySelector('canvas'),luat:(b.querySelector('.kgr')||{}).textContent}});
+ const r1=await p.evaluate(()=>{const b=kg82Box();return{rules:!!b.querySelector('.kgr .kpst'),go:(b.querySelector('.kgr-go')||{}).textContent,demo:!!b.querySelector('.kgr .kpst .kfx')&&!b.querySelector('.kgr-demo')/* LIVE mg-intro-2 (as mg-ready-guide): kit tap-word «!» on the rules title, no demo picture */,eng:KG82_KIND.hoa.e,tut:!!b.querySelector('#kgrtut'),run:!!KG82.run,cv:!!b.querySelector('canvas'),luat:(b.querySelector('.kgr')||{}).textContent}});
  ok(r1.rules&&r1.demo&&/Sẵn sàng/.test(r1.go||'')&&r1.eng==='ikebana'&&r1.tut&&!r1.cv&&!/%/.test(r1.luat),'rules screen first (contest caller), engine ikebana, hướng dẫn button, no %',{eng:r1.eng,go:r1.go});
  if(SH)await p.screenshot({path:SH+'/hoa-rules-'+VW+'.png'});
  await p.evaluate(()=>document.getElementById('kgrtut').click());await p.waitForTimeout(2500);
