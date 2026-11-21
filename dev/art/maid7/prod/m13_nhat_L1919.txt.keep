@@ -1,0 +1,6 @@
+base: dev/art/maid7/prod/m13_nhat_L1905.txt
+allow: she holds an embroidered handkerchief in a contrasting colour   # held item owner L1919 (E13: every rank a different item; builder AGE5 pick)
+allow: turning or touching it   # A38 boilerplate trim to stay under 10 000 (hands-interact boilerplate shortened / duplicate FABRIC line; crepe sentence stays in the master block)
+allow: lively and natural   # A38 boilerplate trim to stay under 10 000 (hands-interact boilerplate shortened / duplicate FABRIC line; crepe sentence stays in the master block)
+allow: while her head stays up facing the viewer   # A38 boilerplate trim to stay under 10 000 (hands-interact boilerplate shortened / duplicate FABRIC line; crepe sentence stays in the master block)
+allow: never looking down   # A38 boilerplate trim to stay under 10 000 (hands-interact boilerplate shortened / duplicate FABRIC line; crepe sentence stays in the master block)

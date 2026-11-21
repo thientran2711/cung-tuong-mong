@@ -10,6 +10,7 @@ Part 3 BANNED REFS (owner Lượt 554/555): the prompt text or --refs id,id,... 
 Usage
   python3 dev/art/check_store.py <prompt_file> <store_args...> [--refs id,id]                     # both parts (scope from the args / prompt)
   python3 dev/art/check_store.py <prompt_file> --scope tpN|prN|trieuN|mama|nude|face [--age aNN]   # approved part only (no store args)
+  python3 dev/art/check_store.py --maid-items <dir> <tag>   # E13 (owner L1919): maid held items, FAIL on a repeat inside one person / same item at the same rank across persons
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
   --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
@@ -1359,6 +1360,13 @@ def main():
     a=sys.argv[1:]
     if not a or a[0] in ("-h","--help"): print(__doc__); return 0
     if a[0]=="--self": return selftest()
+    if a[0]=="--maid-items":   # E13 (owner L1919): every maid rank of one person holds a different item/kind; same rank across persons never the exact same item
+        sys.path.insert(0,ART); import maid_items
+        d,tag=a[1],a[2]; bad,per=maid_items.gate(d,tag)
+        if not per: print('MAID ITEMS FAIL — no <pid>_<rank>_'+tag+'.txt files in',d); return 1
+        if bad:
+            print('MAID ITEMS FAIL',d,tag,'—',len(bad),'repeat(s):'); [print('  '+b) for b in bad]; return 1
+        print('MAID ITEMS PASS',d,tag,'(%d persons, %d files: every rank a different item/kind, no same item at the same rank across persons)'%(len(per),sum(map(len,per.values())))); return 0
     if a[0]=="--audit": audit(a[a.index("--out")+1] if "--out" in a else os.path.join(ART,"APPROVED_AUDIT.md")); return 0
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
