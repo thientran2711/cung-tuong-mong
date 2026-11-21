@@ -30,3 +30,11 @@ Keeper #2 r3 b0a8eb4b + LIVE e391b85f (assemble.py list: main's jroad8.js kept, 
 
 Keeper #2 r4 0f6c758a (r3 + j59.js exports window.j59tagHTML / j59col / j59fac — they lived inside the j59 IIFE, so in the real game every focus plate fell back to «Người lạ» and fac() was always 1; kit-focus.js now asserts the helpers are exported and plate text == the stage token's tag) + LIVE 94cbe0cd (assemble.py list union; contains newest LIVE) = review/kit-focus-rv4 sha 4c1105d83bf849d1a40fb7aaa699eb1913fc6514. Diff vs r3: 1 line in j59.js + test; no other window.j59* definition clashes (grepped).
 Checks: kit-focus.js PASS Fold + iPad; my probe: sub-lines 0/9 cut on both; plate shows the real person tag («Cung nữ thân tín tam đẳng» / name) in my iPad run instead of «Người lạ»; coop-e2e 94/94; QUICKCHECK PASS 313 s (render 293/273, tab 743/753, buổi 1718/1935, core gates PASS, old save ok).
+
+## Round 5 — da873b4b68ce (each ton cost its own unbreakable sub-line part, kfoc-sub3)
+PRIORITY #1 CHECK: re-read rounds 1-4 above, OWNER_DECISIONS on focus/sub-line (price never cut), KIT.md kit-focus; reused my r4 probes.
+- Merged LIVE 0046a920 into review/kit-focus-rv5 (f6d0af801ed507b37395d57c54ac12e55259dc36): only index/sw (theirs+rebuild) conflicts; assemble.py union kept jfocus.js.
+- kit-focus.js Fold+iPad PASS (clip 0, iOver 0, overFig 0, 2-cost ton on the 2-line real title, btnHs uniform).
+- Fold shot: «Tốn 2 khắc · Đức -2» and «Khá chắc · Tốn 1 khắc · 20 bạc» whole, wraps only between parts, no «%», odds ladder words OK. iPad: sub-lines whole (shot partly covered by harness gift overlay; layout asserts pass).
+- quickcheck PASS (core gates, perf median new/live 264/308 ms render), coop-e2e 94/94.
+- VERDICT: PASS.
