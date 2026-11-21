@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DESIGN18 (owner L1590 + L1592 G40 + L1595/L1597 G41, via Foreman C #14): THU s62 t1–t3 = s62_t{1,2,3}_COMOI_v4.txt, BUILT on LADDER1's
+"""DESIGN18 (owner L1590 + L1592 G40 + L1595/L1597 G41, via Foreman C #14): THU s62 t1–t3 = s62_t{1,2,3}_COMOI_v5.txt (v4 + JOB 5 G42 edits, see G42 below), BUILT on LADDER1's
 make_thu_L1590.py outputs (t1 v2e, t2 v2e, t3 v2f; DENSE already out). A39: start from each rank's old text, swap only the outfit-design words.
 Owner L1597: NO mẫu C / ChatGPT. THU shift-down, each tier keeps ITS OWN embroidery density (TIER_LOW level) and rank items:
   t1 Đáp ứng   <- the CURRENT thu Thường tại garment (t2 v2e: layered collar + body + sash) verbatim, motif -> lilac sprays,
@@ -50,8 +50,32 @@ def t3():
     s = sw(g40(T3), ONE, TWO)
     return sw(s, '"Quý nhân · Áo trong cổ vuông viền thêu rộng + áo ngoài mở"', '"Quý nhân · Áo trong cổ vuông viền thêu rộng + hai dải vạt trước, thắt đai"')
 
+# DESIGN18 JOB 5 — owner L1605 (rule G42 'ladder carries up': what a lower rank has, the higher rank has too, a little denser). A39: only these.
+G42 = {
+ 1: [("its two straight front edges (a simple thin blush piping)",
+      "its two straight front edges (a narrow blush band embroidered with small lilac sprays, from the shoulders down past the waist)"),
+     ("a wide embroidered lilac sprays hem band, small sprays of embroidered lilac sprays on the upper garment and a soft silk sash",
+      "a wide embroidered lilac sprays hem band, embroidered lilac sprays cuff bands, many small sprays of embroidered lilac sprays over the upper garment "
+      "and the skirt, and a soft silk sash with a small carved jade pendant (ngọc bội) on a silk cord with a silk tassel at each side")],
+ 2: [("its two straight front edges (a simple narrow blush band)",
+      "its two straight front edges (a narrow blush band embroidered with small tiger lilies, from the shoulders down past the waist)"),
+     ("edged by a wide soft blush band embroidered with tiger lilies;",
+      "edged by a wide soft blush band embroidered with tiger lilies running straight ACROSS the chest, the inner top also embroidered with small tiger lilies;"),
+     ("delicate embroidered tiger lilies at the sleeves and hem;",
+      "wide embroidered tiger lilies cuff bands at the sleeve ends and the hem; many small sprays of embroidered tiger lilies over the robe and skirt;")],
+ 3: [("its two straight front edges (a simple narrow blush band)",
+      "its two straight front edges (an embroidered blush band down past the waist)"),
+     ("embroidered with semi-double China roses (the Quý nhân edge);",
+      "embroidered with semi-double China roses (the Quý nhân edge), the inner top also embroidered across the chest;"),
+     ("wide embroidered semi-double China roses bands at the sleeve ends and the hem;",
+      "wide embroidered semi-double China roses bands at the sleeve ends and the hem; many small semi-double China roses over the robe and skirt;")],
+}
+def g42(t, s):
+    for a, b in G42[t]: s = sw(s, a, b)
+    return s
+
 if __name__ == "__main__":
     for t, f in ((1, t1), (2, t2), (3, t3)):
-        s, used = fit(f()); assert "densely embroidered ALL OVER" not in s and "Tang-style" not in s and s.count(OUTER_IN) == 1 and OLD_G40 not in s
-        out = os.path.join(D, f"s62_t{t}_COMOI_v4.txt"); open(out, "w", encoding="utf-8").write(s)
+        s, used = fit(g42(t, f())); assert "densely embroidered ALL OVER" not in s and "Tang-style" not in s and s.count(OUTER_IN) == 1 and OLD_G40 not in s
+        out = os.path.join(D, f"s62_t{t}_COMOI_v5.txt"); open(out, "w", encoding="utf-8").write(s)
         print(t, len(s), os.path.relpath(out, os.path.dirname(os.path.dirname(ART))), "trims:", used)
