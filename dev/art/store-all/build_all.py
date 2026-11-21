@@ -250,11 +250,13 @@ G36_PHIBACH=False
 G36_RX=re.compile(r"(?:,|;) a sheer silk shawl(?=[;.,])")
 def g36(S):
     return S if G36_PHIBACH else G36_RX.sub("",S)
-def phi_bach(person,has_shawl=True):
-    main,sec,fm,col,why=phibach_colour(person)
+def phi_bach(person,has_shawl=True,rank=None):
+    # G56 (owner L1804 approved + L1805, via Foreman C #23): phi bạch = pale IVORY-CREAM silk with a THIN GOLD EDGE (3rd colour for the phi bạch ONLY,
+    # exception to B20/A31), t1-t6 only (t7/t8: none, any season); t6 Quý phi = THICKER, much less transparent silk (G54, L1801). Old F12 words (secondary hue) in git history.
+    if isinstance(rank,int) and rank>=7: return ""
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
-    # F12 (owner Lượt 601, ROOT-51 -> BW4): same secondary hue, but clearly MORE TRANSPARENT (a light airy veil, never an opaque band)
-    return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {col} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape."
+    if rank==6: return f"PHI BẠCH: {intro.replace('the sheer shawl','the shawl')} is a THICKER soft silk shawl in pale IVORY-CREAM with a THIN GOLD EDGE along its borders (a soft neutral, the only colour outside her two robe colours), much less transparent, matching the weight of her brocade, never a see-through gauze veil; it keeps its soft graceful drape."
+    return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in pale IVORY-CREAM silk with a THIN GOLD EDGE along its borders (a soft neutral, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy ivory veil, never an opaque solid band of colour; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 # Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
 # every variant still reads as the same short round shoulder capelet overall. (The store sentence says the outline is smooth and round; the variants only shape the LOWER EDGE; owner approved the result.)
@@ -292,7 +294,7 @@ def extras(S0,person,rank):
         if rank==7: L.append(HQP_LUX)
         if rank in (7,8): L.append(INNER_EMB)   # G20 owner 20/11 ~08:02Z: "Ghi vào, Hoàng Quý Phi và Hoàng hậu lớp áo trong cũng phải theo nha."
     if isinstance(rank,int) and rank<=6:
-        if G36_PHIBACH: L.append(phi_bach(person,"shawl" in S0))   # G36 (owner L1446): builder output = xuân (current Hán set) / đông -> no phi bạch; phi_bach() kept for hạ/thu builders   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
+        if G36_PHIBACH: L.append(phi_bach(person,"shawl" in S0,rank))   # G36 (owner L1446): builder output = xuân (current Hán set) / đông -> no phi bạch; phi_bach() kept for hạ/thu builders   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
     return L
 def princess_sentences(k,t):

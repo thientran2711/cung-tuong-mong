@@ -1085,7 +1085,8 @@ def low_outfit(c,t,v="v0"):
 # the LAD3 one-layer "pearl-edged cape/stole" becomes TWO layered SHORT shoulder capes (Phi has one cloud collar).
 import re as _re6
 _re_cape6=_re6.compile(r"an embroidered ([^,]+?) pearl-edged cape/stole over the shoulders")
-CAPE6_TWO=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, with small jade and pearl drops dangling beneath it, fewer and smaller than the imperial noble consort's, never covering the neckline"   # JOB 3 owner Lượt 1317: t6 collar drops added (reference dev/art/swap56/s62_t6_v2.txt)
+# SWAP CANCELLED (owner L1803, rule G1): Quý phi = her OWN two short shoulder capes again, exactly as in the winter1 sheet (dev/art/winter1/s62_t6_dong_L1803.txt); old SWAP56 value: CAPE6_SWAP56=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, with small jade and pearl drops dangling beneath it, fewer and smaller than the imperial noble consort's, never covering the neckline"   # JOB 3 owner Lượt 1317: t6 collar drops added (reference dev/art/swap56/s62_t6_v2.txt)
+CAPE6_TWO=r"TWO layered embroidered \1 SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders, pearl-edged), never covering the neckline"
 # SWAP56 (owner 20/11 L1266): Quý phi now carries the Phi's old cloud collar (yunjian); pearl edge stays with Quý phi
 CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer), never covering the neckline"
 # JOB 3 (owner Lượt 1312/1314, FINAL Lượt 1317 via Foreman C #5, reference dev/art/b26/s62_t5_v2.txt): Phi capes v2 = her main colour + gold-thread flower embroidery +
@@ -1204,6 +1205,8 @@ TAN_CAPE_PEARLS=", with a beaded yoke over it: an airy open net of sparse pearls
 # + CAPE5_V4_EXTRA (one small layer on top of each shoulder, pearls + tassel fringe). Supersedes CAPE5_V3 (kept for the record). DESIGN20.
 CAPE5_V4_EXTRA="; PLUS ONE extra small layer: on top of EACH shoulder (both sides) a small SOFT round embroidered silk layer lying over the capelet, clearly visible, also edged with sparse pearls and a short pearl tassel fringe"
 CAPE5_V4="a short round embroidered silk capelet (not cloud-shaped, scalloped or pointed) over only the shoulders and upper chest, a jade clasp at the throat"+TAN_CAPE_PEARLS+"; no cloud collar, vest or stiff shoulder pieces"+CAPE5_V4_EXTRA
+# SWAP CANCELLED (owner L1803 21/11 via Foreman C #23, rule G1): Phi = her OWN vân kiên cloud collar again, exactly as in the winter1 sheet (dev/art/winter1/s62_t5_dong_L1803.txt); CAPE5_V2/V3/V4 kept for the record, no longer used.
+CAPE5_VK="an embroidered cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels"
 def build_low(c,t,v="v0"):
     pal,face=DATA[c]; m,m2=ORIG1[c]; item,hk=age_item(c,f"t{t}",*ITEMS_LOW[c][t]); right=(int(c[1:])%2==1)
     main0,orig=LOWNAME[c]
@@ -1232,7 +1235,7 @@ def build_low(c,t,v="v0"):
         if _pv: o=o.replace(_a,PHI_VAR[_pv[0]]+"; a LARGER gold headdress")
         else:
             # TAN <-> PHI SWAP (owner 19/11 ~01:20Z, FIGURE_GATE last line): t5 Phi = the OLD t4 Tan DESIGN (layered robe of two or three visible layers, embroidered cloud collar (yunjian) over the shoulders, waist tie) at the t5 Phi LUXURY level (old t5 default words: silk brocade court robe richly embroidered in gold, scalloped gold-thread edge + gold tassel fringe, deep brocade cuffs, broad gold brocade girdle with jade pendants, peony medallions, LARGER gold headdress). "larger than the rank below" dropped (t4 no longer has a cloud collar).
-            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_V4.format(main=(re.search(r"the robe itself is clearly (.+?) silk",o) or re.search(r"(.+)",new)).group(1))+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle with two long jade pendants hanging on silk cords, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
+            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_VK+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle with two long jade pendants hanging on silk cords, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
     if LV is not None: o=o.replace("NOT yellow, ","")   # v1/v2: no yellow words outside the t6 small-touch clause
     assert "phoenix" not in o,(c,t)
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]} "+o+"."

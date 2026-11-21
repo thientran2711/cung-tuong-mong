@@ -195,7 +195,7 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'store': False},
  {'id': 'S12',
   'title': 'PHI BẠCH (khăn choàng) t1-t6',
-  'text': 'PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape.',
+  'text': 'PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} with a THIN GOLD EDGE along its borders (a soft neutral, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy ivory veil, never an opaque solid band of colour; it keeps its soft graceful drape.',   # G56 (owner L1804/L1805): {colour} = pale IVORY-CREAM silk; t6 thick form = G54/G56; old F12 text: 'PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape.',
   'scope': '-',   # G36 (owner L1446): phi bạch only hạ + thu; builder xuân (current Hán set) / đông have none -> no longer required (was 'tp1-6 pr1-6')
   'confirm': '',
   'ages': '',
