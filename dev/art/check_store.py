@@ -1101,7 +1101,12 @@ def g57_fails(text):
 # NO people prompt (any scope: consorts, maids, mama, all seasons) may name a sachet / túi thơm / scent pouch / perfume bag / hà bao / embroidered pouch. Supersedes the sachet-OK part of G43/G57.
 G59_RX = re.compile(r"\bsachets?\b|\btúi thơm\b|\btui thom\b|\bscent(?:ed)? pouch\b|\bperfume bag\b|\bhà bao\b|\bha bao\b|\bfragrant pouch\b|\bembroidered pouch\b", re.I)
 # G65 EMBROIDERY PLACEMENT + SIZE (owner L1952 via #27): bands/cuffs/trims/borders SMALL motifs only; big motifs on skirt panels / shoulder or chest-band roundels, never on the robe body. Logic in dev/art/g65_check.py.
-def g65_fails(text):
+def g65_rank_exempt(scope):
+    """Owner L1971 (via #27): big flowers ALLOWED from t4 up; G65 bans them only for t1–t3 (and maids/ma ma stay small motifs)."""
+    m = re.match(r"(?:tp|pr|trieu|t)(\d)$", str(scope or ""))
+    return bool(m) and int(m.group(1)) >= 4
+def g65_fails(text, scope=None):
+    if g65_rank_exempt(scope): return []
     try:
         import g65_check
     except ImportError:
@@ -1150,7 +1155,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += g61_fails(text, scope)   # G61 front waist free (owner L1905)
     fails += g60_fails(text)   # G60 bow centred (owner L1890)
     fails += g59_fails(text)   # G59 no sachet anywhere (owner L1874)
-    fails += g65_fails(text)   # G65 embroidery placement + size (owner L1952)
+    fails += g65_fails(text, scope)   # G65 (t4+ exempt, owner L1971) embroidery placement + size (owner L1952)
     fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
     fails += g45_fails(text)   # G45 jade pendant visible: no cloth over the waist (owner L1622)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64

@@ -1,0 +1,5 @@
+base: dev/art/maid7/prod/m13_nhi_L1952.txt
+allow: the jacket is CLOSED   # owner L1971: reproduce the approved nhị 3zKP2qZREY (closed-jacket sentence out, approved angle)
+allow: both jacket fronts overlap and are bound in at the waist under the sash   # owner L1971: reproduce the approved nhị 3zKP2qZREY (closed-jacket sentence out, approved angle)
+allow: the sash wrapped OVER the jacket and holding it shut   # owner L1971: reproduce the approved nhị 3zKP2qZREY (closed-jacket sentence out, approved angle)
+allow: never an open coat hanging loose over the outfit   # owner L1971: reproduce the approved nhị 3zKP2qZREY (closed-jacket sentence out, approved angle)
