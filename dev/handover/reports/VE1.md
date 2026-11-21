@@ -15,3 +15,7 @@ TOTAL 405 cr · sheet dev/handover/review-sheets/han_liked_L1738/han_liked_L1738
 
 ### Order 2 — from Foreman C #21 (report to #21 from now on)
 JOB B L1739 · dev/art/thu_comoi/s62_t8_THU_fix5_L1737.txt · check_store --scope tp8 --age a22 PASS · refs nVsrRMPYQD+TdwDfOyVNR · 1k low → eIPWWUNdqL · 55 cr · sheet review-sheets/thu_hh_fix5_L1739.png (old jUoqvBPLD0 | fix4 gOmkqTkSXO | fix5)
+JOB C L1740 · dev/art/maid7/test13_*_L1736.txt · check_store --scope maid --age a18 --refs s7IPw0Ll8e PASS ×6 (scope mama FAILs S32 on tam/nhi, not the maid scope) · ref s7IPw0Ll8e · 1k low
+  tam yiulgnLPW9 · tam_thancan eIPWcQ1dqL · nhi Cqn8IOhEEy · nhi_thancan lJtKkdAgv9 · nhat N2qw7kt6D9 · nhat_thancan s7I5K5Al8e · 6×55 = 330 cr
+  sheet review-sheets/maid_test13_L1740.png (2 rows thường/thân cận × 3 cols tam/nhị/nhất)
+Order 2 total 385 cr; session total 790 cr.
