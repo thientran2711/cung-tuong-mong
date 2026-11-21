@@ -846,3 +846,4 @@ kit-focus rv3 | review/kit-focus-rv3 a1e2abc8 | rv session | PASS | 21/11
 | COOP POOL-FACE (opus; coop-e2e Thái hậu face blank on guest / host face re-roll c23→c04) | review/coop-pool-face; reports/coop-pool-face.md | FOREMAN D #15 | session_01964izF5rYFfN6AQemodeBW | RUNNING | 21/11 10:32Z |
 | coop-famops E44 (opus BIG; jcoopworld famApply ret / famDiff rm × lost cases, law 6c, guest seat) | review/coop-famops; reports/coop-famops.md | FOREMAN E #26 | session_01DgYSWoNyf8gHKuWgnuwjQx | RUNNING | 21/11 10:36Z |
 kit-chip-pause rv | review/kit-chip-pause-rv 33661a10 | rv session | PASS (stacked on hao-huu) | 21/11
+| ui-leftover-fold REPORT | review/ui-leftover-fold b98bb227c | B | session_01N1tNP2bJj9FqZNTvhAgTmS | READY | 21/11 10:45Z |
