@@ -36,7 +36,7 @@ LIB = {
   ('#E9DDB9', '香色', 'vàng hương trầm', 'incense buff'),
   ('#DEDCB4', '秋香', 'vàng thu hương', 'autumn-fragrance olive'),
   ('#F2DFC8', '杏', 'vàng hạnh nhạt', 'pale apricot'),
-  ('#E7D2C2', '赭白', 'son đất nhạt', 'pale ochre-rose'),
+  ('#E7D2C2', '赭白', 'son đất nhạt', 'pale earth-rose'),
   ('#DCD5EC', '雪青', 'tím tuyết', 'snow-violet'),
   ('#E6D8EA', '丁香', 'tím đinh hương', 'lilac'),
   ('#D8E9EE', '月白', 'xanh trăng thu', 'autumn moon-white'),
@@ -125,15 +125,21 @@ def main():
                 'hex': c[0], 'name_zh': c[1], 'name_vi': f'{c[2]} ({c[1]})', 'name_en': c[3],
                 'main_hex': q['main_hex'], 'main_vi': q['main_vi'], 'sec_hex': q['sec_hex'], 'sec_vi': q['sec_vi'],
                 'dE_main': round(dE(c[0], q['main_hex']), 1), 'dE_sec': round(dE(c[0], q['sec_hex']), 1),
-                'harmony': rel(c[0], q['main_hex'])}
-    out = {'_note': 'PALBACH1 L1821 PROPOSAL (owner verdict pending; prompts/rules NOT changed). Phi bach 3rd colour per '
+                'harmony': rel(c[0], q['main_hex']), 'prompt_colour': prompt_colour(c[3], c[0])}
+    out = {'_note': 'PALBACH1 L1821 (approved L1834). Phi bach 3rd colour per '
            'person x season (ha/thu only; ranks t1-t6, same colour at every rank per G13; t6 = thicker silk G54; '
            'thin gold edge kept G56; t7/t8 + xuan/dong none). Overrides only the IVORY-CREAM colour part of G56 if approved. '
-           'dE = OKLab x100. Script dev/art/palettes3/phibach_3rd_L1821.py; palette source palettes_season_L1726.json.',
+           'APPROVED owner L1834 (via Foreman C #23). prompt_colour = words used by build_all phi_bach(). dE = OKLab x100. Script dev/art/palettes3/phibach_3rd_L1821.py; palette source palettes_season_L1726.json.',
            '_usage': use}
     out.update({p: res[p] for p in persons})
     json.dump(out, open(OUT, 'w'), ensure_ascii=False, indent=1)
     draw_sheets(persons, res)
+
+def prompt_colour(en, hexv):
+    """L1834 apply: colour words for the phi bach sentence, e.g. 'soft snow-violet silk (like #C6BAE0)'."""
+    soft = en.endswith('(soft-deep)'); base = en.replace(' (soft-deep)', '')
+    if base.startswith('pale '): base = base[5:]
+    return f"{'soft' if soft else 'pale'} {base} silk (like {hexv})"
 
 def rel(c, main):
     d = hd(lch(c)[2], lch(main)[2])

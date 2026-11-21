@@ -250,13 +250,31 @@ G36_PHIBACH=False
 G36_RX=re.compile(r"(?:,|;) a sheer silk shawl(?=[;.,])")
 def g36(S):
     return S if G36_PHIBACH else G36_RX.sub("",S)
-def phi_bach(person,has_shawl=True,rank=None):
-    # G56 (owner L1804 approved + L1805, via Foreman C #23): phi bạch = pale IVORY-CREAM silk with a THIN GOLD EDGE (3rd colour for the phi bạch ONLY,
-    # exception to B20/A31), t1-t6 only (t7/t8: none, any season); t6 Quý phi = THICKER, much less transparent silk (G54, L1801). Old F12 words (secondary hue) in git history.
+# L1834 (owner approved PALBACH1 L1821 via Foreman C #23): phi bạch colour = her own per-season 3rd colour from
+# dev/art/face-common/phibach_3rd_L1821.json (person -> ha/thu -> prompt_colour) + THIN GOLD EDGE; season from the season arg or PHIBACH_SEASON
+# (a hạ/thu builder sets it); unknown season/person -> the old G56 pale IVORY-CREAM words.
+PHIBACH_SEASON=None
+_PB3=None
+def phibach3(person,season=None):
+    global _PB3
+    season=season or PHIBACH_SEASON
+    if season not in ("ha","thu"): return None
+    if _PB3 is None:
+        _PB3=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","face-common","phibach_3rd_L1821.json"),encoding="utf-8"))
+    e=_PB3.get(ALIAS.get(person,person),{}).get(season)
+    return e["prompt_colour"] if e else None
+def phi_bach(person,has_shawl=True,rank=None,season=None):
+    # G56 (owner L1804/L1805) + L1834: phi bạch = her 3rd colour (phibach3) with a THIN GOLD EDGE (outside her two palette colours, exception to B20/A31),
+    # t1-t6 only (t7/t8: none, any season); t6 Quý phi = THICKER, much less transparent silk (G54, L1801). Old F12 words (secondary hue) in git history.
     if isinstance(rank,int) and rank>=7: return ""
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
-    if rank==6: return f"PHI BẠCH: {intro.replace('the sheer shawl','the shawl')} is a THICKER soft silk shawl in pale IVORY-CREAM with a THIN GOLD EDGE along its borders (a soft neutral, the only colour outside her two robe colours), much less transparent, matching the weight of her brocade, never a see-through gauze veil; it keeps its soft graceful drape."
-    return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in pale IVORY-CREAM silk with a THIN GOLD EDGE along its borders (a soft neutral, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy ivory veil, never an opaque solid band of colour; it keeps its soft graceful drape."
+    c3=phibach3(person,season)
+    if c3:
+        col,kind,veil=c3,"a soft pastel","a light airy veil of that soft hue"
+    else:
+        col,kind,veil="pale IVORY-CREAM silk","a soft neutral","a light airy ivory veil"
+    if rank==6: return f"PHI BẠCH: {intro.replace('the sheer shawl','the shawl')} is a THICKER soft silk shawl in {col.replace('pale IVORY-CREAM silk','pale IVORY-CREAM')} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours), much less transparent, matching the weight of her brocade, never a see-through gauze veil; it keeps its soft graceful drape."
+    return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {col} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as {veil}, never an opaque solid band of colour; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 # Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
 # every variant still reads as the same short round shoulder capelet overall. (The store sentence says the outline is smooth and round; the variants only shape the LOWER EDGE; owner approved the result.)
