@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"980818d4+","t":"2026-11-21T12:38Z","c":"night-balance-bundle: Hoàng hậu gate back to LIVE values (k4: hhThNoSon 80 / Hiếu 70, outQ 60, RANKS HH Danh 78) — balance-2's lowering is …","b":"2ef7af1edcb4","h":[{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"}]};
+window.CTM_BI={"s":"57058a0c+","t":"2026-11-21T12:41Z","c":"night-balance-bundle: Hoàng hậu gate back to LIVE values (k4: hhThNoSon 80 / Hiếu 70, outQ 60, RANKS HH Danh 78) — balance-2's lowering is …","b":"aebf30805464","h":[{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48271,7 +48271,7 @@ CW.cyHer=()=>cyHer();
    answers a real choice for her): the hold is bounded by BAL.coop.cyWaitMs (one core). When it runs out the host draws with the «no answer»
    outcome — the same rule as when her week end frees it, whichever seat hosts — and both seats get the kit notice. Her card stays open on
    her side (never answered for her); her late answer still lands in her own S.cyb (jcycle / thin E do cyb), so nothing is lost. */
-function cyMs(){const v=BAL&&BAL.coop&&+BAL.coop.cyWaitMs;return v>0?v:90000}
+function cyMs(){return +BAL.coop.cyWaitMs}/* one core (law 4): the bound lives only in BAL.coop.cyWaitMs */
 function cyArm(){clearTimeout(CW.cyT);const g=CW.cyHold;if(!eW())p2say("cyq",{w:g})/* ask her to say her flags again: a host reload / lost relay left CW.fcy empty (NLC #10 case 12) */;CW.cyT=setTimeout(()=>{CW.cyT=null;if(!CW.on||CW.cyHold==null||CW.cyHold!==g)return;
  CW.cyTo=g;T("cyTimeout "+g);cyMark(g);p2say("cyto",{w:g});cyToNote(false);cyFree()},cyMs())}
 /* traceable: her cycle state keeps that week's wait ran out with no answer (S.cyb.to; an answer she still gives that week is kept beside it).
@@ -90694,7 +90694,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2ef7af1edcb4";window.CTM_BUILD=BUILD;
+const BUILD="aebf30805464";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
