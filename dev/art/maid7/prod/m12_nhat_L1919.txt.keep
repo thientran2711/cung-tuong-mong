@@ -1,2 +1,4 @@
 base: dev/art/maid7/prod/m12_nhat_L1905.txt
 allow: she holds an embroidered handkerchief in a contrasting colour   # held item owner L1919 (E13: every rank a different item; builder AGE5 pick)
+allow: a wide matte silk crepe sash tied in a bow at the waist   # owner L1952: bow exactly at centre front (folded into her bow phrase to stay under 10 000)
+allow: graceful bow tied at the FRONT of the sash   # owner L1952: bow exactly at centre front (folded into her bow phrase to stay under 10 000)

@@ -1,2 +1,4 @@
 base: dev/art/maid7/prod/m12_mama_a51_L1905.txt
 allow: she holds an abacus framed in dark lacquered wood with brass fittings in a contrasting colour   # held item owner L1919 (E13: every rank a different item; builder AGE5 pick)
+allow: nothing covers the sash   # A38 boilerplate trim to fit the owner L1952 bow-centre sentence under 10 000
+allow: the bow or the centre front   # A38 boilerplate trim to fit the owner L1952 bow-centre sentence under 10 000
