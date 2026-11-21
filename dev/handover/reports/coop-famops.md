@@ -166,3 +166,21 @@ LEAD (whole group, law 11): every ilGone of a FRIEND-OWNED piece into my ledger 
   | SEED=4242 | 81/98 (B.nofriend 76: guest never had a friend entry; stalls w0/4/8/25/30/53/55) | 0 | 2: 10000637 (her piece home «nha» w58 then her case 22 held by host NPC 6 → «matdau» w62), 10000706 (NPC 6 → 3 «cướp» on her seat) — run degenerate, rerun |
 - NEXT (E44c): (1) CONTROL: same 3 scans on LIVE 04afaeb7 + coop-famops (E48r's re-land 8b3aee53, or 6b11f8fa merged with 04afaeb7 locally) WITHOUT c2 → splits LIVE vs c2. (2) fix the gh suspect (248). (3) if SKEW «cướp» shape is in the control too → report as LIVE/other row, not c2. (4) gates: unit, seed 4242 + SWAP + SKEW 76 wk dup0/van0 for the (c) family, coop-e2e 124, quickcheck + old save, role-parity ×2 → SSK to E #30 (session_01DgYSWn34K38PMxUZdZc9yb) AND E48r (session_01DgYSWpBzP3A6Bn8pRU8jcw); line in FOREMAN_E_STATUS.md.
 - Worktrees (E44b container only — successor starts fresh): /home/user/wt/famops (review/coop-famops 6b11f8fa), /home/user/wt/famops-c (review/coop-famops-c2 6909e22c1). Run scans max 2–3 in parallel (4 cores; stalls rise with load). Unit needs URL arg http://ctm.local/ (coop-serve route).
+
+## E44c (depth 3, session_01DgYSWpbxnb51GjUhBoeY8R) — CONTROL split + E48r guard, 21/11 23:55Z
+PRIORITY #1 CHECK ('famApply|ilGone|famSweep|coop-lost-scan'): OD law 6c | main 87ac1ff4 (coop-famops LIVE, contains 5341fe36) | review/coop-famops-c2 6909e22c1 → 840b1e54 → eaebce79 | claims E44b → E44c.
+Heads: 840b1e54 = c2 + merge LIVE ea112384 · 8f… fix commit (E48r ask: «dead» branch gated by jil's own guards ilAt / ilToFriend / ilDur, unit 16c) · **eaebce79** = + merge LIVE 87ac1ff4 (generated-file conflicts only; diff vs LIVE = jcoopworld.js +21, coop-famops-unit.js +13).
+76 wk coop-lost-scan, LOST_DBG=1 (3 in parallel per batch; SWAP/SKEW use the default seed 4242; 9001 replaces the degenerate default-4242 run):
+| run | CONTROL 5341fe36 (LIVE ea112384 + famops, NO c2) | c2 840b1e54 (no guard) |
+|---|---|---|
+| COOP_SWAP | 3 FAIL: vanish **116** + 10000274; stall w30 | 82/104: degenerate (B.nofriend 76) + stalls w37/w57; dup 86 (pre-existing shape P1) |
+| COOP_SKEW=24 | 89/94: vanish 3119; stall w73 | **91/91** dup0 van0 |
+| SEED=9001 | dup 55 (pre-existing shape P1); stip show page error (LIVE) | **90/90** dup0 van0 |
+Split:
+- **116 = the (c) shape, PRE-EXISTING on LIVE, closed by c2**: host piece (host case 12 own me, held at 902) seized on HER seat as tang vật → «trả kho» → «bán lại» → bought by a host-NPC copy; host case stays «held at 902».
+- **248 (E44b's c2 SWAP vanish) not reproduced**; code reading: lostReturn always loClean()s the piece (gh dropped), so the wrapper's gh test never fires on an NPC↔NPC «tra»; gh is only kept on census di vật (jil:101) and planted pieces (gh = the planter = whose piece it was). No change to the gh test.
+TICKET (pre-existing, NOT c2, not this row — guest seat runs NPC item roads on its COPIES of the host's people):
+- P1 dup (55 control, 86 c2): her seat's copy of host NPC 2/4 «sells» a piece (host id) → HER box mkt:sell, while the real piece stays at the host NPC.
+- P2 vanish (10000274 control; E44b's SKEW 10000274/275/320): NPC→NPC «cướp» case opened on HER seat over host-NPC copies (ids numbered on her seat), never counted.
+- P3 vanish 3119 (control SKEW): host Kỳ ngộ «giữ lại» by NPC 1 (lo103) then gone, host side only.
+Owner for P1/P2: coop world (thin guest must not run NPC economy/loLose on copies); P3: jky/jlost.
