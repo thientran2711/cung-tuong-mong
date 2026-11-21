@@ -6,3 +6,7 @@ Faults: Lông 1 – CAPTION line in prompt not drawn (no text on image); hair lo
 ## JOB A49 PALBACH1 (#24) — dev/art/seasons4/s62_t{4,5,6}_ha_DUONG_L1834.txt · gpt-2-6 1k low 9:16 seed 7172 · refs nVsrRMPYQD (+TdwDfOyVNR for t6) · check_store: t6 PASS; t4 FAIL B26/M06/S13 and t5 FAIL B26/M06 = known waived · 3×55 = 165 cr
 t4 yiugBgJPW9 · t5 yiugBSOPW9 · t6 N2q7tyz6D9 · sheet dev/handover/review-sheets/ha_phibach_t4_t6_L1834.png
 Faults: t4 hair reads as ~one bun with loops, not clearly two looped buns; shawl hangs behind and loops over arms ok. t5 shawl ok, letter held, bun + big flower ok. t6 shawl sits fairly high on the upper arms (near shoulders) — placement borderline; yellow band + ball ok. Captions drawn and legible on all three (t6 wraps to 6 lines, close to the hair flower).
+
+## JOB xuân cổ mở t5/t6 L1833 (#24) — dev/art/seasons4/s62_t{5,6}_XUAN_COMOI_L1833.txt · gpt-2-6 1k low 9:16 seed 7172 · refs nVsrRMPYQD (+TdwDfOyVNR t6) · check_store: t6 PASS; t5 FAIL B26/M06 (waived) + WARN OUT1 · 2×55 = 110 cr
+t5 9ZHwt1ONYZ · t6 vQABy0na47 · sheet dev/handover/review-sheets/xuan_t5_t6_L1833.png
+Notes: t5 open outer robe, square inner neckline, cloud collar open at the front, letter held; the pearl net over the collar is faint/hard to see. t6 two short capes pearl-edged, open neck, yellow sash + ball, mint sheer shawl. Captions legible on both (t5 wraps to 4 lines near the hair flower).
