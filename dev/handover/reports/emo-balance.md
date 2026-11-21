@@ -52,3 +52,47 @@ Read: HH, early death and childbirth gaps are 1-4 points against a ±4 SE and a 
 NPC harm is +15% with emotions ON and the CIs do not overlap: a real effect. Per kind (per year): provoke 78 -> 90, humiliate 36 -> 41, block 4.0 -> 5.4, trip 2.4 -> 3.1, the rest within ±1.
 Source: angry (gian) and jealous (ghen) NPC weights plus the danger bonus toward the target.
 Tuning (BAL.feel only): w.gian harm 1.6->1.35, provoke/humiliate 1.3->1.15; w.ghen harm 1.3->1.15; dg.cap 8->5. Tuned arm runs on seeds 601-608 (80 lives) for a same-seed before/after.
+
+## 2026-11-21 ~05:10Z: tuned re-measure, gates, co-op checks
+
+Tune (BAL.feel only, jfeel.js): w.gian harm 1.6->1.35, provoke/humiliate 1.3->1.15; w.ghen harm 1.3->1.15; dg.cap 8->5. No other number changed.
+
+Before/after on the SAME seeds 601-608 (run4c.sh, 9-origin rotation, HHSTOP; emocmp.py, boot.py = 2000x bootstrap of lives with act counters):
+
+| arm | n | HH | early death | childbirth deaths | NPC harm/yr (95% CI) | provoke/yr | humiliate/yr | NPC kind/yr |
+|---|---|---|---|---|---|---|---|---|
+| OFF | 62 | 34% ±6 | 45% ±6 | 31% ±6 | 141 (130-150) | 78 | 35 | 271 |
+| ON = LIVE | 80 | 38% ±5 | 40% ±5 | 30% ±5 | 157 (143-170) | 88 | 39 | 258 |
+| TUNED | 74 | 32% ±5 | 50% ±6 | 35% ±6 | 145 (135-156) | 80 | 36 | 256 |
+
+- NPC harm: ON +11% over OFF on these seeds -> TUNED +3%, inside the OFF CI. The provoke/humiliate excess is gone.
+- HH: TUNED vs ON -6 (±7 combined SE). Inside the noise; per-seed spread is 11-57%.
+- Early death: TUNED vs ON +10 (±8 combined SE, about 1.3σ). Most of it is childbirth deaths (+5), which harm weights do not drive. I read it as seed noise but cannot rule it out at n=74. **Reviewer: please weigh this.** A 150-life tuned arm would settle it, at about 7 h of 4-browser runs.
+
+Branch review/emo-balance (final-merged LIVE 8acb2bef (via 5a8c30af, 8b2e344d, fafe0f62, 922b36b4), merge-base present after --deepen=400):
+- LIVE-revert audit CLEAN. `git diff 8acb2bef..HEAD` (9 files, +192 -42) touches only jemo.js, jfeel.js, the measure tools and the new probe. Every hunk is from my commits 9118941 / 34308fd2. The only extra lines are 9118941's BAL.feel lines that 34308fd2 replaces.
+- quickcheck PASS on every merge (5a8c30af, 8b2e344d, fafe0f62, 922b36b4, 8acb2bef). Last run on 33fb97ec: core gates PASS, open 1873 ms, old save ok, perf median new/live render 209/298, tab 561/609, buổi 1522/1424 ms. one-core-guard PASS. tier.js = BIG.
+- tier.js BIG -> ag-later-scan PASS, emo-men ok (errs []), emo-seal-persist ok (errs []), feel-shown 6/6, feelings18 34/34, game-feel ok (no page errors; offline errs []; old load ok; open new 8.3/10.5 s vs main 9.1/9.0 s at 4x CPU), rules-one-source PASS (in quickcheck G2), difficulty ALL OK.
+- paid-tiers: 81 FAIL, IDENTICAL list to LIVE 5a8c30af (pre-existing shop/craft price rows, not this branch). One first run with 3 bot browsers in parallel gave 93; two clean reruns gave 81.
+- coop-e2e 92/92 PASS (on 5a8c30af, 8b2e344d and 922b36b4 merges). feel-shown 6/6, feelings18 34/34 re-run on the 922b36b4 merge.
+- co-op emotion check: NEW dev/test/coop-emo-seat.js. It is coop-one-world-play plus, for every NPC, [emotion kind, strength, target, cause text, week], emoMul for provoke/humiliate/idle/help, and the BAL.feel tables. These must be the same on both seats at every merged week. It also asserts that the values were really read (not an error string).
+  - Emotion effects are host-computed by design: feelWorld()=worldOn() is false on the guest, jemoact eaHost (seat a), jcoopone ONLY_ME emoMonth.
+  - D #14 settle run, 12 runs each, 4 in parallel, same probe: **LIVE fafe0f62 6/12 FAIL, branch (merged fafe0f62) 3/12 FAIL**. Earlier serial runs: LIVE 5a8c30af 0/6, branch 3/9.
+  - Every mismatch, LIVE and branch alike, is on NPC #1 at a merged week, and the other ~10 NPCs always match. The cause texts show the same split: one seat has "được <name> đối đãi tử tế" (jemo.js:124 affAdd wrap -> emoEv gift, or jevb.js:91), the other "được nhà gửi bạc vào" / "phòng ốc bày biện vừa ý" (jfeel life / jshelf). Examples:
+    - LIVE L5: 22 "phòng ốc bày biện vừa ý" | 50 "được Viên Ngân Chúc đối đãi tử tế"
+    - LIVE L11: 100 | 53, both "được … đối đãi tử tế" with different givers
+    - branch B7: 38 "được nhà gửi bạc vào" | 67 "được Phú Sát Ngọc Hành đối đãi tử tế"
+  - **=> PRE-EXISTING in LIVE, not caused by this branch.** This branch touches no co-op, sync or emoSet code, and the gap is the same or smaller on the branch.
+
+**FOR MAIN (co-op one world, pre-existing):** NPC #1's feeling (p.emo) can differ between the two seats after a merged week, so emoMul and the NPC's acts differ (one world broken for that NPC). Repro: `node dev/test/coop-emo-seat.js <out>`, about 1 run in 2 to 4.
+- Path: guest-side emoSet/emoEv on a world NPC with no worldOn() guard. jemo.js:124 affAdd wrap and jevb.js:91 are the "đối đãi tử tế" cause; jfeel life gives "nhà gửi bạc" and jshelf gives "phòng ốc".
+- The merged week does not carry NPC p.emo, or it carries it for every NPC except #1. Why always #1 is worth checking in jcoopone's PERSON list.
+- Fix options for the co-op owner:
+  - (a) guard emoSet for p!==S with feelWorld(), or
+  - (b) carry NPC p.emo in the merged-week world state.
+- Not in this job's scope (one-core BAL.feel balance). I did not change it.
+
+New tools on the branch: dev/measure/run4c.sh (one seeded browser per seed, ≤4 at once, CAP), dev/measure/emocmp.py (arm table with SE + per-seed spread), dev/test/coop-emo-seat.js (co-op emotion probe).
+Scratch data (not in git): /home/user/wt/emo-out/{off,on,tun}_s*.json.
+
+SẴN SÀNG KIỂM 33fb97ec2e616125b1ee43f0dde06f081ce6f2c3 (review/emo-balance, TIER BIG, on LIVE 8acb2bef; LIVE has since moved to 2021e23f with no emotion files touched up to 8acb2bef. Reviewer: please final-merge at land.)
