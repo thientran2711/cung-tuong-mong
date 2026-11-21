@@ -685,7 +685,7 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | DONE PASS ee8847b0 | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
 | bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | READY FOR REVIEW 626ca232 | 21/11 04:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | REVIEW quest-rows (SMALL sonnet) 27f1451c (#66 FINAL) | review/quest-rows-rv; briefs/main87-rv-quest-rows.md | MAIN CHÍNH 87 | session_01Rc5AsJ3yeAh7AtFoj48HKK | DONE PASS 05e1cf15 | 21/11 03:58Z |
 | kit-ghichu-bang + kit-rankunit KIT KEEPER (sonnet; addendum 14 + #61 part 1) | review/kit-ghichu-bang a775df5b; review/kit-rankunit b3a96a1d; reports/kit-ghichu-bang.md | MAIN CHÍNH 87 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM both (small; quickcheck PASS) | 21/11 |
 | REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
@@ -697,7 +697,7 @@ econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RU
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED bd03747e (rv PASS 0266713d) | 21/11 |
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | DONE → MAIN CHÍNH 88 session_01Rc5AsL9RckY86bdwv8NheC | 21/11 03:45Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
 | REVIEW dialog-person part 1 (SMALL sonnet) de1d7e11 (#58 #59 #67 ma-ma gone) | review/dialog-person-rv; briefs/main87-rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | RUNNING | 21/11 04:08Z |
 | REVIEW dialog-dedup (SMALL sonnet) 2a5997df (#85) | review/dialog-dedup-rv; briefs/main87-rv-dialog-dedup.md | MAIN CHÍNH 87 | session_01Rc5AsMG7xwmZZoHcPKThD4 | RUNNING | 21/11 04:11Z |
@@ -710,7 +710,7 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
 | bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | REVIEW quest-rows (SMALL sonnet) 27f1451c (#66 FINAL) | review/quest-rows-rv; briefs/main87-rv-quest-rows.md | MAIN CHÍNH 87 | session_01Rc5AsJ3yeAh7AtFoj48HKK | RUNNING | 21/11 03:58Z |
 | kit-ghichu-bang + kit-rankunit KIT KEEPER (sonnet; addendum 14 + #61 part 1) | review/kit-ghichu-bang a775df5b; review/kit-rankunit b3a96a1d; reports/kit-ghichu-bang.md | MAIN CHÍNH 87 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM both (small; quickcheck PASS) | 21/11 |
 | REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
@@ -722,7 +722,7 @@ econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RU
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED bd03747e (rv PASS 0266713d) | 21/11 |
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | MAIN CHÍNH 88 (coordinator; land queue + owner marks) | handover branch | MAIN CHÍNH 88 | session_01Rc5AsL9RckY86bdwv8NheC | RUNNING | 21/11 04:25Z |
 kit-rankunit rv2 | review/kit-rankunit-rv2 d3f5ea28 | rv session | PASS | 21/11
 | REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | RUNNING | 21/11 04:43Z |
@@ -732,7 +732,7 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | DONE → MAIN CHÍNH 88 session_01Rc5AsL9RckY86bdwv8NheC | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
 | REVIEW dialog-person part 1 (SMALL sonnet) de1d7e11 (#58 #59 #67 ma-ma gone) | review/dialog-person-rv; briefs/main87-rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | RUNNING | 21/11 04:08Z |
 | REVIEW dialog-dedup (SMALL sonnet) 2a5997df (#85) | review/dialog-dedup-rv; briefs/main87-rv-dialog-dedup.md | MAIN CHÍNH 87 | session_01Rc5AsMG7xwmZZoHcPKThD4 | RUNNING | 21/11 04:11Z |
@@ -746,7 +746,7 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
 | bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 | REVIEW quest-rows (SMALL sonnet) 27f1451c (#66 FINAL) | review/quest-rows-rv; briefs/main87-rv-quest-rows.md | MAIN CHÍNH 87 | session_01Rc5AsJ3yeAh7AtFoj48HKK | RUNNING | 21/11 03:58Z |
 | kit-ghichu-bang + kit-rankunit KIT KEEPER (sonnet; addendum 14 + #61 part 1) | review/kit-ghichu-bang a775df5b; review/kit-rankunit b3a96a1d; reports/kit-ghichu-bang.md | MAIN CHÍNH 87 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM both (small; quickcheck PASS) | 21/11 |
 | REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
@@ -759,5 +759,5 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 kit-ghichu-sections rv | review/kit-ghichu-sections-rv dd0e20e9 | rv session | FAIL (popup under avatar on Fold) | 21/11
