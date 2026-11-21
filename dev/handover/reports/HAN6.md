@@ -31,3 +31,9 @@ HAN6 read (own look at the sheet):
 - G61 OK: t1 book at the side, t2 drum at chest, t3 flute out to the side.
 - If the owner wants stronger band separation, the next lever is a stronger outer tone (e.g. "deep rose pink"), band words only, and only with the owner's yes.
 STATUS: waiting for the owner's verdict via Foreman C #27 (session_01D3E3NaDamfSozkn47q9kMK; #26 rolled over).
+
+## OWNER L1953 (via #27) on L1928
+- t1–t3 collar APPROVED ("rất đẹp, duyệt"). Locked in dev/art/seasons4/HAN_COLLAR_L1953_T1T3_FROZEN.txt (band line per rank, verbatim). The rule entry is for #27 to add (rule.py).
+- Loose hair over the shoulders is fine; never flag it again. The band-merge question is closed.
+- t3 bow: s62_t3_HAN_BOW_L1953.txt (+.keep, make_han_t3_bow_L1953.py). The only change is the sash, now "…tied in a neat bow at the CENTRE front of the waist, the two bow loops and ends lying flat…" (G60). 9913 ch. keep PASS. check_store shows only the waived M06/M07/S06. Sent to VE7: 1 @55, sheet CŨ|MỚI han_t3_bow_L1953.png.
+- Research (words only): dev/handover/reports/HAN6_HAN_DRESS_RESEARCH_L1953.md (Vietnamese).
