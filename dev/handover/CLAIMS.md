@@ -900,3 +900,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | ksz-lost-tap (sonnet SMALL; MAIN 96 ORDER 15:36Z kszLiveRepick3 lost tap, whole dialog family) | review/ksz-lost-tap; briefs/b7-ksz-lost-tap.md | B | session_01N1tNP6FXxSMAD52iUqBBNM | RUNNING | 21/11 16:18Z |
 | rel-men-servants r3 (sonnet; F1 on kit-relrows-ms LIVE 08e1e934; successor of archived 64FJEwd9) | review/rel-men-servants; briefs/b7-rel-men-servants-r3.md | B | session_01N1tNP2fJb8RtamPiP5PTXF | RUNNING | 21/11 16:18Z |
 | KIT KEEPER #5 (opus; successor of #4 Jkj5; ef-unit r3 first) | review/kit-ef-unit-r3; reports/kit-keeper-5.md | MAIN CHÍNH 97 | session_01Rc5AsJexZYYx4jcgUw6Uu1 | RUNNING | 21/11 16:34Z |
+| rv-kit-opt-title-wrap r2 | PASS | review/kit-opt-title-wrap-rv2 3d8e89478942bb13c30d9472c20100b62dbe84be | 12/12 stable runs, quickcheck, coop-e2e 124/124 |
