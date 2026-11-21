@@ -132,13 +132,16 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
  res.ex=out}
 /* ---------- the result event (kit dialog; serialisable) ---------- */
 function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close")return true;if(A==="stay")return false;return GB().exitSum.includes(C(s).e[res.i][5])}
+/* bang-words: ending texts carry the road's land tokens ({kha} {land} {quan} {dien} …) — filled by the one filler (j67 fill67), never shown raw */
+function geF(x){try{return typeof fill67==="function"&&/\{\w+\}/.test(x||"")?fill67(x,(S&&S.st&&S.st.M)||{}):x}catch(e){return x}}
+window.geF=geF;
 PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e[res.i];
  const rows=[];if(res.fx&&Object.keys(res.fx).length)rows.push([res.ok?"Được":"Mất",fmt(res.fx),res.ok?"g":"r"]);(res.ex||[]).forEach(x=>rows.push(["",x,"t"]));
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
-  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${res.sh==="t"?e.t:e.a}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
-   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,res.sh==="t"?e.t:e.a,`Đại kết cục: ${res.ti}`,true)}}]}}
- return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":e.ft}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
+  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
+   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
+ return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;
 function geStore(){const g=store.get("ctm-ge");return g&&typeof g==="object"?Object.assign({t:{},g:{},f:{}},g):{t:{},g:{},f:{}}}
@@ -150,7 +153,7 @@ window.geStore=geStore;
 /* ---------- titles: the jdh catalogue group «Thiên mệnh» (one step, tier BAL.ge.title.tier, no bonus: cosmetic) ---------- */
 function geTitles(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const b in GE_DATA){const Cb=GE_CAT[b];if(!Cb)continue;Cb.e.forEach((e,i)=>{["t","a"].forEach(sh=>{
   const key=geKey(b,i,sh),nm=e[sh==="t"?6:7],how=GE_DATA[b].e[i][sh==="t"?"ht":"ha"];
-  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${how}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
+  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${geF(how)}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
   BAL.dh.T[key]={n:[1],b:GB().title.tier,ch:[]}})})}}catch(e){console.error("ge",e)}}
 geTitles();
 /* carry (D5): a new life may wear the grand title of the life before ("prev") or any title ever earned ("any"); cosmetic only */

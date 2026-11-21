@@ -14,8 +14,21 @@ function eq(a, b) {
 /* numbers that are states/indices, not amounts: never add deltas, host wins when both changed */
 const NOADD = new Set(["mood", "rank", "buoi", "tuan", "month", "year", "turn", "age", "era", "face", "hue", "fid", "fc", "fk", "id", "sid", "rid", "week",
   "life", "step", "done", "pal", "used", "lastPromo", "vacSince", "pregWk", "preg", "srk", "pid", "v", "seatBan", "until", "at", "wx"]);
+/* coop-room-faces (Foreman D #16, MAIN 95): the face registries are SETS ("never hand this face out again"), not values: when both seats
+   added to one, the host's list was taken whole and the guest's new faces were lost, so the host drew them again (mama:k01 / maid:m14 worn by
+   two people). Union, de-duplicated, host-canon: host list first (its removals stand: figGC frees, figThPick re-roll), then every entry the
+   guest ADDED since the base; a guest removal never applies (the guest never frees a face). Lists of plain values only. */
+const UNION = new Set(["fidUsed", "fidDead", "usedFaces", "kidUsed", "fseen", "fdead"]);
+const prim = x => Array.isArray(x) && x.every(e => e === null || typeof e !== "object");
+function union3(base, a, b) {
+  const k = e => typeof e + ":" + String(e); const bs = new Set((Array.isArray(base) ? base : []).map(k));
+  const out = [], seen = new Set(); for (const e of a) if (!seen.has(k(e))) { seen.add(k(e)); out.push(e); }
+  for (const e of b) if (!bs.has(k(e)) && !seen.has(k(e))) { seen.add(k(e)); out.push(e); }
+  return out;
+}
 const idArr = x => Array.isArray(x) && x.length > 0 && x.every(e => isObj(e) && e.id != null);
 function m3(base, a, b, inP, key) {
+  if (UNION.has(key) && prim(a) && prim(b) && (base === undefined || base === null || prim(base))) return union3(base, a, b);
   if (eq(a, b)) return a;
   if (eq(a, base)) return b;
   if (eq(b, base)) return a;

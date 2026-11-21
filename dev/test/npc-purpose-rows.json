@@ -2487,7 +2487,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sad consort refuses; outburst + victim; acts on feeling; Emperor drink",
-"done": "function eaVictim(L){return npwPick(L,m=>101-(m.loyal||0))||L[0]}"
+"done": "function eaVictim(L){return npwPick(L,m=>BAL.ea.victimBase-(m.loyal||0))||L[0]}"
 },
 {
 "f": "jht.js",

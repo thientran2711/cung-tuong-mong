@@ -324,6 +324,7 @@ function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
 /* AG-ALL-2f (one-core text G1): THE ONE evidence-count text — "chứng cứ +1" always prints the BAL amount (default BAL.ag.ev.one); cap = "Chứng cứ" */
 function evSg(n,cap){return (cap?"Chứng cứ ":"chứng cứ ")+balSg(n==null?BAL.ag.ev.one:n)}
+function balDec(n){/* law4-typed: a BAL decimal as players read it (1.5 → 1,5) */return String(n).replace(".",",")}
 function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
