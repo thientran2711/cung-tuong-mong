@@ -82,3 +82,30 @@ Non-ECON_WIN schemes (spy, poison, musk…) are fine: the price is paid either w
 - «shown = charged»: OK except **F1** (ECON_WIN).
 N1 (low odds: every road «Liều») and N3 (spy `:15` dead fallback) still stand, non-blocking.
 Fixer: ECON TAMCO #2 session_01964izCzXkfovcY4kd6X4Mk. After the fix: final-merge the newest LIVE, then SẴN SÀNG KIỂM. The reviewer re-runs econ-tamco (+ the F1 fail/success check), econ-tamco-coop, coop-e2e and quickcheck.
+
+## RE-CHECK #2 21/11 — review/econ-tamco @ d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (ECON TAMCO #3, on LIVE 56ff0db0)
+PRIORITY #1 CHECK ('ECON_WIN|rcvMaidBribe|rcvJudge|aOdd'): main j17 actLine / jrcv rcvMaidBribe + rcvJudge / jagstf2 stf2BribeW | review/econ-tamco only | claims ECON TAMCO #3 CiU7bSoQ.
+Context: ~24 %. LIVE moved to 9c1dd605 (kit-pcrow-square). The reviewer merged it locally (f42736e7, review/econ-tamco-rv, NOT pushed: index/sw conflicts only, rebuilt; diff vs main = the same 11 econ-tamco files, no revert). The revert audit of d07e20bb vs its base 56ff0db0 is clean.
+
+### VERDICT: FAIL (2 items). F1 is FIXED.
+**F1 fixed, verified.** Pay-on-success schemes: «Tốn» now holds only what is paid either way (plain «không», Tâm cơ road «Tâm cơ -n», hire road «Bạc -hire»). The price is a red «Bạc -N» on the THÀNH/Được row, and BẠI says «không mất bạc» / «chỉ mất tiền thuê, không mất bạc giá mưu kế» from one source (ECON_WIN_FAIL, shared with j17 actLine). A forced fail on each road charges exactly «Tốn».
+
+**F2 — the road's odds gain never reaches the outcome on bribe, xinhh and musk (law 3 gain-and-loss, law 2 equal value, shown odds = rolled odds; law 11 whole group).** The roads sell +BAL.tcroad.up through aOdd / the frozen shown odds (fzRun). Three of the 13 priced schemes do not roll through aRoll/aOdd:
+- **bribe**: the maid's receiver choice (jrcv rcvMaidBribe → jagstf2 stf2BribeW) weights «take» with the raw `oddsCl(oBribe(a,t))` (j8:129). Probe in the game (merged build, 120 tries each, Fold): frozen odds 0 → 4/120 taken, frozen odds 100 → 2/120 taken. Control **block**: 0/120 vs 108/120. The card shows plain «Liều» but the Tâm cơ / hire roads «Khó» (5 → 17 in another run), and she pays Tâm cơ −4 or Bạc −40 for no change. The test's §3c even says so («the maid decides, not the roll») and accepts it.
+- **xinhh**: jaudit X.f → rcvJudge("xinhh",a,t,o) with `o=odA(a,raw)` and `roll(o)`, not aOdd. The same gap.
+- **musk**: `o:()=>null` (no roll at all), so there are no odds to buy. A Tâm cơ / hire road there is cost-only.
+NPCs: the same (the aOdd wrapper does not reach these paths), so law 1 holds but law 3 fails for them too.
+Fix (whole group): make the success decision of each priced scheme read aOdd(shown odds, a), i.e. pass `aOdd(oddsCl(oBribe(a,t)),a)` into rcvMaidBribe/stf2Bribe and `aOdd(o,a)` into rcvJudge; or, for a scheme with no roll (musk), give no roads (no road card), or a road gain that really exists. Add a group scan test: for every scheme that gets the road card, freezing the odds at 0 vs 100 must change the success rate (as block does), for her and for an NPC. A scheme that fails the scan must not get the road card.
+
+**F3 — econ-tamco.test.js is not stable.** Three runs, three results: merged build run 1 FAIL «tc road Tâm cơ change 0 vs -4»; worker's d07e20bb FAIL «sent deed … nodeed»; merged run 2 PASS. In that PASS run the tc road charged Tâm cơ −5 / Bạc −90 against a card that showed Tâm cơ −4 / Bạc −86 (the price moved between the card and the charge; the test recomputes the cost and so does not see it). Pin the state (seed, khắc, Q, rival choice) so the test is the same every run, and check the charge against the numbers the card showed at the click (not a recomputed cost). If the price really can move between the card and the payment in play, that is a «shown = charged» bug to fix too.
+
+Minor (non-blocking, the kit wraps the row): on the Fold the red «Bạc -86» splits across two lines («Bạc» / «-86») at the end of the Được row.
+
+### Gates on the merged build f42736e7 (one at a time)
+| gate | result |
+|---|---|
+| econ-tamco | run 1 FAIL (F3), run 2 PASS |
+| econ-tamco on the worker's d07e20bb | FAIL (sent deed nodeed) — F3 |
+| bribe/block odds probe (reviewer script) | bribe ignores the shown odds — F2 |
+| econ-tamco-coop / coop-e2e / kit-ton-row / roadhp-unit / quickcheck | not re-run this round (FAIL already found; the worker reports 17 / 92/92 / 14 / PASS / 197 s). All of them run at the next round. |
+Fixer: ECON TAMCO #3 session_01964izCiU7bSoQZwWZBzj4B. Next round: final-merge the newest LIVE, then SẴN SÀNG KIỂM; the reviewer re-runs everything + the F2 probe.
