@@ -1,0 +1,4448 @@
+{
+ "_note": "G50 (owner L1645) PAL3: pictures drawn in the OLD ★GỐC colours that G50 recolours → kho skins. Redraw later with the new palette (owner order needed per A20/A21). Source gen_ledger.jsonl, ΔE2000 < 6.",
+ "old_root": {
+  "c06": {
+   "season": "xuan",
+   "old_main": "#CF816E",
+   "old_sec": "#6AAF98",
+   "new_main": "#933966",
+   "new_sec": "#A6DED2",
+   "matched_hex": [
+    "#CF816E",
+    "#D28977"
+   ]
+  },
+  "c08": {
+   "season": "xuan",
+   "old_main": "#DF9FA2",
+   "old_sec": "#74B47E",
+   "new_main": "#F09BAB",
+   "new_sec": "#74B47E",
+   "matched_hex": [
+    "#DE9FA7",
+    "#DF9FA2"
+   ]
+  },
+  "c10": {
+   "season": "ha",
+   "old_main": "#DFBB9F",
+   "old_sec": "#53ACA5",
+   "new_main": "#DB9B66",
+   "new_sec": "#53ACA5",
+   "matched_hex": [
+    "#DFBB9F"
+   ]
+  },
+  "c14": {
+   "season": "dong",
+   "old_main": "#EAD7BF",
+   "old_sec": "#6B64B4",
+   "new_main": "#077673",
+   "new_sec": "#6B64B4",
+   "matched_hex": [
+    "#EAD7BF",
+    "#ECE4C8"
+   ]
+  },
+  "c27": {
+   "season": "thu",
+   "old_main": "#E06B5A",
+   "old_sec": "#4D9699",
+   "new_main": "#93A869",
+   "new_sec": "#A3DCE7",
+   "matched_hex": [
+    "#CF776E",
+    "#D3877F",
+    "#E06B5A"
+   ]
+  },
+  "c28": {
+   "season": "xuan",
+   "old_main": "#98CAA5",
+   "old_sec": "#BF73A1",
+   "new_main": "#73B37D",
+   "new_sec": "#BF73A1",
+   "matched_hex": [
+    "#98CAA5",
+    "#A0BD8C"
+   ]
+  },
+  "c31": {
+   "season": "xuan",
+   "old_main": "#ABD4BB",
+   "old_sec": "#D67064",
+   "new_main": "#3A8753",
+   "new_sec": "#D67064",
+   "matched_hex": [
+    "#ABD4BB"
+   ]
+  },
+  "c32": {
+   "season": "dong",
+   "old_main": "#EDDCC6",
+   "old_sec": "#49659C",
+   "new_main": "#5DD0A9",
+   "new_sec": "#49659C",
+   "matched_hex": [
+    "#EDDCC6",
+    "#EFDBC7"
+   ]
+  },
+  "m02": {
+   "season": "thu",
+   "old_main": "#A5C56A",
+   "old_sec": "#CF8377",
+   "new_main": "#93A86B",
+   "new_sec": "#F8DED9",
+   "matched_hex": [
+    "#A5C56A",
+    "#A8C379",
+    "#AAC280"
+   ]
+  },
+  "m04": {
+   "season": "ha",
+   "old_main": "#E8AD81",
+   "old_sec": "#4E5D97",
+   "new_main": "#F5A56B",
+   "new_sec": "#4E5D97",
+   "matched_hex": [
+    "#DBB294",
+    "#E8AD81"
+   ]
+  },
+  "m14": {
+   "season": "dong",
+   "old_main": "#EDE0CC",
+   "old_sec": "#5DAC85",
+   "new_main": "#D28BCC",
+   "new_sec": "#A3DCE7",
+   "matched_hex": [
+    "#EDE0CC"
+   ]
+  },
+  "m19": {
+   "season": "ha",
+   "old_main": "#D79B70",
+   "old_sec": "#499597",
+   "new_main": "#F39972",
+   "new_sec": "#499597",
+   "matched_hex": [
+    "#CE9F7E",
+    "#D79B70"
+   ]
+  },
+  "m28": {
+   "season": "xuan",
+   "old_main": "#D9998C",
+   "old_sec": "#4E5D97",
+   "new_main": "#B96899",
+   "new_sec": "#4E5D97",
+   "matched_hex": [
+    "#D9998C"
+   ]
+  },
+  "m29": {
+   "season": "xuan",
+   "old_main": "#AFD4BC",
+   "old_sec": "#CA7281",
+   "new_main": "#B96899",
+   "new_sec": "#DDD7EC",
+   "matched_hex": [
+    "#AFD4BC"
+   ]
+  },
+  "s16": {
+   "season": "xuan",
+   "old_main": "#DE9CA4",
+   "old_sec": "#B35685",
+   "new_main": "#87346A",
+   "new_sec": "#F4C1CF",
+   "matched_hex": [
+    "#DE9CA4",
+    "#DF9C9E"
+   ]
+  },
+  "s17": {
+   "season": "xuan",
+   "old_main": "#D88579",
+   "old_sec": "#FBD6C2",
+   "new_main": "#9E497E",
+   "new_sec": "#FBD6C2",
+   "matched_hex": [
+    "#D3887D",
+    "#D88579"
+   ]
+  },
+  "s24": {
+   "season": "thu",
+   "old_main": "#882655",
+   "old_sec": "#F1CCB8",
+   "new_main": "#7D143D",
+   "new_sec": "#FCDEC7",
+   "matched_hex": [
+    "#7D364D",
+    "#882655"
+   ]
+  },
+  "s29": {
+   "season": "dong",
+   "old_main": "#BFD9CE",
+   "old_sec": "#00675B",
+   "new_main": "#95E1CD",
+   "new_sec": "#00675B",
+   "matched_hex": [
+    "#BFD9CE"
+   ]
+  },
+  "s34": {
+   "season": "thu",
+   "old_main": "#DF6959",
+   "old_sec": "#EAD9CD",
+   "new_main": "#93A869",
+   "new_sec": "#EBB890",
+   "matched_hex": [
+    "#D37269",
+    "#D3877F",
+    "#DF6959"
+   ]
+  },
+  "s37": {
+   "season": "xuan",
+   "old_main": "#C982BE",
+   "old_sec": "#593A78",
+   "new_main": "#AC4D6F",
+   "new_sec": "#593A78",
+   "matched_hex": [
+    "#C28AB9",
+    "#C982BE"
+   ]
+  },
+  "s38": {
+   "season": "ha",
+   "old_main": "#D99F8C",
+   "old_sec": "#872555",
+   "new_main": "#E9937C",
+   "new_sec": "#872555",
+   "matched_hex": [
+    "#D99F8C"
+   ]
+  },
+  "s44": {
+   "season": "thu",
+   "old_main": "#A6593F",
+   "old_sec": "#94B594",
+   "new_main": "#617437",
+   "new_sec": "#94B594",
+   "matched_hex": [
+    "#A6593F"
+   ]
+  },
+  "s48": {
+   "season": "xuan",
+   "old_main": "#DF9FA8",
+   "old_sec": "#70CCC1",
+   "new_main": "#ED9BA9",
+   "new_sec": "#70CCC1",
+   "matched_hex": [
+    "#DF9FA8"
+   ]
+  },
+  "s55": {
+   "season": "xuan",
+   "old_main": "#D79BC4",
+   "old_sec": "#95B77B",
+   "new_main": "#87314C",
+   "new_sec": "#95B77B",
+   "matched_hex": [
+    "#CEA1BF",
+    "#D79BC4"
+   ]
+  },
+  "s56": {
+   "season": "ha",
+   "old_main": "#D6A585",
+   "old_sec": "#A991CA",
+   "new_main": "#E4986A",
+   "new_sec": "#A991CA",
+   "matched_hex": [
+    "#D6A585"
+   ]
+  },
+  "s58": {
+   "season": "thu",
+   "old_main": "#DC8570",
+   "old_sec": "#B0DDD0",
+   "new_main": "#6A7E40",
+   "new_sec": "#B7DBCA",
+   "matched_hex": [
+    "#D28B79",
+    "#DC8570"
+   ]
+  },
+  "s59": {
+   "season": "ha",
+   "old_main": "#EDA98C",
+   "old_sec": "#90BDF2",
+   "new_main": "#E6976E",
+   "new_sec": "#90BDF2",
+   "matched_hex": [
+    "#DEAF9B",
+    "#EDA98C"
+   ]
+  },
+  "s60": {
+   "season": "xuan",
+   "old_main": "#D9998C",
+   "old_sec": "#649AB8",
+   "new_main": "#68963D",
+   "new_sec": "#649AB8",
+   "matched_hex": [
+    "#D9998C"
+   ]
+  },
+  "s61": {
+   "season": "ha",
+   "old_main": "#D2906C",
+   "old_sec": "#EDDCC6",
+   "new_main": "#E6976E",
+   "new_sec": "#FFF2EF",
+   "matched_hex": [
+    "#D2906C"
+   ]
+  }
+ },
+ "skins": [
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "xSBwRrHjfW",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T04:00:52Z",
+   "prompt_file": "",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 131,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "MBJ85ZZDCm",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T04:12:00Z",
+   "prompt_file": "dev/art/owner-copy/tan_c06_NEWCOLLAR.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 133,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "0eUXKVLTfW",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T04:20:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t8_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 135,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "Syh4SxlUb8",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.871668+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t4_SHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 150,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "Lw8JL1cswO",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872127+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t4_NOSHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 151,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "1ldS158r4r",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872207+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t5_SHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 152,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "TdwBT0FVNR",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872252+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t5_NOSHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 153,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "0eUX00WTfW",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872287+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_SHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 154,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "9ZHG6iONYZ",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872348+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_NOSHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 155,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "0eUBVpVTfW",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872379+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t7_SHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 156,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "s7Iyg73l8e",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:13:12.872413+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t7_NOSHAWL.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 157,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "jUoJ7WbLD0",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:23:22.968444+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_SOFT.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 165,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "yiuZR83PW9",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:23:22.968444+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t7_SOFT.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 166,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "5jDl7ONKxe",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:35:13.085182+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_SOFT2.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 169,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "kseSNbF16B",
+   "cut_id": null,
+   "kind": "OWNER-COPY",
+   "ts": "2026-11-19T05:41:15.473674+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_SOFT3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 173,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "6AbnH48iJO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:06:39.983393+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_FABRICWORDS.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 194,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "6AbnOzMiJO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t1_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 206,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "lJtP14cgv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t2_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 207,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "xSB7byVjfW",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t3_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 208,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "xSB7b4wjfW",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t4_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 209,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "bxMsEPz5Y2",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t5_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 210,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "5jDluitKxe",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 211,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "8aiEpgvIrU",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t7_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 212,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "aFGb8PxfSh",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:27:53.412427+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t8_V3.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 213,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "YMldekqWeC",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t1_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 262,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "Lw8yOe1swO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t2_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 263,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "1ldwJEGr4r",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t3_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 264,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "Lw8yOIlswO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t4_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 265,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "bxMllM05Y2",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t5_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 266,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "iG5WWxW3uK",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t6_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 267,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "tCRFFWwmZJ",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t7_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 268,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "MBJttZdDCm",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T06:45:53.272493+00:00",
+   "prompt_file": "dev/art/owner-copy/m19_t8_V4.txt",
+   "drawn_hex": [
+    "#C7A085"
+   ],
+   "ledger_line": 269,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "u5Wx8J0QLD",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t1_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 394,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "Syh6KTmUb8",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t2_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 395,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "gOmNKoISXO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t3_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 396,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "0eU83k7TfW",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t4_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 397,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "lJt95ICgv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t5_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 398,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "s7I4bhVl8e",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t6_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 399,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "KLpUa0ykqp",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t7_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 400,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "EbYrX2WuuO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t8_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 401,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "ov6uo3E829",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t1_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 494,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "YMlBcSOWeC",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t2_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 495,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "O6EAPqUynm",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t3_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 496,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "ov6QmqZ829",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t4_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 497,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "gOm67AqSXO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t5_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 498,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "mEZbfgthJQ",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T08:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/t6_c06.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 499,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "Xm9rj6ZBfo",
+   "cut_id": "w4aTeIq7EI",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:00:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r17/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1152,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "hu2SwWGvqL",
+   "cut_id": "DoO5xwgpcl",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:00:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r17/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1153,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "DoO5kZZpcl",
+   "cut_id": "5jDiAMXKxe",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:00:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r17/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1154,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "Lw8zWHyswO",
+   "cut_id": "CqnJ9WKEEy",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:00:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r17/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1155,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "tCRlUePmZJ",
+   "cut_id": "3zKIaxVREY",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:00:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r17/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1156,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "rgX2d9Pxtc",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/a_l400/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1312,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "6Aboqd9iJO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/a_l400/t7_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1313,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "lJtYI09gv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/a_l400/t8_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1314,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "UPv0faUwny",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/b_l410/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1315,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "bxM6pX65Y2",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/b_l410/t7_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1316,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "79fVE5LJAL",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/b_l410/t8_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1317,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "DoO5icwpcl",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1318,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "1ldZmk6r4r",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1319,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "ov6jztB829",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1320,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "WDgu4dKcXe",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1321,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "KLp3m7Skqp",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1322,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "CqnJeoCEEy",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1323,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "9ZHXLOMNYZ",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t7_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1324,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "hu2SMf3vqL",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/c_l411/t8_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1325,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "TdwHzhYVNR",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1326,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "If3sekXtvE",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1327,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "lJtY1z8gv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1328,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "MBJbYkIDCm",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1329,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "lJtY1Mxgv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1330,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "cpSQAxA0eP",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t7_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1331,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "EbYOmc8uuO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:30:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/d_l415/t8_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1332,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "DoOKXtspcl",
+   "cut_id": "YMlueqsWeC",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1406,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "lJtWwizgv9",
+   "cut_id": "4RFXAmM9Aa",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1407,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "iG5I2e23uK",
+   "cut_id": "YMluekUWeC",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1408,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "kseZLiu16B",
+   "cut_id": "UPvTN8Dwny",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1409,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "cpSFDHg0eP",
+   "cut_id": "3zKtWqhREY",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1410,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "p8ykIBnehw",
+   "cut_id": "TdwqoUdVNR",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1411,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "mEZSuQdhJQ",
+   "cut_id": "9ZHBGHqNYZ",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t7_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1412,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "6Ab8GcBiJO",
+   "cut_id": "79fMiEWJAL",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:05:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r18/t8_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1413,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "w4aVdtb7EI",
+   "cut_id": "kseZTzc16B",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1431,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "8ais7u7IrU",
+   "cut_id": "gOmcBpUSXO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1432,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "P3Qdtql42C",
+   "cut_id": "UPvT8XSwny",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1433,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "8aisJ54IrU",
+   "cut_id": "jUozpDtLD0",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1434,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "1ld2cv9r4r",
+   "cut_id": "bxMiWcN5Y2",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1435,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "rgXATYQxtc",
+   "cut_id": "1ld2VpSr4r",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:12:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/v1_ownwords/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1436,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "VX7bgTOMMU",
+   "cut_id": "kseZd6916B",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1437,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "u5WPzRUQLD",
+   "cut_id": "hu2UAgCvqL",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1438,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "Lw8nBU6swO",
+   "cut_id": "KLpRe3zkqp",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1439,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "u5WPnYPQLD",
+   "cut_id": "xSBGozEjfW",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1440,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "xSBGXysjfW",
+   "cut_id": "w4aVfpd7EI",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1441,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "Lw8noFaswO",
+   "cut_id": "kseZdn616B",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:24:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r19/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1442,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "gOmcFrrSXO",
+   "cut_id": "4RFXsdv9Aa",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1479,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "gOmcFsASXO",
+   "cut_id": "MBJ52KaDCm",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1480,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "s7IYQghl8e",
+   "cut_id": "hu2UD7IvqL",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1481,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "u5WPX5TQLD",
+   "cut_id": "EbYyBNDuuO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1482,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "VX7b3IwMMU",
+   "cut_id": "JNCDroDOq4",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1483,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "VX7b3f4MMU",
+   "cut_id": "jUozQMzLD0",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/a_superseded/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1484,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "lJtWkRXgv9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:37:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/b_superseded/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1485,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "ov6LM1C829",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:37:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/b_superseded/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1486,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "vQAwBUUa47",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:37:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/b_superseded/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1487,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "P3QdSon42C",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:37:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/b_superseded/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1488,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "Lw8nrGkswO",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1489,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "WDgQzHscXe",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1490,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "tCRgoOimZJ",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1491,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "iG5I9Qh3uK",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1492,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "KLpRqeAkqp",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1493,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "Syh0suyUb8",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:40:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/c_superseded/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1494,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "eIPrXKWdqL",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1495,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "bxM3KRo5Y2",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1496,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "UPvV7edwny",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1497,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "ov6sIJF829",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1498,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "dt4xBJmXSL",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1499,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "DoOkeOepcl",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/d_superseded/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1500,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "P3QXiOf42C",
+   "cut_id": "nVsuDuUYQD",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1501,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "hu2wufsvqL",
+   "cut_id": "p8y1txCehw",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1502,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "JNCpNNbOq4",
+   "cut_id": "DoOkIx3pcl",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1503,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "1ldAlwsr4r",
+   "cut_id": "UPvV9dVwny",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1504,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "w4aM4R57EI",
+   "cut_id": "s7IWOp3l8e",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1505,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "eIPrIqZdqL",
+   "cut_id": "Lw8YJp1swO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:47:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r20/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1506,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "BhNLrpYoQR",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:58:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/superseded/t1_c06_TP1_BhNLrpYoQR.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1561,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "s7IWnSdl8e",
+   "cut_id": "KLpZm3ikqp",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T16:58:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1562,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "gOm0feISXO",
+   "cut_id": "gOm0FnYSXO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1563,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "5jDRX02Kxe",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/superseded/t3_c06_try1_5jDRX02Kxe.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1564,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "79fD5zYJAL",
+   "cut_id": "VX753zHMMU",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1565,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "VX7549CMMU",
+   "cut_id": "u5W4dPuQLD",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1566,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "Lw8YvEHswO",
+   "cut_id": "If3gWUKtvE",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1567,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "EbYPeUcuuO",
+   "cut_id": "N2q8sOD6D9",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:18:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r21/t6_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1568,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "yiuXphzPW9",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:40:45Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/superseded/t1_c06_try1_yiuXphzPW9.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1665,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "iG5mITr3uK",
+   "cut_id": null,
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:40:45Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/superseded/t2_c06_try1_iG5mITr3uK.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1666,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "CqnPOI6EEy",
+   "cut_id": "xSBncLojfW",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:40:45Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1667,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "0eUbqLqTfW",
+   "cut_id": "vQAJPENa47",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:40:45Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1668,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "lJt0Vrvgv9",
+   "cut_id": "5jDZzRnKxe",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:44:25Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1669,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "9ZH8t41NYZ",
+   "cut_id": "jUoYTWuLD0",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T17:44:25Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r22/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1670,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "w4ap6mi7EI",
+   "cut_id": "N2qtc3i6D9",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:18:15Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r23/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1720,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "DoOrmvspcl",
+   "cut_id": "SyhM3JRUb8",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:18:30Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r23/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1721,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "Cqn4kV2EEy",
+   "cut_id": "hu2JKQLvqL",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:18:40Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r23/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1722,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "ov6guqc829",
+   "cut_id": "vQAOkHda47",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:18:50Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r23/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1723,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "xSBYOhojfW",
+   "cut_id": "p8yxfupehw",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:18:57Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r23/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1724,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "Xm9sxZ0Bfo",
+   "cut_id": "4RF88rp9Aa",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:30:30Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r24/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1734,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "iG5htow3uK",
+   "cut_id": "rgXnna1xtc",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:31:10Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r24/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1735,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "Lw8cYLyswO",
+   "cut_id": "6Abmmg1iJO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:31:40Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r24/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1736,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "kseGAnD16B",
+   "cut_id": "p8yxxz5ehw",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:32:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r24/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1737,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "4RF8oOf9Aa",
+   "cut_id": "P3Qoog242C",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:32:20Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r24/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1738,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "Xm9sPSLBfo",
+   "cut_id": "gOmVho7SXO",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:41:30Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r25/t1_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1768,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "xSBYXLKjfW",
+   "cut_id": "hu2JA3lvqL",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:42:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r25/t2_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1769,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "KLpADcokqp",
+   "cut_id": "yiuBQE4PW9",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:42:30Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r25/t3_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1770,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "lJtTtwKgv9",
+   "cut_id": "If3UR3itvE",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:43:00Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r25/t4_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1771,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "jUoWooaLD0",
+   "cut_id": "vQAOGGIa47",
+   "kind": "OWNER-DESIGN",
+   "ts": "2026-11-19T18:43:30Z",
+   "prompt_file": "dev/art/owner-copy/trieu/r25/t5_c06_RAN.txt",
+   "drawn_hex": [
+    "#D5745E"
+   ],
+   "ledger_line": 1772,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c08",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "vQAyefqa47",
+   "cut_id": "Lw80qQpswO",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c08.v3.FULL.txt",
+   "drawn_hex": [
+    "#DF9FA2"
+   ],
+   "ledger_line": 1805,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c10",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "gOmM5yySXO",
+   "cut_id": "jUocHFqLD0",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c10.v3.FULL.txt",
+   "drawn_hex": [
+    "#DFBB9F"
+   ],
+   "ledger_line": 1807,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c14",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "TdwkAAyVNR",
+   "cut_id": "aFGP8u5fSh",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c14.v3.FULL.txt",
+   "drawn_hex": [
+    "#EAD7BF"
+   ],
+   "ledger_line": 1811,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c27",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "3zKf2P4REY",
+   "cut_id": "rgXWl3bxtc",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c27.v3.FULL.txt",
+   "drawn_hex": [
+    "#CF776E"
+   ],
+   "ledger_line": 1824,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c28",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "iG5aZ9U3uK",
+   "cut_id": "JNCB9V9Oq4",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c28.v3.FULL.txt",
+   "drawn_hex": [
+    "#98CAA5"
+   ],
+   "ledger_line": 1825,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c31",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "P3QIRCn42C",
+   "cut_id": "1ldYS3Zr4r",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c31.v3.FULL.txt",
+   "drawn_hex": [
+    "#ABD4BB"
+   ],
+   "ledger_line": 1828,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c32",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "N2qhRHL6D9",
+   "cut_id": "lJtMJwTgv9",
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c32.v3.FULL.txt",
+   "drawn_hex": [
+    "#EDDCC6"
+   ],
+   "ledger_line": 1829,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c31",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "gOmD78WSXO",
+   "cut_id": null,
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c31.v3.FULL.txt",
+   "drawn_hex": [
+    "#ABD4BB"
+   ],
+   "ledger_line": 1834,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c31",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "P3QI3R142C",
+   "cut_id": null,
+   "kind": "OWNER-GO",
+   "ts": "2026-11-19T20:05:30Z",
+   "prompt_file": "dev/art/face-common/c31.v3.FULL.txt",
+   "drawn_hex": [
+    "#ABD4BB"
+   ],
+   "ledger_line": 1835,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "YMlb1sbWeC",
+   "cut_id": "MBJxgicDCm",
+   "kind": "REDRAW-629",
+   "ts": "2026-11-19T20:45:00Z",
+   "prompt_file": "dev/art/face-common/c06.v3b.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 1876,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "Lw8T8EfswO",
+   "cut_id": "jUo08nILD0",
+   "kind": "FIX-644",
+   "ts": "2026-11-19T21:10:00Z",
+   "prompt_file": "dev/art/face-common/c06.v3c.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 1880,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "eIPlue1dqL",
+   "cut_id": "p8ysH61ehw",
+   "kind": "TEETH-686",
+   "ts": "2026-11-19T21:30:00Z",
+   "prompt_file": "dev/art/face-common/c06.v3t.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 1903,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c14",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "jUoT6o3LD0",
+   "cut_id": "WDgKaOScXe",
+   "kind": "TEETH-686",
+   "ts": "2026-11-19T21:30:00Z",
+   "prompt_file": "dev/art/face-common/c14.v3t.FULL.txt",
+   "drawn_hex": [
+    "#EAD7BF"
+   ],
+   "ledger_line": 1904,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c31",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "Lw8ViaUswO",
+   "cut_id": "fHzNgVTCDY",
+   "kind": "TEETH-686",
+   "ts": "2026-11-19T21:30:00Z",
+   "prompt_file": "dev/art/face-common/c31.v3t.FULL.txt",
+   "drawn_hex": [
+    "#ABD4BB"
+   ],
+   "ledger_line": 1907,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c27",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "gOmpGecSXO",
+   "cut_id": "KLpnNqzkqp",
+   "kind": "NEWFACE-686",
+   "ts": "2026-11-19T21:30:00Z",
+   "prompt_file": "dev/art/face-common/c27.v4.FULL.txt",
+   "drawn_hex": [
+    "#CF776E"
+   ],
+   "ledger_line": 1908,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s17",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "jUoTnh9LD0",
+   "cut_id": "WDgKqfpcXe",
+   "kind": "SAMPLE-689",
+   "ts": "2026-11-19T21:35:00Z",
+   "prompt_file": "dev/art/face-common/s17.v5.FULL.txt",
+   "drawn_hex": [
+    "#D88579"
+   ],
+   "ledger_line": 1959,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "UPvdXYlwny",
+   "cut_id": "rgXcT8Jxtc",
+   "kind": "SACSAO-696",
+   "ts": "2026-11-19T21:40:00Z",
+   "prompt_file": "dev/art/face-common/c06.v5.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 1963,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c14",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "5jDzn6nKxe",
+   "cut_id": "rgXcTIOxtc",
+   "kind": "SACSAO-696",
+   "ts": "2026-11-19T21:40:00Z",
+   "prompt_file": "dev/art/face-common/c14.v5.FULL.txt",
+   "drawn_hex": [
+    "#EAD7BF"
+   ],
+   "ledger_line": 1964,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c31",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "yiuItX4PW9",
+   "cut_id": "SyheXu8Ub8",
+   "kind": "SACSAO-696",
+   "ts": "2026-11-19T21:40:00Z",
+   "prompt_file": "dev/art/face-common/c31.v5.FULL.txt",
+   "drawn_hex": [
+    "#ABD4BB"
+   ],
+   "ledger_line": 1966,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s24",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "s7IMBwgl8e",
+   "cut_id": "xSB08sMjfW",
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:55:00Z",
+   "prompt_file": "dev/art/face-common/s24.v5.FULL.txt",
+   "drawn_hex": [
+    "#7D364D"
+   ],
+   "ledger_line": 1977,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s29",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "DoOLwTYpcl",
+   "cut_id": "WDgKUoPcXe",
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:55:00Z",
+   "prompt_file": "dev/art/face-common/s29.v5.FULL.txt",
+   "drawn_hex": [
+    "#BFD9CE"
+   ],
+   "ledger_line": 1982,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s34",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "mEZy3ekhJQ",
+   "cut_id": "cpSkwCV0eP",
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:55:00Z",
+   "prompt_file": "dev/art/face-common/s34.v5.FULL.txt",
+   "drawn_hex": [
+    "#D37269"
+   ],
+   "ledger_line": 1987,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s37",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "gOmptElSXO",
+   "cut_id": "WDgKUC2cXe",
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:55:00Z",
+   "prompt_file": "dev/art/face-common/s37.v5.FULL.txt",
+   "drawn_hex": [
+    "#C982BE"
+   ],
+   "ledger_line": 1990,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s38",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "0eU1wnSTfW",
+   "cut_id": "lJtDhmMgv9",
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:55:00Z",
+   "prompt_file": "dev/art/face-common/s38.v5b.FULL.txt",
+   "drawn_hex": [
+    "#D99F8C"
+   ],
+   "ledger_line": 1991,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s38",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "w4aXvqs7EI",
+   "cut_id": null,
+   "kind": "FULLSET-700",
+   "ts": "2026-11-19T21:50:00Z",
+   "prompt_file": "dev/art/face-common/s38.v5.FULL.txt",
+   "drawn_hex": [
+    "#D99F8C"
+   ],
+   "ledger_line": 1993,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s16",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "u5WiTRSQLD",
+   "cut_id": "hu2ynp3vqL",
+   "kind": "RESTORE-712",
+   "ts": "2026-11-19T22:08:16Z",
+   "prompt_file": "dev/art/face-common/s16.v4c.FULL.txt",
+   "drawn_hex": [
+    "#DE9CA4"
+   ],
+   "ledger_line": 2006,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s37",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "O6E8sJQynm",
+   "cut_id": "Lw8V5SlswO",
+   "kind": "A21-RETOUCH-712",
+   "ts": "2026-11-19T22:08:16Z",
+   "prompt_file": "dev/art/face-common/s37.v5.FULL.txt",
+   "drawn_hex": [
+    "#C982BE"
+   ],
+   "ledger_line": 2007,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s38",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "p8yscIfehw",
+   "cut_id": "MBJjc4LDCm",
+   "kind": "REDRAW-712",
+   "ts": "2026-11-19T22:08:16Z",
+   "prompt_file": "dev/art/face-common/s38.v5r2.FULL.txt",
+   "drawn_hex": [
+    "#D99F8C"
+   ],
+   "ledger_line": 2011,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m04",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "P3QmZ8342C",
+   "cut_id": "rgX0wzixtc",
+   "kind": "SEASON-TRYON-735",
+   "ts": "2026-11-19T22:35:00Z",
+   "prompt_file": "dev/art/face-common/season-tryon/m04.xuan.FULL.txt",
+   "drawn_hex": [
+    "#E19E7A"
+   ],
+   "ledger_line": 2017,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m04",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "kseWgcl16B",
+   "cut_id": "BhNwfgNoQR",
+   "kind": "SEASON-TRYON-735",
+   "ts": "2026-11-19T22:35:00Z",
+   "prompt_file": "dev/art/face-common/season-tryon/m04.thu.FULL.txt",
+   "drawn_hex": [
+    "#DBB294"
+   ],
+   "ledger_line": 2019,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "kseW7Jt16B",
+   "cut_id": null,
+   "kind": "REDRAW-737",
+   "ts": "2026-11-19T23:00:00Z",
+   "prompt_file": "dev/art/face-common/c06.v5.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 2025,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "c06",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "p8ylaCXehw",
+   "cut_id": "hu24KgZvqL",
+   "kind": "REDRAW-737",
+   "ts": "2026-11-19T23:00:00Z",
+   "prompt_file": "dev/art/face-common/c06.v5.FULL.txt",
+   "drawn_hex": [
+    "#CF816E"
+   ],
+   "ledger_line": 2026,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s44",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "WDgkI1rcXe",
+   "cut_id": "79foGbpJAL",
+   "kind": "NEWFACE-737",
+   "ts": "2026-11-19T23:00:00Z",
+   "prompt_file": "dev/art/face-common/s44.v5.FULL.txt",
+   "drawn_hex": [
+    "#A6593F"
+   ],
+   "ledger_line": 2034,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s48",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "YMlKqk5WeC",
+   "cut_id": "jUoV0AQLD0",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:40:00Z",
+   "prompt_file": "dev/art/face-common/s48.v5.FULL.txt",
+   "drawn_hex": [
+    "#DF9FA8"
+   ],
+   "ledger_line": 2039,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s55",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "Xm9UADGBfo",
+   "cut_id": "WDgk4PIcXe",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:30:00Z",
+   "prompt_file": "dev/art/face-common/s55.v5.FULL.txt",
+   "drawn_hex": [
+    "#CEA1BF"
+   ],
+   "ledger_line": 2068,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s56",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "3zKEOiVREY",
+   "cut_id": "rgX0qMZxtc",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:40:00Z",
+   "prompt_file": "dev/art/face-common/s56.v5.FULL.txt",
+   "drawn_hex": [
+    "#D6A585"
+   ],
+   "ledger_line": 2174,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s58",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "9ZHvwpkNYZ",
+   "cut_id": "yiutSarPW9",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:40:00Z",
+   "prompt_file": "dev/art/face-common/s58.v5.FULL.txt",
+   "drawn_hex": [
+    "#D28B79"
+   ],
+   "ledger_line": 2176,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s59",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "dt4S0zyXSL",
+   "cut_id": "JNC8lvIOq4",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:40:00Z",
+   "prompt_file": "dev/art/face-common/s59.v5.FULL.txt",
+   "drawn_hex": [
+    "#DEAF9B"
+   ],
+   "ledger_line": 2177,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s61",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "gOme1k6SXO",
+   "cut_id": "SyhdxtJUb8",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:40:00Z",
+   "prompt_file": "dev/art/face-common/s61.v5.FULL.txt",
+   "drawn_hex": [
+    "#D2906C"
+   ],
+   "ledger_line": 2179,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s60",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "lJtpxtNgv9",
+   "cut_id": "lJtpjSYgv9",
+   "kind": "NEWFACE-761",
+   "ts": "2026-11-19T23:45:00Z",
+   "prompt_file": "dev/art/face-common/s60.v5.FULL.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 2210,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s44",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "?",
+   "age": "?",
+   "gen_id": "kse0GTu16B",
+   "cut_id": "DoOgxICpcl",
+   "kind": "QUYENRU-MOVE-F3",
+   "ts": "2026-11-20T02:38:00Z",
+   "prompt_file": "dev/art/face-common/s44.qr.FULL.txt",
+   "drawn_hex": [
+    "#A6593F"
+   ],
+   "ledger_line": 2828,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "1",
+   "age": "a18",
+   "gen_id": "EbYGtmwuuO",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t1.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2910,
+   "already_in_SKINS": true
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "2",
+   "age": "a18",
+   "gen_id": "P3QCUdD42C",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t2.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2911,
+   "already_in_SKINS": true
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "3",
+   "age": "a18",
+   "gen_id": "hu23Be4vqL",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t3.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2912,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "4",
+   "age": "a18",
+   "gen_id": "nVsxZfWYQD",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t4.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2913,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "5",
+   "age": "a18",
+   "gen_id": "BhNPDY5oQR",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t5.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2914,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "6",
+   "age": "a18",
+   "gen_id": "O6EaUWJynm",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t6.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2915,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "s7IBrfql8e",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t7.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2916,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m19",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "xSBekJWjfW",
+   "cut_id": null,
+   "kind": "REDRAW3-M19",
+   "ts": "2026-11-20T08:15:00Z",
+   "prompt_file": "dev/art/rank8-m19/m19_t8.txt",
+   "drawn_hex": [
+    "#CE9F7E"
+   ],
+   "ledger_line": 2917,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "1",
+   "age": "?",
+   "gen_id": "6AbFJeJiJO",
+   "cut_id": "lJtojGEgv9",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t1.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2926,
+   "already_in_SKINS": true
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "2",
+   "age": "?",
+   "gen_id": "BhNPVrToQR",
+   "cut_id": "dt4ODkaXSL",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t2.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2928,
+   "already_in_SKINS": true
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "3",
+   "age": "?",
+   "gen_id": "4RFEwch9Aa",
+   "cut_id": "79fhSVDJAL",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t3.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2930,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "4",
+   "age": "?",
+   "gen_id": "bxM0EOE5Y2",
+   "cut_id": "BhNPejcoQR",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t4.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2932,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "5",
+   "age": "?",
+   "gen_id": "DoOwcvYpcl",
+   "cut_id": "iG5H9mC3uK",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t5.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2934,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "6",
+   "age": "?",
+   "gen_id": "p8y70uxehw",
+   "cut_id": "lJtojT5gv9",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t6.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2936,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "kseMqUH16B",
+   "cut_id": "gOm8LDpSXO",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t7.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2938,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "?",
+   "gen_id": "jUodk9yLD0",
+   "cut_id": "lJtojD1gv9",
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:05:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t8.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2940,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m29",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "?",
+   "gen_id": "If36aN1tvE",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:00:00Z",
+   "prompt_file": "dev/art/rank8-old4/m29_t7_eyes.txt",
+   "drawn_hex": [
+    "#AFD4BC"
+   ],
+   "ledger_line": 2954,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m14",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "TdwSNTeVNR",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:40:00Z",
+   "prompt_file": "dev/art/rank8-t78/m14_t7.txt",
+   "drawn_hex": [
+    "#EDE0CC"
+   ],
+   "ledger_line": 2989,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m14",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "aFG2MEOfSh",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:40:00Z",
+   "prompt_file": "dev/art/rank8-t78/m14_t8.txt",
+   "drawn_hex": [
+    "#EDE0CC"
+   ],
+   "ledger_line": 2990,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m28",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "YMlL9QDWeC",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:40:00Z",
+   "prompt_file": "dev/art/rank8-t78/m28_t7.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 2999,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m28",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "rgXeuuCxtc",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:40:00Z",
+   "prompt_file": "dev/art/rank8-t78/m28_t8.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 3000,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m02",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "lJt8ujFgv9",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:50:00Z",
+   "prompt_file": "dev/art/rank8-t78/m02_t7.txt",
+   "drawn_hex": [
+    "#A8C379"
+   ],
+   "ledger_line": 3001,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m02",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "kseDhr516B",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:50:00Z",
+   "prompt_file": "dev/art/rank8-t78/m02_t8.txt",
+   "drawn_hex": [
+    "#A8C379"
+   ],
+   "ledger_line": 3002,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m04",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "KLpMmjykqp",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:50:00Z",
+   "prompt_file": "dev/art/rank8-t78/m04_t7.txt",
+   "drawn_hex": [
+    "#DBB294"
+   ],
+   "ledger_line": 3003,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m04",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "jUoXEdmLD0",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:50:00Z",
+   "prompt_file": "dev/art/rank8-t78/m04_t8.txt",
+   "drawn_hex": [
+    "#DBB294"
+   ],
+   "ledger_line": 3004,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s16",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "rgXdJUgxtc",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:55:00Z",
+   "prompt_file": "dev/art/rank8-t78/s16_t7.txt",
+   "drawn_hex": [
+    "#DF9C9E"
+   ],
+   "ledger_line": 3022,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s16",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "Syhm66eUb8",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:55:00Z",
+   "prompt_file": "dev/art/rank8-t78/s16_t8.txt",
+   "drawn_hex": [
+    "#DF9C9E"
+   ],
+   "ledger_line": 3023,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s17",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "tCR35uqmZJ",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:59:00Z",
+   "prompt_file": "dev/art/rank8-t78/s17_t7.txt",
+   "drawn_hex": [
+    "#D3887D"
+   ],
+   "ledger_line": 3024,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s17",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "VX7wvtKMMU",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T08:59:00Z",
+   "prompt_file": "dev/art/rank8-t78/s17_t8.txt",
+   "drawn_hex": [
+    "#D3887D"
+   ],
+   "ledger_line": 3025,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s34",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "MBJ7EMwDCm",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s34_t7.txt",
+   "drawn_hex": [
+    "#D3877F"
+   ],
+   "ledger_line": 3042,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s34",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "0eUSfDmTfW",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s34_t8.txt",
+   "drawn_hex": [
+    "#D3877F"
+   ],
+   "ledger_line": 3043,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s37",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "eIPyHbAdqL",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s37_t7.txt",
+   "drawn_hex": [
+    "#C28AB9"
+   ],
+   "ledger_line": 3048,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s37",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "YMlshEsWeC",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s37_t8.txt",
+   "drawn_hex": [
+    "#C28AB9"
+   ],
+   "ledger_line": 3049,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s38",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "fHzGlyRCDY",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s38_t7.txt",
+   "drawn_hex": [
+    "#D99F8C"
+   ],
+   "ledger_line": 3050,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s38",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "lJtI2pqgv9",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s38_t8.txt",
+   "drawn_hex": [
+    "#D99F8C"
+   ],
+   "ledger_line": 3051,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s48",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "UPvh6s7wny",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s48_t7.txt",
+   "drawn_hex": [
+    "#DF9FA8"
+   ],
+   "ledger_line": 3054,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s48",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "aFGA5hhfSh",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:20:00Z",
+   "prompt_file": "dev/art/rank8-t78/s48_t8.txt",
+   "drawn_hex": [
+    "#DF9FA8"
+   ],
+   "ledger_line": 3055,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s55",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "Syhm2y0Ub8",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s55_t7.txt",
+   "drawn_hex": [
+    "#CEA1BF"
+   ],
+   "ledger_line": 3068,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s55",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "KLpDylfkqp",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s55_t8.txt",
+   "drawn_hex": [
+    "#CEA1BF"
+   ],
+   "ledger_line": 3069,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s56",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "If3iKHntvE",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s56_t7.txt",
+   "drawn_hex": [
+    "#D6A585"
+   ],
+   "ledger_line": 3070,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s56",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "TdwUavZVNR",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s56_t8.txt",
+   "drawn_hex": [
+    "#D6A585"
+   ],
+   "ledger_line": 3071,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s58",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "WDglmFkcXe",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s58_t7.txt",
+   "drawn_hex": [
+    "#D28B79"
+   ],
+   "ledger_line": 3074,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s58",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "xSBXNWqjfW",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s58_t8.txt",
+   "drawn_hex": [
+    "#D28B79"
+   ],
+   "ledger_line": 3075,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s59",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "VX7wfL9MMU",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s59_t7.txt",
+   "drawn_hex": [
+    "#DEAF9B"
+   ],
+   "ledger_line": 3076,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s59",
+   "season": "ha",
+   "season_vi": "Hạ",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "jUoB6dGLD0",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s59_t8.txt",
+   "drawn_hex": [
+    "#DEAF9B"
+   ],
+   "ledger_line": 3077,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s60",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "xSBXNBojfW",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s60_t7.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 3078,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s60",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "fHzGLWXCDY",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:00:00Z",
+   "prompt_file": "dev/art/rank8-t78/s60_t8.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 3079,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s29",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "gOmtAixSXO",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:10:00Z",
+   "prompt_file": "dev/art/rank8-t78/s29_t7.txt",
+   "drawn_hex": [
+    "#BFD9CE"
+   ],
+   "ledger_line": 3110,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "s29",
+   "season": "dong",
+   "season_vi": "Đông",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "3zK5deTREY",
+   "cut_id": null,
+   "kind": "RANK8",
+   "ts": "2026-11-20T09:10:00Z",
+   "prompt_file": "dev/art/rank8-t78/s29_t8.txt",
+   "drawn_hex": [
+    "#BFD9CE"
+   ],
+   "ledger_line": 3111,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m02",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "s7IFfwNl8e",
+   "cut_id": null,
+   "kind": "NEWPERSON-THU-COMOI",
+   "ts": "2026-11-20T20:16Z",
+   "prompt_file": "dev/art/thu_comoi/m02_t7_THU_builder.txt",
+   "drawn_hex": [
+    "#A8C379"
+   ],
+   "ledger_line": 3318,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m02",
+   "season": "thu",
+   "season_vi": "Thu",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "u5WBDNRQLD",
+   "cut_id": null,
+   "kind": "NEWPERSON-THU-COMOI",
+   "ts": "2026-11-20T20:16Z",
+   "prompt_file": "dev/art/thu_comoi/m02_t8_THU_COMOI_v2.txt",
+   "drawn_hex": [
+    "#A8C379"
+   ],
+   "ledger_line": 3319,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m28",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "7",
+   "age": "a18",
+   "gen_id": "CqnX5s3EEy",
+   "cut_id": null,
+   "kind": "NEWPERSON-THU-COMOI",
+   "ts": "2026-11-20T20:51Z",
+   "prompt_file": "dev/art/thu_comoi/m28_t7_THU_nn.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 3320,
+   "already_in_SKINS": false
+  },
+  {
+   "person": "m28",
+   "season": "xuan",
+   "season_vi": "Xuân",
+   "tier": "8",
+   "age": "a18",
+   "gen_id": "xSBuw8YjfW",
+   "cut_id": null,
+   "kind": "NEWPERSON-THU-COMOI",
+   "ts": "2026-11-20T20:51Z",
+   "prompt_file": "dev/art/thu_comoi/m28_t8_THU_COMOI_v5.txt",
+   "drawn_hex": [
+    "#D9998C"
+   ],
+   "ledger_line": 3321,
+   "already_in_SKINS": false
+  }
+ ]
+}
