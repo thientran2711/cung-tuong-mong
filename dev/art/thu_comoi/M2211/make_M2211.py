@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """M2211-03..08 = M2206-03..08 + owner L2212 (net/edging/fringe words only INSIDE each rank's one vân kiên sentence, repeats deleted; t3 pearl-edged rim + clasp pearl) + M2206-04..08 + owner L2207 (cloth movement t7/t8) + L2208/L2210 (ONE vân-kiên jewel-net ladder template t4..t8 + drop-fringe material);
+"""M2211-04..08 = M2206-04..08 + owner L2207 (cloth movement t7/t8) + L2208/L2210 (ONE vân-kiên jewel-net ladder template t4..t8 + drop-fringe material);
 M2209-01 = M2211-07 with every neckline/collar/neck word replaced by only 'a low neckline' (owner L2209 test). THUROOT7, words only, 0 cr."""
 import pathlib
 R = pathlib.Path(__file__).resolve().parents[4]; P = R / "dev/handover/prompts_L2095"; D = pathlib.Path(__file__).parent
@@ -57,6 +58,7 @@ VK = {5: ("a light olive soft vân kiên (cầu vai)", "never a separate yoke la
       6: ("a light olive soft vân kiên (cầu vai)", "never split into two separate shoulder pieces"),
       7: ("a light olive vân kiên (soft shoulder", "never a separate yoke laid over it"),
       8: ("a royal golden yellow vân kiên", "never a separate yoke laid over it")}
+TAG = "owner L2207/L2208/L2210 via ROOT-B5"
 def build(n, base, code, edits, allows, tag):
     s = (P / base).read_text()
     for o, w in edits:
@@ -68,6 +70,7 @@ def build(n, base, code, edits, allows, tag):
     (D / (out + ".keep")).write_text(f"base: dev/handover/prompts_L2095/{base}\n" + "".join(f"allow: {a}  # {tag}\n" for a in allows))
     print(out, len(s))
 for n in range(3, 9):
+for n in range(4, 9):
     build(n, f"M2206-0{n}_s62_t{n}_thu.txt", f"M2211-0{n}", J[n], A.get(n, []), TAG)
 # L2209 test: HQP neck words -> only 'a low neckline'
 T = [("ONE straight SQUARE collar only (no crossed collar, nothing layered under it): a LOW open square neckline just below the collarbones, neck and collarbones bare, NEVER a high stand collar or mandarin collar, framed by ONE wide flat band in her second colour embroidered with bomb-form herbaceous peonies (the square band stops at the shoulders, nothing rises up the neck, neck bare), always fully visible;", "a low neckline;"),
