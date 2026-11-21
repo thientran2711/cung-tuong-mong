@@ -140,5 +140,13 @@
  "M2187-05": "M2187-05_s62_t5_thu.txt (bộ thu s62 t5 Phi = M2186-05 + khuy cũ ở cổ, vân kiên MỘT mảnh liền quanh cổ, không tách đôi)",
  "M2187-06": "M2187-06_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2186-06 + khuy cũ ở cổ, vân kiên MỘT mảnh liền quanh cổ, không tách đôi)",
  "M2187-07": "M2187-07_s62_t7_thu.txt (bộ thu s62 t7 HQP = M2186-07 + khuy cũ ở cổ, vân kiên MỘT mảnh liền quanh cổ, không tách đôi)",
- "M2187-08": "M2187-08_s62_t8_thu.txt (bộ thu s62 t8 HH = M2186-08 + khuy cũ ở cổ, vân kiên MỘT mảnh liền quanh cổ, không tách đôi)"
+ "M2187-08": "M2187-08_s62_t8_thu.txt (bộ thu s62 t8 HH = M2186-08 + khuy cũ ở cổ, vân kiên MỘT mảnh liền quanh cổ, không tách đôi)",
+ "M2189-01": "M2189-01_s62_t1_thu.txt (bộ thu s62 t1 Đáp ứng = M2187-01 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
+ "M2189-02": "M2189-02_s62_t2_thu.txt (bộ thu s62 t2 Thường tại = M2187-02 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
+ "M2189-03": "M2189-03_s62_t3_thu.txt (bộ thu s62 t3 Quý nhân = M2187-03 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
+ "M2189-04": "M2189-04_s62_t4_thu.txt (bộ thu s62 t4 Tần = M2187-04 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
+ "M2189-05": "M2189-05_s62_t5_thu.txt (bộ thu s62 t5 Phi = M2187-05 + khuy cũ trơn, bỏ câu vân kiên MỘT mảnh liền)",
+ "M2189-06": "M2189-06_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2179-03 y nguyên, chỉ bỏ chữ \"image 2\" swatch; màu chờ chủ)",
+ "M2189-07": "M2189-07_s62_t7_thu.txt (bộ thu s62 t7 HQP = M2187-07 + khuy cũ, cổ/áo trong/eo như QP M2179-03, phượng mờ dưới lưới ngọc)",
+ "M2189-08": "M2189-08_s62_t8_thu.txt (bộ thu s62 t8 HH = M2187-08 + khuy cũ, cổ/áo trong/eo như QP M2179-03, vân kiên mềm dài như HQP, phượng mây mờ dưới lưới ngọc)"
 }
