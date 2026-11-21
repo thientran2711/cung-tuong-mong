@@ -1537,3 +1537,4 @@ ROOT-B3 ~17:23Z: ROOT-B2 hit 60 % ceiling and stopped; OWNER now talks in ROOT-B
 ROOT-B2 ~22:02Z: OWNER L2154: no list of cuts, only the two prompt files. Relayed to ROOT-B3. Next Lượt 2155.
 ROOT-B3 ~17:30Z: ROLLING at 33 % → takeover dev/handover/TAKEOVER_FOREMAN_C_ROOTB3.md; opening ROOT-B4 as my child. M2153 pair sent to owner Lượt 2156. check_store fixed @c6dec735. No schedules owned. Next Lượt 2157.
 ROOT-B2 ~22:10Z: SENT L2155 M2153-01/-02 Tần before/after. ROOT-B3 rolled → Foreman C = ROOT-B4 session_01D3E3NX7udKgKjCk21vGEJz; owner told to continue there. ROOT-B2 stops. Next Lượt 2157.
+ROOT-B4 ~17:35Z: CURRENT FOREMAN C = ROOT-B4 session_01D3E3NX7udKgKjCk21vGEJz, depth 3, START_CTX ~4 % (roll at ~29 %, ceiling 60 %). Took over from ROOT-B3. M2150-01..03 pushed by THUROOT4; t4–t8 pending. No schedules owned. Next Lượt 2157.
