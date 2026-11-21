@@ -1764,6 +1764,38 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* jkcg (GAP OR01/OR06/OR08/OR14, review/outside-gaps; OUTSIDE_PLAN §6 §9 §11): fest = home festivals played as the real mini-game: raw 0..10 ≥ top = first
+   (Danh +danh[0]), ≥ ok = praised (+danh[1]), else Danh −danh[2]; skip = the quick option's score (same 5/10 as Phúc tuyển), bot = [base, spread] quick score;
+   sister moves sisP % of the time (+sis[0] when she lost, +sis[1] when she did well). vpSac / vpRare = the old kcFest gate to the Vương phi rare.
+   carry = palace entry: cap (each of Sắc/Tài/Tâm cơ/Đức/Sức at most cap over its home-road start; 0 = off). OUTSIDE_PLAN §9 asked +15, but the later
+   owner rule OD:L1287/L1288 (waiting must be worth the same months in the palace; BAL.kcv calibrated with dev/measure/kc2val.js WITHOUT a cap) wins:
+   kc2val home arm on this build (tt/muoi/thd/dtq, 3 lives each, 20/11) — a +15 cap would cut 49–91 Tư chất points per life (mean ≈ 77), so it is OFF; ldOld (Lời đồn ≥ → «lời đồn cũ» flag),
+   dad {mid,k} (Phụ thân thiện cảm − mid) × k added to «Nhờ cha dâng sớ» odds, danhK/danhMax/bacMax/sung (were typed in kcEnter).
+   home = letters/gifts from Mẫu thân while she is in the palace: p + (af − mid) × pk % a month unasked (giftShare % of them a gift), khac = khắc of each «Thư nhà» act, writeO / giftO base odds
+   (+ (af − mid) × k), writeBac / writeAf / lostDanh / askAf = the two «Thư nhà» acts, know = j61 intel depth, keep = letters listed, gifts = items home sends.
+   ld = «lời đồn cũ» event: p % a month; own (admit) / wit (mother's letter, witBac, witO odds, foe Danh −witFoe and Oán witOan, lose Danh −witLose) / wait.
+   Law 2 (review r1): writeBac 5→15, askAf 3→1 — writing (af +, a letter item Sức+10/Đức+2, true intel) dominated asking (af −, one gift item worth 6–30 bạc).
+   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
+BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
+ carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
+ ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
+ title:{tier:4,rare:6,quyRank:2,carry:1}};
+/* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
+   letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level,
+       burn = Tâm cơ for «Đọc xong đốt đi» (law 2, review r1).
+   gift: wait = turns until the visiting day, pickMax = items listed (newest first; 3 + «Thôi» = 4 options while the kit T3 frame crushes 5+ options on the Fold, KIT_REQUESTS 20/11 review r1), back* = the receiver's «Trả lại quà» (Đức gain, bond loss).
+   so: odds = o + house power*powK (+ father's liking - mid)*afK at home; pow = house power moved; rel = j55 relation between the two houses;
+       danh = the receiver's name gain on «Đội ơn», beDuc = its Đức loss (seen as one faction, law 3, review r1); noDuc = Đức for «Xin thôi»;
+       af / lost = the sender's price when it fails.
+   rumour: o odds, bac / suc = the two equal roads (law 2), n = Danh / Lời đồn moved, lost = the sender's Danh when traced, bond = tình hảo hữu;
+       fix = the receiver's answer to a bad rumour: o + her Danh*k, bac / suc roads (law 2), duc = «Mặc kệ» gain.
+   join: o + her Sủng*k = «Xin ban nàng về ở cung mình» odds, suc price, sung = loss when refused, bond / greet = tình hảo hữu.
+   kh = khắc each act costs (letter / gift / so / rumour); keep = list lengths, resend = seconds between relay resends. */
+BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:1,pickMax:3,bond:5,backDuc:1,backBond:4},
+ so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
+ rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
+ join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
 /* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
    owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
    Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank

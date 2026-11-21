@@ -95,7 +95,7 @@ const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","
 function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"",ECON_WIN_FAIL].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
 function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
- return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
+ return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
 /* the option's OWN code (review/odds-meter-back): a go that is a reference to a global scene / step function (go:nightScene) opens the next
    step — the rolls inside that function belong to the next step's own options, not to this option */
