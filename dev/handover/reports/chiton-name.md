@@ -20,11 +20,13 @@ Thái hậu card: already name «Thái hậu», no era — no change.
    Applies to every card with the info panel (Chí tôn, Phi tần, Nam nhân, Cung nhân). 
 4. **Place label order** (owner 21/11 ~02:18Z): palace on TOP, her hall BELOW: sources jpm.js (`palace · hall`), jres.js (2 residence labels), jplst.js comment (old «hall line 1» rule overwritten). Stage label, Dư đồ/notice strings built from the same names follow.
 
+5. **Đức chip** (owner 21/11 ~02:54Z): Tài nghệ › Tứ đức no longer repeats «Đức N» (top bar has it): chip removed in jtabs.js:54 and the old «Đức ngươi: N» in j85.js:180; the «ⓘ luật Đức» button stays. Scan of tab headers for chips/rows repeating Sắc/Tài/Tâm cơ/Đức/Danh/Sủng/Bạc/Sức: only these two; the Kén chọn / entry rows (jkc, jkc2 «Tư chất», «Mang theo Bạc») are pre-game dialogs without the top bar, left as is.
+
 ## Not done / for MAIN
 - Trait box (Lạnh lùng: … bullets) left in place on the Emperor cards (j15/jhc `note:`) for the kit keeper's «!» (kit-pcrow-square). DOM I touched: `.pcl` (new `.pcrows`), `.pcf .kpsec` (no `.kpst`), `#kpname` order. I did NOT touch tag centring or act cards (CSS rule I tried for centring removed).
 - Fold: the left column (.pcl) scrolls (existing, overflow:auto), so «Niên hiệu» row sits below the big portrait there, same place as «Biết tên».
 - The «Dạo này» label column is a separate table from Sở trường/Trọng/Hay (label widths differ by ~16px); kitRowsAlign could merge them — kit keeper's call.
 
 ## Tests
-- quickcheck: see below. coop-e2e (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc): 68/68 passed. pcard-fill (?khost=0, 1180x820): court0/court1/rv0/rv1 card+info+sticky OK, no hscroll, 0 errors. pcard-facts: rows incl. «Trong cung: …», no clamp, popups OK, 0 errors.
+- quickcheck: PASS on ee3eead (render 208/204 ms, tab 410/498, buổi 1091/1113). First two runs FAILED perf (render 305-333 vs 184-202) because of a `:has()` selector I had added in jk2b.css; replaced by class `kpno` → PASS. The last commit (Đức chip, 2 text edits) was rebuilt only; core gates run by the build. coop-e2e (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc): 68/68 passed. pcard-fill (?khost=0, 1180x820): court0/court1/rv0/rv1 card+info+sticky OK, no hscroll, 0 errors. pcard-facts: rows incl. «Trong cung: …», no clamp, popups OK, 0 errors.
 - Shots (Fold 755x1000 + iPad 1180x820, host mode, looked 3x): before/after in the worker scratch (not in git).
