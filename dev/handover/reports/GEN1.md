@@ -141,3 +141,16 @@ Look:
 - t1: outer robe edges rest ON the shoulders, shoulders covered, an ivory-edged soft V, outer robe now clearly held in by a bow sash; ivory inner top with a STRAIGHT top edge (no crossed collar) + small lilac band; embroidery is SPARSER than v2 (few lilac sprays on the upper body, bigger sprays + band at hem, lilac vine on cuffs); book; loose hair + one lilac.
 - t2: outer robe edge sits at/just over the shoulder points, the tops of the shoulders and collarbones bare (reads close to off-shoulder); ivory inner top straight-edged with a flower band; held in by the ivory sash + jade disc; larger tiger lilies, fewer, mostly low on the skirt and cuffs; one pink lily in hair; navy drum with a lily; wide skirt flare.
 - t3: outer edges rest around the shoulder points, shoulders mostly bare (slightly off-shoulder look); ivory inner top, straight edge, with a rose band; wide ivory girdle with rose + jade plaques/pearls/tassels, outer robe held in; roses mainly on collar/cuffs/hem bands (body mostly plain); ONE slim pin + a pink rose, hair mostly loose, no spiky crown; flute.
+
+# JOB L1600 — thu s62 t1–t3 v4 drafts (gpt-2-6 low 1k; CHECK1 PASS ×3 @cd26445)
+Pulled to 367e1a4 (cd26445 is an ancestor), files unchanged vs what CHECK1 passed: dev/art/dapung4/s62_t{1,2,3}_COMOI_v4.txt (9372 / 9979 / 9856 ch). check_store (tp1/tp2/tp3, a22, ref nVsrRMPYQD) PASS ×3 before each gen. gpt-2-6, quality low via extraSettings, 1k 9:16 (752x1344), seed 7172, ref nVsrRMPYQD only (no image 2 in these prompts). simulate exact 55 each, total 165 cr.
+| pic | creation | link |
+|---|---|---|
+| Thu t1 v4 | WDg3hsAcXe | https://www.magnific.com/app/creation/WDg3hsAcXe |
+| Thu t2 v4 | jUoHiBoLD0 | https://www.magnific.com/app/creation/jUoHiBoLD0 |
+| Thu t3 v4 | YMlimOIWeC | https://www.magnific.com/app/creation/YMlimOIWeC |
+Sheet dev/handover/review-sheets/thu_t13_v4_L1600/sheet.jpg (+ thu_tN_v4.webp), 'Thu tN · s62 · v4 · GPT 2.6 low · 55 cr' per picture + 'Tổng: 165 cr'. Viewed each picture once at 1024, not the finished sheet.
+Look:
+- t1: light plum outer robe open over a blush inner top with a straight SQUARE neckline + a small lilac band, edges on the shoulders (covered); blush bow sash tied OVER the outer robe so it is held in (the robe still opens below the sash and flares wide); sheer blush shawl over the arms; small lilac sprays on the upper body and vine on the front edges; one lilac in hair; book.
+- t2: same layered neckline, square inner top with a flower band; outer robe held in by a blush sash bow + jade disc; ONE wide blush front panel (single dải vạt) with a vertical tiger-lily vine down the skirt front, jade/pearl pendants beside it; pink-coral tiger lilies, one in hair; navy drum; sheer shawl.
+- t3: 3/4 right; square inner top with a rose band; wide blush girdle over the outer robe; TWO long blush front panels side by side with roses + jade/pearl pendants outside them; roses at hem + sleeves; ONE slim pin (raised hand) + pink rose, no spiky crown; flute; sheer shawl. Fault-ish: the plum skirt behind the panels is very wide and trails, like a bell.
