@@ -26,3 +26,6 @@ ref1 nVsrRMPYQD (remove-bg 1024×2304, flattened on white) | ref2 TdwDfOyVNR (ro
 ### Order 4 — JOB E L1749 · Phi tách nền (remove_background on white, 3 cr each = 6 cr)
 u5Wte79QLD → hu2doQavqL (752×1344) · EbYI8xvuuO → Lw8bk7cswO (1520×2688). Files review-sheets/han_phi_tachnen_L1749/{phi_cu_tachnen,phi_moi_tachnen,face_compare}.png (faces scaled to 1400 px high). Session total 796 cr.
 JOB E fix L1754 (0 cr): the Magnific cut-outs were made WITH backgroundColor #FFFFFF → RGBA but alpha 255 everywhere (no real transparency). Made phi_cu_trongsuot.png / phi_moi_trongsuot.png locally: flood-fill from the corners over near-white (≥245) → alpha 0, rest 255. RGBA, corners alpha 0. Hard edge, a few white specks (ear/tassel gaps). A clean soft-edged alpha = re-run remove_background WITHOUT backgroundColor (3 cr × 2 = 6 cr) — offered to foreman.
+
+### Order 5 — JOB F L1756 · Hán Thường tại from Phi
+dev/art/seasons4/s62_t2_HAN_THUONGTAI_fromphi_L1745.txt (HAN3 5be7551) unchanged · check_store tp2 a22: FAIL only M06/M07/S06 (owner-ordered đoạn fabric, waived by foreman) · no "image 2" → ref nVsrRMPYQD only · gpt-2-6 2k medium 9:16 seed 7172 → nVsiA1bYQD · 135 cr · sheet review-sheets/han_thuongtai_L1756.png (vs Phi EbYI8xvuuO). Session total 931 cr.
