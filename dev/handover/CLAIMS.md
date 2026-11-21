@@ -641,3 +641,6 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | RUNNING | 21/11 03:50Z |
+| REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
+| REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
+| bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
