@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const path=require('path');
     const m=Q[0];const txt=document.querySelector('#modal').innerText;out.shown.push(m.t+' :: …'+m.h.replace(/<[^>]*>/g,'').slice(-90));
     if(m.opts&&m.opts.length>1&&!svFramed(m.h))out.bad.push(m.t+': '+m.h.slice(-120));try{chooseM(0)}catch(e){}Q.length=0;$("modal").hidden=true}}
   /* static: every arc beat text through fill67 + svFrame */
-  for(const id in ARC67){const a=ARC67[id];out.arcs++;let A;try{A=newThread67(id,"x")}catch(e){continue}for(const bk in (a.B||{})){const bd=a.B[bk];if(!bd||!bd.t)continue;let h;try{h=fill67(bd.t,A)}catch(e){continue}out.beats++;
+  for(const id in ARC67){const a=ARC67[id];out.arcs++;let A;try{A=newThread67(id,"x")}catch(e){continue}for(const bk in (a.B||{})){const bd=a.B[bk];if(!bd||!bd.t)continue;let h;try{h=fill67(bd.t,A)}catch(e){continue}out.beats++;if(/\{\w+\}|undefined/.test(h))out.bad.push(id+'.'+bk+': token left: '+h.slice(0,90));for(const o of [].concat(bd.o||[])){if(!o||typeof o!=='object')continue;for(const k of ['n','rt','rf','wx','lx']){if(typeof o[k]!=='string')continue;let x;try{x=fill67(o[k],A)}catch(e){continue}if(/\{\w+\}|undefined/.test(x))out.bad.push(id+'.'+bk+'.'+k+': '+x.slice(0,90))}}
    const f=svFrame(h);if(f===h&&!svFramed(h)){if(/<(?:div|p|table|ul|ol|h\d)\b/i.test(h))out.skipHTML++;else out.unframed++}}}
   return out});
  console.log(r.shown.slice(0,8).join('\n'));console.log(`arcs ${r.arcs} beats ${r.beats} unframed ${r.unframed} skipHTML ${r.skipHTML} live-bad ${r.bad.length} errors ${errs.length}`);

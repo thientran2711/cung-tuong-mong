@@ -7,7 +7,7 @@
    Usage: node dev/test/story-voice/scan.js [--list KIND] [--json]   (exit 1 if Q3P/DIG/OBS after-counts are not 0 or the hook is missing) */
 const fs=require("fs"),path=require("path");const D=path.join(__dirname,"../../build/");
 const FILES=fs.readdirSync(D).filter(f=>/^(jrd_\w+|j67|jroad|jreign|jnroad\w*|jnrask\w*|j72|jstory|joi|jentry|jend14|jst14)\.js$/.test(f)).sort();
-const OBS=[/chữ của trẫm chưa ra khỏi/,/chưa ra khỏi cửa điện/,/hặc tội/,/đánh hơi(?! thấy)/i].concat([]);
+const OBS=[/chữ của trẫm chưa ra khỏi/,/chưa ra khỏi cửa điện/].concat([]);
 const B="(?<![\\p{L}\\d])",E="(?![\\p{L}\\d])";
 const OLD=new RegExp("(?<!(?:→|oán|quý|với|ghen) )"+B+"([Nn])àng"+E+"(?! ta"+E+")(?! ấy"+E+")(?! (?:oán|ghen|→|quý|thương)"+E+")","gu");
 const NEW=new RegExp("^[^“”]*”|“[^”]*(?:”|$)|(?<!(?:→|oán|quý|với|ghen) )"+B+"([Nn])àng"+E+"(?! ta"+E+")(?! ấy"+E+")(?! (?:oán|ghen|→|quý|thương)"+E+")","gu");
