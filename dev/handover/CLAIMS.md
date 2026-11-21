@@ -823,3 +823,4 @@ kit-mark-fix rv3 | review/kit-mark-fix-rv3 db138921 | rv session | PASS | 21/11
 kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text clipped) | 21/11
 | REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
 | ban-cung (owner mark #53 / GAP M53; MAIN 86 03:45Z order; history expert + real odds, opus) | review/ban-cung | D #14 | session_01964izDzJ9DZJRZ4MUStHk6 | RUNNING | 21/11 09:14Z |
+| KIT KEEPER #2 (OPUS; successor of MtjP at 78 %) | review/kit-focus; reports/kit-keeper-2.md | MAIN CHÍNH 92 | session_01Rc5AsMF9SLrWM4NQM9zGGz | RUNNING | 21/11 09:21Z |
