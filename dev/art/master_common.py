@@ -278,6 +278,86 @@ B29_S_CREPE = "The FABRIC is thin, light, flowing matte silk crepe (lụa tơ t�
 B29_S_SCOPES = {"maid"}
 
 
+# L2119 VÂN KIÊN + NO CAPE (BUILDFIX5, ROOT-B3 GO 21/11 after owner L2119 verbatim: "Hoàng Quý Phi á, là vẫn là Vân Kim một tầng khổ quá, vẫn bỏ chữ cứng,
+# bỏ áo choàng đó. ..." + owner L2105 "... đừng có đề cập là tới cứng nữa, chỉ đơn giản là nhắc nó là chia ra khỏi vai là được ..."):
+# t7 HQP vân kiên = ONE tier (L2099/L2119); t7/t8 vân kiên: no STIFF / STIFFER / 'never hugging them' (L2105); t6-t8: no 'cape' garment word (L2119).
+# NOT fabric, NOT waist, NOT chest, NOT angle/pose (A54/A55). ONE copy, used by build_all (l2119_post) and check_store (store swap).
+L2119_SWAPS = [   # (old, new, ranks)
+ ("TWO-TIER cloud collar (vân kiên hai tầng)", "SINGLE-TIER cloud collar of ONE layer only (vân kiên một tầng)", (7,)),          # thu t7 (L2099/L2119)
+ ("a little LONGER and STIFF, standing slightly OUT past the shoulders, never hugging them", "a little LONGER, extending slightly OUT past the shoulders", (7,)),   # L2105
+ ("LONGER and STIFFER, standing clearly OUT past the shoulders, never hugging them", "LONGER, extending clearly OUT past the shoulders", (8,)),                     # L2105
+ ("NEVER on the robe, cape, collar or belt", "NEVER on the robe, collar or belt", (6, 7, 8)),                                     # L2111/L2119 gem line
+ ("a jewelled cloud-collar cape edged with", "a jewelled SINGLE-TIER cloud collar of ONE layer only (vân kiên một tầng) edged with", (7,)),   # root/xuân/hạ/đông t7
+ ("lying flat on the cloud-collar cape", "lying flat on the cloud collar", (7,)),
+ ("of the robe, cape and sleeves", "of the robe, cloud collar and sleeves", (7,)),
+ ("trims along the cape edges", "trims along the vân kiên edges", (7,)),                                                          # = S14_VK form (G67)
+ # t6 root/xuân/hạ/đông (ROOT-B3 answer (a) 21/11): the SHORT shoulder capes are named as the TWO-TIER cloud collar (vân kiên hai tầng), same shape/size words
+ (" SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer,", " SHORT TWO-TIER cloud collar (vân kiên hai tầng), one tier over the other (the upper tier shorter, the lower tier a little longer,", (6,)),
+ ("a pearl-edged collar and cape trim", "a pearl-edged collar and cloud-collar trim", (6,)),
+ ("sleeves, cape and train", "sleeves, cloud collar and train", (6,)),
+ ("of the robe, sleeves and any cape,", "of the robe, sleeves and cloud collar,", (6, 7, 8)),                                        # = thu_ladder.T6_COLOUR
+]
+
+
+def l2119_post(text, rank):
+    """builder: t6-t8 (any season) vân kiên / cape words -> owner L2105/L2119 words. -> (text, notes)."""
+    notes = []
+    if not (isinstance(rank, int) and 6 <= rank <= 8): return text, notes
+    for old, new, rr in L2119_SWAPS:
+        if rank in rr and old in text: text = text.replace(old, new); notes.append("L2119 " + new[:28])
+    return text, notes
+
+
+# B32 THU FABRIC ONE FOR ALL RANKS (owner L2122 CHỐT verbatim: 'mùa thu giữ cái loại vải y chang như là từ cái bậc đáp ứng trở lên á, là dùng vải gì là lên tới
+# hoàng hậu Quý Phi, dùng y chang cái vải đó cho tao. Chỉ có triều phục là mới dùng gấm thôi, là dùng gấm nhẹ thôi.'; ROOT-B3 item 5, BUILDFIX5):
+# THU thường phục t6-t8 = EXACTLY the t1-t5 thu fabric sentence (master M06) in the BROCADE slot + outfit noun 'robe of thin, light, flowing <colour> silk'.
+# Root / xuân / hạ / đông UNCHANGED. Triều phục keeps its own brocade (no light-gấm constant wired: see BUILDFIX5.md).
+def b32_swaps():
+    m06 = sentences()[ids().index(M06_ID)]
+    return [(BROCADE, m06, (6, 7, 8)),
+            ("a HEAVY silk brocade robe in SATURATED ", "a robe of thin, light, flowing SATURATED ", (6,)),
+            ("a near-empress ceremonial robe of ", "a near-empress robe of thin, light, flowing ", (7,)),
+            ("imperial phoenix ceremonial robe of ", "imperial phoenix robe of thin, light, flowing ", (8,)),
+            (", matching the weight of her brocade", "", (6,))]
+
+
+def b32_post(text, rank):
+    """builder, season THU only (caller checks): t6-t8 brocade fabric + outfit noun -> the t1-t5 thu fabric words. -> (text, notes)."""
+    notes = []
+    if not (isinstance(rank, int) and 6 <= rank <= 8): return text, notes
+    for old, new, rr in b32_swaps():
+        if rank in rr and old in text: text = text.replace(old, new, 1); notes.append("B32 thu fabric " + (new or "drop")[:24])
+    return text, notes
+
+
+def thu_b32(prompt, scope):
+    """gate: a thu thường phục t6-t8 prompt (no WINTER) carrying M06 in place of BROCADE (B32)."""
+    m06 = sentences()[ids().index(M06_ID)]
+    return scope in ("tp6", "tp7", "tp8") and "WINTER:" not in prompt and m06 in prompt and BROCADE not in prompt
+
+
+def new_words_unswap(prompt):
+    """store gate helper: the prompt with the L2119 / B32 new words put back to the old store words (for slot regexes written on the old words)."""
+    for old, new, rr in sorted(L2119_SWAPS + b32_swaps(), key=lambda x: -len(x[1])):   # longest new words first (one new form may hold another)
+        if new and new in prompt and old not in prompt: prompt = prompt.replace(new, old)
+    return prompt
+
+
+def b32_store_swap(store, prompt, scope):
+    """store gate: for a B32 thu t6-t8 prompt the store's brocade words are read as the B32 words."""
+    if not thu_b32(prompt, scope): return store
+    for old, new, rr in b32_swaps():
+        if old in store and old not in prompt and (not new or new in prompt): store = store.replace(old, new, 1)
+    return store
+
+
+def l2119_store_swap(store, prompt):
+    """store gate: the store's old vân kiên / cape words are read as the L2119 words when the prompt carries the new form."""
+    for old, new, rr in L2119_SWAPS:
+        if old in store and old not in prompt and new in prompt: store = store.replace(old, new)
+    return store
+
+
 def b29_alts(scope, high=False, doan=False, winter=False):
     """B29: the alternative fabric sentences accepted for this scope (empty = only the old slot sentence)."""
     if high: return [B29_C_GAM]

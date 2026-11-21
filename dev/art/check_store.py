@@ -773,7 +773,7 @@ def hqp_store(store,prompt):
     for short in (False,True):
         rx=re.escape(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ").replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
         pm=re.search(rx,prompt)
-        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:
+        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:   # BUILDFIX5: + the L2119 one-tier vân kiên form
             return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
     return store
 def thu_fabric_waiver(text, scope):
@@ -813,9 +813,12 @@ def store_check(pf, prompt, args):
         rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
-    store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
+    if scope_from_store_args(args) in ("tp6","tp7","tp8"): store=master_common.new_words_unswap(store)   # BUILDFIX5: the season store text already carries the L2119/B32 words (season_post) -> old words first; swapped back below
+    store=hqp_store(store,master_common.new_words_unswap(prompt))   # HQP COLLAR (L1384)   # BUILDFIX5: slot regex on the old words (L2119/B32 new words put back first)
     store=re.sub(r"(?:,|;) a sheer silk shawl(?=[;.,])","",store)   # G36 (owner L1446): the store shawl words are optional (builder xuân/đông drop them)
     _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
+    store=master_common.b32_store_swap(store,prompt,_sc)   # BUILDFIX5 B32 (owner L2122): thu t6-t8 brocade store words read as the t1-t5 thu fabric words
+    store=master_common.l2119_store_swap(store,prompt)   # BUILDFIX5 L2105/L2119: old vân kiên / cape store words read as the new words when the prompt has them
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -1330,7 +1333,9 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     import winter_g28; _winter = winter_g28.is_winter(text)   # SEASON đông: G26 fur sentence present -> winter twins (W*) replace S06/S12, M06 in its G28 form
     _doan = master_common.doan_scope(scope)
     if _doan and thu_fabric_waiver(text, scope): _doan = False; warns.append(("B26", "THU WAIVER", "thu t4/t5: approved thin-silk FABRIC words (L2041/L2050 pictures) kept, B26 satin đoạn waived (ROOT-B2 answer 1, 21/11)"))
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=_doan, scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    _high = master_common.high_scope(scope)
+    if _high and master_common.thu_b32(text, scope): _high = False; warns.append(("B32", "THU FABRIC", "thu t6-t8 thường phục: the t1-t5 thu fabric sentence (M06) stands in the brocade slot (owner L2122 CHỐT)"))
+    for k, kind, d in master_common.check(text, high=_high, female=not master_common.male_scope(scope), winter=_winter, doan=_doan, scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
@@ -1347,6 +1352,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e["id"] in ("S24", "S16", "S19"):   # B26 length exception: S24 repeats master M13 (cut 5); B26FAB4: S16 / S19 tails cut by LEN_CUTS2 N1 / N2 (same-prompt repeats), only when needed
             _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
             if _k in _made: continue
+        if e["id"] == "S07" and master_common.thu_b32(text, scope): continue   # BUILDFIX5 B32 (owner L2122 CHỐT): thu t6-t8 thường phục carry the t1-t5 thu fabric sentence, not brocade
         if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
         if e["id"] == "S14" and (slot_rx(S14_L1794).search(text) or slot_rx(S14_VK).search(text)): continue   # owner L1794: jade/pearl/gold-only HQP luxury form stands in the S14 slot (A46)
         if e["id"] in W_L1803 and any(slot_rx(f).search(text) for f in W_L1803[e["id"]]): continue   # owner L1803: thicker-fur ladder forms (t1-t3 x2, t4-t6 x4, t7 a little thicker, t8 sheet sentence) stand in the W01/W02/W03 slots

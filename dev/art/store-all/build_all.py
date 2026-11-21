@@ -681,6 +681,8 @@ def season_post(S,person,season,strict=True):
         S,k=re.subn(r"\("+re.escape(m)+r", NOT green\)","("+m+")",S)
         if k: notes.append("season: NOT green dropped (green main)")
     if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=8: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
+    sys.path.insert(0,ART); import master_common as _MCv; S,_vk=_MCv.l2119_post(S,_SP_RANK[0]); notes+=_vk
+    if season=="thu": S,_b32=_MCv.b32_post(S,_SP_RANK[0]); notes+=_b32   # BUILDFIX5 B32 (owner L2122 CHỐT): thu t6-t8 = the t1-t5 thu fabric words   # BUILDFIX5 L2105/L2119: again after the thu ladder words (they carry TWO-TIER / STIFF / cape)
     if season=="thu" and strict:
         for bp in THU_TRIMS+THU_TRIMS_RANK.get(_SP_RANK[0],()):   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
             if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
@@ -740,7 +742,7 @@ def thu_sentences(S,person,rank,strict=True):
         m=_sent_rx(kind).search(S)
         if m: S=(S[:m.start()]+S[m.end():]).replace("  "," "); notes.append("thu ladder DROP "+kind)
     if rank==4: S=THU.capelet_thu(S); notes.append("thu L2041 CAPELET CUT (open front)")
-    if rank==6: S=THU.colour_t6(S); notes.append("thu L2088 COLOUR RULE cloud collar; refs "+" + ".join(THU.refs(6)))
+    if rank==6: S=THU.colour_t6(S); notes.append("thu COLOUR RULE cloud collar (no cape, L2119); refs "+" + ".join(THU.refs(6)))
     if rank>=7: notes.append("thu refs "+" + ".join(THU.refs(rank)))
     return S,notes
 def _build_season2(person,rank,age,season):
@@ -774,6 +776,7 @@ def eyes(S):
 def build(person,rank,age="a18",_season=None):
     global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
+    sys.path.insert(0,ART); import master_common as _MCv; S,_vk=_MCv.l2119_post(S,rank); add=add+_vk   # BUILDFIX5 L2105/L2119: t7 one-tier vân kiên, no stiff, no cape (t6-t8)
     _m=b26_fit_ok(person,rank,age,_season)
     if _m and len(S)>10000 and _season in (None,"dong"):   # BUILDFIX2: xuân/hạ/thu fit once, after their season words (_build_season2)
         _T,_a=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))

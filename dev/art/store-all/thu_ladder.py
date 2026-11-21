@@ -8,16 +8,16 @@ s62 (main + secondary colour, F2 flower species of the rank, hair-flower colour,
 build_all.season_post (season thu, t1-t5) puts them in place of the builder's sentences of the same kind, filled with HER slots:
   main/sec = palettes_season.json thu names EXACT; species = build.py F2_FL (hairflower_species); hair colour = F20 hair_by_tier tN (f20_name).
 t4 CAPELET CUT: the approved L2041 form drops the throat-clasp / long-V clause (capelet open at the front); her own lower-edge shape stays.
-t6 QP = s62_t6_THU_vankien2_L2088 (VE12, owner L2088), t7 HQP = L2050, t8 HH = L2023 (BUILDFIX3) + refs(k)."""
+t6 QP = s62_t6_THU_vankien2_L1893 (approved eIPcGThdqL; BUILDFIX5 revert of the L2088 test), t7 HQP = L2050, t8 HH = L2023 (BUILDFIX3) + refs(k)."""
 import os, re
 ART = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = {1: "s62_t1_THU_fix_L2008.txt", 2: "s62_t2_THU_fix_L1847.txt", 3: "s62_t3_THU_fix_L1978.txt",
        4: "s62_t4_THU_L2041.txt", 5: "s62_t5_THU_L2050.txt",
-       6: "s62_t6_THU_vankien2_L2088.txt",   # BUILDFIX3: t6 QP = VE12 L2088 words (owner L2088 direction: SMALL slim two-tier collar, image 3 = collar crop YMl2p0yWeC)
+       6: "s62_t6_THU_vankien2_L1893.txt",   # BUILDFIX5 (ROOT-B3 item 4, owner L2119 'gỡ hết' + A55): t6 QP = the APPROVED L1893 words (picture eIPcGThdqL, G63 frozen copy THU_QP_t6_L1933_FROZEN.txt); was VE12 L2088 TEST words + ref YMl2p0yWeC
        7: "s62_t7_THU_vankien2_L2050.txt",   # BUILDFIX3: t7 HQP = L2050 (owner L2050: no second yellow collar; ROOT G67 'vân kiên edges'), refs image 2 swatch + image 3 collar kseQCFw16B
        8: "s62_t8_THU_vankien2_L2023.txt"}   # BUILDFIX3: t8 HH = L2023 (lJt1uiYgv9 words), same refs
 # reference images per rank in the gen path (image 1 = HER OWN KC_REFS cut, never s62's); t6 QP owner L2066/L2088: image 2 royal-yellow swatch, image 3 collar crop (shape only)
-REFS = {6: ["<her KC_REFS cut>", "TdwDfOyVNR", "YMl2p0yWeC"], 7: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"], 8: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"]}
+REFS = {6: ["<her KC_REFS cut>", "TdwDfOyVNR"], 7: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"], 8: ["<her KC_REFS cut>", "TdwDfOyVNR", "kseQCFw16B"]}
 def refs(k): return REFS.get(k, ["<her KC_REFS cut>"])
 KINDS = ("Outfit (", "Hair: ", "HAIR FLOWER SIZE: ", "NO BIG FLOWERS: ")
 # per-rank sentence kinds (default KINDS): t7 its own COLOUR RULE + HQP LUXURY sentence; t8 HH carries its COLOUR RULE inside the Outfit sentence
@@ -43,7 +43,8 @@ S62 = {
  5: [("deep rose-pink double hollyhock", "{hc} {hsp}"), ("double hollyhock medallions", "{sp} medallions"), ("double hollyhocks", "{spl}"),
      ("light olive and lilac", "{main} and {sec}"), ("(light olive)", "({main})"), ("light olive silk", "{main} silk"),
      ("embroidered light olive SINGLE-tier", "embroidered {main} SINGLE-tier")],
- 6: [("ivory-white formal double camellia with a soft pink blush", "{hc} {hsp}"), ("formal double camellias", "{spl}"), ("camellia sprigs", "{sp} sprigs"),
+ 6: [("ivory-white formal double camellia with a soft pink blush", "{hc} {hsp}"), ("formal double camellias", "{spl}"),   # BUILDFIX5: L1893 base has no 'camellia sprigs' (that pair was for the L2088 test words)
+    
      ("light olive and lilac", "{main} and {sec}"), ("light olive silk", "{main} silk"), ("light olive TWO-TIER", "{main} TWO-TIER"),
      ("light olive and gold thread", "{main} and gold thread"), ("lilac only as a small accent", "{sec} only as a small accent")],
  7: [("light olive silk like #9FB577", "{main} silk like {hex}"), ("deeper olive", "deeper {main}"), ("light olive", "{main}"), ("lilac", "{sec}")],
