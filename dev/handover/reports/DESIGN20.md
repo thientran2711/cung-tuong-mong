@@ -76,3 +76,10 @@ GEN1 told to HOLD v7 (COMOIg/COMOIf). New shared clause **master_common.OUTER_WR
 - Files: **t4 v8 = thu_comoi/s62_t4_THU_COMOIh.txt (9 988)** (make_s62_t4_thu.py V8 stage) · **t5 v8 = thu_comoi/s62_t5_THU_COMOIg.txt (9 982)** (make_s62_t5_thu_v6.py --v8). Earlier outputs rebuild byte-identical.
 - Gates: tp4/tp5 a22 PASS; store only the Outfit exemption [0.70]/[0.73]; keep sidecars PASS, --all 280 PASS.
 - CONFLICT (not changed, A18/A39): approved S13 (t4 CAPELET CUT, gated) says "the outer robe closes only at the sash … opening gradually in a long soft V toward the hem" — so the outer robe parts again BELOW the sash; removing it = S13 FAIL. OUTER_WRAP therefore says "outer robe fabric on both sides of the waist above and below the sash", not "closed to the hem". If the owner wants it closed down to the hem, S13 needs her update.
+
+## JOB 5 — t5 v9 (Foreman C #15 01:58Z: v8 draft = two hollyhocks in the hair + jade drop earrings) — 0 gens. Coordinator now Foreman C #16 (session_01D3E3NYgpZzskYx2Nvem9yW).
+**t5 v9 = dev/art/thu_comoi/s62_t5_THU_COMOIh.txt (9 975)** (make_s62_t5_thu_v6.py --v9, base COMOIg):
+- hair flower: "(never two)" → "(never two, never a pair, no cluster)" (words of the A38 trim list put back).
+- earrings: "a LARGER gold headdress with dangling gold tassels and jade pins" + " on the bun, none at the ears" (master EAR_SENT "Bare earlobes, no earrings." already present).
+- length: ", framing the bordered square neckline" (A38 repeat, gate-free) · "gold-edged " dropped from the front panels · "many small double hollyhocks over the robe and skirt" → "many small ones over the robe and skirt".
+- Gates: tp5 a22 PASS; store only the Outfit exemption [0.73]; keep sidecar PASS, --all 290 PASS. Older t5 outputs rebuild byte-identical. t4 v8 COMOIh unchanged.

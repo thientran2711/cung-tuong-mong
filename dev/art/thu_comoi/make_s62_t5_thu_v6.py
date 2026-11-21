@@ -14,7 +14,8 @@ sys.path.insert(0, ART)
 from master_common import OUTER_IN, OUTER_TIED, OUTER_WRAP
 src = open(os.path.join(ART, "t8-prompt-B/build.py"), encoding="utf-8").read()
 EXTRA = eval(re.search(r'^CAPE5_V4_EXTRA=(".*?")\n', src, re.M).group(1))
-V8 = "--v8" in sys.argv   # v8 = COMOIg: + G40 WRAP clause (Foreman C #15 01:51Z after v6 drafts both_L1638), t4 capelet from COMOIh
+V9 = "--v9" in sys.argv   # v9 = COMOIh: v8 draft faults (Foreman C #15 01:58Z): two hair flowers -> exactly one; jade drop earrings -> nothing at the ears
+V8 = "--v8" in sys.argv or V9   # v8 = COMOIg: + G40 WRAP clause (Foreman C #15 01:51Z after v6 drafts both_L1638), t4 capelet from COMOIh
 V7 = "--v7" in sys.argv or V8   # v7 = COMOIf: t4 COMOIg capelet (cord across the chest, jade in the middle) + t3 apron panels/jade sets (Foreman C #15 01:39Z, G47)
 t4 = open(os.path.join(ART, "thu_comoi/s62_t4_THU_COMOI" + ("h" if V8 else "g" if V7 else "f") + ".txt"), encoding="utf-8").read()
 a = t4.index("a short round embroidered silk capelet"); END = "no cloud collar, vest or stiff shoulder pieces"
@@ -54,6 +55,13 @@ if V7:
         ("hem bands on the outer and the inner robe", "hem bands on outer and inner robe")]:
         assert s.count(x) == 1, x; s = s.replace(x, y)
     TRIM6 += TRIM7
+if V9:   # v8 draft: two hollyhocks in the hair + jade drop earrings
+    for x, y in [("in her hair (never two), BIG", "in her hair (never two, never a pair, no cluster), BIG"),   # words of the A38 TRIM list restored
+                 ("a LARGER gold headdress with dangling gold tassels and jade pins", "a LARGER gold headdress with dangling gold tassels and jade pins on the bun, none at the ears"),
+                 (", framing the bordered square neckline", ""),            # A38 repeat (layout of the front edges already given)
+                 ("(each a long vertical gold-edged blush panel", "(each a long vertical blush panel"),     # own words compacted
+                 ("many small double hollyhocks over the robe and skirt", "many small ones over the robe and skirt")]:
+        assert s.count(x) == 1, x; s = s.replace(x, y)
 if V8:
     for x, y in [(OUTER_TIED, OUTER_WRAP), ("outer robe worn OPEN at the front,", "outer robe open above the waist,"),
                  ("the skirt embroidered with large double hollyhock medallions", "large double hollyhock medallions on the skirt")]:
@@ -61,9 +69,9 @@ if V8:
 for x in TRIM6:
     assert s.count(x) == 1, x; s = s.replace(x, "")
 CAP = "Mùa Thu · Thiết kế hiện tại · Phi · 2 lớp choàng (Quý phi cũ) + lưới ngọc trai + cổ mở"; assert s.count(CAP) == 1
-s = s.replace(CAP, "Mùa Thu · Phi · v8" if V8 else "Mùa Thu · Phi · v7" if V7 else "Mùa Thu · Phi · v6")
+s = s.replace(CAP, "Mùa Thu · Phi · v9" if V9 else "Mùa Thu · Phi · v8" if V8 else "Mùa Thu · Phi · v7" if V7 else "Mùa Thu · Phi · v6")
 if "--raw" in sys.argv: print(s); sys.exit()
 if "--len" in sys.argv: print(len(s)); sys.exit()
 assert len(s) <= 9990, len(s)
-out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOI" + ("g" if V8 else "f" if V7 else "e") + ".txt")
+out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOI" + ("h" if V9 else "g" if V8 else "f" if V7 else "e") + ".txt")
 open(out, "w", encoding="utf-8").write(s); print(len(s), out)
