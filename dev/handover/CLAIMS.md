@@ -877,3 +877,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-relrows-ms | PASS | review/kit-relrows-ms-rv 1641927e314979c8119bf2402ffb5067b613deb0 | no-op on LIVE; works on rel-men-servants+patch; quickcheck+coop-e2e 94/94 |
 | REVIEW pet-bath-test (sonnet SMALL) of 211f71ae | review/pet-bath-test-rv | B | session_01N1tNP6F99Fy3kcZThzrtBR | RUNNING | 21/11 13:57Z |
 | RELAND dialog-person-3 r2 (sonnet SMALL reviewer-lander; MAIN 95 ORDER 13:50Z, kit-dialog-2 on LIVE f85cba97) | review/dialog-person-3-r2 | B | session_01N1tNP4AK8LdJ1WkY3Zv3Ys | RUNNING | 21/11 14:19Z |
+| COOP ROOM-FACES (opus BIG; ORDER MAIN 95 13:40Z; fidUsed union + picker greys room faces + friend personal holders in roomTaken) | review/coop-room-faces | D | session_01964izBkX79DBt4vJ5vYRrQ | RUNNING (depth 8, START_CTX ~3 %) | 21/11 14:30Z |
