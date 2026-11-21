@@ -14,7 +14,7 @@ LAB={1:"rank-1 consort (Đáp ứng), the lowest consort rank, elegant, never po
  8:"the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks"}
 SLV={1:"the sleeve body plain, ending in narrow embroidered cuff bands",2:"the sleeve body plain, ending in embroidered cuff bands",3:"with embroidered cuff bands and a few small flowers on the sleeves",
  4:"ending in broad embroidered cuff bands, the same flowers embroidered all over the sleeves",5:"with deep embroidered cuffs and a little more embroidery on the sleeves than the Tần",
- 6:"with deep embroidered cuffs and more embroidery on the sleeves than the Phi",7:"with deep gold-embroidered cuffs and rich embroidery on the sleeves",8:"with the deepest gold-embroidered cuffs and the richest embroidery on the sleeves of all ranks"}
+ 6:"with deep embroidered cuffs and more embroidery on the sleeves than the Phi",7:"with deep gold-embroidered cuffs and rich embroidery on the sleeves",8:"with the deepest gold-embroidered cuffs and the richest sleeve embroidery of all ranks"}
 EMB={1:"many SMALL lilac sprays spread over the whole garment, clearly more embroidery than any palace maid (light, sparse sprays in ivory white and fine gold thread)",
  2:"many small tiger lilies spread over the whole garment, clearly more embroidery than any palace maid (a little larger than at the lowest rank, in ivory white and fine gold thread)",
  3:"many small-to-medium semi-double China roses spread over the whole garment, clearly more embroidery than any palace maid (in ivory white and fine gold thread)",
@@ -37,7 +37,7 @@ FR={4:"a flat pearl-and-jade bead yoke over both shoulders with a short pearl fr
 HEAD={1:"pretty silver hairpins and a fresh flower (a lilac spray)",2:"silver and pearl hairpins and a fresh flower (a tiger lily)",3:"slim pearl hairpins and a fresh flower (a semi-double China rose)",
  4:"gold and jade hairpins with small dangling gold bu yao tassels",5:"a LARGER gold headdress with dangling gold tassels and jade pins",
  6:"a BIG ornate gold headdress with pearls, gold flowers and many gold tassels, grander than the Phi",
- 7:"a tall chignon with a LARGE ornate gold phoenix crown with pearl strands and a few gold tassels, simpler than the Empress's",
+ 7:"a tall chignon with a LARGE ornate gold phoenix crown with pearl strands and a few gold tassels",
  8:"a tall chignon with a LARGE ornate gold nine-phoenix crown (one central phoenix and eight small ones, the grandest of all ranks) with pearl strands and a few gold tassels"}
 YEL6=" plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders in honey-gold exactly the colour of image 2 (a colour swatch only, close to hex #F2BC61), much less yellow than an imperial noble consort's robe;"
 Y8="royal golden yellow"
@@ -49,7 +49,7 @@ WRAP={1:"the front panel crosses the body in ONE SHORT straight diagonal and end
  5:"the outer panel crosses in one straight diagonal and ends in ONE neat POINTED corner tail at the hip side, its edge bordered in gold",
  6:"ONE LONG sweeping diagonal across the whole skirt from the waist down to the opposite hem, ending in a narrow softly CURVED tip",
  7:"CURVED WRAP: the outer front panel sweeps in ONE wide CURVE across the front, covering the inner layer, whose edge shows under the curve; a curved hem edge",
- 8:"the longest, grandest CURVED WRAP: the outer front panel sweeps in ONE wide CURVE round to the back hem, covering the inner layer, whose edge shows under the curve; curved hem edge"}
+ 8:"the longest, grandest CURVED WRAP: the outer front panel sweeps in ONE wide CURVE round to the back hem, covering the inner layer, whose edge shows under the curve; curved hem"}
 def outfit(n):
     L=2; B=2 if n<=3 else (3 if n<=6 else 4)
     M,Sx,ms,ss=(PK,IV,"pink","ivory") if n<=3 else (P,S,"plum","pink")
@@ -66,11 +66,12 @@ def outfit(n):
     return o,B,M,Sx
 COLLAR="COLLAR AND SHOULDERS (every rank, exactly like the Phi): the wide crossed collar lies FLAT on top of both shoulders, its edges reaching almost to the shoulder points and dipping in one broad shallow V low at the chest; soft sloping shoulders; nothing covers the collar or shoulder line: loose hair falls BEHIND the shoulders, hands and held item stay below the collar, any bead yoke lies flat along the collar edge."
 JEWEL="JEWELLERY: every jewel SMALL and delicate, never chunky or showy; NO red anywhere (no red gems, beads or tassels), no faceted gems, no necklace."
+JEWEL78="JEWELLERY: only jade, pearls and gold, Chinese court style, all SMALL and delicate; red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants; no faceted or sparkling gems, nothing European, no necklace."
 ANG="ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn;"
 POSE={2:"Pose: standing poised, a small pale-jade lacquered pellet drum (trống lắc) with a jade handle, a deep drum with two pellets on cords of the same pale jade, not flat, held low at her waist, the robe hem stirring slightly.",
  6:"Pose: standing poised, one hand holding a pearl-embroidered silk ball (tú cầu) with pearl tassels low at her waist, a round stuffed ball, no handle, no stick, the robe hem stirring slightly.",
  7:"Pose: walking slowly, a closed kingfisher-feather gold silk parasol with a gold filigree handle and pearl tassels, held low at her side, the robe hem swaying gently with her step.",
- 8:"Pose: walking slowly, a round phoenix-embroidered silk fan with a gold phoenix handle set with pearls, held low at her waist, the robe hem swaying gently with her step."}
+ 8:"Pose: walking slowly, a round phoenix-embroidered silk fan with a gold phoenix handle, held low at her waist, the robe hem swaying gently with her step."}
 DUP=re.compile(r"Full-body standing figure head to feet[^.]*\. ")
 out={}
 for n in range(1,9):
@@ -143,17 +144,17 @@ for n in range(1,9):
     if n>=7:
         t=rep(t,"the crown, hairpin and jewellery gold in the same 18K tone; ","")
         t=rep(t,", outside the collar;",";")
-        t=rep(t,sent(t,"INNER LAYER EMBROIDERED"),"INNER LAYER EMBROIDERED: the inner robe and skirt are ALSO embroidered, more sparsely than the outer robe.")
+        t=rep(t,sent(t,"INNER LAYER EMBROIDERED"),"INNER LAYER EMBROIDERED: the inner robe and skirt are ALSO embroidered, more sparsely.")
         t=rep(t,"; WRAP CUT: ","; ")
-        t=rep(t,"NO red anywhere (no red gems, beads or tassels)","NO red on clothing, belt or pendants (small rubies only on the crown)")   # owner L1799
+        t=rep(t,JEWEL,JEWEL78)   # owner L1799 via #23
         t=rep(t,"the robe hem swaying gently with her step","the robe hem swaying gently")
     if n==7:
-        t=rep(t,sent(t,"HOÀNG QUÝ PHI LUXURY"),"HOÀNG QUÝ PHI LUXURY: more small cabochon rubies, pearls and jade on the phoenix crown than the lower ranks, long jade-and-gold belt pendants with pearl tassels, still clearly simpler and less golden than the Empress.")
+        t=rep(t,sent(t,"HOÀNG QUÝ PHI LUXURY"),"HOÀNG QUÝ PHI LUXURY: more jade, pearls, gold and a few smooth red gems on the phoenix crown, long jade-and-gold belt pendants with pearl tassels, still clearly simpler and less golden than the Empress.")
     if n==8:
         t=rep(t,"densely embroidered ALL OVER (not only the borders) with","densely embroidered ALL OVER with")
-        t=rep(t,sent(t,"EMPRESS LUXURY"),"EMPRESS LUXURY: more small cabochon rubies, pearls and jade on the phoenix crown than any lower rank, long jade-and-gold belt pendants with pearl tassels.")
+        t=rep(t,sent(t,"EMPRESS LUXURY"),"EMPRESS LUXURY: more jade, pearls, gold and a few smooth red gems on the phoenix crown, long jade-and-gold belt pendants with pearl tassels.")
         t=rep(t,"light clear warm plum silk like #DF9ED9 is the MAIN colour of the robe and sleeves, with bright blush pink in the inner robe and linings; yellow as the LARGEST yellow parts of all ranks (the yellow collar band, wide yellow borders and a wide yellow sash) in rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold",
-              "light clear warm plum silk like #DF9ED9, with bright blush pink in the linings; the royal golden yellow is the DOMINANT colour of the over-robe, sleeves and skirt (more than half of all visible, the most of all ranks), her plum is the second colour (inner robe, collar edge, wide borders); the yellow is rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold")
+              "light clear warm plum silk like #DF9ED9, with bright blush pink in the linings; the royal golden yellow is the DOMINANT colour of the over-robe, sleeves and skirt (over half of all visible, the most of all ranks), her plum is the second colour (inner robe, collar edge, wide borders); the yellow is rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold")
         t=rep(t,"the royal golden yellow (honey-gold like #EFBD69), the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink","the DOMINANT royal golden yellow (honey-gold like #EFBD69), the second colour light clear warm plum and the third colour bright blush pink")
     f=D+f's62_t{n}_HAN_LADDER5_L1794.txt'; open(f,'w').write(t); out[n]=len(t)
 print(out)
