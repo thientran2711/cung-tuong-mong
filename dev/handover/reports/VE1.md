@@ -22,3 +22,6 @@ Order 2 total 385 cr; session total 790 cr.
 
 ### Order 3 — JOB D L1745 (0 gens) · han_refs sheet
 ref1 nVsrRMPYQD (remove-bg 1024×2304, flattened on white) | ref2 TdwDfOyVNR (royal_yellow_C2 swatch) | old 55 cr u5Wte79QLD (SAME Phi prompt, caption "Hoàng hậu", 1k low 752×1344, 21/11 05:58Z) | new 135 cr EbYI8xvuuO (2k medium). No s62_t5_HAN_BAC entry in gen_ledger.jsonl; found u5Wte79QLD via creations_search. Sheet review-sheets/han_refs_L1745.png
+
+### Order 4 — JOB E L1749 · Phi tách nền (remove_background on white, 3 cr each = 6 cr)
+u5Wte79QLD → hu2doQavqL (752×1344) · EbYI8xvuuO → Lw8bk7cswO (1520×2688). Files review-sheets/han_phi_tachnen_L1749/{phi_cu_tachnen,phi_moi_tachnen,face_compare}.png (faces scaled to 1400 px high). Session total 796 cr.
