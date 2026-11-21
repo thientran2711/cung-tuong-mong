@@ -1948,3 +1948,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:04Z) duodo-focus N9Yc ROLLED (4f759a76; kitFocus wired, 4 kit faults sent to keeper) → opened OPUS successor session_01Rc5AsLtG4rLx87Rv3pd1ej; N9Yc ARCHIVED. Keeper order: kit-badge fix → kit-focus 4 faults → K-OPT-KEM.
 - (09:09Z) rv MSxp FAIL kit-focus 05332db8 (merged base afd85abf): all owner words match EXCEPT Fold fan button 64 px fixed → long act names wrap 5 lines, clipped (= duodo fault #4) → keeper fixes (line-clamp 2 + sub-line, test on button box with long names); nit iPad SAY box covers legs/name plate. Keeper queue: kit-badge → kit-focus faults → K-OPT-KEM.
 - (09:11Z) keeper SSK K-OPT-KEM 79a5a451 (review/kit-opt-kem) → rv MSxp (verify Sủng sg() display==applied claim). Keeper re-told: report to 92; kit-badge fix NOW, then kit-focus fix.
+- (09:14Z) mg-intro-2 Ji75 SSK 570ec621 (re-merge on 74cea8bf) → opened SONNET SMALL rv session_01Rc5AsMBXtN7JoHpTB9zpvY (review/mg-intro-2-rv3). Pre-existing LIVE mg-noword-kit FAIL 3 kinds → ORDER B.
+| REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
