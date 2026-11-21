@@ -794,4 +794,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW maid-8tabs (BIG opus) 7d68436b (#32–#36) | review/maid-8tabs-rv; briefs/main89-rv-maid-8tabs.md | MAIN CHÍNH 89 | session_01Rc5AsMYd9YDaGJ8Zvocx99 | RUNNING | 21/11 06:09Z |
 | B-LANDER successor (opus; perf-ci → ge-npc → kc-fail-effects) | review/main84-land-*; reports/main84-lander.md | MAIN CHÍNH 89 | session_01Rc5AsKQsGmhYdKRJ3xPkSq | RUNNING | 21/11 06:17Z |
 | E39 self-word (E39r follow-up 1) | review/self-word; reports/self-word.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | SSK 2030714f | 21/11 06:40Z |
-| duodo-focus (OPUS BIG; owner OD 21/11 ~06:20Z + ~06:50Z: Dư đồ focus view + every act = on-figure mini-game) | review/duodo-focus; briefs/main90-duodo-focus.md; reports/duodo-focus.md | MAIN CHÍNH 90 | (opening) | RUNNING | 21/11 06:58Z |
+| duodo-focus (OPUS BIG; owner OD 21/11 ~06:20Z + ~06:50Z: Dư đồ focus view + every act = on-figure mini-game) | review/duodo-focus; briefs/main90-duodo-focus.md; reports/duodo-focus.md | MAIN CHÍNH 90 | session_01Rc5AsN9YcB3r7aJt7LGx7R | RUNNING | 21/11 06:58Z |
