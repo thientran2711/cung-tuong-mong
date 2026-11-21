@@ -152,7 +152,7 @@ function kitCourtRows(){const out=[];if(!S||S.dead)return out;const mood=w=>{try
 function kitCourtHTML(cls){const R=kitCourtRows();if(!R.length)return"";const v=(x,l)=>x?`<span class="ef ${x[1]==="g"?"g":x[1]==="r"?"r":"n"}">${x[0]}</span>`:`<span class="ef n">chưa rõ</span>`;
  return `<div class="kcourt ${cls||""}"><b class="khh">Trong cung</b>`+R.map(r=>`<button class="kcrow" data-kc="${r.k}" title="Chạm để xem thẻ ${r.who}">${mdH(r.f,"xs")}<span class="kcn">${r.who}</span><span class="kcv"><small>Tâm trạng</small>${v(r.mood)}<small>Với ngươi</small>${v(r.att)}</span></button>`).join("")+`</div>`}
 function kitCourtOpen(k){try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;if(k==="emp"){showEmp();return}
- const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=rivals.indexOf(q);if(i>=0)PG.rv=i}
+ const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=typeof rvPgOf==="function"?rvPgOf(q):rivals.indexOf(q);/* strip position (j27 groups the strip by palace) */if(i>=0)PG.rv=i}
  const b=document.querySelector(`[data-tab="${tb}"]`);if(b)b.click();else{tab=tb;render()}}catch(e){console.error("kitCourtOpen",e)}}
 addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b||e.target.closest("img.kemo"))return; /* a tap on the mood seal = its popover (jemo), not the card */e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
 function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt");const land=kitView().pages===2;
@@ -223,7 +223,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
   /* an unlabelled segment with no number after the effects = a reading of the moment ("ngài trọng tài, rất hợp") */
-  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&!/^(nàng|hắn|các|Thái hậu|Hoàng hậu|Hoàng thượng|chứng cứ)/.test(body)){M.notes.push(body);continue}
+  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&/^(ngài |an toàn$)/i.test(body)){M.notes.push(body);continue}/* K-OPT-KEM: ONLY the night «reading of the moment» (nx: «ngài …, rất hợp», «an toàn») is a note; every other number-less kèm / hỏng phrase («ít gặp Hoàng thượng», «chủ ít thấy mặt ngươi») is a real side effect and gets its row */
   for(const sc of body.split(/; /)){const P=[];for(const v of sc.split(/, (?![^(]*\))/)){const p=v.trim();if(!p)continue;if(P.length&&!/\d/.test(p)&&!/\d/.test(P[P.length-1])&&!/^(Sủng|Danh|Đức|Bạc|Sức|Ân tình|Thái hậu|Hoàng hậu|chứng cứ|nàng|hắn|các)/.test(p))P[P.length-1]+=", "+p;else P.push(p)}
    P.forEach(p=>M.items.push({p,l:lab||"thành"}))}}
  return M}
@@ -585,7 +585,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
   if(m.placeK)return r;/* kit-size #8 (place:tgk/ttp/night MIXED): a place card already carries its ONE place picture (headArt → kitOnePic); an inherited evId (cat:hinh-phat…) must never add a 2nd event picture */
   const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId||kitEvFitWant(m,kind);if(!want||body.querySelector(":scope > .kpsubj"))return r;
-  const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
+  const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,Object.assign({shape:"tall"},a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}))}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
 /* the result card right after an event choice shows the same picture, small, left of the rows */
 (function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
 (function(){const c0=closeModal;closeModal=function(){const m=Q[0];const r=c0.apply(this,arguments);try{if(!(m&&kitIsEventChoice(m)))window.__kitLastEvArt=null}catch(e){}return r}})();
@@ -618,15 +618,23 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
  return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
-  (o.mark?`<i class="ksart-mark" role="img" aria-label="${o.markAlt?String(o.markAlt).replace(/"/g,"&quot;"):""}" style="background-image:url('${String(o.mark).replace(/["'()]/g,"")}')"></i>`:"")+`</figure>`}
+    (o.tags&&o.tags.length?`<span class="ksart-tags">${o.tags.map(t=>`<em class="ksart-tag">${t}</em>`).join("")}</span>`:"")+(o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
+/* owner 21/11 (mood-seal-2, mark #68): the corner mark is the LIVE mood seal (img.kemo = the ONE kit seal part jemoseal: idle sway at once + the lean as the dialog opens, data-kemo-now); any other mark src stays a still <i> */
+function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec(String(mark));const a=alt?String(alt).replace(/"/g,"&quot;"):"";const u=String(mark).replace(/["'()]/g,"");
+ if(m)return `<img class="kemo kemo-${m[1]} ksart-mark" data-kemo-now="1" role="img" aria-label="${a}" alt="${a}" draggable="false" src="${u}" onerror="this.remove()">`;
+ return `<i class="ksart-mark" role="img" aria-label="${a}" style="background-image:url('${u}')"></i>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
+.ksart-tags{position:absolute;top:6px;left:6px;z-index:3;display:flex;flex-wrap:wrap;gap:4px;max-width:calc(100% - 12px);pointer-events:none}
+.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:nowrap}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */
-.ksart>i.ksart-mark{position:absolute;top:6px;right:6px;width:clamp(46px,24%,88px);aspect-ratio:1;background:center/contain no-repeat;z-index:3;filter:drop-shadow(0 1px 2px #000a);pointer-events:none}
-.ksart.ksart-thumb>i.ksart-mark{top:2px;right:2px;width:52%}/* owner 11/16 15:10Z 7.2: the round mood mark on picture corners a bit BIGGER (was 17 % / 40 %) */
+.ksart>i.ksart-mark,.ksart>img.kemo.ksart-mark{position:absolute;top:6px;right:6px;width:clamp(46px,24%,88px);aspect-ratio:1;background:center/contain no-repeat;z-index:3;filter:drop-shadow(0 1px 2px #000a);pointer-events:none}
+.ksart.ksart-thumb>i.ksart-mark{top:2px;right:2px;width:52%}
+html body .ksart>img.kemo.ksart-mark{position:absolute!important;inset:6px 6px auto auto!important;height:clamp(46px,9vmin,80px)!important;max-height:calc(100% - 10px)!important;width:auto!important;aspect-ratio:1!important;object-fit:contain!important;border:0!important;border-radius:0!important;margin:0!important;max-width:none!important;pointer-events:none!important;background:none!important}
+html body .ksart.ksart-thumb>img.kemo.ksart-mark{inset:2px 2px auto auto!important;width:52%!important;height:auto!important}/* owner 11/16 15:10Z 7.2: the round mood mark on picture corners a bit BIGGER (was 17 % / 40 %) */
 /* size "thumb" (tabs-kit r7, KIT 28.19): the same frame as a small square tile beside text (skill / chapter / empty cards): --ksth (64 px; 56 px
    on phones), 2 px mat, never stretched by its slot */
 .ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
@@ -832,11 +840,13 @@ function kitWearSlots(p,opts){try{if(!p||typeof wdSlots!=="function")return"";co
  return `<div class="kwear${opts&&opts.cls?" "+opts.cls:""}">`+L.map((x,i)=>kitItem({src:x.empty?"":kitItemSrc(x.k,x.icon),name:x.empty?x.name:x.name,grade:x.grade,empty:x.empty,size:(opts&&opts.size)||"sm",
   data:`data-kwear="${x.slot}" data-kwho="${me?"me":(p.id!=null?p.id:"")}" role="button" tabindex="0"`,tip:`${x.slot==="tram"?"Trâm cài":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}${x.giver?" · "+x.giver+" ban":""}`})).join("")+(lab?`<span class="kwearl">${kitItem({}).slice(0,0)}<span class="kitl kitl-${lab[1]}">${lab[0]}</span></span>`:"")+`</div>`}catch(e){return""}}
 function kitPersonByName(nm){nm=String(nm||"").replace(/<[^>]*>/g,"").trim();if(!nm||typeof S==="undefined"||!S)return null;if(nm===S.name)return S;
- const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (P||[]))if(v&&v.name===nm)return v;
+ const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (Array.isArray(P)?P:[]))if(v&&v.name===nm)return v;
  try{if(S.thO&&S.thO.name===nm)return S.thO}catch(e){}return null}
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;ev.stopPropagation();const sl=t.dataset.kwear,who=t.dataset.kwho;
  if(who==="me"){window.__kwdTab=sl;const b=document.querySelector('[data-tab="inv"]');if(b)b.click();return}
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===who))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===sl);if(!x)return;
+ /* bag-inline-3 F2: the inline strip (KIT §70.6 kinlWear) under the card, no pop-up */
+ if(typeof kinlWear==="function"&&kinlWear(t,v,sl))return;
  kitModal({kind:"info",title:`${sl==="tram"?"Trâm cài":"Y phục"} của ${v.name}`,facts:[{who:v,text:x.empty?x.name:`${x.name} · ${x.gradeName}${x.giver?" · "+x.giver+" ban":""}`},
   x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."],btn:"Đã hiểu"})},true);
 /* K1 on every person card: replace j92's temporary "Trâm: … / Y phục: …" chips with the slots under the portrait */
@@ -1185,3 +1195,12 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
+
+/* KIT 8.10 TAGS ON THE PICTURE (owner 21/11 mark #66 FINAL): a dialog whose queue item carries `qtags:[type, deadline]` shows those TWO words as tags on the TOP-LEFT of its event picture (kitSceneArt o.tags /
+   .ksart-tag); never a chip row. No picture in the dialog -> the two words become kit label|value rows (Loại | Hạn) at the top of its text. Runs on showModal and whenever the dialog is rebuilt. */
+function kitArtTags(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=m&&m.qtags;if(!t||!t.length)return;const mb=document.getElementById("mb");if(!mb||mb.querySelector(".ksart-tags,.kqtrows"))return;
+ const a=mb.querySelector(".ksart");if(a){a.insertAdjacentHTML("afterbegin",`<span class="ksart-tags">${t.map(x=>`<em class="ksart-tag">${x}</em>`).join("")}</span>`);return}
+ const rows=typeof kitRows==="function"?kitRows([["Loại",t[0]],["Hạn",t[1]]].filter(r=>r[1])):"";const tg=mb.querySelector(".kpsec")||mb.firstElementChild;if(rows&&tg)tg.insertAdjacentHTML("beforebegin",`<div class="kpsec kqtrows">${rows}</div>`)}catch(e){console.error("kitArtTags",e)}}
+window.kitArtTags=kitArtTags;
+(function(){const M=document.getElementById("modal");if(!M)return;setTimeout(()=>{const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitArtTags();return r}},0);
+ let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitArtTags()})}).observe(M,{childList:true,subtree:true})})();

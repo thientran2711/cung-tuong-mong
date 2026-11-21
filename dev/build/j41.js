@@ -29,9 +29,9 @@ function accName(k){try{return k==="home"?palName("home"):(typeof palName==="fun
 /* the full state of a map place for her right now: grey reason (access first, then khắc / confinement) */
 function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
- const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
+ const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
- if(k!=="home"&&!walkOk(tc))return{why:walkWhy(tc)};
+ if(!walkOk(tc))return{why:walkWhy(tc)}; /* the road home is a walk like any other (OD L1976) */
  return{why:"",tc}}
 function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${typeof j77When==="function"?j77When(tc+1):" buổi này"} · hỏng: Danh -${BAL.sneak.danh}, bị phạt`} /* replaced by j77; same words */
 function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào${typeof j77When==="function"?j77When(1):" buổi này"} · hỏng: không mất gì thêm`} /* replaced by j77 */
@@ -53,7 +53,7 @@ function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=
  spend(tc);apply({danh:-BAL.sneak.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -${BAL.sneak.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
 function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
- if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k==="home"?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
+ if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k===S.place?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
  else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, ${kSay({srv:"m"},S,"{goi}")} xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
  showModal();render()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]");if(s){e.preventDefault();e.stopImmediatePropagation();if(!s.disabled)accSneak(s.dataset.acsneak);return}

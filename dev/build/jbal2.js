@@ -268,6 +268,15 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
     while a p75 round is still inside the window at her matching board; xa keep .1 → .4 (same proposal); law 5: fast still falls as the board hardens. */
  blend:{w:.32,star:[.25,.55,.85]},
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+/* GAP MG11 (jmgx; owner OD 20/11 ~08:40Z scan, MAIN ROOT-79 16:25Z): the seven boards that joined «Thử tay» read the board ease like every kind (mgLev:
+   [value at ease 0 = hardest, value at ease 5 = easiest], linear). Each pair is set so the MIDDLE ease (BAL.mgTier.mid = 2, a rank-0 hoc board) gives the
+   board exactly as it was before MG11 (old typed numbers in brackets), so a matching play is unchanged and law 5 (harder as she climbs) / the Thử tay ladder move round it:
+   nghe.cross   ms a line takes to cross the screen (6500)          truyen.lim  ms per round (12000)      mac.lim  ms per round (10000)    thoico.lim  ms per round (8000)
+   thu_choi     ms = first step of the ball (820), dec = faster per tap (140), min = floor (420), n = taps (3)
+   thu_tam      k = strictness of «đều tay» (1.6: score 1 − k·sd/mean of the stroke lengths), n = strokes (5)
+   tuoi         f = × the pour pace BAL.shelf.plant.game.ms (1 = the old pace; bigger = slower water = easier) */
+Object.assign(BAL.mgTier.lev,{nghe:{cross:[5600,7850]},truyen:{lim:[10000,15000]},mac:{lim:[8500,12250]},thoico:{lim:[6800,9800]},
+ thu_choi:{ms:[700,1000],dec:[160,110],min:[370,495],n:[3,3]},thu_tam:{k:[1.9,1.15],n:[5,5]},tuoi:{f:[.8,1.3]}});
 /* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
    calibration ladder BAL.ag.mg2.cal.d (read at play time, no second number here); part = it ends once this share of the engine's rounds is done
    (round a/b: a−1 ≥ max(1, ceil(b·part))) or when the engine ends; ms = the longest it may run; back = the pause on «Xong» before the rules screen returns. */
@@ -438,6 +447,11 @@ Object.assign(BAL,{nroad:{
  org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
+ /* OR19 (OD:L1288, STORY_ROADS_PLAN §3.0): an NPC consort may be a foreign princess (Công chúa hòa thân) — rolled ONCE at game start (or on
+    arrival) with the SAME share as the player's pool: BAL.orig.ow.nc out of the consort origins of BAL.orig.ow (cnv = a servant, never a
+    consort), country by BAL.orig.br.nc; max = princesses of one country in one game (the player counts); faces = princess faces per country
+    (shared by player and NPC rolls, never the same face twice in one game; stand-in = her drawn face until the princess art ships) */
+ fp:{max:1,faces:3,no:["cnv"]},
  /* at most this many NPC roads have the player as their rival at one time */
  meMax:3,
  /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
@@ -1717,7 +1731,7 @@ BAL.tdCourt={giftAf:20,backs:40};
    stake.bac[R] = V, the value of a duel stake by the higher rank (law 5: rises with rank); band = an item stake's price within V·(1 ± band);
    val = the exchange rates the equal-value measure (dev/measure/pm-equal.js) uses: Danh in bạc (charity BAL.charity 35 bạc → Danh 5 + Đức 3),
          one point of someone's liking in bạc («Giúp đỡ nàng» 20 bạc → thiện cảm 10 both ways), oán, khắc, Sức. eqTol = the most two answers / stakes may differ (bạc).
-   duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
+   duel: (round C: the public Danh ± now comes from the real watchers, BAL.pm.eye) shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
    yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
    refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
    npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
@@ -1732,15 +1746,31 @@ BAL.pm={kc:1,luck:30,minLv:1,
  play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
  stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
  val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
- duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ duel:{shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
  refuse:{up:1},
- pub:["vuon","kn","tn"],
  mem:{pmplay:6,pmwin:10,pmyield:10},
  npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
 BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
 BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
+/* ROUND C (owner OD 20/11 ~01:00Z "Làm cả 4 luôn đi"; review/person-minigame-acts-c, jpma §C):
+   live = the co-op live board (Q-C2): tx = ms between two running-score sends, wait = ms the friend has to open the board / send her end before the
+     own-hand path, mv = ms of her silence on her Cờ turn before the AI takes her side with her own hand;
+   ky = the real 7×7 Cờ board (j5 gKy rules) in a person act: the white AI's noise = base − k·(opponent's duel score − her talent) − rankN·R, clamped
+     min..max (less noise = fewer blunders); tut = the noise of the guided round; guard = ms before an unfinished board ends; win / draw / lose[her longest
+     run] = her raw (0–10) for the result card and «Cùng chơi»;
+   eye = onlookers (real people at that place): max watchers counted, danh = Danh per watcher to the winner and from the loser (≤ danhMax), kinh = liking
+     of a watcher who likes the winner (≥ likeMin), ghen / oan = a watcher who resents the winner (spite ≥ spite): jealousy toward her / grudge toward an NPC;
+   lad = the per-art palace ladder: arts on the ladder, top = Danh each month for places 1..n, reach = how many places above an NPC may challenge,
+     gapW = weeks between two ladder challenges of one NPC, refuseDrop = places a refused ladder challenge costs (0: pm-equal law 2 — a drop made «Từ chối» worth
+     13 bạc less than «Nhận lời»), g = day-plan weight (need danh). One place is worth mean(top) Danh a month (pmPlaceBac); «Nhường» a place earns that much liking. */
+Object.assign(BAL.pm,{live:{tx:700,wait:45000,mv:90000},
+ ky:{base:120,k:3,min:10,max:220,rankN:8,tut:220,guard:1800000,win:10,draw:5,lose:[0,0,1,2,3,4],
+  ai:{w:[0,1,8,60,600,9000],atk:1.1,mid:3,midW:6,lvN:35,lvN0:10,think:420,endMs:600,loseMs:800}},/* ai = j5 gKy's own scoring (run weights, attack ×, centre pull) and pacing (ms), kept */
+ eye:{max:6,danh:1,danhMax:4,kinh:1,likeMin:20,ghen:3,oan:2,spite:3},
+ lad:{arts:["dan","co","ve","mua","tho","huong","banh","theu","dauho"],top:[3,2,1],reach:2,gapW:3,refuseDrop:0,g:{danh:5}}});
+Object.assign(BAL.pm.mem,{pmsaw:4,pmlad:8});
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
@@ -1750,6 +1780,38 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* jkcg (GAP OR01/OR06/OR08/OR14, review/outside-gaps; OUTSIDE_PLAN §6 §9 §11): fest = home festivals played as the real mini-game: raw 0..10 ≥ top = first
+   (Danh +danh[0]), ≥ ok = praised (+danh[1]), else Danh −danh[2]; skip = the quick option's score (same 5/10 as Phúc tuyển), bot = [base, spread] quick score;
+   sister moves sisP % of the time (+sis[0] when she lost, +sis[1] when she did well). vpSac / vpRare = the old kcFest gate to the Vương phi rare.
+   carry = palace entry: cap (each of Sắc/Tài/Tâm cơ/Đức/Sức at most cap over its home-road start; 0 = off). OUTSIDE_PLAN §9 asked +15, but the later
+   owner rule OD:L1287/L1288 (waiting must be worth the same months in the palace; BAL.kcv calibrated with dev/measure/kc2val.js WITHOUT a cap) wins:
+   kc2val home arm on this build (tt/muoi/thd/dtq, 3 lives each, 20/11) — a +15 cap would cut 49–91 Tư chất points per life (mean ≈ 77), so it is OFF; ldOld (Lời đồn ≥ → «lời đồn cũ» flag),
+   dad {mid,k} (Phụ thân thiện cảm − mid) × k added to «Nhờ cha dâng sớ» odds, danhK/danhMax/bacMax/sung (were typed in kcEnter).
+   home = letters/gifts from Mẫu thân while she is in the palace: p + (af − mid) × pk % a month unasked (giftShare % of them a gift), khac = khắc of each «Thư nhà» act, writeO / giftO base odds
+   (+ (af − mid) × k), writeBac / writeAf / lostDanh / askAf = the two «Thư nhà» acts, know = j61 intel depth, keep = letters listed, gifts = items home sends.
+   ld = «lời đồn cũ» event: p % a month; own (admit) / wit (mother's letter, witBac, witO odds, foe Danh −witFoe and Oán witOan, lose Danh −witLose) / wait.
+   Law 2 (review r1): writeBac 5→15, askAf 3→1 — writing (af +, a letter item Sức+10/Đức+2, true intel) dominated asking (af −, one gift item worth 6–30 bạc).
+   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
+BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
+ carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
+ ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
+ title:{tier:4,rare:6,quyRank:2,carry:1}};
+/* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
+   letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level,
+       burn = Tâm cơ for «Đọc xong đốt đi» (law 2, review r1).
+   gift: wait = turns until the visiting day, pickMax = items listed (newest first; 3 + «Thôi» = 4 options while the kit T3 frame crushes 5+ options on the Fold, KIT_REQUESTS 20/11 review r1), back* = the receiver's «Trả lại quà» (Đức gain, bond loss).
+   so: odds = o + house power*powK (+ father's liking - mid)*afK at home; pow = house power moved; rel = j55 relation between the two houses;
+       danh = the receiver's name gain on «Đội ơn», beDuc = its Đức loss (seen as one faction, law 3, review r1); noDuc = Đức for «Xin thôi»;
+       af / lost = the sender's price when it fails.
+   rumour: o odds, bac / suc = the two equal roads (law 2), n = Danh / Lời đồn moved, lost = the sender's Danh when traced, bond = tình hảo hữu;
+       fix = the receiver's answer to a bad rumour: o + her Danh*k, bac / suc roads (law 2), duc = «Mặc kệ» gain.
+   join: o + her Sủng*k = «Xin ban nàng về ở cung mình» odds, suc price, sung = loss when refused, bond / greet = tình hảo hữu.
+   kh = khắc each act costs (letter / gift / so / rumour); keep = list lengths, resend = seconds between relay resends. */
+BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:1,pickMax:3,bond:5,backDuc:1,backBond:4},
+ so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
+ rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
+ join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
 /* jkc3 HOME CHAPTERS (GAP OR03–OR10): the calendar of the home arcs, the roster people, the home events E9 / E15 / E28, the early roads.
    cal: o0 months to the first beat · gap [min, +roll] months between beats · tP odds of a turn beat · min beats an unopened arc needs · fin spare months before Sơ tuyển.
    win Lợi thế for the win ending of an arc with no fixed ending · scOdds odds per Lợi thế at a climax · plan.ke odds of «Kế mẫu» over «Hôn sự» when the mother lives.
