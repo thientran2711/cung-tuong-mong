@@ -860,3 +860,4 @@ kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
 | FOREMAN E #27 (opus; child of E #26, depth 8 LAST) | handover FOREMAN_E_STATUS | FOREMAN E #26 | session_01DgYSWm9AdaKw5vcJA3B9eS | DONE → handed to standby E #28 session_01DgYSWmZdYn5y3yDw6o778C 11:50Z | 21/11 11:44Z |
 kit-mark-fix rv4 | review/kit-mark-fix-rv4 123c4572 | rv session | PASS (re-merge) | 21/11
 | FOREMAN E #28 (opus; ex-standby, depth 0) | handover FOREMAN_E_STATUS | FOREMAN E #27 | session_01DgYSWmZdYn5y3yDw6o778C | RUNNING | 21/11 11:50Z |
+kit-g4-plate rv | review/kit-g4-plate-rv 42d5985e | rv session | PASS (flaky G4 reproduced under load, fixed) | 21/11
