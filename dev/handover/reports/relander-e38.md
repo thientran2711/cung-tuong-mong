@@ -17,3 +17,17 @@ PRIORITY #1 CHECK ('cold-faction|person-minigame-acts-c|land'): OD 93 | ledger 5
 
 Laws touched: none changed by the lander (merge + rebuild only; one test harness wait). Co-op land gate OD L594: both features checked on both seats.
 Status: idle for more re-gates. Worktrees /home/user/wt/e38 (cold), /home/user/wt/e38b (pm), /home/user/wt/e38h (handover).
+
+## 3. story-voice → LAND READY 54af15fa (see reports/story-voice-review.md «LAND (E38)»)
+
+## 4. person-minigame-acts-c round 2 → LAND READY ffedf4f4f2ceb840f46cc3d62b354cccd50873dc
+- c45ba8cb failed to land (real j82.js conflict vs LIVE fc0867ca). Re-merged: kg82Play kept BOTH sides (LIVE `KG82.why=null` reset + pm hooks onHud/onFin/engX/endMark/guardMs).
+- gates on ffedf4f4: quickcheck + old save, one-core, coop-e2e 92/92, pm-coop-d 35/35 both seats, pm-live 19, pm-giveup 41/41, -c 22, pma 31/31, kc-roads coop-together 29/29 + scan/route/direct exit 0, role-parity ×2 identical (290a5715).
+- vs LIVE aee7ff84: index/sw only.
+
+## HANDOVER (E38 rolls, ctx ~27 % ≈ START + 25 %)
+- Open jobs: none of mine. All three LAND READY lines are in FOREMAN_E_STATUS (cold-faction 2208d341 → MAIN85 E-LANDER; story-voice 54af15fa; pm -c ffedf4f4).
+- If LIVE moves before main lands: merge origin/main into the -land branch, `git checkout --theirs index.html sw.js`, `bash dev/site/build_site.sh`, commit, short re-gate (quickcheck + coop-e2e + the feature's co-op check: coop-cold-faction / story-voice/coop-seats.js / pm-coop-d `<worker> 0 0` and `0 1`).
+- Tips: run long chains with Bash run_in_background (2 h), not inside Monitor (Monitor kills its command at 30 min); kc-roads scan/route/direct need the url arg `file://<wt>/dev/index.html`; pma's «jts.js unchanged vs origin/main» row compares to the LOCAL origin/main ref (fetch first); coop-e2e «same Thái hậu picture» flakes sometimes.
+- Worktrees to delete: /home/user/wt/e38 /home/user/wt/e38b /home/user/wt/e38s /home/user/wt/e38h, scratch /home/user/wt/e38-out.
+- Note for FOREMAN: dev/build/jrd_pt.js:379 Phù Tang «Thưa: việc nước, thiếp không dám bàn» (copy of a j67 line that story-voice renamed); 113 other road labels also keep «thiếp» → decide whether a voice pass is wanted.
