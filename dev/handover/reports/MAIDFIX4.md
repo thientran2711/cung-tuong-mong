@@ -83,3 +83,12 @@ Gates: keep PASS ×2, check_store tp7/tp8 PASS ×2. Old pictures 0eUA2SkTfW / Cq
 - t6 QP frozen (THU_QP_t6_L1933_FROZEN, G63): one HEAVY brocade robe + square collar + flat two-tier vân kiên; NO open outer robe / cloak words → no outer layer (not edited).
 - Rule G67 added (rule.py, quoting her). Gates: keep PASS ×2, check_store tp7/tp8 PASS ×2 (t7 9974, t8 9967).
 - OWNER L1985: thu t8 HH vân kiên → "an embroidered royal golden yellow TWO-TIER cloud collar (never olive)" and the "second colour (collar, …)" list no longer names the collar. Two layers kept. keep/store PASS (9981). t7 HQP vân kiên = "light olive" = her MAIN colour, the same as the approved L1903 base. Not changed.
+
+## OWNER L1990 (via #27) — thu t7/t8 cleavage + full square-collar frame
+Words found (no word "cleavage" anywhere; the squeeze came from):
+- "a low straight SQUARE neckline edged by a pearl-edged gold band, neck and collarbones visible" (t7+t8) → "a SQUARE neckline at a modest height, its WHOLE outline (the band across the upper chest AND both side bands up to the shoulders) a wide pearl-edged gold-embroidered border; flat smooth chest, NO cleavage, no pushed-up bust;"
+- t7 clasp "…so below it the chest and square neckline stay open" → "…the embroidered square collar fully visible below it"; t8 "split open below it, the square neckline left open" → "the embroidered square collar fully visible below it".
+- t7 "strands of pearls swagged across the chest from the left collar edge to the right collar edge" → "pearl strands lying flat on the vân kiên"; t8 "many long strands of pearls only across the chest" → "many pearl strands lying flat on the vân kiên".
+- A38 length trims (yellow hex already in the THREE-COLOUR RULE): t7 "…, a honey-gold close to hex #EFBD69 (medium depth, 18K gold tone)," → "(#EFBD69),"; t8 "the yellow is rich warm royal golden yellow, a honey-gold … not lemon;" → "the yellow never cream, beige, mustard or lemon;".
+- t8 yellow vân kiên + two layers kept. keep/store PASS ×2 (t7 9997, t8 9981).
+- t1–t6 approved thu files (L1852/L1847/L1893/L1847/L1856 + t6 FROZEN): NO cleavage/bust words; all say "a LOW open square neckline across the upper chest, neck and collarbones bare … framed by a wide flat band" ("LOW" is the only risk word; not edited). CONFLICT to flag: rule A42 (owner L1413) WANTS "a soft, natural hint of cleavage" at every square neckline. L1990 is later and wins for thu t7/t8; #27 to decide if A42 is retired.
