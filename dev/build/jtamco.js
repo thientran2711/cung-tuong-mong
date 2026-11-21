@@ -36,6 +36,7 @@ PEND.roadpick=p=>{const v=RV(p.v),k=p.k,A0=ACT[k];if(!v||!A0)return null;const c
  O.push({n:"Hao tâm cơ, tự mình sắp đặt",fx:{},p:up,off:!econRoadOk(k,S,v,"tc"),ton:Object.assign({tamco:-c.tc},pr),x:`thành: tự tay sắp đặt từng bước, chắc tay hơn${wT}${wH(0)}`,go:go("tc")});/* kit Tốn row (KIT §13.16 ton field): a price paid elsewhere — Tâm cơ is paid in econRoadGo, the scheme price by the act */
  O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(win?c.hire:c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn${wT}${wH(1)}`,go:go("hire")});
  O.push({n:"Thôi",fx:{}});
+ /* the queued item gets act:1 (KIT §28.6 data flag, set where doAct pushes it): the scheme act's OWN picker, not an event → the open act card (Tốn · THÀNH · BẠI with numbers, §88), so a pay-on-success price shows as THÀNH «Bạc -N» */
  return{who:pv(v),t:`<p>${A0.n} — ${v.name}: tự tay làm, hao tâm cơ mà sắp đặt, hay bỏ bạc thuê người làm thay?</p>`,o:O}};
 /* her road travels with her act as ECON_HER {k, t: rival id, road, fz: the odds she saw}; runAct (below) pays it and rolls the odds she saw.
    Co-op (owner CO-OP LAND GATE): a thin guest's runAct is an intent run on the HOST; ECON_HER rides in that intent's ctx (jcoopthinf F1
@@ -55,6 +56,6 @@ setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")re
  const l0=ptLand;ptLand=function(a){try{const e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k])econRoadPay(S,e.k,t,e.road)}}catch(x){console.error("econ road land",x)}
   return l0.apply(this,arguments)}}catch(e){console.error("econ road ptime",e)}},0);
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
-  if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);render();return}}catch(e){console.error("road",e)}
+  if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}
   return d0.apply(this,arguments)}})();
 window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc=econRoadNpc;
