@@ -25,6 +25,7 @@ ROYAL = '#EFBD69'
 KIND = {'đỏ lá phong': 'đỏ', 'đỏ rượu trầm': 'đỏ'}   # two Thu reds read as ONE colour to the eye (owner L1679 Kiêu kỳ)
 HARD = {'xanh ngọc biển': 6}   # owner L1705: blue-ish in Hạ only a few people
 MAX_COST = .36       # tone move allowed: ~3*ΔL + 4*ΔC + 2.5*ΔS (ΔL .12 alone)
+NB_W = 7             # penalty per sheet neighbour (±2 rows) in the same family
 S_CAP = .72           # HSV saturation cap for a CHANGED main (L1583 p90 .66; owner L1704: never rực)
 de = functools.lru_cache(maxsize=None)(CU.de2000)
 bad = functools.lru_cache(maxsize=None)(B.bad_colour)
@@ -150,7 +151,7 @@ def repair(d, out, P, log, rounds=6):
                             fails = sum(1 for z in nsec if de(y, z) < 8)
                             a31 = min(de(x, z) for z in own)
                             grp = min([v for q, v in zip(rest, dm) if d[q]['group'] == g] or [99])
-                            sc = (fails * 500 + nb.get(n, 0) * 7 + gpen + max(0, 20 - a31) * 6 + (12 if n != cur else 0) + r[0] * 20
+                            sc = (fails * 500 + nb.get(n, 0) * NB_W + gpen + max(0, 20 - a31) * 6 + (12 if n != cur else 0) + r[0] * 20
                                   - min(grp, 12) * .6 - min(min(dm), 8) * .5 + (de(y, old_sec) * .15 if y != old_sec else 0))
                             if best is None or sc < best[0]: best = (sc, n, x, y)
                 if best is None: continue

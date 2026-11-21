@@ -75,3 +75,24 @@ L1583: same-group same-season main pairs ΔE<8 = 656; A31 people (4 mains not al
 - Plan changed by Foreman C (owner L1721): palettes_season_L1709.json = **DRAFT only**, not to be used until the owner picks.
 - 4 sheets (VN, phone-readable, looked): dev/handover/review-sheets/pal_L1721/khuyennghi_{xuan,ha,thu,dong}.png — feeling · NÊN DÙNG swatches (L1583 softness) · current L1583 mains grouped ✓ hợp / ✗ chưa hợp with counts + example ids · đề xuất đổi. Script dev/art/palettes3/reco_L1721.py.
 - Key points: Xuân (vui tươi, đoàn viên) — 11 heavy hồng mẫu đơn + 8 dark greens don't feel joyful; add Tết red, pale mai yellow, tangerine. Hạ (tỏa nắng + mát) — L1583 is 100 % warm (cam 67, vàng 23, mát 0) → move ~1/3 to cool: lotus green, mint, lotus pink, a few water-aqua. Thu (ấm nhưng đượm buồn) — olive 51/90, 18 near-identical dark wines; add persimmon/amber (warm) + ash-rose and muted teal (wistful). Đông (lạnh lẽo, cô đơn) — 21 warm/pink purples and 10 bright jades feel sweet/springy → cold violet, indigo, ice blue, pine; few plum-red accents. Many ✗ in Đông are drawn roots → keep unless she releases them.
+
+# JOB 3 — owner L1726 approved → NEW palette palettes_season_L1726.json · 0 cr
+- Feelings (owner L1726): Xuân e ấp tình đầu, đoàn viên · Hạ tự do, tinh nghịch, nắng + mát · Thu HOÀI NIỆM · Đông lạnh lẽo, cô quạnh.
+- Script dev/art/palettes3/four_season_L1726.py (engine four_season_L1709.py; engine change = NB_W constant only, default 7 → L1709 unchanged). L1583 tone kept per person; changed mains HSV S ≤ .72; roots + s62 unchanged. Some families may lift a person a bit more (ΔL up to ~.15–.2) where the L1721 sheets asked for it (Xuân dark greens → fresh green; dark Thu reds → ash-rose / muted teal; warm Thu / Xuân tangerine / mai yellow).
+- check_unique **0 FAIL** (206 WARN) · keep_check --all 405 PASS · same-group mains ΔE<8: 656 → 327 · longest run of one family down a season column: 2–3.
+- Families: Xuân hồng hoa đào 24, đỏ son Tết 17, xanh lá non tươi 22, hồng mẫu đơn 18, cam quýt nhạt 8, vàng hoa mai 1 · Hạ vàng nắng 20, cam đào 18, san hô dưa hấu 14, xanh lá sen/bạc hà 18, hồng sen 14, xanh ngọc nước 6 · Thu cam quả hồng 13, hổ phách/đất nung 10, ô liu 22, đỏ lá phong 16, hồng tro/tím khói 17, xanh cổ vịt trầm 12 · Đông xanh băng 20, chàm/lam đêm 24, tím than lạnh 22, xanh tùng trầm 20, đỏ mai đông 4.
+- HSV (mains):
+| mùa | bảng | mean S | p90 S | max S | mean V |
+|---|---|---|---|---|---|
+| Xuân | L1583 | 0.47 | 0.62 | 0.72 | 0.68 |
+| Xuân | L1726 | 0.46 | 0.62 | 0.67 | 0.71 |
+| Hạ | L1583 | 0.50 | 0.62 | 0.84 | 0.94 |
+| Hạ | L1726 | 0.44 | 0.56 | 0.83 | 0.91 |
+| Thu | L1583 | 0.51 | 0.80 | 0.98 | 0.61 |
+| Thu | L1726 | 0.48 | 0.71 | 0.84 | 0.66 |
+| Đông | L1583 | 0.48 | 0.65 | 0.98 | 0.75 |
+| Đông | L1726 | 0.45 | 0.62 | 0.94 | 0.74 |
+| cả 4 (360) | L1583 | 0.49 | 0.66 | 0.98 | 0.75 |
+| cả 4 (360) | L1726 | 0.46 | 0.64 | 0.94 | 0.75 |
+- Sheets (LOOKED): dev/handover/review-sheets/pal_L1726/bangmau_L1726_to1..3.png, bangmau_theomua_L1726.png (+ _L1583), s33_s42_cu_moi.png (sheet_L1726.py, stats_L1726.py).
+- Open: A31 31 people (4 mains < ΔE 20, mostly reds Xuân/Thu/Đông + roots) · vàng hoa mai only 1 (Xuân tones are mid; pale yellow needs L ≥ .91) · Đông pink-purple roots (drawn) kept, named under tím than lạnh · s10–s12 Thu still 3 dark maple reds (L ≈ .34, no other family fits at that depth without a big lift).
