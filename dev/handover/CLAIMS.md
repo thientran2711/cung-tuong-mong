@@ -561,3 +561,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-ton-row KIT KEEPER (sonnet; ROOT-82 deadline order: «Tốn» row accepts a cost fx does not pay — ton:{tamco/bac} for econ-tamco + «quý nhau» check) | review/kit-ton-row | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | IN PROGRESS — ETA KIT READY ≈ 2 h from 21/11 00:45Z (well before the 12:00Z cut) | 21/11 |
 | kit-ton-row KIT KEEPER (sonnet; ROOT-82 deadline order) | review/kit-ton-row; reports/kit-ton-row.md | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 99a80834 — KIT READY (waits rv MSxpxbsA) | 21/11 |
 | REVIEW coop-thin-g r1 (opus BIG) of 7fcae66b | review/coop-thin-g-r1 | B | session_01N1tNP33ttbcEgRGTF1Udhr | RUNNING | 20/11 23:58Z |
+| REVIEW or20-j68q r1 E31r (opus BIG; briefs/E31r-review-or20-j68q.md) of cd23ef92 | review/or20-j68q-r1; reports/or20-j68q-review.md | FOREMAN E #24 | session_01DgYSWq8fVe171xmVXHeDg6 | RUNNING | 21/11 00:02Z |
