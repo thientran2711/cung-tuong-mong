@@ -64,3 +64,21 @@ Changes vs hqp1 t2:
 - Removed: OPEN-NECK lead line, COLLAR CUT (flowing) sentence; pose "the skirt still flaring softly" → "the skirt hem just settling".
 - Kept on purpose: S08 sleeve rank law verbatim ("wide, flowing sleeves … KNEES") — approved sentence; hair "LOOSE and flowing" (hair, not fabric).
 Gates: keep --sidecar PASS, --all PASS. check_store: FAIL M06 + S06 only = the two fabric sentences the owner ordered out (needs foreman waiver / rule update for Hán t1–t3). Note: brocade borders at t2 go against L1262 "gấm only t7/t8" — owner L1727 asked for cẩm duyên borders.
+
+# HAN2 job 5 — HH from the EARLY HQP thu prompt (owner paste, L1732, Foreman C #20). 0 gens.
+Source = the only file matching her paste (necklace + flower basket + "Mùa Thu · … · Hoàng quý phi"): seasons4/s62_t7_HAN_LADDER.txt (zhiju brocade, 3 wide collar bands, no cape/cloud collar).
+File: seasons4/s62_t8_HAN_BAC_fromhqp_L1732.txt (+ .keep, base = LADDER), 9781 chars. Changes only:
+1. label "rank-7 imperial noble consort (Hoàng quý phi)" → "the Empress (Hoàng hậu)"; 2. "a near-empress" → "the Empress's"; 3. crown → "LARGE ornate gold nine-phoenix crown (one large central gold phoenix with spreading wings and eight small phoenixes around it, the grandest headdress of all ranks)" (pearl strands / kingfisher inlay / tassels kept); 4. "HOÀNG QUÝ PHI LUXURY" → "EMPRESS LUXURY", jewels → "smooth polished CABOCHON rubies, sapphires, pearls and jade, never faceted" (A46); 5. dropped "a layered pearl-and-gold necklace" (A41), "pearl and jade trims along the cape edges" + "cape" in "robe, cape and sleeves" (no cape words), "still clearly simpler and less golden than the Empress"; 6. caption "Hoàng quý phi" → "Hoàng hậu" (Mùa Thu kept as pasted). Item (flower basket) and colours (plum/blush/yellow parts) unchanged.
+Gates: keep --sidecar PASS; check_store tp8 a22 PASS (0 FAIL; the paste itself already carries S07/S19/S24/S34).
+
+## Bell/vạt suspects — words in old HH prompts NOT in the HQP paste
+| words (HH only) | in | why suspect |
+|---|---|---|
+| yellow "DOMINANT colour of the over-robe/quju, more than half of everything" / "SOFT golden yellow is the MAIN colour of the outer quju and sleeves" | base, open11c, hqp1 | big single-colour mass → model draws a wide flared yellow cone; HQP has yellow only as borders/sash/collar |
+| khúc cư "front panel wound SEVERAL times in a long spiral round the body", "whole spiral wrap clearly visible" | open11c, hqp1 | spiral bands stack round the hips = many vạt, widens the skirt (HQP paste = straight-hem zhiju) |
+| cloud collar + "LONGEST / layered pearl fringes", "ONE-TIER … a little firmer" | all three | shoulder mass widens the top → triangle/bell outline |
+| "EXACTLY FOUR visible layers", "swallowtail guiyi layer", "over-robe" | base | layers = many visible vạt |
+| "FABRIC the richest of all", "woven gold DENSER", "LARGEST motifs … far denser" | base, open11c | heavy stiff look |
+| "grand ceremonial dress", "imperial phoenix ceremonial robe", "GRANDEST headdress", "taller and wider" | base, open11c | "grand/ceremonial/wider" → volume |
+| casket "raised and admired" (both hands at chest) + floor sleeves | base | DESIGN14 audit: sleeves fall from chest-high hands as a cone |
+| ONE LARGE phoenix across the front | hqp1 | needs a flat wide canvas → robe spread out |
