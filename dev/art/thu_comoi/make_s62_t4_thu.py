@@ -66,3 +66,25 @@ if __name__ == "__main__":
     assert len(s) <= 9990, len(s)
     out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIf.txt")
     open(out, "w", encoding="utf-8").write(s); print(len(s), out)
+
+# ---- v7 = COMOIg (Foreman C #15 01:39Z: YES carry t3 v5's TWO apron panels + long jade sets up (G47); CHECK1: name the outer hem band,
+#      capelet cord across the chest with the jade in the middle (G46, owner L1626 'nối nhau bằng một cái sợi dây. Ở giữa có cái ngọc')) ----
+V7 = [
+    ("linked low on the chest by a small jade clasp on a short silk cord",
+     "linked across the chest by a short silk cord with a small jade clasp in the middle"),
+    ("WIDE gold-thread embroidered borders of lotus flowers at sleeves and hem,",
+     "WIDE gold-thread embroidered borders of lotus flowers at sleeves and outer hem,"),
+    ("with a carved jade pendant set (ngọc bội) and tassels in front, never covered by sleeve or shawl",   # t3 v5 apron panels + jade sets, lotus
+     "with TWO embroidered blush APRON PANELS (lotus, gold-braid edge) hanging side by side to the ankles, a long jade pendant set (ngọc bội) "
+     "of jade plaques on pearl strings with tassels at each outer side, never covered by sleeve or shawl"),
+]
+TRIM7 = []
+if __name__ == "__main__":
+    for a, b in V7:
+        assert s.count(a) == 1, a; s = s.replace(a, b)
+    for a in TRIM7:
+        assert s.count(a) == 1, a; s = s.replace(a, "")
+    s = s.replace("Mùa Thu · Tần · v6", "Mùa Thu · Tần · v7")
+    print(len(s)); assert len(s) <= 10000, len(s)
+    out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIg.txt")
+    open(out, "w", encoding="utf-8").write(s); print(len(s), out)

@@ -14,7 +14,8 @@ sys.path.insert(0, ART)
 from master_common import OUTER_IN, OUTER_TIED
 src = open(os.path.join(ART, "t8-prompt-B/build.py"), encoding="utf-8").read()
 EXTRA = eval(re.search(r'^CAPE5_V4_EXTRA=(".*?")\n', src, re.M).group(1))
-t4 = open(os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIf.txt"), encoding="utf-8").read()
+V7 = "--v7" in sys.argv   # v7 = COMOIf: t4 COMOIg capelet (cord across the chest, jade in the middle) + t3 apron panels/jade sets (Foreman C #15 01:39Z, G47)
+t4 = open(os.path.join(ART, "thu_comoi/s62_t4_THU_COMOI" + ("g" if V7 else "f") + ".txt"), encoding="utf-8").read()
 a = t4.index("a short round embroidered silk capelet"); END = "no cloud collar, vest or stiff shoulder pieces"
 TAN_CAPE = t4[a:t4.index(END, a) + len(END)]
 cape = TAN_CAPE + EXTRA   # verbatim (L1626 "từng câu từng chữ")
@@ -34,15 +35,23 @@ for x, y in [
      "a broad gold brocade girdle tied flat at the CENTRE front, NO bow, with two long carved jade pendant sets (ngọc bội) and tassels in front, never covered by sleeve or shawl,"),
 ]:
     assert s.count(x) == 1, x; s = s.replace(x, y)
+TRIM7 = []   # v7 length trims (Foreman decision pending)
 TRIM6 = [   # A38: repeats only, gate-checked (DESIGN20 sentence scan)
     " Hair: her own hair colour, decorated with ONE fresh flower and several gold hairpins (trâm) with dangles, rich like her rank.",
     " (her secondary colour, clearly different from her main robe colour light plum)",
 ]
+if V7:
+    x = "with two long carved jade pendant sets (ngọc bội) and tassels in front, never covered by sleeve or shawl, the front of the skirt embroidered with large double hollyhock medallions,"
+    assert s.count(x) == 1
+    s = s.replace(x, "with TWO embroidered blush APRON PANELS (double hollyhocks, gold-braid edge) hanging side by side to the ankles, a long jade pendant set (ngọc bội) "
+                     "of jade plaques on pearl strings with tassels at each outer side, never covered by sleeve or shawl, the skirt embroidered with large double hollyhock medallions,")
+    TRIM6 += TRIM7
 for x in TRIM6:
     assert s.count(x) == 1, x; s = s.replace(x, "")
 CAP = "Mùa Thu · Thiết kế hiện tại · Phi · 2 lớp choàng (Quý phi cũ) + lưới ngọc trai + cổ mở"; assert s.count(CAP) == 1
-s = s.replace(CAP, "Mùa Thu · Phi · v6")
+s = s.replace(CAP, "Mùa Thu · Phi · v7" if V7 else "Mùa Thu · Phi · v6")
 if "--raw" in sys.argv: print(s); sys.exit()
+if "--len" in sys.argv: print(len(s)); sys.exit()
 assert len(s) <= 9990, len(s)
-out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOIe.txt")
+out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOI" + ("f" if V7 else "e") + ".txt")
 open(out, "w", encoding="utf-8").write(s); print(len(s), out)
