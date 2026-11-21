@@ -32,6 +32,16 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
    const f4=fmt({sung:4});if(sgTxt(f4)!==f4)unit.push('fmt Sủng scaled twice by sgTxt: '+P(sgTxt(f4)));if(!/\+5/.test(P(f4)))unit.push('fmt({sung:4}) not +5: '+P(f4));
    const kp=P(kitParse('Khá chắc · thành: Sủng +4 · hỏng: Sủng -8'));if(!/Sủng \+5/.test(kp)||!/Sủng -10/.test(kp))unit.push('kit card does not draw the applied Sủng: '+kp);
    const kp2=P(kitParse('Khá chắc · thành: '+fmt({sung:4})));if(!/Sủng \+5/.test(kp2))unit.push('kit card of a fmt Sủng: '+kp2);
+   /* r2: RANGES scale both ends (nồng nàn 2..4 → 3..5; lạnh lùng 2..4 → 1..3), «..» / «–» too; helpers sgRange / sgOf / sgFix / sgRule */
+   const RC=[[['nongnay'],'thành: Sủng +2 đến +4','thành: Sủng +3 đến +5'],[['lanhlung'],'thành: Sủng +2 đến +4','thành: Sủng +1 đến +3'],[['nongnay'],'Sủng +2..+4','Sủng +3..+5'],
+    [['nongnay'],'hỏng: Sủng -2 – -4','hỏng: Sủng -3 – -5'],[['nongnay'],'nàng Sủng +2 đến +4','nàng Sủng +2 đến +4']];
+   for(const [tr,a,w] of RC){S.emp.traits=tr;const g=P(sgTxt(a));if(g!==w)unit.push(`range ${tr} «${a}» → «${g}», want «${w}»`);if(sgTxt(sgTxt(a))!==sgTxt(a))unit.push(`range scaled twice: «${a}»`)}
+   S.emp.traits=['nongnay'];const kr=P(kitParse('Khá chắc · thành: Sủng +2 đến +4'));if(!/Sủng \+3 đến \+5/.test(kr))unit.push('kit card range half-scaled: '+kr);
+   if(P(sgRange(2,4))!=='Sủng +3 đến +5')unit.push('sgRange(2,4) nồng nàn: '+P(sgRange(2,4)));if(sgTxt(sgRange(2,4))!==sgRange(2,4))unit.push('sgRange rescaled by sgTxt');
+   const v0=rivals[0];if(v0&&P(sgOf(v0,4))!=='Sủng +4')unit.push('sgOf(NPC) scaled: '+P(sgOf(v0,4)));if(P(sgOf(S,4))!=='Sủng +5')unit.push('sgOf(her) not scaled: '+P(sgOf(S,4)));
+   if(sgTxt(sgFix(2))!==sgFix(2)||P(sgFix(2))!=='Sủng +2')unit.push('sgFix (applied as is) rescaled: '+P(sgTxt(sgFix(2))));
+   if(P(sgRule('x {sg:deck.cam.w.sung} y'))!==`x Sủng +${sg(BAL.deck.cam.w.sung)} y`)unit.push('sgRule deck token: '+P(sgRule('x {sg:deck.cam.w.sung} y')));
+   if(P(sgRule('{sgRaw:tho.sung5} (thay {n:tho.sung})'))!==`Sủng +${BAL.tho.sung5} (thay +${BAL.tho.sung})`)unit.push('sgRule raw token: '+P(sgRule('{sgRaw:tho.sung5} (thay {n:tho.sung})')));
    S.emp.traits=k}
   const S0=structuredClone(S),RV0=structuredClone(rivals),rnd=Math.random,q0=quiet,lg=console.error;const out=[],unb=[];let ids=Object.keys(PEND),built=0;
   const fresh=()=>{S=structuredClone(S0);rivals.length=0;structuredClone(RV0).forEach(x=>rivals.push(x));Q.length=0;quiet=true};
@@ -46,20 +56,65 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
     for(const tr of T){fresh();S.emp.traits=tr.slice();const dd=mk(id,JSON.parse(PP));const c=dd&&dd.o[i];if(!c)continue;let R;try{R=card(c)}catch(e){continue}
      const shT=sum(R,['thanh','duoc','mat','ton','ngay']),shB=R.bai!=null?sum(R,['bai','ton','ngay']):null;if(shT==null&&shB==null)continue;any=true;
      const res={};for(const [o,rv,sh] of [['T',0,shT],['B',.99999,shB]]){if(o==='B'&&R.bai==null)continue;fresh();S.emp.traits=tr.slice();const d2=mk(id,JSON.parse(PP));const c2=d2&&d2.o[i];if(!c2)continue;
-      S.sung=50;Math.random=()=>rv;let got;try{if(c2.cap!=null){}apply(c2.fx||{});if(c2.go)c2.go();await new Promise(z=>setTimeout(z,0));got=S.sung-50}catch(e){got='err'}Math.random=rnd;
-      res[o]={sh:sh==null?0:sh,got}}
+      S.sung=50;Math.random=()=>rv;let got,lg=null,goD=0;try{if(c2.cap!=null){}apply(c2.fx||{});const s1=S.sung,q0=Q.length,l0=S.logSeq||0;if(c2.go)c2.go();await new Promise(z=>setTimeout(z,0));got=S.sung-50;goD=S.sung-s1;
+       /* r2 result / log pass: her Sủng printed by the lines this choice wrote (Sổ ghi + result cards) == the measured change */
+       const nl=Math.min(150,(S.logSeq||0)-l0),T2=S.logs.slice(0,nl).concat(Q.slice(q0).map(q=>(q&&(q.h||''))+' '+(q&&q.past||''))).map(x=>String(x).replace(/<[^>]+>/g,' ')).join(' · ');lg=herS(T2)}catch(e){got='err'}Math.random=rnd;
+      res[o]={sh:sh==null?0:sh,got,lg,goD}}
      row.t[tr.join('+')||'-']=res}
     if(any)out.push(row)}}}finally{console.error=lg;Math.random=rnd;fresh();quiet=q0;S=S0}
-  return {out,built,ids:ids.length,unb,unit}});
+  /* r2 DIRECT pass: result functions that are not a dialog option (their own log / result card) × traits: printed == measured */
+  const direct=[];const DF=[['empTeaCard',()=>{const r=empTeaCard();return r&&r.h}],['nightFx',()=>{nightFx(2)}],['kmEmpAct ky',()=>{S.arts.ky=4;const r=kmEmpAct(S,'ky');return r&&r.txt}],
+   ['kmEmpAct walk',()=>{const r=kmEmpAct(S,'walk');return r&&r.txt}],['visAfter',()=>{const r=visAfter();return Array.isArray(r)?r.join(' '):r}],['festival',()=>festival('Hội',"tai","Tài")]];
+  for(const [nm,f] of DF){if(typeof window[nm.split(' ')[0]]!=='function'){direct.push({ok:true,t:`${nm}: not in this build`});continue}const per=[];let bad=0;
+   for(const tr of T){fresh();S.emp.traits=tr.slice();S.sung=50;Math.random=()=>0;const l0=S.logSeq||0,q0=Q.length;let ret='';try{ret=f()||''}catch(e){ret='err '+e.message}Math.random=rnd;
+    const d=S.sung-50,nl=Math.min(150,(S.logSeq||0)-l0),txt=[String(ret)].concat(S.logs.slice(0,nl),Q.slice(q0).map(q=>q&&q.h||'')).map(x=>String(x).replace(/<[^>]+>/g,' ')).join(' · ');
+    const shown=herS(txt);per.push(`${tr.join('+')||'-'} ${shown}/${d}`);if(shown!=null&&shown!==d)bad++}
+   direct.push({ok:!bad,t:`${nm}: printed/applied ${per.join(' · ')}${bad?' ← MISMATCH':''}`})}
+  fresh();S=S0;
+  return {out,built,ids:ids.length,unb,unit,direct}});
  /* classify */
  const fam=[],other=[],ok=[];for(const row of r.out){const base=row.t['-']||{};const baseOk=Object.values(base).every(x=>x.got!=='err'&&x.sh===x.got);
   const bad=Object.entries(row.t).filter(([k])=>k!=='-').flatMap(([k,v])=>Object.entries(v).filter(([o,x])=>x.got!=='err'&&x.sh!==x.got).map(([o,x])=>`${k} ${o==='T'?'thành':'bại'} shown ${x.sh} applied ${x.got}`));
   const fmtR=Object.entries(row.t).map(([k,v])=>`${k}: `+Object.entries(v).map(([o,x])=>`${o==='T'?'thành':'bại'} ${x.sh}/${x.got}`).join(', ')).join(' | ');
   if(!baseOk)other.push(`${row.id} «${row.n}» ${fmtR}`);else if(bad.length)fam.push(`${row.id} «${row.n}» ${bad.join('; ')}`);else ok.push(`${row.id} «${row.n}» ${fmtR}`)}
+ /* r2: result/log lines — a line that prints her Sủng must print the measured change (the go() part or the whole choice) */
+ const lgFam=[],lgOther=[];let lgRows=0;for(const row of r.out){let any=false;const bad=[],base=[];for(const [k,v] of Object.entries(row.t))for(const [o,x] of Object.entries(v)){if(x.lg==null||x.got==='err')continue;any=true;
+   if(x.lg!==x.got&&x.lg!==x.goD)(k==='-'?base:bad).push(`${k} ${o==='T'?'thành':'bại'} log ${x.lg} applied ${x.goD}`)}
+  if(any)lgRows++;if(base.length)lgOther.push(`${row.id} «${row.n}» ${base.concat(bad).join('; ')}`);else if(bad.length)lgFam.push(`${row.id} «${row.n}» ${bad.join('; ')}`)}
+ console.log(`result/log lines with her Sủng after a choice: ${lgRows} · SG family (log ≠ applied only with a trait) ${lgFam.length} · other ${lgOther.length}`);
+ lgFam.forEach(x=>console.log('LOG ',x));if(TABLE)lgOther.forEach(x=>console.log('LOTH',x));fam.push(...lgFam);
+ r.direct.forEach(x=>console.log(x.ok?'DIR ':'DIRX',x.t));fam.push(...r.direct.filter(x=>!x.ok).map(x=>x.t));
  console.log(`dialogs built ${r.built}/${r.ids} · options with her Sủng on the card ${r.out.length} · shown==applied for every trait ${ok.length} · SG family (shown≠applied only with a trait) ${fam.length} · other (≠ even with no trait) ${other.length}`);
  if(TABLE){console.log('--- OK (shown/applied per trait)');ok.forEach(x=>console.log('OK  ',x));console.log('--- OTHER (not the sg family)');other.forEach(x=>console.log('OTH ',x))}
  fam.forEach(x=>console.log('SG  ',x));r.unit.forEach(x=>console.log('UNIT',x));console.log(`sgTxt unit cases: ${r.unit.length?'FAIL '+r.unit.length:'all pass'}`);if(r.unit.length)fam.push(...r.unit);
  if(r.unb.length)console.log(`not drawn (builder needs a live situation) yet names Sủng in its code: ${r.unb.length} — ${r.unb.join(', ')}`);
+ /* r2 STATIC pass (law 11, whole family): every raw «Sủng ±N» text left in dev/build/j*.js (comments stripped; sgStat / sgOf / sgRange /
+    sgFix / sgRule print the applied number and do not write «Sủng ±» in the source) is one of:
+    NPC   someone else's Sủng (nàng / <name> / ${W} / ${NM(…)} before it) — applied raw (ap), printed raw;
+    VALUE a level or threshold, not a change (Sủng ${p.sung}, cần Sủng ${N.sung});
+    CARD  an option / card line (x / lx / duoc / mat / kem / R6 / kitParse …) — drawn through kitParse → sgTxt (walk above = 0 SG rows);
+    OK    hand-verified (VERIFIED list: ±1 steps sg can't change, a measured delta, a sample page);
+    anything else = CHECK → FAIL. Plus: no «Sủng ±A ..|đến|– ±B» range built from a template (must be sgRange). */
+ const ST=(()=>{const fs=require('fs'),path=require('path');const D=path.join(__dirname,'../build');const rows=[];
+  const VER=[['jtoil.js','Sủng +1":"Sủng -1','±1: sg(±1) = ±1 for every trait'],['jtoil.js','?`Sủng ${f.aff>0?"+1"','±1 (aff>0) / NPC host'],['jmkt.js','Sủng ${n>0?"+":"-"}${Math.abs(Math.sign(n))}','±1 sign only: sg(±1) = ±1'],
+   ['j54.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1 → sum = V.length'],['j71.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1'],
+   ['j68.js','`Sủng ${n>0?"+":""}${n}`','e68 «emp» line: n = the measured/sgStat number of the e68 row (j68 fx6, rv r1)'],['jemoact.js','`Sủng của ${who} ${v}`:`Sủng ${v}`','label formatter: v comes in already drawn (eaN / sgStat)'],
+   ['jkitpage.js','','kit sample page (demo cards, kitParse draws them)'],['jstatfx.js','Sủng −3</button>','kit sample button (kitStatFx demo)'],['j87.js','Sủng ${wkeSign(d)}','measured week delta'],
+   ['jlost.js','${wdNmC(h)} mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}','NPC branch (h !== S)'],['j75.js','mỗi +2: Sủng +1','a ratio rule (Ân tình steps), not a change'],
+   ['jgift.js','thành: Sủng +2 đến +4, Ân tình +1, then','comment'],
+   ['j54.js','`Sủng mẹ +${g.sung}`','the mother is an NPC (x.p !== S): ap raw'],['j67.js','return `${v.name}: Sủng -${n}.`','NPC (v.sung -= n)'],['j92.js','AOUT.giahoa=["nàng mang tội','NPC act-outcome text (nàng …)'],
+   ['jface.js','a===S?"Sủng ngươi":`Sủng ${NM(a)}`','the label of sgOf(a, …) — the number is drawn by sgOf'],['j30.js','ốm 3 tháng (Sủng -4 mỗi tháng','the target (nàng) falls ill: NPC monthly rule']];
+  for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='jaudit.js'&&!/^jbal/.test(f))){const src=fs.readFileSync(path.join(D,f),'utf8').replace(/\/\*[\s\S]*?\*\//g,m=>m.replace(/[^\n]/g,' '));
+   src.split('\n').forEach((l,i)=>{const re=/Sủng(?: ngươi| ta| mẹ)? (?:[+\-−]\d|[+\-−]?\$\{)/g;let m;while((m=re.exec(l))){const pre=l.slice(Math.max(0,m.index-240),m.index),sn=l.slice(Math.max(0,m.index-60),m.index+40);let k;
+    const v=VER.find(([vf,vs])=>vf===f&&(!vs||l.includes(vs)&&sn.includes(vs.slice(0,8))||l.slice(Math.max(0,m.index-80),m.index+80).includes(vs)));
+    if(v)k='OK';else if(/(nàng(?: ta)?|của nàng|\$\{(?:v\.name|W|w\.name|NM\([^)]*\)|who|row\.name)\}|\p{Lu}\p{Ll}+)\s*$/u.test(pre.replace(/<[^>]*>/g,'')))k='NPC';
+    else if(/^Sủng \$\{(?:S|p|v|k|row|x)\.(?:sung|s)\b|^Sủng \$\{(?:Math\.round\(v\.sung|p\.sung\|0|N\.sung|RANKS|BAL\.st14|F14G|S\.sung)/.test(l.slice(m.index))||/cần Sủng|Sủng \$\{[^}]*\}\/\$\{|Sủng \$\{[^}]*\} →/.test(l.slice(m.index,m.index+40)))k='VALUE';
+    else if(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss|use|u)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|get x\(\)\{return `|return `\$\{w\} · thành|const risk=`|r\.x=\(r\.x\|\|""\)\+`|pbtn\()[^]*$/.test(pre)&&!/(?:log\(|Q\.push\(|txt:`|L\.push\(`)[^]*$/.test(pre.slice(pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/)>=0?pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/):0)))k='CARD';else k='CHECK';
+    rows.push({k,at:`${f}:${i+1}`,t:sn.replace(/\s+/g,' '),why:v&&v[2]})}
+    const rg=/Sủng [+\-−]?\$\{[^}]*\}\s*(?:đến|\.\.|–)\s*[+\-−]?\$\{/.exec(l);if(rg)rows.push({k:'RANGE',at:`${f}:${i+1}`,t:rg[0]})})}
+  return rows})();
+ const stc={};ST.forEach(x=>stc[x.k]=(stc[x.k]||0)+1);console.log('static raw «Sủng ±» sites: '+Object.entries(stc).map(([k,v])=>`${k} ${v}`).join(' · '));
+ ST.filter(x=>x.k==='CHECK'||x.k==='RANGE').forEach(x=>{console.log(x.k.padEnd(5),x.at,x.t);fam.push(x.at)});if(TABLE)ST.filter(x=>x.k==='OK').forEach(x=>console.log('OK   ',x.at,x.why));
  if(process.argv.includes('--static')){const fs=require('fs'),path=require('path');const D=path.join(__dirname,'../build');let n=0;for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f))){fs.readFileSync(path.join(D,f),'utf8').split('\n').forEach((l,i)=>{const m=l.match(/Sủng(?: ngươi| ta)? (?:[+\-−]|\$\{)/g);if(m){n+=m.length}})}console.log('static: literal «Sủng ±» texts in dev/build/j*.js: '+n)}
  if(errs.length)console.log('page errors (not fatal for the scan): '+[...new Set(errs)].slice(0,5).join(' | '));
  console.log(fam.length?`FAIL ${fam.length} option(s) show a Sủng that is not the applied one`:'PASS');await b.close();process.exit(fam.length?1:0)})();

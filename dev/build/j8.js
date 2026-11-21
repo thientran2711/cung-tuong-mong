@@ -337,7 +337,7 @@ function nightGain(s){const BN=BAL.night;return{sung:BN.sung+Math.max(0,Math.rou
 function nightG(s){return nightGain(s).sung}
 function nightA(s){return nightGain(s).an}
 function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const VO=BAL.night.vO;const w=word(VO[cl(Math.floor(v),-1,VO.length-2)+1]);const q=p&&p.q!=null?p.q:1;
- const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, Sủng +${hi.sung}, Ân tình +${hi.an} · hỏng: đêm nhạt, Sủng +${lo.sung}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
+ const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, ${sgStat(hi.sung)}, Ân tình +${hi.an} · hỏng: đêm nhạt, ${sgStat(lo.sung)}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen,"ngươi được thị tẩm");
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(empGive(S,BN.bestow+s*BN.bestowS,"night"))bestow(S,"night");log(`Thị tẩm. ${sgStat(g)} · Ân tình +${NG.an}.`)}
