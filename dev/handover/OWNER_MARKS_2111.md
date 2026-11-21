@@ -11,6 +11,7 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | 7 | 02:12 | Cung nhân: small portrait floating; act cards | owner-2111-cungnhan.jpg | keeper | in work | — |
 | 8 | 02:14 | Rank+name tag not centred | owner-2111-cungnhan.jpg | keeper | in work | — |
 | 9 | 02:10 | «Người chạy việc…» info box → «!» on avatar top-right corner | owner-2111-infobox-bang.jpg | keeper | in work | — |
+| 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF SENT 50 pp; OWNER 06:05Z: BUILD it as an icon in the left stage icon column → worker hao-huu (87); was asked: add «Hảo hữu» sheet? | — |
 | 3 | 01:58 | Chí tôn: «Hoàng thượng» not centred; niên hiệu shown as name → name «Hoàng thượng», niên hiệu row below | owner-2111-chiton-nienhieu.jpg | chiton-name worker JeU31 → rv2 session_01Rc5AsJz4mUrjazcfdR5JPr | in review | — |
 | 4 | 02:00 | Sở trường/Hay/Chuyện doubled labels → one column «Sở trường · Trọng · Dạo này» | owner-2111-sotrong-dup.jpg | chiton-name worker JeU31 → rv2 session_01Rc5AsJz4mUrjazcfdR5JPr | in review | — |
 | 5 | 02:02 | Trait box «Trọng tài / Mê sắc…» repeats → into «!» | owner-2111-trait-box-dup.jpg | keeper kit-pcrow-square (merged with #9) | LIVE | 9c1dd605 |
