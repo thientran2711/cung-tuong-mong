@@ -80,3 +80,35 @@ Run time unchanged (~10–11 min).
 - Pre-existing co-op asymmetry, same on the OLD place tgk (control run `PLACES=tgk`): when both stand in one place, the host's visit list gains her name but her phone's visit list does not list the host. Not from map-places; for the co-op lane.
 - The maid phase still runs as one task (peak 5–7 GB); if more servant places come, split it the same way.
 SẴN SÀNG KIỂM map-places-r2 d4c723d4 (BIG: core-loop memory + test harness).
+
+## REVIEW r2 (opus BIG) — reviewer session_01N1tNP6yVqCugi1vTEyrEka, 21/11 — PASS 688a5667 (review/map-places-r2-r1 = d4c723d4 + merges of LIVE 8b2e344d, 2021e23f, 686807ef; only index.html/sw.js conflicted, rebuilt with build_site.sh; assets.json left as main)
+PRIORITY #1 CHECK ('map-places memory OOM consort role-parity'): OD 0 | ledger 0 | claims 0 (own row) | main 0 | review/* 0 | archive 0 — brief and worker report both carry it.
+Diff vs LIVE 686807ef = jplx.js + jact.js (r1 PASS game diff, unchanged), dev/tools/role-parity-scan.js (scan fix), dev/test/places-d42.js, dev/test/coop-places.js, built files. No BAL, save, co-op or time code.
+
+### Worker claim checked independently (renderer RSS from /proc, CDP DOM counters + JS heap after GC; same box 15 GB)
+| probe (800 goTo+render, consort ranks cycling) | LIVE main 8b2e344d (18 places) | branch 923a2290 (20 places) |
+|---|---|---|
+| real play: each goTo its own task, 30 ms gap | RSS 268→472 MB, heap 40 MB, DOM nodes ~17 k flat | RSS 248→463 MB, heap 39 MB, DOM ~21 k flat |
+| ONE task (as the old scan): peak RSS during the task | **12.5 GB** | **12.0 GB** |
+| same, after the task ends (timers run) | 436 MB | 411 MB |
+| old scan (main's role-parity-scan.js), consort phase | peak 12.8 GB | (OOM 13.7 GB per LANDER #2b) |
+| new scan (one page per consort role), whole test | — | peak 7.0 GB (maid phase), ALL PASS |
+→ Confirmed: no game leak; the peak is transient memory the game frees in its deferred timers, which never run inside one synchronous evaluate. nth/pd add nothing per goTo. Scan fix is the right fix.
+
+### Does the scan fix hide gaps? (old scan vs new scan, both on LIVE main 8b2e344d, --json)
+- Gaps: old 13 = new 13, identical set (0 lost, 0 new). Rows 237 = 237.
+- 34 cell changes, none touching a gap: 27 '—'→EXEMPT and 5 EXEMPT→'—' (exempt player-only labels whose condition hung on the world left by earlier roles: «Chọn làm cung nữ thân cận» t2–t4, «Mắng cung nữ» / «Đập đồ» hh lost; «Đàn hát tự thưởng», «Đến gặp …», «Nghe lén» gained); 2 N·draw→NUM (cx4:rougeBorrow t2/t3: player row found). EXEMPT cells carry no parity requirement, so no gap can hide there.
+- The 2 old hh gaps «cx2:chest / cx4:rougeSteal» the worker saw 'gone': on b1033eb0 (before main's chest-direct probe 91216b96/56ff0db0) the hh probe ran LAST in one page, after t1..t7 had moved the seeded day plan so every palace owner was home → no chest person → N-ONLY. In a fresh page per role the hh probe starts from the seeded world where an owner is away. On current main both scans also ask every chest directly (chest-direct), so the row is covered either way; the card has no rank gate. Real access, not a hidden gap.
+
+### Gates on 688a5667 (this box)
+- quickcheck --runs 7 PASS (core gates, time-spill, old save loads + plays a buổi, perf new/live render 210/240 ms, tab 424/445, buổi 1183/1253, tasks>200 ms 19/20). Earlier merges: 923a2290 PASS, 853159b6 PASS.
+- undef-scan PASS (257 names). role-parity.test.js ALL PASS on 688a5667 (and on 853159b6, 923a2290).
+- coop-e2e 92/92 on 688a5667 and on 853159b6 (each run alone; a run in parallel with role-parity gave 90/92 = guest Thái hậu picture not loaded yet under CPU load, not from this diff — rerun alone 92/92). Kit-only chain 686807ef touches no co-op code.
+- CO-OP GATE coop-places.js: host-first 18/18 and SWAP 18–19/19 on every merge (923a2290, 853159b6, 688a5667): both seats walk to nth and pd, meet the keeper, same Dư đồ count, the guest's walk never moves the host's place/visit/khắc/buổi, Đáp ứng refused at nth on both seats with the same reason, 0 page errors. Law 1 for the feature: holds both ways.
+- Shots looked at (scratch only, not in git): Fold 755x1000@2 + iPad 1180x820@2, nth + pd stage: kit stage, title «Ngự thiện phòng» / «Phật đường» readable, keeper name plate under the kit grey stand-in figure, no horizontal overflow, 0 page errors. (places-d42.js shots are covered by its own rank-up modals — test harness only.)
+- Laws: 1 (feature two-way: yes, see co-op gate) · 4 (no new number; rank gate r>=2 copies the existing ACC_ROLE literal pattern — same note as r1, whole access family, not this branch's) · 6b keepers are fixed place people; servants not sampled (ledger rows = follow-up) · 7 wording cổ trang, no % · 9 kit only, stand-in pictures tạm, KIT_REQUESTS place-nth/place-pd · 11 scan fix covers the whole consort phase; maid phase still one page (peak 5–7 GB, note kept).
+
+### Pre-existing co-op presence bug (not from this branch) — decided: does NOT break law 1, filed GAP_LIST OD-CO1
+Measured: the friend who ARRIVES SECOND at a place does not see the friend already standing there; the one already there does see the arrival. Host-first: host lists her, her phone misses the host; SWAP (guest first): her phone lists the host, the host misses her. Same on the old place tgk on LIVE 8b2e344d (control PLACES=tgk, both orders). It is seat-symmetric (each seat can and cannot equally), so it is not a law-1 two-way break between seats; it is a real-people / co-op visibility bug for the co-op lane (GAP_LIST.md row OD-CO1, B build). The worker's note described only the host-first half.
+
+PASS 688a5667 (contains LIVE 686807ef). Landing: ff main to 688a5667 if main has not moved; else re-merge (index.html/sw.js rebuild only).
