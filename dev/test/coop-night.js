@@ -28,6 +28,7 @@ const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
    const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+   /* the morning panel (#dawn, jne kitNewDay): a player taps it (skip to the last beat), then its kit «Tiếp theo»; while it is on, j93 starts no scene */const dw=document.getElementById('dawn');if(dw&&!dw.hidden&&dw.classList.contains('on')){const de=dw.querySelector(':scope > .kmend');if(de&&de.offsetParent!==null){de.click();return'x'}if(!dw.dataset.tsk){dw.dataset.tsk=1;dw.click();return'x'}}
    /* the jnf flip choice opens only after the card-flip scene (.kcf, kit end button), like coop-e2e */const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}
    const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}/* a mini-game on screen (the steal game after Tranh sủng, jsmg herGame): play it out like a player (quick option «Thôi, không chơi», then the result frame's kit ✕ «Quay lại», which presses the hidden «Đã hiểu», jk4 kitOvSync); wiping S.mg leaves jsmg BUSY and jnf's choice in st "mg" for good */
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
@@ -110,9 +111,13 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
   
+  /* NLC #9: the host plays on like a player (scene, morning panel, his choice); the AFK guest never answers. Bound (jnf): every seat's
+     choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
+     her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */
+  const wm=await A.p.evaluate(()=>BAL.steal.choice.waitMs),lim=9000+wm+15000;
   const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
-  let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
-  ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);await merged('4',w0)}
+  let st=-1;while(Date.now()-t0<lim){await clear(A);const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
+  ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK guest holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);

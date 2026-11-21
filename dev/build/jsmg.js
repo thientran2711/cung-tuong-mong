@@ -87,7 +87,7 @@ if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"
 /* CO-OP (host-authoritative, jnf relay "ctm-nf"): each player plays HER OWN game on her own seat; the rung she wins reaches the one resolve on the host.
    GUEST: her pick tells the host at once that she is playing (SMG "mg"); jnf's "ch" message is held until her game ends, then sent right after a
    SMG "up" message {mode, up} (same socket, so the host has her rung before it has her choice). HOST: a friend's "ch" that arrives while the host is
-   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from x.myAt) restarts when the
+   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from the choice opening x.at, or from x.mgAt) restarts (x.mgAt) when the
    host's game ends and is held open while the friend's game runs (at most BAL.steal.mg.coopMs). The friend's try then reads her rung (FRUP) through
    the same oSteal hook. jnf.js itself is unchanged. */
 let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null,PEND=0;   /* PEND: her pick is being recorded (chooseM renders inside), the game opens next */const NPCR=new Map();let PASS=0;
@@ -108,7 +108,7 @@ function nfCtxUp(a,mode){if(typeof window.nfStep!=="function"||!a)return null;
 function smgSend(m){try{COOP.send(Object.assign({t:"act",k:SMG,mode:isHost()?"h":"g",d:day(),week:COOP.state&&COOP.state.week,id:SMG+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},m))}catch(e){console.error(e)}}
 /* host: keep jnf's friend wait open while her game runs (bounded) */
 let FRT=null;function frHold(on){if(FRT){clearInterval(FRT);FRT=null}if(!on)return;
- FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
+ FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}x.mgAt=Date.now();if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
 let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||typeof chooseM!=="function")return;NFON=1;
  const cm0=chooseM;chooseM=function(j){const m=Q[0],op=m&&m.pid==="nfch"&&m.opts&&m.opts[j];const mode=op&&(op.n==="Tranh sủng"?"feign":op.n==="Chặn ngự giá"?"road":null);
   const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
@@ -117,7 +117,7 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
   x.st="mg";PEND=1;let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;PEND=0;throw e}
   PEND=0;herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
    if(gst){GHOLD=0;smgSend({ph:"up",v:mode,up:up||0});const h=HELD;HELD=null;if(h)try{COOP.send(h)/* GHOLD is 0 now: goes out */}catch(e){console.error(e)}return}
-   if(y&&y.myAt)y.myAt=Date.now();   /* the friend's wait restarts after the host's own game */
+   if(y){y.mgAt=Date.now();if(y.myAt)y.myAt=Date.now()};   /* the friend's wait restarts after the host's own game */
    try{window.nfStep()}catch(e){console.error(e)}});
   return r};
  /* guest: jnf's "ch" waits for her game (sent after the SMG "up") */
@@ -125,7 +125,7 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
  /* host: the friend's game notice / rung, and her "ch" while the host is in her own game */
  try{if(typeof COOP==="object"&&typeof COOP.on==="function")COOP.on("act",m=>{try{const c=CO();if(!m||!c||m.from===c.seat||!isHost()||!S||m.d!==day()||m.mode!=="g")return;
   if(m.k===SMG){if(m.ph==="mg"){FRW={d:day(),until:Date.now()+(M().coopMs||120000)};FRUP=null;frHold(true)}
-   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x&&x.myAt)x.myAt=Date.now()}return}
+   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x){x.mgAt=Date.now();if(x.myAt)x.myAt=Date.now()}}return}
   if(m.k===NFK&&m.ph==="ch"){const x=nfX();if(x&&x.st==="mg"&&x.fr===undefined){x.fr=m.ch?VALIDM(m.ch.v):null;FRW=null;frHold(false)}}}catch(e){console.error(e)}})}catch(e){}
  /* a save made while the game was open: the choice stands, the step resumes (no rung) */
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY&&!PEND){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}

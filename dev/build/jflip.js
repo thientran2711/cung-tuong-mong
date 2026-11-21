@@ -224,7 +224,7 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
 let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
-try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;CFN=0;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
+try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;CFN=0;JOBS.clear();try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
@@ -238,13 +238,23 @@ function busy(){if(typeof NLP!=="undefined"&&NLP)return true;/* the Luân hồi 
  if([...document.querySelectorAll(".kbk")].some(e=>e.offsetParent||e.getClientRects().length))return true;const ti=document.getElementById("title");return !!(ti&&!ti.hidden)}
 const DBG=window.__cfdbg=[];const dbg=x=>{DBG.push(x);if(DBG.length>30)DBG.shift()};
 /* cfBusy(): a card-flip scene is queued or on screen (jnf opens the flip choice only after it, owner OD 16/11 22:45Z) */
-let CFN=0;window.cfBusy=()=>CFN>0;
-function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1)}done0()};dbg('run');const go=()=>{try{
+let CFN=0;
+/* every scene job (queued in j93 KMQ or on screen): {t: pushed at, v: void}. A queued job may wait behind a blocker the player has not cleared
+   (#dawn morning panel, podium, roulette, reward — j93 kmFree; the co-op merged week; busy()): an AFK seat never starts it. jnf holds the flip
+   choice / the night step only while a LIVE job is younger than its bound (jnf scene(): BAL.steal.choice.waitMs − choice.ms), then cfDrop():
+   the scene on screen closes, queued ones turn void and finish unplayed when j93 reaches them — never a scene after the choice (NLC #9). */
+const JOBS=new Set();
+window.cfBusy=()=>{for(const j of JOBS)if(!j.v)return true;return false};
+window.cfAge=()=>{let a=0;const n=Date.now();for(const j of JOBS)if(!j.v)a=Math.max(a,n-j.t);return a};
+window.cfDrop=()=>{dbg('drop');for(const j of JOBS)j.v=1;try{cur&&cur.close&&cur.close()}catch(e){console.error(e)}};
+function cfJob(){const j={t:Date.now(),v:0};JOBS.add(j);return j}
+function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
+   if(j.v){dbg('void');done();return}   /* jnf dropped it (the choice went up without it): never a flip scene after the choice */
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */
    if(!S||S.dead||(S.nightWhy&&S.nightWhy.wk!==plan.wk)){dbg('stale');done();return}
    const deck=deckOf(S.nightWhy);if(!deck.length){dbg('nodeck');done();return}dbg('play '+deck.length);
-   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),seal:!plan.pending,onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
+   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}if(j.v){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),seal:!plan.pending,onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
 if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom=null;let r;try{r=f0.apply(this,arguments)}finally{inFlip=false}
  try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}}catch(e){console.error(e)}return r}}
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
@@ -253,9 +263,9 @@ window.cfShow=function(){try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* the seal AFTER the flip choice (main s26 23:39Z, night-final): she kept her flipped night or won it → her card alone, at rest, gets the painted
    "THỊ TẨM" seal (same scene, final still, KIT §81 ONE button "Chuẩn bị thị tẩm"); robbed → nothing (the winner's seat stamps hers). Once a day. */
-window.cfSeal=function(){try{if(!want()||!S||S.dead)return false;const d=typeof wk==="function"?wk():0;if(S.cfSl===d)return false;S.cfSl=d;const gen=life;CFN++;let out=0;
- kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1)}done0()};const go=()=>{try{if(gen!==life||!S||S.dead){done();return}if(busy()){setTimeout(go,300);return}
-   Promise.all([ART.a,ART.b,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck:[{id:"me",p:S,bar:false}],pick:"me",turned:"me",still:true,seal:true,
+window.cfSeal=function(){try{if(!want()||!S||S.dead)return false;const d=typeof wk==="function"?wk():0;if(S.cfSl===d)return false;S.cfSl=d;const gen=life;CFN++;let out=0;const j=cfJob();
+ kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};const go=()=>{try{if(gen!==life||!S||S.dead||j.v||(typeof wk==="function"&&wk()!==d)/* dropped, or the day moved on: no seal of an old night */){done();return}if(busy()){setTimeout(go,300);return}
+   Promise.all([ART.a,ART.b,ART.seal].map(preload)).then(()=>{try{if(gen!==life||j.v){done();return}const sc=kitCardFlip({deck:[{id:"me",p:S,bar:false}],pick:"me",turned:"me",still:true,seal:true,
     resHTML:resHTML({pick:"me",turned:"me"},{}),end:"Chuẩn bị thị tẩm",onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()});return true}catch(e){console.error(e);return false}};
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
 window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];n=Math.min(n,L.length);/* one card per person, never a duplicate or a fake extra */for(let i=0;i<n;i++){const p=L[i];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
