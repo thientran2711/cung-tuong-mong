@@ -1,0 +1,14 @@
+base: dev/art/thu_comoi/s62_t6_THU_caovai_L2095.txt
+allow: HEAVY silk brocade robe in SATURATED light olive silk  # owner L2097 test: Phi fabric
+allow: thick gold-embroidered brocade  # owner L2097 test: Phi fabric
+allow: slightly THICKER soft silk gauze shawl  # Phi shawl words
+allow: LESS see-through than at the lower ranks  # Phi shawl words
+allow: matching the weight of her brocade  # Phi shawl words
+allow: Every hairpin is inserted into the hair pointing upward or backward  # duplicate of earlier hairpin sentence (LEN)
+allow: NOTHING on the forehead  # duplicate of 'Bare clean forehead' (LEN)
+allow: never a stretched grin  # boilerplate trim (LEN), as THUROOT3
+allow: never cross-eyed, never wall-eyed  # boilerplate trim (LEN), as THUROOT3
+allow: Quý phi · L2095  # caption
+allow: no hairpin horizontal or sticking out to the side  # duplicate sentence trimmed (earlier hairpin sentence stays)
+allow: no hoa điền  # duplicate forehead sentence trimmed (bare clean forehead stays)
+allow: graceful adult body  # LEN trim

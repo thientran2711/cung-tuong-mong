@@ -1,0 +1,12 @@
+base: dev/art/thu_comoi/s62_t6_THU_vankien2_L2088.txt
+allow: TWO-TIER cloud collar  # owner L2095: vân kiên → cầu vai 2 layers soft draped, large
+allow: SMALL and slim, no wider than her shoulders  # owner L2095: size large as image 3
+allow: cloud collar  # owner L2095 replaced by shoulder cape
+allow: rich gold-thread embroidery covering much of the robe  # owner L2095: denser robe embroidery
+allow: and train  # stray train word (VE12 L2074)
+allow: Quý phi · L2088  # caption
+allow: it follows the slope of her shoulders  # reworded: 'following the shoulder slope'
+allow: never thick or padded  # reworded: 'never stiff, never padded'
+allow: a pearl-edged collar and cloud-collar trim  # reworded: shoulder-cape trim
+allow: ONE short pearl fringe along the lower tier only  # reworded: lower layer
+allow: small flowers only  # reworded: never big medallions
