@@ -3354,3 +3354,5 @@
 {"id":"CqnIwJ6EEy","prompt":"dev/art/winter1/s62_t1_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
 {"id":"s7IKGYWl8e","prompt":"dev/art/winter1/s62_t2_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
 {"id":"Lw85AYUswO","prompt":"dev/art/winter1/s62_t3_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
+{"id": "SyhrWSTUb8", "prompt": "dev/art/maid7/test18_nhat_L1797.txt", "mode": "gpt-2-6", "res": "2k", "quality": "medium", "seed": 7172, "refs": ["s7IPw0Ll8e"], "cr": 135, "why": "owner L1819 nhat sachet fix", "by": "VE3"}
+{"id": "p8yWKdBehw", "prompt": "dev/art/maid7/test18_nhat_thancan_L1797.txt", "mode": "gpt-2-6", "res": "2k", "quality": "medium", "seed": 7172, "refs": ["s7IPw0Ll8e"], "cr": 135, "why": "owner L1819 nhat sachet fix", "by": "VE3"}
