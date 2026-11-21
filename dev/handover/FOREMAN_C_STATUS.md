@@ -1301,3 +1301,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
 #27 ~09:13Z: OWNER L1938 (typed in #26 chat): maid face page drop groups Kiêu kỳ/Lạnh lùng/Sắc sảo, filter by group → FACEPAGE1 (by #26). L1941 asked owner: m09 = Sắc sảo, keep? Told her to use #27 chat. Next Lượt 1942.
 #27 ~09:15Z: SENT L1942 thu t7 hu2BC0ivqL / t8 Tdwzp62VNR clasp L1924 (VE11 110). Flag: t7 jade pendant + red tassel on scroll (G57) — HHCOL2 told to check prompt. m18 chưởng sự 1ldHj2ur4r drawn before tím cà fix. Next Lượt 1943.
 #27 ~09:17Z: FACEPAGE1 L1938 done (v2 same URLs; m09, c17 c23 c29 hidden as Sắc sảo; group filter tabs). OWNER L1939 (in #26 chat): Tang thô sử boring → HADUONG2 deep research + 3 VN options to #27 before any drawing. Next Lượt 1943.
+#27 ~09:19Z: HHCOL2: t7 pendant = prompt words 'gem tassels' on flute; fixed t7 L1924b @fbe8719 (needs owner yes to redraw). NGOCBOI1 ordered G57b sweep (tassel words + regex). Next Lượt 1944.
