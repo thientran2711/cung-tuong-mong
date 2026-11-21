@@ -21,3 +21,16 @@ No "cape" word left anywhere (0 hits).
 
 ## Gates
 All 3: keep_check PASS, check_store `--scope tpN --age a22` PASS, no waivers (base had none).
+
+# UPDATE owner L1847 (via #24) — A48 later wins
+- (1) t1 thu collar → CANCELLED ("Đáp ứng ổn"); s62_t1_THU_fix_L1840 stays on disk, NOT to be drawn. VE3 told.
+- (2) winter t1 s62_t1_dong_L1840 → kept, VE3 drawing.
+- (3) QP REWRITTEN, thu + xuân (no "cape" word left in either):
+  - thu dev/art/thu_comoi/s62_t6_THU_cauvai_L1840.txt (base fix_L1833, 9 968 chars) · xuân dev/art/seasons4/s62_t6_XUAN_cauvai_L1840.txt (base XUAN_COMOI_L1833, 9 957 chars)
+  - "TWO layered embroidered <colour> SHORT shoulder capes … one over the other (…) …" → "an embroidered <colour> SHOULDER PIECE (cầu vai) of soft silk in TWO thin layers, fitted close over the shoulder tops only, never puffing out, a fringe of small gold tassels (tua rua) hanging from its lower edge, pearl-edged"
+  - "collar and cape trim" → "collar and shoulder-piece trim"; "sleeves, cape and train" → "sleeves, shoulder piece and train"; "sleeves and any cape," → "sleeves and shoulder piece,"
+  - phi bạch thu: "a THICKER soft silk shawl … much less transparent, matching the weight of her brocade, never a see-through gauze veil" → "a slightly THICKER soft gauze shawl … a little LESS see-through than the lower ranks, still softly translucent"; xuân: "a very sheer, highly translucent gauze shawl … the robe, sleeves and arms are clearly visible through it, so it reads as" → "a slightly THICKER gauze shawl … a little LESS see-through than the lower ranks, still translucent,"
+  - captions "Thu · Quý phi · cầu vai tua L1847" / "… cầu vai tua + cổ mở L1847". Old pics: thu BhNVgiDoQR, xuân fHz89AdCDY (+ vQABy0na47).
+  - RULE NOTE for #24: G3 says "Quý phi collar: no pearls/fringe/tassels" — L1847 tassels are on the SHOULDER PIECE, not the collar, but please update G3 so a later worker does not strip them.
+- (4) Phi t5 thu dev/art/thu_comoi/s62_t5_THU_fix_L1847.txt (base fix_L1833): "; a SHORT strand of small round pearls swags ACROSS her chest," → "; NO necklace, no pearl strand at the neck or across the chest,". Nothing else changed (pearl net on the cloud collar kept). Old pic u5Wm60bQLD.
+- Gates: all keep_check PASS; check_store PASS for both QP; t5 FAILs only B26/M06 = the same waiver its base u5Wm60bQLD was drawn with (no new fail).
