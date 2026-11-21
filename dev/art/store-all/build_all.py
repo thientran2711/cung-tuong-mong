@@ -20,6 +20,7 @@ Usage:  build_all.py PERSON RANK [--age a18|a26|a36|a51|a65]     (PERSON c01..c3
         build_all.py --check [--age aNN]        build_all.py --samples
 """
 import sys,os,re,io,contextlib,json
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import lowneck_L2228 as _LN   # G76 (owner L2228) low neckline a18-a36
 HERE=os.path.dirname(os.path.abspath(__file__)); ART=os.path.dirname(HERE); STORE_DIR=os.path.join(ART,"t8-prompt-B"); STORE=os.path.join(STORE_DIR,"build.py")
 _SRC=open(STORE,encoding="utf-8").read(); _I=_SRC.index('if __name__=="__main__":')
 _PART1=compile(_SRC[:_I],STORE,"exec"); _MAIN=compile(_SRC[_I:].replace('if __name__=="__main__":',"if True:",1),STORE,"exec")
@@ -656,6 +657,7 @@ def build_season(person,rank,age="a18",season=None):
         HQP_SHORT=True
         try: r=_build_season(person,rank,age,season)
         finally: HQP_SHORT=False
+    if season and age in _LN.AGES: r=(r[0],_LN.post(r[1])[0])+tuple(r[2:])   # G76 (owner L2228) season cells, last step
     return r
 def _build_season(person,rank,age="a18",season=None):
     global SEASON_PAL,G36_PHIBACH,PHIBACH_SEASON
@@ -663,13 +665,15 @@ def _build_season(person,rank,age="a18",season=None):
     assert season in SEASONS,("--season must be one of",SEASONS)
     SEASON_PAL=season   # PALFIX c3: every store run of this season cell (incl. the G25 a36 build) uses her B20 palette of that season
     G36_PHIBACH,PHIBACH_SEASON=(season in ("ha","thu")),season   # G36 (owner L1446): phi bạch only in hạ + thu; colour = phibach_3rd_L1821.json (L1834)
+    G76_ON[0]=age in _LN.AGES
     try: return _build_season2(person,rank,age,season)
-    finally: SEASON_PAL=None; G36_PHIBACH,PHIBACH_SEASON=False,None
+    finally: SEASON_PAL=None; G36_PHIBACH,PHIBACH_SEASON=False,None; G76_ON[0]=False
 # BUILDFIX2: season words after the store text. (1) a season that is not her root season no longer keeps the colour of image 1 (her reference) ->
 # the 'ORIGINAL robe colour is kept exactly as in image 1 (her first reference): ' clause is dropped, the colour words after it stay (approved thu files
 # s62_t1_THU_fix_L2008 … read the same). (2) the store's fixed ', NOT green' after a main colour that is itself green (palette 'light olive green') is
 # dropped, as the store's own outfit() already does for green palettes.
 _ORIG_RX=re.compile(r"her ORIGINAL robe colour is kept exactly as in image 1 \(her first reference\): ")
+G76_ON=[False]   # G76 (owner L2228): True while a builder a18-a36 season cell is built (never on the check_store store side)
 def season_post(S,person,season,strict=True):
     d=B20.get(ALIAS.get(person,person),{}); notes=[]
     if season!=d.get("root_season"):
@@ -683,6 +687,7 @@ def season_post(S,person,season,strict=True):
     if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=8: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
     sys.path.insert(0,ART); import master_common as _MCv; S,_vk=_MCv.l2119_post(S,_SP_RANK[0]); notes+=_vk
     if season=="thu": S,_b32=_MCv.b32_post(S,_SP_RANK[0]); notes+=_b32   # BUILDFIX5 B32 (owner L2122 CHỐT): thu t6-t8 = the t1-t5 thu fabric words   # BUILDFIX5 L2105/L2119: again after the thu ladder words (they carry TWO-TIER / STIFF / cape)
+    if G76_ON[0]: S=_LN.post(S)[0]   # G76 (owner L2228) builder a18-a36 cells: before the thu length trims (check_store reads the store via store_swap)
     if season=="thu" and strict:
         for bp in THU_TRIMS+THU_TRIMS_RANK.get(_SP_RANK[0],()):   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
             if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
@@ -748,7 +753,9 @@ def thu_sentences(S,person,rank,strict=True):
 def _build_season2(person,rank,age,season):
     assert isinstance(rank,int), "season: ranks 1-8 only"
     sys.path.insert(0,ART); import winter_g28
-    a36=build(person,rank,"a36")[1] if rank<=3 else None
+    _LN.OFF[0]=age not in _LN.AGES   # G76: an a51/a65 cell takes the ORIGINAL a36 words (owner L2228: a51/a65 untouched)
+    try: a36=build(person,rank,"a36")[1] if rank<=3 else None
+    finally: _LN.OFF[0]=False
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season); _SP_RANK[0]=rank; S,_sn=season_post(S,person,season); notes+=_sn
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000:
@@ -777,6 +784,7 @@ def build(person,rank,age="a18",_season=None):
     global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
     sys.path.insert(0,ART); import master_common as _MCv; S,_vk=_MCv.l2119_post(S,rank); add=add+_vk   # BUILDFIX5 L2105/L2119: t7 one-tier vân kiên, no stiff, no cape (t6-t8)
+    if age in _LN.AGES: S=_LN.post(S)[0]   # G76 (owner L2228) BEFORE the length fit: the B26 cuts are only made when still needed (gate necessity rule)
     _m=b26_fit_ok(person,rank,age,_season)
     if _m and len(S)>10000 and _season in (None,"dong"):   # BUILDFIX2: xuân/hạ/thu fit once, after their season words (_build_season2)
         _T,_a=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
@@ -784,6 +792,7 @@ def build(person,rank,age="a18",_season=None):
         S,add=_T,_a
     if not _season: S,add=f20_fit(S,add)
     if not _season: S=g45_post(S,f"{person} t{rank} {age}")   # G45 jade clause after the fit (season cells: after winter_g28.season, below)
+    if age in _LN.AGES: S=_LN.post(S)[0]   # G76 (owner L2228): a18-a36 every woman = ONE low-neckline phrase, every collar word gone; a51/a65 untouched
     return S0,S,add
 # B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
 # (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
@@ -930,6 +939,7 @@ def thaihau(person,age):
     sw("the royal golden yellow (honey-gold like #EFBD69)","the deep antique-gold royal yellow #CE9C48",why="B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69")
     assert "#EFBD69" not in F,"B22: #EFBD69 left in a Thái hậu prompt"
     sys.path.insert(0,ART); import master_common as _MC; F=_MC.apply(F,high=True); D.append(("B25 MASTER block (owner Lượt 745/766; MG1 master_common.apply, last step, as every other path)","",""))   # SL1 (ROOT-57): the Thái hậu path starts from the 18/11 BASE file, so the master block was missing
+    if age in _LN.AGES: F=_LN.post(F)[0]; D.append(("G76 (owner L2228): a36 low neckline, the standing collar words replaced by the one phrase","",""))
     globals()["TH_DIFF"]=D
     return None,F,add
 TH_EXEMPT={"a18":"S03","a26":"S03","a36":"S03","a51":"S33","a65":"S33"}
@@ -965,11 +975,13 @@ def check(person,rank,age="a18",ref=None):
     S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age); S=_sec_slot(ALIAS.get(person,person),rank,S)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim); Lượt 483 secondary slot
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # FRUITPET2 (ROOT-69 (c)): the same F17 depet step as build(); without it the invariant FAILed wherever the picked pose was an old animal pose (m04/m42 t7, m01/m30 t8 a18)
     _g45=lambda x: x.replace(", "+__import__("master_common").JADE_CLEAR,"").replace(G45_SLEEVE,"")   # G45 (POSEFIX1): the jade / sleeve clause is added after the fit (g45_post)
+    if age in _LN.AGES: S=_LN.post(S)[0]; ref=None if ref is None else {x for x in ref if not _LN.touches(x)}   # G76 (owner L2228): the store side read with the same low-neckline swaps
     if _g45(stripped)!=_g45(S): errs.append("F minus added sentences != store output (pose slot dedupe applied)")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])
     if ref is None:
         ref=_frame(rank,age)
+        if age in _LN.AGES: ref={x for x in ref if not _LN.touches(x)}   # G76: frame sentences that carry collar words are replaced by the one phrase
     for s in ref:
         if s.strip() and s not in F: errs.append("store frame sentence missing: "+s[:70])
     return errs

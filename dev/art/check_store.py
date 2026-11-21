@@ -771,9 +771,10 @@ def hqp_store(store,prompt):
     m=HQP_SLOT.search(store)
     if not m: return store
     for short in (False,True):
-        rx=re.escape(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ").replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
+        import lowneck_L2228 as _LN; _g76=(lambda x:_LN.post(x)[0]) if _LN.PHRASE in prompt else (lambda x:x)   # G76 (owner L2228): a18-a36 HQP words read with the low-neckline swaps
+        rx=re.escape(_g76(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ")).replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
         pm=re.search(rx,prompt)
-        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:   # BUILDFIX5: + the L2119 one-tier vân kiên form
+        if pm and _g76(HQP_CAPE+HQP_OPEN+", ") in prompt and store.count(HQP_CAPE)==1:   # BUILDFIX5: + the L2119 one-tier vân kiên form
             return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
     return store
 def thu_fabric_waiver(text, scope):
@@ -782,7 +783,7 @@ def thu_fabric_waiver(text, scope):
     if scope not in ("tp4", "tp5") or winter_g28.is_winter(text): return False
     sys.path.insert(0, os.path.join(ART, "store-all")); import build_all as _ba
     m06 = master_common.sentences()[master_common.ids().index(master_common.M06_ID)]
-    return _ba.is_thu(text) and m06 in text
+    return (_ba.is_thu(text) or SEASON_ARG == "thu") and m06 in text   # G76 (owner L2228): a18-a36 thu cells no longer carry the G53 square-collar marker words -> --season thu marks them
 SEASON_ARG = None   # BUILDFIX3: --season xuan|ha|thu|dong given to the store gate
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
@@ -811,6 +812,7 @@ def store_check(pf, prompt, args):
         _age='a36' if _w25 else (args[args.index('--age')+1] if '--age' in args else None)   # SEASON đông: t3 winter = G15 option B with the a36 crossed collar (G21/G25)
         _g15=g15_t3_words(_age); _g15=winter_g28.fabric_form(_g15) if winter_g28.is_winter(prompt) else _g15
         if " brocade girdle" not in prompt and " silk girdle" in prompt and "WINTER:" not in prompt: _g15=master_common.b32_post(_g15,3)[0]   # BUILDFIX5 B32 (owner L2122): thu t3 girdle = silk   # SEASON đông: G28 opaque shawl inside the t3 words
+        if __import__("lowneck_L2228").PHRASE in prompt: _g15=__import__("lowneck_L2228").post(_g15)[0]   # G76 (owner L2228): a18-a36 t3 option-B words with the one low-neckline phrase
         rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
@@ -820,6 +822,7 @@ def store_check(pf, prompt, args):
     _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
     store=master_common.b32_store_swap(store,prompt,_sc)   # BUILDFIX5 B32 (owner L2122): thu t6-t8 brocade store words read as the t1-t5 thu fabric words
     store=master_common.l2119_store_swap(store,prompt)   # BUILDFIX5 L2105/L2119: old vân kiên / cape store words read as the new words when the prompt has them
+    import lowneck_L2228 as _LN; store=_LN.store_swap(store,prompt)   # G76 (owner L2228): a18-a36 low neckline -> the store collar words read as the one phrase when the prompt has it
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -1357,7 +1360,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
         if e["id"] == "S14" and (slot_rx(S14_L1794).search(text) or slot_rx(S14_VK).search(text)): continue   # owner L1794: jade/pearl/gold-only HQP luxury form stands in the S14 slot (A46)
         if e["id"] in W_L1803 and any(slot_rx(f).search(text) for f in W_L1803[e["id"]]): continue   # owner L1803: thicker-fur ladder forms (t1-t3 x2, t4-t6 x4, t7 a little thicker, t8 sheet sentence) stand in the W01/W02/W03 slots
-        if e["id"] == "S13" and (slot_rx(S13_COMOI).search(text) or ("ONE straight SQUARE collar only" in text and slot_rx(S13_THU_L2041).search(text))): continue   # + owner L2041 thu Tần square-collar form (BUILDFIX2)
+        if e["id"] == "S13" and (slot_rx(S13_COMOI).search(text) or (("ONE straight SQUARE collar only" in text or __import__("lowneck_L2228").PHRASE in text) and slot_rx(S13_THU_L2041).search(text))): continue   # + owner L2041 thu Tần square-collar form (BUILDFIX2)
         if e["id"] == "S13" and slot_rx(S13_COMOI).search(text): continue   # owner L1377 (thu COMOI new collar OK, newer than G25/S13): the COMOI open-collar form "closes only at the sash, never at the throat" stands in the S13 slot (Foreman C #13, L1572)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()

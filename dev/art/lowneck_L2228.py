@@ -16,10 +16,11 @@ Kept on purpose (OPEN QUESTIONS in dev/handover/reports/NECK1.md, not guessed): 
 keeps its shape' (G26 fur order), 'Collar SHAPE exactly as in image 3' (t7/t8 thu ref image), sprig guard 'never inside the
 neckline', G69 'CENTRE of the chest' embroidery, 'pearl strands across the chest', vân kiên / capelet 'collar lines', Hán G62.
 """
-import re
+import os, re
 
 PHRASE = "a very low, wide, open neckline whose edge lies about a hand's width below the collarbones"
 AGES = ("a18", "a26", "a36")
+OFF = [False]   # set True around a raw a36 build that feeds an a51/a65 cell (build_all _build_season2, G25 winter words)
 SKIP_MARK = ("HAN_COLLAR", "two-thirds of the way out along the collarbones")   # G62/G66 Hán frozen collar: OPEN QUESTION, untouched
 
 _P = PHRASE
@@ -41,10 +42,12 @@ RULES = [
      _P, "t7/t8 framed square neckline"),
     (r"a snug crossed-collar upper garment with ", "a snug upper garment with " + _P + ", ", "t1 crossed-collar upper garment"),
     (r", a crossed collar,", ", " + _P + ",", "t4 crossed collar"),
+    (r", and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button \(not a crossed collar, not a cloud collar\)",
+     ", and " + _P, "Thái hậu a36 standing collar (K5 sheet3)"),
     # --- garments with no collar words at all (root/xuân/hạ/đông t2, t5, t6): PHRASE goes into the outfit noun --------
     (r"a fine silk robe with delicate embroidered ([^,;]+?) at the collar, sleeves and hem",
      r"a fine silk robe with " + _P + r", delicate embroidered \1 at the sleeves and hem", "t2 robe (no collar words)"),
-    (r"(court robe of two or three visible layers, richly embroidered in gold with [^,;]+? and small birds),(?! the body motifs)",
+    (r"(court robe of two or three visible layers, richly embroidered in gold with [^,;]+? and small birds),(?! the body motifs)(?! a very low)",
      r"\1, " + _P + ",", "t5 Phi robe (no collar words)"),
     (r"(SATURATED [^,;]+? silk, embroidered with [^,;]+? and gold thread along the borders), (TWO layered embroidered)",
      r"\1, " + _P + r", \2", "t6 Quý phi robe (no collar words)"),
@@ -76,7 +79,7 @@ RULES = [
     (r", the neckline band and the cuffs", " and the cuffs", "pearls 'the neckline band'"),
     (r"wide yellow borders along the neckline, sleeves and hem", "wide yellow borders along the sleeves and hem", "t7 yellow 'along the neckline'"),
     (r", a broad yellow collar and a wide inner panel", " and a wide inner panel", "t7 'broad yellow collar'"),
-    (r"her colour is the second colour \(collar, inner robe", "her colour is the second colour (inner robe", "t8 'second colour (collar'"),
+    (r"\(collar, inner robe", "(inner robe", "t8 / Thái hậu '(collar, inner robe'"),
     (r"a pearl-edged collar and cloud-collar trim", "a pearl-edged cloud-collar trim", "t6 'pearl-edged collar'"),
     (r", a pearl-edged collar trim,", ",", "t6 'pearl-edged collar trim'"),
     (r"NEVER on the robe, collar or belt", "NEVER on the robe or belt", "gems 'collar'"),
@@ -89,7 +92,7 @@ _RX = [(re.compile(a), b, n) for a, b, n in RULES]
 
 def post(text):
     """builder side: L2228 low neckline (call ONLY for AGES). -> (text, notes)"""
-    if any(m in text for m in SKIP_MARK): return text, []
+    if OFF[0] or os.environ.get("G76_OFF") or any(m in text for m in SKIP_MARK): return text, []   # G76_OFF=1: before/after diffs only
     notes = []
     for rx, rep, n in _RX:
         text, k = rx.subn(rep, text)
@@ -97,9 +100,22 @@ def post(text):
     return text, notes
 
 
+_INNER = RULES[[n for _, _, n in RULES].index("INNER robe neckline sentence")][0].replace("\\", "")
+
+
+def touches(sentence):
+    """True when post() would change this sentence (or it is a piece of the INNER-robe neckline sentence)."""
+    x = sentence.strip()
+    return bool(x) and (post(" " + x + " ")[0] != " " + x + " " or x.rstrip(".;") in _INNER)
+
+
 def store_swap(store, prompt):
     """check_store side: when the prompt carries PHRASE, read the store text with the same swaps."""
-    return post(store)[0] if PHRASE in prompt else store
+    if PHRASE not in prompt: return store
+    import master_common   # the L2119 old->new store words whose new form only shows in the prompt after G76 (e.g. the gem line)
+    for old, new, _ in master_common.L2119_SWAPS:
+        if old in store and old not in prompt and post(new)[0] != new and post(new)[0] in prompt: store = store.replace(old, new)
+    return post(store)[0]
 
 
 def residue(text):
