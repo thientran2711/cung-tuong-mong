@@ -1,4 +1,4 @@
-/* review/rel-picker-r2: picker-block scan. usage: node dev/test/relpick-scan.js <url> <outdir> <tag> [WxH@dpr,...]
+/* review/rel-picker-r3 (+r2): picker-row scan. usage: node dev/test/relpick-scan.js <url> <outdir> <tag> [WxH@dpr,...]
    Giao tình › Ân oán default + after picking another person: picker block height (label row 1 + row 2), empty area, card in view without scroll. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,TAG,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -13,10 +13,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const L=liveRivals(true);S.met=S.met||{};tmPlace(S,0);L.forEach(v=>{S.met[v.id]=1;try{S.known[kOf61(v)]=3}catch(e){}});
    tab="rel";relSel="me";PG.rel=null;PG.relY=null;render()});
   await sleep(1500);
-  const meas=()=>p.evaluate(()=>{const P=document.getElementById('panel');const R=e=>e.getBoundingClientRect();const k=[...P.querySelectorAll('.krelpk')].filter(e=>e.offsetParent);
+  const meas=()=>p.evaluate(()=>{const P=document.getElementById('panel');const R=e=>e.getBoundingClientRect();const k=[...P.querySelectorAll('.krelrow,.krelpk')].filter(e=>e.offsetParent);
    const card=P.querySelector('.krpair')||P.querySelector('.krelpair');const pr=R(P);
    const pick=k.length?{top:R(k[0]).top,bottom:R(k[k.length-1]).bottom}:null;
-   const faces=[...P.querySelectorAll('.krelpk .pface')].filter(e=>e.offsetParent);
+   const faces=[...P.querySelectorAll('.krelrow .pface,.krelpk .pface')].filter(e=>e.offsetParent);
    return{pickerH:pick?+(pick.bottom-pick.top).toFixed(0):null,rowsH:k.map(e=>+R(e).height.toFixed(0)),faceH:faces[0]?+R(faces[0]).height.toFixed(0):null,
     cardBottom:card?+R(card).bottom.toFixed(0):null,panelBottom:+pr.bottom.toFixed(0),vh:innerHeight,
     cardInView:card?R(card).bottom<=Math.min(pr.bottom,innerHeight)+1:null,hovf:document.documentElement.scrollWidth>innerWidth+1,
@@ -24,7 +24,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const shot=async n=>{await p.evaluate(()=>Promise.all([...document.querySelectorAll('#panel img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,6000)}))));await sleep(400);
    await p.screenshot({path:`${OUT}/rp-${TAG}-${n}-${wh}.jpg`,type:'jpeg',quality:72,timeout:120000})};
   const res={sz,errs};await sleep(3000);await p.evaluate(()=>{tab="rel";relSel="me";PG.rel=null;PG.relY=null;render()});await sleep(1500);res.def=await meas();await shot('ta');
-  await p.evaluate(()=>{const f=[...document.querySelectorAll('#panel .krelpk .pface')];const q=f.find(x=>/Hoàng thượng/.test(x.textContent));if(q)q.click()});await sleep(500);
+  await p.evaluate(()=>{const q=document.querySelector('#panel [data-relslot="y"]');if(q)q.click()});await sleep(900);await shot('popup');res.popup=await p.evaluate(()=>{const m=document.querySelector('#modal .krpop');return m?{faces:m.querySelectorAll('.pface').length,tabs:m.querySelectorAll('[data-ktsv]').length}:null});
+   await p.evaluate(()=>{const f=[...document.querySelectorAll('#modal .krpop .pface')];const q=f.find(x=>/Hoàng thượng/.test(x.textContent));if(q)q.click()});await sleep(700);res.afterPickY=await p.evaluate(()=>({modalOpen:!document.getElementById('modal').hidden,h:document.querySelector('#panel .krelpair h4')?.textContent}));await shot('y');
   await p.evaluate(()=>{tab="rel";relSel=(liveRivals(true).find(v=>!v.queen)||{}).id;PG.rel=null;PG.relY=null;render()});await sleep(900);
   res.pick=await meas();await shot('pick');
   R.push(res);await ctx.close()}
