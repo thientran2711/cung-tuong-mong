@@ -30,3 +30,15 @@ JOB E fix L1754 (0 cr): the Magnific cut-outs were made WITH backgroundColor #FF
 ### Order 5 — JOB F L1756 · Hán Thường tại from Phi
 dev/art/seasons4/s62_t2_HAN_THUONGTAI_fromphi_L1745.txt (HAN3 5be7551) unchanged · check_store tp2 a22: FAIL only M06/M07/S06 (owner-ordered đoạn fabric, waived by foreman) · no "image 2" → ref nVsrRMPYQD only · gpt-2-6 2k medium 9:16 seed 7172 → nVsiA1bYQD · 135 cr · sheet review-sheets/han_thuongtai_L1756.png (vs Phi EbYI8xvuuO). Session total 931 cr.
 JOB E re-run (foreman go, 6 cr): remove_background WITHOUT backgroundColor: u5Wte79QLD → xSBH1lBjfW, EbYI8xvuuO → Lw8bxU7swO; replaced phi_cu_trongsuot.png / phi_moi_trongsuot.png with Magnific's real alpha (RGBA, corners 0, bg 0 / figure 254, clean on dark bg). Session total 937 cr.
+
+## HANDOVER (VE1 → successor VE2) · 21/11 ~06:35Z · ctx 32 % (START 0 % + 25 % line passed) · VE1 STOPS
+Spent this session: 937 cr (L1738 405 · L1739 55 · L1740 330 · L1745 0 · L1749 6 · L1756 135 · L1754 re-run 6). No scheduled tasks owned.
+OPEN: JOB G (owner L1762, approved by #21): when HAN3 pushes s62_t{2..8}_HAN_LADDER2_L1762.txt and #21 forwards → draw all 7 at 55 cr (gpt-2-6 1k low 9:16 seed 7172; ref nVsrRMPYQD, + TdwDfOyVNR only if the prompt says "image 2") = 385 cr; sheet review-sheets/han_ladder2_L1762.png t2→t8, 2 rows (4+3), labels rank + id + 55 cr. Not started.
+HOW-TO (learned):
+- Foreman now = Foreman C #21 session_01D3E3NZAjbtepUBb2PArbqD (report there).
+- check_store: consorts `python3 dev/art/check_store.py <f> --scope tpN --age a22 [--refs ...]`; maids `--scope maid --age a18 --refs s7IPw0Ll8e` (NOT mama: S32 false FAIL). Hán đoạn prompts fail M06/M07/S06 = owner-ordered fabric, waived.
+- Cost map GPT 2.6 (simulate_cost): 1k low 55 · 1k med 80 · 1k high 95 · 2k low 85 · 2k medium 135 (=1520×2688). GPT 2.6 has no listed extraSettings but quality is honoured/priced.
+- remove_background 3 cr; WITHOUT backgroundColor = real alpha; with #FFFFFF = opaque white (alpha 255).
+- Old creation URLs: creations_get (prompts are long → big output); creations_search lean output is huge too (50 items ≈ 470k chars) → use only with a jq/python filter on the saved file.
+- Sheet script: scratchpad py/grid.py (out title cols W "file|label|sub"...), DejaVuSans-Bold, white bg.
+- Pass prompts verbatim: cat the file, paste whole content incl. CAPTION line.
