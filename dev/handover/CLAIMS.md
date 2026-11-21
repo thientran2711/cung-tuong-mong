@@ -838,3 +838,4 @@ kit-focus rv2 | review/kit-focus-rv2 6291a355 | rv session | FAIL (Fold sub-line
 | REVIEW mg-noword-care (sonnet SMALL) of 5fde6816 | review/mg-noword-care-rv | B | session_01N1tNP5HUkYY7fK5tUcLVxh | RUNNING | 21/11 09:59Z |
 | coop-arrive-see (opus BIG; GAP OD-CO1, MAIN 92 ORDER 09:50Z via D: second co-op arriver does not see friend) | review/coop-arrive-see; briefs/b6-coop-arrive-see.md | B | session_01N1tNP4rBywa4C29JMb8gx6 | RUNNING | 21/11 10:12Z |
 | ui-leftover-fold (sonnet SMALL; GAP MG12+KP05+KP14+M17, MAIN 92 ORDER 09:50Z via D; reuse mg-ui-rest + kit-opt-text) | review/ui-leftover-fold; briefs/b6-ui-leftover-fold.md | B | session_01N1tNP2bJj9FqZNTvhAgTmS | RUNNING | 21/11 10:12Z |
+| REVIEW jlost-kyngo E42r (opus BIG) of 2fa2e667 | review/jlost-kyngo-r1; reports/jlost-kyngo-review.md | FOREMAN E #26 | session_01DgYSWogzcg1vAwJPLueGcM | RUNNING | 21/11 10:17Z |
