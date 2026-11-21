@@ -94,9 +94,9 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
 @container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
 /* KIT 52 compact (owner 17/11): one line per direction, pairs never split */
-.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:.82em;line-height:1.3;font-variant-numeric:tabular-nums}
+.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:1em;line-height:1.3;font-variant-numeric:tabular-nums}
 .kr2cl{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .7em;min-width:0}
-.kr2ch{flex:0 0 100%;font-size:.86em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
+.kr2ch{flex:0 0 100%;font-size:.8em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
 .kr2cl.kr2-them{--krc:#7a4fa0}.kr2cl.kr2-me{--krc:#3f62a8}
 .kr2ci{white-space:nowrap}.kr2ci .kr2-v{margin-left:.15em}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}

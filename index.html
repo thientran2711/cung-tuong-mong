@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text","b":"9ac4c1681550","h":[{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"}]};
+window.CTM_BI={"s":"9c1dd605+","t":"2026-11-21T03:15Z","c":"merge origin/main 56ff0db0 into kit-pcrow-square; sync act scan after render; pcrow-square.js waits for the box","b":"ddd29a0d1d15","h":[{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38708,8 +38708,9 @@ window.kitPersonChips=kitPcGrid;
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 /* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
-.pc .kpkey{display:flex;flex-direction:column;gap:4px;margin:0 0 6px;font-size:.78rem;min-width:0}
+.pc .kpkey{display:flex;flex-direction:column;gap:5px;margin:0 0 6px;font-size:.92rem;min-width:0}/* owner 21/11 ~03:32Z: the rows under the figure are READABLE (were .78rem × .82em × .86em ≈ .55 rem) */
 .pc .kpkey .kpk-st{display:flex;flex-wrap:wrap;gap:4px}
+.pc .kpkey .kpk-st :is(.kgl,.chip,.kchip,span,b){font-size:max(.8rem,1em)}/* the status chip (Đã quen …) reads as the rows do */
 .pc .kpkl{display:flex;flex-direction:column;gap:1px;line-height:1.3;color:var(--ink)}.pc .kpkl-l{font-weight:700;color:var(--k-lab,#8a7350)}
 .pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
@@ -49714,9 +49715,9 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
 @container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
 /* KIT 52 compact (owner 17/11): one line per direction, pairs never split */
-.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:.82em;line-height:1.3;font-variant-numeric:tabular-nums}
+.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:1em;line-height:1.3;font-variant-numeric:tabular-nums}
 .kr2cl{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .7em;min-width:0}
-.kr2ch{flex:0 0 100%;font-size:.86em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
+.kr2ch{flex:0 0 100%;font-size:.8em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
 .kr2cl.kr2-them{--krc:#7a4fa0}.kr2cl.kr2-me{--krc:#3f62a8}
 .kr2ci{white-space:nowrap}.kr2ci .kr2-v{margin-left:.15em}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
@@ -86134,7 +86135,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9ac4c1681550";window.CTM_BUILD=BUILD;
+const BUILD="ddd29a0d1d15";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
