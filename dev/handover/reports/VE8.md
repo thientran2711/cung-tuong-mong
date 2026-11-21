@@ -12,3 +12,10 @@ Refs: m18 → s7IPw0Ll8e · m09 → gOm4HrsSXO (same ref for thosu/chuongsu/mama
 | m09 mama a51 | tCReRkqmZJ | ✓ deep rose, teal skirt/sash, silver temples, abacus, 3/4 right |
 Sheet: dev/handover/review-sheets/maid_prod_thosu_chuongsu_mama_L1856.png (row1 m18, row2 m09; cols thọ sự | chưởng sự | mama a51).
 Not run: check_store (not in the job).
+
+## JOB 2 — THU t7 + t8 vankien2 L1887 (HHCOL1 → #25) · gpt-2-6 1k low 9:16 seed 7172 · refs nVsrRMPYQD + TdwDfOyVNR · 2×55 = **110 cr** (session total 920 cr)
+Grep túi thơm/pendant/necklace/sachet in both prompt files: 0 hits. check_store/keep_check not run by me (HHCOL1 said PASS).
+- t7 Hoàng quý phi **xSBqfnXjfW** (old nVs3E2HYQD): ✓ layered open square neckline, pearl swag, crown red only; ✗/? collar reads as ONE scalloped stand collar, two tiers not clear, no small gold tassels visible on the collar; flute carries a jade ring + red knot tassel (red outside the crown).
+- t8 Hoàng hậu **SyhrHMVUb8** (old 6AbJ5aqiJO): ✓ layered neckline, no cape/cloak, slim silhouette, nine-phoenix crown; ✗ jade disc hangs from the pearl strands at the waist (pendant look, G57), red gem drops on the collar front; collar again one tier, one small gold tassel.
+Verdict: neckline change OK on both; two-tier vân kiên + pendant/red-on-collar NOT clean → suggest owner/#25 decide on a redraw (would cost 2×55).
+Sheet: dev/handover/review-sheets/thu_t7_t8_vankien2_L1887.png (CŨ t7 | MỚI t7 | CŨ t8 | MỚI t8 | MẪU Xuân eIPc7xcdqL).
