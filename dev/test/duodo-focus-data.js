@@ -15,13 +15,20 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  const r=await g.evaluate(()=>{const out={places:{},A:null,B:null};window.__bot=1;
   const go=k=>{Q.length=0;used=0;S.out=0;S.confined=0;S.buoi=0;S.place="home";goTo(k);if(Q[0]&&Q[0].pid==="entpick"){const o=Q[0].opts.find(x=>x.n==="Đi một mình");Q.length=0;o.go()}Q.length=0;S.visit.tk={};S.visit.talked=false};
   for(const k of ["vuon","home","tn","thu","kn"]){try{go(k)}catch(e){out.places[k]={err:e.message};continue}const P=curPeople();const rows=[];
-   P.forEach((pp,i)=>{const G=dfActs(i)||[];const n=G.reduce((s,x)=>s+x.tot,0);const dc=document.createElement("div");dc.innerHTML=popCard(pp,i);const tk=[...dc.querySelectorAll("button")].filter(b=>!b.classList.contains("pct")&&b.id!=="popx"&&!b.classList.contains("pcx")&&(b.firstChild&&b.firstChild.textContent.trim())).length;const ex=G.reduce((s,x)=>s+x.acts.filter(a=>a.id[0]==="a").length,0);
-    const bad=[];G.forEach(x=>{if(x.can!==x.acts.filter(a=>!a.off).length)bad.push("count "+x.n);if(!x.n)bad.push("nameless group "+x.k);if(G.filter(y=>y.n===x.n).length>1)bad.push("twin group "+x.n);x.acts.forEach(a=>{if(!a.eng||!a.cls)bad.push("noeng "+a.n);if(/%/.test(a.word+a.ton))bad.push("% "+a.n);if(/[<>]/.test([a.n,a.word,a.ton,a.why].join("")))bad.push("markup in text "+a.n)})});
+   P.forEach((pp,i)=>{const G=dfActs(i)||[];const n=G.reduce((s,x)=>s+x.tot,0);const dc=document.createElement("div");dc.innerHTML=popCard(pp,i);const tk=[...dc.querySelectorAll("button")].filter(b=>dfIsAct(b)&&(b.firstChild&&b.firstChild.textContent.trim())).length;const ex=G.reduce((s,x)=>s+x.acts.filter(a=>a.id[0]==="a").length,0);
+    const bad=[];G.forEach(x=>{if(x.can!==x.acts.filter(a=>!a.off).length)bad.push("count "+x.n);if(!x.n)bad.push("nameless group "+x.k);if(G.filter(y=>y.n===x.n).length>1)bad.push("twin group "+x.n);x.acts.forEach(a=>{if(!a.eng||!a.cls)bad.push("noeng "+a.n);if(/%/.test(a.word+a.ton))bad.push("% "+a.n);if(/[<>]/.test([a.n,a.word,a.ton,a.why].join("")))bad.push("markup in text "+a.n);if(/Đã biết|Chứng cứ|tin ›/.test(a.n))bad.push("info chip as act "+a.n)})});
     rows.push({kind:pp.kind,n,tk,ex,groups:G.map(x=>x.n+" "+x.can+"/"+x.tot),bad})});out.places[k]={place:S.place,rows}}
+  /* (1b) one-pane card (after an act / talked, strangers) with notes: the «Đã biết: N tin ›» chip (and «Chứng cứ») is NOT an act */
+  {let found=null;for(const k of ["vuon","tn","kn","thu","home"]){if(found)break;go(k);const P=curPeople();
+    for(let i=0;i<P.length&&!found;i++){const v=P[i].ref;if(!v||P[i].kind!=="rival")continue;S.notes=S.notes||{};S.notes[v.id]=[{t:"thử 1",d:S.day||0},{t:"thử 2",d:S.day||0}];
+     for(const one of [true,false]){S.visit.tk={};if(one)S.visit.tk[i]=1;const d=document.createElement("div");d.innerHTML=popCard(P[i],i);
+      if(d.querySelector("[data-kintel]")){const G=dfActs(i)||[];const all=G.flatMap(g=>g.acts);found={place:k,one,kintel:true,panes:d.querySelectorAll(".pcg").length,n:all.length,bad:all.filter(a=>/Đã biết|Chứng cứ|tin ›/.test(a.n)).map(a=>a.n)};break}}
+     delete S.notes[v.id];S.visit.tk={}}}
+   out.chip=found}
   /* (2) class A */let hit=null;for(const pl of ["vuon","tn","kn","thu","home"]){if(hit)break;go(pl);const P=curPeople();
   P.forEach((pp,i)=>{if(hit)return;talkOpts(pp).forEach((a,j)=>{if(!hit&&!a.lock&&!a.open&&a.o!=null&&a.o<100&&dfCls(a)==="A"&&sgShift(a.o,1)!==a.o&&sgShift(a.o,-1)!==a.o)hit={i,j,n:a.n,o:a.o,id:"go="+j}})});
   }if(hit){const P=curPeople();const pp=P[hit.i];const seen=[];const t0=window.talk;window.talk=function(j){seen.push(talkOpts(pp)[j].o)};
-   try{const rets=[];for(const rr of [{raw:10},{raw:5},{raw:0},{skipped:true}]){S.visit.tk={};used=0;Q.length=0;rets.push(dfRun(hit.i,hit.id,rr)||DF.why)}popIdx=null;hit.rets=rets;hit.dbg={tab,host:!!document.querySelector("#popw .pcpop"),q:Q.length,sigs:[...document.querySelectorAll("#popw .pcpop button")].map(b=>Object.keys(b.dataset).join("+")).slice(0,8)}}finally{window.talk=t0}
+   try{const rets=[];for(const rr of [{raw:10},{raw:5},{raw:0},{skipped:true}]){S.visit.tk={};used=0;Q.length=0;rets.push(dfRun(dfIdx(pp),hit.id,rr)||DF.why)/* her index NOW (the list may shift after each act) */}popIdx=null;hit.rets=rets;hit.dbg={tab,host:!!document.querySelector("#popw .pcpop"),q:Q.length,sigs:[...document.querySelectorAll("#popw .pcpop button")].map(b=>Object.keys(b.dataset).join("+")).slice(0,8)}}finally{window.talk=t0}
    out.A={hit,seen,want:[sgShift(hit.o,1),hit.o,sgShift(hit.o,-1),hit.o],after:talkOpts(pp)[hit.j].o,up:BAL.cut.sgStep}}
   /* (3) class B Tát: a lower-rank consort she stands with */
   const v=liveRivals(true).find(x=>x!==S&&!x.out&&!x.queen&&(typeof k61Named!=="function"||k61Named(x)));if(v){S.rank=Math.max(S.rank,(v.rank||0)+2);v.slap=null;v.loc=null;const here=whereOf(v);S.place=here;const ri=rivals.indexOf(v);const fakeP={kind:"rival",ref:v,name:v.name};S.visit.people.push(fakeP);const pi=S.visit.people.length-1;
@@ -38,4 +45,5 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  /* (4) one core scan: digits in jdf.js code outside comments, BAL reads, ids and 0/1 */
  const src=fs.readFileSync(path.join(__dirname,'../build/jdf.js'),'utf8').replace(/\/\*[\s\S]*?\*\//g,'').replace(/"[^"]*"|`[^`]*`/g,'""');
  const nums=(src.match(/[^\w.$]\d+(\.\d+)?/g)||[]).map(s=>s.slice(1)).filter(n=>!/^([01]|100)$/.test(n))/* 100 = the game's «sure» mark (o:100) */;ok(nums.length===0,'one core: no typed number in jdf.js',nums);
+ ok(r.chip&&r.chip.kintel&&r.chip.bad.length===0,'(1b) one-pane card with notes: «Đã biết» chip shown on the card, NOT an act in the focus',r.chip);
  ok(errs.length===0,'no page error',errs.slice(0,3));await b.close();srv.close();console.log(bad?'FAILED '+bad:'ALL OK');process.exit(bad?1:0)})();

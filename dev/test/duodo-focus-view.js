@@ -23,15 +23,22 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   /* a place with a consort she can talk to */let i=-1;for(const k of ["vuon","tn","kn","thu"]){__go(k);i=curPeople().findIndex(pp=>pp.kind==="rival"&&(dfActs(curPeople().indexOf(pp))||[]).some(g=>g.acts.some(a=>!a.off&&a.cls!=="D")));if(i>=0)break}
   out.place=S.place;out.i=i;if(i<0)return out;
   /* (1c) a focus already up for her (an NPC encounter opened it): the tap re-opens; the old one's close must not orphan the new one */
-  {const tk0={};DF.tk=tk0;DF.i=i;popIdx=i;DF.F=kitFocus.open({p:curPeople()[i],fig:dfFig(i),groups:[],onClose:()=>{if(DF.tk===tk0)dfClosed(i)}});await sl(30)}
+  {const tk0={};DF.tk=tk0;DF.p=curPeople()[i];DF.i=i;popIdx=i;DF.F=kitFocus.open({p:curPeople()[i],fig:dfFig(i),groups:[],onClose:()=>dfClosed(tk0)});await sl(30)}
   const tok=document.querySelector(`#tokens .tok[data-p="${i}"]`);tok.click();await sl(50);
   out.open={called:__K.calls.includes('open'),fans:document.querySelectorAll('.kfoc-b').length,groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden,plate:(document.querySelector('.kfoc-plate')||{}).textContent,stageTag:(()=>{const d=document.createElement("div");d.innerHTML=j59tagHTML(curPeople()[i],curPeople()[i].name);return d.textContent})()};
+  /* (1d) the list shifts while the focus is up (co-op refreshHere unshifts the Emperor): the focus still means HER — acts, groups and popIdx follow her, not the old index */
+  {const me=curPeople()[i];const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:""};S.visit.people.unshift(emp);/* no renderStage: it rebuilds the list; this is the moment between a refresh and the next tap */
+   const k=dfHere();out.shift={k,want:curPeople().indexOf(me),popIdx,DFi:DF.i,sameGroups:JSON.stringify(dfData(k).map(g=>g.n))===JSON.stringify(out.open.groups.map(x=>x.replace(/ \d+\/\d+$/,""))),open:!!DF.F};
+   S.visit.people.splice(S.visit.people.indexOf(emp),1);out.shift.back={k:dfHere(),i,popIdx}}
   /* (2) an act, skipped */const F=__K.F;const a=F.groups.flatMap(g=>g.acts).find(a=>!a.off&&(dfFind(i,a.id)||{}).cls!=="D");const n0=S.logSeq||0;const run0=window.talk;let talked=0;window.talk=function(){talked++;return run0.apply(this,arguments)};
   __K.calls.length=0;Q.length=0;F.o.onAct(a.id);out.played=!!DFG.cur&&__K.calls.includes('play');out.skipBtn=!!document.querySelector('.kfoc-skipw:not([hidden]) button');document.querySelector('.kfoc-skipw button').click();await sl(60);window.talk=run0;
   out.act={n:a.n,calls:__K.calls.slice(),talked,cur:!!DFG.cur,skipGone:!document.querySelector('.kfoc-skipw:not([hidden]) button')};
   /* back «◂» during a game = cancel: no act */{S.visit.tk={};Q.length=0;used=0;const b=(dfActs(i)||[]).flatMap(g=>g.acts).find(a=>!a.off&&a.cls!=="D");let t2=0;out.bAct=b&&[b.n,b.cls,DF.play?'busy':'',Q.length];const r1=window.talk;window.talk=function(){t2++;return r1.apply(this,arguments)};
    F.o.onAct(b.id);const inGame=!!DFG.cur;document.querySelector('.kfoc-x').click();await sl(60);window.talk=r1;out.back={b:out.bAct,inGame,talked:t2,cur:!!DFG.cur,open:!!document.querySelector('.kfoc-veil')}}
-  /* (3) close */F.close();await sl(900);out.close={popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
+  /* (3b) she leaves while the focus is up → the focus closes (no act goes to whoever took her index) */
+  {const keep=S.visit.people.slice();const me=curPeople()[i];/* reopen on her */dfOpen(i);await sl(30);S.visit.people.splice(S.visit.people.indexOf(me),1);/* a tap on an act now: must not act on whoever took her index */const t0=window.talk;let tk=0;window.talk=function(){tk++};const a0=(__K.F.groups||[]).flatMap(g=>g.acts).find(a=>!a.off);__K.F.o.onAct(a0.id);window.talk=t0;await sl(900);
+   out.gone={open:!!DF.F,DFi:DF.i,p:!!DF.p,talked:tk,cur:!!DFG.cur};S.visit.people.length=0;keep.forEach(x=>S.visit.people.push(x));renderStage();await sl(30);dfOpen(i);await sl(30)}
+  /* (3) close */__K.F.close();await sl(900);out.close={popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
   /* (4) rollback */BAL.df.on=0;Q.length=0;S.visit.tk={};__K.calls.length=0;document.querySelector(`#tokens .tok[data-p="${i}"]`).click();await sl(30);out.rollback={open:__K.calls.includes('open'),popIdx,pop:!!document.querySelector('#popw .pcpop')};BAL.df.on=1;popIdx=null;renderStage();
   /* (5) NPC-initiated: an NPC slaps her (jslap card «Bị tát» with Né đòn) */
   const v=curPeople()[i].ref;Q.length=0;__K.calls.length=0;v.rank=Math.max(v.rank,(S.rank||0)+2);/* the same card jslap pushes for an NPC slap (who = pv(a), «Né đòn» opens slapGame {dodge}); the full NPC road (day plan → runAct) is covered by jslap's own tests */
@@ -49,6 +56,8 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  console.log(JSON.stringify(r).slice(0,1500));
  ok(r.mood&&r.mood.x&&r.mood.want&&r.mood.want.includes(r.mood.x.text),'(6) mood bubble: a line of her feeling (gian), cổ trang, no emoji',r.mood);
  ok(r.i>=0,'found a consort to act on at '+r.place);
+ ok(r.shift&&r.shift.k===r.shift.want&&r.shift.k===r.i+1&&r.shift.popIdx===r.shift.k&&r.shift.DFi===r.shift.k&&r.shift.sameGroups&&r.shift.open&&r.shift.back.k===r.i,'(1d) list shifts under the focus: index, popIdx and groups follow HER',r.shift);
+ ok(r.gone&&!r.gone.open&&r.gone.DFi==null&&!r.gone.p&&r.gone.talked===0&&!r.gone.cur,'(3b) she leaves while the focus is up → the focus closes',r.gone);
  ok(r.open&&r.open.plate===r.open.stageTag,'(1b) focus plate = the stage name tag of that person (same known / stranger rule)',[r.open&&r.open.plate,r.open&&r.open.stageTag]);
  ok(r.open&&r.open.called&&r.open.groups.length>0&&r.open.popIdx===r.i&&r.open.DFi===r.i&&r.open.popwHidden,'(1) stage tap opens the focus view, pop-up host hidden',r.open);
  ok(r.played&&r.act.calls.includes('endPlay')&&r.act.talked===1&&r.act.calls.includes('react')&&(r.act.calls.includes('setGroups')||r.act.calls.includes('setGroup'))&&r.act.skipGone&&!r.act.cur,`(2) act «${r.act&&r.act.n}»: game in F.play, skip = the act runs once, reaction + groups refresh`,r.act);
