@@ -108,3 +108,21 @@ if __name__ == "__main__":
     assert len(s) <= 9990, len(s)
     out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIh.txt")
     open(out, "w", encoding="utf-8").write(s); print(len(s), out)
+
+# ---- v9 = COMOIi (Foreman C #16 01:59Z, same fault as the t5 v8 draft on every tier: two hair flowers + jade drop earrings) ----
+V9 = [
+    ("in her hair (never two)", "in her hair (never two, never a pair)"),                     # A38 trim words put back
+    ("gold and jade hairpins with small dangling gold bu yao tassels",
+     "gold and jade hairpins with small dangling gold bu yao tassels in the bun, none at the ears"),
+    ("of lotus embroidery from shoulder to hem)", "of lotus, shoulder to hem)"),               # own words compacted
+    ("a wide embroidered lotus band at the inner robe's hem too", "an embroidered lotus band at the inner robe hem"),
+    ("of jade plaques on pearl strings with tassels", "of jade plaques, pearl strings and tassels"),
+    ("a NEW outfit, ", ""),                                                                    # A38 boilerplate (store Outfit sentence already exempt)
+]
+if __name__ == "__main__":
+    for a, b in V9:
+        assert s.count(a) == 1, a; s = s.replace(a, b)
+    s = s.replace("Mùa Thu · Tần · v8", "Mùa Thu · Tần · v9")
+    assert len(s) <= 9990, len(s)
+    out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIi.txt")
+    open(out, "w", encoding="utf-8").write(s); print(len(s), out)
