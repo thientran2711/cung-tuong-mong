@@ -5,7 +5,12 @@ START_CTX ≈ 4 % of the 1M window (rollover at 29 %, ceiling 60 %).
 
 ## STATUS
 - 21/11 ~07:35Z K-FOCUS-1 written (dev/kit/KIT_REQUESTS.md, 39ff7e76) → MAIN «KIT REQUEST K-FOCUS-1» sent.
-- PLAN below → MAIN «PLAN READY». Step 2 building waits for MAIN's laws 1–6 check.
+- PLAN below → MAIN «PLAN READY» (~07:05Z). No answer in 30 min → defaults Q1–Q3 (yes) applied.
+- (a) data + runner jdf.js / BAL.df jbaldf.js — dfActs reads the live person card (every kind) + in-person Hậu cung acts; dfRun clicks the same button (class A = one ladder step only inside the call, B = BAL.slap tier). Test dev/test/duodo-focus-data.js ALL OK (6/6 runs).
+- (b) 7 on-figure engines jdfg.js (swipe incl. dodge, tug, bow, drag, ear, words, stare) — test dev/test/duodo-focus-games.js ALL OK: good play ≥ 9 (ear 7, stare 9), bad play ≤ 3, skip = no mark, law 5 ease share rank 0 → 7 = 0.40 → 0.06, no word in play, no typed number.
+- (c) controller jdfv.js — stage tap → kitFocus.open, act → F.play game → dfRun → F.react + setGroups; ✕; BAL.df.on=0 rollback; NPC-initiated card (speaker at her place) → say → choices → chooseM; dodge inside = on-figure swipe-dodge → slapGame onDone. Test dev/test/duodo-focus-view.js ALL OK against a MOCK kitFocus (API = K-FOCUS-1 proposal).
+- quickcheck 3d3b1455+build: PASS (old save ok; render 284/233 ms new/live — the view is not live yet (no kitFocus), re-measure after wiring).
+- WAITING: KIT READY K-FOCUS-1 (kitFocus). Then: wire to the real API, Fold + iPad shots 3×, mp4 both devices, coop-e2e, review.
 
 ## PLAN
 
