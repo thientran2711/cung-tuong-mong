@@ -101,7 +101,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(m1.hM===Math.max(0,Math.min(100,60+B.estr)),'P3 her son away and unseen: Mẫu tử +estr ONCE (not twice)',{m0,m1,estr:B.estr});
  ok(mh.hM===m1.hM,'P3 the host\'s copy of her son reads the same Mẫu tử',{mh,m1});
  const npcK=p=>p.evaluate(()=>(rivals||[]).filter(v=>v&&!v.coop).flatMap(v=>(v.kids||[]).filter(k=>k.alive).map(k=>v.id+':'+k.name+':'+(k.hM==null?'-':k.hM))).sort().join('|'));
- const nk=[await npcK(H),await npcK(G)];
+ const nk=[await npcK(H.p),await npcK(G.p)];
  ok(nk[0]===nk[1],'P3 NPC children: the same Mẫu tử on both seats',{host:nk[0].slice(0,400),guest:nk[1].slice(0,400)});
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
  const n=res.filter(x=>x[0]).length;console.log(`coop-palace-life L${LVL} swap ${SWAP}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});
