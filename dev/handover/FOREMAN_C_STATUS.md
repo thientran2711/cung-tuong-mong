@@ -1021,3 +1021,4 @@ NEWACCT#15 ~02:27Z: HAIR1 fb020d68c hair table (90×8, 10 shapes/rank ×pos×wra
 NEWACCT#15 ~02:30Z: OWNER L1630: hair table is just words; wants 8 ChatGPT prompts (one per rank), each a sheet of the 10 bun shapes → HAIR1 JOB 1b (chatgpt/hair_t1..8.txt).
 NEWACCT#15 ~02:32Z: OWNER L1631: hair differs per SEASON too → G48; HAIR1 told rebuild person×rank×season.
 NEWACCT#15 ~02:35Z: HAIR1 2b3c43f6a 8 ChatGPT hair-sheet prompts sent L1632 (files). HAIR1 now: season rebuild (L1631); JOB2 waits.
+NEWACCT#15 ~02:40Z: DESIGN20 d13d7ed t4 COMOIf + t5 COMOIe (OUTER_TIED, G46 CAPE5_V4, G47) → CHECK1 → GEN1 110 cr. DESIGN20 ROLLED (~24 %, handover in report). LADDER2 owns remaining gaps t1–t3 text, xuân v6, t6–t8.
