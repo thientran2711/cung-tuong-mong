@@ -1,29 +1,30 @@
-# kit-keeper-1 report (session_01UV1Szj1bf6YFPCryaDjdEi, 16/11 06:38Z) — base origin/main ba07c65e
+# HANDOVER — KIT KEEPER "kit-mark" (session_01Rc5AsMtjP4KTgBZVjENGLs) → successor (written 21/11 ~09:30Z at 78 % context)
 
-## A. C8 fig-bg step 2 (KIT §61) — KIT OK c2cbe401e6d2cf66e855f53a9229266315e84d1b (review/fig-bg-k1; ancestor = origin/main ba07c65e)
-One shared part (jfigbg.js: kitFigBgKey + KIT_FIGBG + one CSS block; data-fb written by kitStageFig only), documented in KIT §61, no private frame:
-the scroll is a border-image on the two existing figure columns (.kbk-por book page, .kes event dialog). 14 webp on the CDN (checked 200, 10–51 KB).
-Fixes made while merging onto main:
-1. kitStageFig: kept main's crossorigin + named own chip, added data-fb.
-2. kitDpFit: main rewrote it (KIT 32.2 cap + crop). The branch's "widen the column by the scroll border" would break the cap → the border is now taken
-   INSIDE the capped column (Wmax − border; --kdpw = need + border). The column never grows past KIT_DP_COL.
-3. jfigbg.js moved to the end of assemble.py (after jact, jkc).
-4. Open point "two people → one scroll" is closed by main's KIT 50.1 (one person in the dialog column).
-Tests: dev/test/figbg/scroll.js PASS at 1180x820@2, 755x1000@2, 844x390, 390x844 (rotate prompt, as designed), 1000x755, 1366x1024; shots looked at
-(dialog scroll with rods top+bottom, Thái hậu wide robe cropped inside the silk, name chip readable on the silk). Foreman C: independent reviewer may start.
+## Role + rules (unchanged)
+Build/maintain shared kit parts only, on `review/<topic>` from newest LIVE, tests, shots (CDN `img/_review/<topic>`, never git), KIT.md text + kit-page sample, report `dev/handover/reports/<topic>.md` (write in worktree /home/user/wt/hand2, explicit-path commits, push HEAD:claude/cung-tuong-mong-handover-hj0h8w with fetch/rebase retry), CLAIMS row, `bash dev/tools/quickcheck.sh <sha>` (+ `node dev/test/coop-e2e.js <out>` 92/92 for layout changes), then «SẴN SÀNG KIỂM <topic> <sha>» to rv MSxp `session_01Rc5AsMSxpxbsAMRSE5oWrq` cc current MAIN (now MAIN CHÍNH 92 `session_01Rc5AsMUHiJKCMiCjnzdhii`). Never push main, never message the owner, force-push is refused by the harness (use a new branch name `-r2`). Build: `python3 dev/build/assemble.py` + `bash dev/site/build_site.sh`, then `git checkout -- assets.json`; commit rebuilt index.html/sw.js on every pushed sha (quickcheck "NOT BUILT"). Merge conflict in index/sw: `git checkout --theirs index.html sw.js`, rebuild. media-check: no width/orientation media queries, no innerWidth (use html.kv1/kv2). Tests take `<url> <outdir>`: never pass the size list as outdir. Local test server: `cd /tmp/pcs/www && python3 -m http.server 8778` after `cp index.html /tmp/pcs/www/` (may be gone: recreate).
 
-## B. D36 rank-port kit requests — KIT OK 05bce551901c8a1ea46ea7a5d6bd267fdaf823f8 (review/kit-keeper-1; ancestor = origin/main ba07c65e)
-Built as amendments of existing parts (sub-numbers, no new top number):
-1. KIT 26.1 podium (j90): the plaque IS the step (no lacquered dais), medal at the plaque's top-right, "Ta"/"Con ta" tag top-left, figures take the whole
-   free height at ONE KIT_FIG scale (C34 rule: only plaque height differs), optional entry fields fig / face / nameH / you / mine (what jrank kpodCol needs),
-   "Ta đứng thứ N" (was "Ngươi"). Found + fixed: kitPortrait could print "false" while the portrait list loads. jcui held a private copy of podium CSS for
-   short screens → moved into j90 (one place; its .58rem chip → .66rem, KIT §2 minimum).
-2. KIT 32.7d person dialog without options (end card): the text side scrolls by itself, the figure column keeps the dialog height (before: the column
-   stretched to the text length and the figure scrolled away at 844x390 and 1180x820). kitDpNat counts the full text. Own chip rank+name was already on main.
-3. KIT.md §26 / 26.1 / 32.7d written; KIT_NUMBERS: 61 → KIT OK, 79 slap-mg + 80 coop-chat RESERVED (both branches still write "§76" → must renumber),
-   next free = 81 (C41 "kitHintRing §76" collides with kitPalaceMap §76 → 81 if it becomes a part).
-Tests: new dev/test/podium-plaque.js PASS (contest + Bảng vàng entries) at 1180x820@2, 755x1000@2, 844x390, 390x844, 1000x755, 1366x1024; option-less
-dialog check at 844x390 + 1180x820 (figure column = dialog height, figure in view; skirt cut at the floor per 32.2 owner rule). Shots looked at.
-Not done: old dev/test/podium.js is stale on main (roulette #kroulw intercepts the first tap) — same on main, not caused here.
-Foreman B / D36 worker: merge review/kit-keeper-1 into review/rank-port, drop rank-port's own j90/jk4 expectations, re-run rank-e2e at all viewports.
-Note for the D36 reviewer: jrank.js carries many private .krk-* rules (header, list rows) — check them against the kit (KIT CONSISTENCY).
+## State of my branches (all pushed)
+| topic | branch @ sha | state |
+|---|---|---|
+| kit-info-fixed | review/kit-info-fixed 7bcee876f (code = a843ea4ad) | rv PASS (191c94f4 rv2), in land chain |
+| kit-mark-fix | review/kit-mark-fix-r2 b5dbeb7e5 | rv PASS (db138921), LAND READY (old review/kit-mark-fix has stray jpgs in history: ignore) |
+| kit-badge | review/kit-badge 8bf7b164c (r2: badge 20 px, glyph 14, ⏸ CSS bars, size asserts) | SSK sent to rv MSxp + MAIN 92; waiting for verdict; hao-huu-2 (0466ee43) re-merges after |
+| kit-opt-kem | review/kit-opt-kem 79a5a4511 | SSK sent (MAIN 91), waiting at rv; (2) «Sủng −3 vs BAL 2» = sg() applied == shown, MAIN agreed no change |
+| kit-focus | review/kit-focus 05332db8c | **rv FAIL** (reports/rv-kit-focus.md) — FIX NOT STARTED (see below) |
+| kit-act-grid, ghichu-sections, rankunit, etc. | earlier rounds | landed / in chain |
+
+## OPEN WORK = kit-focus fixes (do FIRST; successor duodo-focus session is session_01Rc5AsLtG4rLx87Rv3pd1ej — send pings there)
+Base: review/kit-focus 05332db8c (rv merged base review/kit-focus-rv afd85abf: assemble.py conflict = take main's list + `'jfocus.js'` after `'jnamefix.js'`; main now has `'jwalk.js'` after jnamefix). Worker's branch review/duodo-focus (a202c325) merges my kit-focus; their test dev/test/duodo-focus-view.js runs on the real kitFocus.
+1. rv FAIL: Fold act buttons clip text (col 168 px, button fixed 64 px; 3-line title + 2-line sub = 106 px). Fix: keep ONE button size; title line-clamp 2, sub 1 line with ellipsis, full name + sub in the «!» popover/aria (add «!» when clamped, measure after layout); and/or widen the kv1 column (avail ≈ cx−(110+12)−4 ≈ 247, keep `overFig` 0). kit-focus.js must assert on EVERY `.kfoc-b`: scrollHeight ≤ clientHeight and text box inside the button, Fold + iPad, with the long mock + two real names («Sai cung nữ thân tín mua lén ngoài cung», «Hối lộ người ở Thái y viện»).
+2. rv nit: iPad SAY box covers the figure's lower legs + plate. Plan: while say shows, hide tabs and shift figure + plate up with the individual `translate` property (the WAAPI transform has fill both; plate already uses transform) by the overlap, restore on done.
+3. Worker items: (a) `F.play({skip:{n,sub,onSkip},onBack})` — kit-drawn skip button (bottom-centre of the play layer, same fan-button look, text never cut) and `onBack` called by ◂ (then endPlay if still playing); (b) `F.setGroups(G)` — replace groups, keep the current group if it still exists (rebuild, no fold anim); (c) BACKDROP: veil must show the BLURRED PLACE PAINTING behind both pages (stranger silhouette + iPad currently plain grey / panel list shows through): paint the stage painting inside the layer — stage child `#scimg.scimg` has `background-image:url(...)` — as `.kfoc-bg` (absolute, inset −12px, cover, CSS `filter:blur(6px)` + dim overlay; no blur in reduced/Gọn), spanning the whole `.kfoc` (both pages on kv2); (d) = item 1.
+Then: tests, quickcheck + coop-e2e, KIT.md §92 update, report reports/kit-focus.md round 2, CLAIMS, SSK to rv + MAIN 92 + duodo-focus successor.
+
+## kit-focus API facts (jfocus.js, last module in assemble list order: …jnamefix, jfocus[, jwalk])
+Knob object `KIT_FOC` (KIT_FOCUS is jk4's banner table). `kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose})` → F: setGroup/say/choices/play/endPlay/hud/react/close/destroy/figRect; layer `.kfoc` between `#stage` top and `nav.bar` top inside `#game`; geometry in `layout(F)`; motion WAAPI, `still()` = reduced motion / OPT.fxon===false / html.kf-still, `KIT_FOC.motion=true` test override. `kitMoodSay`, `kitIdle` (scan #tokens .tok.fig img.figimg). Test: dev/test/kit-focus.js (Fold+iPad, PASS at 05332db8c). Visual harness copies: /tmp/fk (vis.js, vid.js use handover-branch dev/test/fixback-2111 lib; real CDN pictures need the proxy launch option).
+
+## Kit conventions to keep
+Law 9 kit first (missing part → KIT_REQUESTS.md row, built before use), law 11 whole family (scan + before/after table in the report), law 12 Fold 755x1000 + iPad 1180x820, every player word per VANPHONG, no % (odds ladder words). Person card: §6.3 act card square picture; §6.3i left column = figure fills column (NOT shrunk) + scroll with «more below» fade (`kpmore`); §6.3k `.pcb` children span the row (mother block above rows); §6.3h info rows one line + «!», left of the ✕ lane in `.pcpop`; kitStBadge §77b (`<b class="kbdg ok|busy|pause">`, `.krailb.koff`).
+
+## Small leftovers (low priority)
+kit-info-tap.js skips Hoàng tự/Kế vị/Hôn sự/Quý tộc (no `.pcf` block; rv hit-tested them OK) — could add subGo real taps. kit-mark-fix.js pop-maid scene occasionally 0 cards (harness race). After LIVE lands: CLAIMS LANDED + `python3 dev/site/cdn_sync.py --wipe-review <topic>` (kit-focus, kit-act-grid, …); tell mg-intro-2 to switch kgBang → kitNoteBang(text,title) when cfde1cc4 is LIVE (check if done). KIT keeper checks of other workers' kit diffs when pinged (ending-screens kitEndScreen KIT §91, dialog-stack, kit-dialog, calendar, dialog-person).
