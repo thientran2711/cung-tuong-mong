@@ -984,3 +984,4 @@ NEWACCT#14 ~01:40Z: OWNER L1601: xuân v3 drafts — robe looks like slipping of
 NEWACCT#14 ~01:44Z: GEN1 4da8e62 thu t1–t3 v4 drafts 165 cr (t1 WDg3hsAcXe t2 jUoHiBoLD0 t3 YMlimOIWeC) LOOKED + sent L1602: sash over outer robe OK; t2 one panel clear; t3 two panels read almost as one wide panel; skirts flare wide.
 NEWACCT#14 ~01:47Z: DESIGN18 6f61b3f xuân Hán t1–t3 v4 (collar secure on shoulders + zhiju straight cut, wide hem band, no flare) gates PASS → CHECK1; then send v4 to owner for ChatGPT (no Magnific gen unless asked).
 NEWACCT#14 ~01:50Z: CHECK1 e5789b5 xuân v4 PASS ×3 → sent v4 prompts to owner L1603 (review-sheets/chatgpt_L1603) for ChatGPT.
+NEWACCT#14 ~01:53Z: OWNER L1604: ChatGPT gives the same as Magnific; Hán t1–t3 no longer looks Hán after collar edits → DESIGN19 session (Opus) rebuild collar from LIKED Hán collars (G32, t4–t6 open5, owner ChatGPT Hán pics) → v5 + comparison sheet han_collar_L1604.
