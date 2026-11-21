@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the FESTIVE FLOWER that sits at the top centre of the Đại kết cục frame: a lush rounded cluster of red and gold silk peonies and plum blossoms with a few jade-green leaves, a gold lantern-shaped ornament and a small red silk knot at the centre, tied with a broad red and gold ribbon whose two long tails hang down in soft folds, tiny gold coins and gold petals sprinkled; joyful, rich, auspicious.
+Composition and size: landscape 4:3 (1024x768), perfectly symmetric, the flower cluster in the upper two thirds and the ribbon tails falling in the lower third, flat front view, the object centred with a margin.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No person, no face. Output: ONE image on a plain solid chroma-free pure white background (#FFFFFF), no shadow cast on it, object isolated with a clean soft edge, so the owner can remove the background later.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-M50-001"

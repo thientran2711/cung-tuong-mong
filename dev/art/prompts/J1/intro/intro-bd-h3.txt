@@ -1,0 +1,14 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the narrated intro-panel picture «Cố quốc» of the origin «bd»: a Persian palace room at night by the sacred fire's light: a low table with a Đại Hy primer of characters (abstract), a tutor silhouette, a girl from behind, patterned carpets and arched windows, warm flame glow.
+Composition and size: portrait 3:4 (768x1024) like every story-card picture of the game; one finished scene, the camera and layout your own choice for this scene, the upper fifth and lower fifth calm. The heroine is NOT drawn as a figure (the game shows her portrait separately); only the silhouette or back view described above, if any.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No visible face of any character: people are far away, small, in silhouette or seen from behind (rule N1).
+No Qing-dynasty look anywhere: no queue hairstyle, no stiff board headdress, no cheongsam collar (rule F14).
+No necklace and no pendant on anyone; nothing worn around any neck.
+Any figure holds nothing, or EXACTLY ONE object, really gripped.
+Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-OR17-007"

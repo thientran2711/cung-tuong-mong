@@ -1,0 +1,14 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the painted scene of the grand ending «Theo đường tơ lụa» (the ending's node «Theo đường tơ lụa») on the road «Mã cầu và săn hổ», in its THIỆN shading: warm, gentle, people at ease, a merciful outcome. What it means in the game (the game's own Vietnamese ending text, only to understand the meaning, never write any of it into the picture): Ngươi dâng biểu xin theo sứ đoàn về thăm cố hương. Hoàng thượng phê chuẩn, cho Bạc Đồ dắt Ngọc Câu theo. Ở Kim Quang môn ngươi ngoái lại một lần rồi phi về phía tây; trên con đường tơ lụa, người dắt lạc đà kể về một công chúa đi giữa hai nước mà không mang oán của nước nào. The scene: a single small figure seen from behind on a mountain footpath, the palace gate tiny in the mist far below, a cloth bundle on the back, early sun rising over layered green peaks. World cues of this life: Persia (Ba Tư): a fire temple with a sacred flame, Persian court dress, camel caravans, the Ngọc Môn pass.
+Composition and size: portrait 3:4 (768x1024). Camera: the figure on the right third, open scenery filling the left. Every person is far away, small, in silhouette or seen from behind; the whole picture is ONE finished painted scene, nothing cropped awkwardly, the upper fifth calm enough for a title to sit on it.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2). Time and weather: soft noon sun.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No visible face of any character: people are far away, small, in silhouette or seen from behind (rule N1).
+No Qing-dynasty look anywhere: no queue hairstyle, no stiff board headdress, no cheongsam collar (rule F14).
+No necklace and no pendant on anyone; nothing worn around any neck.
+Any figure holds nothing, or EXACTLY ONE object, really gripped.
+Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-GE06-087"

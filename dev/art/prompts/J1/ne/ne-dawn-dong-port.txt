@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the full-screen «Sang buổi» picture ne-dawn-dong (the dawn of the season): a winter dawn over the palace: snow-covered tiled roofs glowing pink and gold, bare plum branches with red buds, a thin smoke from chimneys, clear cold air. The existing 4:3 picture of the same scene (file ne-dawn-dong.webp, attached as the SECOND image) shows the idea: keep its subject and mood but recompose it freely for the new frame.
+Composition and size: portrait 2:3 (1024x1536), used FULL-SCREEN on a phone held upright with object-fit cover (no frame, no border, no dark band). The title and one line of text lie over the lower third and a button at the very bottom, so keep the lower third quiet and soft; the focus of the picture sits in the upper-middle.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No person, no face. Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-M84-015"

@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the full-screen background of the ending screen of type «leave» (the game's ending types: death, exile, fail, leave, throne, grand, fate, rare): a spring departure: the palace's side gate standing open onto a blossoming country road, peach and willow along a stone path winding to far green hills, a few petals in the air, bright clean spring light.
+Composition and size: landscape 3:2 (1536x1024) used full-screen on BOTH a portrait phone and a landscape iPad with object-fit cover, focus at the horizontal centre and about three tenths down from the top: so the important scenery lies in the CENTRAL vertical band (the middle two fifths of the width) and slightly above the middle; the left and right thirds and the lowest quarter are only soft continuing scenery that may be cropped away; a quiet soft area in the lower third because a dialog frame covers it. No person at all.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No person, no face, no frame, no flowers or drapes (the game adds the frame, flower and drapes on top). Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-M51-004"

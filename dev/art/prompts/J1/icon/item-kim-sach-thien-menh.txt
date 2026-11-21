@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: a single game item icon: the «Kim sách Thiên mệnh» (golden book of Heaven's Mandate): a closed book of thin gold plates bound with red silk cord, the cover a smooth polished gold panel with a soft embossed border of clouds and a small phoenix at its centre (decoration only, no readable writing), a red silk ribbon bookmark hanging from the bottom, a small jade clasp. Heavy, precious, ceremonial. The cover is blank of any letters because the game engraves the title later.
+Composition and size: square 1:1 (1024x1024), the object centred with a margin, seen slightly from above at a three-quarter angle, soft shadow-less rendering. Plain solid chroma-free pure white background (#FFFFFF), object isolated, soft clean edge, nothing else in the picture (the owner removes the background later).
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No hand, no person, no face. Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-GE07-001"

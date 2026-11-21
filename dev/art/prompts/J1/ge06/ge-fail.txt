@@ -1,0 +1,12 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the picture for the fail notice «Kết cục · <name of the lost ending>» of the Hồi kết nhánh: a quiet palace courtyard in thin grey rain after a dream was lost; an empty phoenix-carved chair on a wide wet stone terrace, one fallen plum branch with a few red petals on the stones, torn red silk caught on a balustrade, an unlit lantern, tall dim palace halls behind; no person at all, no ruin or violence, just loss and silence.
+Composition and size: portrait 3:4 (768x1024), centred empty chair in the middle ground, wet stones reflecting a pale sky, the upper fifth calm for a title.
+DARK mood: deep, rich, gloomy atmosphere with low light, not black and not just night (rule N2). Time and weather: thin steady rain at dusk.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No visible face of any character: people are far away, small, in silhouette or seen from behind (rule N1).
+No Qing-dynasty look anywhere: no queue hairstyle, no stiff board headdress, no cheongsam collar (rule F14).
+Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-GE06F-001"

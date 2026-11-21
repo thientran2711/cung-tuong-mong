@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the LEFT white mourning drape of the ending frame: a long white cloth hung from the TOP-LEFT corner: a gathered swag at the top with a small white silk rosette, then the cloth falling straight down in long soft vertical folds along the LEFT side, its tail slightly tapering and ending in a gentle curved hem; white and ivory with soft pearl-grey shading, thin weighty silk with natural folds.
+Composition and size: tall portrait 2:3 (1024x1536); the drape hangs on the left half of the picture from the top edge down nearly to the bottom, the right half is empty background; flat front view. The owner crops it later to a narrow tall strip.
+Mood: solemn and quiet, soft cool even light, never black and never grey-dull (rule N2 sad = deep and rich: keep the whites luminous against the background).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No person, no face. Output: ONE image on a plain flat solid neutral mid-grey background (#7A7A7A), no gradient, no shadow cast on it, object isolated with a clean soft edge, so the owner can remove the background later (grey is used instead of white because the object is white).
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-M48-002"

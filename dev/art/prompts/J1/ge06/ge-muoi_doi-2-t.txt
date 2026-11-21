@@ -1,0 +1,14 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the painted scene of the grand ending «Mở kho cứu đói» (the ending's node «Kho lương thiên hạ») on the road «Năm đói ở Giang Nam», in its THIỆN shading: warm, gentle, people at ease, a merciful outcome. What it means in the game (the game's own Vietnamese ending text, only to understand the meaning, never write any of it into the picture): Năm đói sau, Hộ bộ cạn thóc, và ngươi mở hết kho của nhà cho triều đình mượn, không lấy lãi. Kho thường bình của nhà ngươi thành lệ cho cả Giang Nam: năm được mùa mua vào, năm mất mùa bán ra giá cũ. Hoàng thượng hỏi việc lương thực, chỉ cần hỏi ngươi. The scene: a vast counting hall: tall ledgers and silver ingots in neat rows, clerks small and busy, one figure from behind on a raised dais overlooking them. World cues of this life: a salt-merchant family world: salt barges, white salt mounds, silver ingots, account books.
+Composition and size: portrait 3:4 (768x1024). Camera: close mid-distance, three-quarter back view cropped at the knees, scenery behind. Every person is far away, small, in silhouette or seen from behind; the whole picture is ONE finished painted scene, nothing cropped awkwardly, the upper fifth calm enough for a title to sit on it.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2). Time and weather: soft noon sun.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No visible face of any character: people are far away, small, in silhouette or seen from behind (rule N1).
+No Qing-dynasty look anywhere: no queue hairstyle, no stiff board headdress, no cheongsam collar (rule F14).
+No necklace and no pendant on anyone; nothing worn around any neck.
+Any figure holds nothing, or EXACTLY ONE object, really gripped.
+Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-GE06-235"

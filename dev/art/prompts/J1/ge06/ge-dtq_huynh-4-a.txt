@@ -1,0 +1,15 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+EDIT TASK: attach as the SECOND image the approved THIỆN picture of this same ending (file ge-dtq_huynh-4-t, code AJ1-GE06-065). It is the composition master: keep the camera, every building, prop and silhouette in EXACTLY the same place and size; change ONLY the light, colour temperature and mood to the ác shading, and the crowd's bearing (bowed, kneeling, shrinking, in long shadows). Do not add or remove any object.
+Subject: the SAME scene, repainted in the ÁC shading of the grand ending «Phản quốc theo chàng» (node «Hồng nhan đất giặc», road «Người anh nơi đất giặc»): cold, tense, people afraid or bowed, the outcome won by force or fear. What it means in the game (the game's own Vietnamese ending text, only to understand the meaning, never write any of it into the picture): Ngươi theo người sứ giặc sang bên kia ải, mang theo những gì ngươi biết về quân Đại Hy. Huynh trưởng được thả, đổi lại là một đường ải bỏ ngỏ; ở kinh thành, tên ngươi bị gạch khỏi ngọc điệp, ở thảo nguyên, người ta gọi ngươi là hồng nhan của sứ thần. The scene stays: a hired river boat with two figures from behind under a bamboo awning, drifting between misty banks, a lantern at the prow. World cues: a border general's family world: banners, armour stands, horses, a war drum.
+Size: portrait 3:4 (768x1024), the same framing as the master picture.
+DARK mood: deep, rich, gloomy atmosphere with low light, not black and not just night (rule N2). Time and weather: lamplit night with long shadows.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No visible face of any character: people are far away, small, in silhouette or seen from behind (rule N1).
+No Qing-dynasty look anywhere: no queue hairstyle, no stiff board headdress, no cheongsam collar (rule F14).
+No necklace and no pendant on anyone; nothing worn around any neck.
+Any figure holds nothing, or EXACTLY ONE object, really gripped.
+Output: ONE image.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-GE06-066"

@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+Subject: the LEFT festive drape of the ending frame: a long red silk hanging from the TOP-LEFT corner: a gathered swag at the top with a gold tassel and a red-and-gold rosette, then the silk falling in long soft vertical folds down the LEFT side, with a garland of small gold flowers and red knots running along its inner edge and short gold tassels at the hem; red silk with fine gold embroidery of small clouds, thin weighty silk with natural folds.
+Composition and size: tall portrait 2:3 (1024x1536); the drape hangs on the left half of the picture from the top edge down nearly to the bottom, the right half is empty background; flat front view. The owner crops it later to a narrow tall strip.
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+No person, no face. Output: ONE image on a plain solid chroma-free pure white background (#FFFFFF), no shadow cast on it, object isolated with a clean soft edge, so the owner can remove the background later.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ1-M50-002"
