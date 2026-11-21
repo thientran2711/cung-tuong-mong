@@ -206,5 +206,6 @@
  "M2213-06": "M2213-06_s62_t6_thu.txt (bộ thu s62 t6 Quý phi = M2211-06 (thang lưới L2210, lưới/tua chỉ trong 1 câu vân kiên L2212); bỏ câu lặp + sửa mâu thuẫn COMMON_LIST (L2213))",
  "M2213-07": "M2213-07_s62_t7_thu.txt (bộ thu s62 t7 Hoàng quý phi = M2211-07 (thang lưới L2210, lưới/tua chỉ trong 1 câu vân kiên L2212); bỏ câu lặp + sửa mâu thuẫn COMMON_LIST (L2213))",
  "M2213-08": "M2213-08_s62_t8_thu.txt (bộ thu s62 t8 Hoàng hậu = M2211-08 (thang lưới L2210, lưới/tua chỉ trong 1 câu vân kiên L2212); bỏ câu lặp + sửa mâu thuẫn COMMON_LIST (L2213))",
- "M2213-T7LOW": "M2213-T7LOW_s62_t7_thu.txt (THỬ cổ thấp: HQP = M2213-07, mọi chữ cổ áo thay bằng 'a low neckline'; L2209/L2212)"
+ "M2213-T7LOW": "M2213-T7LOW_s62_t7_thu.txt (THỬ cổ thấp: HQP = M2213-07, mọi chữ cổ áo thay bằng 'a low neckline'; L2209/L2212)",
+ "M2216-01": "M2216-01_s62_t6_thu_COTHAP.txt (THỬ: Quý phi = M2187-06 chị khen, mọi chữ cổ áo thay bằng 'a low neckline'; L2216)"
 }
