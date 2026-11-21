@@ -762,3 +762,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 kit-ghichu-sections rv | review/kit-ghichu-sections-rv dd0e20e9 | rv session | FAIL (popup under avatar on Fold) | 21/11
 | REVIEW dialog-person part 1 DONE: PASS 642f056d FF of fafe0f62 | review/dialog-person-rv; reports/rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | DONE | 21/11 05:00Z |
 bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip acts read only ●) | 21/11
+| REVIEW mg-craft-r2 Thêu delta (opus BIG) of 4847775a | review/mg-craft-r2-r2 | B | session_01N1tNP35AHV1nhE7cRkhbFQ | RUNNING | 21/11 05:02Z |
