@@ -1,0 +1,10 @@
+base: dev/art/thu_comoi/s62_t4_THU_COMOIc.txt
+allow: a slim gold edge  # owner L1605 G42 ladder carries up + G44 (no side bow) + G45 L1622 (jade visible); thu s62 t4 v5 via Foreman C #15, dev/handover/reports/DESIGN20.md
+allow: an embroidered silk sash with jade belt pendants and tassels  # owner L1605 G42 ladder carries up + G44 (no side bow) + G45 L1622 (jade visible); thu s62 t4 v5 via Foreman C #15, dev/handover/reports/DESIGN20.md
+allow: 3/4 or frontal view  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: her signature colour family light plum and blush stays the MAIN robe colour  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: the robe itself is clearly light plum satin  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: NOT a cream  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: beige or all-gold robe  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: never a pair  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: never in profile  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
