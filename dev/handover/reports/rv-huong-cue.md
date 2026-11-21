@@ -10,3 +10,10 @@ Verdict: PASS. Reviewed sha = merge of newest origin/main (e4fd4dcf, LIVE 4f34f4
 - Noword tests now cap each drawn string at 60 chars: they catch a long prose line but NOT a poem drawn as short lines; jnwp/jtd/jnwq/jhd still pending (not in this scope).
 - Far-state label is brown on a busy shelf: readable, slightly low contrast.
 - Relabelled non-huong games verified by the noword tests (words present, ≤60), not by individual shots.
+
+# ROUND 2 — widened to review/huong-cue-2 (MAIN 84)
+Verdict: PASS 5fa9aa87 (pushed review/huong-cue-2-rv) = huong-cue-2 fffd3f59 + review/kit-nwb-cap 39b91a16 + LIVE c3a398dd.
+- Merge: jbal2 (popMax + laneFade both kept); jtd td_dung = main's td-dung-clear version (it already carries the guiding bar words Vững/Đổ + «Bát nghiêng… giữ …» line; branch's older td_dung labels dropped, no loss); mg-noword-b kept main's GUIDE list + the 60-char rule. index.html/sw.js rebuilt.
+- Kit (law 9): .nwb-cap ACCEPTED by kit keeper (rem font + wrap fix, KIT §13.7.3) — merged.
+- Tests on merged sha: mg-noword-a/b/kit, mg-allkinds 7/7, mgcal-redo 12/12, ag-mgcal, coop-e2e 68/68, quickcheck PASS (gates PASS, perf ok).
+- Shots Fold + iPad of doi, thq, xa, tho, td_cong, td_dung, td_hanh looked: words legible, no overflow.
