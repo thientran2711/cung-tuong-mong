@@ -1125,7 +1125,7 @@ function kitPcNoteBang(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"
 window.kitPcNoteBang=kitPcNoteBang;
 function kitPcNoteScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc").forEach(kitPcNoteBang)}catch(e){}}
 document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest(".pc > .pcl > .pcp > .kpcbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
- const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
+ const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();let who=null;try{who=typeof kitPersonByName==="function"?kitPersonByName(nm):null}catch(e){}if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",subject:who||undefined,sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
 (function(){const st=document.createElement("style");st.id="kit-pc-bang";st.textContent=`
 .pc>.pcl>.pcp.kit{position:relative}
 .pc>.pcl>.pcp>.kpcbang{position:absolute;top:5.5%;right:6%;margin:0;z-index:6;cursor:pointer}/* on the visible top-right corner of the framed figure (proportional, never clipped by the name tag) */
