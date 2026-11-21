@@ -25,3 +25,4 @@ ref1 nVsrRMPYQD (remove-bg 1024×2304, flattened on white) | ref2 TdwDfOyVNR (ro
 
 ### Order 4 — JOB E L1749 · Phi tách nền (remove_background on white, 3 cr each = 6 cr)
 u5Wte79QLD → hu2doQavqL (752×1344) · EbYI8xvuuO → Lw8bk7cswO (1520×2688). Files review-sheets/han_phi_tachnen_L1749/{phi_cu_tachnen,phi_moi_tachnen,face_compare}.png (faces scaled to 1400 px high). Session total 796 cr.
+JOB E fix L1754 (0 cr): the Magnific cut-outs were made WITH backgroundColor #FFFFFF → RGBA but alpha 255 everywhere (no real transparency). Made phi_cu_trongsuot.png / phi_moi_trongsuot.png locally: flood-fill from the corners over near-white (≥245) → alpha 0, rest 255. RGBA, corners alpha 0. Hard edge, a few white specks (ear/tassel gaps). A clean soft-edged alpha = re-run remove_background WITHOUT backgroundColor (3 cr × 2 = 6 cr) — offered to foreman.
