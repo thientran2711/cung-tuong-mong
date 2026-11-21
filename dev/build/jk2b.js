@@ -845,6 +845,8 @@ function kitPersonByName(nm){nm=String(nm||"").replace(/<[^>]*>/g,"").trim();if(
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;ev.stopPropagation();const sl=t.dataset.kwear,who=t.dataset.kwho;
  if(who==="me"){window.__kwdTab=sl;const b=document.querySelector('[data-tab="inv"]');if(b)b.click();return}
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===who))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===sl);if(!x)return;
+ /* bag-inline-3 F2: the inline strip (KIT §70.6 kinlWear) under the card, no pop-up */
+ if(typeof kinlWear==="function"&&kinlWear(t,v,sl))return;
  kitModal({kind:"info",title:`${sl==="tram"?"Trâm cài":"Y phục"} của ${v.name}`,facts:[{who:v,text:x.empty?x.name:`${x.name} · ${x.gradeName}${x.giver?" · "+x.giver+" ban":""}`},
   x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."],btn:"Đã hiểu"})},true);
 /* K1 on every person card: replace j92's temporary "Trâm: … / Y phục: …" chips with the slots under the portrait */
