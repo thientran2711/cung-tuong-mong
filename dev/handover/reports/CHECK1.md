@@ -439,3 +439,12 @@ Notes:
 - My own regex scan of every dev/art/**/*.txt for vase / bình hoa / lọ hoa within a hold/held/carry/in-hand context, excluding "no vase": **0 held vases left**.
 Verdict: **PASS.** t4 COMOIi is unchanged (it passed in job 15).
 - JOB 15 re-check 2 (DESIGN20 57ddfa0): t4 COMOIi flower "(never two, never a pair, no cluster)" = the shared wording; "on them" dropped from the sleeves. Gates + keep PASS, 9990 chars. **PASS**, text only. Current thu set (Foreman C #16): t4 COMOIi, t5 COMOIh, t6 COMOIj, t7 v8i, t8 v10h.
+
+## CHECKLIST UPDATE (Foreman C #16, owner L1645) — overrides items 4/8/9/10 above
+- G47 = EMBROIDERY copy only (motif types + placements: front-edge bands, hem bands, inner hem, inner neckline band, chest), a little denser.
+  - NEVER FAIL for missing copied garment pieces (panels / vạt / extra jade sets).
+  - FAIL if extra garment pieces are ADDED.
+- Tần t4 + Phi t5 = the L1638 v6 design (COMOIf / COMOIe) + the vase/ear fixes.
+- G49: Phi t5 has a SHORT round-pearl swag left→right on the capelet. The Tần has none.
+- G44: a t7 HQP bow is allowed (beauty first); t1–t6 bow = centred or none.
+- Do not over-constrain ('đừng ép prompt quá gò bó'). G48 hair table cancelled: hair stays as in the existing prompts.
