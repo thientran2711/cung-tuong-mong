@@ -564,3 +564,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW or20-j68q r1 E31r (opus BIG; briefs/E31r-review-or20-j68q.md) of cd23ef92 | review/or20-j68q-r1; reports/or20-j68q-review.md | FOREMAN E #24 | session_01DgYSWq8fVe171xmVXHeDg6 | RUNNING | 21/11 00:02Z |
 | ui-tour PDF (owner 21/11 ~00:00Z: every tab + every mid-screen popup, Fold+iPad, PDF) | review/ui-tour | MAIN CHÍNH 82 | session_01Rc5AsJLRqcEASEQYrXxbRd | RUNNING | 21/11 00:02Z |
 | name-clash role-parity 463 (opus; hh:N-ONLY cx2:chest + cx4:rougeSteal when name-clash meets LIVE 463d3d70) | review/coop-name-clash-r1-land463; briefs/b-nameclash-rp.md | B | session_01N1tNP4qZ3DWxjmCbaKiPNd | RUNNING | 21/11 00:09Z |
+| OWNER BUG kit-progress-run (loading bar stuck «mới chút ít» + blinks; kit 35 kitProgress, all 3 callers jload :89/:173/:265) | review/kit-progress-run | MAIN CHÍNH 82 → kit keeper | session_01Rc5AsMtjP4KTgBZVjENGLs | ORDERED | 21/11 00:15Z |
