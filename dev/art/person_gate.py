@@ -28,9 +28,17 @@ def _builder():
         finally: sys.argv=old
         _B=B
     return _B
+# MAID file names (MAIDRUN1 / G72 gap, BUILDFIX3): <pid>_<rank>[_ha_DUONG]_L<n>.txt (maid7/prod) and <pid>_<rank>_<age>_L<n>.txt (maid7/prod_ages).
+# Rank key = 'maid:<rank>@<age>' (season variant _ha_DUONG compared with the same rank; prod/ = a18). Maids have no t1-t8 item/angle/face data
+# in the builder, so person_check skips them; batch still runs the same-rank ANGLE / Pose cross-person check.
+MAID_RANKS=("tam_thancan","nhi_thancan","nhat_thancan","mama_a36","mama_a51","thosu","tam","nhi","nhat","chuongsu")
+MAID_RE=re.compile(r"(m\d\d)_("+"|".join(MAID_RANKS)+r")(?:_ha_DUONG)?(?:_(a\d\d))?_L\d+")
 def pid_rank(fn,text=""):
-    m=re.match(r"([cmsp]\d\d)_t([1-8])(?!\d)",os.path.basename(fn))
+    b=os.path.basename(fn)
+    m=re.match(r"([cmsp]\d\d)_t([1-8])(?!\d)",b)
     if m: return m.group(1),int(m.group(2))
+    m=MAID_RE.match(b)
+    if m: return m.group(1),f"maid:{m.group(2)}@{m.group(3) or ('a51' if m.group(2)=='mama_a51' else 'a36' if m.group(2)=='mama_a36' else 'a18')}"
     return None,None
 def _norm(s): return re.sub(r"\s+"," ",re.sub(r"\(.*?\)","",s.lower())).strip(" .,;")
 def _key(item):   # first words of an item phrase, article dropped: 'a thread-bound book tied with …' -> 'thread-bound book'
@@ -58,7 +66,7 @@ def sent(text,head):
     m=re.search(re.escape(head)+r"[^.]*\.?",text); return m.group(0).strip() if m else None
 def person_check(text,pid,rank,age="a18"):
     fails=[]
-    if not pid or not rank: return fails
+    if not pid or not rank or not isinstance(rank,int): return fails   # maid rank keys: no t1-t8 builder data
     try: it,pets=own_item(pid,rank,age)
     except Exception as e: return [("P0","PERSON DATA",f"no builder data for {pid} t{rank}: {e}")]
     pose=sent(text,"Pose:") or text
@@ -79,18 +87,18 @@ def batch(files,age="a18"):
     by=collections.defaultdict(lambda: collections.defaultdict(list)); bad=[]
     for fn in files:
         t=open(fn,encoding="utf-8").read(); pid,rank=pid_rank(fn,t)
-        if not pid: bad.append(f"B0 {fn}: no person/rank in file name (want <pid>_t<rank>_…)"); continue
+        if not pid: bad.append(f"B0 {fn}: no person/rank in file name (want <pid>_t<rank>_… or maid <pid>_<rank>[_<age>]_L<n>)"); continue
         for p in person_check(t,pid,rank,age): bad.append(f"{p[0]} {os.path.basename(fn)}: {p[2]}")
         a=sent(t,"ANGLE:"); po=sent(t,"Pose:")
         if a: by[(rank,"ANGLE")][_norm(a)].append((pid,fn))
         if po: by[(rank,"Pose")][_norm(po)].append((pid,fn))
         try: by[(rank,"ITEM")][_key(own_item(pid,rank,age)[0])].append((pid,fn))
         except Exception: pass
-    for (rank,kind),d in sorted(by.items()):
+    for (rank,kind),d in sorted(by.items(),key=lambda x:(str(x[0][0]),x[0][1])):
         for txt,lst in d.items():
             ps=sorted({p for p,_ in lst})
-            if len(ps)>1 and kind=="ITEM": WARN.append(f"W1 t{rank} builder data gives the SAME item to {', '.join(ps)}: '{txt}' (item data repeats across persons: only 8 item ladders for 90 persons; needs a data fix, not a file fix)"); continue
-            if len(ps)>1: bad.append(f"B1 t{rank} same {kind} for {len(ps)} persons {', '.join(ps)}: '{txt[:100]}…' ({', '.join(os.path.basename(f) for _,f in lst)})")
+            if len(ps)>1 and kind=="ITEM": WARN.append(f"W1 {'t'+str(rank) if isinstance(rank,int) else rank} builder data gives the SAME item to {', '.join(ps)}: '{txt}' (item data repeats across persons: only 8 item ladders for 90 persons; needs a data fix, not a file fix)"); continue
+            if len(ps)>1: bad.append(f"B1 {'t'+str(rank) if isinstance(rank,int) else rank} same {kind} for {len(ps)} persons {', '.join(ps)}: '{txt[:100]}…' ({', '.join(os.path.basename(f) for _,f in lst)})")
     return bad
 def selftest():
     import tempfile
