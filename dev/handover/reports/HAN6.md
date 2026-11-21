@@ -141,3 +141,8 @@ Word-diff vs L1903:
 Gates: keep PASS ×2, check_store --scope tpN --age a22 = no FAIL ×2.
 Sent to VE11 session_01D3E3NXVzBHdCGoGMiocJtu: t7 + t8 @135 each (2k medium) = 270 cr, one sheet CŨ|MỚI ×2.
 - CORRECTION (#27): t7 was already done by HHCOL2 (s62_t7_THU_vankien2_L1973 @fe4e562). My t7 file s62_t7_THU_vankien2_OLD_clasp_L1973.txt = DO NOT USE. VE11 was told to draw only my t8 (1 @135).
+- t8 L1976 drawn (VE11): jUo5nRNLD0 (135 cr), sheet dev/handover/review-sheets/thu_t8_L1976_clasp.png, VE11 commit 333a9c4. My t7 file was NOT drawn.
+HAN6 read:
+- Same old outfit: yellow robe, big lilac peonies, phoenixes, nine-phoenix crown, pearl swags.
+- The clasp shows at the throat. The vân kiên is smaller and more upright around the neck than CqnI8nxEEy, spreading less past the shoulders.
+- The robe falls a little narrower. The front waist is clear: the held item is at the chest.
