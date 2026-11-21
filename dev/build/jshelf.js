@@ -384,7 +384,7 @@ window.shelfPlantOpen=shelfPlantOpen;
 /* the care minigame (also the Thử tay calibration entry): water rises step by step; stop it inside the band; score = closeness over the rounds */
 /* MG11: env (optional) = the board ease (BAL.mgTier.lev.tuoi f × the pour pace; middle ease = the old pace, law 5) + the round on the HUD; the SAME board is the Thử tay kind tuoi (jmgx) */
 function shelfWaterGame(box,done,W,env){W=W||SHELF_CARE.cay;const G=BAL.shelf.plant.game,F=env?mgLev(env,"tuoi","f"):1;let r=0,lv=0,tm=0,sum=0;const stop=()=>clearTimeout(tm);const hr=()=>{if(env&&env.hud)env.hud({round:`${Math.min(r+1,G.rounds)}/${G.rounds}`})};
- const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop">${W.stop}</button></div>`+kitFacts([`Lần ${r+1}/${G.rounds} · đã đổ ${lv}/${G.steps} · vừa đủ: ${G.band[0]}–${G.band[1]}`])};
+ const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop" aria-label="${W.stop}" title="${W.stop}" data-kgsign="●">●</button></div>`+NWB.cnt(G.steps,lv,0,G.band)};
  const tick=()=>{if(!document.body.contains(box)){stop();return}lv++;if(lv>G.steps){end(0);return}draw();tm=setTimeout(tick,F*(G.ms[0]-(G.ms[0]-G.ms[1])*r/Math.max(1,G.rounds-1)))};
  const end=s=>{stop();sum+=s;r++;lv=0;hr();if(r>=G.rounds){SHPC.game=null;done(sum/G.rounds);return}draw();tm=setTimeout(tick,F*G.ms[0])};
  box.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shw]");if(!b)return;ev.preventDefault();ev.stopPropagation();
