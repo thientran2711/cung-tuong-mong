@@ -79,5 +79,6 @@ Practical: worktrees /home/user/wt/k4ow (opt-title-wrap-r2; untracked live.html 
 FOR MAIN 97: keeper #4 stops here (rollover); please open KIT KEEPER #5 with this HANDOVER (queue item 1 = kit-ef-unit r3).
 ## Queue status
 - (1) kit-opt-title-wrap → SSK sent (§1).
-- (2) kit-mark-fix r5 → SSK sent (§2). Coordinator is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr.
+- (2) kit-mark-fix r5 → SSK sent (§2); round 2 b4d82057 (§4).
+- (3) kit-opt-title-wrap r2 486b922a → SSK (§3). Coordinator now MAIN CHÍNH 96 session_01Rc5AsNBD5TsxWsYmh8ZkSJ. Coordinator is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr.
 - Waiting rv verdicts: kit-ef-unit-r2 bb00fc02, kit-relrows-ms d80b9d2b (keeper #3); kit-focus r5 da873b4b, kit-win-pay 0e6fe923, kit-mark-fix-r3 99f1e576, kit-g4-plate 03181881 (keeper #2).
