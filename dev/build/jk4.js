@@ -553,6 +553,8 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
     the player stands there only when the event is about her alone */
  try{if(L.length&&typeof S!=="undefined"&&S&&L.every(p=>p===S||p.__kp===S)&&m){const w=m.who&&(m.who.__kp||m.who);if(w&&w!==S&&typeof w==="object"&&(w.name||w.kind))L=[w].concat(L)}}catch(e){}
  try{if(L.length>1&&typeof S!=="undefined"&&S){const o=L.filter(p=>p!==S&&p.__kp!==S);if(o.length)L=o.concat(L.filter(p=>p===S||p.__kp===S))}}catch(e){}
+ /* dialog-person (owner 21/11): a choice she makes ALONE (picker she opened, act, shop: jksize kszOwnAct3) has HER OWN figure on the left — one rule with kszWho3 */
+ try{if(m&&!Array.isArray(m.stage||(m.kit&&m.kit.stage))&&typeof kszOwnAct3==="function"&&kszOwnAct3(m)&&typeof S!=="undefined"&&S)L=[S]}catch(e){}
  return window.KIT_EVENT_DP===false?L:L.slice(0,1)};window.kitStagePeople=kitStagePeople;
  if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){/* kit-rows-b KP17: an act picker / shop is not an event — never tag a guessed evId on it, never invent its picture (KIT_ACT_PIDS / act / shop, same set kitIsEventChoice excludes) */if(m&&(m.act||m.shop||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))))return a0.apply(this,arguments);try{/* review r8: a festival dialog whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ)
    takes the festival's own band (img/ev-fest-<k>-b.webp, the one the festival day already shows, j71) — not the Hoàng thượng / Thái hậu picture */
