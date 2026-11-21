@@ -399,3 +399,24 @@ Branch **review/coop-thin-g-f1 @792b8e7c** (pushed; contains LIVE 74cea8bf). F1 
 2. TRIP week-9 desync (bạc / danh differ host vs her phone after 10 s): dump as r1 did (E.base / thpn / D.PQ); suspect coop-guest-agent's agSelf at L13 (her household month on the host in her context: wage / Sức / secrets) writing her S outside the patch, or agGuest()=coopGuest() choice at the jagent merge (try main's raw seat check for agGuest + see if agOn runs NPCs in her context).
 3. Then: night ×5, TRIP swap ×5, g4/g4s, coop-e2e ×3 both orders, cyc/cycs, timer, f3s–f6s, perf (coop-thin-g-perf.js MONTH=1 CPU=4, ≤ +40 %), quickcheck, role-parity, old save; '## F1 FIX' verdict line; SẴN SÀNG KIỂM.
 Local Worker: `cd coop/worker && npm install && npx wrangler dev --port 8787 --ip 127.0.0.1` (THINMAX 13). Lane script: copy dev/test/coop-thin-g-reg.sh, set cd/O paths. Not yet run here: f4s/f5s/f6s/night on 792b8e7c (lane was cut), quickcheck, role-parity, perf.
+
+## F1 FIX #2 — worker session_01N1tNP2X4FHGnxW9LYH1iQy (opus), Foreman B lane (ROOT-5 → ROOT-6 session_01N1tNP4cmMULveQru19PTCj), 11/21/2026
+PRIORITY #1 CHECK ('week stall'): claims F1 #1 4qNNZGeU (rolled) | review/coop-thin-g-f1 792b8e7c, review/coop-thin-g-r1 695414cf | no other claim. START_CTX ≈ 4 % of 1M (own estimate; get_session reads 0) → rollover ≈ 29 %, ceiling 60 %.
+
+### Bisect of the 3 reds after LIVE 74cea8bf (same local Worker, THINMAX 13)
+| suite | 56828ae6 (F1 fix, pre-LIVE) | 8b96b6d5 (+ LIVE fc0867ca) | 792b8e7c (+ LIVE 74cea8bf) | cause |
+|---|---|---|---|---|
+| cyc THIN=13 | **66/66** | red (dung: «B gets her maid's card» + «host draw waits») | red (same) | **TEST BOT**: the HOST's own Tài nghệ (kg82) result screen stayed open → his week held (G hold 80). LIVE kit-dialog folds the result's «Đã hiểu» into the frame ✕; coop-cyc's own clear() only knew «Đã hiểu». Not F1 code. |
+| timer THIN=13 | — | — | red 6 | same bot family (own clear()) |
+| TRIP swap wk9 desync | — | — | not reproduced: 1 run 82/82 + lane run 35/36 weeks green (cut by a 45 min cap under load) | see lane below (×5) |
+Family scan (law 11): `grep "Đã hiểu|Tiếp|Đóng)/.test(b.textContent.trim())&&vis(b)"` dev/test/*.js → 5 own clears: coop-thin-g (fixed by #1, d3b2d167), **coop-cyc, coop-e2e (shared clear, eval'd by every coop-thin-* test), coop-night, coop-timer** — all 4 fixed in e6a5feeb (✕ on a result screen when #kg82ok / #kg92ok exists, as coop-thin-g mgSkip). After: cyc 66/66 + cycs 66/66 + timer 43/43 (792b8e7c + e6a5feeb).
+
+### New on this branch
+| sha | what | class |
+|---|---|---|
+| e6a5feeb | result-screen ✕ in the 4 own clears above | TEST BOT family |
+| 34052c15 | merge LIVE origin/main 35232176 (co-op diff: jcoopthinf +econ ctx from econ-tamco; index.html / sw.js rebuilt) | merge |
+| b07ec7ea | coop-night / coop-timer clear(): tap a scene that shows no end button yet, once (coop-e2e / coop-cyc already do: kv) — night run 4 stall [3,3,3] (frPz / gHold, cyHold null): her phone's night card `kne-ov` over her dress board, «Tiếp tục» hidden | TEST BOT family |
+| f108a7da | **KIT REQUEST** (dev/kit/KIT_REQUESTS.md): night card (jne kitNightEnd) has NO end button in reduced motion — j93 kmStage red → finish() at 0 clears `T`, which held jne's `st.later(0, fin)` (.km-done shows the button); manual scene = no hint. Scan: 5 manual kmStage scenes, only jne uses st.later → 1 site. Kit keeper's part (law 9), not changed here. | KIT (FOR B) |
+static @34052c15: one-core guard PASS · undef-scan PASS.
+Full lane (night ×5, TRIP ×5, g4/g4s, e2e level-0 tt/nc ×3 both orders, e2e THIN13 both, cyc/cycs, f3s–f6bs, timer, perf) RUNNING @f108a7da (detached; logs /home/user/wt/lane).
