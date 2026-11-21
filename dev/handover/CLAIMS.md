@@ -582,4 +582,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | E RE-GATE LANDER #2 E38 (opus; cold-faction-land then person-minigame-acts-c-land stacked; ORDER MAIN CHÍNH 83 00:47Z; briefs/E38-relander.md) | review/<topic>-land | FOREMAN E #24 | session_01DgYSWp4ipudRZntvXoutJw | RUNNING | 21/11 00:50Z |
 | OWNER BUG den-look (sonnet; hoa đăng: no avoid symbol on lotus, no white edges on light streak + group; briefs/main83-den-look.md) | review/den-look | MAIN CHÍNH 83 | session_01Rc5AsJdVWQcwwxJVzK3N16 | RUNNING | 21/11 01:00Z |
 | REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | RUNNING | 21/11 01:07Z |
-| mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | (opening) | RUNNING | 21/11 01:08Z |
+| mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | session_01Rc5AsLTqtdSYJsC6Gxn7cc | RUNNING | 21/11 01:08Z |
