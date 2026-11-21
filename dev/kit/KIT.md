@@ -771,6 +771,14 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
   (overrides 31.16 `k3grid` when the cards have pictures; owner L109), all cards of a dialog one height (§6.2b). The tiny portrait icon beside an option title (j25 `.md`) is removed: the picture replaces it.
 - TAP ON THE PICTURE = `kitPicZoom(src)`: the picture large over the screen (`#kpzoom`), tap anywhere closes; it does NOT choose the option
   (capture-phase click handler). Any other kit part may call `kitPicZoom(src)`.
+- PERSON OPTION CARD (owner 21/11 ~04:27Z "Bạn đã thật sự làm mấy cái khung theo một cái kit chưa? Mà tại sao cái avatar này không có", review/dialog-person): an option that targets / chooses a PERSON
+  (entourage, spy / gift / plant / evidence / item targets, any `kgt` / `kgp` option) has the KIT AVATAR PART in its picture slot: `kitOptAvatar(b, face, person, src)` (jopic) puts `mdH(face,"big")` (KIT §4.2: the
+  rank frame + ground + badge of her rank, tassel whole) into `.kaart.kaav` (the slot loses its picture frame / edge ring; `button.ka.kopt.kopav`), and the title becomes the kit STACK rank / name (`kitRankName`; a stranger
+  "rank / ???"; a "· đang nhắm" marker stays as the small `.kanx` line). Never an event picture, never a loose portrait crop (`.kopface` is retired for people). An option names its person in `kgp` (a person object:
+  servants, kids, any NPC) or `kgt` (rival / "emp" / "th" / "maid"); a sentence about a person ("Tố Quý phi …") keeps its words and is stacked only in its rank-led form. Scan: `dev/test/dialog-person-scan.js` (part B).
+- THE LEFT FIGURE OF A DIALOG = THE PERSON REALLY ACTING (owner 21/11 ~04:25Z, law 6b; jksize `kszWho3` / `kszOwnAct3` / `kszHere3`, jk4 `kitStagePeople`): (1) the dialog's own person (`who` / stage); (2) a choice she makes ALONE (a picker she
+  opened: `KIT_ACT_PIDS`, `entpick`, `m.act`, `m.shop`, `m.ownAct`) → HER OWN figure, and the small avatar of her own first-person line (`.kfact.kfme > .md`) is dropped (`kszDropMe3`); (3) otherwise the narrator of the kind
+  (BAL.staff.narrator) only when that official is really where she is now (the roster, `j95whereId`), else her own figure. Scan: `dev/test/dialog-person-scan.js` (part A, before / after table).
 - WHICH PICTURE — `kitOptPic(title, button)` → `{src, key, how}`; owner ruling: one picture per MEANING GROUP, reused everywhere; first hit wins:
   1. `act` — `kitActKey(title)`: the option is an act, or ACTS.json already holds its own choice picture (act-pics2 "-h" keys);
   2. `log` — ACTS.json "log" meaning rules (`kbkRules`, the Tuần lục picture of the same choice line; key "-" = none);

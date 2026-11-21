@@ -312,10 +312,24 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
 .ksz3.kszf{max-height:none}`);
  const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
-/* narrator (owner 16/11 19:23Z): BAL.staff.narrator (one core) → the named palace official of that office (jstaff elderBy / S.court) */
-function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.narrator)||KIT_SIZE.v3.narrator;const n=N[sp.kind]||"maid";
- try{if(n==="me")return S;if(n==="emp")return S.emp;if(n==="maid")return S.maid;if(n==="tq"||n==="ksp")return S.court&&S.court[n]||S.maid;
-  if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
+/* SPEAKER RULE (owner 21/11 ~04:25Z, law 6b REAL PEOPLE): the left figure of a dialog is the person REALLY acting / asking in that scene.
+   ONE helper, every dialog goes through it (kitFrameLive3 + the kit sample frames):
+   (1) the dialog names its person (sp.who / kitStagePeople) -> that person;
+   (2) a choice the player makes ALONE (a picker she opened herself: KIT_ACT_PIDS, the entourage picker, an act, a shop) -> HER OWN figure, nobody
+       asks her anything (the small avatar of her own line is dropped, kszDropMe3);
+   (3) otherwise the narrator of the kind (BAL.staff.narrator, owner 16/11 19:23Z), but ONLY if that official is really where she is now
+       (kszHere3: the roster, jstaff / j95); an official who is elsewhere never walks in -> HER OWN figure (the player's own narration). */
+function kszOwnAct3(m){try{if(!m)return false;return !!(m.entp||m.act||m.shop||m.ownAct||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid)))}catch(e){return false}}
+function kszHere3(p){try{if(!p||p===S)return true;const R=S.roster;if(!R||typeof j95whereId!=="function")return false;let id=null;
+ if(p.sid!=null)id="s"+p.sid;else if(p===S.maid)id="mm:me";else if(S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)id="c:"+k}
+ if(!id)return false;const w=j95whereId(id);if(!w||w.place==null)return false;const me=S.place||"home";return typeof j95at==="function"?j95at(w.place,me):w.place===me}catch(e){return false}}
+function kszWho3(sp){if(sp.who)return sp.who;if(sp.m&&kszOwnAct3(sp.m))return S;const N=(typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.narrator)||KIT_SIZE.v3.narrator;const n=N[sp.kind]||"maid";
+ try{let w=null;if(n==="me")return S;if(n==="emp")w=S.emp;else if(n==="maid")w=S.maid;else if(n==="tq"||n==="ksp")w=S.court&&S.court[n]||S.maid;
+  else if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}w=st||S.maid}else w=S.maid;
+  /* a narrator is only an official who REALLY stands here (law 6b); the sample pages (no sp.m) keep the plain map */
+  if(sp.m&&!kszHere3(w))return S;return w}catch(e){return null}}
+/* the player is the figure: her own small avatar beside her own line is a second copy of the same person (owner 21/11) */
+function kszDropMe3(root){try{if(!root)return;root.querySelectorAll(".kfact.kfme > .md").forEach(x=>{const f=x.closest(".kfact");x.remove();if(f)f.classList.add("kfnodot")})}catch(e){}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
 function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false}).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
@@ -595,13 +609,13 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind,m}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
  if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
  [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
- dlg.__ksz3={kind,who,src,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
+ dlg.__ksz3={kind,who,src,mb,body:B,right:R,opts,m};if(who===S)kszDropMe3(R);kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
 Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFitsLive3,kszBtnGridLive3});
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
