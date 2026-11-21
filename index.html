@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e87ae825+","t":"2026-11-21T12:57Z","c":"SELF-MERGE LAND ending-screens: merge LIVE 6f4e8d700 (index.html/sw.js rebuilt)","b":"90d151a52a50","h":[{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"}]};
+window.CTM_BI={"s":"af02f090+","t":"2026-11-21T13:34Z","c":"kit-opt-title-wrap: the odds meter stacks by the TITLE ROOM on every card with a meter (kitOdFit, KIT §6.2b-1)","b":"2454493fbe1e","h":[{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29526,12 +29526,15 @@ function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isC
  const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
  /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
  const row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
- b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodKey=kan.textContent+"|"+od.textContent+"|"+cw;
+ b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
  if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row)}catch(e){console.error("kitOdFit1",e)}}
-let kitOdRO=null;
+let kitOdRO=null,kitOdQ=new Set(),kitOdRaf=0;
+/* no layout read on the kaNorm path (it runs on every DOM change): a new card is only observed (the ResizeObserver's first call fits it); a card whose title / odds TEXT changed is fitted in the next frame */
+function kitOdFlush(){kitOdRaf=0;const q=[...kitOdQ];kitOdQ.clear();for(const b of q)kitOdFit1(b)}
 function kitOdFit(root){try{const r=root&&root.querySelectorAll?root:document;if(!kitOdRO&&typeof ResizeObserver==="function")kitOdRO=new ResizeObserver(es=>{for(const e of es){const b=e.target;const w=Math.round(e.contentRect.width);if(b.__kodW!==w){b.__kodW=w;kitOdFit1(b)}}});
  const bs=[...r.querySelectorAll(".kat>.kodds")].map(o=>o.closest("button.ka")).filter(Boolean);if(r.matches&&r.matches("button.ka")&&r.querySelector(".kat>.kodds"))bs.push(r);
- for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b)}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent+"|"+kat.clientWidth:"";if(b.__kodKey!==k)kitOdFit1(b)}}catch(e){console.error("kitOdFit",e)}}
+ for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b);continue}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent:"";if(b.__kodTxt!==k)kitOdQ.add(b)}
+ if(kitOdQ.size&&!kitOdRaf)kitOdRaf=requestAnimationFrame(kitOdFlush)}catch(e){console.error("kitOdFit",e)}}
 window.kitOdFit=kitOdFit;window.kitOdFit1=kitOdFit1;
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
 (function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
@@ -90225,7 +90228,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="90d151a52a50";window.CTM_BUILD=BUILD;
+const BUILD="2454493fbe1e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

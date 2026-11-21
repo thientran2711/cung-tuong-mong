@@ -904,12 +904,15 @@ function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isC
  const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
  /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
  const row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
- b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodKey=kan.textContent+"|"+od.textContent+"|"+cw;
+ b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
  if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row)}catch(e){console.error("kitOdFit1",e)}}
-let kitOdRO=null;
+let kitOdRO=null,kitOdQ=new Set(),kitOdRaf=0;
+/* no layout read on the kaNorm path (it runs on every DOM change): a new card is only observed (the ResizeObserver's first call fits it); a card whose title / odds TEXT changed is fitted in the next frame */
+function kitOdFlush(){kitOdRaf=0;const q=[...kitOdQ];kitOdQ.clear();for(const b of q)kitOdFit1(b)}
 function kitOdFit(root){try{const r=root&&root.querySelectorAll?root:document;if(!kitOdRO&&typeof ResizeObserver==="function")kitOdRO=new ResizeObserver(es=>{for(const e of es){const b=e.target;const w=Math.round(e.contentRect.width);if(b.__kodW!==w){b.__kodW=w;kitOdFit1(b)}}});
  const bs=[...r.querySelectorAll(".kat>.kodds")].map(o=>o.closest("button.ka")).filter(Boolean);if(r.matches&&r.matches("button.ka")&&r.querySelector(".kat>.kodds"))bs.push(r);
- for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b)}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent+"|"+kat.clientWidth:"";if(b.__kodKey!==k)kitOdFit1(b)}}catch(e){console.error("kitOdFit",e)}}
+ for(const b of bs){if(!b.__kodObs&&kitOdRO){b.__kodObs=1;kitOdRO.observe(b);continue}const kat=b.querySelector(".kat");const k=kat?(kat.querySelector(":scope>.kan")||{}).textContent+"|"+(kat.querySelector(":scope>.kodds")||{}).textContent:"";if(b.__kodTxt!==k)kitOdQ.add(b)}
+ if(kitOdQ.size&&!kitOdRaf)kitOdRaf=requestAnimationFrame(kitOdFlush)}catch(e){console.error("kitOdFit",e)}}
 window.kitOdFit=kitOdFit;window.kitOdFit1=kitOdFit1;
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
 (function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
