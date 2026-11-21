@@ -489,7 +489,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-80 (opus; from standby, depth 0) | handover HANDOVER_SESSION9 | ROOT-79 | session_01Rc5AsNA483VGFgtAtqERSa | RUNNING | 20/11 16:04Z |
 | CUNG NỮ THÂN CẬN thancan (opus; ORDER MAIN ROOT-79 15:40Z; q.close reuse, master uniform look keys, NPC masters, BAL trust/gain-loss) | review/thancan | B | session_01N1tNP6BaLDPk6fvMeWW8hf | READY 6a9a01c0 (reports/thancan.md) | 20/11 ~18:30Z |
 | REVIEW rel-men-servants r1 (opus BIG) of ab189e51 | review/rel-men-servants-r1 | B | session_01N1tNP3Y82Jb8SEkEn2qJTD | FAIL ab189e51 (2 items: §52 kitRelRows two «Thiện cảm» → KIT_REQUESTS 20/11; stranger name «???»; reports/rel-men-servants.md ## REVIEW r1) | 20/11 17:25Z |
-| rel-men-servants r2 fix (sonnet; REVIEW r1 FAIL F1–F3; F1 waits KIT §52 keeper) | review/rel-men-servants | B | session_01N1tNP64FJEwd9DWxE9nJFE | F2/F3 DONE 494ea79b, F1 WAITING KIT §52 | 20/11 17:35Z |
+| rel-men-servants r2 fix (sonnet; REVIEW r1 FAIL F1–F3; F1 waits KIT §52 keeper) | review/rel-men-servants | B | session_01N1tNP64FJEwd9DWxE9nJFE | RUNNING F1 (kit-relrows-ms d80b9d2b, MAIN 94 13:12Z) | 20/11 17:35Z |
 | REVIEW thancan r1 (opus BIG) of 6a9a01c0 | review/thancan-r1 | B | session_01N1tNP2SFmd1FjgGvLmvsRK | PASS a128fb98 (2 fixes + tests; contains main 983a9436) | 20/11 19:10Z |
 | REVIEW coop-name-clash r1 (opus BIG) of c2353df6 | review/coop-name-clash-r1 | B | session_01N1tNP3dftEE3NNrkg7qe5S | PASS 44cf5202 (2 fixes: nmOrdPrune kids path; role-parity scan maid-accuse = scan seed, not a gap; contains LIVE f6866eb8) | 20/11 18:01Z |
 | KIT kit-cost-rows-home (sonnet; KR home-stat rows + «quý nhau», E blockers of home-chapters / person-minigame) | review/kit-cost-rows-home | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 18:50Z |
@@ -870,3 +870,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | KIT KEEPER #4 (OPUS; successor of keeper #3) | review/kit-*; reports/kit-keeper-4.md | MAIN CHÍNH 94 | session_01Rc5AsJkj5hx1zShFY8KnYZ | RUNNING | 21/11 13:13Z |
 | LAND CHAIN 2 (OPUS; successor of MAIN 89 chain; lands only after 89 TAKE OVER) | main; reports/land-chain-2.md | MAIN CHÍNH 94 | session_01Rc5AsLRRYSeTySKmsRyu3W | RUNNING (prep) | 21/11 13:14Z |
 | rv-kit-ef-unit r2 | PASS | review/kit-ef-unit-rv2 d46ad6deb005ab024b9e23a8e8fbcfa280ca81f7 | kit-ef-unit.js + quickcheck + coop-e2e 94/94 |
+| pet-bath-test (sonnet SMALL; MAIN 94 ORDER 13:08Z: mg-ui-rest.js:45 pet bath in-play text assert stale after no-word) | review/pet-bath-test; briefs/b6-pet-bath-test.md | B | session_01N1tNP63eqDeeAMZM44f9Ra | RUNNING | 21/11 13:21Z |
