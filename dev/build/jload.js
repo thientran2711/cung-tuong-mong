@@ -37,7 +37,11 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kprog{display:flex;flex-direction:column;gap:4px}
 .kprog-r{display:flex;align-items:center;gap:10px}
 .kprog-t{flex:1 1 auto;min-width:0;height:12px;border-radius:7px;border:1px solid var(--line);background:var(--k-card2,#f6ead6);overflow:hidden;box-shadow:inset 0 1px 2px #3a210f22}
-.kprog-t>u{display:block;height:100%;width:var(--v,0%);border-radius:6px;background:linear-gradient(90deg,#b0402c,#c98a2a);box-shadow:inset 0 0 0 1px #f0d07055;transition:width .4s ease}
+.kprog-t>u{position:relative;overflow:hidden;display:block;height:100%;width:var(--v,0%);border-radius:6px;background:linear-gradient(90deg,#b0402c,#c98a2a);box-shadow:inset 0 0 0 1px #f0d07055;transition:width .6s cubic-bezier(.3,.7,.3,1);animation:kprogGrow .6s cubic-bezier(.3,.7,.3,1) both}
+/* kit-progress-run (owner 21/11): the fill is built ONCE and updated in place (never rebuilt per tick), only ever moves forward, and a soft sheen keeps running over the filled part while it waits, so it never looks frozen */
+.kprog-t>u::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 0,transparent 35%,rgba(255,244,214,.55) 50%,transparent 65%,transparent 100%);transform:translateX(-100%);animation:kprogSheen 1.7s linear infinite}
+@keyframes kprogGrow{from{width:var(--v0,0%)}to{width:var(--v,0%)}}@keyframes kprogSheen{to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.kprog-t>u,.kprog-t>u::after{animation:none;transition:none}}
 .kprog-n{flex:none;font-family:var(--display);font-weight:700;color:var(--gold);font-size:.86rem;white-space:nowrap}
 .kprog-s{font-size:.76rem;color:var(--dim);min-height:1.2em}
 .kload .kpopts{display:flex;justify-content:flex-end;gap:8px;padding:2px 14px 12px;margin:0}
@@ -49,9 +53,21 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 `;document.head.appendChild(st)})();
 
 /* ---------- the bar (kit 35): label above, track + how much has come (words, KWAIT dlPart) beside, sub line under ---------- */
-function kitProgress(o){const v=o.total?Math.min(100,o.have/o.total*100):0;
- return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(o)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
-window.kitProgress=kitProgress;
+/* kit-progress-run (owner 21/11, «cứ đứng ở một chỗ … chớp tại chỗ, không phải chạy tới»): the shown value only ever moves FORWARD (the total grows while pictures are discovered, so have / total can fall: the shown max keeps the best, per key); the HTML form
+   animates from the value it replaced (--v0 → --v); a live caller builds it once and then calls kitProgressSet(root, o) which updates the same elements in place (no innerHTML rebuild → the CSS transition + sheen play). Words stay dlPart (no %). */
+const KPMAX={};
+function kpShown(o){const v=o.total?Math.min(100,o.have/o.total*100):0;const k=o.key||o.label||"_";const m=Math.max(KPMAX[k]||0,v);return{k,v:m,v0:KPMAX[k]||0,r:v}}
+function kitProgress(o){const s=kpShown(o);KPMAX[s.k]=s.v;const w={have:s.v,total:100};
+ return `<div class="kprog" data-kpk="${s.k}">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(s.v)}"><u style="--v:${s.v.toFixed(1)}%;--v0:${s.v0.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(w)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
+function kitProgressSet(root,o){const k=root&&root.querySelector(".kprog");if(!k){if(root)root.insertAdjacentHTML("afterbegin",kitProgress(o));return}
+ const s=kpShown(Object.assign({},o,{key:k.dataset.kpk||o.key}));KPMAX[s.k]=s.v;const u=k.querySelector(".kprog-t>u"),n=k.querySelector(".kprog-n"),sb=k.querySelector(".kprog-s"),h=k.querySelector(".kpst"),t=k.querySelector(".kprog-t");
+ if(u)u.style.setProperty("--v",s.v.toFixed(1)+"%");if(t)t.setAttribute("aria-valuenow",String(Math.round(s.v)));const w=dlPortion({have:s.v,total:100});if(n&&n.textContent!==w)n.textContent=w;
+ const sub=o.sub||"";if(sb&&sb.textContent!==sub)sb.textContent=sub;if(h&&o.label&&h.textContent!==o.label)h.textContent=o.label}
+window.kitProgress=kitProgress;window.kitProgressSet=kitProgressSet;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§35.1",title:"kitProgress · thanh chạy tới: dựng một lần, cập nhật tại chỗ, chỉ tiến",where:"màn nhập cung lần đầu, màn thỉnh tranh mỗi kiếp, bảng «Thỉnh tranh nhân vật»: nhìn thanh dưới đây tự chạy (tổng tăng dần, thanh không lùi, vệt sáng chạy khi chờ)",
+ html:()=>{requestAnimationFrame(()=>{try{document.querySelectorAll("[data-kprog-demo]").forEach(h=>{if(h.firstChild)return;let have=1,total=12,n=0;const o=()=>({key:"demo"+(h.id||""),label:"Tranh người trong kiếp này",have:Math.min(have,total),total});KPMAX["demo"+(h.id||"")]=0;h.innerHTML=kitProgress(o());
+   const id=setInterval(()=>{if(!document.body.contains(h)){clearInterval(id);return}n++;have=1+Math.floor(n/2);total=12+Math.floor(n/6)*2;if(n>70){n=0;KPMAX["demo"+(h.id||"")]=0;h.innerHTML=kitProgress(o());return}kitProgressSet(h,o())},200)})}catch(e){}});
+  return `<div class="kload"><div class="klb"><div data-kprog-demo></div></div></div>`}})}catch(e){}
 
 const IOS=/iP(ad|hone|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const STANDALONE=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
@@ -86,10 +102,13 @@ function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  if(IOSB&&KLOAD.phase==="check"&&!MAN){b.innerHTML=`<div class="kpnote">${CTM_WAIT.dlCheck}</div>`;o.innerHTML="";return}
  o.className="kpopts";
  const sub=msg||(KLOAD.phase==="check"?CTM_WAIT.dlCheck:eta(c.total-c.have));
- b.innerHTML=kitProgress({label:"Tranh cảnh · đồ vật · tiếng nhạc",have:c.have,total:c.total,sub})+
-  `<div class="kpnote">${CTM_WAIT.dlOnce}</div>`+
+ const po={key:"core",label:"Tranh cảnh · đồ vật · tiếng nhạc",have:c.have,total:c.total,sub};
+ const notes=`<div class="kpnote">${CTM_WAIT.dlOnce}</div>`+
   (KLOAD.fig.total?`<div class="kpnote">${CTM_WAIT.dlFig}</div>`:"")+
   (IOSB?`<div class="kpnote">Safari và ứng dụng ở màn hình chính cất tranh riêng: nếu sau này ngươi thêm vào màn hình chính, ứng dụng sẽ thỉnh lại một lần nữa.</div>`:"");
+ /* kit-progress-run: the bar is built once and updated in place; the notes are rewritten only when their text changes */
+ if(b.querySelector(".kprog")&&b.dataset.kpn!==undefined){kitProgressSet(b,po);if(b.dataset.kpn!==notes){b.dataset.kpn=notes;b.querySelectorAll(":scope > .kpnote").forEach(e=>e.remove());b.insertAdjacentHTML("beforeend",notes)}}
+ else{b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
  const stuck=KLOAD.err&&KLOAD.phase!=="done";
  o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
 function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTimeout(()=>e.remove(),500);enterCb.splice(0).forEach(f=>{try{f()}catch(x){}})}
@@ -170,7 +189,7 @@ const dlWords=s=>s.done?CTM_WAIT.dlDone:s.paused?CTM_WAIT.dlPaused:KLOAD.err==="
 function dlPanel(){const s=dlState(),g=s.g;
  const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":CTM_WAIT.dlPauseX,fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
  return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
-  {h:"Tiến độ",html:kitProgress({have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
+  {h:"Tiến độ",html:kitProgress({key:"fig",have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
   {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],[CTM_WAIT.dlGot,dlPortion(g)],[CTM_WAIT.dlLeft,s.done?CTM_WAIT.dlNone:CTM_WAIT.dlLeftN.replace("{n}",g.left)]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
@@ -206,7 +225,7 @@ window.kitLoadReady=function(cb){if(!el)cb();else enterCb.push(cb)};
    4. A dialog whose picture is not in yet waits hidden for it (at most 3 s), never opens with an empty picture box.
    Test hook: KLOAD.life {n, bytes, ms, late, why}; node dev/test/life-preload.js. */
 const LIFE={busy:0,on:false,keep:new Map(),done:new Set(),seen:new WeakSet(),again:false,go:false,dirty:0};
-KLOAD.life=null;window.KLIFE=LIFE;LIFE.pend=()=>lPending();
+KLOAD.life=null;window.KLIFE=LIFE;LIFE.pend=()=>lPending();LIFE.paint=lPaint;LIFE.cover=lCover;KLOAD.paintHook=msg=>{screen();paint(msg)};/* test hooks (dev/test/kit-progress-run.js): the three bar callers */
 const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{return new URL(typeof IMG_U==="function"?IMG_U(u):u,location.href).href}catch(e){return""}};
 let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
 const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
@@ -264,7 +283,8 @@ function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="kl
  lel.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice"><div class="klh">${typeof kpHeader==="function"?kpHeader("notice","Cung Tường Mộng",CTM_WAIT.lifeHead):""}</div><div class="klb"></div><div class="kpopts"></div></div>`;
  document.body.appendChild(lel);return lel}
 function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"),o=lel.querySelector(".kpopts");
- b.innerHTML=kitProgress({label:CTM_WAIT.lifeLabel,have,total,sub:slow?CTM_WAIT.lifeSlow:""})+`<div class="kpnote">${CTM_WAIT.lifeNote}</div>`;
+ /* kit-progress-run: built once, then updated in place (was a full innerHTML rewrite every 120 ms = the bar blinked in place) */
+ const po={key:"life",label:CTM_WAIT.lifeLabel,have,total,sub:slow?CTM_WAIT.lifeSlow:""};if(b.querySelector(".kprog"))kitProgressSet(b,po);else{KPMAX.life=0;b.innerHTML=kitProgress(po)+`<div class="kpnote">${CTM_WAIT.lifeNote}</div>`}
  const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
