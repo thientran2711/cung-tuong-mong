@@ -56,3 +56,20 @@ SẴN SÀNG KIỂM bongloc-options 6803e362 (tier BIG).
 3. Flaky test: the no-cung-nữ checks and the option-run check now force the cut (loop until «Lót tay» is on the frame, eunuch-ally staff loyalty lowered); «every option runs» no longer needs a fixed count (Tố lên is absent when there is nobody to report to). 5/5 runs **BONGLOC PASS 14/14**.
 4. stipend.js: done in round 1 (c299c2bc, carried) → STIPEND PASS Fold + iPad on 79988d42.
 Also on 79988d42: ptime2 ALL OK. Branch base is still b7041e67 (reviewer merges main f44060d4).
+
+## FIX ROUND 3 — head 874e8270 (tests only) + the 10-bạc drift traced
+- Flaky test, cause: roll() caps every chance at BAL.odds.hi (a forced «100» can still miss), and a loyal eunuch (staff loyalty ≥ 75) is an «ally» that blocks the cut. Both tests now stage the cut in ONE stipend() call with Math.random pinned low and staff loyalty 40 — no retry loops. bongloc-options 6/6 runs PASS 14/14.
+- bongloc-coop.js ×6 on 874e8270: 5 PASS 15/15, 1 FAIL 1/15 (host copy of the guest 410 vs phone 420).
+- DRIFT PROBE (probe script outside git, `/home/user/wt/bl-logs/drift-*.js`: room setup from bongloc-coop.js; 6 REAL merged weeks through the real monthTick, no direct stipend() call; after each week the guest's bạc on the host (withSeat b) vs her phone). Builds: branch 874e8270 vs main b7041e67 (same base).
+| run | build | weeks off (week: host / phone) | month-change weeks |
+|---|---|---|---|
+| staged (Sủng 5 / greedy written on the phone) | branch | W0 124/132, W1 120/122, W2 234/178, W3 98/138, W5 220/169 | 3 of 3 off |
+| staged | main | W1 120/130 | 0 of 2 off |
+| staged, rerun | branch | W1 82/102, W4 17/37 | 0 of 2 off |
+| staged, rerun | main | none | 0 of 2 off |
+| natural play (guest Đáp ứng) | branch | W2 266/213 (equal again at W3) | 1 of 1 off |
+| natural play (guest Đáp ứng) | main | W1 120/130 | 0 of 1 off |
+| guest rank 3 (set on both copies) | branch | W0 190/200 | 0 of 2 off |
+| guest rank 3 (set on both copies) | main | W0 110/120, **W2 150/135 (month change)**, W4 42/52 | **1 of 2 off** |
+- VERDICT: **pre-existing co-op drift, not introduced by this branch.** (a) 10-bạc gaps in ordinary weeks happen on main too, with no stipend involved. (b) The month-change gap appears on main as soon as the thin guest has a month-card choice (rank ≥ 1: Chu toàn / Bớt lễ nghĩa); the host catches up at the next merged week. In the natural run my branch showed it at Đáp ứng only because Đáp ứng now gets the lễ nghĩa choice every month (BAL.duty[0] 0 → 2). With the guest at rank 3 the branch has no month-change gap, while main does. The staged runs write Sủng / greedy straight on the guest phone (not through the host), so their larger gaps are partly test artefact.
+- Recommendation: open a separate co-op ticket: «thin guest's month-card choice (and some weekly bạc lines) reaches the host one merged week late — host / phone bạc differ for one week», with dev/test/bongloc-coop.js «one world» check + this probe as repro. It is not a blocker for bongloc-options.
