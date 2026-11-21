@@ -92,3 +92,23 @@ From L1880, collar words only:
 keep PASS; check_store M06/M07.
 ### L1893 drawn (VE9): aFGoe7afSh 55 cr, sheet han_phisimple_L1893_VE9.png (3zKyLD3REY | new)
 Collar sits flat and secure on the shoulders, higher than L1880. The inner collarbones show, the outer ends are covered, and the V meets just above the bust. The wide pink-banded collar is kept. Open: the 3rd (pale purple) band is not readable (it is too close to the plum robe), but the pink band reads wide.
+
+## COLLAR L1915 (owner: L1893 aFGoe7afSh = exactly right) → locked + rolled out t1–t8
+- LOCK: rule G62 (dev/art/ART_RULES.md) + frozen words dev/art/seasons4/HAN_COLLAR_L1915_FROZEN.txt ("owner-approved L1915, never change").
+- Files dev/art/seasons4/s62_t{1..8}_HAN_COLLAR_L1915.txt (+.keep), generator make_han_collar9_L1915.py. t5 = PHISIMPLE_L1893 + bands; the other ranks = their LADDER7 file (own rank words, G57) with the collar swapped to the frozen words, the shoulder yoke removed (t4/t6–t8), innermost band ivory white (L1915 test).
+- Collar ornament per rank (tiny, flat, ", all tiny and flat, never bulky"):
+  - t1: none (plain bands, gold edges only)
+  - t2: a fine gold thread line on the outer band
+  - t3: + tiny embroidered flower dots
+  - t4: one row of tiny seed pearls on the outer edge
+  - t5: seed pearls + small gold flowers on the outer band
+  - t6: + one tiny jade bead at the V
+  - t7: seed pearls on the outer and middle bands, fine gold embroidery, jade bead at the V
+  - t8: seed pearls on the outer and middle bands, tiny gold phoenixes, a small flat gold clasp at the V
+- Dup trims to fit 10 000 (each tested with check_store, no new FAIL; all in .keep):
+  - inner-collar clause (t≠5, now said by the bands)
+  - sleeve-layer paren / "Everyone beautiful" where present
+  - t3 signature-colour sentence
+  - t6/t8 "RANK BLOCK…" label
+  - t8 "collar unchanged; " and the plum list (no collar band)
+- ch 9783/9994/9820/9776/9432/9980/9983/9997. keep PASS ×8. check_store shows only the waived FAILs (M06/M07/S06 t1–t3, S13 t4, M06/M07 t5, B12/M07/S07 t6–t8, S14 t7). No pendant/sachet word (G57/G59), no new G60/G61 FAIL.
