@@ -2060,3 +2060,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - ARCHIVED by 94: keeper #3 KoUp, rv duodo-focus MC6N, MAIN 93, stray Hz4F. mg-intro-2 Ji75 → archive after mg-intro-2 lands. bag-inline-3 JuyC idle → archive (check its branch landed).
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY.
 - TRIGGER: mine trig_01CbswFdi7Gx6PdAcZPZVeah (min 32) → 95 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush94.sh). No owner question pending.
+- (13:37Z) MAIN CHÍNH 94 opened child MAIN CHÍNH 95 = session_01Rc5AsLPctRgeDvqEuLS7jr (depth 6). 94 stops except relaying late messages to 95.
