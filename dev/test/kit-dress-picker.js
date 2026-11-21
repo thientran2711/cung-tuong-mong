@@ -9,7 +9,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const p=await (await b.newContext({viewport:{width:W,height:H}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof toilOpen==='function'&&typeof kitDressPicker==='function'&&typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.bac=500;try{render()}catch(e){}});await p.waitForTimeout(1200);
-  await p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());toilOpen()});await p.waitForTimeout(2200);
+  await p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());toilOpen();const r=document.getElementById('toilrdy');if(r)r.click()});await p.waitForTimeout(2200);
   const r=await p.evaluate(()=>{const o={};const box=document.getElementById('kg82');const vis=e=>{const r=e.getBoundingClientRect();return r.width>20&&r.height>40&&getComputedStyle(e).visibility!=='hidden'};
    const figs=[...box.querySelectorAll('.kesf')].filter(vis);o.figs=figs.length;o.kdpk=!!box.querySelector('.kdpk-fig');o.kgfig=!!box.querySelector('.kgfig');
    const f=figs[0],g=box.querySelector('.toilinv'),fr=f&&f.getBoundingClientRect(),gr=g&&g.getBoundingClientRect();o.left=!!(fr&&gr&&fr.right<=gr.left+4);o.grid=!!g&&vis(g);

@@ -72,7 +72,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
    ok("cap3 (no son → Kiều diễm)",r.cap3==="dep",r.cap3);ok("cap0 (nothing → mặt mộc)",r.cap0==="moc",r.cap0);}
   /* the mirror (colour step): only owned colours, the missing note, the rush button; shot */
   const m=await p.evaluate(()=>{try{KMQ.length=0;document.querySelectorAll('.kmov').forEach(o=>o.remove());kmBusy=false}catch(e){}S.inv=S.inv.filter(e=>!(lxOf(e.k)&&lxOf(e.k).part==="son"));S.bac=200;S.buoi=0;delete S.toilette;Q.length=0;document.getElementById('modal').hidden=true;
-   toilOpen();TOIL.st.dv="hopdip";toilColUI();return true});await sleep(1500);
+   toilOpen();{const r=document.getElementById('toilrdy');if(r)r.click()}TOIL.st.dv="hopdip";toilColUI();return true});await sleep(1500);
   await p.screenshot({path:`${OUT}/mirror-${wh}.jpg`,type:'jpeg',quality:70});
   const mm=await p.evaluate(()=>{const box=kg82Box();const rows=[...box.querySelectorAll('.kswt-r')].map(r=>r.querySelector('b').textContent+":"+r.querySelectorAll('.kswt-i').length);
    const own=["may","ma","mat"].map(x=>new Set(S.inv.filter(e=>lxOf(e.k)&&lxOf(e.k).part===x&&e.u>0).map(e=>e.c)).size);

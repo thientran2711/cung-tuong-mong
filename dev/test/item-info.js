@@ -44,7 +44,7 @@ const R={};
   /* slot tap → detail with Tháo */
   await p.evaluate(()=>{const s=document.querySelector('#kg82 [data-keqk="toil"][data-keqi="0"]');s&&s.click()});await p.waitForTimeout(250);
   out.slotStrip=await p.evaluate(()=>{const d=document.querySelector('#kg82 .toildet .kidet');return d?{name:d.querySelector('.kidn').textContent,acts:[...d.querySelectorAll('[data-toilact]')].map(b=>b.firstChild.textContent)}:null});
-  await p.evaluate(()=>document.getElementById('toilok').click());await p.waitForTimeout(300);out.dressDone=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
+  await p.evaluate(()=>{const r=document.getElementById('toilrdy');if(r)r.click()});await p.waitForTimeout(300);await p.evaluate(()=>document.getElementById('toilok').click());await p.waitForTimeout(300);out.dressDone=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
   await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null});await p.waitForTimeout(300);
   step(2);/* 2. Tư trang bag panel: tap a tile = INLINE strip under the grid (KIT §70.6, no pop-up); the old modal path is gone */
   await p.evaluate(()=>{try{localStorage.setItem('hclh-inv-sub','tui')}catch(e){}KINV_SUB='tui';tab='inv';render()});await p.waitForTimeout(500);
