@@ -131,3 +131,8 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 |---|---|---|---|---|---|
 | 20/11 | E30 dresscode | **`kitColDot` / `kitColDots`** read-only colour dot + family name | item rows «Màu», jmcal popover, festival gate | kit keeper | **KIT READY** review/kit-e-rows (KIT §60.1) |
 | 20/11 | E25b home-chapters | **«thế lực nhà ±n» in the word/hint map** | jkc3 E28 (kcE hac) | kit keeper | **KIT READY** review/kit-e-rows (KIT §13.15; built on top of review/kit-cost-rows-home 3332c63b — same file / lines) |
+
+## 20/11 kit-dress-picker (owner OD ~21:45Z via MAIN ROOT-81)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | owner via ROOT-81 | **dress picker** — her figure as a live preview on the left, choices on the right (KIT §60.2 kitDressPicker) | every dress picker (toilDressUI) | kit keeper | **KIT READY** review/kit-dress-picker |

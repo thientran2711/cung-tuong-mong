@@ -133,5 +133,13 @@
 "maid"
 ],
 "reason": "the decline of srvTalk emp (keep her place, Đức +1): an NPC maid's same choice is keeping her routine instead of «Quỳ dâng trà» (jagstaff mindPick vs BAL.ag.routine) — not an act (B4 role-parity-4b, applied by B3)"
+},
+{
+"reason": "Cùng chơi (jpma): ACT.pmplay is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmPlay (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+"key": "harm:pmplay"
+},
+{
+"reason": "Thách đấu (jpma): ACT.pmduel is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmDuel (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+"key": "harm:pmduel"
 }
 ]
