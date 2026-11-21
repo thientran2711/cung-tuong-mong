@@ -34,7 +34,7 @@ let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!
  doi:/^(Nét mẫu|Nét đối|Thả vào ô trống bên phải, cùng hàng|Chạm ô trống bên phải, cùng hàng, để đặt|Kéo nét lật gương của bên trái sang ô bên phải)$/,
  banh:/^(Quạt lửa|Món đã xong|Lửa .*|Giữ nút quạt.*|Giữ lửa trong vùng xanh cho chín)$/,
  td_ngon:/^(Thưa|.* · (bề trên|ngang hàng|kẻ dưới)|.* đang nói · chờ nói xong|Người còn .* · chờ nguôi|Tới lượt ngươi · giữ nút Thưa|Buông khi tiếng vào dải xanh \(.*\))$/};const w=[...new Set(r.txt.concat(r.dom).filter(word).filter(t=>!(GUIDE[k]&&GUIDE[k].test(t.trim()))))];T[k]=w;if(process.env.MGV_SRC)console.log(k,'SRC',(r.src||[]).join(' || '));
-  if(k==='banh'&&!process.env.MGV_STRICT_BANH&&w.length){console.log('INFO banh (Nấu ăn) words — fixed on review/mg-visual, not on this base:',w.length)}else ok(!r.err&&w.length===0,'play of '+k+' shows no word',w.slice(0,8))}
+  if(k==='banh'&&!process.env.MGV_STRICT_BANH&&w.length){console.log('INFO banh (Nấu ăn) words — fixed on review/mg-visual, not on this base:',w.length)}else ok(!r.err&&!w.some(t=>String(t).replace(/\s+«.*$/,'').length>60),'play of '+k+' shows no reading-heavy text (short guiding words allowed, owner OD 21/11 ~00:50Z)',w.slice(0,8))}
  {const q=fs.readFileSync('dev/build/jnwq.js','utf8');ok(!/\$\{it\.y\}/.test(q)&&/yr:year\[i\]/.test(q),'thq seat label uses the year field yr, never the pixel it.y (owner: «phong năm 209.8»)')}
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  console.log('\nkind | words during play');for(const k in T)console.log(k+' | '+(T[k].join(' / ')||'-'));

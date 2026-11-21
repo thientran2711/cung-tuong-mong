@@ -56,9 +56,9 @@ function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,"duho",.05,.5);
   kg82FxLane(g,zx0,zx1,zy,zy1,W);/* mg-play2 (law 11, faint guide): the reach zone = the kit lit lane (was a .16 fill + thin dashed line) */
   for(const s of L){if(s.st)continue;if(!kg82Spr(g,"hat-lotus",s.x,s.y,s.r*2.2,null,{alpha:s.big?1:.88}))kg82Blossom(g,s.x,s.y,s.r*.8,"#e48aa4",false)}
-  if(alarm&&!alarm.done){g.font=`700 26px ${kg82Col("--display","serif")}`;g.textAlign="left";g.fillStyle="#d9482b";kg82Lbl(g,"!",14,28,40,true)}
+  if(alarm&&!alarm.done){g.font=`700 26px ${kg82Col("--display","serif")}`;g.textAlign="left";g.fillStyle="#d9482b";kg82Lbl(g,"!",14,28,40,true);g.font=`700 15px ${kg82Col("--display","serif")}`;kg82Lbl(g,"Lau sậy bên bờ khẽ động",34,24,W-50,true)}
   {/* owner 21/11 ~00:50Z (mg-5s-clear): the reach zone is named, one state-driven guiding line */const inz=L.some(s=>!s.st&&s.x>=zx0&&s.x<=zx1);g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="center";g.fillStyle="#6b4a1c";kg82Lbl(g,"Vùng hái",(zx0+zx1)/2,zy-8,120);
-   kg82Guide(g,inz?"Chạm đóa sen trong vùng sáng!":tt<4500?"Sen trôi từ phải sang · chạm khi vào vùng sáng":"Chờ sen trôi vào vùng sáng rồi chạm",W/2,H*.09,inz?"go":"wait",14,W-16)}
+   if(!(alarm&&!alarm.done))kg82Guide(g,inz?"Chạm đóa sen trong vùng sáng!":tt<4500?"Sen trôi từ phải sang · chạm khi vào vùng sáng":"Chờ sen trôi vào vùng sáng rồi chạm",W/2,H*.09,inz?"go":"wait",14,W-16)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;
   if(!alarm||alarm.done){if(tt>next&&made<N){spawn(tt);next=tt+1500+Math.random()*700}}
@@ -84,6 +84,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
   for(const p of pads){const sh=kg82FxBad(g,p.x,p.y,p.r*1.02,now,p.hitAt||0);/* den-look: plain painted lotus, no ring/✕ (the hit burst only) */kg82Spr(g,"hat-lotus",p.x+sh,p.y,p.r*2.1,null,{alpha:p.hit?.4:.95})}
   const lh=hitP?kg82FxBad.shake(now,hitP):0;
   if(!kg82Spr(g,"doden-lantern",lx+lh,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx+lh,ly,16,"#e06030",true);
+  g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";kg82Lbl(g,wind>.15?"Gió đẩy sang phải":wind<-.15?"Gió đẩy sang trái":"Lặng gió",W/2,18);/* huong-cue: the wind line is back */
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;wind=Math.sin(tt/1700)*.6+Math.sin(tt/530)*.25;
   lx+=(tx-lx)*.12+wind*1.6;lx=cl(lx,20,W-20);
