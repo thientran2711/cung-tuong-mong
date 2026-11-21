@@ -1101,7 +1101,7 @@ CAPE5_V2=("TWO layered embroidered {main} SHORT shoulder capes, one over the oth
 # owner L1598 correction ("Vẫn có lưới ngọc, vẫn có tua rủ"): the V2 pearl edge + drop fringe (L1321) + pearl net (L1329) are KEPT verbatim; only the cape SHAPE changes. Supersedes CAPE5_V2 (kept above for the record).
 CAPE5_V3=("TWO layered embroidered {main} pearl-edged shoulder capes, one over the other (the upper one shorter), softly draping over the shoulders: "
           "the UPPER layer is a short round embroidered silk capelet like the Tần's, over only the shoulders and upper chest, its lower edge softly scalloped; "
-          "UNDER it the LOWER layer is only a small short scalloped flap on each shoulder, sitting out over the top of each upper arm like a tiny cap sleeve, never a second full cape; "
+          "UNDER it the LOWER layer is only a small scalloped flap over the top of each upper arm like a tiny cap sleeve, never a full cape; "
           "each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls (exactly the old Quý phi capes) "
           "with a short fringe of tiny pearl drops dangling beneath each cape edge, a little richer than the Tần's pearl fringe and fewer than the Quý phi's drops, "
           "and over both capes an airy open net of small pearls and small jade beads lying flat (the same kind of beaded pearl net as the Tần's capelet), "

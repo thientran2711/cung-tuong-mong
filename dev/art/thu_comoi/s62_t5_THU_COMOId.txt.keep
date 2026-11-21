@@ -4,11 +4,14 @@ allow: the upper cape shorter  # owner L1596/L1598 (via Foreman C #14): Phi cape
 allow: the lower cape a little longer  # owner L1596/L1598 (via Foreman C #14): Phi cape = old Ba Tư Quý phi t6 V3 shape (JNCRrjtOq4) + V2 pearls/fringe/net, build.py CAPE5_V3; dev/handover/reports/KHO2.md
 allow: both resting on the shoulders  # owner L1596/L1598 (via Foreman C #14): Phi cape = old Ba Tư Quý phi t6 V3 shape (JNCRrjtOq4) + V2 pearls/fringe/net, build.py CAPE5_V3; dev/handover/reports/KHO2.md
 allow: "Mùa Thu · Thiết kế hiện tại · Phi · 2 choàng vai + lưới ngọc trai + cổ mở"  # owner L1596/L1598 (via Foreman C #14): Phi cape = old Ba Tư Quý phi t6 V3 shape (JNCRrjtOq4) + V2 pearls/fringe/net, build.py CAPE5_V3; dev/handover/reports/KHO2.md
-allow: 3/4 or frontal view  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: her signature colour family light plum and blush stays the MAIN robe colour  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: the robe itself is clearly light plum satin  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: gold only as embroidery accents  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: NOT a cream  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: beige or all-gold robe  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: never a pair  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
-allow: never in profile  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view / beauty words, needed for <= 9990 after G40 OUTER_IN (L1592)
+allow: a slim gold-edged band  # owner L1605 G42 ladder carries up (deltas from CHECK1 via Foreman C #15)
+allow: long trailing wide sleeves with deep brocade cuffs  # owner L1605 G42 ladder carries up (deltas from CHECK1 via Foreman C #15)
+allow: 3/4 or frontal view  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: her signature colour family light plum and blush stays the MAIN robe colour  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: the robe itself is clearly light plum satin  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: gold only as embroidery accents  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: NOT a cream  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: beige or all-gold robe  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: never a pair  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: never in profile  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1 G40): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: never hiding the neck or the square inner neckline  # length (G40+G42): repeat — the layered-neckline clause already says "showing her neck and collarbones … framing the bordered square neckline" and the cape keeps "never covering the neckline"

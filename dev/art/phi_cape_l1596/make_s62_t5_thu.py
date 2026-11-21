@@ -17,8 +17,7 @@ fit = _L.fit
 src = open(os.path.join(ART, "t8-prompt-B/build.py"), encoding="utf-8").read()
 m = re.search(r'^CAPE5_V3=\((.*?)\)\n', src, re.S | re.M); assert m
 cape = eval("(" + m.group(1) + ")").format(main="light plum").replace("small peonies", "small double hollyhocks")
-for a, b in [("over only the shoulders and upper chest,", "over only the shoulders and the outer upper chest, OPEN at the front (never hiding the neck or the square inner neckline),"),
-             ("never covering the neckline", "never covering the neckline, never hiding the neck or the square inner neckline")]:
+for a, b in [("over only the shoulders and upper chest,", "over only the shoulders and the outer upper chest, OPEN at the front,")]:   # thu COMOI open front (neck/square neckline words already in the layered-neckline clause)
     assert cape.count(a) == 1; cape = cape.replace(a, b)
 s = open(os.path.join(ART, "thu_comoi/s62_t5_THU_COMOIc.txt"), encoding="utf-8").read()
 assert s.count("TWO layered") == 1
@@ -30,8 +29,14 @@ ANCHOR = "outer robe worn OPEN at the front"
 assert s.count(ANCHOR) == 1 and OUTER_IN not in s
 i = s.index(ANCHOR); j = s.index(";", i) + 1
 s = s[:j] + " " + OUTER_IN + ";" + s[j:]
+# G42 (owner L1605 'bậc dưới có gì thì bậc trên phải có'; deltas from CHECK1 via Foreman C #15, a bit denser than thu t3 v5)
+for a, b in [("(a slim gold-edged band)", "(a gold-edged blush band embroidered with small double hollyhocks, down past the waist)"),
+             ("(the Phi edge);", "(the Phi edge), the inner top also richly embroidered across the chest;"),
+             ("deep brocade cuffs", "deep embroidered double hollyhock cuff bands, a few small double hollyhocks on the sleeves")]:
+    assert s.count(a) == 1, a; s = s.replace(a, b)
 OLD_CAP = "Phi · 2 choàng vai + lưới ngọc trai + cổ mở"; assert s.count(OLD_CAP) == 1
 s = s.replace(OLD_CAP, "Phi · 2 lớp choàng (Quý phi cũ) + lưới ngọc trai + cổ mở")
+if "--raw" in sys.argv: print(s); sys.exit()
 s, used = fit(s)
 assert len(s) <= 10000, len(s)
 out = os.path.join(ART, "thu_comoi/s62_t5_THU_COMOId.txt")
