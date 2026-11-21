@@ -391,3 +391,24 @@ The diff is only:
 Verdict: **PASS** (t5 COMOIh = PASS in job 14). Not sent to GEN1; Foreman C #16 releases.
 Note: the t4 front-panel words lost "embroidery". The master "all flowers … are fine silk-thread embroidery" still covers it, but "lotus-embroidered panel" would be safer.
 - JOB 15 re-check (DESIGN20 702cdfe): t4 COMOIi front panel = "lotus-embroidered blush panel" ✓; "a few small" → "small" lotus on the sleeves; "small" dropped from the lamp. Gates + keep PASS, 9986 chars. **PASS**, text only (Foreman C #16: no gen).
+
+## JOB 16 (LADDER2 1c6629626) — EAR_FREE ×9, diff-only · checked at f625920 · 0 gens
+Files:
+- thu dapung4 t1–t3 COMOI_v8 (9849 / 9946 / 9999)
+- xuân t1–t3 HAN_BAC_v9 (9597 / 9867 / 9997)
+- thu t6 COMOIi (9999), t7 v8h (9976), t8 v10g (9994)
+
+All 9 pass these checks:
+- master_common.EAR_FREE "Nothing hangs from her ears." is present (right after the master earrings line).
+- OUTER_WRAP intact; no vase.
+- check_store tpN a22 PASS; keep PASS.
+
+The A38 trims are harmless:
+- t3s: "inner robe hem" wording shortened.
+- t6:
+  - panel "long vertical" → "long" (still "shoulder to hem");
+  - "NO bow, with TWO" → "NO bow, TWO";
+  - ", a yellow sash" dropped from the yellow list; "the yellow sash tied flat at the CENTRE front" is still there.
+- t7: "never a single flat colour all over" dropped (gate PASS).
+- t8: ", no other colour" dropped.
+Verdict: **PASS ×9**, text only, report to Foreman C #16 (no gen without his release).
