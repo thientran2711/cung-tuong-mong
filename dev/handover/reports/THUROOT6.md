@@ -72,3 +72,4 @@ t5–t8 carry L2193 (M2187 clasp + 'ONE continuous piece' verbatim, HH clasp 'se
 - 06 QP: '+ with a small gold cap and one pearl'. 07 HQP: '+ with a gold cap set with small pearls and jade beads'.
 - 08 HH: 'each ending in a pretty silk tassel capped in gold,' → 'each ending in the richest silk tassel of all ranks, a little longer than the others, with a gold-filigree cap set with pearls and jade beads,'. Tie length unchanged everywhere (well past the knees).
 ## STATUS · depth 4 · START_CTX ~3 % · now ~16 % (measured) — pushed; idle.
+## RETIRED (ROOT-B5 18:36Z): M2195 kept; successor THUROOT7 builds M2196 on M2195. Nothing running, all pushed.
