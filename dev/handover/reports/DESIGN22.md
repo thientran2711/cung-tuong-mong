@@ -7,8 +7,8 @@ depth 7 · START_CTX ~4 % (used_tokens read 0; estimate) · 0 gens, 0 cr. Builde
 | t1 | dapung4/s62_t1_COMOI_v7 → v10 | 9820→9860 | PASS |
 | t2 | dapung4/s62_t2_COMOI_v9 → v10 | 9943→9983 | PASS |
 | t3 | dapung4/s62_t3_COMOI_v9 → v10 | 9987→9989 | PASS |
-| t4 Tần | thu_comoi/s62_t4_THU_COMOIj → COMOIk | 9972→9999 | PASS |
-| t5 Phi | thu_comoi/s62_t5_THU_COMOIi → COMOIj | 9985→9998 | PASS |
+| t4 Tần | thu_comoi/s62_t4_THU_COMOIj → COMOIk | 9972→9978 | PASS |
+| t5 Phi | thu_comoi/s62_t5_THU_COMOIi → COMOIj | 9985→9990 | PASS |
 | t6 | thu_comoi/s62_t6_THU_COMOIk → COMOIl | 9977→9979 | PASS (OUT1 WARN as before) |
 | t7 | thu_comoi/s62_t7_THU_COMOI_v8j → v8k | 9956→9973 | PASS (OUT1 WARN as before) |
 | t8 | thu_comoi/s62_t8_THU_COMOI_v10h → v10i | 10000→9998 | PASS |
@@ -27,8 +27,7 @@ G51 (flowered brocade sash):
 G49 Phi t5: "a SHORT round-pearl strand hangs in a short swag from the left capelet front to the right" (89) → "a SHORT round-pearl strand swags ACROSS her chest, left capelet front to right" (78).
 A38 trims (repeats, to fit 10 000; allow lines in .keep):
 - t3 ", framing the bordered square neckline" (as DESIGN20 did on t5)
-- t4 "small lotus flowers embroidered below it" → "small lotus flowers below it"
-- t5 "many small double hollyhocks embroidered below it" → "many small ones below it" (motif named just before)
+- t4 + t5 " Everyone beautiful at every age." (as DESIGN21 on t6, CHECK1-passed). Foreman/CHECK1 job 21: the "embroidered below it" chest words RESTORED (owner L1628)
 - t6 ", and a grander gold headdress with more gold ornaments" (repeat of "a BIG ornate gold headdress …"; LADDER2 cut the same). CHECK1 job 21 fix: "a pearl-edged collar trim" + "image 2 is only a colour reference;" RESTORED
 - t8 pose "Pose: weight on one leg, a gold" → "Pose: a gold" (repeat of "weight resting on her RIGHT foot" + master)
 Tried and FAILED gates (not used): cutting ", never stiff, flat or board-like" (M07 master) and ", no cup" in the tail (S19).

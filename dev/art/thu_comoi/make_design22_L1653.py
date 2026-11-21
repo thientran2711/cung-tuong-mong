@@ -13,12 +13,12 @@ J={ # base, new, [(old,new,reason)]
  't4':('thu_comoi/s62_t4_THU_COMOIj.txt','thu_comoi/s62_t4_THU_COMOIk.txt',[
    ('lotus flowers over the robe and skirt','lotus flowers over the robe and skirt'+B52,'G52'),
    ('an embroidered silk sash tied flat','a flowered brocade sash tied flat','G51'),
-   ('small lotus flowers embroidered below it','small lotus flowers below it','A38')]),
+   (' Everyone beautiful at every age.','','A38')]),
  't5':('thu_comoi/s62_t5_THU_COMOIi.txt','thu_comoi/s62_t5_THU_COMOIj.txt',[
    ('double hollyhocks over the robe and skirt','double hollyhocks over the robe and skirt'+B52,'G52'),
    ('a broad gold brocade girdle tied flat','a broad gold flowered brocade girdle tied flat','G51'),
    ('a SHORT round-pearl strand hangs in a short swag from the left capelet front to the right','a SHORT round-pearl strand swags ACROSS her chest, left capelet front to right','G49'),
-   ('many small double hollyhocks embroidered below it','many small ones below it','A38')]),
+   (' Everyone beautiful at every age.','','A38')]),
  't6':('thu_comoi/s62_t6_THU_COMOIk.txt','thu_comoi/s62_t6_THU_COMOIl.txt',[
    ('cuffs and skirt-front medallions)','cuffs and skirt-front medallions), the body motifs never over these bands','G52'),
    ('a yellow sash and narrow','a yellow flowered brocade sash and narrow','G51'),
