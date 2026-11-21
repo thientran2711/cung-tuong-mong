@@ -653,6 +653,13 @@ ONE look for every in-play cue on any mini-game canvas (every engine family call
 - `kg82FxBad(g,x,y,r,now,hitAt)` (mg-play2): THE «avoid this» look — kit `--bad` danger ring + small ✕ badge round any thing she must NOT touch; `hitAt` → red burst over `badMs`, returns a shake offset (`badShake`) for the hit thing / her piece. Never on a pickup. Today: den lotus pads.
 - Test: `node dev/test/mg-play2.js` (lane contrast ≥ laneMin, danger ring red rim, hit = penalty, dodge demo, guided hand).
 
+#### 13.7.2 MINI-GAME GUIDING LINE + «Vì sao» ROW (owner OD 21/11 ~00:50Z «guiding words stay», review/mg-5s-clear) — `dev/build/j82.js`
+- `kg82Guide(g, text, cx, cy, col, sz, maxW)`: ONE cream pill with a coloured rim on any mini-game canvas = the single short, state-driven guiding line (brown = wait / neutral, good green = tap now, red = danger). Type shrinks to fit `maxW`. No engine draws its own pill (td_dung's local one now calls it too).
+- `KG82.why = "…"`: an engine sets it when it ends; `kg82ShowRes` shows it as the kit row «Vì sao» above the button, then clears it (also cleared at `kg82Play`).
+- A DOM button in play may keep a short word: set `data-kgkeep="1"` (kit pass in j82 «NO TEXT IN PLAY» skips it). Used: «Quạt lửa», «Thưa», «✓ Dán».
+- Rules-screen demos `NWB_DEMO.aim / slapbar(kind) / cook / tspluck / doiline / hoadien` (jnwb): the object, a hand doing the move, the ✓ (still under Cảnh động off).
+- Used by: ban, tat, ne, banh, duho, doi, hoadien, td_ngon, td_dung. Tests: `mg-noword-a/b` whitelist exactly these strings (GUIDE table).
+
 ### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
 ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
 - `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
