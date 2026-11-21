@@ -39,3 +39,4 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 
 # OWNER L1933 (via #26): Tang maids NO phi bạch at all, every rank
 - dev/art/maid7/prod/m18_{thosu,tam,nhi,nhat}_ha_DUONG_L1933.txt = L1919 with the phi bạch phrase replaced by "NO shawl, NO phi bạch, NO scarf (palace maids never wear one, unlike consorts)" + caption L1933; nothing else changed (nhất keeps its band, bán tý, pins). keep PASS ×4, check_store maid a18 PASS ×4. HOLD: no draw until the owner has reviewed the L1927 sheet / #26 says go.
+- L1924 consorts DRAWN by VE10 (165 cr): t1 EbYmFQnuuO · t2 Syhx77HUb8 · t3 BhNMItAoQR · sheet ha_t1_t3_L1924.png. VE10 notes (no redraw without the owner's yes): t1 only a mild left turn; t2's free hand rests just under the band by the bow (G61 risk).
