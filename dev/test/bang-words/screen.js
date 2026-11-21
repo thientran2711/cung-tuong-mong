@@ -14,7 +14,7 @@ const W={steppe:/thảo nguyên|Khả hãn|Khả đôn|Phụ hãn|sữa ngựa|c
  japan:/Thiên hoàng|Nại Lương|đền Thần|Nan Ba|nước thanh tẩy/i};
 const BAD={nc:['steppe','persia','japan'],bt:['steppe','japan'],bd:['korea','persia','japan'],pf:['steppe','persia']};
 (async()=>{const b=await chromium.launch();let hits=0;const rows=[];const errs=[];
- for(const L of ['nc','bt','bd','pf'])for(let s=0;s<SEEDS;s++){
+ const ONLY=(process.argv.find(x=>/^--land=/.test(x))||'').slice(7);for(const L of ['nc','bt','bd','pf'].filter(x=>!ONLY||ONLY.split(',').includes(x)))for(let s=0;s<SEEDS;s++){
   const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.on('pageerror',e=>errs.push(L+' '+e.message.slice(0,160)));
   await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(800);
   const r=await p.evaluate(async([L,MONTHS,WS])=>{const W={};for(const k in WS)W[k]=new RegExp(WS[k],'i');const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}

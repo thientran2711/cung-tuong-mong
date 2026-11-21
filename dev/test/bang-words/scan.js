@@ -10,7 +10,9 @@ const W={
  korea:/rong biển|nhân sâm|tía tô|Nhiên Đăng|Khai Kinh|giấy Cao Ly|họ Phác|lão Phác|kim chi/i,
  persia:/lửa thánh|Hỏa giáo|sa mạc|lạc đà|Vương trung vương|Hoàng đế Ba Tư|Ba Tư/i,
  korea2:/Cao Ly/i,steppe2:/Bắc Địch/i};
-const BAD={nc:["steppe","persia","steppe2"],bd:["korea","persia","korea2"],bt:["steppe","korea","korea2"]};
+/* pf = Phù Tang (E40r review: the 3rd hòa thân land, landed after this scan was written); rong biển / tía tô are true for Phù Tang too, so the korea list is not used for pf */
+W.japan=/Thiên hoàng|Nại Lương|đền Thần|Nan Ba/i;
+const BAD={nc:["steppe","persia","steppe2","japan"],bd:["korea","persia","korea2","japan"],bt:["steppe","korea","korea2","japan"],pf:["steppe","persia","steppe2"]};
 (async()=>{const url=process.argv[2]&&!/^--/.test(process.argv[2])?process.argv[2]:'file://'+path.join(__dirname,'../../index.html');
  const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(url);await p.waitForFunction(()=>typeof start==='function'&&typeof fill67==='function'&&typeof NCL==='object',null,{timeout:120000});await p.waitForTimeout(1000);
@@ -18,12 +20,12 @@ const BAD={nc:["steppe","persia","steppe2"],bd:["korea","persia","korea2"],bt:["
   let g=0;while(g++<80){start();if(S.origin&&(S.origin.k==='nc'||S.origin.k==='bd'))break}
   const out={};const K0=rdK,P0=rdPrev;const all=Object.keys(ARC67);
   const prem=k=>all.filter(id=>ARC67[id].o===k);
-  const lands={nc:{k:'nc',ps:prem('nc')},bd:{k:'bd',ps:BD_OLD.slice()},bt:{k:'bd',ps:prem('bd').filter(id=>!BD_OLD.includes(id))}};
+  const lands={nc:{k:'nc',ps:prem('nc')},bd:{k:'bd',ps:BD_OLD.slice()},bt:{k:'bd',ps:prem('bd').filter(id=>!BD_OLD.includes(id))},pf:{k:'pf',ps:prem('pf')}};
   for(const L in lands){const D=lands[L];S.origin.k=D.k;out[L]={arcs:0,beats:0,txt:[]};
    for(const p0 of D.ps){S.st.f14=S.st.f14||{};S.st.f14.road=p0;const ids=[p0].concat(all.filter(id=>id.indexOf(p0+'_')===0));
     for(const id of ids){const a=ARC67[id];if(!a)continue;out[L].arcs++;let A;try{A=newThread67(id,'x')}catch(e){continue}
      const seen=new Set();const add=(tag,s)=>{if(typeof s==='function'){try{s=s(A)}catch(e){return}}if(typeof s!=='string'||!s)return;let x;try{x=fill67(s,A)}catch(e){return}x=String(x).replace(/<[^>]*>/g,'');if(!seen.has(x)){seen.add(x);out[L].txt.push(id+'.'+tag+'\t'+x)}};
-     add('t',a.t);add('g',a.g);add('sj',a.sj);
+     {const t0=a.t;if(typeof t0==='string'&&/\{\w+\}/.test(t0))out[L].txt.push(id+'.title(raw read)\t'+t0)}add('t',a.t);add('g',a.g);add('sj',a.sj);
      for(const bk in (a.B||{})){const bd=a.B[bk];let ok=!bd.if;
       if(bd.if)for(const k of [1,-1])for(const pv of ['','win2','win','mid','lose']){window.rdK=()=>k;window.rdPrev=()=>pv;try{if(bd.if(A))ok=true}catch(e){}}
       window.rdK=K0;window.rdPrev=P0;if(!ok)continue;out[L].beats++;
