@@ -235,7 +235,7 @@ function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t)
  let h,o;
  if(x.role==="def"){const ok=typeof stealShown==="function"?stealShown(S,"keep"):nfOdds(S,"keep");
   h=`<p>Thẻ bài của ngươi được lật. Kẻ khác có thể tranh mất đêm nay; ngươi có giữ chân Hoàng thượng không?</p>${clk()}`;
-  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
+  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì ${sgStat(B().keep.gain)} · hỏng: không mất gì`,go:()=>mine("keep")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
  else{const sh=m=>typeof stealShown==="function"?stealShown(S,m):nfOdds(S,m),o1=sh("feign"),o2=sh("road");/* the word she may know (the month's art unread = neutral, jbalcore) */const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
   h=`<p>Tối nay thẻ bài của ${NM(t)} được lật. Ngươi có ra tay giành đêm nay không?</p>${clk()}`;
@@ -277,7 +277,7 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  if(keep&&t===S)log(defOk?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
  const out=nfResolve(t,L,true,"flip");const won=out.res.find(r=>r.won);
  if(keep&&L.length){
-  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${n}.`);x.def.gain=n}
+  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(n)}.`);x.def.gain=n}
   else{const w=entOf(won.w);if(w)keepRobbed(t,w,won.mode);x.def.oan=B().keep.oan}}
  gres(out,t===f?x.def:null);
  if(t===S&&!won)sealMe();   /* she kept her own flipped night */
@@ -365,7 +365,7 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
    else if(g.txt)log(String(g.txt))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
    log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
-   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
+   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(gd.gain)}.`)}}
   if(hadMe&&t!=="me"&&!won){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
   if(t==="me"&&!won)sealMe();

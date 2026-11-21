@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"04b10468+","t":"2026-11-21T17:58Z","c":"night-balance-bundle: restore LIVE cnv origin (o:{},hh:0,th:0); drop dead BAL.odb.j42.rlGo / rlFail","b":"01a7b48e2622","h":[{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"}]};
+window.CTM_BI={"s":"b8fe99ba+","t":"2026-11-21T18:01Z","c":"night-balance-bundle: restore LIVE cnv origin (o:{},hh:0,th:0); drop dead BAL.odb.j42.rlGo / rlFail","b":"a5f6726be85e","h":[{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -78176,17 +78176,17 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
    = BAL.art.odds[bậc] (passive weights: × BAL.art.side), Tứ đức Dung / Ngôn odds = the same ladder ---- */
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
- for(const k in ARTFX){ARTFX[k].forEach((s,i,arr)=>{const l=i+1;
+ for(const k in ARTFX){ARTFX[k].forEach((s0,i,arr)=>{const l=i+1;const T=s=>{
   s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
   {const re=/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?), Danh \+\d+/;/* the bậc-up Danh (BAL.art.danh) sits on exactly the bậc that give it */
    if(BAL.art.danh[l])s=re.test(s)?s.replace(re,`$1, Danh +${BAL.art.danh[l]}`):s.replace(/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?)/,`$1, Danh +${BAL.art.danh[l]}`);else s=s.replace(re,"$1")}
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
   s=s.replace(/\(mỗi bậc \+[\d,]+\)/g,()=>`(+${(SIDE[k]||[]).includes(l)?String(side(O[l])).replace(".",","):O[l]})`);
-  /* the deck cards each course opens: Sủng / Danh / Tâm cơ printed from BAL.deck + BAL.tw.g.ky (one core) */
-  if(k==="cam")s=s.replace(/(«Đàn khúc Phượng cầu hoàng»: Sủng \+)\d+/,`$1${BAL.deck.cam.w.sung}`);
-  if(k==="ky")s=s.replace(/(«Đánh cờ với Hoàng thượng»: )Sủng \+\d+, Danh \+\d+, Tâm cơ \+\d+/,`$1Sủng +${BAL.deck.ky.w.sung}, Danh +${BAL.tw.g.ky[0]}, Tâm cơ +${BAL.tw.g.ky[1]}`);
-  if(k==="vu")s=s.replace(/(«Kinh hồng vũ»: )Sủng \+\d+, Danh \+\d+/,`$1Sủng +${BAL.deck.vu.w.sung}, Danh +${BAL.deck.vu.w.danh}`);
-  arr[i]=s})}/* in place: ARTMS (j82) holds the same arrays */
+  /* the deck cards each course opens: Sủng stays LIVE's {sg:deck.*.w.sung} token (j1 sgRule, trait-scaled, read live); Danh / Tâm cơ printed from BAL.deck + BAL.tw.g.ky (one core) */
+  if(k==="ky")s=s.replace(/(«Đánh cờ với Hoàng thượng»: Sủng[^,]*), Danh \+\d+, Tâm cơ \+\d+/,`$1, Danh +${BAL.tw.g.ky[0]}, Tâm cơ +${BAL.tw.g.ky[1]}`);
+  if(k==="vu")s=s.replace(/(«Kinh hồng vũ»: Sủng[^,]*), Danh \+\d+/,`$1, Danh +${BAL.deck.vu.w.danh}`);
+  return s};/* LIVE sgRuleArr makes a token element ({sg:deck.*.w.sung}) a getter: wrap it (the live Sủng first, then this rewrite) — a plain write would be dropped */
+  const d=Object.getOwnPropertyDescriptor(arr,i);if(d&&d.get){const g=d.get;Object.defineProperty(arr,i,{get:()=>T(g()),enumerable:true,configurable:true})}else arr[i]=T(s0)})}/* in place: ARTMS (j82) holds the same arrays */
  /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
  {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.ag.par3.anthai.self.y-1;/* the gate the LIVE readers use (BAL.ag.par3.anthai.self.y = BAL.ag.cx2.kidHeal.y) */const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
@@ -78438,7 +78438,7 @@ function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t)
  let h,o;
  if(x.role==="def"){const ok=typeof stealShown==="function"?stealShown(S,"keep"):nfOdds(S,"keep");
   h=`<p>Thẻ bài của ngươi được lật. Kẻ khác có thể tranh mất đêm nay; ngươi có giữ chân Hoàng thượng không?</p>${clk()}`;
-  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
+  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì ${sgStat(B().keep.gain)} · hỏng: không mất gì`,go:()=>mine("keep")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
  else{const sh=m=>typeof stealShown==="function"?stealShown(S,m):nfOdds(S,m),o1=sh("feign"),o2=sh("road");/* the word she may know (the month's art unread = neutral, jbalcore) */const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
   h=`<p>Tối nay thẻ bài của ${NM(t)} được lật. Ngươi có ra tay giành đêm nay không?</p>${clk()}`;
@@ -78480,7 +78480,7 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  if(keep&&t===S)log(defOk?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
  const out=nfResolve(t,L,true,"flip");const won=out.res.find(r=>r.won);
  if(keep&&L.length){
-  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${n}.`);x.def.gain=n}
+  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(n)}.`);x.def.gain=n}
   else{const w=entOf(won.w);if(w)keepRobbed(t,w,won.mode);x.def.oan=B().keep.oan}}
  gres(out,t===f?x.def:null);
  if(t===S&&!won)sealMe();   /* she kept her own flipped night */
@@ -78568,7 +78568,7 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
    else if(g.txt)log(String(g.txt))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
    log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
-   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
+   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(gd.gain)}.`)}}
   if(hadMe&&t!=="me"&&!won){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
   if(t==="me"&&!won)sealMe();
@@ -91633,7 +91633,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="01a7b48e2622";window.CTM_BUILD=BUILD;
+const BUILD="a5f6726be85e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
