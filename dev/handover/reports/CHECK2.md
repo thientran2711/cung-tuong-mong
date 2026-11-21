@@ -68,3 +68,9 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - tpN a22 PASS ×8; keep --sidecar PASS ×8.
 - Note: the pale pink-violet is given by the word "lilac" only (no #FBE8F8 hex); the old blush had no hex either.
 - Still to come: the G44 ", NO bow" on t4/t5 and the t8 belt wording. I'll recheck those lines when DESIGN22 pushes.
+
+## Job 7b — DESIGN22 fa97fb2 (G44 + t8 belt) — PASS (04:28Z). FINAL thu s62 set, held for the owner's quality pick
+- t4 COMOIn→COMOIo (9948) / t5 COMOIn→COMOIo (9939): only "NO bow," added after "hanging jade belt pendants and tassels".
+- t8 v10l→v10m (9996): the 3 "sash" words in the WRAP held-in clause → "belt" ("HELD IN by the belt … under the belt … above and below the belt"). Nothing else changed.
+- No markers; tpN a22 PASS ×3; keep PASS ×3.
+- CURRENT SET (all PASS): t1 dapung4 v11, t2 v11, t3 v12, t4 COMOIo, t5 COMOIo, t6 COMOIn, t7 v8m, t8 v10m. Nothing released to GEN1 (the owner picks 55 cr 1k / 135 cr 2k first).
