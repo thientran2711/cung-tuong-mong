@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ee39b121+","t":"2026-11-21T09:52Z","c":"duodo-focus: one-pane card groups take the kit category name (no nameless head tab / twin group, data test guards it); play uses the kit sk…","b":"137cd4ddc570","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
+window.CTM_BI={"s":"4a87e778+","t":"2026-11-21T09:55Z","c":"duodo-focus: view test records F.setGroups (kit r2)","b":"799563d98a46","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -9076,7 +9076,7 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===
   if(k==="home"&&!S.out&&typeof homePeople==="function")return homePeople().filter(j59person).length}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 try{const st=document.getElementById("stage");if(st&&window.ResizeObserver)new ResizeObserver(j59sched).observe(st)}catch(e){}
 addEventListener("resize",j59sched);
-window.j59lay=j59lay;
+window.j59lay=j59lay;/* the kit focus view (jfocus K-FOCUS-1) draws the SAME stage name tag + figure scale: it calls these three by name */window.j59tagHTML=j59tagHTML;window.j59col=j59col;window.j59fac=j59fac;
 })();
 /* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
 (function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
@@ -87489,7 +87489,7 @@ function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 function dfOpen(i){const p=curPeople()[i];if(!p)return false;if(!dfViewOn()){popIdx=i;popMsg="";renderStage();return false}
  const fig=dfFig(i);DF.i=i;popIdx=i;popMsg="";renderStage();
- DF.F=kitFocus.open({p:p.ref||p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:dfData(i),onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});return true}
+ DF.F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:dfData(i),onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});return true}
 function dfClosed(i){if(DF.i!==i)return;DF.i=null;DF.F=null;if(popIdx===i){popIdx=null;popMsg=""}try{renderStage()}catch(e){}}
 function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id===id)return a;return null}
 function dfTap(i,id){const F=DF.F,a=dfFind(i,id);if(!F||!a||a.off||S.dead||Q.length||DF.play)return;
@@ -87510,7 +87510,7 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0)return s0.apply(this,arguments);
  m.dfSeen=1;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
  if(DF.F&&DF.i!==i){try{DF.F.destroy()}catch(e){}DF.F=null}DF.i=i;
- const F=DF.F||kitFocus.open({p:p.ref,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});DF.F=F;
+ const F=DF.F||kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});DF.F=F;
  const txt=String(m.h||"").replace(/<\/p>\s*<p[^>]*>/g,"\n").replace(/<[^>]+>/g,"").split("\n").map(s=>s.trim()).filter(Boolean);
  const nm=(typeof k61Named!=="function"||k61Named(p.ref))?(p.ref.name||p.name||""):"";/* fog (j61): a stranger's name is not on the say box */
  F.say(txt.map(t=>({who:nm,face:nm?p.ref:null,text:t})),{onDone:()=>F.choices(m.opts.map((o,k)=>({id:"m"+k,n:o.n,pic:dfPic(o.n),off:!!o.off,why:o.x||""})),id=>{const k=+String(id).slice(1);DF.enc=1;try{chooseM(k)}finally{DF.enc=0}dfSetGroups(F,dfData(i))})});
@@ -89136,7 +89136,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="137cd4ddc570";window.CTM_BUILD=BUILD;
+const BUILD="799563d98a46";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

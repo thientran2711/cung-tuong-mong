@@ -23,7 +23,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   /* a place with a consort she can talk to */let i=-1;for(const k of ["vuon","tn","kn","thu"]){__go(k);i=curPeople().findIndex(pp=>pp.kind==="rival"&&(dfActs(curPeople().indexOf(pp))||[]).some(g=>g.acts.some(a=>!a.off&&a.cls!=="D")));if(i>=0)break}
   out.place=S.place;out.i=i;if(i<0)return out;
   const tok=document.querySelector(`#tokens .tok[data-p="${i}"]`);tok.click();await sl(50);
-  out.open={called:__K.calls.includes('open'),fans:document.querySelectorAll('.kfoc-b').length,groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden};
+  out.open={called:__K.calls.includes('open'),fans:document.querySelectorAll('.kfoc-b').length,groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden,plate:(document.querySelector('.kfoc-plate')||{}).textContent,stageTag:(()=>{const d=document.createElement("div");d.innerHTML=j59tagHTML(curPeople()[i],curPeople()[i].name);return d.textContent})()};
   /* (2) an act, skipped */const F=__K.F;const a=F.groups.flatMap(g=>g.acts).find(a=>!a.off&&(dfFind(i,a.id)||{}).cls!=="D");const n0=S.logSeq||0;const run0=window.talk;let talked=0;window.talk=function(){talked++;return run0.apply(this,arguments)};
   __K.calls.length=0;Q.length=0;F.o.onAct(a.id);out.played=!!DFG.cur&&__K.calls.includes('play');out.skipBtn=!!document.querySelector('.kfoc-skipw:not([hidden]) button');document.querySelector('.kfoc-skipw button').click();await sl(60);window.talk=run0;
   out.act={n:a.n,calls:__K.calls.slice(),talked,cur:!!DFG.cur,skipGone:!document.querySelector('.kfoc-skipw:not([hidden]) button')};
@@ -47,6 +47,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  console.log(JSON.stringify(r).slice(0,1500));
  ok(r.mood&&r.mood.x&&r.mood.want&&r.mood.want.includes(r.mood.x.text),'(6) mood bubble: a line of her feeling (gian), cổ trang, no emoji',r.mood);
  ok(r.i>=0,'found a consort to act on at '+r.place);
+ ok(r.open&&r.open.plate===r.open.stageTag,'(1b) focus plate = the stage name tag of that person (same known / stranger rule)',[r.open&&r.open.plate,r.open&&r.open.stageTag]);
  ok(r.open&&r.open.called&&r.open.groups.length>0&&r.open.popIdx===r.i&&r.open.DFi===r.i&&r.open.popwHidden,'(1) stage tap opens the focus view, pop-up host hidden',r.open);
  ok(r.played&&r.act.calls.includes('endPlay')&&r.act.talked===1&&r.act.calls.includes('react')&&(r.act.calls.includes('setGroups')||r.act.calls.includes('setGroup'))&&r.act.skipGone&&!r.act.cur,`(2) act «${r.act&&r.act.n}»: game in F.play, skip = the act runs once, reaction + groups refresh`,r.act);
  ok(r.back&&r.back.inGame&&r.back.talked===0&&!r.back.cur&&r.back.open,'(2b) back «◂» in a game = cancel: no act, focus stays',r.back);
