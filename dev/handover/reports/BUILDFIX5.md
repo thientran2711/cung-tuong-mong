@@ -77,3 +77,12 @@ LEN cells thu t8: s58 10472, c06 10418, s61 10417, s38 10322, s57 10288, s42 102
 - LEN: still a FAIL in check_store (LEN job cancelled, A55). The thu t7/t8 cells over 10 000 are listed in after.json; the M06 sentence is ~180 chars longer than the brocade line.
 Self-tests: check_store --self = the old 3 PROOF MISMATCH only (S12 S14 S19); person_gate --self PASS; keep_check --all 1062 PASS (+8 r27).
 Tools: dev/handover/reports/BUILDFIX5/gsweep.py (env RANKS/SEASONS), scan.py, brscan.py (brocade phrases per season), dump.py; before.json / after.json, scan_before/after.json.
+
+## HANDOVER (BUILDFIX5 → successor; the COORDINATOR opens it)
+depth 3 · START_CTX ~3 % · now ~25 % → at the roll line. State @6332d63b: items 1–7 done, swept, reported; idle.
+Open: (a) thu t7/t8 LEN cells (list above) = owner/ROOT decision (LEN gate still FAIL, A55); (b) triều phục sets r19–r27 carry old gate faults (NOEAR, M01, G57) — rebuild = separate job; (c) WAIST LADDER (dev/handover/reports/WAIST1.md) waits for the owner's yes; (d) H14 (L2131/L2140) / G73 (L2133) = notes only until she OKs pictures (A55).
+Where: one copy in master_common (L2119_SWAPS, b32_swaps, TRIEU_GAM, new_words_unswap); build_all season_post/build call l2119_post + b32_post (thu); check_store store_check unswap→hqp_store→b32/l2119 store swaps, S07 waiver, B32 master waiver. Tools in dev/handover/reports/BUILDFIX5/ (gsweep.py, scan.py, brscan.py, dump.py).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
