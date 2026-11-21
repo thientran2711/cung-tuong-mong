@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)","b":"19c835043c3d","h":[{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"}]};
+window.CTM_BI={"s":"f13dc915+","t":"2026-11-21T09:11Z","c":"SELF-MERGE LAND econ-tamco: merge LIVE ce99b707e (index.html/sw.js rebuilt)","b":"3a84ceb9a824","h":[{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37114,6 +37114,8 @@ const NWB={
  /* the hint / done buttons are the SAME signs as group a (j91 k91Btns): «?» and «✓» on .kgbtn, the word only in the tooltip (mg-noword-a); other signs are the svg icons */
  btn(id,k,o){o=o||{};const lab=o.label||"",inner=k==="hint"?"?":k==="check"?"✓":NWB.ic(k);return `<button type="button" class="${o.cls||"kgbtn"} nwb-btn" id="${id}" aria-label="${lab}" title="${lab}">${inner}</button>`},
  pips(n,on,cls){let s="";for(let i=0;i<n;i++)s+=`<i class="nwb-pip${i<on?" on":""}"></i>`;return `<span class="nwb-pips${cls?" "+cls:""}" aria-hidden="true">${s}</span>`},
+ /* care games (thu_tam / thu_choi / tuoi): the progress line is dots, not words. n dots, on filled; band [lo,hi] = the right zone drawn as green-ringed dots (a sign, never text) */
+ cnt(n,on,_h,band){let s="";for(let i=0;i<n;i++){const b=band&&i+1>=band[0]&&i+1<=band[1];s+=`<i class="nwb-pip${i<on?" on":""}${b?" band":""}"></i>`}return `<div class="nwb-pool nwb-cnt"><span class="nwb-pips" aria-hidden="true">${s}</span></div>`},
  who(name){return/già|lão|góa|cao|ma ma/i.test(name)?"elder":/nhỏ|tiểu|mới|còn nhỏ/i.test(name)?"child":/ốm|yếu|đói/i.test(name)?"sick":"adult"},
  POP:{ok:"✓",bad:"✗",s3:"★★★",s2:"★★",s1:"★"}};
 (function(){const st=document.createElement("style");st.id="nwb-css";st.textContent=`
@@ -37122,6 +37124,7 @@ const NWB={
 .nwb-i{width:1.5em;height:1.5em;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nwb-btn{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:48px}.nwb-btn .nwb-i{width:1.8em;height:1.8em}
 .nwb-pips{display:inline-flex;gap:5px;align-items:center;vertical-align:middle}.nwb-pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--k-hair,#b59a6a);box-sizing:border-box;background:transparent}
+.nwb-pip.band{border-color:#2f8f4e;border-width:3px}.nwb-cnt{display:flex;justify-content:center;padding:6px 0}
 .nwb-pip.on{background:var(--gold,#d99a1e);border-color:var(--gold,#d99a1e)}
 .nwb-cap{font:700 .75rem/1.25 var(--body,sans-serif);color:var(--ink,#3a1a0c);text-align:center;overflow-wrap:anywhere}/* huong-cue-2: the one-line guiding caption beside pips (needs / left) */
 .nwb-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0}.nwb-row .nwb-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
@@ -50074,8 +50077,8 @@ function petcTutFeed(b,env){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKi
  b.querySelectorAll("[data-food]").forEach(x=>x.addEventListener("click",pickEl));if(fig)fig.addEventListener("click",eat);
  KG82.peek=()=>{if(dead)return null;if(!sel)return{sel:`[data-food="${ok}"]`};const f=petcFig();if(!f)return null;const r=f.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height*.55}};
  return()=>{dead=true;KG82.peek=()=>null;if(fig)fig.removeEventListener("click",eat)}}
-function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=kitFacts(["Đã vuốt 0/2"]);st.style.touchAction="none";
- const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=kitFacts([`Đã vuốt ${n}/2`]);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
+function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=NWB.cnt(2,0);st.style.touchAction="none";
+ const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=NWB.cnt(2,n);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
  st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);
  KG82.peek=()=>{if(dead)return null;const r=st.getBoundingClientRect();return{drag:[[r.left+r.width*.5,r.top+r.height*.3],[r.left+r.width*.5,r.top+r.height*.75]]}};
  return()=>{dead=true;KG82.peek=()=>null;st.style.touchAction="";st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up)}}
@@ -50112,10 +50115,10 @@ function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)]
    Cho ăn stays outside: picking the food a species eats is knowledge, not a hand (dev/handover/reports/mg11-thutay.md). */
 /* engine: N even strokes along the pet's coat; env.fig = the picture to stroke (her pet on the care screen); none (Thử tay) = her first pet, or a kitten, drawn in the board (kitItem) */
 function petcStrokeEng(box,env){const N=Math.round(mgLev(env,"thu_tam","n")),K=mgLev(env,"thu_tam","k");let st=env.fig||null;
- const fx=c=>kitFacts([`Đã vuốt ${c}/${N}`]);
+ const fx=c=>NWB.cnt(N,c);
  if(!st){let src="";try{const P=(typeof S!=="undefined"&&S)?tsbPets(S)[0]:null;src=P?petcStageSrc(P,1).src:petSrc(Object.keys(PET)[0],1)}catch(e){}
-  box.innerHTML=kitItem({src,name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>','')+fx(0);st=box.firstElementChild}else box.innerHTML=fx(0);
- const facts=()=>box.querySelector(".kfacts");const lens=[];let a=null,dead=false;st.style.touchAction="none";
+  box.innerHTML=kitItem({src,name:"",grade:null,size:"lg"}).replace('<span class="kitn"></span>','')+fx(0);st=box.firstElementChild}else box.innerHTML=fx(0);
+ const facts=()=>box.querySelector(".nwb-cnt");const lens=[];let a=null,dead=false;st.style.touchAction="none";
  const dn=e=>{if(dead)return;e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},
   up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
    const f=facts();if(f)f.outerHTML=fx(lens.length);env.hud({round:`${lens.length}/${N}`});
@@ -50126,13 +50129,13 @@ function petcStrokeEng(box,env){const N=Math.round(mgLev(env,"thu_tam","n")),K=m
  return off}
 /* engine: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (N rounds) */
 function petcBallEng(box,env){const L=n=>mgLev(env,"thu_choi",n),N=Math.round(L("n")),M0=L("ms"),DEC=L("dec"),MIN=L("min"),B0=["Trái","Giữa","Phải"];
- box.innerHTML=`<div class="rbtn">${B0.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+kitFacts([`Lượt 0/${N} · trúng 0`]);
+ box.innerHTML=`<div class="rbtn">${B0.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+NWB.cnt(N,0);
  let lit=-1,n=0,hits=0,tm=0,dead=false;const B=[...box.querySelectorAll("[data-ball]")];
  const step=()=>{if(dead||!document.body.contains(box)){clearTimeout(tm);return}let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(MIN,M0-n*DEC))};
  const off=()=>{dead=true;clearTimeout(tm);KG82.peek=()=>null};env.hud({round:`0/${N}`});step();
  KG82.peek=()=>dead?null:{sel:`[data-ball="${lit}"]`};
  B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(dead)return;if(i===lit)hits++;n++;
-  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/${N} · trúng ${hits}`]);env.hud({round:`${n}/${N}`});if(n>=N){off();env.end(10*hits/N)}else{clearTimeout(tm);step()}}));
+  const f=box.querySelector(".nwb-cnt");if(f)f.outerHTML=NWB.cnt(N,n,hits);env.hud({round:`${n}/${N}`});if(n>=N){off();env.end(10*hits/N)}else{clearTimeout(tm);step()}}));
  return off}
 function petcHow(k){const L=n=>Math.round(mgLev({lv:BAL.mgTier.mid},k,n));return k==="thu_tam"?`Vuốt dọc lông nó ${L("n")} lần, đều tay (vuốt trên hình nó).`:`Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (${L("n")} lần).`}
 /* game 2: even strokes along the pet's coat (on its picture) */
@@ -83966,7 +83969,7 @@ window.shelfPlantOpen=shelfPlantOpen;
 /* the care minigame (also the Thử tay calibration entry): water rises step by step; stop it inside the band; score = closeness over the rounds */
 /* MG11: env (optional) = the board ease (BAL.mgTier.lev.tuoi f × the pour pace; middle ease = the old pace, law 5) + the round on the HUD; the SAME board is the Thử tay kind tuoi (jmgx) */
 function shelfWaterGame(box,done,W,env){W=W||SHELF_CARE.cay;const G=BAL.shelf.plant.game,F=env?mgLev(env,"tuoi","f"):1;let r=0,lv=0,tm=0,sum=0;const stop=()=>clearTimeout(tm);const hr=()=>{if(env&&env.hud)env.hud({round:`${Math.min(r+1,G.rounds)}/${G.rounds}`})};
- const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop">${W.stop}</button></div>`+kitFacts([`Lần ${r+1}/${G.rounds} · đã đổ ${lv}/${G.steps} · vừa đủ: ${G.band[0]}–${G.band[1]}`])};
+ const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop" aria-label="${W.stop}" title="${W.stop}" data-kgsign="●">●</button></div>`+NWB.cnt(G.steps,lv,0,G.band)};
  const tick=()=>{if(!document.body.contains(box)){stop();return}lv++;if(lv>G.steps){end(0);return}draw();tm=setTimeout(tick,F*(G.ms[0]-(G.ms[0]-G.ms[1])*r/Math.max(1,G.rounds-1)))};
  const end=s=>{stop();sum+=s;r++;lv=0;hr();if(r>=G.rounds){SHPC.game=null;done(sum/G.rounds);return}draw();tm=setTimeout(tick,F*G.ms[0])};
  box.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shw]");if(!b)return;ev.preventDefault();ev.stopPropagation();
@@ -88666,7 +88669,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="19c835043c3d";window.CTM_BUILD=BUILD;
+const BUILD="3a84ceb9a824";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
