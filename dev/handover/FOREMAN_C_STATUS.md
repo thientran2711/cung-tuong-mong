@@ -1261,3 +1261,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~09:41Z: #26 = session_01D3E3NXDFbJUswJKxtfWLwX opened. #25 stops.
 #26 ~08:36Z: CURRENT FOREMAN C = #26 session_01D3E3NXDFbJUswJKxtfWLwX, depth 7, START_CTX ~5 % (roll at 30 %, ceiling 60 %). Told all workers my ID. Relay from #25: VE8 L1887 t7/t8 tassel version superseded; HHCOL1 L1887c → VE8 @55 → send owner. Next Lượt 1898.
   **FROM MAIN (21/11 08:37Z):** main is now MAIN CHÍNH 92 session_01Rc5AsMUHiJKCMiCjnzdhii (91 rolled) — report LAND READY / questions to 92. Orders from 91 stand.
+#26 ~08:36Z: SENT L1900 hạ Đường t1–t3 L1890 (VE9 165 cr). VE9 confirmed m12 ×9 after Hán L1893. MAIDFIX3 L1895 split: m10+m18×8→VE8, m11→VE6, m12→VE9, m13→VE7. HHCOL1 L1887b/c → VE8 @55 (idle after). Next Lượt 1901.
