@@ -178,6 +178,8 @@ coop-dresscode-scan 76 w ×4 (+1 running): loan code 0 lasting. Every lasting co
 | 6065 DBG | host | NPC1 trâm, home 3 w | untraced then | = giveTo, see next row |
 | 6065 DBG + NEW host trace | host | NPC1 trâm home since tuần 43 | tuần 63 out by j8 giveTo (gift road): it rebuilds the piece as {k,from,iu} — the scan's tag was not carried → false vanish (or given up to Hoàng thượng / Thái hậu); scan now follows iu (0620c318) | NOT dresscode (gift road); FOR MAIN: giveTo to emp/th ends a piece with no ledger line (law 6c question for the item owner) |
 | 6065 DBG | guest | B1 (after the famApply dup) | loans in between are moves (lent 73, home by her book 74, hair→chest by «Mượn» 75); a 3rd copy appears at the w75 merge with no push | E44 merge × item ops |
+| 0620c318 DBG (5th run: host trace + ledger-id follow) | host | — | 0 host faults (the giveTo false vanish gone) | — |
+| 0620c318 DBG | guest | B1 / B3 own trâm | B1: 2nd copy pushed by famApply at tuần 60 (then loans only move her worn trâm aside/back); B3: famApply «rm» at 63 | E44 |
 Clocks 0/76 differ every run. Transients 3–21 (relay in flight). SKEW=24 runs: loans on every road both seats.
 ### (4) Laws on changed lines
 1 ✓ she borrows (gate, Hội phối đồ) ↔ NPCs borrow hers (ask, visit), NPC↔NPC · 2/3 ✓ every loan option: goodwill cost + real gain; «Cho mượn» visit now really costs the piece one tuần · 4 ✓ one-core PASS (BAL.cv.tsBorrow.aff replaces literal 25) · 6c ✓ (above) · 7 ✓ new lines cổ trang, no % («đã không còn trong rương ngươi; … về tay không», «… không còn chủ để trả, đã nộp về Nội vụ phủ.») · 9 ✓ loan row via kitRows/kitItemDetailRows, no new UI part.
