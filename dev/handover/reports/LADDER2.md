@@ -14,7 +14,19 @@ depth 6 · START_CTX ~4 % (used_tokens reads 0; estimate) · 0 gens, 0 cr.
 | xuân t1 / t2 | seasons4/s62_t{1,2}_HAN_BAC_v7 | 9539 / 9809 | same | — |
 t7/t8 embroidery style untouched (owner L1627: own style). Builders: thu_comoi/make_thu_L1627.py, thu_comoi/make_g40_tied_t13.py.
 
-## BLOCKED — need Foreman/owner call (only gate or owner words left)
+## Step 3 (Foreman C #15 answers 01:47–01:48Z) — all PASS (check_store --scope tpN --age a22 STORE+APPROVED; keep_check --all 287 PASS)
+| tier | new file | chars | change | length method |
+|---|---|---|---|---|
+| thu t6 Quý phi | thu_comoi/s62_t6_THU_COMOIf (builder make_s62_t6_thu_v6.py) | 9996 | G47 copy of DESIGN20 t5 v7 (COMOIf), motif = incurved chrysanthemums: neckline band of dense embroidery ACROSS the chest + small flowers below; long vertical front panels shoulder→hem; small birds; many small flowers over robe+skirt; WIDE hem bands outer + inner; skirt medallions; cape ITEMS of t5 (capelet + cord across chest + jade clasp + pearl/jade/gold-stud net + fringe + extra soft layer on each shoulder, fringes longer than Phi) replacing the old one-tier cloud collar; cuff bands + sleeve flowers; yellow sash flat CENTRE no bow + TWO apron panels + long jade pendant set each side, never covered; sheer stole; OUTER_TIED; caption "Quý phi · v6" | Foreman B: persona "Expression: …" (repeat of face block) cut; our copied words compressed; repeats cut: signature-colour sentence, "pearl-edged collar trim", "grander gold headdress…", "rich gold-thread embroidery covering much of the robe", "image 2 is only a colour reference", "her own colour stays clearly the main robe colour". Note: `--low 6` store-design compare shows 9 low-overlap store sentences (base COMOIe had 4); extra = Expression (B), the luxury/colour repeats above. |
+| thu t1 | dapung4/s62_t1_COMOI_v6 | 9805 | OUTER_TIED + chest embroidery on inner top + hem band outer AND inner | none |
+| thu t2 | dapung4/s62_t2_COMOI_v6 | 9902 | OUTER_TIED + hems outer AND inner | signature-colour repeat (std) |
+| thu t3 | dapung4/s62_t3_COMOI_v6 | 9963 | OUTER_TIED + hems outer AND inner | ANGLE tail repeat of HEAD AND BODY; first "NO crossed wrap collar" (said twice); apron paren compressed |
+| xuân t1 / t2 | seasons4/s62_t{1,2}_HAN_BAC_v7 | 9551 / 9821 | OUTER_TIED + "the embroidered inner robe hem showing below" | none |
+| xuân t3 | seasons4/s62_t3_HAN_BAC_v7 | 9990 | same | ANGLE tail repeat; sleeve paren (repeat of S11) compressed; our G42 cuff/hem phrase compressed |
+Builder for t1–t3: thu_comoi/make_g40_tied_t13.py. Approved pictures unchanged (prompt files only).
+t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jade-and-gold belt pendants with pearl tassels"; t8 same) → G42 jade OK.
+
+## (old, resolved by step 3) BLOCKED
 - **thu t6 Quý phi v6** (thu_comoi/make_s62_t6_thu_v6.py, `--raw <out>` to see): G47 copy of t5 v6 = neckline band embroidered across chest + small flowers below, vertical front panels shoulder→hem, outer+inner hem bands, many small flowers, skirt medallions, cuff bands + sleeve flowers, t5 cape VERBATIM (Tần capelet + CAPE5_V4_EXTRA) replacing the old cloud collar, centre sash no bow + 2 jade pendant sets, sheer stole, OUTER_TIED. = 11 041 ch; after repeat trims 10 592 (+ 3 more gate-safe repeats ≈ 10 480). Options: (A) drop PHI BẠCH shawl sentence (303) + (B) drop persona "Expression: …" (203) → fits; (C) keep t6 cloud collar (no full t5 cape) → breaks G47.
 - **thu t3 v6** 10 093 and **xuân t3 v7** 10 098 with OUTER_TIED: every std trim already used → ~95 over.
 

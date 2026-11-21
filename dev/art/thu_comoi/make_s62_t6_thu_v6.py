@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """LADDER2 (owner L1627 + G46/G47 L1626 via Foreman C #15; 0 cr). Run from anywhere. Never hand-edited (L1567).
 thu s62 t6 Quý phi v6 = thu_comoi/s62_t6_THU_COMOIe.txt with ONLY the G47 ladder copy of thu t5 Phi v6 (DESIGN20 s62_t5_THU_COMOIe,
-make_s62_t5_thu_v6.py), same motif types (t6 = incurved chrysanthemums), a little denser:
+make_s62_t5_thu_v6.py; base for the copy = s62_t5_THU_COMOIf v7), same motif types (t6 = incurved chrysanthemums), a little denser:
  1. G40 strong: master_common.OUTER_TIED instead of OUTER_IN (shared clause, all 8 tiers);
  2. neckline band embroidered ACROSS the chest + small flowers below it (t5 'the Phi edge' words);
  3. front edges = long vertical embroidered panels shoulder -> hem (t5 words);
  4. many small flowers over robe+skirt, WIDE hem bands on the outer AND inner robe (G47 inner hem), skirt-front medallions, small birds (t5);
- 5. cape: the t5 cape copied verbatim (= Tần capelet verbatim incl. chest cord + jade clasp, + build.py CAPE5_V4_EXTRA shoulder layer, G46)
+ 5. cape: the t5 cape ITEMS (Foreman C #15: same items, our builder words compressed): capelet + cord across the chest + jade clasp + pearl net + fringe + extra shoulder layer (G46)
     replaces the old one-tier cloud collar (the Tần capelet words say 'no cloud collar'); its fringe a little longer than the Phi's;
  6. sleeves: deep embroidered cuff bands + small flowers on the sleeves (t5);
  7. sash: tied flat at the CENTRE front, NO bow (G44), two long jade pendant sets in front never covered (G42/G45), sheer silk shawl (t5);
@@ -16,32 +16,36 @@ ART = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ART)
 from master_common import OUTER_IN, OUTER_TIED
 D = os.path.join(ART, "thu_comoi")
-t5 = open(os.path.join(D, "s62_t5_THU_COMOIe.txt"), encoding="utf-8").read()
-a = t5.index("a short round embroidered silk capelet"); END = "a short pearl tassel fringe"
-CAPE = t5[a:t5.index(END, a) + len(END)]   # t5 cape verbatim (Tần capelet + EXTRA)
 SRC = "s62_t6_THU_COMOIe.txt"
 s = open(os.path.join(D, SRC), encoding="utf-8").read()
 WHY = "owner L1627 G40 + L1626 G46/G47 ladder copy of thu t5 Phi v6 (LADDER2)"
 EDITS = [
     (OUTER_IN, OUTER_TIED),
     ("a blush inner top with a low straight SQUARE neckline edged by a pearl-edged gold band (the Quý phi edge),",
-     "a blush inner top with a low straight SQUARE neckline edged by a wide pearl-edged blush band densely embroidered with "
-     "chrysanthemums straight ACROSS the chest (the Quý phi edge), small chrysanthemums below it,"),
-    ("its two front edges (slim, pearl-edged)",
-     "its two front edges (each a long vertical pearl-edged blush chrysanthemum panel, shoulder to hem)"),
+     "a blush inner top with a low straight SQUARE neckline edged by a wide pearl-edged blush band of dense chrysanthemum embroidery "
+     "ACROSS the chest (the Quý phi edge), small chrysanthemums below it,"),
+    ("its two front edges (slim, pearl-edged)", "its two front edges (each a long vertical blush chrysanthemum panel, shoulder to hem)"),
     ("the robe embroidered with incurved chrysanthemums in light plum and gold thread along the borders,",
      "the robe embroidered with incurved chrysanthemums and small birds in light plum and gold thread along the borders, many small "
-     "chrysanthemums densely over robe and skirt, WIDE chrysanthemum hem bands on the outer and inner robe, large chrysanthemum "
-     "medallions on the skirt front,"),
-    # old one-tier cloud collar -> t5 cape verbatim (G46/G47), fringe a little longer
+     "chrysanthemums densely over robe and skirt, WIDE chrysanthemum hem bands on outer and inner robe, large chrysanthemum medallions on the skirt,"),
+    # old one-tier cloud collar -> the t5 cape ITEMS (G46/G47, Foreman: same items, our builder words compressed): capelet + cord across the
+    # chest + jade clasp + pearl net + fringe + extra shoulder layer
     ("an embroidered light plum cloud collar (yunjian) of ONE tier of scalloped cloud-shaped lobes over the shoulders, OPEN at the front "
      "(its lobes resting on the shoulders and back, never covering the neck or the square inner neckline), with a scalloped gold-thread "
      "edge and a fringe of small gold tassels, pearl-edged, with small jade and pearl drops dangling beneath it, fewer and smaller than the "
      "imperial noble consort's,",
-     CAPE + " a little longer than the Phi's, deep chrysanthemum cuff bands and small chrysanthemums on the sleeves,"),
+     "a short round embroidered silk capelet over only the shoulders and outer upper chest, OPEN "
+     "at the front, its fronts linked across the chest by a silk cord with a jade clasp in the middle, under a flat airy net of pearls, "
+     "jade beads and tiny gold flower studs over the WHOLE capelet, pearl-fringed; on EACH shoulder one extra small "
+     "soft round embroidered layer with pearls and a pearl tassel fringe, fringes longer than the Phi's; no cloud "
+     "collar, vest or stiff shoulder pieces; deep chrysanthemum cuff bands, small chrysanthemums on the sleeves,"),
     ("gold-and-jade bracelets;",
-     "gold-and-jade bracelets, the yellow sash tied flat at the CENTRE front, NO bow, two long carved jade pendant sets (ngọc bội) "
-     "with tassels in front, never covered by sleeve or stole, a sheer silk stole;"),
+     "gold-and-jade bracelets, the yellow sash tied flat at the CENTRE front, NO bow, with TWO embroidered blush chrysanthemum "
+     "APRON PANELS side by side to the ankles and a long jade pendant set (ngọc bội) of jade plaques "
+     "and tassels at each outer side, never covered, a sheer stole;"),
+    # Foreman C #15 option B: persona Expression sentence repeats the face block (soft warm eyes, closed-lip smile, head tilt in GRACE)
+    (" Expression: A TENDER, kind, caring look, the head inclined slightly to one side, the soft eyes warm and full of gentle affection, "
+     "a small sweet closed-lip smile, eyes fully open, never a stretched grin.", ""),
     ("Quý phi · Vân kiên cổ cuộn mây + cổ mở", "Quý phi · v6"),
 ]
 # A38: repeated boilerplate only (never owner outfit / embroidery / jewellery / hair words); cut in order until <= LIMIT
@@ -52,7 +56,9 @@ TRIM = [
      "the 'her signature colour family … all-gold robe' colour-repeat sentence (A38 std trim; repeats the 2nd COLOUR RULE + TWO-COLOUR RULE)"),
     (", a pearl-edged collar trim", "repeat of the pearl-edged neckline band"),
     (", and a grander gold headdress with more gold ornaments", "repeat of 'a BIG ornate gold headdress with pearls, gold flowers and many gold tassels'"),
-    (" rich gold-thread embroidery covering much of the robe,", "repeat of the new 'many small chrysanthemums densely over the robe and skirt'"),
+    (" rich gold-thread embroidery covering much of the robe,", "repeat of the new 'many small chrysanthemums densely over robe and skirt'"),
+    (" image 2 is only a colour reference;", "repeat of 'the colour of the flat colour swatch image (image 2 …)'"),
+    (" her own colour stays clearly the main robe colour,", "repeat of COLOUR RULE '#DF9ED9 is the main colour of the robe'"),
 ]
 LIMIT = 10000
 allow = []

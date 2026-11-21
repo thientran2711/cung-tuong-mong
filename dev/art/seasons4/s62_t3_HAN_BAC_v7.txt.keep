@@ -1,0 +1,6 @@
+base: dev/art/seasons4/s62_t3_HAN_BAC_v6.txt
+allow: the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; replaced by OUTER_TIED
+allow: the inner robe hem showing below  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; edit
+allow: wide embroidered semi-double China roses bands at the sleeve ends and the hem  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; edit
+allow: her head turns together with her shoulders and body  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; exact repeat of the HEAD AND BODY sentence (after the ANGLE table words)
+allow: one single visible sleeve layer, every inner sleeve hidden inside  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; builder words: repeat of the ONE SINGLE SLEEVE LAYER rule sentence -> ' (one single visible sleeve layer)'

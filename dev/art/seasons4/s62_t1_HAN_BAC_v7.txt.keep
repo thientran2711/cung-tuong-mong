@@ -1,2 +1,3 @@
 base: dev/art/seasons4/s62_t1_HAN_BAC_v6.txt
-allow: the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat  # owner L1627 G40 all 8 tiers: OUTER_IN -> shared master_common.OUTER_TIED (LADDER2)
+allow: the outer robe HELD IN by the sash or girdle tied OVER it, hugging the body, never a loose open coat  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; replaced by OUTER_TIED
+allow: the inner robe hem showing below  # owner L1627 G40 all 8 tiers (shared master_common.OUTER_TIED) + G47 inner hem / G42 chest (DESIGN20 checklist), LADDER2; edit
