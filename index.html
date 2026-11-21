@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)","b":"5fa262c8723f","h":[{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"}]};
+window.CTM_BI={"s":"6422c1ad","t":"2026-11-21T11:17Z","c":"coop-pool-face: a player's own face is never a room world face; guest never changes a world face","b":"9b90de54db4d","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -9124,7 +9124,7 @@ function pidKeys(){try{const M=typeof FIGIX!=="undefined"&&FIGIX.consort;const k
  const L=[];for(let i=1;i<=PID_N;i++)L.push("consort:c"+String(i).padStart(2,"0"));return L}
 /* deterministic from the roll's seed, so the same roll always gives the same identity even before it is stored */
 let PID_AVOID=null;
-function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r();let i=Math.floor(r()*K.length)%K.length;
+function pidRoll(d){let K=pidKeys();try{const T=pidTakenNow();if(T){const F=K.filter(k=>!T.has(k));if(F.length)K=F}}catch(e){}const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r();let i=Math.floor(r()*K.length)%K.length;
  if(PID_AVOID&&K[i]===PID_AVOID&&K.length>1)i=(i+1+Math.floor(r()*(K.length-1)))%K.length;return K[i]}
 /* "Đổi thân phận" always gives another identity than the one on the card */
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
@@ -9137,7 +9137,9 @@ function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBan
 figDist=function(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);const ab=pidBand(age),fb=pidBand(fa);
  return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(ab!=null&&fb!=null?Math.abs(fb-ab)*1.2+Math.abs(fa-age)/400:0)};
 /* the reserved identity is always "used": every NPC pick skips it */
-(function(){const u0=figUsed;figUsed=function(){const U=u0.apply(this,arguments);try{if(S&&S.pid&&!U.includes(S.pid))U.push(S.pid)}catch(e){}return U}})();
+(function(){const u0=figUsed;figUsed=function(){const U=u0.apply(this,arguments);try{if(S&&S.pid&&!U.includes(S.pid))U.push(S.pid);
+  /* coop-pool-face: the friend's own identity is "used" in the one world too (no NPC the host draws later ever takes her face) */
+  const f=window.COOPW&&COOPW.on&&COOPW.friendPid?COOPW.friendPid():null;if(f&&!U.includes(f))U.push(f)}catch(e){}return U}})();
 /* her own pick: the reserved identity, or nothing (the old face) when its art is not there */
 (function(){const p0=figPick;figPick=function(who){if(who===S&&S&&S.pid){figUsed();const M=typeof FIGIX!=="undefined"&&FIGIX.consort;if(M&&M[S.pid]){S.fid=S.pid;return S.pid}return null}
   if(who&&who!==S&&S&&S.pid&&who.fid===S.pid)who.fid=null;return p0.apply(this,arguments)}})();
@@ -9145,6 +9147,23 @@ figDist=function(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);const
 function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const U=figUsed();
  for(const o of nlHolders()){if(o&&o!==S&&o.fid===S.pid){o.fid=null;ch=true}}
  const n=U.filter(x=>x===S.pid).length;if(n>1){S.fidUsed=U.filter(x=>x!==S.pid);S.fidUsed.push(S.pid);ch=true}return ch}
+/* coop-pool-face (Foreman D #15, root cause of coop-e2e "guest's Thái hậu picture blank"): in a shared room a player's own identity is
+   never a face the ROOM's world already gives someone (Thái hậu, consorts, their staff, court, men … every pool-faced person) nor the
+   friend's own identity. Before: the guest rolled her identity from the 32 consort faces without looking at the room (~1 in 32 hit the
+   face the host had given the Thái hậu); pidEnforce / figPick above then cleared that world person's face on her phone, her week end
+   carried the blank face, the 3-way merge took it (only she "changed" it) and the host drew a new face (c23 → c04): one face for life broken
+   on both seats. ONE rule, two doors: pidRoll skips the taken faces (the roll card shows the face she will have), and every time a
+   life enters / reloads the room (jcoopworld fromCanon) pidRoomFix moves HER (never the world person) to a free identity if hers is
+   taken (a stored roll, a face pick made before the room's world was in, an old room where the clash already happened).
+   COOPW.taken() = the faces held in the room's world + the friend's identity (jcoopworld). Solo: no COOPW.on, nothing changes. */
+function pidTakenNow(){try{return window.COOPW&&COOPW.on&&COOPW.taken?COOPW.taken():null}catch(e){return null}}
+function pidRoomFix(T){if(!S||!S.pid||!T||!T.has(S.pid))return false;const K=pidKeys();const U=new Set(S.fidUsed||[]);const i=Math.max(0,K.indexOf(S.pid));let k=null;
+ for(let j=1;j<=K.length&&!k;j++){const x=K[(i+j)%K.length];if(!T.has(x)&&!U.has(x))k=x}
+ for(let j=1;j<=K.length&&!k;j++){const x=K[(i+j)%K.length];if(!T.has(x))k=x}
+ if(!k)return false;const old=S.pid;S.pid=k;S.fid=k;figUsed();
+ try{const d=store.get(NL_KEY);if(d&&d.pid===old){d.pid=k;if(d.fpick===old)d.fpick=k;store.set(NL_KEY,d)}}catch(e){}
+ pidRoomFix.n=(pidRoomFix.n||0)+1;pidRoomFix.last=[old,k];return true}
+window.pidRoomFix=pidRoomFix;
 (function(){const r0=nlRun;nlRun=function(d){if(d&&!d.pid){d.pid=pidRoll(d);try{const c=store.get(NL_KEY);if(c&&c.seed===d.seed){c.pid=d.pid;store.set(NL_KEY,c)}}catch(e){}}
   const res=r0.apply(this,arguments);try{if(S&&d&&d.pid){S.pid=d.pid;pidEnforce()}}catch(e){console.error(e)}return res}})();
 /* the face snapshot (j52) may hold a pre-j66 player look or an NPC with her identity: correct it and re-record */
@@ -47305,6 +47324,7 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    if(b.fx)for(const x of FXL)if(!fxEq(v[x],b.fx[x]))s[x]=v[x]==null?null:J(v[x]);/* a face mark put on her on this seat (tea, ink, slap, rash…) goes back to her (review/looks-2) */
    if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
+ if(!host()&&CW.base&&CW.base.W){try{keepFaces(WS,CW.base.W.S||{},0);keepFaces(R,CW.base.W.R||[],0)}catch(e){console.error("keepFaces",e)}}
  const out={v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P};
  /* thin guest part C (jcoopthinc): in a C room the guest's week carries the room's world unchanged (W comes from the host only) */
  return CW.cW?CW.cW(out):out}
@@ -47329,7 +47349,24 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,LASTB());
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
- if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}return true}
+ if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}
+ /* coop-pool-face: her own identity is never a face the room's world gives someone, nor the friend's (j66 pidRoomFix moves HER) */
+ try{if(typeof pidRoomFix==="function")pidRoomFix(roomTaken(C))}catch(e){console.error("pid room",e)}return true}
+/* coop-pool-face: the faces of the room — every fid held by a person of the world W (Thái hậu, Emperor, consorts, staff, court, men, kids)
+   + the friend's own identity. fidUsed / fidDead are lists, not holders: not counted here (her own identity sits in fidUsed). */
+function faceHeld(o,out,seen,d){if(!o||typeof o!=="object"||seen.has(o)||d>14)return;seen.add(o);if(Array.isArray(o)){for(const x of o)faceHeld(x,out,seen,d+1);return}
+ for(const k in o){const v=o[k];if(k==="fid"){if(typeof v==="string"&&v)out.add(v)}else if(v&&typeof v==="object")faceHeld(v,out,seen,d+1)}}
+function roomTaken(C){if(!C||!C.W)return null;const T=new Set();faceHeld(C.W,T,new Set(),0);const f=C.P&&C.P[fs()];if(f&&!f.dead&&f.S&&f.S.pid)T.add(f.S.pid);return T}
+CW.taken=()=>roomTaken(CW.base);
+CW.friendPid=()=>{const f=CW.base&&CW.base.P&&CW.base.P[fs()];return f&&!f.dead&&f.S&&f.S.pid||null};
+/* coop-pool-face backstop: the GUEST never decides a world person's face (the host draws every pool face, once). Her week end carries the
+   room's face for every world person the room's world already has a face for, whatever her phone did to it (display re-picks, a clear by
+   pidEnforce): the 3-way merge would otherwise take her change, since only she "changed" it. NPCs match by id, other world keys by path. */
+function keepFaces(n,b,d){if(!n||!b||typeof n!=="object"||typeof b!=="object"||d>14)return;
+ if(Array.isArray(n)){if(!Array.isArray(b))return;const m=new Map();for(const x of b)if(x&&typeof x==="object"&&x.id!=null)m.set(String(x.id),x);
+  for(const x of n)if(x&&typeof x==="object"&&x.id!=null&&m.has(String(x.id)))keepFaces(x,m.get(String(x.id)),d+1);return}
+ if(typeof b.fid==="string"&&b.fid&&n.fid!==b.fid){n.fid=b.fid;CW.faceKeep=(CW.faceKeep||0)+1}
+ for(const k in n){const v=n[k];if(v&&typeof v==="object"&&b[k]&&typeof b[k]==="object")keepFaces(v,b[k],d+1)}}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
 function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
@@ -89404,7 +89441,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5fa262c8723f";window.CTM_BUILD=BUILD;
+const BUILD="9b90de54db4d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
