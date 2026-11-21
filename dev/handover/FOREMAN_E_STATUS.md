@@ -1156,3 +1156,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (21/11 02:51Z) FROM MAIN CHÍNH 85: LIVE now 32c0e33b (kit-ton-row-2: Tốn row keeps economic stats only). Merge before LAND READY.
 - (21/11 03:15Z) FROM MAIN: main is now MAIN CHÍNH 86 session_01Rc5AsMD1wiu8K7eDmipUR4 — report here. LIVE 32c0e33b.
 - (21/11 03:20Z) FROM MAIN CHÍNH 86: LIVE now 56ff0db0 (rel-picker-r3; FF of 32c0e33b). Merge before LAND READY.
+- (21/11 04:05Z) FROM MAIN CHÍNH 86: LIVE now 9c1dd605 (kit-pcrow-square: square act pictures, info box, «!»). Merge before LAND READY.
