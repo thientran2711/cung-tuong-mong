@@ -169,3 +169,18 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 ## 21/11 chapter-card r2 (worker session_01Rc5AsMDAsVpNsL2CKbpUuC) — KIT DRAFT «kitSlide» (marks #28/#29) + «dialog picture fills column» (#43)
 - Need: chapter slide carousel with «Mục lục» corner button for every chapter place; info/chapter dialog picture big. Grep: none existed (jchap/jgoal only had lists + a 170 px tile).
 - Drafted in dev/build/jkslide.js (new kit file, after j79 in assemble.py), KIT.md §21c/§21d, kit sample §21c. Status: DRAFT in review/chapter-card awaiting kit keeper (session_01Rc5AsMtjP4KTgBZVjENGLs).
+
+## 17/11 — KIT REQUEST — timed choice dialog (night-final, owner OD 16/11 22:45Z "Phải quyết định trong vòng 10 giây thôi")
+| date | from | need | where | who | status |
+|---|---|---|---|---|---|
+| 17/11 | night-final (session_01UV1SzhwBU5vBCvZomnavDM) | A dialog with a COUNTDOWN (kit §69 `kitCoopClock` chip in the body) must show the clock + the one-line question WITHOUT scrolling on Fold 755x1000. Today the kit dialog (art + option cards) puts the body text after the option cards on narrow: measured on the flip choice (pid "nfch"): body 736 px tall in a 493 px box, the clock chip at y 965 (off screen), options at 472–796. iPad 1180x820 is fine (text + clock above the cards). Ask: a kit way to pin a timer chip (and the question line) above the options / in the dialog header for timed choices — no private CSS in jnf | flip choice after the card flip (jnf.js showChoice); any later timed choice | kit keeper | mở |
+
+## 17/11 — KIT REQUEST — card flip: the tassel crosses the rank line of the picked card's name tag (night-final #6)
+| date | from | need | where | who | status |
+|---|---|---|---|---|---|
+| 17/11 | night-final #6 (session_01UV1SzkcuhnxeSAywiQC2hz) | The picked card's name tag (`.kcf-pick .kcf-tag.kcf-tag-l{top:79%}`, KIT §48 kitNameRank on the tray) sits ON the jade tassel by design ("over the tassel"), so the tassel cord runs through the rank word (e.g. "Quý nhân"). Needs a kit answer: tag below the tassel end, or the tassel behind a paper backing. Not night-final code (jflip.js / §48 from main) — not changed here. | jflip.js final still, Fold 755x1000 + iPad 1180x820 | kit keeper | open |
+
+## 17/11 — KIT REQUEST — live v3 frame at phone portrait 390x844: info column too narrow for option cards (night-final-r1 reviewer)
+| date | from | need | where | who | status |
+|---|---|---|---|---|---|
+| 17/11 | night-final-r1 reviewer (session_01964izDUxnFjybggNj6Ukev) | At 390x844 (secondary device) the live v3 frame (`kszlive`, lay L) gives the figure most of the width and the right info column only ~146 px; compact option cards (§43, `button.ka.kart.kopt`, 84 px picture) are then 146 px wide: name wraps per word, the odds ladder chip and the Được/Mất values run past the card edge. Pre-existing on live main 6c4f21c3 (there the name is squeezed to 0 px); §43.0a makes it better (name 30 px) but cannot fix the column width. Fold 755x1000 + iPad 1180x820 are fine. Ask: a kit rule for the v3 frame at phone width (figure column narrower / option cards below the figure, full width). | kitFrameLive3 / KIT_SIZE.v3 (jksize.js), every person/event dialog with options at ≤ 420 px wide | kit keeper | open |
