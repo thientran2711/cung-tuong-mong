@@ -620,6 +620,8 @@ def _sec_slot(person,rank,S):
     """Lượt 483 slot REPLACE (colour slot of the store COLOUR RULE, t1-t6): the secondary is no longer only 'in the inner robe and linings'."""
     if not isinstance(rank,int): return S
     sec,_=secondary(person)
+    _w7=_season_pal(person); _m7=re.search(r"with ([^;]+?) in the linings",S)
+    if rank>=7 and _w7 and _m7 and " like #" in _m7.group(1) and " like #" not in sec: sec=f"{sec} like {_w7['sec_hex']}"   # BUILDFIX3: same family as the t1-t6 ORIG1 fix: keep her season hex where the store clause has one
     if rank>=7:   # B17: no stale 'silver #E2C3C5 in the linings' line: the linings clause carries her t1-t6 secondary words
         S,k=re.subn(r"with [^;]+? in the linings",f"with {sec} in the inner robe and linings",S,count=1); assert k==1,("t7/t8 linings slot",person,rank); return S
     if rank<=3 and re.search(r"\babout (36|51|65)\b",S):   # F11 (owner Lượt 583): at a36/a51/a65 the t1-t3 hair line says hair UP (the thiếu-nữ ref has loose hair)
