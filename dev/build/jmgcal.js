@@ -21,7 +21,7 @@ const KEY="ctm-mgcal",FLAG="ctm-owner-cal";
 function mgCalOwner(){return LS.get(FLAG)==="1"}
 function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],k:{}}}
 /* her base on a matching board from the rounds she played (raws[i] at gap ds[i]) */
-function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
+function mgCalBase(raws,ds,kind){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i],kind)-mgMedD(0,kind));/* kind: its own board shift when BAL.ag.mg2.medK has it (dauho-lv5) */
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
 /* the NPC hand curve of a kind (owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z; BAL.ag.mg2.hand ctr / sd / grp): the average adult play m = ctr (per kind, "" default),
@@ -37,29 +37,33 @@ function mgCalShare(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];i
 function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x<0?-y:y}
 /* the kinds she can test: every KG82 kind whose engine is in the game */
 function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG!=="undefined"&&typeof KG82_ENG[K.e]==="function"})}catch(e){return[]}}
+/* owner 21/11 ~00:25Z (verbatim): "mấy cái nút đó đỏ lại đi. Mấy cái nút mà của mấy cái game tao chưa có thử xong á" — kinds whose game was FIXED after her try
+   (BAL.ag.mg2.cal.redo {kind: ISO time of the fix}) count as NOT tried until she plays them again after that time: red button, in «Chưa thử», in «Thử tiếp». */
+function stale(L,k){const R=C().redo||{};return !!(L&&R[k]&&(+L.t||0)<Date.parse(R[k]))}
+function ok(r,k){return !!r[k]&&!stale(r[k],k)}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
-function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
+function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds,kind),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
 function mmdd(t){const d=new Date(t||Date.now()),p=n=>String(n).padStart(2,"0");return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()}`}
 /* the code line for the coordinator: CTM-CAL kind:b/rounds@mm/dd/yyyy … */
-function mgCalCode(r){r=r||rec();return "CTM-CAL "+Object.keys(r).filter(k=>r[k]&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}
+function mgCalCode(r){r=r||rec();/* rv mgcal-redo: a try taken before its game was fixed never goes into the code (broken-board tries are dropped) */return "CTM-CAL "+Object.keys(r).filter(k=>ok(r,k)&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}
 function nm(k){const K=KG82_KIND[k];return K&&K.n||k}
-function stat(k){const L=rec()[k],c=C().k||{};const a=L?`đã thử, tay ${mgWord(L.b)}`:"chưa thử";return c[k]?`${a} · đã ghi vào sổ chung`:a}
+function stat(k){const L=rec()[k],c=C().k||{};const a=L?(stale(L,k)?"đã sửa trò, cần thử lại":`đã thử, tay ${mgWord(L.b)}`):"chưa thử";return c[k]?`${a} · đã ghi vào sổ chung`:a}
 /* ---- the test (kit game frame only) ---- */
 function pick(){const ks=mgCalKinds();if(typeof kg82Open!=="function")return;
  const d=kg82Open({art:"Thử tay",title:"Tài nghệ các môn",how:`Mỗi môn ${C().d.length} hồi, hồi sau khó hơn hồi trước. Phần của người thành mức chuẩn cho tay nghề của mọi người trong cung.`,round:"Môn",roundV:`${ks.length}`});
  if(!d)return;KG82.back=()=>{};/* KIT §13.9: the kit ✕ «Quay lại» closes the list (back to Thiết lập) */const box=kg82Box();const r=rec();
- const dn=ks.filter(k=>r[k]),nd=ks.filter(k=>!r[k]);/* s34 MUST: one kind at a time, any order; đã thử / chưa thử in kit rows */
+ const dn=ks.filter(k=>ok(r,k)),nd=ks.filter(k=>!ok(r,k));/* s34 MUST: one kind at a time, any order; đã thử / chưa thử in kit rows */
  box.innerHTML=`<h4 class="kpst">Đã thử ${dn.length}/${ks.length} môn</h4>`+kg82Rows([["Đã thử",dn.length?dn.map(k=>`${nm(k)} (${mgWord(r[k].b)})`).join(", "):"chưa môn nào","t"],["Chưa thử",nd.length?nd.map(nm).join(", "):"đã thử đủ","n"]])+/* owner 17/11 ~17:10Z: ONE run through every kind in order (Thử lần lượt), progress kept; resumes at the next kind not yet done */
   `<div class="kg82act"><button class="${kg82Btn()}" id="mgcal-seq">${nd.length?(dn.length?`Thử tiếp các môn còn lại<small>từ môn ${nm(nd[0])} · còn ${nd.length} môn</small>`:`Thử hết cả ${ks.length} môn<small>dừng lúc nào cũng được, lần sau thử tiếp</small>`):`Thử lại hết từ đầu<small>đã thử đủ ${ks.length} môn</small>`}</button></div>`+
   `<h4 class="kpst">Hoặc chọn một môn</h4>`+
-  `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(!!r[k])}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
-  (Object.keys(r).length?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"");/* no «Thôi» row: the kit ✕ «Quay lại» (§13.9, 32.10) */
+  `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(ok(r,k))}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
+  (Object.keys(r).some(k=>ok(r,k))?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"");/* no «Thôi» row: the kit ✕ «Quay lại» (§13.9, 32.10) */
  box.querySelectorAll("[data-mgcal-k]").forEach(b=>b.onclick=()=>run(b.dataset.mgcalK));
  const sq=$("mgcal-seq");if(sq)sq.onclick=()=>run(nd.length?nd[0]:ks[0],nd.length?"seq":"all");
  const cp=$("mgcal-copy");if(cp)cp.onclick=()=>copy(cp)}
 function copy(b){const t=mgCalCode();const ok=()=>{b.textContent="Đã chép"};try{navigator.clipboard.writeText(t).then(ok,()=>{})}catch(e){}}
 /* the next kind of a run: "seq" = the next kind not yet done (resume), "all" = the next kind in order (a full redo) */
-function nextOf(kind,seq){const ks=mgCalKinds(),r=rec(),i=ks.indexOf(kind);const L=ks.slice(i+1);return seq==="all"?L[0]||null:L.find(k=>!r[k])||ks.find(k=>!r[k])||null}
+function nextOf(kind,seq){const ks=mgCalKinds(),r=rec(),i=ks.indexOf(kind);const L=ks.slice(i+1);return seq==="all"?L[0]||null:L.find(k=>!ok(r,k))||ks.find(k=>!ok(r,k))||null}
 function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws=[];let i=0;KG82.ctx="hoc";
  const round=()=>{const t=mgSet(kind,{occ:"hoc",lv:0,d:ds[i]});try{kg82Preload(kind)}catch(e){}
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
