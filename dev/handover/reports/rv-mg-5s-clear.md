@@ -18,3 +18,8 @@ Shots (looked, 8 kinds × rules/play/result × 2 devices; scratch /tmp/claude-0/
 Notes (non-blocking): duho rules text says «khoảng vàng sát mạn thuyền», guide says «vùng sáng» — wording drift; doi/td_ngon show a bare «?» button/top bar (pre-existing sign, not from this branch); banh result screen not reached in the shot run (idle play), banh play + rules looked fine.
 
 ~100% xong / ~90% chơi được (owner re-test needed).
+
+## Round 2 — worker tip 3d1d49c6 (8caa9dcd, #45 iPad figure-column backdrop slot) → PASS review/mg-5s-clear-rv2 8d4f9919 (FF of main 5a8c30af)
+PRIORITY #1 CHECK: OD 21/11 ~03:48Z/~03:50Z figure-column backdrop | main KG82_MGBG none before | review/mg-5s-clear 3d1d49c6 | claims worker rolled over.
+Base 3d1d49c6 + merge main (db6ae2a0, then 5a8c30af; index/sw rebuilt) + my 3 reviewer fixes re-applied (ban near=painted ring, tat/ne idle text, duho alarm guard).
+#45 check: KG82_MGBG Proxy → img/mgbg-<kind>.webp via IMG_U; file missing → CSS second layer = cream gradient (iPad shots of all 8 kinds: clean cream column, no broken image, no page errors); Fold 755x1000 unchanged (no figure column). Tests on this branch: mg-noword-a both sizes, mg-noword-b ALL OK, mg-noword-kit 31/0, mg-allkinds 7/7, mgcal-redo 12/12, kit-guide 11, mg-ui-rest 39/39, ag-mgcal ok, dauho-hole 54/54, coop-e2e 92/92 (on db6ae2a0 merge), quickcheck PASS on final sha. BAL untouched.
