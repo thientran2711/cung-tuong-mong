@@ -169,7 +169,7 @@ function knCarryIn(T){const W=(T.W||[]).map(it=>(it.due=0,it));const C=(T.C||[])
 /* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
 function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
  for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
-(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead)knTb()}catch(e){agErr("knTb",e)}}}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead&&knOn())knTb()}catch(e){agErr("knTb",e)}}}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
