@@ -110,3 +110,54 @@ Not game numbers: clamps ±100/1..100, −999 sentinel, eaStamp ×10, name words
 1. Scope: jevb emotion writers (97/98/100/101) are in the "jemo family" (FOR MAIN 90 named jevb.js:98) — included above; say if you want them out.
 2. j8 kframe win: the mother's Danh −10 is applied but not printed on the AOUT card → I would print it (shown == applied); a text change only.
 3. Size: ~200 values. Tables move whole (no value change); the scan gets one row per typed site. ETA ~2.5–3 h build + gates after GO.
+
+## JEMO-BAL r1 — BUILD · 21/11 ~15:35–16:30Z · depth 8 · START_CTX ~4 %
+PRIORITY #1 CHECK: OD law 4 (OD:L1267) + MAIN 92 + D #17 GO 15:32Z | main jemo.js, jemoact.js, jevb.js, j8.js A frame/catswap/kpoison/kframe/pond, j17 AOUT kframe, j34 tScore/dScore/fScore | review/* law4-typed-rv 0bd71d29 (base), night-balance-bundle 35b3a3f5 (see BUNDLE) | claims JEMO-BAL (this)
+Branch **review/jemo-bal** = 0bd71d29 (law4-typed-rv, carries sg-card-rv 625b7601) + jemo-bal 7b93bc45 + merge origin/main 270c6251 (index.html/sw.js rebuilt).
+### Where the numbers went (every value unchanged)
+- **BAL.eff.jemo** (jbaleff.js, loads before jemo): ev, tr, decay, decayDef, dk, night, brake{…,ducDef,grudge,grudgeF,zero}, floor, stack, legSync, legV,
+  wk{…19 lines}, emp{born,lost,punish}, hook{oanMin,affMin,div,lo,hi}, nightK{nhantu,angry,gentle}, loyDiv, mot{anger,strong,lv,aff}.
+  jemo keeps COPIES in EMO_EV/TR/DECAY/DK/NIGHT (jfeel merges its rows and jmoodknow zeroes EMO_DECAY at load, exactly as before; BAL stays the source).
+- **BAL.ea** (jemoact.js own block): rw (57 reaction weights, key who.k.g; eaRW keeps the old cascade sus → pious → gen → hot/timid → stingy → d), cardMax 2,
+  maidN 4, ventDef 10, victimBase 101, supRank 7, rival{affDiv 2, min 10}, half 2, ohoiK 2, extK 2 (20 NPC-extreme sites; text prints the same expression), fx.tiec.n 2.
+  Feeling floor 15 / decay fallback 6 there → BAL.eff.jemo.floor / decayDef (one key with jemo).
+- **BAL.evb** (jevb.js, own line; the bundle edits the ctx* line, so no clash): steps, sureDiv, arcK, scK, moodSo, heavyLv, causeN, rankLoss, g{oan,aff,cap,base,k},
+  v{aff,cap,base,k}, me{min,cap,k}; floor 15 → BAL.eff.jemo.floor.
+- **BAL.eff.j8**: frameCost −5, catswapCost −10, kpoisonCost −20, kframeCost −15 (card c getter + rule ap read the same key), kframeDanh −10, kframeTam 2,
+  pondDrown 45, kpHit{lo 50, r 40, doc 2}, frameSev/pondSev/kframeSev 2, catswapPreg 6, kframeAge 6, pondAge 2.
+  **j17 AOUT kframe** now prints «nàng Danh −10; Tâm cơ +2» from those keys (was applied, not printed → shown == applied).
+- **BAL.eff.j34**: gW 1.6, miniW 1.5, rN 4, rW 1.2, scMax 10, sucDef 60, sucLow 40, sucPen −2, dHit 6, dMiss 3, dDuc 25, dTam 30, pheMax 4, pheBase 1, pheDiv 2
+  (`(p.suc||sucDef)` kept: Sức 0 reads 60 as before).
+### Before / after (applied values) — balance drift: NONE
+| proof | result |
+|---|---|
+| load probe old 0bd71d29 vs new (same page, after every module ran): EMO_EV, EMO_TR, EMO_DECAY, EMO_DK, EMO_NIGHT, EMO_BRAKE (old keys), EMO_W/OD/LOY, BAL.ea (old keys) | **identical** (JSON equal) |
+| every reaction weight r.w(T): 71 reactions × 48 tempers (hot/even/timid × sus/pious/gen/stingy) | **identical** |
+| every scalar site (jemo.js, jemoact.js, jevb.js, j8 A rows, j34 scores) | each key = the literal it replaced (script-made: replacement pairs asserted 1:1, key values copied from the same literal); RNG call order unchanged (R(J.rN) = R(4)) |
+| same-seed bot lives (runb sens, SEED 4242) | NOT usable as proof: old-vs-old with the same seed already differ (timing), so no claim from it |
+### Gates (on a00e679e unless noted)
+- law4-typed.js: origin/main **308 typed → 0** (new jemo-family pass + j8/j17/j34 rows; JEMO_OK lists the structural numbers with why: legacy bar codes, band index, cache size, hash, text length).
+- core static: one-core-guard PASS (inline 3592 < frozen 3737) · one-core-text PASS · one-core-bind PASS (1320 prints, 0 mismatches) · one-core-text-rule PASS.
+- feelings18 34/34 PASS · feel-shown 6/6 PASS · emo-men: 0 page errors; its «ok:false» rows = seal pictures not on this box (CDN), the same on old 0bd71d29.
+- LIVE-revert audit: main 468835a7..270c6251, 10 files / 617 added lines → 0 missing.
+### Extra fixes found by the gates (shown == applied, her Sủng)
+- jbancung.js:76 «Xin <cung>» card (main's ban-cung, landed after sg-card): her fail loss printed `Sủng ${balSg(raw)}` while bcAsk applies it through apply()
+  (trait-scaled) → now `sgStat(raw)`. The reviewed sg-card static gate flagged it (CHECK 1) on the main merge; static pass back to 0 CHECK.
+- jemoact eaN (Emperor's outburst lines noi / nghi / eyen when the target is HER): printed `Sủng ${raw}`, applied via apply() (scaled) → now sgStat(n); NPC amounts stay raw (ap raw).
+  emotion-acts-lines: 143 lines, 0 broken, 0 page errors.
+- npc-purpose-rows.json: the eaVictim registry row quotes the new line (BAL.ea.victimBase); one-core frozen list --update (3737 → 3592, shrink only).
+### BUNDLE (D #17 ruling (b), 15:45Z)
+review/night-balance-bundle 35b3a3f5 merged into current main gives 15 conflict hunks in 12 build files; 8 files are bundle-vs-main overlaps not in this job
+(j2, j79 stealX/stealKem · j54 H54.sad · jcoopone ONLY_ME · jentry entSkipRaw · jkc kcFest · jksize · j42). Aborted; SSK on main without the bundle.
+Union notes for whoever lands second (my side): jbaleff j8 row (bundle adds `hit:{…}` at the row start; mine adds keys after pondFailDanh), jbaleff j34 row
+(mine adds keys at the row start), j8 (bundle: nightCh/oSee/oSteal/punishMonths/poison hit/stealWin/sendMaid/npcMonthly/festival; mine: A frame/catswap/
+kpoison/pond/kframe rows — no line in common expected), j34 (bundle: sabotage roll(BAL.rk.caught); mine: tScore/dScore/fScore), jevb (bundle: ctx* line;
+mine: a NEW BAL.evb line below it + function bodies). All my values are the old literals, so the union is mechanical.
+### FINAL gates on df5dbf30fcd1cf61f1ed3edd3d698faa9b66761d (review/jemo-bal)
+- law4-typed.js 0 (main 308) · sg-card-scan full PASS (static law4 0, CARD 57 · VALUE 24 · NPC 7 · OK 23, no CHECK)
+- QUICKCHECK PASS 220 s · core gates PASS (one-core-guard/text/bind/text-rule, rules-one-source, kit-conform, hooks incl. npc-purpose 419 rows, coop-one-world) · old save ok · perf new/live render 207/223 ms, tab 486/408, buổi 1600/1040 (noise range seen across runs: 1269–2470 / 1040–1687)
+- coop-e2e both seats (host Fold + guest iPad, live Worker) 124/124 PASS · coop-emo-seat 25/25 PASS (both seats, emotions + emoMul + BAL.feel equal every merged week)
+- feelings18 34/34 · feel-shown 6/6 · emotion-acts-lines 0 broken · emo-men 0 errors (same as old)
+- applied tables + 71 reactions × 48 tempers identical old/new · LIVE-revert 0 missing (617 lines)
+Not done / notes: jemoseal motion timing (kit UI data) left; same-seed bot lives are not deterministic (old vs old differ) so not used; bundle merge left to whoever lands second (D #17 (b)).
+SẴN SÀNG KIỂM df5dbf30fcd1cf61f1ed3edd3d698faa9b66761d (review/jemo-bal) · ctx ~27 % at SSK (START ~4 %, line 29 %) → if a fix round is needed, a successor may be needed; handover = this report.
