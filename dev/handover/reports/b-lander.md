@@ -67,3 +67,7 @@ Stale, do NOT land: review/coop-staff-split-r1-land 358b2e85 (inside name-clash;
 | perf-ci-r1 | 524443c5 | 56ff0db0 | LAND READY (perf-fx-gate solo PASS) |
 | palace-life-gaps-r1 | — | — | moved to LANDER #2a by Foreman B ROOT-4 |
 Box lesson: «Target crashed» in role-parity = kernel OOM (check `dmesg | grep Killed`), not a flake.
+- (02:23Z, Foreman B ROOT-4 3A7wQj2k) re-merge on newer LIVE: wear-slots SKIPPED (MAIN LANDER owns it; #2a left an UNGATED push 5b3300b6 = 23f1e651 + LIVE 64d2e094 on review/wear-slots-r1-land).
+- mg11-thutay-r1-land 34353783 (LIVE 64d2e094; assemble + jmgx.js): ALL GREEN → LAND READY 02:58Z (supersedes 184db4e0).
+- kc-fail-effects-r1-land a1498983 (LIVE 64d2e094 then 56ff0db0; jbal2 both kept, assemble + jkcg/jkcco): ALL GREEN, coop-e2e 92/92 ×2 → LAND READY 03:46Z (supersedes 9729cda2). Note: its merge commit message wrongly lists j8/j95 (those were palace-life's conflicts only).
+- palace-life-gaps-r1-land: re-merged LIVE 56ff0db0 → d0f87b91 (game-logic conflicts: j8 maid theft = branch IT05 + LIVE nmNew names; j95 = branch kidWardHome + LIVE «họ Tần»). New co-op test dev/test/coop-palace-life.js (bac1fdf5): P1 ok, P2 RED (host's son replaces HER Thái tử → her Danh not −heirDanh; jcoopworld hrCard x.v branch only shows the card), P3 ok (estrangement once, host copy same). Handed to fix worker 2HMzBBTh (review/palace-life-gaps-r2-land); #2a dropped its gates.
