@@ -301,7 +301,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
   if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
-function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){return S.rank>=3?"nương nương":"tiểu chủ"}};
+function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){try{return kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e2){return"tiểu chủ"}}};
  if(k==="sv"||k==="rsv"||k==="maid")return{me:X.A.o&&X.A.o.role==="eunuch"?"nô tài":"nô tỳ",call:goi(),sv:1};
  if(typeof nrVoiceM==="function")return nrVoiceM(X,goi);return null}
 /* a maid raised to consort keeps who she was: her road state goes on as a cn road from her next chapter (same help chapter, same log) */

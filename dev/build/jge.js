@@ -67,7 +67,11 @@ window.geNote=geNote;
 function geLean(s){const V=GB().var;const last=s.r2===0?1:s.r2===1?-1:0;return s.lt*V.tag+((S.duc|0)-(s.d0|0))*V.duc+last*V.last}
 function geShade(s,i){const L=geLean(s),c=GB().var.cut;if(L>=c)return"t";if(L<=-c)return"a";return C(s).e[i][2]==="A"?"a":"t"}
 /* ---------- odds ---------- */
-function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per;p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
+/* law 5 (harder as she climbs, OD:L1254; brief E35): ONE key BAL.ge.odds.rank = odds lost per rank step, read here for every branch of every wave;
+   her rank step = rkOf(S) (the one rank reader, j8), 0 Đáp ứng … 7 Hoàng hậu; a servant life (isSrv) climbs the maid ladder instead: step = S.srv.rk */
+function geRk(){try{const r=typeof isSrv==="function"&&isSrv()?S.srv.rk:typeof rkOf==="function"?rkOf(S):S.rank;return Math.max(0,Math.min(RANKS.length-1,r|0))}catch(e){return 0}}
+window.geRk=geRk;
+function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per-geRk()*(O.rank||0);p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
 window.geOdds=geOdds;
 /* ---------- the Hồi kết nhánh ---------- */
 function geReady(){const s=geS();if(!s||s.done||S.dead||S.out)return false;try{if(GB().when==="r11")return !!(typeof rdEnd==="function"&&rdEnd(BAL.road.last));return !!S.st.ch.all}catch(e){return false}}
