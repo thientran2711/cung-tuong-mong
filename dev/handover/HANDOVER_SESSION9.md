@@ -2072,3 +2072,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 13:45Z) LRRY: LANDED duodo-focus 419079d7 → LtG4 told to record LIVE mp4. FAIL kit-mark-fix 123c4572 (jk4.js conflict) → KIT KEEPER #4 re-merge → review/kit-mark-fix-r5 → rv MSxp.
 - (21/11 13:48Z) rv MSxp PASS kit-relrows-ms 1641927e → LRRY q2 (before rel-men-servants r2).
 - (13:49Z) LAND CHAIN 2: LANDED kit-dialog-2 f85cba97 (QC ok at 1500 s timeout).
+- (21/11 13:50Z) LRRY: LANDED kit-dialog-2 f85cba97 → ORDER B dialog-person-3 re-merge now.
