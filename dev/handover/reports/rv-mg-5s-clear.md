@@ -1,9 +1,9 @@
 # rv-mg-5s-clear — reviewer (MAIN CHÍNH 85)
 
-PRIORITY #1 CHECK: OD td_dung bug row 21/11 ~00:50Z + guiding-words rule | main 32c0e33b (huong-cue, dauho-lv5, thancan, coop-name-clash live) | review/mg-5s-clear bd64e791 (worker merge of 64d2e094) | claims: worker session_01Rc5AsLTqtdSYJsC6Gxn7cc.
+PRIORITY #1 CHECK: OD td_dung bug row 21/11 ~00:50Z + guiding-words rule | main 56ff0db0 (huong-cue, dauho-lv5, thancan, coop-name-clash live) | review/mg-5s-clear bd64e791 (worker merge of 64d2e094) | claims: worker session_01Rc5AsLTqtdSYJsC6Gxn7cc.
 
-Result: **PASS review/mg-5s-clear-rv 56a9257c** (descends from origin/main 32c0e33b).
-Base: worker bd64e791 (merged as -s ours, reviewer content kept) + final merge of a88b14f0 and 32c0e33b (only index.html/sw.js conflicts; rebuilt with assemble.py + build_site.sh).
+Result: **PASS review/mg-5s-clear-rv c6875956** (descends from origin/main 56ff0db0).
+Base: worker bd64e791 (merged as -s ours, reviewer content kept) + final merge of a88b14f0 and 56ff0db0 (only index.html/sw.js conflicts; rebuilt with assemble.py + build_site.sh).
 
 Reviewer fixes on top of bd64e791 (tiny): ban «near» = zone(x)===0 (the PAINTED gold ring, same oracle as the grading), dashed line ends above the painted outer ring; tat/ne keep huong-cue's idle text («… đang sáng: chạm khi …») in the one guide pill; duho: guide pill hidden while the «Lau sậy bên bờ khẽ động» alarm text shows (no overlap).
 
