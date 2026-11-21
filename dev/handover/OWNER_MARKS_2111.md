@@ -113,3 +113,5 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 69 | 04:57 | Again: left figure + same person's avatar on a line («Ta → nàng: thiện cảm +4») = #64 (result/relation lines included) | img/_review/refs/owner-2111-dup-avatar-2.jpg | dialog-person (86) | in work | — |
 | 70 | 05:00 | «Hoàng thượng ban thưởng»: left figure must be Hoàng thượng (not ma ma), no avatar for him; minor carriers (thái giám bringing silver) no avatar | img/_review/refs/owner-2111-reward-figure.jpg | dialog-person (86) | in work | — |
 | 71 | 05:02 | Fold «Sai … Bạch Lan đi dò la» dialog has its own narrow size (one word per line) → kit frame size; test every dialog uses a kit size | img/_review/refs/owner-2111-narrow-dialog.jpg | kit-dialog (86) | in work | — |
+| 72 | 05:05 | Option card merges the loss into «Tốn» (1 khắc + hắn ôm hận…) → separate «Mất» row; Tốn = only spend; order Tốn → Được → Mất; scan data | img/_review/refs/owner-2111-ton-mat.jpg | kit-dialog (86) | in work | — |
+| 73 | 05:07 | Again same person twice (left figure + line avatar + round medallion) = #64 | img/_review/refs/owner-2111-dup-avatar-3.jpg | dialog-person (86) | in work | — |
