@@ -139,6 +139,8 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
   if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return mapMe(r,true,mp)});
  mapMe(WS,true,mp);
+ /* coop-emo-seat r2: every world person's feelings (emo / mk / emoH / mck) are the host's in the merge; her acts' feelings ride S.coopEmo (jcoopone) */
+ if(!stateOn("emoHost")&&CW.emoHost)CW.emoHost(R,WS);
  const P={};P[CW.seat]=myBlob(sS);
  const B=CW.base&&CW.base.P&&CW.base.P[fs()];
  if(B){const fP=J(B);const f=L.find(x=>x[0]>=0);const v=f&&f[1];
@@ -153,6 +155,7 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    if(b.fx)for(const x of FXL)if(!fxEq(v[x],b.fx[x]))s[x]=v[x]==null?null:J(v[x]);/* a face mark put on her on this seat (tea, ink, slap, rash…) goes back to her (review/looks-2) */
    if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
+ if(!host()&&CW.base&&CW.base.W){try{keepFaces(WS,CW.base.W.S||{},0);keepFaces(R,CW.base.W.R||[],0)}catch(e){console.error("keepFaces",e)}}
  const out={v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P};
  /* thin guest part C (jcoopthinc): in a C room the guest's week carries the room's world unchanged (W comes from the host only) */
  return CW.cW?CW.cW(out):out}
@@ -173,11 +176,34 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R:CW.lensR?CW.lensR(R):R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
  try{CW.lensW&&CW.lensW()}catch(e){console.error("lens W",e)}
  if(!opt.keepUsed)used=0;else used=keepUsed;
+ /* coop-emo-seat r2: her acts' feelings on world people, replayed the same on both seats (jcoopone), then ONE cause sweep. AFTER `used` is set:
+    the cause clock mkNow counts the khắc used this buổi (j95kh), and before r1 each seat swept with its own leftover `used` (review r1: after a
+    rejoin the guest's clock ran ahead and ended a live vui cause on her seat only: host vui 40 | guest khochiu 22) */
+ try{CW.emoReplay&&CW.emoReplay(C)}catch(e){console.error("emoReplay",e)}
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,LASTB());
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
- if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}return true}
+ if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}
+ /* coop-pool-face: her own identity is never a face the room's world gives someone, nor the friend's (j66 pidRoomFix moves HER) */
+ try{if(typeof pidRoomFix==="function")pidRoomFix(roomTaken(C,host()))}catch(e){console.error("pid room",e)}return true}
+/* coop-pool-face: the faces of the room — every fid held by a person of the world W (Thái hậu, Emperor, consorts, staff, court, men, kids)
+   + the friend's own identity. fidUsed / fidDead are lists, not holders: not counted here (her own identity sits in fidUsed). */
+function faceHeld(o,out,seen,d){if(!o||typeof o!=="object"||seen.has(o)||d>14)return;seen.add(o);if(Array.isArray(o)){for(const x of o)faceHeld(x,out,seen,d+1);return}
+ for(const k in o){const v=o[k];if(k==="fid"){if(typeof v==="string"&&v)out.add(v)}else if(v&&typeof v==="object")faceHeld(v,out,seen,d+1)}}
+/* review coop-pool-face: noFriend (the host's own room check) = the two players already share one identity (an old room from before this fix):
+   only the GUEST moves; if both moved they would land on the same next face every week, both faces changing for ever (PF_TWIN probe) */
+function roomTaken(C,noFriend){if(!C||!C.W)return null;const T=new Set();faceHeld(C.W,T,new Set(),0);const f=C.P&&C.P[fs()];if(!noFriend&&f&&!f.dead&&f.S&&f.S.pid)T.add(f.S.pid);return T}
+CW.taken=()=>roomTaken(CW.base);
+CW.friendPid=()=>{const f=CW.base&&CW.base.P&&CW.base.P[fs()];return f&&!f.dead&&f.S&&f.S.pid||null};
+/* coop-pool-face backstop: the GUEST never decides a world person's face (the host draws every pool face, once). Her week end carries the
+   room's face for every world person the room's world already has a face for, whatever her phone did to it (display re-picks, a clear by
+   pidEnforce): the 3-way merge would otherwise take her change, since only she "changed" it. NPCs match by id, other world keys by path. */
+function keepFaces(n,b,d){if(!n||!b||typeof n!=="object"||typeof b!=="object"||d>14)return;
+ if(Array.isArray(n)){if(!Array.isArray(b))return;const m=new Map();for(const x of b)if(x&&typeof x==="object"&&x.id!=null)m.set(String(x.id),x);
+  for(const x of n)if(x&&typeof x==="object"&&x.id!=null&&m.has(String(x.id)))keepFaces(x,m.get(String(x.id)),d+1);return}
+ if(typeof b.fid==="string"&&b.fid&&n.fid!==b.fid){n.fid=b.fid;CW.faceKeep=(CW.faceKeep||0)+1}
+ for(const k in n){const v=n[k];if(v&&typeof v==="object"&&b[k]&&typeof b[k]==="object")keepFaces(v,b[k],d+1)}}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
 function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
