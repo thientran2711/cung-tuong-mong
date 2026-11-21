@@ -473,3 +473,32 @@ OPEN for #4 (in order):
 2. Rebuild is in 647f30aa; run on it: TRIP swap 0 ×2 + swap 1 ×2 (the revert must bring swap 0 back green), g4 / g4s, night, e2e THIN13 + level 0 both, cyc / cycs, timer, f3s–f6bs, as9/13 both, emo, ow, perf, role-parity alone, quickcheck (old save + perf).
 3. Then '## F1 FIX' verdict + SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG to the newest Foreman B (FOREMAN_B_STATUS top line) + one status line.
 Setup: worktree /home/user/wt/ctg3 may be gone in a new container: `git worktree add` sparse, `cd coop/worker && npm install && setsid nohup npx wrangler dev --port 8787 --ip 127.0.0.1 &`; lane script copy with TRIP / arrive-see / room-faces / emo entries: /home/user/wt/lane3/lane.sh (copy of dev/test/coop-thin-g-reg.sh + entries; CAP=6600 for TRIP); 2 queues max; never rebuild while a suite runs in the worktree.
+
+## F1 FIX #4 — worker session_01N1tNP48cvPSepUBAC1udzg (opus), Foreman B ROOT-8 lane, 11/21–22/2026
+PRIORITY #1 CHECK: OD/handover = §F1 #3 handover above | main 87ac1ff4 (LIVE, merged here) | review/* review/coop-guest-week-lag 3f1cec27 (same jcoopthine e7b996f2 hunk ported verbatim to LIVE — kept identical here, not touched) | claims: this lane only. START_CTX ≈ 5 % of 1M (own estimate; get_session reads 0) → rollover ≈ 30 %, ceiling 60 %.
+Worktree /home/user/wt/ctg4 (sparse), local Worker 8787 (THINMAX 13), lane /home/user/wt/lane4/lane.sh (copy of coop-thin-g-reg.sh + trip0*/trip1* (DANHP on swap 1) / as9/as13 / emo / perf / e2e0s / e2e0n), logs /home/user/wt/out4.
+
+### Item 1 — rare Danh split (host 96 | phone 95 @14b87a98)
+| try | build | result |
+|---|---|---|
+| TRIP swap 1 + DANHP ×2 | 647f30aa | run A 82/82 green, no split · run B **week-31 stall** (below, bot family) |
+| TRIP swap 1 + DANHP + pq-drop / gap probe ×2 (wt ctg4b, instrumented, killed at wk16 for the lane) | 647f30aa + probe | 0 split, 0 patch dropped, 0 gap; host unacked queue max 3–4 at every Danh change |
+Not reproduced (0 of 6 TRIP runs since 14b87a98: 2 @31acff2f, 2 here, 2 instrumented). Doors of the delta family checked (LAW 11):
+| # | door | verdict |
+|---|---|---|
+| 1 | host part-D patch queue: patchOut kept **40** unacked, dropped the oldest; her phone applies n > thpn with no gap check → that delta lost for good on her phone (a permanent split) | **REAL door, fixed 6a259bae**: never drop an unacked patch (400 = memory belt, counted D.drop + log pq-drop); coop-thin-g asserts 0 drops. Not shown to be the 14b87a98 case (max queue seen 3–4). |
+| 2 | first erd of a new week vs the host's old-week view (Foreman B FYI, review/coop-guest-week-lag) | covered by e7b996f2 (kept identical). Order checked: jcoopworld onWeek (fromCanon, sync) is registered before jcoopthine's week handler → her baseline = the rebuilt S. |
+| 3 | late part-D patches between his end and the week (gEmp) | r1 fix stands (applied on C + re-queued, same order both seats) |
+| 4 | her erd / ready on a dead socket | re-net: baseline = host copy (E.bs null) → nothing doubled |
+| 5 | nested withSeat (inner D.cur cleared → outer diff counts the inner change again?) | no: same-seat nesting runs fn() with no new D.cur |
+| 6 | host reload: D.N restored lower → a new patch reuses n ≤ her thpn → skipped | no: D.save runs right after patchOut |
+| 7 | a quiet-view "heal" (her phone adopts the host's core numbers when nothing is in flight) | **tried and dropped**: a dry run caught a TRANSIENT mismatch at a quiet view at the week turn (g4s wk5: bạc 412 vs 332, sung, th; resolved by itself) → a heal there would itself double a delta. Not shipped. |
+| 8 | her erd op larger than PACK (15 000 chars) is counted «big», not sent, while her baseline takes it as sent | non-numeric only (one number op is tiny); FOR B (not this lane) |
+
+### Week-31 stall in TRIP run B = TEST BOT family (fixed c40d175b)
+Her phone held 3 cards (Q[0].dfSeen, #modal hidden), host gHold, the week never merged: her NPC card was playing in the jdfv encounter scene (jfocus kitFocus choices «m<k>»), the centre modal stays hidden by design; the shared clear() only tapped #modal. All 16 co-op clear() helpers now pick a visible `.kfoc-b` whose data-id is `m<k>` when Q[0].dfSeen (the say line «Tiếp ▸» was already tapped since 30e12013).
+
+### Merge
+99201b6c = merge LIVE 87ac1ff4: jbal2 (both blocks), jcoopworld famApply (main E44 held case + our coop-thin-laydo __inv0 mark), cyHold block (our 1 s eW check + main's coop-cyhold timeout / peer re-say; cyWait keeps cyLost / cyReask before main's cyTo), jentry/jkc (our kcPhucEnd seam kept, main's Phúc tuyển podium inside it, not drawn on the co-op host for her: COOPW.ctx). Seat-guard scan on main's new code: 0 raw seat reads. one-core / undef PASS.
+
+### Item 2 — full lane @99201b6c — RUNNING (2 queues, /home/user/wt/out4/reg-sum.txt)
