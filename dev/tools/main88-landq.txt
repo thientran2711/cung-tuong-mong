@@ -15,3 +15,4 @@ review/kit-act-grid-rv|d65e535b31d3af99d32c869509958c2faa595def|kit-act-grid|Th�
 review/main84-land-coop-week-stall|abcd23bf|coop-week-stall|Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)
 review/dialog-person-rv2|aae7b0f64|dialog-person|Hộp thoại: bỏ hẳn «ma ma»; một luật avatar; «(ta)»; chữ không bị ép cột
 review/bag-inline-2-rv2|c1f7733bd77e7a5fbd8f6e73d7afc0c9789ac41d|bag-inline-2|Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)
+review/hoangthuong-gold-rv|c2857875|hoangthuong-gold|Hoàng thượng / Thái hậu: tên lại màu vàng hoàng gia (#3)

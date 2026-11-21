@@ -1820,3 +1820,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Owner asked standby pastes for foremen B/D/E (given in chat Lượt 31, TAKEOVER_FOREMAN_STANDBY.md).
 - 88 cron (min 32) dies with this session; 89 creates its own hourly wake.
 - (05:27Z) after roll: bag-inline-2 c1f7733b LAND READY (kit rv MSxp) appended to 88's running chain + dev/tools/main88-landq.txt.
+- (05:30Z) after roll: hoangthuong-gold c2857875 LAND READY (rv LhrW, eyes OK Fold+iPad, 10/10 gold) appended to 88's chain (end). 89: if 88's chain is slow, land it FIRST in your own chain (owner-urgent #3).
