@@ -109,3 +109,7 @@ B26 (L1283) forces matte satin đoạn on t4/t5; owner L1714 row 1 = old 'thin, 
 
 ## Handover
 Job done (steps A+B). Open: B26 gate override for t4/t5 (Foreman). No drawing done.
+
+## L1716 rewrite of the step-A test (owner correction via Foreman C)
+s62_t4_THU_revert_sqtest_L1714.txt rebuilt (9827 ch): OLD Tần prompt with NO new layer words (no inner/outer robe, no layered neckline, no S13_COMOI "outer robe closes at the sash"). Only: "a crossed collar" → "a straight SQUARE NECKLINE framed by a wide stiff lilac embroidered lotus flowers band (NO crossed wrap collar)"; capelet "fastened at the throat" → "OPEN at the front … the square neckline shows fully inside it, never hidden"; CAPELET CUT says the capelet is never closed at the throat. Old-prompt words kept as they were ("a layered silk robe of two or three visible layers", "lilac in the inner robe and linings"). Builder SQ list = the diff (make_t4.py).
+Gate: FAIL B26/M06 (row 1) + S13 REWRITTEN (the approved S13 says "the robe closes only at the throat clasp", which would close over the square collar) — both need the Foreman's override. keep --all 393 PASS.

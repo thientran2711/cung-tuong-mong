@@ -29,12 +29,12 @@ OLD_CUT = "CAPELET CUT (flowing): the capelet stays the same short round shoulde
 FALLBACK = [
  (OLD_CUT, "CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is rounded petal-like lobes along the lower edge, like the soft petals of a flower; the robe closes only at the throat clasp, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.", "24 (approved S13 wording, same meaning)"),
 ]
-SQ = [
- ("a crossed collar,", "NO crossed wrap collar: a LAYERED NECKLINE, a lilac inner robe with a straight SQUARE NECKLINE framed by a wide stiff lilac embroidered lotus flowers band, under the light olive outer robe worn OPEN at the front so the square neckline is always fully visible,", "3 TEST (m19/m29 t3 square-collar words)"),
- ("covering only the shoulders and upper chest,", "covering only the shoulders and the outer upper chest,", "3 TEST"),
- ("fastened at the throat with a jade clasp,", "OPEN at the front, its two front edges parting so the square neckline stays fully visible, never hiding it,", "3 TEST"),
- ("the pearl net starts right at the collar at the throat and hangs down", "the pearl net starts right at the capelet's neck edge and hangs down", "3 TEST"),
- (OLD_CUT, "CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is rounded petal-like lobes along the lower edge, like the soft petals of a flower; the outer robe closes only at the sash, never at the throat, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.", "3 TEST (approved S13_COMOI open-collar form, owner L1377)"),
+SQ = [  # owner L1716: NO layer words (no inner/outer robe, no layered neckline); only the square collar + the capelet open around it
+ ("a crossed collar,", "a straight SQUARE NECKLINE framed by a wide stiff lilac embroidered lotus flowers band (NO crossed wrap collar),", "3 TEST L1716 (m19/m29 t3 square-collar words)"),
+ ("covering only the shoulders and upper chest,", "covering only the shoulders and the outer upper chest,", "3 TEST L1716"),
+ ("fastened at the throat with a jade clasp,", "OPEN at the front, its two front edges parting so the square neckline shows fully inside it, never hidden,", "3 TEST L1716"),
+ ("the pearl net starts right at the collar at the throat and hangs down", "the pearl net starts right at the capelet's neck edge and hangs down", "3 TEST L1716"),
+ (OLD_CUT, "CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is rounded petal-like lobes along the lower edge, like the soft petals of a flower; the capelet is never closed at the throat, never buttoned down the front, the robe opening gradually below the square neckline in a long soft V toward the hem, graceful (uyển chuyển), never boxy.", "3 TEST L1716 + 24 (approved S13 structure, shorter)"),
 ]
 CAP = '\n\nCAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents: "%s"'
 for name, extra, cap in (("s62_t4_THU_revert_sqtest_L1714.txt", SQ, "Mùa Thu · Tần · thử cổ vuông"), ("s62_t4_THU_revert_L1714.txt", FALLBACK, "Mùa Thu · Tần · cổ chéo cũ")):
