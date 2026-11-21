@@ -3,7 +3,7 @@
    After: the hold ends after BAL.coop.cyWaitMs; the host draws with the «no answer» outcome, his week end goes out, her card stays open
    on her phone (never answered for her), she gets the kit notice, and her late answer is still written into her S.cyb (traceable).
    usage: python3 dev/build/assemble.py && node dev/test/coop-cyhold.js [outdir] [workerURL]   (THIN=5: thin room level 5;
-   CY_WAIT=<ms> the bound used by the probe, default 20000; CYC_HTML=<file> another build for both seats). A = host 755x1000@2, B = guest 1180x820@2. */
+   CY_WAIT=<ms> the bound used by the probe, default 20000; CY_RELOAD=1: host-reload case (NLC #10 coop-night 12), use CY_WAIT=120000; CYC_HTML=<file> another build for both seats). A = host 755x1000@2, B = guest 1180x820@2. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const BASE='http://ctm.local/';let HTML=path.join(ROOT,'.tmp/old.html');
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.css':'text/css','.webmanifest':'application/manifest+json','.svg':'image/svg+xml'};
@@ -80,6 +80,26 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* her card comes with her own flip/tuần: drive both seats until it is on her screen; then she stops (AFK) */
  for(let i=0;i<60&&!asked;i++){await clear(A);if((await clearB())==='cy'){asked=true;break}await press1(A);await press1(B);await sleep(700)}
  ok(asked,'B (guest) gets her maid\'s Kỳ nguyệt sự card',nb);
+ if(process.env.CY_RELOAD){/* NLC #10 coop-night case 12: she answers, then the HOST reloads (CW.fcy is memory only): his hold must free from
+   her answer said again (cyq), not wait for the bound (CY_WAIT large here) */
+  const t1=await B.p.evaluate(()=>{const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&/^Báo đúng/.test(b.textContent.trim()));if(x){x.click();return true}return false});
+  for(let i=0;i<30&&!(await B.p.evaluate(()=>!!(S.cyb&&S.cyb.rv)));i++){await sleep(400);await B.p.evaluate(()=>{const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&!b.disabled&&/^(Chọn|Đồng ý|Quyết|Xác nhận|Báo đúng)/.test(b.textContent.trim()));if(x)x.click()})}
+  ok(t1&&await B.p.evaluate(()=>!!(S.cyb&&S.cyb.rv)),'reload: she answered her card before the host left',await B.p.evaluate(()=>S.cyb));
+  await sleep(1500);await A.p.goto(BASE+'?room='+code,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^Vào phòng|^Tiếp tục|^Trở lại phòng/,6000);
+  ok(await until(A,()=>typeof COOPW==='object'&&COOPW.on&&COOP.seat==='a',null,60000),'reload: the host is back in the room');
+  for(const o of [A,B])await setTm(o,{buoiMs:15000,pauseCapMs:10000});await reset(A);await reset(B);
+  console.log('reload state',JSON.stringify(await A.p.evaluate(w=>({w,hold:COOPW.cyHold,sent:COOPW.sent,pend:COOPW.pend,week:COOP.state.week,ended:COOP.state.ended,b:S.buoi,fcy:COOPW.fcy||null}),w0)));
+  const wR=await A.p.evaluate(()=>COOP.state.week||0);
+  const t0=Date.now();let out=-1;
+  while(Date.now()-t0<120000){await clear(A);await clear(B);await press1(A);await press1(B);
+   const s=await A.p.evaluate(()=>({hold:COOPW.cyHold,sent:COOPW.sent,week:COOP.state.week||0,end:!!(COOP.state.ended||{}).a}));
+   if(s.hold==null&&(s.sent===wR||s.end||s.week>wR)){out=Date.now()-t0;break}await sleep(1000)}
+  const trR=await A.p.evaluate(()=>(COOPW.tr||[]).filter(x=>/cy/.test(x)).slice(-6));
+  ok(out>=0&&out<WAIT-5000&&!trR.some(x=>/cyTimeout/.test(x)),'reload: the host\'s week end goes out from her answer said again (not the bound, no stall)',{out,WAIT,trR});
+  await merge(wR,'reload: the week merges');
+  ok(await A.p.evaluate(()=>COOPW.cyHold==null),'reload: no hold left on the host');
+  ok(!A.errs.length,'host: no page errors',A.errs.slice(0,5));ok(!B.errs.length,'guest: no page errors',B.errs.slice(0,5));
+  await b.close();const f=res.filter(x=>!x[0]).length;console.log('RESULT',res.length-f,'/',res.length);process.exit(f?1:0)}
  /* the room clock is the only thing that moves an AFK room: a short buổi so tối times out and the host commits the night (forceNight) */
  for(const o of [A,B])await setTm(o,{buoiMs:15000,pauseCapMs:10000});await reset(A);await reset(B);
  let tH=0;const t00=Date.now();
