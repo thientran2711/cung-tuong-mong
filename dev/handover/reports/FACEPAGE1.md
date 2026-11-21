@@ -9,3 +9,6 @@ Page 1 refs maid: m09 gOm4HrsSXO, m10 O6ERgEUynm, m11 Syh9qs6Ub8, m12 xSB7FTWjfW
 
 ## L1938 update
 Bỏ mọi mặt nhóm Sắc sảo (trang 1: m09; trang 2: c17 c23 c29); Kiêu kỳ/Lạnh lùng không có sẵn. Thêm tab lọc theo nhóm. Republish cùng URL (v2), tick cũ giữ nguyên (doc id không đổi). Trang 1 còn 5 mặt, trang 2 còn 29.
+
+## L1971 update
+Trang 1 republish v3 cùng URL: đủ m01–m52 trừ nhóm ẩn = 51 mặt (m09 Sắc sảo ẩn; Kiêu kỳ 0, Lạnh lùng 0), tab lọc theo nhóm, 5 mặt đang dùng (m10 m11 m12 m13 m18) có nhãn «đang dùng», mặt trong kho ghi «· trong kho».

@@ -9,6 +9,7 @@ h1{font-family:var(--f-head);font-weight:600;font-size:1.5rem;margin:0 0 4px}
 .sub{color:var(--muted);margin:0 0 10px;max-width:70ch;line-height:1.5}
 .status{color:var(--muted);font-size:.85rem;margin:0 0 12px}.sum{font-weight:600;margin:0 0 12px}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.tab{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer}.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.used{background:var(--accent);color:#fff;border-radius:999px;font-size:.7rem;font-weight:600;padding:1px 8px;margin-left:4px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
 .card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
@@ -22,6 +23,7 @@ h1{font-family:var(--f-head);font-weight:600;font-size:1.5rem;margin:0 0 4px}
 <h1>%%H1%%</h1>
 <p class="sub">%%SUB%%</p>
 <p class="sum" id="sum"></p>
+<p class="status" id="note">%%NOTE%%</p>
 <p class="status" id="status">Đang nối kho lưu tick…</p>
 <nav class="tabs" id="tabs"></nav>
 <main class="grid" id="grid"></main>
@@ -38,7 +40,8 @@ function draw(){
     const img=document.createElement("img");img.src=f.img;img.alt=f.id+" "+f.group;
     const meta=document.createElement("div");meta.className="meta";
     const a=document.createElement("div");a.className="id";a.textContent=f.id;
-    const g=document.createElement("div");g.className="g";g.textContent=f.group;
+    const g=document.createElement("div");g.className="g";g.textContent=f.group+(f.kho?" · trong kho":"");
+    if(f.used){const u=document.createElement("div");u.className="used";u.textContent="đang dùng";a.append(" ",u);u.style.display="inline-block";}
     const lab=document.createElement("label");const cb=document.createElement("input");cb.type="checkbox";cb.id="pick-"+f.id;cb.checked=on;cb.disabled=!canWrite;
     const sp=document.createElement("span");sp.textContent=MARK+" "+LABEL;cb.onchange=()=>save(f,cb.checked);
     lab.append(cb,sp);meta.append(a,g,lab);c.append(img,meta);m.append(c);}
