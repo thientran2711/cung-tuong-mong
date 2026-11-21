@@ -1441,3 +1441,4 @@ ROOT ~13:10Z: BUILDFIX1 at roll line: builder 8960/8960 FAIL → 2798 (only LEN>
 ROOT-B1 HANDOVER ~13:12Z: depth 0, ctx 33 % (START 8 %) = roll line. Takeover = dev/handover/TAKEOVER_FOREMAN_C_ROOTB1.md. No schedules owned. Next Lượt 2064.
 ROOT ~13:14Z: OWNER L2064: Phi t5 also looks bell-shaped — fixed yet? → THUROOT2 (L2050 Phi file: add slim/hugging, single tier flat, not flared) before its s62 t5 draw. Next Lượt 2065.
 ROOT ~13:16Z: OWNER L2065: QP crop-ref 0eUzX6bTfW embroidery too sparse; words-only fHztbiqCDY prettier → VE12: crop ref for tier shape only + rich embroidery words, 1@135. Successor ROOT-B2 session_01D3E3NbYsQwytXuwoYF3EXh opened (child of B1). Next Lượt 2066.
+ROOT ~13:19Z: OWNER L2066: QP collar crop ref YMl2p0yWeC APPROVED for every person's QP; fix words so vân kiên embroidery fits QP rank; QP lacks chest-centre embroidery → VE12 redraw adds chest flower cluster + rich embroidery; BUILDFIX2 attaches ref for all t6. Next Lượt 2067.
