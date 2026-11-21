@@ -2178,3 +2178,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:43Z) rv MSxp PASS kit-ef-unit r3 fd8280fa (review/kit-ef-unit-rv3) → LRRY after dresscode, then kit-win-pay 203cd559 HOLD released. Gave owner B STANDBY paste block (resend).
 - (17:53Z) KIT KEEPER #5 SSK kit-mark-fix r6 2bf9f1a1 → rv MSxp. Ordered keeper item 3 kitRelRows one-word (review/kit-relrows-oneword; OD:L352; KIT_REQUESTS l.91) → unblocks B rel-men-servants r4.
 - (17:55Z) LAND CHAIN 2: LANDED coop-room-faces 9c5b6de3 (1 perf retry). Queued kit-ef-unit-rv3 fd8280fa + kit-win-pay (hold released by MAIN 98).
+- (17:57Z) OWNER asked why 84 items not spread over all accounts. Opened GAP v4 recount+SPREAD worker session_01Rc5AsJNTe7U11fSBhJ4DhG (sonnet, ≤60 min). D #17 is depth 8 → cannot open workers (D line needs owner ROOT). E #29 depth 1, 5 seats. Main account itself will run the MAIN-UI NO-OWNER rows.

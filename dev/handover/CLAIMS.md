@@ -909,3 +909,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | RUNNING | 21/11 17:52Z |
 | REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | RUNNING (prep → gates at E46 SSK) | 21/11 17:56Z |
 | REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
+| GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
