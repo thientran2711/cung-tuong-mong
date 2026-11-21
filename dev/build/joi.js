@@ -49,6 +49,11 @@ const OI_TXT={
   d:["Sứ đoàn đi ba tháng đường. Đêm cuối trên đất cũ, ngươi giấu một cánh mai khô vào tay áo.",
    "Kinh thành Đại Hy rộng lớn và xa lạ. Lễ bộ đã dọn lễ ra mắt; cả triều sẽ nhìn công chúa ngoại quốc."],
   h:"Hòa ước còn đang bàn. Phụ vương cho ngươi ở lại cố quốc thêm ít năm, học tiếng nói và lễ nghi Đại Hy trước khi lên đường."},
+ pf:{a:["Phù Tang ở tận chỗ mặt trời mọc, sau một vùng biển mà thuyền đi một tháng mới tới. Ngươi lớn lên giữa vườn rêu và tiếng sóng ở bến Nan Ba.",
+   "Phụ hoàng gửi ngươi theo thuyền sứ đoàn sang Đại Hy, làm tin cho minh ước hai nước bên kia bể."],
+  d:["Ngươi rưới nước thanh tẩy lần cuối trước đền Thần. Các nữ quan Đại Hy đứng chờ ở bến, tay cầm bộ áo gấm và đôi hài thêu.",
+   "Thuyền cập bến Minh Châu sau một tháng sóng gió. Từ đây ngươi ngồi kiệu lên kinh, và cả triều Đại Hy đang chờ xem công chúa bên kia bể."],
+  h:"Thuyền sứ đoàn còn chờ gió mùa. Phụ hoàng cho ngươi ở lại Phù Tang thêm ít năm, học chữ và lễ Đại Hy trong cung Nại Lương."},
  bd:{a:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi hài thêu.",
    "Phụ hãn đổi hòa ước mười năm với Đại Hy bằng ba trăm con ngựa, và bằng ngươi."],
   d:["Ngươi tết tóc lần cuối theo kiểu thảo nguyên. Các nữ quan Đại Hy đứng chờ, tay cầm bộ áo gấm và đôi hài thêu.",
@@ -86,7 +91,7 @@ if(typeof bdTxtProp==="function"){const B=OI_TXT.bd,N={a:["Ba Tư ở xa tận p
 /* picture captions (the frame's title / alt) — the ART LIST in the report describes each scene in full */
 const OI_CAP={tt:["Phủ Tể tướng","Triều cục","Chiếu chỉ","Rời phủ","Ở nhà chờ tuyển"],dtq:["Biên ải","Lòng trung","Thư cha","Lên kiệu","Khuê các"],
  muoi:["Bến muối","Con nhà buôn","Rương bạc","Tường đỏ","Ở nhà chờ tuyển"],cn:["Trà Càn Thanh","Đêm mưa","Khẩu dụ","Hành lang",""],
- nc:["Hải Đông","Hòa ước","Sứ đoàn","Kinh thành","Cố quốc"],bd:["Thảo nguyên","Ngựa hồi môn","Tết tóc","Ngoài cửa thành","Lều nỉ"],
+ nc:["Hải Đông","Hòa ước","Sứ đoàn","Kinh thành","Cố quốc"],bd:["Thảo nguyên","Ngựa hồi môn","Tết tóc","Ngoài cửa thành","Lều nỉ"],pf:["Bến Nan Ba","Thuyền sứ đoàn","Lễ thanh tẩy","Bến Minh Châu","Vườn rêu"],
  td:["Phủ bị niêm phong","Bản sớ","Đổi tên","Cửa cung","Thị lang phủ","Bản sớ ngầm"],ch:["Từ Ninh cung","Người nhà Thái hậu","Trâm ngọc","Ngọ môn","Chờ tuyển"],
  thd:["Mái tranh","Sổ tuyển","Sách chép tay","Thuyền về kinh","Lớp chữ"],cnv:["Lệnh tuyển","Đêm ở làng","Lời mẹ dặn","Cửa sau cung","Làng quê"]};
 if(typeof bdTxtProp==="function")["Lửa thánh","Lời cầu viện","Dâng lửa","Kim Quang môn","Cố quốc"].forEach((t,i)=>bdTxtProp(OI_CAP.bd,i,OI_CAP.bd[i],t));/* Ba Tư (bdTxt) */
@@ -104,7 +109,7 @@ function oiPanels(home){const k=oiK();const T=OI_TXT[k];if(!T)return [];const C=
 /* the selection of this road: its name, its judges, the highest rank it can give */
 function oiSel(home){const k=oiK();const o=S.origin||{};const top=o.r||0;const K=S.kc||{};
  if(k==="cnv")return{head:"Tuyển cung nữ",top:"Hầu phi tần bậc cao"};
- if(k==="nc"||k==="bd")return{head:"Lễ ra mắt",top:RANKS[top].n};
+ if(k==="nc"||k==="bd"||k==="pf")return{head:"Lễ ra mắt",top:RANKS[top].n};
  if(k==="cn")return{head:"Xét phong danh phận",top:RANKS[top].n};
  if(home&&!K.kd)return{head:"Ba vòng tuyển tú",top:RANKS[2].n};/* jkc Điện tuyển: rank 0..2 (kcDien) */
  return{head:"Tuyển chọn",top:RANKS[top].n}}
@@ -128,12 +133,12 @@ function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const m=oiPan
    oiNameSel();showModal();render()}}}catch(e){console.error("oiIntro",e)}return r}})();
 
 /* ---------- 3. the selection named for what it is (direct road card of jkc2 PEND.kc2Sel; jentry exam frame heading) ---------- */
-const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="bd"?bdTxt("Bắc Địch","Ba Tư"):"Cao Ly"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
+const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="pf"?"Phù Tang":S.origin.k==="bd"?bdTxt("Bắc Địch","Ba Tư"):"Cao Ly"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
  cn:()=>`<p>Từ Ninh cung. Thái hậu cho gọi cung nữ được Hoàng thượng giữ lại${oiQueen()?"; Hoàng hậu ngồi bên":""}. Hoàng thượng muốn ban cho ngươi danh phận tới <b>${RANKS[S.origin.r||0].n}</b>; Thái hậu gật đầu hay không là ở buổi hôm nay.</p>`};
-OI_SELT.bd=OI_SELT.nc;
+OI_SELT.bd=OI_SELT.nc;OI_SELT.pf=OI_SELT.nc;
 function oiNameSel(){const k=oiK();const X=oiSel(false);const m=Q.find(x=>x.pid==="kc2Sel");if(!m)return;if(X.head&&k!=="cnv")m.t=X.head;if(OI_SELT[k])m.h=OI_SELT[k]()}
 (function(){if(typeof entCtx!=="function")return;const c0=entCtx;entCtx=function(o){const X=c0.apply(this,arguments);try{const k=oiK();if(S&&S.oiV&&X&&!X.srv&&!(o&&o.phuc)&&X.road==="dir"){
- if(k==="nc"||k==="bd"){X.head="Lễ ra mắt";X.judge="Hoàng thượng, Thái hậu, bá quan, sứ thần"}else if(k==="cn"){X.head="Xét phong danh phận";X.judge=oiQueen()?"Thái hậu, Hoàng hậu":"Thái hậu"}}}catch(e){}return X}})();
+ if(k==="nc"||k==="bd"||k==="pf"){X.head="Lễ ra mắt";X.judge="Hoàng thượng, Thái hậu, bá quan, sứ thần"}else if(k==="cn"){X.head="Xét phong danh phận";X.judge=oiQueen()?"Thái hậu, Hoàng hậu":"Thái hậu"}}}catch(e){}return X}})();
 
 /* ---------- 2. the reason line ("Vì sao") on every result card ---------- */
 /* parts: [key, contribution vs an ordinary new girl]; weights = the road's own (BAL.entry.w), refs = BAL.entry.why.ref */
@@ -164,7 +169,7 @@ function oiWhy(P,tier,g,A,way){const L=P.filter(p=>isFinite(p[1])&&Math.abs(p[1]
  if(tier>=2)return U||(g==="maid"?"Ma ma ghi tên ngươi vào hàng đầu":"Hoàng thượng giữ thẻ bài, ban hoa");
  if(tier===1)return U&&D?`${U}; nhưng ${/^(Thái hậu|Hoàng|Ma ma|Lễ nghi|Lời)/.test(D)?D:D.charAt(0).toLowerCase()+D.slice(1)}`:U?`${U}, nhưng chưa đủ để ${g==="maid"?"được chia về hầu phi tần bậc cao":"được phong cao nhất"}`:(D||"Không ai chê, cũng không ai khen");
  return D||(g==="maid"?"Ma ma không để ý tới ngươi":"Hoàng thượng không để ý tới ngươi")}
-function oiGroup(){const k=oiK();return k==="cnv"?"maid":(k==="nc"||k==="bd")?"bride":"consort"}
+function oiGroup(){const k=oiK();return k==="cnv"?"maid":(k==="nc"||k==="bd"||k==="pf")?"bride":"consort"}
 function oiRow(why){return kitRows([["Vì sao",why,"t"]])}
 function oiPut(c,why){if(!c||!why||c.oiWhy)return;c.oiWhy=1;const h=String(c.h||"");const i=h.indexOf('<p class="past">');c.h=i>=0?h.slice(0,i)+oiRow(why)+h.slice(i):h+oiRow(why)}
 /* direct road */
@@ -184,7 +189,7 @@ function oiPut(c,why){if(!c||!why||c.oiWhy)return;c.oiWhy=1;const h=String(c.h||
 /* ---------- 4. ENTRY ANIMATION seam (KIT REQUEST: kitEntryGate, palace gate → selection hall) ----------
    kind: "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc; + horses: bd) · "maid" (cnv: maids behind a mama) ·
    "corridor" (cn: the Càn Thanh corridor). Once per life, right before her first selection card inside the palace. No kit part → nothing plays. */
-function oiGateKind(){const k=oiK();return k==="cnv"?"maid":(k==="nc"||k==="bd")?"bride":k==="cn"?"corridor":"consort"}
+function oiGateKind(){const k=oiK();return k==="cnv"?"maid":(k==="nc"||k==="bd"||k==="pf")?"bride":k==="cn"?"corridor":"consort"}
 function oiGate(road){if(!S||S.oiGate||!S.oiV)return;S.oiGate=1;if(typeof window.kitEntryGate!=="function")return;
  try{window.kitEntryGate({kind:oiGateKind(),origin:oiK(),road:road||"dir",to:oiSel(road==="home").head})}catch(e){console.error("kitEntryGate",e)}}
 /* home roads: the first card that happens INSIDE the palace (tiểu thư Phúc tuyển / early Điện tuyển, hòa thân Lễ ra mắt, cung nữ entry card) */

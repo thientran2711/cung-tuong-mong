@@ -19,7 +19,7 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
     return K.map(k=>{const a=itemArt(k);return{k,a:a&&[a.src,a.src512,a.grade],it:!!IT[k]}})});
    const miss=[];for(const x of keys){if(!x.a){miss.push(x.k+':noart');continue}for(const u of [x.a[0],x.a[1]]){const r=await p.evaluate(async u=>{try{return (await fetch(IMG_U(u),{method:'HEAD'})).status}catch(e){return 0}},u);if(r!==200)miss.push(x.k+' '+u+' '+r)}}
    ok(!miss.length,'new item keys: itemArt + 256/512 pictures on the CDN ('+keys.length+' keys)',miss.join(' | '));
-   const noIT=keys.filter(x=>!x.it).map(x=>x.k).join(',');ok(noIT==='hoatai,hoataivang,giayhoa,giaygam','items with a slot row exist as IT; earrings/shoes wait for a wear slot (KIT REQUEST)',noIT);
+   const noIT=keys.filter(x=>!x.it).map(x=>x.k).join(',');ok(noIT==='','every item with a painting exists as IT (earrings/shoes: wear slots Hoa tai / Giày, GAP IT03)',noIT);
    const wd=await p.evaluate(()=>['y_chuongsu','y_nuquan','y_mama'].map(k=>[k,!!WD_ITEMS[k],WD_ITEMS[k]&&WD_ITEMS[k].icon]));
    const wm=[];for(const [k,e,ic] of wd){if(!e){wm.push(k);continue}const r=await p.evaluate(async u=>(await fetch(IMG_U(u),{method:'HEAD'})).status,ic);if(r!==200)wm.push(k+' '+r)}
    ok(!wm.length,'maid robes in WD_LIST with their picture on the CDN',wm.join(',')||wd.map(x=>x[2]).join(','));
