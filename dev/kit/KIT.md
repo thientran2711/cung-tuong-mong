@@ -3558,7 +3558,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   `mcMonName` / `mcYearName`, never typed; `(tháng sau)` / `(N tháng nữa)` / `(đã qua)` when not this month; two 44 px `kbtn alt .kmc-ar` arrows, `data-kmcm` = target
   month, disabled at -1 / 11; SWIPE the grid sideways = next / last month, with a short slide that respects reduced motion), then the grid: per tuần one light label
   strip (`Thượng tuần` + `kchip g` "Tuần này" + quẻ chip; the current tuần strip is gold = today, the game has no day inside a tuần) over 2 rows x 5 EQUAL SQUARE
-  cells (`aspect-ratio:1`, days 1–30; 5 columns because the Fold dialog is only ~290 px wide, 10 columns gave 27 px squares; grid capped at 560 px wide),
+  cells (`aspect-ratio:1`, days 1–30; 5 columns by default because the Fold dialog is only ~290 px wide, 10 columns gave 27 px squares; a container query (`.kmc` width ≥ 470 px = iPad) switches to ONE row of 10 per tuần, ~50 px squares, whole month without scrolling; grid capped at 560 px wide),
   festival cells = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name (`MCAL.short`); other known days = tag + count + moon / cycle marks.
   Tap a day = that day's box below the grid (`mcDayBox`, kit rows); under it one `kitRows` table of the month's festivals (day | name · "còn N tuần" / "tuần này" / "đã qua").
 - A festival square or list name opens the kit popover (`kpPop`, hover too with a mouse): name, day + tuần + time left, one line
@@ -3571,7 +3571,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   top-right; the first one that covers no name tag, side card, title, chip, "+N"/"‹" page chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
   re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
 - No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
-- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (opens from the rail "Lịch tháng" button; the room desk calendar is retired by jrail; 2 arrows ≥ 44 px, no chip row, 30 equal squares in 6 rows, swipe both ways, arrow disabled before last month; every month; no clipped
+- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (opens from the rail "Lịch tháng" button; the room desk calendar is retired by jrail; 2 arrows ≥ 44 px, no chip row, 30 equal squares in 6 rows (narrow) or 3 rows (wide ≥ 470 px), swipe both ways, arrow disabled before last month; every month; no clipped
   text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
   390x844 = rotate prompt).
 

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"40d20ee1+","t":"2026-11-21T03:19Z","c":"calendar: Lịch tháng = phone month view (arrows + swipe, equal square day cells, no month chip rows); KIT §58, month-cal test, site rebuilt","b":"217068416c42","h":[{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"}]};
+window.CTM_BI={"s":"672e1972+","t":"2026-11-21T03:30Z","c":"calendar: Lịch tháng = phone month view (arrows + swipe, equal square day cells, no month chip rows); KIT §58, month-cal test, site rebuilt","b":"9060718c96c3","h":[{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -59380,7 +59380,7 @@ window.kitDeskCal=kitDeskCal;
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitDeskCal();return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
-.kmc{display:grid;gap:8px;min-width:0}
+.kmc{display:grid;gap:8px;min-width:0;container-type:inline-size}
 .kmc-nav{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:8px}
 .kmc-ar{min-width:44px;min-height:44px;padding:0;font-size:1.5rem;line-height:1;font-weight:700}.kmc-ar[disabled]{opacity:.35;cursor:default}
 .kmc-head{font-family:var(--display);color:var(--ink);font-size:1rem;text-align:center}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
@@ -59390,6 +59390,7 @@ addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTime
 @media (prefers-reduced-motion:reduce){.kmc-grid.kmc-in-r,.kmc-grid.kmc-in-l{animation:none}}
 .kmc-row{display:grid;gap:4px;min-width:0}
 .kmc-cells{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;min-width:0}
+@container (min-width:470px){.kmc-cells{grid-template-columns:repeat(10,minmax(0,1fr))}}
 .kmc-tl{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:.76rem;line-height:1.2;color:var(--dim);padding:1px 4px;border-radius:6px}
 .kmc-row.on .kmc-tl{color:var(--gold);background:#f0d07033;box-shadow:inset 0 0 0 1px var(--gold)}
 .kmc-now{font-size:.62rem!important;white-space:nowrap}
@@ -86141,7 +86142,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="217068416c42";window.CTM_BUILD=BUILD;
+const BUILD="9060718c96c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -234,7 +234,7 @@ window.kitDeskCal=kitDeskCal;
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitDeskCal();return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
-.kmc{display:grid;gap:8px;min-width:0}
+.kmc{display:grid;gap:8px;min-width:0;container-type:inline-size}
 .kmc-nav{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:8px}
 .kmc-ar{min-width:44px;min-height:44px;padding:0;font-size:1.5rem;line-height:1;font-weight:700}.kmc-ar[disabled]{opacity:.35;cursor:default}
 .kmc-head{font-family:var(--display);color:var(--ink);font-size:1rem;text-align:center}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
@@ -244,6 +244,7 @@ addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTime
 @media (prefers-reduced-motion:reduce){.kmc-grid.kmc-in-r,.kmc-grid.kmc-in-l{animation:none}}
 .kmc-row{display:grid;gap:4px;min-width:0}
 .kmc-cells{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;min-width:0}
+@container (min-width:470px){.kmc-cells{grid-template-columns:repeat(10,minmax(0,1fr))}}
 .kmc-tl{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:.76rem;line-height:1.2;color:var(--dim);padding:1px 4px;border-radius:6px}
 .kmc-row.on .kmc-tl{color:var(--gold);background:#f0d07033;box-shadow:inset 0 0 0 1px var(--gold)}
 .kmc-now{font-size:.62rem!important;white-space:nowrap}

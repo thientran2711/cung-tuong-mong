@@ -31,7 +31,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    {const ar=[...M.querySelectorAll('.kmc-ar')].map(e=>e.getBoundingClientRect());if(ar.some(r=>r.width<43||r.height<43))f.push('arrow under 44px');
     const hd=M.querySelector('.kmc-head');if(!/^Tháng .+ · năm thứ/.test(hd.textContent))f.push('head text '+hd.textContent);
     const sq=[...M.querySelectorAll('.kmc-d')].map(e=>e.getBoundingClientRect());const w0=sq[0].width;if(sq.some(r=>Math.abs(r.width-r.height)>1.5||Math.abs(r.width-w0)>1.5))f.push('day cells not equal squares '+Math.round(w0)+'x'+Math.round(sq[0].height));
-    const rows=new Set(sq.map(r=>Math.round(r.top)));if(rows.size!==6)f.push('day rows '+rows.size);if(w0<40)f.push('day cell too small '+w0);
+    const rows=new Set(sq.map(r=>Math.round(r.top)));const wide=M.querySelector('.kmc').getBoundingClientRect().width>=470;if(rows.size!==(wide?3:6))f.push('day rows '+rows.size+(wide?' (wide: 10 per tuần)':' (narrow: 5 per row)'));if(w0<40)f.push('day cell too small '+w0);
     /* swipe: left = next month, right = back */
     const mk=(x)=>new Touch({identifier:1,target:M.querySelector('.kmc-grid'),clientX:x,clientY:300});const g=()=>M.querySelector('.kmc-grid');const fire=(a,b)=>{const t0=mk(a),t1=mk(b);g().dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[t0],changedTouches:[t0]}));g().dispatchEvent(new TouchEvent('touchend',{bubbles:true,touches:[],changedTouches:[t1]}))};
     fire(300,100);await sleep(80);if(+M.querySelector('.kmc').dataset.kmc!==1)f.push('swipe left did not go to next month');fire(100,300);await sleep(80);if(+M.querySelector('.kmc').dataset.kmc!==0)f.push('swipe right did not go back');
