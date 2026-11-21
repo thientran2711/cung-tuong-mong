@@ -8,3 +8,6 @@ Notes (non-blocking): (1) pcrow-square.js is load-sensitive: while coop-e2e ran 
 
 ## LAND READY d3b6e1b47d14776e2b277bb56adbbe17429f6416 (kit-pcrow-square merged with LIVE 56ff0db0, FF)
 Re-merged LIVE 56ff0db0 (rel-picker-r3), index/sw rebuilt: pcrow-square.js tab-rv / tab-court / tab-kin PASS on Fold + iPad (no load), coop-e2e 92/92, QUICKCHECK PASS 226 s (core gates, old save ok, tab 528/491). Branch review/kit-pcrow-square-rv.
+
+## LAND READY d3b6e1b47d14776e2b277bb56adbbe17429f6416 (kit-pcrow-square merged with LIVE 56ff0db0, FF)
+Re-merged LIVE 56ff0db0 (rel-picker-r3), index/sw rebuilt: pcrow-square.js tab-rv / tab-court / tab-kin PASS on Fold + iPad (no load), coop-e2e 92/92, QUICKCHECK PASS 226 s (core gates, old save ok, tab 528/491). Branch review/kit-pcrow-square-rv.
