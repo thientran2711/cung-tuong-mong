@@ -599,4 +599,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | empty-states (sonnet; owner 21/11 02:22Z: every empty tab = kitEmpty picture card) | review/empty-states; briefs/main84-empty-states.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 02:24Z |
 | REVIEW dresscode r3 loan fix E30r3 (opus BIG; briefs/E30r3-review-dresscode-fix.md) of ee44f91e | review/dresscode-land-fix-r1; reports/dresscode-review.md «ROUND 3» | FOREMAN E #24 | session_01DgYSWon2yx2VxkSP87VchV | RUNNING | 21/11 02:18Z |
 | MAIN CHÍNH 85 (coordinator; took over from 84) | — | MAIN | session_01Rc5AsMwdVzDhr1qhRFsjvd | RUNNING | 21/11 02:45Z |
-| MAIN85 E-LANDER (opus; E stale train: phutang 54e068e5 → errand-bal 0d3a4328 → cold-faction 2208d341) | review/main85-land-*; briefs/main85-e-lander.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:50Z |
+| MAIN85 E-LANDER (opus; E stale train: phutang 54e068e5 → errand-bal 0d3a4328 → cold-faction 2208d341) | review/main85-land-*; briefs/main85-e-lander.md | MAIN CHÍNH 85 | session_01Rc5AsJW9Vhg1k64SUB5Jmb | RUNNING | 21/11 02:50Z |
