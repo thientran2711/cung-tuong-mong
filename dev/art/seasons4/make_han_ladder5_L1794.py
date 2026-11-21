@@ -69,8 +69,8 @@ JEWEL="JEWELLERY: every jewel SMALL and delicate, never chunky or showy; NO red 
 ANG="ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn;"
 POSE={2:"Pose: standing poised, a small pale-jade lacquered pellet drum (trống lắc) with a jade handle, a deep drum with two pellets on cords of the same pale jade, not flat, held low at her waist, the robe hem stirring slightly.",
  6:"Pose: standing poised, one hand holding a pearl-embroidered silk ball (tú cầu) with pearl tassels low at her waist, a round stuffed ball, no handle, no stick, the robe hem stirring slightly.",
- 7:"Pose: walking slowly, one foot ahead, a closed kingfisher-feather gold silk parasol with a gold filigree handle and pearl tassels, held low at her side, the robe hem swaying gently with her step.",
- 8:"Pose: walking slowly, a round phoenix-embroidered imperial silk fan with a gold phoenix handle set with pearls, held low at her waist, the robe hem swaying gently with her step."}
+ 7:"Pose: walking slowly, a closed kingfisher-feather gold silk parasol with a gold filigree handle and pearl tassels, held low at her side, the robe hem swaying gently with her step.",
+ 8:"Pose: walking slowly, a round phoenix-embroidered silk fan with a gold phoenix handle set with pearls, held low at her waist, the robe hem swaying gently with her step."}
 DUP=re.compile(r"Full-body standing figure head to feet[^.]*\. ")
 out={}
 for n in range(1,9):
@@ -145,13 +145,15 @@ for n in range(1,9):
         t=rep(t,", outside the collar;",";")
         t=rep(t,sent(t,"INNER LAYER EMBROIDERED"),"INNER LAYER EMBROIDERED: the inner robe and skirt are ALSO embroidered, more sparsely than the outer robe.")
         t=rep(t,"; WRAP CUT: ","; ")
+        t=rep(t,"NO red anywhere (no red gems, beads or tassels)","NO red on clothing, belt or pendants (small rubies only on the crown)")   # owner L1799
+        t=rep(t,"the robe hem swaying gently with her step","the robe hem swaying gently")
     if n==7:
-        t=rep(t,sent(t,"HOÀNG QUÝ PHI LUXURY"),"HOÀNG QUÝ PHI LUXURY: more small pearls and jade on the phoenix crown than the lower ranks, long jade-and-gold belt pendants with pearl tassels, still clearly simpler and less golden than the Empress.")
+        t=rep(t,sent(t,"HOÀNG QUÝ PHI LUXURY"),"HOÀNG QUÝ PHI LUXURY: more small cabochon rubies, pearls and jade on the phoenix crown than the lower ranks, long jade-and-gold belt pendants with pearl tassels, still clearly simpler and less golden than the Empress.")
     if n==8:
         t=rep(t,"densely embroidered ALL OVER (not only the borders) with","densely embroidered ALL OVER with")
-        t=rep(t,sent(t,"EMPRESS LUXURY"),"EMPRESS LUXURY: more small pearls and jade on the phoenix crown than any lower rank, and long jade-and-gold belt pendants with pearl tassels.")
+        t=rep(t,sent(t,"EMPRESS LUXURY"),"EMPRESS LUXURY: more small cabochon rubies, pearls and jade on the phoenix crown than any lower rank, long jade-and-gold belt pendants with pearl tassels.")
         t=rep(t,"light clear warm plum silk like #DF9ED9 is the MAIN colour of the robe and sleeves, with bright blush pink in the inner robe and linings; yellow as the LARGEST yellow parts of all ranks (the yellow collar band, wide yellow borders and a wide yellow sash) in rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold",
-              "light clear warm plum silk like #DF9ED9, with bright blush pink in the linings; the royal golden yellow is the DOMINANT colour of the over-robe, sleeves and skirt (more than half of everything visible, the most of all ranks), her plum is the second colour (inner robe, collar edge, wide borders); the yellow is rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold")
+              "light clear warm plum silk like #DF9ED9, with bright blush pink in the linings; the royal golden yellow is the DOMINANT colour of the over-robe, sleeves and skirt (more than half of all visible, the most of all ranks), her plum is the second colour (inner robe, collar edge, wide borders); the yellow is rich warm royal golden yellow exactly the colour of image 2 (a colour swatch only), a honey-gold")
         t=rep(t,"the royal golden yellow (honey-gold like #EFBD69), the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink","the DOMINANT royal golden yellow (honey-gold like #EFBD69), the second colour light clear warm plum and the third colour bright blush pink")
     f=D+f's62_t{n}_HAN_LADDER5_L1794.txt'; open(f,'w').write(t); out[n]=len(t)
 print(out)

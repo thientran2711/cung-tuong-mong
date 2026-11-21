@@ -51,3 +51,6 @@ Not a cause: refs (same image for all), caption, char cuts (collar words untouch
 | 7 | 9989 | B12/M07/S07/S14 (S14 now = necklace removed per A41 + rubies removed) |
 | 8 | 9994 | B12/M07/S07 |
 Open: (1) t1–t3 band count stays TWO (L1772) though Phi has THREE — ask owner if she wants 3 for all. (2) t8 outer robe now yellow (collar = yellow outer, plum inner) — OK with "Phi collar"? (3) t6 motif osmanthus is an autumn flower under Mùa Xuân.
+
+## LADDER5 update L1799 (via #22/#23)
+Red gems allowed ONLY on the t7/t8 crown, never on clothing: t7/t8 luxury lines = "more small cabochon rubies, pearls and jade on the phoenix crown"; t7/t8 JEWELLERY "NO red on clothing, belt or pendants (small rubies only on the crown)"; t1–t6 keep "NO red anywhere". Trims: t7/t8 "with her step", t7 "one foot ahead", t8 "imperial" (item), "of everything visible"→"of all visible". ch t7 9998, t8 9999; keep PASS; check_store unchanged (t7 B12/M07/S07/S14, t8 B12/M07/S07).
