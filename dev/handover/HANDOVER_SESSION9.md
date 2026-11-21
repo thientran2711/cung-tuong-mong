@@ -2119,3 +2119,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (16:05Z) LAND CHAIN 2: LANDED kit-relrows-ms 08e1e934. LIVE 08e1e934. Next coop-arrive-see.
 - (16:15Z) LAND CHAIN 2: LANDED coop-arrive-see a201d968.
 - (16:15Z) LAND CHAIN 2: LANDED coop-arrive-see a201d968 (GAP OD-CO1: second arriver sees friend already in room). LIVE a201d968. Next sg-card.
+- (16:26Z) LAND CHAIN 2: LANDED sg-card e193228f.
