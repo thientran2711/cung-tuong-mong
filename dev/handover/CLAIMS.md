@@ -841,7 +841,7 @@ kit-focus rv2 | review/kit-focus-rv2 6291a355 | rv session | FAIL (Fold sub-line
 | coop-arrive-see (opus BIG; GAP OD-CO1, MAIN 92 ORDER 09:50Z via D: second co-op arriver does not see friend) | review/coop-arrive-see; briefs/b6-coop-arrive-see.md | B | session_01N1tNP4rBywa4C29JMb8gx6 | READY 8ee5f709 (reports/coop-arrive-see.md) | 21/11 11:45Z |
 | ui-leftover-fold (sonnet SMALL; GAP MG12+KP05+KP14+M17, MAIN 92 ORDER 09:50Z via D; reuse mg-ui-rest + kit-opt-text) | review/ui-leftover-fold; briefs/b6-ui-leftover-fold.md | B | session_01N1tNP2bJj9FqZNTvhAgTmS | RUNNING | 21/11 10:12Z |
 | REVIEW jlost-kyngo E42r (opus BIG) of 2fa2e667 | review/jlost-kyngo-r1; reports/jlost-kyngo-review.md | FOREMAN E #26 | session_01DgYSWogzcg1vAwJPLueGcM | DONE PASS 8527f09c4778b2ca325f9a34786efecdd12589a8 | 21/11 10:17Z–11:38Z |
-| REVIEW coop-guest-names (opus BIG) of 3ffea799 | review/coop-guest-names-r1 | B | session_01N1tNP4xhQc6kgxpjhWCyYJ | RUNNING | 21/11 10:22Z |
+| REVIEW coop-guest-names (opus BIG) of 3ffea799 | review/coop-guest-names-r1 | B | session_01N1tNP4xhQc6kgxpjhWCyYJ | PASS d45076b6 (reports/coop-guest-names.md ## REVIEW r1) | 21/11 13:20Z |
 kit-focus rv3 | review/kit-focus-rv3 a1e2abc8 | rv session | PASS | 21/11
 | COOP POOL-FACE (opus; coop-e2e Thái hậu face blank on guest / host face re-roll c23→c04) | review/coop-pool-face; reports/coop-pool-face.md | FOREMAN D #15 | session_01964izF5rYFfN6AQemodeBW | RUNNING | 21/11 10:32Z |
 | coop-famops E44 (opus BIG; jcoopworld famApply ret / famDiff rm × lost cases, law 6c, guest seat) | review/coop-famops; reports/coop-famops.md | FOREMAN E #26 | session_01DgYSWoNyf8gHKuWgnuwjQx | RUNNING | 21/11 10:36Z |
