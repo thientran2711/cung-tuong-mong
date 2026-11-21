@@ -96,3 +96,4 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - keep PASS ×3. store mama a18: nhất PASS; tam/nhị S01+S32 = same as their bases.
 - 04:45Z (Foreman #18 order): restored the glued thu_comoi s62_t4_THU_COMOIk + s62_t5_THU_COMOIj (+ .keep) from be1ec9e; keep_check --all = 386 PASS.
 - 04:58Z JOB L1689 try-on page done (Foreman #18): https://claude.ai/artifact/1Vq6sMKho8gTbHYi1DdfzN — details in PAL3.md §L1689 RESULT. 0 cr.
+- 04:50Z LESSON (Foreman #18): my 94def72 used 'commit -am' and re-committed stale palettes_season_L1583.json + four_season_L1583.py (DESIGN21 restored them in 1529c93). From now on: git status first, stage ONLY my own files by path, never -a / add -A.
