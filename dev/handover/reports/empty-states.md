@@ -41,5 +41,8 @@ Kit keeper (session_01Rc5AsMtjP4KTgBZVjENGLs) to be told: kit-pane rule `#panel.
 ## PART 3 — Thú cưng empty (owner ~02:48Z)
 Same kitEmpty card: big pet picture left, right: «Ta chưa nuôi con thú nào» + hint + «Con quý hiếm không mua được: …»; the «Nhờ thái giám tìm thú nuôi» act card stays below.
 
+## r2 (rv FAIL fix)
+`#panel.kpane>.pgwrap` is now `flex:1 0 auto` (fills the room, never shrinks below its content): the first version (`1 1 0`) squashed Ân oán / Chí tôn cards (text on a card border, overlapping next card). panel-scroll-scan now also FAILs on content spilling out of its container (child bottom > parent bottom) and sibling overlap (portrait internals excluded); self-test `SCAN_INJECT_CSS='#panel.kpane>.pgwrap{flex:1 1 0!important}'` makes it FAIL on Ân oán, the shipped CSS PASSes (Fold + iPad, 26 views).
+
 ## Gates
 see message to MAIN (quickcheck + coop-e2e results).

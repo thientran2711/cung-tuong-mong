@@ -41,8 +41,7 @@ window.kitPane=kitPane;
    card tab / empty card overflowed by the bar's height (65 px) and the panel scrolled for nothing. The panel is a column; the card wrap takes what is left of it. */
 #panel.kpane:has(>.pgwrap){display:flex;flex-direction:column}
 #panel.kpane>.kpbar{flex:0 0 auto}
-#panel.kpane>.pgwrap{height:auto;flex:1 1 0;min-height:0}
-#panel.kpane>.pgwrap:has(.ktbox),#panel.kpane>.pgwrap:has(.kvbox){flex:0 0 auto}
+#panel.kpane>.pgwrap{height:auto;flex:1 0 auto;min-height:0}/* grows to fill, NEVER shrinks below its content (rv fail: Ân oán / Chí tôn cards overlapped) */
 #panel.kpane>.kinvpane>.kinv:last-child{margin-bottom:0}/* the bag fits the panel: its 10 px bottom margin + padding made it scroll 3 px */
 #panel.kpane>.kpbar{position:sticky;top:0;z-index:29;display:flex;flex-direction:column;gap:6px;margin-top:0!important;margin-bottom:var(--k-tabgap,10px)!important;padding:8px 8px 6px;
  background:var(--panel,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);box-shadow:none}
