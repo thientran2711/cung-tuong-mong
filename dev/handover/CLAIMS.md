@@ -653,7 +653,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
-| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
+| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | DONE → MAIN CHÍNH 88 session_01Rc5AsL9RckY86bdwv8NheC | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | RUNNING | 21/11 03:50Z |
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | DONE PASS ee8847b0 | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
@@ -669,7 +669,7 @@ jagday-walk-rv stale re-merge | review/jagday-walk-rv | session_01964izGLLhhhTBc
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
-| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
+| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | DONE → MAIN CHÍNH 88 session_01Rc5AsL9RckY86bdwv8NheC | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
 | hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
