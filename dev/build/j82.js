@@ -360,30 +360,31 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
   lit=bi;litUntil=performance.now()+BAL.mgFx.ms;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else if(rtl>0){rtl--;kg82Pluck(0,false);kg82Pop(pops,mx,my-8,"Lỡ một bước, chạm lại",kg82Col("--gold","#8f5f0c"))}else{kg82Pluck(0,false);endRound(inp)}});
  KG82.peek=()=>phase==="play"?C.client(...pos[seq[inp]]):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
-/* 6. AIM (bắn cung, đầu hồ): the marker swings, tap when it is over the centre */
-function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=env.kind==="dauho";const N=6;let k=0,pts=0,stop=false,raf=0,t0=performance.now(),lock=false,shots=[];const pops=[];
+/* 6. AIM */
+/* AIM (Bắn cung): the marker sweeps over the target; tap to loose the arrow straight down onto the face row.
+   dauho-lv5 (whole group of the owner's «vòng to quá ... mũi tên nằm ở ngoài nhìn nó bị giả»): the scoring rings ARE the rings painted in mg-ban-target.webp
+   (BAL.mgArt.ban, measured on the picture); the arrow is drawn where it truly lands (no squeeze toward the centre); the board eases by the picture size
+   (BAL.mgTier.lev.ban.size, law 5: smaller target on a harder board). Đầu hồ has its own engine (j91 k91Fling); a dauho call here goes there. */
+function kg82Aim(box,env){if(env.kind==="dauho"&&typeof KG82_ENG.fling==="function")return KG82_ENG.fling(box,env);
+ const C=kg82Canvas(box,.95,420),{g,W,H}=C;const N=6,T=BAL.mgArt.ban;let k=0,pts=0,stop=false,raf=0,t0=performance.now(),lock=false,shots=[];const pops=[];
  const cx=W/2,ty=H*.58,A=W*.38;const pos=now=>{const w=.0021+k*.00028;return cx+A*Math.sin((now-t0)*w)};let flyAt=0,flyX=0;
+ const Pw=Math.min(W*.96,T.fit*H*(mgLev(env,"ban","size")||1));/* picture width; the face centre sits on (cx, ty) */const ring=i=>T.ring[i]*Pw;
+ const zone=x=>{const d=Math.abs(x-cx);for(let i=0;i<T.ring.length;i++)if(d<=ring(i))return i;return -1};
  function draw(now){kg82Bg(g,W,H,env.kind,0,.6);
-  const kz=Math.min(1.7,Math.min(W,H)/300);
-  /* painted target / pot (target face = 128 units across, ~84 % of the picture's width) */
-  const art=pot?kg82Spr(g,"dauho-pot",cx,ty-50*kz,36*kz/.42,null,{ay:0}):kg82Spr(g,"ban-target",cx,ty,128*kz,null,{ay:.42});
-  g.save();g.translate(cx,ty);g.scale(kz,kz);g.translate(-cx,-ty);
-  if(art){}else if(pot){g.save();const gr=g.createLinearGradient(cx-60,0,cx+60,0);gr.addColorStop(0,"#6e4d0e");gr.addColorStop(.5,"#c9a03a");gr.addColorStop(1,"#6e4d0e");g.fillStyle=gr;
-   g.beginPath();g.moveTo(cx-18,ty-50);g.lineTo(cx+18,ty-50);g.bezierCurveTo(cx+16,ty-20,cx+62,ty+10,cx+48,ty+70);g.lineTo(cx-48,ty+70);g.bezierCurveTo(cx-62,ty+10,cx-16,ty-20,cx-18,ty-50);g.fill();
-   g.fillStyle="#2a1a12";g.beginPath();g.ellipse(cx,ty-50,18,5,0,0,Math.PI*2);g.fill();g.restore()}
-  else{[[64,"#fffaf0"],[50,"#2a1a12"],[38,"#6a8aa0"],[26,"#c23b22"],[13,"#f0d070"]].forEach(([r,c])=>{g.fillStyle=c;g.beginPath();g.arc(cx,ty,r,0,Math.PI*2);g.fill()});g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(cx,ty,64,0,Math.PI*2);g.stroke()}
-  g.restore();
-  const my=pot?ty-50*kz:ty;const an=pot?"dauho-arrow":"ban-arrow";shots.forEach(s=>{if(!kg82Spr(g,an,s.x,my,44*kz,null,{rot:-Math.PI/2+.25,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(s.x,my);g.lineTo(s.x-6,my-30);g.stroke()}});
-  g.strokeStyle="#d2b071";g.lineWidth=2;g.beginPath();g.moveTo(cx-A,H*.16);g.lineTo(cx+A,H*.16);g.stroke();g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(cx-A*.08,H*.16-3,A*.16,6);
+  const art=kg82Spr(g,"ban-target",cx,ty,Pw,null,{ay:T.cy});
+  if(!art){const cs=["#f0d070","#c23b22","#6a8aa0","#2a1a12","#fffaf0"];for(let i=T.ring.length-1;i>=0;i--){g.fillStyle=cs[i];g.beginPath();g.arc(cx,ty,ring(i),0,Math.PI*2);g.fill()}g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(cx,ty,ring(T.ring.length-1),0,Math.PI*2);g.stroke()}
+  const L=Pw*.34;shots.forEach(s=>{if(!kg82Spr(g,"ban-arrow",s.x,ty,L,null,{rot:-Math.PI/2+.25,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(s.x,ty);g.lineTo(s.x-6,ty-30);g.stroke()}});
+  g.strokeStyle="#d2b071";g.lineWidth=2;g.beginPath();g.moveTo(cx-A,H*.16);g.lineTo(cx+A,H*.16);g.stroke();g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(cx-ring(0),H*.16-3,ring(0)*2,6);
   const x=lock?flyX:pos(now);{const pz=lock?kg82FxPop(flyAt,now):1;g.save();g.translate(x,H*.16);g.scale(pz,pz);g.fillStyle="#8a2a1e";if(pz>1){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur}g.beginPath();g.moveTo(0,4);g.lineTo(-9,-12);g.lineTo(9,-12);g.closePath();g.fill();g.restore();if(lock)kg82FxRing(g,x,H*.16-4,16,flyAt,now)}
-  if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+((pot?ty-50*kz:ty)-H*.16)*kk;if(!kg82Spr(g,an,flyX,yy,46*kz,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
+  if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+(ty-H*.16)*kk;if(!kg82Spr(g,"ban-arrow",flyX,yy,L*1.05,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
   kg82DrawPops(g,pops,now)}
- function frame(now){if(stop)return;env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
- function shoot(){if(lock||stop)return;const now=performance.now();const x=pos(now);const d=Math.abs(x-cx)/A/(1+(env.lv||0)*.06)/mgTol(env);const q=d<.08?1:d<.2?.75:d<.35?.5:d<.55?.25:0;lock=true;flyAt=now;flyX=x;
-  setTimeout(()=>{pts+=q;if(q>0)shots.push({x:cx+(x-cx)*(pot?.35:.55)});kg82Pop(pops,cx,ty-80,q===1?(pot?"Trúng giữa bình!":"Hồng tâm!"):q>=.5?"Trúng":q>0?"Sượt qua":"Trượt",q>=.5?kg82Col("--good","#2d7a52"):q>0?kg82Col("--gold","#8f5f0c"):kg82Col("--red","#c23b22"));kg82Pluck(k,q>0);
+ function frame(now){if(stop)return;env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} phát`});draw(now);raf=requestAnimationFrame(frame)}
+ function shoot(xT){if(lock||stop)return;const now=performance.now();const x=xT!=null?xT:pos(now);/* xT: test hook only (KG82.aimGeo) */const z=zone(x),q=z<0?0:T.q[z];lock=true;flyAt=now;flyX=x;
+  setTimeout(()=>{pts+=q;if(q>0)shots.push({x});KG82.aimLast={q,x,cx,ring:T.ring.map((r,i)=>ring(i)),Pw};kg82Pop(pops,cx,ty-ring(T.ring.length-1)-14,q===T.q[0]?"Hồng tâm!":q>=T.q[2]?"Trúng":q>0?"Sượt qua":"Trượt",q>=T.q[2]?kg82Col("--good","#2d7a52"):q>0?kg82Col("--gold","#8f5f0c"):kg82Col("--red","#c23b22"));kg82Pluck(k,q>0);
    k++;env.hud({score:mgLive(env,10*(pts+N-k)/N)});/* review/mg-score-same: the mark moves on the shot itself (the frame loop stops after the last one) */if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end((10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
- C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};document.addEventListener("keydown",kd);
- KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)/A<.04?C.client(W/2,H*.8):null};
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};
+ /* test hook (dev/test/dauho-hole.js): the painted rings in canvas px and a shot at a chosen x */KG82.aimGeo=()=>({W,H,cx,ty,Pw,cy:T.cy,ring:T.ring.map((r,i)=>ring(i)),zone,shootAt:x=>shoot(x),shots:()=>shots.slice(),lock:()=>lock});document.addEventListener("keydown",kd);
+ KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)<ring(0)*.5?C.client(W/2,H*.8):null};/* the test oracle: inside half the painted gold */
  /* hint hook (KIT §13.7 guided round): tap anywhere on the board; soon = the marker reaches the centre within a reaction time */
  KG82.hint=()=>{if(lock||stop)return null;const now=performance.now(),w=.0021+k*.00028,th=((now-t0)*w)%Math.PI,c=C.client(W/2,H*.8);return{x:c.x,y:c.y,soon:(Math.PI-th)/w<BAL.mgTier.tut.lead||th/w<40}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
