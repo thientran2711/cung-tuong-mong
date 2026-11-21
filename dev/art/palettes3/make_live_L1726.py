@@ -18,7 +18,7 @@ BASE = {
  'bạc hà': 'mint green', 'cam hồng': 'pinkish orange', 'cam mơ': 'apricot orange', 'cam quýt': 'tangerine', 'cam quả hồng': 'persimmon orange',
  'cam san hô': 'coral orange', 'cam đào': 'peach orange', 'chàm / lam đêm': 'indigo night blue', 'chàm': 'indigo blue', 'tím than': 'navy violet',
  'hồng': 'rose pink', 'hồng hoa đào': 'peach-blossom pink', 'hồng mẫu đơn': 'peony pink', 'hồng phấn': 'powder pink', 'hồng san hô': 'coral pink',
- 'hồng sen': 'lotus pink', 'hồng tro / tím khói': 'mauve rose', 'hồng tím phấn': 'powder pink-lilac', 'hồng xuân': 'spring pink', 'hồng đất': 'earthy rose',
+ 'hồng sen': 'lotus pink', 'hồng tro / tím khói': 'ash rose', 'hồng tím phấn': 'powder pink-lilac', 'hồng xuân': 'spring pink', 'hồng đất': 'earthy rose',
  'hổ phách / đất nung': 'amber terracotta', 'hổ phách': 'amber', 'kem chanh': 'lemon cream', 'kem mơ': 'apricot cream', 'kem đào': 'peach cream',
  'lam ngọc': 'sapphire blue', 'mòng két': 'teal', 'ngà': 'ivory', 'ngọc bích': 'jade green', 'ngọc': 'jade', 'rêu': 'moss green',
  'san hô dưa hấu': 'watermelon coral', 'trắng hồng': 'blush white', 'trắng ngà': 'ivory white', 'trắng sương': 'frost white', 'tím': 'violet',

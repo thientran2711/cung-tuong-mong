@@ -45,3 +45,15 @@ THUROOT3 has words only (Tần s63–65, Phi s62–65 + ref w4asVae7EI, HQP s62 
 
 ## Tools
 dev/handover/reports/BUILDFIX4/gsweep.py (real gate sweep; env SEASONS, RANKS), lensweep.py, sim.py, dump.py; before.json / after2.json.
+
+## JOB 2 — owner L2096 "Hồng tro ok, chỉ là cấm màu xám thôi" (ROOT-B3 brief, 0 gens)
+- Revert of BUILDFIX3 @facd9d01 rename: palettes_season.json + palettes3/make_live_L1726.py reverse-applied → palettes_season.json byte-identical to facd9d01^ ('ash rose', same hex, 17 thu mains: c02 c26 m10 m18 s09 s15 s20 s23 s29 s33 s36 s43 s50 s52 s55 s60 s65). No built prompt file carried the rename (grep).
+- check_store GREY_RX (B19): 'ash' / 'ashen' / 'ash-…' removed; only grey / gray colour words banned (hair + negated clauses still skipped). No other gate had an ash ban (grep all .py).
+- Rule B19 updated via rule.py set (quotes L2096; ART_RULES + _HISTORY).
+- LUẬT SỬA CẢ NHÓM grep 'mauve rose' left: only names that pre-date facd9d01 (c18 palettes3 / c_rank_colours / golden_low c18 / nonconsort / L761 / INDEX + old reports) — not part of the rename, left as they are.
+| check | before (mauve) | after (ash) |
+|---|---|---|
+| 17 persons × t1–t8 × 5 seasons a18, real gate | thu LEN only: t7 s33 s36 s60, t8 s33 s36 s60 | thu LEN only: t7 2, t8 3 (shorter word); 0 grey FAIL, 0 other FAIL |
+| check_store --self | old 3 PROOF MISMATCH | same |
+| keep_check --all | 1051 PASS | 1051 PASS |
+| person_gate --self | PASS | PASS |
