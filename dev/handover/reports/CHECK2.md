@@ -19,3 +19,20 @@ STATUS: depth 8 (limit 8), START_CTX ~3 %; roll over at ~28 %, ceiling 60 %. At 
 - keep_check --sidecar PASS ×3 (A38). check_store --scope mama --age a18: nhất PASS. tam/nhị FAIL S01+S32 only = identical to their bases (test3_tm1, test5_nhi_g43), accepted by the Foreman. No "jade pendant" left.
 - Old settings (ledger): gpt-2-6 1024x2304 2k seed 7172, ref s7IPw0Ll8e, 135 cr. Drafts = the same at low 1k, 55 cr (K29).
 - Sent GEN1 the draft job directly; copied the Foreman.
+
+## Job 3 — DESIGN22 c609040 G51 correction (owner L1657, ART_RULES G51 L1664) — PASS with 2 notes (04:20Z)
+Word diffs vs the previous PASS texts. For each tier the sash words are back to the original, plus the one held-in clause where it was missing:
+- t4 COMOIk→COMOIl (9994 ch): "a flowered brocade" → "an embroidered silk" sash.
+- t5 COMOIj→COMOIk (9996): "blush flowered" → "broad gold" girdle (= the original words, per L1657 "đừng có đổi"; this undoes the L1656 blush).
+- t6 COMOIl→COMOIm (9971): drop "flowered brocade"; + "the sash tied over the outer robe holds it in at the waist;". A38 cut "her own colour stays clearly the main robe colour,".
+- t7 v8k→v8l (9994): drop "flowered brocade"; + the same clause. A38 "robe with slippers visible" → "robe" ("only slipper toe tips peeking under the hem" stays).
+- t8 v10i→v10j (10000): drop "flowered brocade"; "Pose: weight on one leg," restored.
+- t3 dapung4 v10: unchanged; it already has "WRAP robe HELD IN by the sash" and no brocade. No "flowered brocade" is left in t4–t8.
+Gates:
+- check_store tpN a22 PASS ×5. The t6/t7 OUT1 WARN was already on the old texts.
+- keep --sidecar PASS ×5.
+- Store-mode FAILs are the same as before, except t6 NEW [0.56] "her own colour stays clearly the main robe colour, much less yellow…". The cut half is covered by the COLOUR RULE ("robe, skirt, sleeves, cape and train are all clearly ice blue"), and "much less yellow…" stays, so I accept it.
+NOTES for the Foreman:
+- (1) The t5 Phi girdle is gold again. L1657 says keep the original form; L1656 said the gold girdle is ugly. The newer owner word wins, but this is worth showing her on the OLD|NEW sheet.
+- (2) The t6 colour-clause cut is the only meaningful trim (A38 allow line present).
+No GEN1 release sent (not asked for job 3).
