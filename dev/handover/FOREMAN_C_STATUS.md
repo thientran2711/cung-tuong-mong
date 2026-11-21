@@ -1193,3 +1193,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
   (2) df-props: cup of water (splash), teacup (tea splash), ink fan (ink spray), gift box held in hands (generic), son phấn box;
   (3) df-npc-hand: an NPC's hand coming at the screen (for «Né»), 2 poses.
   When on CDN → send paths to the worker + MAIN 90. Priority: after the owner-driven Hán ladder / maid fabric work in her chat.
+#22 ~07:22Z: MAIDFIX2 test17_L1785 8f793bb (smile, bow+tails one colour, clean edges, nhất same tone) → VE2 JOB K 6×135 = 810. Next Lượt 1791.
