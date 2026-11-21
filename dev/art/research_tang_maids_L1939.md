@@ -47,3 +47,36 @@ HADUONG2, 21/11. Nguồn ở cuối. Chưa vẽ gì; chờ chủ chọn phương
 - Luật phục sắc / gian sắc 12 phá: 新唐书·车服志, 旧唐书·舆服志 (qua rongbaozhai.cn, finance.sina.cn 2024-04-06) · Thẩm Tòng Văn «中国古代服饰研究» (sina 2015).
 - Vải nhuộm giáp hiệt: en.chinaculture.org/classics/2008-01/15/content_126664.htm.
 - Lưu ý: nhiều nguồn là bài phổ biến tiếng Trung; chi tiết cần đối chiếu báo cáo khảo cổ trước khi chốt.
+
+---
+# Phần 2 (owner L1940): bậc càng cao vải càng DÀY/SANG? — vải theo bậc thời Đường
+## Kết luận ngắn
+- **Đúng một nửa.** Bậc cao mặc vải **dệt dày, hoa to, nhiều màu, nhiều vàng**: lăng hoa đoàn lớn (大科绫), cẩm (锦, gấm dệt nhiều màu), thêu kim tuyến cuộn (蹙金绣). Bậc thấp mặc vải trơn, hoa nhỏ.
+- **Nhưng sa/la mỏng KHÔNG phải vải rẻ**: la (罗, sa dệt xoắn) là vải quý — luật cấm thứ dân, người ngoài lưu mặc **lăng, la, hộc (縠)**. Quan tam phẩm trở lên mặc "đại khoa trù lăng và la", ngũ phẩm "tiểu khoa trù lăng và la", lục phẩm trở xuống chỉ "ti bố, tạp tiểu lăng" (lệnh Vũ Đức 4 năm 621; Trinh Quán 5 năm 631, Cựu Đường thư · Dư phục chí).
+- **Sa mỏng dùng khi nào**: mùa xuân–hạ, làm **lớp NGOÀI CÙNG** (đại tụ sam 大袖衫 bằng sa/la, phi bạch) phủ lên váy + áo nhu ĐỤC bên trong; thịnh hành giữa–cuối Đường ở phụ nữ quý tộc (tranh Chu Phưởng). Mùa thu–đông đổi sang áo kép (夹衫, 袄), áo bông, **cẩm bối tử (锦背子)**, váy kép → dày.
+- **Người hầu** dùng thi (絁), quyên (绢), vải bố — đục, không sa la (trừ phi bạch của hầu cận cao, nay chủ đã bỏ cho cung nữ, L1933).
+- Lễ phục nội mệnh phụ: **điền thoa lễ y (钿钗礼衣)** — số "điền" (hoa cài vàng khảm) trên tóc theo phẩm: nhất phẩm 9, nhị 8, tam 7, tứ 6, ngũ 5 → luật trang sức tóc theo bậc có căn cứ. Hoàng hậu: huy y (袆衣) xanh thẫm thêu 12 hàng chim trĩ; cúc y (鞠衣) vàng bằng la.
+- **Gợi ý cho game**: thân áo + váy LUÔN ĐỤC ở mọi bậc; "giàu hơn" = vải dày hơn + hoa dệt to hơn + nhiều vàng hơn; sa mỏng chỉ là lớp khoác ngoài mùa hạ của phi tần (độ dày lớp sa cũng tăng theo bậc: sa mỏng → la hoa → la thêu vàng). Mùa đông mọi bậc mặc áo kép.
+
+## Bảng vải theo bậc (đối chiếu phẩm nội cung Đường, mang tính đề xuất)
+| Bậc game | ≈ phẩm Đường | Thân áo / váy (đục) | Lớp ngoài mùa hạ | Mùa đông | Trang trí |
+|---|---|---|---|---|---|
+| Thô sử | người hầu | vải bố / thi trơn | không | áo kép vải | không |
+| Tam đẳng | người hầu | quyên trơn | không | áo kép quyên | viền màu |
+| Nhị đẳng | người hầu cận | quyên + bán tý quyên | không | áo kép + bán tý | thêu nhỏ ở viền |
+| Nhất đẳng | cung nữ trưởng | tạp tiểu lăng (lăng hoa nhỏ) + bán tý cẩm nhỏ | không | áo kép lăng | đai ngực thêu |
+| t1 Đáp ứng | ~thất–bát phẩm (ngự nữ, thái nữ) | ti bố / tạp tiểu lăng | sa trơn mỏng (tùy chọn) | áo kép lăng nhỏ | thêu chỉ tơ ở đai, viền |
+| t2 Thường tại | ~lục phẩm (bảo lâm) | tiểu lăng hoa nhỏ | sa trơn | áo kép | như t1, thêm ít |
+| t3 Quý nhân | ~ngũ phẩm (tài nhân) | tiểu khoa lăng (đoàn hoa nhỏ) | la trơn | áo kép lăng | 5 điền |
+| t4 Tần | ~tứ–tam phẩm (mỹ nhân, tiệp dư) | đại khoa lăng (đoàn hoa lớn) | la hoa | áo kép + cẩm bối tử | 6–7 điền, hoa lớn |
+| t5 Phi | ~nhị phẩm (cửu tần) | đại khoa lăng + viền cẩm | la hoa thêu | cẩm bối tử | 8 điền, thêu vàng |
+| t6 Quý phi | nhất phẩm (tứ phi) | cẩm nhiều màu | la thêu kim | áo cẩm, lót bông | 9 điền, xúc kim tú |
+| t7 Hoàng quý phi | nhất phẩm cao nhất | cẩm dày + xúc kim tú | la thêu kim dày | cẩm + lông | 9 điền +, kim nhiều |
+| t8 Hoàng hậu | hoàng hậu | cẩm/lăng đẹp nhất; lễ: huy y | la thêu kim | cẩm, lông | 12 điền (lễ), huy y |
+Ghi chú: tên bậc của game là kiểu Thanh; cột phẩm Đường chỉ là đối chiếu gần đúng.
+
+## Nguồn phần 2
+- 旧唐书·舆服志 (Vũ Đức 4, Trinh Quán 4–5) qua zhuanlan.zhihu.com/p/680968812 · baike «唐代冠服制度» · 163.com/dy/article/GO94G9ID0552DWVT.html.
+- Điền thoa lễ y / huy y / cúc y: 唐令拾遗 衣服令 (m.douban.com/book/review/10129184) · shidianguji.com/mid-page/7427223698081595442 · baike «钿钗礼衣».
+- Mùa / độ dày, đại tụ sam sa la, áo kép, cẩm bối tử: zhuanlan.zhihu.com/p/1962492952984127272 · news.qq.com/rain/a/20220810A06AGD00 · baike «唐代服饰».
+- Cấm thứ dân mặc lăng/la/hộc: 新唐书·车服志 (Huyền Tông).
