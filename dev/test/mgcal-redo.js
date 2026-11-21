@@ -13,7 +13,8 @@ for(const [w,h,dev] of [[755,1000,'fold'],[1180,820,'ipad']]){const p=await b.ne
   const btn=k=>document.querySelector(`[data-mgcal-k="${k}"]`);const red=k=>{const e=btn(k);return !!e&&!e.classList.contains('alt')};
   const seq=(document.getElementById('mgcal-seq')||{}).textContent||"";
   return {redoK,after,redRedo:redoK.filter(k=>k!==after).every(red),afterWhite:!red(after),othersWhite:ks.filter(k=>!R[k]).every(k=>!red(k)),
-   n:redoK.length,small:(btn(redoK[1])||{}).textContent||"",seq,hdr:(kg82Box().querySelector(".kpst")||{}).textContent||""}});
+   n:redoK.length,code:mgCalCode(),small:(btn(redoK[1])||{}).textContent||"",seq,hdr:(kg82Box().querySelector(".kpst")||{}).textContent||""}});
+ ok(/\bdauho:/.test(r.code)&&!/\b(ban|mua|huong|td_dung|chai|hoadien|den|banh):/.test(r.code),dev+' «Mã kết quả» holds only tries taken after the fix',r.code);
  ok(r.n===9,dev+' 9 fixed games listed in BAL.ag.mg2.cal.redo (dauho-lv5 adds ban)',r.redoK);
  ok(r.redRedo,dev+' every fixed game tried BEFORE its fix: red button',r.small);
  ok(r.afterWhite&&r.othersWhite,dev+' tried after the fix / never fixed: white',{after:r.after});
