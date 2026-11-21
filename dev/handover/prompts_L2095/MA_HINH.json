@@ -87,9 +87,14 @@
  "M2150-01": "M2150-01_s62_t1_thu.txt (bộ đủ t1 Đáp ứng: vân kiên + khuy cổ, chỉ tơ trơn, nơ nhỏ, hoa ngực tự nhiên)",
  "M2150-02": "M2150-02_s62_t2_thu.txt (bộ đủ t2 Thường tại: vân kiên viền chỉ loang, nơ hai vòng, 1 đôi bướm)",
  "M2150-03": "M2150-03_s62_t3_thu.txt (bộ đủ t3 Quý nhân: vân kiên thêu nhẹ chỉ loang, nơ đai lụa, vài đôi bướm)",
- "M2150-04": "M2150-04_s64_t4_thu.txt (bộ đủ t4 Tần (người s64, từ M2144-01): vân kiên mềm lưới ngọc, chỉ loang + viền bạc, 1 đôi nhạn)",
- "M2150-05": "M2150-05_s62_t5_thu.txt (bộ đủ t5 Phi: vân kiên 2 lớp lưới ngọc tua vàng, chỉ loang + bạc, 3 nhạn)",
- "M2150-06": "M2150-06_s62_t6_thu.txt (bộ đủ t6 Quý phi: chỉ vàng khắp áo + ngọc hạt, 3 nhạn + 1 hạc trắng, áo trong thêu nhẹ, vân kiên 1/3 trên bắp tay)",
- "M2150-07": "M2150-07_s62_t7_thu.txt (bộ đủ t7 Hoàng quý phi: 2 phượng nhỏ (M2148-01), chỉ vàng + tơ ngũ sắc cho phượng)",
- "M2150-08": "M2150-08_s62_t8_thu.txt (bộ đủ t8 Hoàng hậu: 2 phượng lớn (M2148-02), chỉ vàng + kim tuyến dẹt + chỉ lông công cho phượng)"
+ "M2150-04": "M2150-04_s64_t4_thu.txt (bộ đủ t4 Tần (người s64, từ M2144-01): vân kiên mềm lưới ngọc, chỉ loang + viền bạc, 1 đôi nhạn) (cũ → M2163-01)",
+ "M2150-05": "M2150-05_s62_t5_thu.txt (bộ đủ t5 Phi: vân kiên 2 lớp lưới ngọc tua vàng, chỉ loang + bạc, 3 nhạn) (cũ → M2163-02)",
+ "M2150-06": "M2150-06_s62_t6_thu.txt (bộ đủ t6 Quý phi: chỉ vàng khắp áo + ngọc hạt, 3 nhạn + 1 hạc trắng, áo trong thêu nhẹ, vân kiên 1/3 trên bắp tay) (cũ → M2163-03)",
+ "M2150-07": "M2150-07_s62_t7_thu.txt (bộ đủ t7 Hoàng quý phi: 2 phượng nhỏ (M2148-01), chỉ vàng + tơ ngũ sắc cho phượng) (cũ → M2163-04)",
+ "M2150-08": "M2150-08_s62_t8_thu.txt (bộ đủ t8 Hoàng hậu: 2 phượng lớn (M2148-02), chỉ vàng + kim tuyến dẹt + chỉ lông công cho phượng) (cũ → M2163-05)",
+ "M2163-01": "M2163-01_s64_t4_thu.txt (sửa M2150-04: tà chạm đất, đuôi rất ngắn; câu lụa bay bổng)",
+ "M2163-02": "M2163-02_s62_t5_thu.txt (sửa M2150-05: tà chạm đất, đuôi ngắn hơn QP; câu lụa bay bổng)",
+ "M2163-03": "M2163-03_s62_t6_thu.txt (sửa M2150-06: vân kiên rủ nhẹ không nặng, lụa nhẹ, đuôi tà dài hơn Phi)",
+ "M2163-04": "M2163-04_s62_t7_thu.txt (sửa M2150-07: tay áo bay nhẹ chạm đất, lụa nhẹ, đuôi dài hơn QP)",
+ "M2163-05": "M2163-05_s62_t8_thu.txt (sửa M2150-08: khuy cổ vàng rõ, vân kiên tối đa 2 tầng, lụa nhẹ, đuôi dài nhất)"
 }
