@@ -866,3 +866,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | SG-CARD r3 (opus; successor of r2 CCuc9zLt; + kit-opt-sg 64b61d37 merge + j34 → BAL) | review/sg-card (from 587ec407); reports/sg-card.md | FOREMAN D #16 | session_01964izEfJv1yRsyJaCGF1fH | RUNNING | 21/11 12:20Z |
 | REVIEW coop-pool-face (opus BIG co-op) | review/coop-pool-face-rv; reports/review-coop-pool-face.md | FOREMAN D #16 | session_01964izF6yWRxrNN3RCvPXFx | RUNNING | 21/11 12:21Z |
 | rv-kit-focus r5 | PASS | review/kit-focus-rv5 f6d0af801ed507b37395d57c54ac12e55259dc36 | quickcheck+coop-e2e 94/94 |
+| rv-mg-intro-2 re-check | PASS | review/mg-intro-2-rv da3aa72d2f8f72167d25025ad6c7cc08476154f1 | mg-intro-2 ok, mg-ui-rest = LIVE, quickcheck ok |
