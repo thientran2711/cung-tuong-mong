@@ -6,7 +6,7 @@
      the same .kpidt text slot the card already uses.
    Pictures: img/origin-wide-bd.webp (16:9) and img/bg-origin-bd.webp (3:4), CDN. Missing kit part: emblem img/kit/origin-bd.webp (KIT REQUEST). */
 /* Bắc Địch is a COUNTRY BRANCH of the hòa thân origin nc (owner OD:L1213–L1216; j1 ORIGIN_BR), never a 10th origin: no roulette card of its own */
-ORIGIN_BR.bd={par:"nc",k:"bd",land:"Bắc Địch",n:"Công chúa Bắc Địch hòa thân",r:2,o:BAL.orig.bd.o,hh:0,th:BAL.orig.bd.th,t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."};
+ORIGIN_BR.bd={par:"nc",k:"bd",land:"Bắc Địch",n:"Công chúa Bắc Địch hòa thân",r:2,t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."};
 
 /* v1 story slot (every origin needs one: the chapter line j67 lives in QUEST67/ARC67 below) */
 STORY.bd={t:"Hòa thân Bắc Địch",n:3,goal:"Ngươi là tờ hòa ước còn sống. Giữ cho hai nước yên, và giữ cho mình khỏi bị coi là con tin.",

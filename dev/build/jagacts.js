@@ -54,12 +54,12 @@ agRunReg("cx:ally",(v,t)=>{if(!t||(v.bac||0)<BAL.ag.cx.ally.bac)return"";return 
 
 /* Vẽ chân dung tặng Thái hậu (j2: Họa ≥ 3, the same cost / odds / gain) and Nhún nhường (j9: before someone who resents her) */
 agReg("consort","more",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
- if(!S.thDead&&(v.arts&&v.arts.hoa||0)>=X.portrait.hoa&&(!need||need==="th")&&agcCan(v,X.portrait.c)){let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.portrait.o+aw*X.portrait.k);
+ if(!S.thDead&&(v.arts&&v.arts.hoa||0)>=X.portrait.hoa&&(!need||need==="th")&&agcCan(v,X.portrait.c)){const o=odA(v,X.portrait.o+artOE(v,"hoa"));
   const u=agcU(v,N,o,{th:X.portrait.w.th},X.portrait.c,"art",{th:-X.portrait.l.th});if(u>0)O.push({k:"cx:portrait",t:null,u,tag:"art",act:"vẽ chân dung dâng Thái hậu",at:kh=>{const k=agThAt(kh);return k==="tn"?k:null}})}
  if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=X.humble.oan);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
   const u=agcU(v,N,100,{safe:X.humble.g},X.humble.c,"help");if(t&&u>0)O.push({k:"cx:humble",t,u,tag:"help",act:"sang nhún nhường",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  return O});
-agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.o+aw*X.k);const ok=agTry(o);if(!ok&&agSoft(o))return agSoftTxt(v,"",X.c);/* soft: rolled before paying, only its Sức share (j63 oddsSoftCost) */agcPay(v,X.c);if(ok){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
+agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";const o=odA(v,X.o+artOE(v,"hoa"));const ok=agTry(o);if(!ok&&agSoft(o))return agSoftTxt(v,"",X.c);/* soft: rolled before paying, only its Sức share (j63 oddsSoftCost) */agcPay(v,X.c);if(ok){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
 agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
 /* ---------------- 2. HOÀNG HẬU: the player-as-Empress buttons (empAct: Xử tội / Tịch thu / Ban thưởng / Ân xá / Khất bổng lộc) ---------------- */
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */

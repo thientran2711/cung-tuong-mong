@@ -146,7 +146,7 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
  step("pass",{n:"Làm giả yêu bài xuất cung",t:"Một thái giám Nội vụ phủ nhận khắc yêu bài, giá không rẻ.",art:RT_ART.lo,c:{...BAL.route.pass},o:od(BAL.odb.jroute.odO_5+S.tamco/3+rtDf().o),k:BAL.route.k.step_pass,x:"có yêu bài xuất cung",lx:"mất bạc · tên thái giám ôm bạc biến mất · Lời ra tiếng vào +12",go:()=>{P.pass=1},fail:()=>{rtHeat(12)}});
  if(P.maid)step("cloth",{n:"May y phục cung nữ",t:"Cung nữ tâm phúc lén may một bộ áo xanh như của nàng.",art:RT_ART.tc,c:{...BAL.route.cloth},k:BAL.route.k.step_cloth,x:"có y phục cung nữ",go:()=>{P.cloth=1}});
  const ty=T.tt&&m&&m.rw==="thái y"&&T.tt.st>=3,doc=!!S.doctor;
- step("drug",{n:"Xin thuốc giả chết",t:"Một bài thuốc làm mạch ngừng nửa ngày. Chỉ thái y mới có.",art:RT_ART.lo,c:{bac:ty?-20:-100},o:ty?od(BAL.odb.jroute.odO_6):od(BAL.odb.jroute.odO_7+(S.arts&&S.arts.y||0)*6),k:BAL.route.k.step_drug,need:[["thái y tâm phúc hoặc người ấy là thái y",ty||doc]],
+ step("drug",{n:"Xin thuốc giả chết",t:"Một bài thuốc làm mạch ngừng nửa ngày. Chỉ thái y mới có.",art:RT_ART.lo,c:{bac:ty?-20:-100},o:ty?od(BAL.odb.jroute.odO_6):od(BAL.odb.jroute.odO_7+artO(S,"y")),k:BAL.route.k.step_drug,need:[["thái y tâm phúc hoặc người ấy là thái y",ty||doc]],
   x:"có thuốc giả chết",lx:"thái y nghi ngờ · Lời ra tiếng vào +15",go:()=>{P.drug=1},fail:()=>{rtHeat(15)}});
  /* the night itself */
  const fire=T.fire===S.turn;const M=[

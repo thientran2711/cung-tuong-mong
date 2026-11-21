@@ -76,7 +76,7 @@ EVD.thb={place:()=>"tn",
   return `Bệnh Thái hậu trở nặng; Đức Thọ cung chia phiên hầu bệnh, hậu cung bớt thị tẩm, bãi yến.${N.length?` Vào hầu bệnh: ${nmList(N)}.`:""}`},
  tick(w){if(S.thDead||!S.thIll)w.t1=Math.min(w.t1,now()+1)},
  end(){return S.thDead?"":"Bệnh Thái hậu đã thuyên giảm; Đức Thọ cung thôi chia phiên."},
- card(w){const b=B().thb;if(!meCons())return info(w);const o=od(b.nurse.o[0]+((S.arts&&S.arts.y)||0)*b.nurse.o[1]);
+ card(w){const b=B().thb;if(!meCons())return info(w);const o=od(b.nurse.o[0]+artO(S,"y"));
   return Object.assign(info(w),{who:pTH(),opts:[{n:"Xin vào hầu bệnh",fx:{suc:-b.nurse.suc},x:`${word(o)} · thành: Thái hậu +${b.nurse.th} · hỏng: không được gì`,go:()=>{if(roll(o))apply({th:b.nurse.th})}},
    {n:"Chép kinh cầu an",fx:{suc:-b.pray.suc},x:`thành: Đức +${b.pray.duc}, Thái hậu +${b.pray.th}`,go:()=>apply({duc:b.pray.duc,th:b.pray.th})},
    {n:"Gửi thuốc bổ",fx:{bac:-b.med.bac},x:`thành: Thái hậu +${b.med.th}`,go:()=>apply({th:b.med.th})}]})},
@@ -243,7 +243,7 @@ EVD.benh={place:()=>"dtd",
   return `Hoàng thượng lâm bệnh nặng; hậu cung lặng như tờ, bãi yến, thôi thị tẩm.${N.length?` Được vào hầu thuốc: ${nmList(N)}.`:""}`},
  tick(w){if(!(S.emp&&S.emp.ill))w.t1=Math.min(w.t1,now()+1)},
  end(){return S.emp&&S.emp.ill?"Long thể đã đỡ phần nào; hậu cung dần trở lại.":"Long thể đã an; hậu cung trở lại như thường."},
- card(w){const b=B().benh;if(!meCons())return info(w);const ok=rkOf(S)>=b.force[0].rank;const o=od(b.nurse.o[0]+((S.arts&&S.arts.y)||0)*b.nurse.o[1]);
+ card(w){const b=B().benh;if(!meCons())return info(w);const ok=rkOf(S)>=b.force[0].rank;const o=od(b.nurse.o[0]+artO(S,"y"));
   const O=[];if(ok)O.push({n:"Xin vào hầu thuốc",fx:{suc:-b.nurse.suc},x:`${word(o)} · thành: Sủng +${b.nurse.sung}`,go:()=>{if(roll(o))apply({sung:b.nurse.sung})}});
   O.push({n:"Dâng sâm quý",fx:{bac:-b.gin.bac},x:`thành: Sủng +${b.gin.sung}`,go:()=>apply({sung:b.gin.sung})},{n:"Cầu phúc ở chùa",fx:{},x:`thành: Đức +${b.pray.duc}`,go:()=>apply({duc:b.pray.duc})});
   return Object.assign(info(w),{opts:O})},

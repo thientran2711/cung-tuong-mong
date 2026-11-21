@@ -15,7 +15,7 @@ function p3Ap(p,x){if(!x||!Object.keys(x).length)return;if(p===S)apply(x);else a
 function p3GhenAll(p,n,why){if(p===S)return ghenAll(n,why);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)ghenUp(v,d,why||`thấy ${p.name} nổi bật hơn người`,p)})}
 /* ---------------- the player cards, built once ---------------- */
 const P3C={
- dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
+ dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+artOE(p,"vu")),
   w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
  /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
@@ -26,7 +26,7 @@ const P3C={
   return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{},o:tmOdds(p,s),w:{bac:-pr},l:{...X.l},
    x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name}, tốn ${pr} bạc · bại: không mất bạc; người ấy có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
  anthai:p=>{const X=BAL.ag.par3.anthai;const x="tháng này nguy cơ sảy thai giảm một nửa";
-  return ((p.arts&&p.arts.y)||0)>=X.self.y?{n:"Tự bào chế thuốc an thai",t:p===S?"Ngươi tự sắc thuốc, không ai nhúng tay được.":"Tự sắc thuốc an thai.",c:{...X.self.c},o:100,w:{},x,go:()=>{p.anthai=1}}
+  return ((p.arts&&p.arts.y)||0)>=BAL.art.gate.yCure?{n:"Tự bào chế thuốc an thai",t:p===S?"Ngươi tự sắc thuốc, không ai nhúng tay được.":"Tự sắc thuốc an thai.",c:{...X.self.c},o:100,w:{},x,go:()=>{p.anthai=1}}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{...X.buy.c},o:100,w:{...X.buy.w},x,go:()=>{p.anthai=1}}},
  /* Kể tội {X} with the Thái hậu: odds from her evidence on X (evG) and her Thái hậu regard; X loses the teller's liking, one piece of evidence, Sủng */
  tell:(p,t)=>{const X=BAL.ag.par3.tell;if(!t)return{n:"Kể tội một phi tần",lock:true,t:"cần chứng cứ",o:0,w:{...X.w},x:"nàng bị phạt",l:{...X.l}};
@@ -207,7 +207,7 @@ agRunReg("cx3:facSell",v=>facOf(v)?p3FacRes(v,"facSell",sellOut(v)):"");
 agRunReg("cx3:facDiv",(v,l)=>{const g=l&&facOf(l);return g&&g!==facOf(v)?p3FacRes(v,"facDiv",divide(v,g)):""});
 Object.assign(window,{p3FacOn});
 /* ---------------- Uống thuốc thúc sinh (jkh): ONE builder for her deck card and an NPC (cx3:drug; was a flat roll BAL.preT.npcDrug) ---------------- */
-P3C.drug=p=>{const D=BAL.preT.drug;return{n:"Uống thuốc thúc sinh",t:"Bài thuốc giục sinh, cho đứa bé ra đời đúng ngày sổ Kính sự phòng ghi.",c:{bac:-D.bac},o:od(D.o+((p.arts&&p.arts.y)||0)*D.perY),w:{},l:{suc:-D.sucF},
+P3C.drug=p=>{const D=BAL.preT.drug;return{n:"Uống thuốc thúc sinh",t:"Bài thuốc giục sinh, cho đứa bé ra đời đúng ngày sổ Kính sự phòng ghi.",c:{bac:-D.bac},o:od(D.o+artO(p,"y")),w:{},l:{suc:-D.sucF},
  x:`tháng tới trở dạ, đúng ngày trong sổ · đứa bé thật ra sinh non, dễ yếu · hỏng: Sức -${D.sucF}`,dom:"Sức khỏe",go:()=>{p.khInd=1;p3Ap(p,{suc:-D.suc});khStat(p===S?"drug_me":"drug_npc")}}};
 function p3DrugOk(v){if(!v.preg||v.fake||v.khInd||v.out)return false;let o=0;try{o=khRecOff(v)}catch(e){}return o>=1&&v.preg>=9-o&&v.preg<=8}
 AGC3BTN.drug="Uống thuốc thúc sinh";AGC3ACT.drug="uống thuốc thúc sinh";
@@ -339,8 +339,8 @@ agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"
     return{h:`${v.name} ${gmSay(SAY[k][0],v,SAY[k][1],th&&th.name)}.`,line:d?`Ngươi quý nàng ${d>0?"+":""}${d}.`:r}}}))}
   return out}})();
 /* Đánh đàn chờ ngự giá (her garden pop-up jact PEND.adStroll; the old deck card): ONE card for her and an NPC consort in Ngự hoa viên */
-function qinCard(p){const X=BAL.ag.par3.qin;const me=p===S;const K=me&&S.emp.known&&S.emp.known.music;const tt=me&&has("trongtai")?X.tt:1;
- return{n:"Đánh đàn chờ ngự giá",c:{suc:-X.suc},o:odA(p,X.o+(p.tai||0)/X.taiD+((p.arts&&p.arts.cam)||0)*X.cam*tt+(K?X.like:0)+mm()),w:{sung:K?X.wLike:X.w},l:{sung:-X.l}}}
+function qinCard(p){const X=BAL.ag.par3.qin;const me=p===S;const K=me&&S.emp.known&&S.emp.known.music;
+ return{n:"Đánh đàn chờ ngự giá",c:{suc:-X.suc},o:odA(p,X.o+(p.tai||0)/X.taiD+artOE(p,"cam")+(K?X.like:0)+mm()),w:{sung:K?X.wLike:X.w},l:{sung:-X.l}}}
 AGC3BTN.qin="Đánh đàn chờ ngự giá";AGC3ACT.qin="đánh đàn chờ ngự giá ở Ngự hoa viên";
 agReg("consort","par3qin",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="sung"))return O;try{const X=BAL.ag.par3.qin;if(((v.arts&&v.arts.cam)||0)<X.minCam)return O;
  const x=p3O(v,"qin",qinCard(v),N,X.g,"art",()=>"vuon");if(x)O.push(x)}catch(e){agdErr("par3qin",e)}return O});

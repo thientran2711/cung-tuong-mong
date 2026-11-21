@@ -30,7 +30,7 @@ const AGC2={
  court:{act:"bàn chuyện triều chính với Hoàng thượng",tag:"scheme",at:"emp",ok:()=>has("chamchinh")},
  nurse:{act:"hầu thuốc Hoàng thượng",tag:"help",at:"emp",ok:()=>!!(S.emp&&S.emp.ill)},
  kidGreet:{act:"đưa con đến thỉnh an Hoàng thượng",tag:"greet",at:"emp",ok:v=>kidsOf(v).length>0},
- kidHeal:{act:"tự bốc thuốc chữa bệnh cho con",tag:"help",at:"self",ok:v=>(v.arts&&v.arts.y||0)>=BAL.ag.cx2.kidHeal.y&&!!ag2Sick(v,BAL.ag.cx2.kidHeal.hp)},
+ kidHeal:{act:"tự bốc thuốc chữa bệnh cho con",tag:"help",at:"self",ok:v=>(v.arts&&v.arts.y||0)>=BAL.art.gate.yCure&&!!ag2Sick(v,BAL.ag.cx2.kidHeal.hp)},
  kidMed:{act:"xin thuốc cho con ở Thái y viện",tag:"help",at:"tyv",ok:v=>!!ag2Sick(v,BAL.ag.cx2.kidMed.hp)},
  fert:{act:"xin bài thuốc dễ thụ thai",tag:"self",at:"tyv",ok:v=>!v.fert&&!v.preg&&!sonsOf(v).length},
  doctor:{act:"mời thái y tâm phúc",tag:"self",at:"tyv",ok:v=>!v.doctor},

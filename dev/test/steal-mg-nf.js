@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  if(!(await p.evaluate(()=>typeof nfOn==='function'&&typeof nfStep==='function'))){console.log("SKIP: no jnf in this build");await b.close();return}
  await p.evaluate(()=>{window.T={};
   /* his own visit (jvisit, from main) is not what these cases test: off (cap 0); night-final case 8 tests its order */T.vcap=BAL.visit.cap;BAL.visit.cap=0;
-  /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */BAL.nt.on=false;
+  /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */if(BAL.nt)BAL.nt.on=false;/* the ledger lands after night-final (review/night-ledger) */
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
@@ -28,10 +28,10 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  await p.evaluate(()=>{
   /* the flip at the end of tối picks A (forced); NPCs never attack on their own unless a case says so */
   T.sw=window.stealWant;
-  T.setup=()=>{const L=T.fresh();T.cu=T.cu||FAIRN.custom;FAIRN.custom=[0,0];T.cuA=T.cuA||(BAL.ag&&BAL.ag.emp&&BAL.ag.emp.custom);if(T.cuA)BAL.ag.emp.custom=[0,0];/* AG2 moved the custom weight to BAL.ag.emp.custom (ONE CORE); both off here *//* no mùng 1 / rằm custom night (j75): the flip must reach the tray */window.stealWant=()=>({u:0,p:0,mode:null});L.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null});S.sung=50;T.toEvening();used=0;T.ch="Thôi";T.opts=null;return L};
+  T.setup=()=>{const L=T.fresh();T.cuA=T.cuA||(BAL.ag&&BAL.ag.emp&&BAL.ag.emp.custom);if(T.cuA)BAL.ag.emp.custom=[0,0];/* AG2 moved the custom weight to BAL.ag.emp.custom (ONE CORE); both off here *//* no mùng 1 / rằm custom night (j75): the flip must reach the tray */window.stealWant=()=>({u:0,p:0,mode:null});L.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null});S.sung=50;T.toEvening();used=0;T.ch="Thôi";T.opts=null;return L};
   /* end tối with A forced as the flipped one (the real commit: realFlip → choice → resolve) */
   T.commitA=(A)=>{const un=T.only(A);try{T.endDay()}finally{un()}};
-  T.fin=()=>{window.stealWant=T.sw;if(T.cu)FAIRN.custom=T.cu;if(T.cuA)BAL.ag.emp.custom=T.cuA};
+  T.fin=()=>{window.stealWant=T.sw;if(T.cuA)BAL.ag.emp.custom=T.cuA};
  });
  const R={};const ok=(k,c,info)=>{R[k]={pass:!!c,info}};
  /* spy: every oSteal read INSIDE the one resolve (S.nfX st done, def not yet written), with the plain value read the same instant */
