@@ -24,6 +24,10 @@ J={ # base, new, [(old,new,reason)]
    ('double hollyhocks over the robe and skirt','double hollyhocks over the robe and skirt, never over the bands','G52'),
    ('a broad gold brocade girdle tied flat','a blush flowered brocade girdle tied flat','G51'),
    ('a SHORT round-pearl strand hangs in a short swag from the left capelet front to the right','a SHORT round-pearl strand swags ACROSS her chest, left capelet front to right','G49')]),
+   ('double hollyhocks over the robe and skirt','double hollyhocks over the robe and skirt'+B52,'G52'),
+   ('a broad gold brocade girdle tied flat','a broad gold flowered brocade girdle tied flat','G51'),
+   ('a SHORT round-pearl strand hangs in a short swag from the left capelet front to the right','a SHORT round-pearl strand swags ACROSS her chest, left capelet front to right','G49'),
+   (' Everyone beautiful at every age.','','A38')]),
  't6':('thu_comoi/s62_t6_THU_COMOIk.txt','thu_comoi/s62_t6_THU_COMOIl.txt',[
    ('cuffs and skirt-front medallions)','cuffs and skirt-front medallions), the body motifs never over these bands','G52'),
    ('a yellow sash and narrow','a yellow flowered brocade sash and narrow','G51'),
