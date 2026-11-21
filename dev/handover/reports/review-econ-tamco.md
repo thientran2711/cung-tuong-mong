@@ -109,3 +109,33 @@ Minor (non-blocking, the kit wraps the row): on the Fold the red «Bạc -86» s
 | bribe/block odds probe (reviewer script) | bribe ignores the shown odds — F2 |
 | econ-tamco-coop / coop-e2e / kit-ton-row / roadhp-unit / quickcheck | not re-run this round (FAIL already found; the worker reports 17 / 92/92 / 14 / PASS / 197 s). All of them run at the next round. |
 Fixer: ECON TAMCO #3 session_01964izCiU7bSoQZwWZBzj4B. Next round: final-merge the newest LIVE, then SẴN SÀNG KIỂM; the reviewer re-runs everything + the F2 probe.
+
+## RE-CHECK #3 21/11 — review/econ-tamco @ ea374de9c23eabe947b775cacece8127cb652067 (ECON TAMCO #4, on LIVE d31c8ec0)
+PRIORITY #1 CHECK ('aOdd|econRoadRolls|ECON_PRFZ|rcvMaidBribe'): main jrcv/jaudit/j29 receiver paths | review/econ-tamco only | claims ECON TAMCO #4 EeakvU1z.
+The reviewer final-merged LIVE twice (6e07f837, then d3fa26d3) → **review/econ-tamco-rv 7752aa5b** (pushed; index/sw conflicts only, rebuilt). Diff vs main = the branch's own 15 files (454+/26−). No LIVE hunk reverted.
+
+### VERDICT: FAIL (1 item). F2 + F3 FIXED.
+- **F2 fixed.** bribe/bribel (rcvMaidBribe + j29 stf2Bribe), xinhh/trinhhh (rcvJudge + fallback) read aOdd; musk/catswap/her-as-judge get no road (econRoadRolls). Reviewer probe: bribe frozen odds 0 → 0/120, 100 → 120/120 (was 4 vs 2); block 0 → 98/120. econ-tamco-scan PASS (11 her + 11 NPC; bribe TVD 1, xinhh 0.98; musk/catswap «roads no»).
+- **F3 fixed.** econ-tamco PASS 4/4 runs (both devices). The charges equal the card at the click: fail = Tốn only, success = + the shown price (−94). The price doubled after the card (188) is still charged at the shown 94.
+- spy `:15` fallback dropped (N3 done). Fold «Bạc / -94» wrap → KIT REQUEST (non-blocking).
+
+**F4 — the co-op land gate is not stable, and a guest's bạc went negative.** econ-tamco-coop.js on the final shas: run 1 (b1542e84) FAIL staging «no priced scheme this road can pay» (guest bạc 7, Tâm cơ 11); run 2 PASS 17; run 3 (7752aa5b) FAIL staging with **guest bạc −35, Tâm cơ 17** after her Tâm cơ-road step. The game blocks any choice that would take bạc below 0 (j19/j2 canPay), so −35 should not happen. Likely cause (to confirm): on the host her act charges the price/road FROZEN from her card (ECON_PRFZ / econRoadPay h.c) with no fresh can-pay check, while the host's copy of her bạc can be lower than her phone's.
+Fix:
+(a) Find what took her below 0. If it is a road/price charge, a road act whose frozen cost she can no longer pay on the host must stop with the usual «Thiếu bạc» (no partial charge), for her, the co-op guest and the NPC road.
+(b) Pin the coop test: stage the guest's bạc/Tâm cơ so a priced scheme is always reachable, and assert that no road step leaves her bạc or Tâm cơ < 0.
+(c) It must PASS 3 runs in a row.
+
+### Gates on 7752aa5b (LIVE d3fa26d3 merged), one at a time
+| gate | result |
+|---|---|
+| econ-tamco-scan | PASS 11+11 (on b1542e84) |
+| econ-tamco | PASS ×4 (3 on b1542e84, 1 on 7752aa5b) |
+| bribe/block probe | bribe 0/120 → 120/120 |
+| econ-tamco-coop | 1 PASS / 2 FAIL — F4 |
+| coop-e2e | 92/92 (b1542e84 and 7752aa5b) |
+| kit-ton-row | PASS 14 |
+| roadhp-unit | PASS |
+| quickcheck | PASS 192 s on 7752aa5b (215 s on b1542e84), core gates PASS, old save ok |
+| shots Fold + iPad | Tốn: không / Tâm cơ -5 / Bạc -50; Được: the price in red; no %, no overflow |
+Laws 1/2/3/4/7/9: OK on the code. F4 is a co-op «shown = charged / no negative bạc» question.
+Fixer: ECON TAMCO #4 session_01964izEeakvu1zSofrTWNJJ. Build on review/econ-tamco-rv 7752aa5b (or re-merge LIVE). Next round: econ-tamco-coop ×3 + coop-e2e + econ-tamco + quickcheck.
