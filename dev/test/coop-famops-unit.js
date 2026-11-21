@@ -5,8 +5,10 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820}});await serve(ctx);const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(process.argv[2]||'http://127.0.0.1:8744/index.html',{timeout:0,waitUntil:'domcontentloaded'});
  await p.waitForFunction(()=>typeof start==='function'&&window.COOPW&&COOPW.famApply&&typeof loLose==='function',null,{timeout:0});
+ await p.evaluate(()=>{document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});/* LIVE: the new life lands a moment after start() */
+ await p.waitForFunction(()=>typeof S==='object'&&S&&S.name,null,{timeout:60000});
  const R=await p.evaluate(()=>{const out=[];const ck=(n,ok,i)=>out.push([n,!!ok,i==null?"":JSON.stringify(i).slice(0,240)]);
-  document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();Q.length=0;const CW=COOPW;CW.seat="b";
+  Q.length=0;const CW=COOPW;CW.seat="b";
   const T=Object.keys(WD||{}).find(k=>WD[k]&&WD[k].sl==="tram")||Object.keys(IT).find(k=>/tram/.test(k));const P=Object.keys(IT).find(k=>k!==T&&loOk({k})&&ilDur({k})&&!(typeof wdItem==="function"&&wdItem({k})));
   const cnt=iu=>ilSlots(S).filter(e=>e.iu===iu).length;let n=9e6;const pc=k=>({k,iu:++n});const FA=o=>CW.famApply(o);
   const reset=()=>{S.inv=[];S.wd={tram:null,y:null};S.lost=[];Q.length=0;CW.famMiss=[]};
@@ -15,7 +17,13 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   reset();const a=pc(T),a2=pc(T);S.inv.push(a2);S.wd.tram=a;FA([{op:"rm",ci:0,k:T,iu:a.iu,how:"gone"}]);
   ck("1 rm by id finds the worn piece, the other of that kind stays",cnt(a.iu)===0&&cnt(a2.iu)===1&&!S.wd.tram,{w:S.wd.tram,inv:S.inv.map(e=>e.iu)});
   /* 2 rm of a piece that is not hers (id elsewhere): before = «any piece of that kind» was taken */
-  reset();const b1=pc(T);S.inv.push(b1);FA([{op:"rm",ci:0,k:T,iu:12345,how:"lost"}]);ck("2 rm with a foreign id moves nothing",cnt(b1.iu)===1&&CW.famMiss.length===1,CW.famMiss);
+  reset();const b0=pc(P),b1=pc(T);S.inv.push(b0,b1);FA([{op:"rm",ci:0,k:T,iu:12345,how:"lost"}]);ck("2 rm with an unknown id: another kind in that slot, nothing moves (never «any of that kind»)",cnt(b0.iu)===1&&cnt(b1.iu)===1&&CW.famMiss.length===1,CW.famMiss);
+  /* 2b her piece numbered on her seat, the host's copy numbered on the host: same slot, same kind = that piece; the host's id rides as hiu, his «ret» finds her case */
+  reset();const z1=pc(P);S.inv.push(z1);FA([{op:"rm",ci:0,k:P,iu:4444,how:"lost"}]);const cz=S.lost.find(c=>c.e&&c.e.iu===z1.iu);
+  const zr=FA([{op:"ret",k:P,iu:4444,e:{k:P,iu:4444}}]);ck("2b differing ids: taken by slot, case held, the host's ret (his id) brings HER piece home once",cz&&cz.e.hiu===4444&&cz.st==="done"&&cnt(z1.iu)===1&&S.inv.length===1&&zr.loud,{st:cz&&cz.st,inv:S.inv});
+  /* 2c the host's side of her case closed without a return (seized as tang vật): «gone» closes hers, nothing comes home */
+  reset();const y1=pc(P);S.inv.push(y1);FA([{op:"rm",ci:0,k:P,iu:y1.iu,how:"lost"}]);const cy=S.lost.find(c=>c.e&&c.e.iu===y1.iu);FA([{op:"gone",k:P,iu:y1.iu,how:"matdau"}]);
+  ck("2c gone: her case closes «mất dấu», no copy",cy&&cy.st==="done"&&cy.how==="matdau"&&cnt(y1.iu)===0,{st:cy&&cy.st,how:cy&&cy.how});
   /* 3 rm with no id (old room): only the same slot of the same kind */
   reset();const c1=pc(P),c2=pc(T);S.inv.push(c1,c2);FA([{op:"rm",ci:0,k:T,how:"gone"}]);ck("3 rm without id: a different kind in that slot is not taken",cnt(c1.iu)===1&&cnt(c2.iu)===1);
   /* 4 rm lost: her case is HELD by the friend (the piece is in his chest on the other seat), never «lost» (= counted twice) */

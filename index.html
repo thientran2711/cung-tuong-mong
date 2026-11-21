@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"16823a5b","t":"2026-11-21T11:46Z","c":"E42r review: coop-lost-scan COOP_SKEW + friend-entry holder check; new lost-guest-probe (guest seat lost case: Nội vụ phủ and back, Kỳ ngộ …","b":"c69df9e1ceb3","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
+window.CTM_BI={"s":"c3d3020e+","t":"2026-11-21T14:35Z","c":"coop-lost-scan: COOP_FAM steal up to 4 tries (LIVE theft odds are hard: odds / caught / maid begs), so the 76-wk scan has friend-act traffic","b":"7ca61b2f8766","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -47702,18 +47702,23 @@ function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
    way (lostReturn hook below). Before: «ret» pushed a copy of the case piece whatever was already home, «rm» took another piece of the kind
    (coop-dresscode-scan: guest trâm 2 copies / gone; a đàn case closed with the piece nowhere), and a failed loLose spliced her LAST piece. */
 function famRet(e){const x=J(e);delete x.ci;delete x.lo;delete x.by;delete x.gh;delete x.h;delete x.w;return Object.assign({op:"ret",k:e.k},e.iu?{iu:e.iu}:{},{e:x})}
-function famWhere(iu){if(!iu)return null;const L=typeof ilSlots==="function"?ilSlots(S):(S.inv||[]);const e=L.find(x=>x&&x.iu===iu);if(e)return e;
- try{const B=S.il&&S.il.box;const b=B&&B.find(x=>x&&x.e&&x.e.iu===iu);if(b)return b.e}catch(z){}return null}
-function famItem(o){S.inv=S.inv||[];if(o.iu){const e=S.inv.find(x=>x&&x.iu===o.iu);if(e)return e;const w=S.wd;
-  if(w&&typeof w==="object")for(const sl of ["tram","y"]){const x=w[sl];if(x&&typeof x==="object"&&x.iu===o.iu&&x.from!=="base")return x}return null}
- const e=S.inv[o.ci];return e&&e.k===o.k&&!e.h&&!(o.iu&&e.iu)?e:null}/* an op id the host gave a piece her census had not numbered yet: the same slot, same kind, no id of its own (the id is taken on below) */
+/* hiu = the id the HOST's copy of her piece carries when it differs from hers (her entry was numbered on the host before her own census
+   numbered the piece): both ids name the one piece */
+const famIs=(x,iu)=>!!x&&!!iu&&(x.iu===iu||x.hiu===iu);
+function famWhere(iu){if(!iu)return null;const L=typeof ilSlots==="function"?ilSlots(S):(S.inv||[]);const e=L.find(x=>famIs(x,iu));if(e)return e;
+ try{const B=S.il&&S.il.box;const b=B&&B.find(x=>x&&famIs(x.e,iu));if(b)return b.e}catch(z){}return null}
+function famItem(o){S.inv=S.inv||[];if(o.iu){const e=S.inv.find(x=>famIs(x,o.iu));if(e)return e;const w=S.wd;
+  if(w&&typeof w==="object")for(const sl of ["tram","y"]){const x=w[sl];if(x&&typeof x==="object"&&famIs(x,o.iu)&&x.from!=="base")return x}
+  if(famWhere(o.iu))return null}
+ /* no piece of hers carries that id: the same slot, the same kind (never «any piece of that kind»); a differing id of hers is kept, the host's rides as hiu */
+ const e=S.inv[o.ci];if(!e||e.k!==o.k||e.h)return null;if(o.iu&&e.iu&&e.iu!==o.iu)e.hiu=o.iu;return e}/* an op id the host gave a piece her census had not numbered yet: the same slot, same kind, no id of its own (the id is taken on below) */
 /* the piece leaves her (chest or worn slot); true when it was there */
 function famOff(e){const i=(S.inv||[]).indexOf(e);if(i>=0){S.inv.splice(i,1);return true}const w=S.wd;
  if(w&&typeof w==="object")for(const sl of ["tram","y"])if(w[sl]===e){const k=sl==="y"&&typeof wdDefault==="function"?wdDefault(S,"y"):null;w[sl]=k?{k,from:"base"}:null;try{if(typeof wdOf==="function")wdOf(S)}catch(z){}return true}
  return false}
 function famMiss(o,why){const iu=o.iu||(o.e&&o.e.iu)||0,k=o.k||(o.e&&o.e.k);(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k,iu,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,k,iu,why)}
 /* her open case of that piece: by id; an op with no id (old room): the case of that kind the friend holds */
-function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));if(o.iu){const c=L.find(c=>c.e.iu===o.iu);if(c)return c}
+function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));if(o.iu){const c=L.find(c=>famIs(c.e,o.iu));if(c)return c}
  return o.iu&&L.some(c=>c.e.iu)?L.find(c=>!c.e.iu&&c.k===o.k&&(c.by===fp()||c.at===fp()))||null:L.find(c=>c.k===o.k&&(c.by===fp()||c.at===fp()))||null}
 /* the piece is back with her: close the case through the ONE owner change (jlost lostReturn), the holder's copy on this seat leaves.
    Returns the piece put in her chest, or null (already hers / nothing real to put). */
@@ -47758,10 +47763,15 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
  /* p2 B4: a thing given to her in the host's world (a contest prize, a bestowal): into her chest, told */
  for(const o of ops)if(o.op==="add"&&o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){/* E44: her own lost piece coming home through an NPC (a found case on the host) is a return, not a gift */
   if(o.e.iu){if(famWhere(o.e.iu)){famMiss(o,"add: already hers");continue}const c=famCase({iu:o.e.iu,k:o.e.k});
-   if(c&&c.e.iu===o.e.iu){const x=famBack({op:"ret",k:o.e.k,iu:o.e.iu,e:o.e});if(x){loud=1;out.push(`${esc(typeof iname==="function"?iname(x):x.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`)}continue}}
+   if(c&&famIs(c.e,o.e.iu)){const x=famBack({op:"ret",k:o.e.k,iu:o.e.iu,e:o.e});if(x){loud=1;out.push(`${esc(typeof iname==="function"?iname(x):x.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`)}continue}}
   const x=Object.assign({},o.e);delete x.ci;S.inv.push(x);loud=1;out.push(`<span class="g">Được ban ${esc(typeof iname==="function"?iname(x):x.k)}${o.why?` (${esc(o.why)})`:""}.</span>`)}
  for(const o of ops)if(o.op==="ret"){/* her thất lạc case closes: the thing is back in her chest, quietly (as when an NPC returns it); E44: by identity, once */
   const e=famBack(o);if(e){out.push(`${esc(typeof iname==="function"?iname(e):e.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`);loud=1}}
+ for(const o of ops)if(o.op==="gone"){/* E44 r2: the host's side of her case closed without a return (seized, lost track of): hers closes too, quietly */
+  const c=famCase(o);if(!c){famMiss(o,"gone: no open case");continue}let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
+  if(x&&x.h===S){famMiss(o,"gone: the piece is with her");continue}
+  if(x){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
+  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau"}
  for(const o of ops){if(o.op==="preg0"){if(S.preg){S.preg=0;S.hidden=false;loud=1;out.push(`<span class="r">Ngươi sảy thai.</span> Thái y nói trong thuốc có xạ hương.`)}continue}
   const kd=o.n&&kidBy(o.n);if(!kd)continue;loud=1;
   if(o.op==="kdie"){try{out.push(kidDie(kd,o.why||"mất sớm",true))}catch(x){kd.alive=false}continue}
@@ -47774,7 +47784,17 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    out.push(`<span class="r">${esc(kd.name)} gặp chuyện</span>${L.length?` (${L.join(", ")})`:""}.`)}}
  return {out,loud}}
 
-CW.famApply=famApply;CW.famRet=famRet;/* test hooks (dev/test/coop-famops-unit.js) */
+/* E44 (coop-famops r2, COOP_SWAP scan: a guest's xạ hương the host held was seized from his chest as tang vật — his side of her case
+   closed «mất dấu», hers stayed «thất lạc»: the piece in the host's evidence box AND in her open case = 2 places). The host's copy of a case
+   OWNED by the friend is the world's truth: when it closes on the host without a return (returns ride as «ret», lostReturn hook above),
+   her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
+function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
+ const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;const was=st[c.id]===1;st[c.id]=2;
+  if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
+ if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -48065,14 +48085,14 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
  if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */
- try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
+ try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}famSweep();if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  if(eW()&&!CW.allow&&!CW.allowN&&CW.eNext)return CW.eNext();
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;bend();return}
  /* buổi tối: "Sẵn sàng" only marks her ready; the night + week end (endTurn) runs on the host's `go` for both (nightReady below) */
  if(CW.p2&&!CW.allowN&&(S.buoi||0)>=LASTB()){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;nightReady();return}
- const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}return r}})();
+ const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}famSweep();return r}})();
 /* #next was wired to the bare nextBuoi in j6 (before any wrapper): in co-op route the button through the wrapped one */
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
 /* NPC whereabouts are the host's: the guest's own placement is replaced by the host's for this buổi; the host re-sends whenever it re-places */
@@ -89739,7 +89759,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c69df9e1ceb3";window.CTM_BUILD=BUILD;
+const BUILD="7ca61b2f8766";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
