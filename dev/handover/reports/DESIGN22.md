@@ -36,3 +36,6 @@ Tried and FAILED gates (not used): cutting ", never stiff, flat or board-like" (
 - G51 wording on t2/t3 has no "brocade" word; the t2 picture got it anyway. If the t3 draft shows a plain girdle, use "a wide soft blush flowered brocade girdle".
 - G52 on t7/t8? (owner).
 - t1 current per brief = v7 (a v8 exists from LADDER2 step 9; not used).
+
+## Final
+CHECK1 job 21: all 8 PASS (t4 COMOIk, t5 COMOIj, t6 COMOIl re-checked PASS 02:40Z). Commits 31af161d3, ca9ed759c, 8a9caf947. 0 gens. Done; nothing open for DESIGN22 beyond the owner questions above.
