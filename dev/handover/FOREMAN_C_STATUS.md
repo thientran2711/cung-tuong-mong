@@ -997,3 +997,4 @@ NEWACCT#15 ~01:20Z: started, depth 5, START_CTX ~5 % (roll at ~30 %, ceiling 60 
 NEWACCT#15 ~01:24Z: GEN1 10211b3 thu t1–t3 v5 sheet LOOKED + sent L1609 (165 cr). Workers GEN1/CHECK1/DESIGN19/KHO2/THUPAL2/MAIDP4 told to report to #15.
 NEWACCT#15 ~01:27Z: NOTE #14 says it used L1609 for its handover note → my sheet message also labelled L1609; next Lượt 1610. DESIGN19 0c3db29 v5 asked to redo v6 if missing L1606/L1607 (khúc cư + 2 layers). LADDER1 open: t8 v10c 39 ch over, t7 v8d 3 old FAILs — wait.
 NEWACCT#15 ~01:30Z: KHO2 1710252 Phi t5 cape CAPE5_V3 + s62_t5_THU_COMOId (9 943 ch) → CHECK1 job 6 (store fail same as COMOIc exemption + G42) → GEN1 55 cr if PASS. Picture-E image ref = offer owner later.
+NEWACCT#15 ~01:33Z: DESIGN19 e46271eb3 xuân Hán t1–t3 v6 (khúc cư, 2 layers) → CHECK1 job 7 → GEN1 165 cr. KHO2 ~25 % near roll (open successor only if a big job comes). Flag: no xuân Hán t4–t8 carries trực cư — ask owner when relevant.
