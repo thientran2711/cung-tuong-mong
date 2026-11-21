@@ -914,7 +914,7 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | RELAND ui-leftover-fold r2 (opus; MAIN 97 ORDER 17:01Z buổi perf 2984 vs 1426) | review/ui-leftover-fold-r2 | B | session_01N1tNP51qRC8xGqzqkrCEq7 | RUNNING | 21/11 17:19Z |
 | REVIEW dresscode r4 E30r4 (opus BIG; briefs/E30r4-review-dresscode-fix-r4.md) of cabfcad8 | review/dresscode-r4-land 0620c318; reports/dresscode-review.md «ROUND 4» | FOREMAN E #28 | session_01DgYSWo5nZ3yPQ2hdAEtXFQ | PASS 0620c318 → LAND READY (MAIN CHÍNH 97) | 21/11 17:40Z |
 | rv-kit-ef-unit r3 | PASS | review/kit-ef-unit-rv3 fd8280fa3fd7eddef4245084fb86a557d3dd3326 | cache only; tests + quickcheck + coop-e2e 124/124 |
-| FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | RUNNING | 21/11 17:52Z |
+| FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | ROLLED → E #30 | 21/11 17:52Z |
 | REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | PASS 8e452f06 → LAND READY (MAIN 99) | 21/11 17:56Z |
 | REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
 | GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
@@ -944,3 +944,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-pframe-overlay | PASS | review/kit-pframe-overlay-rv 042d2b43724ce0efe8a091a19b838f234b389a71 | kit-pframe-overlay.js ALL PASS Fold+iPad, leftcol-read, quickcheck, coop-e2e 124/124 (one flake) |
 | rv-kit-pframe-overlay r2 | FAIL | review/kit-pframe-overlay-rv3 a8ccb93a1f39cbf109e1dcec44f5f2b7265b73c6 | band table not re-measured: 11/34 frames 6-26 units off; emp/consort-7 rows 19-21 px under band instead of 10-11 |
 | RELAND r3 ui-leftover-fold (opus; jk4 conflict vs kit-mark-fix resolved = LIVE rule) | review/ui-leftover-fold-r3 bca0052c; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 20:45Z |
+| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_PENDING_E30 | RUNNING | 21/11 20:50Z |
