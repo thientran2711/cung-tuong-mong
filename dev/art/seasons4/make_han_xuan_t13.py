@@ -13,6 +13,8 @@ carries the master common block B25, the store rank text, the F2 flower, the new
   D5 COLLAR CUT (flowing) sentence of the Hán set (t4 open5, 'wrap and belt' -> 'wrap and sash': t1–t3 have a sash)
   D6 CAPTION line (G31)
 DESIGN18 (owner L1577 via Foreman C #14, A39): INNER ROBE clause only: no crossed inner collar, straight horizontal top edge (no diagonal at the throat), same length budget (gate S01/M13 forbid more trims); LIMIT 9990->10000 (= check_store PROMPT_MAX).
+DESIGN18 JOB 4 (owner L1601 via Foreman C #14, A39, files _v4): (1) collar SECURE on the shoulders, never slipping off (was: edges exactly ON the shoulder points);
+(2) zhiju silhouette: straight vertical front edge, WIDE straight hem band, no flare / ruffled petticoat / high waist. Same length budget (t3 at the 10 000 limit).
 LADDER1 (owner L1590 + L1592 via Foreman C #14, A39, files _v3): (1) G40 = master_common.OUTER_IN clause in place of the DENSE sentence,
 COLLAR CUT 'the robe closes only by its wrap and sash' -> 'the outer robe is held in only by the sash' (ends the 'no wrap' vs 'closes by its wrap'
 contradiction; collar crossing above the sash kept = the L1577 liked t2 collar);
@@ -33,12 +35,12 @@ def sw(s, a, b):
 
 STORE_FABRIC = ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and "
                 "trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.")
-HEAD = "OPEN-NECK LOOK: collar open OFF the neck to the shoulder points: bare neck and collarbones. "
-COLLAR = ("the collar is worn moderately OPEN: its two edges rest exactly ON the shoulder points, shoulders covered (never off the shoulder), "
+HEAD = "OPEN-NECK LOOK: collar open OFF the neck, SECURE on the shoulders: bare neck and collarbones. "
+COLLAR = ("the collar is worn moderately OPEN: its two edges sit SECURELY on the shoulders, never slipping off, "
           "and curve down to cross high above the sash, never a deep low V; INNER ROBE: opaque mint mist, NO crossed collar, its top edge "
           "straight across below the collarbones; that edge edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
-HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a long floor-length straight-hem robe (zhiju) in ice blue over an inner "
-       "robe in mint mist, the front edge falling straight down to an even hem (no wrap spiral, no curved wrap panel, never a short jacket); wide long sleeves "
+HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a straight-cut floor-length robe (zhiju) in ice blue over an inner "
+       "robe in mint mist, a straight vertical front edge to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket); wide long sleeves "
        "(one single visible sleeve layer, every inner sleeve hidden inside), the sleeve body plain, ending in embroidered mint mist cuff bands; {edge}; "
        "{g8}; {outer}; {rest}no shawl; ")
 HAIRCL = r"(?=pretty silver hairpins|silver and pearl hairpins|two or three slim pearl hairpins)"
@@ -100,5 +102,5 @@ if __name__ == "__main__":
     k = next(k for k in range(len(TRIM) + 1) if max(len(trim(x, k)) for x in full.values()) <= LIMIT)
     print("trims used:", k)
     for t in (1, 2, 3):
-        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v3.txt"); s = trim(full[t], k)
+        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v4.txt"); s = trim(full[t], k)
         open(p, "w", encoding="utf-8").write(s); print(t, len(s), os.path.relpath(p, ROOT))

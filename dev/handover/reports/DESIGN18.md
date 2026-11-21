@@ -50,3 +50,13 @@ Builder dev/art/dapung4/make_thu_L1595.py (rewritten), base = LADDER1 make_thu_L
 Captions: t1 "Đáp ứng · Áo trong cổ vuông viền hoa 2 lớp + áo ngoài thắt đai" · t2 "Thường tại · Áo trong cổ vuông + một dải vạt trước, thắt đai" · t3 "Quý nhân · Áo trong cổ vuông viền thêu rộng + hai dải vạt trước, thắt đai".
 Gates: check_store tpN a22 STORE CHECK PASS ×3 (no OUT1 warn); keep_check sidecar PASS ×3 (allow = only outfit/density/G40/caption phrases); keep_check --all 250 PASS.
 Flags: t2 and t3 share the wide embroidered neckline band (diff = panel count, density, hair/flower); t1 lost the sleeve/cuff words of the old Tang garment (Thường tại garment has none; sleeves stay by the SLEEVE LENGTH law).
+
+## JOB 4 — xuân Hán t1–t3 v4 (owner L1601: robe slipping off + no zhiju silhouette) — 0 gens
+Builder dev/art/seasons4/make_han_xuan_t13.py (A39: only these two; base = v3 by LADDER1). Same length budget (t3 at the limit), no extra trims.
+(1) slipping: HEAD "collar open OFF the neck to the shoulder points:" → "collar open OFF the neck, SECURE on the shoulders:";
+    COLLAR "its two edges rest exactly ON the shoulder points, shoulders covered (never off the shoulder)," → "its two edges sit SECURELY on the shoulders, never slipping off,".
+(2) zhiju: "a long floor-length straight-hem robe (zhiju) … the front edge falling straight down to an even hem (no wrap spiral, no curved wrap panel, never a short jacket)"
+    → "a straight-cut floor-length robe (zhiju) … a straight vertical front edge to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket)".
+Files: dev/art/seasons4/s62_t1_HAN_BAC_v4.txt (9455) · s62_t2_HAN_BAC_v4.txt (9661) · s62_t3_HAN_BAC_v4.txt (9954); .keep base = v3, allow = the 6 replaced phrases.
+Gates: check_store tpN a22 STORE CHECK PASS ×3; keep_check sidecar PASS ×3; --all 253 PASS. Word diff v3→v4 = only the 3 clauses above.
+Note: neck + collarbones stay bare (HEAD "bare neck and collarbones", inner robe straight top edge below the collarbones kept). Her own ChatGPT run of v3 may add points.
