@@ -83,3 +83,17 @@ PRIORITY #1 CHECK ('home-chapters|ge-phutang|bang-words|buoiprof|relander'): OD 
 | grand ending «Tạ ơn» go() + 3 texts | adds `if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");` | wraps e.t/e.a/e.ft in `geF(…)` (land-token filler) | branch geF wrappers + LIVE kitEndNext call — pure both-sides union, no logic choice |
 Gates on 976ea752: quickcheck PASS (old save ok, core gates/one-core PASS; perf buổi 1424/1165, render 260/252) · coop-e2e 124/124 · bang-words scan PASS + screen PASS · bang-line-scan PASS · bd-legacy-save PASS · COOP_LAND nc+bd 128/128, bd+nc 126/128 (known «same Thái hậu picture» flake) → rerun alone 128/128 · ge-guard 8/8 · self-word scan PASS · rare-match errs [] · role-parity ×2 ALONE byte-identical (9b0a3670), table unchanged (b94f2eb8).
 vs LIVE a201d968 (moved after gates): index.html/sw.js only → MAIN self-merge. No reviewer needed (pure union).
+
+## SẴN SÀNG KIỂM ge-phutang-land3 d5331d60f23b1a964ab400463177654fa65c5eff (review/ge-phutang-land3)
+= df05c77c + LIVE 1bf7e14d (06b5ed0a) + LIVE a201d968. Both merges: only assemble.py + index.html/sw.js conflicted.
+| assemble.py | LIVE side | branch side | resolved (res.py asm) |
+|---|---|---|---|
+| merge 1 (1bf7e14d) | + jhaohuu jfocus jbaldf jdf jdfg jdfv jend | + jgedata_pt.js after jgedata_bd.js | LIVE list + jgedata_pt after jgedata_bd (no dups) |
+| merge 2 (a201d968) | + jbancung.js | same | same rule |
+index.html/sw.js = LIVE (--theirs), rebuilt (assemble.py + build_site.sh).
+Gates on d5331d60: quickcheck PASS (old save ok, core gates/one-core PASS; perf buổi 1280/1593, render 237/292) · coop-e2e 124/124 · COOP_GE coop-e2e (tt+nc, both seats) 134/134 · ge-engine 107/107 · ge-pt-scan 85 hits / 0 faults · ge-npc-unit 31 OK · ge-guard 10/10 · self-word scan PASS · rare-match errs [] · role-parity ×2 ALONE identical (9b0a3670), table unchanged (b94f2eb8).
+Reviewer asks (unchanged from E43 JOB 2): (a) jbalge.js GE09 `npc:{on:true…}` kept from LIVE (supersedes the branch's on:false placeholder) → NPC parity now also covers pt roads; (b) 18 jgedata_pt GE option-key remaps to LIVE self-word labels (map e45-out/ptmap.json = dev/handover/tools/e43/ptmap.json). Diff: `git diff f37ec5f1 df05c77c -- dev/build/jbalge.js dev/build/jgedata_pt.js`.
+vs LIVE c9ae030e (moved after gates): index/sw only (both bw-land3 and ge-land3) → MAIN self-merge.
+
+## HANDOVER (E45)
+Done: bw LAND READY 976ea752, ge SSK d5331d60. If LIVE moves with real conflicts: worktrees /home/user/wt/e45b (bw), /home/user/wt/e45g (ge), scripts /home/user/wt/e45-out (g.sh <wt> <bw|ge>, res.py asm, bw_res.py). Delete after land: /home/user/wt/e45b e45g e45h e45-out.
