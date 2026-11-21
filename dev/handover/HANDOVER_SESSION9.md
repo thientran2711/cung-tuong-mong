@@ -1962,3 +1962,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:53Z) rv MSxp PASS kit-badge r2 → LAND READY 9a05a707 (review/kit-badge-rv2) → 89 chain; rv JeK8 unblocked for hao-huu f21bd515. LIVE now 35232176 (kit-info-fixed).
 - (09:58Z) rv MSxp FAIL kit-focus r2 d3f02bcc (1 small item: Fold sub-line ellipsis cuts the price «Năm ăn năm thua · Tố…»; price never cut) → keeper #2 (fix + assert). 8/9 rest verified.
 - (10:03Z) rv MBXt PASS mg-intro-2 → LAND READY 847a5934 (review/mg-intro-2-rv3) → 89 chain. rv MBXt ARCHIVED; worker Ji75 → archive after land.
+- (10:13Z) rv KbS4 PASS maid-acts-a → LAND READY 4cabe30f (FF a2eb51cb) → 89 chain (keep jroad8 after jwalk; road8Acts=3). LIVE e391b85f (maid-8tabs, emo-balance, kit-info-fixed, kc-fail-effects LANDED). ARCHIVED rv KbS4 + rv MYd9. «Dạo này» wrong-person log (pre-existing) → ORDER E. On land: show owner KEPT/ABSENT table + Chí tôn flag (Xin hầu cờ/đánh đàn/Dâng quà/Sang Đức Thọ cung on maid road).
