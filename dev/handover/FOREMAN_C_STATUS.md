@@ -1186,3 +1186,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
 #22 ~07:08Z: L1784 thu t1–t3 old sheet (0 cr) sent. Gate waiver t4/t5 thu (B26/M06, t4 S13) by #22: owner L1714 Set A thin silk + L1720 + L1781 all 8 @135. VE2 drawing THU ×8 @135. Next Lượt 1785.
 #22 ~07:12Z: OWNER L1785: maids crepe ×6 OK; fix: tam thường teeth laugh → closed smile all 6; bow+tails one colour; waist/collar colour bleed (nhị, tam thường); nhất tc too saturated (hex same in all 6 → model/words) → MAIDFIX2 JOB 8 test17_L1785 → VE2 6 × 135 = 810. Next Lượt 1786.
 #22 ~07:15Z: OWNER L1787: old thu pictures (t1–t3 L1723 + HH old/fix4) → SKINS (logged dev/art/SKINS.md, overrides A45 for these). Owner asks why nothing drawn yet → THU ×8 @135 in progress at VE2. Next Lượt 1788.
+#22 ~07:18Z: OWNER L1789: HH 55-cr pictures (jUoqvBPLD0 old, gOmkqTkSXO fix4) NOT skins (A45) → removed from SKINS.md. t1–t3 old thu kept (owner L1787 explicit). Next Lượt 1790.
