@@ -43,3 +43,6 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 
 # OWNER L1939 (via #26 → #27): thô sử too boring → deep research FIRST
 - Note: dev/art/research_tang_maids_L1939.md (Vietnamese; 3 thô sử options A Astana striped skirt [recommended] / B women in men's round-collar robe / C cloth half-sleeve jacket; ladder by stripe count 6→8→10→12; no apron in Tang; drawing advice; sources). Nothing drawn. L1933 still on hold.
+
+# OWNER L1952 (via #27): L1924 t1–t3 OK (no redraw); embroidery research + G64 draft
+- research part 3 in dev/art/research_tang_maids_L1939.md; draft gate dev/art/g64_check.py (standalone, selftest ok; L1924 t1–t3 + t4 L1890 FAIL on 'LARGE … on the robe', maids L1933 PASS, 28 old seasons4/thu_comoi files FAIL). Not wired into check_store; G64 text drafted for #27 (rule.py add is the foreman's).

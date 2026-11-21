@@ -80,3 +80,26 @@ Ghi chú: tên bậc của game là kiểu Thanh; cột phẩm Đường chỉ l
 - Điền thoa lễ y / huy y / cúc y: 唐令拾遗 衣服令 (m.douban.com/book/review/10129184) · shidianguji.com/mid-page/7427223698081595442 · baike «钿钗礼衣».
 - Mùa / độ dày, đại tụ sam sa la, áo kép, cẩm bối tử: zhuanlan.zhihu.com/p/1962492952984127272 · news.qq.com/rain/a/20220810A06AGD00 · baike «唐代服饰».
 - Cấm thứ dân mặc lăng/la/hộc: 新唐书·车服志 (Huyền Tông).
+
+---
+# Phần 3 (owner L1952): thêu ở đâu, hoa to hay nhỏ, theo bậc
+## Các nguồn nói gì
+- **Viền (cổ, tay, gấu, đai)**: bảo tướng hoa (宝相花) và quyển thảo (卷草, dây lá cuốn) chủ yếu là **hoa văn viền**, chạy thành DẢI NHỎ lặp lại ở cổ áo, cửa tay, mép váy, đai lưng (nghiên cứu bích hoạ Đôn Hoàng, Du Gia Dĩnh & Chu Di). Đầu Đường viền cổ/tay áo nhu là vẽ kim, thêu hoặc nẹp lăng cẩm; giữa–cuối Đường dùng **cẩm tiểu đoàn khoa** (gấm đoàn hoa NHỎ, dệt ở Thành Đô) để viền cổ.
+- **Hoa to nằm ở đâu**: (1) **trên VÁY** — tranh Chu Phưởng: một nửa váy trơn, nửa kia in **đoàn hoa lớn lặp lại** (có lẽ in giáp hiệt), trải đều cả mảnh váy; (2) **đoàn khoa (团窠) ở vai/ngực** — hoa tròn đối xứng đặt trên vai áo; (3) **hoa rải (散花)** nhỏ trải đều trên áo sa mỏng. KHÔNG thấy kiểu một bông hoa khổng lồ đơn độc giữa thân áo.
+- **Theo bậc**: luật quan phục Vũ Đức 621 — tam phẩm trở lên **đại khoa** (đoàn hoa LỚN), ngũ phẩm **tiểu khoa** (đoàn hoa NHỎ), lục phẩm trở xuống "tạp tiểu lăng"/không hoa; thời Huyền Tông thêm mẫu chim ngậm cỏ, nhạn ngậm dải cho tam phẩm trở lên. Khác biệt còn ở **chất liệu chỉ**: quý tộc thêu kim tuyến, thường dân chỉ tơ màu, mẫu hoa có thể giống nhau.
+- Lưu ý: không có luật riêng về cỡ hoa trên váy phụ nữ; phần "theo bậc" suy từ luật quan phục + hiện vật.
+
+## Áp vào game (đề xuất)
+- **Viền tay, nẹp tím, viền cổ, gấu: CHỈ hoa NHỎ** (hàng hoa nhỏ / dây lá cuốn lặp lại), mọi bậc.
+- **Hoa to**: chỉ trên **mảng váy** (lặp lại đều, không phải 1 bông đơn) hoặc **đoàn hoa tròn ở vai / đai ngực**; trên áo sa ngoài chỉ hoa rải nhỏ thưa.
+- **Bậc thang cỡ hoa**: t1–t3 hoa nhỏ rải + đai ngực 3 hoa vừa; t4 Tần–t5 Phi đoàn hoa vừa trên váy, chỉ vàng ở viền; t6 trở lên đoàn hoa lớn trên váy + đoàn khoa ở vai, kim tuyến; cung nữ: chỉ hoa nhỏ ở viền/đai, không hoa to.
+
+## Nháp luật G64 (cho #27 quyết, worker không tự thêm luật)
+G64 EMBROIDERY PLACEMENT + SIZE (owner L1952, verbatim via #27: không thêu hoa to ở viền tay áo / nẹp tím mỏng, chỉ hoa nhỏ; hoa to để chỗ khác): every people prompt, all seasons/eras/ranks: sleeve bands, cuffs, neckline bands, front trims, hem bands and thin borders carry ONLY SMALL motifs (a row of small flowers or a small leafy scroll); LARGE motifs only as repeated motifs on the skirt panels or as round medallions at the shoulders / on the chest band, never one huge flower alone on the robe body; the sheer outer robe only small scattered flowers. Size grows with rank (t1–t3 small scattered; t4–t5 medium roundels on the skirt; t6+ large roundels + shoulder medallions, gold thread); maids small motifs on trims/chest band only.
+- Gate nháp: `dev/art/g64_check.py` (đứng riêng, chưa gắn vào check_store): FAIL khi "LARGE … on the band/border/cuff", "border embroidered with LARGE …", "ONE huge flower on the robe body", "LARGE … on the robe"; WARN khi một dải viền có hoa mà không có chữ SMALL. Selftest OK. Chạy thử: L1924 t1–t3 + t4 L1890 FAIL (đều có "LARGE plum blossoms on the robe" — chính là lỗi bông to trên thân áo Quý nhân); maid L1933 PASS; 28 file FAIL trong seasons4 + thu_comoi (prompt cũ, để tham khảo).
+
+## Nguồn phần 3
+- 俞嘉颖、周怡《从敦煌壁画看宝相花纹在唐代女装中的应用》(tsg.humenfz.com/upfile/201903/2019032964810993.pdf).
+- 汪辉秀《浅议中晚唐时期女性服饰》(thepaper.cn/newsDetail_forward_20961192).
+- zhuanlan.zhihu.com/p/630151923 (隋唐五代服饰) · newhanfu.com/44688.html (đoàn khoa ở vai) · biblionalia.info/eastgate/2016/02/10/tangtextiles (váy tranh Chu: đoàn hoa lớn lặp lại, có thể in giáp hiệt).
+- Luật đại khoa / tiểu khoa: 旧唐书·舆服志 (xem phần 2).
