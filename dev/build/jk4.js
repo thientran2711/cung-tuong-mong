@@ -1190,7 +1190,7 @@ window.kitInfoOneLine=kitInfoOneLine;
 .pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
 `;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();try{document.querySelectorAll(".pc.kpwide[data-k2]").forEach(kitPcKeyFit)}catch(e){}},100)})}catch(e){}})();
 /* KIT §6.3j RANK + NAME = ONE COLOUR on the person-card tag (owner OD 16/11 16:10Z «rank+name one colour: OK» + 21/11 04:33Z; MAIN 89 check #3): the name under the rank line takes the rank colour (--rt of .pcrk). The same unit as the story text (§48.3). */
-function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const c=r.style.getPropertyValue("--rt");const n=r.parentElement.querySelector(":scope > .pcname");if(!n||!c||n.classList.contains("krt"))return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
+function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const n=r.parentElement.querySelector(":scope > .pcname");if(!n||n.classList.contains("krt"))return;const c=r.style.getPropertyValue("--rt")||getComputedStyle(r).color;if(!c)return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
 window.kitPcTagColour=kitPcTagColour;
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
@@ -1198,11 +1198,11 @@ window.kitPcTagColour=kitPcTagColour;
 (function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{if(!pc.classList.contains("kpwide"))return;
  /* KIT §6.3i (owner 21/11 «rows UP, nothing wasted, NOT cut», mark #38): the left column = figure + key rows + wear slots must FIT the card height; only the FIGURE gives back the missing height (--kpcw on the figure, --kpcl keeps the column width; centred, never below 170 px wide); the column keeps its width so the slots stay on one row.
     Whatever still does not fit scrolls with the card (the card is its own scroller, thin bar always visible). */
- const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!L||!pcp)return;pc.style.removeProperty("--kpcl");pc.style.removeProperty("--kpcw");
+ const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!L||!pcp)return;if(pc.offsetParent===null&&getComputedStyle(pc).position!=="fixed")return;const sig=pc.clientHeight+"|"+pc.clientWidth+"|"+L.scrollHeight+"|"+L.innerHTML.length;if(pc.__kfs===sig)return;pc.style.removeProperty("--kpcl");pc.style.removeProperty("--kpcw");
  const avail=pc.clientHeight||parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(avail<200)return;
  const need=()=>{let b=0;[...L.children].forEach(c=>{if(c.offsetParent!==null||getComputedStyle(c).position==="absolute")b=Math.max(b,c.offsetTop+c.offsetHeight)});return b+6};
  const nat=Math.round(pcp.getBoundingClientRect().width),col=Math.round(L.getBoundingClientRect().width);if(!nat)return;pc.style.setProperty("--kpcl",col+"px");
- for(let i=0;i<3;i++){const over=need()-avail;if(over<=1)break;const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const w=Math.max(170,Math.min(cw,Math.floor((pcp.offsetHeight-over)*550/1037)));if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}
+ for(let i=0;i<3;i++){const over=need()-avail;if(over<=1)break;const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const w=Math.max(170,Math.min(cw,Math.floor((pcp.offsetHeight-over)*550/1037)));if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")};pc.__kfs=pc.clientHeight+"|"+pc.clientWidth+"|"+L.scrollHeight+"|"+L.innerHTML.length
  }catch(e){}};
 window.kitPcKeyFit=kitPcKeyFit;
  const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
@@ -1220,7 +1220,7 @@ html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
 window.kitPcFrameMark=kitPcFrameMark;
 (function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
-(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal,.pcpop,.j59dock"))return true}return false};
  try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcTagColour(document);try{document.querySelectorAll('.pc.kpwide[data-k2]').forEach(kitPcKeyFit)}catch(e){}kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
