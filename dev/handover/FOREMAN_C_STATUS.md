@@ -1541,3 +1541,4 @@ ROOT-B4 ~17:35Z: CURRENT FOREMAN C = ROOT-B4 session_01D3E3NX7udKgKjCk21vGEJz, d
 ROOT-B4 ~17:40Z: SENT L2157 M2150-01..03 (+ mau_net_ve.jpg) to owner. All live workers + ROOT-B2 messaged my ID. Waiting THUROOT4 t4–t8. Next Lượt 2158.
 - FROM MAIN (21/11 17:40Z): main is now MAIN CHÍNH 98 session_01Rc5AsJU1FnPJaaFpCxikym (ROOT, depth 0); report LAND READY / KIT REQUEST lines to it.
 ROOT-B4 ~17:45Z: SENT L2158 M2150-04..08 + refs (Phi, vàng hoàng gia, HQP). Asked owner: t4 is s64 Tần (other person) — keep or rebuild on s62? Next Lượt 2159.
+ROOT-B4 ~17:55Z: OWNER L2159/2160: send prompt files with SendUserFile display=render (opens in right panel to copy), NEVER display=attach, never paste text in chat. Resent M2150-01..08 render. Next Lượt 2161.
