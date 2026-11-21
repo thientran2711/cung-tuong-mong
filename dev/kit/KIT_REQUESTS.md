@@ -124,6 +124,9 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 |---|---|---|---|---|---|
 | 20/11 | rv outside-coop-r1 | **T3 PERSON EVENT (§8.2, `.dlg.kpanel.kesdlg.kdscroll.kdper.kdpbanner`) with ≥ 5 options**: on Fold 755x1000 the frame is 307 px wide and every option row `button.ka` 143 px, so the option name stacks ONE LETTER PER LINE (iPad 1180: 560 / 368 px, readable but narrow); with ≤ 4 options the same dialog gets `kszf ksz3` = 562 px / 304 px rows. Same on LIVE main fd682a8d (probe: `pushDil({who:pMe(),t,o:[7 options]})` in any life). Ask: the many-option T3 frame keeps the normal frame width (options in full rows, scroll inside), one rule for every dialog. | every PEND dialog with 5+ options (e.g. jkcco «Gửi quà» item pick) | kit keeper via Foreman B | OPEN — interim: BAL.kcco.gift.pickMax 3 (4 options) on review/outside-coop-r1; raise it back when the kit is fixed |
 
+
+## KR home-stat cost row (review/home-chapters, E25, 20/11)
+The act/option card model shows «Tốn: không» for a home-road cost in Hồi môn (`khm`; also `kgt` Gia thanh, `kap` Áp lực hôn sự, `kld` Lời đồn) although `fx` / the j67 line carry it (example: E28 «Dâng phần hồi môn để cha lo lót», fx {khm:-40}). Please let the kit cost/gain rows render these home stats (NAMES has kgt/kap/khm via jkc.js:44). Not a gate for home-chapters; the cost is applied correctly and printed on the result card.
 ## mg-noword-b (worker, 20/11) — painted signs wanted for mini-game play (no word in play, owner OD 20/11 ~05:10Z)
 Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js (NWB) so nothing blocks; painted versions would replace them in ONE place (NWB.P):
 - icon-hint (lamp / «?» seal), icon-done (check seal), icon-voice (td_ngon Thưa hold button), icon-rotl / icon-rotr (hoa điền tilt), icon-shield (duho Hộ giá),
