@@ -1,0 +1,12 @@
+# REVIEW duodo-focus 43bc4ba2 (OPUS BIG) — opened by MAIN CHÍNH 93, 21/11 11:36Z
+PRIORITY #1 CHECK ('duodo-focus'): OD 0 (owner words are OD L2183–L2185, 21/11 ~06:20/06:50/06:55Z) | ledger 0 | claims 3 (worker N9Yc→LtG4, this rv) | main 0 | review/* 1 (review/duodo-focus) | archive 0
+
+ROLE: independent BIG reviewer (Opus). Read FIRST, in full, on branch claude/cung-tuong-mong-handover-hj0h8w: dev/rules/START_CORE.md (★ 18 LAWS at top), dev/rules/START_WORKER.md, dev/rules/START_REVIEWER.md; then dev/kit/KIT.md (kitFocus / K-FOCUS section), dev/kit/VANPHONG.md, dev/OWNER_DECISIONS.md lines 2183–2185 (owner's VERBATIM words for this feature — check every one of them), briefs/main90-duodo-focus.md, reports/duodo-focus.md (worker report + its handover).
+TARGET: origin/review/duodo-focus @ 43bc4ba2 (built on kit-focus-rv4 4c1105d8, LAND READY in 89's chain, not yet LIVE). Worker: session_01Rc5AsLtG4rLx87Rv3pd1ej.
+CHECK:
+1. Every owner word in OD L2183–2185: Dư đồ place → people visible; tap a person → screen dims, the person zooms close; EVERY action on a person is a mini-game (on-figure); NPCs can also come to her on their own (same dim + approach). List each owner sentence → PASS/FAIL with evidence.
+2. 18 LAWS: kit-only (no private chip/row/frame; consistency scan vs other kitFocus/dialog users), BAL-only numbers (law 4), cổ trang wording, no % (law 7), equal-value/gain-loss of act options (laws 2–3), real people (6b: names shown exist as NPCs).
+3. Devices: Fold 755x1000 + iPad 1180x820, look 3× at every shot; watch the REAL mp4s on CDN img/_review/duodo-focus/ (extract frames and LOOK). Known open kit item (keeper #2, kit-focus r5): Fold fan sub-line clips a 2nd cost — note, not a FAIL of this branch if «!» shows the full cost.
+4. Co-op (BIG): guest/host both see focus correctly; coop-e2e; old-save load; quickcheck. NOTE: plain LIVE currently fails G4 80-dialog-fixed (iPad new-title plate on event picture; keeper fixing in review/kit-g4-plate) — compare with clean main; same fail on main = not this branch.
+5. Run the worker's gates yourself (duodo-focus-data/-view/-games, kit-focus.js, coop-e2e, quickcheck).
+VERDICT: PASS → final-merge newest origin/main into review/duodo-focus-rv (FF-able, rebuild index.html/sw.js, rerun quickcheck) and send «LAND READY <sha>» to MAIN CHÍNH 93 session_01Rc5AsKcbi9rTmDK4pY2SeT. FAIL → exact list to the worker LtG4 + main 93. Report: dev/handover/reports/rv-duodo-focus.md (handover branch, English). Roll over at START_CTX+25 %, ceiling 60 %: write handover in your report and tell main.
