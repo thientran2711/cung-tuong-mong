@@ -854,7 +854,7 @@ kit-focus rv4 | review/kit-focus-rv4 4c1105d8 | rv session | PASS (supersedes rv
 | RELAND palace-life-gaps r3 (opus BIG reviewer-lander; MAIN 92 ORDER 10:51Z jbal2 conflict) | review/palace-life-gaps-r3; briefs/b6-relander-palace-life.md | B | session_01N1tNP5jMFLMtiToAbVEacW | RUNNING | 21/11 11:20Z |
 | RELAND mg-craft Thêu r3 (opus BIG reviewer-lander; MAIN 92 ORDER 10:50Z jtd conflict) | review/mg-craft-r3; briefs/b6-relander-mg-craft.md | B | session_01N1tNP3ZWMeRDarhzz276Yb | RUNNING | 21/11 11:20Z |
 kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
-| REVIEW coop-arrive-see (opus BIG) of 8ee5f709 | review/coop-arrive-see-r1 | B | session_01N1tNP5qTMitGkZJgmbbcTW | RUNNING | 21/11 11:28Z |
+| REVIEW coop-arrive-see (opus BIG) of 8ee5f709 | review/coop-arrive-see-r1 | B | session_01N1tNP5qTMitGkZJgmbbcTW | PASS a1c0a55e (r1 adds level-0 = LIVE fix; reports/coop-arrive-see.md REVIEW r1) | 21/11 14:40Z |
 | REVIEW duodo-focus (OPUS BIG) of 43bc4ba2 | review/duodo-focus-rv; briefs/main93-rv-duodo-focus.md | MAIN CHÍNH 93 | session_01Rc5AsMC6NdEnc5VsL1xzk6 | RUNNING | 21/11 11:36Z |
 | REVIEW coop-host-lag-r2 (opus BIG) of 70309b27 | review/coop-host-lag-r2-r1 | B | session_01N1tNP2pAt8zEYzvzn4yUxb | RUNNING | 21/11 11:36Z |
 | FOREMAN E #27 (opus; child of E #26, depth 8 LAST) | handover FOREMAN_E_STATUS | FOREMAN E #26 | session_01DgYSWm9AdaKw5vcJA3B9eS | DONE → handed to standby E #28 session_01DgYSWmZdYn5y3yDw6o778C 11:50Z | 21/11 11:44Z |

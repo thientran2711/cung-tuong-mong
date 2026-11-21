@@ -42,3 +42,37 @@ a buổi step, return home (both ways), visit the friend's palace (visitPal, bot
   perf new/live render 220/232 ms) · role-parity ALL PASS, undef-scan PASS, one-core gates (pre-merge sha 0d858b4b; quickcheck core gates re-ran one-core-guard post-merge).
 - No UI change → no device shots.
 Laws: 1 two-way (both seats, both orders, SWAP) · 4 no number · 6b real people (the friend is where she really is) · 9 no UI · 11 scan above.
+
+## REVIEW r1 (opus BIG reviewer, 11/21/2026) — branch review/coop-arrive-see-r1
+PRIORITY #1 CHECK: OD-CO1 = GAP_LIST row (map-places r2) | main jcoopworld refreshHere/keepFriendPos (reused) | review/*: coop-host-lag-r2 (jcoophl.js only), coop-thin-g-f1 (jcoopworld +90/-?), coop-guest-names(-r1) (j61.js only) | claims: this worker only.
+START_CTX ~8 %.
+**Root cause verified, but only for thin level 7+.** The worker's cause (host-side lists from a stale S.where, no keepFriendPos before the host's goTo, the other list not refreshed, ref-lost friend entry doubled) is real at level 7+ and the fix works there.
+**Missing: level 0 = the LIVE default.** The room level is min(host want, caps); want() is 0 unless the dev flag `ctm-thin` / `?thin=` is set (jcoopthin.js:29, coop/worker thinLevel) — real players play at level 0. presAll() was gated on level 7, so at level 0 the fault stayed exactly as OD-CO1: BEFORE (8ee5f709, new L0 harness) L0 swap0 **20/26**, swap1 **20/25** — every "second arriver sees the first" check FAIL (host-first: her phone misses him; her-first: host misses her) + the buổi-step rows. Cause at level 0: each phone's goTo builds its list from its own S.where, then the jplx goTo wrapper rebuilds tgk/nth/pd lists without the friend, and nothing refreshes the arriver's list afterwards (onPos refreshes only when the FRIEND moves).
+### r1 fix (jcoopworld.js only, no UI, no number)
+- presAll(): below level 7 (and on the host at any level < 7) = ONE key-gated refreshHere of THIS seat's own list (key: week, buổi, place, who is in the list, the friend's place in S.where, dead) on BOTH phones; level 7+ host path unchanged; her phone at 7+ unchanged (lens7).
+- dev/test/coop-arrive-see.js: level 0 mode (L0: no lens check, her person staged on her phone, the "host's copy of her" row = her phone).
+### Code checks
+- Name match (ref-lost friend entry): only entries with ref null AND the friend's full name / «Hoàng hậu <name>»; coop-name-clash on main keeps one living full name per person across both seats (nmFix), so no live NPC shares it; an NPC with a valid ref is never matched by name; a wrongly dropped NPC would be re-added from liveRivals by its ref. coop-guest-names(-r1) touches j61 keys/masks only — no overlap. Safe.
+- goTo reads co-op places from S.where only (recAt is off in co-op, j2.js:122), the same source as refreshHere: the refresh never drops a person goTo placed.
+- Perf: presAll runs at every render but is key-gated (string join of ≤ ~10 entries); quickcheck perf new/live render 303/287 ms, tab 643/653, buổi 1504/1533 (median of 3, within noise).
+- Old saves: nothing saved changes (CW.presK is runtime only); quickcheck old save ok.
+- Levels: 0 (live) / 7 (F2) / 9 (F4) tested; CAP is 9 in this build (no level 13 here).
+### Tests — first on 564737f1 (contains LIVE ba9b6243), then re-run on PASS sha a1c0a55e (contains LIVE 419079d7, which changed jcooptimer.js)
+| test | result |
+|---|---|
+| coop-arrive-see L0 swap0 RUNS=2 | 41/41 (BEFORE 20/26) |
+| coop-arrive-see L0 swap1 RUNS=2 | 40/41 → rerun RUNS=1 26/26 (one visitPal walk on her phone did not leave home — timing, passed on rerun and on BEFORE) (BEFORE 20/25) |
+| coop-arrive-see L7 swap0 RUNS=2 | 41/41 |
+| coop-arrive-see L9 swap0 / swap1 RUNS=5 | 89/89 · 90/90 |
+| coop-places L9 swap1 | 19/19 |
+| coop-places L9 swap0 | 18/19 ×2: G3 (host buổi steps during her walk) — PRE-EXISTING: origin/main ba9b6243 gives the same 18/19; it fails exactly when the harness has to play a setup week (worker's run skipped it: 18/18). Harness follow-up, not this branch. |
+| coop-e2e (tt/nc) · COOP_NC_FORCE=1 | 94/94 · 96/96 |
+| role-parity (alone) | ALL PASS |
+| undef-scan | PASS (268 names) |
+| quickcheck 564737f1 | run 1: core gate G4 coop-one-world seed 3 FAIL once (R.evm 1) → probe alone 6/6 PASS (flake); run 2 PASS; run 3 (--runs 5) PASS |
+| perf | solo path untouched (every new line sits behind CW.on); buổi per-run spread 1228–4783 ms (random events) → medians 1504/1533, 2208/1590, 2535/1637 = noise; render 303/287, 268/272, 302/305 |
+| merge with coop-guest-names-r1 d45076b6 (Foreman B ask) | coop-arrive-see L0 swap0 25/25, L0 swap1 25/25, L9 swap1 26/26 · coop-places swap1 18/18, swap0 18/19 (G3 pre-existing, setup week) — no conflict but index/sw |
+| **re-run on a1c0a55e** | coop-arrive-see RUNS=2: L0 swap0 41/41, L0 swap1 41/41, L9 swap0 41/41, L9 swap1 40/41 (her visitPal walk did not start: place stays home — harness flake, also seen once at L0 swap1 and passed on rerun; follow-up: the test should assert the walk began) · coop-places swap0 18/18, swap1 18/18 · coop-e2e 94/94 · NC_FORCE 96/96 · role-parity ALL PASS · undef-scan PASS (276) · quickcheck PASS (old save ok, core gates PASS, render 339/276 tab 639/568 buổi 1676/1401 = noise band above) |
+Laws: 1 two-way (both seats, both orders, SWAP, level 0 + 7 + 9) · 4 no number · 6b the friend is where she really is, at the live level · 9 no UI (no shots needed) · 11 whole family: every path now ends in a render/goTo → presAll on every level.
+Overlap: coop-thin-g-f1 changes jcoopworld.js (+90 lines; goTo/render wrappers region possible) — whichever lands second re-runs the other's tests (this branch: coop-arrive-see L0/L9 both swaps, coop-places). coop-host-lag-r2 = jcoophl.js only (wraps render: no textual conflict; rerun coop-arrive-see L0 after it lands).
+VERDICT: **PASS a1c0a55e** (review/coop-arrive-see-r1; = worker fix + r1 level-0 fix + test L0 mode; contains LIVE 419079d7). Landing: ff main to a1c0a55e if main has not moved; else re-merge (index.html/sw.js rebuild) and re-run coop-arrive-see L0 both swaps.
