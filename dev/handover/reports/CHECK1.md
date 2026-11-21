@@ -159,3 +159,28 @@ Fix (A39 delta, a bit denser than t3), for example:
 - "deep brocade cuffs" → "deep embroidered double hollyhock cuff bands, a few small double hollyhocks on the sleeves".
 Trim the repeats if it goes over 10 000.
 Note: thu t4 COMOIc probably lacks the same 3 placements (not checked in this job).
+
+## JOB 7 (Foreman C #15) — xuân Hán s62 t1–t3 _v6 (DESIGN19) · checked at 8f20828 · 0 gens
+Gates, all 3:
+- check_store tpN a22 approved + store PASS; keep PASS vs v5. Chars: 9430 / 9700 / 9989.
+- Master: lines 1–5 and 7–14 verbatim; B29 A_HEAVY verbatim.
+- Palette: #EB8186 peach-blossom pink + ivory only.
+- "shawl" appears only in the master line and in "no shawl" (G32/G36: no phi bạch for Hán/xuân) ✓.
+
+Owner points:
+- L1606: TWO visible robe layers (wrapped outer robe + full inner robe), and the inner hem shows below ✓.
+- L1607: "Han-dynasty quju (khúc cư)", the front panel "wraps ONCE round to the side to a softly curved bordered hem" ✓.
+- G32: wide layered jiaoling, "one broad V that starts near the shoulder points, SECURE on the shoulders, never slipping off" ✓.
+- The collar crosses "just above the sash (no crossing at the throat)". That still respects L1577's complaint (no diagonal line at the neck).
+- G40: OUTER_IN verbatim ✓.
+- G42 ladder:
+  - inner collar band, outer collar + wrap + hem band, cuff bands, hem band, sprays on the upper garment and jade are all on t1, and every one carries to t2 and t3 ✓;
+  - jade: t1 1 pendant · t2 disc + pendant · t3 disc + 2 pendant sets.
+- F2 flowers + rising size ✓; G39 t3 hairpin verbatim ✓; items book / drum / flute ✓.
+
+Verdict: **PASS ×3.**
+Notes (fix-recommended, not blocking):
+- t3 still has `ONE WIDE stiff ivory white band` + `a wide stiff ivory white silk girdle`. B29 says "nothing stiff", and thu v4 already changed both to "soft".
+- t3 pose is still `one hand touching her hairpin`; thu v4 already uses the F18 form "adjusting a hairpin set in her hair with one raised empty hand".
+- t1 "a lilac spray" (F13); thu v4 uses "a lilac blossom".
+- The density wording is almost the same at t1–t3 ("small sprays" / "small sprays" / "sprays"), so the G42 "a little denser" step is weak.
