@@ -18,8 +18,11 @@ In game, the Nhập cung identity card (j79 kpIdLay) sets `--kpw:307px` inline o
 Title-screen (fresh) panels are unchanged and equal to the in-game ones.
 Bảng vàng is a full-screen board (not a menu panel) and is untouched; its popups follow the menu width.
 Shots (looked): Fold 755x1000, iPad 1180x820, 390x844 — wide bottom panel, rows on one line.
+<<<<<<< HEAD
 
 ## Addendum (owner ~03:30Z, MAIN 85): Thiết lập scroll, run-together label, cramped root
 - `.kbtn>small{display:block}` (kit-wide): «Xem lại lời dặn» / «Game này chơi gì» no longer run together (the second line was block only inside `.kpmenu`; whole group = every `.kbtn small`).
 - Menu frame height cap `--kph` = min(100dvh-32, 94 kvh, 780): Thiết lập and Sổ luân hồi now fit with no scroll on Fold 755x1000 and iPad 1180x820 (before: cap 574 → «Kéo xuống»). Phones 390/412 still scroll (content 780+ px).
 - `.kpmenu` fills the frame width (centred flex column had shrunk it to 261 px; now 534): root buttons full / half width.
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

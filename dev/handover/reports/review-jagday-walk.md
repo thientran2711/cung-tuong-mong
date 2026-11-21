@@ -251,6 +251,7 @@ On 239b22c5 = HEAD:
 - No perf regression.
 NOTE FOR MAIN: if main moves again, assemble.py can conflict (the module list). Keep main's list and append 'jwalk.js' last. Then take theirs for index.html / sw.js, run assemble + build_site + coop-e2e.
 STATUS: PASS → LAND READY review/jagday-walk-rv 239b22c5b9554fbb12e44a23456165a7e1904553 (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS + co-op seat check.
+<<<<<<< HEAD
 
 ### ROUND 6 addendum: final-merge LIVE 32c0e33b (D #13 order, 21/11 ~03:00Z) → LAND READY f0660492
 - Merges: 32c0e33b (3c96ad5e), then 56ff0db0 (f06604929e49a3c43c66cdb0914d7d4e7f28960a = HEAD). For 32c0e33b, assemble.py conflicted: main's list (+ jname.js, jnamefix.js) with jwalk.js appended last. index.html / sw.js took theirs both times, then assemble + build_site.
@@ -262,3 +263,5 @@ STATUS: PASS → LAND READY review/jagday-walk-rv 239b22c5b9554fbb12e44a23456165
 - Gates on f0660492: ag-carry-turn 6/6 · ag-walk 2/2 · coop-e2e 92/92 · quickcheck PASS (5 runs, buổi 1023/1354).
 - Main then moved to 9c1dd605 (kit-pcrow-square). merge-tree finds conflicts in index.html / sw.js only, not in assemble.py.
 STATUS: PASS → LAND READY review/jagday-walk-rv f06604929e49a3c43c66cdb0914d7d4e7f28960a (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS (92/92) + co-op seat check (ROUND 6), LIVE-revert audit clean.
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

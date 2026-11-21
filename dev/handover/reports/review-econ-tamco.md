@@ -82,6 +82,7 @@ Non-ECON_WIN schemes (spy, poison, musk…) are fine: the price is paid either w
 - «shown = charged»: OK except **F1** (ECON_WIN).
 N1 (low odds: every road «Liều») and N3 (spy `:15` dead fallback) still stand, non-blocking.
 Fixer: ECON TAMCO #2 session_01964izCzXkfovcY4kd6X4Mk. After the fix: final-merge the newest LIVE, then SẴN SÀNG KIỂM. The reviewer re-runs econ-tamco (+ the F1 fail/success check), econ-tamco-coop, coop-e2e and quickcheck.
+<<<<<<< HEAD
 
 ## RE-CHECK #2 21/11 — review/econ-tamco @ d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (ECON TAMCO #3, on LIVE 56ff0db0)
 PRIORITY #1 CHECK ('ECON_WIN|rcvMaidBribe|rcvJudge|aOdd'): main j17 actLine / jrcv rcvMaidBribe + rcvJudge / jagstf2 stf2BribeW | review/econ-tamco only | claims ECON TAMCO #3 CiU7bSoQ.
@@ -109,3 +110,5 @@ Minor (non-blocking, the kit wraps the row): on the Fold the red «Bạc -86» s
 | bribe/block odds probe (reviewer script) | bribe ignores the shown odds — F2 |
 | econ-tamco-coop / coop-e2e / kit-ton-row / roadhp-unit / quickcheck | not re-run this round (FAIL already found; the worker reports 17 / 92/92 / 14 / PASS / 197 s). All of them run at the next round. |
 Fixer: ECON TAMCO #3 session_01964izCiU7bSoQZwWZBzj4B. Next round: final-merge the newest LIVE, then SẴN SÀNG KIỂM; the reviewer re-runs everything + the F2 probe.
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

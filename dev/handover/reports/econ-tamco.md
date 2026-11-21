@@ -81,6 +81,7 @@ OPEN (the only thing left):
 2. The plain road shows «Tốn: không» (kit default for a cost-free option in an open card; it was the same on c45265d6 and passed review; KIT 28.6 drop is for hidden-outcome cards). Mention it to the reviewer; a kit question, not ours.
 3. Then: final-merge LIVE 64d2e094 (index.html/sw.js: take theirs, assemble.py keeps jtamco.js after jecon.js, build_site.sh), run econ-tamco.test.js (server: node dev/test/sw-serve.js 8931 <wt>), econ-tamco-coop.js (live worker), quickcheck, tier → «SẴN SÀNG KIỂM» to reviewer session_01964izCjh2dKcmvL4sSYKMG + D #13 session_01964izC63Mgk7VPcriQTwU7.
 Worktree: /home/user/wt/econ-tamco (sparse). Everything else in the reviewer's re-check PASSED.
+<<<<<<< HEAD
 
 ## ECON TAMCO #3 — F1 done (21/11)
 depth 5 · START_CTX ~3 % (get_session read 0; estimate).
@@ -95,3 +96,5 @@ Branch review/econ-tamco @ d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (TIER BIG, 9
 - Shots (not in git): /home/user/wt/econ-tamco-shots/roadpick-755x1000.jpg + roadpick-1180x820.jpg.
 
 SẴN SÀNG KIỂM review/econ-tamco d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (TIER BIG) — non-blocking KIT REQUEST open (visible «paid only on success» word)
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

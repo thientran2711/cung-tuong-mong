@@ -4,6 +4,7 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 |---|---|---|---|---|---|---|
 | 1 | 01:42 | Send the frames PDF | — | ui-tour (82) | SENT in 84 chat | — |
 | 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF SENT 50 pp; ASKED her: add «Hảo hữu» sheet? | — |
+<<<<<<< HEAD
 | 3 | 01:58 | Chí tôn: «Hoàng thượng» not centred; niên hiệu shown as name → name «Hoàng thượng», niên hiệu row below | owner-2111-chiton-nienhieu.jpg | chiton-name worker JeU31 → rv2 session_01Rc5AsJz4mUrjazcfdR5JPr | in review | — |
 | 4 | 02:00 | Sở trường/Hay/Chuyện doubled labels → one column «Sở trường · Trọng · Dạo này» | owner-2111-sotrong-dup.jpg | chiton-name worker JeU31 → rv2 session_01Rc5AsJz4mUrjazcfdR5JPr | in review | — |
 | 5 | 02:02 | Trait box «Trọng tài / Mê sắc…» repeats → into «!» | owner-2111-trait-box-dup.jpg | keeper kit-pcrow-square (merged with #9) | LIVE | 9c1dd605 |
@@ -11,6 +12,15 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | 7 | 02:12 | Cung nhân: small portrait floating; act cards | owner-2111-cungnhan.jpg | keeper | LIVE | 9c1dd605 |
 | 8 | 02:14 | Rank+name tag not centred | owner-2111-cungnhan.jpg | keeper | LIVE | 9c1dd605 |
 | 9 | 02:10 | «Người chạy việc…» info box → «!» on avatar top-right corner | owner-2111-infobox-bang.jpg | keeper | LIVE | 9c1dd605 |
+=======
+| 3 | 01:58 | Chí tôn: «Hoàng thượng» not centred; niên hiệu shown as name → name «Hoàng thượng», niên hiệu row below | owner-2111-chiton-nienhieu.jpg | chiton-name session_01Rc5AsJe31NLb75JMbggVQc (centring → keeper) | in work | — |
+| 4 | 02:00 | Sở trường/Hay/Chuyện doubled labels → one column «Sở trường · Trọng · Dạo này» | owner-2111-sotrong-dup.jpg | chiton-name | in work | — |
+| 5 | 02:02 | Trait box «Trọng tài / Mê sắc…» repeats → into «!» | owner-2111-trait-box-dup.jpg | keeper kit-pcrow-square (merged with #9) | in work | — |
+| 6 | 02:08 | Person-card act picture stretched tall → SQUARE + Tốn/Được only + full-width info box (approved before, applied only to dialogs) | owner-2111-pcrow-square.jpg | keeper session_01Rc5AsMtjP4KTgBZVjENGLs | in work | — |
+| 7 | 02:12 | Cung nhân: small portrait floating; act cards | owner-2111-cungnhan.jpg | keeper | in work | — |
+| 8 | 02:14 | Rank+name tag not centred | owner-2111-cungnhan.jpg | keeper | in work | — |
+| 9 | 02:10 | «Người chạy việc…» info box → «!» on avatar top-right corner | owner-2111-infobox-bang.jpg | keeper | in work | — |
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
 | 10 | 02:12 | Ân oán picker too big (3rd time) → one compact row | owner-2111-anoan-picker.jpg | rel-picker-r3 session_01Rc5AsJZRwZRBfh2sUuQErH | LIVE | 56ff0db0 |
 | 11 | 02:14 | Ân oán relation card: 2 rows take half the frame → compact | owner-2111-anoan-card.jpg | rel-picker-r3 | LIVE | 56ff0db0 |
 | 12 | 02:16 | «Cùng Cảnh Phúc cung với ta» for a chủ vị → «Chủ vị Cảnh Phúc cung, nơi ta ở» | owner-2111-chuvi-line.jpg | rel-picker-r3 | LIVE | 56ff0db0 |
@@ -18,6 +28,7 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | 14 | 02:20 | Show EVERY frame state (filled) in a separate PDF; fix-back file separate; fix whole group | owner-2111-phephai-empty.jpg | ui-tour-states session_01Rc5AsMRxZnFfU6zhm7mvad | in work | — |
 | 15 | 02:22 | Empty tabs (Phe phái…) need picture card «Ta chưa có …» like «Ta chưa có con» | owner-2111-empty-state.jpg | empty-states session_01Rc5AsMTnwmUdoGmZsd4Uvk | in work | — |
 | 16 | 02:24 | Panel scrolls with no extra content → must stand still | owner-2111-noscroll.jpg | empty-states | in work | — |
+<<<<<<< HEAD
 | 17 | 02:30 | Hoàng tự card: Fold vs iPad different layouts; tiny avatar + empty bands → one shared person layout | owner-2111-hoangtu-fold/ipad.jpg | keeper | LIVE | 9c1dd605 |
 Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ramp, Thử tay overlap, trò Dung, loading bar c3a398dd; Điều hương, Đầu hồ + Bắn cung (red for re-test), Thân cận 64d2e094.
 | 18 | 02:36 | Hoàng tự: top strip (sub-tabs + portraits) scrolls away; must be FIXED like Hậu cung (one shared person-tab frame). Also: no files until she says done | owner-2111-strip-fixed-1/2.jpg | keeper | LIVE | 9c1dd605 |
@@ -32,6 +43,22 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 27 | 03:00 | Sắc phong: keep the 2-column condition rows (liked); make the picture BIG (or a full-width banner) and put rows below; same for Chương này, Đã qua, Triều cục, Tâm nguyện (owner 03:02Z) | img/_review/refs/owner-2111-sacphong.jpg | worker chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (MAIN 85) | SSK 3d52f838 (#26/#27); carousel #28/#29 + #43 being confirmed | — |
 | 28 | 03:05 | Mệnh truyện chapters/phụ tuyến = SLIDE carousel: big wide picture with «Chương N · tên» + hồi on it, arrows/swipe between chapters, info rows below follow the slide; no repeated chapter list | img/_review/refs/owner-2111-trieucuc-slide.jpg | worker chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (MAIN 85) + keeper kit carousel | SSK 3d52f838 (#26/#27); carousel #28/#29 + #43 being confirmed | — |
 | 29 | 03:07 | Slide carousel for EVERY chapter place in the game; chapter list removed → small «Mục lục» button bottom-right opens all chapters | — | chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (addendum MAIN 86) | SSK 3d52f838 (#26/#27); carousel #28/#29 + #43 being confirmed | — |
+=======
+| 17 | 02:30 | Hoàng tự card: Fold vs iPad different layouts; tiny avatar + empty bands → one shared person layout | owner-2111-hoangtu-fold/ipad.jpg | keeper | in work | — |
+Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ramp, Thử tay overlap, trò Dung, loading bar c3a398dd; Điều hương, Đầu hồ + Bắn cung (red for re-test), Thân cận 64d2e094.
+| 18 | 02:36 | Hoàng tự: top strip (sub-tabs + portraits) scrolls away; must be FIXED like Hậu cung (one shared person-tab frame). Also: no files until she says done | owner-2111-strip-fixed-1/2.jpg | keeper | in work | — |
+| 19 | 02:38 | Intro text lines above person strips (Kén rể «Con các nhà quyền thần…», «Con của các phi tần khác…») → into a round «!» top-right; top block ONE fixed size in every person tab, never grows | owner-2111-intro-text.jpg | keeper | in work | — |
+| 20 | 02:40 | APPROVED example: Kén rể «Dò hỏi gia thế» card — size per device (iPad bigger/taller, phone smaller) → reference for all person-tab cards | owner-2111-card-good.jpg | keeper (reference) | noted | — |
+| 21 | 02:45 | Túi đồ: tap item → inline strip under grid (small square + info right), NO popup; Sắc/Xa xỉ/Đã biết chips → small box/column at right | owner-2111-bag-1/2.jpg | worker bag-inline session_01Rc5AsJTtZMnTMg6ibPv5H7 (MAIN 85) | working | — |
+| 22 | 02:48 | Thú cưng empty «Chưa nuôi con nào» → same picture card as «Ta chưa có con»; act card «Nhờ thái giám…» stays below | owner-2111-pet-empty.jpg | empty-states session_01Rc5AsMTnwmUdoGmZsd4Uvk | in work | — |
+| 23 | 02:50 | Tư trang › Việc act cards have no picture → every act card gets its picture (scan all tabs); missing art → Foreman C | owner-2111-viec-nopic.jpg | bag-inline (85) + Foreman C | to open | — |
+| 24 | 02:52 | Tài nghệ act cards different sizes, tiny pictures (asked ≥3 times) → one card size per device everywhere | owner-2111-tainghe-cards.jpg | keeper (same card part) | in work | — |
+| 25 | 02:54 | Tài nghệ: «Đức 60» chip repeats the top bar → remove; scan all tabs for HUD-stat duplicates | owner-2111-duc-dup.jpg | chiton-name | in work | — |
+| 26 | 02:58 | Mệnh truyện › Chương này: big chapter picture left (Hành sự big-card size), title top right, goals under it, task list + Đi làm below — arrange nicely | img/_review/refs/owner-2111-chapter.jpg | worker chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (MAIN 85) | working | — |
+| 27 | 03:00 | Sắc phong: keep the 2-column condition rows (liked); make the picture BIG (or a full-width banner) and put rows below; same for Chương này, Đã qua, Triều cục, Tâm nguyện (owner 03:02Z) | img/_review/refs/owner-2111-sacphong.jpg | worker chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (MAIN 85) | working | — |
+| 28 | 03:05 | Mệnh truyện chapters/phụ tuyến = SLIDE carousel: big wide picture with «Chương N · tên» + hồi on it, arrows/swipe between chapters, info rows below follow the slide; no repeated chapter list | img/_review/refs/owner-2111-trieucuc-slide.jpg | worker chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (MAIN 85) + keeper kit carousel | working | — |
+| 29 | 03:07 | Slide carousel for EVERY chapter place in the game; chapter list removed → small «Mục lục» button bottom-right opens all chapters | — | chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (addendum MAIN 86) | working | — |
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
 | 30 | 03:10 | Việc nhờ empty: big «Chưa ai nhờ ta việc gì» picture card on top, the «Hỏi han…» button below (like Thú cưng) → ONE shared empty-tab layout; she says buttons now follow the kit but layouts don't yet | img/_review/refs/owner-2111-viecnho-empty.jpg | empty-states (addendum sent by 85) | in work | — |
 | 31 | 03:12 | Sổ ghi: much text — she will check in game first; no change until she says | — | — (waiting her) | waiting | — |
 | 32 | 03:15 | Cung nữ road: use the SAME 8 bottom tabs as consort (no different nav); build the 8-tab layout now; content mapping → she decides later | img/_review/refs/owner-2111-maid-tabs.jpg | worker maid-8tabs session_01Rc5AsN3dAttmwAANVGfgtX (MAIN 85) | working | — |
@@ -39,6 +66,7 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 34 | 03:20 | Cung nữ: master strip «Cung nữ tam đẳng của Thường tại… · chủ Kín đáo… · Chủ tin 50» on every tab → remove; master box in stage right column «Chủ tin 50», tap → master info (like Hoàng thượng box) | img/_review/refs/owner-2111-maid-master.jpg | worker maid-8tabs session_01Rc5AsN3dAttmwAANVGfgtX (MAIN 85) | working | — |
 | 35 | 03:22 | Cung nữ › Đồng liêu private layout → into the maid's Hậu cung tab (same sub-tabs; Cung nhân → «Đồng liêu»), shared person layout. ROOT: ONE 8-tab shell + shared layouts for EVERY status so one change applies to all | img/_review/refs/owner-2111-dongliu.jpg | worker maid-8tabs session_01Rc5AsN3dAttmwAANVGfgtX (MAIN 85; goal one shell) | working | — |
 | 36 | 03:25 | All statuses: stage right column = same boxes as consort (Nguy hiểm chung, Xét phẩm…); only labels change: Cung nhân→Đồng liêu, Phi tần→«Chủ tử» for the maid; layouts identical. She is done with the maid road | — | worker maid-8tabs session_01Rc5AsN3dAttmwAANVGfgtX (MAIN 85; one shell) | working | — |
+<<<<<<< HEAD
 | 37 | 03:28 | Phone: Menu panels (Chọn sổ, Sổ luân hồi…) opened in game are narrow + tall, buttons jumble → same wide frame as the title-screen panel | img/_review/refs/owner-2111-menu-narrow.jpg + menu-good.jpg | worker menu-panel session_01Rc5AsMQiepfa9AQYno5iem (MAIN 85) | SSK db5a6bfa → rv session_01Rc5AsLEtGvABQjjGRj13hB | — |
 | 38 | 03:32 | Person dialog left column: empty band under the figure, info rows squeezed at bottom → no wasted band (rows up / figure fills) | img/_review/refs/owner-2111-leftcol-gap.jpg | keeper | in work | — |
 | 39 | 03:35 | Mood frames: cause-event picture (neutral bg OK) + emotion seal in the picture corner (missing); every mood frame | img/_review/refs/owner-2111-mood-seal.jpg | worker mood-seal session_01Rc5AsMBnmtrbTbNUDqJf9M (MAIN 85) | SSK 62f4b11e → rv session_01Rc5AsNSULxyLkcFZCVytcA | — |
@@ -75,3 +103,18 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 65 | 04:44 | Second person mentioned (not the left figure) → her avatar ON the event picture corner (iPad frame; phone small), never a line avatar | img/_review/refs/owner-2111-avatar-on-pic.jpg | keeper | in work | — |
 | 66 | 04:46 | Quest chips: keep the INFO, drop the chip form → kit label|value rows like earlier frames (owner correction 04:49Z) | img/_review/refs/owner-2111-quest-chips-2.jpg | 86 to route | to open | — |
 | 67 | 04:52 | «Trốn trong phòng» (her own event) shows the ma ma on the left → her own figure; scan every dialog for the default narrator figure (= #58) | img/_review/refs/owner-2111-self-event.jpg | dialog-person (86) | in work | — |
+=======
+| 37 | 03:28 | Phone: Menu panels (Chọn sổ, Sổ luân hồi…) opened in game are narrow + tall, buttons jumble → same wide frame as the title-screen panel | img/_review/refs/owner-2111-menu-narrow.jpg + menu-good.jpg | worker menu-panel session_01Rc5AsMQiepfa9AQYno5iem (MAIN 85) | working | — |
+| 38 | 03:32 | Person dialog left column: empty band under the figure, info rows squeezed at bottom → no wasted band (rows up / figure fills) | img/_review/refs/owner-2111-leftcol-gap.jpg | keeper | in work | — |
+| 39 | 03:35 | Mood frames: cause-event picture (neutral bg OK) + emotion seal in the picture corner (missing); every mood frame | img/_review/refs/owner-2111-mood-seal.jpg | worker mood-seal session_01Rc5AsMBnmtrbTbNUDqJf9M (MAIN 85) | working | — |
+| 40 | 03:36 | «Đã sở trọng rồi còn sở trường» on maid dialog = #4 whole group | img/_review/refs/owner-2111-sotrong-maid.jpg | chiton-name | in work | — |
+| 41 | 03:40 | Trait words: «Đa nghi» everywhere (not «dễ nghi»); header «Tính cách | Đa nghi, Hiếu thảo» with DOTTED-UNDERLINE words, tap one → popup with only its meaning; no bullet box; overwrites trait part of #5/#9; kit pattern for every word with hidden detail | img/_review/refs/owner-2111-trait-underline.jpg | keeper + chiton-name | in work | — |
+| 42 | 03:43 | Lịch tháng ugly → normal phone-calendar month view: ‹ month › arrows/swipe (no chip wall), square day grid, marks/pictures in cells, today highlighted, tap day → events below | img/_review/refs/owner-2111-calendar.jpg | NEW sonnet worker calendar (MAIN 86) | opening | — |
+| 43 | 03:45 | Chapter dialog: picture tiny with empty column → BIG picture filling the left column (layout otherwise nearly right) | img/_review/refs/owner-2111-chapter-dialog.jpg | chapter-card session_01Rc5AsMDAsVpNsL2CKbpUuC (addendum MAIN 86) | working | — |
+| 44 | 03:47 | «Trân nữ» seal on dialogs: present on some, absent on others, different corners → one rule, same corner/size on every dialog | img/_review/refs/owner-2111-seal-mark.jpg | keeper | in work | — |
+| 45 | 03:48 | Mini-game iPad figure column (intro + playing): NEW tall background per subject (owner 03:50Z: do NOT reuse the board picture) → Foreman C art + mg wiring | img/_review/refs/owner-2111-mg-intro-bg.jpg | art: Foreman C ART REQUEST; wiring: mg-5s-clear worker session_01Rc5AsLTqtdSYJsC6Gxn7cc (MAIN 86) | routed | — |
+| 46 | 03:52 | Death «Kiếp này» dialog with an old person dialog (Bảo Châu) still open on top → one dialog at a time / new dialog closes others | img/_review/refs/owner-2111-death-overlap.jpg | NEW sonnet worker dialog-stack (MAIN 86) | opening | — |
+| 47 | 03:54 | Same dialog frame size, but the left figure has a different size/position per dialog → one size + position (Hoàng hậu standard) | img/_review/refs/owner-2111-figure-size.jpg | keeper | in work | — |
+| 49 | 04:00 | REPEAT/angry: option card odds meter on its own row → on the title row; iPad 2 columns when text fits; phone picture fills card; dialog picture+info FIXED, only buttons scroll (rules OD L1867/L1878 regressed) + regression test | img/_review/refs/owner-2111-optcard-row.jpg + dialog-fixed.jpg | keeper | in work | — |
+| 48 | 03:56 | Death «Kiếp này» frame: white mourning flower top centre + white drapes hanging around the frame (her sketch), phone + iPad | img/_review/refs/owner-2111-death-frame.jpg | art: Foreman C ART REQUEST (86); wiring: dialog-stack worker session_01Rc5AsMKqxj4qxqFG31WLXb as kit frame variant (keeper checks) | routed | — |
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

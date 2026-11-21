@@ -4,7 +4,11 @@
   "season": "xuan",
   "main": [
    "#98CB8D",
+<<<<<<< HEAD
    "#C988A4"
+=======
+   "#DB90B6"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#AFEBEE",
@@ -32,7 +36,11 @@
   ],
   "sec": [
    "#E0F1FF",
+<<<<<<< HEAD
    "#D3E8F7"
+=======
+   "#E0F1FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -44,7 +52,11 @@
   ],
   "sec": [
    "#FFDEE7",
+<<<<<<< HEAD
    "#FFDEE7"
+=======
+   "#FFE8E9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -52,6 +64,7 @@
   "season": "thu",
   "main": [
    "#5F8F54",
+<<<<<<< HEAD
    "#D1846A"
   ],
   "sec": [
@@ -69,6 +82,13 @@
   "sec": [
    "#FFECDE",
    "#FFECDE"
+=======
+   "#96AB6E"
+  ],
+  "sec": [
+   "#E5E1D7",
+   "#EDF0E5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -88,6 +108,7 @@
   "season": "thu",
   "main": [
    "#4E7D43",
+<<<<<<< HEAD
    "#76183A"
   ],
   "sec": [
@@ -105,6 +126,13 @@
   "sec": [
    "#6AAF98",
    "#A6DED2"
+=======
+   "#6A7E40"
+  ],
+  "sec": [
+   "#E3F3FF",
+   "#DAE4FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -112,11 +140,19 @@
   "season": "ha",
   "main": [
    "#EAE697",
+<<<<<<< HEAD
    "#DC896C"
   ],
   "sec": [
    "#ECF7FF",
    "#C6ECFB"
+=======
+   "#F0EF84"
+  ],
+  "sec": [
+   "#ECF7FF",
+   "#EBC5D0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -124,6 +160,7 @@
   "season": "thu",
   "main": [
    "#903C61",
+<<<<<<< HEAD
    "#93A869"
   ],
   "sec": [
@@ -141,6 +178,13 @@
   "sec": [
    "#74B47E",
    "#74B47E"
+=======
+   "#771735"
+  ],
+  "sec": [
+   "#FFEAEF",
+   "#FFDCCD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -181,6 +225,7 @@
  },
  {
   "id": "c10",
+<<<<<<< HEAD
   "season": "ha",
   "main": [
    "#DFBB9F",
@@ -193,6 +238,8 @@
  },
  {
   "id": "c10",
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "season": "thu",
   "main": [
    "#C16B7A",
@@ -208,11 +255,19 @@
   "season": "ha",
   "main": [
    "#FFAC97",
+<<<<<<< HEAD
    "#FFAC97"
   ],
   "sec": [
    "#FFF0FB",
    "#C9E1D6"
+=======
+   "#FF9C67"
+  ],
+  "sec": [
+   "#FFF0FB",
+   "#FFF0FB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -236,6 +291,7 @@
   ],
   "sec": [
    "#D5FAE9",
+<<<<<<< HEAD
    "#D3FBDA"
   ]
  },
@@ -249,6 +305,9 @@
   "sec": [
    "#6B64B4",
    "#6B64B4"
+=======
+   "#D5FAE9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -256,6 +315,7 @@
   "season": "ha",
   "main": [
    "#D58679",
+<<<<<<< HEAD
    "#E89366"
   ],
   "sec": [
@@ -273,6 +333,13 @@
   "sec": [
    "#FBDAC1",
    "#FCDEC7"
+=======
+   "#ED8D7B"
+  ],
+  "sec": [
+   "#B9E4E6",
+   "#BCE2F1"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -280,11 +347,19 @@
   "season": "ha",
   "main": [
    "#E4E89A",
+<<<<<<< HEAD
    "#E18B23"
   ],
   "sec": [
    "#FFF3E9",
    "#FFF3E9"
+=======
+   "#EAF187"
+  ],
+  "sec": [
+   "#FFF3E9",
+   "#C1D0F9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -296,7 +371,11 @@
   ],
   "sec": [
    "#E3F3FF",
+<<<<<<< HEAD
    "#CCE9FF"
+=======
+   "#E3F3FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -340,7 +419,11 @@
   "season": "thu",
   "main": [
    "#68985D",
+<<<<<<< HEAD
    "#768A4E"
+=======
+   "#7F985E"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#FCD6E0",
@@ -384,6 +467,7 @@
   ]
  },
  {
+<<<<<<< HEAD
   "id": "c27",
   "season": "thu",
   "main": [
@@ -408,10 +492,13 @@
   ]
  },
  {
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "id": "c28",
   "season": "ha",
   "main": [
    "#EBE68E",
+<<<<<<< HEAD
    "#EFEE8D"
   ],
   "sec": [
@@ -429,6 +516,37 @@
   "sec": [
    "#D67064",
    "#D67064"
+=======
+   "#ED8D7B"
+  ],
+  "sec": [
+   "#ECE2FE",
+   "#F2ECF6"
+  ]
+ },
+ {
+  "id": "c28",
+  "season": "thu",
+  "main": [
+   "#D28474",
+   "#768A4E"
+  ],
+  "sec": [
+   "#C7E6FD",
+   "#CEF7FF"
+  ]
+ },
+ {
+  "id": "c28",
+  "season": "dong",
+  "main": [
+   "#599FD8",
+   "#599FD8"
+  ],
+  "sec": [
+   "#FED4B9",
+   "#F2D4BE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -440,7 +558,11 @@
   ],
   "sec": [
    "#FFF3E9",
+<<<<<<< HEAD
    "#EBF9F5"
+=======
+   "#F3DAFE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -452,6 +574,7 @@
   ],
   "sec": [
    "#E3F3FF",
+<<<<<<< HEAD
    "#DAE4FF"
   ]
  },
@@ -477,6 +600,21 @@
   "sec": [
    "#EFF3C9",
    "#FFEBD2"
+=======
+   "#E3F3FF"
+  ]
+ },
+ {
+  "id": "c31",
+  "season": "dong",
+  "main": [
+   "#6B6CAE",
+   "#6B6CAE"
+  ],
+  "sec": [
+   "#FFE0E8",
+   "#FFDADC"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -484,6 +622,7 @@
   "season": "thu",
   "main": [
    "#82B976",
+<<<<<<< HEAD
    "#879B5F"
   ],
   "sec": [
@@ -513,10 +652,18 @@
   "sec": [
    "#CF8377",
    "#F8DED9"
+=======
+   "#93A86B"
+  ],
+  "sec": [
+   "#FFE7EE",
+   "#F7F3FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
   "id": "m02",
+<<<<<<< HEAD
   "season": "dong",
   "main": [
    "#6CD8BA",
@@ -525,6 +672,16 @@
   "sec": [
    "#F2EAFF",
    "#F1EBFF"
+=======
+  "season": "ha",
+  "main": [
+   "#FC9382",
+   "#ED9E64"
+  ],
+  "sec": [
+   "#A4D8FE",
+   "#A4D8FE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -541,6 +698,7 @@
  },
  {
   "id": "m04",
+<<<<<<< HEAD
   "season": "ha",
   "main": [
    "#E8AD81",
@@ -553,6 +711,8 @@
  },
  {
   "id": "m04",
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "season": "thu",
   "main": [
    "#C16B7A",
@@ -560,7 +720,11 @@
   ],
   "sec": [
    "#FCD6E0",
+<<<<<<< HEAD
    "#F8E8FF"
+=======
+   "#E8C3E4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -572,7 +736,11 @@
   ],
   "sec": [
    "#CFB8EC",
+<<<<<<< HEAD
    "#F2CDEE"
+=======
+   "#E6D2F0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -632,7 +800,35 @@
   ],
   "sec": [
    "#E5E1D7",
+<<<<<<< HEAD
    "#FFF1F2"
+=======
+   "#E5E1D7"
+  ]
+ },
+ {
+  "id": "m14",
+  "season": "xuan",
+  "main": [
+   "#F88D92",
+   "#D985B7"
+  ],
+  "sec": [
+   "#F2EAFF",
+   "#F2EAFF"
+  ]
+ },
+ {
+  "id": "m14",
+  "season": "ha",
+  "main": [
+   "#EAA16D",
+   "#F8A86F"
+  ],
+  "sec": [
+   "#CDF2E0",
+   "#CDF2E0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -640,6 +836,7 @@
   "season": "thu",
   "main": [
    "#D28BCC",
+<<<<<<< HEAD
    "#9FB577"
   ],
   "sec": [
@@ -657,6 +854,13 @@
   "sec": [
    "#5DAC85",
    "#A3DCE7"
+=======
+   "#D08070"
+  ],
+  "sec": [
+   "#A4D8FE",
+   "#A4D8FE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -733,6 +937,7 @@
  },
  {
   "id": "m19",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#DE8D9C",
@@ -765,6 +970,28 @@
   "sec": [
    "#CDF2E0",
    "#EBF9F5"
+=======
+  "season": "thu",
+  "main": [
+   "#82B976",
+   "#ACC183"
+  ],
+  "sec": [
+   "#CDF2E0",
+   "#CFF9EF"
+  ]
+ },
+ {
+  "id": "m19",
+  "season": "dong",
+  "main": [
+   "#7ACDF7",
+   "#7ACDF7"
+  ],
+  "sec": [
+   "#F3E7CE",
+   "#F1E2CF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -788,7 +1015,11 @@
   ],
   "sec": [
    "#D4F9E7",
+<<<<<<< HEAD
    "#D4F9E7"
+=======
+   "#DDF5E9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -800,7 +1031,11 @@
   ],
   "sec": [
    "#FFDEE7",
+<<<<<<< HEAD
    "#F2CDEE"
+=======
+   "#FFF2ED"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -812,7 +1047,11 @@
   ],
   "sec": [
    "#C7E6FD",
+<<<<<<< HEAD
    "#EBF9F5"
+=======
+   "#F6ECE5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -820,6 +1059,7 @@
   "season": "thu",
   "main": [
    "#925786",
+<<<<<<< HEAD
    "#708348"
   ],
   "sec": [
@@ -837,6 +1077,13 @@
   "sec": [
    "#4E5D97",
    "#4E5D97"
+=======
+   "#768A4E"
+  ],
+  "sec": [
+   "#FED4B9",
+   "#E9CCA6"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -848,7 +1095,11 @@
   ],
   "sec": [
    "#9AD4B4",
+<<<<<<< HEAD
    "#9AD4B4"
+=======
+   "#B6E8D1"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -856,7 +1107,11 @@
   "season": "thu",
   "main": [
    "#AF71A1",
+<<<<<<< HEAD
    "#DA8979"
+=======
+   "#96AB6E"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#E7DAFF",
@@ -877,6 +1132,7 @@
  },
  {
   "id": "m29",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#AFD4BC",
@@ -897,6 +1153,16 @@
   "sec": [
    "#E5BBE1",
    "#EFC2DA"
+=======
+  "season": "ha",
+  "main": [
+   "#D58679",
+   "#FC9F7F"
+  ],
+  "sec": [
+   "#E5BBE1",
+   "#E5BBE1"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -904,11 +1170,19 @@
   "season": "thu",
   "main": [
    "#AF71A1",
+<<<<<<< HEAD
    "#96AB6E"
   ],
   "sec": [
    "#FFECDE",
    "#FEDEC4"
+=======
+   "#768A4E"
+  ],
+  "sec": [
+   "#FFECDE",
+   "#FFE9E0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -932,7 +1206,11 @@
   ],
   "sec": [
    "#D5FAE9",
+<<<<<<< HEAD
    "#E8C3E4"
+=======
+   "#ECF9F3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -944,7 +1222,11 @@
   ],
   "sec": [
    "#FFE8F9",
+<<<<<<< HEAD
    "#FFF0FD"
+=======
+   "#F8E8FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -968,7 +1250,11 @@
   ],
   "sec": [
    "#F3ECFF",
+<<<<<<< HEAD
    "#FED8EC"
+=======
+   "#E7D4E4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -992,7 +1278,11 @@
   ],
   "sec": [
    "#D5FAE9",
+<<<<<<< HEAD
    "#E4FCF0"
+=======
+   "#D5FAE9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1004,7 +1294,11 @@
   ],
   "sec": [
    "#C9F5F7",
+<<<<<<< HEAD
    "#C1D0F9"
+=======
+   "#F6F3FE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1016,7 +1310,11 @@
   ],
   "sec": [
    "#E4D6FD",
+<<<<<<< HEAD
    "#F7F3FF"
+=======
+   "#E0D2FD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1028,7 +1326,11 @@
   ],
   "sec": [
    "#CAEFDD",
+<<<<<<< HEAD
    "#D4F9E7"
+=======
+   "#C0F2DB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1036,11 +1338,19 @@
   "season": "ha",
   "main": [
    "#E09974",
+<<<<<<< HEAD
    "#F89884"
   ],
   "sec": [
    "#D8DCB2",
    "#CBD7AC"
+=======
+   "#F39D70"
+  ],
+  "sec": [
+   "#D8DCB2",
+   "#ECF2DC"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1048,11 +1358,19 @@
   "season": "thu",
   "main": [
    "#852D37",
+<<<<<<< HEAD
    "#681022"
   ],
   "sec": [
    "#FFD9E3",
    "#F7F3FF"
+=======
+   "#782134"
+  ],
+  "sec": [
+   "#FFD9E3",
+   "#F7CFD1"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1060,11 +1378,19 @@
   "season": "thu",
   "main": [
    "#4E7D43",
+<<<<<<< HEAD
    "#681022"
   ],
   "sec": [
    "#FFEAEF",
    "#DCE9D6"
+=======
+   "#5F7A48"
+  ],
+  "sec": [
+   "#FFEAEF",
+   "#FEE7F3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1072,6 +1398,7 @@
   "season": "xuan",
   "main": [
    "#6AA36C",
+<<<<<<< HEAD
    "#D48BB1"
   ],
   "sec": [
@@ -1089,6 +1416,13 @@
   "sec": [
    "#D0F5E4",
    "#FFF2EF"
+=======
+   "#CC84A8"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#E8E4DA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1100,7 +1434,11 @@
   ],
   "sec": [
    "#EFE6FF",
+<<<<<<< HEAD
    "#C0FCFB"
+=======
+   "#E9DFFE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1108,11 +1446,19 @@
   "season": "xuan",
   "main": [
    "#8CBE81",
+<<<<<<< HEAD
    "#8CBE81"
   ],
   "sec": [
    "#FEDEC4",
    "#E8CBB4"
+=======
+   "#D48BB1"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FFE9E0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1120,11 +1466,19 @@
   "season": "ha",
   "main": [
    "#D58679",
+<<<<<<< HEAD
    "#F5EC8A"
   ],
   "sec": [
    "#88D4D3",
    "#FBF4EA"
+=======
+   "#DE8269"
+  ],
+  "sec": [
+   "#88D4D3",
+   "#88D4D3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1132,11 +1486,31 @@
   "season": "thu",
   "main": [
    "#C592B9",
+<<<<<<< HEAD
    "#D48676"
   ],
   "sec": [
    "#F6ECC0",
    "#E1F5E4"
+=======
+   "#A3C18C"
+  ],
+  "sec": [
+   "#F6ECC0",
+   "#E9CCA6"
+  ]
+ },
+ {
+  "id": "s15",
+  "season": "xuan",
+  "main": [
+   "#D48DA0",
+   "#D48DA0"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#DCD0B0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1144,11 +1518,19 @@
   "season": "ha",
   "main": [
    "#E9A17C",
+<<<<<<< HEAD
    "#F39F6C"
   ],
   "sec": [
    "#EADEFF",
    "#FEE7F3"
+=======
+   "#F49E70"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#F8DED9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1156,6 +1538,7 @@
   "season": "thu",
   "main": [
    "#68985D",
+<<<<<<< HEAD
    "#74915E"
   ],
   "sec": [
@@ -1173,6 +1556,13 @@
   "sec": [
    "#B35685",
    "#F4C1CF"
+=======
+   "#7C9965"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#DAE4FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1180,15 +1570,24 @@
   "season": "thu",
   "main": [
    "#672863",
+<<<<<<< HEAD
    "#7E9354"
   ],
   "sec": [
    "#E0F1FF",
    "#E4F1F4"
+=======
+   "#6A7E40"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#B7D6EC"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
   "id": "s17",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#D88579",
@@ -1197,6 +1596,16 @@
   "sec": [
    "#FBD6C2",
    "#FBD6C2"
+=======
+  "season": "ha",
+  "main": [
+   "#E58870",
+   "#F6EC81"
+  ],
+  "sec": [
+   "#004F38",
+   "#004F38"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1204,11 +1613,19 @@
   "season": "thu",
   "main": [
    "#98518A",
+<<<<<<< HEAD
    "#93A869"
   ],
   "sec": [
    "#BCE8EA",
    "#C0FCFB"
+=======
+   "#9C3B53"
+  ],
+  "sec": [
+   "#BCE8EA",
+   "#BCE8EA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1220,7 +1637,11 @@
   ],
   "sec": [
    "#FBD9F2",
+<<<<<<< HEAD
    "#FEAAAE"
+=======
+   "#FFBDC0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1228,11 +1649,19 @@
   "season": "ha",
   "main": [
    "#DA8375",
+<<<<<<< HEAD
    "#FD9861"
   ],
   "sec": [
    "#E4D6FD",
    "#F3DAFE"
+=======
+   "#F89884"
+  ],
+  "sec": [
+   "#E4D6FD",
+   "#CFDAFA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1244,7 +1673,11 @@
   ],
   "sec": [
    "#FEDEC4",
+<<<<<<< HEAD
    "#EAD7C7"
+=======
+   "#FEEEC1"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1256,7 +1689,11 @@
   ],
   "sec": [
    "#FFD9E3",
+<<<<<<< HEAD
    "#F7CFD1"
+=======
+   "#FFD9E3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1268,7 +1705,11 @@
   ],
   "sec": [
    "#EADEFF",
+<<<<<<< HEAD
    "#EADEFF"
+=======
+   "#ECEDFF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1304,6 +1745,7 @@
   ],
   "sec": [
    "#C3EEF0",
+<<<<<<< HEAD
    "#B7F0FB"
   ]
  },
@@ -1317,6 +1759,9 @@
   "sec": [
    "#FFF1F5",
    "#FFF1F2"
+=======
+   "#C3EEF0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1324,11 +1769,19 @@
   "season": "ha",
   "main": [
    "#DA8375",
+<<<<<<< HEAD
    "#F89884"
   ],
   "sec": [
    "#FEDEC4",
    "#E1E2FF"
+=======
+   "#FB9A5B"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#EFC2DA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1340,7 +1793,11 @@
   ],
   "sec": [
    "#CCE9FF",
+<<<<<<< HEAD
    "#CCE9FF"
+=======
+   "#B8E1FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1352,6 +1809,7 @@
   ],
   "sec": [
    "#F0E5BA",
+<<<<<<< HEAD
    "#F0E5BA"
   ]
  },
@@ -1365,6 +1823,9 @@
   "sec": [
    "#F1CCB8",
    "#FCDEC7"
+=======
+   "#F6F6EB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1384,11 +1845,19 @@
   "season": "ha",
   "main": [
    "#DA8375",
+<<<<<<< HEAD
    "#FE947F"
   ],
   "sec": [
    "#F4F0E6",
    "#F1FAD9"
+=======
+   "#FE9571"
+  ],
+  "sec": [
+   "#F4F0E6",
+   "#E1FCF6"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1400,7 +1869,11 @@
   ],
   "sec": [
    "#CAEFDD",
+<<<<<<< HEAD
    "#C5EFE6"
+=======
+   "#B6DDBD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1412,7 +1885,11 @@
   ],
   "sec": [
    "#CFB8EC",
+<<<<<<< HEAD
    "#FCD7F8"
+=======
+   "#BED3EF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1420,11 +1897,19 @@
   "season": "thu",
   "main": [
    "#7FB673",
+<<<<<<< HEAD
    "#9BB984"
   ],
   "sec": [
    "#EBF0C6",
    "#CDCEEE"
+=======
+   "#8FA771"
+  ],
+  "sec": [
+   "#EBF0C6",
+   "#EBF0C6"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1432,11 +1917,19 @@
   "season": "ha",
   "main": [
    "#D3896B",
+<<<<<<< HEAD
    "#D89B67"
   ],
   "sec": [
    "#9AD4B4",
    "#DDDCC6"
+=======
+   "#EB8C79"
+  ],
+  "sec": [
+   "#9AD4B4",
+   "#C0DAB3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1444,11 +1937,19 @@
   "season": "thu",
   "main": [
    "#F7ACBC",
+<<<<<<< HEAD
    "#78905B"
   ],
   "sec": [
    "#ECF7FF",
    "#F6C3BA"
+=======
+   "#7C8F58"
+  ],
+  "sec": [
+   "#ECF7FF",
+   "#A3DEDD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1456,11 +1957,19 @@
   "season": "xuan",
   "main": [
    "#DE879F",
+<<<<<<< HEAD
    "#DE879F"
   ],
   "sec": [
    "#BCEBD1",
    "#FEDCCE"
+=======
+   "#E4849D"
+  ],
+  "sec": [
+   "#BCEBD1",
+   "#FECEC5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1468,7 +1977,11 @@
   "season": "ha",
   "main": [
    "#E09974",
+<<<<<<< HEAD
    "#E59360"
+=======
+   "#E3955B"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#CFB8EC",
@@ -1480,11 +1993,19 @@
   "season": "thu",
   "main": [
    "#76AC6A",
+<<<<<<< HEAD
    "#A3C18C"
   ],
   "sec": [
    "#EFEBE1",
    "#EFEBE1"
+=======
+   "#83A06D"
+  ],
+  "sec": [
+   "#EFEBE1",
+   "#E7D8C5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1496,7 +2017,11 @@
   ],
   "sec": [
    "#E5E9BF",
+<<<<<<< HEAD
    "#EAE8BA"
+=======
+   "#E5E9BF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1508,7 +2033,11 @@
   ],
   "sec": [
    "#EADEFF",
+<<<<<<< HEAD
    "#F3DAFE"
+=======
+   "#EADEFF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1516,7 +2045,11 @@
   "season": "thu",
   "main": [
    "#7BB76E",
+<<<<<<< HEAD
    "#7C9965"
+=======
+   "#83A06D"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#C4E3F9",
@@ -1524,6 +2057,7 @@
   ]
  },
  {
+<<<<<<< HEAD
   "id": "s29",
   "season": "dong",
   "main": [
@@ -1533,6 +2067,17 @@
   "sec": [
    "#00675B",
    "#00675B"
+=======
+  "id": "s30",
+  "season": "ha",
+  "main": [
+   "#E1EA93",
+   "#F1A167"
+  ],
+  "sec": [
+   "#EEB0C2",
+   "#F6C2C4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1540,11 +2085,19 @@
   "season": "thu",
   "main": [
    "#DF8C6F",
+<<<<<<< HEAD
    "#E09C72"
   ],
   "sec": [
    "#FEDEC4",
    "#F8ECE6"
+=======
+   "#D48772"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FFF3E9"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1556,7 +2109,11 @@
   ],
   "sec": [
    "#E8E4DA",
+<<<<<<< HEAD
    "#F2EEE3"
+=======
+   "#E8E4DA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1564,11 +2121,19 @@
   "season": "ha",
   "main": [
    "#E7A277",
+<<<<<<< HEAD
    "#D89B67"
   ],
   "sec": [
    "#FBBDCF",
    "#FCD7F8"
+=======
+   "#F79B7B"
+  ],
+  "sec": [
+   "#FBBDCF",
+   "#FBBDCF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1576,11 +2141,31 @@
   "season": "thu",
   "main": [
    "#B97275",
+<<<<<<< HEAD
    "#ABC994"
   ],
   "sec": [
    "#AFEBEE",
    "#AFEBEE"
+=======
+   "#9BB984"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#A3DEDD"
+  ]
+ },
+ {
+  "id": "s32",
+  "season": "ha",
+  "main": [
+   "#FFBB92",
+   "#FFBB92"
+  ],
+  "sec": [
+   "#EBF0C6",
+   "#D5E1B5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1592,7 +2177,11 @@
   ],
   "sec": [
    "#CAEFDD",
+<<<<<<< HEAD
    "#C0F2DB"
+=======
+   "#DCFFEE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1604,7 +2193,11 @@
   ],
   "sec": [
    "#E0F1FF",
+<<<<<<< HEAD
    "#C7DDF9"
+=======
+   "#E4F0FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1616,6 +2209,7 @@
   ],
   "sec": [
    "#FEDEC4",
+<<<<<<< HEAD
    "#FFDBD5"
   ]
  },
@@ -1641,6 +2235,9 @@
   "sec": [
    "#EAD9CD",
    "#EBB890"
+=======
+   "#FEDEC4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1648,6 +2245,33 @@
   "season": "thu",
   "main": [
    "#993842",
+<<<<<<< HEAD
+=======
+   "#617437"
+  ],
+  "sec": [
+   "#E9DDC4",
+   "#E2DAC5"
+  ]
+ },
+ {
+  "id": "s36",
+  "season": "thu",
+  "main": [
+   "#9E5B99",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#BCEBD1",
+   "#B6DDBD"
+  ]
+ },
+ {
+  "id": "s37",
+  "season": "thu",
+  "main": [
+   "#A9496B",
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
    "#9C3B53"
   ],
   "sec": [
@@ -1656,6 +2280,7 @@
   ]
  },
  {
+<<<<<<< HEAD
   "id": "s36",
   "season": "thu",
   "main": [
@@ -1716,15 +2341,25 @@
   ]
  },
  {
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "id": "s38",
   "season": "thu",
   "main": [
    "#4A7E3E",
+<<<<<<< HEAD
    "#617437"
   ],
   "sec": [
    "#F4D2EB",
    "#F4D2EB"
+=======
+   "#6A7E40"
+  ],
+  "sec": [
+   "#F4D2EB",
+   "#F2CDEE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1736,7 +2371,11 @@
   ],
   "sec": [
    "#FFF1F5",
+<<<<<<< HEAD
    "#FFE8E9"
+=======
+   "#FFF1F5"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1748,7 +2387,11 @@
   ],
   "sec": [
    "#FBEFD6",
+<<<<<<< HEAD
    "#FFF5D9"
+=======
+   "#FFF3E4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1756,11 +2399,19 @@
   "season": "ha",
   "main": [
    "#DF8071",
+<<<<<<< HEAD
    "#E9833E"
   ],
   "sec": [
    "#F3ECFF",
    "#ECEDFF"
+=======
+   "#EF7D55"
+  ],
+  "sec": [
+   "#F3ECFF",
+   "#FFE5FB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1772,7 +2423,11 @@
   ],
   "sec": [
    "#D5FAE9",
+<<<<<<< HEAD
    "#F6C2C4"
+=======
+   "#D2E0CC"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1792,11 +2447,19 @@
   "season": "ha",
   "main": [
    "#E69671",
+<<<<<<< HEAD
    "#E69671"
   ],
   "sec": [
    "#F7F3FF",
    "#F1F5FF"
+=======
+   "#DF8B4A"
+  ],
+  "sec": [
+   "#F7F3FF",
+   "#E8EEFF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1808,7 +2471,11 @@
   ],
   "sec": [
    "#F0F5CA",
+<<<<<<< HEAD
    "#F0F5CA"
+=======
+   "#E9F5C8"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1816,11 +2483,19 @@
   "season": "ha",
   "main": [
    "#E6A375",
+<<<<<<< HEAD
    "#ED945B"
   ],
   "sec": [
    "#FFE0E8",
    "#FFDBD5"
+=======
+   "#F0933B"
+  ],
+  "sec": [
+   "#FFE0E8",
+   "#FFE0E8"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1832,7 +2507,11 @@
   ],
   "sec": [
    "#E3D6FF",
+<<<<<<< HEAD
    "#FAF1FF"
+=======
+   "#D5CBEB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1840,6 +2519,7 @@
   "season": "ha",
   "main": [
    "#FFAF79",
+<<<<<<< HEAD
    "#FFAF79"
   ],
   "sec": [
@@ -1857,6 +2537,13 @@
   "sec": [
    "#94B594",
    "#94B594"
+=======
+   "#E89751"
+  ],
+  "sec": [
+   "#E69498",
+   "#E69498"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1864,11 +2551,19 @@
   "season": "ha",
   "main": [
    "#DF8C6F",
+<<<<<<< HEAD
    "#F98A58"
   ],
   "sec": [
    "#176A4E",
    "#B6DDBD"
+=======
+   "#F0933B"
+  ],
+  "sec": [
+   "#176A4E",
+   "#176A4E"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1876,11 +2571,31 @@
   "season": "thu",
   "main": [
    "#649958",
+<<<<<<< HEAD
    "#617437"
   ],
   "sec": [
    "#E4D6FD",
    "#FFBDC0"
+=======
+   "#7E9354"
+  ],
+  "sec": [
+   "#E4D6FD",
+   "#F19E96"
+  ]
+ },
+ {
+  "id": "s46",
+  "season": "xuan",
+  "main": [
+   "#CE8EB2",
+   "#D48BB1"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#E0D2FD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1892,7 +2607,11 @@
   ],
   "sec": [
    "#98CBF0",
+<<<<<<< HEAD
    "#FFDADC"
+=======
+   "#98CBF0"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1904,7 +2623,23 @@
   ],
   "sec": [
    "#FEDEC4",
+<<<<<<< HEAD
    "#FEDEC4"
+=======
+   "#F5EBF3"
+  ]
+ },
+ {
+  "id": "s47",
+  "season": "xuan",
+  "main": [
+   "#649958",
+   "#C06FA0"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#F6C3BA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1912,11 +2647,19 @@
   "season": "ha",
   "main": [
    "#D3896B",
+<<<<<<< HEAD
    "#E19757"
   ],
   "sec": [
    "#EEB0C2",
    "#CDCEEE"
+=======
+   "#DE8269"
+  ],
+  "sec": [
+   "#EEB0C2",
+   "#E8C3E4"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1924,6 +2667,7 @@
   "season": "thu",
   "main": [
    "#AF71A1",
+<<<<<<< HEAD
    "#D48772"
   ],
   "sec": [
@@ -1941,6 +2685,13 @@
   "sec": [
    "#70CCC1",
    "#70CCC1"
+=======
+   "#83A06D"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#CEF7FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1952,7 +2703,11 @@
   ],
   "sec": [
    "#CCE9FF",
+<<<<<<< HEAD
    "#CCE9FF"
+=======
+   "#EAF8FB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1960,11 +2715,19 @@
   "season": "thu",
   "main": [
    "#68985D",
+<<<<<<< HEAD
    "#7C9965"
   ],
   "sec": [
    "#E5E9BF",
    "#DFEBBF"
+=======
+   "#83A06D"
+  ],
+  "sec": [
+   "#E5E9BF",
+   "#EADAAE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1976,7 +2739,11 @@
   ],
   "sec": [
    "#EFEBE1",
+<<<<<<< HEAD
    "#C7DFEA"
+=======
+   "#F1F5FF"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -1988,6 +2755,7 @@
   ],
   "sec": [
    "#EADEFF",
+<<<<<<< HEAD
    "#EDEDF8"
   ]
  },
@@ -2001,6 +2769,9 @@
   "sec": [
    "#C3EEF0",
    "#E4FCF0"
+=======
+   "#F0DCFA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2008,11 +2779,19 @@
   "season": "xuan",
   "main": [
    "#7AAB6F",
+<<<<<<< HEAD
    "#EB96C8"
   ],
   "sec": [
    "#CAEFDD",
    "#CAEFDD"
+=======
+   "#E38EC0"
+  ],
+  "sec": [
+   "#CAEFDD",
+   "#BDDAC2"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2024,7 +2803,11 @@
   ],
   "sec": [
    "#FFD9E3",
+<<<<<<< HEAD
    "#FFE7F3"
+=======
+   "#FCD9EB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2032,11 +2815,31 @@
   "season": "thu",
   "main": [
    "#DD90CC",
+<<<<<<< HEAD
    "#83A06D"
   ],
   "sec": [
    "#EFEBE1",
    "#EFEBE1"
+=======
+   "#74915E"
+  ],
+  "sec": [
+   "#EFEBE1",
+   "#EBC8B9"
+  ]
+ },
+ {
+  "id": "s51",
+  "season": "xuan",
+  "main": [
+   "#2F5D24",
+   "#2F5D24"
+  ],
+  "sec": [
+   "#C9F5F7",
+   "#C0FCFB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2056,11 +2859,19 @@
   "season": "thu",
   "main": [
    "#832D47",
+<<<<<<< HEAD
    "#6A0235"
   ],
   "sec": [
    "#E8E4DA",
    "#D2E0CC"
+=======
+   "#76213E"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#ECF9F3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2084,7 +2895,11 @@
   ],
   "sec": [
    "#FFD9E3",
+<<<<<<< HEAD
    "#F4F4FF"
+=======
+   "#FEDCCE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2092,11 +2907,19 @@
   "season": "ha",
   "main": [
    "#FD9F90",
+<<<<<<< HEAD
    "#FD9F90"
   ],
   "sec": [
    "#FFE4CF",
    "#EDF0E5"
+=======
+   "#FE9668"
+  ],
+  "sec": [
+   "#FFE4CF",
+   "#C6ECFB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2108,7 +2931,11 @@
   ],
   "sec": [
    "#E5E9BF",
+<<<<<<< HEAD
    "#EADAAE"
+=======
+   "#D6D4A7"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2116,7 +2943,11 @@
   "season": "ha",
   "main": [
    "#D88669",
+<<<<<<< HEAD
    "#F89C55"
+=======
+   "#F29E6B"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#79466F",
@@ -2128,6 +2959,7 @@
   "season": "thu",
   "main": [
    "#447838",
+<<<<<<< HEAD
    "#D58777"
   ],
   "sec": [
@@ -2145,6 +2977,13 @@
   "sec": [
    "#95B77B",
    "#95B77B"
+=======
+   "#5F7A48"
+  ],
+  "sec": [
+   "#EFE3CB",
+   "#D2E0CC"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2152,11 +2991,19 @@
   "season": "ha",
   "main": [
    "#EB936B",
+<<<<<<< HEAD
    "#EB936B"
   ],
   "sec": [
    "#F9F5EB",
    "#F6F6EB"
+=======
+   "#FD9861"
+  ],
+  "sec": [
+   "#F9F5EB",
+   "#B0DBDA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2164,6 +3011,7 @@
   "season": "thu",
   "main": [
    "#832D47",
+<<<<<<< HEAD
    "#677843"
   ],
   "sec": [
@@ -2181,6 +3029,25 @@
   "sec": [
    "#A991CA",
    "#A991CA"
+=======
+   "#76213E"
+  ],
+  "sec": [
+   "#C3EEF0",
+   "#C5D0EF"
+  ]
+ },
+ {
+  "id": "s55",
+  "season": "dong",
+  "main": [
+   "#6F5897",
+   "#6F5897"
+  ],
+  "sec": [
+   "#EFE6FF",
+   "#F6E9FD"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2197,6 +3064,7 @@
  },
  {
   "id": "s57",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#528747",
@@ -2217,6 +3085,16 @@
   "sec": [
    "#F9D2DD",
    "#EAF8FB"
+=======
+  "season": "ha",
+  "main": [
+   "#DE826A",
+   "#DE826A"
+  ],
+  "sec": [
+   "#F9D2DD",
+   "#F4F1C3"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2233,6 +3111,7 @@
  },
  {
   "id": "s58",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#4A7E3E",
@@ -2245,6 +3124,8 @@
  },
  {
   "id": "s58",
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "season": "ha",
   "main": [
    "#EAE697",
@@ -2256,6 +3137,7 @@
   ]
  },
  {
+<<<<<<< HEAD
   "id": "s58",
   "season": "thu",
   "main": [
@@ -2292,11 +3174,17 @@
   ]
  },
  {
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "id": "s59",
   "season": "thu",
   "main": [
    "#649958",
+<<<<<<< HEAD
    "#9C3B53"
+=======
+   "#617437"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ],
   "sec": [
    "#AFEBEE",
@@ -2305,6 +3193,7 @@
  },
  {
   "id": "s60",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#D9998C",
@@ -2325,6 +3214,16 @@
   "sec": [
    "#EDCCE5",
    "#EDC6C7"
+=======
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#F0933B"
+  ],
+  "sec": [
+   "#EDCCE5",
+   "#F3DAFE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2341,6 +3240,7 @@
  },
  {
   "id": "s61",
+<<<<<<< HEAD
   "season": "xuan",
   "main": [
    "#A44B79",
@@ -2365,6 +3265,8 @@
  },
  {
   "id": "s61",
+=======
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   "season": "thu",
   "main": [
    "#4A7E3E",
@@ -2372,6 +3274,7 @@
   ],
   "sec": [
    "#E3D6FF",
+<<<<<<< HEAD
    "#E3D6FF"
   ]
  },
@@ -2385,6 +3288,9 @@
   "sec": [
    "#D8DCB2",
    "#E0DEB0"
+=======
+   "#FFCCCE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2408,7 +3314,11 @@
   ],
   "sec": [
    "#FFE3EA",
+<<<<<<< HEAD
    "#FBE8F8"
+=======
+   "#FFE3EA"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2428,11 +3338,19 @@
   "season": "ha",
   "main": [
    "#FEAD94",
+<<<<<<< HEAD
    "#FEAD94"
   ],
   "sec": [
    "#EDB9D5",
    "#FFF2EF"
+=======
+   "#D89964"
+  ],
+  "sec": [
+   "#EDB9D5",
+   "#C0FCFB"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2440,11 +3358,43 @@
   "season": "thu",
   "main": [
    "#98CB8D",
+<<<<<<< HEAD
    "#9FB577"
   ],
   "sec": [
    "#F3E7CE",
    "#FAEECD"
+=======
+   "#B2C889"
+  ],
+  "sec": [
+   "#F3E7CE",
+   "#FFEBD2"
+  ]
+ },
+ {
+  "id": "s64",
+  "season": "dong",
+  "main": [
+   "#67B9E2",
+   "#67B9E2"
+  ],
+  "sec": [
+   "#CCF8FA",
+   "#ECF9F3"
+  ]
+ },
+ {
+  "id": "s65",
+  "season": "ha",
+  "main": [
+   "#DE826A",
+   "#E29858"
+  ],
+  "sec": [
+   "#C4B4E5",
+   "#CDCEEE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  },
  {
@@ -2452,11 +3402,19 @@
   "season": "thu",
   "main": [
    "#FF95B7",
+<<<<<<< HEAD
    "#6A7D42"
   ],
   "sec": [
    "#F9F5EB",
    "#F9F5EB"
+=======
+   "#D2836E"
+  ],
+  "sec": [
+   "#F9F5EB",
+   "#F1F8EE"
+>>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
   ]
  }
 ]
