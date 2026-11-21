@@ -47,13 +47,13 @@ function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;co
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
 function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals||[]).forEach(v=>{if(v.alive&&!v.coop)L.push(v);(v.kids||[]).forEach(k=>k.alive&&L.push(k));(v.staff||[]).forEach(s=>!s.coop&&L.push(s))});
  const C=S.court||{};for(const k in C)L.push(C[k]);(S.men||[]).forEach(m=>m.alive!==false&&L.push(m));
- /* D4: Phế phi họ Lý is a world person (co-op: S.lyF is a world key, she rolls and dies on the host only) */
+ /* D4: Phế phi họ Tần is a world person (co-op: S.lyF is a world key, she rolls and dies on the host only) */
  if(typeof lyFallen==="function"){const y=lyFallen();if(y&&!y.dead&&!y.freed)L.push(y)}return L}
 function myPeople(){const L=[S];if(S.maid)L.push(S.maid);(S.staff||[]).forEach(s=>!s.coop&&L.push(s));(S.kids||[]).forEach(k=>k.alive&&L.push(k));return L}
 function people(){return (host()?worldPeople():[]).concat(myPeople())}
 function initAll(){if(!S||!M.on)return;const old=!S.mort;if(!S.mort)S.mort={v:1,old:old&&S.turn>0?1:0};const K=kidSet();for(const p of people())assign(p,K,S.mort.old)}
 const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
-const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
+const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"};
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
 /* death ledger for audits / bots: S.mort.dl = [{g group, a age, c cause, y year}] (last 300) */
 function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF===1?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
@@ -68,9 +68,9 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
- if(p===S.maid){const o=S.maid.name;S.maid=newMaid(typeof npcFreshName==="function"?npcFreshName(MAIDS,[o]):pick(MAIDS.filter(x=>x!==o)),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
+ if(p===S.maid){const o=S.maid.name;S.maid=newMaid(nmNew("maid"),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
- const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.name=`${pre} ${typeof npcFreshName==="function"?npcFreshName(HEIRN,[String(o).replace(pre+" ","")],pre+" "):pick(HEIRN)}`;p.af={};p.gen=(p.gen||0)+1;if(typeof window.j59gen==="function"&&window.J59N){const N=window.J59N;p.pn=window.j59gen(N.SUR,k==="ty"?N.DOC:N.EUN);p.name=p.pn}else delete p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
+ const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.af={};p.gen=(p.gen||0)+1;p.pn=nmNew(k==="ty"?"doc":k==="ped"?"eun":"eunE");p.name=p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.pn?pre+" "+p.name:p.name} lên thay. `}
  if((S.men||[]).includes(p)){p.alive=false;return ""}
  return ev}
