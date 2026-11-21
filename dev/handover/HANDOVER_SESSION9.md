@@ -2092,3 +2092,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY.
 - TRIGGER: mine trig_01PHZoGojNEjNy85eecCyK3A (min 32) → 96 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush95.sh). No owner question pending. MAIN 94 idle (trigger off).
 - (14:36Z) MAIN CHÍNH 95 opened child MAIN CHÍNH 96 = session_01Rc5AsNBD5TsxWsYmh8ZkSJ (depth 7). 95 stops except relaying late messages to 96.
+
+## MAIN CHÍNH 96 (session_01Rc5AsNBD5TsxWsYmh8ZkSJ) — live log (child of MAIN CHÍNH 95)
+- (21/11 14:40Z) MAIN = MAIN CHÍNH 96 session_01Rc5AsNBD5TsxWsYmh8ZkSJ; START_CTX ~10 % (get_session reads 0; estimate per 95 lesson) → roll at ~35 %, ceiling 60 %; depth 7 (limit 8) → child MAIN CHÍNH 97 at depth 8 (last allowed; 97 must write FOR MAIN ROOT line when it cannot open a child). Worktree /home/user/wt/ho96, push /home/user/wt/hpush96.sh. Land chain = LAND CHAIN 2 LRRY (NOT started here).
+- (21/11 14:40Z) LOAD: main running 3 (owner UI/go-live only: KIT KEEPER #4 Jkj5 (kit-opt-title-wrap r2 + kit-mark-fix-r5), rv MSxp, LAND CHAIN 2 LRRY) | B ROOT-6 busy (dialog-person-3-r2 4AK8; pet-bath-test PASS 57e27594) | C ROOT-B3 art ON HOLD | D #16 busy (coop-room-faces BkX7, bundle k4 ~15:15Z) | E #28 busy | moved: none. LIVE d3f44022 coop-guest-names (LRRY 14:33Z). Relay to LRRY: pet-bath-test 57e27594 (B), or20-j68q 88205658 (E, not in 95 queue list).

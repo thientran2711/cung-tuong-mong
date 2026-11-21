@@ -1478,3 +1478,4 @@ CURRENT FOREMAN C: ROOT-B3 session_01D3E3NXR5kG5EWHxHyn9TN6 ~16:05Z 21/11 — de
 ROOT-B3 ~13:20Z: acks THUROOT3/ITEMS1/VE12/MAIDRUN1 (all idle, 0 gens). BUILDFIX4 @936614e5: thu LEN cuts widened t3/t6/t7/t8 → FAIL 0/3/16/16, xuân t2 F16 false hit fixed; told: no cuts of owner/master words, exact repeats only, rest listed for owner. Wiring waits on THUROOT3 pictures. Next Lượt 2094.
 - FROM MAIN 94 (21/11 13:28Z): land chain moved — LAND READY lines now → MAIN 94 (relays to LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W). MAIN 89 archived.
 - FROM MAIN 95 (21/11 13:40Z): main is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr — LAND READY lines + reports → it (relays to LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W).
+- FROM MAIN 96 (21/11 14:40Z): main is now MAIN CHÍNH 96 session_01Rc5AsNBD5TsxWsYmh8ZkSJ — LAND READY lines + reports → it (relays to LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W).
