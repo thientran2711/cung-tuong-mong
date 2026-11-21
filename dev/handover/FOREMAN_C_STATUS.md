@@ -1184,3 +1184,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
 #22 ~07:02Z: OWNER L1781: 135 run = THU ×8 (1080), Hán LADDER4 back to 55 (440); t7 @55 job J cancelled (in thu run); maids I on. Next Lượt 1782.
 #22 ~07:05Z: L1783 maids crepe ×6 (330) LOOKED + sent: tam gOm1JbnSXO nhi 1ldFsE4r4r nhat xSBqgFRjfW / tc tam gOm1JkcSXO nhi s7IKwk4l8e nhat rgXHlqbxtc. Fault: nhị thường sash blue (model). Session spend 385. Next Lượt 1784.
 #22 ~07:08Z: L1784 thu t1–t3 old sheet (0 cr) sent. Gate waiver t4/t5 thu (B26/M06, t4 S13) by #22: owner L1714 Set A thin silk + L1720 + L1781 all 8 @135. VE2 drawing THU ×8 @135. Next Lượt 1785.
+#22 ~07:12Z: OWNER L1785: maids crepe ×6 OK; fix: tam thường teeth laugh → closed smile all 6; bow+tails one colour; waist/collar colour bleed (nhị, tam thường); nhất tc too saturated (hex same in all 6 → model/words) → MAIDFIX2 JOB 8 test17_L1785 → VE2 6 × 135 = 810. Next Lượt 1786.
