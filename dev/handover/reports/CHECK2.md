@@ -86,3 +86,11 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
   - Unrelated commits glued them again: 61e890b (CLAIMS) and caca8f3 (rv-chiton-name), after #17's restore 69c7aa6.
   - Fix = restore both (and their .keep) from be1ec9e. The final set is not affected.
 - 04:37Z MAIDFIX1: owner L1687 approved nhất as drawn; 92317b9 removes test8_nhat_L1685. Verdict stands for tam + nhị (PASS).
+
+## Job 9 — MAIDFIX1 JOB 2 8312d5c thân cận maids (owner L1688) — PASS ×3 (04:42Z), reported to #18 only
+- test9_{tam,nhi,nhat}_thancan_L1688 (7160 / 7022 / 8096 ch); bases test8_tam_L1685 / test8_nhi_L1685 / test6_nhat_L1653.
+- The word diffs hold only: powder blue #A7BAD2 ↔ deep rose #CA7281 swapped (nhị's "pink" jacket → powder blue), plus K28 SQUARE collar (cổ vuông).
+  - The collar wording is identical to gpt/nhi_thancan_gpt_v4.
+  - On nhất it replaces the stand collar (+ "never a tall upright stand collar").
+- No colour is left over: the only "pink" is "pinkish-white" skin. Main = deep rose on robe/skirt (sleeves on nhất); secondary = powder blue on the jacket/vest. No markers.
+- keep PASS ×3. store mama a18: nhất PASS; tam/nhị S01+S32 = same as their bases.
