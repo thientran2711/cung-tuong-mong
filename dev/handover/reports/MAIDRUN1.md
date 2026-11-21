@@ -33,3 +33,12 @@ Notes (not changed, A18): ma ma a51 outfit says "fine embroidered silk brocade" 
 
 ## Handover
 Nothing in progress. Next (only after her face picks + GO): age maker for the 15 missing cells per person, then 1-person sample @55.
+
+## 4. Age maker (ROOT-B2 order after L2089) — make18_ages.py → dev/art/maid7/prod_ages/ (70 files + .keep), 0 gens
+- 5 persons × 7 ranks (thô sử, tam, tam TC, nhị TC, nhất, nhất TC, chưởng sự) × the 2 missing ages = 70. Base = newest prod file (thô sử = L2089).
+- ONLY the age sentence changes, builder words: a18 "about 22, youthful adult." · a26 "about 30, mature and poised." · a36 builder "about 36 but looking young for her age (trẻ trước tuổi) …". Existing cells kept: 6 ranks a18 today (note: thân cận files say "about 22" = a18), chưởng sự "about 28 but looking young" = her a26.
+- Item / hair / pose / angle / outfit / colours / face unchanged (E13 item stays per person × rank; if she wants a different item per age, that is a new choice for her).
+- LEN: nhất + nhất TC at a26/a36 went over 10 000 (13 files) → boilerplate trim on the whole age family (A38): builder header "Full-body standing figure … soft even light;" (= MASTER_COMMON line 3) + "gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open;" (= the MOUTH/teeth sentences + her own Expression). allow lines in each .keep.
+- Gates: check_store --scope maid --age a18/a26/a36 70/70 PASS · keep_check --sidecar 70/70 PASS · max 9 968 chars.
+- NOT built: ma ma a36 (only ma ma prompt is a51 with another outfit + elder colour rule; a36 look vs gate S32 = her open question). So drawable 18→36 now = 21/22 per person (105 pics × 55 = 5 775 for 5 persons) once faces are picked; face words + refs will change after her picks (rerun the makers on the new face files).
+- check_store --batch maid-name gap sent to BUILDFIX2.

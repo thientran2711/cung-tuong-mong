@@ -1,0 +1,3 @@
+base: dev/art/maid7/prod/m12_nhat_L1919.txt
+allow: about 22, youthful adult.   # age sentence -> a26 builder words (owner L2086 ages 18-36), MAIDRUN1
+allow: Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open;   # boilerplate trim (A38): frame = MASTER_COMMON line 3, closed-lip smile = the MOUTH/teeth sentences + her Expression; LEN <= 10000
