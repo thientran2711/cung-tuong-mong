@@ -1,1206 +1,6754 @@
 {
- "_note": "Phoenix plumage sets (owner L2227, G33 ext.): ONE set per consort, feathers + crown phoenix inlay (G33 L1423) + HQP five-colour / HH peacock thread sheen use it; gold-thread outlines always. Only t7/t8, Thái hậu, Nữ đế. alt_by_season = that season's robe main is too close to the set (Lab dE<18): use the alt set in that season only. THUROOT8, make_plumage_L2227.py.",
- "sets": {
-  "ngu_sac_diu": {
-   "vi": "Ngũ sắc dịu",
-   "en": "soft five-colour",
-   "colours": [
-    {
-     "name": "soft vermilion",
-     "hex": "#E58A6F"
-    },
-    {
-     "name": "jade turquoise",
-     "hex": "#6FC1B3"
-    },
-    {
-     "name": "honey gold",
-     "hex": "#E9C46A"
-    },
-    {
-     "name": "soft lilac",
-     "hex": "#B9A2D8"
-    },
-    {
-     "name": "pale blue",
-     "hex": "#A9CBEA"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "lam_ngoc": {
-   "vi": "Lam ngọc",
-   "en": "sapphire-blue",
-   "colours": [
-    {
-     "name": "pale blue",
-     "hex": "#A9CBEA"
-    },
-    {
-     "name": "soft turquoise",
-     "hex": "#7CC6C9"
-    },
-    {
-     "name": "silver",
-     "hex": "#D3D8DE"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "hoang_hon": {
-   "vi": "Hoàng hôn",
-   "en": "sunset",
-   "colours": [
-    {
-     "name": "soft peach",
-     "hex": "#F6B99A"
-    },
-    {
-     "name": "coral pink",
-     "hex": "#EE8E8E"
-    },
-    {
-     "name": "honey gold",
-     "hex": "#E9C46A"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "tu_dang": {
-   "vi": "Tử đằng",
-   "en": "wisteria",
-   "colours": [
-    {
-     "name": "soft lilac",
-     "hex": "#C3AEE0"
-    },
-    {
-     "name": "wisteria violet",
-     "hex": "#9D8BCF"
-    },
-    {
-     "name": "powder pink",
-     "hex": "#F2C4D2"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "bich_thuy": {
-   "vi": "Bích thủy",
-   "en": "jade-water",
-   "colours": [
-    {
-     "name": "jade green",
-     "hex": "#79BE9B"
-    },
-    {
-     "name": "fresh-leaf green",
-     "hex": "#A9D38A"
-    },
-    {
-     "name": "pale yellow",
-     "hex": "#F3E3A0"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "hong_mai": {
-   "vi": "Hồng mai",
-   "en": "plum-blossom",
-   "colours": [
-    {
-     "name": "powder pink",
-     "hex": "#F2C4D2"
-    },
-    {
-     "name": "soft vermilion",
-     "hex": "#E58A6F"
-    },
-    {
-     "name": "ivory",
-     "hex": "#F6F0E1"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "thanh_thien": {
-   "vi": "Thanh thiên",
-   "en": "clear-sky",
-   "colours": [
-    {
-     "name": "pale sky blue",
-     "hex": "#B5D6F0"
-    },
-    {
-     "name": "ivory",
-     "hex": "#F6F0E1"
-    },
-    {
-     "name": "silver",
-     "hex": "#D3D8DE"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "kim_hong": {
-   "vi": "Kim hồng",
-   "en": "gold-rose",
-   "colours": [
-    {
-     "name": "gold",
-     "hex": "#E2BC5E"
-    },
-    {
-     "name": "peach pink",
-     "hex": "#F4AE9E"
-    },
-    {
-     "name": "light orange",
-     "hex": "#F5B97A"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "luc_bao": {
-   "vi": "Lục bảo",
-   "en": "emerald",
-   "colours": [
-    {
-     "name": "pale emerald",
-     "hex": "#7FC8A3"
-    },
-    {
-     "name": "soft turquoise",
-     "hex": "#7CC6C9"
-    },
-    {
-     "name": "gold",
-     "hex": "#E2BC5E"
-    }
-   ],
-   "outline": "gold thread"
-  },
-  "suong_bac": {
-   "vi": "Sương bạc",
-   "en": "silver-mist",
-   "colours": [
-    {
-     "name": "ivory",
-     "hex": "#F6F0E1"
-    },
-    {
-     "name": "blue-silver grey",
-     "hex": "#BFCAD6"
-    },
-    {
-     "name": "very pale lilac",
-     "hex": "#DCD2EC"
-    }
-   ],
-   "outline": "gold thread"
-  }
- },
- "load": {
-  "ngu_sac_diu": 9,
-  "lam_ngoc": 9,
-  "hoang_hon": 9,
-  "tu_dang": 9,
-  "bich_thuy": 9,
-  "hong_mai": 9,
-  "thanh_thien": 9,
-  "kim_hong": 9,
-  "luc_bao": 9,
-  "suong_bac": 9
- },
+ "_note": "G33 PHOENIX PLUMAGE = ChatGPT palette v3 per person x season (PALGPT1, OWNER L2274 verbatim: \"Vậy thì giữ cái bảng màu của ChatGPT đi, bỏ cái bảng màu này vào game giùm tôi cái.\"). REPLACES the 10 sets approved L2235 (\"Bảng màu của Long Phượng. Ok, duyệt đi.\") — those sets are kept in phoenix_plumage_L2227_preGPT_L2274.json. outer / inner / tip = GPT \"Lông phượng ngoài / trong / đầu lông\"; gold-thread outline always; crown phoenix inlay = same colours (G33 L1423). Only t7/t8, Thái hậu, Nữ đế. Builder wiring still pending (as before). Maker dev/art/palette_gpt_L2272/make_live_L2274.py.",
  "people": {
   "c02": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 28.4,
-   "mains": {
-    "xuan": "#D49D79",
-    "ha": "#52B584",
-    "thu": "#D49DC8",
-    "dong": "#7E8FBE"
+   "gpt_code": "DD01",
+   "xuan": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FCD5BC",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DBAE7B",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   },
   "c04": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 36.4,
-   "mains": {
-    "xuan": "#56905F",
-    "ha": "#EBE393",
-    "thu": "#CA697A",
-    "dong": "#A87FBD"
+   "gpt_code": "DT01",
+   "xuan": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FCD5BC",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DBAE7B",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#D2E6C0",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7F8650",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#95C696",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
    }
   },
   "c05": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 33.6,
-   "mains": {
-    "xuan": "#A9607E",
-    "ha": "#FD9C7A",
-    "thu": "#79222A",
-    "dong": "#65C3C1"
+   "gpt_code": "SS01",
+   "xuan": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DAE4BB",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#88824C",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A2C48B",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#DAE4BB",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#88824C",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A2C48B",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "c06": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 39.3,
-   "mains": {
-    "xuan": "#933966",
-    "ha": "#7CB26F",
-    "thu": "#DA966D",
-    "dong": "#AF5359"
+   "gpt_code": "SS02",
+   "xuan": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B5E8F4",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E91",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#7BC2E3",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
    }
   },
   "c08": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 28.6,
-   "mains": {
-    "xuan": "#F09BAB",
-    "ha": "#FFF2BC",
-    "thu": "#EDA47C",
-    "dong": "#B0A0D7"
+   "gpt_code": "DD02",
+   "xuan": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "c10": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 25.9,
-   "mains": {
-    "xuan": "#C26C6D",
-    "ha": "#DB9B66",
-    "thu": "#87A66E",
-    "dong": "#949ED4"
+   "gpt_code": "DT02",
+   "xuan": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "c11": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 39.5,
-   "mains": {
-    "xuan": "#49773D",
-    "ha": "#7FD5D9",
-    "thu": "#81252F",
-    "dong": "#BC9FCE"
+   "gpt_code": "SS03",
+   "xuan": {
+    "outer": {
+     "hex": "#E4E0B7",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#937E4A",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B2BF81",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F7D1EB",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#96719B",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E3A1BD",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light peony pink"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FCD0E2",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9D6F91",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E7A1AE",
+     "vi": "hồng cánh sen lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "c14": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 32.1,
-   "mains": {
-    "xuan": "#A95962",
-    "ha": "#F18D7A",
-    "thu": "#246876",
-    "dong": "#077673"
+   "gpt_code": "SS04",
+   "xuan": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C0EAD2",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#648C64",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7ACAB4",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "c16": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 34.1,
-   "mains": {
-    "xuan": "#A55F75",
-    "ha": "#5BC294",
-    "thu": "#B0BE70",
-    "dong": "#45A6C4"
+   "gpt_code": "DT03",
+   "xuan": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
    }
   },
   "c19": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 26.6,
-   "mains": {
-    "xuan": "#8F2F37",
-    "ha": "#E28F43",
-    "thu": "#618047",
-    "dong": "#BD7FA1"
+   "gpt_code": "SS05",
+   "xuan": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B4EAE8",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#498F80",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D4",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "c20": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 29.2,
-   "mains": {
-    "xuan": "#E3878D",
-    "ha": "#F4ED8C",
-    "thu": "#EBA197",
-    "dong": "#74B5E8"
+   "gpt_code": "DD03",
+   "xuan": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B4E9F3",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E8F",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#79C3E1",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
    }
   },
   "c22": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 43.8,
-   "mains": {
-    "xuan": "#3B8044",
-    "ha": "#EFEE8D",
-    "thu": "#CE8275",
-    "dong": "#B27FBD"
+   "gpt_code": "DT04",
+   "xuan": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#C0EAD2",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#648C64",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7ACAB4",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "c26": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 36.0,
-   "mains": {
-    "xuan": "#CC7384",
-    "ha": "#FECBAD",
-    "thu": "#D6A3DD",
-    "dong": "#42B0A5"
+   "gpt_code": "DD04",
+   "xuan": {
+    "outer": {
+     "hex": "#D0E6C1",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7C8752",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#92C799",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED3C4",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96F69",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E2A983",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "c27": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 24.0,
-   "mains": {
-    "xuan": "#2F7C34",
-    "ha": "#FCA7CC",
-    "thu": "#93A869",
-    "dong": "#716BAC"
+   "gpt_code": "SS06",
+   "xuan": {
+    "outer": {
+     "hex": "#B5E8F4",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E91",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#7BC2E3",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED3C4",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96F69",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E2A983",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B5E8F4",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E91",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#7BC2E3",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E4E0B7",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#937E4A",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B2BF81",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "c28": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 35.6,
-   "mains": {
-    "xuan": "#73B37D",
-    "ha": "#FFF099",
-    "thu": "#D89077",
-    "dong": "#6A9ADB"
+   "gpt_code": "DT05",
+   "xuan": {
+    "outer": {
+     "hex": "#EFDCB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9D784D",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C4B979",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B9EBDC",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#568E71",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C9C3",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "c31": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 51.5,
-   "mains": {
-    "xuan": "#3A8753",
-    "ha": "#81D7CD",
-    "thu": "#7B2332",
-    "dong": "#5C74A4"
+   "gpt_code": "SS07",
+   "xuan": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "c32": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 37.6,
-   "mains": {
-    "xuan": "#D59C7D",
-    "ha": "#9FCC83",
-    "thu": "#599FA5",
-    "dong": "#5DD0A9"
+   "gpt_code": "DD05",
+   "xuan": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B5EAE6",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#4B8F7E",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D1",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#D0E6C1",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7C8752",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#92C799",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
    }
   },
   "m02": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 33.9,
-   "mains": {
-    "xuan": "#F0E7A6",
-    "ha": "#FC9286",
-    "thu": "#93A86B",
-    "dong": "#76CFED"
+   "gpt_code": "DD06",
+   "xuan": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#EBD4F9",
+     "vi": "tím phong lan sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8577A8",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D6A4D3",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "m04": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 34.7,
-   "mains": {
-    "xuan": "#C26C72",
-    "ha": "#F5A56B",
-    "thu": "#84965E",
-    "dong": "#52B1A7"
+   "gpt_code": "DT06",
+   "xuan": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "m05": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 28.3,
-   "mains": {
-    "xuan": "#B87087",
-    "ha": "#93F6C6",
-    "thu": "#D4897D",
-    "dong": "#4A9DC4"
+   "gpt_code": "DT07",
+   "xuan": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#EBD4F9",
+     "vi": "tím phong lan sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8577A8",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D6A4D3",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "m08": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 22.8,
-   "mains": {
-    "xuan": "#D591A5",
-    "ha": "#FFF0A4",
-    "thu": "#E6A189",
-    "dong": "#81ADE9"
+   "gpt_code": "DD07",
+   "xuan": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "m09": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 25.2,
-   "mains": {
-    "xuan": "#D5909C",
-    "ha": "#A7D48B",
-    "thu": "#226973",
-    "dong": "#3D8562"
+   "gpt_code": "SS08",
+   "xuan": {
+    "outer": {
+     "hex": "#FDD0E0",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9F6F8E",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1AB",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F3D2F1",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#9073A0",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DEA2C6",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "m10": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 35.0,
-   "mains": {
-    "xuan": "#A4D098",
-    "ha": "#FFB5C3",
-    "thu": "#A76B8C",
-    "dong": "#8F9BE6"
+   "gpt_code": "DT08",
+   "xuan": {
+    "outer": {
+     "hex": "#DAE4BB",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#88824C",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A2C48B",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F6D8B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A37454",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D0B477",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "m14": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 40.4,
-   "mains": {
-    "xuan": "#73C781",
-    "ha": "#F096A6",
-    "thu": "#DC9A70",
-    "dong": "#D28BCC"
+   "gpt_code": "DD08",
+   "xuan": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FCD0E2",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9D6F91",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E7A1AE",
+     "vi": "hồng cánh sen lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "m16": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 34.4,
-   "mains": {
-    "xuan": "#AE5A61",
-    "ha": "#FFEEB9",
-    "thu": "#DD926F",
-    "dong": "#AD91CA"
+   "gpt_code": "DT09",
+   "xuan": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F3D2F1",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#9073A0",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DEA2C6",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "m18": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 22.2,
-   "mains": {
-    "xuan": "#D69C7B",
-    "ha": "#EFEE8E",
-    "thu": "#E69EC5",
-    "dong": "#8FBCF1"
+   "gpt_code": "DD09",
+   "xuan": {
+    "outer": {
+     "hex": "#BAEBDA",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#598E6E",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#73C9C0",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "m19": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 27.9,
-   "mains": {
-    "xuan": "#E2868C",
-    "ha": "#F39972",
-    "thu": "#8EB079",
-    "dong": "#7FCBFA"
+   "gpt_code": "DD10",
+   "xuan": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED2CD",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D76",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E7A58E",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
    }
   },
   "m20": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 31.6,
-   "mains": {
-    "xuan": "#8CB768",
-    "ha": "#F8EB89",
-    "thu": "#DA9475",
-    "dong": "#8B93D0"
+   "gpt_code": "DD11",
+   "xuan": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "m22": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 24.3,
-   "mains": {
-    "xuan": "#CC8391",
-    "ha": "#BDF09D",
-    "thu": "#6D7C48",
-    "dong": "#72AD91"
+   "gpt_code": "DT10",
+   "xuan": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F3D2F1",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#9073A0",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DEA2C6",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "m28": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 23.2,
-   "mains": {
-    "xuan": "#B96899",
-    "ha": "#FFCBAD",
-    "thu": "#67B0B2",
-    "dong": "#7EA0E7"
+   "gpt_code": "DT11",
+   "xuan": {
+    "outer": {
+     "hex": "#FDD0E0",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9F6F8E",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1AB",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B5EAE6",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#4B8F7E",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D1",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
    }
   },
   "m29": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 32.7,
-   "mains": {
-    "xuan": "#B96899",
-    "ha": "#ED8C86",
-    "thu": "#D8976D",
-    "dong": "#66A9DA"
+   "gpt_code": "DT12",
+   "xuan": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s07": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 52.8,
-   "mains": {
-    "xuan": "#AB3A50",
-    "ha": "#F5EC82",
-    "thu": "#D18379",
-    "dong": "#363D7F"
+   "gpt_code": "SS09",
+   "xuan": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BAEBDA",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#598E6E",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#73C9C0",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
    }
   },
   "s08": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 28.0,
-   "mains": {
-    "xuan": "#A06586",
-    "ha": "#F7958F",
-    "thu": "#A12E37",
-    "dong": "#3B9174"
+   "gpt_code": "SS10",
+   "xuan": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B9EBDC",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#568E71",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C9C3",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s09": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 25.4,
-   "mains": {
-    "xuan": "#4D7A2B",
-    "ha": "#E78FA2",
-    "thu": "#9B5F80",
-    "dong": "#634EA2"
+   "gpt_code": "SS11",
+   "xuan": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FCD5BC",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DBAE7B",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s10": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 26.1,
-   "mains": {
-    "xuan": "#BF4051",
-    "ha": "#FFEEB9",
-    "thu": "#7B2439",
-    "dong": "#2A7466"
+   "gpt_code": "KK01",
+   "xuan": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B4E9F1",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#438E8C",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#77C4DF",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "s11": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 27.5,
-   "mains": {
-    "xuan": "#4E7638",
-    "ha": "#F095BD",
-    "thu": "#7B2436",
-    "dong": "#794096"
+   "gpt_code": "KK02",
+   "xuan": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
    }
   },
   "s12": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 37.0,
-   "mains": {
-    "xuan": "#AB5975",
-    "ha": "#73C4C8",
-    "thu": "#7B242C",
-    "dong": "#3686A1"
+   "gpt_code": "KK03",
+   "xuan": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B4E9F1",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#438E8C",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#77C4DF",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s13": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 26.3,
-   "mains": {
-    "xuan": "#D69D7D",
-    "ha": "#E788A6",
-    "thu": "#7A8F5D",
-    "dong": "#D1E9FB"
+   "gpt_code": "LL01",
+   "xuan": {
+    "outer": {
+     "hex": "#E4E0B7",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#937E4A",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B2BF81",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
    }
   },
   "s14": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 39.0,
-   "mains": {
-    "xuan": "#DC96B8",
-    "ha": "#F6EC8A",
-    "thu": "#DE957C",
-    "dong": "#3E5079"
+   "gpt_code": "LL02",
+   "xuan": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
    }
   },
   "s15": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 33.5,
-   "mains": {
-    "xuan": "#D49D77",
-    "ha": "#FA9790",
-    "thu": "#A77497",
-    "dong": "#ABDBC4"
+   "gpt_code": "LL03",
+   "xuan": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C6E9CA",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#6F8A5B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#83C9A8",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "s16": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 26.1,
-   "mains": {
-    "xuan": "#87346A",
-    "ha": "#75D2A6",
-    "thu": "#C8696B",
-    "dong": "#768AD8"
+   "gpt_code": "QR01",
+   "xuan": {
+    "outer": {
+     "hex": "#F3D2F1",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#9073A0",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DEA2C6",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s17": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 34.2,
-   "mains": {
-    "xuan": "#9E497E",
-    "ha": "#E68580",
-    "thu": "#D69369",
-    "dong": "#6E97BB"
+   "gpt_code": "QR02",
+   "xuan": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BAEBDA",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#598E6E",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#73C9C0",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B4E9F3",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E8F",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#79C3E1",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
    }
   },
   "s18": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 40.8,
-   "mains": {
-    "xuan": "#3F7F4F",
-    "ha": "#FFEFB8",
-    "thu": "#D5867C",
-    "dong": "#AD6EB9"
+   "gpt_code": "QR03",
+   "xuan": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FCD5BC",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DBAE7B",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
    }
   },
   "s19": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 20.7,
-   "mains": {
-    "xuan": "#AA3C4E",
-    "ha": "#FE9671",
-    "thu": "#647847",
-    "dong": "#414888"
+   "gpt_code": "KK04",
+   "xuan": {
+    "outer": {
+     "hex": "#F7D1EB",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#96719B",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E3A1BD",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light peony pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
    }
   },
   "s20": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 24.0,
-   "mains": {
-    "xuan": "#8C333A",
-    "ha": "#DF8697",
-    "thu": "#935785",
-    "dong": "#0A7D87"
+   "gpt_code": "KK05",
+   "xuan": {
+    "outer": {
+     "hex": "#D0E6C1",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7C8752",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#92C799",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s21": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 30.1,
-   "mains": {
-    "xuan": "#AB6982",
-    "ha": "#A5D491",
-    "thu": "#246E7E",
-    "dong": "#824CA9"
+   "gpt_code": "KK06",
+   "xuan": {
+    "outer": {
+     "hex": "#B4EAE8",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#498F80",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D4",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E4E0B7",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#937E4A",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B2BF81",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   },
   "s22": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 19.2,
-   "mains": {
-    "xuan": "#387949",
-    "ha": "#E8E794",
-    "thu": "#5D7321",
-    "dong": "#35436E"
+   "gpt_code": "KK07",
+   "xuan": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s23": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 23.0,
-   "mains": {
-    "xuan": "#CB7172",
-    "ha": "#72C7BD",
-    "thu": "#8A5A91",
-    "dong": "#356E52"
+   "gpt_code": "KK08",
+   "xuan": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s24": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 49.9,
-   "mains": {
-    "xuan": "#A75B63",
-    "ha": "#FF928C",
-    "thu": "#7D143D",
-    "dong": "#615D9D"
+   "gpt_code": "KK09",
+   "xuan": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B5EAE6",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#4B8F7E",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D1",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#EFDCB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9D784D",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C4B979",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s25": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 29.7,
-   "mains": {
-    "xuan": "#447841",
-    "ha": "#F892B0",
-    "thu": "#247476",
-    "dong": "#3F6AA6"
+   "gpt_code": "KK10",
+   "xuan": {
+    "outer": {
+     "hex": "#FED2CD",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D76",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E7A58E",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "s26": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 22.0,
-   "mains": {
-    "xuan": "#D78D94",
-    "ha": "#8ADDDB",
-    "thu": "#9BB984",
-    "dong": "#5180B0"
+   "gpt_code": "LL04",
+   "xuan": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s27": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 26.1,
-   "mains": {
-    "xuan": "#C8696B",
-    "ha": "#7DBB86",
-    "thu": "#4E9496",
-    "dong": "#C1B0F0"
+   "gpt_code": "LL05",
+   "xuan": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s28": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 35.1,
-   "mains": {
-    "xuan": "#D289BD",
-    "ha": "#E2904C",
-    "thu": "#E99B91",
-    "dong": "#A5D6ED"
+   "gpt_code": "LL06",
+   "xuan": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s29": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 32.4,
-   "mains": {
-    "xuan": "#D89F7B",
-    "ha": "#F794A7",
-    "thu": "#A67EAC",
-    "dong": "#95E1CD"
+   "gpt_code": "LL07",
+   "xuan": {
+    "outer": {
+     "hex": "#F7D1EB",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#96719B",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E3A1BD",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light peony pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   },
   "s30": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 31.6,
-   "mains": {
-    "xuan": "#D77E82",
-    "ha": "#FFEFB3",
-    "thu": "#E5955F",
-    "dong": "#7C95CE"
+   "gpt_code": "LL08",
+   "xuan": {
+    "outer": {
+     "hex": "#FED3C4",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96F69",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E2A983",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s31": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 22.1,
-   "mains": {
-    "xuan": "#AD6E9B",
-    "ha": "#DB996B",
-    "thu": "#ABC994",
-    "dong": "#DAE4FC"
+   "gpt_code": "LL09",
+   "xuan": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED3C4",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96F69",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E2A983",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s32": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 22.3,
-   "mains": {
-    "xuan": "#C88599",
-    "ha": "#E6E595",
-    "thu": "#D89570",
-    "dong": "#5D8DBD"
+   "gpt_code": "LL10",
+   "xuan": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
    }
   },
   "s33": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 29.9,
-   "mains": {
-    "xuan": "#D98CA6",
-    "ha": "#CA9972",
-    "thu": "#935C83",
-    "dong": "#6E78B6"
+   "gpt_code": "QR04",
+   "xuan": {
+    "outer": {
+     "hex": "#FCD5BC",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DBAE7B",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s34": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 28.1,
-   "mains": {
-    "xuan": "#3E803A",
-    "ha": "#FFC5DD",
-    "thu": "#93A869",
-    "dong": "#45968D"
+   "gpt_code": "QR05",
+   "xuan": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   },
   "s35": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 41.8,
-   "mains": {
-    "xuan": "#C05995",
-    "ha": "#6AB884",
-    "thu": "#9E3C42",
-    "dong": "#8F83CD"
+   "gpt_code": "QR06",
+   "xuan": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#D0E6C1",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7C8752",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#92C799",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
    }
   },
   "s36": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 45.2,
-   "mains": {
-    "xuan": "#C6535C",
-    "ha": "#FF9E97",
-    "thu": "#8A5F90",
-    "dong": "#569ACA"
+   "gpt_code": "QR07",
+   "xuan": {
+    "outer": {
+     "hex": "#FED2CD",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D76",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E7A58E",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
    }
   },
   "s37": {
-   "set": "ngu_sac_diu",
-   "set_vi": "Ngũ sắc dịu",
-   "min_dE": 21.8,
-   "mains": {
-    "xuan": "#AC4D6F",
-    "ha": "#FA9CB6",
-    "thu": "#5395A4",
-    "dong": "#499971"
+   "gpt_code": "QR08",
+   "xuan": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s38": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 27.0,
-   "mains": {
-    "xuan": "#519D54",
-    "ha": "#E9937C",
-    "thu": "#A7494F",
-    "dong": "#8E77C0"
+   "gpt_code": "QR09",
+   "xuan": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD0D6",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A46D82",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29C",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s39": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 22.5,
-   "mains": {
-    "xuan": "#A55A6E",
-    "ha": "#CE9522",
-    "thu": "#1F6A6C",
-    "dong": "#666FA9"
+   "gpt_code": "SS12",
+   "xuan": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B5E8F4",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E91",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#7BC2E3",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#EBD4F9",
+     "vi": "tím phong lan sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8577A8",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D6A4D3",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "s40": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 30.6,
-   "mains": {
-    "xuan": "#A0628F",
-    "ha": "#E8894A",
-    "thu": "#7B2439",
-    "dong": "#4384B1"
+   "gpt_code": "SS13",
+   "xuan": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED2CF",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A76D78",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E8A591",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#C0EAD2",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#648C64",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7ACAB4",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s41": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 25.8,
-   "mains": {
-    "xuan": "#387949",
-    "ha": "#E48C4A",
-    "thu": "#768B2F",
-    "dong": "#AD526C"
+   "gpt_code": "SS14",
+   "xuan": {
+    "outer": {
+     "hex": "#C0EAD2",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#648C64",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7ACAB4",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   },
   "s42": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 44.9,
-   "mains": {
-    "xuan": "#A63F6A",
-    "ha": "#66C298",
-    "thu": "#CE8369",
-    "dong": "#7C66A8"
+   "gpt_code": "SS15",
+   "xuan": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED2CD",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D76",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E7A58E",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s43": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 46.3,
-   "mains": {
-    "xuan": "#DD7574",
-    "ha": "#E9975B",
-    "thu": "#8E5E8B",
-    "dong": "#385A9F"
+   "gpt_code": "QR10",
+   "xuan": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#DCE3BA",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8B814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A5C389",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "s44": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 36.5,
-   "mains": {
-    "xuan": "#B04D5A",
-    "ha": "#93D895",
-    "thu": "#617437",
-    "dong": "#539582"
+   "gpt_code": "QR11",
+   "xuan": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B4EAE8",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#498F80",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D4",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s45": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 25.3,
-   "mains": {
-    "xuan": "#577B37",
-    "ha": "#FB8860",
-    "thu": "#A6485B",
-    "dong": "#803F8D"
+   "gpt_code": "QR12",
+   "xuan": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FDD0E0",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9F6F8E",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1AB",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
    }
   },
   "s46": {
-   "set": "thanh_thien",
-   "set_vi": "Thanh thiên",
-   "min_dE": 29.6,
-   "mains": {
-    "xuan": "#D49D7D",
-    "ha": "#D77EA6",
-    "thu": "#4F929D",
-    "dong": "#86CDB9"
+   "gpt_code": "LL11",
+   "xuan": {
+    "outer": {
+     "hex": "#FED0D8",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A36E85",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A29F",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s47": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 25.2,
-   "mains": {
-    "xuan": "#BC6C8D",
-    "ha": "#8ABB6B",
-    "thu": "#D48772",
-    "dong": "#949BD8"
+   "gpt_code": "LL12",
+   "xuan": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F9D0E8",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#997097",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E5A1B7",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
    }
   },
   "s48": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 22.1,
-   "mains": {
-    "xuan": "#ED9BA9",
-    "ha": "#F39F6B",
-    "thu": "#7A9966",
-    "dong": "#69A4F2"
+   "gpt_code": "LL13",
+   "xuan": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "s49": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 27.5,
-   "mains": {
-    "xuan": "#CC7384",
-    "ha": "#EDE594",
-    "thu": "#F6A792",
-    "dong": "#7BC2DB"
+   "gpt_code": "LL14",
+   "xuan": {
+    "outer": {
+     "hex": "#C0EAD2",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#648C64",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7ACAB4",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#D2E6C0",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7F8650",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#95C696",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s50": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 23.6,
-   "mains": {
-    "xuan": "#FFCDAE",
-    "ha": "#7AD298",
-    "thu": "#B982A0",
-    "dong": "#A6C9E4"
+   "gpt_code": "LL15",
+   "xuan": {
+    "outer": {
+     "hex": "#F8D8B8",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A47456",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D3B378",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s51": {
-   "set": "kim_hong",
-   "set_vi": "Kim hồng",
-   "min_dE": 41.4,
-   "mains": {
-    "xuan": "#527631",
-    "ha": "#70C6C4",
-    "thu": "#7C2431",
-    "dong": "#CCB0E5"
+   "gpt_code": "KK11",
+   "xuan": {
+    "outer": {
+     "hex": "#B9EBDC",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#568E71",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C9C3",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#C6E9CA",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#6F8A5B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#83C9A8",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "s52": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 22.6,
-   "mains": {
-    "xuan": "#A64449",
-    "ha": "#F6EB92",
-    "thu": "#C18BAD",
-    "dong": "#98C8D7"
+   "gpt_code": "KK12",
+   "xuan": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#EFDCB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9D784D",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C4B979",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B4EAE8",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#498F80",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C7D4",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B8EBDE",
+     "vi": "xanh ngọc bích sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#548E73",
+     "vi": "xanh phỉ thúy sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#71C9C6",
+     "vi": "xanh ngọc nước lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s53": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 31.5,
-   "mains": {
-    "xuan": "#A5444F",
-    "ha": "#FB9CAE",
-    "thu": "#5D7A4A",
-    "dong": "#B290C7"
+   "gpt_code": "KK13",
+   "xuan": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#BAEBDA",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#598E6E",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#73C9C0",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F0DBB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9F774E",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C6B878",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD3C1",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A96F67",
+     "vi": "đào cam sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E1AA81",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s54": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 38.5,
-   "mains": {
-    "xuan": "#E4A1B7",
-    "ha": "#F99B56",
-    "thu": "#D89077",
-    "dong": "#A84D5D"
+   "gpt_code": "KK14",
+   "xuan": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B4E9F1",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#438E8C",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#77C4DF",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
    }
   },
   "s55": {
-   "set": "hoang_hon",
-   "set_vi": "Hoàng hôn",
-   "min_dE": 37.7,
-   "mains": {
-    "xuan": "#87314C",
-    "ha": "#5BC495",
-    "thu": "#86608C",
-    "dong": "#447C65"
+   "gpt_code": "KK15",
+   "xuan": {
+    "outer": {
+     "hex": "#EDDDB5",
+     "vi": "xanh lá non sáng",
+     "en": "ivory white"
+    },
+    "inner": {
+     "hex": "#9C794C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C1BA79",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#D0E6C1",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#7C8752",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#92C799",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
    }
   },
   "s56": {
-   "set": "bich_thuy",
-   "set_vi": "Bích thủy",
-   "min_dE": 34.7,
-   "mains": {
-    "xuan": "#A95E87",
-    "ha": "#E4986A",
-    "thu": "#2F757F",
-    "dong": "#5286D3"
+   "gpt_code": "QR13",
+   "xuan": {
+    "outer": {
+     "hex": "#FED0DE",
+     "vi": "hồng cánh sen sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#A06E8C",
+     "vi": "hồng mẫu đơn sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E8A1A8",
+     "vi": "đỏ hồng san hô lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#B4E9F3",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E8F",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#79C3E1",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#C8E8C8",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#718959",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#86C9A5",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E7D5FB",
+     "vi": "tím thạch anh sáng",
+     "en": "pale smoky lilac"
+    },
+    "inner": {
+     "hex": "#8178AA",
+     "vi": "tím tử đằng sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#D1A6D8",
+     "vi": "tím phong lan lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s57": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 22.5,
-   "mains": {
-    "xuan": "#B25D5F",
-    "ha": "#8DBD6D",
-    "thu": "#527631",
-    "dong": "#BA8CC4"
+   "gpt_code": "QR14",
+   "xuan": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FED2CD",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D76",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E7A58E",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#EFDCB5",
+     "vi": "đào cam sáng",
+     "en": "ivory"
+    },
+    "inner": {
+     "hex": "#9D784D",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#C4B979",
+     "vi": "xanh lá non lụa",
+     "en": "light lemon yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s58": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 32.0,
-   "mains": {
-    "xuan": "#C95D7C",
-    "ha": "#F0EF84",
-    "thu": "#6A7E40",
-    "dong": "#60A18E"
+   "gpt_code": "QR15",
+   "xuan": {
+    "outer": {
+     "hex": "#B4E9F3",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E8F",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#79C3E1",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#C6E9CA",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#6F8A5B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#83C9A8",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
    }
   },
   "s59": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 24.4,
-   "mains": {
-    "xuan": "#6E9659",
-    "ha": "#E6976E",
-    "thu": "#9D3B4D",
-    "dong": "#657DAE"
+   "gpt_code": "QR16",
+   "xuan": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FBD6BB",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A7715C",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#D9AF7A",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B4E9F1",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#438E8C",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#77C4DF",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#E6E0B6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#957D4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#B5BE7F",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
    }
   },
   "s60": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 38.8,
-   "mains": {
-    "xuan": "#68963D",
-    "ha": "#FAEB80",
-    "thu": "#9E5D81",
-    "dong": "#7E7CC6"
+   "gpt_code": "QR17",
+   "xuan": {
+    "outer": {
+     "hex": "#CAE8C6",
+     "vi": "xanh lá non sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#748957",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#89C8A2",
+     "vi": "xanh ngọc lá lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FCD0E2",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "pale powder pink"
+    },
+    "inner": {
+     "hex": "#9D6F91",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E7A1AE",
+     "vi": "hồng cánh sen lụa",
+     "en": "light earthy rose"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s61": {
-   "set": "luc_bao",
-   "set_vi": "Lục bảo",
-   "min_dE": 19.3,
-   "mains": {
-    "xuan": "#AC4F65",
-    "ha": "#E6976E",
-    "thu": "#62844C",
-    "dong": "#519EB8"
+   "gpt_code": "QR18",
+   "xuan": {
+    "outer": {
+     "hex": "#F5D9B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A27553",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#CEB577",
+     "vi": "xanh lá non lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#D4E5BE",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#81854F",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep olive green"
+    },
+    "tip": {
+     "hex": "#99C693",
+     "vi": "xanh lá non lụa",
+     "en": "light young-leaf green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#BAEBDA",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#598E6E",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#73C9C0",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#C1EAD0",
+     "vi": "xanh ngọc lá sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#668C62",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#7CC9B1",
+     "vi": "xanh phỉ thúy lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
    }
   },
   "s62": {
-   "set": "tu_dang",
-   "set_vi": "Tử đằng",
-   "min_dE": 29.8,
-   "mains": {
-    "xuan": "#EB8186",
-    "ha": "#F8B287",
-    "thu": "#9FB577",
-    "dong": "#71B5D7"
+   "gpt_code": "DD12",
+   "xuan": {
+    "outer": {
+     "hex": "#FED1D4",
+     "vi": "đỏ hồng san hô sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A56D80",
+     "vi": "hồng cánh sen sâu",
+     "en": "medium-deep spring pink"
+    },
+    "tip": {
+     "hex": "#E9A399",
+     "vi": "đào cam lụa",
+     "en": "light terracotta brick"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#DEE2B9",
+     "vi": "xanh lá non sáng",
+     "en": "lemon cream"
+    },
+    "inner": {
+     "hex": "#8D814B",
+     "vi": "xanh lá non sâu",
+     "en": "medium-deep soft turmeric yellow"
+    },
+    "tip": {
+     "hex": "#A9C287",
+     "vi": "xanh lá non lụa",
+     "en": "light moss green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#F8D0EA",
+     "vi": "hồng mẫu đơn sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#977199",
+     "vi": "hồng mận sâu",
+     "en": "medium-deep plum"
+    },
+    "tip": {
+     "hex": "#E4A1BA",
+     "vi": "hồng cánh sen lụa",
+     "en": "light spring pink"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
    }
   },
   "s63": {
-   "set": "lam_ngoc",
-   "set_vi": "Lam ngọc",
-   "min_dE": 24.9,
-   "mains": {
-    "xuan": "#EF9BB5",
-    "ha": "#A6F4B1",
-    "thu": "#CB996C",
-    "dong": "#92A4E7"
+   "gpt_code": "DD13",
+   "xuan": {
+    "outer": {
+     "hex": "#B4EAEA",
+     "vi": "xanh ngọc nước sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#478F83",
+     "vi": "xanh ngọc bích sâu",
+     "en": "medium-deep jade green"
+    },
+    "tip": {
+     "hex": "#72C6D6",
+     "vi": "xanh thiên thanh lụa",
+     "en": "light teal"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#BEEAD4",
+     "vi": "xanh phỉ thúy sáng",
+     "en": "pale mint green"
+    },
+    "inner": {
+     "hex": "#618D67",
+     "vi": "xanh ngọc lá sâu",
+     "en": "medium-deep moss green"
+    },
+    "tip": {
+     "hex": "#78CAB7",
+     "vi": "xanh ngọc bích lụa",
+     "en": "light jade green"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F1D2F3",
+     "vi": "hồng mận sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8E74A2",
+     "vi": "tím phong lan sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DDA2C9",
+     "vi": "hồng mẫu đơn lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
    }
   },
   "s64": {
-   "set": "suong_bac",
-   "set_vi": "Sương bạc",
-   "min_dE": 22.9,
-   "mains": {
-    "xuan": "#F8B3D3",
-    "ha": "#FEAD94",
-    "thu": "#69AEBE",
-    "dong": "#62B189"
+   "gpt_code": "DD14",
+   "xuan": {
+    "outer": {
+     "hex": "#FED3C4",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96F69",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E2A983",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#E8DFB6",
+     "vi": "xanh lá non sáng",
+     "en": "pale yellow"
+    },
+    "inner": {
+     "hex": "#977C4A",
+     "vi": "đào cam sâu",
+     "en": "medium-deep amber"
+    },
+    "tip": {
+     "hex": "#B8BD7D",
+     "vi": "xanh lá non lụa",
+     "en": "light olive green"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#FFD3C6",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A96E6C",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E4A885",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#F6D8B7",
+     "vi": "đào cam sáng",
+     "en": "apricot cream"
+    },
+    "inner": {
+     "hex": "#A37454",
+     "vi": "đào cam sâu",
+     "en": "medium-deep muted persimmon orange"
+    },
+    "tip": {
+     "hex": "#D0B477",
+     "vi": "đào cam lụa",
+     "en": "soft light turmeric yellow"
+    },
+    "outline": "gold thread"
    }
   },
   "s65": {
-   "set": "hong_mai",
-   "set_vi": "Hồng mai",
-   "min_dE": 28.3,
-   "mains": {
-    "xuan": "#628346",
-    "ha": "#DB7D97",
-    "thu": "#8C6393",
-    "dong": "#4EA989"
+   "gpt_code": "DT13",
+   "xuan": {
+    "outer": {
+     "hex": "#F0D3F4",
+     "vi": "tím phong lan sáng",
+     "en": "powder pink-lilac"
+    },
+    "inner": {
+     "hex": "#8C74A4",
+     "vi": "tím thạch anh sâu",
+     "en": "medium-deep violet"
+    },
+    "tip": {
+     "hex": "#DBA3CB",
+     "vi": "hồng mận lụa",
+     "en": "light plum"
+    },
+    "outline": "gold thread"
+   },
+   "ha": {
+    "outer": {
+     "hex": "#FED2CC",
+     "vi": "đào cam sáng",
+     "en": "pale earthy rose"
+    },
+    "inner": {
+     "hex": "#A86D73",
+     "vi": "đỏ hồng san hô sâu",
+     "en": "medium-deep earthy rose"
+    },
+    "tip": {
+     "hex": "#E6A68C",
+     "vi": "đào cam lụa",
+     "en": "light muted persimmon orange"
+    },
+    "outline": "gold thread"
+   },
+   "thu": {
+    "outer": {
+     "hex": "#B5E8F4",
+     "vi": "xanh thiên thanh sáng",
+     "en": "misty jade"
+    },
+    "inner": {
+     "hex": "#428E91",
+     "vi": "xanh ngọc nước sâu",
+     "en": "medium-deep teal"
+    },
+    "tip": {
+     "hex": "#7BC2E3",
+     "vi": "xanh lưu ly lụa",
+     "en": "light ice blue"
+    },
+    "outline": "gold thread"
+   },
+   "dong": {
+    "outer": {
+     "hex": "#FDD5BD",
+     "vi": "đào cam sáng",
+     "en": "peach cream"
+    },
+    "inner": {
+     "hex": "#A87060",
+     "vi": "đào cam sâu",
+     "en": "medium-deep terracotta brick"
+    },
+    "tip": {
+     "hex": "#DDAD7C",
+     "vi": "đào cam lụa",
+     "en": "light amber"
+    },
+    "outline": "gold thread"
    }
   }
  }
