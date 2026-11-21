@@ -101,8 +101,8 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
    const A=ROAD8.srv.acts.rival,K=new Set(),T=[],off=new Set();let cons=0;for(let i=0;i<rivals.length;i++){const v=rivals[i];if(!v||v===S)continue;const h=rvCard(v,i);keys(h).forEach(k=>K.add(k));T.push(h.replace(/<[^>]+>/g,' '))}
    const a0=ROAD8.srv.acts;ROAD8.srv.acts=null;try{for(let i=0;i<rivals.length;i++){const v=rivals[i];if(!v||v===S)continue;keys(rvCard(v,i)).forEach(k=>off.add(k))}}finally{ROAD8.srv.acts=a0}
    const t=T.join(' ');const v=rivals.find(x=>x&&x!==S&&x!==srvM()&&x.alive&&!x.out);let talk=[];try{talk=talkOpts({kind:'srv',sk:v.queen?'hh':'rv',ref:v,name:v.name}).map(a=>a.n)}catch(e){talk=['ERR '+e.message]}
-   return{K:[...K],bad:[...K].filter(k=>!A[k]),off:off.size,offHas:['ally','steal','lygian','invite'].filter(k=>off.has(k)),cw:['Tranh sủng','Ly gián','Phạt quỳ','Rút thẻ bài','Mời đến cung ta','Sai cung nữ thân tín','Kết giao','Đến cung nàng thăm','phải sai người','dễ hơn sai người'].filter(w=>t.includes(w)),
-    lock:/🔒|kitLock|klock/.test(t),visit:t.includes('Đến cung nàng thỉnh an'),talk}});
+   return{K:[...K],bad:[...K].filter(k=>!A[k]),off:off.size,offHas:['ally','steal','lygian','invite'].filter(k=>off.has(k)),cw:['Tranh sủng','Ly gián','Phạt quỳ','Rút thẻ bài','Mời đến cung ta','Sai cung nữ thân tín','Kết giao','phải sai người','dễ hơn sai người'].filter(w=>t.includes(w)),
+    lock:/🔒|kitLock|klock/.test(t)||/Đến cung nàng( ta)? thăm/.test(t),visit:/Đến cung nàng( ta)? thỉnh an/.test(t),talk}});
   ok(cma.bad.length===0&&cma.cw.length===0&&!cma.lock,sz+' maid-acts-a: Chủ tử cards on her road = only ROAD8.srv.acts keys, no consort act words, no lock',cma);
   ok(cma.visit&&cma.K.includes('visit'),sz+' maid-acts-a: kept act in her words «Đến cung nàng thỉnh an»',cma.K);
   ok(cma.off>10&&cma.offHas.length===4,sz+' maid-acts-a: the table is the switch (table off → the consort acts come back)',{off:cma.off,has:cma.offHas});
