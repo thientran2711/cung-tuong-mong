@@ -43,7 +43,7 @@ function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=
  return()=>{done=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
 function gKy(b,lv,end){const n=7,B=Array(n*n).fill(0);let over=false,maxRun=0;
  b.innerHTML=`<div class="goban">${B.map((_,i)=>`<button data-i="${i}" aria-label="Hàng ${Math.floor(i/n)+1}, cột ${i%n+1}"></button>`).join("")}</div><p class="mgsc" id="mgsc">Đến lượt ngươi.</p>`;
- const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=[0,1,8,60,600,9000];
+ const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=BAL.pm.ky.ai.w;/* one core (law 4): the run weights live in BAL (jbal2 BAL.pm.ky.ai.w, shared with the jpma 7×7 Cờ) */
  const run=(i,p)=>{const r=Math.floor(i/n),c=i%n;let best=0;for(const[dr,dc]of D){let k=1;for(const s of[1,-1]){let rr=r+dr*s,cc=c+dc*s;while(rr>=0&&rr<n&&cc>=0&&cc<n&&B[rr*n+cc]===p){k++;rr+=dr*s;cc+=dc*s}}best=Math.max(best,k)}return best};
  const val=i=>{B[i]=2;const a=run(i,2);B[i]=1;const d=run(i,1);B[i]=0;const r=Math.floor(i/n),c=i%n;return W[Math.min(a,5)]*1.1+W[Math.min(d,5)]+(6-Math.abs(r-3)-Math.abs(c-3))};
  const ai=()=>{let best=-1,bi=-1;const noise=(5-lv)*35+10;for(let i=0;i<B.length;i++)if(!B[i]){const s=val(i)+Math.random()*noise;if(s>best){best=s;bi=i}}return bi};

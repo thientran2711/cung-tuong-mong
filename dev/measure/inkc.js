@@ -3,7 +3,7 @@
 window.__kcLesson=function(k){const l=S.arts[k],cost=5+l*5;if(!can(2)||l>=5||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);addArt(k,2+R(2))};
 window.__kcRun=function(pol){const lesson=window.__kcLesson;const sens=pol==='sens';let guard=0;
 
-   const bad=/tự vẫn|Thắt cổ|Cắt tóc|bến sông|Đến bến|Nhận lời nhà|Cãi lại|Dùng thử|Im lặng$|Mặc nàng|Xin cha lo cho được miễn|Cáo bệnh|mở lớp/i;
+   const bad=/tự vẫn|Thắt cổ|Cắt tóc|bến sông|Đến bến|Nhận lời nhà|Cãi lại|Dùng thử|Im lặng$|Mặc nàng|Xin cha lo cho được miễn|miễn tuyển|Cáo bệnh|mở lớp/i;
    function choose(m){const O=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(!O.length){Q.shift();return}
     if(!sens){const [c,i]=O[Math.floor(Math.random()*O.length)];chooseM(i);return}
     const rare=O.find(([c])=>c.r97);if(rare&&Math.random()<.5){chooseM(rare[1]);return}

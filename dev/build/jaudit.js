@@ -108,7 +108,7 @@ function aaHealthO(v){return oddsCl(Math.round(45+aff(v,S)/2-((typeof traitsOf==
   let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
 
 /* 9. "ban chết" on cards = what deathSentence (j8) really does; the odds word is the real one (it was forced to "Liều") */
-function aaDeathTxt(){if(S.turn<12&&!S.mercy)return"tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10";return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
+function aaDeathTxt(){/* law4-typed: prints the BAL keys deathSentence (j8) applies — her Sủng drawn once (sgStat) */const E=BAL.eff.j8;if(typeof S==="object"&&S&&S.turn<E.mercyTurn&&!S.mercy)return`tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc ${E.mercyConfine} tháng, Danh ${balSg(E.danhDeathSentence)}, ${sgStat(E.sungDeathSentence)}`;return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
 (function(){for(const k in ACT){const A=ACT[k];if(A&&typeof A.x==="string"&&/ban chết/.test(A.x)){const x0=A.x;Object.defineProperty(A,"x",{configurable:true,get(){return x0.replace(/ban chết/,aaDeathTxt())},set(v){}})}}
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);return typeof h==="string"?h.replace(/(bị (?:tra ra|lộ)): ban chết/g,(m,p)=>`${p}: ${aaDeathTxt()}`):h}}})();
 
@@ -119,13 +119,10 @@ Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"�
 if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
 /* the runner is household info (owner 10:10Z): not a line of the maid's card but "Người chạy việc của cung: X" with the household block; jhc's line (tap = meaning, "Đổi ›") is kept */
 (function(){const r0=window.runnerLine;window.runnerHouse=function(){try{return typeof r0==="function"?String(r0()).replace("Người chạy việc:","Người chạy việc của cung:"):""}catch(e){return""}};window.runnerLine=function(){return""}})();
-/* names: unique, never "Thúy 2" — larger pools, and any old numbered name is renamed once */
-(function(){const xm=["Thanh Trúc","Bạch Lan","Tử Đằng","Hải Đường","Lạc Mai","Diệu Âm","Thúy Vi","Như Ý","Bảo Châu","Kim Chi","Ngân Hạnh","Mộc Lan","Uyển Thanh","Tú Cầm","Phương Thảo","Thanh Hà","Tịnh Hương","Vân Anh","Hồng Ngọc","Lam Ngọc","Thu Thủy","Xuân Đào","Liên Hoa","Hạnh Dung","Cẩm Tú","Ngọc Bích","Tố Như","Song Hỷ","Bích Hà","Quỳnh Chi","Tuyết Mai","Hương Lan","Tiểu Nguyệt","Tiểu Cúc","Tiểu Hoa","Tiểu Linh","Nhã Thanh","Ánh Tuyết","Ngọc Nhi","Khánh Vân"];
- const xe=["Tiểu Hải Tử","Tiểu Toàn Tử","Tiểu Bình Tử","Tiểu Kiệt Tử","Tiểu Minh Tử","Tiểu Ninh Tử","Tiểu Phong Tử","Tiểu Sơn Tử","Tiểu Tường Tử","Tiểu Vinh Tử","Tiểu Lạc Tử","Tiểu Khang Tử","Tiểu Trung Tử","Tiểu Bảo Tử","Tiểu Hưng Tử","Tiểu Cát Tử","Tiểu Long Tử","Tiểu Nghĩa Tử","Tiểu Trí Tử","Tiểu Lễ Tử","Tiểu Thành Tử","Tiểu Đông Tử","Tiểu Thu Tử","Tiểu Hạ Tử","Tiểu Nguyên Tử","Tiểu Quý Tử","Tiểu Hòa Tử","Tiểu Lợi Tử","Tiểu Mãn Tử","Tiểu Tài Tử"];
- try{for(const n of xm)if(!MAIDS.includes(n))MAIDS.push(n);for(const n of xe)if(!EUN.includes(n))EUN.push(n)}catch(e){}})();
+/* names: unique, never "Thúy 2" — any old numbered name is renamed once (from the one name core, jname.js) */
 function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid]:[]);const used=new Set(all.map(s=>s.name));
- for(const s of all){if(!/\d/.test(s.name||""))continue;const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(!pool.length)continue;const n=pool[Math.floor(Math.random()*pool.length)];used.add(n);s.name=n}}catch(e){}}
-(function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name)){const used=new Set(allServ().map(x=>x.name).concat(S&&S.maid?[S.maid.name]:[]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(pool.length)s.name=pool[Math.floor(Math.random()*pool.length)]}}catch(e){}return s}}
+ for(const s of all){if(!/\d/.test(s.name||""))continue;const n=nmNew(s.role==="eunuch"?"eun":"maid");used.add(n);s.name=n}}catch(e){}}
+(function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name))s.name=nmNew(s.role==="eunuch"?"eun":"maid")}catch(e){}return s}}
  if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);aaNamesFix();return r}}})();
 /* strip label = the NAME only (owner): a title is dropped ("Thái y Trương" → "Trương Bá"; "Tiểu Ngân Tử" → "Ngân Tử" as before).
    Someone known only by title + surname gets a fixed given name (same every time). One label function for every strip: shortN. */
@@ -179,7 +176,7 @@ window.kitThey=kitThey;
 /* 15. her own Sủng on act-card outcome texts goes through sg() like the real change (j1 apply: Hoàng thượng nóng nảy ×1.3,
    lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */
 (function(){if(typeof actLineRaw!=="function"||typeof sg!=="function")return;const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;
- return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu,(m,p,l,g,n,off,all)=>{if(/nàng(?: ta)?\s*$|nàng ta mất|nàng mất|của nàng/.test(all.slice(Math.max(0,off-14),off+p.length)))return m;const v=sg((g==="+"?1:-1)*+n);return `${p}${l} ${v>0?"+":"-"}${Math.abs(v)}`})}})();
+ return sgTxt(h)/* SG-CARD: the ONE rewrite (j1 sgTxt) — the same one every option card reads through kitParse */}})();
 
 /* 16. THIẾU LỄ (owner): at formal moments (thỉnh an Thái hậu / Hoàng hậu, gặp Hoàng thượng) a consort who wears nothing proper for
    her rank (nothing worn, or what she wears is clearly below her rank: worn luxury < BAL.thieuLe.frac × her rank's allowance)
@@ -251,10 +248,10 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
  const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
   X.f=(a,t)=>{/* AG-ALL-2d4 (OD 17/11 ~17:10Z (1)): the gift is taken only when the Empress agrees; refused → returned */const q=queenP();const o=odA(a,raw(a,t));
    /* RECEIVER CHOICE (jrcv RCVJ.xinhh, review FAIL 6 #3): the Hoàng hậu decides — she as the Hoàng hậu gets the card; an NPC queen the SAME options, yes at these odds */
-   if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,o);if(roll(o)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
+   const oz=aOdd(o,a);/* the frozen shown odds (fzRun) / an NPC road's +up (jtamco), econ-tamco F2 */if(typeof rcvJudge==="function")return rcvJudge("xinhh",a,t,oz);if(roll(oz)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
  const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
   T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,BAL.eff.jaudit.evF);/* RECEIVER CHOICE (jrcv RCVJ.trinhhh): she as the Hoàng hậu gets the card */
-   if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,o);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
+   const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}

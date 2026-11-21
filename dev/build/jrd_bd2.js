@@ -29,7 +29,7 @@ ARC67.bd_tuyet=bdArc("bd_tuyet",{o:"bd",t:"Năm đoàn người chạy nạn",w:
   {n:"Xin bớt khẩu phần cung mình gửi ra ải",f:"an",wx:"cả hậu cung bàn về lòng ngươi",rt:"Thượng thiện giám ghi: cung ngươi ăn chay suốt tháng chạp."},
   {n:"Tâu: dân biên đói thì cướp, cướp thì Đại Hy mất hơn",f:"le",wx:"triều thần nghe ra lẽ phải",lx:"Hộ bộ cho là ngươi dạy việc triều",rt:"Hoàng thượng gật đầu: “Phải. Một xe lương rẻ hơn một trận đánh.”",rf:"Thượng thư bộ Hộ cười nhạt: “Nương nương thật lo xa.”"},
   {n:"Im lặng, để triều thần quyết",wx:"không ai trách ngươi",lx:"người ngoài ải đợi thêm",rt:"Ngươi chỉ dâng trà."}]},
- c2:{h:"{v} cười trong buổi thỉnh an",w:"v",need:["v"],t:"{v} nói giữa buổi thỉnh an: “Nước {land} mất thành mà nước mắt lại chảy ở Đại Hy. Người {land} thật khéo.”",o:[
+ c2:{h:"{v} cười trong buổi thỉnh an",w:"v",need:["v"],t:"{v} nói giữa buổi thỉnh an: “Nước {land} mất thành, mà kẻ phải rơi nước mắt lại là Đại Hy. Người {land} thật khéo kể khổ.”",o:[
   {n:"Đáp: giặc đâu chọn nước mà đánh",wx:"cả điện lặng nghe",lx:"thành ra cãi nhau trước mặt các phi tần",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đỏ mặt, không đáp được.",rf:"Cả điện cười, ngươi và {v} cùng mất mặt."},
   {n:"Mời {v} cùng góp áo bông gửi ra ải",wx:"{v} không còn lời để cười",lx:"{v} có cớ khoe lòng tốt",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} góp hai rương áo, tên nàng ta được ghi ngay dưới tên ngươi.",rf:"{v} góp áo rồi kể khắp nơi: chính nàng ta lo cho người {land}."},
   {n:"Cúi đầu im lặng",wx:"giữ thể diện",lx:"lời cười cứ thế lan",rt:"Ngươi chỉ nâng chén trà."}]},
@@ -97,7 +97,7 @@ rdDef("bd_tuyet",6,{t:"Đổi lương lấy bạc",w:"emp",sj:"giá lương ở 
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Chợ họp trong gió cát",w:"emp",if:RDW(1),t:"Lương đã ra ải; chợ Ngọc Môn họp lần đầu giữa gió cát. A La Hám mang đến những đồng bạc khắc mặt {quan} và những con lạc đà gầy trơ xương. Quan coi chợ hỏi ngươi: một bao lương đổi bao nhiêu?",o:[
   {n:"Một bao một đồng bạc, lạc đà gầy cũng tính đủ",f:"an",wx:"người {land} thấy Đại Hy không ép",lx:"Hộ bộ chê giá quá hời cho người nước khác",rt:"Quan coi chợ ghi giá. A La Hám chắp tay trước ngực."},
-  {n:"Để quan coi chợ định theo lệ",f:"le",wx:"đúng phép, không ai trách",lx:"lệ chợ ải là lệ của mùa no",rt:"Quan coi chợ định theo lệ cũ.",rf:"Lệ cũ ép giá; người {land} lặng lẽ cất bạc đi."},
+  {n:"Để quan coi chợ định theo lệ",f:"le",wx:"đúng phép, không ai trách",lx:"lệ chợ ải đặt ra cho năm được mùa, giá ép người đói",rt:"Quan coi chợ định theo lệ cũ.",rf:"Lệ cũ ép giá; người {land} lặng lẽ cất bạc đi."},
   {n:"Đòi lạc đà cái làm giá",f:"uy",wx:"Đại Hy có giống lạc đà tốt",lx:"người chạy nạn mất con vật chở đường về",rt:"Quan coi chợ ghi: lương đổi lạc đà cái."}]},
  s2:{h:"Chợ họp mà không ai đến",w:"emp",if:RDW(0),t:"Chợ ải Ngọc Môn mở cửa, nhưng người {land} đến rất ít: họ không tin Đại Hy sau lần ải đóng. A La Hám đứng xa xa, không mang bạc vào.",o:[
   {n:"Viết thư tiếng {land} mời lão tướng vào chợ",f:"an",wx:"lão tướng tin lời người cùng tiếng",lx:"thư tiếng ngoại qua tay Binh bộ",rt:"A La Hám đọc thư, rồi dẫn người vào chợ.",rf:"Binh bộ giữ thư lại hỏi ngươi viết gì."},
@@ -133,7 +133,7 @@ rdDef("bd_tuyet",7,{t:"Hồ thương bị cướp",w:"emp",sj:"vụ cướp trê
   {n:"Xin chém cả toán, treo đầu ở cửa ải",f:"uy",wx:"không ai dám cướp nữa",lx:"người {land} nhớ ngươi đã đòi đầu người cùng nước",rt:"Những cái đầu treo ở Ngọc Môn quan đến hết tháng."}]},
  s2:{h:"Toán cướp chạy vào núi",w:"emp",if:RDW(0),t:"Toán cướp đã chạy vào núi Kỳ Liên; không ai bị bắt. Binh bộ xin đem quân vào núi lùng, mà dưới núi là trại của người A La Hám dẫn đến.",o:[
   {n:"Viết thư cho lão tướng: tự giao người, Đại Hy không vào núi",f:"an",wx:"trại người chạy nạn không bị đốt",lx:"nếu lão tướng không giao, ngươi mất mặt",rt:"Ít ngày sau, A La Hám giao toán cướp ở cửa ải.",rf:"A La Hám không giao; quân Đại Hy vào núi."},
-  {n:"Xin Binh bộ đi, nhưng chỉ bắt kẻ cướp",f:"le",wx:"quân đi có lệnh rõ",lx:"lệnh rõ trên giấy, lửa không rõ trên núi",rt:"Quân Đại Hy bắt được toán cướp, không đốt trại.",rf:"Hai trại bị đốt nhầm."},
+  {n:"Xin Binh bộ đi, nhưng chỉ bắt kẻ cướp",f:"le",wx:"quân đi có lệnh rõ",lx:"lệnh viết rõ, nhưng lên núi rồi lửa đâu chọn người mà cháy",rt:"Quân Đại Hy bắt được toán cướp, không đốt trại.",rf:"Hai trại bị đốt nhầm."},
   {n:"Chỉ đường cho quân, đổi lấy lời khen của Binh bộ",f:"uy",wx:"Binh bộ nể ngươi",lx:"người {land} biết ai chỉ đường",rt:"Quân Đại Hy vào núi theo đường ngươi chỉ."}]},
  c1:{h:"Nhà lão phu xe",w:"maid",t:"Lão phu xe chết để lại vợ và hai con nhỏ. Cung nữ của ngươi người Lương Châu, khóc kể: nhà ấy không còn hạt thóc nào.",o:[
   {n:"Gửi bạc riêng đền cho nhà lão phu xe",f:"an",wx:"nhà lão phu xe có cái ăn",lx:"bạc của ngươi",rt:"Bạc của ngươi đến tay bà vợ lão phu xe, cùng một tấm vải trắng."},
@@ -241,7 +241,7 @@ rdDef("bd_tuyet",10,{t:"Mở cửa ải",w:"emp",sj:"lệnh bài Ngọc Môn qua
   {n:"Im lặng",wx:"không lỡ lời",lx:"lời tâu ở lại",rt:"Ngươi không đáp."}]},
  t1:{h:"Thư của {pb}",w:"emp",t:"Một mũi tên mang thư cắm trên tường thành: {pb} ngươi viết, “Mở cửa ải cho ta qua, ta cho cháu gái làm {mh} của cả {land} dưới cờ Đại Thực.”",o:[
   {n:"Dâng thư lên Hoàng thượng",f:"le",go:()=>bdO("thuthuc","dot"),wx:"Hoàng thượng thấy ngươi không hai lòng",lx:"{pb} biết ngươi đã chọn",rt:"Hoàng thượng đốt thư trước mặt ngươi: “Trẫm tin nàng.”"},
-  {n:"Hồi thư: người của ta không qua, quân của Vương thúc cũng không",f:"an",go:()=>bdO("thuthuc","ta"),wx:"{pb} biết ngươi không sợ",lx:"{pb} giận",rt:"Thư hồi đi theo mũi tên khác."},
+  {n:"Hồi thư: người của ta không theo giặc, quân của Vương thúc cũng đừng hòng qua ải",f:"an",go:()=>bdO("thuthuc","ta"),wx:"{pb} biết ngươi không sợ",lx:"{pb} giận",rt:"Thư hồi đi theo mũi tên khác."},
   {n:"Giữ thư, không tâu, chờ xem ai thắng",f:"uy",wx:"ngươi còn đường lui",lx:"giữ thư giặc là giữ một tội",go:()=>bdO("thuthuc","giu"),rt:"Thư của {pb} nằm dưới đáy hộp trang sức."}]},
  x1:{h:"Ngọc Môn quan",w:"emp",t:"Đêm trước ngày quân {pb} đến chân ải, Hoàng thượng hỏi ngươi lần cuối: “Mở cửa, trẫm cứu người hay cứu giặc? Nàng nói.”",o:[
   {n:"Tâu: mở cửa cho người, đóng cửa với giặc",e:["win","lose"],rt:"Hoàng thượng chuẩn. Cửa ải mở cho người chạy nạn, đóng sau lưng họ; quân {pb} đến thì chỉ thấy tường thành.",rf:"Cửa mở chậm; quân {pb} đuổi đến khi người còn chen ở cửa."},
@@ -325,7 +325,7 @@ ARC67.bd_hen=bdArc("bd_hen",{o:"bd",t:"Lời thề trước lửa thánh",w:"emp
   {n:"Thưa: thần thiếp không biết",e:"mid",lx:"bỏ lỡ một lời",rt:"Hoàng thượng ban vàng theo lệ."}]}},
  E:{win:{tag:"Lời thề giữ trong lòng",w:"emp",t:"Lời thề cũ ở yên trong lòng ngươi, không ai nhắc. Hoàng thượng tin ngươi, và Mật Hồ Đạt được trọng ở Hội Đồng quán."},
   win2:{tag:"Chàng ở lại kinh thành",w:"emp",t:"Mật Hồ Đạt ở lại kinh thành làm hộ vệ quán sứ. Mỗi sáng, tiếng chiêng đổi gác ở Hội Đồng quán vọng vào tận cung ngươi."},
-  mid:{tag:"Gió tây thoảng qua",t:"Sứ đoàn vào nghị việc, đoàn hộ vệ ở lại quán sứ. Như một cơn gió từ phía tây thoảng qua cung cấm."},
+  mid:{tag:"Gió tây thoảng qua",t:"Sứ đoàn vào nghị việc, đoàn hộ vệ ở lại quán sứ. Chuyện cũ thoảng qua cung cấm như một cơn gió từ phía tây, rồi lặng."},
   lose:{tag:"Lời đồn theo chân ngươi",w:"emp",t:"Lời đồn về ngươi và đội trưởng hộ vệ {land} theo chân ngươi khắp hậu cung, và Hoàng thượng đã nghe."}}});
 BD97.push({a:"bd_hen",tag:"Chiếc nhẫn thề trở về",w:"emp",n:"Xin Hoàng thượng làm chứng: lời thề xưa xin đổi thành lời chúc",
  path:["Thưa thật với Hoàng thượng","Gửi lại một sợi chỉ xanh","Dịch đúng từng lời","Nhắn: không gặp","người {land} nhìn lửa","một con ngựa tốt"],bad:["Đến gặp, có cung nữ","Dò xem ai kể"],
@@ -341,7 +341,7 @@ rdDef("bd_hen",5,{t:"Chiếc nhẫn trong tay áo",w:"maid",sj:"chiếc nhẫn �
   {n:"Giữ chiếc nhẫn trong tay áo",f:"tinh",wx:"lời thề ở bên ngươi",lx:"chiếc nhẫn có thể thành chứng cớ",go:()=>bdO("da","ta"),rt:"Chiếc nhẫn nằm trong tay áo ngươi, ấm dần."},
   {n:"Gửi trả chiếc nhẫn, kèm một lời cảm ơn",f:"nghia",wx:"lời thề được trả trọn",lx:"chàng đau lòng",go:()=>bdO("da","tra"),rt:"Túi gấm về lại Hội Đồng quán nguyên như cũ."},
   {n:"Đưa chiếc nhẫn cho Hoàng thượng xem",f:"that",wx:"Hoàng thượng thấy ngươi không giấu",lx:"Hoàng thượng biết cả tên người kia",go:()=>bdO("da","vua"),rt:"Hoàng thượng xoay chiếc nhẫn trong tay: “Nàng giữ đi. Trẫm biết là đủ.”",rf:"Hoàng thượng giữ chiếc nhẫn lại, không nói gì."}]},
- s2:{h:"Hộ vệ quán sứ",w:"maid",if:()=>rdPrev()==="win2",t:"Mật Hồ Đạt ở lại kinh làm hộ vệ quán sứ. Gần như thế, chàng gửi chiếc nhẫn vào cung không phải để nhớ, mà để hỏi: nàng còn giữ lời không.",o:[
+ s2:{h:"Hộ vệ quán sứ",w:"maid",if:()=>rdPrev()==="win2",t:"Mật Hồ Đạt ở lại kinh làm hộ vệ quán sứ. Ở gần như thế, chàng vẫn gửi chiếc nhẫn vào cung: không phải để nhớ, mà để hỏi ngươi còn giữ lời không.",o:[
   {n:"Giữ chiếc nhẫn trong tay áo",f:"tinh",wx:"lời thề ở bên ngươi",lx:"chàng ở gần, lời đồn càng gần",go:()=>bdO("da","ta"),rt:"Chiếc nhẫn nằm trong tay áo ngươi."},
   {n:"Gửi trả chiếc nhẫn, nhắn chàng về {land}",f:"nghia",wx:"chàng hiểu nên đi đâu",lx:"chàng đau lòng",go:()=>bdO("da","tra"),rt:"Túi gấm về lại Hội Đồng quán."},
   {n:"Đưa chiếc nhẫn cho Hoàng thượng xem",f:"that",wx:"Hoàng thượng thấy ngươi không giấu",lx:"Hoàng thượng biết người kia ở rất gần",go:()=>bdO("da","vua"),rt:"Hoàng thượng xoay chiếc nhẫn trong tay: “Nàng giữ đi.”",rf:"Hoàng thượng giữ chiếc nhẫn lại."}]},
@@ -405,11 +405,11 @@ rdDef("bd_hen",6,{t:"Kết nghĩa",w:"emp",sj:"lễ kết nghĩa trước triề
   {n:"Thưa: thần thiếp không uống",e:"mid",lx:"cả triều nhớ ngươi không uống",rt:"Bát rượu được dọn đi."}]}},
  E:{win:{tag:"Nghĩa huynh trước triều",w:"emp",t:"Mật Hồ Đạt thành nghĩa huynh của ngươi trước cả triều. Lời đồn không còn chỗ đứng; người ta gọi chàng là cữu gia {land}.",go:()=>{RD_FL("bd_hen.nghia",1)}},
   mid:{tag:"Chưa thành nghĩa, chưa dứt tình",t:"Lễ kết nghĩa chưa thành. Lời thề cũ vẫn là lời thề cũ."},
-  lose:{tag:"Lời đồn thành tiếng",w:"emp",t:"Lễ hỏng, lời đồn thành tiếng nói. Ngự sử ghi tên ngươi và tên chàng vào cùng một tờ sớ."}}});
+  lose:{tag:"Lời đồn thành tiếng",w:"emp",t:"Lễ hỏng, lời đồn lan khắp nơi, không ai ngăn nổi. Ngự sử ghi tên ngươi và tên chàng vào cùng một tờ sớ."}}});
 
 /* .7 Trận đấu vật — {v}'s house sets a trap at the wrestling before the Emperor; a man dies [emp, v] */
 rdDef("bd_hen",7,{t:"Trận đấu vật",w:"emp",sj:"cái chết ở sân vật",cast(A){return rdCast(A,["v"])},
- g:"Hội đấu vật mừng sứ đoàn trước điện. Nhà {v} đưa ra một dũng sĩ của phủ mình đấu với Mật Hồ Đạt. Hiệp thứ ba, dũng sĩ ngã xuống và không dậy nữa. Người ta nói Phong ra đòn chết người. Trước hiệp đấu, quản sự nhà {v} đã đưa cho dũng sĩ một chén rượu.",
+ g:"Hội đấu vật mừng sứ đoàn trước điện. Nhà {v} đưa ra một dũng sĩ của phủ mình đấu với Mật Hồ Đạt. Hiệp thứ ba, dũng sĩ ngã xuống và không dậy nữa. Người ta nói Mật Hồ Đạt ra đòn chết người. Trước hiệp đấu, quản sự nhà {v} đã đưa cho dũng sĩ một chén rượu.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Chiếc chén còn trên bàn",w:"emp",if:RDW(1),t:"Ngươi ngồi gần sân vật, thấy rõ chiếc chén quản sự nhà {v} đưa còn nằm trên bàn, đáy chén có cặn đen.",o:[
   {n:"Sai cung nữ lặng lẽ giữ lấy chiếc chén",f:"le",wx:"chứng cớ nằm trong tay ngươi",lx:"nếu bị thấy, ngươi thành người giấu vật chứng",go:(_A,ok)=>{if(ok)bdO("chen","ta")},rt:"Cung nữ của ngươi giấu chiếc chén vào tay áo trước khi bàn được dọn.",rf:"Thái giám dọn bàn nhanh hơn; chiếc chén đã rửa."},
@@ -441,7 +441,7 @@ rdDef("bd_hen",7,{t:"Trận đấu vật",w:"emp",sj:"cái chết ở sân vật
 
 /* .8 Lá thư bị chặn — a letter in steppe script is seized at the gate [emp, v, maid] */
 rdDef("bd_hen",8,{t:"Lá thư bị chặn",w:"emp",sj:"lá thư chữ {land}",cast(A){return rdCast(A,["v"])},
- g:"Lính gác cửa Đông Hoa bắt được một lá thư chữ Bát La Bà của người {land} giấu trong giỏ quả gửi vào cung ngươi. Thông dịch Tứ Di quán dịch ra: lời hẹn bỏ trốn. Thư được đưa sang Đại Lý tự.",
+ g:"Lính gác cửa Đông Hoa bắt được một lá thư viết bằng chữ {land} giấu trong giỏ quả gửi vào cung ngươi. Thông dịch Tứ Di quán dịch ra: lời hẹn bỏ trốn. Thư được đưa sang Đại Lý tự.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Bản dịch sai",w:"emp",if:RDW(1),t:"Ngươi được xem bản sao: nét chữ đúng là của chàng, nhưng chàng viết “đợi nàng trước lửa”, còn bản dịch ghi “đợi nàng ở cửa Tây”. Người dịch là thông dịch Tứ Di quán, người nhà của {v}.",o:[
   {n:"Xin đọc nguyên văn trước Hoàng thượng",f:"that",wx:"Hoàng thượng nghe lời thật",lx:"ngươi tự nhận đọc thư của chàng",rt:"Ngươi đọc từng chữ; Hoàng thượng sai người dịch lại.",rf:"Hoàng thượng hỏi: “Nàng đọc thư y quen tay quá.”"},
@@ -560,11 +560,11 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
   {n:"Giữ chiếc nhẫn trong tay áo suốt đời",f:"tinh",wx:"lời thề ở với ngươi",lx:"một vật có thể thành chứng cớ",go:()=>{bdO("da","ta")},rt:"Chiếc nhẫn nằm trong tay áo ngươi."},
   {n:"Dâng chiếc nhẫn vào lửa thánh",f:"uy",wx:"lời thề nằm yên",lx:"lòng ngươi đóng lại",go:()=>{bdO("da","chon")},rt:"Lò lửa ở đền Hỏa Tiên nuốt chiếc nhẫn, không để lại tro."}]},
  c2:{h:"{v} đến tiễn sứ đoàn",w:"v",need:["v"],t:"{v} cũng đến tiễn sứ đoàn, đứng cạnh ngươi trên lầu cổng: “Tỷ tỷ buồn sao?”",o:[
-  {n:"Đáp: buồn, và tỷ biết ai làm tỷ buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
+  {n:"Đáp: buồn, và {tx} biết ai làm {tx} buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
   {n:"Không đáp",wx:"không lỡ lời",lx:"{v} đứng đó đến cuối",rt:"Ngươi nhìn theo sứ đoàn."}]},
  t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Mật Hồ Đạt.",o:[/*bd6b: the letter speaks of him alive or dead (both options fit either)*/
-  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin phụ hãn giữ người ấy.”"},
+  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin {pv} che chở người ấy.”"},
   {n:"Xin {pv} không quên ai đã hại chàng",f:"uy",wx:"{land} sẽ nhớ",lx:"thư ấy là mồi lửa",rt:"Ngươi viết, rồi đóng dấu bằng sáp đỏ."},
   {n:"Không nhắc đến chàng",f:"phan",wx:"thư nhà sạch",lx:"chuyện của chàng không ai kể",rt:"Thư nhà chỉ kể chuyện trong cung."}]},
  x1:{h:"Cổng thành lúc bình minh",w:"emp",t:"Bình minh. Sứ đoàn {land} qua cổng Tây. Hoàng thượng đứng cạnh ngươi trên lầu cổng, không nói gì, chờ xem ngươi làm gì.",o:[
@@ -574,7 +574,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
  E:{win:{tag:"Lời thề giữ trọn",w:"emp",t:"Lời thề trước lửa thánh được giữ trọn theo cách của ngươi. Ở {land} người ta kể chuyện công chúa và người hộ vệ, ở Đại Hy người ta kể chuyện một phi tần không nói dối Hoàng thượng.",go:(_A,G)=>e67bien(G[0])},
   mid:{tag:"Người đi, lời ở lại",t:"Sứ đoàn đi rồi. Lời thề ở lại, không ai nhắc, như một đốm lửa giữ trong lò."},
   lose:{tag:"Lời thề nhuốm máu",w:"emp",t:"Lời thề trước lửa thánh nhuốm máu. {land} nhớ người đã chết, hậu cung nhớ người còn sống, và không ai quên tên ngươi đứng giữa.",go:(_A,G)=>e67bien(G[0])}}});
-RD97L.push(rdRare({a:"bd_hen_11",tag:"Hoàng thượng làm chứng lời thề",w:"emp",n:"Xin Hoàng thượng chứng cho lời thề xưa: chàng giữ biên ải, thiếp giữ Đại Hy",
+RD97L.push(rdRare({a:"bd_hen_11",tag:"Hoàng thượng làm chứng lời thề",w:"emp",n:"Xin Hoàng thượng chứng cho lời thề xưa: chàng giữ biên ải, thần thiếp giữ Đại Hy",
  path:["Thưa thật","Đưa chiếc nhẫn cho Hoàng thượng","Kể hết chuyện lời thề","bát rượu kết nghĩa","Xin cho thái y làm chứng","tra chén rượu","Hồng Lô tự","đọc nguyên văn","Khai thật","Tâu hết với Hoàng thượng","Đến Thận hình ty","Xin Hoàng thượng giữ thái y","nghĩa huynh của Đại Hy"],bad:["Mua chuộc ngục tốt","Khai: không quen","Tâu: thư giả","Đưa bạc cho thái y"],
  x:[()=>bdPh()&&S.danh>=RR("bd_hen_11").bar,"Danh từ "+RR("bd_hen_11").bar],
  t:"Trên lầu cổng Tây, trước mặt sứ đoàn, Hoàng thượng cầm tay ngươi và nói bằng tiếng {land} ngươi đã dạy: “Lời thề của nàng, trẫm làm chứng.” Mật Hồ Đạt xuống ngựa quỳ, thề giữ biên ải cho hai nước đến hết đời. Mỗi mùa thu sau đó, một con ngựa trắng từ biên ải về kinh, trên yên buộc một chiếc nhẫn nhỏ.",/*bd6b: the rare x condition requires bdPh() (alive)*/

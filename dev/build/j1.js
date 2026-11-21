@@ -38,9 +38,9 @@ function originRoot(k){const b=ORIGIN_BR[k];return b?b.par:k}
 /* branch of origin k for a roll r in [0,1): weights BAL.orig.br[k] ({branch key: weight}); an origin without branches is itself */
 function originBrPick(k,r){try{const W=BAL.orig.br[k];if(!W)return k;const L=Object.keys(W).filter(b=>W[b]>0&&originByKey(b));const tot=L.reduce((a,b)=>a+W[b],0);
  let x=r*tot;for(const b of L){x-=W[b];if(x<0)return b}return L.length?L[L.length-1]:k}catch(e){return k}}
-const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
-const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
-const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];
+const SURN=NM_SUR;/* one name core: jname.js */
+const GIVEN=NM_F;
+const MALEN=NM_M;
 /* TRAITS = figure LOOK keys only (FIGURES.json trait tags via TRK) + old malice; nết come from the ONE pool BAL.net (jnet.js) */
 const TRAITS=[["Xảo quyệt",80],["Kiêu ngạo",55],["Ân cần",15],["Kín đáo",45],["Tham vọng",65],["Khiêm nhường",25]];
 /* ONE trait-label map (owner 17/11 05:35Z): "Hiểm độc" renamed "Xảo quyệt" everywhere the player reads it. Old saves/codes store the old word: deser() runs trMigrate() so they load as the new label (behaviour keys unchanged). Add future renames HERE only. */
@@ -51,9 +51,9 @@ function trMigrate(o){const OLD=Object.keys(TRAIT_OLD);const fx=s=>{for(const k 
   for(const k0 of Object.keys(x)){let k=k0;if(TRAIT_OLD[k0]&&!(TRAIT_OLD[k0] in x)){x[TRAIT_OLD[k0]]=x[k0];delete x[k0];k=TRAIT_OLD[k0]}const v=x[k];if(typeof v==="string"){const n=fx(v);if(n!==v)x[k]=n}else w(v,d+1)}};w(o,0);return o}
 const SEASON=["Xuân","Xuân","Xuân","Hạ","Hạ","Hạ","Thu","Thu","Thu","Đông","Đông","Đông"];
 const TUAN=["thượng tuần","trung tuần","hạ tuần"];
-const MAIDS=["Tiểu Đào","Bích Ngọc","Xuân Hạnh","Thu Cúc","Hồng Liên","Tiểu Thúy","Lục Châu","Hạ Vân","Tố Cầm","Ngọc Lan"];
-const PRINCE=["Vĩnh Kỳ","Vĩnh Diễm","Hoằng Trú","Vĩnh Thành","Miên Ninh","Vĩnh Tinh","Hoằng Chiêm","Vĩnh Dung","Dận Tường","Vĩnh Lân","Miên Khải","Hoằng Diệu"];
-const PRINCESS=["Hòa Kính","Hòa Gia","Ngọc Dung","Tĩnh An","Hòa Thạc","Ninh Thọ","Thục Thận","Hòa Khác","An Lạc","Vĩnh Gia","Thục Nghi","Uyển Trinh"];
+const MAIDS=NM_MAID;
+const PRINCE=NM_PX;
+const PRINCESS=NM_PRINCESS;
 const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu → ta: thiện cảm",hh:"Hoàng hậu → ta: thiện cảm",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Lòng cung nữ"};
 const ETRAITS={
  danghi:["Đa nghi","Mưu kế dễ bị lộ hơn, nhưng lời vu cáo khó gỡ hơn."],
@@ -73,10 +73,11 @@ const LIKEN={flower:"Hoa",music:"Nhạc",dish:"Món"};
 const ARTS=[
  {k:"cam",n:"Cầm",st:"tai",u:"Bậc 3: khúc Phượng cầu hoàng"},
  {k:"ky",n:"Kỳ",st:"tai",u:"Bậc 3: đánh cờ với Hoàng thượng"},
- {k:"thi",n:"Thi",st:"tai",u:"Bậc 3: mỗi tháng thơ đến tay Hoàng thượng, Sủng +1"},
+ {k:"thi",n:"Thi",st:"tai",u:"Bậc 3: mỗi tháng thơ đến tay Hoàng thượng, {sgRaw:tho.sung}"},
  {k:"hoa",n:"Họa",st:"tai",u:"Bậc 3: vẽ chân dung dâng Thái hậu"},
  {k:"vu",n:"Vũ",st:"sac",u:"Bậc 3: điệu Kinh hồng vũ"},
  {k:"y",n:"Y thuật & điều hương",st:"sac",u:"Bậc 2: nhận ra độc, xạ hương · Bậc 4: tự bào chế thuốc, chữa bệnh cho con"}];
+ARTS.forEach(a=>sgRuleObj(a,"u"));/* r2 sg-card: «{sgRaw:tho.sung}» read from BAL when shown */
 const NIGHTS=["Rèm the buông xuống, nến đỏ cháy đến canh tư. Sáng ra, Hoàng thượng ban cho ngươi một cây trâm ngọc.",
  "Tiếng mưa rơi trên mái ngói. Hoàng thượng ở lại đến khi trời hửng sáng.",
  "Ngài kể chuyện thuở còn là hoàng tử, rồi đèn lụi dần. Sáng hôm sau, cả hậu cung đều biết.",
@@ -122,6 +123,20 @@ function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
 function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung"))f*=.7;const r=Math.round(n*f);return n>0?Math.max(1,r):r}
+/* SG-CARD (law 4 + law 11, rv kit-opt-kem): HER Sủng written as a literal number in any card / option text («thành: Sủng +4») is drawn as the
+   real change, through the same sg() apply() uses (Hoàng thượng nồng nàn ×1.3, lạnh lùng ×.7 on gains). A number already drawn through sg()
+   (fmt, or an earlier sgTxt pass) carries a no-break space after «Sủng» and is never scaled twice. Someone else's Sủng — «nàng / nàng ta /
+   hắn / <Tên> Sủng …», «của nàng», «nàng mất» — is applied raw (ap(v,…)) and stays raw. ONE rule: read by kitParse (every kit card), the
+   hint model (jk2b kitOptModel) and the act lines (jaudit 15). */
+const SG_NB="\u00a0";
+function sgTxt(h){if(typeof h!=="string"||h.indexOf("Sủng")<0||typeof S!=="object"||!S||!S.emp)return h;
+ /* r2: a RANGE «Sủng +2 đến +4» (also «..» / «–») scales BOTH ends — the first build scaled only the number after «Sủng» */
+ return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)(?:(\s*(?:đến|\.\.|–)\s*)([+\-−]?)(\d+))?/gu,(m,p,l,g,n,sep,g2,n2,off,all)=>{const pre=all.slice(Math.max(0,off-40),off+p.length);
+  if(/nàng(?: ta)? mất|của nàng|nàng ta\s*$/.test(pre))return m;const w=pre.replace(/<[^>]*>/g,"").match(/(\p{L}+)\s*$/u);
+  if(w&&(/^(nàng|hắn|y|thị)$/.test(w[1])||/^\p{Lu}/u.test(w[1])))return m;
+  const sv=x=>`${x>0?"+":x<0?"-":""}${Math.abs(x)}`,v0=(g==="+"?1:-1)*+n,v=sg(v0);
+  if(sep==null)return v===v0?m:`${p}${l}${SG_NB}${sv(v)}`;
+  const u0=(g2?(g2==="+"?1:-1):(g==="+"?1:-1))*+n2,u=sg(u0);return v===v0&&u===u0?m:`${p}${l}${SG_NB}${sv(v)}${sep}${sv(u)}`})}
 /* KLOW: numbers where a FALL is good for her (Áp lực hôn sự / Nợ nhà / Phe chủ chiến, Lời đồn) — coloured by meaning (OD:L908), here and in the result card (j63) */
 const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
 /* AG-ALL-2f3: ONE stat-preview text. A Tai mắt GAIN is not a number handed over (OD 17/11 ~16:50Z / ~17:00Z): it is N approaches to real people who each
@@ -131,7 +146,25 @@ const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
    (cap BAL.ag.eye.cap). The chip / lists still show the real count (p.mat). window.__tmOff (old-stat test knob) reads the plain number. */
 function eyes(p){if(!p)return 0;const n=+p.mat||0;if(window.__tmOff)return n;try{const E=BAL.ag.eye;return Math.min(E.cap,n*E.w)}catch(e){return n}}
 function statTxt(k,v,lbl){const n=lbl||NAMES[k]||k;if(k==="mat"&&v>0)return `${n}: ngỏ lời ${v} người`;return `${n} ${v>0?"+":""}${v}`}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${statTxt(k,v)}</span>`}).join(" · ")}
+/* SG-CARD: her Sủng change v drawn through sg() — the no-break space marks it as already drawn, so sgTxt never scales it again */
+/* sgNow(v): sg(v) when a game is loaded; before one (a card getter read at load, title screen) the number as written */
+function sgNow(v){return typeof S==="object"&&S&&S.emp?sg(v):v}
+function sgStat(v,lbl){const w=sgNow(v),t=statTxt("sung",w,lbl);return w!==v?t.replace(/ (?=[+\-−]?\d+$)/,SG_NB):t}
+/* r2 (rv sg-card): the ONE printer of a Sủng change in a result / log line. sgOf(p,v): HER change is applied through sg() (apply / ap(S,…)) →
+   print sg(v) (marked); someone else's (ap(v,…) raw) → print v. Never pass a MEASURED delta (S.sung after − before): print that as it is.
+   sgRange(a,b): «Sủng +sg(a) đến +sg(b)» — both ends of a range drawn as applied (one number when they meet). */
+/* sgFix(v): HER Sủng that is applied AS IS (not through sg — e.g. the monthly thơ, j3) — marked so sgTxt never rescales it */
+function sgFix(v,lbl){const t=statTxt("sung",v,lbl);return t.replace(/ (?=[+\-−]?\d+$)/,SG_NB)}
+/* sgRule: typed Sủng in a static RULE text (arts tiers ARTFX/ARTMS, ARTS.u) is a token read from BAL when the text is READ (tables load
+   before BAL.deck): «{sg:deck.cam.w.sung}» = a change applied through sg (apply), «{sgRaw:tho.sung}» = applied as is, «{n:tho.sung}» = the
+   bare signed number. sgRuleArr / sgRuleObj turn every element holding a token into a getter, so every reader gets the live number. */
+function sgRule(s){return typeof s!=="string"||s.indexOf("{")<0?s:s.replace(/\{(sg|sgRaw|n):([\w.]+)\}/g,(m,f,p)=>{let v=typeof BAL!=="undefined"?BAL:null;for(const k of p.split("."))v=v&&v[k];v=+v||0;
+ return f==="sg"?(typeof S==="object"&&S&&S.emp?sgStat(v):statTxt("sung",v)):f==="sgRaw"?sgFix(v):`${v>0?"+":v<0?"-":""}${Math.abs(v)}`})}
+function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(a,i,{get:()=>sgRule(s),enumerable:true,configurable:true})});return a}
+function sgRuleObj(o,k){const s=o&&o[k];if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),enumerable:true,configurable:true});return o}
+function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
+function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
@@ -152,8 +185,8 @@ function fx(cls,el){const e=el||$("game");e.classList.remove(cls);void e.offsetW
 
 /* people helpers */
 function allKids(){const a=[];if(S&&S.kids)S.kids.forEach(k=>a.push([k,null]));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>a.push([k,v])));return a}
-function mkKid(sex,age){const used=allKids().map(([k])=>k.name);const pre=sex==="m"?"Hoàng tử ":"Công chúa ";const pool=(sex==="m"?PRINCE:PRINCESS).filter(n=>!used.includes(pre+n));
-  return {name:pre+(pool.length?pick(pool):pick(sex==="m"?PRINCE:PRINCESS)+" "+(R(9)+2)),sex,age,hp:80+R(21),tal:20+R(50),fond:30+R(30),alive:true,heir:false,fv:1+R(2)}}
+function mkKid(sex,age){const used=allKids().map(([k])=>k.name);const pre=sex==="m"?"Hoàng tử ":"Công chúa ";/* one name core (jname.js) */
+  return {name:pre+nmNew(sex==="m"?"prince":"princess"),sex,age,hp:80+R(21),tal:20+R(50),fond:30+R(30),alive:true,heir:false,fv:1+R(2)}}
 /* palace-start (owner 16/11 "game starts right after the accession", amended: "about 4 small children, close in age"): a new game seeds
    BAL.ps.kidN-weighted 3–5 children in the whole palace, ages kidAge (1–4), princes and princesses mixed (sonP each, at least one of each),
    mothers in BAL.ps rank ranges; the Hoàng hậu never has a son at the start (no đích tử) and nobody is grown, so the player can still compete.
@@ -190,10 +223,7 @@ function pgUp(v,n,why){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.p
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(S,d,why,v)}catch(e){}return d}
 function ghenAll(n,why){const d=ghenN(n);liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
-function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>n.startsWith(x+" "))).filter(Boolean);
-  let ss=SURN.filter(x=>!sur.includes(x));if(!ss.length)ss=SURN;
-  for(let t=0;t<200;t++){const n=pick(ss)+" "+pick(GIVEN);if(!used.includes(n)&&!used.some(u=>u.endsWith(" "+n.split(" ").slice(-2).join(" "))))return n}
-  for(const a of SURN)for(const b of GIVEN){const n=a+" "+b;if(!used.includes(n))return n}return pick(SURN)+" "+pick(GIVEN)+" "+(R(90)+10)}
+function freshName(){return nmNew("f")}/* one name core (jname.js): unique across the save, living + dead */
 function ghenNew0(){return R(BAL.ghenNew)}/* ONE CORE: the jealousy a new face starts with (newRival + co-op part B rebase) */
 function newRival(rank,isQueen){const t=pick(TRAITS);
   return rstats({id:++rid,name:freshName(),rank,queen:!!isQueen,trait:t[0],malice:t[1]+R(20)-10,sung:20+rank*9+R(10),rel:isQueen?-5:R(20)-10,ev:0,alive:true,out:false,
@@ -201,6 +231,9 @@ function newRival(rank,isQueen){const t=pick(TRAITS);
 function mkEmp(){const t=[];const ks=Object.keys(ETRAITS);
   while(t.length<2){const k=pick(ks);if(t.includes(k)||CLASH.some(([a,b])=>(a===k&&t.includes(b))||(b===k&&t.includes(a))))continue;t.push(k)}
   return {era:pick(ERA),age:BAL.ps.empAge[0]+R(BAL.ps.empAge[1]+1),reignY:1,traits:t,mood:1,likes:{flower:pick(LIKES.flower),music:pick(LIKES.music),dish:pick(LIKES.dish)},known:{}}}
+/* owner 21/11: «Hoàng thượng» is the NAME the game shows (it never tells her his name); the niên hiệu is a detail row (empEra). empName() = the STORY phrase only (băng hà, lên ngôi…) */
+function empEra(){return S.emp.era}
+function empNm(){return "Hoàng thượng"}
 function empName(){return `Hoàng thượng niên hiệu ${S.emp.era}`}
 function discover(){const u=Object.keys(LIKES).filter(k=>!S.emp.known[k]);if(!u.length)return false;const k=pick(u);S.emp.known[k]=true;
   log(`<span class="g">Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.</span>`);return true}

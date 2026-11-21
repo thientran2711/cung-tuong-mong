@@ -53,7 +53,7 @@ A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc
  f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!aRoll(tsbThuO(a,t),a)){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
-  return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, Sủng -${L.sung}, Danh -${L.danh}.</span> `}});
+  return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, ${sgOf(t,-L.sung)}, Danh -${L.danh}.</span> `}});
 AOUT.thathu=["nàng bị hủy dung (vết cào 1 đến 3 nét), Sắc giảm tới khi lành",`thú bị đuổi đi; nàng có thể nắm ${balAb(BAL.eff.jtsb.evF)} chứng cứ`];
 try{ACTDOM.thathu="Mưu kế";if(typeof ACAUGHT!=="undefined")ACAUGHT.push("thathu")}catch(e){}
 
@@ -231,7 +231,7 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){let m=a0.apply(this,arguments);try{if(!m||!m.opts||!m.who||!m.who.w||m.who.w[0]!=="r")return m;let v=RV(m.who.w[1]);if(!v)return m;const h=String(m.h||"");
   if(/mỉa mai/.test(h)){const e2=npwPick(liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined&&npw1Mot(x,S,"provoke")),x=>hostility(x,S));if(e2&&!tsbEasy(v)&&hostility(e2,S)>=hostility(v,S)){v=e2;m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
   if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`thành: thiện cảm ${balSg(BAL.eff.jtsb.go_8)} · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi ${balSg(BAL.eff.jtsb.go_9)} (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,BAL.eff.jtsb.go_8);foes.forEach(x=>oanAdd(x,S,BAL.eff.jtsb.go_9))}},
-    {n:"Khéo từ chối",fx:{},x:`thành: không dính vào thù oán của nàng · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_10)}`,go:()=>relAdd(S,v,BAL.eff.jtsb.go_10)}];m.optLayout="rows";return m}
+    {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`thành: giữ sức, đứng ngoài chuyện riêng của nàng · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_10)}`,go:()=>relAdd(S,v,BAL.eff.jtsb.go_10)}];m.optLayout="rows";return m}
   if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`thành: nàng bớt oán ${balAb(BAL.eff.jtsb.go_11)} · thiện cảm ${balSg(BAL.eff.jtsb.go_12)} · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_11);relAdd(S,v,BAL.eff.jtsb.go_12)}},
     {n:"Lạnh lùng",fx:{},x:`thành: Danh ${balSg(BAL.eff.jtsb.danhGo_10)} (giữ uy, không để ai coi nhẹ) · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_13)} · nàng vẫn oán như cũ`,go:()=>{apply({danh:BAL.eff.jtsb.danhGo_10});relAdd(S,v,BAL.eff.jtsb.go_13)}}];m.optLayout="rows";return m}
   }catch(e){console.error("tsb approach",e)}return m}})();

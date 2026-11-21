@@ -28,10 +28,10 @@ const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||
    window.__forceOrigin=o;Q=[];S=null;start();Q=[];if(!S.kc)kcInit();Q=[];window.__forceOrigin=undefined;try{$("modal").hidden=true;$("ov").hidden=true}catch(e){}
    const RR=window.__kcRun(window.__POL);const guard=RR.guard,ring=RR.ring;
    const K=S.kc;return{o,inPal:!!K.inPal,rank:K.inPal?K.r:null,end:K.end,dead:!!S.dead,fate:S.fate||"",turn:S.turn,early:!!(K.tt&&K.tt.early),so:K.so?K.soOk:null,sc:K.tt?K.tt.sc:null,
-    sac:S.sac,tai:S.tai,danh:S.danh,duc:S.duc,bac:S.bac,arts:Math.max(...Object.values(S.arts)),le:K.le,kap:S.kap,kgt:S.kgt,ld:S.kld,intel:K.intel.length,sis:K.fam.filter(m=>m.pal).length,guard,ring:guard>=6000?ring:null,kcw:window.__kcw}
+    sac:S.sac,tai:S.tai,danh:S.danh,duc:S.duc,bac:S.bac,arts:Math.max(...Object.values(S.arts)),le:K.le,kap:S.kap,kgt:S.kgt,ld:S.kld,intel:K.intel.length,sis:K.fam.filter(m=>m.pal).length,guard,ring:guard>=6000?ring:null,kcw:window.__kcw,dk:[S.diff,BAL.kcSch,BAL.kcRumFade,BAL.kcMatch,BAL.hz]/* outside-nums: the difficulty knobs in force at the end of the life */}
   }catch(e){return{o,err:String(e&&e.stack||e).slice(0,300)}}},o)}catch(e){r={o,err:'crash '+String(e).slice(0,200)}}
   try{await p.close()}catch(e){}r.secs=Math.round((Date.now()-t1)/1000);res.push(r);fs.writeFileSync(OUTF,JSON.stringify(res));process.stderr.write(`${o} ${i} ${r.inPal?'palace '+r.rank:r.end||r.fate||r.err} ${r.secs}s\n`)}
- const cat=r=>r.err?'err':r.inPal?'palace':(/Bỏ trốn cùng|Vợ Trạng|Vương phi|Nữ tướng|Hòa thân|Nữ thương/.test(r.end||''))?'rare':r.end==='chết'||/chết|Chết|Tự vẫn|Hồng nhan/.test(r.fate)&&!r.end?'death':r.end&&r.end!=='chết'?(r.end==='Xuất gia'||r.end==='Nữ phu tử'?'other':'married'):'death';
+ const cat=r=>r.err?'err':r.inPal?'palace':!r.end&&!r.dead&&!r.fate?'stuck'/* outside-nums: a life the bot left mid-road is not a death */:(/Bỏ trốn cùng|Vợ Trạng|Vương phi|Nữ tướng|Hòa thân|Nữ thương/.test(r.end||''))?'rare':r.end==='chết'||/chết|Chết|Tự vẫn|Hồng nhan/.test(r.fate)&&!r.end?'death':r.end&&r.end!=='chết'?(r.end==='Xuất gia'||r.end==='Nữ phu tử'?'other':'married'):'death';
  const by={};for(const r of res){const k=r.o;by[k]=by[k]||{n:0};by[k].n++;const t=cat(r);by[k][t]=(by[k][t]||0)+1}
  const tot={n:res.length};for(const r of res){const t=cat(r);tot[t]=(tot[t]||0)+1}
  const pct=o=>Object.fromEntries(Object.entries(o).filter(([k])=>k!=='n').map(([k,v])=>[k,Math.round(100*v/o.n)]));

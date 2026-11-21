@@ -64,9 +64,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  ok(fb&&fb.shown&&!fb.row,'fallback anchor (no row, no points) is SHOWN',fb);
  /* 4–6 Hoa đăng */
  await p.evaluate(()=>{mgCalRun("den")});await sleep(900);
- const rules=await p.evaluate(()=>{const d=document.querySelector('#kg82 .kgr-demo');const o=d&&d.querySelector('.kgr-obj');return{m:d&&d.dataset.m,bc:o&&getComputedStyle(o).borderTopColor,bad:getComputedStyle(document.documentElement).getPropertyValue('--bad').trim()}});
+ const rules=await p.evaluate(()=>({demo:!!document.querySelector('#kg82 .kgr-demo'),ev:!!document.querySelector('#kg82 .kgr-ev img')}));
  if(DIR){await sleep(900);await p.screenshot({path:`${DIR}/den-rules-${VW}x${VH}.png`})}
- ok(f.demoDen==='dodge'&&rules.m==='dodge'&&/rgb\(194, 59, 34\)|rgb\(/.test(rules.bc||''),'rules picture of Hoa đăng = «dodge» (danger-ring thing on a lit path)',rules);
+ ok(f.demoDen==='dodge'&&!rules.demo,'Hoa đăng rules screen: no rules-demo picture (mg-intro-2; the «Hướng dẫn» round teaches); the event picture is on top when the manifest has it',rules);
  await p.evaluate(()=>document.querySelector('#kg82 .kgr-go').click());await p.waitForFunction(()=>KG82.denPeek&&KG82.denPeek(),null,{timeout:30000});await sleep(3500);
  /* pixels from a real screenshot (the board paints CDN pictures, so the canvas itself is not readable) */
  const geo=await p.evaluate(()=>{const P=KG82.denPeek();const r=document.querySelector('#kg82 canvas').getBoundingClientRect(),k=r.width/P.W;const out=P.chan+P.cw*.8+28<P.W-6?P.chan+P.cw*.8+28:P.chan-P.cw*.8-28;
@@ -83,10 +83,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const q={x:P2.W*.5,y:P2.H*.12,r:24};P2.pads.push(q);return{hits:KG82.denHit,hitPad:!!pad.hit,g0,g1:P2.good,ring:Array.from({length:12},(_,a)=>[r.left+(q.x+Math.cos(a/12*6.283)*q.r*1.02)*k,r.top+(q.y+2+Math.sin(a/12*6.283)*q.r*1.02)*k])}});
  const png2=(await p.screenshot()).toString('base64');
  const red=await p.evaluate(async([png,pts])=>{const im=new Image();await new Promise(r=>{im.onload=r;im.src='data:image/png;base64,'+png});const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);
-  const sc=im.width/innerWidth;let n=0;for(const [x,y] of pts){const d=g.getImageData(Math.round(x*sc)-2,Math.round(y*sc)-2,5,5).data;let hit=false;for(let i=0;i<d.length;i+=4)if(d[i]>140&&d[i+1]<110&&d[i+2]<100&&d[i]-d[i+1]>60)hit=true;if(hit)n++}return n},[png2,hit0.ring]);
+  const sc=im.width/innerWidth;let n=0;for(const [x,y] of pts){const d=g.getImageData(Math.round(x*sc)-2,Math.round(y*sc)-2,5,5).data;let hit=false;for(let i=0;i<d.length;i+=4)if(Math.abs(d[i]-194)<12&&Math.abs(d[i+1]-59)<12&&Math.abs(d[i+2]-34)<12)hit=true/* the exact kit --bad red of the old ring */;if(hit)n++}return n},[png2,hit0.ring]);
  const hit=Object.assign({},hit0,{red,ring:undefined});
  ok(hit.hits>=1&&hit.hitPad&&hit.g1<hit.g0,'a lotus pad reaching the lantern = a hit, score falls (penalty)',hit);
- ok(hit.red>=4,'lotus pads wear the kit danger ring (red rim)',{red:hit.red});
+ ok(hit.red===0,'den-look: lotus pads are plain painted lotus (no danger ring / ✕ over them)',{red:hit.red});
  await p.evaluate(()=>{try{kg82Close()}catch(e){}});
  /* guided round: the hand drags */
  await p.evaluate(()=>{mgCalRun("den")});await sleep(900);await p.evaluate(()=>document.getElementById('kgrtut').click());await sleep(2500);

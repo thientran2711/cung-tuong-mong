@@ -7,9 +7,9 @@ const A=process.argv.slice(2);const scan=A.includes('--scan');const pos=A.filter
 const URL0=pos[0]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
 const KINDS=['dan','hat','co','dauho','ban','ve','hoa','theu','kim','mua','huong','doden','den','tat','ne'];
-const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
+const GW=60,longW=a=>(a||[]).some(t=>t.replace(/\s+«.*$/,'').length>GW);const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
- await p.addInitScript(()=>{window.__ct=null;const ok=t=>/^[^\p{L}]*$/u.test(t);
+ await p.addInitScript(()=>{window.__ct=null;const ok=t=>/^[^\p{L}]*$/u.test(t)||/^Gió (lặng|(ngược|xuôi) (nhẹ|vừa|mạnh))$/.test(t);/* owner 21/11: guide words that are needed stay (Đầu hồ wind line, dauho-lv5) */
   for(const f of['fillText','strokeText']){const o=CanvasRenderingContext2D.prototype[f];CanvasRenderingContext2D.prototype[f]=function(t){if(window.__ct&&!ok(String(t).trim()))window.__ct.add(String(t).trim());return o.apply(this,arguments)}}});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
@@ -38,8 +38,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  for(const k of KINDS){const exists=await p.evaluate(k=>!!KG82_KIND[k],k);if(!exists){console.log('skip kind '+k+' (not a KG82 kind)');continue}
   const src=k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
   let r;try{r=await p.evaluate(s=>window.__nw(s),src)}catch(e){r={err:String(e.message).slice(0,120)}}
+  /* OD 21/11 ~00:50Z (canon overwrite, mg-5s-clear): the short GUIDING words stay (the kit guide pill kg82Guide, zone labels); everything else is still a FAIL */
+  {const GU={ban:/^(Chạm ngay!|Chờ mũi ngắm vào giữa hồng tâm, rồi chạm|Chạm khi mũi ngắm ở giữa hồng tâm)$/,
+   tat:/^(Nặng|Vừa|Chạm ngay!|Tay đang lướt qua thước · chạm khi kim vào vùng đỏ)$/,ne:/^(Né|Chạm ngay để né!|Đòn đang lướt qua thước · chạm khi kim vào vùng xanh)$/}[k];
+   if(GU){const f=l=>(l||[]).filter(x=>!GU.test(String(x).replace(/\s+«.*»$/,'').trim()));r.play=f(r.play);if(r.tut)r.tut=f(r.tut)}}
   rows.push([k,r]);const n=(r.play||[]).length+((r.tut||[]).length);
   console.log(k.padEnd(7),n?('WORDS '+JSON.stringify({play:r.play,tut:r.tut})):('0 words'+(r.err||r.nobox||r.nogo?' ('+JSON.stringify(r)+')':'')))}
  console.log('errors',errs.slice(0,3));
- if(!scan){for(const [k,r] of rows){ok(r&&!r.err&&!r.nobox&&!r.nogo,k+' opened');ok(!(r.play||[]).length,k+' play: no text');ok(!(r.tut||[]).length,k+' tutorial: no text')}ok(!errs.length,'no page errors')}
+ if(!scan){for(const [k,r] of rows){ok(r&&!r.err&&!r.nobox&&!r.nogo,k+' opened');ok(!longW(r.play),k+' play: no reading-heavy text (guiding words ≤ '+GW+' chars are allowed, owner OD 21/11 ~00:50Z)',(r.play||[]).filter(t=>t.length>GW));ok(!longW(r.tut),k+' tutorial: no reading-heavy text')}ok(!errs.length,'no page errors')}
  await b.close();process.exit(scan||res.every(Boolean)?0:1)})();

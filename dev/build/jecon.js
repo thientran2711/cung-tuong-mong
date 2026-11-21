@@ -15,7 +15,7 @@
 Object.assign(BAL,{
  pay:[40,55,70,95,125,165,215,280],payCold:5,payConfined:.5,payCut:.7,wage:3,
  duty:[0,4,10,18,30,48,72,100],banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
- home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
+ home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,pf:22,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
  sellPct:50,noivuPct:70,craftSell:[8,14,24,40],craftLv:3,craftGift:[2,3,5,7],
  giftLeak:{emp:35,th:25,hh:25},giftHit:{emp:{sung:-6,danh:-4},th:{th:-6,danh:-2},hh:{hh:-6,danh:-2}},
  priceTier:{sonphan:8,huongtram:10,tuithom:6,demgam:12,thuocanthai:15,yensao:25,agiao:35,luahang:30,tramngoc:30,vongngoc:50,botngua:30,nhansam:60,nghien:60,xahuong:50,
@@ -56,7 +56,7 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    if(d||bt){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
     card.h+=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;
     card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
+     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
@@ -138,7 +138,7 @@ function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21):
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 /* AG-ALL-2f3 (OD 17/11 ~17:10Z): acts whose WHOLE price is paid only on success (the act pays econSchemePrice itself when it lands) */
-const ECON_WIN=["bribe","block","xinhh","thathu"];/* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
+const ECON_WIN=["bribe","block","xinhh","thathu"];const ECON_WIN_FAIL="không mất bạc";/* the ONE failure wording of a pay-on-success scheme (j17 actLine, jtamco road card) *//* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
 /* the act landed: pay its whole price now (her and every NPC) and mark the win for a scheme chain that pays its route bạc on success (j70 exec70) */
 function econPayWin(a,k,t,base){const pr=(typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0)||base||0;if(pr>0)ap(a,{bac:-Math.min(pr,Math.max(0,a.bac||0))});if(a)a.__won=1;return pr}
 /* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */
@@ -147,7 +147,10 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
   const ok0=A0.ok;A0.ok=function(a,t){ECON_AT=[a,t];if(!ok0.apply(this,arguments))return false;return (a.bac||0)>=econSchemePrice(k,a,t)};
-  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac;if(extra>0&&!ECON_WIN.includes(k))ap(a,{bac:-extra});return f0.apply(this,arguments)}}})();
+  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac,pay=extra>0&&!ECON_WIN.includes(k);if(pay)ap(a,{bac:-extra});const g0=econVeto();const r=f0.apply(this,arguments);
+   if(pay&&econVeto()!==g0)ap(a,{bac:extra});/* the act's own gate stopped it (j95c: no motive to frame) → no price paid for nothing (law 3) */return r}}})();
+/* acts whose own f can still refuse after the price is taken: the j95c giá họa motive gate (counted in J95C.stat.frameGate) */
+function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
@@ -158,7 +161,7 @@ A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),
    tell, the same as every sent servant); the target's maid answers through the SAME pick as «Mua chuộc cung nữ» (jrcv rcvMaidBribe, cnvBribeOpts with pay 0) */
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>oddsCl(oBribe(a,t)-BAL.selfMinus),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);const mn=t.maid.name;
- const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,oddsCl(oBribe(a,t)-BAL.selfMinus),0):"quiet";
+ const mc=typeof rcvMaidBribe==="function"?rcvMaidBribe(a,t,aOdd(oddsCl(oBribe(a,t)-BAL.selfMinus),a),0)/* the frozen shown odds (econ-tamco F2, whole group) */:"quiet";
  if(mc==="take"){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${mn}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${mn} của ${NM(t)}; nàng ấy thành tai mắt. `}
  if(mc==="quiet")return `${mn} không mặn mà với ${m.name}, cũng không nói với ai. `;
  return `${mn} nhận ra ${m.name} đến dò, báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ. `}});

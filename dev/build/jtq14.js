@@ -22,8 +22,8 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 const nv=n=>typeof kitNumVi==="function"?kitNumVi(n):String(n);
 const lc=s=>String(s).charAt(0).toLowerCase()+String(s).slice(1);
 /* how the narrator speaks to her (VANPHONG §2): a maid is "ngươi" and the ma ma says "ta"; a consort below Tần "tiểu chủ", Tần and up "nương nương" */
-function X(cap){/* j84 lowRank: below Tần (one rule for every speaker) */const w=srvNow()?"ngươi":(typeof lowRank==="function"&&!lowRank()?"nương nương":"tiểu chủ");return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
-function ME(){return srvNow()?"ta":"nô tỳ"}
+function X(cap){/* ONE address core (jvoice kAddr, VANPHONG §2): the narrator calls a maid "ngươi"; a consort is called as her own servant calls her (tiểu chủ / nương nương / Hoàng hậu nương nương) */let w;try{w=srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).goi:kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e){w=srvNow()?"ngươi":"tiểu chủ"}return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
+function ME(){/* the narrator's self word: the ma ma says "ta" to a maid (kAddr, no speaker); a consort's maid says "nô tỳ" */try{return srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).xung:kAddr({srv:"f"},S,{m:"cool"}).xung}catch(e){return srvNow()?"ta":"nô tỳ"}}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{m\}/g,ME())}
 /* ---------- the quests: [variant][chapter] → list; need = how many times (BAL.st14.q.need[id] or 1) ---------- */
 const A=re=>d=>!!(d&&re.test(String(d.n||"")));
@@ -115,6 +115,14 @@ const BEAT={
  cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
   sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
   tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
+/* bang-words review (E40r, law 6b / 11): BEAT.bd above is the Bắc Địch (old-premise) line; a NEW bd life is the Ba Tư princess
+   (owner OD 19/11) and reads the Ba Tư line through THE one switch bdTxtProp (jrd_bd.js). Phù Tang (pf) has its own row. */
+if(typeof bdTxtProp==="function"){const B=BEAT.bd;
+ bdTxtProp(B,"nhap14",B.nhap14,"Phụ vương gửi {x} sang cầu Đại Hy làm đồng minh, Lễ bộ nhìn xem người Ba Tư có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai bảo người phương tây thô lỗ.");
+ bdTxtProp(B,"sung14",B.sung14,"Mang theo của hồi môn từ Ba Tư, tấm thảm hay chuỗi ngọc nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.")}
+BEAT.pf={nhap14:"Thuyền sứ đoàn đưa {x} qua bể sang Đại Hy, Lễ bộ nhìn xem người Phù Tang có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai cười là người bên kia bể.",
+ sung14:"Mang theo của hồi môn từ Phù Tang, món nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.",
+ tap14:"Xa quê thì phải có người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận."};
 /* a road's person is cast only when the road starts (j67 newThread67 fill67), so a {v}/{foe}/{mis} subject is told without a name: the
    person stays unnamed here and is named by the road itself (law 6b: nobody is made up); any other {tag} → no road line */
 const SJ0={v:"một phi tần",foe:"một phi tần",mis:"chủ nhân"};
@@ -122,7 +130,7 @@ function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="und
  const sj=String(a.sj||"").replace(/\{(v|foe|mis)\}/g,(m,k)=>SJ0[k]);if(!sj||/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
 function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
  let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
-window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);
+window.tq14Beat=beatLine;window.tq14Say=say;window.tq14Intro=m=>introCard(m);
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}

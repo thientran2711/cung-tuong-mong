@@ -90,14 +90,16 @@ function ilStaleCases(){const held=new Map();for(const p of ilPeople())for(const
  for(const c of ilCases()){const h=c.e&&c.e.iu&&held.get(c.e.iu);if(!h||h[1]===c.e)continue;c.st="done";c.end=wk();c.how="tra";ilLog(c.e,"lo"+c.id,ilKey(h[0]),"đã ở rương")}}
 const IL_DH=["sacphong","ngocan"];
 const IL_BOXES=["mkt","nvp","cct","emp","th","srv","dlg"];
-function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set();try{ilStaleCases()}catch(z){}
+function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set();const RT=new Map();/* id → the owner a dead holder's piece was just handed back to (that one copy keeps the id) */try{ilStaleCases()}catch(z){}
  /* a found/held lost case and the copy in the holder's chest are ONE piece: same id (old saves had none; lostReturn hands back a copy of c.e) */
  try{for(const c of (S.lost||[]))if(c&&c.st!=="done"&&c.e&&typeof loEntry==="function"){const x=loEntry(c);if(x&&x.e){ilUid(x.e);c.e.iu=x.e.iu}}}catch(z){}
  for(const p of ilPeople()){const k=ilKey(p);const dead=p!==S&&(p.alive===false)&&!ilGuest();
-  for(const e of ilSlots(p)){if(e.iu&&seen.has(e.iu)){e.iu=0}const fresh=!e.iu;ilUid(e);seen.add(e.iu);
+  for(const e of ilSlots(p)){if(e.iu&&seen.has(e.iu)){if(RT.get(e.iu)===k)RT.delete(e.iu);else e.iu=0}const fresh=!e.iu;ilUid(e);
    if(fresh&&I.at)ilLog(e,e.from||e.giver||"",k,"nhận");
-   if(dead&&ilDur(e)){const o=e.gh&&e.gh!==k?ilP(e.gh):null;ilOut(p,e);if(o&&ilAlive(o)&&typeof lostReturn==="function"&&e.lo){lostReturn(e,"nop")}else ilGone(p,e,"dead",{own:k});continue}
-   now[e.iu]=[e.k,k,e.wk?1:0]}}
+   /* E42: a dead holder's piece is routed BEFORE its id counts as seen: the owner's chest (lostReturn) or the box keeps the SAME id
+      (before: an owner listed later in the census found the id already seen → a fresh id = the piece's trace broken, law 6c) */
+   if(dead&&ilDur(e)){const o=e.gh&&e.gh!==k?ilP(e.gh):null;ilOut(p,e);if(o&&ilAlive(o)&&typeof lostReturn==="function"&&e.lo){if(lostReturn(e,"nop")){ilLog(e,k,ilKey(o),"di vật về chủ");if(e.iu){seen.add(e.iu);now[e.iu]=[e.k,ilKey(o),0];RT.set(e.iu,ilKey(o))}}}else ilGone(p,e,"dead",{own:k});continue}
+   seen.add(e.iu);now[e.iu]=[e.k,k,e.wk?1:0]}}
  for(const x of I.box){ilUid(x.e);seen.add(x.e.iu);now[x.e.iu]=[x.e.k,x.at,0]}
  for(const c of ilCases()){ilUid(c.e);seen.add(c.e.iu);now[c.e.iu]=[c.e.k,"lo"+c.id,0]}
  /* a gift on its way (a dialog still waiting for her answer) */
@@ -139,7 +141,7 @@ function ilTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="f
 /* ransom visit (owner: "có người mang đến cho mình chuộc", ceiling time; cannot pay → it comes again later) */
 PEND.ilback=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="mkt"||x.own!=="me")return null;const nm=ilNm(x.e),pr=x.pr;const ok=S.bac>=pr;
  const O=[];if(ok)O.push({n:"Chuộc về",fx:{bac:-pr},j67:`tốn: Bạc -${pr} · thành: ${nm} về lại rương`,go:()=>{ilTake(x,S,"chuộc về");log(`Ngươi chuộc lại ${nm}: Bạc -${pr}.`)}});
- O.push({n:ok?"Thôi, không chuộc":"Chưa đủ bạc, hẹn lần sau",fx:{},j67:"tốn: không tốn gì · kèm: món đồ còn ở ngoài cung, ít lâu sau có thể lại có người mang đến",go:()=>{log(`Ngươi chưa chuộc ${nm}; món đồ còn ở ngoài cung.`)}});
+ O.push({n:ok?"Thôi, không chuộc":"Chưa đủ bạc, hẹn lần sau",fx:{},j67:ok?`tốn: món đồ còn ở ngoài cung · thành: giữ lại ${pr} lượng bạc · kèm: ít lâu sau có thể lại có người mang đến`:"tốn: không tốn gì · kèm: món đồ còn ở ngoài cung, ít lâu sau có thể lại có người mang đến",go:()=>{log(`Ngươi chưa chuộc ${nm}; món đồ còn ở ngoài cung.`)}});
  return{who:pEunCourt("ped"),t:`<p>Thái giám Nội vụ phủ dò được <b>${nm}</b>, đồ cũ của ngươi, đang ở ngoài cung. Người giữ chịu đem vào nếu được chuộc Bạc ${pr}.</p>${ok?"":`<p class="past">Ngươi đang có Bạc ${S.bac}.</p>`}`,o:O}};
 /* confiscated: after the minimum wait she may atone to ask for it back (owner 13:20Z (5): back only through atonement, minimum wait) */
 PEND.ilconf=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own!=="me")return null;const nm=ilNm(x.e),s=BAL.il.confSuc;
@@ -219,8 +221,7 @@ setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function"
 /* cướp y phục (jty): the robe goes to whoever sent the robber (kept in her chest: a lost case, found by tra xét / recognised when worn);
    an unknown thug → a lost case (it turns up in someone's chest, or hidden) — never into thin air */
 function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
- if(by&&by!==p&&ilAlive(by)&&typeof loLoseE==="function"){const c=loLoseE(p,e,"riv");if(c){c.by=ilKey(by);const x=Object.assign({},e,{lo:c.id,gh:c.own,by:c.by});delete x.from;delete x.giver;delete x.w;
-  by.inv=by.inv||[];by.inv.push(x);c.keep=1;c.st="held";c.at=c.by;c.rob=1;try{c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}catch(z){}ilUid(e);ilLog(e,ilKey(p),c.by,"cướp");return c}}
+ if(by&&by!==p&&ilAlive(by)&&typeof loLoseE==="function"){const c=loLoseE(p,e,"riv");if(c){ilUid(e);if(typeof loKeepBy==="function"&&loKeepBy(c,by,"",{rob:1})){try{c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}catch(z){}ilLog(e,ilKey(p),c.by,"cướp")}return c}}/* E42: the one keep road (jlost loKeepBy) */
  return ilGone(p,e,"lost",{cause:"srv"})}
 window.ilRob=ilRob;
 /* §64 item events: the ransom / atonement dialogs show the piece in the picture frame; "Chuộc về" / "xin lại" fly it into the chest */

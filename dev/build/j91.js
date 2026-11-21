@@ -58,7 +58,7 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
   if(t>=0)for(const w of words){if(w.t<ta-500||w.t>tb+500||w.t>DUR)continue;const x=MX+(w.t-t)*SPD;g.fillStyle=Math.abs(w.t-t)<350?K91C.red():"#3a2a1e";kg82Lbl(g,"♪",x,cy(w.t)-band-6)}
   g.fillStyle="#c23b2233";g.fillRect(MX-1,0,2,H);
   {const lr=Math.min(24,W*.05);if(!kg82Spr(g,"hat-lotus",MX,y,lr*2,null,{alpha:ok?1:.6,glow:ok?BAL.mgFx.glow:null,ring:ok}))kg82Blossom(g,MX,y,lr*.7,ok?K91C.pk():"#b9a58a",ok)}
-  if(t<0){g.fillStyle=K91C.ink;g.font=k91F(700,24);kg82Lbl(g,String(Math.ceil(-t/1000)),W/2,H*.2);g.font=k91F(700,13,1);g.fillStyle="#3a2a1e";kg82Lbl(g,"● ↑   ○ ↓",W/2,H*.2+22,W-16)}
+  if(t<0){g.fillStyle=K91C.ink;g.font=k91F(700,24);kg82Lbl(g,String(Math.ceil(-t/1000)),W/2,H*.2);g.font=k91F(700,13,1);g.fillStyle="#3a2a1e";kg82Lbl(g,"Giữ ngón tay: lên giọng · buông: xuống giọng",W/2,H*.2+22,W-16)}
   kg82DrawPops(g,pops,now);
   env.hud({score:mgLive(env,10*Math.min(1,(inb+Math.max(0,DUR-tot))/DUR/mgFull(env,.82))),round:`Hồi ${cl(1+Math.floor(Math.max(0,t)/5000),1,4)}/4`,time:`${Math.max(0,Math.ceil((DUR-Math.max(0,t))/1000))} giây`});
   if(t>DUR&&!done){done=true;setTimeout(()=>env.end((10*ratio())),200)}});
@@ -67,41 +67,59 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
  KG82.peek=()=>{const t=performance.now()-t0;if(t<0||done)return null;const p=C.client(W/2,H/2);return{hold:y>cy(t+120)+2,x:p.x,y:p.y}};
  return()=>{done=true;stop();document.removeEventListener("keydown",kd);document.removeEventListener("keyup",ku)}}
 
-/* =============== 2. FLING (Đầu hồ): drag back and release to throw the arrow; wind changes every throw =============== */
-function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const lv=env.lv||0;const N=6,U=Math.min(W,H);
- const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5,EAR=1.6;let px=0,mh=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
- const setThrow=()=>{px=W*(.6+Math.random()*.22);mh=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
+/* =============== 2. FLING (Đầu hồ): drag back and release to throw the arrow; wind changes every throw ===============
+   dauho-lv5 (owner 21/11, «thu lại cho ngay đúng cái bình»): the scoring holes ARE the holes painted in mg-dauho-pot.webp, measured on the art
+   (BAL.mgArt.dauho, shares of the picture width): the mouth opening (centre on the throw line MY, half-width R = the ease lever mouth) and the two
+   ear tubes at THEIR painted place (lower than the mouth). An arrow crossing the mouth plane inside the opening counts; on the outer lip it bounces
+   (miss); into the painted neck below the lip = miss; beside the vase it flies on and may still drop into an ear tube. A counted arrow is drawn standing IN its hole (the part below the near lip
+   is hidden by a clip), never beside the vase. */
+function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;
+ const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5;let px=0,R=0,Ws=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
+ /* the painted holes at this throw's vase size: R = mouth half-width (BAL.mgTier.lev.dauho.mouth by ease), Ws = picture width, ears below the mouth */
+ const G=()=>({ry:M.ry*Ws,rim:A.rim*Ws,ey:MY+(E.cy-M.cy)*Ws,ex:E.dx*Ws,er:E.rx*Ws,ery:E.ry*Ws});
+ const setThrow=()=>{px=W*(.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
  const vOf=(ax,ay,cx,cy)=>{let dx=cx-ax,dy=cy-ay;const L=Math.hypot(dx,dy);if(L>MAXD){dx*=MAXD/L;dy*=MAXD/L}return[-dx*K,-dy*K]};
+ /* ONE judge for the aim sim, the solver and the real flight: a step from (·,py) to (x,y) going down through a hole plane */
+ function judge(py,y,x){const g0=G();if(py<MY&&y>=MY){const d=Math.abs(x-px);if(d<=R)return{q:d<R*A.q.c?A.q.m[0]:A.q.m[1],at:0,x};if(d<=g0.rim)return{q:0,at:-9,x}}
+  if(py<g0.ey&&y>=g0.ey){for(const s of[-1,1])if(Math.abs(x-(px+s*g0.ex))<=g0.er)return{q:A.q.ear,at:s,x}}
+  if(y>MY&&y<g0.ey&&Math.abs(x-px)<=neck(y))return{q:0,at:-9,x};/* into the painted neck between the lip and the ears: it strikes the vase = miss */return null}
+ function neck(y){const N=A.neck,u=(y-MY)/Ws+M.cy;let i=0;while(i<N.length-2&&u>N[i+1][0])i++;const [a,ha]=N[i],[b,hb]=N[i+1];return Ws*(ha+(hb-ha)*cl((u-a)/(b-a),0,1))}
  function sim(vx,vy,cb){let x=X0,y=Y0,t=0;const dt=1/120;for(let i=0;i<600;i++){const py=y;vx+=wd*dt;vy+=GR*dt;x+=vx*dt;y+=vy*dt;t+=dt;if(cb&&cb(x,y,t)===false)return null;
-   if(py<MY&&y>=MY&&vy>0){const d=Math.abs(x-px);if(d<mh*.5)return{q:1,x,t};if(d<mh)return{q:.7,x,t};if(Math.abs(d-mh*EAR)<mh*.45)return{q:.5,x,t}}if(y>H+40||x>W+40||x<-40)return{q:0,x,t}}return{q:0,x,t}}
- function solve(){if(sol)return sol;let best=null;for(let a=30;a<=78;a+=1)for(let v=200;v<=MAXD*K;v+=4){const r=Math.PI*a/180,vx=v*Math.cos(r),vy=-v*Math.sin(r);const s=sim(vx,vy);if(s&&s.q===1){const d=Math.abs(s.x-px);if(!best||d<best.d)best={d,vx,vy}}}
+   const j=judge(py,y,x);if(j)return{q:j.q,x,t};if(y>H+40||x>W+40||x<-40)return{q:0,x,t}}return{q:0,x,t}}
+ function solve(){if(sol)return sol;let best=null;for(let a=30;a<=78;a+=1)for(let v=200;v<=MAXD*K;v+=4){const r=Math.PI*a/180,vx=v*Math.cos(r),vy=-v*Math.sin(r);const s=sim(vx,vy);if(s&&s.q===A.q.m[0]){const d=Math.abs(s.x-px);if(!best||d<best.d)best={d,vx,vy}}}
   sol=best||{vx:300,vy:-400};return sol}
- function pot(g){const x=px,y=MY;/* the bronze pitch-pot painting: mouth = 42 % of its width */
-  if(kg82Spr(g,"dauho-pot",x,y-mh*.35,mh*2/.42,null,{ay:0}))return;g.save();const gr=g.createLinearGradient(x-mh*3,0,x+mh*3,0);gr.addColorStop(0,"#6e4d0e");gr.addColorStop(.5,"#c9a03a");gr.addColorStop(1,"#6e4d0e");g.fillStyle=gr;
-  g.beginPath();g.moveTo(x-mh,y);g.lineTo(x+mh,y);g.bezierCurveTo(x+mh*.9,y+mh*1.6,x+mh*3.2,y+mh*2.4,x+mh*2.6,y+mh*5.4);g.lineTo(x-mh*2.6,y+mh*5.4);g.bezierCurveTo(x-mh*3.2,y+mh*2.4,x-mh*.9,y+mh*1.6,x-mh,y);g.fill();
-  [-1,1].forEach(s=>{g.fillRect(x+s*mh*2.2-mh*.5,y,mh,mh*1.6);g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x+s*mh*2.2,y,mh*.5,mh*.18,0,0,Math.PI*2);g.fill();g.fillStyle=gr});
-  g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x,y,mh,mh*.3,0,0,Math.PI*2);g.fill();g.restore()}
+ function pot(g){const x=px,y=MY,g0=G();/* the bronze pitch-pot painting, placed so its painted mouth opening sits on (px, MY) with half-width R */
+  if(kg82Spr(g,"dauho-pot",x,y-M.cy*Ws,Ws,null,{ay:0}))return;g.save();const r=g0.rim,gr=g.createLinearGradient(x-r*2.4,0,x+r*2.4,0);gr.addColorStop(0,"#6e4d0e");gr.addColorStop(.5,"#c9a03a");gr.addColorStop(1,"#6e4d0e");g.fillStyle=gr;
+  g.beginPath();g.moveTo(x-r,y);g.lineTo(x+r,y);g.bezierCurveTo(x+r*.7,y+r*1.3,x+r*2.5,y+r*1.9,x+r*2,y+r*4.3);g.lineTo(x-r*2,y+r*4.3);g.bezierCurveTo(x-r*2.5,y+r*1.9,x-r*.7,y+r*1.3,x-r,y);g.fill();
+  [-1,1].forEach(s=>{g.fillRect(x+s*g0.ex-g0.er*1.4,g0.ey,g0.er*2.8,g0.er*3);g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x+s*g0.ex,g0.ey,g0.er,g0.ery,0,0,Math.PI*2);g.fill();g.fillStyle=gr});
+  g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x,y,R,g0.ry,0,0,Math.PI*2);g.fill();g.restore()}
  function arrow(g,x,y,ang,len){if(kg82Spr(g,"dauho-arrow",x,y,len*1.25,null,{rot:ang,ax:.98,ay:.5}))return;g.save();g.translate(x,y);g.rotate(ang);g.strokeStyle="#4a3010";g.lineWidth=2.2;g.beginPath();g.moveTo(-len,0);g.lineTo(0,0);g.stroke();g.fillStyle=K91C.red();g.beginPath();g.moveTo(4,0);g.lineTo(-6,-4);g.lineTo(-6,4);g.fill();
   g.fillStyle="#f6ead6";g.strokeStyle="#8a7350";g.lineWidth=1;g.beginPath();g.moveTo(-len,0);g.lineTo(-len-8,-5);g.lineTo(-len+6,0);g.lineTo(-len-8,5);g.closePath();g.fill();g.stroke();g.restore()}
+ /* a counted arrow standing in its hole: it passes through its landing point on the hole plane, tip sunk below, tail leaning out by at most BAL.mgArt.dauho.lean;
+    the clip (all above the plane + the hole's ellipse) hides the part behind the near lip */
+ function stuck(g,a){const g0=G(),hx=a.at===0?px:px+a.at*g0.ex,hy=a.at===0?MY:g0.ey,rx=a.at===0?R:g0.er,ry=a.at===0?g0.ry:g0.ery,x=px+a.dx,len=U*.11;
+  const ang=Math.PI/2+A.lean*cl((x-hx)/rx,-1,1),s=A.sink*len;g.save();g.beginPath();g.rect(0,0,W,hy);g.ellipse(hx,hy,rx,ry,0,0,Math.PI*2);g.clip();arrow(g,x+Math.cos(ang)*s,hy+Math.sin(ang)*s,ang,len);g.restore()}
  const stop=k91Loop(now=>{kg82Bg(g,W,H,"dauho",0,.75);pot(g);
-  landed.forEach(a=>arrow(g,px+a.dx,MY+mh*.4,a.ang,U*.11));
-  /* wind */const wl=Math.abs(wd)/(H*.55);g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,wl<.05?"·":"~",10,10);
-  if(wl>=.05){const ax=10,ay=34,L=20+40*wl;g.strokeStyle="#6b5643";g.lineWidth=2;g.beginPath();g.moveTo(ax+(wd<0?L:0),ay);g.lineTo(ax+(wd<0?0:L),ay);g.stroke();const hx=ax+(wd<0?0:L),s=wd<0?1:-1;g.beginPath();g.moveTo(hx,ay);g.lineTo(hx+6*s,ay-4);g.lineTo(hx+6*s,ay+4);g.fill()}
+  landed.forEach(a=>stuck(g,a));
+  /* wind */const wl=Math.abs(wd)/(H*.55);g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";const WB=A.wind;/* owner 21/11 (verbatim): "hồi trước nó còn có cái dòng chữ hướng gió á ... những cái hướng dẫn cần chữ thì vẫn phải có chứ" — the wind word line is back (mg-noword-a had cut it) */kg82Lbl(g,wl<WB[0]?"Gió lặng":`Gió ${wd<0?"ngược":"xuôi"} ${wl<WB[1]?"nhẹ":wl<WB[2]?"vừa":"mạnh"}`,10,10);
+  if(wl>=WB[0]){const ax=10,ay=34,L=20+40*wl;g.strokeStyle="#6b5643";g.lineWidth=2;g.beginPath();g.moveTo(ax+(wd<0?L:0),ay);g.lineTo(ax+(wd<0?0:L),ay);g.stroke();const hx=ax+(wd<0?0:L),s=wd<0?1:-1;g.beginPath();g.moveTo(hx,ay);g.lineTo(hx+6*s,ay-4);g.lineTo(hx+6*s,ay+4);g.fill()}
   if(phase==="aim"){let vx=0,vy=0;if(aim){[vx,vy]=vOf(aim.ax,aim.ay,aim.cx,aim.cy)}const ang=aim?Math.atan2(vy,vx):-Math.PI/4;arrow(g,X0,Y0,ang,U*.12);
    if(aim&&Math.hypot(vx,vy)>40){const T=AIDT;g.fillStyle="#8a2a1e";sim(vx,vy,(x,y,t)=>{if(t>T)return false;if(Math.round(t*120)%5===0){g.beginPath();g.arc(x,y,2.2,0,Math.PI*2);g.fill()}});
     g.strokeStyle="#8a735088";g.setLineDash([3,4]);g.beginPath();g.moveTo(aim.ax,aim.ay);g.lineTo(aim.cx,aim.cy);g.stroke();g.setLineDash([])}
    else{g.fillStyle="#3a2a1e";g.textAlign="center";g.font=k91F(700,13,1);kg82Lbl(g,"↙",W/2,H*.95,W-16)}}
   if(phase==="fly"&&fly){const dt=1/60;for(let i=0;i<2;i++){fly.vx+=wd*dt/2;fly.vy+=GR*dt/2;const py=fly.y;fly.x+=fly.vx*dt/2;fly.y+=fly.vy*dt/2;
-    if(py<MY&&fly.y>=MY&&fly.vy>0){const d=Math.abs(fly.x-px);const q=d<mh*.5?1:d<mh?.7:Math.abs(d-mh*EAR)<mh*.45?.5:0;if(q>0){land(q,fly.x,Math.atan2(fly.vy,fly.vx));break}}
-    if(fly.y>H*.9||fly.x>W+20||fly.x<-20){land(0,fly.x,0);break}}
+    const j=judge(py,fly.y,fly.x);if(j){land(j.q,fly.x,j.at);break}
+    if(fly.y>H*.9||fly.x>W+20||fly.x<-20){land(0,fly.x,-9);break}}
    if(fly)arrow(g,fly.x,fly.y,Math.atan2(fly.vy,fly.vx),U*.12)}
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} tên`})});
- function land(q,x,ang){fly=null;phase="wait";pts+=q;if(q>0)landed.push({dx:x-px,ang});kg82Pop(pops,px,MY-mh*2,q===1?"Trúng giữa bình!":q>=.7?"Vào bình":q>0?"Vào tai bình":"Trượt",q>=.7?K91C.good():q>0?K91C.gold():K91C.red());kg82Pluck(k,q>0);k++;
+ function land(q,x,at){fly=null;phase="wait";pts+=q;if(q>0)landed.push({dx:x-px,at});KG82.flingLast={q,at,dx:x-px,R,ear:G()};kg82Pop(pops,px,MY-R*2,q===A.q.m[0]?"Trúng giữa bình!":q>=A.q.m[1]?"Vào bình":q>0?"Vào tai bình":"Trượt",q>=A.q.m[1]?K91C.good():q>0?K91C.gold():K91C.red());kg82Pluck(k,q>0);k++;
   if(k>=N){done=true;setTimeout(()=>env.end((10*pts/N)),700)}else setTimeout(setThrow,700)}
  k91Pointer(C,{down:(x,y)=>{if(phase==="aim")aim={ax:x,ay:y,cx:x,cy:y}},move:(x,y)=>{if(aim&&phase==="aim"){aim.cx=x;aim.cy=y}},
   up:(x,y)=>{if(!aim||phase!=="aim")return;aim.cx=x;aim.cy=y;const [vx,vy]=vOf(aim.ax,aim.ay,x,y);aim=null;if(Math.hypot(vx,vy)<60)return;fly={x:X0,y:Y0,vx,vy};phase="fly"}});
  KG82.peek=()=>{if(phase!=="aim"||done||aim)return null;const s=solve();const a=C.client(W/2,H*.35),b=C.client(W/2-s.vx/K,H*.35-s.vy/K);/* aim: a player watches the aim dots while pulling, so the longer the dots the finer the release (dev/measure/mg-bots.js scales its drag scatter by it) */
   return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],aim:Math.min(1,.1/Math.max(.05,AIDT))}};
+ /* test hook (dev/test/dauho-hole.js): the painted holes of the current throw in canvas px + a throw from a given velocity */
+ KG82.flingGeo=()=>({W,H,px,MY,R,Ws,...G(),shoot:(vx,vy)=>{if(phase!=="aim")return false;fly={x:X0,y:Y0,vx,vy};phase="fly";return true},X0,Y0,GR,wd,setWind:v=>{wd=v;sol=null},setPx:v=>{px=v;sol=null},sim,judge,pot,stuck,phase:()=>phase,landed:()=>landed.slice()});
  return()=>{done=true;stop()}}
 
 /* ---------- mg-easy: shared bits of the three "verse/pair/riddle" games ---------- */
@@ -187,7 +205,7 @@ function k91Arrange(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;const lv
    if(phase!=="judge"){g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(12,P.tw*.14),1);g.textAlign="center";g.textBaseline="alphabetic";0}g.restore()});
   /* the verdict sits on the tray (its slip names are hidden meanwhile), clear of the Thiên/Nhân/Địa marks */if(phase==="judge"&&P.say)k91Say(g,P.say[0],P.say[1],W/2,H*.92,W-16);
   if(drag&&!drag.f.placed){g.save();if(!branch(drag.f,drag.x,drag.y+drag.f.L*.5,drag.f.L*.6,0,true))kg82Blossom(g,drag.x,drag.y,U*.08,drag.f.c,true);g.restore()}
-  /* balance scale */const pl=P.F.filter(f=>f.placed);if(pl.length){const mx=pl.reduce((a,f)=>a+f.x,0)/pl.length;const tx=P.tg.reduce((a,t)=>a+t.x,0)/P.tg.length;g.fillStyle="#3a2a1e";g.font=k91F(700,11,1);g.textAlign="left";g.textBaseline="top";
+  /* balance scale */const pl=P.F.filter(f=>f.placed);if(pl.length){const mx=pl.reduce((a,f)=>a+f.x,0)/pl.length;const tx=P.tg.reduce((a,t)=>a+t.x,0)/P.tg.length;g.fillStyle="#3a2a1e";g.font=k91F(700,11,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,"Cân thế hoa",8,8);
    g.strokeStyle=K91C.hair;g.lineWidth=2;g.beginPath();g.moveTo(8,30);g.lineTo(90,30);g.stroke();g.fillStyle=K91C.good();g.fillRect(49-2,24,4,12);g.fillStyle=Math.abs(mx-tx)<U*.1?K91C.good():K91C.red();g.beginPath();g.arc(49+cl((mx-tx)/U*80,-40,40),30,5,0,Math.PI*2);g.fill()}
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,10*Math.min(1,(sum+NR-cl(r+(phase==="judge"?1:0),0,NR))/NR/mgFull(env,.88))),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;let f=P.F.find(f=>f.placed&&k91Dist(x,y,f.x,f.y)<Math.max(26,U*.1));
@@ -215,7 +233,7 @@ function k91Untangle(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=e
   const {c,X}=cross(P.N,P.E);P.E.forEach(([a,b],i)=>{g.strokeStyle=X.has(i)?K91C.red():phase==="judge"&&!c?K91C.good():"#c9a03a";g.lineWidth=X.has(i)?3:3.5;g.beginPath();g.moveTo(P.N[a].x,P.N[a].y);g.lineTo(P.N[b].x,P.N[b].y);g.stroke()});
   P.N.forEach((p,i)=>{const on=drag&&drag.i===i;/* the painted silk knot */if(kg82Spr(g,"kim-knot",p.x,p.y,HR*1.18*(on?BAL.mgFx.pop:1),null,{glow:on?BAL.mgFx.glow:null,ring:on}))return;g.save();g.shadowColor="#0005";g.shadowBlur=4;const gr=g.createRadialGradient(p.x-4,p.y-4,2,p.x,p.y,HR*.6);gr.addColorStop(0,on?"#fff3d6":"#fbe9c4");gr.addColorStop(1,on?"#e4a54a":"#b88a3a");
    g.fillStyle=gr;g.beginPath();g.arc(p.x,p.y,HR*.55,0,Math.PI*2);g.fill();g.shadowBlur=0;g.strokeStyle="#6e4d0e";g.lineWidth=1.5;g.stroke();g.restore()});
-  g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,`✕ ${c}`,8,8);
+  g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,`Chỗ chỉ chéo: ${c}`,8,8);
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,mgReach(pts,cl(r+(phase==="judge"?1:0),0,NR),NR)-(phase==="play"&&r<NR?10/NR*(1-mgPace(env,"kim",now-t0,LIM)):0)),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;let bi=-1,bd=1e9;P.N.forEach((p,i)=>{const d=k91Dist(x,y,p.x,p.y);if(d<bd){bd=d;bi=i}});if(bd<HR*1.1)drag={i:bi,dx:P.N[bi].x-x,dy:P.N[bi].y-y}},
   move:(x,y)=>{if(!drag||phase!=="play")return;const p=P.N[drag.i];p.x=cl(x+drag.dx,HR*.6,W-HR*.6);p.y=cl(y+drag.dy,HR*.6,H-HR*.6)},
@@ -237,23 +255,24 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
  const LAG=Math.max(.02,mgLev(env,"banh","lag")),GUA=mgLev(env,"banh","gust"),GAP=mgLev(env,"banh","gap"),REACH=mgLev(env,"banh","reach"),FAN=.34,COOL=.1;/* her hand: fan heats up to FAN/s, no fan cools COOL/s (one place; the gust cap reads the same two) */let rr=-.1,gu=0,guEnd=0,guNext=GAP*(.6+.8*Math.random());
  const DUR=55000,SIM=3200;let heat=.3,fan=new Set(),si=0,simAt=0,inz=0,qual=[],miss=0,t0=performance.now()+1200,last=performance.now(),drag=null,done=false,msg="";const pops=[];
  const nd=lv>=3?1:2;const tiles=kg82Shuf(steps.map(([n],i)=>({n,i})).concat(kg82Shuf(K91_RX).slice(0,nd).map(n=>({n,i:-1}))));
- const bt=k91Btns(box,[["k91fan",`<img alt="" src="${kg82Img("banh-flame").src}" style="height:2.2em;vertical-align:middle;pointer-events:none">`,""]]);const fb=bt.querySelector("#k91fan");
+ const bt=k91Btns(box,[["k91fan",`<img alt="" src="${kg82Img("banh-flame").src}" style="height:2.2em;vertical-align:middle;pointer-events:none"> Quạt lửa`,""]]);const fb=bt.querySelector("#k91fan");fb.dataset.kgkeep=1;
  const on=e=>{e.preventDefault();fan.add(e.pointerId);fb.classList.add("on")},off=e=>{fan.delete(e.pointerId);if(!fan.size)fb.classList.remove("on")};fb.addEventListener("pointerdown",on);["pointerup","pointercancel","pointerleave"].forEach(ev=>fb.addEventListener(ev,off));fb.addEventListener("contextmenu",e=>e.preventDefault());
  const kd=e=>{if(e.key===" "){e.preventDefault();fan.add("k")}},ku=e=>{if(e.key===" ")fan.delete("k")};document.addEventListener("keydown",kd);document.addEventListener("keyup",ku);
- const PX=W*.55,PY=H*.44,PR=Math.min(W*.2,H*.16);const GX=W*.06,GY=H*.2,GW=Math.max(18,W*.05),GH=H*.46;
+ const PX=W*.55,PY=H*.44,PR=Math.min(W*.2,H*.16);const GX=W*.06,GY=Math.max(H*.2,96),GW=Math.max(18,W*.05),GH=H*.46;
  /* ingredient slips on the counter: always inside the board (bottom 30 %), smaller slips when many rows are needed */
  function lay(){g.font=k91F(700,W<420?13:15);const left=tiles.filter(t=>!t.used);let th=40,tw=Math.max(96,Math.max(...tiles.map(t=>g.measureText(t.n).width))+20+th);const per=Math.max(2,Math.floor((W-12)/(tw+6)));
   if(per*(tw+6)-6>W-8)tw=(W-8-6*(per-1))/per;const rows=Math.max(1,Math.ceil(left.length/per)),av=H*.3-4;if(rows*(th+6)>av)th=Math.max(26,av/rows-6);const top=H-rows*(th+6)-2;
   left.forEach((t,k)=>{const row=Math.floor(k/per),col=k%per;const n=Math.min(per,left.length-row*per);const rw=n*(tw+6)-6;t.x=(W-rw)/2+col*(tw+6);t.y=top+row*(th+6);t.w=tw;t.h=th})}
  lay();const score=()=>Math.max(0,(qual.reduce((a,b)=>a+b,0)-.3*miss)/steps.length);
+ const whyIt=()=>{const ok=qual.filter(q=>q>.85).length;KG82.why=`Nấu xong ${qual.length}/${steps.length} bước · ${ok} bước đúng lửa · nhầm ${miss} lần`};/* the «Vì sao» row (mg-5s-clear) */
  function add(t){if(si>=steps.length||simAt)return;if(t.i===si){t.used=true;simAt=performance.now();inz=0;lay();kg82Pluck(si,true);msg=""}
   else{miss++;kg82Pluck(0,false);if(t.i<0){t.used=true;lay();kg82Pop(pops,PX,PY-PR-10,"✗",K91C.red())}else kg82Pop(pops,PX,PY-PR-10,"✗",K91C.red())}}
  const stop=k91Loop(now=>{const dt=Math.min(50,now-last)/1000;last=now;const t=now-t0;if(t>=0&&!done){const ts=t/1000;if(GUA>.01&&ts>=guNext){gu=(Math.random()<.5?-1:1)*GUA*(.6+.4*Math.random());gu=gu>0?Math.min(gu,REACH*COOL):Math.max(gu,-REACH*FAN);/* cal-p2b: never past what her hand can answer (cool .1/s, fan .34/s) */guEnd=ts+.7;guNext=ts+GAP*(.6+.8*Math.random());kg82Pop(pops,PX,PY-PR-10,gu>0?"▲":"▼",K91C.gold())}if(ts>=guEnd)gu=0;
    rr+=((fan.size?FAN:-COOL)-rr)*Math.min(1,dt/LAG);heat=cl(heat+(rr+gu)*dt,0,1)}
   const st=steps[Math.min(si,steps.length-1)];const z=Z[st[1]];const inZ=heat>=z[0]&&heat<=z[1];
   if(simAt){inz+=inZ?dt*1000:0;if(now-simAt>=SIM){const q=.4+.6*Math.min(1,inz/SIM);qual.push(q);kg82Pop(pops,PX,PY-PR-10,q>.85?"★★★":q>.6?"★★":"★",q>.85?K91C.good():q>.6?K91C.gold():K91C.red());simAt=0;si++;
-   if(si>=steps.length&&!done){done=true;setTimeout(()=>env.end((10*score())),900)}}}
-  if(t>DUR&&!done){done=true;setTimeout(()=>env.end((10*score())),300)}
+   if(si>=steps.length&&!done){done=true;whyIt();setTimeout(()=>env.end((10*score())),900)}}}
+  if(t>DUR&&!done){done=true;whyIt();setTimeout(()=>env.end((10*score())),300)}
   kg82Bg(g,W,H,"banh",0,1);
   /* recipe = PICTURES only (owner 20/11 ~05:10Z: no words in a mini-game): the order of the painted ingredients, the heat each needs as flame icons, tick when done */
   {const n=steps.length,cs=Math.min(46,(W-20)/n-30),gap=Math.max(26,Math.min(60,(W-20-n*cs)/n));let rx=10;g.textBaseline="middle";
@@ -277,6 +296,11 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
   g.save();g.globalAlpha=.35;g.fillStyle="#fff";for(let k=0;k<3;k++){const sx=PX-PR*.4+k*PR*.4,sy=PY-PR*.3-((now/12+k*40)%(PR*.8));g.beginPath();g.arc(sx+Math.sin(now/300+k)*6,sy,PR*.12,0,Math.PI*2);g.fill()}g.restore();
   /* counter: the painted ingredients on paper slips */tiles.forEach(t=>{if(t.used||(drag&&drag.t===t))return;k91Ing(g,t,t.x,t.y,t.w,t.h,"n",W<420?13:15)});if(drag)k91Ing(g,drag.t,drag.x-drag.t.w/2,drag.y-drag.t.h/2,drag.t.w,drag.t.h,"on",W<420?13:15);
   
+  {/* owner 21/11 ~00:50Z (mg-5s-clear): one guiding line, driven by the fire and the step */const nn=steps[Math.min(si,steps.length-1)][0],gd=K91C.good(),rd=K91C.red();let tx,tc="#6b4a1c";
+   if(si>=steps.length){tx="Món đã xong"}
+   else if(simAt){if(inZ){tx="Giữ lửa trong vùng xanh cho chín";tc=gd}else if(heat<z[0]){tx="Lửa yếu · giữ nút quạt";tc=rd}else{tx="Lửa mạnh · buông quạt";tc=rd}}
+   else if(inZ){tx=`Lửa đủ · kéo «${nn}» vào nồi`;tc=gd}else if(heat<z[0]){tx=`Giữ nút quạt cho lửa lên vùng xanh (${ZN[st[1]]})`}else{tx="Lửa quá mạnh · buông quạt cho dịu";tc=rd}
+   kg82Guide(g,tx,W/2,78,tc,13,W-16)}
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,10*cl((qual.reduce((a,b)=>a+b,0)+Math.max(0,steps.length-qual.length)-.3*miss)/steps.length,0,1)),round:`Hồi ${Math.min(si+1,steps.length)}/${steps.length}`,time:`${Math.max(0,Math.ceil((DUR-Math.max(0,t))/1000))} giây`})});
  let dn=null;k91Pointer(C,{down:(x,y)=>{if(done)return;const t=tiles.find(t=>!t.used&&x>=t.x&&x<=t.x+t.w&&y>=t.y&&y<=t.y+t.h);if(t){drag={t,x,y};dn={x,y}}},move:(x,y)=>{if(drag){drag.x=x;drag.y=y}},
   up:(x,y)=>{if(!drag)return;const t=drag.t;drag=null;const moved=dn&&k91Dist(x,y,dn.x,dn.y)>8;dn=null;if(!moved||k91Dist(x,y,PX,PY+PR*.3)<PR*1.4)add(t)}});
@@ -295,17 +319,21 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
  /* cal-p2b: ONE round score for the live hint, the verdict and the grade (BAL.mgTier.blend) */const rs=d=>cl(1-d/(BAL.mgTier.blend.w*mgTol(env)),0,1);
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
- function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=rs(d),T=BAL.mgTier.blend.star;sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>T[2]?"★★★":s>T[1]?"★★":"✗",s>T[2]?K91C.good():s>T[1]?K91C.gold():K91C.red()];setTimeout(next,1500)}
+ function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=rs(d),T=BAL.mgTier.blend.star;sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>T[2]?"Khớp hương mẫu!":s>T[1]?"Gần giống":"Lệch hương",s>T[2]?K91C.good():s>T[1]?K91C.gold():K91C.red()];setTimeout(next,1500)}
  function smoke(x,y,R,c,lab){/* the painted censer under its live smoke */kg82Spr(g,"huong-censer",x,y+R*.42,R*1.35,null,{ay:0});g.save();const gr=g.createRadialGradient(x,y,R*.1,x,y,R);gr.addColorStop(0,`rgba(${c},1)`);gr.addColorStop(.7,`rgba(${c},.85)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,Math.PI*2);g.fill();
   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lab,x,y+R*1.85+12);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"huong",.08,.8);
-  const R=Math.min(W*.14,H*.095);const tc=mix(P.E,P.tv),mc=mix(P.E,P.v);smoke(W*.27,H*.12,R,tc.join(","),"◎");smoke(W*.73,H*.12,R,mc.join(","),"●");
-  const ls=rs(dist(P.v,P.tv)),T=BAL.mgTier.blend.star;g.fillStyle=ls>T[2]?K91C.good():ls>T[1]?K91C.gold():"#6b5643";g.font=k91F(700,13,1);g.textAlign="center";
-  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else kg82Lbl(g,ls>T[2]?"★★★":ls>T[1]?"★★☆":ls>T[0]?"★☆☆":"☆☆☆",W/2,H*.4,W-16);
+  const R=Math.min(W*.14,H*.095);const tc=mix(P.E,P.tv),mc=mix(P.E,P.v);smoke(W*.27,H*.12,R,tc.join(","),"Hương mẫu");smoke(W*.73,H*.12,R,mc.join(","),"Hương ngươi pha");
+  const ls=rs(dist(P.v,P.tv)),T=BAL.mgTier.blend.star;g.font=k91F(700,13,1);g.textAlign="center";
+  /* huong-cue (owner OD 21/11 ~00:40Z): the near / far cue with NO word — a lit ring round her smoke + a gauge of T.length segments (one more filled each time the hint gets closer, same BAL.mgTier.blend.star steps as the grade) */
+  const stp=T.filter(x=>ls>x).length,sc=stp>=T.length?K91C.good():stp>=T.length-1?K91C.gold():"#6b5643";
+  g.save();g.shadowColor=stp>=T.length-1?BAL.mgFx.glow:"transparent";g.shadowBlur=stp*BAL.mgFx.blur/T.length;g.strokeStyle=stp?sc:K91C.hair;g.lineWidth=2+stp*2.5;g.beginPath();g.arc(W*.73,H*.12,R*1.06,0,Math.PI*2);g.stroke();g.restore();
+  if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else{/* huong-cue: the guiding words are back (owner OD 21/11 ~00:50Z): how close + which scent the sample leans on */const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0],d=dist(P.v,P.tv),word=stp>=T.length?"khớp":stp===T.length-1?"rất gần":stp===T.length-2?"đã gần":"còn xa";g.fillStyle=stp>=T.length?K91C.good():stp>=T.length-1?K91C.gold():"#6b5643";g.font=k91F(700,13,1);kg82Lbl(g,`Mẫu nặng về ${dom} · độ khớp: ${word}`,W/2,H*.425,W-16);const n=T.length,sw=Math.min(W*.2,70),sh=16,gap=6,gx=W/2-(n*sw+(n-1)*gap)/2,gy=H*.345-sh/2;
+   for(let i=0;i<n;i++){const x=gx+i*(sw+gap);g.save();g.fillStyle=i<stp?sc:"rgba(255,250,238,.55)";g.strokeStyle=i<stp?K91C.ink:K91C.hair;g.lineWidth=2;g.beginPath();g.roundRect(x,gy,sw,sh,sh/2);g.fill();g.stroke();g.restore()}}
   SL().forEach((s,i)=>{const e=P.E[i];g.strokeStyle=K91C.hair;g.lineWidth=6;g.lineCap="round";g.beginPath();g.moveTo(s.x,s.top);g.lineTo(s.x,s.bot-22);g.stroke();
    const y=s.bot-22-(s.bot-22-s.top)*P.v[i];g.strokeStyle=`rgb(${e[1].join(",")})`;g.beginPath();g.moveTo(s.x,s.bot-22);g.lineTo(s.x,y);g.stroke();
    /* knob = the painted jar of that scent */if(!kg82Spr(g,"huong-"+e[2],s.x,y,56,null,{})){g.fillStyle=`rgb(${e[1].join(",")})`;g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(s.x,y,13,0,Math.PI*2);g.fill();g.stroke()}
-   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);});
+   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textBaseline="alphabetic";kg82Lbl(g,e[0],s.x,s.bot)});
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,10*(sum+NR-cl(r+(phase==="judge"?1:0),0,NR))/NR),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  const setV=(i,y)=>{const s=SL()[i];P.v[i]=cl((s.bot-22-y)/(s.bot-22-s.top),0,1)};
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;if(y<H*.43)return;drag=cl(Math.floor(x/(W/3)),0,2);setV(drag,y)},move:(x,y)=>{if(drag>=0&&phase==="play")setV(drag,y)},up:()=>{drag=-1}});

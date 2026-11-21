@@ -17,9 +17,9 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
  init(){S.st.proof=0;S.st.acc=0},
  hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${chanceW(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${chanceW(15)}`,
  month(){const st=S.st;let ev="";
-  if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:BAL.eff.j4.danhMonth,sung:BAL.eff.j4.sungMonth_4});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh ${balSg(BAL.eff.j4.danhMonth)} · Sủng ${balSg(BAL.eff.j4.sungMonth_4)}. `}else{apply({danh:BAL.eff.j4.danhMonth_2,sung:BAL.eff.j4.sungMonth_5});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh ${balSg(BAL.eff.j4.danhMonth_2)} · Sủng ${balSg(BAL.eff.j4.sungMonth_5)}. `}}
+  if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:BAL.eff.j4.danhMonth,sung:BAL.eff.j4.sungMonth_4});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh ${balSg(BAL.eff.j4.danhMonth)} · ${sgStat(BAL.eff.j4.sungMonth_4)}. `}else{apply({danh:BAL.eff.j4.danhMonth_2,sung:BAL.eff.j4.sungMonth_5});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh ${balSg(BAL.eff.j4.danhMonth_2)} · ${sgStat(BAL.eff.j4.sungMonth_5)}. `}}
   if(!st.acc&&S.year>=3){const fr=npcWhy("meHarm",{h:"frame"});if(fr){const v=fr.who;/* npc-purpose: the consort with a motive to frame her (motiveOK frame), never a dice */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
-  else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:BAL.eff.j4.danhMonth_3,sung:BAL.eff.j4.sungMonth_6});S.rank=seatDown(S,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh ${balSg(BAL.eff.j4.danhMonth_3)} · Sủng ${balSg(BAL.eff.j4.sungMonth_6)}. `}
+  else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:BAL.eff.j4.danhMonth_3,sung:BAL.eff.j4.sungMonth_6});S.rank=seatDown(S,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh ${balSg(BAL.eff.j4.danhMonth_3)} · ${sgStat(BAL.eff.j4.sungMonth_6)}. `}
   return ev},
  acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(BAL.odb.j4.odO_2+eyes(S)*6+S.tamco/5),w:{},l:{danh:-2},x:evSg(BAL.ag.ev.one),
   go:()=>{st.proof+=BAL.ag.ev.one;st.step=1+st.proof;if(st.proof>=2){const v=st.accuser;apply({danh:BAL.eff.j4.danhGo_3});stEnd(1,"Rửa oan cho cha");log(`<b class="g">Chứng cứ trình lên: cha ngươi trong sạch.</b> Danh ${balSg(BAL.eff.j4.danhGo_3)}.`);if(v&&v.alive&&!v.out)fall(v,"bị xét tội vu cáo trung thần")}}}]}},
@@ -33,11 +33,11 @@ muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. D
   else A.push({n:"Xin phong tước cho cha",t:S.th>=30?"Nhờ Thái hậu nói giúp trước mặt Hoàng thượng.":`Cần Thái hậu ủng hộ 30 (nay ${S.th}).`,c:{suc:-5},o:od(BAL.odb.j4.odO_4+S.danh/4+S.th/5),w:{danh:10},l:{th:-8},lock:S.th<30,x:"cha được phong tước",go:()=>{st.step=3;stEnd(1,"Nhà được phong tước")}});
   return A}},
 cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một mối tình cũ đe dọa hủy ngươi. Lên tới bậc Phi để rửa sạch thân phận.",
- init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+pick(SURN)+" "+pick(MALEN);S.st.secret=0},
+ init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+nmNew("m");S.st.secret=0},
  hint:()=>["Chủ cũ sắp làm khó ngươi","Chuyện cũ sắp bị khơi lại",`Lên bậc Phi (nay ${RANKS[S.rank].n})`][S.st.step]||"",
  month(){const st=S.st,m=st.mis;
   /* npc-purpose: only the old mistress knows (her eunuch sniffed it out, PEND.cn2); she carries the letters when her plan is ripe (story clock cn3) and she has a reason (npcTell) */
-  const mo=rivals.find(x=>x.oldmis)||m;if(st.secret===1&&mo&&mo.alive&&!mo.out&&npcWhy("story",npw1Sc(st,"cn3"))){const tl=npcTell(S,{from:[mo],to:S.emp||S});if(tl){apply({danh:BAL.eff.j4.danhMonth_4,sung:BAL.eff.j4.sungMonth_7});punish("tư tình với thị vệ",2);stEnd(-1,"Lộ chuyện cũ với thị vệ");return `<span class="r">${npwNm(tl.who)} (${tl.why}) sai người dâng thư cũ giữa ngươi và ${st.guard} lên Hoàng thượng.</span> Danh ${balSg(BAL.eff.j4.danhMonth_4)} · Sủng ${balSg(BAL.eff.j4.sungMonth_7)}. `}}
+  const mo=rivals.find(x=>x.oldmis)||m;if(st.secret===1&&mo&&mo.alive&&!mo.out&&npcWhy("story",npw1Sc(st,"cn3"))){const tl=npcTell(S,{from:[mo],to:S.emp||S});if(tl){apply({danh:BAL.eff.j4.danhMonth_4,sung:BAL.eff.j4.sungMonth_7});punish("tư tình với thị vệ",2);stEnd(-1,"Lộ chuyện cũ với thị vệ");return `<span class="r">${npwNm(tl.who)} (${tl.why}) sai người dâng thư cũ giữa ngươi và ${st.guard} lên Hoàng thượng.</span> Danh ${balSg(BAL.eff.j4.danhMonth_4)} · ${sgStat(BAL.eff.j4.sungMonth_7)}. `}}
   if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"cn1")))return setDil(mkP("cn1"));
   if(st.step===1&&npcWhy("story",npw1Sc(st,"cn2"))){const o=od(BAL.odb.j4.odO_5+S.tamco/3);return setDil(mkP("cn2",{o}))}
   if(st.step===2&&S.rank>=4){apply({danh:BAL.eff.j4.danhMonth_8});st.step=3;stEnd(1,"Rửa sạch thân phận cung nữ");return `<b class="g">Ngươi đã là ${RANKS[S.rank].n}. Không ai còn dám gọi ngươi là nô tỳ.</b> Danh ${balSg(BAL.eff.j4.danhMonth_8)}. `}
@@ -49,10 +49,10 @@ nc:{t:"Hòa thân",n:3,goal:"Phụ vương Cao Ly muốn ngươi làm tai mắt.
   if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"nc1")))return setDil(mkP("nc1"));
   if(st.step>=1&&S.year>=4&&S.month===9){st.step=3;S.emp.mood=3;
    if(st.path==="home"){const o=od(BAL.odb.j4.odO_6+st.m*15);if(roll(o)){apply({bac:BAL.eff.j4.bacMonth});stEnd(1,"Công thần của cố quốc");return `<b class="g">Cao Ly thắng trận nhờ tin ngươi gửi về. Đại Hy cầu hòa, cố quốc gửi vàng bạc tạ ơn.</b> Bạc ${balSg(BAL.eff.j4.bacMonth)}. `}
-    if(roll(od(BAL.odb.j4.odMonth+S.tamco/2))){apply({sung:BAL.eff.j4.sungMonth,danh:BAL.eff.j4.danhMonth_9});stEnd(-1,"Bị nghi làm gián điệp");return `<span class="r">Cao Ly thua trận. Cả triều nghi ngươi, nhưng không bắt được chứng cứ.</span> Sủng ${balSg(BAL.eff.j4.sungMonth)} · Danh ${balSg(BAL.eff.j4.danhMonth_9)}. `}
+    if(roll(od(BAL.odb.j4.odMonth+S.tamco/2))){apply({sung:BAL.eff.j4.sungMonth,danh:BAL.eff.j4.danhMonth_9});stEnd(-1,"Bị nghi làm gián điệp");return `<span class="r">Cao Ly thua trận. Cả triều nghi ngươi, nhưng không bắt được chứng cứ.</span> ${sgStat(BAL.eff.j4.sungMonth)} · Danh ${balSg(BAL.eff.j4.danhMonth_9)}. `}
     stEnd(-1,"Gián điệp bị bắt");deathSentence("Cao Ly thua trận, thư mật của ngươi bị tìm thấy");return""}
    if(st.m>=2){apply({danh:BAL.eff.j4.danhMonth_5,th:BAL.eff.j4.thMonth});stEnd(1,"Đoạn tuyệt cố quốc, được triều đình tin");return `<b class="g">Chiến tranh với Cao Ly. Ngươi đứng hẳn về phía Đại Hy, cả triều kính phục.</b> Danh ${balSg(BAL.eff.j4.danhMonth_5)} · Thái hậu ${balSg(BAL.eff.j4.thMonth)}. `}
-   apply({sung:BAL.eff.j4.sungMonth_2,danh:BAL.eff.j4.danhMonth_10});stEnd(-1,"Bị nghi kỵ khi chiến tranh");return `<span class="r">Chiến tranh với Cao Ly. Triều thần nghi ngươi hai lòng.</span> Sủng ${balSg(BAL.eff.j4.sungMonth_2)} · Danh ${balSg(BAL.eff.j4.danhMonth_10)}. `}
+   apply({sung:BAL.eff.j4.sungMonth_2,danh:BAL.eff.j4.danhMonth_10});stEnd(-1,"Bị nghi kỵ khi chiến tranh");return `<span class="r">Chiến tranh với Cao Ly. Triều thần nghi ngươi hai lòng.</span> ${sgStat(BAL.eff.j4.sungMonth_2)} · Danh ${balSg(BAL.eff.j4.danhMonth_10)}. `}
   return""},
  acts(){const st=S.st;if(!st.path)return[];
   if(st.path==="home")return[{n:"Gửi mật thư về Cao Ly",t:"Chép bố phòng, giấu trong hộp phấn gửi về.",c:{suc:-5},o:od(BAL.odb.j4.odO_7+S.tamco/4+eyes(S)*3-(DG()?6:0)),w:{bac:30},l:{danh:-5},x:`tin tình báo +1 (đã gửi ${st.m})`,go:()=>{st.m++;st.step=2},
@@ -79,12 +79,12 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
   if(st.step<2&&!qOn())st.step=2;
   if(S.year>=8||(st.step>=1&&S.year>=5&&roll(4))){st.step=3;S.th=0;S.thDead=true;apply({hh:-20});
    if(S.rank>=5){stEnd(1,st.tool>=2?"Quân cờ đắc lực của Thái hậu":"Tự đứng vững khi Thái hậu mất");return `<b>Thái hậu băng hà.</b> Ngươi đã là ${RANKS[S.rank].n}, đứng vững được. Hoàng hậu hận ngươi hơn. Hoàng hậu -20. `}
-   apply({sung:BAL.eff.j4.sungMonth_3,danh:BAL.eff.j4.danhMonth_6});stEnd(-1,"Mất chỗ dựa khi Thái hậu băng hà");return `<span class="r">Thái hậu băng hà. Không còn ai che chở, Hoàng hậu bắt đầu trả thù.</span> Sủng ${balSg(BAL.eff.j4.sungMonth_3)} · Danh ${balSg(BAL.eff.j4.danhMonth_6)} · Hoàng hậu -20. `}
+   apply({sung:BAL.eff.j4.sungMonth_3,danh:BAL.eff.j4.danhMonth_6});stEnd(-1,"Mất chỗ dựa khi Thái hậu băng hà");return `<span class="r">Thái hậu băng hà. Không còn ai che chở, Hoàng hậu bắt đầu trả thù.</span> ${sgStat(BAL.eff.j4.sungMonth_3)} · Danh ${balSg(BAL.eff.j4.danhMonth_6)} · Hoàng hậu -20. `}
   if(st.step===0&&S.turn>=2&&qOn()&&npcWhy("story",npw1Sc(st,"ch1",{q})))return setDil(mkP("ch1"));
   if(st.step===1&&qOn()&&npcWhy("story",npw1Sc(st,"ch2",{q}))){const o=od(BAL.odb.j4.odO_11+eyes(S)*5+S.tamco/4+S.th/5-(DG()?6:0));return setDil(mkP("ch2",{o}))}
   return""}},
 thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Được phong Tài nữ, rồi xin khắc in sách của cha. Coi chừng kẻ vu ngươi đạo thơ.",
- init(){S.st.stu="Hàn lâm "+pick(SURN)+" "+pick(MALEN);S.st.frames=0;S.st.title=0},
+ init(){S.st.stu="Hàn lâm "+nmNew("m");S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
   if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
@@ -118,7 +118,7 @@ PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Cao Ly trao thư của phụ v�
    {n:"Dâng thư lên Hoàng thượng",fx:{th:15,danh:5,sung:3},x:"đoạn tuyệt cố quốc",go:()=>{st.path="court";st.step=1}}]}};
 PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứng còn sống của vụ án nhà ngươi, đang bị người của ${S.foeDad} truy sát.`,o:[
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
-   {n:"Mặc kệ",fx:{},x:evSg(-BAL.ag.ev.one),go:()=>{S.caseEv=Math.max(0,S.caseEv-BAL.ag.ev.one);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
+   {n:"Mặc kệ",fx:{suc:BAL.cv.rest},x:`giữ sức, không dây vào án · ${evSg(-BAL.ag.ev.one)}`,go:()=>{S.caseEv=Math.max(0,S.caseEv-BAL.ag.ev.one);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:kSay("th",S,'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. {Goi} phải thay nàng ta. Trước hết, dò xem Càn Ninh cung giấu gì.”'),o:[
    {n:"Vâng mệnh cô mẫu",fx:{th:8},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j4.evGo)}`,go:()=>{evStory(q,BAL.eff.j4.evGo,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[

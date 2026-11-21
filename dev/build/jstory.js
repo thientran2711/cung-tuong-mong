@@ -127,3 +127,26 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
  else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))} },"T72 alt")}catch(e){console.error("jstory j72",e)}})();
+/* story-voice (owner 21/11 #61 part 2, OD ~04:33Z «ta nên làm gì mới đúng chứ»): every story hồi (Chính tuyến / Phụ tuyến dialog with a choice)
+   ends by framing HER choice. A hồi whose last words (outside any quote) already ask her is left as written; otherwise one plain closing line
+   is added, picked by how the hồi ends (someone asked her → how to answer; someone asked something of her → what to do; a scene → what to do).
+   Narration names her «ngươi» (j84 shows «ta»). Text only: one wrapper of showModal, applied once per dialog. Scan: dev/test/story-voice/scan.js */
+const SVFR={ask:["Ngươi nên đáp thế nào?","Ngươi nên trả lời ra sao?","Lời đáp lúc này phải cân nhắc: ngươi nên nói gì?"],
+ bid:["Ngươi nên làm gì đây?","Việc này ngươi nên liệu thế nào?","Ngươi nhận hay không, và nhận thế nào?"],
+ sc:["Ngươi nên làm gì?","Ngươi nên liệu thế nào?","Lúc này ngươi chọn đường nào?"]};
+function svTail(h){const t=String(h||"").replace(/<br\s*\/?>/gi," ").replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim();const q=t.lastIndexOf("”");return{t,after:q>=0?t.slice(q+1).trim():t,endQ:q>=0&&!t.slice(q+1).trim(),inQ:q>=0?t.slice(t.lastIndexOf("“",q),q):""}}
+function svFramed(h){const x=svTail(h);return /\?/.test(x.endQ?"":x.after)}
+function svFrame(h){if(h==null)return h;const s=String(h);if(/<(?:div|p|table|ul|ol|h\d)\b/i.test(s))return s;const x=svTail(s);if(!x.t||svFramed(s))return s;
+ const pool=x.endQ?(/\?\s*$/.test(x.inQ)?SVFR.ask:SVFR.bid):SVFR.sc;let n=0;for(const c of x.t)n=(n*31+c.charCodeAt(0))>>>0;return s.replace(/\s*$/,"")+" "+pool[n%pool.length]}
+(function(){if(typeof showModal!=="function")return;const sm=showModal;showModal=function(){try{const m=Q&&Q[0];
+ if(m&&!m.svfr&&m.opts&&m.opts.length>1&&/^(?:Chính|Phụ) tuyến · /.test(m.t||"")){m.svfr=1;m.h=svFrame(m.h)}}catch(e){console.error("jstory svFrame",e)}return sm.apply(this,arguments)}})();
+/* bang-words review (E40r, law 11 whole group): a chapter TITLE may carry a token («Lão {kha} bị bắt» nc_gian .9, «Nhà {v} trong án cũ» cn_than .6);
+   the 23 places that print ARC67[id].t (story card, chapter card, log lines, past-chapter list, hồi header…) showed it raw. ONE fix here: every
+   titled arc whose t holds a {token} gets a getter that fills it through the one token table TOK67 with that arc's live thread (S.st.M or a
+   side thread); no thread (a past chapter) → the same table with an empty thread (nm67 says «một phi tần»). Runs after every arc file loaded. */
+function arcTitleFill67(){try{if(typeof ARC67!=="object"||typeof TOK67!=="object")return;
+ const thr=id=>{try{const L=[S&&S.st&&S.st.M].concat((S&&S.st&&S.st.X)||[]);return L.find(A=>A&&A.a===id)||{}}catch(e){return{}}};
+ for(const id of Object.keys(ARC67)){const a=ARC67[id];if(!a||typeof a!=="object")continue;const d=Object.getOwnPropertyDescriptor(a,"t");
+  if(!d||!("value" in d)||typeof d.value!=="string"||!/\{\w+\}/.test(d.value))continue;const raw=d.value;
+  Object.defineProperty(a,"t",{get:()=>{const A=thr(id);return raw.replace(/\{(\w+)\}/g,(m,k)=>{try{return TOK67[k]?String(TOK67[k](A)):m}catch(e){return m}})},enumerable:true,configurable:true})}}catch(e){console.error("arcTitleFill67",e)}}
+arcTitleFill67();setTimeout(arcTitleFill67,0);
