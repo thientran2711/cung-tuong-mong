@@ -22,3 +22,14 @@ WHERE IT DRIFTED: V4 (drop fringe) + V5 (pearl/jade NET over both capes) — sta
 ## Recommended source to restore (owner picks first — NOT applied)
 Restore Phi t5 cape = V1 verbatim (s64/s65 liked prompts, rank8-s62/g1cape/s64_t6_test.txt), i.e. drop the L1321 drop-fringe and L1329 net; keep seasonal "OPEN at the front" only if she wants. Pearl question for her: V1 had pearl edge (Quý phi jewellery then); L1317 said Phi capes = sewn-on pearl edge → V1 matches L1317 exactly. Alternative = the Hán 2-layer collar BAND (pictures 3–4, liked) but that is a collar band, not a cape.
 Note: SWAP56 recorded (judgement 4) the long V1 wording had to be shortened for a51/a65 length.
+
+## JOB 2 — owner L1589: go further back, the OLD Quý phi (t6) cape of 19/11 (before RANK8-A2 and SWAP56)
+Sheet dev/handover/review-sheets/quyphi_cape_old_L1589/sheet.jpg (LOOKED). It holds 7 existing GPT 2.6 pictures of 19/11, previews downloaded from Magnific (register_download, 0 cr); total 945 cr, all spent on 19/11. The sources are in src/.
+- Top row = V2, Lượt 305 (one cape: `an embroidered {main} pearl-edged cape over the shoulders`): Ba Tư xSBJWEOjfW, Cao Ly tCRF7M5mZJ, Phù Tang rgX7YCLxtc. Owner L306: "bậc quý phi đẹp" (Phù Tang), Cao Ly t4–t6 liked. Same Lượt, decision (4): Quý phi = TWO layered shoulder capes, Phi one.
+- Bottom row = the FIRST two-cape Quý phi pictures (L306 order, sent L321): m19 V5 nVseNMHYQD (owner L321: "Quý phi two capes OK"), Ba Tư V3 JNCRrjtOq4 (L326 "bậc 5, 6 ok"), Cao Ly V3 jUoOqjvLD0 (L326 "4, 6 của Cao Ly ok"), Phù Tang V3 nVse2b7YQD (L326: no fault named at t6).
+FIRST two-layer cape sentence (dev/art/owner-copy/pr_bt_t6_V3.txt, pr_cl_t6_V3.txt, pr_pt_t6_V3.txt, m19_t6_V5.txt — same words in all four, colour changes):
+  `TWO layered embroidered {main} pearl-edged shoulder capes, one over the other (the upper one shorter), softly draping over the shoulders`
+  + `a pearl-edged collar and cape trim, a few strands of pearls across the chest`
+Look: soft scalloped two-tier capes with a pearl edge, draping to the upper arm, light and flowing. They have no pearl net and no drop fringe.
+Next step was RANK8-A2 on 20/11 (JOB 1 V1). It rewrote the sentence as "SHORT shoulder capes … (the upper cape shorter, the lower cape a little longer, both resting on the shoulders, pearl-edged), never covering the neckline", so "softly draping" was lost there and the capes got stiffer and shorter.
+Recommended restore source (owner picks; NOT applied, A39): the 19/11 V3 sentence above (owner-copy/pr_cl_t6_V3.txt), for Phi t5.
