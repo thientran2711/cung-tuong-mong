@@ -1081,11 +1081,18 @@ def g45_fails(text):
 # G57 NO JADE PENDANT ANYWHERE (owner L1851 21/11, verbatim: "tất cả các cái prompt loại bỏ hết ngọc bội, không có cái prompt nào có ngọc bội để cho sau này mình chơi cái game gắn ngọc bội"):
 # NO prompt (any scope / rank / season) may name a jade pendant / yupei / zupei / jinbu / ngọc bội / jade disc|plaque|ring on cords / jade(-and-gold) belt / belt pendant.
 # Negated wording ("no pendants", "never on ... belt or pendants") passes. The hà bí chui (bí trụy) of the trieu block is a cape-band tip, not a waist pendant: exempt (foreman to confirm).
-G57_RX = re.compile(r"\b(?:yu ?pei|zupei|jinbu|ngọc bội|ngoc boi)\b|(?<!\bno )(?<!\bor )(?<!\bear )(?<!\bear drop/)\bpendants?\b|\bjade (?:discs?|plaques? linked|rings?|tassels?|clasps?)\b", re.I)
+G57_RX = re.compile(r"\b(?:yu ?pei|zupei|jinbu|ngọc bội|ngoc boi)\b|(?<!\bno )(?<!\bor )(?<!\bear )(?<!\bear drop/)\bpendants?\b|\bjade (?:discs?|plaques? linked|rings?)\b", re.I)
+# G57 (owner L1851, narrowed L1979): ONLY a jade pendant / ngọc bội worn on the BODY (sash, belt, girdle, waist, chest). A clause about a HELD item (flute, fan, ball, lantern, lamp, held...) is never matched.
+G57_HELD = re.compile(r"\b(?:held|holds?|holding|in (?:the other|one|both|her) hands?|flute|fans?|parasol|lantern|tú cầu|silk ball|\bball\b|ruyi|scepter|lamp|basket|mirror|scroll|casket|tablet|incense|brush|book|letter|dance fans?|item)\b", re.I)
 def g57_fails(text):
     t = re.sub(r"\bbí trụy \(帔坠\) pendant\b|\bthe pendant\b(?= hanging| hangs)|\bbelow the pendant\b", "", text)
-    m = G57_RX.search(t)
-    return [("G57", "JADE PENDANT", f"no jade pendant / ngọc bội in any prompt (owner L1851: the game attaches pendants later; nothing hanging from the belt): …{t[max(0, m.start()-50):m.end()+30]}…")] if m else []
+    for m in G57_RX.finditer(t):
+        a = max(t.rfind(",", 0, m.start()), t.rfind(";", 0, m.start()), t.rfind(".", 0, m.start()), t.rfind(":", 0, m.start()))
+        bs = [x for x in (t.find(",", m.end()), t.find(";", m.end()), t.find(".", m.end())) if x >= 0]
+        clause = t[a + 1:(min(bs) if bs else len(t))]
+        if G57_HELD.search(clause): continue   # held item: free (owner L1979)
+        return [("G57", "JADE PENDANT", f"no jade pendant / ngọc bội worn on the body (owner L1851/L1979: the game attaches pendants later; held items are free): …{t[max(0, m.start()-50):m.end()+30]}…")]
+    return []
 
 # G59 NO SACHET ANYWHERE (owner L1874 21/11, verbatim: "Túi thơm là dẹp hết nha. Tất cả các prompt của các người túi thơm nè, ngọc bội là dẹp hết."):
 # NO people prompt (any scope: consorts, maids, mama, all seasons) may name a sachet / túi thơm / scent pouch / perfume bag / hà bao / embroidered pouch. Supersedes the sachet-OK part of G43/G57.
@@ -1241,8 +1248,10 @@ def selftest():
                     ("Pose: the item held at her waist with both hands, her sleeves kept clear of the front of her waist.", 0),
                     ("the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it.", 0), ("no shawl or stole draped across her waist.", 0)]:   # G45 (owner L1622)
         if bool(g45_fails(norm(t))) != bool(want): print("G45 SELFTEST", want, t); bad += 1
+    for t, want in [("one hand holding a jade pendant on a red cord, held up dangling.", 0), ("dance fans with jade pendants in her hand", 0), ("a sash with a jade pendant on a silk cord", 1)]:   # G57 body-only (owner L1979)
+        if bool(g57_fails(norm(t))) != bool(want): print("G57c SELFTEST", want, t); bad += 1
     for t, want in [("a soft silk sash with a small jade pendant on a silk cord.", 1), ("belt pendants and tassels", 1), ("a set of jade discs and pearl strands (zupei)", 1), ("a carved jade pendant set (ngọc bội)", 1),
-                    ("a small jade clasp at the chest", 1), ("a silk ball with jade tassels", 1), ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
+                    ("a small jade clasp at the chest", 0), ("a silk ball with jade tassels", 0), ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
         if bool(g57_fails(norm(t))) != bool(want): print("G57 SELFTEST", want, t); bad += 1
     for t, want in [("a sash with a small embroidered silk fragrant sachet (túi thơm) hanging from it.", 1), ("she holds a sachet of silk brocade", 1), ("a hà bao at the waist", 1), ("a plain embroidered silk sash tied in a bow.", 0)]:   # G59 (owner L1874)
         if bool(g59_fails(norm(t))) != bool(want): print("G59 SELFTEST", want, t); bad += 1

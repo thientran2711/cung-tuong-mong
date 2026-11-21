@@ -2,3 +2,4 @@ base: dev/art/thu_comoi/s62_t6_THU_vankien2_L1856.txt
 allow: a few strands of pearls across the chest with a little jade   # owner L1879 (via #25) + G57: aFGoYlufSh drew a green jade DISC pendant on the chest pearl strands
 allow: "Thu · Quý phi · L1856"   # caption
 allow: small green jade beads set among the pearls   # owner L1879 + G57
+allow: with jade tassels   # G57 narrowed owner L1979: held items free (jade tassels / pendant on held item restored)
