@@ -81,7 +81,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
     the kit danger ring ✕ (kg82FxBad: things to AVOID, never to catch), a hit = red burst + the pad sinks + the lantern shakes; no words on the board */
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,"den",.04,.55);const cx=chan(tt),cw=W*BD/.8;
   kg82FxLane(g,cx-cw*.8,cx+cw*.8,0,H,W);
-  for(const p of pads){const sh=kg82FxBad(g,p.x,p.y,p.r*1.02,now,p.hitAt||0);kg82Spr(g,"hat-lotus",p.x+sh,p.y,p.r*2.1,null,{alpha:p.hit?.4:.95})}
+  for(const p of pads){const sh=kg82FxBad(g,p.x,p.y,p.r*1.02,now,p.hitAt||0);/* den-look: plain painted lotus, no ring/✕ (the hit burst only) */kg82Spr(g,"hat-lotus",p.x+sh,p.y,p.r*2.1,null,{alpha:p.hit?.4:.95})}
   const lh=hitP?kg82FxBad.shake(now,hitP):0;
   if(!kg82Spr(g,"doden-lantern",lx+lh,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx+lh,ly,16,"#e06030",true);
   kg82DrawPops(g,pops,now)}
