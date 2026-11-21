@@ -108,3 +108,33 @@ No conflict with the other owner rules:
 
 Verdict: **PASS ×3**.
 Tiny note: the words "shoulder points" are gone, so the collar's outer limit is now implied rather than stated.
+
+## JOB 5 (Foreman C #14) — thu s62 t1–t3 COMOI_v5 vs v4 (G42, L1605) · checked at 9c3fe47 · 0 gens
+Gates: check_store tpN a22 approved + store PASS; keep PASS. Chars: 9591 / 9963 / 9984.
+
+The diff against v4 is only the G42 additions (plus the t2 trims below):
+- t1:
+  - front edges = "a narrow blush band embroidered with small lilac sprays, from the shoulders down past the waist" ✓
+  - "embroidered lilac sprays cuff bands" ✓
+  - "many small sprays … over the upper garment and the skirt" (denser) ✓
+  - "a small carved jade pendant (ngọc bội) … at each side" ✓
+- t2:
+  - neckline band "running straight ACROSS the chest" + "the inner top also embroidered with small tiger lilies" ✓
+  - front edges embroidered from the shoulders down past the waist ✓
+  - "wide embroidered tiger lilies cuff bands" ✓
+  - "many small sprays … over the robe and skirt" ✓
+  - jade pendant set kept ✓
+- t3:
+  - "the inner top also embroidered across the chest" ✓
+  - "an embroidered blush band down past the waist" on the front edges ✓
+  - wide cuff + hem bands kept ✓
+  - "many small semi-double China roses over the robe and skirt" ✓
+  - jade pendants on both sides of the two panels ✓
+- Ladder carries up (G42) ✓: every t1 placement (edges, neckline band, cuffs, body sprays, jade) is on t2, and every t2 placement is on t3.
+
+t2 trims (A38): what was cut is the duplicate master-repeat line ("Full-body standing figure…", "fair porcelain skin", "3/4 or frontal view"), "never a pair, no cluster", "never back-turned, never in profile" and "Everyone beautiful at every age." "a simple narrow blush band" and "delicate … at the sleeves and hem" were replaced by the richer owner-asked words. Nothing the owner asked for was cut ✓.
+
+Verdict: **PASS ×3**.
+Notes (not blocking):
+- The density words are the same at t2 and t3 ("many small …"). Nothing says t3 is "a little denser" than t2 (G42), and the motif size does not rise either (H6).
+- t2 lost "never back-turned, never in profile" (it was the only copy). Low risk, because t2 is FULLY FRONTAL.
