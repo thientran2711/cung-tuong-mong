@@ -141,6 +141,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
      const k=[...document.querySelectorAll('.kmov')].find(e=>e.getClientRects().length);if(k){const bb=[...k.querySelectorAll('button')].find(x=>x.getClientRects().length);if(bb)bb.click()}}).catch(()=>{});
    await clear(o,2);await sleep(300)}return false}
  /* 1. the host's Emperor turns an NPC's card; BOTH seats get the choice; the guest's Tranh sủng is resolved once on the host → her night */
+ /* her won night needs her out of her Kỳ nguyệt tuần: fit() marks a lie to the book (cyb.lie), and in her cycle tuần the Kính sự phòng mama checks
+    before the sedan (jcycle nightScene, roll cyLieO) and rightly takes the night (case 1 red 2 in 15, NLC #10 trace): play on to a free tối (as 3/4) */
+ ok(await cycFree('friend'),'1: at tối, the guest out of her Kỳ nguyệt tuần');
  await fitBoth('1');let H=await force("npc");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>100;oKeep=()=>0/* the flipped NPC's own defence (nfOdds keep → rung down) never holds here */});/* the friend's odds are read on the host */
  await endEvening();
  const [c1,h1]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Thôi")]);/* both seats at the same time (order never matters) */
