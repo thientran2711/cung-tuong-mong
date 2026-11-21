@@ -731,3 +731,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
 | hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
 | REVIEW dialog-person part 1 (SMALL sonnet) de1d7e11 (#58 #59 #67 ma-ma gone) | review/dialog-person-rv; briefs/main87-rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | RUNNING | 21/11 04:08Z |
+| REVIEW dialog-dedup (SMALL sonnet) 2a5997df (#85) | review/dialog-dedup-rv; briefs/main87-rv-dialog-dedup.md | MAIN CHÍNH 87 | session_01Rc5AsMG7xwmZZoHcPKThD4 | RUNNING | 21/11 04:11Z |
