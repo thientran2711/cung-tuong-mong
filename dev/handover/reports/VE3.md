@@ -7,3 +7,8 @@ t2 4RFUX629Aa · t8 lJtkWwngv9 · sheet dev/handover/review-sheets/han_ladder5_t
 t2: wide crossed V, collarbones bare ✓, loose hair + ONE lily ✓, ivory inner collar + sash + one jade disc ✓, tiger lilies all over ✓. ✗ only ~2 collar bands clearly readable (3rd not distinct); drum still reads as a round fan (as LADDER4).
 t8: yellow dominant ✓ (honey-gold), plum inner/edge, pink lining ✓, nine-phoenix crown ✓, bead yoke + zupei ✓, 3/4 left, fan low ✓, hair up ✓, sleeves to floor ✓. ✗ three collar bands hidden under the shoulder fringe/yoke, not clearly readable; plum visible only as inner robe + collar edge (small area); yellow robe is very busy with phoenix/peony.
 Session total: 270 + 110 = 380 cr.
+## JOB 3 (L1820, changed by #23: t7 + t8 only, t1 HELD) THU redraw — gpt-2-6 2k medium 9:16 seed 7172 · refs nVsrRMPYQD + TdwDfOyVNR · check_store tp7/tp8 a22 PASS · 2×135 = 270 cr
+t7 nVs3E2HYQD · t8 nVs3EAqYQD · sheet dev/handover/review-sheets/thu_redraw_t1_t7_t8_L1820.png (top old t1 Lw85wx5swO | t7 WDgZpUBcXe | t8 SyhrPfnUb8, bottom new; t1 new = HELD)
+t7 ✓ low open SQUARE neck, collarbones bare, flat peony band; olive main, wide honey-gold panels/sash, lilac inner ✓; ONE gold phoenix crown ✓; flat gold-jade cape with pearl swags; sleeves to floor; jade flute low at left ✓; caption ✓. ✗ the olive outer robe falls from the shoulders like a cloak (cape look); yellow share moderate.
+t8 ✓ low square neck bare, yellow dominant, nine-phoenix crown + flat bead yoke, no cape, phoenix hairpin raised with other hand under ✓, caption ✓. ✗ robe is wide/bell-like (prompt: close to body); hairpin small, reads like a gold sprig.
+Session total: 270 + 110 + 270 = 650 cr.
