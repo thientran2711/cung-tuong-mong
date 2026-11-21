@@ -11,3 +11,11 @@ STATUS: depth 8 (limit 8), START_CTX ~3 %; roll over at ~28 %, ceiling 60 %. At 
   - t5: Outfit [0.73] + "PLUS ONE extra small layer…" [0.89]. The 0.89 is new, caused by the owner-asked girdle edit inside that sentence (it is covered by the .keep allow line), so I accept it. The old "Everyone beautiful" [0.4] FAIL is gone.
 - Checklist: G52 present in both. No vase. "none at the ears" present. One flower ("never two") present. G45 "never covered" present. Jade ngọc bội present. NO bow on t5 (G44). Capelet text is untouched.
 - Note: t6 COMOIl / t7 v8k / t8 v10i use a "yellow flowered brocade sash" (the rank-yellow list). The owner's L1656 "girdle soft palette not gold t5–t8" may also mean those. That is the Foreman's/owner's call, as DESIGN22 already flagged.
+
+## Job 2 — MAIDFIX1 2c75a81 maids (owner L1653/L1656, K29) — PASS (04:05Z)
+- tam test3_tm1_g43 (6698 ch): vs the gen'd prompt test3_tm1 (Tdw9BE8VNR), only G43: "jade or tassel pendant" → "embroidered silk fragrant sachet (túi thơm) hanging from it".
+- nhị test7_nhi_L1656 (6484 ch): base test5_nhi_g43 (= dt4ZloSXSL prompt test5_nhi + the G43 sachet only). One clause added: the pink jacket is the only layer, the sash wraps around it, nothing below the sash, no long robe. 0 drops.
+- nhất test6_nhat_L1653 (7757 ch): base test5_nhat_g43 (= ov6GUhR829 prompt test5_nhat + the G43 sachet). Added: a back tà of the SAME length as the front panels (just past the knee), the same cloth/border/embroidery. Embroidery "panel" → "front and back tà"; the colour line + "and its back tà". 2 allowed drops.
+- keep_check --sidecar PASS ×3 (A38). check_store --scope mama --age a18: nhất PASS. tam/nhị FAIL S01+S32 only = identical to their bases (test3_tm1, test5_nhi_g43), accepted by the Foreman. No "jade pendant" left.
+- Old settings (ledger): gpt-2-6 1024x2304 2k seed 7172, ref s7IPw0Ll8e, 135 cr. Drafts = the same at low 1k, 55 cr (K29).
+- Sent GEN1 the draft job directly; copied the Foreman.
