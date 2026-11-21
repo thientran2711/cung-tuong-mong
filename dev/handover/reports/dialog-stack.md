@@ -19,8 +19,3 @@ jk4.js: `kitDialogStack` wrapped around showModal: `#modal` z 42 (above #popw 41
 before 7/10 bad; after 0/10 bad on Fold and iPad, page errors 0.
 Openers covered: all go through showModal (kitModal, kitConfirm, kitPanel, resultShow, over, events, PEND). Not covered by scan: podium (#kpodov, own contest flow; closed by winners), kit book.
 Shots looked 3x: before-fold (card over death), after fold; iPad via hit-test.
-
-## #66 (owner 21/11 ~04:46Z: remove quest/request chips) — separate commit
-Chip cloud came from the quest-offer dialog line `<p class="past"><b>kind</b> · hạn N tuần · N bước: steps</p>` (j72 PEND q72o), which kpConvert turned into chips. Removed the line (info stays in Mệnh truyện > Việc nhờ; no #57 rows built). Phụ tuyến chapter news lines (jnroad/jnroadm «Tin trong cung · … · chương») get class `nochip` → plain kit note, no chips (kpConvert honours it).
-Scan dev/test/quest-chips-scan.js (real offer dialog of every T72 template that can be made here): before 53/53 with chips + old line, after 0/54, errors 0. Fold + iPad shots looked: no chips.
-Not covered: 81 templates need specific rivals to be made here; they share the same single builder line.

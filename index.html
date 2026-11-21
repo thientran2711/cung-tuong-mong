@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2602caed+","t":"2026-11-21T03:31Z","c":"dialog-stack: one kit stacking rule (modal above room card; death/night close every other pop-up) + scan + KIT 8.9","b":"de595a1889da","h":[{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"}]};
+window.CTM_BI={"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text","b":"9ac4c1681550","h":[{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -24704,7 +24704,7 @@ PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;co
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
-  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
+  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
   const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
@@ -27268,7 +27268,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(n.nodeType!==1)continue;const tg=n.tagName;
   if(tg==="P"&&n.classList.contains("past")){const pl=kpPlain(n.innerHTML);
    if(first&&!sub&&pl.length<90){sub=n.innerHTML;first=false;continue}
-   flush();if((pl.match(/ · /g)||[]).length>=2&&!n.classList.contains("nochip")){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
+   flush();if((pl.match(/ · /g)||[]).length>=2){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
    else blocks.push(`<div class="kpnote">${kpChipify(n.innerHTML)}</div>`);continue}
   first=false;
   if(tg==="P"||tg==="SPAN"&&!n.className||tg==="B"||tg==="I"||tg==="EM"||tg==="STRONG"||tg==="SMALL"&&!n.className||tg==="A"){prose.push(tg==="P"?n.innerHTML:n.outerHTML);if(tg==="P")flush();continue}
@@ -42952,24 +42952,6 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()
  if(L.length){e.preventDefault();L[0].__kxl.close();return}
  if(kitModalClose()){e.preventDefault();return}
  const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
-/* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
-   ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
-   (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
-   (2) a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) closes every other open second-layer pop-up first: the room person card (popIdx),
-       the kit layers (game result #ov and other kitCloseLayer layers), the word pop-up #kpop, the podium #kpodov, an open kit book (.kbk). Nothing is left floating over or behind it.
-   Never two dialogs overlapping: a new dialog never opens on top of an older dialog of its own layer (Q is one queue: the older one waits its turn, shown one at a time). */
-function kitDialogWins(m){try{if(!m)return false;if(typeof S!=="undefined"&&S&&S.dead)return true;const c=String(m.cls||""),k=m.kit&&m.kit.kind;return /\b(end|night|klife)\b/.test(c)||k==="end"||k==="night"}catch(e){return false}}
-function kitCloseOthers(){let n=0;
- try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;popMsg="";n++;if(typeof renderStage==="function")renderStage()}}catch(e){}
- try{KIT_LAYERS.slice().forEach(r=>{if(r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl&&r.__kxl.box()){try{r.__kxl.close()}catch(e){}n++}})}catch(e){}
- try{document.querySelectorAll(".kpop").forEach(x=>{if(!x.hidden){x.hidden=true;n++}})}catch(e){}
- try{if(document.getElementById("kpodov")){typeof kitPodiumClose==="function"?kitPodiumClose(true):document.getElementById("kpodov").remove();n++}}catch(e){}
- try{if(document.body.classList.contains("kbk-open")){const x=document.querySelector(".kbk>.kbk-x");if(x){x.click();n++}}}catch(e){}
- return n}
-function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
-window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
-(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
- setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
 /* (review kit-fig2 11/15, LUẬT SỬA CẢ NHÓM "overlay never closes"): only the result button of the panel ON SCREEN counts — a button left in a
@@ -55749,7 +55731,7 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
      (offer caps / busy weeks) is withdrawn when the chapter falls due: she plays it alone */
   if(N.hs===1&&nrHold(v))continue;
   const r=nrPlay(v);if(!r)continue;
-  const line=`<span class="past nochip">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
   if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${nrFill(N.e,v)}`:""}.</span>`)}catch(e){console.error(e)}}
  try{news=nrMMonth(news)}catch(e){console.error(e)}
@@ -55888,7 +55870,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
   if(N.hs===1){const [rk,ri]=nrMK(s);if(nrHoldM(x=>nrSameA(x,rk,ri)))continue}
   const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
   const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
-  const line=`<span class="past nochip">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
+  const line=`<span class="past">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
   if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
@@ -56048,7 +56030,7 @@ function nrMenMonth(news){const B=nrB();let n=news||0;
   /* fix (r1 finding 6, whole group): his help hồi decides THIS chapter — wait while the player works on it; an unshown request is withdrawn */
   if(N.hs===1&&e.a&&nrHoldM(x=>nrSameA(x,e.a[0],e.a[1])))continue;
   const r=nrMenPlay(e);if(!r)continue;
-  const line=`<span class="past nochip">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
  return n}
 /* the voice of a man in the help hồi (VANPHONG §2): eunuchs nô tài, a Vương gia bản vương, other men and officials thần */
@@ -86152,7 +86134,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="de595a1889da";window.CTM_BUILD=BUILD;
+const BUILD="9ac4c1681550";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

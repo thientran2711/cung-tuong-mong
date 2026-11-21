@@ -158,7 +158,7 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
      (offer caps / busy weeks) is withdrawn when the chapter falls due: she plays it alone */
   if(N.hs===1&&nrHold(v))continue;
   const r=nrPlay(v);if(!r)continue;
-  const line=`<span class="past nochip">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
   if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${nrFill(N.e,v)}`:""}.</span>`)}catch(e){console.error(e)}}
  try{news=nrMMonth(news)}catch(e){console.error(e)}
@@ -297,7 +297,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
   if(N.hs===1){const [rk,ri]=nrMK(s);if(nrHoldM(x=>nrSameA(x,rk,ri)))continue}
   const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
   const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
-  const line=`<span class="past nochip">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
+  const line=`<span class="past">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
   if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
