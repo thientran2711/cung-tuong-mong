@@ -33,6 +33,12 @@ Gates: kit-opt-title-wrap Fold PASS + iPad PASS · quickcheck PASS (bb52274d: co
 Shots (looked at; CDN img/_review/kit-opt-title-wrap/): before-755-opt.jpg (title 7 lines, meter not stacked), after-755-opt.jpg (titles 2 lines, meter bar-over-word on the title row), before-1180-opt.jpg, after-1180-opt.jpg (2 columns, titles 2 lines), after-1180-act.jpg (Hành sự: «Nghỉ ngơi một lát» meter on the title row).
 Note: «Sủng / +2» split in the shots = kit-ef-unit (fixed on review/kit-ef-unit-r2, not on main yet); merge of both branches: different lines of j79 (kp-kat-css block vs j63/kitRows), no conflict expected.
 
+## 2. kit-mark-fix r5 — SẴN SÀNG KIỂM `review/kit-mark-fix-r5` @ 4a1b2450 (MAIN 95 order: LAND CHAIN 2 FAIL, real conflict in jk4.js vs LIVE 419079d7)
+PRIORITY #1 CHECK: review/kit-mark-fix-rv4 123c4572 (keeper #2 r3 + rv merge) reused | main 99795d67 (incl. 419079d7 duodo-focus / K-INFO-TAP jk4 kitInfoOneLine hosts) | claims: keeper #2 topic → #4.
+Merge: rv4 123c4572 + LIVE 99795d67 (newest; contains 419079d7). One conflict, jk4.js `kit-info-one` style block: kept LIVE's wider hosts (`.pc .pcb>.kb.kpkb>.kr>.krv` on the two `.pcpop` lines, K-INFO-TAP) AND kit-mark-fix's resize callback `kitInfoOneLine();kitPcMore()` + `kitPcTagColour` + `kitPcMore` (§6.3i/§6.3j). Everything else auto-merged (LIVE kszOwnAct3 + kitInfoOneLine selector, KIT.md). index/sw rebuilt.
+Tests: kit-mark-fix.js Fold 4/4 PASS every run; iPad 4 scenes: 3 runs → 1 run all PASS, 2 runs one card FAIL (first scenes, `more:false` + rank/name colour not yet applied = observer timing, random world). The SAME flake shows on rv4 123c4572 (iPad pop-maid FAIL) → pre-existing, not from the merge. kit-info-tap.js (LIVE side) PASS (0 FAIL). quickcheck: run 1 FAIL perf tab 569/422 (limit 549), run 2 PASS (render 233/250, tab 438/430, buổi 1308/1047, core gates PASS) — perf noise.
+
 ## Queue status
 - (1) kit-opt-title-wrap → SSK sent (§1).
+- (2) kit-mark-fix r5 → SSK sent (§2). Coordinator is now MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr.
 - Waiting rv verdicts: kit-ef-unit-r2 bb00fc02, kit-relrows-ms d80b9d2b (keeper #3); kit-focus r5 da873b4b, kit-win-pay 0e6fe923, kit-mark-fix-r3 99f1e576, kit-g4-plate 03181881 (keeper #2).
