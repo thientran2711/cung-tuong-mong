@@ -1,0 +1,4 @@
+base: dev/art/thu_comoi/s62_t1_THU_L1723.txt
+# owner L1776 audit: G53 THU square collar (fix6 words)
+allow: a snug crossed-collar upper garment with long wide flowing sleeves and wide embroidered cuffs showing a sheer thin undersleeve  # owner L1747/L1776 G53 square neckline, flat band / caption
+allow: "Mùa Thu · Đáp ứng · prompt cũ L1723"  # owner L1747/L1776 G53 square neckline, flat band / caption

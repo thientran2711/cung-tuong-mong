@@ -1,0 +1,4 @@
+base: dev/art/thu_comoi/s62_t2_THU_L1723.txt
+# owner L1776 audit: G53 THU square collar (fix6 words)
+allow: a fine silk robe with delicate embroidered tiger lilies at the collar  # owner L1747/L1776 G53 square neckline, flat band / caption
+allow: "Mùa Thu · Thường tại · prompt cũ L1723"  # owner L1747/L1776 G53 square neckline, flat band / caption

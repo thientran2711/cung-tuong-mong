@@ -179,3 +179,17 @@ keep --all 435 PASS. Builder fix_L1723/make_t78_fix4_L1735.py.
 - Finding: the square-collar words are IDENTICAL in fix4 and fix5 ('a straight SQUARE collar (no crossed collar) framed by a wide stiff band …'). fix4 only differed by its SMALL cloud collar flat on the shoulders (fix3 words, refused by the owner L1737), which left the neck clear; with the bigger fix2 cloud collar + 'SQUARE collar … wide stiff band' the model read a stand collar.
 - s62_t8_THU_fix6_L1747 (base fix5, 9837 ch, check_store tp8 PASS, keep PASS, --all 443 PASS): square collar made explicit 'a LOW open square neckline across the upper chest, neck and collarbones bare, NEVER a high stand collar or mandarin collar'; 'wide stiff band' → 'wide flat band'; cloud collar + 'never rising up the neck'. Shoulders/cloud collar size = fix2 (unchanged), one-colour lilac flowers + plumage unchanged.
 - Rule: NO rule id for the approved thu square collar. Approval = owner L1720 (Tần sqtest p8yYJV3ehw OK → all tiers, FOREMAN_C_STATUS line 1142); older related G22 (Tần t4 square neck, 20/11) and G17 (t1/t2 square neckline). Suggest the Foreman add one (rule.py add G …).
+
+## JOB L1776 audit (owner via Foreman C #21; G53 THU square collar, F19, peonies t7/t8, one colour, A46) — 0 gens
+| tier | latest file before | drawn id | audit | now |
+|---|---|---|---|---|
+| t1 Đáp ứng | s62_t1_THU_L1723 | fHzo0AZCDY | FAIL G53 (crossed-collar ruqun) | fixed → s62_t1_THU_fix_L1776 (8974, PASS) |
+| t2 Thường tại | s62_t2_THU_L1723 | Syh1EQKUb8 | FAIL G53 (no square neckline) | fixed → s62_t2_THU_fix_L1776 (8746, PASS) |
+| t3 Quý nhân | s62_t3_THU_L1723 | 79fjFlBJAL | square but 'wide stiff band' (G53 risk words) | fixed → s62_t3_THU_fix_L1776 (9667, PASS) |
+| t4 Tần | s62_t4_THU_revert_sqtest_L1714 | p8yYJV3ehw | approved L1720; square drawn OK; has 'wide stiff lilac band' | OK, not changed (approved) |
+| t5 Phi | s62_t5_THU_fix_L1723 | 4RFSkRs9Aa | 'wide stiff band' | fixed → s62_t5_THU_fix_L1776 (9303; gate only B26 as before) |
+| t6 Quý phi | s62_t6_THU_fix2_L1726 | kseumhl16B | 'wide stiff band' + cloud collar no neck guard | fixed → s62_t6_THU_fix_L1776 (9997, PASS; caption shortened "Thu · Quý phi · cổ vuông" for length) |
+| t7 HQP | s62_t7_THU_fix3_L1735 | not drawn | 'wide stiff band' + cloud-collar cape no neck guard | fixed → s62_t7_THU_fix4_L1776 (9629, PASS) = job (1) |
+| t8 HH | s62_t8_THU_fix6_L1747 | (fix6) | OK | OK |
+F19: no chrysanthemum in any latest file. Peonies only t7/t8. One-colour tone-on-tone: t7/t8 (only tiers ordered). A46 cabochon sentence: t6/t7/t8; t1–t5 have only jade/pearl, no faceted gems.
+Edits (word-diff checked vs base): square collar → "a straight SQUARE collar (no crossed collar): a LOW open square neckline across the upper chest, neck and collarbones bare, NEVER a high stand collar or mandarin collar, framed by a wide flat band …" (t1 replaces "crossed-collar upper garment"; t2 inserted; t3 in its SQUARE NECKLINE form); "stiff" → "flat"; t6/t7 cloud collar + "never rising up the neck"; captions. keep --all 490 PASS. Builder fix_L1723/make_fix_L1776.py.
