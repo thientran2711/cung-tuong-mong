@@ -126,3 +126,17 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
+
+## OWNER L1973 (t7) + L1976 (t8) via #27: THU, back to the OLD L1903 outfits, collar only
+make_thu_t7t8_old_clasp_L1973.py. Files:
+- dev/art/thu_comoi/s62_t7_THU_vankien2_OLD_clasp_L1973.txt (9999 ch)
+- dev/art/thu_comoi/s62_t8_THU_vankien2_OLD_clasp_L1976.txt (9987 ch)
+Base L1903 (0eUA2SkTfW / CqnI8nxEEy). NOT the fromQP L1955/L1971 files.
+Word-diff vs L1903:
+- collar sentence = the L1924 clasp collar (square neckline + two-tier vân kiên + "two fronts joined at the throat by one small horizontal clasp (frog button)");
+- caption tag L1903 → L1973 / L1976;
+- the same L1924 boilerplate length trims ("beautiful/handsome romantic-lead looks for everyone."; t8 also "the royal yellow in the robe is exactly that colour.");
+- t7 only: the flute keeps its gem tassels; "no round charm on it" removes the jade disc VE8/VE11 saw (G57). The words "jade disc" trip the G57 gate even when negated. Also ", gaze to the viewer" trimmed for length (boilerplate).
+- t8 had no disc: no pendant change.
+Gates: keep PASS ×2, check_store --scope tpN --age a22 = no FAIL ×2.
+Sent to VE11 session_01D3E3NXVzBHdCGoGMiocJtu: t7 + t8 @135 each (2k medium) = 270 cr, one sheet CŨ|MỚI ×2.
