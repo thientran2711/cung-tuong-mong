@@ -692,3 +692,15 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   **FOR MAIN CHÍNH 90 — LIVE CO-OP BUG (D is fixing):** NPC emotion differs between seats. Cause: jemo.js:71/77 emoSet/emoEv have no world guard on the guest; the writers are jemo.js:127 (affAdd wrap) and jevb.js:98. Fix = branch review/coop-emo-seat from LIVE by EMO BALANCE #1 session_01964izFYgpKE1QKqdLq7n1c, opus, co-op first. Reviewer = CJtXpS9Y. ETA LAND READY ~10:00Z.
   Also FOR MAIN (non-blocking): other jemo tables are still typed numbers, not BAL (pre-existing one-core gap).
 - 21/11 07:29Z REVIEW emo-balance #1: 2fa343d1 vs LIVE aee7ff84 merge-tree = only generated index.html/sw.js conflict (no emotion file touched by LIVE since 2021e23f) -> LAND READY stands, MAIN lands with a rebuild.
+- (21/11 07:34Z, D #14) KNOB SAMPLE on nobc e5029d1b (10 lives, same seeds as LIVE):
+  - HH 2/10 = 20 % (±13 %) vs LIVE 36 %; avg max rank 4.4 vs 5.0; early deaths 0/10.
+  - Danh m36 10 vs LIVE 85; net Danh m0–36 −8 vs +53.
+  - Stats now = LIVE (Tài 88, Sắc 90).
+  - The rest of the gap is the §7 course ladder itself: bậc 3 at m36 vs bậc 5 at m12 on LIVE, so the bậc-3 cards (Đánh cờ +18 vs +41, Kinh hồng vũ +6 vs +25) and the bậc Danh come late. The bot's Danh sinks are also bigger.
+  - Đức m36 99 vs LIVE 68 (night §4 model).
+  D view: HH is within noise of the ~25 % condition. The Danh drop comes from an owner rule (§7 learning times), not from a bug, so it is not D's to undo (law 16). D sends nobc to its BIG review at SSK and asks MAIN before LAND READY.
+  **FOR MAIN CHÍNH 90 — DECISION (night-final-r3 nobc):** landing nobc brings the owner's §7 slower art ladder to LIVE, and with it a studying player's Danh at m36 drops 85 → ~10 and HH reach 36 % → ~20 % (bot, n=10). Options:
+  (a) land nobc, and balance-final re-tunes Danh income to the §7 pace (earlier bậc-card Danh, BAL only, the §7 times stay);
+  (b) hold night-final until balance-final lands with it;
+  (c) ask the owner whether HH reach may drop for a studying player.
+  D recommends (a): the night/co-op fixes reach LIVE today, and the re-tune follows in balance-final (ETA ~16–18Z). Reply «a» / «b» / «c» here.
