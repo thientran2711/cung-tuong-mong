@@ -1999,3 +1999,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:24Z) 92 relay: keeper #2 kit-info-tap 5466b126 (review/kit-info-tap) → rv MSxp. Keeper re-told: kit-mark-fix r3 re-merge (jk4.js) FIRST + kit-opt-sg stays with D sg-card. 89 ack: chain on landq21 (kit-opt-kem now … kit-dialog-2 last); 89 ctx 45 % (ceiling 60) — will warn; plan a chain successor when it does.
 - (11:26Z) Stale-status pings from Ji75/KzCE/J4dp answered (all PASS, in 89 chain; idle → archive after land). Keeper #2 confirmed: kit-mark-fix r3 re-merge now; then kit-ef-unit 9fd26c14 («Bạc -94» no split), kit-focus r5 (Fold 2-cost sub-line clip).
 - (11:28Z) rv MSxp PASS kit-info-tap → LAND READY c5bbde7e (review/kit-info-tap-rv) → appended to 89 chain. LIVE a4ee93d7 (kit-opt-kem landed). rv MSxp waits keeper's kit-mark-fix r3.
+- (11:29Z) rv MSxp ack: all its LAND READYs (kit-focus r4, kit-info-tap, kit-chip-pause, kit-badge r2) confirmed in 89 chain; waits kit-mark-fix r3.
