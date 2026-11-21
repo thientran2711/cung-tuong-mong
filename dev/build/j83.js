@@ -172,14 +172,14 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
 function wkTgt(id){return id==="emp"||id==="th"||id==="maid"?id:RV(+id)}
-function wkGainTxt(ev){const F=[];if(ev.fx.sung)F.push(`Sủng +${sg(ev.fx.sung)}`);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Lòng +${ev.fx.maid}`);if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`);return F.concat(ev.notes.map(n=>n)).join(" · ")}
+function wkGainTxt(ev){const F=[];if(ev.fx.sung)F.push(sgStat(ev.fx.sung)/* SG-CARD marker: drawn once */);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Lòng +${ev.fx.maid}`);if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`);return F.concat(ev.notes.map(n=>n)).join(" · ")}
 PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const O=[],no=[];
  for(const [id,n] of wkTargets(S)){const r=wkTgt(id);if(!r)continue;const ev=wkEval(S,w,r);if(!ev.ok){if(ev.why)no.push(`${n}: ${ev.why}`);continue}
   O.push({n,fx:{},x:wkGainTxt(ev),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
  if(w.kind==="mon"&&S.inv.some(x=>x.k==="hacdinh"&&!x.h))for(const v of liveRivals(true)){const sp=caughtOdds(S,v,true);
   O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức -120, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức -10 · nàng phát giác trước, nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ: ${chanceW(sp)}`,/* previews: caught (ACT.poison.f, via wkPoison) */go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
  O.push({n:"Thôi",fx:{}});
- return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: Tranh cổ, Đàn cổ dâng Hoàng thượng Sủng +5. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
+ return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: dâng Hoàng thượng: Tranh cổ ${sgStat(Math.max(1,Math.round(IT.tranhco.gv/2)))}, Đàn cổ ${sgStat(Math.max(1,Math.round(IT.dancoc.gv/2)))}. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
 function wkAct(a,ix){const e=S.inv[ix];if(!e||!e.wk||S.dead||Q.length)return;
  if(a==="give"){if(!can(2))return;pushDil(mkP("wkgive",{ix}),"Dâng, tặng tác phẩm");render();return}
  if(a==="sell"){if(!can(1))return;const fz=wkSellO(S);/* read before the spend (j9 fzRun) */spend(1);log(fzRun(fz,null,()=>wkSell(S,ix)));render();return}
