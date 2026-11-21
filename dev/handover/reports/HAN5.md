@@ -112,3 +112,9 @@ Collar sits flat and secure on the shoulders, higher than L1880. The inner colla
   - t6/t8 "RANK BLOCK…" label
   - t8 "collar unchanged; " and the plum list (no collar band)
 - ch 9783/9994/9820/9776/9432/9980/9983/9997. keep PASS ×8. check_store shows only the waived FAILs (M06/M07/S06 t1–t3, S13 t4, M06/M07 t5, B12/M07/S07 t6–t8, S14 t7). No pendant/sachet word (G57/G59), no new G60/G61 FAIL.
+### L1915 t1–t8 drawn (VE7, 440 cr), sheet han_collar_L1915_t1_t8.png
+ids: t1 gOm1jngSXO · t2 1ldFbR1r4r · t3 fHz8mJ5CDY · t4 P3QS7XQ42C · t5 eIPcM8vdqL · t6 SyhrsOsUb8 · t7 gOm1LOuSXO · t8 cpS2nen0eP.
+HAN5 read (zoomed collar crops):
+- All 8 have a wide crossed collar on the shoulders and the WHITE innermost band now reads clearly. t4/t5/t6 are closest to aFGoe7afSh.
+- t7/t8 V a little narrower/deeper and t1–t3 slightly less flat (pink-on-pink).
+- POSSIBLE G61: t4 lotus and t6 jade ball held near the front waist. The pose words are LADDER4 byte-identical (A47), so the owner/#26 decides.
