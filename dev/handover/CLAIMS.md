@@ -819,3 +819,4 @@ kit-mark-fix rv3 | review/kit-mark-fix-rv3 db138921 | rv session | PASS | 21/11
 | cold-faction re-land E43 (opus; j42.js real conflict; MAIN 91 ORDER 08:16Z) | review/cold-faction-land2; reports/relander-e43.md | FOREMAN E #26 | session_01DgYSWm9MJSmYC8cYxWWRUE | RUNNING | 21/11 08:50Z |
 | coop-thin-g F1 fixer #2 (opus; successor of 4qNNZGeU; bisect cyc/cycs/timer reds + TRIP wk9 desync after LIVE merge) | review/coop-thin-g-f1 | B | session_01N1tNP2X4FHGnxW9LYH1iQy | RUNNING | 21/11 08:59Z |
 | duodo-focus #2 (OPUS; successor of N9Yc) | review/duodo-focus 4f759a76; reports/duodo-focus.md HANDOVER | MAIN CHÍNH 92 | session_01Rc5AsLtG4rLx87Rv3pd1ej | RUNNING | 21/11 09:04Z |
+kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text clipped) | 21/11
