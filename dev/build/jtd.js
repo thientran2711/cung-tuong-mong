@@ -172,8 +172,8 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
  const rounds=TD_ALMS.map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
  function left(){return rounds[r].pool-give.reduce((a,b)=>a+b,0)}
  function render(){if(stop)return;const R=rounds[r];
-  wrap.innerHTML=`<div class="nwb-pool">${NWB.ic("bowl")}${NWB.pips(R.pool,left())}</div>`+
-   R.list.map((x,i)=>`<div class="nwb-row"><button class="kgbtn" data-p="${i}" data-d="-1" aria-label="Bớt một phần cho ${x[0]}">−</button><div class="nwb-mid"><span class="nwb-who">${NWB.ic(NWB.who(x[0]+" "+x[1]))}</span>${NWB.pips(Math.max(x[2],give[i]),give[i])}</div><button class="kgbtn" data-p="${i}" data-d="1" aria-label="Thêm một phần cho ${x[0]}">+</button></div>`).join("")+
+  wrap.innerHTML=`<div class="nwb-pool">${NWB.ic("bowl")}${NWB.pips(R.pool,left())}<span class="nwb-cap">còn ${left()} phần để chia</span></div>`+
+   R.list.map((x,i)=>`<div class="nwb-row"><button class="kgbtn" data-p="${i}" data-d="-1" aria-label="Bớt một phần cho ${x[0]}">−</button><div class="nwb-mid"><span class="nwb-who">${NWB.ic(NWB.who(x[0]+" "+x[1]))}</span>${NWB.pips(Math.max(x[2],give[i]),give[i])}<span class="nwb-cap">${x[0]} · cần ${x[2]} phần · nhận ${give[i]}</span></div><button class="kgbtn" data-p="${i}" data-d="1" aria-label="Thêm một phần cho ${x[0]}">+</button></div>`).join("")+
    `<div class="kg82act">${NWB.btn("tdadone","check",{alt:false,label:"Phát xong"})}</div>`;
   wrap.querySelectorAll("button[data-p]").forEach(b=>b.onclick=()=>{if(lock)return;const i=+b.dataset.p,d=+b.dataset.d;if(d>0&&left()<=0)return;if(d<0&&give[i]<=0)return;give[i]+=d;kg82Pluck(1,true);render()});
   wrap.querySelector("#tdadone").onclick=done;hud()}
