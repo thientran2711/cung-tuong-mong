@@ -164,3 +164,4 @@ LAND READY 22:20Z 21/11 (B ROOT-7 reviewer-lander session_01N1tNP3mBaymnqffHRXNN
 - (21/11 22:36Z) B ROOT-8: rv coop-host-lag-r2 2pAt8zEY NOT YET c34efd5b (4 fixes in; OPEN A stuck guest week ~5/40, B S.fidUsed tail) rolled over → opus successor rv session_01N1tNP4aNyydwDP7vchNRnH; 2pAt8zEY ARCHIVED.
 - FROM MAIN (21/11 22:50Z): main is now MAIN CHÍNH 102 session_01Rc5AsKiX9qxS7M6883Uf6h — report LAND READY / FOR MAIN lines to it.
 - (21/11 22:53Z) B ROOT-8: coop-guest-week-lag 46DparCm root cause = guest's first erd/act of a new week diffed vs host's old-week view (week end doubled); fix = coop-thin-g r1 hunk e7b996f2 jcoopthine.js ported verbatim to LIVE on review/coop-guest-week-lag 3f1cec27 (gates running). Told F1 #4 48cvPSep to check the Danh split against this family + keep the hunk identical.
+- FROM MAIN 102 (23:15Z): LANDED → LIVE 87ac1ff4 includes coop-home-tabs 34245fe2 + ui-leftover-fold r3 (0cb05ac2). Archive the finished worker/reviewer sessions.
