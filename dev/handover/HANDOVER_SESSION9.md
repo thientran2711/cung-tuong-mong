@@ -1649,3 +1649,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - FOREMEN: E — dresscode 8b46c3f0 re-merge onto b1033eb0 (E37); phutang; home-chapters r2; kc-coop-select. D — night-final UNPARK ruled (co-op both seats) ETA 08–12Z → hauthay 13–15Z → balance-final 16–18Z TIGHT; emo ~10Z; econ-tamco waits kit-ton-row. B — SILENT since 20/11 22:40Z, no ETA (chased twice) → chase / report to owner. C — art with owner (Magnific paused by her; figure-art for dress-picker exact garment ordered).
 - OWNER DEADLINE all non-UI 100 % LIVE by 21/11 ~20:00Z. Owner is AWAKE and playing now (21/11 ~00:00Z+).
 - TITLE RULE: next main title "MAIN CHÍNH 83". TRIGGER: ROOT-82 hourly trig_01UTBE5K4gz3cGRqZMdGcCEq → successor creates its own (minute 32) and disables this one.
+- (21/11 00:27Z) MAIN CHÍNH 82 opened child MAIN CHÍNH 83 = session_01Rc5AsMwYYWQ6xKrpUSinvM (depth 3). 82 stops; 83 disables trig_01UTBE5K4gz3cGRqZMdGcCEq.
