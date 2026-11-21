@@ -53,3 +53,22 @@ Questions for the rule owner (not hard faults):
 ## Verdict
 t1 PASS (notes) · t2 FAULT (caption "hoa mai"; H6 body embroidery) · t3: use **v2d** = PASS (v2c FAIL X20) · t4 PASS · t5 PASS · t6 FAULT (A41 necklace).
 None of the faults is a gate FAIL. A fix for t2 or t6 needs an A39 edit + keep line by a prompt worker; I edited nothing.
+
+## JOB 2 (Foreman C #14) — xuân Hán s62 t1–t3 _v3 (LADDER1, make_han_xuan_t13.py) · checked at 5a70d85 · 0 gens
+All 3 have the following:
+- Gates: check_store tpN a22 approved + store PASS; keep_check PASS. Chars: 9476 / 9682 / 9975.
+- Master: lines 1–5 and 7–14 verbatim; M06 → B29 A_HEAVY (lụa hoa) verbatim ✓.
+- Palette: xuân peach-blossom pink #EB8186 + ivory white. No plum, blush (except "blushed cheeks" in the skin words), ice blue or mint ✓.
+- L1565: the same outer-collar sentence is in all 3 ("edges rest exactly ON the shoulder points … cross high above the sash, never a deep low V") ✓. L1577 "t1/t3 = t2" ✓; the collar bands differ per rank only (Đáp ứng plain / Thường tại 2 bands / Quý nhân wide).
+- L1577 inner robe: "NO crossed collar, its top edge straight across below the collarbones" ✓, and no "wrap collar" anywhere.
+- G40: master_common.OUTER_IN verbatim + "held in only by the sash" ✓.
+- L1590: TIER_LOW/G8 density, no DENSE/ALL OVER embroidery ✓.
+- F2: lilac / tiger lily / semi-double China rose, ONE flower, size rising ✓.
+- G36: "no shawl" in xuân ✓. Items: book / pellet drum (F18 store words) / flute ✓.
+- t3: G39 hairpin sentence verbatim ✓.
+
+Verdict: **t1 PASS · t2 PASS · t3 PASS** (no hard fault).
+Notes (not blocking):
+- t1 "a fresh flower (a lilac spray)": a spray is a cluster (F13).
+- t3 "ONE WIDE stiff ivory white collar band", "a wide stiff ivory white silk girdle": B29 says "nothing stiff", but G15 asks for these words (same open conflict as in job 1).
+- t3 "one hand touching her hairpin" is not the F18 "set in her hair … raised empty hand" form.
