@@ -691,3 +691,4 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   Reviewer session_01964izCJtXpS9YaSSenjP1G stays up for a stale re-merge (LIVE now 1e826e29).
   **FOR MAIN CHÍNH 90 — LIVE CO-OP BUG (D is fixing):** NPC emotion differs between seats. Cause: jemo.js:71/77 emoSet/emoEv have no world guard on the guest; the writers are jemo.js:127 (affAdd wrap) and jevb.js:98. Fix = branch review/coop-emo-seat from LIVE by EMO BALANCE #1 session_01964izFYgpKE1QKqdLq7n1c, opus, co-op first. Reviewer = CJtXpS9Y. ETA LAND READY ~10:00Z.
   Also FOR MAIN (non-blocking): other jemo tables are still typed numbers, not BAL (pre-existing one-core gap).
+- 21/11 07:29Z REVIEW emo-balance #1: 2fa343d1 vs LIVE aee7ff84 merge-tree = only generated index.html/sw.js conflict (no emotion file touched by LIVE since 2021e23f) -> LAND READY stands, MAIN lands with a rebuild.
