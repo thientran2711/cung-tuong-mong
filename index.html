@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bd84201a+","t":"2026-11-21T05:53Z","c":"home-chapters (E25r2, co-op land gate): family faces fall back to the next pool of the same sex (BAL.kc3.ros.pool, as kc3Fid) — the 8-face …","b":"b728805a5c89","h":[{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"}]};
+window.CTM_BI={"s":"4d045fb4+","t":"2026-11-21T06:29Z","c":"home-chapters r2 (E25r2) after LIVE merge: names through the one name core (jname nmNew; LIVE removed kcFreeName, roster + suitors failed t…","b":"8c4463ca473f","h":[{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -76433,7 +76433,8 @@ for(let i=0;i<KC3THAY.length;i++)KCHAB["thay"+i]=[["kc_hoc",3],["",2]];
 /* the tabs: teachers under Tài nghệ, the bà mối and the suitors under Giao du, the rest stays Người nhà */
 (function(){const l0=kcFamList;kcFamList=function(w){const L=l0.apply(this,arguments);return w==="nha"?L.filter(m=>!m.grp):L}})();
 function kc3Grp(g){return S.kc.fam.filter(m=>m.alive&&m.grp===g)}
-function kc3Pager(key,L){return L.length?`<div class="pgwrap">`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div>`:""}
+/* E25r2: the home roster strip sits INSIDE a scrolling tab (Tài nghệ / Giao du), not as a person tab: kept one level below #panel so the kit person-tab frame (KIT §6.3c #panel.kpfr, LIVE 21/11) does not take the whole panel and squeeze the strip to 0 px */
+function kc3Pager(key,L){return L.length?`<div class="kc3pgw"><div class="pgwrap">`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div></div>`:""}
 (function(){const a0=kcArtHTML;kcArtHTML=function(){const h=a0.apply(this,arguments);if(!kc3On())return h;return kc3Pager("kcthay",kc3Grp("thay"))+h}})();
 (function(){const s0=kcSocHTML;kcSocHTML=function(){const h=s0.apply(this,arguments);if(!kc3On())return h;return h+kc3Pager("kcsoc",kc3Grp("soc"))}})();
 /* teacher favour → tier (0 học trò, 1 được quý, 2 truyền nhân); the tier speeds the lessons of her art (the base Tài nghệ games) */
@@ -88527,7 +88528,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b728805a5c89";window.CTM_BUILD=BUILD;
+const BUILD="8c4463ca473f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
