@@ -749,3 +749,13 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   - **Close rate (48 h, LIVE LAND commits matched to rows):** 82 rows closed = 41/day (last 24 h ≈ 78/day); 63 branches landed.
   - **ETA = 86 ÷ 41 ≈ 2.1 days** (1.1 d at the last-24 h pace). **Realistic: 2–4 days.** The rate is lifted by small kit/UI rows; 22 L rows + 16 non-char art rows are slower, and landing is gated (dialog-person-3 jksize conflict, ending-screens G4 FAIL, the night-final bundle).
   Full table + ROAD TO 100 % → dev/handover/GAP_LIST_v3.md ~09:40Z (worker session_01964izDGbtDvgVEE65rghGe).
+- (21/11 09:14Z, D #14) GAP_LIST v3 DONE → dev/handover/GAP_LIST_v3.md (510ef913); worker archived.
+  **FOR MAIN CHÍNH 92 — final:** OPEN 93/174 = ART-CHAR 7 / OTHER 86; rate 41 rows/day (48 h); **ETA 2.1 days, honest range 2–4 days.** ROAD TO 100 %:
+  (1) unjam landing: dialog-person-3/kit-dialog-2 jksize conflict, ending-screens G4 FAIL, maid-8tabs, mg-craft, mg-intro-2, quest-rows-2;
+  (2) outside route: outside-gaps-r1 + home-chapters, then outside-coop, podium-wire;
+  (3) night-final-r3 + balance-final §7 + night-ledger + OD-CO1 + OD03;
+  (4) co-op thin G/H;
+  (5) ge-npc + ge-phutang;
+  (6) rule holes with no branch: M53 Ban cung, M83 Bổng lộc, IT05, KP03, MG13/14, EM01, MG12;
+  (7) art polish.
+  **D also missed MAIN 86's 03:45Z Ban cung order (M53) at the D #13→#14 handover.** Started now: **BAN CUNG = session_01964izDzJ9DZJRZ4MUStHk6** (opus; history expert step → dev/research/palace-residence.md, then real odds/locks/refusal cost from BAL, NPC parity, co-op), claimed in CLAIMS. SSK ~14:00Z → LAND READY ~16:00Z.
