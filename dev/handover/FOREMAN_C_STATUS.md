@@ -1550,3 +1550,4 @@ ROOT-B4 ~18:12Z: OWNER L2165 'thread ladder not updated?': H15 sentences ARE in 
 ROOT-B4 ~18:15Z: OWNER L2166: chest looks emphasised t6–t8 (+Tần). Found: 'just below the bust' t5/t6, 'upper chest' framing t7/t8, 'outer upper chest' t4, chest phoenix t7/t8, 'slim' missing t7/t8. → THUROOT4 M2163 item 8 scrub all chest/bust words except pose; item 9 t4 rebuilt on s62. Next Lượt 2167.
 ROOT-B4 ~18:18Z: OWNER L2167: questions 'Tần/Phi silver' — she remembers Phi with gold (M2144-02 approved has 'fine gold thread'). H15 saved text says Phi silver + gold tassels. Item 7 held for t4/t5; asked her. Next Lượt 2168.
 ROOT-B4 ~18:20Z: OWNER L2168: yellow ladder (L2164) = ROYAL YELLOW CLOTH (vàng hoàng gia), NOT thread. Item 7 (thread change) CANCELLED for all ranks — thread words stay as M2150. Next Lượt 2169.
+ROOT-B4 ~18:22Z: OWNER L2169: t3 Quý nhân flowers too dense/everywhere → fewer than Tần, few widely spaced sprigs (item 10 → THUROOT4, M2163-03). Next Lượt 2170.
