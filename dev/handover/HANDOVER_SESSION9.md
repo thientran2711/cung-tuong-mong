@@ -1977,3 +1977,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:03Z) rv MSxp PASS kit-focus r4 → LAND READY 4c1105d8 (review/kit-focus-rv4) REPLACES r3 in 89 chain; duodo-focus #2 told.
 - (11:09Z) 89: LANDED pm-c 75ad237d (E); FAIL bang-words cba883e0 (jrd_bd2.js) → ORDER E re-merge. Chain landq19 from home-chapters.
 - (11:10Z) 89: FAIL home-chapters 5acae7c5 (assets.json) → ORDER E re-merge (priority, GAP ROAD #2). Chain landq20 from ge-phutang.
+- (11:11Z) 89: FAIL ge-phutang f37ec5f1 (jbalge.js) → ORDER E (E re-merge batch: bang-words, home-chapters, ge-phutang, cold-faction). Chain landq21: kit-opt-kem, kit-badge, mg-intro-2, maid-acts-a, kit-focus r4, mg-noword-care, hao-huu, kit-chip-pause.
