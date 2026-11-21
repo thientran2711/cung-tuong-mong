@@ -592,7 +592,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN CHÍNH 84 (coordinator; took over from 83) | — | MAIN | session_01Rc5AsKwFNncn5NJ71zfUof | RUNNING | 21/11 01:35Z |
 | MAIN84 LANDER (opus; B stale train: thancan, coop-name-clash, wear-slots, coop-week-stall, coop-guest-agent) | review/main84-land-*; briefs/main84-lander.md | MAIN CHÍNH 84 | session_01Rc5AsHzig7NUCeaPzmEwPf | RUNNING (START_CTX ~5 %) | 21/11 01:45Z |
 | REVIEW dauho-lv5 (BIG opus) of f9ef63d0 | review/dauho-lv5-rv ceaa99e2; reports/rv-dauho-lv5.md | MAIN CHÍNH 84 | session_01Rc5AsJQhpHN5KD3jnhMy1U | DONE PASS ceaa99e2 | 21/11 02:10Z |
-| ui-tour-coop (opus; owner 21/11 01:52Z: no 2nd-player info in PDF) | review/ui-tour-coop; briefs/main84-ui-tour-coop.md | MAIN CHÍNH 84 | session_01Rc5AsKcjAGj6nNvPVpVjZP | RUNNING (A sent) | 21/11 01:55Z |
+| ui-tour-coop (opus; owner 21/11 01:52Z: no 2nd-player info in PDF) | review/ui-tour-coop; briefs/main84-ui-tour-coop.md | MAIN CHÍNH 84 | session_01Rc5AsKcjAGj6nNvPVpVjZP | DONE a274e97c (PDF 50p 15.5MB on review/ui-tour-coop) | 21/11 01:55Z |
 | chiton-name (sonnet; OWNER BUG 21/11 01:58Z: Chí tôn name = Hoàng thượng, niên hiệu down) | review/chiton-name; briefs/main84-chiton-name.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 02:00Z |
 | rel-picker-r3 (sonnet; OWNER BUG 3rd time 21/11 02:12Z: Ân oán picker space) | review/rel-picker-r3; briefs/main84-rel-picker-r3.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 02:15Z |
 | ui-tour-states (opus; owner 21/11 02:20Z: show every frame state, separate PDF) | review/ui-tour-states; briefs/main84-ui-tour-states.md | MAIN CHÍNH 84 | session_01Rc5AsMRxZnFfU6zhm7mvad | RUNNING | 21/11 02:22Z |
