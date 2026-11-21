@@ -737,3 +737,9 @@ kit-ghichu-bang rv | review/kit-ghichu-bang-rv 6fb2f34a | rv session | PASS | 21
 kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place names wrapped) | 21/11
 | maid-8tabs-2 worker (OPUS; #34 #35 #36 rest; succeeds N3dA) | review/maid-8tabs; briefs/main87-maid-8tabs-2.md | MAIN CHÍNH 87 | session_01Rc5AsKY5rVpiLYpPGJuZPT | RUNNING | 21/11 04:18Z |
 | REVIEW mood-seal-2 (SMALL sonnet) b03e2002 (#68) | review/mood-seal-2-rv; briefs/main87-rv-mood-seal-2.md | MAIN CHÍNH 87 | session_01Rc5AsLhrWA3f1aH4eph3dD | RUNNING | 21/11 04:19Z |
+| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
+| E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | RUNNING | 21/11 03:50Z |
+| REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
+| REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
+| bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
