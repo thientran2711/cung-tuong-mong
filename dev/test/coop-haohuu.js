@@ -100,7 +100,10 @@ async function states(A,B,code){
  const bk=await until(A,()=>COOPW.frInfo().st!=='away'&&!document.getElementById('coopfz'),null,60000);
  for(let i=0;i<10;i++){await clear(A);await clear(B);await sleep(400)}
  for(const dev of ['fold','ipad']){await A.p.setViewportSize({width:DEV[dev][0],height:DEV[dev][1]});await sleep(900);await shut(A);await clear(A);await bare(A);await sleep(600);
-  const g=await geo(A,'host',dev,'back');ok(bk&&g&&!g.off&&!g.up,`host ${dev}: friend back → full colour, back in the bar`,g&&{off:g.off,up:g.up,st:g.st})}}
+  const g=await geo(A,'host',dev,'back');ok(bk&&g&&!g.off&&!g.up,`host ${dev}: friend back → full colour, back in the bar`,g&&{off:g.off,up:g.up,st:g.st})}
+ /* rv r2 N1: B just RELOADED its own page (about:blank → room again): its own icon keeps its slot (kept per viewport across reloads) */
+ await B.p.setViewportSize({width:DEV.ipad[0],height:DEV.ipad[1]});await sleep(1500);await shut(B);await clear(B);await bare(B);await sleep(900);
+ await geo(B,'guest','ipad','after her own page reload')}
 /* the icon + panel on one seat at one device */
 async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewportSize({width:W,height:H});await sleep(700);await bare(o);await sleep(900);
  await o.p.evaluate(()=>{try{kitStageRail.paint()}catch(e){}});await sleep(300);
@@ -125,9 +128,11 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
   const f=(!!window.COOPW&&COOPW.friend&&COOPW.friend())||null;const txt=dl.textContent;const rows={};dl.querySelectorAll('.kr').forEach(r=>{const l=r.querySelector('.krl'),v=r.querySelector('.krv');if(l&&v)rows[l.textContent.trim()]=v.textContent.trim()});
   const tiles={};dl.querySelectorAll('.kst-tile').forEach(t=>{const c=[...t.children].map(x=>x.textContent.trim());tiles[c[0]]=c[1]});
   const figs=[...dl.querySelectorAll('img')].map(i=>i.getAttribute('src')||'').filter(s=>/fig|unknown|consort|maid|\/r\//.test(s));
-  return{title:(dl.querySelector('.kptitle')||{}).textContent,seal:!!dl.querySelector('.kpseal'),x:!!dl.querySelector('.kph .kit-x'),rows,tiles,figs,fname:f&&f.name,hasName:!!(f&&f.name&&txt.includes(f.name)),
+  return{titleK:!!dl.querySelector('.kptitle [data-k61skip] .kname'),title:(dl.querySelector('.kptitle')||{}).textContent,seal:!!dl.querySelector('.kpseal'),x:!!dl.querySelector('.kph .kit-x'),rows,tiles,figs,fname:f&&f.name,hasName:!!(f&&f.name&&txt.includes(f.name)),
    known:f&&typeof isKnown61==='function'?isKnown61(f):null,named:f&&typeof k61Named==='function'?k61Named(f):null,stats:f?{sung:f.sung,duc:f.duc,danh:f.danh,sac:f.sac,tai:f.tai,tamco:f.tamco,suc:f.suc}:null,
-   rankUnit:!!dl.querySelector('.kr .kname .kti'),kn:f?Object.fromEntries([['Sủng','sung'],['Đức','duc'],['Danh','danh'],['Sắc','sac'],['Tài','tai'],['Tâm cơ','tamco']].map(([l,k])=>[l,kitStatKnown0(f,k)?(k==='sung'?null:Math.round(f[k])):'chưa rõ'])):null,ov:document.documentElement.scrollWidth>innerWidth+1}});
+   rankUnit:!!dl.querySelector('.kr .kname .kti'),kn:f?Object.fromEntries([['Sủng','sung'],['Đức','duc'],['Danh','danh'],['Sắc','sac'],['Tài','tai'],['Tâm cơ','tamco']].map(([l,k])=>[l,kitStatKnown0(f,k)?(k==='sung'?null:Math.round(f[k])):'chưa rõ'])):null,ov:document.documentElement.scrollWidth>innerWidth+1,
+   qq:(()=>{const b=document.querySelector('#kctmf .kctmf');const L=[dl.textContent,b&&b.getAttribute('aria-label'),b&&b.getAttribute('title'),b&&b.textContent].filter(x=>/\?\?\?/.test(x||''));return L.length?L.map(x=>String(x).slice(0,80)):null})(),
+   coll:(()=>{try{if(!f||typeof k61Table!=='function')return null;k61Table();const M=typeof K61MAP==='object'?K61MAP:{};const out=[];for(const v of k61Vars(f)){const k=M[v];if(k&&k!==kOf61(f)){const o=k61Ent(k);out.push({v,k,name:o&&o.name,kind:o&&k61Kind(o),role:o&&o.role,inAll:k61All().includes(f)})}}return out.length?out:null}catch(e){return String(e)}})()}});
  ok(!!d,`${seat} ${dev} ${phase}: tap → kit info panel`,d?undefined:await o.p.evaluate(()=>{const M=document.getElementById('modal');return{on:!!(COOPW&&COOPW.on),S:!!S,dead:S&&S.dead,Q:Q.length,q0:Q[0]&&(Q[0].t||''),hidden:M.hidden,cls:M.className,dlg:M.querySelector('.dlg')&&M.querySelector('.dlg').className,hh:window.__hhOpen||0,fz:!!document.getElementById('coopfz')}}));if(!d)return;
  ok(d.seal&&d.x,`${seat} ${dev} ${phase}: kit header seal + ✕`,{seal:d.seal,x:d.x});
  ok(!d.ov,`${seat} ${dev} ${phase}: no horizontal overflow`);
@@ -139,7 +144,9 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
   ok(Object.entries(d.kn).every(([l,v])=>v===null||String(v)===d.tiles[l]),`${seat} ${dev} stranger: stats follow the knowledge rule (unknown = «chưa rõ», what anyone sees = her number)`,{tiles:d.tiles,rule:d.kn});
   ok(d.figs.length===0||d.figs.every(s=>/unknown/.test(s)),`${seat} ${dev} stranger: grey silhouette only`,d.figs);
  }else{
-  ok(d.title===d.fname,`${seat} ${dev} met: title = her name`,[d.title,d.fname]);
+  ok(d.titleK&&d.title.endsWith(d.fname)&&!/\?\?\?/.test(d.title),`${seat} ${dev} met: title = HER kit name (rank + her name, .kname, data-k61skip; rv r2 A)`,[d.title,d.fname,d.titleK]);
+  ok(!d.qq,`${seat} ${dev} met: no «???» in the sheet nor in the icon's aria-label / title / hidden words (rv r2 A)`,d.qq);
+  if(d.coll)console.log(`   evidence ${seat}: her name words map to other records in the j61 name table`,JSON.stringify(d.coll));
   ok(d.rankUnit,`${seat} ${dev} met: kit rank unit in Danh vị`,d.rows['Danh vị']);
   const T={Sủng:'sung',Đức:'duc',Danh:'danh',Sắc:'sac',Tài:'tai','Tâm cơ':'tamco'};const bad=Object.entries(T).filter(([l,k])=>d.tiles[l]!=null&&d.tiles[l]!=='chưa rõ'&&l!=='Sủng'&&d.stats[k]!=null&&+d.tiles[l]!==Math.round(d.stats[k]));
   ok(Object.keys(d.tiles).length===6&&!bad.length,`${seat} ${dev} met: stat tiles = her real numbers (game state)`,{tiles:d.tiles,stats:d.stats});

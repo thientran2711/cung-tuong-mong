@@ -46,7 +46,11 @@ function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:
 function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||18}]}}
 function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?kitRows:(()=>"");const sec=[];
  const known=!!e&&met(e),nm=!!e&&named(e);
- const title=nm&&e.name?e.name:(typeof K61FR==="string"?K61FR:"Hảo hữu của ta");
+ /* rv r2 A: her name comes from HER entity through the kit name path (kitName = rank + name in the rank colours, owner 15/11 "phẩm và tên
+    người lúc nào cũng phải đi chung"; the same on both seats), never as a bare string the j61 DOM name mask re-reads (on a guest the same
+    words could map to another, unmet record → «Hàn lâm học sĩ ???»): wrapped in data-k61skip. Unmet = «Hảo hữu của ta» (already the mask). */
+ const nmK=x=>`<span data-k61skip="1">${typeof kitName==="function"?kitName(x,{cap:true}):`${es(rankWord(x))} ${es(x.name)}`}</span>`;
+ const title=nm&&e.name?nmK(e):(typeof K61FR==="string"?K61FR:"Hảo hữu của ta");
  if(!e){/* no entry: she lives at her father's house (tiểu thư road, before the tuyển tú) or her life has ended */
   const home=!!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead),dead=!!(P&&(P.dead||(P.S&&P.S.dead)));
   sec.push({h:"Thân phận",rows:[["Nơi ở",home?"ở phủ nhà, chờ kỳ tuyển tú":dead?"đã khuất":UNK,dead?"r":"n"]]});
@@ -59,7 +63,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
   if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
   return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
  /* consort road: rank + name (kit rank unit), her palace, stats, health, household, what she does now */
- sec.push({h:"Thân phận",rows:[["Danh vị",nm?(typeof kitName==="function"?kitName(e,{cap:true}):`${es(rankWord(e))} ${es(e.name)}`):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
+ sec.push({h:"Thân phận",rows:[["Danh vị",nm?nmK(e):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
  sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
  const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;

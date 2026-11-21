@@ -294,7 +294,9 @@ function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend
    under the panel, so the «!» box and the notice chip keep clear of that spot in every state. The «!» box yields: it is not an obstacle of the
    slot (it re-checks its own spot against the bar, kitNoticeBox, after every move of the icon). */
 const PADH=28;
-let SL=null,SLc=0,SLp="",FU=null,FUp="";const SLM={};/* the slot of each viewport, kept: back to a viewport = the same spot */
+let SL=null,SLc=0,SLp="",FU=null,FUp="";const SLK="ctmHhSlot";let SLM={};try{SLM=JSON.parse(localStorage.getItem(SLK)||"{}")||{}}catch(e){SLM={}}
+/* the slot of each viewport, kept (also across her own page reloads, rv r2 N1: a UI preference, not the save): back to a viewport = the same spot */
+const slSave=()=>{try{localStorage.setItem(SLK,JSON.stringify(SLM))}catch(e){}};
 function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R.push(r)};const vis=e=>e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden";
  if(!words)for(const e of hud.children){if(e===FE||e.id==="kntbox"||!vis(e))continue;add(e.getBoundingClientRect())}
  const tw=document.createTreeWalker(hud,NodeFilter.SHOW_TEXT),rg=document.createRange();let n;
@@ -305,16 +307,18 @@ function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R
 function slotSize(){const keep=FE.innerHTML;FE.style.minWidth="";let w=0,h=0;
  for(const o of [{st:"hold",clock:"pz",left:599000},{st:"ready",clock:"up"},{st:"work",clock:"run",left:599000}]){FE.innerHTML=kitCoopFriend(o);const r=FE.getBoundingClientRect();w=Math.max(w,r.width);h=Math.max(h,r.height)}
  FE.innerHTML=keep;const s=FE.getBoundingClientRect().width/(FE.offsetWidth||1)||1;FE.style.minWidth=Math.ceil(w/s)+"px";return{w,h}}
-function slotFind(hud){const z=slotSize(),w=z.w,h=z.h;if(hud.classList.contains("kctm-pad"))hud.classList.remove("kctm-pad");
- const H1=hud.getBoundingClientRect(),R=hudObs(hud,false),R0=Math.min(innerWidth-6,H1.right-4);
+/* the scan never toggles the bar's strip: with the strip on, it looks only above it (a retry from the strip moves nothing until a real slot exists) */
+function slotFind(hud){const z=slotSize(),w=z.w,h=z.h,padOn=hud.classList.contains("kctm-pad");
+ const H1=hud.getBoundingClientRect(),sc=H1.height/(hud.offsetHeight||H1.height)||1,B1=H1.bottom-(padOn?PADH*sc:0),R=hudObs(hud,false),R0=Math.min(innerWidth-6,H1.right-4);
  const free=(x,y)=>!R.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+2&&y+h>q.top-2);
- for(let y=H1.top+2;y+h<=H1.bottom-2;y+=2)for(let x=R0-w;x>=H1.left+2;x-=2)if(free(x,y))return{k:innerWidth+"x"+innerHeight,dx:x-H1.left,dy:y-H1.top,pad:false};
+ for(let y=H1.top+2;y+h<=B1-2;y+=2)for(let x=R0-w;x>=H1.left+2;x-=2)if(free(x,y)){if(padOn)hud.classList.remove("kctm-pad");return{k:innerWidth+"x"+innerHeight,dx:x-H1.left,dy:y-H1.top,pad:false}}
+ if(SL&&SL.pad&&padOn&&SL.k===innerWidth+"x"+innerHeight)return SL;
  hud.classList.add("kctm-pad");try{if(typeof k3Shell==="function")k3Shell()}catch(e){}const H2=hud.getBoundingClientRect();
  return{k:innerWidth+"x"+innerHeight,dx:Math.max(4,R0-w-H2.left),dy:H2.height-PADH+(PADH-h)/2-2,pad:true}}
 function cal(el){el.style.left="0px";el.style.top="0px";const a=el.getBoundingClientRect();el.style.left="100px";el.style.top="100px";const b=el.getBoundingClientRect();
  return{A:a.left,B:a.top,sx:(b.left-a.left)/100||1,sy:(b.top-a.top)/100||1}}
 function upCopy(up){if(!up){if(FU&&!FU.hidden)FU.hidden=true;return}
- if(!FU){FU=document.createElement("div");FU.id="kctmfu";FU.className="kup";FU.setAttribute("aria-hidden","true");document.body.appendChild(FU)}
+ if(!FU){FU=document.createElement("div");FU.id="kctmfu";FU.className="kup";FU.setAttribute("aria-hidden","true");FU.setAttribute("data-k61skip","1");document.body.appendChild(FU)}
  const h=FE.innerHTML;if(FU.__h!==h){FU.innerHTML=h;FU.__h=h;FU.style.minWidth=FE.style.minWidth}if(FU.hidden)FU.hidden=false;
  const R=FE.getBoundingClientRect(),key=[R.left,R.top].map(Math.round).join();if(key===FUp&&FU.style.left)return;FUp=key;const c=cal(FU);FU.style.left=((R.left-c.A)/c.sx).toFixed(1)+"px";FU.style.top=((R.top-c.B)/c.sy).toFixed(1)+"px"}
 function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!hud.getClientRects().length){upCopy(false);return}
@@ -327,8 +331,10 @@ function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!
  if(!SL||SL.k!==k){SL=SLM[k]||null;moved=true}let re=!SL;
  if(SL&&SL.pad!==hud.classList.contains("kctm-pad"))re=true;
  /* a word / picture of the bar really under the icon (checked every 1.5 s, not on every tick) → find the slot again; otherwise it stays */
- if(!re&&!SL.pad&&t0-SLc>1500){SLc=t0;const F=FE.getBoundingClientRect();re=hudObs(hud,true).some(q=>F.left<q.right&&F.right>q.left&&F.top<q.bottom&&F.bottom>q.top)}
- if(re){SL=SLM[k]=slotFind(hud);SLc=t0;moved=true}
+ /* never while the bar may still be re-laying itself out after a resize (a mid-layout check sent the icon to the strip on iPad, rv test r4) */
+ if(!re&&t0-SLc>1500&&t0-RZ>1200){SLc=t0;if(SL.pad)re=true;/* in the strip: look again for a real slot (nothing moves until one exists) */
+  else{const F=FE.getBoundingClientRect();re=hudObs(hud,true).some(q=>F.left<q.right&&F.right>q.left&&F.top<q.bottom&&F.bottom>q.top)}}
+ if(re){const n=slotFind(hud);if(n!==SL){SL=SLM[k]=n;if(!n.pad)slSave();moved=true}SLc=t0}
  const H=hud.getBoundingClientRect(),key=[SL.dx,SL.dy,H.left,H.top].map(Math.round).join();
  if(moved||key!==SLp){SLp=key;const c=cal(FE);FE.style.left=((H.left+SL.dx-c.A)/c.sx).toFixed(1)+"px";FE.style.top=((H.top+SL.dy-c.B)/c.sy).toFixed(1)+"px";
   try{if(typeof kitNoticeBox==="function")kitNoticeBox()}catch(e){}}
@@ -336,7 +342,7 @@ function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!
 function unpad(){const hud=document.querySelector("header.hud.kctm-pad");if(hud)hud.classList.remove("kctm-pad")}
 function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)){if(FE&&!FE.hidden)FE.hidden=true;if(FU&&!FU.hidden)FU.hidden=true;return}
  const o=frInfo();const h=kitCoopFriend(o);
- if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");(document.querySelector("header.hud")||document.body).appendChild(FE)}
+ if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");FE.setAttribute("data-k61skip","1");/* rv r2 A: her name (aria-label / title / hidden span) is set only once she is known by name (k61Named): the DOM name mask must not re-map it */(document.querySelector("header.hud")||document.body).appendChild(FE)}
  if(h!==lastF){FE.innerHTML=h;lastF=h}if(FE.hidden)FE.hidden=false;placeF();if(FP)FP.innerHTML=kitCoopFriendPanel(o)}
 function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}
  /* §69.2 overwrite 21/11: ONE panel = the «Hảo hữu» partner sheet (jhaohuu.js); the old status-only notice is only the fallback */

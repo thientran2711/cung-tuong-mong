@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d41876c9+","t":"2026-11-21T07:29Z","c":"hao-huu r2: report","b":"ff0d1f6cb6fd","h":[{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"},{"s":"d3f5ea28+","t":"2026-11-21T04:23Z","c":"Chức vị người: một kiểu chữ; tên nơi chốn để thường"},{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"},{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"}]};
+window.CTM_BI={"s":"dfd14ac7+","t":"2026-11-21T07:33Z","c":"hao-huu r2: report","b":"c77a82399cd7","h":[{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"},{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -53091,7 +53091,9 @@ function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend
    under the panel, so the «!» box and the notice chip keep clear of that spot in every state. The «!» box yields: it is not an obstacle of the
    slot (it re-checks its own spot against the bar, kitNoticeBox, after every move of the icon). */
 const PADH=28;
-let SL=null,SLc=0,SLp="",FU=null,FUp="";const SLM={};/* the slot of each viewport, kept: back to a viewport = the same spot */
+let SL=null,SLc=0,SLp="",FU=null,FUp="";const SLK="ctmHhSlot";let SLM={};try{SLM=JSON.parse(localStorage.getItem(SLK)||"{}")||{}}catch(e){SLM={}}
+/* the slot of each viewport, kept (also across her own page reloads, rv r2 N1: a UI preference, not the save): back to a viewport = the same spot */
+const slSave=()=>{try{localStorage.setItem(SLK,JSON.stringify(SLM))}catch(e){}};
 function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R.push(r)};const vis=e=>e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden";
  if(!words)for(const e of hud.children){if(e===FE||e.id==="kntbox"||!vis(e))continue;add(e.getBoundingClientRect())}
  const tw=document.createTreeWalker(hud,NodeFilter.SHOW_TEXT),rg=document.createRange();let n;
@@ -53102,16 +53104,18 @@ function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R
 function slotSize(){const keep=FE.innerHTML;FE.style.minWidth="";let w=0,h=0;
  for(const o of [{st:"hold",clock:"pz",left:599000},{st:"ready",clock:"up"},{st:"work",clock:"run",left:599000}]){FE.innerHTML=kitCoopFriend(o);const r=FE.getBoundingClientRect();w=Math.max(w,r.width);h=Math.max(h,r.height)}
  FE.innerHTML=keep;const s=FE.getBoundingClientRect().width/(FE.offsetWidth||1)||1;FE.style.minWidth=Math.ceil(w/s)+"px";return{w,h}}
-function slotFind(hud){const z=slotSize(),w=z.w,h=z.h;if(hud.classList.contains("kctm-pad"))hud.classList.remove("kctm-pad");
- const H1=hud.getBoundingClientRect(),R=hudObs(hud,false),R0=Math.min(innerWidth-6,H1.right-4);
+/* the scan never toggles the bar's strip: with the strip on, it looks only above it (a retry from the strip moves nothing until a real slot exists) */
+function slotFind(hud){const z=slotSize(),w=z.w,h=z.h,padOn=hud.classList.contains("kctm-pad");
+ const H1=hud.getBoundingClientRect(),sc=H1.height/(hud.offsetHeight||H1.height)||1,B1=H1.bottom-(padOn?PADH*sc:0),R=hudObs(hud,false),R0=Math.min(innerWidth-6,H1.right-4);
  const free=(x,y)=>!R.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+2&&y+h>q.top-2);
- for(let y=H1.top+2;y+h<=H1.bottom-2;y+=2)for(let x=R0-w;x>=H1.left+2;x-=2)if(free(x,y))return{k:innerWidth+"x"+innerHeight,dx:x-H1.left,dy:y-H1.top,pad:false};
+ for(let y=H1.top+2;y+h<=B1-2;y+=2)for(let x=R0-w;x>=H1.left+2;x-=2)if(free(x,y)){if(padOn)hud.classList.remove("kctm-pad");return{k:innerWidth+"x"+innerHeight,dx:x-H1.left,dy:y-H1.top,pad:false}}
+ if(SL&&SL.pad&&padOn&&SL.k===innerWidth+"x"+innerHeight)return SL;
  hud.classList.add("kctm-pad");try{if(typeof k3Shell==="function")k3Shell()}catch(e){}const H2=hud.getBoundingClientRect();
  return{k:innerWidth+"x"+innerHeight,dx:Math.max(4,R0-w-H2.left),dy:H2.height-PADH+(PADH-h)/2-2,pad:true}}
 function cal(el){el.style.left="0px";el.style.top="0px";const a=el.getBoundingClientRect();el.style.left="100px";el.style.top="100px";const b=el.getBoundingClientRect();
  return{A:a.left,B:a.top,sx:(b.left-a.left)/100||1,sy:(b.top-a.top)/100||1}}
 function upCopy(up){if(!up){if(FU&&!FU.hidden)FU.hidden=true;return}
- if(!FU){FU=document.createElement("div");FU.id="kctmfu";FU.className="kup";FU.setAttribute("aria-hidden","true");document.body.appendChild(FU)}
+ if(!FU){FU=document.createElement("div");FU.id="kctmfu";FU.className="kup";FU.setAttribute("aria-hidden","true");FU.setAttribute("data-k61skip","1");document.body.appendChild(FU)}
  const h=FE.innerHTML;if(FU.__h!==h){FU.innerHTML=h;FU.__h=h;FU.style.minWidth=FE.style.minWidth}if(FU.hidden)FU.hidden=false;
  const R=FE.getBoundingClientRect(),key=[R.left,R.top].map(Math.round).join();if(key===FUp&&FU.style.left)return;FUp=key;const c=cal(FU);FU.style.left=((R.left-c.A)/c.sx).toFixed(1)+"px";FU.style.top=((R.top-c.B)/c.sy).toFixed(1)+"px"}
 function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!hud.getClientRects().length){upCopy(false);return}
@@ -53124,8 +53128,10 @@ function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!
  if(!SL||SL.k!==k){SL=SLM[k]||null;moved=true}let re=!SL;
  if(SL&&SL.pad!==hud.classList.contains("kctm-pad"))re=true;
  /* a word / picture of the bar really under the icon (checked every 1.5 s, not on every tick) → find the slot again; otherwise it stays */
- if(!re&&!SL.pad&&t0-SLc>1500){SLc=t0;const F=FE.getBoundingClientRect();re=hudObs(hud,true).some(q=>F.left<q.right&&F.right>q.left&&F.top<q.bottom&&F.bottom>q.top)}
- if(re){SL=SLM[k]=slotFind(hud);SLc=t0;moved=true}
+ /* never while the bar may still be re-laying itself out after a resize (a mid-layout check sent the icon to the strip on iPad, rv test r4) */
+ if(!re&&t0-SLc>1500&&t0-RZ>1200){SLc=t0;if(SL.pad)re=true;/* in the strip: look again for a real slot (nothing moves until one exists) */
+  else{const F=FE.getBoundingClientRect();re=hudObs(hud,true).some(q=>F.left<q.right&&F.right>q.left&&F.top<q.bottom&&F.bottom>q.top)}}
+ if(re){const n=slotFind(hud);if(n!==SL){SL=SLM[k]=n;if(!n.pad)slSave();moved=true}SLc=t0}
  const H=hud.getBoundingClientRect(),key=[SL.dx,SL.dy,H.left,H.top].map(Math.round).join();
  if(moved||key!==SLp){SLp=key;const c=cal(FE);FE.style.left=((H.left+SL.dx-c.A)/c.sx).toFixed(1)+"px";FE.style.top=((H.top+SL.dy-c.B)/c.sy).toFixed(1)+"px";
   try{if(typeof kitNoticeBox==="function")kitNoticeBox()}catch(e){}}
@@ -53133,7 +53139,7 @@ function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!
 function unpad(){const hud=document.querySelector("header.hud.kctm-pad");if(hud)hud.classList.remove("kctm-pad")}
 function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)){if(FE&&!FE.hidden)FE.hidden=true;if(FU&&!FU.hidden)FU.hidden=true;return}
  const o=frInfo();const h=kitCoopFriend(o);
- if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");(document.querySelector("header.hud")||document.body).appendChild(FE)}
+ if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");FE.setAttribute("data-k61skip","1");/* rv r2 A: her name (aria-label / title / hidden span) is set only once she is known by name (k61Named): the DOM name mask must not re-map it */(document.querySelector("header.hud")||document.body).appendChild(FE)}
  if(h!==lastF){FE.innerHTML=h;lastF=h}if(FE.hidden)FE.hidden=false;placeF();if(FP)FP.innerHTML=kitCoopFriendPanel(o)}
 function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}
  /* §69.2 overwrite 21/11: ONE panel = the «Hảo hữu» partner sheet (jhaohuu.js); the old status-only notice is only the fallback */
@@ -63489,7 +63495,11 @@ function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:
 function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||18}]}}
 function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?kitRows:(()=>"");const sec=[];
  const known=!!e&&met(e),nm=!!e&&named(e);
- const title=nm&&e.name?e.name:(typeof K61FR==="string"?K61FR:"Hảo hữu của ta");
+ /* rv r2 A: her name comes from HER entity through the kit name path (kitName = rank + name in the rank colours, owner 15/11 "phẩm và tên
+    người lúc nào cũng phải đi chung"; the same on both seats), never as a bare string the j61 DOM name mask re-reads (on a guest the same
+    words could map to another, unmet record → «Hàn lâm học sĩ ???»): wrapped in data-k61skip. Unmet = «Hảo hữu của ta» (already the mask). */
+ const nmK=x=>`<span data-k61skip="1">${typeof kitName==="function"?kitName(x,{cap:true}):`${es(rankWord(x))} ${es(x.name)}`}</span>`;
+ const title=nm&&e.name?nmK(e):(typeof K61FR==="string"?K61FR:"Hảo hữu của ta");
  if(!e){/* no entry: she lives at her father's house (tiểu thư road, before the tuyển tú) or her life has ended */
   const home=!!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead),dead=!!(P&&(P.dead||(P.S&&P.S.dead)));
   sec.push({h:"Thân phận",rows:[["Nơi ở",home?"ở phủ nhà, chờ kỳ tuyển tú":dead?"đã khuất":UNK,dead?"r":"n"]]});
@@ -63502,7 +63512,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
   if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
   return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
  /* consort road: rank + name (kit rank unit), her palace, stats, health, household, what she does now */
- sec.push({h:"Thân phận",rows:[["Danh vị",nm?(typeof kitName==="function"?kitName(e,{cap:true}):`${es(rankWord(e))} ${es(e.name)}`):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
+ sec.push({h:"Thân phận",rows:[["Danh vị",nm?nmK(e):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
  sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
  const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;
@@ -88361,7 +88371,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ff0d1f6cb6fd";window.CTM_BUILD=BUILD;
+const BUILD="c77a82399cd7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
