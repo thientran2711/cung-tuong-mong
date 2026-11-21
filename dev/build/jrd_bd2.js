@@ -564,7 +564,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
   {n:"Không đáp",wx:"không lỡ lời",lx:"{v} đứng đó đến cuối",rt:"Ngươi nhìn theo sứ đoàn."}]},
  t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Mật Hồ Đạt.",o:[/*bd6b: the letter speaks of him alive or dead (both options fit either)*/
-  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin phụ vương che chở người ấy.”"},
+  {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin {pv} che chở người ấy.”"},
   {n:"Xin {pv} không quên ai đã hại chàng",f:"uy",wx:"{land} sẽ nhớ",lx:"thư ấy là mồi lửa",rt:"Ngươi viết, rồi đóng dấu bằng sáp đỏ."},
   {n:"Không nhắc đến chàng",f:"phan",wx:"thư nhà sạch",lx:"chuyện của chàng không ai kể",rt:"Thư nhà chỉ kể chuyện trong cung."}]},
  x1:{h:"Cổng thành lúc bình minh",w:"emp",t:"Bình minh. Sứ đoàn {land} qua cổng Tây. Hoàng thượng đứng cạnh ngươi trên lầu cổng, không nói gì, chờ xem ngươi làm gì.",o:[
