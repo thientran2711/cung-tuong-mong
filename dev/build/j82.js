@@ -540,6 +540,7 @@ const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 
 /* KIT §13.7.4 (mg-intro-2): everything long goes behind a kit TAP-WORD (kitTapWord, §73.2: dotted underline, a tap opens the small kit pop-up with the word as title).
    Owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào" a tap-word / «!». kgBang(html,title) = the heading words as the tap-word holding `html`;
    kgBangRows(head,all,shown,extra) = a kit heading (tap-word) holding ALL rows + the few essential rows shown. No private pop-up code here. */
+/* → kitNoteBang(text,title) after kit-ghichu-bang lands (keeper reply, owner mark #55: the round «!» may replace the tap-word then) */
 function kgBang(html,title){return html?kitTapWord(title||"Thông tin",html):String(title||"")}
 function kgBangRows(head,all,shown,extra){return `<h4 class="kpst">${kgBang(kg82Rows(all)+(extra||""),head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
 window.kgBang=kgBang;window.kgBangRows=kgBangRows;
