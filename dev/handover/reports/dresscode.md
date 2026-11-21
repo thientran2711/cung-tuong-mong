@@ -195,3 +195,19 @@ If a co-op scan PERSIST remains: look at its «ilg» chain and «last»; a lost 
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
+
+## r5 gates (E30d) — FOREMAN E #26→#28 · 21/11 ~12:25Z · branch review/dresscode-fix-r4 cabfcad8 · SẴN SÀNG KIỂM
+PRIORITY #1 CHECK ('dresscode|dcBorrow|Hội phối đồ'): OD 11 | main 15 | review/* dresscode-fix-r4 8d12e509 (E30c, continued) + jlost-kyngo (E42, compatible: kept kyLc shape) | claims E30 line (FOREMAN E). No new game code; replaces the «NOT DONE / NOT YET» rows of r5 (E30c).
+Commits: 27537307 merge LIVE fdabfb44 · ec77fd5c coop-dresscode-scan COOP_DBG guest trace (DBGT places per merge/log, DBGS push/splice/hair stacks; debug only) · cabfcad8 merge LIVE d2b97854 (assemble.py = main's list + jdc0 before j31 + jdc after jcloth; jbal2.js both appended blocks kept; index.html/sw.js rebuilt).
+| gate (on cabfcad8 unless noted) | result |
+|---|---|
+| dresscode.test / dresscode-loans / dresscode-ts-loan | ALL PASS / ALL PASS / ALL PASS |
+| one-core-guard | PASS (fails 0) |
+| dresscode-loan-scan 108 tuần ×3 | PASS · 1 FAIL = coverage only (Hội phối đồ loans 2 < 3 wanted that random run; objects 0 bad, 302 loans) · PASS |
+| coop-dresscode-scan 76 w COOP_DBG (27537307) ×4 | run 3: 88/88 · runs 1/2/4: guest-only dup/vanish of HER own pieces (not lent at that moment) → traced, PRE-EXISTING outside the loan code (below); loan pieces 0; clocks 0/76 differ; run 4 also 1 harness «#next enabled» wait |
+| coop-dresscode-scan COOP_SKEW=24 (cabfcad8) | 88/88 (0 persistent, 5 one-week transients, 16 in flight, clocks 0 differ) |
+| coop-e2e (ec77fd5c) | 92/92 |
+| role-parity.test ×2 (ec77fd5c) | ALL PASS ×2 |
+| quickcheck --runs 6 + old save (ec77fd5c) | PASS (core gates PASS, old save ok, perf new/live render 271/258 tab 495/507 buổi 1288/2081). Note: a sparse worktree without dev/art fails G4 mk-layer-scan («no dev/art/mkfit») — keep dev/art in the checkout for quickcheck |
+### PRE-EXISTING outside the loan code (→ E44, review/coop-famops, stacked on jlost-kyngo; FOREMAN E #26 ruling option 3)
+Stack (coop-dresscode-scan run 4, w71, guest): jcoopworld.js famApply ← resApply ← onRes (host player-act result) — (a) op «ret» (jcoopworld :476, host act k "plant" «Lén trả lại») pushes Object.assign({},c.e) of her open thất lạc case into her chest without checking the piece is already home → 2nd copy of her worn trâm; (b) op «rm» (famDiff :490): itemAt falls back to «any piece of that kind» → another trâm spliced out, nobody gets it («gone»). Also run 4: her đàn → thất lạc case (w35), case closed w47–49 with the piece nowhere. Family = co-op friend-act item ops × jlost cases (famDiff / famApply / b4Ops / RMHOW / loLose keep:1). Not in E42's diff (jil/jky/jlost only).
