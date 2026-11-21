@@ -119,7 +119,7 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
   for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
   if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
  else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
-  t=`Bệ hạ coi ngươi là người của Thái hậu (Sủng −${B.th.sung}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
+  t=`Bệ hạ coi ngươi là người của Thái hậu (${sgStat(-B.th.sung)}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
  else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
   t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
  }catch(e){console.error("promoCost",e)}return t}
@@ -145,7 +145,7 @@ function promoMonth(){let ev="";try{const B=BAL.psk;
   const Lp=L.slice();while(Lp.length&&!x){const T=npwPick(Lp,need);if(!T)break;Lp.splice(Lp.indexOf(T),1);try{x=A&&q72Make(T,A)}catch(e){x=null}}
   if(x){q72Offer(x,"");E.n--;E.at=wk()+B.th.errGap;if(E.n<=0)S.psErr=null}}
  const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(npcWhy("psStrike",{p:S},()=>roll(k.p))){/* npc-purpose G2: the grown Emperor strikes only when his favour for her is low enough to remember */k.n++;S.psStrike=null;
-  apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
+  apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: ${sgStat(-B.quyen.hitSung)}, Danh −${B.quyen.hitDanh}.`)}}
  }catch(e){console.error("promoMonth",e)}return ev}
 (function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
