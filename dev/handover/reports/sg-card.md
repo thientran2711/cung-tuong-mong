@@ -144,3 +144,35 @@ TODO (reviewer's list, same family law 4 + 11):
    pass to the scan (capture log()/Q result text after go(), compare her Sủng with the measured delta) + before/after table.
 3. j7.js:32 guardrumour: typed sung:2 (thành) / danh:-6 (hỏng) applied but not on the card → BAL.eff.j7 keys + shown on the card.
 Re-review gate: scan + quickcheck + coop-e2e + Fold 755x1000 / iPad 1180x820 shots (scratch / CDN img/_review/sg-card, never git) of 2–3 fixed cards.
+
+## ROLLOVER HANDOVER r2 (SG-CARD r2 → successor) — 21/11 ~12:20Z · NOT ready for review
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* review/kit-opt-sg 64b61d37 (to merge, see below) | archive 0
+Branch review/sg-card @ 587ec407 (base review/sg-card-rv 7786935c). Worktree used: /home/user/wt/sgc2. Rollover line reached; the runtime scan
+was NOT run: the auto-mode classifier refused starting a local `python3 -m http.server` for it (twice) — successor: serve the build the way
+quickcheck.sh / coop-e2e do (they start their own server), or ask the foreman for the permission.
+DONE (3 commits a0966955, 477e4cad, 587ec407; node --check clean on every touched file; site build OK, index/sw NOT committed — rebuild at land):
+- j1 core: sgTxt scales BOTH ends of a range («Sủng +2 đến +4», «..», «–»); new sgOf(p,v) (hers → sg, NPC raw), sgRange(a,b), sgFix(v)
+  (her Sủng applied as is, marked), sgRule/sgRuleArr/sgRuleObj ({sg:…}/{sgRaw:…}/{n:…} tokens read from BAL when a rule text is read).
+- Item 1 ranges: jgift kmEmpLine (sgRange; walk/hầu numbers → BAL.empDay walkSung/walkGhen/kmSung/kmArt/kmArtDiv/kmAn), jts tsSummonMe
+  (sgRange, «..» → «đến», tsSummonGain → BAL.cut.summonSung/summonAn), j2 stealX (sgRange).
+- Item 2 result/log lines → sgStat / sgOf: j8 (night log 343, steal 167, gift 262, death 91, rival 361, birth 386, festival 489 + BAL festSung/
+  festDanh, framed → BAL framedSung/framedDanh), j24 tea, j25, j4 ×7 month events, j71 contest ×2 (+ BAL winSung/winDanh, gain text), j92 ×7,
+  j97, jact ×2, jgift ×6, jpet 95/240/decl, jroute ×3, jdh2 ×2, jexam ×2, jts onDone, j30, j34 (log), j53/j54 chips + rule texts (KTG/H54G),
+  j54 nói giúp (BAL noiSung/noiTinh), j55 ×2, j67 ×3, j70/jtsb hủy dung, j78, jtruth, jemoact ×5, jface, jlost, jvisit, jrd_cnv ×2, jky, jmen
+  (BAL unhappySung), jdis ×3, jcycle ×2, jht, j79/j8 night cards, j83 hint (from IT gv).
+- Item 3: j7:32 guardrumour → BAL.eff.j7.sungGuardOk/danhGuardFail, both shown on the card.
+- Foreman: rule texts j85 arts tiers ({sg:deck.*.w.sung}), j23/j1 thơ ({sgRaw:tho.*}, BAL.tho, j3:113 reads it, still applied raw), pets use
+  ({sungN} getter) + jpetcare, jts hoa đăng / phối đồ typed → BAL.eff.jts den*/dress*.
+- Scan dev/test/sg-card-scan.js extended: range + helper unit cases; result/log pass in the walk (logs + Q written by go() vs measured);
+  DIRECT pass (empTeaCard, nightFx, kmEmpAct ky/walk, visAfter, festival × 4 traits); STATIC classifier (NPC/VALUE/CARD/OK, CHECK/RANGE fail).
+  Static before (7786935c) CHECK 98 + RANGE 2 → after 0 (CARD 62 · VALUE 24 · NPC 7 · OK 23). Standalone static runner idea: eval the ST block.
+TODO (successor):
+1. RUN the runtime scan on the build (and on 7786935c for the before table); fix any LOG/DIR rows; the walk's log pass is new code — sanity-check it.
+2. NEW ORDER (D #15 from MAIN 92, 10:44Z): MERGE review/kit-opt-sg 64b61d37 (kit keeper, option-card literal Sủng, joptsg.js + kit-opt-sg.js test).
+   Reviewer pre-flag: joptsg rewrites o.x with a PLAIN space → kitParse → sgTxt scales again (double: 4→5→7) and is a 2nd copy of the rule →
+   keep ONE rewrite (sgTxt): drop joptsg's rewrite or make it call sgTxt; fold its test cases into sg-card-scan (unit: sgTxt(optLine(x)) scaled once).
+3. j34.js:32 card «Danh -6, Sủng -8» typed → BAL.eff.j34.danhSabotage/sungSabotage (the log line is already sgOf); plus the whole-family scan of
+   literal numbers in option text vs BAL keys (MAIN 92 order) — extend the static pass.
+4. Gates: scan, quickcheck, old-save load, coop-e2e, LIVE-revert audit (merge newest origin/main; deepen first), Fold 755x1000 + iPad 1180x820 shots
+   of 2–3 fixed cards with a visible number (scratch / CDN img/_review/sg-card, never git), before/after table here, then «SẴN SÀNG KIỂM <sha>» r2.
+Report to Foreman D #16 session_01964izEETBrWc48AZ1jsSvM + reviewer session_01964izEETgRxuNCdo5Vn7U2.
