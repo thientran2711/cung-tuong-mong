@@ -38,3 +38,10 @@ NOTES for the Foreman:
 No GEN1 release sent (not asked for job 3).
 - 04:12Z update: the Foreman ruled t5 COMOIk FAIL (owner: the gold girdle is not OK); a new t5 will come from DESIGN22.
 - Released to GEN1: t3 dapung4 v10, t4 COMOIl, t6 COMOIm, t7 v8l, t8 v10j = 5 × 55 = 275 cr. Re-checked: no conflict markers, all ≤ 10 000 ch, t3 tp3 PASS + keep PASS.
+
+## Job 3b — DESIGN22 8dc7098 t5 COMOIl (owner L1668: Phi wants the ORIGINAL first girdle) — PASS (04:16Z)
+- The only diff vs COMOIk: "a broad gold brocade girdle" → "an embroidered silk sash" (tied flat at the CENTRE front, NO bow). I verified the words against the original source, rank8-s62/s62_t4.txt ("an embroidered silk sash with hanging jade belt pendants"). There is no gold/yellow girdle word left.
+- The held-in clause is still there. 9993 ch, no conflict markers.
+- check_store tp5 a22 PASS. keep --sidecar PASS (allow line owner L1668).
+- Store mode: Outfit [0.73] + "PLUS ONE" [0.85]. That sentence holds the girdle words and was changed by the owner, so this is accepted.
+- Released to GEN1: t5 draft, 55 cr, joining the job 3 set (now 6 × 55 = 330 cr, as the Foreman first ordered).
