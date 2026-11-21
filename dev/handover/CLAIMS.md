@@ -765,3 +765,4 @@ bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip 
 | REVIEW mg-craft-r2 Thêu delta (opus BIG) of 4847775a | review/mg-craft-r2-r2 | B | session_01N1tNP35AHV1nhE7cRkhbFQ | RUNNING | 21/11 05:02Z |
 | kit-act-grid KIT KEEPER (sonnet; #24 act cards one form one size per device) | review/kit-act-grid; reports/kit-act-grid.md | MAIN CHÍNH 88 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 39cc5bc7 (quickcheck PASS, coop-e2e 92/92) | 21/11 |
 | kit-ghichu-sections KIT KEEPER (sonnet; Ghi chú SECTION → «!», kitNoteBang title, popup layer 9995) | review/kit-ghichu-sections | MAIN CHÍNH 88 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM b6261240 r2 (waits rv) | 21/11 |
+| REVIEW palace-life-gaps r2 (opus BIG) of 0ef1b097 | review/palace-life-gaps-r2-r1 | B | session_01N1tNP5VDCiGrxWWA9cibrc | RUNNING | 21/11 05:06Z |
