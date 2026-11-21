@@ -7,7 +7,9 @@ depth 3 (limit 8) · START_CTX ~3 % · 0 gens (A53: no Magnific) · base d1c7e56
 - Bậc 6–8: bỏ hết chữ "áo choàng" (cape). Quý phi mùa gốc/xuân/hạ/đông: "2 lớp áo choàng vai" đổi tên thành "vân kiên hai tầng", giữ nguyên hình dáng/kích cỡ.
 - Thu Quý phi (t6): máy quay lại đúng lời đã duyệt L1893 (tranh eIPcGThdqL), bỏ lời thử L2088.
 - Thu t6–t8: vải = y chang vải thu t1–t5 (lụa mỏng nhẹ + sa, thướt tha); bỏ "gấm dày / HEAVY / ceremonial". Mùa khác không đổi.
-- Không đụng: tư thế/góc (A54), eo, ngực, cổng độ dài, Tần t4 CAPELET, t1–t5.
+- Thu MỌI bậc t1–t8: không còn chữ "gấm/brocade" (t3 đai lụa, t5 Phi "áo lụa nhiều lớp", "cổ tay lụa", "đai lụa vàng").
+- Triều phục: câu vải S28 = gấm NHẸ NHẤT (mỏng, mềm, lì, không dày/cứng/nặng). Bộ lời triều r27 (chưa vẽ).
+- Không đụng: tư thế/góc (A54), eo, ngực, cổng độ dài, Tần t4 CAPELET. Ghi chú H14/G73 chỉ đọc, chưa đưa vào máy (A55).
 
 ## Jobs (ROOT-B3 GO 16:37Z, owner L2119; + items 4/5)
 JOB 0–4 of the first brief (B27 Phi fabric all seasons, LEN warn, …) were CANCELLED by ROOT-B3 (owner L2116, A55); nothing of them was committed.
@@ -17,6 +19,9 @@ The GO items done here:
 3. t6–t8 no 'cape' garment word (L2119); t6 non-thu capes renamed to the TWO-TIER cloud collar (ROOT-B3 answer (a)).
 4. thu t6 QP back to the APPROVED L1893 words + its own refs (ROOT-B3 item 4).
 5. thu t6–t8 fabric = the t1–t5 thu fabric sentence (owner L2122 CHỐT, rule B32; ROOT-B3 item 5).
+6. triều phục S28 = the lightest-gấm sentence (owner L2122, ROOT-B3 item 6).
+7. thu thường phục t1–t8: no 'brocade' word → silk (owner L2122, ROOT-B3 item 7).
+Push 1 = 29f7d431 (items 1–5); push 2 = items 6–7 + tables.
 
 ## What changed (ONE copy in master_common, used by build_all + check_store)
 | item | before | after | where |
@@ -35,6 +40,11 @@ The GO items done here:
 | thu t6 phi bạch | ', matching the weight of her brocade' | dropped (no brocade left; owner L1847 'slightly THICKER' words kept) | b32_swaps |
 | builder | — | build_all.season_post + build(): l2119_post (all seasons, t6–t8); season_post thu: b32_post | build_all |
 | gate | — | check_store store gate: the season store text is put back to the old words (new_words_unswap) for the HQP slot regex, then read as the new words (b32_store_swap, l2119_store_swap); master check: thu t6–t8 with M06 in the brocade slot = low-rank fabric rule (B32 WARN note, no B12 BROCADE demand); S07 brocade sentence waived for thu B32 | check_store |
+| thu t3 (all p) | 'a wide stiff <sec> brocade girdle' (G15) | 'a wide stiff <sec> silk girdle' (G15 gate template read the same way for thu) | b32_swaps |
+| thu t5 Phi | 'a layered silk brocade court robe' · 'deep brocade cuffs' · 'a broad gold brocade girdle' | 'a layered silk court robe' · 'deep silk cuffs' · 'a broad gold silk girdle' | b32_swaps |
+| triều phục S28 | 'FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as brocade flows, the same brocade on every rank, never thin, limp or flimsy.' | 'FABRIC OF THIS COURT ROBE: the robe and sleeves are the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape, the same on every rank.' | master_common.TRIEU_GAM; check_store S28 text + proof → owner-copy/trieu/r27/t3_c06_RAN.txt; trieu6–8 brocade slot accepts it (b29_alts) |
+| triều set | r26 (S28 old) | r27 = r26 word for word + S28 swap (make_r27.py, .keep sidecars). r26/r27 both carry OLD faults the gate now finds (NOEAR, M01, G57 …) — never a live prompt set; no triều builder in build_all | owner-copy/trieu/r27 |
+| rule B32 | owner text | + WIRED note (thu t1–t8, S28 light gấm) via rule.py set | ART_RULES + _HISTORY |
 | rule | G37 'one tier … HH a little STIFFER' | G37 rewritten via rule.py set (quotes L2105 + L2119; L1543 'stiffer' superseded; t6 two-tier L1847/L2088, t8 two-tier L2099, t7 one tier) | ART_RULES + _HISTORY |
 
 ## LUẬT SỬA CẢ NHÓM — scan (dev/handover/reports/BUILDFIX5/scan.py, 112 persons × t6–t8 × root+4 seasons) — cells with the word
@@ -44,10 +54,11 @@ SCAN_TABLE
 SWEEP_TABLE
 
 ## Not done / for ROOT-B3
-- TRIỀU PHỤC light gấm (L2122 'chỉ triều phục dùng gấm, gấm nhẹ'): a triều builder EXISTS (dev/art/t8-prompt-B/build.py, scopes trieu6–8) and the approved registry sentence S28 says 'rich silk BROCADE (gấm) … never thin, limp or flimsy'. Changing S28 to the lightest gấm = changing an approved sentence → NOT done; needs your/owner yes (BUILDFIX4's short form: 'FABRIC: the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape.').
-- thu t5 Phi outfit noun still says 'a layered silk brocade court robe' (approved L2050 words; t1–t5 not touched by brief).
+- Triều phục: S28 done (item 6). The old triều prompt sets (r19…r26) fail many newer gates (NOEAR, M01, G57); a real triều rebuild is a separate job.
+- t8-prompt-B/build.py old STORE outfits (non-thu seasons) still say 'silk brocade court robe' / 'HEAVY silk brocade robe' — other seasons unchanged by order.
+- NOTE ONLY (A55, not built): H14 inner-robe embroidery ladder (L2131), G73 natural chest embroidery (L2133) wait for the owner's OK on M2133-01..03.
 - G63 says the thu QP L1893 prompt is frozen; the builder now uses its words with the L2119 (no cape) + B32 (L2122 fabric) swaps on top — later owner orders.
 - thu t6 keeps the NECK bracket (ROOT-B2 family fix, not an L2088 word) and colour_t6 ('any cape' → 'cloud collar', = L2119).
 - LEN: still a FAIL in check_store (LEN job cancelled, A55). The thu t7/t8 cells over 10 000 are listed in after.json; the M06 sentence is ~180 chars longer than the brocade line.
-Self-tests: check_store --self = the old 3 PROOF MISMATCH only (S12 S14 S19); person_gate --self PASS; keep_check --all 1054 PASS.
-Tools: dev/handover/reports/BUILDFIX5/gsweep.py (env RANKS/SEASONS), scan.py, dump.py; before.json / after.json, scan_before/after.json.
+Self-tests: check_store --self = the old 3 PROOF MISMATCH only (S12 S14 S19); person_gate --self PASS; keep_check --all 1062 PASS (+8 r27).
+Tools: dev/handover/reports/BUILDFIX5/gsweep.py (env RANKS/SEASONS), scan.py, brscan.py (brocade phrases per season), dump.py; before.json / after.json, scan_before/after.json.

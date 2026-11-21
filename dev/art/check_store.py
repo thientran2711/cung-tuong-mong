@@ -407,15 +407,15 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'store': False},
  {'id': 'S28',
   'title': 'TRIỀU PHỤC brocade (same in all 8 ranks)',
-  'text': 'FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as brocade flows, the same brocade on every rank, never thin, limp or flimsy.',
+  'text': 'FABRIC OF THIS COURT ROBE: the robe and sleeves are the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape, the same on every rank.',   # BUILDFIX5: owner L2122 lightest gấm (= master_common.TRIEU_GAM; old words = TRIEU_GAM_OLD)
   'scope': 'trieu1-8',
   'confirm': '',
   'ages': '',
-  'luot': '444 (H2)',
-  'source': 'dev/art/owner-copy/trieu (r17+)',
-  'proof': 'dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt',
+  'luot': '444 (H2); L2122 (lightest gấm, BUILDFIX5)',
+  'source': 'dev/art/owner-copy/trieu (r17+; r27 = L2122 light gấm)',
+  'proof': 'dev/art/owner-copy/trieu/r27/t3_c06_RAN.txt',
   'picture': 'triều phục c06 r21 (Lượt 492: t4, t6, t7, t8 OK; t4 cut u5W4dPuQLD, t6 cut N2q8sOD6D9) · https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r19/c06_sheet21.jpg',
-  'vn': 'Triều phục: áo và tay bằng GẤM dệt hoa, rủ như gấm, cùng một câu gấm ở cả 8 bậc.',
+  'vn': 'Triều phục: áo và tay bằng GẤM NHẸ NHẤT, mỏng, mềm, mặt lì, không dày/cứng/nặng, rủ thướt tha, cùng một câu ở cả 8 bậc (owner L2122).',
   'store': False},
  {'id': 'S29',
   'title': 'TRIỀU PHỤC sleeves to the ankles (t1-t6)',
@@ -809,7 +809,8 @@ def store_check(pf, prompt, args):
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
         _age='a36' if _w25 else (args[args.index('--age')+1] if '--age' in args else None)   # SEASON đông: t3 winter = G15 option B with the a36 crossed collar (G21/G25)
-        _g15=g15_t3_words(_age); _g15=winter_g28.fabric_form(_g15) if winter_g28.is_winter(prompt) else _g15   # SEASON đông: G28 opaque shawl inside the t3 words
+        _g15=g15_t3_words(_age); _g15=winter_g28.fabric_form(_g15) if winter_g28.is_winter(prompt) else _g15
+        if " brocade girdle" not in prompt and " silk girdle" in prompt and "WINTER:" not in prompt: _g15=master_common.b32_post(_g15,3)[0]   # BUILDFIX5 B32 (owner L2122): thu t3 girdle = silk   # SEASON đông: G28 opaque shawl inside the t3 words
         rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]

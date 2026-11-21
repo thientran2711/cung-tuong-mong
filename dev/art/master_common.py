@@ -308,6 +308,12 @@ def l2119_post(text, rank):
     return text, notes
 
 
+# TRIỀU PHỤC LIGHT GẤM (owner L2122 CHỐT verbatim: 'Chỉ có triều phục là mới dùng gấm thôi, là dùng gấm nhẹ thôi.'; ROOT-B3 item 6, BUILDFIX5): S28 = this sentence
+# (BUILDFIX4's short light-gấm words, old 'rich … never thin, limp or flimsy' clash dropped). Used by check_store S28 + owner-copy/trieu/r27/make_r27.py.
+TRIEU_GAM_OLD = "FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as brocade flows, the same brocade on every rank, never thin, limp or flimsy."
+TRIEU_GAM = "FABRIC OF THIS COURT ROBE: the robe and sleeves are the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape, the same on every rank."
+
+
 # B32 THU FABRIC ONE FOR ALL RANKS (owner L2122 CHỐT verbatim: 'mùa thu giữ cái loại vải y chang như là từ cái bậc đáp ứng trở lên á, là dùng vải gì là lên tới
 # hoàng hậu Quý Phi, dùng y chang cái vải đó cho tao. Chỉ có triều phục là mới dùng gấm thôi, là dùng gấm nhẹ thôi.'; ROOT-B3 item 5, BUILDFIX5):
 # THU thường phục t6-t8 = EXACTLY the t1-t5 thu fabric sentence (master M06) in the BROCADE slot + outfit noun 'robe of thin, light, flowing <colour> silk'.
@@ -318,15 +324,19 @@ def b32_swaps():
             ("a HEAVY silk brocade robe in SATURATED ", "a robe of thin, light, flowing SATURATED ", (6,)),
             ("a near-empress ceremonial robe of ", "a near-empress robe of thin, light, flowing ", (7,)),
             ("imperial phoenix ceremonial robe of ", "imperial phoenix robe of thin, light, flowing ", (8,)),
-            (", matching the weight of her brocade", "", (6,))]
+            (", matching the weight of her brocade", "", (6,)),
+            # ROOT-B3 item 7 (owner L2122 'y chang cái vải đó'): thu thường phục ALL ranks, no 'brocade' word -> silk
+            (" brocade girdle", " silk girdle", (3, 5)),                                  # t3 G15 'a wide stiff <sec> brocade girdle', t5 'a broad gold brocade girdle'
+            ("a layered silk brocade court robe", "a layered silk court robe", (5,)),       # t5 Phi
+            ("deep brocade cuffs", "deep silk cuffs", (5,))]
 
 
 def b32_post(text, rank):
-    """builder, season THU only (caller checks): t6-t8 brocade fabric + outfit noun -> the t1-t5 thu fabric words. -> (text, notes)."""
+    """builder, season THU only (caller checks): t6-t8 brocade fabric + outfit noun -> the t1-t5 thu fabric words; t1-t8 no 'brocade' word. -> (text, notes)."""
     notes = []
-    if not (isinstance(rank, int) and 6 <= rank <= 8): return text, notes
+    if not (isinstance(rank, int) and 1 <= rank <= 8): return text, notes
     for old, new, rr in b32_swaps():
-        if rank in rr and old in text: text = text.replace(old, new, 1); notes.append("B32 thu fabric " + (new or "drop")[:24])
+        if rank in rr and old in text: text = text.replace(old, new); notes.append("B32 thu fabric " + (new or "drop")[:24])
     return text, notes
 
 
@@ -360,6 +370,7 @@ def l2119_store_swap(store, prompt):
 
 def b29_alts(scope, high=False, doan=False, winter=False):
     """B29: the alternative fabric sentences accepted for this scope (empty = only the old slot sentence)."""
+    if high and str(scope).startswith("trieu"): return [B29_C_GAM, TRIEU_GAM]   # BUILDFIX5 owner L2122: triều phục t6-t8 = the lightest-gấm S28 sentence in the brocade slot
     if high: return [B29_C_GAM]
     if doan: return [] if winter else [B29_B_LIGHT]
     if scope in B29_A_SCOPES: return [B29_A_HEAVY] + ([] if winter else [B29_A_LIGHT])
