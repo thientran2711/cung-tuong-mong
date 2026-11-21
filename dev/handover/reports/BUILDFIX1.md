@@ -54,3 +54,13 @@ Tools: dev/handover/reports/BUILDFIX1/sweep.py (in-process, 4 cores ~15 min) + t
 
 ## HANDOVER (coordinator opens the successor)
 Left: (1) builder seasons xuân/hạ/thu (only root + đông exist; AUDIT1 row 1); (2) LEN a51/a65 (owner decision on cuts); (3) X08 m13 'PHOENIX eyes', X11 m43 teeth face words (person slot, owner/foreman call); (4) AUDIT1: 12 F20 cells hair not lighter than embroidery, NOVASE id 'F19' clash in check_store, 38 drawable persons without an F20 row; (5) ROOT's new items not in this brief: t7/t8 phoenix chest embroidery, F21 birds t4–t6, items_per_person_L2053, G72 own angle/pose, Tần t4 L2041 collar, person-gate a22 gap. (6) owner should see one sample per rank before mass (A1/A2) — the t7/t8 one-robe words and F20 sentence are new in the builder.
+
+## Late orders (15 messages read only after the push, 11:17Z) — NOT done, for BUILDFIX2
+- t6 keeps its chest pearl strands (owner L2035): builder t6 untouched by me ✓ (G70 only t7/t8).
+- Tần t4 capelet scalloped edge kept (L2038) + L2041/L2050 locked t4 collar/net words (THUROOT1 msg, files thu_comoi/s6x_t4_THU_L2041.txt); builder still says '(not cloud-shaped, scalloped or pointed)' and 'a crossed collar' → replace with the 4 L2041 phrases; capelet lower edge pending L2051 (THUROOT1 successor).
+- G69 widened (L2049 → L2054): chest-centre embroidery every rank t1–t8 (t1–t6 own flower growing by rank, t7/t8 small phoenix), rule text + check_store G69 t1–t8. Builder has it at t1 only.
+- Seasons xuân/hạ/thu + live palette (root stale 50/74, đông 23/74, m14 swapped) — AUDIT1 row 1.
+- Per-person items: items_per_person_L2053_DRAFT.json @93a8585f read in _e6_picks (ITEMS1 instructions); G72 own angle/pose; person_gate a22 fallback (+ self-test).
+- F21 season birds t4–t6 (face-common/season_birds_L2040.json); flower_colours json re-made by FACEPAGE1 7ab2fdb60 (my builder reads the file live, so it uses the new hexes).
+- make_thu_s63_65 generalise to 90 persons (palette names exact, own item/angle); NOVASE id 'F19' clash.
+- L2060 test: after the fix, build thu t1–t5 for one undrawn person straight from the builder (needs the thu season first), gate + --batch + keep_check, send paths to ROOT + VE12.
