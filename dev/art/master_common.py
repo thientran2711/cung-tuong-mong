@@ -271,6 +271,10 @@ OUTER_WRAP = ("the outer robe is a WRAP robe HELD IN by the sash: its front edge
 # (build_all.g45_post, after the length fit; never for maids, G43). check_store G45 fails cloth-over-waist words. POSEFIX1.
 JADE_CLEAR = "the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it"
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
+# B29 maids (owner L1764 test + L1775 "matte silk crepe (lụa tơ tằm dệt nhám) approved for all maids", via Foreman C #21/#22; MAIDFIX2):
+# every palace maid prompt (scope maid, incl. thân cận) may carry this sentence IN PLACE OF master M06 (all seasons). Other scopes keep M06.
+B29_S_CREPE = "The FABRIC is thin, light, flowing matte silk crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface with no sheen at all, never glossy, never satin, never brocade, with fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+B29_S_SCOPES = {"maid"}
 
 
 def b29_alts(scope, high=False, doan=False, winter=False):
@@ -278,6 +282,7 @@ def b29_alts(scope, high=False, doan=False, winter=False):
     if high: return [B29_C_GAM]
     if doan: return [] if winter else [B29_B_LIGHT]
     if scope in B29_A_SCOPES: return [B29_A_HEAVY] + ([] if winter else [B29_A_LIGHT])
+    if scope in B29_S_SCOPES: return [B29_S_CREPE]
     return []
 
 

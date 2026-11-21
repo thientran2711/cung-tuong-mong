@@ -55,3 +55,9 @@ Files: test14_{tam,nhi,nhat}_L1752 + test14_{tam,nhi,nhat}_thancan_L1752 (all 6 
 - test15_tam_L1764 (base test14_tam_L1752): ruqun, outer jacket, sash → "matte silk crepe"; the FABRIC SHEEN sentence → "FABRIC (same for every palace maid): all her clothes are matte silk crepe: a softly crinkled, slightly grainy, completely MATTE surface with no sheen at all, soft and drapey, never glossy, never satin, never brocade." Nothing else.
 - NOT changed: master sentence M06 "...flowing silk and gauze with a soft sheen..." — changing it = check_store FAIL "M06 MASTER REWRITTEN" (B25). Needs a foreman/owner decision (rule.py) if the test shows sheen.
 - keep PASS, check_store maid a18 PASS, 7.6k chars.
+
+## JOB 7 — owner L1775: matte silk crepe approved for all maids (0 gens)
+- Gate: master_common.py adds B29_S_CREPE + B29_S_SCOPES={"maid"}; b29_alts(scope maid) → [B29_S_CREPE], so a maid prompt may carry the crepe sentence IN PLACE OF master M06 (same B29 mechanism as the t1–t3/t4–t5/t6+ table sentences). MASTER_COMMON.txt and every other scope UNCHANGED; old maid prompts (M06) still pass. Rule B29 updated (rule.py set, Lượt 1775).
+- B29_S_CREPE = "The FABRIC is thin, light, flowing matte silk crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface with no sheen at all, never glossy, never satin, never brocade, with fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+- test16_{tam,nhi,nhat}_L1775 = test14 (wide sash fix, nhất big hairpins) + M06→B29_S_CREPE + test15 FABRIC line + garment words → matte silk crepe (tam ruqun/jacket/sash; nhị ruqun/jacket/sash; nhất robe/sash). test16_*_thancan = colour swap only (word diff verified).
+- keep_check --all 476 PASS; check_store maid a18 ×6 PASS; 7.0–9.5k chars.
