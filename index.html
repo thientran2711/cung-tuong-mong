@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8d831773+","t":"2026-11-21T02:37Z","c":"review wear-slots r1: co-op test (both phones see the same worn Hoa tai + Giày) + earring panel opened from the real chest entry","b":"82457a879d58","h":[{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"}]};
+window.CTM_BI={"s":"65dc7ec6+","t":"2026-11-21T02:58Z","c":"review wear-slots r1: co-op test (both phones see the same worn Hoa tai + Giày) + earring panel opened from the real chest entry","b":"ddddab3a34c6","h":[{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3914,7 +3914,7 @@ function renderStage(){const P=placeOf(S.place);try{if(S.visit&&typeof stageCapF
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o))+lotTag(ACTDOM[k]):"",a.xw&&ok?a.xw(S,v):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">${houseLine(v,"ngươi")}: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<BAL.ag.ev.judge?"disabled":""}>Xử tội<small>${evG(S,v)>=BAL.ag.ev.judge?"theo chứng cứ":`cần ${BAL.ag.ev.judge} chứng cứ`}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<-BAL.tw.reward.bac?"disabled":""}>Ban thưởng<small>Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 /* KIT TAB MODE (design-scale p2): every .game class that depends on the open tab. Reset before EVERY panel render; the renderer of the open
@@ -4357,7 +4357,7 @@ function rvCard(v,i){const st=!v.alive?"Đã chết":v.out?"Ở lãnh cung":"";c
  const chips=[st?"":chip(together(S,v)?`Đang cùng chỗ với ngươi`:locKnown(v)?`Thấy ở ${placeName(locKnown(v))} (buổi này) · cách ${travel(S.place,locKnown(v))} khắc`:"Nơi ở: không rõ","loc"),"",chip(host?"Thù ngươi":v.rel>20?"Thân với ngươi":"Bình thường",host?"hot":v.rel>20?"ok":""),v.pg>=20?chip(`Ngươi ghen ${v.pg}`,"hot"):"",v.ev?chip(`${ic("chung-cu",14)}Chứng cứ ${v.ev}`,"hot"):"",illKnown(v)?chip(illName(v),"hot"):"",evG(v,S)?chip(`Nắm ${evG(v,S)} chứng cứ của ngươi`,"hot"):"",v.preg&&!v.hidden?chip(`${ic("thai",14)}Có thai tháng ${v.preg}`):"",v.confined?chip(`Cấm túc ${v.confined}`):"",v.hieu?chip(`Hiệu ${v.hieu}`,"ok"):"",vpItems(v).length?chip(`Vượt phẩm: ${vpItems(v).map(e=>itm(e.k).n).join(", ")}`,"hot"):"",v.enemy?chip("Kẻ thù nhà ngươi","hot"):"",v.oldmis?chip("Chủ cũ của ngươi","hot"):"",facOf(v)?chip(`Phe ${facOf(v).name}`):""].concat(v.kids.filter(k=>k.alive).map(k=>chip(`${ic("con",14)}${k.name} · ${k.age} tuổi${k.heir?" · Thái tử":""}`,k.heir?"ok":"")));
  let note="",groups=[],empty="";
  if(st){if(v.alive&&S.rank>=7)groups=[["",[pbtn(`data-e="${i}" data-k="pardon"`,"Ân xá","đưa nàng về cung",whyTime(2)||(roomFor("consort")?"":"hậu cung đã đủ người"))]]];else empty=v.alive?"Nàng ở lãnh cung. Chỉ Hoàng hậu mới ân xá được.":"Nàng đã mất."}
- else{note=sameHouse(S,v)?`Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
+ else{note=sameHouse(S,v)?`${houseLine(v,"ngươi")}: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
  return pcard({tabKey:"rival",f:pv(v),col:RCOL[v.queen?7:v.rank],name:v.name,rank:`${ic(RIMG[v.queen?7:v.rank],16)}${v.queen?"Hoàng hậu":RANKS[v.rank].n}`,status:st,out:!!st,ghen:st?null:v.ghen,lines,chips,note,groups,empty})}
 function rvTabHTML(){return `<div class="pgwrap">`+pager("rv",rivals.map(v=>({f:pv(v),name:shortN(v.name),dim:!v.alive||v.out})),i=>rvCard(rivals[i],i))+`</div>`}
 
@@ -5190,6 +5190,10 @@ function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));const hl=p!
  const side=n=>hl?`${hl} · ${n}`:`thiên điện ${n}`;return k==="home"?(p===S?palName("home"):`${side(palName("home"))} (cung ngươi)`):hd===p?palName(k):side(palName(k))}
 /* houseCung(p): the palace two housemates share — "cùng cung" (同宮) is the court phrase for consorts of one palace in different halls (history check, hall-names r2) */
 function houseCung(p){return palName(palaceOf(p))}
+/* houseLine(p, me): ONE wording of "how p stands to my palace" for every generator (owner 21/11 ~02:16Z: the head of the palace is «chủ vị», only peers are «cùng cung»):
+   p is the chủ vị of the palace I live in → «Chủ vị <cung>, nơi ta ở»; I am the chủ vị and p lives under me → «Ở <cung> của ta»; two non-head housemates → «Cùng <cung> với ta». Palace + head from the residence data (houseOf/palaceOf). me = "ta" | "ngươi". */
+function houseLine(p,me){me=me||"ta";const c=houseCung(p);if(typeof S==="undefined"||!S||p===S||!sameHouse(S,p))return"";const hp=byKey(houseOf(p))===p,hs=byKey(houseOf(S))===S;
+ return hp&&!hs?`Chủ vị ${c}, nơi ${me} ở`:hs&&!hp?`Ở ${c} của ${me}`:`Cùng ${c} với ${me}`}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
@@ -26904,7 +26908,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
- const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseCung(p)} với ngươi`:t2||"";
+ const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?houseLine(p,"ngươi").replace(/^./,c=>c.toLowerCase()):t2||"";
  add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
   return{odds:odds("accuse"),why:busy()||(n<need?nf(need):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[fall,"Danh +6"],fail:["Danh -8",`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.f_6,"hurt")}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
  add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
@@ -46468,21 +46472,33 @@ const stripItem=(x,q)=>({small:true,sz:"xs",f:q.f,name:x.k==="me"?"Ta":x.k==="em
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
-function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
- const GR=["Ta","Chí tôn","Phi tần"];const tabs=(key,L)=>GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);
- const outside=hcRelHTML._last!==relSel;if(outside){const i=ix(all,relSel);const g=i<0?"Ta":all[i].g;KTSUB.relx=g;PG.rel=null;PG.relY=null}
- if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;
- const tx=kitSubTabs("relx",tabs("relx",all));const items=all.filter(x=>x.g===tx.cur);if(hcRelHTML._g!==tx.cur&&!outside)PG.rel=0;hcRelHTML._g=tx.cur;
- if(PG.rel==null||!items[PG.rel]){const i=ix(items,relSel);PG.rel=i<0?0:i}
- if(items[PG.rel].k!==relSel){relSel=items[PG.rel].k;PG.relY=null}hcRelHTML._last=relSel;const X=items[PG.rel].q;
- /* strip 2: everyone X can have a relation with (Hoàng thượng / Thái hậu: with Ta and the consorts only) */
+let relYk=null;
+/* KIT §49.2d (owner 21/11, 3rd time: "bớt chiếm không gian"; review/rel-picker-r3): the two strips are gone. ONE small row = two person slots «[face Ta ▾] ⇄ [face Hoàng thượng ▾]»
+   (kit face mdH xs + kitNameRank small, one line). A slot opens the kit dialog (kitModal) holding the group tabs (kitSubTabs) + the Hậu cung pager strip of that group; ⇄ swaps X and Y.
+   The relation card starts right under the row. relSel = X (outside links still set it), relYk = Y (default Ta; X = Ta → the first valid person). */
+function relCands(){const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
+ if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;const X=all[ix(all,relSel)];
  const Ys=all.filter(x=>x.k!==X.k&&!((X.k==="emp"||X.k==="th")&&(x.k==="emp"||x.k==="th")));
- const TY=tabs("rely",Ys);if(hcRelHTML._lx!==X.k||KTSUB.rely==null||!TY.some(t=>t.k===KTSUB.rely))KTSUB.rely=TY.some(t=>t.k==="Ta")?"Ta":TY[0].k;hcRelHTML._lx=X.k;
- const ty=kitSubTabs("rely",TY);const Ys2=Ys.filter(x=>x.g===ty.cur);if(hcRelHTML._gy!==ty.cur)PG.relY=null;hcRelHTML._gy=ty.cur;
- if(PG.relY==null||!Ys2[PG.relY])PG.relY=0;const Y=Ys2[PG.relY].q;
- const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
+ let yi=ix(Ys,relYk);if(yi<0){yi=Math.max(0,ix(Ys,"me"));relYk=Ys[yi].k}return{all,X,Ys,Y:Ys[yi]}}
+const relSlot=(x,w)=>`<button class="pface krslot" data-relslot="${w}" aria-haspopup="dialog" aria-label="${w==="x"?"Xem quan hệ của":"với"} ${ktEsc(x.q.name)}">${mdH(x.q.f,"xs")}${kitNameRank(x.q.rank,x.q.k==="me"?"Ta":x.q.name,x.q.col,x.k==="me"||undefined,true)}<span class="krcar" aria-hidden="true">▾</span></button>`;
+function hcRelHTML(){kn();const C=relCands();
+ return `<div class="pgwrap krelpg"><div class="krelrow">${relSlot(C.X,"x")}<button class="krswap" data-relswap="1" aria-label="Đổi chỗ hai người">⇄</button>${relSlot(C.Y,"y")}</div>${relPair(C.X.q,C.Y.q)}</div>`}
+function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X.k:C.Y.k;const GR=["Ta","Chí tôn","Phi tần"];
+ const tabs=GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);const key="relpop"+w;
+ const cg=(L.find(x=>String(x.k)===String(cur))||L[0]).g;if(KTSUB[key]==null||!tabs.some(t=>t.k===KTSUB[key]))KTSUB[key]=cg;
+ const tx=kitSubTabs(key,tabs);const items=L.filter(x=>x.g===tx.cur);const on=items.findIndex(x=>String(x.k)===String(cur));if(PG[key]==null)PG[key]=on<0?0:on;
+ return tx.html+pager(key,items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"")}
+function relPopOpen(w){delete PG["relpop"+w];delete KTSUB["relpop"+w];const m=kitModal({kind:"notice",title:w==="x"?"Xem quan hệ của":"Quan hệ với",sections:[{h:"",html:`<div class="krpop kpick" data-w="${w}">${relPopBody(w)}</div>`}],btn:"Thôi"});
+ setTimeout(()=>{try{kitStripFit()}catch(e){}},60);return m}
+document.addEventListener("click",e=>{const T=e.target;if(!T||!T.closest)return;
+ const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();relPopOpen(sl.dataset.relslot);return}
+ const sw=T.closest("#panel [data-relswap]");if(sw){e.preventDefault();e.stopPropagation();const C=relCands();relYk=C.X.k;relSel=C.Y.k;renderPanel();return}
+ const pop=T.closest("#modal .krpop");if(!pop)return;const w=pop.dataset.w,key="relpop"+w;const re=()=>{pop.innerHTML=relPopBody(w);try{kitStripFit()}catch(x){}};
+ const tb=T.closest("[data-ktsv]");if(tb){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();KTSUB[key]=tb.dataset.ktsv;PG[key]=0;re();return}
+ const pf=T.closest("[data-pg]");if(!pf||pf.dataset.pg!==key)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const C=relCands();const L=w==="x"?C.all:C.Ys;const items=L.filter(x=>x.g===KTSUB[key]);const i=+pf.dataset.pi;
+ if(pf.classList.contains("parr")){PG[key]=i;re();return}
+ const q=items[i];if(!q)return;if(w==="x"){relSel=q.k}else relYk=q.k;try{kitModalClose()}catch(x){}renderPanel()},true);
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
@@ -46496,12 +46512,14 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
  return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
- const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
+ /* the residence line (owner 21/11 ~02:16Z): ONE sentence from houseLine (chủ vị / ở cung của ta / cùng cung) about the person who is not Ta */
+ const z=p===S?o:o===S?p:null;const hl=z&&z!=="emp"&&z!=="th"&&typeof houseLine==="function"?houseLine(z,"ta"):"";
+ const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+(hl?`<p class="kr3note">${hl}.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
+ /* KIT §49.2d: the card is the relation table only — full width, as tall as its content (the two faces are the picker slots above) */
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
-  `<div class="krel3 krpair">${relSide(X)}<div class="kr3m">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${relSide(Y)}</div>${known}</div>`}
+  `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
   return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
@@ -46631,6 +46649,11 @@ html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;m
 html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
 html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
 html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
+html body :is(#panel,#kitpage) .krelrow{display:flex;align-items:center;gap:6px;margin:0 0 4px}
+html body :is(#panel,#kitpage) .krelrow>.krslot{flex:1 1 0;min-width:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:6px;min-height:0!important;padding:2px 8px 2px 4px!important;text-align:left}
+html body :is(#panel,#kitpage) .krelrow>.krslot .knr{display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:0;line-height:1.05;flex:1 1 auto}
+html body :is(#panel,#kitpage) .krelrow .krcar{flex:0 0 auto;font-size:.8rem;color:var(--dim)}
+html body :is(#panel,#kitpage) .krelrow>.krswap{flex:0 0 auto;min-width:34px;min-height:34px;font-size:1.1rem;border-radius:10px}
 .krelh{margin:4px 0 4px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(88px,104px) minmax(0,1fr) minmax(88px,104px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
@@ -86053,7 +86076,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="82457a879d58";window.CTM_BUILD=BUILD;
+const BUILD="ddddab3a34c6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
