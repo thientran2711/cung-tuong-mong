@@ -240,7 +240,8 @@ function petPanelHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))re
   B.push(pbtn(`data-pet="free" data-i="${i}"`,"Gửi về Ngự thú viên",`thành: bớt Xa xỉ ${S.petOn===i?petLux(P.t):Math.round(petLux(P.t)/2)}${T.up?` · thôi tốn Bạc ${T.up} mỗi tháng`:""} · Mất: ${T.n}${fromHi?` · Hoàng thượng phật ý, Sủng -${BAL.pet.freeHiSung}`:fromTh?" · Thái hậu quý ngươi -8":P.src==="hh"?" · Hoàng hậu quý ngươi -3":""}`,""));
   return kitSkillCard({kind:"pet",k:String(i),name:T.n,kicker:`${PET_TIER[T.tr]} · ${petStageTxt(P)} · ${petAgeTxt(P)} · ${S.petOn===i?"theo hầu":"ở tẩm cung"}`,max:0,img:petPSrc(P),
    desc:`<span class="kchip ${cw[1]}">${cw[0]}</span> ${kitRows(petRowsL(P,i))}`,acts:B,can:true})}).join("");
- return `<div class="kskills kpetcards">${cards||kitSkillCard({kind:"empty",name:"Chưa nuôi con nào",max:0,img:petSrc("cho"),desc:"Nhờ thái giám Nội vụ phủ tìm một con thú nhỏ về nuôi."})}${kitSkillCard({kind:"petshop",name:`Thú nuôi (${L.length}/${petMax(S)})`,max:0,img:"",desc:"Con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.",acts:[shop],can:true})}</div>`}
+ const PETRARE="Con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.";
+ return `<div class="kskills kpetcards">${cards||kitEmpty("Ta chưa nuôi con thú nào",["Nhờ thái giám Nội vụ phủ tìm một con thú nhỏ về nuôi (nút ở dưới).",PETRARE],{art:petSrc("cho")})}${kitSkillCard({kind:"petshop",name:`Thú nuôi (${L.length}/${petMax(S)})`,max:0,img:"",desc:cards?PETRARE:"",acts:[shop],can:true})}</div>`}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-petshop]");if(!b||b.disabled)return;ev.stopPropagation();petShop()},true);
 /* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
 function petRows(P,i){return kitRows(petRowsL(P,i))}

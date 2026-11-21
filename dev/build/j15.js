@@ -11,7 +11,8 @@ function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div c
    the rank-name paint (jaudit) from adding a title in front of the name again. */
 function pcHead(o){const rk=String(o.rank||"").replace(/<[^>]*>/g,"").trim();const raw=o.name==null?"":String(o.name);const same=rk&&!/</.test(raw)&&raw.trim().toLowerCase()===rk.toLowerCase();
  const nm=same?raw:(typeof kitDedupRank==="function"?kitDedupRank(rk,raw):raw);const kmy=o.me||(o.f&&typeof pMe==="function"&&o.name===S.name);const tone=typeof kitRankTone==="function"&&o.rank?kitRankTone(rk,o.col):"";
- return `<b class="pcname${kmy?" kmy":""}${same?" krt":""}" data-krn-skip${same?` style="--rt:${tone}"`:""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
+ const tonly=!same&&/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim());/* OD:L1362: ONLY the Emperor's name is the bright imperial yellow (Thái hậu keeps her own look, KIT 33.5 amber / 83.1) */
+ return `<b class="pcname${kmy?" kmy":""}${same||tonly?" krt":""}" data-krn-skip${same||tonly?` style="--rt:${tone}"`:""}${/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim())?" data-imp=\"emp\"":""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
 function pcard(o){const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=(o.chips||[]).filter(Boolean);
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];
@@ -52,7 +53,7 @@ function kidCard(k){const lines=k.alive?[tuoi(k.age),`Sức khỏe <b>${k.hp}</b
  const chips=[k.heir?chip("Thái tử","ok"):"",k.alive&&k.hp<40?chip("Yếu ớt","hot"):""];
  const home=S.place==="home";
  return pcard({f:kidFace(k),name:k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.alive?k.age+" tuổi":"đã mất"}`,status:k.alive?"":"Đã mất",out:!k.alive,lines,chips,
-  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con","tốn: 1-2 khắc · thành: gặp các con, chăm con tại tẩm cung",home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":"")]]]:[],empty:"Con đã mất."})}
+  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con",`tốn: ${home?0:travel(S.place,"home")} khắc đi đường · thành: gặp các con, chăm con tại tẩm cung`,home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":walkBlock("home"))]]]:[],empty:"Con đã mất."})}
 function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Chỉ được thị tẩm mới mang thai.</p>`)+`</div>`}
 
 /* ---- servants and palace people (Kẻ hầu tab) ---- */
