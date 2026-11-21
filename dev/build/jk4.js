@@ -1204,6 +1204,9 @@ window.kitInfoOneLine=kitInfoOneLine;
 html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
 html body .pc>.pcr .pcg.on{display:block!important}
 html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+/* ui-leftover-fold M17: the Hoàng tự kin card holds the mother block and the facts table directly in .pcb (a 2-column auto-fill grid on the Fold, 1 column on the iPad): both span the whole row, so the mother stands ABOVE the facts on every device */
+html body .pc>.pcr .pcb>.kpl,html body .pc>.pcr .pcb>.kpkb{grid-column:1/-1!important;width:100%!important;box-sizing:border-box}
+html body .pc>.pcr .pcb>.kpl{margin:0 0 8px!important}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
