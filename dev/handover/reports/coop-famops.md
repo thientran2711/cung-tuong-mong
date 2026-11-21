@@ -74,3 +74,13 @@ READY FOR REVIEW — review/coop-famops a211fcf0 (base: review/jlost-kyngo-r1 85
 Long scans on the final head: SWAP/SKEW (r2 code, 1 commit before final) clean; default SEED=9001 clean; default seed 4242: 0 dup, 2 vanish (OPEN d/e above).
 OPEN for the reviewer / next row: (c) her seat's copy of the host entry re-carrying a piece she stole (1 piece, 1 run); (d)/(e) two vanishes in one 76-wk run;
 buổi-handshake stalls in 4 of 12 long runs (coop sync, not famops); dresscode loan piece row now clean with this branch.
+
+## HANDOVER (E44 rolls on context, 18:25Z; E44r reviewing a211fcf0)
+- Foreman ask (E #29): trace seed-4242 van2 + run seed 4242 on LIVE; trace the hoadien_bac host-entry rebuild dup. Any fix → new head + tell E #29 and E44r (session_01DgYSWkYVK6ksd1qvq815dc).
+- RUNNING: LIVE origin/main 0faf7a05 + this branch's coop-lost-scan.js (uncommitted copy) seed 4242, 76 wk, in /home/user/wt/famops-base → log /home/user/wt/fo-out/live4242.log (pre-existing check).
+- LEAD for (e) maitrang: host case 144 stolen w79, handed back w80 («sang hảo hữu» on his ledger), never on her seat. res delivery has NO retry:
+  b4Send/sendRes put CW.rpend[rid], resWait drops it after 10 s (jcoopworld.js:654), onRes drops when her S.dead / life change; the scan's rejoinB closes
+  and reopens B's page. A res lost in that window = a vanish (same for any fam op). Unproven; check the B log around w75 for a rejoin / reload.
+- (d) id 555: host piece held by her since w14 (case «held», fix 13 kept it), gone from her seat at w61, no host ledger line — needs her seat's ledger (faults.json has host side only; add B-side __why for ids).
+- (c) hoadien_bac: her seat's copy of the host entry rebuilt from the host canon while his «rm» was in flight → carried the piece she stole; the host's death (di vật) then put it into her box «nvp:dead» too.
+- Worktrees: /home/user/wt/famops (review/coop-famops a211fcf0, clean), /home/user/wt/famops-base (detached LIVE, scan copy), /home/user/wt/famops-dc (detached; tmp branches deleted, nothing pushed), /home/user/wt/famops-ho (handover). http servers stopped.
