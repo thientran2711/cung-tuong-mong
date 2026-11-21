@@ -260,3 +260,16 @@ Verdict: **t4 PASS · t5 PASS.**
 Notes (not blocking):
 - t4 no longer says "neck and collarbones visible" (t5 keeps "showing her neck and collarbones"; the low square neckline implies it).
 - t5 chest is "small double hollyhocks below it": the word "embroidered" and "many" were dropped, so t5 chest density = t4, a weak G42 "denser" step.
+
+## JOB 10 (LADDER2 ed026219f) — thu s62 t7 HQP v8e + t8 HH v10d · checked at d7649b0 · 0 gens
+Gates:
+- tp7 / tp8 a22 STORE + APPROVED PASS; keep PASS. Chars: 9991 / 9998.
+- G40: OUTER_TIED verbatim ✓ / ✓.
+- Own embroidery style kept (L1627, t7/t8 exempt from the t1–t6 placement copy).
+- Jade: "long jade-and-gold belt pendants with pearl tassels" ✓ / ✓. G37: t8 "ONE tier" ✓.
+
+FAULTS:
+- t7 + t8, G45 (standing checklist 11): no "never covered" words for the jade belt pendants. t4/t5 have "…, never covered by sleeve or shawl"; t7/t8 have long trailing sleeves + a cape. Add it after "with pearl tassels".
+- t8, F18: `a gold phoenix hairpin with pearl dangles, held in the hand raised and admired`. The held-hairpin shape words are missing; F18 + the store item (t8-prompt-B/build.py) require "slim and palm-length, held between her fingers, never a sceptre".
+Rule-owner question (pre-existing store text, not counted as a fault): t7 + t8 `strands of pearls across the chest` vs A41 (no necklaces on anyone, L1411).
+Verdict: **t7 FAIL (G45 words) · t8 FAIL (G45 words + F18)**. These are one-phrase fixes.
