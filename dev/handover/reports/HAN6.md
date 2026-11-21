@@ -60,3 +60,9 @@ Bases: t1/t2 L1955, t3 BOW_L1955, t4–t8 L1915.
 - ch 9870/9971/9946/9834/9564/9937/9956/9987. keep PASS ×8. check_store = exactly the base FAILs (waived) ×8. No pendant word. G60/G61 untouched.
 - A49 sample: t6 sent to VE7 (1 @55), sheet han_t6_L1965.png (CŨ SyhrsOsUb8 | MỚI).
 (2) Weave vs embroidery vs print research (VN): dev/handover/reports/HAN6_WEAVE_VS_EMBROIDERY_L1965.md.
+- t6 sample drawn (VE7): dt4THLQXSL, 55 cr, sheet dev/handover/review-sheets/han_t6_L1965.png (CŨ SyhrsOsUb8 | MỚI), VE7 commit cda608844.
+HAN6 read:
+- The large camellias are gone. Small birds in flight read clearly; the clouds are faint. Small blossoms are still scattered on the body, probably from the fabric/robe words.
+- The cuffs are clearly the widest trim, the hem border is narrower, and bu yao dangles show on the headdress. The collar is unchanged.
+- G61 note (VE7): the right hand rests at the belt and the jade ball hangs beside the front waist. This is the same as the old picture; the pose words are LADDER4 (A47). Owner/#27 decide.
+- If the owner wants stronger clouds: "large flowing cloud scrolls" (words only, only with her yes).
