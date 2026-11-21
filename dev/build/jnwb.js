@@ -23,6 +23,8 @@ const NWB={
  /* the hint / done buttons are the SAME signs as group a (j91 k91Btns): «?» and «✓» on .kgbtn, the word only in the tooltip (mg-noword-a); other signs are the svg icons */
  btn(id,k,o){o=o||{};const lab=o.label||"",inner=k==="hint"?"?":k==="check"?"✓":NWB.ic(k);return `<button type="button" class="${o.cls||"kgbtn"} nwb-btn" id="${id}" aria-label="${lab}" title="${lab}">${inner}</button>`},
  pips(n,on,cls){let s="";for(let i=0;i<n;i++)s+=`<i class="nwb-pip${i<on?" on":""}"></i>`;return `<span class="nwb-pips${cls?" "+cls:""}" aria-hidden="true">${s}</span>`},
+ /* care games (thu_tam / thu_choi / tuoi): the progress line is dots, not words. n dots, on filled; band [lo,hi] = the right zone drawn as green-ringed dots (a sign, never text) */
+ cnt(n,on,_h,band){let s="";for(let i=0;i<n;i++){const b=band&&i+1>=band[0]&&i+1<=band[1];s+=`<i class="nwb-pip${i<on?" on":""}${b?" band":""}"></i>`}return `<div class="nwb-pool nwb-cnt"><span class="nwb-pips" aria-hidden="true">${s}</span></div>`},
  who(name){return/già|lão|góa|cao|ma ma/i.test(name)?"elder":/nhỏ|tiểu|mới|còn nhỏ/i.test(name)?"child":/ốm|yếu|đói/i.test(name)?"sick":"adult"},
  POP:{ok:"✓",bad:"✗",s3:"★★★",s2:"★★",s1:"★"}};
 (function(){const st=document.createElement("style");st.id="nwb-css";st.textContent=`
@@ -31,6 +33,7 @@ const NWB={
 .nwb-i{width:1.5em;height:1.5em;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nwb-btn{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:48px}.nwb-btn .nwb-i{width:1.8em;height:1.8em}
 .nwb-pips{display:inline-flex;gap:5px;align-items:center;vertical-align:middle}.nwb-pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--k-hair,#b59a6a);box-sizing:border-box;background:transparent}
+.nwb-pip.band{border-color:#2f8f4e;border-width:3px}.nwb-cnt{display:flex;justify-content:center;padding:6px 0}
 .nwb-pip.on{background:var(--gold,#d99a1e);border-color:var(--gold,#d99a1e)}
 .nwb-cap{font:700 .75rem/1.25 var(--body,sans-serif);color:var(--ink,#3a1a0c);text-align:center;overflow-wrap:anywhere}/* huong-cue-2: the one-line guiding caption beside pips (needs / left) */
 .nwb-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0}.nwb-row .nwb-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
