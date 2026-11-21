@@ -590,3 +590,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-ton-row-2 KIT KEEPER (sonnet; MAIN CHÍNH 83 follow-ups) | review/kit-ton-row-2; reports/kit-ton-row.md §kit-ton-row-2 | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM f8d36f6b | 21/11 |
 | REVIEW chai-ramp (BIG opus) of 8338d1f5 | review/chai-ramp-rv; briefs/main83-rv-chai-ramp.md | MAIN CHÍNH 83 | session_01Rc5AsJ2gFzDabLoQY1RDFP | RUNNING | 21/11 01:21Z |
 | MAIN CHÍNH 84 (coordinator; took over from 83) | — | MAIN | session_01Rc5AsKwFNncn5NJ71zfUof | RUNNING | 21/11 01:35Z |
+| MAIN84 LANDER (opus; B stale train: thancan, coop-name-clash, wear-slots, coop-week-stall, coop-guest-agent) | review/main84-land-*; briefs/main84-lander.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 01:40Z |
