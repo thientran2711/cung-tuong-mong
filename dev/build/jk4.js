@@ -751,6 +751,8 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
 /* owner 21/11 (OD:L1362, hoangthuong-gold): the EMPEROR's name («Hoàng thượng» as the card head, .pcname.krt[data-imp=emp]) is painted as a TITLE in its rank tone (imperial yellow KIT_IMP), never ink: the name rule above must not win over the title rule. ONLY him: Thái hậu keeps her own look (KIT 33.5) */
 html body .pc .pcl .pcname.krt[data-imp="emp"]{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;font-family:var(--display,"Noto Serif",Georgia,serif)!important;letter-spacing:.03em!important}
+/* kit-mark-fix r6 (rv round 5: no JS timing for the name colour): a card head NAME followed by its RANK line (.pcname ~ .pcrk, also inside .kpnm) takes the RANK colour in pure CSS — pcHead (j15) puts the same --rt on both, and the expression is the rank line's own (T) fallback, so they match from the first paint; kitPcTagColour stays only as a fallback for a rank line built elsewhere */
+html body .pc .pcl .pcname:has(~ .pcrk){color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
@@ -1197,7 +1199,18 @@ window.kitInfoOneLine=kitInfoOneLine;
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
 .pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
 .pcpop .pc .pcf .kr>.krv>.kgnb,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{right:46px}
-`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();kitPcMore()},100)})}catch(e){}})();
+/* KIT §6.3j RANK + NAME = ONE COLOUR on the person-card tag (owner OD 16/11 16:10Z «rank+name one colour: OK» + 21/11 04:33Z; MAIN 89 check #3): the name under the rank line takes the rank colour (--rt of .pcrk). The same unit as the story text (§48.3). */
+function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const n=r.parentElement.querySelector(":scope > .pcname");if(!n||n.classList.contains("krt"))return;const c=r.style.getPropertyValue("--rt")||getComputedStyle(r).color;if(!c)return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
+window.kitPcTagColour=kitPcTagColour;
+let kitPcMoreRO=null;/* r5: the card's content grows after the pass (pictures, fonts, late rows) without any DOM mutation → watch the card's blocks, re-check when one changes size */
+function kitPcMore(){try{if(!kitPcMoreRO&&typeof ResizeObserver==="function")kitPcMoreRO=new ResizeObserver(()=>{clearTimeout(window.__kpmR);window.__kpmR=setTimeout(kitPcMore,30)});
+ document.querySelectorAll(".pc.kpwide[data-k2]").forEach(pc=>{if(kitPcMoreRO&&!pc.__kpmObs){pc.__kpmObs=1;kitPcMoreRO.observe(pc);for(const c of pc.children)kitPcMoreRO.observe(c)}const m=pc.scrollHeight>pc.clientHeight+3&&pc.scrollTop+pc.clientHeight<pc.scrollHeight-3;if(pc.classList.contains("kpmore")!==m)pc.classList.toggle("kpmore",m)})}catch(e){}}
+window.kitPcMore=kitPcMore;/* r6 (test re-assert 1 s later caught it): some pages rebuild their person card every few seconds (tab-rv ≈ 2.7 s); the NEW card had no cue for 125–260 ms until a timer pass ran = the fade blinked off. A card that becomes .pc.kpwide[data-k2] (added, or its class / data-k2 set by a kit scan) is checked in the SAME microtask, before the next paint */
+try{new MutationObserver(r=>{let go=false;const isPc=e=>e&&e.nodeType===1&&e.classList.contains("pc")&&e.classList.contains("kpwide")&&e.hasAttribute("data-k2");
+ for(let i=0;i<r.length&&!go;i++){const m=r[i];if(m.type==="attributes"){if(isPc(m.target)&&!m.target.__kpmSeen)go=true}else for(const n of m.addedNodes){if(n.nodeType===1&&(isPc(n)||n.firstElementChild&&n.querySelector(".pc.kpwide[data-k2]"))){go=true;break}}}
+ if(go){kitPcMore();for(const pc of document.querySelectorAll(".pc.kpwide[data-k2]"))pc.__kpmSeen=1}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["class","data-k2"]})}catch(e){}
+/* r6: web fonts arriving change every card height without a mutation → re-check the cue */try{document.fonts.ready.then(()=>kitPcMore());document.fonts.addEventListener("loadingdone",()=>{clearTimeout(window.__kpmF);window.__kpmF=setTimeout(kitPcMore,30)})}catch(e){}document.addEventListener("scroll",e=>{const pc=e.target;if(pc&&pc.classList&&pc.classList.contains("kpwide"))kitPcMore()},{capture:true,passive:true});
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
@@ -1206,19 +1219,29 @@ window.kitInfoOneLine=kitInfoOneLine;
 html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
 html body .pc>.pcr .pcg.on{display:block!important}
 html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
-/* ui-leftover-fold M17: the Hoàng tự kin card holds the mother block and the facts table directly in .pcb (a 2-column auto-fill grid on the Fold, 1 column on the iPad): both span the whole row, so the mother stands ABOVE the facts on every device */
-html body .pc>.pcr .pcb>.kpl,html body .pc>.pcr .pcb>.kpkb{grid-column:1/-1!important;width:100%!important;box-sizing:border-box}
-html body .pc>.pcr .pcb>.kpl{margin:0 0 8px!important}
+/* the info group of a person card (.pcb) is a generic auto-fill grid: on Fold it put the mother block (.kpl) and the facts table (.kpkb) side by side, on iPad stacked. One layout: every non-button child spans the whole row, so mother is ALWAYS above the facts (mark 17). */
+html body .pc>.pcr>.pcb{align-content:start!important}
+html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
+/* a card that still does not fit scrolls: make the scroller visible (thin always-on bar) so nothing looks cut (mark 38) */
+html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
+/* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
+html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
 window.kitPcFrameMark=kitPcFrameMark;
 (function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
+/* §6.3i/§6.3j (kit-mark-fix r5): the rank colour + «more below» cue also run straight after every render / renderStage (and late), not only from the mutation observer — the test caught whole pages where they never ran */
+(function(){const k=()=>{try{kitPcTagColour(document);kitPcMore();requestAnimationFrame(()=>requestAnimationFrame(kitPcMore));if(typeof kitPcLate==="function")kitPcLate()}catch(e){}};for(const f of ["render","renderStage"]){if(typeof window[f]!=="function")continue;const f0=window[f];window[f]=function(){const r=f0.apply(this,arguments);k();return r};try{if(f==="render")render=window[f];else renderStage=window[f]}catch(e){}}})();
 /* KIT §6.3g: html.kpnarrow = a narrow panel (phone, < 480 px measured on #panel; iPad is html.kv2): the ONE act-card picture size per device (--kpa-d) is 72 instead of 84 */
 function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
 window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
-(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal,.pcpop,.j59dock"))return true}return false};
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcTagColour(document);kitPcMore();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document);kitPcLate()},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ /* §6.3i/§6.3j late pass (kit-mark-fix r5: the test caught a card with no rank colour + no «more» cue): the rank colour (--rt, a style attribute) and the card height (pictures, fonts) settle AFTER
+    the last childList burst, which the observer does not see → the tag colour and the «more below» cue run again 500 ms later, and kitPcMore again whenever a picture inside a card finishes loading */
+ let t2=0;function kitPcLate(){clearTimeout(t2);t2=setTimeout(()=>{kitPcTagColour(document);kitPcMore()},500)}window.kitPcLate=kitPcLate;
+ let t3=0;try{document.addEventListener("load",e=>{const x=e.target;if(x&&x.tagName==="IMG"&&x.closest&&x.closest(".pc.kpwide")){clearTimeout(t3);t3=setTimeout(kitPcMore,60)}},true)}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */

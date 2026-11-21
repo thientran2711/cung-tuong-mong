@@ -18,12 +18,15 @@
 (function(){try{
 const GB=()=>BAL.ge;
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* the identity (origin key) a branch belongs to = its road's own declared origin ARC67[b].o (pt_* roads are origin "pf"); prefix only as fallback */
+const geOrig=b=>{try{const a=typeof ARC67==="object"&&ARC67[b];return a&&a.o&&a.o!=="rd"?a.o:String(b).split("_")[0]}catch(e){return String(b).split("_")[0]}};
+window.geOrig=geOrig;
 const R1N=["Ở lại, giữ trọn phận mình","Ở lại, nắm lấy quyền bính","Rời khỏi cung cấm","Theo người ấy đi"];
 const R2N=["Lấy ân mà đối đãi","Lấy uy mà trị","Buông bỏ tất cả"];
 const SHN={t:"thiện",a:"ác"};
 /* ---------- branch + state ---------- */
 function geBranch(){try{if(!GB().on||!S||!S.st||!S.st.f14)return null;const rd=S.st.f14.rd;if(!rd||!GE_DATA[rd]||!GE_CAT[rd])return null;
- if(!S.origin||rd.split("_")[0]!==S.origin.k)return null;/* a country branch (Bắc Địch) playing nc roads owns its own set (D2, out of scope): not live */
+ if(!S.origin||geOrig(rd)!==S.origin.k)return null;/* a country branch (Bắc Địch) playing nc roads owns its own set (D2, out of scope): not live */
  return rd}catch(e){return null}}
 function geS(){if(typeof S==="undefined"||!S)return null;if(S.ge&&S.ge.b)return S.ge;const b=geBranch();if(!b)return null;
  S.ge={b,st:["o","o","o","o"],cx:[0,0,0,0],pull:[0,0,0,0],lt:0,d0:S.duc|0,ce:{},oc:{},done:0};return S.ge}
@@ -153,7 +156,7 @@ window.geStore=geStore;
 /* ---------- titles: the jdh catalogue group «Thiên mệnh» (one step, tier BAL.ge.title.tier, no bonus: cosmetic) ---------- */
 function geTitles(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const b in GE_DATA){const Cb=GE_CAT[b];if(!Cb)continue;Cb.e.forEach((e,i)=>{["t","a"].forEach(sh=>{
   const key=geKey(b,i,sh),nm=e[sh==="t"?6:7],how=GE_DATA[b].e[i][sh==="t"?"ht":"ha"];
-  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${geF(how)}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
+  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[geOrig(b)]||"";return `${geF(how)}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
   BAL.dh.T[key]={n:[1],b:GB().title.tier,ch:[]}})})}}catch(e){console.error("ge",e)}}
 geTitles();
 /* carry (D5): a new life may wear the grand title of the life before ("prev") or any title ever earned ("any"); cosmetic only */
@@ -168,7 +171,7 @@ window.geCarry=geCarry;
 /* Sổ luân hồi: the collection rows (kit rows, like the kỳ ngộ book of j97) */
 function geBookHTML(){const g=geStore();const nT=Object.keys(g.t).length,tot=Object.keys(GE_CAT).length*GB().n.grand*2;
  const rows=[["Danh hiệu Thiên mệnh",`<b>${nT}/${tot}</b>`,nT?"g":""]];
- for(const k in g.t){const e=g.t[k],Cb=GE_CAT[e.b];if(!Cb)continue;rows.push([`«${esc(e.name)}»`,`${esc(Cb.e[e.i][0])} · ${esc(GE_ID[e.b.split("_")[0]]||"")} · ${esc(Cb.n)} · kiếp ${e.lives.join(", ")}`,"g"])}
+ for(const k in g.t){const e=g.t[k],Cb=GE_CAT[e.b];if(!Cb)continue;rows.push([`«${esc(e.name)}»`,`${esc(Cb.e[e.i][0])} · ${esc(GE_ID[geOrig(e.b)]||"")} · ${esc(Cb.n)} · kiếp ${e.lives.join(", ")}`,"g"])}
  rows.push(["Ghi chú","Chỉ danh hiệu Thiên mệnh của kiếp ngay trước được mang sang kiếp sau, để đeo cho đẹp."]);
  return `<h3>Thiên mệnh</h3>`+rows67(rows)}
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{return h+geBookHTML()}catch(e){return h}}})();
@@ -183,7 +186,7 @@ window.geBoardList=geBoardList;
 function geBoardPanel(tabs){if(!S||typeof kitPanel!=="function")return;const L=geBoardList();const sec=[];if(tabs)sec.push({h:"",html:tabs});
  const rows=L.map(x=>{const o=typeof dhObj==="function"?dhObj(x.who,geKey(x.b,GE_CAT[x.b].e.findIndex(e=>e[6]===x.ti||e[7]===x.ti),x.sh)):null;
   const plate=o&&typeof kitTitlePlate==="function"?kitTitlePlate(o):`«${esc(x.ti)}»`;const nm=typeof kitName==="function"?kitName(x.who,x.who===S?{named:true}:{}):esc(x.who.name);
-  return [plate,[nm,`${esc(GE_ID[x.b.split("_")[0]]||"")} · ${esc(x.when)}`],"t"]});
+  return [plate,[nm,`${esc(GE_ID[geOrig(x.b)]||"")} · ${esc(x.when)}`],"t"]});
  sec.push({h:`Bảng Thiên mệnh · ${L.length} người`,rows:rows.length?rows:[["Bảng","Kiếp này chưa ai đạt Đại kết cục"]]});
  const opts=[];if(L.length>=2&&typeof kitPodiumShow==="function")opts.push({n:"Xem bảng vàng",fx:{},x:"",go:()=>kitPodiumShow(L.map(x=>({who:x.who,place:x.place,sub:x.ti,score:x.pt})),{title:"Bảng Thiên mệnh",next:"Đóng"})});
  opts.push({n:"Đóng",fx:{},go:()=>{}});
@@ -210,16 +213,16 @@ function geMap(b){const Cb=GE_CAT[b];if(!Cb)return null;const g=geStore(),rb=sto
    fail:{n:g.f[node]&&GE_DATA[b]?GE_DATA[b].e[i].fail:"?"},
    card:any?{r1:R1N[e[3]],r2:R2N[e[4]],cw:GE_DATA[b]?GE_DATA[b].e[i].cw:"",lives}:{txt:"Chưa ai biết ngả này dẫn tới đâu."}}});
  const nG=ends.filter(x=>x.n!=="?").length,nT=ends.reduce((a,x)=>a+x.slots.filter(y=>y.ti!=="?").length,0),nK=rare.filter(x=>x.seen).length;
- return {b,n:Cb.n,id:GE_ID[b.split("_")[0]]||"",spine,rare,ends,count:{g:nG,t:nT,k:nK,txt:`Đại kết cục ${nG}/${GB().n.grand} · Danh hiệu ${nT}/${GB().n.grand*2} · Kỳ ngộ ${nK}/${GB().n.rare}`}}}
+ return {b,n:Cb.n,id:GE_ID[geOrig(b)]||"",spine,rare,ends,count:{g:nG,t:nT,k:nK,txt:`Đại kết cục ${nG}/${GB().n.grand} · Danh hiệu ${nT}/${GB().n.grand*2} · Kỳ ngộ ${nK}/${GB().n.rare}`}}}
 window.geMap=geMap;
 /* ---------- the «Sơ đồ nhánh» PAGE in Sổ luân hồi (GE03, design GRAND_ENDINGS §2.10; BAL.ge.mapOn): kit parts only —
    identity tab row (kitTabRowHTML, count = Đại kết cục earned / all of that identity) × road tab row (kitTabRowHTML, the roads of that identity) × kitBranchMap of the picked branch (counts chip, spine, her chip, 4 ends, card on tap = kitBranchMapOpen);
    the whole-book totals are a kitRows row. Only her own lives are read (geMap: ctm-ge / ctm-rare97 / ctm-gech + this life's S.ge) — unseen nodes stay «?». The branch of the life she plays opens first. ---------- */
 let GEMP=null;
-function geMapIds(){return Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>k.split("_")[0]===id))}
-function geMapRoads(id){return Object.keys(GE_CAT).filter(k=>k.split("_")[0]===id)}
+function geMapIds(){return Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>geOrig(k)===id))}
+function geMapRoads(id){return Object.keys(GE_CAT).filter(k=>geOrig(k)===id)}
 function geMapLive(){try{return S&&S.ge&&GE_CAT[S.ge.b]?S.ge.b:null}catch(e){return null}}
-function geMapPick(){if(GEMP&&GE_CAT[GEMP.b])return GEMP;const b=geMapLive()||Object.keys(GE_CAT)[0];return GEMP={id:b.split("_")[0],b}}
+function geMapPick(){if(GEMP&&GE_CAT[GEMP.b])return GEMP;const b=geMapLive()||Object.keys(GE_CAT)[0];return GEMP={id:geOrig(b),b}}
 function geMapInner(){const P=geMapPick(),ids=geMapIds(),GBn=GB().n;const cnt={};let tg=0,tt=0,tk=0,nb=0;
  for(const id of ids){let g=0;const roads=geMapRoads(id);for(const b of roads){const m=geMap(b);if(m){g+=m.count.g;tg+=m.count.g;tt+=m.count.t;tk+=m.count.k;nb++}}cnt[id]=`${g}/${roads.length*GBn.grand}`}
  const idTabs=ids.map(id=>({k:id,label:esc(GE_ID[id]),n:cnt[id],tip:`Đại kết cục đã đạt: ${cnt[id]}`}));
@@ -232,8 +235,8 @@ function geMapInner(){const P=geMapPick(),ids=geMapIds(),GBn=GB().n;const cnt={}
 function geMapPageHTML(){if(!GB().mapOn||typeof kitBranchMap!=="function"||typeof kitTabRowHTML!=="function")return"";if(GEMP&&GEMP.keep)GEMP.keep=false;else GEMP=null;/* a node card closing re-mounts the page: keep the picked branch then */
  try{return `<h3>Sơ đồ nhánh</h3><div class="kgm" data-kgm>${geMapInner()}</div>`}catch(e){console.error("ge",e);return""}}
 document.addEventListener("click",e=>{const t=e.target&&e.target.closest&&e.target.closest("[data-kgm-id],[data-kgm-rd]");if(!t)return;
- try{const P=geMapPick();if(t.dataset.kgmId){const id=t.dataset.kgmId;if(id===P.id)return;const live=geMapLive();GEMP={id,b:live&&live.split("_")[0]===id?live:geMapRoads(id)[0]}}
-  else GEMP={id:t.dataset.kgmRd.split("_")[0],b:t.dataset.kgmRd};
+ try{const P=geMapPick();if(t.dataset.kgmId){const id=t.dataset.kgmId;if(id===P.id)return;const live=geMapLive();GEMP={id,b:live&&geOrig(live)===id?live:geMapRoads(id)[0]}}
+  else GEMP={id:geOrig(t.dataset.kgmRd),b:t.dataset.kgmRd};
   const h=t.closest("[data-kgm]");if(h){h.innerHTML=geMapInner()}}catch(x){console.error("ge",x)}});
 /* the kit's node-card handler reads host.__kbm: refresh it from the data at the moment of the tap (capture phase = before the kit's own handler) */
 document.addEventListener("click",e=>{const n=e.target&&e.target.closest&&e.target.closest(".kgm-chart .kbm [data-kbm]");if(!n)return;const h=n.closest(".kgm-chart");if(h&&h.dataset.kgmB)try{h.__kbm=geMap(h.dataset.kgmB);if(GEMP)GEMP.keep=true}catch(x){}},true);

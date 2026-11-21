@@ -584,6 +584,16 @@ BAL.entry.w.kc={sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:
  /* reviewer origin-intros-r1: the extras jkc kcMyScore typed by hand (same values): way = Tài/Đức added by "Đối đáp lanh lợi" / "Đáp lời khiêm nhường", chTh = Thái hậu added for Cháu gái Thái hậu, rW = per origin rank r, vh / tdFall = sớ tiến cử / td fall */
  way:6,chTh:15,rW:4,vh:6,tdFall:-6};
 BAL.entry.why={ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}};
+/* review/podium-wire (GAP OR09, OUTSIDE_PLAN §9 "Thứ muội and friends compete under the same rule, and the podium screen is used"):
+   phuc = the Phúc tuyển marks of the thứ muội and the khuê hữu (family records S.kc.fam), drawn ONCE from their own stats and kept on the
+   record (law 6b), shown on the kit podium (KIT §20.1) and read again by kcEnter (Điện tuyển), never re-rolled.
+   lv = [tai at art level 0, tai per level, top level]: her art level from her own Tài (Tài 30..80 -> level 2..5; lv[0] 11 (review r1, was 20) keeps the mean mark = the old live 3+R(6) mean 5.5, bots n>=300/origin), top = level 5; her mark uses the SAME
+   NPC curve as HER "Để tài nghệ quyết định" (kg82NpcMean, BAL.mgTier.npc) + a spread of ±sp (sum of three draws, like kg82NpcRaw); max = top mark.
+   duc / pow = [base, range]: her own Đức and (khuê hữu only: her own house's) thế lực, drawn once (the numbers kcEnter typed as 30+R(30) /
+   40+R(30), moved here unchanged); the thứ muội shares HER house (kcPow()).
+   foul = law 1 two-way: she can "Ngáng chân thứ muội" (jkc, Sắc -3 / Danh -3 of the sister); a thứ muội who holds oan >= foul.oan against her
+   tries the same on her in the Phúc tuyển week: odds od + oan/oanDiv, her Sắc -sac / Danh -danh (same sizes as her card). */
+BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{oan:20,od:40,oanDiv:3,sac:3,danh:3}};
 /* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, 13:55Z s17, 14:10Z; FOREMAN_C 14:15Z/14:35Z/14:45Z s17; review/title-sys): achievement titles.
    n0 = the counts that open the 3 steps of a title (1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8).
    T[id] = per title: b base tier, n own counts, st own step, ch = the bonus TYPES this title may give (the PLAYER picks ONE while it is worn; NPCs pick by need).
@@ -1792,6 +1802,13 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* KP03 children living rules (jkidlife; OD:L87 + PLACES_PLAN §5 "Móc lối chơi"): Mẫu tử = k.hM (the same bar the princesses have, j54) for every child.
+   estr  = Mẫu tử per month a child who lives away (prince 6+ at A ca sở / Đông cung, a mother in lãnh cung) was not seen · visit / call = Mẫu tử when she
+   goes to see the child / calls the child home (once a month each child) · callK = khắc of «Cho gọi con về» · callTal = the lesson the child misses (Tài) ·
+   npcSee = an NPC mother's monthly chance to see her son who lives away (two-way) · heirDanh = Danh of the mother when her son is made Thái tử (lost again
+   when he is put aside) · heirGhen = envy of the others at that day · ward = an orphan (mother dead / lãnh cung) goes to the Hoàng hậu (her or an NPC; none
+   → Thái hậu): Danh of the foster mother on the day · succHoa = Mẫu tử ≥ hi / < lo moves the succession "mẹ con" (j99succ hoa) +1 / −1 · hm0 = first value */
+BAL.kid={estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]};
 /* DRESS CODE (PARKING #11, review/dresscode, jdc.js; owner 20/11 ~19:00Z, verbatim dev/PARKING_LOT.md rows 11 + 11b; expert pass dev/handover/reports/dresscode-expert.md).
    fam  = the ONE small set of basic colour families (owner: "những cái màu cơ bản thôi"); every shade maps to one (hồng phấn / hồng đào / peach → hong …). hex = the dot colour (KIT REQUEST kitColDot).
    who  = Foreman C's palette per painted identity [main, secondary] (consorts c01–c32: handover dev/art/t8-prompt-B/build.py DATA; maids m01–m52: dev/art/face-common/m_colours_proposed.json FINAL Lượt 603;
