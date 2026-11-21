@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ab3f6c13+","t":"2026-11-21T16:08Z","c":"jemo-bal: npc-purpose row (eaVictim reads BAL.ea.victimBase) + one-core frozen list shrinks (3737 -> 3592)","b":"37ee5fd8163c","h":[{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"}]};
+window.CTM_BI={"s":"dc83334c+","t":"2026-11-21T16:19Z","c":"jemo-bal: jbancung «Xin cung» card prints her Sủng loss via sgStat (applied through apply(), trait-scaled) — sg-card static gate on main's …","b":"e07b18b2fcfe","h":[{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"},{"s":"cf2cc626+","t":"2026-11-21T10:58Z","c":"Ban cung (D, #53)"},{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -76427,7 +76427,7 @@ const EA_TOK=["Danh","Sức","Bạc","Đức","Tai mắt","Ân tình","Tài","S�
 const EA_LB={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",duc:"Đức",tai:"Tài",sac:"Sắc",mat:"Tai mắt",tamco:"Tâm cơ"};
 /* the name before a number: the last two words of a long name ("Hàm Hương" of "Kiều Hàm Hương"; the book finds the person by the end of the name) */
 function eaShort(p){const w=String(p&&p.name||"").split(" ").filter(Boolean);return w.length>=3?w.slice(-2).join(" "):w.join(" ")}
-function eaN(p,lab,n){if(!n)return"";const v=sgn(n);if(p===S)return`${lab} ${v}`;
+function eaN(p,lab,n){if(!n)return"";const v=sgn(n);if(p===S)return lab==="Sủng"?sgStat(n):`${lab} ${v}`;/* her Sủng: apply() scales it by her nết → print the applied amount (sgStat, law 4) */
  /* a person she cannot name: the book's mask hides the name, so the number would read as hers → no number (the mask words stay) */
  if(p!==S.thO&&p!==S.emp&&!eaKnown(p))return"";const who=p===S.thO?"Thái hậu":p&&p!==S.emp&&eaShort(p)||"";
  if(lab==="Sủng")return who?`Sủng của ${who} ${v}`:`Sủng ${v}`;return EA_TOK.includes(lab)&&who?`${who} ${lab} ${v}`:`${lab} ${v}`}
@@ -90823,7 +90823,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="37ee5fd8163c";window.CTM_BUILD=BUILD;
+const BUILD="e07b18b2fcfe";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -149,7 +149,7 @@ const EA_TOK=["Danh","Sức","Bạc","Đức","Tai mắt","Ân tình","Tài","S�
 const EA_LB={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",duc:"Đức",tai:"Tài",sac:"Sắc",mat:"Tai mắt",tamco:"Tâm cơ"};
 /* the name before a number: the last two words of a long name ("Hàm Hương" of "Kiều Hàm Hương"; the book finds the person by the end of the name) */
 function eaShort(p){const w=String(p&&p.name||"").split(" ").filter(Boolean);return w.length>=3?w.slice(-2).join(" "):w.join(" ")}
-function eaN(p,lab,n){if(!n)return"";const v=sgn(n);if(p===S)return`${lab} ${v}`;
+function eaN(p,lab,n){if(!n)return"";const v=sgn(n);if(p===S)return lab==="Sủng"?sgStat(n):`${lab} ${v}`;/* her Sủng: apply() scales it by her nết → print the applied amount (sgStat, law 4) */
  /* a person she cannot name: the book's mask hides the name, so the number would read as hers → no number (the mask words stay) */
  if(p!==S.thO&&p!==S.emp&&!eaKnown(p))return"";const who=p===S.thO?"Thái hậu":p&&p!==S.emp&&eaShort(p)||"";
  if(lab==="Sủng")return who?`Sủng của ${who} ${v}`:`Sủng ${v}`;return EA_TOK.includes(lab)&&who?`${who} ${lab} ${v}`:`${lab} ${v}`}
