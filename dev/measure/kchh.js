@@ -1,13 +1,14 @@
 // Both roads to Hoàng hậu: node dev/measure/kchh.js <cung|nha> <livesPerOrigin> [origins] [capSeconds]
 // The inpage6 palace bot (sensible) plays every life; with "nha" each life first plays the home road with inkc.js (sensible)
 // and the palace bot takes over at the palace entry (lives that end outside are counted as not reaching HH).
+// env OUTF=<file> (default dev/measure/kchh-<path>.json), GF=<built html, repo-relative>
 // Output: dev/measure/kchh-<path>.json + a summary (HH %, death before HH %, entry rank, stats at entry, palace months).
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GAME='http://game.local/'+(process.env.GF||'index.html');/* r2: the built site (index.html); images are not loaded */const M=__dirname;
 const PATHK=process.argv[2]||'cung',N=+process.argv[3]||5,ORIG=(process.argv[4]||'tt,dtq,muoi,thd,ch,td').split(','),CAP=(+process.argv[5]||3000)*1e3;
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const c=await b.newContext({viewport:{width:390,height:844}});
  await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);if(/\.(webp|png|jpg|mp3|ogg)$/.test(u))return r.abort();const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:/\.html$/.test(f)?'text/html':/\.json$/.test(f)?'application/json':'text/plain'})});
- const errs=[];const res=[],info=[];const t0=Date.now();const OUTF=path.join(M,`kchh-${PATHK}.json`);
+ const errs=[];const res=[],info=[];const t0=Date.now();const OUTF=process.env.OUTF||path.join(M,`kchh-${PATHK}.json`);/* bal-proof: OUTF env = parallel shards */
  async function life(o){const p=await c.newPage();p.on('pageerror',e=>{if(!/onerror/.test(e.stack||''))errs.push(String(e.message).slice(0,200))});
  await p.goto(GAME,{waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);
  await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(1000);
