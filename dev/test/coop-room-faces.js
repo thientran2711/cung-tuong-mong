@@ -10,7 +10,7 @@
    room must make HER person yield (host-canon), never the host's.
    usage: python3 dev/build/assemble.py && node dev/test/coop-room-faces.js [outdir] [workerURL]   (env RF_WEEKS=n, default 2) */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
-const {serve,BASE}=require('./coop-serve.js');
+const {serve,BASE}=require('./coop-serve.js');const QTR=require('./coop-qtrace.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const ROOT=path.resolve(__dirname,'../..');
@@ -19,7 +19,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 /* real boot condition (the game script ran to its end: window.__ctmBuilt, assemble.py), not a 3-3.5 s timer; a page that never boots still reaches the next step, whose own check then fails */
 const booted=o=>o.p.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:60000}).catch(()=>{});
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);/* socket log for failure dumps: every WebSocket the page opens (url tail, open / close code, ms since load) */
+  await serve(ctx);await QTR(ctx);/* socket log for failure dumps: every WebSocket the page opens (url tail, open / close code, ms since load) */
   await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);/* COOP_RECONNECT: a sleeping phone's socket looks open but hears nothing (frames dropped while __wsDeaf) */Object.defineProperty(w,'onmessage',{configurable:true,set(f){w.addEventListener('message',e=>{if(!window.__wsDeaf)f.call(w,e)})}});const L=window.__wsLog,i=L.length,tag=String(u).replace(/^.*\/room\//,'').replace(/&name=.*$/,'');
     L.push([Date.now()-t0,'new',tag]);w.addEventListener('open',()=>L.push([Date.now()-t0,'open',i]));w.addEventListener('close',e=>L.push([Date.now()-t0,'close',i,e.code]));return w};
    window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
@@ -60,7 +60,7 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
    const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true},k0||null);if(r&&!k0)return true;
    /* review/coop-c4-stuck: a click while a card is still queued (Q not yet on screen) is ignored by nextBuoi (Q.length): only count the press when it took */
    if(r&&await until(o,k0=>!!(COOPW.bend||COOPW.pend||__co().waiting||COOPW.nrdy===__co().week||document.getElementById('next').disabled||__co().week+':'+(S.buoi||0)!==k0),k0,2500))return true;await sleep(250)}
-  ok(false,o.name+' #next enabled',await o.p.evaluate(()=>({b:[S.buoi||0,S.tuan,S.month,document.getElementById('next').textContent],co:__co(),bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,nrdy:COOPW.nrdy,pendBuoi:!!COOPW.pendBuoi,wk:COOPW.whereKey,st:COOP.state.status,ended:COOP.state.ended,Q:Q.length,tr:COOPW.tr.slice(-16),ws:window.__wsLog})));return false}
+  ok(false,o.name+' #next enabled',await o.p.evaluate(()=>({b:[S.buoi||0,S.tuan,S.month,document.getElementById('next').textContent],co:__co(),bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,nrdy:COOPW.nrdy,pendBuoi:!!COOPW.pendBuoi,wk:COOPW.whereKey,st:COOP.state.status,ended:COOP.state.ended,Q:Q.length,tr:COOPW.tr.slice(-16),ws:window.__wsLog})));if(process.env.COOP_QTRACE)console.log('QTRACE '+o.name+' '+JSON.stringify(await o.p.evaluate(QTR.dump).catch(e=>String(e))));return false}
 /* one buổi for both (PROTOCOL §9: the buổi advances when both have ended it) */
 /* COOP_NIGHTS=1 (stress): before a buổi, one seat may win a night with the Emperor (as Tranh sủng does), so jnight ends her day */
 const NIGHTS=+process.env.COOP_NIGHTS||0;
@@ -108,7 +108,7 @@ const AUDIT=()=>{const out={held:[],dup:[],notUsed:[],notTaken:[],notPick:[],fr:
  const add=(fid,key)=>{if(typeof fid!=='string'||!fid||/^man:thive/.test(fid))return;if(!H.has(fid))H.set(fid,new Set());H.get(fid).add(key)};
  const walk=(o,path,src,seen,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>30)return;seen.add(o);if(o.coop)return;
   if(Array.isArray(o)){o.forEach((x,i)=>walk(x,path+'['+(x&&x.id!=null?'#'+x.id:i)+']',src,seen,d+1));return}
-  if(typeof o.fid==='string'&&o.fid)add(o.fid,src+':'+(o.id!=null?'id'+o.id:path));
+  if(typeof o.fid==='string'&&o.fid)add(o.fid,o.id==null&&o.sid!=null&&o.name?'srv:'+o.sid+'|'+o.name/* r2-r2: one servant = sid + name on every seat (a coopAsk request copy of a servant she put into an NPC household is the same person as the world servant the host made from it) */:src+':'+(o.id!=null?'id'+o.id:path));
   for(const k in o){if(k==='fid'||k==='visit'||k==='fidUsed'||k==='fidDead'||k==='fseen'||k==='usedFaces'||k==='kidUsed'||k==='fdead')continue;const v=o[k];if(v&&typeof v==='object')walk(v,path+'.'+k,src,seen,d+1)}};
  const seen=new Set();const me=COOPW.seat;
  if(S.pid)add(S.pid,me+':player');seen.add(S);for(const k in S){if(/^(fid|visit|fidUsed|fidDead|fseen|usedFaces|kidUsed|fdead)$/.test(k))continue;const v=S[k];if(v&&typeof v==='object')walk(v,'S.'+k,me,seen,0)}
@@ -154,7 +154,7 @@ const CLASH=w=>{try{let who=S.maid||null;if(!who||typeof who!=='object'){return{
     if(o!==S&&!rivals.includes(o)&&/^(maid|mama):/.test(o.fid||'')){r=o.fid;return}for(const k in o){const v=o[k];if(v&&typeof v==='object')f(v,d+1)}};f(rivals,0);if(!r)f(S.thO,0);return r});
    clash=wf?await B.p.evaluate(CLASH,wf):{none:1};console.log('RF_CLASH guest maid ←',wf,JSON.stringify(clash));ok(clash&&clash.k,'RF_CLASH: guest\'s maid given a world face',clash)}
   await weekBoth(A,B,w);
-  for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),`week ${w+1}: ${o.name} advanced`);await clear(A);await clear(B);await sleep(1500);
+  for(const o of [A,B]){const adv=await untilC(o,x=>__co().week===x+1,wk,90000);ok(adv,`week ${w+1}: ${o.name} advanced`);if(!adv)for(const x of [A,B]){console.log('STUCK '+x.name+' '+JSON.stringify(await x.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),co:__co(),Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,nrdy:COOPW.nrdy,ngoW:COOPW.ngoW,pendBuoi:!!COOPW.pendBuoi,wantB:COOPW.wantB,tr:COOPW.tr.slice(-24)})).catch(e=>e.message)));if(process.env.COOP_QTRACE)console.log('QTRACE '+x.name+' '+JSON.stringify(await x.p.evaluate(QTR.dump).catch(e=>String(e))))}}await clear(A);await clear(B);await sleep(1500);
   if(clash&&clash.k){const hw=await A.p.evaluate(k=>{let n=0;const seen=new Set();const f=(o,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>8||o.coop)return;seen.add(o);if(Array.isArray(o)){o.forEach(x=>f(x,d+1));return}if(o.fid===k)n++;for(const j in o){if(j==='visit')continue;const v=o[j];if(v&&typeof v==='object')f(v,d+1)}};f(rivals,0);f(S.thO,0);return n},clash.k);
    const gm=await B.p.evaluate(()=>S.maid&&S.maid.fid||null);
    ok(hw===1&&gm&&gm!==clash.k,'RF_CLASH: the world person on the host keeps her face (host-canon), the guest\'s maid moved to a free face',{hw,guestMaid:gm,k:clash.k})}
