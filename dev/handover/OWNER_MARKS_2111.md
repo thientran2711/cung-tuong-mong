@@ -3,7 +3,7 @@ Keep one row per mark; update Status/LIVE when it moves. Summary to her = short 
 | # | Time Z | Problem (short) | Ref shot | Worker / session | Status | LIVE sha |
 |---|---|---|---|---|---|---|
 | 1 | 01:42 | Send the frames PDF | — | ui-tour (82) | SENT in 84 chat | — |
-| 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF in work; ASKED her: add «Hảo hữu» sheet? | — |
+| 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF SENT 50 pp; ASKED her: add «Hảo hữu» sheet? | — |
 | 3 | 01:58 | Chí tôn: «Hoàng thượng» not centred; niên hiệu shown as name → name «Hoàng thượng», niên hiệu row below | owner-2111-chiton-nienhieu.jpg | chiton-name session_01Rc5AsJe31NLb75JMbggVQc (centring → keeper) | in work | — |
 | 4 | 02:00 | Sở trường/Hay/Chuyện doubled labels → one column «Sở trường · Trọng · Dạo này» | owner-2111-sotrong-dup.jpg | chiton-name | in work | — |
 | 5 | 02:02 | Trait box «Trọng tài / Mê sắc…» repeats → into «!» | owner-2111-trait-box-dup.jpg | keeper kit-pcrow-square (merged with #9) | in work | — |
