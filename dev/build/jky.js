@@ -183,12 +183,16 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  if(O.s)try{const r=SPEC[O.s](c,O);if(r)out.push(r)}catch(e){kerr("spec "+O.s,e)}
  else if(O.buy)try{const r=SPEC.item(c,O);if(r)out.push(r)}catch(e){kerr("buy",e)}
  return out.join("; ")}
+/* r4b (E30c, law 6c — the reviewer's P1): a lost case found here (lostHere: st "lost", the piece only in the case) goes home through jlost's ONE
+   return with the case's mark (lo). Before, the case's bare object (no lo) was passed: lostReturn took its «case gone» branch, wrote a «dead» copy to
+   the ledger box (owner unknown → her), the owner never got it and the case stayed open — the next Kỳ ngộ wrote another (coop-dresscode-scan: 2–3 copies). */
+function kyLc(L){/* the dialog was built earlier: a case closed (or held by someone) meanwhile moves nothing */const c=L&&typeof loGet==="function"?loGet(L.id):L;return c&&c.st==="lost"&&c.e?Object.assign({},c.e,{lo:c.id}):null}
 /* ---------- specials: every piece only moves (jil / jlost), every fact is a real one ---------- */
 const SPEC=KY.SPEC={
  ret:(c,O)=>SPEC.item(c,O),
  give:(c,O)=>SPEC.item(c,O),
  item:(c,O)=>{const F=c.F;
-  if(c.X.lc){const L=c.X.lc,o=loP(L.own);if(c.oi===0){lostReturn(L.e,"kyngo");return `${loNm(L.k)} về lại tay ${nm(o)}`}
+  if(c.X.lc){const L=c.X.lc,o=loP(L.own);if(c.oi===0){const x=kyLc(L);if(!x)return"";lostReturn(x,"kyngo");return `${loNm(L.k)} về lại tay ${nm(o)}`}
    const x=Object.assign({},L.e,{lo:L.id,gh:L.own,by:key(F)});delete x.from;delete x.giver;F.inv=F.inv||[];F.inv.push(x);L.keep=1;L.by=key(F);L.st="held";L.at=key(F);
    try{ilLog(L.e,"lo"+L.id,key(F),"kyngo: giữ lại")}catch(e){}return `${loNm(L.k)} nằm trong rương ${nm(F)}`}
   if(c.X.box){const x=c.X.box;if(c.oi===1){ilTake(x,F,"kyngo");const i=F.inv.indexOf(x.e);if(i>=0)F.inv.splice(i,1);ilGone(F,x.e,"th");return `${itm(x.e.k).n} dâng lên Đức Thọ cung`}
@@ -205,14 +209,14 @@ const SPEC=KY.SPEC={
  intel:c=>{const F=c.F;const L=liveRivals(true).filter(v=>v!==F&&(c.W&&c.W.ref)!==v);const v=L.sort((a,b)=>oan(b,F)-oan(a,F))[0];if(!v)return"";
   if(F===S){const f=intelLearn(v,KB().intelN,{by:wName(c.W),how:"Kỳ ngộ"});return `biết thêm chuyện của ${v.name}${f?": "+String(f).replace(/<[^>]+>/g,""):""}`}evA(F,v,KB().evStep);return""},
  ev:c=>{const F=c.F;if(c.X.pl){const n=evA(F,c.X.pl.a,KB().evStep);return `chứng cứ về ${nm(c.X.pl.a)} +${n||KB().evStep}`}
-  if(c.X.lc){const L=c.X.lc;lostReturn(L.e,"kyngo");L.cev=(L.cev||0)+KB().evStep;return `${loNm(L.k)} về lại rương, thêm một manh mối`}return""},
+  if(c.X.lc){const L=c.X.lc;const x=kyLc(L);if(x)lostReturn(x,"kyngo");L.cev=(L.cev||0)+KB().evStep;return x?`${loNm(L.k)} về lại rương, thêm một manh mối`:"thêm một manh mối"}return""},
  spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
  cure:c=>{const F=c.F;const i=typeof illOf==="function"?illOf(F):null;if(i){F.ill=null;return "bệnh cũ dứt hẳn"}ap(F,{suc:Math.round(KB().sucRest)});return `bồi bổ, Sức +${Math.round(KB().sucRest)}`},
  rk:c=>{try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,old+KB().rkStep));if(S.srv.rk>old)return `được thăng ${SRK.maid[S.srv.rk]}`}}catch(e){}return""}
 };
 /* ---------- her card ---------- */
 function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item"&&(c.X.box||c.X.rr)){const pr=buyPr(c);if(pr&&!(c.X.box&&i===1))C.bac=(C.bac||0)+pr}if(O.od&&C.seen)L.push(word(seenOd(Object.assign({},c,{oi:i}))));const t=costText(C);if(t)L.push("tốn: "+t);
- const G=sc(O.g,c.b),W=[];if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(`Sủng +${G.sung}`);if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
+ const G=sc(O.g,c.b),W=[];if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
  const sw=specW(c,O,i);if(sw)W.push(sw);for(let j=0;j<W.length;j++)W[j]=gW(W[j]);
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */
@@ -241,6 +245,10 @@ function book(){try{return JSON.parse(localStorage.getItem("ctm-kyngo")||"{}")||
 function meet(c,opt){try{const b=book();const e=b[c.id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[c.id]=e;localStorage.setItem("ctm-kyngo",JSON.stringify(b))}catch(e){}}
 const TITLE={ma_phe:"Hương cũ Trường Môn",ma_giao:"Sổ tay giáo tập",ma_nhac:"Khúc đàn đêm vườn ngự",ma_hoa:"Họa sư bên hàng liễu",ma_ty:"Phương thuốc gia truyền",ma_co:"Ván cờ tiên đế",ma_lao:"Hiên Phật đường",vat_lac:"Ngọc rơi trên lối",vat_minh:"Của mình tìm lại",vat_cu:"Di vật người đã khuất",vat_thu:"Con vật lạc chủ",vat_chung:"Lá thư trong chậu lan",vat_ngu:"Món quý để dành",de_mua:"Chung áo dưới mưa",de_but:"Nét ngự bút",de_den:"Điều ước hoa đăng",de_su:"Câu hỏi của sứ thần",th_kinh:"Sớm mai Phật đường",th_tham:"Bánh trung thu có thư",th_chi:"Lời dặn Đoan ngọ",th_sao:"Đêm Thất tịch",sv_den:"Đèn rơi cứu người",sv_tuyet:"Đêm tuyết người gác cổng",sv_co:"Cô cô để mắt",sv_tre:"Hoàng tử lạc đường"};
 KY.TITLE=TITLE;
+/* E42 (law 6c, jlost one owner change): «Giữ lại» keeps the piece through jlost's ONE keep road (loKeepBy): only while the case still holds it
+   (st "lost"); a card answered after the piece moved on (found / returned / held) moves nothing. Before: an own copy pushed with no check (2–7 copies
+   with the «dead» box copies; lost-one-home-scan / coop-lost-scan). «Mang trả» / «Của mình tìm lại» go through lostReturn (jlost finds the case). */
+{const it0=SPEC.item;SPEC.item=function(c,O){if(c&&c.X&&c.X.lc&&c.oi!==0&&typeof loKeepBy==="function"){const L=c.X.lc,F=c.F;return loKeepBy(L,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:""}return it0.apply(this,arguments)}}
 function bookHTML(){const b=book();const ids=Object.keys(b).filter(id=>DEF[id]);const y=Object.keys(DEF).length;
  const rows=[["Kỳ ngộ đã gặp",`<b>${ids.length}/${y}</b> kỳ ngộ đã gặp`,ids.length?"g":""]].concat(ids.map(id=>[`✧ ${TITLE[id]}`,`${b[id].n>1?`${b[id].n} lần · `:""}${b[id].first?`lần đầu: ${b[id].first.who||""}${b[id].first.o?", "+b[id].first.o:""}`:""}`]));
  rows.push(["Ghi chú","Sổ chỉ để nhớ: kỳ ngộ không mang lợi thế nào sang kiếp sau."]);

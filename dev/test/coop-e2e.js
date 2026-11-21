@@ -5,7 +5,7 @@
    B comes back → resumes same week, B dies → normal rebirth choice → new person in the SAME world, single-player + old save still load.
    Hooks used (PROTOCOL.md / jcoop.js): window.COOP {code,seat,week,online,ended,frozen,waiting,on}, rivals entry coop:true id 901/902. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
-const {serve,BASE}=require('./coop-serve.js');
+const {serve,BASE}=require('./coop-serve.js');const K61P=require('./k61-coop-probe.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const ROOT=path.resolve(__dirname,'../..');
@@ -165,6 +165,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
     ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y])}
+   /* coop-guest-names (K61MAP collision log, both seats): no shared person's name masked through another record, one j61 key = one person */
+   for(const o of [A,B]){const r=await o.p.evaluate(K61P);if(r&&!r.skip&&!r.err){ok(!r.coll.length,tag+' '+o.name+': mask never prints another record\'s title over a shared person (K61MAP)',r.coll.length?r.coll.slice(0,4):undefined);ok(!r.keyDup.length,tag+' '+o.name+': one j61 key = one person',r.keyDup.length?r.keyDup.slice(0,4):undefined);if(r.scrub){const inF=tag==='after week 2'&&!r.scrub.ok&&NCF&&r.scrub.out==='Quý nhân '+r.scrub.name/* F2 in flight: her own person still holds the host's full name until the order lands one week later (a known holder keeps the name readable) */;(inF?(c,m,x)=>console.log('note (forced clash in flight, F2) '+m+' '+JSON.stringify(x)):ok)(r.scrub.ok,tag+' '+o.name+': friend\'s name after the mask',r.scrub)}}else console.log('K61 probe '+tag+' '+o.name+' '+JSON.stringify(r))}
    const okS=a.fr===c.me&&c.fr===a.me;ok(okS,tag+': each sees the other as a person',okS?[a.me,a.fr,c.me,c.fr]:{n:[a.me,a.fr,c.me,c.fr],trA:await A.p.evaluate(()=>COOPW.tr.slice(-14)),wsA:await A.p.evaluate(()=>window.__wsLog),trB:await B.p.evaluate(()=>COOPW.tr.slice(-8))});return[a,c]};
  /* "world" = each seat has its base; the friend's character (her `me` → the room's state) reaches the other seat a moment later: wait for it, as a player would see her appear */
  {const fr=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop);return[S.name,f?f.name:null]});const t0=Date.now();
@@ -210,6 +212,15 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    const an=await A.p.evaluate(()=>S.name);NCF.f2=await B.p.evaluate(an=>{if(S.maid&&S.maid.name){const o=S.maid.name;S.maid.name=an;return{p:'maid',was:o}}const o=S.name;S.name=an;return{p:'name',was:o}},an);NCF.an=an;
    console.log('   NC force',JSON.stringify(NCF))}}
  if(GE)await geP('ge rank after 3 merged weeks',null,null);
+ /* COOP_GE (review/ge-phutang, E35b): a Phù Tang seat (origin pf, road pt_*) opens ITS OWN grand-ending branch (geOrig identity) and gets the Hồi kết nhánh
+    dialog; the other seat's branch / S.ge is untouched (S is personal) — then the seats swap (two-way). Each seat's life is restored after the probe. */
+ if(GE){const gePt=(o,rd)=>o.p.evaluate(rd=>{const k0=S.origin&&S.origin.k,f0=S.st.f14,g0=S.ge,ch0=S.st.ch,q0=Q.slice();
+    try{S.origin.k='pf';S.st.f14=Object.assign({},f0||{},{rd});S.ge=null;const s=geS();S.st.ch=Object.assign({},ch0||{},{all:1});Q.length=0;geAsk();const q=Q.find(m=>m.pid==='ge1');
+     return{b:s&&s.b,live:typeof geOrig==='function'&&geOrig(rd)==='pf',ask:!!q&&q.opts.length===4}}
+    finally{S.origin.k=k0;S.st.f14=f0;S.ge=g0;S.st.ch=ch0;Q.length=0;Q.push(...q0)}},rd);
+  const own=o=>o.p.evaluate(()=>{const g=S.ge;return g?g.b:null});
+  for(const [P,O,rd] of [[A,B,'pt_hai'],[B,A,'pt_dang']]){const o0=await own(O);const r=await gePt(P,rd);const o1=await own(O);
+   ok(r.b===rd&&r.live&&r.ask,`ge Phù Tang: ${P.name} on ${rd} opens its own branch + Hồi kết nhánh`,r);ok(o0===o1,`ge Phù Tang: ${O.name}'s own branch untouched by ${P.name}'s`,{o0,o1})}}
  if(NCF){/* F2 outcome: after two more merged weeks the host's order reached her seat and she renamed her person (texts follow) */
   const b=await B.p.evaluate(p=>({n:p==='maid'?S.maid&&S.maid.name:S.name,ord:window.NM_ORD,o:S.nmOrd||null}),NCF.f2.p);const a=await A.p.evaluate(()=>({ord:NM_FIX.orders||0,o:S.nmOrd||null}));
   ok(b.n&&b.n!==NCF.an,'force F2: the guest\'s person that took the host\'s name was renamed on her seat by the host\'s order',{b,a,f2:NCF.f2})}
@@ -217,6 +228,17 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const g=o=>o.p.evaluate(()=>({has:typeof agOn==='function',on:typeof agOn==='function'&&agOn(),tick:window.AG?AG.stat.tick:-1}));const ha=await g(A),hb=await g(B);
   ok(ha.has&&ha.tick>0,'agent loop: the host ticks',ha);ok(hb.has&&!hb.on&&hb.tick===agB0,'agent loop: the guest never runs agTick',{...hb,before:agB0})}
  await shot(A,'07-after3');await shot(B,'07-after3');
+ /* COOP_LAND=1 (bang-words review E40r, CO-OP LAND GATE OD:L594): two seats of DIFFERENT foreign lands (COOP_A_ORIGIN / COOP_B_ORIGIN,
+    bd = Ba Tư on a new life): each seat's own screens (story / act / go tabs + the page) carry ITS land and none of the other land's home words */
+ if(+process.env.COOP_LAND){const LW={nc:/Nhiên Đăng|Khai Kinh|lão Phác|Thế tử huynh|Vương thúc|sông Áp Lục|Cao Ly/,bd:/lửa thánh|Hỏa giáo|Vương trung vương|Tô Lận|Nô Nhụ|Ba Tư/,
+   pf:/Thiên hoàng|Nại Lương|đền Thần|Nan Ba|Phù Tang/,st:/thảo nguyên|Khả hãn|Khả đôn|Phụ hãn|trà sữa|kim trướng|trướng vàng|đèn bơ/};
+  const grab=o=>o.p.evaluate(()=>{const t0=tab;const out=[];for(const t of['story','act','go']){try{tab=t;render();out.push((document.getElementById('panel')||{}).innerText||'')}catch(e){}}try{tab=t0;render()}catch(e){}
+   return{k:S.origin&&S.origin.k,land:S.origin&&S.origin.land,txt:out.join('\n')}});
+  const ga=await grab(A),gb=await grab(B);
+  for(const [g,o,other] of [[ga,A,gb],[gb,B,ga]]){const mine=LW[g.k],oth=LW[other.k];
+   ok(!!g.land&&g.k===(o===A?process.env.COOP_A_ORIGIN:process.env.COOP_B_ORIGIN),`land: ${o.name} plays her own thân phận`,{k:g.k,land:g.land});
+   const bad=[];for(const re of [oth,LW.st])for(const line of g.txt.split('\n')){const m=line.match(re);if(m)bad.push(m[0]+' :: '+line.slice(0,160))}
+   ok(bad.length===0,`land: ${o.name} (${g.land}) sees none of the other seat's land words (${other.land}) nor steppe words on her own tabs`,bad.slice(0,5))}}
  if(ML){const b1=await B.p.evaluate(()=>({hit:window.__mlHit,N:window.__mlN,ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),maids:S.staff.filter(x=>x.role==='maid').length,month:S.month,calls:window.__mlCalls,feud:BAL.mline.feud}));
   const a1=await A.p.evaluate(()=>({N:window.__mlN,ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),duc:Object.fromEntries(rivals.filter(v=>!v.coop).map(v=>[v.id,v.duc||0]))}));
   const evMeB=+(b1.N.evMe||0),evMeA=+(a1.N.evMe||0);

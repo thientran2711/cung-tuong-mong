@@ -1,0 +1,77 @@
+/* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
+   (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
+   Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
+Object.assign(BAL.kc3.fx,{kc_tt:{
+ s1:[{c:{suc:-5,duc:-1},w:{tamco:2},g:[8]},{c:{suc:-5},w:{duc:2},g:[-8]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:1},sc:1,g:[5,-6]}],
+ c1:[{c:{suc:-3},w:{kgt:2},g:[6]},{c:{suc:-5},o:[45,["d","tamco",3]],w:{tamco:2},sc:1,g:[-10]},{c:{},w:{duc:2},g:[-5]}],
+ c2:[{c:{suc:-10},w:{danh:2},g:[10,-4]},{c:{suc:-10},o:[40,["d","tamco",3],["d","tai",6]],sc:1,l:{kgt:-3},g:[6]},{c:{},w:{duc:2},g:[-5]}],
+ c3:[{c:{},w:{kgt:2},g:[8,-10]},{c:{},w:{duc:1},g:[10,-6,35]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,g:[6,-8]}],
+ t1:[{c:{},w:{duc:2},g:[4]},{c:{suc:-5},o:[45,["d","tamco",3]],sc:1,l:{duc:-2},g:[-10]},{c:{bac:-30},w:{tamco:2},g:[6]}],
+ x1:[{c:{suc:-5},g:[10]},{c:{suc:-5}},{c:{suc:-10},o:[35,["d","tamco",3]]}],
+ E:{win:{fx:{tamco:3},sc:2,mat:50},mid:{fx:{bac:30},sc:1},lose:{fx:{duc:2},sc:1}}}});
+Object.assign(BAL.kc3.fx,{
+ kc_dtq:{
+  s1:[{c:{suc:-5},w:{tamco:1},g:[8]},{c:{suc:-5},w:{duc:2},g:[-6,4]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:2},sc:1,g:[5]}],
+  c1:[{c:{bac:-40},w:{duc:2},sc:1,g:[8]},{c:{suc:-20},o:[45,["d","tamco",4],["d","suc",10]],sc:1,l:{kgt:-3},g:[8]},{c:{},w:{kgt:2},g:[-6]}],
+  c2:[{c:{suc:-10},w:{duc:2},g:[8]},{c:{},w:{kgt:2},g:[-8,6]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{kgt:-4},g:[6]}],
+  c3:[{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:3},sc:1,l:{suc:-5}},{c:{},w:{duc:2},g:[-4]},{c:{suc:-10},w:{tamco:2},g:[5]}],
+  t1:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{suc:-5},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3},g:[-8]},{c:{bac:-30},w:{kgt:2},g:[5]}],
+  x1:[{c:{suc:-5},g:[8]},{c:{suc:-5},g:[-6]},{c:{suc:-10},o:[35,["d","tamco",3],["d","duc",4]]},{c:{}}],
+  E:{win:{fx:{danh:3},sc:2},mid:{fx:{kgt:3},sc:1},lose:{fx:{duc:2},sc:1}}},
+ kc_muoi:{
+  s1:[{c:{suc:-5},w:{kgt:4},g:[20,8]},{c:{suc:-5},w:{tamco:2},g:[-6]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:1},sc:1,g:[10,6,-5]}],
+  c1:[{c:{suc:-10},w:{tamco:2},g:[8]},{c:{suc:-5},w:{duc:3},g:[-8]},{c:{bac:-40},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3}}],
+  c2:[{c:{suc:-5},w:{bac:30},g:[6]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{duc:2},sc:1,l:{bac:-20},g:[-6]},{c:{},w:{duc:1}}],
+  c3:[{c:{bac:-40},w:{danh:3,duc:2},g:[6]},{c:{suc:-20},w:{duc:3,danh:2}},{c:{},w:{bac:20},g:[4]}],
+  t1:[{c:{},w:{bac:20},g:[5]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-3},g:[-8]},{c:{},w:{duc:2},g:[-4]}],
+  x1:[{c:{suc:-5},g:[8]},{c:{suc:-10},o:[40,["d","tamco",3]],g:[-6]},{c:{suc:-5}},{c:{}}],
+  E:{win:{fx:{bac:40},sc:2},mid:{fx:{tamco:2},sc:1},lose:{fx:{duc:2},sc:1}}},
+ kc_thd:{
+  s1:[{c:{bac:-20},w:{duc:2},g:[10]},{c:{},w:{tai:1},g:[-6]},{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:2},sc:1}],
+  c1:[{c:{suc:-15},o:[40,["d","tai",3],["a","thi",8]],w:{danh:5},sc:1,l:{danh:-1}},{c:{},w:{duc:2},g:[10]},{c:{suc:-5},w:{tai:1},g:[5]}],
+  c2:[{c:{},w:{duc:2}},{c:{suc:-5},o:[45,["d","tamco",3]],w:{danh:2},sc:1,g:[-3]},{c:{suc:-10},w:{tai:2}}],
+  c3:[{c:{suc:-10},w:{danh:2},g:[5,-4]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{kgt:-2},g:[6]},{c:{},w:{duc:2},g:[-4]}],
+  t1:[{c:{suc:-10},w:{duc:2},g:[6]},{c:{suc:-10},o:[40,["d","tai",3]],w:{danh:3},sc:1,l:{danh:-2}},{c:{bac:-25},w:{kgt:2},g:[4]}],
+  x1:[{c:{suc:-5},g:[8]},{c:{suc:-5},o:[40,["d","tamco",3],["d","tai",6]],g:[-6]},{c:{}}],
+  E:{win:{fx:{danh:4},sc:2},mid:{fx:{tai:2},sc:1},lose:{fx:{duc:2},sc:1}}},
+ kc_ch:{
+  s1:[{c:{suc:-10},w:{duc:2},g:[4]},{c:{suc:-5},w:{tamco:1},g:[3]},{c:{suc:-5},o:[40,["d","tai",3]],w:{tai:1},sc:1,g:[6,-2]}],
+  c1:[{c:{suc:-5},w:{duc:2},g:[10]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:2},sc:1,l:{kgt:-3}},{c:{},w:{duc:1},g:[-3]}],
+  c2:[{c:{bac:-30},w:{kgt:2},g:[3]},{c:{suc:-15},w:{duc:2},g:[3]},{c:{},w:{tamco:1},g:[-2]}],
+  c3:[{c:{suc:-5},w:{tamco:2},g:[-6]},{c:{},w:{duc:2},g:[4]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{duc:-2}}],
+  t1:[{c:{suc:-5},w:{duc:2},g:[3]},{c:{suc:-10},o:[45,["d","tai",3]],sc:1,l:{kgt:-2},g:[4]},{c:{bac:-30},w:{sac:2},g:[2]}],
+  x1:[{c:{suc:-10},g:[8]},{c:{suc:-10},o:[40,["d","sac",3],["d","tai",6]],g:[3]},{c:{}}],
+  E:{win:{fx:{danh:2},sc:2},mid:{fx:{duc:2},sc:1},lose:{fx:{tamco:2},sc:1}}},
+ kc_td:{
+  s1:[{c:{suc:-5},w:{tamco:2},g:[6]},{c:{suc:-5},w:{duc:3},g:[-8]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-2}}],
+  c1:[{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{suc:-5},g:[5]},{c:{},w:{duc:2},g:[-6]},{c:{bac:-30},w:{tamco:1},sc:1}],
+  c2:[{c:{suc:-10},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3}},{c:{suc:-5},w:{duc:2},g:[6]},{c:{},w:{tamco:2},g:[-4]}],
+  c3:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{bac:-30},w:{tamco:1},sc:1},{c:{suc:-15},o:[40,["d","tamco",3],["d","suc",10]],sc:1,l:{kgt:-3}}],
+  t1:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-3}},{c:{bac:-30},w:{tamco:1},g:[4]}],
+  x1:[{c:{suc:-5},g:[6]},{c:{suc:-5},g:[6]},{c:{suc:-10},o:[35,["d","tamco",3]]}],
+  E:{win:{fx:{tamco:3},sc:2},mid:{fx:{duc:2},sc:1},lose:{fx:{tamco:1},sc:1}}}});
+Object.assign(BAL.kc3.fx,{
+ kc_ke:{
+  s1:[{c:{suc:-5,kgt:-2},w:{duc:2},g:[5]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[6,6]},{c:{bac:-15},g:[10]}],
+  c1:[{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,g:[1,10,4]},{c:{suc:-5},w:{tamco:2}},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[3,10,6]}],
+  c2:[{c:{suc:-10},o:[40,["d","tamco",3],["f","proof",15,0]],sc:1,g:[12,6,4,-8]},{c:{bac:-20},g:[6,4]},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[6,10,3]}],
+  c3:[{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:2},g:[8]},{c:{},g:[8,6]},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[3,10,3]}],
+  t1:[{c:{},w:{tamco:1},g:[12]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[1,8]},{c:{},w:{duc:2},g:[8]}],
+  x1:[{c:{suc:-10},o:[35,["d","tamco",4],["f","muoi",15,0],["f","proof",10,0]]},{c:{},w:{duc:3}},{c:{suc:-10},o:[25,["d","tamco",3]]}],
+  E:{win:{fx:{kgt:4},sc:0,g:[6,10,15]},mid:{fx:{duc:2},sc:0,g:[8]},lose:{fx:{},sc:0,g:[15,5,10]}}},
+ kc_hon:{
+  s1:[{c:{suc:-5,kap:4},w:{tamco:1},g:[5]},{c:{},o:[45,["d","kgt",4]],w:{kap:-6},g:[-6]},{c:{bac:-15},g:[10]}],
+  c1:[{c:{kap:4},w:{duc:2},g:[8]},{c:{kgt:-2},w:{kap:-5},g:[-8]},{c:{kap:5},g:[8]}],
+  c2:[{c:{kgt:-3},w:{kap:-6},g:[10]},{c:{suc:-5},o:[40,["d","kgt",5]],g:[-6,6]},{c:{},w:{duc:1},g:[-6]}],
+  c3:[{c:{suc:-10},o:[45,["d","tamco",3]],w:{kap:-8},l:{kgt:-3}},{c:{bac:-20},w:{kap:-6},g:[6]},{c:{kap:6},w:{kgt:3},g:[8]}],
+  t1:[{c:{},w:{duc:2},g:[6]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[8,-6]},{c:{kap:5},g:[10]}],
+  x1:[{c:{}},{c:{suc:-10},o:[40,["d","kgt",4],["f","cha",15,0]]},{c:{kgt:-3},w:{duc:2}}],
+  E:{win:{fx:{kgt:4},sc:0,g:[25]},mid:{fx:{},sc:0,g:[10]},lose:{fx:{},sc:0}}},
+ tm96z:{
+  s1:[{c:{},g:[10,3]},{c:{},w:{duc:2},g:[8]},{c:{suc:-5},o:[45,["d","tamco",4]],w:{tamco:1},g:[8,8]}],
+  c1:[{c:{bac:-5},g:[6]},{c:{suc:-10},g:[8,3]},{c:{},w:{duc:1},g:[6]}],
+  c2:[{c:{},g:[8,10]},{c:{kap:4},g:[8,10]},{c:{suc:-5},o:[40,["d","tamco",4]],g:[6,8]}],
+  c3:[{c:{suc:-10},o:[50,["d","tamco",4]],g:[10,12]},{c:{},w:{duc:1},g:[6]},{c:{bac:-5},g:[6]}],
+  t1:[{c:{suc:-10,kap:5},g:[6]},{c:{kgt:-4},g:[15,10]},{c:{suc:-5},o:[35,["d","tamco",3]],g:[12]}],
+  x1:[{c:{suc:-5},o:[45,["d","tamco",4],["f","hen",15,0]]},{c:{},w:{duc:2},g:[15]},{c:{suc:-20}},{c:{suc:-20}}],
+  E:{win:{fx:{},sc:0},mid:{fx:{duc:2},sc:0},lose:{fx:{},sc:0}}}});

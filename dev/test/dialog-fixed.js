@@ -41,7 +41,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   await p.evaluate(()=>chooseM(0));await grab('2-hoi-nga-re-2');
   await p.evaluate(()=>{const r0=window.roll;window.roll=()=>true;chooseM(0);window.roll=r0});await grab('3-dai-ket-cuc');
   await p.evaluate(()=>chooseM(0));await grab('4-danh-hieu-moi');
-  {const c=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg'),ev=d&&d.querySelector('.k3ev'),pl=ev&&ev.querySelector('.kt3');if(!ev||!pl)return{ev:!!ev,kt3:[...d.querySelectorAll('.kt3')].map(e=>e.className+'|'+e.parentElement.className),kdh:d.querySelectorAll('.kdh').length,title:(d.querySelector('.kph')||{}).textContent};const a=ev.getBoundingClientRect(),b=pl.getBoundingClientRect();return{a:[a.left,a.top,a.right,a.bottom].map(Math.round),b:[b.left,b.top,b.right,b.bottom].map(Math.round),in:b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1}});chk(`${tag} (#54) the new-title plate sits ON the event picture`,c&&c.in===true,c)}
+  {const c=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg'),ev=d&&d.querySelector('.k3ev,.k3body>.k3mpic'),pl=ev&&ev.querySelector('.kt3');if(!ev||!pl)return{ev:!!ev,kt3:[...d.querySelectorAll('.kt3')].map(e=>e.className+'|'+e.parentElement.className),kdh:d.querySelectorAll('.kdh').length,title:(d.querySelector('.kph')||{}).textContent};const a=ev.getBoundingClientRect(),b=pl.getBoundingClientRect();return{a:[a.left,a.top,a.right,a.bottom].map(Math.round),b:[b.left,b.top,b.right,b.bottom].map(Math.round),in:b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1}});chk(`${tag} (#54) the new-title plate sits ON the event picture`,c&&c.in===true,c)}
   await p.evaluate(()=>{Q.length=0;S.ge=null;const s=geS();s.st[0]='f';geAnswer(1,1);showModal()});await grab('7-ket-cuc-thua');
   await p.evaluate(()=>{Q.length=0;S.ge=null;const s=geS();s.pull=[0,3,0,0];geAnswer(3,0);showModal()});await grab('8-quiet');
   /* (f) same frame size => same figure size + position on this device */
@@ -57,6 +57,51 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   {const r=await p.evaluate(async()=>{Q.length=0;Q.push({t:'Thử mất',h:'<p>Một việc có giá, có lợi và có thể mất.</p>',opts:[{n:'Nhận lời nàng',fx:{},x:'tốn: 1 khắc · thành: Sủng +2 · mất: Danh -3',go:()=>{}},{n:'Từ chối khéo',fx:{},x:'tốn: không · mất: Đức -2',go:()=>{}}]});showModal();await new Promise(r=>setTimeout(r,700));const d=document.querySelector('#modal .dlg');return [...d.querySelectorAll('.opts>button.ka')].filter(b=>b.offsetParent).map(b=>{const rows=[...b.querySelectorAll('small.kb>.kr')].filter(x=>x.querySelector('.krl').getClientRects().length).map(x=>[(x.querySelector('.krl')||{}).textContent,(x.querySelector('.krv')||{}).textContent.trim()]);return rows})});
    await p.screenshot({path:`${OUT}/${tag}-72-mat-row.png`});
    chk(`${tag} (#72) cards show Tốn / Được / Mất rows, the loss not inside Tốn`,r.length===2&&r.every(rows=>Array.isArray(rows)&&rows.some(x=>x[0]==='Mất')&&rows.some(x=>x[0]==='Tốn'&&!/Danh|Đức/.test(x[1]))),r)}
+  /* (i) #71 owner 21/11 ~05:02Z: EVERY dialog uses a kit frame size S / M / L / XL (data-ksz) and has that size's width (law 10) - the Fold «Sai … đi dò la» dialog had a size of its own. Every kind is opened for real. */
+  {const rows=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const res=[];const FW=KIT_SIZE.frame,mode=kitSzMode();
+    const meas=async(name)=>{await sleep(1500);const L=[...document.querySelectorAll('.dlg,.dbox.kpanel')].filter(d=>{const r=d.getBoundingClientRect();return r.width>5&&r.height>5&&!d.closest('[hidden]')&&!d.closest('#kload')&&getComputedStyle(d).visibility!=='hidden'});
+     L.forEach(d=>{const r=d.getBoundingClientRect(),k=d.dataset.ksz||'';const want=FW[k]?Math.min(FW[k].w[mode],innerWidth-16):null;res.push({name,cls:d.className.slice(0,50),ksz:k,w:Math.round(r.width),want,ok:!!FW[k]&&Math.abs(r.width-want)<=2})});if(!L.length)res.push({name,none:1});
+     Q.length=0;document.getElementById('modal').hidden=true;['kidfl','ktip'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});try{kitCoachOff()}catch(e){}};
+    const who=pMaid(),nm='Cung nữ thân tín tam đẳng Bạch Lan';const mk=n=>Array.from({length:n},(_,i)=>({n:'Lựa chọn '+(i+1),fx:{},x:'tốn: 1 khắc · thành: biết thêm',go:()=>{}}));
+    for(const k of['notice','news','intel','result','threat','reward','info','rule']){try{kitPanel({kind:k,title:'Thử '+k,rows:[['Việc','Thử ấn']],facts:['Điều thử.'],sections:[{h:'',rows:[['a','b']]}]},true);showModal();await meas('kitPanel '+k)}catch(e){res.push({name:'kitPanel '+k,err:e.message})}}
+    for(const [nme,w,o,h] of[['choice',null,mk(2),'<p>Một việc.</p>'],['choice+person',who,mk(2),'<p>Một việc.</p>'],['pick-list+person',who,mk(9),'<p>Ngươi muốn dò la ai?</p>'],['long text',null,[],'<p>'+'Một đoạn rất dài. '.repeat(70)+'</p>'],['person+text',who,[],'<p>Có người.</p>']]){Q.length=0;Q.push({t:'Sai '+nm+' đi dò la',who:w,h,opts:o});showModal();await meas(nme)}
+    try{S.maid=S.maid||{};S.maid.name='Bạch Lan';S.bac=500;spyPick(2);await meas('spyPick (real pick-list)')}catch(e){res.push({name:'spyPick',err:e.message})}
+    try{kitConfirm({title:'Chắc chăng?',lines:['Một dòng.'],yes:'Có',no:'Thôi'});await meas('kitConfirm')}catch(e){res.push({name:'kitConfirm',err:e.message})}
+    try{kitItemCard({e:S.inv.find(x=>x&&IT[x.k])});await meas('item card')}catch(e){res.push({name:'item card',err:e.message})}
+    try{kitTip({id:'scan',title:'Lời dặn thử',html:'<p>Một lời dặn ngắn.</p>'});await meas('tip')}catch(e){res.push({name:'tip',err:e.message})}
+    try{kitCoach({title:'Dặn thử',html:'<p>Một lời.</p>'});await meas('coach')}catch(e){res.push({name:'coach',err:e.message})}
+    try{S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,12);kitShopNvp();await meas('shop')}catch(e){res.push({name:'shop',err:e.message})}
+    return res});
+   const bad=rows.filter(r=>r.err||r.none||!r.ok);
+   console.log(tag,'(#71) dialogs measured:',rows.map(r=>`${r.name}:${r.ksz}/${r.w}`).join(' | '));
+   chk(`${tag} (#71) every dialog (${rows.length} opened, ${new Set(rows.map(r=>r.name)).size} kinds) uses a kit frame size S/M/L/XL and its width`,!bad.length,bad.slice(0,6))}
+  /* (j) #75 #76 #80 owner 21/11: the LEFT SLOT of a small frame = the main subject (person portrait / ITEM tile / matter picture) on EVERY device, and the event picture is the TOP of the right column (no empty band above it) */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const A=rivals.filter(v=>v&&v.name)[0],e=S.inv.find(x=>x&&IT[x.k]);const out={};
+    const cases={result:()=>kitPanel({kind:'result',title:'Bị từ chối',facts:['Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”'],who:pv(A)},true),
+     lohen:()=>Q.push({t:'Lỡ hẹn',btn:'Đã hiểu',who:pv(A),h:`<p>Đã quá hạn việc ${A.name} nhờ: <b>Mời Thường tại cùng nhau uống trà</b>.</p><p>Thiện cảm −3</p>`}),
+     lost:()=>Q.push({t:'Đồ thất lạc',who:pMe(),h:`${loTag(e)}<p><b>${loNm(e.k)}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao.</p>`,btn:'Đã hiểu'}),
+     matter:()=>kitPanel({kind:'news',title:'Tin cung',facts:['Mưa lớn suốt đêm, ngự hoa viên ngập nước.']},true)};
+    for(const k in cases){Q.length=0;cases[k]();showModal();await sleep(1700);const d=document.querySelector('#modal .dlg');const R=x=>x?x.getBoundingClientRect():null;const rc=R(d.querySelector('.k3right')),ev=R(d.querySelector('.k3right>.k3ev'));
+     out[k]={ksz:d.dataset.ksz,left:(d.querySelector('.k3body>:first-child')||{}).className||'',evTop:ev&&rc?Math.round(ev.top-rc.top):null,kievInText:d.querySelectorAll('.k3right .kiev').length,picLeft:!!d.querySelector('.k3body>.k3mpic')};Q.length=0;document.getElementById('modal').hidden=true}
+    return out});
+   chk(`${tag} (#75) small notice «Lỡ hẹn»: the person is the left slot (portrait) on this device`,r.lohen.ksz==='S'&&/k3mpor/.test(r.lohen.left),r.lohen);
+   chk(`${tag} (#80) event picture is the TOP of the right column (result + notice with a person)`,r.result.evTop!==null&&r.result.evTop<=3&&r.lohen.evTop!==null&&r.lohen.evTop<=3,[r.result,r.lohen]);
+   chk(`${tag} (#76) «Đồ thất lạc»: the ITEM tile is the left slot, not in the text, not a generic picture`,r.lost.ksz==='S'&&/k3mitem/.test(r.lost.left)&&r.lost.kievInText===0&&!r.lost.picLeft,r.lost);
+   chk(`${tag} (#76) no person / item: the matter (event picture) is the left slot`,r.matter.picLeft,r.matter)}
+  /* (k) #82 owner 21/11 ~05:37Z: a list of SHORT rows (Sổ nguyệt sự, people lists) is in TWO columns on the iPad, ONE on the phone */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const rv0=rivals.filter(v=>v&&v.name),rv=Array.from({length:14},(_,i)=>rv0[i%rv0.length]);/* 14 short rows: too tall for M, so the frame is XL (wide text column) like the owner's Sổ nguyệt sự */
+    const facts=[{who:S,text:'Ta: tháng này đã báo, ngày 13-19 · tháng trước: đã báo, ngày 13-19'},...rv.map(v=>({who:v,text:`${v.name}: tháng này đã báo, mong 3-8 · tháng trước: đã báo, mong 3-9`}))];
+    const long=[{who:S,text:'Một hàng rất dài. '.repeat(12)},...rv.slice(0,3).map(v=>({who:v,text:'Một hàng rất dài. '.repeat(12)}))];
+    const one=async(f)=>{Q.length=0;kitModal({kind:'intel',title:'Sổ nguyệt sự',sub:'Kính sự phòng',facts:f});await sleep(1800);const d=document.querySelector('#modal .dlg');const L=[...d.querySelectorAll('.kfacts')].map(x=>{const rs=[...x.children].filter(c=>c.classList.contains('kfact'));const xs=new Set(rs.map(c=>Math.round(c.getBoundingClientRect().left)));return{rows:rs.length,cols:xs.size,attr:x.dataset.kcols||''}});const sc=d.querySelector('.k3right');const o={ksz:d.dataset.ksz,L,scroll:sc?Math.max(0,...[d,...d.querySelectorAll('*:not(img):not(figure)')].filter(e=>/(auto|scroll|hidden|clip)/.test(getComputedStyle(e).overflowY)).map(e=>e.scrollHeight-e.clientHeight)):0};Q.length=0;document.getElementById('modal').hidden=true;return o};
+    return{short:await one(facts),long:await one(long)}});
+   const big=r.short.L.find(x=>x.rows>=3);
+   if(z.w>=1100)chk(`${tag} (#82) iPad: a list of short rows is in 2 columns (${big&&big.rows} rows, ${big&&big.cols} columns)`,big&&big.cols===2&&big.attr==='2'&&r.short.ksz==='XL',r.short);
+   else chk(`${tag} (#82) phone: the same list stays in 1 column`,big&&big.cols===1&&!big.attr,r.short);
+   chk(`${tag} (#82) long rows stay in 1 column`,r.long.L.every(x=>x.cols===1),r.long)}
+  /* (l) MAIN 88 (a) no empty «Được» cell: a card with no gain says «không» on every device (j65 dedupe used to delete the second «không»); (b) ONE title alignment on every card */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;Q.push({t:'Thử',h:'<p>Thử.</p>',opts:[{n:'Đeo ngay',fx:{},x:'Danh +2',go:()=>{}},{n:'Mặc kệ',fx:{},x:'',go:()=>{}},{n:'Vô ích',fx:{},x:'tốn: 1 khắc',go:()=>{}}]});showModal();await sleep(2200);const ob=[...document.querySelectorAll('#modal .opts>button.kopt')];if(ob.some(b=>!b.querySelector('.kr-duoc')))await sleep(3000);
+    const o=[...document.querySelectorAll('#modal .opts>button.kopt')].map(b=>({ta:getComputedStyle(b.querySelector('.kan')).textAlign,duoc:((b.querySelector('.kr-duoc')||{}).innerText||'').replace(/\s+/g,' ').replace(/^Được\s*/i,'').trim(),ton:((b.querySelector('.kr-ton')||{}).innerText||'').replace(/\s+/g,' ').replace(/^Tốn\s*/i,'').trim()}));Q.length=0;document.getElementById('modal').hidden=true;return o});
+   chk(`${tag} (kit-dialog-2 a) no empty Tốn / Được cell`,r.every(c=>c.duoc&&c.ton),r[1]);chk(`${tag} (kit-dialog-2 b) one title alignment on every card`,new Set(r.map(c=>c.ta)).size===1,r)}
   chk(`${tag} (#56) ${evs.length} dialogs with unlisted option titles, ${nCards} option cards: none without a picture`,!noPic.length,noPic.slice(0,6));
   console.log(tag,'summary',JSON.stringify(R.map(m=>[m.name,m.ksz,m.D.w+'x'+m.D.h,m.kol,m.fig&&m.fig.w+'x'+m.fig.h+'@'+(m.fig.y-m.D.y)])));
   chk(`${tag}: no page errors`,!errs.length,errs.slice(0,3));await ctx.close()}

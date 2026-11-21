@@ -73,10 +73,11 @@ const LIKEN={flower:"Hoa",music:"Nhạc",dish:"Món"};
 const ARTS=[
  {k:"cam",n:"Cầm",st:"tai",u:"Bậc 3: khúc Phượng cầu hoàng"},
  {k:"ky",n:"Kỳ",st:"tai",u:"Bậc 3: đánh cờ với Hoàng thượng"},
- {k:"thi",n:"Thi",st:"tai",u:"Bậc 3: mỗi tháng thơ đến tay Hoàng thượng, Sủng +1"},
+ {k:"thi",n:"Thi",st:"tai",u:"Bậc 3: mỗi tháng thơ đến tay Hoàng thượng, {sgRaw:tho.sung}"},
  {k:"hoa",n:"Họa",st:"tai",u:"Bậc 3: vẽ chân dung dâng Thái hậu"},
  {k:"vu",n:"Vũ",st:"sac",u:"Bậc 3: điệu Kinh hồng vũ"},
  {k:"y",n:"Y thuật & điều hương",st:"sac",u:"Bậc 2: nhận ra độc, xạ hương · Bậc 4: tự bào chế thuốc, chữa bệnh cho con"}];
+ARTS.forEach(a=>sgRuleObj(a,"u"));/* r2 sg-card: «{sgRaw:tho.sung}» read from BAL when shown */
 const NIGHTS=["Rèm the buông xuống, nến đỏ cháy đến canh tư. Sáng ra, Hoàng thượng ban cho ngươi một cây trâm ngọc.",
  "Tiếng mưa rơi trên mái ngói. Hoàng thượng ở lại đến khi trời hửng sáng.",
  "Ngài kể chuyện thuở còn là hoàng tử, rồi đèn lụi dần. Sáng hôm sau, cả hậu cung đều biết.",
@@ -122,6 +123,20 @@ function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
 function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung"))f*=.7;const r=Math.round(n*f);return n>0?Math.max(1,r):r}
+/* SG-CARD (law 4 + law 11, rv kit-opt-kem): HER Sủng written as a literal number in any card / option text («thành: Sủng +4») is drawn as the
+   real change, through the same sg() apply() uses (Hoàng thượng nồng nàn ×1.3, lạnh lùng ×.7 on gains). A number already drawn through sg()
+   (fmt, or an earlier sgTxt pass) carries a no-break space after «Sủng» and is never scaled twice. Someone else's Sủng — «nàng / nàng ta /
+   hắn / <Tên> Sủng …», «của nàng», «nàng mất» — is applied raw (ap(v,…)) and stays raw. ONE rule: read by kitParse (every kit card), the
+   hint model (jk2b kitOptModel) and the act lines (jaudit 15). */
+const SG_NB="\u00a0";
+function sgTxt(h){if(typeof h!=="string"||h.indexOf("Sủng")<0||typeof S!=="object"||!S||!S.emp)return h;
+ /* r2: a RANGE «Sủng +2 đến +4» (also «..» / «–») scales BOTH ends — the first build scaled only the number after «Sủng» */
+ return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)(?:(\s*(?:đến|\.\.|–)\s*)([+\-−]?)(\d+))?/gu,(m,p,l,g,n,sep,g2,n2,off,all)=>{const pre=all.slice(Math.max(0,off-40),off+p.length);
+  if(/nàng(?: ta)? mất|của nàng|nàng ta\s*$/.test(pre))return m;const w=pre.replace(/<[^>]*>/g,"").match(/(\p{L}+)\s*$/u);
+  if(w&&(/^(nàng|hắn|y|thị)$/.test(w[1])||/^\p{Lu}/u.test(w[1])))return m;
+  const sv=x=>`${x>0?"+":x<0?"-":""}${Math.abs(x)}`,v0=(g==="+"?1:-1)*+n,v=sg(v0);
+  if(sep==null)return v===v0?m:`${p}${l}${SG_NB}${sv(v)}`;
+  const u0=(g2?(g2==="+"?1:-1):(g==="+"?1:-1))*+n2,u=sg(u0);return v===v0&&u===u0?m:`${p}${l}${SG_NB}${sv(v)}${sep}${sv(u)}`})}
 /* KLOW: numbers where a FALL is good for her (Áp lực hôn sự / Nợ nhà / Phe chủ chiến, Lời đồn) — coloured by meaning (OD:L908), here and in the result card (j63) */
 const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
 /* AG-ALL-2f3: ONE stat-preview text. A Tai mắt GAIN is not a number handed over (OD 17/11 ~16:50Z / ~17:00Z): it is N approaches to real people who each
@@ -131,7 +146,25 @@ const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
    (cap BAL.ag.eye.cap). The chip / lists still show the real count (p.mat). window.__tmOff (old-stat test knob) reads the plain number. */
 function eyes(p){if(!p)return 0;const n=+p.mat||0;if(window.__tmOff)return n;try{const E=BAL.ag.eye;return Math.min(E.cap,n*E.w)}catch(e){return n}}
 function statTxt(k,v,lbl){const n=lbl||NAMES[k]||k;if(k==="mat"&&v>0)return `${n}: ngỏ lời ${v} người`;return `${n} ${v>0?"+":""}${v}`}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${statTxt(k,v)}</span>`}).join(" · ")}
+/* SG-CARD: her Sủng change v drawn through sg() — the no-break space marks it as already drawn, so sgTxt never scales it again */
+/* sgNow(v): sg(v) when a game is loaded; before one (a card getter read at load, title screen) the number as written */
+function sgNow(v){return typeof S==="object"&&S&&S.emp?sg(v):v}
+function sgStat(v,lbl){const w=sgNow(v),t=statTxt("sung",w,lbl);return w!==v?t.replace(/ (?=[+\-−]?\d+$)/,SG_NB):t}
+/* r2 (rv sg-card): the ONE printer of a Sủng change in a result / log line. sgOf(p,v): HER change is applied through sg() (apply / ap(S,…)) →
+   print sg(v) (marked); someone else's (ap(v,…) raw) → print v. Never pass a MEASURED delta (S.sung after − before): print that as it is.
+   sgRange(a,b): «Sủng +sg(a) đến +sg(b)» — both ends of a range drawn as applied (one number when they meet). */
+/* sgFix(v): HER Sủng that is applied AS IS (not through sg — e.g. the monthly thơ, j3) — marked so sgTxt never rescales it */
+function sgFix(v,lbl){const t=statTxt("sung",v,lbl);return t.replace(/ (?=[+\-−]?\d+$)/,SG_NB)}
+/* sgRule: typed Sủng in a static RULE text (arts tiers ARTFX/ARTMS, ARTS.u) is a token read from BAL when the text is READ (tables load
+   before BAL.deck): «{sg:deck.cam.w.sung}» = a change applied through sg (apply), «{sgRaw:tho.sung}» = applied as is, «{n:tho.sung}» = the
+   bare signed number. sgRuleArr / sgRuleObj turn every element holding a token into a getter, so every reader gets the live number. */
+function sgRule(s){return typeof s!=="string"||s.indexOf("{")<0?s:s.replace(/\{(sg|sgRaw|n):([\w.]+)\}/g,(m,f,p)=>{let v=typeof BAL!=="undefined"?BAL:null;for(const k of p.split("."))v=v&&v[k];v=+v||0;
+ return f==="sg"?(typeof S==="object"&&S&&S.emp?sgStat(v):statTxt("sung",v)):f==="sgRaw"?sgFix(v):`${v>0?"+":v<0?"-":""}${Math.abs(v)}`})}
+function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(a,i,{get:()=>sgRule(s),enumerable:true,configurable:true})});return a}
+function sgRuleObj(o,k){const s=o&&o[k];if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),enumerable:true,configurable:true});return o}
+function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
+function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
@@ -174,7 +207,7 @@ function myDaus(){return S.kids.filter(k=>k.alive&&k.sex==="f")}
 function liveRivals(q){return rivals.filter(v=>v.alive&&!v.out&&(q||!v.queen))}
 function qOn(){const q=rivals[0];return q.alive&&!q.out&&q.queen}
 function momRank(v){return v?(v.alive&&!v.out?(v.queen?7:v.rank):0):S.rank}
-function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v};if(!v)apply({danh:10})}
+function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v}}/* KP03: the mother's Danh (her and an NPC mother, BAL.kid.heirDanh) is jkidlife's setHeir wrap */
 function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;S.heir=null}if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */

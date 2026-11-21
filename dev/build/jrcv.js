@@ -95,7 +95,7 @@ function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&
  /* the co-op friend is a PLAYER (law 1): inside her accepted offer (jcoopworld invHer: he already tapped «Nhận» on his own card, COOPW.inv) his
     answer is that «Nhận» = the first (yes) option, never a roll for him (coop-ptime-reds: coop-thin-d «Kết giao» came back as «mách lẻo») */
  const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
-PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.out||(D.ok&&!D.ok(p,S,pp.x)))return null;
+PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||(p.out&&!D.cold)/* cold-faction: a letter from lãnh cung still waits */||(D.ok&&!D.ok(p,S,pp.x)))return null;
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,need:o.need,tsDis:o.tsDis,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
 /* Kết giao (j8 ACT.ally, NPC cx:ally): the asker sends BAL.actBac.ally bạc as the gift (paid when sent); yes / mách keep it, «từ chối» sends it back */
@@ -113,7 +113,7 @@ RCVK.ally={t:"Lời kết giao",act:"xin kết giao với",kind:"help",
   rcvNoO(p,t,{g:[`không dính bè phái, Danh ${balSg(A.danh)}`,rcvFoeX(fo,t,fh)].filter(Boolean).join(", "),fx:{danh:A.danh},go:()=>{rcvAp(p,{bac:g});foeAdd(fh)},r:`${me?"Ngươi":t.name} trả lễ, khéo từ chối kết giao với ${NM(p)}`}),
   rcvSabO(p,t,{g:`giữ lễ ${g} lượng`,go:keep,r:tq=>`${me?"Ngươi":t.name} nhận lễ của ${NM(p)} rồi đem chuyện đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Lập phe cùng (j10 found: her button, NPC cx3:facFound) */
-RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",ok:(p,t)=>!facOf(p)&&!facOf(t),
+RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",ok:(p,t)=>facIn(p)&&facIn(t)&&!facOf(p)&&!facOf(t),/* cold-faction: founding needs both present */
  line:p=>`<p>${p.name} sai người sang: “Trong cung một cây làm chẳng nên non. Nương nương nhà ta muốn cùng người lập một phe, chia nhau tin tức, che chở nhau.”</p>`,
  opts:(p,t)=>{const me=t===S;return[
   rcvYesO(p,t,0,{n:"Nhận lời lập phe",g:"có phe cùng chia tin tức, chứng cứ",go:()=>found(p,t)}),
@@ -122,14 +122,16 @@ RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",o
   rcvSabO(p,t,{g:"không dính bè phái",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} rủ lập phe đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Xin vào phe (j10 askJoin: the receiver is the faction's leader) and Mời vào phe (j10 facInvite: the receiver is the one invited); x = the faction id */
 const rcvFac=x=>(S.facs||[]).find(f=>f.id===x)||null;
-RCVK.facJoin={t:"Xin vào phe",act:"xin vào phe của",kind:"help",ok:(p,t,x)=>{const f=rcvFac(x);return !!f&&!facOf(p)&&facLeader(f)===t},
- line:(p,x)=>{const f=rcvFac(x);return `<p>${p.name} sai người sang: “Nương nương nhà ta xin được đứng cùng ${f?f.name:"phe của người"}.”</p>`},
- opts:(p,t,x)=>{const f=rcvFac(x),me=t===S;return[
-  rcvYesO(p,t,0,{n:"Nhận vào phe",g:"phe thêm người",go:()=>joinFac(p,f)}),
-  rcvYesO(p,t,1,{n:"Nhận cho có",g:"phe thêm người",go:()=>joinFac(p,f)}),
+/* cold-faction: the asker may write from lãnh cung (her letter card = an NPC's, j14 coldActsOf): the leader answers the letter (cold:1 lets PEND keep it);
+   taking in a phế phi is a real cost: yes = Danh − BAL.rcv.prop.danh (the mirror of the «no» gain) */
+RCVK.facJoin={t:"Xin vào phe",act:"xin vào phe của",kind:"help",cold:1,ok:(p,t,x)=>{const f=rcvFac(x);return !!f&&!facOf(p)&&facIn(t)&&facLeader(f)===t},
+ line:(p,x)=>{const f=rcvFac(x);return facIn(p)?`<p>${p.name} sai người sang: “Nương nương nhà ta xin được đứng cùng ${f?f.name:"phe của người"}.”</p>`:`<p>Một lá thư từ lãnh cung lọt ra: ${p.name} xin được đứng cùng ${f?f.name:"phe của người"}, mong có người bên ngoài nói giúp.</p><p class="past">Nhận một phế phi vào phe thì phe mang tiếng.</p>`},
+ opts:(p,t,x)=>{const f=rcvFac(x),me=t===S,lc=!facIn(p),D=BAL.rcv.prop.danh,lx=lc?{fx:{danh:-D},c:`nhận phế phi: Danh ${balSg(-D)}`}:{};return[
+  rcvYesO(p,t,0,Object.assign({n:"Nhận vào phe",g:"phe thêm người",go:()=>joinFac(p,f)},lx)),
+  rcvYesO(p,t,1,Object.assign({n:"Nhận cho có",g:"phe thêm người",go:()=>joinFac(p,f)},lx)),
   rcvNoO(p,t,{g:`phe giữ kín người, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} chưa nhận ${NM(p)} vào phe`}),
   rcvSabO(p,t,{g:"phe giữ kín người",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} xin vào phe đi kể${tq?" với "+rcvQn(tq):""}`})]}};
-RCVK.facInvite={t:"Lời mời vào phe",act:"mời vào phe",kind:"help",ok:(p,t)=>!!facOf(p)&&!facOf(t),
+RCVK.facInvite={t:"Lời mời vào phe",act:"mời vào phe",kind:"help",ok:(p,t)=>facIn(p)&&facIn(t)&&!!facOf(p)&&!facOf(t),
  line:p=>{const f=facOf(p);return `<p>${p.name} mời ngươi vào ${f?f.name:"phe của nàng"}. Vào thì cùng chia tin tức, chứng cứ, che chở nhau.</p>`},
  opts:(p,t)=>{const f=facOf(p),me=t===S;return[
   rcvYesO(p,t,0,{n:"Nhận lời vào phe",g:"có phe cùng chia tin tức, chứng cứ",go:()=>joinFac(t,f)}),

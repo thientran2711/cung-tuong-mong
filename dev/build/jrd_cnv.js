@@ -86,7 +86,7 @@ const CHU_Q=()=>CNV_QN();/* who holds the inner palace: Hoàng hậu / Thái h�
 /* {mis} relation, real both ways (OD:L1247); as a maid also Chủ tin */
 function CHU_MIS(n){return CNV_REL(n)}
 /* the Emperor's eye: Hoàng thượng để ý while a maid (BAL.ntRise then offers the rise), Sủng once raised */
-function CHU_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `Sủng +${Math.round(n/3)}.`}catch(e){return""}}
+function CHU_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `${sgStat(Math.round(n/3))}.`}catch(e){return""}}
 const CHU_E=()=>CHU_R()?S.sung:S.nt;/* odds term for options that reach the Emperor */
 
 rdDef("cnv_chu",5,{t:"Gói thuốc",w:"doc",sj:"gói thuốc của {mis}",cast(A){return CNV_MC(A,1)&&rdCast(A,["v"])},
@@ -336,7 +336,7 @@ CNV_QFIX("cnv_chu");
 const BAN_R=()=>!!(S.srv&&S.srv.risen);
 const BAN_T=(a,b)=>A=>{const x=BAN_R()?b:a;return typeof x==="function"?x(A):x};/* text: maid wording / consort wording */
 function BAN_MIS(n){return CNV_REL(n)}
-function BAN_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `Sủng +${Math.round(n/3)}.`}catch(e){return""}}
+function BAN_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `${sgStat(Math.round(n/3))}.`}catch(e){return""}}
 const BAN_E=()=>BAN_R()?S.sung:S.nt;/* odds term for options that reach the Emperor */
 
 rdDef("cnv_ban",5,{t:"Chiếc vòng ngọc",w:"maid",sj:"chiếc vòng ngọc thật",cast(A){return CNV_MC(A,0)&&rdCast(A,["v"])},

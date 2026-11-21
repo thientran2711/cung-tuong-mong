@@ -366,9 +366,9 @@ for(const k in KC2CH)KCE[k]={get t(){try{return kc2ChT()}catch(x){return""}},b:K
    kind = "dan" (cnv home), "nc" (nc/bd home) or the origin key (direct "Vào cung ngay", and the six tiểu thư home roads' Phúc tuyển with info.phuc = 1, jkc kcPhucPlay); info.art = the round she chose (kim / le / mua / an art key);
    done must be called exactly once with 0..10; the "wait" choice never reaches the hook (it scores 5); bots (window.__bot) skip it. (reviewer r1)
    TODO(selection-minigame): when that worker ships, it sets window.kcEntryExam; until then the round is playArt (the same engine as Phúc tuyển). */
-function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(cl(3+R(6),0,10));return}
+function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(entBotRaw());return}
  if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam((S.kc&&S.kc.kd)||S.origin.k,fin,{art,origin:S.origin&&S.origin.k,title,note});return}catch(e){console.error(e)}}
- try{playArt({art,title,note,quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10, như người cùng bậc"},onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
+ try{playArt({art,title,note,quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
 Object.assign(KCE,{
  d_tuyen:{t:"Ngày tuyển cung nữ",b:()=>{const K=S.kc;const ly=kcR("ly");if(K.gach)return{who:kcFace(ly||K.fam[0]),t:`<p>Thái giám Nội vụ phủ về huyện đường; con gái các xã xếp hàng trước cổng. Tên ngươi đã bị gạch khỏi sổ. Xuân Đào đứng trong hàng, ngoái lại nhìn ngươi.</p>`,o:[
    kc2H(kcO("Ở lại quê nhà",{},()=>kc2End("Ở lại quê nhà",`Nàng ở lại ${K.vil}. Hai năm sau nàng lấy một anh thợ mộc làng bên; nợ nhà trả dần trong mười năm.`)),"không vào cung; kiếp này dừng ở quê","an toàn"),

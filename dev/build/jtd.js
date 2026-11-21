@@ -19,7 +19,7 @@ Object.assign(KG82_KIND,{
  td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓. Ba lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
-const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the picture of the move is drawn by NWB_DEMO (jnwb) */
+const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the «Hướng dẫn» round teaches the move */
  cong:[["1","Chạm sợi chỉ cùng màu chỉ mẫu."],["2","Kéo kim theo nét chấm, từ chấm xanh tới chấm đỏ."]],
  dung:[["1","Bát đặt trên đầu, mỗi bước chân làm bát nghiêng."],["2","Dấu ◀ ▶ trên sàn báo bát sắp nghiêng về bên nào."],["3","Giữ nửa khung bên kia để đỡ; kim ở dải xanh là vững."]],
  ngon:[["1","Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa."],["2","Buông khi tiếng nói vào dải xanh."]],

@@ -10,7 +10,17 @@ const {chromium}=require('playwright');const [,,URL,MAIN]=process.argv;
     const A=S&&S.st&&S.st.M;if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);res67(thKey67(A),A.cur,0,O[0]&&O[0].o!=null?oOf67(A,O[0],bd):100)}
     if(S&&S.st&&S.st.ms&&typeof msDone67==='function'){S.st.ms.t0=-99}}
    Q.length=0;return{save:JSON.stringify(ser()),land:S.origin&&S.origin.land,n:S.origin&&S.origin.n,arc:S.st&&S.st.M&&S.st.M.id,ch:S.st&&S.st.ch&&S.st.ch.n}},[k,months]);await q.context().close();return s};
- const old=await mk(MAIN,'nc',40);console.log('old save (main build):',JSON.stringify({land:old.land,n:old.n,arc:old.arc,ch:old.ch}));
+/* PRE-RENAME FIXTURE (E40r, bang-words review): main is already Cao Ly, so no main build can write a Nam Chiếu save any more. The rename kept
+   every id / key (jkc2 kc2MigNc comment), so an old save differs only in the stored STRINGS: S.origin land / name, S.kc.fam titles and the
+   thanh-mai's strings. ageNc() writes exactly those old strings back into a save made on this build -> the same bytes an old device holds. */
+const AGE_FAM={"Thế tử huynh":"Hoàng huynh","Vương thúc":"Hoàng thúc","Vương hậu":"Mẫu hậu"};
+const ageNc=async(q,save)=>q.evaluate(([s,F])=>{const o=JSON.parse(s);const sub=v=>typeof v==="string"?v.split("Cao Ly").join("Nam Chiếu"):v;
+  const walk=x=>{if(!x||typeof x!=="object")return;for(const k in x){if(typeof x[k]==="string")x[k]=sub(x[k]);else walk(x[k])}};
+  const find=(x,d)=>{if(!x||typeof x!=="object"||d>3)return null;if(x.origin&&x.origin.k)return x;for(const k in x){const r=find(x[k],d+1);if(r)return r}return null};
+  const R=o.S||find(o,0)||o;if(R.origin)walk(R.origin);if(R.kc&&Array.isArray(R.kc.fam))for(const m of R.kc.fam)if(m&&F[m.t])m.t=F[m.t];
+  if(Array.isArray(R.men))R.men.forEach(m=>{if(m&&/Phó sứ (Cao Ly|Nam Chiếu)/.test(m.role||""))walk(m)});return JSON.stringify(o)},[save,AGE_FAM]);
+ const old0=await mk(MAIN,'nc',40);let old=old0;
+ if(old0.land==='Cao Ly'){const qa=await boot(MAIN);old={...old0,save:await ageNc(qa,old0.save),land:'Nam Chiếu',aged:1};await qa.context().close();console.log('main is post-rename: save AGED to the pre-rename strings (fixture)')}console.log('old save (main build):',JSON.stringify({land:old.land,n:old.n,arc:old.arc,ch:old.ch}));
  chk('old save is a Nam Chiếu life (pre-rename)',old.land==='Nam Chiếu',old.land);
  const q=await boot(URL);
  const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));
@@ -33,7 +43,8 @@ const {chromium}=require('playwright');const [,,URL,MAIN]=process.argv;
    SLOT=3;window.__forceOrigin='nc';document.getElementById('title').hidden=true;quiet=true;start();quiet=false;await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin)||++n>150)r();else setTimeout(t,100)};t()});
    if(!S.kc&&kcOk(S.origin.k))kcInit();for(let i=0;i<8;i++){try{Q.length=0;used=0;nextBuoi()}catch(e){}}
    return{save:JSON.stringify(ser()),fam:S.kc&&S.kc.fam.map(m=>m.r+'/'+m.t),ids:S.kc&&S.kc.fam.map(m=>m.id||m.r)}});await q.context().close();return s};
- const oh=await mkHome();console.log('old HOME save fam:',JSON.stringify(oh.fam));
+ let oh=await mkHome();if(!/Hoàng huynh/.test((oh.fam||[]).join())){const qa=await boot(MAIN);const sv=await ageNc(qa,oh.save);await qa.context().close();
+  oh={...oh,save:sv,fam:(sv.match(/Hoàng huynh|Hoàng thúc|Mẫu hậu/g)||[]),aged:1};console.log('home save AGED to the pre-rename titles (fixture)')}console.log('old HOME save fam:',JSON.stringify(oh.fam));
  chk('old home save really holds the old titles',/Hoàng huynh/.test((oh.fam||[]).join()),oh.fam);
  const q2=await boot(URL);
  const rh=await q2.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));

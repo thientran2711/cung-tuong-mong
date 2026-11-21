@@ -95,8 +95,16 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const live=diff(await WORLD(A),await WORLD(B),'',[]);console.log('     (info) live view now differs on',live.length,'paths:',live.slice(0,6).join(' ; '));return sa[w]}
  await hook(A);await hook(B);await toDay();
  const w0=(await D(A)).w;await same('start');
- /* week 1: a plain week */
+ /* week 1: HER OWN ACT on an NPC sets that NPC's feeling (review/coop-emo-seat r2): on the guest it is recorded (S.coopEmo), the server merge keeps
+    the host's feelings, and at the merged week BOTH seats replay it the same; the host marks it taken (S.emoDone), the guest then drops it */
+ const WHY='thử lòng: được hảo hữu đối đãi chu đáo';
+ const tgt=await B.p.evaluate(why=>{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!sameHouse(S,x));if(!v)return null;
+   ACT.__emoT={f:(a,t)=>{emoSet(t,'vui',40,why);return ''}};runAct(S,v,'__emoT');delete ACT.__emoT;return {id:v.id,q:(S.coopEmo||[]).length}},WHY);
+ ok(tgt&&tgt.q===1,'guest: her own act on an NPC recorded once in her queue',tgt);
  ok(await nextWeek(w0),'week 1 merged on both');const W1=await same('after week 1');
+ if(tgt){const cz=o=>o.p.evaluate(([id,why])=>{const v=rivals.find(x=>x&&String(x.id)===String(id));const m=(v&&v.mk||[]).filter(c=>c.why===why);return {n:m.length,s:m.map(c=>c.s),done:S.emoDone||0,q:(S.coopEmo||[]).length}},[tgt.id,WHY]);
+  const ca=await cz(A),cb=await cz(B);ok(ca.n===1&&cb.n===1&&JSON.stringify(ca.s)===JSON.stringify(cb.s)&&ca.done>0,'merged week 1: her act\'s feeling is on that NPC once, the same on both seats; the host marked it taken',[ca,cb]);
+  W1.__tgt=tgt}
  const E1=Object.values(W1.R||{});ok(E1.length>0&&E1.every(o=>Array.isArray(o.emo)&&Array.isArray(o.emoMul)),'emotion + act weights read on every NPC (not an error string)',E1.map(o=>[o.name,o.emo,o.emoMul]).slice(0,4));ok(typeof W1.feel==='string'&&W1.feel.length>10,'BAL.feel read on both seats',W1.feel);
  /* week 2: the guest leaves mid-week and comes back by the link */
  {const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k);await leaveBack(B,A,'week 2 guest');await hook(B);
@@ -104,6 +112,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* week 3: the host leaves mid-week and comes back */
  {const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k);await leaveBack(A,B,'week 3 host');await hook(A);
   ok(await nextWeek(w0+2),'week 3 merged on both');const W3=await same('after week 3 (host rejoined)');
+ if(W1.__tgt){const q=await B.p.evaluate(([id,why])=>{const v=rivals.find(x=>x&&String(x.id)===String(id));return {q:(S.coopEmo||[]).length,n:(v&&v.mk||[]).filter(c=>c.why===why).length}},[W1.__tgt.id,WHY]);ok(q.q===0&&q.n<=1,'later weeks: the guest dropped the taken entry; the feeling was never applied twice',q)}
   /* the world moved at all (not a frozen probe) */
   const moved=Object.keys(W3.R).filter(id=>W1.R[id]&&JSON.stringify(W1.R[id])!==JSON.stringify(W3.R[id])).length;ok(moved>0,'the world moved between week 1 and week 3 ('+moved+' NPCs changed)')}
  ok(A.errs.length===0&&B.errs.length===0,'no page errors',[A.errs.slice(0,3),B.errs.slice(0,3)]);
