@@ -64,7 +64,7 @@ def outfit(n):
        + (YEL6 if n==6 else "") +
        f" her signature colour family {M} and {Sx} stays the MAIN robe colour ({M}); the robe itself is clearly {M} silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe.")
     return o,B,M,Sx
-COLLAR="COLLAR AND SHOULDERS (every rank, exactly like the Phi): the wide crossed collar lies FLAT on top of both shoulders, its edges reaching almost to the shoulder points and dipping in one broad shallow V low at the chest; soft sloping shoulders; nothing covers the collar or shoulder line: loose hair falls BEHIND the shoulders, hands and held item stay below the collar, any bead yoke lies flat along the collar edge."
+COLLAR="COLLAR AND SHOULDERS (every rank, exactly like the Phi): the wide crossed collar lies FLAT on top of both shoulders, its edges reaching almost to the shoulder points and dipping in one broad shallow V low at the chest; soft sloping shoulders; the hands and held item stay below the collar, any bead yoke lies flat along the collar edge."
 JEWEL="JEWELLERY: every jewel SMALL and delicate, never chunky or showy; NO red anywhere (no red gems, beads or tassels), no faceted gems, no necklace."
 JEWEL78="JEWELLERY: only jade, pearls and gold, Chinese court style, all SMALL and delicate; red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants; no faceted or sparkling gems, nothing European, no necklace."
 ANG="ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn;"
