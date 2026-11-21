@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1086618b+","t":"2026-11-21T04:45Z","c":"phone-drop-scan: fixed dialog set identical on both devices","b":"b979f5b17912","h":[{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"}]};
+window.CTM_BI={"s":"fcd7d7c5+","t":"2026-11-21T04:46Z","c":"phone-drop-scan: fixed dialog set identical on both devices","b":"b6bea1a527e6","h":[{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -63296,10 +63296,10 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
  if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
 window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 .k3ev>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
@@ -73163,7 +73163,7 @@ window.kitPicSubj=kitPicSubj;
 function kszOwnAct3(m){try{if(!m)return false;return !!(m.entp||m.act||m.shop||m.ownAct||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid)))}catch(e){return false}}
 function kszNormP(p){return p&&(p.__kp||p)}
 function kszWho3(sp){if(sp.who)return sp.who;if(sp.m&&kszOwnAct3(sp.m))return S;return null}
-function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(kszOwnAct3(m))return S;
+function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(m&&m.kit&&m.kit.who)return m.kit.who;/* a kitPanel spec names its person */if(kszOwnAct3(m))return S;
  const ps=[];if(main)main.querySelectorAll(".kfact[data-kfp]").forEach(r=>{const p=typeof kfpGet==="function"?kfpGet(r.dataset.kfp):null;if(p&&!ps.some(q=>kszNormP(q)===kszNormP(p)))ps.push(p)});
  const oth=ps.filter(p=>kszNormP(p)!==S);if(oth.length===1)return oth[0];if(oth.length>1)return null;
  if(ps.length===1)return S;/* only she is named */
@@ -73476,7 +73476,7 @@ function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),
 function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
+ let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
@@ -73585,6 +73585,9 @@ window.kitFrameTagAll=kitFrameTagAll;
 KIT_SIZE.list={colMin:260,gap:12,minRows:3,maxChars:110};
 function kszListCols3(root){try{const L=KIT_SIZE.list,two=kitSzMode()==="kv2";(root||document).querySelectorAll(".kfacts").forEach(f=>{f.removeAttribute("data-kcols");if(!two)return;const rows=[...f.children].filter(c=>c.classList.contains("kfact"));
  if(rows.length>=L.minRows&&f.clientWidth>=2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars))f.setAttribute("data-kcols","2")})}catch(e){}}
+/* #82: on the iPad a long list of short rows that would scroll in a narrow text column takes the next size (wide enough for two columns) instead of scrolling */
+function kszListWantsWide3(dlg){try{if(kitSzMode()!=="kv2")return false;const L=KIT_SIZE.list,R=dlg.querySelector(".k3right");if(!R||![dlg,...dlg.querySelectorAll("*:not(img):not(figure)")].some(e=>e.scrollHeight>e.clientHeight+8&&/(auto|scroll|hidden|clip)/.test(getComputedStyle(e).overflowY)))return false;
+ return [...dlg.querySelectorAll(".kfacts")].some(f=>{const rows=[...f.children].filter(c=>c.classList.contains("kfact"));return !f.dataset.kcols&&rows.length>=L.minRows&&f.clientWidth<2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars)})}catch(e){return false}}
 window.kszListCols3=kszListCols3;
 (function(){const st=document.createElement("style");st.id="k-list-cols";st.textContent=`.kfacts[data-kcols="2"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:${KIT_SIZE.list.gap}px;align-items:start}`;document.head.appendChild(st)})();
 /* dialog-person CSS: «(ta)» line, hidden duplicate avatar, the second person's avatar ON the event picture (top-left overlay; phone: smaller) */
@@ -86346,7 +86349,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b979f5b17912";window.CTM_BUILD=BUILD;
+const BUILD="b6bea1a527e6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -322,7 +322,7 @@ window.kitPicSubj=kitPicSubj;
 function kszOwnAct3(m){try{if(!m)return false;return !!(m.entp||m.act||m.shop||m.ownAct||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid)))}catch(e){return false}}
 function kszNormP(p){return p&&(p.__kp||p)}
 function kszWho3(sp){if(sp.who)return sp.who;if(sp.m&&kszOwnAct3(sp.m))return S;return null}
-function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(kszOwnAct3(m))return S;
+function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(m&&m.kit&&m.kit.who)return m.kit.who;/* a kitPanel spec names its person */if(kszOwnAct3(m))return S;
  const ps=[];if(main)main.querySelectorAll(".kfact[data-kfp]").forEach(r=>{const p=typeof kfpGet==="function"?kfpGet(r.dataset.kfp):null;if(p&&!ps.some(q=>kszNormP(q)===kszNormP(p)))ps.push(p)});
  const oth=ps.filter(p=>kszNormP(p)!==S);if(oth.length===1)return oth[0];if(oth.length>1)return null;
  if(ps.length===1)return S;/* only she is named */
@@ -635,7 +635,7 @@ function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),
 function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
+ let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
@@ -744,6 +744,9 @@ window.kitFrameTagAll=kitFrameTagAll;
 KIT_SIZE.list={colMin:260,gap:12,minRows:3,maxChars:110};
 function kszListCols3(root){try{const L=KIT_SIZE.list,two=kitSzMode()==="kv2";(root||document).querySelectorAll(".kfacts").forEach(f=>{f.removeAttribute("data-kcols");if(!two)return;const rows=[...f.children].filter(c=>c.classList.contains("kfact"));
  if(rows.length>=L.minRows&&f.clientWidth>=2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars))f.setAttribute("data-kcols","2")})}catch(e){}}
+/* #82: on the iPad a long list of short rows that would scroll in a narrow text column takes the next size (wide enough for two columns) instead of scrolling */
+function kszListWantsWide3(dlg){try{if(kitSzMode()!=="kv2")return false;const L=KIT_SIZE.list,R=dlg.querySelector(".k3right");if(!R||![dlg,...dlg.querySelectorAll("*:not(img):not(figure)")].some(e=>e.scrollHeight>e.clientHeight+8&&/(auto|scroll|hidden|clip)/.test(getComputedStyle(e).overflowY)))return false;
+ return [...dlg.querySelectorAll(".kfacts")].some(f=>{const rows=[...f.children].filter(c=>c.classList.contains("kfact"));return !f.dataset.kcols&&rows.length>=L.minRows&&f.clientWidth<2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars)})}catch(e){return false}}
 window.kszListCols3=kszListCols3;
 (function(){const st=document.createElement("style");st.id="k-list-cols";st.textContent=`.kfacts[data-kcols="2"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:${KIT_SIZE.list.gap}px;align-items:start}`;document.head.appendChild(st)})();
 /* dialog-person CSS: «(ta)» line, hidden duplicate avatar, the second person's avatar ON the event picture (top-left overlay; phone: smaller) */
