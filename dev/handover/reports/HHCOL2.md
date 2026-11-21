@@ -48,3 +48,18 @@ New dev/art/thu_comoi/s62_t7_THU_vankien2_L1955.txt (9996; base L1924b = clasp +
 ## OWNER L1965 (via #27 09:30Z)
 (1) Winter t2 Thường tại: approved dong8_duyet_L1803 t2 = gen jUoattyLD0, prompt winter1/s62_t2_dong.txt (HAS phi bạch). New dev/art/winter1/s62_t2_dong_L1965.txt (8321): ONLY the PHI BẠCH sentence cut. keep PASS; store fails M06/W01/W04 = same as approved base (waiver). Sent VE6 1 @55 + sheet CŨ jUoattyLD0 | MỚI.
 (2) Thu t7 L1955 rgXqyJlxtc sent to owner (outer robe still open below sash, sleeves wide to floor) — no action until she answers.
+
+## OWNER L1971 (via #27 09:42Z)
+A1 THU list → dev/handover/reports/THU_8BAC_LIST_L1971.md; VE11 rendering review-sheets/thu_8bac_hientai_L1971.png (0 gens). t1/t2 ids inferred from the L1862/L1864 sheets OK'd at L1869 (asked #27 to confirm).
+A2 t7 HQP rebuild → dev/art/thu_comoi/s62_t7_THU_fromQP_L1971.txt (9997; base L1955; store PASS, keep PASS). Garment: "the Quý phi's robe: ONE light olive silk brocade robe over a lilac inner dress, ONLY TWO layers (no extra outer robe), SLIM and fitted …, never bulky"; LAYERED NECKLINE/outer-robe words → the frozen QP square-collar words ("a straight SQUARE collar (no crossed collar): a LOW open square neckline …, framed by a wide flat band in her second colour"); sash → "a yellow sash tied at the waist, closing the robe, bow centred, long ties". vân kiên + clasp + no-tassel flute UNCHANGED. Trims: "An imperial consort.", ", gaze to the viewer". Sent VE11 1 @135 (2k medium) + sheet CŨ rgXqyJlxtc | MỚI.
+
+## HANDOVER (rollover: context ~25 % ≥ START 4 % + ~20 %, rolling early because B+C are large) — 21/11 ~09:55Z
+depth 8 · coordinator Foreman C #27 session_01D3E3NaDamfSozkn47q9kMK (it opens my successor). Owner L1971 full text: FOREMAN_C_STATUS.md "#27 ~10:20Z".
+OPEN for successor (WORDS ONLY, no gens until she says):
+(B) WINTER audit of dong8_duyet_L1803_clean (= coLong set; ids/prompts in section L1952 above; t2 jUoattyLD0 s62_t2_dong.txt):
+ - L1961 t4 Tần has SQUARE collar → winter must be crossed collar (cổ chéo, G25). Base used = s62_t4_dong_noangle.txt (my L1952 copy) — check its collar words vs G25 and vs the picture cpSPN2P0eP; fix in s62_t4_dong_L1952 → new _L1971 file.
+ - t6 QP vân kiên / shoulder cape BELL-shaped: grep the bell fix (HHCOL1 L1840 "winter t8 red/bell"; rule.py find bell / chuông) and check s62_t6_dong_L1952.txt has it.
+ - L1967 t2 (VE6 result of s62_t2_dong_L1965) very different from jUoattyLD0: compare settings (original 2k 1024x2304 vs 1k low), refs (orig nVsrRMPYQD only), and whether s62_t2_dong.txt really = the prompt of jUoattyLD0 (ledger line 3300 "build_all.py s62 2 + G26 fur + G25 collar" — the file may have been rebuilt after the gen; check git log -p of that file vs 20/11 18:05Z).
+ - Do the same TRUE-prompt check (git log at gen time) for t3–t8; report causes + fixes to #27.
+(C) BOWS: her new rule — every bow in the game has LONG trailing ties, thướt tha. Extend G60 (rule.py set G60 … via #27 OK) + word sweep of live consort files (bow / knot / sash words → "bow centred with long trailing ties, thướt tha"); words only; keep_check sidecars.
+Also: L1971 #9 says tassels on held items are fine (revert "G57b" no-tassel; keep ngọc bội ban) — my L1924b/L1955/L1971 t7 still say "no tassel or pendant" on the flute; #27 to decide.
