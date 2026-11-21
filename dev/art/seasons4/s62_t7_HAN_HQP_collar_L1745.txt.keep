@@ -1,0 +1,10 @@
+base: dev/art/seasons4/s62_t7_HAN_LADDER.txt
+allow: the crossed collars open WIDE   # owner L1745 (via Foreman C #21): HQP lost collar → copy Phi/Quý phi collar words — HAN3
+allow: the lapels sweeping out to the edge of the SHOULDERS and meeting low at the chest in a broad V   # owner L1745: copy Phi/Quý phi collar words — HAN3
+allow: neck and collarbones visible but modest   # owner L1745: copy Phi/Quý phi collar words — HAN3
+allow: THREE stacked WIDE collar bands woven in gold and edged with pearls   # owner L1745: Quý phi collar-band words (pearls + gold kept inside new sentence) — HAN3
+allow: Full-body standing figure head to feet   # boilerplate trim to fit 10 000 (repeat of the opening line) — HAN3
+allow: soft even light   # boilerplate trim to fit 10 000 (opening says soft even NEUTRAL white daylight) — HAN3
+allow: fair porcelain skin   # boilerplate trim to fit 10 000 (skin set in opening + "Luminous smooth porcelain skin") — HAN3
+allow: beautiful/handsome romantic-lead looks for everyone   # boilerplate trim to fit 10 000 ("Everyone beautiful at every age" kept) — HAN3
+allow: 3/4 or frontal view   # boilerplate trim to fit 10 000 (ANGLE sentence sets the view) — HAN3
