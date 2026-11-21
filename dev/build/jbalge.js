@@ -17,8 +17,9 @@ BAL.ge={
  quietLoss:false,      /* D8 */
  mapOn:true,           /* K-GE-1 kitBranchMap landed (90b7e797): the Sơ đồ nhánh page in Sổ luân hồi is on */
  pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
- /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
- odds:{base:22,per:9,min:5,max:88,noCond:12},
+ /* odds of the open ending her pair points to: base + pull × per − rank × her rank step (law 5, harder as she climbs: 0 Đáp ứng … 7 Hoàng hậu,
+    ONE key for every branch of every wave, brief E35), clamped [min, max]; its condition not met → capped at noCond */
+ odds:{base:22,per:9,rank:2,min:5,max:88,noCond:12},
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
  var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
