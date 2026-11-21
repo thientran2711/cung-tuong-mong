@@ -1036,6 +1036,15 @@ def out1_fails(text):
         w.append(("OUT1", "OUTER NOT HELD IN?", "open outer robe without the G40 clause master_common.OUTER_IN (owner L1592: held in by the sash, all 8 tiers)"))
     return f, w
 
+# G43 MAIDS NO JADE PENDANT (owner L1608 21/11, verbatim: "Sửa lại là cung nữ là sẽ không có đeo ngọc bội, nhưng mà đổi lại thì cung nữ có thể đeo túi thơm nha."):
+# a maid prompt (cung nữ any grade, thân cận, chưởng sự cô cô, ma ma) with a jade pendant / jade disc / ngọc bội = FAIL; a fragrant sachet (túi thơm) at the sash is OK.
+G43_MAID_RX = re.compile(r"\b[Cc]ung n[uữ]\b|\bA (?:[\w-]+ ){0,3}palace maid\b|\bA palace ma ma\b|\b[Cc]huong su co co\b|\b[Cc]hưởng sự\b|\bmistress of servants\b")   # subject words only (case-sensitive "A ..."): a consort line "finer than a palace maid's" is not a maid
+G43_JADE_RX = re.compile(r"\bjade (?:or tassel )?pendants?\b|\bjade discs?\b|\bngọc bội\b|\bngoc boi\b", re.I)
+def g43_fails(text, scope=None):
+    if not (scope == "mama" or G43_MAID_RX.search(text)): return []
+    m = G43_JADE_RX.search(text)
+    return [("G43", "MAID JADE PENDANT", f"maids wear no jade pendant (owner L1608: a small embroidered fragrant sachet / túi thơm at the sash instead): …{text[max(0, m.start()-60):m.end()+30]}…")] if m else []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1047,6 +1056,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += angle_fails(text)   # MG3 L806 (E1)
     fails += pet_fails(text, scope, age)   # F17 PETS (owner Lượt 1057/1059): ages 18/26, kc + ranks 1–6 only, in contact only
     fails += fruit_fails(text, scope, pid)
+    fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
@@ -1124,6 +1134,11 @@ def selftest():
                     ("Pose: holding a sprig of pink peach blossom; a round fan in soft peach pink silk; a carved peach-wood comb.", 0),
                     ("Pose: she holds a round jade longevity plaque carved with a round shou symbol.", 0), ("She holds nothing, no fruit in her hands.", 0)]:   # F16 NOFRUIT
         if bool(fruit_fails(norm(t))) != bool(want): print("NOFRUIT SELFTEST", want, t); bad += 1
+    for t, sc, want in [("A palace maid (cung nu, tam dang). a decorative sash with a small jade or tassel pendant.", "tp1", 1),
+                        ("A palace ma ma. a wide silk sash, a jade pendant on a silk cord.", "mama", 1),
+                        ("A palace maid (cung nu, nhi dang). an embroidered silk sash with a small embroidered silk fragrant sachet (túi thơm).", "mama", 0),
+                        ("A consort. a soft silk sash with a small jade pendant.", "tp2", 0)]:   # G43 maids no jade pendant (owner L1608)
+        if bool(g43_fails(norm(t), sc)) != bool(want): print("G43 SELFTEST", want, sc, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),

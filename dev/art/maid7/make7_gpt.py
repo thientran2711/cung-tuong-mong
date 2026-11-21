@@ -710,6 +710,50 @@ def nhi_tc3(): return tc3('nhi_thancan_gpt', TC_EXTRA_VEST % 'deep rose like #CA
 def nhat_tc3(): return tc3('nhat_thancan_gpt', TC_EXTRA_NHAT % 'deep rose like #CA7281')
 
 
+# owner L1608 / G43 (21/11, verbatim: "Sửa lại là cung nữ là sẽ không có đeo ngọc bội, nhưng mà đổi lại thì cung nữ có thể đeo túi thơm nha."):
+# maids never wear a jade pendant; the waist accessory becomes a small embroidered fragrant sachet (túi thơm). ONLY this change (A39).
+G43_SACHET = 'a small embroidered silk fragrant sachet (túi thơm)'
+G43_SWAPS = [
+    ('a decorative sash with a small jade or tassel pendant',            # tam đẳng (+ thân cận)
+     'a decorative sash with ' + G43_SACHET + ' hanging from it'),
+    ('an embroidered silk sash with a jade pendant on a silk cord',      # nhị đẳng (+ thân cận)
+     'an embroidered silk sash with ' + G43_SACHET + ' hanging from it on a silk cord'),
+    ('a jade pendant on a silk cord with a tassel hanging at the centre between the two panels',   # nhất / thân cận / chưởng sự / ma ma
+     G43_SACHET + ' on a silk cord with a tassel hanging at the centre between the two panels'),
+]
+G43_JOBS = {   # current file -> next version (mama v5 is SUPERSEDED, so ma ma goes v4 -> v6)
+    'tamdang_gpt': 'tamdang_gpt_v2', 'tamdang_thancan_gpt_v3': 'tamdang_thancan_gpt_v4',
+    'nhi_gpt_v2': 'nhi_gpt_v3', 'nhi_thancan_gpt_v3': 'nhi_thancan_gpt_v4',
+    'nhat_gpt_v6': 'nhat_gpt_v7', 'nhat_thancan_gpt_v3': 'nhat_thancan_gpt_v4',
+    'thancan_gpt_v4': 'thancan_gpt_v5', 'chuongsu_gpt_v4': 'chuongsu_gpt_v5',
+    'mama_gpt_v4_a51': 'mama_gpt_v6_a51', 'mama_gpt_v4_a65': 'mama_gpt_v6_a65',
+}
+G43_RX = re.compile(r"jade (?:or tassel )?pendants?|jade discs?|ngọc bội|ngoc boi", re.I)
+
+
+def g43(t):
+    """Apply the G43 sachet swap to any maid prompt text (use it in every future maid build)."""
+    for old, new in G43_SWAPS:
+        if old in t: t = swap(t, old, new)
+    assert not G43_RX.search(t), G43_RX.search(t).group(0)
+    return t
+
+
+def g43_job(name):
+    base = D + name + '.txt'
+    t = open(base, encoding='utf-8').read()
+    olds = [o for o, _ in G43_SWAPS if o in t]
+    assert len(olds) == 1, (name, olds)
+    t = g43(t)
+    out = D + G43_JOBS[name] + '.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [(olds[0], 'owner Lượt 1608 / G43: maids wear no jade pendant -> small embroidered fragrant sachet (túi thơm)')])
+    return out
+
+
+def g43_all(): return [g43_job(n) for n in G43_JOBS][-1]
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']
