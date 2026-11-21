@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Writes INDEX.md of J3 from _gen_state.json (run gen_J3.py first, then this, from anywhere)."""
+import os, json, collections, subprocess, re
+J = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(J, "..", "..", "..", ".."))
+S = json.load(open(os.path.join(J, "_gen_state.json")))
+rows = S["rows"]; m45 = S["m45"]
+acts = [r for r in rows if r[0] != "Outer outing places (map stage picture)"]; outs = [r for r in rows if r[0].startswith("Outer")]
+dark = sum(1 for r in acts if r[4]); pend = sum(1 for r in acts if r[5])
+by = collections.OrderedDict()
+for r in acts: by.setdefault(r[0], []).append(r)
+ASSETS = {k[0] for k in json.load(open(os.path.join(ROOT, "assets.json")))["files"]}
+dl = [l.split("|")[0] for l in open(os.path.join(ROOT, "dev/figwork/acts/dlg_scenes.txt")) if l.strip()]
+chk = subprocess.run(["python3", "dev/art/prompts/check_prompts.py", "dev/art/prompts/J3"], cwd=ROOT, capture_output=True, text=True).stdout.strip().splitlines()
+o = []
+o.append("# J3 INDEX: act / dialog / banner pictures (KP23) + tall iPad figure-column backgrounds (M45)\n")
+o.append("PRIORITY #1 CHECK ('KP23|M45|act-pics|mgbg|figure-column'): OD 0 for new art wording | ledger 0 | claims: C art rows only on the outfit loop | origin/main: prompts2.py --todo, meanings.py, gens2.txt (427 keys), assets.json (1366 img/act-*, 280 img/ev-*, 0 img/mgbg-*) READ and REUSED | handover prompts_L2095 + dev/art read for style (MASTER_COMMON via _lib) | archive: PROGRESS_review-act-pics2.md, act-pics-d14 report. Nothing re-invented: scene text = meanings.py scenes, style = _lib sentences.\n")
+o.append("ART LAW A53 (owner verbatim): 'Tiếp đến là bây giờ tôi đã có thể à, vẽ ảnh bằng ChatGPT rồi, bạn không có dùng Magnific để vẽ nữa.' No Magnific call was made, no credit spent; this folder only holds paste-ready prompt files.\n")
+o.append("## How to use\n1. New ChatGPT chat per picture. Attach the style reference `dev/handover/prompts_L2095/refs/mau_net_ve.jpg` (REF_STYLE). 2. Paste the whole `.txt` (ONE message). 3. Ask for ONE image. 4. Look at it (hands, no visible face, no text), then give it to C / the coordinator for the usual cut: act pictures centre-crop to 384:506 webp q82 (`dev/figwork/acts/fetchb.py` recipe), backdrops per the table. No identity reference is needed anywhere in J3: every act picture shows people far away, from behind or in silhouette (rule N1), and the backdrops hold no person.\n5. Regenerate the files: `python3 dev/art/prompts/J3/gen_J3.py && python3 dev/art/prompts/J3/gen_index_J3.py` (reads meanings.py, gens2.txt, assets.json and the mini-game kind tables; no hand-typed key lists except the English scenery of the 35 mini-game places).\n")
+o.append("## Counts\n")
+o.append("| set | prompt files | note |\n|---|---|---|")
+o.append("| KP23 act pictures still missing | %d | of %d keys the queue `prompts2.py --todo` would still list (%d are already in assets.json, skipped). Tone: %d LIGHT / %d DARK. %d of them also have an old Magnific id in pending2.txt (see Open questions) |" % (len(acts), len(acts) + 8, 8, len(acts) - dark, dark, pend))
+o.append("| KP23 dialog banners | 0 | all %d keys of dlg_scenes.txt exist as img/ev-<key>.webp in assets.json: nothing left to draw (the '97 of 121 left' in PROGRESS is stale) |" % len(dl))
+o.append("| KP23 outer outing places | %d | Ngự uyển ngoài + chùa Hộ Quốc, portrait + landscape (L10); no code key yet |" % len(outs))
+o.append("| M45 tall figure-column backgrounds | %d | one per mini-game kind; img/mgbg-<kind>.webp |" % len(m45))
+o.append("| TOTAL | %d | |\n" % (len(acts) + len(outs) + len(m45)))
+o.append("### Act pictures by meaning group (rule N3)\n\n| meaning group | count | LIGHT | DARK |\n|---|---|---|---|")
+for g, rs in by.items(): o.append("| %s | %d | %d | %d |" % (g, len(rs), sum(1 for r in rs if not r[4]), sum(1 for r in rs if r[4])))
+o.append("")
+o.append("## Target sizes and where the code reads them\n")
+o.append("- ACT pictures: key `img/act-<key>.webp`, 3:4 portrait; ask ChatGPT for 768x1024, ship centre-cropped to 384:506 (384x506 webp q82, existing live ones are 50-60 KB, keep <= 60 KB): `dev/figwork/acts/fetchb.py:1` and `fetch.py:26` (A=384/506). Read by `dev/build/j79.js:803` (kitActArt: `src:img/act-${key}.webp`), `j79.js:1014`, `j87.js:369/383/394`; the key is mapped from the book line by the `log` regexes of img/ACTS.json (built from `dev/figwork/acts/meanings.py`, `build_acts.py`), so a new file needs the ACTS.json patch and `cdn_sync` (coordinator).")
+o.append("- M45 backdrops: key `img/mgbg-<kind>.webp` from `dev/build/j82.js:102` (`KG82_MGBG` proxy, `img/mgbg-${k}.webp`), applied by `dev/build/j79.js:650-651` (`kitGameFig`, `--mgbg` + `.kgf-bg`) and CSS `j79.js:688` (`background:var(--mgbg) center/cover no-repeat`); a missing file = the cream gradient. Column size: `j79.js:640` grid `minmax(150px,30%) minmax(0,1fr)` of the frame body (frame width `--kpw` 560 px on iPad 1180, 620 px from 1200 wide, height `--kph` <= 720, KIT.md:412-416; `.kgfig` margin 10px 0 10px 14px, `j79.js:~686`), so the column is about 155-185 px wide x 480-600 px tall = ratio about 0.30-0.35 (my arithmetic, not measured: see Open questions). Prompt asks for a 2:3 source (1024x1536) with all content in the central 45 percent; deliver as webp, tall, <= 120 KB (suggest crop 512x1024 centre, 1:2, so `cover` loses only the side margins). The player's figure fills the column from the bottom, so the lower middle of every backdrop is left open. Wide screen only (html.kv2); Fold (kv1) has no column (KIT.md:679).")
+o.append("- Outings: portrait 768x1024 and landscape 1024x768 (L10). No code reads them yet (`PROGRESS_review-act-pics2`/`act-split-w2` say 'Dư đồ outer picture ... ART NEEDED'); keys below are PROPOSED.\n")
+o.append("## M45 table (35 mini-game kinds: every key of KG82_KIND that reaches kg82Frame, kg82Pic skips duho/den/may which have no picture column)\n")
+o.append("| code | key | prompt file | refs to attach | target | read at | note |\n|---|---|---|---|---|---|---|")
+for c, k, f, n, d in m45: o.append("| %s | %s | %s | REF_STYLE | tall webp, gen 2:3 1024x1536, ship 512x1024 <= 120 KB | j82.js:102, j79.js:650 | %s, %s |" % (c, k, f, n, "DARK" if d else "LIGHT"))
+o.append("\n## Outer outing places\n")
+o.append("| code | key (proposed) | prompt file | refs | target | read at | note |\n|---|---|---|---|---|---|---|")
+for g, c, k, f, d, p in outs: o.append("| %s | %s | %s | REF_STYLE | webp %s | none yet | LIGHT, empty establishing backdrop |" % (c, k, f, "768x1024" if "port" in f else "1024x768"))
+o.append("\n## KP23 act pictures, by meaning group\n")
+for g, rs in by.items():
+    o.append("### %s (%d)\n\n| code | key | prompt file | refs | target | read at | note |\n|---|---|---|---|---|---|---|" % (g, len(rs)))
+    for g_, c, k, f, d, p in rs:
+        o.append("| %s | %s | %s | REF_STYLE | 384x506 webp (gen 768x1024) | j79.js:803 | %s%s |" % (c, k, f, "DARK" if d else "LIGHT", "; old Magnific id in pending2.txt" if p else ""))
+    o.append("")
+sk = [l for l in open(os.path.join(ROOT, "dev/figwork/acts/gens2.txt")) if l.strip()]
+o.append("## Skipped (already exists)\n")
+o.append("- %d act keys the queue still listed but whose `img/act-<key>.webp` is already in assets.json: %s" % (8, ", ".join(S["skipped_exists"])))
+o.append("- %d act keys drawn earlier (gens2.txt), all present in assets.json: not listed." % len(sk))
+o.append("- All %d dialog banners `img/ev-<key>.webp` (dlg_scenes.txt) present in assets.json; also the 280 ev-* in total; MISSING_PICS.md shows 0 events on the placeholder." % len(dl))
+o.append("- No `img/mgbg-*.webp` exists anywhere in assets.json (so none skipped).\n")
+o.append("## Open questions for the owner / C\n")
+o.append("1. M45 column ratio is derived from the CSS numbers (about 0.30-0.35 wide:tall); C should confirm with one screenshot at iPad 1180x820 before painting all 35 (the prompt keeps the content in the central strip so a mistake costs only a crop).")
+o.append("2. KP23 banners: the task says 97 banners left but assets.json holds all 121 `ev-` keys (640x480 landscape per PROGRESS). N4 wants the result/news pop-up picture on the LEFT as 3:4 (EVENT_ART.md says 768x1024). Do the existing 4:3 banners stay (then banners = 0 prompts) or must they be redrawn 3:4? If redrawn, say so and the generator can emit 121 more files from dlg_scenes.txt.")
+o.append("3. The old queue (prompts2.py) asked for visible faces and 'near-3D realistic' style; J3 follows the current canon instead (N1 no visible face, _lib style sentences, A53). Existing live act pictures show faces: say if the new ones should match that look.")
+o.append("4. %d of the missing act keys have an old Magnific id in pending2.txt (rendered or queued earlier). If those renders still exist on Magnific, fetching them costs nothing; otherwise use these prompts." % pend)
+o.append("5. Outing places: which code key and size should they take (no reader exists)? Proposed names are in the table.")
+o.append("6. The English subject lines quote the Vietnamese scene from meanings.py verbatim (as the approved prompts2.py recipe does); the glossary only covers titles. If ChatGPT misreads a scene, give it the English by hand.\n")
+o.append("## Checks\n")
+o.append("`python3 dev/art/prompts/check_prompts.py dev/art/prompts/J3` (from /home/user/wt/apj): `%s`" % chk[-1])
+o.append("Canon checks that apply: A56 caption (one unique code per file, AJ3-KP23-nnn / AJ3-OUT-nn / AJ3-M45-nn), N1 no visible face (S_NOFACE in every act and outing prompt; backdrops forbid any person), N2 tone (DARK for the scheme / punishment groups and harm / sadness keywords, else LIGHT, night scenes get a warm lantern glow), N3 groups above, F14 (own Han/Ming sentence, the checker bans the words of S_NOQING), one held item per figure, no % and no text. L10 backdrops port + land: outings have both; act pictures are portrait only like all act art; M45 is a tall portrait column only. check_store.py (outfit figure gate) and keep_check: not applicable (all prompts new, no figure outfits).")
+open(os.path.join(J, "INDEX.md"), "w", encoding="utf-8").write("\n".join(o) + "\n")
+print("INDEX written", len(o))

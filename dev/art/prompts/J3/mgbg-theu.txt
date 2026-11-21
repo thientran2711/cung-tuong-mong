@@ -1,0 +1,10 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+SUBJECT: the empty setting for the mini-game «Thêu» (kind theu): an embroidery chamber: a wooden embroidery frame holding a silk panel with a half-finished lotus pattern, silk threads in many colours on a rack, soft window light.
+TALL NARROW PORTRAIT backdrop, generate 2:3 portrait (1024x1536). On screen it is shown inside a column about 0.30 to 0.35 times as wide as it is tall, covering and centre-cropped, so keep ALL important painting inside the central vertical strip (the middle 45 percent of the width) and let the left and right sides carry only soft continuing scenery. The player's own figure stands in front of this painting at the lower centre of the column, filling about the whole height: leave the lower two thirds of the central strip calm and open (floor, ground or a quiet low table surface), with no person, no animal and no large object there. Put the story elements of the place in the upper third and at the sides, receding in depth. NO person, NO face, NO figure anywhere in this painting (the player's own figure is placed on top by the game).
+LIGHT mood: bright, clean, warm gentle daylight, clear soft colours (rule N2).
+Palette: bamboo green and rice-paper white.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJ3-M45-12"
