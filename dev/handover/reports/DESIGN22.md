@@ -86,3 +86,10 @@ History of the Phi t5 sash:
 - the OLD Tần design that Phi took over had "an embroidered silk sash with hanging jade belt pendants and tassels" (golden_low t4_v0_c01, rank8-s62/s62_t4.txt gen SyhIap2Ub8, 20/11 07:34Z). This is the first wording with no gold and no brocade.
 New t5 COMOIl (base COMOIk @c609040): "a broad gold brocade girdle tied flat" → "an embroidered silk sash tied flat". The rest of the clause is kept: centre, NO bow, two jade pendant sets, never covered. The held-in clause is already there ("the outer robe HELD IN by the sash tied OVER it"). Nothing else changed. 9993 ch, check_store tp5 PASS, keep --all 359 PASS. 0 gens.
 If the owner means the pre-18/11 Phi instead, its words are the "gold-embroidered waistband" above (that has gold).
+
+## Job 5 — owner L1672 "cô bé mặc áo xanh dương với xanh lá" (lookup only)
+This is the SAME set as Job 4 Set A. s62's old palette was ice blue #71B5D7 + mint mist #CDF2E0 (blue + green), and every rank8-s62 prompt carries it ("ice blue" 4–10× and "mint mist" 3–9× per file). Palette was changed to light plum + blush by COLORFIX1 on 20/11 ~23:53Z.
+RANK8-A (worker of ROOT-68), 20/11 07:31–07:38Z, gpt-2-6 1024x2304 2k seed 7172, prompts dev/art/rank8-s62/s62_t1..t8.txt (report reports/RANK8-A.md §5, sheet review-sheets/rank8-s62/s62_t1-t8_sheet.webp):
+t1 mEZiZ8ShJQ · t2 9ZHuqIGNYZ · t3 vQARGIUa47 · t4 SyhIap2Ub8 · t5 xSBe8KVjfW · t6 1ldDonjr4r · t7 nVsxSZNYQD · t8 KLpVBAXkqp.
+Owner use, 20/11 morning (no verbatim "đẹp" stored): ROOT-68 cut every rank (RANK8-CUT 07:43Z, "owner via ROOT-68: combined transparent image per rank"); t1/t2 kept as skins ("kept as skin (owner 20/11)"); square-neck follow-ups the same morning (kiểu 1 OK → G17).
+The original commit is outside this shallow clone (the oldest visible commit for those files is 93790a6).
