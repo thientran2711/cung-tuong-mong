@@ -18,3 +18,6 @@ THU t4 Lw85yeYswO · t5 DoOYmUHpcl (refs image 1) = 270 cr → full sheet dev/ha
 JOB K (ref s7IPw0Ll8e, check_store maid a18 PASS ×6) = 810 cr, sheet dev/handover/review-sheets/maid_crepe6_135_L1785.png: tam KLpuSFKkqp · nhị p8yWhVaehw · nhất p8yWhMfehw · tam tc cpS2ouY0eP · nhị tc BhNVExMoQR · nhất tc hu2XbwEvqL.
 Checks: no teeth (face close-up strip), bow + both tails one colour ✓ all six, clean flat edges at collar/waist ✓, nhất tc same soft rose/blue tone ✓.
 Session total 1690 + 270 + 810 = 2770 cr.
+## JOB L1814 winter G28 t1–t3 @55 — gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD (= s62 face/style image 1) · check_store PASS (tp1–3) · 3×55 = 165 cr
+t1 CqnIwJ6EEy · t2 s7IKGYWl8e · t3 Lw85AYUswO · sheet dev/handover/review-sheets/dong_g28_t1-3_L1814.png (top old crop, bottom new).
+✓ opaque silk (no see-through), thick ~4-finger ivory fur on collar/front/hem/cuffs, neckline intact, mouths closed, one item each. Session total 2770 + 165 = 2935 cr.

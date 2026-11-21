@@ -3351,3 +3351,6 @@
 {"id":"cpS2ouY0eP","prompt":"dev/art/maid7/test17_tam_thancan_L1785.txt","mode":"gpt-2-6","res":"2k","quality":"medium","seed":7172,"refs":["s7IPw0Ll8e"],"cr":135,"why":"owner L1785 maid crepe6 135cr (JOB K)","by":"VE2"}
 {"id":"BhNVExMoQR","prompt":"dev/art/maid7/test17_nhi_thancan_L1785.txt","mode":"gpt-2-6","res":"2k","quality":"medium","seed":7172,"refs":["s7IPw0Ll8e"],"cr":135,"why":"owner L1785 maid crepe6 135cr (JOB K)","by":"VE2"}
 {"id":"hu2XbwEvqL","prompt":"dev/art/maid7/test17_nhat_thancan_L1785.txt","mode":"gpt-2-6","res":"2k","quality":"medium","seed":7172,"refs":["s7IPw0Ll8e"],"cr":135,"why":"owner L1785 maid crepe6 135cr (JOB K)","by":"VE2"}
+{"id":"CqnIwJ6EEy","prompt":"dev/art/winter1/s62_t1_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
+{"id":"s7IKGYWl8e","prompt":"dev/art/winter1/s62_t2_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
+{"id":"Lw85AYUswO","prompt":"dev/art/winter1/s62_t3_dong_L1803_g28.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1814 winter G28 opaque+double fur test","by":"VE2"}
