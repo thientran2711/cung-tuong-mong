@@ -10,3 +10,20 @@ PRIORITY #1 CHECK: OD §7 learning times (owner rule, law 16: unchanged) + night
 - RUNTIME BAL SCAN LIVE fdabfb44 vs bundle 40f159bc (nlc8/balscan.js): leaves 60314 / 60418 · **missing 0** · fn missing 0 · **changed 18**, each with its reason: outQ 60→30, hhThNoSon 80→70, hhThNoSonHieu 70→62 (balance-2 HH gate) · mort.life.careYt 2→1 (balance-final careY family, §7 ladder) · steal.cost.feign.duc 4→0, road.suc 5→0 (night-final OD 22:50Z/23:05Z) · ag.par3.dance.o / odb.j2.odO_3 30→42, odO_7 30→40, j68e.odP_5 40→46, j68f.odP_2 30→40 (balance-2 r2 C1 risky-act family) · deck vu/cam o[0] 40→48, ky 45→53, cam/ky lv 3→2 (balance-2 r2 C2/C3) · ctxTaste 12→18, ctxCap 22→30 (balance-2 bot-proof). Added 104 (nobc's 78 §4/§7 keys + BAL.rk, danhG.srvRise, art.care, eff.j8.hit, tw.g ill keys).
 - REVERSE AUDIT (nlc8/rev.py): nobc 1e826e29→9a06cea8 own lines 1629, lost 6 = the assemble list (replaced by main's) + 5 Y-care lines artO(y)→careY (intended). balance-final 2bda29a1→40775131 own lines 2261, «lost» 938 = the dropped superseded families above (jledger 118, jnf/jflip/jbalcore/jcycle, measure scripts, night/ledger tests, balance-core readers) + lines LIVE rewrote since (j54/j70 npcWhy, jecon wording); checked by token diff, no balance-2/final rule lost. LIVE-revert: missing 0 in the BAL scan; the LIVE merge took main's side everywhere except the assemble list.
 - KNOB ARMS running (knobbot, 2 browsers each, seeds 21+): b0 = bundle 49912535 (no re-tune), k1 = b0 + Danh knob 1 (deck vu lv 2 + Kinh hồng vũ Danh 4, BAL.art.danh {2:3,3:5,4:6,5:8}, Múa par3.dance.vu 4→6, Đánh cờ tw.g.ky[0] 2→3). LIVE / nobc rows = knobbot lives.csv (rmain 11 lives, nobc 10).
+
+## Steps 2–3 — §7 Danh re-tune + knob arms (21/11 ~09:00–12:15Z; coordinator now D #15 session_01964izCZTNiRZKnSHxPrUuX)
+- Re-tune 21703845 (BAL only; §7 learning times BAL.art.tier/gain untouched; NPCs read the same keys): Múa trong yến tiệc win Danh 4→6 (BAL.ag.par3.dance.w/g) · Kinh hồng vũ BAL.deck.vu.lv 3→2 + win Danh 3→4 · Đánh cờ BAL.tw.g.ky[0] 2→3 · bậc-up Danh BAL.art.danh {3:3,5:6}→{2:3,3:5,4:6,5:8}. Course texts (ARTFX / ARTS.u / «Lên bậc») print these keys (6a96ef3f; were typed). one-core ×4 PASS.
+- Merged since: coop-steal fixture 32aa512d/33ad9416; NLC #10 9a3fdbc2 e43b7146 50b54a44 cc5df7a2 3b85e530 86cc402a; COOP CYHOLD 8ecdb5fc → r2 60b5ee43 (+ LIVE 94cbe0cd); jnf cyHold wait reads BAL.coop.cyWaitMs (one key, same 90 s). Head b3e563b9.
+- «Nhún nhường» (bot's biggest Danh sink, −187…−234 / life m0–36 vs LIVE −134) is a BOT HABIT: inpage6 talkScore buys rapport with Danh by need weights; the game's cost (BAL.ag.cx.humble) is LIVE's, unchanged. Not tuned.
+
+| arm (knobbot, HHSTOP, seeds 21+) | lives | HH | Danh m0/12/24/36 | net Danh m0–36 | died<3y |
+|---|---|---|---|---|---|
+| LIVE 8c8b8b6b (lives.csv) | 11 | 36 % | 18/51/84/85 | +53 | 2/11 |
+| nobc e5029d1b (lives.csv) | 10 | 20 % | 19/9/10/10 | −8 | – |
+| b0 bundle, no re-tune | 9 | 0 % | 21/20/36/36 | +9 | 0/9 |
+| k1 first knob | 6 | 33 % | 22/30/48/37 | +24 | 1/6 |
+| k2 | 6 | 33 % | 24/59/82/56 | +35 | 0/6 |
+| FINAL re-tune (HH gate = balance-2: RANKS HH Danh 70, hhThNoSon 70/62, outQ 30) | 16 | 56 % | 21/54/76/71 | +51 | 0/16 |
+| k3 = FINAL + RANKS HH 78 + hhThNoSon 80/70 (LIVE, D #15 ruling) | 12 (2 timeouts) | 58 % | 29/39/76/73 | +48 | 1/12 |
+| k4 = k3 + outQ 60 (whole HH gate = LIVE) | 10 | 70 % | 22/41/66/84 | +60 | 0/10 |
+- HH sits above the 28–40 % band in every arm with the re-tune, whatever the HH gate. The LIVE row is an OLD-LIVE 11-life sample → measuring CURRENT LIVE 94cbe0cd with the same bot now (12 lives).
