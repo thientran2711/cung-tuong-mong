@@ -742,3 +742,10 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   (2) **COOPW.cyHold IS on LIVE with NO timeout** (jcoopworld.js:748 sets it, :238 blocks the host sendEnd, freed only by cyFree :989). An AFK guest with her Kỳ nguyệt card open can hold the host's week end without limit. This is a LIVE co-op stall candidate (not yet reproduced on LIVE).
   → **COOP CYHOLD = session_01964izDPrCNteY5iRRFuhaC** (opus, child of D #14): reproduce on LIVE, then review/coop-cyhold from LIVE with a BAL-bounded wait (host decides after the bound, same for both seats; every host wait on a guest answer bounded) → SSK ~11:30Z → LAND READY ~12:30Z (small BIG-tier co-op fix).
   NLC #9 archived; NIGHT LAND CHAIN #10 GF8Rap3Z keeps the won-night race + NOBC regressions + buổi perf.
+- (21/11 09:13Z, D #14) **FOR MAIN CHÍNH 92 — GAP_LIST v3 FIRST SUMMARY (for the owner's «days to 100 % excluding character art»):** checked against LIVE f3353128 (08:52Z); 91 GAP rows + 83 unique OWNER_MARKS rows rechecked.
+  - **OPEN 93 of 174** (77 DONE, 4 VOID): ART-CHAR 7 (MG10, OR02, IT04, AP02, AP03, KP04, KP09) / **OTHER 86**.
+  - OTHER by type: UI 41, rules-numbers 21, non-character art 16, content 8. By size: S 27, M 37, L 22. By owner: MAIN UI ~31, B ~27, C (non-char art) ~16, E 10, D 7.
+  - 59 of the 86 are already in a branch (many PASS / LAND READY); only 27 have no branch.
+  - **Close rate (48 h, LIVE LAND commits matched to rows):** 82 rows closed = 41/day (last 24 h ≈ 78/day); 63 branches landed.
+  - **ETA = 86 ÷ 41 ≈ 2.1 days** (1.1 d at the last-24 h pace). **Realistic: 2–4 days.** The rate is lifted by small kit/UI rows; 22 L rows + 16 non-char art rows are slower, and landing is gated (dialog-person-3 jksize conflict, ending-screens G4 FAIL, the night-final bundle).
+  Full table + ROAD TO 100 % → dev/handover/GAP_LIST_v3.md ~09:40Z (worker session_01964izDGbtDvgVEE65rghGe).
