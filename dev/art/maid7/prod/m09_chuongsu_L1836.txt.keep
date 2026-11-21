@@ -1,0 +1,18 @@
+base: dev/art/maid7/gpt/chuongsu_gpt_v5.txt
+allow: attach Image 1 = m18 face reference   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: the same single reference used on Magnific   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: 'The reference image' and 'the identity reference' below both mean Image 1   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: Make ONE tall portrait image   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: a SLIM OVAL face with a gently pointed chin   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: large almond eyes with softly upturned outer corners   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: fully open and clear   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: softly arched thin brows   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: a slim straight nose   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: a small rosebud mouth   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: a small playful closed-lip smile   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: head slightly tilted   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: never a stretched grin   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: a long robe of fine embroidered silk brocade with a subtle woven pattern   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: a wide silk sash tied in a bow at the waist   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: the MAIN colour eggplant purple and the SECONDARY colour deep rose like   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
