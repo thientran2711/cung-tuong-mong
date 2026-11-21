@@ -127,7 +127,7 @@ function stageCapFix(V){/* the caption is written AFTER the people are reconcile
   const n=V.people.filter(p=>p.kind!=="chest").length;const cnt=n?`Ở đây có ${n} người.`:"Không gặp ai.";
   if(/Ở đây có \d+ người\./.test(V.msg))V.msg=V.msg.replace(/Ở đây có \d+ người\./,cnt);else if(V.msg==="Không gặp ai."&&n)V.msg=cnt}catch(e){}}
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
- if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
+ if(k==="home"){if(S.place!=="home"&&!window.__walkFree){const th=travel(S.place,"home");if(!walkOk(th))return;spend(th)}S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
  const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
  const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  const at=(id,w)=>{const r=recAt(id,k);return r==null?w===k:r};const here=liveRivals(true).filter(v=>at("v"+v.id,W[v.id]));const empHere=at("emp",W.emp);const cap={};

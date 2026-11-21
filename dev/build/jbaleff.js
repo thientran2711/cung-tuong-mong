@@ -36,6 +36,12 @@ Object.assign(BAL,{eff:{
  j68f:{relOk:6,hpOk:10,hpOk_2:6,hpOk_3:4,talOk:2,talOk_2:5,evOk:1,sungOk:-1,sacOk:-1,ducOk:-2,ducOk_2:-1,danhL:-1},
  j68g:{talOk:4,talOk_2:3,talOk_3:2,evOk:1,sacOk:-1,ducOk:-1,danhOk:-1,sungOk:-1,ducOk_2:-1,sungOk_2:-1,ducOk_3:-2,ducOk_4:-3},
  j68h:{relHit:-25,relOk:6,evOk:1,loyalOk:10,danhL:-1},
+ /* j68q (OR20): j68 life in lãnh cung (cold), as a servant (srv), Hoàng hậu duties (hh). cd = tuần between two of one template; w = weights;
+    rk = odds lost per rung (law 5: cold = the rank she fell from, srv = her servant rung, hh = rungs above BAL.voice.hq + 1); od = base odds;
+    rel / loy / tin / nt / st / suc / bac = small / mid / large amounts (s / m / l); ev = chứng cứ per success */
+ j68q:{cd:10,w:{lo:.7,mid:1,hi:1.5},rk:{cold:2,srv:3,hh:4},dv:3,ev:1,
+  od:{talk:50,take:45,gloat:45,letter:45,credit:45,cheer:55,quan:45,pass:40,late:55,ledger:55,judge:55,deny:50,visit:50,newT:50},
+  rel:{s:4,m:8,l:12},loy:{s:5,m:10,l:15},tin:{s:4,m:8,l:12},nt:{s:3,m:6},st:{s:1,m:2,l:3},suc:{s:3,m:6,l:10},bac:{s:10,m:20,l:40}},
  j7:{evGo:1,evGo_2:1,evN:2,fondGo:6,talGo:5,fondGo_2:8,hpGo:20,hpGo_2:8,hpGo_3:30,hpGo_4:10,evGo_3:2,evGo_4:1,evGo_5:2,evGo_6:2,evGo_7:2,evGo_8:2,sungGo:4,sungGo_2:-8,danhGo:3,danhGo_2:4,sungGo_3:-10,matGo:1,danhGo_3:5,sungGo_4:3,sungGo_5:-5,sungGo_6:-10,bacGo:60,danhGo_4:5,sungGo_7:2,matGo_2:1,thGo:15,danhGo_5:4,thGo_2:3,ducGo:5,matGo_3:1,sungGo_8:-5,sungGo_9:-6,ducGo_2:4,sucGo:10,sungGo_10:-4,danhGo_6:6,sucGo_2:-15,danhGo_7:-5},
  j70:{thShield:-3,thLotus:-3,step70:2,exec70:-10,no:5,no_2:8,ok:12,ok_2:8,ordMonth70:6,ok_3:-3,evNewPlot70:1,evStep70:1,evExec70:1,evExec70_2:2,evOk:1,evOk_2:1,evOk_3:2,evOk_4:-1,evTop:1,evOrdMonth70:1,evTop_2:1,evF:1,evF_2:1,loyalNewPlot70:5,loyalOk:2,loyalOk_2:10,loyalOrdMonth70:5,loyalTop:5,ducOk:1,sucC:-5,sacUse:3},
  j71:{incenseTh:3,thNurse:[10,3],go:4,go_2:2,go_3:5,go_4:-3,go_5:6,go_6:4,ok:-2,no:-2,npc:10,res:-10,ok_2:10,npc_2:10,npc_3:5,npc_4:5,hpOnFire:15,hpOk:20,fondOk:6,hpOk_2:15,fondOk_2:3,hpOk_3:15,hpOk_4:8,hpNpc:15,danhCRun7:1,danhCRun7_2:-1,danhGo:1,sucGo:4,danhGo_2:4,sungGo:2,danhGo_3:-2,danhGo_4:1,sucGo_2:4,sungGo_2:2,danhGo_5:3,danhGo_6:-2,ducGo:2,sucGo_3:4,danhNpc:3,danhNpc_2:2,danhNpc_3:2,sungStakes:8,danhStakes:3,ducNpc:3,danhBrbTick7:-5,danhCFin7:1,danhCFin7_2:-1,danhFxFin7:-1,danhTop:-1},
