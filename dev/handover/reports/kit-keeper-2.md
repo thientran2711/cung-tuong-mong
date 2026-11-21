@@ -21,3 +21,26 @@ START_CTX ~8 % (estimate). Successor of kit-keeper-1 (MtjP). Coordinator MAIN CH
   - kit-g4-plate 03181881 (MAIN 93 top priority): LIVE G4 80-dialog-fixed #54 is a RACE, not a landing (fails on every LIVE sha back to 35232176 under load); kitDhCap now also re-run by one #modal MutationObserver. 6 parallel runs: before 6/6 FAIL, after 6/6 PASS; QC PASS → SSK.
   - kit-focus r5 da873b4b (duodo: 2-cost ton clipped on Fold): each ton cost its own nowrap part; 3-line sub drops title to 1 line. kit-focus.js PASS, QC PASS → SSK.
   KIT_REQUESTS rows: «quý nhau» (E22t) and econ-tamco ton row = already on LIVE (close); place-nth/pd glyphs = art → Foreman C; OPEN for me: rel-men-servants kitRelRows, «khi thành» tag on §6.2b Được (next).
+
+# HANDOVER — KIT KEEPER #2 (session_01Rc5AsMF9SLrWM4NQM9zGGz, depth 4) → KIT KEEPER #3 (written 21/11 ~12:15Z at ~33 % context = START ~8 % + 25 %)
+Coordinator: MAIN CHÍNH 93 session_01Rc5AsKcbi9rTmDK4pY2SeT (opens the successor). Kit reviewer: rv MSxp session_01Rc5AsMSxpxbsAMRSE5oWrq.
+Role/rules: unchanged from kit-keeper-1 HANDOVER (top of this file's sibling reports/kit-keeper-1.md): review/<topic> from newest LIVE, tests Fold 755x1000 + iPad 1180x820, LOOK at shots, shots on CDN img/_review/<topic> (cdn_sync.py <dir>, never git), KIT.md note, quickcheck (+ coop-e2e for layout), SSK to rv + MAIN. Never push main, no PR.
+Practical: worktrees /home/user/wt/hand2 (handover, sparse), /home/user/wt/kmf (kit-mark-fix-r3), /home/user/wt/kf (kit-focus); test servers: python3 -m http.server 8778 in /tmp/pcs/www (+8779 www2, 8780 www3); copy index.html there. Harness overlays to hide in shots: `#kload,#klife,.modal.kload,#modal.kptitle,.kroul,#kroulw,#curtain,#buoitr,.kmov`. quickcheck can leave index.html build-stamp diffs (commit them) and _aa.html (transient). LIVE G4 dialog-fixed #54 is a race (fixed on kit-g4-plate) — until it lands, a G4 #54 FAIL on any branch is not that branch's fault (verify on plain origin/main index.html).
+
+## My branches (state at handover)
+| topic | branch @ sha | state |
+|---|---|---|
+| kit-focus | review/kit-focus r4 0f6c758a PASS (LAND READY); r5 da873b4b (2-cost ton sub-line, duodo) | r5 SSK sent, waiting |
+| kit-chip-pause | review/kit-chip-pause 8d624b8a | rv PASS (33661a10), land AFTER hao-huu |
+| kit-info-tap | review/kit-info-tap 5466b126 | rv PASS (c5bbde7e), LAND READY |
+| kit-opt-sg | review/kit-opt-sg 64b61d37 | NOT landing alone: Foreman D sg-card r2 absorbs it; nothing to do |
+| kit-mark-fix-r3 | review/kit-mark-fix-r3 99f1e576 | SSK sent (QC PASS, coop 94/94), waiting |
+| kit-ef-unit | review/kit-ef-unit 9fd26c14 | SSK sent, waiting |
+| kit-g4-plate | review/kit-g4-plate 03181881 | SSK sent (MAIN 93 top priority: unblocks every land), waiting |
+| kit-win-pay | review/kit-win-pay 0e6fe923 | SSK sent, waiting |
+## Queue for #3
+1. Handle any rv FAIL on the 5 waiting topics above (kit-focus r5, kit-mark-fix-r3, kit-ef-unit, kit-g4-plate, kit-win-pay). After LIVE lands: CLAIMS LANDED + `python3 dev/site/cdn_sync.py --wipe-review <topic>`.
+2. KIT_REQUESTS OPEN row «REVIEW rel-men-servants r1 — KIT §52 kitRelRows(p)» (men / servants get two «Thiện cảm» numbers; asked mapping in the row). PRIORITY #1 first: check whether review/rel-men-servants landed and whether Foreman B already took it.
+3. KIT_REQUESTS row place-nth / place-pd glyphs = ART → Foreman C (not the keeper); old 15/11 rows marked «in progress» look stale — ask MAIN before touching.
+4. Side note for the owner of j34: «Sủng -8 / Danh -6» literals in j34.js:32 (should read BAL.eff.j34.*Sabotage) — reported to MAIN 92.
+FOR MAIN: keeper #2 stops here (worker rollover rule); please open KIT KEEPER #3 with this HANDOVER.
