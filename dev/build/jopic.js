@@ -160,7 +160,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
- let p=kitOptPic(name,b);if(!p.src&&b.__koph&&typeof KIT_PH!=="undefined"&&KIT_PH.act){let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
+ let p=kitOptPic(name,b);if(!p.src&&typeof KIT_PH!=="undefined"&&KIT_PH.act)/* OD 21/11 ~04:20Z (#56): EVERY option card shows a picture — no art of its own → the §59 stand-in, even when no sibling has one */{let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
  kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
