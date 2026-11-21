@@ -180,12 +180,14 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
  if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;try{CW.hrApply&&CW.hrApply()}catch(e){console.error(e)}
  /* coop-pool-face: her own identity is never a face the room's world gives someone, nor the friend's (j66 pidRoomFix moves HER) */
- try{if(typeof pidRoomFix==="function")pidRoomFix(roomTaken(C))}catch(e){console.error("pid room",e)}return true}
+ try{if(typeof pidRoomFix==="function")pidRoomFix(roomTaken(C,host()))}catch(e){console.error("pid room",e)}return true}
 /* coop-pool-face: the faces of the room — every fid held by a person of the world W (Thái hậu, Emperor, consorts, staff, court, men, kids)
    + the friend's own identity. fidUsed / fidDead are lists, not holders: not counted here (her own identity sits in fidUsed). */
 function faceHeld(o,out,seen,d){if(!o||typeof o!=="object"||seen.has(o)||d>14)return;seen.add(o);if(Array.isArray(o)){for(const x of o)faceHeld(x,out,seen,d+1);return}
  for(const k in o){const v=o[k];if(k==="fid"){if(typeof v==="string"&&v)out.add(v)}else if(v&&typeof v==="object")faceHeld(v,out,seen,d+1)}}
-function roomTaken(C){if(!C||!C.W)return null;const T=new Set();faceHeld(C.W,T,new Set(),0);const f=C.P&&C.P[fs()];if(f&&!f.dead&&f.S&&f.S.pid)T.add(f.S.pid);return T}
+/* review coop-pool-face: noFriend (the host's own room check) = the two players already share one identity (an old room from before this fix):
+   only the GUEST moves; if both moved they would land on the same next face every week, both faces changing for ever (PF_TWIN probe) */
+function roomTaken(C,noFriend){if(!C||!C.W)return null;const T=new Set();faceHeld(C.W,T,new Set(),0);const f=C.P&&C.P[fs()];if(!noFriend&&f&&!f.dead&&f.S&&f.S.pid)T.add(f.S.pid);return T}
 CW.taken=()=>roomTaken(CW.base);
 CW.friendPid=()=>{const f=CW.base&&CW.base.P&&CW.base.P[fs()];return f&&!f.dead&&f.S&&f.S.pid||null};
 /* coop-pool-face backstop: the GUEST never decides a world person's face (the host draws every pool face, once). Her week end carries the

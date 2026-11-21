@@ -122,15 +122,25 @@ async function thCheck(A,B,tag){let x,y;const t0=Date.now();while(Date.now()-t0<
     (j66 pidRoll) is pinned to it, as a roll stored before the room's world was in would be */
  if(+process.env.PF_FORCE)await B.ctx.addInitScript(()=>{const iv=setInterval(()=>{if(typeof pidRoll!=='function')return;clearInterval(iv);const p0=pidRoll;
    pidRoll=function(d){let k=null;try{const T=COOPW.base.W.S.thO;k=T&&T.fid}catch(e){}if(/^consort:/.test(k||'')){window.__pfForced=k;return k}return p0.apply(this,arguments)}},5)});
+ /* PF_TWIN=1 (reviewer): an OLD room from before this fix where the two players already share one identity (the guest's roll landed on
+    the host's own face): her roll is pinned to the host's S.pid and the room check is held off until the start check, as on a pre-fix build.
+    Then weeks run: the host's own face must never move, only hers, and the two must end different and stay put. */
+ if(+process.env.PF_TWIN)await B.ctx.addInitScript(()=>{window.__pfHold=1;const iv=setInterval(()=>{if(typeof pidRoll!=='function'||typeof pidRoomFix!=='function')return;clearInterval(iv);const p0=pidRoll,f0=pidRoomFix;
+   pidRoll=function(d){let k=null;try{k=COOPW.base.P.a.S.pid}catch(e){}if(/^consort:/.test(k||'')){window.__pfForced=k;return k}return p0.apply(this,arguments)};
+   pidRoomFix=function(){if(window.__pfHold)return false;return f0.apply(this,arguments)}},5)});
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await booted(B);await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  const forced=await B.p.evaluate(()=>window.__pfForced||null);if(+process.env.PF_FORCE)console.log('forced guest roll',forced);
  const fids=[await thCheck(A,B,'start')];
+ const pids=async()=>[await A.p.evaluate(()=>S.pid||null),await B.p.evaluate(()=>S.pid||null)];const PH=[];
+ if(+process.env.PF_TWIN){PH.push(await pids());console.log('twin start pids',JSON.stringify(PH[0]));await B.p.evaluate(()=>{window.__pfHold=0})}
+
  for(let w=0;w<(+process.env.PF_WEEKS||1);w++){const wk=(await C(A)).week;await weekBoth(A,B,w);
   for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),`week ${w+1}: ${o.name} advanced`);await clear(A);await clear(B);
-  fids.push(await thCheck(A,B,'after week '+(w+1)))}
+  fids.push(await thCheck(A,B,'after week '+(w+1)));if(+process.env.PF_TWIN){PH.push(await pids());console.log('twin pids week '+(w+1),JSON.stringify(PH[PH.length-1]),JSON.stringify([await A.p.evaluate(()=>[pidRoomFix.n||0,pidRoomFix.last||null]),await B.p.evaluate(()=>[pidRoomFix.n||0,pidRoomFix.last||null])]))}}
+ if(+process.env.PF_TWIN){ok(PH.every(p=>p[0]===PH[0][0]),'twin: the host\'s own face never moves',PH);const L=PH[PH.length-1],M=PH[PH.length-2];ok(L[0]!==L[1]&&L[1]===M[1],'twin: the two players end different and her face stays put',PH)}
  ok(fids.every(f=>f&&f===fids[0]),'the host never re-rolls the Thái hậu face (one face for life)',fids);
  /* the whole family: no world person on the host wears a player's own identity, and the two players differ */
  {const pa=await A.p.evaluate(()=>S.pid||null),pb=await B.p.evaluate(()=>S.pid||null);
