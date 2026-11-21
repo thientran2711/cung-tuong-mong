@@ -576,3 +576,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | RUNNING | 21/11 00:40Z |
 | OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | session_01Rc5AsJcZhVHQUYhZunHGJr | RUNNING | 21/11 00:45Z |
 | OWNER BUG hoadien-easy (opus; hoa điền too strict for an easy act + makeup group; briefs/main83-hoadien-easy.md) | review/hoadien-easy | MAIN CHÍNH 83 | session_01Rc5AsLWRQqT9YHnXd91Grh | RUNNING | 21/11 00:47Z |
+| kit-kg82-stack KIT KEEPER (sonnet; owner Fold shot, MAIN CHÍNH 82/83) | review/kit-kg82-stack; reports/kit-kg82-stack.md | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 50751774 (waits rv MSxpxbsA) | 21/11 |
