@@ -1,0 +1,9 @@
+Bảng màu bạn làm đã tốt hơn nhiều. Giữ nguyên cách làm và mọi yêu cầu cũ, chỉ sửa 3 điểm sau rồi xuất lại toàn bộ (cùng dạng trang HTML có ô màu):
+
+1. ĐỪNG xếp màu theo vòng cầu vồng. Hiện giờ nhóm nào cũng đi lần lượt người 01 → 18 vòng quanh bánh xe màu, nên 6 nhóm giống hệt nhau về cách xếp và không thấy tính cách. Hãy chọn màu cho TỪNG NGƯỜI theo tính cách nhóm của họ: mỗi nhóm phải có "cách phối" riêng nhìn ra được (độ tương phản, độ rực, độ ấm/lạnh, độ sâu khác nhau giữa các nhóm), nhưng trong nhóm vẫn mỗi người một họ màu. Hai người đứng cạnh nhau trong bảng không được gần màu nhau.
+
+2. MÀU PHỤ phải là một màu thật, riêng cho từng người, không phải gần như ai cũng một màu kem nhạt (hay một màu băng nhạt ở mùa đông). Màu phụ phải tương phản đẹp với màu chính, và trong một mùa không quá 3 người dùng cùng một họ màu phụ.
+
+3. MÀU HOÀNG HẬU đã được chốt: vàng hoàng gia #EFBD69. Bỏ màu đỏ chu sa bạn đã chọn. Không ai trong 90 người được dùng màu chính, màu phụ hay màu nhấn gần với vàng hoàng gia này (khác xa hẳn khi nhìn bằng mắt).
+
+Cuối trang ghi rõ: bạn đã phân biệt 6 nhóm bằng cách phối nào, và liệt kê những người còn gần màu nhau (nếu có).
