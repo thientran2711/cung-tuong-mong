@@ -2153,3 +2153,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:03Z) rv MSxp PASS kit-opt-title-wrap-rv2 3d8e8947 (via 96) → sent to LRRY after bang-words-land3; told MSxp to report to 97.
 - (17:11Z) LAND CHAIN 2: LANDED bang-words-land3 6d31d6d2. Queued kit-opt-title-wrap-rv2 3d8e8947.
 - (17:12Z) LAND CHAIN 2: LANDED bang-words-land3 6d31d6d2 (E45). LIVE 6d31d6d2. Next kit-opt-title-wrap-rv2.
+- (17:14Z) rv MSxp FAIL kit-mark-fix b4d82057 (kpmore fade cue flaky 15/48; fix list rv-kit-mark-fix.md r6) → relayed to KIT KEEPER #5 as queue item 2 after ef-unit r3. opt-title-wrap r2 done (land queue).
