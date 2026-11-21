@@ -30,3 +30,15 @@ t3 only: boilerplate trims (COLLAR CUT sentence = duplicate of OUTER_IN; long ey
 - check_store --scope tpN --age a22: t1/t2/t3 STORE CHECK PASS. t8: ONE FAIL = S07 (approved "FABRIC: thick gold-embroidered brocade…") — deliberately absent: owner L1324 gauze (sa dệt kim) + L1717 "quấn mền"; the liked HQP open5 has the same S07 fail. Foreman decides (gate says no gen until S07 is waived/updated).
 - keep_check --sidecar PASS ×4; --all 393 PASS.
 - No earrings (only EAR_SENT), no necklace, no vase, shoe tips only (S19).
+
+# HAN2 job 2 — owner L1725 (Foreman C #20, ADDENDUM B): t1–t3 closed collar. 0 gens.
+Files: seasons4/s62_t{1,2,3}_HAN_BAC_L1725.txt + .keep (base = same-tier hqp1_L1717; t3 drew WDgRSsjcXe). Chars 9449 / 9797 / 9993.
+Same change in all three (rank parts, pose, item, angle, fabric, embroidery ladder kept):
+- "OPEN-NECK LOOK…bare neck and collarbones" lead line removed.
+- Collar: open-off-the-neck V → "a properly CLOSED crossed jiaoling collar, left over right, lying close round the base of the neck and crossing at mid-chest in a modest V, the ivory white inner collar showing just inside; shoulders and collarbones covered, never open off the neck".
+- Shoulder: "real Han shoulders: the robe smooth over natural rounded shoulders, sleeves widening below the elbow".
+- Khúc cư: "its long front panel crosses diagonally from the collar and wraps {t1 ONCE / t2 ONE AND A HALF times / t3 TWICE} round the hips and back in clear bordered spiral bands, ending in a curved tail at the side hip; below, the robe falls straight to the floor, no train".
+- Dressed: "a complete, neatly dressed … court look" + "every layer closed and tidy, never like a dressing gown or sleepwear"; t1 sash → medium-wide, wrapped firmly round the natural waist; t2 sash → firm, wrapped round the natural waist.
+- Collar bands "along each edge of the V" → "along the collar edges". Captions: "… Khúc cư một vòng / một vòng rưỡi / hai vòng, cổ giao lĩnh kín".
+- Boilerplate trims (allow lines): COLLAR CUT sentence (dup of OUTER_IN, t1/t2), long eye sentence → short (t1/t2), t3 "none at the ears" + "a small sweet closed-lip smile, eyes fully open, never a stretched grin" (dup of S18/master).
+Gates: check_store tp1/tp2/tp3 a22 STORE CHECK PASS ×3; keep_check --sidecar PASS ×3; --all 408 PASS. t7/t8 untouched.
