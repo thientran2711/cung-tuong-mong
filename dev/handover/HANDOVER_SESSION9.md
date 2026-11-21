@@ -1751,3 +1751,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 04:20Z) #60 keeper addendum 14 (by 84). #61 (1) rank+name colour unit → keeper; (2)(3) literature expert (opus) for ALL narration → Foreman E ORDER.
 - (21/11 04:25Z) LAND QUEUE (main self-merge, /home/user/wt/sland86.sh): bag-inline 1674d407 (running) → menu-panel d26dbd7b (rv PASS) → huong-cue-2 06c76fff (rv PASS). calendar SSK 40d20ee1 → rv session_01Rc5AsKHZyzLGYRFR43QaZN. Archived rv huong JgMQ; huong worker KFt2 to archive.
 - (21/11 04:30Z) Keeper addenda 15/16 from 84 (= marks #62 many-people line no avatar + no empty band, #63 item in dialog smallest inline, #64 never same person twice) → dialog-person worker (keeper keeps 9 → 14 + #61(1) → act-grid). keeper kit-leftcol-read 5fc1b026 (add. 9, #38) SSK soon.
+- (21/11 04:35Z) #65 (second person's avatar ON event picture, no line avatars) → dialog-person. #66 overwrites #57 (quest chips removed entirely) → dialog-stack. Keeper split confirmed again to 84.
