@@ -90,21 +90,33 @@ const stripItem=(x,q)=>({small:true,sz:"xs",f:q.f,name:x.k==="me"?"Ta":x.k==="em
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
-function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
- const GR=["Ta","Chí tôn","Phi tần"];const tabs=(key,L)=>GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);
- const outside=hcRelHTML._last!==relSel;if(outside){const i=ix(all,relSel);const g=i<0?"Ta":all[i].g;KTSUB.relx=g;PG.rel=null;PG.relY=null}
- if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;
- const tx=kitSubTabs("relx",tabs("relx",all));const items=all.filter(x=>x.g===tx.cur);if(hcRelHTML._g!==tx.cur&&!outside)PG.rel=0;hcRelHTML._g=tx.cur;
- if(PG.rel==null||!items[PG.rel]){const i=ix(items,relSel);PG.rel=i<0?0:i}
- if(items[PG.rel].k!==relSel){relSel=items[PG.rel].k;PG.relY=null}hcRelHTML._last=relSel;const X=items[PG.rel].q;
- /* strip 2: everyone X can have a relation with (Hoàng thượng / Thái hậu: with Ta and the consorts only) */
+let relYk=null;
+/* KIT §49.2d (owner 21/11, 3rd time: "bớt chiếm không gian"; review/rel-picker-r3): the two strips are gone. ONE small row = two person slots «[face Ta ▾] ⇄ [face Hoàng thượng ▾]»
+   (kit face mdH xs + kitNameRank small, one line). A slot opens the kit dialog (kitModal) holding the group tabs (kitSubTabs) + the Hậu cung pager strip of that group; ⇄ swaps X and Y.
+   The relation card starts right under the row. relSel = X (outside links still set it), relYk = Y (default Ta; X = Ta → the first valid person). */
+function relCands(){const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
+ if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;const X=all[ix(all,relSel)];
  const Ys=all.filter(x=>x.k!==X.k&&!((X.k==="emp"||X.k==="th")&&(x.k==="emp"||x.k==="th")));
- const TY=tabs("rely",Ys);if(hcRelHTML._lx!==X.k||KTSUB.rely==null||!TY.some(t=>t.k===KTSUB.rely))KTSUB.rely=TY.some(t=>t.k==="Ta")?"Ta":TY[0].k;hcRelHTML._lx=X.k;
- const ty=kitSubTabs("rely",TY);const Ys2=Ys.filter(x=>x.g===ty.cur);if(hcRelHTML._gy!==ty.cur)PG.relY=null;hcRelHTML._gy=ty.cur;
- if(PG.relY==null||!Ys2[PG.relY])PG.relY=0;const Y=Ys2[PG.relY].q;
- const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
+ let yi=ix(Ys,relYk);if(yi<0){yi=Math.max(0,ix(Ys,"me"));relYk=Ys[yi].k}return{all,X,Ys,Y:Ys[yi]}}
+const relSlot=(x,w)=>`<button class="pface krslot" data-relslot="${w}" aria-haspopup="dialog" aria-label="${w==="x"?"Xem quan hệ của":"với"} ${ktEsc(x.q.name)}">${mdH(x.q.f,"xs")}${kitNameRank(x.q.rank,x.q.k==="me"?"Ta":x.q.name,x.q.col,x.k==="me"||undefined,true)}<span class="krcar" aria-hidden="true">▾</span></button>`;
+function hcRelHTML(){kn();const C=relCands();
+ return `<div class="pgwrap krelpg"><div class="krelrow">${relSlot(C.X,"x")}<button class="krswap" data-relswap="1" aria-label="Đổi chỗ hai người">⇄</button>${relSlot(C.Y,"y")}</div>${relPair(C.X.q,C.Y.q)}</div>`}
+function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X.k:C.Y.k;const GR=["Ta","Chí tôn","Phi tần"];
+ const tabs=GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);const key="relpop"+w;
+ const cg=(L.find(x=>String(x.k)===String(cur))||L[0]).g;if(KTSUB[key]==null||!tabs.some(t=>t.k===KTSUB[key]))KTSUB[key]=cg;
+ const tx=kitSubTabs(key,tabs);const items=L.filter(x=>x.g===tx.cur);const on=items.findIndex(x=>String(x.k)===String(cur));if(PG[key]==null)PG[key]=on<0?0:on;
+ return tx.html+pager(key,items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"")}
+function relPopOpen(w){delete PG["relpop"+w];delete KTSUB["relpop"+w];const m=kitModal({kind:"notice",title:w==="x"?"Xem quan hệ của":"Quan hệ với",sections:[{h:"",html:`<div class="krpop kpick" data-w="${w}">${relPopBody(w)}</div>`}],btn:"Thôi"});
+ setTimeout(()=>{try{kitStripFit()}catch(e){}},60);return m}
+document.addEventListener("click",e=>{const T=e.target;if(!T||!T.closest)return;
+ const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();relPopOpen(sl.dataset.relslot);return}
+ const sw=T.closest("#panel [data-relswap]");if(sw){e.preventDefault();e.stopPropagation();const C=relCands();relYk=C.X.k;relSel=C.Y.k;renderPanel();return}
+ const pop=T.closest("#modal .krpop");if(!pop)return;const w=pop.dataset.w,key="relpop"+w;const re=()=>{pop.innerHTML=relPopBody(w);try{kitStripFit()}catch(x){}};
+ const tb=T.closest("[data-ktsv]");if(tb){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();KTSUB[key]=tb.dataset.ktsv;PG[key]=0;re();return}
+ const pf=T.closest("[data-pg]");if(!pf||pf.dataset.pg!==key)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const C=relCands();const L=w==="x"?C.all:C.Ys;const items=L.filter(x=>x.g===KTSUB[key]);const i=+pf.dataset.pi;
+ if(pf.classList.contains("parr")){PG[key]=i;re();return}
+ const q=items[i];if(!q)return;if(w==="x"){relSel=q.k}else relYk=q.k;try{kitModalClose()}catch(x){}renderPanel()},true);
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
@@ -118,12 +130,14 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
  return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
- const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
+ /* the residence line (owner 21/11 ~02:16Z): ONE sentence from houseLine (chủ vị / ở cung của ta / cùng cung) about the person who is not Ta */
+ const z=p===S?o:o===S?p:null;const hl=z&&z!=="emp"&&z!=="th"&&typeof houseLine==="function"?houseLine(z,"ta"):"";
+ const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+(hl?`<p class="kr3note">${hl}.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
+ /* KIT §49.2d: the card is the relation table only — full width, as tall as its content (the two faces are the picker slots above) */
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
-  `<div class="krel3 krpair">${relSide(X)}<div class="kr3m">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${relSide(Y)}</div>${known}</div>`}
+  `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
   return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
@@ -162,12 +176,12 @@ window.courtTabHTML=function(){const L=[{f:pEmp(),name:"Hoàng thượng",mk:emp
 
 /* ---------- 5. men: unique names, only the ones she has met ---------- */
 /* (MALEN "Lục Trường", "Tiêu Viễn" carry a surname: "Lục Lục Trường" is renamed too) */
-const MALEN2=["Cảnh Hoài","Tĩnh An","Dật Thanh","Mặc Trần","Quân Hạo","Thanh Diễn","Hựu Ninh","Tấn Lương","Cẩn Du","Hoằng Nghị","Thiệu Khang","Diệp Tùng"];
-function menUnique(){try{if(!S||!S.men)return;const used=new Set();const pool=MALEN.concat(MALEN2);
- for(const m of S.men){const w=m.name.split(" ");const giv=w.slice(-2).join(" "),last=w[w.length-1];
-  if(!used.has(last)&&w[w.length-3]!==w[w.length-2]){used.add(last);continue}
-  const nw=pool.find(g=>!used.has(g.split(" ").pop())&&g.split(" ")[0]!==w[w.length-3]&&!S.men.some(x=>x!==m&&x.name.endsWith(" "+g)));if(!nw){continue}
-  m.name=w.slice(0,-2).concat([nw]).join(" ");used.add(nw.split(" ").pop())}}catch(e){}}
+const MALEN2=[];/* retired: one name core (jname.js); jnamefix renames any clash */
+function menUnique(){try{if(!S||!S.men)return;const used=new Set();/* the last word of a man's name stays unique among the men; new names from the one name core */
+ for(const m of S.men){const raw=String(m.name||"");const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);const last=b.split(" ").pop();
+  if(!used.has(last)&&nmTwice(b)){used.add(last);continue}
+  let nb="";for(let t=0;t<40;t++){const c=nmNew("m",{reg:false});if(!used.has(c.split(" ").pop())){nb=c;break}}if(!nb)continue;
+  const R=nmReg();if(R&&nmOwner())R[nb]="m";m.name=pre+nb;used.add(nb.split(" ").pop())}}catch(e){}}
 window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}
@@ -253,6 +267,11 @@ html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;m
 html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
 html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
 html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
+html body :is(#panel,#kitpage) .krelrow{display:flex;align-items:center;gap:6px;margin:0 0 4px}
+html body :is(#panel,#kitpage) .krelrow>.krslot{flex:1 1 0;min-width:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:6px;min-height:0!important;padding:2px 8px 2px 4px!important;text-align:left}
+html body :is(#panel,#kitpage) .krelrow>.krslot .knr{display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:0;line-height:1.05;flex:1 1 auto}
+html body :is(#panel,#kitpage) .krelrow .krcar{flex:0 0 auto;font-size:.8rem;color:var(--dim)}
+html body :is(#panel,#kitpage) .krelrow>.krswap{flex:0 0 auto;min-width:34px;min-height:34px;font-size:1.1rem;border-radius:10px}
 .krelh{margin:4px 0 4px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(88px,104px) minmax(0,1fr) minmax(88px,104px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
