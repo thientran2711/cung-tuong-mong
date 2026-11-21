@@ -70,5 +70,5 @@ Gates on e156be4c: quickcheck PASS + old save, core gates PASS · coop-e2e 94/94
 1. bw: merge origin/main, resolve jge.js keeping both (diff by script), rebuild, short re-gate (quickcheck, coop-e2e, COOP_LAND both orders, bang-words scan/screen, ge-guard) → LAND READY (it was all green).
 2. ge: merge, assemble union (res.py asm), rebuild, full gates (own-ge.sh) → SSK: short reviewer for the jbalge npc.on line + 18-label remap.
 3. hc: merge, assemble union, then the perf blocker above.
-Scripts: /home/user/wt/e43-out/{g.sh,own-hc.sh,own-ge.sh,own-bw.sh,res.py,hunks.py,buoiprof.js} — copy them (container-local). g.sh usage: bash g.sh <worktree> <tag>. Note caoly-oldsave needs `<this url> <main url>` (root index.html), bd-legacy-save `<url>`.
+Scripts (copied to dev/handover/tools/e43/ on this branch; put them in /home/user/wt/e43-out/): {g.sh,own-hc.sh,own-ge.sh,own-bw.sh,res.py,hunks.py,buoiprof.js} — copy them (container-local). g.sh usage: bash g.sh <worktree> <tag>. Note caoly-oldsave needs `<this url> <main url>` (root index.html), bd-legacy-save `<url>`.
 Worktrees to delete: /home/user/wt/e43 e43g e43b e43L e43h, scratch /home/user/wt/e43-out.
