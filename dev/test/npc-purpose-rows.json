@@ -847,7 +847,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"done": "npcWhy(\"hEmpWed\",{p,k},()=>roll(8))"
+"done": "npcWhy(\"hEmpWed\",{p,k},()=>roll(H54.ask))"
 },
 {
 "f": "j54.js",
