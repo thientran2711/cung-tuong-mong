@@ -47,3 +47,13 @@ Palette: no duplicate main+sec pair in any season; duplicate MAIN hex: xuân 3, 
 4. Fix 12 F20 cells; gate F16 'persimmon' + F19 id clash.
 5. Hand thu: palette names in s64/s65; generalise make_thu script to read the json.
 Handover: none needed (job done at ~15 % ctx).
+
+## JOB 2 — PERSON + BATCH gate (owner L2039, ROOT order 10:55Z) · 0 gens
+Cause: check_store read ONE file alone; VE12 make_thu_s63_65_L2026.py copied s62's ANGLE + Pose + held item into s63/s64/s65 → PASS.
+Added (no build files touched):
+- `dev/art/person_gate.py`: P1 item = her own builder item (`_e6_picks`, or pet, or owner-approved exception table APPROVED_ITEM: s62 t7 jade flute L1979, s62 t8 gold phoenix hairpin L1976); P2 ANGLE = her own `build_all.plan`/ANG14 sentence (exceptions APPROVED_ANGLE: s62 t7/t8 frontal L1973/L1976/L2002); P3 her own face sentence (face-common/<pid>.v5|v3.FULL.txt); B1 batch = 2+ persons share a rank's ANGLE or Pose sentence → FAIL; W1 = same builder item for 2+ persons (WARN).
+- `check_store.py`: scope tp1–tp8 runs P1–P3 when `--pid` or a `<pid>_t<rank>_` file name is given (`--no-person` skips); new `--batch <files…> [--age aNN]`; `--self` also runs the person self-test.
+- Rule **G72** (rule.py add, owner verbatim) + one bold line in START_ART_WORKER.md §2 (batch gate mandatory before any multi-person run).
+Results: VE12 s63–s65 t1–t5 (15 files) → FAIL: P1 15/15, P2 15/15, B1 10 (same ANGLE + Pose per rank for all 3), P3 0 (faces were swapped correctly). s62 approved thu t1–t8 → PASS. Self-test PASS (check_store's own registry self-test still has its 3 pre-existing PROOF problems, unchanged).
+**DATA FINDING (blocks real per-person items):** builder item data has only **8 distinct t1–t8 item ladders for 90 persons** (e.g. s63 = s65 = c19 = c28 … 12 persons identical; s62 = c14 = c22 … 12) → 'her own item' is not unique; W1 warns. Needs a data fix in build.py `_e6_picks` (BUILDFIX1 / foreman decision), not a gate fix.
+For BUILDFIX1: builder output is NOT affected (tmp file names carry no pid); if build_all passes `--pid` later, P1/P2 are its own data by construction.

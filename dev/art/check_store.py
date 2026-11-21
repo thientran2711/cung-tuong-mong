@@ -19,6 +19,8 @@ NOFRUIT (owner Lượt 1052/1054, 20/11, rule F16): in EVERY scope a fruit word 
 NOEAR (owner Lượt 1037, 20/11, rule F15): in EVERY woman/girl scope (all but --scope emperor|men) master_common.EAR_SENT exactly once + NO earring word (earring, ear drop/pendant/stud, jewels at the ears, hoa tai…) = else FAIL
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
   python3 dev/art/check_store.py --self | --audit | --registry-md
+PERSON + BATCH (owner L2039, dev/art/person_gate.py): scope tp1-tp8 with --pid or a <pid>_t<rank>_ file name = her OWN item / ANGLE / face (P1/P2/P3);
+  python3 dev/art/check_store.py --batch <files…> [--age aNN]  = FAIL when 2+ persons share a rank's ANGLE or Pose sentence (B1) + the person check per file. MANDATORY before every multi-person gen run.
 Exit 1 = FAIL -> do NOT generate. Ledger lines carry "store_check":"PASS" and "approved_check":"PASS"."""
 import subprocess,sys,re,os,glob,collections,json
 ART=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(os.path.dirname(ART))
@@ -1552,7 +1554,8 @@ def registry_md():
 def main():
     a=sys.argv[1:]
     if not a or a[0] in ("-h","--help"): print(__doc__); return 0
-    if a[0]=="--self": return selftest()
+    if a[0]=="--self":
+        r=selftest(); import person_gate; r2=person_gate.selftest(); return r or r2   # + PERSON/BATCH self-test (owner L2039)
     if a[0]=="--maid-items":   # E13 (owner L1919): every maid rank of one person holds a different item/kind; same rank across persons never the exact same item
         sys.path.insert(0,ART); import maid_items
         d,tag=a[1],a[2]; bad,per=maid_items.gate(d,tag)
@@ -1560,6 +1563,11 @@ def main():
         if bad:
             print('MAID ITEMS FAIL',d,tag,'—',len(bad),'repeat(s):'); [print('  '+b) for b in bad]; return 1
         print('MAID ITEMS PASS',d,tag,'(%d persons, %d files: every rank a different item/kind, no same item at the same rank across persons)'%(len(per),sum(map(len,per.values())))); return 0
+    if a[0]=="--batch":   # BATCH gate (owner L2039): 2+ persons in one batch never share a rank's ANGLE / Pose sentence; every file = that person's own item/angle/face
+        import person_gate
+        fs=[x for x in a[1:] if not x.startswith("--")]; bad=person_gate.batch(fs,a[a.index("--age")+1] if "--age" in a else "a18")
+        [print("  FAIL "+b) for b in bad]; [print("  WARN "+w) for w in person_gate.WARN]
+        print("BATCH CHECK", "FAIL — do NOT generate" if bad else "PASS", f"({len(fs)} files)"); return 1 if bad else 0
     if a[0]=="--audit": audit(a[a.index("--out")+1] if "--out" in a else os.path.join(ART,"APPROVED_AUDIT.md")); return 0
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
@@ -1582,7 +1590,13 @@ def main():
         print('STORE CHECK FAIL',pf,'— K18 LIVE GAME FILE used as reference (refs only from our store: KC_REFS cut ids / store ids):',', '.join(sorted(set(live)))); return 1
     if "--scope" in a:   # prompt without store args (triều phục, ma ma spec files, …): approved part only
         scope=a[a.index("--scope")+1]; age=a[a.index("--age")+1] if "--age" in a else None; pid=a[a.index("--pid")+1] if "--pid" in a else None
-        f,w,_=check_text(prompt,scope,age=age,pid=pid); report(pf,scope,f,w)
+        f,w,_=check_text(prompt,scope,age=age,pid=pid)
+        if re.fullmatch(r"tp[1-8]",scope) and "--no-person" not in a:   # PERSON gate (owner L2039): her own item / angle / face, never another person's (dev/art/person_gate.py)
+            import person_gate
+            _pp,_pr=person_gate.pid_rank(pf) if pf!="-" else (None,None)
+            _pp=pid or _pp; _pr=int(scope[2:]) if _pp else None
+            if _pp and re.fullmatch(r"[cmsp]\d\d",_pp): f=f+person_gate.person_check(prompt,_pp,_pr,age or "a18")
+        report(pf,scope,f,w)
         if f: print('STORE CHECK FAIL',pf,'— APPROVED CHECK FAIL: do NOT generate'); return 1
         print('STORE CHECK PASS',pf,'(approved_check PASS, scope',scope+')'); return 0
     args=a[1:]
