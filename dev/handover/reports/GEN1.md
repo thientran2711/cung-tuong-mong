@@ -186,3 +186,14 @@ Pulled to 16d2cad (8123dde is an ancestor); dev/art/thu_comoi/s62_t5_THU_COMOId.
 Creation BhN0jieoQR  https://www.magnific.com/app/creation/BhN0jieoQR
 Sheet dev/handover/review-sheets/thu_t5_COMOId/sheet.jpg (+ thu_t5_COMOId.webp): 'Thu t5 · s62 · COMOId · GPT 2.6 low · 55 cr' + 'Tổng: 55 cr'. Viewed the picture once at 1024, not the finished sheet.
 Look: frontal; blush inner top with a square neckline and gold band; plum outer robe open at the front, edges embroidered blush band with small hollyhocks, a gold girdle over it; ONE round pearl-edged capelet over the shoulders with a pearl/jade bead net + pearl fringe, scalloped edge; the SECOND lower layer (small scalloped cap-sleeve flap) is NOT clearly visible, so it reads as one cape; wide trailing sleeves with hollyhock vines; sheer shawl reads plum-lilac, not blush; blush skirt is the large visible area (skirt and inner robe blush > plum robe), large double-hollyhock medallions on the skirt front; two jade pendants + long tassels; folded gold-flecked letter in both hands; high bun with big pink hollyhock + gold headdress with long gold tassels dangling beside the ears (can read as earrings).
+
+## DESIGN20 — thu t4 THU_COMOIf + t5 THU_COMOIe (drafts, v6)
+Settings as L1608: gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD, 55 cr each (110 total). Both files CHECK1 PASS at 83d55ab, unchanged (diff clean), check_store PASS tp4/tp5. t4 COMOIe not run (on hold).
+
+| pic | creation | link |
+|---|---|---|
+| t4 THU_COMOIf | gOmKedZSXO | https://www.magnific.com/app/creation/gOmKedZSXO |
+| t5 THU_COMOIe | VX7AjYoMMU | https://www.magnific.com/app/creation/VX7AjYoMMU |
+
+Sheets: dev/handover/review-sheets/thu_t4_t5_v6_DESIGN20/sheet_t4.png, sheet_t5.png
+Look: t4 – 3/4 left, hair fully up, one big lotus, vase held upright, square neckline with lotus band, flat sash + one jade set, round net capelet with petal lobes, sheer blush shawl; no bow. t5 – frontal, letter held in both hands, square neckline with hollyhock band, two jade pendants, capelet + small shoulder layers, big hollyhock + larger headdress; a few thin loose wisps at the ears (hair-up rule slightly broken).
