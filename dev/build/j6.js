@@ -56,7 +56,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
 function panelScrollKeep(el,keep,rk,lk){const f=()=>{if(!el.isConnected)return;el.scrollTop=keep;if(rk!=null){const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk}if(lk!=null){const l2=el.querySelector(".pcl");if(l2)l2.scrollTop=lk}};
  (window.renderAfter||((k,g)=>g()))("pscroll",f)}
 function showSelf(){Q.unshift({t:S.name,cls:"pcm",h:selfCardHTML()});showModal()}
-function showEmp(){Q.unshift({t:empName(),cls:"pcm",h:empCardHTML()});showModal()}
+function showEmp(){Q.unshift({t:empNm(),cls:"pcm",h:empCardHTML()});showModal()}
 
 /* save / load: three slots */
 let SLOT=1;const SK=n=>"hclh-save-v2-"+n;
