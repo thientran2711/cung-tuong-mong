@@ -174,8 +174,8 @@ addEventListener("resize",()=>requestAnimationFrame(htFitSub));
 (function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
   if(off&&HTK.slice(1).includes(tab))tab="kid"}catch(e){}return x}})();
 
-/* the kit empty card: picture + title + lines (never a blank page) */
-function htEmpty(art,title,lines,acts){return `<div class="khtempty"><div class="khte-art">${kitArtFrame(art,"")}</div><div class="khte-b"><b class="khte-t">${title}</b><ul class="kr3l">${lines.map(x=>`<li>${x}</li>`).join("")}</ul>${acts?`<div class="pcb">${acts}</div>`:""}</div></div>`}
+/* the empty card = the kit's kitEmpty (j79): picture + title + hint lines (never a blank page) */
+function htEmpty(art,title,lines,acts){return kitEmpty(title,lines,{art,acts})}
 const momLab=p=>p===S?"Ngươi":`${rkName(p)} ${p.name}`;
 const momNote=p=>p===S?"":!p.alive?" (đã mất)":p.out?" (lãnh cung)":"";
 /* owner 11/15 (TƯ CHẤT vs HIỀN TÀI): Văn · Võ · Đức only for her own child from 3; Hiền tài only from 6 (her own: the number, others: the
@@ -280,10 +280,6 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kit-ht";st.textContent=`
-.khtempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
-.khte-art{min-width:0}.khte-b{min-width:0;display:flex;flex-direction:column;gap:6px}.khte-t{font-size:1rem;color:var(--k-seal,#9a2c1c)}
-.khtempty .kr3l{font-size:.86rem}
-@container (max-width:420px){.khtempty{grid-template-columns:1fr;justify-items:center}.khte-art{width:min(170px,60%)}}
 .khtrule .kgl{font-weight:600}.khtrule small{font-size:.72rem}
 .kht .khtwhy{margin:0 0 4px;font-size:.82rem;color:inherit}
 .kht .pcn .khtsp,.kht .khtsp{display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06)}.kht .khtsp span{min-width:0;overflow-wrap:anywhere;font-size:.82rem}
