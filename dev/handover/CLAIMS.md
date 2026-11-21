@@ -619,3 +619,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | MAIN CHÍNH 86 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 86 | session_01Rc5AsMD1wiu8K7eDmipUR4 | RUNNING | 21/11 03:15Z |
 | calendar (sonnet; OWNER mark #42 21/11 ~03:43Z: Lịch tháng = phone-calendar month view) | review/calendar; briefs/main86-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:10Z |
 | dialog-stack (sonnet; OWNER mark #46 21/11 ~03:52Z: never two dialogs overlapping) | review/dialog-stack; briefs/main86-dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:10Z |
+| calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
