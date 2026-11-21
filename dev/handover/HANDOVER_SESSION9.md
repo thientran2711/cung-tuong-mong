@@ -2105,3 +2105,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 14:53Z) rv MSxp FAIL kit-mark-fix r5 4a1b2450 (iPad flaky 3/5: fade cue + name colour late on first render, missing re-fit) → keeper #4 owes r6 + kit-opt-title-wrap r2. CTX real 15.0 % (150k/1M); roll at 35 %.
 - (14:55Z) LAND CHAIN 2: LANDED jlost-kyngo 468835a7. LIVE 468835a7. Next kit-ef-unit.
 - (14:55Z) LAND CHAIN 2: LANDED jlost-kyngo 468835a7.
+- (15:19Z) LAND CHAIN 2: FAIL kit-ef-unit d46ad6de (QC perf twice: longTaskMaxMs 5349>5000, buổi 2182/1701 ms; core gates PASS) → owner. kit-win-pay HELD behind it. Chain continues q1c.
