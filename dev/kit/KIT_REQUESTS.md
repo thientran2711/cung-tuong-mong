@@ -133,6 +133,11 @@ Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js
 - icon-bowl (Hạnh pool), person signs elder / child / sick / adult (td_hanh row), pips (filled / empty dot) — all in the kit stroke style.
 Rule sentences stay on the rules screen only; the frame «Cách chơi» row is hidden while a game runs (#kg82.kg-run .kghow).
 
+## 20/11 mg-craft (owner OD 20/11 ~08:15Z: each craft its own mechanic) — rules-screen move pictures
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | wk mg-craft-hoa (filed by the group-2 reviewer: the HOA report and jcraft_hoa.js named this request, but it was never written here) | **KG82_DEMO "cut" motion** (j82 KG82_DEMO + kgReady picture): the ghost hand SLASHES across a lying stem (a swipe that crosses a line), + the kgTut step sign for it on `.kgt-bar`. No existing demo group shows a slash; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» shows the generic "drag" demo until then (KG82_CRAFT.hoa.demo "drag" → "cut"). Optional, same table: "hold" for Vẽ «Thủy mặc» (press-hold-release on the inkstone). | Cắm hoa (hoa) rules screen + «Hướng dẫn»; Vẽ (ve) optional | kit keeper | open |
+
 ## 20/11 wear-slots (GAP IT03, Foreman B ROOT) — the wear column must hold 8 slots + the pet box
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
