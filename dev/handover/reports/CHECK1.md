@@ -432,3 +432,9 @@ Verdict: **PASS ×9.**
 Notes:
 - t1/t2 (both seasons) get only the flower words; their small silver/pearl pins carry no ear clause (low risk, and the master "Bare earlobes, no earrings" stays).
 - GEN1 was already sent the EAR_FREE t6 COMOIi + t7 v8h redrafts (Foreman C #16 release, 02:04Z); the Foreman decides whether to swap them to COMOIj / v8i.
+
+## JOB 18 (DESIGN20 9214db6) — NO VASE gate F19 + swap in 71 .txt · checked at 707ac6a · 0 gens
+- check_store F19 NOVASE is wired (vase_fails in every scope, line ~1070). Its selftest cases pass.
+- `--self` reports 2 problems, both PROOF MISMATCH: S14 c06_t7_a18 and S19 pr_cl_t2_V2. The same 2 problems are there before the commit, so they are pre-existing, not caused by F19.
+- My own regex scan of every dev/art/**/*.txt for vase / bình hoa / lọ hoa within a hold/held/carry/in-hand context, excluding "no vase": **0 held vases left**.
+Verdict: **PASS.** t4 COMOIi is unchanged (it passed in job 15).
