@@ -39,8 +39,12 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
     /* strike the incoming hand */const h=DFG.cur;if(h){const q=h.peek();const cv=h.canvas,rc=cv.getBoundingClientRect();const f=(t,x,y)=>cv.dispatchEvent(new PointerEvent(t,{clientX:rc.left+x,clientY:rc.top+y,bubbles:true,pointerId:1}));
      f('pointerdown',q.x,q.y-80);f('pointermove',q.x,q.y);f('pointerup',q.x,q.y+80)}await sl(80);
     out.enc.after={dodge:window.__dodge,raw3:BAL.slap.raw[3],cur:!!DFG.cur,log:(S.logs||[]).slice(0,2).map(x=>String(x).replace(/<[^>]+>/g,"").slice(0,90)),slap:S.slap&&S.slap.sev||0,q:Q.length,qt:Q[0]&&Q[0].t}}}
+  /* (6) mood bubble picker: a known, non-calm person gets a line of her feeling group */
+  {const pp=curPeople().find(x=>x.ref&&x.kind==="rival");if(pp){emoSet(pp.ref,"gian",80,"thử");const kn=window.emoKnown;window.emoKnown=()=>true;const groups=Object.keys(DF_MOOD);let x=null;for(let k=0;k<20&&!(x&&x.i===curPeople().indexOf(pp));k++)x=dfMoodPick();window.emoKnown=kn;
+   out.mood={x:x&&{text:x.text,i:x.i},want:DF_MOOD[typeof feelGrp==="function"?feelGrp("gian"):"gian"]||null,groups}}}
   return out});
  console.log(JSON.stringify(r).slice(0,1500));
+ ok(r.mood&&r.mood.x&&r.mood.want&&r.mood.want.includes(r.mood.x.text),'(6) mood bubble: a line of her feeling (gian), cổ trang, no emoji',r.mood);
  ok(r.i>=0,'found a consort to act on at '+r.place);
  ok(r.open&&r.open.called&&r.open.groups.length>0&&r.open.popIdx===r.i&&r.open.DFi===r.i&&r.open.popwHidden,'(1) stage tap opens the focus view, pop-up host hidden',r.open);
  ok(r.played&&r.act.calls.includes('endPlay')&&r.act.talked===1&&r.act.calls.includes('react')&&r.act.calls.includes('setGroups')&&!r.act.cur,`(2) act «${r.act&&r.act.n}»: game in F.play, skip = the act runs once, reaction + groups refresh`,r.act);

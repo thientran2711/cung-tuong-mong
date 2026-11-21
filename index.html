@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3d3b1455","t":"2026-11-21T07:27Z","c":"duodo-focus: dfRun draws the card when a re-render dropped it; failure reason DF.why; stable data test","b":"3c3144c7264c","h":[{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"},{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"}]};
+window.CTM_BI={"s":"9d739197+","t":"2026-11-21T07:36Z","c":"duodo-focus: report status","b":"9afcec49a96f","h":[{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"},{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -86566,7 +86566,8 @@ Object.assign(BAL,{df:{
  words:{ms:6000,n:6,good:[.4,.65],spd:[.35,.15],goal:5,size:.07,hit:.75,spread:2.5}/* spread = how wide around her the signs rise (× amp) */,/* n glyphs at once; good = share of fitting ones; goal = good taps for raw 10 (2 per tap, −2 per wrong) */
  stare:{ms:4000,band:[.16,.30],mid:.6,rise:.6,fall:.5,push:[.9,.4],wob:1.3},/* hold = rise per s, release = fall per s; her push-back amplitude; raw = share of time in the band */
  walk:{in:700,out:600,veil:360,stagger:40},/* motion ms (MOTION.md: 0.3–2 s); the kit part kitFocus owns its own timings, these feed the fallback */
- react:1600}});
+ react:1600,
+ idle:{every:[20000,40000],first:8000}/* mood bubble on the place stage: one person, at most once per this many ms (random in range); first = earliest after arriving */}});
 /* the new occasion + kinds in the ONE tier table (jmgt): her rank raises the stake (0 at Đáp ứng … 2.1 at the top: ease 2 → about 0.3, spread over the whole climb) */
 try{BAL.mgTier.occ.df=BAL.mgTier.occ.df||[0,.3];for(const k of ["df_swipe","df_tug","df_bow","df_drag","df_ear","df_words","df_stare"])if(BAL.mgTier.kAdj[k]==null)BAL.mgTier.kAdj[k]=0}catch(e){}
 /* ================= jdf: Dư đồ FOCUS VIEW — data + act runner (review/duodo-focus; owner OD 21/11 ~06:20Z idea, ~06:50Z approval, ~06:55Z NPC-initiated) =================
@@ -86788,6 +86789,19 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
   onDone:res=>{DF.play=null;try{F.endPlay()}catch(e){}const R=BAL.slap.raw;try{o.onDone(res.skipped?{raw:0,skipped:true}:{raw:res.raw>=BAL.df.swipe.mid[1]?R[3]:0,skipped:false})}catch(e){console.error(e)}}});
  if(!DF.play)return g0.apply(this,arguments)};window.slapGame=slapGame})();
 window.dfOpen=dfOpen;window.dfTap=dfTap;
+/* (4) MOOD BUBBLES on the place stage (owner OD 06:50Z «idle animations + mood bubbles»): kit parts kitIdle (CSS, the kit applies it) + kitMoodSay (K-FOCUS-1b).
+   Rare (BAL.df.idle), one person whose feeling she may see (jemo emoKnown) and who is not calm, a short cổ trang line for that feeling (VANPHONG; no emoji). */
+const DF_MOOD={vui:["Hôm nay lòng thật nhẹ nhõm.","Hoa nở đẹp quá."],buon:["Chuyện cũ cứ vương vấn mãi.","Lòng nặng trĩu."],gian:["Hừ, chớ để ta gặp lại kẻ ấy.","Thật tức chết đi được."],
+ so:["Nơi này sao lạnh lẽo thế.","Mong mọi chuyện bình yên."],ghen:["Người ta được sủng ái thật.","Sao lại là nàng ấy chứ."],lo:["Không biết rồi sẽ ra sao.","Lòng cứ thấp thỏm không yên."]};
+function dfMoodPick(){try{const P=curPeople();const L=[];P.forEach((p,i)=>{const v=p.ref;if(!v||typeof emoGet!=="function")return;if(typeof emoKnown==="function"&&!emoKnown(v))return;
+  const e=emoGet(v);const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(!e||e.k==="binh"||!DF_MOOD[g])return;const f=dfFig(i);if(f)L.push({i,f,g})});
+ if(!L.length)return null;const x=L[Math.floor(Math.random()*L.length)];const T=DF_MOOD[x.g];return{fig:x.f,text:T[Math.floor(Math.random()*T.length)],i:x.i}}catch(e){return null}}
+function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+Math.random()*(I.every[1]-I.every[0])}
+(function(){let tm=0,plc=null;const tick=()=>{tm=0;try{if(typeof kitMoodSay==="function"&&typeof S!=="undefined"&&S&&!S.dead&&!Q.length&&DF.i==null&&!DF.play&&typeof tab!=="undefined"&&tab==="act"&&S.visit&&typeof window.__bot==="undefined"){
+  const x=dfMoodPick();if(x)kitMoodSay(x.fig,x.text,{p:curPeople()[x.i].ref})}}catch(e){}arm(false)};
+ const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
+ const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
+window.dfMoodPick=dfMoodPick;
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -88387,7 +88401,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3c3144c7264c";window.CTM_BUILD=BUILD;
+const BUILD="9afcec49a96f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

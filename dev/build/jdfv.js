@@ -49,3 +49,16 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
   onDone:res=>{DF.play=null;try{F.endPlay()}catch(e){}const R=BAL.slap.raw;try{o.onDone(res.skipped?{raw:0,skipped:true}:{raw:res.raw>=BAL.df.swipe.mid[1]?R[3]:0,skipped:false})}catch(e){console.error(e)}}});
  if(!DF.play)return g0.apply(this,arguments)};window.slapGame=slapGame})();
 window.dfOpen=dfOpen;window.dfTap=dfTap;
+/* (4) MOOD BUBBLES on the place stage (owner OD 06:50Z «idle animations + mood bubbles»): kit parts kitIdle (CSS, the kit applies it) + kitMoodSay (K-FOCUS-1b).
+   Rare (BAL.df.idle), one person whose feeling she may see (jemo emoKnown) and who is not calm, a short cổ trang line for that feeling (VANPHONG; no emoji). */
+const DF_MOOD={vui:["Hôm nay lòng thật nhẹ nhõm.","Hoa nở đẹp quá."],buon:["Chuyện cũ cứ vương vấn mãi.","Lòng nặng trĩu."],gian:["Hừ, chớ để ta gặp lại kẻ ấy.","Thật tức chết đi được."],
+ so:["Nơi này sao lạnh lẽo thế.","Mong mọi chuyện bình yên."],ghen:["Người ta được sủng ái thật.","Sao lại là nàng ấy chứ."],lo:["Không biết rồi sẽ ra sao.","Lòng cứ thấp thỏm không yên."]};
+function dfMoodPick(){try{const P=curPeople();const L=[];P.forEach((p,i)=>{const v=p.ref;if(!v||typeof emoGet!=="function")return;if(typeof emoKnown==="function"&&!emoKnown(v))return;
+  const e=emoGet(v);const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(!e||e.k==="binh"||!DF_MOOD[g])return;const f=dfFig(i);if(f)L.push({i,f,g})});
+ if(!L.length)return null;const x=L[Math.floor(Math.random()*L.length)];const T=DF_MOOD[x.g];return{fig:x.f,text:T[Math.floor(Math.random()*T.length)],i:x.i}}catch(e){return null}}
+function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+Math.random()*(I.every[1]-I.every[0])}
+(function(){let tm=0,plc=null;const tick=()=>{tm=0;try{if(typeof kitMoodSay==="function"&&typeof S!=="undefined"&&S&&!S.dead&&!Q.length&&DF.i==null&&!DF.play&&typeof tab!=="undefined"&&tab==="act"&&S.visit&&typeof window.__bot==="undefined"){
+  const x=dfMoodPick();if(x)kitMoodSay(x.fig,x.text,{p:curPeople()[x.i].ref})}}catch(e){}arm(false)};
+ const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
+ const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
+window.dfMoodPick=dfMoodPick;
