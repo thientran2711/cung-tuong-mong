@@ -1,0 +1,30 @@
+base: dev/art/rank8-s62/s62_t6.txt
+# ROOT#19 L1719: + square collar (owner: Tần sqtest OK → rest of tiers). REVERT1 owner L1714: back to the old Set A prompt; drops only per the L1714 rows
+allow: Full-body standing figure head to feet  # owner L1714 row 24 repeat of the opening sentence
+allow: soft even light  # owner L1714 row 24 repeat of the opening sentence
+allow: fair porcelain skin  # owner L1714 row 24 repeat of the opening sentence
+allow: 3/4 or frontal view  # owner L1714 row 23/24 angle repeat
+allow: a HEAVY silk brocade robe in SATURATED ice blue silk  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: embroidered with peonies and plum blossoms in ice blue and gold thread along the borders  # owner L1714 row 20 F2 species (+21 colour words in the same phrase)
+allow: an embroidered ice blue pearl-edged cape/stole over the shoulders  # owner L1714 row 7+8 cape moved Quý phi -> Phi
+allow: gold-and-jade necklace and bracelets  # owner L1714 row 12 no necklaces
+allow: a pearl-edged collar and cape trim  # owner L1714 row 7+8 cape moved Quý phi -> Phi
+allow: cape and train are all clearly ice blue silk  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: her signature colour family ice blue and mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: with large areas of plain ice blue silk visible  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: mint mist only as a small accent  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: her ORIGINAL robe colour is kept exactly as in image 1  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: her first reference  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: ice blue silk like #71B5D7 is the main colour of the robe  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: with mint mist in the inner robe and linings  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: exactly ONE fresh flower in her hair  # owner L1714 row 20 hair flower species
+allow: a SLIGHT shoulder turn to the LEFT  # owner L1714 row 23 new angle/grace
+allow: never in profile  # owner L1714 row 23 new angle/grace
+allow: her fingers softly and gracefully curved around the item  # owner L1714 row 23 new angle/grace
+allow: the MAIN colour ice blue and the SECONDARY colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: highly translucent gauze shawl in mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: clearly different from her main robe colour ice blue  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: one hand holding a pearl-tasselled silk lantern with a jade top  # owner L1714 row 23 new pose/held item
+allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
+allow: standing as a breeze lifts her long stole  # foreman ROOT#19: stole moved to Phi (L1714 rows 7/8) → breeze lifts her sleeves

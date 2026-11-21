@@ -1,0 +1,20 @@
+base: dev/art/rank8-s62/s62_t8.txt
+# ROOT#19 L1719: + square collar (owner: Tần sqtest OK → rest of tiers). REVERT1 owner L1714: back to the old Set A prompt; drops only per the L1714 rows
+allow: Full-body standing figure head to feet  # owner L1714 row 24 repeat of the opening sentence
+allow: soft even light  # owner L1714 row 24 repeat of the opening sentence
+allow: fair porcelain skin  # owner L1714 row 24 repeat of the opening sentence
+allow: 3/4 or frontal view  # owner L1714 row 23/24 angle repeat
+allow: the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with ice blue  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: peonies and clouds in gold and kingfisher-blue silk thread  # owner L1714 row 20 F2 species (+21 colour words in the same phrase)
+allow: over it a long ceremonial silk mantle falling from the shoulders to the floor  # owner L1714 row 15 no HH mantle in daily wear
+allow: edged with a broad band of gold brocade and pearls  # owner L1714 row 15 no HH mantle in daily wear
+allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
+allow: her ORIGINAL robe colour is kept exactly as in image 1  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: her first reference  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: ice blue silk like #71B5D7  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: with mint mist in the inner robe and linings  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: the MAIN colour ice blue and the SECONDARY colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
+allow: weight on one leg  # owner L1714 row 22/23 pose
+allow: held in the hand raised and admired  # owner L1714 row 23 new pose/held item
+allow: the robe falling still and straight  # owner L1714 row 22/23 pose
