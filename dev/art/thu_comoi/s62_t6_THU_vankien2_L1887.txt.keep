@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t6_THU_vankien2_L1879b.txt
+allow: LARGE gold tassels (tua rua) hanging, pearl-edged, never rising up the neck   # owner L1887 (via #25): tua rua = a PEARL NET/fringe hanging below the cloud collar like Phi t5 / Tần t4 (net of pearls + jade beads, pearl fringe), a bit richer for QP, NOT silk tassels
+allow: small round pearls only   # trim to stay < 10 000 chars (owner L1880: strands OK)
+allow: upper chest like the Phi's   # trim own L1856 words (chars)
+allow: "Thu · Quý phi · L1879b"   # caption
+allow: a pearl fringe hanging below   # trim own words (chars)
