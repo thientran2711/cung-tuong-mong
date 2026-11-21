@@ -1,0 +1,12 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+This is level 3 of 3 of the game look 'Tóc xổ tung, trâm rơi' (file img/fx-hair-toc-3.png); a higher level is clearly heavier than the lower ones.
+Subject: hair completely come undone. A big wild spray of long blue-black strands bursting outward in every direction, heavy loose locks falling down both sides and a wind-tossed cloud on top, dozens of hairs, some thick locks tangled together; a small broken hair comb tumbles out at the lower-right with its teeth showing, and ONE hairpin of gold and jade is falling out near the bottom edge with a tiny trail of stray hairs. The strands are the blue-black of palace-lady hair (deep blue-black with a thin cool highlight), so they sit invisibly on dark hair.
+There is NO person and NO figure anywhere in this picture.
+OVERLAY SPRITE: paint ONLY the marks, isolated on a plain solid chroma-free pure white background, soft clean edge, nothing else in the picture (no person, no head, no body, no cloth, no hair-pin carrier, no hand, no furniture, no ground, no shadow under it). The marks are a separate decal that the game lays over a person picture later, so they must read on their own and fade softly towards the edges of the canvas without touching them.
+Composition: landscape 768x512, the spray fills the canvas widely but fades and thins before every edge, strongest mass at the top, falling pin low right. Target size 768x512 px (the game stretches it onto the 'hair' zone of a figure), transparent PNG after the owner removes the white.
+Mood N2: plain everyday mishap, light and clear, a quiet untidy feeling, not gloomy and not comic.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJKP09-TOC3-03"

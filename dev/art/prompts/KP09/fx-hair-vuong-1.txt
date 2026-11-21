@@ -1,0 +1,12 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+This is level 1 of 3 of the game look 'Hoa lá vương tóc' (file img/fx-hair-vuong-1.png); a higher level is clearly heavier than the lower ones.
+Subject: a few petals and leaves caught in the hair. FIVE items only: two pale-pink peach-blossom petals, one small maple leaf (red-orange), one tiny green willow leaf and one more petal, each slightly curled, scattered in a loose diagonal, none overlapping, each painted with a thin soft darker rim and gentle veins. Light spring-autumn mix, fresh and delicate.
+There is NO person and NO figure anywhere in this picture.
+OVERLAY SPRITE: paint ONLY the marks, isolated on a plain solid chroma-free pure white background, soft clean edge, nothing else in the picture (no person, no head, no body, no cloth, no hair-pin carrier, no hand, no furniture, no ground, no shadow under it). The marks are a separate decal that the game lays over a person picture later, so they must read on their own and fade softly towards the edges of the canvas without touching them.
+Composition: landscape 768x512, items sit along a loose diagonal from upper left to lower right with big gaps between them. Target size 768x512 px (the game stretches it onto the 'hair' zone of a figure), transparent PNG after the owner removes the white.
+Mood N2: plain everyday mishap, light and clear, a quiet untidy feeling, not gloomy and not comic.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJKP09-VUONG1-07"

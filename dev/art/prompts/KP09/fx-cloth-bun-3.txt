@@ -1,0 +1,12 @@
+Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image (soft clean line work, smooth airbrushed painting); NOT a photo, NOT a realistic real person, NOT 3D.
+From the reference image take ONLY the drawing style: NEVER copy its face or its subject.
+This is level 3 of 3 of the game look 'Áo lấm lem bùn đất' (file img/fx-cloth-bun-3.png); a higher level is clearly heavier than the lower ones.
+Subject: a hem plastered in mud. A heavy continuous ragged crust of dark brown mud over the whole lower half, glossy wet in places and cracked dry in others, big drip-tongues hanging at the bottom, many hard flung splashes up the strip, little clods and a few grass stems stuck in it.
+There is NO person and NO figure anywhere in this picture.
+OVERLAY SPRITE: paint ONLY the marks, isolated on a plain solid chroma-free pure white background, soft clean edge, nothing else in the picture (no person, no head, no body, no cloth, no hair-pin carrier, no hand, no furniture, no ground, no shadow under it). The marks are a separate decal that the game lays over a person picture later, so they must read on their own and fade softly towards the edges of the canvas without touching them.
+Composition: strip 768x256, the crust covers the lower two thirds edge to edge, with splash spray reaching the top at the left and the right. Target size 768x256 px (the game stretches it onto the 'hem' zone of a figure), transparent PNG after the owner removes the white.
+Mood N2: plain everyday mishap, light and clear, a quiet untidy feeling, not gloomy and not comic.
+COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;
+No text, no labels, no letters, no numbers, no watermark, no signature, no frame, no border.
+
+CAPTION: write ONLY this code, small, bold, in the top-left corner, never over the picture content: "AJKP09-BUN3-18"
