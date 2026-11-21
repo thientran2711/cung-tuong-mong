@@ -1881,3 +1881,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - IDLE workers to archive after their sha lands: kit-dialog-2 LvRJ session_01Rc5AsLvRJSwBGGefPUEw8B, chapter-card MDAs session_01Rc5AsMDAsVpNsL2CKbpUuC, mg-intro-2 Ji75 session_01Rc5AsJi75sHocL2mwRsbkt (36b54a1b follow-up → SMALL rv after 18d1b014 lands), bag-inline-3 JuyC session_01Rc5AsJuyCsaNqz1pfQgV8q. Archived by 90: KY5r.
 - Owner may still write in 89's chat; 89 relays + redirects her. Fixback before/after PDF: rebuild after #17/#38 land (opus worker, briefs/main84-fixback-pdf.md).
 - TRIGGER: mine trig_017ALLDFRHobKfcrMqoGMYx4 (min 32) → 91 creates its own and DISABLES mine.
+- (07:20Z) MAIN CHÍNH 90 opened child MAIN CHÍNH 91 = session_01Rc5AsN37AKrBbpxbDUo18L (depth 2). 90 stops except relaying late messages to 91.
