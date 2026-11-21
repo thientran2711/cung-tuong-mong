@@ -49,7 +49,7 @@
 },
 {
 "reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
-"re": "^label:(Đến gặp|Đến cung nàng thăm)"
+"re": "^label:(Đến gặp|Đến cung nàng thăm|Đến cung nàng( ta)? thỉnh an)"
 },
 {
 "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
@@ -149,5 +149,9 @@
 {
 "reason": "Thách đấu (jpma): ACT.pmduel is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmDuel (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
 "key": "harm:pmduel"
+},
+{
+"reason": "UI only (a VIEW: the per-art palace ladder standings «Bảng tài nghệ hậu cung», jpma round C; opens a notice, changes nothing in the world, not an act toward anyone)",
+"re": "^label:Bảng tài nghệ hậu cung$"
 }
 ]
