@@ -952,3 +952,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | coop-guest-week-lag (opus BIG; OWNER-BUG LANE MAIN 100 ORDER 20:35Z, thin guest month card/bạc one week late on host) | review/coop-guest-week-lag; briefs/b7-coop-guest-week-lag.md | B | session_01N1tNP46DparCmsaQ6RRX48 | RUNNING | 21/11 21:18Z |
 | REVIEW coop-home-tabs (sonnet SMALL test-only) of 92df9b08 | review/coop-home-tabs-rv | B | session_01N1tNP3mBaymnqffHRXNNdB | PASS 34245fe24 (FF of LIVE ea112384) | 21/11 22:20Z |
 | E44c coop-famops-c2 fixer (opus BIG co-op; successor of E44b, opened by E44b depth 3) | review/coop-famops-c2; reports/coop-famops.md | FOREMAN E #30 | session_01DgYSWpbxnb51GjUhBoeY8R | RUNNING | 21/11 22:12Z |
+| coop-thin-g F1 fixer #4 (opus BIG co-op; successor of #3 6SrqdZ7X) | review/coop-thin-g-f1 @647f30aa; reports/coop-thin-g.md | B | session_01N1tNP48cvPSepUBAC1udzg | RUNNING | 21/11 22:23Z |
