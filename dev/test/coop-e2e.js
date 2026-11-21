@@ -5,7 +5,7 @@
    B comes back → resumes same week, B dies → normal rebirth choice → new person in the SAME world, single-player + old save still load.
    Hooks used (PROTOCOL.md / jcoop.js): window.COOP {code,seat,week,online,ended,frozen,waiting,on}, rivals entry coop:true id 901/902. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
-const {serve,BASE}=require('./coop-serve.js');
+const {serve,BASE}=require('./coop-serve.js');const K61P=require('./k61-coop-probe.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const ROOT=path.resolve(__dirname,'../..');
@@ -129,6 +129,12 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  {const wd=o=>o.p.evaluate(()=>{const m=document.getElementById('modal'),t=document.getElementById('title'),k=document.getElementById('kroul');return{S:typeof S!=='undefined'&&!!S,n:typeof S!=='undefined'&&S&&S.name,base:!!(window.COOPW&&COOPW.base),inLife:COOPW.inLife,ww:COOPW.waitWorld,st:COOP.state.status,C:!!COOP.state.C,title:t&&!t.hidden,kroul:!!k,modal:m&&!m.hidden?m.textContent.slice(0,120):'',you:COOP.state.you,pid:COOP.pid,ws:window.__wsLog,tr:COOPW.tr.slice(-16)}}).catch(e=>e.message);
  const wa=await A.p.evaluate(()=>__co().world),wb=await B.p.evaluate(()=>__co().world);ok(wa&&wb,'both players are in the shared world',wa&&wb?undefined:{A:await wd(A),B:await wd(B)})}await clear(A);await clear(B);
+ /* maid-8tabs (owner 21/11 ~03:15Z): both seats show the SAME 8 bottom tabs; each seat sees her own road in them (cung nữ: Hậu cung › Đồng liêu, Mệnh truyện › Thân phận;
+    consort: Cung nhân, Mệnh truyện). Run with COOP_B_ORIGIN=cnv for one maid seat + one consort seat. */
+ {const T8='Hành sự · Dư đồ · Hậu cung · Giao tình · Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện';
+  for(const o of [A,B]){const r=await o.p.evaluate(()=>({bar:[...document.querySelectorAll('#tabs [data-tab]')].filter(x=>x.getClientRects().length).map(x=>x.textContent.trim()).join(' · '),
+    srv:typeof isSrv==='function'&&isSrv(),st:typeof kgLabel==='function'?kgLabel('staff'):'',sy:typeof kgLabel==='function'?kgLabel('story'):''}));
+   ok(r.bar===T8&&r.st===(r.srv?'Đồng liêu':'Cung nhân')&&r.sy===(r.srv?'Thân phận':'Mệnh truyện'),o.name+': the 8 bottom tabs, her own road in them'+(r.srv?' (cung nữ)':' (phi tần)'),r)}}
  /* coop-staff-split: on a names split, dump every world consort's staff (id,name,role,coop) on both seats + where the extra person lives on the other seat */
  const staffDiff=async tag=>{const g=o=>o.p.evaluate(()=>({seat:COOP.state.you,wk:__co().week,d:[S.year,S.month,S.tuan,S.buoi],V:rivals.filter(v=>!v.coop).map(v=>({id:v.id,n:v.name,st:(v.staff||[]).map(x=>[x.id,x.sid,x.name,x.role,!!x.coop,x.mid])})),me:(S.staff||[]).map(x=>[x.id,x.sid,x.name,x.role]),tr:COOPW.tr.slice(-24)}));
   const a=await g(A),b=await g(B);const out={tag,A:{d:a.d,wk:a.wk},B:{d:b.d,wk:b.wk},diff:[]};
@@ -159,6 +165,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
     ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y])}
+   /* coop-guest-names (K61MAP collision log, both seats): no shared person's name masked through another record, one j61 key = one person */
+   for(const o of [A,B]){const r=await o.p.evaluate(K61P);if(r&&!r.skip&&!r.err){ok(!r.coll.length,tag+' '+o.name+': mask never prints another record\'s title over a shared person (K61MAP)',r.coll.length?r.coll.slice(0,4):undefined);ok(!r.keyDup.length,tag+' '+o.name+': one j61 key = one person',r.keyDup.length?r.keyDup.slice(0,4):undefined);if(r.scrub){const inF=tag==='after week 2'&&!r.scrub.ok&&NCF&&r.scrub.out==='Quý nhân '+r.scrub.name/* F2 in flight: her own person still holds the host's full name until the order lands one week later (a known holder keeps the name readable) */;(inF?(c,m,x)=>console.log('note (forced clash in flight, F2) '+m+' '+JSON.stringify(x)):ok)(r.scrub.ok,tag+' '+o.name+': friend\'s name after the mask',r.scrub)}}else console.log('K61 probe '+tag+' '+o.name+' '+JSON.stringify(r))}
    const okS=a.fr===c.me&&c.fr===a.me;ok(okS,tag+': each sees the other as a person',okS?[a.me,a.fr,c.me,c.fr]:{n:[a.me,a.fr,c.me,c.fr],trA:await A.p.evaluate(()=>COOPW.tr.slice(-14)),wsA:await A.p.evaluate(()=>window.__wsLog),trB:await B.p.evaluate(()=>COOPW.tr.slice(-8))});return[a,c]};
  /* "world" = each seat has its base; the friend's character (her `me` → the room's state) reaches the other seat a moment later: wait for it, as a player would see her appear */
  {const fr=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop);return[S.name,f?f.name:null]});const t0=Date.now();

@@ -77,8 +77,8 @@ function lights(pic,name){const H=[];if(!pic||typeof kitFxLight!=="function")ret
   if(!still()){if(how==="gutter")setTimeout(()=>h.stop(2200),900);else if(how==="dim")setTimeout(()=>{b.style.transition="opacity 2.6s ease";b.style.opacity=".35"},700);
    else if(how==="in"){b.style.opacity="0";b.style.transition="opacity 2s ease .4s";requestAnimationFrame(()=>requestAnimationFrame(()=>{b.style.opacity="1"}))}}}catch(e){}});return H}
 const nameOf=src=>(String(src).match(/(ne-[a-z-]+)\.webp/)||[])[1]||"";
-function picHTML(src,k,extra){const nm=nameOf(src);const f=FOC[nm]||[50,50];const lq=LQ[nm]||(/ev-fest-/.test(src)?LQ["ne-dawn-"+(SEAK[SEASON[(S&&S.month||1)-1]]||"xuan")]:"");
- return `<div class="kne-pic" style="--fx:${f[0]}%;--fy:${f[1]}%">${lq?`<img class="kne-lq" src="data:image/webp;base64,${lq}" alt="" draggable="false">`:""}<img class="kne-img" src="${src}" alt="" draggable="false" onload="this.classList.add('ld')">${k==="cold"?"":driftHTML(k)}${extra||""}</div>`}
+function picHTML(src,k,extra,full){const nm=nameOf(src);const f=FOC[nm]||[50,50];const lq=LQ[nm]||(/ev-fest-/.test(src)?LQ["ne-dawn-"+(SEAK[SEASON[(S&&S.month||1)-1]]||"xuan")]:"");
+ return `<div class="kne-pic${full?" kfull":""}" style="--fx:${f[0]}%;--fy:${f[1]}%;--kfx:${f[0]}%;--kfy:${f[1]}%">${lq?`<img class="kne-lq" src="data:image/webp;base64,${lq}" alt="" draggable="false">`:""}<img class="kne-img" src="${src}" alt="" draggable="false" onload="this.classList.add('ld')">${k==="cold"?"":driftHTML(k)}${extra||""}${full?`<i class="kfull-shade"></i>`:""}</div>`}
 const PRE={};/* preload: resolves when loaded or after `ms` (the blurred thumbnail covers a slow picture; the full one fades in on load) */
 function preload(src,ms){if(!src)return Promise.resolve();const w=ms||NE.wait;if(!PRE[src]){const im=new Image();PRE[src]=new Promise(r=>{im.onload=im.onerror=()=>r()});im.src=src}
  return Promise.race([PRE[src],new Promise(r=>setTimeout(r,w))])}
@@ -159,11 +159,15 @@ function dawnOf(){const f=typeof festToday==="function"?festToday():null;const s
  if(f)return{k:"fest",src:`img/ev-fest-${f.k}-b.webp`,t:`Sáng ${f.name}`,sub:`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`};
  return{k:sea,src:`${DIR}ne-dawn-${sea}.webp`,t:`Bình minh ${SEAN[sea]}`,sub:`Tháng ${S.month}${S.wx?" · "+S.wx.n:""}`}}
 /* kitNewDay(o) — o = {night:{k,line}|null, day:{k,src,t,sub}, wx, host(#dawn), then()} : plays the beats in host, then() when done/tapped */
+/* owner 21/11 mark #84 («Sang buổi»: picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background): every beat is THE full-screen
+   picture (KIT 81c kitFullPic): <name>-port.webp on the phone, <name>-land.webp on the iPad once Foreman C lists them in img/INFO.json; until then today's 4:3
+   painting cropped to fill (its focus FOC). Title + line and the ONE kit button lie on the picture. */
+const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
 function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow();
  if(o.night)beats.push({k:o.night.k,snd:o.night.snd,dk:"lonely-"+sea,src:`${DIR}ne-night-lonely-${sea}.webp`,t:TIER[o.night.k].t,sub:o.night.line,ms:NE.lonelyMs});
- beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});
+ beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});beats.forEach(b=>{b.src=fullSrc(b.src)});
  host.className="dawn kne-day"+(red()?" rm":"");host.hidden=false;
- host.innerHTML=`<div class="kne kne-beat">${beats.map((b,i)=>`<div class="kne-b kne-${b.k}${i?"":" on"}" data-i="${i}">${picHTML(b.src,b.dk||b.k,b.wx?wxHTML(b.wx):"")}<div class="kne-cap"><b>${esc(b.t)}</b><small>${esc(b.sub)}</small></div></div>`).join("")}<div class="kmhint">Chạm để bỏ qua</div></div>`;
+ host.innerHTML=`<div class="kne kne-beat">${beats.map((b,i)=>`<div class="kne-b kne-${b.k}${i?"":" on"}" data-i="${i}">${picHTML(b.src,b.dk||b.k,b.wx?wxHTML(b.wx):"",1)}<div class="kne-cap"><b>${esc(b.t)}</b><small>${esc(b.sub)}</small></div></div>`).join("")}<div class="kmhint">Chạm để bỏ qua</div></div>`;
  void host.offsetWidth;host.classList.add("on");let i=0,end=false;const T=[];
  let LH=[];const stopL=()=>{LH.forEach(h=>{try{h.stop(300)}catch(e){}});LH=[]};
  const show=j=>{host.querySelectorAll(".kne-b").forEach(e=>e.classList.toggle("on",+e.dataset.i===j));play(beats[j].snd||beats[j].k);stopL();
@@ -258,14 +262,16 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 @keyframes kneRain{from{transform:translate(0,0) rotate(12deg)}to{transform:translate(-24px,125cqh) rotate(12deg)}}
 .kne-ov .kne:not(.km-done) :is(.kmlist,.kne-take){display:none}
 /* week panel beats */
-.dawn.kne-day{padding:12px;cursor:pointer;z-index:9200}
-.dawn.kne-day.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
-.dawn.kne-day.km-endon .kne-beat .kne-pic{max-height:calc(100dvh - 200px)}
-.kne-beat{position:relative;width:100%;max-width:820px;display:grid;place-items:center}
-.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
+/* owner 21/11 mark #84: FULL SCREEN beats (KIT 81b/81c): the picture covers the whole screen (no frame, no dark band), title + line + the ONE button ON it */
+.dawn.kne-day,.dawn.kne-day.km-endon{padding:0;cursor:pointer;z-index:9200;overflow:hidden}
+.kne-beat{position:absolute;inset:0;width:auto;max-width:none;display:block}
+.kne-b{position:absolute;inset:0;display:block;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
 .kne-b.on{opacity:1}
-.kne-beat .kne-pic{max-height:calc(100dvh - 130px)}
-.kne-beat .kmhint{position:static;margin-top:8px}
+.kne-beat .kne-pic.kfull{position:absolute;inset:0;width:auto;height:auto;aspect-ratio:auto;max-height:none;border:0;border-radius:0;box-shadow:none}
+.kne-beat .kne-cap{position:absolute;z-index:4;left:16px;right:16px;bottom:calc(68px + env(safe-area-inset-bottom,0px) + 10px);margin:0 auto;max-width:40rem}
+.kne-beat .kne-cap b{font-size:clamp(1.45rem,4.4vmin,2.1rem);text-shadow:0 1px 3px #000d,0 0 16px #000b}
+.kne-beat .kne-cap small{font-size:clamp(.9rem,2.4vmin,1.1rem);text-shadow:0 1px 3px #000d,0 0 10px #000b}
+.kne-beat .kmhint{position:absolute;z-index:5;margin:0}
 .dawn.rm .kne-b{transition:none}
 /* landscape up to 900 px high (phone 844x390, 1000x755, iPad 1180x820): picture left, words right; the button never leaves the screen */
 /* kv3:.kv2 */
@@ -273,12 +279,12 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
  :where(.kv2) .kne-ov .kne-pic{width:min(54vw,calc((100dvh - 40px)*1.333));height:auto;max-height:none;flex:0 0 auto}
  :where(.kv2) .kne-ov .kne-side{justify-content:center;max-width:420px;flex:1 1 300px;max-height:calc(100dvh - 24px)}
  :where(.kv2) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- :where(.kv2) .kne-beat .kne-b{flex-direction:row}:where(.kv2) .kne-beat .kne-pic{width:min(66vw,calc((100dvh - 60px)*1.333));height:auto;max-height:none}:where(.kv2) .kne-beat .kne-cap{max-width:28vw}
+ 
 
-/* portrait: the full-scene beats fill a tall frame cropped around the focal point; the card keeps 4:3 above its list */
+/* portrait: the night card keeps 4:3 above its list (the new-day beats are full screen, KIT 81c) */
 /* kv3:.kv1 */:where(.kv1) .kne-ov .kne-pic{max-height:min(calc(46*var(--kvh,1dvh)),450px)}
  :where(.kv1) .kne-ov .kne-side{max-height:calc(100dvh - min(calc(46*var(--kvh,1dvh)),450px) - 40px)}:where(.kv1) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- :where(.kv1) .kne-beat .kne-pic{aspect-ratio:3/4;width:min(100%,calc((100dvh - 170px)*.75));max-height:none}
+
 .kne-sample{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}.kne-sample figure{margin:0}.kne-sample img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--gold)}
 .kne-sample figcaption{font-size:.75rem;text-align:center}
 @media (prefers-reduced-motion:reduce){.kne *{animation:none!important;transition:none!important}.kne-sp{display:none}}
