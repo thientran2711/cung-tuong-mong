@@ -47,3 +47,13 @@ RIGHT (unchanged, still L1836): m18 tam, nhi, nhat, 3 thân cận, thô sử, ch
 All 10 *_L1869: keep_check PASS, check_store PASS (maid a18/a26, mama a51). Colour tokens + the ma ma "own colour" sentence only (A47). I did not look at the drawn sheet PNGs (not needed for the token fix).
 
 ## G59 (owner L1874/L1876): NO túi thơm — sachet clause deleted from all 15 L1836 + 10 L1869 prod .txt files (nothing else changed, A47); allow lines added in each .keep. The 2 undrawn ma ma a36 files per person were removed. NOTE make8_prod.py / make9_fix.py still regenerate the old sachet text — re-apply the deletion if re-run.
+
+## L1895 — 4 more persons (script make10_persons.py), files prod/<pid>_<rank>_L1895.txt (+ .keep), 9 ranks each = 36 + m09_mama_a51_L1895 (fix: my L1869 m09 ma ma had "pink becomes rose pink-plum" from a token-replace bug; use L1895)
+| person | face (DUYỆT/OK) | ref id | own main | SECONDARY slot |
+|---|---|---|---|---|
+| m10 | LONG oval (L291 ok) | O6ERgEUynm | sage green #ABCDA2 | sage green |
+| m11 | small ROUND baby face (L285 DUYỆT) | Syh9qs6Ub8 | sky blue #85BBD6 ≈ uniform → K26 | coral rose #CF8377 (own secondary) |
+| m12 | SQUARE-ROUND, dimples (L289 ok) | xSB7FTWjfW | warm sand apricot #DEBF9C | warm sand apricot |
+| m13 | slim V-shaped, phoenix eyes (mass v3) | VX7IB7sMMU | lilac #C3A1CE | lilac |
+Ranks: tam, nhi, nhat, tam/nhi/nhat_thancan, thosu, chuongsu, mama_a51. MAIN uniform blue #A7BAD2, thân cận flip, chưởng sự tím cà, ma ma jade #4E8FA3. Source = m18 L1836 files (no sachet G59, no pendant G57, bow at the front) with face line + secondary tokens only. Gates: keep_check PASS, check_store PASS x37.
+m18 redraw candidates (judged from the PROMPTS; pictures not opened): every m18 prompt that carried a túi thơm = tam, nhi, nhat, tam/nhi/nhat_thancan, chuongsu (7, now sachet-free in the L1836 files at commit of this section) + m18_mama_a51_L1869 (wrong colour + sachet). m18 thô sử never had one → keep.
