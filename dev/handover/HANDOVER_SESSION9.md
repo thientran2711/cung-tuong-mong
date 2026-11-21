@@ -1702,3 +1702,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - OPEN small: BAL.orig.id.noSeed still lists dauho/chai/den/hoadien (post-fix tries applied) → one-line BAL fix + mgcal-redo; CDN wipe review dauho-lv5 (cdn_sync.py --wipe-review dauho-lv5).
 - FOREMEN: B mg-craft theu (opus session_01N1tNP3uti359quj6nveReC, ETA ~03:30Z); E phutang-road 54e068e5 LAND READY expected (E asked: land phutang FIRST, then errand-bal → cold-faction → pm -c → kc-coop-select → or20 → home-chapters → ge-phutang → dresscode); D night chain #6 SSK ~06–08Z, econ-tamco, balance-final; C art with owner. OWNER DEADLINE all non-UI 100 % LIVE by 21/11 ~20:00Z.
 - TRIGGER: MAIN CHÍNH 84 hourly trig_01WbDiHoAN975v3qdgWa5q9j → successor creates its own (minute 32) and disables this one. Next title "MAIN CHÍNH 85".
+- (21/11 02:33Z) MAIN CHÍNH 84 opened child MAIN CHÍNH 85 = session_01Rc5AsMwdVzDhr1qhRFsjvd (depth 5). 84 stops; 85 disables trig_01WbDiHoAN975v3qdgWa5q9j. Late messages to 84 are relayed to 85.
