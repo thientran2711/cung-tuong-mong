@@ -2218,3 +2218,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:06Z) LAND CHAIN 2: LANDED kit-mark-fix r6 dcff5884 = LIVE. Next kit-relrows → podium-wire-r2.
 - (19:12Z) LAND CHAIN 2: LANDED kit-relrows-ms1word f44060d4 = LIVE. Next podium-wire-r2 (last).
 - (19:11Z) LAND CHAIN 2: LANDED kit-relrows-ms1word f44060d4.
+- (19:14Z) rv MSxp PASS kit-body-fit (KP09/J7) 821727de → LRRY after podium-wire-r2. C art (fx-hair/fx-cloth + body-fit.json) may start now (order 18:52Z in C STATUS).
