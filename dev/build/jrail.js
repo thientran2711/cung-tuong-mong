@@ -88,8 +88,10 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 /* KIT §77b kitStBadge: the round STATUS BADGE at the bottom-right corner of a kit square rail button (.krailb): ✓ green = ready, … grey = busy, ⏸ amber = paused; none = no badge. Offline = class koff on the button (picture goes grey). K-BADGE-HAOHUU */
-.krailb .kbdg{position:absolute;right:-6px;bottom:-5px;min-width:15px;height:15px;padding:0 2px;border-radius:50%;box-sizing:border-box;font:700 10px/15px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 1.5px var(--k-card,#fffaf0);pointer-events:none;z-index:2}
-.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+.krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
+.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+/* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+.krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
 .krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
