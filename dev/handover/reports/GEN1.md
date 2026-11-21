@@ -253,3 +253,12 @@ New prompt files (dev/art/maid7/, each + .keep, keep_check PASS ×3 – only the
 | nhất đẳng | ov6GUhR829 | kseEeAm16B | https://www.magnific.com/app/creation/kseEeAm16B |
 Sheets (OLD | NEW, labels on image + TỔNG 405): dev/handover/review-sheets/maid_sachet_redraw/sheet_tam.png, sheet_nhi.png, sheet_nhat.png
 Look: all three NEW show a small embroidered fragrant sachet (túi thơm) with a tassel at the sash and NO jade disc. Same outfit/colours/hair-up/item as OLD. Differences from OLD (new draw, not only the sachet): tam – jacket a bit longer (past the waist), sash ribbon hangs at the centre; nhị – envelope is mauve instead of cream, jacket gets knot buttons, two-tier short sleeves; nhất – almost identical, cuffs/peonies slightly different. No new faults seen.
+
+## v6b drafts (CHECK1, Foreman C #16 standing OK) — thu t4 COMOIj + t5 COMOIi
+gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr each (110 total). Both files CHECK1 PASS at e36da43 (ancestor, unchanged), check_store PASS tp4/tp5.
+| pic | file | creation | link |
+|---|---|---|---|
+| t4 Tần v6b | s62_t4_THU_COMOIj | p8ynPhWehw | https://www.magnific.com/app/creation/p8ynPhWehw |
+| t5 Phi v6b | s62_t5_THU_COMOIi | hu2eAbgvqL | https://www.magnific.com/app/creation/hu2eAbgvqL |
+Sheets: dev/handover/review-sheets/thu_t4_t5_v6b/sheet_t4.png, sheet_t5.png
+Look: t4 – 3/4 left, hair up, ONE lotus, bare ears, white-jade lotus lamp held, wide pink sash flat no bow over the plum robe, round net capelet with petal lobes + pearl fringe, one jade pendant set, sheer shawl. t5 – frontal, ONE hollyhock, bare ears, letter in both hands, capelet + net + small shoulder layers, two jade pendants; a couple of fine loose wisps by the cheeks; the girdle is mostly hidden by the hands. No other faults seen.
