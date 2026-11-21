@@ -27,9 +27,25 @@ function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBan
 figDist=function(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);const ab=pidBand(age),fb=pidBand(fa);
  return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(ab!=null&&fb!=null?Math.abs(fb-ab)*1.2+Math.abs(fa-age)/400:0)};
 /* the reserved identity is always "used": every NPC pick skips it */
+/* coop-room-faces (Foreman D #16, MAIN 95, LUẬT SỬA CẢ NHÓM): a face anyone HOLDS is "used", whatever list it was written in. Before, the
+   face list S.fidUsed missed faces that people really wore: the court (Tổng quản, Kính sự phòng, Thái y …), the men, NPC consorts after the
+   new-life face snapshot (j52 nlFaces puts back an older list), and in co-op the friend's own people (her maid, staff, kids live in her
+   P blob, not the world) and every face the 3-way merge dropped (the host's list taken whole) — so a new draw could hand one face to two
+   people (probe dev/test/coop-room-faces.js: maid:m14 on two consorts on the host after week 2). ONE rule here: figUsed() = the list +
+   the reserved identity + every face held by S, the consorts and their people (figHeld, walked once per turn/buổi) + in co-op every face
+   of the room (COOPW.roomFaces: the room's world + the friend's own people + her identity). Faces held are added to the list itself, so
+   saves and the week end carry them. «man:thive-*» guards share faces by design (jmen) and are left out. */
+const FIG_SHARE=/^man:thive/;const FIG_LISTK={fidUsed:1,fidDead:1,fseen:1,usedFaces:1,kidUsed:1,fdead:1,visit:1};let FIG_HM=null;
+function figHeld(){if(!S)return new Set();const R=typeof rivals!=="undefined"?rivals:[];const rb=window.COOPW&&COOPW.on?COOPW.base:null;
+ const key=[S.turn,S.month,S.tuan,S.buoi||0,R.length,S.pid||"",S.fid||""].join("|");if(FIG_HM&&FIG_HM.S===S&&FIG_HM.k===key&&FIG_HM.R===R&&FIG_HM.b===rb)return FIG_HM.H;
+ const H=new Set(),seen=new Set();const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
+  for(const k in o){if(FIG_LISTK[k])continue;const v=o[k];if(k==="fid"){if(typeof v==="string"&&v&&!FIG_SHARE.test(v))H.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};
+ try{walk(S,0);walk(R,0)}catch(e){}if(S.pid)H.add(S.pid);
+ try{if(rb&&COOPW.roomFaces)for(const k of COOPW.roomFaces())if(!FIG_SHARE.test(k))H.add(k)}catch(e){}
+ FIG_HM={S,k:key,R,b:rb,H};return H}
 (function(){const u0=figUsed;figUsed=function(){const U=u0.apply(this,arguments);try{if(S&&S.pid&&!U.includes(S.pid))U.push(S.pid);
-  /* coop-pool-face: the friend's own identity is "used" in the one world too (no NPC the host draws later ever takes her face) */
-  const f=window.COOPW&&COOPW.on&&COOPW.friendPid?COOPW.friendPid():null;if(f&&!U.includes(f))U.push(f)}catch(e){}return U}})();
+  const H=figHeld();if(H.size){const has=new Set(U);for(const k of H)if(!has.has(k)){U.push(k);has.add(k)}}}catch(e){}return U}})();
+window.figHeld=figHeld;
 /* her own pick: the reserved identity, or nothing (the old face) when its art is not there */
 (function(){const p0=figPick;figPick=function(who){if(who===S&&S&&S.pid){figUsed();const M=typeof FIGIX!=="undefined"&&FIGIX.consort;if(M&&M[S.pid]){S.fid=S.pid;return S.pid}return null}
   if(who&&who!==S&&S&&S.pid&&who.fid===S.pid)who.fid=null;return p0.apply(this,arguments)}})();
