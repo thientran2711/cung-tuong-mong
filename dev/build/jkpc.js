@@ -29,4 +29,11 @@ html body #modal:not(.pcm) .dlg.kpanel.kpcompact .kpb.kpshort{margin:0}
 /* title menu: small, at the bottom, the room behind it stays visible */
 .modal.kpthome.kpscene{align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
 .modal.kpthome .dlg.kpsc .kpmenu{margin:6px 0 4px}
+/* KIT MENU PANEL (owner 21/11 mark #37): every panel of the ☰ / title menu (home, Chọn sổ Một mình + Cùng hảo hữu, Sổ luân hồi, Bảng vàng, Thiết lập) is ONE frame: the wide §8.1 width, at the bottom. Locked here (!important beats any stale inline --kpw left by the identity card), so no phone / Fold / iPad can show a narrow tall frame */
+html body .modal.kptitle.kpscene{--kpw:min(560px,calc(100vw - 28px))!important;--kph:min(calc(100dvh - 32px),860px)!important;align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
+html body .modal.kptitle.kpscene .dlg.kpsc{width:var(--kpw)!important;max-width:var(--kpw)!important}
+/* a kit button's second line is always its own line (Xem lại lời dặn / Game này chơi gì ran together in Thiết lập) */
+.kbtn>small{display:block}
+/* the menu root fills the frame width (a centred flex column shrank it to half, buttons cramped) */
+html body .modal.kptitle .kpmenu{align-self:stretch;width:100%;box-sizing:border-box}
 `;document.head.appendChild(st)})();
