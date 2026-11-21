@@ -1,0 +1,16 @@
+base: dev/art/thu_comoi/s62_t4_THU_COMOIk_31af161_base.txt
+allow: SATIN (đoạn) with a soft MATTE finish   # owner L1695: test fabric = thin silk + gauze like m19/m29/s65 (only change)
+allow: very faint gentle lustre
+allow: like fine old silk
+allow: never glossy, shiny, wet-looking or plastic
+allow: faint woven self-pattern (damask)
+allow: thinner and airier than the winter satin
+allow: soft and supple, NOT brocade
+allow: falls in long, light, flowing folds
+allow: layered satin (đoạn) robe
+allow: thin silk SATIN
+allow: with a faint woven self-pattern
+allow: it falls in long
+allow: a layered satin
+allow: "Mùa Thu · Tần · v6b"   # caption label only (now "lụa voan")
+allow: The FABRIC is light
