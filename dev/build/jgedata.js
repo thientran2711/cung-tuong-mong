@@ -41,7 +41,7 @@ const GE_DATA={
    a:"Trước khi đi, ngươi để lại trên ngự án một hộp thư: tội của từng môn sinh cha từng nuôi. Ngươi ra khỏi cung, sau lưng phủ Tể tướng sụp trong một mùa.",
    ht:"buông bàn cờ của cha, rời cung về núi phụng dưỡng cha già",ha:"lật bàn cờ của cha trước khi rời cung",
    fail:"Biểu xin về bị bác",ft:"Biểu xin về bị bác. Trong triều đồn rằng con gái Tể tướng muốn bỏ Hoàng thượng; ngài lạnh nhạt một mùa."},
-  {pull:["Chối thẳng, để luật xử hắn","Giao Thận hình ty xử","Không nhận, để giữ mình","Thiếp đứng bên Hoàng thượng","Đáp: con đi đường con","Đưa thư cha cho Hoàng thượng xem","Chặn trước, nói với Hoàng thượng"],
+  {pull:["Chối thẳng, để luật xử hắn","Giao Thận hình ty xử","Không nhận, để giữ mình","Thần thiếp đứng về phía Hoàng thượng","Đáp: con đi đường con","Đưa thư cha cho Hoàng thượng xem","Chặn trước, nói với Hoàng thượng"],
    close:["Hứa giữ cha","Xin giữ cha ở lại","Xin Thái hậu nói giúp cha","Nhận, để giữ cha"],
    cond:[["s","sung"],["s","tamco"]],fo:[],
    cw:"cần Hoàng thượng tin ngươi và Tâm cơ sâu",
