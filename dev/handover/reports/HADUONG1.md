@@ -25,4 +25,4 @@ depth 6 · START_CTX ≈ 3 % (get_session read 0; own estimate)
 - t6 QP: phi bạch a little LESS see-through than t1–t5 (owner L1847; G54 wording) — to apply when t6 is edited.
 
 ## Draw
-- sent to VE6 session_01D3E3NavF2AADAvmzPDhZC5 @55, sheet ha_t1_t3_L1847.png next to t4 yiugBgJPW9. Ids: (VE6 reports)
+- sent to VE9 session_01D3E3NY6tdajnq7tHvQhexg @55 (#25 redirect; VE6 request cancelled), sheet ha_t1_t3_L1847.png next to t4 yiugBgJPW9. Ids: (VE6 reports)
