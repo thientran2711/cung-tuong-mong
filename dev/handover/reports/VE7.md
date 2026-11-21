@@ -23,6 +23,9 @@ Earlier 1k sample m09_tam_L1869 (bxMCdqL5Y2, 55 cr) → sheet maid_m09_tam_L1869
 | m09_nhi_L1869 | MBJnZb9DCm | ✓ rose jacket / blue ruqun, letter held (plum envelope with a small bead tassel, not a sachet); sash/bow colours hard to judge at 512px, bow reads blue |
 | m09_nhat_L1869 | yiugj9KPW9 | ✓ rose vest + two front panels + back tà, blue skirt/sleeves, handkerchief, dense pins; sash blue with rose bow |
 | m09_tam_thancan_L1869 | KLpuvihkqp | ✓ blue jacket / rose skirt, rose sash + blue bow, comb box |
+| m09_nhi_L1869 | MBJnZb9DCm | ✓ rose jacket / blue ruqun, blue bow on rose?? sash looks blue-lilac w/ blue bow (sash colour should be rose, bow blue) — minor ✗ sash; letter envelope is plum with small bead tassel, not a sachet |
+| m09_nhat_L1869 | yiugj9KPW9 | ✓ rose vest + 2 front panels + back tà, blue skirt/sleeves, rose sash+bow?, handkerchief, dense pins |
+| m09_tam_thancan_L1869 | KLpuvihkqp | ✓ blue jacket / rose skirt, blue sash + rose?? bow is blue (spec: sash rose, bow blue → ✓ as spec), comb box |
 | m09_nhi_thancan_L1869 | UPvx5V9wny | ✓ blue jacket / rose ruqun, rose bow, green envelope with small knot+tassel (not a sachet) |
 | m09_nhat_thancan_L1869 | If3pTvxtvE | ✓ blue vest/panels, rose skirt/sleeves, blue bow, handkerchief |
 | m09_thosu_L1869 | rgXHElZxtc | ✓ blue jacket+skirt+apron, rose narrow sash + hair tie, sewing basket, wooden pin |
