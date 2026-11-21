@@ -964,3 +964,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-pframe-overlay | PASS | review/kit-pframe-overlay-rv 042d2b43724ce0efe8a091a19b838f234b389a71 | kit-pframe-overlay.js ALL PASS Fold+iPad, leftcol-read, quickcheck, coop-e2e 124/124 (one flake) |
 | rv-kit-pframe-overlay r2 | FAIL | review/kit-pframe-overlay-rv3 a8ccb93a1f39cbf109e1dcec44f5f2b7265b73c6 | band table not re-measured: 11/34 frames 6-26 units off; emp/consort-7 rows 19-21 px under band instead of 10-11 |
 | RELAND r3 ui-leftover-fold (opus; jk4 conflict vs kit-mark-fix resolved = LIVE rule) | review/ui-leftover-fold-r3 bca0052c; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 20:45Z |
+| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_PENDING_E30 | RUNNING | 21/11 20:50Z |
