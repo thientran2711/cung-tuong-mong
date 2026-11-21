@@ -4,7 +4,7 @@
    NPC side: the live registries — every AGREG provider of the person's group (agGrp: consort / hh / maid) called on a rich NPC of that role over many
    draws (keys o.k), plus the shared gates TW[k].req / ACT[k].ok(a,t) / hh acts over every target.
    Player side: the live builders — Hành sự deck (deal + pool + artActs + directActs + illCards), talkOpts of every person at every place (goTo),
-   topicOpts + rvCard of every consort, Kẻ hầu / phe / Tài nghệ tabs (consort life); srvCards + srvTalk + srvStaffHTML (maid life).
+   topicOpts + rvCard of every consort, Kẻ hầu / phe / Tài nghệ tabs (consort life); srvCards + srvTalk + every Đồng liêu card, srvStaffTabHTML, rvCard of every consort (Chủ tử, maid life).
    Labels → keys through the game's own label tables (TW.n, ACT.n, AGC2BTN, AGC3BTN) + the small KEYLAB table below (keys whose button text lives
    inside a builder). A row's verdict per role: SAME (both sides, ONE function) · NUM (both sides, same BAL row, two code paths) · P-ONLY / N-ONLY
    (a gap) · EXEMPT (documented, EXEMPT table) · — (neither side holds it in that role).
@@ -278,13 +278,16 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
   S.place="home";Q.length=0;
   /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
   if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}
+  /* maid-acts-a (MAIN CHÍNH 90): the cung nữ road opens the SAME Hậu cung › Chủ tử card (j15 rvCard, act table jroad8 ROAD8.srv.acts) — scanned in the maid column
+     too, so a consort act leaking onto her card is a P-ONLY gap (it used to be read only when !isSrv(): ~50 consort acts there went unseen) */
+  if(isSrv())for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv-srv")}catch(e){E("rv-srv",e)}}
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
   /* E22e round C: the master has an errand for her this buổi (explicit world, the twin of the NPC j95 errand gate in npcOpts): SRVA.errand.offer
      forced for this read only, her drawn errand cleared before and restored after (the card was there only when the seeded draw came up) */
-  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
+  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{/* Hậu cung › Đồng liêu = the shared pager (j42 srvStaffTabHTML, one card at a time, its groups = kit sub-tabs): tabAll walks every card and every group, like the consort's Cung nhân tab */for(const h of tabAll("srvStaffTabHTML"))for(const n of lab(h))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
  const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
  if(phase==="consort"){
