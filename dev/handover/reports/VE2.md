@@ -9,3 +9,7 @@ All matte crepe, colours swapped correctly, mouths closed, one item each, nhất
 ## THU ×8 @135 (L1781) — gpt-2-6 2k medium 9:16 seed 7172 · sheet dev/handover/review-sheets/thu_8bac_135_L1781.png (+ 0-cr dev/handover/review-sheets/thu_t1t3_L1778.png)
 t1 Lw85wx5swO · t2 6AbJANKiJO · t3 6AbJGp4iJO · t6 VX7zBuWMMU · t7 WDgZpUBcXe · t8 SyhrPfnUb8 = 6 × 135 = 810 cr. t4 (revert_sqtest_L1714) + t5 (fix_L1776) NOT drawn: check_store FAIL B26/M06 (t4 also S13) — waiting #22 waiver.
 Necks all LOW open SQUARE, collarbones bare ✓ (G53). Refs: t1–t3 image 1 only; t6–t8 + image 2. JOB J cancelled. Session total 440+810 = 1250 cr.
+## JOB G Hán LADDER4 ×8 @55 (L1773) — gpt-2-6 1k low 9:16 seed 7172 · refs image 1 (t1–t5), +image 2 (t6–t8) · check_store FAIL only on #21's listed owner-ordered waivers (t1–t3 M06/M07/S06, t4 M06/M07/S13, t5 M06/M07, t6/t8 B12/M07/S07, t7 +S14) · 8×55 = 440 cr · sheet dev/handover/review-sheets/han_ladder4_L1773.png
+t1 w4ajNaE7EI · t2 5jDEsp0Kxe · t3 vQABHIKa47 · t4 tCReuogmZJ · t5 CqnIKlAEEy · t6 TdwGoCfVNR · t7 p8yWmJnehw · t8 If3pui4tvE
+Necks all wide crossed V, collarbones bare ✓; two stacked bands visible t1–t3, 3 bands t4–t6, 4 bands t7/t8 ✓; yellow only t6–t8 ✓; loose hair t1–t3, up-do t4–t8 ✓. Minor ✗: t2 drum reads as a round fan; t6 pose has hand on ball but yellow sash small.
+Session total: 440 (H+fix6+I) + 810 (THU×6) + 440 (Hán) = 1690 cr. Open: THU t4/t5 @135 need #22 gate waiver (B26/M06).
