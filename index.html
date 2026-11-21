@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e43b7146","t":"2026-11-21T10:04Z","c":"jnf co-op: after a host reload (LAST gone) the host still answers the guest's ask for today — the word is rebuilt from the saved state","b":"54c241171e80","h":[{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"}]};
+window.CTM_BI={"s":"cc5df7a2","t":"2026-11-21T10:34Z","c":"jflip: when the flip scene ends, jnf's step runs at once — the due choice goes up before any dialog that waited behind the scene","b":"25db6ca9a598","h":[{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -61861,7 +61861,9 @@ window.cfBusy=()=>{for(const j of JOBS)if(!j.v)return true;return false};
 window.cfAge=()=>{let a=0;const n=Date.now();for(const j of JOBS)if(!j.v)a=Math.max(a,n-j.t);return a};
 window.cfDrop=()=>{dbg('drop');for(const j of JOBS)j.v=1;try{cur&&cur.close&&cur.close()}catch(e){console.error(e)}};
 function cfJob(){const j={t:Date.now(),v:0};JOBS.add(j);return j}
-function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};dbg('run');const go=()=>{try{
+/* the flip scene ends (closed, voided, stale): jnf's step runs at once, before j93 starts its next job — the choice due now goes up in front of any
+   dialog that waited behind the scene (a gift, a person met), never ≤250 ms later on step's own tick (night-final case 7, NLC #10) */
+function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j);try{if(typeof window.nfStep==="function")window.nfStep()}catch(e){console.error(e)}}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
    if(j.v){dbg('void');done();return}   /* jnf dropped it (the choice went up without it): never a flip scene after the choice */
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */
@@ -88509,7 +88511,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="54c241171e80";window.CTM_BUILD=BUILD;
+const BUILD="25db6ca9a598";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
