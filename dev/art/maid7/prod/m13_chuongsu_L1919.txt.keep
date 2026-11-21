@@ -1,2 +1,3 @@
 base: dev/art/maid7/prod/m13_chuongsu_L1905.txt
 allow: she holds a large ring of brass palace keys in a contrasting colour   # held item owner L1919 (E13: every rank a different item; builder AGE5 pick)
+allow: the MAIN colour eggplant purple and the SECONDARY colour lilac like #C3A1CE   # owner via #26 (L1924): tím cà fixed code like #8E6C98 inserted

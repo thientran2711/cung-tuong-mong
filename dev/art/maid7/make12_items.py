@@ -30,6 +30,8 @@ for pid in [p for p in PERS if p != "m11"]:
         trim = False   # A38 boilerplate trim only (same two trims as make11_poses.py), listed as allow lines
         if len(s) > 9995 and s.count(INT) == 1: s = s.replace(INT, "Her hands interact naturally with the item, her head up facing the viewer, eyes open, lips closed."); trim = True
         if len(s) > 9995 and s.count(FAB) == 1: s = s.replace(FAB, ""); trim = True
+        if rk == "chuongsu":   # owner via #26 L1924: tím cà fixed code (re-add the allow line for the split phrase if the .keep is regenerated)
+            s = s.replace("medium eggplant purple (tím cà),", "medium eggplant purple (tím cà) like #8E6C98,").replace("the MAIN colour eggplant purple and", "the MAIN colour eggplant purple like #8E6C98 and")
         assert len(s) <= 10000, (pid, rk, len(s))
         f = P + f"{pid}_{rk}_L1919.txt"; open(f, "w", encoding="utf-8").write(s)
         d = kc.check(b, f, [])[0]

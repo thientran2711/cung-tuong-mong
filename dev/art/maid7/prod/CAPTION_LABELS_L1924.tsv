@@ -1,6 +1,6 @@
 pid	sheet caption (owner L1924: person code · SEASON · colour names · face GROUP; never face shape)	chưởng sự sheet colours	ma ma colours	sources
 m09	m09 · Xuân · xanh dương phấn + hồng phấn · sắc sảo	tím cà + hồng phấn	ngọc bích + hồng phấn	season: season_colour_classes.json; group: FACE_MAP_L703
 m10	m10 · Xuân · xanh dương phấn + xanh lá dịu · đoan trang	tím cà + xanh lá dịu	ngọc bích + xanh lá dịu	same
-m12	m12 · Thu · xanh dương phấn + vàng cát · tinh nghịch	tím cà + vàng cát	ngọc bích + vàng cát	season: palettes_season_nonconsort.json; group FACE_MAP = Tinh nghịch (#26 example said đoan trang — confirm)
-m13	m13 · Hạ · xanh dương phấn + tím hoa cà · (nhóm ?)	tím cà + tím hoa cà	ngọc bích + tím hoa cà	season: palettes_season_nonconsort.json; group: Kho (none) — foreman to name
+m12	m12 · Thu · xanh dương phấn + vàng cát · tinh nghịch	tím cà + vàng cát	ngọc bích + vàng cát	season: palettes_season_nonconsort.json; group FACE_MAP = Tinh nghịch (#26 confirmed)
+m13	m13 · Hạ · xanh dương phấn + tím hoa cà · tươi tắn	tím cà + tím hoa cà	ngọc bích + tím hoa cà	season: palettes_season_nonconsort.json; group: Tươi tắn (FACEPAGE1 card / LOOK_GROUPS; FACE_MAP says Kho)
 m18	m18 · Đông · xanh dương phấn + hồng đậm · dịu dàng	tím cà + hồng đậm	ngọc bích + hồng đậm	season: season_colour_classes.json (root dong)
