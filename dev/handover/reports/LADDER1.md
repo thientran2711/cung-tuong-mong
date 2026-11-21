@@ -81,3 +81,47 @@ Open: sheet label t1 row B slightly clipped ("dải buộc ngực"). No commit o
   t4 COMOIc→**COMOId** (9958, no trim) · t6 COMOId→**COMOIe** (9970, A38 trims: never a pair / never in profile / Everyone beautiful… / never copy anything but its colour) · t7 v8c→**v8d** (9917, trim: Full-body… boilerplate).
 - **t8 v10c NOT built:** with the clause it is 10 073 chars, every A38 trim is already used, and only owner outfit words are left, so it is 39 over even at PROMPT_MAX 10 000. **Needs your/owner call on what to shorten.**
 - Gates: t4 d / t6 e STORE+APPROVED PASS, no OUT1 warn. t7 v8d FAILS with exactly the 3 faults its base v8c already had (G23 walk+still, E1 angle, S19 tail; listed in COLORFIX1.md:74). Under A39 these were not touched, so t7 is not gen-ready until they are fixed. keep_check --all 247 PASS.
+
+## POSE AUDIT — jade pendant (ngọc bội) must stay visible at the front of the waist (owner L1611) — 0 gens
+Pool = E4 66 poses: 36 old spec5 (`t8-prompt-B/build.py` SPEC5_POSES, read with SPEC5_ADAPT + SPEC5_FRONTAL as the builder sends them) + 30 new (`dev/art/POSES_30.md`, used by `store-all/build_all.py` P30). `{prop}` = the rank item. "E2-banned" = look-back poses the builder already never draws.
+Verdict: **CHE** = the pose text puts hands/item/hand-on-sash in front of the waist/belly (pendant hidden). **RỦI RO** = "{prop} in the other hand"/"holding {prop}" with no place given; GPT often parks that hand at the front of the waist. **OK** = item at cheek/shoulder/chest/side/raised.
+
+### CHE — 20 (2 already E2/D3d-banned)
+| pose | short | what covers | fix |
+|---|---|---|---|
+| numi0 | offering {prop} forward, both hands | both hands + item centred in front | move: "offering {prop} forward at chest height" |
+| hienlanh2 | stepping forward to offer {prop} in both hands | same | move: "… at chest height" |
+| thamvong2 | walking holding {prop} in both hands | both hands in front of torso | move: "… held up at her chest" |
+| thanhnha2 | walking holding {prop} in both hands | same (duplicate text of thamvong2) | move as thamvong2 (or drop the duplicate) |
+| thanhnha5 | lightly holding {prop} in both hands, sash fluttering | both hands low in front | move: "… at her chest" |
+| P30-L4 | tiptoe step, both hands holding the item in front | "in front" | move: "… at her chest" |
+| P30-L5 | hand on hairpin, the item … at her waist | "at her waist" | move: "… at her side" |
+| P30-L6 | leaning forward, item toward the viewer | item pushed out over the belly | move: "… held up toward the viewer at chest height" |
+| P30-M1 | item held at her waist with both hands | "at her waist" | move: "… at her chest" |
+| P30-M6 | one hand adjusting her belt pendant | hand ON the pendant | **drop** (or → "touching her hairpin") |
+| P30-M7 | item held forward as if presenting | in front of the body | move: "… at chest height" |
+| P30-M9 | item held across her body with both hands | across the waist | move: "… across her chest" |
+| P30-C1 | item level at her waist with both hands | "at her waist" | move: "… at her chest" |
+| P30-C3 | hands folded at her waist under the sleeves | hands + sleeves over the sash | **drop** |
+| P30-C4 | other hand resting on her sash | hand on the sash front | move: "… resting at her side" |
+| P30-C5 | item held upright in front of her | "in front of her" | move: "… upright at her chest" |
+| P30-C8 | both hands presenting the item forward | in front | move: "… at chest height" |
+| P30-C9 | other hand holding the item in front | "in front" | move: "… at her side" |
+| kieungao2 | look back, {prop} near her waist | waist (E2-banned, never drawn) | drop from pool |
+| hienlanh0 | looking down at {prop} (D3d-banned, never drawn) | item in front | drop from pool |
+
+### RỦI RO — 21 (hand/item place not said)
+kieungao3, kieungao4, kieungao5 (hand lifting skirt hem), numi1, numi2, numi3, numi5, hienlanh1 (carrying), hienlanh5, dangi2, dangi3, thamvong0, thamvong4, thamvong5, thanhnha1 (held upright), thanhnha3 (reading held open), P30-L1 (hand lifting skirt hem), P30-L8, P30-L9 (item swinging from the hand), P30-C6 ("held low"), P30-C7 (crook of the arm).
+Fix: add the place, e.g. "{prop} in the other hand **at her side**" / "**held at her chest**". A lighter alternative is ONE common sentence for every figure, with no pose edits: "The jade pendant hanging from the front of the sash stays fully visible: no hand, sleeve or held item in front of the waist or belly."
+
+### OK — 25
+kieungao0, kieungao1, numi4, hienlanh3, hienlanh4, dangi0, dangi4, dangi5, thamvong3, thanhnha0, thanhnha4, P30-L3, L7, L10, M2, M3, M4, M5, M8, M10, C2, C10 (+ E2-banned dangi1, thamvong1, P30-L2).
+
+### Vietnamese summary for the owner
+Bộ 66 tư thế: 20 tư thế che ngọc bội (tay hoặc món cầm ở trước eo/bụng: "cầm ở eo", "hai tay cầm phía trước", "tay đặt lên đai", "chỉnh ngọc bội"); 21 tư thế rủi ro (không nói tay kia để đâu, AI hay để trước bụng); 25 tư thế an toàn.
+Đề xuất:
+1) Bỏ hẳn 2 tư thế: M6 (tay chỉnh ngọc bội) và C3 (hai tay khoanh trước eo).
+2) 16 tư thế còn lại: chuyển món cầm lên ngực hoặc sang bên hông (vd. "cầm ở eo" → "cầm trước ngực").
+3) 21 tư thế rủi ro: thêm chữ "tay kia để bên hông".
+4) Thêm 1 câu chung vào mọi prompt: "ngọc bội trước đai luôn lộ rõ, không tay, tay áo hay món đồ nào che trước eo/bụng".
+Chưa sửa prompt nào, chờ sếp duyệt.
