@@ -205,7 +205,7 @@ def b20_winter_words(out,pairs):
     i=out.index("Outfit ("); j=out.index(". ",i)+1; o=out[i:j]
     seen=set()
     for a,b in sorted(pairs,key=lambda x:-len(x[0])):
-        if not a or a==b or a in seen or a in ("gold","golden","silver","pearl","white"): continue   # metal / pearl words (DATA 'peacock teal and gold') are trims, never her colour
+        if not a or a==b or a in seen or a in ("gold","golden","silver","pearl","white","jade"): continue   # metal / pearl words (DATA 'peacock teal and gold') are trims, never her colour
         seen.add(a); o=re.sub(r"(?<!NOT )(?<![A-Za-z-])"+re.escape(a)+r"(?![A-Za-z-])",b,o)
     return out[:i]+o+out[j:]
 def secondary(person):
@@ -701,11 +701,12 @@ def season_store(store,person,rank,season):
 import importlib.util as _iu3
 _sp3=_iu3.spec_from_file_location("thu_ladder",os.path.join(HERE,"thu_ladder.py")); THU=_iu3.module_from_spec(_sp3); _sp3.loader.exec_module(THU)
 def thu_slots(person,rank):
-    p=ALIAS.get(person,person); w=B20[p]["thu"]; sp=LAST_G["hairflower_species"](p,rank)
+    p=ALIAS.get(person,person); sp=LAST_G["hairflower_species"](p,rank)
+    main=main_name(p); sec=secondary(p)[0]   # her thu palette when she has one (B20), else her own DATA colours (maids m01… have no season palette)
     hx=F20.get(p,{}).get("thu",{}).get("hair_by_tier",{}).get(f"t{rank}")
-    assert sp and hx,("thu slots",person,rank)
-    g=any(x in w["main"] for x in ("green","celadon","jade","teal","mint","sage","aqua"))
-    return dict(main=w["main"],sec=w["sec"],notgreen="" if g else ", NOT green",sp=sp[0],hsp=sp[0],spl=sp[1],hc=f20_name(hx))
+    assert sp,("thu slots: no F2 species",person,rank)
+    g=any(x in main for x in ("green","celadon","jade","teal","mint","sage","aqua"))
+    return dict(main=main,sec=sec,notgreen="" if g else ", NOT green",sp=sp[0],hsp=sp[0],spl=sp[1],hc=f20_name(hx) if hx else "fresh")
 def _sent_rx(kind): return re.compile(r"(?:(?<=^)|(?<=\. ))"+re.escape(kind)+r"[^\n]*?\.(?= [A-Z]|$)")
 def thu_sentences(S,person,rank,strict=True):
     notes=[]; new=THU.fill(rank,thu_slots(person,rank))

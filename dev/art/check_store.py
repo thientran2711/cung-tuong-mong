@@ -931,6 +931,7 @@ def fruit_fails(text, scope=None, pid=None):
     out = []
     for sent in re.split(r"(?<=[.;])\s+", text):
         if not HOLD_RX.search(sent): continue
+        if sent.lstrip().startswith("HELD ITEM COLOUR:"): continue   # BUILDFIX2: the B15 item-colour law names only her robe colours (light pale tangerine, pastel peach …), never a held object
         for m in FRUIT_RX.finditer(sent):
             if re.search(r"colou?r(?: family)?(?: is)? $", sent[max(0, m.start() - 20):m.start()], re.I): continue   # BUILDFIX1: a colour NAME (her robe colour persimmon) is not a held fruit
             if NEG.search(sent[max(0, m.start() - 30):m.start()]): continue   # 'no fruit', 'never a peach' (a later 'never …' in the clause does not excuse it)
