@@ -111,3 +111,8 @@ t8 length trims: outfit "floor-length robe," → "robe" (S19 tail repeat), "Pose
 ## Job 7 — owner L1674 G50 PAL3 palette (palettes_season_L1583.json s62 thu: main ô liu sáng #9FB577, sec hồng tím phấn #FBE8F8). Builder thu_comoi/make_design22_L1674.py
 Colour words only, COLORFIX1 method: "light plum" → "light olive", "#DF9ED9" → "#9FB577", the word "blush" → "lilac" (t1: "pale lilac", because "lilac" is also t1's flower motif; "blushed cheeks" is the skin line and stays). The prompts never had the secondary hex, so none was added. t7/t8 phoenix tips: "deeper light plum" → "deeper olive" (fits 10 000). The t6–t8 yellow rule is unchanged.
 New CURRENT set (built on job 6): dapung4/s62_t1_COMOI_v11 (9908), t2_v11 (9989), t3_v12 (9999); thu_comoi/s62_t4_THU_COMOIn (9940), t5_COMOIn (9931), t6_COMOIn (9981), t7_v8m (9996), t8_v10l (9996). check_store ×8 PASS, keep --all 378 PASS. 0 gens.
+
+## Job 7b — Foreman C #17 (CHECK2 job 6 notes)
+- t4 COMOIn → COMOIo, t5 COMOIn → COMOIo: Set A sash + ", NO bow" (G44) after "tassels": "an embroidered silk sash with hanging jade belt pendants and tassels, NO bow, never covered by sleeve or shawl".
+- t8 v10l → v10m: the held-in clause now says "belt" for its three "sash" words ("HELD IN by the belt … bound CLOSED under the belt … above and below the belt"), to match the Set A jade-and-gold belt in the outfit.
+CURRENT SET: dapung4/s62_t1_COMOI_v11, t2_v11, t3_v12; thu_comoi/s62_t4_THU_COMOIo (9948), t5_COMOIo (9939), t6_COMOIn, t7_v8m, t8_v10m (9996). check_store ×3 PASS, keep --all 381 PASS. 0 gens.
