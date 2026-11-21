@@ -1516,3 +1516,4 @@ ROOT-B2 ~19:25Z: OWNER L2129: QP chest+waist now OK (M2121/M2124 line), but cầ
 ROOT-B2 ~19:30Z: OWNER L2130: QP belt of M2124-01 (L2124) is OK, no belt change → M2129-02 = M2124-01 + only the falling cầu vai words; M2128-01 and M2129-01 marked 'bỏ' in MA_HINH. SENT. Next Lượt 2131.
 ROOT-B2 ~19:40Z: OWNER L2131: inner-robe embroidery ladder t6 light → t7 more → t8 most → rule (H). Test files M2131-01 QP (from M2129-02), -02 HQP (from M2123-08), -03 HH (from M2121-04 nguc) SENT. Builder waits for her OK on pictures (A55). Next Lượt 2132.
 ROOT-B2 ~19:42Z: OWNER L2132: stop sending the reference images; send ONLY the prompt files each run (she has the refs). Next Lượt 2132.
+ROOT-B2 ~19:50Z: OWNER L2133: chest embroidery = natural, may be covered by hands/items, never shown off → rule G (added). Test files M2133-01 QP, -02 HQP, -03 HH (from M2131) SENT. Builder after her OK (A55). Next Lượt 2134.
