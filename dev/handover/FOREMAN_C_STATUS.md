@@ -1348,3 +1348,4 @@ Next Lượt 1953.
  10. Hán t6 Quý phi pretty but not Quý-phi enough: add jewellery/ngọc ngà châu báu from Tần (t4) up (Tần a little, Quý phi fairly much) — copy the common luxury/jewellery prompt. Clouds/birds are ADDITIONS; each rank keeps its FLOWER embroidery; big flowers allowed from t4 up (banned only t1–t3) → fix G65.
  11. Face page: I gave only 5 faces and never resent link after fix → need full maid face page link.
  NOW: send her the THU outfit list (what we have).
+#27 ~10:30Z: OWNER L1973: HQP t7 = keep OLD HOÀNG QUÝ PHI outfit (not Quý phi), only fix collar; go back to previous version (L1903 0eUA2SkTfW base) + collar only → HHCOL2 → VE11 1@135. FACEPAGE1 full page v3 (51 faces) SENT L1972; m11 label → 'đã bỏ'. Next Lượt 1974.
