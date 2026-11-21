@@ -605,7 +605,7 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
   hợp dịp · trang điểm đẹp" (`.ok` / `.hot`), tap = kpPop. Never forced, never blocks Sang buổi.
 - Frame: the j82 game overlay (`kg82Open`, HUD Phần · Hồi x/4 · Còn). Hồi 1 CHỌN Y PHỤC (DOM, no canvas): left = her portrait `pcPort` with the
   picture of the WORN y phục's tier (figFor with that tier) + "Hôm nay" kitFacts of the day's occasions; right = `kitEquipSlots` (key "toil": Cài tóc,
-  Y phục, Đeo tay, Đeo eo, Túi thơm; tap = take off) over `kitInvGrid` (key "toil", tabs Trâm cài · Y phục · Trang sức, the SAME items as Tư trang via
+  Hoa tai, Y phục, Đeo tay, Đeo eo, Túi thơm, Giày (GAP IT03); tap = take off) over `kitInvGrid` (key "toil", tabs Trâm cài · Y phục · Trang sức, the SAME items as Tư trang via
   `kinvItems`; tap = wear). Buttons: Mặc bộ này · Giữ đồ hôm qua. Verdict row (kitRows): hợp dịp / hợp phẩm / quá giản dị / quá phô trương / vượt phẩm /
   phạm tang. Hồi 2–4 TRANG ĐIỂM (canvas): the mirror of `mg-chai-bg` zoomed to fill the board, HER portrait in the glass (face from veil-fit),
   live marks only (gold dotted guides, ink stroke, powder bloom, rouge dots, closing ring) + the three sprites as the tool under the finger.
@@ -1452,7 +1452,7 @@ chips (`.keqfx`) · note line (`.keqnote`: the `.keql2` part of `mini`, e.g. "th
 slot's `mini` at its `.keql2`, so names, chip lines and note lines sit on one line across a row even when one slot has a chip and its
 neighbour has none (was: the followed pet's status line 17 px lower than the others). Measured by dev/test/pets-fix.js (row.pets / row.tutrang ≤ 1 px).
 Tư trang slots = the rules' wear slots (`IT.sl`, j8 wear()/wearBonus/vpItems/tố vượt phẩm are generic on it):
-Cài tóc (hair) · Đeo tay (wrist) · Đeo eo (waist: ngọc bội ngự ban, Danh +1, still never given/sold) · Túi thơm (scent: túi thơm thêu, Sắc +1,
+Cài tóc (hair) · Hoa tai (ear, GAP IT03: hoatai / hoataivang, rewards only) · Giày (shoe, GAP IT03: giayhoa / giaygam; numbers BAL.wearSlots) · Đeo tay (wrist) · Đeo eo (waist: ngọc bội ngự ban, Danh +1, still never given/sold) · Túi thơm (scent: túi thơm thêu, Sắc +1,
 worn instead of used up; a tainted sachet keeps hurting via taintHit) · Y phục (áo may từ vải, `S.dress`, 3 tháng; the slot shows the GARMENT:
 j92 painting `img/wd512/wd-<tier>-y-NN.webp` picked by her tier and, inside the fabric grade's band, a stable hash of fabric+rank).
 Khăn che mặt (veil): the j70 hủy dung veil (`p.scar={sev,known,veil}`, same field KIT_VEIL draws on portraits); she has it once her face was
@@ -1528,8 +1528,8 @@ is in (j17 evArt, season × buổi), never the j89 default category (Triều ch�
 
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})` (review/dress-offence, owner 16/11 18:30Z: "6 wear slots + the pet = 7"): SEVEN kitItem tiles right under the portrait on
-  EVERY person card (player, consorts, maids, ma ma, Thái hậu…): Cài tóc (`p.wd.tram`) · Đeo tay · Đeo eo · Túi thơm (jinv worn IT.sl) · Khăn che mặt
-  (KIT_VEIL) · Y phục (`p.wd.y`) · Theo hầu (jpet `p.petOn`); an empty slot = the empty kitItem with the slot name. Data: `dressSlots(p)` / `dressView(p)`
+  EVERY person card (player, consorts, maids, ma ma, Thái hậu…): Cài tóc (`p.wd.tram`) · Hoa tai · Đeo tay · Đeo eo · Túi thơm (jinv worn IT.sl) · Khăn che mặt
+  (KIT_VEIL) · Y phục (`p.wd.y`) · Giày (GAP IT03: 8 wear slots + the pet = 9 tiles) · Theo hầu (jpet `p.petOn`); an empty slot = the empty kitItem with the slot name. Data: `dressSlots(p)` / `dressView(p)`
   (jdress). Marks, all existing kit parts, shown ONLY when the player has SEEN that dress (`dressNow(S,p)`: same place this buổi, or a Dò la report,
   while she still wears the same set; her own row always): kitItem corner tag `mark:["Vượt phẩm","r"]` on a piece above the wearer's rank (WD pieces
   only once their phẩm is known), the item's Xa xỉ box (`lux`), and the label row `.kwearl` = outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị /
@@ -4046,7 +4046,12 @@ Old list (kept for the right panel): 3. **Sở trọng** `kitRows`: known tính 
 Not filled: her own card, children, "Người lạ". Dislikes/likes (review/pcard-dislikes, `jdis.js`) are rows of the Sở trọng block; `kitPcKey` lifts the known ones to the left.
 **Event dialogs (ksz3 "Có người đến" / kdper, §32.7)**: NOT changed here. The figure there is the event stage column (§32.7b/§33.6, ladder `kszLivePick3`), a taller left column makes the ladder jump to XL; a key strip needs its own kit task (see reports/person-leftcol.md).
 **73.1 Fact rows (owner 17/11 ~14:15Z + ~14:40Z, review/pcard-facts) — kit part `kitFactRows` / `kitFactTap` (`j79.js`, next to `kitRows`)**: a known-fact row (Sở trọng / Đã biết / Dạo này, the Hậu cung / Giao tình / Nam nhân / Cung nhân / NPC cards, and the "Đã biết về X" column of the relation card) shows the FACT itself first, short ("Thích Cầm", "Ghét …", "Ta đã biết: đó là Quý phi …"): no "Tháng …, năm …: Dò được:" prefix and no "…" cut-off (the `.krv` line-clamp is gone). When / how / who found it open in a kit pop-up (`kpPop`) on tapping the fact; a tappable fact carries the kit dotted underline (`.kgl.kfx`, same look as the glossary tip). `kitFactRows([{l:label, f:fact html | [facts], d:{when,how,src}|null, c:cls}])`; `kitFactTap(fact, detail)` for one fact; no detail → plain text, nothing to open. `kitKnownList(p)` (jhc) now also returns `how` (Dò được / Chuyện trò / Dâng quà …). Test: `node dev/test/pcard-facts.js <url> <outdir> [WxH@dpr]`.
+<<<<<<< HEAD
 **73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word) — `kitTapWord(word, meaning)` / `kitTraitWords(keys)` (`j79.js`, next to `kitFactTap`)**: a trait is NOT a bullet box and NOT behind the avatar «!»: it is a short WORD with the kit dotted underline; tapping it opens the small kit popup with ONLY that word's meaning (word as the title). The person header rows read «Tính nết | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc». One word per trait game-wide (ETRAITS: «Đa nghi», never «dễ nghi»). `kitTraitWords(["danghi","hieuthao"])` (or the words) → the comma-joined tap-words, meaning from ETRAITS. The avatar «!» (§6.3b-1) stays only for non-word info (e.g. «Người chạy việc của cung…»). Test: `node dev/test/kit-tap-word.js <url>`; kit sample «§73.2».
+=======
+**62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z «Mấy cái ghi chú như vậy là để thành cái dấu chấm than ở kế bên cái sự việc của nó», repeat of OD L1867; review/kit-ghichu-bang) — `kitRows` / `kitNoteBang` (`j79.js`)**: in every kit row table (dialog info frames such as «Bổng lộc tháng ba», item cards, results, books) a row labelled «Ghi chú» is NOT drawn: its text goes behind the kit yellow round «!» (`.khap.kgnb`) at the END of the row just above it (the line it explains: «Bị cắt xén … (!)»); tap → the kit pop-up titled «Ghi chú» with that text. A Ghi chú with no row above it stays a row. One place (kitRows), no caller changes. Act-card Ghi chú (person-card info box §6.3, option cards behind their own «!» §6.2b) are separate approved forms. Test `node dev/test/kit-ghichu.js <url>`.
+**73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word) — `kitTapWord(word, meaning)` / `kitTraitWords(keys)` (`j79.js`, next to `kitFactTap`)**: a trait is NOT a bullet box and NOT behind the avatar «!»: it is a short WORD with the kit dotted underline; tapping it opens the small kit popup with ONLY that word's meaning (word as the title). The person header rows read «Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc». One word per trait game-wide (ETRAITS: «Đa nghi», never «dễ nghi»). `kitTraitWords(["danghi","hieuthao"])` (or the words) → the comma-joined tap-words, meaning from ETRAITS. The avatar «!» (§6.3b-1) stays only for non-word info (e.g. «Người chạy việc của cung…»). Test: `node dev/test/kit-tap-word.js <url>`; kit sample «§73.2».
+>>>>>>> origin/main
 `pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
 
 ## 76. kitPalaceMap — palace DETAIL map (Chính điện · Đông / Tây phối điện) — `dev/build/jpm.js` (last module) — review/palace-map → re-ported as review/palace-map-port (number 71: main's §33 is the figure scale)
