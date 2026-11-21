@@ -174,3 +174,8 @@ keep --all 435 PASS. Builder fix_L1723/make_t78_fix4_L1735.py.
 
 ## Fix5 t8 (owner L1737: fix3 shoulders/slim were not asked — Foreman's own idea)
 - s62_t8_THU_fix5_L1737 (base t8 fix2_L1726, 9691 ch): fix2 + ONLY the fix4 words (one-colour lilac tone-on-tone flowers, G33 plumage on robe phoenixes, matched crown inlay). Word-diff vs fix2 checked: nothing else changed; no 'SMALL … cloud collar' / 'SLIM EMPRESS SILHOUETTE'. fix3/fix4 t8 are superseded.
+
+## Fix6 t8 (owner L1747: fix5 eIPWWUNdqL drew a HIGH STAND collar; fix4 gOmkqTkSXO had the square one)
+- Finding: the square-collar words are IDENTICAL in fix4 and fix5 ('a straight SQUARE collar (no crossed collar) framed by a wide stiff band …'). fix4 only differed by its SMALL cloud collar flat on the shoulders (fix3 words, refused by the owner L1737), which left the neck clear; with the bigger fix2 cloud collar + 'SQUARE collar … wide stiff band' the model read a stand collar.
+- s62_t8_THU_fix6_L1747 (base fix5, 9837 ch, check_store tp8 PASS, keep PASS, --all 443 PASS): square collar made explicit 'a LOW open square neckline across the upper chest, neck and collarbones bare, NEVER a high stand collar or mandarin collar'; 'wide stiff band' → 'wide flat band'; cloud collar + 'never rising up the neck'. Shoulders/cloud collar size = fix2 (unchanged), one-colour lilac flowers + plumage unchanged.
+- Rule: NO rule id for the approved thu square collar. Approval = owner L1720 (Tần sqtest p8yYJV3ehw OK → all tiers, FOREMAN_C_STATUS line 1142); older related G22 (Tần t4 square neck, 20/11) and G17 (t1/t2 square neckline). Suggest the Foreman add one (rule.py add G …).
