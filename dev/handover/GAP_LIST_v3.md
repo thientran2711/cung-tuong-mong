@@ -1,0 +1,210 @@
+# GAP LIST v3 — RECOUNT vs LIVE origin/main f3353128 (21/11 08:52Z); built 21/11 ~09:45Z by worker session_01964izDGbtDvgVEE65rghGe (depth 6, read-only, for FOREMAN D #14 / MAIN 91)
+PRIORITY #1 CHECK: OD 21/11 ~07:05Z + ~08:05Z (owner asks: real progress, days to 100 % excl. character art) | main origin/main f3353128 LIVE (git grep ≥2 patterns per row, dev/build) | GAP_LIST v2 dev/handover/GAP_LIST.md (90 rows) + OWNER_MARKS_2111.md | claims: D #14 session_01964izE19z2nZ1MbPTVsG1X (this order), CLAIMS.md + FOREMAN_B/C/D/E_STATUS read for branch verdicts
+
+**SUMMARY (v3, 21/11 ~09:45Z):** rows rechecked 91 GAP (v2 90 + OD-CO1) + 83 unique non-LIVE owner marks (+34 marks already LIVE, not listed) = 174. DONE 77 · VOID 4 · **OPEN 93** (STILL OPEN/HALF 34, IN A BRANCH 59).
+**OPEN split: ART-CHAR 7 (MG10, OR02, IT04, AP02, AP03, KP04, KP09) / OTHER 86.** OTHER by type: UI 41, art 16, content 8, rules-numbers 21. By size: L 22, M 37, S 27. By owner: B build 27, C art 12, D rules 7, E roads 10, MAIN UI 30. (OTHER includes 16 non-character art rows: scenes/icons/items/frames, owner C art.)
+Of the 86 OTHER rows, 59 are already in a branch (most PASS / LAND READY, waiting for landing) and 27 have no branch (need a worker).
+**CLOSE RATE (48 h, 19/11 09:20Z → 21/11 09:20Z):** 82 rows closed = **41 rows/day** (20/11: 32 rows; 21/11 first 9 h: 50 rows; last 24 h = 78/day). 63 distinct branches landed in the window (all but 2 since 20/11 12:53Z).
+**ETA (days to 100 % excluding character art) = OTHER-open ÷ rate = 86 ÷ 41 = 2.1 days** (at last-24 h pace 1.1 d). Honest range **2–4 days**: the 48 h rate is carried by small kit/UI rows; 22 L rows and 16 non-character art rows (GE06 160 scenes, GE11 83 scenes, IT02 260 sets, KP23 ~400 pictures…) are not comparable to it, and landing is gate-limited (see ROAD).
+
+## HOW THE NUMBERS WERE MADE (method)
+1. `git fetch --filter=blob:none --shallow-since="4 days ago" origin main` (full depth-200 fetch was 4+ GB), then `git log --since=48.hours origin/main` = 1027 commits, 162 mention LAND, 98 plain LAND lines + train/re-merge lines.
+2. Seven read-only sub-checkers re-grepped every row on origin/main (≥2 patterns before calling anything missing) and read reports/*.md, CLAIMS.md, FOREMAN_*_STATUS.md for branch verdicts. Marks file has repeated rows per mark number; the newest wording per number is used, best status wins on conflicts.
+3. A row counts as CLOSED in the window when its LIVE sha (the LAND commit that carries it) has a commit date inside the last 48 h. Closed rows with dates: closed_rows_dates list at the bottom (id, commit time). Rows LIVE earlier than 19/11 09:20Z do not count (none were found).
+4. Rate = closed rows ÷ 2 days; ETA = OTHER-open ÷ rate. Branch-only rows are NOT counted as closed until their LAND commit is on origin/main.
+Caveats: no local review/* refs, so branch verdicts come from reports/CLAIMS/STATUS text (may be 0–60 min old); KP14/KP22/M17 need a browser to settle; art rows are judged from code/assets.json/PROGRESS (CDN not countable). Dialog-person/avatar marks tagged OTHER (the fix is code, the pictures exist).
+
+## ROAD TO 100 % — only what blocks a full playthrough, in order
+1. **Unjam LANDING (blocks most of the 59 branch rows):** (a) dialog-person-3 + kit-dialog-2 (jksize.js conflict) — the «ma ma speaks for the player» bug M58/M67/M77 is still LIVE until it lands, plus M62–M82 family; (b) ending-screens c073f8d4 + ending-screens-2 da613d5a (G4 80-dialog-fixed FAIL) = death/ending/Học thành tài/sang-buổi screens M48/M50/M51/M52/M84; (c) maid-8tabs 561e3f47 (PASS, LAND READY) = whole Cung nữ road UI M32–M36; (d) mg-craft (MG09), mg-intro-2 (M55), quest-rows-2 (M57/M66), kit-info-fixed-rv2 (M86), hao-huu (M2).
+2. **Outside route (home → palace) playable end to end:** land outside-gaps-r1 52f0638e + home-chapters 5acae7c5 (OR01/03–08/10/14) → review+land outside-coop 2c904461 (OR13) + podium-wire 0e1433be (OR09). OR02 portraits/scenes + OR17 panels = art, placeholders exist (not blocking).
+3. **Night / core loop correctness:** night-final-r3 (OD01/OD02: 2 regressions, co-op park rule needs MAIN decision) together with balance-final §7 Danh re-tune (OD05, D ETA 16–18Z) → night-ledger KP01 (needs reviewer; NPC Ân drift) → OD-CO1 co-op arrival visibility (S, no branch) → OD03 emperor monthly art (M, no branch).
+4. **Co-op complete:** coop-thin F5/F6 LAND READY 26f36042, then G and H (OD04, L) ; outside-coop (item 2).
+5. **Grand endings complete:** land ge-npc 344a9fac (OR19, GE08–GE10) + ge-phutang f37ec5f1 (GE02). Scene paintings GE06/GE11 are art polish (text endings play without them).
+6. **Rule holes with no branch yet (need workers, ~9 rows):** M53 Ban cung real odds (L, D), M83 Bổng lộc options (L, E), IT05 maid theft takes item not silver (S), KP03 children rules (M), MG13-pm-c + MG14 competitive acts (L), EM01 emotion balance proof (M), MG12 Điểm trang rules screen (S), KP14/KP22/M17 Fold/iPad layout leftovers (S–M, need browser check).
+7. Not blocking a playthrough (polish, C art): wardrobe 260, act/dialog/banner art KP23, weather KP08, Đa Bảo Các KP10, ico-tin KP11, GE06/GE11, AP01 origin frames. Character art (excluded): MG10, OR02, IT04 npcShow, AP02, AP03, KP04, KP09.
+
+## A. GAP rows (v2 ids), status on LIVE f3353128
+Status: DONE = on origin/main; HALF = part live; OPEN = no branch; BRANCH = in a branch, not on main. Tag ART-CHAR / OTHER on open rows.
+| id | item | status | proof (LIVE sha / file:line / branch+verdict) | tag | type | size | owner | what remains |
+|---|---|---|---|---|---|---|---|---|
+| MG01 | Quay lại back button on every mini-game screen | DONE | LIVE 8d385f2f mg-ui-rest (+mg-back); j82.js:415-439 kitXHTML "Quay lại" | - | UI | S | MAIN UI | nothing |
+| MG02 | Chải chuốt green zone default env fields | DONE | LIVE 716be762 mg-env; j92.js:441 env.zw!=null default | - | rules-numbers | S | B build | nothing |
+| MG03 | No text inside play, group b games | DONE | LIVE 8cf6b7d7 mg-noword-b (+dbddaed2 noword-kit); j92.js:448 "no word in play" | - | UI | M | MAIN UI | nothing (CÁCH CHƠI only on demo cards jlant:36, jnwp:50) |
+| MG04 | td_dung rules rewrite and guided round | DONE | LIVE 9519a16f td-dung-clear (rv PASS c2aacf88), 03ba85c3 scene; c3a398dd | - | UI | S | MAIN UI | nothing |
+| MG05 | Hoa điền: remove tilt, anchored target, stricter scoring | DONE | LIVE 66bd36cd mg-play2; jhd.js:11-12,36 tilt removed, HD_ANCHOR jhd.js:83 | - | rules-numbers | M | B build | nothing |
+| MG06 | Hoa đăng avoid-lotus obvious, strong light lane | DONE | LIVE 66bd36cd mg-play2; jts.js:57 kg82FxLane lit lane, jts.js:47 lotus sprite | - | UI | S | B build | nothing |
+| MG07 | Điều hương grading fault + Nấu ăn fire lag | DONE | LIVE f43efc71 cal-p2b (Điều hương/Múa/Nấu bánh grading fix); jbal2.js:253 banh | - | rules-numbers | S | D rules | nothing |
+| MG08 | Board score = given score, one n/10 chip, amber clock | DONE | LIVE 0aaf8152 kit-mark + 892e5bb0 mg-score-same; j79.js:649 kitGameMark | - | UI | M | MAIN UI | nothing |
+| MG09 | Craft mini-games each own mechanic (Thêu, Vẽ, Hoa, Khéo tay) | BRANCH | review/mg-craft-r2-r2 25d5775d Thêu PASS opus rv 35AHV1nh, LAND READY (B 07:58Z); Vẽ/Hoa still pattern j82.js:25-26 | OTHER | UI | L | B build | Land Thêu; Vẽ, Cắm hoa, Khéo tay own mechanics (mg-craft-ve/-hoa) |
+| MG10 | Paint code-drawn objects/people in mini-games | OPEN | jlant.js no kg82Spr/drawImage; jnwq.js:161 nwqRobe still arc shapes | ART-CHAR | art | L | C art | Painted lanterns, suspects, seat cards; people need drawn figures |
+| MG11 | Mini-games outside KG82_KIND into Thử tay | DONE | LIVE 465662b5 / a66b5a49 mg11; jmgx.js:33-36 (nghe/truyen/mac/thoico/thu_tam/thu_choi/tuoi) | - | rules-numbers | M | B build | Điểm trang waits for faces (jmgx.js:10); Cho ăn, gKy, jkc2 judged not kinds |
+| MG12 | Sẵn sàng/Hướng dẫn rules screen in pet, plant, Điểm trang | HALF | LIVE 8d385f2f mg-ui-rest; jpetcare.js:97, jshelf.js:407 kgReady | OTHER | UI | S | MAIN UI | Điểm trang (jmkt/jtoil) not re-checked; no kgReady hit in the grep |
+| MG13 | Person mini-game acts Cùng chơi / Thách đấu | HALF | LIVE 463d3d70 person-minigame-acts r4 (jpma.js:11,15); pm-c ffedf4f4 LAND READY | OTHER | UI | L | E roads | Land person-minigame-acts-c (ffedf4f4); NPC invites, harder by rank |
+| MG14 | Four competitive ideas (live head-to-head, Cờ duel, onlookers, ladder) | HALF | jpma.js:86-99 pmDuel on LIVE; no kitGameVs( call in jpma, no ladder/gossip grep hit | OTHER | UI | L | E roads | Live board duel, Cờ on gKy, onlookers + gossip, ranking ladder |
+| MG15 | Fair NPC hands: bell curve per kind | DONE | LIVE 90d57324 mg-fair-ratio (via 66bd36cd); jmgid.js | - | rules-numbers | M | D rules | nothing |
+| MG16 | Per-identity start arts, sở trường / sở đoản | DONE | LIVE 90d57324 + 0667403a cal-p2c; j1.js:35 originArts, jbal.js:167 SỞ ĐOẢN | - | content | M | D rules | nothing (40-identity count not audited) |
+| MG17 | Identity offset on her result | DONE | LIVE 0667403a cal-p2c; jmgid.js:9-10 mgIdOff / mgIdRes | - | rules-numbers | M | D rules | nothing |
+| MG18 | Rolling hand b per player | DONE | LIVE 0667403a cal-p2c; jmgid.js:8,26 S.mgB per player | - | rules-numbers | M | D rules | nothing |
+| OD01 | Final night rule: 10-second forced choice, one resolve | BRANCH | review/night-final-r3-nobc 9a06cea8 (D #14): 2 regressions, night-final 8/10 + coop-night case 12; -r3-coop cdaddf70 gating | OTHER | rules-numbers | L | B build (+D numbers) | Fix 2 regressions, land; co-op park rule conflict open for MAIN |
+| OD02 | Giữ chân Hoàng thượng defence + rebalance | BRANCH | review/night-final-r3 (same line as OD01); LIVE only on jkitpage.js:161 sample | OTHER | rules-numbers | M | D rules | Lands with night-final-r3 |
+| OD03 | Emperor monthly favoured art changes flip odds | OPEN | no favArt/empArt/ưa thích hits on origin/main; no branch | OTHER | rules-numbers | M | D rules | Build monthly favoured/disfavoured art and its flip-odds effect |
+| OD04 | Co-op thin-guest A to H | HALF | LIVE jcoopthin.js:25 TH.CAP=9 (A-E, F1-F4); coop-thin-f6b-r1 26f36042 LAND READY; coop-thin-g running (rollover 792b8e7c) | OTHER | rules-numbers | L | B build | Land F5+F6a/b; then G and H |
+| OD05 | Balance pass: start stats + growth by origin | BRANCH | balance-core 42/42 PASS in reports; D ETA balance-final + re-tune 16-18Z; not on main | OTHER | rules-numbers | M | D rules | Land balance-final; earlier one-core-guard FAIL needs re-check |
+| OD06 | Unique ancient-Chinese names, one registry | DONE | LIVE a88b14f0 / a8a9e0a2 coop-name-clash (+names-unique-r2); jname.js:8 NM_BAN_SUR; j1.js:193 freshName=nmNew | - | content | M | B build | nothing |
+| OD07 | Day-khắc left check everywhere | DONE | LIVE 7a35db20 day-khac-audit; j76.js:14 one day-khắc function | - | rules-numbers | M | D rules | nothing |
+| OD-CO1 | Co-op: second arriver does not see friend already there | OPEN | jcoopworld.js:285 applyWhere/refreshHere; map-places-r2-r1 688a5667 PASS LAND READY, no fix claim | OTHER | rules-numbers | S | B build | Fix seat-symmetric presence on arrival; the cause is suspected only |
+| OR01 | Home scenes, Dư đồ house/city maps, Huynh figure wired | BRANCH | review/outside-gaps-r1 52f0638e BIG PASS, LAND READY (jkcg.js absent on main; jkc.js:42-44 still palace SCIMG) | OTHER | UI | S | B build | Land stack outside-gaps -> outside-coop -> kc-fail-effects (art already on CDN) |
+| OR02 | Bến sông/ngoại ô/Thần Võ scenes; mẫu thân/kế mẫu/bà mối/teacher portraits | OPEN | no img for these in assets.json; family uses face-mama pool (jkc.js:121-124) | ART-CHAR | art | M | C art | Draw 3 scenes + female family/teacher portraits, new act pictures |
+| OR03 | Origin home chapters as j67 arcs with 3 endings seeding palace arcs | BRANCH | review/home-chapters PASS 5acae7c5 LAND READY (jkc3.js/jkc3a.js absent on main) | OTHER | content | M | E roads | Land (E listed it with MAIN 91) |
+| OR04 | kc_ke, kc_hon, tm96z/S.tm96.endZ, kc_tt3 chapters | BRANCH | home-chapters PASS 5acae7c5 (jkc3b.js); 0 hits on main for kc_ke/kc_hon/tm96z/endZ | OTHER | content | M | E roads | Land |
+| OR05 | Home events E9 keepsake, E15 look inspection, E28 impeachment | BRANCH | home-chapters PASS 5acae7c5 (IT.divat, xemmat, hac); no 'di vật' event on main | OTHER | content | S | E roads | Land; item icon borrows tramngoc (one painting wanted) |
+| OR06 | Home poetry/festivals use real mini-game, not formula | BRANCH | outside-gaps-r1 52f0638e (jkcg.js OR06); main still kcFest jkc.js:380-384 | OTHER | rules-numbers | S | B build | Land |
+| OR07 | Home roster: nhũ mẫu, teachers/bà mối/suitors as people | BRANCH | home-chapters PASS 5acae7c5 (kc3Roster, KC3THAY); main nhũ mẫu only j53.js | OTHER | content | M | E roads | Land; faces reuse existing pools |
+| OR08 | Carry-over to palace: cap, father liking, letters/gifts, Thư nhà | BRANCH | outside-gaps-r1 52f0638e (askO liking, Thư nhà sub-tab); main jkc.js kcEnter no cap | OTHER | rules-numbers | M | B build | Land; +15 cap question was open to MAIN |
+| OR09 | Tuyển tú podium (sister + khuê hữu compete) | BRANCH | kit part LIVE dd248d5d (kit-podium-gate); wiring review/podium-wire SẴN SÀNG KIỂM 0e1433be (own tests 34/34, no reviewer verdict) | OTHER | UI | S | MAIN UI | Review + land podium-wire |
+| OR10 | Early entry: Thái hậu triệu, vi hành direct Thường tại | BRANCH | home-chapters PASS 5acae7c5 (thtrieu, vhtrieu); main 'Thái hậu triệu' only j24/j67 | OTHER | content | S | E roads | Land |
+| OR11 | Difficulty scales home hazards | DONE | LIVE 983a9436 (outside-nums); jdiff.js:10,18,21 kcSch/kcRumFade/kcMatch | - | rules-numbers | S | D rules | - |
+| OR12 | Outside-route outcome split measured on live | HALF | LIVE 983a9436 outside-nums: n=180 split in band, no retune (reports/outside-nums.md:20-38) | OTHER | rules-numbers | M | D rules | HH ±5 vs direct start (>=60 lives/arm) not run (MAIN-4) |
+| OR13 | Co-op help home<->palace; co-op rebirth into home road | BRANCH | single-player hooks in outside-gaps-r1 52f0638e; co-op half review/outside-coop 2c904461 SẴN SÀNG KIỂM (jkcco.js, coop-kcco 63/63); main kcHook stub jkc.js:646 | OTHER | rules-numbers | M | B build | Review+land outside-coop; rebirth into friend's home moment unconfirmed |
+| OR14 | Khuê các title/milestone set | BRANCH | outside-gaps-r1 52f0638e (Khuê các kiếp no.); main 'Khuê các' only text jkc.js:140 | OTHER | rules-numbers | S | B build | Land |
+| OR15 | Tutorial ch1-3 tied to her rolled road | DONE | LIVE 4e8cbaeb (tut-road); jtq14.js:84,121 roadSj reads S.st.f14.road | - | content | M | E roads | - |
+| OR16 | Reason triggers per hồi | DONE | LIVE 548dcd0d (road-triggers); jrtrig.js:1-12 npcWhy("hoi67"), BAL.arc.trig | - | rules-numbers | L | E roads | - |
+| OR17 | Intro panel pictures incomplete (nc-*, bd-3, bd-h3, cn-2, dtq-4) | OPEN | assets.json img/intro lacks nc-*, bd-3, bd-h3, cn-2, dtq-4 (has bd-1,2,4 cn-1,3,4 dtq-1,2,3,h3) | OTHER | art | S | C art | Paint 5+ panels (nc ones may show princess figure) |
+| OR18 | Emperor NPC road templates 2-4 | DONE | LIVE 548dcd0d (road-triggers); jnroade.js:2-10 biên ải, cải cách, kế vị (BAL.nroad.men.emp) | - | content | M | E roads | - |
+| OR19 | NPC consorts roll origin from player pool incl. foreign princesses | BRANCH | review/ge-npc PASS c925183e, LAND READY 344a9fac (report title lists OR19); main nrOrigin jnroad.js:33 clan table only | OTHER | rules-numbers | M | B build | Land ge-npc |
+| OR20 | j68 follow-ups: Hoàng hậu duty, lãnh cung, servant | DONE | LIVE d6f23858 (or20-j68q); j68q.js:1-7 | - | content | M | E roads | - |
+| OR21 | Tâm cơ as scheme cost; buy safety with silver | BRANCH | review/econ-tamco-rv 079a147b PASS, LAND READY (coop-e2e + econ-tamco-coop PASS); not in main_log48 | OTHER | rules-numbers | M | D rules | Land |
+| GE01 | Grand-ending data for 11 branches + BAL.ge | DONE | LIVE 8730f431 (ge-writers-w3); all 36 GE_CAT branches have GE_DATA (jgedata*.js) | - | content | L | E roads | - |
+| GE02 | Foreign-princess remap + roads + 4 GE each (Ba Tư, Phù Tang) | BRANCH | Ba Tư road LIVE 494b386a, 16 GE jgedata_bd.js (ge-batu in 983a9436); Phù Tang road LIVE 666def0c; Phù Tang GE = review/ge-phutang f37ec5f1 PASS LAND READY | OTHER | content | L | E roads | Land ge-phutang; keys stay bd/nc, jorigins.js:9 text remap only |
+| GE03 | Sơ đồ nhánh page in Sổ luân hồi | DONE | LIVE ca642f9c (ge-map) + 90b7e797 (kit-ge); jbalge.js:18 mapOn:true, j79.js:544 kitBranchMap | - | UI | M | MAIN UI | - |
+| GE04 | Two-tone Thiên mệnh title plate | DONE | LIVE 90b7e797 (kit-ge); jtitle.js:26-28 kdhTone ge_<b>_<n>t/a | - | UI | S | MAIN UI | - (jbalge.js:30 comment stale) |
+| GE05 | Bảng Thiên mệnh rows on phones | DONE | LIVE 90b7e797 (kit-ge); j79.js:706 K-GE-3 plate-label row stacks | - | UI | S | MAIN UI | - |
+| GE06 | Grand-ending scene paintings + fail picture | OPEN | PEND.geR jge.js:133 no picture; 0 ge_/r97 keys in EVENTS.json/assets.json | OTHER | art | L | C art (B wires) | Paint 160x2 scenes (pilot 24), wire into geR |
+| GE07 | Kim sách Thiên mệnh item icon | OPEN | IT.kimsachtm defined jge.js:184; no kimsach icon in assets.json | OTHER | art | S | C art | Paint one icon, map in ITIMG |
+| GE08 | Grand-ending unlock news as centre pop-up | BRANCH | review/ge-npc PASS c925183e (kitPanel «Thiên hạ truyền tin»), LAND READY 344a9fac; main jge.js:126 log only | OTHER | UI | S | B build | Land ge-npc |
+| GE09 | NPC grand-ending parity | BRANCH | review/ge-npc (jgenpc.js) PASS c925183e, LAND READY 344a9fac; main jbalge.js:173 npc:{on:false} | OTHER | rules-numbers | L | B build | Land; known limits: cnv maids, co-op friend |
+| GE10 | Her help/sabotage moves NPC GE + BAL.ge.help.rw | BRANCH | ge-npc (nrHelped wrap) PASS c925183e, LAND READY 344a9fac; main jbalge.js:172 "not live" | OTHER | rules-numbers | M | B build | Land ge-npc |
+| GE11 | Rare-ending pictures (47 j97 + 36 RD97L) | OPEN | no r97 art in assets.json/EVENTS.json; j89.js falls back to arc cover | OTHER | art | L | C art | Paint ~83 ending scenes |
+| IT01 | Big centre item display, frameless, hi-res | DONE | LIVE 26f3bfa9 (kit-item-big tooling) + j93.js:189-210 kitRevealHTML xl | OTHER | UI | S | MAIN UI | art gap only: 22 items no item512 art (C) |
+| IT02 | Wardrobe 20/tier x 13 ranks = 260 sets | OPEN | j92.js:70 WD_LIST still ~47 garments; no branch | OTHER | art | L | C art (+B data) | ~210 garment/hairpin pictures + maid rank sets (item icons, art/judged from reports) |
+| IT03 | Wear slots earrings + shoes | DONE | LIVE 8acb2bef/31114358 wear-slots; jinv.js:313 KEQ_TT has ear; jbal2.js:1768 BAL.wearSlots | - | UI | S | MAIN UI | nothing |
+| IT04 | Hoa dien transparent sprites, anchors, NPC shown | HALF | jhd.js:83-121 HD_ANC table landed (LIVE 9b51dacf); jhd.js:48 npcShow:0 still | ART-CHAR | art | M | C art | flip npcShow after face check; transparent face sprites (hoa-dien-art 3927 cleanup, 1/3 still marked) |
+| IT05 | Bribed maid steals box moves only silver | OPEN | j8.js:419 text "lay trom hop trang suc" but ap(p,{bac:-g}) only | OTHER | rules-numbers | S | B build | move a real item out of chest or reword text |
+| AP01 | Main-story event frames per origin (9 styles) | OPEN | jpres.js:59 KPO_ART={} empty; branch review/presentation-wiring b0b972b97 ~65% (not verdict) | OTHER | art | M | C art (B fills KPO_ART) | paint 9 origin frames then fill KPO_ART |
+| AP02 | Old-save player looks 1-4: 128 figures + faces | HALF | assets.json 36 fig-player-look* (t1 x10-11, t2/3/4/6/8 x2; no t5/t7/cold); jhd.js:117 HD_ANC rows exist | ART-CHAR | art | M | C art (B face pools) | t5/t7/cold + older ages of looks 1-4, 4 faces into pools |
+| AP03 | Pregnancy/nun figures, duong nhan glow, early grey hair | OPEN | no fig-nun/preg figure in build (grep preg, nun, duong nhan, toc bac); jmort/j32 text-only xuat gia | ART-CHAR | art | M | C art | confirm postponement lifted; draw 6/9-month, nun x4 ages, glow, grey strands |
+| AP04 | Perf test in CI at 755x1000 + mid-phone | DONE | .github/workflows/perf.yml on main; LIVE f3353128 SELF-MERGE LAND perf-ci | - | rules-numbers | S | B build | nothing |
+| EM01 | Emotion balance proof 150 vs 150 lives | OPEN | PROGRESS_emotion.md:15-18 only n=61/60; D #14 coop-emo-seat (07:52Z) is a different fix | OTHER | rules-numbers | M | D rules | run 150+150 with run5b.sh, tune EMO_OD/idle/cap |
+| KP01 | 10-night ledger, Empress auto days 1&15 | BRANCH | jagemp.js:18 "not built yet" on main; review/night-ledger-r1 (reports/review-night-ledger-r1.md, reviewer fixes, no LAND; FOREMAN note: owner call balance-core §7 HH 33%->6%) | OTHER | rules-numbers | L | B build | owner decision on balance-core §7 then LAND ORDER |
+| KP02 | Map places Ngu thien phong, Noi vu phu, Phat duong | BRANCH | review/map-places 6883c4feb SAN SANG KIEM; places-port-r1 PASS 7c2aaa08c; map-places-r2 in B LAND READY (08:20Z 21/11); main j2.js/j26.js no nth/pd | OTHER | UI | M | B build (+C art) | MAIN to land map-places-r2 |
+| KP03 | Children rules: call home, estrangement, Thai tu, orphans | OPEN | greps "Cho goi con/goi con ve/estrange/orphan" no rules (only jnrask_m flavour, j99succ text) | OTHER | rules-numbers | M | B build | build whole rule set; no branch |
+| KP04 | bd origin seal img/kit/origin-bd.webp | OPEN | j60.js:23 KIT_ORIGINS has no bd; no report/LAND for land-origin-bd-r1 | ART-CHAR | art | S | C art + MAIN UI | draw seal, add "bd" to KIT_ORIGINS |
+| KP05 | Scheme mini-games MUU seal, own HUD, painted boards | HALF | jsgame.js:282 seal:"MUU" via j79.js:629 param; LIVE a66b5a49 mg11 land | OTHER | UI | M | MAIN UI | own HUD (Bong/Hoi/Con) + painted boards (fallback silk jsgame:11) |
+| KP06 | Y duoc act group | DONE | LIVE 99bdba82; j79.js:931-933 KIT_CAT y-duoc | - | UI | S | MAIN UI | nothing |
+| KP07 | kitEntryGate palace-gate animation | DONE | LIVE dd248d5d; j93.js:64-78 kitEntryGate defined | OTHER | UI | M | MAIN UI | entry-gate-* art slots (C) |
+| KP08 | Weather art icons, fogbank, fog grade | OPEN | jclose.js:62 reuses icons "until C paints mo-wx-amu/muarao"; jfx.js:199 smoke atlas; code branch weather-khac PASS 03a776e4 (judged from reports) | OTHER | art | M | C art | paint 4 icons + fog sprite (art judged from reports) |
+| KP09 | Body-fit box per figure for outfit stains | OPEN | jlooks.js:14 still waits; review/looks-2 FAIL r1 040ce3440, looks-2-r1 head 4d9fcd648 not landed | ART-CHAR | UI | M | MAIN UI + C art | body-fit data per figure; land looks-2 |
+| KP10 | Da Bao Cac art: rail icon, cabinet, 67 cut-outs | HALF | jdisp.js:153 rail icon path img/kit/ico-room.webp; jdisp.js:21 .kdr-nopic stub; display-shelf PASS 60b0e3bf, kit-display-room-r2 PASS f4abade8 (art judged from reports) | OTHER | art | M | C art | painted cabinet + slot points + 67 item cut-outs |
+| KP11 | Painted ico-tin, ico-alert | OPEN | grep ico-tin 0; jstagehere.js:9 says glyph until img/kit/ico-alert.webp exists | OTHER | art | S | C art | paint 2 icons (art judged from code only) |
+| KP12 | Writer green/red class beats word colouring | DONE | LIVE 5cd6d24a kit-rows-b | - | UI | S | MAIN UI | nothing |
+| KP13 | Price under THANH, "khong mat bac" under BAI | DONE | LIVE 5cd6d24a; j8.js:131 econPayWin, j17.js:95 | - | UI | S | MAIN UI | nothing |
+| KP14 | Option tiles squeeze at Fold 755 | OPEN | no option-grid fix found (jk4.js:1113 only kart rows); not browser-checked | OTHER | UI | S | MAIN UI | verify at Fold then fix |
+| KP15 | Reveal card many items row cap / +N | DONE | LIVE 5cd6d24a (v2 verdict; not re-greped deeply) | - | UI | S | MAIN UI | nothing |
+| KP16 | Small loading spinner | DONE | LIVE 99bdba82; jph.js:144 kitSpin | - | UI | S | MAIN UI | nothing |
+| KP17 | kitEvArt guessed evId on pickers | DONE | LIVE 5cd6d24a; j95s.js:256 note | - | UI | S | MAIN UI | nothing |
+| KP18 | kitModal from title sits under #title | DONE | LIVE 99bdba82 (v2; grep for title check found no symbol, trust LAND) | - | UI | S | MAIN UI | nothing |
+| KP19 | Viec nho step list shared kit part | DONE | LIVE 5cd6d24a; j72.js:266 kitStepList | - | UI | S | MAIN UI | nothing |
+| KP20 | Chapter detail cover not topic picture | DONE | LIVE 5cd6d24a; jchap.js:18 o.cover; also LIVE 74cea8bf chapter-card-3 | - | UI | S | MAIN UI | nothing |
+| KP21 | Act-card parser strips labels, splits long rows | DONE | LIVE 5cd6d24a; j63.js:61 kaRows | - | UI | M | MAIN UI | nothing |
+| KP22 | kit-fig2 leftovers: empty visit, An oan groups, chips | OPEN | no Nam nhan/Cung nhan groups in An oan (j22.js only Hau cung sub-tab); E ordered ROOT-79 14:45Z 20/11, no result seen | OTHER | UI | M | MAIN UI / E | An oan groups, 2-option gap, relation chip wording |
+| KP23 | Art backlog: 48 sys keys, 97 banners, ~240 act pics, outings | HALF | per PROGRESS_review-act-pics2 (CDN, not git-countable); no verdict line | OTHER | art | L | C art | remaining queue via prompts2.py --todo |
+
+## B. OWNER_MARKS_2111 rows not LIVE in the marks file (one line per mark number, newest wording; 34 other marks already LIVE in OWNER_MARKS_2111.md are not repeated)
+| mark | problem | status | proof | tag | type | size | owner |
+|---|---|---|---|---|---|---|---|
+| M1 | Send the frames PDF | VOID | row says SENT in 84 chat (ui-tour DONE) | OTHER | content | S | MAIN UI |
+| M2 | Co-op partner info missing; build Hảo hữu icon in left stage column | BRANCH | review/hao-huu d41876c9; rv2 PASS-PENDING-BADGE 8bcba06b (CLAIMS L809); kit-badge SẴN SÀNG KIỂM 36b6071ed; not in main log | OTHER | UI | L | B build |
+| M3 | Chí tôn name «Hoàng thượng» centred, niên hiệu row below | DONE | LIVE fafe0f62 LAND chiton-name (2fc286c6); gold colour 94a37f51 hoangthuong-gold on main | OTHER | UI | S | MAIN UI |
+| M4 | Sở trường/Hay/Chuyện doubled labels into one column | DONE | LIVE fafe0f62 chiton-name (2fc286c6); mark-verify rv: OK | OTHER | UI | S | MAIN UI |
+| M5 | Trait box repeats; move into «!» | DONE | LIVE 9c1dd605 kit-pcrow-square (+6c024ff0 tap-words); mark-verify A: OK | OTHER | UI | S | MAIN UI |
+| M6 | Person-card act picture square, Tốn/Được only, full-width info box | DONE | LIVE 9c1dd605 kit-pcrow-square (8ccd209e) + 2bf59027 LAND kit-act-grid; A: OK | OTHER | UI | M | MAIN UI |
+| M7 | Cung nhân small portrait floating; act cards | DONE | LIVE 9c1dd605 kit-pcrow-square + 5fc1b026/bd03747e kit-leftcol-read; A: OK (borderline) | OTHER | UI | M | MAIN UI |
+| M8 | Rank+name tag not centred | DONE | LIVE 31cd39be (kit-pcrow-square WIP2, in 9c1dd605) + 90da39e3 LAND kit-rankunit; A: OK | OTHER | UI | S | MAIN UI |
+| M9 | Info box becomes «!» on avatar top-right | DONE | LIVE 31cd39be/8ccd209e via 9c1dd605 kit-pcrow-square; A: OK | OTHER | UI | S | MAIN UI |
+| M13 | Place label: palace on top, hall below | DONE | LIVE 2fc286c6 (chiton-name: palace above hall) in fafe0f62 | OTHER | UI | S | MAIN UI |
+| M14 | Separate PDF of every filled frame state | BRANCH | review/ui-tour-states 35eb944f DONE READY (HOLD), 190 pp 23.9 MB (CLAIMS L600); rv: deliverable OK | OTHER | content | M | MAIN UI |
+| M15 | Empty tabs need picture card «Ta chưa có…» | DONE | LIVE 177a1931 LAND empty-states (rv2 PASS ee8847b0) | OTHER | UI | M | MAIN UI |
+| M16 | Panel scrolls with no extra content; must stand still | DONE | LIVE 177a1931 LAND empty-states | OTHER | UI | S | MAIN UI |
+| M17 | Hoàng tự card: Fold vs iPad different layouts; one shared layout | OPEN | mark-verify A on 666def0c: WRONG (Fold mother LEFT, iPad ABOVE); no later fix commit/branch found | OTHER | UI | M | MAIN UI |
+| M18 | Person-tab top strip fixed, not scrolling away | DONE | LIVE c3e4cf21 kit-pcrow-square WIP5 (one person-tab frame) in 9c1dd605; A: OK | OTHER | UI | M | MAIN UI |
+| M19 | Intro text into round «!»; top block fixed size | DONE | LIVE fdc54f3a kit-pcrow-square WIP6 in 9c1dd605; A: OK | OTHER | UI | S | MAIN UI |
+| M20 | APPROVED Kén rể card = reference for person-tab cards | VOID | row says noted (reference only) | OTHER | UI | S | MAIN UI |
+| M21 | Túi đồ inline item strip under grid, chips at right | DONE | LIVE db6ae2a0 LAND bag-inline + aee7ff84 LAND bag-inline-2 (rv2 PASS c1f7733b) | OTHER | UI | M | MAIN UI |
+| M22 | Thú cưng empty uses same picture card as «Ta chưa có con» | DONE | LIVE 177a1931 LAND empty-states | OTHER | UI | S | MAIN UI |
+| M23 | Tư trang Việc act cards need pictures | DONE | LIVE 67eb7b98 (alias 6 acts + kpanec) on main; A: OK, partly seen (Chợ đen/Xin đồng minh below fold) | OTHER | UI | S | MAIN UI |
+| M24 | Tài nghệ act cards one size per device, bigger pictures | DONE | LIVE 2bf59027 LAND kit-act-grid (070eb977) | OTHER | UI | M | MAIN UI |
+| M25 | Tài nghệ «Đức» chip repeats top bar; remove | DONE | LIVE a41b3891 (chiton-name) in fafe0f62; rv: OK, 0 HUD repeats | OTHER | UI | S | MAIN UI |
+| M26 | Chương này: big picture card, title, goals, task list | DONE | LIVE 74cea8bf LAND chapter-card-3 (52657663, 3d52f838); rv: OK | OTHER | UI | M | MAIN UI |
+| M27 | Sắc phong/Đã qua/Triều cục/Tâm nguyện big banner picture | DONE | LIVE 74cea8bf LAND chapter-card-3 (4771570e kitSlide on Sắc phong, Tâm nguyện, Phụ tuyến; rv r2 PASS 73808a61) | OTHER | UI | M | MAIN UI |
+| M28 | Mệnh truyện chapters as slide carousel, no repeated list | DONE | LIVE 74cea8bf LAND chapter-card-3 (52657663 kitSlide); rv: OK | OTHER | UI | M | MAIN UI |
+| M29 | Slide carousel every chapter place; Mục lục button | DONE | LIVE 74cea8bf (jkslide/jkc Mục lục on main); rv: partly verified (home/road/ending not checked) | OTHER | UI | M | MAIN UI |
+| M30 | Việc nhờ empty: big picture card, button below | DONE | LIVE 4386e849 kitEmptyTab (empty card on top) in 177a1931 LAND empty-states | OTHER | UI | S | MAIN UI |
+| M31 | Sổ ghi much text; wait for her check | VOID | row = waiting her, no change until she says | OTHER | UI | S | MAIN UI |
+| M32 | Cung nữ road uses same 8 bottom tabs as consort | BRANCH | review/maid-8tabs 561e3f47 rv R2 PASS LAND READY (not in main) | OTHER | UI | L | B build |
+| M33 | Cung nữ repeated tam đẳng strip removed; stage column 1:1 | BRANCH | review/maid-8tabs 561e3f47 rv R2 PASS LAND READY | OTHER | UI | M | B build |
+| M34 | Cung nữ master strip removed; Chủ tin box in stage column | BRANCH | review/maid-8tabs 561e3f47 rv R2 PASS LAND READY | OTHER | UI | M | B build |
+| M35 | Đồng liêu into Hậu cung tab; one 8-tab shell for all | BRANCH | review/maid-8tabs 561e3f47 rv R2 PASS LAND READY | OTHER | UI | L | B build |
+| M36 | All statuses same stage boxes, only labels change | BRANCH | review/maid-8tabs 561e3f47 rv R2 PASS LAND READY | OTHER | UI | M | B build |
+| M37 | Phone menu panels narrow+tall → wide frame | DONE | LIVE 5a8c30af SELF-MERGE LAND menu-panel | OTHER | UI | S | MAIN UI |
+| M38 | Person dialog left column: no empty band | DONE | LIVE bd03747e kit-leftcol-read (5fc1b026) | OTHER | UI | S | MAIN UI |
+| M39 | Mood frames: cause picture + emotion seal in corner | DONE | LIVE d31c8ec0 LAND mood-seal (30fa26a2, 62f4b11e scan) | OTHER | UI | S | MAIN UI |
+| M40 | Sở trọng/sở trường on maid dialog = #4 group | DONE | LIVE fafe0f62 chiton-name (0b2bbd82 rv2 PASS) | OTHER | UI | S | MAIN UI |
+| M41 | Trait words Đa nghi, dotted-underline tap popup | DONE | LIVE fafe0f62 chiton-name + 0d60ae54 kit-tap-word | OTHER | UI | S | MAIN UI |
+| M42 | Lịch tháng → phone-style month calendar view | DONE | LIVE 6e07f837 LAND calendar (40d20ee1, 2b2c970b) | OTHER | UI | M | MAIN UI |
+| M43 | Chapter dialog: big picture fills left column | DONE | LIVE 74cea8bf; 52657663 + ea48b2fe (Fold 11px fix) in main | OTHER | UI | S | MAIN UI |
+| M44 | Trân nữ seal one rule same corner every dialog | DONE | LIVE 686807ef kit-dialog (518893d7 seal left of close) | OTHER | UI | S | MAIN UI |
+| M45 | Mini-game iPad figure column: new tall background per subject | OPEN | wiring DONE (LIVE 8b2e344d/922b36b4 mg-5s-clear, 8caa9dcd); backgrounds = Foreman C ART REQUEST, no art evidence | OTHER | art | M | C art |
+| M46 | Death dialog: old person dialog stays open on top | DONE | LIVE 60dd62c3 SELF-MERGE LAND dialog-stack (bd605e17); duplicate row in file already says LIVE | OTHER | UI | S | MAIN UI |
+| M47 | Same left figure size/position per frame size | DONE | LIVE 686807ef kit-dialog (7c5d51f3) | OTHER | UI | S | MAIN UI |
+| M48 | Death frame: white mourning flower + drapes | BRANCH | review/ending-screens c073f8d4 (+ -2 da613d5a PASS); landing FAILED G4 80-dialog-fixed (92 order 08:53Z); art ask Foreman C | OTHER | art | L | B build + C art |
+| M49 | Odds meter on title row; iPad 2 col; dialog picture fixed | DONE | LIVE 686807ef kit-dialog (7c5d51f3 + dialog-fixed test) | OTHER | UI | M | MAIN UI |
+| M50 | Đại kết cục festive frame, flowers + drapes | BRANCH | review/ending-screens c073f8d4 rv PASS but land FAILED G4; art Foreman C | OTHER | art | L | B build + C art |
+| M51 | Every ending full-screen ceremonial screen, own background | BRANCH | review/ending-screens c073f8d4 (kitEndScreen not on main) + ending-screens-2 da613d5a PASS; backgrounds Foreman C | OTHER | art | L | B build + C art |
+| M52 | Học thành tài full picture per subject, iPad landscape | BRANCH | ending-screens-2 da613d5a (sits on ending-screens c073f8d4; LAND READY, failed to land G4 08:53Z); C ART REQUEST 05:35Z pictures per subject pending | OTHER | art | L | C art + B build |
+| M53 | Ban cung: history expert first, real odds/costs on Xin cung | OPEN | Only ORDER to Foreman D (FOREMAN_D_STATUS 03:45Z/04:12Z); no branch/claim/commit found | OTHER | rules-numbers | L | D rules |
+| M54 | Danh hiệu mới title on event picture | DONE | LIVE 686807ef kit-dialog (7fb051b8 "#54 new-title plate sits on the event picture"); per-title Magnific art = parked LATER | OTHER | UI | S | MAIN UI |
+| M55 | Contest/mini-game intro: event picture top, rules behind «!» | BRANCH | review/mg-intro-2 18d1b014 PASS (rv b21609fc); LAND READY, queued in 89/91 chain, not on main | OTHER | UI | M | MAIN UI / B build |
+| M56 | Every dialog option card has its picture | DONE | LIVE 686807ef kit-dialog (e8d30ca7 every option card shows a picture + test) | OTHER | UI | M | MAIN UI |
+| M57 | Quest dialog chip cloud -> tidy rows, steps behind «!» | BRANCH | review/quest-rows-2-rv 6aac0a54 PASS (rv-quest-rows-2.md, chips-scan 0); queued after d6f23858, not in main log. Row repeated 5x (superseded by #66) | OTHER | UI | M | MAIN UI |
+| M58 | Speaker must be the player not ma ma; kit avatar+rank+name on person options | BRANCH | kit-dialog-2 ab74a5d7 PASS (carries dialog-person) + dialog-person-3 b187ecdc PASS; LAND FAILED jksize.js conflict 08:54Z; main still has narrator default (jksize.js kszWho3) | OTHER | UI | M | MAIN UI |
+| M59 | Person-target option cards use kit avatar part | BRANCH | same dialog-person: kit-dialog-2 ab74a5d7 PASS / dialog-person-3 b187ecdc PASS, not landed | OTHER | UI | S | MAIN UI |
+| M60 | «Ghi chú» rows -> kit «!» next to line, whole game | DONE | LIVE 068662ad SELF-MERGE LAND kit-ghichu-bang (a775df5b) + 32c63abc kit-ghichu-sections; test dev/test/kit-ghichu.js, j79.js kitNoteBang | OTHER | UI | M | MAIN UI |
+| M61 | Story text: rank+name one colour unit; literature rewrite of narration | BRANCH | part (1) DONE LIVE 90da39e3 kit-rankunit (b3a96a1d); parts (2)(3) story-voice-land 54af15fa LAND READY (FOREMAN_E_STATUS L1258), not landed; cafbaacf withdrawn | OTHER | content | L | E roads/content + MAIN UI |
+| M62 | Line naming many people: no avatar, no empty band | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS / dialog-person-3 b187ecdc PASS), not landed | OTHER | UI | S | MAIN UI |
+| M63 | Item in dialog too big -> smallest kit item size inline | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS / dialog-person-3), not landed | OTHER | UI | S | MAIN UI |
+| M64 | Same person twice in dialog -> one image per person | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS; dialog-person-scan PASS), not landed | OTHER | UI | M | MAIN UI |
+| M65 | Second person's avatar on event picture corner | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS), not landed | OTHER | UI | S | MAIN UI |
+| M66 | Quest chips FINAL: 2 tags on picture, rest label-value rows | BRANCH | review/quest-rows-2-rv 6aac0a54 PASS (rv-quest-rows-2.md), not landed | OTHER | UI | M | MAIN UI |
+| M67 | «Trốn trong phòng»: own figure not ma ma; scan default narrator | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 / dialog-person-3 b187ecdc PASS); rv-quest-rows-2 note: ma ma still shown on main | OTHER | UI | M | MAIN UI |
+| M68 | Emotion events: mood seal top-right, animates on open | DONE | LIVE 2021e23f SELF-MERGE LAND mood-seal-2 (b03e2002 + 8acb2bef); keepMk in jksize.js | OTHER | UI | S | MAIN UI |
+| M69 | Left figure + same avatar on result/relation lines = #64 | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS), not landed | OTHER | UI | S | MAIN UI |
+| M70 | «Hoàng thượng ban thưởng»: left figure = emperor, minor carriers no avatar | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS), not landed | OTHER | UI | S | MAIN UI |
+| M71 | Narrow Fold dialog -> kit frame size; test every dialog uses kit size | BRANCH | kit-dialog-2 ab74a5d7 PASS (rv-kit-dialog-2: #71 OK, test (i) 19 kinds); LAND READY, kszSlot3 absent on main | OTHER | UI | M | MAIN UI |
+| M72 | Separate «Mất» row; Tốn/Được/Mất order | DONE | LIVE 686807ef kit-dialog (b6438032 "kit-dialog #72: separate Mất row; test") | OTHER | rules-numbers | S | MAIN UI |
+| M73 | Same person twice (figure+line avatar+medallion) = #64 | BRANCH | dialog-person-3 b187ecdc PASS (CLAIMS L772/785); LAND FAILED jksize.js conflict 08:54Z, waits kit-dialog-2 | OTHER | UI | S | MAIN UI |
+| M74 | Phone-only: no event picture on big dialogs (cancelled) | VOID | Row says VOID (owner cancelled 05:15Z) | OTHER | UI | S | MAIN UI |
+| M75 | «Lỡ hẹn» avatar on iPad missing on phone | BRANCH | kit-dialog-2 ab74a5d7 PASS (#75 OK, phone-drop-scan) not landed | OTHER | UI | S | MAIN UI |
+| M76 | Left-slot rule: item art left on «Đồ thất lạc» | BRANCH | kit-dialog-2 ab74a5d7 PASS (kszSlot3, #76 OK), not landed | OTHER | UI | M | MAIN UI |
+| M77 | ANGRY: ma ma again on Thi tài Thất tịch -> Hoàng thượng; kill default narrator | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 / dialog-person-3 PASS), not landed; main jksize.js still has BAL.staff.narrator default | OTHER | UI | M | MAIN UI |
+| M78 | ONE consistent avatar rule in KIT.md + test | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS, KIT 6.2b/6.2g, dialog-person-scan), not landed | OTHER | UI | S | MAIN UI |
+| M79 | «Hắt nước»: duplicate avatar + broken image icon Bạch Lan | BRANCH | dialog-person-3 b187ecdc PASS / kit-dialog-2 ab74a5d7, not landed | OTHER | UI | S | MAIN UI |
+| M80 | Small-frame: event picture at TOP of right column | BRANCH | kit-dialog-2 ab74a5d7 PASS (#80 evTop 0, test (j)), not landed | OTHER | UI | S | MAIN UI |
+| M81 | Player as left subject: rank+name+«(ta)», no extra avatar | BRANCH | dialog-person (kit-dialog-2 ab74a5d7 PASS; "(ta)" scan), not landed | OTHER | UI | S | MAIN UI |
+| M82 | iPad list frames short rows -> 2 columns | BRANCH | kit-dialog-2 ab74a5d7 PASS (#82 OK, test (k)), not landed | OTHER | UI | S | MAIN UI |
+| M83 | Bổng lộc tháng 5/6 no options -> same options every month + đòi lại/lót tay | OPEN | Only ORDER to Foreman E (FOREMAN_E_STATUS 03:51Z, BIG opus); no branch/claim found; main has no matching fix | OTHER | rules-numbers | L | E roads + D rules |
+| M84 | Sang buổi transition picture full screen phone+iPad | BRANCH | ending-screens-2 da613d5a (LAND READY, failed to land G4 08:53Z); C ART REQUEST 05:35Z: 8 portrait ne-*-port pictures pending | OTHER | art | M | B build + C art |
+| M85 | «Lời cảnh báo»: no boxed card, no duplicate fact line, order | DONE | LIVE 5569adb6 SELF-MERGE LAND dialog-dedup (2a5997df #85 + 3862abec) | OTHER | content | S | MAIN UI |
+| M86 | Person card Dạo này info block fixed height, only buttons scroll | BRANCH | review/kit-info-fixed-rv2 191c94f4 PASS (CLAIMS L810); queued in 89 chain, not LIVE | OTHER | UI | M | MAIN UI |
+
+## C. Rows closed in the last 48 h (id, LIVE commit time UTC) — input of the rate
+MG02 11-20T08:08, MG05 11-20T08:46, MG06 11-20T08:46, MG15 11-20T08:46, GE03 11-20T10:25, GE04 11-20T10:25, GE05 11-20T10:25, MG07 11-20T10:34, MG03 11-20T11:05, MG08 11-20T11:16, KP06 11-20T11:42, KP16 11-20T11:42, KP18 11-20T11:42, MG01 11-20T12:02, IT01 11-20T12:19, OR15 11-20T12:33, KP07 11-20T12:53, GE01 11-20T13:20, KP12 11-20T13:39, KP13 11-20T13:39, KP15 11-20T13:39, KP17 11-20T13:39, KP19 11-20T13:39, KP20 11-20T13:39, KP21 11-20T13:39, OD07 11-20T13:49, MG16 11-20T14:22, MG17 11-20T14:22, MG18 11-20T14:22, OR11 11-20T15:42, OR16 11-20T21:13, OR18 11-20T21:13, MG04 11-21T01:04, M13 11-21T02:15, M3 11-21T02:15, M4 11-21T02:15, M8 11-21T02:15, M9 11-21T02:15, OD06 11-21T02:16, M25 11-21T02:35, M23 11-21T02:38, M10 11-21T02:59, M11 11-21T02:59, M12 11-21T02:59, M26 11-21T03:02, M5 11-21T03:05, M39 11-21T03:10, M17 11-21T03:15, M18 11-21T03:15, M19 11-21T03:15, M20 11-21T03:15, IT03 11-21T03:20, M40 11-21T03:25, M38 11-21T03:29, M7 11-21T03:29, M28 11-21T03:33, M43 11-21T03:33, M41 11-21T03:36, M42 11-21T03:40, M44 11-21T03:46, M37 11-21T03:47, M46 11-21T04:02, M85 11-21T04:04, M24 11-21T04:21, M15 11-21T05:12, M16 11-21T05:12, M22 11-21T05:12, M30 11-21T05:12, M60 11-21T05:32, M27 11-21T05:42, MG11 11-21T05:47, M68 11-21T05:47, M47 11-21T06:14, M49 11-21T06:14, M54 11-21T06:14, M56 11-21T06:14, M72 11-21T06:14, M6 11-21T07:01, M21 11-21T07:19, OR20 11-21T07:46, M29 11-21T08:24, AP04 11-21T08:52
