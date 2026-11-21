@@ -2280,3 +2280,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:37Z) «main is now 101» sent to LC3 JFfM, keeper #6 McbX, rv MSxp, MAIN 100; FROM MAIN in B/C/D/E STATUS. Own wake trig_01PPLdmXzg7C14Mqpgvu6Ebm (min 32); trig_01KABF9TjF5Q8cVy8A1niSEH DISABLED. M99b + MAIN 100 ARCHIVED. B/C orders re-posted (none claimed). Waiting: keeper #6 r3 → rv MSxp PASS → land → owner shots.
 - (20:56Z) LAND CHAIN 3: LANDED coop-cyhold 2fd4e0b4 = LIVE (hold lifted by D; 1 perf-only retry; no coop/worker change). HOLD od03-favart-rv. Idle.
 - (20:56Z) LC3: LANDED coop-cyhold 2fd4e0b4 = LIVE. Queue empty. Keeper #6 r3 7196bc19 with rv MSxp.
+- (20:59Z) rv MSxp PASS pframe-overlay r3 7196bc19 (rv4 95fd1253) → LAND READY relayed to LC3. Main looked at rv shots: Fold ok; iPad act pictures not loaded → asked rv for retake rv-r3b-* after land; then owner shots.
