@@ -22,7 +22,7 @@ function econRoadPay(a,k,t,road){const c=econRoadCost(k,a,t);if(road==="tc")ap(a
 /* the NPC act: pay the road, the act's own success roll gets +up (aOdd, below) */
 function econRoadWrapF(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.__c0||(A0.f&&A0.f.__road))continue;const f0=A0.f;/* again at the script end: later modules replace some f (jwhy spy) */
   const f=function(a,t){if(!a||a===S||ECON_RB)return f0.apply(this,arguments);let road="";try{road=econRoadNpc(a,k,t)}catch(e){}
-   if(!road)return f0.apply(this,arguments);econRoadPay(a,k,t,road);ECON_RB={a,b:BAL.tcroad.up,road};try{return f0.apply(this,arguments)}finally{ECON_RB=null}};f.__road=1;A0.f=f}}
+   if(!road)return f0.apply(this,arguments);const c=econRoadPay(a,k,t,road),g0=econVeto();ECON_RB={a,b:BAL.tcroad.up,road};try{return f0.apply(this,arguments)}finally{ECON_RB=null;if(econVeto()!==g0)ap(a,road==="tc"?{tamco:c.tc}:{bac:c.hire})/* the act's own gate stopped it: the road is given back */}};f.__road=1;A0.f=f}}
 econRoadWrapF();setTimeout(econRoadWrapF,0);
 (function(){const o0=aOdd;aOdd=function(o,a){const z=o0.apply(this,arguments);
  if(ECON_RB&&!(ACTX&&ACTX.fz!=null)&&(a===undefined||a===ECON_RB.a))return oddsCl(z+ECON_RB.b);return z}})();
@@ -35,7 +35,23 @@ PEND.roadpick=p=>{const v=RV(p.v),k=p.k,A0=ACT[k];if(!v||!A0)return null;const c
  O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn`,go:go("hire")});
  O.push({n:"Thôi",fx:{}});
  return{who:pv(v),t:`<p>${A0.n} — ${v.name}: tự tay làm, hao tâm cơ mà sắp đặt, hay bỏ bạc thuê người làm thay?</p>`,o:O}};
-function econRoadGo(i,k,road,fz){const v=rivals[i];if(v&&road==="tc")ap(S,{tamco:-econRoadCost(k,S,v).tc});if(v&&road==="hire")ap(S,{bac:-econRoadCost(k,S,v).hire});/* the hired hand is paid here; the card shows price + hire in the kit Tốn row (ton) */ECON_ROADGO=1;try{fzRun(fz,k,()=>doAct(i,k))}finally{ECON_ROADGO=0}}
+/* her road travels with her act as ECON_HER {k, t: rival id, road, fz: the odds she saw}; runAct (below) pays it and rolls the odds she saw.
+   Co-op (owner CO-OP LAND GATE): a thin guest's runAct is an intent run on the HOST; ECON_HER rides in that intent's ctx (jcoopthinf F1
+   runAct "econ"), so the host computes the cost and the roll in her context — the same road on both seats, nothing paid on the guest phone. */
+window.ECON_HER=null;
+function econRoadGo(i,k,road,fz){const v=rivals[i];window.ECON_HER=v&&road?{k,t:v.id,road,fz}:null;ECON_ROADGO=1;try{fzRun(fz,k,()=>doAct(i,k))}finally{ECON_ROADGO=0;window.ECON_HER=null}}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const h=window.ECON_HER;
+ if(!h||a!==S||!t||t.id!==h.t||k!==h.k||!ACT[k]||!ACT[k].__c0)return r0.apply(this,arguments);window.ECON_HER=null;
+ const run=()=>r0.apply(this,arguments);econRoadPay(S,k,t,h.road);/* tc: Tâm cơ · hire: the hired hand (the scheme price is the act's own) */
+ return ACTFZ||h.fz==null?run():fzRun(h.fz,k,run)}})();
+/* parallel time (jptime): a scheme SENT with a servant (ptHarmSend, the spy deed…) lands later. The deed sent while her road is pending
+   carries it (a.econ) and pays it when it lands (ptLand), before the deed's own run; the odds she saw are the deed's fz. Co-op: the landing
+   runs on the host in her context (ptTickHer intent), so the host pays it. */
+setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")return;
+ const s0=ptSend;ptSend=function(o){const h=window.ECON_HER,a=s0.apply(this,arguments);
+  try{if(a&&h&&o&&o.tgt==="v"+h.t&&(!o.a||o.a.k==null||o.a.k===h.k)){a.econ={k:h.k,t:h.t,road:h.road};window.ECON_HER=null}}catch(e){}return a};
+ const l0=ptLand;ptLand=function(a){try{const e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k])econRoadPay(S,e.k,t,e.road)}}catch(x){console.error("econ road land",x)}
+  return l0.apply(this,arguments)}}catch(e){console.error("econ road ptime",e)}},0);
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
   if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);render();return}}catch(e){console.error("road",e)}
   return d0.apply(this,arguments)}})();

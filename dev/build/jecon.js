@@ -147,7 +147,10 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
   const ok0=A0.ok;A0.ok=function(a,t){ECON_AT=[a,t];if(!ok0.apply(this,arguments))return false;return (a.bac||0)>=econSchemePrice(k,a,t)};
-  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac;if(extra>0&&!ECON_WIN.includes(k))ap(a,{bac:-extra});return f0.apply(this,arguments)}}})();
+  const f0=A0.f;A0.f=function(a,t){const extra=econSchemePrice(k,a,t)+c0.bac,pay=extra>0&&!ECON_WIN.includes(k);if(pay)ap(a,{bac:-extra});const g0=econVeto();const r=f0.apply(this,arguments);
+   if(pay&&econVeto()!==g0)ap(a,{bac:extra});/* the act's own gate stopped it (j95c: no motive to frame) → no price paid for nothing (law 3) */return r}}})();
+/* acts whose own f can still refuse after the price is taken: the j95c giá họa motive gate (counted in J95C.stat.frameGate) */
+function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}

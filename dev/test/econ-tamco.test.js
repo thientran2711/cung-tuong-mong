@@ -53,6 +53,21 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   if(first)console.log("pay",JSON.stringify(pay));
   if(pay){const t=pay.tc,h=pay.hire;if(t.seen!==t.p)F(sz,`tc road rolled ${t.seen} vs shown ${t.p}`);if(h.seen!==h.p)F(sz,`hire road rolled ${h.seen} vs shown ${h.p}`);
    if(t.dTc>-t.tc||t.dTc<-t.tc-3)F(sz,`tc road Tâm cơ change ${t.dTc} vs ${-t.tc}`);if(h.dBac>-h.hire||h.dBac<-(h.hire+h.pr))F(sz,`hire road bạc change ${h.dBac} vs hire ${h.hire} (+ price ${h.pr} when the act pays it)`);}
+  /* 3b. parallel time: a scheme SENT with a servant (ptHarmSend) carries the road in the deed and pays it when the deed lands */
+  const dd=await p.evaluate(()=>{if(typeof ptHarmSent!=='function'||typeof ptOn!=='function'||!ptOn())return {skip:'ptime off'};S.bac=2000;S.tamco=60;S.khac=99;
+   const priced=Object.keys(ACT).filter(k=>ACT[k].__c0);let k=null,v=null;for(const kk of priced){v=liveRivals(true).find(x=>{try{return ACT[kk].ok(S,x)&&ptHarmSent(x,kk)}catch(e){return false}});if(v){k=kk;break}}
+   if(!v)return {skip:'no sendable priced scheme'};if(!S.maid)return {skip:'no maid'};const bs0=bestSent;bestSent=()=>S.maid;/* a free servant to send (this fresh life may have none) */try{
+   const out={};for(const [ix,lab] of [[1,'tc'],[2,'hire']]){S.bac=2000;S.tamco=60;v.block=0;try{used=0}catch(e){}S.confined=0;S.mg=null;const c=econRoadCost(k,S,v),n0=ptZ().length;Q.length=0;pushDil(mkP('roadpick',{v:v.id,k}),ACT[k].n);chooseM(ix);
+    const a=ptZ().slice(n0).find(x=>x.tgt==='v'+v.id);if(!a){out[lab]={nodeed:1};continue}
+    const ec=a.econ&&a.econ.road;const pays=[];const ep0=econRoadPay;econRoadPay=function(a2,k2,t2,r2){const tc0=a2.tamco,bc0=a2.bac,x=ep0.apply(this,arguments);pays.push({road:r2,dTc:a2.tamco-tc0,dBac:a2.bac-bc0});return x};
+    const b0=S.bac,t0=S.tamco;try{ptLand(a)}finally{econRoadPay=ep0}out[lab]={kind:a.kind,econ:ec,pays,c,dTcAtSend:t0-60,dBacAtSend:b0-2000,dTcLand:S.tamco-t0,dBacLand:S.bac-b0,her:window.ECON_HER}}
+   return {k,v:v.name,out}}finally{bestSent=bs0}});
+  if(first)console.log('ptime deeds',JSON.stringify(dd));
+  if(dd&&!dd.skip){const T=dd.out.tc,H=dd.out.hire;
+   if(!T||T.econ!=='tc'||T.dTcAtSend!==0||T.pays.length!==1||T.pays[0].dTc!==-T.c.tc)F(sz,'sent deed (Tâm cơ road): road not carried / not paid at landing '+JSON.stringify(T));
+   if(!H||H.econ!=='hire'||H.dBacAtSend!==0||H.pays.length!==1||H.pays[0].dBac!==-H.c.hire||H.dBacLand>-H.c.hire||H.dBacLand<-(H.c.hire+H.c.pr))F(sz,'sent deed (hire road): road not carried / not paid at landing '+JSON.stringify(H));
+   if((T&&T.her)||(H&&H.her))F(sz,'ECON_HER left set after a deed');}
+  else if(first)console.log('NOTE ptime deed check skipped:',dd&&dd.skip);
   /* 4. NPC roads (law 1): same price, same bonus */
   const npc=await p.evaluate(()=>{const R=BAL.tcroad;const L=liveRivals(true);const res={n:0,tc:0,hire:0,plain:0,bad:[]};
    for(let i=0;i<300;i++){const a=L[i%L.length],t=L[(i+1)%L.length];if(a===t||sameHouse(a,t))continue;const k=["rumor","bribe","block","frame"][i%4];if(!ACT[k]||!ACT[k].__c0)continue;
