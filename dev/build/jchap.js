@@ -52,7 +52,7 @@ function chapChipHint(c){const t=(c.innerText||"").replace(/\s+/g," ").trim();co
  return null}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const go=t.closest("[data-chapgo]");if(go){e.stopPropagation();e.preventDefault();if(Q.length&&Q[0].kit&&Q[0].kit.chap){Q.shift();showModal()}tab="act";render();return}
  const pn=t.closest("#panel");if(!pn||t.closest("button,a,input,select,textarea,.kgl,.kpanec,.pcb,.ksub,.pctabs,.kpbar,.opts"))return;
- if(t.closest(".kskill[data-skill^='rank-']")||(tab==="story"&&t.closest(".ktop .kchip")&&pn.querySelector(".kskill[data-skill^='rank-']"))){const ch=t.closest(".ktop .kchip");
+ const RK=".kskill[data-skill^='rank-'],.kslide[data-ksk='story-rank']";if(t.closest(RK)||(tab==="story"&&t.closest(".ktop .kchip")&&pn.querySelector(RK))){const ch=t.closest(".ktop .kchip");
   const h=ch&&chapChipHint(ch);if(h){e.stopPropagation();kpPop(ch,`<div class="kpopt">${h[0]}</div><div class="kpopx">${h[1]}</div>`);return}if(!ch){e.stopPropagation();chapRankOpen()}return}
  if(tab==="story"&&(t.closest("[data-chap]")||t.closest(".kskill[data-skill^='story-']")||t.closest(".kchk")||t.closest(".ktop .kchip"))&&pn.querySelector(".kskill[data-skill^='story-'],.kslide[data-ksk='story-now']")){e.stopPropagation();chapOpen();return}
  if(tab==="q72"){const ch=t.closest(".ktop .kchip");const h=ch&&chapChipHint(ch);if(h){e.stopPropagation();kpPop(ch,`<div class="kpopt">${h[0]}</div><div class="kpopx">${h[1]}</div>`)}}}catch(err){console.error("chap tap",err)}},true);

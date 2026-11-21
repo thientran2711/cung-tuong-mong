@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"084952a7+","t":"2026-11-21T05:40Z","c":"rv chapter-card-2: report","b":"fc4596d2b076","h":[{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"}]};
+window.CTM_BI={"s":"4771570e+","t":"2026-11-21T05:42Z","c":"chapter-card-3: kitSlide banner on Sắc phong, Tâm nguyện, Phụ tuyến (Đã qua already); whole Mệnh truyện sub-tab row one hero style","b":"40f051290616","h":[{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -52110,7 +52110,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   if(S.rank>=7)h+=kitEmpty("Ta là Hoàng hậu, không còn bậc để lên",["Đưa con mình lên ngôi để thành Hoàng thái hậu."],{topic:"Sắc phong"});
   else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`],{topic:"Sắc phong"});
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
-   h+=kitSlide("story-rank",[{kicker:"Điều kiện sắc phong",title:RANKS[S.rank+1].n,sub:`Đạt ${ok}/${R.length}`,img:kitInfoArt("sắc phong").src||art,
+   h+=kitSlide("story-rank",[{kicker:"Điều kiện sắc phong",title:RANKS[S.rank+1].n,sub:`Đạt ${ok}/${R.length}`,img:kitInfoArt("sắc phong").src||art,tap:"chapRankOpen",
     body:`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`}]);
    R.sort((a,b)=>a[0]-b[0]);/* KIT §51 (owner 11/15 17:27Z): the requirement list is ONE kit table (kitReqRows: label | ✓/✗ + numbers), unmet first */h+=kitReqRows(R)}}
  else{const R=[];
@@ -52224,7 +52224,7 @@ function chapChipHint(c){const t=(c.innerText||"").replace(/\s+/g," ").trim();co
  return null}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const go=t.closest("[data-chapgo]");if(go){e.stopPropagation();e.preventDefault();if(Q.length&&Q[0].kit&&Q[0].kit.chap){Q.shift();showModal()}tab="act";render();return}
  const pn=t.closest("#panel");if(!pn||t.closest("button,a,input,select,textarea,.kgl,.kpanec,.pcb,.ksub,.pctabs,.kpbar,.opts"))return;
- if(t.closest(".kskill[data-skill^='rank-']")||(tab==="story"&&t.closest(".ktop .kchip")&&pn.querySelector(".kskill[data-skill^='rank-']"))){const ch=t.closest(".ktop .kchip");
+ const RK=".kskill[data-skill^='rank-'],.kslide[data-ksk='story-rank']";if(t.closest(RK)||(tab==="story"&&t.closest(".ktop .kchip")&&pn.querySelector(RK))){const ch=t.closest(".ktop .kchip");
   const h=ch&&chapChipHint(ch);if(h){e.stopPropagation();kpPop(ch,`<div class="kpopt">${h[0]}</div><div class="kpopx">${h[1]}</div>`);return}if(!ch){e.stopPropagation();chapRankOpen()}return}
  if(tab==="story"&&(t.closest("[data-chap]")||t.closest(".kskill[data-skill^='story-']")||t.closest(".kchk")||t.closest(".ktop .kchip"))&&pn.querySelector(".kskill[data-skill^='story-'],.kslide[data-ksk='story-now']")){e.stopPropagation();chapOpen();return}
  if(tab==="q72"){const ch=t.closest(".ktop .kchip");const h=ch&&chapChipHint(ch);if(h){e.stopPropagation();kpPop(ch,`<div class="kpopt">${h[0]}</div><div class="kpopx">${h[1]}</div>`)}}}catch(err){console.error("chap tap",err)}},true);
@@ -57323,7 +57323,7 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Kiếp này 
  /* chapter-card (owner #28/#29): the six chapters are ONE SLIDE (kitSlide), not a list «Chương 1 … Chương 6» */
  const art0=typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):(typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"");
  const sl=RGC.map((ch,i)=>{const dn=ch.b.filter(id=>r.done[id]).length;const st=ch.b.length&&dn===ch.b.length?"done":i<c?"now":"next";
-  return{kicker:`${RGT} · Chương ${i+1}`,title:ch.t,sub:i<c||st==="done"?`Hồi ${dn}/${ch.b.length}`:"chưa tới",img:art0,
+  return{tap:"chapOpen",kicker:`${RGT} · Chương ${i+1}`,title:ch.t,sub:i<c||st==="done"?`Hồi ${dn}/${ch.b.length}`:"chưa tới",img:art0,
    body:kitChecks(ch.b.map((id,j)=>[!!r.done[id],`Hồi ${j+1}/${ch.b.length}${r.done[id]?"":i<c?" · đang tới":" · chưa tới"}`])),toc:[st,`Chương ${i+1} «${ch.t}»`,st==="done"?"đã xong":i<c?"đang tới":"chưa tới"]}});
  let h=kitSlide("story-rg",sl,{cur:Math.max(0,c-1)})+hd;
  if(rgSideNow()&&!W.out)h+=`<div class="kskacts pcb"><div class="kpanec">${pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())}</div></div>`;
@@ -57338,7 +57338,7 @@ function rgGoalHTML(){const L=rgL();const R=[];let n=0;
  for(const k in RGL){const l=L[k]||{st:0};const ok=rgLOk(k)||l.done;const who=k==="maid"&&S.maid?`${S.maid.name} (cung nữ thân tín)`:RGL[k].who;
   if(l.done)n++;const st=l.done?"đã thành tâm nguyện":ok?`bước ${Math.min(3,l.st+1)}/3: ${plain(String(T72I[RGL[k].q[Math.min(l.st,2)]].t).replace(/^Tâm nguyện [^:]*: /,"").replace(/\{A\}/g,who))}`:"người này không còn ở đây";
   const sub=`${RGL[k].g} · ${st}`;const A=ok&&!l.done?rgLA(k):null;R.push(`<div class="ktprow">${A&&typeof ktPerson==="function"?ktPerson(A,sub):`<div class="kpl"><span class="kplt"><b>${who}</b><small>${sub}</small></span></div>`}</div>`)}
- return kitSlide("story-rgl",[{kicker:"Phụ tuyến",title:"Tâm nguyện",sub:`Xong ${n}/${Object.keys(RGL).length}`,img:typeof kitInfoArt==="function"?(kitInfoArt("Tâm nguyện").src||""):"",
+ return kitSlide("story-rgl",[{tap:"chapOpen",kicker:"Phụ tuyến",title:"Tâm nguyện",sub:`Xong ${n}/${Object.keys(RGL).length}`,img:typeof kitInfoArt==="function"?(kitInfoArt("Tâm nguyện").src||""):"",
    body:rows67([["Tâm nguyện","mỗi người một tâm nguyện; giúp trọn ba việc nhờ thì tâm nguyện thành."],["Đã thành",`${n}/${Object.keys(RGL).length} tâm nguyện`,n?"g":""],["Còn lại",`${Object.keys(RGL).length-n} người đang chờ ngươi giúp`]])}])+
   `<div class="ktpeople">${R.join("")}</div>`}
 try{KIT_GLOSS["Tâm nguyện"]="Mỗi người có một tâm nguyện. Họ sẽ tự tìm đến nhờ ngươi từng việc (mục Việc nhờ). Giúp trọn ba việc thì tâm nguyện thành."}catch(e){}
@@ -78964,7 +78964,7 @@ function nhSlide(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=
  const R=[["Chương đã qua",e.c?`Chương ${e.c}${e.e?` — ${e.e}`:""}`:"chưa qua chương nào"],["Ngươi đã",did,s0>0?"g":"r"],
   e.hr!=null?["Kết quả",nhRes(s0,e.hr,he,"","chương ấy"),(s0>0)===(e.hr>0)?(s0>0?"g":"r"):""]:["Kết quả","chương ấy chưa tới hồi phân định"],
   e.f?["Trọn tuyến",`${he} đi trọn tuyến và nhớ công ngươi`,"g"]:null,e.sb?["Ghi hận",`${he} đã biết ngươi bán đứng`,"r"]:null];
- return {kicker:`Phụ tuyến · «${T}»`,title:e.nm,sub:`${Math.min(e.np||0,chs.length)}/${chs.length} chương · ${st}`,img,body:rows67(R),toc:[e.x?"done":"now",e.nm,st]}}
+ return {tap:"chapOpen",kicker:`Phụ tuyến · «${T}»`,title:e.nm,sub:`${Math.min(e.np||0,chs.length)}/${chs.length} chương · ${st}`,img,body:rows67(R),toc:[e.x?"done":"now",e.nm,st]}}
 function nhCard(e){return kitSlide("story-pt-"+(e.nm||""),[nhSlide(e)])}
 function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Ta chưa nhúng tay vào tuyến riêng của ai",["Khi ta can dự vào chuyện riêng của một người trong cung, tuyến của người ấy hiện ở đây."],{topic:"Phụ tuyến"});return kitSlide("story-pt",L.map(nhSlide),{tocTitle:"Mục lục tuyến"})}
 try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đã nhúng tay: giúp hay bán đứng ở chương nào, chương ấy ra sao. Người được giúp mà đi trọn tuyến thì nhớ công ngươi; kẻ bị bán đứng chỉ biết khi có người đem chuyện đến tai, biết rồi thì ghi hận."}catch(e){}
@@ -87977,7 +87977,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fc4596d2b076";window.CTM_BUILD=BUILD;
+const BUILD="40f051290616";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -94,7 +94,7 @@ function nhSlide(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=
  const R=[["Chương đã qua",e.c?`Chương ${e.c}${e.e?` — ${e.e}`:""}`:"chưa qua chương nào"],["Ngươi đã",did,s0>0?"g":"r"],
   e.hr!=null?["Kết quả",nhRes(s0,e.hr,he,"","chương ấy"),(s0>0)===(e.hr>0)?(s0>0?"g":"r"):""]:["Kết quả","chương ấy chưa tới hồi phân định"],
   e.f?["Trọn tuyến",`${he} đi trọn tuyến và nhớ công ngươi`,"g"]:null,e.sb?["Ghi hận",`${he} đã biết ngươi bán đứng`,"r"]:null];
- return {kicker:`Phụ tuyến · «${T}»`,title:e.nm,sub:`${Math.min(e.np||0,chs.length)}/${chs.length} chương · ${st}`,img,body:rows67(R),toc:[e.x?"done":"now",e.nm,st]}}
+ return {tap:"chapOpen",kicker:`Phụ tuyến · «${T}»`,title:e.nm,sub:`${Math.min(e.np||0,chs.length)}/${chs.length} chương · ${st}`,img,body:rows67(R),toc:[e.x?"done":"now",e.nm,st]}}
 function nhCard(e){return kitSlide("story-pt-"+(e.nm||""),[nhSlide(e)])}
 function nhPaneHTML(){const L=nhList();if(!L.length)return kitEmpty("Ta chưa nhúng tay vào tuyến riêng của ai",["Khi ta can dự vào chuyện riêng của một người trong cung, tuyến của người ấy hiện ở đây."],{topic:"Phụ tuyến"});return kitSlide("story-pt",L.map(nhSlide),{tocTitle:"Mục lục tuyến"})}
 try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đã nhúng tay: giúp hay bán đứng ở chương nào, chương ấy ra sao. Người được giúp mà đi trọn tuyến thì nhớ công ngươi; kẻ bị bán đứng chỉ biết khi có người đem chuyện đến tai, biết rồi thì ghi hận."}catch(e){}

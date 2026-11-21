@@ -27,7 +27,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
   await reset()}
  /* rank + Việc nhờ chips */
  await reset();await p.evaluate(()=>{tab='story';render();document.querySelector('#panel [data-ktsv="rank"]').click()});await p.waitForTimeout(250);
- await p.click('#panel .kskill .ksart');await p.waitForTimeout(400);chk('rank picture -> Sắc phong panel',await p.evaluate(()=>/Sắc phong/.test((document.querySelector('#modal .kptitle')||{}).innerText||'')&&!document.getElementById('modal').hidden));
+ await p.click('#panel .kslide .ksls:not([hidden]) .ksart');await p.waitForTimeout(400);chk('rank picture -> Sắc phong panel',await p.evaluate(()=>/Sắc phong/.test((document.querySelector('#modal .kptitle')||{}).innerText||'')&&!document.getElementById('modal').hidden));
  await reset();await p.evaluate(()=>{tab='q72';render()});await p.waitForTimeout(250);await p.click('#panel .ktop .kchip');await p.waitForTimeout(300);chk('Việc nhờ counter chip -> explanation popup',await p.evaluate(()=>!!document.getElementById('kpop')&&document.getElementById('kpop').innerText.length>15));
  chk('no page errors',!errs.length);
  console.log(res.map(x=>(x[1]?'ok   ':'FAIL ')+x[0]).join('\n'));if(errs.length)console.log('ERRS',errs);await b.close();process.exit(res.every(x=>x[1])?0:1)})().catch(e=>{console.error(e);process.exit(2)});
