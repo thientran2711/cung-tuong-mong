@@ -39,3 +39,9 @@ Tried and FAILED gates (not used): cutting ", never stiff, flat or board-like" (
 
 ## Final
 CHECK1 job 21: all 8 PASS (t4 COMOIk, t5 COMOIj, t6 COMOIl re-checked PASS 02:40Z). Commits 31af161d3, ca9ed759c, 8a9caf947. 0 gens. Done; nothing open for DESIGN22 beyond the owner questions above.
+
+## Job 2 — owner L1656 (Foreman C #17, drafts 9ZHSjoTNYZ / mEZp0UIhJQ)
+- t5 COMOIj: "a broad gold flowered brocade girdle" → "a blush flowered brocade girdle" (Phi's own secondary colour; no "broad", no "gold").
+- t4 COMOIk + t5 COMOIj: master " Everyone beautiful at every age." RESTORED. To fit, my own G52 add shortened on t4/t5 only: ", never over the edge, cuff or hem bands" → ", never over the bands". Capelet text untouched.
+- t6 COMOIl / t7 v8k / t8 v10i: NO gold girdle wording there; their sash is "yellow flowered brocade" inside the royal-yellow colour list (t6+ rank yellow). t7/t8 "jade-and-gold belt (pendants)" = jade pendant belts. Left unchanged; ask owner if the yellow sash should change too.
+- t4 9993, t5 10000 · check_store PASS · keep --all 345 PASS · 0 gens.
