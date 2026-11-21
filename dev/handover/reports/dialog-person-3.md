@@ -1,6 +1,7 @@
 # dialog-person-3 — report (sonnet worker for Foreman B ROOT-5; owner mark #73 + eye checks)
 PRIORITY #1 CHECK: OD 21/11 05:07Z (#73 verbatim: "left figure has a big round portrait medallion beside it … remove too") | main 666def0c: r86 NOT in main, merged here | review/mood-seal: picture-corner mark (§28.19b, X.mk) already in main, reused | CLAIMS: #76 stays with kit-dialog-2, not touched.
 START_CTX ~8%.
+Tests: dialog-person-scan PASS Fold+iPad (526/441 frames); quickcheck PASS (1st run perf noise, 2nd PASS 192 s); coop-e2e 92/92 (the r86 2 FAILs are gone); old save ok.
 ## Branch
 review/dialog-person-3 = review/dialog-person-r86 2b8b3efd + merge of main 666def0c (conflict only jksize.js: kept r86 subject rule + main's `mk` mark) + fixes below.
 ## Fixes
