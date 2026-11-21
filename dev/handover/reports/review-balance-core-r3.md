@@ -143,3 +143,54 @@ per origin: HH / lives · died<3y · avg max rank
 - Bot data and tools stay in the container (/home/user/wt/rv-bot): run.sh, indt.js, agg.py, table.py.
 - To repeat: `run.sh <main|br> <seed> 30 <capSec>`, then `python3 table.py`.
 - Seeds used: main 21–25, branch 21–25. The branch arm stopped at 34 lives, main at 30.
+
+## Knob sample (21/11, for D #12 → D #13 → D #14; session GMDXZAV9)
+
+Bot: the studying life bot from chain #5 (runb.js sens + inpage6/inbc/instudy + the indt.js Danh tracer, now also recording losses in m0–36). HHSTOP=1, CAP=5400 s, seeds 21+.
+
+### Bases
+- balance-core-r3 8939c663 is TAINTED. Its jbal2 reverts LIVE: the cal-p2b mgPace windows, banh.reach, mua.dark, blend and kG.huong; `BAL.orig.id` (cal-p2c identity offset, so jmgid runs with on:0); and `BAL.invite.wait`. Chain #7 later counted 84 keys/fns and 26 values lost.
+- «rst» = 8939c663 with those LIVE hunks put back (no knob). «ed977bf4» = night-final-r3-coop after chain #7's re-port onto LIVE 8c8b8b6b.
+- rst and ed977bf4 give the same picture, so the revert is NOT the cause of the HH drop.
+
+### Table
+| arm (base) | lives | HH | first bậc 3 (art bậc max m0/12/24/36) | avg max rank | Danh m0/12/24/36 | died < 3 y |
+|---|---|---|---|---|---|---|
+| main LIVE 983a9436 (chain #5) | 40 | 35 % | m6 | 5.30 | 21/47/66/75 | 6/40 |
+| branch balance-core-r3 (chain #5) | 30 | 17 % | m21 | 3.77 | 19/11/9/11 | 4/30 |
+| main LIVE 8c8b8b6b (this sample) | 11 | 4/11 = 36 % | 2/4/5/5 | 5.00 | 18/51/84/85 | 2/11 |
+| rst (8939c663 + LIVE hunks) | 33 | 1/33 = 3 % | 2/2/3/3 | 3.73 | 19/11/17/20 | 7/33 |
+| ed977bf4, no knob | 10 | 1/10 = 10 % | 2/2/3/3 | 4.00 | 11/8/12/16 | 1/10 |
+| K1 (Phi 36 / QP 45 / HQP 55 / HH 63; tainted base, stopped early) | 12 | 1/12 = 8 % | 2/2/3/3 | 3.92 | 20/10/8/13 | 2/12 |
+| K2 (deck vu/cam/ky lv 3→2; tainted base, stopped early) | 7 | 1/7 = 14 % | 2/2/2/2 | 3.57 | 16/11/9/16 | 0/7 |
+| FIX = K2 + "sac" out of BAL.grow.keys (ed977bf4) | 11 | 0/11 = 0 % | 2/2/2/3 | 2.91 | 22/26/30/18 | 2/11 |
+
+§7 learning times are untouched in every arm: BAL.art.gain and tier are not edited, and the art bậc rows match ed977bf4.
+
+### Danh income diff, m0–36 per life (gain / loss / NET)
+| source | LIVE 8c8b8b6b | ed977bf4 | FIX |
+|---|---|---|---|
+| TOTAL | +620 / −567 / **+53** | +588 / −589 / **−1** | +536 / −537 / **−1** |
+| talk Nhún nhường (bot spends Danh) | −134 | −138 | −163 |
+| nextBuoi → stayRoll (caught after closing, BAL.sneak.danh) | −85 | −87 | −81 |
+| card Múa trong yến tiệc | +114 | +55 | +71 |
+| card Phát bạc cứu giúp | +87 | +91 | +93 |
+| card Đánh cờ (deck ky, lv 3) | +41 | +13 | +31 |
+| card Kinh hồng vũ (deck vu, lv 3) | +25 | 0 | +7 |
+| bậc-up Danh (BAL.art.danh 3/5, ctx "-") | +23 | +14 | – |
+
+The changes that cut income on balance-core:
+- **(a) Múa:** BAL.ag.par3.dance odds = o + Sắc/sacD + artOE(vu). At equal bậc, artOE equals the old vu×4. The loss is Sắc: 64 vs 92 at m36. Sắc is held back by BAL.grow (jbal2.js:540, keys sac/tai/tamco, ×.25 above 60) and by BAL.art.stUp 2→1.
+- **(b) bậc-3 cards:** BAL.deck lv:3 (jbal2.js:810–812) on the slower §7 ladder opens them around m21 instead of m6.
+- **(c) bậc-up Danh:** later bậc means later Danh.
+
+Other gaps, not Danh: start Tài 60 on LIVE vs 25–32 (BAL.start / one start-art table f219377e1), and Tài m36 96 vs 45.
+
+### Verdict and recommendation
+- No sampled knob reaches HH ~32 % while keeping §7 times. K1 lowers gates that Danh never reaches. K2 and the FIX raise card and Múa income by about +40 net, but the bot's own Danh sinks grow by the same amount (Nhún nhường −25, endTurn −25), so net Danh stays at ≈ 0. Ranks stay at 1–2, and rank in turn gates the Danh events.
+- I do NOT recommend landing any of K1 / K2 / FIX.
+- The gap is wider than one BAL key: Tài (start and curve), Sắc (curve and stUp) and the art ladder each feed odds. Next probe, if MAIN wants it: one arm with LIVE's start Tài (BAL.start tai) plus stUp 2, §7-neutral, 10 lives. Or MAIN accepts a lower HH reach for a studying player, given that §7 is an owner rule.
+- Caveat: n = 10–12 per new arm, so ±15 %. The direction is clear, since no new arm got near main's Danh 85.
+
+### Handover (knob sample)
+Data and tools stay in the container at /home/user/wt/rv-bot: outk/, runk.sh, sup2.sh `<arm> <N>`, tablek.py (env ARMS, OUT), net36.py, s36.py, indt.js (records l36). Arm worktrees: /home/user/wt/{rst,nf,rmain,kk} (kk = FIX). No knob branch was pushed.
