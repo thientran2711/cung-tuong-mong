@@ -42,3 +42,15 @@ Same change in all three (rank parts, pose, item, angle, fabric, embroidery ladd
 - Collar bands "along each edge of the V" → "along the collar edges". Captions: "… Khúc cư một vòng / một vòng rưỡi / hai vòng, cổ giao lĩnh kín".
 - Boilerplate trims (allow lines): COLLAR CUT sentence (dup of OUTER_IN, t1/t2), long eye sentence → short (t1/t2), t3 "none at the ears" + "a small sweet closed-lip smile, eyes fully open, never a stretched grin" (dup of S18/master).
 Gates: check_store tp1/tp2/tp3 a22 STORE CHECK PASS ×3; keep_check --sidecar PASS ×3; --all 408 PASS. t7/t8 untouched.
+
+# HAN2 job 3 — HH fix after test A (Foreman C #20, L1725/L1726). 0 gens.
+File: seasons4/s62_t8_HAN_BAC_hhfix_L1725.txt (+ .keep, base = hqptest_L1725 = HQP open5 byte-for-byte, drew 3zKOxwbREY). 9877 chars.
+Only 6 word changes (risk for bell/vạt in brackets):
+1. "Outfit (rank-7 imperial noble consort (Hoàng quý phi),)" → "Outfit (the Empress (Hoàng hậu),)" [low: label only].
+2. "a near-empress Han ceremonial look" → "the Empress's Han ceremonial look" [low; "Empress" may pull a grander/stiffer robe — watch].
+3. Crown: "LARGE ornate gold phoenix crown (one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown)" → "LARGE ornate gold nine-phoenix crown (one large central gold phoenix with spreading wings and eight small phoenixes around it, the grandest headdress of all ranks)" [low: head only; pearl strands, kingfisher-blue inlay, gold tassels kept].
+4. "HOÀNG QUÝ PHI LUXURY" → "EMPRESS LUXURY" [low].
+5. "; still clearly simpler and less golden than the Empress" removed [low; contradicts HH].
+6. Item: "a gold flower basket set with gems" → "a gold lidded jewel casket with a phoenix and pearls" [low-medium: casket held low at side like the basket, same pose words].
+NOT changed on purpose (no new shape words): colours stay HQP (plum main #DF9ED9, blush pink inner, yellow parts as HQP amounts), robe phoenix count/size, vân kiên (still "LONGER fringe than the Quý phi's"), fringe, no anti-blanket words, no restored store tails. If the owner wants HH colours (peach-blossom pink/ivory, yellow main) add them one at a time — yellow-as-MAIN of quju+sleeves is my top suspect for the bell/vạt, then LARGE phoenix, then 'firmer' one-tier vân kiên.
+Gates: keep_check --sidecar PASS, --all PASS. check_store: S19/S24/S34 FAIL = same trimmed tails as hqptest/open5 (hqptest also had them; you drew it) — not restored per "no new words".
