@@ -24,6 +24,7 @@ const probe=()=>{const B=BAL.mgTier,o={};o.aim=String(kg82Aim);o.kind=JSON.strin
  ok(/mgLev\(env,"dauho","pull"\)/.test(n.fl)&&/K=5\.4\*PULL/.test(n.fl)&&/MAXD=U\*\.45\/PULL/.test(n.fl),'2 k91Fling reads the pull knob; strongest throw K·MAXD kept');
  const e0=n.ev[0],e5=n.ev[5],e3=n.ev[3.2];ok(e0.aid<e3.aid&&e3.aid<e5.aid&&e0.mouth<e3.mouth&&e3.mouth<e5.mouth&&e0.pull>e3.pull&&e3.pull>e5.pull,'3 law 5: harder board = shorter dots, smaller mouth, more sensitive pull',n.ev);
  ok(o.ev[3.2].aid<=e3.aid&&o.ev[3.2].mouth<=e3.mouth,'3 the matching board is not harder than the base build (cal-p2 owner bug: 1.1/10)',{before:o.ev[3.2],after:e3});
- ok(!n.calDh&&JSON.parse(n.band).m===JSON.parse(n.bandDef).m,'4 no cal.k.dauho; dauho NPC curve = the adult curve (BAL.ag.mg2.hand ctr)',{band:n.band,def:n.bandDef});
+ /* her post-fix re-test dauho 9.7 was applied on main (f15146ea, mgcal batch); the NPC curve stays the adult curve either way (her b only places her on it) */
+ ok(JSON.parse(n.band).m===JSON.parse(n.bandDef).m,'4 dauho NPC curve = the adult curve (BAL.ag.mg2.hand ctr), whatever her cal.k.dauho',{band:n.band,def:n.bandDef,calDh:n.calDh});
  ok(!n.errs.length,'5 no page errors',n.errs.slice(0,3));
  await b.close();fs.unlinkSync(bf);const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})();
