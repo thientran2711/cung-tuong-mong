@@ -101,8 +101,8 @@ function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U
   const ang=Math.PI/2+A.lean*cl((x-hx)/rx,-1,1),s=A.sink*len;g.save();g.beginPath();g.rect(0,0,W,hy);g.ellipse(hx,hy,rx,ry,0,0,Math.PI*2);g.clip();arrow(g,x+Math.cos(ang)*s,hy+Math.sin(ang)*s,ang,len);g.restore()}
  const stop=k91Loop(now=>{kg82Bg(g,W,H,"dauho",0,.75);pot(g);
   landed.forEach(a=>stuck(g,a));
-  /* wind */const wl=Math.abs(wd)/(H*.55);g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,wl<.05?"·":"~",10,10);
-  if(wl>=.05){const ax=10,ay=34,L=20+40*wl;g.strokeStyle="#6b5643";g.lineWidth=2;g.beginPath();g.moveTo(ax+(wd<0?L:0),ay);g.lineTo(ax+(wd<0?0:L),ay);g.stroke();const hx=ax+(wd<0?0:L),s=wd<0?1:-1;g.beginPath();g.moveTo(hx,ay);g.lineTo(hx+6*s,ay-4);g.lineTo(hx+6*s,ay+4);g.fill()}
+  /* wind */const wl=Math.abs(wd)/(H*.55);g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";const WB=A.wind;/* owner 21/11 (verbatim): "hồi trước nó còn có cái dòng chữ hướng gió á ... những cái hướng dẫn cần chữ thì vẫn phải có chứ" — the wind word line is back (mg-noword-a had cut it) */kg82Lbl(g,wl<WB[0]?"Gió lặng":`Gió ${wd<0?"ngược":"xuôi"} ${wl<WB[1]?"nhẹ":wl<WB[2]?"vừa":"mạnh"}`,10,10);
+  if(wl>=WB[0]){const ax=10,ay=34,L=20+40*wl;g.strokeStyle="#6b5643";g.lineWidth=2;g.beginPath();g.moveTo(ax+(wd<0?L:0),ay);g.lineTo(ax+(wd<0?0:L),ay);g.stroke();const hx=ax+(wd<0?0:L),s=wd<0?1:-1;g.beginPath();g.moveTo(hx,ay);g.lineTo(hx+6*s,ay-4);g.lineTo(hx+6*s,ay+4);g.fill()}
   if(phase==="aim"){let vx=0,vy=0;if(aim){[vx,vy]=vOf(aim.ax,aim.ay,aim.cx,aim.cy)}const ang=aim?Math.atan2(vy,vx):-Math.PI/4;arrow(g,X0,Y0,ang,U*.12);
    if(aim&&Math.hypot(vx,vy)>40){const T=AIDT;g.fillStyle="#8a2a1e";sim(vx,vy,(x,y,t)=>{if(t>T)return false;if(Math.round(t*120)%5===0){g.beginPath();g.arc(x,y,2.2,0,Math.PI*2);g.fill()}});
     g.strokeStyle="#8a735088";g.setLineDash([3,4]);g.beginPath();g.moveTo(aim.ax,aim.ay);g.lineTo(aim.cx,aim.cy);g.stroke();g.setLineDash([])}

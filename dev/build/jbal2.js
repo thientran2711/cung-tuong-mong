@@ -285,12 +285,13 @@ BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07
    mgArt = the painted target art measured ON THE PICTURE (shares of its width; dev/handover/reports/dauho-lv5.md §2):
      dauho (mg-dauho-pot.webp 290x560): mouth opening centre cy below the picture top, half-width rx / half-height ry; rim = outer lip half-width (an arrow
        there bounces = miss); neck = [y below the top, half-width] points of the painted neck (lip → ears; an arrow striking it = miss); ear tubes: centre ±dx from the picture centre, cy below the top, opening half-width rx / ry; q = {c: share of R that is
-       «Trúng giữa bình», m: [centre, rest of the mouth], ear}; lean = the most a stuck arrow tilts (rad), sink = share of the arrow sunk below the hole plane.
+       «Trúng giữa bình», m: [centre, rest of the mouth], ear}; lean = the most a stuck arrow tilts (rad), sink = share of the arrow sunk below the hole plane;
+       wind = share of the strongest gust where the wind word line turns «nhẹ» / «vừa» / «mạnh» (below wind[0] = «Gió lặng»; owner 21/11 wants the wind words back).
      ban (mg-ban-target.webp 470x560): face centre at cy of the picture height; ring = outer radius of gold / red / blue / black / paper (share of the
        picture width); q = the score of an arrow inside each ring (outside the paper = Trượt); fit = picture width at size 1 as a share of the board height
        (the largest the 0.58·H stand line lets it be). Board size by ease = BAL.mgTier.lev.ban.size. */
 BAL.mgTier.base={dauho:{r:5,lo:0,n:8}};
-BAL.mgArt={dauho:{mouth:{cy:.0414,rx:.2207,ry:.0224},rim:.2776,neck:[[.069,.276],[.152,.2],[.345,.165],[.455,.162]],ear:{dx:.329,cy:.431,rx:.0655,ry:.019},q:{c:.5,m:[1,.7],ear:.5},lean:.15,sink:.3},
+BAL.mgArt={dauho:{mouth:{cy:.0414,rx:.2207,ry:.0224},rim:.2776,neck:[[.069,.276],[.152,.2],[.345,.165],[.455,.162]],ear:{dx:.329,cy:.431,rx:.0655,ry:.019},q:{c:.5,m:[1,.7],ear:.5},lean:.15,sink:.3,wind:[.05,.35,.7]},
  ban:{cy:.4275,ring:[.072,.159,.247,.336,.438],q:[1,.75,.5,.25,.25],fit:.6}};
 /* mg-play2 (owner OD 20/11 ~08:05Z Hoa đăng «luồng ánh sáng màu vàng này quá nhạt … không có thấy đường» + «cứ tưởng là phải hứng mấy cái hoa sen»): two more
    parts of the SAME cue kit (j82 kg82FxLane / kg82FxBad), for every board that has a path to follow or a thing to AVOID:

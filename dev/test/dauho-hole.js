@@ -38,7 +38,7 @@ const DEV=[['Fold',755,1000],['iPad',1180,820]];
   ok(geo.top===0,`${dn} A1 nothing painted above the vase top`);
   ok(Math.abs(geo.earL-(geo.px-geo.ex))<=geo.Ws*.03&&Math.abs(geo.earR-(geo.px+geo.ex))<=geo.Ws*.03,`${dn} A1 painted ear tubes centred where the judge's ear holes are`,{earL:geo.earL,earR:geo.earR,want:[+(geo.px-geo.ex).toFixed(1),+(geo.px+geo.ex).toFixed(1)]});
   /* a throw that crosses a given row at a given x (wind 0): fixed angle, bisect the speed (same 1/120 s steps as the flight) */
-  const throwAt=async(d,row)=>p.evaluate(async([d,row])=>{const G=KG82.flingGeo();G.setWind(0);const Y=row==="ear"?G.ey:G.MY,xt=G.px+d;
+  const throwAt=async(d,row)=>p.evaluate(async([d,row])=>{let G=KG82.flingGeo();G.setWind(0);G.setPx(G.W*.7);G=KG82.flingGeo();/* fixed vase spot: the test is about the holes, not the random place */const Y=row==="ear"?G.ey:G.MY,xt=G.px+d;
    const cross=v=>{const a=Math.PI*52/180;let vx=v*Math.cos(a),vy=-v*Math.sin(a),x=G.X0,y=G.Y0;const h=1/120;for(let i=0;i<2000;i++){const py=y;vy+=G.GR*h;x+=vx*h;y+=vy*h;if(py<Y&&y>=Y)return x;if(y>G.H*3)return -1e9}return -1e9};
    let lo=50,hi=6000;for(let i=0;i<60;i++){const m=(lo+hi)/2;if(cross(m)<xt)lo=m;else hi=m}const v=(lo+hi)/2,a=Math.PI*52/180;
    const n0=G.landed().length;window.__fl=null;KG82.flingLast=null;G.shoot(v*Math.cos(a),-v*Math.sin(a));
