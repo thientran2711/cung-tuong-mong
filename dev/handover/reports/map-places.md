@@ -42,3 +42,41 @@ PRIORITY #1 CHECK: report + brief carry it; nvp drop verified (jact.js:90-97 liv
 - Looked at: map + nth + pd stage on both devices (birth modals from the harness cover part of the frame; labels «Ngự thiện phòng» / «Phật đường» and keepers visible, stand-in pictures read correctly).
 - Not run: quickcheck.sh (absent on LIVE), co-op suites (nothing touched).
 Landing: ff main to 7c2aaa08c only if main has not moved; else coordinator re-merges (built files will conflict again — rebuild).
+
+## MEM FIX r2 — worker session_01N1tNP2WuK5mpdfoK3vLBAr (opus), 21/11 — SẴN SÀNG KIỂM d4c723d4 (branch review/map-places-r2-land)
+PRIORITY #1 CHECK ('map-places memory OOM consort role-parity'): OD 0 | ledger 0 | claims 0 (own row) | main 0 | review/* 0 | archive 0 (brief line; re-checked: no other worker on role-parity memory).
+START_CTX ~5 % (estimate).
+
+### Cause (measured, renderer RSS from /proc per role; same box 15 GB)
+- NOT a game leak. Real play = one tap = one task: 800 goTo+render as separate tasks → renderer ~440 MB, JS heap ~40 MB, **LIVE b1033eb0 = branch 3217d3b7** (same numbers). nth/pd add nothing per goTo.
+- SCAN artifact: role-parity-scan.js ran the whole consort phase (8 player roles × 24 world variants × every place goTo + render, ~1700 goTo) in ONE `page.evaluate` = one synchronous task. Each goTo+render queues ~150 deferred UI timers (renderStage/lay2/showModal/kitFrameApplyLive3/kmmSched/kfsSched layout passes); inside one task they never run, so the detached stage DOM they close over is never freed (Blink DOM nodes counter 41 k when tasks are split vs 897 k in one task for the same 840 goTo; 3.2 GB vs 0.49 GB).
+- LIVE b1033eb0 consort phase: +~1.2 GB per role, peak **12.5 GB**; the branch has 21 places instead of 19 (+10 % goTo) → 13.7 GB = memcg OOM. Matches LANDER #2b (LIVE "just fits", browser-per-phase does not help: the phase itself is the one task).
+- Tried and rejected: yielding inside the evaluate with the game's timers suppressed (memory still not freed: the cleanups ARE those timers); letting timers run mid-scan (they could move the world between variants).
+
+### Fix (test-only, B owns the scan) — commit e3b3f02c
+- `dev/tools/role-parity-scan.js`: each consort player role runs in its own fresh page (world set-up + seeded start + NPC part repeated per page, results merged as a union; error lines de-duplicated). The maid phase is unchanged (one page; maid/up/t1me depend on each other).
+- Effect: every role is probed from the SAME seeded world, independent of role order (before, a later role saw the world the earlier roles left).
+- Rows vs the old scan on LIVE b1033eb0: 0 new gaps; 2 old gaps gone = hh N-ONLY cx2:chest + cx4:rougeSteal (the same state-carry artifact main already worked around in 56ff0db0 with the chest-direct probe); a few NUM/EXEMPT cells gained on t3–t7 (more player rows found, none lost as a gap).
+
+| renderer RSS peak | consort phase | maid phase | verdict |
+|---|---|---|---|
+| LIVE b1033eb0, old scan | 12.5 GB | 6.2 GB | fits barely |
+| branch 3217d3b7, old scan (LANDER #2b) | OOM 13.7 GB | — | crash |
+| LIVE b1033eb0, new scan | ≤ 4.6 GB | 5.0 GB | ALL PASS-equivalent rows |
+| branch 3217d3b7, new scan | 4.6 GB | ≤ 6.9 GB (a co-op test ran in parallel; RSS sum of all renderers) | fits, ~2× margin |
+Run time unchanged (~10–11 min).
+
+### Branch
+- e3b3f02c scan fix · 2fb20b7d merge LIVE **56ff0db0** (conflicts index.html/sw.js only → rebuilt with build_site.sh) · d4c723d4 test `dev/test/coop-places.js` (test-only; game build = 2fb20b7d).
+- Game code diff vs LIVE = the r1 PASS diff only (jplx.js nth/pd, jact.js glyphs). No BAL, save, co-op or time code.
+
+### Gates on d4c723d4 (this box)
+- quickcheck `--runs 7` PASS: core gates, time-spill, old save ok, perf median new/live render 254/245 ms, tab 434/405, buổi 1122/1081 ms, tasks>200 ms 18/18.
+- undef-scan PASS (257 names). role-parity.test.js ALL PASS (new scan). coop-e2e PASS 92/92.
+- CO-OP GATE (new) `node dev/test/coop-places.js <worker> 9 0` 18/18 (host-first, host Fold / guest iPad) and `… 9 1` 18/18 (SWAP: devices swapped, guest walks first): both seats walk to nth and pd (guest = intent F2 goTo run on the host in her context), meet the keeper, host's copy of her = her phone (place + people), her walk never moves the host's own place/visit/khắc/buổi, Dư đồ count same on both seats, Đáp ứng refused at nth on both seats with the same reason, 0 page errors.
+- Shots (kit stage, no private part), looked at: CDN `img/_review/map-places-r2/` clean-fold-nth.jpg, clean-fold-pd.jpg, clean-ipad-nth.jpg, clean-ipad-pd.jpg (755x1000@2, 1180x820@2; no horizontal overflow, 0 page errors). Keepers show the kit's grey stand-in figure (no portrait yet; ART REQUEST of r1 stands).
+
+### Notes for the reviewer / B (not fixed here, outside the job)
+- Pre-existing co-op asymmetry, same on the OLD place tgk (control run `PLACES=tgk`): when both stand in one place, the host's visit list gains her name but her phone's visit list does not list the host. Not from map-places; for the co-op lane.
+- The maid phase still runs as one task (peak 5–7 GB); if more servant places come, split it the same way.
+SẴN SÀNG KIỂM map-places-r2 d4c723d4 (BIG: core-loop memory + test harness).

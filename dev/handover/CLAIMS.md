@@ -647,7 +647,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | calendar (sonnet; OWNER mark #42 21/11 ~03:43Z: Lịch tháng = phone-calendar month view) | review/calendar; briefs/main86-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:10Z |
 | dialog-stack (sonnet; OWNER mark #46 21/11 ~03:52Z: never two dialogs overlapping) | review/dialog-stack; briefs/main86-dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:10Z |
 | calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | SẴN SÀNG KIỂM 40d20ee1 (quickcheck PASS, coop 92/92) | 21/11 |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | SẴN SÀNG KIỂM d4c723d4 (reports/map-places.md MEM FIX r2) | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED (rv PASS 0d60ae54, LIVE with tap-word) | 21/11 |
 | kit-dialog (sonnet; OWNER marks #44 seal, #47 figure size, #49 option card/fixed dialog — split from keeper) | review/kit-dialog; briefs/main86-kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:15Z |
@@ -680,7 +680,7 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | mgcraft-theu (opus; owner 21/11 ~01:05Z keep Thêu «Nhớ mẫu thêu», stitch board → Công «Thêu theo nét»; brief briefs/b-mgcraft-theu.md) | review/mg-craft-r2-land | B | session_01N1tNP3uti359quj6nveReC | READY e4e0241b (contains LIVE 56ff0db0; report reports/mg-craft.md «owner 01:05Z theu») |
 jagday-walk-rv stale re-merge | review/jagday-walk-rv | session_01964izGLLhhhTBcSZM9UCJ2 | RUNNING | 21/11 04:04Z (D #13; succeeds GHdj1g2L)
 | calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | SẴN SÀNG KIỂM d4c723d4 (reports/map-places.md MEM FIX r2) | 21/11 03:14Z |
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED bd03747e (rv PASS 0266713d) | 21/11 |
@@ -705,7 +705,7 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | mgcraft-theu (opus; owner 21/11 ~01:05Z keep Thêu «Nhớ mẫu thêu», stitch board → Công «Thêu theo nét»; brief briefs/b-mgcraft-theu.md) | review/mg-craft-r2-land | B | session_01N1tNP3uti359quj6nveReC | READY e4e0241b (contains LIVE 56ff0db0; report reports/mg-craft.md «owner 01:05Z theu») |
 jagday-walk-rv stale re-merge | review/jagday-walk-rv | session_01964izGLLhhhTBcSZM9UCJ2 | RUNNING | 21/11 04:04Z (D #13; succeeds GHdj1g2L)
 | calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
-| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | SẴN SÀNG KIỂM d4c723d4 (reports/map-places.md MEM FIX r2) | 21/11 03:14Z |
 econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
 kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED bd03747e (rv PASS 0266713d) | 21/11 |
