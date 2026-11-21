@@ -75,3 +75,18 @@ TESTS (all ALL OK at a202c325): node dev/test/duodo-focus-data.js · duodo-focus
 SHOT SCRIPT: /home/user/wt/df-shots/shots.js <fold|ipadAir> (scratch, not in git; 8 shots: place, focus, group, play, react, say, choices, dodge). Looked at Fold + iPad once: flow works; kit-side faults sent to keeper 09:25Z: (1) skip slot «Làm luôn» overlaps ◂ (I inject kitQuick into .kfoc-hud — replace when keeper adds play({skip})), (2) F.setGroups missing (emulated in dfSetGroups), (3) grey backdrop for stranger silhouettes + on iPad, (4) Fold fan text clipped.
 TODO for the successor: (a) wait keeper fixes → re-merge review/kit-focus, drop the dfskip injection if play({skip}) lands; (b) shots Fold + iPad LOOKED 3×; (c) REAL mp4 screen recording both devices (Playwright recordVideo, KIT_FOC.motion=true): open focus → walk-in, group switch, a swipe game (Tát / Hắt nước on a lower-rank NAMED consort), reaction, ✕ walk-back, NPC encounter with say box + Né dodge; upload to CDN img/_review/duodo-focus/ (python3 dev/site/cdn_sync.py); (d) COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-e2e.js <out>; (e) quickcheck; (f) commit build (index.html, sw.js), push, report «SẴN SÀNG KIỂM <sha>» to MAIN 92.
 ART: df-hand / df-props / df-npc-hand ordered by MAIN 90 in FOREMAN_C_STATUS; when on the CDN set BAL.df.art=1 and draw the sprites in jdfg (swipe hand / dodge NPC hand / drag token).
+
+## STATUS 21/11 ~10:50Z — worker #2 session_01Rc5AsLtG4rLx87Rv3pd1ej (depth 4, START_CTX ~4 %)
+PRIORITY #1 CHECK: handover §21/11 09:30Z | review/kit-focus d3f02bcc (keeper #2 session_01Rc5AsMF9SLrWM4NQM9zGGz) | main ce99b707 | claims: this worker.
+DONE
+- Merged review/kit-focus r2 (d3f02bcc): own «Làm luôn» injection DROPPED → `F.play({skip:{n,sub,onSkip},onBack})`; `F.setGroups` (no emulation).
+- Fixes found while looking (all with a test that FAILS before / passes after):
+  1. one-pane card (stranger) gave a NAMELESS head tab «4/6» + a twin «Giao thiệp» → group takes the kit category name (dfCatName); data test: no nameless / twin group.
+  2. focus plate read «Người lạ» for everyone: jfocus calls j59tagHTML / j59col / j59fac by name but j59.js kept them inside its IIFE → exported them (also fixes fac() = 1 for men / kids); o.p = the STAGE person (curPeople()[i]) not .ref. View test (1b): plate = stage tag. Told keeper #2 to put the same export line on review/kit-focus.
+  3. raw HTML in fan text («Tốn 2 khắc · <span class="r">Đức…» on Hắt nước / Hắt trà / Quạt mực): fmt / whyTime / choice x give HTML, the kit escapes → dfTxt; data test: no markup in n / word / ton / why.
+  4. an NPC card playing in the scene: a repeated showModal / render raised the centre modal over the say box → DF.encM guard; view test (5a) repeats showModal.
+  5. words game took the FIRST sign within reach, not the nearest (tap on a good sign overlapping a wrong one = −2) → nearest; games test strokes / taps run in-page (no round-trip timing flake); 6/6 runs ALL OK.
+- Tests: duodo-focus-data / -games / -view ALL OK; kit-focus.js PASS 755x1000 + 1180x820; quickcheck PASS (at 4f759a76; re-run on the final sha below).
+- Shots Fold 755x1000 + iPad 1180x820 LOOKED 3× (place, focus, group, play + kit skip, react, say, choices, dodge, after). REAL mp4 (Playwright recordVideo, KIT_FOC.motion=true, boot trimmed, frames looked at: walk-in visible):
+  CDN img/_review/duodo-focus/ → duodo-focus-fold.mp4, duodo-focus-ipadAir.mp4, fold-sheet.webp, ipadAir-sheet.webp (wipe with the verdict).
+- Shot/video script: /home/user/wt/df-shots/shots.js <fold|ipadAir> [video] (scratch, not in git).
