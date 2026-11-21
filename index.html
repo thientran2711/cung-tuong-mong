@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"278c461b+","t":"2026-11-21T11:56Z","c":"mg-intro-2-land: report","b":"476dc04a5eb1","h":[{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"}]};
+window.CTM_BI={"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)","b":"b6df9504f36e","h":[{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6202,11 +6202,6 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* say = the cuts of the office holder's greeting pool (jstaff): tn = Thái hậu thiện cảm [hi from, mid from]; kn = Hoàng hậu thiện cảm [hi from, mid above] (review/one-core-dup3-land) */
  say:{tn:[30,0],kn:[10,-10]},
- /* FRAME NARRATOR (owner 16/11 19:23Z s22, kit-size #4): a kit frame without its own person is told by the named palace official whose
-    office covers that topic. ONE map (kind of the frame → post id gt / tn / kn, or the Emperor's eunuchs tq / ksp; "maid" = her thân tín
-    maid, "me" = the player, where no office fits). Read by jksize kszWho3. */
- narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",
-  intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
  /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
  gtDays:4,
  posts:[
@@ -28661,7 +28656,10 @@ function kitTitledName(t,n){t=String(t||"").trim();n=String(n||"").trim();if(!t|
  for(let k=Math.min(4,w.length-1);k>=1;k--){const pre=w.slice(0,k).join(" ").toLowerCase();if(!KIT_NAME_TITLE_RX.test(pre))continue;if(tl===pre||tl.startsWith(pre+" ")||tl.endsWith(" "+pre)||tl.includes(" "+pre+" "))return w.slice(k).join(" ")}return n}
 function kitTitled(t,n){const m=kitTitledName(t,n);return t?(m?`${t} ${m}`:t):m}
 window.kitTitled=kitTitled;window.kitTitledName=kitTitledName;
-function kitFaceH(p,size){try{if(!p)return"";if(p.src!==undefined||p.ini!==undefined)return mdH(p,size||"sm");return mdH(kitFace(p),size||"sm")}catch(e){return""}}
+/* dialog-person (owner 21/11 #79 "ảnh vỡ ở Bạch Lan"): a SERVANT object carries `src` = where she came from ("home" / "pick") — that is NOT a picture. Only a real face
+   object ({src: url / path / "", ini, rk, col…}) is drawn as is; every person object goes through kitFace. */
+function kitIsFaceObj(p){return !!p&&(p.ini!==undefined||(typeof p.src==="string"&&(/^(https?:|img\/|data:|blob:|\.\/|\/)/.test(p.src)||(p.src===""&&p.col!==undefined))))}
+function kitFaceH(p,size){try{if(!p)return"";if(kitIsFaceObj(p))return mdH(p,size||"sm");return mdH(kitFace(p),size||"sm")}catch(e){return""}}
 /* one person line: face + title/name + sub line (chips allowed) */
 function kitPersonLine(p,o){o=o||{};return `<div class="kpl">${kitFaceH(p,o.size||"sm")}<span class="kplt">${kitName(p,{cap:true})}${o.sub?`<small>${o.sub}</small>`:""}</span>${o.chips?`<span class="kplc">${o.chips}</span>`:""}</div>`}
 /* every named person the text can mention, longest name first */
@@ -28795,11 +28793,15 @@ function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastInde
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
+const KFP_MAP=new Map();let KFP_N=0;function kfpReg(p){const id=++KFP_N;KFP_MAP.set(id,p);if(KFP_MAP.size>800){const k=KFP_MAP.keys().next().value;KFP_MAP.delete(k)}return id}function kfpGet(id){return KFP_MAP.get(+id)||null}
+window.kfpGet=kfpGet;window.kitIsFaceObj=kitIsFaceObj;
 function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
  if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(kitRankText(text)).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}
  const p=who&&who[0];const world=f.kind==="world"||!p;const face=p&&p!==SKIP?kitFaceH(p,"sm"):`<span class="kfdot" aria-hidden="true"></span>`;
  const chips=f.chips&&f.chips.length?kitChips(f.chips):"";
- return `<div class="kfact${world?" kfworld":""}${p===S?" kfme":""}">${face}<span class="kft">${f.when?`<small class="kfwhen">${f.when}</small>`:""}${text}${f.why?`<small class="kfwhy">Vì: ${f.why}</small>`:""}${chips}</span></div>`}
+ /* ONE AVATAR RULE (owner 21/11 #62 #64 #65 #78): the row remembers WHO its avatar is and how many people the line names; the frame decides at layout time (jksize kszAvatarRule3) */
+ const kfp=p?kfpReg(p):"",kfn=who?who.length:0;
+ return `<div class="kfact${world?" kfworld":""}${p===S?" kfme":""}"${kfp!==""?` data-kfp="${kfp}" data-kfn="${kfn}"`:""}>${face}<span class="kft">${f.when?`<small class="kfwhen">${f.when}</small>`:""}${text}${f.why?`<small class="kfwhy">Vì: ${f.why}</small>`:""}${chips}</span></div>`}
 /* kitFacts(facts, {group:true|false, title}) -> rows; groups (Ngươi / Người trong cung / Triều đình · thiên hạ) when there are 4+ facts of 2+ kinds */
 function kitFacts(facts,o){o=o||{};const people=kpPeople();let F=[];
  for(const f of (facts||[])){if(typeof f==="string"){kpSentences(f).forEach(s=>F.push({text:s}))}else if(f)F.push(f)}
@@ -29027,7 +29029,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .dlg.kpanel::before{display:none}
 /* ONE FRAME SIZE (owner 15/11 "kích thước khung khác nhau", KIT §8.1): every pop-up has the same width and the same height at a given viewport; only the
    seal word and the content differ. The header and the button stay fixed; the text / option area scrolls inside (rule L191). */
-:root{--kpw:min(560px,calc(100vw - 28px));--kph:min(calc(100dvh - 32px),max(420px,calc(70*var(--kvh,1dvh))),720px)}
+:root{--kpw:min(var(--kszW-L),calc(100vw - 28px));--kph:min(calc(100dvh - 32px),max(420px,calc(70*var(--kvh,1dvh))),720px)}
 
 html body #modal:not(.pcm) .dlg.kpanel{box-sizing:border-box;width:var(--kpw)!important;min-width:0!important;max-width:var(--kpw)!important;height:var(--kph)!important;min-height:var(--kph)!important;max-height:var(--kph)!important;display:flex!important;flex-direction:column;overflow:hidden!important}
 html body #modal:not(.pcm) .dlg.kpanel>.kph{position:relative;flex:0 0 auto}
@@ -29363,7 +29365,7 @@ KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi th�
 (function(){const st=document.createElement("style");st.id="kp-scene-css";st.textContent=`
 .modal.kpscene{align-items:flex-end;justify-content:center;padding:8px}
 /* kv3:.kv2 */:where(.kv2) .modal.kpscene{align-items:center;justify-content:flex-end;padding:12px 16px}
-.modal.kpscene .dlg.kpsc{max-width:min(560px,100%);width:100%;max-height:calc(100dvh - 16px);background:rgba(255,250,240,.90);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:none}
+.modal.kpscene .dlg.kpsc{max-width:min(var(--kszW-L),100%);width:100%;max-height:calc(100dvh - 16px);background:rgba(255,250,240,.90);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:none}
 /* kv3:.kv2 */:where(.kv2) .modal.kpscene .dlg.kpsc{max-width:min(440px,44vw)}
 .modal.kpscene .dlg.kpsc .kph{background:linear-gradient(#f6ead6d8,#fffaf0d8);padding:7px 12px}
 .modal.kpscene .dlg.kpsc #mb{padding:8px 12px 2px}
@@ -29740,7 +29742,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 .dlg.kpsc .kpid .kstgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin:4px 0 0}
 .dlg.kpsc .kpid .kst-tile{flex-direction:row;justify-content:space-between;align-items:baseline;gap:6px;padding:4px 9px}.dlg.kpsc .kpid .kst-tile>.kstv{font-size:.95rem;text-align:right}
 .dlg.kpsc .kpid .kst-tile:nth-child(8){grid-column:auto}
-/* kv3:.kv1 */:where(.kv1) .modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}:where(.kv1) .modal.kpscene .dlg.kpsc{max-width:min(680px,100%)!important}
+/* kv3:.kv1 */:where(.kv1) .modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}:where(.kv1) .modal.kpscene .dlg.kpsc{max-width:min(var(--kszW-L),100%)!important}
 /* kv3:.kv1 */:where(.kv1) .dlg.kpsc .kpb.kpid{grid-template-columns:104px minmax(0,1fr)!important;gap:10px!important}:where(.kv1) .dlg.kpsc .kpid .kpidn{font-size:1.02rem}:where(.kv1) .dlg.kpsc .kpid .kpidt{font-size:.84rem}:where(.kv1) .dlg.kpsc .kpid .kstgrid{grid-template-columns:1fr 1fr}:where(.kv1) .dlg.kpsc .kpid .kst-tile{padding:2px 6px}:where(.kv1) .dlg.kpsc .kpid .kst-tile>.kstv{font-size:.84rem}
 /* 3b · identity with her standing figure */
 .modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:calc(94*var(--kvh,1dvh));filter:url(#kfa) drop-shadow(0 6px 18px #0006)}
@@ -38539,7 +38541,7 @@ function r97After(A,d){let ex=[];try{if(d.go){const g=d.go(A);if(g)ex.push(g)}}c
 /* leaving the palace when the rare ending allows it (nữ vương…) */
 PEND.j97x=p=>{const d=R97[p.a];if(!d||!d.exit||S.dead)return null;const A={act:{},a:p.a};
  return {who:who67(d.w,A),t:`<b>${ARC67[p.a].t}</b><br>${fill67(d.t,A,d.w)}`,o:[
-  {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>over(d.exit[2],fill67(d.exit[3],A),d.exit[4],true)},
+  {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>{if(typeof kitEndNext==="function")kitEndNext("rare");over(d.exit[2],fill67(d.exit[3],A),d.exit[4],true)}},
   {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{const W=BAL.arc.r97.stay;apply(W);log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. Sủng +${W.sung}.`)}}]}};
 /* ---------- Sổ luân hồi: rare endings met across lives (memory only, no carry-over) ---------- */
 function r97Book(){try{return JSON.parse(localStorage.getItem("ctm-rare97")||"{}")||{}}catch(e){return {}}}
@@ -38867,6 +38869,33 @@ window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelec
 function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".kmhint").forEach(h=>h.remove());let b=ov.querySelector(":scope > .kmend");
  if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
 window.kitSceneEnd=kitSceneEnd;
+/* ---------- KIT 81c kitFullPic (owner 21/11 marks #52 «Học thành tài» + #84 «Sang buổi», review/ending-screens-2): THE full-screen scene PICTURE ----------
+   Owner: "trên iPad là phải ngang nguyên một cái màn hình, full nguyên cái màn hình luôn" / Sang buổi: "picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background".
+   ONE picture layer for every full-bleed scene (81b .km-full): it covers the WHOLE screen (no frame, no border, no dark band), a soft top + bottom shade keeps the
+   title and the words on it readable, the scene's own title / card / ONE kit button (.kmend) lie ON the picture.
+   ORIENTATION (KIT §0: html.kv1 / kv2, never a width test): phone portrait (kv1) = the PORTRAIT painting `https://ctm-img.victoria-tntt.workers.dev/img/<key>-port.webp`, iPad landscape (kv2) = the LANDSCAPE one
+   `https://ctm-img.victoria-tntt.workers.dev/img/<key>-land.webp` — used only when listed in the art manifest img/INFO.json {have:[…]} (Foreman C adds the key when the picture is on the CDN: no code change,
+   no 404). Until then the scene's own picture `fb`: mode "cover" (a big painting: cropped to fill, focus --kfx/--kfy) or "blur" (a small card picture: the same
+   picture blurred fills the screen, the sharp one sits whole in the middle — never stretched into mush).
+   While a full-screen picture is open the room's lean-in emotion seal (span.kemo-big, jemoseal) is hidden: nothing of the room floats over it.
+   kitFullOri() = "port" | "land"; kitFullSrc(key, fb) = {src, art}; kitFullPicHTML({key, fb, mode, cls, fx, fy, extra, img}) = the layer's HTML (img = extra attributes of the sharp <img>). */
+function kitFullOri(){try{return (typeof kitSzMode==="function"?kitSzMode()==="kv2":document.documentElement.classList.contains("kv2"))?"land":"port"}catch(e){return"port"}}
+function kitFullSrc(key,fb){const k=key?`${key}-${kitFullOri()}`:"";let have=[];try{have=(typeof KIT_INFOM!=="undefined"&&KIT_INFOM&&KIT_INFOM.have)||[]}catch(e){}
+ return k&&have.includes(k)?{src:`https://ctm-img.victoria-tntt.workers.dev/img/${k}.webp`,art:1}:{src:fb||"",art:0}}
+function kitFullPicHTML(o){o=o||{};const P=kitFullSrc(o.key,o.fb);const blur=!P.art&&o.mode==="blur";
+ return `<div class="kfull${blur?" kfull-blur":""}${P.art?" kfull-art":""}${o.cls?" "+o.cls:""}" style="--kfx:${o.fx==null?50:o.fx}%;--kfy:${o.fy==null?50:o.fy}%" aria-hidden="true">`+
+  `${blur&&P.src?`<img class="kfull-bk" src="${P.src}" alt="" draggable="false" decoding="async">`:""}${P.src?`<img class="kfull-img" src="${P.src}" alt="" draggable="false" decoding="async" ${o.img||""}>`:""}`+
+  `${o.extra||""}<i class="kfull-shade"></i></div>`}
+window.kitFullOri=kitFullOri;window.kitFullSrc=kitFullSrc;window.kitFullPicHTML=kitFullPicHTML;
+(function(){const st=document.createElement("style");st.id="kfull-css";st.textContent=`
+.kfull{position:absolute;inset:0;z-index:0;overflow:hidden;background:#17110d;border:0;border-radius:0;box-shadow:none;margin:0;pointer-events:none}
+.kfull>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--kfx,50%) var(--kfy,50%);display:block}
+.kfull.kfull-blur>.kfull-bk{filter:blur(14px) brightness(.72) saturate(.9);transform:scale(1.08)}
+.kfull.kfull-blur>.kfull-img{object-fit:contain;object-position:50% 50%;filter:drop-shadow(0 8px 24px #000a)}
+/* nothing of the room floats over a full-screen picture: the lean-in emotion seal clone (jemoseal span.kemo-big, fixed, above every UI) hides while one is open */
+body:has(.kmov.km-full .kfull) span.kemo-big,body:has(.dawn.kne-day.on) span.kemo-big{visibility:hidden}
+.kfull>.kfull-shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(12,8,5,.55) 0,rgba(12,8,5,0) 20%,rgba(12,8,5,0) 52%,rgba(12,8,5,.72) 100%)}
+`;document.head.appendChild(st)})();
 
 /* ---------- KIT §81.1 kitEntryGate (K-OI-1 / KP07, review/kit-podium-gate; OD:L1244 + L1261): the ENTRY animation «palace gate → selection hall» ----------
    kitEntryGate({kind, origin, road, to}) — kind "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc bd) · "maid" (cnv: maids behind a mama) · "corridor" (cn: the Càn Thanh corridor);
@@ -39088,7 +39117,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
- W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{if(S&&S.dead&&!was&&!window.__bot)kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
+ W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
    const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
@@ -44602,6 +44631,8 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
     the player stands there only when the event is about her alone */
  try{if(L.length&&typeof S!=="undefined"&&S&&L.every(p=>p===S||p.__kp===S)&&m){const w=m.who&&(m.who.__kp||m.who);if(w&&w!==S&&typeof w==="object"&&(w.name||w.kind))L=[w].concat(L)}}catch(e){}
  try{if(L.length>1&&typeof S!=="undefined"&&S){const o=L.filter(p=>p!==S&&p.__kp!==S);if(o.length)L=o.concat(L.filter(p=>p===S||p.__kp===S))}}catch(e){}
+ /* dialog-person (owner 21/11): a choice she makes ALONE (picker she opened, act, shop: jksize kszOwnAct3) has HER OWN figure on the left — one rule with kszWho3 */
+ try{if(m&&!Array.isArray(m.stage||(m.kit&&m.kit.stage))&&typeof kszOwnAct3==="function"&&kszOwnAct3(m)&&typeof S!=="undefined"&&S)L=[S]}catch(e){}
  return window.KIT_EVENT_DP===false?L:L.slice(0,1)};window.kitStagePeople=kitStagePeople;
  if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){/* kit-rows-b KP17: an act picker / shop is not an event — never tag a guessed evId on it, never invent its picture (KIT_ACT_PIDS / act / shop, same set kitIsEventChoice excludes) */if(m&&(m.act||m.shop||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))))return a0.apply(this,arguments);try{/* review r8: a festival dialog whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ)
    takes the festival's own band (https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-<k>-b.webp, the one the festival day already shows, j71) — not the Hoàng thượng / Thái hậu picture */
@@ -45231,19 +45262,19 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
 /* KIT §6.3h PERSON INFO BLOCK = FIXED HEIGHT, ONE LINE PER ROW (owner 21/11 ~05:15Z #86 option A, her words: the info block must not grow with text and push the action buttons down; «Dạo này» = a headline + a «!»):
    every row of the person info block (.pc .pcf .kr: Sở trường · Tính nết · Đã biết · Dạo này …) is ONE line; a value longer than its line is cut with «…» and a kit «!» (kitNoteBang, .kgnb) at the end of the row opens the FULL text in the kit popup.
    kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
-function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv").forEach(v=>{
+function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv, .pc .pcb > .kb.kpkb > .kr > .krv").forEach(v=>{/* K-INFO-TAP (law 11): the kit-rows info block of a person card body (Hoàng tự / Quý tộc cards: Tuổi · Thứ bậc · Tước vị …) is the same info block */
   if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
   const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
   if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
 window.kitInfoOneLine=kitInfoOneLine;
 (function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
-.pc .pcf .kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-.pc .pcf .kr>.krv>*{white-space:nowrap!important}
-.pc .pcf .kr>.krv.kone{padding-right:26px}
-.pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+.pc .pcf .kr>.krv,.pc .pcb>.kb.kpkb>.kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.pc .pcf .kr>.krv>*,.pc .pcb>.kb.kpkb>.kr>.krv>*{white-space:nowrap!important}
+.pc .pcf .kr>.krv.kone,.pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kgnb,.pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
-.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
-.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
+.pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{right:46px}
 `;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
@@ -47157,6 +47188,8 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
   if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return mapMe(r,true,mp)});
  mapMe(WS,true,mp);
+ /* coop-emo-seat r2: every world person's feelings (emo / mk / emoH / mck) are the host's in the merge; her acts' feelings ride S.coopEmo (jcoopone) */
+ if(!stateOn("emoHost")&&CW.emoHost)CW.emoHost(R,WS);
  const P={};P[CW.seat]=myBlob(sS);
  const B=CW.base&&CW.base.P&&CW.base.P[fs()];
  if(B){const fP=J(B);const f=L.find(x=>x[0]>=0);const v=f&&f[1];
@@ -47191,6 +47224,10 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R:CW.lensR?CW.lensR(R):R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
  try{CW.lensW&&CW.lensW()}catch(e){console.error("lens W",e)}
  if(!opt.keepUsed)used=0;else used=keepUsed;
+ /* coop-emo-seat r2: her acts' feelings on world people, replayed the same on both seats (jcoopone), then ONE cause sweep. AFTER `used` is set:
+    the cause clock mkNow counts the khắc used this buổi (j95kh), and before r1 each seat swept with its own leftover `used` (review r1: after a
+    rejoin the guest's clock ran ahead and ended a live vui cause on her seat only: host vui 40 | guest khochiu 22) */
+ try{CW.emoReplay&&CW.emoReplay(C)}catch(e){console.error("emoReplay",e)}
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,LASTB());
@@ -50421,7 +50458,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
      chip (kitOptPic cannot find a masked "Phi ???" by name). A stranger's portrait is already the kit silhouette (pv). */
   if(o.kgt){try{const t=o.kgt;const f=t==="emp"?pEmp():t==="th"?pTH():t==="maid"?kitFace(S.maid):pv(t);if(f&&f.src&&typeof kitArtFrame==="function"){let art=b.querySelector(":scope > .kaart");
     if(!art&&typeof kpOptArt==="function"){kpOptArt(b);art=b.querySelector(":scope > .kaart")}
-    if(art){art.innerHTML=kitArtFrame(f.src,"","kopic kopface","");art.dataset.kzoom=f.src;b.dataset.kopic="face:gift";b.querySelectorAll(":scope > .md").forEach(x=>x.remove())}
+    if(art){if(typeof kitOptAvatar==="function"&&kitOptAvatar(b,f,t==="emp"?S.emp:t==="th"?S.thO:t==="maid"?S.maid:t,f.src))b.dataset.kopic="face:gift";else{art.innerHTML=kitArtFrame(f.src,"","kopic kopface","");art.dataset.kzoom=f.src;b.dataset.kopic="face:gift";b.querySelectorAll(":scope > .md").forEach(x=>x.remove())}}
     else if(!b.querySelector(".md"))b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))}
    else if(f&&!b.querySelector(".md"))b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))}catch(x){}}
   if(o.lock){b.disabled=true;b.classList.add("kgiftno")}const c=cnt[b.dataset.kgg]||(cnt[b.dataset.kgg]=[0,0]);c[1]++;if(!o.lock)c[0]++});
@@ -51009,7 +51046,7 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
  const opts=L.map(v=>{const fz=spyRoll(S,v,m);/* the odds printed = the odds rolled after the pay (j9 fzRun) */return{kgt:v,n:`${mdH(pv(v),"xs")}${spyWho(v)}${v===cur?" · đang nhắm":""}`,x:`${word(fz)} · thành: biết 2 điều thật về nàng, chứng cứ ${balSg(BAL.eff.j78.evN)} · hỏng: Lòng ${m.name} -5, nàng đoán ra: ${typeof pvOan==="function"?pvOan(v,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,v,m),dom:"Mưu kế",o:spyO(S,v,m),go:()=>{/* review/servant-system: the khắc is paid when a target is chosen (j25 payOnPick: the card is an "open" act); before, nothing was paid and "Thôi" gave 2 khắc back */if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0}const b=rsnap();const ok=fzRun(fz,null,()=>spyMaidRun(v,ag));try{if(S.visit){S.visit.tk=S.visit.tk||{};if(popIdx!=null)S.visit.tk[popIdx]=1}}catch(e){}setTimeout(()=>{try{resultShow(`Sai ${m.name} dò la ${spyWho(v)}`,b,ok)}catch(e){}},0)}}});
  opts.push({n:"Thôi, để sau",x:"không sai đi (khắc vừa tốn được trả lại)",go:()=>{if(S.payOnPick)S.payOnPick=0;else if(refund)used=Math.max(0,used-refund)}});
- Q.push({t:`Sai ${m.name} đi dò la`,who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p>`,opts});showModal()}
+ Q.push({t:`Sai ${m.name} đi dò la`,ownAct:1,/* dialog-person (owner 21/11): the choice is HERS alone — her own figure stands on the left (jk4 kitStagePeople); `who` stays only to name the servant she sends (no chip of her inside the text) */who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p>`,opts});showModal()}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||p.kind!=="maid"||!S.maid)return A;const i=A.findIndex(a=>a.n==="Sai đi dò la");if(i<0)return A;
  const m=whyMaidInit(S.maid),t=spyTarget();if(!t){A[i]=Object.assign({},A[i],{lock:true,t:"không còn phi tần nào để dò"});return A}
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
@@ -54693,8 +54730,8 @@ function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
  const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
 window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
 /* ---------- §64.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
-function kitItemTag(I){/* KIT §70: tap the tag → kitItemCard (the shared item detail) */const tap=typeof kitItemTap==="function"&&I.k?kitItemTap({k:I.k}):"";
- return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname} · chạm để xem`,data:tap})}</div>`}
+function kitItemTag(I){/* KIT §70: tap the tag → kitItemCard (the shared item detail). owner 21/11 #63: an item named in a dialog is the SMALLEST kit item size (sm), inline beside its line — never its own big row */const tap=typeof kitItemTap==="function"&&I.k?kitItemTap({k:I.k}):"";
+ return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"sm",tip:`${I.name} · ${I.gname} · chạm để xem`,data:tap})}</div>`}
 window.kitItemTag=kitItemTag;
 function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
  const own=mb.querySelector(".tsbtile");if(own){own.classList.add("kiev","kiev-own");return own}
@@ -60360,8 +60397,8 @@ function lights(pic,name){const H=[];if(!pic||typeof kitFxLight!=="function")ret
   if(!still()){if(how==="gutter")setTimeout(()=>h.stop(2200),900);else if(how==="dim")setTimeout(()=>{b.style.transition="opacity 2.6s ease";b.style.opacity=".35"},700);
    else if(how==="in"){b.style.opacity="0";b.style.transition="opacity 2s ease .4s";requestAnimationFrame(()=>requestAnimationFrame(()=>{b.style.opacity="1"}))}}}catch(e){}});return H}
 const nameOf=src=>(String(src).match(/(ne-[a-z-]+)\.webp/)||[])[1]||"";
-function picHTML(src,k,extra){const nm=nameOf(src);const f=FOC[nm]||[50,50];const lq=LQ[nm]||(/ev-fest-/.test(src)?LQ["ne-dawn-"+(SEAK[SEASON[(S&&S.month||1)-1]]||"xuan")]:"");
- return `<div class="kne-pic" style="--fx:${f[0]}%;--fy:${f[1]}%">${lq?`<img class="kne-lq" src="data:image/webp;base64,${lq}" alt="" draggable="false">`:""}<img class="kne-img" src="${src}" alt="" draggable="false" onload="this.classList.add('ld')">${k==="cold"?"":driftHTML(k)}${extra||""}</div>`}
+function picHTML(src,k,extra,full){const nm=nameOf(src);const f=FOC[nm]||[50,50];const lq=LQ[nm]||(/ev-fest-/.test(src)?LQ["ne-dawn-"+(SEAK[SEASON[(S&&S.month||1)-1]]||"xuan")]:"");
+ return `<div class="kne-pic${full?" kfull":""}" style="--fx:${f[0]}%;--fy:${f[1]}%;--kfx:${f[0]}%;--kfy:${f[1]}%">${lq?`<img class="kne-lq" src="data:image/webp;base64,${lq}" alt="" draggable="false">`:""}<img class="kne-img" src="${src}" alt="" draggable="false" onload="this.classList.add('ld')">${k==="cold"?"":driftHTML(k)}${extra||""}${full?`<i class="kfull-shade"></i>`:""}</div>`}
 const PRE={};/* preload: resolves when loaded or after `ms` (the blurred thumbnail covers a slow picture; the full one fades in on load) */
 function preload(src,ms){if(!src)return Promise.resolve();const w=ms||NE.wait;if(!PRE[src]){const im=new Image();PRE[src]=new Promise(r=>{im.onload=im.onerror=()=>r()});im.src=src}
  return Promise.race([PRE[src],new Promise(r=>setTimeout(r,w))])}
@@ -60442,11 +60479,15 @@ function dawnOf(){const f=typeof festToday==="function"?festToday():null;const s
  if(f)return{k:"fest",src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f.k}-b.webp`,t:`Sáng ${f.name}`,sub:`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`};
  return{k:sea,src:`${DIR}ne-dawn-${sea}.webp`,t:`Bình minh ${SEAN[sea]}`,sub:`Tháng ${S.month}${S.wx?" · "+S.wx.n:""}`}}
 /* kitNewDay(o) — o = {night:{k,line}|null, day:{k,src,t,sub}, wx, host(#dawn), then()} : plays the beats in host, then() when done/tapped */
+/* owner 21/11 mark #84 («Sang buổi»: picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background): every beat is THE full-screen
+   picture (KIT 81c kitFullPic): <name>-port.webp on the phone, <name>-land.webp on the iPad once Foreman C lists them in img/INFO.json; until then today's 4:3
+   painting cropped to fill (its focus FOC). Title + line and the ONE kit button lie on the picture. */
+const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
 function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow();
  if(o.night)beats.push({k:o.night.k,snd:o.night.snd,dk:"lonely-"+sea,src:`${DIR}ne-night-lonely-${sea}.webp`,t:TIER[o.night.k].t,sub:o.night.line,ms:NE.lonelyMs});
- beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});
+ beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});beats.forEach(b=>{b.src=fullSrc(b.src)});
  host.className="dawn kne-day"+(red()?" rm":"");host.hidden=false;
- host.innerHTML=`<div class="kne kne-beat">${beats.map((b,i)=>`<div class="kne-b kne-${b.k}${i?"":" on"}" data-i="${i}">${picHTML(b.src,b.dk||b.k,b.wx?wxHTML(b.wx):"")}<div class="kne-cap"><b>${esc(b.t)}</b><small>${esc(b.sub)}</small></div></div>`).join("")}<div class="kmhint">Chạm để bỏ qua</div></div>`;
+ host.innerHTML=`<div class="kne kne-beat">${beats.map((b,i)=>`<div class="kne-b kne-${b.k}${i?"":" on"}" data-i="${i}">${picHTML(b.src,b.dk||b.k,b.wx?wxHTML(b.wx):"",1)}<div class="kne-cap"><b>${esc(b.t)}</b><small>${esc(b.sub)}</small></div></div>`).join("")}<div class="kmhint">Chạm để bỏ qua</div></div>`;
  void host.offsetWidth;host.classList.add("on");let i=0,end=false;const T=[];
  let LH=[];const stopL=()=>{LH.forEach(h=>{try{h.stop(300)}catch(e){}});LH=[]};
  const show=j=>{host.querySelectorAll(".kne-b").forEach(e=>e.classList.toggle("on",+e.dataset.i===j));play(beats[j].snd||beats[j].k);stopL();
@@ -60541,14 +60582,16 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 @keyframes kneRain{from{transform:translate(0,0) rotate(12deg)}to{transform:translate(-24px,125cqh) rotate(12deg)}}
 .kne-ov .kne:not(.km-done) :is(.kmlist,.kne-take){display:none}
 /* week panel beats */
-.dawn.kne-day{padding:12px;cursor:pointer;z-index:9200}
-.dawn.kne-day.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
-.dawn.kne-day.km-endon .kne-beat .kne-pic{max-height:calc(100dvh - 200px)}
-.kne-beat{position:relative;width:100%;max-width:820px;display:grid;place-items:center}
-.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
+/* owner 21/11 mark #84: FULL SCREEN beats (KIT 81b/81c): the picture covers the whole screen (no frame, no dark band), title + line + the ONE button ON it */
+.dawn.kne-day,.dawn.kne-day.km-endon{padding:0;cursor:pointer;z-index:9200;overflow:hidden}
+.kne-beat{position:absolute;inset:0;width:auto;max-width:none;display:block}
+.kne-b{position:absolute;inset:0;display:block;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
 .kne-b.on{opacity:1}
-.kne-beat .kne-pic{max-height:calc(100dvh - 130px)}
-.kne-beat .kmhint{position:static;margin-top:8px}
+.kne-beat .kne-pic.kfull{position:absolute;inset:0;width:auto;height:auto;aspect-ratio:auto;max-height:none;border:0;border-radius:0;box-shadow:none}
+.kne-beat .kne-cap{position:absolute;z-index:4;left:16px;right:16px;bottom:calc(68px + env(safe-area-inset-bottom,0px) + 10px);margin:0 auto;max-width:40rem}
+.kne-beat .kne-cap b{font-size:clamp(1.45rem,4.4vmin,2.1rem);text-shadow:0 1px 3px #000d,0 0 16px #000b}
+.kne-beat .kne-cap small{font-size:clamp(.9rem,2.4vmin,1.1rem);text-shadow:0 1px 3px #000d,0 0 10px #000b}
+.kne-beat .kmhint{position:absolute;z-index:5;margin:0}
 .dawn.rm .kne-b{transition:none}
 /* landscape up to 900 px high (phone 844x390, 1000x755, iPad 1180x820): picture left, words right; the button never leaves the screen */
 /* kv3:.kv2 */
@@ -60556,12 +60599,12 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
  :where(.kv2) .kne-ov .kne-pic{width:min(54vw,calc((100dvh - 40px)*1.333));height:auto;max-height:none;flex:0 0 auto}
  :where(.kv2) .kne-ov .kne-side{justify-content:center;max-width:420px;flex:1 1 300px;max-height:calc(100dvh - 24px)}
  :where(.kv2) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- :where(.kv2) .kne-beat .kne-b{flex-direction:row}:where(.kv2) .kne-beat .kne-pic{width:min(66vw,calc((100dvh - 60px)*1.333));height:auto;max-height:none}:where(.kv2) .kne-beat .kne-cap{max-width:28vw}
+ 
 
-/* portrait: the full-scene beats fill a tall frame cropped around the focal point; the card keeps 4:3 above its list */
+/* portrait: the night card keeps 4:3 above its list (the new-day beats are full screen, KIT 81c) */
 /* kv3:.kv1 */:where(.kv1) .kne-ov .kne-pic{max-height:min(calc(46*var(--kvh,1dvh)),450px)}
  :where(.kv1) .kne-ov .kne-side{max-height:calc(100dvh - min(calc(46*var(--kvh,1dvh)),450px) - 40px)}:where(.kv1) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- :where(.kv1) .kne-beat .kne-pic{aspect-ratio:3/4;width:min(100%,calc((100dvh - 170px)*.75));max-height:none}
+
 .kne-sample{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}.kne-sample figure{margin:0}.kne-sample img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--gold)}
 .kne-sample figcaption{font-size:.75rem;text-align:center}
 @media (prefers-reduced-motion:reduce){.kne *{animation:none!important;transition:none!important}.kne-sp{display:none}}
@@ -64650,21 +64693,23 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
   return src&&kitOptOnCdn(src)?{src,key:k,how}:null};
  let r=null;
  /* an option that NAMES its person target (Q option field `kgt` = a rival object / "emp" / "th" / "maid") shows that person's kit portrait, whatever its title says (masked "Phi ???" too) */
- try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];if(o&&o.kgt){const g=o.kgt;const f=g==="emp"?pEmp():g==="th"?pTH():g==="maid"?kitFace(S.maid):pv(g);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}}catch(e){}
+ try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];
+  if(o&&o.kgp&&typeof kitFace==="function"){const f=kitFace(o.kgp);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:o.kgp}}/* dialog-person (owner 21/11): an option that IS a person (entourage, any servant / NPC target) names her in kgp */
+  if(o&&o.kgt){const g=o.kgt;const f=g==="emp"?pEmp():g==="th"?pTH():g==="maid"?kitFace(S.maid):pv(g);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:g==="emp"?S.emp:g==="th"?S.thO:g==="maid"?S.maid:g}}}catch(e){}
  /* kit-size #8 (kit-conform "generic picture on a person option", SRV:night2): an option whose title NAMES a live person shows THAT person's kit portrait (pv: a stranger gives the kit
     silhouette), whatever act / meaning group its words hit. Not inside a person-event frame (the figure column on the left already is that person). Same name test as kit-conform (b). */
- if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}}catch(e){}}
+ if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who}}}catch(e){}}
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
   /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
      — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
      scene picture. Beats the `log` / `rule` groups; a specific act picture (above) still wins. */
-  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-(?:act-|event-|[plws]-)/.test(fs))return{src:fs,key:"",how:"face",face:true}}catch(e){}
+  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-(?:act-|event-|[plws]-)/.test(fs))return{src:fs,key:"",how:"face",face:true,chip}}catch(e){}
   try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
   for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
  /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
  if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
    const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
-   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}catch(e){}
+   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:v||null}}catch(e){}
   try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&itm(k).n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
@@ -64684,6 +64729,25 @@ function kitOptStackTitle(kan){if(!kan||kan.querySelector(".knr")||typeof RANKS=
  const rv=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name===name):null;
  kan.innerHTML=kitRankName(rv||null,{form:"stack",parts:{rank:rk,name}})+(tail?`<span class="kanx">${tail}</span>`:"")}
 window.kitOptStackTitle=kitOptStackTitle;
+/* PERSON OPTION CARD (owner 21/11 ~04:27Z, OD "Bạn đã thật sự làm mấy cái khung theo một cái kit chưa? Mà tại sao cái avatar này không có"): an option that
+   targets / chooses a PERSON (entourage, spy / gift / invite / visit target …) wears the KIT AVATAR part (mdH: the rank frame, ground and badge of her rank,
+   KIT §4.2) in its picture slot — never an event picture, never a loose portrait crop (kitArtFrame) — and its title is the kit STACK rank / name (kitRankName).
+   ONE builder: kpOptArt (every option), jgift (gift rows) both call it. */
+function kitOptAvatar(b,f,who,src){try{if(!b||!f||typeof mdH!=="function")return false;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");
+ let art=b.querySelector(":scope > .kaart");if(!art){let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+  art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=mdH(f,"big");art.classList.add("kaav");art.dataset.kzoom=src||f.src||"";art.title="Chạm để xem tranh";
+ b.querySelectorAll(":scope > .md").forEach(x=>x.remove());if(kan)kan.querySelectorAll(":scope > .md, :scope > img").forEach(x=>x.remove());
+ if(kan&&who&&typeof who==="object"&&typeof kitRankName==="function"&&!kan.querySelector(".knr")){const tx=String(kan.textContent||"").replace(/\s+/g," ").trim();const ix=tx.indexOf(" · ");const head=(ix>=0?tx.slice(0,ix):tx).replace(/\s*\([^)]*\)\s*$/,"").trim();
+  let rn=["",who.name||""];try{if(typeof kszRankName==="function")rn=kszRankName(who)}catch(e){}
+  /* the title is JUST the person (name, or rank + name, + a "· đang nhắm" marker): the kit stack rank / name. A SENTENCE about her ("Tố Quý phi …") keeps its verb: only the rank-led form is stacked (kitOptStackTitle) */
+  const tl=()=>{const t=kan.querySelector(":scope > .kanx");return t?t.outerHTML:ix>=0?`<span class="kanx">${tx.slice(ix+3).replace(/[<>&]/g,"")}</span>`:""};
+  const nm0=who.name||"";/* the title may carry her REAL name while the kit shows "???" for a stranger (kszRankName masks): both count as "just the person" */
+  if(rn[1]&&(head===rn[1]||head===(rn[0]+" "+rn[1]).trim()||nm0&&(head===nm0||head===(rn[0]+" "+nm0).trim()))||!rn[1]&&head===rn[0])kan.innerHTML=kitRankName(who,{form:"stack"})+tl();
+  else if(rn[0]&&head===rn[0]+" ???"){let col="";try{col=kitPersonCol(who)}catch(e){}/* a stranger: the rank is known, the name is not (kit: "???") */kan.innerHTML=kitRankName(null,{form:"stack",parts:{rank:rn[0],name:"???",col}})+tl()}
+  else try{kitOptStackTitle(kan)}catch(e){}}
+ b.dataset.kopt="1";b.dataset.kopic="face:avatar";b.classList.add("kart","kopt","kopav");return true}catch(e){return false}}
+window.kitOptAvatar=kitOptAvatar;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
@@ -64694,6 +64758,12 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
  let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ if(p.face&&p.f&&kitOptAvatar(b,p.f,p.who,p.src))return;
+ /* the name chip beside the title IS already a kit avatar (mdH): it moves into the picture slot, grown to the kit "big" size — never re-cut into a loose crop */
+ if(p.face&&p.chip&&p.chip.classList.contains("md")){const c=p.chip.cloneNode(true);c.classList.remove("xs","sm");c.classList.add("big");
+  let ar=b.querySelector(":scope > .kaart");if(!ar){ar=document.createElement("span");ar.className="kaart";b.prepend(ar)}
+  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");ar.dataset.kzoom=p.src;ar.title="Chạm để xem tranh";try{kitOptStackTitle(kan)}catch(e){}
+  b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
  art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
@@ -64714,6 +64784,8 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
+html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
+html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
 button.ka .kan .kanx{display:block;font-size:.82em;font-weight:600;opacity:.85;line-height:1.25}
 button.ka .kan .knr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;margin:0;line-height:1.2}
@@ -64756,7 +64828,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
  const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
  /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
- const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
+ const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
  mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
  if(gain){const v=gain.querySelector(".krv");gains.slice(1).forEach(g=>chipsOf(g).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
  else{gain=row("kr-duoc kfill","Được",[]);
@@ -64764,7 +64836,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
   const hr=R("hint")[0],ht=hr?(hr.querySelector(".krv")||hr).textContent.trim():"";const cp=(t,c)=>{const e=document.createElement("span");e.className="ef "+c+" kdup";e.textContent=t;return e};
   if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),g0=parts[0].trim(),l0=parts.slice(1).join("; ").trim();gain.querySelector(".krv").appendChild(cp(g0,"g"));
    if(l0)loss.push(cp(l0,"r"))}
-  else{const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}}
+  else{const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";gain.querySelector(".krv").appendChild(e)}}
  const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
@@ -64847,7 +64919,7 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 (function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,88px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
 ${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:auto!important;min-height:var(--ko-ph,88px)!important;align-self:stretch!important;margin-block:-6px!important}/* OD 21/11 ~04:00Z (#49c): the picture FILLS the card height (top to bottom), never a small box with a gap */
 ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:24px}/* OD 21/11 ~04:00Z (#49a): the odds word sits ON THE TITLE ROW, never its own row */
-${O} .kat>.kan{line-height:1.15}
+${O} .kat>.kan{line-height:1.15;text-align:left}/* one alignment for every card title (owner via MAIN 88: «Đeo ngay» left vs «Để sau» centred) */
 ${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
 ${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
 ${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
@@ -65558,11 +65630,16 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
  if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
 window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 .k3ev>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
+/* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
+   loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
+   on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
+(function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -67567,7 +67644,7 @@ PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
   return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${res.sh==="t"?e.t:e.a}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
-   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,res.sh==="t"?e.t:e.a,`Đại kết cục: ${res.ti}`,true)}}]}}
+   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,res.sh==="t"?e.t:e.a,`Đại kết cục: ${res.ti}`,true)}}]}}
  return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":e.ft}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;
@@ -67614,7 +67691,7 @@ function geBoardPanel(tabs){if(!S||typeof kitPanel!=="function")return;const L=g
  sec.push({h:`Bảng Thiên mệnh · ${L.length} người`,rows:rows.length?rows:[["Bảng","Kiếp này chưa ai đạt Đại kết cục"]]});
  const opts=[];if(L.length>=2&&typeof kitPodiumShow==="function")opts.push({n:"Xem bảng vàng",fx:{},x:"",go:()=>kitPodiumShow(L.map(x=>({who:x.who,place:x.place,sub:x.ti,score:x.pt})),{title:"Bảng Thiên mệnh",next:"Đóng"})});
  opts.push({n:"Đóng",fx:{},go:()=>{}});
- kitPanel({kind:"info",title:"Thiên mệnh",sub:"Những người kiếp này đạt Đại kết cục",sections:sec,opts,dh:1},true);showModal()}
+ kitPanel({kind:"info",title:"Thiên mệnh",sub:"Những người kiếp này đạt Đại kết cục",sections:sec,opts,dh:1,cls:"kes-t-fate"/* KIT §91 ending screen (owner #51) */},true);showModal()}
 window.geBoardPanel=geBoardPanel;
 /* ---------- the Kim sách item (one kind) ---------- */
 try{IT[GB().kimsach]=IT[GB().kimsach]||{n:"Kim sách Thiên mệnh",kd:"Kỷ vật",d:"Sách vàng khắc danh hiệu Thiên mệnh của ngươi; không bán, không tặng, không mất",pr:0,keep:1,tg:[]}}catch(e){}
@@ -67741,12 +67818,15 @@ window.demoReturn=demoReturn;
    Ngôn Hạnh, j85) — when HER level rises, kitLearn plays after the work that raised it (kmPush queue, behind any edict). NPC consorts: no scene (data only, as always).
    What she gained = the effect table's own lines (ARTFX / VIRFX, the same text as her skill card, ONE source) + the recipes the level opens (Tứ đức, RCP_ST via
    tdsOpenN). No number here.
-   PAINTING: img/scene-thanhtai.webp (ART REQUEST to Foreman C, dev/handover/FOREMAN_C_STATUS.md). Until it lands the scene shows the skill's own painting
-   (kitSkillArt, the one on her skill card) — an <img> onerror swap, no 404 loop.
-   kitLearn({kind:"art"|"vir", k, from, to}) — the scene only; kitLearnHTML(o) = its HTML (kit sample page §86). Reduced motion / Hiệu ứng Gọn: final frame at once. */
+   FULL SCREEN (owner 21/11 mark #52: "Vẽ … một cái nền tranh ứng với từng cái môn học đó … trên iPad là phải ngang nguyên một cái màn hình, full nguyên cái màn hình"):
+   the scene is a full-bleed scene (KIT 81b .km-full) on THE full-screen picture (KIT 81c kitFullPic): one painting PER SUBJECT, portrait on the phone
+   img/learn-<art|vir>-<k>-port.webp, landscape on the iPad img/learn-<art|vir>-<k>-land.webp (ART REQUEST to Foreman C; live once listed in img/INFO.json).
+   Until a subject's painting lands: the skill's own painting (kitSkillArt, the one on her skill card) blurred over the screen with the sharp one in the middle.
+   Title on top, the card (bậc, what she gained, ONE button) at the bottom, both ON the picture.
+   kitLearn({kind:"art"|"vir", k, from, to}) — the scene only; kitLearn({t}) = a learning without a subject level (a new lối, jky): title + the line, no bậc.
+   kitLearnHTML(o) = its HTML (kit sample page §86). Reduced motion / Hiệu ứng Gọn: final frame at once. */
 (function(){
 const esc=s=>typeof kmEsc==="function"?kmEsc(s):String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const PAINT="https://ctm-img.victoria-tntt.workers.dev/img/scene-thanhtai.webp";
 function info(kind,k,from,to){const V=kind==="vir",T=V?VIR.find(x=>x.k===k):ARTS.find(x=>x.k===k);if(!T)return null;
  const fx=(V?VIRFX:ARTFX)[k]||[];const L=[];for(let l=from+1;l<=to;l++)if(fx[l-1])L.push([`Bậc ${l}`,fx[l-1]]);
  let rec=[];if(V&&typeof RCP_ST==="object"&&typeof TDS_KIND==="object"&&typeof tdsOpenN==="function"){const kd=TDS_KIND[k],st=kd&&RCP_ST[kd];
@@ -67754,13 +67834,16 @@ function info(kind,k,from,to){const V=kind==="vir",T=V?VIR.find(x=>x.k===k):ARTS
  if(rec.length)L.push(["Mở thêm",`lối mới: ${rec.join(", ")}`]);
  const name=V?`${T.n} (${T.full})`:T.n;let img="";try{img=V?kitSkillArt("vir",k,T.n):(kitSkillArt("art",k,T.n)||(typeof AIMG==="object"&&AIMG[k]?AIMG[k]:""))}catch(e){}
  return{name,rows:L,img,levelWord:`${name} lên bậc ${to}`}}
-function kitLearnHTML(o){const I=info(o.kind,o.k,o.from,o.to);if(!I)return"";
+function kitLearnHTML(o){o=o||{};let I=info(o.kind,o.k,o.from,o.to);let key=I?`learn-${o.kind==="vir"?"vir":"art"}-${o.k}`:"";
+ /* a learning with no subject level (jky: a new lối) — same scene, its own line, no bậc (before: an empty overlay with no button) */
+ if(!I){if(!o.t)return"";let img="";try{img=kitSkillArt("art","")}catch(e){}I={name:"",rows:[],img,levelWord:String(o.t)}}
  const rows=typeof kitRows==="function"?kitRows(I.rows.map(([a,b])=>[a,esc(b)])):I.rows.map(([a,b])=>`<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("");
- /* the same frame as kitPersonReveal (§65.2): header, the centre (here the painting), card with the info lines + ONE button */
- return `<div class="kprev klearn"><div class="kmrew-h kprev-h"><b>Học thành tài</b><small>${esc(I.levelWord)}</small></div>
-  <div class="kprev-fig klearn-fig"><img class="klearn-pic" src="${PAINT}" alt="" draggable="false" decoding="async" ${I.img?`onerror="this.onerror=null;this.src='${I.img}'"`:`onerror="this.remove()"`}></div>
-  <div class="kprev-card klearn-card">${typeof kitSteps==="function"?kitSteps(o.to,0,"","Bậc"):""}<div class="kinvrows klearn-rows">${rows}</div><button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
-function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn())return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
+ /* §65.2 classes (header, card + ONE button) on THE full-screen picture (KIT 81c): header on top, card at the bottom */
+ const pic=typeof kitFullPicHTML==="function"?kitFullPicHTML({key,fb:I.img,mode:"blur",cls:"klearn-fig"}):"";
+ return `<div class="kprev klearn">${pic}<div class="kmrew-h kprev-h klearn-h"><b>Học thành tài</b><small>${esc(I.levelWord)}</small></div>
+  <div class="klearn-sp"></div>
+  <div class="kprev-card klearn-card">${o.to&&typeof kitSteps==="function"?kitSteps(o.to,0,"","Bậc"):""}${I.rows.length?`<div class="kinvrows klearn-rows">${rows}</div>`:""}<button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
+function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn()||!kitLearnHTML(o))return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn km-full",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
   try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}
   try{if(typeof kitFxBurst==="function"){const f=st.ov.querySelector(".klearn-fig");if(f){kitFxBurst("glowburst",f);kitFxBurst("spark",f,10)}}}catch(e){}})}
 window.kitLearn=kitLearn;window.kitLearnHTML=kitLearnHTML;
@@ -67772,15 +67855,19 @@ if(typeof addVir==="function"&&!addVir.__lrn){const f0=addVir;addVir=function(p,
   try{if(mine){const l1=S.vir?S.vir[k]|0:0;if(l1>l0&&!S.dead)kitLearn({kind:"vir",k,from:l0,to:l1})}}catch(e){console.error("learn",e)}return r};addVir.__lrn=1}
 /* ---------- CSS (kit part §86; the layout classes are §65.2's) ---------- */
 (function(){const st=document.createElement("style");st.textContent=`
-.klearn-fig{min-height:200px;overflow:hidden;border-radius:12px;box-shadow:0 6px 18px #000a}
-.klearn-pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmFade calc(.8s*var(--pace)) ease both}
-.klearn-fig::before{display:none}
+/* full screen (owner mark #52): the overlay is a full-bleed scene (81b), the picture layer is kitFullPic (81c); title on top, card at the bottom, ON the picture */
+.km-learn .kmst{position:absolute;inset:0;width:auto;max-width:none;max-height:none}
+.kprev.klearn{position:absolute;inset:0;width:auto;max-width:none;height:auto;padding:max(12px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px));justify-content:space-between;gap:10px}
+.klearn>.klearn-fig{animation:kmFade calc(.8s*var(--pace)) ease both}
+.klearn>.klearn-h,.klearn>.klearn-card{position:relative;z-index:2}
+.klearn-h b{text-shadow:0 1px 3px #000c,0 0 14px #000a}.klearn-h small{text-shadow:0 1px 3px #000c}
+.klearn-sp{flex:1 1 auto;min-height:0}
 .klearn-card{width:100%;max-width:520px}
 .klearn-rows{width:100%;text-align:left}
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page §86 ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§86",title:"kitLearn: Học thành tài (tài nghệ / Công Dung Ngôn Hạnh lên bậc)",where:"<b>Level-up scene</b> — every time HER tài nghệ (Cầm, Kỳ, Thi, Họa, Vũ, Y…) or Công Dung Ngôn Hạnh reaches a new bậc: the painting, the bậc steps, the effect lines of the skill card, the recipes it opens, ONE button.",
- html:()=>`<div class="kitpg-row" style="background:#1a0f0acc;padding:10px;border-radius:8px;height:460px">${kitLearnHTML({kind:"art",k:"cam",from:2,to:3}).replace('class="kprev klearn"','class="kprev klearn" style="height:440px"')}</div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="position:relative;overflow:hidden;background:#1a0f0acc;border-radius:8px;height:460px">${kitLearnHTML({kind:"art",k:"cam",from:2,to:3})}</div>`})}catch(e){}
 })();
 /* ---- jpm: kitPalaceMap — BẢN ĐỒ CHI TIẾT MỘT CUNG (owner 11/15, KIT.md §33) ----
    Dư đồ → chạm một cung phi tần (MAPH.rivalSlots = PALN) hoặc Càn Ninh → bản đồ chi tiết sân cung (tranh L2 của Phượng Lệnh,
@@ -75288,9 +75375,11 @@ function kszBtn(o){const R=o.rows||[],hint=R.filter(r=>/^gợi ý$/i.test(r[0]))
 /* rank + name of a person for the tag (kitTitle = the one rank / role word; Thái hậu / Hoàng thượng carry no own name) */
 function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitleOf(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";if(!r&&p.queen)r="Hoàng hậu";if(!r&&typeof p.rank==="number"&&typeof RANKS!=="undefined"&&RANKS[p.rank]&&rivals&&rivals.includes(p))r=RANKS[p.rank].n;
  let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}/* review r1: a person whose name she does not know yet prints "???" on line 2 (as the 32.7 column does); never the half-masked "Bùi Thị vệ ???" the global name mask made of a bare name */try{if(n&&!(S&&(p===S||p===S.emp||p===S.thO||p.kind==="th"))&&typeof kitKnownName==="function"&&!kitKnownName(p))n="???"}catch(e){}return[r,n]}
+/* owner 21/11 #81: when the left subject is HER, her rank / name tag gets «(ta)» under the name — she does not remember her own name */
+function kszTa(tag,p){try{if(p!==S||!tag)return tag;const t='<small class="knr-ta">(ta)</small>';if(/<\/div><\/div>$/.test(tag))return tag.replace(/<\/div><\/div>$/,t+"</div></div>");if(/<\/div>$/.test(tag))return tag.replace(/<\/div>$/,t+"</div>")}catch(e){}return tag}
 function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("https://ctm-img.victoria-tntt.workers.dev/img/fig-thaihau-h1-a51.webp");
  const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
- const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);const age=p&&typeof p.age==="number"?p.age:null;
+ const tag=kszTa(typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col),p);const age=p&&typeof p.age==="number"?p.age:null;
  return `<div class="kszfig">${tag}<span class="kszfs"><img src="${src}" alt="" crossorigin="anonymous" data-age="${age==null?"":age}"></span></div>`}
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
@@ -75412,7 +75501,7 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 
 /* ================= v3 · kit-size #3 (owner 16/11 16:45Z s20, OD "(16/11 16:45Z, s20 chat)" (1)–(6)) =================
    (1) EVERY frame shows BOTH the person AND the event picture (the event picture = the real game path: the event's own picture, else
-       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own gets its NARRATOR (BAL.staff.narrator, owner 16/11 19:23Z: the named
+       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own shows its MAIN SUBJECT, else the event picture (owner 21/11 canon overwrite: the palace-official narrator is gone; was owner 16/11 19:23Z: the named
        palace official whose office covers the topic — Quản sự ma ma, Chưởng sự cô cô, Tổng quản thái giám, Kính sự phòng; jstaff).
    (2) every kind comes in S / M / L / XL and EACH SIZE HAS ITS OWN PRESENTATION (KIT_SIZE.v3.pres):
        S  = "one": ONE main picture LEFT, chosen by what the frame is about (KIT_SIZE.v3.focus):
@@ -75430,9 +75519,6 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 KIT_SIZE.v3={
  focus:{news:"event",rule:"event",notice:"event",night:"event",intel:"event",evidence:"event",reward:"event",week:"event",
         info:"person",result:"person",choice:"person",threat:"person",person:"person",end:"person"},
- /* narrator map = BAL.staff.narrator (jbal, one core; owner 16/11 19:23Z: the palace official whose office covers the topic); this is only the
-    fallback when BAL has no map */
- narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
  pres:{S:"one",M:"fig",L:"fig",XL:"fig"},
  /* S = small content: body up to bodyS, body + its button rows up to capS */
  bodyS:200,capS:{kv1:340,kv2:340},
@@ -75461,7 +75547,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3[data-pres="fig"] .k3body>.kszfig{align-self:flex-start}
 .ksz3 .k3main{flex:none;width:${V.colS}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .ksz3 .k3main>.kt3{text-align:center;width:max-content;max-width:${V.colS+24}px}
-.ksz3 .k3mpor{align-self:center}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
+.ksz3 .k3mpor{align-self:center}.ksz3 .k3mitem{flex:none;align-self:center;width:${V.colS}px;min-height:${Z.pic[V.picS].h}px;display:flex;align-items:center;justify-content:center}.ksz3 .k3mitem>.kiev{margin:0;max-width:100%}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
@@ -75476,23 +75562,63 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
 .ksz3.kszf{max-height:none}`);
  const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
-/* narrator (owner 16/11 19:23Z): BAL.staff.narrator (one core) → the named palace official of that office (jstaff elderBy / S.court) */
-function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.narrator)||KIT_SIZE.v3.narrator;const n=N[sp.kind]||"maid";
- try{if(n==="me")return S;if(n==="emp")return S.emp;if(n==="maid")return S.maid;if(n==="tq"||n==="ksp")return S.court&&S.court[n]||S.maid;
-  if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
+/* THE LEFT SLOT = THE MAIN SUBJECT (owner 21/11: #58 #67 #70 #76 #77, law 6b REAL PEOPLE; the default ma-ma narrator is GONE from every dialog):
+   ONE helper, every frame goes through it (kitFrameLive3 + the kit sample frames). The left slot shows, first match wins:
+   (1) the person the dialog names (sp.who / kitStagePeople) — an Emperor who judges, a thái y who is overheard…;
+   (2) a choice she makes ALONE (a picker she opened: KIT_ACT_PIDS, the entourage picker, an act, a shop) → HER OWN figure;
+   (3) the one person the lines are about (exactly ONE other person named in the text) → that person; many people (a list of visitors) → nobody in particular;
+   (4) only her ("ta"), no other person → HER OWN figure (her own event: fear, tears…);
+   (5) nobody → the event picture (the person-less frame: small frames keep the picture on the left).
+   No palace official stands in a frame because of her office: a person is there only when the scene names her. */
+function kszOwnAct3(m){try{if(!m)return false;return !!(m.entp||m.act||m.shop||m.ownAct||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid)))}catch(e){return false}}
+function kszNormP(p){return p&&(p.__kp||p)}
+function kszWho3(sp){if(sp.who)return sp.who;if(sp.m&&kszOwnAct3(sp.m))return S;return null}
+function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(m&&m.kit&&m.kit.who)return m.kit.who;/* a kitPanel spec names its person */if(kszOwnAct3(m))return S;
+ const ps=[];if(main)main.querySelectorAll(".kfact[data-kfp]").forEach(r=>{const p=typeof kfpGet==="function"?kfpGet(r.dataset.kfp):null;if(p&&!ps.some(q=>kszNormP(q)===kszNormP(p)))ps.push(p)});
+ const oth=ps.filter(p=>kszNormP(p)!==S);if(oth.length===1)return oth[0];if(oth.length>1)return null;
+ if(ps.length===1)return S;/* only she is named */
+ const tx=main?String(main.textContent||""):"";if(/(^|[\s,.;:(])ta([\s,.;:)]|$)/i.test(tx))return S;return null}catch(e){return null}}
+/* the player is the figure: her own small avatar beside her own line is a second copy of the same person (owner 21/11) — see kszAvatarRule3 */
+function kszDropMe3(root){try{if(!root)return;root.querySelectorAll(".kfact.kfme > .md").forEach(x=>{const f=x.closest(".kfact");x.remove();if(f)f.classList.add("kfnodot")})}catch(e){}}
+/* ONE AVATAR RULE (owner 21/11 #62 #64 #65 #78 #79, whole game; run at every layout of a live frame):
+   - a line naming MANY people (≥ 2) → NO avatar (a list of visitors);
+   - the left slot already shows a person (figure / framed portrait) → that same person NEVER again (no line avatar);
+   - a SECOND person (not the left subject) in a frame whose left slot shows a person → her kit avatar sits ON the event picture (top-left corner overlay), never in the text;
+   - left slot = the event picture (no subject): the one person who acts keeps her avatar beside her line (small picture-only notice), the same on Fold and iPad.
+   An unnamed carrier ("thái giám mang bạc đến") has no person object → no avatar. */
+function kszAvatarRule3(dlg){try{const X=dlg.__ksz3;if(!X||!X.right)return;const R=X.right;const leftPerson=!!X.who&&X.slot!=="item"&&X.slot!=="matter";const sub=kszNormP(X.who);const sec=[];
+ R.querySelectorAll(".kfact[data-kfp]").forEach(row=>{const chip=row.querySelector(":scope > .md");row.classList.remove("kfav-off");if(!chip)return;const p=typeof kfpGet==="function"?kfpGet(row.dataset.kfp):null;const n=+row.dataset.kfn||1;let off=false;
+  if(n>=2)off=true;else if(leftPerson&&p&&kszNormP(p)===sub)off=true;else if(leftPerson){off=true;if(p&&!sec.some(q=>kszNormP(q)===kszNormP(p)))sec.push(p)}
+  row.classList.toggle("kfav-off",off)});
+ R.querySelectorAll(":scope>.k3ev .kevav").forEach(x=>x.remove());const ev=R.querySelector(":scope>.k3ev");
+ if(ev&&sec.length&&typeof kitFaceH==="function"){const h=sec.slice(0,2).map(p=>{let f="";try{f=kitFaceH(p,"big")}catch(e){}return f}).join("");if(h)ev.insertAdjacentHTML("beforeend",`<span class="kevav">${h}</span>`)}
+ else if(sec.length)R.querySelectorAll(".kfact.kfav-off").forEach(r=>{/* no picture in this layout: the line keeps its avatar rather than losing the person */const c=r.querySelector(":scope > .md");if(c&&+r.dataset.kfn<2)r.classList.remove("kfav-off")})}catch(e){console.error("kszAvatarRule3",e)}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
 function kszPic3(src,cls,mk){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",Object.assign({shape:"wide",cap:false},mk&&mk.mark?{mark:mk.mark,markAlt:mk.markAlt||""}:{})).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
+/* ---- #76 LEFT-SLOT KIT PART (owner 21/11 ~05:21Z «Đồ thất lạc»; one part for the builder kszFrame3 and the live frame kszLiveLay3) ----
+   The left slot of a small ("one") frame holds the MAIN SUBJECT of the dialog: a PERSON (portrait frame + tag), an ITEM (the item tile) or a MATTER (the event picture itself).
+   The event picture is only the left slot when there is no person or item; with a person or an item the event picture is the TOP of the right column (owner #80).
+   WHO is decided by the dialog (dialog-person): `spec.subject` = "person" | "item" | "matter" (forces it), `spec.who` (explicit person), `spec.item` (item info of kitItemInfo, or {k}),
+   or a leading item tag (.kiev) in the body text. Without any of them: the frame kind (KIT_SIZE.v3.focus) decides as before (person-centred kinds → the person, else the matter).
+   kszSubject3(m,main) (dialog-person) resolves WHO the person is; kszSlotType3({who,item,subject}) -> "person" | "item" | "matter" decides what fills the slot (an item beats a person, `subject` forces).
+   kszSlot3(type,{who,item,src,mk}) -> {left,evTop}: the left column html and whether the event picture goes to the top of the right column. */
+function kszSlotType3(o){if(o.subject==="matter")return"matter";if(o.item&&o.subject!=="person")return"item";if(o.who)return"person";return"matter"}
+function kszItemSlot3(item){let el=null;if(item&&item.nodeType===1)el=item;else if(item){try{el=document.createElement("div");el.innerHTML=kitItemTag(item.name?item:(typeof kitItemInfo==="function"?kitItemInfo(item):item));el=el.firstElementChild}catch(e){el=null}}
+ return el}
+function kszSlot3(type,o){if(type==="item"&&o.item){const el=kszItemSlot3(o.item);if(el){el.classList.remove("kiev-txt","kiev-ban");el.classList.add("kiev-slot");const w=document.createElement("div");w.className="k3main k3mitem";w.appendChild(el);return{left:w.outerHTML,evTop:!!o.src}}}
+ if(type==="person"&&o.who)return{left:kszPor3(o.who),evTop:!!o.src};
+ return{left:kszPic3(o.src,o.fill?"k3main k3mpic k3fill":"k3main k3mpic",o.mk),evTop:false}}
 function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}
  if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
- const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
+ const tag=kszTa(typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col),p);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
  return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
 /* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
 function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
  /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
  if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",sp.mk);
- else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic",sp.mk);else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}}
+ else if(pres==="one"){const T=kszSlotType3({who,item:sp.item,subject:sp.subject}),SL=kszSlot3(T,{who,item:sp.item,src:ev,mk:sp.mk});left=SL.left;if(SL.evTop)R.push(kszPic3(ev,"k3ev",sp.mk))}/* #76 left slot = the main subject; #80 the event picture on top of the right column */
  else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
@@ -75535,10 +75661,10 @@ function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=
  need=kszNeedTxt(bs,need,B);const nar=g.closest(".dlg")&&g.closest(".dlg").dataset.narrow==="1";const cols=nar?1:Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
 /* the left column decides the body height; the event picture in the info grows into what the text leaves */
-function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem");
  if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);return dlg.dataset.ksz}
 /* does the content fit this size? (info column measured with the event picture at its smallest) */
-function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
+function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem"),ev=R&&R.querySelector(":scope>.k3ev");
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
@@ -75656,7 +75782,7 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    kitFrameLive3(m) = the LAST step of showModal (outermost wrapper): every #modal kit panel (kpBuild) of a KP_SEAL kind is re-laid as the v3 frame,
    KEEPING the nodes the game made (its info blocks .kpmain, its option buttons .opts with their handlers, the header .kph with its ✕):
    #mb > .k3body(left + .k3right[event picture .k3ev · .kpmain · (M/L/XL) .opts.k3btns]) + (S) .opts.k3btns.
-   left = the event's own person (kitStagePeople) or the NARRATOR of the kind (kszWho3, BAL.staff.narrator), full figure at M/L/XL, portrait pendant
+   left = the MAIN SUBJECT of the event (kszSubject3: named person / her own act / the one person the lines are about / her own event), else the event picture; full figure at M/L/XL, portrait pendant
    at S (person-centred kinds) or the event picture (event-centred kinds). Event picture = the dialog's own band / tall slot, else kitEvArt / kszEvSrc3.
    Size = the smallest of S/M/L/XL whose presentation holds the content (kitFrameFitsLive3); XL: more text scrolls inside the info column.
    NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
@@ -75715,7 +75841,7 @@ window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
 let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
 function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
- const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+ const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
  kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
@@ -75727,7 +75853,7 @@ function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySele
  delete dlg.dataset.evfit;if(!sc())return;const h=kszEvStrip3(ev);if(ev.dataset.pstep&&ev.offsetHeight<=h+1)return;/* the 56.6 step already made it the strip or smaller */
  dlg.dataset.evfit="s";ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";dlg.dataset.picc="strip";const im=ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)}
 window.kszEvStrip3=kszEvStrip3;
-function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
+function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
@@ -75739,15 +75865,20 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;const keepMk=dlg.querySelector(".k3ev .ksart>img.kemo.ksart-mark,.k3mpic .ksart>img.kemo.ksart-mark");if(keepMk)keepMk.remove();/* mark #68: the live corner seal keeps its own element through every re-lay (size pick, picture step), so its motion is never restarted */
  [...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic",X.mk);ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
- if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));
+ let left="",ev=true;X.slot="matter";
+ /* #76 ONE left-slot part (kszSlot3): the MAIN SUBJECT (item / person / matter); a person who is the subject = framed portrait on the left and the event picture on TOP of the right column (#80, approved small frame) */
+ if(pres==="one"&&(X.who||X.item)){const T=kszSlotType3({who:X.who,item:X.item,subject:X.subject}),SL=kszSlot3(T,{who:X.who,item:X.item,src:X.src,mk:X.mk});left=SL.left;ev=SL.evTop;X.slot=T}
+ else if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */
+ else{left=kszFigHtml(X.who);X.slot="person"}
+ right.querySelectorAll(".kiev-back").forEach(x=>x.remove());if(pres!=="one"&&X.item&&X.item.nodeType===1){/* #76 the item is the left slot of a small frame only; a figure frame keeps it at the top of the text as before */const c=X.item.cloneNode(true);c.classList.remove("kiev-slot");c.classList.add("kiev-back","kiev-txt");(right.querySelector(".kpmain")||right).insertAdjacentElement("afterbegin",c)}
+ if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));kszAvatarRule3(dlg);
  if(keepMk){const nu=dlg.querySelector(".k3ev .ksart,.k3mpic .ksart");if(nu){const m0=nu.querySelector(":scope>img.kemo.ksart-mark");if(m0)m0.replaceWith(keepMk);else nu.appendChild(keepMk)}}
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
  body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
- kitFrameApplyLive3(dlg)}
+ kszListCols3(dlg);kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
    the option cards BELOW it full width, 1 column (kszBtnGridLive3), cards = ONE size per dialog (kitOptFill, tall 3:4 for person dialogs). The figure ladder
@@ -75758,7 +75889,7 @@ function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),
 function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
+ let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
@@ -75768,13 +75899,15 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:kszSubject3(m,main);/* a place card (jplace) has no person column (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
+ /* #76 an item tag leading the text (.kiev: Đồ thất lạc, Tìm thấy đồ …) or m.item is the main subject: it leaves the text and fills the left slot of a small frame */
+ let itemEl=null;try{const k0=main.querySelector(":scope > .kiev, :scope > .kiev-txt");if(k0&&k0.matches(".kiev")){itemEl=k0;k0.remove()}else if(m&&m.item)itemEl=m.item}catch(e){}
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
  if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
  [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
- dlg.__ksz3={kind,who,src,mk,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
+ dlg.__ksz3={kind,who,src,mk,mb,body:B,right:R,opts,m,item:itemEl,subject:m&&m.subject};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
 Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFitsLive3,kszBtnGridLive3});
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
@@ -75782,7 +75915,7 @@ html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc
 /* r4 (owner 17/11): option rows are label LEFT + value RIGHT at every size; the stacked label-over-value layout (r2 .kszstk) is gone */
 #modal .dlg.kszlive>#mr:not(:has(button:not([hidden]))){display:none}
 #modal .dlg.kszlive[data-narrow="1"]{overflow-x:hidden;overflow-y:auto}
-#modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
+#modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:flex-start}#modal .dlg.kszlive[data-pres="one"] .k3right:not(:has(>.k3ev)){justify-content:center}/* #80 the event picture is the TOP of the right column (never centred with an empty band above); a frame with no picture there keeps its text centred */
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
 /* KIT §6.2 FINAL / frame rule (owner 18/11 07:25Z, EVERY layout): the portrait + the info (event picture, text, chips) STAND STILL; only the option list scrolls. The right column never scrolls as a whole. */
 html.kv1 body #modal .dlg.kszlive:is([data-ksz="L"],[data-ksz="XL"]){--kph:calc(100*var(--kvh,1vh) - 24px)}/* VARIANT B: tall frames get the TALL height limit but no screen-ratio rectangle: frame height = content up to the screen */
@@ -75842,6 +75975,43 @@ window.kitScrollCues=kitScrollCues;
 .kscue.sib{position:static;height:auto;width:auto;text-align:center;padding:1px 0 0;pointer-events:none}.kscue.sib.on{display:block}.kscue.sib .kscc{position:static;transform:none;display:inline-block;font-size:.64rem}
 .kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
 .kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
+
+/* ================= #71 EVERY DIALOG = A KIT FRAME SIZE (owner 21/11 ~05:02Z, kit-dialog-2) =================
+   Owner (Fold «Sai … Bạch Lan đi dò la», a narrow dialog with one word per line): a dialog never has a size of its own; every dialog is S / M / L / XL (law 10).
+   The live v3 frame (kszlive) picks its size by content. Every OTHER dialog (page frames: pick-lists, sectioned pages, the item card, tutorial coach / tips, co-op rooms,
+   shop, the loading cover …, all of them "the one pop-up frame" of KIT §8.1) is a LEGACY page frame = KIT_SIZE.legacy.size (L), width from the SAME table:
+   `--kszW-S/M/L/XL` (html.kv1 / html.kv2) is generated from KIT_SIZE.frame, and the pop-up width `--kpw` is min(--kszW-L, screen − 28) (j79 :root). Nothing types 560 any more.
+   kitFrameTagAll() writes data-ksz on every .dlg / .dbox.kpanel that has none (one MutationObserver pass); the test dev/test/dialog-fixed.js (i) opens every dialog kind and fails on a
+   dialog without a kit size or whose width is not its size's width. */
+KIT_SIZE.legacy={size:"L"};
+(function(){const css=[];css.push("html body .modal.kpscene .dlg.kpsc:not(.kszf)[data-ksz]{width:var(--kpw)!important;max-width:var(--kpw)!important}");/* the scene cover frames (loading cover …): the kit width, never a width of their own */for(const m of["kv1","kv2"])css.push(`html.${m}{${["S","M","L","XL"].map(k=>`--kszW-${k}:${KIT_SIZE.frame[k].w[m]}px`).join(";")}}`);
+ const st=document.createElement("style");st.id="k-size-every";st.textContent=css.join("\n");document.head.appendChild(st)})();
+function kitFrameTagAll(){try{document.querySelectorAll(".dlg:not([data-ksz]),.dbox.kpanel:not([data-ksz])").forEach(d=>{d.dataset.ksz=KIT_SIZE.legacy.size});if(typeof kszListCols3==="function")document.querySelectorAll(".dlg:not(.kszlive) .kfacts:not([data-kcols])").length&&kszListCols3(document.querySelector(".dlg:not(.kszlive)")||document)}catch(e){}}
+window.kitFrameTagAll=kitFrameTagAll;
+(function(){const go=()=>{kitFrameTagAll();try{new MutationObserver(()=>{kitFrameTagAll()}).observe(document.body,{childList:true,subtree:true})}catch(e){}};if(document.body)go();else addEventListener("DOMContentLoaded",go)})();
+
+/* ================= #82 KIT LIST RULE (owner 21/11 ~05:37Z, «Sổ nguyệt sự», people lists) =================
+   A list of SHORT rows (kit facts: .kfacts > .kfact, one person / one line each) on the iPad (kv2: the frame's text column is wide) is laid in TWO columns so it does not scroll
+   a long way for nothing; the phone (kv1) keeps ONE column. Rule (KIT_SIZE.list): kv2 only · the list has at least minRows rows · every row is at most maxChars characters ·
+   the list is wide enough for two columns of colMin px + gap. The whole group = every .kfacts in every frame (kszLiveLay3 runs it before the frame size is picked, so the
+   smaller height can choose a smaller frame; the tag pass runs it for page frames). Test: dialog-fixed (k). */
+KIT_SIZE.list={colMin:260,gap:12,minRows:3,maxChars:110};
+function kszListCols3(root){try{const L=KIT_SIZE.list,two=kitSzMode()==="kv2";(root||document).querySelectorAll(".kfacts").forEach(f=>{f.removeAttribute("data-kcols");if(!two)return;const rows=[...f.children].filter(c=>c.classList.contains("kfact"));
+ if(rows.length>=L.minRows&&f.clientWidth>=2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars))f.setAttribute("data-kcols","2")})}catch(e){}}
+/* #82: on the iPad a long list of short rows that would scroll in a narrow text column takes the next size (wide enough for two columns) instead of scrolling */
+function kszListWantsWide3(dlg){try{if(kitSzMode()!=="kv2")return false;const L=KIT_SIZE.list,R=dlg.querySelector(".k3right");if(!R||![dlg,...dlg.querySelectorAll("*:not(img):not(figure)")].some(e=>e.scrollHeight>e.clientHeight+8&&/(auto|scroll|hidden|clip)/.test(getComputedStyle(e).overflowY)))return false;
+ return [...dlg.querySelectorAll(".kfacts")].some(f=>{const rows=[...f.children].filter(c=>c.classList.contains("kfact"));return !f.dataset.kcols&&rows.length>=L.minRows&&f.clientWidth<2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars)})}catch(e){return false}}
+window.kszListCols3=kszListCols3;
+(function(){const st=document.createElement("style");st.id="k-list-cols";st.textContent=`.kfacts[data-kcols="2"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:${KIT_SIZE.list.gap}px;align-items:start}`;document.head.appendChild(st)})();
+/* dialog-person CSS: «(ta)» line, hidden duplicate avatar, the second person's avatar ON the event picture (top-left overlay; phone: smaller) */
+(function(){const st=document.createElement("style");st.id="k-dialog-person";st.textContent=`
+.knr .knr-ta{display:block;font-size:.76rem;font-weight:700;letter-spacing:.02em;opacity:.85;line-height:1.1}
+#mb .kfact.kfav-off>.md{display:none!important}
+#mb .kfact.kfav-off:not(.kfnodot){padding-left:0}
+.k3ev{position:relative}
+.k3ev>.kevav{position:absolute;left:6px;top:6px;z-index:3;display:flex;gap:4px;pointer-events:none}
+.k3ev>.kevav>span.md.kmini.kmini{width:clamp(34px,11%,62px)!important;max-width:62px;filter:drop-shadow(0 2px 4px #0006)}
+`;document.head.appendChild(st)})();
 /* ================= jemoact: HÀNH ĐỘNG THEO CẢM XÚC — emotion acts, extreme mood, forced outbursts (review/emotion-acts) =================
    Owner, verbatim in dev/OWNER_DECISIONS.md (docs branch): "16/11 13:08Z" (emotion acts + extreme-mood consequences, player AND every NPC,
    men and women), "16/11 13:25Z" part B (FORCED events she does not choose; reaction fits PERSONALITY + CURRENT MOOD; scolding any maid
@@ -77356,9 +77526,9 @@ const wrap=(n,mk)=>{const f=window[n];if(typeof f!=="function")return;window[n]=
 const MUTE=["npcEncounters","q72Npc","epidemic","tdMonth","tdNews","moodMonth","tsDenNpc","tsNpcDanger"];
 for(const n of MUTE)wrap(n,f=>function(){if(guest())return "";return f.apply(this,arguments)});
 /* ONLY_ME: arts/virtue study (v85Month), pets care + gifts (petWeek, petMonth), lost items (loMonth), servants' loyalty from mood (emoMonth),
-   NPC affairs with palace men (affairMonth): on the guest the people lists (liveRivals / consorts / emoPeople) hold only her while it runs
+   NPC affairs with palace men (affairMonth), the week's feelings + decay of everyone (emoWeek, review/coop-emo-seat): on the guest the people lists (liveRivals / consorts / emoPeople) hold only her while it runs
    (the rivals array itself is untouched, so the queen, RV(id) and refs still resolve). */
-const ONLY_ME=["v85Month","petWeek","petMonth","loMonth","emoMonth","affairMonth","facMonth","servMonth","queenRewards","maidLoveMonth","ktMonth","fxServMonth"];
+const ONLY_ME=["v85Month","petWeek","petMonth","loMonth","emoMonth","emoWeek","affairMonth","facMonth","servMonth","queenRewards","maidLoveMonth","ktMonth","fxServMonth"];
 /* her own people: herself, her maid, her servants, her children */
 const mine=x=>!!x&&(x===S||x===S.maid||(S.staff||[]).includes(x)||(S.kids||[]).includes(x));
 let solo=0;
@@ -77391,7 +77561,59 @@ wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt()
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
 wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside an act is a world loop again */try{if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)}finally{own=o}});
 wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});
-window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
+/* FEELINGS (review/coop-emo-seat r2): an NPC's feeling is a WORLD fact, computed on the host (owner co-op rule OD:L96, one world).
+   The group = every feeling field both seats could write on a world person: p.emo (the seal), p.mk (its causes; jmoodknow mkSync sums them into
+   p.emo), p.emoH (cause box, jevb), p.mck (what she knows of the causes). After a merged week both seats must read the same number
+   (dev/test/coop-emo-seat.js). Three parts:
+   (1) GUARD, the OUTERMOST emoSet wrapper (installed after every module: jmoodknow / jfeel wrap emoSet after this file, and a write the inner
+       guard dropped still added a cause to p.mk there: guest vui 41 = the host's 22 + a replayed 19). An NPC feeling is set only on the host
+       outside a rebuild, or by HER OWN act on the guest. Never during fromCanon on either seat (affAdd / oanAdd replayed while rows are restored).
+   (2) HOST-ONLY in the week merge: the guest's toCanon carries the group of every world person from the room base (COOPW.emoHost, like
+       HOST_ONLY), so the server's 3-way merge takes the host's numbers and never mixes her copy into his.
+   (3) HER ACT still counts, through one queue: her own act's feeling on a world person is recorded in her blob (S.coopEmo, [{id, who, k, v,
+       why, t, ev}]); at the merged week BOTH seats replay the entries the host has not taken yet (C.P.a.S.emoDone) with the same emoSet on the
+       same rebuilt world, so the numbers match; the host then marks them taken (S.emoDone) and the guest drops them once she sees the mark. */
+const EMO_G=["emo","mk","emoH","mck","__mkAt","__mkL"];/* __mkAt / __mkL: jmoodknow's sync stamp + last read seal, serialized with the person */
+const emoR=p=>{let r=p;try{if(typeof emoRes==="function")r=emoRes(p)}catch(e){}return r};
+let emoRp=0;
+const emoOff=r=>{if(!r||mine(r))return false;const C=window.COOPW;if(C&&C.on&&C.inFC)return true;return guest()&&!own};
+function emoRec(r,a){try{const C=window.COOPW;if(!C||!C.on||!guest()||!S)return;const who=typeof emoKey==="function"?emoKey(r):"";if(!who||who==="me"||/^x/.test(who))return;
+ const L=S.coopEmo=Array.isArray(S.coopEmo)?S.coopEmo:[];const id=Math.max(Date.now(),L.length?(+L[L.length-1].id||0)+1:0);
+ let ev=null;try{ev=typeof MCK==="object"&&MCK&&MCK.ev||null}catch(e){}
+ L.push({id,w:typeof wk==="function"?wk():0,who,k:a[1],v:a[2],why:a[3]==null?"":String(a[3]),t:a[4]==null?null:a[4],ev});if(L.length>60)L.splice(0,L.length-60)}catch(e){console.error("emoRec",e)}}
+/* (4) one clock: jmoodknow mkSync (sums p.mk into p.emo, ends causes whose khắc ran out) never runs inside a rebuild, where the clock
+   is half old / half new (a new week with the old buổi ended live causes early, on one seat only); fromCanon ends with ONE sweep (emoReplay) */
+let emoSw=0;
+/* review r1 (coop-one-world G4): on the guest a READ of an NPC feeling (emoGet → mkSync) re-summed the causes at her clock and wrote p.emo /
+   __mkAt / __mkL into the world during her week. Her world shows the host's numbers until the next merge: on the guest mkSync touches only her
+   own people, except inside her own act (her cause on an NPC) and the merge sweep. */
+queueMicrotask(()=>wrap("mkSync",f=>function(p){const C=window.COOPW;if(C&&C.on&&!emoSw&&!emoRp){if(C.inFC)return;if(guest()&&!own&&!mine(emoR(p)))return}return f.apply(this,arguments)}));
+queueMicrotask(()=>wrap("emoSet",f=>function(p){if(emoRp)return f.apply(this,arguments);const r=emoR(p);if(emoOff(r))return;if(r&&own&&guest()&&!mine(r))emoRec(r,arguments);return f.apply(this,arguments)}));
+const CWo=window.COOPW;
+if(CWo){
+ const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
+ const gCopy=(o,b)=>{if(!o||typeof o!=="object")return;for(const f of EMO_G){if(b&&typeof b==="object"&&f in b)o[f]=J(b[f]);else delete o[f]}};
+ const kOf=x=>x&&typeof x==="object"?(x.sid!=null?"s"+x.sid:x.id!=null?"i"+x.id:typeof x.name==="string"&&x.name?"n"+x.name:null):null;
+ const gList=(A,B)=>{if(!Array.isArray(A))return;const m=new Map((Array.isArray(B)?B:[]).map(x=>[kOf(x),x]));for(const x of A){const k=kOf(x);if(k&&m.has(k))gCopy(x,m.get(k))}};
+ /* (2) guest toCanon: R = her canonical NPC list, WS = her canonical world keys; a person not in the base (her new person) keeps hers */
+ CWo.emoHost=function(R,WS){const bW=CWo.base&&CWo.base.W;if(!bW||!Array.isArray(R))return;const bm=new Map((bW.R||[]).map(r=>[String(r.id),r]));
+  for(const r of R){const b=bm.get(String(r&&r.id));if(!b)continue;gCopy(r,b);gList(r.staff,b.staff);gList(r.kids,b.kids)}
+  const bS=bW.S||{};if(WS){for(const k of ["emp","thO"])if(WS[k]&&bS[k])gCopy(WS[k],bS[k]);if(WS.court&&bS.court)for(const c in WS.court)if(bS.court[c])gCopy(WS.court[c],bS.court[c]);
+   if(Array.isArray(WS.men))gList(WS.men,bS.men)}};
+ /* (3) both seats, inside fromCanon after the world is rebuilt (C = the merged week) */
+ CWo.emoReplay=function(C){emoSw++;try{const pb=C&&C.P&&C.P.b,pa=C&&C.P&&C.P.a;const done=+(pa&&pa.S&&pa.S.emoDone)||0;const L=pb&&pb.S&&Array.isArray(pb.S.coopEmo)?pb.S.coopEmo:[];
+  const h=CWo.seat==="a";let top=done;
+  if(!(!h&&typeof thinW==="function"&&thinW()))/* a C room: the guest's world is the host's lens, his delta brings it */
+   for(const e of L){if(!e||!(+e.id>done))continue;top=Math.max(top,+e.id);let p=null;try{p=emoByKey(String(e.who))}catch(x){}if(!p)continue;
+    let o=null;try{if(typeof MCK==="object"&&MCK){o=MCK.ev;MCK.ev=e.ev||null}}catch(x){}emoRp++;
+    try{emoSet(p,e.k,e.v,e.why,e.t)}catch(x){console.error("emoReplay",x)}finally{emoRp--;try{if(typeof MCK==="object"&&MCK)MCK.ev=o}catch(x){}}}
+  else for(const e of L)if(e&&+e.id>done)top=Math.max(top,+e.id);
+  if(h){if(top>done)S.emoDone=top;else if(done)S.emoDone=done}
+  else if(Array.isArray(S.coopEmo))S.coopEmo=S.coopEmo.filter(e=>e&&+e.id>done);
+  /* one clock for the seal: every world person's causes summed at the rebuilt week's khắc, the same on both seats */
+  if(typeof mkAll==="function"&&typeof mkSync==="function")for(const p of mkAll())try{mkSync(p)}catch(x){}}catch(e){console.error("emoReplay",e)}finally{emoSw--}};
+}
+window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress","emoSet"])};
 })();
 /* ================= jgreet: ONE GREETING NAME RULE + AG-MEET (owner 17/11 05:12Z, chosen 05:28Z; 05:25Z) =================
    GREETING (greetName(a,b,o), a greets b; the SAME function for her → NPC, NPC → her, NPC ↔ NPC, every greeting site):
@@ -78668,7 +78890,7 @@ function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j
  return L}
 const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
 function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
- const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
+ const opts=L.map(p=>{const c={n:p.name,fx:{},kgp:p.s,entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
   if(!p.free)kitOff(c,j95sNotFree(p.x),"không theo được hôm nay");return c});
  const go=ids=>{S.ent={d:j95sDay(),ids,at:k};let ok=false;try{goTo(k);ok=S.place!=="home"||Q.length>0}catch(e){j95sErr("ent",e)}if(!ok)delete S.ent;/* she did not leave (a gate, no khắc): the card comes again */};
  const goOpt={n:"Lên đường",fx:{},entGo:1,x:"",go:()=>go(opts.filter(c=>c.entId&&c.sel&&!c.off).map(c=>c.entId))};
@@ -87959,8 +88181,10 @@ function area(){const g=document.getElementById("game")||document.body,gr=g.getB
  const sr=st?st.getBoundingClientRect():{top:gr.top+163};const br=bar&&bar.getBoundingClientRect().height?bar.getBoundingClientRect():null;
  const top=Math.max(sr.top,gr.top)-gr.top,bot=(br?br.top:gr.bottom)-gr.top-6;return {g,left:4,top,w:gr.width-8,h:Math.max(200,bot-top)}}
 function picHTML(a){const u=a.pic;if(u&&/^(https?:|img\/|data:)/.test(u))return `<img class="kfoc-pic" alt="" src="${esc(u)}" draggable="false">`;if(u&&/^</.test(u))return `<span class="kfoc-pic">${u}</span>`;return `<span class="kfoc-pic kfoc-ph" aria-hidden="true"></span>`}
+/* sub-line parts: odds word, then «Tốn» + each cost of `ton` as its own unbreakable part («Tốn 2 khắc» · «Đức -2») */
+function subParts(a){const t=a.ton?String(a.ton).split(/\s*·\s*/).filter(Boolean):[];return [a.word,...t.map((x,i)=>i?x:"Tốn "+x)].filter(Boolean)}
 function btnHTML(a,i){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");
- const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join(" · ")}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
+ const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${subParts(a).map(x=>`<span>${esc(x)}</span>`).join(" · ")}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
 function fac(F){try{if(typeof j59fac==="function")return j59fac(F.src,F.p)||1}catch(e){}return 1}
 function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig&&(o.fig.currentSrc||o.fig.src))||(typeof o.fig==="string"?o.fig:"")||"";
  const F={o,A,m,src,p:o.p,groups:o.groups||[],group:o.group||(o.groups&&o.groups[0]&&o.groups[0].k),anims:[],open:true,playing:false};CUR=F;
@@ -88004,7 +88228,7 @@ function build(F){const G=F.groups,g=G.find(x=>x.k===F.group)||G[0];F.cur=g?g.ac
  fill(F,F.cur)}
 function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
 /* text never cut: title max 2 lines (clamp) + the sub-line «odds word · Tốn N khắc» whose two parts never break inside (nowrap spans), so on a narrow column it takes 2 lines and the price is never cut; a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */
-function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
+function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");b.classList.remove("kfoc-sub3");if(s&&s.scrollHeight>s.clientHeight+1)b.classList.add("kfoc-sub3")/* a sub-line of 3 lines (2 costs on a narrow column): title gives up its 2nd line, the price is never cut */;const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
   b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`)}})}
 /* replace the groups (caller's live counts); keeps the current group if it still exists; no fold animation; during choices/play the acts wait until play/choices end */
 function setGroups(F,G){F.groups=G||[];if(!F.groups.find(x=>x.k===F.group))F.group=F.groups[0]&&F.groups[0].k;if(F.pick||F.playing){F.saved=1;return}build(F)}
@@ -88101,7 +88325,7 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-b{position:relative;flex:none;display:flex;align-items:center;gap:8px;width:100%;height:var(--kfh,64px);min-height:var(--kfh,64px);box-sizing:border-box;padding:2px 8px 2px 4px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),0 2px 6px rgba(0,0,0,.25)}
 .kfoc-pic{flex:none;width:var(--kfp,56px);height:var(--kfp,56px);border-radius:8px;object-fit:cover;display:block;background:#efe3c8;overflow:hidden}
 .kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}
-.kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0;line-height:1.1}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.2em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal;overflow:hidden;max-height:2.2em}.kfoc-t small span{white-space:nowrap}
+.kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0;line-height:1.1}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.2em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal;overflow:hidden;max-height:2.2em}.kfoc-t small span{white-space:nowrap}.kfoc-b.kfoc-sub3 .kfoc-t small{max-height:3.3em}.kfoc-b.kfoc-sub3 .kfoc-t b{-webkit-line-clamp:1;max-height:1.1em}
 .kfoc-b.kfoc-hasi{padding-right:20px}
 .kfoc-skipw{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:6}.kfoc-skipw .kfoc-skip{width:auto;min-width:150px;max-width:280px;padding:4px 18px;justify-content:center;text-align:center;background:#fff3c4}
 .kfoc-b .kfoc-i{position:absolute;top:-6px;right:-4px}
@@ -88206,6 +88430,293 @@ function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=
  /* round 4 (review/jagday-walk-rv): the deed-road guard runs here, after every row writer of the chain (j95sPass retinue / j95sGuard), then the road pass */
  try{if(typeof agWalkGuard==="function")n+=agWalkGuard(R,k0,fresh)||0}catch(e){if(JWALK.errs.length<20)JWALK.errs.push("guard: "+(e&&e.message||String(e)))}
  try{n+=walkNpcPass(R,k0,fresh,first)}catch(e){if(JWALK.errs.length<20)JWALK.errs.push(e&&e.message||String(e))}return n}})();
+/* ================= jbaldf: BAL.df — the knobs of the Dư đồ focus view + on-figure act games (review/duodo-focus; owner OD 21/11 ~06:20Z / ~06:50Z / ~06:55Z) =================
+   ONE CORE (law 4): every number the focus view or an on-figure game reads lives here or in an existing BAL block it points to.
+   Outcomes are NOT here: a rolled act moves ONE ladder step (jsgame sgShift + BAL.cut.sgStep), a tiered act uses BAL.slap, a sure act keeps its numbers.
+   Difficulty (law 5) = jmgt mgTier(kind,{occ:"df"}): stake = BAL.mgTier.occ.df [base, perRank] by HER rank (the attacker's rank for a dodge), ease per kind = BAL.mgTier.kAdj.
+   Source of each block: plan dev/handover/reports/duodo-focus.md §PLAN 2 (act table) — first values, calibrated with dev/measure/df-bots.js. */
+Object.assign(BAL,{df:{
+ on:1,                 /* 0 = the stage tap opens the old person pop-up (rollback / tests) */
+ npc:1,                /* 0 = NPC-initiated cards keep the centre card (row 15 off) */
+ inPerson:["tat","phatquy","nuoc","tea","ink"],/* Hậu cung acts that need her THERE, offered in the focus view too (ONE act, same lock: doAct) */
+ art:0,                /* 1 when Foreman C's hand / prop sprites are on the CDN (ART REQUEST df-hand / df-props / df-npc-hand) */
+ /* engine knobs (all lerp pairs are [at ease 0, at ease 5]; ease = mgTier(kind,{occ:"df"}).ease clamped 0..5). ms = play time.
+    geo = where on the figure box each target sits (share of the figure height from its top; x share of the height from the centre line). */
+ easeTop:5,rawTop:10,/* the mgTier ease scale (0..5) and the raw mark scale (0..10) every game shares (jmgt / jsgame BAL.cut.sgStep) */
+ geo:{face:.11,faceX:0,ear:.10,earX:.075,chest:.30,hands:.47,feet:.93,amp:.12,side:1.4,thin:.25}/* side / thin: gauge placement beside a target (layout) */,
+ swipe:{ms:3200,zone:[.10,.18],spd:[.9,.25],fast:[1.6,.9],slow:[.5,.3],miss:0,low:3,mid:[5,8],top:10,dodgeMs:[900,1600]},/* dodgeMs = time the NPC's hand takes to land (ease 0 → 5) *//* fast / slow = stroke speed (figure-heights per s) for raw top / raw mid[0]; below slow = low; no hit = miss */
+ tug:{ms:5000,start:.3,push:[.055,.085],back:[.30,.12]},/* push = meter per tap, back = meter lost per second */
+ bow:{beats:3,gap:900,lead:600,r0:.45,r1:.07,win:[110,240],zero:3},/* ring from r0 to r1 (shares of figure height) in gap ms; full marks within ± win ms, nothing beyond zero × win */
+ drag:{ms:4000,zone:[.12,.22],spd:[.6,.15],near:2,nearRaw:2,inMin:5,grab:1.6},/* drop inside the zone = inMin..10 by distance; within near × radius = nearRaw */
+ ear:{ms:5000,need:2200,glance:[.9,.4],hot:.6,pen:3,zone:.09,mix:.37,grip:1.5},/* need = ms of safe holding for raw 10; glance = speed of the onlooker's look (per s); hot = look level that catches her; pen = raw lost when caught */
+ words:{ms:6000,n:6,good:[.4,.65],spd:[.35,.15],goal:5,size:.07,hit:.75,spread:2.5}/* spread = how wide around her the signs rise (× amp) */,/* n glyphs at once; good = share of fitting ones; goal = good taps for raw 10 (2 per tap, −2 per wrong) */
+ stare:{ms:4000,band:[.16,.30],mid:.6,rise:.6,fall:.5,push:[.9,.4],wob:1.3},/* hold = rise per s, release = fall per s; her push-back amplitude; raw = share of time in the band */
+ walk:{in:700,out:600,veil:360,stagger:40},/* motion ms (MOTION.md: 0.3–2 s); the kit part kitFocus owns its own timings, these feed the fallback */
+ react:1600,reactChars:60,/* the reaction line on the figure: the first sentence of the result, at most this many letters */
+ idle:{every:[20000,40000],first:8000}/* mood bubble on the place stage: one person, at most once per this many ms (random in range); first = earliest after arriving */}});
+/* the new occasion + kinds in the ONE tier table (jmgt): her rank raises the stake (0 at Đáp ứng … 2.1 at the top: ease 2 → about 0.3, spread over the whole climb) */
+try{BAL.mgTier.occ.df=BAL.mgTier.occ.df||[0,.3];for(const k of ["df_swipe","df_tug","df_bow","df_drag","df_ear","df_words","df_stare"])if(BAL.mgTier.kAdj[k]==null)BAL.mgTier.kAdj[k]=0}catch(e){}
+/* ================= jdf: Dư đồ FOCUS VIEW — data + act runner (review/duodo-focus; owner OD 21/11 ~06:20Z idea, ~06:50Z approval, ~06:55Z NPC-initiated) =================
+   Plan + act table: dev/handover/reports/duodo-focus.md §PLAN. Numbers: BAL.df (jbaldf). View: the kit part kitFocus (K-FOCUS-1, kit keeper) — this file draws NOTHING itself.
+   (1) dfActs(i)  → the groups of the person curPeople()[i] for the focus view: the SAME acts the stage pop-up offers (j2 talkOpts → kitActCat groups,
+       «làm được/tổng», lock reasons, the §6.3 row html for the «!» popover) + the in-person Hậu cung acts (BAL.df.inPerson: Tát, Phạt quỳ, Hắt nước, Hắt trà,
+       Quạt mực) for a consort she stands with — each still runs its OWN path (doAct: same price, same lock, same result card).
+   (2) dfRun(i,id,res) → runs one act with the on-figure game result res = {raw 0..10, skipped}: class A (rolled) = ONE ladder step (sgShift, BAL.cut.sgStep)
+       read by the talkOpts wrapper below only inside this call; class B (tiered: tat / nuoc / tea / ink) = the BAL.slap tier (SLAP.next / LOOKS tier);
+       class C (sure) = numbers untouched; class D (open: gift picker, jsgame, jpma) = that flow opens as it is.
+   (3) dfOpen(i) — the stage tap: kitFocus when the kit part exists and BAL.df.on, else the old pop-up (popIdx) so nothing changes until KIT READY.
+   popIdx stays the source of truth (talk(), the log sync popMsg, co-op) — the focus view sets it on open and clears it on close.
+   Co-op: everything here is her local view; acts go the existing runAct / jcoopworld path. ===================================================== */
+const DF={i:null,step:0,cls:{}};window.DF=DF;
+/* class of a talk option: D = opens its own flow, A = rolled, C = sure */
+function dfCls(a){if(!a)return"C";if(a.open)return"D";if(a.pm)return"D";const o=typeof oddsOf==="function"?oddsOf(a):(a.o==null?100:a.o);return o<100&&!a.lock?"A":"C"}
+/* the engine of an act name (the act table, §PLAN 2): one rule by meaning, no per-person variant */
+const DF_ENG=[
+ [/^Tát$|^Hắt nước$|^Hắt trà$|^Quạt mực$/,"swipe"],[/Ngáng chân/,"swipe"],[/Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen/,"tug"],
+ [/^Chào hỏi|^Thỉnh an|^Nhún nhường|^Tạ lỗi/,"bow"],
+ [/^Tặng quà|^Dâng |^Đưa cơm áo|^Mua |^Bài thuốc|^Xin thuốc|^Đút lót/,"drag"],[/son phấn/,"drag"],
+ [/bí mật|^Rỉ tai|^Bàn tán|^Kể tội|^Cảnh báo|^Nói thật lòng|^Hỏi chuyện cũ|^Nghe ngóng|^Sai đi dò la|^Hỏi sở thích/,"ear"],
+ [/^Khiêu khích|^Trút giận|^Hạ nhục|^Hặc |^Tố vượt phẩm|^Tố xa xỉ|^Phạt quỳ/,"stare"]];
+function dfEng(n){const t=String(n||"").replace(/<[^>]+>/g,"");for(const [re,e] of DF_ENG)if(re.test(t))return e;return"words"}
+/* the in-person Hậu cung acts of a consort she stands with (ONE act, its own lock: the same ok() the Hậu cung card asks) */
+function dfInPerson(p){const v=p&&p.ref,L=[];if(!v||!(p.kind==="rival"||p.kind==="hh")||typeof ACT!=="object"||typeof rivals==="undefined")return L;
+ const i=rivals.indexOf(v);if(i<0)return L;
+ for(const k of (BAL.df&&BAL.df.inPerson)||[]){const a=ACT[k];if(!a)continue;let ok=false;try{ok=!!a.ok(S,v)&&together(S,v)&&(typeof k61Named!=="function"||k61Named(v))}catch(e){}/* j61: an act on a person she cannot name is blocked in doAct: never offered */if(ok)L.push({k,a,i})}
+ return L}
+/* the act picture: the same picture the person-card row shows (jopic kitOptPic, else the j79 act / category picture) — a url string for kitFocus */
+function dfPic(n){try{const r=typeof kitOptPic==="function"?kitOptPic(n):null;if(r&&r.src)return r.src}catch(e){}try{const a=typeof kitActArt==="function"?kitActArt(n):null;if(a&&a.src)return a.src}catch(e){}return""}
+function dfWord(o){return typeof KIT_ODDS!=="undefined"&&typeof oddsLv==="function"?KIT_ODDS[oddsLv(o)]:""}
+/* (1) the groups — read from the person card the stage pop-up draws TODAY (j15 popCard + every wrapper: elders, servants, maids, the co-op friend …),
+   so the focus view always offers exactly what the pop-up offers, for every kind of person (law 11), plus the in-person Hậu cung acts */
+function dfCard(i){const p=curPeople()[i];if(!p)return null;const d=document.createElement("div");try{d.innerHTML=popCard(p,i)}catch(e){return null}return d}
+function dfBtnTitle(b){const n=b.firstChild;return String(n&&n.nodeType===Node.TEXT_NODE?n.textContent:(b.childNodes[0]&&b.childNodes[0].textContent)||"").trim()}
+/* a button's identity = its data-* attributes (the live card may be re-split by the kit observer; data stays) */
+function dfSig(b){return Object.keys(b.dataset).filter(k=>!/^k/.test(k))/* kit decorations (ka, kart, kph, krv…) are added later by the kit observers */.sort().map(k=>k+"="+b.dataset[k]).join("&")}
+/* a card with ONE pane has no tab row: its group takes the kit category name of its acts (never a nameless head tab) */
+/* the kit fan draws n / word / ton / why as TEXT (escaped): game formatters (fmt, whyTime) give HTML, so every such field is reduced to its text here */
+function dfTxt(h){if(!h)return"";const d=document.createElement("div");d.innerHTML=String(h);return d.textContent.replace(/\s+/g," ").trim()}
+/* ONE rule: which button of a person card is an ACT. Not acts: group tabs (.pct), ✕ (#popx / .pcx / .kit-x), and the info chips of the card head
+   — «Đã biết: N tin ›» (data-kintel), «Chứng cứ N ›» (data-kev), any .chip / .kchipb, anything inside .pcinfo (rv duodo-focus 43bc4ba2 #2) */
+function dfIsAct(b){return !(b.classList.contains("pct")||b.id==="popx"||b.classList.contains("pcx")||b.classList.contains("kit-x")||b.classList.contains("chip")||b.classList.contains("kchipb")||b.hasAttribute("data-kintel")||b.hasAttribute("data-kev")||!!b.closest(".pcinfo"))}
+window.dfIsAct=dfIsAct;
+function dfCatName(acts){for(const a of acts){let c="";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){}if(c&&typeof KIT_CAT!=="undefined"&&KIT_CAT[c])return KIT_CAT[c][0]}return""}
+function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let T=null;try{T=talkOpts(p)}catch(e){T=[]}
+ const tabs=[...d.querySelectorAll(".pctabs .pct")].map(t=>({n:t.dataset.pct||t.textContent.trim()}));
+ const panes=[...d.querySelectorAll(".pcg")];const src=panes.length?panes:[d];const out=[];
+ src.forEach((g,gi)=>{const acts=[];[...g.querySelectorAll("button")].forEach((b,bi)=>{if(!dfIsAct(b))return;
+   const n=dfBtnTitle(b);if(!n)return;const sm=b.querySelector("small");const why=(b.querySelector(".kwhy")||{}).textContent||"";const o=b.dataset.o!=null?T[+b.dataset.o]:null;
+   const oo=o?(typeof oddsOf==="function"?oddsOf(o):(o.o==null?100:o.o)):null;/* 100 = the game's own «sure» mark on an option (o:100), not a balance number */
+   acts.push({id:"g"+dfSig(b),n,cls:o?dfCls(o):"C",eng:dfEng(n),word:oo!=null&&oo<100?dfWord(oo):"",ton:o?[talkK(o)+" khắc",o.c&&o.c.bac?(-o.c.bac)+" bạc":""].filter(Boolean).join(" · "):"",
+    off:!!b.disabled,why,info:b.outerHTML,small:sm?sm.innerHTML:"",pic:dfPic(n)})});
+  out.push({k:"g"+gi,n:(tabs[gi]||{}).n||dfCatName(acts),acts})});
+ const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);
+ if(!done)for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";
+  const c=(()=>{try{return (typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){return""}})(),cn=typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:"";
+  let G=out.find(g=>g.n===cn)||(!cn&&out[0]);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
+  G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?dfTxt(fmt(a.c||{})):""].filter(Boolean).join(" · "),off:!!why,why,info:"",small:"",pic:dfPic(a.n)})}
+ return out.filter(g=>g.acts.length).map(g=>Object.assign(g,{can:g.acts.filter(a=>!a.off).length,tot:g.acts.length}))}
+/* (2) run one act. res = {raw, skipped} from the on-figure game (undefined = no game played: plain odds) */
+function dfStep(res){if(!res||res.skipped||res.raw==null)return 0;return typeof sgStep==="function"?sgStep(res.raw):0}
+function dfRun(i,id,res){const p=curPeople()[i];DF.why="";if(!p||S.dead||Q.length){DF.why=!p?"nobody":"busy";return false}
+ if(id[0]==="g"){/* the SAME button of the live pop-up card (hidden under the focus view): every existing click handler runs as before */
+  popIdx=i;try{renderStage()}catch(e){}let host=document.querySelector("#popw .pcpop");if(!host){/* a re-render in between dropped it: draw the same card the stage draws (j6 renderStage line) into its own place */try{const w=document.getElementById("popw");w.innerHTML=`<div class="pop pcpop">${popCard(p,i)}</div>`;if(typeof kitFix==="function")kitFix(w)}catch(e){}host=document.querySelector("#popw .pcpop")}if(!host){DF.why="no card";return false}const sig=id.slice(1);
+  const b=[...host.querySelectorAll("button")].find(x=>dfSig(x)===sig&&dfBtnTitle(x));if(!b||b.disabled){DF.why=b?"locked":"no button "+sig+" in "+[...host.querySelectorAll("button")].map(dfSig).join("|");return false}
+  DF.step=dfStep(res);try{b.click()}finally{DF.step=0}return true}
+ if(id[0]==="a"){const k=id.slice(1),v=p.ref,ri=rivals.indexOf(v);if(ri<0)return false;
+  const tier=res&&!res.skipped&&res.raw!=null&&typeof slapTierOf==="function"?slapTierOf(res.raw):(BAL.slap?BAL.slap.def:1);
+  if(k==="tat"&&typeof SLAPG==="object"&&typeof SLAP==="object"){SLAPG.busy=1;SLAP.next=tier;try{doAct(ri,k)}finally{SLAPG.busy=0;SLAP.next=0}return true}
+  if(typeof LKG==="object"&&LKG&&typeof LK_ACT==="object"&&LK_ACT[k]){LKG.busy=1;LKG.next=tier;try{doAct(ri,k)}finally{LKG.busy=0;LKG.next=0}return true}
+  doAct(ri,k);return true}
+ return false}
+/* class A: inside dfRun only, every talk option's odds move the game's ONE ladder step (the same sgShift the scheme games use) */
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!DF.step||!Array.isArray(A)||typeof sgShift!=="function")return A;
+ return A.map(a=>{if(!a||a.lock||a.o==null||a.o>=100)return a;return Object.assign({},a,{o:sgShift(a.o,DF.step)})})}})();
+/* (3) the stage tap */
+function dfViewOn(){return !!(BAL.df&&BAL.df.on)&&typeof kitFocus==="object"&&kitFocus&&typeof kitFocus.open==="function"&&typeof window.__bot==="undefined"}
+window.dfActs=dfActs;window.dfRun=dfRun;window.dfEng=dfEng;window.dfCls=dfCls;
+/* ================= jdfg: the ON-FIGURE act games of the Dư đồ focus view (review/duodo-focus; owner OD 21/11 ~06:50Z «bất kỳ một cái action nào … đều sẽ là một cái mini game») =================
+   Seven gesture engines played ON the person (act table: dev/handover/reports/duodo-focus.md §PLAN 2):
+     swipe «Giáng tay / Hắt / Ngáng»  stroke through the moving target (face, or feet) — speed = strength
+     tug   «Xô»                      tap fast to push the balance meter over the pond edge against her pull-back
+     bow   «Hành lễ»                 tap as each ring closes on her (3 beats)
+     drag  «Trao tay»                drag the token into her moving hands
+     ear   «Ghé tai»                 hold at her ear while the onlooker does not look
+     words «Lời hay»                 tap the fitting signs (check), never the wrong ones (cross)
+     stare «Đấu mắt»                 hold to keep the pressure inside the band while she pushes back
+   ONE shell dfGame(eng, o): o = {box (the play layer element: kitFocus F.play()), fig {x,y,w,h} (the figure box inside box, CSS px), rank (whose rank sets the stake:
+   hers, the attacker's for a dodge), at ("feet" for a low swipe), onDone({raw 0..top, skipped}), hud(o)} → {skip(), destroy()}.
+   NO word in play (owner OD 20/11 ~05:10Z): rings, gauges, kit signs (jnwb NWB check / cross) only; the score chip / clock come through o.hud (kit kitGameMark / kitGameClock).
+   Numbers: BAL.df (jbaldf) — nothing typed here. Difficulty (law 5): jmgt mgTier("df_<eng>", {occ:"df", rank}) → ease 0..5 → every lerp pair of BAL.df.<eng>.
+   Painted hand / props (ART REQUEST df-hand / df-props) draw on top when BAL.df.art is on; until then the stroke trail is the kit gold line. ====================== */
+const DFG={cur:null,ENG:{}};window.DFG=DFG;const DFG_MS=1000;/* ms per second (unit) */
+function dfgL(pr,f){return pr[0]+(pr[1]-pr[0])*f}
+function dfgEase(eng,rank){let t=null;try{t=mgTier("df_"+eng,{occ:"df",rank,lv:0})}catch(e){}const top=(BAL.df.easeTop);return{t,f:cl(t?t.ease:0,0,top)/top}}
+function dfgSeg(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy;let u=L?((p.x-a[0])*dx+(p.y-a[1])*dy)/L:0;u=cl(u,0,1);return Math.hypot(a[0]+u*dx-p.x,a[1]+u*dy-p.y)}
+function dfgPath(name){try{const s=String(NWB.P[name]||"");return s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]))}catch(e){return[]}}
+function dfgCol(){const O=typeof KIT_ODDS_COL!=="undefined"?KIT_ODDS_COL:[];return{ink:kg82Col("--ink",kg82Col("--body-ink","#3b2a1c")),gold:kg82Col("--gold","#c99a1e"),red:O[0]||"#b8321f",green:O[O.length-1]||"#2d7a52",paper:kg82Col("--paper","#f6eedc")}}
+function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return null;if(DFG.cur)DFG.cur.destroy();
+ const B=BAL.df[eng],top=BAL.df.rawTop,box=o.box,cv=document.createElement("canvas");cv.className="kfoc-cv";cv.setAttribute("aria-hidden","true");
+ Object.assign(cv.style,{position:"absolute",left:"0",top:"0",width:"100%",height:"100%",touchAction:"none"});box.appendChild(cv);
+ const W=box.clientWidth,H=box.clientHeight,dpr=Math.max(1,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);const g=cv.getContext("2d");g.scale(dpr,dpr);
+ const F=o.fig,fh=F.h,ez=dfgEase(eng,o.rank);
+ const c={eng,o,B,top,W,H,g,fh,e:ez.f,tier:ez.t,col:dfgCol(),P:(gy,gx)=>({x:F.x+F.w/2+(gx||0)*fh,y:F.y+gy*fh}),t0:performance.now(),done:false,raf:0};
+ c.now=()=>performance.now()-c.t0;
+ c.end=raw=>{if(c.done)return;c.done=true;raw=cl(Math.round(raw),0,top);c.raw=raw;try{o.hud&&o.hud({score:raw,end:true})}catch(e){}stop();try{o.onDone&&o.onDone({raw,skipped:false})}catch(e){console.error(e)}};
+ const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*(W/Math.max(1,r.width)),(e.clientY-r.top)*(H/Math.max(1,r.height))]};
+ const dn=e=>{if(c.done)return;e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}const [x,y]=pt(e);c.down&&c.down(x,y,c.now())},
+  mv=e=>{if(c.done)return;const [x,y]=pt(e);c.move&&c.move(x,y,c.now())},up=e=>{if(c.done)return;const [x,y]=pt(e);c.up&&c.up(x,y,c.now())};
+ cv.addEventListener("pointerdown",dn);cv.addEventListener("pointermove",mv);cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
+ E(c);let last=0;
+ const frame=()=>{if(c.done)return;const t=c.now(),dt=last?t-last:0;last=t;if(c.tick)c.tick(dt,t);if(c.done)return;
+  if(t>=(c.ms||B.ms)){c.timeout?c.timeout():c.end(0);return}
+  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}try{o.hud&&o.hud({time:Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS))})}catch(e){}c.raf=requestAnimationFrame(frame)};
+ function stop(){cancelAnimationFrame(c.raf);cv.removeEventListener("pointerdown",dn);cv.removeEventListener("pointermove",mv);cv.removeEventListener("pointerup",up);cv.removeEventListener("pointercancel",up);cv.remove();if(DFG.cur===h)DFG.cur=null}
+ const h={c,skip(){if(c.done)return;c.done=true;stop();try{o.onDone&&o.onDone({raw:null,skipped:true})}catch(e){console.error(e)}},destroy(){c.done=true;stop()},
+  /* test / measure oracle (never drawn): where the target is now */peek(){return c.peek?c.peek(c.now()):null},canvas:cv};
+ DFG.cur=h;c.raf=requestAnimationFrame(frame);return h}
+window.dfGame=dfGame;
+/* ---------- drawing helpers (kit colours, no words) ---------- */
+function dfgRing(g,x,y,r,col,w){g.beginPath();g.arc(x,y,Math.max(1,r),0,Math.PI*2);g.strokeStyle=col;g.lineWidth=w||3;g.stroke()}
+function dfgDot(g,x,y,r,col){g.beginPath();g.arc(x,y,Math.max(1,r),0,Math.PI*2);g.fillStyle=col;g.fill()}
+function dfgTrail(g,pts,col){if(pts.length<2)return;g.beginPath();g.moveTo(pts[0][0],pts[0][1]);for(const p of pts)g.lineTo(p[0],p[1]);g.strokeStyle=col;g.lineWidth=5;g.lineCap="round";g.lineJoin="round";g.stroke()}
+function dfgBar(g,x,y,w,h,v,col,band){g.fillStyle="rgba(0,0,0,.18)";g.fillRect(x,y,w,h);if(band){g.fillStyle="rgba(63,138,67,.35)";g.fillRect(x,y+h*(1-band[1]),w,h*(band[1]-band[0]))}g.fillStyle=col;const v2=cl(v,0,1);g.fillRect(x,y+h*(1-v2),w,h*v2);g.strokeStyle="rgba(0,0,0,.35)";g.lineWidth=1;g.strokeRect(x,y,w,h)}
+function dfgSign(g,name,x,y,s,col){const P=dfgPath(name);g.save();g.translate(x-s/2,y-s/2);g.scale(s/24,s/24);g.strokeStyle=col;g.lineWidth=2.6;g.lineCap="round";g.lineJoin="round";for(const p of P)g.stroke(p);g.restore()}
+/* ---------- swipe: stroke through the moving target; strength = stroke speed ---------- */
+DFG.ENG.swipe=c=>{const B=c.B,G=BAL.df.geo,low=c.o.at==="feet",r=dfgL(B.zone,c.e)*c.fh/2,A=G.amp*c.fh,w=dfgL(B.spd,c.e)*c.fh/Math.max(1,A),fast=dfgL(B.fast,c.e),slow=dfgL(B.slow,c.e);let pts=[];
+ /* dodge (an NPC's hand comes at her face, OD 06:55Z «Né»): the target flies in from the side and must be struck away before it lands; hit = top, landed = miss */
+ const dm=dfgL(B.dodgeMs,c.e),side=(Math.random()*2|0)?1:-1;if(c.o.dodge)c.ms=dm;
+ const zc=t=>{const b=c.P(low?G.feet:G.face,G.faceX);if(c.o.dodge){const f=cl(t/dm,0,1);return{x:b.x+side*(1-f)*c.W/2,y:b.y}}return{x:b.x+A*Math.sin(t/DFG_MS*w),y:b.y}};
+ c.down=(x,y,t)=>{pts=[[x,y,t]]};c.move=(x,y,t)=>{if(pts.length)pts.push([x,y,t])};
+ c.up=(x,y,t)=>{if(!pts.length)return;pts.push([x,y,t]);const z=zc(t);let hit=false,len=0;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];len+=Math.hypot(b[0]-a[0],b[1]-a[1]);if(dfgSeg(z,a,b)<=r)hit=true}
+  const v=len/c.fh/(Math.max(1,pts[pts.length-1][2]-pts[0][2])/DFG_MS);c.stroke={hit,v};
+  if(c.o.dodge){if(hit)return c.end(B.top);pts=[];return}
+  if(!hit)return c.end(B.miss);if(v>=fast)return c.end(B.top);if(v>=slow)return c.end(B.mid[0]+(B.mid[1]-B.mid[0])*(v-slow)/Math.max(Number.EPSILON,fast-slow));return c.end(B.low)};
+ c.draw=(g,t)=>{const z=zc(t);dfgRing(g,z.x,z.y,r,c.col.red,3);dfgTrail(g,pts,c.col.gold)};c.timeout=()=>c.end(B.miss);c.peek=t=>Object.assign(zc(t),{r,fast,slow})};
+/* ---------- tug: tap to push the meter to the pond edge; she pulls back ---------- */
+DFG.ENG.tug=c=>{const B=c.B,G=BAL.df.geo,push=dfgL(B.push,c.e),back=dfgL(B.back,c.e);let m=B.start,mx=m;
+ c.down=()=>{m=Math.min(1,m+push);mx=Math.max(mx,m);if(m>=1)c.end(c.top)};c.tick=dt=>{m=Math.max(0,m-back*dt/DFG_MS)};
+ c.draw=g=>{const p=c.P(G.chest,0),bw=c.fh*G.amp,bh=c.fh*G.amp*2.5;dfgBar(g,p.x+c.fh*G.earX*2,p.y,bw/3,bh,m,c.col.gold);dfgSign(g,"check",p.x+c.fh*G.earX*2+bw/6,p.y-bw/3,bw/2.5,c.col.green)};
+ c.timeout=()=>c.end(c.top*mx);c.peek=()=>({m,push,back})};
+/* ---------- bow: tap as each ring closes on her ---------- */
+DFG.ENG.bow=c=>{const B=c.B,G=BAL.df.geo,win=dfgL(B.win,c.e),beats=[];for(let k=0;k<B.beats;k++)beats.push({t:B.lead+k*B.gap,s:null});c.ms=B.lead+(B.beats-1)*B.gap+win*B.zero;
+ const score=err=>err<=win?1:Math.max(0,1-(err-win)/Math.max(1,(B.zero-1)*win));
+ c.down=(x,y,t)=>{const b=beats.filter(b=>b.s==null).sort((a,b)=>Math.abs(a.t-t)-Math.abs(b.t-t))[0];if(!b||Math.abs(b.t-t)>B.gap/2)return;b.s=score(Math.abs(b.t-t));if(beats.every(b=>b.s!=null))fin()};
+ const fin=()=>c.end(c.top*beats.reduce((s,b)=>s+(b.s||0),0)/beats.length);
+ c.tick=(dt,t)=>{for(const b of beats)if(b.s==null&&t>b.t+win*B.zero)b.s=0;if(beats.every(b=>b.s!=null))fin()};
+ c.draw=(g,t)=>{const p=c.P(G.chest,0);dfgRing(g,p.x,p.y,B.r1*c.fh,c.col.ink,2);for(const b of beats){if(b.s!=null)continue;const f=(b.t-t)/B.gap;if(f>1||f<-.2)continue;dfgRing(g,p.x,p.y,(B.r1+(B.r0-B.r1)*Math.max(0,f))*c.fh,f<=win/B.gap&&f>=-win/B.gap?c.col.green:c.col.gold,4)}};
+ c.timeout=fin;c.peek=t=>{const b=beats.find(b=>b.s==null);return b?{at:b.t-t,win}:null}};
+/* ---------- drag: put the token into her moving hands ---------- */
+DFG.ENG.drag=c=>{const B=c.B,G=BAL.df.geo,r=dfgL(B.zone,c.e)*c.fh/2,A=G.amp*c.fh,w=dfgL(B.spd,c.e)*c.fh/Math.max(1,A);const home=c.P(G.feet,0);let tok={x:home.x,y:home.y},drag=false;
+ const zc=t=>{const b=c.P(G.hands,0);return{x:b.x+A*Math.sin(t/DFG_MS*w),y:b.y}};
+ c.down=(x,y)=>{if(Math.hypot(x-tok.x,y-tok.y)<=r*B.grab)drag=true};c.move=(x,y)=>{if(drag){tok={x,y}}};
+ c.up=(x,y,t)=>{if(!drag)return;drag=false;const z=zc(t),d=Math.hypot(tok.x-z.x,tok.y-z.y);
+  if(d<=r)return c.end(B.inMin+(c.top-B.inMin)*(1-d/r));if(d<=B.near*r)return c.end(B.nearRaw);tok={x:home.x,y:home.y}};
+ c.draw=(g,t)=>{const z=zc(t);dfgRing(g,z.x,z.y,r,c.col.green,3);dfgDot(g,tok.x,tok.y,r*.55,c.col.gold);dfgRing(g,tok.x,tok.y,r*.55,c.col.ink,2)};c.timeout=()=>c.end(0);c.peek=t=>Object.assign(zc(t),{r,tok})};
+/* ---------- ear: hold at her ear while the onlooker does not look ---------- */
+DFG.ENG.ear=c=>{const B=c.B,G=BAL.df.geo,z=c.P(G.ear,G.earX),r=B.zone*c.fh,sp=dfgL(B.glance,c.e)*Math.PI*2,ph=Math.random()*Math.PI*2;let hold=false,acc=0,pen=0;
+ const look=t=>.5+.5*Math.sin(t/DFG_MS*sp+ph)*Math.cos(t/DFG_MS*sp*BAL.df.ear.mix+ph);
+ c.down=(x,y)=>{hold=Math.hypot(x-z.x,y-z.y)<=r*BAL.df.ear.grip};c.up=()=>{hold=false};c.move=(x,y)=>{if(hold&&Math.hypot(x-z.x,y-z.y)>r*BAL.df.ear.grip*BAL.df.ear.grip)hold=false};
+ c.tick=(dt,t)=>{if(!hold)return;if(look(t)>=B.hot){pen++;hold=false;return}acc+=dt;if(acc>=B.need)c.end(c.top-pen*B.pen)};
+ c.draw=(g,t)=>{const L=look(t);dfgRing(g,z.x,z.y,r,hold?c.col.green:c.col.gold,3);const p=c.P(G.face,0);dfgBar(g,p.x-c.fh*G.earX*3,p.y,c.fh*G.amp/3,c.fh*G.amp*2,L,L>=B.hot?c.col.red:c.col.ink,null);
+  dfgBar(g,z.x+r*G.side,z.y-r,c.fh*G.amp*G.thin,r*2,acc/B.need,c.col.green,null)};
+ c.timeout=()=>c.end(c.top*acc/B.need-pen*B.pen);c.peek=t=>({x:z.x,y:z.y,r,look:look(t),hot:B.hot,acc,pen})};
+/* ---------- words: tap the fitting signs, never the wrong ones ---------- */
+DFG.ENG.words=c=>{const B=c.B,G=BAL.df.geo,good=dfgL(B.good,c.e),sp=dfgL(B.spd,c.e)*c.fh,sz=B.size*c.fh;let score=0,hits=0;const L=[];
+ const spawn=t=>{const p=c.P(G.chest,0);return{x:p.x+(Math.random()*2-1)*c.fh*G.amp*B.spread,y:p.y+c.fh*G.amp*(1+Math.random()),born:t,ok:Math.random()<good}};
+ for(let k=0;k<B.n;k++){const s=spawn(0);s.y-=k*c.fh*G.amp*.6;L.push(s)}
+ c.down=(x,y,t)=>{/* the NEAREST sign under the finger (two signs can overlap: the one she aims at counts, not the first in the list) */let i=-1,dm=sz*B.hit;L.forEach((s,k)=>{const d=Math.hypot(s.x-x,s.y-y);if(d<=dm){dm=d;i=k}});if(i<0)return;const s=L[i];if(s.ok){score+=2;hits++}else score-=2;L[i]=spawn(t);if(hits>=B.goal)c.end(score)};
+ c.tick=(dt,t)=>{for(let i=0;i<L.length;i++){L[i].y-=sp*dt/DFG_MS;if(L[i].y<c.P(0,0).y)L[i]=spawn(t)}};
+ c.draw=g=>{for(const s of L){dfgDot(g,s.x,s.y,sz/2,c.col.paper);dfgRing(g,s.x,s.y,sz/2,s.ok?c.col.green:c.col.red,2);dfgSign(g,s.ok?"check":"cross",s.x,s.y,sz*.6,s.ok?c.col.green:c.col.red)}};
+ c.timeout=()=>c.end(score);c.peek=()=>({L:L.map(s=>({x:s.x,y:s.y,ok:s.ok})),score,hits})};
+/* ---------- stare: hold to keep the pressure inside the band while she pushes back ---------- */
+DFG.ENG.stare=c=>{const B=c.B,G=BAL.df.geo,band=dfgL(B.band,c.e),push=dfgL(B.push,c.e),lo=B.mid-band/2,hi=B.mid+band/2;let p=0,hold=false,inT=0;
+ c.down=()=>{hold=true};c.up=()=>{hold=false};
+ c.tick=(dt,t)=>{const s=dt/DFG_MS;p=cl(p+(hold?B.rise:-B.fall)*s+push*Math.sin(t/DFG_MS*Math.PI*BAL.df.stare.wob)*s,0,1);if(p>=lo&&p<=hi)inT+=dt};
+ c.draw=g=>{const q=c.P(G.chest,0);dfgBar(g,q.x+c.fh*G.earX*2,q.y-c.fh*G.amp,c.fh*G.amp/3,c.fh*G.amp*3,p,p>=lo&&p<=hi?c.col.green:c.col.gold,[lo,hi])};
+ c.timeout=()=>c.end(c.top*inT/B.ms);c.peek=()=>({p,lo,hi,inT})};
+/* ================= jdfv: Dư đồ FOCUS VIEW — the controller (review/duodo-focus; owner OD 21/11 ~06:20Z / ~06:50Z / ~06:55Z) =================
+   Glue only: kit part kitFocus (K-FOCUS-1) draws, jdf gives the acts + runs them, jdfg plays the on-figure games. Nothing here draws or holds a number.
+   (1) THE STAGE TAP: a tap on a person on the place stage opens the focus view (she walks forward, map dims, head tabs = the card's groups, acts fan L/R).
+       The old pop-up card stays the hidden source under it (popIdx = that person) so every existing handler, the log sync and co-op keep working.
+   (2) AN ACT: locked → kitFocus shows the reason; class D (own flow: gift picker, jsgame, jpma) → that flow opens as it is; else the act's on-figure game
+       (DF_ENG) plays in F.play() with «Làm luôn» = skip → dfRun(i,id,{raw|skipped}) → the result card / log as today + the reaction on the figure.
+   (3) NPC-INITIATED (OD 06:55Z): a person card (Q) whose speaker stands with her at this place, while she looks at the place stage, plays in the SAME
+       scene: the person walks in, the bottom SAY box carries the card text, «Tiếp» → the card's options fan out L/R; picking one = chooseM (the card's
+       own code). A dodge inside it (jslap / jlooks slapGame {dodge}) is played ON the figure (swipe dodge: strike the incoming hand away) and hands its
+       mark back to slapGame's own onDone — the dodge rule (one tier lower, nhẹ = miss) is unchanged.
+   Off when BAL.df.on = 0, under bots, or before the kit part exists (dfViewOn). ===================================================== */
+function dfFig(i){const t=document.querySelector(`#tokens .tok[data-p="${i}"]`);return t?(t.querySelector("img.figimg")||t):null}
+/* the focus needs HER stage figure picture (people in the «+N» overflow have no token / picture): without one the old pop-up / centre card is used, never an empty frame */
+function dfHasFig(i){const f=dfFig(i);return !!(f&&f.tagName==="IMG"&&(f.currentSrc||f.getAttribute("src")))}
+function dfFigBox(F,layer){/* the figure box inside the play layer (CSS px) */
+ try{const fr=(F.figRect?F.figRect():null)||(F.figEl&&F.figEl.getBoundingClientRect()),lr=layer.getBoundingClientRect();if(fr)return{x:fr.left-lr.left,y:fr.top-lr.top,w:fr.width,h:fr.height}}catch(e){}
+ return{x:layer.clientWidth/4,y:0,w:layer.clientWidth/2,h:layer.clientHeight}}
+function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.tot,acts:g.acts.map(a=>({id:a.id,n:a.n,pic:a.pic,word:a.word,ton:a.ton,off:a.off,why:a.why,info:a.info}))}))}
+/* kitFocus API glue (K-FOCUS-1, review/kit-focus): hud(mark "n/10", clock "N giây"); groups refresh; the play layer + «Làm luôn» (kit kitQuick in the kit HUD strip) + the kit back «◂» = cancel, no act */
+function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
+function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
+/* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Làm luôn",sub:"không chơi: như thường",onSkip},onBack})}
+function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
+function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
+/* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
+   people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
+function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}
+function dfIdx(p){p=p||DF.p;if(!p)return -1;try{return curPeople().findIndex(x=>dfSame(x,p))}catch(e){return -1}}
+function dfGone(){const F=DF.F;if(F){try{F.close()}catch(e){try{F.destroy()}catch(x){}}}else dfClosed(DF.tk)}
+function dfHere(){const k=dfIdx();if(k<0){dfGone();return -1}DF.i=k;popIdx=k;return k}
+function dfOpen(i){const p=curPeople()[i];if(!p)return false;if(!dfViewOn()||!dfHasFig(i)){popIdx=i;popMsg="";renderStage();return false}
+ /* kitFocus.open destroys the focus already up (e.g. an NPC encounter): its onClose must not clear THIS one — each open has its own token */
+ const fig=dfFig(i);const tk={};DF.tk=tk;DF.encM=null;DF.p=p;DF.i=i;popIdx=i;popMsg="";renderStage();
+ DF.F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:dfData(i),onAct:id=>dfTap(id),onClose:()=>dfClosed(tk)});return true}
+function dfClosed(tk){if(DF.tk!==tk)return;const i=DF.i;DF.i=null;DF.p=null;DF.F=null;DF.tk=null;DF.encM=null;if(popIdx===i){popIdx=null;popMsg=""}try{renderStage()}catch(e){}}
+function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id===id)return a;return null}
+function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
+ /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
+ const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
+ if(a.cls==="D"){run();return}
+ const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
+ DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
+  onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
+ if(!DF.play){dfUnplay(F);run()}}
+function dfAfter(a,res){const F=DF.F;if(!F)return;const i=dfIdx();if(i<0){dfGone();return}try{const ln=dfLast();F.react({line:ln?ln.slice(0,BAL.df.reactChars):"",seal:true})}catch(e){}dfSetGroups(F,dfData(i))}
+/* the old pop-up stays hidden under the focus view (the global [hidden] rule; no CSS of its own) */
+(function(){const r0=renderStage;renderStage=function(){if(DF.p&&DF.F&&!DF.play){const k=dfIdx();if(k<0){setTimeout(()=>{if(DF.p&&dfIdx()<0)dfGone()},0)}else{DF.i=k;popIdx=k}}
+ const r=r0.apply(this,arguments);try{const w=document.getElementById("popw");if(w)w.hidden=DF.i!=null}catch(e){}return r}})();
+/* (1) the stage tap: capture before j6's #stage handler (which would open the pop-up) */
+document.addEventListener("click",e=>{try{if(!dfViewOn()||typeof S==="undefined"||!S||S.dead||Q.length)return;const b=e.target.closest&&e.target.closest("#tokens .tok[data-p]");if(!b)return;
+ e.stopPropagation();e.preventDefault();dfOpen(+b.dataset.p)}catch(x){}},true);
+/* (3) NPC-initiated: the top person card whose speaker stands here */
+function dfWhoIdx(m){try{const w=m&&m.who&&m.who.w;if(!w||w[0]!=="r")return -1;return curPeople().findIndex(p=>p.ref&&p.ref.id===w[1])}catch(e){return -1}}
+function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab==="act"&&!!S.visit&&!S.out}
+(function(){const s0=showModal;showModal=function(){const m=Q[0];/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
+ if(m&&m.dfSeen&&DF.encM===m&&DF.F){try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}return undefined}const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0||!dfHasFig(i))return s0.apply(this,arguments);
+ m.dfSeen=1;DF.encM=m;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
+ if(DF.F&&!dfSame(DF.p,p)){const o=DF.F;DF.F=null;DF.tk=null;try{o.destroy()}catch(e){}}DF.p=p;DF.i=i;popIdx=i;let F=DF.F;if(!F){const tk={};DF.tk=tk;F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(id),onClose:()=>dfClosed(tk)})}DF.F=F;
+ const txt=String(m.h||"").replace(/<\/p>\s*<p[^>]*>/g,"\n").replace(/<[^>]+>/g,"").split("\n").map(s=>s.trim()).filter(Boolean);
+ const nm=(typeof k61Named!=="function"||k61Named(p.ref))?(p.ref.name||p.name||""):"";/* fog (j61): a stranger's name is not on the say box */
+ F.say(txt.map(t=>({who:nm,face:nm?p.ref:null,text:t})),{onDone:()=>F.choices(m.opts.map((o,k)=>({id:"m"+k,n:o.n,pic:dfPic(o.n),off:!!o.off,why:dfTxt(o.x)})),id=>{const k=+String(id).slice(1);DF.enc=1;DF.encM=null;try{chooseM(k)}finally{DF.enc=0}const j=dfIdx(p);if(j<0){dfGone();return}dfSetGroups(F,dfData(j))})});
+ return undefined}})();
+/* a dodge inside an encounter: played on the figure, the mark goes back to slapGame's own onDone (jslap / jlooks rules unchanged) */
+(function(){if(typeof slapGame!=="function")return;const g0=slapGame;slapGame=function(o){if(!o||!o.dodge||!DF.F||DF.i==null||typeof window.__bot!=="undefined")return g0.apply(this,arguments);
+ const F=DF.F;let backed=false;const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{backed=true;if(DF.play)DF.play.skip()});if(!layer)return g0.apply(this,arguments);
+ DF.play=dfGame("swipe",{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"&&o.by?rkOf(o.by):0,dodge:true,hud:x=>dfHud(F,x),
+  onDone:res=>{DF.play=null;dfUnplay(F);const R=BAL.slap.raw;try{o.onDone(res.skipped?{raw:0,skipped:true}:{raw:res.raw>=BAL.df.swipe.mid[1]?R[3]:0,skipped:false})}catch(e){console.error(e)}}});
+ if(!DF.play)return g0.apply(this,arguments)};window.slapGame=slapGame})();
+window.dfOpen=dfOpen;window.dfTap=dfTap;window.dfIdx=dfIdx;window.dfHere=dfHere;
+/* (4) MOOD BUBBLES on the place stage (owner OD 06:50Z «idle animations + mood bubbles»): kit parts kitIdle (CSS, the kit applies it) + kitMoodSay (K-FOCUS-1b).
+   Rare (BAL.df.idle), one person whose feeling she may see (jemo emoKnown) and who is not calm, a short cổ trang line for that feeling (VANPHONG; no emoji). */
+const DF_MOOD={vui:["Hôm nay lòng thật nhẹ nhõm.","Hoa nở đẹp quá."],buon:["Chuyện cũ cứ vương vấn mãi.","Lòng nặng trĩu."],gian:["Hừ, chớ để ta gặp lại kẻ ấy.","Thật tức chết đi được."],
+ so:["Nơi này sao lạnh lẽo thế.","Mong mọi chuyện bình yên."],ghen:["Người ta được sủng ái thật.","Sao lại là nàng ấy chứ."],lo:["Không biết rồi sẽ ra sao.","Lòng cứ thấp thỏm không yên."]};
+function dfMoodPick(){try{const P=curPeople();const L=[];P.forEach((p,i)=>{const v=p.ref;if(!v||typeof emoGet!=="function")return;if(typeof emoKnown==="function"&&!emoKnown(v))return;
+  const e=emoGet(v);const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(!e||e.k==="binh"||!DF_MOOD[g])return;const f=dfFig(i);if(f)L.push({i,f,g})});
+ if(!L.length)return null;const x=L[Math.floor(Math.random()*L.length)];const T=DF_MOOD[x.g];return{fig:x.f,text:T[Math.floor(Math.random()*T.length)],i:x.i}}catch(e){return null}}
+function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+Math.random()*(I.every[1]-I.every[0])}
+(function(){let tm=0,plc=null;const tick=()=>{tm=0;try{if(typeof kitMoodSay==="function"&&typeof S!=="undefined"&&S&&!S.dead&&!Q.length&&DF.i==null&&!DF.play&&typeof tab!=="undefined"&&tab==="act"&&S.visit&&typeof window.__bot==="undefined"){
+  const x=dfMoodPick();if(x)kitMoodSay(x.fig,x.text,{p:curPeople()[x.i].ref})}}catch(e){}arm(false)};
+ const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
+ const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
+window.dfMoodPick=dfMoodPick;
 /* ================= jroad8: ONE 8-TAB BAR ON EVERY ROAD (owner 21/11 ~03:15Z, mark #32; MAIN CHÍNH 85 brief maid-8tabs) =================
    Owner (verbatim, OD 21/11 ~03:15Z): "Mình vẫn giữ đủ 8 cái tab, nhưng mà mỗi một cái tab mình để y chang luôn … tôi nghĩ là mình không có nên thay đổi
    những cái tab này … trước mắt là cứ làm cái layout là 8 cái tab. Còn mà đổi cái gì vào trong cái tab gì cho nó đúng thì tôi sẽ báo bạn sau."
@@ -88277,6 +88788,154 @@ function road8Acts(o){const r=road8();const T=r&&ROAD8[r]&&ROAD8[r].acts;if(!T||
  const n=T.note&&T.note[o.tabKey];const note=o.note&&/^(Cùng chỗ: làm tại chỗ|Không gặp mặt: phải sai người)/.test(o.note)?(n||""):o.note;
  return Object.assign({},o,{groups,note})}
 window.road8ActKey=road8ActKey;window.road8Acts=road8Acts;
+/* ================= jend: kitEndScreen — THE ENDING SCREEN, full screen (KIT §91; owner marks #48 #50 #51, OD 21/11 ~03:56Z / ~04:03Z / ~04:06Z) =================
+   Owner (verbatim, 21/11 ~04:06Z): "bất cứ một cái gì mà kết thúc một cái game, kết thúc một cái kiếp là đều phải có một cái khung đẹp của nó ... thay vì là khung nhỏ
+   thì tôi muốn là khung full màn hình luôn ... dưới là có cái nền ... từ cái kết cục cho tới đại kết cục hay là kỳ ngộ gì đó, mỗi một cái nó sẽ có một cái nền khác nhau".
+   #48 (death «Kiếp này»): WHITE mourning flower (hoa tang) at the top centre of the frame + white cloth drapes hanging down its sides.
+   #50 (Đại kết cục): the festive twin — red/gold celebration flowers at the top centre + festive drapes/garlands down the sides, plus its own «wow».
+   ONE kit part for EVERY ending dialog. It changes no flow, no button, no number: the dialog that was there (its kit body, its figure, its buttons, its
+   co-op and save behaviour) is shown as a full-screen ceremonial screen:
+     · the whole screen = the ending's own background picture (https://ctm-img.victoria-tntt.workers.dev/img/end-bg-<type>.webp; until it lands: the already-approved event picture of that ending, dimmed)
+     · the kit dialog becomes the big frame on it (KIT size system keeps measuring it: the frame is set BEFORE the fit runs)
+     · the frame wears the overlay set of its tone: mourn = img/kit/death-flower.webp + death-drape-l/-r.webp, fest = img/kit/fest-flower.webp + fest-drape-l/-r.webp
+       (missing art = no piece; the frame keeps its tone ring, never a code-drawn flower)
+     · one short entrance: fest = frame rises + painted gold sparks and petals (jfxkit), mourn = slow quiet fade + rising incense; none under reduced motion / «Gọn».
+   TYPES (KIT_END.types; tone + fallback picture): death · exile · fail = mourn; leave · throne · grand · fate · rare = fest.
+   WHICH DIALOG IS AN ENDING (kitEndType(m), derived from the queued card itself, so old saves and the co-op guest get it with no stored flag):
+     · the life end card of over() (j32, t "Kiếp này", cls "end") → S.kesT (set by the over() wrapper below from h / fate / alive; old save: read from S.fate)
+     · the Hồi kết nhánh result (jge PEND.geR) → grand (Đại kết cục) / fail (Kết cục)
+     · any card whose cls carries "kes-t-<type>" (Bảng Thiên mệnh jge geBoardPanel → fate; a rare ending's result card j97 → rare).
+   Callers that know the type before over() runs say it with kitEndNext(type) (jge grand exit, j97 rare exit). ===== */
+window.KIT_END=window.KIT_END||{
+ types:{death:{tone:"mourn",pic:"tang-le"},exile:{tone:"mourn",pic:"lanh-cung"},fail:{tone:"mourn",pic:"lanh-cung"},
+  leave:{tone:"fest",pic:"le-xuan"},throne:{tone:"fest",pic:"tan-phong"},grand:{tone:"fest",pic:"tan-phong"},fate:{tone:"fest",pic:"tan-phong"},rare:{tone:"fest",pic:"le-xuan"}},
+ ov:{mourn:{fl:"https://ctm-img.victoria-tntt.workers.dev/img/kit/death-flower.webp",l:"https://ctm-img.victoria-tntt.workers.dev/img/kit/death-drape-l.webp",r:"https://ctm-img.victoria-tntt.workers.dev/img/kit/death-drape-r.webp"},
+     fest:{fl:"https://ctm-img.victoria-tntt.workers.dev/img/kit/fest-flower.webp",l:"https://ctm-img.victoria-tntt.workers.dev/img/kit/fest-drape-l.webp",r:"https://ctm-img.victoria-tntt.workers.dev/img/kit/fest-drape-r.webp"}},
+ bg:t=>`https://ctm-img.victoria-tntt.workers.dev/img/end-bg-${t}.webp`,
+ ev:k=>`https://ctm-img.victoria-tntt.workers.dev/img/ev-${k}.webp`,
+ next:"",log:[]};
+(function(){const KE=window.KIT_END;
+/* ---------- which ending ---------- */
+function kitEndNext(t){KE.next=KE.types[t]?t:""}
+window.kitEndNext=kitEndNext;
+/* a life ending (over): h = card title, fate = record line, live = she is alive */
+function kesLife(h,fate,live){const s=`${h||""} · ${fate||""}`;
+ if(/^Đại kết cục/.test(String(h||""))||/Đại kết cục:/.test(String(fate||"")))return"grand";
+ if(!live)return"death";
+ if(/phế|đuổi|lãnh cung|điên|tuổi xuân qua đi|thứ dân|tân giả|lưu đày/i.test(s))return"exile";
+ if(/ban hôn|ban gả|xuất giá|thành thân/i.test(s))return"leave";/* a marriage granted BY Thái hậu is a leave, not a throne (rv) */
+ if(/thái hậu|mẫu hậu|mẫu nghi|thái phi|lên ngôi|đăng cơ|nữ vương/i.test(s))return"throne";
+ return"leave"}
+window.kesLife=kesLife;
+function kitEndType(m){if(!m||typeof m!=="object")return"";const c=String(m.cls||"");
+ const x=c.match(/\bkes-t-(\w+)/);if(x&&KE.types[x[1]])return x[1];
+ if(m.pid==="geR"){const r=typeof S!=="undefined"&&S&&S.ge&&S.ge.res;return r?(r.ok?"grand":"fail"):""}
+ if(/\bend\b/.test(c)&&m.t==="Kiếp này"&&typeof S!=="undefined"&&S&&S.dead){
+  if(S.kesT&&KE.types[S.kesT])return S.kesT;
+  const f=String(S.fate||"");return kesLife("",f,typeof overAlive==="function"?overAlive(f):false)}
+ return""}
+window.kitEndType=kitEndType;
+/* the over() wrapper: decide the type once, keep it on S (saved with the life) */
+if(typeof over==="function"){const o0=over;over=function(h,t,fate,alive){const was=typeof S!=="undefined"&&S&&S.dead;const nx=KE.next;KE.next="";
+  if(!was&&S){try{const live=typeof overAlive==="function"?overAlive(fate,alive):alive===true;S.kesT=nx||kesLife(h,fate,live)}catch(e){console.error("kes",e)}}
+  return o0.apply(this,arguments)};window.over=over}
+/* ---------- the screen ---------- */
+const kesCls=(t)=>`kes kes-${KE.types[t].tone} kes-t-${t}`;
+function kesMark(m,t){const c=String(m.cls||"").replace(/\s*\bkes(-\w+(-\w+)?)?\b/g,"").trim();m.cls=(c?c+" ":"")+kesCls(t)}
+function kesFallPic(m,t){const a=m&&m.art&&/ev-/.test(String(m.art))?String(m.art):"";return a||KE.ev(KE.types[t].pic)}
+function kesDecorate(M,m,t){const tone=KE.types[t].tone;let bg=M.querySelector(":scope>.kes-bg");
+ if(!bg||bg.dataset.t!==t){if(bg)bg.remove();bg=document.createElement("div");bg.className="kes-bg";bg.dataset.t=t;bg.setAttribute("aria-hidden","true");
+  const im=new Image();im.alt="";im.className="kes-bgi";im.decoding="async";const fb=kesFallPic(m,t);
+  im.onerror=()=>{if(im.dataset.fb){im.remove();return}im.dataset.fb="1";bg.classList.add("kes-bgfb");im.src=fb};im.src=KE.bg(t);bg.appendChild(im);M.insertBefore(bg,M.firstChild)}
+ const d=M.querySelector(".dlg");if(!d)return;let ov=d.querySelector(":scope>.kes-ov");
+ if(!ov||ov.dataset.tone!==tone){if(ov)ov.remove();ov=document.createElement("div");ov.className="kes-ov";ov.dataset.tone=tone;ov.setAttribute("aria-hidden","true");const P=KE.ov[tone];
+  [["fl","kes-fl"],["l","kes-dr kes-drl"],["r","kes-dr kes-drr"]].forEach(([k,cl])=>{const im=new Image();im.alt="";im.className=cl;im.decoding="async";im.onerror=()=>{im.remove();ov.classList.add("kes-miss")};im.src=P[k];ov.appendChild(im)});
+  d.appendChild(ov)}}
+function kesClear(M){const bg=M&&M.querySelector(":scope>.kes-bg");if(bg)bg.remove();const ov=M&&M.querySelector(".dlg>.kes-ov");if(ov)ov.remove()}
+/* the entrance: once per card, painted kit effects only (jfxkit), nothing under reduced motion / Gọn */
+function kesFx(M,m,t){if(m.__kesFx)return;try{Object.defineProperty(m,"__kesFx",{value:1,enumerable:false})}catch(e){m.__kesFx=1}
+ const calm=typeof kmReduced==="function"?kmReduced():false;M.classList.toggle("kes-calm",!!calm);KE.log.push(t);if(KE.log.length>40)KE.log.shift();
+ M.classList.remove("kes-in");void M.offsetWidth;M.classList.add("kes-in");
+ if(calm||window.__bot||(typeof quiet!=="undefined"&&quiet))return;
+ const d=M.querySelector(".dlg");const r=d?d.getBoundingClientRect():null;const top=r?{x:r.left+r.width/2,y:r.top+8}:null;
+ setTimeout(()=>{try{if(M.hidden||!M.classList.contains("kes"))return;
+  if(KE.types[t].tone==="fest"){if(typeof kitFxBurst==="function"){kitFxBurst("glowburst",top,1);kitFxBurst("spark",top,12);kitFxBurst(t==="grand"||t==="throne"?"petal-peach":"petal-plum",null,14)}}
+  else if(t!=="death"&&typeof kitFxBurst==="function")kitFxBurst(t==="fail"?"ash":"incense",top,6)/* death: j93 already plays ink + white silk + incense */
+ }catch(e){console.error("kes fx",e)}},380)}
+function kesShow(){const M=document.getElementById("modal");if(!M)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=M.hidden?"":kitEndType(m);
+ if(!t){if(M.querySelector(":scope>.kes-bg"))kesClear(M);return}kesDecorate(M,m,t);kesFx(M,m,t)}
+/* pre: the card carries the frame class BEFORE the base paints it, so the kit size fit measures the full-screen frame; post: layers + entrance */
+if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{const m=typeof Q!=="undefined"?Q[0]:null;const t=kitEndType(m);if(t)kesMark(m,t)}catch(e){console.error("kes",e)}
+  const r=s0.apply(this,arguments);try{kesShow()}catch(e){console.error("kes",e)}return r};window.showModal=showModal}
+/* a rare ending (Kỳ ngộ, j97): the arc's result card that r97Take queues (card67 "result" → kit panel) is that ending's screen */
+if(typeof r97Take==="function"){const r0=r97Take;r97Take=function(){const before=new Set(typeof Q!=="undefined"?Q:[]);const r=r0.apply(this,arguments);
+  try{(Q||[]).forEach(m=>{if(m&&!before.has(m)&&m.kit&&m.kit.kind==="result")kesMark(m,"rare")})}catch(e){console.error("kes",e)}return r}}
+/* the frame inside: the ending screen always takes the kit's LARGEST v3 layout (XL: figure XL, the event picture grows into what the text leaves) — the
+   kit size system picks the smallest size that holds the content, which on a full-screen frame leaves the figure small in a sea of paper */
+if(typeof kszLivePick3_0==="function"&&typeof kszLiveLay3==="function"){const p0=kszLivePick3_0;kszLivePick3_0=function(dlg){try{const M=document.getElementById("modal");
+  if(M&&M.classList.contains("kes")&&dlg&&dlg.__ksz3){dlg.__kszFill=0;
+   if(typeof kszNarrow3==="function"&&kszNarrow3(dlg))return p0.apply(this,arguments);/* a narrow screen keeps the kit's stacked ladder */
+   kszLiveLay3(dlg,"XL");dlg.__kszFill=1;kitFrameApplyLive3(dlg);return"XL"}}catch(e){console.error("kes",e)}
+  return p0.apply(this,arguments)}}
+window.kitEndScreen={type:kitEndType,show:kesShow,mark:kesMark,life:kesLife};
+/* ---------- look (KIT §91) ---------- */
+const css=`
+.modal.kes{padding:0;background:#17110d;overflow:hidden;--kes-top:clamp(64px,calc(11*var(--kvh,1vh)),118px);--kes-bot:clamp(12px,calc(2.6*var(--kvh,1vh)),26px)}
+.modal.kes-mourn{--kes-ring:#f6f3ec;--kes-ring2:#8d8a86;--kes-grad:radial-gradient(ellipse at 50% 30%,#4a4850 0%,#26252b 60%,#141317 100%)}
+.modal.kes-fest{--kes-ring:#e5b53a;--kes-ring2:#9e1b1f;--kes-grad:radial-gradient(ellipse at 50% 28%,#8f2a1d 0%,#5a1410 55%,#2a0806 100%)}
+.modal.kes>.kes-bg{position:absolute;inset:0;z-index:0;background:var(--kes-grad);overflow:hidden;pointer-events:none}
+.modal.kes>.kes-bg>.kes-bgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.modal.kes>.kes-bg.kes-bgfb>.kes-bgi{filter:blur(3px) saturate(.85);transform:scale(1.06)}
+.modal.kes-mourn>.kes-bg.kes-bgfb>.kes-bgi{filter:blur(3px) grayscale(.55) brightness(.62)}
+.modal.kes-fest>.kes-bg.kes-bgfb>.kes-bgi{filter:blur(3px) brightness(.7) saturate(1.05)}
+.modal.kes>.kes-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(10,6,4,.5) 100%)}
+/* beats the kit size system's !important frame rules (html body #modal .dlg.kszlive.kszlive, #modal:not(.pcm) .dlg.kpanel): the ending frame is ONE size */
+/* the frame = the kit dialog at the kit's own XL size (width --kszw, height = content up to the kit limit, KIT §8.4 / §6.2f): NO ending-only size,
+   so the left figure is the kit XL figure slot of every other XL dialog (dialog-fixed (f)); only the ring + a top offset for the flower room are added */
+html body #modal.modal.kes>.dlg{position:relative;z-index:1;margin:calc(var(--kes-top) - var(--kes-bot)) 0 0!important;overflow:visible!important;
+ box-shadow:0 0 0 2px var(--kes-ring),0 0 0 5px var(--kes-ring2),0 0 0 7px var(--kes-ring),0 18px 48px rgba(0,0,0,.55)!important}
+.modal.kes>.dlg>.kes-ov{position:absolute;inset:0;pointer-events:none;z-index:6}
+.kes-ov>.kes-fl{position:absolute;left:50%;top:0;width:clamp(130px,26%,250px);height:auto;transform:translate(-50%,-64%);filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
+.kes-ov>.kes-dr{position:absolute;top:-10px;width:clamp(40px,7.5%,104px);height:calc(100% + 10px);object-fit:contain;object-position:50% 0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.kes-ov>.kes-drl{left:0;transform:translateX(-62%);transform-origin:50% 0}
+.kes-ov>.kes-drr{right:0;transform:translateX(62%);transform-origin:50% 0}
+.modal.kes .dlg>.kph{position:relative;z-index:7}
+.modal.kes .dlg .k3right{z-index:1}
+.modal.kes-in>.dlg{animation:kesRise .62s cubic-bezier(.2,.8,.25,1) both}
+.modal.kes-in.kes-mourn>.dlg{animation:kesFade 1.1s ease-out both}
+.modal.kes-in>.kes-bg{animation:kesBg 1.2s ease-out both}
+.modal.kes-in .kes-fl{animation:kesDrop .7s .25s cubic-bezier(.2,.9,.3,1.15) both}
+.modal.kes-in.kes-mourn .kes-fl{animation:kesDropM 1.3s .3s ease-out both}
+.modal.kes-in .kes-drl{animation:kesUnfurlL .9s .2s ease-out both}
+.modal.kes-in .kes-drr{animation:kesUnfurlR .9s .2s ease-out both}
+.modal.kes-calm>.dlg,.modal.kes-calm>.kes-bg,.modal.kes-calm .kes-fl,.modal.kes-calm .kes-dr{animation:none!important}
+@keyframes kesRise{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes kesFade{from{opacity:0}to{opacity:1}}
+@keyframes kesBg{from{opacity:0}to{opacity:1}}
+@keyframes kesDrop{from{opacity:0;transform:translate(-50%,-110%) scale(.7)}to{opacity:1;transform:translate(-50%,-64%)}}
+@keyframes kesDropM{from{opacity:0;transform:translate(-50%,-80%)}to{opacity:1;transform:translate(-50%,-64%)}}
+@keyframes kesUnfurlL{from{opacity:0;transform:translateX(-62%) scaleY(.2)}to{opacity:1;transform:translateX(-62%)}}
+@keyframes kesUnfurlR{from{opacity:0;transform:translateX(62%) scaleY(.2)}to{opacity:1;transform:translateX(62%)}}
+.kes-minis{display:flex;gap:14px;flex-wrap:wrap}
+.kes-mini{position:relative;width:200px;height:150px;border-radius:6px;overflow:hidden;background:var(--kes-grad)}
+.kes-mini .kes-mbg{position:absolute;inset:0;background-size:cover;background-position:50% 30%;filter:blur(2px) brightness(.65)}
+.kes-mini.kes-mourn .kes-mbg{filter:blur(2px) grayscale(.55) brightness(.62)}
+.kes-mini .kes-mf{position:absolute;left:16px;right:16px;top:30px;bottom:8px;background:#fffaf0;border-radius:4px;box-shadow:0 0 0 1px var(--kes-ring),0 0 0 3px var(--kes-ring2),0 0 0 4px var(--kes-ring);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.kes-mini .kes-mf small{opacity:.6}
+.kes-mini .kes-mfl{position:absolute;left:50%;top:0;width:64px;transform:translate(-50%,-64%)}
+.kes-mini .kes-mdl,.kes-mini .kes-mdr{position:absolute;top:-4px;width:22px;height:100%;object-fit:contain;object-position:50% 0}
+.kes-mini .kes-mdl{left:0;transform:translateX(-46%)}.kes-mini .kes-mdr{right:0;transform:translateX(46%)}
+.kes-mini.kes-mourn{--kes-ring:#f6f3ec;--kes-ring2:#8d8a86;--kes-grad:#26252b}.kes-mini.kes-fest{--kes-ring:#e5b53a;--kes-ring2:#9e1b1f;--kes-grad:#5a1410}
+@media (prefers-reduced-motion:reduce){.modal.kes>.dlg,.modal.kes>.kes-bg,.kes-fl,.kes-dr{animation:none!important}}`;
+try{const st=document.createElement("style");st.id="kes-css";st.textContent=css;document.head.appendChild(st)}catch(e){}
+/* kit page sample §91: both tones as a still preview (the same layers, scaled) + a live open */
+function kesMini(t){const T=KE.types[t],P=KE.ov[T.tone];return `<div class="kes-mini kes-${T.tone}"><div class="kes-mbg" style="background-image:url(${KE.ev(T.pic)})"></div><div class="kes-mf"><b>${t==="grand"?"Đại kết cục":"Kiếp này"}</b><small>${t}</small>
+ <img class="kes-mfl" src="${P.fl}" alt="" onerror="this.remove()"><img class="kes-mdl" src="${P.l}" alt="" onerror="this.remove()"><img class="kes-mdr" src="${P.r}" alt="" onerror="this.remove()"></div></div>`}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEndScreen · màn kết toàn màn hình (tang · mừng)",where:"mọi màn kết: Kiếp này (chết, rời cung, phế), Đại kết cục, Kết cục, Bảng Thiên mệnh, Kỳ ngộ (kết hiếm)",
+ html:()=>`<div class="kes-minis">${kesMini("death")}${kesMini("grand")}</div><div class="kpnote">Loại: ${Object.keys(KE.types).map(k=>`${k} (${KE.types[k].tone==="fest"?"mừng":"tang"})`).join(" · ")} · <button type="button" class="kbtn" onclick="kesSample('death')">Mở Kiếp này</button> <button type="button" class="kbtn" onclick="kesSample('grand')">Mở Đại kết cục</button></div>`})}catch(e){}
+window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
+  h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
+})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -89878,7 +90537,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="476dc04a5eb1";window.CTM_BUILD=BUILD;
+const BUILD="b6df9504f36e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
