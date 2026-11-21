@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3769fe01","t":"2026-11-21T18:59Z","c":"bongloc-options (M83): every monthly Bổng lộc frame carries its options; cut answers on the month frame (Lót tay / đòi lại phần bị cắt xén)…","b":"d2a59346d0a1","h":[{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"}]};
+window.CTM_BI={"s":"5b77b988+","t":"2026-11-21T18:59Z","c":"bongloc-options: site build","b":"45edc5059080","h":[{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37137,6 +37137,9 @@ BAL.wearSlots={
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
    a month; lets her go when her lòng falls under drop. */
 BAL.thc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
+/* review/bongloc-options (M83, owner 21/11 ~05:39Z): «Đòi lại phần bị cắt xén» when she has no cung nữ to send — she goes to Nội vụ phủ herself.
+   Odds = BAL.stip.askBase + Danh / danhD + Sủng / sungD − sup (a superior is behind the cut). Read by jstip stipEvent. */
+BAL.blopt={danhD:4,sungD:4,sup:25};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -44285,7 +44288,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
   O.push({n:`Sai ${m.name} đòi lại phần bị cắt xén`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
  else{/* review/bongloc-options: no cung nữ to send → she goes herself (owner 21/11 ~05:39Z «đi đòi lại đồ mình bị cắt xén»): her Danh + Sủng carry it */
-  const od=oddsCl(B.askBase+Math.round((S.danh||0)/4)+Math.round((S.sung||0)/4)-(SK.sup?25:0));
+  const BO=BAL.blopt;const od=oddsCl(B.askBase+Math.round((S.danh||0)/BO.danhD)+Math.round((S.sung||0)/BO.sungD)-(SK.sup?BO.sup:0));
   O.push({n:"Đòi lại phần bị cắt xén",fx:{},x:`${word(od)} · thành: ${eun} đành trả lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: Danh ${balSg(BAL.eff.jstip.danhGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`Ngươi tự đến Nội vụ phủ đòi phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;log(`<span class="r">${eun} chối quanh, ngươi về tay không.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.`)}}})}
  const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
@@ -91604,7 +91607,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d2a59346d0a1";window.CTM_BUILD=BUILD;
+const BUILD="45edc5059080";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

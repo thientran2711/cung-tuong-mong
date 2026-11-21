@@ -1888,3 +1888,6 @@ BAL.wearSlots={
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
    a month; lets her go when her lòng falls under drop. */
 BAL.thc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
+/* review/bongloc-options (M83, owner 21/11 ~05:39Z): «Đòi lại phần bị cắt xén» when she has no cung nữ to send — she goes to Nội vụ phủ herself.
+   Odds = BAL.stip.askBase + Danh / danhD + Sủng / sungD − sup (a superior is behind the cut). Read by jstip stipEvent. */
+BAL.blopt={danhD:4,sungD:4,sup:25};

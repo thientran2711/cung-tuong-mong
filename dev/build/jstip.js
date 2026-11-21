@@ -141,7 +141,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
   O.push({n:`Sai ${m.name} đòi lại phần bị cắt xén`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
  else{/* review/bongloc-options: no cung nữ to send → she goes herself (owner 21/11 ~05:39Z «đi đòi lại đồ mình bị cắt xén»): her Danh + Sủng carry it */
-  const od=oddsCl(B.askBase+Math.round((S.danh||0)/4)+Math.round((S.sung||0)/4)-(SK.sup?25:0));
+  const BO=BAL.blopt;const od=oddsCl(B.askBase+Math.round((S.danh||0)/BO.danhD)+Math.round((S.sung||0)/BO.sungD)-(SK.sup?BO.sup:0));
   O.push({n:"Đòi lại phần bị cắt xén",fx:{},x:`${word(od)} · thành: ${eun} đành trả lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: Danh ${balSg(BAL.eff.jstip.danhGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`Ngươi tự đến Nội vụ phủ đòi phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;log(`<span class="r">${eun} chối quanh, ngươi về tay không.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.`)}}})}
  const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
