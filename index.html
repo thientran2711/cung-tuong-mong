@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1af8db13+","t":"2026-11-21T07:55Z","c":"SELF-MERGE LAND coop-guest-agent: merge LIVE d6f23858 (index.html/sw.js rebuilt)","b":"42d8c5727cd0","h":[{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"},{"s":"d3f5ea28+","t":"2026-11-21T04:23Z","c":"Chức vị người: một kiểu chữ; tên nơi chốn để thường"},{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"}]};
+window.CTM_BI={"s":"36b6071e+","t":"2026-11-21T08:08Z","c":"kit-badge: kitStBadge round status badge on .krailb (ok/busy/pause) + .koff offline grey; KIT 77b + sample; test kit-badge.js (K-BADGE-HAOH…","b":"a832073d95d9","h":[{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"},{"s":"d3f5ea28+","t":"2026-11-21T04:23Z","c":"Chức vị người: một kiểu chữ; tên nơi chốn để thường"},{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28666,7 +28666,7 @@ function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R
  return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
 function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
 /* KIT §73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word): a WORD with the kit dotted underline (.kgl.kfx); tap → the small kit popup with ONLY that word's meaning (the word as its title). Used for the traits in the person header
-   («Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
+   («Tính nết | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
    kitTapWord(word, meaning) = one tap-word (meaning = plain text or HTML; empty → the plain word); kitTraitWords(keys|words) = «Đa nghi, Hiếu thảo» — each trait (ETRAITS key «danghi» or its word «Đa nghi») as a tap-word, comma-joined. */
 function kitTapWord(word,meaning){return meaning?kitFactTap(word,String(meaning)):String(word==null?"":word)}
 function kitTraitWords(list){const E=typeof ETRAITS==="object"&&ETRAITS?ETRAITS:{};const by={};Object.keys(E).forEach(k=>{by[k]=E[k];by[E[k][0]]=E[k]});
@@ -68153,11 +68153,11 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
  if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
   rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính cách | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
+  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính nết | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
   const tw=(w,t)=>typeof kitFactTap==="function"&&ETRAITS[t]?kitFactTap(w,`<div class="kpopx">${ETRAITS[t][1]}</div>`):w;
   const TS=(E.traits||[]).filter(t=>ETRAITS[t]),tr=[];
   for(const t of TS){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(tw(m[1],t))}}
-  if(TS.length)rows.push({l:"Tính cách",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
+  if(TS.length)rows.push({l:"Tính nết",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}}
@@ -68244,7 +68244,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: bảng thông tin bên phải (sở trọng, đã biết, dạo này) + khối chính bên trái (lòng người gọn)",html:()=>{
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính cách là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính cách",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính nết là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính nết",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
  try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true),k=pcfKey(v);if(h||k)return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div style="flex:0 0 172px">${k}</div><div style="flex:1;min-width:0">${h}</div></div>`}
   /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
   return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div class="kpkey" style="flex:0 0 172px">${kitRelTable([{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:12,d:0,kind:"good"},{dir:"them",label:"Nàng oán ta",w:"Oán",sj:"Nàng",ob:"nàng",now:3,d:0,kind:"bad"},{dir:"them",label:"Nàng ghen",w:"Ghen",sj:"Nàng",ob:"nàng",now:8,d:0,kind:"bad"},{dir:"me",label:"Ta → nàng: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:20,d:0,kind:"good"}],{compact:true})}</div><div style="flex:1;min-width:0">${kitRows([["Sở trường","Thi họa"],["Tính nết","Hay giúp người"],["Tin","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}</div></div>`}catch(e){return""}}})}catch(e){}
@@ -88408,7 +88408,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="42d8c5727cd0";window.CTM_BUILD=BUILD;
+const BUILD="a832073d95d9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
