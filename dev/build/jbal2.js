@@ -1828,6 +1828,13 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* KP03 children living rules (jkidlife; OD:L87 + PLACES_PLAN §5 "Móc lối chơi"): Mẫu tử = k.hM (the same bar the princesses have, j54) for every child.
+   estr  = Mẫu tử per month a child who lives away (prince 6+ at A ca sở / Đông cung, a mother in lãnh cung) was not seen · visit / call = Mẫu tử when she
+   goes to see the child / calls the child home (once a month each child) · callK = khắc of «Cho gọi con về» · callTal = the lesson the child misses (Tài) ·
+   npcSee = an NPC mother's monthly chance to see her son who lives away (two-way) · heirDanh = Danh of the mother when her son is made Thái tử (lost again
+   when he is put aside) · heirGhen = envy of the others at that day · ward = an orphan (mother dead / lãnh cung) goes to the Hoàng hậu (her or an NPC; none
+   → Thái hậu): Danh of the foster mother on the day · succHoa = Mẫu tử ≥ hi / < lo moves the succession "mẹ con" (j99succ hoa) +1 / −1 · hm0 = first value */
+BAL.kid={estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]};
 /* DRESS CODE (PARKING #11, review/dresscode, jdc.js; owner 20/11 ~19:00Z, verbatim dev/PARKING_LOT.md rows 11 + 11b; expert pass dev/handover/reports/dresscode-expert.md).
    fam  = the ONE small set of basic colour families (owner: "những cái màu cơ bản thôi"); every shade maps to one (hồng phấn / hồng đào / peach → hong …). hex = the dot colour (KIT REQUEST kitColDot).
    who  = Foreman C's palette per painted identity [main, secondary] (consorts c01–c32: handover dev/art/t8-prompt-B/build.py DATA; maids m01–m52: dev/art/face-common/m_colours_proposed.json FINAL Lượt 603;
