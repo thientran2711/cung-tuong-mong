@@ -3403,3 +3403,4 @@
 {"id": "N2q7qUw6D9", "prompt": "dev/art/maid7/prod/m18_tam_thancan_L1836.txt", "mode": "gpt-2-6", "res": "2k", "quality": "medium", "seed": 7172, "refs": ["s7IPw0Ll8e"], "cr": 135, "why": "#25 owner L1836/L1855 maid production m18", "by": "VE6"}
 {"id": "EbYtYI8uuO", "prompt": "dev/art/maid7/prod/m18_nhi_thancan_L1836.txt", "mode": "gpt-2-6", "res": "2k", "quality": "medium", "seed": 7172, "refs": ["s7IPw0Ll8e"], "cr": 135, "why": "#25 owner L1836/L1855 maid production m18", "by": "VE6"}
 {"id": "s7IKIK8l8e", "prompt": "dev/art/maid7/prod/m18_nhat_thancan_L1836.txt", "mode": "gpt-2-6", "res": "2k", "quality": "medium", "seed": 7172, "refs": ["s7IPw0Ll8e"], "cr": 135, "why": "#25 owner L1836/L1855 maid production m18", "by": "VE6"}
+{"id": "nVs3UHgYQD", "prompt": "dev/art/thu_comoi/s62_t3_THU_fix_L1869.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD"], "cr": 55, "why": "#25 owner L1869 THU t3", "by": "VE6"}
