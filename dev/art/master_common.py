@@ -265,6 +265,11 @@ OUTER_TIED = ("the outer robe HELD IN by the sash tied OVER it: its front edges 
 EAR_FREE = "Nothing hangs from her ears."   # SUPERSEDED 02:05Z by DESIGN20 1e330b0 wording (thu_comoi/make_no_ears2.py); kept so make_ears_free.py still runs
 OUTER_WRAP = ("the outer robe is a WRAP robe HELD IN by the sash: its front edges overlap at the waist, bound CLOSED under the sash lying ON TOP of it, "
               "outer robe fabric on both sides of the waist above and below the sash, never an open coat")
+# G45 JADE PENDANT VISIBLE (owner L1622, 21/11, verbatim: "... sửa hết để mình thấy cái ngọc bội ... cái tay để đó ok, miễn sao rằng là không có cái tà áo
+# hay cái gì đó nó che cái ngọc bội hết ..."): in game the pendant is a layer BEHIND the hands, so hands / the held item in front of the waist are fine;
+# no sleeve, robe flap, shawl or cloth may cover it (the clause says 'cloth', not 'shawl': X05 bans that word in t7/t8 poses). ONE short clause, added at the end of the Pose slot of every prompt that names a jade pendant
+# (build_all.g45_post, after the length fit; never for maids, G43). check_store G45 fails cloth-over-waist words. POSEFIX1.
+JADE_CLEAR = "the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it"
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
 
 

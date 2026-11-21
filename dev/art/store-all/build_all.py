@@ -431,6 +431,16 @@ def plan(age="a18"):
             ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not re.search(r"necklace|shawl",_pose_tpl(g,*o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]
             ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
             R=_random.Random(f"{c}-{t}-G36"); ok=list(ok); R.shuffle(ok); nz=min(ok,key=lambda o:cp[t][o]); cp[t][pz]-=1; cp[t][nz]+=1; P[(c,t)]=(a,nz,gr)
+    # G45 (owner L1622 21/11, POSEFIX1): POSES_30 M6 (hand adjusting the belt pendant) + C3 (hands folded under the long sleeves) are DROPPED: a cell whose plan
+    # pose is one of them gets another allowed pose the same way as A41/G36, in a THIRD pass after them (every other cell keeps exactly its pose).
+    for c in PEOPLE:
+        for t in range(1,9):
+            a,pz,gr=P[(c,t)]
+            if not re.search(r"DROPPED G45",_pose_tpl(g,*pz)): continue
+            up=[P[(c,u)][1] for u in range(1,9)]; prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up if u!=pz])
+            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not re.search(r"necklace|draped shawl|DROPPED G45",_pose_tpl(g,*o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]
+            ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
+            R=_random.Random(f"{c}-{t}-G45"); ok=list(ok); R.shuffle(ok); nz=min(ok,key=lambda o:cp[t][o]); cp[t][pz]-=1; cp[t][nz]+=1; P[(c,t)]=(a,nz,gr)
     # E12 (owner Lượt 650/656, ROOT-54 ruling (b), BW6): inside each LOOK GROUP the angle and grace of THIS age are replaced by the group plan
     # (different angle sentence per person at one rank, <=2 per visual class, different grace line; E1 no repeat inside one person). Poses: untouched.
     for name,mem in g["look_groups"]().items():
@@ -558,7 +568,23 @@ def apply_dedupe(person,rank,age,S):
         S=S.replace(a," Pose: "+new,1)
     # E4 (Lượt 529/534): the rank's ending at the END of the pose sentence (pose slot)
     i=S.index(" Pose: "); j=S.index(". The item is in a contrasting colour",i)
-    return S[:j]+", "+pose_end(rank,S[i:j])+S[j:]
+    global G45_HAD; G45_HAD=G45_SLEEVE in S[i:j]; P=S[i:j].replace(G45_SLEEVE,"")   # G45: the sleeve / jade clause goes in AFTER the length fit (g45_post)
+    return S[:i]+P+", "+pose_end(rank,P)+S[j:]
+# G45 JADE PENDANT VISIBLE (owner L1622 21/11, POSEFIX1): COVER/RISK poses end with G45_SLEEVE (POSES_30.md + build.py SPEC5); a prompt that names a jade pendant
+# instead gets the ONE shared clause master_common.JADE_CLEAR at the end of the pose slot; both are added AFTER the B26 length fit and only while the prompt stays
+# <= 10 000 (else the shorter G45_SLEEVE goes back in, else nothing; the cell is logged in G45_OVER): G45 never makes the fit cut a sentence (A38).
+G45_SLEEVE=", her sleeves kept clear of the front of her waist"
+G45_JADE_RX=re.compile(r"\bjade pendants?\b",re.I)
+G45_OVER=[]; G45_HAD=False
+def g45_post(S,tag=""):
+    sys.path.insert(0,ART); import master_common as _MC
+    jade=bool(G45_JADE_RX.search(S)); had=G45_HAD
+    if not (jade or had) or _MC.JADE_CLEAR in S or " Pose: " not in S: return S
+    i=S.index(" Pose: "); j=S.find(". The item is in a contrasting colour",i)
+    if j<0: j=S.index(". ",i)   # Nữ đế / other paths: end of the pose sentence
+    for add in ((", "+_MC.JADE_CLEAR) if jade else None, G45_SLEEVE if had and G45_SLEEVE not in S[i:j] else None):
+        if add and len(S)+len(add)<=10000: return S[:j]+add+S[j:]
+    G45_OVER.append((tag,len(S),"jade" if jade else "sleeve")); return S
 TQ_RIGHT=", body turned slightly three-quarters to the right"
 def _clean_pose(S):
     """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
@@ -613,6 +639,7 @@ def _build_season2(person,rank,age,season):
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
+    S=g45_post(S,f"{person} t{rank} {age} {season}")   # G45 jade clause after the fit
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -628,9 +655,11 @@ def eyes(S):
     m=re.search(r"Her face: [^.]*\. ",S); assert m,"EYES: face sentence"
     return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
 def build(person,rank,age="a18",_season=None):
+    global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
     _m=b26_fit_ok(person,rank,age,_season)
     if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
+    if not _season: S=g45_post(S,f"{person} t{rank} {age}")   # G45 jade clause after the fit (season cells: after winter_g28.season, below)
     return S0,S,add
 # B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
 # (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
@@ -783,7 +812,8 @@ def check(person,rank,age="a18",ref=None):
         face=FACE_M.get(ALIAS.get(person,person),FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age); S=_sec_slot(ALIAS.get(person,person),rank,S)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim); Lượt 483 secondary slot
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # FRUITPET2 (ROOT-69 (c)): the same F17 depet step as build(); without it the invariant FAILed wherever the picked pose was an old animal pose (m04/m42 t7, m01/m30 t8 a18)
-    if stripped!=S: errs.append("F minus added sentences != store output (pose slot dedupe applied)")
+    _g45=lambda x: x.replace(", "+__import__("master_common").JADE_CLEAR,"").replace(G45_SLEEVE,"")   # G45 (POSEFIX1): the jade / sleeve clause is added after the fit (g45_post)
+    if _g45(stripped)!=_g45(S): errs.append("F minus added sentences != store output (pose slot dedupe applied)")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])
     if ref is None:

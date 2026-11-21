@@ -1056,6 +1056,20 @@ def g43_fails(text, scope=None):
     m = G43_JADE_RX.search(text)
     return [("G43", "MAID JADE PENDANT", f"maids wear no jade pendant (owner L1608: a small embroidered fragrant sachet / túi thơm at the sash instead): …{text[max(0, m.start()-60):m.end()+30]}…")] if m else []
 
+# G45 JADE PENDANT VISIBLE (owner L1622 21/11, verbatim: "... cái tay để đó ok, miễn sao rằng là không có cái tà áo hay cái gì đó nó che cái ngọc bội hết ..."):
+# hands / the held item in front of the waist are FINE (the pendant is a layer behind the hands in game); words that put a SLEEVE, robe flap, shawl,
+# stole, cape or any cloth over the waist / sash front / pendant = FAIL. Negated wording ("no sleeve ... over it", "kept clear of") passes. POSEFIX1.
+G45_RX = re.compile(r"\b(?:hands?|arms?) (?:folded|clasped|hidden|tucked|crossed)[^.;,]{0,30}\b(?:under|in|inside|within) (?:the |her )?(?:long |wide )?sleeves?\b"
+                    r"|\bsleeves? (?:folded|draped|crossed|hanging|falling|gathered|covering)[^.;,]{0,12}\b(?:over|across|in front of) (?:the front of )?(?:her )?(?:waist|belly|sash|girdle|belt|jade|pendant)"
+                    r"|\b(?:shawl|stole|cape|scarf|robe flap|front flap|cloth|veil)[^.;,]{0,30}\b(?:over|across|covering) (?:the front of )?(?:her )?(?:waist|belly|sash front|girdle front|jade|pendant)"
+                    r"|\badjusting her (?:belt |sash |girdle )?pendant", re.I)
+def g45_fails(text):
+    for m in G45_RX.finditer(text):
+        pre = text[max(0, m.start()-25):m.start()].lower()
+        if re.search(r"\b(no|never|not|without)\b[^.;,]*$", pre): continue
+        return [("G45", "CLOTH OVER JADE", f"cloth over the waist / jade pendant (G45, owner L1622: hands are OK, no sleeve, robe flap, shawl or cloth over the pendant): …{text[max(0, m.start()-40):m.end()+30]}…")]
+    return []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1069,6 +1083,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += fruit_fails(text, scope, pid)
     fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
+    fails += g45_fails(text)   # G45 jade pendant visible: no cloth over the waist (owner L1622)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
@@ -1155,6 +1170,11 @@ def selftest():
                         ("A palace maid (cung nu, nhi dang). an embroidered silk sash with a small embroidered silk fragrant sachet (túi thơm).", "mama", 0),
                         ("A consort. a soft silk sash with a small jade pendant.", "tp2", 0)]:   # G43 maids no jade pendant (owner L1608)
         if bool(g43_fails(norm(t), sc)) != bool(want): print("G43 SELFTEST", want, sc, t); bad += 1
+    for t, want in [("Pose: hands folded at her waist under the long sleeves, the item held between them.", 1), ("Pose: one hand adjusting her belt pendant, the item in the other hand.", 1),
+                    ("Pose: her wide sleeves draped over her waist.", 1), ("a long stole falling across her waist.", 1),
+                    ("Pose: the item held at her waist with both hands, her sleeves kept clear of the front of her waist.", 0),
+                    ("the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it.", 0), ("no shawl or stole draped across her waist.", 0)]:   # G45 (owner L1622)
+        if bool(g45_fails(norm(t))) != bool(want): print("G45 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
