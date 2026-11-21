@@ -1,0 +1,4 @@
+base: dev/art/seasons4/s62_t5_XUAN_COMOI_L1803s.txt
+allow: over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: never hiding the neck   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: "Mùa Xuân · Thiết kế hiện tại · Phi · Vân kiên + cổ mở"   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py

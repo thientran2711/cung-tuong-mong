@@ -1,0 +1,5 @@
+base: dev/art/seasons4/s62_t6_XUAN_COMOI_L1803s.txt
+allow: lower a little longer   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: both on the shoulders   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: never covering the neck or the square inner neckline   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
+allow: a pearl-edged collar trim   # owner L1829 drift fix (JOB6): pre-swap words verbatim (swap56/base) via seasons4/make_comoi.py
