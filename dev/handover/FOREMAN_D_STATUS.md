@@ -661,3 +661,9 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   - **NIGHT LAND CHAIN #9 = session_01964izEeSaDYxdhm1XHe4hc:** jnf/jflip co-op stall fix (whole group) + gates on -coop.
   - **NOBC BUILDER = session_01964izGHyaHxissgvBFzqLH:** review/night-final-r3-nobc with D ruling «A + drop growth/start», then merges #9's fix. The sampler measures HH on the nobc sha (land condition ≥ ~25 %).
   #8 is archived after it sends probe 2. night-final LAND READY ETA ~12:00–13:00Z.
+- (21/11 06:18Z, D #14) NOBC BUILDER GHyaHxis: review/night-final-r3-nobc = e5029d1b (from 57e82acf). BAL scan vs LIVE 666def0c: 0 missing, 2 changed (steal.cost feign.duc / road.suc), 78 added (night §4 + §7 ladder). Done in the build:
+  - 31 leaves + LIVE readers restored;
+  - BAL.grow curve dropped;
+  - her start values = LIVE; NPC stats on LIVE rstats;
+  - stUp 2 (LIVE).
+  Kept: §4 night model, §7 ladder. Knob sampler measures HH on e5029d1b; gates running. NLC #9 EeSaDYxd is on the jnf/jflip stall fix.
