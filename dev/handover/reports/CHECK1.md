@@ -274,3 +274,25 @@ FAULTS:
 Rule-owner question (pre-existing store text, not counted as a fault): t7 + t8 `strands of pearls across the chest` vs A41 (no necklaces on anyone, L1411).
 Verdict: **t7 FAIL (G45 words) · t8 FAIL (G45 words + F18)**. These are one-phrase fixes.
 - A41 settled (Foreman C #15, NEWACCT#13/L1574): the chest pearl strands on t7/t8 are KEPT, because A41 bans necklaces, not these strands. This is no longer a question.
+
+## JOB 11 (LADDER2 db26ad679) — thu s62 t6 Quý phi COMOIf · checked at db26ad6 · 0 gens
+Gates: tp6 a22 PASS; keep PASS. Chars: 9996.
+Standing checklist, all present:
+- OUTER_TIED ✓
+- embroidered neckline band ACROSS the chest + flowers below ✓
+- vertical front panels shoulder→hem ✓
+- outer + inner hem bands ✓
+- cuffs + sleeve flowers ✓
+- jade at each side "never covered" ✓
+- centre sash, NO bow ✓
+- denser than t5 ✓
+- Phi bạch kept ✓
+
+**FAULT (G1, owner L1266 SWAP56): the Quý phi signature VÂN KIÊN cloud collar has been removed.** The outfit now says `… replacing the old cloud collar` (LADDER2.md) and `no cloud collar, vest or stiff shoulder pieces`, and puts the Phi's capelet + shoulder layers on t6 instead.
+- The owner's ladder is capelet(1) → two capes(2) → vân kiên (t6) → jewelled cloud-collar cape (t7) → empress. Without the vân kiên, t6 looks like a Phi and the step to t7 is lost.
+- G47 "copy the lower tier" adds items. It does not delete the rank's own signature piece, and no owner order to drop the t6 vân kiên was found.
+- Suggested fix: keep the G1/G37 one-tier vân kiên (scalloped gold-thread edge, gold tassel fringe, pearl-edged, small jade + pearl drops) as THE signature piece, and carry the Phi items onto/under it (pearl net, pearl fringe, jade clasp on the chest cord). Or get the owner's explicit yes to replace it.
+Notes:
+- The persona "Expression:" sentence was cut (Foreman option B) — accepted per Foreman.
+- The t6 cape words are a compacted version of the t5 text, not verbatim (G46 asks for verbatim only for Tần → Phi).
+Verdict: **t6 FAIL (G1 vân kiên removed)**. Not sent to GEN1.
