@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cfe3b505+","t":"2026-11-21T03:17Z","c":"chiton-name: trait words as tap-words (Tính cách / Trọng), no long Hay sentence, Đa nghi","b":"79ea225ac58e","h":[{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"}]};
+window.CTM_BI={"s":"9d798e41+","t":"2026-11-21T03:17Z","c":"chiton-name: trait words as tap-words (Tính cách / Trọng), no long Hay sentence, Đa nghi","b":"0801a7732345","h":[{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43137,7 +43137,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
 function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(".pc>.pcr button.ka")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -43178,12 +43178,92 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
-@container kpane (max-width:420px){
- .pc>.pcr button.ka.kart{--kaw:72px!important;--kah:96px!important}
- .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
-}
+${kitCompactCSS(".pc>.pcr button.ka.kart",84,84)}
+/* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (per-device size: 68 on a narrow pane, 84 normal, 96 on a wide pane — the sizing of the approved «Dò hỏi gia thế» card; one size per device, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
+   UNDER both, ONE full-width info box (.kpabox: the lead sentence, Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, every other row). kitPcActSplit builds the box. */
+html body .pc>.pcr button.ka.kart{--kpa:84px;display:grid!important;grid-template-columns:var(--kpa) minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:var(--kpa)!important;--kah:var(--kpa)!important;min-height:0!important}
+html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:var(--kpa)!important;height:var(--kpa)!important;flex-basis:var(--kpa)!important;flex:none!important;align-self:start!important}
+html body .pc>.pcr button.ka.kart>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
+html body .pc>.pcr button.ka.kart>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
+@container kpane (max-width:420px){html body .pc>.pcr button.ka.kart{--kpa:68px}}
+html.kv2 body .pc>.pcr button.ka.kart,html.kv2 body .pc>.pcr button.ka.kart.kart{--kpa:96px}/* iPad (two pages): the bigger card, as the approved «Dò hỏi gia thế» */
 `;document.head.appendChild(st)})();
+/* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
+   Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
+function kitPcActSplit(b){try{if(!b||!b.isConnected||!b.classList.contains("kart"))return;const body=b.querySelector(":scope > .kabody");if(!body)return;
+ const kb=body.querySelector(":scope > small.kb"),lead=body.querySelector(":scope > .klead");
+ const keep=r=>/\bkr-(ton|duoc|thanh)\b/.test(r.className)&&!r.classList.contains("kofold");const mv=kb?[...kb.children].filter(r=>r.classList.contains("kr")&&!keep(r)):[];
+ if(!lead&&!mv.length)return;/* nothing to move: no box is made (no DOM churn for the observer) */
+ let box=b.querySelector(":scope > .kpabox");if(!box){box=document.createElement("span");box.className="kpabox";b.appendChild(box)}
+ if(lead)box.prepend(lead);
+ if(mv.length){let bk=box.querySelector(":scope > small.kb");if(!bk){bk=document.createElement("small");bk.className="kb";box.appendChild(bk)}mv.forEach(r=>bk.appendChild(r))}
+ if(kb&&!kb.children.length)kb.remove()}catch(e){console.error("kitPcActSplit",e)}}
+window.kitPcActSplit=kitPcActSplit;
+function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc>.pcr button.ka.kart").forEach(kitPcActSplit)}catch(e){}}
+window.kitPcActScan=kitPcActScan;
+/* KIT §6.3b-1 (owner 21/11 ~02:10Z, review/kit-pcrow-square): NO bullet info box on a person card. The descriptive note (.pcn.kpres: «Người chạy việc của cung… / Gặp nàng ta ở tẩm cung…», Chí tôn «Trọng tài… / Mê sắc…»)
+   is hidden and the kit yellow «!» (.khap, §78) sits on the TOP-RIGHT corner of the left avatar/figure (.pcp); tap → the same text in the kit info popup. An act RESULT («…: thành / hỏng», popMsg) stays on the card
+   (feedback to a tap is not a description). Every left-avatar host, one rule. */
+function kitPcNoteBang(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp");const nt=pc.querySelector(":scope > .pcr > .pcn.kpres");
+ if(!pcp){return}const have=pcp.querySelector(":scope > .kpcbang");
+ if(!nt||/:\s*(thành|hỏng)/i.test(nt.textContent)){if(have&&!nt)have.remove();return}
+ nt.hidden=true;nt.classList.add("kpcnote");pc.__kpnote=nt.innerHTML;
+ if(!have){const i=document.createElement("i");i.className="khap kpcbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";pcp.appendChild(i)}}catch(e){console.error("kitPcNoteBang",e)}}
+window.kitPcNoteBang=kitPcNoteBang;
+function kitPcNoteScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc").forEach(kitPcNoteBang)}catch(e){}}
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest(".pc > .pcl > .pcp > .kpcbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();let who=null;try{who=typeof kitPersonByName==="function"?kitPersonByName(nm):null}catch(e){}if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",subject:who||undefined,sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
+(function(){const st=document.createElement("style");st.id="kit-pc-bang";st.textContent=`
+.pc>.pcl>.pcp.kit{position:relative}
+.pc>.pcl>.pcp>.kpcbang{position:absolute;top:5.5%;right:6%;margin:0;z-index:6;cursor:pointer}/* on the visible top-right corner of the framed figure (proportional, never clipped by the name tag) */
+.pc>.pcr>.pcn.kpcnote{display:none!important}
+/* KIT §6.3b-2 (owner 21/11 ~02:14Z): the rank + name tag at the top of the left column is CENTRED over the figure, in every left-avatar tab */
+html body .pc[data-k2].kpwide>.pcl>:is(.pcname,.pcrk,b:first-of-type){text-align:center!important;justify-content:center!important;align-self:stretch!important}
+html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!important;text-align:center!important;margin-left:0!important;margin-right:0!important}
+`;document.head.appendChild(st)})();
+/* KIT §6.3c — ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình, Hoàng tự ×5, Nhân sự …) the TOP BLOCK (pane bar, sub-tabs, the headline, the face/mother strip) is FIXED and only the person card
+   below it scrolls (inside itself), never the whole panel — the strip is never cut off. Pure CSS on the shared wrappers (.pgwrap > .pc), no host calls it. */
+(function(){const st=document.createElement("style");st.id="kit-pc-frame";st.textContent=`
+#panel.kpfr{display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#panel.kpfr > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
+#panel.kpfr > .pgwrap > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+#panel.kpfr > .pgwrap.krelpg > :last-child{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+/* KIT §6.3d (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (Hoàng tự tabs: «Con các nhà quyền thần chưa hứa hôn…», «Con của các phi tần khác…», counts) are NOT drawn: a kit round «!» sits at the TOP-RIGHT corner of
+   the top block and opens them in the kit info popup, so the top block has ONE fixed size whatever the text length. */
+#panel > .pgwrap{position:relative}
+#panel > .pgwrap > .ph.kpintro{display:none!important}
+#panel > .pgwrap > .kppbang{position:absolute;top:4px;right:6px;margin:0;z-index:7;cursor:pointer}
+`;document.head.appendChild(st)})();
+function kitPcIntroBang(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll("#panel > .pgwrap").forEach(g=>{const ph=g.querySelector(":scope > .ph");const have=g.querySelector(":scope > .kppbang");
+ if(!ph){if(have)have.remove();return}ph.classList.add("kpintro");g.__kpintro=[...ph.children].map(x=>`<p>${x.innerHTML}</p>`).join("");
+ if(!have){const i=document.createElement("i");i.className="khap kppbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";g.prepend(i)}})}catch(e){console.error("kitPcIntroBang",e)}}
+window.kitPcIntroBang=kitPcIntroBang;
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
+ if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+/* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
+/* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
+   the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(nat&&pc.classList.contains("kpwide"))pc.style.setProperty("--kpcw",nat+"px")}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
+html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
+html body .pc>.pcr .pcg.on{display:block!important}
+html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+`;document.head.appendChild(st)})();
+/* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
+function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
+window.kitPcFrameMark=kitPcFrameMark;
+(function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
@@ -62444,9 +62524,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
   +set("Một hàng dài, bậc M","1","M",[["Cúi đầu nhận lỗi","tốn: "+BAL.kitpage.demo.k+" khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -"+BAL.kitpage.demo.gift.bac+", "+BAL.kitpage.demo.k+" khắc"]])
   +set("Một hàng dài, bậc L (chữ dài nhất)","1","L",[["Xin về tảo mộ tổ tiên cho trọn đạo hiếu","tốn: Sức -"+BAL.kitpage.demo.tomb.suc+" · được: Đức +"+BAL.kitpage.demo.tomb.duc+", cha mẹ vui lòng"]])}})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
@@ -86061,7 +86141,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="79ea225ac58e";window.CTM_BUILD=BUILD;
+const BUILD="0801a7732345";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
