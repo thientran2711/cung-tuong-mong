@@ -1,0 +1,4651 @@
+{
+ "rows": [
+  {
+   "id": "c02",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#98CB8D",
+    "main_vi": "xanh lá xuân sáng",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DA9071",
+    "main_vi": "cam đào dịu",
+    "sec": "#B9C9F9",
+    "sec_vi": "dịu tím than",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#CB92BE",
+    "main_vi": "tím mận dịu",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#7E8FBE",
+    "main_vi": "soft sapphire blue",
+    "sec": "#EAD7BF",
+    "sec_vi": "warm ivory",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 53.2,
+    "main_sec": 38.0,
+    "sec_sec": 13.8
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "c04",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#CD757A",
+    "main_vi": "đỏ thắm dịu",
+    "sec": "#FFDEE7",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFBB92",
+    "main_vi": "cam mơ nhạt",
+    "sec": "#88D4D3",
+    "sec_vi": "ngọc dịu",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#5F8F54",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#E5E1D7",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#A87FBD",
+    "main_vi": "soft royal purple",
+    "sec": "#CF818C",
+    "sec_vi": "rose-red",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 49.3,
+    "main_sec": 47.5,
+    "sec_sec": 16.1
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c05",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#913968",
+    "main_vi": "hồng mẫu đơn đậm",
+    "sec": "#FFECDE",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#E6A375",
+    "main_vi": "cam quýt sáng",
+    "sec": "#49457C",
+    "sec_vi": "tím than",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#4E7D43",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#65C3C1",
+    "main_vi": "soft teal",
+    "sec": "#CE707A",
+    "sec_vi": "soft rose",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.3,
+    "main_sec": 43.6,
+    "sec_sec": 16.7
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c06",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#CF816E",
+    "main_vi": "soft vermilion",
+    "sec": "#6AAF98",
+    "sec_vi": "jade green",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#ECF7FF",
+    "sec_vi": "xanh sương",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#903C61",
+    "main_vi": "đỏ rượu đậm",
+    "sec": "#FFEAEF",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#4875B4",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 30.2,
+    "main_sec": 59.6,
+    "sec_sec": 40.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "c08",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#DF9FA2",
+    "main_vi": "soft cherry-blossom pink",
+    "sec": "#74B47E",
+    "sec_vi": "jade green",
+    "reads": "thu",
+    "proto": "hồng đất",
+    "root": true
+   },
+   "ha": {
+    "main": "#E4E89A",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#98CBF0",
+    "sec_vi": "xanh trời dịu",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#E499A4",
+    "main_vi": "hồng thu sáng",
+    "sec": "#F3ECFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#B2A0D6",
+    "main_vi": "tím dịu",
+    "sec": "#FFF3E9",
+    "sec_vi": "kem đào",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 3.2,
+    "main_sec": 49.5,
+    "sec_sec": 35.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "c10",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#7BB76E",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#ECE2FE",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DFBB9F",
+    "main_vi": "soft peach",
+    "sec": "#53ACA5",
+    "sec_vi": "jade teal",
+    "reads": "thu",
+    "proto": "hổ phách",
+    "root": true
+   },
+   "thu": {
+    "main": "#C16B7A",
+    "main_vi": "hồng thu đậm vừa",
+    "sec": "#C7EBDA",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#AA95D2",
+    "main_vi": "tím dịu",
+    "sec": "#C7E6FD",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.3,
+    "main_sec": 33.3,
+    "sec_sec": 25.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "c11",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#45743B",
+    "main_vi": "xanh lá xuân đậm",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFAC97",
+    "main_vi": "cam san hô sáng",
+    "sec": "#FFF0FB",
+    "sec_vi": "hồng tím phấn",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#8B4A86",
+    "main_vi": "tím mận đậm",
+    "sec": "#F0F5CA",
+    "sec_vi": "kem chanh",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#BC9FCE",
+    "main_vi": "soft lilac",
+    "sec": "#C76B82",
+    "sec_vi": "deep rose",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.3,
+    "main_sec": 46.8,
+    "sec_sec": 21.8
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c14",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#3D6B32",
+    "main_vi": "xanh lá xuân đậm",
+    "sec": "#FFEAEF",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#F38B7B",
+    "main_vi": "cam san hô dịu",
+    "sec": "#ECF7FF",
+    "sec_vi": "xanh sương",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#903C61",
+    "main_vi": "đỏ rượu đậm",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#EAD7BF",
+    "main_vi": "soft ivory cream",
+    "sec": "#6B64B4",
+    "sec_vi": "blue-violet",
+    "reads": "thu",
+    "proto": "vàng nghệ dịu",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.3,
+    "main_sec": 48.8,
+    "sec_sec": 28.6
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c16",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#56864C",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#E7DAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#D58679",
+    "main_vi": "cam san hô dịu",
+    "sec": "#B9E4E6",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#B0BE70",
+    "main_vi": "soft olive",
+    "sec": "#B8618C",
+    "sec_vi": "plum rose",
+    "reads": "thu",
+    "proto": "ô liu",
+    "root": true
+   },
+   "dong": {
+    "main": "#04ADB4",
+    "main_vi": "xanh mòng két dịu",
+    "sec": "#FBDAC1",
+    "sec_vi": "kem đào",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 21.6,
+    "main_sec": 44.3,
+    "sec_sec": 32.6
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "c19",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#852533",
+    "main_vi": "đỏ thắm thẫm",
+    "sec": "#FFE0E8",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#E4E89A",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#FFF3E9",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#7F447B",
+    "main_vi": "tím mận đậm",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#BD7FA1",
+    "main_vi": "soft plum",
+    "sec": "#7CB699",
+    "sec_vi": "soft jade",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.2,
+    "main_sec": 46.8,
+    "sec_sec": 20.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "c20",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#DA9098",
+    "main_vi": "hồng hoa đào dịu",
+    "sec": "#D2ECFF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#F6A496",
+    "main_vi": "cam san hô sáng",
+    "sec": "#CFB8EC",
+    "sec_vi": "tím hoa cà dịu",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#EBA197",
+    "main_vi": "soft coral",
+    "sec": "#84AB6B",
+    "sec_vi": "soft leaf green",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "dong": {
+    "main": "#53C0CC",
+    "main_vi": "xanh mòng két dịu",
+    "sec": "#CDF2E0",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 7.9,
+    "main_sec": 35.2,
+    "sec_sec": 35.4
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c22",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#A64D69",
+    "main_vi": "hồng đậm vừa",
+    "sec": "#E1D3FA",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#88D4D3",
+    "sec_vi": "ngọc dịu",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#68985D",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#FCD6E0",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#B27FBD",
+    "main_vi": "soft orchid purple",
+    "sec": "#D38B80",
+    "sec_vi": "soft coral",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.6,
+    "main_sec": 41.5,
+    "sec_sec": 12.1
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "c26",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#CC7384",
+    "main_vi": "soft rose",
+    "sec": "#8AAF7D",
+    "sec_vi": "soft leaf green",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#FEAD94",
+    "main_vi": "cam đào sáng",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#E6AFE0",
+    "main_vi": "tím mận sáng",
+    "sec": "#D4F9E7",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#4FCCD9",
+    "main_vi": "xanh mòng két sáng",
+    "sec": "#EFF3C9",
+    "sec_vi": "kem chanh",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.4,
+    "main_sec": 49.9,
+    "sec_sec": 21.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "c27",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#993842",
+    "main_vi": "đỏ thắm đậm",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#FCB17E",
+    "main_vi": "cam quýt sáng",
+    "sec": "#176A4E",
+    "sec_vi": "xanh ngọc sẫm",
+    "reads": "ha",
+    "proto": "cam mơ",
+    "root": false
+   },
+   "thu": {
+    "main": "#E06B5A",
+    "main_vi": "soft coral red",
+    "sec": "#4D9699",
+    "sec_vi": "deep teal",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": true
+   },
+   "dong": {
+    "main": "#7E66A6",
+    "main_vi": "tím đậm vừa",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 22.6,
+    "main_sec": 41.9,
+    "sec_sec": 30.8
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c28",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#98CAA5",
+    "main_vi": "soft celadon",
+    "sec": "#BF73A1",
+    "sec_vi": "soft raspberry pink",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "ha": {
+    "main": "#EBE68E",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#ECE2FE",
+    "sec_vi": "tím khói nhạt",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#D28474",
+    "main_vi": "đỏ lá phong dịu",
+    "sec": "#C7E6FD",
+    "sec_vi": "xanh sương",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "dong": {
+    "main": "#599FD8",
+    "main_vi": "xanh da trời dịu",
+    "sec": "#FED4B9",
+    "sec_vi": "đào pastel",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 42.9,
+    "main_sec": 21.2,
+    "sec_sec": 37.7
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c31",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#ABD4BB",
+    "main_vi": "soft pale jade",
+    "sec": "#D67064",
+    "sec_vi": "soft coral",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "ha": {
+    "main": "#FCB17E",
+    "main_vi": "cam quýt sáng",
+    "sec": "#FFF3E9",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "cam mơ",
+    "root": false
+   },
+   "thu": {
+    "main": "#993842",
+    "main_vi": "đỏ lá phong trầm đậm",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#6B6CAE",
+    "main_vi": "tím than đậm vừa",
+    "sec": "#FFE0E8",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 59.3,
+    "main_sec": 21.6,
+    "sec_sec": 41.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "c32",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#D58EB6",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#C6F2F4",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#FBA192",
+    "main_vi": "cam san hô sáng",
+    "sec": "#EFF3C9",
+    "sec_vi": "kem chanh",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#82B976",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#FFE7EE",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#EDDCC6",
+    "main_vi": "soft ivory",
+    "sec": "#49659C",
+    "sec_vi": "indigo blue",
+    "reads": "thu",
+    "proto": "vàng nghệ dịu",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.2,
+    "main_sec": 26.5,
+    "sec_sec": 30.4
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "m02",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#E9A1C9",
+    "main_vi": "hồng mẫu đơn sáng",
+    "sec": "#F3E7CE",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#FC9382",
+    "main_vi": "cam san hô sáng",
+    "sec": "#A4D8FE",
+    "sec_vi": "xanh trời dịu",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#A5C56A",
+    "main_vi": "soft leaf green",
+    "sec": "#CF8377",
+    "sec_vi": "coral rose",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": true
+   },
+   "dong": {
+    "main": "#6CD8BA",
+    "main_vi": "xanh ngọc sáng",
+    "sec": "#F2EAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 54.9,
+    "main_sec": 21.3,
+    "sec_sec": 30.2
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "m04",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#68985D",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#E2E6BC",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E8AD81",
+    "main_vi": "soft apricot",
+    "sec": "#4E5D97",
+    "sec_vi": "indigo blue",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": true
+   },
+   "thu": {
+    "main": "#C16B7A",
+    "main_vi": "hồng thu đậm vừa",
+    "sec": "#FCD6E0",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#6AA6E4",
+    "main_vi": "xanh da trời dịu",
+    "sec": "#BFEBED",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 50.8,
+    "main_sec": 44.9,
+    "sec_sec": 30.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": true
+  },
+  {
+   "id": "m05",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#68985D",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#ECF7FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#CFB8EC",
+    "sec_vi": "tím hoa cà dịu",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#D4897D",
+    "main_vi": "coral red",
+    "sec": "#499597",
+    "sec_vi": "teal",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "dong": {
+    "main": "#288DD4",
+    "main_vi": "xanh da trời đậm vừa",
+    "sec": "#B9E4E6",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 43.3,
+    "main_sec": 35.4,
+    "sec_sec": 32.7
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "m08",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#D390B0",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#E4E89A",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#FFE7EE",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#E6A189",
+    "main_vi": "soft coral",
+    "sec": "#5DAC85",
+    "sec_vi": "jade green",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "dong": {
+    "main": "#5ECAD6",
+    "main_vi": "xanh mòng két sáng",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.5,
+    "main_sec": 32.7,
+    "sec_sec": 31.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "m09",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#D5909C",
+    "main_vi": "rose pink",
+    "sec": "#499597",
+    "sec_vi": "teal",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#FCB17E",
+    "main_vi": "cam quýt sáng",
+    "sec": "#F7F3FF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "ha",
+    "proto": "cam mơ",
+    "root": false
+   },
+   "thu": {
+    "main": "#793B6D",
+    "main_vi": "tím mận đậm",
+    "sec": "#FBEFD6",
+    "sec_vi": "ngà",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#5073B5",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 34.5,
+    "main_sec": 43.4,
+    "sec_sec": 36.2
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "m10",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#A4D098",
+    "main_vi": "soft leaf green",
+    "sec": "#CA7281",
+    "sec_vi": "deep rose",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": true
+   },
+   "ha": {
+    "main": "#FFBB92",
+    "main_vi": "cam mơ nhạt",
+    "sec": "#C6F2F4",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#955290",
+    "main_vi": "tím mận đậm",
+    "sec": "#E5E1D7",
+    "sec_vi": "trắng ngà",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#63A8E2",
+    "main_vi": "xanh da trời dịu",
+    "sec": "#E7DAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 63.4,
+    "main_sec": 20.4,
+    "sec_sec": 34.5
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "m14",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#F88D92",
+    "main_vi": "hồng hoa đào sáng",
+    "sec": "#F2EAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#EAA16D",
+    "main_vi": "cam dưa lưới sáng",
+    "sec": "#CDF2E0",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "ha",
+    "proto": "cam mơ",
+    "root": false
+   },
+   "thu": {
+    "main": "#D28BCC",
+    "main_vi": "tím mận dịu",
+    "sec": "#A4D8FE",
+    "sec_vi": "xanh trời nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#EDE0CC",
+    "main_vi": "ivory white",
+    "sec": "#5DAC85",
+    "sec_vi": "jade green",
+    "reads": "thu",
+    "proto": "vàng nghệ dịu",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.0,
+    "main_sec": 24.7,
+    "sec_sec": 22.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "m16",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#CB656C",
+    "main_vi": "đỏ thắm đậm vừa",
+    "sec": "#ECE0C8",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#E09974",
+    "main_vi": "cam đào dịu",
+    "sec": "#C6F2F4",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#925786",
+    "main_vi": "tím mận đậm",
+    "sec": "#FCD6E0",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#AD91CA",
+    "main_vi": "lavender purple",
+    "sec": "#5DAC85",
+    "sec_vi": "jade green",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.2,
+    "main_sec": 47.6,
+    "sec_sec": 20.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": true
+  },
+  {
+   "id": "m18",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#7FB980",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#F3E8BD",
+    "sec_vi": "vàng nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E09974",
+    "main_vi": "cam đào dịu",
+    "sec": "#88D4D3",
+    "sec_vi": "ngọc dịu",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#E69EDF",
+    "main_vi": "tím mận sáng",
+    "sec": "#F2EAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#8FBCF1",
+    "main_vi": "soft blue",
+    "sec": "#CA7281",
+    "sec_vi": "deep rose",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.8,
+    "main_sec": 43.6,
+    "sec_sec": 27.2
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "m19",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#DE8D9C",
+    "main_vi": "hồng hoa đào dịu",
+    "sec": "#FFDEE7",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#D79B70",
+    "main_vi": "soft apricot",
+    "sec": "#499597",
+    "sec_vi": "teal",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": true
+   },
+   "thu": {
+    "main": "#82B976",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#CDF2E0",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#7ACDF7",
+    "main_vi": "xanh băng sáng",
+    "sec": "#F3E7CE",
+    "sec_vi": "ngà",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 51.3,
+    "main_sec": 42.2,
+    "sec_sec": 34.3
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "m20",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#7FB980",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#EFE495",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#D4F9E7",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#E88696",
+    "main_vi": "hồng thu dịu",
+    "sec": "#FFDEE7",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#8B93D0",
+    "main_vi": "soft periwinkle",
+    "sec": "#D6A585",
+    "sec_vi": "apricot",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 53.6,
+    "main_sec": 36.0,
+    "sec_sec": 21.2
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": true
+  },
+  {
+   "id": "m22",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#CC8391",
+    "main_vi": "soft rose",
+    "sec": "#5DAC85",
+    "sec_vi": "jade green",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#E7E798",
+    "main_vi": "vàng chanh non nhạt",
+    "sec": "#C7E6FD",
+    "sec_vi": "xanh sương",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#925786",
+    "main_vi": "tím mận đậm",
+    "sec": "#FED4B9",
+    "sec_vi": "đào pastel",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#AA95D2",
+    "main_vi": "tím dịu",
+    "sec": "#FCD6E0",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.4,
+    "main_sec": 44.6,
+    "sec_sec": 37.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "m28",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#D9998C",
+    "main_vi": "coral pink",
+    "sec": "#4E5D97",
+    "sec_vi": "indigo blue",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#9AD4B4",
+    "sec_vi": "bạc hà dịu",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#AF71A1",
+    "main_vi": "tím mận đậm vừa",
+    "sec": "#E7DAFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#63A8E2",
+    "main_vi": "xanh da trời dịu",
+    "sec": "#D2ECFF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 23.6,
+    "main_sec": 24.9,
+    "sec_sec": 41.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "m29",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#AFD4BC",
+    "main_vi": "pale celadon",
+    "sec": "#CA7281",
+    "sec_vi": "deep rose",
+    "reads": "thu",
+    "proto": "rêu",
+    "root": true
+   },
+   "ha": {
+    "main": "#D58679",
+    "main_vi": "cam san hô dịu",
+    "sec": "#E5BBE1",
+    "sec_vi": "dịu tím",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#AF71A1",
+    "main_vi": "tím mận đậm vừa",
+    "sec": "#FFECDE",
+    "sec_vi": "kem đào",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#11B7BF",
+    "main_vi": "xanh mòng két dịu",
+    "sec": "#C7E6FD",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 38.9,
+    "main_sec": 13.3,
+    "sec_sec": 33.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s07",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#AB3A50",
+    "main_vi": "deep rose",
+    "sec": "#A2B9F5",
+    "sec_vi": "soft periwinkle",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#EFE495",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#F6A78F",
+    "sec_vi": "cam hồng",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#642B61",
+    "main_vi": "tím mận thẫm",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#219271",
+    "main_vi": "xanh ngọc đậm vừa",
+    "sec": "#FFE8F9",
+    "sec_vi": "hồng tím phấn",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 21.3,
+    "main_sec": 52.5,
+    "sec_sec": 30.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s08",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#9D6184",
+    "main_vi": "hồng mẫu đơn đậm vừa",
+    "sec": "#D6EDFF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "ha": {
+    "main": "#F79686",
+    "main_vi": "cam san hô sáng",
+    "sec": "#A9E8C6",
+    "sec_vi": "bạc hà",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#7B1542",
+    "main_vi": "đỏ rượu thẫm",
+    "sec": "#F3ECFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "thu",
+    "proto": "đỏ rượu trầm",
+    "root": false
+   },
+   "dong": {
+    "main": "#3B9174",
+    "main_vi": "soft emerald green",
+    "sec": "#E9E7E2",
+    "sec_vi": "pearl white",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.2,
+    "main_sec": 66.0,
+    "sec_sec": 13.5
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s09",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#7A2B56",
+    "main_vi": "hồng mẫu đơn thẫm",
+    "sec": "#D6EDFF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#E5976E",
+    "main_vi": "cam đào dịu",
+    "sec": "#FFF6D0",
+    "sec_vi": "vàng nhạt",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#4E7D43",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#634EA2",
+    "main_vi": "soft indigo violet",
+    "sec": "#E6BCC3",
+    "sec_vi": "pale rose",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.0,
+    "main_sec": 45.3,
+    "sec_sec": 16.5
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s10",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#BF4051",
+    "main_vi": "soft crimson",
+    "sec": "#EEC9B5",
+    "sec_vi": "pale peach",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#C9F5F7",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#733567",
+    "main_vi": "tím mận thẫm",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#3A66A4",
+    "main_vi": "lam ngọc bích đậm",
+    "sec": "#FFD9E3",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 22.6,
+    "main_sec": 53.1,
+    "sec_sec": 22.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s11",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#2F5D24",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#CAEFDD",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E09974",
+    "main_vi": "cam đào dịu",
+    "sec": "#D8DCB2",
+    "sec_vi": "kem chanh",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#852D37",
+    "main_vi": "đỏ lá phong trầm thẫm",
+    "sec": "#FFD9E3",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#794096",
+    "main_vi": "soft royal purple",
+    "sec": "#9ABCF5",
+    "sec_vi": "soft blue",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 50.7,
+    "main_sec": 66.1,
+    "sec_sec": 36.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "s12",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#AF5A5F",
+    "main_vi": "hồng hoa đào đậm vừa",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#F2998A",
+    "main_vi": "cam san hô sáng",
+    "sec": "#7F4073",
+    "sec_vi": "tím mận trầm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#4E7D43",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#FFEAEF",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#3686A1",
+    "main_vi": "soft peacock blue",
+    "sec": "#EAD7BF",
+    "sec_vi": "warm ivory",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 49.0,
+    "main_sec": 45.1,
+    "sec_sec": 16.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "s13",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#6AA36C",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#E8E4DA",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#FEAC9E",
+    "main_vi": "cam san hô sáng",
+    "sec": "#D0F5E4",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#C592B9",
+    "main_vi": "tím mận dịu",
+    "sec": "#EFE6FF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#D1E9FB",
+    "main_vi": "pale blue",
+    "sec": "#4A6D9F",
+    "sec_vi": "deep blue",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 51.2,
+    "main_sec": 30.5,
+    "sec_sec": 16.8
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s14",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#8CBE81",
+    "main_vi": "xanh lá xuân sáng",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#D58679",
+    "main_vi": "cam san hô dịu",
+    "sec": "#88D4D3",
+    "sec_vi": "ngọc dịu",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#C592B9",
+    "main_vi": "tím mận dịu",
+    "sec": "#F6ECC0",
+    "sec_vi": "vàng nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#3E5079",
+    "main_vi": "soft ink blue",
+    "sec": "#B8CBF3",
+    "sec_vi": "pale blue",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 50.9,
+    "main_sec": 30.7,
+    "sec_sec": 12.3
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s15",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#D48DA0",
+    "main_vi": "hồng dịu",
+    "sec": "#E8E4DA",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "ha": {
+    "main": "#E9A17C",
+    "main_vi": "cam đào sáng",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#68985D",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#ABDBC4",
+    "main_vi": "pale jade",
+    "sec": "#007179",
+    "sec_vi": "deep teal",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 49.4,
+    "main_sec": 31.2,
+    "sec_sec": 16.4
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s16",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#DE9CA4",
+    "main_vi": "soft peach-blossom pink",
+    "sec": "#B35685",
+    "sec_vi": "plum rose",
+    "reads": "thu",
+    "proto": "hồng đất",
+    "root": true
+   },
+   "ha": {
+    "main": "#F3A976",
+    "main_vi": "cam quýt sáng",
+    "sec": "#9AD4B4",
+    "sec_vi": "bạc hà dịu",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#672863",
+    "main_vi": "tím mận thẫm",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#668ED8",
+    "main_vi": "lam ngọc bích dịu",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 45.9,
+    "main_sec": 20.3,
+    "sec_sec": 43.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s17",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#D88579",
+    "main_vi": "soft coral pink",
+    "sec": "#FBD6C2",
+    "sec_vi": "pale peach",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "ha": {
+    "main": "#E58870",
+    "main_vi": "cam san hô dịu",
+    "sec": "#004F38",
+    "sec_vi": "xanh ngọc trầm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#98518A",
+    "main_vi": "tím mận đậm",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#8586D0",
+    "main_vi": "tím than dịu",
+    "sec": "#F9D2DD",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 28.9,
+    "main_sec": 44.0,
+    "sec_sec": 28.9
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s18",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E1EA93",
+    "main_vi": "vàng chanh non nhạt",
+    "sec": "#3E5A8D",
+    "sec_vi": "lam ngọc trầm",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#D88669",
+    "main_vi": "cam quả hồng dịu",
+    "sec": "#FBD9F2",
+    "sec_vi": "hồng tím phấn",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "dong": {
+    "main": "#AD6EB9",
+    "main_vi": "soft violet mauve",
+    "sec": "#A63F59",
+    "sec_vi": "deep rose",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 45.4,
+    "main_sec": 40.3,
+    "sec_sec": 32.1
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "s19",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#AA3C4E",
+    "main_vi": "soft garnet red",
+    "sec": "#B2D3C6",
+    "sec_vi": "pale jade",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#DA8375",
+    "main_vi": "cam san hô dịu",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#70366C",
+    "main_vi": "tím mận thẫm",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#1C7855",
+    "main_vi": "xanh ngọc đậm",
+    "sec": "#FFD9E3",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.2,
+    "main_sec": 54.6,
+    "sec_sec": 25.5
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s20",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#2F5D24",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#E5E9BF",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E1897B",
+    "main_vi": "cam san hô dịu",
+    "sec": "#D0F5E4",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#852D37",
+    "main_vi": "đỏ lá phong trầm thẫm",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#0A7D87",
+    "main_vi": "deep teal",
+    "sec": "#E6DDD1",
+    "sec_vi": "warm ivory",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 50.7,
+    "main_sec": 62.0,
+    "sec_sec": 33.9
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s21",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#58905A",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#D0F5E4",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFAD93",
+    "main_vi": "cam đào sáng",
+    "sec": "#005C41",
+    "sec_vi": "xanh ngọc sẫm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#832D47",
+    "main_vi": "đỏ rượu thẫm",
+    "sec": "#F0E5BA",
+    "sec_vi": "vàng nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#824CA9",
+    "main_vi": "soft amethyst purple",
+    "sec": "#D5BFE8",
+    "sec_vi": "soft lavender",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.2,
+    "main_sec": 67.8,
+    "sec_sec": 17.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s22",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#2F5D24",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E1EA93",
+    "main_vi": "vàng chanh non nhạt",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#763463",
+    "main_vi": "tím mận thẫm",
+    "sec": "#C3EEF0",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#35436E",
+    "main_vi": "soft midnight blue",
+    "sec": "#E9E7E2",
+    "sec_vi": "pearl white",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 56.0,
+    "main_sec": 52.0,
+    "sec_sec": 24.9
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s23",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#B86D98",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#FFF1F5",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#DA8375",
+    "main_vi": "cam san hô dịu",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#832D47",
+    "main_vi": "đỏ rượu thẫm",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#356E52",
+    "main_vi": "soft pine green",
+    "sec": "#A3D3BC",
+    "sec_vi": "soft jade",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 23.2,
+    "main_sec": 56.5,
+    "sec_sec": 18.6
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s24",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#417843",
+    "main_vi": "xanh lá xuân đậm",
+    "sec": "#BCEBD1",
+    "sec_vi": "bạc hà pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DF8071",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F0E5BA",
+    "sec_vi": "vàng nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#882655",
+    "main_vi": "deep berry",
+    "sec": "#F1CCB8",
+    "sec_vi": "pale peach",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": true
+   },
+   "dong": {
+    "main": "#5D5E9E",
+    "main_vi": "tím than đậm",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 59.9,
+    "main_sec": 70.4,
+    "sec_sec": 30.8
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s25",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#2F5D24",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#F8D7BE",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DA8375",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F4F0E6",
+    "sec_vi": "trắng ngà",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#852D37",
+    "main_vi": "đỏ lá phong trầm thẫm",
+    "sec": "#CAEFDD",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#3F6AA6",
+    "main_vi": "soft cobalt blue",
+    "sec": "#D2E1F8",
+    "sec_vi": "pale blue",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 50.7,
+    "main_sec": 52.8,
+    "sec_sec": 26.3
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s26",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#D68D9B",
+    "main_vi": "hồng dịu",
+    "sec": "#C3EEF0",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFBB92",
+    "main_vi": "cam mơ nhạt",
+    "sec": "#CFB8EC",
+    "sec_vi": "tím hoa cà dịu",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#7FB673",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#EBF0C6",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#5180B0",
+    "main_vi": "soft blue",
+    "sec": "#EDEBE9",
+    "sec_vi": "soft white",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 49.8,
+    "main_sec": 26.6,
+    "sec_sec": 18.6
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s27",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#BC6A9A",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#D3896B",
+    "main_vi": "cam đào dịu",
+    "sec": "#9AD4B4",
+    "sec_vi": "bạc hà dịu",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#F7ACBC",
+    "main_vi": "hồng thu sáng",
+    "sec": "#ECF7FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#C1B0F0",
+    "main_vi": "soft lavender",
+    "sec": "#353A6E",
+    "sec_vi": "deep indigo",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.1,
+    "main_sec": 22.2,
+    "sec_sec": 20.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s28",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#DE879F",
+    "main_vi": "hồng dịu",
+    "sec": "#BCEBD1",
+    "sec_vi": "bạc hà pastel",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "ha": {
+    "main": "#E09974",
+    "main_vi": "cam đào dịu",
+    "sec": "#CFB8EC",
+    "sec_vi": "tím hoa cà dịu",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#76AC6A",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#EFEBE1",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#A5D6ED",
+    "main_vi": "pale sky blue",
+    "sec": "#263359",
+    "sec_vi": "deep navy",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 54.0,
+    "main_sec": 20.2,
+    "sec_sec": 17.7
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s29",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#C485A8",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#E5E9BF",
+    "sec_vi": "kem chanh",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "ha": {
+    "main": "#F6A496",
+    "main_vi": "cam san hô sáng",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#7BB76E",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#C4E3F9",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#BFD9CE",
+    "main_vi": "soft pale mint",
+    "sec": "#00675B",
+    "sec_vi": "deep teal",
+    "reads": "thu",
+    "proto": "rêu",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 54.9,
+    "main_sec": 20.1,
+    "sec_sec": 26.5
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s30",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#7AAB6F",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E1EA93",
+    "main_vi": "vàng chanh non nhạt",
+    "sec": "#EEB0C2",
+    "sec_vi": "hồng dịu",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#DF8C6F",
+    "main_vi": "cam quả hồng dịu",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "dong": {
+    "main": "#7C95CE",
+    "main_vi": "soft blue",
+    "sec": "#CDDDE4",
+    "sec_vi": "pale ice blue",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 41.7,
+    "main_sec": 41.9,
+    "sec_sec": 29.0
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s31",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#8CBE81",
+    "main_vi": "xanh lá xuân sáng",
+    "sec": "#E8E4DA",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E7A277",
+    "main_vi": "cam đào sáng",
+    "sec": "#FBBDCF",
+    "sec_vi": "hồng dịu",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#B97275",
+    "main_vi": "đỏ lá phong trầm đậm vừa",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "thu",
+    "proto": "hồng đất",
+    "root": false
+   },
+   "dong": {
+    "main": "#DAE4FC",
+    "main_vi": "pale blue",
+    "sec": "#5D325D",
+    "sec_vi": "deep plum",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 47.8,
+    "main_sec": 34.8,
+    "sec_sec": 18.9
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s32",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#73AC74",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#FFE3EA",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFBB92",
+    "main_vi": "cam mơ nhạt",
+    "sec": "#EBF0C6",
+    "sec_vi": "kem chanh",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#C592B9",
+    "main_vi": "tím mận dịu",
+    "sec": "#CAEFDD",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#5D8DBD",
+    "main_vi": "soft blue",
+    "sec": "#B8CBF3",
+    "sec_vi": "pale blue",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 51.1,
+    "main_sec": 21.6,
+    "sec_sec": 32.2
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s33",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#D98CA6",
+    "main_vi": "soft peony pink",
+    "sec": "#791649",
+    "sec_vi": "deep berry",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": true
+   },
+   "ha": {
+    "main": "#D88766",
+    "main_vi": "cam đào dịu",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#9668AA",
+    "main_vi": "tím hoa cà đậm vừa",
+    "sec": "#E9DFB3",
+    "sec_vi": "vàng nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.7,
+    "main_sec": 62.5,
+    "sec_sec": 63.1
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s34",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#A44B79",
+    "main_vi": "hồng mẫu đơn đậm",
+    "sec": "#F9D2DD",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#E1EA93",
+    "main_vi": "vàng chanh non nhạt",
+    "sec": "#555095",
+    "sec_vi": "tím than",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#DF6959",
+    "main_vi": "soft coral red",
+    "sec": "#EAD9CD",
+    "sec_vi": "pale peach ivory",
+    "reads": "xuan",
+    "proto": "đỏ Tết",
+    "root": true
+   },
+   "dong": {
+    "main": "#5D85CE",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 25.3,
+    "main_sec": 29.0,
+    "sec_sec": 13.6
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s35",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#C05995",
+    "main_vi": "soft fuchsia rose",
+    "sec": "#EACDD2",
+    "sec_vi": "pale blush",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": true
+   },
+   "ha": {
+    "main": "#DE8D6C",
+    "main_vi": "cam đào dịu",
+    "sec": "#3E5A8D",
+    "sec_vi": "lam ngọc trầm",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#993842",
+    "main_vi": "đỏ lá phong trầm đậm",
+    "sec": "#E9DDC4",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#8586D0",
+    "main_vi": "tím than dịu",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.7,
+    "main_sec": 43.5,
+    "sec_sec": 17.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s36",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#C6535C",
+    "main_vi": "soft lychee red",
+    "sec": "#DAC39A",
+    "sec_vi": "soft honey",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#FE9F8F",
+    "main_vi": "cam san hô sáng",
+    "sec": "#3E5A8D",
+    "sec_vi": "lam ngọc trầm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#9E5B99",
+    "main_vi": "tím mận đậm vừa",
+    "sec": "#BCEBD1",
+    "sec_vi": "bạc hà pastel",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#039D7F",
+    "main_vi": "xanh ngọc đậm vừa",
+    "sec": "#C4E3F9",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 21.1,
+    "main_sec": 47.1,
+    "sec_sec": 22.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s37",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#C982BE",
+    "main_vi": "soft orchid pink",
+    "sec": "#593A78",
+    "sec_vi": "deep violet",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "ha": {
+    "main": "#FDA089",
+    "main_vi": "cam san hô sáng",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#A9496B",
+    "main_vi": "đỏ rượu đậm",
+    "sec": "#E9DDC4",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#5D85CE",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#F4D2EB",
+    "sec_vi": "hồng tím phấn",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 21.2,
+    "main_sec": 21.9,
+    "sec_sec": 61.8
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s38",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#C26594",
+    "main_vi": "hồng mẫu đơn đậm vừa",
+    "sec": "#E9DDC4",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#D99F8C",
+    "main_vi": "soft apricot rose",
+    "sec": "#872555",
+    "sec_vi": "deep berry",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "thu": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#F4D2EB",
+    "sec_vi": "hồng tím phấn",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#7C7DC7",
+    "main_vi": "tím than đậm vừa",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 60.1,
+    "main_sec": 37.5,
+    "sec_sec": 24.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "s39",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#4E7D43",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#FED4B9",
+    "sec_vi": "đào pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#CE9522",
+    "main_vi": "soft honey",
+    "sec": "#187E90",
+    "sec_vi": "deep sky blue",
+    "reads": "ha",
+    "proto": "vàng xoài",
+    "root": true
+   },
+   "thu": {
+    "main": "#993842",
+    "main_vi": "đỏ lá phong trầm đậm",
+    "sec": "#FFF1F5",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "dong": {
+    "main": "#7E66A6",
+    "main_vi": "tím đậm vừa",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 52.7,
+    "main_sec": 46.0,
+    "sec_sec": 14.9
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s40",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#3D6B32",
+    "main_vi": "xanh lá xuân đậm",
+    "sec": "#FBEFD6",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DF8071",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F3ECFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#7F447B",
+    "main_vi": "tím mận đậm",
+    "sec": "#D5FAE9",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#4384B1",
+    "main_vi": "soft cerulean blue",
+    "sec": "#F5CEBE",
+    "sec_vi": "pale apricot",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 56.9,
+    "main_sec": 56.9,
+    "sec_sec": 17.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s41",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#2C5A21",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#E3F3FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#E6A375",
+    "main_vi": "cam quýt sáng",
+    "sec": "#79466F",
+    "sec_vi": "tím mận trầm",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#768B2F",
+    "main_vi": "soft leaf green",
+    "sec": "#EEC9B5",
+    "sec_vi": "pale peach",
+    "reads": "thu",
+    "proto": "ô liu",
+    "root": true
+   },
+   "dong": {
+    "main": "#5073B5",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#FBEFD6",
+    "sec_vi": "ngà",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 21.5,
+    "main_sec": 43.4,
+    "sec_sec": 23.8
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s42",
+   "group": "Sắc sảo",
+   "xuan": {
+    "main": "#A63F6A",
+    "main_vi": "soft raspberry magenta",
+    "sec": "#C6DDD3",
+    "sec_vi": "pale mint",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": true
+   },
+   "ha": {
+    "main": "#E69671",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F7F3FF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#4E7D43",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#F0F5CA",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#6B6CAE",
+    "main_vi": "tím than đậm vừa",
+    "sec": "#FFECDE",
+    "sec_vi": "kem đào",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.3,
+    "main_sec": 34.4,
+    "sec_sec": 13.3
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s43",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#CB656C",
+    "main_vi": "đỏ thắm đậm vừa",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#E6A375",
+    "main_vi": "cam quýt sáng",
+    "sec": "#FFE0E8",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#98518A",
+    "main_vi": "tím mận đậm",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#385A9F",
+    "main_vi": "soft sapphire blue",
+    "sec": "#EAE5CD",
+    "sec_vi": "pale lemon cream",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.9,
+    "main_sec": 48.7,
+    "sec_sec": 27.5
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s44",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#984377",
+    "main_vi": "hồng mẫu đơn đậm",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#FFAF79",
+    "main_vi": "cam quýt sáng",
+    "sec": "#E69498",
+    "sec_vi": "hồng san hô",
+    "reads": "ha",
+    "proto": "cam mơ",
+    "root": false
+   },
+   "thu": {
+    "main": "#A6593F",
+    "main_vi": "soft burnt sienna",
+    "sec": "#94B594",
+    "sec_vi": "sage green",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": true
+   },
+   "dong": {
+    "main": "#9076BE",
+    "main_vi": "tím đậm vừa",
+    "sec": "#E2DED4",
+    "sec_vi": "trắng ngà",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 26.3,
+    "main_sec": 43.6,
+    "sec_sec": 32.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s45",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#AD4A53",
+    "main_vi": "đỏ thắm đậm vừa",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#DF8C6F",
+    "main_vi": "cam san hô dịu",
+    "sec": "#176A4E",
+    "sec_vi": "xanh ngọc sẫm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#649958",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#803F8D",
+    "main_vi": "deep orchid",
+    "sec": "#DACEA9",
+    "sec_vi": "pale gold",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.2,
+    "main_sec": 31.5,
+    "sec_sec": 25.6
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s46",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#CE8EB2",
+    "main_vi": "hồng mẫu đơn dịu",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#D48871",
+    "main_vi": "cam đào dịu",
+    "sec": "#98CBF0",
+    "sec_vi": "xanh trời dịu",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#68985D",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#86CDB9",
+    "main_vi": "cool aquamarine",
+    "sec": "#5D5894",
+    "sec_vi": "deep blue-violet",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 52.1,
+    "main_sec": 41.5,
+    "sec_sec": 23.3
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s47",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#649958",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#FEDEC4",
+    "sec_vi": "kem đào",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#D3896B",
+    "main_vi": "cam đào dịu",
+    "sec": "#EEB0C2",
+    "sec_vi": "hồng dịu",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#AF71A1",
+    "main_vi": "tím mận đậm vừa",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#949BD8",
+    "main_vi": "periwinkle",
+    "sec": "#9ACBB7",
+    "sec_vi": "mint",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 56.4,
+    "main_sec": 38.3,
+    "sec_sec": 26.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s48",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#DF9FA8",
+    "main_vi": "soft blush pink",
+    "sec": "#70CCC1",
+    "sec_vi": "soft teal",
+    "reads": "thu",
+    "proto": "hồng đất",
+    "root": true
+   },
+   "ha": {
+    "main": "#EEAB7D",
+    "main_vi": "cam quýt sáng",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": false
+   },
+   "thu": {
+    "main": "#68985D",
+    "main_vi": "xanh rêu dịu",
+    "sec": "#E5E9BF",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#23B1E0",
+    "main_vi": "xanh băng dịu",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 46.6,
+    "main_sec": 22.6,
+    "sec_sec": 22.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s49",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#CC7384",
+    "main_vi": "soft rose",
+    "sec": "#3E8577",
+    "sec_vi": "soft jade",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": true
+   },
+   "ha": {
+    "main": "#FEAD94",
+    "main_vi": "cam đào sáng",
+    "sec": "#EFEBE1",
+    "sec_vi": "trắng ngà",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#8CBE81",
+    "main_vi": "xanh rêu sáng",
+    "sec": "#EADEFF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#95C0FD",
+    "main_vi": "lam ngọc bích sáng",
+    "sec": "#C3EEF0",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 52.7,
+    "main_sec": 23.3,
+    "sec_sec": 43.0
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s50",
+   "group": "Lạnh lùng",
+   "xuan": {
+    "main": "#7AAB6F",
+    "main_vi": "xanh lá xuân dịu",
+    "sec": "#CAEFDD",
+    "sec_vi": "bạc hà nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#FF9F87",
+    "main_vi": "cam san hô sáng",
+    "sec": "#FFD9E3",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#DD90CC",
+    "main_vi": "tím mận dịu",
+    "sec": "#EFEBE1",
+    "sec_vi": "trắng ngà",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#A6C9E4",
+    "main_vi": "clear ice blue",
+    "sec": "#A55D7A",
+    "sec_vi": "deep raspberry",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.1,
+    "main_sec": 35.3,
+    "sec_sec": 15.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s51",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#2F5D24",
+    "main_vi": "xanh lá xuân thẫm",
+    "sec": "#C9F5F7",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DA8F74",
+    "main_vi": "cam san hô dịu",
+    "sec": "#555095",
+    "sec_vi": "tím than",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": false
+   },
+   "thu": {
+    "main": "#832D47",
+    "main_vi": "đỏ rượu thẫm",
+    "sec": "#E8E4DA",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#CCB0E5",
+    "main_vi": "cool lilac",
+    "sec": "#62AEA9",
+    "sec_vi": "soft pine teal",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 53.4,
+    "main_sec": 63.6,
+    "sec_sec": 16.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s52",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#A6444C",
+    "main_vi": "hồng hoa đào đậm",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#176A4E",
+    "sec_vi": "xanh ngọc sẫm",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#733567",
+    "main_vi": "tím mận thẫm",
+    "sec": "#FFD9E3",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#98C8D7",
+    "main_vi": "sky blue",
+    "sec": "#D38A7B",
+    "sec_vi": "soft coral",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.0,
+    "main_sec": 50.5,
+    "sec_sec": 12.7
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": true
+  },
+  {
+   "id": "s53",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#A6444C",
+    "main_vi": "hồng hoa đào đậm",
+    "sec": "#FBD9F2",
+    "sec_vi": "hồng tím phấn",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#FD9F90",
+    "main_vi": "cam san hô sáng",
+    "sec": "#FFE4CF",
+    "sec_vi": "kem đào",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#733567",
+    "main_vi": "tím mận thẫm",
+    "sec": "#E5E9BF",
+    "sec_vi": "kem chanh",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#B290C7",
+    "main_vi": "soft orchid",
+    "sec": "#B0DDD0",
+    "sec_vi": "pale mint green",
+    "reads": "dong",
+    "proto": "tím",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.0,
+    "main_sec": 51.0,
+    "sec_sec": 34.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s54",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#E4A1B7",
+    "main_vi": "carnation pink",
+    "sec": "#63A9CF",
+    "sec_vi": "soft sky blue",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": true
+   },
+   "ha": {
+    "main": "#D88669",
+    "main_vi": "cam san hô dịu",
+    "sec": "#79466F",
+    "sec_vi": "tím mận trầm",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#447838",
+    "main_vi": "xanh rêu đậm",
+    "sec": "#EFE3CB",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#5F67AE",
+    "main_vi": "tím than đậm",
+    "sec": "#EFE6FF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "chàm",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 55.9,
+    "main_sec": 42.9,
+    "sec_sec": 33.8
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s55",
+   "group": "Kiêu kỳ",
+   "xuan": {
+    "main": "#D79BC4",
+    "main_vi": "soft raspberry pink",
+    "sec": "#95B77B",
+    "sec_vi": "soft leaf green",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "ha": {
+    "main": "#EB936B",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F9F5EB",
+    "sec_vi": "trắng ngà",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#832D47",
+    "main_vi": "đỏ rượu thẫm",
+    "sec": "#C3EEF0",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#6F5897",
+    "main_vi": "tím đậm",
+    "sec": "#EFE6FF",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 39.7,
+    "main_sec": 62.9,
+    "sec_sec": 25.0
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  },
+  {
+   "id": "s56",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#DEE2B9",
+    "sec_vi": "kem chanh",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#D6A585",
+    "main_vi": "apricot",
+    "sec": "#A991CA",
+    "sec_vi": "lavender violet",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": true
+   },
+   "thu": {
+    "main": "#B35274",
+    "main_vi": "đỏ rượu đậm vừa",
+    "sec": "#F9D2DD",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#5087D3",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#C4E3F9",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 57.8,
+    "main_sec": 51.6,
+    "sec_sec": 31.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": false
+  },
+  {
+   "id": "s57",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#528747",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#E2DED4",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#DE826A",
+    "main_vi": "cam san hô dịu",
+    "sec": "#F9D2DD",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#A9496B",
+    "main_vi": "đỏ rượu đậm",
+    "sec": "#BCE8EA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#BA8CC4",
+    "main_vi": "soft orchid purple",
+    "sec": "#F3CEBA",
+    "sec_vi": "pale peach",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.2,
+    "main_sec": 44.8,
+    "sec_sec": 16.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s58",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh lá xuân đậm vừa",
+    "sec": "#F2CCD6",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#79466F",
+    "sec_vi": "tím mận trầm",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#DC8570",
+    "main_vi": "soft coral",
+    "sec": "#B0DDD0",
+    "sec_vi": "pale mint green",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": true
+   },
+   "dong": {
+    "main": "#A87ABD",
+    "main_vi": "tím hoa cà dịu",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 47.8,
+    "main_sec": 22.4,
+    "sec_sec": 37.2
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s59",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#AA4969",
+    "main_vi": "hồng đậm vừa",
+    "sec": "#E9DFB3",
+    "sec_vi": "vàng nhạt",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "ha": {
+    "main": "#EDA98C",
+    "main_vi": "soft apricot",
+    "sec": "#90BDF2",
+    "sec_vi": "soft blue",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": true
+   },
+   "thu": {
+    "main": "#649958",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#886DB5",
+    "main_vi": "tím đậm vừa",
+    "sec": "#E4D6FD",
+    "sec_vi": "tím khói nhạt",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 58.9,
+    "main_sec": 27.6,
+    "sec_sec": 23.9
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s60",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#D9998C",
+    "main_vi": "coral pink",
+    "sec": "#649AB8",
+    "sec_vi": "soft sea blue",
+    "reads": "thu",
+    "proto": "đất nung / gạch",
+    "root": true
+   },
+   "ha": {
+    "main": "#EAE697",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#EDCCE5",
+    "sec_vi": "hồng tím phấn",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#AA4964",
+    "main_vi": "đỏ rượu đậm",
+    "sec": "#CCE9FF",
+    "sec_vi": "xanh sương",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#9F71B4",
+    "main_vi": "tím hoa cà đậm vừa",
+    "sec": "#AFEBEE",
+    "sec_vi": "ngọc pastel",
+    "reads": "dong",
+    "proto": "tím",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 26.3,
+    "main_sec": 45.3,
+    "sec_sec": 22.2
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s61",
+   "group": "Quyến rũ",
+   "xuan": {
+    "main": "#A44B79",
+    "main_vi": "hồng mẫu đơn đậm",
+    "sec": "#BCEBD1",
+    "sec_vi": "bạc hà pastel",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#D2906C",
+    "main_vi": "persimmon",
+    "sec": "#EDDCC6",
+    "sec_vi": "ivory",
+    "reads": "thu",
+    "proto": "cam quả hồng trầm",
+    "root": true
+   },
+   "thu": {
+    "main": "#4A7E3E",
+    "main_vi": "xanh rêu đậm vừa",
+    "sec": "#E3D6FF",
+    "sec_vi": "tím pastel",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#5D85CE",
+    "main_vi": "lam ngọc bích đậm vừa",
+    "sec": "#D8DCB2",
+    "sec_vi": "kem chanh",
+    "reads": "dong",
+    "proto": "lam ngọc",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 59.4,
+    "main_sec": 34.4,
+    "sec_sec": 30.1
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s62",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#EB8186",
+    "main_vi": "hồng hoa đào dịu",
+    "sec": "#F4F0E6",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "hồng hoa đào",
+    "root": false
+   },
+   "ha": {
+    "main": "#F8B287",
+    "main_vi": "cam đào sáng",
+    "sec": "#B9C9F9",
+    "sec_vi": "dịu tím than",
+    "reads": "ha",
+    "proto": "cam đào",
+    "root": false
+   },
+   "thu": {
+    "main": "#DF9ED9",
+    "main_vi": "tím mận sáng",
+    "sec": "#FFE3EA",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "dong",
+    "proto": "tím mận",
+    "root": false
+   },
+   "dong": {
+    "main": "#71B5D7",
+    "main_vi": "ice blue",
+    "sec": "#CDF2E0",
+    "sec_vi": "mint mist",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 20.3,
+    "main_sec": 31.8,
+    "sec_sec": 14.4
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": true,
+   "spring_pink": true
+  },
+  {
+   "id": "s63",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#85CC87",
+    "main_vi": "xanh lá xuân sáng",
+    "sec": "#FFE7EE",
+    "sec_vi": "hồng phấn nhạt",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "ha": {
+    "main": "#EFE495",
+    "main_vi": "vàng chanh nhạt",
+    "sec": "#E69498",
+    "sec_vi": "hồng san hô",
+    "reads": "ha",
+    "proto": "vàng chanh",
+    "root": false
+   },
+   "thu": {
+    "main": "#CB996C",
+    "main_vi": "amber",
+    "sec": "#F3E7CE",
+    "sec_vi": "ivory",
+    "reads": "thu",
+    "proto": "hổ phách",
+    "root": true
+   },
+   "dong": {
+    "main": "#68D5DA",
+    "main_vi": "xanh mòng két sáng",
+    "sec": "#E0F1FF",
+    "sec_vi": "xanh sương",
+    "reads": "dong",
+    "proto": "mòng két",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 33.8,
+    "main_sec": 27.4,
+    "sec_sec": 17.2
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s64",
+   "group": "Dịu dàng",
+   "xuan": {
+    "main": "#F8B3D3",
+    "main_vi": "peony pink",
+    "sec": "#ECE2FE",
+    "sec_vi": "smoke lilac",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": true
+   },
+   "ha": {
+    "main": "#FEAD94",
+    "main_vi": "cam đào sáng",
+    "sec": "#EDB9D5",
+    "sec_vi": "dịu tím mận",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#98CB8D",
+    "main_vi": "xanh rêu sáng",
+    "sec": "#F3E7CE",
+    "sec_vi": "ngà",
+    "reads": "xuan",
+    "proto": "xanh lá non",
+    "root": false
+   },
+   "dong": {
+    "main": "#67B9E2",
+    "main_vi": "xanh băng dịu",
+    "sec": "#CCF8FA",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "dong",
+    "proto": "xanh băng",
+    "root": false
+   },
+   "thu_vs_xuan": {
+    "main_main": 51.1,
+    "main_sec": 34.1,
+    "sec_sec": 23.5
+   },
+   "thu_pink_main": false,
+   "thu_pink_sec": false,
+   "spring_pink": false
+  },
+  {
+   "id": "s65",
+   "group": "Đoan trang",
+   "xuan": {
+    "main": "#A45B86",
+    "main_vi": "hồng mẫu đơn đậm vừa",
+    "sec": "#C9F5F7",
+    "sec_vi": "xanh ngọc sương",
+    "reads": "xuan",
+    "proto": "hồng mẫu đơn",
+    "root": false
+   },
+   "ha": {
+    "main": "#DE826A",
+    "main_vi": "cam san hô dịu",
+    "sec": "#C4B4E5",
+    "sec_vi": "dịu tím than",
+    "reads": "ha",
+    "proto": "cam san hô",
+    "root": false
+   },
+   "thu": {
+    "main": "#FF95B7",
+    "main_vi": "đỏ rượu sáng",
+    "sec": "#F9F5EB",
+    "sec_vi": "trắng ngà",
+    "reads": "xuan",
+    "proto": "hồng xuân",
+    "root": false
+   },
+   "dong": {
+    "main": "#4EA989",
+    "main_vi": "jade",
+    "sec": "#FBDAC1",
+    "sec_vi": "peach cream",
+    "reads": "dong",
+    "proto": "ngọc bích",
+    "root": true
+   },
+   "thu_vs_xuan": {
+    "main_main": 22.9,
+    "main_sec": 37.3,
+    "sec_sec": 16.1
+   },
+   "thu_pink_main": true,
+   "thu_pink_sec": false,
+   "spring_pink": true
+  }
+ ],
+ "wrong": {
+  "xuan": [
+   "c06",
+   "c08",
+   "c28",
+   "c31",
+   "m28",
+   "m29",
+   "s08",
+   "s16",
+   "s17",
+   "s29",
+   "s37",
+   "s48",
+   "s55",
+   "s60"
+  ],
+  "ha": [
+   "c02",
+   "c05",
+   "c10",
+   "c16",
+   "c20",
+   "m04",
+   "m16",
+   "m18",
+   "m19",
+   "m29",
+   "s11",
+   "s14",
+   "s15",
+   "s27",
+   "s28",
+   "s29",
+   "s31",
+   "s38",
+   "s41",
+   "s43",
+   "s46",
+   "s47",
+   "s48",
+   "s51",
+   "s56",
+   "s59",
+   "s61"
+  ],
+  "thu": [
+   "c02",
+   "c04",
+   "c05",
+   "c06",
+   "c08",
+   "c10",
+   "c11",
+   "c14",
+   "c19",
+   "c22",
+   "c26",
+   "c27",
+   "c31",
+   "c32",
+   "m02",
+   "m04",
+   "m09",
+   "m10",
+   "m14",
+   "m16",
+   "m18",
+   "m19",
+   "m20",
+   "m22",
+   "m28",
+   "m29",
+   "s07",
+   "s09",
+   "s10",
+   "s11",
+   "s12",
+   "s13",
+   "s14",
+   "s15",
+   "s16",
+   "s17",
+   "s18",
+   "s19",
+   "s20",
+   "s21",
+   "s22",
+   "s23",
+   "s24",
+   "s25",
+   "s26",
+   "s27",
+   "s28",
+   "s29",
+   "s30",
+   "s32",
+   "s33",
+   "s34",
+   "s35",
+   "s36",
+   "s37",
+   "s38",
+   "s39",
+   "s40",
+   "s42",
+   "s43",
+   "s44",
+   "s45",
+   "s46",
+   "s47",
+   "s48",
+   "s49",
+   "s50",
+   "s51",
+   "s52",
+   "s53",
+   "s54",
+   "s55",
+   "s56",
+   "s57",
+   "s58",
+   "s59",
+   "s60",
+   "s61",
+   "s62",
+   "s64",
+   "s65"
+  ],
+  "dong": [
+   "c14",
+   "c32",
+   "m14",
+   "s29"
+  ]
+ },
+ "s62_options": [
+  {
+   "key": "1",
+   "title": "Chỉ đổi Thu (Xuân · Hạ · Đông giữ nguyên)",
+   "why": "Thu = lá ô liu cuối thu: xanh ô liu ánh vàng, dịu, nhạt — rõ là THU; phụ hồng tím phấn giữ nét nữ tính dịu dàng của cô (hồng được làm màu phụ, L1583)",
+   "sets": {
+    "xuan": {
+     "main": "#EB8186",
+     "main_vi": "hồng hoa đào dịu",
+     "sec": "#F4F0E6",
+     "sec_vi": "trắng ngà",
+     "changed": false,
+     "root": false,
+     "reads": "xuan",
+     "proto": "hồng hoa đào",
+     "bad": null,
+     "contrast": 32.5,
+     "uniq_fail": []
+    },
+    "ha": {
+     "main": "#F8B287",
+     "main_vi": "cam đào sáng",
+     "sec": "#B9C9F9",
+     "sec_vi": "dịu tím than",
+     "changed": false,
+     "root": false,
+     "reads": "ha",
+     "proto": "cam đào",
+     "bad": null,
+     "contrast": 34.9,
+     "uniq_fail": []
+    },
+    "thu": {
+     "main": "#97AF68",
+     "main_vi": "xanh ô liu dịu",
+     "main_en": "soft olive green",
+     "sec": "#FCCFE7",
+     "sec_vi": "hồng tím phấn nhạt",
+     "sec_en": "pale orchid pink",
+     "changed": true,
+     "reads": "thu",
+     "proto": "ô liu",
+     "bad": null,
+     "contrast": 45.2,
+     "uniq_fail": []
+    },
+    "dong": {
+     "main": "#71B5D7",
+     "main_vi": "xanh băng",
+     "sec": "#CDF2E0",
+     "sec_vi": "bạc hà nhạt",
+     "changed": false,
+     "root": true,
+     "reads": "dong",
+     "proto": "xanh băng",
+     "bad": null,
+     "contrast": 25.2,
+     "uniq_fail": []
+    }
+   },
+   "a31": [
+    "Hạ phụ ~ Đông chính ΔE 16"
+   ]
+  },
+  {
+   "key": "2",
+   "title": "Thu đất nung (đổi Xuân + Hạ chút ít cho hợp)",
+   "why": "Thu = đất nung hồng: hồng pha cam đất, trầm dịu như lá phong ngả màu — ấm, mùa gặt; phụ trắng sương xanh cho sáng mặt. Xuân sang hồng xuân mát hơn, Hạ sang vàng chanh nắng để Thu có chỗ đứng",
+   "sets": {
+    "xuan": {
+     "main": "#E680A1",
+     "main_vi": "hồng xuân",
+     "main_en": "spring rose pink",
+     "sec": "#FCEEEE",
+     "sec_vi": "trắng hồng ngà",
+     "sec_en": "blush white",
+     "changed": true,
+     "reads": "xuan",
+     "proto": "hồng xuân",
+     "bad": null,
+     "contrast": 28.5,
+     "uniq_fail": []
+    },
+    "ha": {
+     "main": "#F4E798",
+     "main_vi": "vàng chanh sáng",
+     "main_en": "light lemon yellow",
+     "sec": "#C9CDF9",
+     "sec_vi": "tím than nhạt",
+     "sec_en": "soft periwinkle",
+     "changed": true,
+     "reads": "ha",
+     "proto": "vàng chanh",
+     "bad": null,
+     "contrast": 41.7,
+     "uniq_fail": []
+    },
+    "thu": {
+     "main": "#D59278",
+     "main_vi": "hồng đất nung dịu",
+     "main_en": "soft terracotta rose",
+     "sec": "#E7F4F9",
+     "sec_vi": "trắng sương xanh",
+     "sec_en": "ice mist white",
+     "changed": true,
+     "reads": "thu",
+     "proto": "cam quả hồng trầm",
+     "bad": null,
+     "contrast": 34.4,
+     "uniq_fail": []
+    },
+    "dong": {
+     "main": "#71B5D7",
+     "main_vi": "xanh băng",
+     "sec": "#CDF2E0",
+     "sec_vi": "bạc hà nhạt",
+     "changed": false,
+     "root": true,
+     "reads": "dong",
+     "proto": "xanh băng",
+     "bad": null,
+     "contrast": 25.2,
+     "uniq_fail": []
+    }
+   },
+   "a31": []
+  },
+  {
+   "key": "3",
+   "title": "Thu quả hồng (đổi Xuân + Hạ chút ít cho hợp)",
+   "why": "Thu = cam quả hồng trầm: màu quả hồng chín tháng chín, ấm, hơi trầm — đậm chất thu nhất; Xuân gần như giữ (hồng hoa đào), Hạ vàng chanh. Cần chủ xem có thấy \"nâu\" không",
+   "sets": {
+    "xuan": {
+     "main": "#E98092",
+     "main_vi": "hồng hoa đào",
+     "main_en": "peach-blossom pink",
+     "sec": "#FCEEEE",
+     "sec_vi": "trắng hồng ngà",
+     "sec_en": "blush white",
+     "changed": true,
+     "reads": "xuan",
+     "proto": "hồng hoa đào",
+     "bad": null,
+     "contrast": 28.3,
+     "uniq_fail": []
+    },
+    "ha": {
+     "main": "#F4E798",
+     "main_vi": "vàng chanh sáng",
+     "main_en": "light lemon yellow",
+     "sec": "#C9CDF9",
+     "sec_vi": "tím than nhạt",
+     "sec_en": "soft periwinkle",
+     "changed": true,
+     "reads": "ha",
+     "proto": "vàng chanh",
+     "bad": null,
+     "contrast": 41.7,
+     "uniq_fail": []
+    },
+    "thu": {
+     "main": "#CC8E6B",
+     "main_vi": "cam quả hồng trầm",
+     "main_en": "muted persimmon",
+     "sec": "#E7F9FF",
+     "sec_vi": "trắng sương xanh",
+     "sec_en": "ice mist white",
+     "changed": true,
+     "reads": "thu",
+     "proto": "cam quả hồng trầm",
+     "bad": null,
+     "contrast": 35.6,
+     "uniq_fail": []
+    },
+    "dong": {
+     "main": "#71B5D7",
+     "main_vi": "xanh băng",
+     "sec": "#CDF2E0",
+     "sec_vi": "bạc hà nhạt",
+     "changed": false,
+     "root": true,
+     "reads": "dong",
+     "proto": "xanh băng",
+     "bad": null,
+     "contrast": 25.2,
+     "uniq_fail": []
+    }
+   },
+   "a31": []
+  }
+ ]
+}
