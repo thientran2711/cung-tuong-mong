@@ -418,7 +418,7 @@ rdDef("nc_su",9,{t:"Điều ước chợ biên",w:"emp",sj:"điều ước chợ
  c1:{h:"Thượng thư bộ Hộ",w:"emp",t:"Hoàng thượng kể lời Thượng thư bộ Hộ: Đại Hy không bán sắt cho nước ngoài. Sắt thành nông cụ hôm nay, mai có thể thành giáo mác.",o:[
   {n:"Đề nghị chỉ bán nông cụ đã rèn",f:"terms",wx:"có sắt mà không có giáo",lx:"{pa} chê ít",rt:"Hoàng thượng đem ý ấy hỏi Thượng thư; ông vuốt râu: “Thế thì được.”",rf:"Thượng thư lắc đầu."},
   {n:"Thưa: Thượng thư nói phải",f:"law",wx:"Hoàng thượng thấy ngươi lo cho Đại Hy",lx:"{land} không có sắt",rt:"Hoàng thượng gật đầu."},
-  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có sắt, Đại Hy có ngựa",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
+  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có ngựa, Đại Hy có sắt",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
  c2:{h:"Nhà {v} buôn muối",w:"v",need:["v"],t:"Nhà {v} giữ giấy phép buôn muối ở biên ải. Chợ biên mở thì muối của họ mất giá. Cha nàng ta đã dâng sớ: chợ biên là cửa cho gian tế.",o:[
   {n:"Tâu rõ nhà {v} có lợi riêng",wx:"sớ của nhà {v} mất sức nặng",lx:"hai nhà thành thù",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Hoàng thượng gác sớ của nhà {v}.",rf:"Hoàng thượng chán chuyện bè phái."},
   {n:"Chia cho nhà {v} một phần chợ muối",wx:"nhà {v} thôi cản",lx:"chợ biên có thêm một kẻ ăn chia",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Nhà {v} rút sớ.",rf:"Nhà {v} nhận phần, rồi vẫn cản."},
