@@ -336,6 +336,10 @@ function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m
    so a guest who missed fin (dropped socket, reload, AFK phone) would wait for it forever — and the room with her (coop-night case 4/12, NLC #10) */
 function again(d){try{const f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);if(!f)return false;
  COOP.send(Object.assign({},f,{id:NK+"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));return true}catch(e){console.error(e);return false}}
+/* the host answers "which word for day d?": a past day → its fin as it was; today → the last word again, or — after a reload, when LAST is gone —
+   today's word rebuilt from the saved state (the flip / the choice / fin), so a guest is never left without the host's word (NLC #10) */
+function reply(d){if(!host()||!S)return false;if(d!==day())return again(d);if(LAST&&LAST.d===d){send(LAST.ph);return true}
+ const x=X();if(S.nfFin===d||(x&&x.st!=="wait")){send(S.nfFin===d?"fin":null);return true}return false}
 function ask(){const c=CO();if(!c||!nfOn())return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
 /* the guest applies the host's word: the holder, the flip (scene + her own choice), the result */
 function apply(m){if(!S||S.dead||m.d!==day())return;
@@ -371,13 +375,13 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
  try{if(!window.__bot&&Q.length)showModal();render()}catch(e){}}
 try{if(typeof COOP==="object"&&COOP.on){
  COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat||!nfOn())return;
-  if(m.mode==="ask"){if(host()){if(m.d!=null&&m.d!==day())again(m.d);else if(LAST&&LAST.d===day())send(LAST.ph)}return}
+  if(m.mode==="ask"){if(host())reply(m.d!=null?m.d:day());return}
   if(m.mode==="h"&&guest())apply(m);
   else if(m.mode==="g"&&host()&&S&&m.d===day()){
    if(m.ph==="ch"){const x=X();if(x&&x.st==="open"&&x.fr===undefined){x.fr=m.ch?VALID(m.ch.v):null;step()}return}
    if(S.nfFin===day())return;
    apply(m);send()}}catch(e){console.error(e)}});
- const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(LAST&&LAST.d===day())send(LAST.ph);else if(S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d)}else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
+ const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d)}else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfSend=()=>send();/* test hook: relay the holder now */
 window.nfStep=step;
