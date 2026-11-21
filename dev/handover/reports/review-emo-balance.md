@@ -45,3 +45,20 @@ Shots: none kept (test outputs in /home/user/wt/rev-emo-shots scratch only; no C
 
 ## 2026-11-21 ~07:35Z — merge-tree vs newest LIVE aee7ff84
 `git merge-tree 2fa343d1 origin/main(aee7ff84)`: conflicts ONLY in generated index.html + sw.js; every dev/ file merges clean; LIVE 2021e23f..aee7ff84 touches none of jemo.js / jfeel.js / jmoodknow.js / jcoopone.js. => no re-review needed; MAIN lands 2fa343d1 with an index.html/sw.js rebuild. Standing by for the review/coop-emo-seat fix.
+
+# REVIEW coop-emo-seat r2 (a4457e49) — reviewer REVIEW emo-balance #1 session_01964izCJtXpS9YaSSenjP1G (for D #15 session_01964izCZTNiRZKnSHxPrUuX), 2026-11-21 ~10:05Z
+PRIORITY #1 CHECK: OD co-op one world (OD:L96) / feelings | main LIVE 92633f1d (emo-balance landed) | review/coop-emo-seat a4457e49, review/coop-host-lag-r2 (B, not landed) | claims COOP-EMO-SEAT #2 session_01964izG1vuu39FQLbioHU1N.
+
+Reviewer merge: a4457e49 + final-merge LIVE 92633f1d -> review/coop-emo-seat-r1 bfa6852d (conflicts: index.html/sw.js rebuilt; dev/test/coop-emo-seat.js add/add -> the branch's version, a superset of LIVE's). LIVE-revert audit CLEAN (dev/ diff vs LIVE = the branch's jcoopone/jcoopworld/probe hunks only). coop-host-lag-r2 NOT on LIVE -> this lands first; B's branch re-runs coop-emo-seat + coop-hl when it lands second.
+
+## VERDICT: FAIL (gate "coop-emo-seat 12× 0 FAIL" not met)
+1. coop-emo-seat ×12 on the LIVE merge (3 in parallel × 4 rounds): **11 PASS 25/25, 1 FAIL 24/25** (run r1a). This is a FEELING mismatch, not the «start»/bac miss: "after week 2 (guest rejoined)": R.1 emo host vui 40 "phòng ốc bày biện vừa ý" | guest khochiu 22 "trời oi bức khó ngủ"; R.3 emo.v 42 | 22 (+ emoMul of both). Week stamp (emo[4]) is the SAME on both seats; 22 = BAL.feel.life.v and "trời oi bức khó ngủ" is feelLife's Nóng nảy line (jfeel.js:203-204), so the GUEST rolled a quiet-life feeling on world NPCs that the host never rolled, and the merged week did not replace it with the host's.
+   feelLife is guarded by feelWorld() (worldOn false on the guest), so the guest wrote it while worldOn() was TRUE on her page — most likely the rejoin window (page reloaded, COOPW.on not yet set / seat not yet "b", the save loaded solo and a world tick ran), then the merge after rejoin did not take the host's group (emoHost needs CW.base.W; check whether base is set at that point, and whether emoOff/guest() is false before the room is back). Week 3 (host rejoined) then matched again.
+   Fix asked: the rejoin path must also end host-authoritative for the emo group (e.g. the first fromCanon after rejoin takes the host's emo/mk/emoH/mck for every world person, or no world feeling tick may run on a seat that holds a co-op room id before it reconnects). Then 12× 0 FAIL again, including at least 12 rejoin passes.
+   Log: /home/user/wt/rev-ces-seat/r1a.log (reviewer container scratch). Use your coop-emo-trace.js tracer on the guest-rejoin step.
+2. Not run yet (will run on the fixed sha): coop-e2e, coop-night, emo BIG tests. quickcheck on bfa6852d: see next line when done.
+
+## Law checks done (code read)
+- L1 TWO-WAY: OK — her act on an NPC still sets that NPC's feeling (recorded in S.coopEmo, replayed on both seats, host marks emoDone); NPC writes on her (mine()) are never blocked.
+- L4 ONE CORE: OK — no balance number added; the 60-entry queue cap (jcoopone emoRec) is a buffer size, not a game number.
+- Design matches the HOST_ONLY / stateOn pattern (jcoopworld.js:136/143); C rooms skip the guest replay (lens) and the host replays.
