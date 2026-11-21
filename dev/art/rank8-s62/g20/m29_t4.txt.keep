@@ -3,4 +3,3 @@ allow: Pose: one hand adjusting her belt pendant  # owner L1622 G45 (no cloth ov
 allow: Pose: one hand adjusting her belt pendant, a small white-jade lotus lamp in the other hand, the robe hem stirring slightly  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
 allow: an embroidered silk sash with hanging jade belt pendants and tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
 allow: fastened at the throat with a jade clasp   # G57 owner L1851: no jade pendant/disc/clasp/tassel (removal only)
-allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour pale celadon and her secondary colour deep rose like #CA7281   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

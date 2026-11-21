@@ -56,7 +56,7 @@ for age in ("a18","a26","a36","a51","a65"):
     NOFL=" NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6)."
     HB=" HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body."
     ANG=_hhs("ANGLE: ")
-    HIC=" HELD ITEM COLOUR: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour royal golden yellow and her secondary colour wine-crimson like #7E2A33."
+    HIC=" HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour royal golden yellow and her secondary colour wine-crimson like #7E2A33."
     for x in (NOFL,HB): assert _hh.count(x)==1,("not verbatim in HH t8",x)
     _hic_hh=_hhs("HELD ITEM COLOUR: "); assert re.sub(r"her robe colour .*$","",_hic_hh)==re.sub(r"her robe colour .*$","",HIC),"HELD ITEM COLOUR template differs from HH"
     assert o.count(S07)==1; o=o.replace(S07,"",1)   # move FABRIC out of its old place

@@ -64,7 +64,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### W05 · WINTER PHI BẠCH t1-t6 (G28, twin of S12)
 - text: `PHI BẠCH (winter): the shawl draped behind her back and over her arms is a soft, light, flowing OPAQUE silk shawl in {sec} (her secondary colour, clearly different from her main robe colour {main}), never see-through, never stiff or bulky; it keeps its soft graceful drape.`
-- scope: -
+- scope: tp1-6 pr1-6
 - confirm: -
 - ages: all
 - store: no
@@ -219,8 +219,8 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - vn: Chỉ MỘT lớp tay áo, rủ một mảnh từ vai; không tay ngắn chồng lên tay dài.
 
 ### S12 · PHI BẠCH (khăn choàng) t1-t6
-- text: `PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} with a THIN GOLD EDGE along its borders ({kind}, the only colour outside her two robe colours) — the robe, sleeves and arms are clearly visible through it, so it reads as {veil}, never an opaque solid band of colour; it keeps its soft graceful drape.`
-- scope: -
+- text: `PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape.`
+- scope: tp1-6 pr1-6
 - confirm: -
 - ages: all
 - store: no
@@ -243,19 +243,19 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - vn: Áo choàng vai Tần: đường cắt CONG (hình cong đổi theo người), vạt trước mở dần từ cổ xuống, không cài kín.
 
 ### S14 · HOÀNG QUÝ PHI LUXURY t7
-- text: `HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along the cape edges; still clearly simpler and less golden than the Empress.`
+- text: `HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.`
 - scope: tp7 pr7
 - confirm: -
 - ages: all
 - store: no
-- luot: 486 (G12); A41 owner Lượt 1411 (no necklace for anyone): "a layered pearl-and-gold necklace, " removed (B26FAB4, Foreman C #8)
+- luot: 486 (G12)
 - source: dev/art/store-all/build_all.py HQP_LUX
 - proof: dev/art/approved/proof/c06_t7_a18.txt
 - picture: HQP c20 pearls (skin) · gen 0eUXPSZTfW · cut xSBwv6vjfW · https://ctm-img.victoria-tntt.workers.dev/img/_keep/skins-1119/c20_hqp_pearls.png
 - vn: Hoàng quý phi: nhiều ngọc, trân châu, ngọc bích, vàng hơn bậc dưới, vẫn kém Hoàng hậu.
 
 ### S15 · HELD ITEM COLOUR (món cầm khác màu)
-- text: `HELD ITEM COLOUR: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {secondary}.`
+- text: `HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {secondary}.`
 - scope: tp1-8 pr1-8
 - confirm: -
 - ages: all
@@ -692,11 +692,3 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - negation: no
 - luot: 800 (F14, via ROOT-58; MG3)
 - why: owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)
-
-### X20 · Quý nhân t3 spiky hairpins (pearl-tipped hairpins = 'con nhím')
-- regex: `pearl-tipped hairpins`
-- scope: tp3 pr3
-- unless: -
-- negation: no
-- luot: owner L1566 + L1568 (G39, via Foreman C #13, DESIGN17)
-- why: owner L1566: the Quý nhân hairpins look like a hedgehog (many straight pins fanning out) = a prompt fault; L1568: fix it in the common prompt for everyone. Store TIER_LOW[3] now: two or three slim pearl hairpins set INTO her gathered hair at natural angles, mostly hidden, small dangling pearl ornaments, never a radiating crown

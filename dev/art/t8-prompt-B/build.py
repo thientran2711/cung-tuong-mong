@@ -346,11 +346,11 @@ ORIG1={
 "c32":("ivory cream silk like #EEDCCE","a pale ivory-taupe like #C5B5A8"),
 }
 # 3f t8 list (10 items): (text, hand-template key)
-ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered round fan with a gold-and-jade handle","two"),
+ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered round fan with a gold-and-jade handle and pearl tassels","two"),
 ("a gold-mounted imperial scroll","scroll"),("a gold phoenix seal box","box"),("a phoenix-headed gold hand mirror with pearls","one"),
 ("a gold phoenix-shaped incense ball","one"),("a kingfisher-and-pearl phoenix folding fan with gold ribs","two"),
 ("a gold lidded jewel casket with a phoenix and pearls","box"),("an imperial book bound in gold-thread silk","two"),
-("a gold phoenix palace lantern","two"),
+("a gold phoenix palace lantern with pearl tassels","two"),
 ("a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre","one"),
 ("a pair of mandarin ducks carved in white jade on a pearl cord","one"),
 ("a white-jade flute with gold phoenix bands","two"),
@@ -366,7 +366,7 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a small white-jade statuette of Guanyin on a gold stand","two"),
 ("a round imperial-jade longevity plaque carved with a round shou symbol, on a gold stand","two"),
 ("a pair of imperial-jade health balls","two"),
-("an imperial phoenix-embroidered silk ball (tú cầu), a round stuffed ball held in the palm or by its cord, no handle","one"),
+("an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle","one"),
 ("a folded letter on gold-flecked imperial paper tied with a pearl cord","two"),
 ("a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole","one"),
 ("an embroidery hoop in a gold phoenix frame with an imperial-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle","two"),
@@ -487,11 +487,11 @@ def build(c,v="v0",golden=False):
 # ---------- t7 Hoang quy phi variant (same method; colour slot: ORIGINAL t7 colour MAIN + royal yellow ONLY as parts) ----------
 ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigree frame and gems","two"),("a gold-filigree jewel casket set with gems","box"),
 ("a kingfisher-feather folding fan with gold ribs","two"),("a gold lotus-shaped incense box","box"),("a gold hand mirror set with gems","one"),
-("a gold lotus lamp set with gems","one"),("a gold-filigree palace lantern","two"),("a gold flower basket set with gems","box"),
+("a gold lotus lamp set with gems","one"),("a gold-filigree palace lantern with gem tassels","two"),("a gold flower basket set with gems","box"),
 ("a gold-and-coral bead string held as a hand ornament","one"),
 ("a gold-filigree butterfly hairpin with kingfisher-feather wings, held in the hand","one"),
-("a kingfisher-feather silk ball (tú cầu), a round stuffed ball held in the palm or by its cord, no handle","one"),
-("a jade flute with gold-filigree bands","two"),
+("a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle","one"),
+("a jade flute with gold-filigree bands and gem tassels","two"),
 ("a small pipa lute inlaid with gold filigree and gems","two"),
 ("a closed kingfisher-feather silk parasol with a gold handle","one"),
 ("a poetry book bound in kingfisher silk with gold clasps","two"),
@@ -699,14 +699,14 @@ def outfit_low123(c,t,pal,main):
     _sp=hairflower_species(c,t); fl=_art(_sp[0]) if _sp else fl   # F2 (owner Lượt 1352): hair flower t1–t3 = the F2 species of this rank
     if AGE in CROSSED_AGES and t in TIER_LOW_CROSSED: robe=TIER_LOW_CROSSED[t]   # G21: crossed collar at a36/a51/a65
     return f"Outfit ({rk}): a NEW outfit, {robe.format(motif=mo,sec=pal.split(" and ")[-1])}; {hair.format(flower=fl)}; her signature colour family {pal} stays the MAIN robe colour ({main}, NOT green); the robe itself is clearly {main} silk, {gold}, NOT a cream, beige or all-gold robe"
-ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an embroidered silk sachet with a tassel","one"),3:("an embroidered silk round fan","two"),
- 4:("a round fan with a carved jade handle","two"),5:("a round fan with a gold-inlaid handle","two"),6:("a white-jade ruyi","one")},
+ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an embroidered silk sachet with a tassel","one"),3:("an embroidered silk round fan with a silk tassel","two"),
+ 4:("a round fan with a carved jade handle and jade tassel","two"),5:("a round fan with a gold-inlaid handle and gem tassel","two"),6:("a white-jade ruyi","one")},
  "c25":{1:("a sprig of fresh plum blossoms","one"),2:("a painted paper folding fan","one"),3:("a painted scroll with wooden rollers","scroll"),
  4:("a lacquered jewel box","box"),5:("a painted scroll with gold fittings","scroll"),6:("a jewelled box","box")}}
 # per-person item ladder (t1..t6) for everyone else: signature object of her jobs.json poses (phoenix-free), stepped up in richness per rank
 # (B, hand key, style); styles: trim (default) | jade | pearls | flower
 LOW_SIG={"c01":("round silk fan painted with peonies","two","trim"),"c02":("round silk fan","two","trim"),"c03":("white feather fan","two","trim"),
-"c04":("round gauze fan","two","trim"),"c05":("round fan painted with peonies","two","trim"),"c07":("silk handkerchief","one","trim"),
+"c04":("round gauze fan with a red tassel","two","trim"),"c05":("round fan painted with peonies","two","trim"),"c07":("silk handkerchief","one","trim"),
 "c08":("embroidered sachet","one","trim"),"c09":("small white flower","one","flower"),"c10":("sprig of white jasmine","one","flower"),
 "c11":("folded letter","one","trim"),"c12":("string of pearls","one","pearls"),"c13":("embroidery hoop","two","trim"),"c14":("basket of flowers","two","trim"),
 "c15":("sprig of plum blossom","one","flower"),"c16":("pink lotus flower","one","flower"),"c17":("spool of silk thread and a needle case","one","trim"),
@@ -730,7 +730,7 @@ for _c in LOW_SIG: ITEMS_LOW[_c]=low_items(_c)
 # The old LOW_SIG ladder (her signature item stepped up) is REPLACED: every rank takes ONE item from ITS OWN 3f list, spread so neighbouring people differ and one person never holds the same KIND of item at two ranks; each item kind has its own hand interaction (HAND_LOW).
 L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a simple embroidered cloth sachet","dangle"),
 ("a small paper kite painted like a swallow, its string on a bamboo reel","two"),
-("an embroidered silk ball (tú cầu), a round stuffed ball, no handle, no stick","dangle"),
+("an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick","dangle"),
 ("a folded letter on flower-patterned paper tied with a silk cord","two"),
 ("a small painted wooden comb box","box"),
 ("a small glazed clay pot with an orchid","two"),
@@ -759,7 +759,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a fly-whisk of horsehair with a plain bamboo handle","one"),
 ("a small plain bamboo birdcage with its cloth cover drawn back","lantern"),
 ("a thread-bound almanac in a plain cloth cover","book")],
-2:[("a silk round fan with a lacquered handle","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain lotus lamp","lamp"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern","lantern"),("a small lacquered comb box","box"),("a bamboo flute","flute"),
+2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain lotus lamp","lamp"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
 ("a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat","one"),
 ("a small cricket cage of lacquered bamboo with a silk tassel","dangle"),
 ("a lacquered butterfly hairpin, held in the hand","dangle"),
@@ -781,7 +781,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a red-lacquered hair comb, held in the hand","one"),
 ("a lacquered name seal with a silk tassel","one"),
 ("a small painted lacquer flower basket","basket"),
-("an embroidered silk ball (tú cầu), a round stuffed ball, no handle, no stick","dangle"),
+("an embroidered silk ball (tú cầu) with a long silk tassel, a round stuffed ball, no handle, no stick","dangle"),
 ("a small painted porcelain perfume flask with a silk tassel","one"),
 ("a calligraphy brush with a painted porcelain shaft","one"),
 ("a small lacquered hand bell with a silk tassel","dangle"),
@@ -790,7 +790,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a lacquered walking staff with a silk cord","one"),
 ("a small potted pine in a painted porcelain pot","two"),
 ("an agate pendant on a silk cord","dangle")],
-3:[("an embroidered silk round fan","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon lotus lamp","lamp"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
+3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon lotus lamp","lamp"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
 ("an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick","dangle"),
 ("a silver butterfly hairpin, held in the hand","dangle"),
 ("a small embroidered silk sachet with a silver bead","dangle"),
@@ -821,10 +821,10 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a string of red-agate prayer beads with a silver tassel","dangle"),
 ("a round red-agate longevity plaque carved with a round shou symbol","two"),
 ("a thread-bound almanac in a silver-thread cover","book")],
-4:[("a round fan with a carved jade handle","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné lotus lamp","lamp"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade lotus lamp","lamp"),
+4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné lotus lamp","lamp"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade lotus lamp","lamp"),
 ("a jade butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of jade-trimmed bamboo","dangle"),
-("a jade flute","flute"),
+("a jade flute with a jade tassel","flute"),
 ("a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat","one"),
 ("a small pipa lute inlaid with jade","two"),
 ("a closed silk-brocade parasol with a carved jade handle","one"),
@@ -837,7 +837,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a carved jade crane on a rosewood stand","stand"),
 ("a round jade longevity plaque carved with a round shou symbol","two"),
 ("a small jade statuette of Guanyin on a stand","stand"),
-("an embroidered silk ball (tú cầu), a round stuffed ball, no handle, no stick","dangle"),
+("an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick","dangle"),
 ("a folded letter on jade-green flower paper tied with a silk cord","two"),
 ("a sprig of white magnolia blossoms tied with a silk cord","sprig"),
 ("an embroidered silk handkerchief with small jade corner weights","kerchief"),
@@ -852,10 +852,10 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a sandalwood walking staff with a jade head","one"),
 ("a small potted orchid in a jade-green glazed pot","two"),
 ("a string of jade prayer beads","dangle")],
-5:[("a round fan with a gold-inlaid handle","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel lotus lamp with gilt petals","lamp"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
+5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel lotus lamp with gilt petals","lamp"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
 ("a gold butterfly hairpin with gem wings, held in the hand","dangle"),
-("a gold-thread embroidered ball (tú cầu), a round stuffed ball, no handle, no stick","dangle"),
-("a flute with gold bands","flute"),
+("a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick","dangle"),
+("a flute with gold bands and a gem tassel","flute"),
 ("a small pipa lute inlaid with gold and mother-of-pearl","two"),
 ("a closed gold-thread brocade parasol with a gilded handle","one"),
 ("a gilded birdcage with its brocade cover drawn back","lantern"),
@@ -895,11 +895,11 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small hand-held table screen of pearl-embroidered silk in a white-jade frame","two"),
 ("a white-jade hair comb mounted in gold, held in the hand","one"),
 ("a white-jade hand warmer in a pearl-embroidered cover","two"),
-("an openwork gold incense ball","dangle"),
+("an openwork gold incense ball with pearl tassels","dangle"),
 ("a hanging scroll of pine and cranes on pearl-embroidered silk with white-jade rollers","scroll"),
 ("a round white-jade longevity plaque carved with a round shou symbol, on a gold stand","two"),
 ("a pair of white-jade health balls","two"),
-("a pearl-embroidered silk ball (tú cầu), a round stuffed ball, no handle, no stick","dangle"),
+("a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick","dangle"),
 ("a folded letter on gold-flecked paper sealed with white jade","two"),
 ("a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat","one"),
 ("an embroidery hoop in a gold-and-pearl frame with a fine silk scene, cloth stretched flat in two thin rings, a needle in it, never on a handle","hoop"),
@@ -916,7 +916,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a carved white-jade lingzhi fungus on a gold stand","stand")]}
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
 L3F_AGE={1:{"a18": [7, 12, 11, 5, 10, 25, 26, 27], "a26": [0, 2, 4, 13, 8, 28, 29, 30], "a36": [6, 16, 9, 1, 3, 31, 32, 33], "a51": [19, 15, 23, 20, 17, 34, 35, 36], "a65": [22, 24, 14, 18, 21, 37, 38, 39]},2:{"a18": [15, 1, 10, 12, 13, 25, 26, 27], "a26": [11, 16, 5, 14, 9, 28, 29, 30], "a36": [0, 18, 2, 3, 19, 31, 32, 33], "a51": [8, 6, 17, 4, 23, 34, 35, 36], "a65": [22, 24, 20, 7, 21, 37, 38, 39]},3:{"a18": [15, 10, 7, 13, 2, 25, 26, 27], "a26": [11, 16, 1, 12, 17, 28, 29, 30], "a36": [14, 4, 9, 5, 6, 31, 32, 33], "a51": [3, 19, 23, 24, 8, 34, 35, 36], "a65": [21, 20, 0, 22, 18, 37, 38, 39]},4:{"a18": [13, 8, 1, 9, 10, 25, 26, 27], "a26": [12, 15, 17, 14, 11, 28, 29, 30], "a36": [3, 16, 20, 18, 0, 31, 32, 33], "a51": [4, 19, 23, 6, 2, 34, 35, 36], "a65": [7, 5, 22, 21, 24, 37, 38, 39]},5:{"a18": [4, 13, 12, 11, 6, 25, 26, 27], "a26": [1, 9, 10, 2, 5, 28, 29, 30], "a36": [20, 15, 7, 14, 18, 31, 32, 33], "a51": [17, 21, 24, 0, 16, 34, 35, 36], "a65": [22, 19, 8, 3, 23, 37, 38, 39]},6:{"a18": [16, 8, 5, 15, 10, 25, 26, 27], "a26": [17, 11, 14, 12, 9, 28, 29, 30], "a36": [1, 4, 19, 13, 20, 31, 32, 33], "a51": [0, 18, 21, 24, 23, 34, 35, 36], "a65": [22, 2, 7, 6, 3, 37, 38, 39]}}
-HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, body and face frontal, standing squarely facing the viewer, no turn",
+HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",
 "ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body and face frontal, standing squarely facing the viewer, no turn",
 "kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body and face frontal, standing squarely facing the viewer, no turn",
 "basket":"the basket hanging from the crook of one arm, the other hand arranging a flower in it, body and face frontal, standing squarely facing the viewer, no turn",
@@ -924,7 +924,7 @@ HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turn
 "book":"the book open in both hands at waist height as if she was just reading it, head up toward the viewer, body and face frontal, standing squarely facing the viewer, no turn",
 "hoop":"the hoop held in one hand at waist height, the other hand drawing a silk thread from it, body and face frontal, standing squarely facing the viewer, no turn",
 "flute":"the flute held horizontally in both hands at chest height (not at the lips), fingers resting on its holes, body and face frontal, standing squarely facing the viewer, no turn",
-"lantern":"the lantern hanging from its handle in one hand beside her at hip height, body and face frontal, standing squarely facing the viewer, no turn",
+"lantern":"the lantern hanging from its handle in one hand beside her at hip height, the other hand steadying its tassel, body and face frontal, standing squarely facing the viewer, no turn",
 "dangle":"the ornament dangling from the fingers of one hand at chest height, the other hand cupped beneath it, body and face frontal, standing squarely facing the viewer, no turn",
 "lamp":"the lamp cradled in both hands at waist height, one hand under its base, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer",
 "box":"the box in both hands at waist height, one hand lifting its lid slightly, body and face frontal, standing squarely facing the viewer, no turn",
@@ -1280,13 +1280,13 @@ for _id,_m,_mh,_s,_sh in (("nc1","indigo","#5E6694","warm ivory","#EAD7BF"),("nc
     DATA[_id]=(f"{_m} and {_s}",DATA[_id][1]); ORIG1[_id]=(f"{_m} silk like {_mh}",f"{_s} like {_sh}"); M_COLS[_id]=(_m,_mh,_s,_sh)
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
 TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one"),
-("a dark-sandalwood folding fan","one"),
+("a dark-sandalwood folding fan with a long silk tassel","one"),
 ("an old-jade pendant carved with the longevity character on a silk cord","one"),
 ("a small lotus lamp of old celadon","two"),
 ("a palace lantern of longevity-pattern brocade on a sandalwood frame","two"),
 ("a painting album bound in longevity-pattern brocade","two"),
 ("a small hand warmer of gilt bronze in a brocade cover","two"),
-("an openwork gilt-bronze incense ball","one"),
+("an openwork gilt-bronze incense ball on a long silk tassel","one"),
 ("a fly-whisk of white horsehair with a sandalwood handle","one"),
 ("a round old-jade longevity plaque carved with a round shou symbol","two"),
 ("a small old-jade statuette of Guanyin on a sandalwood base","two"),
@@ -1326,13 +1326,13 @@ NUDE_VAR=[("only five short bead tassels hanging at the front of the crown to th
 # N4 nude-mass PHASE 1a: FIGURE_GATE H NỮ ĐẾ list (1..10), one item per person, neighbours (+-8) differ, never her own t8 item/kind (c06 #5 fan, c25 #4 ruyi unchanged)
 NUDE_LIST=[('an imperial jade seal (ngọc tỷ) on a yellow silk cord', 'one'), ('a gold dragon-headed sceptre', 'one'), ('an imperial edict scroll on yellow silk with gold rollers', 'scroll'), ('a gold-and-jade ruyi with a dragon', 'one'), ('a gold dragon-framed round fan', 'two'), ('a gold dragon-handled hand mirror', 'mirror'), ('a jade tablet (hốt) edged in gold', 'two'), ('a yellow-silk folding fan with gold dragon ribs', 'ffan'), ('a small gilded dragon censer', 'one'), ('a gold-mounted jade dragon-ring pendant on a yellow cord', 'dangle'),
 ("a gold dragon hairpin with jade dangles, slim and palm-length, held between her fingers, never a sceptre","dangle"),
-("a dragon-embroidered silk ball (tú cầu), a round stuffed ball held in the palm or by its cord, no handle","dangle"),
+("a dragon-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball held in the palm or by its cord, no handle","dangle"),
 ("a white-jade flute with gold dragon bands","two"),
 ("a closed dragon-embroidered silk parasol with a jade handle","one"),
 ("a poetry book bound in dragon-embroidered silk","two"),
 ("a small pipa lute inlaid with gold dragons","two"),
 ("a small hand-held table screen of dragon-embroidered silk in a jade frame","two"),
-("a gold dragon-framed palace lantern","two"),
+("a gold dragon-framed palace lantern with jade tassels","two"),
 ("a calligraphy brush with a jade shaft and a gold dragon cap","one"),
 ("a gold-mounted jade tiger tally (hổ phù) on a silk cord","dangle"),
 ("an openwork gold dragon incense ball","dangle"),
@@ -1574,7 +1574,7 @@ def build_state(c,state,v="v0"):
         hair=" Hair: her own hairstyle as described in the outfit, with hairpins, "+("silver, pearls and fresh flowers, little gold. " if t==1 else "gold hairpins with dangles, rich like her rank. ")
         s+=hair+EMB_NOPH+(FAB_LOW if t==1 else FAB)
         if state=="bd6" and BDOPT: s=bd_opt(s,BDOPT)
-        it={("nc",1):("a folded ivory-gold silk fan","two"),("nc",6):("a round fan with a gold-inlaid handle","two"),("bd",1):("a small bouquet of coral-red flowers","one"),("bd",6):("a white-jade ruyi","one")}[(k,t)]; it=age_item(c,k,*it)
+        it={("nc",1):("a folded ivory-gold silk fan","two"),("nc",6):("a round fan with a gold-inlaid handle and gem tassel","two"),("bd",1):("a small bouquet of coral-red flowers","one"),("bd",6):("a white-jade ruyi","one")}[(k,t)]; it=age_item(c,k,*it)
         return s+_pose(it[0],it[1],right)+CLOSE+END
     pal,face=DATA[c]; m,m2=ORIG1[c]; main0,orig=LOWNAME[c]; mo,fl=MOTIF_LOW[c]
     if state=="nude":

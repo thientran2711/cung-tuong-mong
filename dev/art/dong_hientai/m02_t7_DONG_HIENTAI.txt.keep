@@ -21,4 +21,3 @@ allow: the MAIN colour moss green like #A8C379 and the SECONDARY colour coral ro
 allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour moss green and her secondary colour coral rose like #CF8377  # m02 B20 đông palette sky blue #97C9D4 / cool rose pink #CE8AA7 replaces thu (owner L1419 c3, L1421)
 allow: Everyone beautiful at every age  # boilerplate duplicate, trimmed for <= 10 000
 allow: a plain gold belt   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
-allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour moss green and her secondary colour coral rose like #CF8377   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

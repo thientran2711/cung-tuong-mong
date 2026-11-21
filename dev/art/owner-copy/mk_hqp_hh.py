@@ -4,8 +4,8 @@
 # NO hair flowers at t7/t8 (only gold, pearls, jewels). Templates: tpl_hqp.txt, tpl_hh.txt, tpl_hh_orig.txt.
 B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 M19=dict(MAIN='caramel apricot',HEX1='#DFBBA1',SEC='soft teal blue',HEX2='#6E9CA8',AGE='about 22')
-ITEM19={7:'a closed parasol of gold silk inlaid with kingfisher feathers, handle of gold filigree set with gems',
-        8:'a closed parasol of imperial silk embroidered with phoenixes, handle of gold carved with phoenixes and set with pearls'}
+ITEM19={7:'a closed parasol of gold silk inlaid with kingfisher feathers, handle of gold filigree set with gems, with gem tassels',
+        8:'a closed parasol of imperial silk embroidered with phoenixes, handle of gold carved with phoenixes and set with pearls, with pearl phoenix tassels'}
 LOW_TONE="all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; "   # = t8-prompt-B/build.py LOW_TONE (B18)
 FL2='FABRIC: thick gold-embroidered brocade with a graceful, flowing drape. '  # owner Lượt 364: prompt B
 def templ(t,src):

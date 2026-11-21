@@ -19,4 +19,3 @@ allow: weight on one leg  # owner L1714 row 22/23 pose
 allow: held in the hand raised and admired  # owner L1714 row 23 new pose/held item
 allow: the robe falling still and straight  # owner L1714 row 22/23 pose
 allow: a jade-and-gold belt with long tassels and jade pendants   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
-allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

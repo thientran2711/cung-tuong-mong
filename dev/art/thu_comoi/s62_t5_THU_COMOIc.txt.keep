@@ -19,4 +19,3 @@ allow: the MAIN colour ice blue and the SECONDARY colour mint mist   # COLORFIX1
 allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
 allow: highly translucent gauze shawl in mint mist   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
 allow: clearly different from her main robe colour ice blue   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
-allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)
