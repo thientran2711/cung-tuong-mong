@@ -813,7 +813,7 @@ kit-info-fixed rv2 | review/kit-info-fixed-rv2 191c94f4 | rv session | PASS | 21
 | B LANDER #2c coop-host-lag-r2 (opus; successor of #2b 6cqrrDPR; merge LIVE into f13d8932 + rerun) | review/coop-host-lag-r2 | B | session_01N1tNP5ihpHbBRmxrezPTPd | RUNNING | 21/11 07:34Z |
 | jlost-kyngo E42 fixer (OPUS BIG; law 6c lost-case item duplicate, co-op both seats; MAIN 91 ORDER) | review/jlost-kyngo; briefs/E42-jlost-kyngo.md | FOREMAN E #26 | session_01DgYSWo2PtuCgvYCBtqoEdV | RUNNING | 21/11 07:50Z |
 kit-mark-fix rv | review/kit-mark-fix-rv 0e7561c9 | rv session | FAIL (portrait shrink vs older figure rule; stray jpgs) | 21/11
-| REVIEW maid-acts-a (OPUS BIG) 90931482 (+ merge 561e3f47) | review/maid-acts-a-rv; briefs/main91-rv-maid-acts-a.md | MAIN CHÍNH 91 | session_01Rc5AsKb5S4yXkQE8MAu4TW | RUNNING | 21/11 08:02Z |
+| REVIEW maid-acts-a (OPUS BIG) 90931482 (+ merge 561e3f47) | review/maid-acts-a-rv; briefs/main91-rv-maid-acts-a.md | MAIN CHÍNH 91 | session_01Rc5AsKb5S4yXkQE8MAu4TW | PASS → LAND READY 4cabe30f (FF of a2eb51cb; main now e391b85f, re-merge LIVE at land) · quickcheck PASS · coop tt+nc 94/94 · maid-8tabs 70/70 · role-parity ALONE ALL PASS · reports/rv-maid-acts-a.md | 21/11 08:02Z |
 kit-badge rv | review/kit-badge-rv 8e440a19 | rv session | FAIL (N4 ⏸ unreadable at 10 px) | 21/11
 | dresscode-fix-r4 gates E30d (opus; successor of E30c) | review/dresscode-fix-r4; reports/dresscode.md | FOREMAN E #26 | session_01DgYSWkaEjsg1aJWvkGTjny | RUNNING | 21/11 08:21Z |
 kit-mark-fix rv3 | review/kit-mark-fix-rv3 db138921 | rv session | PASS | 21/11

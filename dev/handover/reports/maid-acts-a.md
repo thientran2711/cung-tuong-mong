@@ -59,7 +59,9 @@ Her own maid-true acts toward a consort stay where they always were: when she me
 | Hại nặng | Sai cung nữ thân tín lấy đồ (laydol) · Sai cung nữ thân tín lấy lòng (bribel) | absent | she has no maid of her own |
 | Hại nặng | Hặc ăn mặc sai phẩm (vp) · Tố xa xỉ (xx) · Xin Hoàng hậu giáng (xinhh) | absent | a consort's standing to accuse |
 | Hại nặng | Trộm thú nuôi (petsteal) · Thả thú dữ (thathu) · Phóng hỏa kho đồ (phonghoa) · Phá việc học (ksab) | absent | consort harm (send people) |
+| Hại nặng | Xin bế con nàng về nuôi (takeaway) | absent | needs a higher phẩm than the mother (consort rank act); added by reviewer rv-maid-acts-a (table was missing it; code already hid it) |
 | Sát hại | Hạ độc (poison) · Hạ độc dần (slowpoison) · Hạ độc con nàng (kpoison) · Tặng quà ăn có độc (pgift) · Bỏ xạ hương (musk) · Mua chuộc bà đỡ (catswap) · Hủy dung (huydung) · Đẩy xuống hồ sen (pushp) · Đẩy con nàng xuống hồ (pond) | absent | consort harm; her poison road stays «Bỏ độc vào bát cơm» (a maid of a hostile palace, jmline) |
+| Sát hại | Vu con nàng trù ẻo (kframe) | absent | consort harm on a child; added by reviewer rv-maid-acts-a (table was missing it; code already hid it) |
 | Quyền Hoàng hậu | Xử tội · Tịch thu · Ban thưởng · Ân xá · Khất bổng lộc (hh:*) | absent | Hoàng hậu only (never on her road anyway) |
 | (any act added later) | unknown key | absent by default | allowlist: a new consort act never leaks onto her card; role-parity now scans this card in the maid column |
 
