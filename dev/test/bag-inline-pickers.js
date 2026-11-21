@@ -32,7 +32,7 @@ const R={},FAIL=[];const chk=(tag,n,ok,d)=>{(R[tag].checks=R[tag].checks||{})[n]
   await p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());TOIL.st=null;toilOpen()});await p.waitForSelector('#kg82 .toilw',{timeout:20000});await p.waitForTimeout(2500);
   let s=await stripOf('#kg82 .toildet .kinldet');chk(tag,'toil-strip-empty',s&&s.empty,s);chk(tag,'toil-chips-in-strip',s&&/Sắc|Xa xỉ|Danh/.test(s.chips||'')||true,s&&s.chips);
   await p.evaluate(()=>{const t=document.querySelector('#kg82 [data-kinvkey="toil"][data-kinvi]:not(.kitem-empty)');t&&t.click()});await p.waitForTimeout(400);
-  s=await stripOf('#kg82 .toildet .kinldet');chk(tag,'toil-strip-named',s&&!s.empty&&s.name,s);chk(tag,'toil-pic-left-square',s&&s.picL,s);chk(tag,'toil-no-x-no-card',s&&!s.x&&!s.card,s);chk(tag,'toil-acts',s&&s.acts.length>0,s);chk(tag,'toil-rows',s&&s.rows>0,s);chk(tag,'toil-nooverflowX',s&&!s.over,s);
+  s=await stripOf('#kg82 .toildet .kinldet');chk(tag,'toil-strip-named',s&&!s.empty&&s.name,s);chk(tag,'toil-pic-left-square',s&&s.picL,s);chk(tag,'toil-no-x-no-card',s&&!s.x&&!s.card,s);chk(tag,'toil-acts',s&&s.acts.length>0&&s.acts.every(t=>/\p{L}/u.test(t||'')),s);chk(tag,'toil-rows',s&&s.rows>0,s);chk(tag,'toil-nooverflowX',s&&!s.over,s);
   chk(tag,'toil-no-old-strip',await p.evaluate(()=>!document.querySelector('#kg82 .kidet-strip')));
   await shot('t1-toil','#kg82 .toildet .kinldet');
   await p.evaluate(()=>{const ts=[...document.querySelectorAll('#kg82 [data-kinvkey="toil"][data-kinvi]:not(.kitem-empty)')];ts[ts.length>1?1:0].click()});await p.waitForTimeout(300);
@@ -42,7 +42,7 @@ const R={},FAIL=[];const chk=(tag,n,ok,d)=>{(R[tag].checks=R[tag].checks||{})[n]
   await p.evaluate(()=>{tsDressGame('thanh',()=>{})});await p.waitForTimeout(500);
   s=await stripOf('#kg82 .ts-det .kinldet');chk(tag,'ts-strip-empty',s&&s.empty,s);
   await p.evaluate(()=>{const t=document.querySelector('#kg82 [data-tsi]');t&&t.click()});await p.waitForTimeout(300);
-  s=await stripOf('#kg82 .ts-det .kinldet');chk(tag,'ts-strip-named',s&&!s.empty&&s.name&&s.picL&&!s.x&&!s.card&&s.acts.length>0,s);chk(tag,'ts-nooverflowX',s&&!s.over,s);chk(tag,'ts-no-old-strip',await p.evaluate(()=>!document.querySelector('#kg82 .kidet-strip')));
+  s=await stripOf('#kg82 .ts-det .kinldet');chk(tag,'ts-strip-named',s&&!s.empty&&s.name&&s.picL&&!s.x&&!s.card&&s.acts.length>0,s);chk(tag,'ts-nooverflowX',s&&!s.over,s);chk(tag,'ts-acts-have-words',s&&s.acts.length>0&&s.acts.every(t=>/\p{L}/u.test(t||'')),s&&s.acts);chk(tag,'ts-no-old-strip',await p.evaluate(()=>!document.querySelector('#kg82 .kidet-strip')));
   await shot('t2-hoi-phoi-do','#kg82 .ts-det .kinldet');
   await p.evaluate(()=>{try{kg82Close()}catch(e){}});await p.waitForTimeout(300);
   /* 3. veil picker */

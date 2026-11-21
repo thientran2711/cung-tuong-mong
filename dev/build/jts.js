@@ -404,7 +404,7 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
  const grade=k=>typeof kmTierOf==="function"?kmTierOf(k):0;const src=k=>{try{const a=typeof itemArt==="function"?itemArt(k):null;if(a&&a.src)return a.src}catch(e){}return typeof kmItemImg==="function"?kmItemImg(k):""};
  let selI=null;const detHTML=()=>{const e=selI!=null?S.inv[selI]:null;if(!e||typeof kinlDetail!=="function")return typeof kinlDetail==="function"?kinlDetail(null,{key:"ts"}):"";
   const s=TS_SLOT.find(([,,fit])=>fit(e.k));const on=s&&P[s[0]]===e.k;const hit=T.tags.includes(e.k);
-  const b=on?pbtn(`data-tsact="off"`,"Bỏ ra",`thành: ô ${s[1]} để trống`,""):pbtn(`data-tsact="on"`,`Đặt vào ${s?s[1].toLowerCase():""}`,`thành: ${hit?`hợp đề ${T.n}`:`không hợp đề ${T.n}`}${P[s&&s[0]]?` · kèm: thay ${itm(P[s[0]]).n}`:""}`,"");
+  const b=on?pbtn(`data-tsact="off" data-kgkeep="1"`,"Bỏ ra",`thành: ô ${s[1]} để trống`,""):pbtn(`data-tsact="on" data-kgkeep="1"`,`Đặt vào ${s?s[1].toLowerCase():""}`,`thành: ${hit?`hợp đề ${T.n}`:`không hợp đề ${T.n}`}${P[s&&s[0]]?` · kèm: thay ${itm(P[s[0]]).n}`:""}`,"");
   return kinlDetail({e},{key:"ts",acts:[b],luxItem:true})};
  const paint=()=>{const dp=tsDressPts(S,P,th),pts=dp.raw;kg82Set("score",`${pts}/10`);kg82Set("round",`đã đặt ${Object.keys(P).filter(k=>P[k]).length}/4 · Xa xỉ ${dp.lux}`);kg82Set("time","không giới hạn");
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:itm(P[sl]).n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
