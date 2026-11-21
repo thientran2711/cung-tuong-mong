@@ -60,6 +60,8 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   /* E44b 14 (E44r seed 4242 vanish 1073 / 144): the returned piece carries another id than the case on this seat; `alt` names the case's id */
   reset();const q1=pc(P);const C14=mkc(P,Object.assign({},q1));const r14=FA([{op:"ret",k:P,iu:88888,alt:[q1.iu],e:{k:P,iu:88888}}]);
   ck("14 ret with a split id: alt finds her case, it closes, one piece home",C14.st==="done"&&S.inv.length===1&&r14.loud,{st:C14.st,inv:S.inv.map(e=>[e.k,e.iu]),miss:CW.famMiss});
+  reset();const q2=pc(P);const C14c=mkc(P,Object.assign({},q2));FA([{op:"ret",k:P,iu:99991,e:{k:P,iu:99991}}]);
+  ck("14c ret whose ids all miss: the case of that kind the friend holds closes, one piece home",C14c.st==="done"&&S.inv.length===1,{st:C14c.st,inv:S.inv.map(e=>[e.k,e.iu])});
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

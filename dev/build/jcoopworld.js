@@ -532,7 +532,10 @@ function famOff(e){const i=(S.inv||[]).indexOf(e);if(i>=0){S.inv.splice(i,1);ret
 function famMiss(o,why){const iu=o.iu||(o.e&&o.e.iu)||0,k=o.k||(o.e&&o.e.k);(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k,iu,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,k,iu,why)}
 /* her open case of that piece: by id; an op with no id (old room): the case of that kind the friend holds */
 function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));for(const id of famIds(o)){const c=L.find(c=>famIs(c.e,id));if(c)return c}
- return o.iu&&L.some(c=>c.e.iu)?L.find(c=>!c.e.iu&&c.k===o.k&&(c.by===fp()||c.at===fp()))||null:L.find(c=>c.k===o.k&&(c.by===fp()||c.at===fp()))||null}
+ /* E44b (E44r): a «ret» whose ids all miss (a census renumbered the piece on one seat) still closes THE case of that kind the friend holds
+    (an id-less one first): the piece comes home once and his side never stays «held» by her for a piece she no longer has */
+ const fh=L.filter(c=>c.k===o.k&&(c.by===fp()||c.at===fp()));
+ return o.iu&&L.some(c=>c.e.iu)?(fh.find(c=>!c.e.iu)||(o.op==="ret"?fh[0]:null)||null):fh[0]||null}
 /* the piece is back with her: close the case through the ONE owner change (jlost lostReturn), the holder's copy on this seat leaves.
    Returns the piece put in her chest, or null (already hers / nothing real to put). */
 function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const ids=famIds(o);if(c&&c.e&&c.e.iu)ids.push(c.e.iu);const mineAny=()=>ids.some(i=>famWhere(i));
