@@ -1978,3 +1978,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:09Z) 89: LANDED pm-c 75ad237d (E); FAIL bang-words cba883e0 (jrd_bd2.js) → ORDER E re-merge. Chain landq19 from home-chapters.
 - (11:10Z) 89: FAIL home-chapters 5acae7c5 (assets.json) → ORDER E re-merge (priority, GAP ROAD #2). Chain landq20 from ge-phutang.
 - (11:11Z) 89: FAIL ge-phutang f37ec5f1 (jbalge.js) → ORDER E (E re-merge batch: bang-words, home-chapters, ge-phutang, cold-faction). Chain landq21: kit-opt-kem, kit-badge, mg-intro-2, maid-acts-a, kit-focus r4, mg-noword-care, hao-huu, kit-chip-pause.
+- (11:12Z) kit-dialog-2 LvRJ: LAND READY c2b10901 (review/kit-dialog-2-land); G4 coop-one-world = parallel-load flake (alone 6/6 branch + 6/6 clean main) → 89 chain (QC alone). LvRJ ARCHIVED (ctx high).
