@@ -58,7 +58,7 @@ function tdGift(a,h){if(!h||a.bac<BAL.bacFee.tdGift)return"";ap(a,{bac:-BAL.bacF
  else r=`${TDOFF[h.c]} ${h.name} nhận quà của ${tdName(a)} nhưng chưa hứa gì (Bạc -40 mất trắng). `;
  return r+ccStep(a)}
 function tdAsk(a){const c=tdHouse(a);if(!c)return"";tdPowAdd(c,BAL.eff.j55.tdAsk);a.askT=S.turn;let r;
- window.__tdOk=false;if(aRoll(askO(a),a)){window.__tdOk=true;ap(a,{danh:BAL.eff.j55.danhTdAsk,sung:BAL.eff.j55.sungTdAsk});if(a!==S)a.dad=cl((a.dad||40)+3,0,100);r=`Cha ${tdName(a)} dâng sớ tâu đức hạnh của con gái; Hoàng thượng để ý: ${a===S?`Danh ${balSg(BAL.eff.j55.danhTdAsk)} · Sủng ${balSg(BAL.eff.j55.sungTdAsk)}`:"nàng được khen"}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)} vì dốc vốn liếng. `;tdNews(`Một quan nhà ${c} dâng sớ khen ${tdName(a)}.`)}
+ window.__tdOk=false;if(aRoll(askO(a),a)){window.__tdOk=true;ap(a,{danh:BAL.eff.j55.danhTdAsk,sung:BAL.eff.j55.sungTdAsk});if(a!==S)a.dad=cl((a.dad||40)+3,0,100);r=`Cha ${tdName(a)} dâng sớ tâu đức hạnh của con gái; Hoàng thượng để ý: ${a===S?`Danh ${balSg(BAL.eff.j55.danhTdAsk)} · ${sgStat(BAL.eff.j55.sungTdAsk)}`:"nàng được khen"}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)} vì dốc vốn liếng. `;tdNews(`Một quan nhà ${c} dâng sớ khen ${tdName(a)}.`)}
  else{ap(a,{danh:BAL.eff.j55.danhTdAsk_2});r=`Sớ của cha ${tdName(a)} bị Hoàng thượng gác lại${a===S?`: Danh ${balSg(BAL.eff.j55.danhTdAsk_2)}`:""}; nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)}. `}
  return r+ccStep(a)}
 function tdProbe(a,t){if(a.bac<BAL.bacFee.tdProbe||!tdHouse(t))return"";ap(a,{bac:-BAL.bacFee.tdProbe});let r="";

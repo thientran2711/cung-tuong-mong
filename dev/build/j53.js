@@ -129,7 +129,7 @@ function ktPEx(d){return cl(Math.round((21-KT.exc+d)/41*100),0,100)}function ktP
 function ktOdds(k,E,prep){return oddsCl(ktPEx(ktEdge(k,E,prep)))}
 function ktList(E){return allKids().filter(([k])=>ktEl(k,E))}
 const KTG={ex:{fond:6,sung:3,danh:2},top:{fond:3,sung:2,danh:2},ok:{fond:1},poor:{fond:-3,danh:-1},skip:{fond:-2}};
-function ktGain(){return `con xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, Sủng +${KTG.ex.sung}, Danh +${KTG.ex.danh} (đứng đầu thêm thương +${KTG.top.fond}, Sủng +${KTG.top.sung}, Danh +${KTG.top.danh})`}
+function ktGain(){return `con xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, ${sgStat(KTG.ex.sung)}, Danh +${KTG.ex.danh} (đứng đầu thêm thương +${KTG.top.fond}, ${sgStat(KTG.top.sung)}, Danh +${KTG.top.danh})`}
 function ktLoss(){return `con thi kém: Hoàng thượng thương con ${KTG.poor.fond}, Danh ${KTG.poor.danh}`}
 PEND.kt53=pp=>{const E=KTE[pp.e];if(!E||!S)return null;const L=ktList(E);const mine=L.filter(([,v])=>!v).map(([k])=>k).filter(k=>k.hp>=35);if(!mine.length)return null;
  const row=([k,v])=>{const sick=k.hp<35;return `<div class="ktr"><span>${mdH(kidFace(k),"xs")}<span>${k.name} · ${k.age} tuổi · ${v?"con "+v.name:"<strong class=\"g\">con ngươi</strong>"}</span></span><b>${sick?"đang ốm, không dự":oddsChip(word(ktOdds(k,E,0)))+" được khen"}</b></div>`};const oth=L.filter(([,v])=>v).length;
@@ -152,13 +152,13 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
   x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&npwPick(["tell","quiet"],y=>{const B=BAL.ag.why.g2b.rev;return y==="tell"?B.base+(x.k.tut||0)*B.tut:B.quiet})==="tell")rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
  if(top&&!top.v)ghenAll(BAL.ghen.kidTop,"con ngươi hơn con người khác");
  const RW={ex:"Xuất sắc",ok:"Khá",poor:"Kém",skip:"Ở nhà"};
- const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">Sủng +${g.sung}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
+ const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">${x.p?sgOf(x.p,g.sung):sgStat(g.sung)}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
  res.sort((a,b)=>b.s-a.s);const shown=res.filter(x=>!x.v||x===top||(x.r==="ex"&&res.indexOf(x)<4));const hid=res.filter(x=>!shown.includes(x));
  const cnt=r=>hid.filter(x=>x.r===r).length;const sum=hid.length?`Các hoàng tự khác (${hid.length}): ${["ex","ok","poor","skip"].filter(r=>cnt(r)).map(r=>`${cnt(r)} ${RW[r].toLowerCase()}`).join(", ")}.`:"";
  const rows=shown.map(x=>`<div class="ktr"><span>${mdH(kidFace(x.k),"xs")}<span>${x.k.name} · ${x.v?"con "+x.v.name:"<strong class=\"g\">con ngươi</strong>"}</span></span><b class="${x.r==="ex"?"g":x.r==="poor"||x.r==="skip"?"r":""}">${x===top?"Đứng đầu · ":""}${RW[x.r]}</b>${x.v?"":`<small>${eff(x)}</small>`}</div>`).join("");
  const mineT=res.filter(x=>!x.v).map(x=>`${x.k.name}: ${x===top?"đứng đầu, ":""}${RW[x.r].toLowerCase()}`).join("; ");
  log(`${E.n}: ${mineT}.${top&&top.v?` Đứng đầu: ${top.k.name} (con ${top.v.name}).`:""} ${rev}`);
- Q.unshift({t:`Kết quả ${E.n.toLowerCase()}`,h:`<div class="ktlist">${rows}</div>${sum?`<p>${sum}</p>`:""}${rev?`<p>${rev}</p>`:""}<p class="past">Xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, mẹ Sủng +${KTG.ex.sung}, Danh +${KTG.ex.danh}; đứng đầu thêm. Khá: thương +1. Kém: thương ${KTG.poor.fond}, mẹ Danh ${KTG.poor.danh}. Ở nhà: thương ${KTG.skip.fond}.</p>`})}
+ Q.unshift({t:`Kết quả ${E.n.toLowerCase()}`,h:`<div class="ktlist">${rows}</div>${sum?`<p>${sum}</p>`:""}${rev?`<p>${rev}</p>`:""}<p class="past">Xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, mẹ ${sgStat(KTG.ex.sung)}, Danh +${KTG.ex.danh}; đứng đầu thêm. Khá: thương +1. Kém: thương ${KTG.poor.fond}, mẹ Danh ${KTG.poor.danh}. Ở nhà: thương ${KTG.skip.fond}.</p>`})}
 /* chỉ phi tần khác có con dự: một dòng tin, không hộp thoại */
 function ktQuiet(e){const E=KTE[e];S.kt53t=S.turn;const L=ktList(E).filter(([k])=>k.hp>=35);let best=null;
  for(const [k,v] of L){const s=ktEdge(k,E,0)+R(41)-20,r=s>=KT.exc?"ex":s<=KT.poor?"poor":"ok";ktApply(k,v||S,KTG[r]);k.lt={n:E.n,y:S.year,r,top:0};if(r==="ex"&&(!best||s>best.s))best={k,v,s}}
