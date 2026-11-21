@@ -1259,3 +1259,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~09:35Z: OWNER L1895: maids GO 4 more persons (all 9 ranks each, 4860 cr) + redraw wrong ones (m09 9 running at VE7 1215; m18 sachet/mama ~8 = ~1080) → 6 persons total. MAIDFIX3 builds + splits VE8/VE6/VE9/VE7. HAN5 L1893 collar raised → VE9. HADUONG1 hạ L1890 t1–t5 + maids g1–g3 (→VE8 @55). Next Lượt 1896.
 #25 HANDOVER ~09:40Z: depth 6, ctx 34.6 % (START ~4 % + 25 % = 29 %). Opening #26 as my child (TAKEOVER_FOREMAN_C_25.md). T1QP1 rolled (not replaced; HHCOL1 covers). No schedules owned. Next Lượt 1898.
 #25 ~09:41Z: #26 = session_01D3E3NXDFbJUswJKxtfWLwX opened. #25 stops.
+#26 ~08:36Z: CURRENT FOREMAN C = #26 session_01D3E3NXDFbJUswJKxtfWLwX, depth 7, START_CTX ~5 % (roll at 30 %, ceiling 60 %). Told all workers my ID. Relay from #25: VE8 L1887 t7/t8 tassel version superseded; HHCOL1 L1887c → VE8 @55 → send owner. Next Lượt 1898.
