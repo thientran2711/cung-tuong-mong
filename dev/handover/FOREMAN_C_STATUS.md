@@ -1039,3 +1039,4 @@ NEWACCT#16 ~01:58Z: started, depth 6, START_CTX ~4 % (roll at ~29 %, ceiling 60 
 NEWACCT#16 ~01:59Z: workers DESIGN20/LADDER2/CHECK1/GEN1/POSEFIX1/PR21 told to report to #16. Waiting GEN1 t6–t8 drafts (165 cr), POSEFIX1, PR21 test room, DESIGN20 t5 v9.
 NEWACCT#16 ~01:59Z: #16 status msg to owner = Lượt 1641 (#15 also used 1641 for its handover note) → next Lượt 1642. CHECK1 idle, LADDER2 done/idle ~25 %, GEN1 drawing t6–t8.
 NEWACCT#16 ~02:00Z: DESIGN20 13337e0 t5 v9 COMOIh (1 hollyhock, no earrings) → CHECK1 job 14 → GEN1 55 cr (standing OK L1569).
+NEWACCT#16 ~02:01Z: GEN1 63e14aa t6 VX7AgiYMMU / t7 rgXQDfdxtc / t8 xSBFpEOjfW (165 cr) LOOKED + sent L1642 (combo_L1642.png): áo quấn kín eo OK; t6+t7 jade earrings (fault, also t5 v8) → LADDER2 fix shared source all tiers; t7 bow centred (G44 OK). Next Lượt 1643.
