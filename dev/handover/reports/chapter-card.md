@@ -35,3 +35,9 @@ PRIORITY #1 CHECK: OD rows «21/11 ~03:05Z/~03:07Z/~03:45Z real» | main none | 
 - #43: info/chapter dialog (kitGoalDetail + every `.kpb.kpinfo>.kpsubj.kpiart.kpev`): picture fills its column (kv2: 40 % column, 1.5x act height, cover); kv1 (Fold) stacks a 16:9 band over the rows (the dialog is ~250 px, the 170 px tile had squeezed the text to 64 px). KIT.md §21d.
 - Chapter-place scan (whole group): slide = Chương này, Đã qua, Triều cục. Big card (not a slide, one chapter only) = Sắc phong, Tâm nguyện, Phụ tuyến card. NOT converted (not a chapter list, single cards): khuê các «Chương ngoài cung / Tuyển tú / Thanh mai» (jkc.js:631, jkc2.js:454), home chapters. Open for MAIN: say if those should become a slide too.
 - Tests @52657663: QUICKCHECK PASS (core gates PASS, old save ok); coop-e2e tt/nc 92/92; chapter-detail.js all ok (selectors updated to the slide); shots Fold + iPad of ms, past, rg, rg2 (swiped), rgm (Mục lục popup), dlg looked.
+
+## ROUND 3 — review/chapter-card-2 @ 85386b37 (base LIVE 0d60ae54 merged; MAIN 87 decision: khuê các chapter cards → slide too)
+PRIORITY #1 CHECK: OD «21/11 ~03:07Z» (#29 every chapter place) + MAIN 87 order | main none | review/* chapter-card (r2 under review) | claims chapter-card.
+- Khuê các «Chương ngoài cung / Tuyển tú (or Ngày lên đường / Ngày tuyển cung nữ) / Thanh mai trúc mã» (jkc.js kcStoryHTML, jkc2.js override) = ONE kitSlide via `kcSlideHTML` (rows under the slide follow it, «Mục lục chương» corner button); the facts rows below stay.
+- Tests: QUICKCHECK PASS (core gates PASS, old save ok). Structural check in the harness: origins tt and dtq with kcInit → `#panel .kslide` with 3 slides, no page errors. Visual shot of this tab NOT obtained (the harness leaves the «Sửa soạn nhập cung» scene over the panel when kcInit is forced); same kitSlide as the verified Mệnh truyện slides. Reviewer: please look at a real khuê các life (Fold + iPad).
+- Not run again: coop-e2e (no co-op code touched).
