@@ -82,4 +82,4 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 63 | 04:38 | Item shown in a dialog («Hoa điền hoa đào») too big → smallest kit item size inline with its line; frames with buttons save space | img/_review/refs/owner-2111-item-small.jpg | keeper | in work | — |
 | 64 | 04:41 | Same person twice in a dialog (left figure + framed avatar beside each line) → one image per person per dialog; no line avatars when she is the left figure | img/_review/refs/owner-2111-dup-avatar.jpg | keeper | in work | — |
 | 65 | 04:44 | Second person mentioned (not the left figure) → her avatar ON the event picture corner (iPad frame; phone small), never a line avatar | img/_review/refs/owner-2111-avatar-on-pic.jpg | keeper | in work | — |
-| 66 | 04:46 | Quest chips in dialogs → REMOVE entirely (overwrites #57) | img/_review/refs/owner-2111-quest-chips-2.jpg | 86 to route | to open | — |
+| 66 | 04:46 | Quest chips: keep the INFO, drop the chip form → kit label|value rows like earlier frames (owner correction 04:49Z) | img/_review/refs/owner-2111-quest-chips-2.jpg | 86 to route | to open | — |
