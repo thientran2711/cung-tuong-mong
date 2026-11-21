@@ -647,3 +647,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
 | REVIEW quest-rows (SMALL sonnet) 27f1451c (#66 FINAL) | review/quest-rows-rv; briefs/main87-rv-quest-rows.md | MAIN CHÍNH 87 | session_01Rc5AsJ3yeAh7AtFoj48HKK | RUNNING | 21/11 03:58Z |
 | kit-ghichu-bang + kit-rankunit KIT KEEPER (sonnet; addendum 14 + #61 part 1) | review/kit-ghichu-bang a775df5b; review/kit-rankunit b3a96a1d; reports/kit-ghichu-bang.md | MAIN CHÍNH 87 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM both (small; quickcheck PASS) | 21/11 |
+| REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
