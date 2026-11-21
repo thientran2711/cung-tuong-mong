@@ -1,9 +1,3 @@
-review/hoangthuong-gold-rv|c2857875|hoangthuong-gold|Hoàng thượng / Thái hậu: tên lại màu vàng hoàng gia (#3)
-review/main84-land-wear-slots|31114358|wear-slots|Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)
-review/mood-seal-2-rv|38e0fd93|mood-seal-2|Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay
-review/chapter-card-2-rv|4a638700|chapter-card-2|Thẻ chương / đời khuê các: khung trượt mới, sửa «NaN», tranh Fold không co
-review/dialog-dedup-rv|61fdc000|dialog-dedup|Hộp thoại: bỏ câu lặp lại hai lần
-review/kit-dialog-rv2|1fa28148|kit-dialog|Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56
 review/jagday-walk-rv|6ada1cb74c7ce882aa2efe0b82ea2eee1b7d87b1|jagday-walk|Đi lại trong cung: tốn khắc theo đường đi (D)
 review/main85-land-errand-bal|1d30dfe956d557d0b5c084541611659b068d2439|errand-bal|Việc vặt: cân lại tiền công / số (E)
 review/kc-coop-select-r1|2eb1ac5f|kc-coop-select|Khuê các chơi chung: chọn đúng người (E)
@@ -14,3 +8,15 @@ review/kit-act-grid-rv|d65e535b31d3af99d32c869509958c2faa595def|kit-act-grid|Th�
 review/main84-land-coop-week-stall|abcd23bf|coop-week-stall|Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)
 review/dialog-person-rv2|aae7b0f64|dialog-person|Hộp thoại: bỏ hẳn «ma ma»; một luật avatar; «(ta)»; chữ không bị ép cột
 review/bag-inline-2-rv2|c1f7733bd77e7a5fbd8f6e73d7afc0c9789ac41d|bag-inline-2|Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)
+review/kit-ghichu-sections-rv2|cfde1cc4ff63488d1839e9138508e2615e0da871|kit-ghichu-sections|Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc
+review/main88-or20-j68q-ff|d11280f51e5d41f151c44933225ca043ba6322b5|or20-j68q|Biến cố triều: tháng 20 chạy đúng (E)
+review/main84-land-coop-guest-agent|f7e54803|coop-guest-agent|Chơi chung: hảo hữu vắng thì có người thay tay (B)
+review/tinh-net-word-rv|72b0bdb7|tinh-net-word|Thẻ người: một chữ «Tính nết» khắp nơi (#4)
+review/main85-land-cold-faction|5168e39668fb9086969a620f68e0c67f722ee94a|cold-faction|Phe lạnh nhạt: hậu cung có phe bị thất sủng (E)
+review/main84-land-mg11|465662b5|mg11|Mini-game: 11 trò chơi tay mới (B)
+review/chapter-card-3-rv|73808a61|chapter-card-3|Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)
+review/mg-intro-2-rv|18d1b014|mg-intro-2|Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)
+review/huong-cue-2-r2-rv|3be6edad|huong-cue-2|Điều hương: chỉ dẫn gọn theo luật chữ của mini-game
+review/ending-screens-rv|c073f8d4|ending-screens|Màn kết cục / kiếp này: một khung chung (#48 #50 #51)
+review/ending-screens-2-r1|da613d5a|ending-screens-2|Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)
+review/dialog-person-3-rv|b187ecdc|dialog-person-3|Hộp thoại: bỏ vòng tròn bên hình trái (#73)
