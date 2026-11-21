@@ -1943,3 +1943,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:46Z) rv MSxp PASS kit-mark-fix r2 → LAND READY db138921 (review/kit-mark-fix-rv3) → 89 chain after kit-info-fixed. Nits: maid pop-up left column scrolls (= LIVE), fade cream on pink. Open: kit-badge FAIL with keeper.
 - (08:47Z) hao-huu-2 0466ee43 (badge wired on rv-FAILED kit-badge 36b6071e) → forwarded to rv JeK8 for pre-check; final after keeper fix PASS + re-merge. Keeper kit-badge fix not pushed yet (still 36b6071e).
 - (08:53Z) 89: LANDED huong-cue-2 a3a65964; FAIL ending-screens c073f8d4 (G4 80-dialog-fixed figure size after kit-dialog) + ending-screens-2 skipped → ORDER B re-merge + fix. Chain on landq12 (from dialog-person-3; kit-mark-fix appended).
+- (08:54Z) 89: FAIL dialog-person-3 b187ecdc (jksize) → ORDER B re-merge after kit-dialog-2 lands. Chain landq13 (14 lines from perf-ci).
