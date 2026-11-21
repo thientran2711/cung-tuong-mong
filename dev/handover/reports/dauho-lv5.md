@@ -56,4 +56,10 @@ j91 `k91Fling` rewritten around ONE `judge()` (aim dots, solver, real flight):
 ## Files
 dev/build/jbal2.js (mgTier.base, mgArt, lev.ban.size, mg2.medK, cal.redo/k), jmgt.js (mgTier base gap, mgMedP/mgMedD kind), j91.js (k91Fling), j82.js (kg82Aim), jmgcal.js, jmgid.js; dev/kit/KIT.md (art rows); tests dauho-hole (new), cal-dauho, mgcal-redo; index.html/sw.js rebuilt.
 
+## r1 (MAIN 82 add, owner verbatim: "Ở phía bên cái trò ném tên trong vô bình cũng vậy, hồi trước nó còn có cái dòng chữ hướng gió á. Bây giờ không có cái dòng chữ ... cái nào cần thiết có chữ thì để chữ ... những cái hướng dẫn cần chữ thì vẫn phải có chứ.")
+- 7bb74ab9 + f9ef63d0: the wind word line restored exactly as before mg-noword-a cfa9156c cut it: «Gió lặng» / «Gió ngược|xuôi nhẹ|vừa|mạnh» (top-left, above the wind arrow); bands now in `BAL.mgArt.dauho.wind [.05,.35,.7]` (were typed).
+- `mg-noword-a` allows only that line (regex) — all other kinds still no text; PASS. `dauho-hole` 54/54 ×3 (vase spot fixed in the test; one earlier random-spot flake removed). one-core PASS, quickcheck PASS (f9ef63d0).
+- Shots (looked at): CDN img/_review/dauho-lv5/wind-fold.png, wind-ipad.png («Gió ngược vừa», readable on both).
+READY sha: **f9ef63d0**.
+
 ~Handover: none needed (done).
