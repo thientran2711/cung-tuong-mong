@@ -382,3 +382,6 @@ ROLLOVER RULES (copy verbatim into every takeover prompt):
 
 ## NOBC BUILDER
 - 2026-11-21 06:12Z START session_01964izGHyaHxissgvBFzqLH · depth 6 · START_CTX ~4 % (get_session reads 0; estimate) · rollover at ~29 %, ceiling 60 % · job: build review/night-final-r3-nobc from night-final-r3-coop 57e82acf (D ruling «A + drop growth/start»).
+
+## NIGHT LAND CHAIN #9 — START (21/11 ~06:20Z) session_01964izEeSaDYxdhm1XHe4hc, depth 6, START_CTX ~5 % (1M window; get_session reads 0, own estimate) → roll over at ~30 %, ceiling 60 %. Worker of Foreman D #14. Job: jnf/jflip co-op choice stall (coop-night case 4 + cases 1/2: choice held by jnf scene() while jflip cfPlay waits on COOPW.pend||busy()) → root fix in jnf/jflip, whole group; test to the real bound; gates; push review/night-final-r3-coop; sha to D + NOBC BUILDER.
+PRIORITY #1 CHECK: OD night-final 22:50Z/23:05Z + co-op-first lines | main LIVE 2021e23f or newer | review/night-final-r3-coop 57e82acf | claims NIGHT LAND CHAIN (D).
