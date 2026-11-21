@@ -15,7 +15,6 @@ for s,fl in FL.items():
         ]
     LC='CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:'
     if LC in t: reps.append((LC,'CAPTION: bold, top-left, never over her, with accents:'))
-    reps.append(('GRACE (pose variety, every rank its own):','GRACE:'))
     for o in (', never a stretched grin',):
         if o in t: reps.append((o,''))
     for a,b in reps:
@@ -38,7 +37,6 @@ allow: (never small waves)  # owner L2070/L2072
 allow: never cross-eyed  # trim to fit 10 000: same eye sentence keeps 'never looking in two directions'
 allow: never wall-eyed  # trim to fit 10 000: same
 allow: never a stretched grin  # trim to fit 10 000: the MOUTH sentence keeps 'never a grin'
-allow: (pose variety, every rank its own)  # trim to fit 10 000: label text only
 {extra}allow: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:  # trim to fit 10 000: short caption form (as s65 NECK)
 """.replace("{extra}",extra))
     if capline:
