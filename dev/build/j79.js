@@ -76,6 +76,13 @@ function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(
 function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R=[["Khi nào",d.when&&typeof kpDateText==="function"?kpDateText(String(d.when)):d.when],["Cách biết",d.how],["Nguồn",d.src&&typeof d.src==="object"?d.src.name:d.src]].filter(r=>r[1]);
  return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
 function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
+/* KIT §73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word): a WORD with the kit dotted underline (.kgl.kfx); tap → the small kit popup with ONLY that word's meaning (the word as its title). Used for the traits in the person header
+   («Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
+   kitTapWord(word, meaning) = one tap-word (meaning = plain text or HTML; empty → the plain word); kitTraitWords(keys|words) = «Đa nghi, Hiếu thảo» — each trait (ETRAITS key «danghi» or its word «Đa nghi») as a tap-word, comma-joined. */
+function kitTapWord(word,meaning){return meaning?kitFactTap(word,String(meaning)):String(word==null?"":word)}
+function kitTraitWords(list){const E=typeof ETRAITS==="object"&&ETRAITS?ETRAITS:{};const by={};Object.keys(E).forEach(k=>{by[k]=E[k];by[E[k][0]]=E[k]});
+ return (list||[]).map(x=>{const e=by[x];return e?kitTapWord(e[0],e[1]):(typeof x==="string"?x:"")}).filter(Boolean).join(", ")}
+window.kitTapWord=kitTapWord;window.kitTraitWords=kitTraitWords;
 function kitFactTipHtml(el){return `<div class="kpopt">${el.dataset.kfxt!=null?el.dataset.kfxt:el.innerHTML}</div>${el.dataset.kfx}`}
 function kitFactRows(items){return kitRows((items||[]).filter(x=>x&&x.f).map(x=>[x.l||"",Array.isArray(x.f)?x.f:kitFactTap(x.f,x.d),x.c||"t"]))}
 /* KIT §51 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
@@ -1047,7 +1054,7 @@ function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const s
 (function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
  new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();
 (function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig");const d=M.querySelector(".dlg");if(d&&!(Q[0]&&Q[0].nl)){d.style.removeProperty("width");d.style.removeProperty("max-width")}}}catch(e){}return r}})();
-(function(){const b0=kpBuild;kpBuild=function(M,m){try{if(!(m&&m.nl)){const d=M.querySelector(".dlg");if(d){d.style.removeProperty("width");d.style.removeProperty("max-width")}M.__kidWant=""}}catch(e){}b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
+(function(){const b0=kpBuild;kpBuild=function(M,m){try{if(!(m&&m.nl)){const d=M.querySelector(".dlg");if(d){d.style.removeProperty("width");d.style.removeProperty("max-width")}M.__kidWant="";/* menu-panel (owner 21/11): the identity card sets --kpw inline on #modal (kpIdLay); no later panel may inherit that narrow width */M.style.removeProperty("--kpw");M.classList.remove("kpside")}}catch(e){}b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(kpIsScene(m)){const t=$("rtoast");if(t)t.classList.remove("on")}}catch(e){}}})();
 /* ---- 4. status grouped by purpose ---- */
 const KH_GRP=[["Tư chất",["sac","tai","tamco","duc","mat","srk","merit"]],["Nhân tâm",["th","hh","maid","tin","chu"]],["Ân sủng",["con","dem","an","aw","nt"]],["Thời gian",["buoi","lot","bl","wage","date"]]];
