@@ -38,7 +38,10 @@ TH.holdOf=seat=>host()&&TB.hold&&seat===other();
 function qSer(L){const out=[];for(const m of L||[]){if(!m||m.nl)continue;
   if(m.pid){out.push({pid:m.pid,pp:J(m.pp),t:m.t});continue}
   if(m.opts&&m.opts.length){TB.stat.qdrop++;continue}
-  out.push({t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,art:m.headArt?J(m.headArt):null,st:Array.isArray(m.stage)&&m.stage.includes(S)?1:0})}return out}
+  out.push({t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,art:m.headArt?J(m.headArt):null,st:Array.isArray(m.stage)&&m.stage.includes(S)?1:0,
+   /* kc-coop-select: the story cards of a new life (jentry Tiền truyện / joi origin intros) keep their card art, their marks and the one
+      closure they carry (joi's last direct-road panel opens the entry gate: oiGate("dir")) */
+   ca:typeof m.art==="string"?m.art:undefined,entI:m.entI||undefined,oiP:m.oiP||undefined,og:m.oiP&&m.onClose&&!S.kc?"dir":undefined})}return out}
 /* every name in the one world (consorts, the host's entry, servants, children, men) — her name / her maid's must not repeat one */
 const tail=n=>String(n||"").split(" ").slice(-2).join(" ");
 function worldNames(){const own=new Set([S,S.maid,...(S.staff||[]),...(S.kids||[])]),a=[];const add=o=>{if(o&&!own.has(o)&&o.name)a.push(o.name)};
@@ -84,15 +87,20 @@ function rebase(K){const T=new Set((rivals||[]).filter(v=>v&&!v.coop));
  if(!s.srv){s.place="home";s.visit={k:"home",people:homePeople(),talked:false}}}
 function npcs(){return (rivals||[]).filter(v=>v&&!v.coop)}
 /* the seeded core build: what nlRun does, then rebase (before any start() wrapper loaded after j52 runs) */
-function core(K){K.go=1;const mr=Math.random;NLR={face:nlRng((K.seed^0x5bd1e995)>>>0)};Math.random=nlRng(K.seed);rid=0;try{if(typeof sidN!=="undefined")sidN=0}catch(e){}
- NLP={seed:K.seed};try{_start52()}finally{Math.random=mr;NLR=null}rebase(K);K.done=1}
+/* review/kc-coop-select (law 1, whole family): the build is the REAL nlRun chain, as on her phone in solo — j52 nlRun (seeded core start) + its
+   hooks: j69 the weighted origin of HER stored life (ow), j66 her pid, jdiff HER Độ khó, jil her dead life's pieces (law 6c). Was: _start52
+   alone, so a thin guest got a uniform origin (or the host's own forced one), the host's Độ khó and no pid. Her stored-life marks ride with
+   the intent (a.ow / a.pid / a.diff); window.__forceOrigin is a dev/test hook only (hers, a.fo, else the host's). */
+function core(K){K.go=1;const fo0=window.__forceOrigin,df0=window.__diffO;const d={seed:K.seed};if(K.ow)d.ow=K.ow;else d.faces=1/* an old uniform life (no j69 mark) keeps its uniform pick */;if(K.pid)d.pid=K.pid;
+ window.__forceOrigin=K.fo||fo0||undefined;/* her dev hook first, else the host's (coop-thin-b.js forces on the host) */window.__diffO=K.diff||undefined;
+ NLP={seed:K.seed};try{nlRun(d)}finally{window.__forceOrigin=fo0;window.__diffO=df0}rebase(K);K.done=1}
 if(typeof nlBegin==="function"){const f=nlBegin;nlBegin=function(){if(CW.ctx&&TB.K)return core(TB.K);return f.apply(this,arguments)}}
 function blob(life){const P=X.myBlob(ser().S);P.life=life;P.dead=false;return P}
 /* the rows of every NPC toward her new face (what the guest shows); then the host's own world gets the room's old numbers back */
 function rowsOut(K){const o={};for(const [r,v] of K.old){o[r.id]=[r.rel||0,r.oan||0,r.ghen||0,r.ev||0];r.rel=v[0];r.oan=v[1];r.ghen=v[2];r.ev=v[3];if(plain(r.evm)){if(v[4]===undefined)delete r.evm.me;else r.evm.me=v[4]}}return o}
 function mistressOk(){if(!S.srv)return true;const m=typeof RV==="function"?RV(S.srv.mid):null;return !!(m&&!m.coop&&m.alive&&!m.out&&+m.id<900)}
 function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];const thq0=Array.isArray(S&&S.thq)?S.thq:null;/* B r2: her D cards are D's, never the new life's to drop */
- const K=TB.K={seed:(+a.seed>>>0)||1,R0:rivals,rid0:rid,sid0:typeof sidN!=="undefined"?sidN:null,W0:{}};for(const k of X.W_KEYS)if(k in S)K.W0[k]=S[k];
+ const K=TB.K={seed:(+a.seed>>>0)||1,ow:a.ow===undefined?3:(+a.ow|0),pid:a.pid||null,diff:a.diff?String(a.diff):null,fo:a.fo?String(a.fo):null,R0:rivals,rid0:rid,sid0:typeof sidN!=="undefined"?sidN:null,W0:{}};for(const k of X.W_KEYS)if(k in S)K.W0[k]=S[k];
  const tab0=tab;TB.renamed=null;
  try{start()}finally{TB.K=null;tab=tab0;quiet=true;
   /* a throw inside the core build: the room world goes back as it was (her store is rebuilt from the room) */
@@ -106,9 +114,14 @@ function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];
  const P=blob(life);TB.last.P=P;
  return {st:"roll",key,P,q:qSer(Q),rows,ok:mistressOk(),renamed:TB.renamed}}
 function accept(a){if(TB.cache[a.key])return TB.cache[a.key];try{if(TH.D&&TH.D.RV)delete TH.D.RV[CW.ctx]}catch(e){}/* D r1: a new face: this week's row deltas of the old face are gone with it */const L=TB.last;if(!L||L.key!==a.key)return {st:"accept",key:a.key,err:"stale"};
- NLP=null;S.pdw=pdBase();S.pdLife=0;if(S.nlRe)log(`Đã đổi thân phận ${S.nlRe} lần (−${S.nlRe*PD_COST} Phúc duyên).`);
- const tab0=tab;
- try{if(a.kc)S.kcPick=String(a.kc);if(a.kc==="nha"&&!S.kc&&typeof kcInit==="function"&&kcOk(S.origin.k)&&!S.srv)kcInit()}finally{tab=tab0}
+ /* review/kc-coop-select (law 1, whole family): her accept is the REAL accept chain, as in solo — j52 nlAccept + every hook on it (jkc / jkc2
+    home road incl. the cung nữ "nha" road, jkc2 kc2Sel the selection after "Vào cung ngay", jentry Tiền truyện, joi origin intros, jkiep,
+    jage, jrank) — run here in her context. Was: only the core steps + kcInit were copied, so a thin guest never met the selection, the
+    origin intros or the kiếp baseline (dev/test/kc-roads/accept-scan.js). The host's own store is never touched: her luân hồi seed is on
+    her phone (nlNew / nlFaces held), the road she picked is hers (window.__kcO = her pick, not the host's), her rank id is her phone's. */
+ const tab0=tab,kc0=window.__kcO,nn0=nlNew,nf0=nlFaces;const sd=(+String(a.key).split("#")[0])>>>0;
+ try{if(a.kc)S.kcPick=String(a.kc);window.__kcO=a.kc?String(a.kc):undefined;nlNew=()=>null;nlFaces=()=>{};NLP={seed:sd||1,thin:1};nlAcc0(true)}
+ finally{window.__kcO=kc0;nlNew=nn0;nlFaces=nf0;NLP=null;tab=tab0;delete S.rkGid}
  Q=Q.filter(m=>!m.nl);
  const P=blob(L.life);const r={st:"accept",key:a.key,P,q:qSer(Q),rows:L.rows};
  TB.cache={[a.key]:r};TB.hold=false;TB.last=null;TB.stat.accept++;
@@ -143,19 +156,25 @@ function oldPath(o){TB.stat.old++;Q=Q.filter(m=>!m.thw);if(o.st==="accept"){try{
 /* B r1 item 1: the wait note is a plain kit note (no nl / nlcard: those draw the person in S = her DEAD old life, with the Độ khó tabs and the
    ✕ that accepted it); closing it only hides the note (no action); the host's answer replaces it (show: Q = her dialogs, then nlCard) */
 function waitCard(){Q=Q.filter(m=>!m.nl&&!m.thw);Q.unshift({thw:1,t:"Sổ luân hồi",h:`<p class="past">Sổ luân hồi đang định thân phận kiếp này, xin đợi giây lát.</p>`});try{showModal()}catch(e){}}
-function rollAsk(seed,re){CW.inLife=true;NLP={seed:0,thin:1};TB.key=null;ask({st:"roll",seed,re:re|0});if(S)waitCard()}
+function rollAsk(seed,re){CW.inLife=true;NLP={seed:0,thin:1};TB.key=null;
+ /* kc-coop-select: her stored life's marks (j69 ow: 0 = an old uniform life, j66 pid) and her Độ khó travel with the intent */
+ const o={st:"roll",seed,re:re|0};try{const d=store.get(NL_KEY);if(d&&d.seed===seed){o.ow=d.ow?(d.ow===true?1:+d.ow):(d.faces?0:3);if(d.pid)o.pid=d.pid}}catch(e){}
+ try{if(typeof diffPref==="function")o.diff=diffPref()}catch(e){}if(window.__forceOrigin)o.fo=String(window.__forceOrigin);
+ ask(o);if(S)waitCard()}
 /* the host's answer: her person shown through the display path (fromCanon of the room world + her blob + the rows toward her) */
 function show(r){const C2=J(CW.dying||CW.base);if(!C2||!C2.W)return false;C2.P=C2.P||{};C2.P[CW.seat]=J(r.P);
  const mp=CW.seat==="a"?901:902;for(const x of C2.W.R||[]){const v=r.rows&&r.rows[x.id];if(!v)continue;x.rl=x.rl||{};x.ro=x.ro||{};x.gp=x.gp||{};x.ep=x.ep||{};
   x.rl[mp]=v[0];x.ro[mp]=v[1];x.gp[mp]=v[2];x.ep[mp]=v[3];if(x.evm)x.evm[mp]=0;if(x.resHead===mp)x.resHead=null}
  CW.fromCanon(C2);CW.life=r.P.life||CW.life;
  const qs=[];for(const e of r.q||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)qs.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}
-  else qs.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:typeof WHO==="function"?WHO(e.w):undefined,headArt:e.art||undefined,stage:e.st?[S]:undefined})}catch(x){console.error(x)}}
+  else{const m={t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:typeof WHO==="function"?WHO(e.w):undefined,headArt:e.art||undefined,stage:e.st?[S]:undefined};
+   if(e.ca)m.art=e.ca;if(e.entI)m.entI=e.entI;if(e.oiP)m.oiP=e.oiP;if(e.og&&typeof oiGate==="function"){const g=e.og;m.onClose=()=>{try{oiGate(g)}catch(x){console.error(x)}}}qs.push(m)}}catch(x){console.error(x)}}
  Q=qs;return true}
 function lifeRes(r){if(!r||!r.P){if(r&&r.err==="stale"){const s=nlGet();rollAsk(s.seed,s.re|0)/* B r1 item 4: her real reroll count */}return}
  clearTimeout(TB.t);TB.ask=null;
  if(r.st==="roll"){if(!show(r))return;CW.inLife=true;TB.key=r.key;NLP={seed:0,thin:1}/* truthy for the card (jkc road cards, no pdCheck); never a stored seed, so nlFaces never repaints faces here */;try{nlCard()}catch(e){console.error(e)}return}
  if(r.st==="accept"){if(!show(r))return;NLP=null;try{nlNew()}catch(e){}TB.key=null;CW.inLife=false;
+  try{if(typeof rkTrack==="function")rkTrack()}catch(e){console.error(e)}/* kc-coop-select: her rank id is her phone's (jrank rkIdGet) */
   try{CW.sendMe(J(r.P))}catch(e){console.error(e)}
   /* B r2 (seam): her D cards / patches were held off her S during the life change (gSync); her accepted person is in now */
   try{if(TH.gSync)TH.gSync(TH.view)}catch(e){console.error(e)}try{showModal();render()}catch(e){}}}
