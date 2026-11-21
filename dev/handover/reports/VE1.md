@@ -29,3 +29,4 @@ JOB E fix L1754 (0 cr): the Magnific cut-outs were made WITH backgroundColor #FF
 
 ### Order 5 — JOB F L1756 · Hán Thường tại from Phi
 dev/art/seasons4/s62_t2_HAN_THUONGTAI_fromphi_L1745.txt (HAN3 5be7551) unchanged · check_store tp2 a22: FAIL only M06/M07/S06 (owner-ordered đoạn fabric, waived by foreman) · no "image 2" → ref nVsrRMPYQD only · gpt-2-6 2k medium 9:16 seed 7172 → nVsiA1bYQD · 135 cr · sheet review-sheets/han_thuongtai_L1756.png (vs Phi EbYI8xvuuO). Session total 931 cr.
+JOB E re-run (foreman go, 6 cr): remove_background WITHOUT backgroundColor: u5Wte79QLD → xSBH1lBjfW, EbYI8xvuuO → Lw8bxU7swO; replaced phi_cu_trongsuot.png / phi_moi_trongsuot.png with Magnific's real alpha (RGBA, corners 0, bg 0 / figure 254, clean on dark bg). Session total 937 cr.
