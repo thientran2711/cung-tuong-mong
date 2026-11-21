@@ -49,3 +49,8 @@ Probe dev/test/coop-room-faces.js (A host Fold 686x880@2.2, B guest iPad 1180x82
 2. Concurrent draw is repaired within one merged week: when the host draws a world servant's face AFTER the guest's last merge and the guest draws the same face, the host shows the duplicate until the guest's next merge (guest yields there). Seen once under parallel load (RF_CLASH 36/37); the world person never changes.
 3. Item 2 stays open on the kit keeper (KIT REQUEST «taken» tile for §23).
 4. Old solo saves with a dup keep it (no solo repair); new draws never reuse a held face.
+
+## Final gates after LIVE moves (17:25–18:00Z)
+- 9a4df264 (+LIVE 93704ee1): coop-e2e 124/124 · room-faces natural 37/37 · RF_CLASH 39/39 (0 face FAIL) · PF_FORCE 13/13 · PF_TWIN 21/21 · quickcheck PASS · coop-night 105/105.
+- dd7a005d (+LIVE 7af6a13f jemo-bal, no co-op file): coop-e2e 124/124 · room-faces natural 37/37 · quickcheck PASS.
+- LANDED: main 9c5b6de3 = 500dffbd + LIVE 7af6a13f; tree identical to the checked dd7a005d apart from the build line in index.html. Done.
