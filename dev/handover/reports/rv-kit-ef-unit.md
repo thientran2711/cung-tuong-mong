@@ -16,3 +16,10 @@ PRIORITY #1 CHECK: re-read my r1 FAIL (nowrap overridden by .krv>*{white-space:n
 - Own probe on real option card (card.js, getClientRects().length==1 per .ef): all 1 (Bạc -94, Tâm cơ -3, Sức 80→98 (+18), Sủng +2, Danh +1, 2 khắc, Đức +2) on Fold and iPad. Fold shot looked at: units whole, wrap only between units.
 - quickcheck PASS, coop-e2e 94/94.
 - VERDICT: PASS.
+
+## Round 3 — review/kit-ef-unit-r3 a42ca838 (keeper #5): PASS
+PRIORITY #1 CHECK: my r2 PASS d46ad6de; LAND CHAIN 2 QC perf-only fail; diffed r2..r3 on j63.js; merged LIVE c9ae030e into review/kit-ef-unit-rv3 (fd8280fa3fd7eddef4245084fb86a557d3dd3326).
+- Only change vs my PASS (besides merge): kaUnit cached per item text (Map, cleared at 3000) — kaUnit0 is a pure function of the text, so the cache cannot change a result; kitParse also routes sgTxt (SG-CARD, LIVE side).
+- kit-ef-unit.js x3: Fold PASS + iPad PASS every time (bad=0). Own real-card probe: every .ef unit 1 client rect on Fold + iPad.
+- quickcheck PASS (render 259/277, tab 599/658, buổi 1559/1944 ms); coop-e2e 124/124.
+- VERDICT: PASS (supersedes d46ad6de).
