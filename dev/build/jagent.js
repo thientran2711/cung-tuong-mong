@@ -22,10 +22,21 @@
    Perf: window.__agMs (last tick), __agN (agents), agPerf() → p95 over the last BAL.ag.perf.n ticks; budget BAL.ag.perf.p95 ms.
    Off switch for measuring: BAL.ag.on=0 or window.__agOff=1 (old drips). Loaded last (after j95/j95b/j95c, jtwoway, jmind, j75, jcoopworld).
    ===================================================================================================================== */
-const AG={inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
+const AG={self:0,inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
-function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
+function agLive(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff)}catch(e){return false}}
+function agOn(){try{return agLive()&&(!agGuest()||AG.self>0)}catch(e){return false}}
+/* coop-guest-agent r2: agMine() = this seat may run ONLY her own household: a co-op guest's phone, or the host inside her context (TH.withSeat).
+   agSelfRun(f): run f as solo would (agOn() true inside) — every loop inside must keep to her own people (asStaff / amMaids / consorts filters). */
+function agMine(){try{const c=window.COOPW;return agGuest()||!!(c&&c.on&&c.ctx&&c.ctx!==c.seat)}catch(e){return false}}
+function agSelfRun(f){AG.self=(AG.self||0)+1;try{return f()}finally{AG.self--}}
+/* coop-guest-agent (law 1 + 6b, co-op parity): agSelf(p) = the agent layer decides for p's OWN household on THIS seat. Host / solo = agOn().
+   A co-op GUEST: only her own seat (p===S): her servants live the same agent month as solo (asMonth: wage, Sức, secrets, betrayal found,
+   ban gả, the age choice), on the seat that runs her week end (her phone ≤ 12; the host in her context at 13). EXACTLY ONCE: the host's
+   stand-in of her has no staff (jcoopworld buildFriend staff:[]), a guest who is a maid (s.coop stand-in in an NPC's staff) is skipped by
+   asStaff / asMonth, and her toCanon is the only writer of her S.staff (toCanon drops s.coop and the host never writes P.b.S.staff). */
+function agSelf(p){try{return agOn()||(!!p&&p===S&&agGuest()&&agLive())}catch(e){return false}}
 function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
 /* AG-ALL-2d2 · NOTHING IS EVER 100 % (owner 17/11 ~17:00Z, global): every odds of an act (her or an NPC: success, being caught, persuading) is clamped
    to BAL.odds.lo..hi (the j13 ladI pattern); a chance / frequency roll (a rare gift, a re-plan, an illness) is only capped at BAL.odds.hi (never sure;
@@ -305,4 +316,4 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agSelf,agLive,agMine,agSelfRun,agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
