@@ -1126,3 +1126,4 @@ NEWACCT#18 ~07:35Z: OWNER L1704: L1679 palette too vivid/garish ('rực kinh kh�
 NEWACCT#18 ~07:40Z: OWNER L1705 palette distribution (hạ = yellow+orange, blue→đông, even spread) added to ROOT19 takeover. Next Lượt 1706.
 NEWACCT#18 ~07:45Z: OWNER L1706: do NOT bulk-revert t4–t8 — first list every change made after the m19/m29/s65 sets, with before|after pictures, she picks per change; revert step by step. Added as STEP 0 in ROOT19 takeover. Next Lượt 1707.
 NEWACCT#18 ~07:50Z: L1707 old palette sheets re-sent; target = L1583 softness (S p90 0.66 vs L1679 0.94) noted in ROOT19 takeover. Next Lượt 1708.
+NEWACCT#18 ~07:55Z: OWNER L1708: L1583 TONE is liked (p1 soft, p2–3 slightly deeper); only problem = too many alike → rework from L1583 changing hue families only. In ROOT19 takeover. Next Lượt 1709.
