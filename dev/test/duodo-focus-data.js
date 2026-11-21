@@ -21,14 +21,14 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
   /* (2) class A */let hit=null;for(const pl of ["vuon","tn","kn","thu","home"]){if(hit)break;go(pl);const P=curPeople();
   P.forEach((pp,i)=>{if(hit)return;talkOpts(pp).forEach((a,j)=>{if(!hit&&!a.lock&&!a.open&&a.o!=null&&a.o<100&&dfCls(a)==="A"&&sgShift(a.o,1)!==a.o&&sgShift(a.o,-1)!==a.o)hit={i,j,n:a.n,o:a.o,id:"go="+j}})});
   }if(hit){const P=curPeople();const pp=P[hit.i];const seen=[];const t0=window.talk;window.talk=function(j){seen.push(talkOpts(pp)[j].o)};
-   try{const rets=[];for(const rr of [{raw:10},{raw:5},{raw:0},{skipped:true}]){S.visit.tk={};used=0;Q.length=0;rets.push(dfRun(hit.i,hit.id,rr))}popIdx=null;hit.rets=rets;hit.dbg={tab,host:!!document.querySelector("#popw .pcpop"),q:Q.length,sigs:[...document.querySelectorAll("#popw .pcpop button")].map(b=>Object.keys(b.dataset).join("+")).slice(0,8)}}finally{window.talk=t0}
+   try{const rets=[];for(const rr of [{raw:10},{raw:5},{raw:0},{skipped:true}]){S.visit.tk={};used=0;Q.length=0;rets.push(dfRun(hit.i,hit.id,rr)||DF.why)}popIdx=null;hit.rets=rets;hit.dbg={tab,host:!!document.querySelector("#popw .pcpop"),q:Q.length,sigs:[...document.querySelectorAll("#popw .pcpop button")].map(b=>Object.keys(b.dataset).join("+")).slice(0,8)}}finally{window.talk=t0}
    out.A={hit,seen,want:[sgShift(hit.o,1),hit.o,sgShift(hit.o,-1),hit.o],after:talkOpts(pp)[hit.j].o,up:BAL.cut.sgStep}}
   /* (3) class B Tát: a lower-rank consort she stands with */
   const v=liveRivals(true).find(x=>x!==S&&!x.out&&!x.queen&&(typeof k61Named!=="function"||k61Named(x)));if(v){S.rank=Math.max(S.rank,(v.rank||0)+2);v.slap=null;v.loc=null;const here=whereOf(v);S.place=here;const ri=rivals.indexOf(v);const fakeP={kind:"rival",ref:v,name:v.name};S.visit.people.push(fakeP);const pi=S.visit.people.length-1;
    const ok0=ACT.tat.ok(S,v);const G=dfActs(pi)||[];const hasT=G.some(x=>x.acts.some(a=>a.id==="atat"));
    let t1=null,t2=null;if(ok0&&hasT){const f0=ACT.tat.f,seen=[];const r0=window.runAct;window.runAct=function(a,t,k){if(k==="tat"){seen.push(SLAP.next);return""}return r0.apply(this,arguments)};
     const trace=[];const d0=window.doAct;window.doAct=function(i,k){trace.push("doAct "+k+" can="+can(typeof harmK==="function"?harmK(rivals[i],k):1)+" Q="+Q.length);const r=d0.apply(this,arguments);trace.push("after Q="+Q.length+(Q[0]?" "+Q[0].t:""));return r};out.trace=trace;
-    try{used=0;Q.length=0;dfRun(pi,"atat",{raw:10});used=0;S.visit.tk={};Q.length=0;out.Bq=[can(1),S.suc,S.dead,v.alive,ACT.tat.ok(S,v)];dfRun(pi,"atat",{skipped:true})}finally{window.runAct=r0;window.doAct=d0}t1=seen[0];t2=seen[1]}
+    try{const tryRun=rr=>{for(let k=0;k<6&&seen.length<(rr.raw?1:2);k++){used=0;S.visit.tk={};Q.length=0;v.slap=null;S.dead=false;dfRun(pi,"atat",rr)}};tryRun({raw:10});tryRun({skipped:true})}finally{window.runAct=r0;window.doAct=d0}t1=seen[0];t2=seen[1]}
    out.B={ok0,hasT,t1,t2,want:[3,BAL.slap.def],together:together(S,v)}}
   return out});
  for(const [k,x] of Object.entries(r.places)){if(x.err){ok(false,`place ${k} opens`,x.err);continue}
