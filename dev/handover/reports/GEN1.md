@@ -109,3 +109,22 @@ Look:
 - t1: collar edges rest ON the shoulder points, shoulders covered (not off-shoulder), a soft V crossing high; ivory inner robe with its own neat crossed collar visible just inside; dense small lilac sprays all over + lilac hem band, ivory cuffs; one small lilac in hair; book held; mid-step.
 - t2: collar on the shoulder points, shoulders covered; ivory inner collar with a small flower band visible and neat; fewer, larger ivory tiger lilies over the robe (sparser than t1, bigger flowers); one peach-orange flower in hair; drum raised; hem flares.
 - t3: collar band is WIDE, rose-embroidered, and sits right at/just over the tops of the shoulders (close to a boat/off-shoulder line, not clearly covered); ivory inner robe visible and neat; medium China roses densely over the whole robe + wide rose bands at sleeves/hem; girdle with jade plaques/pearls/tassels; hair: ONE slim pin with a pearl dangle by the hand + the rose, hair mostly loose; NO spiky crown of pins.
+
+# JOB L1576 — FINAL thu t1–t6 s62 (GPT 2.6, 1024x2304, 2k, seed 7172)
+gpt-2-6, width 1024 x height 2304, resolution 2k, NO quality override (same as earlier finals), seed 7172. simulate_cost exact 135 each (as expected), total 810 cr. Ref image 1 = nVsrRMPYQD (s62 face). t6's prompt names "image 2" as the royal-yellow colour swatch, so t6 also got image 2 = TdwDfOyVNR (as in the earlier t6/t8 gens); t1–t5 prompts have no image 2, so ONE ref. Prompts exactly: t1 dapung4/s62_t1_COMOI_v2d, t2 dapung4/s62_t2_COMOI_v2d, t3 dapung4/s62_t3_COMOI_v2e, t4 thu_comoi/s62_t4_THU_COMOIc, t5 thu_comoi/s62_t5_THU_COMOIc, t6 thu_comoi/s62_t6_THU_COMOId.
+| pic | creation | link |
+|---|---|---|
+| Thu t1 Đáp ứng | iG5w9iB3uK | https://www.magnific.com/app/creation/iG5w9iB3uK |
+| Thu t2 Thường tại | xSBQkx1jfW | https://www.magnific.com/app/creation/xSBQkx1jfW |
+| Thu t3 Quý nhân | gOm5sZ5SXO | https://www.magnific.com/app/creation/gOm5sZ5SXO |
+| Thu t4 Tần | SyhKlGwUb8 | https://www.magnific.com/app/creation/SyhKlGwUb8 |
+| Thu t5 Phi | 6AbU9EpiJO | https://www.magnific.com/app/creation/6AbU9EpiJO |
+| Thu t6 Quý phi | bxMvHW65Y2 | https://www.magnific.com/app/creation/bxMvHW65Y2 |
+Files + sheet: dev/handover/review-sheets/thu_final_t16_L1576/ (sheet.jpg 2x3 with 'Thu tN · s62 · GPT 2.6 final 1024x2304 · 135 cr' per picture and 'Tổng: 810 cr'; thu_tN_s62_final.webp full size). I viewed each picture once at 1024-preview, not the finished sheet.
+Look:
+- t1: light plum open outer garment over a blush tube top with a straight square neckline (plain blush band); blush chest-high skirt + broad ribbon; many small lilac sprays all over + lilac hem band; sheer blush shawl wraps arms; one small lilac in hair; loose hair; book held at side; mid-step.
+- t2: same layered neckline with a narrow flower-edge band; fewer, larger peach-pink tiger lilies on the plum robe; sheer blush shawl; ONE peach tiger lily in hair; green pellet drum raised; skirt flares. Caption wraps to 5 lines.
+- t3: 3/4 right; blush tube top with a wide rose-embroidered square band; blush APRON panel with roses and gold edge down the front; jade pendants with pearls and tassels each side; dense pink roses over the plum robe; ONE big rose in hair + one slim pin with pearl dangles at the raised hand (no spiky crown); bamboo flute at the waist; hair mostly loose.
+- t4: 3/4 left; round capelet over the shoulders with an airy pearl/jade bead net over the whole capelet and a jade clasp, scalloped lower edge; large gold lotus embroidery on sleeves/hem + lotus in the high bun (large); square blush inner top; white-jade vase with blossoms held upright; hair up with gold pins.
+- t5: frontal; TWO layered short capes with pearl-edge rows and a pearl net, pearl fringe; big pink hollyhock in a high bun with a gold headdress and long gold tassels; folded gold-flecked letter in both hands; double-hollyhock medallions on the skirt front; two jade pendants on a gold girdle. Dangling gold tassels hang beside the ears (could read as earrings).
+- t6: slight turn left; ONE-tier scalloped cloud collar with gold tassel fringe; clearly visible yellow: a yellow-orange inner panel + sash + narrow borders (a bit orange-gold, not quite honey); plum/blush rest; large chrysanthemum in hair + big gold headdress with tassels (again dangling tassels at the ears); jade-and-pearl ball with jade tassel; pearl strands across the chest.
