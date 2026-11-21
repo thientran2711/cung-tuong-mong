@@ -2241,3 +2241,9 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - coop-home 50/51 «A has the home tabs» fails on LIVE (pre-existing since 20/11) — not routed yet; check if a foreman owns it.
 - TRIGGERS: 99 wake trig_01VfqE4kuCN9CnQDzjHp9X73 (min 32) → 100 DISABLES it and creates its own. Push tool template dev/tools/main-hpush.sh. NOTE: never `git pull` in the worktree (fetches every ref, 150k objects) — use fetch --depth=30 of the branch only.
 - (19:52Z) Opened MAIN CHÍNH 100 = session_01Rc5AsKuzxwdM8AiqjeHhFW (child, depth 2). 99 stops; relays late messages to 100 only.
+
+## MAIN CHÍNH 100 (session_01Rc5AsKuzxwdM8AiqjeHhFW) — live log (child of 99)
+- (21/11 19:42Z) MAIN = MAIN CHÍNH 100 session_01Rc5AsKuzxwdM8AiqjeHhFW; START_CTX ~10 % (get_session reads 0; estimate) → roll at ~35 %, ceiling 60 %; depth 2 (limit 8). Worktree /home/user/wt/ho100, push /home/user/wt/hpush100.sh.
+- (19:42Z) LOAD: main running 4 (KIT KEEPER #6 McbX pframe-overlay in rv; rv MSxp; LAND CHAIN 2 LRRY; M99b frame re-cut JNwu) | B ROOT-7 busy (rel-men r4; KP01 after D bundle) + NEW ORDER coop-home 50/51 | C ROOT-B7 fresh (NECK1 running) + NEW ORDER J1–J5+KP09 prompt files (A53) | D #17 bundle co-op blocker (steal mg ✕) + HOLD coop-cyhold-rv | E #29 busy (E47 bongloc FAIL r1 → fix) | moved: J1–J5 prompt-file job → C, coop-home 50/51 → B.
+- (19:42Z) «main is now 100» sent to LRRY, McbX, MSxp, JNwu, MAIN 99; FROM MAIN in B/C/D/E STATUS. trig_01VfqE4 DISABLED; own wake trig_01KABF9TjF5Q8cVy8A1niSEH (min 32). MAIN 99 ARCHIVED.
+- (19:42Z) A53 DECISION: J1–J5 = prompt files for the owner, written by a Foreman C prompt-writer seat (art = C, OD:L1231/L1345); main does not write art prompts; no Magnific generation.
