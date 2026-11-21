@@ -47,7 +47,7 @@ const CON=["t1","t2","t3","t4","t5","t6","t7"];const ROLES=["maid","t1","t2","t3
 const ROLE_N={maid:"cung nữ",t1:"Đáp ứng",t2:"Thường tại",t3:"Quý nhân",t4:"Tần",t5:"Phi",t6:"Quý phi",t7:"Hoàng quý phi",hh:"Hoàng hậu",up:"cung nữ → phi tần"};
 
 /* ---------------- in-page probes ---------------- */
-function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}};
+function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4,5,6,7];const res={P:{},N:{},err:[],cov:{}};
  /* one seeded dice for both sides: each probe starts from the same seed, so a random pick never makes a one-sided row */
  const R0=Math.random;let seed=1;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};const SEED=n=>{seed=n||1;Math.random=rnd};
  const E=(w,e)=>{if(res.err.length<30)res.err.push(w+": "+(e&&e.message||e))};
@@ -285,7 +285,7 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   for(const t of liveRivals(true).filter(x=>x!==q&&!x.out))(q.rl=q.rl||{})[t.id]=60;
   npcOpts("hh",q,["consort","hh"]);
   if(q===v){v.queen=false;v.rank=5}
-  for(let r=0;r<=7;r++){S.rank=r;if(r===7)for(const x of rivals)if(x!==S)x.queen=false;playerLabels(r===7?"hh":"t"+(r+1))}
+  for(let r=0;r<=7;r++){if(!RANKS_P.includes(r))continue;S.rank=r;if(r===7)for(const x of rivals)if(x!==S)x.queen=false;playerLabels(r===7?"hh":"t"+(r+1))}
   S.rank=0;
 }
  if(phase==="maid"){
@@ -317,7 +317,14 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
  const b=await chromium.launch();const out={P:{},N:{},err:[],pageErr:[]};
- for(const phase of ["consort","maid"]){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>out.pageErr.push(phase+": "+e.message));
+ /* map-places mem fix r2 (21/11): the consort phase used to run its 8 player roles in ONE page.evaluate = one synchronous task of ~1700 goTo+render.
+    Inside one task the game's own deferred UI timers (renderStage / showModal / kitFrame / kmmSched layout passes, ~150 per goTo) never run, so the
+    detached stage DOM they close over is never freed: renderer RSS grew ~1.2 GB per role (LIVE b1033eb0 peak 12.5 GB; +2 places = OOM at 13.7 GB).
+    Real play is one tap = one task (800 goTo as separate tasks: ~440 MB, LIVE = branch). The fix runs each consort player role in its own fresh page
+    (the world set-up and the NPC part run again in each page, seeded the same): every role is probed from the SAME world, whatever its order
+    (before, a later role saw the world left by the earlier ones); rows are the union, as before. */
+ const PAGES=[0,1,2,3,4,5,6,7].map(r=>["consort",[r]]).concat([["maid",null]]);
+ for(const [phase,ranks] of PAGES){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>{const x=phase+": "+e.message;if(!out.pageErr.includes(x))out.pageErr.push(x)});
   /* part 2: one deterministic page (as ag2perf-diff): seeded Math.random + crypto, frozen clocks — a row never flips between runs */
   await p.addInitScript(()=>{let x=424242;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};let y=777;crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++){y=(y*1103515245+12345)%2147483648;a[i]=Math.floor(y/2147483648*4294967296)%(a instanceof Uint8Array?256:4294967296)}return a};performance.now=()=>1000;Date.now=()=>1763000000000});
   /* part-1 fix: no network at all (as ag2perf-deeds): a CDN build (build_site.sh) otherwise loads the CDN asset index while the probe runs, so the
@@ -326,8 +333,8 @@ async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright')
   /* part 2: the same world every run (the life start() draws was unseeded: rows that depend on a draw flipped between runs) */
   await p.evaluate(({phase})=>{let sd=20261118;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();
    for(let i=0;i<60&&(phase==="maid"?!isSrv():isSrv());i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}},{phase});
-  const r=await p.evaluate(inPage,{phase,TRIES:opt.tries||4});
-  Object.assign(out.P,r.P);Object.assign(out.N,r.N);out.err.push(...r.err.map(x=>phase+": "+x));if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
+  const r=await p.evaluate(inPage,{phase,ranks,TRIES:opt.tries||4});
+  Object.assign(out.P,r.P);for(const role in r.N){const T=out.N[role]=out.N[role]||{};for(const k in r.N[role])T[k]=Object.assign(T[k]||{},r.N[role][k])}for(const x of r.err.map(x=>phase+": "+x))if(!out.err.includes(x))out.err.push(x);if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
  await b.close();return build(out)}
 
 /* ---------------- table ---------------- */
