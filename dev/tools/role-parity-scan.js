@@ -270,6 +270,11 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
      seeded world: no place held her, so "Tố cáo … trước Hoàng hậu" was read as an NPC-only act although the player holds it). The
      Hoàng hậu is asked directly, as a visit person (j42 srvVisitOf: {kind:"srv",sk:"hh",ref}), like every NPC maid's hh probe */
   if(isSrv())try{const m=srvM(),q=rivals.find(v=>v&&v.queen&&v.alive!==false&&!v.out&&v!==m);if(q)for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:q.name})||[])addP(role,a.n,"talk:srv-hh")}catch(e){E("talk srv-hh",e)}
+  /* b-nameclash-rp (21/11, same family as the srv-hh fix above): her «Lục rương tìm chứng cứ» / «Lấy trộm son phấn» sit on the chest person j2 goTo puts
+     in a palace whose owner is away (P.v not here); whether any visited palace was empty this khắc hung on the seeded day plan (the coop-name-clash
+     names draw moved every owner home in the hh probe: hh N-ONLY cx2:chest / cx4:rougeSteal). The card has no rank gate; the NPC road (jagacts2
+     cx2:chest, jagacts4 p4StealT) goes to the target's palace by rule. So the chest of every other consort is asked directly (owner away) */
+  if(!isSrv())for(const v of liveRivals(true)){if(!v||v===S||v.out||v.alive===false)continue;try{for(const a of talkOpts({kind:"chest",ref:v,name:`Rương của ${v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"})||[])addP(role,a.n,"talk:chest-direct")}catch(e){E("talk chest",e)}}
   S.place="home";Q.length=0;
   /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
   if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}

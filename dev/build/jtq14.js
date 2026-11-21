@@ -22,8 +22,8 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 const nv=n=>typeof kitNumVi==="function"?kitNumVi(n):String(n);
 const lc=s=>String(s).charAt(0).toLowerCase()+String(s).slice(1);
 /* how the narrator speaks to her (VANPHONG §2): a maid is "ngươi" and the ma ma says "ta"; a consort below Tần "tiểu chủ", Tần and up "nương nương" */
-function X(cap){/* j84 lowRank: below Tần (one rule for every speaker) */const w=srvNow()?"ngươi":(typeof lowRank==="function"&&!lowRank()?"nương nương":"tiểu chủ");return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
-function ME(){return srvNow()?"ta":"nô tỳ"}
+function X(cap){/* ONE address core (jvoice kAddr, VANPHONG §2): the narrator calls a maid "ngươi"; a consort is called as her own servant calls her (tiểu chủ / nương nương / Hoàng hậu nương nương) */let w;try{w=srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).goi:kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e){w=srvNow()?"ngươi":"tiểu chủ"}return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
+function ME(){/* the narrator's self word: the ma ma says "ta" to a maid (kAddr, no speaker); a consort's maid says "nô tỳ" */try{return srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).xung:kAddr({srv:"f"},S,{m:"cool"}).xung}catch(e){return srvNow()?"ta":"nô tỳ"}}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{m\}/g,ME())}
 /* ---------- the quests: [variant][chapter] → list; need = how many times (BAL.st14.q.need[id] or 1) ---------- */
 const A=re=>d=>!!(d&&re.test(String(d.n||"")));
@@ -122,7 +122,7 @@ function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="und
  const sj=String(a.sj||"").replace(/\{(v|foe|mis)\}/g,(m,k)=>SJ0[k]);if(!sj||/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
 function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
  let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
-window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);
+window.tq14Beat=beatLine;window.tq14Say=say;window.tq14Intro=m=>introCard(m);
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}
