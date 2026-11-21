@@ -61,3 +61,12 @@ Files: test14_{tam,nhi,nhat}_L1752 + test14_{tam,nhi,nhat}_thancan_L1752 (all 6 
 - B29_S_CREPE = "The FABRIC is thin, light, flowing matte silk crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface with no sheen at all, never glossy, never satin, never brocade, with fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
 - test16_{tam,nhi,nhat}_L1775 = test14 (wide sash fix, nhất big hairpins) + M06→B29_S_CREPE + test15 FABRIC line + garment words → matte silk crepe (tam ruqun/jacket/sash; nhị ruqun/jacket/sash; nhất robe/sash). test16_*_thancan = colour swap only (word diff verified).
 - keep_check --all 476 PASS; check_store maid a18 ×6 PASS; 7.0–9.5k chars.
+
+## JOB 8 — owner L1785 (via Foreman C #22), 0 gens
+test17_{tam,nhi,nhat}(+_thancan)_L1785 from test16:
+1. SMILE (all 6): + "Only a soft closed-lips smile, never laughing, no teeth." (no-teeth sentences were already there; the approved face line "a small playful closed-lip smile" / master "a bright closed-lip smile" kept — check_store needs them).
+2. BOW: tam had "sash AND both long hanging ties powder blue, BOW deep rose" = tails in the sash colour → fixed to "sash band powder blue, BOW deep rose …; the bow and both long hanging tails are one single colour deep rose". nhị/nhất: + "the bow and both long hanging tails are one single colour <bow colour>".
+3. BLEED (all 6): + "CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient or ombré between the two colours; both colours stay as soft and muted as the colour rule says, never richer or more saturated."
+4. NHẤT tone: nhất had "(a touch deeper than a lower maid's blue)" → thân cận "deeper than … deep rose" + "RECOLOUR the whole costume to her colour …" on skirt + WHOLE sleeves = the most saturated. → "(the same soft tone as the other maids)" in both nhất files.
+Why bleed: tam text named sash+ties one colour and bow the other in one phrase; the sash (main colour) wraps over the jacket (other colour) right where the short jacket ends; nhất's "TWO colours that clearly interact"; collar borders "in a lighter tone"/"cream-and-blush" next to the other colour. No rule ever asked for clean edges, and the 55-cr draft model blends neighbouring colours more → both.
+keep_check --all 496 PASS; check_store maid a18 ×6 PASS; nhất 9.93k (limit 10k), others 7.4–8.2k.
