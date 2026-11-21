@@ -988,3 +988,4 @@ NEWACCT#14 ~01:53Z: OWNER L1604: ChatGPT gives the same as Magnific; Hán t1–t
 NEWACCT#14 ~01:57Z: OWNER L1605 on thu t1–t3 v4: t1 more density + jade pendants; t2 outer-robe edge embroidery + inner horizontal neckline band; t3 chest embroidery; ladder carries up (rule G42); fabric OK; continue Magnific drafts (ChatGPT too slow) → DESIGN18 JOB 5 → v5 → CHECK1 → GEN1 165 cr.
 NEWACCT#14 ~02:00Z: OWNER L1606: xuân Hán t1–t3 need ≥2 visible layers + real Hán wrap panels (trực cư/khúc cư); scrap current design text, NEW Hán prompt → DESIGN19 widened (v5).
 NEWACCT#14 ~02:02Z: OWNER L1607: low tiers = KHÚC CƯ not trực cư; trực cư only higher ('quý nhân' — likely voice for quý phi per DESIGN5 ladder t6) → DESIGN19 told t1–t3 khúc cư.
+NEWACCT#14 ~02:05Z: DESIGN18 6f3e630 thu t1–t3 v5 (G42 L1605) gates PASS → CHECK1 → GEN1 165 cr (L1608). DESIGN18 ROLLED (~25 %, handover in reports/DESIGN18.md) → successor opened only when next thu prompt job comes.
