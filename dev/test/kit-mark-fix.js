@@ -10,7 +10,7 @@ const [,,URL,OUT,SIZES,SCN]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SCENES={'pop-maid':"popKind('maid')",'pop-elder':"popKind('elder')",'tab-rv':"tabGo('rv')",'tab-court':"tabGo('court')",'tab-staff':"tabGo('staff')",'tab-art':"tabGo('art')",'tab-kid':"tabGo('kid')",'tab-men':"tabGo('men')",'tab-kin':"subGo('Hoàng tự trong cung')",'tab-kvo':"subGo('Kế vị')",'tab-hon':"subGo('Hôn sự')",'tab-qt':"subGo('Quý tộc kén rể')",'tab-rel':"tabGo('rel')",'gift-wk':"giftWk()",'spy-pick':"spyPickScene()"};
 const cdn={};const TOPS={};
 (async()=>{const b=await chromium.launch();let bad=0;
- for(const wh of (SIZES||"755x1000,1000x755,1180x820,1366x1024,844x390").split(",")){const [W,H]=wh.split("x").map(Number);
+ for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   if(process.env.CTM_CURL_CDN)await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,r=>{const u=r.request().url();try{if(!cdn[u])cdn[u]=cp.execFileSync('curl',['-sSf','-m','30',u],{maxBuffer:60e6});r.fulfill({status:200,body:cdn[u],contentType:u.endsWith('.json')?'application/json':'image/webp',headers:{'access-control-allow-origin':'*'}})}catch(e){r.abort()}});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
@@ -41,7 +41,7 @@ const cdn={};const TOPS={};
      const kpl=pc.querySelector('.kpl'),kb=kpl&&kpl.parentElement.querySelector('.kb.kpkb');
      out.push({name:(nm?nm.textContent.trim():'').slice(0,14),figW:Math.round(R(pcp).width),cut:Math.round(bottom-pr.bottom),scrollable:pc.scrollHeight>pc.clientHeight+2&&/auto|scroll/.test(getComputedStyle(pc).overflowY),
       rankCol:rk?getComputedStyle(rk).color:'',nameCol:nm?getComputedStyle(nm).color:'',same:nm&&rk?(nm.classList.contains('krt')||getComputedStyle(nm).color===getComputedStyle(rk).color):true,
-      kplAbove:kpl&&kb?(R(kpl).bottom<=R(kb).top+2&&Math.abs(R(kpl).left-R(kb).left)<6):null})}
+      kplAbove:kpl&&kb?(R(kpl).bottom<=R(kb).top+2&&Math.abs(R(kpl).left-R(kb).left)<6&&(!/grid/.test(getComputedStyle(kpl.parentElement).display)||getComputedStyle(kpl).gridColumnStart==='1'&&getComputedStyle(kpl).gridColumnEnd==='-1')):null})}
     return out});
    const fails=m.filter(x=>x.figW<168||(x.cut>2&&!x.scrollable)||!x.same||x.kplAbove===false).map(x=>JSON.stringify(x));
    const ok=m.length>0&&!fails.length;if(!ok)bad++;

@@ -1195,18 +1195,26 @@ window.kitPcTagColour=kitPcTagColour;
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
-(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(!nat||!pc.classList.contains("kpwide"))return;
- /* KIT §6.3i (owner 21/11 «rows UP, nothing wasted, NOT cut», mark #38): the left column = figure + key rows + wear slots must FIT the card height; the figure gives back only the height that is missing, never below 170 px wide
-    (the old floor of 112 px made the «small framed portrait floating» she circled). Whatever still does not fit scrolls with the card (the card is its own scroller). */
- const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!L||!pcp)return;pc.style.setProperty("--kpcw",nat+"px");
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{if(!pc.classList.contains("kpwide"))return;
+ /* KIT §6.3i (owner 21/11 «rows UP, nothing wasted, NOT cut», mark #38): the left column = figure + key rows + wear slots must FIT the card height; only the FIGURE gives back the missing height (--kpcw on the figure, --kpcl keeps the column width; centred, never below 170 px wide); the column keeps its width so the slots stay on one row.
+    Whatever still does not fit scrolls with the card (the card is its own scroller, thin bar always visible). */
+ const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!L||!pcp)return;pc.style.removeProperty("--kpcl");pc.style.removeProperty("--kpcw");
  const avail=pc.clientHeight||parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(avail<200)return;
  const need=()=>{let b=0;[...L.children].forEach(c=>{if(c.offsetParent!==null||getComputedStyle(c).position==="absolute")b=Math.max(b,c.offsetTop+c.offsetHeight)});return b+6};
- for(let i=0;i<3;i++){const over=need()-avail;if(over<=1)break;const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const w=Math.max(170,Math.min(cw,Math.floor((pcp.offsetHeight-over)*550/1037)));if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}}catch(e){}};
+ const nat=Math.round(pcp.getBoundingClientRect().width),col=Math.round(L.getBoundingClientRect().width);if(!nat)return;pc.style.setProperty("--kpcl",col+"px");
+ for(let i=0;i<3;i++){const over=need()-avail;if(over<=1)break;const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const w=Math.max(170,Math.min(cw,Math.floor((pcp.offsetHeight-over)*550/1037)));if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}
+ }catch(e){}};
 window.kitPcKeyFit=kitPcKeyFit;
  const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
 html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
 html body .pc>.pcr .pcg.on{display:block!important}
 html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+/* the info group of a person card (.pcb) is a generic auto-fill grid: on Fold it put the mother block (.kpl) and the facts table (.kpkb) side by side, on iPad stacked. One layout: every non-button child spans the whole row, so mother is ALWAYS above the facts (mark 17). */
+html body .pc>.pcr>.pcb{align-content:start!important}
+html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
+/* a card that still does not fit scrolls: make the scroller visible (thin always-on bar) so nothing looks cut (mark 38) */
+html body .pc.kpwide[data-k2]>.pcl>.pcp.kit{margin-left:auto!important;margin-right:auto!important;float:none!important}
+html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
