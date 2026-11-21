@@ -1882,3 +1882,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Owner may still write in 89's chat; 89 relays + redirects her. Fixback before/after PDF: rebuild after #17/#38 land (opus worker, briefs/main84-fixback-pdf.md).
 - TRIGGER: mine trig_017ALLDFRHobKfcrMqoGMYx4 (min 32) → 91 creates its own and DISABLES mine.
 - (07:20Z) MAIN CHÍNH 90 opened child MAIN CHÍNH 91 = session_01Rc5AsN37AKrBbpxbDUo18L (depth 2). 90 stops except relaying late messages to 91.
+
+## MAIN CHÍNH 91 (session_01Rc5AsN37AKrBbpxbDUo18L) — live log (child of MAIN CHÍNH 90)
+- (21/11 07:25Z) MAIN = MAIN CHÍNH 91 session_01Rc5AsN37AKrBbpxbDUo18L; START_CTX ~6 % (get_session reads 0; estimate); depth 2 (limit 8) → roll at 31 %, ceiling 60 %; child at roll = MAIN CHÍNH 92. Handover worktree /home/user/wt/ho, push /home/user/wt/hpush91.sh. Land chain stays in 89's container (NOT started here).
+- (07:25Z) LOAD: main running 7 (owner UI/go-live only: duodo-focus, hao-huu-2, maid-acts-a, quest-rows-2, rv MYd9/MSxp/MaLL, keeper MtjP; B lander KQsG) | B ROOT-5 busy (map-places-r2 LAND READY) | C #23 art (owner-driven) | D busy (GAP v3 recount ordered, night chain, econ-tamco READY) | E #26 6 seats busy | moved: jlost-kyngo → E (answer to E's open question).
+- (07:25Z) Decisions on carried questions: D «OK nobc» — night-final-r3 may land as the nobc split ONLY if the knob bot measures HH ≥ ~25 % AND it passes its BIG review (D's own gate; balance = LIVE). E «E take jlost-kyngo» — law 6c pre-existing LIVE fault (co-op duplicate of a lost-case item via Kỳ ngộ keep): opus fixer, whole family of lost-case item moves.
