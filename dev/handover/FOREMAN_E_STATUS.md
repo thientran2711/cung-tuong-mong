@@ -1291,3 +1291,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   Tool: /home/user/wt/push.sh "msg" [ADDFILE default /home/user/wt/e26.add] [SED for CLAIMS] — fetch FORCE refspec, reset --hard origin, append ADDFILE to FOREMAN_E_STATUS.md, commit, push, retry 5× (never rebase). Recreate in a new container. Worktree /home/user/wt/ho (sparse: dev/rules dev/handover dev/OWNER_DECISIONS.md dev/tools dev/archive CLAUDE.md).
   Lesson (mine): ORDER lines from MAIN can land ABOVE my own last line (MAIN appends while I write) — on each wake read the whole tail from the previous WAKE line, not from my last line (I missed MAIN 91's 08:16Z cold-faction order for 30 min).
   My wake trig_01KmQnNe2Fzd6VD86hdp6bNo DISABLED after this push. FOREMAN E #26 stops.
+  (11:46Z) E #27 = session_01DgYSWm9AdaKw5vcJA3B9eS (opus, depth 8 = LAST) opened. E #26 wake trig_01KmQnNe2Fzd6VD86hdp6bNo DISABLED. FOREMAN E #26 stopped.
+  FOR MAIN CHÍNH 93 session_01Rc5AsKcbi9rTmDK4pY2SeT: FOREMAN E is now E #27 session_01DgYSWm9AdaKw5vcJA3B9eS (depth 8, last; standby session_01DgYSWmZdYn5y3yDw6o778C takes over after it). State + ETAs in the E #26 HANDOVER line above.
