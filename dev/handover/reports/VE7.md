@@ -7,7 +7,7 @@ Sheet: dev/handover/review-sheets/maid_prod_m09_ranks_L1856.png (row 1 = main ro
 | m09_tam_L1836 | ov6MN3b829 | 135 | ✓ teal short jacket over rose skirt, rose sash + teal bow, comb box held, closed-lip smile, double buns, no pendant |
 | m09_nhi_L1836 | YMlRl8QWeC | 135 | ✓ teal half-sleeve jacket over rose ruqun, teal sash + rose bow, letter held, closed smile |
 | m09_nhat_L1836 | lJtktZGgv9 | 135 | ✓ teal sleeveless vest + two front panels, rose skirt/sleeves, rose sash + teal bow, handkerchief, dense hairpins, airy borders |
-| m09_tam_thancan_L1836 | hu2X2KJvqL | 135 | ✓ rose short jacket over teal skirt, teal sash + rose bow, comb box |
+| m09_tam_thancan_L1869 | KLpuvihkqp | ✓ blue jacket / rose skirt, rose sash + blue bow, comb box |
 | m09_nhi_thancan_L1836 | YMlRlIFWeC | 135 | ✓ rose jacket over teal ruqun, rose sash + teal bow, envelope held |
 | m09_nhat_thancan_L1836 | bxMCMyz5Y2 | 135 | ✓ rose vest/panels, teal skirt/sleeves, rose bow on teal sash, handkerchief |
 
@@ -20,9 +20,9 @@ Earlier 1k sample m09_tam_L1869 (bxMCdqL5Y2, 55 cr) → sheet maid_m09_tam_L1869
 | file | id | look |
 |---|---|---|
 | m09_tam_L1869 | P3QSjDb42C | ✓ rose jacket / blue skirt, blue sash + rose bow, comb box |
-| m09_nhi_L1869 | MBJnZb9DCm | ✓ rose jacket / blue ruqun, blue bow on rose?? sash looks blue-lilac w/ blue bow (sash colour should be rose, bow blue) — minor ✗ sash; letter envelope is plum with small bead tassel, not a sachet |
-| m09_nhat_L1869 | yiugj9KPW9 | ✓ rose vest + 2 front panels + back tà, blue skirt/sleeves, rose sash+bow?, handkerchief, dense pins |
-| m09_tam_thancan_L1869 | KLpuvihkqp | ✓ blue jacket / rose skirt, blue sash + rose?? bow is blue (spec: sash rose, bow blue → ✓ as spec), comb box |
+| m09_nhi_L1869 | MBJnZb9DCm | ✓ rose jacket / blue ruqun, letter held (plum envelope with a small bead tassel, not a sachet); sash/bow colours hard to judge at 512px, bow reads blue |
+| m09_nhat_L1869 | yiugj9KPW9 | ✓ rose vest + two front panels + back tà, blue skirt/sleeves, handkerchief, dense pins; sash blue with rose bow |
+| m09_tam_thancan_L1869 | KLpuvihkqp | ✓ blue jacket / rose skirt, rose sash + blue bow, comb box |
 | m09_nhi_thancan_L1869 | UPvx5V9wny | ✓ blue jacket / rose ruqun, rose bow, green envelope with small knot+tassel (not a sachet) |
 | m09_nhat_thancan_L1869 | If3pTvxtvE | ✓ blue vest/panels, rose skirt/sleeves, blue bow, handkerchief |
 | m09_thosu_L1869 | rgXHElZxtc | ✓ blue jacket+skirt+apron, rose narrow sash + hair tie, sewing basket, wooden pin |
