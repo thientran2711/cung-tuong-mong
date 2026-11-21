@@ -45,3 +45,5 @@ WRONG (my fault: I gave m09 rose pink as MAIN and teal as secondary = her palett
 WRONG too: m18_mama_a51 (main was powder blue = uniform, not jade; v6 "her own colour" wording) → m18_mama_a51_L1869 (MAIN jade blue-green #4E8FA3, SECONDARY deep rose).
 RIGHT (unchanged, still L1836): m18 tam, nhi, nhat, 3 thân cận, thô sử, chưởng sự (blue/deep rose, tím cà/deep rose).
 All 10 *_L1869: keep_check PASS, check_store PASS (maid a18/a26, mama a51). Colour tokens + the ma ma "own colour" sentence only (A47). I did not look at the drawn sheet PNGs (not needed for the token fix).
+
+## G59 (owner L1874/L1876): NO túi thơm — sachet clause deleted from all 15 L1836 + 10 L1869 prod .txt files (nothing else changed, A47); allow lines added in each .keep. The 2 undrawn ma ma a36 files per person were removed. NOTE make8_prod.py / make9_fix.py still regenerate the old sachet text — re-apply the deletion if re-run.
