@@ -7,11 +7,11 @@ R=[
  (r",? a small embroidered silk fragrant sachet \(túi thơm\) with a tassel hanging from the sash at the waist on a short silk cord looped over the sash", ""),
  (r" with a small embroidered silk fragrant sachet \(túi thơm\) hanging from (?:it|the sash)(?: on a silk cord)?", ""),
  (r",? a small embroidered silk fragrant sachet \(túi thơm\) hanging from the sash(?: on a silk cord)?", ""),
- (r"an embroidered (?:red )?silk sachet with a tassel", "a small round embroidered silk fan with a silk tassel"),
- (r"(?:a|an) (?:small )?embroidered fragrant sachet with a long silk tassel dangling from her fingers", "a small round embroidered silk fan with a silk tassel held in her fingers"),
+ (r"an embroidered (?:red )?silk sachet with a tassel", "a small round embroidered silk fan"),
+ (r"(?:a|an) (?:small )?embroidered fragrant sachet with a long silk tassel dangling from her fingers", "a small round embroidered silk fan held in her fingers"),
  (r"a simple embroidered cloth sachet", "a small round embroidered silk fan"),
- (r"an embroidered sachet with a tassel", "a small round embroidered silk fan with a silk tassel"),
- (r"a small embroidered silk sachet held up by its red cord", "a small round embroidered silk fan held up by its red tassel"),
+ (r"an embroidered sachet with a tassel", "a small round embroidered silk fan"),
+ (r"a small embroidered silk sachet held up by its red cord", "a small round embroidered silk fan held up by its handle"),
 ]
 DET=re.compile(r"sachets?\b|túi thơm|tui thom|scent(?:ed)? pouch|perfume bag|hà bao|fragrant pouch|embroidered pouch",re.I)
 def strip(t):

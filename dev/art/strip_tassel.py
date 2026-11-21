@@ -6,7 +6,8 @@ TS=r"(?:(?:a|an|small|long|silk|pearl|gem|jade|red|dragon)\s+)*tassels?"
 R=[
  (r"any embroidery, painting or tassel on it", "any embroidery or painting on it"),
  (r"(\(tú cầu\)) with "+TS, r"\1"),
- (r"((?:flute|fan|parasol|handle|lantern|ruyi|scepter)\b[^\",;.]{0,70}?) and (?:a )?(?:gem|pearl|jade|silk) tassels?", r"\1"),
+ (r"((?:flute|fan|parasol|handle|lantern|ruyi|scepter)\b[^\",;.]{0,70}?) and (?:a )?(?:gem|pearl|jade|silk|red) tassels?", r"\1"),
+ (r"held up by its red tassel", "held up by its handle"),
  (r"((?:flute|fan|parasol|lantern|ruyi|scepter|incense ball|ball)\b[^\",;.]{0,50}?) (?:with|on) "+TS+r"(?=[\",;. ]|$)", r"\1"),
  (r"((?:fan|handle|flute)\b[^\",;.]{0,70}?) and (?:a )?(?:small |long )?tassels?(?=[\",;. ]|$)", r"\1"),
  (r"(an embroidered silk sash) with silk tassels", r"\1"),
