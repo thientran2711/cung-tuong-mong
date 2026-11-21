@@ -340,11 +340,15 @@ function setWhere(m){if(!m||!m.W||!S||host()||m.week!==wk()||m.buoi!==(S.buoi||0
  const W=mapMe(J(m.W),false,me());const mw=W.__menW;delete W.__menW;const tl2=W.__tl2;delete W.__tl2;try{if(tl2&&typeof toil2Take==="function")toil2Take(tl2)}catch(e){}const fpl=S.where&&S.where[fp()];S.where=W;if(fpl)S.where[fp()]=fpl;if(mw)S.menW=mw;
  CW.whereKey=bkey();return true}
 function applyWhere(m){if(!m||!m.W||!S||host())return;CW.lastWhere=m;if(!setWhere(m))return;refreshHere();render()}
+/* coop-arrive-see: */const lens7=()=>!!(CW.on&&!host()&&CW.thin&&CW.thin.on&&CW.thin.on(7));/* her phone at level 7+: her visit is the host's (one source) */
 /* people at my current place, from S.where (no travel, no side effects): NPCs + the Emperor + my friend */
-function refreshHere(){if(!S||!S.visit||S.dead)return;const k=S.place||"home",W=S.where||{};const P=S.visit.people||[];
+function refreshHere(){if(!S||!S.visit||S.dead||lens7())return;const k=S.place||"home",W=S.where||{};const P=S.visit.people||[];
  const isR=p=>p&&(p.kind==="rival"||p.kind==="hh")&&p.ref;
- if(k==="home"){const f=friendEntry();const L=P.filter(p=>!(isR(p)&&isF(p.ref)));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
- const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isR(p)||(here.includes(p.ref)&&!isF(p.ref)));
+ /* coop-arrive-see: her stored person on the host keeps refs as {$r:id}; the friend entry (the host's stand-in) is re-made in every
+    withSeat, so her old entry of him comes back with ref null: it is still HIM (same name), never a second copy beside the new one */
+ const f0=friendEntry();const fN=f0?[f0.name,`Hoàng hậu ${f0.name}`]:[];const isFp=p=>!!p&&(p.kind==="rival"||p.kind==="hh")&&(p.ref?isF(p.ref):fN.includes(p.name));
+ if(k==="home"){const f=f0;const L=P.filter(p=>!isFp(p));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
+ const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isFp(p)&&(!isR(p)||here.includes(p.ref)));
  for(const v of here)if(!L.some(p=>isR(p)&&p.ref===v))L.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"}:rp(v));
  const ei=L.findIndex(p=>p.kind==="emp");if(W.emp!==k&&ei>=0&&["vuon","thu","dtd"].includes(k))L.splice(ei,1);
  else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
@@ -403,7 +407,7 @@ COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
 function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return null;const B=CW.thin.seatOf(CW.seat==="a"?"b":"a");return B&&B.S&&B.S.place||null}catch(e){return null}}
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
- let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
+ let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
 function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
@@ -888,7 +892,23 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
 /* NPC whereabouts are the host's: the guest's own placement is replaced by the host's for this buổi; the host re-sends whenever it re-places */
 (function(){const f=placeWhere;placeWhere=function(){const r=f.apply(this,arguments);if(CW.on)try{if(!host()&&CW.p2&&!eW()){if(!setWhere(CW.lastWhere))CW.whereKey=""}keepFriendPos();if(host()&&CW.p2&&!CW.pend&&!CW.inTurn)sendWhere()/* the new week's places go out with the merged week, not from inside endTurn */}catch(e){}return r}})();
-(function(){const f=goTo;goTo=function(){const r=f.apply(this,arguments);if(CW.on)try{sendPos()}catch(e){}return r}})();
+/* review/coop-arrive-see (GAP OD-CO1): the walker's list is built from S.where, so the friend's place in it is made current FIRST
+   (her walk on the host read the host's place from the last buổi step: the second to arrive never saw the first) */
+(function(){const f=goTo;goTo=function(){if(CW.on)try{keepFriendPos()}catch(e){}const r=f.apply(this,arguments);if(CW.on)try{sendPos();presAll()}catch(e){}return r}})();
+/* ONE presence refresh for both seats on the host (thin level 7: both persons live here): whenever either person's place / visit / buổi
+   changes (any road: walk, map jump, event sending her home, buổi step, visit), each seat's friend place is re-read and the people at
+   each seat's place rebuilt; her copy goes to her phone in the next delta. Gated by a key, so a render without a move costs nothing. */
+function presAll(force){try{if(!CW.on||CW.ctx||!S)return;
+ /* the key holds WHO is in each list (a later goTo wrapper, e.g. jplx, rebuilds the list to the same length without the friend) */
+ const vk=x=>x&&x.visit?x.visit.k+"/"+(x.visit.people||[]).map(p=>p?(p.kind||"")+":"+(p.ref&&p.ref.id!=null?p.ref.id:p.name||""):"").join(","):"-";
+ /* rv coop-arrive-see r1: below level 7 (the LIVE default, level 0) each phone builds its OWN list from its own S.where (the friend's
+    place from her pos message): the same one refresh, on this seat only, on BOTH seats; her phone at level 7+ shows the host's (lens7) */
+ if(!(host()&&CW.thin&&CW.thin.on&&CW.thin.on(7))){if(lens7())return;const f=friendEntry();
+  const K1=()=>["L",wk(),S.buoi||0,S.place,vk(S),f&&S.where?S.where[f.id]:"",!!S.dead].join("|");if(!force&&K1()===CW.presK)return;refreshHere();CW.presK=K1();return}
+ const o=CW.seat==="a"?"b":"a";const B=CW.thin.seatOf(o);const H=B&&B.S;if(!H)return;
+ const K=()=>[wk(),S.buoi||0,S.place,vk(S),H.place,H.buoi||0,vk(H),!!S.dead,!!H.dead].join("|");if(!force&&K()===CW.presK)return;
+ keepFriendPos();refreshHere();CW.thin.withSeat(o,()=>{keepFriendPos();refreshHere()});CW.presK=K()}catch(e){console.error(e)}}
+CW.presAll=presAll;
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
   try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
@@ -898,7 +918,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 function qBlocked(){try{const b=document.querySelector(".kbk-bar");return !!(b&&b.offsetParent!==null)||!!(S&&S.mg)}catch(e){return false}}
 let qT=0;CW.qN=0;function reshowQ(){qT=0;CW.qN++;try{const M=$("modal");if(!(CW.on&&S&&Q.length&&M&&M.hidden))return;if(qBlocked()){qT=setTimeout(reshowQ,400);return}showModal()}catch(e){}}
 CW.reshowQ=reshowQ;CW.qArmed=()=>!!qT;/* review/coop-c4-stuck: test hooks (dev/test/coop-c4-stuck.js S1) */
-(function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos();if(Q.length&&!qT)qT=setTimeout(reshowQ,400)}catch(e){}return r}})();
+(function(){const f=render;render=function(){if(CW.on)try{presAll()}catch(e){}const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos();if(Q.length&&!qT)qT=setTimeout(reshowQ,400)}catch(e){}return r}})();
 (function(){const f=closeModal;closeModal=function(){/* the guest's "Đợi bạn" note can be closed before any world exists */
  if(CW.on&&!S){Q.shift();if(Q.length)showModal();else{const m=$("modal");if(m)m.hidden=true}return}const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
