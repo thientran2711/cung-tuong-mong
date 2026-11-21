@@ -140,3 +140,4 @@ Word-diff vs L1903:
 - t8 had no disc: no pendant change.
 Gates: keep PASS ×2, check_store --scope tpN --age a22 = no FAIL ×2.
 Sent to VE11 session_01D3E3NXVzBHdCGoGMiocJtu: t7 + t8 @135 each (2k medium) = 270 cr, one sheet CŨ|MỚI ×2.
+- CORRECTION (#27): t7 was already done by HHCOL2 (s62_t7_THU_vankien2_L1973 @fe4e562). My t7 file s62_t7_THU_vankien2_OLD_clasp_L1973.txt = DO NOT USE. VE11 was told to draw only my t8 (1 @135).
