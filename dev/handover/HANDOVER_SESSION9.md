@@ -1841,3 +1841,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:45Z) LANDED hoangthuong-gold 1e826e29 (#3 Emperor gold). OWNER_MARKS #3 #68 LIVE.
 - (06:50Z) tinh-net-word LAND READY 72b0bdb7 → queued (landq4). rv LhrW + worker MKqx archived (done).
 - (06:55Z) maid-8tabs 7d68436b (#32–#36 BIG) → opus rv session_01Rc5AsMYd9YDaGJ8Zvocx99. mg-intro-2 new sha 36b54a1b → B rv 4xiA.
+- (07:00Z) LANDED dialog-dedup 5569adb6 (#85). Queue + cold-faction 5168e396 (E, contains errand-bal) + MG11 465662b5 (B train). E-LANDER JW9V done+archived. B lander HzigX rolled → successor session_01Rc5AsKQsGmhYdKRJ3xPkSq (perf-ci → ge-npc → kc-fail-effects). chapter-card-3 r2 7bd1a790 at rv LEAM.

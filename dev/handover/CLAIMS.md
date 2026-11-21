@@ -792,3 +792,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | rv-ending-screens OPUS BIG reviewer (Foreman B; MAIN 88 order) | review/ending-screens-rv; reports/rv-ending-screens.md | B | session_01N1tNP2Z5YHxBZcLFzY5BEH | PASS c073f8d4 → LAND READY (FF of 2021e23f) | 21/11 |
 | REVIEW tinh-net-word PASS → LAND READY 72b0bdb7 (#4 note) | review/tinh-net-word-rv | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS (archived) | 21/11 06:06Z |
 | REVIEW maid-8tabs (BIG opus) 7d68436b (#32–#36) | review/maid-8tabs-rv; briefs/main89-rv-maid-8tabs.md | MAIN CHÍNH 89 | session_01Rc5AsMYd9YDaGJ8Zvocx99 | RUNNING | 21/11 06:09Z |
+| B-LANDER successor (opus; perf-ci → ge-npc → kc-fail-effects) | review/main84-land-*; reports/main84-lander.md | MAIN CHÍNH 89 | session_01Rc5AsKQsGmhYdKRJ3xPkSq | RUNNING | 21/11 06:17Z |
