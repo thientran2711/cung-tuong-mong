@@ -2131,3 +2131,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY. No owner question pending; owner silent all session.
 - TRIGGER: mine trig_01Xcas2RnJwU5JeiDV5M13uy (min 32) → 97 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush96.sh).
 - 97 is at depth 8 (limit): it CANNOT open a child. At its roll point it writes the handover + a FOR MAIN line so the owner opens a ROOT (MAIN CHÍNH 98) from claude.ai (dev/handover/TAKEOVER_MAIN_ROOT.md).
+- (16:28Z) MAIN CHÍNH 96 opened child MAIN CHÍNH 97 = session_01Rc5AsLuG71zn8SX9tkLTWk (depth 8, last allowed). 96 stops except relaying late messages to 97.
