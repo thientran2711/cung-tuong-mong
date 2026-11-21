@@ -184,13 +184,15 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  else if(O.buy)try{const r=SPEC.item(c,O);if(r)out.push(r)}catch(e){kerr("buy",e)}
  return out.join("; ")}
 /* ---------- specials: every piece only moves (jil / jlost), every fact is a real one ---------- */
+/* a found piece that has already moved on (someone found it first): nothing moves */
+const gone=L=>`${loNm(L.k)} đã có người tìm thấy trước`;
 const SPEC=KY.SPEC={
  ret:(c,O)=>SPEC.item(c,O),
  give:(c,O)=>SPEC.item(c,O),
  item:(c,O)=>{const F=c.F;
-  if(c.X.lc){const L=c.X.lc,o=loP(L.own);if(c.oi===0){lostReturn(L.e,"kyngo");return `${loNm(L.k)} về lại tay ${nm(o)}`}
-   const x=Object.assign({},L.e,{lo:L.id,gh:L.own,by:key(F)});delete x.from;delete x.giver;F.inv=F.inv||[];F.inv.push(x);L.keep=1;L.by=key(F);L.st="held";L.at=key(F);
-   try{ilLog(L.e,"lo"+L.id,key(F),"kyngo: giữ lại")}catch(e){}return `${loNm(L.k)} nằm trong rương ${nm(F)}`}
+  if(c.X.lc){const L=c.X.lc,o=loP(L.own);/* E42 one owner change (jlost): the piece moves only from where it is now; a stale card (already found / returned) moves nothing */
+   if(c.oi===0)return lostReturn(L.e,"kyngo")?`${loNm(L.k)} về lại tay ${nm(o)}`:gone(L);
+   return loKeepBy(L,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:gone(L)}
   if(c.X.box){const x=c.X.box;if(c.oi===1){ilTake(x,F,"kyngo");const i=F.inv.indexOf(x.e);if(i>=0)F.inv.splice(i,1);ilGone(F,x.e,"th");return `${itm(x.e.k).n} dâng lên Đức Thọ cung`}
    const pr=buyPr(c);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}ilTake(x,F,"kyngo: chuộc di vật");return `${itm(x.e.k).n} vào rương`}
   if(c.X.rr){const r=c.X.rr,pr=buyPr(c);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}r.sold=1;const e={k:r.k,from:"nvp",own:key(F),d:S.turn};F.inv=F.inv||[];F.inv.push(e);
@@ -205,7 +207,7 @@ const SPEC=KY.SPEC={
  intel:c=>{const F=c.F;const L=liveRivals(true).filter(v=>v!==F&&(c.W&&c.W.ref)!==v);const v=L.sort((a,b)=>oan(b,F)-oan(a,F))[0];if(!v)return"";
   if(F===S){const f=intelLearn(v,KB().intelN,{by:wName(c.W),how:"Kỳ ngộ"});return `biết thêm chuyện của ${v.name}${f?": "+String(f).replace(/<[^>]+>/g,""):""}`}evA(F,v,KB().evStep);return""},
  ev:c=>{const F=c.F;if(c.X.pl){const n=evA(F,c.X.pl.a,KB().evStep);return `chứng cứ về ${nm(c.X.pl.a)} +${n||KB().evStep}`}
-  if(c.X.lc){const L=c.X.lc;lostReturn(L.e,"kyngo");L.cev=(L.cev||0)+KB().evStep;return `${loNm(L.k)} về lại rương, thêm một manh mối`}return""},
+  if(c.X.lc){const L=c.X.lc;if(!lostReturn(L.e,"kyngo"))return gone(L);L.cev=(L.cev||0)+KB().evStep;return `${loNm(L.k)} về lại rương, thêm một manh mối`}return""},
  spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
  cure:c=>{const F=c.F;const i=typeof illOf==="function"?illOf(F):null;if(i){F.ill=null;return "bệnh cũ dứt hẳn"}ap(F,{suc:Math.round(KB().sucRest)});return `bồi bổ, Sức +${Math.round(KB().sucRest)}`},
  rk:c=>{try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,old+KB().rkStep));if(S.srv.rk>old)return `được thăng ${SRK.maid[S.srv.rk]}`}}catch(e){}return""}

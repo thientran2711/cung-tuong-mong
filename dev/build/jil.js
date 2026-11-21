@@ -219,8 +219,7 @@ setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function"
 /* cướp y phục (jty): the robe goes to whoever sent the robber (kept in her chest: a lost case, found by tra xét / recognised when worn);
    an unknown thug → a lost case (it turns up in someone's chest, or hidden) — never into thin air */
 function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
- if(by&&by!==p&&ilAlive(by)&&typeof loLoseE==="function"){const c=loLoseE(p,e,"riv");if(c){c.by=ilKey(by);const x=Object.assign({},e,{lo:c.id,gh:c.own,by:c.by});delete x.from;delete x.giver;delete x.w;
-  by.inv=by.inv||[];by.inv.push(x);c.keep=1;c.st="held";c.at=c.by;c.rob=1;try{c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}catch(z){}ilUid(e);ilLog(e,ilKey(p),c.by,"cướp");return c}}
+ if(by&&by!==p&&ilAlive(by)&&typeof loLoseE==="function"){const c=loLoseE(p,e,"riv");if(c){ilUid(e);if(typeof loKeepBy==="function"&&loKeepBy(c,by,"",{rob:1})){try{c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}catch(z){}ilLog(e,ilKey(p),c.by,"cướp")}return c}}/* E42: the one keep road (jlost loKeepBy) */
  return ilGone(p,e,"lost",{cause:"srv"})}
 window.ilRob=ilRob;
 /* §64 item events: the ransom / atonement dialogs show the piece in the picture frame; "Chuộc về" / "xin lại" fly it into the chest */
