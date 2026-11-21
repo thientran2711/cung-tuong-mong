@@ -1,0 +1,5 @@
+base: dev/art/thu_comoi/s62_t7_THU_vankien2_L1924.txt
+# #27 09:09Z: hu2BC0ivqL drew a jade disc + red knot + red tassel hanging from the flute = G57 jade pendant; cause = held-item words 'gem tassels' (+ HELD ITEM COLOUR pushing the tassel to red). Words-only fix.
+allow: a jade flute with gold-filigree bands and gem tassels held low at her side  # G57 (owner L1851): no pendant/tassel hanging from the flute
+allow: vân kiên L1924  # caption renamed L1924b
+allow: CAPTION: large bold, top-left, never over her  # boilerplate 'large' trimmed for 10 000

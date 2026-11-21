@@ -19,3 +19,8 @@ Insert (owner L1924, like image 3 kseQCFw16B): "the two fronts joined at the thr
 - t6 L1924 clasp CANCELLED (s62_t6_THU_vankien2_L1924.txt = do not draw; #26 told VE11). t7/t8 L1924 clasp continue at VE11.
 - Every sheet label names the collar type in Vietnamese (in G63; told VE11/VE6).
 - VE11 result: t7 hu2BC0ivqL, t8 Tdwzp62VNR (L1924 clasp), sheet dev/handover/review-sheets/thu_t7_t8_vankien_clasp_L1924.png (VE11 @e779fa2; ids sent to #27).
+
+## #27 09:09Z — t7 hu2BC0ivqL jade pendant + red tassel (G57)
+- Looked at hu2BC0ivqL: a red knot + jade disc + long red tassel hang from the held jade flute. Ref kseQCFw16B (collar crop) shows only a throat drop, no flute/tassel → cause = PROMPT WORDS: Pose "a jade flute with gold-filigree bands and gem tassels held low" (+ HELD ITEM COLOUR 'any … tassel on it … different colour' → red). Same words in L1901/L1903 t7. G57 gate regex misses "gem tassels" (only jade discs/tassels/pendant).
+- Fix (words only, no gen): dev/art/thu_comoi/s62_t7_THU_vankien2_L1924b.txt (9998): "…bands and gem tassels held low" → "…bands, no tassel or pendant, held low"; caption L1924b, "large" trimmed. store PASS, keep PASS.
+- Wider: "gem tassels" is in ~137 t7 prompt files (builder pose for the jade flute, e.g. rank8-t78/*_t7.txt) → foreman call (store/builder + G57 regex).
