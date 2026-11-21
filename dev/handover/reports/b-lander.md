@@ -57,3 +57,13 @@ Stale, do NOT land: review/coop-staff-split-r1-land 358b2e85 (inside name-clash;
 - mg11-thutay-r1-land 184db4e0 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 01:56Z.
 - kc-fail-effects-r1-land 9729cda2 (re-merged LIVE e4fd4dcf): ALL GREEN → LAND READY 02:22Z.
 - All conflicts in these merges = generated index.html/sw.js only (LIVE's, then build_site.sh).
+
+## LANDER #2b (session_01N1tNP6cqrrDPRXd6b6opjm) — 21/11 00:40Z–03:55Z, START_CTX ~5 %
+| branch | land sha | base | result |
+|---|---|---|---|
+| thancan-r1 | 6ed639e7 | b1033eb0 | LAND READY 01:06Z (landed by MAIN in 64d2e094) |
+| ge-npc-r1 | 21faa03b (= 4c46ad85 + test-only dev/test/coop-ge-npc.js, NEW co-op gate 10/10 both seat orders) | b1033eb0 | LAND READY |
+| map-places-r1 | 3217d3b7 | b1033eb0 | SENT BACK 03:20Z: perf = noise (quickcheck --runs 7 PASS, buổi 1417/1278); role-parity = renderer OOM-killed (memcg, anon-rss 13.7 GB) at the end of the CONSORT phase 3/3, LIVE fits (ALL PASS); browser-per-phase harness does not help; maid phase alone PASS. Next: CDP Runtime.getHeapUsage per role, LIVE vs branch (performance.memory is bucketed, reads a flat 64 MB). |
+| perf-ci-r1 | 524443c5 | 56ff0db0 | LAND READY (perf-fx-gate solo PASS) |
+| palace-life-gaps-r1 | — | — | moved to LANDER #2a by Foreman B ROOT-4 |
+Box lesson: «Target crashed» in role-parity = kernel OOM (check `dmesg | grep Killed`), not a flake.
