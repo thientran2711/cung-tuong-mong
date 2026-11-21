@@ -51,32 +51,32 @@ OUT = {
   + S2 + "; its " + WIDE.format(s="", v="s") + "; the hem winds once around the body in a curved spiral wrap; very wide long sleeves " + SLV + " ending in broad embroidered cuff bands, a few sparse small "
   "flowers on the sleeves; " + DENSE.format(sz="medium-size") + " (peonies, peach blossoms and small swallows in gold and " + S2 + "); RANK BLOCK: "
   "THREE stacked WIDE collar bands following the wide V out to the shoulders (outer band " + M + " embroidered in gold, inner two " + S2 + " with gold edges), the same triple band on the spiral hem edge; "
-  "a WIDE stiff embroidered waist belt with a gold buckle plaque and one set of jade discs and pearl strands (zupei) on silk cords to the knee; " + SIG[4] + NOC +
+  "a WIDE stiff embroidered waist belt with a gold buckle plaque; " + SIG[4] + NOC +
   "gold and jade hairpins with small dangling gold bu yao tassels; "),
  5: ("Mùa Xuân · Thiết kế thời Hán · Phi · Trực cư đoạn, hai lớp áo cổ rộng + choàng vai hai lớp",
   "a NEW outfit, a full Han-dynasty court look in TWO visible robe layers: a long straight-hem outer robe "
   "(zhiju) in " + M + " reaching the floor over an inner robe in " + S2 + "; the " + WIDE.format(s="s of BOTH robes", v="") + ", the pink inner collar showing as a wide layered edge inside the plum outer collar; "
   "very wide long sleeves " + SLV + " with deep embroidered cuffs and a little more embroidery on the sleeves than the Tần; " + DENSE.format(sz="LARGE") + " (large peony medallions, peach blossoms and "
   "cloud-and-swallow scrolls in gold); a deep embroidered border along the whole hem and front opening; RANK BLOCK, clearly visible at game size: THREE stacked WIDE gold-edged collar bands in the wide V "
-  "(outer " + M + " embroidered in gold, inner two " + S2 + ") and a broad embroidered waist sash tied in a flat knot with TWO long jade pendants on silk cords; " + SIG[5] + NOC +
+  "(outer " + M + " embroidered in gold, inner two " + S2 + ") and a broad embroidered waist sash tied in a flat knot; " + SIG[5] + NOC +
   "a LARGER gold headdress with dangling gold tassels and jade pins; "),
  6: ("Mùa Xuân · Thiết kế thời Hán · Quý phi · Khuê y đuôi én, đoạn + vân kiên",
   "a NEW Han court look in THREE visible layers: the Phi's two robes (" + S2 + " inner, " + M + " zhiju, collars WIDE to the shoulders) under a NEW "
   "third layer, a " + M + " guiyi over-robe whose skirt ends in a ring of long swallowtail points (yanwei) to the shins, with floating silk ribbon streamers; "
   "very wide sleeves " + SLV + " with deep embroidered cuffs; " + DENSE.format(sz="LARGE") + "; RANK BLOCK: FOUR stacked WIDE collar bands (outermost a narrow "
-  + Y + " band), the swallowtail ring, a jade belt, a short " + Y + " shou and a zupei; " + SIG[6] + NOC + "a BIG ornate gold headdress with pearls and many gold tassels; "),
+  + Y + " band), the swallowtail ring, a plain gold belt, a short " + Y + " shou; " + SIG[6] + NOC + "a BIG ornate gold headdress with pearls and many gold tassels; "),
  7: ("Mùa Xuân · Thiết kế thời Hán · Hoàng quý phi · Đại bào gấm bốn lớp + choàng vân kiên ngọc",
   "a near-empress Han ceremonial look in FOUR visible layers of thick BROCADE (gấm), richer than the Quý phi's satin: the "
   + S2 + " inner robe, the " + M + " zhiju and the swallowtail guiyi layer (swallowtail points and ribbon streamers), "
   "all collars WIDE to the shoulders; over them a NEW outer layer, a LONG open-front " + M + " over-robe to the floor, very wide sleeves " + SLV + " with deep "
-  + Y + " cuffs, two broad " + Y + " front bands edged with pearls; " + DENSE.format(sz="LARGER") + " in thick gold thread; FIVE stacked WIDE gold collar bands; a jade-and-gold belt with a long " + Y + " rank ribbon (shou) with jade rings and two zupei; " + SIG[7] + NOC),
+  + Y + " cuffs, two broad " + Y + " front bands edged with pearls; " + DENSE.format(sz="LARGER") + " in thick gold thread; FIVE stacked WIDE gold collar bands; a gold belt with a long " + Y + " rank ribbon (shou); " + SIG[7] + NOC),
  8: ("Mùa Xuân · Thiết kế thời Hán · Hoàng hậu · Lễ phục gấm kim tuyến, thụ vàng + vân kiên ngọc trai",
   "the Empress's Han-dynasty grand ceremonial dress in FIVE visible layers, FABRIC the richest of all: heavy gold-thread brocade (gấm kim tuyến) richer than the "
   "Hoàng quý phi's brocade: the inner " + S2 + " robe, the " + M + " zhiju, the swallowtail guiyi layer (a DOUBLE ring of swallowtail points and many ribbon streamers), the Hoàng quý phi's "
   "long open-front " + M + " brocade over-robe, and over them all a NEW outermost layer: a grand long open-front mantle of " + Y + " gold-thread brocade to the floor with very wide sleeves "
   + SLV + " and broad " + M + " borders edged with pearls; all collars WIDE to the shoulders, SIX stacked WIDE gold-woven collar bands edged with pearls; the robe body and "
   "mantle densely embroidered ALL OVER with the LARGEST motifs of all ranks: big peonies, peach blossoms and clouds in gold and kingfisher-blue silk thread (far denser than any other rank); "
-  "the Empress's long " + Y + " silk shou hung with large jade rings falling to the hem, a jade-and-gold belt and two long zupei; many long "
+  "the Empress's long " + Y + " silk shou falling to the hem, a plain gold belt; many long "
   "strands of pearls and jade across the chest; " + SIG[8] + NOC + "slim tall silhouette; "),
 }
 for n, (cap, body) in OUT.items():

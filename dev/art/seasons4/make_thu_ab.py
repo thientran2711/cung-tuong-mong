@@ -15,7 +15,7 @@ V = {
   "fastened at the throat by a row of small gold-and-pearl buttons down the right front, long wide sleeves; across both shoulders and down the full length of each sleeve runs a WIDE woven gold "
   "band (tongxiu lan) of chrysanthemums and maple leaves, and the jacket body is densely embroidered all over with large chrysanthemums, maple leaves and small autumn birds in gold and blush pink; "
   "under it a long pleated MA-MIAN skirt (horse-face skirt) in bright blush pink with flat front and back panels and fine side pleats, carrying TWO wide woven gold bands (a broad knee band and a "
-  "hem band) of chrysanthemum scrolls; a gold-and-jade pendant set (jinbu) of linked jade plaques and pearl strands with long silk tassels hangs from the waist down the centre of the skirt front; "
+  "hem band) of chrysanthemum scrolls; "
   "RANK BLOCK, clearly visible at game size: a large square embroidered gold medallion on the chest of the jacket, framed by a double gold border, plus the shoulder-and-sleeve gold bands and the "
   "two gold skirt bands; no cape, no cloud collar, no shoulder piece; a sheer silk shawl; hair in a smooth Ming-style high bun with a gold diadem; a LARGER gold headdress "
   "with dangling gold tassels and jade pins; "),
@@ -24,8 +24,7 @@ V = {
   "the throat by gold-and-pearl buttons (its sleeves hidden inside); over it a LONG open-front over-robe (pifeng) reaching the ankle, with long wide sleeves and two broad straight front bands from the neck to the hem, "
   "each band densely embroidered in gold thread with chrysanthemum and maple-leaf scrolls, the front closed at the chest by one large gold-and-jade clasp; the over-robe body richly embroidered "
   "all over with large chrysanthemums, maple leaves and small autumn birds in gold and blush pink, a deep embroidered border along its hem and side slits; under it a long pleated MA-MIAN skirt "
-  "(horse-face skirt) in bright blush pink, its flat front panel showing between the open fronts, with a wide woven gold band near the hem; a long gold-and-jade pendant set (jinbu) with pearl "
-  "strands and silk tassels hanging at the centre front; RANK BLOCK, clearly visible at game size: a large ROUND embroidered gold medallion of chrysanthemums on the chest and the two broad "
+  "(horse-face skirt) in bright blush pink, its flat front panel showing between the open fronts, with a wide woven gold band near the hem; RANK BLOCK, clearly visible at game size: a large ROUND embroidered gold medallion of chrysanthemums on the chest and the two broad "
   "gold-embroidered front bands; no cape, no cloud collar, no shoulder piece; a sheer silk shawl; hair in a smooth Ming-style high bun with a gold diadem; a LARGER gold "
   "headdress with dangling gold tassels and jade pins; "),
  "HAN_A": ("s62_t5_thu_HAN.txt", "Mùa Thu · Thiết kế thời Hán (cải tiến A) · Phi", "robe",
@@ -33,8 +32,8 @@ V = {
   "in a broad V, showing her neck and collarbones fully but modestly (never narrow near the neck, never a tight high crossing); the hem winds once around the body in a curved spiral wrap; "
   "very wide long sleeves gathered into broad embroidered cuff bands; the robe body densely embroidered all over in gold with large peonies, cloud scrolls and small birds; RANK BLOCK, "
   "clearly visible at game size: THREE stacked WIDE collar bands following the wide V out to the shoulders, the outer band light clear warm plum fully embroidered with gold-thread flowers, "
-  "the two inner bands bright blush pink with gold edges, the same triple band repeated on the spiral hem edge; a WIDE stiff embroidered waist belt with a gold buckle plaque and a long set "
-  "of jade discs and pearl strands (zupei) hanging on silk cords to the knee; no cape, no cloud collar, no shoulder piece; a sheer silk shawl; a LARGER gold headdress with dangling gold tassels "
+  "the two inner bands bright blush pink with gold edges, the same triple band repeated on the spiral hem edge; a WIDE stiff embroidered waist belt with a gold buckle plaque; "
+  "no cape, no cloud collar, no shoulder piece; a sheer silk shawl; a LARGER gold headdress with dangling gold tassels "
   "and jade pins; "),
  "HAN_B": ("s62_t5_thu_HAN.txt", "Mùa Thu · Thiết kế thời Hán (cải tiến B) · Phi", "outer robe",
   "a NEW outfit, a full Han-dynasty court look in TWO visible robe layers: a long straight-hem outer robe (zhiju) reaching the floor and an inner robe in bright blush pink; the crossed collars "
@@ -42,7 +41,7 @@ V = {
   "neck), the pink inner collar showing as a wide layered edge inside the plum outer collar; the outer robe's very wide long sleeves end in deep embroidered cuffs (one single sleeve layer, the inner sleeves hidden "
   "inside); the outer robe body densely embroidered all over in gold with large peony medallions, autumn chrysanthemums and cloud-and-bird scrolls; a deep embroidered border "
   "along the whole hem and the front opening; RANK BLOCK, clearly visible at game size: THREE stacked WIDE gold-edged collar bands in the wide V (outer light clear warm plum fully embroidered "
-  "in gold, inner two bright blush pink) and a broad embroidered waist sash tied in a flat knot, with two long jade pendants on silk cords; no cape, no cloud collar, no shoulder piece; a sheer "
+  "in gold, inner two bright blush pink) and a broad embroidered waist sash tied in a flat knot; no cape, no cloud collar, no shoulder piece; a sheer "
   "silk shawl; a LARGER gold headdress with dangling gold tassels and jade pins; "),
 }
 for k, (base, cap, g, body) in V.items():
