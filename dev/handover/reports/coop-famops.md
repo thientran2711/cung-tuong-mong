@@ -134,3 +134,20 @@ r3 fixes (ba28d7d4, jcoopworld.js):
 (d) faults.json now carries both seats' __why (why = host, whyB = guest).
 (c) hoadien_bac host-entry rebuild: not reproduced in 3 seed-4242 runs this session; not changed.
 Gates on ba28d7d4: unit 19/19 · others running (see STATUS lines).
+
+### E44b r3 final (20:20Z)
+| # | road | before | after |
+|---|---|---|---|
+| 16 | jlost loEntry on co-op: the seats number cases on their own; her copies of the host's people carry HIS lo marks | her case 1 (lxma2) took host case 1's lxson2 (iu 31) as holder copy: census synced c.e.iu / c.at → ret closed onto it (SWAP w4 dup 31 + vanish 10000012) | a piece of ANOTHER KIND is never a case's holder copy (no entry, c.at kept) |
+| 17 | b4Send from the GUEST (lostReturn hook) | dOn() → D.resTo ran the «ret» locally on the guest: host case stayed «held by 902» (SWAP vanish 399 / 1571; root found by E44r) | D.resTo on the host only (as sendRes); the guest's res goes COOP.send → host onRes |
+Heads: ba28d7d4 (14, 15) · 56850f9f (15 kind fallback, asked by E44r) · 263304f5 (16) · 24196bf0 (17) · 4d16236d (site build) · **6b11f8fa merge LIVE 0faf7a05** (G1 frozen list 3930 > LIVE 3592 before the merge).
+| gate | result |
+|---|---|
+| coop-famops-unit | 21/21 (6b11f8fa) |
+| coop-e2e (LIVE suite) | 124/124 (6b11f8fa); 94/94 (24196bf0, old suite) |
+| quickcheck + old save | PASS, core gates PASS (6b11f8fa) |
+| coop-b1 | 43/43 (56850f9f; ba28d7d4 39/43 = laydo picked a used-up «Than liễu», no case by design) |
+| role-parity ×2 | ALL PASS ×2 (4d16236d) |
+| 76 wk COOP_SWAP | 24196bf0: dup0 van0 (88/90: 2 traffic FAILs, LIVE theft odds) |
+| 76 wk seed 4242 | 24196bf0: dup0 van1 (148 vongvang = (c)) |
+OPEN (c) → follow-up branch review/coop-famops-c 7e13e936 (from 4d16236d): ilGone wrapper — a piece OWNED by the friend leaving me with no live owner entry (her entry pulled out at week end) goes to her seat as «ret» + ilSent, never into MY box «di vật» (148: her box nvp:dead w35 → sold → bought by a host-NPC copy). unit 22/22; seed 4242 76 wk running.
