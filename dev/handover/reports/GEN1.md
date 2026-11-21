@@ -262,3 +262,12 @@ gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr eac
 | t5 Phi v6b | s62_t5_THU_COMOIi | hu2eAbgvqL | https://www.magnific.com/app/creation/hu2eAbgvqL |
 Sheets: dev/handover/review-sheets/thu_t4_t5_v6b/sheet_t4.png, sheet_t5.png
 Look: t4 – 3/4 left, hair up, ONE lotus, bare ears, white-jade lotus lamp held, wide pink sash flat no bow over the plum robe, round net capelet with petal lobes + pearl fringe, one jade pendant set, sheer shawl. t5 – frontal, ONE hollyhock, bare ears, letter in both hands, capelet + net + small shoulder layers, two jade pendants; a couple of fine loose wisps by the cheeks; the girdle is mostly hidden by the hands. No other faults seen.
+
+## L1653 drafts (CHECK1 PASS, Foreman C #16 release, DESIGN22 31af161) — thu t4 COMOIk + t5 COMOIj
+gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr each (110 total, drafts only per K29). Both files in 31af161 (ancestor of HEAD, unchanged since), check_store PASS tp4/tp5. t1–t3 / t6–t8 not drawn.
+| pic | file | creation | link |
+|---|---|---|---|
+| t4 Tần | s62_t4_THU_COMOIk | 9ZHSjoTNYZ | https://www.magnific.com/app/creation/9ZHSjoTNYZ |
+| t5 Phi | s62_t5_THU_COMOIj | mEZp0UIhJQ | https://www.magnific.com/app/creation/mEZp0UIhJQ |
+Sheets: dev/handover/review-sheets/thu_t4_t5_L1653/sheet_t4.png, sheet_t5.png ('… · L1653 · GPT 2.6 low · 55 cr', Tổng 110 cr). Caption inside both pictures still reads "v6b" (as in the prompt files).
+Look: t4 – 3/4 left, hair up, ONE lotus, bare ears, white lotus held on a gold stalk (reads more like a lotus flower on a handle than a lamp), flowered brocade sash at the centre (tied with a small knot and short loops – borderline "no bow"), net capelet with pearl fringe, one jade pendant set. t5 – frontal, ONE hollyhock, bare ears, letter in both hands, gold flowered girdle, short pearl swag across the chest (G49 visible), two jade pendants, shoulder layers. No other faults seen.
