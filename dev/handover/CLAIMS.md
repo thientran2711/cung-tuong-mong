@@ -636,6 +636,12 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | menu-panel (sonnet; OWNER mark #37 21/11 ~03:28Z: one kit menu-panel size, no narrow tall frame) | review/menu-panel; briefs/main85-menu-panel.md | MAIN CHÍNH 85 | session_01Rc5AsMQiepfa9AQYno5iem | READY 0f2dc4fa (base b1033eb0) | 21/11 02:56Z |
 | mood-seal (sonnet; OWNER mark #39 21/11 ~03:35Z: mood dialogs show the emotion seal in the corner) | review/mood-seal; briefs/main85-mood-seal.md | MAIN CHÍNH 85 | session_01Rc5AsMBnmtrbTbNUDqJf9M | READY 62f4b11e (base b1033eb0; qc PASS, coop 68/68; reports/mood-seal.md) | 21/11 03:01Z |
 | REVIEW bag-inline (SMALL sonnet) of a8ef23ce + merge LIVE | review/bag-inline-rv; briefs/main85-rv-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsNNxkaFhociEYPGYWR | DONE PASS 5e1f97ef (reports/rv-bag-inline.md) | 21/11 03:02Z |
+| chapter-card (sonnet; OWNER marks #26/#27 21/11 ~02:58Z–03:02Z: every Mệnh truyện sub-tab big picture card) | review/chapter-card; briefs/main85-chapter-card.md | MAIN CHÍNH 85 | session_01Rc5AsMDAsVpNsL2CKbpUuC | RUNNING | 21/11 02:41Z |
+| REVIEW empty-states (SMALL sonnet) of 4fe91dcc + merge LIVE | review/empty-states-rv; briefs/main85-rv-empty-states.md | MAIN CHÍNH 85 | session_01Rc5AsKYVABSkdoN1RAuKBR | DONE: FAIL (Ân oán squash) reports/rv-empty-states.md | 21/11 |
+| maid-8tabs (OPUS; OWNER mark #32 21/11 ~03:15Z: maid road = same 8 bottom tabs, no locks, mapping table) | review/maid-8tabs; briefs/main85-maid-8tabs.md | MAIN CHÍNH 85 | session_01Rc5AsN3dAttmwAANVGfgtX | RUNNING | 21/11 02:49Z |
+| menu-panel (sonnet; OWNER mark #37 21/11 ~03:28Z: one kit menu-panel size, no narrow tall frame) | review/menu-panel; briefs/main85-menu-panel.md | MAIN CHÍNH 85 | session_01Rc5AsMQiepfa9AQYno5iem | READY db5a6bfa (base 32c0e33b) | 21/11 02:56Z |
+| mood-seal (sonnet; OWNER mark #39 21/11 ~03:35Z: mood dialogs show the emotion seal in the corner) | review/mood-seal; briefs/main85-mood-seal.md | MAIN CHÍNH 85 | session_01Rc5AsMBnmtrbTbNUDqJf9M | RUNNING | 21/11 03:01Z |
+| REVIEW bag-inline (SMALL sonnet) of a8ef23ce + merge LIVE | review/bag-inline-rv; briefs/main85-rv-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsNNxkaFhociEYPGYWR | RUNNING | 21/11 03:02Z |
 | kit-rel2-span KIT KEEPER (sonnet; MAIN 85 follow-up, lone kitRel2 box spans the row) | review/kit-rel2-span; reports/kit-rel2-span.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 23afdbea (small; quickcheck PASS) | 21/11 |
 | MAIN CHÍNH 86 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 86 | session_01Rc5AsMD1wiu8K7eDmipUR4 | DONE → MAIN CHÍNH 87 session_01Rc5AsLqvvursHGF726bgwU | 21/11 03:15Z |
 | calendar (sonnet; OWNER mark #42 21/11 ~03:43Z: Lịch tháng = phone-calendar month view) | review/calendar; briefs/main86-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:10Z |
@@ -699,3 +705,7 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | REVIEW kit-dialog (SMALL sonnet) e8d30ca7 (#44 #47 #49 #56) | review/kit-dialog-rv; briefs/main87-rv-kit-dialog.md | MAIN CHÍNH 87 | session_01Rc5AsMkZzqq4sedCmM32A4 | RUNNING | 21/11 04:01Z |
 | mgcraft-theu (opus; owner 21/11 ~01:05Z keep Thêu «Nhớ mẫu thêu», stitch board → Công «Thêu theo nét»; brief briefs/b-mgcraft-theu.md) | review/mg-craft-r2-land | B | session_01N1tNP3uti359quj6nveReC | READY e4e0241b (contains LIVE 56ff0db0; report reports/mg-craft.md «owner 01:05Z theu») |
 jagday-walk-rv stale re-merge | review/jagday-walk-rv | session_01964izGLLhhhTBcSZM9UCJ2 | RUNNING | 21/11 04:04Z (D #13; succeeds GHdj1g2L)
+| calendar | review/calendar | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:3xZ |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
+kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
