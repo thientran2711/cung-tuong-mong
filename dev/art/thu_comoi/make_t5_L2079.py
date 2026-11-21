@@ -7,7 +7,7 @@ for s,base in B.items():
     m=re.search(r"framed by a wide flat band in her second colour embroidered with ([^,]+), always fully visible,",t)
     fl=m.group(1); old=m.group(0)
     new=(f"framed by a wide flat band in her second colour embroidered with {fl} (the square band stops at the shoulders, nothing rises up the neck, neck bare), always fully visible, "
-         f"a large cluster of {fl} embroidered in gold thread in the middle of the chest panel, centred between the neckline band and the sash, part of the robe's embroidery, larger than the Tần's, never inside the neckline, never framed,")
+         f"a large cluster of {fl} embroidered in gold thread in the UPPER middle of the chest panel, just under the neckline band, never hidden by the held item, part of the robe's embroidery, larger than the Tần's, never inside the neckline, never framed,")
     assert t.count(old)==1; t=t.replace(old,new)
     o2='never hiding the square collar;'
     assert t.count(o2)==1

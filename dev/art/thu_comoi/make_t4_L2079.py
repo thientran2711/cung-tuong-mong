@@ -6,7 +6,7 @@ for s,fl in FL.items():
      ("of embroidered silk, its lower edge cut into 5 or 6 LARGE round petal lobes (never small waves), each lobe gold-edged, its neck edge plain capelet silk",
       "of embroidered silk with a soft scalloped wavy (lượn sóng) lower edge, its neck edge plain capelet silk"),
      ("a pearl drop at each lobe tip","a short pearl fringe stitched along its scalloped lower edge"),
-     ("neck bare), always fully visible,", f"neck bare), always fully visible, a medium cluster of {fl} embroidered in gold thread in the middle of the chest panel, centred between the neckline band and the sash, part of the robe's embroidery, never inside the neckline, never framed,"),
+     ("neck bare), always fully visible,", f"neck bare), always fully visible, a medium cluster of {fl} embroidered in gold thread in the UPPER middle of the chest panel, just under the neckline band, part of the robe's embroidery, never inside the neckline, never framed,"),
      (", never cross-eyed, never wall-eyed",""),
         ]
     LC='CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:'
