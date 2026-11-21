@@ -1,0 +1,10 @@
+base: dev/handover/prompts_L2095/M2213-02_s62_t2_thu.txt
+allow: a fine silk robe with a straight SQUARE collar  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: no crossed collar  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: a LOW open square neckline just below the collarbones  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: neck and collarbones bare  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: NEVER a high stand collar or mandarin collar  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: framed by a wide flat lilac band  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
+allow: delicate embroidered tiger lilies at the collar  # L2232 #2 density swap t2<-t3 + size ladder; L2228 neck (ROOT-B7)
+allow: sleeves and hem  # L2232 #2 density swap t2<-t3 + size ladder; L2228 neck (ROOT-B7)
+allow: its two front edges parting so the square collar stays fully visible  # owner L2228 G76 low neckline a18-a36 via lowneck_L2228.post (NECK1 wording)
