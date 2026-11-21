@@ -130,12 +130,14 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
  return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
- const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
+ /* the residence line (owner 21/11 ~02:16Z): ONE sentence from houseLine (chủ vị / ở cung của ta / cùng cung) about the person who is not Ta */
+ const z=p===S?o:o===S?p:null;const hl=z&&z!=="emp"&&z!=="th"&&typeof houseLine==="function"?houseLine(z,"ta"):"";
+ const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+(hl?`<p class="kr3note">${hl}.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
+ /* KIT §49.2d: the card is the relation table only — full width, as tall as its content (the two faces are the picker slots above) */
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
-  `<div class="krel3 krpair">${relSide(X)}<div class="kr3m">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${relSide(Y)}</div>${known}</div>`}
+  `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
   return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};

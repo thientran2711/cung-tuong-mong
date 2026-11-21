@@ -1,4 +1,5 @@
 # rel-picker-r3 (worker, 21/11)
+ADD-ONS (MAIN 84): (1) compact relation card, no portraits, full-width kit table: card bottom Fold 739→470, iPad 711→410. (2) houseLine(p,me) in j27: chủ vị / ở cung của ta / cùng cung; generators fixed: j15, j6, j78, jhc (grep of "Cùng … với" found only these four; the rest of "Cùng" hits are unrelated action names). Owner screenshots owner-2111-* were not on the handover branch when I fetched; worked from the verbatim text.
 PRIORITY #1 CHECK: OD L357, L898-902, 18/11 item 3, 21/11 02:12Z | main: rel-picker-r2 9a1d6922 (two strips) | review/rel-picker{,-r1,-r2} older | claims none.
 Result: Giao tình > Ân oán picker = ONE row «[face Ta ▾] ⇄ [face Hoàng thượng ▾]» + kit popup (kitModal, kitSubTabs group tabs + pager strip). Code: dev/build/jhc.js (hcRelHTML/relCands/relSlot/relPopOpen), KIT.md §49.2d, test dev/test/relpick-scan.js.
 Before → after (picker height / card bottom): Fold 167→55 px / 739→629; iPad 154→55 px / 711→613. Card + both portraits + relation table visible without scrolling on both.

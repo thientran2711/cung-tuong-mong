@@ -577,8 +577,8 @@ Contest boards = palace contest grounds with empty galleries, red curtains, lant
 | Đàn (`dan`, học Cầm) | sân khấu nhạc, sàn gỗ bóng | phòng đàn: cổ cầm bên cửa sổ trăng | `dan-blossom` (hoa mai rơi), `dan-bridge` (nhạn đàn), `dan-tassel` |
 | Hát (`hat`) | sân hát bên hồ sen đêm trăng | — (không có bài học) | `hat-lotus` (đóa sen theo giọng) |
 | Cờ (`co`, học Kỳ) | bàn đá cẩm thạch dưới đình | thư phòng cờ bên rừng trúc | `co-board` (bàn cờ gỗ trơn, kẻ 7×7 bằng nét), `co-black`, `co-white` |
-| Đầu hồ (`dauho`) | sân lát đá | — | `dauho-pot` (bình đồng hai tai; miệng = 42 % bề ngang, tai ±1,6 miệng), `dauho-arrow` |
-| Bắn cung (`ban`) | trường bắn cỏ xanh, lối cát | — | `ban-target` (bia trên giá; mặt bia = cả bề ngang, tâm ở 42 % chiều cao), `ban-arrow` |
+| Đầu hồ (`dauho`) | sân lát đá | — | `dauho-pot` (bình đồng hai tai; holes measured on the picture = the scoring holes, BAL.mgArt.dauho: mouth opening, lip, neck, two ear tubes lower than the mouth; dauho-lv5), `dauho-arrow` |
+| Bắn cung (`ban`) | trường bắn cỏ xanh, lối cát | — | `ban-target` (bia trên giá; face centre at BAL.mgArt.ban.cy of the height; the painted rings = the scoring rings, BAL.mgArt.ban.ring; dauho-lv5), `ban-arrow` |
 | Thơ (`tho`, học Thi) | án thư dài phủ dạ | thư phòng, án thư giấy trắng | `tho-slip` (thẻ giấy kem viền vàng; vẽ 3 khúc giữ viền) |
 | Câu đối (`doi`) | vách vôi ngà giữa cột son, hai liễn đỏ để trống | — | `doi-slip` (thẻ giấy hồng điều nhũ vàng, chữ kem) |
 | Đố đèn (`doden`) | sân hội hoa đăng ban đêm | — | `doden-panel` (mặt đèn khung son; lời đố viết lên rồi cắt 9 mảnh), `doden-lantern` (đèn đỏ có ô kem ghi lời giải) |
@@ -590,6 +590,7 @@ Contest boards = palace contest grounds with empty galleries, red curtains, lant
 | Nấu ăn (`banh`, học Nấu nướng) | bếp hội thi ngoài trời | bếp riêng trong cung | `banh-stove`, `banh-pot`, `banh-flame` (cao theo độ lửa), 19 nguyên liệu `banh-<nuoc·sen·nhan·duong·ga·thuoc·tao·kytu·gao·dung·yen·xuong·cusen·hanh·ot·giam·mam·ruou·muoi>` (ô nguyên liệu = thẻ giấy + ảnh) |
 | Điều hương (`huong`, học Y thuật & điều hương) | bàn gỗ trải lụa rêu, khói nhẹ | phòng hương dược, kệ hũ | `huong-censer` (lư dưới làn khói), 7 hũ `huong-<tram·nhai·que·hong·bacha·dan·moclan>` (núm thanh trượt) |
 | Chải chuốt · Điểm trang (`chai`, review/wardrobe + review/toilette jtoil) | `mg-chai-bg`: bàn trang điểm, gương đồng mờ, hộp trang sức | — | `chai-brow` (bút kẻ mày; đầu bút ở góc trên phải ảnh, ax .95 ay .02), `chai-puff` (bông phấn), `chai-rouge` (hộp son + giấy son) |
+- **Điều hương near/far cue (huong-cue, owner OD 21/11 ~00:40Z)** — no word: a ring round her smoke swatch (width + colour step with closeness: hair → brown → gold → `--good` + glow `BAL.mgFx`) and a gauge of `BAL.mgTier.blend.star.length` pills in the same colours (0 empty … all full = matched). Steps are the SAME `BAL.mgTier.blend.star` thresholds as the grade; verdict ★ replaces the gauge after «Dâng hương». Drawn on the canvas in `k91Blend` (live marks only).
 
 All 15 contest kinds + the 8 lessons (cam→dan, ky→co, thi→tho, hoa→ve, vu→mua, y→huong, theu, nau→banh) + practice/works (`playArt`) use these; any new mini-game adds its own `mg-<k>-bg(-hoc)` + sprites here first.
 HUD: "Phần x/10 · Hồi x/y · Còn …" (every round/throw/vase/lantern = "Hồi"); standings heading "Bảng định thứ"; never "điểm".
@@ -4467,3 +4468,5 @@ Option field `ton:{tamco:-n}` / `ton:{bac:-pr}` (j17 `dilTon`, used by `dilLine`
 
 ### 49.2d GIAO TÌNH › ÂN OÁN PICKER = ONE ROW OF TWO PERSON SLOTS (owner 21/11, 3rd time "bớt chiếm không gian"; review/rel-picker-r3) — `hcRelHTML` / `relCands` / `relSlot` / `relPopOpen` (jhc)
 Replaces the two chip+strip blocks of §49.2c. ONE row «[face Ta ▾] ⇄ [face Hoàng thượng ▾]» (kit face `mdH` xs + `kitNameRank` small, `.pface.krslot`); ⇄ swaps X and Y. A slot opens a kit dialog (`kitModal`, kind notice, content class `kpick` so the live frame keeps it a plain list) with the group tabs (`kitSubTabs`: Ta · Chí tôn · Phi tần) over the Hậu cung pager strip (`pager`, ‹ › only when the faces overflow). The relation card starts right under the row. Picker height 154 → 55 px (Fold + iPad). Men / servants are not relation persons (`relPerson` knows Ta, Hoàng thượng, Thái hậu, consorts only), so their tabs do not exist. Gate: `node dev/test/relpick-scan.js <url> <outdir> <tag>`.
+
+**49.2d addendum (owner 21/11 ~02:14Z + ~02:16Z):** the relation card = heading + the kit relation table (`kitRel2`, both directions) + residence line + action + «Đã biết về», NO portraits (the two faces are the picker slots); height = content (Fold card bottom 739 → 470 px, iPad 711 → 410). Residence wording = ONE function `houseLine(p, me)` (j27): «Chủ vị <cung>, nơi ta ở» (p heads the palace she lives in) · «Ở <cung> của ta» (she heads it, p lives under her) · «Cùng <cung> với ta» (two non-head housemates only). Generators switched to it: j15 (Phi tần act note), j6 (person card note), j78 (busy reason), jhc (Ân oán card).
