@@ -239,3 +239,24 @@ Checklist, t4 / t5:
 
 Verdict: **t4 PASS · t5 PASS.**
 Old note, not blocking: t5 "broad gold brocade girdle" sits next to B_LIGHT "NOT brocade".
+
+## JOB 9 (DESIGN20 751e3a5) — thu s62 t4 COMOIg + t5 COMOIf (v7) vs v6 · checked at 037a98e · 0 gens
+Gates:
+- tp4 / tp5 a22 PASS; keep PASS. Chars: 9981 / 9981.
+- Store mode: only the Outfit sentence [0.70] / [0.73] = the exemption.
+
+The diff against v6 is only what was asked:
+- (d) "at sleeves and outer hem" ✓
+- (e) capelet "linked across the chest by a silk cord with a jade clasp in the middle" (G46) ✓
+- t3's TWO embroidered blush APRON PANELS carried up (Foreman YES), with a jade pendant set at each outer side, "never covered by sleeve or shawl" (G45) ✓
+- Trims, all A38:
+  - the capelet "(never hiding the neck or the square inner neckline)" (the capelet is still OPEN at the front);
+  - t4 "neck and collarbones visible";
+  - the pose tails ("skirt swirling / robe hem stirring").
+- G46: t5 still has the t4 capelet text verbatim (527 chars) ✓.
+- The rest of the standing checklist is unchanged from job 8 ✓ (OUTER_TIED, neckline band, chest, vertical panels, outer + inner hem, cuffs, jade, centred no bow).
+
+Verdict: **t4 PASS · t5 PASS.**
+Notes (not blocking):
+- t4 no longer says "neck and collarbones visible" (t5 keeps "showing her neck and collarbones"; the low square neckline implies it).
+- t5 chest is "small double hollyhocks below it": the word "embroidered" and "many" were dropped, so t5 chest density = t4, a weak G42 "denser" step.
