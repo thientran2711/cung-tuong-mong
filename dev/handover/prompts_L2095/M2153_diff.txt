@@ -1,0 +1,49 @@
+M2153 — so sánh prompt Tần s64: TRƯỚC (M2153-01) và SAU (M2153-02)
+Số ký tự: TRƯỚC 10615 — SAU 9656 — bớt 959
+
+[1] TRƯỚC: The whole face clearly visible, eyes fully open
+    SAU  : Eyes fully open
+
+[2] TRƯỚC: Bare clean forehead, no forehead mark, no moles.
+    SAU  : No moles.
+
+[3] TRƯỚC: Every hairpin points upward or backward, never sticking out sideways.
+    SAU  : (bỏ hẳn)
+
+[4] TRƯỚC: gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant,
+    SAU  : Elegant,
+
+[5] TRƯỚC: and a soft warm look, fully open, the gaze
+    SAU  : and a soft warm look, the gaze
+
+[6] TRƯỚC: a small sweet closed-lip smile, eyes fully open, never a stretched grin
+    SAU  : a small sweet closed-lip smile, never a stretched grin
+
+[7] TRƯỚC: long trailing wide sleeves,
+    SAU  : (bỏ hẳn)
+
+[8] TRƯỚC: her signature colour family muted teal and ivory stays the MAIN robe colour (muted teal); the robe itself is clearly muted teal silk, gold only as embroidery accents, NOT
+    SAU  : her signature colour family muted teal and ivory; the robe itself is clearly muted teal silk, NOT
+
+[9] TRƯỚC: with ivory in the inner robe and linings; gold only as thin accents. Hair:
+    SAU  : with ivory in the inner robe and linings. Hair:
+
+[10] TRƯỚC: Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with ONE fresh soft pale lilac double kerria pompon (the bloom ONLY, NO leaves) and several gold hairpins
+    SAU  : Hair: her own hair colour, decorated with several gold hairpins
+
+[11] TRƯỚC: The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like.
+    SAU  : (bỏ hẳn)
+
+[12] TRƯỚC: rounded petal-like lobes along the lower edge, like
+    SAU  : rounded petal-like lobes, like
+
+[13] TRƯỚC: The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face
+    SAU  : The whole face
+
+[14] TRƯỚC: toward the viewer, eyes open, lips closed, never looking down
+    SAU  : toward the viewer, never looking down
+
+[15] TRƯỚC: Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe, only slipper toe tips peeking under the hem, no train, no cup, nothing covering the face.
+    SAU  : Floor-length robe, only slipper toe tips peeking under the hem, no train.
+
+CAPTION: "M2153-01" -> "M2153-02"

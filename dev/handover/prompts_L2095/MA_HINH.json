@@ -81,5 +81,7 @@
  "M2147-07": "M2147-07_HoangQuyPhi_s62_thu_phuong_khuy.txt (Hoàng quý phi = M2148-01 (phượng) + khuy cài cổ)",
  "M2147-08": "M2147-08_HoangHau_s62_thu_phuong_khuy.txt (Hoàng hậu = M2148-02 (phượng) + khuy cài cổ)",
  "M2147-09": "M2147-09_HoangQuyPhi_s62_thu_mem_khuy.txt (Hoàng quý phi = M2145-01 + khuy cài cổ)",
- "M2147-10": "M2147-10_HoangHau_s62_thu_mem_khuy.txt (Hoàng hậu = M2145-02 + khuy cài cổ)"
+ "M2147-10": "M2147-10_HoangHau_s62_thu_mem_khuy.txt (Hoàng hậu = M2145-02 + khuy cài cổ)",
+ "M2153-01": "M2153-01_Tan_s64_thu_TRUOC.txt (Tần s64 TRƯỚC khi cắt gọn = M2144-01)",
+ "M2153-02": "M2153-02_Tan_s64_thu_SAU.txt (Tần s64 SAU khi cắt gọn, chỉ bỏ chữ lặp)"
 }
