@@ -25,4 +25,4 @@ depth 6 · START_CTX ≈ 3 % (get_session read 0; own estimate)
 - t6 QP: phi bạch a little LESS see-through than t1–t5 (owner L1847; G54 wording) — to apply when t6 is edited.
 
 ## Draw
-- sent to VE9 session_01D3E3NY6tdajnq7tHvQhexg @55 (#25 redirect; VE6 request cancelled), sheet ha_t1_t3_L1847.png next to t4 yiugBgJPW9. Ids: (VE6 reports)
+- sent to VE9 session_01D3E3NY6tdajnq7tHvQhexg @55 (#25 redirect; VE6 request cancelled), sheet ha_t1_t3_L1847.png next to t4 yiugBgJPW9. Drawn by VE9 (165 cr): t1 VX7zPFbMMU · t2 mEZdzPqhJQ · t3 p8yWN9kehw · sheet dev/handover/review-sheets/ha_t1_t3_L1847.png (t1|t2|t3|t4 yiugBgJPW9). VE9 check: no jade ✓, small embroidery ✓, phi bạch sheer pine-pollen behind back/over forearms ✓. Faults (NOTE only, no redraw without owner yes, A20/A21): t2 pellet drum reads flat/paddle-like (possible item-shape words, F18); t3 not a clear 45° three-quarter. Waiting owner verdict.
