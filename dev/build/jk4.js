@@ -1142,8 +1142,25 @@ html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!impo
 #panel:has(> .pgwrap > .pc) > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
 #panel > .pgwrap:has(> .pc) > *{flex:0 0 auto}
 #panel > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+#panel:has(> .pgwrap.krelpg){display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#panel:has(> .pgwrap.krelpg) > *{flex:0 0 auto}
+#panel:has(> .pgwrap.krelpg) > .pgwrap.krelpg{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
+#panel > .pgwrap.krelpg > *{flex:0 0 auto}
+#panel > .pgwrap.krelpg > :last-child{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+/* KIT §6.3d (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (Hoàng tự tabs: «Con các nhà quyền thần chưa hứa hôn…», «Con của các phi tần khác…», counts) are NOT drawn: a kit round «!» sits at the TOP-RIGHT corner of
+   the top block and opens them in the kit info popup, so the top block has ONE fixed size whatever the text length. */
+#panel > .pgwrap{position:relative}
+#panel > .pgwrap > .ph.kpintro{display:none!important}
+#panel > .pgwrap > .kppbang{position:absolute;top:4px;right:6px;margin:0;z-index:7;cursor:pointer}
 `;document.head.appendChild(st)})();
-(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+function kitPcIntroBang(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll("#panel > .pgwrap").forEach(g=>{const ph=g.querySelector(":scope > .ph");const have=g.querySelector(":scope > .kppbang");
+ if(!ph){if(have)have.remove();return}ph.classList.add("kpintro");g.__kpintro=[...ph.children].map(x=>`<p>${x.innerHTML}</p>`).join("");
+ if(!have){const i=document.createElement("i");i.className="khap kppbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";g.prepend(i)}})}catch(e){console.error("kitPcIntroBang",e)}}
+window.kitPcIntroBang=kitPcIntroBang;
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
+ if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document);kitPcIntroBang(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */

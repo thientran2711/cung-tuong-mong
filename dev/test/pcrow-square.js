@@ -6,8 +6,8 @@
    scenes: pop-maid pop-elder tab-rv tab-court tab-staff tab-art tab-kid tab-men gift-wk spy-pick */
 const {chromium}=require('playwright');const fs=require('fs');const cp=require('child_process');
 const [,,URL,OUT,SIZES,SCN]=process.argv;fs.mkdirSync(OUT,{recursive:true});
-const SCENES={'pop-maid':"popKind('maid')",'pop-elder':"popKind('elder')",'tab-rv':"tabGo('rv')",'tab-court':"tabGo('court')",'tab-staff':"tabGo('staff')",'tab-art':"tabGo('art')",'tab-kid':"tabGo('kid')",'tab-men':"tabGo('men')",'tab-kin':"kinGo()",'tab-rel':"tabGo('rel')",'gift-wk':"giftWk()",'spy-pick':"spyPickScene()"};
-const cdn={};
+const SCENES={'pop-maid':"popKind('maid')",'pop-elder':"popKind('elder')",'tab-rv':"tabGo('rv')",'tab-court':"tabGo('court')",'tab-staff':"tabGo('staff')",'tab-art':"tabGo('art')",'tab-kid':"tabGo('kid')",'tab-men':"tabGo('men')",'tab-kin':"subGo('Hoàng tự trong cung')",'tab-kvo':"subGo('Kế vị')",'tab-hon':"subGo('Hôn sự')",'tab-qt':"subGo('Quý tộc kén rể')",'tab-rel':"tabGo('rel')",'gift-wk':"giftWk()",'spy-pick':"spyPickScene()"};
+const cdn={};const TOPS={};
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||"755x1000,1000x755,1180x820,1366x1024,844x390").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
@@ -23,7 +23,7 @@ const cdn={};
    window.popKind=k=>{Q.length=0;document.getElementById('modal').hidden=true;tab='act';S.out=0;S.confined=0;render();const ps=curPeople();const i=ps.findIndex(x=>x.kind===k);if(i<0)return 'none';popIdx=i;popMsg='';renderStage();return 'ok'};
    window.giftWk=()=>{Q.length=0;document.getElementById('modal').hidden=true;tab='art';S.out=0;render();S.inv.push(wkMake(S,'khuc',0,10));GIFT_TAB=null;itemAct('gift',S.inv.length-1);showModal();showModal();return 'ok'};
    window.spyPickScene=()=>{Q.length=0;document.getElementById('modal').hidden=true;tab='act';S.out=0;render();const ps=curPeople();popIdx=ps.findIndex(x=>x.kind==='maid');renderStage();spyPick(0);return 'ok'};
-   window.kinGo=()=>{const v=rivals.find(x=>x.alive&&!x.out)||rivals[0];if(!v.kids)v.kids=[];if(!v.kids.length)v.kids.push(mkKid('m',5));Q.length=0;document.getElementById('modal').hidden=true;tab='kid';try{K3SH.home=false}catch(e){};render();try{k3Shell()}catch(e){};const b=[...document.querySelectorAll('button,.pct')].find(x=>/Hoàng tự trong cung/.test(x.textContent)&&x.children.length<3);if(b)b.click();return 'ok'};
+   window.subGo=(lab)=>{const v=rivals.find(x=>x.alive&&!x.out)||rivals[0];if(!v.kids)v.kids=[];if(!v.kids.length)v.kids.push(mkKid('m',5));Q.length=0;document.getElementById('modal').hidden=true;tab='kid';try{K3SH.home=false}catch(e){};render();try{k3Shell()}catch(e){};const b=[...document.querySelectorAll('button,.pct')].find(x=>x.textContent.indexOf(lab)>=0&&x.children.length<3);if(b)b.click();return 'ok'};
    window.tabGo=t=>{Q.length=0;document.getElementById('modal').hidden=true;tab=t;try{K3SH.home=false}catch(e){};render();try{k3Shell()}catch(e){};return 'ok'}},process.env.NOMEET==='1');
   await p.waitForTimeout(1500);
   for(const sc of (SCN?SCN.split(","):Object.keys(SCENES))){await p.evaluate(SCENES[sc]);await p.waitForTimeout(2500);await p.addStyleTag({content:'.kmov,#curtain,#buoitr,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(300);
@@ -33,7 +33,10 @@ const cdn={};
    if(sc==='spy-pick'){const g=await p.evaluate(()=>{const M=document.getElementById('modal');const rows=[...M.querySelectorAll('.opts>button.ka')].filter(b=>!/Thôi/.test(b.textContent));
      return{rows:rows.length,noface:rows.filter(b=>!/^face/.test(b.dataset.kopic||'')).length,clipped:rows.filter(b=>{const body=b.querySelector('.kabody');return body&&body.getBoundingClientRect().bottom>b.getBoundingClientRect().bottom+1}).length}});
     const ok=g.rows>0&&!g.noface&&!g.clipped;if(!ok)bad++;console.log(wh,sc,JSON.stringify(g),ok?'PASS':'FAIL');await p.screenshot({path:`${OUT}/${wh}-${sc}.jpg`,type:'jpeg',quality:60});continue}
-   const m=await p.evaluate(()=>{const R=e=>e.getBoundingClientRect();const vis=e=>e.offsetParent&&R(e).width>0;const out={acts:[],cards:[]};
+   const m=await p.evaluate(()=>{const R=e=>e.getBoundingClientRect();const vis=e=>e.offsetParent&&R(e).width>0;const out={acts:[],cards:[]};{const g=document.querySelector('#panel>.pgwrap');const ph=g&&g.querySelector(':scope>.ph');const st=g&&g.querySelector(':scope>.pstrip');const bg=g&&g.querySelector(':scope>.kppbang');out.intro={ph:!!ph,phShown:!!(ph&&vis(ph)),bang:!!bg,bangIn:bg?(R(bg).right<=R(g).right+1&&R(bg).top>=R(g).top-1):false,stripTop:st?Math.round(R(st).top):null,gTop:g?Math.round(R(g).top):null};}
+    {const P=document.getElementById('panel'),pcw=P&&P.querySelector(':scope>.pgwrap>.pc'),st=P&&P.querySelector('.pstrip, .ph');
+     if(pcw&&st&&vis(pcw)){const t0=R(st).top;P.scrollTop=99999;pcw.scrollTop=99999;const t1=R(st).top;const acts=[...pcw.querySelectorAll(':scope>.pcr button.ka.kart')].filter(vis);const la=acts[acts.length-1];
+      out.frame={moved:Math.abs(t1-t0)>1,lastCut:la?R(la).bottom>R(P).bottom+2:false,panelScrolled:P.scrollTop>1};pcw.scrollTop=0;P.scrollTop=0}}
     for(const pc of [...document.querySelectorAll('.pc')].filter(vis)){
      const L=pc.querySelector(':scope>.pcl'),pcp=L&&L.querySelector(':scope>.pcp');const nm=L&&L.querySelector(':scope>.pcname'),rk=L&&L.querySelector(':scope>.pcrk');
      const cx=e=>{const r=R(e);return r.left+r.width/2};const wide=pc.classList.contains('kpwide');
@@ -48,10 +51,14 @@ const cdn={};
      return out});
    const A=m.acts,C=m.cards;const sizes=new Set(A.map(x=>x.aw+'x'+x.ah));
    const fails=[...A.filter(x=>x.aw!==x.ah||x.tallPic||x.bad.length||!x.boxUnder||!x.boxFull||x.over||x.cut).map(x=>'act '+JSON.stringify(x)),...C.filter(x=>x.cenName>3||x.cenRank>3||x.noteShown||(x.hasNote&&!x.bang)).map(x=>'card '+JSON.stringify(x))];
+   if(m.frame&&(m.frame.moved||m.frame.lastCut||m.frame.panelScrolled))fails.push('frame '+JSON.stringify(m.frame));
+   if(m.intro&&(m.intro.phShown||(m.intro.ph&&!m.intro.bang)||(m.intro.bang&&!m.intro.bangIn)))fails.push('intro '+JSON.stringify(m.intro));
+   if(m.intro&&m.intro.ph&&m.intro.stripTop!=null)(TOPS[wh]=TOPS[wh]||{})[sc]=m.intro.stripTop;
    if(sizes.size>1)fails.push('picture sizes differ: '+[...sizes]);
    const ok=!fails.length;if(!ok)bad++;
-   console.log(wh,sc,'cards',C.length,'acts',A.length,'pic',[...sizes].join('/'),ok?'PASS':'FAIL',ok?'':JSON.stringify(fails).slice(0,1500));
+   console.log(wh,sc,'frame',m.frame?(m.frame.moved?'MOVED':'fixed'):'-','cards',C.length,'acts',A.length,'pic',[...sizes].join('/'),ok?'PASS':'FAIL',ok?'':JSON.stringify(fails).slice(0,1500));
    await p.screenshot({path:`${OUT}/${wh}-${sc}.jpg`,type:'jpeg',quality:60})}
   if(errs.length){bad++;console.log(wh,'ERRORS',errs)}
   await ctx.close()}
+ for(const wh in TOPS){const v=Object.values(TOPS[wh]);if(v.length&&Math.max(...v)-Math.min(...v)>1){bad++;console.log(wh,'TOP BLOCK NOT ONE FIXED SIZE',JSON.stringify(TOPS[wh]))}else console.log(wh,'top block fixed size',JSON.stringify(TOPS[wh]))}
  await b.close();process.exit(bad?1:0)})();
