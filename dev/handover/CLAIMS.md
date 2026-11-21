@@ -623,3 +623,6 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 410c4f44 (small; quickcheck PASS) | 21/11 |
+| kit-dialog (sonnet; OWNER marks #44 seal, #47 figure size, #49 option card/fixed dialog — split from keeper) | review/kit-dialog; briefs/main86-kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:15Z |
+| REVIEW chiton-name rv2 (SMALL sonnet) | review/chiton-name-rv2; briefs/main86-rv-chiton-name.md | MAIN CHÍNH 86 | session_01Rc5AsJz4mUrjazcfdR5JPr | RUNNING | 21/11 03:15Z |
+| REVIEW menu-panel (SMALL sonnet) | review/menu-panel-rv; briefs/main86-rv-menu-panel.md | MAIN CHÍNH 86 | session_01Rc5AsLEtGvABQjjGRj13hB | RUNNING | 21/11 03:13Z |
