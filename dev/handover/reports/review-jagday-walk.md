@@ -210,3 +210,44 @@ Rollover rules (verbatim):
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## ROUND 6: RE-GATE review/jagday-walk-rv 20c8adbf (JAGDAY-WALK #4 fix) + final-merge LIVE → VERDICT: PASS → LAND READY
+Reviewer session_01964izGHdj1g2LVwM27Nc3K (depth 4, START_CTX ≈ 4 %).
+PRIORITY #1 CHECK ('knCarryOut|knCarryIn|knTb|KN.turn|agDrain|4 carry'): OD L1976 + law 6c / 11 | main b1033eb0 → f15146ea → a4fdb642 (same jagknow carry code, no turn guard) | review/* jagday-walk-rv 20c8adbf (this), walk-cost-rv2 bd2b1c59 (inside) | claims CLAIMS.md jagday-walk row (D).
+### Code read (1dab9933 → 20c8adbf)
+- Game code only: jagknow.js (knTb / knCarryOut / knCarryIn / nextBuoi wrapper). jagent.js changed in 55af281b and was reverted in 20c8adbf (net 0). ag-walk.test.js is unchanged. The new test is ag-carry-turn.test.js (6 checks).
+- Law 6c (no item vanishes): (B) no knTb rebuild at the half-turned key while KN.turn, one rebuild after the turn at the real key + khắc; (A) a refused turn keeps C (merge by id under the same bkey, Cb); knCarryOut drains AGL first so last-khắc deeds are read; W items left on the road land at once, then C. The turn counter is decremented in finally, so it is safe on throw / re-entry.
+- Law 11: the whole carry group (knTb / knCarryOut / knCarryIn / knCarryTick / wrapper) is covered. No other carry path exists (grep knCarry*).
+- FAR items: C keeps its due, so FAR still lands at khắc 2. ag-walk «4 carry FAR» is green in every run (16 + 8 + 4, plus 4 probe runs). Only items left in W (she ended the buổi early) now land at khắc 0; before, they were dropped. No regression.
+- Reviewer fix 2431fe94: the post-turn knTb() rebuild now runs only when knOn(). Before, it wrote S.tb on a co-op guest / with ag off, where tinBaoList never builds it.
+### Final merge
+Main kept landing during the gates, so I merged it in turn: b1033eb0 (88412cb1), f15146ea (7740bfa4), a4fdb642 (24c309f5), 4f34f461 (21f5f018), e4fd4dcf (fada0907), 8c8b8b6b (af735ff7, the LIVE D #13 named), c3a398dd (9a0c3191, LIVE per MAIN 84 02:18Z), 64d2e094 (239b22c5 = HEAD; assemble.py conflicted too: main's list (+ jtc.js) with jwalk.js kept last). On 9a0c3191: ag-carry-turn 6/6, ag-walk 2/2, walk-cost ALL OK, coop-e2e 68/68, quickcheck PASS (5 runs: buổi 946/941, core gates PASS). For each: index.html / sw.js take theirs, then assemble.py + build_site.sh. The build has jwalk + the knOn guard. No conflict markers.
+### Gates (one at a time)
+| gate | 88412cb1 (LIVE b1033eb0) | 7740bfa4 (f15146ea) | 24c309f5 / 21f5f018 / fada0907 / **af735ff7 HEAD** |
+|---|---|---|---|
+| ag-carry-turn | 6/6 | 6/6 | 6/6 each |
+| ag-walk | **16/16** | 8/8 | 4/4 · 2/2 · 2/2 · 2/2 |
+| probe rv-jw-agwalk-carry.js | **56 NEAR carries, 0 lost** (4 runs × 14), FAR/NEAR test rows all ok | – | – |
+| walk-cost | ALL OK (12: 0 bare far of 192; deeds 1671) | ALL OK (0 of 177; deeds 1666) | ALL OK on 24c309f5 (0 of 194) |
+| far-jump scan rv-jw-jumps.js 1 10 16 | **0 in all classes** / 347 far; land 1644, walkDrop 2, pageErr 0 | – | – |
+| ptime / ptime2 | ALL OK / ALL OK | ALL OK / ALL OK | – |
+| invite-host-away | **×10 = 10/10** (9/9 each; no E/F flake seen) | ×3 = 3/3 | 1/1 (24c309f5) |
+| time-spill-guard | PASS (static + runtime) | – | – |
+| coop-e2e | **68/68** | 68/68 | 68/68 each |
+| quickcheck --cpu 4 | PASS, old save ok; render 193/215, tab 382/366, buổi 1193/1134 ms | PASS, old save ok | PASS / PASS / see note / **PASS (5 runs: buổi 1056/1152, core gates PASS)** |
+IHA note: the worker saw 9/10 once (E/F) and the base 1dab9933 2/10 red. Here the branch is 10/10 + 3/3 + 1/1 on 24c309f5. So there is no branch-only regression.
+### Co-op seat check (owner CO-OP LAND GATE), on 88412cb1
+- Two-client probe (coop-thin-f2 setup lines 1–60, LIVE Worker, level 7, then 2 full weeks on both seats), 15/15. On both seats at S0 / S1 / S2: j95on() = false (record off in co-op, j95.js:28) and S.roster is absent and equal (0 rows both). JWALK.stat stays {fix 0, late 0, miss 0, now 0} on both, so no NPC walk runs. KN.turn is back to 0 on both. No page errors. Host agOn / knOn = true, guest false: pre-existing (agGuest), and her tin báo stays the host's own. NPC record off in co-op on both seats = equal.
+- Her walk cost = host intent: coop-thin-f2 all ok. In P1, from the guest, every place: run once on the host, khắc = travel() (BAL.walk), place / visit / khắc the same on both phones (18/18; 6 behind a decision card, local). P10 net loss: khắc paid once. P8 no local walk. No page errors.
+Quickcheck note (fada0907, main e4fd4dcf): two 3-run quickchecks went red, once on G4 coop-one-world and twice on perf (buổi 2885 / 3475 vs live 1000).
+- coop-one-world alone passed 3/3. A 5-run quickcheck on the same sha PASSED (buổi 1013/1004, core gates PASS).
+- The slow buổi is a mode on main too: e4fd4dcf alone had 2372 ms and 1922 ms runs.
+- I logged the cards at CPU ×4, 10 runs each. Branch median ≈ 2.5 s, live ≈ 2.8 s. On both, the slow runs are the ones with an extra card («Có người đến», «Có người bán tin», «Chọn cung nữ thân tín»).
+- So this is not a branch regression. I use 5 runs from then on.
+On 239b22c5 = HEAD:
+- ag-carry-turn 6/6, ag-walk 4/4, walk-cost ALL OK (12: 0 of 230), ptime ALL OK, IHA 2/2, coop-e2e 68/68.
+- quickcheck PASS (5 runs). The buổi median was 2305 vs live 1357. Runs: branch 1082 / 1122 / 3821 / 4120 / 2305, live 1357 / 1448 / 3424 / 1058 / 1260.
+- Direct check at CPU ×4, 12 runs each: nextBuoi compute is 426 vs 409 ms median (+4 %; the max is 538 vs 794). The whole step is 3395 vs 3145 ms, driven by the cards.
+- No perf regression.
+NOTE FOR MAIN: if main moves again, assemble.py can conflict (the module list). Keep main's list and append 'jwalk.js' last. Then take theirs for index.html / sw.js, run assemble + build_site + coop-e2e.
+STATUS: PASS → LAND READY review/jagday-walk-rv 239b22c5b9554fbb12e44a23456165a7e1904553 (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS + co-op seat check.
