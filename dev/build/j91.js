@@ -300,8 +300,12 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lab,x,y+R*1.85+12);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"huong",.08,.8);
   const R=Math.min(W*.14,H*.095);const tc=mix(P.E,P.tv),mc=mix(P.E,P.v);smoke(W*.27,H*.12,R,tc.join(","),"◎");smoke(W*.73,H*.12,R,mc.join(","),"●");
-  const ls=rs(dist(P.v,P.tv)),T=BAL.mgTier.blend.star;g.fillStyle=ls>T[2]?K91C.good():ls>T[1]?K91C.gold():"#6b5643";g.font=k91F(700,13,1);g.textAlign="center";
-  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else kg82Lbl(g,ls>T[2]?"★★★":ls>T[1]?"★★☆":ls>T[0]?"★☆☆":"☆☆☆",W/2,H*.4,W-16);
+  const ls=rs(dist(P.v,P.tv)),T=BAL.mgTier.blend.star;g.font=k91F(700,13,1);g.textAlign="center";
+  /* huong-cue (owner OD 21/11 ~00:40Z): the near / far cue with NO word — a lit ring round her smoke + a gauge of T.length segments (one more filled each time the hint gets closer, same BAL.mgTier.blend.star steps as the grade) */
+  const stp=T.filter(x=>ls>x).length,sc=stp>=T.length?K91C.good():stp>=T.length-1?K91C.gold():"#6b5643";
+  g.save();g.shadowColor=stp>=T.length-1?BAL.mgFx.glow:"transparent";g.shadowBlur=stp*BAL.mgFx.blur/T.length;g.strokeStyle=stp?sc:K91C.hair;g.lineWidth=2+stp*2.5;g.beginPath();g.arc(W*.73,H*.12,R*1.06,0,Math.PI*2);g.stroke();g.restore();
+  if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else{const n=T.length,sw=Math.min(W*.2,70),sh=16,gap=6,gx=W/2-(n*sw+(n-1)*gap)/2,gy=H*.4-sh/2;
+   for(let i=0;i<n;i++){const x=gx+i*(sw+gap);g.save();g.fillStyle=i<stp?sc:"rgba(255,250,238,.55)";g.strokeStyle=i<stp?K91C.ink:K91C.hair;g.lineWidth=2;g.beginPath();g.roundRect(x,gy,sw,sh,sh/2);g.fill();g.stroke();g.restore()}}
   SL().forEach((s,i)=>{const e=P.E[i];g.strokeStyle=K91C.hair;g.lineWidth=6;g.lineCap="round";g.beginPath();g.moveTo(s.x,s.top);g.lineTo(s.x,s.bot-22);g.stroke();
    const y=s.bot-22-(s.bot-22-s.top)*P.v[i];g.strokeStyle=`rgb(${e[1].join(",")})`;g.beginPath();g.moveTo(s.x,s.bot-22);g.lineTo(s.x,y);g.stroke();
    /* knob = the painted jar of that scent */if(!kg82Spr(g,"huong-"+e[2],s.x,y,56,null,{})){g.fillStyle=`rgb(${e[1].join(",")})`;g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(s.x,y,13,0,Math.PI*2);g.fill();g.stroke()}
