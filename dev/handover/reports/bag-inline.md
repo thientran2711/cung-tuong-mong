@@ -44,10 +44,7 @@ Branch review/bag-inline @ a8ef23ce (base LIVE a88b14f0, merged; assemble = main
 - coop-e2e (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc): 92/92 passed
 - Fold bag flow after the merge: tap, second tap, slot tap, sell → no page errors.
 Not run: dev/test/item-info.js / item-info-scan.js (the bag pop-up site is now a strip; reviewer may adapt), iPad act-pictures shot.
-<<<<<<< HEAD
 
 ## bag-inline-2 (rv follow-ups) — status 21/11 ~03:50Z, branch review/bag-inline-2 @ 5b9d81a8 (base LIVE db6ae2a0)
 DONE: F3 — act buttons leave the narrow info column and take the FULL strip width under the picture/info/chips row (2–3 per row; `.kinlacts`, jkinl.js). iPad worst case (Nước bào hoa, long note + 3 acts) now scrolls ~146 px (was ~199); the long «Ghi chú» note in the narrow info column is what is left. F4 — strip picture 120 px (was 88; rv metric 120x130 at Fold and iPad). `dev/test/bag-inline.js` PASS, no page errors. Not yet run on this sha: quickcheck, coop-e2e.
 TODO (handover to the next worker; rollover by context): F1 — dress picker (jtoil kitDressPicker), Hội phối đồ (jts 406), veil picker (jveil 181), gift picker (jgpick 37, jksize kszItemDetail 229) still use `kitItemDetail(…,{cls:"kidet-strip"})` BESIDE the grid: switch to the §70.6 strip (picture left, info, chip column right; reuse `kinlStrip`/`kinlPick`, grid option `inline:true` or a small helper that takes a spec). F2 — pet tiles (jpet 255/261) and others' worn slots (jdress 143, jk2b 840, jgift kitItemCard) → inline, no popups; use the capture trick (KINL.cap diverts `kitModal({kind:"info"})`; a `kitItemCard` call needs the same diversion or a spec builder). Tests: extend dev/test/bag-inline.js per grid; Fold 755x1000 + iPad 1180x820; then quickcheck + coop-e2e (tt/nc); merge newest LIVE (take main's index/sw, rebuild).
-=======
->>>>>>> f29c8990 (rv-chiton-name rv2 report)
