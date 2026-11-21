@@ -32,11 +32,11 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
  if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
   rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính cách | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
+  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính nết | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
   const tw=(w,t)=>typeof kitFactTap==="function"&&ETRAITS[t]?kitFactTap(w,`<div class="kpopx">${ETRAITS[t][1]}</div>`):w;
   const TS=(E.traits||[]).filter(t=>ETRAITS[t]),tr=[];
   for(const t of TS){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(tw(m[1],t))}}
-  if(TS.length)rows.push({l:"Tính cách",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
+  if(TS.length)rows.push({l:"Tính nết",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}}
@@ -123,7 +123,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: bảng thông tin bên phải (sở trọng, đã biết, dạo này) + khối chính bên trái (lòng người gọn)",html:()=>{
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính cách là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính cách",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính nết là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính nết",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
  try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true),k=pcfKey(v);if(h||k)return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div style="flex:0 0 172px">${k}</div><div style="flex:1;min-width:0">${h}</div></div>`}
   /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
   return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div class="kpkey" style="flex:0 0 172px">${kitRelTable([{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:12,d:0,kind:"good"},{dir:"them",label:"Nàng oán ta",w:"Oán",sj:"Nàng",ob:"nàng",now:3,d:0,kind:"bad"},{dir:"them",label:"Nàng ghen",w:"Ghen",sj:"Nàng",ob:"nàng",now:8,d:0,kind:"bad"},{dir:"me",label:"Ta → nàng: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:20,d:0,kind:"good"}],{compact:true})}</div><div style="flex:1;min-width:0">${kitRows([["Sở trường","Thi họa"],["Tính nết","Hay giúp người"],["Tin","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}</div></div>`}catch(e){return""}}})}catch(e){}
