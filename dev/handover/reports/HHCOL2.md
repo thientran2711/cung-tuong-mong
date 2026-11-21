@@ -63,3 +63,8 @@ OPEN for successor (WORDS ONLY, no gens until she says):
  - Do the same TRUE-prompt check (git log at gen time) for t3–t8; report causes + fixes to #27.
 (C) BOWS: her new rule — every bow in the game has LONG trailing ties, thướt tha. Extend G60 (rule.py set G60 … via #27 OK) + word sweep of live consort files (bow / knot / sash words → "bow centred with long trailing ties, thướt tha"); words only; keep_check sidecars.
 Also: L1971 #9 says tassels on held items are fine (revert "G57b" no-tassel; keep ngọc bội ban) — my L1924b/L1955/L1971 t7 still say "no tassel or pendant" on the flute; #27 to decide.
+
+## OWNER L1973 correction (via #27 09:44Z) — A2 REPLACED
+- s62_t7_THU_fromQP_L1971.txt = CANCELLED (VE11 told STOP before drawing).
+- New dev/art/thu_comoi/s62_t7_THU_vankien2_L1973.txt (9995) = L1903 (0eUA2SkTfW, liked) + ONLY: collar clasp (as L1924: "CUT AWAY square, the two fronts joined at the throat by one small horizontal clasp (frog button), so below it the chest…"), flute "gem tassels (no jade ornament)" (G57; tassels kept), trim "beautiful/handsome romantic-lead looks for everyone.", caption → 'CAPTION: top-left, with accents: "Thu · Hoàng quý phi · cổ vuông + vân kiên + khuy cài L1973"'. All L1924b/L1955/L1971 rewording undone. store PASS, keep PASS (base L1903). → VE11 1 @135 + sheet CŨ 0eUA2SkTfW | MỚI.
+- The handover above stays valid for B + C (#27 is at depth 8 and can't open a successor, so it gives B/C to another worker).
