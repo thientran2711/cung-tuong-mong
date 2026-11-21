@@ -565,3 +565,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ui-tour PDF (owner 21/11 ~00:00Z: every tab + every mid-screen popup, Fold+iPad, PDF) | review/ui-tour | MAIN CHÍNH 82 | session_01Rc5AsJLRqcEASEQYrXxbRd | RUNNING | 21/11 00:02Z |
 | name-clash role-parity 463 (opus; hh:N-ONLY cx2:chest + cx4:rougeSteal when name-clash meets LIVE 463d3d70) | review/coop-name-clash-r1-land463; briefs/b-nameclash-rp.md | B | session_01N1tNP4qZ3DWxjmCbaKiPNd | RUNNING | 21/11 00:09Z |
 | OWNER BUG kit-progress-run (loading bar stuck «mới chút ít» + blinks; kit 35 kitProgress, all 3 callers jload :89/:173/:265) | review/kit-progress-run | MAIN CHÍNH 82 → kit keeper | session_01Rc5AsMtjP4KTgBZVjENGLs | ORDERED | 21/11 00:15Z |
+| OWNER BUG mgcal-redo (Thử tay buttons of the 8 fixed games red again) | review/mgcal-redo cc50a8ee | MAIN CHÍNH 82 (built by main) → rv MSxpxbsA | session_01Rc5AsMSxpxbsAMRSE5oWrq | IN REVIEW | 21/11 00:40Z |
