@@ -16,7 +16,9 @@ FR8 = ", a pearl drop fringe along its scalloped edge, the LONGEST of all ranks 
 QPW = ("a slim royal-yellow silk sash wrapped all the way around the waist OVER the outer robe, sitting at the natural waist and staying there (only one belt), "
        "with ONE slim gold girdle line running along the sash (no wide plaque belt on top of it), flat, fitted to the waist, never bulky, nothing tight or binding at the chest, closed at its centre front")
 J = {}
-J[5] = [  # t5 Phi: waist / sash / robe / skirt = Tần M2189-04 structure; vân kiên length = Tần's
+J[5] = [  # t5 Phi: waist / sash / robe / skirt = Tần M2189-04 structure; vân kiên length = Tần's; ONE tier like Tần (owner L2176)
+ ("a light olive soft vân kiên (cầu vai) of TWO thin soft layers of the SAME thin, light, flowing silk as her robe (the lower peeking out below the upper as a narrow wavy band) that DRAPES",
+  "a light olive soft vân kiên (cầu vai) of ONE layer of the SAME thin, light, flowing silk as her robe that DRAPES"),
  ("a layered silk court robe of two or three visible layers, richly embroidered",
   "a layered silk robe of two or three visible layers with WIDE shaded-silk embroidered borders edged with fine silver thread of double hollyhocks at the sleeves and hem (the small embroidered motifs never run over these borders or bands), richly embroidered"),
  ("its lobes reaching the shoulder points and just over them (about as long as the Tần's, never shorter " + LADDER + ")",
@@ -24,7 +26,8 @@ J[5] = [  # t5 Phi: waist / sash / robe / skirt = Tần M2189-04 structure; vân
  ("long trailing wide sleeves with deep silk cuffs, NO bow: ONE slim gold silk girdle (only one belt, no second band) set with a row of small flat gold plaques chased with her flower, sitting at the natural waist and staying there, never slipping down to the hips, wrapped OVER the outer robe and closed at its centre front by a small gold flower clasp, two LONG silk ties falling straight down either side of it to well past the knees; SLIM, the front of the skirt embroidered with large double hollyhock medallions, a sheer silk shawl;",
   "double hollyhock sprays on the skirt front, long trailing wide sleeves, NO bow: a slim embroidered lilac silk sash with her small flowers along it, wrapped OVER the outer robe and closed at the CENTRE front of the waist by a small round gold-filigree clasp, two LONG silk ties falling straight down either side of the clasp to well past the knees, with small silk tassels (thướt tha); SLIM, a sheer silk shawl;"),
 ]
-J[6] = [  # t6 QP: a little more yellow (about half of HQP's); garment jewels
+J[6] = [  # t6 QP: base M2187-06 VERBATIM (owner L2192 lock); a little more yellow (about half of HQP's); garment jewels; fringe = HQP's M2187-07 words
+ ("ONE short pearl fringe along its scalloped edge,", "a short pearl fringe along its scalloped edge,"),
  ("plus a modest amount of royal yellow: a NARROW yellow panel at the SKIRT FRONT below the waist (never at the neckline)",
   "plus a moderate amount of royal yellow (about HALF of the Hoàng quý phi's): a slim yellow panel at the SKIRT FRONT from the waist to the hem (never at the neckline)"),
  ("NARROW royal-yellow borders (the edge of the neckline band, the sleeve ends and the hem),",
@@ -56,12 +59,16 @@ J[8] = [
  (SLEEVE_OLD, SLEEVE_NEW),
 ]
 for i, n in enumerate((5, 6, 7, 8), 1):
-    base = f"M2189-0{n}_s62_t{n}_thu.txt"; s = (P / base).read_text()
+    base = "M2187-06_s62_t6_thu.txt" if n == 6 else f"M2189-0{n}_s62_t{n}_thu.txt"; s = (P / base).read_text()
     for o, w in J[n]:
         assert s.count(o) == 1, (n, o[:70], s.count(o)); s = s.replace(o, w, 1)
-    assert "image 2" not in s and "image 3" not in s and "continuous piece" not in s, n
+    assert "image 2" not in s and "image 3" not in s and (n == 6 or "continuous piece" not in s), n
     code = f"M2191-0{i}"; out = f"{code}_s62_t{n}_thu.txt"
-    s = s.replace(f'"M2189-0{n}"', f'"{code}"'); assert s.rstrip().endswith(f'"{code}"'), n
+    s = s.replace(f'"M2189-0{n}"', f'"{code}"').replace('"M2187-06"', f'"{code}"'); assert s.rstrip().endswith(f'"{code}"'), n
     (D / out).write_text(s); (P / out).write_text(s)
     (D / (out + ".keep")).write_text(f"base: dev/handover/prompts_L2095/{base}\n" + "".join(f"allow: {o}  # owner L2191 via ROOT-B5\n" for o, _ in J[n]))
     print(out, len(s))
+
+# owner L2192 lock: praised pictures frozen -> LOCKED copies of M2187-01..04 (verbatim)
+for n in (1, 2, 3, 4):
+    src = P / f"M2187-0{n}_s62_t{n}_thu.txt"; (P / f"LOCKED_t{n}_M2187-0{n}_s62_t{n}_thu.txt").write_bytes(src.read_bytes())
