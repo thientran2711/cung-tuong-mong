@@ -2081,3 +2081,13 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 14:13Z) keeper #4: kit-opt-title-wrap bb52274d SSK → rv MSxp. Reminded keeper: kit-mark-fix-r5 re-merge still owed.
 - (21/11 14:26Z) rv MSxp FAIL kit-opt-title-wrap bb52274d (flaky borderline meter wrap at room≈natW, 3/14 iPad w320) → keeper #4 has fix list (r2). Keeper also owes kit-mark-fix-r5.
 - (14:33Z) LAND CHAIN 2: LANDED coop-guest-names d3f44022 (1 perf-only retry).
+- (21/11 14:34Z) WAKE. LOAD: main running 3 (KIT KEEPER #4 Jkj5 (kit-opt-title-wrap r2 + kit-mark-fix-r5), rv MSxp, LAND CHAIN 2 LRRY) | B ROOT-6 busy (dialog-person-3-r2 reland 4AK8, pet-bath-test rv F99F) | C ROOT-B3 art ON HOLD | D #16 busy (coop-room-faces BkX7, bundle k4 ~15:15Z) | E #28 busy | moved: none. LIVE 99795d67. Relayed to LRRY: coop-arrive-see a1c0a55e (B), sg-card-rv 625b7601 (D). od03-favart waits D bundle. ctx REAL 30.8 % (308k/1M) — near roll line (~33 %) with heavy notification schema load → ROLLING OVER now.
+
+## MAIN CHÍNH 95 → NEXT MAIN (MAIN CHÍNH 96) HANDOVER (21/11 14:35Z) (ctx 30.8 % real; depth 6 → child depth 7)
+- LIVE = 99795d67 mg-intro-2 (on 8f435841 coop-emo-seat, f85cba97 kit-dialog-2, 419079d7 duodo-focus, fc7f98f6). Check `git log origin/main -8`.
+- LAND CHAIN = LAND CHAIN 2 OPUS session_01Rc5AsLRRYSeTySKmsRyu3W. Queue now: coop-guest-names → cold-faction-land2 → jlost-kyngo → kit-ef-unit → ban-cung → kit-win-pay → coop-pool-face → kit-relrows-ms → coop-cyhold → coop-arrive-see → sg-card-rv. Send every new LAND READY line. NEVER two chains. It rolls itself and tells main → main opens its successor.
+- RUNNING (report to main): KIT KEEPER #4 session_01Rc5AsJkj5hx1zShFY8KnYZ — owes (a) kit-opt-title-wrap r2 (rv FAIL: flaky own-row meter at room≈natW, iPad w320) and (b) kit-mark-fix-r5 re-merge onto LIVE (jk4.js conflict vs duodo-focus). Both → rv MSxp session_01Rc5AsMSxpxbsAMRSE5oWrq → LAND READY → chain. rel-men-servants r2 (B) must land with/after kit-relrows-ms.
+- ORDERS OUT: B dialog-person-3 re-merge (reland 4AK8 running); D coop-room-faces (BkX7 running; 3 co-op face points). D: od03-favart-rv 50bea9c9 lands only after D bundle k4 (~17:00Z LAND READY).
+- DONE this session: duodo-focus LIVE + owner got both mp4 links (Fold/iPad) with «Dư đồ đã lên game»; Tát hand / NPC slap art still missing (C on hold). LtG4 + Ji75 archived.
+- NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY.
+- TRIGGER: mine trig_01PHZoGojNEjNy85eecCyK3A (min 32) → 96 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush95.sh). No owner question pending. MAIN 94 idle (trigger off).
