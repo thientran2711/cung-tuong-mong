@@ -6,8 +6,9 @@ allow: never two stacked layers  # owner L2023 via ROOT go: t6 vân kiên two se
 allow: small pearl nets  # owner L2023 via ROOT go: t6 vân kiên two separate tiers / no chest swag / centred bow; t7-t8 no 'two layers' forbidden list + lower-rank neckline
 allow: with pearl fringes hanging below it  # owner L2023 via ROOT go: t6 vân kiên two separate tiers / no chest swag / centred bow; t7-t8 no 'two layers' forbidden list + lower-rank neckline
 allow: never rising up the neck  # owner L2023 via ROOT go: t6 vân kiên two separate tiers / no chest swag / centred bow; t7-t8 no 'two layers' forbidden list + lower-rank neckline
-allow: a few strands of pearls across the chest  # owner L2023 via ROOT go: t6 vân kiên two separate tiers / no chest swag / centred bow; t7-t8 no 'two layers' forbidden list + lower-rank neckline
 allow: a yellow sash and narrow yellow borders  # owner L2023 via ROOT go: t6 vân kiên two separate tiers / no chest swag / centred bow; t7-t8 no 'two layers' forbidden list + lower-rank neckline
 allow: "Thu · Quý phi · L1893"  # caption tag updated to L2023
 allow: a pearl-edged collar and cloud-collar trim  # trim to fit 10000: redundant with the new pearl-fringed tiers, ROOT go L2023
 allow: NOT a pile of jewels  # trim to fit 10000, ROOT go L2023
+allow: the royal yellow is exactly the colour of the flat colour swatch image  # reworded 'the royal yellow exactly as image 2' to fit 10000 after restoring the chest pearl strands (owner L2035 via ROOT)
+allow: a honey-gold close to hex #F2BC61  # same words kept as 'honey-gold close to hex #F2BC61' (L2035 fit)
