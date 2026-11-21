@@ -989,3 +989,4 @@ NEWACCT#14 ~01:57Z: OWNER L1605 on thu t1–t3 v4: t1 more density + jade pendan
 NEWACCT#14 ~02:00Z: OWNER L1606: xuân Hán t1–t3 need ≥2 visible layers + real Hán wrap panels (trực cư/khúc cư); scrap current design text, NEW Hán prompt → DESIGN19 widened (v5).
 NEWACCT#14 ~02:02Z: OWNER L1607: low tiers = KHÚC CƯ not trực cư; trực cư only higher ('quý nhân' — likely voice for quý phi per DESIGN5 ladder t6) → DESIGN19 told t1–t3 khúc cư.
 NEWACCT#14 ~02:05Z: DESIGN18 6f3e630 thu t1–t3 v5 (G42 L1605) gates PASS → CHECK1 → GEN1 165 cr (L1608). DESIGN18 ROLLED (~25 %, handover in reports/DESIGN18.md) → successor opened only when next thu prompt job comes.
+NEWACCT#14 ~02:08Z: OWNER L1608: maids no jade pendant, may wear sachet → rule G43; MAIDP4 (Opus) opened to fix maid sources/prompts.
