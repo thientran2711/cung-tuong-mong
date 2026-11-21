@@ -10,3 +10,15 @@ PRIORITY #1 CHECK: rv-kit-ef-unit.md round 2 PASS (bb00fc02 → rv2 d46ad6de) | 
 - quickcheck ×3, alone on the machine (new/live): run 1 (pre-cache) render 272/315, tab 522/660, buổi 1630/2772, longMax 2769/2741 · run 2 render 327/270, tab 633/649, buổi 1632/1583, longMax 2744/3402 · run 3 render 284/307, tab 603/542, buổi 1449/1943, longMax 3122/3052. Medians new/live: render 284/307, tab 603/649, buổi 1630/1943, longMax 2769/3052 — all ≤ LIVE. Core gates PASS, old save ok, every run.
 - kit-ef-unit.js Fold PASS + iPad PASS (real option dialog widths auto..280, act tab, pop-maid, staff, rv: bad=0) · coop-e2e 124/124.
 - kit-win-pay 203cd559 sits on top of ef-unit: re-merge it on r3 when it goes to land (no file overlap with the cache line in j63).
+
+## 2. kit-mark-fix r6 — SẴN SÀNG KIỂM `review/kit-mark-fix-r6` @ 2bf9f1a1 (rv round 6 FAIL on b4d82057: fade cue flaky)
+PRIORITY #1 CHECK: rv-kit-mark-fix.md rounds 5 + 6 (cue late/intermittent; name colour asked in pure CSS) | main c9ae030e | review/kit-mark-fix-r5 b4d82057 reused | claims #5.
+- Base = b4d82057 + LIVE c9ae030e (index/sw rebuilt; no other conflict).
+- ROOT CAUSE of the flaky cue (probe: card identity + kpmore every 200 ms): some pages REBUILD their person card every ~2.7 s (tab-rv seen); the new card had no `kpmore` for 125–260 ms until a timed pass (40 ms observer / RO 30 ms / late 500 ms) ran → the fade blinked off, and a measure landing in that gap failed. Not fixable by more timers.
+- Fix (jk4, one rule for every `.pc.kpwide[data-k2]`): a MutationObserver (childList + class/data-k2 attributes) runs `kitPcMore` in the SAME microtask a card becomes `.pc.kpwide[data-k2]` (added, or its class / data-k2 set by a kit scan) = before the next paint; cards already seen are skipped (no loop on its own kpmore toggle). Probe after: kpmore true on the new card at its first sample, every rebuild. Also: `document.fonts.ready` / `loadingdone` and rAF×2 after every render re-check the cue (rv round 5 b).
+- Name colour in PURE CSS (rv round 5 a): pcHead (j15) puts `--rt` on `.pcname` too; jk4 `.pc .pcl .pcname:has(~ .pcrk){color:var(--rt, <rank-line fallback>)!important}` (also inside .kpnm); kitPcTagColour kept as fallback for a rank line built outside pcHead.
+- Test (rv round 5 c): every scene measured on the settled page AND again 1 s later, both must pass; `REP=n` repeats every scene. The 1 s re-assert is what caught the rebuild gap.
+- Results: kit-mark-fix.js REP=3 both devices 24/24 PASS · iPad REP=10 40/40 PASS · Fold REP=5 15/15 PASS (pop-maid SKIP: that world had no maid) + Fold pop-maid,tab-rv REP=3 ×2 12/12 PASS. Shot looked at (iPad tab-rv): «Thải Vân» name = rank green, bottom fade on the left column.
+- Gates: quickcheck PASS (render 282/305, tab 529/627, buổi 1534/1582, core gates PASS, old save ok) · coop-e2e 124/124 · kit-info-tap.js 0 FAIL. KIT.md §6.3i/§6.3j updated.
+
+## 3. kit-opt-title-wrap r2 — rv round 2 PASS (486b922a); nothing to do (land = coordinator).
