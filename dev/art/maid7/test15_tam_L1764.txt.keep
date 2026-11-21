@@ -1,0 +1,9 @@
+base: dev/art/maid7/test14_tam_L1752.txt
+allow: all her clothes are the same soft fine silk with only a gentle   # owner Lượt 1764: fabric = matte silk crepe (lụa tơ tằm dệt nhám), no sheen
+allow: muted sheen   # owner Lượt 1764
+allow: never shiny or wet-looking satin   # owner Lượt 1764
+allow: never metallic or stiff brocade   # owner Lượt 1764
+allow: FABRIC SHEEN   # owner Lượt 1764
+allow: a fine silk ruqun   # owner Lượt 1764
+allow: made of the SAME fine soft silk as the outer jacket of the higher maids   # owner Lượt 1764
+allow: a WIDE soft silk band   # owner Lượt 1764
