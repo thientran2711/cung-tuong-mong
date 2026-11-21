@@ -1,4 +1,4 @@
-# rv-chapter-card-3 — FAIL (1 item) — reviewer sonnet, MAIN CHÍNH 89, 21/11
+# rv-chapter-card-3 — r1 FAIL (1 item) → r2 PASS (see bottom) — reviewer sonnet, MAIN CHÍNH 89, 21/11
 PRIORITY #1 CHECK: OD 6 | ledger 0 | claims 8 | main 0 | review/* 4 | archive 1 | review/chapter-card-3 4771570e (brief line reused)
 Tested: rv branch review/chapter-card-3-rv = 4771570e + merge origin/main 8acb2bef (ee19ba25; index/sw rebuilt by assemble.py + build_site.sh, no markers).
 
@@ -15,3 +15,7 @@ Note: there is no separate "Phụ tuyến" sub-tab in the row (5 sub-tabs; Phụ
 ## FAIL list for worker
 1. Sắc phong picture no longer opens the Sắc phong detail panel (older behaviour, test line 30 `#panel .kskill .ksart` → `rank picture -> Sắc phong panel`; the rank slide has no `tap`, and the test selector was only updated for the 'card'/'picture' loop, not line 30). Fix: give the rank slide `tap:` for the Sắc phong panel (jchap.js:45 opener, e.g. wrap in a global fn like chapOpen) AND update chapter-detail.js:30 to `.kslide .ksart`; rerun chapter-detail.js at both viewports until exit 0. Then recheck the rest of the file's later asserts (they never ran).
 Everything else PASS. Not landing: no PASS sha. After the fix, ping reviewer/MAIN; only item 1 needs re-test (+ quickcheck).
+
+## r2 re-check — PASS
+Worker fix 7bd1a790 (rank/Triều cục/Tâm nguyện/Phụ tuyến slides tap:chapOpen, chip selector, test line 30). Merged onto origin/main 1e826e29 → rv sha below (index/sw rebuilt).
+chapter-detail.js 755x1000 + 1180x820 exit 0 (incl. «rank picture -> Sắc phong panel», no page errors); coop-e2e 92/92; QUICKCHECK PASS (old save loads, perf ≈ live). Delta is 5 source lines, no layout change since the r1 shots (all sub-tabs on one kitSlide banner).
