@@ -1309,3 +1309,11 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
 #27 ~09:26Z: NGOCBOI1 G57b done 9fac14e14 (~969 files tassel words stripped, gate HELD ITEM TASSEL). Ordered face-common/*.FULL.txt scrub. Next Lượt 1949.
 #27 ~09:27Z: NGOCBOI1 face-common G57 scrub fa95f9405 (187 files; m48 item → silk fan). Ordered G61 sweep face-common.
 #27 ~09:28Z: NGOCBOI1 G61 face-common done 0601c6738 (95 files). NGOCBOI1 idle. Next Lượt 1951.
+#27 ~09:30Z: OWNER L1952 (in #27 chat), in full:
+ (1) L1935 winter Đáp ứng L1924 KLpQriTkqp KEPT/locked. Winter Quý nhân t3→Hoàng hậu t8 = OLD approved prompts (dong8_duyet_L1803) EXACT, only remove phi bạch → HHCOL2 files → VE6 6@55 (330). t2 Thường tại not mentioned → asked her.
+ (2) L1936 hạ Đường t1–t3 L1924 ALL OK. NEW COMMON RULE: no big embroidery on sleeve bands/thin trim bands, only small flowers there; big flowers elsewhere. Quý nhân has huge flower on robe body → rethink embroidery design; ask history experts → HADUONG2 research + G64 draft.
+ (3) L1937 nhị sample 3zKP2qZREY APPROVED (keep distinct from tam/nhất); bow MUST be exact centre (keeps drifting).
+ (4) L1938 m18 OK. Thân cận hair must differ from regular; drawn ones no redraw; undrawn → thân cận hair prompt + 1 sample pic first.
+ (5) L1939 m10: note — waist sash must bind the jacket inside; nhị currently looks like open outer coat → fix nhị.
+ → MAIDFIX4: nhị files fix (bow centre + sash closes jacket) m09 m10 m12 m13 + thân cận hair sample → VE10 4×135 + 55 = 595 cr.
+Next Lượt 1953.
