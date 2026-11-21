@@ -72,3 +72,14 @@ Gates on e156be4c: quickcheck PASS + old save, core gates PASS · coop-e2e 94/94
 3. hc: merge, assemble union, then the perf blocker above.
 Scripts (copied to dev/handover/tools/e43/ on this branch; put them in /home/user/wt/e43-out/): {g.sh,own-hc.sh,own-ge.sh,own-bw.sh,res.py,hunks.py,buoiprof.js} — copy them (container-local). g.sh usage: bash g.sh <worktree> <tag>. Note caoly-oldsave needs `<this url> <main url>` (root index.html), bd-legacy-save `<url>`.
 Worktrees to delete: /home/user/wt/e43 e43g e43b e43L e43h, scratch /home/user/wt/e43-out.
+
+# JOB 3 (E45, opus, session_01DgYSWooSZorHJAJ7Gthdcg; FOREMAN E #28) — bang-words land3 + ge-phutang land3
+PRIORITY #1 CHECK ('home-chapters|ge-phutang|bang-words|buoiprof|relander'): OD 0 | ledger 0 | claims E43 rolled | review/* bang-words-land2 e156be4c, ge-phutang-land2 df05c77c — reused, nothing new built.
+
+## LAND READY bang-words-land3 976ea752f08602946fb742b59f68b07bf39d0617 (review/bang-words-land3)
+= e156be4c + LIVE 1bf7e14d. Conflicts: dev/build/jge.js (1 hunk) + index.html/sw.js (--theirs, rebuilt by assemble.py + build_site.sh).
+| jge.js PEND.geR ending texts | LIVE side | branch side | resolved (script e45-out/bw_res.py, asserts the diff is ONLY these two changes) |
+|---|---|---|---|
+| grand ending «Tạ ơn» go() + 3 texts | adds `if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");` | wraps e.t/e.a/e.ft in `geF(…)` (land-token filler) | branch geF wrappers + LIVE kitEndNext call — pure both-sides union, no logic choice |
+Gates on 976ea752: quickcheck PASS (old save ok, core gates/one-core PASS; perf buổi 1424/1165, render 260/252) · coop-e2e 124/124 · bang-words scan PASS + screen PASS · bang-line-scan PASS · bd-legacy-save PASS · COOP_LAND nc+bd 128/128, bd+nc 126/128 (known «same Thái hậu picture» flake) → rerun alone 128/128 · ge-guard 8/8 · self-word scan PASS · rare-match errs [] · role-parity ×2 ALONE byte-identical (9b0a3670), table unchanged (b94f2eb8).
+vs LIVE a201d968 (moved after gates): index.html/sw.js only → MAIN self-merge. No reviewer needed (pure union).
