@@ -12,7 +12,7 @@
    - scene name tags for kids drop the title (frame + strip already say it; stops "Hoàng tử Vĩ…")
    - act cards: "Chỉ buổi tối — chờ…" reason -> meta "· Chỉ buổi tối" dropped while the reason shows; Đức warning no longer repeats "Đức"
    - servant card: role chip -> second line drops the role (a higher title moves into the chip)
-   - Hoàng thượng card: chip "Hoàng thượng" -> heading "Niên hiệu …"; self card drops "Hoàng hậu 0" once she is Hoàng hậu
+   - (owner 21/11: rename removed, name stays «Hoàng thượng», niên hiệu = row) self card drops "Hoàng hậu 0" once she is Hoàng hậu
    - end card: "Phẩm cao nhất" row -> portrait caption hidden when equal; identity card: rows -> bio sentence drops name/age/origin, "Vào cung" row = caption rank dropped, "Phúc duyên đang có" kept on the button only
    - Nhật ký: date shown once per run of same-date entries; "Ngươi tố giác X …: thành." dropped when "X bị tố giác …" is logged
    - result card: log line under the numbers drops the title, the verdict word and the deltas already shown
@@ -110,7 +110,6 @@ function fixModal(){const M=document.getElementById("modal");if(!M||M.hidden)ret
  const RWS=()=>[...M.querySelectorAll(".pcrow,.kb>.kr")],RL=x=>x.querySelector(":scope>.krl")||x.querySelector("span"),RV=x=>x.querySelector(":scope>.krv")||x.querySelector("b");
  const nm=M.querySelector(".pcname"),rk=M.querySelector(".pcrk");
  if(nm&&rk){const n=T(nm.textContent),r=T(rk.textContent);
-  if(r==="Hoàng thượng"&&n.startsWith("Hoàng thượng niên hiệu "))nm.textContent="Niên hiệu "+n.slice(23);
   if(typeof S!=="undefined"&&S&&n===S.name&&(S.rank>=7||S.queen))RWS().forEach(x=>{if(T(RL(x)?.textContent)==="Hoàng hậu")x.remove()})}
  /* end card: caption = highest rank */
  const cap=M.querySelector(".pfwrap .pfrw");if(cap){const row=RWS().find(x=>T(RL(x)?.textContent)==="Phẩm cao nhất");if(row&&T(RV(row)?.textContent)===T(cap.textContent))HIDE(cap)}
