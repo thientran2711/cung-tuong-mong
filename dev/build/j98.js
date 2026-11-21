@@ -17,7 +17,7 @@ const ITEM_ART_G={
  /* Trân phẩm */ gamto:2,boodieu:2,tranhco:2,dancoc:2,vongvang:2,hacdinh:2,vangbac:2,bienvang:2,
  /* Tuyệt phẩm */ tramphuong:3,gamvang:3,ngocdungcao:3,
  /* Ngự tứ */ ngocboi:4,bienngu:4,
- /* D45 small-art (review/small-art-wire): earrings + shoes (no wear slot yet: KIT REQUEST), per-rank Đeo eo / Đeo tay / Túi thơm of the promotion set (jinv RANKED) */
+ /* D45 small-art (review/small-art-wire): earrings + shoes (wear slots Hoa tai / Giày: jinv GAP IT03, BAL.wearSlots), per-rank Đeo eo / Đeo tay / Túi thơm of the promotion set (jinv RANKED) */
  hoatai:1,hoataivang:2,giayhoa:0,giaygam:1,
  ngocboi_r0:0,ngocboi_r1:0,ngocboi_r2:1,ngocboi_r3:1,ngocboi_r4:2,ngocboi_r5:2,ngocboi_r6:3,ngocboi_r7:4,
  vongngoc_r1:1,vongngoc_r2:1,vongngoc_r3:2,vongngoc_r4:2,
