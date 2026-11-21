@@ -284,7 +284,7 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
 function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`)}catch(e){}if(window.__bot||typeof Q==="undefined")return;
- Q.push({t:r.n,art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
+ Q.push({t:r.n,emoSeal:{k,who:"me"},art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}
 window.feelActTick=feelActTick;
 /* ---------- 6. VẺ MẶT: the ONE seal key (active act > strongest feeling; an intent is never shown, owner 20:15Z / 20:20Z) + the tap-card lines ---------- */
