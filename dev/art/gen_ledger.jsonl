@@ -3323,3 +3323,9 @@
 {"id":"YMl3Eq3WeC","prompt":"dev/art/thu_comoi/s62_t4_THU_luavoan_L1695.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD"],"cr":55,"why":"owner L1695 fabric test (gauze vs satin)","by":"Foreman C #18"}
 {"id":"bxMfqxQ5Y2","prompt":"dev/art/maid7/test15_tam_L1764.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1764 tam crepe/sash test","by":"VE2"}
 {"id":"jUobgIELD0","prompt":"dev/art/thu_comoi/s62_t8_THU_fix6_L1747.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["nVsrRMPYQD","TdwDfOyVNR"],"cr":55,"why":"owner L1775 REVERT1 fix6 low square neck","by":"VE2"}
+{"id":"gOm1JbnSXO","prompt":"dev/art/maid7/test16_tam_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
+{"id":"1ldFsE4r4r","prompt":"dev/art/maid7/test16_nhi_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
+{"id":"xSBqgFRjfW","prompt":"dev/art/maid7/test16_nhat_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
+{"id":"gOm1JkcSXO","prompt":"dev/art/maid7/test16_tam_thancan_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
+{"id":"s7IKwk4l8e","prompt":"dev/art/maid7/test16_nhi_thancan_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
+{"id":"rgXHlqbxtc","prompt":"dev/art/maid7/test16_nhat_thancan_L1775.txt","mode":"gpt-2-6","res":"1k","quality":"low","seed":7172,"refs":["s7IPw0Ll8e"],"cr":55,"why":"owner L1775 maid crepe 6 (JOB I)","by":"VE2"}
