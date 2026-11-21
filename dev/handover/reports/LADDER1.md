@@ -2,6 +2,17 @@
 depth 5 · START_CTX ~4 % (used_tokens read 0; estimate) · 0 gens · 0 prompt edits (A39: waiting for owner)
 Sheet (LOOKED): dev/handover/review-sheets/ladder_outer_L1580/sheet.jpg (existing pictures only, 10 × 135 cr already spent).
 
+## 0. FIRST — owner L1581 "Thường tại set must change (looks Tang/Đường); I ran your prompt on ChatGPT, said OK — why still this prompt?"
+Trail (FOREMAN_C_STATUS.md 625–643, dev/art/dapung4/):
+- ~17:25Z 20/11 (L1235): foreman logged "Đáp ứng current = Tang-like" → 4 NEW **t1** designs dapung4/s62_t1_dapung_mau1–4 (short crossed jacket / Song beizi / Han one-piece / half-sleeve over-jacket). No verbatim of this owner message is stored anywhere (grep FG, OD, status, briefs, reports).
+- L1239: v1 rejected (maid-like); v2 dapung4/s62_t1_dapung_v2_mau1–4 → ~17:52Z ALL REJECTED ("không có cái nào đạt hết trơn").
+- ~17:58Z: "Đáp ứng = copy Thường tại, simplify" → s62_t1_tu_thuongtai_A–D (L1242).
+- ~18:00Z owner: **"Tao có đề cập gì tới đáp ứng à?"** → the redesign was put on the WRONG RANK (voice: she most likely meant Thường tại all along). H13 voided.
+- ~18:10Z: she ran **mẫu C** (dapung4/s62_t1_tu_thuongtai_C.txt = the Thường tại design, simplified) on ChatGPT: liked ONLY its COLLAR (inner square-neck top + open outer robe); embroidery too sparse. → that collar went into t2/t3 (s62_t2_thuongtai_COMOI, s62_t3_quynhan_COMOI, L1245) and t1 (DESIGN1 JOB 5, L1253) → lineage COMOI_v2 → v2c → v2d = the thu final.
+- So the final t2 DOES carry the one thing she OK'd (collar), but the body was never redesigned: still TIER_LOW t2 "robe … soft silk sash"; GPT draws it as a chest-high skirt tied with a bow (row B t2 on the sheet = Tang ruqun look). TIER_LOW t1 literally says "a Tang-style TWO-PIECE ruqun".
+- No non-Tang t2 design with her OK exists in the repo; her ChatGPT picture is not saved (review-sheets/owner-chatgpt has only Hán t6/t8). No builder took any t2 redesign because none was approved — only the collar.
+- Ask her: which picture did she OK (ChatGPT history screenshot)? If it was mẫu C, the "OK" was for the collar only (status L1245).
+
 ## 1. Which t1–t3 common prompt she approved
 - The ONLY t1–t3 common prompt with an owner approval = the STORE/builder `TIER_LOW` in dev/art/t8-prompt-B/build.py:684 (golden_low / store-all build_all.py use it):
   - owner 18/11 ~22:45Z (FIGURE_GATE.md:102): "cái prompt cũ … ta đã ưng rồi … sản xuất ra hàng loạt là ta không hề complain";
