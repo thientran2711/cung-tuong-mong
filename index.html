@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"05332db8+","t":"2026-11-21T08:47Z","c":"kit-focus: kitFocus (Dư đồ focus view: veil, walking figure, head tabs, L/R fan, plate, say box, play layer, hud, react) + kitIdle + kitMoo…","b":"c3f11fa0f281","h":[{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"}]};
+window.CTM_BI={"s":"d3f02bcc+","t":"2026-11-21T09:32Z","c":"kit-focus: kitFocus (Dư đồ focus view: veil, walking figure, head tabs, L/R fan, plate, say box, play layer, hud, react) + kitIdle + kitMoo…","b":"15fa735fa01a","h":[{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -35365,6 +35365,11 @@ Object.assign(BAL,{nroad:{
  org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
+ /* OR19 (OD:L1288, STORY_ROADS_PLAN §3.0): an NPC consort may be a foreign princess (Công chúa hòa thân) — rolled ONCE at game start (or on
+    arrival) with the SAME share as the player's pool: BAL.orig.ow.nc out of the consort origins of BAL.orig.ow (cnv = a servant, never a
+    consort), country by BAL.orig.br.nc; max = princesses of one country in one game (the player counts); faces = princess faces per country
+    (shared by player and NPC rolls, never the same face twice in one game; stand-in = her drawn face until the princess art ships) */
+ fp:{max:1,faces:3,no:["cnv"]},
  /* at most this many NPC roads have the player as their rival at one time */
  meMax:3,
  /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
@@ -36864,8 +36869,24 @@ BAL.ge={
  bd_soi_1:{danh:36,sung:18,rel:8},bd_soi_2:{rank:1,danh:30,duc:10,rel:8},bd_soi_3:{rank:1,danh:30,tamco:10,rel:8},bd_soi_4:{seat:"TM",danh:30,sung:15,rel:8},
  bd_tuyet_1:{danh:36,duc:12,rel:8},bd_tuyet_2:{rank:1,danh:30,tamco:10,rel:8},bd_tuyet_3:{danh:30,mat:2,tamco:10,rel:8},bd_tuyet_4:{danh:30,tai:10,rel:8},
  bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8}},
- help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
- npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
+ /* GE10 (design §2.9 "Helping"): her help on an NPC's road (the jnroad help hồi) moves that NPC's grand ending — help = +pull on the ending
+    the NPC leans toward most (it stays open), a betrayal = −push on it (at 0 pull it turns fail-only: sabotage can close one); the rival she
+    told gets the same +pull (two-way, laws 1–2, like BAL.nroad.help). rw = her reward when an NPC she helped (no betrayal) then unlocks. */
+ help:{rw:{danh:6,duc:3},pull:2,push:2},
+ /* GE09 NPC parity (design §2.9, OD:L1386/L1403/L1601 (4)): an NPC consort whose road is a live branch (GE_DATA) gets the same funnel —
+    pull / closing / lean from HER choices (each stage of each chapter she plays: she picks one option of that stage, weighted by her nature
+    via jmind mindPick, no flat roll) + her own Đức + the chapter ends; at the end of HER road (the chapter that closes it) the Hồi kết nhánh:
+    Ngã rẽ 1/2 picked from her nature (nat: trait → [weights of the 4 / 3 answers]) × (1 + pull of the open ending that owns the pair × pw);
+    «Theo người ấy» only with a real bond (BAL.ge.bond.sis toward a living consort). Same resolve, odds, shading, seat locks as hers.
+    w.lean = weight an option tagged to her nature's side gets; w.pull = weight of an option that pulls an ending her nature points to;
+    w.close = factor on an option that would close / doom an open ending her nature points to (she shies away, like a player aiming at it).
+    leave = summits after which an NPC leaves the palace (a Hoàng hậu never leaves this way); news = the world news pop-up for an NPC unlock (GE08). */
+ npc:{on:true,
+  nat:{"Ân cần":{r1:[3,1,1,1],r2:[4,1,1]},"Khiêm nhường":{r1:[3,1,1,1],r2:[3,1,2]},"Tham vọng":{r1:[1,4,1,1],r2:[1,4,1]},
+   "Kiêu ngạo":{r1:[2,3,1,1],r2:[1,4,1]},"Xảo quyệt":{r1:[1,3,1,1],r2:[1,4,1]},"Kín đáo":{r1:[1,1,3,1],r2:[1,1,4]}},
+  kind:["Ân cần","Khiêm nhường"],cruel:["Xảo quyệt","Kiêu ngạo","Tham vọng"],
+  w:{lean:3,pull:3,close:.25},pw:1,bondMul:2,
+  leave:["FREE","NUN","FOLLOW","REUNION","NV"],news:true},
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
     a random bot rarely does; the funnel leaves 1–2 open by .11; a bot that plays kindly / cruelly for most of a life gets that shading */
  target:{inChar:[.30,.60],random:[0,.20],open11:[1,2.6],shade:.70},
@@ -41817,23 +41838,22 @@ const EMO_GHEN="Chạnh lòng";
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu"};/* FEELINGS-18 (owner OD 17/11 ~19:10Z): the full 18-kind set, levels, heavy names and the old-key conversion live in jfeel.js (FEEL_N, BAL.feel); Toan tính is an intent there, Đau khổ = Buồn at the heavy level */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
- kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
+ kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],neglect:["buon",30],ill:["lo",35],
  friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["buon",90],
  motherCold:["buon",50],clanUp:["vui",35],clanDown:["lo",40]};
 /* personality filter: trait → event → [emotion, ×strength] (null emotion = shrugs it off) */
 const EMO_TR={
- "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
+ "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4]},
  "Khiêm nhường":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
- "Tham vọng":{rivalUp:["ghen",1.3],otherKid:["ghen",1.2],selfUp:["vui",1.3],punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
- "Xảo quyệt":{rivalUp:["ghen",1.2],slight:["gian",1.1],punished:["gian",.9],otherKid:["ghen",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Tham vọng":{punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
+ "Xảo quyệt":{slight:["gian",1.1],punished:["gian",.9],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
  "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["buon",1.6]},
  "Kín đáo":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
- "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
  "Thù dai":{slight:["gian",1.4],foeDown:["vui",1.3]},
  "Ham lợi":{gift:["vui",1.6]},
  "Trọng nghĩa":{friendDie:["buon",1.7],friendUp:["vui",1.4]},
  "Rộng lượng":{slight:["buon",.8]},
- "Thật thà":{slight:["gian",1.1],rivalUp:["ghen",.6]},
+ "Thật thà":{slight:["gian",1.1]},
  "Mê tín":{ill:["so",1.2],kidDie:["buon",1]},
  /* servants (j10 STR) */
  trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["lo",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
@@ -41846,15 +41866,13 @@ const EMO_DK={"Thù dai":{gian:.4},"Ân cần":{gian:1.6,ghen:1.6},"Khiêm như�
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
-const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,humiliate:1.3,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
- so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
- };/* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
+const EMO_W={};/* ONE CORE (emo-balance): every kind's act weights live in BAL.feel.w (jfeel) + BAL.emo2.w (jmoodknow), copied in at load *//* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:1,binh:0,buon:0,gian:-1,so:-1,ghen:0,lo:0};
+const EMO_OD={};/* BAL.feel.odAll (jfeel) + BAL.emo2.od */
 /* the Emperor's tablet chance by her mood */
 const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
 /* servants' Lòng per month by their own mood */
-const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1};
+const EMO_LOY={};/* BAL.feel.loy (jfeel) + BAL.emo2.loy */
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
 function emoOn(){return !!(typeof S!=="undefined"&&S&&!window.__emoOff)}
 /* ---------- who ---------- */
@@ -41941,11 +41959,11 @@ function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mi
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}
- if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=1.4;/* high Đức: anger makes her withdraw instead */
+ if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=BAL.feel.wd;/* high Đức: anger makes her withdraw instead */
  return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
-/* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
+/* anger and jealousy aimed at someone raise the danger toward that person: + v/BAL.feel.dg.div × brake, capped at BAL.feel.dg.cap */
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0){const G=BAL.feel.dg;return d+Math.min(G.cap,Math.round(e.v/G.div*f))}}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return oddsCl(r+m)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return oddsCl(r+m)}}catch(e){}return r}})();
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if(e.k==="buon"&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
@@ -45251,6 +45269,23 @@ window.kitPcIntroBang=kitPcIntroBang;
 document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
  const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
  if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+/* KIT §6.3h PERSON INFO BLOCK = FIXED HEIGHT, ONE LINE PER ROW (owner 21/11 ~05:15Z #86 option A, her words: the info block must not grow with text and push the action buttons down; «Dạo này» = a headline + a «!»):
+   every row of the person info block (.pc .pcf .kr: Sở trường · Tính nết · Đã biết · Dạo này …) is ONE line; a value longer than its line is cut with «…» and a kit «!» (kitNoteBang, .kgnb) at the end of the row opens the FULL text in the kit popup.
+   kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
+function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv").forEach(v=>{
+  if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
+  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+window.kitInfoOneLine=kitInfoOneLine;
+(function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
+.pc .pcf .kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.pc .pcf .kr>.krv>*{white-space:nowrap!important}
+.pc .pcf .kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+/* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
+.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
@@ -45268,7 +45303,7 @@ window.kitPcFrameMark=kitPcFrameMark;
 function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
 window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
 (function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
@@ -57756,7 +57791,7 @@ function nrRoads(o){const M=Object.keys(NRM).filter(id=>NRM[id].k===o);if(M.leng
 function nrCh(r,n){if(NRM[r])return NRM[r].c[n]||null;if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
 function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
 /* origin of an NPC woman (canon ROAD_MAP §5.2: one father = one record) */
-function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
+function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";try{const f=typeof nrFpRoll==="function"?nrFpRoll(v):"";if(f)return f}catch(e){}/* OR19 foreign princess (jgenpc.js) */let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
  let L=(nrB().org[c]||nrB().org[""]).filter(([o])=>!(nrB().uniq.includes(o)&&o===me));if(!L.length)L=nrB().org[""];
  const tot=L.reduce((a,z)=>a+z[1],0);let x=Math.random()*tot;for(const [o,w] of L){if((x-=w)<0)return o}return L[0][0]}
 /* a road of that origin: avoid the player's road and roads other NPCs of the same origin already live (variety) */
@@ -57786,7 +57821,7 @@ function nrHe(p){try{if(!p)return"nàng";if(p.role==="eunuch"||p.sex==="m")retur
 /* r2 fix (F8): some chapter tags / titles of the roads are functions (()=>`… ${CN_Q()}`) — read their value, never their source text */
 function nrS(x,A){try{return typeof x==="function"?String(x(A)||""):String(x||"")}catch(e){return""}}
 function nrEnd(A,k,he,who){const E=A&&A.E||{};const tg=x=>plain(nrS(E[x].tag,A));const ks=Object.keys(E).filter(x=>(E[x].k||0)===k&&tg(x)&&!/✦/.test(tg(x)));
- const x=ks.length?pick(ks):null;return x?nrFill(nrTag(tg(x),he),who):""}
+ const x=ks.length?pick(ks):null;nrEnd.k=x;/* the ending key, read by the NPC grand-ending funnel (jgenpc.js «@arc=end») */return x?nrFill(nrTag(tg(x),he),who):""}
 /* r2 fix (whole group F7: 51 ending tags + 1 chapter title of the roads NPCs read carry the player's cast tokens {v} {v2} {foe} {foed} {mis}):
    an NPC's line names HER OWN cast — her rival (the player = «ngươi», j84 turns it to «ta») and, for a maid, her mistress — never a raw token */
 function nrWho(p){const o={v:"",mis:""};try{const N=p&&p.nr;if(!N)return o;
@@ -67275,7 +67310,9 @@ const D=s=>GE_DATA[s.b],C=s=>GE_CAT[s.b];
 const chN=()=>{try{return S.st.ch.n|0}catch(e){return 0}};
 /* ---------- the world: seats, people ---------- */
 function geMis(){try{const id=S.st.f14.act&&S.st.f14.act.mis;return id!=null?RV(id):null}catch(e){return null}}
-function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};return !!W[X]&&W[X]!=="me"}catch(e){return false}}
+/* GE09 seat locks both ways: a seat an NPC took by her own grand ending (v.ge.seat, jgenpc.js; rides the rivals in co-op) is taken for her too */
+function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};if(!!W[X]&&W[X]!=="me")return true;
+ return (typeof rivals==="object"&&rivals||[]).some(v=>v&&v.alive!==false&&v.ge&&v.ge.seat===X)}catch(e){return false}}
 function geStat(k){try{if(k==="dad")return S.dad||0;if(k==="maid")return S.maid?S.maid.loyal||0:0;if(k==="mis"){const v=geMis();return v?aff(v,S):-100}return S[k]||0}catch(e){return 0}}
 const gate=(s,i)=>(GB().gate[s.b+"_"+(i+1)]||{});
 function geTerm(s,i,t){const k=t[0];
@@ -67413,7 +67450,11 @@ if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(
 window.geBookHTML=geBookHTML;
 /* ---------- Bảng «Thiên mệnh»: who reached a grand ending in THIS life ---------- */
 function geBoardAdd(p,ti,sh,b){S.geBoard=S.geBoard||[];S.geBoard.push({id:p===S?"me":String(p.id),ti,sh,b,when:(typeof VP==="object"&&VP.date?VP.date(S.month,S.year):`Tháng ${S.month}, năm thứ ${S.year}`),pt:GB().pt})}
-function geBoardList(){return (S&&S.geBoard||[]).map((x,i)=>{const p=x.id==="me"?S:(typeof RV==="function"?RV(+x.id)||RV(x.id):null);return p?Object.assign({},x,{who:p,place:i+1}):null}).filter(Boolean).sort((a,b)=>(a.id==="me"?-1:0)-(b.id==="me"?-1:0))}
+/* GE09: NPC rows come from the NPCs themselves (v.ge.res, jgenpc.js) so the co-op friend sees the same Bảng; her row first, then in order reached */
+function geBoardList(){const L=(S&&S.geBoard||[]).filter(x=>x.id==="me").map(x=>Object.assign({},x,{who:S}));
+ try{for(const v of (typeof rivals==="object"&&rivals||[])){const r=v&&v.ge&&v.ge.res;if(!r||!r.ok||!v.name)continue;L.push({id:String(v.id),ti:r.ti,sh:r.sh,b:v.ge.b,when:r.when||"",pt:GB().pt,t:r.t||0,who:v})}}catch(e){}
+ const me=L.filter(x=>x.id==="me"),np=L.filter(x=>x.id!=="me").sort((a,b)=>(a.t||0)-(b.t||0));return me.concat(np).map((x,i)=>Object.assign(x,{place:i+1}))}
+window.geBoardList=geBoardList;
 function geBoardPanel(tabs){if(!S||typeof kitPanel!=="function")return;const L=geBoardList();const sec=[];if(tabs)sec.push({h:"",html:tabs});
  const rows=L.map(x=>{const o=typeof dhObj==="function"?dhObj(x.who,geKey(x.b,GE_CAT[x.b].e.findIndex(e=>e[6]===x.ti||e[7]===x.ti),x.sh)):null;
   const plate=o&&typeof kitTitlePlate==="function"?kitTitlePlate(o):`«${esc(x.ti)}»`;const nm=typeof kitName==="function"?kitName(x.who,x.who===S?{named:true}:{}):esc(x.who.name);
@@ -67477,6 +67518,8 @@ window.geMapPageHTML=geMapPageHTML;
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
 /* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
 window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:()=>geMis()};
+/* shared with the NPC parity module (jgenpc.js): the same names, keys, odds and lean formulas — nothing copied */
+window.geK={R1N,R2N,SHN,STATK,key:geKey,store:geStore,seatTaken:geSeatTaken,lifeNo:geLifeNo};
 }catch(e){console.error("jge",e)}})();
 /* ================= jdemo: GIÁNG PHẨM / LÃNH CUNG — Nội vụ phủ thu đồ vượt phẩm (review/scenes-3, sweep S3-82, owner OD:L374 08:35Z) =================
    "Demoted / sent to cold palace: above-rank items are CONFISCATED in a scene — Nội vụ phủ eunuch (person dialog) takes each item cell onto a tray,
@@ -79494,6 +79537,175 @@ try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đ
  const h0=ktStoryHTML;ktStoryHTML=function(){try{if(has()){const B=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)}];
    if(ktSubGet("story",B.concat([{k:"pt"},{k:"rg"},{k:"rgl"}]))==="pt"){const sub=kitSubTabs("story",B,kitInfo("Phụ tuyến"));return sub.html+nhPaneHTML()}}}catch(e){console.error(e)}return h0.apply(this,arguments)}})();
 Object.assign(window,{nhTip,nhHp,nhList,nhPaneHTML,nhSbMonth,nhCarrier,nhAfter,nhFlush,nhSnap});
+/* ================= jgenpc: GRAND ENDINGS — NPC PARITY (GE09), her help moves an NPC's ending (GE10), world news pop-up (GE08),
+   NPC foreign princesses (OR19) — design dev/design/GRAND_ENDINGS.md §2.5 (1), §2.9; STORY_ROADS_PLAN.md §3.0; OD:L1288 (NPC identities from
+   the player's pool), OD:L1386 / L1403 (NPCs by the same rules), OD:L1601 (4) (her help / sabotage, the NPC strikes back) =================
+   Builds on jge.js (engine, GE_DATA / GE_CAT, BAL.ge), jnroad.js (NPC roads: v.nr) and jnroadhp.js (help record, strike-back) — nothing copied:
+   names, pairs, titles, odds, lean and seat rules are read from them; every number lives in BAL.ge.npc / BAL.ge.help / BAL.nroad.fp.
+   STATE v.ge (an NPC consort whose road v.nr.r is a live branch; saved with her, rides the rivals in co-op):
+     {b branch, st[4] o/f/x, cx[4], pull[4], lt lean tally, d0 Đức at her start, en {chapter: ending key}, r1, r2, res, done, seat}
+   FLOW (host only, like the NPC roads): every chapter she plays off-screen (nrPlay) → for each stage of that chapter she picks ONE option of the
+     stage, weighted by her nature (jmind mindPick: lean side + the endings her nature points to — no flat roll) → pull / push / close / doom /
+     lean like the player's choices, + «@<chapter>=<ending>» → fail-only checks (her chapter ends, seats) → when her road closes: the Hồi kết
+     nhánh = Ngã rẽ 1/2 picked from her nature × pull → the SAME resolve as hers (open → odds → grand in a shading or fail; no owner → quiet).
+   SUCCESS: her stats + rank step (seat rules), Hoàng hậu through the lập hậu pattern (j8), a seat ending holds the seat (v.ge.seat: locks the
+     player's endings that need it, jge geSeatTaken), a leave ending takes her out of the palace, the shading title on her (jdh), a Kim sách
+     in her chest (real object, law 6c), her row on the Bảng Thiên mệnh, world news = the centre kit pop-up (GE08, both co-op players).
+   FAIL: her loss; a public fall (rank lost) is a palace news line only.
+   HELP (GE10): the jnroad help hồi → +BAL.ge.help.pull on the ending she leans to most; a betrayal → −push (0 → fail-only); the rival told
+     gets +pull (two-way); she unlocks after the player's help and no betrayal → BAL.ge.help.rw to the player.
+   OR19: at game start (and on arrival) an NPC consort may be a foreign princess with the player's pool share; v.fpk origin key, v.fpf face no.
+   Kill switch: BAL.ge.npc.on false. Kit only: Q centre pop-up (kitModal through showModal), log lines, jdh title, j90 podium (jge). */
+(function(){try{
+const GB=()=>BAL.ge,NB=()=>BAL.ge.npc;
+const on=()=>{try{return !!(GB().on&&NB().on&&typeof GE_DATA==="object"&&typeof GE_CAT==="object")}catch(e){return false}};
+const host=()=>{try{return !(typeof nrGuest==="function"&&nrGuest())}catch(e){return true}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const K=()=>window.geK;
+/* ---------- OR19: foreign princess identity ---------- */
+/* share of the player's pool (BAL.orig.ow): hòa thân's weight over every consort origin's weight */
+function fpShare(){const W=BAL.orig.ow,no=BAL.nroad.fp.no||[];let t=0;for(const k in W)if(!no.includes(k))t+=W[k]||0;return t>0?(W.nc||0)/t*100:0}
+function fpUsed(){const U={};try{const me=S.origin&&S.origin.k;if(me&&originRoot(me)==="nc")(U[me]=U[me]||[]).push(S.fpf||1)}catch(e){}
+ for(const v of (rivals||[]))if(v&&v.fpk)(U[v.fpk]=U[v.fpk]||[]).push(v.fpf||0);return U}
+/* one roll per consort, kept: "" = not a princess; else the country branch key (nc / bd …) */
+function nrFpRoll(v){if(!v||v===S)return"";if(v.fpk!==undefined)return v.fpk||"";v.fpk="";
+ try{if(!on()&&!(BAL.nroad&&BAL.nroad.fp))return"";if(v.fromMaid||v.wasMaid||v.coop||v.queen)return"";
+  /* a house's own daughter (j55: the house sent her, n.dad set) is that house's record, never a princess */
+  if(v.dad!=null&&v.clan)return"";if(!roll(fpShare()))return"";
+  const k=originBrPick("nc",Math.random());const F=BAL.nroad.fp,U=fpUsed();const used=U[k]||[];if(used.length>=F.max)return"";
+  const free=[];for(let i=1;i<=F.faces;i++)if(!used.includes(i))free.push(i);if(!free.length)return"";
+  const o=originByKey(k);v.fpk=k;v.fpf=pick(free);v.clan=(o&&o.land)||"";/* her house is abroad: no court house (tdHouse null) */return k}catch(e){console.error("fp",e);return""}}
+window.nrFpRoll=nrFpRoll;
+/* the player's own princess face takes one of the same faces (never twice in one game) */
+function fpMine(){try{const me=S.origin&&S.origin.k;if(!me||originRoot(me)!=="nc"||S.fpf)return;const U=fpUsed();const used=(U[me]||[]).filter(x=>x);
+ const free=[];for(let i=1;i<=BAL.nroad.fp.faces;i++)if(!used.includes(i))free.push(i);S.fpf=free.length?pick(free):1}catch(e){}}
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);
+ try{if(S&&!S.dead&&host()){fpMine();for(const v of rivals.slice())if(v&&v.alive&&!v.out&&!v.coop&&v.fpk===undefined)nrFpRoll(v)}}catch(e){console.error("fp",e)}return r}})();
+/* ---------- GE09: NPC state ---------- */
+function nBranch(v){const r=v&&v.nr&&v.nr.r;return r&&GE_DATA[r]&&GE_CAT[r]&&r.split("_")[0]===v.nr.o?r:null}
+function nS(v){if(!v||v===S||v.coop)return null;if(v.ge&&v.ge.b)return v.ge;if(!on())return null;const b=nBranch(v);if(!b)return null;
+ v.ge={b,st:["o","o","o","o"],cx:[0,0,0,0],pull:[0,0,0,0],lt:0,d0:v.duc|0,en:{},done:0};return v.ge}
+const D=g=>GE_DATA[g.b],C=g=>GE_CAT[g.b];
+/* her stats for the gates (same keys as the player's; a field she lacks counts 0) */
+function nStat(v,k){try{if(k==="dad")return v.dad||0;if(k==="maid"){let m=0;try{for(const s of (typeof knStaff==="function"?knStaff(v):[]))m=Math.max(m,s.loyal||0)}catch(e){}return m}
+ if(k==="mis")return -100;if(k==="mat")return +v.mat||0;return v[k]||0}catch(e){return 0}}
+const gate=(g,i)=>(GB().gate[g.b+"_"+(i+1)]||{});
+function nSeatTaken(X,v){try{if(X==="HH"){if(v.queen)return false;return (typeof qOn==="function"&&qOn())||(S.rank>=RANKS.length-1&&!S.cold)}
+ const W=S.geSeat||{};if(W[X])return true;return rivals.some(w=>w&&w!==v&&w.alive!==false&&w.ge&&w.ge.seat===X)}catch(e){return false}}
+function nSon(v){try{return allKids().some(([k,m])=>m===v&&k.sex==="m"&&k.alive)}catch(e){return false}}
+const ENDK={1:"win",0:"mid","-1":"lose"};
+function nTerm(v,g,i,t){const k=t[0];
+ if(k==="s")return nStat(v,t[1])>=(gate(g,i)[t[1]]||0);
+ if(k==="e"){const e=g.en[t[1]];return !!e&&String(t[2]).split("|").includes(e)}
+ if(k==="seat")return !nSeatTaken(t[1],v);
+ if(k==="seatT")return nSeatTaken(t[1],v);
+ if(k==="mis")return false;/* a consort has no mistress: a {mis} condition never holds for her */
+ if(k==="misD")return false;
+ if(k==="son")return nSon(v);
+ return false}
+const nCond=(v,g,i)=>(D(g).e[i].cond||[]).every(t=>nTerm(v,g,i,t));
+function nLive(v,g){(D(g).e||[]).forEach((e,i)=>{if(g.st[i]==="o"&&(e.fo||[]).some(t=>nTerm(v,g,i,t)))g.st[i]="f"})}
+/* one option name taken → the branch (the player's geNote rules, on her state) */
+function nNote(g,n,ch){const B=D(g),P=GB().pull;
+ B.e.forEach((e,i)=>{if((e.pull||[]).includes(n))g.pull[i]+=P.step;if((e.push||[]).includes(n))g.pull[i]=Math.max(0,g.pull[i]-P.push);
+  if((e.close||[]).includes(n)&&g.st[i]!=="x"){g.st[i]="x";g.cx[i]=ch}else if((e.doom||[]).includes(n)&&g.st[i]==="o")g.st[i]="f"});
+ if((B.lean.p||[]).includes(n))g.lt++;if((B.lean.m||[]).includes(n))g.lt--}
+/* her nature (traits) */
+function nTraits(v){let t=[];try{t=typeof traitsOf==="function"?traitsOf(v)||[]:[]}catch(e){}if(!t.length&&v.trait)t=[v.trait];return t}
+function nNat(v){const N=NB().nat,T=nTraits(v);const r1=[0,0,0,0],r2=[0,0,0];let n=0;
+ for(const t of T){const x=N[t];if(!x)continue;n++;x.r1.forEach((w,i)=>r1[i]+=w);x.r2.forEach((w,i)=>r2[i]+=w)}
+ if(!n){r1.fill(1);r2.fill(1)}return {r1,r2,kind:T.some(t=>NB().kind.includes(t)),cruel:T.some(t=>NB().cruel.includes(t))}}
+/* the weight of an option for HER: base 1, + her side of the lean, + endings her nature points to (their pair weight) */
+function nOptW(v,g,n,nat){const B=D(g),W=NB().w;let w=1;
+ if(nat.kind&&(B.lean.p||[]).includes(n))w+=W.lean;if(nat.cruel&&(B.lean.m||[]).includes(n))w+=W.lean;
+ const top1=Math.max(...nat.r1),top2=Math.max(...nat.r2);
+ C(g).e.forEach((e,i)=>{if(g.st[i]==="x")return;const a=nat.r1[e[3]]||0,b=nat.r2[e[4]]||0;const mine=a>=top1&&b>=top2,half=a>=top1||b>=top2;
+  if((B.e[i].pull||[]).includes(n))w+=mine?W.pull:half?W.pull/2:0;
+  /* she shies away from what would close or doom an ending her nature points to (a player who aims at one does the same) */
+  if(g.st[i]==="o"&&(mine||half)&&((B.e[i].close||[]).includes(n)||(B.e[i].doom||[]).includes(n)))w*=W.close});return w}
+const RAWN=o=>{try{return typeof o.n==="function"?"":String(o.n||"")}catch(e){return""}};
+/* she plays chapter A: one option per stage of the chapter's path, picked by her nature */
+function nChoose(v,g,A,ch){try{const nat=nNat(v);const P=Array.isArray(A.p)?A.p:[[Object.keys(A.B||{})[0]]];
+ for(const stage of P){const L=[];for(const bid of [].concat(stage)){const b=A.B&&A.B[bid];if(!b||!Array.isArray(b.o))continue;for(const o of b.o){const n=RAWN(o);if(n&&!L.some(x=>x[0]===n))L.push([n,nOptW(v,g,n,nat)])}}
+  if(!L.length)continue;const n=typeof mindPick==="function"?mindPick(L,v):wpick(L);if(n)nNote(g,n,ch)}}catch(e){console.error("ge npc",e)}}
+/* ---------- the Hồi kết nhánh of an NPC ---------- */
+function nBond(v){try{const s=GB().bond.sis;for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop&&aff(v,x)>=s)return x.name;
+ if(aff(v,S)>=s&&!S.dead)return S.name}catch(e){}return null}
+function nPair(v,g){const nat=nNat(v),E=C(g).e,pw=NB().pw;const bond=nBond(v);const L=[];
+ for(let a=0;a<4;a++)for(let b=0;b<3;b++){let w=(nat.r1[a]||0)*(nat.r2[b]||0);if(a===3)w=bond?w*NB().bondMul:0;if(w<=0)continue;
+  const j=E.findIndex(e=>e[3]===a&&e[4]===b);if(j>=0&&g.st[j]==="o")w*=1+g.pull[j]*pw;L.push([[a,b],w])}
+ const p=L.length?(typeof mindPick==="function"?mindPick(L,v):wpick(L)):[0,2];g.who=bond||"";return p||[0,2]}
+function nLean(v,g){const V=GB().var;const last=g.r2===0?1:g.r2===1?-1:0;return g.lt*V.tag+((v.duc|0)-(g.d0|0))*V.duc+last*V.last}
+function nShade(v,g,i){const L=nLean(v,g),c=GB().var.cut;if(L>=c)return"t";if(L<=-c)return"a";return C(g).e[i][2]==="A"?"a":"t"}
+function nOdds(v,g,i){const O=GB().odds;let p=O.base+g.pull[i]*O.per;p=Math.max(O.min,Math.min(O.max,p));if(!nCond(v,g,i))p=Math.min(p,O.noCond);return Math.round(p)}
+function nWhen(){try{return typeof VP==="object"&&VP.date?VP.date(S.month,S.year):`Tháng ${S.month}, năm thứ ${S.year}`}catch(e){return""}}
+function nResolve(v,force){const g=nS(v);if(!g||g.done)return null;nLive(v,g);const [r1,r2]=nPair(v,g);g.r1=r1;g.r2=r2;const E=C(g).e,Bd=D(g);
+ const i=E.findIndex(e=>e[3]===r1&&e[4]===r2);let res;
+ if(i<0){let j=-1,best=-1;g.pull.forEach((p,k)=>{if(p>best||(p===best&&j>=0&&g.st[j]!=="o"&&g.st[k]==="o")){best=p;j=k}});if(best<=0){j=g.st.indexOf("o");if(j<0)j=0}res={i:j,ok:0,quiet:1}}
+ else if(g.st[i]==="o"){const p=nOdds(v,g,i);res={i,ok:(force!=null?!!force:roll(p))?1:0,odds:p}}
+ else res={i,ok:0,st:g.st[i]};
+ res.lean=nLean(v,g);if(res.ok){res.sh=nShade(v,g,res.i);res.ti=E[res.i][res.sh==="t"?6:7]}
+ res.n=E[res.i][0];res.fail=Bd.e[res.i].fail;res.t=S.turn;res.when=nWhen();g.res=res;g.done=1;
+ try{nApply(v,g,res)}catch(e){console.error("ge npc",e)}return res}
+window.geNpcResolve=nResolve;
+/* ---------- reward / loss on the NPC ---------- */
+function nRank(v,n){try{if(!n||v.queen)return"";const r0=v.rank|0;
+ if(n>0){const r=Math.min(RANKS.length-2,r0+n);if(r>r0&&(typeof seatHas!=="function"||seatHas(v,r))){if(typeof seatUp==="function"&&r<RANKS.length-1)seatUp(v,r,"ge");else v.rank=r;v.lastPromo=S.turn}}
+ else v.rank=Math.max(0,r0+n);return v.rank!==r0?`${RANKS[r0].n} → ${RANKS[v.rank].n}`:""}catch(e){return""}}
+function nCrown(v){if(v.queen||(typeof qOn==="function"&&qOn())||S.rank>=RANKS.length-1)return false;
+ v.rank=RANKS.length-2;v.queen=true;const i=rivals.indexOf(v);if(i>0){rivals.splice(i,1);rivals.unshift(v)}v.lastPromo=S.turn;return true}
+function nApply(v,g,res){const id=g.b+"_"+(res.i+1),sum=C(g).e[res.i][5];const out=[];res.fx={};
+ if(res.ok){const W=GB().rw[id]||{};const fx={};for(const k of K().STATK)if(W[k]&&k in v)fx[k]=W[k];if(Object.keys(fx).length)ap(v,fx);res.fx=fx;
+  const rk=nRank(v,W.rank||0);if(rk)out.push(rk);
+  if((W.seat==="HH"||sum==="HH")&&nCrown(v))out.push("lập làm Hoàng hậu");
+  else if(GB().seat.includes(sum)&&sum!=="HH"&&!nSeatTaken(sum,v)){g.seat=sum}
+  if(W.rel){for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop){if(res.sh==="t")affAdd(x,v,W.rel);else oanAdd(x,v,W.rel)}}
+  /* the one treasure, a real object in HER chest (law 6c; cannot be sold, given or lost) */
+  const kk=GB().kimsach;if(IT[kk]){v.inv=v.inv||[];v.inv.push({k:kk,from:"ge",ti:res.ti,d:S.turn,nt:true})}
+  try{if(typeof dhInc==="function")dhInc(v,K().key(g.b,res.i,res.sh))}catch(e){}
+  if(NB().leave.includes(sum)&&!v.queen){v.alive=false;v.left=sum;if(sum==="NUN")v.nun=1;g.left=1}
+  /* GE10: her help on this road (no betrayal) is remembered */
+  try{const H=v.nr&&Array.isArray(v.nr.hp)?v.nr.hp:[];if(H.some(x=>x[1]>0)&&!H.some(x=>x[1]<0)&&!v.nr.geRw){v.nr.geRw=1;const R=GB().help.rw;apply(R);res.help=fmt(R)}}catch(e){console.error(e)}
+  log(`<b class="g">Thiên hạ truyền tin · Đại kết cục:</b> ${esc(v.name)} đã thành “${esc(res.ti)}”${out.length?` (${out.join(", ")})`:""}.${res.help?` Nhờ ngươi từng giúp một tay, nàng nhớ ơn: ${res.help}.`:""}`)}
+ else{const L=res.quiet?{}:(GB().fail[id]||{});const fx={};for(const k of K().STATK)if(L[k]&&k in v)fx[k]=L[k];if(Object.keys(fx).length)ap(v,fx);res.fx=fx;
+  const rk=nRank(v,L.rank||0);if(rk){out.push(rk);res.fall=1;log(`<span class="past">Tin trong cung · ${esc(v.name)} · ${esc(res.fail)}: bị giáng ${rk}.</span>`)}}
+ res.ex=out}
+/* ---------- the funnel rides her road ---------- */
+function nAfterCh(v,A,cid,n,r){if(!r||!A)return;const g=nS(v);if(!g||g.done)return;nChoose(v,g,A,n);
+ const x=nrEnd.k;if(x){g.en[n]=String(x);nNote(g,"@"+cid+"="+x,n)}nLive(v,g);
+ if(v.nr.x&&v.alive&&!v.out)nResolve(v)}
+(function(){if(typeof nrPlay!=="function")return;const f=nrPlay;nrPlay=function(v){let A=null,cid="",n=0;
+ try{if(on()&&v&&v.nr&&nBranch(v)){n=v.nr.n;A=nrCh(v.nr.r,n);cid=typeof nrAskId==="function"?nrAskId(v.nr.r,n):v.nr.r;nrEnd.k=null}}catch(e){}
+ const r=f.apply(this,arguments);try{if(A&&on())nAfterCh(v,A,cid,n,r)}catch(e){console.error("ge npc",e)}return r}})();
+/* ---------- GE10: her help / betrayal on an NPC road ---------- */
+function nLeadI(g){let j=-1,b=-1;g.st.forEach((s,i)=>{if(s==="o"&&g.pull[i]>b){b=g.pull[i];j=i}});return j}
+function nHelpMove(v,sign){const g=nS(v);if(!g||g.done)return"";const j=nLeadI(g);if(j<0)return"";const H=GB().help;
+ if(sign>0){g.pull[j]+=H.pull;return ` Ngả đường «${esc(C(g).e[j][0])}» của ${typeof nrHe==="function"?nrHe(v):"nàng"} thêm vững.`}
+ g.pull[j]=Math.max(0,g.pull[j]-H.push);if(g.pull[j]<=0){g.st[j]="f";g.cx[j]=v.nr?v.nr.n:0}return""}
+(function(){if(typeof nrHelped!=="function")return;const h0=nrHelped;nrHelped=function(X,how){const r=h0.apply(this,arguments);
+ try{if(!on()||!how||!host())return r;const v=X&&X.A&&X.A.o;let add="";if(v&&rivals.includes(v))add+=nHelpMove(v,how>0?1:-1);
+  if(how<0){const o=X.B&&X.B.o;if(o&&o!==v&&rivals.includes(o))nHelpMove(o,1)}return (r||"")+add}catch(e){console.error("ge npc",e);return r}}})();
+/* ---------- GE08: world news = centre kit pop-up (both co-op players read the same NPC state) ---------- */
+function nSum(v,g,res){const sum=C(g).e[res.i][5];if(v.queen&&(sum==="HH"))return"Thánh chỉ lập nàng làm Hoàng hậu, chủ trì lục cung.";
+ if(g.left)return sum==="NUN"?"Nàng xin xuất gia, rời cung cấm.":sum==="FOLLOW"?"Nàng theo người mình gắn bó rời khỏi cung cấm.":sum==="NV"?"Nàng về cố quốc, lên ngôi nữ vương.":"Nàng rời khỏi cung cấm.";
+ if(g.seat)return {NDE:"Ngôi nữ đế từ nay thuộc về nàng.",THH:"Nàng buông rèm nhiếp chính.",TM:"Con nàng nối ngôi, nàng thành mẹ của vua."}[g.seat]||"";return""}
+function nNews(){if(!S||S.dead||!on()||!NB().news)return 0;S.geNs=S.geNs||{};let n=0;
+ for(const v of (rivals||[])){const g=v&&v.ge,res=g&&g.res;if(!res||!res.ok||!v.name)continue;const id=String(v.id)+":"+g.b;if(S.geNs[id])continue;S.geNs[id]=1;
+  const ident=(typeof GE_ID==="object"&&GE_ID[g.b.split("_")[0]])||"";const s2=nSum(v,g,res);
+  /* the kit news panel (KIT §kitModal, kind "news"): the person = the full-body figure column (subject), one fact per line, the date on the sub line */
+  const facts=[`${v.name} đi trọn con đường «${C(g).n}»${ident?` (${ident})`:""}, tới Đại kết cục «${res.n}».`,`Thiên hạ gọi nàng là “${res.ti}”.`];
+  if(s2)facts.push(s2);if(res.help)facts.push(`Nàng nhớ ơn ngươi từng giúp một tay: ${res.help}.`);
+  /* the news names her in public: the player now knows her name (j61 reveal stage 2 «Biết tên»; true information) */
+  try{if(typeof k61Know==="function")k61Know(v,"Thiên hạ truyền tin về nàng.",true,2)}catch(e){}
+  if(typeof kitPanel==="function")kitPanel({kind:"result",title:"Thiên hạ truyền tin",sub:res.when||"",subject:v,facts,btn:"Đã rõ"});
+  else Q.push({t:"Thiên hạ truyền tin",who:v,h:facts.map(f=>`<p>${esc(typeof f==="string"?f:v.name+" "+f.text)}</p>`).join("")});n++}
+ return n}
+window.geNpcNews=nNews;
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(nNews()&&typeof showModal==="function"&&$("modal")&&$("modal").hidden)showModal()}catch(e){console.error("ge npc",e)}return r}})();
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg&&nNews()&&$("modal").hidden)showModal()}catch(e){}return r}})();
+/* old saves: a road already past its finale with no v.ge stays as it was (nothing to resolve); dbg for tests / bots */
+window.geNpcDbg={state:nS,choose:nChoose,pair:nPair,odds:nOdds,lean:nLean,term:nTerm,live:nLive,help:nHelpMove,share:fpShare,used:fpUsed};
+}catch(e){console.error("jgenpc",e)}})();
 
 /* ================= jmoodknow: NGUYÊN DO TÂM TRẠNG — who knows WHY a person feels so (owner OD 17/11 ~17:55Z item (1)) =================
    Owner: the mood seal is seen by anyone who SEES the person; the CAUSE shows only when she KNOWS it, else "Nguyên do chưa rõ".
@@ -79815,12 +80027,17 @@ Object.assign(BAL,{feel:{
   hon:{c:["giao-thiep"],p:[-1,-2,-3]},
   ghen:{c:["giao-thiep"],p:[0,-1,-2]}},
  /* act weights of NPCs (jemo EMO_W shape: harm / kind / idle / an act key), scaled by strength like every feeling */
- w:{tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
+ w:{vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.35,kind:.6,provoke:1.15,humiliate:1.15,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
+  so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
+  tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
   tinhnghich:{kind:1.3,visit:1.3,harm:.8},hothen:{visit:.5,idle:1.4,kind:.8,harm:.8},chan:{idle:1.3,visit:1.2},khochiu:{harm:1.1,idle:1.3,kind:.9},
-  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.15,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+ /* anger / jealousy / sulk aimed at someone: danger toward that person + strength/div × the Đức brake, capped at cap (jemo danger wrap);
+    wd = idle weight of a high-Đức consort who withdraws instead of lashing out when angry or jealous (jemo emoMul) */
+ dg:{cap:5,div:8},wd:1.4,
  /* odds points of any act at strength 100 (jemo EMO_OD shape, "a little") and servants' Lòng a month by their own feeling (EMO_LOY shape) */
- odAll:{tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
- loy:{tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
+ odAll:{vui:1,binh:0,buon:0,gian:-1,so:-1,lo:0,tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
+ loy:{vui:2,binh:0,buon:-1,gian:-2,so:-1,lo:-1,tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
  /* the Emperor's tablet chance × (Tình tứ of the consort, by level) */
  night:{tinhtu:[1.03,1.06,1.1]},
  /* thiện cảm gains of others toward a joyful person × (1 + this, by level); a sulk drifts the sulker's thiện cảm toward its target by this a day */
@@ -88867,7 +89084,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c3f11fa0f281";window.CTM_BUILD=BUILD;
+const BUILD="15fa735fa01a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
