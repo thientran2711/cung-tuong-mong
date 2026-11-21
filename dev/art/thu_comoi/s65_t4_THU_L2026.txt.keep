@@ -1,0 +1,32 @@
+base: dev/art/thu_comoi/s62_t4_THU_sqtest_L1994.txt
+allow: beautiful/handsome romantic-lead looks for everyone   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a SOFT gentle oval face   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a smooth wide forehead   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: smooth rounded cheeks and a small soft chin   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: no sharp angles anywhere   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: large TENDER almond eyes with gently LOWERED outer corners and a soft warm look   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the gaze soft and kind   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: gently curved brows that slope gently DOWN at the tails   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a small delicate nose   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a small soft mouth with gently rounded lips   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the head inclined slightly to one side   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the soft eyes warm and full of gentle affection   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a small sweet closed-lip smile   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: do NOT copy poses   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: hair ornaments or accessories of the reference   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: dress her in the NEW outfit below   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of lotus flowers at collar   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: framed by a wide stiff lilac band embroidered with lotus flowers   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: a few MEDIUM embroidered lotus flowers scattered on the robe body and the sleeves   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: and lotus sprays on the skirt front   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: an embroidered silk sash with silk tassels   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: her signature colour family light olive and lilac stays the MAIN robe colour   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the robe itself is clearly light olive silk   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: light olive silk like #9FB577 is the main colour of the robe   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: with lilac in the inner robe and linings   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: decorated with ONE fresh lotus flower and several gold hairpins   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: exactly ONE fresh lotus flower in her hair   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: the MAIN colour light olive and the SECONDARY colour lilac   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light olive and her secondary colour lilac   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: Everyone beautiful at every age   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026
+allow: "Mùa Thu · Tần · thử cổ vuông · phi bạch xanh trăng L1847 · thêu nhiều hơn L1994"   # person slot s62->s65 (face/colour/flower F2+F20), t4 sash/lamp/no-leaf fixes; owner L2009/L2026

@@ -18,3 +18,10 @@ Fixed and verified: Fold columns 236 px, titles line-clamp 2 (9 of 9 buttons: no
 FAIL — the sub-line is nowrap + ellipsis and on Fold the widest ladder word eats the price: «Năm ăn năm thua · Tố…» (Việc số 3 and Việc số 8: sub-line scrollWidth > clientWidth; iPad fine). The cost («Tốn N khắc») is the player's price (kit rule: the price is never hidden on an act card, owner «Tốn» row); it is only reachable through the «!» popover. Every 50/50 act on Fold will show it.
 Fix: sub-line may take 2 lines (title 2 + sub 2 fits a 64 px button) or put the price first («Tốn 3 khắc · Năm ăn năm thua») so the ellipsis can only eat the odds word, or render the odds as the kit odds meter and keep only «Tốn N khắc» as text; then assert in kit-focus.js: no .kfoc-b small is ellipsized (scrollWidth <= clientWidth) on both viewports with the real ladder words (Liều … Năm ăn năm thua … Nắm chắc).
 Not run after the FAIL: quickcheck/coop-e2e on r2 (stopped; the keeper reports PASS/92-92).
+
+## Round 3 — PASS
+
+Keeper #2 r3 b0a8eb4b + LIVE e391b85f (assemble.py list: main's jroad8.js kept, jfocus.js after jnamefix.js; index/sw rebuilt; contains newest LIVE) = review/kit-focus-rv3 sha a1e2abc8b25eef7a4b038fbd6dc53da231ff3a15.
+- Sub-line fixed: two nowrap parts «odds word» · «Tốn N khắc» that wrap between the parts (title 2 + sub 2 lines fit; line-height 1.1): my probe on Fold: 0 of 9 sub-lines cut (scrollWidth <= clientWidth), 0 button overflow, text margin >= 11 px (iPad 15); looked at r3 Fold shot: «Năm ăn năm thua · / Tốn 3 khắc» both visible, 2-line title + 2-line sub fits (greyed «Rỉ tai chuyện trong cung»). kit-focus.js (asserts sub-line width+height with all 7 ladder words) PASS Fold + iPad.
+- All round-1/2 items still fine: dim + blur veil, top bar + 8 tabs stay, figure at standard size, name under feet, head tabs, L+R columns of one size (Fold 236 px / iPad 300), ✕ walks back, SAY box (iPad: figure rises, feet above box), play/hud/react API, F.setGroups, F.play skip/onBack.
+- coop-e2e 94/94. QUICKCHECK PASS 241 s (render 259/177, tab 536/535, buổi 1337/2691, core gates PASS, old save ok). No stray images in the tree.

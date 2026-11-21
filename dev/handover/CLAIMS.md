@@ -828,7 +828,7 @@ kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text c
 | coop-guest-names (opus BIG; MAIN 91 ORDER 08:34Z: guest k61 name mask misses shared-world people + jnamefix cross-seat) | review/coop-guest-names; briefs/b5-coop-guest-names.md | B | session_01N1tNP4yDu6wnmaLKhzumGM | SSK 3ffea799 (reports/coop-guest-names.md) | 21/11 10:40Z |
 | coop-guest-names (opus BIG; MAIN 91 ORDER 08:34Z: guest k61 name mask misses shared-world people + jnamefix cross-seat) | review/coop-guest-names; briefs/b5-coop-guest-names.md | B | session_01N1tNP4yDu6wnmaLKhzumGM | RUNNING | 21/11 09:21Z |
 | ending-screens-land (opus BIG re-merge; MAIN 92 ORDER 08:53Z: G4 80-dialog-fixed fail; + ending-screens-2 on top) | review/ending-screens-land, review/ending-screens-2-land; briefs/b5-ending-screens-land.md | B | session_01N1tNP6MabVX7Umpx2XWEzo | RUNNING | 21/11 09:21Z |
-| mg-noword-care (sonnet SMALL; MAIN 92 ORDER 09:14Z: thu_tam/thu_choi/tuoi words + whole family) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP2S5rf5Z5gTFLmPZaf | RUNNING | 21/11 09:21Z |
+| mg-noword-care (sonnet SMALL; MAIN 92 ORDER 09:14Z: thu_tam/thu_choi/tuoi words + whole family) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP2S5rf5Z5gTFLmPZaf | DONE → LAND READY 0409cdb1 | 21/11 09:21Z |
 kit-opt-kem rv | review/kit-opt-kem-rv e09fd19a | rv session | PASS (+law-4 finding for MAIN) | 21/11
 | SG-CARD (opus; MAIN 92 09:43Z: option-line Sủng literal not run through sg() — whole family j7/j8/jact/jdis + shown-vs-applied scan) | review/sg-card (base review/kit-opt-kem-rv e09fd19a); reports/sg-card.md | FOREMAN D #15 | session_01964izDpmefTHJeFavzFYEQ | RUNNING | 21/11 09:46Z |
 | GAP SPREAD (sonnet; MAIN 92 09:40Z: 27 no-branch OTHER rows of GAP_LIST_v3 → ORDER lines in owners' STATUS) | handover branch only; dev/handover/GAP_LIST_v3.md | FOREMAN D #15 | session_01964izFUmgHDvrDQQXoo4Ki | DONE (archived) | 21/11 09:52Z |
@@ -837,8 +837,9 @@ kit-badge rv2 | review/kit-badge-rv2 9a05a707 | rv session | PASS | 21/11
 | BAL PROOF (opus; GAP OR12 HH ±5 + EM01 emotion 150v150) | review/bal-proof; reports/bal-proof.md | FOREMAN D #15 | session_01964izFzGxSL8HNQXDXiA9R | RUNNING | 21/11 09:52Z |
 kit-focus rv2 | review/kit-focus-rv2 6291a355 | rv session | FAIL (Fold sub-line cuts the cost) | 21/11
 | mg-noword-care (sonnet SMALL; MAIN CHÍNH 92) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | READY 5fde6816 | 21/11 |
-| REVIEW mg-noword-care (sonnet SMALL) of 5fde6816 | review/mg-noword-care-rv | B | session_01N1tNP5HUkYY7fK5tUcLVxh | RUNNING | 21/11 09:59Z |
+| REVIEW mg-noword-care (sonnet SMALL) of 5fde6816 | review/mg-noword-care-rv | B | session_01N1tNP5HUkYY7fK5tUcLVxh | PASS 0409cdb1 (FF of main e391b85f) | 21/11 |
 | coop-arrive-see (opus BIG; GAP OD-CO1, MAIN 92 ORDER 09:50Z via D: second co-op arriver does not see friend) | review/coop-arrive-see; briefs/b6-coop-arrive-see.md | B | session_01N1tNP4rBywa4C29JMb8gx6 | RUNNING | 21/11 10:12Z |
 | ui-leftover-fold (sonnet SMALL; GAP MG12+KP05+KP14+M17, MAIN 92 ORDER 09:50Z via D; reuse mg-ui-rest + kit-opt-text) | review/ui-leftover-fold; briefs/b6-ui-leftover-fold.md | B | session_01N1tNP2bJj9FqZNTvhAgTmS | RUNNING | 21/11 10:12Z |
 | REVIEW jlost-kyngo E42r (opus BIG) of 2fa2e667 | review/jlost-kyngo-r1; reports/jlost-kyngo-review.md | FOREMAN E #26 | session_01DgYSWogzcg1vAwJPLueGcM | RUNNING | 21/11 10:17Z |
 | REVIEW coop-guest-names (opus BIG) of 3ffea799 | review/coop-guest-names-r1 | B | session_01N1tNP4xhQc6kgxpjhWCyYJ | RUNNING | 21/11 10:22Z |
+kit-focus rv3 | review/kit-focus-rv3 a1e2abc8 | rv session | PASS | 21/11
