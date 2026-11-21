@@ -20,3 +20,6 @@ t1 Đáp ứng fHz8PhrCDY · t2 Thường tại jUobW1FLD0 · t3 Quý nhân DoOY
 t4 sqtest_L1834 NOT drawn: gate FAIL B26/M06/S13 (same as the earlier #22-waived t4) — asked #24 for "t4 waived".
 LOOK: snow-violet gauze shawl on all three reads sheer, robe/arms visible through it ✓, soft violet hue; thin gold edge barely visible at this size. t1: low square neck, waist ribbon, book, white lilac ✓. t2: square neck ✓, peach-coral tiger lily in hair ✓, brick-red pellet drum with handle (contrasts) ✓, tiger lilies scattered on skirt. t3: 3/4 right ✓, lilac apron panel + jade pendants ✓, hand adjusting hairpin + bamboo flute ✓, one rose-pink rose ✓. Notes: shawl large/voluminous on all; the olive reads sage-green.
 Session total: 705 + 165 = 870 cr.
+t4 Tần sqtest L1834 — id 3zKyaU7REY · 55 cr (waived B26/M06/S13 by #24) · same settings/ref · sheet updated (4 filled).
+LOOK: low square neck with lilac lotus band fully visible ✓; round petal-lobed capelet, open at front ✓; pearl net on the shoulders/upper capelet with pearl fringe on the lobes (net not clearly the full capelet length ✗); hair up + ONE large lotus ✓; white-jade lotus lamp upright ✓; snow-violet sheer shawl ✓. ✗ body is near-frontal, not a clear 45° left three-quarter.
+A49 total 220 cr; session total 705 + 220 = 925 cr.
