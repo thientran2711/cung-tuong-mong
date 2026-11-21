@@ -14,3 +14,9 @@ Bỏ mọi mặt nhóm Sắc sảo (trang 1: m09; trang 2: c17 c23 c29); Kiêu k
 Trang 1 republish v3 cùng URL: đủ m01–m52 trừ nhóm ẩn = 51 mặt (m09 Sắc sảo ẩn; Kiêu kỳ 0, Lạnh lùng 0), tab lọc theo nhóm, 5 mặt đang dùng (m10 m11 m12 m13 m18) có nhãn «đang dùng», mặt trong kho ghi «· trong kho».
 
 L1925: m11 đổi nhãn «đang dùng» → «đã bỏ» (v4).
+
+## JOB L2013 — bảng màu hoa (0 gen, không sửa prompt, chờ owner duyệt)
+- dev/art/face-common/flower_colours_L2013.json: 90 người × 4 mùa (palettes_season_L1726) → tone soft/medium/vivid (114/167/79 trên 360 bộ), hoa thêu hex+tên VN, hoa tóc hex+tên VN, hair_by_tier t1..t6. Script make_flower_colours_L2013.py (OKLCH: độ rực hoa bị chặn theo tone, không trùng áo chính dE>=14, không vàng/xanh lá, màu phụ của áo làm gốc hue nếu hợp).
+- Trang màu (private): https://claude.ai/artifact/9CPDiiiEqgAwaq2tZESbjx (nguồn dev/art/face-pages/flower_swatches.html, build_flowers.py) — lọc theo nhóm mặt + độ rực, 390px OK.
+- Rule nháp: dev/art/face-common/flower_rule_draft_L2013.md (F20, chưa add).
+- Giới hạn: thuật toán, chưa có mắt chủ nhân; chưa xét từng cấp ngoài ramp t1–t6; t7/t8 chỉ thêu (F2) dùng cột hoa thêu. Chưa so với s62 REVERT1 từng cấp (s62 thu cùng họ hồng nhạt).
