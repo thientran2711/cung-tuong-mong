@@ -36,3 +36,41 @@ Nguồn:
 - [Cornell — Han women's style](https://exhibits-container-int.library.cornell.edu/chinese-traditional-dress/feature/han-women-s-style)
 
 (Một số chi tiết, như kiểu thêu Mã Vương Đôi, hồ/khư và Dư phục chí, là kiến thức chuẩn, chưa đối chiếu nguyên văn báo cáo khảo cổ.)
+
+## 4. THÊU THÙA THEO BẬC (owner L1955) — vị trí và kích thước
+
+### Sử liệu nói gì (Hậu Hán thư · Dư phục chí)
+- **Hoàng hậu** (áo yết miếu): thâm y, trên xanh thẫm dưới đen; áo tằm trên xanh dưới xanh nhạt. Cổ áo và viền tay được nẹp bằng dây tết lụa ("ẩn lĩnh, tụ duyên dĩ thao").
+  - Trên đầu: búi giả + **bộ diêu vàng** (cành quế bằng ngọc trai trắng, một chim sẻ chín hoa, sáu con thú, lông chim bằng phỉ thúy) + trâm, khuyên tai.
+- **Quý nhân:** thâm y một màu xanh nhạt trên dưới như nhau, búi "đại thủ kết", trâm đồi mồi đen, thêm trâm và khuyên tai. **Không có bộ diêu.**
+- **Trường công chúa** thêm bộ diêu. **Công chúa** chỉ có đại thủ kết.
+  - "Trâm và khuyên tai cùng kiểu, nhưng **trâm có cấp bậc**."
+  - → Thời Hán phân bậc chủ yếu bằng **đồ trên đầu và màu**, không phải bằng áo thêu kín người.
+- **Thêu và viền có giới hạn:** "từ công, liệt hầu trở xuống chỉ viền một lớp"; "từ hoàng hậu trở xuống không được dùng" một số kiểu viền đặc biệt. Áo của vua thì **thêu tay** (thích tú), còn từ công hầu cửu khanh trở xuống dùng vải **dệt sẵn hoa văn** (chức thành).
+  - → **Thêu tay là đặc quyền của bậc cao nhất.** Bậc thấp hơn dùng hoa văn dệt, viền đơn.
+- Đồ vật Mã Vương Đôi (theo hiểu biết chung, chưa đối chiếu số đo):
+  - **Tín kỳ tú:** họa tiết nhỏ, lặp dày, chim én và mây nhỏ.
+  - **Trường thọ tú:** họa tiết vừa.
+  - **Thừa vân tú:** mây cuộn và chim lớn hơn, uốn lượn.
+  - Họa tiết luôn là mây, chim, thoi, ít hoa to.
+
+### Gợi ý cho Hán t1–t8 (CHỜ CHỦ XEM; chưa sửa prompt nào)
+| Bậc | Vị trí thêu | Cỡ họa tiết |
+|---|---|---|
+| t1 Đáp ứng | Chỉ ở viền cổ, viền tay và viền gấu (viền đơn); thân áo trơn hoặc hoa văn dệt chìm rất nhạt | nhỏ (kiểu Tín kỳ) |
+| t2 Thường tại | Viền + vài cụm hoa nhỏ rải thưa ở vạt dưới | nhỏ |
+| t3 Quý nhân | Viền rộng hơn + cụm nhỏ rải thưa ở thân và tay áo | nhỏ – vừa |
+| t4 Tần | Viền gấm thêu + họa tiết rải đều toàn thân | vừa (kiểu Trường thọ) |
+| t5 Phi | Như t4, dày hơn, thêm chỉ vàng ở viền | vừa |
+| t6 Quý phi | Thêu toàn thân, mây + chim | vừa – lớn (kiểu Thừa vân) |
+| t7 Hoàng quý phi | Thêu toàn thân dày, viền đôi | lớn, nhiều chỉ vàng |
+| t8 Hoàng hậu | Thêu toàn thân dày nhất, mây + phượng, viền tay rộng nhất | lớn nhất |
+
+- **Thứ tự độ rộng viền:** viền tay > viền gấu > viền cổ, ở mọi bậc (Mã Vương Đôi). Riêng dải cổ đã khóa (G62/G66) thì giữ nguyên.
+- **Lưu ý:** hiện t1–t3 đang ghi "thêu dày toàn thân". Theo sử, bậc thấp nên ít thêu hơn. Đây là thay đổi lớn, chỉ làm khi chủ duyệt.
+
+Nguồn thêm:
+- [Hậu Hán thư · Dư phục hạ (ctext)](https://ctext.org/hou-han-shu/yu-fu-xia)
+- [Quốc học đạo hàng — Dư phục hạ, chú Lý Hiền](http://www.guoxue123.com/shibu/0101/00hhsz/128.htm)
+- [Cổ văn đảo — Dư phục hạ](https://m.gushiwen.cn/guwen/bookv_05b0e9e91dfd.aspx)
+- [Thông điển quyển 62](https://zh.wikisource.org/zh-hans/%E9%80%9A%E5%85%B8/%E5%8D%B7062)

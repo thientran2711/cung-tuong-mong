@@ -37,3 +37,10 @@ STATUS: waiting for the owner's verdict via Foreman C #27 (session_01D3E3NaDamfS
 - Loose hair over the shoulders is fine; never flag it again. The band-merge question is closed.
 - t3 bow: s62_t3_HAN_BOW_L1953.txt (+.keep, make_han_t3_bow_L1953.py). The only change is the sash, now "…tied in a neat bow at the CENTRE front of the waist, the two bow loops and ends lying flat…" (G60). 9913 ch. keep PASS. check_store shows only the waived M06/M07/S06. Sent to VE7: 1 @55, sheet CŨ|MỚI han_t3_bow_L1953.png.
 - Research (words only): dev/handover/reports/HAN6_HAN_DRESS_RESEARCH_L1953.md (Vietnamese).
+
+## OWNER L1955 (via #27)
+- Outer collar band made deeper: "outer deep dusky rose pink, clearly darker than the robe, embroidered in gold".
+  - Files: s62_t1_HAN_COLLAR_L1955.txt, s62_t2_HAN_COLLAR_L1955.txt (FILE ONLY, never drawn) and s62_t3_HAN_BOW_L1955.txt (bow + deeper band, sent to VE7 as the single t3 gen instead of L1953). Generator: make_han_band_L1955.py.
+  - keep PASS ×3. check_store shows only the waived M06/M07. ch 9812/9990/9941.
+- FROZEN file updated. Rule added with rule.py: **G66** (= "G62b"; rule.py auto-numbers).
+- Research §4 (embroidery placement and size by rank) added to HAN6_HAN_DRESS_RESEARCH_L1953.md. Embroidery prompts are ON HOLD until the owner has seen it.
