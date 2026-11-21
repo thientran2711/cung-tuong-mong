@@ -350,7 +350,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(n.nodeType!==1)continue;const tg=n.tagName;
   if(tg==="P"&&n.classList.contains("past")){const pl=kpPlain(n.innerHTML);
    if(first&&!sub&&pl.length<90){sub=n.innerHTML;first=false;continue}
-   flush();if((pl.match(/ · /g)||[]).length>=2){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
+   flush();if((pl.match(/ · /g)||[]).length>=2&&!n.classList.contains("nochip")){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
    else blocks.push(`<div class="kpnote">${kpChipify(n.innerHTML)}</div>`);continue}
   first=false;
   if(tg==="P"||tg==="SPAN"&&!n.className||tg==="B"||tg==="I"||tg==="EM"||tg==="STRONG"||tg==="SMALL"&&!n.className||tg==="A"){prose.push(tg==="P"?n.innerHTML:n.outerHTML);if(tg==="P")flush();continue}
@@ -1176,17 +1176,21 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
    group and the panel gets the kit SUB-TABS (segmented control .ksub); the last sub-tab of each group is remembered. Servant mode keeps its tabs. */
 const KG={hc:{keys:["rv","rel","fac"],l:"Hậu cung",s:"Hậu cung"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}};
 function kgOf(t){for(const g in KG)if(KG[g].keys.includes(t))return g;return null}
-function kgOn(){try{return !(typeof isSrv==="function"&&isSrv())&&!(S&&S.dead)}catch(e){return true}}
+/* maid-8tabs (owner 21/11 ~03:15Z mark #32): every road (cung nữ, tiểu thư ngoài cung) has the SAME groups / sub-tabs as the consort; only death turns them off */
+function kgOn(){try{return !(S&&S.dead)}catch(e){return true}}
 function kgLast(g){let v=null;try{v=localStorage.getItem("hclh-kg-"+g)}catch(e){}const ks=kgKeys(g);return ks.includes(v)?v:ks[0]}
-function kgKeys(g){return KG[g].keys.filter(k=>document.querySelector(`#tabs [data-tab="${k}"]`))}
-function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(!b)return k;return (b.dataset.kl0||b.dataset.l0||b.textContent).trim()}
+function kgKeys(g){return KG[g].keys.filter(k=>document.querySelector(`#tabs [data-tab="${k}"]`)&&!(typeof road8Hide==="function"&&road8Hide(k)))}/* jroad8 ROAD8: a key that is not a sub-tab on her road */
+function kgLabel(k){const r8=typeof road8Label==="function"?road8Label(k):"";if(r8)return r8;/* jroad8 ROAD8: her road's sub-tab label */const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(!b)return k;return (b.dataset.kl0||b.dataset.l0||b.textContent).trim()}
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
- for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
+ for(const g in KG){const vis=kgKeys(g);/* every member button of the group: the first one shown on her road is the head, the rest (and keys her road leaves out, jroad8) hide */
+  KG[g].keys.forEach(k=>{const i=vis.indexOf(k);const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
   if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
-  else b.classList.add("kghide")})}}
+  else{b.classList.add("kghide");/* maid-8tabs #34: a member that was a group head before (KG rebuilt by jhc: rv headed Hậu cung) drops its stale head mark — else a tap on it
+   (kitCourtOpen: Hoàng hậu / her chủ → rv) ran the head click and opened the group's LAST sub-tab (Cung nhân / Đồng liêu) instead of rv */if(b.dataset.kg){if(b.dataset.kl0!=null)b.textContent=b.dataset.kl0;if(b.dataset.ks0!=null)b.dataset.s=b.dataset.ks0;delete b.dataset.kg}}})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
+ if(kgKeys(g).length<2){if(nav)nav.remove();return}/* one sub-tab only (a road with one member in this group, jroad8): no sub-tab row */
  const html=kgKeys(g).map(k=>`<button class="ksubb${k===tab?" on":""}" role="tab" aria-selected="${k===tab}" data-ksub="${k}">${kgLabel(k)}</button>`).join("");
  if(!nav){nav=document.createElement("nav");nav.className="ksub";nav.setAttribute("role","tablist");P.prepend(nav)}nav.innerHTML=html}
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-ksub]");if(s){e.preventDefault();e.stopPropagation();tab=s.dataset.ksub;render();return}
