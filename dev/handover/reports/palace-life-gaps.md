@@ -107,3 +107,31 @@ PRIORITY #1 CHECK ('heirDanh hrCard setHeir'): OD 0 | ledger 0 | claims = worker
 - Shots looked (Fold + iPad: kid, ward, lost); scratch only, nothing uploaded, nothing to wipe.
 ### P3 = PRE-EXISTING (confirmed, NOT a blocker) → separate thin-E worker
 Base bac1fdf5 SWAP 4 runs: P2 red 4/4 (the bug fixed here); P3 red 2/4. Faces seen (base + branch): (a) her month −3 lost (her hM 60, Danh 52 vs 50); (b) host copy hM 54 vs her 57 (Danh may differ too: 58/54, 46/48); (c) her own phone hM 54 = estr twice (branch run on 5c438f2b). Same thin-E month-delta race (worker: after "week" E.base is a stale view, her first erd re-sends month "+" deltas). Fix belongs to jcoopthine baseline + coop-thin-e* suites; this branch does not touch it and does not make it worse (branch ~3/14 SWAP vs base 2/4).
+
+## RELAND r3 (BIG reviewer-lander, opus, session_01N1tNP5jMFLMtiToAbVEacW; brief briefs/b6-relander-palace-life.md) — PASS 8599d166 (branch review/palace-life-gaps-r3)
+PRIORITY #1 CHECK ('palace-life-gaps|jkidlife|maidTheft'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 5 | archive 14 — branch review/palace-life-gaps-r2-r1 1bf2d07b reused, no rebuild.
+START_CTX ~3 % (1M window).
+- r3 = 1bf2d07b + LIVE merged 8 times while testing (a4ee93d7 → 23bb3862 → 3a2b81b1 → fc7f98f6 → f85cba97 → 8f435841 → 99795d67 → d3f44022). 8599d166 contains origin/main d3f44022. At report time LIVE = 1bf7e14d: git merge-tree shows code merges clean (j95/jbal2 auto-merge), only index.html/sw.js conflict → the land merge just rebuilds them.
+- Real conflicts (first merge, a4ee93d7): jbal2.js, jcoopworld.js, assemble.py; later merges: assemble.py only (+ index.html/sw.js, always rebuilt with dev/site/build_site.sh). jcoopone/jcoopworld (LIVE 8f435841 co-op change) auto-merged; hrCard(a.h,a.was) intact.
+### BAL keys touched (law 4 one core: no value overwritten on either side)
+| key | LIVE value | branch value | kept |
+|---|---|---|---|
+| BAL.kid (whole block, jbal2.js) | absent | {estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]} | branch block added as is |
+| BAL.kcg (jbal2.js, LIVE jkcg) | LIVE block | absent | LIVE block as is |
+| BAL.kcco (jbal2.js, LIVE jkcco) | LIVE block | absent | LIVE block as is |
+| BAL.eff.j8.maidStealBac (jbaleff.js) | absent | 30 | added; the rest of BAL.eff.j8 identical to LIVE (diffed) |
+Final diff vs LIVE in jbal.js 0 lines, jbal2.js only BAL.kid (7 lines), jbaleff.js only maidStealBac. One-core guard: 0 fails, balKeys 725 on the first merge.
+### Other conflicts
+- jcoopworld T.D.K: branch hr:a=>hrCard(a.h,a.was) + LIVE invHer:a=>invHer(a.pp,a.ok,a.lv) → both kept on one line.
+- assemble.py: LIVE list each time + 'jkidlife.js' right after 'jagwhy1.js' (one line of diff vs LIVE).
+### Tests
+- FINAL 8599d166 (+ LIVE d3f44022: j61/jhaohuu): quickcheck PASS (core gates PASS, old save ok, perf render 204/242, buổi 1038/1074 ms); undef PASS (276); palace-life 23/23 Fold 755x1000@2 + iPad 1180x820@2.
+- 8691418c (+ LIVE 99795d67, minigame UI only): quickcheck PASS; undef PASS; palace-life 23/23 both devices.
+- 5a43675b (+ LIVE 8f435841, co-op jcoopone/jcoopworld change): quickcheck PASS (core gates PASS, old save ok, perf render 235/246, buổi 1207/1221 ms); undef PASS (276); scan-heir-family 28 sites / 0 miss; palace-life 23/23 Fold 755x1000@2 + iPad 1180x820@2; coop-e2e 94/94; coop-palace-life host-first 18/18, SWAP 18/18.
+- 35e14a4c (+ LIVE fc7f98f6): quickcheck PASS; undef PASS; scan-heir 0 miss; theft-object-scan UNROUTED 0; palace-life 23/23 both devices; coop-e2e 94/94; coop-palace-life 18/18 both seat orders; role-parity ALL PASS (run alone).
+- c0730654 (+ LIVE 3a2b81b1, jcooptimer): the same set all green incl. role-parity ALL PASS.
+- 3fbc0d20 / 10055501: quickcheck PASS (10055501 had one G4 coop-one-world seed-3 fail «R.evm 1»; reran seed 3 on the branch 5× PASS, LIVE 3× PASS; no file of this branch touches evm/proof → load flake; all later quickchecks green); role-parity ALL PASS; coop-e2e 94/94 ×4 and one 92/94 (rerun 94/94 ×3, no failing check reproduced).
+- coop-palace-life P3 (thin-E month-delta race, PRE-EXISTING per REVIEW r2): SWAP over all heads 4× 18/18, 3× 17/18 (P3 only, face b: host copy hM 54 vs her 57). Same separate thin-E worker as r2 notes; not a blocker.
+- Shots looked (Fold + iPad: kid card «Thăm con» group, ward, Đồ thất lạc case): clean, kit cards, odds in words. Observation (not this branch): Fold kid card stat chips (Văn/Võ/Đức/Mẫu tử) sit at the scroll edge of the panel in the test shot. Scratch only; nothing uploaded, nothing to wipe.
+### 18 laws (touched by the merge)
+- Law 4: table above, no value moved, no typed number added. Law 1/2/3/6: unchanged from r2 PASS (no code of the branch changed in the merge besides the two kept lines). Law 9/10: no kit/CSS change.
