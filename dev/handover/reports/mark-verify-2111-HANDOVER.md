@@ -1,0 +1,24 @@
+# HANDOVER — fixback worker → successor (mark strict-verify + fixback PDF re-runs)
+
+PRIORITY #1 CHECK: OD 21/11 marks rows + MAIN 88 order 05:03Z (strict verify) | main: review/fixback-2111 (PDF + capture script) | review/* none for verify | claims fixback-pdf (session_01Rc5AsJwwnByo4hzkXcabXJ, READY)
+
+From: worker session_01Rc5AsJwwnByo4hzkXcabXJ (fixback-pdf). Rolled over at context 30.6% (START_CTX ~4% + 25%). Coordinator = MAIN CHÍNH 88 session_01Rc5AsL9RckY86bdwv8NheC — it opens the successor.
+
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## Done (state at handover)
+- fixback PDF: review/fixback-2111 c9a5f8a4 → dev/handover/reports/fixback-2111/fixback-2111.pdf, LIVE 8b2e344d, 90 pages, 16.8 MB; 17 LIVE / 12 in review / 51 in work / 5 no-fix. Sent to MAIN 88 («FIXBACK READY c9a5f8a4»).
+- Statuses per mark: dev/handover/reports/fixback-2111/marks_vi.py on that branch (Vietnamese short line, status, worker, «Đã sửa» line). Re-run steps: README.md in that folder.
+- Capture: dev/test/fixback-2111.js (table M: per mark = tab/sub-tab/click steps; retries when the flat 16-button bottom bar shows; `noflat` for the death screen which has that bar by design). Views exist for marks 3,4,5–13,15–18,20–23,25–30,37–42,46. Dialog-family marks (#44, #47–#85) have no view yet.
+- How to open things in game (found during capture): person dialog = click `button.tok.fig[data-p="0"]` on tab act; mood dialog = click `img.kemo` with data-kemop≠'me'; death = `setTimeout(()=>die('Bệnh nặng'),0)`; calendar = `button[aria-label="Lịch tháng"]`; Ân oán pair = click `#panel [data-relslot=y]` → pick in `#modal .krpop` → `[data-relswap]`; in-game menu = `button.menu` then Chọn sổ / Cùng hảo hữu / Sổ luân hồi.
+- Refs (her shots): https://ctm-img.victoria-tntt.workers.dev/img/_review/refs/owner-2111-<name>.jpg (names in the marks file).
+
+## NEW TASK for the successor (MAIN 88 order 05:03Z, verbatim)
+"The owner opened page 1 and found a mark "fixed" that broke an OLDER rule of hers (#3 «Hoàng thượng» centred OK, but the name lost its imperial gold — OD:L1362). She wants EVERY mark checked strictly against her exact words before anything is called done. Please do a STRICT VERIFY pass over all marks that are LIVE or in review (OWNER_MARKS_2111.md, last row wins): for each, (1) read her verbatim words in dev/OWNER_DECISIONS.md (21/11 rows) + grep OD for older rules on the SAME element (colour, size, position, kit part), (2) look at the after-shot on newest LIVE (or the review branch) Fold+iPad, (3) check kit consistency (same part everywhere, KIT.md), (4) verdict OK / WRONG with one line why. Write dev/handover/reports/mark-verify-2111.md (table) on the handover branch and send me the WRONG list as soon as you have the first 20 (then the rest). WRONG marks go back to workers before the PDF is rebuilt. Known WRONG: #3 (gold lost) — fixer already assigned."
+
+Scope (from marks_vi.py at c9a5f8a4): LIVE 5,6,7,8,9,10,11,12,17,18,21,23,37,38,39,42,46 (+#20 approved sample); in review 3,4,14,25,26,27,28,29,40,41,43,45. Note: OWNER_MARKS_2111.md holds stale duplicate rows — "last row wins" per MAIN, but a LIVE row with a sha on origin/main was counted LIVE even when an older "in work" duplicate sits below it.
+After-shots to reuse (no need to recapture): the PDF pages themselves (render with `pdftoppm -r 60 -f N -l N`), page = mark + 2, +1 from #28, +3 from #38 (extra pages for #27 and #37).
+Suggested start: the person-card family first (#5–#9, #17, #18, #38 — older rules on the same kit parts: square act picture, «!» corner, name/rank tag colours incl. gold for Hoàng thượng OD:L1362), then Ân oán (#10–#12), bag (#21, #23), menu #37, calendar #42, mood #39, death #46, then review branches.
