@@ -94,8 +94,9 @@ const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`
   const mgl=await p.evaluate(k=>Object.keys(KG82_MGL).find(a=>KG82_MGL[a][1]===k)||null,k);
   const callers=[['playArt',`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`],['startContest',`startContest({art:${JSON.stringify(k)},title:"Hội thi",onDone:()=>{}})`],
    ['Thử tay mgCalRun',`mgCalRun(${JSON.stringify(k)})`],['khảo hạch exRun',`(()=>{const P=exPlan(S);P.rounds=[${JSON.stringify(k)}];exRun(P,{},()=>{})})()`],
-   ['tuyển chọn kcEntryExam',`kcEntryExam(${JSON.stringify(k)},()=>{},{})`],['works openMG→playArt',`(S.mg={k:${JSON.stringify(mgl||k)},pa:1},openMG(${JSON.stringify(mgl||k)},1,()=>{}))`]];
+   ['tuyển chọn kcEntryExam',`kcEntryExam(${JSON.stringify(k)},()=>{},{art:${JSON.stringify(k)}})`]/* review/mg-craft-r3: entExam picks its board from info.art (empty → her best art, any kind: on iPad that was Điều hương, whose LIVE guiding words failed this row); art = the kind makes the row test the craft board */,['works openMG→playArt',`(S.mg={k:${JSON.stringify(mgl||k)},pa:1},openMG(${JSON.stringify(mgl||k)},1,()=>{}))`]];
   if(k==='hoa')callers.shift();/* no plain playArt road to Cắm hoa */
+  if(k==='hoa')callers.splice(callers.findIndex(c=>c[0].startsWith('tuyển chọn')),1);/* nor a selection-exam road: entKind("hoa") = KG82_PLAIN.hoa = Vẽ */
   if(k==='td_cong')callers.splice(0,callers.length,['Công lesson tdPlay self','(TDS.busy=false,tdPlay("cong","self"))'],['Công lesson tdPlay master','(TDS.busy=false,tdPlay("cong","master"))'],['Thử tay mgCalRun','mgCalRun("td_cong")'],['khảo hạch exRun','(()=>{const P=exPlan(S);P.rounds=["td_cong"];exRun(P,{},()=>{})})()']);/* the Tứ đức lesson roads */
   for(const [lab,src] of callers){if(lab.startsWith('works')&&!mgl)continue;
    const r=await ev(([s,k])=>window.__open(s,{kind:k,close:true}),[src,k]);
