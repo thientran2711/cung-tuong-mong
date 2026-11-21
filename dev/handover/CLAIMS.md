@@ -878,3 +878,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW pet-bath-test (sonnet SMALL) of 211f71ae | review/pet-bath-test-rv | B | session_01N1tNP6F99Fy3kcZThzrtBR | RUNNING | 21/11 13:57Z |
 | RELAND dialog-person-3 r2 (sonnet SMALL reviewer-lander; MAIN 95 ORDER 13:50Z, kit-dialog-2 on LIVE f85cba97) | review/dialog-person-3-r2 | B | session_01N1tNP4AK8LdJ1WkY3Zv3Ys | RUNNING | 21/11 14:19Z |
 | COOP ROOM-FACES (opus BIG; ORDER MAIN 95 13:40Z; fidUsed union + picker greys room faces + friend personal holders in roomTaken) | review/coop-room-faces | D | session_01964izBkX79DBt4vJ5vYRrQ | RUNNING (depth 8, START_CTX ~3 %) | 21/11 14:30Z |
+| rv-kit-opt-title-wrap r1 | FAIL | review/kit-opt-title-wrap-rv 4515b576da9559c0ce83a5339a47c134f40dd41d | flaky own-row meter at borderline room (w320) |
