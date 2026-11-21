@@ -200,3 +200,17 @@ The length trims are repeats only:
 - the lower-flap words were tightened, same meaning.
 
 Ladder (G42): t5 now carries everything t1–t3 v5 have (edges, neckline band, chest, cuffs/sleeves, body, jade), denser. **Verdict: PASS.**
+
+## STANDING CHECKLIST (Foreman C #15, owner L1626–L1628) — every consort prompt from now on; FAIL if anything is missing
+1. G40: the sash visibly wraps OVER the outer robe (all 8 tiers).
+2. The inner top's horizontal neckline band is EMBROIDERED.
+3. The inner top has chest embroidery.
+4. From t4 up: long vertical embroidered panels down the outer robe's front edges (G47).
+5. Outer hem band embroidered.
+6. INNER robe hem embroidered (G47).
+7. Sleeves/cuffs embroidered.
+8. Jade for consorts / sachet for maids (G42/G43).
+9. Every item of the tier below is present, denser (G42/G47). G46: Tần chest cord + jade piece; Phi cape = Tần capelet text verbatim + one small extra layer on each shoulder.
+10. G44: a bow only if centred, or no bow (thu t3 = girdle medallion, no bow).
+11. G45: no cloth, sleeve, cape, shawl or flap over the jade/sash front.
+Also: the gates (check_store, keep_check), ≤ 10 000 chars, palette, F2, B29, G39.
