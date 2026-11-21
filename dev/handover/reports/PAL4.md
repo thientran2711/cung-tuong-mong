@@ -12,8 +12,8 @@ depth 1 · START_CTX ~3 % (used_tokens read 0; estimate) · ended ~20 %.
 - check_unique (--file palettes_season_L1709.json): **0 FAIL**, 214 WARN (L1583: 0 FAIL, 370 WARN).
 - Same group + same season mains ΔE < 8: L1583 **656** pairs → L1709 **355**.
 - A31 (one person's 4 mains all ΔE ≥ 20): L1583 8 people fail → L1709 **27** fail (mostly a red in Xuân/Thu next to a red in Đông, or a root that can't move). OPEN — owner/foreman call; it can be pushed down at the cost of fewer reds per season.
-- keep_check --all: FAIL ×2, NOT mine (no prompts edited): bases `thu_comoi/s62_t4_THU_COMOIk.txt` (29 713 ch) and `s62_t5_THU_COMOIj.txt` (29 724 ch) are GLUED again (3 prompts each), last touched by 93cfa42 "rv-chiton-name rv2 report" (stale tree). → foreman: restore (DESIGN21 job3 recipe).
-
+- keep_check --all: **401 PASS** on the pushed tip (no prompts edited by PAL4). Note: on the older tip 9700edb the bases thu_comoi/s62_t4_THU_COMOIk.txt + s62_t5_THU_COMOIj.txt were glued (29.7k, by 93cfa42); the current tip has them restored (10 029 / 10 028 ch). palettes_season_L1583.json / four_season_L1583.py / room_vivid.py checked after the pull: single copies, JSON loads, sources identical to what L1709 was built from.
+- Commit: 1e149c5 (data + sheets), report fix: see next commit.
 ## HSV stats of mains (old vs new)
 | mùa | bảng | mean S | p90 S | max S | mean V |
 |---|---|---|---|---|---|
