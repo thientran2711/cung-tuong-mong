@@ -39,9 +39,14 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    if(st==="cut"){S.sung=5;W.greedy=1;delete W.pun;BAL.stip.cap=100;BAL.stip.w.sung=100}else{S.sung=80;W.greedy=0}
    Q.length=0;stipend(S);const c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||""));const op=(c.opts||[])[i];if(!op)continue;try{if(op.go)op.go();o.push([st,op.n,"ok"])}catch(e){o.push([st,op.n,"ERR "+e.message])}}}
   Q.length=0;return o});
- ok(run.length>=7&&run.every(x=>x[2]==="ok"),"every option runs",run);
+ ok(run.length>=6&&run.every(x=>x[2]==="ok")&&run.some(x=>/^Lót tay/.test(x[1]))&&run.some(x=>/^Chu toàn/.test(x[1])),"every option runs",run);
  /* the maid-less road: she goes herself */
- const self=await p.evaluate(()=>{const m0=S.maid,sf=m0&&m0.spyFor;if(m0)m0.spyFor="x";S.rank=2;S.month=6;S.sung=5;const W=stipW();W.greedy=1;delete W.pun;delete stipSt(S).tip;Q.length=0;stipend(S);const c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||""));if(m0)m0.spyFor=sf;Q.length=0;return c?(c.opts||[]).map(o=>o.n+" | "+o.x):[]});
+ const selfRun=conf=>p.evaluate(conf=>{const m0=S.maid,sf=m0&&m0.spyFor;if(m0)m0.spyFor="x";const B0=JSON.stringify(BAL.stip);let c=null;
+  for(let k=0;k<40;k++){S.rank=2;S.month=6;S.out=0;S.confined=conf?2:0;S.sung=5;S.bac=500;BAL.stip.cap=100;BAL.stip.w.sung=100;(S.staff||[]).forEach(x=>x.loyal=40);const W=stipW();W.greedy=1;delete W.pun;const st=stipSt(S);delete st.tip;st.tips=0;
+   Q.length=0;stipend(S);c=Q.find(q=>/^Bổng lộc tháng/.test(q.t||"")&&!/Lễ nghĩa$/.test(q.t));if(c&&(c.opts||[]).some(o=>/^Lót tay/.test(o.n)))break}
+  Object.assign(BAL.stip,JSON.parse(B0));if(m0)m0.spyFor=sf;S.confined=0;Q.length=0;return c?(c.opts||[]).map(o=>o.n+" | "+(o.lock?"LOCK ":"")+o.x):[]},conf);
+ const self=await selfRun(false);const selfC=await selfRun(true);
+ ok(selfC.some(s=>/^Đòi lại phần bị cắt xén \| LOCK đang cấm túc/.test(s)),"no cung nữ + cấm túc: «Đòi lại phần bị cắt xén» locked with the reason (law 6: cannot leave her palace)",selfC);
  ok(self.some(s=>/^Đòi lại phần bị cắt xén \| (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(s)),"no cung nữ: «Đòi lại phần bị cắt xén» with odds in words",self);
  if(SHOT){fs.mkdirSync(SHOT,{recursive:true});
   for(const [W,H,nm] of [[755,1000,"fold"],[1180,820,"ipad"]])for(const st of ["cut","confined"]){
