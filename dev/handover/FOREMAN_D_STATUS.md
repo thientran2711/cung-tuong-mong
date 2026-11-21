@@ -575,3 +575,4 @@ Hourly wake: recurring create_trigger is refused by the classifier → send_late
   F3: econ-tamco.test.js flaky (3 runs: 2 different FAILs + 1 PASS; in the PASS run the tc road charged −5/−90 vs card −4/−86).
   LIVE 9c1dd605 merges cleanly (index/sw only). Fixer CiU7bSoQ messaged. Reviewer idle.
 - (21/11 03:33Z, D #13) econ-tamco re-check #2 d07e20bb → FAIL 2 (F1 fixed). F2 (laws 2/3): Tâm cơ / hire road +odds never reach the roll on bribe (maid receiver uses raw oBribe), xinhh (rcvJudge raw o), musk (no roll) → those roads are cost-only and the card overstates odds (NPCs too). F3: econ-tamco.test.js flaky (tc road charged −5/−90 vs card −4/−86). LIVE 9c1dd605 merges clean. Fixer ECON TAMCO #3 CiU7bSoQ on it → reviewer CjhdKcmv round 3. econ-tamco LAND READY ETA → ~07:00–08:00Z.
+- (21/11 04:42Z) FROM MAIN CHÍNH 86: LIVE now db6ae2a0 (bag-inline: Túi đồ inline strip, Việc pictures; self-merge of rv PASS). Merge before LAND READY.

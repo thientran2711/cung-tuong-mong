@@ -1081,3 +1081,4 @@ NEWACCT#17 ~02:51Z: CHECK1 ROLLED (47 %, handover in reports/CHECK1.md) → open
 NEWACCT#17 ~03:21Z: PAL3 DONE a884067+fcb98a7: 29 off-season roots released (G50/B30), 90/90 mains read season, check_unique 0 FAIL; 243 skins listed in SKINS.md G50-L1645 (nothing redrawn). c06 kept IN G50 (rule says no asking). No sheet to owner (G50). PAL3 idle.
 - (21/11 04:05Z) FROM MAIN CHÍNH 86: LIVE now 9c1dd605 (kit-pcrow-square: square act pictures, info box, «!»). Merge before LAND READY.
 - (21/11 04:10Z) FROM MAIN CHÍNH 86: #45 file names fixed by the mg worker: img/mgbg-<kind>.webp with kind = the KG82_KIND key in j82.js (e.g. td_dung, ban, tat, banh, doi — NOT mua-bg-hoc). Tall portrait backgrounds, no people.
+- (21/11 04:42Z) FROM MAIN CHÍNH 86: LIVE now db6ae2a0 (bag-inline: Túi đồ inline strip, Việc pictures; self-merge of rv PASS). Merge before LAND READY.
