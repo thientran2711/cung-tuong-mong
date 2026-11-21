@@ -94,12 +94,30 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   const D={};for(const id of ids){const e=(S.lost||[]).map(c=>c.e).find(e=>e&&e.iu===id);const lg=((S.il&&S.il.log)||[]).find(l=>l[1]===id);D[id]=ilDur(e||{k:lg&&lg[2]})}/* a used-up kind may end at 0 */
   const ky=((S.il&&S.il.log)||[]).filter(l=>/kyngo/.test(String(l[5]))).length;
   const NETL=((S.il&&S.il.log)||[]).filter(l=>l[5]==='net').map(l=>[l[0],l[1],l[2],l[3],ids.has(l[1])?'LOST-CASE':'other']);
-  /* E42r: a host case held by a friend ENTRY (v.coop: a copy of the other seat) would live nowhere real */const coopHeld=world?(S.lost||[]).filter(c=>c&&c.at&&c.st!=='done'&&rivals.some(v=>v&&v.coop&&key(v)===c.at)).length:0;
+  /* E42r: a host case held by a friend ENTRY (v.coop: a copy of the other seat) would live nowhere real */const coopHeld=world?(S.lost||[]).filter(c=>c&&c.at&&c.st!=='done'&&c.own!=='me'&&rivals.some(v=>v&&v.coop&&key(v)===c.at)).length/* E44: HIS own piece the friend took (famApply rm lost) is really in her chest: held there by design */:0;
   return{NETL,ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,coopHeld,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
+ /* E44 coop-famops (COOP_FAM=1, default on): the friend-act item roads on BOTH seats, through the game's own acts: I steal from the
+    friend's entry (laydo → res.fam «rm» lost), I hand back what I hold of hers («Cài đồ vào rương» onto her = «ret»; Tư trang › Việc
+    «Lén trả lại» / «Trả lại» = the lostReturn hook), a host NPC steals from her entry (b4Ops «rm» by that NPC); the guest sometimes puts
+    on a piece from her chest first (her entry on the host is a step behind: the rm op finds it on her, by id) */
+ window.__fam=r=>{const out=[];if(S.dead||S.out||S.mg)return out;const t=rivals.find(v=>v&&v.coop&&v.alive!==false);if(!t)return['nofriend'];
+  S.bac=Math.max(S.bac||0,5000);try{used=0}catch(e){}
+  if(!(S.inv||[]).filter(loOk).length||r<.25){const ks=Object.keys(IT).filter(k=>{const x=IT[k];return x&&!x.nt&&!x.evi&&(x.pr||0)>=LO.minPr&&ilDur({k})&&!/Thuốc|Trà|Hương|Điểm tâm|Rượu|Thư/.test(x.kd||'')});if(ks.length)S.inv.push({k:ks[Math.floor(r*997)%ks.length],from:'emp'})}/* something worth taking on both seats */
+  if(!world&&r<.35){const ix=(S.inv||[]).findIndex(e=>e&&!e.h&&!e.lo&&typeof wdItem==="function"&&wdItem(e)&&wdItem(e).sl!=="hd");if(ix>=0&&wdWear(S,ix))out.push('wear')}
+  const mine=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.own===key(t)&&c.at==="me");
+  const hx=(S.inv||[]).findIndex(e=>e&&e.lo&&!e.h&&String(e.gh)===String(key(t)));
+  try{if((mine.length||hx>=0)&&r<.75){const c=mine[0];
+    if((r<.35||!c)&&hx>=0){runAct(S,t,"plant",hx);out.push('plant')}else if(c){Q.length=0;loUI(r<.55?"sneak":"giveback",c.id);out.push('ui')}}
+   else if((t.inv||[]).some(loOk)){const n0=(S.inv||[]).filter(e=>e&&e.lo).length;/* LIVE odds are hard (odds / caught / her maid begs): up to 4 tries so the scan has traffic */
+    let g=false;for(let j=0;j<4&&!g&&(t.inv||[]).some(loOk);j++){S.bac=Math.max(S.bac||0,5000);try{used=0}catch(e){}runAct(S,t,r<.8?"laydo":"laydol");g=(S.inv||[]).filter(e=>e&&e.lo).length>n0}out.push(g?'steal':'steal-miss')}}catch(e){out.push('err:'+e.message)}
+  if(world&&r>.5)try{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!x.out&&loAlive(x));if(v&&(t.inv||[]).some(loOk)){v.bac=Math.max(v.bac||0,5000);runAct(v,t,"laydo");out.push('npc')}}catch(e){out.push('nerr:'+e.message)}
+  try{Q.length=Math.min(Q.length,8);showModal()}catch(e){}return out};
+ window.__fmiss=()=>(COOPW.famMiss||[]).slice();
  window.__why=id=>{const L=((S.il&&S.il.log)||[]).filter(l=>l[1]===id);const C=(S.lost||[]).filter(c=>c.e&&c.e.iu===id).map(c=>({id:c.id,own:c.own,st:c.st,at:c.at,how:c.how,keep:c.keep,by:c.by,cause:c.cause,w:c.w,end:c.end}));return{L,C}};
  return true};
 (async()=>{const b=await chromium.launch();
- const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
+ /* COOP_SWAP=1 (as coop-e2e): the iPad hosts (seat a), the Fold joins (seat b) */
+ const FOLD=['fold',[755,1000,2]],IPAD=['ipad',[1180,820,2]];const [VA,VB]=process.env.COOP_SWAP?[IPAD,FOLD]:[FOLD,IPAD];const A=await mk(b,...VA),B=await mk(b,...VB);ALL.push(A,B);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code');const code=(await C(A)).code;console.log('room',code);await clear(A);
@@ -108,13 +126,15 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  ok(await A.p.evaluate(INST,['A',true,!!process.env.LOST_DBG])&&await B.p.evaluate(INST,['B',false,!!process.env.LOST_DBG]),'scan hooks on both seats');
- /* COOP_SKEW=N (as coop-dresscode-scan, E30r3): the guest's life clock N months AHEAD of the host's (S.turn is each seat's own) */
+ /* COOP_SKEW=N (as coop-dresscode-scan): the guest's life clock N months ahead of the host's */
  const SKEW=+process.env.COOP_SKEW||0;if(SKEW)ok(await B.p.evaluate(n=>{S.turn=(S.turn|0)+n;return true},SKEW),'guest life clock '+SKEW+' months ahead of the host');
- let rs=4242;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
+ const FAM=process.env.COOP_FAM!=='0';const fam={};
+ let rs=(+process.env.SEED||4242);const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
  const prev={};const dups=[],vans=[],seen={};let coopH=0,weeksOk=0,lost={A:0,B:0},net0=null;const t0=Date.now();
  for(let w=0;w<NW;w++){
   for(const o of [A,B])await o.p.evaluate(()=>{S.suc=Math.max(S.suc||0,80);S.out=0;S.confined=0;__kyReset()});
   const la=await A.p.evaluate(r=>__lose(r),rnd()),lb=rnd()<.5?await B.p.evaluate(r=>__lose(r),rnd()):[];lost.A+=la.length;lost.B+=lb.length;
+  if(FAM){const fb=await B.p.evaluate(r=>__fam(r),rnd());await sleep(300);const fa=await A.p.evaluate(r=>__fam(r),rnd());for(const x of fb.map(y=>"B."+y).concat(fa.map(y=>"A."+y)))fam[x]=(fam[x]||0)+1}
   const unstick=async()=>{for(const o of [A,B])await o.p.evaluate(()=>{for(let i=0;i<6&&Q.length&&Q[0]&&Array.isArray(Q[0].opts)&&Q[0].opts.length;i++){try{chooseM(Q[0].opts.length-1)}catch(e){Q.shift()}}try{showModal()}catch(e){}}).catch(()=>{})};
   await unstick();let okw=await weekAll(A,B,'w'+w);if(!okw){await unstick();okw=await untilC(A,x=>__co().week>=x,w+1,60000).catch(()=>false)}if(okw)weeksOk++;await sleep(1200);
   const ca=await A.p.evaluate(()=>__lc()),cb=await B.p.evaluate(()=>__lc());if(net0==null)net0=[ca.net,cb.net];coopH=Math.max(coopH,ca.coopHeld||0);
@@ -122,7 +142,7 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   for(const id of ids){const L=(ca.M[id]||[]).map(x=>'A:'+x).concat((cb.M[id]||[]).map(x=>'B:'+x));seen[id]=1;
    const dur=(ca.D[id]!==undefined?ca.D[id]:cb.D[id])!==false;
    const bad=L.length>1?'dup':(!L.length&&dur?'van':'');
-   if(bad){if(prev[id]===bad){const x={w,id,bad,at:L};const why=await (ca.ids.includes(id)?A:B).p.evaluate(id=>__why(id),id);x.why=why;if(process.env.LOST_DBG)x.st=await A.p.evaluate(id=>(window.__gst||[]).filter(g=>g[0]===id).slice(0,3),id);(bad==='dup'?dups:vans).push(x);if(!prev['!'+id]){console.log('PERSIST',JSON.stringify(x).slice(0,1800));prev['!'+id]=1}}prev[id]=bad}else{delete prev[id];delete prev['!'+id]}}
+   if(bad){if(prev[id]===bad){const x={w,id,bad,at:L};/* E44b (d): both seats' ledger lines + cases for the id (the host side alone could not trace a piece gone from her seat) */x.why=await A.p.evaluate(id=>__why(id),id);x.whyB=await B.p.evaluate(id=>__why(id),id);if(process.env.LOST_DBG)x.st=await A.p.evaluate(id=>(window.__gst||[]).filter(g=>g[0]===id).slice(0,3),id);(bad==='dup'?dups:vans).push(x);if(!prev['!'+id]){console.log('PERSIST',JSON.stringify(x).slice(0,1800));prev['!'+id]=1}}prev[id]=bad}else{delete prev[id];delete prev['!'+id]}}
   if(w%8===7)console.log('week',w,'ids',Object.keys(seen).length,'dups',new Set(dups.map(x=>x.id)).size,'vanish',new Set(vans.map(x=>x.id)).size,'kyA',ca.ky,'kyB',cb.ky,'cases',ca.cases,cb.cases,Math.round((Date.now()-t0)/1000)+'s')}
  const ca=await A.p.evaluate(()=>__lc()),cb=await B.p.evaluate(()=>__lc());
  const dI=new Set(dups.map(x=>x.id)),vI=new Set(vans.map(x=>x.id));
@@ -133,7 +153,9 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  const NL=ca.NETL.map(x=>['A'].concat(x)).concat(cb.NETL.map(x=>['B'].concat(x)));console.log('NET lines',JSON.stringify(NL));const nlo=NL.filter(x=>x[5]==='LOST-CASE');
  ok(!nlo.length,`ledger net: no unrouted removal of a lost-case piece on either seat (${nlo.length}; all pieces host +${ca.net-net0[0]} guest +${cb.net-net0[1]}, the others are outside jlost: reported)`,nlo);
   ok(!coopH,`no host lost case held by a friend entry in any week (max ${coopH})`);
- console.log('SUMMARY',JSON.stringify({weeks:weeksOk,ids:Object.keys(seen).length,dupPieces:dI.size,dupWeeks:dups.length,vanPieces:vI.size,vanWeeks:vans.length,casesA:ca.cases,casesB:cb.cases,kyA:ca.ky,kyB:cb.ky,lost}));
+ const miss=[...await A.p.evaluate(()=>__fmiss()),...await B.p.evaluate(()=>__fmiss())];console.log('FAM acts',JSON.stringify(fam),'famMiss',JSON.stringify(miss.slice(-12)));
+ const fs_=x=>(fam['A.'+x]||0)+(fam['B.'+x]||0);if(FAM)ok((fam['A.steal']||0)>=3&&(fam['B.steal']||0)>=3&&fs_('npc')>=4&&fs_('plant')+fs_('ui')>=4,`friend-act item traffic (${JSON.stringify(fam)})`);
+ console.log('SUMMARY',JSON.stringify({fam,miss:miss.length,weeks:weeksOk,ids:Object.keys(seen).length,dupPieces:dI.size,dupWeeks:dups.length,vanPieces:vI.size,vanWeeks:vans.length,casesA:ca.cases,casesB:cb.cases,kyA:ca.ky,kyB:cb.ky,lost}));
  fs.writeFileSync(OUT+'/faults.json',JSON.stringify({dups,vans},null,1));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');

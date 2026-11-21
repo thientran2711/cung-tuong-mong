@@ -316,10 +316,15 @@ function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDre
  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;if(typeof lxSit==="function")lxSit(S,S.toilette)}
 /* KIT §13.9 (mg-back): the kit ✕ «Quay lại» on the mirror = leaving it as «Để mộc» (the existing lose choice), asked once; on the result it presses «Đã hiểu» */
 function toilBackX(){try{KG82.quitAsk=[`Rời gương lúc này thì tính như ${toilMkW("moc")}: không trang điểm.`];KG82.quit=()=>toilFinish(false)}catch(e){}}
+const TOIL_HOW="Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng.";
+/* ui-leftover-fold MG12 (KIT §13.7): the game's FIRST screen is the kit rules screen (kgReady: luật + picture of the move + «Sẵn sàng»), then Hồi 1 (the dress). Nothing runs and no khắc go before «Sẵn sàng». */
+function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="toilrdy">Bắt đầu</button></div>`;
+ kgReady(box,{n:"Điểm trang",t:"Trước gương đồng",how:TOIL_HOW,e:"drag",go:"#toilrdy",pic:"",timed:false});
+ $("toilrdy").addEventListener("click",()=>{box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
- const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng."});
+ const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:TOIL_HOW});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
- TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
+ TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilRules()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["shoe","Giày","giayhoa"]];
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
