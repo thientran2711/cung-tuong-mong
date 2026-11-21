@@ -29,3 +29,4 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 24 | 02:52 | Tài nghệ act cards different sizes, tiny pictures (asked ≥3 times) → one card size per device everywhere | owner-2111-tainghe-cards.jpg | keeper (same card part) | in work | — |
 | 25 | 02:54 | Tài nghệ: «Đức 60» chip repeats the top bar → remove; scan all tabs for HUD-stat duplicates | owner-2111-duc-dup.jpg | chiton-name | in work | — |
 | 26 | 02:58 | Mệnh truyện › Chương này: big chapter picture left (Hành sự big-card size), title top right, goals under it, task list + Đi làm below — arrange nicely | img/_review/refs/owner-2111-chapter.jpg | NEW worker chapter-card (85) | to open | — |
+| 27 | 03:00 | Sắc phong: keep the 2-column condition rows (liked); make the picture BIG (or a full-width banner) and put rows below; same for Chương này + other Mệnh truyện sub-tabs | img/_review/refs/owner-2111-sacphong.jpg | chapter-card (85) | to open | — |
