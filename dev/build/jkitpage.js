@@ -22,7 +22,8 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"art",k:"cam",name:"Cầm",level:2,max:5,prog:[1,4],desc:"Tài: thơ, đàn, thi tài",next:"Tài +2",stepsAttr:'data-v85tab="cam"',
    acts:[pbtn('data-kitsample="1"',"Tự học",capW()+" · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần",""),pbtn('data-kitsample="2"',"Học với thầy",capW()+" · tốn: 2 khắc, Bạc -15 · thành: tiến bộ một đến ba phần","thiếu bạc (cần 15)")]})+
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
-  kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
+  kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+
+  kitSkillCard({kind:"story",k:"big",kicker:"Chương 2",name:"Thẻ lớn (Mệnh truyện)",level:1,max:4,word:"Hồi",bar:false,next:"",big:true,img:kitInfoArt("Mệnh truyện").src,body:kitRows([["Mục tiêu","Tranh ảnh to bên trái (cỡ ảnh thẻ Hành sự), tên chương bên phải, mục tiêu và hàng kit ngay dưới tên."],["Hạn","còn 3 tháng"]])})+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
  {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},

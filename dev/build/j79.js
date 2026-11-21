@@ -1199,16 +1199,23 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
  const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">Đã tinh thông</span>`;
  const acts=(o.acts||[]).filter(Boolean);
- return `<div class="kskill${o.can===false?" kdone":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",{shape:"tall",size:"thumb",cap:false}):""}`+
+ /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
+   title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
+ return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
   `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
-  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}</div></div>`+
+  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,line): an empty state = the same card with no steps: the topic's painted picture (kitInfoArt) + one short line */
-function kitEmpty(title,line){const a=typeof kitInfoArt==="function"?kitInfoArt(title):{src:""};return kitSkillCard({kind:"empty",name:"",max:0,img:a&&a.src||"",desc:line})}
+function kitEmpty(title,line,big){const a=typeof kitInfoArt==="function"?kitInfoArt(title):{src:""};return kitSkillCard({kind:"empty",name:big?title:"",max:0,img:a&&a.src||"",desc:line,big:!!big})}
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
 .kskill{display:flex;flex-direction:column;gap:8px;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
 .kskills>.kskill{margin:0}.kskill.kdone{opacity:.92}
+/* chapter-card: the BIG card (kitSkillCard o.big): one picture size for every Mệnh truyện sub-tab = the big Hành sự act-card picture (170 x 227, 3:4) */
+:root{--kbw:170px}
+.kskill.kbig .kskh2{grid-template-columns:var(--kbw) minmax(0,1fr);gap:12px;align-items:stretch}.kskill.kbig .kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
+.kskill.kbig .ksart.kbigart{width:var(--kbw);height:auto;aspect-ratio:3/4;align-self:start}
+.kskill.kbig .kskinfo{gap:6px}.kskill.kbig .kskh b{font-size:1.2rem}.kskill.kbig .kskinfo>.kb{margin:0}
 .kskh2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}.kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
 .kskinfo{display:flex;flex-direction:column;gap:5px;min-width:0}.kskk{color:var(--dim);font-size:.78rem}
 .kskh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}.kskh:has(>b:empty){justify-content:flex-end}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}

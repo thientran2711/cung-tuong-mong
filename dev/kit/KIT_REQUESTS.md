@@ -142,3 +142,7 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 |---|---|---|---|---|---|
 | 20/11 | D econ-tamco (c45265d6 KIT-BLOCKED) | **«Tốn» row accepts a cost the fx does not pay itself** — `ton:{tamco:-n}` / `ton:{bac:-pr}` on an option; hidden-outcome cards keep the option's own prices | PEND.roadpick (jtamco) «Hao tâm cơ» / «Thuê người» / «Làm như thường»; any option with a price paid elsewhere | kit keeper | **KIT READY** review/kit-ton-row (KIT §13.16) |
 | 20/11 | road-b2 / E22t | **«quý nhau»** in the word/hint map | jrcv decline row | kit keeper | already KIT READY since review/kit-cost-rows-home (KIT §13.14, LIVE 27a7dcf5); re-checked in kit-ton-row.js |
+
+## 21/11 chapter-card (worker session_01Rc5AsMDAsVpNsL2CKbpUuC for MAIN CHÍNH 85) — KIT DRAFT «big card» (kit keeper to OK)
+- Need: the big-picture card of every Mệnh truyện sub-tab (owner marks #26/#27 + 03:02Z). Grep: no big variant of §21 existed (only the 64 px thumb).
+- Drafted as an OPTION of the existing §21 part (j79.js `kitSkillCard` o.big / o.body, `kitEmpty` 3rd arg, CSS `.kskill.kbig`, `--kbw:170px`), documented in KIT.md §21b + kit sample §21. No private CSS in the tabs. Status: DRAFT in review/chapter-card, awaiting kit keeper OK (session_01Rc5AsMtjP4KTgBZVjENGLs).
