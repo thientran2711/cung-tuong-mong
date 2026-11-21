@@ -1,0 +1,15 @@
+base: dev/art/maid7/prod/m18_nhat_ha_DUONG_L1890.txt
+allow: A first-rank palace maid   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: the highest palace maid rank   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: clearly finer than a nhị đẳng maid   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: over a short powder blue upper blouse with a WIDE   # owner L1919: nhị collar wrong → straight parallel (đối khâm) square open neckline, named explicitly, all ranks
+allow: LOW open neckline showing her neck and collarbones   # owner L1919: nhị collar wrong → straight parallel (đối khâm) square open neckline, named explicitly, all ranks
+allow: long NARROW sleeves   # owner L1919 research (b): Tang palace maids wore NARROW sleeves → narrow sleeves close to the arm, all ranks
+allow: a little richer than a nhị đẳng maid's   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: her hairpins are AS LARGE AND AS MANY as a nhị đẳng maid's or a little more   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: Sleeves about two and a half hand-spans wide   # owner L1919 research (b): Tang palace maids wore NARROW sleeves → narrow sleeves close to the arm, all ranks
+allow: she holds an embroidered handkerchief in a contrasting colour   # owner L1919: each rank a different held item (item of the new rank, prod m18_*_L1905)
+allow: the item held below the chin   # G61 owner L1905: hands/item never cover the front waist; pose+angle as prod m18_*_L1905 of the new rank (A47)
+allow: the item held in both hands lowered before her at waist height   # G61 owner L1905: hands/item never cover the front waist; pose+angle as prod m18_*_L1905 of the new rank (A47)
+allow: tied round the top of the skirt above the bust in a ribbon bow exactly at the CENTRE front with a small pearl at its centre   # G60 strip_bow wording (bow still exactly at the CENTRE front)
+allow: "Mùa Hạ · Cung nữ thời Đường · nhất đẳng · L1890"   # owner L1919 reshuffle: new rank caption

@@ -1,0 +1,21 @@
+base: dev/art/maid7/prod/m18_tam_ha_DUONG_L1890.txt
+allow: a palace maid's uniform   # owner L1919 reshuffle: thô sử ← tam, tam ← nhị, nhị ← nhất, NEW richer nhất
+allow: over a short powder blue upper blouse with a WIDE   # owner L1919: nhị collar wrong → straight parallel (đối khâm) square open neckline, named explicitly, all ranks
+allow: LOW open neckline showing her neck and collarbones   # owner L1919: nhị collar wrong → straight parallel (đối khâm) square open neckline, named explicitly, all ranks
+allow: long NARROW sleeves   # owner L1919 research (b): Tang palace maids wore NARROW sleeves → narrow sleeves close to the arm, all ranks
+allow: a few tiny embroidered plum sprigs on the blouse and a narrow embroidered plum-blossom hem band on the skirt   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: the least of all maids   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: every motif SMALL and fine   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: NO large flowers anywhere   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: a very sheer   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: highly translucent pale powder-blue gauze shawl   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: draped behind her back and looped over her forearms   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: never over her shoulders   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: the robe clearly visible through it   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: hair in neat double buns with one or two elegant silver hairpins with small pearls   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: Sleeves about one hand-span wide   # owner L1919 research (b): Tang palace maids wore NARROW sleeves → narrow sleeves close to the arm, all ranks
+allow: she holds a her mistress's comb box of plain wood in a contrasting colour   # owner L1919: each rank a different held item (item of the new rank, prod m18_*_L1905)
+allow: the item held below the chin   # G61 owner L1905: hands/item never cover the front waist; pose+angle as prod m18_*_L1905 of the new rank (A47)
+allow: the item held in both hands lowered before her at waist height   # G61 owner L1905: hands/item never cover the front waist; pose+angle as prod m18_*_L1905 of the new rank (A47)
+allow: a NARROW plain deep rose silk ribbon tied round the top of the skirt above the bust in ONE small simple bow exactly at the CENTRE front   # owner L1919 research (c): thô sử = plain working maid: no phi bạch, no embroidery, one wooden pin
+allow: "Mùa Hạ · Cung nữ thời Đường · tam đẳng · L1890"   # owner L1919 reshuffle: new rank caption
