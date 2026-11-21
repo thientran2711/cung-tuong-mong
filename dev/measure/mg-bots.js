@@ -54,7 +54,7 @@ const BOTS_SRC=(BOT)=>{
       she scribbles roughly along the line instead of following it; a board where sloppy play still scores high cannot fail = snap / magnet) */
    const pk=KG82.peek();
    if(pk&&pk.at!=null){/* a predictable target (jslap needle): a person ANTICIPATES the crossing she sees coming and taps at at + N(0, BOT.aim) ms */
-     if(!busy){busy=true;const k=kind==='casual'?2:1;setTimeout(()=>{if(KG82.phase!=='play')return;const q=KG82.peek()||pk;tap(q.x,q.y)},Math.max(0,pk.at+G()*BOT.aim*k))}
+     if(!busy){busy=true;const k=kind==='casual'?2:1;setTimeout(()=>{if(KG82.phase!=='play'){busy=false;return}const q=KG82.peek()||pk;tap(q.x,q.y);busy=false/* mg-craft: a board with many timed taps (Thêu stitches) — free for the next one */},Math.max(0,pk.at+G()*BOT.aim*k))}
      setTimeout(tick,16);return}
    if(pk&&'hold' in pk){/* continuous hold: follow the wanted state after a reaction delay */
      /* the wanted state = off, or on at a place (hsel / the board half of x): a change of place = lift and press again (Đi đứng: left / right half) */

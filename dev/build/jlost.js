@@ -56,10 +56,16 @@ function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(l
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
  /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else loKeepPick: keep vs her worst grudge, BAL.ag.why.loTry.keep) */
  if(c.cause==="riv"&&c.by&&(c.keep||(!force&&loKeepPick(loP(c.by),p)==="keep"))){if(!loKeepBy(c,loP(c.by)))c.keep=0}
- if(p===S){Q.push({t:"Đồ thất lạc",who:pMe(),h:`${loTag(e)}<p><b>${nm}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});log(`${nm} trong rương thất lạc.`);
+ if(p===S&&!c.quiet){Q.push({t:"Đồ thất lạc",who:pMe(),h:`${loTag(e)}<p><b>${nm}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});log(`${nm} trong rương thất lạc.`);
   try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"thất lạc",lo:c.id})}catch(x){}}
  else{const txt=`${wdNmC(p)} báo mất ${nm}.`;try{newsAdd(p,"lo",txt);if(S.news&&S.news[0]&&S.news[0].t===txt){c.heard=1;log(txt)}}catch(x){}}
  return c}
+/* IT05: a maid bought by a (j8 maidMonthP) steals one valuable piece of p's chest for a, who keeps it (the "keep" road of a rival theft).
+   The maid's confession of who bought her is known to the owner: the case is "found" at once (loKnowAt), so Đòi lại / Báo / Tâu are open.
+   Same rule for her and every consort (two-way). No piece worth taking → null (the caller takes silver). */
+function maidTheft(p,a,m){if(!p||!a||!loAlive(p)||!loAlive(a)||!(p.inv||[]).some(loOk))return null;
+ const c=loLose(p,{cause:"riv",by:key(a),keep:1,sv:(m&&m.name)||"",quiet:1,mt:1});if(!c||c.at!==key(a))return c;
+ try{loKnowAt(c,p,null)}catch(e){}return c}
 function loLoseE(p,e,cause){if(!loAlive(p)||!e)return null;if(typeof ilUid==="function")ilUid(e);S.loSeq=(S.loSeq||0)+1;const c={id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,cause:cause||"srv",d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")};
  loL().push(c);if(p===S){try{if(typeof tsbLedger==="function")tsbLedger({what:loNm(e.k),how:"thất lạc",lo:c.id})}catch(x){}}return c}
 function loClean(e){const x=Object.assign({},e);for(const f of ["lo","gh","by","h","w"])delete x[f];return x}
@@ -281,3 +287,21 @@ try{AOUT.laydo=[`một món quý trong rương nàng về tay ngươi (nàng ch�
  try{if(lo){const c=loGet(lo);const n=(t.inv||[])[t.inv.length-1];if(c&&n&&n.h&&n.k===e.k&&n.by===key(a)){if(c.own===key(t)){t.inv.pop();lostReturn(e,"nha")}
    else{Object.assign(n,{lo,gh:c.own});c.at=key(t);c.keep=0;c.by=key(a);c.st="held";c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}}else if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau"}}}catch(x){console.error(x)}return r}})();
 window.LO=LO;window.loLose=loLose;window.loWeek=loWeek;window.loMonth=loMonth;window.lostReturn=lostReturn;window.loKeepBy=loKeepBy;window.loCaseOf=loCaseOf;window.loHolds=loHolds;window.lostEv=lostEv;window.lostEvUse=lostEvUse;window.lostUnwear=lostUnwear;window.loKeepHear=loKeepHear;window.loSteal=loSteal;window.loEntry=loEntry;window.loGet=loGet;
+/* IT05 whole group (law 6c REAL OBJECTS, OD:L1313): the two "something went missing in her palace" events (j68e/j68h lostItem, j68f/j68h hairpinThief)
+   named a made-up object and could end "mất hẳn" with nothing moving. Now the event binds ONE real piece of her chest when it opens: the piece really
+   leaves the chest into a jlost case (cause "srv" = a servant took it / "mis" = mislaid; the hairpin thief's name is the case's sv), the text names that
+   piece, a "found" outcome puts it back (lostReturn), and every other outcome leaves the case open (Tư trang › Việc › Đồ thất lạc; jlost finds it later
+   or jil keeps it located). No piece worth taking → the event does not come. */
+const LO_EV={lostItem:1,hairpinThief:1};
+function loEvOk(){return !!S&&!S.dead&&(S.inv||[]).some(loOk)}
+function loEvCase(s,p){if(p.lc){const c=loGet(p.lc);return c&&c.e?c:null}
+ const L=(S.inv||[]).filter(loOk);if(!L.length)return null;const e=npwPick(L,x=>1+loPrice(x),{all:true})||L[0];
+ const i=S.inv.indexOf(e);if(i<0)return null;S.inv.splice(i,1);
+ const thief=s.id==="hairpinThief"?(()=>{try{const a=A6("sv",p["a"+(p.g|0)]);return a&&a.n}catch(x){return""}})():(p.c!=null?((typeof servById==="function"&&servById(p.c))||{}).name:"");
+ const c=loLoseE(S,e,thief?"srv":"mis");if(!c){S.inv.push(e);return null}if(thief)c.sv=thief;c.ev68=s.id;p.lc=c.id;return c}
+function loEvBack(p,how){try{const c=p&&p.lc?loGet(p.lc):null;if(c&&c.st!=="done"&&c.e)lostReturn(Object.assign({},c.e,{lo:c.id}),how||"tra")/* the case's own piece (loLoseE keeps no lo mark on it) */}catch(e){console.error("lo ev back",e)}}
+(function(){try{
+ for(const id in LO_EV){const s=E68I[id];if(!s)continue;const pp0=s.pp;s.pp=function(){return loEvOk()?(pp0?pp0.apply(this,arguments):{}):null}}
+ const b0=e68Build;e68Build=function(s,p){if(!s||!LO_EV[s.id])return b0.apply(this,arguments);const c=loEvCase(s,p);if(!c)return null;
+  const sv=s.items,si=p.it;s.items=[loNm(c.k)];p.it=0;try{return b0.call(this,s,p)}finally{s.items=sv;if(si==null)delete p.it;else p.it=si}};
+}catch(e){console.error("lo ev",e)}})();

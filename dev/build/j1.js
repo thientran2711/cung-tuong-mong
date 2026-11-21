@@ -207,7 +207,7 @@ function myDaus(){return S.kids.filter(k=>k.alive&&k.sex==="f")}
 function liveRivals(q){return rivals.filter(v=>v.alive&&!v.out&&(q||!v.queen))}
 function qOn(){const q=rivals[0];return q.alive&&!q.out&&q.queen}
 function momRank(v){return v?(v.alive&&!v.out?(v.queen?7:v.rank):0):S.rank}
-function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v};if(!v)apply({danh:10})}
+function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v}}/* KP03: the mother's Danh (her and an NPC mother, BAL.kid.heirDanh) is jkidlife's setHeir wrap */
 function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;S.heir=null}if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */

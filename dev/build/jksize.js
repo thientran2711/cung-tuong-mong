@@ -487,7 +487,7 @@ function kszSheet3(kind){const old=document.getElementById("kszsheet");if(old)ol
  let h=`<h2>${KSZ3_NAME[kind]||kind} · S / M / L / XL (${kitSzMode()==="kv2"?"iPad landscape 1180x820":"Fold portrait 755x1000"})</h2><p class="kszn">${foc==="event"?"Event-centred kind: S leads with the EVENT picture (person = small avatar inside the info).":"Person-centred kind: S leads with the PERSON's portrait frame (event picture = strip at the top of the info)."} M / L / XL: full figure left + event picture top-right, as wide as the info + button column; the picture grows into what the text leaves, so no frame has empty space.${(kind==="info"||kind==="choice"||kind==="news"||kind==="week")?" Thái hậu art: current files kept — Foreman C is redrawing every Thái hậu picture (slimmer robes).":""}${kind==="result"?" KẾT QUẢ frame = big / rare events only (tranh ghế, kỳ thi, mưu kế); routine actions keep today's small result toast at the bottom.":""}</p><div class="ksz3col" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">`;
  try{for(const K of ["S","M","L","XL"])h+=`<div data-k3="${K}"><div class="kszlab">${K}</div>${kszFrame3(X[K],K)}<div class="kszn k3pick"></div></div>`}finally{window.kitKnown=kk}
  window.__ksz3X=X;h+=`</div>`;d.innerHTML=h.replace(/ loading="lazy"/g,"");document.body.appendChild(d);
- const fit=()=>d.querySelectorAll(".ksz3").forEach(kitFrameApply3);fit();d.querySelectorAll("img").forEach(i=>i.complete||i.addEventListener("load",fit,{once:true}));return d}
+ const fit=()=>kszKeep3(d,()=>d.querySelectorAll(".ksz3").forEach(kitFrameApply3));fit();d.querySelectorAll("img").forEach(i=>i.complete||i.addEventListener("load",fit,{once:true}));return d}
 /* after the pictures are in: what does each sample's content pick (proof that the content is realistic for that size)? */
 function kszPick3Report(kind){const kk=window.kitKnown;window.kitKnown=()=>true;const X=window.__ksz3X||kszSpecs3()[kind];const host=document.createElement("div");host.style.cssText="position:absolute;left:-5000px;top:0";document.body.appendChild(host);
  const out={};try{for(const K of ["S","M","L","XL"])out[K]=kitFramePick3(X[K],host)}finally{host.remove();window.kitKnown=kk}return out}
@@ -626,7 +626,7 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
  body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
- right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
+ right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszKeep3(dlg,()=>kitFrameApplyLive3(dlg)),{once:true})});
  kszListCols3(dlg);kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
@@ -635,12 +635,32 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
 function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),a=M?M.clientWidth-16:0;/* a = the width the screen leaves a frame; the M frame (the smallest figure + right column layout) needs 24 + 12 + its figure column + minRight */return a>0&&a-24-12-KIT_SIZE.fig3.M.cw<V.narrow.minRight}
 /* KIT §56.19 (opt-scroll-reset): a re-pick (a picture loaded late, a resize) tries the smaller frames first, which shortens the option list for a moment and clamps its
    scrollTop — the player's scroll (or her first wheel) was lost. The re-pick keeps the scroll position of every scroller in the frame (option list, info column, #mb). */
-function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
- const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
+/* KIT §56.20 part 2 (ksz-lost-tap): a re-pick that runs BEFORE her finger lands still moves the card she was already aiming at (her eye saw the old place: ~100–200 ms from sight to touch).
+   For kszGrace3 ms after a re-pick, a pointer-down that lands where a button WAS (and is not on that button now) is delivered to that button: the tap is never dropped or misrouted. */
+const kszGrace3=300;let kszStale3=null,kszRemap3=null;
+function kszStaleSnap3(dlg){try{const L=[...dlg.querySelectorAll(".opts>button,.k3btns>button,#mr>button,.kpopts button")].filter(b=>b.getClientRects().length).map(b=>{const r=b.getBoundingClientRect();return[b,r.left,r.top,r.right,r.bottom]});return L}catch(e){return[]}}
+/* every other late re-fit of a dialog (picture load -> kitFrameApplyLive3 / kitFrameApply3 / kitPersonDlgFit) goes through the same snapshot + grace */
+function kszKeep3(root,fn){const SN=kszStaleSnap3(root);try{return fn()}finally{kszStaleMark3(root,SN)}}
+function kszStaleMark3(dlg,L){const t=performance.now();kszStale3=L.length?{dlg,L:L.map(([b,l,t0,r,bt])=>{const n=b.getBoundingClientRect();return Math.abs(n.left-l)+Math.abs(n.top-t0)+Math.abs(n.right-r)+Math.abs(n.bottom-bt)>2?[b,l,t0,r,bt]:null}).filter(Boolean),t}:null;if(kszStale3&&!kszStale3.L.length)kszStale3=null}
+(function(){let synth=0;
+ document.addEventListener("pointerdown",e=>{kszRemap3=null;const S=kszStale3;if(!S||performance.now()-S.t>kszGrace3||!S.dlg.isConnected)return;const x=e.clientX,y=e.clientY;const hit=S.L.find(([b,l,t,r,bt])=>b.isConnected&&x>=l&&x<=r&&y>=t&&y<=bt);if(!hit)return;const el=document.elementFromPoint(x,y);if(el&&(el===hit[0]||hit[0].contains(el)))return;kszRemap3={b:hit[0],up:0}},true);
+ document.addEventListener("pointerup",()=>{const R=kszRemap3;if(!R)return;R.up=1;setTimeout(()=>{if(kszRemap3===R)kszRemap3=null},600)},true);
+ /* the native click (aimed at what is under the finger NOW) is swallowed; the card she aimed at gets the click instead */
+ document.addEventListener("click",e=>{if(synth)return;const R=kszRemap3;if(!R||!R.up)return;kszRemap3=null;e.stopImmediatePropagation();e.preventDefault();try{if(R.b.isConnected&&!R.b.disabled){synth=1;try{R.b.click()}finally{synth=0}}}catch(er){console.error("kszRemap3",er)}},true);
+ document.addEventListener("pointercancel",()=>{kszRemap3=null},true)})();
+function kszLivePick3(dlg){const SNAP=kszStaleSnap3(dlg);const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
+ const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});kszStaleMark3(dlg,SNAP);return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
  let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
-let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
+/* KIT §56.20 (ksz-lost-tap, owner LIVE fault 21/11): a re-pick (late picture, resize) moves the figure and the option block (kszLiveLay3 detaches + re-appends the same nodes), so a tap whose finger
+   is DOWN on an option card when the re-pick runs loses its click (the node is detached between touch-down and touch-up). The re-pick therefore never runs while a pointer is down inside the modal:
+   it waits for the pointer to go up and for the click to be delivered (kszPtrUp3 → 120 ms), then runs once. One place for every live frame. */
+let kszRepT=0,kszPtrDown3=0,kszPtrT3=0,kszRepWait3=null;
+function kszRepRun3(dlg){try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}}
+function kszLiveRepick3(dlg){clearTimeout(kszRepT);if(kszPtrDown3){kszRepWait3=dlg;return}kszRepT=setTimeout(()=>{if(kszPtrDown3){kszRepWait3=dlg;return}kszRepRun3(dlg)},30)}
+(function(){const dn=e=>{const M=document.getElementById("modal");if(M&&!M.hidden&&e.target&&e.target.closest&&e.target.closest("#modal")){kszPtrDown3=1;clearTimeout(kszPtrT3);kszPtrT3=setTimeout(up,1500)/* safety: a lost pointerup never freezes the layout for good */}},up=()=>{if(!kszPtrDown3)return;kszPtrDown3=0;clearTimeout(kszPtrT3);if(kszRepWait3){const d=kszRepWait3;kszRepWait3=null;clearTimeout(kszRepT);kszRepT=setTimeout(()=>{if(kszPtrDown3){kszRepWait3=d;return}kszRepRun3(d)},120)}};
+ document.addEventListener("pointerdown",dn,true);document.addEventListener("pointerup",up,true);document.addEventListener("pointercancel",up,true);document.addEventListener("touchend",up,true);document.addEventListener("touchcancel",up,true);document.addEventListener("dragend",up,true);window.addEventListener("blur",up)})();
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
  if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
  if(M.classList.contains("kptitle")||mb.querySelector(".kpmenu,.kpt-mount"))return false;/* menu-panel (owner 21/11): the ☰ / title menu is the one kit menu frame, never an event frame */

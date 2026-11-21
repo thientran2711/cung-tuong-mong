@@ -123,6 +123,9 @@ Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ks
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
    graceMs = after the deadline the screens show "Hết buổi" this long before the step (lag between the two players). */
 Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500}});
+/* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
+   with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
+BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
 /* ITEM DETAIL (KIT §70, review/item-info): allow = show "hạn mức phẩm ta N" (her rank's luxury allowance) on the Xa xỉ row of every item detail,
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
@@ -251,7 +254,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tc:{fast:[.3,.45],keep:[.3,.3]},xa:{fast:[.25,.4],keep:[.4,.4]},thq:{fast:[.5,.65],keep:[.5,.5]},
   kim:{fast:[.25,.4],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.4,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220],darkCap:[.6,.6]},
-  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},chai:{zone:[.6,1.6]},ban:{size:[.7,1]},/* dauho-lv5: Bắn cung target picture size by ease (share of BAL.mgArt.ban.fit·H); the scoring rings are the painted rings *//* chai-ramp (owner 21/11 ~00:55Z): Chải chuốt green «đúng phẩm» band = wdGroomW × zone at the board ease (1.0 at ease 2 = the width she was measured on); Thử tay hồi 1→5 (ease 3.6→0.4) ≈ ×1.32 → ×0.68 *//* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
+  td_hanh:{lim:[8000,20000],short:[2,0]},den:{swing:[.36,.36],band:[.16,.208]},chai:{zone:[.6,1.6]},ban:{size:[.7,1]},/* dauho-lv5: Bắn cung target picture size by ease (share of BAL.mgArt.ban.fit·H); the scoring rings are the painted rings *//* chai-ramp (owner 21/11 ~00:55Z): Chải chuốt green «đúng phẩm» band = wdGroomW × zone at the board ease (1.0 at ease 2 = the width she was measured on); Thử tay hồi 1→5 (ease 3.6→0.4) ≈ ×1.32 → ×0.68 *//* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  /* review/cal-p2b (owner OD 20/11 ~07:35Z: fix the broken games only) — three board faults, BAL only:
@@ -309,7 +312,33 @@ BAL.mgArt={dauho:{mouth:{cy:.0414,rx:.2207,ry:.0224},rim:.2776,neck:[[.069,.276]
    bad = width share of the danger ring round a thing to avoid (colour = kit --bad) · badMs = how long the hit burst stays · badShake = px the hit thing / the player's
    piece shakes on a hit */
 Object.assign(BAL.mgFx,{popMax:30,/* huong-cue: longest pop / verdict kept as words */lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62,laneFade:.25});/* laneFade (den-look): share of the lane width over which the dim board fades in beside the path (no hard edge) *//* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
+/* mg-craft-hoa (owner OD 20/11 ~08:15Z, design MG_CRAFTS.md §3): Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa.js). Levers = [ease 0, ease 5] through mgLev:
+   ghost = share of the ruler ticks / lean fan shown · cutTol = length error that still counts full (share of the target) · angTol = lean error in degrees that counts full ·
+   alike = off-season look-alikes in the tray of 6 · sway = stem wobble while it is turned (share of half a turn) · limStem = ms per stem of the vase (clock = stems × this).
+   BAL.mgTier.hoa: n = stems of the 3 vases (+ mgMore, at most maxMore) · thien = Thiên length in vase heights · k = Nhân/Thiên, Địa/Nhân · guest = guest stems ÷ the Nhân (odd) / Địa (even) they hang off ·
+   ang = lean degrees per stem, signed (Thiên, Nhân, Địa, guests) · cut = uncut stem in vase heights · zero = the error (× its tolerance) at which a part scores 0 · seat = mouth radius in vase heights ·
+   w = score weights (season, length, lean, balance) · wrong = season share lost per wilted pick · balTol = balance error (share of the stem lengths) that scores 0 · judgeMs = pause on the stars. */
+BAL.mgTier.hoa={n:[3,4,5],maxMore:2,thien:1.5,k:[.75,.75],guest:[.85,.85,.65,.65],ang:[-10,45,-75,25,-50,60,-30],cut:2.2,zero:3,seat:.4,w:{sea:.2,len:.4,ang:.3,bal:.1},wrong:.5,balTol:.35,judgeMs:1500};
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
+/* mg-craft (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm": each craft its OWN real mechanic; design dev/design/MG_CRAFTS.md):
+   the board levers of the four craft boards, each [at ease 0 (hard), at ease 5 (easy)], read through mgLev(env, kind, name) — ONE CORE: no board number is typed in
+   the engines. Each kind's builder adds knobs ONLY inside its own block. Kind keys, kG / kAdj, cal.k and the hand band are unchanged (MAIN ROOT-75 order).
+   td_cong «Thêu theo nét» (jcraft_theu stitch board; built as Thêu «Thêu lướt sắc», moved to the Công lesson by the owner 21/11 ~01:05Z — Thêu keeps the j82
+     memory game; was td_cong tol = the old dotted-line trace tolerance): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · st = stitches per band · alike = decoy spools one
+     shade step off the right one · sway = hoop drift as a share of the hoop · peek = ms the finished sample stays before its cloth covers it (≥ round time = stays) ·
+     wC / wS = weight of the right colour / the stitch rhythm in a piece · lim = ms per piece (the time part mgPace) · fast / keep = mgPace of that time.
+   kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · holes = cuts of a sheet before mgMore · size = a cutter's size as a share of the wedge radius · place = snap tolerance as a share of
+     the wedge · peek = ms the unfolded sample stays (≥ lim = stays) · alike = look-alike cutter shapes · lim = ms per sheet · extra = what one extra hole costs
+     (share of a right hole) · fast / keep = mgPace (kept from review/mg-tune-r1).
+   Measured STEP 3 (dev/measure/mg-bots.js skilled n=30, graded): theu Dễ/Vừa/Khó 8.6 / 7.7 / 6.8 (old pattern 7.2 / 7.2 / 6.7), kim 8.7 / 8.5 / 6.8 (old untangle 9.0 / 8.6 / 7.7).
+   Integrate (lead #2, same harness, graded mean Dễ/Vừa/Khó): ve 9.9 / 8.2 / 5.5 (old trace 9.1 / 7.9 / 5.4) after ve ease-0 place .012 · ramp 220 · dry 150;
+   hoa 8.4 / 7.5 / 7.2 (old rings 8.5 / 7.8 / 7.7) after hoa ease-0 cutTol .12 · angTol 16 · sway .01 · limStem 10000 (was 4.4 / 4.7 at Vừa / Khó).
+   ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
+Object.assign(BAL.mgTier.lev,{
+ td_cong:{beat:[440,850],win:[20,65],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[18000,30000],fast:[.8,.8],keep:[.6,.6]},/* td_cong tune 21/11 (Công lesson kG 1.3; mg-bots skilled graded Dễ/Vừa/Khó 8.8 / 8.1 / 5.4 vs the old dotted-line trace 9.3 / 7.9 / 5.5): beat 520→440 | 900→850 · win 45→20 | 75→65 · lim ease-0 30000→18000 */
+ ve:{place:[.012,.14],tones:[5,3],ramp:[220,2600],dry:[150,30000],peek:[3000,40000],bleed:[.07,.03],flick:[420,420],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},/* mg-craft-ve «Thủy mặc» [ease 0, ease 5]: place = hit radius, share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = ms before the loaded brush pales one tone · peek = ms the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share · flick = ms a person takes to flick (bot oracle) · holdMin = ms a press counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = score parts · lim/limBase = ms per motif / fixed · fast/keep = mgPace */
+ hoa:{ghost:[0,1],cutTol:[.12,.15],angTol:[16,20],alike:[3,0],sway:[.01,0],limStem:[10000,17000]}});
+Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
@@ -1808,6 +1837,13 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* KP03 children living rules (jkidlife; OD:L87 + PLACES_PLAN §5 "Móc lối chơi"): Mẫu tử = k.hM (the same bar the princesses have, j54) for every child.
+   estr  = Mẫu tử per month a child who lives away (prince 6+ at A ca sở / Đông cung, a mother in lãnh cung) was not seen · visit / call = Mẫu tử when she
+   goes to see the child / calls the child home (once a month each child) · callK = khắc of «Cho gọi con về» · callTal = the lesson the child misses (Tài) ·
+   npcSee = an NPC mother's monthly chance to see her son who lives away (two-way) · heirDanh = Danh of the mother when her son is made Thái tử (lost again
+   when he is put aside) · heirGhen = envy of the others at that day · ward = an orphan (mother dead / lãnh cung) goes to the Hoàng hậu (her or an NPC; none
+   → Thái hậu): Danh of the foster mother on the day · succHoa = Mẫu tử ≥ hi / < lo moves the succession "mẹ con" (j99succ hoa) +1 / −1 · hm0 = first value */
+BAL.kid={estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]};
 /* DRESS CODE (PARKING #11, review/dresscode, jdc.js; owner 20/11 ~19:00Z, verbatim dev/PARKING_LOT.md rows 11 + 11b; expert pass dev/handover/reports/dresscode-expert.md).
    fam  = the ONE small set of basic colour families (owner: "những cái màu cơ bản thôi"); every shade maps to one (hồng phấn / hồng đào / peach → hong …). hex = the dot colour (KIT REQUEST kitColDot).
    who  = Foreman C's palette per painted identity [main, secondary] (consorts c01–c32: handover dev/art/t8-prompt-B/build.py DATA; maids m01–m52: dev/art/face-common/m_colours_proposed.json FINAL Lượt 603;
@@ -1888,6 +1924,23 @@ BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:
  so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
  rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
  join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
+/* jkc3 HOME CHAPTERS (GAP OR03–OR10): the calendar of the home arcs, the roster people, the home events E9 / E15 / E28, the early roads.
+   cal: o0 months to the first beat · gap [min, +roll] months between beats · tP odds of a turn beat · min beats an unopened arc needs · fin spare months before Sơ tuyển.
+   win Lợi thế for the win ending of an arc with no fixed ending · scOdds odds per Lợi thế at a climax · plan.ke odds of «Kế mẫu» over «Hôn sự» when the mother lives.
+   ros: starting favour [base, +roll] · me = her own liking · baSanh odds the bà mối sits in the chính sảnh while a match is open.
+   thay: t favour for tier 1 / 2 · mul lesson speed per tier · hau / bieu / truyen the three teacher acts. entry: rank index of the early roads (1 = Thường tại). fx: every arc's option / ending numbers (BAL.arc.fx format). */
+Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1,nc:[1,2]},win:3,mid:1,scOdds:7,plan:{ke:50},
+ ros:{me:[30,20],nm:[60,25],ba:[25,20],thay:[20,20],sx:[30,30],baSanh:60,age:{nm:[56,10],ba:[40,9],thay:[34,12],le:[52,12]},
+  sxAge:{hau:[20,5],quan:[22,5],than:[24,4],thuong:[30,8],lao:[56,8],def:[24,6]},
+  pool:{mama:["mama","maid"],maid:["maid","mama"],man:["man","official"],official:["official","man"]},noFid:["man:vuonggia","man:thaiy","emperor:","thaihau:"],pref:{hoa:["man:hoasu-1"]}},
+ thay:{t:[45,75],mul:[1,1.25,1.5],hau:{k:2,suc:-10,af:7},bieu:{k:1,bac:-15,af:7},truyen:{k:2,suc:-15,danh:3,art:8,tier:2},leMax:5},
+ nm:{ke:{k:1,tamco:1,af:3},do:{k:1,od:40,afD:4,proof:1,oan:6,af:-5,oanMin:12},an:{k:2,suc:20}},
+ ba:{bieu:{k:1,bac:-20,af:10,q:10},khe:{k:2,suc:-10,kap:-8,af:4}},
+ ev:{mebenh:{t0:6,p:6,af:10,y:{bac:-40,od:55},hau:{suc:-30,od:50}},divat:{hua:{duc:3},hoi:{tamco:3,proof:1}},
+  xemmat:{dep:{suc:-10,od:45,sacD:3,kgt:4,kap:10,af:8,kgtF:-3},gian:{duc:2,kap:3},muoi:{af:8,danh:2,kap:-4,p:50}},
+  hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
+  vh:{duc:3},th:{go:10,wait:6,duc:2},qMax:2},
+ entry:{th:1,vh:1},tier:{win:1,mid:0,lose:-1},seedP:50,thdTro:40,rare:{dtqSuc:90,muoiTc:60,dtqOc:1,r4:.6,r6:.8,r1:{h:80,loyal:60,kld:55,p:.6}},gtuMin:10,know:{foe:2},intel:{n:1,st:2},fx:{}}});
 /* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
    owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
    Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
