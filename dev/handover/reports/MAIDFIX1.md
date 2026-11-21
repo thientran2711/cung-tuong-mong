@@ -50,3 +50,44 @@ OLD|NEW sheet — OLD gen ids: tam **Tdw9BE8VNR**, nhị **dt4ZloSXSL**, nhất 
 POSE (asked by #18): all three prompts say "Her hands and body: the item held in both hands lowered before her at waist height, head tilted gently toward the viewer." + "the item held below the chin" — nothing keeps the hands OFF the sash; "at waist height" puts hands/item over the sash. Not changed (owner did not raise it); suggested swap if wanted: "…held in both hands before her just above the waist sash, the sash and its bow left clearly visible…".
 keep_check --all: FAIL only on 2 files not mine (thu_comoi/s62_t4_THU_COMOIl, s62_t5_THU_COMOIk).
 UPDATE owner L1687: nhất 4RFSnTa9Aa DUYỆT as drawn (prompt dev/art/maid7/test6_nhat_L1653.txt, unchanged) → test8_nhat_L1685 REMOVED (sachet edit dropped). tam test8_tam_L1685 + nhị test8_nhi_L1685 stand.
+
+## JOB 2 — THÂN CẬN (owner L1688 via Foreman C #18): copy approved maid prompt, swap MAIN↔SECONDARY colours (K24/K28) + K28 square collar; nothing else. 0 gens.
+Files dev/art/maid7/test9_{tam,nhi,nhat}_thancan_L1688.txt (+.keep, allow = only the swapped/collar phrases). Bases: tam test8_tam_L1685 · nhị test8_nhi_L1685 · nhất test6_nhat_L1653 (approved 4RFSnTa9Aa).
+Colours: powder blue #A7BAD2 ↔ deep rose #CA7281 everywhere (also 'blue ruqun'→'deep rose ruqun', 'pink jacket'→'powder blue jacket', nhất 'lower maid's blue'→'deep rose', 'sleeves blue all the way down'→'deep rose'). Square collar = the existing thân cận wording (gpt/nhi_thancan_gpt_v4), added on the outer top (tam/nhị) / replaces nhất's stand collar.
+Gates: keep --sidecar PASS ×3; check_store mama a18: nhất PASS, tam/nhị S01+S32 only = same as bases; keep --all FAIL only the 2 thu_comoi files (not mine).
+```
+== test9_tam_thancan_L1688
+  replace | and skirt in powder blue like #A7BAD2,   →   and skirt in deep rose like #CA7281,
+  replace | powder blue like #A7BAD2, with a   →   deep rose like #CA7281, with a
+  replace | half-sleeve jacket, in deep rose like #CA7281,   →   half-sleeve jacket, in powder blue like #A7BAD2,
+  replace | deep rose like #CA7281, made of   →   powder blue like #A7BAD2, made of
+  insert | or duller cloth), its FRONT   →   or duller cloth), with a SQUARE collar (cổ vuông, fangling): a flat embroidered collar band that runs straight down from each side of the neck and turns at a right angle, framing a square opening at t
+  replace | all the SAME powder blue, never white;   →   all the SAME deep rose, never white;
+  replace | her main colour powder blue on the   →   her main colour deep rose on the
+  replace | her secondary colour deep rose clearly visible   →   her secondary colour powder blue clearly visible
+== test9_nhi_thancan_L1688
+  replace | silk ruqun in powder blue, with narrow   →   silk ruqun in deep rose, with narrow
+  replace | on top in deep rose like #CA7281,   →   on top in powder blue like #A7BAD2,
+  replace | deep rose like #CA7281, an embroidered   →   powder blue like #A7BAD2, with a SQUARE collar (cổ vuông, fangling): a flat embroidered collar band that runs straight down from each side of the neck and turns at a right angle, framing a square op
+  replace | silk cord; the pink jacket is   →   silk cord; the powder blue jacket is
+  replace | layer over the blue ruqun: the   →   layer over the deep rose ruqun: the
+  replace | wraps AROUND the pink jacket at   →   wraps AROUND the powder blue jacket at
+  replace | her main colour powder blue like #A7BAD2   →   her main colour deep rose like #CA7281
+  replace | powder blue like #A7BAD2 on the   →   deep rose like #CA7281 on the
+  replace | her secondary colour deep rose like #CA7281   →   her secondary colour powder blue like #A7BAD2
+  replace | deep rose like #CA7281 on the   →   powder blue like #A7BAD2 on the
+== test9_nhat_thancan_L1688
+  replace | over-vest with a stand collar closed   →   over-vest with a SQUARE collar (cổ
+  insert | a stand collar closed by   →   a SQUARE collar (cổ vuông, fangling): a flat embroidered collar band that runs straight down from each side of the neck and turns at a right angle, framing a square opening at the upper chest, inside 
+  replace | stand collar closed by a small knot   →   to edge, closed with one small knot
+  insert | small knot button, with a   →   small knot button, never a tall upright stand collar, with a
+  replace | to her colour powder blue, a soft,   →   to her colour deep rose, a soft,
+  replace | the MAIN colour powder blue like #A7BAD2   →   the MAIN colour deep rose like #CA7281
+  replace | powder blue like #A7BAD2 and the   →   deep rose like #CA7281 and the
+  replace | the SECONDARY colour deep rose like #CA7281,   →   the SECONDARY colour powder blue like #A7BAD2,
+  replace | deep rose like #CA7281, the secondary   →   powder blue like #A7BAD2, the secondary
+  replace | WHOLE SLEEVES are powder blue (a touch   →   WHOLE SLEEVES are deep rose (a touch
+  replace | a lower maid's blue), the sleeves   →   a lower maid's deep rose), the sleeves
+  replace | band may carry deep rose embroidery; the   →   band may carry powder blue embroidery; the
+  replace | back tà are deep rose. COLOUR TONE:   →   back tà are powder blue. COLOUR TONE:
+```
