@@ -3,7 +3,7 @@
 Hair flower: bloom ONLY, no leaves, colour from the table HF_COL (suits the olive/lilac outfit, never yellow chrysanthemum); t7/t8 own embroidery flowers."""
 import os
 D = os.path.dirname(os.path.abspath(__file__)); TH = os.path.join(D, '..')
-HFL = "the bloom ONLY, NO leaves, never a yellow chrysanthemum"   # owner L1723
+HFL = "the bloom ONLY, NO leaves"   # owner L1723
 def rep(t, o, n, r):
     assert t.count(o) == 1, (r, o[:70], t.count(o)); return t.replace(o, n)
 T = {5: [

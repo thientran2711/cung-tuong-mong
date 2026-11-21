@@ -6,7 +6,7 @@ MAIN, SEC, HEX = "light olive", "lilac", "#9FB577"          # COLOUR SLOT (row 2
 D = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(D, '..', '..', '..', '..'))
 CUR = {1: 'dev/art/dapung4/s62_t1_COMOI_v11.txt', 2: 'dev/art/dapung4/s62_t2_COMOI_v11.txt', 3: 'dev/art/dapung4/s62_t3_COMOI_v12.txt'}
 SP = {1: ("lilac", "lilac flowers", "pure white"), 2: ("tiger lily", "tiger lilies", "soft peach-coral"), 3: ("semi-double China rose", "semi-double China roses", "soft rose-pink")}  # row 20 F2_FL s62 + L1723 colour
-HFL = "the bloom ONLY, NO leaves, never a yellow chrysanthemum"
+HFL = "the bloom ONLY, NO leaves"
 def rep(t, o, n, r):
     assert t.count(o) == 1, (r, o[:70], t.count(o)); return t.replace(o, n)
 def grab(t, rx): m = re.search(rx, t); assert m, rx; return m.group(0)

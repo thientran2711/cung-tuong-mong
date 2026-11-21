@@ -162,3 +162,7 @@ A46 gems: one sentence before "No text, no labels." — "All gems are smooth pol
 | s62_t7_THU_fix2_L1726 | s62_t7_THU_fix_L1723 | + A46 sentence only | PASS |
 | s62_t8_THU_fix2_L1726 | s62_t8_THU_fix_L1723 | crown "rubies" → "smooth cabochon rubies" + A46 sentence | PASS |
 keep_check --all 424 PASS. Builder fix_L1723/make_fix2_L1726.py. Words "never a yellow chrysanthemum" stay inside the hair-flower negation (t1–t6 L1723 files) — harmless; say if you want them cut.
+
+## Fix3 t8 + negation cut (Foreman C #20, after draw jUoqvBPLD0 still wide/bell)
+- s62_t8_THU_fix3_L1726.txt (base fix2, 9565 ch, PASS): cloud collar → "a SMALL … cloud collar lying FLAT ON the shoulders only, never reaching past the shoulder line, with short pearl fringes hanging straight down"; + "SLIM EMPRESS SILHOUETTE: the sleeves hang straight down close to her body, never flaring out; the robe falls in a slim straight column to the floor, never an A-line, triangle or bell shape." (approved sleeve-length sentences untouched).
+- 'never a yellow chrysanthemum' cut from the hair-flower negations (now 'the bloom ONLY, NO leaves') in t1/t2/t3_THU_L1723, t5/t6_THU_fix_L1723, t6_THU_fix2_L1726 + builders. keep --all 428 PASS.
