@@ -1666,3 +1666,4 @@ SẴN SÀNG KIỂM td-dung-clear 03ba85c3b
 SẴN SÀNG KIỂM den-look 93436938
 SẴN SÀNG KIỂM huong-cue d9fa3a93 (round 2: Điều hương words + group a/part of b; jhd/jnwp/jnwq/jtd pending)
 - (21/11 01:18Z) SELF-MERGE LAND kit-ton-row: rv PASS fc854210 + LIVE 4f34f461 → e4fd4dcf (index/sw only conflict, rebuilt; kit-ton-row 12/12, coop-ton-row 19/19, quickcheck PASS 227 s, coop-e2e 68/68) → LIVE e4fd4dcf (rollback 4f34f461). D econ-tamco unblocked. Follow-up kit-ton-row-2 with keeper (relation costs words only; Sủng test regex).
+- (21/11 01:20Z) dauho-lv5 SSK a3cf3eaf (via 82) → sent back for: wind word line + merge LIVE e4fd4dcf (cal map) + rerun; then BIG opus reviewer. Note: makes dauho + ban redo (broken-board rule, OD 2046: games fixed → she re-tests) — tell owner at land.
