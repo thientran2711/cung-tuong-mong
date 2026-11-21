@@ -237,3 +237,81 @@ Method started (container-local, recreate): main history fetched with `git fetch
 After that: gates one at a time on the new head — night-final ×10, night-multi ×10, night-day ×10, night-book-day, night-steal-unit (arg index.html path), steal-mg-unit (arg dev/index.html), flip-entry, steal-mg-nf, night-coop-park, balance-core (index.html path), one-core-guard, coop-e2e, coop-night, coop-steal ×3, QUICKCHECK (bash dev/tools/quickcheck.sh: old save + perf). Plus a «no-revert» check: `git diff origin/main HEAD -- dev/build` must contain only the branch's own hunks (list them). Then ff review/night-final-r3 to that head, SSK line «SẴN SÀNG KIỂM review/night-final-r3 <sha> (TIER BIG; solo + co-op new night)» + this STATUS/report + send_message D #12.
 Studying-bot table for the SSK line = #5's §7 life bot above (main 66bd36cd 5/8 HH vs branch 1/7, small n); the instudy measure (dev/measure/instudy.js) was NOT run by #5 or #6; BAL.art.gain stays HELD.
 Container-local helpers (recreate): loop.sh `<wt> <test> <n> <arg> <tag>` (one at a time, logs /home/user/wt/logs), csloop.sh (coop-steal n times), python3 -m http.server 8761 in the worktree for <url> tests (http://localhost:8761/index.html); coop tests serve dev/index.html (run assemble first) and use the LIVE Worker.
+
+## NIGHT LAND CHAIN #7 (session_01964izCYYK9w88YKJcvCFHe, depth 4, START_CTX ~5 %) — JOB 1 re-port onto LIVE + audit
+PRIORITY #1 CHECK: OD 20/11 ~21:30Z co-op rule + OD02 giữ chân | main none (LIVE 8c8b8b6b) | review/* night-final-r3-coop c3295d37, night-final-r3 73a09248, balance-core-r3 8939c663 | claims GAP night land chain row (D) → #7.
+
+ROOT CAUSE confirmed on full history (fetched --shallow-since=2026-11-15): BAL.orig.id was present in night-final-r3 de26ef16f (merge main 20/11 14:58) but LOST in balance-core-r3 abae0ea8a («Merge LIVE eb11e2ad … re-port», 16:02, eb11e2ad HAS it) and came into night-final via dc3ab36ca (merge balance-core 6eaa5f18). So balance-core-r3 8939c663 itself is ALSO tainted (do not land it alone).
+
+METHOD (no 3-way, no shallow): line provenance. Own set = every commit in LIVE..c3295d37 (65 non-merge + 30 merges). For each of the 84 files that differ LIVE↔branch (generated index/sw/all/dev/index, assets.json excluded; rebuilt):
+- a LIVE line stays unless a chain commit removed that exact line; a branch line is kept only if a chain commit (or a chain merge's own resolution, `++` in --cc) added it;
+- where both sides kept text (63 line pairs) a token 3-way vs the line the chain commit edited; 27 left were read token by token: all = chain edits on lines LIVE did not change in substance → chain side.
+- assemble.py = LIVE's list + 'jbalcore.js','jnf.js' right after 'jseat.js'; build_site.sh rebuilt index.html/sw.js.
+Result commit 8c8689b9 (parents: LIVE 8c8b8b6b, old head c3295d37 → fast-forward for both review branches; `git diff 8c8689b9^1 8c8689b9` = the whole chain change, 78 files +2521/−384). Pushed review/night-final-r3-coop.
+
+AUDIT 1 — every edit LIVE→branch is ours (dev/build + dev/test + kit md): 652 token edits; 616 auto-matched (the LIVE side with 3 tokens of context inside a line a chain commit removed AND the branch side inside a line a chain commit added); 36 by hand (j1 5, jorigins 1, jfe 11, night-day 12, night-steal-unit 7), all chain intent. Table:
+| file | token edits vs LIVE | auto-matched to chain commits | checked by hand | LIVE lines kept where the old branch differed | stale lines dropped |
+|---|---|---|---|---|---|
+| dev/build/assemble.py | 1 | 1 | 0 | 1 | 0 |
+| dev/build/j1.js | 12 | 7 | 5 (ORIGINS numbers → BAL.start (balance-core); LIVE art:{cam:1}→BAL.orig.art already gone on both) | 5 | 0 |
+| dev/build/j13.js | 9 | 9 | 0 | 1 | 0 |
+| dev/build/j14.js | 4 | 4 | 0 | 1 | 0 |
+| dev/build/j2.js | 62 | 62 | 0 | 10 | 0 |
+| dev/build/j22.js | 3 | 3 | 0 | 1 | 0 |
+| dev/build/j23.js | 5 | 5 | 0 | 1 | 0 |
+| dev/build/j31.js | 8 | 8 | 0 | 1 | 0 |
+| dev/build/j4.js | 9 | 9 | 0 | 3 | 0 |
+| dev/build/j42.js | 1 | 1 | 0 | 0 | 0 |
+| dev/build/j68e.js | 20 | 20 | 0 | 5 | 0 |
+| dev/build/j68f.js | 8 | 8 | 0 | 2 | 0 |
+| dev/build/j7.js | 13 | 13 | 0 | 4 | 0 |
+| dev/build/j75.js | 10 | 10 | 0 | 2 | 0 |
+| dev/build/j79.js | 8 | 8 | 0 | 1 | 0 |
+| dev/build/j8.js | 43 | 43 | 0 | 6 | 0 |
+| dev/build/j85.js | 68 | 68 | 0 | 4 | 0 |
+| dev/build/j96.js | 4 | 4 | 0 | 1 | 0 |
+| dev/build/jact.js | 2 | 2 | 0 | 1 | 0 |
+| dev/build/jagacts.js | 4 | 4 | 0 | 2 | 0 |
+| dev/build/jagacts2.js | 3 | 3 | 0 | 1 | 0 |
+| dev/build/jagacts3.js | 16 | 16 | 0 | 5 | 0 |
+| dev/build/jagmaid.js | 4 | 4 | 0 | 0 | 0 |
+| dev/build/jbal.js | 12 | 12 | 0 | 1 | 0 |
+| dev/build/jbal2.js | 24 | 24 | 0 | 64 | 8 |
+| dev/build/jbalarc.js | 13 | 13 | 0 | 7 | 0 |
+| dev/build/jcoopone.js | 2 | 2 | 0 | 0 | 0 |
+| dev/build/jcoopworld.js | 17 | 17 | 0 | 0 | 0 |
+| dev/build/jfe.js | 18 | 7 | 11 (nfParked gate (co-op unpark #5)) | 4 | 0 |
+| dev/build/jflip.js | 17 | 17 | 0 | 2 | 0 |
+| dev/build/jgift.js | 4 | 4 | 0 | 0 | 0 |
+| dev/build/jk4.js | 5 | 5 | 0 | 0 | 0 |
+| dev/build/jkc.js | 5 | 5 | 0 | 0 | 0 |
+| dev/build/jksize.js | 6 | 6 | 0 | 1 | 0 |
+| dev/build/jopic.js | 4 | 4 | 0 | 0 | 0 |
+| dev/build/jorigins.js | 1 | 0 | 1 (bd row numbers → BAL.start.bd (balance-core)) | 1 | 0 |
+| dev/build/jroad.js | 5 | 5 | 0 | 1 | 0 |
+| dev/build/jroute.js | 4 | 4 | 0 | 1 | 0 |
+| dev/build/jsteal.js | 4 | 4 | 0 | 0 | 0 |
+| dev/build/jtabs.js | 23 | 23 | 0 | 0 | 0 |
+| dev/build/jthaiy.js | 4 | 4 | 0 | 1 | 0 |
+| dev/build/jts.js | 17 | 17 | 0 | 2 | 1 |
+| dev/build/jvisit.js | 2 | 2 | 0 | 1 | 0 |
+| dev/build/jweather.js | 8 | 8 | 0 | 0 | 0 |
+| dev/build/jworld2.js | 8 | 8 | 0 | 2 | 0 |
+| dev/kit/KIT.md | 3 | 3 | 0 | 3 | 0 |
+| dev/kit/KIT_REQUESTS.md | 1 | 1 | 0 | 6 | 0 |
+| dev/test/coop-one-world.js | 4 | 4 | 0 | 0 | 0 |
+| dev/test/flip-entry.js | 48 | 48 | 0 | 6 | 0 |
+| dev/test/night-day.js | 32 | 20 | 12 (night-final test rewrite) | 1 | 0 |
+| dev/test/night-steal-shot.js | 5 | 5 | 0 | 0 | 0 |
+| dev/test/night-steal-unit.js | 32 | 25 | 7 (commit-time steal test rewrite) | 1 | 0 |
+| dev/test/npc-purpose-rows.json | 1 | 1 | 0 | 0 | 0 |
+| dev/test/origin-arts.js | 2 | 2 | 0 | 1 | 0 |
+| dev/test/steal-mg-nf.js | 4 | 4 | 0 | 0 | 0 |
+
+AUDIT 2 — runtime BAL scan (every BAL leaf + every global function, page loaded in Chromium; LIVE vs branch):
+| | old branch c3295d37 | re-port 8c8689b9 |
+|---|---|---|
+| BAL leaves/globals on LIVE missing on branch | 84 | 22 |
+| BAL values different from LIVE | 26 | 2 |
+Restored by the re-port (86 entries; examples): BAL.orig.id.* (cal-p2c identity offset, 20 keys), BAL.ag.mg2.cal.k.{chai,dauho,den,hoadien} + cal.redo.* (mgcal-redo), BAL.invite.wait.* , BAL.mgFx.laneFade, BAL.mgTier.blend.*, lev.banh.reach, lev.mua.dark/darkCap, cal.k.banh/mua b (7.3/8.3, old 6.1/6.3), kG.huong 1 (old 3.65), lev.co/doden fast (0.4 / 0.3,0.5; old 0.1 / 0.05,0.175), win:dilTon (jcui), jmgcal ok/stale.
+The 22 + 2 left = balance-core intent only: per-art weights now read the one ladder artOE/artO (BAL.visit.show.w, BAL.ag.cx.portrait.k, BAL.ag.cx2.{show.k,court.thi,nurse.y,kidHeal.y→BAL.art.gate.yCure}, BAL.ag.par3.{dance.vu,anthai.self.y,cold.poem.thi,qin.cam,qin.tt}, BAL.deck.{vu,cam,ky}.o[1], BAL.world.{thb,benh}.nurse.o[1], BAL.preT.drug.perY, BAL.thy.findY), bd start numbers → BAL.start.bd (BAL.orig.bd.o/th), BAL.steal.cost.feign.duc / road.suc → 0 (flip choice has no cost, OD 16/11 22:45Z). Source-level key/function scan: 5 references missing, same set (all above).
