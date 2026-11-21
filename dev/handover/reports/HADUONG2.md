@@ -16,6 +16,7 @@ depth 8 (limit 8) · START_CTX ≈ 3 % (get_session read 0; own estimate)
 All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open neckline, "NEVER round/scooped/U" (fixes nhị); sleeves narrow close to the arm (research b); bow exactly CENTRE front (G60); hands/items off the front waist (G61 — all L1890 pictures held the item at the waist).
 ## Notes for #26
 - The L1890 maid files are DOUBLED (whole prompt written twice → check_store FAIL M-MASTER NOT ONCE). The L1919 files use one copy only. The L1890 files are left as they were.
-- K3 conflict: K3 says nhất ≈3 hand-spans, nhị ≈2; research (b) + owner "apply to all" → narrow for all. #26 to log/waive.
+- K3 conflict → WAIVED by #26 (conflict 18 in ART_RULES_CONFLICTS.md). L1890 maid files left doubled (not reused; L1919 supersedes).
 ## Draw
 - Sent to VE10 session_01D3E3NaakFbargWadMNeWzZ @55, all 4 (all changed), sheet ha_maid_L1919.png thô sử | tam | nhị | nhất.
+- VE10 holds the job until #26 says "VE10 GO m18" (its standing order).
