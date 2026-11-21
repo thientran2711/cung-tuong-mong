@@ -1,0 +1,115 @@
+/* «Hảo hữu» partner sheet (owner 21/11 ~06:05Z mark #2; dev/build/jhaohuu.js) — BOTH seats, two Playwright browsers in one room on the LIVE Worker.
+   usage: python3 dev/build/assemble.py && COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <outdir> [workerURL]
+   Checks: (1) SOLO: no «Hảo hữu» rail icon; (2) co-op, host A + guest B, each at Fold 755x1000 AND iPad 1180x820:
+   the icon is the LAST (bottom) button of the stage's left rail (#krail), inside the stage; tap → ONE kit info panel (.dlg.kpanel, seal + ✕);
+   STRANGER (unmet): title «Hảo hữu của ta», her real name nowhere in the panel, grey silhouette figure, rank/stats «chưa rõ»;
+   MET: title = her name, kit rank unit (.kname) in «Danh vị», stats tiles = her real numbers, Sức khỏe = her number, Lúc này row;
+   ✕ and Esc close it; no page errors; no horizontal overflow. Shots <outdir>/hh-<seat>-<dev>-<stranger|met>.jpg (scratch, never git). */
+const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {serve,BASE}=require('./coop-serve.js');
+const OUT=path.resolve(process.argv[2]||'/tmp/coop-haohuu');fs.mkdirSync(OUT,{recursive:true});
+const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
+const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const DEV={fold:[755,1000],ipad:[1180,820]};
+const DCL={waitUntil:'domcontentloaded'};
+async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+ await serve(ctx);
+ await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf,#kroul,#kroulw,.kroul{display:none!important}';document.head.appendChild(s)})});
+ await ctx.addInitScript(()=>{window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
+  return{code:c.code||s.room||'',seat:c.seat||s.you||null,on,online:s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{},frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}});
+ const o={ctx,name,errs:[]};const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
+ p.on('pageerror',e=>o.errs.push(e.message.slice(0,200)));o.p=p;return o}
+const booted=o=>o.p.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:90000}).catch(()=>{});
+async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}}
+async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
+ return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
+ const el=h.asElement();if(el){try{await el.click({noWaitAfter:true,timeout:15000});return true}catch(e){}}await sleep(250)}return false}
+/* close every story / news card (never the co-op freeze panel) — the game screen with the stage must be bare */
+const bare=o=>o.p.evaluate(()=>{try{Q.length=0;const M=document.getElementById('modal');M.hidden=true;M.className='modal';
+ document.querySelectorAll('.kroul,#kroul,#kroulw,.kcf,#ktut,#kcoach,.kcoach,.kmov,.kflip,#kflip,.kbk').forEach(e=>e.remove());try{kitCoachOff()}catch(e){}
+ if(S&&S.mg)S.mg=null;/* the opening Thi tuyển chọn mini game (#ov) of a new life covers the stage: a player plays it first; the test closes it */const ov=document.getElementById('ov');if(ov&&ov.querySelector('.mg')){ov.hidden=true;ov.innerHTML='';document.body.classList.remove('kdlg-on')}try{S.tutDone=1}catch(e){}tab='act';render();return true}catch(e){return String(e)}});
+/* close story/news modals of the normal game (never the co-op waiting/freeze panel) — copied from coop-e2e.js clear() */
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
+   const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
+  const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
+  if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
+  if(st!=='x')return st;await sleep(200)}return'many'}
+
+const clearAll=o=>clear(o);
+/* a story card (.kmov) of the running game may cover the screen a moment later: clear it, then tap the icon */
+async function tapHH(o){for(let i=0;i<4;i++){await clear(o);await bare(o);await sleep(300);try{await o.p.click('#krail [data-rail=haohuu]',{timeout:5000});return true}catch(e){}}return false}
+/* the icon + panel on one seat at one device */
+async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewportSize({width:W,height:H});await sleep(700);await bare(o);await sleep(900);
+ await o.p.evaluate(()=>{try{kitStageRail.paint()}catch(e){}});await sleep(300);
+ const r=await o.p.evaluate(()=>{const rail=document.getElementById('krail'),st=document.getElementById('stage');const B=rail?[...rail.querySelectorAll('[data-rail]')].filter(x=>x.getClientRects().length):[];
+  const hh=rail&&rail.querySelector('[data-rail=haohuu]');const q=e=>{const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
+  const sr=st&&st.getBoundingClientRect();const inside=!!(hh&&sr&&(()=>{const r=hh.getBoundingClientRect();return r.left>=sr.left-1&&r.right<=sr.right+1&&r.top>=sr.top-1&&r.bottom<=sr.bottom+1})());
+  return{n:B.length,ids:B.map(x=>x.dataset.rail),last:B.length?B[B.length-1].dataset.rail:null,box:hh?q(hh):null,inside,tag:hh&&hh.tagName,sq:hh?getComputedStyle(hh).borderRadius:null}});
+ ok(!!r.box,`${seat} ${dev} ${phase}: «Hảo hữu» icon on the stage rail`,r);
+ ok(r.last==='haohuu',`${seat} ${dev} ${phase}: icon is the BOTTOM of the left rail`,r.ids);
+ ok(r.inside,`${seat} ${dev} ${phase}: icon inside the stage`,r.box);
+ ok(r.sq&&!/50%/.test(r.sq),`${seat} ${dev} ${phase}: square kit rail button (no round tap target)`,r.sq);
+ if(!r.box)return;
+ await tapHH(o);await sleep(1400);const d=await o.p.evaluate(()=>{const M=document.getElementById('modal');const dl=M&&!M.hidden&&M.querySelector('.dlg.kpanel');if(!dl)return null;
+  const f=(!!window.COOPW&&COOPW.friend&&COOPW.friend())||null;const txt=dl.textContent;const rows={};dl.querySelectorAll('.kr').forEach(r=>{const l=r.querySelector('.krl'),v=r.querySelector('.krv');if(l&&v)rows[l.textContent.trim()]=v.textContent.trim()});
+  const tiles={};dl.querySelectorAll('.kst-tile').forEach(t=>{const c=[...t.children].map(x=>x.textContent.trim());tiles[c[0]]=c[1]});
+  const figs=[...dl.querySelectorAll('img')].map(i=>i.getAttribute('src')||'').filter(s=>/fig|unknown|consort|maid|\/r\//.test(s));
+  return{title:(dl.querySelector('.kptitle')||{}).textContent,seal:!!dl.querySelector('.kpseal'),x:!!dl.querySelector('.kph .kit-x'),rows,tiles,figs,fname:f&&f.name,hasName:!!(f&&f.name&&txt.includes(f.name)),
+   known:f&&typeof isKnown61==='function'?isKnown61(f):null,named:f&&typeof k61Named==='function'?k61Named(f):null,stats:f?{sung:f.sung,duc:f.duc,danh:f.danh,sac:f.sac,tai:f.tai,tamco:f.tamco,suc:f.suc}:null,
+   rankUnit:!!dl.querySelector('.kr .kname .kti'),kn:f?Object.fromEntries([['Sủng','sung'],['Đức','duc'],['Danh','danh'],['Sắc','sac'],['Tài','tai'],['Tâm cơ','tamco']].map(([l,k])=>[l,kitStatKnown0(f,k)?(k==='sung'?null:Math.round(f[k])):'chưa rõ'])):null,ov:document.documentElement.scrollWidth>innerWidth+1}});
+ ok(!!d,`${seat} ${dev} ${phase}: tap → kit info panel`,d?undefined:await o.p.evaluate(()=>{const M=document.getElementById('modal');return{on:!!(COOPW&&COOPW.on),S:!!S,dead:S&&S.dead,Q:Q.length,q0:Q[0]&&(Q[0].t||''),hidden:M.hidden,cls:M.className,dlg:M.querySelector('.dlg')&&M.querySelector('.dlg').className,hh:window.__hhOpen||0,fz:!!document.getElementById('coopfz')}}));if(!d)return;
+ ok(d.seal&&d.x,`${seat} ${dev} ${phase}: kit header seal + ✕`,{seal:d.seal,x:d.x});
+ ok(!d.ov,`${seat} ${dev} ${phase}: no horizontal overflow`);
+ ok(!!d.rows['Lúc này'],`${seat} ${dev} ${phase}: live status row (Lúc này)`,d.rows['Lúc này']);
+ if(phase==='stranger'){
+  ok(d.title==='Hảo hữu của ta',`${seat} ${dev} stranger: title «Hảo hữu của ta»`,d.title);
+  ok(!d.hasName,`${seat} ${dev} stranger: her real name nowhere in the panel`,d.fname);
+  ok(d.rows['Danh vị']==='chưa rõ'||d.rows['Danh vị']==null,`${seat} ${dev} stranger: rank «chưa rõ»`,d.rows['Danh vị']);
+  ok(Object.entries(d.kn).every(([l,v])=>v===null||String(v)===d.tiles[l]),`${seat} ${dev} stranger: stats follow the knowledge rule (unknown = «chưa rõ», what anyone sees = her number)`,{tiles:d.tiles,rule:d.kn});
+  ok(d.figs.length===0||d.figs.every(s=>/unknown/.test(s)),`${seat} ${dev} stranger: grey silhouette only`,d.figs);
+ }else{
+  ok(d.title===d.fname,`${seat} ${dev} met: title = her name`,[d.title,d.fname]);
+  ok(d.rankUnit,`${seat} ${dev} met: kit rank unit in Danh vị`,d.rows['Danh vị']);
+  const T={Sủng:'sung',Đức:'duc',Danh:'danh',Sắc:'sac',Tài:'tai','Tâm cơ':'tamco'};const bad=Object.entries(T).filter(([l,k])=>d.tiles[l]!=null&&d.tiles[l]!=='chưa rõ'&&l!=='Sủng'&&d.stats[k]!=null&&+d.tiles[l]!==Math.round(d.stats[k]));
+  ok(Object.keys(d.tiles).length===6&&!bad.length,`${seat} ${dev} met: stat tiles = her real numbers (game state)`,{tiles:d.tiles,stats:d.stats});
+  ok(d.rows['Sức khỏe']==='chưa rõ'||+d.rows['Sức khỏe']===Math.round(d.stats.suc),`${seat} ${dev} met: Sức khỏe = her number`,[d.rows['Sức khỏe'],d.stats.suc]);
+  ok(!!d.rows['Cung']&&!!d.rows['Con cái'],`${seat} ${dev} met: palace + household rows`,{cung:d.rows['Cung'],con:d.rows['Con cái'],maid:d.rows['Cung nữ thân cận']});
+ }
+ await o.p.screenshot({path:`${OUT}/hh-${seat}-${dev}-${phase}.jpg`,type:'jpeg',quality:72});
+ await o.p.click('#modal .kph .kit-x').catch(()=>{});await sleep(500);ok(await o.p.evaluate(()=>document.getElementById('modal').hidden),`${seat} ${dev} ${phase}: ✕ closes`);
+ await tapHH(o);await sleep(900);await o.p.keyboard.press('Escape');await sleep(500);
+ ok(await o.p.evaluate(()=>document.getElementById('modal').hidden),`${seat} ${dev} ${phase}: Esc closes`);
+ console.log(`   ${seat} ${dev} ${phase} rows`,JSON.stringify(d.rows))}
+(async()=>{const b=await chromium.launch();
+ /* (1) SOLO: no icon */
+ {const S0=await mk(b,'solo',DEV.fold);await S0.p.goto(BASE,DCL);await booted(S0);
+  await S0.p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
+  await sleep(1500);await bare(S0);await sleep(900);
+  const r=await S0.p.evaluate(()=>({reg:typeof kitStageRail!=='undefined'&&kitStageRail.items().some(x=>x.id==='haohuu'),shown:!!document.querySelector('#krail [data-rail=haohuu]'),rail:!!document.getElementById('krail'),coop:!!window.COOPW&&!!COOPW.on}));
+  ok(r.rail&&!r.shown&&!r.coop,'solo: no «Hảo hữu» icon (rail present, co-op off)',r);ok(!S0.errs.length,'solo: no page errors',S0.errs);await S0.ctx.close()}
+ /* (2) co-op room: A host (Fold), B guest (iPad) */
+ const A=await mk(b,'host',DEV.fold),B=await mk(b,'guest',DEV.ipad);
+ for(const [o,k] of [[A,process.env.COOP_A_ORIGIN],[B,process.env.COOP_B_ORIGIN]])if(k)await o.ctx.addInitScript(k=>{window.__forceOrigin=k},k);
+ await A.p.goto(BASE,DCL);await booted(A);
+ ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Cùng hảo hữu');await sleep(600);ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời hảo hữu');
+ ok(await until(A,()=>__co().code&&__co().seat==='a',null,40000),'A has a room code');const code=(await A.p.evaluate(()=>__co())).code;console.log('room',code);
+ await B.p.goto(BASE+'?room='+code,DCL);await booted(B);await tapText(B,/^Vào phòng/,4000);
+ ok(await until(B,()=>__co().seat==='b'&&!__co().frozen,null,60000),'B joined seat b');
+ {const t0=Date.now();while(Date.now()-t0<90000){await clearAll(A);await clearAll(B);const a=await A.p.evaluate(()=>{let f=null;try{f=COOPW.friend()}catch(e){}return __co().world&&!!f}),c=await B.p.evaluate(()=>{let f=null;try{f=COOPW.friend()}catch(e){}return __co().world&&!!f});if(a&&c)break;await sleep(600)}}
+ for(const [o,s] of [[A,'host'],[B,'guest']])ok(await o.p.evaluate(()=>{try{return !!COOPW.friend()}catch(e){return false}}),`${s}: friend entry in the shared world`);
+ /* stranger: make sure she has NOT met the friend (the origins may house them together: then skip the stranger phase on that seat, logged) */
+ for(const [o,s] of [[A,'host'],[B,'guest']]){const k=await o.p.evaluate(()=>{const f=COOPW.friend();return isKnown61(f)});
+  if(k){console.log(`   note: ${s} already knows the friend (same house / Hoàng hậu): forcing stranger state for the check`);
+   await o.p.evaluate(()=>{const f=COOPW.friend();if(S.met)delete S.met[f.id];const K=k61S();if(K)K[kOf61(f)]=0})}
+  /* the shared world re-sends what she knows every few seconds: hold the stranger state for the whole check (test only) */
+  await o.p.evaluate(()=>{window.__fst=setInterval(()=>{try{const f=COOPW.friend();if(f&&!(typeof sameHouse==='function'&&sameHouse(S,f))&&!f.queen){if(S.met)delete S.met[f.id];const K=k61S();if(K)K[kOf61(f)]=0}}catch(e){}},40)});await sleep(200);
+  const still=await o.p.evaluate(()=>!isKnown61(COOPW.friend()));
+  if(still){for(const dev of ['fold','ipad'])await check(o,s,dev,'stranger')}else console.log(`   note: ${s} knows the friend by rule (sameHouse/queen): stranger phase not reachable`);await o.p.evaluate(()=>clearInterval(window.__fst))}
+ /* met: the meeting (S.met + Quen biết) as j61 k61Meet records it */
+ for(const [o,s] of [[A,'host'],[B,'guest']]){await o.p.evaluate(()=>{const f=COOPW.friend();S.met=S.met||{};S.met[f.id]=__co().week||0;const K=k61S();if(K)K[kOf61(f)]=3;render()});
+  for(const dev of ['fold','ipad'])await check(o,s,dev,'met')}
+ ok(!A.errs.length,'host: no page errors',A.errs.slice(0,5));ok(!B.errs.length,'guest: no page errors',B.errs.slice(0,5));
+ const bad=res.filter(r=>!r[0]).length;console.log(`\n${res.length-bad}/${res.length} ok`);fs.writeFileSync(OUT+'/result.json',JSON.stringify(res,null,1));
+ await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

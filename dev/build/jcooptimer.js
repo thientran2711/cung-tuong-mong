@@ -230,9 +230,11 @@ const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;
  const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t">${o.clock==="pz"?"Đợi":"Còn"} ${mmss(o.left)}</span>`;
  return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${o.name?esc(o.name):`<span class="kctmf-l">Hảo hữu của ta</span><span class="kctmf-sh">Hảo hữu</span>`}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
+/* the friend's status in words (ONE table: the chip panel below + the «Hảo hữu» partner sheet, jhaohuu.js) */
+function frWord(o){o=o||{};return {ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
+  away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc"}
 function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
- const fw={ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
-  away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc";
+ const fw=frWord(o);
  const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
   ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
  const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
@@ -310,5 +312,7 @@ function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
 function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
+/* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
+CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
 }catch(e){console.error(e)}})();

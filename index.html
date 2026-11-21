@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc","b":"fa585b739fa3","h":[{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"}]};
+window.CTM_BI={"s":"d31c8ec0+","t":"2026-11-21T03:55Z","c":"SELF-MERGE LAND mood-seal: merge LIVE 5a8c30afe (index.html/sw.js rebuilt)","b":"a7a061c314cc","h":[{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -51319,9 +51319,11 @@ const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;
  const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t">${o.clock==="pz"?"Đợi":"Còn"} ${mmss(o.left)}</span>`;
  return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${o.name?esc(o.name):`<span class="kctmf-l">Hảo hữu của ta</span><span class="kctmf-sh">Hảo hữu</span>`}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
+/* the friend's status in words (ONE table: the chip panel below + the «Hảo hữu» partner sheet, jhaohuu.js) */
+function frWord(o){o=o||{};return {ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
+  away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc"}
 function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
- const fw={ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
-  away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc";
+ const fw=frWord(o);
  const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
   ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
  const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
@@ -51399,6 +51401,8 @@ function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
 function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
+/* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
+CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
 }catch(e){console.error(e)}})();
 /* ================= jcoopchat: CO-OP CHAT "Thư từ" (owner 16/11, review/coop-chat) — KIT §80 =================
@@ -61611,6 +61615,78 @@ window.kitStatusIcon={set,refresh,remove,open,has:id=>M.has(id),items:()=>[...M.
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
  html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","ico-download"],["Đã thỉnh đủ (viền xanh)"," kdone","ico-download"],["Tạm ngưng (có chấm đỏ)"," kbadge","ico-download"],["Có bản mới (chấm đỏ)"," kbadge","ico-update"]].map(([t,c,g])=>`<button type="button" class="krailb${c}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${g}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jstatus",e)}})();
+/* ================= jhaohuu: «Hảo hữu» — THE partner sheet in co-op (owner 21/11 ~06:05Z, mark #2, verbatim:
+   "Làm khung Hảo hữu đi, nhưng Làm thành một cái icon để ở bên trái của cái nền phòng á. Bên trái mình đang có một cái mấy cái icon đó, để ở dưới luôn.")
+   ENTRY = one kitStageRail item (KIT §77, the LEFT icon column of every stage), id "haohuu", order 90 = the BOTTOM of the column; co-op only
+   (when: CW.on), both seats (host + guest run the same code on their own screen). Solo: never registered as visible (when() false).
+   ICON: KIT REQUEST K-ICO-HAOHUU (https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-friend.webp) is with the kit keeper; until it is on the CDN the rail shows the KIT §77.1 glyph
+   fallback «友» (same precedent as K-ICO-ALERT). Swap = set ICO below.
+   PANEL = the kit info panel (kitPanel, §8): subject = her FULL-BODY figure (the stranger rule turns it into the grey silhouette, j61 figFor),
+   sections of kitRows + kitPersonStats (§49 knowledge: unknown stats read «chưa rõ») only. No new part, no own CSS.
+   DATA (law 6b real data, law 4 numbers from game state): her entry in the shared world (CW.friend(): rivals, or a consort's staff on the
+   servant road), her place (S.where, the same source as the stage), the live status of the header chip (CW.frInfo, jcooptimer — ONE source).
+   STRANGER RULE (OD:L165 / OD:L1061): unmet = «Hảo hữu của ta», grey silhouette, rank / name / stats / health / household / place «chưa rõ»;
+   only what anyone sees (her status in this buổi) shows. Reborn friend = unknown again (jcoopworld forgetFriend). ================= */
+(function(){try{
+const CW=window.COOPW||{};
+const ICO="https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-friend.webp";/* KIT READY K-ICO-HAOHUU (keeper 21/11); the §77.1 glyph «友» stays only as the fallback if ICO is empty */
+const UNK="chưa rõ";
+const on=()=>!!CW.on&&typeof S!=="undefined"&&!!S&&!S.dead;
+const es=t=>typeof esc==="function"?esc(String(t==null?"":t)):String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* her entry: rivals (consort roads) or a consort's staff (servant road) */
+function ent(){try{const f=typeof CW.friend==="function"?CW.friend():null;if(f)return f;return typeof k61CoopEnt==="function"?k61CoopEnt():null}catch(e){return null}}
+/* her raw seat blob (only to tell the home road / death apart when she has no entry) */
+function blob(){try{const P=CW.base&&CW.base.P;if(!P)return null;const k=Object.keys(P).find(x=>x!==CW.seat);return k?P[k]:null}catch(e){return null}}
+const met=e=>{try{return typeof isKnown61==="function"?isKnown61(e):true}catch(x){return true}};
+const named=e=>{try{return typeof k61Named==="function"?k61Named(e):true}catch(x){return true}};
+const isRival=e=>typeof rivals!=="undefined"&&rivals.includes(e);
+const mistress=e=>{try{return (rivals||[]).find(v=>(v.staff||[]).includes(e))||null}catch(x){return null}};
+function rankWord(e){try{if(e.out)return"Phế phi";if(e.queen)return RANKS[7].n;return RANKS[Math.max(0,Math.min(7,e.rank||0))].n}catch(x){return""}}
+function palWord(e){try{if(e.out)return"Lãnh cung";const k=typeof palaceOf==="function"?palaceOf(e):null;return k&&typeof palName==="function"?palName(k):""}catch(x){return""}}
+function placeWord(e){try{const k=(S.where||{})[e.id];if(!k)return"";if(typeof palaceOf==="function"&&k===palaceOf(e))return"ở cung của nàng";if(k==="home")return"ở cung của ngươi";return typeof placeName==="function"?placeName(k):""}catch(x){return""}}
+function kidsWord(e){const L=(e.kids||[]).filter(k=>k&&k.alive!==false);if(!L.length)return"chưa có";const m=L.filter(k=>k.sex==="m").length,f=L.length-m;
+ return [m?`${m} hoàng tử`:"",f?`${f} công chúa`:""].filter(Boolean).join(" · ")}
+function healthRows(e){const R=[];let known=true;try{known=typeof kitStatKnown0==="function"?kitStatKnown0(e,"suc"):true}catch(x){}
+ R.push(["Sức khỏe",known&&e.suc!=null?String(Math.round(e.suc)):UNK,known?"":"t"]);
+ if(known){let il="";try{il=typeof illName==="function"?illName(e):""}catch(x){}R.push(["Bệnh",il||"không",il?"r":"g"])}
+ if(known&&e.preg&&!e.fake)R.push(["Thai","đang mang thai","g"]);return R}
+/* the live status of this buổi = the header chip's own data (anyone sees it: the chip shows it to strangers too) */
+function nowRows(e){const R=[];let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():null}catch(x){}
+ if(o){R.push(["Lúc này",`${o.glyph} ${es(o.word)}`,o.tone]);R.push(["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${typeof CW.tm==="object"&&CW.tm.fmtT?CW.tm.fmtT(o.left):Math.ceil((o.left||0)/1000)+" giây"}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"])}
+ if(e&&met(e)){const w=placeWord(e);if(w)R.push(["Đang ở",es(w),"n"])}else if(e)R.push(["Đang ở",UNK,"t"]);return R}
+/* the figure on the panel: met = her own entry (full body, kit stage); unmet = the kit stranger figure as a stage pseudo person ({__fig,__cap}, the kitShop seller form, jinv),
+   never her entry: the stage would resolve her real art and name from it */
+function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||18}]}}
+function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?kitRows:(()=>"");const sec=[];
+ const known=!!e&&met(e),nm=!!e&&named(e);
+ const title=nm&&e.name?e.name:(typeof K61FR==="string"?K61FR:"Hảo hữu của ta");
+ if(!e){/* no entry: she lives at her father's house (tiểu thư road, before the tuyển tú) or her life has ended */
+  const home=!!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead),dead=!!(P&&(P.dead||(P.S&&P.S.dead)));
+  sec.push({h:"Thân phận",rows:[["Nơi ở",home?"ở phủ nhà, chờ kỳ tuyển tú":dead?"đã khuất":UNK,dead?"r":"n"]]});
+  sec.push({h:"Lúc này",rows:nowRows(null)});
+  return {kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec}}
+ if(!isRival(e)){/* servant road: a cung nữ in a consort's palace */
+  const m=mistress(e);
+  sec.push({h:"Thân phận",rows:[["Danh vị",known?"Cung nữ":UNK,known?"n":"t"],["Hầu hạ",known&&m?(typeof kitName==="function"?kitName(m,{cap:true}):es(m.name)):UNK,known?"n":"t"],["Cung",known&&m?es(palWord(m)):UNK,known?"n":"t"]]});
+  sec.push({h:"Lúc này",rows:nowRows(e)});
+  if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
+  return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
+ /* consort road: rank + name (kit rank unit), her palace, stats, health, household, what she does now */
+ sec.push({h:"Thân phận",rows:[["Danh vị",nm?(typeof kitName==="function"?kitName(e,{cap:true}):`${es(rankWord(e))} ${es(e.name)}`):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
+ sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
+ sec.push({h:"Sức khỏe",rows:healthRows(e)});
+ const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;
+ sec.push({h:"Trong cung của nàng",rows:[["Con cái",kidsWord(e),"n"],["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});
+ sec.push({h:"Lúc này",rows:nowRows(e)});
+ if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
+ return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
+function open(){try{if(!on()||typeof kitPanel!=="function")return;const sp=spec();sp.opts=[{n:"Đóng",fx:{},go:()=>{}}];/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
+ window.__hhOpen=1;kitPanel(sp,true);if(typeof showModal==="function")showModal()}catch(e){console.error("haohuu",e)}}
+function mount(){try{if(typeof kitStageRail==="undefined"||typeof kitStageRail.add!=="function")return false;
+ const it={id:"haohuu",order:90,title:"Hảo hữu",when:on,onTap:open};if(ICO)it.icon=ICO;else it.glyph="友";kitStageRail.add(it);return true}catch(e){return false}}
+if(!mount())addEventListener("load",mount,{once:true});
+window.kitHaoHuuOpen=open;window.kitHaoHuuSpec=spec;
+}catch(e){console.error(e)}})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
    table window.VP applied to text nodes and to title/aria-label/placeholder/data-s attributes as they appear on screen
@@ -86214,7 +86290,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa585b739fa3";window.CTM_BUILD=BUILD;
+const BUILD="a7a061c314cc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
