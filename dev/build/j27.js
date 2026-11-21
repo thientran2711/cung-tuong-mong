@@ -30,6 +30,10 @@ function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));const hl=p!
  const side=n=>hl?`${hl} · ${n}`:`thiên điện ${n}`;return k==="home"?(p===S?palName("home"):`${side(palName("home"))} (cung ngươi)`):hd===p?palName(k):side(palName(k))}
 /* houseCung(p): the palace two housemates share — "cùng cung" (同宮) is the court phrase for consorts of one palace in different halls (history check, hall-names r2) */
 function houseCung(p){return palName(palaceOf(p))}
+/* houseLine(p, me): ONE wording of "how p stands to my palace" for every generator (owner 21/11 ~02:16Z: the head of the palace is «chủ vị», only peers are «cùng cung»):
+   p is the chủ vị of the palace I live in → «Chủ vị <cung>, nơi ta ở»; I am the chủ vị and p lives under me → «Ở <cung> của ta»; two non-head housemates → «Cùng <cung> với ta». Palace + head from the residence data (houseOf/palaceOf). me = "ta" | "ngươi". */
+function houseLine(p,me){me=me||"ta";const c=houseCung(p);if(typeof S==="undefined"||!S||p===S||!sameHouse(S,p))return"";const hp=byKey(houseOf(p))===p,hs=byKey(houseOf(S))===S;
+ return hp&&!hs?`Chủ vị ${c}, nơi ${me} ở`:hs&&!hp?`Ở ${c} của ${me}`:`Cùng ${c} với ${me}`}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
