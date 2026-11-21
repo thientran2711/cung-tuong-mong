@@ -1932,3 +1932,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGER: mine trig_01TPEcfAwu7QnUBQq4AeAkTy (min 32) → 92 creates its own and DISABLES mine. MAIN 90 told to stop; owner now writes in 91 → 91 relays to 92.
 - No owner question pending.
 - (08:37Z) MAIN CHÍNH 91 opened child MAIN CHÍNH 92 = session_01Rc5AsMUHiJKCMiCjnzdhii (depth 3). 91 stops except relaying late messages to 92.
+- (08:39Z) 91 late relay: 89 LANDED mg11 a66b5a49, chapter-card-3 74cea8bf; FAIL mg-intro-2 18d1b014 (jnwb vs mg11) → Ji75 told to re-merge on 36b54a1b + SSK to 92; relayed to 92.
