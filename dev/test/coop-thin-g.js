@@ -47,8 +47,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];
  /* diagnostic (env DANHP): every 400 ms her Danh on her phone vs the host's store of her; prints each change with her last log lines */
  if(process.env.DANHP){let last='';const lg=x=>(x||[]).slice(-2).map(l=>String(l&&l.t||l).replace(/<[^>]+>/g,'').slice(0,140));
-  (async()=>{while(true){try{const g=await G.p.evaluate(()=>({w:COOP.state.week,d:S.danh,b:S.buoi,t:S.tuan,L:(S.log||[]).slice(-2),tr:(COOPW.tr||[]).slice(-2)}));const h=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {d:s.danh,b:s.buoi,t:s.tuan,L:(s.log||[]).slice(-2),dl:(COOPW.thin.D.log||[]).slice(-2)}});
-   const k=g.d+'|'+h.d;if(k!==last){console.log('DANHP',JSON.stringify({w:g.w,ph:[g.d,g.t,g.b],st:[h.d,h.t,h.b],gL:lg(g.L),hL:lg(h.L),tr:g.tr,dl:h.dl}).slice(0,1400));last=k}}catch(e){}await sleep(400)}})()}
+  (async()=>{while(true){try{const g=await G.p.evaluate(()=>({w:COOP.state.week,d:S.danh,b:S.buoi,t:S.tuan,L:(S.log||[]).slice(-2),tr:(COOPW.tr||[]).slice(-2),pn:S.thpn}));const h=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {d:s.danh,b:s.buoi,t:s.tuan,L:(s.log||[]).slice(-2),dl:(COOPW.thin.D.log||[]).slice(-2),N:(COOPW.thin.D.N||{}).b,pq:((COOPW.thin.D.PQ||{}).b||[]).length,drop:COOPW.thin.D.drop|0}});
+   const k=g.d+'|'+h.d+'|'+h.drop;if(k!==last){console.log('DANHP',JSON.stringify({w:g.w,ph:[g.d,g.t,g.b],st:[h.d,h.t,h.b],gL:lg(g.L),hL:lg(h.L),tr:g.tr,dl:h.dl,pn:g.pn,N:h.N,pq:h.pq,drop:h.drop}).slice(0,1400));last=k}}catch(e){}await sleep(400)}})()}
  const UP=+(process.env.UP||0);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
  const KEYS=['bac','sung','danh','suc','duc','th','tai','sac','tamco','rank'];/* mat (Tai mắt) is derived on the live S, not stored */
@@ -125,4 +125,6 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await So.close();
  {const d=await H.p.evaluate(()=>({bad:COOPW.thin.D.bad.slice(),live:COOPW.thin.G.liveK,lost:COOPW.thin.D.liveLost,stale:COOPW.thin.D.log.filter(x=>x[0]==='pick-stale').length}));ok(!d.bad.length&&!d.lost,'G7 no card of hers dropped on the host (a card with options and no pid travels as a live card; none lost)',d)}
  const errs=[...H.errs,...G.errs];ok(!errs.length,'no page errors',errs.slice(0,6));
+ /* coop-thin-g-f1 #4: the host never drops an unacked part-D patch (her phone would skip it for good: a lost delta = a number split) */
+ try{const dr=await H.p.evaluate(()=>({n:COOPW.thin.D.drop|0,N:(COOPW.thin.D.N||{}).b}));ok(dr.n===0,'host dropped no unacked patch',dr)}catch(e){ok(false,'host dropped no unacked patch',String(e).slice(0,120))}
  const n=res.filter(r=>r[0]).length;console.log(`coop-thin-g ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

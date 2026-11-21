@@ -482,7 +482,7 @@ setInterval(()=>{try{if(!CW.on||!host()||!TH.dOn())return;qsInit();for(const k i
 D.dropPQ=function(seat){for(const x of D.PQ[seat]||[])if(CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=[]};
 /* her card from the host's side: build is called in her context; true when a card was queued */
 D.cardFor=function(seat,build,rid){D.later(seat,()=>{build()},rid)};
-D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});while(L.length>40)L.shift();
+D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});/* coop-thin-g-f1 #4: an unacked patch is never dropped (was: kept 40, her phone then skipped the lost one for good: a delta lost = a number split); 400 = memory belt only, logged */while(L.length>400){const z=L.shift();D.drop=(D.drop|0)+1;D.log.push(["pq-drop",seat,z.n])}
  const k="pq"+seat+D.N[seat];if(CW.rpend)CW.rpend[k]=Date.now();D.log.push(["patch",seat,D.N[seat],p.length]);setTimeout(()=>TH.flush(),0)};
 /* an act / NPC event's effect on her (the old `res` message), applied on the host in her context; death / lãnh cung stay on the old path (part B/G) */
 D.resTo=function(seat,m,rid){const g=m.flags||{};if(g.dead||g.cold)return false;D.kind(seat,"res",{m},rid);return true};
