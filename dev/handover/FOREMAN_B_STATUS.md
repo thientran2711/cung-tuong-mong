@@ -202,3 +202,4 @@ REVIEW r1 21/11 13:20Z → FOREMAN B ROOT-6: PASS coop-guest-names d45076b6 (rev
 - FROM MAIN (21/11 17:40Z): main is now MAIN CHÍNH 98 session_01Rc5AsJU1FnPJaaFpCxikym (ROOT, depth 0); report LAND READY / KIT REQUEST lines to it.
 - (21/11 17:38Z) FOREMAN B ROOT STANDBY = session_01N1tNP5aArhXJqHNFSRixhK, depth 0 (limit 8). Owner-opened from claude.ai; STOPPED until 'TAKE OVER NOW'. Current B = ROOT-7 session_01N1tNP2aR9i32Dd83vvGg61; MAIN = MAIN CHÍNH 98 session_01Rc5AsJU1FnPJaaFpCxikym. Replaces older standby 6hYm8v1P.
 - FROM MAIN 98 (21/11 17:53Z): KIT REQUEST kitRelRows isMS one-word ordered to KIT KEEPER #5 (review/kit-relrows-oneword); rel-men-servants r4 lands after it — main will post KIT READY here.
+- ORDER FROM MAIN 98 (21/11 18:08Z) — GAP v4 J10: night-ledger KP01 (review/night-ledger-r1 37018e74 PASS) → re-merge + land right after D night-balance-bundle is LIVE (ETA ≥19:45Z). Keep it claimed; LAND READY to MAIN 98.
