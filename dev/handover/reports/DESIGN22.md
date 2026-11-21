@@ -45,3 +45,16 @@ CHECK1 job 21: all 8 PASS (t4 COMOIk, t5 COMOIj, t6 COMOIl re-checked PASS 02:40
 - t4 COMOIk + t5 COMOIj: master " Everyone beautiful at every age." RESTORED. To fit, my own G52 add shortened on t4/t5 only: ", never over the edge, cuff or hem bands" → ", never over the bands". Capelet text untouched.
 - t6 COMOIl / t7 v8k / t8 v10i: NO gold girdle wording there; their sash is "yellow flowered brocade" inside the royal-yellow colour list (t6+ rank yellow). t7/t8 "jade-and-gold belt (pendants)" = jade pendant belts. Left unchanged; ask owner if the yellow sash should change too.
 - t4 9993, t5 10000 · check_store PASS · keep --all 345 PASS · 0 gens.
+
+## Job 3 — owner L1657 G51 CORRECTION (Foreman C #17). Builder thu_comoi/make_design22_L1657.py
+Original sash words back, "flowered brocade" carry-up removed, the blush change removed. One plain clause added only where the file had no held-in wording.
+| tier | base → new | sash words | held-in clause | other | chars |
+|---|---|---|---|---|---|
+| t3 | dapung4 v10 (unchanged) | never changed (= t2) | already "WRAP robe HELD IN by the sash" | — | 9989 |
+| t4 | COMOIk → COMOIl | "an embroidered silk sash tied flat" (= COMOIf) | already "outer robe HELD IN by the sash tied OVER it" | — | 9994 |
+| t5 | COMOIj → COMOIk | "a broad gold brocade girdle tied flat" (= COMOIe) | already present | — | 9996 |
+| t6 | COMOIl → COMOIm | "a yellow sash" (= COMOId) | + "; the sash tied over the outer robe holds it in at the waist" after "neck and collarbones visible" | A38 cut "her own colour stays clearly the main robe colour, " (repeat of COLOUR RULE) | 9971 |
+| t7 | v8k → v8l | "a wide yellow sash" (= v8c) | + same clause after "framing the bordered square neckline" | A38 "floor-length robe with slippers visible" → "floor-length robe" (S19 tail repeat; LADDER2 v8g same) | 9994 |
+| t8 | v10i → v10j | "a wide yellow sash" | already WRAP HELD IN | "Pose: weight on one leg," restored (room again) | 10000 |
+G52/G49/master line kept. check_store ×5 PASS (t6/t7 OUT1 WARN only: the long master OUTER_IN clause is not used, by owner "no emphasis"). keep --all 358 PASS. 0 gens.
+NOTE: the t5 sash is gold again (COMOIe words), as the Foreman asked. Owner L1656 called the yellow girdle ugly → owner should confirm.
