@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d709fb19+","t":"2026-11-21T10:09Z","c":"Merge review/ending-screens-land f41dba60 into ending-screens-2-land (index.html/sw.js rebuilt)","b":"d572c1d185c4","h":[{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"}]};
+window.CTM_BI={"s":"df03ad26+","t":"2026-11-21T10:09Z","c":"Merge review/ending-screens-land f41dba60 into ending-screens-2-land (index.html/sw.js rebuilt)","b":"a332e207d867","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -26341,7 +26341,10 @@ function q72OkDef(X){return X.T.ok||{}}
 function q72NoDef(X){const n=X.T.no||{};return Object.assign({r:-6},n)}
 /* rough chance of finishing (only rolled steps that can end it), for the ladder word on the offer */
 function q72Est(X){let p=1;for(const st of X.T.s){if(st.ch){const os=st.ch.filter(o=>o.p!=null);if(os.length===st.ch.length){p*=Math.max(...os.map(o=>q72Odds(o.p,o.sk,X)))/100}}else if(!st.w){const o=q72Odds(st.b,st.sk,X)/100;p*=st.f==="r"?Math.min(1,o+.35):o}}return Math.round(p*100)}
-function q72Steps(X){return X.T.s.map((st,i)=>{const pl=q72StepPl(st,X);return `${i+1}. ${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}).join("<br>")}
+function q72StepTxt(st,X){const pl=q72StepPl(st,X);return `${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}
+function q72Steps(X){return X.T.s.map((st,i)=>`${i+1}. ${q72StepTxt(st,X)}`).join("<br>")}
+/* owner 21/11 #66 FINAL: the offer's type + deadline are TWO tags on its event picture (m.qtags → kitArtTags); the steps are kit label|value rows (never a chip cloud) */
+function q72InfoRows(X){const T=X.T;return `<div class="kpsec">${kitRows(T.s.map((st,i)=>[`Bước ${i+1}`,q72StepTxt(st,X)]))}</div>`}
 
 /* ---------- candidates ---------- */
 function q72Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.place,or:S.origin&&S.origin.k,bac:S.bac,sung:S.sung,kids:(S.kids||[]).length,fest:(()=>{try{return festToday()}catch(e){return null}})()}}
@@ -26369,12 +26372,12 @@ function q72Tone(X,pool,key){try{if(!X||!X.A||Q72_TONED.indexOf(X.A.k)<0||!windo
 function q72Lead(X,txt){try{if(typeof txt!=="string"||!/^[“"]/.test(txt))return txt;const l=q72Tone(X,"askLead","q72:ask");return l?`${X.A.n} ${l} ${txt}`:txt}catch(e){return txt}}
 /* ---------- the offer (a person comes to her, or she asked around) ---------- */
 function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off++;q.cd[x.tid]=wk();evHistMark("j72:"+x.tid);const d=mkP("q72o",{x,how:how||""});if(!d)return false;
- Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return true}
+ {const X=q72X(x);Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,qtags:X?[KIND72[X.T.kind],`Hạn ${X.T.dl||6} tuần`]:null})}return true}
 PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
-  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
+  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${q72InfoRows(X)}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
   const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
@@ -28960,7 +28963,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(n.nodeType!==1)continue;const tg=n.tagName;
   if(tg==="P"&&n.classList.contains("past")){const pl=kpPlain(n.innerHTML);
    if(first&&!sub&&pl.length<90){sub=n.innerHTML;first=false;continue}
-   flush();if((pl.match(/ · /g)||[]).length>=2){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
+   flush();if((pl.match(/ · /g)||[]).length>=2&&!n.classList.contains("nochip")){blocks.push(`<div class="kpsec">${kitChips(n.innerHTML.split(/ · /).map(x=>`<span class="kchip n">${x}</span>`))}</div>`)}
    else blocks.push(`<div class="kpnote">${kpChipify(n.innerHTML)}</div>`);continue}
   first=false;
   if(tg==="P"||tg==="SPAN"&&!n.className||tg==="B"||tg==="I"||tg==="EM"||tg==="STRONG"||tg==="SMALL"&&!n.className||tg==="A"){prose.push(tg==="P"?n.innerHTML:n.outerHTML);if(tg==="P")flush();continue}
@@ -40161,7 +40164,7 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
  return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
-  (o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
+    (o.tags&&o.tags.length?`<span class="ksart-tags">${o.tags.map(t=>`<em class="ksart-tag">${t}</em>`).join("")}</span>`:"")+(o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
 /* owner 21/11 (mood-seal-2, mark #68): the corner mark is the LIVE mood seal (img.kemo = the ONE kit seal part jemoseal: idle sway at once + the lean as the dialog opens, data-kemo-now); any other mark src stays a still <i> */
 function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec(String(mark));const a=alt?String(alt).replace(/"/g,"&quot;"):"";const u=String(mark).replace(/["'()]/g,"");
  if(m)return `<img class="kemo kemo-${m[1]} ksart-mark" data-kemo-now="1" role="img" aria-label="${a}" alt="${a}" draggable="false" src="${u}" onerror="this.remove()">`;
@@ -40169,6 +40172,8 @@ function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
+.ksart-tags{position:absolute;top:6px;left:6px;z-index:3;display:flex;flex-wrap:wrap;gap:4px;max-width:calc(100% - 12px);pointer-events:none}
+.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:nowrap}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */
@@ -40736,6 +40741,15 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
+
+/* KIT 8.10 TAGS ON THE PICTURE (owner 21/11 mark #66 FINAL): a dialog whose queue item carries `qtags:[type, deadline]` shows those TWO words as tags on the TOP-LEFT of its event picture (kitSceneArt o.tags /
+   .ksart-tag); never a chip row. No picture in the dialog -> the two words become kit label|value rows (Loại | Hạn) at the top of its text. Runs on showModal and whenever the dialog is rebuilt. */
+function kitArtTags(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=m&&m.qtags;if(!t||!t.length)return;const mb=document.getElementById("mb");if(!mb||mb.querySelector(".ksart-tags,.kqtrows"))return;
+ const a=mb.querySelector(".ksart");if(a){a.insertAdjacentHTML("afterbegin",`<span class="ksart-tags">${t.map(x=>`<em class="ksart-tag">${x}</em>`).join("")}</span>`);return}
+ const rows=typeof kitRows==="function"?kitRows([["Loại",t[0]],["Hạn",t[1]]].filter(r=>r[1])):"";const tg=mb.querySelector(".kpsec")||mb.firstElementChild;if(rows&&tg)tg.insertAdjacentHTML("beforebegin",`<div class="kpsec kqtrows">${rows}</div>`)}catch(e){console.error("kitArtTags",e)}}
+window.kitArtTags=kitArtTags;
+(function(){const M=document.getElementById("modal");if(!M)return;setTimeout(()=>{const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitArtTags();return r}},0);
+ let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitArtTags()})}).observe(M,{childList:true,subtree:true})})();
 /* ===================================================================================================================
    jk95 — what the person card shows from j95 (who is where). Data from j95 (habitsKnown, j95habitsMine), look from the kit only
    (kpsec / kpst section, kitRows grid KIT §51, kitChip, kpnote): no CSS of its own (LUẬT KIT TRƯỚC). Guarded by typeof: the game runs
@@ -58023,7 +58037,7 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
      (offer caps / busy weeks) is withdrawn when the chapter falls due: she plays it alone */
   if(N.hs===1&&nrHold(v))continue;
   const r=nrPlay(v);if(!r)continue;
-  const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past nochip">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
   if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${nrFill(N.e,v)}`:""}.</span>`)}catch(e){console.error(e)}}
  try{news=nrMMonth(news)}catch(e){console.error(e)}
@@ -58162,7 +58176,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
   if(N.hs===1){const [rk,ri]=nrMK(s);if(nrHoldM(x=>nrSameA(x,rk,ri)))continue}
   const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
   const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
-  const line=`<span class="past">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
+  const line=`<span class="past nochip">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
   if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
@@ -58322,7 +58336,7 @@ function nrMenMonth(news){const B=nrB();let n=news||0;
   /* fix (r1 finding 6, whole group): his help hồi decides THIS chapter — wait while the player works on it; an unshown request is withdrawn */
   if(N.hs===1&&e.a&&nrHoldM(x=>nrSameA(x,e.a[0],e.a[1])))continue;
   const r=nrMenPlay(e);if(!r)continue;
-  const line=`<span class="past">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past nochip">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
  return n}
 /* the voice of a man in the help hồi (VANPHONG §2): eunuchs nô tài, a Vương gia bản vương, other men and officials thần */
@@ -89581,7 +89595,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d572c1d185c4";window.CTM_BUILD=BUILD;
+const BUILD="a332e207d867";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
