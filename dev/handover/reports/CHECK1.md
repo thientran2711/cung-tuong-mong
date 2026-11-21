@@ -184,3 +184,19 @@ Notes (fix-recommended, not blocking):
 - t3 pose is still `one hand touching her hairpin`; thu v4 already uses the F18 form "adjusting a hairpin set in her hair with one raised empty hand".
 - t1 "a lilac spray" (F13); thu v4 uses "a lilac blossom".
 - The density wording is almost the same at t1–t3 ("small sprays" / "small sprays" / "sprays"), so the G42 "a little denser" step is weak.
+
+## JOB 6 re-check — thu s62 t5 THU_COMOId (KHO2 9128cac) · checked at 8123dde · 0 gens
+Gates:
+- approved+master tp5 a22 PASS; keep PASS (16 allowed drops). Chars: 9986.
+- Store mode has only the pre-existing Outfit sentence [0.65], the accepted COMOI exemption. The CAPE5_V3 sentences pass the store check.
+
+The 3 G42 deltas are in:
+1. Front edges: "(a gold-edged blush band embroidered with small double hollyhocks, down past the waist)". "from the shoulders" is covered by "over BOTH shoulders" ✓.
+2. Chest: "the inner top also richly embroidered across the chest" ✓.
+3. Sleeves: "deep embroidered double hollyhock cuff bands, a few small double hollyhocks on the sleeves" ✓.
+
+The length trims are repeats only:
+- the cape's "never hiding the neck or the square inner neckline" (still covered by "never covering the neckline" and the layered-neckline clause);
+- the lower-flap words were tightened, same meaning.
+
+Ladder (G42): t5 now carries everything t1–t3 v5 have (edges, neckline band, chest, cuffs/sleeves, body, jade), denser. **Verdict: PASS.**
