@@ -1153,8 +1153,9 @@ window.kitPersonChips=kitPcGrid;
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 /* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
-.pc .kpkey{display:flex;flex-direction:column;gap:4px;margin:0 0 6px;font-size:.78rem;min-width:0}
+.pc .kpkey{display:flex;flex-direction:column;gap:5px;margin:0 0 6px;font-size:.92rem;min-width:0}/* owner 21/11 ~03:32Z: the rows under the figure are READABLE (were .78rem × .82em × .86em ≈ .55 rem) */
 .pc .kpkey .kpk-st{display:flex;flex-wrap:wrap;gap:4px}
+.pc .kpkey .kpk-st :is(.kgl,.chip,.kchip,span,b){font-size:max(.8rem,1em)}/* the status chip (Đã quen …) reads as the rows do */
 .pc .kpkl{display:flex;flex-direction:column;gap:1px;line-height:1.3;color:var(--ink)}.pc .kpkl-l{font-weight:700;color:var(--k-lab,#8a7350)}
 .pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
