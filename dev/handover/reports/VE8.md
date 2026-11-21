@@ -25,3 +25,11 @@ Grep túi thơm/pendant/necklace/sachet in both L1887b files: 0 hits. Files diff
 - t7 Hoàng quý phi **O6ElrJ3ynm**: ✓ pearl-beaded net/fringe over a scalloped collar (reads as pearls, not silk tassels), layered square neckline, no waist pendant, red only on crown; ~ collar still reads close to one scalloped tier with a pearl fringe below; flute keeps its own jade ring/gold knot/tassel (held item, not a pendant).
 - t8 Hoàng hậu **3zKyU3rREY**: ✓ pearl+jade net collar, layered neckline, no jade disc / no pendant, red gems on crown only, slim silhouette, no cape.
 Both clearly better than L1887. Sheet: dev/handover/review-sheets/thu_t7_t8_vankien2b_L1887b.png (CŨ | L1887 | L1887b per rank + MẪU Xuân eIPc7xcdqL).
+
+## JOB 4 — hạ (Đường) maid samples m18 tam/nhị/nhất L1890 (HADUONG1 via #25) · gpt-2-6 1k low 9:16 seed 7172 · ref s7IPw0Ll8e · 3×55 = **165 cr** (session total 1195 cr)
+Grep pendant/jade/sachet/túi thơm in the 3 prompt files: 0 hits. check_store not run by me (HADUONG1 said PASS).
+All three: ✓ high Tang skirt tied above the bust + short blouse, NO outer robe, powder blue main + deep rose bands/ribbon, bow at the CENTRE front, hair in double buns, sheer pale-blue phi bạch behind the back looped over the forearms, no jade, no sachet, mouths closed, captions correct.
+- tam **UPvxKsawny** ✓ square neckline, plain narrow rose bands, comb box; ~ sleeves flare a little at the cuff (not strictly narrow); silver hairpin head looks flower-shaped.
+- nhị **N2q7gPL6D9** ✓ rose band + pearl at bow, plum hem band, rose envelope; ✗ neckline is a ROUND scoop, not the square/low open neckline of tam/nhất; small red tassel on the envelope; a small white flower-like hairpin head.
+- nhất **CqnIXaGEEy** ✓ wide embroidered rose bands (neck, cuffs, hem, chest band with pearl), embroidered handkerchief, densest hairpins; cleanest of the three.
+Sheet: dev/handover/review-sheets/ha_maid_g1_g3_L1890.png (Tam | Nhị | Nhất, Vietnamese labels).
