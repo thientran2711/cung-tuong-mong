@@ -300,3 +300,18 @@ Verdict: **t6 FAIL (G1 vân kiên removed)**. Not sent to GEN1.
 ## HOLD + checklist add (Foreman C #15 ~01:53Z)
 - The v6 drafts show that OUTER_TIED does not work in the picture (the outer robe is still an open coat). HOLD t6/t7/t8 even on PASS until DESIGN20's v8 G40 wording is proven on the t4/t5 drafts; then LADDER2 swaps it in and I re-check.
 - Checklist item 12: no vase / bình hoa as the held item (owner L1438). The thu t4 v6/v7 pose "a small white-jade vase with blossoms" breaks this, so the next t4 version must change it.
+
+## JOB 12 (DESIGN20 9db802f) — thu s62 t4 COMOIh + t5 COMOIg (v8) vs v7 · checked at 5d4d596 · 0 gens
+Gates:
+- tp4 / tp5 a22 PASS; keep PASS. Chars: 9988 / 9982.
+- Store mode: only the Outfit sentence [0.70] / [0.73] = the exemption.
+
+The diff against v7 is only what was asked:
+- G40 → master_common.OUTER_WRAP verbatim ("WRAP robe HELD IN by the sash … overlap at the waist, bound CLOSED under the sash lying ON TOP of it … never an open coat") ✓
+- "worn OPEN at the front" → "open above the waist" ✓
+- t4 item: vase → "a small white-jade lotus lamp" (L1438 no vase ✓)
+- t5 medallion words compacted
+- Every other checklist item is unchanged from job 8/9 ✓
+
+Verdict: **t4 PASS · t5 PASS**. These are the proof drafts for the new G40 wording, so they are not under the t6–t8 HOLD.
+Note: the approved t4 S13 sentence "the outer robe closes only at the sash … opening gradually in a long soft V toward the hem" fits OUTER_WRAP (closed at the sash, opens below it), but it may weaken the "fabric … below the sash" wording. Flagged by DESIGN20; watch the draft.
