@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"da873b4b+","t":"2026-11-21T11:24Z","c":"kit-focus r5: each cost of ton is its own unbreakable sub-line part («Tốn 2 khắc» · «Đức -2»); a 3-line sub (2 costs, narrow Fold column) m…","b":"0910d916452f","h":[{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"}]};
+window.CTM_BI={"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold","b":"caa2db19a992","h":[{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"},{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -53515,7 +53515,7 @@ function kitCoopLenRow(){css();const cur=lenPick()||Math.round(TB().buoiMs/60000
 /* §69.2 FRIEND CHIP (owner 16/11: "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu đâu …", coordinator spec): top of the
    screen, always visible in co-op: her face (grey silhouette until met — stranger rule, kitFaceH) + "Hảo hữu của ta" (her name once known)
    + one status chip + the shared buổi countdown. st: ready ✓ / busy ! / work … / away / hold ⏸. Tap → kitCoopFriendPanel. */
-const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w","⏸","Tạm dừng"]};
+const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w",`<i class="kpzb" aria-hidden="true"></i>`,"Tạm dừng"]};
 const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
 /* §69.2 CANON OVERWRITE (owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... người đó off là màu xám ... On là sẽ màu tươi hơn ...
    xong thì có một cái dấu tích màu xanh kế bên ... vẫn còn đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó thì nó ra thông tin"):
@@ -53526,7 +53526,7 @@ const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/
    countdown stays beside it as one short kit chip (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu?", OD rule kept). Tap → the
    partner sheet kitHaoHuuOpen (jhaohuu.js), which also holds the old chip panel's rows (her status, Ngươi) and «Tạm dừng». */
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
- const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?"⏸ ":""}${mmss(o.left)}</span>`;
+ const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?`<i class="kpzb" aria-hidden="true"></i>`:""}${mmss(o.left)}</span>`;
  const av=o.known&&o.face?o.face:`<img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-friend.webp" alt="" decoding="async">`;
  /* KIT §77b (K-BADGE-HAOHUU): ready → ok ✓ green · hold → pause ⏸ · busy / work → busy … · away → no badge + the button's .koff grey; the badge is the LAST child of the .krailb */
  const bst=o.st==="ready"?"ok":o.st==="hold"?"pause":o.st==="away"?"":"busy";const bd=typeof kitStBadge==="function"?kitStBadge(bst):"";
@@ -53591,7 +53591,7 @@ function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R
  while((n=tw.nextNode())){if(!n.nodeValue.trim()||FE.contains(n)||(n.parentElement&&n.parentElement.closest("#kntbox")))continue;const pe=n.parentElement;if(!pe||!vis(pe))continue;rg.selectNodeContents(n);for(const r of rg.getClientRects())add(r)}
  for(const e of hud.querySelectorAll("img,svg,canvas,button,[role=button],input,.kseal-hud")){if(FE.contains(e)||!vis(e)||e.closest("#kntbox"))continue;add(e.getBoundingClientRect())}
  return R}
-/* the slot is sized for the WIDEST content (icon + «⏸ 0:00» / «Hết buổi»), so a clock change never makes it grow into a neighbour */
+/* the slot is sized for the WIDEST content (icon + «pause bars 0:00» / «Hết buổi»), so a clock change never makes it grow into a neighbour */
 function slotSize(){const keep=FE.innerHTML;FE.style.minWidth="";let w=0,h=0;
  for(const o of [{st:"hold",clock:"pz",left:599000},{st:"ready",clock:"up"},{st:"work",clock:"run",left:599000}]){FE.innerHTML=kitCoopFriend(o);const r=FE.getBoundingClientRect();w=Math.max(w,r.width);h=Math.max(h,r.height)}
  FE.innerHTML=keep;const s=FE.getBoundingClientRect().width/(FE.offsetWidth||1)||1;FE.style.minWidth=Math.ceil(w/s)+"px";return{w,h}}
@@ -63957,6 +63957,8 @@ body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail
 .krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
 .krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
 /* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+/* the same two bars inline in any kit chip text (.kpzb, K-CHIP-PAUSE): never a ⏸ font glyph in a chip — it reads as a smudge at chip size */
+.kpzb{display:inline-flex;gap:3px;align-items:center;vertical-align:-1px;margin-right:4px}.kpzb::before,.kpzb::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:currentColor}
 .krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
 .krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
@@ -65722,6 +65724,11 @@ function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dl
 window.kitDhCap=kitDhCap;
 (function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 .k3ev>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
+/* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
+   loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
+   on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
+(function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -90038,7 +90045,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0910d916452f";window.CTM_BUILD=BUILD;
+const BUILD="caa2db19a992";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

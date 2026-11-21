@@ -91,6 +91,8 @@ body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail
 .krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
 .krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
 /* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+/* the same two bars inline in any kit chip text (.kpzb, K-CHIP-PAUSE): never a ⏸ font glyph in a chip — it reads as a smudge at chip size */
+.kpzb{display:inline-flex;gap:3px;align-items:center;vertical-align:-1px;margin-right:4px}.kpzb::before,.kpzb::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:currentColor}
 .krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
 .krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
