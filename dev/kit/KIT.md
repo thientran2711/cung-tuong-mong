@@ -3213,7 +3213,7 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   kind (kitPanel / kitModal) only when that kind is in `KSEAL_EV.kinds`; a queue item without its own kind is something that happened
   (event, festival, contest, pay day, news …) except the HUD help cards (Thang / Ra vào / Quẻ / HXN titles). Tool panels (rules, info, person
   card, calendar, shop, act pickers `KIT_ACT_PIDS`, `act` / `shop`) never get one.
-- Placement (owner 21/11 ~03:47Z, #44, «chỗ có, chỗ không» — canon overwrite of the measured corner search): ONE fixed place, never measured: the TOP-RIGHT corner of the frame's header bar (`.kph`), ONE size (`KSEAL_EV.fix` = 34 px, top 4 / right 8), on every event dialog, Fold + iPad; the header reserves the room (`padding-right`), so it never covers a word. No bottom strip, no corner search.
+- Placement (owner 21/11 ~03:47Z, #44, «chỗ có, chỗ không» — canon overwrite of the measured corner search): ONE fixed place, never measured: the TOP-RIGHT of the frame's header bar (`.kph`), just left of the ✕ slot, ONE size (`KSEAL_EV.fix` = 34 px, top 4 / right 52 = left of the ✕ slot, which stays free), on every event dialog, Fold + iPad; the header reserves the room (`padding-right`), so it never covers a word. No bottom strip, no corner search.
 - A mark only: aria-hidden, pointer-events none, multiply, opacity .9. Test: `node dev/test/seal-events.js <index.html> [outdir] [sizes]`.
 
 ## 40. APP ICON (owner 11/15, review/brand) — `dev/art/make_icons.py`

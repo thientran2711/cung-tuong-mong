@@ -32,7 +32,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
     if(z.w>=1100&&m.oc.length>=3)chk(`${tag} ${name}: iPad option cards in 2 columns (layout ${m.kol})`,m.kol[0]==='2',m.kol);
     if(z.w<800)chk(`${tag} ${name}: phone option cards in 1 column (layout ${m.kol})`,m.kol[0]==='1',m.kol)}
    /* (e) seal */
-   chk(`${tag} ${name}: exactly one seal, top-right of the header`,m.sealN===1&&m.seal&&m.seal.c==='tr'&&m.kph&&m.seal.y<m.kph.y+m.kph.h&&m.seal.x+m.seal.w>m.D.x+m.D.w-70&&m.seal.w===34,{n:m.sealN,seal:m.seal,kph:m.kph,D:m.D});
+   chk(`${tag} ${name}: exactly one seal, top-right of the header`,m.sealN===1&&m.seal&&m.seal.c==='tr'&&m.kph&&m.seal.y<m.kph.y+m.kph.h&&m.seal.x+m.seal.w>m.D.x+m.D.w-110&&m.seal.w===34,{n:m.sealN,seal:m.seal,kph:m.kph,D:m.D});
    /* (d) only the option list scrolls: scroll every scroller down, the figure / event picture / info must not move */
    const mv=await p.evaluate(MEASMOVE=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg');const pos=()=>[d.querySelector('.kszfig'),d.querySelector('.k3right>.k3ev'),d.querySelector('.k3right>.k3info,.k3right>.kpmain,.k3right')].map(e=>{if(!e)return null;const r=e.getBoundingClientRect();return[Math.round(r.top),Math.round(r.left)]});
     const a=pos();let n=0;[d,...d.querySelectorAll('*')].forEach(e=>{if(e.scrollHeight>e.clientHeight+2&&/(auto|scroll)/.test(getComputedStyle(e).overflowY)){e.scrollTop=1e5;n++}});const c=pos();return{a,c,n}},null);

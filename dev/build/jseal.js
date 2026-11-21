@@ -72,7 +72,7 @@ try{kitSealHud()}catch(e){}
    plain event cards, news / intel / result / night / end / reward cards — kpKind in KSEAL_EV.kinds; tool panels such as rules, info, the person
    card, shop, act pickers, the calendar are not events) wears ONE kitSeal in a corner of its frame. A mark only (aria-hidden, no tap).
    Placement (owner 21/11 ~03:47Z, #44): ONE fixed place on every frame, never measured: the top-right corner of the header bar (.kph), one size (KSEAL_EV.fix); the header reserves the room. */
-const KSEAL_EV={fix:34,padT:4,padR:8,sz:[34],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
+const KSEAL_EV={fix:34,padT:4,padR:52,sz:[34],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
 function kitSealEvIs(m,dlg){try{if(!m||!dlg)return false;if(/pcm/.test(m.cls||"")||m.act||m.shop)return false;
  if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;
  const k=dlg.dataset.kind||(typeof kpKind==="function"?kpKind(m):"");const own=m.kit&&m.kit.kind;
@@ -106,4 +106,4 @@ window.kitSealEvPlace=kitSealEvPlace;
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
 (function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
 #modal .dlg>.kseal-ev{position:absolute;width:var(--kseal,36px);height:var(--kseal,36px);z-index:3;pointer-events:none;opacity:.9;mix-blend-mode:multiply}
-#modal .dlg:has(>.kseal-ev)>.kph{padding-right:calc(var(--kseal,34px) + 18px)!important;box-sizing:border-box}`;document.head.appendChild(st)})();
+#modal .dlg:has(>.kseal-ev)>.kph{padding-right:calc(var(--kseal,34px) + 62px)!important;box-sizing:border-box}`;document.head.appendChild(st)})();
