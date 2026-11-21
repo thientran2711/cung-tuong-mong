@@ -315,3 +315,20 @@ The diff against v7 is only what was asked:
 
 Verdict: **t4 PASS · t5 PASS**. These are the proof drafts for the new G40 wording, so they are not under the t6–t8 HOLD.
 Note: the approved t4 S13 sentence "the outer robe closes only at the sash … opening gradually in a long soft V toward the hem" fits OUTER_WRAP (closed at the sash, opens below it), but it may weaken the "fabric … below the sash" wording. Flagged by DESIGN20; watch the draft.
+
+## JOB 10 re-check (LADDER2 5d4d5967a) — thu s62 t7 v8f + t8 v10e · checked at 5d4d596 · 0 gens · ON HOLD
+Gates:
+- tp7 / tp8 a22 PASS; keep PASS. Chars: 9991 / 9967.
+- No vase.
+
+Fixes:
+- t7 G45: "a jade-and-gold belt with long tassels, its pendants never covered by sleeve, cape or shawl". Placed on the belt because the store S14 phrase can't be edited ✓
+- t8 G45: "…belt pendants with pearl tassels, never covered by sleeve, cape or shawl" ✓
+- t8 F18: "slim and palm-length, held between her fingers, never a sceptre" ✓
+- The t8 repeat trims change nothing:
+  - the belt is still there as "belt pendants";
+  - the crown still has rubies in "More jewels on the crown";
+  - the "broad yellow collar" is still in the neckline band.
+  - The G23-type "robe falling still and straight" was dropped.
+
+Verdict: **t7 PASS · t8 PASS — HOLD, not to GEN1** (Foreman). They still carry OUTER_TIED. When t4/t5 v8 proves OUTER_WRAP, LADDER2 swaps it in and I re-check. t6 COMOIf stays FAIL (G1 vân kiên).
