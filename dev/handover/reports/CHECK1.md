@@ -93,3 +93,18 @@ G41 garment by tier:
 
 Verdict: **t1 PASS · t2 PASS · t3 PASS.**
 Note: H12 says "never an apron panel", but here the owner orders the panels herself (G41, L1595/L1597), so the newer, specific owner order wins.
+
+## JOB 4 (Foreman C #14) — xuân Hán s62 t1–t3 _v4 vs _v3 · checked at e5789b5 · 0 gens
+The diff against v3 is the same 3 sentences in each file, and nothing else changed:
+1. First line: "to the shoulder points" → "SECURE on the shoulders".
+2. Collar: "rest exactly ON the shoulder points, shoulders covered (never off the shoulder)" → "sit SECURELY on the shoulders, never slipping off" (L1601 "áo muốn tuột").
+3. Robe: "a straight-cut floor-length robe (zhiju) … a straight vertical front edge to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket)" (L1601 trực cư). "no curved wrap panel" was dropped from this sentence.
+
+Gates: check_store tpN a22 approved + store PASS; keep PASS vs v3. Chars: 9455 / 9661 / 9954.
+No conflict with the other owner rules:
+- L1565: still "open OFF the neck … cross high, never a deep low V"; "never slipping off" keeps the intent of "never off the shoulder".
+- L1577: the inner robe "NO crossed collar, straight top edge" is unchanged.
+- G40: OUTER_IN is unchanged, and "no high waist" does not clash with a sash at the waist.
+
+Verdict: **PASS ×3**.
+Tiny note: the words "shoulder points" are gone, so the collar's outer limit is now implied rather than stated.
