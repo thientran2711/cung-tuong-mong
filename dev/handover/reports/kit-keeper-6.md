@@ -10,3 +10,19 @@ PRIORITY #1 CHECK: OD/ledger no KP09 owner line beyond GAP v4 J7 + KIT_REQUESTS.
 - quickcheck PASS (median new/live: render 314/257, tab 476/510, buổi 1689/1342, tasks>200 23/22; inside gates; old save ok).
 - Shots looked at (CDN img/_review/kit-body-fit/kbody-sample-755.jpg, -1180.jpg, kbody-stage-755/1180.jpg): heads/hair on heads, chest at shoulders, waist on belts (men exact, women at sash), sleeves both sides, hem at feet.
 - For C (later): fill img/body-fit.json rows where the measure is off (wide-sleeve women: waist slightly low on some), and deliver fx-hair-* / fx-cloth-* overlays.
+
+## 2. FRAME COLUMN OVERLAY (owner bug lane, MAIN 99 18:58Z) — SẴN SÀNG KIỂM `review/kit-pframe-overlay` @ 8f5676ed (base main b7041e67)
+PRIORITY #1 CHECK: OD last row 21/11 ~18:55Z read verbatim (shot refs/owner-2111-pframe-tassel-overlay.jpg is NOT in git/CDN — reproduced the screen from the game) | main jk2b §20a kitPcKey / kitPcKeyFit + kit-leftcol-read bd03747e (extended, not rebuilt) | review/* none | claims none.
+- CAUSE of the off-centre label: the frame box (--kpcw, e.g. 240 px) is wider than the column's content box (234 px, 3 px padding); `margin:auto` on an overflowing flex item pins it left → frame axis 3 px right of the label (every card, both devices).
+- FIX jk2b §20b `KIT_PFO`: frame `align-self:center` + no side margins (overflows equally) → label on the axis; `KIT_PFO.fit(pc)` sets the frame's margin-bottom so the first visible row under it lands at the frame's BAND bottom + 10 px (one correction pass for row-gap / empty rows), rows z 2 with the kit text halo (--kts); band per frame `KIT_PFO.band` measured on all 34 frame pictures (750…786 canvas units). Runs in the kitPcFix hook + ResizeObserver + inside kitPcKeyFit (now counts the overlap when it sizes the figure). Pendant/tassel untouched as part of the frame picture (PARKING_LOT #12 not built).
+- KIT.md §4.1c new; §4.5 frame line OVERWRITTEN in place (Magnific cut-out, not chroma keying; re-cut = Foreman C); §6.3f line updated in place. Kit sample §4.1c.
+- WHOLE GROUP before → after (dev/test/kit-pframe-overlay.js; label centre − frame axis px | first row top − band bottom px | rows over tassel):
+| scene | Fold 755x1000 before | after | iPad 1180x820 before | after |
+|---|---|---|---|---|
+| Chí tôn (Hoàng thượng) | −3 \| 119 \| no | 0 \| 10 \| yes | −3 \| 105 \| no | 0 \| 10 \| yes |
+| Phi tần (Hoàng hậu) | −3 \| 117 \| no | 0 \| 11 \| yes | −3 \| 108 \| no | 0 \| 10 \| yes |
+| Cung nhân (cung nữ) | −3 \| 122 \| no | 0 \| 11 \| yes | −3 \| 108 \| no | 0 \| 10 \| yes |
+| person dialog maid / elder | −3 \| 117 \| no | 0 \| 10–11 \| yes | −3 \| 108 \| no | 0 \| 10 \| yes |
+Also 1000x755 PASS. Nam nhân / Hoàng tự tabs: no frame column in that world state (0 cards). Narrow card (390x844, unsupported phone portrait): name stays a full row by design; rows at band + 10.
+- Regression: kit-leftcol-read.js Fold + iPad 5 scenes PASS (readable ≥ 11.5 px); kit-page.js Fold PASS, iPad only the pre-existing §59/§86 40 px overflow. quickcheck ×2 PASS (run 2 new/live: render 226/249, tab 480/477, buổi 1245/1293; run 1 buổi 1722/1158 = noise).
+- Shots looked at ×3 (CDN img/_review/kit-pframe-overlay/: after-755x1000/1180x820 tab-court, tab-rv, tab-staff + sample-755): Chí tôn «Niên hiệu / Đã quen / Hoàng thượng → ta · Sủng 7» start right under the band over the pendant + tassel, name centred over the frame.
