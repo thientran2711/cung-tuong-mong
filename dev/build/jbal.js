@@ -415,7 +415,7 @@ Object.assign(BAL,{
 Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
  tho:[40,60,75],succEnd:{an:5,q:6},veil:[6,10,14],lost:[40,100,200],kidHp:[35,60],exTier:[3,5],luxRep:[2,3],
- rgTrust:[15,35,60],summon:[3,5,8],sgStep:{up:7,down:3}}});
+ rgTrust:[15,35,60],summon:[3,5,8],summonGain:[{sung:1,an:1},{sung:2,an:1},{sung:3,an:2},{sung:4,an:3}]/* r2 sg-card: tsSummonGain per band (below summon[0], ≥[0], ≥[1], ≥[2]) — were typed in jts */,sgStep:{up:7,down:3}}});
 /* CHOICE VALUE (owner OD:L582 + OD 18/11 ~09:20Z; START_CORE laws 2 + 3; review/choice-value-audit): no option is cost-only, none is clearly better.
    rest = Sức she keeps when she declines / stays in her palace (the gain of every "Khéo từ chối / Không đến / Cáo bệnh / Mặc kệ / Lánh đi" option);
    duc = Đức of a virtuous refusal (burning a man's love poem); skipAff = thiện cảm the host loses when she skips a tấn phong feast (was a typed 6 in jts);
@@ -433,3 +433,5 @@ Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired
    colour, leaderboard and bow order (tam + nhị đẳng share the «Cung nữ» robe until Foreman C paints their own). wage = Bạc per month by rung (was j42 CNV_WAGE). */
 BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
+/* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
+BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
