@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b8fe99ba+","t":"2026-11-21T18:01Z","c":"night-balance-bundle: restore LIVE cnv origin (o:{},hh:0,th:0); drop dead BAL.odb.j42.rlGo / rlFail","b":"a5f6726be85e","h":[{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"}]};
+window.CTM_BI={"s":"c6ffc4c3","t":"2026-11-21T20:17Z","c":"night-balance-bundle: coop-cyhold test clear() closes manual kit scenes and the steal game (from review/bundle-nfstall 1388c7af, test only)","b":"bb92856694a0","h":[{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"},{"s":"6a654cac+","t":"2026-11-21T13:15Z","c":"Chơi chung: khách không còn trùng mặt với người trong phòng (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -78282,6 +78282,7 @@ function realFlip(){S.nfP=null;S.nfF=day();
  const n=typeof ntTaken==="function"?ntTaken():null;
  if(n){S.tonight=n.who==="me"?"me":((typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===n.who)||null);return}
  REAL=1;let r;try{r=f0.apply(this,arguments)}finally{REAL=0}
+ try{if(CO()&&!guest())S.nfH={d:day(),hold:enc(S.tonight)}}catch(e){}   /* the host's draw of this day, for a late fin (again) */
  /* her own summons (ksp / prep) waits for the choice from the moment the flip writes it: while another dialog holds the choice back
     (step's gate), the summons sitting in Q could be answered first and play her night before the choice (no defence, no tries) */
  try{const x=X();if(x&&x.st==="wait")for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}}catch(e){console.error(e)}
@@ -78399,7 +78400,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -78501,7 +78502,14 @@ function rerun(){if(RR!==day()||!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4()||(g
  RR=null;
  setTimeout(()=>{try{if(!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4())return;
   if(CO()){if(COOPW.pend)return;COOPW.allowN=true;try{nextBuoi()}finally{COOPW.allowN=false}}else nextBuoi()}catch(e){console.error(e)}},300)}
-const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this,arguments);try{if(nfOn())rerun()}catch(e){}return r};
+/* bundle (coop-night case 1): the host's day can move on before its choice of day d ends (jcoopworld cyFree → flip → soonEnd after the
+   cycle hold): no fin for d is ever sent, and a guest who waits on d (S.nfFin!==d → ask) is never answered. The host sends that day's fin
+   itself, once, from the draw (again); the guest asks again every BAL.steal.choice.ms while she waits (a lost ask / an early reply). */
+function finLate(){try{if(!CO()||!S||S.dead)return;
+ if(!guest()){const x=S.nfX;if(x&&x.d!=null&&x.d<day()&&S.nfFin!==x.d&&!x.late){x.late=1;x.st="done";again(x.d)}return}
+ if(S.nfW===day()&&S.nfFin!==day()&&Date.now()-(ASKT||0)>B().choice.ms){ASKT=Date.now();ask()}}catch(e){console.error(e)}}
+let ASKT=0;
+const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this,arguments);try{if(nfOn()){rerun();finLate()}}catch(e){}return r};
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
@@ -78537,7 +78545,9 @@ function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m
 /* the host's final word of a day (fin: holder, record, results) is kept in her save (S.nfLast) and sent again, AS IT WAS, when the guest asks
    for a day the host has already left: the host ends its day right after fin and runs ahead to the next one while the merged week is pending,
    so a guest who missed fin (dropped socket, reload, AFK phone) would wait for it forever — and the room with her (coop-night case 4/12, NLC #10) */
-function again(d){try{const f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);if(!f)return false;
+function again(d){try{let f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);
+ if(!f&&S&&d<day()){const h=S.nfH&&S.nfH.d===d?S.nfH:null;f={t:"act",k:NK,mode:"h",ph:"fin",d,week:COOP.state.week,hold:h?h.hold:(S.nfN===d?enc("me"):null)/* her night already played that day (no flip): the host held it */,ntk:null,fin:1,open:1,nw:null,ch:null,gres:null,gdef:null}}
+ if(!f)return false;
  COOP.send(Object.assign({},f,{id:NK+"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));return true}catch(e){console.error(e);return false}}
 /* the host answers "which word for day d?": a past day → its fin as it was; today → the last word again, or — after a reload, when LAST is gone —
    today's word rebuilt from the saved state (the flip / the choice / fin), so a guest is never left without the host's word (NLC #10) */
@@ -91633,7 +91643,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a5f6726be85e";window.CTM_BUILD=BUILD;
+const BUILD="bb92856694a0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
