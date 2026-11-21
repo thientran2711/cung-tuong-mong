@@ -78,3 +78,11 @@ Set B (later, light plum, never said "duyệt"): L1576 finals t1–t6, 21/11 ~00
 | t7 | + outer robe, broad 1→3 ("broad royal-yellow brocade band" collar), brocade 1→2 | — |
 | t8 | + outer robe, cloud collar "moderately firm", cape 0→2, wide 10→11 | OK "slim tall silhouette" → now "slim, hanging close, never bell-wide" (kept, reworded) |
 FABRIC t7/t8 = "thick gold-embroidered brocade" in BOTH (unchanged). No version has a separate "slim outfit" line except t8. Main cause of the thick look = the two-garment layered neckline + outer robe held in over both layers (all tiers) and the t4/t5 satin + 2–3 layers (+ the t5 capelet/yoke/shoulder layers).
+
+## Job 3b — owner L1668 "trả về cái thắt lưng gốc ban đầu" (Phi t5)
+History of the Phi t5 sash:
+- the 18/11 store default t5, before the redesign: "a gold-embroidered waistband with hanging jade belt pendants and tassels" (build.py `_a`; gold)
+- 19/11 TAN<->PHI SWAP: Phi = the OLD Tần DESIGN, but the builder added "a broad gold brocade girdle with two long jade pendants hanging on silk cords" (build.py:1235; golden_low t5_v0, rank8-s62/s62_t5 xSBe8KVjfW) → the gold/brocade start
+- the OLD Tần design that Phi took over had "an embroidered silk sash with hanging jade belt pendants and tassels" (golden_low t4_v0_c01, rank8-s62/s62_t4.txt gen SyhIap2Ub8, 20/11 07:34Z). This is the first wording with no gold and no brocade.
+New t5 COMOIl (base COMOIk @c609040): "a broad gold brocade girdle tied flat" → "an embroidered silk sash tied flat". The rest of the clause is kept: centre, NO bow, two jade pendant sets, never covered. The held-in clause is already there ("the outer robe HELD IN by the sash tied OVER it"). Nothing else changed. 9993 ch, check_store tp5 PASS, keep --all 359 PASS. 0 gens.
+If the owner means the pre-18/11 Phi instead, its words are the "gold-embroidered waistband" above (that has gold).
