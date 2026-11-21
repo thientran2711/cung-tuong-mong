@@ -440,7 +440,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
 
 /* ---------- rising: she joins the consort game ---------- */
 function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
- S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
+ S.maid=newMaid(nmNew("maid"),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
  if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
@@ -581,7 +581,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
 /* Đức Thọ cung errands earn the Thái hậu's eye (a grant may come from her) */
 (function(){const e0=srvErrandDone;srvErrandDone=function(){const sn=S.srv.sent;const r=e0.apply(this,arguments);if(sn&&sn.k==="tn"&&!S.thDead)S.srv.thf=(S.srv.thf||0)+1;return r}})();
 /* NPC maids: the same road (love a palace man, caught or married off) */
-function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"";/* AG-ALL B: love acts + grant are her choices (jagstaff) */try{const M=srvMen();if(!M.length)return"";const L=allServ().filter(s=>s.role==="maid"&&(s.age||20)>=18);
+function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"";/* AG-ALL B: love acts + grant are her choices (jagstaff) */try{const M=srvMen();if(!M.length)return"";const L=allServ().filter(s=>s.role==="maid"&&(s.age||20)>=18&&!(typeof asSelfOn==="function"&&asSelfOn(ownerOf(s))));/* coop-guest-agent r2: a co-op guest's own maids love / are granted by their agent acts + month (jagstaff), never also by these dice */
  if(L.length&&roll(25)){const s=pick(L.filter(x=>!x.manLove));if(s){const m=pick(M.filter(x=>x.rw!=="vương gia"));if(m)s.manLove=m.id}}
  for(const s of L.filter(x=>x.manLove)){const m=manById(s.manLove);const o=ownerOf(s);if(!m||!o){s.manLove=null;continue}
   const mine=isSrv()&&(o===srvM()||(S.srv.af[s.sid]||0)>=30);

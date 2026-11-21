@@ -270,7 +270,7 @@ RD97L.push(rdRare({a:"cn_chu_11",tag:"Chủ cũ tạ lỗi trước Hoàng hậu
    every chapter (taken from the .4 thread when it is still reachable, else a new name). {v} = the consort whose people held the letter
    in .4 (introduced here from .5 on and carried by rdCast). */
 const CNTINH_G=A=>{try{const f=S.st.f14||{};if(!f.cnG){let n=f.n1||"";if(!n)for(const t of [S.st.M].concat(S.st.X||[]))if(t&&t.a==="cn_tinh"&&t.n1){n=t.n1;break}
-  f.cnG=n||("thị vệ "+pick(SURN)+" "+pick(MALEN))}A.n1=f.cnG}catch(e){A.n1="thị vệ năm xưa"}return true};
+  f.cnG=n||("thị vệ "+nmNew("m"))}A.n1=f.cnG}catch(e){A.n1="thị vệ năm xưa"}return true};
 
 rdDef("cn_tinh",5,{t:"Thư cũ",w:"maid",sj:"những bức thư năm xưa",cast(A){return CNTINH_G(A)&&rdCast(A,["v"])},
  g:"Một bức thư đã từng bị trình lên Hoàng thượng. Những bức còn lại vẫn trôi nổi đâu đó, và người của {v}, kẻ đứng sau lần trình thư trước, cũng đang tìm. Phải tìm thấy trước họ.",

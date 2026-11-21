@@ -172,7 +172,7 @@ BAL.mort={on:1,playerFloorYears:0,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
  fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
- /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Lý in Trường Môn viện: age when the game starts, floor = minimum years she lives
+ /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Tần in Trường Môn viện: age when the game starts, floor = minimum years she lives
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
  ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
@@ -1759,6 +1759,17 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
+   owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
+   Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
+   that may wear it (above = vượt phẩm, the one j8/jwdinv rule); pr = price (luxury = the one luxVal: grade of the painting + pr/10); tg = gift likes.
+   best = the j8 BEST reward lists (the Emperor's rewards, player and NPC alike) that may hand it out; shop = sold by Nội vụ phủ (SHOP_ALL).
+   Earrings are REWARDS only (shop 0, owner Lượt 1054 'được thưởng những cái hoa tai'); shoes are sold too. */
+BAL.wearSlots={
+ ear:{hoatai:{n:"Hoa tai ngọc trắng",pr:40,rk:0,w:{sac:2},tg:["hh","rv"],best:["night","birthday"],shop:0},
+      hoataivang:{n:"Hoa tai vàng khảm trân châu",pr:130,rk:3,w:{sac:3,danh:2},tg:["rv"],best:["contest","promo"],shop:0}},
+ shoe:{giayhoa:{n:"Giày thêu hoa mai",pr:15,rk:0,w:{sac:1},tg:["rv"],best:["night"],shop:1},
+       giaygam:{n:"Giày gấm mẫu đơn đính trân châu",pr:70,rk:2,w:{sac:2,danh:1},tg:["hh","rv"],best:["birthday","promo"],shop:1}}};
 /* CUNG NỮ THÂN CẬN (jtc, owner OD 20/11 ~15:55Z, review/thancan): rk = the maid rungs that may be raised (SRK.maid 1 tam đẳng … 3 nhất đẳng); the trust
    bar is BAL.loy.trust. pick: her lòng +loy, Bạc -bac (her master's thân cận uniform is sewn), every other maid of the house lòng -envy (law 3: gain and loss);
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)

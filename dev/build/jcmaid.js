@@ -42,7 +42,7 @@ function cmInfo(m){m=m||S.maid;if(!m||!m.src)return"";return ` · ${CM_LBL[m.src
 function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB().pickAlone)}
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
-function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
+function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){const nm=nmNew("maid");
  L.push({name:nm,loy:cmRange(B.loy.pick),age:BAL.cmaidx.age+R(BAL.cmaidx.ageR)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
@@ -77,7 +77,7 @@ PEND.cmSec=pp=>{const B=cmB(),m=S.maid;if(!m||!m.sec)return null;const k=m.sec.k
  const o=k==="spy"?[{n:"Giữ lại, dặn nàng ta chỉ báo chuyện vô hại",fx:{maid:B.secLoy},x:"từ nay không còn lộ chuyện"},{n:"Trả nàng ta về Nội vụ phủ",fx:{danh:-B.spyDanh},x:"Nội vụ phủ đưa người khác đến",go:()=>cmReplace("noi")}]:
   [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*BAL.cv.secPayMul},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:`thành: giữ lại ${B.secPay} lượng bạc · kèm: ${k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}`}];
  return{who:pMaid(),t,o:o.map(x=>Object.assign(x,{go:(g=>()=>{if(g)g();if(S.maid===m)m.sec.done=1})(x.go)}))}};
-function cmReplace(src){const B=cmB();const m=newMaid(pick(MAIDS.filter(x=>x!==(S.maid&&S.maid.name))),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
+function cmReplace(src){const B=cmB();const m=newMaid(nmNew("maid"),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
 
 /* ---------- dtq: the martial maid stands in the way (called by jmline when an NPC's harm is aimed at her household) ---------- */
 function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.origin||S.origin.k!=="dtq"||!roll(cmB().dtqGuard))return"";cmC("guard");
@@ -103,7 +103,7 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
    and not, weighted by the same % (talSpy / secOut) × her lòng (ag2Ch, as the other servant inclinations of AG-ALL-2): a loyal maid listens for her mistress more and leaks less, a disloyal one the
    other way (BAL.ag.stf2.cm: spy × lòng / talLoy, leak × (100 − lòng) / (100 − secTrust)). A secret affair FOUND by Cung Chính ti (lover)
    is not her choice: it stays the old witness roll. Loop off → the old rolls. */
-function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return null;return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
+function cmCh(m,w){if(!(window.agSelf&&agSelf(m&&S&&m===S.maid?S:null)&&typeof ag2Ch==="function"))return null;/* coop-guest-agent: her own chief maid on a co-op guest's seat = the same agent odds as solo */return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
 function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?(!!npcWhy("cmSpy",{p:m},()=>roll(B.talSpy))):c}/* npc-purpose G2a: she listens for her mistress out of loyalty */
 function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-BAL.ag.why.tell.host)&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s},()=>roll(B.secOut))):c}
 /* ---------- the month ---------- */

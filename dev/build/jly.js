@@ -1,18 +1,18 @@
-/* owner 16:40Z: "Phế phi họ Lý" (the cold-palace stand-in shown while no rival has fallen) had an empty frame — no ref, so figRoles gave
+/* owner 16:40Z: "Phế phi họ Tần" (the cold-palace stand-in shown while no rival has fallen) had an empty frame — no ref, so figRoles gave
    no role. She is now ONE persistent person (S.lyF, saved; same face every visit) drawn from the cold-palace consort art (tier cold:
    plain clothes, no jewellery, no forehead mark), with the matching round portrait in the talk panel.
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
-/* B-answers art (D50): Phế phi họ Lý, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
+/* B-answers art (D50): Phế phi họ Tần, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
    fallen/steward/tutor, 4 age bands each, same manifest format). Until the manifest lists them, Lý keeps the cold-palace consort art. */
 const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:BAL.ly.npcAge.tgk,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:BAL.ly.npcAge.ttp,role:"tutor"}};
 function lyArt(){try{return !!(FIGIX&&FIGIX.fallen)}catch(e){return false}}
 function npcFixOf(p){if(!p||p.kind!=="npc"||p.sid)return null;const k=Object.keys(NPCFIX).find(k=>NPCFIX[k].name===p.name);if(!k||!(FIGIX&&FIGIX[NPCFIX[k].role]))return null;S.npcFix=S.npcFix||{};if(!S.npcFix[k])S.npcFix[k]={name:NPCFIX[k].name,age:NPCFIX[k].age,npcFix:k};return S.npcFix[k]}
-function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.age)||34,lyF:1};return S.lyF}
-/* D4 (owner OD:L641–642): who is in Trường Môn viện = the fallen rivals (up to BAL.mort.ly.lcShow) AND Phế phi họ Lý while she lives;
+function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Tần",age:(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.age)||34,lyF:1};return S.lyF}
+/* D4 (owner OD:L641–642): who is in Trường Môn viện = the fallen rivals (up to BAL.mort.ly.lcShow) AND Phế phi họ Tần while she lives;
    after her death (or her release in an old save) nobody stands in for her: the place is empty until a real person is sent there. */
 /* npc-death-wire: ONE Lý (alive or null) and ONE stage entry for her (record id c:ly, read by j95ppl / j95stage / j95ledObj / lcPeople) */
 function lyAlive(){const y=S&&lyFallen();return y&&!y.dead&&!y.freed?y:null}
-function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name:y.name,ini:"Lý",col:"#6a7a8a",info:info||"Phế phi"}:null}
+function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name:y.name,ini:"Tần",col:"#6a7a8a",info:info||"Phế phi"}:null}
 function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
  const q=lyEntry("Phế phi");if(q)L.push(q);return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
