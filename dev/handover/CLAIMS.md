@@ -853,3 +853,4 @@ kit-focus rv4 | review/kit-focus-rv4 4c1105d8 | rv session | PASS (supersedes rv
 | REVIEW cold-faction-land2 E43r (opus short BIG; j42/jkc hunks) of ef0a89f2 | review/cold-faction-land2; reports/relander-e43.md | FOREMAN E #26 | session_01DgYSWq56vk37YGWWa6aGdM | RUNNING | 21/11 11:06Z |
 | RELAND palace-life-gaps r3 (opus BIG reviewer-lander; MAIN 92 ORDER 10:51Z jbal2 conflict) | review/palace-life-gaps-r3; briefs/b6-relander-palace-life.md | B | session_01N1tNP5jMFLMtiToAbVEacW | RUNNING | 21/11 11:20Z |
 | RELAND mg-craft Thêu r3 (opus BIG reviewer-lander; MAIN 92 ORDER 10:50Z jtd conflict) | review/mg-craft-r3; briefs/b6-relander-mg-craft.md | B | session_01N1tNP3ZWMeRDarhzz276Yb | RUNNING | 21/11 11:20Z |
+kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
