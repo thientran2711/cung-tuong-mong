@@ -471,7 +471,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   /* mg-intro-2 (owner OD 21/11 ~04:17Z): short essentials only — «Độ khó» + one «Phần của ngươi» line; every part / every rival detail behind the kit «!» */
   const allRows=[["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]);
   box.innerHTML=kgBangRows("Phần của ngươi",allRows,[["Gồm",`tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""} + tự chơi 0–${luck}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]])+
-  (rows.length?`<h4 class="kpst">Đối thủ${kgBang(`<p class="kpnote">Phần của mỗi đối thủ = tài nghệ + chuẩn bị + màn thi chưa rõ (0–${luck}).</p>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))),"Đối thủ")}</h4><div class="kgrv kgrv-c">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t+r.pr}</small>`})))+`</div>`:"")+
+  (rows.length?`<h4 class="kpst">${kgBang(`<p class="kpnote">Phần của mỗi đối thủ = tài nghệ + chuẩn bị + màn thi chưa rõ (0–${luck}).</p>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))),"Đối thủ")}</h4><div class="kgrv kgrv-c">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t+r.pr}</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ`})}</div>`;
   kgReady(box,{kind,ev:o.ev||(o.fk?"fest:"+o.fk:"cat:tai-nghe")});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
   $("kg82go").onclick=()=>kg82Play(kind,raw=>finish(raw,false));$("kg82skip").onclick=()=>finish(SK,true)};
@@ -525,7 +525,7 @@ window.startContest=startContest;window.playArt=playArt;
    jslap/jtd/jhd/j92 engines, the scheme games jsgame, Nghiệm thân jroute):
    kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
      · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
-       (mg-intro-2: NO picture of the move any more; the picture on top is the EVENT's (spec.ev = evArtOf id, default cat:tai-nghe, ev:false = none), the long rules sit behind the kit «!» kgBang);
+       (mg-intro-2: NO picture of the move any more; the picture on top is the EVENT's (spec.ev = evArtOf id, default cat:tai-nghe, ev:false = none), the long rules sit behind a kit tap-word (kgBang));
       dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a plain lotus comes down it, the hand drags the player's piece aside and back);
      · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
      · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
@@ -537,13 +537,11 @@ window.startContest=startContest;window.playArt=playArt;
 const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"dodge",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
  fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
-/* KIT §13.7.4 kgBang(html,title) — the round yellow «!» (kitHapHtml look) that opens the kit info popup with the long rules / «Phần của ta» rows / opponent details.
-   Whatever is long goes behind it (owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào dấu chấm than"). kgBangRows(head,all,shown) = a kit heading + the few
-   essential rows + the «!» holding ALL rows. */
-function kgBang(html,title){if(!html)return"";return `<i class="khap kgbang" role="button" tabindex="0" aria-label="Xem thêm" title="Xem thêm" data-kgb="${kpEsc(String(html))}" data-kgt="${kpEsc(String(title||"Thông tin"))}">!</i>`}
-function kgBangRows(head,all,shown,extra){const full=kg82Rows(all)+(extra||"");return `<h4 class="kpst">${head}${kgBang(full,head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
-document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest(".kgbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
- kpPop(t,`<div class="kpopt">${kpEsc(t.dataset.kgt||"Thông tin")}</div><div class="kpopx kgbpop">${t.dataset.kgb||""}</div>`)}catch(x){console.error(x)}},true);
+/* KIT §13.7.4 (mg-intro-2): everything long goes behind a kit TAP-WORD (kitTapWord, §73.2: dotted underline, a tap opens the small kit pop-up with the word as title).
+   Owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào" a tap-word / «!». kgBang(html,title) = the heading words as the tap-word holding `html`;
+   kgBangRows(head,all,shown,extra) = a kit heading (tap-word) holding ALL rows + the few essential rows shown. No private pop-up code here. */
+function kgBang(html,title){return html?kitTapWord(title||"Thông tin",html):String(title||"")}
+function kgBangRows(head,all,shown,extra){return `<h4 class="kpst">${kgBang(kg82Rows(all)+(extra||""),head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
 window.kgBang=kgBang;window.kgBangRows=kgBangRows;
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
  s.n=s.n||K.n||"";s.t=s.t||K.t||"";s.how=s.how!=null?s.how:(K.how||"");s.e=s.e||K.e||"";s.go=s.go||"#kg82go";s.timed=s.timed!==false;return s}
@@ -554,7 +552,7 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  /* mg-intro-2 (owner OD 21/11 ~04:17Z): the picture on top is the EVENT's (festival / contest scene, evArtOf), never the picture of the move; the rules sit behind the kit «!» */
  let evp="";try{const id=s.ev===false?"":(s.ev||"cat:tai-nghe");evp=id&&typeof evArtOf==="function"?evArtOf(id,s.n):""}catch(e){}
  const note=`<p class="kpnote">${s.timed?"Đọc kỹ luật; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p>`;
- const html=`<div class="kgr">${evp?`<div class="kgr-ev"><img src="${evp}" alt="" draggable="false" onerror="this.parentNode.remove()"></div>`:""}<h4 class="kpst">Luật chơi · ${s.n}${kgBang(kg82Rows(rows)+note,`Luật chơi · ${s.n}`)}</h4></div>`;
+ const html=`<div class="kgr">${evp?`<div class="kgr-ev"><img src="${evp}" alt="" draggable="false" onerror="this.parentNode.remove()"></div>`:""}<h4 class="kpst">${kgBang(kg82Rows(rows)+note,`Luật chơi · ${s.n}`)}</h4></div>`;
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
@@ -629,8 +627,9 @@ body.kg82cf #modal{z-index:40}
 #kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-ev,#kshpgw .kgr-ev{display:none}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 /* §13.7.4 (mg-intro-2): the EVENT picture on top of every intro + the «!» that holds the long text */
-.kgr-ev{margin:0 0 8px;height:clamp(110px,calc(19*var(--kvh)),190px);border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card)}.kgr-ev img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%}
-.kpst .kgbang{margin:0 0 0 8px;vertical-align:middle;cursor:pointer;position:static}
+.kgr-ev{margin:0 0 8px;height:clamp(84px,calc(12*var(--kvh)),150px);border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card)}.kgrv.kgrv-c{max-height:none;overflow:visible}/* the 3 rival rows are never cut (MAIN 87) */
+.kgr-ev img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+
 .kgr-hand{width:38px;height:44px;left:50%;top:50%;transform:translate(-48%,-6%);filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}
 .kgr-hand svg,.kgt-hand svg{width:100%;height:100%;display:block}
 .kgr-ring{position:absolute;left:28%;top:-14%;width:20px;height:20px;margin:-2px 0 0 -2px;border:3px solid var(--good,#2d7a52);border-radius:50%;opacity:0}
