@@ -76,3 +76,12 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - CURRENT SET (all PASS): t1 dapung4 v11, t2 v11, t3 v12, t4 COMOIo, t5 COMOIo, t6 COMOIn, t7 v8m, t8 v10m. Nothing released to GEN1 (the owner picks 55 cr 1k / 135 cr 2k first).
 - 04:23Z: Foreman C #17 rolled over → I now report to #18 session_01D3E3NbPQeExFnFGqi5RR2S. Order unchanged: release nothing to GEN1.
 - 04:23Z GEN1: the job 6 release was never received → 0 cr. Job 3b t5 COMOIl drawn once = Cqn8j8HEEy (55 cr), reported to #17 (now superseded by t5 COMOIo).
+
+## Job 8 — MAIDFIX1 r3 b31b625 maids (owner L1685, Foreman #18) — PASS ×3 (04:35Z), reported to #18 only
+- tam test8_tam_L1685 (6782; base test3_tm1_g43): one added clause, "the sash, its bow AND both long hanging ties all the SAME powder blue, never white". 0 cut.
+- nhị test8_nhi_L1685 (6623; base test7_nhi_L1656): the jacket now continues below the sash to mid-thigh, longer than tam, one continuous piece ("never a separate second layer below the sash, no front panels, no vạt"). 3 allow lines, all owner L1685. This reverses the L1656 "ends at the waist" by the owner's newer order.
+- nhất test8_nhat_L1685 (7883; base test6_nhat_L1653): the sachet cord is tied onto the waist sash at the side of the hip, never dangling at the centre. 2 allow lines.
+- keep --sidecar PASS ×3. check_store mama a18: nhất PASS; tam/nhị S01+S32 = same as their bases. No markers.
+- FOUND: keep_check --all FAILs on dev/art/thu_comoi/s62_t4_THU_COMOIk.txt and s62_t5_THU_COMOIj.txt (old texts, the .keep bases of COMOIl/COMOIk). They are "glued" again: the text is in there 3× (29 713 B).
+  - Unrelated commits glued them again: 61e890b (CLAIMS) and caca8f3 (rv-chiton-name), after #17's restore 69c7aa6.
+  - Fix = restore both (and their .keep) from be1ec9e. The final set is not affected.
