@@ -1306,3 +1306,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
 #27 ~09:22Z: SENT L1946 HADUONG2 Tang maid research (dev/art/research_tang_maids_L1939.md @ef95bf0) + 3 thô sử options A/B/C (A recommended). Waiting owner choice; rank→fabric table (L1940) still coming. Next Lượt 1947.
 #27 ~09:23Z: OWNER L1941 (#26 chat): compare winter Đáp ứng L1924 KLpQriTkqp vs approved winter Thường tại (looks alike?) — #26 sent side-by-side. Awaiting verdict. NOTE: #26 Lượt numbers 1939–1942 overlap mine; my next 1947.
 #27 ~09:24Z: SENT L1948 HADUONG2 rank→fabric research (@d23753a part 2). Awaiting owner: thô sử A/B/C + fabric ladder. HADUONG2 ctx 26 %. Next Lượt 1949.
+#27 ~09:26Z: NGOCBOI1 G57b done 9fac14e14 (~969 files tassel words stripped, gate HELD ITEM TASSEL). Ordered face-common/*.FULL.txt scrub. Next Lượt 1949.
