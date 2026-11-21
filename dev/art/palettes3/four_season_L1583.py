@@ -53,6 +53,28 @@ def clear_feel(h, s):
     return oth - own >= 2.0
 
 
+def looks_right(x, s):
+    """THUPAL2 colour-expert check on a NEW or kept non-root MAIN (owner L1583/B30: the main must READ as its season, never grey/dirty):
+    no greyish main (C < .07); Hạ warm (hue 20-92) L >= .70 (darker reads tan / rust); Hạ lemon only bright (L >= .905, C >= .11, hue <= 114 — lower reads olive / khaki, higher reads lime);
+    Thu warm (terracotta / persimmon / amber, hue 28-100) needs C >= .095, hue <= 54, L >= .68 (persimmon hue >= 42: L >= .72) — a muted or yellower warm reads brown/tan;
+    Xuân green only fresh leaf (hue >= 132, L >= .40); Thu green only olive/moss with a yellow cast (hue 114-134, C >= .075, L >= .52) — a bluer or greyer sage reads spring / grey."""
+    L, c, h = oklch(x)
+    if c < .07: return False
+    if s == 'xuan' and 95 <= h < 170 and (h < 132 or L < .40): return False   # spring green = fresh leaf; a yellow-cast green reads olive (autumn)
+    if s == 'ha' and 20 <= h < 92 and L < .70: return False   # Hạ warm = sunlit: a darker orange reads tan / rust (Thu)
+    if s == 'ha' and 92 <= h <= 125 and (L < .905 or c < .11 or h > 114): return False
+    if s == 'thu':
+        if 28 <= h < 100 and (c < .095 or h > 54 or L < (.72 if h >= 42 else .68)): return False   # persimmon below L .72 reads brown
+        if 100 <= h < 170 and not (114 <= h <= 134 and c >= .075 and L >= .52): return False   # darker olive reads army drab
+    return True
+
+
+def thu_warm(x):
+    """warm Thu that passes looks_right reads as Thu by the feel test even without the 2-ΔE margin (it sits next to Hạ peach)"""
+    L, c, h = oklch(x)
+    return feel(x)[0] == 'thu' and 28 <= h <= 54 and looks_right(x, 'thu')
+
+
 LIM = [20, 12]
 
 
@@ -89,7 +111,7 @@ def main_grid(group, s):
         for L in [round(lo + n + i * (hi - lo) / 7, 3) for i in range(8)]:
             for C in [round(clo + i * (chi - clo) / 3, 3) for i in range(4)]:
                 x = B.lch2hex(L, C, h)
-                if not bad(x) and clear_feel(x, s) and not pink_thu(x, s): out.append(x)
+                if not bad(x) and (clear_feel(x, s) or s == 'thu' and thu_warm(x)) and not pink_thu(x, s) and looks_right(x, s): out.append(x)
     return tuple(dict.fromkeys(out))
 
 
@@ -118,23 +140,30 @@ def vi_sec(x):
     return min(NEUT, key=lambda n: min(abs(h - n[1]), 360 - abs(h - n[1])))[0]
 
 
+# THUPAL2: s62 = the sample row the owner sees first — keep her Xuân/Hạ (they read right) and give Thu the olive of
+# THUPAL1's option 1 (olive + pink phụ), not a terracotta that pushes her Xuân/Hạ around.
+PIN = {'s62': {'xuan': lambda m: m == '#EB8186', 'ha': lambda m: m == '#F8B287',
+               'thu': lambda m: 114 <= oklch(m)[2] <= 134}}
+
+
 def main_cands(p, r, s):
     """[(cost, main)] diverse, for person p season s"""
     g = r['group']; cm = r[s]['main_hex']
     own = [r[t]['main_hex'] for t in SEAS if not r[t].get('root') and t != s]       # ★GỐC colours stay where they are
     mains = []
-    if feel(cm)[0] == s and not bad(cm) and not pink_thu(cm, s): mains.append((0.0, cm))       # least change: current main already reads right
+    if feel(cm)[0] == s and not bad(cm) and not pink_thu(cm, s) and looks_right(cm, s): mains.append((0.0, cm))       # least change: current main already reads right
     for o in own:
-        if clear_feel(o, s) and not bad(o) and not pink_thu(o, s): mains.append((3.0, o))                   # her colour moved to the season it reads as
+        if clear_feel(o, s) and not bad(o) and not pink_thu(o, s) and looks_right(o, s): mains.append((3.0, o))                   # her colour moved to the season it reads as
     for x in main_grid(g, s):
         mains.append((min(de(x, cm), min([de(x, o) + 4 for o in own] or [99])) + 2, x))
+    if p in PIN and s in PIN[p]: mains = [(c, m) for c, m in mains if PIN[p][s](m)] or mains
     best = {}
     for c, m in mains: best[m] = min(c, best.get(m, 1e9))
     keep, per = [], {}
     for m, c in sorted(best.items(), key=lambda t: t[1]):
         f = family(m)
-        if per.get(f, 0) < 6: keep.append((c, m)); per[f] = per.get(f, 0) + 1
-        if len(keep) >= 40: break
+        if per.get(f, 0) < 10: keep.append((c, m)); per[f] = per.get(f, 0) + 1
+        if len(keep) >= 60: break
     return keep
 
 
@@ -149,7 +178,7 @@ def sec_cands(r, s, m, taken):
         pal = dict(main=m, main_hex=m, sec=x, sec_hex=x)
         if any(CU.pair_verdict(pal, q)[0] == 'FAIL' for q in taken[s]): continue
         res.append((c, x))
-        if len(res) >= 25: break
+        if len(res) >= 40: break
     return res
 
 
@@ -164,7 +193,7 @@ def solve():
             if d[p][s].get('root'):
                 taken[s].append(dict(main=d[p][s]['main_hex'], main_hex=d[p][s]['main_hex'], sec=d[p][s]['sec_hex'], sec_hex=d[p][s]['sec_hex']))
     # hardest people first: most seasons needing change
-    HARD = ('m28', 's10', 's58', 'c08', 'm02', 'm10', 'm14', 'c20', 'c26', 'm18', 'c22', 'm05')   # tightest ★GỐC rooms (run 3)
+    HARD = ('s62', 'm08', 's09', 's52', 's22', 'm20', 's39', 'm28', 's10', 's58', 'c08', 'm02', 'm10', 'm14', 'c20', 'c26', 'm18', 'c22', 'm05')   # tightest ★GỐC rooms (run 3)
     order = sorted(ppl, key=lambda p: (p not in HARD, -sum(bool(d[p][s].get('root')) for s in SEAS),
                                        -sum(not clear_feel(d[p][s]['main_hex'], s) for s in SEAS)))
     for p in order:

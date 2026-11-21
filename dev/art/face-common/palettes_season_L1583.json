@@ -33,21 +33,22 @@
   "s61 Hạ ★GỐC #D2906C reads Thu — kept (L27)"
  ],
  "_fails": [
-  "c08: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
+  "c08: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
   "m02: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "m10: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
   "m14: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
   "c20: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
   "c26: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "m18: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "m22: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
   "c04: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
-  "m08: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "m16: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
-  "s62: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "s65: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "m20: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
-  "s52: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
-  "s63: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room"
+  "s18: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "s24: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "s30: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
+  "s32: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "s47: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "s60: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room",
+  "s65: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
+  "s50: A31 only at ΔE ≥ 12 (neutral ≥ 8) — ★GỐC roots leave no room",
+  "s63: A31 only at ΔE ≥ 16 (neutral ≥ 10) — ★GỐC roots leave no room"
  ],
  "c02": {
   "group": "Dịu dàng",
@@ -66,28 +67,28 @@
    "sec": "bạc hà nhạt #DCFFEE"
   },
   "ha": {
-   "main_hex": "#E78F68",
-   "sec_hex": "#CDDAFF",
+   "main_hex": "#DC855E",
+   "sec_hex": "#D6D6FE",
    "root": false,
    "main_vi": "cam đào dịu",
-   "sec_vi": "xanh sương",
+   "sec_vi": "tím khói nhạt",
    "main_before": "#DA9071",
    "sec_before": "#B9C9F9",
    "reads": "Hạ",
-   "main": "cam đào dịu #E78F68",
-   "sec": "xanh sương #CDDAFF"
+   "main": "cam đào dịu #DC855E",
+   "sec": "tím khói nhạt #D6D6FE"
   },
   "thu": {
    "main_hex": "#A5BB7D",
-   "sec_hex": "#C6ECFB",
+   "sec_hex": "#E0F1FF",
    "root": false,
    "main_vi": "ô liu sáng",
    "sec_vi": "xanh sương",
    "main_before": "#CB92BE",
-   "sec_before": "#E0F1FF",
+   "sec_before": null,
    "reads": "Thu",
    "main": "ô liu sáng #A5BB7D",
-   "sec": "xanh sương #C6ECFB"
+   "sec": "xanh sương #E0F1FF"
   },
   "dong": {
    "main_hex": "#7E8FBE",
@@ -108,16 +109,16 @@
   "root_season": "dong",
   "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son dịu #CF816E + ngà)",
   "xuan": {
-   "main_hex": "#799C47",
-   "sec_hex": "#FFDEE7",
+   "main_hex": "#5F8F54",
+   "sec_hex": "#FFE8E9",
    "root": false,
-   "main_vi": "xanh lá non dịu",
-   "sec_vi": "hồng phấn nhạt",
+   "main_vi": "xanh lá non đậm vừa",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#CD757A",
-   "sec_before": null,
+   "sec_before": "#FFDEE7",
    "reads": "Xuân",
-   "main": "xanh lá non dịu #799C47",
-   "sec": "hồng phấn nhạt #FFDEE7"
+   "main": "xanh lá non đậm vừa #5F8F54",
+   "sec": "hồng đất nhạt #FFE8E9"
   },
   "ha": {
    "main_hex": "#FFBB92",
@@ -132,16 +133,16 @@
    "sec": "ngọc dịu #88D4D3"
   },
   "thu": {
-   "main_hex": "#64855D",
-   "sec_hex": "#E5E1D7",
+   "main_hex": "#96AB6E",
+   "sec_hex": "#EDF0E5",
    "root": false,
-   "main_vi": "rêu đậm vừa",
+   "main_vi": "ô liu dịu",
    "sec_vi": "trắng ngà",
    "main_before": "#5F8F54",
-   "sec_before": null,
+   "sec_before": "#E5E1D7",
    "reads": "Thu",
-   "main": "rêu đậm vừa #64855D",
-   "sec": "trắng ngà #E5E1D7"
+   "main": "ô liu dịu #96AB6E",
+   "sec": "trắng ngà #EDF0E5"
   },
   "dong": {
    "main_hex": "#A87FBD",
@@ -157,6 +158,7 @@
   },
   "a31": [
    "Xuân chính~Thu chính ΔE12",
+   "Xuân phụ~Hạ chính ΔE19",
    "Đông chính~Đông phụ ΔE19"
   ]
  },
@@ -189,16 +191,16 @@
    "sec": "tím than #49457C"
   },
   "thu": {
-   "main_hex": "#516325",
-   "sec_hex": "#E3F3FF",
+   "main_hex": "#6A7E40",
+   "sec_hex": "#DAE4FF",
    "root": false,
-   "main_vi": "ô liu đậm",
+   "main_vi": "ô liu đậm vừa",
    "sec_vi": "xanh sương",
    "main_before": "#4E7D43",
-   "sec_before": null,
+   "sec_before": "#E3F3FF",
    "reads": "Thu",
-   "main": "ô liu đậm #516325",
-   "sec": "xanh sương #E3F3FF"
+   "main": "ô liu đậm vừa #6A7E40",
+   "sec": "xanh sương #DAE4FF"
   },
   "dong": {
    "main_hex": "#65C3C1",
@@ -231,28 +233,28 @@
    "sec": "ngọc bích dịu #6AAF98"
   },
   "ha": {
-   "main_hex": "#8D1D0A",
-   "sec_hex": "#ECF7FF",
+   "main_hex": "#F0EF84",
+   "sec_hex": "#EBC5D0",
    "root": false,
-   "main_vi": "cam san hô thẫm",
-   "sec_vi": "xanh sương",
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "hồng phấn nhạt",
    "main_before": "#EAE697",
-   "sec_before": null,
+   "sec_before": "#ECF7FF",
    "reads": "Hạ",
-   "main": "cam san hô thẫm #8D1D0A",
-   "sec": "xanh sương #ECF7FF"
+   "main": "vàng chanh sáng #F0EF84",
+   "sec": "hồng phấn nhạt #EBC5D0"
   },
   "thu": {
-   "main_hex": "#7C0439",
-   "sec_hex": "#FFE8E9",
+   "main_hex": "#771735",
+   "sec_hex": "#FFDCCD",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "hồng đất nhạt",
+   "sec_vi": "kem đào",
    "main_before": "#903C61",
    "sec_before": "#FFEAEF",
    "reads": "Thu",
-   "main": "đỏ rượu trầm thẫm #7C0439",
-   "sec": "hồng đất nhạt #FFE8E9"
+   "main": "đỏ rượu trầm thẫm #771735",
+   "sec": "kem đào #FFDCCD"
   },
   "dong": {
    "main_hex": "#4875B4",
@@ -285,27 +287,27 @@
    "sec": "xanh lá non dịu #74B47E"
   },
   "ha": {
-   "main_hex": "#E4E89A",
+   "main_hex": "#E9F090",
    "sec_hex": "#98CBF0",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "xanh trời dịu",
-   "main_before": null,
+   "main_before": "#E4E89A",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #E4E89A",
+   "main": "vàng chanh sáng #E9F090",
    "sec": "xanh trời dịu #98CBF0"
   },
   "thu": {
-   "main_hex": "#D09E85",
+   "main_hex": "#ECA579",
    "sec_hex": "#F3ECFF",
    "root": false,
-   "main_vi": "cam quả hồng trầm dịu",
+   "main_vi": "cam quả hồng trầm sáng",
    "sec_vi": "tím khói nhạt",
    "main_before": "#E499A4",
    "sec_before": null,
    "reads": "Thu",
-   "main": "cam quả hồng trầm dịu #D09E85",
+   "main": "cam quả hồng trầm sáng #ECA579",
    "sec": "tím khói nhạt #F3ECFF"
   },
   "dong": {
@@ -321,7 +323,7 @@
    "sec": "kem đào #FFF3E9"
   },
   "a31": [
-   "Xuân chính~Thu chính ΔE12"
+   "Xuân chính~Thu chính ΔE17"
   ]
  },
  "c10": {
@@ -503,16 +505,16 @@
    "sec": "tím khói nhạt #E7DAFF"
   },
   "ha": {
-   "main_hex": "#DC8067",
-   "sec_hex": "#B9E4E6",
+   "main_hex": "#ED8D7B",
+   "sec_hex": "#BCE2F1",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "xanh sương",
    "main_before": "#D58679",
-   "sec_before": null,
+   "sec_before": "#B9E4E6",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DC8067",
-   "sec": "xanh ngọc sương #B9E4E6"
+   "main": "cam san hô sáng #ED8D7B",
+   "sec": "xanh sương #BCE2F1"
   },
   "thu": {
    "main_hex": "#B0BE70",
@@ -546,27 +548,27 @@
   "band": "chính ĐẬM nhờ trầm (tối hơn, không rực hơn), tương phản mạnh với phụ rất sáng (đỏ thẫm + trắng ngà)",
   "xuan": {
    "main_hex": "#852533",
-   "sec_hex": "#FFE7F3",
+   "sec_hex": "#FFE0E8",
    "root": false,
    "main_vi": "đỏ thắm thẫm",
-   "sec_vi": "hồng tím phấn",
+   "sec_vi": "hồng phấn nhạt",
    "main_before": null,
-   "sec_before": "#FFE0E8",
+   "sec_before": null,
    "reads": "Xuân",
    "main": "đỏ thắm thẫm #852533",
-   "sec": "hồng tím phấn #FFE7F3"
+   "sec": "hồng phấn nhạt #FFE0E8"
   },
   "ha": {
-   "main_hex": "#E4E89A",
-   "sec_hex": "#F6C3BA",
+   "main_hex": "#EAF187",
+   "sec_hex": "#C1D0F9",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
-   "sec_vi": "hồng đất nhạt",
-   "main_before": null,
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "xanh sương",
+   "main_before": "#E4E89A",
    "sec_before": "#FFF3E9",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #E4E89A",
-   "sec": "hồng đất nhạt #F6C3BA"
+   "main": "vàng chanh sáng #EAF187",
+   "sec": "xanh sương #C1D0F9"
   },
   "thu": {
    "main_hex": "#6A7E40",
@@ -611,7 +613,7 @@
    "sec": "xanh sương #D2ECFF"
   },
   "ha": {
-   "main_hex": "#DDD685",
+   "main_hex": "#FAEA89",
    "sec_hex": "#CFB8EC",
    "root": false,
    "main_vi": "vàng chanh sáng",
@@ -619,7 +621,7 @@
    "main_before": "#F6A496",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #DDD685",
+   "main": "vàng chanh sáng #FAEA89",
    "sec": "tím hoa cà dịu #CFB8EC"
   },
   "thu": {
@@ -648,8 +650,7 @@
   },
   "a31": [
    "Xuân chính~Hạ phụ ΔE16",
-   "Xuân chính~Thu chính ΔE17",
-   "Hạ chính~Thu phụ ΔE18"
+   "Xuân chính~Thu chính ΔE17"
   ]
  },
  "c22": {
@@ -669,19 +670,19 @@
    "sec": "tím khói nhạt #E1D3FA"
   },
   "ha": {
-   "main_hex": "#EAE697",
-   "sec_hex": "#88D4D3",
+   "main_hex": "#EFEE8D",
+   "sec_hex": "#ADE6F1",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
-   "sec_vi": "ngọc dịu",
-   "main_before": null,
-   "sec_before": null,
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "xanh ngọc sương",
+   "main_before": "#EAE697",
+   "sec_before": "#88D4D3",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
-   "sec": "ngọc dịu #88D4D3"
+   "main": "vàng chanh sáng #EFEE8D",
+   "sec": "xanh ngọc sương #ADE6F1"
   },
   "thu": {
-   "main_hex": "#779970",
+   "main_hex": "#7F985E",
    "sec_hex": "#FCD6E0",
    "root": false,
    "main_vi": "rêu dịu",
@@ -689,7 +690,7 @@
    "main_before": "#68985D",
    "sec_before": null,
    "reads": "Thu",
-   "main": "rêu dịu #779970",
+   "main": "rêu dịu #7F985E",
    "sec": "hồng phấn nhạt #FCD6E0"
   },
   "dong": {
@@ -723,7 +724,7 @@
    "sec": "rêu dịu #8AAF7D"
   },
   "ha": {
-   "main_hex": "#EFDF7E",
+   "main_hex": "#FAEA89",
    "sec_hex": "#E0F1FF",
    "root": false,
    "main_vi": "vàng chanh sáng",
@@ -731,11 +732,11 @@
    "main_before": "#FEAD94",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #EFDF7E",
+   "main": "vàng chanh sáng #FAEA89",
    "sec": "xanh sương #E0F1FF"
   },
   "thu": {
-   "main_hex": "#E5A884",
+   "main_hex": "#ECA579",
    "sec_hex": "#D4F9E7",
    "root": false,
    "main_vi": "cam quả hồng trầm sáng",
@@ -743,7 +744,7 @@
    "main_before": "#E6AFE0",
    "sec_before": null,
    "reads": "Thu",
-   "main": "cam quả hồng trầm sáng #E5A884",
+   "main": "cam quả hồng trầm sáng #ECA579",
    "sec": "bạc hà nhạt #D4F9E7"
   },
   "dong": {
@@ -759,7 +760,7 @@
    "sec": "kem chanh #F1F0D9"
   },
   "a31": [
-   "Hạ chính~Đông phụ ΔE17"
+   "Hạ chính~Đông phụ ΔE16"
   ]
  },
  "c27": {
@@ -833,40 +834,40 @@
    "sec": "hồng mẫu đơn dịu #BF73A1"
   },
   "ha": {
-   "main_hex": "#EBE68E",
-   "sec_hex": "#F7DDE4",
+   "main_hex": "#ED8D7B",
+   "sec_hex": "#F2ECF6",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
-   "sec_vi": "hồng phấn nhạt",
-   "main_before": null,
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "trắng hồng",
+   "main_before": "#EBE68E",
    "sec_before": "#ECE2FE",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EBE68E",
-   "sec": "hồng phấn nhạt #F7DDE4"
+   "main": "cam san hô sáng #ED8D7B",
+   "sec": "trắng hồng #F2ECF6"
   },
   "thu": {
-   "main_hex": "#D28474",
-   "sec_hex": "#C7E6FD",
+   "main_hex": "#768A4E",
+   "sec_hex": "#CEF7FF",
    "root": false,
-   "main_vi": "đỏ lá phong dịu",
-   "sec_vi": "xanh sương",
-   "main_before": null,
-   "sec_before": null,
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "xanh ngọc sương",
+   "main_before": "#D28474",
+   "sec_before": "#C7E6FD",
    "reads": "Thu",
-   "main": "đỏ lá phong dịu #D28474",
-   "sec": "xanh sương #C7E6FD"
+   "main": "ô liu đậm vừa #768A4E",
+   "sec": "xanh ngọc sương #CEF7FF"
   },
   "dong": {
    "main_hex": "#599FD8",
-   "sec_hex": "#FED4B9",
+   "sec_hex": "#F2D4BE",
    "root": false,
    "main_vi": "xanh da trời dịu",
-   "sec_vi": "đào pastel",
+   "sec_vi": "kem đào",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#FED4B9",
    "reads": "Đông",
    "main": "xanh da trời dịu #599FD8",
-   "sec": "đào pastel #FED4B9"
+   "sec": "kem đào #F2D4BE"
   },
   "a31": []
  },
@@ -887,16 +888,16 @@
    "sec": "đỏ Tết dịu #D67064"
   },
   "ha": {
-   "main_hex": "#F4EC94",
-   "sec_hex": "#C1D0F9",
+   "main_hex": "#FCB17E",
+   "sec_hex": "#F3DAFE",
    "root": false,
-   "main_vi": "vàng chanh sáng",
-   "sec_vi": "xanh sương",
-   "main_before": "#FCB17E",
+   "main_vi": "cam quýt sáng",
+   "sec_vi": "tím khói nhạt",
+   "main_before": null,
    "sec_before": "#FFF3E9",
    "reads": "Hạ",
-   "main": "vàng chanh sáng #F4EC94",
-   "sec": "xanh sương #C1D0F9"
+   "main": "cam quýt sáng #FCB17E",
+   "sec": "tím khói nhạt #F3DAFE"
   },
   "thu": {
    "main_hex": "#78172F",
@@ -912,15 +913,15 @@
   },
   "dong": {
    "main_hex": "#6B6CAE",
-   "sec_hex": "#FFE0E8",
+   "sec_hex": "#FFDADC",
    "root": false,
    "main_vi": "tím than đậm vừa",
-   "sec_vi": "hồng phấn nhạt",
+   "sec_vi": "hồng đất nhạt",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#FFE0E8",
    "reads": "Đông",
    "main": "tím than đậm vừa #6B6CAE",
-   "sec": "hồng phấn nhạt #FFE0E8"
+   "sec": "hồng đất nhạt #FFDADC"
   },
   "a31": []
  },
@@ -942,27 +943,27 @@
   },
   "ha": {
    "main_hex": "#FBA192",
-   "sec_hex": "#F1FAD9",
+   "sec_hex": "#EFF3C9",
    "root": false,
    "main_vi": "cam san hô sáng",
    "sec_vi": "kem chanh",
    "main_before": null,
-   "sec_before": "#EFF3C9",
+   "sec_before": null,
    "reads": "Hạ",
    "main": "cam san hô sáng #FBA192",
-   "sec": "kem chanh #F1FAD9"
+   "sec": "kem chanh #EFF3C9"
   },
   "thu": {
-   "main_hex": "#95AF74",
-   "sec_hex": "#FFE8E9",
+   "main_hex": "#93A86B",
+   "sec_hex": "#F7F3FF",
    "root": false,
-   "main_vi": "rêu dịu",
-   "sec_vi": "hồng đất nhạt",
+   "main_vi": "ô liu dịu",
+   "sec_vi": "trắng hồng",
    "main_before": "#82B976",
    "sec_before": "#FFE7EE",
    "reads": "Thu",
-   "main": "rêu dịu #95AF74",
-   "sec": "hồng đất nhạt #FFE8E9"
+   "main": "ô liu dịu #93A86B",
+   "sec": "trắng hồng #F7F3FF"
   },
   "dong": {
    "main_hex": "#EDDCC6",
@@ -995,16 +996,16 @@
    "sec": "ngà #F3E7CE"
   },
   "ha": {
-   "main_hex": "#FBA773",
-   "sec_hex": "#AED7F5",
+   "main_hex": "#ED9E64",
+   "sec_hex": "#A4D8FE",
    "root": false,
-   "main_vi": "cam đào sáng",
-   "sec_vi": "xanh sương",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "xanh trời dịu",
    "main_before": "#FC9382",
-   "sec_before": "#A4D8FE",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "cam đào sáng #FBA773",
-   "sec": "xanh sương #AED7F5"
+   "main": "cam mơ sáng #ED9E64",
+   "sec": "xanh trời dịu #A4D8FE"
   },
   "thu": {
    "main_hex": "#A5C56A",
@@ -1063,7 +1064,7 @@
    "sec": "lam ngọc đậm #4E5D97"
   },
   "thu": {
-   "main_hex": "#779970",
+   "main_hex": "#7F985E",
    "sec_hex": "#E8C3E4",
    "root": false,
    "main_vi": "rêu dịu",
@@ -1071,7 +1072,7 @@
    "main_before": "#C16B7A",
    "sec_before": "#FCD6E0",
    "reads": "Thu",
-   "main": "rêu dịu #779970",
+   "main": "rêu dịu #7F985E",
    "sec": "hồng tím phấn #E8C3E4"
   },
   "dong": {
@@ -1105,15 +1106,15 @@
    "sec": "xanh sương #ECF7FF"
   },
   "ha": {
-   "main_hex": "#EAE697",
+   "main_hex": "#EFEE8D",
    "sec_hex": "#E6D2F0",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "tím khói nhạt",
-   "main_before": null,
+   "main_before": "#EAE697",
    "sec_before": "#CFB8EC",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
+   "main": "vàng chanh sáng #EFEE8D",
    "sec": "tím khói nhạt #E6D2F0"
   },
   "thu": {
@@ -1148,7 +1149,7 @@
   "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem) — độ rực vừa, như lụa dưới nắng dịu",
   "xuan": {
    "main_hex": "#D390B0",
-   "sec_hex": "#F1F5FF",
+   "sec_hex": "#E4F2F1",
    "root": false,
    "main_vi": "hồng mẫu đơn dịu",
    "sec_vi": "trắng sương",
@@ -1156,19 +1157,19 @@
    "sec_before": "#E0F1FF",
    "reads": "Xuân",
    "main": "hồng mẫu đơn dịu #D390B0",
-   "sec": "trắng sương #F1F5FF"
+   "sec": "trắng sương #E4F2F1"
   },
   "ha": {
-   "main_hex": "#DFE585",
-   "sec_hex": "#FCDEC7",
+   "main_hex": "#E9F090",
+   "sec_hex": "#FFE7EE",
    "root": false,
    "main_vi": "vàng chanh sáng",
-   "sec_vi": "kem đào",
+   "sec_vi": "hồng phấn nhạt",
    "main_before": "#E4E89A",
-   "sec_before": "#FFE7EE",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #DFE585",
-   "sec": "kem đào #FCDEC7"
+   "main": "vàng chanh sáng #E9F090",
+   "sec": "hồng phấn nhạt #FFE7EE"
   },
   "thu": {
    "main_hex": "#E6A189",
@@ -1194,9 +1195,7 @@
    "main": "xanh mòng két sáng #5ECAD6",
    "sec": "tím pastel #E3D6FF"
   },
-  "a31": [
-   "Hạ phụ~Thu chính ΔE16"
-  ]
+  "a31": []
  },
  "m09": {
   "group": "Sắc sảo",
@@ -1269,27 +1268,27 @@
    "sec": "hồng hoa đào dịu #CA7281"
   },
   "ha": {
-   "main_hex": "#E8DB89",
+   "main_hex": "#FFBB92",
    "sec_hex": "#C6F2F4",
    "root": false,
-   "main_vi": "vàng chanh sáng",
+   "main_vi": "cam mơ nhạt",
    "sec_vi": "xanh ngọc sương",
-   "main_before": "#FFBB92",
+   "main_before": null,
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #E8DB89",
+   "main": "cam mơ nhạt #FFBB92",
    "sec": "xanh ngọc sương #C6F2F4"
   },
   "thu": {
-   "main_hex": "#D09075",
+   "main_hex": "#768A4E",
    "sec_hex": "#E5E1D7",
    "root": false,
-   "main_vi": "cam quả hồng trầm dịu",
+   "main_vi": "ô liu đậm vừa",
    "sec_vi": "trắng ngà",
    "main_before": "#955290",
    "sec_before": null,
    "reads": "Thu",
-   "main": "cam quả hồng trầm dịu #D09075",
+   "main": "ô liu đậm vừa #768A4E",
    "sec": "trắng ngà #E5E1D7"
   },
   "dong": {
@@ -1304,50 +1303,46 @@
    "main": "xanh da trời dịu #63A8E2",
    "sec": "tím khói nhạt #E7DAFF"
   },
-  "a31": [
-   "Xuân chính~Hạ chính ΔE16",
-   "Xuân phụ~Thu chính ΔE17",
-   "Hạ chính~Thu phụ ΔE18"
-  ]
+  "a31": []
  },
  "m14": {
   "group": "Dịu dàng",
   "root_season": "dong",
   "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem) — độ rực vừa, như lụa dưới nắng dịu",
   "xuan": {
-   "main_hex": "#F88D92",
+   "main_hex": "#D985B7",
    "sec_hex": "#F2EAFF",
    "root": false,
-   "main_vi": "hồng hoa đào sáng",
+   "main_vi": "hồng mẫu đơn dịu",
    "sec_vi": "tím khói nhạt",
-   "main_before": null,
+   "main_before": "#F88D92",
    "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng hoa đào sáng #F88D92",
+   "main": "hồng mẫu đơn dịu #D985B7",
    "sec": "tím khói nhạt #F2EAFF"
   },
   "ha": {
-   "main_hex": "#EFDF7E",
+   "main_hex": "#F8A86F",
    "sec_hex": "#CDF2E0",
    "root": false,
-   "main_vi": "vàng chanh sáng",
+   "main_vi": "cam mơ sáng",
    "sec_vi": "bạc hà nhạt",
    "main_before": "#EAA16D",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #EFDF7E",
+   "main": "cam mơ sáng #F8A86F",
    "sec": "bạc hà nhạt #CDF2E0"
   },
   "thu": {
-   "main_hex": "#DCA37B",
+   "main_hex": "#D08070",
    "sec_hex": "#A4D8FE",
    "root": false,
-   "main_vi": "cam quả hồng trầm sáng",
+   "main_vi": "đất nung / gạch dịu",
    "sec_vi": "xanh trời nhạt",
    "main_before": "#D28BCC",
    "sec_before": null,
    "reads": "Thu",
-   "main": "cam quả hồng trầm sáng #DCA37B",
+   "main": "đất nung / gạch dịu #D08070",
    "sec": "xanh trời nhạt #A4D8FE"
   },
   "dong": {
@@ -1363,9 +1358,7 @@
    "sec": "ngọc bích dịu #5DAC85"
   },
   "a31": [
-   "Xuân chính~Thu chính ΔE19",
-   "Hạ chính~Đông chính ΔE17",
-   "Thu chính~Đông chính ΔE19"
+   "Hạ chính~Thu chính ΔE17"
   ]
  },
  "m16": {
@@ -1373,31 +1366,31 @@
   "root_season": "dong",
   "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son dịu #CF816E + ngà)",
   "xuan": {
-   "main_hex": "#CB656C",
-   "sec_hex": "#ECE0C8",
+   "main_hex": "#A45586",
+   "sec_hex": "#F5EDE4",
    "root": false,
-   "main_vi": "đỏ thắm đậm vừa",
-   "sec_vi": "ngà",
-   "main_before": null,
-   "sec_before": null,
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "trắng ngà",
+   "main_before": "#CB656C",
+   "sec_before": "#ECE0C8",
    "reads": "Xuân",
-   "main": "đỏ thắm đậm vừa #CB656C",
-   "sec": "ngà #ECE0C8"
+   "main": "hồng mẫu đơn đậm #A45586",
+   "sec": "trắng ngà #F5EDE4"
   },
   "ha": {
-   "main_hex": "#F7A470",
-   "sec_hex": "#C3EFEE",
+   "main_hex": "#E9F090",
+   "sec_hex": "#F9D2B4",
    "root": false,
-   "main_vi": "cam đào sáng",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "kem đào",
    "main_before": "#E09974",
    "sec_before": "#C6F2F4",
    "reads": "Hạ",
-   "main": "cam đào sáng #F7A470",
-   "sec": "xanh ngọc sương #C3EFEE"
+   "main": "vàng chanh sáng #E9F090",
+   "sec": "kem đào #F9D2B4"
   },
   "thu": {
-   "main_hex": "#CA8972",
+   "main_hex": "#D1846A",
    "sec_hex": "#FCD6E0",
    "root": false,
    "main_vi": "đất nung / gạch dịu",
@@ -1405,7 +1398,7 @@
    "main_before": "#925786",
    "sec_before": null,
    "reads": "Thu",
-   "main": "đất nung / gạch dịu #CA8972",
+   "main": "đất nung / gạch dịu #D1846A",
    "sec": "hồng phấn nhạt #FCD6E0"
   },
   "dong": {
@@ -1420,50 +1413,47 @@
    "main": "tím dịu #AD91CA",
    "sec": "ngọc bích dịu #5DAC85"
   },
-  "a31": [
-   "Xuân chính~Thu chính ΔE14",
-   "Hạ chính~Thu chính ΔE12"
-  ]
+  "a31": []
  },
  "m18": {
   "group": "Dịu dàng",
   "root_season": "dong",
   "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem) — độ rực vừa, như lụa dưới nắng dịu",
   "xuan": {
-   "main_hex": "#F79DCB",
-   "sec_hex": "#EAE8BA",
+   "main_hex": "#88BB7C",
+   "sec_hex": "#EDF0E5",
    "root": false,
-   "main_vi": "hồng mẫu đơn sáng",
-   "sec_vi": "kem chanh",
+   "main_vi": "xanh lá non sáng",
+   "sec_vi": "trắng ngà",
    "main_before": "#7FB980",
    "sec_before": "#F3E8BD",
    "reads": "Xuân",
-   "main": "hồng mẫu đơn sáng #F79DCB",
-   "sec": "kem chanh #EAE8BA"
+   "main": "xanh lá non sáng #88BB7C",
+   "sec": "trắng ngà #EDF0E5"
   },
   "ha": {
-   "main_hex": "#E69063",
+   "main_hex": "#FAEA89",
    "sec_hex": "#88D4D3",
    "root": false,
-   "main_vi": "cam đào dịu",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "ngọc dịu",
    "main_before": "#E09974",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam đào dịu #E69063",
+   "main": "vàng chanh sáng #FAEA89",
    "sec": "ngọc dịu #88D4D3"
   },
   "thu": {
-   "main_hex": "#90B78F",
-   "sec_hex": "#F2EAFF",
+   "main_hex": "#ECA579",
+   "sec_hex": "#F7DAF3",
    "root": false,
-   "main_vi": "rêu sáng",
-   "sec_vi": "tím khói nhạt",
+   "main_vi": "cam quả hồng trầm sáng",
+   "sec_vi": "hồng tím phấn",
    "main_before": "#E69EDF",
-   "sec_before": null,
+   "sec_before": "#F2EAFF",
    "reads": "Thu",
-   "main": "rêu sáng #90B78F",
-   "sec": "tím khói nhạt #F2EAFF"
+   "main": "cam quả hồng trầm sáng #ECA579",
+   "sec": "hồng tím phấn #F7DAF3"
   },
   "dong": {
    "main_hex": "#8FBCF1",
@@ -1477,11 +1467,7 @@
    "main": "lam ngọc sáng #8FBCF1",
    "sec": "hồng hoa đào dịu #CA7281"
   },
-  "a31": [
-   "Xuân chính~Đông phụ ΔE16",
-   "Xuân phụ~Thu chính ΔE18",
-   "Hạ phụ~Thu chính ΔE17"
-  ]
+  "a31": []
  },
  "m19": {
   "group": "Dịu dàng",
@@ -1512,28 +1498,28 @@
    "sec": "mòng két đậm vừa #499597"
   },
   "thu": {
-   "main_hex": "#94B68C",
-   "sec_hex": "#D8FFF6",
+   "main_hex": "#ACC183",
+   "sec_hex": "#CFF9EF",
    "root": false,
-   "main_vi": "rêu dịu",
+   "main_vi": "ô liu sáng",
    "sec_vi": "bạc hà nhạt",
    "main_before": "#82B976",
    "sec_before": "#CDF2E0",
    "reads": "Thu",
-   "main": "rêu dịu #94B68C",
-   "sec": "bạc hà nhạt #D8FFF6"
+   "main": "ô liu sáng #ACC183",
+   "sec": "bạc hà nhạt #CFF9EF"
   },
   "dong": {
    "main_hex": "#7ACDF7",
-   "sec_hex": "#F3E7CE",
+   "sec_hex": "#F1E2CF",
    "root": false,
    "main_vi": "xanh băng sáng",
    "sec_vi": "ngà",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#F3E7CE",
    "reads": "Đông",
    "main": "xanh băng sáng #7ACDF7",
-   "sec": "ngà #F3E7CE"
+   "sec": "ngà #F1E2CF"
   },
   "a31": []
  },
@@ -1542,40 +1528,40 @@
   "root_season": "dong",
   "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem) — độ rực vừa, như lụa dưới nắng dịu",
   "xuan": {
-   "main_hex": "#EB8A9C",
+   "main_hex": "#E88696",
    "sec_hex": "#E0F1FF",
    "root": false,
-   "main_vi": "hồng hoa đào sáng",
+   "main_vi": "hồng hoa đào dịu",
    "sec_vi": "xanh sương",
    "main_before": "#7FB980",
    "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng hoa đào sáng #EB8A9C",
+   "main": "hồng hoa đào dịu #E88696",
    "sec": "xanh sương #E0F1FF"
   },
   "ha": {
-   "main_hex": "#EA8B78",
-   "sec_hex": "#C5D8BB",
+   "main_hex": "#F5EC8A",
+   "sec_hex": "#DDF5E9",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "kem chanh",
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "bạc hà nhạt",
    "main_before": "#EFE495",
    "sec_before": "#D4F9E7",
    "reads": "Hạ",
-   "main": "cam san hô dịu #EA8B78",
-   "sec": "kem chanh #C5D8BB"
+   "main": "vàng chanh sáng #F5EC8A",
+   "sec": "bạc hà nhạt #DDF5E9"
   },
   "thu": {
-   "main_hex": "#8AB189",
-   "sec_hex": "#F6C3BA",
+   "main_hex": "#95AF74",
+   "sec_hex": "#FFF2ED",
    "root": false,
    "main_vi": "rêu dịu",
-   "sec_vi": "hồng đất nhạt",
+   "sec_vi": "trắng ngà",
    "main_before": "#E88696",
    "sec_before": "#FFDEE7",
    "reads": "Thu",
-   "main": "rêu dịu #8AB189",
-   "sec": "hồng đất nhạt #F6C3BA"
+   "main": "rêu dịu #95AF74",
+   "sec": "trắng ngà #FFF2ED"
   },
   "dong": {
    "main_hex": "#8B93D0",
@@ -1589,14 +1575,7 @@
    "main": "chàm dịu #8B93D0",
    "sec": "cam quả hồng trầm sáng #D6A585"
   },
-  "a31": [
-   "Xuân chính~Hạ chính ΔE13",
-   "Xuân chính~Thu phụ ΔE16",
-   "Hạ chính~Thu phụ ΔE15",
-   "Hạ chính~Đông phụ ΔE12",
-   "Hạ phụ~Thu chính ΔE13",
-   "Thu phụ~Đông phụ ΔE12"
-  ]
+  "a31": []
  },
  "m22": {
   "group": "Đoan trang",
@@ -1615,28 +1594,28 @@
    "sec": "ngọc bích dịu #5DAC85"
   },
   "ha": {
-   "main_hex": "#E3DC8B",
-   "sec_hex": "#EBF9F5",
+   "main_hex": "#EFEE8D",
+   "sec_hex": "#F6ECE5",
    "root": false,
    "main_vi": "vàng chanh sáng",
-   "sec_vi": "trắng sương",
+   "sec_vi": "trắng ngà",
    "main_before": "#E7E798",
    "sec_before": "#C7E6FD",
    "reads": "Hạ",
-   "main": "vàng chanh sáng #E3DC8B",
-   "sec": "trắng sương #EBF9F5"
+   "main": "vàng chanh sáng #EFEE8D",
+   "sec": "trắng ngà #F6ECE5"
   },
   "thu": {
-   "main_hex": "#C19974",
-   "sec_hex": "#F8ECE6",
+   "main_hex": "#768A4E",
+   "sec_hex": "#E9CCA6",
    "root": false,
-   "main_vi": "hổ phách dịu",
-   "sec_vi": "trắng ngà",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "ngà",
    "main_before": "#925786",
    "sec_before": "#FED4B9",
    "reads": "Thu",
-   "main": "hổ phách dịu #C19974",
-   "sec": "trắng ngà #F8ECE6"
+   "main": "ô liu đậm vừa #768A4E",
+   "sec": "ngà #E9CCA6"
   },
   "dong": {
    "main_hex": "#AA95D2",
@@ -1650,7 +1629,10 @@
    "main": "tím dịu #AA95D2",
    "sec": "hồng phấn nhạt #FCD6E0"
   },
-  "a31": []
+  "a31": [
+   "Xuân phụ~Thu chính ΔE16",
+   "Hạ chính~Thu phụ ΔE16"
+  ]
  },
  "m28": {
   "group": "Đoan trang",
@@ -1669,27 +1651,27 @@
    "sec": "lam ngọc đậm #4E5D97"
   },
   "ha": {
-   "main_hex": "#EAE697",
-   "sec_hex": "#FFF2ED",
+   "main_hex": "#F5EC8A",
+   "sec_hex": "#B6E8D1",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
-   "sec_vi": "trắng ngà",
-   "main_before": null,
+   "main_vi": "vàng chanh sáng",
+   "sec_vi": "bạc hà nhạt",
+   "main_before": "#EAE697",
    "sec_before": "#9AD4B4",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
-   "sec": "trắng ngà #FFF2ED"
+   "main": "vàng chanh sáng #F5EC8A",
+   "sec": "bạc hà nhạt #B6E8D1"
   },
   "thu": {
-   "main_hex": "#899E61",
+   "main_hex": "#96AB6E",
    "sec_hex": "#E7DAFF",
    "root": false,
-   "main_vi": "rêu dịu",
+   "main_vi": "ô liu dịu",
    "sec_vi": "tím khói nhạt",
    "main_before": "#AF71A1",
    "sec_before": null,
    "reads": "Thu",
-   "main": "rêu dịu #899E61",
+   "main": "ô liu dịu #96AB6E",
    "sec": "tím khói nhạt #E7DAFF"
   },
   "dong": {
@@ -1723,40 +1705,40 @@
    "sec": "hồng hoa đào dịu #CA7281"
   },
   "ha": {
-   "main_hex": "#E8DB89",
-   "sec_hex": "#F4C1CF",
+   "main_hex": "#FC9F7F",
+   "sec_hex": "#E5BBE1",
    "root": false,
-   "main_vi": "vàng chanh sáng",
-   "sec_vi": "hồng phấn nhạt",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "dịu tím",
    "main_before": "#D58679",
-   "sec_before": "#E5BBE1",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #E8DB89",
-   "sec": "hồng phấn nhạt #F4C1CF"
+   "main": "cam san hô sáng #FC9F7F",
+   "sec": "dịu tím #E5BBE1"
   },
   "thu": {
-   "main_hex": "#CD926F",
-   "sec_hex": "#EFF6FF",
+   "main_hex": "#768A4E",
+   "sec_hex": "#FFE9E0",
    "root": false,
-   "main_vi": "cam quả hồng trầm dịu",
-   "sec_vi": "trắng sương",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "kem đào",
    "main_before": "#AF71A1",
    "sec_before": "#FFECDE",
    "reads": "Thu",
-   "main": "cam quả hồng trầm dịu #CD926F",
-   "sec": "trắng sương #EFF6FF"
+   "main": "ô liu đậm vừa #768A4E",
+   "sec": "kem đào #FFE9E0"
   },
   "dong": {
    "main_hex": "#11B7BF",
-   "sec_hex": "#B7D4F9",
+   "sec_hex": "#C7E6FD",
    "root": false,
    "main_vi": "xanh mòng két dịu",
    "sec_vi": "xanh sương",
    "main_before": null,
-   "sec_before": "#C7E6FD",
+   "sec_before": null,
    "reads": "Đông",
    "main": "xanh mòng két dịu #11B7BF",
-   "sec": "xanh sương #B7D4F9"
+   "sec": "xanh sương #C7E6FD"
   },
   "a31": []
  },
@@ -1777,7 +1759,7 @@
    "sec": "lam ngọc sáng #A2B9F5"
   },
   "ha": {
-   "main_hex": "#F4EC94",
+   "main_hex": "#F6EC81",
    "sec_hex": "#F6A78F",
    "root": false,
    "main_vi": "vàng chanh sáng",
@@ -1785,32 +1767,32 @@
    "main_before": "#EFE495",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #F4EC94",
+   "main": "vàng chanh sáng #F6EC81",
    "sec": "cam hồng #F6A78F"
   },
   "thu": {
-   "main_hex": "#516325",
-   "sec_hex": "#D5FAE9",
+   "main_hex": "#788C4E",
+   "sec_hex": "#ECF9F3",
    "root": false,
-   "main_vi": "ô liu đậm",
-   "sec_vi": "bạc hà nhạt",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "trắng sương",
    "main_before": "#642B61",
-   "sec_before": null,
+   "sec_before": "#D5FAE9",
    "reads": "Thu",
-   "main": "ô liu đậm #516325",
-   "sec": "bạc hà nhạt #D5FAE9"
+   "main": "ô liu đậm vừa #788C4E",
+   "sec": "trắng sương #ECF9F3"
   },
   "dong": {
-   "main_hex": "#219271",
-   "sec_hex": "#FFE8F9",
+   "main_hex": "#642B61",
+   "sec_hex": "#F8E8FF",
    "root": false,
-   "main_vi": "xanh ngọc đậm vừa",
-   "sec_vi": "hồng tím phấn",
-   "main_before": null,
-   "sec_before": null,
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "tím khói nhạt",
+   "main_before": "#219271",
+   "sec_before": "#FFE8F9",
    "reads": "Đông",
-   "main": "xanh ngọc đậm vừa #219271",
-   "sec": "hồng tím phấn #FFE8F9"
+   "main": "tím mận thẫm #642B61",
+   "sec": "tím khói nhạt #F8E8FF"
   },
   "a31": []
  },
@@ -1844,15 +1826,15 @@
   },
   "thu": {
    "main_hex": "#7C0439",
-   "sec_hex": "#F3ECFF",
+   "sec_hex": "#E7D4E4",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "tím khói nhạt",
+   "sec_vi": "hồng tím phấn",
    "main_before": "#7B1542",
-   "sec_before": null,
+   "sec_before": "#F3ECFF",
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #7C0439",
-   "sec": "tím khói nhạt #F3ECFF"
+   "sec": "hồng tím phấn #E7D4E4"
   },
   "dong": {
    "main_hex": "#3B9174",
@@ -1885,28 +1867,28 @@
    "sec": "xanh sương #D6EDFF"
   },
   "ha": {
-   "main_hex": "#E38755",
-   "sec_hex": "#FFF6D0",
+   "main_hex": "#E5976E",
+   "sec_hex": "#D5E1B5",
    "root": false,
    "main_vi": "cam đào dịu",
-   "sec_vi": "vàng nhạt",
-   "main_before": "#E5976E",
-   "sec_before": null,
+   "sec_vi": "kem chanh",
+   "main_before": null,
+   "sec_before": "#FFF6D0",
    "reads": "Hạ",
-   "main": "cam đào dịu #E38755",
-   "sec": "vàng nhạt #FFF6D0"
+   "main": "cam đào dịu #E5976E",
+   "sec": "kem chanh #D5E1B5"
   },
   "thu": {
-   "main_hex": "#5D7133",
-   "sec_hex": "#B6F2F1",
+   "main_hex": "#6A7E40",
+   "sec_hex": "#D5FAE9",
    "root": false,
-   "main_vi": "ô liu đậm",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "bạc hà nhạt",
    "main_before": "#4E7D43",
-   "sec_before": "#D5FAE9",
+   "sec_before": null,
    "reads": "Thu",
-   "main": "ô liu đậm #5D7133",
-   "sec": "xanh ngọc sương #B6F2F1"
+   "main": "ô liu đậm vừa #6A7E40",
+   "sec": "bạc hà nhạt #D5FAE9"
   },
   "dong": {
    "main_hex": "#634EA2",
@@ -1939,16 +1921,16 @@
    "sec": "kem đào #EEC9B5"
   },
   "ha": {
-   "main_hex": "#EAE697",
-   "sec_hex": "#F7F3FF",
+   "main_hex": "#EFEE8D",
+   "sec_hex": "#F6F3FE",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "trắng hồng",
-   "main_before": null,
+   "main_before": "#EAE697",
    "sec_before": "#C9F5F7",
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
-   "sec": "trắng hồng #F7F3FF"
+   "main": "vàng chanh sáng #EFEE8D",
+   "sec": "trắng hồng #F6F3FE"
   },
   "thu": {
    "main_hex": "#6A0235",
@@ -1982,39 +1964,39 @@
   "band": "chính đậm quý phái tông ngọc trầm + phụ vàng nhạt / ngà (tím than, xanh ngọc sẫm + vàng nhạt)",
   "xuan": {
    "main_hex": "#2F5D24",
-   "sec_hex": "#CAEFDD",
+   "sec_hex": "#C0F2DB",
    "root": false,
    "main_vi": "xanh lá xuân thẫm",
    "sec_vi": "bạc hà nhạt",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#CAEFDD",
    "reads": "Xuân",
    "main": "xanh lá xuân thẫm #2F5D24",
-   "sec": "bạc hà nhạt #CAEFDD"
+   "sec": "bạc hà nhạt #C0F2DB"
   },
   "ha": {
-   "main_hex": "#D88457",
-   "sec_hex": "#D8DCB2",
+   "main_hex": "#F39D70",
+   "sec_hex": "#ECF2DC",
    "root": false,
-   "main_vi": "cam đào dịu",
+   "main_vi": "cam đào sáng",
    "sec_vi": "kem chanh",
    "main_before": "#E09974",
-   "sec_before": null,
+   "sec_before": "#D8DCB2",
    "reads": "Hạ",
-   "main": "cam đào dịu #D88457",
-   "sec": "kem chanh #D8DCB2"
+   "main": "cam đào sáng #F39D70",
+   "sec": "kem chanh #ECF2DC"
   },
   "thu": {
    "main_hex": "#782134",
-   "sec_hex": "#FED8EC",
+   "sec_hex": "#F7CFD1",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "hồng tím phấn",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#852D37",
    "sec_before": "#FFD9E3",
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #782134",
-   "sec": "hồng tím phấn #FED8EC"
+   "sec": "hồng đất nhạt #F7CFD1"
   },
   "dong": {
    "main_hex": "#794096",
@@ -2059,16 +2041,16 @@
    "sec": "tím mận trầm #7F4073"
   },
   "thu": {
-   "main_hex": "#5B7B4C",
-   "sec_hex": "#FFEAEF",
+   "main_hex": "#5F7A48",
+   "sec_hex": "#FEE7F3",
    "root": false,
    "main_vi": "rêu đậm",
-   "sec_vi": "hồng phấn nhạt",
+   "sec_vi": "hồng tím phấn",
    "main_before": "#4E7D43",
-   "sec_before": null,
+   "sec_before": "#FFEAEF",
    "reads": "Thu",
-   "main": "rêu đậm #5B7B4C",
-   "sec": "hồng phấn nhạt #FFEAEF"
+   "main": "rêu đậm #5F7A48",
+   "sec": "hồng tím phấn #FEE7F3"
   },
   "dong": {
    "main_hex": "#3686A1",
@@ -2113,16 +2095,16 @@
    "sec": "bạc hà nhạt #D0F5E4"
   },
   "thu": {
-   "main_hex": "#80A07E",
-   "sec_hex": "#D6D6FE",
+   "main_hex": "#74915E",
+   "sec_hex": "#E9DFFE",
    "root": false,
-   "main_vi": "rêu dịu",
+   "main_vi": "rêu đậm vừa",
    "sec_vi": "tím khói nhạt",
    "main_before": "#C592B9",
    "sec_before": "#EFE6FF",
    "reads": "Thu",
-   "main": "rêu dịu #80A07E",
-   "sec": "tím khói nhạt #D6D6FE"
+   "main": "rêu đậm vừa #74915E",
+   "sec": "tím khói nhạt #E9DFFE"
   },
   "dong": {
    "main_hex": "#D1E9FB",
@@ -2144,39 +2126,39 @@
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
    "main_hex": "#D48BB1",
-   "sec_hex": "#FEDEC4",
+   "sec_hex": "#FFE9E0",
    "root": false,
    "main_vi": "hồng mẫu đơn dịu",
    "sec_vi": "kem đào",
    "main_before": "#8CBE81",
-   "sec_before": null,
+   "sec_before": "#FEDEC4",
    "reads": "Xuân",
    "main": "hồng mẫu đơn dịu #D48BB1",
-   "sec": "kem đào #FEDEC4"
+   "sec": "kem đào #FFE9E0"
   },
   "ha": {
-   "main_hex": "#EB8C79",
-   "sec_hex": "#DCFFEE",
+   "main_hex": "#DE8269",
+   "sec_hex": "#88D4D3",
    "root": false,
    "main_vi": "cam san hô dịu",
-   "sec_vi": "bạc hà nhạt",
+   "sec_vi": "ngọc dịu",
    "main_before": "#D58679",
-   "sec_before": "#88D4D3",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "cam san hô dịu #EB8C79",
-   "sec": "bạc hà nhạt #DCFFEE"
+   "main": "cam san hô dịu #DE8269",
+   "sec": "ngọc dịu #88D4D3"
   },
   "thu": {
-   "main_hex": "#9BB984",
-   "sec_hex": "#F0EFE4",
+   "main_hex": "#A3C18C",
+   "sec_hex": "#E9CCA6",
    "root": false,
    "main_vi": "rêu sáng",
-   "sec_vi": "trắng ngà",
+   "sec_vi": "ngà",
    "main_before": "#C592B9",
    "sec_before": "#F6ECC0",
    "reads": "Thu",
-   "main": "rêu sáng #9BB984",
-   "sec": "trắng ngà #F0EFE4"
+   "main": "rêu sáng #A3C18C",
+   "sec": "ngà #E9CCA6"
   },
   "dong": {
    "main_hex": "#3E5079",
@@ -2198,39 +2180,39 @@
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
    "main_hex": "#D48DA0",
-   "sec_hex": "#FFF1F2",
+   "sec_hex": "#DCD0B0",
    "root": false,
    "main_vi": "hồng dịu",
-   "sec_vi": "trắng hồng",
+   "sec_vi": "trắng ngà",
    "main_before": null,
    "sec_before": "#E8E4DA",
    "reads": "Xuân",
    "main": "hồng dịu #D48DA0",
-   "sec": "trắng hồng #FFF1F2"
+   "sec": "trắng ngà #DCD0B0"
   },
   "ha": {
    "main_hex": "#F49E70",
-   "sec_hex": "#EADEFF",
+   "sec_hex": "#F8DED9",
    "root": false,
    "main_vi": "cam đào sáng",
-   "sec_vi": "tím khói nhạt",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#E9A17C",
-   "sec_before": null,
+   "sec_before": "#EADEFF",
    "reads": "Hạ",
    "main": "cam đào sáng #F49E70",
-   "sec": "tím khói nhạt #EADEFF"
+   "sec": "hồng đất nhạt #F8DED9"
   },
   "thu": {
-   "main_hex": "#74915E",
-   "sec_hex": "#CEF7FF",
+   "main_hex": "#7C9965",
+   "sec_hex": "#DAE4FF",
    "root": false,
-   "main_vi": "rêu đậm vừa",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "rêu dịu",
+   "sec_vi": "xanh sương",
    "main_before": "#68985D",
    "sec_before": "#CCE9FF",
    "reads": "Thu",
-   "main": "rêu đậm vừa #74915E",
-   "sec": "xanh ngọc sương #CEF7FF"
+   "main": "rêu dịu #7C9965",
+   "sec": "xanh sương #DAE4FF"
   },
   "dong": {
    "main_hex": "#ABDBC4",
@@ -2264,27 +2246,27 @@
   },
   "ha": {
    "main_hex": "#F3A976",
-   "sec_hex": "#B6E8D1",
+   "sec_hex": "#9AD4B4",
    "root": false,
    "main_vi": "cam quýt sáng",
-   "sec_vi": "bạc hà nhạt",
+   "sec_vi": "bạc hà dịu",
    "main_before": null,
-   "sec_before": "#9AD4B4",
+   "sec_before": null,
    "reads": "Hạ",
    "main": "cam quýt sáng #F3A976",
-   "sec": "bạc hà nhạt #B6E8D1"
+   "sec": "bạc hà dịu #9AD4B4"
   },
   "thu": {
-   "main_hex": "#93A869",
-   "sec_hex": "#ECF7FF",
+   "main_hex": "#6A7E40",
+   "sec_hex": "#B7D6EC",
    "root": false,
-   "main_vi": "ô liu dịu",
-   "sec_vi": "trắng sương",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "xanh sương",
    "main_before": "#672863",
    "sec_before": "#E0F1FF",
    "reads": "Thu",
-   "main": "ô liu dịu #93A869",
-   "sec": "trắng sương #ECF7FF"
+   "main": "ô liu đậm vừa #6A7E40",
+   "sec": "xanh sương #B7D6EC"
   },
   "dong": {
    "main_hex": "#668ED8",
@@ -2317,7 +2299,7 @@
    "sec": "kem đào #FBD6C2"
   },
   "ha": {
-   "main_hex": "#E0D880",
+   "main_hex": "#F6EC81",
    "sec_hex": "#004F38",
    "root": false,
    "main_vi": "vàng chanh sáng",
@@ -2325,7 +2307,7 @@
    "main_before": "#E58870",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #E0D880",
+   "main": "vàng chanh sáng #F6EC81",
    "sec": "xanh ngọc trầm #004F38"
   },
   "thu": {
@@ -2383,16 +2365,16 @@
    "sec": "lam ngọc trầm #3E5A8D"
   },
   "thu": {
-   "main_hex": "#D0897B",
-   "sec_hex": "#F3DAFE",
+   "main_hex": "#93A869",
+   "sec_hex": "#FFBDC0",
    "root": false,
-   "main_vi": "đất nung / gạch dịu",
-   "sec_vi": "tím khói nhạt",
+   "main_vi": "ô liu dịu",
+   "sec_vi": "hồng hoa đào sáng",
    "main_before": "#D88669",
    "sec_before": "#FBD9F2",
    "reads": "Thu",
-   "main": "đất nung / gạch dịu #D0897B",
-   "sec": "tím khói nhạt #F3DAFE"
+   "main": "ô liu dịu #93A869",
+   "sec": "hồng hoa đào sáng #FFBDC0"
   },
   "dong": {
    "main_hex": "#AD6EB9",
@@ -2406,7 +2388,10 @@
    "main": "tím mận đậm vừa #AD6EB9",
    "sec": "đỏ rượu trầm đậm #A63F59"
   },
-  "a31": []
+  "a31": [
+   "Xuân chính~Thu chính ΔE18",
+   "Hạ chính~Thu chính ΔE18"
+  ]
  },
  "s19": {
   "group": "Kiêu kỳ",
@@ -2425,28 +2410,28 @@
    "sec": "ngọc bích sáng #B2D3C6"
   },
   "ha": {
-   "main_hex": "#DA8375",
+   "main_hex": "#F89884",
    "sec_hex": "#CFDAFA",
    "root": false,
-   "main_vi": "cam san hô dịu",
+   "main_vi": "cam san hô sáng",
    "sec_vi": "xanh sương",
-   "main_before": null,
+   "main_before": "#DA8375",
    "sec_before": "#E4D6FD",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DA8375",
+   "main": "cam san hô sáng #F89884",
    "sec": "xanh sương #CFDAFA"
   },
   "thu": {
-   "main_hex": "#5B7B4C",
-   "sec_hex": "#FEDEC4",
+   "main_hex": "#5F7A48",
+   "sec_hex": "#FEEEC1",
    "root": false,
    "main_vi": "rêu đậm",
-   "sec_vi": "kem đào",
+   "sec_vi": "trắng ngà",
    "main_before": "#70366C",
-   "sec_before": null,
+   "sec_before": "#FEDEC4",
    "reads": "Thu",
-   "main": "rêu đậm #5B7B4C",
-   "sec": "kem đào #FEDEC4"
+   "main": "rêu đậm #5F7A48",
+   "sec": "trắng ngà #FEEEC1"
   },
   "dong": {
    "main_hex": "#70366C",
@@ -2479,28 +2464,28 @@
    "sec": "kem chanh #E5E9BF"
   },
   "ha": {
-   "main_hex": "#D88457",
+   "main_hex": "#E1897B",
    "sec_hex": "#D0F5E4",
    "root": false,
-   "main_vi": "cam đào dịu",
+   "main_vi": "cam san hô dịu",
    "sec_vi": "bạc hà nhạt",
-   "main_before": "#E1897B",
+   "main_before": null,
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam đào dịu #D88457",
+   "main": "cam san hô dịu #E1897B",
    "sec": "bạc hà nhạt #D0F5E4"
   },
   "thu": {
    "main_hex": "#782134",
-   "sec_hex": "#CFDAFA",
+   "sec_hex": "#ECEDFF",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "xanh sương",
+   "sec_vi": "tím khói nhạt",
    "main_before": "#852D37",
    "sec_before": "#EADEFF",
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #782134",
-   "sec": "xanh sương #CFDAFA"
+   "sec": "tím khói nhạt #ECEDFF"
   },
   "dong": {
    "main_hex": "#0A7D87",
@@ -2587,16 +2572,16 @@
    "sec": "tím khói nhạt #EADEFF"
   },
   "ha": {
-   "main_hex": "#E3F482",
-   "sec_hex": "#F4C1CF",
+   "main_hex": "#E1EA93",
+   "sec_hex": "#FECEC5",
    "root": false,
-   "main_vi": "vàng chanh sáng",
-   "sec_vi": "hồng phấn nhạt",
-   "main_before": "#E1EA93",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "hồng đất nhạt",
+   "main_before": null,
    "sec_before": "#FEDEC4",
    "reads": "Hạ",
-   "main": "vàng chanh sáng #E3F482",
-   "sec": "hồng phấn nhạt #F4C1CF"
+   "main": "vàng chanh non nhạt #E1EA93",
+   "sec": "hồng đất nhạt #FECEC5"
   },
   "thu": {
    "main_hex": "#76213E",
@@ -2641,16 +2626,16 @@
    "sec": "hồng phấn nhạt #FFF1F5"
   },
   "ha": {
-   "main_hex": "#DA8375",
-   "sec_hex": "#FAEECD",
+   "main_hex": "#FB9A5B",
+   "sec_hex": "#EFC2DA",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "trắng ngà",
-   "main_before": null,
+   "main_vi": "cam đào sáng",
+   "sec_vi": "hồng tím phấn",
+   "main_before": "#DA8375",
    "sec_before": "#FEDEC4",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DA8375",
-   "sec": "trắng ngà #FAEECD"
+   "main": "cam đào sáng #FB9A5B",
+   "sec": "hồng tím phấn #EFC2DA"
   },
   "thu": {
    "main_hex": "#76213E",
@@ -2695,16 +2680,16 @@
    "sec": "bạc hà pastel #BCEBD1"
   },
   "ha": {
-   "main_hex": "#DF8071",
-   "sec_hex": "#D6D4A7",
+   "main_hex": "#FE947F",
+   "sec_hex": "#F6F6EB",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "kem chanh",
-   "main_before": null,
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "trắng ngà",
+   "main_before": "#DF8071",
    "sec_before": "#F0E5BA",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DF8071",
-   "sec": "kem chanh #D6D4A7"
+   "main": "cam san hô sáng #FE947F",
+   "sec": "trắng ngà #F6F6EB"
   },
   "thu": {
    "main_hex": "#882655",
@@ -2730,7 +2715,9 @@
    "main": "tím than đậm #5D5E9E",
    "sec": "xanh sương #CCE9FF"
   },
-  "a31": []
+  "a31": [
+   "Hạ chính~Thu phụ ΔE17"
+  ]
  },
  "s25": {
   "group": "Kiêu kỳ",
@@ -2738,27 +2725,27 @@
   "band": "chính đậm quý phái tông ngọc trầm + phụ vàng nhạt / ngà (tím than, xanh ngọc sẫm + vàng nhạt)",
   "xuan": {
    "main_hex": "#2F5D24",
-   "sec_hex": "#F8D7BE",
+   "sec_hex": "#FEDEC4",
    "root": false,
    "main_vi": "xanh lá xuân thẫm",
-   "sec_vi": "kem đào",
+   "sec_vi": "kem mơ",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#F8D7BE",
    "reads": "Xuân",
    "main": "xanh lá xuân thẫm #2F5D24",
-   "sec": "kem đào #F8D7BE"
+   "sec": "kem mơ #FEDEC4"
   },
   "ha": {
-   "main_hex": "#DA8375",
-   "sec_hex": "#F4F0E6",
+   "main_hex": "#FE9571",
+   "sec_hex": "#E1FCF6",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "trắng ngà",
-   "main_before": null,
-   "sec_before": null,
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "bạc hà nhạt",
+   "main_before": "#DA8375",
+   "sec_before": "#F4F0E6",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DA8375",
-   "sec": "trắng ngà #F4F0E6"
+   "main": "cam san hô sáng #FE9571",
+   "sec": "bạc hà nhạt #E1FCF6"
   },
   "thu": {
    "main_hex": "#782134",
@@ -2804,15 +2791,15 @@
   },
   "ha": {
    "main_hex": "#FFBB92",
-   "sec_hex": "#CFB8EC",
+   "sec_hex": "#BED3EF",
    "root": false,
    "main_vi": "cam mơ nhạt",
-   "sec_vi": "tím hoa cà dịu",
+   "sec_vi": "xanh sương",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#CFB8EC",
    "reads": "Hạ",
    "main": "cam mơ nhạt #FFBB92",
-   "sec": "tím hoa cà dịu #CFB8EC"
+   "sec": "xanh sương #BED3EF"
   },
   "thu": {
    "main_hex": "#8FA771",
@@ -2857,28 +2844,28 @@
    "sec": "kem đào #FEDEC4"
   },
   "ha": {
-   "main_hex": "#DD8363",
-   "sec_hex": "#9AD4B4",
+   "main_hex": "#EB8C79",
+   "sec_hex": "#C0DAB3",
    "root": false,
    "main_vi": "cam san hô dịu",
-   "sec_vi": "bạc hà dịu",
+   "sec_vi": "kem chanh",
    "main_before": "#D3896B",
-   "sec_before": null,
+   "sec_before": "#9AD4B4",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DD8363",
-   "sec": "bạc hà dịu #9AD4B4"
+   "main": "cam san hô dịu #EB8C79",
+   "sec": "kem chanh #C0DAB3"
   },
   "thu": {
-   "main_hex": "#7E8D65",
-   "sec_hex": "#ECF7FF",
+   "main_hex": "#7C8F58",
+   "sec_hex": "#A3DEDD",
    "root": false,
-   "main_vi": "rêu đậm vừa",
-   "sec_vi": "xanh sương",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "xanh ngọc sương",
    "main_before": "#F7ACBC",
-   "sec_before": null,
+   "sec_before": "#ECF7FF",
    "reads": "Thu",
-   "main": "rêu đậm vừa #7E8D65",
-   "sec": "xanh sương #ECF7FF"
+   "main": "ô liu đậm vừa #7C8F58",
+   "sec": "xanh ngọc sương #A3DEDD"
   },
   "dong": {
    "main_hex": "#C1B0F0",
@@ -2899,40 +2886,40 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#DE879F",
-   "sec_hex": "#B6DDBD",
+   "main_hex": "#E4849D",
+   "sec_hex": "#FECEC5",
    "root": false,
-   "main_vi": "hồng dịu",
-   "sec_vi": "bạc hà nhạt",
-   "main_before": null,
+   "main_vi": "hồng xuân dịu",
+   "sec_vi": "hồng đất nhạt",
+   "main_before": "#DE879F",
    "sec_before": "#BCEBD1",
    "reads": "Xuân",
-   "main": "hồng dịu #DE879F",
-   "sec": "bạc hà nhạt #B6DDBD"
+   "main": "hồng xuân dịu #E4849D",
+   "sec": "hồng đất nhạt #FECEC5"
   },
   "ha": {
-   "main_hex": "#E79265",
+   "main_hex": "#E3955B",
    "sec_hex": "#CFB8EC",
    "root": false,
-   "main_vi": "cam đào dịu",
+   "main_vi": "cam mơ dịu",
    "sec_vi": "tím hoa cà dịu",
    "main_before": "#E09974",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam đào dịu #E79265",
+   "main": "cam mơ dịu #E3955B",
    "sec": "tím hoa cà dịu #CFB8EC"
   },
   "thu": {
-   "main_hex": "#809862",
-   "sec_hex": "#EFEBE1",
+   "main_hex": "#83A06D",
+   "sec_hex": "#E7D8C5",
    "root": false,
    "main_vi": "rêu dịu",
-   "sec_vi": "trắng ngà",
+   "sec_vi": "ngà",
    "main_before": "#76AC6A",
-   "sec_before": null,
+   "sec_before": "#EFEBE1",
    "reads": "Thu",
-   "main": "rêu dịu #809862",
-   "sec": "trắng ngà #EFEBE1"
+   "main": "rêu dịu #83A06D",
+   "sec": "ngà #E7D8C5"
   },
   "dong": {
    "main_hex": "#A5D6ED",
@@ -3007,40 +2994,40 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#D57577",
+   "main_hex": "#7AAB6F",
    "sec_hex": "#AFEBEE",
    "root": false,
-   "main_vi": "hồng hoa đào dịu",
+   "main_vi": "xanh lá xuân dịu",
    "sec_vi": "ngọc pastel",
-   "main_before": "#7AAB6F",
+   "main_before": null,
    "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng hoa đào dịu #D57577",
+   "main": "xanh lá xuân dịu #7AAB6F",
    "sec": "ngọc pastel #AFEBEE"
   },
   "ha": {
-   "main_hex": "#F39F6C",
-   "sec_hex": "#F4C1CF",
+   "main_hex": "#F1A167",
+   "sec_hex": "#F6C2C4",
    "root": false,
-   "main_vi": "cam đào sáng",
-   "sec_vi": "hồng phấn nhạt",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#E1EA93",
    "sec_before": "#EEB0C2",
    "reads": "Hạ",
-   "main": "cam đào sáng #F39F6C",
-   "sec": "hồng phấn nhạt #F4C1CF"
+   "main": "cam mơ sáng #F1A167",
+   "sec": "hồng đất nhạt #F6C2C4"
   },
   "thu": {
-   "main_hex": "#9BB984",
-   "sec_hex": "#F4E0D1",
+   "main_hex": "#D48772",
+   "sec_hex": "#FFF3E9",
    "root": false,
-   "main_vi": "rêu sáng",
-   "sec_vi": "kem đào",
+   "main_vi": "đất nung / gạch dịu",
+   "sec_vi": "trắng ngà",
    "main_before": "#DF8C6F",
    "sec_before": "#FEDEC4",
    "reads": "Thu",
-   "main": "rêu sáng #9BB984",
-   "sec": "kem đào #F4E0D1"
+   "main": "đất nung / gạch dịu #D48772",
+   "sec": "trắng ngà #FFF3E9"
   },
   "dong": {
    "main_hex": "#7C95CE",
@@ -3054,7 +3041,10 @@
    "main": "lam ngọc dịu #7C95CE",
    "sec": "trắng sương #CDDDE4"
   },
-  "a31": []
+  "a31": [
+   "Hạ chính~Thu chính ΔE13",
+   "Hạ phụ~Thu chính ΔE18"
+  ]
  },
  "s31": {
   "group": "Lạnh lùng",
@@ -3062,27 +3052,27 @@
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
    "main_hex": "#BA6C76",
-   "sec_hex": "#EDF0E5",
+   "sec_hex": "#E8E4DA",
    "root": false,
    "main_vi": "hồng hoa đào đậm vừa",
    "sec_vi": "trắng ngà",
    "main_before": "#8CBE81",
-   "sec_before": "#E8E4DA",
+   "sec_before": null,
    "reads": "Xuân",
    "main": "hồng hoa đào đậm vừa #BA6C76",
-   "sec": "trắng ngà #EDF0E5"
+   "sec": "trắng ngà #E8E4DA"
   },
   "ha": {
-   "main_hex": "#F39F6C",
-   "sec_hex": "#EED3D4",
+   "main_hex": "#F79B7B",
+   "sec_hex": "#FBBDCF",
    "root": false,
-   "main_vi": "cam đào sáng",
-   "sec_vi": "hồng đất nhạt",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "hồng dịu",
    "main_before": "#E7A277",
-   "sec_before": "#FBBDCF",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "cam đào sáng #F39F6C",
-   "sec": "hồng đất nhạt #EED3D4"
+   "main": "cam san hô sáng #F79B7B",
+   "sec": "hồng dịu #FBBDCF"
   },
   "thu": {
    "main_hex": "#9BB984",
@@ -3115,40 +3105,40 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#DA86B8",
+   "main_hex": "#73AC74",
    "sec_hex": "#FFE3EA",
    "root": false,
-   "main_vi": "hồng mẫu đơn dịu",
+   "main_vi": "xanh lá xuân dịu",
    "sec_vi": "hồng phấn nhạt",
-   "main_before": "#73AC74",
+   "main_before": null,
    "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng mẫu đơn dịu #DA86B8",
+   "main": "xanh lá xuân dịu #73AC74",
    "sec": "hồng phấn nhạt #FFE3EA"
   },
   "ha": {
    "main_hex": "#FFBB92",
-   "sec_hex": "#EBF0C6",
+   "sec_hex": "#D5E1B5",
    "root": false,
    "main_vi": "cam mơ nhạt",
    "sec_vi": "kem chanh",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#EBF0C6",
    "reads": "Hạ",
    "main": "cam mơ nhạt #FFBB92",
-   "sec": "kem chanh #EBF0C6"
+   "sec": "kem chanh #D5E1B5"
   },
   "thu": {
-   "main_hex": "#80A07E",
-   "sec_hex": "#A3DEDD",
+   "main_hex": "#D48676",
+   "sec_hex": "#DCFFEE",
    "root": false,
-   "main_vi": "rêu dịu",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "đất nung / gạch dịu",
+   "sec_vi": "bạc hà nhạt",
    "main_before": "#C592B9",
    "sec_before": "#CAEFDD",
    "reads": "Thu",
-   "main": "rêu dịu #80A07E",
-   "sec": "xanh ngọc sương #A3DEDD"
+   "main": "đất nung / gạch dịu #D48676",
+   "sec": "bạc hà nhạt #DCFFEE"
   },
   "dong": {
    "main_hex": "#5D8DBD",
@@ -3162,7 +3152,10 @@
    "main": "lam ngọc đậm vừa #5D8DBD",
    "sec": "lam ngọc sáng #B8CBF3"
   },
-  "a31": []
+  "a31": [
+   "Xuân chính~Hạ phụ ΔE19",
+   "Hạ chính~Thu chính ΔE16"
+  ]
  },
  "s33": {
   "group": "Quyến rũ",
@@ -3182,18 +3175,18 @@
   },
   "ha": {
    "main_hex": "#D88766",
-   "sec_hex": "#E0F1FF",
+   "sec_hex": "#E4F0FF",
    "root": false,
    "main_vi": "cam đào dịu",
    "sec_vi": "xanh sương",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#E0F1FF",
    "reads": "Hạ",
    "main": "cam đào dịu #D88766",
-   "sec": "xanh sương #E0F1FF"
+   "sec": "xanh sương #E4F0FF"
   },
   "thu": {
-   "main_hex": "#4E6022",
+   "main_hex": "#617437",
    "sec_hex": "#FEDEC4",
    "root": false,
    "main_vi": "ô liu đậm",
@@ -3201,7 +3194,7 @@
    "main_before": "#4A7E3E",
    "sec_before": null,
    "reads": "Thu",
-   "main": "ô liu đậm #4E6022",
+   "main": "ô liu đậm #617437",
    "sec": "kem đào #FEDEC4"
   },
   "dong": {
@@ -3301,16 +3294,16 @@
    "sec": "lam ngọc trầm #3E5A8D"
   },
   "thu": {
-   "main_hex": "#7E9354",
-   "sec_hex": "#DCD0B0",
+   "main_hex": "#617437",
+   "sec_hex": "#E2DAC5",
    "root": false,
-   "main_vi": "ô liu đậm vừa",
+   "main_vi": "ô liu đậm",
    "sec_vi": "trắng ngà",
    "main_before": "#993842",
    "sec_before": "#E9DDC4",
    "reads": "Thu",
-   "main": "ô liu đậm vừa #7E9354",
-   "sec": "trắng ngà #DCD0B0"
+   "main": "ô liu đậm #617437",
+   "sec": "trắng ngà #E2DAC5"
   },
   "dong": {
    "main_hex": "#8586D0",
@@ -3356,15 +3349,15 @@
   },
   "thu": {
    "main_hex": "#6A7E40",
-   "sec_hex": "#BCEBD1",
+   "sec_hex": "#B6DDBD",
    "root": false,
    "main_vi": "ô liu đậm vừa",
-   "sec_vi": "bạc hà pastel",
+   "sec_vi": "bạc hà nhạt",
    "main_before": "#9E5B99",
-   "sec_before": null,
+   "sec_before": "#BCEBD1",
    "reads": "Thu",
    "main": "ô liu đậm vừa #6A7E40",
-   "sec": "bạc hà pastel #BCEBD1"
+   "sec": "bạc hà nhạt #B6DDBD"
   },
   "dong": {
    "main_hex": "#039D7F",
@@ -3464,15 +3457,15 @@
   },
   "thu": {
    "main_hex": "#6A7E40",
-   "sec_hex": "#F4D2EB",
+   "sec_hex": "#F2CDEE",
    "root": false,
    "main_vi": "ô liu đậm vừa",
    "sec_vi": "hồng tím phấn",
    "main_before": "#4A7E3E",
-   "sec_before": null,
+   "sec_before": "#F4D2EB",
    "reads": "Thu",
    "main": "ô liu đậm vừa #6A7E40",
-   "sec": "hồng tím phấn #F4D2EB"
+   "sec": "hồng tím phấn #F2CDEE"
   },
   "dong": {
    "main_hex": "#7C7DC7",
@@ -3518,15 +3511,15 @@
   },
   "thu": {
    "main_hex": "#78172F",
-   "sec_hex": "#F6C2C4",
+   "sec_hex": "#FFF1F5",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "hồng đất nhạt",
+   "sec_vi": "hồng phấn nhạt",
    "main_before": "#993842",
-   "sec_before": "#FFF1F5",
+   "sec_before": null,
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #78172F",
-   "sec": "hồng đất nhạt #F6C2C4"
+   "sec": "hồng phấn nhạt #FFF1F5"
   },
   "dong": {
    "main_hex": "#7E66A6",
@@ -3548,39 +3541,39 @@
   "band": "chính ĐẬM nhờ trầm (tối hơn, không rực hơn), tương phản mạnh với phụ rất sáng (đỏ thẫm + trắng ngà)",
   "xuan": {
    "main_hex": "#3D6B32",
-   "sec_hex": "#DCD0B0",
+   "sec_hex": "#FFF3E4",
    "root": false,
    "main_vi": "xanh lá xuân đậm",
-   "sec_vi": "trắng ngà",
+   "sec_vi": "ngà",
    "main_before": null,
    "sec_before": "#FBEFD6",
    "reads": "Xuân",
    "main": "xanh lá xuân đậm #3D6B32",
-   "sec": "trắng ngà #DCD0B0"
+   "sec": "ngà #FFF3E4"
   },
   "ha": {
-   "main_hex": "#DF8071",
-   "sec_hex": "#F2ECF6",
+   "main_hex": "#EF7D55",
+   "sec_hex": "#FFE5FB",
    "root": false,
    "main_vi": "cam san hô dịu",
-   "sec_vi": "trắng hồng",
-   "main_before": null,
+   "sec_vi": "hồng tím phấn",
+   "main_before": "#DF8071",
    "sec_before": "#F3ECFF",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DF8071",
-   "sec": "trắng hồng #F2ECF6"
+   "main": "cam san hô dịu #EF7D55",
+   "sec": "hồng tím phấn #FFE5FB"
   },
   "thu": {
    "main_hex": "#76183A",
-   "sec_hex": "#ECF9F3",
+   "sec_hex": "#D2E0CC",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "trắng sương",
+   "sec_vi": "kem chanh",
    "main_before": "#7F447B",
    "sec_before": "#D5FAE9",
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #76183A",
-   "sec": "trắng sương #ECF9F3"
+   "sec": "kem chanh #D2E0CC"
   },
   "dong": {
    "main_hex": "#4384B1",
@@ -3602,27 +3595,27 @@
   "band": "chính ĐẬM nhờ trầm (tối hơn, không rực hơn), tương phản mạnh với phụ rất sáng (đỏ thẫm + trắng ngà)",
   "xuan": {
    "main_hex": "#2C5A21",
-   "sec_hex": "#ECF7FF",
+   "sec_hex": "#E3F3FF",
    "root": false,
    "main_vi": "xanh lá xuân thẫm",
-   "sec_vi": "trắng sương",
+   "sec_vi": "xanh sương",
    "main_before": null,
-   "sec_before": "#E3F3FF",
+   "sec_before": null,
    "reads": "Xuân",
    "main": "xanh lá xuân thẫm #2C5A21",
-   "sec": "trắng sương #ECF7FF"
+   "sec": "xanh sương #E3F3FF"
   },
   "ha": {
-   "main_hex": "#F9ED6B",
-   "sec_hex": "#AED7F5",
+   "main_hex": "#ED7F4D",
+   "sec_hex": "#79466F",
    "root": false,
-   "main_vi": "vàng chanh sáng",
-   "sec_vi": "xanh sương",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "tím mận trầm",
    "main_before": "#E6A375",
-   "sec_before": "#79466F",
+   "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh sáng #F9ED6B",
-   "sec": "xanh sương #AED7F5"
+   "main": "cam đào dịu #ED7F4D",
+   "sec": "tím mận trầm #79466F"
   },
   "thu": {
    "main_hex": "#768B2F",
@@ -3637,16 +3630,16 @@
    "sec": "kem đào #EEC9B5"
   },
   "dong": {
-   "main_hex": "#5B6EC1",
-   "sec_hex": "#FFF3E4",
+   "main_hex": "#5073B5",
+   "sec_hex": "#FBEFD6",
    "root": false,
-   "main_vi": "lam ngọc đậm vừa",
+   "main_vi": "lam ngọc bích đậm vừa",
    "sec_vi": "ngà",
-   "main_before": "#5073B5",
-   "sec_before": "#FBEFD6",
+   "main_before": null,
+   "sec_before": null,
    "reads": "Đông",
-   "main": "lam ngọc đậm vừa #5B6EC1",
-   "sec": "ngà #FFF3E4"
+   "main": "lam ngọc bích đậm vừa #5073B5",
+   "sec": "ngà #FBEFD6"
   },
   "a31": []
  },
@@ -3667,40 +3660,40 @@
    "sec": "bạc hà nhạt #C6DDD3"
   },
   "ha": {
-   "main_hex": "#E18950",
-   "sec_hex": "#AED7F5",
+   "main_hex": "#DF8B4A",
+   "sec_hex": "#E8EEFF",
    "root": false,
-   "main_vi": "cam đào dịu",
+   "main_vi": "cam mơ dịu",
    "sec_vi": "xanh sương",
    "main_before": "#E69671",
    "sec_before": "#F7F3FF",
    "reads": "Hạ",
-   "main": "cam đào dịu #E18950",
-   "sec": "xanh sương #AED7F5"
+   "main": "cam mơ dịu #DF8B4A",
+   "sec": "xanh sương #E8EEFF"
   },
   "thu": {
    "main_hex": "#6A7E40",
-   "sec_hex": "#F0F5CA",
+   "sec_hex": "#E9F5C8",
    "root": false,
    "main_vi": "ô liu đậm vừa",
    "sec_vi": "kem chanh",
    "main_before": "#4E7D43",
-   "sec_before": null,
+   "sec_before": "#F0F5CA",
    "reads": "Thu",
    "main": "ô liu đậm vừa #6A7E40",
-   "sec": "kem chanh #F0F5CA"
+   "sec": "kem chanh #E9F5C8"
   },
   "dong": {
    "main_hex": "#6B6CAE",
-   "sec_hex": "#EDD5CB",
+   "sec_hex": "#FFECDE",
    "root": false,
    "main_vi": "tím than đậm vừa",
    "sec_vi": "kem đào",
    "main_before": null,
-   "sec_before": "#FFECDE",
+   "sec_before": null,
    "reads": "Đông",
    "main": "tím than đậm vừa #6B6CAE",
-   "sec": "kem đào #EDD5CB"
+   "sec": "kem đào #FFECDE"
   },
   "a31": []
  },
@@ -3709,40 +3702,40 @@
   "root_season": "dong",
   "band": "đậm đà, ấm, trầm (đỏ rượu trầm + cam hồng) — nồng nàn mà không rực",
   "xuan": {
-   "main_hex": "#9E497E",
+   "main_hex": "#CB656C",
    "sec_hex": "#AFEBEE",
    "root": false,
-   "main_vi": "hồng mẫu đơn đậm",
+   "main_vi": "đỏ thắm đậm vừa",
    "sec_vi": "ngọc pastel",
-   "main_before": "#CB656C",
+   "main_before": null,
    "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng mẫu đơn đậm #9E497E",
+   "main": "đỏ thắm đậm vừa #CB656C",
    "sec": "ngọc pastel #AFEBEE"
   },
   "ha": {
-   "main_hex": "#E9937C",
+   "main_hex": "#F0933B",
    "sec_hex": "#FFE0E8",
    "root": false,
-   "main_vi": "cam san hô sáng",
+   "main_vi": "cam mơ sáng",
    "sec_vi": "hồng phấn nhạt",
    "main_before": "#E6A375",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam san hô sáng #E9937C",
+   "main": "cam mơ sáng #F0933B",
    "sec": "hồng phấn nhạt #FFE0E8"
   },
   "thu": {
-   "main_hex": "#6A7E40",
-   "sec_hex": "#E3D6FF",
+   "main_hex": "#617437",
+   "sec_hex": "#D5CBEB",
    "root": false,
-   "main_vi": "ô liu đậm vừa",
-   "sec_vi": "tím pastel",
+   "main_vi": "ô liu đậm",
+   "sec_vi": "tím khói nhạt",
    "main_before": "#98518A",
-   "sec_before": null,
+   "sec_before": "#E3D6FF",
    "reads": "Thu",
-   "main": "ô liu đậm vừa #6A7E40",
-   "sec": "tím pastel #E3D6FF"
+   "main": "ô liu đậm #617437",
+   "sec": "tím khói nhạt #D5CBEB"
   },
   "dong": {
    "main_hex": "#385A9F",
@@ -3829,28 +3822,28 @@
    "sec": "xanh ngọc sương #BCE8EA"
   },
   "ha": {
-   "main_hex": "#DF8C6F",
+   "main_hex": "#F0933B",
    "sec_hex": "#176A4E",
    "root": false,
-   "main_vi": "cam san hô dịu",
+   "main_vi": "cam mơ sáng",
    "sec_vi": "xanh ngọc sẫm",
-   "main_before": null,
+   "main_before": "#DF8C6F",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam san hô dịu #DF8C6F",
+   "main": "cam mơ sáng #F0933B",
    "sec": "xanh ngọc sẫm #176A4E"
   },
   "thu": {
    "main_hex": "#7E9354",
-   "sec_hex": "#CFDAFA",
+   "sec_hex": "#F19E96",
    "root": false,
    "main_vi": "ô liu đậm vừa",
-   "sec_vi": "xanh sương",
+   "sec_vi": "đất nung / gạch sáng",
    "main_before": "#649958",
    "sec_before": "#E4D6FD",
    "reads": "Thu",
    "main": "ô liu đậm vừa #7E9354",
-   "sec": "xanh sương #CFDAFA"
+   "sec": "đất nung / gạch sáng #F19E96"
   },
   "dong": {
    "main_hex": "#803F8D",
@@ -3871,16 +3864,16 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#CE8EB2",
-   "sec_hex": "#EADEFF",
+   "main_hex": "#D48BB1",
+   "sec_hex": "#E0D2FD",
    "root": false,
    "main_vi": "hồng mẫu đơn dịu",
    "sec_vi": "tím khói nhạt",
-   "main_before": null,
-   "sec_before": null,
+   "main_before": "#CE8EB2",
+   "sec_before": "#EADEFF",
    "reads": "Xuân",
-   "main": "hồng mẫu đơn dịu #CE8EB2",
-   "sec": "tím khói nhạt #EADEFF"
+   "main": "hồng mẫu đơn dịu #D48BB1",
+   "sec": "tím khói nhạt #E0D2FD"
   },
   "ha": {
    "main_hex": "#DE8269",
@@ -3896,15 +3889,15 @@
   },
   "thu": {
    "main_hex": "#74915E",
-   "sec_hex": "#FEDEC4",
+   "sec_hex": "#F5EBF3",
    "root": false,
    "main_vi": "rêu đậm vừa",
-   "sec_vi": "kem đào",
+   "sec_vi": "trắng hồng",
    "main_before": "#68985D",
-   "sec_before": null,
+   "sec_before": "#FEDEC4",
    "reads": "Thu",
    "main": "rêu đậm vừa #74915E",
-   "sec": "kem đào #FEDEC4"
+   "sec": "trắng hồng #F5EBF3"
   },
   "dong": {
    "main_hex": "#86CDB9",
@@ -3925,40 +3918,40 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#B86798",
-   "sec_hex": "#FBF8CA",
+   "main_hex": "#C06FA0",
+   "sec_hex": "#F6C3BA",
    "root": false,
-   "main_vi": "hồng mẫu đơn đậm vừa",
-   "sec_vi": "kem chanh",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#649958",
    "sec_before": "#FEDEC4",
    "reads": "Xuân",
-   "main": "hồng mẫu đơn đậm vừa #B86798",
-   "sec": "kem chanh #FBF8CA"
+   "main": "hồng mẫu đơn dịu #C06FA0",
+   "sec": "hồng đất nhạt #F6C3BA"
   },
   "ha": {
-   "main_hex": "#DD8363",
-   "sec_hex": "#F4C1CF",
+   "main_hex": "#DE8269",
+   "sec_hex": "#E8C3E4",
    "root": false,
    "main_vi": "cam san hô dịu",
-   "sec_vi": "hồng phấn nhạt",
+   "sec_vi": "hồng tím phấn",
    "main_before": "#D3896B",
    "sec_before": "#EEB0C2",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DD8363",
-   "sec": "hồng phấn nhạt #F4C1CF"
+   "main": "cam san hô dịu #DE8269",
+   "sec": "hồng tím phấn #E8C3E4"
   },
   "thu": {
-   "main_hex": "#74915E",
-   "sec_hex": "#F2ECF6",
+   "main_hex": "#83A06D",
+   "sec_hex": "#CEF7FF",
    "root": false,
-   "main_vi": "rêu đậm vừa",
-   "sec_vi": "trắng hồng",
+   "main_vi": "rêu dịu",
+   "sec_vi": "xanh ngọc sương",
    "main_before": "#AF71A1",
    "sec_before": "#CCE9FF",
    "reads": "Thu",
-   "main": "rêu đậm vừa #74915E",
-   "sec": "trắng hồng #F2ECF6"
+   "main": "rêu dịu #83A06D",
+   "sec": "xanh ngọc sương #CEF7FF"
   },
   "dong": {
    "main_hex": "#949BD8",
@@ -3972,7 +3965,11 @@
    "main": "chàm dịu #949BD8",
    "sec": "ngọc bích sáng #9ACBB7"
   },
-  "a31": []
+  "a31": [
+   "Xuân phụ~Hạ chính ΔE17",
+   "Thu chính~Đông phụ ΔE16",
+   "Thu phụ~Đông phụ ΔE16"
+  ]
  },
  "s48": {
   "group": "Lạnh lùng",
@@ -3992,27 +3989,27 @@
   },
   "ha": {
    "main_hex": "#F1A167",
-   "sec_hex": "#DAF3FE",
+   "sec_hex": "#EAF8FB",
    "root": false,
    "main_vi": "cam mơ sáng",
-   "sec_vi": "xanh sương",
+   "sec_vi": "trắng sương",
    "main_before": "#EEAB7D",
    "sec_before": "#CCE9FF",
    "reads": "Hạ",
    "main": "cam mơ sáng #F1A167",
-   "sec": "xanh sương #DAF3FE"
+   "sec": "trắng sương #EAF8FB"
   },
   "thu": {
-   "main_hex": "#7C8D66",
-   "sec_hex": "#E5E9BF",
+   "main_hex": "#83A06D",
+   "sec_hex": "#EADAAE",
    "root": false,
-   "main_vi": "rêu đậm vừa",
-   "sec_vi": "kem chanh",
+   "main_vi": "rêu dịu",
+   "sec_vi": "trắng ngà",
    "main_before": "#68985D",
-   "sec_before": null,
+   "sec_before": "#E5E9BF",
    "reads": "Thu",
-   "main": "rêu đậm vừa #7C8D66",
-   "sec": "kem chanh #E5E9BF"
+   "main": "rêu dịu #83A06D",
+   "sec": "trắng ngà #EADAAE"
   },
   "dong": {
    "main_hex": "#23B1E0",
@@ -4046,27 +4043,27 @@
   },
   "ha": {
    "main_hex": "#FEAD94",
-   "sec_hex": "#EFEBE1",
+   "sec_hex": "#F1F5FF",
    "root": false,
    "main_vi": "cam đào sáng",
-   "sec_vi": "trắng ngà",
+   "sec_vi": "trắng sương",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#EFEBE1",
    "reads": "Hạ",
    "main": "cam đào sáng #FEAD94",
-   "sec": "trắng ngà #EFEBE1"
+   "sec": "trắng sương #F1F5FF"
   },
   "thu": {
-   "main_hex": "#9BB984",
-   "sec_hex": "#DCC9E6",
+   "main_hex": "#ABC994",
+   "sec_hex": "#F0DCFA",
    "root": false,
    "main_vi": "rêu sáng",
    "sec_vi": "tím khói nhạt",
    "main_before": "#8CBE81",
    "sec_before": "#EADEFF",
    "reads": "Thu",
-   "main": "rêu sáng #9BB984",
-   "sec": "tím khói nhạt #DCC9E6"
+   "main": "rêu sáng #ABC994",
+   "sec": "tím khói nhạt #F0DCFA"
   },
   "dong": {
    "main_hex": "#95C0FD",
@@ -4087,40 +4084,40 @@
   "root_season": "dong",
   "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main_hex": "#EB96C8",
-   "sec_hex": "#ADDEC7",
+   "main_hex": "#E38EC0",
+   "sec_hex": "#BDDAC2",
    "root": false,
    "main_vi": "hồng mẫu đơn sáng",
    "sec_vi": "bạc hà nhạt",
    "main_before": "#7AAB6F",
    "sec_before": "#CAEFDD",
    "reads": "Xuân",
-   "main": "hồng mẫu đơn sáng #EB96C8",
-   "sec": "bạc hà nhạt #ADDEC7"
+   "main": "hồng mẫu đơn sáng #E38EC0",
+   "sec": "bạc hà nhạt #BDDAC2"
   },
   "ha": {
    "main_hex": "#FF9F87",
-   "sec_hex": "#FBF2FA",
+   "sec_hex": "#FCD9EB",
    "root": false,
    "main_vi": "cam san hô sáng",
-   "sec_vi": "trắng hồng",
+   "sec_vi": "hồng tím phấn",
    "main_before": null,
    "sec_before": "#FFD9E3",
    "reads": "Hạ",
    "main": "cam san hô sáng #FF9F87",
-   "sec": "trắng hồng #FBF2FA"
+   "sec": "hồng tím phấn #FCD9EB"
   },
   "thu": {
-   "main_hex": "#C3B58A",
-   "sec_hex": "#F1F8EE",
+   "main_hex": "#74915E",
+   "sec_hex": "#EBC8B9",
    "root": false,
-   "main_vi": "vàng nghệ dịu sáng",
-   "sec_vi": "trắng hồng",
+   "main_vi": "rêu đậm vừa",
+   "sec_vi": "kem đào",
    "main_before": "#DD90CC",
    "sec_before": "#EFEBE1",
    "reads": "Thu",
-   "main": "vàng nghệ dịu sáng #C3B58A",
-   "sec": "trắng hồng #F1F8EE"
+   "main": "rêu đậm vừa #74915E",
+   "sec": "kem đào #EBC8B9"
   },
   "dong": {
    "main_hex": "#A6C9E4",
@@ -4134,7 +4131,11 @@
    "main": "xanh băng sáng #A6C9E4",
    "sec": "hồng xuân đậm vừa #A55D7A"
   },
-  "a31": []
+  "a31": [
+   "Xuân chính~Hạ phụ ΔE19",
+   "Xuân chính~Đông phụ ΔE19",
+   "Hạ chính~Thu phụ ΔE14"
+  ]
  },
  "s51": {
   "group": "Kiêu kỳ",
@@ -4142,39 +4143,39 @@
   "band": "chính đậm quý phái tông ngọc trầm + phụ vàng nhạt / ngà (tím than, xanh ngọc sẫm + vàng nhạt)",
   "xuan": {
    "main_hex": "#2F5D24",
-   "sec_hex": "#C9F5F7",
+   "sec_hex": "#C0FCFB",
    "root": false,
    "main_vi": "xanh lá xuân thẫm",
    "sec_vi": "xanh ngọc sương",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#C9F5F7",
    "reads": "Xuân",
    "main": "xanh lá xuân thẫm #2F5D24",
-   "sec": "xanh ngọc sương #C9F5F7"
+   "sec": "xanh ngọc sương #C0FCFB"
   },
   "ha": {
-   "main_hex": "#DB8162",
+   "main_hex": "#F7997F",
    "sec_hex": "#555095",
    "root": false,
-   "main_vi": "cam san hô dịu",
+   "main_vi": "cam san hô sáng",
    "sec_vi": "tím than",
    "main_before": "#DA8F74",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam san hô dịu #DB8162",
+   "main": "cam san hô sáng #F7997F",
    "sec": "tím than #555095"
   },
   "thu": {
    "main_hex": "#76213E",
-   "sec_hex": "#D2E0CC",
+   "sec_hex": "#ECF9F3",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "kem chanh",
+   "sec_vi": "trắng sương",
    "main_before": "#832D47",
    "sec_before": "#E8E4DA",
    "reads": "Thu",
    "main": "đỏ rượu trầm thẫm #76213E",
-   "sec": "kem chanh #D2E0CC"
+   "sec": "trắng sương #ECF9F3"
   },
   "dong": {
    "main_hex": "#CCB0E5",
@@ -4207,28 +4208,28 @@
    "sec": "tím pastel #E3D6FF"
   },
   "ha": {
-   "main_hex": "#EAE697",
+   "main_hex": "#EFEE8D",
    "sec_hex": "#176A4E",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "xanh ngọc sẫm",
-   "main_before": null,
+   "main_before": "#EAE697",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
+   "main": "vàng chanh sáng #EFEE8D",
    "sec": "xanh ngọc sẫm #176A4E"
   },
   "thu": {
-   "main_hex": "#677843",
-   "sec_hex": "#FFCCCE",
+   "main_hex": "#94A770",
+   "sec_hex": "#FEDCCE",
    "root": false,
-   "main_vi": "ô liu đậm",
-   "sec_vi": "hồng đất nhạt",
+   "main_vi": "ô liu dịu",
+   "sec_vi": "kem đào",
    "main_before": "#733567",
    "sec_before": "#FFD9E3",
    "reads": "Thu",
-   "main": "ô liu đậm #677843",
-   "sec": "hồng đất nhạt #FFCCCE"
+   "main": "ô liu dịu #94A770",
+   "sec": "kem đào #FEDCCE"
   },
   "dong": {
    "main_hex": "#98C8D7",
@@ -4242,10 +4243,7 @@
    "main": "xanh băng sáng #98C8D7",
    "sec": "đất nung / gạch dịu #D38A7B"
   },
-  "a31": [
-   "Hạ phụ~Thu chính ΔE16",
-   "Thu phụ~Đông phụ ΔE18"
-  ]
+  "a31": []
  },
  "s53": {
   "group": "Kiêu kỳ",
@@ -4264,28 +4262,28 @@
    "sec": "hồng tím phấn #FBD9F2"
   },
   "ha": {
-   "main_hex": "#FD9F90",
-   "sec_hex": "#DBE4FF",
+   "main_hex": "#FE9668",
+   "sec_hex": "#C6ECFB",
    "root": false,
-   "main_vi": "cam san hô sáng",
+   "main_vi": "cam đào sáng",
    "sec_vi": "xanh sương",
-   "main_before": null,
+   "main_before": "#FD9F90",
    "sec_before": "#FFE4CF",
    "reads": "Hạ",
-   "main": "cam san hô sáng #FD9F90",
-   "sec": "xanh sương #DBE4FF"
+   "main": "cam đào sáng #FE9668",
+   "sec": "xanh sương #C6ECFB"
   },
   "thu": {
-   "main_hex": "#546A37",
-   "sec_hex": "#E5E9BF",
+   "main_hex": "#677843",
+   "sec_hex": "#D6D4A7",
    "root": false,
-   "main_vi": "rêu đậm",
+   "main_vi": "ô liu đậm",
    "sec_vi": "kem chanh",
    "main_before": "#733567",
-   "sec_before": null,
+   "sec_before": "#E5E9BF",
    "reads": "Thu",
-   "main": "rêu đậm #546A37",
-   "sec": "kem chanh #E5E9BF"
+   "main": "ô liu đậm #677843",
+   "sec": "kem chanh #D6D4A7"
   },
   "dong": {
    "main_hex": "#B290C7",
@@ -4318,28 +4316,28 @@
    "sec": "xanh băng dịu #63A9CF"
   },
   "ha": {
-   "main_hex": "#D88669",
+   "main_hex": "#F29E6B",
    "sec_hex": "#79466F",
    "root": false,
-   "main_vi": "cam san hô dịu",
+   "main_vi": "cam đào sáng",
    "sec_vi": "tím mận trầm",
-   "main_before": null,
+   "main_before": "#D88669",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "cam san hô dịu #D88669",
+   "main": "cam đào sáng #F29E6B",
    "sec": "tím mận trầm #79466F"
   },
   "thu": {
-   "main_hex": "#546A37",
-   "sec_hex": "#EFE3CB",
+   "main_hex": "#5F7A48",
+   "sec_hex": "#D2E0CC",
    "root": false,
    "main_vi": "rêu đậm",
-   "sec_vi": "ngà",
+   "sec_vi": "kem chanh",
    "main_before": "#447838",
-   "sec_before": null,
+   "sec_before": "#EFE3CB",
    "reads": "Thu",
-   "main": "rêu đậm #546A37",
-   "sec": "ngà #EFE3CB"
+   "main": "rêu đậm #5F7A48",
+   "sec": "kem chanh #D2E0CC"
   },
   "dong": {
    "main_hex": "#5F67AE",
@@ -4372,40 +4370,40 @@
    "sec": "xanh lá non dịu #95B77B"
   },
   "ha": {
-   "main_hex": "#EB936B",
-   "sec_hex": "#F6F6EB",
+   "main_hex": "#FD9861",
+   "sec_hex": "#B0DBDA",
    "root": false,
-   "main_vi": "cam san hô dịu",
-   "sec_vi": "trắng ngà",
-   "main_before": null,
+   "main_vi": "cam đào sáng",
+   "sec_vi": "xanh ngọc sương",
+   "main_before": "#EB936B",
    "sec_before": "#F9F5EB",
    "reads": "Hạ",
-   "main": "cam san hô dịu #EB936B",
-   "sec": "trắng ngà #F6F6EB"
+   "main": "cam đào sáng #FD9861",
+   "sec": "xanh ngọc sương #B0DBDA"
   },
   "thu": {
-   "main_hex": "#782134",
-   "sec_hex": "#FCDEC7",
+   "main_hex": "#76213E",
+   "sec_hex": "#C5D0EF",
    "root": false,
    "main_vi": "đỏ rượu trầm thẫm",
-   "sec_vi": "kem đào",
+   "sec_vi": "xanh sương",
    "main_before": "#832D47",
    "sec_before": "#C3EEF0",
    "reads": "Thu",
-   "main": "đỏ rượu trầm thẫm #782134",
-   "sec": "kem đào #FCDEC7"
+   "main": "đỏ rượu trầm thẫm #76213E",
+   "sec": "xanh sương #C5D0EF"
   },
   "dong": {
    "main_hex": "#6F5897",
-   "sec_hex": "#EFE6FF",
+   "sec_hex": "#F6E9FD",
    "root": false,
    "main_vi": "tím đậm",
    "sec_vi": "tím khói nhạt",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#EFE6FF",
    "reads": "Đông",
    "main": "tím đậm #6F5897",
-   "sec": "tím khói nhạt #EFE6FF"
+   "sec": "tím khói nhạt #F6E9FD"
   },
   "a31": []
  },
@@ -4415,15 +4413,15 @@
   "band": "đậm đà, ấm, trầm (đỏ rượu trầm + cam hồng) — nồng nàn mà không rực",
   "xuan": {
    "main_hex": "#4A7E3E",
-   "sec_hex": "#D5E1B5",
+   "sec_hex": "#DEE2B9",
    "root": false,
    "main_vi": "xanh lá xuân đậm vừa",
    "sec_vi": "kem chanh",
    "main_before": null,
-   "sec_before": "#DEE2B9",
+   "sec_before": null,
    "reads": "Xuân",
    "main": "xanh lá xuân đậm vừa #4A7E3E",
-   "sec": "kem chanh #D5E1B5"
+   "sec": "kem chanh #DEE2B9"
   },
   "ha": {
    "main_hex": "#D6A585",
@@ -4480,16 +4478,16 @@
    "sec": "trắng ngà #E2DED4"
   },
   "ha": {
-   "main_hex": "#DD7A5F",
-   "sec_hex": "#F0DCFA",
+   "main_hex": "#DE826A",
+   "sec_hex": "#F4F1C3",
    "root": false,
    "main_vi": "cam san hô dịu",
-   "sec_vi": "tím khói nhạt",
-   "main_before": "#DE826A",
+   "sec_vi": "kem chanh",
+   "main_before": null,
    "sec_before": "#F9D2DD",
    "reads": "Hạ",
-   "main": "cam san hô dịu #DD7A5F",
-   "sec": "tím khói nhạt #F0DCFA"
+   "main": "cam san hô dịu #DE826A",
+   "sec": "kem chanh #F4F1C3"
   },
   "thu": {
    "main_hex": "#9C3B53",
@@ -4534,15 +4532,15 @@
    "sec": "hồng phấn nhạt #F2CCD6"
   },
   "ha": {
-   "main_hex": "#EAE697",
+   "main_hex": "#F0EF84",
    "sec_hex": "#79466F",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "tím mận trầm",
-   "main_before": null,
+   "main_before": "#EAE697",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EAE697",
+   "main": "vàng chanh sáng #F0EF84",
    "sec": "tím mận trầm #79466F"
   },
   "thu": {
@@ -4600,16 +4598,16 @@
    "sec": "lam ngọc sáng #90BDF2"
   },
   "thu": {
-   "main_hex": "#7E9354",
-   "sec_hex": "#A3DEDD",
+   "main_hex": "#617437",
+   "sec_hex": "#AFEBEE",
    "root": false,
-   "main_vi": "ô liu đậm vừa",
-   "sec_vi": "xanh ngọc sương",
+   "main_vi": "ô liu đậm",
+   "sec_vi": "ngọc pastel",
    "main_before": "#649958",
-   "sec_before": "#AFEBEE",
+   "sec_before": null,
    "reads": "Thu",
-   "main": "ô liu đậm vừa #7E9354",
-   "sec": "xanh ngọc sương #A3DEDD"
+   "main": "ô liu đậm #617437",
+   "sec": "ngọc pastel #AFEBEE"
   },
   "dong": {
    "main_hex": "#886DB5",
@@ -4642,16 +4640,16 @@
    "sec": "xanh băng dịu #649AB8"
   },
   "ha": {
-   "main_hex": "#BB4F25",
-   "sec_hex": "#EDCCE5",
+   "main_hex": "#F0933B",
+   "sec_hex": "#F3DAFE",
    "root": false,
-   "main_vi": "cam san hô đậm vừa",
-   "sec_vi": "hồng tím phấn",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "tím khói nhạt",
    "main_before": "#EAE697",
-   "sec_before": null,
+   "sec_before": "#EDCCE5",
    "reads": "Hạ",
-   "main": "cam san hô đậm vừa #BB4F25",
-   "sec": "hồng tím phấn #EDCCE5"
+   "main": "cam mơ sáng #F0933B",
+   "sec": "tím khói nhạt #F3DAFE"
   },
   "thu": {
    "main_hex": "#9C3B53",
@@ -4677,7 +4675,9 @@
    "main": "tím hoa cà đậm vừa #9F71B4",
    "sec": "ngọc pastel #AFEBEE"
   },
-  "a31": []
+  "a31": [
+   "Xuân chính~Hạ chính ΔE19"
+  ]
  },
  "s61": {
   "group": "Quyến rũ",
@@ -4708,16 +4708,16 @@
    "sec": "ngà #EDDCC6"
   },
   "thu": {
-   "main_hex": "#4E6022",
-   "sec_hex": "#E3D6FF",
+   "main_hex": "#6A7E40",
+   "sec_hex": "#FFCCCE",
    "root": false,
-   "main_vi": "ô liu đậm",
-   "sec_vi": "tím pastel",
+   "main_vi": "ô liu đậm vừa",
+   "sec_vi": "hồng đất nhạt",
    "main_before": "#4A7E3E",
-   "sec_before": null,
+   "sec_before": "#E3D6FF",
    "reads": "Thu",
-   "main": "ô liu đậm #4E6022",
-   "sec": "tím pastel #E3D6FF"
+   "main": "ô liu đậm vừa #6A7E40",
+   "sec": "hồng đất nhạt #FFCCCE"
   },
   "dong": {
    "main_hex": "#5D85CE",
@@ -4751,27 +4751,27 @@
   },
   "ha": {
    "main_hex": "#F8B287",
-   "sec_hex": "#B9C9F9",
+   "sec_hex": "#CCCCF8",
    "root": false,
    "main_vi": "cam đào sáng",
-   "sec_vi": "dịu tím than",
+   "sec_vi": "tím khói nhạt",
    "main_before": null,
-   "sec_before": null,
+   "sec_before": "#B9C9F9",
    "reads": "Hạ",
    "main": "cam đào sáng #F8B287",
-   "sec": "dịu tím than #B9C9F9"
+   "sec": "tím khói nhạt #CCCCF8"
   },
   "thu": {
-   "main_hex": "#AEBF8E",
-   "sec_hex": "#EBC5D0",
+   "main_hex": "#9FB577",
+   "sec_hex": "#FFE3EA",
    "root": false,
-   "main_vi": "rêu sáng",
+   "main_vi": "ô liu sáng",
    "sec_vi": "hồng phấn nhạt",
    "main_before": "#DF9ED9",
-   "sec_before": "#FFE3EA",
+   "sec_before": null,
    "reads": "Thu",
-   "main": "rêu sáng #AEBF8E",
-   "sec": "hồng phấn nhạt #EBC5D0"
+   "main": "ô liu sáng #9FB577",
+   "sec": "hồng phấn nhạt #FFE3EA"
   },
   "dong": {
    "main_hex": "#71B5D7",
@@ -4785,11 +4785,7 @@
    "main": "xanh băng sáng #71B5D7",
    "sec": "bạc hà nhạt #CDF2E0"
   },
-  "a31": [
-   "Xuân chính~Thu phụ ΔE19",
-   "Hạ phụ~Đông chính ΔE16",
-   "Thu chính~Đông phụ ΔE16"
-  ]
+  "a31": []
  },
  "s63": {
   "group": "Dịu dàng",
@@ -4808,15 +4804,15 @@
    "sec": "hồng phấn nhạt #FFE7EE"
   },
   "ha": {
-   "main_hex": "#EFE495",
+   "main_hex": "#E9F090",
    "sec_hex": "#E69498",
    "root": false,
-   "main_vi": "vàng chanh nhạt",
+   "main_vi": "vàng chanh sáng",
    "sec_vi": "hồng san hô",
-   "main_before": null,
+   "main_before": "#EFE495",
    "sec_before": null,
    "reads": "Hạ",
-   "main": "vàng chanh nhạt #EFE495",
+   "main": "vàng chanh sáng #E9F090",
    "sec": "hồng san hô #E69498"
   },
   "thu": {
@@ -4844,7 +4840,8 @@
    "sec": "xanh sương #E0F1FF"
   },
   "a31": [
-   "Hạ chính~Thu phụ ΔE13"
+   "Xuân chính~Hạ chính ΔE18",
+   "Hạ chính~Thu phụ ΔE16"
   ]
  },
  "s64": {
@@ -4864,40 +4861,40 @@
    "sec": "tím khói nhạt #ECE2FE"
   },
   "ha": {
-   "main_hex": "#FEAD94",
-   "sec_hex": "#D9F4FF",
+   "main_hex": "#D89964",
+   "sec_hex": "#C0FCFB",
    "root": false,
-   "main_vi": "cam đào sáng",
-   "sec_vi": "xanh sương",
-   "main_before": null,
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "xanh ngọc sương",
+   "main_before": "#FEAD94",
    "sec_before": "#EDB9D5",
    "reads": "Hạ",
-   "main": "cam đào sáng #FEAD94",
-   "sec": "xanh sương #D9F4FF"
+   "main": "cam mơ dịu #D89964",
+   "sec": "xanh ngọc sương #C0FCFB"
   },
   "thu": {
-   "main_hex": "#9DC49B",
-   "sec_hex": "#FEEEC1",
+   "main_hex": "#B2C889",
+   "sec_hex": "#FFEBD2",
    "root": false,
-   "main_vi": "rêu sáng",
-   "sec_vi": "trắng ngà",
+   "main_vi": "ô liu sáng",
+   "sec_vi": "kem mơ",
    "main_before": "#98CB8D",
    "sec_before": "#F3E7CE",
    "reads": "Thu",
-   "main": "rêu sáng #9DC49B",
-   "sec": "trắng ngà #FEEEC1"
+   "main": "ô liu sáng #B2C889",
+   "sec": "kem mơ #FFEBD2"
   },
   "dong": {
-   "main_hex": "#65B5E3",
-   "sec_hex": "#F4F7EC",
+   "main_hex": "#67B9E2",
+   "sec_hex": "#ECF9F3",
    "root": false,
-   "main_vi": "xanh băng sáng",
-   "sec_vi": "trắng ngà",
-   "main_before": "#67B9E2",
+   "main_vi": "xanh băng dịu",
+   "sec_vi": "trắng sương",
+   "main_before": null,
    "sec_before": "#CCF8FA",
    "reads": "Đông",
-   "main": "xanh băng sáng #65B5E3",
-   "sec": "trắng ngà #F4F7EC"
+   "main": "xanh băng dịu #67B9E2",
+   "sec": "trắng sương #ECF9F3"
   },
   "a31": [
    "Xuân chính~Xuân phụ ΔE16"
@@ -4908,40 +4905,40 @@
   "root_season": "dong",
   "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son dịu #CF816E + ngà)",
   "xuan": {
-   "main_hex": "#FF95B7",
-   "sec_hex": "#CDF7FF",
+   "main_hex": "#A45B86",
+   "sec_hex": "#C9F5F7",
    "root": false,
-   "main_vi": "hồng xuân sáng",
+   "main_vi": "hồng mẫu đơn đậm vừa",
    "sec_vi": "xanh ngọc sương",
-   "main_before": "#A45B86",
-   "sec_before": "#C9F5F7",
+   "main_before": null,
+   "sec_before": null,
    "reads": "Xuân",
-   "main": "hồng xuân sáng #FF95B7",
-   "sec": "xanh ngọc sương #CDF7FF"
+   "main": "hồng mẫu đơn đậm vừa #A45B86",
+   "sec": "xanh ngọc sương #C9F5F7"
   },
   "ha": {
-   "main_hex": "#ED8D7B",
-   "sec_hex": "#C4B4E5",
+   "main_hex": "#E29858",
+   "sec_hex": "#CDCEEE",
    "root": false,
-   "main_vi": "cam san hô sáng",
-   "sec_vi": "dịu tím than",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "tím khói nhạt",
    "main_before": "#DE826A",
-   "sec_before": null,
+   "sec_before": "#C4B4E5",
    "reads": "Hạ",
-   "main": "cam san hô sáng #ED8D7B",
-   "sec": "dịu tím than #C4B4E5"
+   "main": "cam mơ sáng #E29858",
+   "sec": "tím khói nhạt #CDCEEE"
   },
   "thu": {
-   "main_hex": "#788859",
-   "sec_hex": "#E8FBEB",
+   "main_hex": "#D2836E",
+   "sec_hex": "#F1F8EE",
    "root": false,
-   "main_vi": "rêu đậm vừa",
-   "sec_vi": "bạc hà nhạt",
+   "main_vi": "đất nung / gạch dịu",
+   "sec_vi": "trắng hồng",
    "main_before": "#FF95B7",
    "sec_before": "#F9F5EB",
    "reads": "Thu",
-   "main": "rêu đậm vừa #788859",
-   "sec": "bạc hà nhạt #E8FBEB"
+   "main": "đất nung / gạch dịu #D2836E",
+   "sec": "trắng hồng #F1F8EE"
   },
   "dong": {
    "main_hex": "#4EA989",
@@ -4956,9 +4953,9 @@
    "sec": "kem đào #FBDAC1"
   },
   "a31": [
-   "Xuân chính~Hạ chính ΔE17",
-   "Xuân phụ~Thu phụ ΔE11",
-   "Thu chính~Đông chính ΔE17"
+   "Xuân phụ~Thu phụ ΔE12",
+   "Hạ chính~Thu chính ΔE14",
+   "Hạ chính~Đông phụ ΔE19"
   ]
  }
 }

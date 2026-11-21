@@ -16,11 +16,11 @@
   "season": "ha",
   "main": [
    "#DA9071",
-   "#E78F68"
+   "#DC855E"
   ],
   "sec": [
    "#B9C9F9",
-   "#CDDAFF"
+   "#D6D6FE"
   ]
  },
  {
@@ -32,7 +32,7 @@
   ],
   "sec": [
    "#E0F1FF",
-   "#C6ECFB"
+   "#E0F1FF"
   ]
  },
  {
@@ -40,11 +40,11 @@
   "season": "xuan",
   "main": [
    "#CD757A",
-   "#799C47"
+   "#5F8F54"
   ],
   "sec": [
    "#FFDEE7",
-   "#FFDEE7"
+   "#FFE8E9"
   ]
  },
  {
@@ -52,11 +52,11 @@
   "season": "thu",
   "main": [
    "#5F8F54",
-   "#64855D"
+   "#96AB6E"
   ],
   "sec": [
    "#E5E1D7",
-   "#E5E1D7"
+   "#EDF0E5"
   ]
  },
  {
@@ -76,11 +76,11 @@
   "season": "thu",
   "main": [
    "#4E7D43",
-   "#516325"
+   "#6A7E40"
   ],
   "sec": [
    "#E3F3FF",
-   "#E3F3FF"
+   "#DAE4FF"
   ]
  },
  {
@@ -88,11 +88,11 @@
   "season": "ha",
   "main": [
    "#EAE697",
-   "#8D1D0A"
+   "#F0EF84"
   ],
   "sec": [
    "#ECF7FF",
-   "#ECF7FF"
+   "#EBC5D0"
   ]
  },
  {
@@ -100,11 +100,23 @@
   "season": "thu",
   "main": [
    "#903C61",
-   "#7C0439"
+   "#771735"
   ],
   "sec": [
    "#FFEAEF",
-   "#FFE8E9"
+   "#FFDCCD"
+  ]
+ },
+ {
+  "id": "c08",
+  "season": "ha",
+  "main": [
+   "#E4E89A",
+   "#E9F090"
+  ],
+  "sec": [
+   "#98CBF0",
+   "#98CBF0"
   ]
  },
  {
@@ -112,7 +124,7 @@
   "season": "thu",
   "main": [
    "#E499A4",
-   "#D09E85"
+   "#ECA579"
   ],
   "sec": [
    "#F3ECFF",
@@ -184,23 +196,11 @@
   "season": "ha",
   "main": [
    "#D58679",
-   "#DC8067"
+   "#ED8D7B"
   ],
   "sec": [
    "#B9E4E6",
-   "#B9E4E6"
-  ]
- },
- {
-  "id": "c19",
-  "season": "xuan",
-  "main": [
-   "#852533",
-   "#852533"
-  ],
-  "sec": [
-   "#FFE0E8",
-   "#FFE7F3"
+   "#BCE2F1"
   ]
  },
  {
@@ -208,11 +208,11 @@
   "season": "ha",
   "main": [
    "#E4E89A",
-   "#E4E89A"
+   "#EAF187"
   ],
   "sec": [
    "#FFF3E9",
-   "#F6C3BA"
+   "#C1D0F9"
   ]
  },
  {
@@ -244,7 +244,7 @@
   "season": "ha",
   "main": [
    "#F6A496",
-   "#DDD685"
+   "#FAEA89"
   ],
   "sec": [
    "#CFB8EC",
@@ -253,10 +253,22 @@
  },
  {
   "id": "c22",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#EFEE8D"
+  ],
+  "sec": [
+   "#88D4D3",
+   "#ADE6F1"
+  ]
+ },
+ {
+  "id": "c22",
   "season": "thu",
   "main": [
    "#68985D",
-   "#779970"
+   "#7F985E"
   ],
   "sec": [
    "#FCD6E0",
@@ -268,7 +280,7 @@
   "season": "ha",
   "main": [
    "#FEAD94",
-   "#EFDF7E"
+   "#FAEA89"
   ],
   "sec": [
    "#E0F1FF",
@@ -280,7 +292,7 @@
   "season": "thu",
   "main": [
    "#E6AFE0",
-   "#E5A884"
+   "#ECA579"
   ],
   "sec": [
    "#D4F9E7",
@@ -304,11 +316,35 @@
   "season": "ha",
   "main": [
    "#EBE68E",
-   "#EBE68E"
+   "#ED8D7B"
   ],
   "sec": [
    "#ECE2FE",
-   "#F7DDE4"
+   "#F2ECF6"
+  ]
+ },
+ {
+  "id": "c28",
+  "season": "thu",
+  "main": [
+   "#D28474",
+   "#768A4E"
+  ],
+  "sec": [
+   "#C7E6FD",
+   "#CEF7FF"
+  ]
+ },
+ {
+  "id": "c28",
+  "season": "dong",
+  "main": [
+   "#599FD8",
+   "#599FD8"
+  ],
+  "sec": [
+   "#FED4B9",
+   "#F2D4BE"
   ]
  },
  {
@@ -316,11 +352,11 @@
   "season": "ha",
   "main": [
    "#FCB17E",
-   "#F4EC94"
+   "#FCB17E"
   ],
   "sec": [
    "#FFF3E9",
-   "#C1D0F9"
+   "#F3DAFE"
   ]
  },
  {
@@ -336,15 +372,15 @@
   ]
  },
  {
-  "id": "c32",
-  "season": "ha",
+  "id": "c31",
+  "season": "dong",
   "main": [
-   "#FBA192",
-   "#FBA192"
+   "#6B6CAE",
+   "#6B6CAE"
   ],
   "sec": [
-   "#EFF3C9",
-   "#F1FAD9"
+   "#FFE0E8",
+   "#FFDADC"
   ]
  },
  {
@@ -352,11 +388,11 @@
   "season": "thu",
   "main": [
    "#82B976",
-   "#95AF74"
+   "#93A86B"
   ],
   "sec": [
    "#FFE7EE",
-   "#FFE8E9"
+   "#F7F3FF"
   ]
  },
  {
@@ -364,11 +400,11 @@
   "season": "ha",
   "main": [
    "#FC9382",
-   "#FBA773"
+   "#ED9E64"
   ],
   "sec": [
    "#A4D8FE",
-   "#AED7F5"
+   "#A4D8FE"
   ]
  },
  {
@@ -388,7 +424,7 @@
   "season": "thu",
   "main": [
    "#C16B7A",
-   "#779970"
+   "#7F985E"
   ],
   "sec": [
    "#FCD6E0",
@@ -400,7 +436,7 @@
   "season": "ha",
   "main": [
    "#EAE697",
-   "#EAE697"
+   "#EFEE8D"
   ],
   "sec": [
    "#CFB8EC",
@@ -416,7 +452,7 @@
   ],
   "sec": [
    "#E0F1FF",
-   "#F1F5FF"
+   "#E4F2F1"
   ]
  },
  {
@@ -424,11 +460,11 @@
   "season": "ha",
   "main": [
    "#E4E89A",
-   "#DFE585"
+   "#E9F090"
   ],
   "sec": [
    "#FFE7EE",
-   "#FCDEC7"
+   "#FFE7EE"
   ]
  },
  {
@@ -457,22 +493,10 @@
  },
  {
   "id": "m10",
-  "season": "ha",
-  "main": [
-   "#FFBB92",
-   "#E8DB89"
-  ],
-  "sec": [
-   "#C6F2F4",
-   "#C6F2F4"
-  ]
- },
- {
-  "id": "m10",
   "season": "thu",
   "main": [
    "#955290",
-   "#D09075"
+   "#768A4E"
   ],
   "sec": [
    "#E5E1D7",
@@ -481,10 +505,22 @@
  },
  {
   "id": "m14",
+  "season": "xuan",
+  "main": [
+   "#F88D92",
+   "#D985B7"
+  ],
+  "sec": [
+   "#F2EAFF",
+   "#F2EAFF"
+  ]
+ },
+ {
+  "id": "m14",
   "season": "ha",
   "main": [
    "#EAA16D",
-   "#EFDF7E"
+   "#F8A86F"
   ],
   "sec": [
    "#CDF2E0",
@@ -496,7 +532,7 @@
   "season": "thu",
   "main": [
    "#D28BCC",
-   "#DCA37B"
+   "#D08070"
   ],
   "sec": [
    "#A4D8FE",
@@ -505,14 +541,26 @@
  },
  {
   "id": "m16",
+  "season": "xuan",
+  "main": [
+   "#CB656C",
+   "#A45586"
+  ],
+  "sec": [
+   "#ECE0C8",
+   "#F5EDE4"
+  ]
+ },
+ {
+  "id": "m16",
   "season": "ha",
   "main": [
    "#E09974",
-   "#F7A470"
+   "#E9F090"
   ],
   "sec": [
    "#C6F2F4",
-   "#C3EFEE"
+   "#F9D2B4"
   ]
  },
  {
@@ -520,7 +568,7 @@
   "season": "thu",
   "main": [
    "#925786",
-   "#CA8972"
+   "#D1846A"
   ],
   "sec": [
    "#FCD6E0",
@@ -532,11 +580,11 @@
   "season": "xuan",
   "main": [
    "#7FB980",
-   "#F79DCB"
+   "#88BB7C"
   ],
   "sec": [
    "#F3E8BD",
-   "#EAE8BA"
+   "#EDF0E5"
   ]
  },
  {
@@ -544,7 +592,7 @@
   "season": "ha",
   "main": [
    "#E09974",
-   "#E69063"
+   "#FAEA89"
   ],
   "sec": [
    "#88D4D3",
@@ -556,11 +604,11 @@
   "season": "thu",
   "main": [
    "#E69EDF",
-   "#90B78F"
+   "#ECA579"
   ],
   "sec": [
    "#F2EAFF",
-   "#F2EAFF"
+   "#F7DAF3"
   ]
  },
  {
@@ -568,11 +616,23 @@
   "season": "thu",
   "main": [
    "#82B976",
-   "#94B68C"
+   "#ACC183"
   ],
   "sec": [
    "#CDF2E0",
-   "#D8FFF6"
+   "#CFF9EF"
+  ]
+ },
+ {
+  "id": "m19",
+  "season": "dong",
+  "main": [
+   "#7ACDF7",
+   "#7ACDF7"
+  ],
+  "sec": [
+   "#F3E7CE",
+   "#F1E2CF"
   ]
  },
  {
@@ -580,7 +640,7 @@
   "season": "xuan",
   "main": [
    "#7FB980",
-   "#EB8A9C"
+   "#E88696"
   ],
   "sec": [
    "#E0F1FF",
@@ -592,11 +652,11 @@
   "season": "ha",
   "main": [
    "#EFE495",
-   "#EA8B78"
+   "#F5EC8A"
   ],
   "sec": [
    "#D4F9E7",
-   "#C5D8BB"
+   "#DDF5E9"
   ]
  },
  {
@@ -604,11 +664,11 @@
   "season": "thu",
   "main": [
    "#E88696",
-   "#8AB189"
+   "#95AF74"
   ],
   "sec": [
    "#FFDEE7",
-   "#F6C3BA"
+   "#FFF2ED"
   ]
  },
  {
@@ -616,11 +676,11 @@
   "season": "ha",
   "main": [
    "#E7E798",
-   "#E3DC8B"
+   "#EFEE8D"
   ],
   "sec": [
    "#C7E6FD",
-   "#EBF9F5"
+   "#F6ECE5"
   ]
  },
  {
@@ -628,11 +688,11 @@
   "season": "thu",
   "main": [
    "#925786",
-   "#C19974"
+   "#768A4E"
   ],
   "sec": [
    "#FED4B9",
-   "#F8ECE6"
+   "#E9CCA6"
   ]
  },
  {
@@ -640,11 +700,11 @@
   "season": "ha",
   "main": [
    "#EAE697",
-   "#EAE697"
+   "#F5EC8A"
   ],
   "sec": [
    "#9AD4B4",
-   "#FFF2ED"
+   "#B6E8D1"
   ]
  },
  {
@@ -652,7 +712,7 @@
   "season": "thu",
   "main": [
    "#AF71A1",
-   "#899E61"
+   "#96AB6E"
   ],
   "sec": [
    "#E7DAFF",
@@ -676,11 +736,11 @@
   "season": "ha",
   "main": [
    "#D58679",
-   "#E8DB89"
+   "#FC9F7F"
   ],
   "sec": [
    "#E5BBE1",
-   "#F4C1CF"
+   "#E5BBE1"
   ]
  },
  {
@@ -688,23 +748,11 @@
   "season": "thu",
   "main": [
    "#AF71A1",
-   "#CD926F"
+   "#768A4E"
   ],
   "sec": [
    "#FFECDE",
-   "#EFF6FF"
-  ]
- },
- {
-  "id": "m29",
-  "season": "dong",
-  "main": [
-   "#11B7BF",
-   "#11B7BF"
-  ],
-  "sec": [
-   "#C7E6FD",
-   "#B7D4F9"
+   "#FFE9E0"
   ]
  },
  {
@@ -712,7 +760,7 @@
   "season": "ha",
   "main": [
    "#EFE495",
-   "#F4EC94"
+   "#F6EC81"
   ],
   "sec": [
    "#F6A78F",
@@ -724,11 +772,23 @@
   "season": "thu",
   "main": [
    "#642B61",
-   "#516325"
+   "#788C4E"
   ],
   "sec": [
    "#D5FAE9",
-   "#D5FAE9"
+   "#ECF9F3"
+  ]
+ },
+ {
+  "id": "s07",
+  "season": "dong",
+  "main": [
+   "#219271",
+   "#642B61"
+  ],
+  "sec": [
+   "#FFE8F9",
+   "#F8E8FF"
   ]
  },
  {
@@ -752,7 +812,7 @@
   ],
   "sec": [
    "#F3ECFF",
-   "#F3ECFF"
+   "#E7D4E4"
   ]
  },
  {
@@ -760,11 +820,11 @@
   "season": "ha",
   "main": [
    "#E5976E",
-   "#E38755"
+   "#E5976E"
   ],
   "sec": [
    "#FFF6D0",
-   "#FFF6D0"
+   "#D5E1B5"
   ]
  },
  {
@@ -772,11 +832,11 @@
   "season": "thu",
   "main": [
    "#4E7D43",
-   "#5D7133"
+   "#6A7E40"
   ],
   "sec": [
    "#D5FAE9",
-   "#B6F2F1"
+   "#D5FAE9"
   ]
  },
  {
@@ -784,11 +844,11 @@
   "season": "ha",
   "main": [
    "#EAE697",
-   "#EAE697"
+   "#EFEE8D"
   ],
   "sec": [
    "#C9F5F7",
-   "#F7F3FF"
+   "#F6F3FE"
   ]
  },
  {
@@ -805,14 +865,26 @@
  },
  {
   "id": "s11",
+  "season": "xuan",
+  "main": [
+   "#2F5D24",
+   "#2F5D24"
+  ],
+  "sec": [
+   "#CAEFDD",
+   "#C0F2DB"
+  ]
+ },
+ {
+  "id": "s11",
   "season": "ha",
   "main": [
    "#E09974",
-   "#D88457"
+   "#F39D70"
   ],
   "sec": [
    "#D8DCB2",
-   "#D8DCB2"
+   "#ECF2DC"
   ]
  },
  {
@@ -824,7 +896,7 @@
   ],
   "sec": [
    "#FFD9E3",
-   "#FED8EC"
+   "#F7CFD1"
   ]
  },
  {
@@ -832,11 +904,11 @@
   "season": "thu",
   "main": [
    "#4E7D43",
-   "#5B7B4C"
+   "#5F7A48"
   ],
   "sec": [
    "#FFEAEF",
-   "#FFEAEF"
+   "#FEE7F3"
   ]
  },
  {
@@ -856,11 +928,11 @@
   "season": "thu",
   "main": [
    "#C592B9",
-   "#80A07E"
+   "#74915E"
   ],
   "sec": [
    "#EFE6FF",
-   "#D6D6FE"
+   "#E9DFFE"
   ]
  },
  {
@@ -872,7 +944,7 @@
   ],
   "sec": [
    "#FEDEC4",
-   "#FEDEC4"
+   "#FFE9E0"
   ]
  },
  {
@@ -880,11 +952,11 @@
   "season": "ha",
   "main": [
    "#D58679",
-   "#EB8C79"
+   "#DE8269"
   ],
   "sec": [
    "#88D4D3",
-   "#DCFFEE"
+   "#88D4D3"
   ]
  },
  {
@@ -892,11 +964,11 @@
   "season": "thu",
   "main": [
    "#C592B9",
-   "#9BB984"
+   "#A3C18C"
   ],
   "sec": [
    "#F6ECC0",
-   "#F0EFE4"
+   "#E9CCA6"
   ]
  },
  {
@@ -908,7 +980,7 @@
   ],
   "sec": [
    "#E8E4DA",
-   "#FFF1F2"
+   "#DCD0B0"
   ]
  },
  {
@@ -920,7 +992,7 @@
   ],
   "sec": [
    "#EADEFF",
-   "#EADEFF"
+   "#F8DED9"
   ]
  },
  {
@@ -928,23 +1000,11 @@
   "season": "thu",
   "main": [
    "#68985D",
-   "#74915E"
+   "#7C9965"
   ],
   "sec": [
    "#CCE9FF",
-   "#CEF7FF"
-  ]
- },
- {
-  "id": "s16",
-  "season": "ha",
-  "main": [
-   "#F3A976",
-   "#F3A976"
-  ],
-  "sec": [
-   "#9AD4B4",
-   "#B6E8D1"
+   "#DAE4FF"
   ]
  },
  {
@@ -952,11 +1012,11 @@
   "season": "thu",
   "main": [
    "#672863",
-   "#93A869"
+   "#6A7E40"
   ],
   "sec": [
    "#E0F1FF",
-   "#ECF7FF"
+   "#B7D6EC"
   ]
  },
  {
@@ -964,7 +1024,7 @@
   "season": "ha",
   "main": [
    "#E58870",
-   "#E0D880"
+   "#F6EC81"
   ],
   "sec": [
    "#004F38",
@@ -988,11 +1048,11 @@
   "season": "thu",
   "main": [
    "#D88669",
-   "#D0897B"
+   "#93A869"
   ],
   "sec": [
    "#FBD9F2",
-   "#F3DAFE"
+   "#FFBDC0"
   ]
  },
  {
@@ -1000,7 +1060,7 @@
   "season": "ha",
   "main": [
    "#DA8375",
-   "#DA8375"
+   "#F89884"
   ],
   "sec": [
    "#E4D6FD",
@@ -1012,11 +1072,11 @@
   "season": "thu",
   "main": [
    "#70366C",
-   "#5B7B4C"
+   "#5F7A48"
   ],
   "sec": [
    "#FEDEC4",
-   "#FEDEC4"
+   "#FEEEC1"
   ]
  },
  {
@@ -1033,18 +1093,6 @@
  },
  {
   "id": "s20",
-  "season": "ha",
-  "main": [
-   "#E1897B",
-   "#D88457"
-  ],
-  "sec": [
-   "#D0F5E4",
-   "#D0F5E4"
-  ]
- },
- {
-  "id": "s20",
   "season": "thu",
   "main": [
    "#852D37",
@@ -1052,7 +1100,7 @@
   ],
   "sec": [
    "#EADEFF",
-   "#CFDAFA"
+   "#ECEDFF"
   ]
  },
  {
@@ -1072,11 +1120,11 @@
   "season": "ha",
   "main": [
    "#E1EA93",
-   "#E3F482"
+   "#E1EA93"
   ],
   "sec": [
    "#FEDEC4",
-   "#F4C1CF"
+   "#FECEC5"
   ]
  },
  {
@@ -1096,11 +1144,11 @@
   "season": "ha",
   "main": [
    "#DA8375",
-   "#DA8375"
+   "#FB9A5B"
   ],
   "sec": [
    "#FEDEC4",
-   "#FAEECD"
+   "#EFC2DA"
   ]
  },
  {
@@ -1120,11 +1168,35 @@
   "season": "ha",
   "main": [
    "#DF8071",
-   "#DF8071"
+   "#FE947F"
   ],
   "sec": [
    "#F0E5BA",
-   "#D6D4A7"
+   "#F6F6EB"
+  ]
+ },
+ {
+  "id": "s25",
+  "season": "xuan",
+  "main": [
+   "#2F5D24",
+   "#2F5D24"
+  ],
+  "sec": [
+   "#F8D7BE",
+   "#FEDEC4"
+  ]
+ },
+ {
+  "id": "s25",
+  "season": "ha",
+  "main": [
+   "#DA8375",
+   "#FE9571"
+  ],
+  "sec": [
+   "#F4F0E6",
+   "#E1FCF6"
   ]
  },
  {
@@ -1137,6 +1209,18 @@
   "sec": [
    "#CAEFDD",
    "#B6DDBD"
+  ]
+ },
+ {
+  "id": "s26",
+  "season": "ha",
+  "main": [
+   "#FFBB92",
+   "#FFBB92"
+  ],
+  "sec": [
+   "#CFB8EC",
+   "#BED3EF"
   ]
  },
  {
@@ -1156,11 +1240,11 @@
   "season": "ha",
   "main": [
    "#D3896B",
-   "#DD8363"
+   "#EB8C79"
   ],
   "sec": [
    "#9AD4B4",
-   "#9AD4B4"
+   "#C0DAB3"
   ]
  },
  {
@@ -1168,11 +1252,11 @@
   "season": "thu",
   "main": [
    "#F7ACBC",
-   "#7E8D65"
+   "#7C8F58"
   ],
   "sec": [
    "#ECF7FF",
-   "#ECF7FF"
+   "#A3DEDD"
   ]
  },
  {
@@ -1180,11 +1264,11 @@
   "season": "xuan",
   "main": [
    "#DE879F",
-   "#DE879F"
+   "#E4849D"
   ],
   "sec": [
    "#BCEBD1",
-   "#B6DDBD"
+   "#FECEC5"
   ]
  },
  {
@@ -1192,7 +1276,7 @@
   "season": "ha",
   "main": [
    "#E09974",
-   "#E79265"
+   "#E3955B"
   ],
   "sec": [
    "#CFB8EC",
@@ -1204,11 +1288,11 @@
   "season": "thu",
   "main": [
    "#76AC6A",
-   "#809862"
+   "#83A06D"
   ],
   "sec": [
    "#EFEBE1",
-   "#EFEBE1"
+   "#E7D8C5"
   ]
  },
  {
@@ -1249,26 +1333,14 @@
  },
  {
   "id": "s30",
-  "season": "xuan",
-  "main": [
-   "#7AAB6F",
-   "#D57577"
-  ],
-  "sec": [
-   "#AFEBEE",
-   "#AFEBEE"
-  ]
- },
- {
-  "id": "s30",
   "season": "ha",
   "main": [
    "#E1EA93",
-   "#F39F6C"
+   "#F1A167"
   ],
   "sec": [
    "#EEB0C2",
-   "#F4C1CF"
+   "#F6C2C4"
   ]
  },
  {
@@ -1276,11 +1348,11 @@
   "season": "thu",
   "main": [
    "#DF8C6F",
-   "#9BB984"
+   "#D48772"
   ],
   "sec": [
    "#FEDEC4",
-   "#F4E0D1"
+   "#FFF3E9"
   ]
  },
  {
@@ -1292,7 +1364,7 @@
   ],
   "sec": [
    "#E8E4DA",
-   "#EDF0E5"
+   "#E8E4DA"
   ]
  },
  {
@@ -1300,11 +1372,11 @@
   "season": "ha",
   "main": [
    "#E7A277",
-   "#F39F6C"
+   "#F79B7B"
   ],
   "sec": [
    "#FBBDCF",
-   "#EED3D4"
+   "#FBBDCF"
   ]
  },
  {
@@ -1321,14 +1393,14 @@
  },
  {
   "id": "s32",
-  "season": "xuan",
+  "season": "ha",
   "main": [
-   "#73AC74",
-   "#DA86B8"
+   "#FFBB92",
+   "#FFBB92"
   ],
   "sec": [
-   "#FFE3EA",
-   "#FFE3EA"
+   "#EBF0C6",
+   "#D5E1B5"
   ]
  },
  {
@@ -1336,11 +1408,23 @@
   "season": "thu",
   "main": [
    "#C592B9",
-   "#80A07E"
+   "#D48676"
   ],
   "sec": [
    "#CAEFDD",
-   "#A3DEDD"
+   "#DCFFEE"
+  ]
+ },
+ {
+  "id": "s33",
+  "season": "ha",
+  "main": [
+   "#D88766",
+   "#D88766"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#E4F0FF"
   ]
  },
  {
@@ -1348,7 +1432,7 @@
   "season": "thu",
   "main": [
    "#4A7E3E",
-   "#4E6022"
+   "#617437"
   ],
   "sec": [
    "#FEDEC4",
@@ -1360,11 +1444,11 @@
   "season": "thu",
   "main": [
    "#993842",
-   "#7E9354"
+   "#617437"
   ],
   "sec": [
    "#E9DDC4",
-   "#DCD0B0"
+   "#E2DAC5"
   ]
  },
  {
@@ -1376,7 +1460,7 @@
   ],
   "sec": [
    "#BCEBD1",
-   "#BCEBD1"
+   "#B6DDBD"
   ]
  },
  {
@@ -1400,7 +1484,7 @@
   ],
   "sec": [
    "#F4D2EB",
-   "#F4D2EB"
+   "#F2CDEE"
   ]
  },
  {
@@ -1412,7 +1496,7 @@
   ],
   "sec": [
    "#FFF1F5",
-   "#F6C2C4"
+   "#FFF1F5"
   ]
  },
  {
@@ -1424,7 +1508,7 @@
   ],
   "sec": [
    "#FBEFD6",
-   "#DCD0B0"
+   "#FFF3E4"
   ]
  },
  {
@@ -1432,11 +1516,11 @@
   "season": "ha",
   "main": [
    "#DF8071",
-   "#DF8071"
+   "#EF7D55"
   ],
   "sec": [
    "#F3ECFF",
-   "#F2ECF6"
+   "#FFE5FB"
   ]
  },
  {
@@ -1448,19 +1532,7 @@
   ],
   "sec": [
    "#D5FAE9",
-   "#ECF9F3"
-  ]
- },
- {
-  "id": "s41",
-  "season": "xuan",
-  "main": [
-   "#2C5A21",
-   "#2C5A21"
-  ],
-  "sec": [
-   "#E3F3FF",
-   "#ECF7FF"
+   "#D2E0CC"
   ]
  },
  {
@@ -1468,23 +1540,11 @@
   "season": "ha",
   "main": [
    "#E6A375",
-   "#F9ED6B"
+   "#ED7F4D"
   ],
   "sec": [
    "#79466F",
-   "#AED7F5"
-  ]
- },
- {
-  "id": "s41",
-  "season": "dong",
-  "main": [
-   "#5073B5",
-   "#5B6EC1"
-  ],
-  "sec": [
-   "#FBEFD6",
-   "#FFF3E4"
+   "#79466F"
   ]
  },
  {
@@ -1492,11 +1552,11 @@
   "season": "ha",
   "main": [
    "#E69671",
-   "#E18950"
+   "#DF8B4A"
   ],
   "sec": [
    "#F7F3FF",
-   "#AED7F5"
+   "#E8EEFF"
   ]
  },
  {
@@ -1508,31 +1568,7 @@
   ],
   "sec": [
    "#F0F5CA",
-   "#F0F5CA"
-  ]
- },
- {
-  "id": "s42",
-  "season": "dong",
-  "main": [
-   "#6B6CAE",
-   "#6B6CAE"
-  ],
-  "sec": [
-   "#FFECDE",
-   "#EDD5CB"
-  ]
- },
- {
-  "id": "s43",
-  "season": "xuan",
-  "main": [
-   "#CB656C",
-   "#9E497E"
-  ],
-  "sec": [
-   "#AFEBEE",
-   "#AFEBEE"
+   "#E9F5C8"
   ]
  },
  {
@@ -1540,7 +1576,7 @@
   "season": "ha",
   "main": [
    "#E6A375",
-   "#E9937C"
+   "#F0933B"
   ],
   "sec": [
    "#FFE0E8",
@@ -1552,11 +1588,11 @@
   "season": "thu",
   "main": [
    "#98518A",
-   "#6A7E40"
+   "#617437"
   ],
   "sec": [
    "#E3D6FF",
-   "#E3D6FF"
+   "#D5CBEB"
   ]
  },
  {
@@ -1573,6 +1609,18 @@
  },
  {
   "id": "s45",
+  "season": "ha",
+  "main": [
+   "#DF8C6F",
+   "#F0933B"
+  ],
+  "sec": [
+   "#176A4E",
+   "#176A4E"
+  ]
+ },
+ {
+  "id": "s45",
   "season": "thu",
   "main": [
    "#649958",
@@ -1580,7 +1628,19 @@
   ],
   "sec": [
    "#E4D6FD",
-   "#CFDAFA"
+   "#F19E96"
+  ]
+ },
+ {
+  "id": "s46",
+  "season": "xuan",
+  "main": [
+   "#CE8EB2",
+   "#D48BB1"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#E0D2FD"
   ]
  },
  {
@@ -1604,7 +1664,7 @@
   ],
   "sec": [
    "#FEDEC4",
-   "#FEDEC4"
+   "#F5EBF3"
   ]
  },
  {
@@ -1612,11 +1672,11 @@
   "season": "xuan",
   "main": [
    "#649958",
-   "#B86798"
+   "#C06FA0"
   ],
   "sec": [
    "#FEDEC4",
-   "#FBF8CA"
+   "#F6C3BA"
   ]
  },
  {
@@ -1624,11 +1684,11 @@
   "season": "ha",
   "main": [
    "#D3896B",
-   "#DD8363"
+   "#DE8269"
   ],
   "sec": [
    "#EEB0C2",
-   "#F4C1CF"
+   "#E8C3E4"
   ]
  },
  {
@@ -1636,11 +1696,11 @@
   "season": "thu",
   "main": [
    "#AF71A1",
-   "#74915E"
+   "#83A06D"
   ],
   "sec": [
    "#CCE9FF",
-   "#F2ECF6"
+   "#CEF7FF"
   ]
  },
  {
@@ -1652,7 +1712,7 @@
   ],
   "sec": [
    "#CCE9FF",
-   "#DAF3FE"
+   "#EAF8FB"
   ]
  },
  {
@@ -1660,11 +1720,23 @@
   "season": "thu",
   "main": [
    "#68985D",
-   "#7C8D66"
+   "#83A06D"
   ],
   "sec": [
    "#E5E9BF",
-   "#E5E9BF"
+   "#EADAAE"
+  ]
+ },
+ {
+  "id": "s49",
+  "season": "ha",
+  "main": [
+   "#FEAD94",
+   "#FEAD94"
+  ],
+  "sec": [
+   "#EFEBE1",
+   "#F1F5FF"
   ]
  },
  {
@@ -1672,11 +1744,11 @@
   "season": "thu",
   "main": [
    "#8CBE81",
-   "#9BB984"
+   "#ABC994"
   ],
   "sec": [
    "#EADEFF",
-   "#DCC9E6"
+   "#F0DCFA"
   ]
  },
  {
@@ -1684,11 +1756,11 @@
   "season": "xuan",
   "main": [
    "#7AAB6F",
-   "#EB96C8"
+   "#E38EC0"
   ],
   "sec": [
    "#CAEFDD",
-   "#ADDEC7"
+   "#BDDAC2"
   ]
  },
  {
@@ -1700,7 +1772,7 @@
   ],
   "sec": [
    "#FFD9E3",
-   "#FBF2FA"
+   "#FCD9EB"
   ]
  },
  {
@@ -1708,11 +1780,23 @@
   "season": "thu",
   "main": [
    "#DD90CC",
-   "#C3B58A"
+   "#74915E"
   ],
   "sec": [
    "#EFEBE1",
-   "#F1F8EE"
+   "#EBC8B9"
+  ]
+ },
+ {
+  "id": "s51",
+  "season": "xuan",
+  "main": [
+   "#2F5D24",
+   "#2F5D24"
+  ],
+  "sec": [
+   "#C9F5F7",
+   "#C0FCFB"
   ]
  },
  {
@@ -1720,7 +1804,7 @@
   "season": "ha",
   "main": [
    "#DA8F74",
-   "#DB8162"
+   "#F7997F"
   ],
   "sec": [
    "#555095",
@@ -1736,7 +1820,19 @@
   ],
   "sec": [
    "#E8E4DA",
-   "#D2E0CC"
+   "#ECF9F3"
+  ]
+ },
+ {
+  "id": "s52",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#EFEE8D"
+  ],
+  "sec": [
+   "#176A4E",
+   "#176A4E"
   ]
  },
  {
@@ -1744,11 +1840,11 @@
   "season": "thu",
   "main": [
    "#733567",
-   "#677843"
+   "#94A770"
   ],
   "sec": [
    "#FFD9E3",
-   "#FFCCCE"
+   "#FEDCCE"
   ]
  },
  {
@@ -1756,11 +1852,11 @@
   "season": "ha",
   "main": [
    "#FD9F90",
-   "#FD9F90"
+   "#FE9668"
   ],
   "sec": [
    "#FFE4CF",
-   "#DBE4FF"
+   "#C6ECFB"
   ]
  },
  {
@@ -1768,11 +1864,23 @@
   "season": "thu",
   "main": [
    "#733567",
-   "#546A37"
+   "#677843"
   ],
   "sec": [
    "#E5E9BF",
-   "#E5E9BF"
+   "#D6D4A7"
+  ]
+ },
+ {
+  "id": "s54",
+  "season": "ha",
+  "main": [
+   "#D88669",
+   "#F29E6B"
+  ],
+  "sec": [
+   "#79466F",
+   "#79466F"
   ]
  },
  {
@@ -1780,11 +1888,11 @@
   "season": "thu",
   "main": [
    "#447838",
-   "#546A37"
+   "#5F7A48"
   ],
   "sec": [
    "#EFE3CB",
-   "#EFE3CB"
+   "#D2E0CC"
   ]
  },
  {
@@ -1792,11 +1900,11 @@
   "season": "ha",
   "main": [
    "#EB936B",
-   "#EB936B"
+   "#FD9861"
   ],
   "sec": [
    "#F9F5EB",
-   "#F6F6EB"
+   "#B0DBDA"
   ]
  },
  {
@@ -1804,23 +1912,23 @@
   "season": "thu",
   "main": [
    "#832D47",
-   "#782134"
+   "#76213E"
   ],
   "sec": [
    "#C3EEF0",
-   "#FCDEC7"
+   "#C5D0EF"
   ]
  },
  {
-  "id": "s56",
-  "season": "xuan",
+  "id": "s55",
+  "season": "dong",
   "main": [
-   "#4A7E3E",
-   "#4A7E3E"
+   "#6F5897",
+   "#6F5897"
   ],
   "sec": [
-   "#DEE2B9",
-   "#D5E1B5"
+   "#EFE6FF",
+   "#F6E9FD"
   ]
  },
  {
@@ -1840,11 +1948,11 @@
   "season": "ha",
   "main": [
    "#DE826A",
-   "#DD7A5F"
+   "#DE826A"
   ],
   "sec": [
    "#F9D2DD",
-   "#F0DCFA"
+   "#F4F1C3"
   ]
  },
  {
@@ -1860,15 +1968,27 @@
   ]
  },
  {
+  "id": "s58",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#F0EF84"
+  ],
+  "sec": [
+   "#79466F",
+   "#79466F"
+  ]
+ },
+ {
   "id": "s59",
   "season": "thu",
   "main": [
    "#649958",
-   "#7E9354"
+   "#617437"
   ],
   "sec": [
    "#AFEBEE",
-   "#A3DEDD"
+   "#AFEBEE"
   ]
  },
  {
@@ -1876,11 +1996,11 @@
   "season": "ha",
   "main": [
    "#EAE697",
-   "#BB4F25"
+   "#F0933B"
   ],
   "sec": [
    "#EDCCE5",
-   "#EDCCE5"
+   "#F3DAFE"
   ]
  },
  {
@@ -1900,11 +2020,23 @@
   "season": "thu",
   "main": [
    "#4A7E3E",
-   "#4E6022"
+   "#6A7E40"
   ],
   "sec": [
    "#E3D6FF",
-   "#E3D6FF"
+   "#FFCCCE"
+  ]
+ },
+ {
+  "id": "s62",
+  "season": "ha",
+  "main": [
+   "#F8B287",
+   "#F8B287"
+  ],
+  "sec": [
+   "#B9C9F9",
+   "#CCCCF8"
   ]
  },
  {
@@ -1912,11 +2044,23 @@
   "season": "thu",
   "main": [
    "#DF9ED9",
-   "#AEBF8E"
+   "#9FB577"
   ],
   "sec": [
    "#FFE3EA",
-   "#EBC5D0"
+   "#FFE3EA"
+  ]
+ },
+ {
+  "id": "s63",
+  "season": "ha",
+  "main": [
+   "#EFE495",
+   "#E9F090"
+  ],
+  "sec": [
+   "#E69498",
+   "#E69498"
   ]
  },
  {
@@ -1924,11 +2068,11 @@
   "season": "ha",
   "main": [
    "#FEAD94",
-   "#FEAD94"
+   "#D89964"
   ],
   "sec": [
    "#EDB9D5",
-   "#D9F4FF"
+   "#C0FCFB"
   ]
  },
  {
@@ -1936,11 +2080,11 @@
   "season": "thu",
   "main": [
    "#98CB8D",
-   "#9DC49B"
+   "#B2C889"
   ],
   "sec": [
    "#F3E7CE",
-   "#FEEEC1"
+   "#FFEBD2"
   ]
  },
  {
@@ -1948,23 +2092,11 @@
   "season": "dong",
   "main": [
    "#67B9E2",
-   "#65B5E3"
+   "#67B9E2"
   ],
   "sec": [
    "#CCF8FA",
-   "#F4F7EC"
-  ]
- },
- {
-  "id": "s65",
-  "season": "xuan",
-  "main": [
-   "#A45B86",
-   "#FF95B7"
-  ],
-  "sec": [
-   "#C9F5F7",
-   "#CDF7FF"
+   "#ECF9F3"
   ]
  },
  {
@@ -1972,11 +2104,11 @@
   "season": "ha",
   "main": [
    "#DE826A",
-   "#ED8D7B"
+   "#E29858"
   ],
   "sec": [
    "#C4B4E5",
-   "#C4B4E5"
+   "#CDCEEE"
   ]
  },
  {
@@ -1984,11 +2116,11 @@
   "season": "thu",
   "main": [
    "#FF95B7",
-   "#788859"
+   "#D2836E"
   ],
   "sec": [
    "#F9F5EB",
-   "#E8FBEB"
+   "#F1F8EE"
   ]
  }
 ]
