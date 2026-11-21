@@ -1134,6 +1134,15 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
 html body .pc[data-k2].kpwide>.pcl>:is(.pcname,.pcrk,b:first-of-type){text-align:center!important;justify-content:center!important;align-self:stretch!important}
 html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!important;text-align:center!important;margin-left:0!important;margin-right:0!important}
 `;document.head.appendChild(st)})();
+/* KIT §6.3c — ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình, Hoàng tự ×5, Nhân sự …) the TOP BLOCK (pane bar, sub-tabs, the headline, the face/mother strip) is FIXED and only the person card
+   below it scrolls (inside itself), never the whole panel — the strip is never cut off. Pure CSS on the shared wrappers (.pgwrap > .pc), no host calls it. */
+(function(){const st=document.createElement("style");st.id="kit-pc-frame";st.textContent=`
+#panel:has(> .pgwrap > .pc){display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#panel:has(> .pgwrap > .pc) > *{flex:0 0 auto}
+#panel:has(> .pgwrap > .pc) > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
+#panel > .pgwrap:has(> .pc) > *{flex:0 0 auto}
+#panel > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+`;document.head.appendChild(st)})();
 (function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
