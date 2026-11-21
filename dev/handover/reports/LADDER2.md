@@ -32,3 +32,11 @@ t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jad
 
 ## Notes
 - DESIGN20 checklist gaps for t7/t8 (neckline band not embroidered, slim front edges, no inner hem band, no jade set) NOT applied — owner L1627 says HQP/HH keep their own style; ask owner if G47 items should still be added there.
+
+## Step 5 — CHECK1 01:50Z FAIL on t7 v8e / t8 v10d → fixed as t7 v8f (9991) / t8 v10e (9967), gates PASS, keep --all 289 PASS
+- G45 (both): jade pendants "never covered by sleeve, cape or shawl". t8: after "long jade-and-gold belt pendants with pearl tassels". t7: that phrase sits inside store S14 (gate FAIL if touched) → put on the outfit belt instead ("a jade-and-gold belt with long tassels, its pendants never covered by sleeve, cape or shawl").
+- t8 F18: pose hairpin = store shape words "slim and palm-length, held between her fingers, never a sceptre, raised and admired, the other hand beneath it".
+- t8 extra A38 repeats: outfit "a jade-and-gold belt with long tassels" (repeat of luxury pendants), crown ", rubies and pearls" (repeat of "More jewels on the crown (rubies, sapphires, pearls and jade)"), colour list ", a broad yellow collar" (repeat of "her broad yellow collar"), pose ", the robe falling still and straight".
+- HOLD (Foreman 01:53Z): no t6–t8 gens until DESIGN20's new G40 wording is proven on t4/t5 v8 drafts; then swap into OUTER_TIED source + t1–t3, xuân, t6–t8, re-gate, CHECK1.
+- Vase check (owner L1438): none in t1–t3 v6, xuân v7, t6 COMOIf, t7 v8f, t8 v10e. Only DESIGN20's t4 COMOIf / COMOIg hold "a small white-jade vase" (pose).
+- CHECK1 rule question for the owner: "strands of pearls across the chest" (t6–t8) vs A41 no necklaces.

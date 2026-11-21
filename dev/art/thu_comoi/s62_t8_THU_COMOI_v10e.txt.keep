@@ -1,0 +1,13 @@
+base: dev/art/thu_comoi/s62_t8_THU_COMOI_v10c.txt
+allow: long jade-and-gold belt pendants with pearl tassels  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); CHECK1 01:50Z G45 standing checklist (jade never covered, as t4/t5)
+allow: a gold phoenix hairpin with pearl dangles, held in the hand raised and admired, the other hand beneath it  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); CHECK1 01:50Z F18 store hairpin shape words
+allow: eyes open, floor-length robe with slippers visible, no train  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); S19 gate: store feet tail (G23 owner 20/11)
+allow: never copy anything but its colour  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of 'Image 2 is only a colour reference' (A38 std trim list)
+allow: the royal yellow in the robe is exactly that colour  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of the yellow hex sentence in COLOUR RULE
+allow: with slippers visible  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of the S19 feet tail (outfit copy, G23 feet words)
+allow: never a single flat colour all over  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of 'NOT an all-yellow robe' + 'secondary clearly visible in large areas'
+allow: the crown, hairpin and jewellery gold in the same 18K tone  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of '(medium depth, 18K gold tone)' in the same sentence
+allow: a jade-and-gold belt with long tassels  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of the luxury sentence 'long jade-and-gold belt pendants with pearl tassels'
+allow: rubies and pearls  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of 'More jewels on the crown (rubies, sapphires, pearls and jade)'
+allow: a broad yellow collar and a wide inner panel  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: ', a broad yellow collar' = repeat of '(the … edge, her broad yellow collar)'
+allow: the robe falling still and straight  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: pose tail repeat of 'floor-length robe, slim, hanging close'
