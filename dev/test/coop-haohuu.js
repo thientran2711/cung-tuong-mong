@@ -62,7 +62,7 @@ async function geo(o,seat,dev,phase){/* story cards (.kmov) and the open card's 
   const pics=[...hud.querySelectorAll('img,svg,button,.kseal-hud')].filter(e=>!F0.contains(e)&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&hit(e.getBoundingClientRect(),R)).map(e=>e.id||e.className.toString().slice(0,20));
   const kb=document.getElementById('kntbox'),kc=document.getElementById('kntchip');
   const over=[];const onTop=e=>{const r=e.getBoundingClientRect();/* #kxcatch = the kit's TRANSPARENT outside-tap catcher under an open card (jk4, paints nothing): looked through */const t=document.elementsFromPoint(r.left+r.width/2,r.top+r.height/2).find(x=>x.id!=='kxcatch');const ok=!!t&&F.contains(t);if(!ok&&t)over.push((t.id||'')+'.'+String(t.className).slice(0,30)+'<'+(t.parentNode&&(t.parentNode.id||String(t.parentNode.className).slice(0,20))));return ok};
-  const bd=b.querySelector('.kctmf-b');const im=b.querySelector('.kctmf-a>*');
+  const bd=b.querySelector(':scope>.kbdg');const im=b.querySelector(':scope>.kctmf-a');
   return{box:q(B),wrap:q(R),words,pics,kbox:!!(kb&&kb.getClientRects().length&&hit(kb.getBoundingClientRect(),R)),kchip:!!(kc&&kc.getClientRects().length&&getComputedStyle(kc).visibility!=='hidden'&&!kc.classList.contains('out')&&hit(kc.getBoundingClientRect(),R)),
    top:onTop(b),badge:bd?bd.textContent:'',badgeTop:bd?onTop(bd):null,grey:im?/grayscale/.test(getComputedStyle(im).filter):null,off:b.classList.contains('koff'),up,st:COOPW.frInfo().st,over}});
  const k=seat+' '+dev;ok(!!g&&!g.notInBar,`${k} ${phase}: icon on screen (the bar's own icon stays a child of the bar)`,g);if(!g||g.notInBar)return null;
@@ -110,14 +110,15 @@ async function check(o,seat,dev,phase){const [W,H]=DEV[dev];await o.p.setViewpor
  const r=await o.p.evaluate(()=>{const b=document.querySelector('#kctmf .kctmf'),hud=document.querySelector('header.hud');const q=e=>{const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
   if(!b||!b.getClientRects().length)return{box:null};const R=b.getBoundingClientRect(),H=hud.getBoundingClientRect();const inBar=R.top>=H.top-1&&R.bottom<=H.bottom+1&&R.left>=H.left-1&&R.right<=H.right+1;
   const vis=[...b.querySelectorAll('*')].filter(e=>!e.closest('.kctmf-vh')&&e.children.length===0&&e.getClientRects().length).map(e=>e.textContent.trim()).filter(Boolean);
-  const bd=b.querySelector('.kctmf-b');const st=COOPW.frInfo().st;
-  return{box:q(b),inBar,sq:getComputedStyle(b).borderRadius,vis,badge:bd&&bd.textContent,st,off:b.classList.contains('koff'),img:(b.querySelector('img')||{}).getAttribute&&b.querySelector('img').getAttribute('src'),
+  const bd=b.querySelector(':scope>.kbdg');const st=COOPW.frInfo().st;
+  return{box:q(b),inBar,sq:getComputedStyle(b).borderRadius,vis,badge:bd&&bd.textContent,bk:bd?bd.className:'',st,off:b.classList.contains('koff'),img:(b.querySelector('img')||{}).getAttribute&&b.querySelector('img').getAttribute('src'),
    rail:!!document.querySelector('#krail [data-rail=haohuu]'),kit:b.classList.contains('krailb'),par:document.getElementById('kctmf').parentNode===hud}});
  ok(!!r.box,`${seat} ${dev} ${phase}: «Hảo hữu» icon shown`,r);
  ok(r.inBar,`${seat} ${dev} ${phase}: icon inside the fixed top bar`,r.box);
  ok(r.sq&&!/50%/.test(r.sq),`${seat} ${dev} ${phase}: square kit icon button (no round tap target)`,r.sq);
  ok(r.vis.every(t=>/^[✓…⏸]$|^⏸?\s?\d+:\d\d$|^Hết buổi$/.test(t)),`${seat} ${dev} ${phase}: no name / status words on screen (badge + clock only)`,r.vis);
  ok(r.st==='away'?(r.off&&!r.badge):(!r.off&&(r.st==='ready'?r.badge==='✓':r.st==='hold'?r.badge==='⏸':r.badge==='…')),`${seat} ${dev} ${phase}: online colour + badge matches her status`,{st:r.st,badge:r.badge,off:r.off});
+ ok(!r.bk||/^kbdg (ok|busy|pause)$/.test(r.bk),`${seat} ${dev} ${phase}: the badge is the kit §77b kitStBadge part (.kbdg)`,r.bk);
  ok(r.kit&&r.par,`${seat} ${dev} ${phase}: kit square button .krailb, a child of the top bar header.hud`,{kit:r.kit,par:r.par});
  await geo(o,seat,dev,phase);
  ok(phase==='stranger'?/ico-friend/.test(r.img||''):!/ico-friend/.test(r.img||''),`${seat} ${dev} ${phase}: icon = ${phase==='stranger'?'painted kit icon (no face before meeting)':'her portrait'}`,r.img);

@@ -185,11 +185,9 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 #kctmp .dlg #kctmpb{padding:8px 12px 2px}#kctmp .dlg #kctmpb .kpnote{margin:6px 0 0}
 #kctmp .dlg #kctmpr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
 .krailb.kctmf{width:32px;height:32px;min-width:0;min-height:0;padding:3px;flex:0 0 auto}
-.kctmf .kctmf-a{position:relative;display:block;width:26px;height:26px;border-radius:5px;overflow:visible;pointer-events:none}
-.kctmf .kctmf-a>img,.kctmf .kctmf-a>:not(.kctmf-b){width:26px!important;height:26px!important;min-width:0!important;margin:0!important;border-radius:5px;object-fit:cover;display:block}
-.kctmf.koff .kctmf-a>img,.kctmf.koff .kctmf-a>:not(.kctmf-b){filter:grayscale(1) brightness(.92);opacity:.7}
-.kctmf .kctmf-b{position:absolute;right:-7px;bottom:-6px;min-width:15px;height:15px;padding:0 2px;border-radius:50%;font:700 10px/15px system-ui,sans-serif;text-align:center;color:#fff;box-shadow:0 0 0 1.5px #fffaf0;background:#8a7350}
-.kctmf .kctmf-b.g{background:#2f8a4a}.kctmf .kctmf-b.w{background:#b07a18}.kctmf .kctmf-b.n{background:#7a6a58;letter-spacing:-1px}
+/* the picture inside the kit button; the status badge + the grey offline state are the kit's (§77b kitStBadge / .krailb.koff, K-BADGE-HAOHUU) */
+.kctmf>.kctmf-a{display:block;width:26px;height:26px;border-radius:5px;overflow:hidden;pointer-events:none}
+.kctmf>.kctmf-a>img,.kctmf>.kctmf-a>*{width:26px!important;height:26px!important;min-width:0!important;margin:0!important;border-radius:5px;object-fit:cover;display:block}
 .kctmf .kctmf-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #kctmf{display:flex;align-items:center;gap:6px}#kctmf .kctmf-t{margin:0;white-space:nowrap;font-size:.72rem;padding-top:0;padding-bottom:0;background:#fffaf0f2}
 #kctmf{position:absolute;z-index:8;margin:0;max-width:calc(100vw - 16px)}
@@ -241,9 +239,10 @@ const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
  const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?"⏸ ":""}${mmss(o.left)}</span>`;
  const av=o.known&&o.face?o.face:`<img src="img/kit/ico-friend.webp" alt="" decoding="async">`;
- const bd=o.st==="ready"?`<b class="kctmf-b g" aria-hidden="true">✓</b>`:o.st==="hold"?`<b class="kctmf-b w" aria-hidden="true">⏸</b>`:o.st==="away"?"":`<b class="kctmf-b n" aria-hidden="true">…</b>`;
+ /* KIT §77b (K-BADGE-HAOHUU): ready → ok ✓ green · hold → pause ⏸ · busy / work → busy … · away → no badge + the button's .koff grey; the badge is the LAST child of the .krailb */
+ const bst=o.st==="ready"?"ok":o.st==="hold"?"pause":o.st==="away"?"":"busy";const bd=typeof kitStBadge==="function"?kitStBadge(bst):"";
  const lab=esc(nm+": "+s[2]);
- return `<button type="button" class="krailb kctmf${o.st==="away"?" koff":""}" data-ctm="fr" aria-label="${lab}" title="${lab}"><span class="kctmf-a">${av}${bd}</span><span class="kctmf-vh">${esc(nm)} · ${s[1]} ${s[2]}</span></button>${clk}`}
+ return `<button type="button" class="krailb kctmf${o.st==="away"?" koff":""}" data-ctm="fr" aria-label="${lab}" title="${lab}"><span class="kctmf-a">${av}</span><span class="kctmf-vh">${esc(nm)} · ${s[1]} ${s[2]}</span>${bd}</button>${clk}`}
 /* the friend's status in words (ONE table: the chip panel below + the «Hảo hữu» partner sheet, jhaohuu.js) */
 function frWord(o){o=o||{};return {ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
   away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc"}
