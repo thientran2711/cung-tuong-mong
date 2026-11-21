@@ -96,3 +96,16 @@ Look:
 - t1: very wide open collar, off both shoulders, bare collarbones; plain narrow ivory collar band; embroidery = many SMALL lilac+ivory sprays all over, a wider lilac/white flower band at the hem; peach-pink robe + ivory inner robe, ivory sash with long ends, both colours clear; one small lilac in the hair; loose long hair; book held at side; mid-step, sleeves flowing, cuffs ivory.
 - t2: wide open collar off the shoulders with two stacked narrow bands (ivory piping + small flower band); body embroidery = fewer but LARGER tiger lilies (ivory/gold) scattered, more than t1 in size, sparser in count; peach pink + ivory clear; ONE peach-orange lily in hair, medium; jade disc on sash; blue pellet drum raised in one hand; skirt flares wide at the hem.
 - t3: widest/deepest open collar (low V, shoulders bare) with a WIDE embroidered rose band; densest embroidery = medium ivory-gold China roses over the whole robe, plus wide rose bands at sleeve ends/hem; peach pink + ivory clear; one big ivory rose in hair; jade plaques + pearl strings + green tassels hang each side of the girdle; bamboo flute at waist, other hand at hairpin; clear 3/4 turn to the right.
+
+# JOB L1573 — xuân Hán t1–t3 v2 drafts (gpt-2-6 low 1k, owner pre-approved)
+gpt-2-6, quality low (extraSettings), 1k 9:16 (752x1344), seed 7172, ref nVsrRMPYQD only. simulate exact 55 each, total 165 cr. Prompts exactly: dev/art/seasons4/s62_t{1,2,3}_HAN_BAC_v2.txt (9463 / 9711 / 9983 ch).
+| pic | creation | link |
+|---|---|---|
+| Xuân Hán t1 v2 | gOm5jQwSXO | https://www.magnific.com/app/creation/gOm5jQwSXO |
+| Xuân Hán t2 v2 | rgXu5vFxtc | https://www.magnific.com/app/creation/rgXu5vFxtc |
+| Xuân Hán t3 v2 | DoOG0RNpcl | https://www.magnific.com/app/creation/DoOG0RNpcl |
+Sheet dev/handover/review-sheets/xuan_han_t13_v2_L1573/sheet.jpg (+ xuan_han_tN_v2.webp); labels 'Xuân Hán tN v2 · s62 · GPT 2.6 low 1k · 55 cr' + 'Tổng: 165 cr' on the sheet. Viewed each picture once at 1024, not the finished sheet.
+Look:
+- t1: collar edges rest ON the shoulder points, shoulders covered (not off-shoulder), a soft V crossing high; ivory inner robe with its own neat crossed collar visible just inside; dense small lilac sprays all over + lilac hem band, ivory cuffs; one small lilac in hair; book held; mid-step.
+- t2: collar on the shoulder points, shoulders covered; ivory inner collar with a small flower band visible and neat; fewer, larger ivory tiger lilies over the robe (sparser than t1, bigger flowers); one peach-orange flower in hair; drum raised; hem flares.
+- t3: collar band is WIDE, rose-embroidered, and sits right at/just over the tops of the shoulders (close to a boat/off-shoulder line, not clearly covered); ivory inner robe visible and neat; medium China roses densely over the whole robe + wide rose bands at sleeves/hem; girdle with jade plaques/pearls/tassels; hair: ONE slim pin with a pearl dangle by the hand + the rose, hair mostly loose; NO spiky crown of pins.
