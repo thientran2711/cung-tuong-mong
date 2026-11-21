@@ -67,6 +67,15 @@ function diff(b,n){const ops=[];let skip=0;
  HL.stat.skipNum+=skip;return ops}
 HL.diff=diff;HL.canon=canon;
 
+
+/* r2: at a room start / rejoin / merged week / face index ready, the host sends EVERY world person's face as it holds it (idempotent "s" ops,
+   on top of the diff): a face the diff could not see (the base already held it on the host only, a pick in a gap) still reaches the guest */
+const FACEW=new Set(["start","week","peer","ready","state"]);let faceDue=false;
+function facePaths(){const L=[];try{const T=S.thO;if(T&&!S.thDead){if(T.fid)L.push([["S","thO","fid"],T.fid]);for(const s of T.staff||[])if(s&&s.fid&&s.sid!=null)L.push([["S","thO","staff",["s",s.sid],"fid"],s.fid])}
+  for(const v of rivals||[]){if(!v||v.coop||v.id==null)continue;const R=["R",["i",v.id]];if(v.fid)L.push([R.concat(["fid"]),v.fid]);if(v.maid&&v.maid.fid)L.push([R.concat(["maid","fid"]),v.maid.fid]);
+   for(const s of v.staff||[])if(s&&!s.coop&&s.fid&&s.sid!=null)L.push([R.concat(["staff",["s",s.sid],"fid"]),s.fid]);for(const k of v.kids||[])if(k&&k.fid&&k.id!=null)L.push([R.concat(["kids",["i",k.id],"fid"]),k.fid])}}catch(e){}return L}
+function faceOps(have){const seen=new Set((have||[]).filter(o=>o[0]==="s").map(o=>JSON.stringify(o[1])));const out=[];for(const [p,f] of facePaths()){const k=JSON.stringify(p);if(!seen.has(k))out.push(["s",p,f])}HL.stat.faceOps=(HL.stat.faceOps||0)+out.length;return out}
+HL.faceOps=faceOps;
 /* ---------- HOST: send what it wrote outside the merge ---------- */
 let shared=null,tmr=0,nmQ=[];
 /* the friend's own face (her pid, a pool identity) is reserved in the ONE world face list on the host too: before, only her seat held it
@@ -80,7 +89,7 @@ function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function"
   const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}}catch(e){}}
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
  if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
- try{const now=canon();if(shared)ops=diff(shared,now);shared=now}catch(e){console.error("hl check",e);return}
+ try{const now=canon();/* r2: no shared world yet (between a room start / stop and its base): diff against the room's own base C, never swallow the host's writes made meanwhile (a face given in that gap reached no one) */if(!shared&&CW.base&&CW.base.W)try{shared=fromC(J(CW.base.W));HL.stat.baseFb=(HL.stat.baseFb||0)+1}catch(e){shared=null}if(shared)ops=diff(shared,now);shared=now;if(FACEW.has(why)||faceDue){faceDue=false;ops=ops.concat(faceOps(ops))}}catch(e){console.error("hl check",e);return}
  HL.stat.ms=Math.round(performance.now()-t0);const nm=nmQ.splice(0);
  if(!ops.length&&!nm.length)return;
  try{COOP.send({t:"act",k:K,week:COOP.state.week||0,why:String(why||""),ops,nm,id:K+Date.now().toString(36)});HL.stat.sent++;HL.stat.ops+=ops.length;HL.last={why,n:ops.length,nm:nm.length,ex:ops.slice(0,6)};lg(["send",why,ops.length,nm.length])}catch(e){console.error("hl send",e)}}
@@ -97,14 +106,14 @@ function fidBack(){if(!host()||!FID.size||!S)return 0;let n=0;const U=typeof fig
  for(const p of L){const k=whoKey(p);const f=k&&FID.get(k);if(!f||p.fid===f)continue;const o=held.get(f);if(o&&o!==p)continue;/* someone else holds it now */
   const was=p.fid;p.fid=f;held.set(f,p);if(was){held.delete(was);const i=U.indexOf(was);if(i>=0)U.splice(i,1)}if(!U.includes(f))U.push(f);n++}
  HL.stat.fidBack=(HL.stat.fidBack||0)+n;return n}
-function soon(why,ms){clearTimeout(tmr);tmr=setTimeout(()=>{tmr=0;check(why)},ms==null?250:ms)}
+function soon(why,ms){if(FACEW.has(why))faceDue=true;/* r2: a later "pick" timer must not cancel the faces a start / week check owes */clearTimeout(tmr);tmr=setTimeout(()=>{tmr=0;check(why)},ms==null?250:ms)}
 HL.check=check;
 /* what the guest holds right after a merged week / a new world = that C's world; the host's own writes after it are the difference */
 function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
-COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host())baseFrom(m.state,"week");else setTimeout(nmAgain,0)});
+COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host()){/* r2: a face the merged week dropped comes back (one person, one face for life) */try{if(!lvl3())fidBack()}catch(e){}baseFrom(m.state,"week")}else setTimeout(nmAgain,0)});
 COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
 COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host()&&!lvl3())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
-COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear()});
+COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear();try{FLAST.clear()}catch(e){}});
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
 COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
 /* every rename the host makes (any sweep: load, start, month) goes to the guest's own texts */
@@ -114,6 +123,28 @@ if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){const r=f0.appl
 function wrapPick(name){const f=window[name];if(typeof f!=="function")return;const g=function(who){let w=null,a;try{w=who||(name==="figThPick"&&S?S.thO:null);a=w&&w.fid}catch(e){}const r=f.apply(this,arguments);
   try{if(CW.on&&host()&&w&&w.fid){fidNote(w);if(w.fid!==a)soon("pick")}}catch(e){}return r};window[name]=g;return g}
 try{const g=wrapPick("figThPick");if(g)figThPick=g}catch(e){}
+/* r2 (law 11, the whole lazy-face family): a face can also be given by a path no wrapper sees (jfigx figFor / figPick of S.thO call their
+   module's own figThPick; any engine reader holding the old figPick). e2e 1/5 + probe 3/8 rooms: the host showed the Thái hậu c29 (or a consort
+   r2 c20) at the start, no check ever ran for it, the guest had no face, and the next merged week re-drew her (c29 -> c22). Now the HOST
+   scans every world person's face after each of its renders (cheap: one Map compare) and after its face index becomes ready; any new or
+   changed face is noted (FID, kept for life) and sent at once. Before the face index is ready (figxReady false) figFill cannot give faces:
+   the check is tried again until it is, so every figure has its face on BOTH seats from week 0. */
+const FLAST=new Map();
+function fidScan(){if(!CW.on||!host()||lvl3()||!S)return 0;let n=0;try{for(const p of worldPeople()){if(!p||!p.fid)continue;const k=whoKey(p);if(!k)continue;
+  if(FLAST.get(k)!==p.fid){FLAST.set(k,p.fid);fidNote(p);n++}}}catch(e){}HL.stat.scan=(HL.stat.scan||0)+n;return n}
+HL.fidScan=fidScan;
+let readyT=0,readyN=0;
+function whenReady(){if(readyT||!CW.on||!host()||lvl3())return;if(typeof figxReady!=="function"||figxReady())return;
+ readyT=setTimeout(function w(){readyT=0;if(!CW.on||!host())return;if(figxReady()){readyN=0;check("ready");return}if(++readyN<120)readyT=setTimeout(w,500)},500)}
+/* r2 guest: no path of HER render stores a world person's face (probe 2/16 rooms: Hạ Chiêu Nghi consort:c16 on the host, maid:m34 stored on
+   her seat by an unwrapped lazy pick, kept by both merges). Each world person's face before her render is put back after it (shown faces come
+   from the seeded guest pick, never stored); the host's faces reach her only through the merge / the host's ops. */
+function gSnap(){const M=new Map();try{for(const p of worldPeople())if(p&&!mine(p))M.set(p,p.fid==null?null:p.fid)}catch(e){}return M}
+function gBack(M,n0){let n=0;try{const U=typeof figUsed==="function"?figUsed():null;const add=new Set();for(const [p,f] of M){const now=p.fid==null?null:p.fid;if(now!==f){if(now)add.add(now);if(f==null)delete p.fid;else p.fid=f;n++}}
+  if(U&&add.size&&U.length>n0){const keep=U.slice(0,n0),tail=U.slice(n0).filter(x=>!add.has(x));U.length=0;keep.concat(tail).forEach(x=>U.push(x))}}catch(e){}if(n)HL.stat.gBack=(HL.stat.gBack||0)+n;return n}
+if(typeof render==="function"){const r0=render;render=function(){const g=live()&&!host();let M=null,n0=0;if(g)try{M=gSnap();n0=typeof figUsed==="function"?figUsed().length:0}catch(e){M=null}
+  const r=r0.apply(this,arguments);try{if(live()&&host()){if(fidScan())soon("pick");whenReady()}else if(g&&M)gBack(M,n0)}catch(e){}return r};window.render=render}
+
 /* ---------- the guest never stores a world person's face ---------- */
 function mine(who){try{if(!S||who===S||who===S.maid)return true;if((S.staff||[]).includes(who))return true;
   if((S.kids||[]).includes(who))return true;if(typeof tsbPets==="function"&&tsbPets(S).includes(who))return true}catch(e){}return false}
