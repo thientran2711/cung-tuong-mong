@@ -12,6 +12,7 @@ carries the master common block B25, the store rank text, the F2 flower, the new
   D4 xuân palette (B20): ice blue -> peach-blossom pink, #71B5D7 -> #EB8186, mint mist -> ivory white
   D5 COLLAR CUT (flowing) sentence of the Hán set (t4 open5, 'wrap and belt' -> 'wrap and sash': t1–t3 have a sash)
   D6 CAPTION line (G31)
+DESIGN18 (owner L1577 via Foreman C #14, A39): INNER ROBE clause only: no crossed inner collar, straight horizontal top edge (no diagonal at the throat), same length budget (gate S01/M13 forbid more trims); LIMIT 9990->10000 (= check_store PROMPT_MAX).
 Run from the repo root:  python3 dev/art/seasons4/make_han_xuan_t13.py   (writes the 3 files + prints lengths; gate = check_store + keep_check)."""
 import os, re, subprocess, sys
 D = os.path.dirname(os.path.abspath(__file__)); ART = os.path.dirname(D); ROOT = os.path.dirname(os.path.dirname(ART))
@@ -30,8 +31,8 @@ STORE_FABRIC = ("The FABRIC is thin, light, flowing silk and gauze with a soft s
                 "trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.")
 HEAD = "OPEN-NECK LOOK: collar open OFF the neck to the shoulder points: bare neck and collarbones. "
 COLLAR = ("the collar is worn moderately OPEN: its two edges rest exactly ON the shoulder points, shoulders covered (never off the shoulder), "
-          "and curve down to cross high above the sash, never a deep low V; INNER ROBE: opaque mint mist, its own neat crossed collar "
-          "just inside, crossing higher; its collar edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
+          "and curve down to cross high above the sash, never a deep low V; INNER ROBE: opaque mint mist, NO crossed collar, its top edge "
+          "straight across below the collarbones; that edge edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
 HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a long floor-length straight-hem robe (zhiju) in ice blue over an inner "
        "robe in mint mist, the front edge falling straight down to an even hem (no wrap spiral, no curved wrap panel, never a short jacket); wide long sleeves "
        "(one single visible sleeve layer, every inner sleeve hidden inside), the sleeve body plain, ending in embroidered mint mist cuff bands; {edge}; "
@@ -64,7 +65,7 @@ COLLAR_CUT = (" COLLAR CUT (flowing): the collar lines are soft CURVES, never fl
 
 # TRIM (A38: only duplicated boilerplate, each stated elsewhere in the same prompt; the SAME list as DESIGN16's approved-draft trims and
 # make_han_bac.TRIM[4]); applied in this order, the same count for all three ranks, just enough for the longest file to fit LIMIT.
-LIMIT = 9990
+LIMIT = 10000   # = check_store PROMPT_MAX (DESIGN18: was 9990)
 TRIM = [" Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin;",   # = master full-body + skin sentences
         "; face clearly visible, 3/4 or frontal view.",                    # = 'The whole face clearly visible' + ANGLE sentence
         r"; her signature colour family [^.]*? robe(?=\.)",                 # = COLOUR RULE + TWO-COLOUR RULE (make_han_bac.TRIM[4])
