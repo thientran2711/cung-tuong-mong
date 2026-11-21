@@ -53,3 +53,8 @@ Gates: check_store tp7/tp8 a22 PASS, keep_check PASS. Commit df0b5b9. Sent to VE
 
 ## JOB 3b — L1887 correction (via #25): tua rua = pearl net
 thu_comoi/s62_t7_THU_vankien2_L1887b.txt / s62_t8_THU_vankien2_L1887b.txt (f0d2334): "small gold tassels (tua rua) hanging from it" → "a pearl net (tua rua) of small pearls and jade beads over the collar, richer than the Quý phi's [t8: the richest of all], a pearl fringe below, never silk tassels" (T1QP1 words from thu_comoi/s62_t6_THU_vankien2_L1887.txt). Gates PASS. VE8 told to draw L1887b (instead, or in addition if L1887 already drawn).
+
+## JOB 3c — L1887c (go from #25 08:35Z, option 1 only)
+VE8 drew the TASSEL L1887 pair: t7 xSBqfnXjfW, t8 SyhrHMVUb8 (sheet thu_t7_t8_vankien2_L1887.png): neckline OK; collar reads one tier; t8 jade disc (pendant look) + red on collar.
+Fix: t8 thu_comoi/s62_t8_THU_vankien2_L1887c.txt (fe606a3): "many long strands of pearls and jade across the chest" → "many long strands of pearls only across the chest". t7 needs none (already pearls only) → t7 L1887b stays. No tier words added (#25: copy eIPc7xcdqL y chang). Gates PASS. VE8 told: draw t7 L1887b + t8 L1887c, report to Foreman C #26 session_01D3E3NXDFbJUswJKxtfWLwX.
+Open: red on t8 collar (crown 'a few smooth red gems' bleed) — not changed.
