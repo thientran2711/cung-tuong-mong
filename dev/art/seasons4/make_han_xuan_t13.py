@@ -22,6 +22,10 @@ contradiction; collar crossing above the sash kept = the L1577 liked t2 collar);
 DESIGN19 (owner L1604 via Foreman C #14, A39, files _v5): COLLAR back to a real Han crossed collar (jiaoling) from the liked Han words
 (t5 gon/open2 + t4-t6 open5c): one broad V crossing right over left just above the sash; inner collar = layered edge inside the same V (no horizontal/square inner top =
 the beizi/Song look of v3, no second diagonal at the throat = L1577); front edge below the crossing straight down (zhiju, L1601).
+DESIGN19 JOB 2 (owner L1606 + L1607 via Foreman C #14, files _v6): design paragraph REPLACED by a new Han quju (khúc cư) design: two visible
+robe layers with LAYERED crossed jiaoling collars (two bands in one V), outer front panel wrapping once round to the side with a curved bordered hem
+(the t4 Tần short-wrap words, kept simpler), zhiju words dropped (L1607: trực cư only at a higher rank); G42: every tier embroidered edge + jade,
+t2 carries t1, t3 carries t2. Rest still built from the store/master.
 Run from the repo root:  python3 dev/art/seasons4/make_han_xuan_t13.py   (writes the 3 files + prints lengths; gate = check_store + keep_check)."""
 import os, re, subprocess, sys
 D = os.path.dirname(os.path.abspath(__file__)); ART = os.path.dirname(D); ROOT = os.path.dirname(os.path.dirname(ART))
@@ -39,36 +43,36 @@ def sw(s, a, b):
 STORE_FABRIC = ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and "
                 "trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.")
 HEAD = "OPEN-NECK LOOK: collar open OFF the neck, SECURE on the shoulders: bare neck and collarbones. "
-COLLAR = ("a WIDE Han CROSSED COLLAR (jiaoling): its two edges start near the shoulder points, SECURE on the shoulders, never slipping off, "
-          "and sweep down in one broad V to CROSS left over right just above the sash; INNER ROBE: opaque mint mist, its collar a layered "
-          "edge just inside the outer collar, same V (no second diagonal at the throat, no straight-across top, never parallel open-coat edges), "
-          "edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
-HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a straight-cut floor-length robe (zhiju) in ice blue over an inner "
-       "robe in mint mist, below the crossing the front edge runs straight down to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket); wide long sleeves "
-       "(one single visible sleeve layer, every inner sleeve hidden inside), the sleeve body plain, ending in embroidered mint mist cuff bands; {edge}; "
-       "{g8}; {outer}; {rest}no shawl; ")
+COLLAR = ""   # DESIGN19 L1606: the collar now lives inside the new quju design paragraph (HAN)
+HAN = ("a NEW outfit, a Han-dynasty quju (khúc cư) look in TWO visible robe layers: a floor-length wrapped outer robe in ice blue "
+       "over a full inner robe in mint mist; LAYERED CROSSED COLLARS (jiaoling): two wide crossed collars, left over right, the inner one "
+       "just inside the outer, so TWO bands show side by side in one broad V that starts near the shoulder points, SECURE on the "
+       "shoulders, never slipping off, and crosses just above the sash (no crossing at the throat, no straight-across top); "
+       "inner collar edged by {inner} in ice blue and gold; the outer front panel wraps ONCE round to the side to a softly curved bordered hem "
+       "(short, like the Tần's; no high waist, no petal panels), the inner robe hem showing below; wide long sleeves "
+       "(one single visible sleeve layer, every inner sleeve hidden inside) ending in embroidered mint mist cuff bands; {edge}; {g8}{carry}; {outer}; {rest}no shawl; ")
 HAIRCL = r"(?=pretty silver hairpins|silver and pearl hairpins|two or three slim pearl hairpins)"
 RANK = {
  1: dict(motif="lilac sprays", sz="small-size",
          inner="one narrow band of tiny embroidered lilac sprays",
-         edge="ONE narrow plain mint mist collar band along the collar edges with no embroidery on it (the Đáp ứng edge)",
+         edge="ONE narrow mint mist band of tiny embroidered lilac sprays along the outer collar, wrap edge and hem (the Đáp ứng edge)", carry="",
          g8=r"a wide embroidered lilac sprays hem band, small sprays of embroidered lilac sprays on the upper garment",
-         rest="a soft narrow mint mist silk sash whose two ends hang down the front; no belt plaque, no pendants, no signature piece; "),
+         rest="a soft narrow mint mist silk sash whose two ends hang down the front, with ONE small jade pendant on a silk cord; no belt plaque, no signature piece; "),
  2: dict(motif="tiger lilies", sz="small-size (a little larger than at the lowest rank)",
          inner="one narrow band of small embroidered tiger lilies",
-         edge="TWO stacked NARROW collar bands along the collar edges: a thin mint mist piping inside and a narrow band of small embroidered tiger lilies outside (the Thường tại edge)",
+         edge="TWO stacked NARROW bands along the outer collar, wrap edge and hem: a thin mint mist piping and a narrow band of small embroidered tiger lilies (the Thường tại edge)", carry=", small sprays of tiger lilies on the upper garment",
          g8=r"delicate embroidered tiger lilies at the sleeves and hem and a soft silk sash",
-         rest="the mint mist sash tied at the waist with ONE small jade disc on a silk cord; no belt plaque, no signature piece; "),
+         rest="the mint mist sash tied at the waist, its two ends hanging down the front, with ONE small jade disc and ONE small jade pendant on silk cords; no belt plaque, no signature piece; "),
  3: dict(motif="semi-double China roses", sz="small-to-medium-size",
          inner="one slightly wider band of small embroidered semi-double China roses",
-         edge="ONE WIDE stiff mint mist collar band embroidered with semi-double China roses sewn flat along the collar edges (the Quý nhân edge)",
+         edge="a thin mint mist piping and ONE WIDE stiff mint mist band embroidered with semi-double China roses along the outer collar, wrap edge and hem (the Quý nhân edge)", carry=", sprays of China roses on the upper garment",
          g8=r"wide embroidered semi-double China roses bands at the sleeve ends and the hem",
-         rest=("a wide stiff mint mist silk girdle at the natural waist with a long ceremonial jade pendant set on each side down to the knees: small carved jade "
+         rest=("a wide stiff mint mist silk girdle at the natural waist with ONE jade disc at the centre and a long ceremonial jade pendant set on each side down to the knees: small carved jade "
                "plaques linked by strings of pearls, ending in silk tassels; no signature piece; ")),
 }
-CAPS = {1: "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Trực cư, cổ viền trơn",
-        2: "Mùa Xuân · Thiết kế thời Hán · Thường tại · Trực cư, cổ viền hai lớp hoa",
-        3: "Mùa Xuân · Thiết kế thời Hán · Quý nhân · Trực cư, cổ viền thêu rộng"}
+CAPS = {1: "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Khúc cư hai lớp, cổ viền hoa nhỏ",
+        2: "Mùa Xuân · Thiết kế thời Hán · Thường tại · Khúc cư hai lớp, cổ viền hai lớp hoa",
+        3: "Mùa Xuân · Thiết kế thời Hán · Quý nhân · Khúc cư hai lớp, cổ viền thêu rộng"}
 HELD_END = "her secondary colour mint mist."
 COLLAR_CUT = (" COLLAR CUT (flowing): the collar lines are soft CURVES, never flat; the outer robe is held in only by the sash, never buttoned down the front, "
               "graceful (uyển chuyển), never boxy.")
@@ -94,7 +98,7 @@ def build(t):
     s = HEAD + s                                                            # D1
     s = sw(s, STORE_FABRIC, B29_A_HEAVY)                                    # D2
     m = list(re.finditer(r"a NEW outfit, .*?; " + HAIRCL, s)); assert len(m) == 1, ("store design", t)
-    design = COLLAR.format(inner=r["inner"]) + HAN.format(edge=r["edge"], g8=r["g8"], outer=OUTER_IN, rest=r["rest"])
+    design = HAN.format(inner=r["inner"], edge=r["edge"], g8=r["g8"], carry=r["carry"], outer=OUTER_IN, rest=r["rest"])
     s = s[:m[0].start()] + design + s[m[0].end():]                          # D3
     s = sw(s, HELD_END, HELD_END + COLLAR_CUT)                              # D5
     s = s.replace("ice blue", "peach-blossom pink").replace("#71B5D7", "#EB8186").replace("mint mist", "ivory white")   # D4
@@ -106,5 +110,5 @@ if __name__ == "__main__":
     k = next(k for k in range(len(TRIM) + 1) if max(len(trim(x, k)) for x in full.values()) <= LIMIT)
     print("trims used:", k)
     for t in (1, 2, 3):
-        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v5.txt"); s = trim(full[t], k)
+        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v6.txt"); s = trim(full[t], k)
         open(p, "w", encoding="utf-8").write(s); print(t, len(s), os.path.relpath(p, ROOT))
