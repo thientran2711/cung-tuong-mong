@@ -1,6 +1,6 @@
 # Owner marks 21/11 (ui-tour PDF review) — running list for «tổng hợp đi»
 Keep one row per mark; update Status/LIVE when it moves. Summary to her = short Vietnamese from this table.
-| # | Time Z | Problem (short) | Ref shot | Worker / session | Status | LIVE sha |
+| # | Time Z | Problem (short) | Ref shot (CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/refs/<name>) | Worker / session | Status | LIVE sha |
 |---|---|---|---|---|---|---|
 | 1 | 01:42 | Send the frames PDF | — | ui-tour (82) | SENT in 84 chat | — |
 | 2 | 01:52 | PDF has no 2nd-player (co-op) screens; where is partner info? | — | ui-tour-coop session_01Rc5AsKcjAGj6nNvPVpVjZP | partner info found (chip + Phi tần card once met; no dedicated sheet); co-op PDF SENT 50 pp; ASKED her: add «Hảo hữu» sheet? | — |
@@ -28,3 +28,4 @@ Also LIVE today for her (not marks): Hoa đăng look 8c8b8b6b; Chải chuốt ra
 | 23 | 02:50 | Tư trang › Việc act cards have no picture → every act card gets its picture (scan all tabs); missing art → Foreman C | owner-2111-viec-nopic.jpg | bag-inline (85) + Foreman C | to open | — |
 | 24 | 02:52 | Tài nghệ act cards different sizes, tiny pictures (asked ≥3 times) → one card size per device everywhere | owner-2111-tainghe-cards.jpg | keeper (same card part) | in work | — |
 | 25 | 02:54 | Tài nghệ: «Đức 60» chip repeats the top bar → remove; scan all tabs for HUD-stat duplicates | owner-2111-duc-dup.jpg | chiton-name | in work | — |
+| 26 | 02:58 | Mệnh truyện › Chương này: big chapter picture left (Hành sự big-card size), title top right, goals under it, task list + Đi làm below — arrange nicely | img/_review/refs/owner-2111-chapter.jpg | NEW worker chapter-card (85) | to open | — |
