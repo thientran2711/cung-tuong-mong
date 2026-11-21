@@ -677,3 +677,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | kit-dialog-2 worker (sonnet; #71 #75 #76 #80 #82 + KIT §6.2b overwrite; succeeds McXo2) | review/kit-dialog-2; briefs/main87-kit-dialog-2.md | MAIN CHÍNH 87 | session_01Rc5AsLvRJSwBGGefPUEw8B | RUNNING | 21/11 04:13Z |
 kit-ghichu-bang rv | review/kit-ghichu-bang-rv 6fb2f34a | rv session | PASS | 21/11
 kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place names wrapped) | 21/11
+| maid-8tabs-2 worker (OPUS; #34 #35 #36 rest; succeeds N3dA) | review/maid-8tabs; briefs/main87-maid-8tabs-2.md | MAIN CHÍNH 87 | (opening) | RUNNING | 21/11 04:18Z |
