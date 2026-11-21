@@ -10,12 +10,12 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr||1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
  const p=await ctx.newPage();p.setDefaultTimeout(600000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.addInitScript(()=>{window.__nlInner=1;let s=20261121>>>0;Math.random=()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}});
- await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof econRoadRolls==='function');await sleep(2500);
+ await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof econRoadCost==='function');await sleep(2500);
  const r=await p.evaluate(([N])=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<400;i++){KMQ.length=0;start();if(!isSrv())break}
   try{KMQ.length=0;document.querySelectorAll('.kmov').forEach(o=>o.remove());kmBusy=false}catch(e){}Q.length=0;quiet=true;
   const rich=x=>{x.bac=5000;x.tamco=80;x.duc=60;x.khac=99};rich(S);for(const v of liveRivals(true))rich(v);
-  const D=JSON.stringify(ser());const reload=()=>{deser(JSON.parse(D));Q.length=0;try{used=0}catch(e){}};
+  const D=JSON.stringify(ser());/* a build before F2 has no econRoadRolls: every priced scheme got roads */const RR=typeof econRoadRolls==="function"?econRoadRolls:(k)=>!!(ACT[k]&&ACT[k].__c0);const reload=()=>{deser(JSON.parse(D));Q.length=0;try{used=0}catch(e){}};
   const prep=(k,t,a)=>{if(a){delete a.frA92;const q=typeof queenP==="function"?queenP():null;if(k==="xinhh"&&q&&q!==a&&q!==t)affAdd(q,a,100)}delete t.frT92;if(k==="musk")t.preg=3;if(k==="catswap")t.preg=7;t.block=0;t.scar=0;t.rash=0;if(t.maid)t.maid.spyFor=null;S.confined=0;S.mg=null};
   const norm=s=>String(s||"").replace(/<[^>]+>/g,"").replace(/\d+/g,"#").replace(/\s+/g," ").trim().slice(0,90);
   const pair=(k,her)=>{const L=liveRivals(true);for(const a of her?[S]:L)for(const t of L.concat(her?[]:[S])){if(t===a||sameHouse(a,t))continue;prep(k,t,a);try{if(ACT[k].ok(a,t)&&(k!=="giahoa"||her||typeof motiveOK!=="function"||motiveOK(a,t,"giahoa").ok))/* an NPC frame needs a motive (j95c gate) */return [a.id==null?"S":a.id,t===S?"S":t.id]}catch(e){}}return null};
@@ -25,7 +25,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const out=[];
   for(const k of Object.keys(ACT).filter(k=>ACT[k].__c0))for(const her of [true,false]){reload();const ids=pair(k,her);
    if(!ids){out.push({k,side:her?"her":"npc",skip:"no target"});continue}
-   const a=who(ids[0]),t=who(ids[1]);prep(k,t,a);const roads=econRoadRolls(k,a,t),o=actOdds(a,t,k);
+   const a=who(ids[0]),t=who(ids[1]);prep(k,t,a);const roads=RR(k,a,t),o=actOdds(a,t,k);
    let card=null,npcRoad=null;
    if(her){reload();const t2=who(ids[1]);prep(k,t2,who(ids[0]));Q.length=0;try{doAct(rivals.indexOf(t2),k)}catch(e){}card=Q.some(m=>m&&m.pid==="roadpick");Q.length=0}
    else{reload();const a2=who(ids[0]),t2=who(ids[1]);prep(k,t2,who(ids[0]));const np=BAL.tcroad.npcP;BAL.tcroad.npcP=100;try{npcRoad=econRoadNpc(a2,k,t2)}finally{BAL.tcroad.npcP=np}}
