@@ -1,0 +1,38 @@
+G57 body pendant                           FAIL  222 | t1:0/74 t2:0/74 t3:0/74 t4:74/74 t5:74/74 t6:0/74 t7:0/74 t8:74/74
+     e.g. c06_t4_dong.txt: an embroidered silk sash with jade belt pendants and tassels
+G59 sachet                                 FAIL   11 | t1:0/74 t2:11/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+     e.g. c06_t2_dong.txt: an embroidered silk sachet with a tassel in the other hand
+G60 side bow                               FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+G60 bow not centred                        FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+G60 bow no long ties                       FAIL   95 | t1:0/74 t2:19/74 t3:19/74 t4:0/74 t5:0/74 t6:19/74 t7:19/74 t8:19/74
+     e.g. m04_t2_dong.txt:  Her face: a DIAMOND face with a narrow brow line, high defined cheekbones and a small pointed chin, close-set almond eyes slightly upturned
+G61 front waist                            FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+G58/G65 big flower t1-3                    FAIL    0 | t1:0/74 t2:0/74 t3:0/74
+G65 big motif on trim                      FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+G69 t1 chest-centre flower missing         FAIL   74 | t1:74/74
+     e.g. c06_t1_dong.txt: (no chest-centre embroidery)
+F19 chrysanthemum                          FAIL   42 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:14/74 t7:14/74 t8:14/74
+     e.g. m02_t6_dong.txt: embroidered with incurved chrysanthemums in light ice blue and gold thread along the borders
+F19 hair flower has no 'bloom only/no leaves' FAIL  444 | t1:74/74 t2:74/74 t3:74/74 t4:74/74 t5:74/74 t6:74/74
+     e.g. c06_t1_dong.txt: No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies or other motifs.
+F19 hair flower with leaf words            FAIL   20 | t1:0/74 t2:0/74 t3:20/74 t4:0/74 t5:0/74 t6:0/74
+     e.g. m05_t3_dong.txt: a wintersweet sprig
+F2 no hair flower t1-6                     FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74
+G35 cleavage words                         FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+LEN>10000                                  FAIL    0 | t1:0/74 t2:0/74 t3:0/74 t4:0/74 t5:0/74 t6:0/74 t7:0/74 t8:0/74
+B20 main colour != palette                 FAIL  208 | t1:26/74 t2:26/74 t3:26/74 t4:26/74 t5:26/74 t6:26/74 t7:26/74 t8:26/74
+     e.g. m14_t1_dong.txt: wants 'soft plum' #D28BCC | has 'ivory white like #EDE0CC'
+B20 secondary != palette                   FAIL  104 | t1:13/74 t2:13/74 t3:13/74 t4:13/74 t5:13/74 t6:13/74 t7:13/74 t8:13/74
+     e.g. m14_t1_dong.txt: wants 'misty jade' #A3DCE7 | has 'jade green like #5DAC85'
+F20 emb colour not in prompt               FAIL  592 | t1:74/74 t2:74/74 t3:74/74 t4:74/74 t5:74/74 t6:74/74 t7:74/74 t8:74/74
+     e.g. c06_t1_dong.txt: wants #B9A5DE tím hoa cà vừa dịu
+F20 hair colour not in prompt              FAIL  444 | t1:74/74 t2:74/74 t3:74/74 t4:74/74 t5:74/74 t6:74/74
+     e.g. c06_t1_dong.txt: wants #D5C1FC
+G68 Tần MEDIUM words missing               FAIL   74 | t4:74/74
+     e.g. c06_t4_dong.txt: (no 'a few MEDIUM embroidered')
+G68 old LARGE words                        FAIL   74 | t4:74/74
+     e.g. c06_t4_dong.txt: a few LARGE embroidered butterflies on the robe (fewer than Phi), a crossed collar,
+G67 cloak t6-8                             FAIL  222 | t6:74/74 t7:74/74 t8:74/74
+     e.g. c06_t6_dong.txt: the upper cape shorter
+F2 hair flower at t7/t8                    FAIL    4 | t7:2/74 t8:2/74
+     e.g. m20_t7_dong.txt: Pose: adjusting a gold hairpin set in her hair with one raised empty hand, the other hand holding a gold lotus lamp set with gems, with stat
