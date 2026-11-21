@@ -139,3 +139,29 @@ Test: walk-cost 12 (new) = units (b) / fresh-khắc guard / plan label free + th
 Gates on 1dab9933 (one at a time): walk-cost ALL OK (5 all rows 0/73; 11 0 vs off 3; 12 0/195) · ag-walk 19/20 (the 1 FAIL = «4 carry» tin báo item missing next buổi; ALSO on base 64750121: 1–2 per 8 runs here; main 548dcd0d 8/8 → a pre-existing branch flake, not r4; not chased) · ptime ALL OK · ptime2 ALL OK · invite-host-away ×10 = 10/10 (9/9) · time-spill-guard PASS (76 checks) · coop-e2e 68/68 · QUICKCHECK --cpu 4 PASS (old save ok, core gates PASS incl. one-core-guard, perf new/live render 212/206, tab 408/380, buổi 1253/1123 ms).
 Scan tools (container-local): /home/user/wt/jw3-tools/scan4.js <html> <seed0> <seed1> <buổi> (tracer: last writer stack per cell).
 SẴN SÀNG KIỂM review/jagday-walk-rv 1dab993378e404f6a8578de84b114ce2f82fc425 (TIER BIG)
+
+## JAGDAY-WALK #4 (session_01964izFBGxYoMmBWfQB5dDg, opus, depth 4, START_CTX ≈ 4 %) — ROUND 5 FAIL 1 fix (ag-walk «4 carry» flake)
+PRIORITY #1 CHECK ('knCarryOut|knCarryIn|knTb|agDrain|4 carry'): OD L1976 + law 6c / 11 | main 24dd2c62 (same jagknow carry code, no turn guard) | review/* jagday-walk-rv 1dab9933 (this) | claims CLAIMS.md jagday-walk row (D).
+Branch: review/jagday-walk-rv = 1dab9933 + fix 55af281b + merge main 24dd2c62 (5f73f84d) + 20c8adbf. FF push.
+Root (tracer: knCarryIn calls with bkey + stack, Q.push stacks; probe 40 carries in a row). The lost item had two shapes. Both are also on main, but rarer there (main: A 2/120, B 0/120; branch: A ≈ 7/320, B ≈ 5/320):
+| shape | what happened | fix (jagknow.js, the whole carry group) |
+|---|---|---|
+| B: real loss at a week wrap | j9 nextBuoi sets S.buoi=0, then endTurn. Inside it, j95sync → knSellTick → knTb rebuilt at the half-turned key «oldwk-0» with the khắc still 3. The carry landed in that list, then the real key «newwk-0» wiped K and W. The stale khắc also landed FAR items at khắc 1 (due 1). | knTb does not rebuild while KN.turn (set by the knCarryOut nextBuoi wrapper around the turn). The wrapper rebuilds once after the turn, at the real key and khắc. |
+| A: turn refused | agDrain (the outermost nextBuoi wrapper) ran the waiting AGL jobs of the ending buổi. A visitor / deed at her place raised a scene (agScene / gmWatch), so j9 refused the turn. The carry stayed in C, but the next knCarryOut call replaced C. Also, a direct knCarryOut call read the hap list before those last-khắc deeds landed, so their news was never carried. | knCarryOut first runs agDrain (a no-op inside nextBuoi, where it already ran), so the whole ending buổi is read. On a refused turn with the same key, C keeps its old items (merge by id). |
+| W on the road at the turn | knCarryIn overwrote T.W with C, which dropped items whose due was not yet reached (she ended the buổi early). | knCarryIn: W items land at once (due 0) and C follows. |
+Tried and dropped: an early return in the agDrain nextBuoi wrapper when the drain raised a scene. A refused press then skipped iwTick, and invite-host-away E hostBack went red 3/35. It is not needed for the carry, so it was reverted (20c8adbf).
+New test: dev/test/ag-carry-turn.test.js, 6 checks: no rebuild mid-turn · lands after the turn · refused turn keeps C · W items land · knCarryOut drains first · no errors. Branch 6/6; main 24dd2c62 fails 4 (the old behaviour).
+Gates on 20c8adbf (one at a time):
+| gate | result |
+|---|---|
+| walk-cost | ALL OK (12: seeds 1–10 × 16, bare far jumps 0 of 242; deeds landed 1568) |
+| ag-walk ×16 | **16/16** (also 16/16 on 55af281b; with the earlier dev runs, 0 carry FAIL in 52 runs) |
+| probe rv-jw-agwalk-carry.js | **56 NEAR carries, 0 lost** (4 runs × 14). Earlier on 55af281b: 70 carries + 120 in a 40-in-a-row variant (NEAR + FAR timing): 0 lost |
+| ag-carry-turn (new) | 6/6 |
+| ptime / ptime2 | ALL OK / ALL OK |
+| invite-host-away ×10 | 9/10, then 10/10. The red runs were E (late start khắc: back.arr / fit false) and F. **Base 1dab9933 has the same flake: 2/10.** Pre-existing, not this fix. |
+| time-spill-guard | PASS (static + runtime) |
+| coop-e2e | 68/68 |
+| quickcheck --cpu 4 | PASS: old save ok; core gates PASS; render 277/221, tab 456/466, buổi 1390/1022 ms (median of 3, new/live) |
+Pre-existing, not touched: ag-walk test 2 «her own servant NEAR» sometimes reads «pass» at khắc 2 (a passer-by is first). main 463d3d70 1/16; branch 1/36 before the final build, 0/32 after.
+SẴN SÀNG KIỂM review/jagday-walk-rv 20c8adbf1f0babc630785a12be2a3f402d6331ef (TIER BIG)
