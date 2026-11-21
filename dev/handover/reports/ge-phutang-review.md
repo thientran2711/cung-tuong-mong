@@ -33,3 +33,16 @@ Verdict: **PASS b3ec1843 on the stack** (review/ge-phutang-r6 = fa820b35 + 2 rev
 | quickcheck (b-1 sha 7490f33d tree) | QUICKCHECK PASS · core gates PASS · old save ok · render 174/187, tab 438/421, buổi 1166/1025, tasks>200ms 18/18 |
 | ge-shots pt_su / pf, 755x1000@2 + 1180x820@2 | 34/34; looked 3×: Đại kết cục «Sứ giả hai trời» card (kit modal, Danh +30 · Đức +10, rank Quý nhân → Tần, Nắm chắc) and Sơ đồ nhánh (pf tab «Công chúa hòa thân · Phù Tang 0/16» now present, no overflow) both devices. Shots local only (CDN 401). |
 Note (not this branch): on Fold the floating «Hoàng hậu → ta: thiện cảm +8» toast sits over the bottom of the modal card for a moment — same on every GE wave (engine toast), not a ge-phutang fault.
+
+## FINAL MERGE — LAND READY f37ec5f11c4edd6558fda304a3417577acf21d87 (21/11)
+review/ge-phutang-r6 b3ec1843 + newest LIVE origin/main 8acb2bef (phutang-road 666def0c and ge-rank LIVE). Conflicts: assemble.py (main's list + jgedata_pt.js after jgedata_bd.js), coop-e2e.js (kept main's COOP_NC_FORCE block AND the two-seat Phù Tang probe), index.html/sw.js (rebuilt). jgecat.js regenerates identical (44 branches).
+| gate (merged sha) | result |
+|---|---|
+| ge-guard | 10/10 |
+| ge-engine - all | 1460/1460 |
+| ge-rank-scan | PASS |
+| ge-pt-scan / ge-bd-scan | 0 faults / 34 hits |
+| ge-map | PASS |
+| one-core-guard | PASS |
+| coop-e2e COOP_GE=1 COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc (live Worker, both seats) | 102/102 — Fold on pt_hai / iPad on pt_dang each open their own branch, other seat untouched (nc_vuong / tt_oan) |
+| quickcheck | PASS · core gates PASS · old save ok · render 237/284, tab 458/439, buổi 1067/1428, tasks>200ms 20/17 |
