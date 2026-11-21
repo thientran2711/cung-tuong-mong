@@ -65,7 +65,7 @@ wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,argument
    (3) HER ACT still counts, through one queue: her own act's feeling on a world person is recorded in her blob (S.coopEmo, [{id, who, k, v,
        why, t, ev}]); at the merged week BOTH seats replay the entries the host has not taken yet (C.P.a.S.emoDone) with the same emoSet on the
        same rebuilt world, so the numbers match; the host then marks them taken (S.emoDone) and the guest drops them once she sees the mark. */
-const EMO_G=["emo","mk","emoH","mck"];
+const EMO_G=["emo","mk","emoH","mck","__mkAt","__mkL"];/* __mkAt / __mkL: jmoodknow's sync stamp + last read seal, serialized with the person */
 const emoR=p=>{let r=p;try{if(typeof emoRes==="function")r=emoRes(p)}catch(e){}return r};
 let emoRp=0;
 const emoOff=r=>{if(!r||mine(r))return false;const C=window.COOPW;if(C&&C.on&&C.inFC)return true;return guest()&&!own};
@@ -76,7 +76,10 @@ function emoRec(r,a){try{const C=window.COOPW;if(!C||!C.on||!guest()||!S)return;
 /* (4) one clock: jmoodknow mkSync (sums p.mk into p.emo, ends causes whose khắc ran out) never runs inside a rebuild, where the clock
    is half old / half new (a new week with the old buổi ended live causes early, on one seat only); fromCanon ends with ONE sweep (emoReplay) */
 let emoSw=0;
-queueMicrotask(()=>wrap("mkSync",f=>function(){const C=window.COOPW;if(C&&C.on&&C.inFC&&!emoSw&&!emoRp)return;return f.apply(this,arguments)}));
+/* review r1 (coop-one-world G4): on the guest a READ of an NPC feeling (emoGet → mkSync) re-summed the causes at her clock and wrote p.emo /
+   __mkAt / __mkL into the world during her week. Her world shows the host's numbers until the next merge: on the guest mkSync touches only her
+   own people, except inside her own act (her cause on an NPC) and the merge sweep. */
+queueMicrotask(()=>wrap("mkSync",f=>function(p){const C=window.COOPW;if(C&&C.on&&!emoSw&&!emoRp){if(C.inFC)return;if(guest()&&!own&&!mine(emoR(p)))return}return f.apply(this,arguments)}));
 queueMicrotask(()=>wrap("emoSet",f=>function(p){if(emoRp)return f.apply(this,arguments);const r=emoR(p);if(emoOff(r))return;if(r&&own&&guest()&&!mine(r))emoRec(r,arguments);return f.apply(this,arguments)}));
 const CWo=window.COOPW;
 if(CWo){

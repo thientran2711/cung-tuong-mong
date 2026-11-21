@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a4457e49+","t":"2026-11-21T09:19Z","c":"coop-emo-seat r2: rebuild on merged LIVE a66b5a49","b":"e2e281145afa","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
+window.CTM_BI={"s":"23fbf1d3+","t":"2026-11-21T10:07Z","c":"coop-emo-seat r2: rebuild on merged LIVE a66b5a49","b":"63f13249a71f","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77295,7 +77295,7 @@ wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,argument
    (3) HER ACT still counts, through one queue: her own act's feeling on a world person is recorded in her blob (S.coopEmo, [{id, who, k, v,
        why, t, ev}]); at the merged week BOTH seats replay the entries the host has not taken yet (C.P.a.S.emoDone) with the same emoSet on the
        same rebuilt world, so the numbers match; the host then marks them taken (S.emoDone) and the guest drops them once she sees the mark. */
-const EMO_G=["emo","mk","emoH","mck"];
+const EMO_G=["emo","mk","emoH","mck","__mkAt","__mkL"];/* __mkAt / __mkL: jmoodknow's sync stamp + last read seal, serialized with the person */
 const emoR=p=>{let r=p;try{if(typeof emoRes==="function")r=emoRes(p)}catch(e){}return r};
 let emoRp=0;
 const emoOff=r=>{if(!r||mine(r))return false;const C=window.COOPW;if(C&&C.on&&C.inFC)return true;return guest()&&!own};
@@ -77306,7 +77306,10 @@ function emoRec(r,a){try{const C=window.COOPW;if(!C||!C.on||!guest()||!S)return;
 /* (4) one clock: jmoodknow mkSync (sums p.mk into p.emo, ends causes whose khắc ran out) never runs inside a rebuild, where the clock
    is half old / half new (a new week with the old buổi ended live causes early, on one seat only); fromCanon ends with ONE sweep (emoReplay) */
 let emoSw=0;
-queueMicrotask(()=>wrap("mkSync",f=>function(){const C=window.COOPW;if(C&&C.on&&C.inFC&&!emoSw&&!emoRp)return;return f.apply(this,arguments)}));
+/* review r1 (coop-one-world G4): on the guest a READ of an NPC feeling (emoGet → mkSync) re-summed the causes at her clock and wrote p.emo /
+   __mkAt / __mkL into the world during her week. Her world shows the host's numbers until the next merge: on the guest mkSync touches only her
+   own people, except inside her own act (her cause on an NPC) and the merge sweep. */
+queueMicrotask(()=>wrap("mkSync",f=>function(p){const C=window.COOPW;if(C&&C.on&&!emoSw&&!emoRp){if(C.inFC)return;if(guest()&&!own&&!mine(emoR(p)))return}return f.apply(this,arguments)}));
 queueMicrotask(()=>wrap("emoSet",f=>function(p){if(emoRp)return f.apply(this,arguments);const r=emoR(p);if(emoOff(r))return;if(r&&own&&guest()&&!mine(r))emoRec(r,arguments);return f.apply(this,arguments)}));
 const CWo=window.COOPW;
 if(CWo){
@@ -89338,7 +89341,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e2e281145afa";window.CTM_BUILD=BUILD;
+const BUILD="63f13249a71f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
