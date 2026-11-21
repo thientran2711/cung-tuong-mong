@@ -864,6 +864,24 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()
  if(L.length){e.preventDefault();L[0].__kxl.close();return}
  if(kitModalClose()){e.preventDefault();return}
  const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+/* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
+   ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
+   (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
+   (2) a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) closes every other open second-layer pop-up first: the room person card (popIdx),
+       the kit layers (game result #ov and other kitCloseLayer layers), the word pop-up #kpop, the podium #kpodov, an open kit book (.kbk). Nothing is left floating over or behind it.
+   Never two dialogs overlapping: a new dialog never opens on top of an older dialog of its own layer (Q is one queue: the older one waits its turn, shown one at a time). */
+function kitDialogWins(m){try{if(!m)return false;if(typeof S!=="undefined"&&S&&S.dead)return true;const c=String(m.cls||""),k=m.kit&&m.kit.kind;return /\b(end|night|klife)\b/.test(c)||k==="end"||k==="night"}catch(e){return false}}
+function kitCloseOthers(){let n=0;
+ try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;popMsg="";n++;if(typeof renderStage==="function")renderStage()}}catch(e){}
+ try{KIT_LAYERS.slice().forEach(r=>{if(r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl&&r.__kxl.box()){try{r.__kxl.close()}catch(e){}n++}})}catch(e){}
+ try{document.querySelectorAll(".kpop").forEach(x=>{if(!x.hidden){x.hidden=true;n++}})}catch(e){}
+ try{if(document.getElementById("kpodov")){typeof kitPodiumClose==="function"?kitPodiumClose(true):document.getElementById("kpodov").remove();n++}}catch(e){}
+ try{if(document.body.classList.contains("kbk-open")){const x=document.querySelector(".kbk>.kbk-x");if(x){x.click();n++}}}catch(e){}
+ return n}
+function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
+window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+ setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
 /* (review kit-fig2 11/15, LUẬT SỬA CẢ NHÓM "overlay never closes"): only the result button of the panel ON SCREEN counts — a button left in a
