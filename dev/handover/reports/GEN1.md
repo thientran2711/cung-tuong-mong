@@ -128,3 +128,16 @@ Look:
 - t4: 3/4 left; round capelet over the shoulders with an airy pearl/jade bead net over the whole capelet and a jade clasp, scalloped lower edge; large gold lotus embroidery on sleeves/hem + lotus in the high bun (large); square blush inner top; white-jade vase with blossoms held upright; hair up with gold pins.
 - t5: frontal; TWO layered short capes with pearl-edge rows and a pearl net, pearl fringe; big pink hollyhock in a high bun with a gold headdress and long gold tassels; folded gold-flecked letter in both hands; double-hollyhock medallions on the skirt front; two jade pendants on a gold girdle. Dangling gold tassels hang beside the ears (could read as earrings).
 - t6: slight turn left; ONE-tier scalloped cloud collar with gold tassel fringe; clearly visible yellow: a yellow-orange inner panel + sash + narrow borders (a bit orange-gold, not quite honey); plum/blush rest; large chrysanthemum in hair + big gold headdress with tassels (again dangling tassels at the ears); jade-and-pearl ball with jade tassel; pearl strands across the chest.
+
+# JOB L1599 — xuân Hán t1–t3 v3 drafts (gpt-2-6 low 1k, standing OK L1569; coordinator Foreman C #14)
+check_store before each gen (scope tp1/tp2/tp3, a22, ref nVsrRMPYQD): PASS ×3 (APPROVED CHECK PASS). gpt-2-6, quality low via extraSettings, 1k 9:16 (752x1344), seed 7172, ref nVsrRMPYQD only (same as the v2 drafts). simulate exact 55 each, total 165 cr. Prompts exactly: dev/art/seasons4/s62_t{1,2,3}_HAN_BAC_v3.txt (9476 / 9682 / 9975 ch).
+| pic | creation | link |
+|---|---|---|
+| Xuân t1 v3 | ov6Tbws829 | https://www.magnific.com/app/creation/ov6Tbws829 |
+| Xuân t2 v3 | 4RFg0hb9Aa | https://www.magnific.com/app/creation/4RFg0hb9Aa |
+| Xuân t3 v3 | mEZp1RzhJQ | https://www.magnific.com/app/creation/mEZp1RzhJQ |
+Sheet dev/handover/review-sheets/xuan_han_t13_v3_L1599/sheet.jpg (+ xuan_han_tN_v3.webp), 'Xuân tN · s62 · v3 · GPT 2.6 low · 55 cr' per picture + 'Tổng: 165 cr'. Viewed each picture once at 1024, not the finished sheet.
+Look:
+- t1: outer robe edges rest ON the shoulders, shoulders covered, an ivory-edged soft V, outer robe now clearly held in by a bow sash; ivory inner top with a STRAIGHT top edge (no crossed collar) + small lilac band; embroidery is SPARSER than v2 (few lilac sprays on the upper body, bigger sprays + band at hem, lilac vine on cuffs); book; loose hair + one lilac.
+- t2: outer robe edge sits at/just over the shoulder points, the tops of the shoulders and collarbones bare (reads close to off-shoulder); ivory inner top straight-edged with a flower band; held in by the ivory sash + jade disc; larger tiger lilies, fewer, mostly low on the skirt and cuffs; one pink lily in hair; navy drum with a lily; wide skirt flare.
+- t3: outer edges rest around the shoulder points, shoulders mostly bare (slightly off-shoulder look); ivory inner top, straight edge, with a rose band; wide ivory girdle with rose + jade plaques/pearls/tassels, outer robe held in; roses mainly on collar/cuffs/hem bands (body mostly plain); ONE slim pin + a pink rose, hair mostly loose, no spiky crown; flute.
