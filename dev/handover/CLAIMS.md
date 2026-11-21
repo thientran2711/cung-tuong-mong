@@ -906,4 +906,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | RELAND ui-leftover-fold r2 (opus; MAIN 97 ORDER 17:01Z buổi perf 2984 vs 1426) | review/ui-leftover-fold-r2 | B | session_01N1tNP51qRC8xGqzqkrCEq7 | RUNNING | 21/11 17:19Z |
 | REVIEW dresscode r4 E30r4 (opus BIG; briefs/E30r4-review-dresscode-fix-r4.md) of cabfcad8 | review/dresscode-r4-land 0620c318; reports/dresscode-review.md «ROUND 4» | FOREMAN E #28 | session_01DgYSWo5nZ3yPQ2hdAEtXFQ | PASS 0620c318 → LAND READY (MAIN CHÍNH 97) | 21/11 17:40Z |
 | rv-kit-ef-unit r3 | PASS | review/kit-ef-unit-rv3 fd8280fa3fd7eddef4245084fb86a557d3dd3326 | cache only; tests + quickcheck + coop-e2e 124/124 |
-| FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_PENDING_E29 | RUNNING | 21/11 17:52Z |
+| FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | RUNNING | 21/11 17:52Z |
