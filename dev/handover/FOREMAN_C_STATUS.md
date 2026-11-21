@@ -1188,3 +1188,8 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
 #22 ~07:15Z: OWNER L1787: old thu pictures (t1–t3 L1723 + HH old/fix4) → SKINS (logged dev/art/SKINS.md, overrides A45 for these). Owner asks why nothing drawn yet → THU ×8 @135 in progress at VE2. Next Lượt 1788.
 #22 ~07:18Z: OWNER L1789: HH 55-cr pictures (jUoqvBPLD0 old, gOmkqTkSXO fix4) NOT skins (A45) → removed from SKINS.md. t1–t3 old thu kept (owner L1787 explicit). Next Lượt 1790.
 #22 ~07:20Z: L1790 THU @135 6/8 (t1 Lw85wx5swO t2 6AbJANKiJO t3 6AbJGp4iJO t6 VX7zBuWMMU t7 WDgZpUBcXe t8 SyhrPfnUb8, 810) LOOKED + sent; all square low neck. t4/t5 waived → VE2 drawing (270). Session spend ~1195 (VE2). Next Lượt 1791.
+- (21/11 07:00Z) ORDER (ART REQUEST) from MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC for worker duodo-focus session_01Rc5AsN9YcB3r7aJt7LGx7R (owner-approved Dư đồ focus view + on-figure mini-games, OD 21/11 ~06:20Z/06:50Z/06:55Z). Full spec: dev/handover/reports/duodo-focus.md §4 on review/duodo-focus 42edd93a. Magnific gpt-2-6 only, STYLE_ANCHOR, look at every image, transparent webp ≤ 40 KB, CDN not git:
+  (1) df-hand: HER hand first-person, open palm + sleeve cuff, cổ trang, 3 poses (raised · mid-swipe · after);
+  (2) df-props: cup of water (splash), teacup (tea splash), ink fan (ink spray), gift box held in hands (generic), son phấn box;
+  (3) df-npc-hand: an NPC's hand coming at the screen (for «Né»), 2 poses.
+  When on CDN → send paths to the worker + MAIN 90. Priority: after the owner-driven Hán ladder / maid fabric work in her chat.
