@@ -141,3 +141,9 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 20/11 | owner via ROOT-81 | **dress picker** — her figure as a live preview on the left, choices on the right (KIT §60.2 kitDressPicker) | every dress picker (toilDressUI) | kit keeper | **KIT READY** review/kit-dress-picker |
+
+## 21/11 kit-ton-row (MAIN ROOT-82 deadline order; D econ-tamco L85, road-b2 L80 family)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | D econ-tamco (c45265d6 KIT-BLOCKED) | **«Tốn» row accepts a cost the fx does not pay itself** — `ton:{tamco:-n}` / `ton:{bac:-pr}` on an option; hidden-outcome cards keep the option's own prices | PEND.roadpick (jtamco) «Hao tâm cơ» / «Thuê người» / «Làm như thường»; any option with a price paid elsewhere | kit keeper | **KIT READY** review/kit-ton-row (KIT §13.16) |
+| 20/11 | road-b2 / E22t | **«quý nhau»** in the word/hint map | jrcv decline row | kit keeper | already KIT READY since review/kit-cost-rows-home (KIT §13.14, LIVE 27a7dcf5); re-checked in kit-ton-row.js |
