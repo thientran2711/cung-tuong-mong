@@ -77,3 +77,14 @@ A. **Met friend's sheet title is masked «Hàn lâm học sĩ ???»** (title-mas
 ### Checked OK
 Both seats; stranger = painted kit icon + «Hảo hữu của ta» sheet with silhouette, every field «chưa rõ» except what anyone sees (Danh); met = portrait, rank unit, real numbers, palace, household, Lúc này + «Tạm dừng» act card (Tốn không · Được …); online colour, ✓ ready, … work/busy, ⏸ hold, grey + no badge away; no words on screen; ✕ / Esc close; no overflow; no page errors; ONE panel; two-way (law 1) both seats see each other the same way; numbers from game state (law 4).
 Next: worker fixes A (+ N1/N2 if cheap) and wires K-BADGE-HAOHUU when the keeper lands it; then re-check only that diff + the badge states. Shots wipe at the final verdict: `python3 dev/site/cdn_sync.py --wipe-review rv-hao-huu-2` (and `rv-hao-huu`, `hao-huu`).
+
+## r2b — re-check of 8bcba06b (hao-huu-2 r3: A + N1 + N2) — verdict: **PASS-PENDING-BADGE**
+Diff dfd14ac7..8bcba06b only (jhaohuu, jcooptimer, KIT §69.2, coop-haohuu, rebuilt index/sw). 8bcba06b descends from review/hao-huu-rv2 dfd14ac7 (main aee7ff84); main has moved on (a66b5a49) → the final land needs one more merge of main.
+| item | check | verdict |
+|---|---|---|
+| A sheet title masked | title + Danh vị = `kitName(entity,{cap:true})` in a `data-k61skip` span; `#kctmf` / `#kctmfu` data-k61skip. coop-haohuu (tt/nc, HH_DSF=2) **311/311 ok**; shot r3 hh-guest-fold-met: «Quý nhân Tô Tĩnh Thù» in rank colours, Danh vị the same, no «???» (also aria-label / title / hidden words, test). Rank + name together = owner 15/11 rule; unmet stays «Hảo hữu của ta» (OD:L1060). | FIXED |
+| A root cause | not reproducible (random lives); the test now logs any K61MAP variant of her name mapped to another key; the name-core collision (guest keeps the host's names) reported to MAIN by the worker, outside this branch. | accepted |
+| N1 slot after own reload | slot per viewport in localStorage `ctmHhSlot` (UI only, try/catch); no collision re-check within 1.2 s of a resize; strip slot retries without toggling. Test: guest iPad same box after reload. | FIXED |
+| N2 KIT doc | §69.2 rewritten in place (#kctmfu.kup copy, data-k61skip, slot persistence). | FIXED |
+| N3 / N4 | cord + tiny ⏸ → badge commit (keeper `kitStBadge`, review/kit-badge 36b6071e, not KIT READY yet). | with badge |
+Remaining before LAND: keeper K-BADGE-HAOHUU KIT READY → worker wires it → I re-check that diff + badge states (✓ / … / ⏸ / grey, Fold + iPad, both seats), merge newest main, gates, push review/hao-huu-rv2, send LAND READY.
