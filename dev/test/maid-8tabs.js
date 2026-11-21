@@ -106,6 +106,6 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
   ok(kOn,sz+' tiểu thư ngoài cung road started');
   ok(kBar===T8,sz+' tiểu thư ngoài cung: the same 8 bottom tabs',kBar);
   ok(kW.every(x=>x.txt>0&&(x.on==null||x.k==null||x.on===x.k)),sz+' tiểu thư ngoài cung: every tab / sub-tab opens with content',kW);
-  ok(await p.evaluate(()=>{document.querySelector('#tabs [data-tab="kid"]').click();return !!document.querySelector('#panel .kskc,#panel .kskill,#panel [class*="ksk"]')&&tab==='kid'}),sz+' tiểu thư ngoài cung: Hoàng tự = the kit empty card');
+  ok(await p.evaluate(()=>{document.querySelector('#tabs [data-tab="kid"]').click();return !!document.querySelector('#panel .kempty,#panel .kskc,#panel .kskill,#panel [class*="ksk"]')&&tab==='kid'}),sz+' tiểu thư ngoài cung: Hoàng tự = the kit empty card');
   ok(!errs.length,sz+' no page error',errs.slice(0,3));await ctx.close()}
  await b.close();const f=R.filter(x=>!x).length;console.log(f?`FAIL ${f}/${R.length}`:`PASS ${R.length}/${R.length}`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(1)});

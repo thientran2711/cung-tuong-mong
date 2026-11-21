@@ -838,7 +838,7 @@ function kitWearSlots(p,opts){try{if(!p||typeof wdSlots!=="function")return"";co
  return `<div class="kwear${opts&&opts.cls?" "+opts.cls:""}">`+L.map((x,i)=>kitItem({src:x.empty?"":kitItemSrc(x.k,x.icon),name:x.empty?x.name:x.name,grade:x.grade,empty:x.empty,size:(opts&&opts.size)||"sm",
   data:`data-kwear="${x.slot}" data-kwho="${me?"me":(p.id!=null?p.id:"")}" role="button" tabindex="0"`,tip:`${x.slot==="tram"?"Trâm cài":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}${x.giver?" · "+x.giver+" ban":""}`})).join("")+(lab?`<span class="kwearl">${kitItem({}).slice(0,0)}<span class="kitl kitl-${lab[1]}">${lab[0]}</span></span>`:"")+`</div>`}catch(e){return""}}
 function kitPersonByName(nm){nm=String(nm||"").replace(/<[^>]*>/g,"").trim();if(!nm||typeof S==="undefined"||!S)return null;if(nm===S.name)return S;
- const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (P||[]))if(v&&v.name===nm)return v;
+ const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (Array.isArray(P)?P:[]))if(v&&v.name===nm)return v;
  try{if(S.thO&&S.thO.name===nm)return S.thO}catch(e){}return null}
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;ev.stopPropagation();const sl=t.dataset.kwear,who=t.dataset.kwho;
  if(who==="me"){window.__kwdTab=sl;const b=document.querySelector('[data-tab="inv"]');if(b)b.click();return}
