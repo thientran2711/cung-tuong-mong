@@ -204,3 +204,20 @@ Branch review/rel-men-servants-r6 @159dab21 (from -r5rv fafbf719; no main merge 
 - Shots LOOKED 3× (Fold 755x1000@2 + iPad 1180x820@2): https://ctm-img.victoria-tntt.workers.dev/img/_review/rel-men-servants/ r6-rel-srv-mistress-*.jpg (Ân oán «Nhi → Hoàng hậu Thiện cảm 56», «Chỉ → Hoàng hậu 76» = loyal), r6-staff-own-*.jpg, r6-staff-other-*.jpg. Wipe: python3 dev/site/cdn_sync.py --wipe-review rel-men-servants.
 - Note N7 (not changed, for Foreman B): the other direction master → servant in Ân oán («Hoàng hậu → Chỉ Thiện cảm 0», also «Ta → nàng Thiện cảm» for her own) reads the master's rl map, while her trust lives in tinOf («tin cậy», a different word per VANPHONG l.55). Not two numbers under one word, but the 0 may read odd; a rule call (show «Tin cậy» there?) is the owner's.
 READY: review/rel-men-servants-r6 159dab21.
+
+## REVIEW r6 (BIG, opus, session_01N1tNP5VS6ZVp3CRYrxc8sA) — PASS 1840a861 (review/rel-men-servants-r6rv; worker head 159dab21)
+PRIORITY #1 CHECK: OD:L352 + VANPHONG l.55/l.61 | ledger 0 | claims 8 | main kit-relrows-ms1word LIVE | review/* review/rel-men-servants-r6 (+ r5rv) | Foreman B orders 21:57Z (ROOT-7) / 22:21Z (ROOT-8).
+Merges: origin/main ea112384, then 87ac1ff4 (both only index.html/sw.js → rebuilt); hunk script (every '+' line of both sides present): 0 lost. 1840a861 is a fast-forward of LIVE 87ac1ff4.
+F5 (Fix A) holds: another consort's servant card «Thiện cảm với Vãn Tình 66 · Vãn Tình tin cậy 49 · Nàng → ta Thiện cảm 0» and aff(servant, mistress) = 66 = loyal (Fold 755x1000@2 + iPad 1180x820@2 looked 3×); her maid / household = loyal, no «Lòng»; servant-long-scan 0 survivors.
+role-parity scan change (dev/tools/role-parity-scan.js, snapshots also hold servants' loyal / tin / af) — verified it does NOT weaken the test:
+| Run | Gaps |
+|---|---|
+| LIVE ea112384 + OLD scan | 13 |
+| LIVE ea112384 + NEW scan | 13 — rows AND gaps byte-identical to the old scan (cmp) |
+| branch + OLD scan | 14 (+ maid:P-ONLY:maid:poison) |
+| branch + NEW scan | 13 = LIVE set |
+| branch + NEW scan + MUTATION (stfPoisonOk returns false for every NPC) | 14 (+ maid:P-ONLY:maid:poison) → still red |
+open/exempt lists and OPEN_MAX unchanged. Game-side check: 26 turns (8 months) of real play on the branch, 796 affAdd calls, 0 reach servant → own master (relMaster) → the new store does not move the NPC world in play; the old red was the scan's probe worlds leaking loyal.
+Tests on 1840a861: quickcheck PASS (core gates incl. one-core-guard / one-core-text, old LIVE save, perf render 254/218, tab 349/378, buổi 2037/1756 ms, tasks>200 19/18) · rel-men-servants 30/30 (on 189a5315) · role-parity.test ALL PASS · undef-scan PASS (282) · coop-e2e 124/124 · coop-home 51/51 (stale «Khuê phòng» fixed on LIVE) · NEW dev/test/coop-relms-both.js 14/14 (BOTH SEATS: Ân oán groups Nam nhân/Cung nhân, her maid Thiện cảm = her loyal with no Lòng, NPC servant → mistress = loyal, his oán toward the host kept after a merged week and not copied to the guest, 0 page errors).
+Laws: 1 OK (parity proven, mutation) · 2/3 n/a · 4 OK (BAL.tinLv.send, one store) · 6 OK · 7 OK · 9 OK (kit sbar / kitRel2 only) · 11 OK (scan) · 14 OK · 16/17 OK.
+CDN review folder wiped. CO-OP GATE: coop-e2e 124/124 + own both-seat 14/14 PASS.
