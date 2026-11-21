@@ -74,3 +74,12 @@ keep_check --all 496 PASS; check_store maid a18 ×6 PASS; nhất 9.93k (limit 10
 ## JOB 9 — owner L1797 (via Foreman C #22), 0 gens
 - test18_nhat_L1797 + test18_nhat_thancan_L1797 = test17 nhất files with ONE change: "a small embroidered silk fragrant sachet (túi thơm) on a silk cord with a tassel hanging at the centre between the two panels" → "... (túi thơm) with a tassel hanging from the sash at the waist on a short silk cord looped over the sash, never low at the knees". Everything else byte-identical; tc word diff = colour only.
 - keep PASS ×2 (all 502), check_store maid a18 PASS ×2; 9974 / 9981 chars (limit 10 000, ~20 chars left).
+<<<<<<< HEAD
+=======
+>>>>>>> a30918c (#22 L1779)
+
+## HANDOVER (MAIDFIX2, depth 1) — JOB 10 (owner L1836) NOT started
+START_CTX ≈ 3 % · now 391k/1M ≈ 39 % (get_session) > roll line 28 % → rolled over; the COORDINATOR (Foreman C #23/#24) opens the successor.
+JOB 10 (Foreman C #23 msg 07:38Z, owner L1836 verbatim: "Cung nữ đã ok rồi, tiến hành vẽ hai người cung nữ. Từ thô sử lên tới mama cho tôi. Hai người."): PRODUCTION prompt files for 2 maid PERSONS × every maid rank thô sử → tam → nhị → nhất (+ thân cận tam/nhị/nhất) → chưởng sự → ma ma; pick 2 persons from the roster the builders/palettes already have (say which + why); build per person × rank, gate PASS (keep_check + check_store --scope maid / mama, --age per rank), list files + count + cost @135 (2k medium, same settings as JOB K); push; report to Foreman C #24 (until it messages, #23 session_01D3E3NbPDzH9MSjxsnNqXEn).
+Approved maid bases (owner OK): test17_{tam,nhi}_L1785, test17_{tam,nhi}_thancan_L1785, test18_nhat_L1797, test18_nhat_thancan_L1797 (all dev/art/maid7/). Thô sử / chưởng sự / ma ma: find their approved prompts (grep gen_ledger / dev/art/maid7/gpt/*, DESIGN15.md rows 20–25) — they do NOT yet have the K30 / crepe (B29_S_CREPE, scope maid only; ma ma scope "mama" still on M06) / clean-edge / bow lines; ask the foreman whether to port them.
+How the swap/keep was done (reuse): thân cận = colour-token swap powder blue #A7BAD2 ↔ deep rose #CA7281 (+ 'lower maid's blue', 'sleeves blue all the way'); keep sidecars per file; nhất prompts sit at 9 974 / 9 981 chars (limit 10 000) — a person's face/identity lines will NOT fit without trimming boilerplate (A38: list as allow lines, never cut outfit words).
