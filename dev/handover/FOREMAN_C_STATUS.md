@@ -1062,3 +1062,4 @@ NEWACCT#16 ~02:29Z: OWNER L1653 (angry): maids L1650 bad (tam old+new ugly; nh�
 NEWACCT#16 ~02:37Z: DESIGN22 31af161 thu t1–t8 (t1–t3 v10, t4 COMOIk, t5 COMOIj, t6 COMOIl, t7 v8k, t8 v10i): G51 sash t4–t8, G52 t1–t6 (t7/t8 phoenix on borders intended), G49 clearer → CHECK1 → GEN1 t4+t5 drafts 110 cr.
 NEWACCT#16 ~02:38Z: CHECK1 job 21: GEN1 t4 COMOIk + t5 COMOIj drafts sent (110 cr) before 'embroidered' chest restore (msgs crossed) — accept as test of G51/G52/G49; DESIGN22 restoring t6 items + t4/t5 words.
 - (21/11 02:39Z) FROM MAIN CHÍNH 85: LIVE now a88b14f0 (coop-name-clash + thancan module list; FF of 64d2e094). Merge before LAND READY.
+NEWACCT#16 ~02:40Z: MAIDFIX1 e40bb3a maid prompts test6_nhi/nhat/tam_L1653 (+.keep) ready; 3 design Qs asked owner L1654 (nhị blue sleeves?, tam vs nhị difference, nhất back tà 1 or 2). Drafts 55 cr each after answers.
