@@ -21,8 +21,7 @@ const KCDAD={tt:["Tể tướng","phủ Tể tướng"],dtq:["Đại tướng qu
 const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
 /* KC LORE: new games run lore v2 (the td house falls only when she leaves for the palace; one father, one brother, one dress). Old saves (S.kc.v 1) keep their old rules. At the identity card S.kc does not exist yet: that is always a new game. */
 function kcLore(){return !S||!S.kc||(S.kc.v||1)>=2}
-const KCMN=["Đức Minh","Hữu Chính","Kính Đường","Bác Văn","Thế Khanh","Trọng Lễ","Hoài An","Tư Viễn","Thừa Tông","Bảo Thành","Gia Mậu","Duy Nhạc"];
-const KCFN=["Ngọc Nhu","Tĩnh Uyển","Bích Hà","Thu Thủy","Minh Châu","Lạc Yên","Hoài Ngọc","Tuyết Nhạn","Vân Khanh","Mộ Tình","Thanh Đại","Liên Kiều"];
+/* home names come from the one name core (jname.js nmNew) */
 const KCGTU={tt:80,dtq:65,muoi:90,thd:25,ch:75,td:55};
 /* places: key -> [name, scene code, in the house?, line] (scenes are placeholders until the gpt-2-6 set, OUTSIDE_PLAN §14) */
 const KCPL={
@@ -112,23 +111,20 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.close
 
 function kcSnapReset(){try{S.wkSnap=wkSnap()}catch(e){}try{KMS=S;KMSNAP=kmSnap()}catch(e){}}
 /* r2: a home name never repeats a palace name (j61 hides the names of palace people she does not know, in any text: "Thăm cung nữ ???") */
-function kcFreeName(mk,more){const used=new Set();const tail=n=>String(n).split(" ").slice(-2).join(" ");const add=n=>{if(n){used.add(n);used.add(tail(n))}};
- try{(typeof k61All==="function"?k61All():[]).forEach(e=>e&&add(e.name));(more||[]).forEach(m=>add(m.name))}catch(e){}
- let n=mk();for(let i=0;i<40&&(used.has(n)||used.has(tail(n)));i++)n=mk();return n}
 function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;
  const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||undefined,af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
- const fam=[];const gl=shuf(KCMN.slice());const g=()=>gl.pop();
- fam.push(T("cha","Phụ thân",nm(g()),48+R(8),"official",[],null,35+R(25)));
+ const fam=[];
+ fam.push(T("cha","Phụ thân",nmNew("m",{sur,more:fam}),48+R(8),"official",[],null,35+R(25)));
  /* KC LORE: the father of tt / dtq is the head of that house in the court (j55 trS, j67 {dad}): one name, one age, in the home and in the palace */
  try{const hd=(k==="tt"||k==="dtq")?tdHead(KCCLAN[k]):null;if(hd&&hd.dadOf==="me"){fam[0].name=hd.name;fam[0].age=Math.min(56,Math.max(46,hd.age||50));fam[0].net=netOf(hd).slice()}}catch(e){console.error("kc lore dad",e)}
  const momAlive=roll(60);
- if(momAlive)fam.push(T("me","Mẫu thân",`${pick(SURN)} thị`,38+R(6),"mama",[],pick(["Ân cần","Khiêm nhường","Kín đáo"]),55+R(25)));
- fam.push(T("di",momAlive?"Di nương":"Kế mẫu",`${pick(SURN)} thị`,33+R(6),"mama",[],pick(["Xảo quyệt","Tham vọng","Kiêu ngạo","Ân cần"]),R(25)));
+ if(momAlive)fam.push(T("me","Mẫu thân",nmNew("mo",{more:fam,avoidSur:new Set([sur])}),38+R(6),"mama",[],pick(["Ân cần","Khiêm nhường","Kín đáo"]),55+R(25)));
+ fam.push(T("di",momAlive?"Di nương":"Kế mẫu",nmNew("mo",{more:fam,avoidSur:new Set([sur])}),33+R(6),"mama",[],pick(["Xảo quyệt","Tham vọng","Kiêu ngạo","Ân cần"]),R(25)));
  fam.push(T("to","Tổ mẫu",`Lão phu nhân ${sur} gia`,66+R(8),"mama",[],pick(["Cương trực","Ân cần","Kín đáo"]),40+R(20)));
- fam.push(T("huynh","Huynh trưởng",nm(g()),21+R(4),"man",["man:thive-1","man:thive-2"],pick(["phong lưu","trung hậu","tham vọng","cẩn trọng"]),40+R(30)));
- const sis=T("muoi","Thứ muội",kcFreeName(()=>nm(pick(KCFN)),fam),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Khiêm nhường","Xảo quyệt","Ân cần"]),R(30));
+ fam.push(T("huynh","Huynh trưởng",nmNew("m",{sur,more:fam}),21+R(4),"man",["man:thive-1","man:thive-2"],pick(["phong lưu","trung hậu","tham vọng","cẩn trọng"]),40+R(30)));
+ const sis=T("muoi","Thứ muội",nmNew("f",{sur,more:fam}),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Khiêm nhường","Xảo quyệt","Ân cần"]),R(30));
  sis.sac=40+R(50);sis.tai=30+R(50);sis.danh=4+R(8);fam.push(sis);
- for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",kcFreeName(()=>`${pick(SURN)} ${pick(KCFN)}`,fam),18+R(2),"consort",[],pick(["Ân cần","Khiêm nhường","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
+ for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",nmNew("f",{more:fam,avoidSur:new Set([sur])}),18+R(2),"consort",[],pick(["Ân cần","Khiêm nhường","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
  S.kc={v:2,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
  S.kgt=BAL.kc2.st.kc.kgt[0]+R(BAL.kc2.st.kc.kgt[1])+(k==="tt"||k==="ch"?BAL.kc2.st.kc.kgtBr[0]:k==="td"?BAL.kc2.st.kc.kgtBr[1]:0);S.kap=BAL.kc2.st.kc.kap[0]+R(BAL.kc2.st.kc.kap[1]);S.khm=Math.round((KCGTU[k]||50)*1.2);S.kld=0;S.kgtu=KCGTU[k]||50;
  S.age=18;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
@@ -601,7 +597,7 @@ try{Object.assign(KIT_GLOSS,{"Áp lực hôn sự":`Mỗi tháng một tăng. T�
 /* Thư từ: what she truly knows of the harem — one kit person line per consort (stranger rule of the kit applies), then the letters */
 function kcMailHTML(){const L=S.kc.intel.map(id=>RV(id)).filter(Boolean);
  const rows=L.length?`<div class="ktprows">${L.map(v=>`<div class="ktprow">${kitPersonLine(v,{sub:v.alive&&!v.out?`tính ${netTxt(v)} · sủng ${v.sung>=BAL.sungLv.kc[1]?"rất cao":v.sung>=BAL.sungLv.kc[0]?"khá":"ít"}${v.preg?" · mang thai":""}`:"đã không còn"})}</div>`).join("")}</div>`
-  :kitEmpty("Thư từ","Chưa biết ai trong cung: viết thư, mua tin, nghe chuyện trà lâu.");
+  :kitEmpty("Ta chưa có thư từ",["Chưa biết ai trong cung thì chưa có thư để gửi.","Viết thư, mua tin, nghe chuyện ở trà lâu."],{topic:"Thư từ"});
  return `<h3>${kitInfo("Tin trong cung")}</h3>`+rows+kcGroupHTML("mail")}
 try{KIT_GLOSS["Tin trong cung"]="Những gì ta biết thật về hậu cung, qua thư từ, trà lâu và người nhà. Vào cung vẫn nhớ."}catch(e){}
 /* Gia tộc = sub-tabs Người nhà · Khuê hữu · Gia thế; a person = the Hậu cung pattern: pager strip + ONE kit person card */
@@ -617,7 +613,7 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
  const T=kitSubTabs("kcfam",[Object.assign({k:"nha",label:"Người nhà"},cnt(nha)),Object.assign({k:"ban",label:"Khuê hữu"},cnt(ban)),{k:"gia",label:"Gia thế",doable:rest.filter(([a])=>kcDoable(a)).length,total:rest.length}]);
  let h=T.html;
  if(T.cur==="gia")h+=kitRows([[kitInfo("Gia thanh"),S.kgt,S.kgt<BAL.kc2.st.kgtLow?"r":"t"],["Thế lực nhà",kcPow(),"t"],["Gia tư",S.kgtu,"t"],["Hồi môn cha mẹ hứa",kitChip("Bạc",S.khm,"n"),"t"],[kitInfo("Áp lực hôn sự"),S.kap,S.kap>=BAL.kc2.st.kc.hot?"r":"t"]])+kcCardsH(rest);
- else{const L=T.cur==="ban"?ban:nha;const key=T.cur==="ban"?"kcban":"kcfam";h=L.length?`<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t==="Khuê hữu"?shortN(m.name):m.t})),i=>kcFamCard(L[i]))+`</div>`:T.html+kitEmpty("Gia tộc","Không còn ai.")}
+ else{const L=T.cur==="ban"?ban:nha;const key=T.cur==="ban"?"kcban":"kcfam";h=L.length?`<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t==="Khuê hữu"?shortN(m.name):m.t})),i=>kcFamCard(L[i]))+`</div>`:T.html+kitEmpty("Nhà ta không còn ai",["Không còn người thân nào ở lại."],{topic:"Gia tộc"})}
  return h}
 /* Dư đồ: sub-tabs Trong phủ · Kinh thành, one kit priced button per place (who is there; city = 1 khắc; why locked) */
 function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=kcHere(k).map(m=>m.t.toLowerCase());const tmh=S.kc.at.ftm===k&&kcTmMan()?["người ấy"]:[];const who=ppl.concat(tmh);
