@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"29d64df1","t":"2026-11-21T04:28Z","c":"kit-ghichu-sections: a section headed Ghi chu (art-rule modal) goes behind a «!» on the heading above; kitNoteBang(text,title) optional tit…","b":"679c4e44a89d","h":[{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"}]};
+window.CTM_BI={"s":"8e89667d+","t":"2026-11-21T04:35Z","c":"kit-ghichu-sections: index.html/sw.js rebuilt","b":"e8d724b9b73d","h":[{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38725,8 +38725,9 @@ window.kitPersonChips=kitPcGrid;
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 /* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
-.pc .kpkey{display:flex;flex-direction:column;gap:4px;margin:0 0 6px;font-size:.78rem;min-width:0}
+.pc .kpkey{display:flex;flex-direction:column;gap:5px;margin:0 0 6px;font-size:.92rem;min-width:0}/* owner 21/11 ~03:32Z: the rows under the figure are READABLE (were .78rem × .82em × .86em ≈ .55 rem) */
 .pc .kpkey .kpk-st{display:flex;flex-wrap:wrap;gap:4px}
+.pc .kpkey .kpk-st :is(.kgl,.chip,.kchip,span,b){font-size:max(.8rem,1em)}/* the status chip (Đã quen …) reads as the rows do */
 .pc .kpkl{display:flex;flex-direction:column;gap:1px;line-height:1.3;color:var(--ink)}.pc .kpkl-l{font-weight:700;color:var(--k-lab,#8a7350)}
 .pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
@@ -49727,7 +49728,7 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
 /* KIT §52 kitRel2: two column boxes (that person → me | me → that person), short words, no bars; Hiện nay / Tuần này aligned inside each box */
 .kr2w{container-type:inline-size;min-width:0;max-width:100%;margin:.2em 0 .45em}
-.kr2{display:grid;gap:.5em;align-items:stretch;grid-auto-rows:1fr}.kr2-n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.kr2-n1{grid-template-columns:minmax(0,calc(50% - .25em))}/* boxes shown together = SAME width and height, tops aligned; a lone box is one column wide, never the whole row (owner 16:10Z) */
+.kr2{display:grid;gap:.5em;align-items:stretch;grid-auto-rows:1fr}.kr2-n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.kr2-n1{grid-template-columns:minmax(0,1fr)}/* boxes shown together = SAME width and height, tops aligned; a LONE box spans the WHOLE row — never half a frame left empty (owner 21/11 ~02:14Z «chiếm hết cả một nửa cái khung nền», overwrites the 16/11 16:10Z half-width rule) */
 .kr2b{min-width:0;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);overflow:hidden;--krc:#6a5040}
 .kr2-them{--krc:#7a4fa0}.kr2-me{--krc:#3f62a8}
 .kr2h{padding:.28em .55em;font-size:.76em;font-weight:700;letter-spacing:.02em;color:var(--krc);background:color-mix(in srgb,var(--krc) 12%,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);overflow-wrap:anywhere}
@@ -49749,9 +49750,9 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
 @container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
 /* KIT 52 compact (owner 17/11): one line per direction, pairs never split */
-.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:.82em;line-height:1.3;font-variant-numeric:tabular-nums}
+.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:1em;line-height:1.3;font-variant-numeric:tabular-nums}
 .kr2cl{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .7em;min-width:0}
-.kr2ch{flex:0 0 100%;font-size:.86em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
+.kr2ch{flex:0 0 100%;font-size:.8em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
 .kr2cl.kr2-them{--krc:#7a4fa0}.kr2cl.kr2-me{--krc:#3f62a8}
 .kr2ci{white-space:nowrap}.kr2ci .kr2-v{margin-left:.15em}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
@@ -86250,7 +86251,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="679c4e44a89d";window.CTM_BUILD=BUILD;
+const BUILD="e8d724b9b73d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
