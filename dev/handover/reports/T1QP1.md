@@ -89,3 +89,4 @@ PROPOSED (words only, needs #25/owner yes): (1) "…the upper tier appliquéd ON
 - dev/art/thu_comoi/s62_t6_THU_vankien2_L1879b.txt (base vankien2_L1879: chest = "small round pearls only", no jade) + dev/art/seasons4/s62_t6_XUAN_vankien2_L1879b.txt (base vankien2_L1856):
   "the upper tier appliquéd ON the lower, which shows only as a thin scalloped edge, never two stacked layers," → "the upper tier appliquéd ON a slightly larger lower tier whose scalloped edge clearly shows below it as a second row,". Captions "… L1879b". keep + store PASS (9 967 / 9 966 chars). túi thơm/sachet/pouch: 0.
 - Thu sent to VE9 @55 (after its hạ t1–t3); xuân NOT drawn.
+- Owner L1880 (via #25): chest bead/pearl strands WANTED for t6–t8; only necklaces + pendants/discs banned. L1879/L1879b 'pearls only' kept as is.
