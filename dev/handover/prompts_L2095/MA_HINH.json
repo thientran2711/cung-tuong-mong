@@ -209,5 +209,12 @@
  "M2213-T7LOW": "M2213-T7LOW_s62_t7_thu.txt (THỬ cổ thấp: HQP = M2213-07, mọi chữ cổ áo thay bằng 'a low neckline'; L2209/L2212/L2214/L2215)",
  "M2216-01": "M2216-01_s62_t6_thu_COTHAP.txt (THỬ: Quý phi = M2187-06 chị khen, mọi chữ cổ áo thay bằng 'a low neckline'; L2216)",
  "M2213-01": "M2213-01_s62_t1_thu.txt (bộ thu s62 t1 = M2206-01, chỉ đổi khối VẢI chung cho mọi bậc (L2214))",
- "M2213-02": "M2213-02_s62_t2_thu.txt (bộ thu s62 t2 = M2206-02, chỉ đổi khối VẢI chung cho mọi bậc (L2214))"
+ "M2213-02": "M2213-02_s62_t2_thu.txt (bộ thu s62 t2 = M2206-02, chỉ đổi khối VẢI chung cho mọi bậc (L2214))",
+ "M2217-03": "M2217-03_s62_t3_thu.txt (= M2213-03: bỏ câu lặp L2213, vải chung L2214, tay áo L2215)",
+ "M2217-04": "M2217-04_s62_t4_thu.txt (= M2213-04: bỏ câu lặp L2213, vải chung L2214, tay áo L2215)",
+ "M2217-05": "M2217-05_s62_t5_thu.txt (= M2213-05: bỏ câu lặp L2213, vải chung L2214, tay áo L2215)",
+ "M2217-06": "M2217-06_s62_t6_thu.txt (= M2213-06: bỏ câu lặp L2213, vải chung L2214, tay áo L2215)",
+ "M2217-07": "M2217-07_s62_t7_thu.txt (= M2213-07: bỏ câu lặp L2213, vải chung L2214, tay áo L2215)",
+ "M2217-08": "M2217-08_s62_t8_thu.txt (= M2213-08: bỏ câu lặp L2213, vải chung L2214, tay áo L2215; HH KHÓA: màu/áo trong/nghiêng đầu/'never covered by the sleeves' trả về y M2211-08)",
+ "M2217-T7LOW": "M2217-T7LOW_s62_t7_thu.txt (THỬ cổ thấp = M2213-T7LOW, chỉ đổi mã)"
 }
