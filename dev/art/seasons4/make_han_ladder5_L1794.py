@@ -20,7 +20,7 @@ EMB={1:"many SMALL lilac sprays spread over the whole garment, clearly more embr
  3:"many small-to-medium semi-double China roses spread over the whole garment, clearly more embroidery than any palace maid (in ivory white and fine gold thread)",
  4:"many medium-size spring flowers spread over EVERY part of the garment (robe body, sleeves, inner robe and skirt, like the Quý nhân), clearly more embroidery than any palace maid (peach blossoms, magnolias and small swallows in flight, in gold and bright blush pink)",
  5:"many LARGE spring flowers spread over the whole garment, clearly more embroidery than any palace maid (large magnolia medallions, peach blossoms and cloud-and-swallow scrolls in gold)",
- 6:"many large flowers spread over the whole garment, clearly more embroidery than any palace maid (large camellia medallions and sprays of osmanthus in gold)",
+ 6:"many large flowers spread over the whole garment, clearly more embroidery than any palace maid (large camellia medallions and sprays of double crabapple blossoms in gold)",
  7:"many large flowers spread over the whole garment, far more embroidery than any palace maid (large peonies and auspicious clouds in thick gold thread)",
  8:"the LARGEST, densest embroidery of all ranks: many clearly visible gold PHOENIXES in flight on the robe body, sleeves and wrap edge, among large peonies and clouds"}
 BRD={1:"a narrow embroidered border along the hem and front opening",2:"an embroidered border along the hem and front opening",3:"a wide embroidered border along the hem and front opening",4:"a deep embroidered border along the whole hem and front opening",5:"a deep embroidered border along the whole hem and front opening",
@@ -51,12 +51,12 @@ WRAP={1:"the front panel crosses the body in ONE SHORT straight diagonal and end
  7:"CURVED WRAP: the outer front panel sweeps in ONE wide CURVE across the front, covering the inner layer, whose edge shows under the curve; a curved hem edge",
  8:"the longest, grandest CURVED WRAP: the outer front panel sweeps in ONE wide CURVE round to the back hem, covering the inner layer, whose edge shows under the curve; curved hem"}
 def outfit(n):
-    L=2; B=2 if n<=3 else (3 if n<=6 else 4)
+    L=3; B=3   # owner L1807: THREE collar bands at every rank
     M,Sx,ms,ss=(PK,IV,"pink","ivory") if n<=3 else (P,S,"plum","pink")
     OM,IM,oms,ims=(Y8,M,"yellow","plum") if n==8 else (M,Sx,ms,ss)
     robes=f"a long wrapped outer robe (quju, khúc cư) in {OM} reaching the floor over an inner robe in {IM}, NOT a straight-hem robe; WRAP CUT: {WRAP[n]} (collar unchanged; no spiral or swallowtail points)"
     coll=f"the crossed collars of BOTH robes {CORE}, the {ims} inner collar showing as a wide layered edge inside the {oms} outer collar"
-    bands={2:f"(outer {M} embroidered in gold, inner {Sx})",3:f"(outer {M} embroidered in gold, inner two {Sx})",4:(f"(royal yellow woven in gold, small-pearl-edged, then plum, inner two pink)" if n==8 else f"(outer {M} woven in gold and edged with small pearls, then royal yellow, inner two {Sx})")}[B]
+    bands={2:f"(outer {M} embroidered in gold, inner {Sx})",3:(f"(royal yellow woven in gold, pearl-edged, then plum, inner pink)" if n==8 else f"(outer {M} woven in gold and edged with small pearls, then royal yellow, inner {Sx})" if n==7 else f"(outer {M} embroidered in gold, inner two {Sx})"),4:(f"(royal yellow woven in gold, small-pearl-edged, then plum, inner two pink)" if n==8 else f"(outer {M} woven in gold and edged with small pearls, then royal yellow, inner two {Sx})")}[B]
     extra="" if B==2 else ", never a third robe"
     fr=f"SHOULDER FRINGE: {FR[n]}, lying outside the collar, never touching or hiding the collar; no cape, no cloud collar, no shawl;" if n>=4 else "no cape, no cloud collar, no shawl;"
     o=(f"Outfit ({LAB[n]}): a NEW outfit, a full Han-dynasty court look in TWO visible robe layers: {robes}; {coll}; very wide long sleeves (one single visible sleeve layer, every inner sleeve hidden inside) {SLV[n]}; "
@@ -67,7 +67,7 @@ def outfit(n):
 COLLAR="COLLAR AND SHOULDERS (every rank, exactly like the Phi): the wide crossed collar lies FLAT on top of both shoulders, its edges reaching almost to the shoulder points and dipping in one broad shallow V low at the chest; soft sloping shoulders; any bead yoke lies flat along the collar edge."
 JEWEL="JEWELLERY: every jewel SMALL and delicate, never chunky or showy; NO red anywhere (no red gems, beads or tassels), no faceted gems, no necklace."
 JEWEL78="JEWELLERY: only jade, pearls and gold, Chinese court style, all SMALL and delicate; red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants; no faceted or sparkling gems, nothing European, no necklace."
-ITEM={7:"a closed kingfisher-feather gold silk parasol with a gold filigree handle and pearl tassels",8:"a round phoenix-embroidered silk fan with a gold phoenix handle"}
+ITEM={7:"a closed kingfisher-feather gold silk parasol with a gold filigree handle and pearl tassels",8:"a round jade-green silk fan with gold phoenixes and a gold phoenix handle"}
 ANG="ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn;"
 POSE={2:"Pose: standing poised, a small pale-jade lacquered pellet drum (trống lắc) with a jade handle, a deep drum with two pellets on cords of the same pale jade, not flat, held low at her waist, the robe hem stirring slightly.",
  6:"Pose: standing poised, one hand holding a pearl-embroidered silk ball (tú cầu) with pearl tassels low at her waist, a round stuffed ball, no handle, no stick, the robe hem stirring slightly.",

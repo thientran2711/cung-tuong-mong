@@ -72,3 +72,8 @@ Removed "nothing covers the collar or shoulder line: loose hair falls BEHIND the
   6. t7 colour list "the yellow collar band" (Phi has no extra collar band in the colour sentence) → removed (yellow band still in the bands phrase).
   NOT changed, owner to decide: (a) band count t1–t3 TWO / t7–t8 FOUR (L1772); (b) t1–t3 have NO bead yoke at all (Phi's yoke lies on the collar edge; fringe is t4+ in the ladder); (c) t8 outer collar yellow, inner plum (HH yellow order); (d) t1–t3 colours ivory-in-pink vs pink-in-plum (rank colours).
 ch 9460/9636/9690/9549/9203/9779/9987/9995; keep PASS ×8; check_store same waivers (t7 S14 waived by #23).
+## LADDER5 update 5 (owner L1807 answers via #22)
+- THREE collar bands at every rank: t1–t3 "(outer pink embroidered in gold, inner two ivory)", t4–t6 = Phi, t7 "(outer plum woven in gold and edged with small pearls, then royal yellow, inner pink)", t8 "(royal yellow woven in gold, pearl-edged, then plum, inner pink)"; ", never a third robe" ×8; caption "ba dải cổ rộng" ×8.
+- HH 3 colours: royal yellow MAIN (outer robe, over half), her own main plum second (inner robe, collar edge, borders), pink third (linings) — as in update 1; held fan made jade-green (B16: item differs from yellow/plum/pink).
+- Quý phi Xuân flowers: osmanthus (autumn) → double crabapple (spring; F19 t6 list); camellia kept. All captions Mùa Xuân.
+ch 9485/9661/9715/9549/9203/9795/9983/9995; keep PASS ×8; check_store same waivers.
