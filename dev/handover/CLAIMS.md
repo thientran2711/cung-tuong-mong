@@ -805,3 +805,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | dresscode r4b F1 E30c (opus; successor of E30b; one loan rule for the Hội phối đồ + «Cho mượn» visit) | review/dresscode-fix-r4; reports/dresscode.md «r5 (E30c)» | FOREMAN E #25 | session_01DgYSWkosXzSx4tcEyzoTZv | RUNNING | 21/11 07:40Z |
 | maid-acts-a (OPUS; maid road act allowlist option A interim; successor of KY5r) | review/maid-acts-a; briefs/main90-maid-acts-a.md | MAIN CHÍNH 90 | session_01Rc5AsKzCEhNeHRAnkWCAkA | RUNNING | 21/11 07:15Z |
 | REVIEW quest-rows-2 re-merge (SONNET SMALL; #66) 2fc4a277 | review/quest-rows-2-rv; briefs/main91-rv-quest-rows-2.md | MAIN CHÍNH 91 | session_01Rc5AsNT2KxMEmhx8b9Pm1j | RUNNING | 21/11 07:28Z |
+| REVIEW hao-huu r2 (OPUS BIG co-op) d41876c9 (+ badge follow-up) | review/hao-huu-rv2; briefs/main91-rv-hao-huu-2.md | MAIN CHÍNH 91 | (opening) | RUNNING | 21/11 07:33Z |
