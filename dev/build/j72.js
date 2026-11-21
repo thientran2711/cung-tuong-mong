@@ -172,7 +172,7 @@ function q72Why(x,X,st,o){if(S.dead)return"đã hết kiếp";if(Q.length)return
  const pl=q72StepPl(st,X);const k=o?(o.k==null?1:o.k):st.k;const c=o?o.c:st.c;
  if(pl&&S.place!==pl&&!(pl==="home"&&S.place==="home"))return `phải đến ${q72PlN(pl)} trước`;
  if(st.bu!=null&&(S.buoi||0)!==st.bu)return `chỉ làm được ${BUOI[st.bu].toLowerCase()}`;
- if(st.emp&&!q72EmpNear())return "chỉ khi ở cạnh Hoàng thượng (gặp ngài trên bản đồ, hoặc vừa thị tẩm tuần này)";
+ if(st.emp&&!q72EmpNear())return "chỉ khi ở cạnh Hoàng thượng (gặp ngài trên Dư đồ, hoặc vừa thị tẩm tuần này)";
  if(!can(k))return (typeof whyTime==="function"&&whyTime(k))||(used+k>BAL.time.khac?"hết khắc":"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ");if(c&&c.bac&&S.bac+c.bac<0)return `thiếu bạc (cần ${-c.bac})`;if(c&&c.suc&&S.suc+c.suc<5)return"Sức quá yếu";
  if(o&&o.t){try{if(!o.t(X))return q72Txt(o.tw||"không làm được",X)}catch(e){return"không làm được"}}return""}
 function q72Line(x,X,st,o){const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=s.p!=null||(!o&&s.b<100);const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;
@@ -414,7 +414,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Làm văn tế","thi",45,2),G("","Dâng văn tế","tai",70,1,{},"r",{emp:1})],ok:{fx:{sung:5,danh:4},d:0},no:{fx:{sung:-2}}});
  T7("an_xa","court",{r:"emp",rf:()=>thIll(),t:"Soạn danh sách ân xá cầu phúc cho Thái hậu",h:"“Mẫu hậu ốm lâu. Trẫm muốn ân xá một số cung nhân bị phạt để cầu phúc. {Goi} hiểu chuyện hậu cung, soạn giúp trẫm.”",dl:3,
   s:[G("home","Xét và soạn danh sách","duc",60,2),G("","Dâng danh sách","",100,1,{},"r",{emp:1})],ok:{fx:{duc:4,sung:2},d:0,fn:()=>{let n=0;for(const v of rivals)if(v.alive&&v.confined&&!v.out){v.confined=Math.max(0,v.confined-1);n++}return n?`Các phi tần đang cấm túc được giảm một tháng (${n} người).`:""},x:"phi tần đang cấm túc được giảm một tháng"},no:{fx:{sung:-2}}});
- T7("qua_tet","court",{r:"emp",w:fest(12,1),rf:()=>!S.thDead,t:"Chọn quà Tết dâng Thái hậu cùng Hoàng thượng",h:"“Tết đến, năm nào trẫm cũng dâng mẫu hậu ngọc, bà chán rồi. {Goi} chọn giúp trẫm món gì bà thích.”",dl:3,
+ T7("qua_tet","court",{r:"emp",w:fest(12,1),rf:()=>!S.thDead,t:"Chọn quà Tết dâng Thái hậu cùng Hoàng thượng",h:"“Tết đến, năm nào trẫm cũng dâng mẫu hậu ngọc, người xem mãi cũng chán. {Goi} chọn giúp trẫm món gì người thích.”",dl:3,
   s:[G("home","Chọn quà","tai",55,1,{bac:-20}),G("tn","Cùng dâng quà","",100,1)],ok:{fx:{sung:3,th:5},d:0},no:{fx:{sung:-1}}});
  T7("bien_tin","inv",{r:"off",rf:o=>o.c==="Đại tướng quân"&&bienLo(55),p:()=>({b:TD_().bien}),t:"Dò ý Hoàng thượng về việc biên ải",h:"“Biên cương bất ổn, lão phu ở xa không biết ý Hoàng thượng thế nào. {Nc} hầu cận, dò giúp một lời.”",dl:4,
   s:[G("","Dò ý Hoàng thượng","sung",45,1,{},"r",{emp:1}),C(X=>`Ngươi biết sự thật: biên cương đang ở mức ${X.p.b}${X.p.b<40?", Hoàng thượng rất lo":", ngài còn để ý"}`,O("Viết thư báo đúng như vậy",{}))],ok:{r:10,cc:1,fn:pow("Đại tướng quân",2)},no:{r:-4}});
@@ -433,7 +433,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("ksp","Dò sổ sách qua thái giám","mat",40,2,{bac:-20}),C(X=>X.p.tru?"Ngươi biết sự thật: cha {B} quả có tham ô":"Ngươi biết sự thật: cha {B} thanh liêm, sổ sách sạch",
    O("Báo đúng sự thật",{fn:X=>{if(X.p.tru&&typeof deA==="function"){deA(S,X.B.o,BAL.ag.ev.one);return `Ngươi nắm Chứng cứ tham ô của cha ${X.B.n} ${balSg(BAL.ag.ev.one)}.`}return""}}),O("Giữ kín, chỉ báo “chưa rõ”",{r:-4}))],ok:{r:10,cc:1},no:{r:-5}});
  T7("off_bac","trade",{r:"off",rf:o=>o.pow>=50&&S.bac<80,acc:X=>{apply({bac:BAL.eff.j72.bacAcc});q72DebtAdd(X.A,-1)},accX:`Bạc ${balSg(BAL.eff.j72.bacAcc)}; ngươi nợ ông một ân.`,t:"Đổi ơn: bạc của quyền thần, lời nhắc tên con ông",
-  h:"“Thấy {N} chi tiêu chật vật, lão phu có chút lễ mọn. Con trai lão phu thi đỗ mà chưa được bổ dụng; {N} nhắc giúp một câu.”",tr:"Nhận lời: ngay Bạc +50, ngươi nợ ông một ân. Đây là can chính.",dl:5,
+  h:"“Thấy {N} chi tiêu chật vật, lão phu có chút lễ mọn. Con trai lão phu thi đỗ mà chưa được bổ dụng; {N} nhắc giúp một câu.”",tr:"Nhận lời: ngay Bạc +50, ngươi nợ ông một ân. Đây là xen vào việc triều chính.",dl:5,
   s:[G("","Nhắc tên con ông với Hoàng thượng","sung",50,1,{},"r",{emp:1})],ok:{r:15,d:1,cc:1,fn:X=>pow(X.A.id,2)()},no:{r:-12,cc:1}});
  T7("off_con","social",{r:"off",rf:o=>typeof tdMembers==="function"&&tdMembers(o.c).some(p=>p!==S&&p.rank<=2),b:"rv",bf:(o,z,A)=>tdHouse(o)===A.id&&o.rank<=2,t:"Che chở con gái nhà {A} trong cung",
   h:"“Con gái lão phu phẩm vị thấp, vào cung còn non dại. Mong {N} chỉ bảo, che chở cho nó.”",dl:5,s:[G("B","Sang thăm {B}","",90,1),G("home","Mời {B} sang, chỉ bảo","tai",65,1)],ok:{r:14,rb:10},no:{r:-5}});
@@ -491,7 +491,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("sv_luong","social",{r:"sv",rf:s=>(s.loyal||50)<BAL.loy.warn,t:"{A} xin được thưởng thêm",h:X=>`“Nô ${X.A.o.role==="maid"?"tỳ":"tài"} hầu {N} chăm chỉ mà lương chẳng đủ gửi về nhà. {Nc} thương thì thưởng thêm chút ít.”`,dl:2,
   s:[C("Thưởng",O("Thưởng 15 bạc",{c:{bac:-15}}),O("Hứa xin Tổng quản tăng lương",{t:()=>S.place==="ksp",tw:"phải đến Kính sự phòng",p:50,sk:"danh",lto:"fail"}))],ok:{r:15},no:{r:-6}});
  T7("dt_thu","love",{r:"svm",rf:s=>{const l=loverOf(s);return !!l&&ownerOf(l)&&ownerOf(l)!==S},b:"rsv",bf:(o,z,A)=>A.o.lover===o.sid,t:"Trao túi thơm của {A} cho {B}",
-  h:"“{Nc}… {B} hầu ở cung khác, chúng nô tỳ thương nhau đã lâu. Nô tỳ thêu túi thơm này mà không dám tự mang sang. {Nc} giúp nô tỳ.”",dl:4,tr:"Hai người quả có tình với nhau (đối thực).",
+  h:"“{Nc}… {B} hầu ở cung khác, chúng nô tỳ thương nhau đã lâu. Nô tỳ thêu túi thơm này mà không dám tự mang sang. {Nc} giúp nô tỳ.”",dl:4,tr:"Hai người quả đã thầm thương nhau từ lâu.",
   s:[G("B","Trao túi thơm cho {B}","tamco",60,1,{},"b"),C("{B} gửi lại lời",O("Mang lời hồi âm về cho {A}",{}))],ok:{r:15,rb:10},no:{r:-5},bad:{fx:{danh:-3},r:-3},badT:"Có người bắt gặp ngươi trao tín vật, lời ra tiếng vào."});
  T7("dt_hen","love",{r:"svm",rf:s=>!!loverOf(s),t:"Cho {A} gặp người thương một khắc",h:X=>`“${loverOf(X.A.o).name} sắp bị điều đi xa. Nô tỳ chỉ xin một khắc ở cửa sau cung để từ biệt… {Nc} thương nô tỳ.”`,dl:2,
   s:[C("Cửa sau cung",O("Cho phép, sai thái giám canh chừng",{p:75,sk:"mat",lto:"bad"}),O("Ngươi đứng ra canh cửa",{p:85,k:2,lto:"bad"}))],ok:{r:18},no:{r:-4},bad:{fx:{danh:-4},r:-2},badT:"Người tuần đêm bắt gặp, cả cung ngươi bị trách."});
@@ -535,7 +535,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("tyv","Xin thuốc trị thương","danh",65,1,{bac:-15})],ok:{r:12},no:{r:-4}});
  T7("maid_tet","social",{r:"maid",w:fest(12),t:"Gửi quà Tết về nhà cho {A}",h:"“Tết sắp đến, nô tỳ muốn gửi ít quà về cho mẹ mà không có đường ra. {Nc} cho nô tỳ gửi theo người của cung mình.”",dl:2,
   s:[G("home","Gửi quà theo người ra cung","",100,1,{bac:-10})],ok:{r:12},no:{r:-4}});
- T7("kho_tet","court",{r:"eun",w:fest(11,12),t:"Kiểm kê kho lụa cuối năm",h:"“Cuối năm Nội vụ phủ kiểm kho, sổ sách rối như canh hẹ. {Nc} tính toán giỏi, xem giúp nô tài.”",dl:3,
+ T7("kho_tet","court",{r:"eun",w:fest(11,12),t:"Kiểm kê kho lụa cuối năm",h:"“Cuối năm Nội vụ phủ soát kho, sổ sách rối như canh hẹ. {Nc} tính toán giỏi, xem giúp nô tài.”",dl:3,
   s:[G("home","Đối chiếu sổ kho","tai",55,2)],ok:{r:10,fx:{bac:15}},no:{r:-4}});
  T7("su_tet","social",{r:"man:sứ thần",w:fest(12,1),rf:()=>!S.thDead&&S.rank>=2,t:"Dẫn sứ thần dâng lễ Tết lên Thái hậu",h:"“Quốc vương nước thần gửi lễ Tết dâng Thái hậu. Thần không rõ lễ nghi trong cung, xin {N} dẫn đường.”",dl:3,
   s:[G("tn","Dâng lễ đúng nghi","danh",65,1)],ok:{fx:{th:3,bac:20},r:8,fn:bien(2),x:"Biên cương +2 (bang giao êm)"},no:{r:-4}});
@@ -568,7 +568,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("","Dò ý Hoàng thượng","tamco",45,1,{},"r",{emp:1}),C("Viết thư trả lời cha",O("Kể đúng những gì thấy",{fn:X=>X.A.k==="off"?pow(X.A.id,2)():""}),O("Khuyên cha đừng nhúng tay",{w:{duc:2}}))],ok:{r:10,cc:1},no:{r:-4}});
  T7("fam_dtq","fam",{r:"fam",rf:()=>S.origin.k==="dtq"&&bienLo(55),t:"Thư cha: xin lương thảo cho biên ải",h:X=>`“Biên ải nguy (${TD_().bien}), quân ở Nhạn Môn quan thiếu lương. Sớ của cha bị Hộ bộ ỉm đi. Con thưa với Hoàng thượng giúp cha.”`,dl:5,
   s:[G("","Thưa với Hoàng thượng","sung",50,1,{},"r",{emp:1})],ok:{r:10,fn:bien(5),x:"Biên cương +5",cc:1},no:{r:-4,cc:1}});
- T7("fam_muoi","fam",{r:"fam",rf:()=>S.origin.k==="muoi",w:c=>c.bac<120?2:1,t:"Thư nhà: xin quyền buôn muối ở trấn mới",h:"“Con gái, trấn Lâm An mới mở đường muối. Nhà mình muốn xin giấy phép. Con nhờ người đưa lời đến Hộ bộ.”",dl:5,
+ T7("fam_muoi","fam",{r:"fam",rf:()=>S.origin.k==="muoi",w:c=>c.bac<120?2:1,t:"Thư nhà: xin quyền buôn muối ở trấn mới",h:"“Con gái, trấn Lâm An mới mở đường muối. Nhà ta muốn xin phép buôn muối ở đó. Con nhờ người đưa lời đến Hộ bộ.”",dl:5,
   s:[G("ksp","Nhờ Tổng quản đưa lời đến Hộ bộ","tamco",50,1,{bac:-20})],ok:{fx:{bac:80},cc:1,fn:pow("Hộ bộ",1)},no:{}});
  T7("fam_nc","fam",{r:"man:sứ thần",rf:()=>S.origin.k==="nc",t:"Thư phụ vương: xin giảm cống phẩm cho Cao Ly",h:"“Công chúa, phụ vương người gửi thư. Năm nay Cao Ly mất mùa, xin người tâu với Hoàng đế giảm bớt cống phẩm.”",dl:5,
   s:[G("","Tâu xin Hoàng thượng","sung",45,1,{},"r",{emp:1})],ok:{r:12,fx:{danh:3},cc:1,fn:X=>bien(3)()+" "+kho(-2)(),x:"Biên cương +3, Kho lúa -2"},no:{r:-4,cc:1}});
@@ -576,11 +576,11 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("","Tâu xin Hoàng thượng","sung",45,1,{},"r",{emp:1})],ok:{r:12,fx:{...BAL.m72.bdOk},cc:1,fn:X=>bien(4)()+" "+kho(-1)(),x:"Biên cương +4, Kho lúa -1"},no:{r:-4,cc:1}});
  T7("fam_cn","fam",{r:"rsv",rf:(s,z)=>S.origin.k==="cn"&&(s.loyal||50)<BAL.loy.mid,t:"Đồng liêu cũ ở Càn Thanh cung nhờ giúp",h:X=>`“{Goi} còn nhớ nô tỳ không? Ngày trước hai ta cùng bưng trà ở Càn Thanh cung. Giờ nô tỳ hầu ${X.A.own.name}, bị mắng suốt; {goi} nể tình cũ, xin Tổng quản thưởng cho nô tỳ chút ít.”`,dl:4,
   s:[G("ksp","Xin Tổng quản","danh",55,1,{bac:-15})],ok:{r:18,fx:{mat:1}},no:{r:-6}});
- T7("fam_ch","fam",{r:"th",rf:()=>S.origin.k==="ch",b:"rvk",bf:o=>liveRivals(true).some(u=>u!==o&&aff(u,o)<-15),t:"Thái hậu (cô ngươi) nhờ che chở {B}",h:"“{B} là con nhà thế giao với họ ta. Nó hiền quá, bị người ta bắt nạt. Con là cháu ai gia, để mắt giúp nó.”",dl:5,
+ T7("fam_ch","fam",{r:"th",rf:()=>S.origin.k==="ch",b:"rvk",bf:o=>liveRivals(true).some(u=>u!==o&&aff(u,o)<-15),t:"Thái hậu (cô ngươi) nhờ che chở {B}",h:"“{B} là con nhà thế giao với họ nhà ai gia. Nó hiền quá, bị người ta bắt nạt. Con là cháu ai gia, để mắt giúp nó.”",dl:5,
   s:[G("B","Sang thăm {B}","",90,1),G("home","Mời {B} sang chơi, dạy nàng phòng thân","tamco",65,1)],ok:{r:8,rb:12,fn:X=>{ap(X.B.o,{tamco:BAL.eff.j72.tamcoFn});return `${X.B.n} Tâm cơ ${balSg(BAL.eff.j72.tamcoFn)}.`}},no:{r:-5}});
- T7("fam_thd","fam",{r:"fam",rf:()=>S.origin.k==="thd",t:"Thư cha: xin sách cho trường làng",h:"“Con ơi, trường làng mình thiếu sách đã lâu. Cha nghe nói trong cung có kho sách thừa. Con xin giúp cha mấy bộ.”",dl:5,
+ T7("fam_thd","fam",{r:"fam",rf:()=>S.origin.k==="thd",t:"Thư cha: xin sách cho trường làng",h:"“Con ơi, trường làng ta thiếu sách đã lâu. Cha nghe nói trong cung có kho sách thừa. Con xin giúp cha mấy bộ.”",dl:5,
   s:[G("","Xin Hoàng thượng ban sách","tai",55,1,{},"r",{emp:1})],ok:{fx:{duc:3,danh:3}},no:{}});
- T7("fam_td","fam",{r:"fam",rf:()=>S.origin.k==="td"&&S.bac>=50,t:"Tin nhà: người hầu cũ của nhà ngươi túng quẫn",h:"“Tiểu thư, lão bộc còn sống, nay già yếu ở Giang Nam, nhà họ đã không còn ai. Tiểu thư còn nhớ thì gửi chút bạc.”",dl:5,
+ T7("fam_td","fam",{r:"fam",rf:()=>S.origin.k==="td"&&S.bac>=50,t:"Tin nhà: người hầu cũ của nhà ngươi túng quẫn",h:"“Tiểu thư, lão bộc ngày trước của nhà ta nay già yếu ở Giang Nam, không còn ai thân thích. Tiểu thư còn nhớ ông thì gửi chút bạc.”",dl:5,
   s:[G("home","Gom bạc gửi ra","",100,1,{bac:-40}),W("Tin hồi âm",2)],ok:{fx:{duc:3,tamco:2}},no:{}});
  T7("fam_tien","fam",{r:"fam",rf:()=>S.bac<30,t:"Thư nhà: gửi bạc vào cho ngươi",h:"“Nghe nói con trong cung túng thiếu. Nhà gửi vào ít bạc, nhưng phải nhờ thái giám Kính sự phòng lo lót mới qua được cửa cung.”",dl:3,
   s:[G("ksp","Lo lót nhận bạc ở Kính sự phòng","tamco",65,1)],ok:{fx:{bac:50}},no:{}});
