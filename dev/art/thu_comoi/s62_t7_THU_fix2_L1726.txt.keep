@@ -1,0 +1,3 @@
+base: dev/art/thu_comoi/s62_t7_THU_fix_L1723.txt
+# REVERT1 owner L1726: no chrysanthemum (F19), A46 cabochon gems
+allow: "Mùa Thu · Hoàng quý phi · hoa thược dược L1723"  # owner L1726 (chrysanthemum out, F19) / caption

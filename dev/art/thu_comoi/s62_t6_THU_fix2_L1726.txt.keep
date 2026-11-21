@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t6_THU_fix_L1723.txt
+# REVERT1 owner L1726: no chrysanthemum (F19), A46 cabochon gems
+allow: embroidered with incurved chrysanthemums in light olive and gold thread along the borders  # owner L1726 (chrysanthemum out, F19) / caption
+allow: framed by a wide stiff band in her second colour embroidered with chrysanthemums  # owner L1726 (chrysanthemum out, F19) / caption
+allow: exactly ONE fresh soft mauve-pink incurved chrysanthemum in her hair  # owner L1726 (chrysanthemum out, F19) / caption
+allow: "Mùa Thu · Quý phi · thêm ngọc L1723"  # owner L1726 (chrysanthemum out, F19) / caption

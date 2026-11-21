@@ -152,3 +152,13 @@ Builders: thu_comoi/fix_L1723/make_t5_t8.py, make_t1_t3.py, make_keeps.py (each 
 - t8 HH: chrysanthemums → tree peonies (deep rose-red and lilac); cloud collar "lying FLAT and close on the shoulders … pearl fringes hanging straight down … NO cloak, NO cape, NO mantle: never a bell or flared cone shape at the neck and shoulders"; "the robe hanging close to the body, never bell-wide".
 - t1–t3 (old Set A + L1714 rows): rows 19 (none at the ears), 20 (s62 species, plum → lilac / tiger lily / China rose), 21 (olive + lilac), 22 (toe tips), 23 (angle/grace/pose/item copied from today's dapung4 s62_t1_v11 / t2_v11 / t3_v12), 24 (opening repeat), 6 (motifs never over bands), 18 (t3 jade pendants never covered), G39 (t3 hairpin words, X20), L1723 hair flower. Old collars kept: t1 crossed-collar ruqun, t2 robe, t3 already square (no record asks a square collar at t1/t2). No layer/inner/outer words added.
 - t4 Tần NOTE ONLY (approved, unchanged): L1723 would add (a) short pearl tassels — the yoke already has "its lower edge a short pearl fringe"; owner says Tần lacks pearl tassels → proposal: "+ a few short pearl tassels hanging from the capelet's lower edge" ; (b) hair flower "pale blush-pink lotus (the bloom ONLY, NO leaves…)". Foreman decides.
+
+## JOB L1726 (Foreman C #20, 0 gens)
+F19 updated (rule.py set): chrysanthemum out everywhere; peonies only t7/t8; new F2 t6 list centifolia rose / formal double camellia / thousand-petal lotus / mophead hydrangea / double crabapple. s62 t6 = formal double camellia, ivory-white with a soft pink blush (hair) + camellia embroidery.
+A46 gems: one sentence before "No text, no labels." — "All gems are smooth polished CABOCHON stones (rounded, glossy), never faceted, never sparkling or brilliant-cut." (approved S14 HQP LUXURY sentence kept verbatim, gate requires it).
+| file (thu_comoi/, + .keep) | base | diff | gate |
+|---|---|---|---|
+| s62_t6_THU_fix2_L1726 | s62_t6_THU_fix_L1723 | chrysanthemums → formal double camellias (borders, collar band, hair flower ivory-white/pink blush) + A46 sentence | PASS |
+| s62_t7_THU_fix2_L1726 | s62_t7_THU_fix_L1723 | + A46 sentence only | PASS |
+| s62_t8_THU_fix2_L1726 | s62_t8_THU_fix_L1723 | crown "rubies" → "smooth cabochon rubies" + A46 sentence | PASS |
+keep_check --all 424 PASS. Builder fix_L1723/make_fix2_L1726.py. Words "never a yellow chrysanthemum" stay inside the hair-flower negation (t1–t6 L1723 files) — harmless; say if you want them cut.
