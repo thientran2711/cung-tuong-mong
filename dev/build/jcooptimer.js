@@ -184,15 +184,17 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 #kctmh,#kctmp{z-index:9400}
 #kctmp .dlg #kctmpb{padding:8px 12px 2px}#kctmp .dlg #kctmpb .kpnote{margin:6px 0 0}
 #kctmp .dlg #kctmpr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
-.kctmf{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin:0;padding:2px;border:1px solid var(--gold,#b8892b);border-radius:8px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;cursor:pointer;flex:0 0 auto}
-.kctmf .kctmf-a{position:relative;display:block;width:30px;height:30px;border-radius:6px;overflow:visible}
-.kctmf .kctmf-a>img,.kctmf .kctmf-a>:not(.kctmf-b){width:30px!important;height:30px!important;min-width:0!important;margin:0!important;border-radius:6px;object-fit:cover;display:block}
+.krailb.kctmf{width:32px;height:32px;min-width:0;min-height:0;padding:3px;flex:0 0 auto}
+.kctmf .kctmf-a{position:relative;display:block;width:26px;height:26px;border-radius:5px;overflow:visible;pointer-events:none}
+.kctmf .kctmf-a>img,.kctmf .kctmf-a>:not(.kctmf-b){width:26px!important;height:26px!important;min-width:0!important;margin:0!important;border-radius:5px;object-fit:cover;display:block}
 .kctmf.koff .kctmf-a>img,.kctmf.koff .kctmf-a>:not(.kctmf-b){filter:grayscale(1) brightness(.92);opacity:.7}
 .kctmf .kctmf-b{position:absolute;right:-7px;bottom:-6px;min-width:15px;height:15px;padding:0 2px;border-radius:50%;font:700 10px/15px system-ui,sans-serif;text-align:center;color:#fff;box-shadow:0 0 0 1.5px #fffaf0;background:#8a7350}
 .kctmf .kctmf-b.g{background:#2f8a4a}.kctmf .kctmf-b.w{background:#b07a18}.kctmf .kctmf-b.n{background:#7a6a58;letter-spacing:-1px}
 .kctmf .kctmf-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #kctmf{display:flex;align-items:center;gap:6px}#kctmf .kctmf-t{margin:0;white-space:nowrap;font-size:.72rem;padding-top:0;padding-bottom:0;background:#fffaf0f2}
-#kctmf{position:fixed;z-index:24;max-width:calc(100vw - 16px)}
+#kctmf{position:absolute;z-index:8;margin:0;max-width:calc(100vw - 16px)}
+#kctmfu{position:fixed;z-index:9600;pointer-events:none;display:flex;align-items:center;gap:6px;margin:0}#kctmfu[hidden]{display:none}
+#kctmfu .kctmf-t{margin:0;white-space:nowrap;font-size:.72rem;padding-top:0;padding-bottom:0;background:#fffaf0f2}
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
@@ -241,7 +243,7 @@ function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.n
  const av=o.known&&o.face?o.face:`<img src="img/kit/ico-friend.webp" alt="" decoding="async">`;
  const bd=o.st==="ready"?`<b class="kctmf-b g" aria-hidden="true">✓</b>`:o.st==="hold"?`<b class="kctmf-b w" aria-hidden="true">⏸</b>`:o.st==="away"?"":`<b class="kctmf-b n" aria-hidden="true">…</b>`;
  const lab=esc(nm+": "+s[2]);
- return `<button type="button" class="kctmf${o.st==="away"?" koff":""}" data-ctm="fr" aria-label="${lab}" title="${lab}"><span class="kctmf-a">${av}${bd}</span><span class="kctmf-vh">${esc(nm)} · ${s[1]} ${s[2]}</span></button>${clk}`}
+ return `<button type="button" class="krailb kctmf${o.st==="away"?" koff":""}" data-ctm="fr" aria-label="${lab}" title="${lab}"><span class="kctmf-a">${av}${bd}</span><span class="kctmf-vh">${esc(nm)} · ${s[1]} ${s[2]}</span></button>${clk}`}
 /* the friend's status in words (ONE table: the chip panel below + the «Hảo hữu» partner sheet, jhaohuu.js) */
 function frWord(o){o=o||{};return {ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
   away:CTM_WAIT.coopAway,hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc"}
@@ -272,7 +274,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§69",title:"kitCo
   `<div class="kitpg-row" style="position:relative">${kitCoopFriendPanel({st:"work",name:"",left:194000,clock:"run",kh:2,myKh:1})}</div>`})}catch(e){}
 /* ---------- the chip over #next ---------- */
 let EL=null,lastH="",waitKey="",FE=null,lastF="",FP=null;
-function hideChip(){if(EL&&!EL.hidden)EL.hidden=true;if(FE&&!FE.hidden)FE.hidden=true}
+function hideChip(){if(EL&&!EL.hidden)EL.hidden=true;if(FE&&!FE.hidden)FE.hidden=true;if(FU&&!FU.hidden)FU.hidden=true}
 /* the friend's state as one word (FST) */
 function frSt(v){if(!COOP.state.peerOnline)return"away";if(frReady())return"ready";const k=v?v.key:roomKey();const h=v?v.hold:HOLD;
  if(h&&h!==CW.seat)return"hold";if(FS.key===k&&(FS.pz||FS.bz||FS.lf))return"busy";return"work"}
@@ -281,26 +283,60 @@ function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend
  if(!name){try{const so=(COOP.state.seats||{})[other()];void so}catch(e){}}
  const clock=!v?null:(v.up||(v.run&&v.left<=0))?"up":(v.pz||v.hold||!v.run||frozenRoom())?"pz":"run";
  return {name,face,known,st:frSt(v),left:v?v.left:0,clock,kh:FS.kh,meRd:myRd(),myKh:myKh(),canHold:!!v&&!v.up&&!frozenRoom()&&!HOLD}}
-/* top of the screen, INSIDE the bar (never over the stage or the panel): the first free spot of the bar (scanned top → bottom, right → left,
-   checked against every visible leaf of the bar and the seal); when the bar has none (iPad portrait, phones), the bar gets a strip of its own
-   (class kctm-pad = padding-bottom) and the chip sits in it at the right. */
+/* rv hao-huu items 1-4 (21/11): the icon (+ its clock chip) is a CHILD of the fixed top bar header.hud, like the §42.2 «!» box — so the «!» box,
+   the notice chip and the rail dock (they scan the bar's own boxes) keep clear of it. ONE FIXED SLOT per viewport (innerWidth x innerHeight):
+   found once by scanning right → left, top → bottom against every visible block of the bar (its direct children's whole boxes, so a word that
+   grows inside its block cannot reach the icon), every word (text-node rects, also inside elements that have children), every picture / button,
+   the seal and the «!» box; it never re-places on a content change (owner 21/11: "cái thanh không có bao giờ bị dịch chuyển") — only when a word
+   or picture of the bar really lies under it. No free slot (phones, iPad portrait) → the bar's own strip (kctm-pad) at its right.
+   While the room is frozen (#coopfz, the friend away) or held (the hold panel), a COPY (#kctmfu, class kup: body child, fixed, tap inert,
+   aria-hidden) stands at the SAME spot raised above that panel: grey while she is away, ⏸ while she holds; the bar's own icon stays in the bar
+   under the panel, so the «!» box and the notice chip keep clear of that spot in every state. The «!» box yields: it is not an obstacle of the
+   slot (it re-checks its own spot against the bar, kitNoticeBox, after every move of the icon). */
 const PADH=28;
-let PK="",PT=0;
-function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE)return;const H=hud.getBoundingClientRect(),w=FE.offsetWidth,h=FE.offsetHeight;
- const pk=[innerWidth,innerHeight,Math.round(H.top),Math.round(H.bottom),w,h,hud.textContent.length].join(),t0=pnow();if(pk===PK&&t0-PT<3000)return;PK=pk;PT=t0;
- const pad=hud.classList.contains("kctm-pad")?PADH:0,B=H.bottom-pad-2;
- const sl=hud.querySelector(".kseal-hud");const R0=Math.min(innerWidth-6,H.right-4);
- const lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length&&!FE.contains(e)&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- if(sl)lv.push(sl.getBoundingClientRect());
- const free=(x,y)=>x>=H.left+2&&x+w<=R0&&y>=H.top+2&&y+h<=B&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+2&&y+h>q.top-2);
- let at=null;for(let y=H.top+2;y+h<=B&&!at;y+=3)for(let x=R0-w;x>=H.left+2;x-=6)if(free(x,y)){at=[x,y];break}
- if(at){if(pad)hud.classList.remove("kctm-pad")}
- else{if(!pad){hud.classList.add("kctm-pad");try{if(typeof k3Shell==="function")k3Shell()}catch(e){}}const H2=hud.getBoundingClientRect();at=[Math.max(H2.left+4,R0-w),H2.bottom-PADH+(PADH-h)/2-2]}
- FE.style.left=Math.round(at[0])+"px";FE.style.top=Math.round(at[1])+"px"}
+let SL=null,SLc=0,SLp="",FU=null,FUp="";const SLM={};/* the slot of each viewport, kept: back to a viewport = the same spot */
+function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R.push(r)};const vis=e=>e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden";
+ if(!words)for(const e of hud.children){if(e===FE||e.id==="kntbox"||!vis(e))continue;add(e.getBoundingClientRect())}
+ const tw=document.createTreeWalker(hud,NodeFilter.SHOW_TEXT),rg=document.createRange();let n;
+ while((n=tw.nextNode())){if(!n.nodeValue.trim()||FE.contains(n)||(n.parentElement&&n.parentElement.closest("#kntbox")))continue;const pe=n.parentElement;if(!pe||!vis(pe))continue;rg.selectNodeContents(n);for(const r of rg.getClientRects())add(r)}
+ for(const e of hud.querySelectorAll("img,svg,canvas,button,[role=button],input,.kseal-hud")){if(FE.contains(e)||!vis(e)||e.closest("#kntbox"))continue;add(e.getBoundingClientRect())}
+ return R}
+/* the slot is sized for the WIDEST content (icon + «⏸ 0:00» / «Hết buổi»), so a clock change never makes it grow into a neighbour */
+function slotSize(){const keep=FE.innerHTML;FE.style.minWidth="";let w=0,h=0;
+ for(const o of [{st:"hold",clock:"pz",left:599000},{st:"ready",clock:"up"},{st:"work",clock:"run",left:599000}]){FE.innerHTML=kitCoopFriend(o);const r=FE.getBoundingClientRect();w=Math.max(w,r.width);h=Math.max(h,r.height)}
+ FE.innerHTML=keep;const s=FE.getBoundingClientRect().width/(FE.offsetWidth||1)||1;FE.style.minWidth=Math.ceil(w/s)+"px";return{w,h}}
+function slotFind(hud){const z=slotSize(),w=z.w,h=z.h;if(hud.classList.contains("kctm-pad"))hud.classList.remove("kctm-pad");
+ const H1=hud.getBoundingClientRect(),R=hudObs(hud,false),R0=Math.min(innerWidth-6,H1.right-4);
+ const free=(x,y)=>!R.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+2&&y+h>q.top-2);
+ for(let y=H1.top+2;y+h<=H1.bottom-2;y+=2)for(let x=R0-w;x>=H1.left+2;x-=2)if(free(x,y))return{k:innerWidth+"x"+innerHeight,dx:x-H1.left,dy:y-H1.top,pad:false};
+ hud.classList.add("kctm-pad");try{if(typeof k3Shell==="function")k3Shell()}catch(e){}const H2=hud.getBoundingClientRect();
+ return{k:innerWidth+"x"+innerHeight,dx:Math.max(4,R0-w-H2.left),dy:H2.height-PADH+(PADH-h)/2-2,pad:true}}
+function cal(el){el.style.left="0px";el.style.top="0px";const a=el.getBoundingClientRect();el.style.left="100px";el.style.top="100px";const b=el.getBoundingClientRect();
+ return{A:a.left,B:a.top,sx:(b.left-a.left)/100||1,sy:(b.top-a.top)/100||1}}
+function upCopy(up){if(!up){if(FU&&!FU.hidden)FU.hidden=true;return}
+ if(!FU){FU=document.createElement("div");FU.id="kctmfu";FU.className="kup";FU.setAttribute("aria-hidden","true");document.body.appendChild(FU)}
+ const h=FE.innerHTML;if(FU.__h!==h){FU.innerHTML=h;FU.__h=h;FU.style.minWidth=FE.style.minWidth}if(FU.hidden)FU.hidden=false;
+ const R=FE.getBoundingClientRect(),key=[R.left,R.top].map(Math.round).join();if(key===FUp&&FU.style.left)return;FUp=key;const c=cal(FU);FU.style.left=((R.left-c.A)/c.sx).toFixed(1)+"px";FU.style.top=((R.top-c.B)/c.sy).toFixed(1)+"px"}
+function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE||!hud.getClientRects().length){upCopy(false);return}
+ const up=!!(document.getElementById("coopfz")||HP);
+ if(getComputedStyle(hud).position==="static")hud.style.position="relative";
+ let moved=false;if(FE.parentNode!==hud){hud.appendChild(FE);moved=true}
+ const k=innerWidth+"x"+innerHeight,t0=pnow();
+ /* the bar is still re-laying itself out after a resize: keep the old spot a moment (a slot found mid-layout would be wrong for good) */
+ if(SL&&SL.k!==k&&!SLM[k]){const H0=hud.getBoundingClientRect(),hk=[H0.width,H0.height].map(Math.round).join();if(t0-RZ<400||hk!==placeF.hk){placeF.hk=hk;upCopy(up);return}}
+ if(!SL||SL.k!==k){SL=SLM[k]||null;moved=true}let re=!SL;
+ if(SL&&SL.pad!==hud.classList.contains("kctm-pad"))re=true;
+ /* a word / picture of the bar really under the icon (checked every 1.5 s, not on every tick) → find the slot again; otherwise it stays */
+ if(!re&&!SL.pad&&t0-SLc>1500){SLc=t0;const F=FE.getBoundingClientRect();re=hudObs(hud,true).some(q=>F.left<q.right&&F.right>q.left&&F.top<q.bottom&&F.bottom>q.top)}
+ if(re){SL=SLM[k]=slotFind(hud);SLc=t0;moved=true}
+ const H=hud.getBoundingClientRect(),key=[SL.dx,SL.dy,H.left,H.top].map(Math.round).join();
+ if(moved||key!==SLp){SLp=key;const c=cal(FE);FE.style.left=((H.left+SL.dx-c.A)/c.sx).toFixed(1)+"px";FE.style.top=((H.top+SL.dy-c.B)/c.sy).toFixed(1)+"px";
+  try{if(typeof kitNoticeBox==="function")kitNoticeBox()}catch(e){}}
+ upCopy(up)}
 function unpad(){const hud=document.querySelector("header.hud.kctm-pad");if(hud)hud.classList.remove("kctm-pad")}
-function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(FE&&!FE.hidden)FE.hidden=true;return}
+function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)){if(FE&&!FE.hidden)FE.hidden=true;if(FU&&!FU.hidden)FU.hidden=true;return}
  const o=frInfo();const h=kitCoopFriend(o);
- if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");document.body.appendChild(FE)}
+ if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");(document.querySelector("header.hud")||document.body).appendChild(FE)}
  if(h!==lastF){FE.innerHTML=h;lastF=h}if(FE.hidden)FE.hidden=false;placeF();if(FP)FP.innerHTML=kitCoopFriendPanel(o)}
 function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}
  /* §69.2 overwrite 21/11: ONE panel = the «Hảo hữu» partner sheet (jhaohuu.js); the old status-only notice is only the fallback */
@@ -322,6 +358,8 @@ let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
  sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
+/* a new viewport: the bar lays itself out again first (its grid / shell change after the resize); the slot is found once that has settled */
+let RZ=0;addEventListener("resize",()=>{RZ=pnow()});
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
 function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();

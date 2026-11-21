@@ -63,7 +63,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
  sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
  const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;
- sec.push({h:"Trong cung của nàng",rows:[["Con cái",kidsWord(e),"n"],["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});
+ sec.push({h:"Trong cung của nàng",rows:[["Con cái",known?kidsWord(e):UNK,known?"n":"t"],/* OD:L165: unmet = «chưa rõ» (rv hao-huu item 5) */["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});
  sec.push(nowSec(e));
  if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
  return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}

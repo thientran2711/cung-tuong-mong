@@ -3991,15 +3991,20 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
   Freeze panel (#coopfz, peer): "Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; …".
 - §69.2 «HẢO HỮU» ICON · kitCoopFriend(o) (CANON OVERWRITE, owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... off là màu
   xám ... On là sẽ màu tươi hơn ... xong thì có một cái dấu tích màu xanh kế bên ... đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó
-  thì nó ra thông tin"; review/hao-huu): `#kctmf`, in the FIXED TOP BAR, always on in co-op (hidden only under the title, the freeze panel, the hold panel).
-  `button.kctmf[data-ctm=fr]` = ONE square kit icon button (36 px, radius 8 px like the rail / `.kit-x`; no round tap target): her portrait
+  thì nó ra thông tin"; review/hao-huu): `#kctmf`, a CHILD of the FIXED TOP BAR `header.hud` (like the §42.2 «!» box), always on in co-op (hidden only
+  under the title). While the room is frozen (`#coopfz`, she is away) or held (the hold panel) it stays at the SAME spot, raised above that panel
+  (`#kctmf.kup`: body child, fixed, tap inert) so the grey icon / ⏸ are seen.
+  `button.krailb.kctmf[data-ctm=fr]` = the §77 kit square icon button `.krailb`, compact 32 px like `#kntbox` / `.krail.khud` (padding 3 px): her portrait
   `kitFaceH(friend,"xs")` once met (`isKnown61`), the painted kit icon `img/kit/ico-friend.webp` (K-ICO-HAOHUU) while she is a stranger (no face
   before meeting, §49.3). GREY (`.koff`: grayscale) when she is offline (away), full colour when online. Badge at its corner (`.kctmf-b`, a dot, the
   only round part): ready `.g` "✓" · busy / work `.n` "…" · hold `.w` "⏸" · away: none (the grey icon says it). NO name and NO status words on
   screen: they are the aria-label / title and a visually hidden span (`.kctmf-vh`, "<name or Hảo hữu của ta> · ✓ Đã sẵn sàng" …). Beside it the
   shared buổi countdown as ONE short kit chip `.kctmf-t` (`m:ss` / `⏸ m:ss` while stopped / `.r` "Hết buổi") — owner 16/11 countdown rule kept.
-  Status is pushed at once: each client sends {mode:"st",bz,kh,…} on change (checked every 250 ms). Place: the first free spot of the bar from the
-  top-right corner (checked against every leaf of the bar and the seal), else a strip under the bar at the right edge.
+  Status is pushed at once: each client sends {mode:"st",bz,kh,…} on change (checked every 250 ms). Place = ONE FIXED SLOT per viewport
+  (innerWidth x innerHeight, kept per viewport): found once, right → left / top → bottom, against the whole boxes of the bar's direct children (a word
+  growing inside its block cannot reach it), every word (text-node rects), every picture / button, the seal and the «!» box; sized for the widest
+  content (icon + «⏸ 0:00» / «Hết buổi»); never re-placed on a content change, only when a word or picture of the bar really lies under it. No free
+  slot → a strip under the bar at the right edge (`header.hud.kctm-pad`). Being a bar child, the «!» box, the notice chip and the rail dock keep clear of it.
   Tap → the «Hảo hữu» partner sheet `kitHaoHuuOpen()` (`dev/build/jhaohuu.js`, ONE panel): `kitPanel({kind:"info"})` with her full-body figure
   (stranger: the kit `unknown-fig-f` as a stage pseudo person, never her entry), Thân phận (Danh vị = `kitName` rank unit, Cung) · Tư chất
   (`kitPersonStats`) · Sức khỏe · Trong cung của nàng (Con cái, Cung nữ thân cận) · Lúc này (Hảo hữu = this status `COOPW.frInfo` + `frWord`, Ngươi,
