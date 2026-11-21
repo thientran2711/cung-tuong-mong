@@ -25,5 +25,21 @@ Not changed on purpose (not whole-panel empties): Triều đình «Chưa có tin
 2. Phe phái: current `info-phe-phai.webp` is a tea scene; a dedicated «faction / allies» picture would fit better (optional).
 3. Việc nhờ / Mệnh truyện empties reuse act-category art; dedicated «việc nhờ» art optional.
 
+## PART 2 — panel must not scroll when content fits (owner ~02:24Z)
+Cause: `.pgwrap{height:100%}` (every card tab: Con của ta, Kế vị, Chí tôn, Phi tần, Nam nhân, Cung nhân, Ân oán…) sits UNDER the sticky `.kpbar` (55 px + 10 px gap), so it was 65 px taller than the room left → `#panel` scrolled 65 px for nothing (Ân oán 130). Fix in the shared panel CSS (jpane.js `kit-pane`): panel with a card wrap = flex column, `.pgwrap` takes the remaining height (`flex:1 1 0`, ktbox/kvbox pages stay auto). Also the bag (Túi đồ) `.kinv` bottom margin made it scroll 3 px → last-child margin 0.
+Scan: `node dev/test/panel-scroll-scan.js <out> fold,ipadAir` (26 views × 2 devices; FAIL = scrolls although content fits).
+| view (Fold = iPad) | scrollH − clientH before | after |
+|---|---|---|
+| Hậu cung: Chí tôn / Phi tần / Nam nhân / Cung nhân | 65 | 0 |
+| Hoàng tự: all 5 sub-tabs (empty and filled) | 65 | 0 |
+| Giao tình › Ân oán | 130 | 0 |
+| Tư trang › Túi đồ | 3 | 0 |
+| Tư trang Thú cưng / Việc, Mệnh truyện, Việc nhờ, Phe phái hậu cung, Dư đồ | 0 | 0 |
+| Triều đình, Tài nghệ, Sổ ghi, Hành sự (content longer than panel) | scrolls | scrolls (legit) |
+Kit keeper (session_01Rc5AsMtjP4KTgBZVjENGLs) to be told: kit-pane rule `#panel.kpane:has(>.pgwrap)` column layout + `.kempty` (kitEmpty §21/§37.2).
+
+## PART 3 — Thú cưng empty (owner ~02:48Z)
+Same kitEmpty card: big pet picture left, right: «Ta chưa nuôi con thú nào» + hint + «Con quý hiếm không mua được: …»; the «Nhờ thái giám tìm thú nuôi» act card stays below.
+
 ## Gates
 see message to MAIN (quickcheck + coop-e2e results).
