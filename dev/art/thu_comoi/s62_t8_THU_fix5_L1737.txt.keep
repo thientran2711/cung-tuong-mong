@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t8_THU_fix2_L1726.txt
+# owner L1737 (via Foreman C #20): fix2 + ONLY the fix4 words (one-colour flowers, G33 plumage, matched crown); no fix3 words
+allow: deep rose-red and lilac  # owner L1735/L1737 one colour / G33 plumage / caption
+allow: lilac and light olive silk thread  # owner L1735/L1737 one colour / G33 plumage / caption
+allow: its phoenix feathers inlaid in lilac and light olive  # owner L1735/L1737 one colour / G33 plumage / caption
+allow: "Mùa Thu · Hoàng hậu · đá cabochon L1726"  # owner L1735/L1737 one colour / G33 plumage / caption

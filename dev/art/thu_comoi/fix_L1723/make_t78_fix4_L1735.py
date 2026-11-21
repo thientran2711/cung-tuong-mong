@@ -22,3 +22,9 @@ for n, (src, dst, R) in JOBS.items():
     t = open(os.path.join(D, src)).read().strip()
     for o, w in R: t = rep(t, o, w)
     p = os.path.join(D, dst); open(p, 'w').write(t + '\n'); print(dst, len(t))
+
+# fix5 (owner L1737 via Foreman C #20: fix3 shoulders/slim were not asked) = fix2_L1726 + ONLY the fix4 words
+t = open(os.path.join(D, "s62_t8_THU_fix2_L1726.txt")).read().strip()
+for o, w in JOBS[8][2][:2]: t = rep(t, o, w)
+t = rep(t, "Mùa Thu · Hoàng hậu · đá cabochon L1726", "Mùa Thu · Hoàng hậu · một tông màu L1737")
+open(os.path.join(D, "s62_t8_THU_fix5_L1737.txt"), "w").write(t + "\n"); print("s62_t8_THU_fix5_L1737.txt", len(t))
