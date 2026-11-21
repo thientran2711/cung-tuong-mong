@@ -115,3 +115,9 @@ Test tools updated to the new renderer: dev/tools/role-parity-scan.js (tabAll("s
 ## Notes for the reviewer
 - No save field changed. Co-op sends no UI state.
 - Her chủ's card still says «Ghen/Đức/Tính nết: chưa rõ» (knowledge rules of j25/k61, unchanged — not in these marks).
+
+## maid-8tabs-2 — FIX ROUND for rv FAIL 1 → **941c1367** (on reviewer f479ac2f)
+- jts tsGuardW/tsOptGuard: ONE act, two roads. Consort «Đóng cửa giữ mình» (Sủng −BAL.tsGuard.sung, kèm ít gặp Hoàng thượng). Cung nữ «Nép mình theo hầu chủ» (Chủ tin −BAL.tsGuard.tin = her Sủng bar; need: not in Tân Giả khố; kèm ít được chủ sai việc; log phòng hạ nhân / theo sát chủ). Same gain s.guard for BAL.tsGuard.wk weeks (npcAct wrapper + jagharm haGuardW).
+- Law 4: typed sung −2 / 2 weeks (player + NPC tsNpcDanger) → BAL.tsGuard {wk:2,sung:2,tin:2} (values unchanged).
+- Whole group on the maid road: guard FIXED; Biếu quà làm lành → Lễ bạc / Tác phẩm / Đồ trong rương: real bạc cost (BAL.tsGift), real gain, honest need, no consort words → kept (probe); tsDangerOmen «Ghi nhớ…» only on the consort road (endTurn !isSrv) → n/a.
+- Gates: maid-8tabs.js 59/59 (new line: danger panel on her road = «Nép mình theo hầu chủ», fx tin −2, guard 2 wk, no Sủng / door / servants words); quickcheck 941c1367 PASS (render 236/242, tab 491/454, buổi 1296/1319; one earlier run perf-only FAIL tab 636/465, noise — re-run PASS).
