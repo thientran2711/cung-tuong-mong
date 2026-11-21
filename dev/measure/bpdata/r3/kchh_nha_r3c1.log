@@ -12,3 +12,61 @@ ch HH maxRank 7 entry 2
 td Vợ quan thanh liêm maxRank 0 entry 0
 tt HH maxRank 7 entry 2
 dtq Chính thất hầu phủ maxRank 0 entry 1
+muoi HH maxRank 7 entry 0
+{
+ "path": "nha",
+ "lives": 15,
+ "HH": 53,
+ "outside": 40,
+ "byOrigin": {
+  "tt": {
+   "n": 3,
+   "HH": 100,
+   "out": 0
+  },
+  "dtq": {
+   "n": 3,
+   "HH": 0,
+   "out": 100
+  },
+  "muoi": {
+   "n": 3,
+   "HH": 67,
+   "out": 33
+  },
+  "thd": {
+   "n": 2,
+   "HH": 0,
+   "out": 50
+  },
+  "ch": {
+   "n": 2,
+   "HH": 100,
+   "out": 0
+  },
+  "td": {
+   "n": 2,
+   "HH": 50,
+   "out": 50
+  }
+ },
+ "entry": {
+  "n": 15,
+  "rank": [
+   5,
+   6,
+   4,
+   0
+  ],
+  "sac": 68,
+  "tai": 100,
+  "danh": 44,
+  "bac": 70,
+  "arts": 3,
+  "intel": 11,
+  "monthsOutside": 23
+ },
+ "lifeMonths": 72,
+ "errs": [],
+ "secs": 6906
+}
