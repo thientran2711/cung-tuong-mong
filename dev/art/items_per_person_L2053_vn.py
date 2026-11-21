@@ -1,0 +1,17 @@
+# ITEMS1: short Vietnamese names of the a18 E11 items used in items_per_person_L2053_DRAFT.json (sample sheet only; not game text yet)
+VN={("t1",5):"Sách đóng chỉ",("t1",7):"Sáo trúc nhỏ",("t1",10):"Diều giấy hình én",("t1",11):"Tú cầu thêu",("t1",12):"Thư giấy hoa",
+("t1",25):"Lồng dế cỏ đan",("t1",26):"Lược gỗ mộc",("t1",27):"Còi đất hình chim",
+("t2",10):"Trống lắc cán sơn mài",("t2",12):"Trâm bướm sơn mài",("t2",13):"Tỳ bà nhỏ sơn mài",("t2",15):"Gương sơn mài",
+("t2",25):"Diều giấy hình bướm",("t2",26):"Cành mai đỏ",("t2",27):"Thư giấy son vàng",
+("t3",2):"Tranh cuộn trục gỗ",("t3",7):"Sách bọc bạc",("t3",10):"Tú cầu chuông bạc",("t3",13):"Sáo trúc đai bạc",
+("t3",15):"Thư giấy hoa rắc bạc",("t3",25):"Diều hạc trục bạc",("t3",26):"Trống lắc đai bạc",("t3",27):"Cành hoa lê",
+("t4",1):"Quạt xếp đàn hương",("t4",8):"Hộp sách bịt bạc",("t4",9):"Đèn sen bạch ngọc",("t4",10):"Trâm bướm ngọc",
+("t4",13):"Trống lắc cán ngọc",("t4",25):"Tú cầu tua ngọc",("t4",26):"Thư giấy xanh ngọc",("t4",27):"Cành mộc lan trắng",
+("t5",4):"Đèn sen pháp lam",("t5",6):"Giỏ hoa bạc mạ vàng",("t5",11):"Tú cầu kim tuyến",("t5",12):"Sáo đai vàng",
+("t5",13):"Tỳ bà khảm vàng xà cừ",("t5",25):"Thư giấy rắc vàng",("t5",26):"Trống lắc mạ vàng",("t5",27):"Diều lụa hình hạc",
+("t6",5):"Quạt xếp thêu ngọc trai",("t6",8):"Đèn lồng tua ngọc trai",("t6",10):"Trâm bướm ngọc trai vàng",("t6",15):"Bình hương bạch ngọc",
+("t6",16):"Thi tập thêu ngọc trai",("t6",25):"Tú cầu thêu ngọc trai",("t6",26):"Thư niêm bạch ngọc",("t6",27):"Trống lắc bạch ngọc",
+("t7",1):"Quạt tròn vàng chạm lưới",("t7",6):"Đèn sen vàng nạm đá",("t7",8):"Giỏ hoa vàng nạm đá",("t7",11):"Tú cầu lông trả",
+("t7",12):"Sáo ngọc đai vàng",("t7",25):"Thư giấy lam rắc vàng",("t7",26):"Trống lắc vàng chạm lưới",("t7",27):"Khung thêu vàng chạm lưới",
+("t8",3):"Hộp ấn phượng vàng",("t8",7):"Tráp vàng phượng ngọc trai",("t8",10):"Trâm phượng vàng",("t8",14):"Dù ngự thêu phượng",
+("t8",15):"Bình hương nắp phượng",("t8",25):"Tú cầu ngự thêu phượng",("t8",26):"Thư giấy ngự rắc vàng",("t8",27):"Trống lắc phượng vàng"}

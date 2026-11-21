@@ -1,0 +1,3884 @@
+{
+ "_meta": {
+  "source": "t8-prompt-B/build.py _E11_LISTS() a18 indices (existing map, E11/E12), no new items",
+  "age": "a18",
+  "maxov_same_group": 3,
+  "banned_skipped": {
+   "t2:1": "G59 sachet"
+  },
+  "pinned": [
+   "s62"
+  ],
+  "builder_read": "in _e6_picks(c,age): if age=='a18' and c in this json -> out[t]=L[t][0][json[c][t]['idx']] for t1-t8"
+ },
+ "c02": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "c04": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "c05": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "c06": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "c08": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "c10": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "c11": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "c14": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "c16": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "c19": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "c20": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "c22": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "c26": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "c27": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "c28": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "c31": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "c32": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "m02": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "m04": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "m05": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "m08": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "m09": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "m10": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "m14": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "m16": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "m18": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "m19": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "m20": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "m22": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "m28": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "m29": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "s07": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s08": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s09": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s10": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s11": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s12": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s13": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "s14": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s15": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s16": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s17": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s18": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s19": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s20": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s21": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s22": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s23": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s24": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s25": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "s26": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s27": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s28": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s29": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s30": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s31": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s32": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s33": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s34": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s35": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s36": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s37": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s38": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s39": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s40": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s41": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s42": {
+  "group": "Sắc sảo",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s43": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 6,
+   "kind": "lamp",
+   "item": "a gold lotus lamp set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s44": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 7,
+   "kind": "box",
+   "item": "a gold lidded jewel casket with a phoenix and pearls"
+  }
+ },
+ "s45": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s46": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 15,
+   "kind": "letter",
+   "item": "a folded letter on silver-flecked flower paper"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 14,
+   "kind": "parasol",
+   "item": "a closed imperial phoenix-embroidered silk parasol with a jade handle"
+  }
+ },
+ "s47": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 26,
+   "kind": "comb",
+   "item": "a plain wooden hair comb, held in the hand"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s48": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s49": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s50": {
+  "group": "Lạnh lùng",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a crane, its string on a silver-trimmed reel"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s51": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s52": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s53": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  }
+ },
+ "s54": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s55": {
+  "group": "Kiêu kỳ",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s56": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 13,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not flat"
+  },
+  "t5": {
+   "idx": 4,
+   "kind": "lamp",
+   "item": "a cloisonné enamel lotus lamp with gilt petals"
+  },
+  "t6": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper sealed with white jade"
+  },
+  "t7": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s57": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 27,
+   "kind": "letter",
+   "item": "a folded letter on painted red-and-gold paper tied with a silk cord"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 8,
+   "kind": "box",
+   "item": "a silver-mounted book box"
+  },
+  "t5": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 27,
+   "kind": "hoop",
+   "item": "an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s58": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 7,
+   "kind": "flute",
+   "item": "a small bamboo flute"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 7,
+   "kind": "book",
+   "item": "a silver-mounted thread-bound book"
+  },
+  "t4": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on jade-green flower paper tied with a silk cord"
+  },
+  "t5": {
+   "idx": 6,
+   "kind": "basket",
+   "item": "a gilded silver flower basket"
+  },
+  "t6": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a pearl-and-gold butterfly hairpin, held in the hand"
+  },
+  "t7": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "an imperial round fan with a gold filigree frame and gems"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s59": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 10,
+   "kind": "kite",
+   "item": "a small paper kite painted like a swallow, its string on a bamboo reel"
+  },
+  "t2": {
+   "idx": 26,
+   "kind": "flowers",
+   "item": "a sprig of red plum blossoms tied with a silk ribbon"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t6": {
+   "idx": 8,
+   "kind": "lantern",
+   "item": "a pearl-tasselled silk lantern with a jade top"
+  },
+  "t7": {
+   "idx": 8,
+   "kind": "basket",
+   "item": "a gold flower basket set with gems"
+  },
+  "t8": {
+   "idx": 3,
+   "kind": "box",
+   "item": "a gold phoenix seal box"
+  }
+ },
+ "s60": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of fresh pear blossoms"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a flute with gold bands and a gem tassel"
+  },
+  "t6": {
+   "idx": 16,
+   "kind": "book",
+   "item": "a poetry book bound in pearl-embroidered silk with gold clasps"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ },
+ "s61": {
+  "group": "Quyến rũ",
+  "t1": {
+   "idx": 12,
+   "kind": "letter",
+   "item": "a folded letter on flower-patterned paper tied with a silk cord"
+  },
+  "t2": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute with a lacquered body"
+  },
+  "t3": {
+   "idx": 10,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick"
+  },
+  "t4": {
+   "idx": 27,
+   "kind": "flowers",
+   "item": "a sprig of white magnolia blossoms tied with a silk cord"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 5,
+   "kind": "fan",
+   "item": "a pearl-embroidered silk folding fan with jade ribs"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 27,
+   "kind": "drum",
+   "item": "a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  }
+ },
+ "s62": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 5,
+   "kind": "book",
+   "item": "a thread-bound book"
+  },
+  "t2": {
+   "idx": 10,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat"
+  },
+  "t3": {
+   "idx": 13,
+   "kind": "flute",
+   "item": "a bamboo flute with silver bands"
+  },
+  "t4": {
+   "idx": 9,
+   "kind": "lamp",
+   "item": "a small white-jade lotus lamp"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s63": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 11,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick"
+  },
+  "t2": {
+   "idx": 15,
+   "kind": "mirror",
+   "item": "a small lacquered hand mirror"
+  },
+  "t3": {
+   "idx": 2,
+   "kind": "scroll",
+   "item": "a painted scroll with wooden rollers"
+  },
+  "t4": {
+   "idx": 1,
+   "kind": "fan",
+   "item": "a sandalwood folding fan with carved ribs"
+  },
+  "t5": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked paper tied with a silk cord"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole"
+  },
+  "t8": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a gold phoenix hairpin with pearl dangles, slim and palm-length, held between her fingers, never a sceptre"
+  }
+ },
+ "s64": {
+  "group": "Dịu dàng",
+  "t1": {
+   "idx": 25,
+   "kind": "cage",
+   "item": "a small woven-grass cricket cage with a cotton tassel"
+  },
+  "t2": {
+   "idx": 25,
+   "kind": "kite",
+   "item": "a small paper kite painted like a butterfly, its string on a lacquered reel"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 10,
+   "kind": "hairpin",
+   "item": "a jade butterfly hairpin, held in the hand"
+  },
+  "t5": {
+   "idx": 13,
+   "kind": "lute",
+   "item": "a small pipa lute inlaid with gold and mother-of-pearl"
+  },
+  "t6": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "a pearl-embroidered silk ball (tú cầu) with jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t7": {
+   "idx": 25,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord"
+  },
+  "t8": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold phoenix stopper"
+  }
+ },
+ "s65": {
+  "group": "Đoan trang",
+  "t1": {
+   "idx": 27,
+   "kind": "whistle",
+   "item": "a small painted clay whistle shaped like a bird"
+  },
+  "t2": {
+   "idx": 12,
+   "kind": "hairpin",
+   "item": "a lacquered butterfly hairpin, held in the hand"
+  },
+  "t3": {
+   "idx": 26,
+   "kind": "drum",
+   "item": "a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets, not flat"
+  },
+  "t4": {
+   "idx": 25,
+   "kind": "ball",
+   "item": "an embroidered silk ball (tú cầu) with small jade tassels, a round stuffed ball, no handle, no stick"
+  },
+  "t5": {
+   "idx": 27,
+   "kind": "kite",
+   "item": "a silk kite painted like a crane, its string on a gilded reel"
+  },
+  "t6": {
+   "idx": 15,
+   "kind": "flask",
+   "item": "a white-jade perfume flask with a gold stopper"
+  },
+  "t7": {
+   "idx": 12,
+   "kind": "flute",
+   "item": "a jade flute with gold-filigree bands and gem tassels"
+  },
+  "t8": {
+   "idx": 26,
+   "kind": "letter",
+   "item": "a folded letter on gold-flecked imperial paper tied with a pearl cord"
+  }
+ }
+}
