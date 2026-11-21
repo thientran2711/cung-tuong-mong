@@ -38,6 +38,7 @@ function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise
 /* reviewer r1 (ONE CORE): the shared odds ladder j1 word(), not a copy of its thresholds */
 function entWord(p){return word(p)}
 /* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
+function entBotRaw(){const b=BAL.entry.bot;return cl(b.min+R(b.r),0,b.max)}/* review/errand-bal: one bot / broken-round score (BAL.entry.bot) */
 function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
@@ -70,8 +71,8 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
  const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():cl(3+R(6),0,10));return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
- try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
+ if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
+ try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(entSkipRaw())}};
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();
@@ -84,6 +85,7 @@ const ENT_INTRO={
  muoi:["Nhà ngươi giàu nhờ muối: thuyền muối của cha ngươi đi khắp các bến sông phương nam.","Bạc mua được lụa gấm, mua được một chỗ trong sổ tuyển; nhưng trong cung, người ta vẫn gọi sau lưng ngươi là con nhà buôn."],
  cn:["Ba năm nay ngươi hầu trà ở Càn Thanh cung. Ngươi biết Hoàng thượng thích nước trà thứ hai, biết thái giám nào nói thật, ma ma nào ăn bạc.","Một đêm mưa, Hoàng thượng giữ ngươi lại. Từ cung nữ thành chủ tử chỉ cách một lời khẩu dụ, và bao nhiêu ánh mắt."],
  nc:["Cao Ly ở xa về phương đông, nơi biển Hải Đông xanh thẫm, hoa mai nở đầu xuân.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người nước phiên."],
+ pf:["Phù Tang ở ngoài bể Đông: núi lửa đội tuyết, chuông chùa ngân trên sóng. Ngươi lớn lên giữa hương trầm và tiếng sáo trúc ở kinh đô Nại Lương.","Phụ hoàng gả ngươi sang Đại Hy theo thuyền sứ vượt bể, mong hòa ước giữ yên đường biển cho thuyền buôn hai nước."],
  bd:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi giày thêu.","Ba trăm con ngựa theo ngươi làm của hồi môn, đổi lấy hòa ước mười năm với Đại Hy."],
  td:["Cả nhà ngươi bị xử trảm vì một bản sớ vu cáo. Người thế giao đổi tên ngươi trong sổ tuyển để giữ một đường sống.","Ngươi vào cung với cái tên không phải của mình, mang theo mối thù chưa ai hay."],
  ch:["Thái hậu là cô ruột của ngươi; từ nhỏ ngươi đã quen từng lối đi trong Từ Ninh cung.","Thái hậu muốn một người nhà mình đứng cạnh Hoàng thượng. Có người chống lưng là may, nhưng phẩm vị vẫn phải tự mình giành lấy."],
@@ -92,6 +94,8 @@ const ENT_INTRO={
 /* Ba Tư for new bd lives (owner OD 19/11; THE one per-life switch bdTxt, jrd_bd.js): an old-premise life keeps the Bắc Địch lines above */
 if(typeof bdTxtProp==="function")["Ba Tư ở xa tận phía tây, cuối con đường tơ lụa; lửa thánh cháy trong đền ngày đêm không tắt, ngựa quý và bạc trắng nổi tiếng khắp các nước.",
  "Quân Đại Thực đã lấy ba phần đất nước. Phụ vương gả ngươi sang Đại Hy, mong một nước lớn làm chỗ dựa."].forEach((t,i)=>bdTxtProp(ENT_INTRO.bd,i,ENT_INTRO.bd[i],t));
+/* pf (review/phutang-road): no origin-wide-pf picture yet (art request in reports/phutang-road.md FOR E) -> the neutral hòa thân picture */
+(function(){if(typeof kitOriginWide!=="function")return;const w0=kitOriginWide;kitOriginWide=function(k){return k==="pf"?"img/ev-hoa-than.webp":w0.apply(this,arguments)}})();
 function entIntroCard(){const k=S.origin&&S.origin.k;const T=ENT_INTRO[k];if(!T)return null;
  const road="Kiếp này ngươi vào cung ngay.";
  return{t:`Tiền truyện · ${S.origin.n}`,who:pMe(),art:(typeof kitOriginWide==="function"?kitOriginWide(k):`img/origin-wide-${k}.webp`),btn:"Tiếp theo",entI:1,
@@ -106,7 +110,7 @@ function entIntroCard(){const k=S.origin&&S.origin.k;const T=ENT_INTRO[k];if(!T)
 /* ---------- 4. the entry scene after the "Nhập cung" card (her own button closes it) ---------- */
 const ENT_LINE={tt:"Cửa cung khép lại sau lưng; từ nay tiếng của cha chỉ vọng tới qua người khác.",dtq:"Tiếng trống biên ải ở lại phía sau; trong cung chỉ có tiếng chuông giờ.",
  muoi:"Rương bạc theo ngươi qua cửa cung; ánh mắt người ta theo rương bạc.",cn:"Lối hành lang Càn Thanh cung vẫn thế; chỉ có người đi trên đó là đã khác.",
- nc:"Kiệu hoa qua Ngọ môn; tiếng nhạc cố quốc tắt ở bên kia cửa.",bd:"Ba trăm con ngựa dừng ngoài cửa thành; ngươi đi tiếp một mình.",
+ nc:"Kiệu hoa qua Ngọ môn; tiếng nhạc cố quốc tắt ở bên kia cửa.",pf:"Thuyền sứ Phù Tang neo lại ở bến; ngươi lên kiệu, tiếng sóng ở lại sau lưng.",bd:"Ba trăm con ngựa dừng ngoài cửa thành; ngươi đi tiếp một mình.",
  td:"Ngươi bước qua cửa cung, đầu cúi thấp, tên mới trên môi.",ch:"Từ Ninh cung ở ngay bên kia vườn; nhưng con đường của ngươi phải tự mình đi.",
  thd:"Một bọc sách, một bộ áo sạch: ngươi bước vào nơi chữ nghĩa cũng là gươm.",cnv:"Ma ma đi trước, ngươi theo sau, qua những cánh cửa đỏ không đếm xuể."};
 if(typeof bdTxtProp==="function")bdTxtProp(ENT_LINE,"bd",ENT_LINE.bd,"Đoàn lạc đà chở bạc dừng ngoài Kim Quang môn; ngươi đi tiếp một mình.");/* Ba Tư (bdTxt) */
