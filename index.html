@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0c37d290+","t":"2026-11-21T09:17Z","c":"coop-steal fixture: a forced player's card in her Kỳ nguyệt tuần → play on to the next tối (cycFree)","b":"80fc31e7b17a","h":[{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"},{"s":"f7e54803+","t":"2026-11-21T04:53Z","c":"Chơi chung: hảo hữu vắng thì có người thay tay (B)"},{"s":"d11280f5+","t":"2026-11-21T04:28Z","c":"Biến cố triều: tháng 20 chạy đúng (E)"},{"s":"cfde1cc4+","t":"2026-11-21T05:26Z","c":"Ghi chú «!» theo từng mục; khung bật nằm trên hình cảm xúc"},{"s":"c1f7733b+","t":"2026-11-21T05:15Z","c":"Chọn đồ/áo/quà/mạng che mặt mở tại chỗ (#21 #23)"},{"s":"abcd23bf+","t":"2026-11-21T03:20Z","c":"Chơi chung: bớt kẹt tuần «Chờ hảo hữu…» (B)"},{"s":"d65e535b+","t":"2026-11-21T04:55Z","c":"Thẻ hành động: một cỡ vuông mỗi máy, Tốn/Được bên cạnh (#24)"},{"s":"d3f5ea28+","t":"2026-11-21T04:23Z","c":"Chức vị người: một kiểu chữ; tên nơi chốn để thường"},{"s":"2eb1ac5f+","t":"2026-11-21T02:18Z","c":"Khuê các chơi chung: chọn đúng người (E)"},{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"}]};
+window.CTM_BI={"s":"e9451578","t":"2026-11-21T09:56Z","c":"OD03 fav-art: two-way month art — NPC weighs flip modes by the odds she sees (stealShown), NPC Kính sự phòng ask names the month art (eaAsk…","b":"fbbb6ed06034","h":[{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"},{"s":"72b0bdb7+","t":"2026-11-21T05:58Z","c":"Thẻ người: một chữ «Tính nết» khắp nơi (#4)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1486,7 +1486,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   const k=S.kids.filter(x=>x.alive&&x.hp<BAL.ag.cx2.kidMed.hp).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{...BAL.ag.cx2.kidMed.c},o:100,x:`Sức khỏe +${BAL.ag.cx2.kidMed.up}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.ag.cx2.kidMed.up)}});
   A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ một phần",go:()=>addArt("y",1)});return A}
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,inner:1,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
-  if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp")))A.push({n:"Hỏi sở thích Hoàng thượng",c:{...BAL.ag.cx2.likes.c},o:od(BAL.ag.cx2.likes.o),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
+  if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp"))||(typeof eaOpen==="function"&&eaOpen(S)))A.push({n:"Hỏi sở thích Hoàng thượng",c:{...BAL.ag.cx2.likes.c},o:od(BAL.ag.cx2.likes.o),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
   A.push({n:"Xem sổ thị tẩm",o:100,fix:1,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights} lần`)+`; ngươi ${S.nights} lần.`)});return A}
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,fix:1,x:itm(k).d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
@@ -4426,7 +4426,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empNm(),rank:"Hoàng thượng",rows:[["Niên hiệu",empEra(),"t"]],lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
- note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"])]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
+ note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]).concat(typeof eaRows==="function"?eaRows(S):[])]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
 function selfCardHTML(){const ch=[["Sắc",S.sac],["Tài",S.tai],["Tâm cơ",S.tamco],["Đức",S.duc],["Tai mắt",S.mat],["Thái hậu",S.th],["Hoàng hậu",S.hh]];
  return pcard({f:pMe(),col:RCOL[S.rank],name:S.name,rank:`${ic(RIMG[S.rank],16)}${S.rank>=7?"Hoàng hậu":RANKS[S.rank].n}`,lines:[`${S.origin.n}`,ageLine(S),`Bổng lộc: <b>${S.out?BAL.payCold:BAL.pay[Math.min(7,S.rank)]}</b> bạc/tháng · công kẻ hầu -${(S.staff||[]).length*BAL.wage}`,`Cung nữ ${S.maid.name} · lòng <b>${S.maid.loyal}</b>`],chips:[illOf(S)?chip(illName(S),"hot"):"",S.preg?chip(`${ic("thai",14)}Mang thai tháng ${S.preg}`,"hot"):"",facOf(S)?chip(`Phe ${facOf(S).name}`):""],
  groups:[["Tư chất",ch.map(([a,b])=>[a,b,"t"])],["Tài nghệ",ARTS.map(a=>[`${ic(AIMG[a.k],14)}${a.n}`,S.arts[a.k],"t"])]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}
@@ -27057,8 +27057,10 @@ function stNeed(v){const N=B().need;const fav=cl(1-(v.sung||0)/100,0,1),rank=rkO
  const heir=kidsOf(v).some(k=>k.sex==="m")?B().heirHas:1;return (N.fav*fav+N.rank*rank+N.heir*heir)/(N.fav+N.rank+N.heir)}
 function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/b.friend):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
 function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&rkOf(t)>=7)f*=b.custom;return f}
-function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",oSteal(v,"feign")]);
- if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",oSteal(v,"road")]);return M}
+/* OD03 two-way: she weighs each mode by the odds she SEES (stealShown: the month art only once she knows it, as the player's flip card); the roll stays the true oSteal (stealNight) */
+function stSeen(v,m){return typeof stealShown==="function"?stealShown(v,m):oSteal(v,m)}
+function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",stSeen(v,"feign")]);
+ if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",stSeen(v,"road")]);return M}
 /* her wish to try tonight against holder t; mode is drawn now (weighted by its odds) */
 function stealWant(v,t){const M=stModes(v);if(!M.length)return{u:0,p:0,mode:null};let r=Math.random()*M.reduce((a,m)=>a+m[1],0),i=0;while(r>M[i][1]&&i<M.length-1){r-=M[i][1];i++}
  const mode=M[i][0],o=M[i][1];let mind=1;try{if(typeof mindW==="function")mind=mindW(v,"scheme")||1}catch(e){}
@@ -77098,7 +77100,13 @@ function eaLearn(start){if(!S||S.dead||!empArt())return"";const E=BAL.steal.ea;c
  for(const p of P){if(!p||p.eaK===S.turn)continue;const m=p.mat||0;if(start&&m>=E.mat)eaTell(p,"tai mắt báo");else if(!start&&roll(E.r0+m*E.rMat))eaTell(p,"nghe lời đồn")}return""}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{empArtMonth();eaLearn(true)}catch(e){console.error("ea",e)}return ev}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(!empArt())empArtMonth();eaLearn(false)}}catch(e){}return r}})();
-(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{if(empArt()&&!eaKnows(S)&&roll(BAL.steal.ea.disc)&&eaTell(S,"dò được"))return true}catch(e){}return d0.apply(this,arguments)}})();
+/* OD03: asking Kính sự phòng (her discover, an NPC's cx2:likes) names the month art at BAL.steal.ea.disc — one rule for everyone (two-way) */
+function eaOpen(p){return !!(p&&empArt()&&!eaKnows(p))}
+function eaAsk(p){return eaOpen(p)&&roll(BAL.steal.ea.disc)&&eaTell(p,"dò được")}
+/* the Emperor card rows (kit pcard group rows [label, value, tone]): his month art as she knows it */
+function eaRows(p){const ea=empArt();if(!ea)return[];const k=eaKnows(p),n=x=>(ARTS.find(a=>a.k===x)||{}).n||x;
+ return [["Tháng này chuộng",k?n(ea.f):"chưa rõ",k?"t":"n"],["Tháng này không ưa",k?n(ea.d):"chưa rõ",k?"t":"n"]]}
+(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{if(eaAsk(S))return true}catch(e){}return d0.apply(this,arguments)}})();
 /* ---- night choices ---- */
 /* her best art (most points; a tie prefers his favoured art, never his disfavoured one first) */
 function stBestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=artPts(p,a.k);const pr=ea?(a.k===ea.f?1:a.k===ea.d?-1:0):0;
@@ -79112,7 +79120,7 @@ const AGC2={
  kidMed:{act:"xin thuốc cho con ở Thái y viện",tag:"help",at:"tyv",ok:v=>!!ag2Sick(v,BAL.ag.cx2.kidMed.hp)},
  fert:{act:"xin bài thuốc dễ thụ thai",tag:"self",at:"tyv",ok:v=>!v.fert&&!v.preg&&!sonsOf(v).length},
  doctor:{act:"mời thái y tâm phúc",tag:"self",at:"tyv",ok:v=>!v.doctor},
- likes:{act:"hỏi Kính sự phòng sở thích của Hoàng thượng",tag:"scheme",at:"ksp",ok:v=>!(v.eK&&v.eK.flower)},
+ likes:{act:"hỏi Kính sự phòng sở thích của Hoàng thượng",tag:"scheme",at:"ksp",ok:v=>!(v.eK&&v.eK.flower)||(typeof eaOpen==="function"&&eaOpen(v))},
  old:{act:"hỏi chuyện cũ phế phi ở lãnh cung",tag:"scheme",at:"lc"}};
 /* the player's button each deed is (j2 talkOpts / deck, j9 topicOpts, j20) — checked by dev/test/ag-all.test.js (no NPC-only hidden act) */
 const AGC2BTN={maidTalk:"Tâm sự",maidSpy:"Sai đi dò la",bribeSrv:"Mua chuộc",plantSrv:"Cài người vào cung khác",flat:"Tâng bốc",true:"Nói thật lòng",show:"Phô tài",favor:"Xin ân điển",court:"Bàn chuyện triều chính",nurse:"Hầu thuốc Hoàng thượng",kidGreet:"Đưa con đến thỉnh an Hoàng thượng",
@@ -79165,7 +79173,7 @@ agRunReg("cx2:kidHeal",v=>{const X=BAL.ag.cx2.kidHeal;const k=ag2Sick(v,X.hp);if
 agRunReg("cx2:kidMed",v=>{const X=BAL.ag.cx2.kidMed;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";k.hp=Math.min(100,k.hp+X.up);return ag2Res(v,"kidMed",1,`${v.name} đến Thái y viện xin thuốc cho ${k.name}`)});
 agRunReg("cx2:fert",v=>{const X=BAL.ag.cx2.fert;if(v.fert||!ag2Pay(v,X.c))return"";v.fert=X.m;return ag2Res(v,"fert",1,`${v.name} đến Thái y viện xin bài thuốc dễ thụ thai`)});
 agRunReg("cx2:doctor",v=>{const X=BAL.ag.cx2.doctor;if(v.doctor||!ag2Pay(v,X.c))return"";v.doctor=1;return ag2Res(v,"doctor",1,`${v.name} mời được một thái y làm tâm phúc`)});
-agRunReg("cx2:likes",v=>{const X=BAL.ag.cx2.likes;if(!agcCan(v,X.c))return"";const lo=odA(v,X.o),ok=agTry(lo);if(!ok&&agSoft(lo)){ag2Soft(X.c);return ag2Res(v,"likes",0,"")}agcPay(v,X.c);if(ok){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);const k=u.includes("flower")?"flower":u.length?pick(u):null;if(k)(v.eK=v.eK||{})[k]=1}
+agRunReg("cx2:likes",v=>{const X=BAL.ag.cx2.likes;if(!agcCan(v,X.c))return"";const lo=odA(v,X.o),ok=agTry(lo);if(!ok&&agSoft(lo)){ag2Soft(X.c);return ag2Res(v,"likes",0,"")}agcPay(v,X.c);if(ok){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);const k=u.includes("flower")?"flower":u.length?pick(u):null;if(k)(v.eK=v.eK||{})[k]=1;/* OD03 two-way: the same month-art chance as her discover() (jbalcore, BAL.steal.ea.disc) */try{if(typeof eaAsk==="function")eaAsk(v)}catch(e){}}
  return ag2Res(v,"likes",ok,ok?`${v.name} dò được sở thích của Hoàng thượng ở Kính sự phòng`:`${v.name} hỏi Kính sự phòng nhưng chẳng được gì`)});
 agRunReg("cx2:old",v=>{const oo=odA(v,cx2O(v,"old")),ok=agTry(oo);if(!ok&&agSoft(oo)){ag2Soft();return ag2Res(v,"old",0,"")}let x=null;if(ok){const P=others(v).filter(t=>t&&t!==v&&(t===S||t.alive));x=evGuilty(v,P);if(x&&!evA(v,x,BAL.ag.ev.one))x=null}
  return ag2Res(v,"old",ok,x?`${v.name} nghe phế phi kể chuyện cũ của ${agcNm(x)}`:`${v.name} sang lãnh cung hỏi chuyện cũ, chẳng được gì`)});
@@ -89020,7 +89028,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="80fc31e7b17a";window.CTM_BUILD=BUILD;
+const BUILD="fbbb6ed06034";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
