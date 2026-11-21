@@ -105,9 +105,9 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   if(!world&&r<.35){const ix=(S.inv||[]).findIndex(e=>e&&!e.h&&!e.lo&&typeof wdItem==="function"&&wdItem(e)&&wdItem(e).sl!=="hd");if(ix>=0&&wdWear(S,ix))out.push('wear')}
   const mine=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.own===key(t)&&c.at==="me");
   const hx=(S.inv||[]).findIndex(e=>e&&e.lo&&!e.h&&String(e.gh)===String(key(t)));
-  try{if((mine.length||hx>=0)&&r<.6){const c=mine[0];
-    if((r<.3||!c)&&hx>=0){runAct(S,t,"plant",hx);out.push('plant')}else if(c&&!Q.length){loUI(r<.45?"sneak":"giveback",c.id);out.push('ui')}}
-   else if((t.inv||[]).some(loOk)){runAct(S,t,r<.8?"laydo":"laydol");out.push('steal')}}catch(e){out.push('err:'+e.message)}
+  try{if((mine.length||hx>=0)&&r<.75){const c=mine[0];
+    if((r<.35||!c)&&hx>=0){runAct(S,t,"plant",hx);out.push('plant')}else if(c){Q.length=0;loUI(r<.55?"sneak":"giveback",c.id);out.push('ui')}}
+   else if((t.inv||[]).some(loOk)){const n0=(S.inv||[]).filter(e=>e&&e.lo).length;const tx=runAct(S,t,r<.8?"laydo":"laydol");out.push((S.inv||[]).filter(e=>e&&e.lo).length>n0?'steal':'steal-miss')}}catch(e){out.push('err:'+e.message)}
   if(world&&r>.5)try{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!x.out&&loAlive(x));if(v&&(t.inv||[]).some(loOk)){v.bac=Math.max(v.bac||0,5000);runAct(v,t,"laydo");out.push('npc')}}catch(e){out.push('nerr:'+e.message)}
   try{Q.length=Math.min(Q.length,8);showModal()}catch(e){}return out};
  window.__fmiss=()=>(COOPW.famMiss||[]).slice();
@@ -151,7 +151,7 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  const NL=ca.NETL.map(x=>['A'].concat(x)).concat(cb.NETL.map(x=>['B'].concat(x)));console.log('NET lines',JSON.stringify(NL));const nlo=NL.filter(x=>x[5]==='LOST-CASE');
  ok(!nlo.length,`ledger net: no unrouted removal of a lost-case piece on either seat (${nlo.length}; all pieces host +${ca.net-net0[0]} guest +${cb.net-net0[1]}, the others are outside jlost: reported)`,nlo);
  const miss=[...await A.p.evaluate(()=>__fmiss()),...await B.p.evaluate(()=>__fmiss())];console.log('FAM acts',JSON.stringify(fam),'famMiss',JSON.stringify(miss.slice(-12)));
- const fs_=x=>(fam['A.'+x]||0)+(fam['B.'+x]||0);if(FAM)ok(fam['A.steal']>=4&&fam['B.steal']>=4&&fs_('npc')>=4&&fs_('plant')+fs_('ui')>=4,`friend-act item traffic (${JSON.stringify(fam)})`);
+ const fs_=x=>(fam['A.'+x]||0)+(fam['B.'+x]||0);if(FAM)ok((fam['A.steal']||0)>=3&&(fam['B.steal']||0)>=3&&fs_('npc')>=4&&fs_('plant')+fs_('ui')>=4,`friend-act item traffic (${JSON.stringify(fam)})`);
  console.log('SUMMARY',JSON.stringify({fam,miss:miss.length,weeks:weeksOk,ids:Object.keys(seen).length,dupPieces:dI.size,dupWeeks:dups.length,vanPieces:vI.size,vanWeeks:vans.length,casesA:ca.cases,casesB:cb.cases,kyA:ca.ky,kyB:cb.ky,lost}));
  fs.writeFileSync(OUT+'/faults.json',JSON.stringify({dups,vans},null,1));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));

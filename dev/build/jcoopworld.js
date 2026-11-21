@@ -516,7 +516,7 @@ function famItem(o){S.inv=S.inv||[];if(o.iu){const e=S.inv.find(x=>x&&x.iu===o.i
 function famOff(e){const i=(S.inv||[]).indexOf(e);if(i>=0){S.inv.splice(i,1);return true}const w=S.wd;
  if(w&&typeof w==="object")for(const sl of ["tram","y"])if(w[sl]===e){const k=sl==="y"&&typeof wdDefault==="function"?wdDefault(S,"y"):null;w[sl]=k?{k,from:"base"}:null;try{if(typeof wdOf==="function")wdOf(S)}catch(z){}return true}
  return false}
-function famMiss(o,why){(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k:o.k,iu:o.iu||0,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,o.k,o.iu||"",why)}
+function famMiss(o,why){const iu=o.iu||(o.e&&o.e.iu)||0,k=o.k||(o.e&&o.e.k);(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k,iu,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,k,iu,why)}
 /* her open case of that piece: by id; an op with no id (old room): the case of that kind the friend holds */
 function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));if(o.iu){const c=L.find(c=>c.e.iu===o.iu);if(c)return c}
  return o.iu&&L.some(c=>c.e.iu)?L.find(c=>!c.e.iu&&c.k===o.k&&(c.by===fp()||c.at===fp()))||null:L.find(c=>c.k===o.k&&(c.by===fp()||c.at===fp()))||null}
@@ -579,6 +579,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    out.push(`<span class="r">${esc(kd.name)} gặp chuyện</span>${L.length?` (${L.join(", ")})`:""}.`)}}
  return {out,loud}}
 
+CW.famApply=famApply;CW.famRet=famRet;/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,ok=>COOP.send({t:"actr",id:m.id,ok,k:m.k}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
