@@ -29,3 +29,6 @@ Drawn "pendants" came from jade clasp on silk cord + tú cầu "jade tassels" + 
 
 ## G60 bow centred (owner L1890)
 dev/art/strip_bow.py adds "at the centre front" to every sash/bow/knot lacking a position (115 live consort files, not maid7, not *ha_DUONG* = HADUONG1); no prompt had explicit side-bow words. check_store G60 `g60_fails` FAILs side/off-centre/hip bow, knot, sash words (negation passes; hair ribbons not matched), 5 selftests. ART_RULES G60 added. keep_check PASS.
+
+## G61 front waist free (owner L1905)
+Audit offenders (consort live files, 206 changed + POSES_30.md + KC_REFS.json): "item held in both hands lowered before her at waist height" (25), flute/tú cầu "in the other hand at her waist" (~52), letter "held level/gently at her waist with both hands" (13), hairpin/flute "held close at her waist in both hands" (8), pipa at waist (1), butterfly "in front of her", plus every "holding X in both hands," (now "raised at chest height"). POSES_30 L4 L5 M1 M9 C1 C4 C5 C6 C7 C9 reworded to side/chest-height. Only hand/item position words changed; emperor ("his") untouched; maid7/prod untouched (MAIDFIX3). strip_waist.py; check_store G61 FAIL (negations pass; 5 selftests); ART_RULES G61. keep_check PASS.

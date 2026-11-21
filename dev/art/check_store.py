@@ -1102,6 +1102,20 @@ def g60_fails(text):
         return [("G60", "BOW NOT CENTRED", f"the bow / sash knot must be at the CENTRE front, never to one side (owner L1890): …{text[max(0, m.start()-30):m.end()+30]}…")]
     return []
 
+# G61 FRONT WAIST FREE (owner L1905 21/11): in consort prompts (not men / emperor) no hand or held item may be placed in front of the waist / belly (the in-game ngọc bội slot):
+# FAIL on a Pose / hands-and-body / holds sentence saying held / lowered / folded / clasped ... at|before|in front of|across her waist / belly / sash, "at waist height", "before the waist", "in her lap".
+# Allowed: held to the side, raised at chest height, hanging from one hand at the side; "sleeves kept clear of the front of her waist" is fine.
+G61_SENT = re.compile(r"(?:\bPose: |\b[Hh]er hands and body: |\bshe holds )[^.]*")
+G61_RX = re.compile(r"\b(?:held|holding|hold|lowered|folded|clasped|cradled|resting|rested|hands?|item)\b[^.;]{0,50}\b(?:at|before|in front of|across|over|on|against) (?:her |the )?(?:waist|belly|abdomen|stomach|sash|lap)\b|\bwaist height\b|\bbefore the waist\b|\bin her lap\b", re.I)
+def g61_fails(text, scope=None):
+    if scope in ("men", "emperor"): return []
+    for s in G61_SENT.finditer(text):
+        if re.search(r"\b(?:he|his|him) ", s.group(0), re.I): continue
+        for m in G61_RX.finditer(s.group(0)):
+            if re.search(r"\b(no|never|not|without|clear of)\b[^.;,]*$", s.group(0)[max(0, m.start()-30):m.start()].lower()) or re.search(r"\b(?:no|never|not|without|clear of)\b", m.group(0), re.I): continue
+            return [("G61", "HAND/ITEM AT FRONT WAIST", f"no hand or held item in front of the waist (owner L1905: the ngọc bội slot stays free; hold it at the side / chest height): …{s.group(0)[max(0, m.start()-30):m.end()+20]}…")]
+    return []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1115,6 +1129,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += fruit_fails(text, scope, pid)
     fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
+    fails += g61_fails(text, scope)   # G61 front waist free (owner L1905)
     fails += g60_fails(text)   # G60 bow centred (owner L1890)
     fails += g59_fails(text)   # G59 no sachet anywhere (owner L1874)
     fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
@@ -1219,6 +1234,9 @@ def selftest():
         if bool(g59_fails(norm(t))) != bool(want): print("G59 SELFTEST", want, t); bad += 1
     for t, want in [("a ribbon bow tied to one side at the waist.", 1), ("the sash knotted at her left hip.", 1), ("an off-centre bow", 1), ("a bow tied at the centre front, never to one side.", 0), ("sash tied flat at the CENTRE front, NO bow", 0)]:   # G60 (owner L1890)
         if bool(g60_fails(norm(t))) != bool(want): print("G60 SELFTEST", want, t); bad += 1
+    for t, want in [("Pose: one hand touching her hairpin, a flute in the other hand at her waist, the hem swinging.", 1), ("Pose: standing, a letter held level at her waist with both hands.", 1), ("Her hands and body: the item held in both hands lowered before her at waist height, head tilted.", 1),
+                    ("Pose: the item held in one hand out to her side at chest height, her sleeves kept clear of the front of her waist.", 0), ("Pose: a flute held low at her side, never in front of her waist.", 0)]:   # G61 (owner L1905)
+        if bool(g61_fails(norm(t))) != bool(want): print("G61 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
