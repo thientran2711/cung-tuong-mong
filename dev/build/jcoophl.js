@@ -97,7 +97,12 @@ function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function"
   /* rv r2-r1 (coop-room-faces (D), same family): the host's world person holding a face one of HER OWN people wears (her maid / staff / kids,
      drawn on her seat when she made her person, after the host's start had given that face back from FID) yields the same way: one face per
      person in the room; host-canon keeps HER people (rfYield) only for a draw made after the room knew the face. */
-  const own=pFids({maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);if(own.size)for(const p of worldPeople())if(p&&!p.coop&&p!==S&&typeof p.fid==="string"&&own.has(p.fid)){const k=whoKey(p);
+  const own=pFids({maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);
+  /* order (hlf 1/24 after the first cut: a world servant re-drawn for a face SHE drew later): a face the room's merged world W already gives
+     that person was known to her seat, so HER person yields (jcoopworld rfYield); only a face the room never had (FID give-back) yields here */
+  const inW=new Set();if(own.size)try{const sn=new Set();const w=(o,d)=>{if(!o||typeof o!=="object"||sn.has(o)||d>30)return;sn.add(o);if(Array.isArray(o)){for(const x of o)w(x,d+1);return}
+   for(const k in o){if(k==="fidUsed"||k==="fidDead"||k==="visit")continue;const v=o[k];if(k==="fid"){if(typeof v==="string"&&v)inW.add(v)}else if(v&&typeof v==="object")w(v,d+1)}};w(CW.base&&CW.base.W,0)}catch(e){}
+  if(own.size)for(const p of worldPeople())if(p&&!p.coop&&p!==S&&typeof p.fid==="string"&&own.has(p.fid)&&!inW.has(p.fid)){const k=whoKey(p);
    HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;if(k){FLAST.delete(k);FID.delete(k)}clash++;HL.stat.clash=(HL.stat.clash||0)+1}
   if(pid)for(const p of rivals||[])if(p&&!p.coop&&p.fid===pid){const k=whoKey(p);HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;
    if(k){FLAST.delete(k);FID.delete(k)/* fidBack must not put her portrait back after the next merged week */}clash++;HL.stat.clash=(HL.stat.clash||0)+1}}catch(e){}}
@@ -132,7 +137,7 @@ HL.check=check;
 /* what the guest holds right after a merged week / a new world = that C's world; the host's own writes after it are the difference */
 function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
 COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host()){/* r2: a face the merged week dropped comes back (one person, one face for life) */try{if(!lvl3())fidBack()}catch(e){}baseFrom(m.state,"week")}else setTimeout(nmAgain,0)});
-COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
+COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state");/* rv r2-r1: her new blob (a rejoin / a new person) may hold faces the host list lacks (e2e: S.fidUsed guest-only after rejoin): the check adds them (reserveFriend) and sends the list */else if(CW.on&&host()&&live())soon("rsv")});
 COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host()&&!lvl3())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
 /* rv r2-r1 (probe 1/32 + r1's E1: the Thái hậu c29 -> c07 on the host one beat AFTER the merged week, the merged C still holding c29): the host's
    world can be rebuilt from a C again after the "week" event (a later fromCanon: room catch-up / restore), and the render right after it drew a
@@ -199,6 +204,16 @@ function rsvTake(L){if(!Array.isArray(L)||!host()||!live()||typeof figUsed!=="fu
 if(typeof tinOf==="function"){const t0=tinOf;tinOf=function(s){try{if(CW.on&&!host()&&!lvl3()&&s&&typeof s==="object"&&s.tin==null&&!s.coop&&!mine(s)){
    const v=t0.call(this,s);delete s.tin;HL.stat.gTin=(HL.stat.gTin||0)+1;return v}}catch(e){}
   const a=s&&s.tin;const r=t0.apply(this,arguments);try{if(CW.on&&host()&&s&&a==null&&s.tin!=null)soon("tin")}catch(e){}return r};window.tinOf=tinOf}
+/* rv r2-r1 (same lazy-write family, e2e after rejoin 1/5 each): two more READS that store on a world person: jmind mindTr fades her staff's
+   seen-deeds record on read (trM.o / trM.w: guest A=2 B=3), jnet netOf draws a missing net list on read (S.court.ty.net guest-only). On HER
+   seat (level < 3) the read is shown, not stored; on the host a stored change is sent (the value is deterministic: the same on both seats). */
+if(typeof mindTr==="function"){const m0=mindTr;mindTr=function(s,m){try{if(CW.on&&!host()&&!lvl3()&&s&&typeof s==="object"&&!s.coop&&!mine(s)&&s.trM){
+   const keep=J(s.trM);const r=m0.apply(this,arguments);s.trM=keep;HL.stat.gTrm=(HL.stat.gTrm||0)+1;return r}}catch(e){}
+  const w=s&&s.trM&&s.trM.w;const r=m0.apply(this,arguments);try{if(CW.on&&host()&&s&&s.trM&&s.trM.w!==w)soon("trm")}catch(e){}return r};window.mindTr=mindTr}
+if(typeof netOf==="function"){const n0=netOf;netOf=function(p){try{if(CW.on&&!host()&&!lvl3()&&p&&typeof p==="object"&&p!==S&&!p.coop&&!mine(p)){
+   const hn="net" in p,hv=p.net,ht="trong" in p,tv=Array.isArray(p.trong)?p.trong.slice():p.trong;const r=n0.apply(this,arguments);
+   if(p.net!==hv){if(hn)p.net=hv;else delete p.net;if(ht)p.trong=tv;else delete p.trong;HL.stat.gNet=(HL.stat.gNet||0)+1}return r}}catch(e){}
+  const a=p&&typeof p==="object"?p.net:undefined;const r=n0.apply(this,arguments);try{if(CW.on&&host()&&p&&typeof p==="object"&&p.net!==a)soon("net")}catch(e){}return r};window.netOf=netOf}
 /* the Empress's regard (j24 hhBind): a consort object carrying an old plain "hh" number is migrated ONCE when consorts() first binds it
    (blended into aff(Empress, her) by affAdd, whose side effect writes a feeling cause on the Empress: "được X đối đãi tử tế"). Each seat
    binds each object at its own moment (a rejoin rebuilds every object: the guest re-ran it on her seat only, e2e trace: normAll ->
