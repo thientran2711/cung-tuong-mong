@@ -22,6 +22,8 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
  const r=await g.evaluate(async()=>{const out={};const sl=ms=>new Promise(r=>setTimeout(r,ms));
   /* a place with a consort she can talk to */let i=-1;for(const k of ["vuon","tn","kn","thu"]){__go(k);i=curPeople().findIndex(pp=>pp.kind==="rival"&&(dfActs(curPeople().indexOf(pp))||[]).some(g=>g.acts.some(a=>!a.off&&a.cls!=="D")));if(i>=0)break}
   out.place=S.place;out.i=i;if(i<0)return out;
+  /* (1c) a focus already up for her (an NPC encounter opened it): the tap re-opens; the old one's close must not orphan the new one */
+  {const tk0={};DF.tk=tk0;DF.i=i;popIdx=i;DF.F=kitFocus.open({p:curPeople()[i],fig:dfFig(i),groups:[],onClose:()=>{if(DF.tk===tk0)dfClosed(i)}});await sl(30)}
   const tok=document.querySelector(`#tokens .tok[data-p="${i}"]`);tok.click();await sl(50);
   out.open={called:__K.calls.includes('open'),fans:document.querySelectorAll('.kfoc-b').length,groups:(__K.F&&__K.F.groups||[]).map(g=>g.n+" "+g.can+"/"+g.tot),popIdx,DFi:DF.i,popwHidden:document.getElementById('popw').hidden,plate:(document.querySelector('.kfoc-plate')||{}).textContent,stageTag:(()=>{const d=document.createElement("div");d.innerHTML=j59tagHTML(curPeople()[i],curPeople()[i].name);return d.textContent})()};
   /* (2) an act, skipped */const F=__K.F;const a=F.groups.flatMap(g=>g.acts).find(a=>!a.off&&(dfFind(i,a.id)||{}).cls!=="D");const n0=S.logSeq||0;const run0=window.talk;let talked=0;window.talk=function(){talked++;return run0.apply(this,arguments)};

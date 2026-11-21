@@ -22,8 +22,9 @@ function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Làm luôn",sub:"không
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 function dfOpen(i){const p=curPeople()[i];if(!p)return false;if(!dfViewOn()){popIdx=i;popMsg="";renderStage();return false}
- const fig=dfFig(i);DF.i=i;popIdx=i;popMsg="";renderStage();
- DF.F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:dfData(i),onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});return true}
+ /* kitFocus.open destroys the focus already up (e.g. an NPC encounter): its onClose must not clear THIS one — each open has its own token */
+ const fig=dfFig(i);const tk={};DF.tk=tk;DF.encM=null;DF.i=i;popIdx=i;popMsg="";renderStage();
+ DF.F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:dfData(i),onAct:id=>dfTap(i,id),onClose:()=>{if(DF.tk===tk)dfClosed(i)}});return true}
 function dfClosed(i){if(DF.i!==i)return;DF.i=null;DF.F=null;DF.encM=null;if(popIdx===i){popIdx=null;popMsg=""}try{renderStage()}catch(e){}}
 function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id===id)return a;return null}
 function dfTap(i,id){const F=DF.F,a=dfFind(i,id);if(!F||!a||a.off||S.dead||Q.length||DF.play)return;
@@ -44,8 +45,7 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
  if(m&&m.dfSeen&&DF.encM===m&&DF.F){try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}return undefined}const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0)return s0.apply(this,arguments);
  m.dfSeen=1;DF.encM=m;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
- if(DF.F&&DF.i!==i){try{DF.F.destroy()}catch(e){}DF.F=null}DF.i=i;
- const F=DF.F||kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(i,id),onClose:()=>dfClosed(i)});DF.F=F;
+ if(DF.F&&DF.i!==i){const o=DF.F;DF.F=null;DF.tk=null;try{o.destroy()}catch(e){}}DF.i=i;let F=DF.F;if(!F){const tk={};DF.tk=tk;F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(i,id),onClose:()=>{if(DF.tk===tk)dfClosed(i)}})}DF.F=F;
  const txt=String(m.h||"").replace(/<\/p>\s*<p[^>]*>/g,"\n").replace(/<[^>]+>/g,"").split("\n").map(s=>s.trim()).filter(Boolean);
  const nm=(typeof k61Named!=="function"||k61Named(p.ref))?(p.ref.name||p.name||""):"";/* fog (j61): a stranger's name is not on the say box */
  F.say(txt.map(t=>({who:nm,face:nm?p.ref:null,text:t})),{onDone:()=>F.choices(m.opts.map((o,k)=>({id:"m"+k,n:o.n,pic:dfPic(o.n),off:!!o.off,why:dfTxt(o.x)})),id=>{const k=+String(id).slice(1);DF.enc=1;DF.encM=null;try{chooseM(k)}finally{DF.enc=0}dfSetGroups(F,dfData(i))})});
