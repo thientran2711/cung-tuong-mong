@@ -18,9 +18,9 @@ const wrap=(n,mk)=>{const f=window[n];if(typeof f!=="function")return;window[n]=
 const MUTE=["npcEncounters","q72Npc","epidemic","tdMonth","tdNews","moodMonth","tsDenNpc","tsNpcDanger"];
 for(const n of MUTE)wrap(n,f=>function(){if(guest())return "";return f.apply(this,arguments)});
 /* ONLY_ME: arts/virtue study (v85Month), pets care + gifts (petWeek, petMonth), lost items (loMonth), servants' loyalty from mood (emoMonth),
-   NPC affairs with palace men (affairMonth): on the guest the people lists (liveRivals / consorts / emoPeople) hold only her while it runs
+   NPC affairs with palace men (affairMonth), the week's feelings + decay of everyone (emoWeek, review/coop-emo-seat): on the guest the people lists (liveRivals / consorts / emoPeople) hold only her while it runs
    (the rivals array itself is untouched, so the queen, RV(id) and refs still resolve). */
-const ONLY_ME=["v85Month","petWeek","petMonth","loMonth","emoMonth","affairMonth","facMonth","servMonth","queenRewards","maidLoveMonth","ktMonth","fxServMonth"];
+const ONLY_ME=["v85Month","petWeek","petMonth","loMonth","emoMonth","emoWeek","affairMonth","facMonth","servMonth","queenRewards","maidLoveMonth","ktMonth","fxServMonth"];
 /* her own people: herself, her maid, her servants, her children */
 const mine=x=>!!x&&(x===S||x===S.maid||(S.staff||[]).includes(x)||(S.kids||[]).includes(x));
 let solo=0;
@@ -53,5 +53,13 @@ wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt()
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
 wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside an act is a world loop again */try{if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)}finally{own=o}});
 wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});
-window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
+/* FEELINGS (review/coop-emo-seat): an NPC's feeling p.emo (jemo emoSet: every emoEv, the affAdd/oanAdd wraps, jevb, jshelf …) is a world fact,
+   written on the host only. Two leaks made one NPC read another feeling on each seat after the same merged week (dev/test/coop-emo-seat.js):
+   (1) the guest's world loops (week end, buổi) set NPC feelings of their own; (2) rebuilding the merged world (fromCanon: affAdd/oanAdd replayed
+   while the rows are restored) set new feelings on EITHER seat after the merge. Now an NPC feeling is set only on the host outside a rebuild, or
+   by HER OWN act on the guest (that one reaches the host in the merged week, like every NPC row her act changes). Her own people: unchanged. */
+const emoOff=p=>{let r=p;try{if(typeof emoRes==="function")r=emoRes(p)}catch(e){}if(!r||mine(r))return false;
+ const C=window.COOPW;if(C&&C.on&&C.inFC)return true;return guest()&&!own};
+wrap("emoSet",f=>function(p){if(emoOff(p))return;return f.apply(this,arguments)});
+window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress","emoSet"])};
 })();
