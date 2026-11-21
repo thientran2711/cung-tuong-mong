@@ -112,6 +112,11 @@ KIT_SAMPLES.push({id:"§4.1c",title:"Cột khung chân dung: tên giữa trục 
  const col=(f,nm,rows)=>`<div class="pc kpwide kpfo-demo" data-k2="1" style="--kpcw:200px;display:grid;grid-template-columns:200px;overflow:visible;max-width:220px"><div class="pcl" style="display:flex;flex-direction:column;gap:3px"><b class="pcname krt" style="justify-content:center;text-align:center">${nm}</b>${pcPort(f)}<div class="kpkey" data-k="1" style="order:1">${rows}</div></div></div>`;
  setTimeout(()=>{try{document.querySelectorAll("#kitpage .kpfo-demo").forEach(pc=>KIT_PFO.fit(pc))}catch(e){}},50);
  return `<div class="kitpg-row" style="align-items:flex-start;gap:24px">${col(em,"Hoàng thượng",`<div class="kpk-st"><span class="chip">Đã quen</span></div><div>Hoàng thượng → ta · Sủng <b>7</b></div>`)}${col(me,"Quý nhân",`<div class="kpk-st"><span class="chip">Biết tên</span></div><div>Nàng → ta · Thiện cảm <b>12</b></div>`)}</div>`}});
+/* §28.8e KIT_BODY body-fit box (KP09, review/kit-body-fit): every zone outlined on a woman, a maid, a eunuch, the emperor, a child + a portrait */
+KIT_SAMPLES.push({id:"§28.8e",title:"KIT_BODY: ô thân theo hình (tóc · đầu · ngực · eo · tay áo · váy · gấu)",where:"<b>KIT_BODY</b> (jbody) — rows from img/body-fit.json (Foreman C) or measured from the picture (kitFigBody + veil-fit). Layers: <code>KIT_BODY.img(cls,src,file,zone)</code> inside the one kitFxLayers stack.",html:()=>{
+ if(typeof KIT_BODY==="undefined")return "";const F=["fig-consort-c01-t1-a18.webp","fig-maid-m01-a26.webp","fig-eunuch-u01-a26.webp","fig-emperor-a26-1.webp","fig-kid-f01-a14.webp"];
+ setTimeout(()=>KIT_BODY.debugFill(document.getElementById("kitpage")),0);
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap">${F.map(f=>KIT_BODY.debugHtml(f,130)).join("")}${KIT_BODY.debugHtml("por-consort-c01-t1-a18.webp",130)}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
