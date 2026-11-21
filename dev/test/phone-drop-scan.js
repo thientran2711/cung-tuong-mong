@@ -3,7 +3,7 @@
    FEATURES: avatars (<img> inside the text column, .pframe, .md avatar chips), pictures, the figure, the seal, chips, rows - counted by kind - and the texts. A dialog that has
    a feature (or a text line) on the iPad that the Fold drops (or the reverse) is a FAIL: a device may change the LAYOUT, never the CONTENT.
    usage: node dev/test/phone-drop-scan.js <index.html> [turns]   Exit 1 on any difference. */
-const {chromium}=require('playwright');const fs=require('fs');const IDX=process.argv[2];const TURNS=+(process.argv[3]||6);
+const {chromium}=require('playwright');const fs=require('fs');const IDX=process.argv[2];const TURNS=+(process.argv[3]||0);/* 0 = the forced dialogs only (identical on both devices); played turns diverge between devices (timing), so they are off by default */
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(IDX,'utf8');
 const SZ=[['755x1000@2',755,1000],['1180x820@2',1180,820]];
 const SEED=`(()=>{let s=12345;Math.random=()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}})()`;
@@ -32,6 +32,16 @@ const SEED=`(()=>{let s=12345;Math.random=()=>{s=(s*1664525+1013904223)>>>0;retu
    for(let i=0;i<6;i++){try{pushDil(makeDil());await drain('dilemma',1)}catch(e){}}
    const P=[['notice',{rows:[['Việc','Thử ấn']]}],['news',{facts:['Tin trong cung: thử.']}],['result',{facts:['Kết quả thử.']}]];
    for(const [k,o] of P){kitPanel(Object.assign({kind:k,title:'Thử '+k},o),true);await drain('kitPanel '+k,1)}
+   /* fixed dialogs: the same persons / item on both devices (rivals[0..], first inventory item) */
+   {const A=rivals.filter(v=>v&&v.name)[0],B=rivals.filter(v=>v&&v.name)[1],e=S.inv.find(x=>x&&IT[x.k]);
+    const F=[['Lỡ hẹn',()=>Q.push({t:'Lỡ hẹn',btn:'Đã hiểu',who:pv(A),h:`<p>Đã quá hạn việc nhờ: <b>Mời uống trà</b>.</p><p>Thiện cảm −3</p>`})],
+     ['Đồ thất lạc',()=>Q.push({t:'Đồ thất lạc',who:pMe(),h:`${loTag(e)}<p><b>${loNm(e.k)}</b> trong rương ngươi đã thất lạc.</p>`,btn:'Đã hiểu'})],
+     ['Bị từ chối',()=>kitPanel({kind:'result',title:'Bị từ chối',facts:['Cung nữ ra cửa.'],who:pv(A)},true)],
+     ['Tin cung',()=>kitPanel({kind:'news',title:'Tin cung',facts:['Mưa lớn suốt đêm.']},true)],
+     ['Sổ nguyệt sự',()=>kitModal({kind:'intel',title:'Sổ nguyệt sự',sub:'Kính sự phòng',facts:[{who:S,text:'Ta: đã báo'},{who:A,text:A.name+': đã báo'},{who:B,text:B.name+': đã báo'}]})],
+     ['Thưởng',()=>kitPanel({kind:'reward',title:'Ban thưởng',facts:['Hoàng thượng ban thưởng.'],who:pv(B)},true)],
+     ['Cảnh báo',()=>kitPanel({kind:'threat',title:'Có kẻ rình',facts:['Có kẻ rình cung.'],who:pv(B)},true)]];
+    for(const [t,f] of F){try{Q.length=0;f();showModal();await drain('fixed '+t,1)}catch(e){out.push({src:'fixed '+t,t,ksz:'ERR',f:{},txt:e.message,vis:0})}}}
    for(let t=0;t<TURNS;t++){try{endTurn()}catch(e){}dawn();await drain('play',12);if(S.dead)break}
    return out},TURNS);
   await ctx.close()}
