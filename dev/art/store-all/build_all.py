@@ -298,7 +298,7 @@ INNER_EMB="INNER LAYER EMBROIDERED (t7/t8): the inner robe and skirt layer is AL
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
     main=main_name(person); sec,_=secondary(person)
-    return f"HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {sec}."
+    return f"HELD ITEM COLOUR: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {sec}."
 def outfit_colours3(person):
     """B17 (owner Lượt 583): t7/t8 = THREE colours: royal yellow #EFBD69 + her MAIN and SECONDARY colour with exactly the words of her t1-t6 TWO-COLOUR sentence
     (same data: DATA main + secondary()); the B15 sentence adapted so it never says 'never a third colour'."""

@@ -27,3 +27,4 @@ allow: clearly different from her main robe colour ice blue  # owner L1714 row 2
 allow: leaning slightly forward with curiosity  # owner L1714 row 23 grace/pose/item
 allow: a folded letter on flower-patterned paper tied with a silk cord held a little toward the viewer  # owner L1714 row 23 grace/pose/item
 allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips
+allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

@@ -3,3 +3,4 @@ allow: LARGE gold tassels (tua rua) hanging   # owner L1893 (via #25): keep aFGo
 allow: with a little jade: small green jade beads set among the pearls   # owner L1879/L1893: chest pearls only (jade disc on aFGoYlufSh, G57)
 allow: a few strands of pearls across the chest with a little jade   # same
 allow: "Thu · Quý phi · L1856"   # caption
+allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour light olive and her secondary colour lilac   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

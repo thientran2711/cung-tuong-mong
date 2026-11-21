@@ -28,3 +28,4 @@ allow: clearly different from her main robe colour ice blue  # owner L1714 row 2
 allow: one hand holding a pearl-tasselled silk lantern with a jade top  # owner L1714 row 23 new pose/held item
 allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
 allow: standing as a breeze lifts her long stole  # foreman ROOT#19: stole moved to Phi (L1714 rows 7/8) → breeze lifts her sleeves
+allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

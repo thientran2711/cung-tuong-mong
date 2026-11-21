@@ -8,3 +8,4 @@ allow: ice blue silk like #71B5D7 is the MAIN colour of the robe   # owner L1560
 allow: with mint mist in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
 allow: the MAIN colour ice blue and the SECONDARY colour mint mist   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
 allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

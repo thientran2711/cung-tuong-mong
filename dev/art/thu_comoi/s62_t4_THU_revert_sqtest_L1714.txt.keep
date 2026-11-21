@@ -42,3 +42,4 @@ allow: the robe hem stirring slightly  # owner L1714 row 23 new pose/held item
 allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
 allow: an embroidered silk sash with hanging jade belt pendants and tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
 allow: fastened at the throat with a gold clasp   # G57 owner L1851: no jade pendant/disc/clasp/tassel (removal only)
+allow: the held item and any embroidery or painting on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)

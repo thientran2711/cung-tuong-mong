@@ -13,3 +13,4 @@ allow: softly rounded and full   # owner Lượt 1490 + C #10 decision (L1488/L1
 allow: yet neat and elegant   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
 allow: a jade flute with gold-filigree bands and gem tassels held low at her side   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
 allow: Even while her hands are raised to hold her item at chest height   # C #10 decision L1488/L1490: compact hold + boilerplate trim to fit 10 000 (said earlier in the prompt); cloak6
+allow: a jade flute with gold-filigree bands held low at her side   # G57b owner L1924 via #27: no tassel on held items (held-colour sentence + item words)
