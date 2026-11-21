@@ -357,11 +357,16 @@ const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);
 /* thin E: the room's step is the host's alone: it travels as its value, never as a delta (a delta on a seat that is already there drifted to buổi 4) */
 const ABS=new Set(["buoi"]);
+/* coop-thin-g-f1 (TRIP swap 1 @14b87a98: her Danh host store 96 | phone 95 from week 26 to the end, after Danh reached its cap): a number travels
+   as a delta, so ONE lost / doubled step (a network trip; PQ keeps 40; her phone's own erd ops) stays for good. At level 13 her week end, her picks
+   and her month all run on the host: the host store is her one truth, so her core stats travel as their value there and any drift heals at the
+   next change. Below 13 her phone still computes and the delta merge is kept. */
+const ABS13=new Set(["sung","danh","bac","suc","sac","tai","tamco","duc","th"]);
 function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
  for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k)&&!(k==="cyb"&&TH.on(5)/* E-fix: her cycle flags are the host's at level 5+: they travel in the patch */))continue;if(BADK.test(k))continue;
   const x=a[k],y=b[k],p=pre.concat([k]);if(jq(x,y))continue;
   if(!(k in b)){out.push(["-",p]);continue}
-  if(typeof x==="number"&&typeof y==="number"){out.push(p.length===1&&ABS.has(k)?["=",p,y]:["+",p,y-x]);continue}
+  if(typeof x==="number"&&typeof y==="number"){out.push(p.length===1&&(ABS.has(k)||ABS13.has(k)&&TH.on(13)&&host()/* the host's patch only: her phone's own ops (E erd, F) stay deltas */)?["=",p,y]:["+",p,y-x]);continue}
   if(Array.isArray(x)&&Array.isArray(y)){
    if(x.length===y.length&&x.every((e,i)=>plain(e)&&plain(y[i])&&eid(e)!=null&&eid(e)===eid(y[i]))){x.forEach((e,i)=>{if(!jq(e,y[i]))pDiff(e,y[i],p.concat([{i,id:eid(e)}]),out)});continue}
    const rest=x.map(e=>JSON.stringify(e)),add=[];for(const e of y){const j=rest.indexOf(JSON.stringify(e));if(j>=0)rest[j]=null;else add.push(e)}

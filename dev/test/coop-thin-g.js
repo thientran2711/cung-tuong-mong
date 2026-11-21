@@ -45,6 +45,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];
+ /* diagnostic (env DANHP): every 400 ms her Danh on her phone vs the host's store of her; prints each change with her last log lines */
+ if(process.env.DANHP){let last='';const lg=x=>(x||[]).slice(-2).map(l=>String(l&&l.t||l).replace(/<[^>]+>/g,'').slice(0,140));
+  (async()=>{while(true){try{const g=await G.p.evaluate(()=>({w:COOP.state.week,d:S.danh,b:S.buoi,t:S.tuan,L:(S.log||[]).slice(-2),tr:(COOPW.tr||[]).slice(-2)}));const h=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {d:s.danh,b:s.buoi,t:s.tuan,L:(s.log||[]).slice(-2),dl:(COOPW.thin.D.log||[]).slice(-2)}});
+   const k=g.d+'|'+h.d;if(k!==last){console.log('DANHP',JSON.stringify({w:g.w,ph:[g.d,g.t,g.b],st:[h.d,h.t,h.b],gL:lg(g.L),hL:lg(h.L),tr:g.tr,dl:h.dl}).slice(0,1400));last=k}}catch(e){}await sleep(400)}})()}
  const UP=+(process.env.UP||0);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
  const KEYS=['bac','sung','danh','suc','duc','th','tai','sac','tamco','rank'];/* mat (Tai mắt) is derived on the live S, not stored */
