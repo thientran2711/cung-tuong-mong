@@ -6,9 +6,6 @@ Per person, per season:
   * keep the current pair when its main passes the season-feel test (season_feel_L1582.feel) and all gates;
   * ★GỐC root pairs (root:true) are never recoloured (L27) — EXCEPT (G50, owner L1645) a root whose main fails B30:
     it is released to the solver like any other pair (least change), marked g50_released, old pictures → kho skins;
-  * ★GỐC root pairs (root:true) are never recoloured (L27) — EXCEPT (G50, owner L1645) a root whose main fails B30:
-    it is released to the solver like any other pair (least change), marked g50_released, old pictures → kho skins;
-  * ★GỐC root pairs (root:true) are never recoloured (L27) — a root main that fails B30 is listed as a clash;
   * else re-pick the MAIN from a colour grid inside her group tone band (A32 L range + season notch), filtered by
     bad_colour (no grey / brown / old mustard / royal yellow) and the season-feel test with a clear margin; cost prefers
     HER OWN colours (a colour she already wears in the wrong season moves to the season it reads as — e.g. a Hạ main that
@@ -197,9 +194,6 @@ def solve(first=()):
             o = d[p][s]
             if o.get('root') and feel(o['main_hex'])[0] != s:
                 o['root'] = False; o['_g50'] = True; released.append((p, s))
-def solve():
-    d = json.load(open(SRC))
-    ppl = [k for k in d if not k.startswith('_') and k != 'status']
     taken = {s: [] for s in SEAS}
     res, fails, clashes = {}, [], []
     # roots first into the uniqueness pool
@@ -213,7 +207,6 @@ def solve():
     G50_FIRST = tuple(first) + ('c28', 's24', 's55', 's23', 's50', 's63', 's42', 's65')   # PAL3: people that found no room when solved late (runs 1-3) → solve first
     order = sorted(ppl, key=lambda p: (p not in HARD and p not in G50_FIRST, p not in G50_FIRST, p not in REL_P,
                                        -sum(bool(d[p][s].get('root')) for s in SEAS),
-    order = sorted(ppl, key=lambda p: (p not in HARD, -sum(bool(d[p][s].get('root')) for s in SEAS),
                                        -sum(not clear_feel(d[p][s]['main_hex'], s) for s in SEAS)))
     for p in order:
         r = d[p]; free = [s for s in SEAS if not r[s].get('root')]
@@ -244,8 +237,6 @@ def solve():
                 nc = cols + [(m, VN[s] + 'c')]
                 if a31_ok(nc): pick[s] = m; main_dfs(i + 1, nc, cost + c, pick); pick.pop(s)
         for lim, ncomb in (([20, 12], 1500), ([16, 10], 1500), ([12, 8], 1500), ([16, 10], 40000), ([12, 8], 40000)):   # PAL3: wide retry
-        for lim, ncomb in (([20, 12], 1500), ([16, 10], 1500), ([12, 8], 1500), ([16, 10], 40000), ([12, 8], 40000)):   # PAL3: wide retry
-        for lim in ([20, 12], [16, 10], [12, 8]):
             LIM[:] = lim; combos.clear(); sc_cache.clear()
             main_dfs(0, [], 0.0, {}) if False else None
             def main_dfs2(i, cols, cost, pick):
@@ -257,8 +248,6 @@ def solve():
             main_dfs2(0, list(fixed), 0.0, {})
             combos.sort(key=lambda t: t[0])
             for cost, mains, cols in combos[:ncomb]:
-            for cost, mains, cols in combos[:ncomb]:
-            for cost, mains, cols in combos[:1500]:
                 if cost >= best[1]: break
                 sec_dfs(0, cols, cost, {}, mains)
             if best[0] is not None:
@@ -278,9 +267,6 @@ def solve():
            'status': 'PROPOSAL L1583 — owner verdict pending; palettes_season_deep.json unchanged',
            '_clashes': clashes, '_fails': fails,
            '_g50_released': [f'{p} {VN[s]}' for p, s in released]}
-                    'MAIN reads as its season (season_feel_L1582 test); SECONDARY free but suits; ★GỐC fixed; A31 + unique.',
-           'status': 'PROPOSAL L1583 — owner verdict pending; palettes_season_deep.json unchanged',
-           '_clashes': clashes, '_fails': fails}
     diff = []
     for p in ppl:
         r = copy.deepcopy(d[p]); e = dict(group=r['group'], root_season=r.get('root_season'), band=r.get('band'))
@@ -291,16 +277,11 @@ def solve():
             else: m, x = res[p][s]
             ch_m, ch_s = m != o['main_hex'], x != o['sec_hex']
             e[s] = dict(main_hex=m, sec_hex=x, root=bool(o.get('root') or o.get('_g50')),
-            e[s] = dict(main_hex=m, sec_hex=x, root=bool(o.get('root') or o.get('_g50')),
-            e[s] = dict(main_hex=m, sec_hex=x, root=bool(o.get('root')),
                         main_vi=(o.get('main_vi') if not ch_m and o.get('main_vi') else vi_main(m)),
                         sec_vi=(o.get('sec_vi') if not ch_s and o.get('sec_vi') else vi_sec(x)),
                         main_before=o['main_hex'] if ch_m else None, sec_before=o['sec_hex'] if ch_s else None,
                         reads=VN[feel(m)[0]])
             e[s]['main'] = e[s]['main_vi'] + ' ' + m; e[s]['sec'] = e[s]['sec_vi'] + ' ' + x   # check_unique keys
-            if o.get('_g50'):
-                e[s]['g50_released'] = dict(old_main=o['main_hex'], old_sec=o['sec_hex'], old_reads=VN[feel(o['main_hex'])[0]],
-                                            note='G50 owner L1645: ★GỐC recoloured per B30; old pictures = kho skins (dev/art/SKINS.md)')
             if o.get('_g50'):
                 e[s]['g50_released'] = dict(old_main=o['main_hex'], old_sec=o['sec_hex'], old_reads=VN[feel(o['main_hex'])[0]],
                                             note='G50 owner L1645: ★GỐC recoloured per B30; old pictures = kho skins (dev/art/SKINS.md)')
@@ -321,7 +302,6 @@ if __name__ == '__main__':
         print('round', rnd, 'no fit:', nf)
         if not nf or set(nf) <= set(first): break
         first += [q for q in nf if q not in first]
-    out, diff, gate = solve()
     ppl = [k for k in out if not k.startswith('_') and k != 'status']
     for s in SEAS:
         print(VN[s], 'mains reading as season:', sum(out[p][s]['reads'] == VN[s] for p in ppl), '/', len(ppl),

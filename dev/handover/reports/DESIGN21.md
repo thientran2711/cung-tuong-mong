@@ -37,3 +37,17 @@ t7 v8j vs v8c:
   | rank8-t78/s23_t7 | adjusting her belt pendant | three-quarter turn looking at the viewer, hoop near her shoulder |
   | rank8-t78/s17_t8 | adjusting her belt pendant | raising the hairpin between her fingers beside her cheek, glancing at it |
 - Gates: keep_check --all 365 PASS. check_store (--scope tpN --age a18) before→after: G45 FAIL gone ×7, 0 new FAIL. Old FAILs untouched (older stored text): m29_t4 ×2 B26/M06/S13/S19; s07/s54/s23 t7 S14; s59/s17 t8 now fully PASS.
+
+# JOB 3 — glued-merge scan + restore (Foreman C #17) · 0 cr
+Scan dev/art (*.txt/.json/.py/.keep/.md/.jsonl/.tsv): conflict markers 0 · invalid JSON 0 · duplicate JSON keys 0 (palettes_season_L1583.json already restored by #17 791d35a) · multi-prompt .txt / duplicated .py blocks / duplicated .keep lines → restored below. Each restore = pure deletions of the glued copy (git diff: 1 insertion, 144 deletions).
+| file | glued by | restored from |
+|---|---|---|
+| palettes3/four_season_L1583.py (old 60c0578d side glued back, 2× def solve) | 61036d5 MAIN CHÍNH 84 | a884067f PAL3 G50 (= f3428ed fix) |
+| thu_comoi/make_design22_L1653.py (t4 edits ×2, t5 block ×2) | 61036d5 | be1ec9e0 DESIGN22 job2 |
+| thu_comoi/s62_t4_THU_COMOIk.txt.keep, s62_t5_THU_COMOIj.txt.keep (allow lines ×2–3) | d3fcd3e / 61036d5 | be1ec9e0 (matches #17's 69c7aa6 txt restore) |
+| seasons4/s62_t{4..8}_HAN_BAC_vai.txt (3 prompts glued, 29–30k) + .keep ×5 + make_han_vai_L1398.py (2× VAI) | replays e0076022/faa27020/3a26627f/c3d4ef5e (20/11 21:23 + 22:06, same DESIGN10 commits re-applied) | 73a4828d DESIGN10 stage 3 (last single-prompt version, 9925–9996 ch); then novase_L1642.py re-run (t4 vase → lotus lamp, F19) |
+- keep_check --all 370 PASS · JSON load OK · py_compile OK.
+- Note: the _vai t4–t8 (old Hán tests, superseded) FAIL check_store with OLD faults (M07/S13/B12/S07/S14) = text as it was at 73a4828d; not glue — not touched.
+## For MAIN / foreman (not restored: not glued, pre-existing, not merge victims)
+- Prompt .txt > 10 000 chars, single prompt, unchanged since b007228b (20/11) or older: dong_hientai/s62_t8_DONG_HIENTAI (10387), m02_t8_DONG_HIENTAI (10370), s62_t8_DONG_HIENTAI_cloak7_LUAMONG_test (10345), s62_t7_DONG_HIENTAI (10306), s62_t6 (10056), s62_t4 (10024), s62_t8_cloak5 (10001); winter1/s62_t4_dong (10186); seasons4/s62_t8_dong_LONG3moi (10036). Big non-prompt logs (b26/proof, store-all/samples_a18, palaudit1, emo-anim clipurls) = OK by nature.
+- Non-art files touched by the same bad merges (MAIN's): dev/handover/reports/rv-kit-pcrow-square.md, rv-menu-panel.md, rv-mg-5s-clear.md, econ-tamco.md, menu-panel.md, review-*.md, dev/art/SKINS.md — no markers left; MAIN to check content.
