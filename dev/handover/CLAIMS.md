@@ -563,3 +563,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-thin-g r1 (opus BIG) of 7fcae66b | review/coop-thin-g-r1 | B | session_01N1tNP33ttbcEgRGTF1Udhr | RUNNING | 20/11 23:58Z |
 | REVIEW or20-j68q r1 E31r (opus BIG; briefs/E31r-review-or20-j68q.md) of cd23ef92 | review/or20-j68q-r1; reports/or20-j68q-review.md | FOREMAN E #24 | session_01DgYSWq8fVe171xmVXHeDg6 | RUNNING | 21/11 00:02Z |
 | ui-tour PDF (owner 21/11 ~00:00Z: every tab + every mid-screen popup, Fold+iPad, PDF) | review/ui-tour | MAIN CHÍNH 82 | session_01Rc5AsJLRqcEASEQYrXxbRd | RUNNING | 21/11 00:02Z |
+| name-clash role-parity 463 (opus; hh:N-ONLY cx2:chest + cx4:rougeSteal when name-clash meets LIVE 463d3d70) | review/coop-name-clash-r1-land463; briefs/b-nameclash-rp.md | B | session_01N1tNP4qZ3DWxjmCbaKiPNd | RUNNING | 21/11 00:09Z |
