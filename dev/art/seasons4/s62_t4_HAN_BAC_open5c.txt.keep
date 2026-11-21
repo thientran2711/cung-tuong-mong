@@ -1,10 +1,15 @@
 base: dev/art/seasons4/s62_t4_HAN_BAC_open5.txt
-allow: in light clear warm plum over an inner robe in bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: peach blossoms and small swallows in gold and bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: light clear warm plum and bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: outer band light clear warm plum embroidered in gold   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: inner two bright blush pink with gold edges   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: light clear warm plum silk like #DF9ED9 is the main colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: with bright blush pink in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light clear warm plum and her secondary colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: in light clear warm plum over an inner robe in bright blush pink   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: with many medium-size spring flowers spread over the whole garment   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: peach blossoms and small swallows in gold and bright blush pink   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: light clear warm plum and bright blush pink   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: each richly embroidered in gold with small peonies and edged with small pearls   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: outer band light clear warm plum embroidered in gold   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: inner two bright blush pink with gold edges   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: her ORIGINAL robe colour is kept exactly as in image 1   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: her first reference   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: light clear warm plum silk like #DF9ED9 is the main colour of the robe   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: with bright blush pink in the inner robe and linings   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: exactly ONE fresh flower in her hair   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light clear warm plum and her secondary colour bright blush pink   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md

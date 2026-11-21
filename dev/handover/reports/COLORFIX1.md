@@ -12,8 +12,8 @@ Maker (re-runnable, scratch): mapping is in the table below.
 | thu_comoi/s62_t4_THU_COMOIc, t5c, t6c, t7_v8c, t8_v10c | THU | ice blue #71B5D7 + mint mist (= s62 ĐÔNG) | light plum #DF9ED9 + blush |
 | dapung4/s62_t{1,2,3}_COMOI_v2c (thu base) | THU | ice blue #71B5D7 + mint mist | light plum #DF9ED9 + blush |
 | t7_v8c / t8_v10c phoenix (G33 B) | THU | plumage "in shades of ice blue and mint mist"; crown inlay ice blue + mint mist | OUTER blush, inner light plum, tips/eyes deeper light plum, gold outline; crown inlay blush + light plum |
-| thu_comoi/m02_t8_THU_COMOI_v6c, m02_t7_THU_builder_nnc | THU (root) | moss green #A8C379 + coral rose #CF8377 | leaf green #A5C56A + coral rose #CF8377 |
-| thu_comoi/m28_t8_THU_COMOI_v6c, m28_t7_THU_nnc | THU | coral pink #D9998C + indigo blue #4E5D97 (= m28 XUÂN root in deep file) | rich plum #AF71A1 + smoke lilac #E7DAFF |
+| ~~thu_comoi/m02_t8_THU_COMOI_v6c, m02_t7_THU_builder_nnc~~ (withdrawn pass 2, L27) | THU (root) | moss green #A8C379 + coral rose #CF8377 | leaf green #A5C56A + coral rose #CF8377 |
+| ~~thu_comoi/m28_t8_THU_COMOI_v6c, m28_t7_THU_nnc~~ (withdrawn pass 2, L27) | THU | coral pink #D9998C + indigo blue #4E5D97 (= m28 XUÂN root in deep file) | rich plum #AF71A1 + smoke lilac #E7DAFF |
 | dong_hientai/s62_t{4,5}_cloak8, t6_cloak6, t{7,8}_cloak9 | ĐÔNG | ice blue #71B5D7 + mint mist | OK — no change |
 | dong_hientai/m02_t7_DONG_HIENTAI_cloak9c, m02_t8_…cloak9c | ĐÔNG | sky blue #97C9D4 + cool rose pink #CE8AA7 (old B20 palettes_season.json) | light clear cool jade #6CD8BA + smoke lilac #F2EAFF |
 
@@ -58,3 +58,27 @@ Exact edits per file (also in each .keep):
 - thu_comoi/s62_t4_THU_COMOIc.txt: fabric B29 B_LIGHT (đoạn mỏng); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); S16 restored (approved); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
 - thu_comoi/s62_t5_THU_COMOIc.txt: fabric B29 B_LIGHT (đoạn mỏng); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
 - thu_comoi/s62_t6_THU_COMOIc.txt: fabric B29 C_GAM; outfit word HEAVY→LIGHT gấm (B28/B29); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); S16 restored (approved); cut repeat of the image-2 royal-yellow sentence; cut repeat "gold only as thin accents."; colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours); drop SATURATED (A32 Dịu dàng never deep; B29 light); LEN: cut repeat (= "the LARGEST single bloom of all ranks"); LEN: cut repeat "never covering the neckline" (said before in the same clause); LEN: cut repeat (TWO-COLOUR RULE says main ≠ secondary)
+
+## Pass 2 — XUÂN Hán t4–t6, m02/m28 (L27), rest
+
+| file | colours | held item | flower (F2) | hairpins | fabric (B29) | rules |
+|---|---|---|---|---|---|---|
+| seasons4/s62_t4_HAN_BAC_open5c | fixed (pass 1) | OK | FIXED: peonies/peach blossoms/spring flowers → lotus (embroidery) + hair 'ONE fresh lotus flower' | OK gold trâm | OK DOAN (xuân = đoạn mờ vừa, L1558) | added master M07 → only **S13 FAIL**: approved S13 = Tần CAPELET text, but the Hán Tần design has collar bands, no capelet (DESIGN12) → gate/rule conflict, needs rule owner. NOT GEN-READY |
+| seasons4/s62_t5_HAN_BAC_open3c | fixed | OK | FIXED: peony medallions/peach blossoms/spring flowers → double hollyhock + hair named | OK | OK DOAN | added M07 → approved+master PASS |
+| seasons4/s62_t6_HAN_BAC_open5c | fixed | OK tú cầu | FIXED: peonies/spring flowers → incurved chrysanthemum + hair named | OK, S24 added | FIXED: exact C_GAM (old variant failed B12/S07) | added M07 + S19 + S24 + S34 → approved+master PASS; LEN fit by 5 same-prompt repeat cuts (see edits) |
+| thu_comoi/m02_t7_THU_builder_nn, m02_t8_THU_COMOI_v6 | **OK — _c withdrawn**: thu = m02's drawn ROOT; L27 'robes keep root_drawn' → moss green #A8C379 + coral rose stays (my pass-1 leaf-green change removed) | — | — | — | — | m02_t8 base: S16 missing (pre-existing, LEN 9 981 — not fixed) |
+| thu_comoi/m28_t7_THU_nn, m28_t8_THU_COMOI_v6 | **OK — _c withdrawn**: palettes_season.json (B20, L27 source) has m28 root_season = thu, root_drawn coral pink #D9998C + indigo #4E5D97 = what the prompts carry. (Deep file labels that pair xuân — files disagree; owner may want one answer.) | — | — | — | — | approved PASS |
+
+### NOT fixed in pass 2 (colour fix only; all at the 10 000 limit — needs a foreman decision on which store sentences may be cut):
+- seasons4/s62_t7_HAN_BAC_open8c: B12 brocade, S07, S16, S18, S19, S24, S34 missing (pre-existing). s62_t8_HAN_BAC_open11c: E1 angle, B12, S07, S16, S18, S19, S34. (Xuân t8 = owner WAIT anyway.)
+- thu_comoi/s62_t7_THU_COMOI_v8c: G23 walk+still, E1 angle, S19. s62_t8_THU_COMOI_v10c: S19. (phoenix G33-B done in pass 1)
+- dong_hientai/m02_t{7,8}_DONG_HIENTAI_cloak9c: B12, W03 winter fur, S07, S14 (t7), S16 (t8), S19, S24, S34.
+- kingfisher-blue (G33 HOLD) left in all t7/t8.
+
+Exact edits pass 2:
+- seasons4/s62_t4_HAN_BAC_open5c.txt: add master M07 (silk has real weight); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root picture, other season); F2 embroidery species: "(peonies, peach blossoms and small swall" → "(lotus flowers and small swallows in gol"; F2 embroidery species: "with small peonies" → "with small lotus flowers"; F2 embroidery species: "many medium-size spring flowers" → "many medium-size lotus flowers"; F2 hair flower named: "exactly ONE fresh flower in her hair" → "exactly ONE fresh lotus flower in her ha"
+- seasons4/s62_t5_HAN_BAC_open3c.txt: add master M07; colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root picture, other season); F2 embroidery species: "(large peony medallions, peach blossoms " → "(large double hollyhock medallions and c"; F2 embroidery species: "with small peonies" → "with small double hollyhocks"; F2 embroidery species: "many LARGE spring flowers" → "many LARGE double hollyhocks"; F2 hair flower named: "exactly ONE fresh flower in her hair" → "exactly ONE fresh double hollyhock in he"
+- seasons4/s62_t6_HAN_BAC_open5c.txt: fabric → exact B29 C_GAM (B12 slot); add master M07 + approved S19 + S24 + S34; colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root picture, other season); F2 embroidery species: "with small peonies" → "with small incurved chrysanthemums"; F2 embroidery species: "many LARGE spring flowers" → "many LARGE incurved chrysanthemums"; F2 hair flower named: "exactly ONE fresh flower in her hair" → "exactly ONE fresh incurved chrysanthemum"; LEN: cut repeat of S19: " Floor-length robe, only slipper toe tip" → ""; LEN: bun words repeat S21: "Hair: her own hair colour, ALL her hair " → "Hair: her own hair colour, "; LEN: cut repeat (= LARGEST of all ranks): ", the grandest hair flower in the palace" → "."; LEN: cut lead line repeating the Outfit "collar worn OPEN, pulled wide OFF the neck": "OPEN-NECK LOOK: collar wide OFF the neck" → ""; LEN: cut "(not only the borders)" (repeats ALL OVER)
+
+## Handover
+Worker stops here (context). Open items for C #13: S13 conflict (thu t4 + Hán t4), the t7/t8 + m02 đông fail lists above, m28 root-season file conflict. My _c files: thu s62 t1–t8 (dapung4 t1–t3, thu_comoi t4–t8), Hán xuân t4–t8, m02 đông t7/t8.

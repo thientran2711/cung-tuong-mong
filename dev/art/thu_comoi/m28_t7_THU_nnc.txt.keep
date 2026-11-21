@@ -1,8 +1,0 @@
-base: dev/art/thu_comoi/m28_t7_THU_nn.txt
-allow: a near-empress ceremonial robe of coral pink silk with a LAYERED NECKLINE   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: a fitted indigo blue INNER top   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: OVER it the coral pink outer robe worn OPEN at the front   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: coral pink silk like #D9998C is the MAIN colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: with indigo blue like #4E5D97 in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: the MAIN colour coral pink like #D9998C and the SECONDARY colour indigo blue like #4E5D97   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral pink and her secondary colour indigo blue like #4E5D97   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)

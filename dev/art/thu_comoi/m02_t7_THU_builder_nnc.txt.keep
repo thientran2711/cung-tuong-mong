@@ -1,6 +1,0 @@
-base: dev/art/thu_comoi/m02_t7_THU_builder_nn.txt
-allow: a near-empress ceremonial robe of moss green silk with a LAYERED NECKLINE   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: OVER it the moss green outer robe worn OPEN at the front   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: moss green silk like #A8C379 is the MAIN colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: the MAIN colour moss green like #A8C379 and the SECONDARY colour coral rose like #CF8377   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour moss green and her secondary colour coral rose like #CF8377   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
