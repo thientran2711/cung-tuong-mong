@@ -1025,3 +1025,4 @@ NEWACCT#15 ~02:40Z: DESIGN20 d13d7ed t4 COMOIf + t5 COMOIe (OUTER_TIED, G46 CAPE
 NEWACCT#15 ~02:42Z: HAIR1 83d55ab44 hair table per season (90×8×4, check PASS, 10 shapes/rank kept) → told owner L1633. JOB2 waits owner.
 NEWACCT#15 ~02:45Z: OWNER L1634 'B05 bật thực tại, 6 bỏ' → read as t2 Thường tại drop B05+B06 → HAIR1 replace with 2 new shapes.
 NEWACCT#15 ~02:48Z: OWNER L1635 CANCELLED hair project (angry: 'gớm'); prompts unchanged (no builder used hair table); G48 set CANCELLED; HAIR1 stopped.
+NEWACCT#15 ~02:50Z: DESIGN20 continues (ctx 15 % real). t4/t5 v7 (apron panels + jade set carried, G47) 132 over → trims A+D+C + compact own words; NOT B (approved S12) / E. v6 drafts running in GEN1.
