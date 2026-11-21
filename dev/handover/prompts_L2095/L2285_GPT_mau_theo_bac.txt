@@ -1,0 +1,14 @@
+Giữ nguyên bảng màu bạn vừa làm (90 người × 4 mùa, mỗi người vẫn giữ đúng họ màu của mình trong từng mùa). Bây giờ thêm ĐỘ ĐẬM THEO BẬC: càng lên bậc, màu càng sâu và sang, để hợp với địa vị và với cung điện của bậc đó.
+
+8 bậc chia 3 tầng:
+- Bậc 1–3 (Đáp ứng, Thường tại, Quý nhân): nhạt, nhẹ, trong — hợp với phòng nhỏ, sáng, giản dị.
+- Bậc 4–6 (Tần, Phi, Quý phi): vừa, rõ màu, đầy đặn.
+- Bậc 7–8 (Hoàng quý phi, Hoàng hậu): sâu, sang, đậm — đứng trong đại điện vẫn nổi bật, không bị chìm.
+
+Luật:
+- Chỉ đổi độ sáng / độ đậm / độ rực, KHÔNG đổi họ màu của người đó.
+- Tính cách vẫn điều chỉnh độ đậm: cùng một tầng, nhóm Dịu dàng đậm theo kiểu mềm mại; Lạnh lùng và Đoan trang đậm theo kiểu trầm, không rực; Kiêu kỳ, Quyến rũ, Sắc sảo có thể rực hơn.
+- Tầng cao nhất vẫn phải đẹp, không chói, không tối bẩn.
+- Màu vàng hoàng gia #EFBD69 vẫn dành riêng Hoàng hậu.
+
+Cho tôi: với mỗi người, mỗi mùa, 3 phiên bản (Tầng 1 / Tầng 2 / Tầng 3) đủ 6 mục màu như cũ (tên + HEX), xuất lại thành trang HTML có ô màu như bản trước.
