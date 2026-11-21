@@ -14,14 +14,15 @@ post(text)            -> (text, notes)     builder side (build_all build / seaso
 store_swap(store, p)  -> store             check_store side: the store text read with the same swaps when prompt p has PHRASE
 Kept on purpose (OPEN QUESTIONS in dev/handover/reports/NECK1.md, not guessed): winter fur 'along her collar' / 'the neckline
 keeps its shape' (G26 fur order), 'Collar SHAPE exactly as in image 3' (t7/t8 thu ref image), sprig guard 'never inside the
-neckline', G69 'CENTRE of the chest' embroidery, 'pearl strands across the chest', vân kiên / capelet 'collar lines', Hán G62.
+neckline', G69 'CENTRE of the chest' embroidery, 'pearl strands across the chest', vân kiên / capelet 'collar lines'. Hán: EXCLUDED (owner L2234, G62 locked).
 """
 import os, re
 
 PHRASE = "a very low, wide, open neckline whose edge lies about a hand's width below the collarbones"
 AGES = ("a18", "a26", "a36")
 OFF = [False]   # set True around a raw a36 build that feeds an a51/a65 cell (build_all _build_season2, G25 winter words)
-SKIP_MARK = ("HAN_COLLAR", "two-thirds of the way out along the collarbones")   # G62/G66 Hán frozen collar: OPEN QUESTION, untouched
+SKIP_MARK = ("Hán", "Han-dynasty", "Han dynasty", "HAN_COLLAR", "two-thirds of the way out along the collarbones")
+# ^ G62/G66 Hán collar LOCKED (owner L2234 verbatim: 'Cái bộ hán phục, cái cổ áo tôi chốt rồi là không sửa gì hết.'): every Hán prompt is EXCLUDED from G76
 
 _P = PHRASE
 _SQ_HEAD = (r"(?:ONE straight SQUARE collar only \(no crossed collar, nothing layered under it\)"

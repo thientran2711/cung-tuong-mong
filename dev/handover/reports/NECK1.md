@@ -34,7 +34,7 @@ keep_check `--sidecar` **PASS ×8** (.keep allow lines = exactly the neckline ph
 - **Q3 t7/t8 thu 'Collar SHAPE exactly as in image 3'** kept (ref image = the vân kiên? if it shows the square collar it fights the phrase).
 - **Q4** kept: 'never inside the neckline' (bodice-sprig guard, M2228-04/05/07), G69 'embroidered flower at the CENTRE of the chest', 'pearl strands across the chest' (t6/Thái hậu), vân kiên/capelet 'collar lines', cloud collar words.
 - **Q5** should the raw store `t8-prompt-B/build.py` CLI itself print G76 words at a18–a36? (Not done: the store/gate machinery keys on the store words.)
-- **Q6 Hán G62/G66** frozen collar: untouched (`SKIP_MARK` in lowneck_L2228.py).
+- **Q6 Hán — ANSWERED (owner L2234 'Cái bộ hán phục, cái cổ áo tôi chốt rồi là không sửa gì hết.')**: every Hán prompt EXCLUDED; `SKIP_MARK` = 'Hán' / 'Han-dynasty' / HAN_COLLAR … → post() no-op. Proof: all 225 Hán-marked prompt files under dev/art + dev/handover byte-identical under post(); no builder output / M2228 file carries a Hán marker; G76 rule text updated (rule.py set, --luot 2234).
 
 ## Commits
 afbc831 (rule + module + M2228 set) · second commit = builders/gate wiring + report (hash in the message to the foreman).
