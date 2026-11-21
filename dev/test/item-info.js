@@ -1,6 +1,6 @@
 /* KIT §70 item detail (review/item-info): every item cell → tap shows the same kitItemDetail.
    usage: node dev/test/item-info.js <url> <outdir> [WxH,WxH…] [save]
-   Per viewport: dress pick (tap = select + strip with Mặc/Cài/Tháo, no blind wear; Mặc bộ này still works), Tư trang bag panel rows,
+   Per viewport: dress pick (tap = select + strip with Mặc/Cài/Tháo, no blind wear; Mặc bộ này still works), Tư trang bag INLINE strip (§70.6) rows,
    Bên mình slot panel pick tile → card, shop picture → card, reward box row → card, event item tag → card, Hội phối đồ board → strip,
    other people's worn slot → card, veil picker. Checks: same .kidrows labels everywhere, no horizontal overflow, card inside the viewport. */
 const {chromium}=require('playwright');const fs=require('fs');
@@ -46,10 +46,13 @@ const R={};
   out.slotStrip=await p.evaluate(()=>{const d=document.querySelector('#kg82 .toildet .kidet');return d?{name:d.querySelector('.kidn').textContent,acts:[...d.querySelectorAll('[data-toilact]')].map(b=>b.firstChild.textContent)}:null});
   await p.evaluate(()=>document.getElementById('toilok').click());await p.waitForTimeout(300);out.dressDone=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
   await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null});await p.waitForTimeout(300);
-  step(2);/* 2. Tư trang bag panel */
-  await p.evaluate(()=>{const it=kinvItems().find(x=>x.g&&x.g.k==='vongngoc');kinvOpen(it)});await p.waitForTimeout(400);
-  out.bagLabels=await p.evaluate(()=>[...document.querySelectorAll('#modal .krl')].map(e=>e.textContent));out.bagFromFact=await p.evaluate(()=>/Thái hậu ban\./.test((document.querySelector('#modal .kfacts')||{}).textContent||''));
-  await shot('2-bag-panel');await p.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(200);
+  step(2);/* 2. Tư trang bag panel: tap a tile = INLINE strip under the grid (KIT §70.6, no pop-up); the old modal path is gone */
+  await p.evaluate(()=>{try{localStorage.setItem('hclh-inv-sub','tui')}catch(e){}KINV_SUB='tui';tab='inv';render()});await p.waitForTimeout(500);
+  await p.evaluate(()=>{const i=kinvItems().findIndex(x=>x.g&&x.g.k==='vongngoc');const t=document.querySelector(`#panel [data-kinvkey="tutrang"][data-kinvi="${i}"]`);t&&t.scrollIntoView({block:'center'});t&&t.click()});await p.waitForTimeout(400);
+  out.bagLabels=await p.evaluate(()=>[...document.querySelectorAll('#panel .kinldet .krl')].map(e=>e.textContent));
+  out.bagFromFact=await p.evaluate(()=>/Thái hậu ban/.test((document.querySelector("#panel .kinldet")||{}).textContent||''));
+  out.bagTxt=await p.evaluate(()=>((document.querySelector('#panel .kinldet')||{}).textContent||'').replace(/\s+/g,' ').slice(0,260));out.bagNoModal=await p.evaluate(()=>!document.querySelector('#modal:not([hidden]) .kmodal')&&!document.querySelector('.kinldet .kit-x'));
+  await shot('2-bag-strip');
   step(3);/* 3. Bên mình slot panel → tap a pick tile = card (no blind wear) */
   await p.evaluate(()=>{const it=kinvItems().find(x=>x.g&&x.g.k==='tram_ngoclan');wdSlotOpen({wd:'tram',label:'Cài tóc',ghost:''})});await p.waitForTimeout(400);
   const b3=await p.evaluate(()=>JSON.stringify(wdOf(S)));

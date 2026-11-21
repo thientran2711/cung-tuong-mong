@@ -104,7 +104,7 @@ window.ledgerId=ledgerId;
 
 /* ---------------- 3. THE REGISTRY: everyone alive in the palace now ---------------- */
 function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{if(seen[id])return;seen[id]=1;L.push({id,name,role,kind,home,ref})};
- let en="Hoàng thượng";try{en=empName()}catch(e){}add("emp",en,"Hoàng thượng","emp","dtd");
+ let en="Hoàng thượng";add("emp",en,"Hoàng thượng","emp","dtd");
  if(!S.thDead)add("th","Thái hậu","Thái hậu","th","tn");
  add("me",S.name,j95rk(S),"me",null,S);
  for(const v of rivals){if(!v.alive)continue;add("v"+v.id,v.name,j95rk(v),"rv",v.out?"lc":palaceOf(v),v)}
@@ -112,8 +112,8 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
     and the two people fixed to a place (Quản sự Tân Giả khố, Thầy dạy): the record takes the SAME lists the stage draws (one ledger) */
  J95.px={};const PXT=typeof plxPeople==="function";if(PXT)try{for(const k of ["cnh","tgk"])for(const q of plxPeople(k))if(q&&q.sid!=null)J95.px["s"+q.sid]=k}catch(e){}
  for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const hk=p===S?(S.out?"lc":"home"):p.out?"lc":palaceOf(p);const pk=p===S?"me":p.id;const ow=p===S?"ngươi":p.name;
-  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,"Cung nữ thân tín của "+ow,"mm",hk,p);
-  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
+  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,(typeof thcIs==="function"&&thcIs(p,p.maid)?"Cung nữ thân cận của ":"Cung nữ thân tín của ")+ow,"mm",hk,p);
+  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":typeof thcIs==="function"&&thcIs(p,s)?"Cung nữ thân cận":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
  /* named palace staff (jstaff, main 16/11): the elders stand at their post (the stage draws them there); the rest of Thái hậu's household serves at Đức Thọ cung */
  J95.eld={};const eh=x=>{if(!x||x.sid==null)return;const k=j95elderK(x);if(x.eid)J95.eld["s"+x.sid]=x.eid;if(seen["s"+x.sid]){const q=L.find(z=>z.id==="s"+x.sid);if(q&&x.eid){q.kind="el";q.home=k}return}add("s"+x.sid,x.name,x.call||"Người hầu của Thái hậu","el",k,x)};
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
@@ -123,7 +123,7 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
  if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn");const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
- /* npc-death-wire (owner OD:L641): Phế phi họ Lý lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
+ /* npc-death-wire (owner OD:L641): Phế phi họ Tần lives in Trường Môn viện until she dies — ONE record person (c:ly), the stage, the map count and lcPeople read her from here */
  try{const y=typeof lyAlive==="function"&&lyAlive();if(y)add("c:ly",y.name,"Phế phi","ly","lc",y)}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
@@ -389,7 +389,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  const kc=S.court&&S.court.ksp;if(kc&&kc.name)for(const p of V.people)if(p.kind==="ksp"&&p.name!==kc.name){p.name=kc.name;p.info="Kính sự phòng · Giữ thẻ bài các phi tần";ch=true}
  /* npc-death-wire: a dead post holder's successor (jmort) shows under his own name on every stage the post stands on */
  for(const [kd,post] of [["ty","ty"],["peddler","ped"]]){const o=S.court&&S.court[post];if(o&&o.name)for(const p of V.people)if((p.kind===kd||(p.kind==="srv"&&p.sk===kd))&&p.name!==o.name){p.name=o.name;ch=true}}
- if(here("emp")&&k!=="home"&&k[0]!=="r"&&!V.people.some(p=>p.kind==="emp")&&!(k==="dtd"&&S.sung<BAL.m95.dtdSung)){try{V.people.push({kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});ch=true}catch(e){}}
+ if(here("emp")&&k!=="home"&&k[0]!=="r"&&!V.people.some(p=>p.kind==="emp")&&!(k==="dtd"&&S.sung<BAL.m95.dtdSung)){try{V.people.push({kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});ch=true}catch(e){}}
  if(here("th")&&!V.people.some(p=>p.kind==="th")){V.people.push({kind:"th",name:"Thái hậu",ini:"慈",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`});ch=true}
  return ch}
 /* what she can see happen where she stands: secret meetings (catch), people waiting for her (ambush), what she observes */
@@ -618,7 +618,7 @@ function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
   else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${netTxt(x)} · ${tinhW(x.tinh)}`}}return null}
   else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
  if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
- if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
  if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`${kitMaidTitle()} · thiện cảm ${S.maid.loyal}`}:null;
  if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));const m=v&&v.maid;if(!m||!m.name)return null;return{kind:"npc",lid:id,name:m.name,ini:m.name.split(" ").pop()[0],col:"#b9a48a",info:who[1]||"Cung nữ thân tín"}}

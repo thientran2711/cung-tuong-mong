@@ -5,7 +5,7 @@ function start(){
   try{if(typeof kmReset==="function")kmReset()}catch(e){}/* a new life starts with no scene / overlay / queued job of the last one (j93 kmReset) */
   const o=(window.__forceOrigin&&originByKey(window.__forceOrigin))||(o0=>originByKey(originBrPick(o0.k,Math.random()))||o0)(pick(ORIGINS));/* hòa thân: country branch (j1) */quiet=true;Q=[];popIdx=null;popMsg="";
   S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,th:o.th,hh:o.hh,tai:30+R(50),sac:40+R(55),tamco:10+R(20),duc:30,thu:0,
-     schemes:0,moreRivals:0,maid:newMaid(pick(MAIDS),50+R(31)),origin:o,name:"",
+     schemes:0,moreRivals:0,maid:newMaid(nmNew("maid"),50+R(31)),origin:o,name:"",
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false,lad6:1/* maid-ladder-6: born on the six-rung maid ladder */};
@@ -27,7 +27,7 @@ function start(){
      entering-the-palace band (consort / palace-maid road) + her full-body figure in the person column, the text beside */
   pushModal({t:"Nhập cung",stage:[S],headArt:{src:(o.k==="cnv"||(typeof isSrv==="function"&&isSrv()))?"img/ev-nhap-cung-cn.webp":"img/ev-nhap-cung.webp",label:"Nhập cung"},
    h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung.</p>
-   ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`${empName()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
+   ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`niên hiệu ${empEra()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
     ...(S.ps?[["Hậu cung",psOpenText(),"t"]]:[]),["Tuyến truyện",`${s.t}. ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}`,"t"]])}
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi ${BAL.time.khac} khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
@@ -126,7 +126,7 @@ function stageCapFix(V){/* the caption is written AFTER the people are reconcile
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
  const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
- const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  const at=(id,w)=>{const r=recAt(id,k);return r==null?w===k:r};const here=liveRivals(true).filter(v=>at("v"+v.id,W[v.id]));const empHere=at("emp",W.emp);const cap={};
  if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi.";cap.emp=[msg,"Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."]}else{msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay.";cap.emp=["Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi.",msg]}}
  if(k==="thu"){if(empHere){if(S.sung<40&&!roll(od(BAL.odb.j2.odGoTo+S.sung+mm()))){apply({sung:-3});S.visit={k,people:[emp],talked:true,tk:{},msg:"Hoàng thượng cau mày: “Trẫm đang bận việc nước.” Ngươi phải lui ra."};log("Đến Cần Chính điện, bị đuổi về.");render();return}
@@ -137,7 +137,7 @@ function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
  if(k==="tyv")ppl.push({kind:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
  if(k==="ksp")ppl.push({kind:"ksp",name:(S.court&&S.court.ksp&&S.court.ksp.name)||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
- /* D4 (owner OD:L641): Phế phi họ Lý STAYS beside fallen rivals until she dies; then the post is empty until a real person arrives */
+ /* D4 (owner OD:L641): Phế phi họ Tần STAYS beside fallen rivals until she dies; then the post is empty until a real person arrives */
  if(k==="lc")lcPeople("Phế phi").forEach(x=>ppl.push(x));
  if(!msg){msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";cap.cnt=1}
  if(cap.emp)cap.cur=msg;S.visit={k,people:ppl,talked:false,tk:{},msg,cap};log(`Đến ${P.n}.`);render()}

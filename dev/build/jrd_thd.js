@@ -503,7 +503,7 @@ RD97L.push(rdRare({a:"thd_sach_11",tag:"Sách mở đường cải cách, cha v�
    {n2} = the false Tiến sĩ of an earlier exam, elder cousin (biểu huynh) of {v}, from {v}'s maternal house (engine-carried S.st.f14.n2).
    Enemy house = {v}'s maternal house (bought the paper in .4); the official behind the leak = "Thị lang bộ Lễ" (Phó chủ khảo), never named. */
 function thdTroCast(A){/* {n1}/{n2} are carried by the engine (jroad: S.st.f14.n1/n2, saved at each chapter end); a name is made only when none exists yet */
- try{const f=(S.st&&S.st.f14)||{};const nm=()=>pick(SURN)+" "+pick(MALEN);A.n1=A.n1||f.n1||nm();A.n2=A.n2||f.n2||nm()}catch(e){A.n1=A.n1||"học trò của cha";A.n2=A.n2||"biểu huynh của nàng ta"}
+ try{const f=(S.st&&S.st.f14)||{};const nm=()=>nmNew("m");A.n1=A.n1||f.n1||nm();A.n2=A.n2||f.n2||nm()}catch(e){A.n1=A.n1||"học trò của cha";A.n2=A.n2||"biểu huynh của nàng ta"}
  return rdCast(A,["v"])}
 
 rdDef("thd_tro",5,{t:"Đề thi bị bán",w:"maid",sj:"kẻ bán đề thi trong Lễ bộ",cast:thdTroCast,
