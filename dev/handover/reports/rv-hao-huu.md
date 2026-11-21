@@ -88,3 +88,31 @@ Diff dfd14ac7..8bcba06b only (jhaohuu, jcooptimer, KIT §69.2, coop-haohuu, rebu
 | N2 KIT doc | §69.2 rewritten in place (#kctmfu.kup copy, data-k61skip, slot persistence). | FIXED |
 | N3 / N4 | cord + tiny ⏸ → badge commit (keeper `kitStBadge`, review/kit-badge 36b6071e, not KIT READY yet). | with badge |
 Remaining before LAND: keeper K-BADGE-HAOHUU KIT READY → worker wires it → I re-check that diff + badge states (✓ / … / ⏸ / grey, Fold + iPad, both seats), merge newest main, gates, push review/hao-huu-rv2, send LAND READY.
+
+## r2c — FINAL re-check: badge 0466ee43 (K-BADGE-HAOHUU) + newest main — verdict: **PASS → LAND READY**
+Diff 8bcba06b..0466ee43: merge of review/kit-badge 36b6071e (keeper session_01Rc5AsMtjP4KTgBZVjENGLs; its base 1af8db13 is in main) + wiring.
+- Keeper part (law 9, OD:L1103): `kitStBadge(st)` in jrail.js → `<b class="kbdg ok|busy|pause">`, 15 px disc bottom-right of a `.krailb`, `.krailb.koff` greys every child but the badge; KIT.md §77b + kit sample §77b + dev/test/kit-badge.js (PASS 755x1000 + 1180x820). KIT_REQUESTS row K-BADGE-HAOHUU present.
+- Wiring (jcooptimer): ready → ok ✓ · hold → pause ⏸ · busy/work → busy … · away → no badge + `.koff`; the private `.kctmf-b` / `.kctmf.koff` CSS is DELETED (no second look; consistency with every `.krailb`); portrait clipped inside the button (N3 cord gone).
+- Owner canon 06:30Z checked against shots (Fold 755x1000 + iPad 1180x820, both seats, scale 2, looked at 3×): green ✓ beside the icon when she is ready (st-host-fold-ready / st-host-ipad-ready, the «Hảo hữu đã sẵn sàng» notice sits LEFT of it, not over it); «…» while she works / is busy (hh-*-met, hh-*-stranger); grey picture + no badge when she is offline (st-host-fold-away / st-host-ipad-away, raised above the freeze panel); ⏸ amber while she holds (st-*-hold, above the hold panel). No long text; tap → partner sheet (unchanged, r2b). Countdown chip kept (16/11).
+- Note (non-blocking, keeper): at 10 px the ⏸ glyph draws as one white bar on the amber disc (zoom), not two; the owner's canon only names ✓ and «…»; keeper may swap the glyph for two drawn bars in §77b later.
+
+### Merges + gates
+Branch `review/hao-huu-rv2`: 0466ee43 + merge origin/main a3a65964 (475d23d1; assemble = main list + jhaohuu.js; KIT_REQUESTS rows of both kept) + merge f3353128 (90ccc476; CI/perf-test files only) + merge f13dc915 (44b3418d; assemble = main list + jhaohuu.js; index.html/sw.js rebuilt every time).
+| gate | on | result |
+|---|---|---|
+| quickcheck | 475d23d1 | PASS · open 1643 · old save ok · render 212/212, tab 397/421, buổi 1095/986 · core PASS |
+| quickcheck | 90ccc476 | run 1 FAIL perf only (buổi 3582 vs live 1102: runs 3582/3713/1708, random-life noise; game code = 475d23d1); run 2 PASS · buổi 1042/1568 · old save ok · core PASS |
+| kit-badge.js | 475d23d1 | PASS both sizes |
+| coop-haohuu (tt/nc, HH_DSF=2) | 475d23d1 | 319/319 ok |
+| coop-e2e | 475d23d1 | 92/92 passed |
+| coop-chat | 475d23d1 | ALL OK 55 checks |
+| role-parity.test.js (alone) | 475d23d1 | ALL PASS |
+| coop-haohuu | 1f08d99a (+ main 2bab70e1) | run 1 317/319: host Fold stranger, `#kntchip` caught over the icon for one frame; run 2 319/319. Probe (both seats × Fold/iPad × 4 notice lengths 19–82 chars): every PLACED chip keeps clear of icon + clock (slots bar / bar2 / hidden), so this is a ≤ 300 ms placement race before jnotice's 300 ms watch re-places the chip, not a lasting cover. Non-blocking; could be hardened later by adding `#kctmf` to the jnotice bar2 obstacles |
+| quickcheck | 44b3418d (+ main f13dc915) | run 1 FAIL perf only (buổi 3085 vs 1026); run 2 PASS buổi 1071/1398. Same-seed A/B (6 seeded lives, new vs LIVE, run alone): buổi medians ≈ 1668 vs 1690 ms, LIVE spikes 3640 / 4688 too → random-life noise, no branch cost (jhaohuu has no timers; jcooptimer work is co-op only) |
+| coop-e2e | 44b3418d, 1f08d99a | 92/92, 92/92 |
+| coop-haohuu + quickcheck | **b4aa7f42** (+ main e391b85f, which changed j61 / j79 used by fix A) | **319/319 ok** · **QUICKCHECK PASS** · open 1711 · old save ok · render 241/232, tab 514/491, buổi 1288/1257 · core PASS |
+Further merges: f3353128 (90ccc476), f13dc915 (44b3418d), 2bab70e1 (1f08d99a), e391b85f (b4aa7f42); every time assemble = main list + 'jhaohuu.js' after 'jstatus.js', index.html/sw.js rebuilt; no other conflict.
+
+**LAND READY hao-huu b4aa7f42** (review/hao-huu-rv2), FF of main **e391b85f**. Main then moved to 94cbe0cd (quest-rows: j72, j79, jk2b, jnroad*, KIT.md): the land merge is mechanical (assemble = main list + 'jhaohuu.js' after 'jstatus.js'; index.html/sw.js = rebuild). Because j79 (kitName, used by the sheet title) changed again, re-run `COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <out>` after that merge.
+Laws checked: 1 two-way (both seats see each other the same way) · 4 one core (numbers from game state) · 6b real people (the partner's own entity, knowledge rule per person) · 7 wording (no %, cổ trang; no status words on screen) · 9 kit first (kit .krailb + keeper §77b kitStBadge, no private badge CSS) · 11 whole group (every name text + labels guarded; badge on every state) · 12 two devices (Fold + iPad, both seats, looked at 3×) · 14 canon overwrite (§69.2 in place). Older owner rules on the same element kept: 16/11 countdown chip, OD:L1060 «Hảo hữu của ta», OD:L165 stranger, 21/11 05:05Z fixed top bar.
+CDN review folders wiped: rv-hao-huu, rv-hao-huu-2, hao-huu.
