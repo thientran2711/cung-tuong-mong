@@ -837,7 +837,6 @@ def store_check(pf, prompt, args):
     store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
     store=re.sub(r"(?:,|;) a sheer silk shawl(?=[;.,])","",store)   # G36 (owner L1446): the store shawl words are optional (builder xuân/đông drop them)
     _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
-    store=master_common.b27_store_swap(store,prompt)   # BUILDFIX4 B27/B28 (owner L2099/L2100): heavy-brocade store words read as the light words when the prompt has them
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -1406,9 +1405,6 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             if x.get("negation", "yes") == "yes" and negated(text, m.start(), m.end()): continue
             ctx = text[max(0, m.start() - 50):m.end() + 30]
             fails.append((x["id"], "BANNED", f"{x['title']}: …{ctx}…")); break
-    for m in master_common.B27_RX.finditer(text):   # BUILDFIX4 B27 (owner L1524 'brocade = the lightest, never thick/stiff' + L2100): heavy-brocade words FAIL (negated clauses pass)
-        if negated(text, m.start(), m.end()): continue
-        fails.append(("B27", "HEAVY BROCADE", f"thick/heavy/stiff brocade (owner B27 L1524 + L2100: the lightest gấm only): …{text[max(0, m.start()-40):m.end()+30]}…")); break
     for g in grey_hits(text)[:3]:   # B19 (BW4): flag (or FAIL when B19_FAIL)
         (fails if B19_FAIL else warns).append(("B19", "GREY", f"grey outfit colour (owner Lượt 591, NO GREY): …{g}…"))
     return fails, warns, found

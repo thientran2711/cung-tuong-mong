@@ -400,7 +400,7 @@ def b29_alts(scope, high=False, doan=False, winter=False):
     if high and str(scope).startswith("trieu"): return [B29_C_GAM, TRIEU_GAM]   # BUILDFIX5 owner L2122: triều phục t6-t8 = the lightest-gấm S28 sentence in the brocade slot
 def b29_alts(scope, high=False, doan=False, winter=False):
     """B29: the alternative fabric sentences accepted for this scope (empty = only the old slot sentence)."""
-    if high: return [B29_C_GAM] + ([B27_FABRIC] if B27_FABRIC not in (B29_C_GAM, BROCADE) else [])   # BUILDFIX4: + the B27 short light-gấm form
+    if high: return [B29_C_GAM]
     if doan: return [] if winter else [B29_B_LIGHT]
     if scope in B29_A_SCOPES: return [B29_A_HEAVY] + ([] if winter else [B29_A_LIGHT])
     if scope in B29_S_SCOPES: return [B29_S_CREPE]
