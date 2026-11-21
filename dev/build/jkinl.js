@@ -11,19 +11,27 @@
    The selection is remembered per grid (KINL.sel[key] = item id) and re-captured on every render, so the strip always shows the live state (Đeo → Tháo, sold item → gone). */
 const KINL={sel:{},cap:null};
 function kinlId(x){try{if(x.g)return(x.g.wk?"w":"i")+x.g.i+":"+(x.g.k||"");if(x.mme!=null)return"m"+x.mme;if(x.k)return"k"+x.k+":"+(x.ix!=null?x.ix:"");}catch(e){}return"t"+(x.tip||x.name||"")}
-function kinlIsSel(key,x){return KINL.sel[key]!=null&&KINL.sel[key]===kinlId(x)}
+function kinlIsSel(key,x){const v=KINL.sel[key];return v!=null&&typeof v==="string"&&v===kinlId(x)}
 function kinlCapture(o,x){KINL.cap={};try{o.onPick(x)}catch(e){console.error("kinlCapture",e)}const c=KINL.cap;KINL.cap=null;return c&&c.spec?c.spec:null}
-function kinlStrip(o){const key=o.key||"bag";let spec=null;const id=KINL.sel[key];
- if(id!=null){const x=(o.items||[]).find(y=>kinlId(y)===id);spec=x?kinlCapture(o,x):null;if(!spec)delete KINL.sel[key]}
+/* the selection is an item id (bag tile) or {slot:i} (a "Bên mình" equipment slot of the same panel: the same strip shows it) */
+function kinlSlotSel(key,i){const v=KINL.sel[key];return!!v&&typeof v==="object"&&v.slot===i}
+function kinlSlotReg(o){return typeof KEQ==="object"&&KEQ.reg&&KEQ.reg[o.key]}
+function kinlSpec(o){const key=o.key||"bag",v=KINL.sel[key];if(v==null)return null;
+ if(typeof v==="object"){const q=kinlSlotReg(o),x=q&&q.slots&&q.slots[v.slot];return x&&q.onPick?kinlCapture(q,x):null}
+ const x=(o.items||[]).find(y=>kinlId(y)===v);return x?kinlCapture(o,x):null}
+function kinlStrip(o){const key=o.key||"bag";let spec=kinlSpec(o);if(!spec)delete KINL.sel[key];
  const body=spec?`<div class="kinlpic">${spec.itemPic||""}</div><div class="kinlinfo"><b class="kinln">${spec.title||""}</b>${spec.sub?`<span class="kinlsub">${spec.sub}</span>`:""}${spec.html||""}</div>`
   :`<div class="kinlempty">Chạm một món để xem.</div>`;
  return `<div class="kidet kidet-inline kinldet" data-kinl="${key}">${body}${o.sum?`<div class="kinlchips">${o.sum}</div>`:""}</div>`}
-/* tap = select + swap the strip in place (no re-render of the grid: the page keeps its scroll and the tab row stays put) */
-function kinlPick(o,x){const key=o.key||"bag";KINL.sel[key]=kinlId(x);const spec=kinlCapture(o,x);
- if(!spec){delete KINL.sel[key];o.onPick(x);return}
- const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
- document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=e.dataset.kinvi!=null&&(o.items||[])[+e.dataset.kinvi]===x;e.classList.toggle("kitem-sel",on);if(on)e.setAttribute("aria-pressed","true");else e.removeAttribute("aria-pressed")});
+function kinlPaint(o){const key=o.key||"bag";const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
+ const v=KINL.sel[key];document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=typeof v==="string"&&e.dataset.kinvi!=null&&kinlId((o.items||[])[+e.dataset.kinvi]||{})===v;e.classList.toggle("kitem-sel",on)});
+ document.querySelectorAll(`[data-keqk="${key}"][data-keqi]`).forEach(e=>e.classList.toggle("kitem-sel",!!v&&typeof v==="object"&&+e.dataset.keqi===v.slot));
  try{if(typeof sfx==="function")sfx("tap")}catch(e){}try{if(typeof kitFix==="function")kitFix(document.getElementById("panel"))}catch(e){}try{kitInvFit()}catch(e){}}
+/* tap a bag tile = select + swap the strip in place (the grid is not re-rendered: scroll and tab row stay put) */
+function kinlPick(o,x){const key=o.key||"bag";KINL.sel[key]=kinlId(x);if(!kinlCapture(o,x)){delete KINL.sel[key];o.onPick(x);return}kinlPaint(o)}
+/* tap a "Bên mình" slot of the same panel: same strip. Returns false when the page has no strip (the slot keeps its own pop-up). */
+function kinlPickSlot(q,i){const o=KINV.reg[q.key];if(!o||!o.inline||!document.querySelector(`.kinldet[data-kinl="${q.key}"]`))return false;
+ const x=q.slots&&q.slots[i];if(!x)return false;KINL.sel[q.key]={slot:i};if(!kinlCapture(q,x)){delete KINL.sel[q.key];return false}kinlPaint(o);return true}
 /* the capture: an info pop-up built while a pick is captured goes to the strip, nowhere else */
 (function(){if(typeof kitModal!=="function")return;const k0=kitModal;kitModal=function(spec){if(KINL.cap&&spec&&spec.kind==="info"&&!KINL.cap.spec){KINL.cap.spec=spec;return null}return k0.apply(this,arguments)};window.kitModal=kitModal})();
 (function(){const st=document.createElement("style");st.id="kinl-css";st.textContent=`

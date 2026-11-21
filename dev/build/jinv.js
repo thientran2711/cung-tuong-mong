@@ -200,19 +200,19 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    Under each: the slot name + what is in it (or "trống"). The header carries the bonus summary of everything worn. Tap → onPick(slot). */
 const KEQ={reg:{}};
 function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o.slots||[];
- const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
+ const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`});
  /* col = the VERTICAL "Đang mang" column beside the bag: slot picture + the slot name (small) under it; the item name, chips and note live in the tap panel / tooltip */
  if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql"${x.lc?` style="color:${x.lc}"`:""}>${x.label}</b>${x.info?`<span class="keqpi">${x.info}</span>`:""}</div>`).join("")+`</div></div>`;
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
-  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
+  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
 /* ROW ALIGNMENT (owner 15/11 05:45Z OCD rule; review/pets-fix): each slot is 4 fixed rows on a CSS subgrid — picture · name · chips · note line
    (.keql2: "theo hầu · Khỏe", "còn N tháng", ⚠) — so across a row of slots the names, the chip lines and the note lines sit on one line even when
    one slot has a chip and its neighbour has none (was: the followed pet's status line 17 px lower). */
 function keqMiniSplit(m){m=m||"";const i=m.indexOf('<span class="keql2">');const chips=i<0?m:m.slice(0,i),note=i<0?"":m.slice(i);
  return `<span class="keqfx">${chips}</span><span class="keqnote">${note}</span>`}
-document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick)o.onPick(x)},true);
+document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick){if(typeof kinlPickSlot==="function"&&kinlPickSlot(Object.assign({key:s.dataset.keqk},o),+s.dataset.keqi))return;o.onPick(x)}},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.keqi!=null){e.preventDefault();e.target.click()}});
 (function(){const st=document.createElement("style");st.id="keq-css";st.textContent=`
 .keq{border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf4e7;padding:8px 10px 10px;margin:4px 0 6px}

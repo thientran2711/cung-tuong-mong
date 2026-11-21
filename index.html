@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"67eb7b98+","t":"2026-11-21T02:38Z","c":"Tu trang Viec: act cards get their pictures (code-side alias for 6 acts + kpanec on the Viec pane); mark #23","b":"4cab2ffe05cf","h":[{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"}]};
+window.CTM_BI={"s":"1c2f4364+","t":"2026-11-21T02:42Z","c":"KIT 70.6 inline item strip under the bag grid (no pop-up): kinlStrip/kinlPick, chip column; Tu trang Tui do uses it","b":"93aa6b7b9ce8","h":[{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -40965,19 +40965,19 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    Under each: the slot name + what is in it (or "trống"). The header carries the bonus summary of everything worn. Tap → onPick(slot). */
 const KEQ={reg:{}};
 function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o.slots||[];
- const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
+ const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`});
  /* col = the VERTICAL "Đang mang" column beside the bag: slot picture + the slot name (small) under it; the item name, chips and note live in the tap panel / tooltip */
  if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql"${x.lc?` style="color:${x.lc}"`:""}>${x.label}</b>${x.info?`<span class="keqpi">${x.info}</span>`:""}</div>`).join("")+`</div></div>`;
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
-  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
+  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
 /* ROW ALIGNMENT (owner 15/11 05:45Z OCD rule; review/pets-fix): each slot is 4 fixed rows on a CSS subgrid — picture · name · chips · note line
    (.keql2: "theo hầu · Khỏe", "còn N tháng", ⚠) — so across a row of slots the names, the chip lines and the note lines sit on one line even when
    one slot has a chip and its neighbour has none (was: the followed pet's status line 17 px lower). */
 function keqMiniSplit(m){m=m||"";const i=m.indexOf('<span class="keql2">');const chips=i<0?m:m.slice(0,i),note=i<0?"":m.slice(i);
  return `<span class="keqfx">${chips}</span><span class="keqnote">${note}</span>`}
-document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick)o.onPick(x)},true);
+document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick){if(typeof kinlPickSlot==="function"&&kinlPickSlot(Object.assign({key:s.dataset.keqk},o),+s.dataset.keqi))return;o.onPick(x)}},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.keqi!=null){e.preventDefault();e.target.click()}});
 (function(){const st=document.createElement("style");st.id="keq-css";st.textContent=`
 .keq{border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf4e7;padding:8px 10px 10px;margin:4px 0 6px}
@@ -52664,19 +52664,27 @@ window.kitItemRef=kitItemRef;window.kitItemDetail=kitItemDetail;window.kitItemDe
    The selection is remembered per grid (KINL.sel[key] = item id) and re-captured on every render, so the strip always shows the live state (Đeo → Tháo, sold item → gone). */
 const KINL={sel:{},cap:null};
 function kinlId(x){try{if(x.g)return(x.g.wk?"w":"i")+x.g.i+":"+(x.g.k||"");if(x.mme!=null)return"m"+x.mme;if(x.k)return"k"+x.k+":"+(x.ix!=null?x.ix:"");}catch(e){}return"t"+(x.tip||x.name||"")}
-function kinlIsSel(key,x){return KINL.sel[key]!=null&&KINL.sel[key]===kinlId(x)}
+function kinlIsSel(key,x){const v=KINL.sel[key];return v!=null&&typeof v==="string"&&v===kinlId(x)}
 function kinlCapture(o,x){KINL.cap={};try{o.onPick(x)}catch(e){console.error("kinlCapture",e)}const c=KINL.cap;KINL.cap=null;return c&&c.spec?c.spec:null}
-function kinlStrip(o){const key=o.key||"bag";let spec=null;const id=KINL.sel[key];
- if(id!=null){const x=(o.items||[]).find(y=>kinlId(y)===id);spec=x?kinlCapture(o,x):null;if(!spec)delete KINL.sel[key]}
+/* the selection is an item id (bag tile) or {slot:i} (a "Bên mình" equipment slot of the same panel: the same strip shows it) */
+function kinlSlotSel(key,i){const v=KINL.sel[key];return!!v&&typeof v==="object"&&v.slot===i}
+function kinlSlotReg(o){return typeof KEQ==="object"&&KEQ.reg&&KEQ.reg[o.key]}
+function kinlSpec(o){const key=o.key||"bag",v=KINL.sel[key];if(v==null)return null;
+ if(typeof v==="object"){const q=kinlSlotReg(o),x=q&&q.slots&&q.slots[v.slot];return x&&q.onPick?kinlCapture(q,x):null}
+ const x=(o.items||[]).find(y=>kinlId(y)===v);return x?kinlCapture(o,x):null}
+function kinlStrip(o){const key=o.key||"bag";let spec=kinlSpec(o);if(!spec)delete KINL.sel[key];
  const body=spec?`<div class="kinlpic">${spec.itemPic||""}</div><div class="kinlinfo"><b class="kinln">${spec.title||""}</b>${spec.sub?`<span class="kinlsub">${spec.sub}</span>`:""}${spec.html||""}</div>`
   :`<div class="kinlempty">Chạm một món để xem.</div>`;
  return `<div class="kidet kidet-inline kinldet" data-kinl="${key}">${body}${o.sum?`<div class="kinlchips">${o.sum}</div>`:""}</div>`}
-/* tap = select + swap the strip in place (no re-render of the grid: the page keeps its scroll and the tab row stays put) */
-function kinlPick(o,x){const key=o.key||"bag";KINL.sel[key]=kinlId(x);const spec=kinlCapture(o,x);
- if(!spec){delete KINL.sel[key];o.onPick(x);return}
- const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
- document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=e.dataset.kinvi!=null&&(o.items||[])[+e.dataset.kinvi]===x;e.classList.toggle("kitem-sel",on);if(on)e.setAttribute("aria-pressed","true");else e.removeAttribute("aria-pressed")});
+function kinlPaint(o){const key=o.key||"bag";const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
+ const v=KINL.sel[key];document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=typeof v==="string"&&e.dataset.kinvi!=null&&kinlId((o.items||[])[+e.dataset.kinvi]||{})===v;e.classList.toggle("kitem-sel",on)});
+ document.querySelectorAll(`[data-keqk="${key}"][data-keqi]`).forEach(e=>e.classList.toggle("kitem-sel",!!v&&typeof v==="object"&&+e.dataset.keqi===v.slot));
  try{if(typeof sfx==="function")sfx("tap")}catch(e){}try{if(typeof kitFix==="function")kitFix(document.getElementById("panel"))}catch(e){}try{kitInvFit()}catch(e){}}
+/* tap a bag tile = select + swap the strip in place (the grid is not re-rendered: scroll and tab row stay put) */
+function kinlPick(o,x){const key=o.key||"bag";KINL.sel[key]=kinlId(x);if(!kinlCapture(o,x)){delete KINL.sel[key];o.onPick(x);return}kinlPaint(o)}
+/* tap a "Bên mình" slot of the same panel: same strip. Returns false when the page has no strip (the slot keeps its own pop-up). */
+function kinlPickSlot(q,i){const o=KINV.reg[q.key];if(!o||!o.inline||!document.querySelector(`.kinldet[data-kinl="${q.key}"]`))return false;
+ const x=q.slots&&q.slots[i];if(!x)return false;KINL.sel[q.key]={slot:i};if(!kinlCapture(q,x)){delete KINL.sel[q.key];return false}kinlPaint(o);return true}
 /* the capture: an info pop-up built while a pick is captured goes to the strip, nowhere else */
 (function(){if(typeof kitModal!=="function")return;const k0=kitModal;kitModal=function(spec){if(KINL.cap&&spec&&spec.kind==="info"&&!KINL.cap.spec){KINL.cap.spec=spec;return null}return k0.apply(this,arguments)};window.kitModal=kitModal})();
 (function(){const st=document.createElement("style");st.id="kinl-css";st.textContent=`
@@ -85876,7 +85884,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4cab2ffe05cf";window.CTM_BUILD=BUILD;
+const BUILD="93aa6b7b9ce8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
