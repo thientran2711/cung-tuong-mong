@@ -1244,3 +1244,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~08:37Z: SENT L1871 Hán PHISIMPLE 8aiDRlmIrU vs Phi CqnIKlAEEy (55 cr). 3 bands not readable. Next Lượt 1872.
 #25 ~08:40Z: OWNER L1874: m18 maids OK, m09 wrong. G59 NEW: NO túi thơm (sachet) in ANY prompt (like G57 ngọc bội) → NGOCBOI1 global sweep + gate; MAIDFIX3 in maid _L1869. Pending owner answer: HAN5 yoke choice (a/b/c). Next Lượt 1875.
 #25 ~08:42Z: OWNER L1876 angry again re túi thơm on m18 sheet. G59 overrides G43 (L1608 'maids may wear sachet'). NGOCBOI1 sweeping maid files first. Next Lượt 1877.
+#25 ~08:46Z: MAIDFIX3 L1869 colour fix 0332b9c31 (9 m09 + m18 mama a51 wrong → fixed; m18 rest right). Files still had túi thơm → VE7 HOLD; MAIDFIX3 strips sachets from all 20 maid files, then m09_tam sample @55. Answered owner L1878 (Đáp ứng pin = gen variation; t6–t8 thu = 'thick brocade', not lightest — awaiting owner yes to change).
