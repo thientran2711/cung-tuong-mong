@@ -1,4 +1,4 @@
-/* mg-craft shots — node dev/test/mg-craft-shots.js <outDir OUTSIDE the repo> [dev/index.html] [--kinds=theu,kim]
+/* mg-craft shots — node dev/test/mg-craft-shots.js <outDir OUTSIDE the repo> [dev/index.html] [--kinds=td_cong,theu,kim]
    For each craft kind on its new engine, on Fold 755x1000@2 and iPad 1180x820@2: 1 rules screen (kgReady), 2 guided round (ghost hand), 3 play mid-board,
    4 result. Shots never go in git (OD 16/11 18:50Z): write them to scratch, look at them, upload to CDN img/_review/mg-craft/ for the reviewer. */
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
@@ -6,7 +6,7 @@ const A=process.argv.slice(2);const pos=A.filter(a=>!a.startsWith('--'));const o
 const URL0=pos[1]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const kk=(A.find(a=>a.startsWith('--kinds='))||'').split('=')[1];
 const DEV=[['fold',755,1000],['ipad',1180,820]];
-const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
+const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
 (async()=>{const b=await chromium.launch();
  for(const [dn,w,h] of DEV){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:2});const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -14,7 +14,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
   await p.waitForTimeout(2500);
   /* the welcome chest / reward stage of a new game is not part of these shots */
   await p.evaluate(()=>{try{kitReward=()=>{};kmPush=()=>{}}catch(e){}document.querySelectorAll('#kmrew').forEach(e=>{const o=e.closest('.kmstage')||e;o.remove()});document.querySelectorAll('.kmstage,.km-stage').forEach(e=>e.remove())});
-  const kinds=await p.evaluate(()=>Object.keys(KG82_CRAFT).filter(k=>crOn(k)));
+  const kinds=await p.evaluate(()=>Object.keys(KG82_CRAFT).filter(k=>crOn(k)).concat(['theu']));/* + Thêu «Nhớ mẫu thêu» (j82 pattern, kept by the owner 21/11 ~01:05Z) */
   for(const k of kinds){if(kk&&!kk.split(',').includes(k))continue;
    const shot=async n=>{await p.screenshot({path:`${out}/${k}-${dn}-${n}.png`});console.log(`${out}/${k}-${dn}-${n}.png`)};
    await p.evaluate(s=>{try{kg82Close()}catch(e){}Q.length=0;(0,eval)(s)},SRC0(k));await p.waitForTimeout(1200);await shot('1rules');
