@@ -26,3 +26,6 @@ Drawn "pendants" came from jade clasp on silk cord + tú cầu "jade tassels" + 
 - maid7 non-prod + prod/base stripped (maid7/prod done by MAIDFIX3 63f8a93c5); maid7/make7_gpt.py G43 swaps now delete instead of adding a sachet.
 - ART_RULES: G59 added, G43 marked REPLACED.
 - Not touched: t8-prompt-B/golden_low, owner-copy, _retired, sachet-tryon dirs, approved/proof (history); item_spec.py/ITEM_ART.md item-art catalogue ("tuithom", "huong" Túi hương, item-rank-age.md) are game ITEM pictures, not people prompts — foreman to decide. keep_check --all PASS.
+
+## G60 bow centred (owner L1890)
+dev/art/strip_bow.py adds "at the centre front" to every sash/bow/knot lacking a position (115 live consort files, not maid7, not *ha_DUONG* = HADUONG1); no prompt had explicit side-bow words. check_store G60 `g60_fails` FAILs side/off-centre/hip bow, knot, sash words (negation passes; hair ribbons not matched), 5 selftests. ART_RULES G60 added. keep_check PASS.

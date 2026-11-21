@@ -28,3 +28,4 @@ allow: the outer robe is held in only by the sash   # boilerplate trimmed to fit
 allow: never buttoned down the front   # boilerplate trimmed to fit 10 000 (duplicate words) — HAN2
 allow: "Mùa Xuân · Thiết kế thời Hán · Thường tại · Khúc cư hai lớp   # owner L1725: collar CLOSED at the neck (open-off-neck reads undressed/sleepwear), real Hán khúc cư wrap + shoulder line, complete dressed look — HAN2
 allow: sa hoa nhỏ + lụa"   # owner L1725: collar CLOSED at the neck (open-off-neck reads undressed/sleepwear), real Hán khúc cư wrap + shoulder line, complete dressed look — HAN2
+allow: the ivory white sash tied at the centre front of the waist   # G60 owner L1890: bow/sash centred at the front (position words only)

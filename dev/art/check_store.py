@@ -1093,6 +1093,15 @@ def g59_fails(text):
     m = G59_RX.search(text)
     return [("G59", "SACHET", f"no sachet / túi thơm in any prompt (owner L1874): …{text[max(0, m.start()-50):m.end()+30]}…")] if m else []
 
+# G60 BOW CENTRED (owner L1890 21/11, verbatim: "Cái nơ không phải là nơ lệch qua một bên mà phải là cái nơ ngay giữa ... sửa lại cho tất cả các bậc, tất cả các mùa"):
+# every waist / sash bow or knot is at the CENTRE front: words that put a bow / knot / ribbon / sash to one side, off-centre, at a hip, left/right = FAIL (negated "never to one side" passes).
+G60_RX = re.compile(r"\b(?:bows?|knots?|sash(?:es)?)\b[^.;:]{0,30}\b(?:to one side|(?:at|on) (?:the|her|one) (?:left|right|side)|at the side|off[- ]?cent(?:re|er)|lopsided|slanted|crooked|asymmetric\w*)\b|\b(?:left|right|side|off[- ]?cent(?:re|er)(?:ed)?|lopsided|crooked)(?:-side)? (?:hip )?(?:bows?|knot)\b|\b(?:bows?|knot)\b[^.;:]{0,20}\bhip\b", re.I)
+def g60_fails(text):
+    for m in G60_RX.finditer(text):
+        if re.search(r"\b(no|never|not|without)\b[^.;,]*$", text[max(0, m.start()-25):m.start()].lower()): continue
+        return [("G60", "BOW NOT CENTRED", f"the bow / sash knot must be at the CENTRE front, never to one side (owner L1890): …{text[max(0, m.start()-30):m.end()+30]}…")]
+    return []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1106,6 +1115,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += fruit_fails(text, scope, pid)
     fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
+    fails += g60_fails(text)   # G60 bow centred (owner L1890)
     fails += g59_fails(text)   # G59 no sachet anywhere (owner L1874)
     fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
     fails += g45_fails(text)   # G45 jade pendant visible: no cloth over the waist (owner L1622)
@@ -1207,6 +1217,8 @@ def selftest():
         if bool(g57_fails(norm(t))) != bool(want): print("G57 SELFTEST", want, t); bad += 1
     for t, want in [("a sash with a small embroidered silk fragrant sachet (túi thơm) hanging from it.", 1), ("she holds a sachet of silk brocade", 1), ("a hà bao at the waist", 1), ("a plain embroidered silk sash tied in a bow.", 0)]:   # G59 (owner L1874)
         if bool(g59_fails(norm(t))) != bool(want): print("G59 SELFTEST", want, t); bad += 1
+    for t, want in [("a ribbon bow tied to one side at the waist.", 1), ("the sash knotted at her left hip.", 1), ("an off-centre bow", 1), ("a bow tied at the centre front, never to one side.", 0), ("sash tied flat at the CENTRE front, NO bow", 0)]:   # G60 (owner L1890)
+        if bool(g60_fails(norm(t))) != bool(want): print("G60 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),

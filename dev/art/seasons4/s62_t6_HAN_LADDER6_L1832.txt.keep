@@ -38,3 +38,4 @@ allow: hai lớp áo cổ rộng"   # owner L1766-L1773 + L1794/L1799/L1805/L180
 allow: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V   # owner L1831/L1832 (via Foreman C #23): LADDER6 collar fix = wide flat V to the shoulders + THREE separate unbroken bands; yoke outside/below the bands
 allow: THREE stacked WIDE gold-edged collar bands in the wide V   # owner L1831/L1832 (via Foreman C #23): LADDER6 collar fix = wide flat V to the shoulders + THREE separate unbroken bands; yoke outside/below the bands
 allow: and a broad embroidered waist sash tied in a flat knot with the two silk ends tied flat   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
+allow: and a broad embroidered waist sash tied in a flat knot at the centre front with the two silk ends tied flat   # G60 owner L1890: bow/sash centred at the front (position words only)
