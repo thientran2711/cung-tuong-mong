@@ -978,3 +978,4 @@ NEWACCT#14 ~01:18Z: LADDER1 b600e6e: master_common.OUTER_IN (G40) + check_store 
 NEWACCT#14 ~01:22Z: OWNER L1597 corrects G41: thu shift-down — t1 = CURRENT thu Thường tại prompt (not mẫu C), t2 = current Quý nhân, t3 = Quý nhân 2 panels; each tier keeps own density → G41 set, DESIGN18 told. OWNER L1598: Phi cape keeps pearl net + drop fringe → KHO2 told.
 NEWACCT#14 ~01:25Z: CHECK1 71c9de9 xuân Hán t1–t3 v3 PASS ×3 → GEN1 3 drafts 165 cr (L1599).
 NEWACCT#14 ~01:28Z: LADDER1 1724f9f OUTER_IN shortened 100 ch; thu t4 COMOId + t6 COMOIe PASS (G40); t7 v8d gate FAIL (old G23/E1/S19 faults, COLORFIX1.md:74); t8 v10c can't fit +clause (10 073) → t7/t8 need trims (A38 / owner) later. LADDER1 idle.
+NEWACCT#14 ~01:32Z: DESIGN18 ca6c3fd thu t1–t3 v4 (G41 shift-down per L1597, own density, OUTER_IN) PASS gates → CHECK1 → GEN1 3 drafts 165 cr (L1600). CHECK1 27c9d2e xuân v3 PASS after OUTER_IN shortening.
