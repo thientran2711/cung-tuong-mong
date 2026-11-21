@@ -95,3 +95,4 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - No colour is left over: the only "pink" is "pinkish-white" skin. Main = deep rose on robe/skirt (sleeves on nhất); secondary = powder blue on the jacket/vest. No markers.
 - keep PASS ×3. store mama a18: nhất PASS; tam/nhị S01+S32 = same as their bases.
 - 04:45Z (Foreman #18 order): restored the glued thu_comoi s62_t4_THU_COMOIk + s62_t5_THU_COMOIj (+ .keep) from be1ec9e; keep_check --all = 386 PASS.
+- 04:58Z JOB L1689 try-on page done (Foreman #18): https://claude.ai/artifact/1Vq6sMKho8gTbHYi1DdfzN — details in PAL3.md §L1689 RESULT. 0 cr.

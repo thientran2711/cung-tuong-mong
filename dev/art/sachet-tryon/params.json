@@ -1,0 +1,11 @@
+{
+ "tam": {"gen": "KLpEwy4kqp", "label": "Tam đẳng cung nữ · KLpEwy4kqp (đã duyệt)", "anchor": [466, 538], "scale": 0.44,
+  "zoom": [430, 640], "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa eo (dưới hộp lược). Không xoá, không vẽ đè.",
+  "front": [[430,500],[515,500],[512,540],[500,551],[488,556],[470,557],[456,554],[446,548],[430,547]]},
+ "nhi": {"gen": "6Ab7cMSiJO", "label": "Nhị đẳng cung nữ · 6Ab7cMSiJO (bản nháp)", "anchor": [472, 530], "scale": 0.44,
+  "zoom": [430, 620], "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa eo (dưới phong thư). Không xoá, không vẽ đè.",
+  "front": [[435,480],[525,480],[522,520],[510,530],[495,535],[487,542],[435,542]]},
+ "nhat": {"gen": "4RFSnTa9Aa", "label": "Nhất đẳng cung nữ · 4RFSnTa9Aa (đã duyệt)", "anchor": [508, 548], "scale": 0.44,
+  "zoom": [450, 650], "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa (dưới khăn tay). Không xoá, không vẽ đè.",
+  "front": [[450,495],[530,495],[528,540],[515,556],[507,566],[502,600],[495,640],[450,640]]}
+}

@@ -1,0 +1,95 @@
+{
+ "tam": {
+  "gen": "KLpEwy4kqp",
+  "label": "Tam đẳng cung nữ · KLpEwy4kqp (đã duyệt)",
+  "anchor": [
+   466,
+   538
+  ],
+  "scale": 0.44,
+  "zoom": [
+   430,
+   640
+  ],
+  "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa eo (dưới hộp lược). Không xoá, không vẽ đè.",
+  "base": "tam_base.webp",
+  "W": 752,
+  "H": 1344,
+  "ngoc": {
+   "src": "tam_ngoc.png",
+   "x": 440,
+   "y": 554,
+   "w": 57,
+   "h": 212
+  },
+  "tui": {
+   "src": "tam_tui.png",
+   "x": 433,
+   "y": 554,
+   "w": 71,
+   "h": 212
+  }
+ },
+ "nhi": {
+  "gen": "6Ab7cMSiJO",
+  "label": "Nhị đẳng cung nữ · 6Ab7cMSiJO (bản nháp)",
+  "anchor": [
+   472,
+   530
+  ],
+  "scale": 0.44,
+  "zoom": [
+   430,
+   620
+  ],
+  "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa eo (dưới phong thư). Không xoá, không vẽ đè.",
+  "base": "nhi_base.webp",
+  "W": 752,
+  "H": 1344,
+  "ngoc": {
+   "src": "nhi_ngoc.png",
+   "x": 446,
+   "y": 541,
+   "w": 57,
+   "h": 217
+  },
+  "tui": {
+   "src": "nhi_tui.png",
+   "x": 439,
+   "y": 541,
+   "w": 71,
+   "h": 217
+  }
+ },
+ "nhat": {
+  "gen": "4RFSnTa9Aa",
+  "label": "Nhất đẳng cung nữ · 4RFSnTa9Aa (đã duyệt)",
+  "anchor": [
+   508,
+   548
+  ],
+  "scale": 0.44,
+  "zoom": [
+   450,
+   650
+  ],
+  "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa (dưới khăn tay). Không xoá, không vẽ đè.",
+  "base": "nhat_base.webp",
+  "W": 752,
+  "H": 1344,
+  "ngoc": {
+   "src": "nhat_ngoc.png",
+   "x": 485,
+   "y": 553,
+   "w": 54,
+   "h": 223
+  },
+  "tui": {
+   "src": "nhat_tui.png",
+   "x": 475,
+   "y": 552,
+   "w": 71,
+   "h": 224
+  }
+ }
+}
