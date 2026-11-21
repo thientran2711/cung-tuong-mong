@@ -23,3 +23,10 @@ keep_check --all: 405 sidecars PASS. check_store --scope maid --age a18 --refs s
 - test11_{tam,nhat}_thancan_L1725 = the test11 maid prompts with only powder blue ↔ deep rose swapped.
 - Nhị: WAITING for the owner's pick of a base (dt4ZloSXSL / 6Ab7cMSiJO / Lw8btUtswO).
 - Gates: keep_check --all 409 PASS; check_store maid a18 ×4 PASS; 6.9–8.5k chars.
+
+## JOB 2b — owner L1728 corrects K30 (0 gens)
+- K30 updated (rule.py set, Lượt 1728): borders only (collar, cuffs of BOTH sleeves, hem bands, SKIRT HEM); NO body embroidery; skirt hem density tam very little < nhị more < nhất more again, always small; front bow every maid.
+- test11_tam_L1725 rewritten: + VERY sparse tiny-flower skirt-hem band, no body embroidery. test11_nhat_L1725 rewritten: nhị border style DENSER, skirt hem densely small flowers, body plain.
+- NEW test11_nhi_L1725 (base test8_nhi_L1685 = Lw8btUtswO, "C"): borders only (collar, outer half-sleeve AND inner long-sleeve cuffs, jacket hem, skirt-hem small-flower band fuller than tam); the "few small flower sprays on the jacket" removed (no body embroidery); + front bow.
+- test11_{tam,nhi,nhat}_thancan_L1725 = colour swap of the above.
+- keep_check --all 423 PASS; check_store maid a18 ×6 PASS; 6.9–8.5k chars.
