@@ -119,6 +119,15 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   let st=-1;while(Date.now()-t0<lim){await clear(A);const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
   ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK guest holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+ /* 4b the guest misses the host's final word of the night (its "fin" lost on the way: a dropped socket, a sleeping phone). The host ended its day
+    right after fin and runs ahead while the merged week waits for her: she asks again (jnf ask), the host — already past that day — sends that
+    day's fin again as it was (jnf again / S.nfLast) → both reach the next week (NLC #10: before, the host answered only for its CURRENT day = stall) */
+ for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+ if(await toNight('4b')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);
+  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;COOP.rxWrap=function(go,m){if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  for(const o of [A,B]){await clear(o);ok(await isRd(o)||await press(o),'4b: '+o.name+' presses')}
+  await merged('4b',w0,90000);ok(await B.p.evaluate(()=>window.__fdrop===1),'4b: the guest really missed the host\'s fin once');
+  await B.p.evaluate(()=>{COOP.rxWrap=window.__rx0;delete window.__rx0})}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);
   await B.p.close();await until(A,()=>COOP.frozen,null,60000);await join(B,code);
