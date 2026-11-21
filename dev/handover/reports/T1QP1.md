@@ -90,3 +90,4 @@ PROPOSED (words only, needs #25/owner yes): (1) "…the upper tier appliquéd ON
   "the upper tier appliquéd ON the lower, which shows only as a thin scalloped edge, never two stacked layers," → "the upper tier appliquéd ON a slightly larger lower tier whose scalloped edge clearly shows below it as a second row,". Captions "… L1879b". keep + store PASS (9 967 / 9 966 chars). túi thơm/sachet/pouch: 0.
 - Thu sent to VE9 @55 (after its hạ t1–t3); xuân NOT drawn.
 - Owner L1880 (via #25): chest bead/pearl strands WANTED for t6–t8; only necklaces + pendants/discs banned. L1879/L1879b 'pearls only' kept as is.
+- RESULT L1879b thu (VE9, 55 cr): jUobvI7LD0 (old aFGoYlufSh), sheet review-sheets/thu_qp_vankien2_L1879b_VE9.png: flat on shoulders ✓, second scalloped row visible (better, not crisp), big tassels ✓, pearls only ✓. Xuân L1879b ready, not drawn (waits owner verdict).
