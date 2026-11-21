@@ -28,14 +28,16 @@ const cdn={};const TOPS={};
    window.tabGo=t=>{Q.length=0;document.getElementById('modal').hidden=true;tab=t;try{K3SH.home=false}catch(e){};render();try{k3Shell()}catch(e){};return 'ok'}},process.env.NOMEET==='1');
   await p.waitForTimeout(1500);
   const DEFAULT_SCENES='pop-maid,tab-rv,tab-staff,tab-kin';
-  for(const sc of (SCN||DEFAULT_SCENES).split(",")){const go=await p.evaluate(SCENES[sc]);if(go==='none'){console.log(wh,sc,'SKIP (this world has no such person)');continue}/* r5: a random world without a maid is not a card fault */await p.waitForTimeout(2500);try{await p.waitForFunction(()=>{try{kitPcActScan(document)}catch(e){}return ![...document.querySelectorAll('.pc>.pcr button.ka.kart')].some(b=>b.querySelector(':scope>.kabody small.kb>.kr:not(.kr-ton):not(.kr-duoc):not(.kr-thanh)'))},null,{timeout:15000})}catch(e){}await p.addStyleTag({content:'.kmov,#curtain,#buoitr,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(300);
+  const REP=+process.env.REP||1;const LIST=[];for(let i=0;i<REP;i++)LIST.push(...(SCN||DEFAULT_SCENES).split(","));/* r6: REP=n repeats every scene n times (rv: iPad ≥ 10 clean) */
+  for(const sc of LIST){const go=await p.evaluate(SCENES[sc]);if(go==='none'){console.log(wh,sc,'SKIP (this world has no such person)');continue}/* r5: a random world without a maid is not a card fault */await p.waitForTimeout(2500);try{await p.waitForFunction(()=>{try{kitPcActScan(document)}catch(e){}return ![...document.querySelectorAll('.pc>.pcr button.ka.kart')].some(b=>b.querySelector(':scope>.kabody small.kb>.kr:not(.kr-ton):not(.kr-duoc):not(.kr-thanh)'))},null,{timeout:15000})}catch(e){}await p.addStyleTag({content:'.kmov,#curtain,#buoitr,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(300);
    if(sc==='gift-wk'){const g=await p.evaluate(()=>{const M=document.getElementById('modal');const rows=[...M.querySelectorAll('.opt[data-m]')].filter(b=>getComputedStyle(b).display!=='none'&&b.offsetParent);
      const tot=[...M.querySelectorAll('.opt[data-m]')].filter(b=>b.dataset.kgg===GIFT_TAB).length;return{tab:GIFT_TAB,rows:rows.length,tot,wrong:rows.filter(b=>b.dataset.kgg!==GIFT_TAB).length,noface:rows.filter(b=>b.dataset.kopic!=='face:gift').length}});
     const ok=g.tab==='ct'&&!g.wrong&&!g.noface&&g.rows===g.tot&&g.rows===3;if(!ok)bad++;console.log(wh,sc,JSON.stringify(g),ok?'PASS':'FAIL');await p.screenshot({path:`${OUT}/${wh}-${sc}.jpg`,type:'jpeg',quality:60});continue}
    if(sc==='spy-pick'){const g=await p.evaluate(()=>{const M=document.getElementById('modal');const rows=[...M.querySelectorAll('.opts>button.ka')].filter(b=>!/Thôi/.test(b.textContent));
      return{rows:rows.length,noface:rows.filter(b=>!/^face/.test(b.dataset.kopic||'')).length,clipped:rows.filter(b=>{const body=b.querySelector('.kabody');return body&&body.getBoundingClientRect().bottom>b.getBoundingClientRect().bottom+1}).length}});
     const ok=g.rows>0&&!g.noface&&!g.clipped;if(!ok)bad++;console.log(wh,sc,JSON.stringify(g),ok?'PASS':'FAIL');await p.screenshot({path:`${OUT}/${wh}-${sc}.jpg`,type:'jpeg',quality:60});continue}
-   const m=await p.evaluate(()=>{const R=e=>e.getBoundingClientRect();const vis=e=>e.offsetParent&&R(e).width>0;const out=[];
+   /* r6 (rv round 5 c): the marks must HOLD — measured on the settled scene and again 1 s later; both must pass */
+   const MEAS=()=>p.evaluate(()=>{const R=e=>e.getBoundingClientRect();const vis=e=>e.offsetParent&&R(e).width>0;const out=[];
     for(const pc of [...document.querySelectorAll('.pc')].filter(vis)){const L=pc.querySelector(':scope>.pcl'),pcp=L&&L.querySelector(':scope>.pcp');if(!pcp||!pc.classList.contains('kpwide'))continue;
      const pr=R(pc);let bottom=0;[...L.children].forEach(c=>{if(vis(c))bottom=Math.max(bottom,R(c).bottom)});const rk=L.querySelector(':scope>.pcrk'),nm=L.querySelector(':scope>.pcname');
      const kpl=pc.querySelector('.kpl'),kb=kpl&&kpl.parentElement.querySelector('.kb.kpkb');
@@ -43,6 +45,7 @@ const cdn={};const TOPS={};
       rankCol:rk?getComputedStyle(rk).color:'',nameCol:nm?getComputedStyle(nm).color:'',same:nm&&rk?(nm.classList.contains('krt')||getComputedStyle(nm).color===getComputedStyle(rk).color):true,
       kplAbove:kpl&&kb?(R(kpl).bottom<=R(kb).top+2&&Math.abs(R(kpl).left-R(kb).left)<6&&(!/grid/.test(getComputedStyle(kpl.parentElement).display)||getComputedStyle(kpl).gridColumnStart==='1'&&getComputedStyle(kpl).gridColumnEnd==='-1')):null})}
     return out});
+   const m=await MEAS();await p.waitForTimeout(1000);const m2=await MEAS();if(m2.length!==m.length)m.push({name:'card count changed '+m.length+'→'+m2.length,figW:0,colW:99});m.push(...m2.map(x=>Object.assign(x,{name:'+1s '+x.name})));
    const fails=m.filter(x=>Math.abs(x.figW-x.colW)>3||(x.cut>2&&!x.scrollable)||(x.scrollable&&!x.atEnd&&!x.more)||!x.same||x.kplAbove===false).map(x=>JSON.stringify(x));
    const ok=m.length>0&&!fails.length;if(!ok)bad++;
    console.log(wh,sc,'cards',m.length,JSON.stringify(m.map(x=>({fig:x.figW,col:x.colW,more:x.more,cut:x.cut,sc:x.scrollable,same:x.same,kplAbove:x.kplAbove}))),ok?'PASS':'FAIL '+fails.join(' ').slice(0,900));
