@@ -50,3 +50,16 @@ depth 6 · START_CTX ≈ 3 % (get_session read 0; own estimate)
 - WAIVER (#26, 21/11 ~08:45Z): S08 + G58/K27 waived for hạ Đường L1908 t1–t3 (owner L1908 wins); logged in dev/art/ART_RULES_CONFLICTS.md. t2/t3 sent to VE6 session_01D3E3NavF2AADAvmzPDhZC5 @55, sheet ha_t1_t3_L1908.png (t1 = yiugBgJPW9).
 - OPEN: maids got a short sheer pale powder-blue phi bạch (the Tang murals show one; the owner liked the look). Is phi bạch allowed for maids? Owner to say.
 - Draw: consort t1–t3 L1890 sent to VE9 @55 (sheet ha_t1_t3_L1890.png). Maids + t4/t5 are not sent yet; waiting for #25.
+
+# HANDOVER (HADUONG1 → successor) · depth 6 · START_CTX ≈ 3 % · now 31 % ≥ 28 % → rollover (worker: the coordinator #26 opens the successor)
+Coordinator: Foreman C #26 session_01D3E3NXDFbJUswJKxtfWLwX. Branch claude/cung-tuong-mong-handover-hj0h8w. PUSH TIP: the repo has 2 GB image packs, so `git pull` is too slow → use `git fetch -q --filter=blob:none origin <branch> && git rebase -q origin/<branch>` (remote.origin.promisor=true is already set in this clone; set it in a fresh clone too).
+## Open jobs
+1. VE6 session_01D3E3NavF2AADAvmzPDhZC5 is drawing hạ Đường L1908 t2/t3 @55 (s62_t{2,3}_ha_DUONG_L1908.txt, S08+G58/K27 waived by #26, conflict 17). Sheet ha_t1_t3_L1908.png (t1 = yiugBgJPW9). Waiting for ids → report to #26.
+2. NOT STARTED — OWNER L1919 (via #26) on hạ Đường MAIDS (m18; L1890 pictures tam UPvxKsawny / nhị N2q7gPL6D9 / nhất CqnIXaGEEy; files dev/art/maid7/prod/m18_{tam,nhi,nhat}_ha_DUONG_L1890.txt):
+   - Owner: nhị COLLAR WRONG (round scoop → make it the right open neckline; say the shape explicitly); tam OK but too plain, looks like a thô sử; nhất nothing special.
+   - RESEARCH, 2–3 Vietnamese lines each, with sources: (a) did Tang palace maids wear phi bạch/pibo? (Yongtai tomb murals 706: yes, many maids carry a pibo) (b) Tang maid sleeves narrow or wide? (murals: mostly NARROW ru sleeves) (c) what did thô sử (lowest coarse-work maids) wear? (plain narrow-sleeved ru + skirt or round-collar robe, plain cloth, no pibo, little ornament) → if it fits, the current tam becomes THÔ SỬ.
+   - RESHUFFLE: current tam → thô sử (if the research fits); current nhị with the collar FIXED → new tam; current nhất → new nhị; design a NEW nhất that is richer (e.g. a prettier chest band / dải cột ngực). Apply the research answers (phi bạch, sleeve width) to all.
+   - Rules G57 (no jade pendant), G59 (no sachet), G60 (centred bow, run dev/art/strip_bow.py --write), G61 (look it up with rule.py / grep ART_RULES.md). keep_check + check_store (--scope maid --age a18; thô sử: check the scope used by maid7 prod thô sử files). Base hair/item/pose per grade from prod m18_*_L1836 (A47); thô sử base = the prod thô sử file of m18 if there is one.
+   - Send ONLY the changed/new files to VE10 session_01D3E3NaakFbargWadMNeWzZ @55; sheet thô sử | tam | nhị | nhất; report to #26 with the research answers.
+## Done (see sections above)
+L1847 t1–t3 (now the maid look) · L1890 consort t1–t5 + maids · L1908 t1 (verbatim Tần) + t2/t3 · waiver log.
