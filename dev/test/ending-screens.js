@@ -58,8 +58,9 @@ const CASES=[
    await p.waitForTimeout(1400);await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(2200);await p.evaluate(()=>{try{kmReset()}catch(e){}});await p.waitForTimeout(300);
    const R=await p.evaluate(()=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg'),bg=M.querySelector(':scope>.kes-bg'),ov=d&&d.querySelector('.kes-ov');const r=x=>{if(!x)return null;const b=x.getBoundingClientRect();return {l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height}};
      const hud=document.querySelector('header.hud,#hud');const hb=hud&&hud.getBoundingClientRect();const hit=hb?document.elementFromPoint(Math.max(2,hb.left+8),Math.max(2,hb.top+8)):null;
-     const fg=d&&(d.querySelector('.kszfig .kszfs')||d.querySelector('.kszfig'));const kw=d?parseFloat(getComputedStyle(d).getPropertyValue('--kszw'))||0:0;
-     return {ksz:d&&d.dataset.ksz||'',live:!!(d&&d.classList.contains('kszlive')),kw,fig:r(fg),cls:M.className,hid:M.hidden,err:window.__kesErr||'',d:r(d),bg:r(bg),fl:r(ov&&ov.querySelector('.kes-fl')),dl:r(ov&&ov.querySelector('.kes-drl')),dr:r(ov&&ov.querySelector('.kes-drr')),miss:!!(ov&&ov.classList.contains('kes-miss')),
+     const fg=d&&d.querySelector('.kszfig');/* the kit figure SLOT (the column); the picture inside also gives room to the kit name plate (1 or 2 lines) */const kw=d?parseFloat(getComputedStyle(d).getPropertyValue('--kszw'))||0:0;
+     const hd=d&&d.querySelector(':scope>.kph,:scope>#mt'),ft=d&&d.querySelector(':scope>#mr');
+     return {hd:hd?Math.round(hd.getBoundingClientRect().height):0,ft:ft&&ft.offsetParent?Math.round(ft.getBoundingClientRect().height):0,ksz:d&&d.dataset.ksz||'',live:!!(d&&d.classList.contains('kszlive')),kw,fig:r(fg),cls:M.className,hid:M.hidden,err:window.__kesErr||'',d:r(d),bg:r(bg),fl:r(ov&&ov.querySelector('.kes-fl')),dl:r(ov&&ov.querySelector('.kes-drl')),dr:r(ov&&ov.querySelector('.kes-drr')),miss:!!(ov&&ov.classList.contains('kes-miss')),
       hudHidden:!hit||!!hit.closest('#modal'),title:(document.getElementById('mt')||{}).textContent||(M.querySelector('.kptitle')||{}).textContent||'',ov:document.documentElement.scrollWidth>innerWidth+1,vw:innerWidth,vh:innerHeight,
       btns:[...M.querySelectorAll('button')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,30))}});
    chk(`${N}: opened without error`,!R.err&&!R.hid,R.err);
@@ -70,7 +71,7 @@ const CASES=[
    chk(`${N}: frame inside the screen`,R.d&&R.d.l>=0&&R.d.r<=R.vw&&R.d.t>=0&&R.d.b<=R.vh+1,R.d);
    /* ending-screens-land (KIT §91.4b canon overwrite): the frame is the KIT dialog frame at its own size — no ending-only width/height — so the left figure is the kit XL figure slot */
    if(R.live)chk(`${N}: kit frame ${R.ksz} at the kit width --kszw (${R.kw}px), no ending-only size`,R.ksz==='XL'&&Math.abs(R.d.w-Math.min(R.kw,R.vw-16))<=2,{ksz:R.ksz,kw:R.kw,d:R.d});
-   FIGS.push([N,R.ksz,R.live,R.fig&&Math.round(R.fig.w)+'x'+Math.round(R.fig.h),R.fig&&Math.round(R.fig.t-R.d.t),R.fig&&Math.round(R.fig.l-R.d.l),Math.round(R.d.w)+'x'+Math.round(R.d.h)]);
+   FIGS.push([N,R.ksz,R.live,R.fig&&Math.round(R.fig.w)+'x'+Math.round(R.fig.h),R.fig&&Math.round(R.fig.t-R.d.t),R.fig&&Math.round(R.fig.l-R.d.l),Math.round(R.d.w)+'x'+Math.round(R.d.h),R.hd,R.ft]);
    if(!NOART){const cx=R.d.l+R.d.w/2;
     chk(`${N}: flower centred on the frame's top edge`,R.fl&&Math.abs(R.fl.l+R.fl.w/2-cx)<3&&R.fl.t<R.d.t&&R.fl.b>R.d.t&&R.fl.t>=-1,{fl:R.fl,d:R.d});
     chk(`${N}: drapes hang on the left / right edges`,R.dl&&R.dr&&R.dl.l<R.d.l&&R.dl.r>R.d.l&&R.dr.r>R.d.r&&R.dr.l<R.d.r&&R.dl.h>R.d.h*.6,{dl:R.dl,dr:R.dr,d:R.d});}
@@ -89,8 +90,8 @@ const CASES=[
    else chk(`${N}: «${want||'close'}» closes; the next dialog is not an ending screen`,S2.hid||(!/\bkes\b/.test(S2.cls)&&!S2.bg),S2);
    chk(`${N}: no page errors`,!errs.length,errs.slice(0,4));
    await ctx.close()}}
- /* law 11 family: every ending of one device in the same kit frame size = the same left figure slot (size + place in the frame) */
- const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1];(G[k]=G[k]||[]).push(f)});
+ /* law 11 family: every ending of one device in the same kit frame size (and the same kit header / footer-button height, which the KIT size system takes from the figure column for every dialog — KIT_REQUESTS ending-screens-land) = the same left figure slot (size + place in the frame) */
+ const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1]+' header '+f[7]+' footer '+f[8];(G[k]=G[k]||[]).push(f)});
  for(const k in G){const L=G[k],r=L[0];chk(`${k}: every ending shows the same kit figure slot (${L.length} endings, ${r[3]} @${r[4]},${r[5]})`,L.every(f=>f[3]===r[3]&&Math.abs(f[4]-r[4])<=2&&Math.abs(f[5]-r[5])<=2),L)}
- console.log('figure table [case, ksz, kit live frame, figure, fig top in frame, fig left in frame, frame]');FIGS.forEach(f=>console.log(JSON.stringify(f)));
+ console.log('figure table [case, ksz, kit live frame, figure slot (.kszfig), fig top in frame, fig left in frame, frame, header h, footer h]');FIGS.forEach(f=>console.log(JSON.stringify(f)));
  await b.close();const nb=ok.filter(x=>!x[1]).length;console.log(`ending-screens: ${ok.length-nb}/${ok.length} pass${NOART?' (no art)':''}`);process.exit(nb?1:0)})();
