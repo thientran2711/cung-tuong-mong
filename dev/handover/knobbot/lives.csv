@@ -1,0 +1,106 @@
+arm,seed,origin,fate,HH,hhTurn,maxRank,years,danh_m0,danh_m12,danh_m24,danh_m36,tai_m36,sac_m36,artbac_m36,netDanh_m0_36
+k1,21,tt,Thái phi theo con ra phủ,0,,5,13.17,29,8,2,0,51,61,4,
+k1,21,dtq,Thái phi theo con ra phủ,0,,5,23.58,35,35,0,15,37,57,3,
+k1,21,muoi,Tuổi xuân qua đi,0,,5,20.83,25,4,0,26,43,71,3,
+k1,21,cn,"Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",0,,1,1.83,13,4,,,,,,
+k1,22,tt,"Năm 18, Hoàng thượng niên hiệu Gia Thịnh băng hà, thọ 38 tuổi. Tân Thái hậu Bạch Họa Mi xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,4,17.58,38,26,5,0,49,64,3,
+k1,22,dtq,"Lao phổi nguy kịch, không qua khỏi",0,,4,9.42,18,7,0,8,40,61,3,
+k1,22,muoi,"Năm 4, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 28 tuổi. Tân Thái hậu Tạ Mi Trang xét lại chuyện cũ (khả năng: rất cao), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,1,3.42,6,1,0,4,46,57,3,
+k1,22,cn,HH-STOP,1,119,7,9.92,5,5,5,35,25,79,3,
+k1,22,nc,"Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",0,,5,16.75,39,2,1,6,37,82,3,
+k1,22,td,"Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",0,,3,13.33,0,0,11,0,46,59,3,
+k1,22,ch,Hoàng thái hậu,0,,6,3.83,19,28,59,36,43,77,3,
+k1,22,thd,"Khó sinh, băng huyết mà chết",0,,1,1.25,9,4,,,,,,
+k2,21,cn,"Khó sinh, băng huyết mà chết",0,,3,7,15,8,12,9,23,75,2,
+k2,21,dtq,HH-STOP,1,243,7,20.25,14,46,12,30,26,63,2,
+k2,21,muoi,"Khó sinh, băng huyết mà chết",0,,3,20.17,9,13,2,6,36,70,2,
+k2,21,cn,"Năm 13, Hoàng thượng niên hiệu Hưng Long băng hà, thọ 33 tuổi. Tân Thái hậu Tạ Diễm Thu xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,2,12.42,15,10,2,27,32,67,2,
+k2,22,dtq,"Khó sinh, băng huyết mà chết",0,,2,10.33,21,0,7,10,24,67,2,
+k2,22,dtq,"Khó sinh, băng huyết mà chết",0,,5,20,26,0,29,25,32,62,3,
+k2,22,muoi,Thành Thái phi,0,,3,20.5,9,0,1,2,40,64,3,
+kk,21,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 23 tuổi",0,,3,5,34,1,88,16,36,86,3,-12
+kk,21,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 38 tuổi",0,,3,19.5,20,7,0,3,33,63,3,-17
+kk,21,muoi,"Năm 4, Hoàng thượng niên hiệu Khang Định băng hà, thọ 28 tuổi. Tân Thái hậu Bạch Tịnh Nghi xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,1,3.75,6,6,15,21,40,88,3,2
+kk,21,cn,Xuất gia làm ni cô,0,,3,1.83,17,56,,,,,,28
+kk,22,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi",0,,2,6.58,32,38,36,45,30,70,3,14
+kk,22,dtq,Tuổi xuân qua đi,0,,3,21.83,24,31,11,46,35,70,3,23
+kk,23,ch,Tuổi xuân qua đi,0,,6,20.83,36,44,6,12,36,70,3,-13
+kk,24,muoi,Tuổi xuân qua đi,0,,5,20.83,9,25,45,11,47,89,4,-11
+kk,24,dtq,"Năm 11, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 32 tuổi. Tân Thái hậu Chu Như Ý xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,3,10.5,32,55,52,6,38,76,3,-5
+kk,24,muoi,Xuất gia làm ni cô,0,,2,6.58,11,10,15,5,47,77,3,-7
+kk,24,cn,Xuất cung về quê,0,,1,1.83,16,17,,,,,,-9
+nf,21,thd,Tuổi xuân qua đi,0,,3,20.83,9,14,12,7,47,62,3,9
+nf,21,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 38 tuổi",0,,5,18.08,15,0,12,33,40,62,3,-10
+nf,22,muoi,Xuất gia làm ni cô,0,,4,16.58,0,4,20,19,44,65,3,15
+nf,22,dtq,Tuổi xuân qua đi,0,,4,21.83,25,0,11,3,41,60,3,-20
+nf,23,thd,Tuổi xuân qua đi,0,,6,20.83,9,24,13,21,49,60,3,6
+nf,23,dtq,"Năm 12, Hoàng thượng niên hiệu Khang Định băng hà, thọ 35 tuổi. Tân Thái hậu Thẩm Ngọc Dao xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,3,11.75,14,12,18,8,32,54,4,-24
+nf,23,muoi,Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa,0,,3,11.58,0,0,9,6,46,80,4,-8
+nf,24,thd,HH-STOP,1,135,7,11.25,3,9,11,4,63,68,3,13
+nf,24,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 37 tuổi",0,,4,17.75,21,14,0,40,43,65,3,13
+nf,24,muoi,"Năm 2, Hoàng thượng niên hiệu Khang Định băng hà, thọ 22 tuổi. Tân Thái hậu Mộ Dung Hàm Hương xét lại chuyện cũ (khả năng: rất cao), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,1,1.17,10,0,,,,,,-8
+nobc,21,tt,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 22 tuổi",0,,3,3,43,0,8,,,,,-24
+nobc,21,dtq,Xuất gia làm ni cô,0,,3,9.33,15,8,3,6,72,91,3,-23
+nobc,21,muoi,Xuất gia làm ni cô,0,,5,19.25,1,7,11,17,100,97,3,5
+nobc,22,cnv,Tuổi xuân qua đi,0,,5,21.83,6,42,20,21,96,75,3,14
+nobc,23,ch,Tuổi xuân qua đi,0,,4,21.83,19,2,0,0,73,81,4,-11
+nobc,24,td,HH-STOP,1,104,7,8.67,15,5,17,13,100,100,3,-2
+nobc,24,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 32 tuổi",0,,5,14.17,24,0,0,7,100,100,3,-25
+nobc,24,muoi,HH-STOP,1,107,7,8.92,7,10,36,2,70,84,3,8
+nobc,24,cn,"Sốt rét nguy kịch, không qua khỏi",0,,2,4.58,24,0,6,2,100,92,3,3
+nobc,24,nc,"Khó sinh, băng huyết mà chết",0,,3,7.92,32,14,1,19,84,93,3,-21
+rmain,21,muoi,Xuất cung về quê,0,,0,0.33,15,,,,,,,0
+rmain,21,dtq,"Khó sinh, băng huyết mà chết",0,,4,6.92,36,62,98,93,90,100,5,66
+rmain,21,muoi,HH-STOP,1,130,7,10.83,16,17,90,61,100,100,5,46
+rmain,21,cn,"Khó sinh, băng huyết mà chết",0,,4,4.33,9,27,78,84,100,66,5,67
+rmain,22,ch,HH-STOP,1,63,7,5.25,26,100,79,99,100,81,5,52
+rmain,22,dtq,"Năm 5, Hoàng thượng niên hiệu Khang Định băng hà, thọ 24 tuổi. Tân Thái hậu Đường Yên Nhiên xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,6,4.17,29,90,100,99,100,100,5,72
+rmain,22,muoi,HH-STOP,1,131,7,10.92,3,31,94,92,100,100,5,64
+rmain,23,cn,"Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",0,,5,17.75,9,0,17,61,73,83,4,9
+rmain,23,dtq,"Năm 2, Hoàng thượng niên hiệu Hưng Long băng hà, thọ 21 tuổi. Tân Thái hậu Tống Ngọc Hành xét lại chuyện cũ (khả năng: cao), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,2,1.08,19,89,,,,,,72
+rmain,24,td,Thái phi theo con ra phủ,0,,6,16.33,15,31,100,88,100,97,5,64
+rmain,24,dtq,HH-STOP,1,49,7,4.08,18,62,96,86,100,97,5,75
+rst,21,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 24 tuổi",0,,2,4,18,0,6,6,42,52,3,
+rst,21,dtq,"Khó sinh, băng huyết mà chết",0,,3,2.67,26,22,2,,,,,
+rst,21,muoi,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 23 tuổi",0,,5,3.58,12,14,35,32,44,72,3,
+rst,21,cn,Tuổi xuân qua đi,0,,4,21.83,15,2,0,0,35,58,3,
+rst,21,nc,"Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",0,,6,15.92,50,10,20,46,37,70,3,
+rst,21,td,Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa,0,,2,1.83,0,6,,,,,,
+rst,21,ch,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 29 tuổi",0,,5,11.75,30,10,10,21,46,73,3,
+rst,21,thd,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 30 tuổi",0,,3,10.25,7,4,2,0,51,66,3,
+rst,21,tt,"Khó sinh, băng huyết mà chết",0,,2,6.83,34,6,28,1,48,65,3,
+rst,21,dtq,"Khó sinh, băng huyết mà chết",0,,1,1.5,29,4,,,,,,
+rst,21,muoi,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 18 tuổi",0,,1,0.58,19,,,,,,,
+rst,21,cn,"Khó sinh, băng huyết mà chết",0,,4,9.17,15,3,24,10,32,73,3,
+rst,22,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 35 tuổi",0,,4,16.42,25,41,5,10,29,51,3,
+rst,23,td,"Trúng độc, không qua khỏi",0,,5,15.92,0,0,6,0,49,52,3,
+rst,23,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 37 tuổi",0,,4,17.17,29,0,0,1,38,62,4,
+rst,23,muoi,HH-STOP,1,134,7,11.17,9,7,6,100,40,78,3,
+rst,23,cn,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 32 tuổi",0,,2,13.5,15,0,0,4,27,72,3,
+rst,23,nc,"Năm 11, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 33 tuổi. Tân Thái hậu Tống Hàm Hương xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,3,10.67,37,0,6,40,37,70,3,
+rst,23,td,"Năm 11, Hoàng thượng niên hiệu Vĩnh An băng hà, thọ 33 tuổi. Tân Thái hậu Đoan Mộc Nhược Lan xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,6,10.25,17,35,66,33,45,62,3,
+rst,23,ch,Hoàng thái hậu,0,,6,14.08,14,2,22,1,35,61,3,
+rst,24,dtq,Thái phi theo con ra phủ,0,,5,20.33,26,16,8,2,41,67,3,
+rst,24,dtq,Tuổi xuân qua đi,0,,5,20.83,18,12,21,33,26,61,3,
+rst,24,muoi,Xuất gia làm ni cô,0,,2,2.33,15,4,34,,,,,
+rst,24,cn,Tuổi xuân qua đi,0,,4,20.83,2,0,0,35,35,61,3,
+rst,25,cnv,"Khó sinh, băng huyết mà chết",0,,4,14.5,8,100,93,13,18,65,2,
+rst,25,dtq,"Khó sinh, băng huyết mà chết",0,,4,14.17,35,12,14,0,29,64,3,
+rst,26,muoi,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi",0,,1,6.33,10,3,4,7,35,78,3,
+rst,26,dtq,"Khó sinh, băng huyết mà chết",0,,4,10.5,28,0,14,4,37,72,3,
+rst,27,thd,"Khó sinh, băng huyết mà chết",0,,6,11.5,1,21,31,42,51,63,3,
+rst,28,ch,Xuất cung về quê,0,,2,0.92,34,,,,,,,
+rst,28,dtq,Thành Thái phi,0,,4,4.92,20,11,17,51,26,68,3,
+rst,28,muoi,"Năm 10, Hoàng thượng niên hiệu Khang Định băng hà, thọ 34 tuổi. Tân Thái hậu Bạch Khinh Vũ xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,4,9.5,3,2,3,15,36,68,3,
+rst,28,cn,Thành Thái phi,0,,3,2.5,15,9,4,,,,,
+tp,21,tt,Tuổi xuân qua đi,0,,6,20.83,32,0,13,1,70,57,3,-29
+tp,21,dtq,Xuất cung về quê,0,,2,1.08,32,1,,,,,,-23
+tp,22,ch,"Năm 16, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 38 tuổi. Tân Thái hậu Đường Tuyết Dao xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,4,15.58,31,6,8,12,80,61,3,-23
+tp,22,dtq,Tuổi xuân qua đi,0,,3,19.83,29,15,10,14,78,62,3,-8
+tp,22,muoi,Tuổi xuân qua đi,0,,6,20.83,9,0,10,4,80,61,3,-10
+tp,23,muoi,Tuổi xuân qua đi,0,,5,19.83,9,74,25,0,77,72,3,-3
+tp,23,dtq,"Năm 7, Hoàng thượng niên hiệu Khang Định băng hà, thọ 30 tuổi. Tân Thái hậu Mạnh Vân Thường xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,1,5.92,24,0,4,1,76,66,3,-20
+tp,23,muoi,Tuổi xuân qua đi,0,,5,21.83,10,27,4,0,63,75,4,7
+tp,23,cn,Đại kết cục: Trả áo về quê,0,,3,8.67,7,0,8,7,81,72,4,-14
+tp,24,td,"Năm 20, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 40 tuổi. Tân Thái hậu Thẩm Ngưng Sương xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,5,19.33,23,2,10,17,93,68,4,-3
+tp,24,dtq,"Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 39 tuổi",0,,4,19.58,22,9,25,49,76,68,4,19
