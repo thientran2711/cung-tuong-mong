@@ -90,8 +90,19 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const g2=await herG(),h2=await herH();
  ok(c2,'P2 her card «Lập Thái tử» names the host\'s son',await G.p.evaluate(()=>Q.map(q=>q.t+':'+String(q.h||'').replace(/<[^>]+>/g,'').slice(0,80))));
  ok(g2.danh-g1.danh===-B.heirDanh&&h2.danh===g2.danh,'P2 the host\'s son replaces HER Thái tử: she loses Danh −heirDanh as solo (both seats)',{g1,g2,h2,heirDanh:B.heirDanh});
+ /* P4 (CO-OP HEIR FIX r2, law 11): her OWN act in her context (j97 mật chiếu / jend14 ch14 / j4 setHeir) reads the world's Thái tử and writes it back */
+ const p4a=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>[egHeirNone(),S.heir&&S.heir.k&&S.heir.k.name]));
+ ok(p4a[0]===false&&p4a[1]==='Thử Hùng','P4 in her context the world\'s Thái tử (the host\'s son) is seen: "no Thái tử yet" is false',p4a);
+ await reset();await sync();
+ await H.p.evaluate(()=>{S.hr=null;S.heir=null;0});
+ await H.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{const k=S.kids.find(k=>k.name==='Thử Lân');setHeir(k,null)});try{COOPW.thin.flush()}catch(e){}});
+ await until(G,d=>(S.danh|0)!==d,g2.danh,15000);await sync();
+ const g4=await herG(),h4=await herH(),w4=await H.p.evaluate(()=>[S.hr,S.heir&&S.heir.k&&S.heir.k.name]);
+ ok(/\|Thử Lân#3$/.test(String(w4[0]))&&w4[1]==='Thử Lân','P4 her act made her son Thái tử: the world S.hr and the host\'s S.heir read him',w4);
+ ok(g4.danh-g2.danh===B.heirDanh&&h4.danh===g4.danh,'P4 her Danh +heirDanh once, the same on both seats',{g2,g4,h4});
  await H.p.evaluate(()=>{S.hr=window.__hrs||null});
- /* P3 month end: estrangement once */
+ /* P4 her own act (her context) names her son when there is no Thái tử: world S.hr + host S.heir follow, Danh once.
+   P3 month end: estrangement once */
  await reset();await sync();
  await stage("const k=S.kids.find(k=>k.name==='Thử Lân');if(k){k.hM=60;k.kmS=-9}S.place='home';return 1");
  const m0=await herG();let m1=m0;
