@@ -2001,3 +2001,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:28Z) rv MSxp PASS kit-info-tap → LAND READY c5bbde7e (review/kit-info-tap-rv) → appended to 89 chain. LIVE a4ee93d7 (kit-opt-kem landed). rv MSxp waits keeper's kit-mark-fix r3.
 - (11:29Z) rv MSxp ack: all its LAND READYs (kit-focus r4, kit-info-tap, kit-chip-pause, kit-badge r2) confirmed in 89 chain; waits kit-mark-fix r3.
 - (11:30Z) 89: LANDED kit-opt-kem a4ee93d7, kit-badge r2 ba9b6243. FAIL mg-intro-2 847a5934 (j82.js vs pm-c) → Ji75 re-merge → review/mg-intro-2-land. Chain landq22 from maid-acts-a (+kit-info-tap last).
+- (11:32Z) LIVE REGRESSION (keeper #2): G4 80-dialog-fixed FAILS on plain main («1180x820 new-title plate on event picture») → keeper #2 TOP PRIORITY review/kit-g4-plate (bisect last LIVE shas, whole-group fix) → rv MSxp. 89 told: that one G4 case = known-LIVE, keep landing. Keeper: kit-ef-unit 9fd26c14 SSK, kit-mark-fix-r3 99f1e576 gates, kit-focus r5 da873b4b gates.
