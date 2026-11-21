@@ -147,8 +147,7 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
   const kf=S.kf&&S.kf[z.id];return kitRel2([{head:`Hoàng thượng → ${whoL(z)}`,dir:"x",rows:[R("Sủng",kf?kf.s:null,"pos")]}])}
  if(a==="th"||b==="th"){const z=a==="th"?b:a;return kitRel2([{head:`Thái hậu → ${whoL(z)}`,dir:z===S?"them":"x",rows:[R("Thiện cảm",z===S?(S.th||0):(met(z)?(z.th||0):null),"good")]}])}
  const ok=(p,q)=>p===S||(met(p)&&met(q));const dirOf=(p,q)=>q===S?"them":p===S?"me":"x";
- const loy=(p,q)=>relMS(p)&&!relMan(p)&&typeof p.loyal==="number"&&(p===S.maid?q===S:typeof ownerOf==="function"&&ownerOf(p)===q)?[R("Lòng",p.loyal,"pos")]:[];/* her servant's Lòng toward the master (j10) */
- const col=(p,q)=>({head:`${capL(whoL(p))} → ${whoL(q)}`,dir:dirOf(p,q),rows:[R("Thiện cảm",ok(p,q)?aff(p,q):null,"good"),R("Oán",ok(p,q)?oan(p,q):null,"bad")].concat(loy(p,q))});
+ const col=(p,q)=>({head:`${capL(whoL(p))} → ${whoL(q)}`,dir:dirOf(p,q),rows:[R("Thiện cảm",ok(p,q)?aff(p,q):null,"good"),R("Oán",ok(p,q)?oan(p,q):null,"bad")]});
  return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p,rv=p!==S&&p!=="emp"&&p!=="th"&&!relMS(p);const strangers=[X,Y].filter(q=>q.met===false&&!relMS(q.p));
