@@ -819,7 +819,7 @@ kit-badge rv | review/kit-badge-rv 8e440a19 | rv session | FAIL (N4 ⏸ unreadab
 | dresscode-fix-r4 gates E30d (opus; successor of E30c) | review/dresscode-fix-r4; reports/dresscode.md | FOREMAN E #26 | session_01DgYSWkaEjsg1aJWvkGTjny | RUNNING | 21/11 08:21Z |
 kit-mark-fix rv3 | review/kit-mark-fix-rv3 db138921 | rv session | PASS | 21/11
 | cold-faction re-land E43 (opus; j42.js real conflict; MAIN 91 ORDER 08:16Z) | review/cold-faction-land2 ef0a89f2 + home-chapters/ge-phutang/bang-words -land2; reports/relander-e43.md | FOREMAN E #28 | session_01DgYSWm9MJSmYC8cYxWWRUE | ROLLED 14:5xZ (handover in report) | 21/11 08:50Z |
-| coop-thin-g F1 fixer #2 (opus; successor of 4qNNZGeU; bisect cyc/cycs/timer reds + TRIP wk9 desync after LIVE merge) | review/coop-thin-g-f1 | B | session_01N1tNP2X4FHGnxW9LYH1iQy | RUNNING | 21/11 08:59Z |
+| coop-thin-g F1 fixer #2 (opus; successor of 4qNNZGeU; bisect cyc/cycs/timer reds + TRIP wk9 desync after LIVE merge) | review/coop-thin-g-f1 | B | session_01N1tNP2X4FHGnxW9LYH1iQy | ROLLOVER @066ef17d: cyc/timer reds = test bot family (fixed), full lane green @f108a7da (night 5/5, TRIP 5/5 0 stall 0 desync); merged LIVE d541add9; NEXT: seat-guard scan of new main sites + rerun + perf buổi recheck (report ## ROLLOVER HANDOVER F1 #2 → #3) | 21/11 17:40Z |
 | duodo-focus #2 (OPUS; successor of N9Yc) | review/duodo-focus 4f759a76; reports/duodo-focus.md HANDOVER | MAIN CHÍNH 92 | session_01Rc5AsLtG4rLx87Rv3pd1ej | RUNNING | 21/11 09:04Z |
 kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text clipped) | 21/11
 | REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
