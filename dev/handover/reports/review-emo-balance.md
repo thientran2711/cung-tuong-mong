@@ -62,3 +62,4 @@ Reviewer merge: a4457e49 + final-merge LIVE 92633f1d -> review/coop-emo-seat-r1 
 - L1 TWO-WAY: OK — her act on an NPC still sets that NPC's feeling (recorded in S.coopEmo, replayed on both seats, host marks emoDone); NPC writes on her (mine()) are never blocked.
 - L4 ONE CORE: OK — no balance number added; the 60-entry queue cap (jcoopone emoRec) is a buffer size, not a game number.
 - Design matches the HOST_ONLY / stateOn pattern (jcoopworld.js:136/143); C rooms skip the guest replay (lens) and the host replays.
+- quickcheck on bfa6852d (alone): PASS · open 2037 ms · old save ok · perf new/live render 336/323, tab 656/688, buổi 2213/2232 · core gates PASS · 643 s. (A first run made while 6 co-op browsers were running failed G4 dialog-fixed #54 on 755x1000 and 1180x820. Run alone, dialog-fixed passes on both the branch and LIVE, so that failure was machine load, not this branch.) FAIL item 1 stands.
