@@ -12,3 +12,4 @@
   - Law 11 scan in dev/test/ban-cung.js: every (rank 3..6, granted from, allowed i) pair — 256 pairs — non-empty gain and shown == applied; card «thành» prints bcGain.
   - Non-blocking: doc reworded (Vĩnh Thọ/Dực Khôn = beside Càn Ninh, mid-distance on the plan, standing from history); in-game lock reason now «Cung bậc nhất lục cung, lệ chỉ dành cho bậc <rank> trở lên; tâu xin là vượt phận.» KIT REQUEST (greyed option «Nắm chắc» chip) filed in FOREMAN_D_STATUS (handover 12d7b2aa).
   GATES (eea1304a): ban-cung 33/33 PASS · coop-ban-cung 23/23 · coop-e2e 94/94 · quickcheck PASS (core gates PASS, old save ok) · LIVE-revert audit clean (diff vs LIVE = jbancung, jpal 1 line, assemble 1 entry, research doc, 3 tests, rebuilt index/sw).
+- (21/11 ~11:25Z) REVIEW r2 PASS (reviewer DRuUdpyT): landing base review/ban-cung-rv cf2cc626 (eea1304a + LIVE 31fcfe30), LAND READY sent to Foreman D. Worker BAN CUNG done; worktrees removed.
