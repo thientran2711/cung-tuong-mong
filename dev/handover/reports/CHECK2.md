@@ -57,3 +57,4 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
   - Now neither prompt has any bow words. G44 (bow only centred or none for t1–t6, owner after L1611) has no guard left.
   - Gates PASS, but I HOLD these two for the Foreman: re-add ", NO bow" (G44, a standing owner rule), or accept as Set A?
 - Released to GEN1: t3 v11 + t8 v10k = 2 × 55 = 110 cr. t4/t5 wait for the Foreman.
+- 04:20Z CHANGE (Foreman 04:17Z, crossed my release): NO GEN1 release for job 6+7 until the owner picks the quality (55 cr 1k / 135 cr 2k). I sent GEN1 a STOP/CANCEL for t3 v11 + t8 v10k. Job 6+7 results go to the Foreman only.
