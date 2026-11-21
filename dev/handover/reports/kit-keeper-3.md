@@ -29,4 +29,20 @@ Note (not this topic, seen in the shot): Fold option titles wrap one word per li
 ## Queue status
 - (1) kit-ef-unit → r2 SSK sent.
 - (2) kit-focus r5 da873b4b / kit-win-pay 0e6fe923: waiting on rv MSxp verdicts.
-- (3) KIT_REQUESTS rel-men-servants kitRelRows row: next.
+- (3) kitRelRows → SSK sent (§2 below).
+- (4) MAIN 94 order: Fold option titles wrap one word per line beside the odds meter — whole group fix, next.
+(Coordinator is now MAIN CHÍNH 94 session_01Rc5AsLniSu9Gw8QDFt52Ph.)
+
+## 2. kit-relrows-ms — SẴN SÀNG KIỂM `review/kit-relrows-ms` @ d80b9d2b (from LIVE 0046a920)
+PRIORITY #1 CHECK: KIT_REQUESTS 20/11 rel-men-servants row (OPEN) | main jkrel.js kitRelRows loyal branch | review/rel-men-servants 494ea79b (F1 waiting KIT §52; not landed) | claims: none other.
+Change (jkrel.js only): a man / servant / maid / court official (`relMS(p)` and man or in `relMSAll()`) reads j9 aff/oan: «→ ta» Thiện cảm aff(p,S) + Oán oan(p,S); man: «Ta → hắn» Thiện cảm aff(S,p), no Tin cậy; HER own servants (S.maid / ownerOf(p)===S): + «Lòng» = p.loyal (KR2_W /lòng/) + «Ta tin cậy» tinOf(p); other servants/officials: Thiện cảm + Oán; not met (relMSMet false) → one «chưa rõ» row. Week snapshot s.ms[relKey] for the deltas. Guarded on relMS/relMSAll → no-op on LIVE (test prints SKIP there; quickcheck PASS). Lands with/after review/rel-men-servants (that branch's F1 = this); merge is jkrel.js-only, no conflict expected.
+Test `node dev/test/kit-relrows-ms.js <url> <out>`: scan of every man + relMSAll person, two passes (as-is, and everyone met), + person card left key render. Run on rel-men-servants 494ea79b + this patch: Fold PASS (47 people: 9 men, 2 own, 36 servants/officials), iPad PASS.
+Before / after (same scan, rel-men-servants 494ea79b without / with the patch):
+| case | before | after |
+|---|---|---|
+| man «→ ta: Thiện cảm» | p.loyal (e.g. 78 vs aff 8) | aff(p,S) |
+| man Oán / «Ta → hắn» | missing | oan(p,S) / aff(S,p) |
+| man «Tin cậy» | shown | gone |
+| her maid card | «Thiện cảm 37» (= loyal) + Tin cậy | «Thiện cảm 8 · Oán 4 · Lòng 68» + «Tin cậy 48» |
+| not-met people | numbers shown (8 non-strangers only) | «chưa rõ» |
+Shots CDN img/_review/kit-relrows-ms/: before-755-maid, after-755-maid, after-1180-maid (looked at). quickcheck PASS (d80b9d2b). coop-e2e not run (no layout change: row data only).
