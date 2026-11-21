@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)","b":"56e5791fc72a","h":[{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"},{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"},{"s":"c37b7713+","t":"2026-11-21T18:42Z","c":"Hàng quan hệ: một chữ thống nhất"},{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"}]};
+window.CTM_BI={"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)","b":"9034f4227758","h":[{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"},{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"},{"s":"c37b7713+","t":"2026-11-21T18:42Z","c":"Hàng quan hệ: một chữ thống nhất"},{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32191,10 +32191,10 @@ const KG82_KIND={
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
  doi:{e:"doiline"},/* filled by jnwp */
  doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý. Làm nhanh thì được trọn phần."},
- ve:{e:"pattern",m:"ink",n:"Vẽ",t:"Nhớ nét bút",how:"Nét mực hiện trên ô giấy rồi tan. Chạm lại đúng những ô có nét mực. 5 hồi."},
- hoa:{e:"pattern",m:"flower",n:"Cắm hoa",t:"Nhớ thế hoa",how:"Hoa hiện trên các ô bình rồi khuất. Chạm lại đúng những ô có hoa. 5 hồi."},
+ ve:{e:"trace",n:"Vẽ",t:"",how:""},/* the live engine + rules text of the craft kinds ve / hoa / kim: j91 KG82_CRAFT (review/mg-craft); Thêu keeps «Nhớ mẫu thêu» (owner 21/11 ~01:05Z) */
+ hoa:{e:"arrange",n:"Cắm hoa",t:"",how:""},
  theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
- kim:{e:"pattern",m:"silk",n:"Khéo tay",t:"Nhớ mẫu kết",how:"Nút kết hiện trên khung rồi khuất. Chạm lại đúng những ô có nút kết. 5 hồi."},
+ kim:{e:"papercut",n:"Khéo tay",t:"",how:""},
  mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn. Mỗi bước phải chạm kịp nhịp, chậm nhịp là hồi ấy dừng; bàn dễ cho lỡ một bước mỗi hồi."},
  banh:{e:"cook"},/* filled by j91 */
  huong:{e:"blend"}};/* filled by j91 */
@@ -32482,7 +32482,8 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
-/* 4. PATTERN (vẽ, cắm hoa, thêu, khéo tay): remember which cells were painted */
+/* 4. PATTERN (Thêu «Nhớ mẫu thêu»; once also vẽ / cắm hoa / khéo tay): remember which cells were painted. review/mg-craft removed it; the owner kept it
+   (21/11 ~01:05Z "Cái trò đó hay nha, không bỏ nha"): Thêu plays it everywhere (Tài nghệ, contests, Thử tay); the craft stitch board went to Công «Thêu theo nét» (jtd). */
 function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
  const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
  const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
@@ -32716,7 +32717,7 @@ window.startContest=startContest;window.playArt=playArt;
    spec: kind (KG82_KIND key) | n, t, how, e (own game), steps:[[label,text]] (rows instead of Luật), go (selector), timed (false = no clock in the game),
          tutor(box, env) → stop (a game with its own engine), v (the person an engine reads as env.v), lv (tutorial board ease). Returns true when dressed. */
 const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"dodge",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
- fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
+ fling:"pull",calli:"drag",trace:"drag",arrange:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
 /* KIT §13.7.4 (mg-intro-2): everything long goes behind a kit TAP-WORD (kitTapWord, §73.2: dotted underline, a tap opens the small kit pop-up with the word as title).
    Owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào" a tap-word / «!». kgBang(html,title) = the heading words as the tap-word holding `html`;
@@ -32876,7 +32877,7 @@ function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
      tho verse (kéo chữ vào câu bát, đúng vần) · doi pair (nối chữ đối) · doden lamp (jlant.js: thắp đèn theo mẫu) ·
-     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern · kim untangle (gỡ rối chỉ) · mua steps ·
+     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern (nhớ mẫu thêu, j82) · kim papercut (jcraft_kim) · mua steps ·
      banh cook (giữ lửa + thứ tự nguyên liệu) · huong blend (thanh trượt pha hương).
    Engines follow the j82 contract: eng(box, env{kind, lv 0–5, hud(o), end(raw0to10)}) -> stop(); KG82.peek() is the test oracle:
      {x,y} tap · {sel} click · {drag:[[x,y],…]} drag path (client px) · {hold:bool, hsel|x,y} keep a pointer down or not.
@@ -33090,31 +33091,7 @@ function k91Arrange(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;const lv
  KG82.peek=()=>{if(phase!=="play"||!P||drag)return null;const f=P.F.find(f=>!f.placed);if(!f)return{sel:"#k91done"};const t=P.tg[f.ti];const a=C.client(f.hx,H*.86),b=C.client(t.x,t.y),m=C.client(MXv,MYv-U*.2);return{drag:[[a.x,a.y],[m.x,m.y],[b.x,b.y]]}};
  next();return()=>{done=true;stop()}}
 
-/* =============== 8. UNTANGLE (Khéo tay): drag the knots until no two silk threads cross =============== */
-function k91Untangle(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,NS=[6,7,8];const cx=W/2,cy=H/2,RAD=Math.min(W,H)*.38,HR=Math.max(22,Math.min(W,H)*.05);
- let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false;const pops=[];
- function tri(a){/* chords of a random triangulation of polygon vertex list a */if(a.length<4)return[];const i=Math.floor(Math.random()*a.length);let j;do j=Math.floor(Math.random()*a.length);while(Math.abs(i-j)<2||Math.abs(i-j)===a.length-1);
-  const [p,q]=i<j?[i,j]:[j,i];return[[a[p],a[q]]].concat(tri(a.slice(p,q+1)),tri(a.slice(q).concat(a.slice(0,p+1))))}
- const cross=(N,E)=>{let c=0;const X=new Set();for(let i=0;i<E.length;i++)for(let j=i+1;j<E.length;j++){const [a,b]=E[i],[c2,d]=E[j];if(a===c2||a===d||b===c2||b===d)continue;if(k91SegX([N[a].x,N[a].y],[N[b].x,N[b].y],[N[c2].x,N[c2].y],[N[d].x,N[d].y])){c++;X.add(i);X.add(j)}}return{c,X}};
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end((pts)),300)}const n=NS[r];const home=[...Array(n).keys()].map(i=>({x:cx+RAD*Math.cos(i/n*Math.PI*2-Math.PI/2),y:cy+RAD*Math.sin(i/n*Math.PI*2-Math.PI/2)}));
-  const E=[...Array(n).keys()].map(i=>[i,(i+1)%n]).concat(kg82Shuf(tri([...Array(n).keys()])).slice(0,Math.ceil(n/2)));let N;
-  for(let t=0;t<200;t++){N=[];for(let i=0;i<n;i++){let p,k=0;do{p={x:HR+Math.random()*(W-2*HR),y:HR+Math.random()*(H-2*HR)};k++}while(k<50&&N.some(q=>k91Dist(p.x,p.y,q.x,q.y)<HR*2.2));N.push(p)}if(cross(N,E).c>=n-2)break}
-  P={n,E,N,home,c0:Math.max(1,cross(N,E).c)};LIM=(30000+lv*2500)*mgTol(env);phase="play";t0=performance.now();drag=null}
- function finish(ok,t){phase="judge";const per=10/NR;let got;const sp=ok?mgPace(env,"kim",t-t0,LIM):1;if(ok)got=per*sp;/* review/mg-tune-r1: the ONE time part (was its own typed .6+.4·left/LIM) */else got=per*.5*(1-cross(P.N,P.E).c/P.c0);pts+=Math.max(0,got);
-  kg82Pop(pops,W/2,H*.08+10,ok?"Gỡ xong mối rối!":"Hết giờ",ok?(sp<.995?K91C.gold():K91C.good()):K91C.red());setTimeout(next,1200)}
- const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)finish(false,now);kg82Bg(g,W,H,"kim",.06,.7);
-  kg82Spr(g,"kim-spool",W-Math.min(W,H)*.07,Math.min(W,H)*.09,Math.min(W,H)*.1,null,{alpha:.95});
-  const {c,X}=cross(P.N,P.E);P.E.forEach(([a,b],i)=>{g.strokeStyle=X.has(i)?K91C.red():phase==="judge"&&!c?K91C.good():"#c9a03a";g.lineWidth=X.has(i)?3:3.5;g.beginPath();g.moveTo(P.N[a].x,P.N[a].y);g.lineTo(P.N[b].x,P.N[b].y);g.stroke()});
-  P.N.forEach((p,i)=>{const on=drag&&drag.i===i;/* the painted silk knot */if(kg82Spr(g,"kim-knot",p.x,p.y,HR*1.18*(on?BAL.mgFx.pop:1),null,{glow:on?BAL.mgFx.glow:null,ring:on}))return;g.save();g.shadowColor="#0005";g.shadowBlur=4;const gr=g.createRadialGradient(p.x-4,p.y-4,2,p.x,p.y,HR*.6);gr.addColorStop(0,on?"#fff3d6":"#fbe9c4");gr.addColorStop(1,on?"#e4a54a":"#b88a3a");
-   g.fillStyle=gr;g.beginPath();g.arc(p.x,p.y,HR*.55,0,Math.PI*2);g.fill();g.shadowBlur=0;g.strokeStyle="#6e4d0e";g.lineWidth=1.5;g.stroke();g.restore()});
-  g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,`Chỗ chỉ chéo: ${c}`,8,8);
-  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,mgReach(pts,cl(r+(phase==="judge"?1:0),0,NR),NR)-(phase==="play"&&r<NR?10/NR*(1-mgPace(env,"kim",now-t0,LIM)):0)),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
- k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;let bi=-1,bd=1e9;P.N.forEach((p,i)=>{const d=k91Dist(x,y,p.x,p.y);if(d<bd){bd=d;bi=i}});if(bd<HR*1.1)drag={i:bi,dx:P.N[bi].x-x,dy:P.N[bi].y-y}},
-  move:(x,y)=>{if(!drag||phase!=="play")return;const p=P.N[drag.i];p.x=cl(x+drag.dx,HR*.6,W-HR*.6);p.y=cl(y+drag.dy,HR*.6,H-HR*.6)},
-  up:()=>{if(!drag)return;drag=null;if(phase==="play"&&cross(P.N,P.E).c===0){kg82Pluck(2,true);finish(true,performance.now())}}});
- KG82.peek=()=>{if(phase!=="play"||!P||drag)return null;let bi=-1,bd=4;P.N.forEach((p,i)=>{const d=k91Dist(p.x,p.y,P.home[i].x,P.home[i].y);if(d>bd){bd=d;bi=i}});if(bi<0)return null;
-  const a=C.client(P.N[bi].x,P.N[bi].y),b=C.client(P.home[bi].x,P.home[bi].y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
- next();return()=>{done=true;stop()}}
+/* =============== 8. (was UNTANGLE, Khéo tay «Gỡ rối chỉ»): removed by review/mg-craft — Khéo tay plays jcraft_kim «Cắt hoa giấy»; no other caller =============== */
 
 /* =============== 9. COOK (Nấu ăn): hold "Quạt lửa" to keep the fire in the step's zone and put the ingredients in the recipe's order =============== */
 const K91_RC=[["Chè hạt sen long nhãn",[["Nước giếng",2],["Hạt sen",1],["Long nhãn",0],["Đường phèn",0]]],["Gà ác tần thuốc bắc",[["Gà ác",2],["Thuốc bắc",1],["Táo đỏ",1],["Kỷ tử",0]]],
@@ -33217,19 +33194,32 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  next();return()=>{done=true;stop()}}
 
 /* ---------- wiring: one engine per kind, new "how" lines ---------- */
-Object.assign(KG82_ENG,{hold:k91Hold,fling:k91Fling,trace:k91Trace,arrange:k91Arrange,untangle:k91Untangle,cook:k91Cook,blend:k91Blend});
+Object.assign(KG82_ENG,{hold:k91Hold,fling:k91Fling,trace:k91Trace,arrange:k91Arrange,cook:k91Cook,blend:k91Blend});
 Object.assign(KG82_KIND,{
  hat:{e:"hold",n:"Hát",t:"Giữ hơi theo giai điệu",how:"Giữ ngón tay trên ô để lên giọng, buông ra để xuống giọng; giữ đóa hoa trong dải vàng của giai điệu suốt bài ca."},
  dauho:{e:"fling",n:"Đầu hồ",t:"Ném tên vào bình",how:"Đặt ngón tay, kéo ngược về sau rồi buông để ném tên vào miệng bình. Kéo dài thì ném xa; gió đổi mỗi lần. 6 lần ném."},
  ve:{e:"trace",n:"Vẽ",t:"Đồ nét bút",how:"Đặt ngón tay ở chấm xanh rồi đưa theo nét mờ cho kín và đều tay. 4 bức."},
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
- kim:{e:"untangle",n:"Khéo tay",t:"Gỡ rối chỉ",how:"Kéo các nút chỉ cho đến khi không còn sợi nào chéo nhau (sợi đỏ là chỗ chéo). 3 mối rối. Làm nhanh thì được trọn phần."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
  huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
 KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
+/* ---------- mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN real mechanic, tracing only for Chép kinh; dev/design/MG_CRAFTS.md) ----------
+   THE ONE PLACE that maps the craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
+   jcraft_kim / jcraft_ve / jcraft_hoa, and by jtd for td_cong = the stitch board of jcraft_theu; owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game); until then it keeps the engine above. Kind KEYS stay (ve, hoa, kim, td_cong): every caller (startContest,
+   playArt, lessons, jexam, jentry, Thử tay, works j83) and old saves keep working. e = engine · t / how = the rules screen (kgReady; text is allowed there,
+   never in play, OD 20/11 ~05:10Z) · demo = the KG82_DEMO move picture · mgl = the lesson label (KG82_MGL) when the kind is a lesson art · spr = the sprites preloaded (KG82_SPR; [] while the board draws stand-ins). */
+const KG82_CRAFT={
+ kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",spr:[],
+  how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
+ ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
+  how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi chạm ✓: giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
+ hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
+  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."},
+ td_cong:{e:"stitch",t:"Thêu theo nét",demo:"tap",spr:[],/* owner 21/11 ~01:05Z: Thêu keeps «Nhớ mẫu thêu»; the stitch board serves the Công lesson (jtd registers it) */
+  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
 /* ================= jmgt: MINIGAME DIFFICULTY TIERS (owner 16/11 07:10Z "lên chơi càng cao thì nó khó hơn", 07:25Z "mức vừa", ONE CORE) =================
@@ -33389,6 +33379,479 @@ window.mgTraceScore=mgTraceScore;window.mgTier=mgTier;window.mgPace=mgPace;windo
 /* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
    jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
    values keep using her real art level (KG82.tier.lv) through kg82NpcMean. */
+/* ================= jcraft: shared parts of the four CRAFT mini-games (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm";
+   design dev/design/MG_CRAFTS.md; review/mg-craft lead + review/mg-craft-ve + review/mg-craft-hoa) =================
+   Engines (same KG82 contract as j82 / j91: eng(box, env{kind, lv = board ease, hud, end(raw 0..10)}) → stop; KG82.peek = the test oracle / the guided round's
+   hand; KG82.hint = a timing game's «tap now» point):
+     jcraft_theu.js  td_cong «Thêu theo nét» engine "stitch" (lead; owner 21/11 ~01:05Z: Thêu keeps the j82 memory game, the stitch board serves Công, jtd registers it)
+     jcraft_kim.js   kim   «Cắt hoa giấy»    engine "papercut"  (lead)
+     jcraft_ve.js    ve    «Thủy mặc»        engine "inkwash"   (review/mg-craft-ve)
+     jcraft_hoa.js   hoa   «Chọn mùa · cắt cành · nghiêng thế»  engine "ikebana" (review/mg-craft-hoa)
+   Wiring: the ONE table KG82_CRAFT (j91 re-wire block) names each kind's engine + rules text; crReg(kind, eng, fn) registers the engine and switches the kind.
+   Numbers: every board number is a lever BAL.mgTier.lev.<kind>.<name> = [ease 0, ease 5] read through crLev (= mgLev); pieces with rank through mgMore,
+   the time part through mgPace (ONE CORE, law 4; harder as she climbs, law 5). Score road unchanged: raw 0..10 → mgGrade(raw, kind) with BAL.mgTier.kG.
+   No words in play (OD 20/11 ~05:10Z): every cue is a picture; signs only (★ ✗ ✓). Pictures: crArt draws the painted sprite when Foreman C has delivered it
+   (name listed in CR_HAVE), else the canvas stand-in and the name is recorded once in CTM_MISSING_PICS (kitPhNote "mg") = the «tạm» marker of the kit. */
+const CRAFT={speed:1};/* tests only: CRAFT.speed > 1 runs the craft boards' clocks faster (crNow); the game never changes it */
+const CR_B={r:null,g:0,s:1};/* the craft clock: continuous when CRAFT.speed changes (tests only) */
+function crNow(){const n=performance.now();if(CR_B.r==null){CR_B.r=n;CR_B.g=n;CR_B.s=CRAFT.speed}if(CRAFT.speed!==CR_B.s){CR_B.g+=(n-CR_B.r)*CR_B.s;CR_B.r=n;CR_B.s=CRAFT.speed}return CR_B.g+(n-CR_B.r)*CR_B.s}
+/* register an engine; switch the kind to it from KG82_CRAFT (rules text, move picture, lesson label) */
+function crReg(kind,eng,fn){KG82_ENG[eng]=fn;const D=(typeof KG82_CRAFT!=="undefined"&&KG82_CRAFT[kind])||null;const K=KG82_KIND[kind];if(!D||D.e!==eng||!K)return;
+ const was=K.e;K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
+ if(D.mgl)for(const a in KG82_MGL)if(KG82_MGL[a][1]===kind)KG82_MGL[a]=[D.mgl,kind];
+ if(D.spr)KG82_SPR[kind]=D.spr;
+ /* the engine this kind left: unregistered once no kind runs it (mg-allkinds guard 1: every KG82_ENG engine backs a kind; old trace / arrange). The
+    functions stay where something still calls them directly (k91Trace: jwkg Chép kinh / May áo) */
+ if(was!==eng&&!Object.values(KG82_KIND).some(k=>k.e===was))delete KG82_ENG[was]}
+/* is the kind on its craft engine? (tests, scans) */
+function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_KIND[kind].e===D.e&&typeof KG82_ENG[D.e]==="function"}
+/* a board lever (mgLev) — the craft engines never type a number of their own */
+function crLev(env,kind,name){const v=mgLev(env,kind,name);if(v==null)throw new Error("BAL.mgTier.lev."+kind+"."+name+" missing");return v}
+/* painted sprites Foreman C has delivered (https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-<name>.webp); until then the stand-in is drawn and the name is listed as a missing picture */
+const CR_HAVE=new Set([]);
+function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,w,h,o))return true;
+ try{if(typeof kitPhNote==="function")kitPhNote("mg",name,"light","mini-game craft sprite "+name)}catch(e){}if(stand)stand();return false}
+/* the frame loop on the craft clock (crNow), so a test can run the board faster; returns stop() */
+function crLoop(fn){let stop=false,raf=0;const L=()=>{if(stop)return;fn(crNow());if(!stop)raf=requestAnimationFrame(L)};raf=requestAnimationFrame(L);return()=>{stop=true;cancelAnimationFrame(raf)}}
+/* a timeout on the craft clock */
+function crLater(f,ms){return setTimeout(f,Math.max(0,ms/(CRAFT.speed||1)))}
+/* the HUD of a round-based craft board (kit chips). x = the raw float if the rest of the play goes perfectly (mgReach + the open round's reach): the score
+   cell shows the ONE grade mgLive(env, x) like every other mini-game (review/mg-score-same, owner bug 20/11 ~06:50Z; dev/test/mg-score-same-scan.py) */
+function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,Math.max(0,x-(env.hintCut?env.hintCut():0))),/* hintCut: the hints taken in the Tứ đức wrapper (jtd tdWrap), as its env.end */round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
+/* the pop colour of a judged round (one rule for the family, review/mg-score-same C-AG #29): good work the time part cut shows gold, not green */
+function crCol(q,sp){return q>=.55?(sp<.995?K91C.gold():K91C.good()):q>=.3?K91C.gold():K91C.red()}
+const crStars=q=>q>=.85?"★★★":q>=.55?"★★":q>=.3?"★":"✗";
+/* colour helpers (stand-in drawing) */
+function crMix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
+const crRGB=c=>`rgb(${c.join(",")})`;
+/* a small stand-in spool of silk (stitch) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
+function crTmp(g,x,y,w,h){g.save();g.setLineDash([3,3]);g.strokeStyle="rgba(143,95,12,.45)";g.lineWidth=1;g.strokeRect(x,y,w,h);g.restore()}
+window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window.crNow=crNow;
+/* ================= jcraft_theu: the stitch board, Công «Thêu theo nét» (kind td_cong, engine "stitch"; MG_CRAFTS.md §1 — built for Thêu, moved to the Công
+   lesson by the owner 21/11 ~01:05Z: Thêu keeps the j82 memory game «Nhớ mẫu thêu»; registered by jtd: crReg("td_cong","stitch",tdWrap(crtStitch)). owner OD 20/11 ~08:15Z: «choose the right thread
+   colour and stitch along a lit pattern in rhythm») =================
+   Real craft (Su xiu long-and-short shading): a petal is built from bands of ONE hue, dark at the rim to light at the heart; the colour order is the skill,
+   the even stitch rhythm is the hand. Board: the hoop with the flower cut into bands, the finished sample in the corner (covered by its cloth after
+   lev.peek ms), a row of silk spools (the right shades shuffled + lev.alike decoys half a shade step off). Per band: tap the spool of that band's shade,
+   then lev.st stitches: the needle dips on a steady beat (lev.beat ms); tap the hoop as it dips onto the lit dot (±lev.win ms = on-beat 1, ±near·win = 0.6,
+   else a loose loop 0 that must be re-stitched). 3 pieces (mai 3 · mẫu đơn 4 · phượng 5 bands, + mgMore with rank).
+   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). In play: ★ / ✗ signs + ONE short guiding line (kit kg82Guide, KIT §13.7.2) and the «Mẫu» tag (owner OD 21/11 ~00:50Z «guiding words stay»; LIVE huong-cue-2 gave the old Công board «Chỉ mẫu» / «Chạm sợi chỉ cùng màu», carried here by review/mg-craft-r3). */
+const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
+function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K=env.kind||"td_cong",L=n=>crLev(env,K,n);
+ const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
+ /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
+ const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
+ let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;
+ const hx=now=>HX+SWAY*W*Math.sin(now/1100);
+ function piece(){if(done)return;pi++;if(pi>=NP){done=true;phase="end";return crLater(()=>env.end(pts),300)}
+  const [pet,b0,dk,lt]=CRT_PCS[pi];const n=b0+mgMore(env);const col=i=>crMix(dk,lt,n>1?i/(n-1):0);
+  /* spools: every band's shade + decoys half a step off (the hardest look-alikes: next to the darkest bands) */
+  const sp=[...Array(n).keys()].map(i=>({c:col(i),b:i}));for(let k=0;k<Math.min(ALIKE,n-1);k++)sp.push({c:crMix(col(k),col(k+1),.5),b:-1});
+  P={pet,n,col,sp:kg82Shuf(sp),band:0,ph:"pick",cols:[],q:[],k:0,used:-1,ok:0,start:crNow(),pk:null,dip0:0};phase="play";t0=P.start;layout()}
+ /* spool places: one row (two rows when crowded) under the hoop */
+ function layout(){const m=P.sp.length,rows=m>6?2:1,per=Math.ceil(m/rows),sx=W/(per+1),r=Math.min(sx*.36,24,H*.05);
+  P.sp.forEach((s,i)=>{const row=Math.floor(i/per),j=i%per,cnt=row<rows-1?per:m-per*(rows-1);s.x=W/2+(j-(cnt-1)/2)*sx;s.y=SY+(rows>1?(row-.5)*r*2.7:0);s.r=r})}
+ /* band i of the flower: scale from the rim (i = 0) to the heart */
+ const sc=i=>1-i/(P.n+.6);
+ function petals(x,y,R,s,fill,stroke,lw){g.save();g.translate(x,y);g.beginPath();for(let k=0;k<P.pet;k++){const a=k/P.pet*Math.PI*2-Math.PI/2;
+   g.moveTo(Math.cos(a)*R*s*1.02,Math.sin(a)*R*s*1.02);g.ellipse(Math.cos(a)*R*s*.52,Math.sin(a)*R*s*.52,R*s*.5,R*s*.28,a,0,Math.PI*2)}
+  if(fill){g.fillStyle=fill;g.fill()}if(stroke){g.strokeStyle=stroke;g.lineWidth=lw||1.2;g.stroke()}g.restore()}
+ /* the stitch dots of band i: ST points on the band's mid-line, at petals spread round the flower */
+ function dots(i,x,y){const s=(sc(i)+sc(i+1))/2,out=[];for(let k=0;k<ST;k++){const pt=Math.floor(k*P.pet/ST),a=pt/P.pet*Math.PI*2-Math.PI/2;out.push([x+Math.cos(a)*R0*s*.75,y+Math.sin(a)*R0*s*.75])}return out}
+ /* the dip of the needle nearest to now (dip i at dip0 + i·beat) */
+ const dipIdx=now=>Math.round((now-P.dip0)/BEAT),dipAt=i=>P.dip0+i*BEAT;
+ function sample(x,y,R,now){const hid=now-P.start>PEEK;g.save();g.beginPath();g.arc(x,y,R*1.12,0,Math.PI*2);g.fillStyle="#fbf3e2";g.fill();g.strokeStyle="#8f5f0c";g.lineWidth=2;g.stroke();g.restore();
+  if(!hid)for(let i=0;i<P.n;i++)petals(x,y,R,sc(i),crRGB(P.col(i)));
+  else{/* the silk cloth over the sample (memory at high rank) */g.save();g.beginPath();g.arc(x,y,R*1.1,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.clip();g.globalAlpha=.3;g.strokeStyle="#6e4d0e";g.lineWidth=1;
+   for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(x-R*1.1,y+k*R*.28);g.quadraticCurveTo(x,y+k*R*.28+R*.12,x+R*1.1,y+k*R*.28);g.stroke()}g.restore()}
+  crTmp(g,x-R*1.12,y-R*1.12,R*2.24,R*2.24);return hid}
+ function draw(now){kg82Bg(g,W,H,K,.1,.6);if(!P)return;const x=hx(now),y=HY;
+  /* hoop: stand-in wooden ring + silk */
+  crArt(g,"theu-hoop",x,y,R0*2.3,R0*2.3,{},()=>{g.save();g.beginPath();g.arc(x,y,R0*1.08,0,Math.PI*2);g.fillStyle="#fffaf0";g.fill();g.lineWidth=R0*.07;g.strokeStyle="#a8743a";g.stroke();g.restore();crTmp(g,x-R0*1.12,y-R0*1.12,R0*2.24,R0*2.24)});
+  /* the bands: stitched ones in the chosen silk, the band being stitched half filled, the next one lit, the rest a faint outline */
+  for(let i=0;i<P.n;i++){if(i<P.band||(i===P.band&&P.ph==="stitch")){const c=P.cols[i]||P.col(i);petals(x,y,R0,sc(i),crRGB(i<P.band?c:crMix(c,[255,255,255],.55*(1-P.k/ST))),null)}
+   else petals(x,y,R0,sc(i),i===P.band&&P.ph==="pick"?"rgba(255,240,160,.6)":"rgba(255,255,255,.35)","rgba(110,77,14,.5)",1.2)}
+  if(P.ph!=="end"&&P.band<P.n){/* lit band rim */g.save();g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.5;petals(x,y,R0,sc(P.band),null,BAL.mgFx.ring,2.6);g.restore()}
+  if(P.ph==="stitch"){const D=dots(P.band,x,y);D.forEach((d,k)=>{if(k<P.k){g.fillStyle=crRGB(P.cols[P.band]);g.strokeStyle="#6e4d0e";g.lineWidth=1;g.beginPath();g.arc(d[0],d[1],5,0,Math.PI*2);g.fill();g.stroke()}});
+   const d=D[P.k];if(d){/* the lit dot and the needle bobbing onto it on the beat */const ph=((now-P.dip0)%BEAT+BEAT)%BEAT/BEAT,lift=(1-Math.cos(ph*Math.PI*2))/2;
+    const near=1-Math.min(1,Math.abs(now-dipAt(dipIdx(now)))/(BEAT*.5));const rr=7+6*near;
+    g.save();g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*near;g.fillStyle=near>.75?BAL.mgFx.ring:"#f6d27a";g.strokeStyle="#8f5f0c";g.lineWidth=1.5;g.beginPath();g.arc(d[0],d[1],rr,0,Math.PI*2);g.fill();g.stroke();g.restore();
+    const ny=d[1]-6-lift*R0*.5;crArt(g,"theu-needle",d[0],ny,14,R0*.5,{ay:1},()=>{g.save();g.strokeStyle="#5b5b66";g.lineWidth=3;g.lineCap="round";g.beginPath();g.moveTo(d[0],ny);g.lineTo(d[0]+3,ny-R0*.42);g.stroke();
+     g.strokeStyle=crRGB(P.cols[P.band]);g.lineWidth=1.6;g.beginPath();g.moveTo(d[0]+3,ny-R0*.4);g.quadraticCurveTo(d[0]+R0*.3,ny-R0*.6,d[0]+R0*.45,ny-R0*.2);g.stroke();g.restore()})}}
+  /* sample in the corner */const sr=Math.min(W,H)*.08;sample(sr*1.35,sr*1.35,sr,now);
+  /* spools */P.sp.forEach((s,i)=>{const on=P.pk===i&&now-P.litAt<BAL.mgFx.ms;const sz=on?kg82FxPop(P.litAt,now):1;crArt(g,"theu-spool",s.x,s.y,s.r*2*sz,s.r*2.4*sz,{},()=>{g.save();g.translate(s.x,s.y);g.scale(sz,sz);
+    g.fillStyle="#b88a3a";g.fillRect(-s.r*.95,-s.r*1.15,s.r*1.9,s.r*.3);g.fillRect(-s.r*.95,s.r*.85,s.r*1.9,s.r*.3);g.fillStyle=crRGB(s.c);g.fillRect(-s.r*.8,-s.r*.85,s.r*1.6,s.r*1.7);
+    g.globalAlpha=.22;g.strokeStyle="#000";g.lineWidth=1;for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(-s.r*.8,k*s.r*.24);g.lineTo(s.r*.8,k*s.r*.24+2);g.stroke()}g.restore()});
+   if(P.pk===i)kg82FxRing(g,s.x,s.y,s.r*1.2,P.litAt,now)});
+  /* the «Mẫu» tag under the sample + ONE kit guiding line between the hoop and the spools: pick = which spool, stitch = when to tap (green when the lit dot glows) */
+  g.textAlign="center";g.textBaseline="alphabetic";g.fillStyle=kg82Col("--k-lab","#6b4a1c");g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Mẫu",sr*1.35,sr*2.47+13,70);
+  if(phase==="play"&&P.ph!=="end"){const top=Math.min(...P.sp.map(s=>s.y-s.r*1.2)),gy=(HY+R0*1.12+top)/2;
+   if(P.ph==="pick")kg82Guide(g,"Chạm cuộn chỉ cùng sắc dải sáng",W/2,gy,"wait",13,W-16);
+   else if(P.ph==="stitch"&&P.k<ST){const go=1-Math.min(1,Math.abs(now-dipAt(dipIdx(now)))/(BEAT*.5))>.75;kg82Guide(g,go?"Chạm khung ngay!":"Chạm khung khi kim chúc xuống",W/2,gy,go?"go":"wait",13,W-16)}}
+  kg82DrawPops(g,pops,now);crHud(env,reach(now),pi,NP,phase==="play"?LIM-(now-t0):null);
+  if(phase==="play"&&P.ph!=="end"&&now-P.start>LIM)endPiece(now)}
+ /* the raw float if the rest goes perfectly: pieces done + the open piece's reach (wrong spools / loose stitches so far stay lost, its time part now) + pieces to come */
+ function reach(now){if(!P||phase!=="play"||P.ph==="end")return mgReach(pts,Math.min(NP,pi+1),NP);const picked=P.band+(P.ph==="stitch"?1:0),cR=(P.ok+P.n-picked)/P.n;
+  const sq=P.q.reduce((a,b)=>a+b,0),left=P.n*ST-P.q.filter(q=>q>0).length,sR=(sq+left)/Math.max(P.q.length+left,P.n*ST);
+  return mgReach(pts+10/NP*(wC*cR+wS*sR)*mgPace(env,K,now-P.start,LIM),pi+1,NP)}
+ function bandDone(){if(!P||P.ph!=="stitch")return;P.band++;P.k=0;if(P.band>=P.n)return endPiece(crNow());P.ph="pick"}
+ function endPiece(now){if(P.ph==="end")return;P.ph="end";const cShare=P.ok/P.n,sQ=P.q.reduce((a,b)=>a+b,0)/Math.max(P.q.length,P.n*ST);
+  const f=wC*cShare+wS*sQ,sp=mgPace(env,K,now-P.start,LIM),got=10/NP*f*sp;pts+=Math.max(0,got);kg82Pop(pops,W/2,H*.08+12,crStars(f),crCol(f,sp));
+  phase="judge";crLater(piece,1200)}
+ function tapAt(x,y){if(phase!=="play"||!P)return;const now=crNow();
+  if(P.ph==="pick"){const i=P.sp.findIndex(s=>k91Dist(x,y,s.x,s.y)<s.r*1.35);if(i<0)return;const s=P.sp[i];P.pk=i;P.litAt=now;const right=s.b===P.band;
+   P.cols[P.band]=s.c;if(right)P.ok++;kg82Pluck(P.band,right);kg82Pop(pops,s.x,s.y-s.r*1.6,right?"★":"✗",right?K91C.good():K91C.red());
+   P.ph="stitch";P.k=0;P.dip0=now+BEAT*.5;P.used=-1;return}
+  if(P.ph==="stitch"&&P.k<ST){if(k91Dist(x,y,hx(now),HY)>R0*1.25)return;const di=dipIdx(now),dt=Math.abs(now-dipAt(di));const d=dots(P.band,hx(now),HY)[P.k];
+   const q=di<0||di===P.used?0:dt<=WIN?1:dt<=WIN*NEAR?.6:0;P.q.push(q);
+   if(q>0){P.used=di;P.k++;kg82Pluck(P.k,true);if(q<1)kg82Pop(pops,d[0],d[1]-16,"★",K91C.gold());if(P.k>=ST)crLater(bandDone,BEAT*.35)}
+   else kg82Pop(pops,d[0],d[1]-16,"✗",K91C.red())}}
+ k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
+ /* the oracle: the right spool (with its look-alikes and whether the sample is covered: a test bot's memory slip), then the hoop on the dip */
+ KG82.peek=()=>{if(phase!=="play"||!P)return null;const now=crNow();
+  if(P.ph==="pick"){const i=P.sp.findIndex(s=>s.b===P.band);if(i<0)return null;const s=P.sp[i];const c=C.client(s.x,s.y);
+   const al=P.sp.filter(t=>t!==s&&t.b<0&&Math.abs(t.c[0]-s.c[0])+Math.abs(t.c[1]-s.c[1])+Math.abs(t.c[2]-s.c[2])<90).map(t=>C.client(t.x,t.y));return Object.assign(c,{alike:al,hidden:now-P.start>PEEK})}
+  /* stitch: the next free dip once it is near (≤ 300 ms); at = ms until that moment (the jslap convention read by dev/measure/mg-bots.js), so a bot taps on the beat, not on the call */
+  if(P.ph==="stitch"&&P.k<ST){let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;if(dipAt(di)-now>300)return null;const d=dots(P.band,hx(now),HY)[P.k];return d?Object.assign(C.client(d[0],d[1]),{at:dipAt(di)-now}):null}return null};
+ KG82.hint=()=>{if(phase!=="play"||!P||P.ph!=="stitch"||P.k>=ST)return null;const now=crNow();let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;
+  const d=dots(P.band,hx(now),HY)[P.k];if(!d)return null;const c=C.client(d[0],d[1]);return{x:c.x,y:c.y,soon:dipAt(di)-now<BAL.mgTier.tut.lead}};
+ piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;if(stop)stop()}}
+window.crtStitch=crtStitch;/* registered by jtd (loads later): crReg("td_cong","stitch",tdWrap(crtStitch,"stitch")) */
+/* ================= jcraft_kim: Khéo tay «Cắt hoa giấy» (kind kim, engine "papercut"; MG_CRAFTS.md §4; Khất xảo paper-cut, UNESCO ICH 2009) =================
+   Real craft: red paper folded 2, 4 or 8 times and snipped; unfolded it becomes a symmetric window-flower. The skill is seeing, while folded, what each
+   snip becomes once opened. Board: the finished window-flower (sample) on the left — covered by its cloth after lev.peek ms; on the right the same paper
+   folded into a wedge (fold edges = the two radii, open edge = the arc). Drag one of the cutter shapes (moon, triangle, drop; + lev.alike look-alikes)
+   onto the wedge where it will make the sample's holes; drag a cut off the wedge to take it back; tap ✓: the paper unfolds (accordion: panel m shows the
+   wedge mirrored on every second panel), matching holes glow, extra holes show. 3 sheets: folds 2 · folds/2 · folds (lev.folds 8 = 2·4·8, 4 = 2·2·4).
+   Match = same shape within lev.place (share of the wedge radius) of a hole of the sample, in the wedge's own plane.
+   Score per sheet = 10/3 · max(0, (matched − lev.extra · extra) / needed) · mgPace(env, "kim", el, lim). No words in play: ★ / ✗ / ✓ signs only. */
+const CRK_SH=["moon","tri","drop"],CRK_ALIKE=["half","dia"];/* the alike pool: half-moon looks like the moon, the diamond like the drop / triangle */
+function crkShape(g,sh,x,y,a,z){/* a cutter / hole shape centred (x,y), symmetric about its radial axis a (pointing outward), size z (px) */
+ g.save();g.translate(x,y);g.rotate(a+Math.PI/2);/* local: −y = outward */g.beginPath();
+ if(sh==="moon"){g.arc(0,0,z,0,Math.PI*2);g.closePath();g.save();g.clip();g.beginPath();g.arc(0,0,z,0,Math.PI*2);g.arc(0,-z*.55,z*.82,0,Math.PI*2,true);g.fill("evenodd");g.restore();g.restore();return}
+ if(sh==="half"){g.arc(0,z*.25,z,Math.PI,Math.PI*2);g.closePath()}
+ else if(sh==="tri"){g.moveTo(0,z*1.05);g.lineTo(-z*.95,-z*.75);g.lineTo(z*.95,-z*.75);g.closePath()}
+ else if(sh==="drop"){/* round end inward, tip outward: the arc between the two tangent points from the tip (0, −1.15z) */g.arc(0,z*.3,z*.72,-Math.PI*.166,-Math.PI*.834,false);g.lineTo(0,-z*1.15);g.closePath()}
+ else if(sh==="dia"){g.moveTo(0,-z*1.1);g.lineTo(z*.62,0);g.lineTo(0,z*1.1);g.lineTo(-z*.62,0);g.closePath()}
+ g.fill();g.restore()}
+function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.15:.8,470),{g,W,H}=C;const K="kim",L=n=>crLev(env,K,n);
+ const F=Math.max(2,Math.pow(2,Math.round(Math.log2(Math.max(2,L("folds")))))),FOLDS=[2,Math.max(2,F/2),F],NR=FOLDS.length;
+ const HOLES=Math.max(1,Math.round(L("holes")))+mgMore(env),SIZE=L("size"),TOL=L("place"),PEEK=L("peek"),ALIKE=Math.max(0,Math.round(L("alike"))),LIM=L("lim"),EX=L("extra");
+ const side=W>=H*1.05;/* sample left / wedge right (wide); sample above / wedge below (narrow) */
+ const SX=side?W*.2:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.17,H*.34):Math.min(W*.3,H*.17);
+ const AX=side?W*.7:W*.5,AY=side?H*.72:H*.74,R=side?Math.min(W*.27,H*.55):Math.min(W*.42,H*.4);
+ const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
+ const bt=k91Btns(box,[["crkok","✓","","Mở giấy: xem hoa cắt"]]);const okb=bt.querySelector("#crkok");
+ /* wedge-plane point (rr share of R, ph radians from the wedge's left fold) → board px */
+ const wA0=a=>-Math.PI/2-a/2;
+ const toXY=(rr,ph,a)=>{const t=wA0(a)+ph;return[AX+Math.cos(t)*rr*R,AY+Math.sin(t)*rr*R]};
+ const fromXY=(x,y,a)=>{const dx=x-AX,dy=y-AY;const rr=Math.hypot(dx,dy)/R;let t=Math.atan2(dy,dx)-wA0(a);while(t<-Math.PI)t+=Math.PI*2;while(t>Math.PI)t-=Math.PI*2;return[rr,t]};
+ const inW=(rr,ph,a)=>rr>=.08&&rr<=1.02&&ph>=-.04&&ph<=a+.04;
+ const pl=(rr,ph)=>[rr*Math.cos(ph),rr*Math.sin(ph)];/* the wedge's own plane (units of R) */
+ const dist=(c,t)=>{const a=pl(c.r,c.ph),b=pl(t.r,t.ph);return Math.hypot(a[0]-b[0],a[1]-b[1])};
+ function next(){if(done)return;r++;if(r>=NR){done=true;okb.disabled=true;phase="end";return crLater(()=>env.end(pts),300)}
+  const f=FOLDS[r],a=Math.PI*2/f,shapes=CRK_SH.concat(CRK_ALIKE.slice(0,ALIKE));const z=SIZE;const T=[];
+  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+Math.random()*.55,edge=Math.random()<.2?(Math.random()<.5?0:a):null;
+    const ph=edge!=null?edge:a*(.18+Math.random()*.64);const t={sh:shapes[Math.floor(Math.random()*shapes.length)],r:rr,ph};
+    /* holes apart from each other (and from their own mirror images across the folds) */
+    if(T.every(o=>dist(o,t)>z*3.2)&&(edge!=null||(rr*Math.sin(Math.min(ph,a-ph))>z*1.6))){T.push(t);break}}}
+  const tray=shapes.map((sh,i)=>({sh,x:(side?W*.42:W*.1)+(i+.5)*((side?W*.56:W*.8)/shapes.length),y:TY}));
+  P={f,a,z,T,cuts:[],tray,start:crNow(),ph:"cut",open:0,res:null};phase="play";okb.disabled=false}
+ function drawPaper(cx,cy,RR,a0,span,cuts,opts){/* the red paper sector [a0, a0+span] with every cut's mirrored images (panels of angle P.a) */
+  g.save();g.beginPath();g.moveTo(cx,cy);g.arc(cx,cy,RR,a0,a0+span);g.closePath();g.fillStyle=RED;g.fill();g.clip();g.fillStyle=PAPER;
+  const n=Math.ceil(span/P.a-1e-6);for(let m=0;m<n;m++)for(const c of cuts){const t=m%2===0?a0+m*P.a+c.ph:a0+(m+1)*P.a-c.ph;if(t>a0+span+1e-6)continue;
+   const x=cx+Math.cos(t)*c.r*RR,y=cy+Math.sin(t)*c.r*RR;g.fillStyle=opts&&opts.col?opts.col(c):PAPER;crkShape(g,c.sh,x,y,t,P.z*RR)}
+  /* creases */g.strokeStyle="rgba(255,255,255,.28)";g.lineWidth=1;for(let m=1;m<n;m++){const t=a0+m*P.a;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(t)*RR,cy+Math.sin(t)*RR);g.stroke()}
+  g.restore()}
+ function draw(now){kg82Bg(g,W,H,"kim",.12,.6);if(!P)return;const a=P.a,hid=now-P.start>PEEK&&P.ph==="cut";
+  /* the sample: the opened window-flower (or its cloth); the gold outline marks the panel that is the folded wedge */
+  crArt(g,"kim-sample",SX,SY,RS*2,RS*2,{},()=>{if(hid){g.save();g.beginPath();g.arc(SX,SY,RS,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.restore()}
+   else{drawPaper(SX,SY,RS,wA0(a),Math.PI*2,P.T);g.save();g.strokeStyle="rgba(255,226,140,.85)";g.lineWidth=1.6;g.beginPath();g.moveTo(SX,SY);g.arc(SX,SY,RS,wA0(a),wA0(a)+a);g.closePath();g.stroke();g.restore()}
+   crTmp(g,SX-RS,SY-RS,RS*2,RS*2)});
+  if(P.ph==="cut"){/* the folded wedge with the cuts so far (as cut paper: the holes show), the fold edges darker */
+   crArt(g,"kim-wedge",AX,AY,R*2,R*2,{},()=>{drawPaper(AX,AY,R,wA0(a),a,P.cuts);crTmp(g,AX-R,AY-R,R*2,R)});
+   g.save();g.strokeStyle="#7a1418";g.lineWidth=2.5;g.beginPath();g.moveTo(...toXY(1,0,a));g.lineTo(AX,AY);g.lineTo(...toXY(1,a,a));g.stroke();g.restore();
+   if(drag&&drag.c){const c=drag.c;g.save();g.globalAlpha=.85;g.fillStyle=PAPER;const t=Math.atan2(drag.y-AY,drag.x-AX);crkShape(g,c.sh,drag.x,drag.y,t,P.z*R);g.restore()}}
+  else{/* opening: the sector grows from the wedge to the full sheet; then the holes are judged */const k=Math.min(1,(now-P.open)/900);const span=a+(Math.PI*2-a)*k*k*(3-2*k);
+   const OY=AY-R*.35,OR=R*.62;drawPaper(AX,OY,OR,wA0(a),span,P.cuts,P.res&&k>=1?{col:c=>c.ok?"#fff0a0":"#ffffff"}:null);
+   if(P.res&&k>=1){g.save();g.setLineDash([4,3]);g.strokeStyle=K91C.red();g.lineWidth=1.6;/* the sample's holes she missed, as dashed ghosts on the wedge panel */
+    for(const t of P.T.filter(t=>!t.ok)){const ang=wA0(a)+t.ph,x=AX+Math.cos(ang)*t.r*OR,y=OY+Math.sin(ang)*t.r*OR;g.beginPath();g.arc(x,y,P.z*OR*1.25,0,Math.PI*2);g.stroke()}g.restore()}}
+  /* the cutter tray (pictures only) */
+  P.tray.forEach(s=>{const on=drag&&drag.c&&drag.new&&drag.c.sh===s.sh;crArt(g,"kim-cut-"+s.sh,s.x,s.y,P.z*R*3,P.z*R*3,{},()=>{g.save();g.fillStyle="#fff8ea";g.strokeStyle="#8f5f0c";g.lineWidth=1.5;
+    k91RR(g,s.x-P.z*R*1.6,s.y-P.z*R*1.6,P.z*R*3.2,P.z*R*3.2,6);g.fill();g.stroke();g.fillStyle=RED;crkShape(g,s.sh,s.x,s.y,-Math.PI/2,P.z*R*(on?BAL.mgFx.pop:1));g.restore()})});
+  kg82DrawPops(g,pops,now);crHud(env,phase==="play"&&P.ph==="cut"?mgReach(pts+10/NR*mgPace(env,K,now-P.start,LIM),r+1,NR):mgReach(pts,Math.min(NR,r+1),NR),r,NR,phase==="play"&&P.ph==="cut"?LIM-(now-P.start):null);
+  if(phase==="play"&&P.ph==="cut"&&now-P.start>LIM)open(now)}
+ function open(now){if(!P||P.ph!=="cut")return;P.ph="open";P.open=now;okb.disabled=true;drag=null;const el=now-P.start;
+  /* greedy match: each hole of the sample takes the nearest unused cut of its shape within the tolerance */
+  const used=new Set();let m=0;P.T.forEach(t=>{t.ok=false;let bi=-1,bd=TOL;P.cuts.forEach((c,i)=>{if(used.has(i)||c.sh!==t.sh)return;const d=dist(c,t);if(d<=bd){bd=d;bi=i}});if(bi>=0){used.add(bi);P.cuts[bi].ok=true;t.ok=true;m++}});
+  const extra=P.cuts.length-used.size;const s=Math.max(0,(m-EX*extra)/P.T.length),sp=mgPace(env,K,el,LIM);const got=10/NR*s*sp;pts+=got;
+  crLater(()=>{if(!P)return;P.res={m,extra};kg82Pluck(2,s>=.6);kg82Pop(pops,W/2,H*.1+10,crStars(s),crCol(s,sp))},900);
+  phase="judge";crLater(()=>{if(done)return;phase="play";next()},2300)}
+ okb.onclick=()=>{if(phase==="play"&&P&&P.ph==="cut")open(crNow())};
+ k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||!P||P.ph!=="cut")return;
+   const s=P.tray.find(s=>Math.abs(x-s.x)<P.z*R*1.7&&Math.abs(y-s.y)<P.z*R*1.7);if(s){drag={c:{sh:s.sh},new:1,x,y};return}
+   /* pick up a cut already on the wedge (to move it, or off the wedge to take it back) */
+   let bi=-1,bd=P.z*R*1.3;P.cuts.forEach((c,i)=>{const [cx,cy]=toXY(c.r,c.ph,P.a);const d=k91Dist(x,y,cx,cy);if(d<bd){bd=d;bi=i}});if(bi>=0){const c=P.cuts.splice(bi,1)[0];drag={c,new:0,x,y}}},
+  move:(x,y)=>{if(drag){drag.x=x;drag.y=y}},
+  up:(x,y)=>{if(!drag||!P||P.ph!=="cut"){drag=null;return}const [rr,ph]=fromXY(x,y,P.a);
+   if(inW(rr,ph,P.a)){const c={sh:drag.c.sh,r:Math.min(1,rr),ph:cl(ph,0,P.a)};/* the hole of the sample this cut was meant for (the oracle's bookkeeping) */
+    const free=P.T.map((t,i)=>i).filter(i=>P.T[i].sh===c.sh&&!P.cuts.some(q=>q.aim===i));let ai=-1,ad=1e9;free.forEach(i=>{const d=dist(c,P.T[i]);if(d<ad){ad=d;ai=i}});c.aim=ai;
+    P.cuts.push(c);kg82Pluck(P.cuts.length,true)}drag=null}});
+ /* the oracle: drag the shape of the next hole not yet cut from the tray to its place on the wedge, then ✓ */
+ KG82.peek=()=>{if(phase!=="play"||!P||P.ph!=="cut"||drag)return null;const i=P.T.findIndex((t,k)=>!P.cuts.some(c=>c.aim===k));if(i<0)return{sel:"#crkok"};
+  const t=P.T[i],s=P.tray.find(s=>s.sh===t.sh);const [tx,ty]=toXY(t.r,t.ph,P.a);const A=C.client(s.x,s.y),B=C.client(tx,ty);return{drag:[[A.x,A.y],[(A.x+B.x)/2,Math.min(A.y,B.y)-20],[B.x,B.y]]}};
+ next();stop=crLoop(draw);return()=>{done=true;if(stop)stop()}}
+crReg("kim","papercut",crkPaper);
+/* ===== mg-craft-ve · Vẽ «Thủy mặc: bố cục, năm sắc mực» (design dev/design/MG_CRAFTS.md §2; owner OD 20/11 ~08:15Z real: each art its OWN mechanic, no tracing)
+   KG82 contract: eng(box, env{kind, lv, hud, end(raw0to10)}) → stop; KG82.peek = the test oracle (KG82.peek formats of the other engines).
+   Per painting (3 of them, +1 motif on the last):
+     1 BỐ CỤC  drag the motif stamps (chủ sơn, khách sơn, thuyền + nước, tùng, hạc) from the tray onto the blank scroll where the master's small
+               sample has them; higher on the scroll = farther = drawn smaller and paler (three distances). ✓ (a sign) when all are down.
+     2 MỰC     the layers glow one by one, far → near. Hold the brush on the inkstone: its tip darkens through the tones painted on the stone's
+               rim; release on the tone that layer shows in the sample; flick (tap) onto the glowing layer: the wash blooms. A flick that spills
+               into the blank mist leaves a blot. A loaded brush dries (pales a tone) after a while.
+   Score per painting = 10/3 × (wPlace × placement + wTone × tone + wClean × clean) × mgPace(env,"ve",el,lim); raw = the sum → mgGrade(raw,"ve").
+   ONE CORE: every board number is BAL.mgTier.lev.ve.* [ease0, ease5] through mgLev (jbal2.js); motifs +mgMore(env). No words in play (OD 05:10Z).
+   STAND-IN ART («tạm»): the motif stamps, scroll and stone rim are drawn on the canvas until Foreman C paints the ART REQUEST (report mg-craft-ve.md);
+   the inkstone and brush sprites ve-inkstone / ve-brush already exist. K91VE_TEMP marks the stand-in. */
+const K91VE_TEMP=true;/* stand-in art: the missing sprite names ve-motif-<type> are listed by crArt (kitPhNote mg) */
+/* the master's paintings: motif type + spot on the scroll (u across, v down = near; far things sit high). Tone of a layer = how far it is (v). */
+const K91VE_PAINT=[
+ [["sonchu",.30,.46],["sonkhach",.74,.28],["thuyen",.62,.80],["tung",.12,.74],["hac",.88,.58],["sonkhach",.50,.22]],
+ [["sonkhach",.22,.26],["sonchu",.62,.42],["tung",.26,.78],["thuyen",.78,.82],["hac",.84,.18],["tung",.46,.84]],
+ [["sonchu",.74,.38],["sonkhach",.26,.24],["hac",.44,.58],["tung",.16,.76],["thuyen",.62,.84],["sonkhach",.92,.62]]];
+const K91VE_BASE=[3,3,4];/* motifs per painting before mgMore (design: 3–4) */
+const K91VE_SZ={u:.115,far:.58,pale:.5,tone:[[222,214,198],[22,18,14]],near:[.12,.76]};/* picture constants: stamp half-size / scroll width, far scale, far alpha, tone ramp, v range of the tone ramp */
+function k91VePath(g,t,x,y,s){/* stand-in silhouettes in a ±1 box round (x, y), scale s: closed shapes first, thin lines last (water, neck) */
+ g.beginPath();const m=(a,b)=>g.moveTo(x+a*s,y+b*s),l=(a,b)=>g.lineTo(x+a*s,y+b*s),e=(a,b,rx,ry)=>{g.moveTo(x+(a+rx)*s,y+b*s);g.ellipse(x+a*s,y+b*s,rx*s,ry*s,0,0,Math.PI*2)};
+ if(t==="sonchu"){m(-1,.7);l(-.55,.1);l(-.2,.3);l(.12,-.8);l(.5,-.15);l(.85,.7);g.closePath()}
+ else if(t==="sonkhach"){m(-.9,.6);l(-.3,-.3);l(.05,.1);l(.4,-.45);l(.95,.6);g.closePath()}
+ else if(t==="thuyen"){m(-.55,.3);l(.55,.3);l(.38,.52);l(-.38,.52);g.closePath();m(0,-.7);l(0,.24);l(.46,.14);g.closePath();m(-.9,.74);g.quadraticCurveTo(x-.45*s,y+.64*s,x,y+.74*s);g.quadraticCurveTo(x+.45*s,y+.84*s,x+.9*s,y+.74*s);m(-.7,.92);g.quadraticCurveTo(x-.3*s,y+.84*s,x+.1*s,y+.92*s);g.quadraticCurveTo(x+.4*s,y+1*s,x+.7*s,y+.92*s)}
+ else if(t==="tung"){m(-.07,.1);l(.07,.1);l(.09,.9);l(-.09,.9);g.closePath();e(0,-.55,.5,.17);e(0,-.28,.66,.2);e(0,.0,.82,.22)}
+ else{e(-.34,.1,.3,.13);e(.42,.34,.24,.1);m(-.1,.02);g.quadraticCurveTo(x+.06*s,y-.3*s,x+.1*s,y-.62*s);m(.5,.26);g.quadraticCurveTo(x+.52*s,y,x+.58*s,y-.14*s);m(-.62,.1);l(-.95,.2)}}
+function k91VeDraw(g,t,x,y,s,col,a,line){if(crArt(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:a},null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
+const k91VeInk=f=>{const [a,b]=K91VE_SZ.tone;return`rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*f)).join(",")})`};
+function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
+ const Lv=n=>crLev(env,"ve",n),Z=K91VE_SZ;
+ const T=Math.max(2,Math.round(Lv("tones"))),PLACE=Lv("place"),RAMP=Lv("ramp"),DRY=Lv("dry"),PEEK=Lv("peek"),BLEED=Lv("bleed"),HOLDMIN=Lv("holdMin"),REACH=Lv("reach");
+ const WP=Lv("wPlace"),WT=Lv("wTone"),WC=Lv("wClean");
+ const SX=W*.05,SW=W*.9,SY=H*.31,SH=H*.5,UN=SW*Z.u;/* the scroll */
+ const TW=W*.38,TH=TW*SH/SW,TX=W*.04,TY=H*.03;/* the master's sample pinned top-left, same shape as the scroll */
+ const ST={x:W*.57,y:H*.04,w:W*.38,h:H*.15};/* the inkstone */
+ const OFF=UN*.9;/* a dragged stamp rides above the finger */
+ let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;/* act = the one finger (pointer id) being followed */const pops=[];
+ const btn=k91Btns(box,[["k91vdone","✓","","Bố cục xong: bắt đầu tô mực"]]);const bd=btn.querySelector("#k91vdone");
+ const sc=cy=>Z.far+(1-Z.far)*cl((cy-SY)/SH,0,1),pa=cy=>Z.pale+(1-Z.pale)*cl((cy-SY)/SH,0,1);
+ const toneF=v=>cl((v-Z.near[0])/(Z.near[1]-Z.near[0]),0,1),toneOf=v=>Math.round(toneF(v)*(T-1));
+ const tgPt=t=>[SX+t.u*SW,SY+t.v*SH];
+ function next(){r++;if(r>=NR){done=true;bd.disabled=true;return crLater(()=>env.end(Math.min(10,pts)),300)}
+  const n=Math.min(K91VE_PAINT[r].length,K91VE_BASE[r]+mgMore(env));const M=K91VE_PAINT[r].slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
+  const S=kg82Shuf(M.map((m,i)=>({ti:i,type:m.type,placed:false,x:0,y:0})));const tw=(W-12)/n;S.forEach((s,i)=>{s.hx=6+tw*(i+.5);s.hy=H*.915});
+  P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=crNow();peekAt=t0;drag=null;fl=null;bd.disabled=true}
+ /* the best way to name which stamp stands for which motif (same type only; ≤ 6! tries) */
+ function assign(){const S=P.S,M=P.M,sp=(s,t)=>{if(!s.placed||s.type!==t.type)return s.type===t.type?0:-9;const [tx,ty]=tgPt(t),d=Math.hypot(s.x-tx,(s.y-ty))/SW;return cl(1-(d-PLACE)/(2*PLACE),0,1)};
+  let best=-1e9,bp=null;const perm=(a,rest)=>{if(!rest.length){let v=0;a.forEach((j,i)=>v+=sp(S[i],M[j]));if(v>best){best=v;bp=a.slice()}return}rest.forEach((j,k)=>perm(a.concat(j),rest.slice(0,k).concat(rest.slice(k+1))))};
+  perm([],M.map((_,i)=>i));P.map=bp;P.tp=M.map((t,j)=>{const i=bp.indexOf(j);return Math.max(0,sp(S[i],t))});
+  /* a stamp still in the tray is laid on the scroll's near edge so the ink round can go on (its placement scores 0) */
+  S.forEach((s,i)=>{if(!s.placed){s.placed=true;s.x=SX+SW*(.15+.7*i/Math.max(1,S.length-1));s.y=SY+SH*.94}});
+  P.lay=M.map((t,j)=>({j,s:S[bp.indexOf(j)],tone:t.tone,done:false,miss:0,ts:0,at:0,tonePut:-1})).sort((a,b)=>M[a.j].v-M[b.j].v)}
+ function inkStart(now){assign();phase="ink";bd.disabled=true;P.li=0;fl={mode:"idle",loadAt:0,loadedAt:0,tone:0,down:null};peekAt=now}
+ function paintEnd(now,ended){/* one painting is done: score it, show the stars, go on */
+  phase="judge";bd.disabled=true;const n=P.M.length,pl=P.tp.reduce((a,b)=>a+b,0)/n,tn=P.lay.reduce((a,l)=>a+l.ts,0)/n,cn=cl(1-P.bl*.5,0,1);
+  const el=Math.min(LIM,now-t0),q=WP*pl+WT*tn+WC*cn,sp=mgPace(env,"ve",el,LIM),got=10/NR*q*sp;pts+=got;P.stars=q;P.sp=sp;kg82Pluck(2,q*sp>.5);crLater(next,1500)}
+ const stop=crLoop(now=>{if(!P)return;const left=LIM-(now-t0);
+  if(phase==="place"&&left<=0)inkStart(now);else if(phase==="ink"&&left<=0)paintEnd(now,true);
+  kg82Bg(g,W,H,"ve",0,.7);
+  /* the sample (rolled up once its time is out; tap it to look again) */
+  const seen=now-peekAt<PEEK||phase==="judge";g.fillStyle="rgba(255,250,236,.9)";k91RR(g,TX-3,TY-3,TW+6,TH+6,5);g.fill();g.strokeStyle=K91C.hair;g.lineWidth=1.5;g.stroke();
+  if(seen){P.M.forEach(t=>{const x=TX+t.u*TW,y=TY+t.v*TH,s=UN*TW/SW*sc(SY+t.v*SH)*1.0;k91VeDraw(g,t.type,x,y,s,k91VeInk(toneF(t.v)),1)})}
+  else{g.fillStyle="#d8c79a";k91RR(g,TX+TW*.1,TY+TH*.2,TW*.8,TH*.6,6);g.fill();g.strokeStyle="#8a7350";g.lineWidth=2;g.beginPath();g.moveTo(TX+TW*.1,TY+TH*.5);g.lineTo(TX+TW*.9,TY+TH*.5);g.moveTo(TX+TW*.1,TY+TH*.35);g.lineTo(TX+TW*.9,TY+TH*.35);g.moveTo(TX+TW*.1,TY+TH*.65);g.lineTo(TX+TW*.9,TY+TH*.65);g.stroke()}
+  /* the blank scroll (stand-in «tạm»: dashed edge) with a band of mist */
+  g.fillStyle="rgba(255,252,242,.74)";k91RR(g,SX,SY,SW,SH,8);g.fill();g.strokeStyle=K91VE_TEMP?"#b99a52":K91C.hair;g.lineWidth=2;if(K91VE_TEMP)g.setLineDash([6,4]);g.stroke();g.setLineDash([]);
+  {const mg=g.createLinearGradient(0,SY+SH*.42,0,SY+SH*.62);mg.addColorStop(0,"rgba(255,255,255,0)");mg.addColorStop(.5,"rgba(236,240,238,.7)");mg.addColorStop(1,"rgba(255,255,255,0)");g.fillStyle=mg;g.fillRect(SX+2,SY+SH*.42,SW-4,SH*.2)}
+  /* stamps on the scroll */
+  const stampAt=s=>{const dg=drag&&drag.s===s;return dg?[drag.x,drag.y]:[s.x,s.y]};
+  P.S.forEach(s=>{if(!s.placed&&!(drag&&drag.s===s))return;const [x,y]=stampAt(s);const lay=P.lay&&P.lay.find(l=>l.s===s);
+   if(phase==="place"||!lay)k91VeDraw(g,s.type,x,y,UN*sc(y),"#4a4136",pa(y));
+   else if(lay.done){const k=cl((now-lay.at)/BAL.mgFx.ms/1.6,0,1);k91VeDraw(g,s.type,x,y,UN*sc(y)*(1+.18*(1-k)),k91VeInk(lay.tonePut/(T-1)),.35+.65*k)}
+   else k91VeDraw(g,s.type,x,y,UN*sc(y),"#6b5a3c",.8,true)});
+  P.blots.forEach(b=>{g.save();const gr=g.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);gr.addColorStop(0,"rgba(20,16,12,.85)");gr.addColorStop(.7,"rgba(20,16,12,.5)");gr.addColorStop(1,"rgba(20,16,12,0)");g.fillStyle=gr;g.beginPath();g.arc(b.x,b.y,b.r,0,Math.PI*2);g.fill();g.restore()});
+  /* the lit layer */
+  if(phase==="ink"&&P.li<P.lay.length){const l=P.lay[P.li],s=l.s,k=sc(s.y),F=BAL.mgFx;g.save();g.globalAlpha=.6+.4*Math.sin(now/170);g.shadowColor=F.glow;g.shadowBlur=F.blur;g.strokeStyle=F.ring;g.lineWidth=Math.max(3,UN*k*F.ringW*2.4);g.beginPath();g.arc(s.x,s.y,UN*k*1.05,0,Math.PI*2);g.stroke();g.restore()}
+  /* the tray (placement only) */
+  if(phase==="place"){g.fillStyle="rgba(255,250,236,.55)";g.fillRect(0,H*.84,W,H*.16);P.S.forEach(s=>{if(s.placed||(drag&&drag.s===s))return;k91VeDraw(g,s.type,s.hx,s.hy,Math.min(UN*.8,P.tw*.4),"#4a4136",.9)})}
+  /* the inkstone: tones on its rim, the brush tip darkens while held */
+  {const lit=phase==="ink";g.save();g.globalAlpha=lit?1:.55;if(!kg82Spr(g,"ve-inkstone",ST.x+ST.w*.5,ST.y+ST.h*.45,ST.w*.62,null,{})){g.fillStyle="#2a2622";k91RR(g,ST.x+ST.w*.12,ST.y,ST.w*.76,ST.h*.9,10);g.fill()}
+   const lvl=fl&&fl.mode==="load"?Math.min(T-.001,T*(now-fl.loadAt)/RAMP):-1,sw=Math.min(ST.w*.8/T,22);
+   for(let i=0;i<T;i++){const x=ST.x+ST.w*.5+(i-(T-1)/2)*sw*1.15,y=ST.y+ST.h*.98;g.fillStyle=k91VeInk(i/(T-1));g.strokeStyle=Math.floor(lvl)===i?"#e0a526":"#6b5a3c";g.lineWidth=Math.floor(lvl)===i?3.5:1.2;g.beginPath();g.arc(x,y,sw*.52*(Math.floor(lvl)===i?1.25:1),0,Math.PI*2);g.fill();g.stroke()}
+   if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor((now-fl.loadedAt)/DRY)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
+    if(!kg82Spr(g,"ve-brush",bx,by,UN*1.6,null,{ax:.06,ay:.95,glow:fl.mode==="load"?BAL.mgFx.glow:null})){g.strokeStyle="#6b4a2a";g.lineWidth=5;g.lineCap="round";g.beginPath();g.moveTo(bx+UN*.9,by-UN*.9);g.lineTo(bx,by);g.stroke()}
+    g.fillStyle=k91VeInk(tn/(T-1));g.beginPath();g.arc(bx,by,UN*.14,0,Math.PI*2);g.fill()}g.restore()}
+  if(phase==="judge"&&P.stars!=null)k91Say(g,crStars(P.stars),crCol(P.stars,P.sp),W/2,H*.915,W-16);/* the family star rule (crStars / crCol, review/mg-craft-r1) */
+  kg82DrawPops(g,pops,now);const on=phase==="place"||phase==="ink";/* the ONE live grade (crHud → mgLive): done paintings + the open one's time part + paintings to come */
+  crHud(env,on?mgReach(pts+10/NR*mgPace(env,"ve",Math.min(LIM,now-t0),LIM),r+1,NR):mgReach(pts,Math.min(NR,r+1),NR),r,NR,on?left:null)});
+ const onStone=(x,y)=>x>=ST.x-6&&x<=ST.x+ST.w+6&&y>=ST.y-6&&y<=ST.y+ST.h+ST.h*.3+6;
+ const nearStamp=(x,y)=>{let b=null,bd=1e9;P.S.forEach(s=>{if(!s.placed)return;const d=k91Dist(x,y,s.x,s.y);if(d<bd&&d<UN*sc(s.y)*1.1){bd=d;b=s}});return b};
+ function flick(x,y,now){const l=P.lay[P.li],s=l.s,R=UN*sc(s.y),d=k91Dist(x,y,s.x,s.y),bl=BLEED*SW;
+  if(d<=R*REACH){/* the wash lands on the layer: tone = what the brush still holds */
+   const put=cl(fl.tone-Math.floor((now-fl.loadedAt)/DRY),0,T-1),e=Math.abs(put-l.tone);l.ts=e===0?1:e===1?.5:0;l.tonePut=put;l.done=true;l.at=now;kg82Pluck(put,e<=1);
+   if(d+bl>R*REACH*.9){P.blots.push({x,y,r:bl});P.bl++}P.li++;if(P.li>=P.lay.length)crLater(()=>{if(phase==="ink")paintEnd(crNow())},500)}
+  else{P.blots.push({x,y,r:bl});P.bl++;l.miss++;kg82Pluck(0,false);if(l.miss>=2){l.done=true;l.at=now;l.tonePut=0;l.ts=0;P.li++;if(P.li>=P.lay.length)crLater(()=>{if(phase==="ink")paintEnd(crNow())},500)}}
+  fl.mode="idle";fl.down=null}
+ k91Pointer(C,{down:(x,y,id)=>{const now=crNow();if(!P)return;if(act!=null){if(fl&&fl.mode==="load")return;drag=null;if(fl)fl.down=null}act=id;/* a new finger replaces a finished-looking one, never a brush being loaded */
+   if(x>=TX&&x<=TX+TW&&y>=TY&&y<=TY+TH&&(phase==="place"||phase==="ink")){peekAt=now;return}
+   if(phase==="place"){let s=nearStamp(x,y);if(s)drag={s,x:s.x,y:s.y,dx:s.x-x,dy:s.y-y};else{s=P.S.find(s=>!s.placed&&Math.abs(x-s.hx)<P.tw/2&&y>H*.82);if(s)drag={s,x,y:y-OFF,dx:0,dy:-OFF}}return}
+   if(phase==="ink"){if(onStone(x,y)){fl.mode="load";fl.loadAt=now;fl.down=null;return}if(fl.mode==="loaded")fl.down=[x,y]}},
+  move:(x,y,id)=>{if(id===act&&drag){drag.x=x+drag.dx;drag.y=y+drag.dy}},
+  up:(x,y,id)=>{const now=crNow();if(!P||id!==act)return;act=null;
+   if(drag){const s=drag.s,cx=x+drag.dx,cy=y+drag.dy;drag=null;if(phase!=="place")return;if(cx>=SX&&cx<=SX+SW&&cy>=SY&&cy<=SY+SH){s.placed=true;s.x=cx;s.y=cy;kg82Pluck(1,true)}else s.placed=false;bd.disabled=!P.S.every(s=>s.placed);return}
+   if(phase==="ink"&&fl){if(fl.mode==="load"){if(now-fl.loadAt<HOLDMIN){fl.mode="idle";return}fl.tone=Math.min(T-1,Math.floor(T*(now-fl.loadAt)/RAMP));fl.mode="loaded";fl.loadedAt=now;
+     if(!onStone(x,y)&&P.li<P.lay.length)flick(x,y,now);/* one gesture: load on the stone, lift on the layer */return}
+    if(fl.mode==="loaded"&&fl.down&&P.li<P.lay.length)flick(x,y,now)}}});
+ bd.onclick=()=>{if(phase==="place"&&P.S.every(s=>s.placed))inkStart(crNow())};
+ KG82.peek=()=>{if(!P||drag)return null;
+  if(phase==="place"){const s=P.S.find(s=>!s.placed);if(!s)return{sel:"#k91vdone"};const t=P.M[s.ti],[tx,ty]=tgPt(t),a=C.client(s.hx,s.hy),b=C.client(tx,ty+OFF),m=C.client((s.hx+tx)/2,(s.hy+ty)/2);return{drag:[[a.x,a.y],[m.x,m.y],[b.x,b.y]]}}
+  if(phase==="ink"&&P.li<P.lay.length){const l=P.lay[P.li];
+   if(fl.mode==="loaded"){const c=C.client(l.s.x,l.s.y);return{x:c.x,y:c.y,thinkMs:Lv("flick")}}
+   const sc2=C.client(ST.x+ST.w*.5,ST.y+ST.h*.45);
+   if(fl.mode==="load"){const lv=Math.min(T-.001,T*(crNow()-fl.loadAt)/RAMP);return{hold:!((lv>=l.tone+.3||lv>=T-.01)&&crNow()-fl.loadAt>=HOLDMIN+25),x:sc2.x,y:sc2.y}}
+   return{hold:true,x:sc2.x,y:sc2.y}}
+  return null};
+ next();return()=>{done=true;stop()}}
+/* wiring: the ONE table KG82_CRAFT (j91) names the engine «inkwash» + rules text; crReg registers it and switches the kind ve (jcraft.js) */
+crReg("ve","inkwash",k91Ve);
+/* ================= jcraft_hoa: CẮM HOA «Chọn mùa · cắt cành · nghiêng thế» (mg-craft-hoa; design dev/design/MG_CRAFTS.md §3; owner OD 20/11 ~08:15Z:
+   each craft its own mechanic, no tracing) =================
+   Kind key `hoa` (kG / kAdj / cal key unchanged), engine `ikebana`: eng(box, env{kind,lv,hud,end(raw 0..10)}) → stop, KG82.peek oracle.
+   Three vases (stems BAL.mgTier.hoa.n + mgMore). Per vase:
+     1 CHỌN  tap the season's main flower in a tray of 6 (the window shows the season; an off-season look-alike wilts, season share falls)
+     2 CẮT   one stem at a time lies on the cloth; SWIPE across it to cut: Thiên ≈ 1.5 × vase height, Nhân ≈ ¾ Thiên, Địa ≈ ¾ Nhân (the vase is the ruler)
+     3 CẮM   drag the cut stem into the vase mouth, then drag its tip round to lean it (Thiên ~10°, Nhân ~45°, Địa ~75°, uneven triangle)
+   Score per vase 10/NR × (w.sea·season + w.len·length + w.ang·lean + w.bal·balance) × mgPace; levers BAL.mgTier.lev.hoa.* through mgLev (ONE CORE), other
+   constants BAL.mgTier.hoa. No word is drawn in play (pictures, stars, the role bars, the ghost ticks / fan); art here is a STAND-IN drawn on the canvas
+   (canvas.dataset.tam="hoa" marks it; ART REQUEST in reports/mg-craft-hoa.md). ✕ / Quay lại / ✓ are the kit's. */
+const KCH_SEAS=[/* winter · summer · autumn · spring: the main flower + its look-alikes (same colour family, other season) */
+ {k:"mai",fl:{col:"#fffaf0",ctr:"#e3b23c",n:5,pt:.46},like:[{col:"#fff0e6",ctr:"#9bb05a",n:5,pt:.46},{col:"#f6f8ee",ctr:"#e3b23c",n:6,pt:.4},{col:"#fffdf5",ctr:"#c9a0a0",n:5,pt:.55}]},
+ {k:"sen",fl:{col:"#f19ab8",ctr:"#f0d060",n:9,pt:.3},like:[{col:"#f5b0c8",ctr:"#9bb05a",n:9,pt:.3},{col:"#e98aac",ctr:"#f0d060",n:8,pt:.34},{col:"#f6c0d4",ctr:"#e3b23c",n:10,pt:.28}]},
+ {k:"cuc",fl:{col:"#f2c230",ctr:"#a8691a",n:14,pt:.2},like:[{col:"#f6d25a",ctr:"#7a8a3a",n:14,pt:.2},{col:"#ecb020",ctr:"#a8691a",n:12,pt:.22},{col:"#f8dc7a",ctr:"#b8791a",n:16,pt:.18}]},
+ {k:"dao",fl:{col:"#f8b4c4",ctr:"#c4425a",n:5,pt:.5},like:[{col:"#fbc4d0",ctr:"#e3b23c",n:5,pt:.5},{col:"#f4a0b6",ctr:"#c4425a",n:6,pt:.44},{col:"#fdd0da",ctr:"#9b4a6a",n:5,pt:.52}]}];
+const KCH_RCP={chrys:"cuc",plum:"mai",peach:"dao"};/* jwkr WKR_FL flower → this board's season flower */
+const KCH_OTHER=[{col:"#8aa4ea",ctr:"#fff4c0",n:6,pt:.38},{col:"#b58ad8",ctr:"#f0e0a0",n:7,pt:.34},{col:"#e8704a",ctr:"#5a2a10",n:8,pt:.3},{col:"#ffffff",ctr:"#444444",n:12,pt:.22}];
+/* one blossom (stand-in): n petals of length pt·r·2, centre disc; droop = wilted (greyed, bent) */
+function kchBloom(g,x,y,r,F,droop){g.save();g.translate(x,y);if(droop){g.rotate(1.15);g.globalAlpha*=.85}
+ for(let i=0;i<F.n;i++){g.rotate(Math.PI*2/F.n);g.fillStyle=droop?"#a99a86":F.col;g.strokeStyle="rgba(90,60,40,.28)";g.lineWidth=1;g.beginPath();g.ellipse(0,-r*.62,r*F.pt*.8,r*.62,0,0,Math.PI*2);g.fill();g.stroke()}
+ g.fillStyle=droop?"#7a6a58":F.ctr;g.beginPath();g.arc(0,0,r*.26,0,Math.PI*2);g.fill();g.restore()}
+/* a stem: base (bx,by), length L, lean ang (rad from vertical), bloom at the tip; cut end is drawn as a light disc */
+function kchStem(g,bx,by,L,ang,F,r,o){o=o||{};const tx=bx+L*Math.sin(ang),ty=by-L*Math.cos(ang),px=Math.cos(ang),py=Math.sin(ang);g.save();if(o.alpha!=null)g.globalAlpha*=o.alpha;
+ if(o.glow){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.5}
+ g.strokeStyle="#4f7f4a";g.lineWidth=Math.max(3,r*.34);g.lineCap="round";g.beginPath();g.moveTo(bx,by);g.quadraticCurveTo((bx+tx)/2+px*L*.05,(by+ty)/2+py*L*.05,tx,ty);g.stroke();g.shadowBlur=0;
+ g.fillStyle="#6b9a5e";for(const q of [.38,.62]){const lx=bx+(tx-bx)*q,ly=by+(ty-by)*q,s=q<.5?-1:1;g.beginPath();g.ellipse(lx+s*r*.5*px,ly+s*r*.5*py,r*.5,r*.2,ang+s*.6,0,Math.PI*2);g.fill()}
+ g.fillStyle="#e8dcb0";g.beginPath();g.arc(bx,by,Math.max(2.5,r*.17),0,Math.PI*2);g.fill();
+ kchBloom(g,tx,ty,r,F,o.droop);g.restore();return{x:tx,y:ty}}
+/* the season in the window: winter snow · summer lotus pond · autumn leaves · spring petals (stand-in picture) */
+function kchScene(g,x,y,w,h,si,F,now,fa){g.save();g.beginPath();g.rect(x,y,w,h);g.clip();
+ const bg=[["#e6eef6","#f8fbff"],["#cfe8d6","#a8d2c0"],["#f6dca8","#e8b878"],["#fbe6ee","#fff4f4"]][si];const gr=g.createLinearGradient(0,y,0,y+h);gr.addColorStop(0,bg[0]);gr.addColorStop(1,bg[1]);g.fillStyle=gr;g.fillRect(x,y,w,h);
+ const t=(now||0)/1000;
+ if(si===0){g.fillStyle="#fff";for(let i=0;i<14;i++){g.beginPath();g.arc(x+((i*53+t*14)%w),y+((i*37+t*22)%h),1.6+(i%3),0,7);g.fill()}g.strokeStyle="#6a5040";g.lineWidth=3;g.beginPath();g.moveTo(x+w*.1,y+h*.95);g.quadraticCurveTo(x+w*.4,y+h*.5,x+w*.85,y+h*.3);g.stroke()}
+ else if(si===1){g.fillStyle="#7fb7a8";g.fillRect(x,y+h*.62,w,h*.38);g.fillStyle="#4f9a62";for(let i=0;i<4;i++){g.beginPath();g.ellipse(x+w*(.18+i*.22),y+h*(.74+(i%2)*.1),w*.09,h*.05,0,0,7);g.fill()}}
+ else if(si===2){g.fillStyle="#c8602a";for(let i=0;i<9;i++){g.save();g.translate(x+((i*61+t*10)%w),y+((i*43+t*26)%h));g.rotate(i+t);g.beginPath();g.ellipse(0,0,5,2.6,0,0,7);g.fill();g.restore()}}
+ else{g.fillStyle="#f6a6b8";for(let i=0;i<10;i++){g.beginPath();g.ellipse(x+((i*47+t*12)%w),y+((i*39+t*20)%h),3.4,2,i,0,7);g.fill()}}
+ /* the season's flower, large, in the window corner: the aid (BAL lev.hoa.ghost); at the hardest board she must know it */if(fa>.02){g.globalAlpha=Math.min(1,fa);kchBloom(g,x+w*.78,y+h*.62,Math.min(w,h)*.26,F,false)}g.restore();
+ g.save();g.strokeStyle="#6b4a2a";g.lineWidth=4;g.strokeRect(x,y,w,h);g.beginPath();g.moveTo(x+w/2,y);g.lineTo(x+w/2,y+h);g.moveTo(x,y+h/2);g.lineTo(x+w,y+h/2);g.lineWidth=2;g.stroke();g.restore()}
+function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.tam="hoa";const B=BAL.mgTier.hoa,L=n=>mgLev(env,"hoa",n);const NR=B.n.length;
+ const hv=Math.min(H*.2,W*.28),MX=W*.5,MY=H*.56,TY=H*.9,HX=W*.07,LU=B.cut*hv,rB=hv*.2,more=Math.min(B.maxMore,mgMore(env));
+ const ghost=L("ghost"),cutTol=L("cutTol"),angTol=L("angTol"),sway=L("sway"),nAlike=Math.round(L("alike"));
+ /* a handmade-work recipe (j83 «Cắm hoa», jwkr WKR_FL) with one of this board's four flowers arranges only that flower: every vase takes its season (orchid / peony / mixed recipes keep the shuffle) */
+ const wk=(typeof wkrNow==="function"&&wkrNow())||null,rf=wk&&wk.kind==="bhoa"&&typeof WKR_FL!=="undefined"?KCH_RCP[WKR_FL[wk.r]]:null,ri=rf?KCH_SEAS.findIndex(x=>x.k===rf):-1;
+ const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
+ const btn=k91Btns(box,[["k91done","✓","","Cắm xong: chấm thế hoa"]]);const bd=btn.querySelector("#k91done");
+ const rad=d=>d*Math.PI/180,dg=a=>a*180/Math.PI,wob=now=>rad(sway*180)*Math.sin(now/110);
+ /* target of stem i: length in px (chain Thiên → Nhân → Địa; guests hang off Nhân / Địa alternately) and the lean in degrees */
+ const lenT=i=>{const k=B.k;const th=B.thien*hv;if(i===0)return th;if(i===1)return th*k[0];if(i===2)return th*k[0]*k[1];const gi=i-3;return th*k[0]*(i%2?1:k[1])*B.guest[Math.min(gi,B.guest.length-1)]};
+ const angT=i=>B.ang[Math.min(i,B.ang.length-1)];
+ const pickPos=i=>({x:W*(.2+.3*(i%3)),y:H*(.5+.2*Math.floor(i/3))});
+ const tipOf=(s,a)=>({x:MX+s.L*Math.sin(a),y:MY-s.L*Math.cos(a)});
+ function next(){r++;if(r>=NR){done=true;bd.disabled=true;phase="end";return setTimeout(()=>env.end(Math.max(0,Math.min(10,sum))),300)}
+  const si=seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=kg82Shuf(SE.like).slice(0,Math.max(0,Math.min(3,nAlike)));
+  const oth=kg82Shuf(KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER));const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
+  P={si,SE,fl:kg82Shuf(fl).map(f=>Object.assign(f,{wilt:false})),wrong:0,picked:false,cur:0,last:null,t0:performance.now(),lim:n*L("limStem"),
+   st:Array.from({length:n},(_,i)=>({i,Lt:lenT(i),at:angT(i),cut:false,L:0,seated:false,a:0,leaned:false}))};phase="pick";bd.disabled=true}
+ function score(){const S=P.st,n=S.length;const z=B.zero-1;let ln=0,an=0;
+  S.forEach(s=>{if(s.cut){const e=Math.abs(s.L-s.Lt)/s.Lt;ln+=Math.max(0,Math.min(1,1-(e-cutTol)/(z*cutTol)))}if(s.seated){const e=Math.abs(dg(s.a)-s.at);an+=Math.max(0,Math.min(1,1-(e-angTol)/(z*angTol)))}});
+  const pl=S.filter(s=>s.seated);const cen=(arr,f)=>arr.reduce((a,s)=>a+s.Lc*Math.sin(f(s)),0)/(arr.reduce((a,s)=>a+s.Lc,0)||1);
+  const b=pl.length?Math.max(0,1-Math.abs(cen(pl.map(s=>({Lc:s.L,s})),o=>o.s.a)-cen(S.map(s=>({Lc:s.Lt,s})),o=>rad(o.s.at)))/B.balTol):0;
+  const sea=P.picked?Math.max(0,1-P.wrong*B.wrong):0;return{sea,len:ln/n,ang:an/n,bal:b*(pl.length/n),s:B.w.sea*sea+B.w.len*ln/n+B.w.ang*an/n+B.w.bal*b*(pl.length/n)}}
+ function judge(){if(phase==="judge")return;const el=performance.now()-P.t0;phase="judge";bd.disabled=true;gest=null;const sc=score(),pace=mgPace(env,"hoa",el,P.lim),v=10/NR*sc.s*pace;sum+=v;P.verdict=sc.s;P.sp=pace;P.v=v;
+  setTimeout(()=>{if(!done)next()},B.judgeMs)}
+ const stop=k91Loop(now=>{if(!P)return;const left=P.lim-(now-P.t0);if((phase==="pick"||phase==="play")&&left<=0)judge();
+  kg82Bg(g,W,H,"hoa",.28,.6);
+  /* season window: large while she picks, a small reminder while she cuts */
+  const big=phase==="pick";const wx=big?W*.12:W*.03,wy=big?H*.03:H*.02,ww=big?W*.76:W*.22,wh=big?H*.3:H*.15;kchScene(g,wx,wy,ww,wh,P.si,P.SE.fl,now,ghost);
+  if(phase==="pick"){P.fl.forEach((f,i)=>{const c=pickPos(i);g.save();g.fillStyle="rgba(255,250,236,.55)";g.beginPath();g.ellipse(c.x,c.y+rB*1.9,rB*1.7,rB*.5,0,0,7);g.fill();
+    kchStem(g,c.x,c.y+rB*1.9,rB*3.4,f.wilt?.5:0,f.F,rB*1.15,{droop:f.wilt,alpha:f.wilt?.7:1});g.restore()})}
+  else{
+   /* role bars: one bar per stem, as tall as its target; the seated ones are filled, the next one is lit */
+   const S=P.st,bw=Math.min(14,W*.035),bx0=W-8-S.length*(bw+4);g.save();S.forEach((s,i)=>{const h=s.Lt/(B.thien*hv)*H*.12,x=bx0+i*(bw+4);const cur=i===P.cur&&phase==="play";
+    if(cur){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.4}g.fillStyle=s.seated?K91C.good():cur?"#fff3b0":"rgba(255,250,236,.7)";g.strokeStyle=cur?K91C.gold():K91C.hair;g.lineWidth=cur?2.5:1.5;
+    g.beginPath();g.rect(x,H*.16-h,bw,h);g.fill();g.stroke();g.shadowBlur=0});g.restore();
+   /* the stems in the vase (longest first), then the vase over their feet */
+   const seated=S.filter(s=>s.seated).sort((a,b)=>b.L-a.L);seated.forEach(s=>{const a=s.a+(gest&&gest.type==="lean"&&gest.s===s?wob(now):0);kchStem(g,MX,MY+hv*.04,s.L,a,P.fl.find(f=>f.main).F,rB*(s.i>=3?.85:1),{glow:gest&&gest.s===s})});
+   if(!kg82Spr(g,"hoa-vase",MX,MY-hv*.02,null,hv*1.05,{ay:0})){g.save();const vw=hv*.55;const gr=g.createLinearGradient(MX-vw,0,MX+vw,0);gr.addColorStop(0,"#2f5d6e");gr.addColorStop(.5,"#6aa0b0");gr.addColorStop(1,"#2f5d6e");g.fillStyle=gr;
+    g.beginPath();g.moveTo(MX-vw*.42,MY);g.lineTo(MX+vw*.42,MY);g.bezierCurveTo(MX+vw*.4,MY+hv*.25,MX+vw,MY+hv*.35,MX+vw*.8,MY+hv);g.lineTo(MX-vw*.8,MY+hv);g.bezierCurveTo(MX-vw,MY+hv*.35,MX-vw*.4,MY+hv*.25,MX-vw*.42,MY);g.fill();
+    g.strokeStyle="#f4efe6aa";g.lineWidth=1.5;g.beginPath();g.ellipse(MX,MY+hv*.55,vw*.6,hv*.1,0,0,7);g.stroke();g.restore()}
+   /* the cloth */g.fillStyle="rgba(255,250,236,.55)";g.fillRect(0,TY-hv*.62,W,H-(TY-hv*.62));
+   const s=S[P.cur];const FF=P.fl.find(f=>f.main).F;
+   if(s&&phase==="play"){
+    if(!s.cut){/* the long stem lies on the cloth; ghost ticks every half vase + the right one lit */
+     if(ghost>.02){g.save();g.globalAlpha=Math.min(1,ghost);g.strokeStyle=K91C.lab;g.lineWidth=1.5;for(let k=1;k*hv/2<LU;k++){const x=HX+k*hv/2;g.beginPath();g.moveTo(x,TY+rB*.5);g.lineTo(x,TY+rB*(k%2?.9:1.3));g.stroke()}
+      const x=HX+s.Lt;g.strokeStyle=K91C.good();g.lineWidth=3;g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.4;g.beginPath();g.moveTo(x,TY-rB*1.4);g.lineTo(x,TY+rB*1.4);g.stroke();g.restore()}
+     kchStem(g,HX+LU,TY,LU,-Math.PI/2,FF,rB,{glow:true})}
+    else if(!(gest&&gest.type==="carry"&&gest.f===s)){kchStem(g,HX+s.L,TY,s.L,-Math.PI/2,FF,rB,{glow:true});
+     if(ghost>.02){g.save();g.globalAlpha=Math.min(1,ghost)*.5;g.setLineDash([5,5]);g.strokeStyle=K91C.good();g.lineWidth=2;const a=rad(s.at);g.beginPath();g.moveTo(MX,MY);g.lineTo(MX+s.L*Math.sin(a),MY-s.L*Math.cos(a));g.stroke();g.restore()}}
+    else{kchStem(g,gest.x,gest.y,s.L,0,FF,rB,{glow:true})}
+    if(P.last&&!P.last.leaned&&ghost>.02){g.save();g.globalAlpha=Math.min(1,ghost)*.5;g.setLineDash([5,5]);g.strokeStyle=K91C.good();g.lineWidth=2;const q=P.last,a=rad(q.at);g.beginPath();g.moveTo(MX,MY);g.lineTo(MX+q.L*Math.sin(a),MY-q.L*Math.cos(a));g.stroke();g.restore()}}
+   if(phase==="judge"){/* the master's own set, faint, and the stars */g.save();g.globalAlpha=.55;g.setLineDash([4,4]);g.strokeStyle=K91C.good();g.lineWidth=2;S.forEach(q=>{const a=rad(q.at);g.beginPath();g.arc(MX+q.Lt*Math.sin(a),MY-q.Lt*Math.cos(a),rB*.7,0,7);g.stroke()});g.restore();
+    const v=P.verdict;g.fillStyle=crCol(v,P.sp);g.font=k91F(700,22,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,crStars(v),W/2,TY,W-16)}}
+  /* falling cut-offs + the slash */
+  for(let i=falls.length-1;i>=0;i--){const q=falls[i],k=(now-q.a)/600;if(k>=1){falls.splice(i,1);continue}g.save();g.globalAlpha=1-k;g.strokeStyle="#4f7f4a";g.lineWidth=Math.max(3,rB*.34);g.lineCap="round";g.translate(0,k*k*hv*.5);g.rotate(k*.3);g.beginPath();g.moveTo(q.x,TY);g.lineTo(q.x+q.len,TY);g.stroke();g.restore()}
+  if(slash&&now-slash.a<BAL.mgFx.ms){g.save();g.globalAlpha=1-(now-slash.a)/BAL.mgFx.ms;g.strokeStyle=BAL.mgFx.ring;g.lineWidth=4;g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.5;g.beginPath();g.moveTo(slash.x0,slash.y0);g.lineTo(slash.x1,slash.y1);g.stroke();g.restore()}
+  if(gest&&gest.type==="cut"){g.save();g.strokeStyle="rgba(255,255,255,.9)";g.lineWidth=3;g.beginPath();g.moveTo(gest.x0,gest.y0);g.lineTo(gest.x1,gest.y1);g.stroke();g.restore()}
+  kg82DrawPops(g,pops,now);
+  const on=phase==="pick"||phase==="play";/* the ONE live grade (crHud → mgLive): done vases + the open one's time part + vases to come */
+  crHud(env,on?mgReach(sum+10/NR*mgPace(env,"hoa",now-P.t0,P.lim),r+1,NR):mgReach(sum,Math.min(NR,r+1),NR),r,NR,on?left:null)});
+ const segD=(px,py,ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(px-(ax+dx*t),py-(ay+dy*t))};
+ const aimOf=(x,y)=>Math.max(-rad(80),Math.min(rad(80),Math.atan2(x-MX,MY-y)));
+ k91Pointer(C,{
+  down:(x,y)=>{if(!P)return;
+   if(phase==="pick"){const i=P.fl.findIndex((f,k)=>{const c=pickPos(k);return k91Dist(x,y,c.x,c.y+rB*.4)<Math.max(30,rB*2.2)});if(i<0)return;const f=P.fl[i];if(f.wilt)return;
+    if(f.main){P.picked=true;P.cur=0;phase="play";bd.disabled=false;kg82Pluck(1,true);pops.length=0;kg82Pop(pops,pickPos(i).x,pickPos(i).y-rB*2,"✓",K91C.good())}
+    else{f.wilt=true;P.wrong++;kg82Pluck(0,false);kg82Pop(pops,pickPos(i).x,pickPos(i).y-rB*2,"✗",K91C.red())}return}
+   if(phase!=="play")return;const s=P.st[P.cur];
+   /* turn a stem already in the vase: the nearest tip, or the stem just set that was never turned */
+   const near=P.st.filter(q=>q.seated).map(q=>({q,d:k91Dist(x,y,tipOf(q,q.a).x,tipOf(q,q.a).y)})).sort((a,b)=>a.d-b.d)[0];
+   if(y<MY+hv*.15&&near&&(near.d<Math.max(46,hv*.5)||(P.last&&!P.last.leaned))){const q=near.d<Math.max(46,hv*.5)?near.q:P.last;gest={type:"lean",s:q};q.a=aimOf(x,y);return}
+   if(!s)return;
+   if(!s.cut){if(Math.abs(y-TY)<hv*.8&&x>HX-12&&x<HX+LU+30)gest={type:"cut",x0:x,y0:y,x1:x,y1:y};return}
+   if(segD(x,y,HX,TY,HX+s.L,TY)<Math.max(26,hv*.24))gest={type:"carry",f:s,x,y}},
+  move:(x,y)=>{if(!gest)return;if(gest.type==="cut"){gest.x1=x;gest.y1=y}else if(gest.type==="carry"){gest.x=x;gest.y=y}else if(gest.type==="lean"){gest.s.a=aimOf(x,y)}},
+  up:(x,y)=>{if(!gest)return;const G=gest;gest=null;const now=performance.now();
+   if(G.type==="cut"){const s=P.st[P.cur];G.x1=x;G.y1=y;if((G.y0-TY)*(G.y1-TY)<0&&Math.abs(G.y1-G.y0)>10){const cx=G.x0+(G.x1-G.x0)*(TY-G.y0)/(G.y1-G.y0);
+     if(cx>HX+hv*.15&&cx<HX+LU){s.cut=true;s.L=cx-HX;falls.push({x:cx,len:HX+LU-cx,a:now});slash={x0:G.x0,y0:G.y0,x1:G.x1,y1:G.y1,a:now};kg82Pluck(2,true)}}return}
+   if(G.type==="carry"){const s=G.f;if(k91Dist(x,y,MX,MY)<B.seat*hv){s.seated=true;s.a=0;P.last=s;P.cur++;kg82Pluck(1,true)}return}
+   if(G.type==="lean"){G.s.a=aimOf(x,y)+(sway?wob(now):0);G.s.leaned=true;if(G.s===P.last)P.last=P.st.slice().reverse().find(q=>q.seated&&!q.leaned)||null;kg82Pluck(1,true)}}});
+ bd.onclick=()=>{if(phase==="play")judge()};
+ /* the test oracle (KG82.peek): the next right move, in client coordinates */
+ KG82.peek=()=>{if(!P||gest)return null;
+  if(phase==="pick"){const i=P.fl.findIndex(f=>f.main);const c=pickPos(i),p=C.client(c.x,c.y+rB*.4);return{x:p.x,y:p.y}}
+  if(phase!=="play")return null;const q=P.last;
+  if(q&&!q.leaned){const a=rad(q.at),t0=tipOf(q,q.a),t1={x:MX+q.L*Math.sin(a),y:MY-q.L*Math.cos(a)},A=C.client(t0.x,t0.y),Bq=C.client(t1.x,t1.y);return{drag:[[A.x,A.y],[(A.x+Bq.x)/2,(A.y+Bq.y)/2],[Bq.x,Bq.y]]}}
+  const s=P.st[P.cur];if(!s)return{sel:"#k91done"};
+  if(!s.cut){const x=HX+s.Lt,a=C.client(x,TY-hv*.4),b=C.client(x,TY+hv*.4);return{drag:[[a.x,a.y],[b.x,b.y]]}}
+  const a=C.client(HX+s.L*.5,TY),b=C.client(MX,MY+hv*.02);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2-hv*.3],[b.x,b.y]]}};
+ next();return()=>{done=true;stop()}}
+
+/* wiring: the ONE table KG82_CRAFT (j91 re-wire block) names this engine + its rules text; the rules picture uses the "drag" demo until the kit's "cut" motion exists (KIT_REQUESTS.md, mg-craft-hoa; tạm → "cut" in KG82_CRAFT.hoa.demo) */
+crReg("hoa","ikebana",kcHoa);
 /* ================= jnwp — NO WORD GAMES, family A: Thơ + Câu đối (owner 16/11 07:20Z "no word games", OD:L1265/L1266) =================
    She does NOT want games built on words/text. The two word games of the Thi art are replaced for EVERY entry point (contest j71/j82, lessons KG82_MGL,
    handmade works j83 playArt, teacher lessons jrcp, Phúc tuyển jkc, veil jveil): kinds `tho` and `doi` now run NON-word engines, winnable by what is shown.
@@ -34230,7 +34693,7 @@ bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){
    frame (j82 kg82Open / kitGameFrame, KIT §13): the same engine contract as j82 / j91 — eng(box, env) -> stop(), env.hud, env.end(raw 0..10), KG82.peek.
    Own file (after j91 + j85, before j83): nothing in j82 / j91 is edited, so review/mg-easy cannot conflict.
    | course            | game                | how (every rule is on screen before and during play)                                            |
-   | Công · Nữ công    | Thêu theo nét       | match the sample thread colour, then drag the needle along the dotted pattern (glowing dot = next stitch) |
+   | Công · Nữ công    | Thêu theo nét       | (owner 21/11) the craft stitch board: tap the spool of the lit band's shade, then tap the hoop as the needle dips on the beat |
    | Dung · Dung nghi  | Đi đứng giữ bát     | hold LEFT / RIGHT half of the board to keep the bowl upright; each floor mark shows which way the next step leans it |
    | Ngôn · Lời nói    | Nói đúng lúc        | (mg-balance-2, no words) wait for the speaker (and an upset one to calm), then HOLD «Thưa» and let go in the voice band of that listener |
    | Hạnh · Đức hạnh   | Làm phúc            | share the portions among the waiting people (+ / −) so that everyone gets enough of what they need  |
@@ -34240,14 +34703,14 @@ bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){
 const TD_BG={td_cong:"theu-bg-hoc",td_dung:"mua-bg-hoc",td_ngon:"tho-bg-hoc",td_hanh:"ve-bg-hoc"};
 const TD_OF={cong:"td_cong",dung:"td_dung",ngon:"td_ngon",hanh:"td_hanh"};
 Object.assign(KG82_KIND,{
- td_cong:{e:"tdthread",n:"Công",t:"Thêu theo nét",how:"Chạm sợi chỉ cùng màu chỉ mẫu, rồi kéo kim theo nét chấm. Ba mảnh thêu."},
+ td_cong:{e:"stitch",n:"Công",t:"Thêu theo nét",how:""},/* engine, rules text: j91 KG82_CRAFT.td_cong (crReg below) */
  td_dung:{e:"tdwalk",n:"Dung",t:"Đội bát đi đứng",how:"Đội bát đi qua sảnh. Bát nghiêng bên nào, giữ nửa khung bên kia để đỡ. Kim ở dải xanh là vững."},
  td_ngon:{e:"tdtalk",n:"Ngôn",t:"Nói đúng lúc, vừa tiếng",how:"Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa; buông khi tiếng nói vào dải xanh."},
  td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓. Ba lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the «Hướng dẫn» round teaches the move */
- cong:[["1","Chạm sợi chỉ cùng màu chỉ mẫu."],["2","Kéo kim theo nét chấm, từ chấm xanh tới chấm đỏ."]],
+ cong:[["1","Chạm cuộn chỉ cùng sắc với dải sáng trong mẫu."],["2","Chạm khung đúng lúc kim chúc xuống chấm sáng."]],
  dung:[["1","Bát đặt trên đầu, mỗi bước chân làm bát nghiêng."],["2","Dấu ◀ ▶ trên sàn báo bát sắp nghiêng về bên nào."],["3","Giữ nửa khung bên kia để đỡ; kim ở dải xanh là vững."]],
  ngon:[["1","Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa."],["2","Buông khi tiếng nói vào dải xanh."]],
  hanh:[["1","Chạm + hoặc − để chia phần cho đủ số chấm."],["2","Xong thì chạm ✓, trước khi hết giờ."]]};
@@ -34255,49 +34718,9 @@ const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát vữ
 function tdEase(lv){return cl(Math.round(lv||0),0,5)}
 
 /* ---------- 1. Công: Thêu theo nét ---------- */
-const TD_THREAD=[["đỏ son","#c23b22"],["lam ngọc","#2f6aa5"],["vàng nghệ","#e0a526"],["lục","#2f8a5a"],["tím","#7a4a9a"]];
-const TD_PATH=[t=>[.1+.8*t,.5+.2*Math.sin(Math.PI*4*t)],t=>{const a=Math.PI*(-.85+1.7*t);return[.5+.34*Math.sin(a)*1.0,.62-.34*Math.cos(a)]},t=>[.5+.27*Math.sin(Math.PI*2*t),.12+.76*t]];
-/* review/mg-snap (owner 17/11 07:10Z, OD:L1571): the stitch follows HER finger. Before, the thread was drawn along the dotted path and the needle
-   jumped to the next path dot whenever the finger came near it, so a scribble looked and scored like a clean line. Now every point she draws is
-   kept and drawn: inside the tolerance in the thread colour, outside it as a red stitch; a piece is scored by the ONE trace score mgTraceScore
-   (jmgt, the same as Đồ nét bút / Chép kinh / May áo): path covered by her line × her line lying on the path. Tolerance = BAL.mgTier.lev.td_cong.tol
-   (share of the board width, by the board ease = rank / skill, mgLev; calibrated with dev/measure/mg-bots.js: skilled ≈ 25 % Xuất sắc at the matching level). The bright dot still shows the first part of the path not yet covered. */
-function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const N=44,TOL=W*mgLev(env,"td_cong","tol"),LIM=26000;
- const order=kg82Shuf([0,1,2]);let piece=0,pts=0,phase="pick",stop=false,raf=0,t0=0,i=0,down=false,px=0,py=0,tgt=0,choice=[],P=[],D=[],cov=[],ink=null,inks=[],colOk=false;const pops=[];
- const pc=kg82Col("--good","#2d7a52"),rc=kg82Col("--red","#c23b22");const lv=tdEase(env.lv);
- function samples(k){return Array.from({length:N},(_,j)=>{const [x,y]=TD_PATH[order[k]](j/(N-1));return[x*W,(.1+.8*y)*H]})}
- /* the path densified to ~4 px for scoring (the 44 dots stay the picture) */
- function dense(Q){const R=[Q[0]];for(let j=1;j<Q.length;j++){const n=Math.max(1,Math.ceil(Math.hypot(Q[j][0]-Q[j-1][0],Q[j][1]-Q[j-1][1])/4));for(let s=1;s<=n;s++)R.push([Q[j-1][0]+(Q[j][0]-Q[j-1][0])*s/n,Q[j-1][1]+(Q[j][1]-Q[j-1][1])*s/n])}return R}
- const near=(x,y)=>{let m=1e9;for(const q of D){const d=(q[0]-x)**2+(q[1]-y)**2;if(d<m)m=d}return Math.sqrt(m)};
- function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end((pts)),350)}P=samples(piece);D=dense(P);cov=P.map(()=>false);i=0;ink=null;inks=[];down=false;colOk=false;phase="pick";
-  const ids=kg82Shuf([0,1,2,3,4]).slice(0,lv>=3?2:3);tgt=ids[Math.floor(Math.random()*ids.length)];choice=kg82Shuf(ids)}
- function endPiece(){if(phase!=="stitch")return;phase="judge";if(ink){inks.push(ink);ink=null}down=false;const U=[].concat(...inks);const q=mgTraceScore(D,U,TOL);const got=((colOk?.2:0)+.8*q)*10/3;pts+=got;
-  kg82Pop(pops,W/2,H*.5,q>=.85?NWB.POP.s3:q>=.6?NWB.POP.s2:q>=.3?NWB.POP.s1:NWB.POP.bad,q>=.6?pc:rc);piece++;setTimeout(begin,1100)}
- /* her point at (x,y): marks the path dots it covers; i = the first dot not yet covered (the bright dot) */
- function stitch(x,y){const l=ink[ink.length-1];if(l&&Math.hypot(x-l[0],y-l[1])<2)return;ink.push([x,y,near(x,y)<=TOL]);for(let j=0;j<N;j++)if(!cov[j]&&Math.hypot(P[j][0]-x,P[j][1]-y)<TOL)cov[j]=true;while(i<N&&cov[i])i++}
- const sw=()=>{const r=Math.min(W*.085,34),n=choice.length,gap=(W-n*2*r)/(n+1);return choice.map((id,k)=>({id,x:gap*(k+1)+r*(2*k+1),y:H*.72,r}))};
- function draw(now){kg82Bg(g,W,H,"td_cong",.1,.6);g.textAlign="center";g.textBaseline="alphabetic";
-  if(phase==="pick"){g.fillStyle="#3a1a0c";g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Chỉ mẫu",W/2,H*.2);g.beginPath();g.arc(W/2,H*.34,Math.min(W*.1,40),0,Math.PI*2);g.fillStyle=TD_THREAD[tgt][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke();
-   g.fillStyle="#3a1a0c";g.font=`700 22px ${kg82Col("--body","sans-serif")}`;g.fillText("▼",W/2,H*.585);g.fillStyle="#3a1a0c";g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Chạm sợi chỉ cùng màu",W/2,H*.53);g.font=`700 22px ${kg82Col("--body","sans-serif")}`;sw().forEach(s=>{g.beginPath();g.arc(s.x,s.y,s.r,0,Math.PI*2);g.fillStyle=TD_THREAD[s.id][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke()})}
-  else{g.save();g.lineCap="round";g.lineJoin="round";g.setLineDash([2,9]);g.lineWidth=4;g.strokeStyle="rgba(58,26,12,.75)";g.beginPath();P.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();g.restore();
-   /* her own line: on the path in the thread colour, off the path a thin dashed red line (an off stitch shows and costs; dashed so it reads apart from a red thread) */
-   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";for(let j=1;j<U.length;j++){const ok=U[j][2]&&U[j-1][2];g.lineWidth=ok?5.5:2.5;g.strokeStyle=ok?useCol:rc;g.globalAlpha=ok?1:.9;g.setLineDash(ok?[]:[5,4]);g.beginPath();g.moveTo(U[j-1][0],U[j-1][1]);g.lineTo(U[j][0],U[j][1]);g.stroke()}g.restore()});
-   if(phase==="stitch"&&i<N){const nx=P[Math.min(N-1,i)];g.save();g.globalAlpha=.55+.4*Math.sin(now/180);g.fillStyle="#ffe08a";g.shadowColor="#ffe08a";g.shadowBlur=16;g.beginPath();g.arc(nx[0],nx[1],8,0,Math.PI*2);g.fill();g.restore()}
-   g.fillStyle="#2d7a52";g.beginPath();g.arc(P[0][0],P[0][1],9,0,Math.PI*2);g.fill();g.fillStyle="#c23b22";g.beginPath();g.arc(P[N-1][0],P[N-1][1],9,0,Math.PI*2);g.fill();
-   g.fillStyle="#fff6dc";g.font=`700 11px ${kg82Col("--body","sans-serif")}`;g.textBaseline="middle";g.fillText("▶",P[0][0]+1,P[0][1]+.5);g.fillText("■",P[N-1][0],P[N-1][1]+.5);g.textBaseline="alphabetic";g.fillStyle="#3a1a0c";g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"bắt đầu",P[0][0],P[0][1]+(P[0][1]<H*.5?24:-14),70);kg82Lbl(g,"hết nét",P[N-1][0],P[N-1][1]+(P[N-1][1]<H*.5?24:-14),70);
-   const tip=ink&&ink.length?ink[ink.length-1]:null;if(tip)kg82Spr(g,"kim-needle",tip[0],tip[1],W*.2,null,{ax:.08,ay:.92})}
-  kg82DrawPops(g,pops,now)}
- let useCol="#c23b22";
- function frame(now){if(stop&&phase!=="judge")return;if(phase==="stitch"){const left=LIM-(now-t0);if(left<=0||(i>=N&&!down))endPiece()}
-  env.hud({score:mgReach(pts,piece,3),round:`Hồi ${Math.min(piece+1,3)}/3`,time:phase==="stitch"?`${Math.max(0,Math.ceil((LIM-(now-t0))/1000))} giây`:phase==="pick"?"chọn chỉ":"–"});draw(now);raf=requestAnimationFrame(frame)}
- function move(e){if(phase!=="stitch"||!down||!ink)return;[px,py]=C.at(e);stitch(px,py)}
- C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x,y]=C.at(e);if(phase==="pick"){const s=sw().find(s=>Math.hypot(s.x-x,s.y-y)<s.r*1.4);if(!s)return;colOk=s.id===tgt;useCol=TD_THREAD[s.id][1];kg82Pluck(colOk?3:0,colOk);kg82Pop(pops,W/2,H*.5,colOk?NWB.POP.ok:NWB.POP.bad,colOk?pc:rc);phase="stitch";t0=performance.now();return}
-  if(phase!=="stitch")return;px=x;py=y;down=true;ink=[];stitch(x,y);try{C.cv.setPointerCapture(e.pointerId)}catch(_){}});
- C.cv.addEventListener("pointermove",move);const up=()=>{down=false;if(ink){if(ink.length)inks.push(ink);ink=null}};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
- const act=document.createElement("div");act.className="kg82act";act.innerHTML=NWB.btn("tdthx","check",{label:"Xong mảnh này"});box.appendChild(act);act.querySelector("button").onclick=()=>{if(phase==="stitch")endPiece()};
- KG82.peek=()=>{if(phase==="pick"){const s=sw().find(s=>s.id===tgt);return s?C.client(s.x,s.y):null}if(phase!=="stitch"||down||i>=N)return null;return{drag:P.slice(Math.max(0,i)).filter((_,j,a)=>j%2===0||j===a.length-1).map(([x,y])=>{const c=C.client(x,y);return[c.x,c.y]})}};
- KG82.dbg=()=>({phase,i,down,TOL,p0:P[0],piece,ink:inks.reduce((a,u)=>a+u.length,0)});
- begin();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
+/* owner 21/11 ~01:05Z ("Ủa đâu cái trò mà nhớ ô hoa … Cái trò đó hay nha, không bỏ nha"): Thêu keeps the j82 memory game «Nhớ mẫu thêu»; the craft
+   stitch board of review/mg-craft (jcraft_theu crtStitch: shade order + stitch on the beat) serves Công «Thêu theo nét» instead of the old dotted-line
+   trace (kgTdThread, review/mg-snap; removed: no caller left). Levers BAL.mgTier.lev.td_cong (board ease from the tier, harder with rank: law 5). */
 
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
 function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
@@ -34455,8 +34878,8 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
  render();return()=>{stop=true;clearInterval(tm)}}
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
 /* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
-const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
-const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:`Người ghi cần ${BAL.td.exNeed} phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong.`};
+const TD_HINT={stitch:"Viền vàng chỉ cuộn chỉ đúng sắc, hoặc chỗ chạm khung khi kim chúc xuống.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
+const TD_EX={cong:"Dải sáng ở mép cánh hoa là sắc đậm nhất trong mẫu: chạm cuộn chỉ đậm ấy, rồi chạm khung mỗi lần kim chúc xuống chấm sáng.",dung:"Dấu sàn ghi “◀” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:`Người ghi cần ${BAL.td.exNeed} phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong.`};
 function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
 function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
 function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
@@ -34472,8 +34895,9 @@ function tdWrap(eng,ek){return function(box,env){let hints=0,last=performance.no
  env.end=raw=>end0(Math.max(0,raw-Math.min(2,hints)));/* review/mg-balance-2-r1: keep the float (kg82Play grades it with mgGrade); rounding here made the 4 Tứ đức grades jump 9→10 */
  /* review/mg-score-same: the four Tứ đức engines give the board a FLOAT (the raw reachable); the mark in hand = the ONE grade of it minus the hints taken so far, as env.end above */
  const hud0=env.hud;env.hud=o=>{if(o&&typeof o.score==="number")o=Object.assign({},o,{score:mgLive(env,Math.max(0,o.score-Math.min(2,hints)))});hud0(o)};
- const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
-Object.assign(KG82_ENG,{tdthread:tdWrap(kgTdThread,"tdthread"),tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
+ env.hintCut=()=>Math.min(2,hints);/* crHud (jcraft, the stitch board) takes the hints off before it grades */const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
+Object.assign(KG82_ENG,{tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
+crReg("td_cong","stitch",tdWrap(crtStitch,"stitch"));/* the stitch board inside the Tứ đức wrapper (hint button + idle hints, like Dung / Ngôn / Hạnh) */
 
 /* ---------- layout only (colours and chrome come from the kit) ---------- */
 (function(){const st=document.createElement("style");st.id="td-css";st.textContent=`
@@ -34493,7 +34917,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const kind=TD_OF[k],K=KG82_KIND[kind];if(window.__bot||typeof kg82Open!=="function"){tdFinish(k,mode,5,true);return}
  TDS.busy=true;KG82.ctx="hoc";kg82Preload(kind);mgSet(kind,{occ:"hoc",lv:l});/* mg-balance: board ease from the tier (jmgt) */
- const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="tdthread"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
+ const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="stitch"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
@@ -35507,7 +35931,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tc:{fast:[.3,.45],keep:[.3,.3]},xa:{fast:[.25,.4],keep:[.4,.4]},thq:{fast:[.5,.65],keep:[.5,.5]},
   kim:{fast:[.25,.4],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.4,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220],darkCap:[.6,.6]},
-  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},chai:{zone:[.6,1.6]},ban:{size:[.7,1]},/* dauho-lv5: Bắn cung target picture size by ease (share of BAL.mgArt.ban.fit·H); the scoring rings are the painted rings *//* chai-ramp (owner 21/11 ~00:55Z): Chải chuốt green «đúng phẩm» band = wdGroomW × zone at the board ease (1.0 at ease 2 = the width she was measured on); Thử tay hồi 1→5 (ease 3.6→0.4) ≈ ×1.32 → ×0.68 *//* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
+  td_hanh:{lim:[8000,20000],short:[2,0]},den:{swing:[.36,.36],band:[.16,.208]},chai:{zone:[.6,1.6]},ban:{size:[.7,1]},/* dauho-lv5: Bắn cung target picture size by ease (share of BAL.mgArt.ban.fit·H); the scoring rings are the painted rings *//* chai-ramp (owner 21/11 ~00:55Z): Chải chuốt green «đúng phẩm» band = wdGroomW × zone at the board ease (1.0 at ease 2 = the width she was measured on); Thử tay hồi 1→5 (ease 3.6→0.4) ≈ ×1.32 → ×0.68 *//* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  /* review/cal-p2b (owner OD 20/11 ~07:35Z: fix the broken games only) — three board faults, BAL only:
@@ -35565,7 +35989,33 @@ BAL.mgArt={dauho:{mouth:{cy:.0414,rx:.2207,ry:.0224},rim:.2776,neck:[[.069,.276]
    bad = width share of the danger ring round a thing to avoid (colour = kit --bad) · badMs = how long the hit burst stays · badShake = px the hit thing / the player's
    piece shakes on a hit */
 Object.assign(BAL.mgFx,{popMax:30,/* huong-cue: longest pop / verdict kept as words */lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62,laneFade:.25});/* laneFade (den-look): share of the lane width over which the dim board fades in beside the path (no hard edge) *//* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
+/* mg-craft-hoa (owner OD 20/11 ~08:15Z, design MG_CRAFTS.md §3): Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa.js). Levers = [ease 0, ease 5] through mgLev:
+   ghost = share of the ruler ticks / lean fan shown · cutTol = length error that still counts full (share of the target) · angTol = lean error in degrees that counts full ·
+   alike = off-season look-alikes in the tray of 6 · sway = stem wobble while it is turned (share of half a turn) · limStem = ms per stem of the vase (clock = stems × this).
+   BAL.mgTier.hoa: n = stems of the 3 vases (+ mgMore, at most maxMore) · thien = Thiên length in vase heights · k = Nhân/Thiên, Địa/Nhân · guest = guest stems ÷ the Nhân (odd) / Địa (even) they hang off ·
+   ang = lean degrees per stem, signed (Thiên, Nhân, Địa, guests) · cut = uncut stem in vase heights · zero = the error (× its tolerance) at which a part scores 0 · seat = mouth radius in vase heights ·
+   w = score weights (season, length, lean, balance) · wrong = season share lost per wilted pick · balTol = balance error (share of the stem lengths) that scores 0 · judgeMs = pause on the stars. */
+BAL.mgTier.hoa={n:[3,4,5],maxMore:2,thien:1.5,k:[.75,.75],guest:[.85,.85,.65,.65],ang:[-10,45,-75,25,-50,60,-30],cut:2.2,zero:3,seat:.4,w:{sea:.2,len:.4,ang:.3,bal:.1},wrong:.5,balTol:.35,judgeMs:1500};
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
+/* mg-craft (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm": each craft its OWN real mechanic; design dev/design/MG_CRAFTS.md):
+   the board levers of the four craft boards, each [at ease 0 (hard), at ease 5 (easy)], read through mgLev(env, kind, name) — ONE CORE: no board number is typed in
+   the engines. Each kind's builder adds knobs ONLY inside its own block. Kind keys, kG / kAdj, cal.k and the hand band are unchanged (MAIN ROOT-75 order).
+   td_cong «Thêu theo nét» (jcraft_theu stitch board; built as Thêu «Thêu lướt sắc», moved to the Công lesson by the owner 21/11 ~01:05Z — Thêu keeps the j82
+     memory game; was td_cong tol = the old dotted-line trace tolerance): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · st = stitches per band · alike = decoy spools one
+     shade step off the right one · sway = hoop drift as a share of the hoop · peek = ms the finished sample stays before its cloth covers it (≥ round time = stays) ·
+     wC / wS = weight of the right colour / the stitch rhythm in a piece · lim = ms per piece (the time part mgPace) · fast / keep = mgPace of that time.
+   kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · holes = cuts of a sheet before mgMore · size = a cutter's size as a share of the wedge radius · place = snap tolerance as a share of
+     the wedge · peek = ms the unfolded sample stays (≥ lim = stays) · alike = look-alike cutter shapes · lim = ms per sheet · extra = what one extra hole costs
+     (share of a right hole) · fast / keep = mgPace (kept from review/mg-tune-r1).
+   Measured STEP 3 (dev/measure/mg-bots.js skilled n=30, graded): theu Dễ/Vừa/Khó 8.6 / 7.7 / 6.8 (old pattern 7.2 / 7.2 / 6.7), kim 8.7 / 8.5 / 6.8 (old untangle 9.0 / 8.6 / 7.7).
+   Integrate (lead #2, same harness, graded mean Dễ/Vừa/Khó): ve 9.9 / 8.2 / 5.5 (old trace 9.1 / 7.9 / 5.4) after ve ease-0 place .012 · ramp 220 · dry 150;
+   hoa 8.4 / 7.5 / 7.2 (old rings 8.5 / 7.8 / 7.7) after hoa ease-0 cutTol .12 · angTol 16 · sway .01 · limStem 10000 (was 4.4 / 4.7 at Vừa / Khó).
+   ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
+Object.assign(BAL.mgTier.lev,{
+ td_cong:{beat:[440,850],win:[20,65],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[18000,30000],fast:[.8,.8],keep:[.6,.6]},/* td_cong tune 21/11 (Công lesson kG 1.3; mg-bots skilled graded Dễ/Vừa/Khó 8.8 / 8.1 / 5.4 vs the old dotted-line trace 9.3 / 7.9 / 5.5): beat 520→440 | 900→850 · win 45→20 | 75→65 · lim ease-0 30000→18000 */
+ ve:{place:[.012,.14],tones:[5,3],ramp:[220,2600],dry:[150,30000],peek:[3000,40000],bleed:[.07,.03],flick:[420,420],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},/* mg-craft-ve «Thủy mặc» [ease 0, ease 5]: place = hit radius, share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = ms before the loaded brush pales one tone · peek = ms the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share · flick = ms a person takes to flick (bot oracle) · holdMin = ms a press counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = score parts · lim/limBase = ms per motif / fixed · fast/keep = mgPace */
+ hoa:{ghost:[0,1],cutTol:[.12,.15],angTol:[16,20],alike:[3,0],sway:[.01,0],limStem:[10000,17000]}});
+Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
@@ -92558,7 +93008,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="56e5791fc72a";window.CTM_BUILD=BUILD;
+const BUILD="9034f4227758";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
