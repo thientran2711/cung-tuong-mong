@@ -296,3 +296,7 @@ Notes:
 - The persona "Expression:" sentence was cut (Foreman option B) — accepted per Foreman.
 - The t6 cape words are a compacted version of the t5 text, not verbatim (G46 asks for verbatim only for Tần → Phi).
 Verdict: **t6 FAIL (G1 vân kiên removed)**. Not sent to GEN1.
+
+## HOLD + checklist add (Foreman C #15 ~01:53Z)
+- The v6 drafts show that OUTER_TIED does not work in the picture (the outer robe is still an open coat). HOLD t6/t7/t8 even on PASS until DESIGN20's v8 G40 wording is proven on the t4/t5 drafts; then LADDER2 swaps it in and I re-check.
+- Checklist item 12: no vase / bình hoa as the held item (owner L1438). The thu t4 v6/v7 pose "a small white-jade vase with blossoms" breaks this, so the next t4 version must change it.
