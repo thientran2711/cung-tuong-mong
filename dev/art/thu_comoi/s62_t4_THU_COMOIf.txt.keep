@@ -1,0 +1,11 @@
+base: dev/art/thu_comoi/s62_t4_THU_COMOIe.txt
+allow: a blush inner top with a low straight SQUARE neckline edged by a richer gold-brocade band  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: the inner top also richly embroidered across the chest  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: an embroidered blush lotus band down past the waist  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: the outer robe HELD IN by the sash or girdle tied OVER it  # owner L1625/L1626/L1627 G40 strong: master_common.OUTER_TIED replaces OUTER_IN (shared with LADDER2), DESIGN20
+allow: hugging the body  # owner L1625/L1626/L1627 G40 strong: master_common.OUTER_TIED replaces OUTER_IN (shared with LADDER2), DESIGN20
+allow: her own hair colour  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: decorated with ONE fresh flower and several gold hairpins  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: rich like her rank  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: clearly different from her main robe colour light plum  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: "Mùa Thu · Thiết kế hiện tại · Tần · Áo choàng nhỏ + cổ mở · v5"  # caption v6 (length), DESIGN20

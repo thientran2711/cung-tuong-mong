@@ -1,0 +1,31 @@
+base: dev/art/thu_comoi/s62_t5_THU_COMOId.txt
+allow: that square neckline edged by a wide gold-embroidered band  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: the inner top also richly embroidered across the chest  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: a gold-edged blush band embroidered with small double hollyhocks  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: down past the waist  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: the outer robe HELD IN by the sash or girdle tied OVER it  # owner L1625/L1626/L1627 G40 strong: master_common.OUTER_TIED replaces OUTER_IN (shared with LADDER2), DESIGN20
+allow: hugging the body  # owner L1625/L1626/L1627 G40 strong: master_common.OUTER_TIED replaces OUTER_IN (shared with LADDER2), DESIGN20
+allow: TWO layered embroidered light plum pearl-edged shoulder capes  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: one over the other  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: the upper one shorter  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: softly draping over the shoulders  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: the UPPER layer is a short round embroidered silk capelet like the Tần's  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: its lower edge softly scalloped  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: UNDER it the LOWER layer is only a small scalloped flap over the top of each upper arm like a tiny cap sleeve  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: never a full cape  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: each cape richly embroidered in gold thread with small double hollyhocks  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: each edged with a row of small sewn-on pearls  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: exactly the old Quý phi capes  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: with a short fringe of tiny pearl drops dangling beneath each cape edge  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: a little richer than the Tần's pearl fringe and fewer than the Quý phi's drops  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: and over both capes an airy open net of small pearls and small jade beads lying flat  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: the same kind of beaded pearl net as the Tần's capelet  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: never covering the neckline  # owner L1626: Phi cape = Tần capelet word for word + one extra small layer on each shoulder (build.py CAPE5_V4), DESIGN20
+allow: a broad gold brocade girdle with two long jade pendants hanging on silk cords  # owner L1626/L1628 G42/G47 ladder (embroidered neckline band, chest, long vertical front panels, hem bands, jade sets visible G45/G44), DESIGN20
+allow: her own hair colour  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: decorated with ONE fresh flower and several gold hairpins  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: rich like her rank  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: clearly different from her main robe colour light plum  # A38 repeat trim (= HAIR FLOWER SIZE + hairpin sentences / TWO-COLOUR RULE), gate-checked, DESIGN20
+allow: "Mùa Thu · Thiết kế hiện tại · Phi · 2 lớp choàng  # caption v6 (length), DESIGN20
+allow: Quý phi cũ  # caption v6 (length), DESIGN20
+allow: + lưới ngọc trai + cổ mở"  # caption v6 (length), DESIGN20

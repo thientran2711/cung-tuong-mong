@@ -11,7 +11,7 @@ Tần capelet clause untouched (owner liked it, B). Never hand-edited (L1567): r
 import os, sys
 ART = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ART); sys.path.insert(0, os.path.join(ART, "dapung4"))
-from master_common import OUTER_IN
+from master_common import OUTER_IN, OUTER_TIED
 import make_thu_L1574 as _L
 _L.TRIM = [x for x in _L.TRIM if x[0] != " Everyone beautiful at every age."]   # store sentence (check_store) -> never trimmed here
 fit = _L.fit
@@ -41,3 +41,28 @@ s, used = fit(s)
 assert len(s) <= 10000, len(s)
 out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIe.txt")
 open(out, "w", encoding="utf-8").write(s); print(len(s), out, "trims:", used)
+
+# ---- v6 = COMOIf (owner L1625/L1626/L1628 via Foreman C #15; G40 strong, G42/G47 ladder; Tần capelet + chest cord + jade KEPT verbatim) ----
+V6 = [
+    (OUTER_IN, OUTER_TIED),                                                    # G40 strong shared clause (master_common, agreed with LADDER2)
+    ("WIDE gold-thread embroidered borders of lotus flowers at sleeves and hem,",   # L1626 (d): inner robe hem (chân áo áo trong) embroidered too
+     "WIDE gold-thread embroidered borders of lotus flowers at sleeves and hem, a wide embroidered lotus band at the inner robe's hem too,"),
+    ("edged by a richer gold-brocade band (the Tần edge), the inner top also richly embroidered across the chest,",   # L1628: band itself embroidered
+     "edged by a wide blush band embroidered with lotus flowers running straight ACROSS the chest (the Tần edge), small lotus flowers embroidered below it,"),
+    ("(an embroidered blush lotus band down past the waist)",                   # L1626 (c) 'mảng dài dọc xuống'
+     "(each a long vertical blush panel of lotus embroidery from shoulder to hem)"),
+]
+TRIM6 = [   # A38: repeats only (each said elsewhere in this prompt); check_store PASS without them (DESIGN20 sentence scan)
+    " Hair: her own hair colour, decorated with ONE fresh flower and several gold hairpins (trâm) with dangles, rich like her rank.",  # = HAIR FLOWER SIZE + hairpin sentences
+    " (her secondary colour, clearly different from her main robe colour light plum)",   # = TWO-COLOUR RULE
+]
+if __name__ == "__main__":
+    for a, b in V6:
+        assert s.count(a) == 1, a; s = s.replace(a, b)
+    for a in TRIM6:
+        assert s.count(a) == 1, a; s = s.replace(a, "")
+    CAP = "Mùa Thu · Thiết kế hiện tại · Tần · Áo choàng nhỏ + cổ mở · v5"; assert s.count(CAP) == 1
+    s = s.replace(CAP, "Mùa Thu · Tần · v6")
+    assert len(s) <= 9990, len(s)
+    out = os.path.join(ART, "thu_comoi/s62_t4_THU_COMOIf.txt")
+    open(out, "w", encoding="utf-8").write(s); print(len(s), out)
