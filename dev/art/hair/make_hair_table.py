@@ -172,15 +172,27 @@ def style(t, cell):
     return dict(code=full, shape=code, vi=f"{svi} · {wvi} · {pvi}", vi_short=[svi, wvi, pvi], en_a18=en, en_a36=en)
 
 
+SEASONS = ["xuan", "ha", "thu", "dong"]   # owner L1631: 'mỗi mùa một kiểu'
+SEASON_VI = {"xuan": "Xuân", "ha": "Hạ", "thu": "Thu", "dong": "Đông"}
+SD = 3   # shape step per season: shapes s, s+3, s+6, s+9 (mod 10) -> 4 DIFFERENT bun shapes for one person in one rank
+
+
+def season_cell(cell, k):
+    """season k: shape +k*SD (mod 10), position/wrap +k (mod 9). Both maps are bijections -> still 90 distinct styles per rank+season."""
+    s, pw = divmod(cell, 9)
+    return ((s + k * SD) % 10) * 9 + (pw + k) % 9
+
+
 def main():
     ids, grp = roster()
     assert len(ids) == 90, len(ids)
     people = {}
     for i, pid in enumerate(ids):
-        people[pid] = {"group": grp[pid], **{f"t{t}": style(t, (i * K[t] + O[t]) % 90) for t in range(1, 9)}}
+        people[pid] = {"group": grp[pid], **{f"t{t}": {se: style(t, season_cell((i * K[t] + O[t]) % 90, k)) for k, se in enumerate(SEASONS)}
+                                             for t in range(1, 9)}}
     table = {
         "_note": "HAIR1 hairstyle table (owner order 21/11 via Foreman C #15). PROPOSAL — owner verdict pending. "
-                 "One style per person per rank; no duplicate inside a rank; 8 different styles per person. "
+                 "One style per person per rank per season (owner L1631 mỗi mùa một kiểu); 4 seasons of one rank = 4 different bun shapes; no duplicate inside a rank; 8 different styles per person. "
                  "Proof: python3 dev/art/hair/check_hair_table.py. Builder form: HAIR_TABLE_builder.json / hair_words.py.",
         "status": "PROPOSAL — owner verdict pending",
         "roster": "palettes_season_L1583.json (90 = 86 consorts + s62–s65)",
@@ -191,13 +203,14 @@ def main():
         "axes": {"shape": {f"t{t}": [list(x) for x in SHAPES[t]] for t in SHAPES},
                  "position_t1_t3": POS_LOW, "sides_t4_t8": POS_UP, "wrap": WRAP, "loose_t1_t3_a18_a26": LOOSE,
                  "t1_t3_a36_plus": list(NAPE_A36)},
-        "assign": {"formula": "cell = (i*K[t] + O[t]) mod 90; shape,rest = divmod(cell,9); pos,wrap = divmod(rest,3); loose = (shape+pos+wrap) mod 3",
+        "assign": {"formula": "cell = (i*K[t] + O[t]) mod 90; shape,pw = divmod(cell,9); season k (xuan,ha,thu,dong = 0..3): shape = (shape + 3k) mod 10, pw = (pw + k) mod 9; pos,wrap = divmod(pw,3); loose = (shape+pos+wrap) mod 3",
                    "K": K, "O": O, "i": "index in sorted roster ids"},
-        "group_order": GROUP_ORDER,
+        "group_order": GROUP_ORDER, "seasons": SEASONS, "season_vi": SEASON_VI,
         "people": people,
     }
     json.dump(table, open(os.path.join(HERE, "HAIR_TABLE.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    flat = {pid: {t: {"code": v[t]["code"], "en_a18": v[t]["en_a18"], "en_a36": v[t]["en_a36"]} for t in v if t.startswith("t")}
+    flat = {pid: {t: {se: {"code": v[t][se]["code"], "en_a18": v[t][se]["en_a18"], "en_a36": v[t][se]["en_a36"]} for se in SEASONS}
+                  for t in v if t.startswith("t")}
             for pid, v in people.items()}
     json.dump(flat, open(os.path.join(HERE, "HAIR_TABLE_builder.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("wrote HAIR_TABLE.json + HAIR_TABLE_builder.json for", len(people), "people")

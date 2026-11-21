@@ -27,3 +27,10 @@ Rules respected / conflicts
 ## JOB 1b — DONE (owner L1630: 'cho tôi một cái prompt … vẽ hết 10 kiểu này vô một bậc … tôi đưa chat GPT nó vẽ') — 0 gens
 - dev/handover/review-sheets/hair_table_L1621/chatgpt/hair_t1..t8.txt (+ make_chatgpt_hair.py, README.md with gate result + what was dropped / hand-written).
 - Gate: no BANNED, no REWRITTEN; only figure-only master/store sentences missing on purpose (listed in README).
+
+## JOB 1c — DONE (owner L1631 verbatim: 'Tại sao không làm xuân một kiểu, xuân hạ thu đông một kiểu, hiểu không? Ý là mỗi mùa một kiểu.') — 0 gens
+- HAIR_TABLE is now person × rank × season (xuan/ha/thu/dong). Still 10 shapes per rank (80 total) — no new shapes needed, so the 8 ChatGPT sheets (JOB 1b) are unchanged.
+- Season k: shape +3k (mod 10), position/wrap +k (mod 9) — both bijections, so each rank+season still has 90 different styles; her 4 seasons in one rank = 4 DIFFERENT bun shapes; her 32 cells all different.
+- hair_words(pid, tier, season, age); HAIR_TABLE_builder.json = {pid: {tN: {season: {code, en_a18, en_a36}}}}.
+- check_hair_table.py PASS: no duplicate inside any rank+season (code/VN/EN), 32/32 per person, 4 shapes per rank per person, 8 shapes per season per person, rank-disjoint shapes, F1/F11, banned words. Mutation test (copy xuân→hạ) -> FAIL (works).
+- Sheets rebuilt: each cell now lists Xuân/Hạ/Thu/Đông stacked (same 13 files).

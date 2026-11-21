@@ -23,34 +23,55 @@ def wrap(d, txt, font, w):
     out.append(line); return out
 
 
+SE = T["seasons"]; SV = T["season_vi"]
+SC = {"xuan": (200, 60, 110), "ha": (200, 110, 20), "thu": (150, 80, 30), "dong": (40, 90, 160)}
+
+
+def cell(d, x, y, r, draw=True):
+    """one rank cell = 4 season blocks stacked; returns the height used"""
+    yy = y + 6
+    for se in SE:
+        vs = r[se]["vi_short"]
+        lines = wrap(d, f"{SV[se]}: {vs[0]}", F(23, True), CW - 22)[:2]
+        for n, ln in enumerate(lines):
+            if draw:
+                if n == 0:
+                    lab = SV[se] + ":"; d.text((x + 10, yy), lab, font=F(23, True), fill=SC[se])
+                    d.text((x + 10 + d.textlength(lab + " ", font=F(23, True)), yy), ln[len(lab) + 1:], font=F(23, True), fill=INK)
+                else:
+                    d.text((x + 10, yy), ln, font=F(23, True), fill=INK)
+            yy += 28
+        for ln in wrap(d, " · ".join(vs[1:]), F(19), CW - 30)[:2]:
+            if draw: d.text((x + 22, yy), ln, font=F(19), fill=(80, 80, 80))
+            yy += 23
+        yy += 6
+    return yy - y
+
+
 def group_sheet(g, ids, part):
     tiers = [1, 2, 3, 4] if part == "A" else [5, 6, 7, 8]
-    H = 190 + 70 + RH * len(ids) + 60
+    tmp = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    rh = {pid: max(cell(tmp, 0, 0, P[pid][f"t{t}"], False) for t in tiers) + 8 for pid in ids}
+    H = 196 + 70 + sum(rh.values()) + 60
     im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im)
-    d.text((20, 15), f"Bảng kiểu tóc L1621 — nhóm {g} ({len(ids)} người) · bậc {tiers[0]}–{tiers[-1]}", font=F(46, True), fill=RED)
+    d.text((20, 15), f"Bảng kiểu tóc L1621 — nhóm {g} ({len(ids)} người) · bậc {tiers[0]}–{tiers[-1]} · 4 mùa", font=F(46, True), fill=RED)
     note = ("Bậc 1–3: chỉ BÚI phần tóc trên, phần lớn tóc XÕA (tuổi 18/26). Tuổi 36+: phần xõa búi gọn ở gáy (luật F11)."
             if part == "A" else "Bậc 4–8: búi hết tóc lên. Bậc 7–8: búi nằm dưới mũ phượng (chữ mũ giữ nguyên).")
     d.text((20, 78), note, font=F(26), fill=GREY)
-    d.text((20, 116), "Mỗi bậc: 90 người = 90 kiểu khác nhau · mỗi người: 8 bậc = 8 kiểu khác nhau (máy kiểm tra: PASS)", font=F(26, True), fill=(20, 110, 40))
-    y = 190
+    d.text((20, 114), "Mỗi mùa một kiểu (L1631): cùng bậc + cùng mùa: 90 người = 90 kiểu khác nhau", font=F(24, True), fill=(20, 110, 40))
+    d.text((20, 146), "Mỗi người: 8 bậc × 4 mùa = 32 kiểu khác nhau · 4 mùa của 1 bậc = 4 dáng búi khác nhau (máy kiểm tra: PASS)", font=F(24, True), fill=(20, 110, 40))
+    y = 196
     for j, t in enumerate(tiers):
         x = LW + j * CW
         d.rounded_rectangle((x + 4, y, x + CW - 6, y + 58), 10, fill=RK[t])
         d.text((x + 16, y + 10), f"t{t} {RV[t]}", font=F(32, True), fill=INK)
     y += 70
     for k, pid in enumerate(ids):
-        if k % 2 == 0: d.rectangle((10, y, W - 10, y + RH - 4), fill=(244, 240, 230))
+        if k % 2 == 0: d.rectangle((10, y, W - 10, y + rh[pid] - 4), fill=(244, 240, 230))
         d.text((22, y + 14), pid, font=F(38, True), fill=INK)
         for j, t in enumerate(tiers):
-            x = LW + j * CW; r = P[pid][f"t{t}"]; vs = r["vi_short"]
-            yy = y + 8
-            for ln in wrap(d, vs[0], F(26, True), CW - 24)[:2]:
-                d.text((x + 10, yy), ln, font=F(26, True), fill=INK); yy += 32
-            for s in vs[1:]:
-                for ln in wrap(d, s, F(22), CW - 24)[:2]:
-                    d.text((x + 10, yy), ln, font=F(22), fill=(60, 60, 60)); yy += 27
-            d.text((x + CW - 62, y + RH - 26), r["code"].split("-")[0], font=F(16, True), fill=(150, 150, 150))
-        y += RH
+            cell(d, LW + j * CW, y, P[pid][f"t{t}"])
+        y += rh[pid]
     d.text((20, H - 45), FOOT, font=F(22), fill=GREY)
     return im
 
