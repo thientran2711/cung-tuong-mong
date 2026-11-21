@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"123c4572+","t":"2026-11-21T11:28Z","c":"kit-mark-fix r2 (rv FAIL): portrait is NOT shrunk (back to LIVE size, KIT 6.3e); a card that still scrolls shows a bottom-fade cue (kpmore)…","b":"e83861ad7e45","h":[{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"}]};
+window.CTM_BI={"s":"4a1b2450+","t":"2026-11-21T14:12Z","c":"kit-mark-fix r2 (rv FAIL): portrait is NOT shrunk (back to LIVE size, KIT 6.3e); a card that still scrolls shows a bottom-fade cue (kpmore)…","b":"2db485690869","h":[{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -27770,7 +27770,21 @@ function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}KREG[k]=e;return k}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
+   GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
+   key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
+   name («Hàn lâm học sĩ ???», rv-hao-huu r2 A). Her people get their own namespace "g…" on BOTH seats; the host's people and the world keep
+   the solo keys (old saves, solo and the host change nothing; her own people are always known on her seat, k61Own). */
+function k61GuestOwn(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop)return false;
+  if(W.seat!=="a")return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||!!(S.kc&&(S.kc.fam||[]).includes(e));
+  for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
+/* coop-guest-names r1 (law 1 two-way): the mirror on the GUEST seat — the copies of the HOST player's people on her entry (her children, maid,
+   servants) carry keys issued by the host's counter, while this seat's own counter runs from the same shared value (S.kseq) and issues the
+   same "x<n>" to its own new records: one key, two people. They get their own namespace "h…" on the guest seat, as hers get "g…" on the host. */
+function k61HostCopy(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop||W.seat==="a")return false;
+  for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
  add(S.emp);if(!S.thDead){S.thO=S.thO||{};add(S.thO)}add(S.maid);(S.staff||[]).forEach(add);(S.kids||[]).forEach(add);
@@ -27995,10 +28009,27 @@ const K61T="(?:(Hoàng hậu|Hoàng quý phi|Quý phi|Phế phi|Phi|Tần|Quý n
 function k61Vars(e){const n=e&&e.name;if(!n||typeof n!=="string")return[];const w=n.split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V.filter(x=>x.length>=4&&x.split(" ").length>=2)}
 function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(rivals||[]).length;if(K61RX!==null&&K61RV===K61VER&&K61RN===rn&&now-K61RT<1500)return K61RX;K61RV=K61VER;K61RT=now;K61RN=rn;/* name-mask: a new consort (tuyển tú, a maid promoted) is in the table the same tick */
  const M={},prot=new Set();const ents=k61All();ents.push(S);
+ /* coop-guest-names: the co-op SHARED people come first (the friend + the people of hers this seat shows), so no unmet local / world record
+    with the same words takes her name (first holder wins below); her people known only through the room blob (not in this seat's list:
+    her servants, home family, the friend herself while her entry is out of rivals) are protected by full name — never masked by another's title */
+ const sh=k61Shared(ents);for(const e of sh.ents.reverse()){const i=ents.indexOf(e);if(i>=0)ents.splice(i,1);ents.unshift(e)}for(const n of sh.prot)prot.add(n);
  for(const e of ents){const kn=k61Named(e);for(const v of k61Vars(e)){if(kn){prot.add(v);M[v]=null}else if(!(v in M))M[v]=kOf61(e)}}
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
  keys.sort((a,b)=>b.length-a.length);K61MAP=M;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  K61RX=kRx(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
+/* coop-guest-names: the shared people of a co-op seat. ents = the friend (her coop entry; while it is out of rivals — at home, pulled for the week
+   end, between rebuilds — a stand-in {coop,id:pid,name} with her rivals key (a cung nữ: {coop,sid:pid}, her servant key), so she still reads «Hảo hữu của ta» until met) and the copies of
+   her people in this seat's list; prot = full names of her people this seat only knows from the room blob (P of the other seat: nmPers) */
+let K61CF=null;
+function k61CoopFr(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P)return null;const P=W.base.P[W.seat==="a"?"b":"a"];if(!P||P.dead||!P.S||P.S.dead||!P.pid)return null;
+  const nm=String(P.name||P.S.name||"");if(!nm)return null;const sv=!!(P.S.srv&&!P.S.srv.risen)/* she serves as a cung nữ: her entry is a servant {sid:pid} (key "s"+pid) */;
+  if(!K61CF||(sv?K61CF.sid:K61CF.id)!==P.pid||K61CF.name!==nm)K61CF=sv?{coop:true,sid:P.pid,name:nm,role:"maid",fr:1}:{coop:true,id:P.pid,name:nm,rank:P.S.rank||0,out:!!P.S.out,fr:1};return K61CF}catch(e){return null}}
+function k61Shared(ents){const o={ents:[],prot:[]};try{const W=window.COOPW;if(!W||!W.on)return o;let f=(rivals||[]).find(v=>v&&v.coop)||ents.find(e=>e&&e.coop)||null;
+  if(!f){f=k61CoopFr();if(f){ents.push(f);kOf61(f)}}if(f){o.ents.push(f);for(const x of [f.maid,...(f.staff||[]),...(f.kids||[])])if(x&&ents.includes(x))o.ents.push(x)}
+  if(W.seat!=="a")for(const x of [S.maid,...(S.staff||[]),...(S.kids||[])])if(x&&ents.includes(x)&&!o.ents.includes(x))o.ents.push(x);
+  const P=W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];if(P&&P.S&&!P.dead&&typeof nmPers==="function"){const have=new Set(o.ents.map(e=>e&&e.name))/* her person's own copy is here: it follows the knowledge rule itself */;
+   for(const x of nmPers(P.S)){const n=x.o&&x.o.name;if(x.fp==="name"||!n||have.has(n))continue;o.prot.push(n)}}}catch(e){}return o}
+window.k61CoopFr=k61CoopFr;window.k61Shared=k61Shared;
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
 function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
@@ -63958,7 +63989,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
  sec.push({h:"Thân phận",rows:[["Danh vị",nm?nmK(e):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
  sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
- const mai=known&&e.maid&&e.maid.name?es(e.maid.name):UNK;
+ const mai=known&&e.maid&&e.maid.name?`<span data-k61skip="1">${es(e.maid.name)}</span>`/* rv coop-guest-names r1: her maid's copy now holds its own j61 key (g… / h…, one key = one person), unmet on this seat → the DOM mask read «cung nữ ???» over the row the sheet shows once SHE is met (before, the copy shared this seat's own maid key x1 and passed by accident) */:UNK;
  sec.push({h:"Trong cung của nàng",rows:[["Con cái",known?kidsWord(e):UNK,known?"n":"t"],/* OD:L165: unmet = «chưa rõ» (rv hao-huu item 5) */["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});
  sec.push(nowSec(e));
  if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
@@ -90549,7 +90580,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e83861ad7e45";window.CTM_BUILD=BUILD;
+const BUILD="2db485690869";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
