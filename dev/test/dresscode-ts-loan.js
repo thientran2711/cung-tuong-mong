@@ -47,6 +47,9 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
   {const v7=live()[0];const P=PEND.e68borrowDress;S.inv.push({k:'dancoc',from:'emp',tg:'t6'});const pp={a0:v7.id,vi:1};const d=P(pp);out.b6={built:!!d,t:d&&d.t,bk:pp.bk};
    if(d){d.o[0].go();out.b6.lent=where('t6');const e=v7.inv.find(e=>e.tg==='t6');out.b6.bor=e&&e.bor;turn(2);out.b6.back=where('t6')}
    const d2=P({a0:v7.id,vi:1});if(d2){const e=S.inv.find(e=>e.tg==='t6');if(e){S.inv.splice(S.inv.indexOf(e),1);live()[1].inv.push(e)}d2.o[0].go();out.b6.stale=where('t6')}}
+  /* (8) the reviewer's P1 (jky × jlost): a lost case found by Kỳ ngộ goes home once — no «dead» copy in the ledger box, case closed */
+  {const o=live()[2];const e={k:'tram_ngoclan',from:'emp',tg:'t8'};o.inv.push(e);const c=loLoseE(o,o.inv.splice(o.inv.indexOf(e),1)[0],'srv');const bx0=((S.il&&S.il.box)||[]).length;
+   const F=live()[3];const r1=KY.SPEC.item({F,X:{lc:c},oi:0},{});const r2=KY.SPEC.ev({F,X:{lc:c}},{});out.b8={c:!!c,st:c&&c.st,at:where('t8'),box:((S.il&&S.il.box)||[]).length-bx0,r1,r2}}
   out.tsB=[S].concat(rivals).flatMap(q=>q.inv||[]).filter(e=>e&&e.tsB!=null).length;
   return out});
  const b1=R.b1||{};
@@ -63,6 +66,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
  ck('(6) «Cho mượn» visit names her real piece and it really goes to the NPC (one copy, loan mark)',R.b6&&R.b6.built&&R.b6.lent&&R.b6.lent.length===1&&!/^me/.test(R.b6.lent[0])&&R.b6.bor&&R.b6.bor.why==='ev'&&/Tiêu Vĩ/.test(R.b6.t||''),R.b6);
  ck('(6) back to her the next tuần, one copy',R.b6&&R.b6.back&&R.b6.back.join()==='me:i',R.b6&&R.b6.back);
  ck('(6) stale visit: her piece already elsewhere → nothing moves',R.b6&&R.b6.stale&&R.b6.stale.length===1&&!/^me/.test(R.b6.stale[0]),R.b6&&R.b6.stale);
+ ck('(8) Kỳ ngộ finds a lost case: the piece home once (owner), case done, no ledger copy — also when found twice',R.b8&&R.b8.c&&R.b8.st==='done'&&R.b8.at.length===1&&R.b8.at[0].endsWith(':i')&&!/^me/.test(R.b8.at[0])&&R.b8.box===0,R.b8);
  ck('(7) no e.tsB mark anywhere',R.tsB===0,R.tsB);
  ck('no page errors',!errs.length&&!R.err,errs.slice(0,4).concat(R.err?[R.err]:[]));
  console.log(fail?`dresscode-ts-loan: ${fail} FAIL`:'dresscode-ts-loan: ALL PASS');await b.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});
