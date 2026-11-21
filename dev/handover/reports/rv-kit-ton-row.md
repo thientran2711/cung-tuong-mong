@@ -14,3 +14,6 @@ Limits (as the keeper): D's real PEND.roadpick not run (branch not merged here);
 ## kit-ton-row-2 RE-GATE — PASS edc41ba12bc8adf8f9d05b0e5a39a26501e3f373 (review/kit-ton-row-2-rv = keeper f8d36f6b + LIVE 64d2e094, index/sw rebuilt, FF of LIVE)
 Decision applied (MAIN): the Tốn keep-rule of a hidden-outcome card covers ECONOMIC stats only — ownP filter /khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/; relation prices («thiện cảm -3», «quý ngươi -3», Ân tình) stay words. kit-ton-row.js 14/14, three runs in a row stable (the Sủng -3/-4 flake is fixed by a number-agnostic regex). coop-e2e 68/68, QUICKCHECK PASS 227 s (core gates, old save ok; buổi 1730/1122 inside the limit).
 My seeded real-play scan again (3 seeds, Fold, every event modal's options → Tốn): 16 option titles, NO relation number in any Tốn row (the «Khéo từ chối» decline cards now read «kẻ hầu sinh oán» / «mất lòng người»); economic prices still show («Bạc -30», «Sức -25»). Nothing else changed.
+
+## kit-ton-row-2 LAND READY 32c0e33b3b488d24edbc138bdf054f3254385727 (merged with LIVE a88b14f0, FF)
+Re-merged LIVE a88b14f0 (coop-name-clash) after the PASS: index/sw rebuilt; kit-ton-row.js 14/14 ×2, coop-e2e 92/92 (coop-name-clash added checks), QUICKCHECK PASS 245 s (core gates, old save ok, perf in line). Branch review/kit-ton-row-2-rv.
