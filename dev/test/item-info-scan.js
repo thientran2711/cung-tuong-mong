@@ -11,6 +11,7 @@ function scan(dir){const L=[];for(const f of fs.readdirSync(dir).filter(f=>/^j.*
    if(/^function kit(Item|InvGrid|EquipSlots)\(/.test(ln.slice(at-9))||/function kitItem\(o\)/.test(ln.slice(Math.max(0,at-9),at+12)))continue;
    L.push({f,line:i+1,ctx,cls:classify(f,ctx,ln+' '+(src[i+1]||''))})}})}return L}
 function classify(f,c,ln){
+ if(f==='jkinl.js'&&/^\s*(\/\*|\*|ONE kit part)/.test(ln))return 'DEF (doc comment)';
  const head=ln.trimStart();if(/^(\/\*|\*|[A-Za-z ]*kitItem\(\{src)/.test(head)&&!/[;{]\s*$/.test(head)&&/^(\/\*|\*)/.test(head))return 'DEF (doc comment)';
  if(/^\s+\S.*→ HTML|kitInvGrid\(\{key, tabs|kitEquipSlots\(\{key, title/.test(ln))return 'DEF (doc comment)';
  if(/const slots=L\.map\(\(x,i\)=>kitItem\(\{src:x\.src,name:x\.name/.test(ln))return 'GRID CELL (onPick of the caller)';
@@ -24,7 +25,7 @@ function classify(f,c,ln){
  if(f==='jgift.js')return 'GIFT PICKER (review/gift-pick)';
  if(/empty:true,ghost:x\.ghost,size:"lg"/.test(c))return 'SUBJ (picture of an open panel / reveal / FX)';
  if(/kitInvGrid\(\{/.test(c.slice(0,280))&&/kitInvGrid\(\{key:"toil"/.test(c))return /toilDetHTML|toildet/.test(ln)?'INFO (select + §70 strip)':'BLIND (tap = wear)';
- if(/kitInvGrid\(\{key:"tutrang"/.test(c)||/onPick:kinvOpen/.test(c))return 'INFO (item panel)';
+ if(/kitInvGrid\(\{key:"tutrang"/.test(c)||/onPick:kinvOpen/.test(c))return 'INFO (inline strip KIT §70.6, no pop-up)';
  if(/kitEquipSlots\(\{key:"toil"/.test(c))return /toilDetHTML|toildet/.test(ln)?'INFO (select + §70 strip)':'BLIND (tap = take off)';
  if(/kitEquipSlots\(\{key:"(tutrang|pets)"/.test(c))return 'INFO (slot panel)';
  if(/kitEquipSlots\(\{/.test(c.slice(0,280)))return 'INFO (slot panel)';

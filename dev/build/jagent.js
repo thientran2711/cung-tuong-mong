@@ -126,7 +126,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
 function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
-  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
+  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;/* the walk to it and on from it fits (jagday agWalkOk: kept rows are never rewritten by jwalk) */if(R&&typeof agWalkOk==="function"&&!agWalkOk(R,id,kh,c&&typeof agKhC==="function"?agKhC(c,v):1,k,v,k0))continue;L.push([kh,k])}
  /* NPC-PURPOSE G3: she does what she wants SOON — the near-best khắc from now (BAL.ag.why.g3.soon), never a random khắc */
  return L.length?npwPick(L,x=>agSoon(x[0],k0)):null}
 function agSoon(kh,k0){return Math.max(1,100-(kh-k0)*BAL.ag.why.g3.soon)}
@@ -275,7 +275,7 @@ function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
- O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:"thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
+ O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:(()=>{let th=0,wb="";try{if(S.place!=="home"&&!S.out){th=travel(S.place,"home");wb=walkBlock("home",th)}}catch(e){}return `tốn: ${th} khắc đi đường · thành: ${wb?`chỉ tránh mặt, chưa về được cung (${wb})`:"ngươi lui về cung"}, nàng không thấy ngươi`})(),/* shown = charged (walk-cost r3): the walk home walkGo pays, spill included */go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)walkGo("home")}catch(e){}}});
  O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  /* no khắc left in the day (j76 can, spill allowed): the kit GREYED OPTION (KIT §84 kitOff, jgrey) — one form with every other locked option */
  if(lock)O.forEach(c=>{if(c.r==="hear"||c.r==="join")kitOff(c,lock,"")});

@@ -97,7 +97,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
  Q.unshift({t:"Bị giật y phục giữa đường",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
   opts:[{n:"Về tẩm cung",fx:{},x:`(Danh -${T.robDanh+T.robWalk} đã mất trên đường)`,go:()=>{}}]});
  try{for(const v of liveRivals(true).slice(0,2))newsAdd(v,"ty",`Nghe nói ${S.name} bị giật y phục giữa đường, phải mặc trung y về cung`,true)}catch(x){}
- window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0}return true}
+ window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;window.__walkFree=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0;window.__walkFree=0}return true}
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(S&&!S.dead&&k&&k!=="home"&&S.place===k&&p0!==k&&!tyOn(S)&&!window.__tyGo&&!S.out&&!(typeof isSrv==="function"&&isSrv())){const o=tyRobOdds(k);if(o>0&&roll(o)){tyRob(k);render()}}}catch(e){console.error(e)}return r};window.goTo=goTo})();
 /* the omen: an enemy plans it; her people warn her (a card) — then night walks to lonely places are dangerous for omenWk weeks */
