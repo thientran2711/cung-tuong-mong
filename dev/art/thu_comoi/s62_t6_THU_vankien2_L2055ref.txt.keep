@@ -1,0 +1,5 @@
+base: dev/art/thu_comoi/s62_t6_THU_vankien2_L2055.txt
+allow: From the identity reference keep ONLY her face  # boilerplate trim to fit 10 000 (A38); no identity ref image in this draw
+allow: facial features  # same trim
+allow: hair COLOUR and signature colour family  # same trim
+allow: "Thu · Quý phi · L2055"  # caption
