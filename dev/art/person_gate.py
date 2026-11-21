@@ -5,7 +5,7 @@ PERSON check (per file, pid + rank known from --pid/--rank or the file name sNN_
   (1) HER OWN held item of that rank = builder data (t8-prompt-B/build.py _e6_picks via store-all/build_all.py; a pet from pets.py also OK),
       or an owner-approved per-file exception in APPROVED_ITEM below;
   (2) HER OWN ANGLE sentence of that rank (build_all.plan / ANG14, the E1 14-angle table) when the file has an 'ANGLE:' sentence;
-  (3) HER OWN face words (face-common/<pid>.v5/.v3 FULL 'Her face:' sentence) and NO other person's face sentence.
+  (3) HER OWN face words (KC_REFS face_words = FACE_MAP_L703 current face; else face-common/<pid>.v5/.v3 FULL 'Her face:' sentence) and NO other person's face sentence.
 BATCH check (--batch files…): FAIL when 2+ different persons at the same rank share the same ANGLE sentence, the same Pose sentence, or the same held item.
 Used by check_store.py (scope tpN + a pid) and `python3 dev/art/check_store.py --batch <files…>`."""
 import os,re,sys,io,glob,contextlib,collections
@@ -54,7 +54,14 @@ def own_item(pid,rank,age="a18"):
     return it,pets
 def own_angle(pid,rank,age="a18"):
     B=_builder(); return B.angle_sentence(pid,rank,age).split(";")[0].strip()
+_KC=None
 def face_of(pid):
+    """her CURRENT face words: KC_REFS face_words (= the prompt of her FACE_MAP_L703 cut, the owner's current face; ROOT-B2 21/11 Q2), else the old v5/v3 FULL file."""
+    global _KC
+    if _KC is None:
+        import json; _KC=json.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"]
+    fw=(_KC.get(pid) or {}).get("face_words") or ""
+    if fw.startswith("Her face:"): j=fw.find(".",40); return fw[:j].strip() if j>0 else fw.strip()
     for v in ("v5","v3"):
         f=os.path.join(ART,"face-common",f"{pid}.{v}.FULL.txt")
         if os.path.exists(f):
@@ -64,8 +71,13 @@ def face_of(pid):
     return None
 def sent(text,head):
     m=re.search(re.escape(head)+r"[^.]*\.?",text); return m.group(0).strip() if m else None
+# a22 gap (ROOT-B1 13:00Z, BUILDFIX3): the design ages are a18 a26 a36 a51 a65 (dev/art/item-rank-age.md, build_all ages); there is NO a22 cell.
+# The a18 prompts read 'about 22, youthful adult', so '--age a22' = the a18 cell (alias, WARN); any other unknown age = no person data -> P checks skipped (WARN), never a P0 FAIL.
+DESIGN_AGES=("a18","a26","a36","a51","a65"); AGE_ALIAS={"a22":"a18"}
 def person_check(text,pid,rank,age="a18"):
     fails=[]
+    if age in AGE_ALIAS: WARN.append(f"W2 age {age} = design age {AGE_ALIAS[age]} (a18 prompts say 'about 22'; no {age} cell)"); age=AGE_ALIAS[age]
+    elif age not in DESIGN_AGES: WARN.append(f"W2 age {age} is not a design age {DESIGN_AGES}: person checks skipped"); return fails
     if not pid or not rank or not isinstance(rank,int): return fails   # maid rank keys: no t1-t8 builder data
     try: it,pets=own_item(pid,rank,age)
     except Exception as e: return [("P0","PERSON DATA",f"no builder data for {pid} t{rank}: {e}")]
@@ -81,7 +93,7 @@ def person_check(text,pid,rank,age="a18"):
             fails.append(("P2","PERSON ANGLE",f"{pid} t{rank}: ANGLE is not HER angle (build_all.plan/ANG14): want '{want[:90]}…', has '{a[:90]}…'"))
     f=face_of(pid)
     if f and _norm(f)[:150] not in _norm(text):
-        fails.append(("P3","PERSON FACE",f"{pid} t{rank}: her own face sentence (face-common/{pid}.v5/v3.FULL.txt) missing"))
+        fails.append(("P3","PERSON FACE",f"{pid} t{rank}: her own face sentence (KC_REFS face_words / face-common v5/v3) missing"))
     return fails
 def batch(files,age="a18"):
     by=collections.defaultdict(lambda: collections.defaultdict(list)); bad=[]

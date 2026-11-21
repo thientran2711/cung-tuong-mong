@@ -81,8 +81,8 @@ def templates():
 # s6x_t{1..5}_THU_NECK files, applied to THIS table's approved bases (t1 L2008 keeps its G69 chest cluster, t4 stays L2041):
 #  (1) after the square-band clause: " (the square band stops at the shoulders, nothing rises up the neck, neck bare)";
 #  (2) t1-t3 "at the collar, sleeves and hem" -> "at the sleeves and hem" (fault (a) family, Tần L2041); (3) t4 "no trim band up the neck, " dropped (duplicate).
-# t6 = VE12 L2088 words as they are (VE12's t6 line L2074-L2088 does not carry the NECK bracket; its collar says 'never rising up the neck') -> asked ROOT-B2.
-NECK_RANKS = (1, 2, 3, 4, 5)
+# t6: VE12's L2088 words lacked the bracket; ROOT-B2 21/11: add it (same family).
+NECK_RANKS = (1, 2, 3, 4, 5, 6)   # t6 added: ROOT-B2 21/11 (ROOT-B1's NECK family order was t1-t6)
 NECK_WORDS = " (the square band stops at the shoulders, nothing rises up the neck, neck bare)"
 _BAND = re.compile(r"framed by (?:a|one) wide flat (?:\{sec\} band|band in her second colour)(?: embroidered with \{spl\})?")
 def neck(k, d):

@@ -907,6 +907,9 @@ def _strip_kc_faces(text):
         import json
         P = json.load(open(os.path.join(ART, "KC_REFS.json"), encoding="utf-8"))["people"]
         _KC_FACES = [norm(p["face_words"]) for p in P.values() if p.get("m09_ok") == "yes" and (p.get("face_words") or "").startswith("Her face: ")]
+        # BUILDFIX3 (X08 m13 / X11 m43 family): the builder puts the EYES sentence between 'Her face: …' and 'Expression: …', so the whole
+        # face_words string is never found verbatim -> also strip each of its sentences (each one still verbatim owner words, ≥ 40 chars)
+        _KC_FACES = _KC_FACES + [x for f in _KC_FACES for x in re.split(r"(?<=\.)\s+(?=[A-Z])", f) if len(x) >= 40 and x not in _KC_FACES]
     for f in _KC_FACES:
         if f in text: text = text.replace(f, " ")
     return text
