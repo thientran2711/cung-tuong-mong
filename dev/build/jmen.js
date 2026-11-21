@@ -182,7 +182,7 @@ function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) p
  if(v&&love){const o=odA(S,58+d/5),o2=odA(S,42+d/5+tc/4);
   A.push({k:"bao",n:"Báo thị vệ",x:`${word(o)} · tốn: 1 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (hắn bị xử trảm) · hỏng: nàng chối được, Danh -2 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport)} · phe nàng tìm cách trả thù`});
   A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (xét án có sổ sách; hắn bị xử trảm) · hỏng: thiếu chứng nên nàng chối được, Danh -2 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport)} · phe nàng tìm cách trả thù`})}
- else if(v){const o2=odA(S,48+d/5+tc/4);const sg=(v.sung||0)>=60?" · Hoàng thượng không vui, Sủng -2":"";
+ else if(v){const o2=odA(S,48+d/5+tc/4);const sg=(v.sung||0)>=60?` · Hoàng thượng không vui, ${sgStat(BAL.eff.jmen.unhappySung)}`:"";
   A.push({cap:1,k:"bao",n:"Báo thị vệ",x:`${capW()} · tốn: 1 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng mất tự do, cấm túc · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport_3)}${sg}`});
   A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng sa sút, có khi giáng phẩm · (hắn bị cấm vào cung một năm) · hỏng: thiếu chứng, mang tiếng vu khống, Danh -5 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport_3)}${sg}`})}
  else{A.push({cap:1,k:"bao",n:"Báo thị vệ",x:`${capW()} · tốn: 1 khắc · thành: Danh +2 · Thái hậu quý ngươi +1 · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: hắn ôm hận, có thể tung tin đồn trả thù · Danh -3 mỗi lần bị trả thù`});
@@ -210,7 +210,7 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
  if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);
   if(roll(o)){log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} và ${c===S?"ngươi":`${rkName(c)} ${c.name}`} gặp riêng ở ${at}${y.r==="letter"?", trao thư lén":""}.</span>`);
    punish(c,y.r==="letter"?"trao thư lén cho nam nhân ra ngoài cung":"gặp riêng nam nhân nơi cấm địa",formal?2:1);gain({danh:3});
-   if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:-2});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+2,-100,100);return true}
+   if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:BAL.eff.jmen.unhappySung});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+2,-100,100);return true}
   log(`<span class="r">${menCap(byT)} trình Cung Chính ti chuyện ở ${at}, nhưng không đủ chứng: ${c===S?"ngươi":`${rkName(c)} ${c.name}`} vô can; ${byT} mang tiếng vu khống.</span>`);gain({danh:-5});return false}
  m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;gain({danh:formal?3:2});if(by===S)S.th=cl((S.th||0)+1,-100,100);
  if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1}}}
