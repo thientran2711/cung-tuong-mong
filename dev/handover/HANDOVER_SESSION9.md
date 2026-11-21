@@ -2044,3 +2044,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (13:14Z) 89: LANDED ending-screens e87ae825; or20-j68q already LIVE (skipped); 89 ctx 48 % → opened LAND CHAIN 2 OPUS session_01Rc5AsLRRYSeTySKmsRyu3W (prep only; lands after 89 TAKE OVER at ~55 %; never two chains). Queue: ending-screens-2 (running), ban-cung, kit-mark-fix, kit-dialog-2, coop-emo-seat, mg-intro-2, coop-guest-names, cold-faction-land2, jlost-kyngo.
 - (13:19Z) rv MSxp PASS kit-ef-unit r2 → LAND READY d46ad6de (review/kit-ef-unit-rv2) → 89 chain.
 - (13:19Z) LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W READY (depth 6, START_CTX ~6 %, roll ≤31 %): /home/user/wt/live + sland/landq scripts set up; waits 89 TAKE OVER, lands nothing before.
+- (13:21Z) rv MC6N PASS duodo-focus r2 → LAND READY 5e7dae26 (review/duodo-focus-rv) → 89 chain (early slot asked). rv MC6N ARCHIVED. LtG4 kept to record LIVE mp4 after land (CDN review folder wiped). Art still open: Tát hand / NPC slap (C).
