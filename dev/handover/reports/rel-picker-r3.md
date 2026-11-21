@@ -1,0 +1,6 @@
+# rel-picker-r3 (worker, 21/11)
+PRIORITY #1 CHECK: OD L357, L898-902, 18/11 item 3, 21/11 02:12Z | main: rel-picker-r2 9a1d6922 (two strips) | review/rel-picker{,-r1,-r2} older | claims none.
+Result: Giao tình > Ân oán picker = ONE row «[face Ta ▾] ⇄ [face Hoàng thượng ▾]» + kit popup (kitModal, kitSubTabs group tabs + pager strip). Code: dev/build/jhc.js (hcRelHTML/relCands/relSlot/relPopOpen), KIT.md §49.2d, test dev/test/relpick-scan.js.
+Before → after (picker height / card bottom): Fold 167→55 px / 739→629; iPad 154→55 px / 711→613. Card + both portraits + relation table visible without scrolling on both.
+Gates: quickcheck PASS (sha 7e49eff8f0e320b9daf6609e7fe0869aafeba4ba, 207 s); coop-e2e 68/68; relpick-scan no page errors, no h-overflow. Shots (outside git): /home/user/wt/rp3-shots/rp-{before,after}-{ta,pick,popup,y}-{755x1000,1180x820}.jpg, looked 3x.
+Notes: (1) Popup tabs = Ta / Chí tôn / Phi tần only; Nam nhân / Cung nhân do not exist as relation persons (relPerson knows only Ta, Hoàng thượng, Thái hậu, consorts). (2) The popup uses kind notice + class kpick so the live frame does not add a person column + picture (kind info added a random picture). (3) Only other .krelpk user = kit-page sample kitRelPickerSample (unchanged). No kit part missing: slot = mdH + kitNameRank + .pface.
