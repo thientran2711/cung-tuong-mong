@@ -2166,3 +2166,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: trig_01YPhjHxUCirfSrkLWaDqHzt fires hourly (min 32) into 97 (created by 96) → 98 creates its own wake and DISABLES trig_01YPhjHx. 96's trig_01Xcas2 already disabled. MAIN 96 session_01Rc5AsNBD5TsxWsYmh8ZkSJ + 97 both stop after 98 confirms (archive them).
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY. No owner question pending.
 - FOR MAIN: owner opens ROOT «MAIN CHÍNH 98» from claude.ai with the paste block given in 97 chat (17:25Z).
+- (17:30Z) OWNER: «mở phiên dự phòng» rule (OD row + START_MAIN SLEEP line). Gave STANDBY paste blocks for B, D, E (TAKEOVER_FOREMAN_STANDBY.md). D LAND READY coop-room-faces-rv 500dffbd → relayed to LRRY.
