@@ -374,3 +374,19 @@ The diff is only:
 - A38 trims: panel "gold-edged" dropped, "framing the bordered square neckline" dropped, "many small ones".
 Standing checklist unchanged from job 8/9/12 ✓.
 Verdict: **PASS** → GEN1, 1 draft (55 cr).
+
+## JOB 15 (DESIGN20 1e330b0) — thu s62 t4 COMOIi (v9) vs v8 COMOIh · checked at 13fc25d · 0 gens
+Gates:
+- tp4 a22 PASS; keep PASS. Chars: 9989.
+- Store mode: only the Outfit sentence [0.70] = the exemption.
+- OUTER_WRAP verbatim; no vase; "Bare earlobes, no earrings" kept.
+The diff is only:
+- bu yao "in the bun, none at the ears" ✓
+- flower "(never two, never a pair)" ✓
+- A38 compactions:
+  - "a NEW outfit, " dropped;
+  - "an embroidered lotus band at the inner robe hem";
+  - front panel "a long vertical blush panel of lotus, shoulder to hem" — the word "embroidery" is dropped;
+  - jade-set wording.
+Verdict: **PASS** (t5 COMOIh = PASS in job 14). Not sent to GEN1; Foreman C #16 releases.
+Note: the t4 front-panel words lost "embroidery". The master "all flowers … are fine silk-thread embroidery" still covers it, but "lotus-embroidered panel" would be safer.
