@@ -91,3 +91,7 @@ Gates: keep --sidecar PASS ×3; check_store mama a18: nhất PASS, tam/nhị S01
   replace | band may carry deep rose embroidery; the   →   band may carry powder blue embroidery; the
   replace | back tà are deep rose. COLOUR TONE:   →   back tà are powder blue. COLOUR TONE:
 ```
+
+## HANDOVER (MAIDFIX1, depth 7) — JOB 3 (try-on page L1689) NOT started
+START_CTX ≈ 3 % · now 236k/1M ≈ 24 % (get_session) · roll line 28 %. JOB 3 (PAL3.md §L1689: try-on page "Thử đeo túi thơm & ngọc bội — cung nữ", bases tam KLpEwy4kqp / nhị 6Ab7cMSiJO / nhất 4RFSnTa9Aa, buttons Đeo túi thơm / Đeo ngọc bội / Cận eo, item BEHIND the hands, G45) needs downloads, cut-outs and several image LOOKs → it would cross 28 %. Not started, 0 cr. A fresh worker should do it end-to-end from PAL3.md §L1689 (method: dev/art/necklace-square/, EAR3.md).
+Maid state for the successor: approved tam KLpEwy4kqp (prompt test3_tm1_g43); fixes pending draw: test8_tam_L1685 (blue ties), test8_nhi_L1685 (longer jacket); nhất approved 4RFSnTa9Aa (test6_nhat_L1653, unchanged); thân cận test9_*_thancan_L1688 (CHECK2 PASS). Pose stays (G45).
