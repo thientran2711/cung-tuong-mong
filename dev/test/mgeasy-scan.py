@@ -19,7 +19,7 @@ G=[('tho','k91Verse','old verse (lục bát rhyme)'),('doi','k91Pair','parallel 
    ('co','kg82Go','go "khí" rule'),('le/tc/xa/thq (khảo hạch)','kg82Quiz','palace manners / duties'),
    ('banh','k91Cook','recipe order (recipe is shown)'),('huong','k91Blend','match a sample colour (shown)'),('hoa(cắm)','k91Arrange','Thiên/Nhân/Địa by stem length (shown)'),
    ('dan','kg82Rhythm','rhythm'),('hat','k91Hold','follow a ribbon'),('ban','kg82Aim','timing'),('dauho','k91Fling','physics'),('ve','k91Trace','trace a faint line'),
-   ('theu','kg82Pattern','memory'),('mua','kg82Steps','memory'),('kim','k91Untangle','untangle')]
+   ('theu','kg82Pattern','memory'),('td_cong','crtStitch','shade order + stitch on the beat'),('mua','kg82Steps','memory'),('kim','crkPaper','fold symmetry (paper-cut)')]
 cols=[('tier','kg82Tier'),('Gợi ý','Gợi ý'),('idle-hint','IDLE'),('bounce/instant check','bounce|P.lock|t.locked|hinted|wrongs|P.dis'),('1-screen demo','k91DemoCard'),('shown rhyme/aid','k91End|vòng vàng|gợi ý:|Mẹo:')]
 print('%-26s %-34s'%('kind','asks')+' '.join('%-12s'%c[0] for c in cols))
 for k,f,a in G:
