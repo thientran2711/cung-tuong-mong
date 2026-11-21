@@ -398,14 +398,18 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Triều cụ
  const mem=k=>kitNameList(rgMembers(k),v=>`${rkName(v)} ${v.name}`,"chưa ai");
  const hd=rows67([["Mục tiêu","Hoàng thượng mới đăng cơ, quyền còn trong tay Thái hậu và Tể tướng phụ chính. Ngươi chọn đứng về phía ai, hay đứng ngoài."],
   ["Chương",c?`Chương ${c} «${RGC[c-1].t}»`:"chưa mở"],["Triều cục",W.out?({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:`${rgQN()} nhiếp chính`})[W.out]:rgPWord(W.p),W.out?"g":""]]);
- let h=kitSkillCard({kind:"story",k:"rg",kicker:"Phụ tuyến",name:RGT,level:done,max:tot,word:"Hồi",bar:false,next:"",big:true,body:hd,img:typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"",
-  acts:rgSideNow()&&!W.out?[pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())]:[]});
+ /* chapter-card (owner #28/#29): the six chapters are ONE SLIDE (kitSlide), not a list «Chương 1 … Chương 6» */
+ const art0=typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):(typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"");
+ const sl=RGC.map((ch,i)=>{const dn=ch.b.filter(id=>r.done[id]).length;const st=ch.b.length&&dn===ch.b.length?"done":i<c?"now":"next";
+  return{kicker:`${RGT} · Chương ${i+1}`,title:ch.t,sub:i<c||st==="done"?`Hồi ${dn}/${ch.b.length}`:"chưa tới",img:art0,
+   body:kitChecks(ch.b.map((id,j)=>[!!r.done[id],`Hồi ${j+1}/${ch.b.length}${r.done[id]?"":i<c?" · đang tới":" · chưa tới"}`])),toc:[st,`Chương ${i+1} «${ch.t}»`,st==="done"?"đã xong":i<c?"đang tới":"chưa tới"]}});
+ let h=kitSlide("story-rg",sl,{cur:Math.max(0,c-1)})+hd;
+ if(rgSideNow()&&!W.out)h+=`<div class="kskacts pcb"><div class="kpanec">${pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())}</div></div>`;
  h+=rows67([["Phe của ngươi",s?rgSideTag(s):r.side==="ngoai"?"đứng ngoài":"chưa chọn",s?"g":""],s?["Phe tin ngươi",r.tr>=BAL.cut.rgTrust[2]?"rất tin":r.tr>=BAL.cut.rgTrust[1]?"tin":r.tr>=BAL.cut.rgTrust[0]?"còn dè dặt":"chưa tin"]:null,
   rgFam()?["Nhà ngươi",({quyen:"phụ thân là Tể tướng phụ chính",th:"đứng sau Thái hậu",emp:"theo bệ hạ"})[rgFam()]]:null,
   r.res?["Kết cục của ngươi",r.res==="win"?"phe ngươi thắng":r.res==="lose"?"phe ngươi thua":"đứng ngoài, giữ được mình",r.res==="win"?"g":r.res==="lose"?"r":""]:null,
   ["Phe Hoàng thượng",mem("emp")],["Phe Thái hậu",S.thDead?"Thái hậu đã mất":mem("th")],["Phe quyền thần",mem("quyen")]]);
 
- h+=kitChecks(RGC.map((ch,i)=>[ch.b.every(id=>r.done[id]),`Chương ${i+1} «${ch.t}»${i<c?"":" · chưa tới"}`]));
  if(W.n&&W.n.length)h+=rows67(W.n.slice(0,4).map(x=>{const i=x.indexOf(": ");return[x.slice(0,i),x.slice(i+2)]}));
  return h}
 function rgGoalHTML(){const L=rgL();const R=[];let n=0;

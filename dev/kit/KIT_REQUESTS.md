@@ -146,3 +146,7 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 ## 21/11 chapter-card (worker session_01Rc5AsMDAsVpNsL2CKbpUuC for MAIN CHÍNH 85) — KIT DRAFT «big card» (kit keeper to OK)
 - Need: the big-picture card of every Mệnh truyện sub-tab (owner marks #26/#27 + 03:02Z). Grep: no big variant of §21 existed (only the 64 px thumb).
 - Drafted as an OPTION of the existing §21 part (j79.js `kitSkillCard` o.big / o.body, `kitEmpty` 3rd arg, CSS `.kskill.kbig`, `--kbw:170px`), documented in KIT.md §21b + kit sample §21. No private CSS in the tabs. Status: DRAFT in review/chapter-card, awaiting kit keeper OK (session_01Rc5AsMtjP4KTgBZVjENGLs).
+
+## 21/11 chapter-card r2 (worker session_01Rc5AsMDAsVpNsL2CKbpUuC) — KIT DRAFT «kitSlide» (marks #28/#29) + «dialog picture fills column» (#43)
+- Need: chapter slide carousel with «Mục lục» corner button for every chapter place; info/chapter dialog picture big. Grep: none existed (jchap/jgoal only had lists + a 170 px tile).
+- Drafted in dev/build/jkslide.js (new kit file, after j79 in assemble.py), KIT.md §21c/§21d, kit sample §21c. Status: DRAFT in review/chapter-card awaiting kit keeper (session_01Rc5AsMtjP4KTgBZVjENGLs).

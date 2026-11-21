@@ -72,22 +72,26 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  const list=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(past.length+rare.length)}];
  const sub=kitSubTabs("story",list,kitInfo("Luật chương"));let h=sub.html;/* "ⓘ Luật chương" = the tab bar's trailing slot (owner 17/11 07:55Z) */
  const art=typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"";
- if(sub.cur==="now"){let card="";/* KIT §51.1: "Khép nẻo đời" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
-  const fin=c&&c.done?["Khép nẻo đời",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false;
-  if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);
-   card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art,big:true,body:(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],msHan67(m),fin]))})+kitChecks(st.map(x=>[x[1],x[0]]))}
-  else if(M){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};/* kicker Chương N, steps "Hồi i/n" = the act she is on, as in the story dialog title (lab67) */
-   card=kitSkillCard({kind:"story",k:M.a,kicker:`Chương ${P.c}`,name:a.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art,big:true,body:rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],fin])});finIn=!!fin}
+ if(sub.cur==="now"){/* chapter-card (owner #28/#29): the chapters are ONE SLIDE (kitSlide): wide picture with «Chương N · tên · hồi» on it, arrows + swipe, the rows below follow the slide, «Mục lục» in the corner */
+  const fin=c&&c.done?["Khép nẻo đời",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false,cur=null,card="";
+  const CM=(()=>{try{return typeof chapModel==="function"?chapModel():null}catch(e){return null}})();
+  const inl=sk=>{try{return CM?chapInline(CM,sk):""}catch(e){console.error(e);return""}};
+  if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);finIn=!!fin;
+   cur={kicker:`Chương ${c.n}`,title:d.t(),sub:`Bước ${done}/${st.length}`,img:art,tap:"chapOpen",body:rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],msHan67(m),fin])+kitChecks(st.map(x=>[x[1],x[0]]))+inl(true)}}
+  else if(M){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};finIn=!!fin;
+   cur={kicker:`Chương ${P.c}`,title:a.t,sub:`Hồi ${P.i}/${P.n}`,img:art,tap:"chapOpen",body:rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],fin])+inl(false)}}
   else if(c&&c.all)card=kitEmpty("Mệnh truyện","Đã đi hết các chương của kiếp này.",1);
   else if(!v267()&&S.st&&STORY[S.origin.k]){/* old save from before chapters (v1 story): one chapter, its steps as acts */const s=STORY[S.origin.k],P=pos67()||{c:1,i:0,n:s.n||0};let hn="";try{hn=s.hint?s.hint():""}catch(e){}
-   card=kitSkillCard({kind:"story",k:"v1",kicker:`Chương ${P.c}`,name:s.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art,big:true,body:rows67([["Mục tiêu",s.goal],
-    S.st.done?["Kết quả",S.st.tag||(S.st.done>0?"Thành":"Bại"),S.st.done>0?"g":"r"]:["Kế tiếp",hn||"chờ hồi kế tiếp"]])})}
+   cur={kicker:`Chương ${P.c}`,title:s.t,sub:`Hồi ${P.i}/${P.n}`,img:art,tap:"chapOpen",body:rows67([["Mục tiêu",s.goal],
+    S.st.done?["Kết quả",S.st.tag||(S.st.done>0?"Thành":"Bại"),S.st.done>0?"g":"r"]:["Kế tiếp",hn||"chờ hồi kế tiếp"]])+inl(false)}}
   else card=kitEmpty("Mệnh truyện","Chưa mở chương nào. Mở bằng thẻ «Mệnh truyện» ở Hành sự.",1);
   const F=typeof f14Info==="function"?f14Info():null;/* the 14-chapter frame (jst14): part chip + exact chapters left */
   const nx=F?F.left:c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
-  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""}</div>`+card;
-  try{if(typeof chapModel==="function"){const CM=chapModel();h+=chapInline(CM,CM&&CM.mode==="ms")}}catch(e){console.error(e)}
-  if(fin&&!finIn)h+=rows67([fin])}
+  if(cur&&fin&&!finIn)cur.body+=rows67([fin]);
+  const sl=past.map(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}return{kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]}});
+  if(cur){cur.toc=["now",`Chương ${cur.kicker.replace(/^Chương /,"")} · ${cur.title}`,"đang làm"];sl.push(cur)}
+  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""}</div>`+
+   (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Sắc phong","Ngươi là Hoàng hậu. Đưa con mình lên ngôi để thành Hoàng thái hậu.",1);
   else if(S.out)h+=kitEmpty("Sắc phong",`Ngươi đang ở lãnh cung: không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`,1);
@@ -95,9 +99,10 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
    h+=kitSkillCard({kind:"rank",k:String(S.rank+1),kicker:"Điều kiện sắc phong",name:RANKS[S.rank+1].n,level:ok,max:R.length,word:"Đạt",bar:false,next:"",img:kitInfoArt("sắc phong").src||art,big:true,
     body:`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`});
    R.sort((a,b)=>a[0]-b[0]);/* KIT §51 (owner 11/15 17:27Z): the requirement list is ONE kit table (kitReqRows: label | ✓/✗ + numbers), unmet first */h+=kitReqRows(R)}}
- else{const R=past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]);
-  rare.forEach(x=>R.push([`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]));
-  h+=R.length?kitSkillCard({kind:"story",k:"past",kicker:"Mệnh truyện",name:"Đã qua",max:0,img:kitInfoArt("Mệnh truyện").src||art,big:true,desc:`${past.length} chương đã khép${rare.length?` · ${rare.length} kết cục hiếm`:""}`,body:rows67(R)}):kitEmpty("Mệnh truyện","Chưa qua chương nào.",1)}
+ else{const R=[];
+  past.forEach(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}R.push({kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]})});
+  rare.forEach(x=>{const tt=ARC67[x.a]?ARC67[x.a].t:x.a;R.push({kicker:"Kết cục hiếm",title:tt,sub:x.tag,img:art,body:rows67([["Kết cục",x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]]),toc:["done",`✦ ${tt}`,x.tag]})});
+  h+=R.length?kitSlide("story-past",R,{cur:R.length-1}):kitEmpty("Mệnh truyện","Chưa qua chương nào.",1)}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
 (function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
