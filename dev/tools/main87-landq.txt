@@ -1,0 +1,10 @@
+review/kit-rel2-span-rv|181f35de858015825fdf480e59fdaea938b76ffd|kit-rel2-span|Ô quan hệ lẻ trải hết hàng
+review/kit-leftcol-read-rv|0266713da162a5ee745937318a2dd735598b8894|kit-leftcol-read|Khung người: cột trái hết dải trống, chữ đủ to
+review/mg-5s-clear-rv|8da94cef|mg-5s-clear|Mini-game: luật gọn 5 giây, bỏ chữ thừa
+review/huong-cue-2-rv|06c76fff|huong-cue-2|Mini-game thêu, hành hương…: lời dẫn rõ + dòng «Cách chơi»
+review/chiton-name-rv2|0b2bbd82|chiton-name|Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột
+review/quest-rows-rv|05e1cf15|quest-rows|Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng
+review/main85-land-phutang|0f9d0f77a7e6a06bb8885625d18d2007cbd904f6|phutang|Công chúa ngoại bang: thêm các đường Phù Tang
+review/empty-states-rv2|ee8847b0|empty-states|Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ
+review/mg-5s-clear-rv2|8d4f9919|mg-5s-clear-2|Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)
+review/kit-ghichu-bang-rv|6fb2f34aed3a7a32ab87bc09830e3b250f732293|kit-ghichu-bang|Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»
