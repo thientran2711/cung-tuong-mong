@@ -574,7 +574,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | RUNNING | 21/11 00:25Z |
 | B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | RUNNING | 21/11 00:25Z |
 | MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | RUNNING | 21/11 00:40Z |
-| OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | session_01Rc5AsJcZhVHQUYhZunHGJr | RUNNING | 21/11 00:45Z |
+| OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | session_01Rc5AsJcZhVHQUYhZunHGJr | SSK d9fa3a93 → rolled over, archived | 21/11 00:45Z |
 | kit-kg82-stack KIT KEEPER (sonnet; owner Fold shot, MAIN CHÍNH 82/83) | review/kit-kg82-stack; reports/kit-kg82-stack.md | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 50751774 (waits rv MSxpxbsA) | 21/11 |
 | OWNER BUG hoadien-easy (opus; hoa điền too strict for an easy act + makeup group; briefs/main83-hoadien-easy.md) | review/hoadien-easy | MAIN CHÍNH 83 | session_01Rc5AsLWRQqT9YHnXd91Grh | VOID (owner: hoa điền is fine) archived | 21/11 00:47Z |
 | OWNER BUG td-dung-clear (sonnet; Đi đứng still not understood + whole group 5-second goal check; briefs/main83-td-dung-clear.md) | review/td-dung-clear | MAIN CHÍNH 83 | session_01Rc5AsLcX2LUVnXazaweFe6 | SSK 03ba85c3 → archived | 21/11 00:52Z |
@@ -584,3 +584,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW td-dung-clear (SMALL sonnet) of 03ba85c3 | review/td-dung-clear-rv; briefs/main83-rv-td-dung-clear.md | MAIN CHÍNH 83 | session_01Rc5AsKRhcu4CuLwi5bcbCk | RUNNING | 21/11 01:07Z |
 | mg-5s-clear (sonnet; 8 kinds not clear in 5 s: ban tat ne banh duho doi hoadien td_ngon; briefs/main83-mg-5s-clear.md) | review/mg-5s-clear | MAIN CHÍNH 83 | session_01Rc5AsLTqtdSYJsC6Gxn7cc | RUNNING | 21/11 01:08Z |
 | REVIEW den-look (SMALL sonnet) of 93436938 | review/den-look-rv; briefs/main83-rv-den-look.md | MAIN CHÍNH 83 | session_01Rc5AsJi9JqNMCUZv8DNjsm | RUNNING | 21/11 01:09Z |
+| REVIEW huong-cue r2 (SMALL sonnet) of d9fa3a93 | review/huong-cue-rv; briefs/main83-rv-huong-cue.md | MAIN CHÍNH 83 | (rv) | RUNNING | 21/11 01:16Z |
+| huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | (w) | RUNNING | 21/11 01:16Z |
