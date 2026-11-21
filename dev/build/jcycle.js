@@ -147,7 +147,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
   lo=oddsCl(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5))),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
- const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
+ const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, ${sgStat(-R.lieSung)} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
  const lie=k=>()=>{c.lie=wk();c.lieM=cyCur();c.lieEv=0;if(k==="giau"){c.giauM=cyCur();c.rum={by:"me",m:cyCur(),self:1};try{ghenAll(R.giauGhen,"nghe xì xào ngươi có tin vui")}catch(e){}}};
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
@@ -161,7 +161,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
     k:["thẻ bài tạm cất tuần này và khó được lật tuần sau","thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
   mk("Báo sớm, nói đã sạch kỳ",{c:{duc:-R.somDuc},wt:[G6("thẻ bài vẫn nằm trên khay")],k:[risk,evi],wl:"Ma ma báo kỳ của ngươi đã qua; thẻ bài vẫn nằm trên khay."},"som",lie("som")),
-  mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
+  mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: ${sgStat(-B().rumSung)} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
  O.forEach((o,i)=>{o.hint=H[i][0];o.risk=H[i][1]});
  return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: ${kLine("cycle:ask",kTP("cycle:ask")||CY_ASK,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace("{d}",dName(cyDaysM(S,cyCur())))}</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
