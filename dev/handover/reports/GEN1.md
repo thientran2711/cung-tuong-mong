@@ -223,3 +223,9 @@ Look:
 - t6: slight left turn, one big chrysanthemum, tú cầu ball held, yellow sash on top with plum robe fabric above and below, one-tier scalloped collar with gold tassels, two apron panels, jade pendants both sides. FAULT: jade drop earrings (bare earlobes).
 - t7: frontal, jade flute held low, small phoenixes, small round cape with pearl drops, sleeves to the floor, crown with phoenix. FAULTS: yellow sash tied with a BOW (rule: no bow); drop earrings.
 - t8: frontal, phoenix hairpin held, one large phoenix on the skirt, one-tier collar with longest fringe, nine-phoenix crown, sleeves to the floor, sash on top. No earrings; no faults seen.
+
+## JOB 14 (Foreman C #16) — thu t5 Phi COMOIh (v9) draft
+gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr. File dev/art/thu_comoi/s62_t5_THU_COMOIh.txt, CHECK1 PASS at bb45c7d (ancestor, unchanged), check_store PASS tp5.
+| t5 Phi v9 | kseEMNa16B | https://www.magnific.com/app/creation/kseEMNa16B |
+Sheet: dev/handover/review-sheets/thu_t5_v9_job14/sheet_t5.png
+Look: frontal, ONE hollyhock in the hair, bare ears (no earrings), hair fully up, letter in both hands, square neckline + hollyhock band, capelet with net + small shoulder layers, two apron panels, jade plaques on pearl strings both sides, gold girdle (partly hidden by the hands, so the plum above/below the sash is hard to judge). No faults seen.
