@@ -1176,3 +1176,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
 #21 HANDOVER ~07:50Z: depth 2, ctx ~25 % (START ~3 % + 25 % reached). Spend ~992 cr. Opening #22 as my child (TAKEOVER_FOREMAN_C_21b.md). No schedules owned. Next Lượt 1774.
 #22 ~06:45Z: depth 3, START_CTX ~3 %. Took over from #21. VE2 job H done (tam crepe bxMfqxQ5Y2), waiting HAN4 LADDER4 → VE2 job G (440). No schedules owned. Next Lượt 1774.
 #21 ~07:55Z: OWNER L1775: maid crepe APPROVED (all 6 → MAIDFIX2 test16, VE2 6×55); HH thu fix6 draw NOW (VE2 55). Passed to #22 session_01D3E3Nb1jfmB2z3T7rrCUDZ. Next Lượt 1776. #21 stops.
+#22 ~06:47Z: from #21: OWNER L1775 maid crepe APPROVED → MAIDFIX2 test16_*_L1775 → VE2 6×55=330 (no re-ask); HH thu fix6 → VE2 drawing (55) sheet thu_hh_fix6_L1775.png; LADDER4 8×55 approved. Next Lượt 1776.
