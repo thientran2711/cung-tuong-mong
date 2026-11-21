@@ -861,6 +861,7 @@ def negated(text, a, b):
     return bool(NEG.search(text[lo + 1:hi]))
 
 
+S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls and gold on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'   # owner L1794 (THU @135 sheet): no rubies/sapphires/European gems; S14 override OK'd by Foreman C #22
 S13_COMOI = 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; the outer robe closes only at the sash, never at the throat, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.'
 
 def best_overlap(sentence, text):
@@ -1108,6 +1109,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
             if _k in _made: continue
         if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
+        if e["id"] == "S14" and slot_rx(S14_L1794).search(text): continue   # owner L1794: jade/pearl/gold-only HQP luxury form stands in the S14 slot (A46)
         if e["id"] == "S13" and slot_rx(S13_COMOI).search(text): continue   # owner L1377 (thu COMOI new collar OK, newer than G25/S13): the COMOI open-collar form "closes only at the sash, never at the throat" stands in the S13 slot (Foreman C #13, L1572)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
