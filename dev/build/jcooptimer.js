@@ -226,7 +226,7 @@ function kitCoopLenRow(){css();const cur=lenPick()||Math.round(TB().buoiMs/60000
 /* §69.2 FRIEND CHIP (owner 16/11: "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu đâu …", coordinator spec): top of the
    screen, always visible in co-op: her face (grey silhouette until met — stranger rule, kitFaceH) + "Hảo hữu của ta" (her name once known)
    + one status chip + the shared buổi countdown. st: ready ✓ / busy ! / work … / away / hold ⏸. Tap → kitCoopFriendPanel. */
-const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w","⏸","Tạm dừng"]};
+const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w",`<i class="kpzb" aria-hidden="true"></i>`,"Tạm dừng"]};
 const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
 /* §69.2 CANON OVERWRITE (owner 21/11 ~06:30Z, OD verbatim: "ở cái thanh trên cùng ... một cái icon ... người đó off là màu xám ... On là sẽ màu tươi hơn ...
    xong thì có một cái dấu tích màu xanh kế bên ... vẫn còn đang bận thì là nó hiện cái dấu ba chấm kế bên ... bấm vô người đó thì nó ra thông tin"):
@@ -237,7 +237,7 @@ const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/
    countdown stays beside it as one short kit chip (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu?", OD rule kept). Tap → the
    partner sheet kitHaoHuuOpen (jhaohuu.js), which also holds the old chip panel's rows (her status, Ngươi) and «Tạm dừng». */
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
- const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?"⏸ ":""}${mmss(o.left)}</span>`;
+ const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t" aria-label="${o.clock==="pz"?"Đồng hồ đang đợi":"Buổi này còn"} ${mmss(o.left)}">${o.clock==="pz"?`<i class="kpzb" aria-hidden="true"></i>`:""}${mmss(o.left)}</span>`;
  const av=o.known&&o.face?o.face:`<img src="img/kit/ico-friend.webp" alt="" decoding="async">`;
  /* KIT §77b (K-BADGE-HAOHUU): ready → ok ✓ green · hold → pause ⏸ · busy / work → busy … · away → no badge + the button's .koff grey; the badge is the LAST child of the .krailb */
  const bst=o.st==="ready"?"ok":o.st==="hold"?"pause":o.st==="away"?"":"busy";const bd=typeof kitStBadge==="function"?kitStBadge(bst):"";
@@ -302,7 +302,7 @@ function hudObs(hud,words){const R=[];const add=r=>{if(r.width>=2&&r.height>=2)R
  while((n=tw.nextNode())){if(!n.nodeValue.trim()||FE.contains(n)||(n.parentElement&&n.parentElement.closest("#kntbox")))continue;const pe=n.parentElement;if(!pe||!vis(pe))continue;rg.selectNodeContents(n);for(const r of rg.getClientRects())add(r)}
  for(const e of hud.querySelectorAll("img,svg,canvas,button,[role=button],input,.kseal-hud")){if(FE.contains(e)||!vis(e)||e.closest("#kntbox"))continue;add(e.getBoundingClientRect())}
  return R}
-/* the slot is sized for the WIDEST content (icon + «⏸ 0:00» / «Hết buổi»), so a clock change never makes it grow into a neighbour */
+/* the slot is sized for the WIDEST content (icon + «pause bars 0:00» / «Hết buổi»), so a clock change never makes it grow into a neighbour */
 function slotSize(){const keep=FE.innerHTML;FE.style.minWidth="";let w=0,h=0;
  for(const o of [{st:"hold",clock:"pz",left:599000},{st:"ready",clock:"up"},{st:"work",clock:"run",left:599000}]){FE.innerHTML=kitCoopFriend(o);const r=FE.getBoundingClientRect();w=Math.max(w,r.width);h=Math.max(h,r.height)}
  FE.innerHTML=keep;const s=FE.getBoundingClientRect().width/(FE.offsetWidth||1)||1;FE.style.minWidth=Math.ceil(w/s)+"px";return{w,h}}
