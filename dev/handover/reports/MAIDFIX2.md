@@ -14,3 +14,12 @@ depth 1 · START_CTX ≈ 3 % (est.; get_session read 0) · done well under the r
 
 ## Gates
 keep_check --all: 405 sidecars PASS. check_store --scope maid --age a18 --refs s7IPw0Ll8e: all 4 PASS (no S01/S32 noise). Sizes 6.6–8.0k chars (≤ 10 000).
+
+## JOB 2 — owner L1725 (Foreman C #20), 0 gens
+- Nhị prompt files (for the comparison sheet): dt4ZloSXSL = test5_nhi.txt (ledger) · 6Ab7cMSiJO = test7_nhi_L1656.txt (inferred from CHECK2 2c75a81) · Lw8btUtswO = test8_nhi_L1685.txt.
+- Rule K30 added (rule.py add K, Lượt 1725): MAID EMBROIDERY LADDER + FRONT BOW.
+- test11_tam_L1725 (base test8_tam_L1685): borders only (collar, short outer sleeve edges, long inner sleeve cuffs, hem of the short top); skirt-hem flower band REMOVED (tam = none); + "the sash tied at the FRONT of the waist in a pretty, graceful bow".
+- test11_nhat_L1725 (base test10_nhat_L1722): scattered small flowers replaced by nhị-style border embroidery, a little richer (stand collar, vest front edges/hems, both front panels + back tà, WHOLE cuff band of every sleeve layer all the way round); skirt hem = small flowers a little bigger than nhị, never large (NO large/peony/medallion kept); open cloth plain; + a pretty, graceful bow at the FRONT of the sash.
+- test11_{tam,nhat}_thancan_L1725 = the test11 maid prompts with only powder blue ↔ deep rose swapped.
+- Nhị: WAITING for the owner's pick of a base (dt4ZloSXSL / 6Ab7cMSiJO / Lw8btUtswO).
+- Gates: keep_check --all 409 PASS; check_store maid a18 ×4 PASS; 6.9–8.5k chars.
