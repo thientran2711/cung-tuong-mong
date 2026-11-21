@@ -83,7 +83,7 @@ function fxSeen(p){return KIT_FACEFX.seen(p)}                        /* the one 
 function fxLive(p){return KIT_FACEFX.live(p)}
 function fxKey(by){try{return by&&["consort","player"].includes(KIT_FACEFX.kind(by))?key(by):null}catch(e){return null}}
 function fxLeft(u){return Math.max(1,(u|0)-wk())}
-function fxName(p){try{if(p===S)return"Ngươi";if(p&&p.name)return p.name;const k=KIT_FACEFX.kind(p);if(k==="thaihau")return"Thái hậu";if(k==="emp")return typeof empName==="function"?empName():"Hoàng thượng"}catch(e){}return""}
+function fxName(p){try{if(p===S)return"Ngươi";if(p&&p.name)return p.name;const k=KIT_FACEFX.kind(p);if(k==="thaihau")return"Thái hậu";if(k==="emp")return"Hoàng thượng"}catch(e){}return""}
 function fxWho(p){return fxName(p)}
 function fxIllSeen(p){try{const i=fxIll(p);if(!i)return false;if(typeof illOf==="function"&&i===illOf(p)&&typeof illKnown==="function")return !!illKnown(p);return !!i.known}catch(e){return false}}
 function fxIllName(i){try{return `${ILL[i.k].n} · ${STG[i.st|0]||STG[1]}`}catch(e){return"Người ốm yếu, xanh xao"}}
@@ -157,7 +157,7 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
  state:p=>p&&p.pen&&p.pen.until>wk()?p.pen:null,
  seen:(p,st)=>fxSeen(p),
  chip:(p,st)=>[`${PEN_N[st.k]||PEN_N.quy} · đi chậm · còn ${fxLeft(st.until)} tuần`,"hot"]});
-(function(){const t0=travel;travel=function(a,b){const r=t0.apply(this,arguments);try{if(r>0&&S&&S.pen&&S.pen.until>wk())return r+1}catch(e){}return r}})();
+walkSlow=function(p){try{return p&&p.pen&&p.pen.until>wk()?BAL.walk.pen:0}catch(e){return 0}}; /* «đi chậm»: j9 travel adds it per walker (walk-cost r3; was a travel wrapper that jclose overwrote) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&npwPick(["go","low"],k=>fxPenW(v,t,k))==="low")return[]}/* npc-purpose G2c: while punished she lies low unless her grudge outweighs her fear */catch(e){}return O}})();
 
 /* ---------- causes for slap + punishment ---------- */
