@@ -573,7 +573,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-progress-run KIT KEEPER (sonnet; owner bug, MAIN ROOT-82 fast lane) | review/kit-progress-run; reports/kit-progress-run.md | MAIN ROOT-82 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM d19741dc (waits rv MSxpxbsA) | 21/11 |
 | B LANDER #2a (opus; wear-slots → mg-craft-r2 → mg11 → kc stack; own container) | <branch>-land | B | session_01N1tNP3TNXAxaCbRNNS5Qcv | RUNNING | 21/11 00:25Z |
 | B LANDER #2b (opus; thancan → ge-npc → map-places → perf-ci → palace-life; own container) | <branch>-land | B | session_01N1tNP6cqrrDPRXd6b6opjm | RUNNING | 21/11 00:25Z |
-| MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | RUNNING | 21/11 00:40Z |
+| MAIN CHÍNH 83 (opus; child of MAIN CHÍNH 82, depth 3) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsMwYYWQ6xKrpUSinvM | ROLLED OVER → MAIN CHÍNH 84 KwFNncn5 | 21/11 00:40Z |
 | OWNER BUG huong-cue (sonnet; Điều hương closeness cue lost to mg-noword + whole group; briefs/main83-huong-cue.md) | review/huong-cue | MAIN CHÍNH 83 | session_01Rc5AsJcZhVHQUYhZunHGJr | SSK d9fa3a93 → rolled over, archived | 21/11 00:45Z |
 | kit-kg82-stack KIT KEEPER (sonnet; owner Fold shot, MAIN CHÍNH 82/83) | review/kit-kg82-stack; reports/kit-kg82-stack.md | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 50751774 (waits rv MSxpxbsA) | 21/11 |
 | OWNER BUG hoadien-easy (opus; hoa điền too strict for an easy act + makeup group; briefs/main83-hoadien-easy.md) | review/hoadien-easy | MAIN CHÍNH 83 | session_01Rc5AsLWRQqT9YHnXd91Grh | VOID (owner: hoa điền is fine) archived | 21/11 00:47Z |
