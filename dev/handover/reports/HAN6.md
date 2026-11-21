@@ -66,3 +66,8 @@ HAN6 read:
 - The cuffs are clearly the widest trim, the hem border is narrower, and bu yao dangles show on the headdress. The collar is unchanged.
 - G61 note (VE7): the right hand rests at the belt and the jade ball hangs beside the front waist. This is the same as the old picture; the pose words are LADDER4 (A47). Owner/#27 decide.
 - If the owner wants stronger clouds: "large flowing cloud scrolls" (words only, only with her yes).
+- #27 follow-up on dt4THLQXSL (G57 tassels / G61 hand at waist), words only, no gen:
+  - t6 ball: "a round stuffed ball, NO tassels, no handle, no stick".
+  - t1/t2/t4/t6/t7/t8 Pose + ", her free hand at her side, never at the front waist". t3 (one hand at the hairpin + flute) and t5 (both hands on the letter) have no free hand.
+  - Shortened my own L1965 additions to fit 10 000 (t6 bu yao "with swaying pearl dangles", t7/t8 "Han cloud-riding embroidery", t8 "hairpins", hem "(narrower than cuffs, wider than collar)"). The fit-trim threshold is now 9900.
+  - ch 9915/9953/9875/9879/9556/9967/9973/9994. keep PASS ×8; check_store = base waived FAILs ×8.

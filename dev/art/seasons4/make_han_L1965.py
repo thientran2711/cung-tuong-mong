@@ -18,13 +18,13 @@ R = {  # rank: list of (old, new)
  6: [("with many large flowers spread over the whole garment, clearly more embroidery than any palace maid (large camellia medallions and sprays of double crabapple blossoms in gold)",
       "with flowing cloud scrolls and small birds in flight (Han cloud-riding embroidery) spread over the whole garment, clearly more embroidery than any palace maid (in gold thread, no large flowers)"),
      ("a BIG ornate gold headdress with pearls, gold flowers and many gold tassels, grander than the Phi",
-      "a BIG ornate gold headdress with pearls, gold flowers and many gold tassels and gold bu yao hairpins with swaying pearl dangles, grander than the Phi")],
+      "a BIG ornate gold headdress with pearls, gold flowers and many gold tassels and gold bu yao hairpins, grander than the Phi")],
  7: [("with many large flowers spread over the whole garment, far more embroidery than any palace maid (large peonies and auspicious clouds in thick gold thread)",
-      "with large flowing cloud scrolls and birds and small phoenixes in flight spread over the whole garment, far more embroidery than any palace maid (Han cloud-riding embroidery in thick gold thread, no large flowers)"),
+      "with large flowing cloud scrolls and birds and small phoenixes in flight spread over the whole garment, far more embroidery than any palace maid (in thick gold thread, no large flowers)"),
      ("phoenix crown with pearl strands and a few gold tassels.", "phoenix crown with pearl strands, a few gold tassels and tall gold bu yao hairpins.")],
- 8: [("among large peonies and clouds;", "among large flowing cloud scrolls (Han cloud-riding embroidery, no large flowers);"),
+ 8: [("among large peonies and clouds;", "among large flowing cloud scrolls (no large flowers);"),
      ("(one central phoenix and eight small ones, the grandest of all ranks) with pearl strands and a few gold tassels.",
-      "(one central phoenix and eight small ones, the grandest of all ranks) with pearl strands, a few gold tassels and the tallest gold bu yao hairpins.")],
+      "(one central phoenix and eight small ones, the grandest of all ranks) with pearl strands, a few gold tassels and the tallest gold bu yao.")],
 }
 for t, base in BASES.items():
     s = open(base, encoding="utf-8").read()
@@ -38,12 +38,19 @@ for t, base in BASES.items():
     s = s[:m.end()] + ", the widest trim" + s[m.end():]
     allows.append((m.group(0), "owner L1965: cuffs = widest trim (sleeve > hem > collar)"))
     m = _re.search(r"border along the (whole )?hem and front opening", s)
-    s = s[:m.end()] + " (narrower than the cuffs, wider than the collar)" + s[m.end():]
+    s = s[:m.end()] + " (narrower than cuffs, wider than collar)" + s[m.end():]
     allows.append((m.group(0), "owner L1965: hem border between cuffs and collar"))
     for extra in ("her head turns together with her shoulders and body, never back-turned, never in profile. ",
                   "the small embroidered motifs are stitched in fine gold thread. "):
-        if len(s) > 9995 and s.count(extra) == 1:  # L1965 fit 10 000: content duplicates (HEAD AND BODY sentence / embroidery thread said in the outfit); gate-tested, no new FAIL
+        if len(s) > 9900 and s.count(extra) == 1:  # L1965 fit 10 000: content duplicates (HEAD AND BODY sentence / embroidery thread said in the outfit); gate-tested, no new FAIL
             s = s.replace(extra, ""); allows.append((extra.strip(" ."), "L1965 fit 10 000: duplicate boilerplate, check_store-tested"))
+    # #27 L1965 follow-up (G57/G61): t6 ball plain, no tassels; hands away from the front waist (t5 = both hands on the letter at chest)
+    if t == 6:
+        o = "a round stuffed ball, no handle, no stick,"
+        assert s.count(o) == 1; s = s.replace(o, "a round stuffed ball, NO tassels, no handle, no stick,")
+    if t not in (3, 5):  # t3 one hand at hairpin + flute; t5 both hands on the letter
+        m = _re.search(r"(Pose: [^.]*?)(\.)", s)
+        s = s[:m.end(1)] + ", her free hand at her side, never at the front waist" + s[m.end(1):]
     out = base.replace("_L1955", "_L1965").replace("_L1915", "_L1965")
     open(out, "w", encoding="utf-8").write(s)
     with open(out + ".keep", "w", encoding="utf-8") as k:
