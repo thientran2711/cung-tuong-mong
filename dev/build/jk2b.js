@@ -223,7 +223,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
   /* an unlabelled segment with no number after the effects = a reading of the moment ("ngài trọng tài, rất hợp") */
-  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&!/^(nàng|hắn|các|Thái hậu|Hoàng hậu|Hoàng thượng|chứng cứ)/.test(body)){M.notes.push(body);continue}
+  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&/^(ngài |an toàn$)/i.test(body)){M.notes.push(body);continue}/* K-OPT-KEM: ONLY the night «reading of the moment» (nx: «ngài …, rất hợp», «an toàn») is a note; every other number-less kèm / hỏng phrase («ít gặp Hoàng thượng», «chủ ít thấy mặt ngươi») is a real side effect and gets its row */
   for(const sc of body.split(/; /)){const P=[];for(const v of sc.split(/, (?![^(]*\))/)){const p=v.trim();if(!p)continue;if(P.length&&!/\d/.test(p)&&!/\d/.test(P[P.length-1])&&!/^(Sủng|Danh|Đức|Bạc|Sức|Ân tình|Thái hậu|Hoàng hậu|chứng cứ|nàng|hắn|các)/.test(p))P[P.length-1]+=", "+p;else P.push(p)}
    P.forEach(p=>M.items.push({p,l:lab||"thành"}))}}
  return M}
@@ -618,7 +618,7 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
  return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
-  (o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
+    (o.tags&&o.tags.length?`<span class="ksart-tags">${o.tags.map(t=>`<em class="ksart-tag">${t}</em>`).join("")}</span>`:"")+(o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
 /* owner 21/11 (mood-seal-2, mark #68): the corner mark is the LIVE mood seal (img.kemo = the ONE kit seal part jemoseal: idle sway at once + the lean as the dialog opens, data-kemo-now); any other mark src stays a still <i> */
 function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec(String(mark));const a=alt?String(alt).replace(/"/g,"&quot;"):"";const u=String(mark).replace(/["'()]/g,"");
  if(m)return `<img class="kemo kemo-${m[1]} ksart-mark" data-kemo-now="1" role="img" aria-label="${a}" alt="${a}" draggable="false" src="${u}" onerror="this.remove()">`;
@@ -626,6 +626,8 @@ function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
+.ksart-tags{position:absolute;top:6px;left:6px;z-index:3;display:flex;flex-wrap:wrap;gap:4px;max-width:calc(100% - 12px);pointer-events:none}
+.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:nowrap}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */
@@ -1193,3 +1195,12 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
+
+/* KIT 8.10 TAGS ON THE PICTURE (owner 21/11 mark #66 FINAL): a dialog whose queue item carries `qtags:[type, deadline]` shows those TWO words as tags on the TOP-LEFT of its event picture (kitSceneArt o.tags /
+   .ksart-tag); never a chip row. No picture in the dialog -> the two words become kit label|value rows (Loại | Hạn) at the top of its text. Runs on showModal and whenever the dialog is rebuilt. */
+function kitArtTags(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=m&&m.qtags;if(!t||!t.length)return;const mb=document.getElementById("mb");if(!mb||mb.querySelector(".ksart-tags,.kqtrows"))return;
+ const a=mb.querySelector(".ksart");if(a){a.insertAdjacentHTML("afterbegin",`<span class="ksart-tags">${t.map(x=>`<em class="ksart-tag">${x}</em>`).join("")}</span>`);return}
+ const rows=typeof kitRows==="function"?kitRows([["Loại",t[0]],["Hạn",t[1]]].filter(r=>r[1])):"";const tg=mb.querySelector(".kpsec")||mb.firstElementChild;if(rows&&tg)tg.insertAdjacentHTML("beforebegin",`<div class="kpsec kqtrows">${rows}</div>`)}catch(e){console.error("kitArtTags",e)}}
+window.kitArtTags=kitArtTags;
+(function(){const M=document.getElementById("modal");if(!M)return;setTimeout(()=>{const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitArtTags();return r}},0);
+ let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitArtTags()})}).observe(M,{childList:true,subtree:true})})();
