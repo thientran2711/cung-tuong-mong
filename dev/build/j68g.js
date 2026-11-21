@@ -62,7 +62,9 @@ EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);
 EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>.9,
  v:["Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.","{A} phát hiện bậc thềm đá bị bôi dầu trơn, kịp lau trước khi ngươi đi qua.","{A} đuổi được một con rắn độc bò vào buồng các con.","{A} thức trắng chép lại sổ sách cung bị nước làm nhòe."],
  o:X=>[c6("Thưởng hậu",{c:{bac:-25},r:[[X.A,18]]}),
-  c6("Thăng làm người thân cận",{r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")]}),
+  (()=>{/* jtc (r1): when she can raise this maid now, the card SHOWS the uniform's Bạc (BAL.thc.pick.bac) and the raise runs the same thcSet as the person card (paid by this cost, never twice); otherwise the old loyalty-only reward */
+   const s=X.A.o,can=!!(s&&s.role==="maid"&&typeof thcSet==="function"&&!thcWhyNot(S,s));
+   return c6("Thăng làm người thân cận",{c:can?{bac:-BAL.thc.pick.bac}:undefined,r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")],ok:()=>{try{if(can&&!thcWhyNot(S,s,{paid:1}))return thcSet(S,s,{paid:1})}catch(e){}return ""}})})(),
   c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(BAL.odb.j68g.odP_7+eyes(S)*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
 EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
  v:["Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.","Lời đồn: Thái hậu định chọn ngươi trông coi việc tế lễ năm nay.","Người ta bảo Thái hậu khen ngươi trước mặt Hoàng thượng.","Có tin Thái hậu nhắc tên ngươi khi bàn chuyện ghế trống."],

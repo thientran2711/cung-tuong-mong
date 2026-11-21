@@ -81,7 +81,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="center";g.textBaseline="alphabetic";
   if(R.type===0){/* sample card, left */
    const cw=Math.min(W*.3,tz*1.0);k91RR(g,10,8,cw,tz-12,10);g.fillStyle="rgba(255,250,236,.92)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
-   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";
+   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";g.fillText("Đèn mẫu",10+cw/2,tz-8);
    g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,`${R.found}/${R.need}`,cw+22,tz*.4,W-cw-30,true)}
   else if(R.type===1){/* sample grid, right */
    const m=G.m,x0=m[0].x-4,y0=m[0].y-4,mw=m[0].w*R.cols+8,mh=m[0].h*R.rows+8;k91RR(g,x0,y0,mw,mh,8);g.fillStyle="rgba(255,250,236,.9)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
