@@ -1553,3 +1553,4 @@ ROOT-B4 ~18:20Z: OWNER L2168: yellow ladder (L2164) = ROYAL YELLOW CLOTH (vàng 
 ROOT-B4 ~18:22Z: OWNER L2169: t3 Quý nhân flowers too dense/everywhere → fewer than Tần, few widely spaced sprigs (item 10 → THUROOT4, M2163-03). Next Lượt 2170.
 ROOT-B4 ~18:30Z: THUROOT4 pushed M2163-01..05 (t4–t8, items 1–3 only) @f28a9fe6 and hit roll line → RETIRED. Opened THUROOT5 session_01D3E3NXk5FcuhXpbwVo8KPv (my child): full set M2170-01..08 = t1..t8 with items 1–10 (7 cancelled). M2163 NOT sent to owner (superseded). Next Lượt 2170.
 ROOT-B4 ~18:33Z: OWNER L2171: t6 Quý phi vân kiên has no pearl net → add (item 11 → THUROOT5, M2170-06). Next Lượt 2172.
+ROOT-B4 ~18:36Z: OWNER L2172 colour plan (replaces item 6): HQP main = own colour, SECONDARY = royal yellow, own secondary only scattered accents; QP keeps main+secondary + gets royal yellow where HQP's yellow is now (M2150-07); HH unchanged. → THUROOT5. Next Lượt 2173.
