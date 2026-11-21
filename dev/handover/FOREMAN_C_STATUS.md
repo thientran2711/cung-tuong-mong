@@ -1194,3 +1194,4 @@ ROOT#19 HANDOVER ~06:35Z: depth 0, ctx ~33 % (START ~8 % + 25 %). Maids nhị Lw
   (3) df-npc-hand: an NPC's hand coming at the screen (for «Né»), 2 poses.
   When on CDN → send paths to the worker + MAIN 90. Priority: after the owner-driven Hán ladder / maid fabric work in her chat.
 #22 ~07:22Z: MAIDFIX2 test17_L1785 8f793bb (smile, bow+tails one colour, clean edges, nhất same tone) → VE2 JOB K 6×135 = 810. Next Lượt 1791.
+#22 ~07:26Z: L1792 Hán LADDER4 ×8 @55 (440) LOOKED + sent: t1 w4ajNaE7EI t2 5jDEsp0Kxe t3 vQABHIKa47 t4 tCReuogmZJ t5 CqnIKlAEEy t6 TdwGoCfVNR t7 p8yWmJnehw t8 If3pui4tvE. Faults seen: caption season Xuân t1–t5 / Thu t6–t8 (mixed); collar bands soft, not clearly stiff; t7/t8 curved wrap not clear; t2 drum → round fan. VE2 resent t4/t5 waiver + JOB K. Next Lượt 1793.
