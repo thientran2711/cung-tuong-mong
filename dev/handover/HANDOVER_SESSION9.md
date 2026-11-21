@@ -1901,3 +1901,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:47Z) Lander KQsG LAND READY kc-fail-effects STACK 0b0cf8a8 (outside-gaps → outside-coop → kc-fail-effects, one land) → 89 chain after ge-npc. Lander chain done → archive KQsG once its report is pushed and lines land.
 - (07:49Z) Lander KQsG DONE (report main84-lander.md Successor; 3 lines handed to 89 chain) → ARCHIVED (OD:L1287).
 - (07:58Z) rv MYd9 PASS r2 maid-8tabs 561e3f47 (#32–#36) → 89 chain; MYd9 idle until land then archive. maid-acts-a told to rebase on 561e3f47. Keeper K-OPT-KEM queued after K-FOCUS-1 (option card drops number-less «kèm» lines; consort guard shows Sủng −3 vs BAL 2 = law 4 → whole-family shown-vs-BAL scan).
+- (08:00Z) rv NT2K PASS quest-rows-2 6aac0a54 (#66) → 89 chain (replaces failed quest-rows). ARCHIVED rv NT2K + worker KTU3 (work handed on; a land conflict → new small re-merge). Side note: ma ma still left figure in figure dialogs = dialog-person job (carried by kit-dialog-2, rv MaLL).
