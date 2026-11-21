@@ -578,3 +578,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-kg82-stack KIT KEEPER (sonnet; owner Fold shot, MAIN CHÍNH 82/83) | review/kit-kg82-stack; reports/kit-kg82-stack.md | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 50751774 (waits rv MSxpxbsA) | 21/11 |
 | OWNER BUG hoadien-easy (opus; hoa điền too strict for an easy act + makeup group; briefs/main83-hoadien-easy.md) | review/hoadien-easy | MAIN CHÍNH 83 | session_01Rc5AsLWRQqT9YHnXd91Grh | VOID (owner: hoa điền is fine) archived | 21/11 00:47Z |
 | OWNER BUG td-dung-clear (sonnet; Đi đứng still not understood + whole group 5-second goal check; briefs/main83-td-dung-clear.md) | review/td-dung-clear | MAIN CHÍNH 83 | session_01Rc5AsLcX2LUVnXazaweFe6 | RUNNING | 21/11 00:52Z |
+| OWNER BUG chai-ramp (opus; chải chuốt band never shrinks across hồi + whole group; briefs/main83-chai-ramp.md) | review/chai-ramp | MAIN CHÍNH 83 | (opening) | RUNNING | 21/11 00:55Z |
