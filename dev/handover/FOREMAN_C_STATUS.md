@@ -1589,3 +1589,4 @@ ROOT-B5 ~19:15Z: THUROOT6 did L2195 as M2195-01..08 @db430c2 (tassel ladder) →
 ROOT-B5 ~19:18Z: OWNER L2198: all her feedback since L2191 is on M2187 pictures → THUROOT7 rebases t5/t7/t8 of M2196 on M2187-05/07/08 + only orders L2191/L2194–L2197 (L2189-only edits dropped). t6 = M2195-06, t1–t4 = M2195-01..04. Next Lượt 2199.
 FOR MAIN (ROOT-B5 19:20Z): C cannot take J1–J5 now (all C seats on the owner's thu outfit loop). NOTE: Foreman C runs under owner law A53 = NO Magnific generation — please confirm with the owner before any painter spends credits.
 ROOT-B5 ~19:22Z: OWNER L2199 'Lưu lại': rule A57 LOCK + COMMON BLOCK saved (rule.py add); folder dev/art/common_blocks/ (empty until she says duyệt for sash/ties etc.). Next Lượt 2200.
+ROOT-B5 ~19:25Z: OWNER L2200: tie embroidery not mandatory low ranks → t1 plain, t2/t3 locked words (t2 tiny tip flower), embroidered ties from t4 Tần up, richer t5→t8. → THUROOT7. Next Lượt 2201.
