@@ -22,6 +22,8 @@ Thái hậu card: already name «Thái hậu», no era — no change.
 
 5. **Đức chip** (owner 21/11 ~02:54Z): Tài nghệ › Tứ đức no longer repeats «Đức N» (top bar has it): chip removed in jtabs.js:54 and the old «Đức ngươi: N» in j85.js:180; the «ⓘ luật Đức» button stays. Scan of tab headers for chips/rows repeating Sắc/Tài/Tâm cơ/Đức/Danh/Sủng/Bạc/Sức: only these two; the Kén chọn / entry rows (jkc, jkc2 «Tư chất», «Mang theo Bạc») are pre-game dialogs without the top bar, left as is.
 
+6. **Trait words** (owner 21/11 ~03:40Z, MAIN 84): Emperor rows now «Tính cách | Nóng nảy, Chăm chính sự» (one ETRAITS name per trait) and «Trọng | …», each word = kit tap-word `kitFactTap(word, meaning)` (dotted underline; popup = only that trait's ETRAITS sentence). Long «Hay» sentence rows removed for Emperor AND for consorts/maids (jpcf.js). PERS danghi tend «dễ nghi» → «Đa nghi» (j28.js; the only trait occurrence; j13 lot verse is another meaning). Keeper will rename to kitTapWord/kitTraitWords later (review/kit-tap-word) — plain rename.
+
 ## Not done / for MAIN
 - Trait box (Lạnh lùng: … bullets) left in place on the Emperor cards (j15/jhc `note:`) for the kit keeper's «!» (kit-pcrow-square). DOM I touched: `.pcl` (new `.pcrows`), `.pcf .kpsec` (no `.kpst`), `#kpname` order. I did NOT touch tag centring or act cards (CSS rule I tried for centring removed).
 - Fold: the left column (.pcl) scrolls (existing, overflow:auto), so «Niên hiệu» row sits below the big portrait there, same place as «Biết tên».

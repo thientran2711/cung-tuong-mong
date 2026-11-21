@@ -32,10 +32,11 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
  if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
   rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  /* owner 21/11: «Trọng» = what he values (his tend phrases «trọng X», one comma list, «trọng» never repeated); «Hay» = the rest (the trait box → «!» is the kit keeper's, review/kit-pcrow-square) */
-  const tr=[],hay=[];for(const t of (E.traits||[])){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;
-   for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(m[1]);else hay.push(w)}}
-  if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")});if(hay.length)rows.push({l:"Hay",f:hay.join(", ")})}
+  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính cách | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
+  const tw=(w,t)=>typeof kitFactTap==="function"&&ETRAITS[t]?kitFactTap(w,`<div class="kpopx">${ETRAITS[t][1]}</div>`):w;
+  const TS=(E.traits||[]).filter(t=>ETRAITS[t]),tr=[];
+  for(const t of TS){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(tw(m[1],t))}}
+  if(TS.length)rows.push({l:"Tính cách",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}}
@@ -44,7 +45,7 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
   try{if(typeof disLikeKnown==="function"){const keys=disLikeKeys(e),kn_=disLikeKnown(e).filter(k=>keys.includes(k));
     const r=kn_.length?pcfPrefRow(e,L,"Thích",kn_.map(k=>disEntry(k).n),keys.length,"thích"):(keys.length?{l:"Thích",f:"chưa rõ",c:"n"}:null);if(r)rows.push(r)}}catch(x){}
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push({l:"Hay",f:tend.join("; ")})}
+  /* owner 21/11: no long «Hay» sentence: the trait words above carry their meaning on tap (kitGloss) */}
  const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec kpno">${kitFactRows(R)}</div>`}catch(x){return""}}
 const PREF=/^(thích|không ưa|ghét)\b/i;
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=KNOWN(e).filter(x=>!PREF.test(x.f));/* likes / dislikes already sit in Sở trọng */const n=KNOWN(e).length;const ev=e.ev||0;
