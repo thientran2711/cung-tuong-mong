@@ -131,3 +131,19 @@ My own check (not the worker's): on every seat, after start / every merged week 
 6. coop-name-clash (c2353df6) reviewer: my j95cDedupe guard keeps world names on the guest; its "host decides one name list" should agree; re-check after merge.
 
 Reviewer fixes (all in dev/build/jcoophl.js): j95cDedupe guest guard; rsv (guest's own people's faces reserved on the host at once, also sent with "ask"); !lvl3() on figFill / fidBack / fidNote.
+
+## R2 — lazy-face family closed for every figure (B LANDER #2b session_01N1tNP6cqrrDPRXd6b6opjm, 21/11 04:30Z–07:40Z)
+PRIORITY #1 CHECK ('lazy face', 'figThPick', 'f88Take', 'mkMigrate' co-op): OD 0 | ledger 0 | claims: this lane (Foreman B ROOT-4 order 04:19Z) | main: jcoophl r1 only | review/*: coop-host-lag-r1(-land463) only → built on 081797c8.
+Branch review/coop-host-lag-r2 @ **f13d8932** (base LIVE db6ae2a0 + host-lag 081797c8). Only dev/build/jcoophl.js + new dev/test/coop-hl-faces.js (+ generated index.html/sw.js).
+Causes (probe = dev/test/coop-hl-faces.js: N real rooms, level 0, every figure's face host vs guest at start + after week 1; before: 3/8 rooms bad):
+1. Host faces given by paths no wrapper sees (jfigx figFor / figPick(S.thO) call the module's own figThPick) were never sent → guest had none; next merged week re-drew them (Thái hậu c29 → c22).
+2. check() with no shared base yet (after a room start) set shared=now without sending → writes in that gap reached no one.
+3. A later "pick" timer cancelled the start/week check (soon() keeps one why).
+4. The GUEST stored her own lazy face for world people: render path (unwrapped pick) and the j88 pool f88Take (f88Draw / f88Carry, outside render) → two faces, kept by both merges (consort:c16 host vs maid:m34 guest; e2e R#7 c22 vs m42/m40).
+5. Same family, other lazy write: mood memory mkMigrate made by the guest's first mood read only (e2e R#10.mk A=undefined B=[]).
+Fix (jcoophl.js): host fidScan after every render + retry until figxReady; fidBack after every merged week; base-C fallback when no shared; every world face sent as idempotent "s" ops at start/week/rejoin/ready/state (faceDue survives a later timer); guest render never stores a world face (gSnap/gBack); guest f88Take for a world person returns the face without storing/reserving; host mkMigrate for every world person with a mood.
+Tests on f13d8932 (each alone, base db6ae2a0): coop-hl-faces 16/16 + 8/8 rooms clean (was 3/8 bad) · coop-e2e 104/104 ×5 · COOP_HL_FORCE=1 106/106 + with COOP_SWAP=1 106/106 · COOP_NC_FORCE=1 106/106 · quickcheck PASS · undef PASS · role-parity ALL PASS.
+
+## HANDOVER (07:40Z 21/11, ctx 36 % > START 5 % + 25 %) → successor opened by Foreman B
+- LIVE moved to aee7ff84 (164 files since db6ae2a0). Left: merge origin/main into review/coop-host-lag-r2 f13d8932 (jcoophl.js is the branch's own file; coop-e2e.js / assemble.py may conflict → LIVE side + branch additions; generated files = LIVE's then `bash dev/site/build_site.sh`), push, then rerun ONE AT A TIME: `N=8 node dev/test/coop-hl-faces.js`, `node dev/test/coop-e2e.js <out>` ×5 (all 104/104 or the new LIVE count), `COOP_HL_FORCE=1` and `COOP_HL_FORCE=1 COOP_SWAP=1` coop-e2e, `COOP_NC_FORCE=1` coop-e2e, quickcheck, undef-scan, role-parity (alone, ~10 GB).
+- Then send Foreman B «SẴN SÀNG KIỂM coop-host-lag-r2 <sha>» (Foreman opens an opus BIG reviewer). Note for the reviewer: guest f88Carry still sets n.fromMaid on her seat (face not stored) — check the host makes the same world fact.
