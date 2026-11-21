@@ -116,7 +116,8 @@ function aaDeathTxt(){/* law4-typed: prints the BAL keys deathSentence (j8) appl
 Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"Đang là người chạy việc"});
 /* the bars on a servant card: her attitude = "Thiện cảm" (was Lòng), her trust in him = "Ta tin cậy" (was Chủ tin); the runner is
    marked on HIS card, not on the maid's */
-if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
+/* r6 N6: the bars themselves come from jtin bondBars (who → whom: hers «Thiện cảm · Ta tin cậy» = KIT_REL.srvThem / srvTrust, another master's «Thiện cảm với <chủ> · <chủ> tin cậy»); this layer only adds her runner note */
+if(typeof bondBars==="function"){const bb0=bondBars;bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return bb0(s)+r}}
 /* the runner is household info (owner 10:10Z): not a line of the maid's card but "Người chạy việc của cung: X" with the household block; jhc's line (tap = meaning, "Đổi ›") is kept */
 (function(){const r0=window.runnerLine;window.runnerHouse=function(){try{return typeof r0==="function"?String(r0()).replace("Người chạy việc:","Người chạy việc của cung:"):""}catch(e){return""}};window.runnerLine=function(){return""}})();
 /* names: unique, never "Thúy 2" — any old numbered name is renamed once (from the one name core, jname.js) */

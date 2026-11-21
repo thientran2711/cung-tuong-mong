@@ -12,8 +12,12 @@ function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)
 function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}
 function relHk(h,t){if(t===S)return"me";if(relRv(t))return relMan(h)||relCourt(h)?t.id:"r"+t.id;if(t.sid!=null&&!relMan(h)&&!relCourt(h))return t.sid;return relKey(t)}
 function relMap(h,f){if(!h[f]||typeof h[f]!=="object")h[f]={};return h[f]}
-/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng": HER servant toward HER (S.maid / household) is ONE store, s.loyal (j10) — the number the game already writes. An NPC consort's servant stays on s.af: reading loyal there shifts the NPC world (role-parity maid:P-ONLY:poison, seeded scan) and the player never sees a second number for that pair */
-function relMaster(x,y){return relMS(x)&&!relMan(x)&&typeof x.loyal==="number"&&!relCourt(x)&&y===S&&(x===S.maid||(typeof ownerOf==="function"&&ownerOf(x)===S))}
+/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng" + law 4 one core (r6 F5, Fix A): a servant toward ITS master is ONE store, s.loyal (j10) — the
+   number the game already writes — for EVERY master: her (S.maid / her household) and an NPC consort (her maid v.maid / her household, ownerOf).
+   relOwner = that master (court officials and men have none). Servant road: S is the maid there, her own bond stays S.srv.af (isSrv guard below). */
+function relOwner(x){if(!relMS(x)||relMan(x)||relCourt(x)||typeof x.loyal!=="number")return null;if(S&&x===S.maid)return S;try{const o=typeof ownerOf==="function"?ownerOf(x):null;if(o)return o}catch(e){}
+ return (typeof rivals!=="undefined"&&rivals||[]).find(v=>v&&v.maid===x)||null}
+function relMaster(x,y){return !!y&&relOwner(x)===y}
 function msAff(x,y){if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv()))return +x.loyal||0;if(relMS(x)){if(y===S){if(relMan(x))return +x.af||0;if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv())return S.srv.af[x.sid]||0;return x.af&&typeof x.af==="object"?(+x.af.me||0):(+x.af||0)}
   const M=relMan(x)?x.afw:x.af;return M&&typeof M==="object"?(+M[relHk(x,y)]||0):0}
  const M=x===S?S.rl:x.rl;return (M&&M[relKey(y)])||0}

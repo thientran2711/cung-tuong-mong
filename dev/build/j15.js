@@ -63,7 +63,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
  Object.entries(S.court).forEach(([k,c],j)=>L.push({t:"court",k,c,f:k==="ty"?pDoc():{src:courtSrc(k,c),ini:"Hoạn",col:"#8a8aa0"},name:shortN(c.name),sep:j?"":"Trong cung"}));
  if(typeof elderTabRows==="function")L.push(...elderTabRows());/* Thái hậu's household (jstaff: Giáo tập ma ma, Chưởng sự cô cô …) */
  let first=true;liveRivals(true).forEach(v=>(v.staff||[]).forEach(s=>{L.push({t:"other",s,v,f:pServ(s),name:shortN(s.name),sep:first?"Cung khác":""});first=false}));
- const sinfo=s=>[tuoi(s.age),`${srkName(s)} · ${strShow(s)}`,typeof bondBars==="function"?bondBars(s):`Thiện cảm <b>${s.loyal}</b>`,typeof tinOf==="function"&&tinOf(s)<40?`<span class="past">Chưa đủ tin để sai việc kín (cần Chủ tin 40)</span>`:""].filter(Boolean);
+ const sinfo=s=>[tuoi(s.age),`${srkName(s)} · ${strShow(s)}`,typeof bondBars==="function"?bondBars(s):`Thiện cảm <b>${s.loyal}</b>`,typeof tinOf==="function"&&typeof bondOwner==="function"&&bondOwner(s)===S&&tinOf(s)<BAL.tinLv.send?`<span class="past">Chưa đủ tin để sai việc kín (cần Chủ tin ${BAL.tinLv.send})</span>`:""/* r6 N6: her trust only — never on another master's servant */].filter(Boolean);
  const schip=s=>[s.lover&&(S.knowDT||[]).includes(s.sid)?chip("đối thực","hot"):"",s.spyFor==="me"?chip("tai mắt của ngươi","ok"):""];
  const t2=whyTime(2);
  const mk=i=>{const e=L[i];

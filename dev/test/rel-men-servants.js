@@ -12,6 +12,8 @@
     U2 X = a servant of hers → Thiện cảm / Oán / Lòng toward Ta
     U3 the man card (Hậu cung › Nam nhân) prints the same numbers as Ân oán (one model, law 11)
     C1 co-op: his oán toward her is hers (MEN_P), like af
+    F5 (r6) an NPC consort's servant → its mistress = s.loyal (one store for every master), aff reads / affAdd writes it
+    N6 (r6) servant card bars name who → whom: hers «Thiện cảm · Ta tin cậy», another master's «Thiện cảm với <chủ> · <chủ> tin cậy»
     E  no page errors */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -87,6 +89,18 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     return JSON.stringify({kit:t,custom:/Hắn quý ngươi|Ngươi quý hắn|Hắn oán ngươi|Ngươi oán hắn/.test(own),loyalAsAff:false})});
    const j=JSON.parse(u3);const nums=(j.kit.match(/-?\d+/g)||[]).map(Number);
    ok("U3 man card: kit block carries the SAME numbers (aff both ways, oán), no custom lines, no second number",!j.custom&&j.kit.includes("Thiện cảm")&&nums.includes(r.rms.mAff[0])&&nums.includes(r.rms.mAff[1])&&nums.includes(r.rms.mOan[0]),u3)}
+  /* r6 F5 (law 4 one core, OD:L352): a servant → ITS master is ONE store (s.loyal) for EVERY master — hers and an NPC consort's; aff reads it, affAdd writes it */
+  const f5=await p.evaluate(()=>{const bad=[];let n=0;for(const o of relMSAll()){const m=typeof relOwner==="function"?relOwner(o):null;if(!m||m===S)continue;n++;
+    if(Math.round(aff(o,m))!==Math.round(o.loyal))bad.push(o.name+" aff "+aff(o,m)+" != loyal "+o.loyal);const l0=o.loyal,a0=JSON.stringify(o.af||{});affAdd(o,m,3);
+    if(o.loyal===l0&&l0<100)bad.push(o.name+" affAdd did not move loyal");/* +3 goes through the shared modifiers (mood, trust…), as for everyone */if(JSON.stringify(o.af||{})!==a0)bad.push(o.name+" affAdd wrote s.af");o.loyal=l0}return{n,bad}});
+  ok(`F5 ${wh} ${f5.n} NPC consorts' servants: Thiện cảm with the mistress = loyal (one store)`,f5.n>0&&!f5.bad.length,f5.bad.slice(0,3).join(" | "));
+  /* r6 N6 (VANPHONG l.55/l.61, law 11): every servant card's two bars say who → whom — her own: «Thiện cảm» · «Ta tin cậy»; another master's: «Thiện cảm với <chủ>» · «<chủ> tin cậy» (after the j84 fixer = on screen) */
+  const n6=await p.evaluate(()=>{const bad=[];let own=0,oth=0;const lab=s=>{const d=document.createElement("div");d.innerHTML=bondBars(s);return [...d.querySelectorAll(".sbl")].map(x=>VP.fix(x.textContent))};
+    const L=[S.maid].concat(S.staff||[]).concat((S.thO&&S.thO.staff)||[]);liveRivals(true).forEach(v=>{if(v.maid)L.push(v.maid);(v.staff||[]).forEach(s=>L.push(s))});
+    for(const s of L){if(!s||typeof s.loyal!=="number")continue;const m=bondOwner(s),b=lab(s);if(m===S){own++;if(b[0]!=="Thiện cảm"||b[1]!=="Ta tin cậy")bad.push("own "+s.name+": "+b.join(" / "))}
+     else if(m){oth++;const w=bondWho(m);if(b[0]!=="Thiện cảm với "+w||b[1]!==w+" tin cậy"||b.some(x=>/^Ta |Chủ tin/.test(x)))bad.push("other "+s.name+": "+b.join(" / "))}}
+    tab="staff";render();const t=(document.getElementById("panel")||{}).innerText||"";return{own,oth,bad,screen:/cung /.test(t)}});
+  ok(`N6 ${wh} servant cards say who → whom (${n6.own} hers · ${n6.oth} other masters')`,n6.own>0&&n6.oth>0&&!n6.bad.length,n6.bad.slice(0,3).join(" | "));
   ok(`E ${wh} no page errors`,!errs.length,errs.join(" | ").slice(0,300));
   first=false;await ctx.close()}
  await b.close();console.log(res.join("\n"));console.log(`rel-men-servants: ${fail?"FAIL":"PASS"} (${res.length-fail}/${res.length})`);process.exit(fail?1:0)})();

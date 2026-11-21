@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"04210f7a+","t":"2026-11-21T19:42Z","c":"rel-men-servants r5: report gates","b":"6dd25c1a024c","h":[{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"},{"s":"c37b7713+","t":"2026-11-21T18:42Z","c":"Hàng quan hệ: một chữ thống nhất"},{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"}]};
+window.CTM_BI={"s":"fafbf719+","t":"2026-11-21T19:48Z","c":"rel-men-servants r5 review: opt-greyed expects «thiện cảm … chưa tới» (renamed word); one-core-text loy cut scan also reads «thiện cảm»","b":"588b3e898ab4","h":[{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"},{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"},{"s":"c37b7713+","t":"2026-11-21T18:42Z","c":"Hàng quan hệ: một chữ thống nhất"},{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3592,8 +3592,12 @@ function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)
 function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}
 function relHk(h,t){if(t===S)return"me";if(relRv(t))return relMan(h)||relCourt(h)?t.id:"r"+t.id;if(t.sid!=null&&!relMan(h)&&!relCourt(h))return t.sid;return relKey(t)}
 function relMap(h,f){if(!h[f]||typeof h[f]!=="object")h[f]={};return h[f]}
-/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng": HER servant toward HER (S.maid / household) is ONE store, s.loyal (j10) — the number the game already writes. An NPC consort's servant stays on s.af: reading loyal there shifts the NPC world (role-parity maid:P-ONLY:poison, seeded scan) and the player never sees a second number for that pair */
-function relMaster(x,y){return relMS(x)&&!relMan(x)&&typeof x.loyal==="number"&&!relCourt(x)&&y===S&&(x===S.maid||(typeof ownerOf==="function"&&ownerOf(x)===S))}
+/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng" + law 4 one core (r6 F5, Fix A): a servant toward ITS master is ONE store, s.loyal (j10) — the
+   number the game already writes — for EVERY master: her (S.maid / her household) and an NPC consort (her maid v.maid / her household, ownerOf).
+   relOwner = that master (court officials and men have none). Servant road: S is the maid there, her own bond stays S.srv.af (isSrv guard below). */
+function relOwner(x){if(!relMS(x)||relMan(x)||relCourt(x)||typeof x.loyal!=="number")return null;if(S&&x===S.maid)return S;try{const o=typeof ownerOf==="function"?ownerOf(x):null;if(o)return o}catch(e){}
+ return (typeof rivals!=="undefined"&&rivals||[]).find(v=>v&&v.maid===x)||null}
+function relMaster(x,y){return !!y&&relOwner(x)===y}
 function msAff(x,y){if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv()))return +x.loyal||0;if(relMS(x)){if(y===S){if(relMan(x))return +x.af||0;if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv())return S.srv.af[x.sid]||0;return x.af&&typeof x.af==="object"?(+x.af.me||0):(+x.af||0)}
   const M=relMan(x)?x.afw:x.af;return M&&typeof M==="object"?(+M[relHk(x,y)]||0):0}
  const M=x===S?S.rl:x.rl;return (M&&M[relKey(y)])||0}
@@ -4486,7 +4490,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
  Object.entries(S.court).forEach(([k,c],j)=>L.push({t:"court",k,c,f:k==="ty"?pDoc():{src:courtSrc(k,c),ini:"Hoạn",col:"#8a8aa0"},name:shortN(c.name),sep:j?"":"Trong cung"}));
  if(typeof elderTabRows==="function")L.push(...elderTabRows());/* Thái hậu's household (jstaff: Giáo tập ma ma, Chưởng sự cô cô …) */
  let first=true;liveRivals(true).forEach(v=>(v.staff||[]).forEach(s=>{L.push({t:"other",s,v,f:pServ(s),name:shortN(s.name),sep:first?"Cung khác":""});first=false}));
- const sinfo=s=>[tuoi(s.age),`${srkName(s)} · ${strShow(s)}`,typeof bondBars==="function"?bondBars(s):`Thiện cảm <b>${s.loyal}</b>`,typeof tinOf==="function"&&tinOf(s)<40?`<span class="past">Chưa đủ tin để sai việc kín (cần Chủ tin 40)</span>`:""].filter(Boolean);
+ const sinfo=s=>[tuoi(s.age),`${srkName(s)} · ${strShow(s)}`,typeof bondBars==="function"?bondBars(s):`Thiện cảm <b>${s.loyal}</b>`,typeof tinOf==="function"&&typeof bondOwner==="function"&&bondOwner(s)===S&&tinOf(s)<BAL.tinLv.send?`<span class="past">Chưa đủ tin để sai việc kín (cần Chủ tin ${BAL.tinLv.send})</span>`:""/* r6 N6: her trust only — never on another master's servant */].filter(Boolean);
  const schip=s=>[s.lover&&(S.knowDT||[]).includes(s.sid)?chip("đối thực","hot"):"",s.spyFor==="me"?chip("tai mắt của ngươi","ok"):""];
  const t2=whyTime(2);
  const mk=i=>{const e=L[i];
@@ -6418,14 +6422,14 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
 /* part 2 (review/one-core-dup2):
    tinhLv  = a man's tình ý for the player (j22 / j42 / j24 / jmen): known 10 (shows), warm 30 (khăn tay, rumour), prince 40 (vương gia
              asks for her), close 50 (meets alone, helps), ally 60 (vương gia ally), love 70 (word "si mê"); tinhW words on 10/30/50/70.
-   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green; watch = the Chủ tin a servant needs to keep watch
+   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green; send = the Chủ tin a servant needs before her mistress sends her on a secret errand (jtin bestSent, j15 card line); watch = the Chủ tin a servant needs to keep watch
              at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
    rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
    oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
-Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60},rareLv:[6,9],
+Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
  sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});BAL.age.adult=18;
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
@@ -6930,9 +6934,17 @@ document.addEventListener("click",e=>{const k=e.target.closest("[data-kinfo]");i
 function tinOf(s){if(!s)return 0;if(s.tin==null)s.tin=cl(Math.round(45+((s.loyal||50)-50)/4),0,100);return s.tin}
 function tinAdd(s,n){if(!s)return;s.tin=cl(Math.round(tinOf(s)+n),0,100)}
 function sbar(lbl,v,cls){v=Math.round(v||0);return `<span class="sbar ${cls||""}"><span class="sbl">${lbl}</span><span class="sbt"><u style="width:${cl(v,0,100)}%"></u></span><b>${v}</b></span>`}
-function bondBars(s){return sbar("Thiện cảm",s.loyal,"lo")+sbar("Chủ tin",tinOf(s),"ti")}
-/* entrusting: a scheme order needs Chủ tin 40, guarding a tryst 60 (same for every mistress) */
-(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+nq(s,"sharp",BAL.net.k.spySharp);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(BAL.mind.pick.tin.floor,sc(s)),BAL.mind.pick.tin.pow)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
+/* r6 N6 (VANPHONG l.55 + l.61 "bất kỳ «thiện cảm» nào cũng phải nói của ai với ai", law 11): the two bars name WHO → WHOM. Her servant: «Thiện cảm» (to her) ·
+   «Ta tin cậy»; another master's servant (an NPC consort's, Thái hậu's household): «Thiện cảm với <chủ>» · «<chủ> tin cậy» — never «Ta» for a trust that is not hers.
+   Servant road keeps «Chủ tin» (VANPHONG: chế độ cung nữ). bondOwner = j9 relOwner (the ONE servant → master link), Thái hậu's household = S.thO. */
+function bondOwner(s){try{const o=typeof relOwner==="function"?relOwner(s):null;if(o)return o}catch(e){}if(S&&s===S.maid)return S;if(S&&S.thO&&(S.thO.staff||[]).includes(s))return S.thO;return null}
+function bondWho(m){if(!m)return null;if(S&&m===S.thO)return "Thái hậu";return typeof shortN==="function"?shortN(m.name):m.name}
+function bondBars(s){const tb=s.sid!=null||typeof s.tin==="number";/* a trust bar only for a servant who holds one (jaudit rule) */
+ if(typeof isSrv==="function"&&S&&isSrv())return sbar("Thiện cảm",s.loyal,"lo")+(tb?sbar("Chủ tin",tinOf(s),"ti"):"");
+ const m=bondOwner(s),K=typeof KIT_REL==="object"?KIT_REL:{};if(!m||m===S)return sbar(K.srvThem||"Thiện cảm",s.loyal,"lo")+(tb?sbar(K.srvTrust||"Ta tin cậy",tinOf(s),"ti"):"");
+ const n=bondWho(m);return sbar(`Thiện cảm với ${n}`,s.loyal,"lo")+(tb?sbar(`${n} tin cậy`,tinOf(s),"ti"):"")}
+/* entrusting: a scheme order needs Chủ tin BAL.tinLv.send, guarding a tryst BAL.tinLv.watch (same for every mistress) */
+(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=BAL.tinLv.send);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+nq(s,"sharp",BAL.net.k.spySharp);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(BAL.mind.pick.tin.floor,sc(s)),BAL.mind.pick.tin.pow)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
 /* p = the woman whose watcher this is (her by default; an NPC consort: j22 lộRisk(k,p) / manTryst, jchat eavesdrop partner) — keeps j22's watcher(p) signature (was: always S) */
 watcher=function(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close&&tinOf(x)>=BAL.tinLv.watch).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close&&tinOf(p.maid)>=BAL.tinLv.watch)return{name:p.maid.name,loyal:p.maid.loyal};return null};
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
@@ -51775,7 +51787,8 @@ function aaDeathTxt(){/* law4-typed: prints the BAL keys deathSentence (j8) appl
 Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"Đang là người chạy việc"});
 /* the bars on a servant card: her attitude = "Thiện cảm" (was Lòng), her trust in him = "Ta tin cậy" (was Chủ tin); the runner is
    marked on HIS card, not on the maid's */
-if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
+/* r6 N6: the bars themselves come from jtin bondBars (who → whom: hers «Thiện cảm · Ta tin cậy» = KIT_REL.srvThem / srvTrust, another master's «Thiện cảm với <chủ> · <chủ> tin cậy»); this layer only adds her runner note */
+if(typeof bondBars==="function"){const bb0=bondBars;bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return bb0(s)+r}}
 /* the runner is household info (owner 10:10Z): not a line of the maid's card but "Người chạy việc của cung: X" with the household block; jhc's line (tap = meaning, "Đổi ›") is kept */
 (function(){const r0=window.runnerLine;window.runnerHouse=function(){try{return typeof r0==="function"?String(r0()).replace("Người chạy việc:","Người chạy việc của cung:"):""}catch(e){return""}};window.runnerLine=function(){return""}})();
 /* names: unique, never "Thúy 2" — any old numbered name is renamed once (from the one name core, jname.js) */
@@ -91709,7 +91722,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6dd25c1a024c";window.CTM_BUILD=BUILD;
+const BUILD="588b3e898ab4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
