@@ -55,7 +55,7 @@ function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi
    caught up both carried the same change (a number added twice on the host). */
 E.bs=null;E.pn=0;E.last="";E.curP=curP;E.packs=packs;
 E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n|0)):0;const done=!E.last||!!(o&&o.dr&&o.dr.id===E.last);
- if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
+ if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&(o.w==null||o.w===(COOP.state.week||0))/* r1: never a view of an older week */&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
 COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
@@ -70,7 +70,12 @@ E.BAD=BAD;
    resent diff starts from what he really holds, nothing doubled) and, at the next view, if she still waits on that same buổi, her ready is
    sent again (once per loss; the host's ready is idempotent; a buổi he already stepped arrives in that view and nothing is resent). */
 const EID=[];let rr=0;
-COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null});
+COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null;
+ /* review coop-thin-g r1 (seat desync, g4s bạc 7 vs 67, TRIP week-36 Sức 83 vs 77): after the week her S IS the room's new C (fromCanon), which
+    is exactly what the host rebuilds her store from. Her diff baseline is that S, never the last VIEW: the view held at this moment is the
+    host's PRE-week copy, and a baseline taken from it made her first erd carry the week's own changes (his acts on her stand-in as deltas,
+    the merge's moves) as if they were hers: the host added them a second time to his store, her phone kept the single count. */
+ try{if(!host()&&on()&&S&&!S.dead){E.bs=curP();E.pn=(S.thpn|0);E.last=""}}catch(e){console.error("thin E week base",e)}});
 COOP.on("thin",()=>{if(rr&&!host())setTimeout(()=>{try{reNet()}catch(e){console.error(e)}},0)});
 COOP.on("error",m=>{try{if(host()||!m||m.code!=="nohost"||!m.id||!EID.includes(m.id))return;E.bs=null;E.last="";if(E.mine)rr=1;lg(["nohost",m.id])}catch(e){}});
 function reNet(){if(!rr)return;if(host()||!E.mine||E.mine!==bk()){rr=0;return}if(!on()||!TH.view||!S||S.dead||Q.length||S.mg||CW.inLife)return;/* the room level comes back after the reconnect snapshot ("thin"): wait for it */

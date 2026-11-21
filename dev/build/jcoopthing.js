@@ -50,6 +50,8 @@ try{const P=Storage.prototype,si=P.setItem,ri=P.removeItem;
    her phone's own render-time check keeps her collection and her device ledger */
 if(typeof colCheck==="function"){const f=colCheck;colCheck=function(){if(CW.on&&CW.ctx&&host()){G.stat.colSkip++;return}return f.apply(this,arguments)}}
 
+/* r1: every part-D patch of hers, by number (the last 60): one made after his `end` is put on the new C at the week (CW.gEmp) */
+const PREC={};{const po=D.patchOut;D.patchOut=function(seat,p){const r=po.apply(this,arguments);try{if(on()&&host()){const L=PREC[seat]=PREC[seat]||[];L.push({n:D.N[seat],p});if(L.length>60)L.shift()}}catch(e){}return r}}
 /* ---------- her week end on the host ---------- */
 let hw=false;/* inside her week end (her step's E wrappers: no NPC acts again, her places = his) */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(hw&&CW.ctx)return "";return f.apply(this,arguments)}}
@@ -93,11 +95,20 @@ CW.gHold=function(){if(!on()||!host())return false;const k=wkR();if(!G.done[k])r
 /* jcoopworld toCanon (host): P.b = her store as a blob (myBlob form: personal keys, empKnown / cmP / menP, no heir / thq) */
 CW.gBlob=function(){if(!on()||!host())return null;const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}if(!st||!st.S)return null;
  const s=J(st.S);for(const k of X.W_KEYS)delete s[k];delete s.heir;delete s.thq;
+ /* r1: the part-D patches up to here are in this blob: her phone, rebuilt from it at the week, applies only the later ones (n > thpn) */
+ s.thpn=(D.N&&D.N[seat])||0;
  const p=st.pers||{};s.empKnown=(p.kn&&p.kn[0])||{};s.cmP=J(p.cm||{});s.menP=J(p.men||{});G.stat.blob++;
  return {pid:902,ok:st.ok||(s.origin&&s.origin.k)||"tt",name:s.name,rank:s.rank,dead:!!s.dead,srv:!!(s.srv&&!s.srv.risen),life:st.life||0,S:s}};
 /* jcoopworld onWeek (host, before his own reign ending): her reign ending, her seat-cap check, her places = his. The store is rebuilt from the
    new C first; what this run changes is written into CW.base.P.b too (a later rebuild of the store keeps it) */
 CW.gEmp=function(){if(!on()||!host()||CW.ctx||!CW.base||!CW.base.P||!CW.base.P[other()])return;const seat=other();
+ /* r1 (seat desync): a part-D patch made AFTER his `end` (a late run in her context between his end and the server's week) is not in the new
+    C; her phone applies it on top of C (n > the blob's thpn), so the host puts it on the C copy he rebuilds her store from, in the same order */
+ try{const s0=CW.base.P[seat].S;if(s0&&!(TH.held&&TH.held(seat))){const n0=s0.thpn|0;const R=(PREC[seat]||[]).filter(x=>x.n>n0);let k=0;
+  for(const x of R){TH.pApply(s0,x.p);s0.thpn=x.n;k++}
+  /* one she already acked before the week was applied on her OLD S (fromCanon replaced it): it goes back into the queue so her phone applies it on C */
+  const L=D.PQ[seat]=D.PQ[seat]||[];const have=new Set(L.map(x=>x.n));for(const x of R)if(!have.has(x.n))L.push({n:x.n,p:x.p});L.sort((a,b)=>a.n-b.n);
+  if(k){G.stat.late=(G.stat.late|0)+k;lg(["late-patch",wkR(),n0,k])}}}catch(e){console.error("thin G late patch",e)}
  try{TH.seatDrop(seat)}catch(e){}let st=null;try{st=TH.seatOf(seat)}catch(e){}if(!st||(TH.held&&TH.held(seat)))return;
  const Wh=whereOut(S);let ch=false;
  TH.withSeat(seat,()=>{if(!S||S.dead)return;const snap=E.wSnap();CW.gWk=true;const m0=CW.mine;
