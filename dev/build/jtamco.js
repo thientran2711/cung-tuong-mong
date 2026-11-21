@@ -29,10 +29,12 @@ econRoadWrapF();setTimeout(econRoadWrapF,0);
 /* her choice: a priced scheme from doAct opens the road card first */
 let ECON_ROADGO=0;
 PEND.roadpick=p=>{const v=RV(p.v),k=p.k,A0=ACT[k];if(!v||!A0)return null;const c=econRoadCost(k,S,v),o0=actOdds(S,v,k),R=BAL.tcroad;
- const up=oddsCl(o0+R.up),pr=c.pr>0?{bac:-c.pr}:{},go=road=>()=>econRoadGo(rivals.indexOf(v),k,road,road?up:o0);
- const O=[{n:"Làm như thường",fx:{},p:oddsCl(o0),ton:pr,x:`thành: giá mưu kế như cũ, không hao gì thêm`,go:go("")}];
- O.push({n:"Hao tâm cơ, tự mình sắp đặt",fx:{},p:up,off:!econRoadOk(k,S,v,"tc"),ton:Object.assign({tamco:-c.tc},pr),x:`thành: tự tay sắp đặt từng bước, chắc tay hơn`,go:go("tc")});/* kit Tốn row (KIT §13.16 ton field): a price paid elsewhere — Tâm cơ is paid in econRoadGo, the scheme price by the act */
- O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn`,go:go("hire")});
+ const up=oddsCl(o0+R.up),win=typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k),pr=c.pr>0&&!win?{bac:-c.pr}:{},
+  /* pay-on-success schemes (ECON_WIN: the price is paid only when it works): the price sits on «thành», not in Tốn; «hỏng» says what a failure keeps */
+  wT=win&&c.pr>0?`, thành mới trả ${c.pr} bạc`:"",wH=hire=>win?` · hỏng: ${hire?"chỉ mất tiền thuê, ":""}${ECON_WIN_FAIL}${hire?" giá mưu kế":""}`:"",go=road=>()=>econRoadGo(rivals.indexOf(v),k,road,road?up:o0);
+ const O=[{n:"Làm như thường",fx:{},p:oddsCl(o0),ton:pr,x:`thành: giá mưu kế như cũ, không hao gì thêm${wT}${wH(0)}`,go:go("")}];
+ O.push({n:"Hao tâm cơ, tự mình sắp đặt",fx:{},p:up,off:!econRoadOk(k,S,v,"tc"),ton:Object.assign({tamco:-c.tc},pr),x:`thành: tự tay sắp đặt từng bước, chắc tay hơn${wT}${wH(0)}`,go:go("tc")});/* kit Tốn row (KIT §13.16 ton field): a price paid elsewhere — Tâm cơ is paid in econRoadGo, the scheme price by the act */
+ O.push({n:"Thuê người làm thay",fx:{},p:up,off:!econRoadOk(k,S,v,"hire"),ton:{bac:-(win?c.hire:c.pr+c.hire)},x:`thành: người được thuê làm thay, chắc tay hơn${wT}${wH(1)}`,go:go("hire")});
  O.push({n:"Thôi",fx:{}});
  return{who:pv(v),t:`<p>${A0.n} — ${v.name}: tự tay làm, hao tâm cơ mà sắp đặt, hay bỏ bạc thuê người làm thay?</p>`,o:O}};
 /* her road travels with her act as ECON_HER {k, t: rival id, road, fz: the odds she saw}; runAct (below) pays it and rolls the odds she saw.

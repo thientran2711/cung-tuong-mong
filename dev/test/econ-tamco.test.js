@@ -24,18 +24,22 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    if(!pick)return Object.assign(out,{nopick:1});
    out.pick=[pick.k,pick.v.name];Q.length=0;doAct(pick.i,pick.k);
    out.q=Q.length;const m=Q[0]||{};out.opts=(m.opts||[]).map(o=>({n:o.n,fx:o.fx,p:o.p,off:!!o.off,x:o.x,ton:o.ton,line:(()=>{if(typeof dilLine!=="function")return"";const d=document.createElement("div");d.innerHTML=dilLine(o);const r=d.querySelector(".kr-ton .krv");return r?"tốn: "+r.textContent.replace(/\s+/g," ").replace(/·/g,","):d.textContent})()}));
-   out.cost=econRoadCost(pick.k,S,pick.v);out.o0=actOdds(S,pick.v,pick.k);return out});
+   out.cost=econRoadCost(pick.k,S,pick.v);out.win=ECON_WIN.includes(pick.k);out.o0=actOdds(S,pick.v,pick.k);return out});
   if(r.nopick){F(sz,"no priced scheme available to test");}
   if(r.eq&&r.eq.length)F(sz,`equal value broken: ${JSON.stringify(r.eq.slice(0,3))}`);
   if(first)console.log("priced schemes:",r.keys.join(" "),"| pick",JSON.stringify(r.pick),"| cost",JSON.stringify(r.cost),"| o0",r.o0);
   if(r.opts){if(r.opts.length!==4)F(sz,`road card has ${r.opts.length} options`);const [o1,o2,o3]=r.opts;
    if(o2&&o3&&o2.p!==o3.p)F(sz,"tc and hire roads show different odds");if(o1&&o2&&!(o2.p>o1.p||o2.p>=100))F(sz,"road gives no better odds");
-   if(o2&&!new RegExp("tốn:[^·]*Tâm cơ -"+r.cost.tc).test(o2.line))F(sz,"tc road: kit line has no «tốn: Tâm cơ -tc» ("+(o2&&o2.line)+")");for(const o of [o1,o2])if(o&&r.cost.pr>0&&!new RegExp("tốn:[^·]*Bạc -"+r.cost.pr).test(o.line))F(sz,o.n+": kit line has no scheme price «tốn: Bạc -"+r.cost.pr+"» ("+o.line+")");if(o2&&/tốn:/.test(o2.x||""))F(sz,"tc road still types its cost in x (must use the kit ton field)");if(o3&&!(o3.ton&&o3.ton.bac===-(r.cost.pr+r.cost.hire)))F(sz,"hire road: Tốn must be price + hire");
+   if(o2&&!new RegExp("tốn:[^·]*Tâm cơ -"+r.cost.tc).test(o2.line))F(sz,"tc road: kit line has no «tốn: Tâm cơ -tc» ("+(o2&&o2.line)+")");for(const o of [o1,o2])if(o&&r.cost.pr>0&&!r.win&&!new RegExp("tốn:[^·]*Bạc -"+r.cost.pr).test(o.line))F(sz,o.n+": kit line has no scheme price «tốn: Bạc -"+r.cost.pr+"» ("+o.line+")");if(o2&&/tốn:/.test(o2.x||""))F(sz,"tc road still types its cost in x (must use the kit ton field)");if(r.win)for(const o of [o1,o2,o3])if(o&&!(/hỏng:[^·]*không mất bạc/.test((o.x||"").replace(/<[^>]+>/g,""))&&new RegExp("thành mới trả "+r.cost.pr+" bạc").test((o.x||"").replace(/<[^>]+>/g,""))&&!(o.ton&&o.ton.bac===-r.cost.pr)))F(sz,o.n+": pay-on-success scheme: card must show the price on «thành» and «hỏng: … không mất bạc», not in Tốn ("+o.x+")");
+   if(o3&&!(o3.ton&&o3.ton.bac===-(r.win?r.cost.hire:r.cost.pr+r.cost.hire)))F(sz,"hire road: Tốn must be price + hire");
    if(first)console.log(JSON.stringify(r.opts));}
   for(let i=0;i<120;i++){if(!(await p.evaluate(()=>/tranh người trong kiếp/i.test(document.body.innerText))))break;await sleep(1000)}
   await p.evaluate(()=>{try{KMQ.length=0;document.querySelectorAll('.kmov,#kmrew').forEach(o=>o.remove());kmBusy=false;showModal()}catch(e){}});await sleep(800);
+  for(let w=0;w<20&&!(await p.evaluate(()=>!!document.querySelector('#modal:not([hidden]) .kr-ton')));w++){await p.evaluate(()=>{try{showModal()}catch(e){}});await sleep(500)}
+  if(r.win){const tx=await p.evaluate(()=>(document.querySelector('#modal:not([hidden])')||{innerText:''}).innerText.replace(/\s+/g,' '));const n=(tx.match(new RegExp('thành mới trả '+r.cost.pr+' bạc','g'))||[]).length;
+   if(n<3||!/không mất bạc/.test(tx))F(sz,'rendered card (pay-on-success): each road must show «thành mới trả '+r.cost.pr+' bạc» + «không mất bạc» (found '+n+')');}
   {const rows=await p.evaluate(()=>[...document.querySelectorAll('#modal:not([hidden]) .kr-ton .krv')].map(e=>e.innerText.replace(/\s+/g,' ').trim()));if(first)console.log(sz,'rendered Tốn rows',JSON.stringify(rows));
-   if(r.cost&&r.cost.pr>0&&rows.filter(s=>new RegExp('Bạc\\s*[−-]\\s*'+r.cost.pr+'(?!\\d)').test(s)).length<2||!rows.some(s=>new RegExp('Bạc\\s*[−-]\\s*'+(r.cost.pr+r.cost.hire)+'(?!\\d)').test(s)))F(sz,'rendered card: scheme price not in 3 Tốn rows '+JSON.stringify(rows));
+   if(!r.win&&(r.cost&&r.cost.pr>0&&!r.win&&rows.filter(s=>new RegExp('Bạc\\s*[−-]\\s*'+r.cost.pr+'(?!\\d)').test(s)).length<2||!rows.some(s=>new RegExp('Bạc\\s*[−-]\\s*'+(r.cost.pr+r.cost.hire)+'(?!\\d)').test(s))))F(sz,'rendered card: scheme price not in 3 Tốn rows '+JSON.stringify(rows));
    if(r.cost&&!rows.some(s=>new RegExp('Tâm cơ\\s*[−-]\\s*'+r.cost.tc).test(s)))F(sz,'rendered card: no Tâm cơ cost in a Tốn row '+JSON.stringify(rows));}
   const ui=await p.evaluate(()=>{const M=document.getElementById('modal');const d=M&&M.querySelector('.dlg');if(!M||M.hidden||!d)return{shown:false};const rc=d.getBoundingClientRect();
    return{shown:true,txt:M.textContent,inView:rc.left>=-1&&rc.right<=innerWidth+1&&rc.top>=-1&&rc.bottom<=innerHeight+1,pageOvf:document.documentElement.scrollWidth>innerWidth+1,
@@ -68,6 +72,18 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    if(!H||H.econ!=='hire'||H.dBacAtSend!==0||H.pays.length!==1||H.pays[0].dBac!==-H.c.hire||H.dBacLand>-H.c.hire||H.dBacLand<-(H.c.hire+H.c.pr))F(sz,'sent deed (hire road): road not carried / not paid at landing '+JSON.stringify(H));
    if((T&&T.her)||(H&&H.her))F(sz,'ECON_HER left set after a deed');}
   else if(first)console.log('NOTE ptime deed check skipped:',dd&&dd.skip);
+  /* 3c. pay-on-success schemes (ECON_WIN): forced fail + success per road; charged = the card (Tốn either way, price only on «thành») */
+  const wv=await p.evaluate(()=>{const ks=ECON_WIN.filter(k=>ACT[k]&&ACT[k].__c0);let k=null,v=null;S.bac=2000;S.tamco=60;
+   for(const kk of ks){v=liveRivals(true).find(x=>{try{return ACT[kk].ok(S,x)}catch(e){return false}});if(v){k=kk;break}}if(!v)return {skip:'no pay-on-success scheme open'};
+   const pH=window.ptHarmSend;window.ptHarmSend=null;const out=[];try{for(const road of ['','tc','hire'])for(const fz of [0,100]){S.bac=2000;S.tamco=60;v.block=0;try{used=0}catch(e){}S.confined=0;S.mg=null;Q.length=0;
+    const c=econRoadCost(k,S,v),i=rivals.indexOf(v);let seen=null;const r0=runAct;runAct=function(){seen=ACTFZ?ACTFZ.o:null;return r0.apply(this,arguments)};
+    const b0=S.bac,t0=S.tamco;let ok=null;try{econRoadGo(i,k,road,fz);ok=window.__lastOk}finally{runAct=r0}
+    const want={dTc:road==='tc'?-c.tc:0,dBac:-(road==='hire'?c.hire:0)-(fz?c.pr:0),pr:c.pr};out.push({road,fz,seen,ok,dTc:S.tamco-t0,dBac:S.bac-b0,want})}}finally{window.ptHarmSend=pH}
+   return {k,v:v.name,out}});
+  if(first)console.log('pay-on-success',JSON.stringify(wv));
+  if(wv&&!wv.skip){for(const x of wv.out)if(x.seen===x.fz&&(!(x.fz?[x.want.dBac,x.want.dBac+x.want.pr]:[x.want.dBac,x.want.dBac-x.want.pr]).includes(x.dBac)||(x.road==='tc'&&x.dTc>x.want.dTc)))/* bribe: the maid decides (receiver choice, her own odds), not the roll: every outcome is either «thành» (road + price) or «hỏng» (road only) — never anything else */F(sz,`${wv.k} road «${x.road||'plain'}» ${x.fz?'success':'fail'}: charged bạc ${x.dBac} Tâm cơ ${x.dTc}, card says bạc ${x.want.dBac} Tâm cơ ${x.want.dTc}`);
+   if(!wv.out.some(x=>x.seen===x.fz))F(sz,'pay-on-success: forced odds never reached the roll '+JSON.stringify(wv.out));}
+  else if(first)console.log('NOTE pay-on-success check skipped:',wv&&wv.skip);
   /* 4. NPC roads (law 1): same price, same bonus */
   const npc=await p.evaluate(()=>{const R=BAL.tcroad;const L=liveRivals(true);const res={n:0,tc:0,hire:0,plain:0,bad:[]};
    for(let i=0;i<300;i++){const a=L[i%L.length],t=L[(i+1)%L.length];if(a===t||sameHouse(a,t))continue;const k=["rumor","bribe","block","frame"][i%4];if(!ACT[k]||!ACT[k].__c0)continue;
