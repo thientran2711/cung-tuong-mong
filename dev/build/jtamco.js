@@ -53,11 +53,15 @@ window.ECON_HER=null;
 let ECON_PRFZ=null;
 (function(){if(typeof econSchemePrice!=="function")return;const p0=econSchemePrice;econSchemePrice=function(k,a,t){const z=ECON_PRFZ;
  if(z&&a===S&&k===z.k&&t&&t.id===z.t&&z.pr!=null)return z.pr;return p0.apply(this,arguments)}})();
+/* F4: a frozen cost is paid only if she can still pay it NOW (the host's copy of her in co-op, a deed landing weeks later): else the act stops,
+   nothing is charged (the same words as the j19 lock, «Thiếu bạc (cần N)»). The act's own check (ACT.ok) needs bạc ≥ price for every scheme, pay-on-success too */
+function econLack(a,k,t,road,c){if(!a||!c)return"";if(road==="tc"&&(a.tamco||0)<c.tc)return `Thiếu Tâm cơ (cần ${c.tc})`;
+ const need=(road==="hire"?c.hire:0)+(c.pr||0);return (a.bac||0)<need?`Thiếu bạc (cần ${need})`:""}
 function econPrFz(h,fn){const z0=ECON_PRFZ;ECON_PRFZ=h&&h.c?{k:h.k,t:h.t,pr:h.c.pr}:null;try{return fn()}finally{ECON_PRFZ=z0}}
 function econRoadGo(i,k,road,fz,c){const v=rivals[i];window.ECON_HER=v?{k,t:v.id,road:road||"",fz,c:c||null}:null;ECON_ROADGO=1;try{fzRun(fz,k,()=>doAct(i,k))}finally{ECON_ROADGO=0;window.ECON_HER=null}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const h=window.ECON_HER;
  if(!h||a!==S||!t||t.id!==h.t||k!==h.k||!ACT[k]||!ACT[k].__c0)return r0.apply(this,arguments);window.ECON_HER=null;
- const A=arguments,run=()=>econPrFz(h,()=>r0.apply(this,A));econRoadPay(S,k,t,h.road,h.c);/* tc: Tâm cơ · hire: the hired hand (the scheme price is the act's own) */
+ const A=arguments,run=()=>econPrFz(h,()=>r0.apply(this,A));const lack=econLack(S,k,t,h.road,h.c||econRoadCost(k,S,t));if(lack)return `${lack}: ${ACT[k].n} không thành, chưa tốn gì. `;econRoadPay(S,k,t,h.road,h.c);/* tc: Tâm cơ · hire: the hired hand (the scheme price is the act's own) */
  return ACTFZ||h.fz==null?run():fzRun(h.fz,k,run)}})();
 /* parallel time (jptime): a scheme SENT with a servant (ptHarmSend, the spy deed…) lands later. The deed sent while her road is pending
    carries it (a.econ) and pays it when it lands (ptLand), before the deed's own run; the odds she saw are the deed's fz. Co-op: the landing
@@ -65,7 +69,8 @@ function econRoadGo(i,k,road,fz,c){const v=rivals[i];window.ECON_HER=v?{k,t:v.id
 setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")return;
  const s0=ptSend;ptSend=function(o){const h=window.ECON_HER,a=s0.apply(this,arguments);
   try{if(a&&h&&o&&o.tgt==="v"+h.t&&(!o.a||o.a.k==null||o.a.k===h.k)){a.econ={k:h.k,t:h.t,road:h.road,c:h.c||null};window.ECON_HER=null}}catch(e){}return a};
- const l0=ptLand;ptLand=function(a){let e=null;try{e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k])econRoadPay(S,e.k,t,e.road,e.c)}else e=null}catch(x){console.error("econ road land",x)}
+ const l0=ptLand;ptLand=function(a){let e=null;try{e=a&&a.econ;if(e&&!a.back&&a.by==="me"){delete a.econ;const t=RV(e.t);if(t&&ACT[e.k]){const lack=econLack(S,e.k,t,e.road,e.c||econRoadCost(e.k,S,t));
+   if(lack){a.back=1;try{PT.stat.back++}catch(x){}a.rep={t:a.lbl||"Đã về",ok:false,L:[`${lack}: ${ACT[e.k].n} không thành, chưa tốn gì.`],d:[]};return}/* F4: she cannot pay it any more → the deed comes back undone */econRoadPay(S,e.k,t,e.road,e.c)}}else e=null}catch(x){console.error("econ road land",x)}
   const A=arguments;return econPrFz(e,()=>l0.apply(this,A))}}catch(e){console.error("econ road ptime",e)}},0);
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
   if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}

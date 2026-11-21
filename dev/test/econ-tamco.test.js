@@ -92,6 +92,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     try{econRoadGo(rivals.indexOf(v),k,road,100,c)}finally{ACT[k].__c0.bac=base;window.ptHarmSend=pH}const won=!!S.__won,win=ECON_WIN.includes(k);
     const want={dTc:road==='tc'?-c.tc:0,dBac:-(road==='hire'?c.hire:0)-(!win||won?c.pr:0)};out.push({road,won,dBac:S.bac-b0,dTc:S.tamco-t0,want,moved,shown:c.pr})}return {k,out}});
   if(first)console.log('price moved after the card',JSON.stringify(mv));
+  /* 3e. F4: a frozen road/price she can no longer pay (the host's copy of her, a late deed) stops the act: «Thiếu …», nothing charged, never below 0 */
+  const lk=await p.evaluate(()=>{const k=["spy","bribe","block","poison"].find(k=>ACT[k]&&ACT[k].__c0&&liveRivals(true).some(x=>ACT[k].ok(S,x)&&econRoadRolls(k,S,x)));if(!k)return {skip:1};const out=[];
+   for(const [road,bac,tc] of [['hire',null,60],['','low',60],['tc',2000,0]]){S.bac=2000;S.tamco=60;try{used=0}catch(e){}Q.length=0;const v=liveRivals(true).find(x=>ACT[k].ok(S,x)&&econRoadRolls(k,S,x));const c=econRoadCost(k,S,v);
+    S.bac=bac==null?c.pr+c.hire-1:bac==='low'?c.pr-1:bac;S.tamco=tc;const b0=S.bac,t0=S.tamco;window.ECON_HER={k,t:v.id,road,fz:50,c};let r="";try{r=runAct(S,v,k)}finally{window.ECON_HER=null}
+    out.push({road,r:String(r).slice(0,60),dBac:S.bac-b0,dTc:S.tamco-t0,bac:S.bac,tc:S.tamco})}return {k,out}});
+  if(first)console.log('cannot pay any more',JSON.stringify(lk));
+  if(lk&&!lk.skip)for(const x of lk.out)if(x.dBac||x.dTc||!/Thiếu/.test(x.r)||x.bac<0||x.tc<0)F(sz,`F4 road «${x.road||'plain'}» she cannot pay: must stop «Thiếu …» and charge nothing ${JSON.stringify(x)}`);
   if(mv&&!mv.skip)for(const x of mv.out)if(x.moved===x.shown)F(sz,'3d: the price did not move, the check proves nothing');else if(x.dBac!==x.want.dBac||(x.dTc!==x.want.dTc&&!(x.won&&x.dTc>x.want.dTc)))F(sz,`${mv.k} road «${x.road||'plain'}»: the price moved after the card and the charge followed it (bạc ${x.dBac} Tâm cơ ${x.dTc}, card bạc ${x.want.dBac} Tâm cơ ${x.want.dTc})`);
   if(wv&&!wv.skip){for(const x of wv.out){/* F2: the frozen odds decide (bribe: the maid's take weight = the frozen odds) — 0 never lands; 100 lands unless caught first (block) */const wantB=x.won?x.want.dBac:x.want.dBac+(x.fz?x.want.pr:0);
     if(x.fz===0&&x.won||wv.k==='bribe'&&x.fz===100&&!x.won)F(sz,`${wv.k} road «${x.road||'plain'}»: frozen odds ${x.fz} but landed=${x.won} (the road's odds do not reach the outcome)`);

@@ -66,9 +66,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const ix=road==='tc'?1:2;const shown=m.opts[ix].p;const F=COOPW.thin&&COOPW.thin.F;const s0=F?F.stat.sent:0;const tc0=S.tamco,b0=S.bac;
    window.__card={k,rows};return {k,v:v.name,vid:v.id,c,ix,shown,rows,tc0,b0,me:S.name}},[road,tgt]);
  const choose=async(o,ix)=>{await o.p.evaluate(ix=>{const F=COOPW.thin&&COOPW.thin.F;window.__s0=F?F.stat.sent:0;chooseM(ix)},ix);
-   const host=await o.p.evaluate(()=>COOP.seat==='a');if(!host){await until(o,()=>!COOPW.thin.F.pend,null,20000);await sleep(600)}await sync()};
+   const host=await o.p.evaluate(()=>COOP.seat==='a');if(!host){await until(o,()=>!COOPW.thin.F.pend,null,20000);await sleep(600)}await sync();await nonneg('after the choice on '+o.name)};
  const shot=async(o,n)=>{if(!process.env.SHOTS)return;fs.mkdirSync(process.env.SHOTS,{recursive:true});await o.p.screenshot({path:path.join(process.env.SHOTS,`${n}-${o.name}.jpg`),quality:70,type:'jpeg'})};
- const reset=async()=>{for(const o of [H,G])await o.p.evaluate(()=>{__ep.length=0;__fz.length=0;try{Q.length=0;closeModal()}catch(e){}});await clear(H);await clear(G);await sync()};
+ /* F4: no step may leave bạc or Tâm cơ below 0 (her on the host = the authority, her phone, the host player) */
+ const neg=[];const nonneg=async lab=>{const h=await H.p.evaluate(()=>{const me={bac:S.bac,tamco:S.tamco};let her=null;try{her=COOPW.thin.withSeat('b',()=>({bac:S.bac,tamco:S.tamco}))}catch(e){}return {me,her}});
+  const g=await G.p.evaluate(()=>({bac:S.bac,tamco:S.tamco}));for(const [w,x] of [['host',h.me],['her@host',h.her],['her phone',g]])if(x&&((x.bac||0)<0||(x.tamco||0)<0))neg.push({lab,w,x})};
+ /* F4 (b): pinned staging — her bạc / Tâm cơ set on the HOST (her seat, the authority), so a priced scheme is always open to both roads */
+ const stage=async()=>{await H.p.evaluate(()=>{try{COOPW.thin.withSeat('b',()=>{S.bac=600;S.tamco=40})}catch(e){console.error(e)}});await sync()};
+ const reset=async()=>{for(const o of [H,G])await o.p.evaluate(()=>{__ep.length=0;__fz.length=0;try{Q.length=0;closeModal()}catch(e){}});await clear(H);await clear(G);await sync();await nonneg('reset');await stage();await nonneg('staged')};
  /* (1)+(2)(3) guest roads on an NPC */
  for(const road of ['tc']){await reset();
   const r=await act(G,road,'npc');if(!r||r.why){ok(false,`guest ${road}: staging`,r);continue}
@@ -106,5 +111,6 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const he=await H.p.evaluate(()=>__ep.slice());const p=he[0]||{};
    ok(he.length===1&&p.road==='hire'&&p.isS&&!p.ctx&&p.dBac===-r.c.hire,'host: his hire road is paid once on his phone, his own person',he)}}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
+ ok(neg.length===0,'F4: no step leaves bạc or Tâm cơ below 0 (her on the host, her phone, the host)',neg);
  const bad=res.filter(x=>!x[0]);console.log(bad.length?`ECON-TAMCO-COOP FAIL ${bad.length}/${res.length}`:`ECON-TAMCO-COOP PASS ${res.length}`);
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
