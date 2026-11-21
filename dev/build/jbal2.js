@@ -1757,6 +1757,17 @@ BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share
    when he is put aside) · heirGhen = envy of the others at that day · ward = an orphan (mother dead / lãnh cung) goes to the Hoàng hậu (her or an NPC; none
    → Thái hậu): Danh of the foster mother on the day · succHoa = Mẫu tử ≥ hi / < lo moves the succession "mẹ con" (j99succ hoa) +1 / −1 · hm0 = first value */
 BAL.kid={estr:-3,visit:4,call:3,callK:1,callTal:1,npcSee:60,heirDanh:10,heirGhen:6,ward:{danh:3},succHoa:{hi:75,lo:35},hm0:[55,16]};
+/* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
+   owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
+   Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
+   that may wear it (above = vượt phẩm, the one j8/jwdinv rule); pr = price (luxury = the one luxVal: grade of the painting + pr/10); tg = gift likes.
+   best = the j8 BEST reward lists (the Emperor's rewards, player and NPC alike) that may hand it out; shop = sold by Nội vụ phủ (SHOP_ALL).
+   Earrings are REWARDS only (shop 0, owner Lượt 1054 'được thưởng những cái hoa tai'); shoes are sold too. */
+BAL.wearSlots={
+ ear:{hoatai:{n:"Hoa tai ngọc trắng",pr:40,rk:0,w:{sac:2},tg:["hh","rv"],best:["night","birthday"],shop:0},
+      hoataivang:{n:"Hoa tai vàng khảm trân châu",pr:130,rk:3,w:{sac:3,danh:2},tg:["rv"],best:["contest","promo"],shop:0}},
+ shoe:{giayhoa:{n:"Giày thêu hoa mai",pr:15,rk:0,w:{sac:1},tg:["rv"],best:["night"],shop:1},
+       giaygam:{n:"Giày gấm mẫu đơn đính trân châu",pr:70,rk:2,w:{sac:2,danh:1},tg:["hh","rv"],best:["birthday","promo"],shop:1}}};
 /* CUNG NỮ THÂN CẬN (jtc, owner OD 20/11 ~15:55Z, review/thancan): rk = the maid rungs that may be raised (SRK.maid 1 tam đẳng … 3 nhất đẳng); the trust
    bar is BAL.loy.trust. pick: her lòng +loy, Bạc -bac (her master's thân cận uniform is sewn), every other maid of the house lòng -envy (law 3: gain and loss);
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
