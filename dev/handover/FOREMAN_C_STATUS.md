@@ -1334,3 +1334,4 @@ Next Lượt 1953.
 #27 ~10:05Z: SENT L1967 winter t2 L1965 Lw8Ki3RswO (VE6 55). Winter t1–t8 now complete pending her OK. Next Lượt 1968.
 #27 ~10:07Z: HAN6 Hán L1965 t1–t8 files (trims, clouds+birds t6–t8, bu yao ladder) → VE7 t6 sample @55. Weave vs embroidery research HAN6_WEAVE_VS_EMBROIDERY_L1965.md → SENT L1968; asks owner yes to drop 'embroidered all over' t1–t5 (+1 sample). Next Lượt 1969.
 #27 ~10:09Z: SENT L1969 Hán t6 L1965 dt4THLQXSL (VE7 55); flagged tassel on ball + hand at waist → HAN6 word fix. Next Lượt 1970.
+#27 ~10:12Z: HAN6 L1965 files G57/G61 word fix e692390; NGOCBOI1 G57b text in ART_RULES 2b462d400. Waiting owner on: L1956 face pages, L1961/1962/1964/1967/1968/1969, thô sử A/B/C + maid ladder L1966, thân cận hair. Next Lượt 1970.
