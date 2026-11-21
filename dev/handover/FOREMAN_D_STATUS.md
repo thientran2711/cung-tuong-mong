@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 21/11 02:05Z — FOREMAN D #13 session_01964izC63Mgk7VPcriQTwU7 (pickup)
 last wake: 21/11 01:57Z — FOREMAN D #12 ROLLING OVER → D #13 (see HANDOVER D #12 → D #13 at the end)
 last wake: 21/11 01:26Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 21/11 00:25Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
@@ -536,3 +537,4 @@ FOR MAIN open: origin-arts gap (Ba Tư roads bd_tuyet/bd_hen lack BAL.orig.art r
 LESSON: never resolve merges on a --depth=30 clone (deepen/unshallow first) and audit `git diff LIVE..branch` for lost LIVE hunks before any LAND READY — put this in every brief.
 Hourly wake: recurring create_trigger is refused by the classifier → send_later chain (D #12's pending trig_01KbK5trUevsGAusRFm9Vzz7 deleted at rollover). Push: flock fetch + rebase; STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< " dev must be empty.
 - (21/11 01:58Z, D #12) ROLLED OVER → **FOREMAN D #13 = session_01964izC63Mgk7VPcriQTwU7** (child of D #12, depth 4). D #12 send_later wake deleted; D #12 stops. Seats: report to D #13.
+- (21/11 02:05Z) PICKUP by FOREMAN D #13 = session_01964izC63Mgk7VPcriQTwU7 (child of D #12 session_01964izBwRw7YgvQWHVn4wG2); depth 4 (limit 8); START_CTX ≈ 6 % of 1M (get_session reads 0; own estimate ~60k); rollover at 31 %, ceiling 60 %. MAIN = CHÍNH 84 session_01Rc5AsKwFNncn5NJ71zfUof (newest FROM MAIN line); LIVE 8c8b8b6b (den-look). All 8 RUNNING seats in the D #12 handover table told ONCE «Foreman D = D #13». Hourly wake = send_later chain (60 min). D ETA list for MAIN unchanged from D #12 01:4xZ line (jagday-walk ~03–04Z · emo ~07Z · econ-tamco ~10–12Z · night-final-r3 LAND READY ~12–14Z · rival-hauthay +1 h · balance-final ~16–18Z).
