@@ -1055,3 +1055,4 @@ NEWACCT#16 ~02:10Z: DESIGN20 61a5551 t4 COMOIj + t5 COMOIi (base v6 COMOIf/COMOI
 NEWACCT#16 ~02:12Z: GEN1 32123e2 maids sachet redraw 3×135 = 405 cr (tam eIPYP1ZdqL, nhị 8aiVighIrU, nhất kseEeAm16B) LOOKED + sent L1650. Next Lượt 1651.
 NEWACCT#16 ~02:13Z: DESIGN21 356ce76 t6 COMOIk (base COMOId L1576) + t7 v8j (base v8c) reverted; prompt files sent owner L1651; CHECK1 checking; no gen until owner. Next Lượt 1652.
 NEWACCT#16 ~02:14Z: CHECK1 job 20 t6 COMOIk + t7 v8j PASS (G45 jade-not-covered words lost in revert; left out — owner 'don't over-constrain'; POSEFIX1 handles poses at source). Waiting owner on L1651.
+NEWACCT#16 ~02:14Z: GEN1 500e8ec t4 COMOIj p8ynPhWehw + t5 COMOIi hu2eAbgvqL (110 cr) LOOKED + sent L1652: v6 look back, 1 flower, bare ears, lotus lamp; Phi G49 pearl swag NOT clearly visible (needs stronger wording if owner wants). Next Lượt 1653.
