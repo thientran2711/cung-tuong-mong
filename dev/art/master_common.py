@@ -249,6 +249,10 @@ B29_A_LIGHT = "The FABRIC is thin, light, flowing silk and patterned silk gauze 
 B29_A_HEAVY = "The FABRIC is soft, supple OPAQUE patterned silk (lụa hoa) with a faint woven flower pattern and a soft sheen, never see-through, just a little fuller than summer silk yet still thin, light and airy, NOT satin and NOT brocade; long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
 B29_B_LIGHT = "The FABRIC is light, thin silk SATIN (đoạn) with a soft MATTE finish and only a very faint gentle lustre, like fine old silk, never glossy, shiny, wet-looking or plastic, with a faint woven self-pattern (damask), thinner and airier than the winter satin, soft and supple, NOT brocade; it falls in long, light, flowing folds (thướt tha); the small embroidered motifs are stitched in fine gold thread."
 B29_C_GAM = "The FABRIC is the LIGHTEST brocade (gấm): thin, supple Song brocade (Tống cẩm) with a soft MATTE finish and only a very faint gentle lustre, never glossy, shiny, wet-looking or plastic, with a woven flower pattern all through the cloth, never stiff, thick, heavy or puffed; it falls in soft, light folds close to the body, flowing gracefully (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+# OUT1 OUTER LAYER OUTSIDE (owner L1590 DUYỆT, 21/11, verbatim: "Ok, áo ngoài của kiểu 1 là để ngoài hết cho 8 bậc rồi, ok, duyệt."): the ONE shared clause
+# for every rank t1–t8 of every season that has an outer robe/layer over an inner garment; copied verbatim by the season make scripts (LADDER1).
+OUTER_OUT = ("the outer robe hangs OPEN and loose OUTSIDE the sash, girdle or ribbon band, straight down to the hem, never tucked in, never belted or "
+             "tied under it, the sash, girdle or ribbon band tying ONLY the inner garment")
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
 
 

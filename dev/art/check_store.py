@@ -1025,6 +1025,17 @@ def walk_still_fails(text):
     return []
 
 
+def out1_fails(text):
+    """G40 OUT1 (owner L1590 DUYỆT): the OUTER robe hangs OPEN OUTSIDE the sash/girdle on all 8 tiers. -> (fails, warns)."""
+    f, w = [], []
+    m = re.search(r"(outer (robe|garment|layer)|upper garment|over-?robe)[^.;]{0,120}\b(tucked|tuck(s|ed)? (in|into)|under the (sash|girdle|belt|ribbon)|inside the (sash|girdle|belt)|belted (in|at))", text, re.I)
+    if m and not re.search(r"never (tucked|belted)", m.group(0), re.I):
+        f.append(("OUT1", "OUTER TUCKED", f"outer layer tucked/belted (G40, owner L1590: outer robe OUTSIDE the sash, all 8 tiers): …{m.group(0)[:160]}…"))
+    for rx in (r"closes only (at|by)[^.;]{0,30}\b(sash|belt|girdle)", r"cross (only LOW|high above) (at )?the sash"):
+        m = re.search(rx, text, re.I)
+        if m: w.append(("OUT1", "OUTER CLOSED AT SASH?", f"wording may close/tuck the outer robe at the sash (G40, L1590): …{m.group(0)}…"))
+    return f, w
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1035,7 +1046,8 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += b24_fails(text, scope)   # MG3 L784 item 7 (B24)
     fails += angle_fails(text)   # MG3 L806 (E1)
     fails += pet_fails(text, scope, age)   # F17 PETS (owner Lượt 1057/1059): ages 18/26, kc + ranks 1–6 only, in contact only
-    fails += fruit_fails(text, scope, pid)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
+    fails += fruit_fails(text, scope, pid)
+    _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
         for m in DEEP_COLOUR_RX.finditer(text):
