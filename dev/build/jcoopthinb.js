@@ -53,8 +53,7 @@ function worldNames(){const own=new Set([S,S.maid,...(S.staff||[]),...(S.kids||[
  try{for(const r of (CW.base&&CW.base.W&&CW.base.W.R)||[]){if(r&&r.name&&!r.coop)a.push(r.name);for(const x of r&&r.staff||[])if(x&&x.name&&!x.coop)a.push(x.name)}}catch(e){}
  return a}
 function clash(n,L,full){return L.includes(n)||(full&&L.some(u=>tail(u)===tail(n)))}
-function freeMaid(L){const f=MAIDS.filter(x=>!L.includes(x)&&x!==S.name);let n=f.length?pick(f):"";
- for(let i=0;!n&&i<60;i++){const c=pick(MAIDS)+" "+(R(8)+2+Math.floor(i/10)*8);if(!L.includes(c))n=c}return n}
+function freeMaid(L){return nmNew("maid",{more:L,reg:false})}/* one name core (jname.js); a guest draft is not registered */
 function checkNames(){const L=worldNames();
  if(clash(S.name,L,true)){const was=S.name;let n=was;for(let i=0;i<50&&clash(n,L,true);i++){S.name="";n=freshName()}S.name=n;TB.stat.rename++;TB.renamed=[was,n]}
  /* her maid: a free name of the maids' list, else the list name + a number (the same rule as mkServ j10), never one already in the world */

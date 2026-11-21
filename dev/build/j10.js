@@ -1,6 +1,6 @@
 /* ================= HOUSEHOLDS: maids and eunuchs, one rule for every consort ================= */
 
-const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
+const EUN=NM_EUNX.map(x=>"Tiểu "+x+" Tử");/* one name core: jname.js (nmNew("eun")) */
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
    for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; Nữ đế (succession path c) = BAL.promo.capNd; a cung nữ (servant road) keeps no household.
@@ -8,9 +8,13 @@ let sidN=0;
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
  if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
-function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
-function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
- const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
+/* coop-staff-split: a co-op PLAYER serving as cung nữ is her coop entry in her mistress's staff on the OTHER seat only (on her own seat she is S),
+   and only while the world loops do not run (jcoopworld withoutFriend pulls her out); she is never one of the household's allotted servants
+   (as in solo, where the cung-nữ player is not in m.staff). Counted, she made the host trim a real servant at her arrival (that person
+   vanished) and every month the fill (her pulled) and the trim (her back) made and dropped one more — on the host only, so the two seats split. */
+function hhHas(p){const L=((p&&p.staff)||[]).filter(s=>s&&!s.coop);return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
+function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;
+ const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
 /* perf (review ag-all-2 r2 B5): the last owner found is checked first (one includes on one list); a moved servant falls through to the full scan */
 const OWN_C=new WeakMap();
@@ -18,7 +22,7 @@ function ownerOf(s){const o=s&&typeof s==="object";if(o){const c=OWN_C.get(s);if
  for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s)){if(o)OWN_C.set(s,p);return p}return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
 function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
- if(!S.court)S.court={tq:{name:"Tổng quản Lý Liên Anh",n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:"Tiểu Ngân Tử",n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
+ if(!S.court)S.court={tq:{name:"Tổng quản "+nmNew("eunE"),n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:nmNew("eun"),n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
  const L=allServ();if(!L.some(s=>s.af&&Object.keys(s.af).length))for(const s of L){const o=pick(L.filter(x=>ownerOf(x)!==ownerOf(s)));if(o){s.af[o.sid]=30;o.af[s.sid]=30}
   if(s.role==="eunuch"&&!(typeof asOn==="function"&&asOn())&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
@@ -168,7 +172,7 @@ function facHTML(){const mine=facOf(S),F=S.facs||[];let h=`<div class="ph"><span
  if(!mine){const cands=liveRivals(true).filter(v=>!facOf(v)&&aff(v,S)>=BAL.facJoinAff&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${cands.slice(0,4).map(v=>`<button data-fa="lap" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Lập phe cùng ${v.name}<small>2 khắc · ${rcvWord(v,S)}</small></button>`).join("")||`<span class="past">Cần một phi tần quý ngươi từ ${BAL.facJoinAff} để lập phe.</span>`}</div>`}
  else{const out=liveRivals(true).filter(v=>!facOf(v)&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${out.slice(0,4).map(v=>`<button data-fa="moi" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Mời ${v.name}<small>${rcvWord(v,S)}</small></button>`).join("")}<button data-fa="roi">Rời phe<small>đồng đảng giận</small></button><button data-fa="ban" ${!can(2)?"disabled":""}>Bán đứng<small>Danh +5 · cả phe oán +40</small></button></div>`}
  h+=F.map(f=>{const M=facMembers(f),l=facLeader(f),st=Math.round(M.filter(m=>m!==S).reduce((s,m)=>s+aff(m,S),0)/Math.max(1,M.filter(m=>m!==S).length));const me=f===mine;
-  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${me?(l===S?`<div class="rbtn">${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(jointO(f))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||`<p class="past">Hậu cung chưa có phe phái nào.</p>`;
+  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${me?(l===S?`<div class="rbtn">${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(jointO(f))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||kitEmpty("Ta chưa có phe phái",["Hậu cung chưa có phe nào. Phi tần quý ta đủ lòng thì lập phe cùng ta.","Có phe thì được che chở, nhưng phe đối nghịch sẽ để mắt tới ta."],{topic:"Phe phái"});
  return h}
 function facAct(a,d){if(S.dead||Q.length)return;let r="";const v=d.fv?RV(+d.fv):null,f=d.ff?(S.facs||[]).find(x=>x.id===+d.ff):null;
  if(a==="roi"){r=leaveFac(S)}
