@@ -1,0 +1,31 @@
+Bạn là chuyên gia màu sắc trang phục cho game cung đấu anime (áo Đường – Minh lãng mạn, vải lụa mỏng bay). Hãy làm cho tôi BẢNG MÀU cho 90 phi tần, chia theo NHÓM TÍNH CÁCH và theo 4 MÙA.
+
+6 nhóm tính cách (số người):
+- Quyến rũ: 18 người
+- Sắc sảo: 15 người
+- Kiêu kỳ: 15 người
+- Lạnh lùng: 15 người
+- Dịu dàng: 14 người
+- Đoan trang: 13 người
+
+4 mùa, mỗi mùa một cảm giác riêng: Xuân (tươi, non, ấm nhẹ), Hạ (mát, trong, sáng), Thu (ấm, dịu, chín), Đông (trong lạnh, sâu, sang).
+
+Mỗi người, mỗi mùa có đủ các màu sau (ghi tên màu tiếng Việt + mã HEX):
+1. Màu chính (áo ngoài, tay áo)
+2. Màu phụ (áo trong, viền, lót) — tương phản đẹp với màu chính
+3. Màu thứ ba, đậm hơn một nấc (điểm nhấn: đầu lông phượng, viền nhỏ)
+4. Màu hoa (hoa thêu + hoa cài tóc)
+5. Màu khăn voan mỏng phi bạch (nhạt, trong)
+6. Bộ màu lông phượng: lông ngoài / lông trong / đầu lông
+
+Yêu cầu:
+- Tông màu dịu, sáng vừa, trong và sạch; không neon, không chói, không xám bẩn, không đen, không nhạt bệch.
+- Màu phải hợp tính cách của nhóm (ví dụ Quyến rũ: hồng đào, đỏ hồng, tím mận; Lạnh lùng: xanh băng, bạc, tím lạnh; Dịu dàng: hồng phấn, xanh ngọc nhạt…).
+- Trong cùng một mùa, không có 2 người trùng cặp màu chính + màu phụ.
+- Màu vàng hoàng gia #EFBD69 dành riêng cho Hoàng hậu: không ai khác dùng làm màu chính.
+- Mỗi người giữ cùng một "họ màu" qua 4 mùa (nhận ra được là cùng một người), chỉ đổi sắc độ theo cảm giác mùa.
+
+Cách trình bày:
+- Trước tiên: mỗi nhóm có một dòng "nhóm này dùng những họ màu nào" + số họ màu của nhóm.
+- Sau đó: bảng theo từng nhóm, mỗi dòng là một người (đánh số Quyến rũ 01 … 18, v.v.), cột = 4 mùa, trong mỗi ô ghi đủ 6 màu (tên + HEX).
+- Cuối cùng: một hình bảng màu (ô màu) cho mỗi nhóm để tôi nhìn bằng mắt.
