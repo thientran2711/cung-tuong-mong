@@ -1,0 +1,15 @@
+# Brief: map-places memory fix (opus, Foreman B ROOT-4, 21/11 03:20Z)
+PRIORITY #1 CHECK ('map-places memory OOM consort role-parity'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0
+
+Read first, in full: dev/rules/START_CORE.md (★ 18 LAWS) + dev/rules/START_WORKER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w), dev/handover/briefs/b-root-common.md (B common rules, push recipe, sparse worktrees, fetch --depth=30 under flock /home/user/wt/fetch.lock), dev/handover/reports/map-places.md.
+
+## Job (whole job, one worker)
+GAP KP02 map-places (review/map-places-r1 PASS 7c2aaa08c; land branch 3217d3b7 on LIVE b1033eb0) adds Ngự thiện phòng (nth) + Phật đường (pd). On its land branch the role-parity scan (dev/test/role-parity-scan.js) gets the headless renderer OOM-killed (memcg, anon-rss 13.7 GB) at the very END of the CONSORT phase, 3/3 runs; maid phase alone PASSES; LIVE b1033eb0 on the same box ALL PASS (~10-12 GB). One-browser-per-phase harness does NOT help (consort phase alone OOMs). 150x goTo nth/pd alone shows same RSS as other places → the growth is elsewhere. performance.memory is bucketed (flat 64 MB) → not trustworthy.
+Lander #2b findings (session_01N1tNP6cqrrDPRXd6b6opjm) suspects: jplx countAt double-setTimeout wrap (jplx.js:100), mapHTMLgrid MAPL push/pop (jplx.js:46), plxNth/plxPd keeper entries without id fed to talkOpts / npc readers.
+1. Find the real cause: CDP (Runtime.getHeapUsage / HeapProfiler / DOM node counts / listener counts / timers) per role in the consort phase, LIVE vs branch. Fix the GAME code if it leaks (timers, DOM, arrays that grow); fix the whole family (law 11): any other place-module with the same pattern.
+2. If it is a scan-only artifact, fix the scan (B owns role-parity-scan.js) and prove LIVE + branch both fit with margin.
+3. Merge newest LIVE (now 64d2e094; check origin/main) into review/map-places-r1-land (or a new review/map-places-r2-land), rebuild (assemble.py + build_site.sh).
+4. Gates on the final sha: quickcheck PASS (--runs 7 for perf; branch had 3-run noise), undef PASS, role-parity ALL PASS, coop-e2e PASS; CO-OP GATE (owner): the feature's own both-seat co-op check — write/run a test that both seats can go to nth + pd, see the same keepers, and the guest's goTo never moves host state (host-first + SWAP=1). Fold 755x1000 + iPad 1180x820 shots of the two places (kit only; law 9).
+5. Report in dev/handover/reports/map-places.md (append "MEM FIX r2"), then send_message Foreman B (ROOT-4 session_01N1tNP3A7wQj2kKiLjc7ZhM or the newest B ROOT in FOREMAN_B_STATUS top) "SẴN SÀNG KIỂM <sha>". This is BIG (rules/core loop memory) → B opens an opus BIG reviewer.
+ROLLOVER: at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+Never push to main. Repository work in English; player text Vietnamese per dev/kit/VANPHONG.md.
