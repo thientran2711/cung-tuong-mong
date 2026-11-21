@@ -15,3 +15,8 @@ Session total: 270 + 110 + 270 = 650 cr.
 ## THU t1 sample @55 (L1823/#23) — gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD · check_store tp1 a22 PASS · id vQABJFua47 · 55 cr · picture dev/handover/review-sheets/thu_t1_sample55_L1824.png
 ✓ LOW open square neck, collarbones bare, wide lilac flower band; waist ribbon at natural waist with 2 front ribbons ✓; phi bạch = very sheer ivory gauze, thin gold edge, robe/arms visible through ✓; loose hair + ONE small white lilac ✓; navy thread-bound book gripped at side ✓; sleeves to knees, one layer ✓; caption ✓. Notes: olive reads sage-green; skirt is lilac (not a lighter olive); shawl is large and voluminous.
 Session total: 650 + 55 = 705 cr. t5/t6 @55 NOT drawn yet — waiting #23 (new files).
+## A49 PALBACH1 samples (#24, commit 60f22ad) — THU t1–t3 L1834 @55 · gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD · check_store a19 PASS ×3 · 3×55 = 165 cr
+t1 Đáp ứng fHz8PhrCDY · t2 Thường tại jUobW1FLD0 · t3 Quý nhân DoOYrVxpcl · sheet dev/handover/review-sheets/thu_phibach_t1_t4_L1834.png
+t4 sqtest_L1834 NOT drawn: gate FAIL B26/M06/S13 (same as the earlier #22-waived t4) — asked #24 for "t4 waived".
+LOOK: snow-violet gauze shawl on all three reads sheer, robe/arms visible through it ✓, soft violet hue; thin gold edge barely visible at this size. t1: low square neck, waist ribbon, book, white lilac ✓. t2: square neck ✓, peach-coral tiger lily in hair ✓, brick-red pellet drum with handle (contrasts) ✓, tiger lilies scattered on skirt. t3: 3/4 right ✓, lilac apron panel + jade pendants ✓, hand adjusting hairpin + bamboo flute ✓, one rose-pink rose ✓. Notes: shawl large/voluminous on all; the olive reads sage-green.
+Session total: 705 + 165 = 870 cr.
