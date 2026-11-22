@@ -87,12 +87,12 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
  init(){S.st.stu="Hàn lâm "+nmNew("m");S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
-  if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
-  if(st.step>=1){const th=npcWhy("thdTaunt",{});if(th){const v=th.who,o1=od(BAL.odb.j4.odO1+S.tai/2+artW("thi",S.arts.thi)*8),o2=od(BAL.odb.j4.odO2);
+  if(st.step===0&&(S.arts.thi>=BAL.art.gate.thiFame||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
+  if(st.step>=1){const th=npcWhy("thdTaunt",{});if(th){const v=th.who,o1=od(BAL.odb.j4.odO1+S.tai/2+artOE(S,"thi")),o2=od(BAL.odb.j4.odO2);
    return setDil(mkP("thd1",{v:v.id,o1,o2}))}}
   return""},
  acts(){const st=S.st;
-  if(st.step===1){const ok=S.arts.thi>=3||S.tai>=70;return[{n:"Dự thi Tài nữ ở Hàn lâm viện",t:ok?"Cùng các khuê tú đối thơ trước Hoàng thượng.":"Cần Thi bậc 3 hoặc Tài 70.",c:{suc:-10},o:ok?od(BAL.odb.j4.odO_12+S.tai/3+artW("thi",S.arts.thi)*6):0,w:{danh:8,sung:3},l:{danh:-3},lock:!ok,x:"danh hiệu Tài nữ",go:()=>{st.title=1;st.step=2}}]}
+  if(st.step===1){const ok=S.arts.thi>=3||S.tai>=70;return[{n:"Dự thi Tài nữ ở Hàn lâm viện",t:ok?"Cùng các khuê tú đối thơ trước Hoàng thượng.":"Cần Thi bậc 3 hoặc Tài 70.",c:{suc:-10},o:ok?od(BAL.odb.j4.odO_12+S.tai/3+artOE(S,"thi")):0,w:{danh:8,sung:3},l:{danh:-3},lock:!ok,x:"danh hiệu Tài nữ",go:()=>{st.title=1;st.step=2}}]}
   if(st.step===2){const ok=S.danh>=BAL.danhG.fatherBook;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng bản thảo của cha lên Hoàng thượng.":`Cần Danh ${BAL.danhG.fatherBook} (nay ${S.danh}).`,c:{suc:-5},o:ok?od(BAL.odb.j4.odO_13+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
   return[]}}
 };

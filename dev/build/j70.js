@@ -530,7 +530,7 @@ try{ORD70.thudoc.acts.push("huydung");ORD70.canh.acts.push("huydung");ORD70.thud
   const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(oddsCl(o)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
   h=h.replace(/(<button[^>]*data-a="poison")/,btn+"$1")}catch(e){}return h}})();
 /* recovery, the same weekly rule for everyone */
-function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||npcWhy("j70Face",{p},()=>roll(20))))st++;if(me&&(S.arts&&S.arts.y>=2))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;
+function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||npcWhy("j70Face",{p},()=>roll(20))))st++;if(me&&(S.arts&&S.arts.y>=yCareT()))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;
  if(!me&&!s.cure&&npcWhy("j70Face",{p,cure:1},()=>roll(8))){p.bac-=BAL.ag.why.g2b.face.cureBac;s.cure=1}
  if(s.pg>=s.need){const L=SCAR70[s.sev];const perm=s.cure?0:L.perm;if(perm)p.sac=Math.max(5,(p.sac||0)-perm);p.scar=null;
   if(me)log(perm?`Vết thương trên mặt ngươi đã lành, nhưng để lại sẹo: Sắc -${perm} mãi mãi.`:`Vết thương trên mặt ngươi đã lành hẳn, nhan sắc như xưa.`);else if(knows(p))log(`${title70(p)} đã lành vết thương trên mặt${perm?`, còn sẹo (Sắc -${perm})`:""}.`)}}

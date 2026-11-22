@@ -26,9 +26,9 @@ Object.assign(BAL,{tw:{
  cold:{suc:-10},         /* petition to leave lãnh cung (j14 'Tìm chứng cứ minh oan'; NPC release attempt pays it too) */
  accBestow:40,            /* Tố giác thành: chance of a reward from the throne (was 100 for NPCs, 40 for her) */
  /* gains (one source, read by both sides and by the option text) */
- g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,preg:[6,5,-5],ann:[6,5,6],
+ g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1],preg:[6,5,-5],ann:[6,5,6],
     provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
-    accFail:[8,25,20],vu:[10,5,4],ky:[2,1],conf:[20,15],reward:[20,10,3],
+    accFail:[8,25,20],vu:[10,5,4],ky:[3,1],conf:[20,15],reward:[20,10,3],
     /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
        − o[3] when he is Đa nghi; thành: the target's Sủng −hit, liking −rel; hỏng: Đa nghi → the speaker's Sủng −dg[0], Danh −dg[1], else Sủng −fail */
     pillow:{o:[30,2,3,10],hit:10,rel:5,dg:[6,3],fail:2}}
