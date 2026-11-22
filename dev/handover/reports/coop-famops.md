@@ -184,3 +184,22 @@ TICKET (pre-existing, NOT c2, not this row — guest seat runs NPC item roads on
 - P2 vanish (10000274 control; E44b's SKEW 10000274/275/320): NPC→NPC «cướp» case opened on HER seat over host-NPC copies (ids numbered on her seat), never counted.
 - P3 vanish 3119 (control SKEW): host Kỳ ngộ «giữ lại» by NPC 1 (lo103) then gone, host side only.
 Owner for P1/P2: coop world (thin guest must not run NPC economy/loLose on copies); P3: jky/jlost.
+
+### E44c c2 SẴN SÀNG KIỂM — review/coop-famops-c2 f766a052 (22/11 ~01:20Z)
+Commits since E44b 6909e22c1: 840b1e54 merge LIVE ea112384 · 5349479e «dead» branch gated by jil's guards ilAt / ilToFriend / ilDur (E48r ask) + unit 16c · eaebce79 merge LIVE 87ac1ff4 (coop-famops landed) · **f766a052** merge LIVE 02c6d8f4 (bongloc-options). Diff vs LIVE 02c6d8f4: dev/build/jcoopworld.js +21/−1, dev/test/coop-famops-unit.js +13 (+ generated index.html/sw.js). No new number, no new player word.
+| gate | result |
+|---|---|
+| coop-famops-unit | 24/24 on f766a052 (16c FAILs on the code without the guard: «ret» sent) |
+| quickcheck + old save | PASS on eaebce79 and on f766a052 (core gates PASS). One run on f766a052 failed G4 coop-one-world while 3 heavy jobs ran in parallel; the rerun alone PASSed = load flake |
+| coop-e2e (LIVE suite) | 124/124 on eaebce79 and on f766a052 |
+| coop-b1 | 43/43 (eaebce79) |
+| role-parity ×2 | ALL PASS ×2, logs byte-identical (eaebce79) |
+| 76 wk COOP_SKEW=24 | eaebce79: 91/92 dup0 van0 (1 harness «#next» wait) · 840b1e54: 91/91 |
+| 76 wk SEED=9001 | eaebce79: dup 118 (P1) + 246 (P4), van0 · 840b1e54: 90/90 |
+| 76 wk COOP_SWAP | eaebce79: van 270 (P3) + 10000341 (P2), stall w40 · 840b1e54: degenerate (B.nofriend 76) |
+The (c) family (a friend-owned piece leaving the holder through the box rule) is clean in all 6 c2 runs. Control (no c2) showed it: 116. Every leftover fault has a shape the CONTROL also shows, except P4, which the wrapper cannot reach (owner = NPC):
+- P1 dup (control 55; c2 86, 118): her seat's copy of a host NPC «sells» (agent cx3:sell → sellItem → ilGone sell) a piece with a host id into HER box mkt:sell; the real piece stays at the host NPC.
+- P2 vanish (control 10000274; c2 10000341; E44b 10000274/275/320): ilRob «cướp» NPC→NPC on HER seat over copies → a case in HER S.lost (own NPC), closes «matdau», never counted.
+- P3 vanish (control 3119; c2 270; = E44b's 248): host Kỳ ngộ «giữ lại» by an NPC (holder of an NPC-owned case) → case «tra» → the piece is nowhere. Host side only.
+- P4 dup (c2 246, one run): host NPC 3's case «riv» held by the friend entry (her seat has the piece, lo99) while the host confiscates a piece with the same id from NPC 3 («conf» into nvp box), so NPC 3 kept a copy on the host.
+NEXT (order E #30): P1–P4 on NEW branch review/coop-famops-p (from LIVE / on c2), whole group, CONTROL vs fix tables.
