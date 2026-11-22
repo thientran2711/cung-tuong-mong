@@ -2448,3 +2448,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 21:47Z) LANDED coop-guest-men 0a3ceede (LIVE=0a3ceede FF, coop-e2e 141/141). LC5 queue empty.
 - (22/11 22:33Z) WAKE LOAD: main 0 | B ROOT-11 (night-ledger r4 #4, thin-g F1 #9) | C ROOT-C5 (PLACES4 7 open-window redo b8b8a3d, waits owner OK + Group 2 choice) | D #20 (coop-flakes rv, coop-real-port) | E #32 (E51r -pv, E44g t1) | moved: none. No LAND READY. LIVE 0a3ceede. 106 over ceiling, relay only; owner to open ROOT 107.
 - (22/11 22:45Z) OWNER: C stop painting, give C helper work → ORDER to C: stop art spend, close PLACES4 Group 2, park b8b8a3d; take M14 (PDF refresh+send), N19 data (body-fit.json, no pictures), N18 (quickcheck FIGSIG). B told re N18.
+- (22/11 23:34Z) WAKE LOAD: main 0 | B ROOT-11 (night-ledger r4 #4 SSK ~23:45Z, thin-g F1 #9) | C ROOT-C5 (helper ORDER 22:45Z not yet acked) | D #20 (coop-real-port) | E #32 | moved: none. RELAYED coop-flakes review/coop-flakes-rv d1a36374 → LC5. LIVE 0a3ceede.
