@@ -157,18 +157,23 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
      ANY OTHER dialog (a real choice, a notice): CARRIED (coordinator ruling under OD L680) — taken off her screen unanswered (no onClose, no
        road), kept on her seat (CQ) and put back on top right after the merged week, so she answers it when she returns.
    Then her night step runs as for any closed dialog (dueTick / jcoopworld nCheck) and her week end goes. LAW 11 table: reports/night-ledger.md «FIX r3». */
-const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OWN=["nfch"];let NA={w0:0,said:-1},CQ=[];
+const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OWN=["nfch"];let NA={w0:0,said:-1};
+/* r4 (Foreman B ruling 2): the carried cards live in her SAVE (S.cq, save form: pid {pid,pp,t} / generator {rk,ra,t}); both seats, a reload keeps them */
+const CQ=()=>(S.cq=Array.isArray(S.cq)?S.cq:[]);
 function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
 let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
 function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
  if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
  if(!m){nafScene();return}
  if(NAF_OWN.includes(m.pid))return;
- if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
-  const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+ if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN(),dc};
+  const t=sum?`Quá giờ chờ: ngươi chưa đáp lời, kiệu đã quay về. Đêm nay ngươi không hầu giá${dc?`, lỡ hẹn như cáo bệnh: ${dc}`:""}.`:"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
   try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
  /* carry: off her screen with no answer (no onClose: nothing is decided), back on top after the merged week */
- Q.shift();CQ.push(m.pid?{pid:m.pid,pp:m.pp,t:m.t,m}:{m});CW.nacN=(CW.nacN||0)+1;
+ Q.shift();const e=typeof serM==="function"?serM(m,{lap:1}):null;
+ if(e)e.cw=wkN();/* the week it was carried in: it comes back once the room is past that week (the merged week, or a rejoin after it) */
+ if(e&&(e.pid||e.rk)){CQ().push(e);CW.nacN=(CW.nacN||0)+1}else if(e&&e.lap){rcpLapse(e.t);CW.nalN=(CW.nalN||0)+1}/* a choice with no generator lapses now (no effect, one log line), never a hollow road later */
+ else if(e){CQ().push(e);CW.nacN=(CW.nacN||0)+1}/* a notice: its text */
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
  try{showModal();render()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
 /* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
@@ -180,10 +185,17 @@ function nafScene(){try{const L=[...document.querySelectorAll(".kmov")].filter(o
   CW.nasN=(CW.nasN||0)+1;b.click();return}}catch(e){console.error(e)}}
 /* the carried dialogs come back on top once the merged week is in (jcoopworld onWeek keeps Q: fromCanon keepQ). A card of the save's kind
    (pid) is made again from its id (deserQ, the save path: it points at the people of the merged world); any other card comes back as it was. */
-function carryBack(){if(!CQ.length||!live()||S.dead)return;const L=CQ.splice(0),out=[];
- for(const e of L){let c=null;if(e.pid){try{c=(typeof deserQ==="function"?deserQ([{pid:e.pid,pp:e.pp,t:e.t}]):[])[0]||null}catch(x){c=null}}out.push(c||e.m)}
- Q.unshift(...out);CW.nacB=(CW.nacB||0)+out.length;try{showModal();render()}catch(e){console.error(e)}}
+function carryBack(){if(typeof S==="undefined"||!S||!Array.isArray(S.cq)||!S.cq.length||!live()||S.dead)return;const w=wkN(),L=S.cq.filter(e=>!(e.cw>=w));if(!L.length)return;S.cq=S.cq.filter(e=>e.cw>=w);let out=[];
+ try{out=deserQ(L)}catch(x){out=[]}/* rebuilt against the merged world, people by id (j3 deserQ: pid → mkP, generator → rcpMk; a gone person → lapse + log) */
+ CW.nacB=(CW.nacB||0)+L.length;CW.nacL=(CW.nacL||0)+(L.length-out.length);if(!out.length)return;Q.unshift(...out);try{showModal();render()}catch(e){console.error(e)}}
+/* LAW 2 / 3 (Foreman B ruling 3): «no answer» to a summons after the AFK bound costs what «Cáo bệnh» costs on that same card (its own fx losses
+   and its go: Ân tình, the decline count …; one core: the card's own BAL numbers), without the rest it buys (Sức) — absence is never the cheaper decline */
+function nafDecl(m){try{const o=(m.opts||[]).find(x=>/^Cáo bệnh/.test(String(x&&x.n||"")));if(!o)return"";const L={};for(const k in (o.fx||{}))if(typeof o.fx[k]==="number"&&o.fx[k]<0)L[k]=o.fx[k];
+ const a0=S.an;if(Object.keys(L).length)apply(L);try{if(o.go)o.go()}catch(e){console.error(e)}
+ const T=Object.keys(L).map(k=>`${NAMES[k]||k} ${L[k]}`);if(typeof S.an==="number"&&typeof a0==="number"&&S.an<a0)T.push(`Ân tình ${S.an-a0}`);CW.nafD=(CW.nafD||0)+1;return T.join(", ")}catch(e){console.error(e);return""}}
 COOP.on("week",()=>setTimeout(()=>{try{carryBack()}catch(e){console.error(e)}},0));
+/* r4: a reload between the carry and the merged week keeps them (S.cq is in her save); a rejoin after that merge (no "week" event on this page) brings them back too */
+CW.cqBack=()=>setTimeout(()=>{try{carryBack()}catch(e){console.error(e)}},0);/* called by jcoopworld fromCanon once a world is in (merge, join, rejoin) */
 /* a dialog with no choice, or with one single road, is read for her once her buổi is overdue (never a real choice) */
 function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;return}const m=Q[0];
  if(m.act||/kptitle|kcoop/.test(m.cls||""))return;
@@ -416,5 +428,5 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,scene:CW.nasN||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,lapsed:(CW.nalN||0)+(CW.nacL||0),decl:CW.nafD||0,scene:CW.nasN||0,cq:(S&&Array.isArray(S.cq))?S.cq.length:0,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();
