@@ -370,3 +370,34 @@ ONE CORE: no new number (BAL.coopTm.nightMs was added in 5efd53fb). KIT: kitLine
 3. A carried card lives in the seat's memory (CQ): a reload before the merged week loses it (as a reload loses any non-pid card today).
 
 SẴN SÀNG KIỂM 7aff0de33866ce5dd07af355c0c0e6c85fa41ff3
+
+## REVIEW coop r3 — review/night-ledger-coop-r3 @7aff0de3 (⊇ LIVE b238857f; rv = the same sha, nothing to merge) — **FAIL (a carried non-pid real choice comes back hollow)**
+PRIORITY #1 CHECK: «REVIEW coop r2» FAIL 1–4 + «FIX r3» (this report) | OD L680 (time out: open dialogs resolved safely / carried), OD 15/11 ~21:25Z / ~22:55Z (a real choice is never made for her), OD L1479 | main LIVE b238857f (no nightAfk / carry) | review/night-ledger-coop-r3 7aff0de3 | claims B row «REVIEW night-ledger-coop r3» (this reviewer).
+Reviewer: opus, session_01N1tNP5JeCc1aEETUicwLpq; coordinator Foreman B ROOT-10. START_CTX ≈ 4 % (own estimate).
+
+### 1. Code read (jcooptimer nightAfk / nafScene / carryBack)
+- Summons ksp / nfsum / amNight and the night prep / night1 / night2 are pid cards built by mkP / deserQ: **no onClose**, so closeModal() takes no road — «no answer» is real (checked j3 closeModal, j8 PEND.ksp, jnf nfsum, jagmaid amNight). OK under the Foreman B ruling.
+- nafScene clicks only a scene whose ONLY visible button is .kmend / .krevok / [data-km-close]: scan of every such button (j93 kitSceneEnd «Tiếp theo»/event label, j93 kmtake «Nhận», jne kne-take «Nhận / Tiếp tục», jfx krevok «Nhận»): all are end / take buttons, none is a choice. OK.
+- nfch untouched (own 10 s clock). nafWait false while HOLD / inLife / dead. Number: only BAL.coopTm.nightMs (one-core guard PASS fails 0).
+- **carryBack (FAIL 1):** a non-pid card goes back as the same JS object (`out.push(c||e.m)`); its roads are closures over people of the OLD world. The merged week rebuilds the world from JSON (jcoopworld fromCanon0: `sS=J(Pm.S)`, `R=J(C.W.R)` → deser), so every person the closure holds is no longer in S / rivals.
+
+### 2. Evidence (scratch harness /home/user/wt/nlr4-out/_rv_cn.js = coop-night + one non-pid two-road card on the AFK seat whose road writes to a live rival, + RL=y|x reload mid-wait; not git)
+| run | result |
+|---|---|
+| ONLY=4 FORCE4=g + non-pid card | carried 3, back 3, room bounded (58.9 s ≤ 114 s); the non-pid card came back and was answered on her return: **`inWorld:false`** — the rival its road writes to is not in the merged world → the road does nothing (gain/loss lost; a «Một ánh mắt» answered after the carry would write tình ý / letters to a ghost man) |
+| RL=y FORCE4=g (host = partner leaves + rejoins at 8 s) | no freeze: 66.3 s ≤ 114 s, summons closed (nafN 1, ksp), carried 2 = back 2, next week exactly one step |
+| RL=y FORCE4=h (guest = partner leaves + rejoins) | no freeze: 57.2 s, nafN 1 ksp, carried 3 = back 3 |
+| RL=x FORCE4=g (the AFK guest herself reloads at 8 s, stays AFK) | no freeze: 62.3 s, next week one step; the injected test cards died with the page (harness artefact, not a game fault) |
+| coop-night plain (head) | 112/112 |
+| coop-e2e ×10 same-world (COOP_WDIFF, head) | 141/141 ×10, same world clean 10/10, MOODTR 0 → r2 FAIL 2 not reproduced (worker 0/11 + reviewer 0/10 = 0/21 vs r2 1/6): closed as not shown to differ from LIVE |
+| coop-night 4b semantics | read: ok when the fin really dropped; n/a only when the relay was off on a seat; FAIL when on — matches r2 FAIL 3. Closed |
+| one-core-guard / undef-scan | PASS fails 0 / PASS (293) |
+Not run (verdict already FAIL): coop-ledger ×4 + DEVSWAP + NOREV, coop-night0, night-coop-park, quickcheck, role-parity, ledger / night-final / night-multi, shots (no screen changed).
+
+### 3. FAIL list (worker 4b8rvF5b, on review/night-ledger-coop-r3)
+1. **BLOCKING — a carried NON-pid real choice comes back hollow.** Brief check (a): carried dialogs must still work after the merged week. Proof above (`inWorld:false`). The carry today works only for pid cards (the worker's own test switched to a pid card for this reason). Fix the family, not the test: every real choice that can stand on a seat at tối must come back pointing at the merged world — e.g. carry non-pid choice cards by a save kind (give the open-at-tối choice families — j24 npcWhy events like «Một ánh mắt», Biến cố đêm, Việc khó xử … — a pid / evpick route so deserQ rebuilds them), with a LAW 11 table of every non-pid `opts` card that can be open at tối and how each is carried. If a family cannot be rebuilt, ask Foreman B for a ruling (OD L680 «resolved safely / carried») — never show a road whose effect is lost. Prove: coop-night FORCE4=g/h with a NON-pid two-road card whose road writes to a world person: after the merged week the road lands on that person in S (both seats see it, same world).
+2. Non-blocking, same fix: CQ lives only in page memory — a reload between the carry and the merged week loses even a pid card that, left in Q, the seat's save (serQ) would have kept. Keep carried cards in the save form (pid + pp) so a reload keeps them.
+3. FYI Foreman B (no fix asked; LAW 2 edge): «no answer» to the summons costs only the night, while «Cáo bệnh» costs Sủng −BAL.cv.decl.sung and Ân −BAL.cv.decl.an (gains Sức). A co-op player who goes AFK 30 s past the partner's wait declines for less than Cáo bệnh. Likelihood: possible (only in co-op, only with a waiting partner); harm: small; fix if wanted: no answer takes the Cáo bệnh loss without its Sức gain. Ruling is the Foreman's.
+4. Re-run on the fixed head: coop-night ×3 plain + FORCE4=g ×2 + h ×2, coop-e2e ×5, coop-ledger ×4 + DEVSWAP ×4 + NOREV both, coop-night0, night-coop-park ×4, quickcheck, one-core, undef, role-parity, ledger / night-final / night-multi.
+Closed from r2: FAIL 1 (AFK holder stall) — bounded both seats incl. partner reload; FAIL 2 — 0/21; FAIL 3 (4b) — closed; FAIL 4 — re-run pending with item 4 above.
+Scratch: /home/user/wt/nlr4-out (logs + _rv_cn.js; not git, no shots).
