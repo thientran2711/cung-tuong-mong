@@ -75,7 +75,12 @@ function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());co
    Returns loy (true = she stays her old master's friend). */
 function riseLoyal(m){return (m===S?S.tin:m&&m.loyal)||0}
 function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(loy0!=null?loy0:riseLoyal(m))>=B.riseLoy;const reg=amSung(m);
- n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
+ n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);
+ /* balance-2 fault 9 (night-balance-bundle), now in the ONE core: a maid's name among servants is not a consort's name — only BAL.danhG.srvRise of
+    the Danh she held AS A MAID carries over, then the rise gain D.danh. An NPC maid keeps no servant Danh (her staff record has none), so her new
+    consort record keeps its born Đáp ứng Danh; the player maid's servant Danh is S.danh (role-parity-bundle-fix: was a player-only step in j42 srvRise) */
+ const md=m===S?S.danh:m&&m.danh;if(md!=null)n.danh=Math.round((md||0)*BAL.danhG.srvRise);
+ if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
  if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
  return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);

@@ -23,6 +23,10 @@ const WEEKS=+process.env.W||8,RUNS=+process.env.RUNS||8,SEED=+process.env.SEED||
 const out=await p.evaluate(([WEEKS,RUNS,SEED])=>{
  let seed=SEED;const rnd=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648};const nat=Math.random;
  const solo=worldOn();Math.random=rnd;/* one seeded run (env SEED): a failure can be replayed */
+ /* coop-one-world-flake 22/11: the NPC agents (jagent agSlice / jagday agLzRun) decide in 3 ms wall-clock slices (BAL.ag.perf.slice) and leave the
+    rest for a setTimeout(0) frame this one sync evaluate never yields: on a loaded CPU fewer NPCs decide, the seeded stream shifts, the run is
+    not replayable. window.__agAll (the game's own switch, as the jagent tests use) runs every slice at once: same run on any CPU */
+ const ag0=window.__agAll;window.__agAll=1;
  window.__nlInner=1;document.getElementById('title').hidden=true;for(let i=0;i<20&&!(typeof S!=='undefined'&&S&&S.name);i++)start();Q.length=0;
  const drain=()=>{for(let i=0;i<80&&Q.length;i++)Q.shift();S.mg=null};
  /* the night-final step (jnf) holds tối's week end until tonight's flip choice is settled; this probe has no host / no player to answer it:
@@ -60,9 +64,13 @@ const out=await p.evaluate(([WEEKS,RUNS,SEED])=>{
   C2.W.S.men=hm;C2.W.S.cm={th:{lv:3,why:'x'},hh:{lv:0,why:''}};COOPW.on=true;COOPW.seat='b';COOPW.fromCanon(C2);COOPW.on=false;
   rt={name:S.men&&S.men[0]&&S.men[0].name,tinh:S.men&&S.men[0]&&S.men[0].tinh,cmTh:S.cm&&S.cm.th&&S.cm.th.lv,seen:!!(S.cm&&S.cm.seen)}}catch(e){rt={err:String(e)}}
  mig.rt=rt;
- Math.random=nat;return {res,mig,solo,after:worldOn()}},[WEEKS,RUNS,SEED]);
+ Math.random=nat;window.__agAll=ag0;return {res,mig,solo,after:worldOn()}},[WEEKS,RUNS,SEED]);
 /* ---- analysis in node ---- */
-const OWN=/^\.R\[#\d+\]\.(rl|ro|gp|ep|evm)\./;const DATE=/^\.S\.(year|month|tuan|turn|cnews)\b/;
+/* her own rows on each NPC: rl/ro/gp/ep/evm[her pid] (PID below). coop-one-world-flake 22/11: these maps were skipped WHOLE, so an NPC's
+   proof on another NPC (evm[npc id], world) went unchecked, while flat() writes an EMPTY map as one '{}' leaf: evm {} at base -> {902:n} in
+   her week (an NPC found proof on HER: her own row) read as "R.evm changed" (the seed-3 flake). Now: every key inside is checked (her pid
+   keys skipped by PID), and the empty-map leaf of these five maps is not a value (its keys, when any, are compared one by one). */
+const OWN=/^\.R\[#\d+\]\.(rl|ro|gp|ep|evm)$/;const DATE=/^\.S\.(year|month|tuan|turn|cnews)\b/;
 function flat(o,pre,acc){if(o&&typeof o==='object'){if(Array.isArray(o)&&o.length&&o.every(e=>e&&typeof e==='object'&&e.id!=null)){for(const e of o)flat(e,pre+'[#'+e.id+']',acc);return acc}
  const ks=Object.keys(o);if(!ks.length)acc[pre]=Array.isArray(o)?'[]':'{}';for(const k of ks)flat(o[k],pre+'.'+k,acc);return acc}acc[pre]=JSON.stringify(o);return acc}
 const fl=W=>flat({S:W.S,R:W.R},'',{});
@@ -70,6 +78,10 @@ const fl=W=>flat({S:W.S,R:W.R},'',{});
 const PID=/\.90[12](\.|$)/;
 const skip=(k,v)=>OWN.test(k)||DATE.test(k)||PID.test(k);
 const top=k=>{let m=k.match(/^\.R\[#\d+\]\.([^.\[]+)/);if(m)return 'R.'+m[1];m=k.match(/^\.S\.([^.\[]+)(\.[^.\[]+)?/);if(m)return 'S.'+m[1]+(m[1]==='emp'||m[1]==='court'?m[2]||'':'');return k.slice(0,30)};
+/* self-check of the compare (coop-one-world-flake): an empty own map that fills with HER row is no world change; an NPC key in it is */
+{const d=(a,b)=>{const x=fl({S:{},R:[{id:5,evm:a}]}),y=fl({S:{},R:[{id:5,evm:b}]});return [...new Set([...Object.keys(x),...Object.keys(y)])].filter(k=>!skip(k)&&x[k]!==y[k])};
+ const own=d({},{902:2}),npc=d({},{41:1}),gone=d({902:1},{});
+ if(own.length||gone.length||npc.join()!=='.R[#5].evm.41'){console.log('FAIL: compare self-check',JSON.stringify({own,npc,gone}));process.exit(1)}}
 const raw={},netBad={},mergeBad={};let actOk=0,actN=0,errN=0;
 for(const r of out.res){if(r.H.err||r.G.err){errN++;console.log('ERR',r.H.err||r.G.err)}
  const b0=fl(r.H.c0.W),h1=fl(r.H.c1.W),g0=fl(r.G.c0.W),g1=fl(r.G.c1.W),gs=fl(r.G.sent.W);
