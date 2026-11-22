@@ -1077,3 +1077,4 @@ L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | RUNNING | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
 night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | (opening) | RUNNING | 22/11 03:22Z (Foreman D #18)
+| E44d coop-famops-p fixer (P1–P4 pre-existing co-op item dup/vanish; opus BIG; successor of E44c, depth 4) | review/coop-famops-p; reports/coop-famops.md | FOREMAN E #31 | session_01DgYSWnPPS3JD1PLTsrLBCp | SSK 1033eb2e (on LIVE f0070e61) | 22/11 07:45Z |
