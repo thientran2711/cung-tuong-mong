@@ -1000,3 +1000,4 @@ night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964i
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | DONE LIVE 8746a062 22/11 | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
 night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | RUNNING | 22/11 03:22Z (Foreman D #18)
+| RELAND coop-host-lag r3 on LIVE bb92f986 (opus; MAIN 103 ORDER 02:50Z, clear() conflict → one shared helper) | review/coop-host-lag-r3 | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 22/11 03:23Z |
