@@ -89,3 +89,7 @@ Gates after the fix (serial):
 - quickcheck PASS on efea09a8 (core gates PASS, old save ok; perf new/live render 227/268 ms, buổi 1143/1596 ms)
 - on fe634e0f (same game code except jnf): balance-core, steal-mg-unit, night-steal-unit, night-multi, night-coop-park 7/7, flip-entry, steal-mg-nf, night-final 10/10, coop-e2e 124/124; guards ×5, sg-card-scan, npc-purpose-scan PASS
 Not taken: coop-nf-stall.js (WIP; D #17: rv's 10-week drive covers it).
+
+### Post-SSK (22/11 ~00:10Z): co-op stall on the rv's mg-craft merge 64758330
+- Cause found with a forced probe (dev/test/cn-force.js, bundle 0ebab437, test only): the guest's manual night-end scene #kneov (jne kitNightEnd: kmStage manual, closes only on «Nhận» [data-km-close]) holds her card-flip job in the kit scene queue (cfBusy), so jnf's choice waits (jnf.js scene()). Deferred, not held: with «Nhận» pressed, case 1 PASS; AFK, the host's BAL.steal.choice.waitMs bound resolves the night and both seats move on (180 s watched). coop-e2e's clear() never pressed [data-km-close]: driver gap; rv's clear() fix → coop-e2e 124/124 ×3. No game change.
+- FOLLOW-UP (not blocking): while the guest waits at tối for the host's word, she sends «ask» about every 0.3 s (jnf endTurn wrapper → ask() on every endTurn call) and the host answers «open» each time: chatty relay, pre-existing (nobc/NLC). Rate-limit ask() (e.g. on BAL.steal.choice.ms like finLate's re-ask).
