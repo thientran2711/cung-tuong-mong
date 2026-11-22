@@ -80,7 +80,7 @@ function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahe
    blocks the scene / the flip choice / the steal only when her cycle covers THAT day. While the ledger draws (jledger window.__ldRoll)
    nothing blocks: it keeps every woman off her own cycle days night by night (jledger cyDayOf). Before the draw (the day's own acts: the
    late visit's night option, the ksp bath, the tray she sees) the played day is not known yet: her cycle tuần blocks as before.
-   Without the ledger (a PARKED thin part-E room, BAL.nt.on false; a player room runs the ledger since night-ledger-coop): the whole cycle tuần, as before. */
+   Without the ledger (a PARKED room: nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff); BAL.nt.on false; a player room with both seats in the palace runs the ledger since night-ledger-coop): the whole cycle tuần, as before. */
 function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;if(window.__ldRoll)return 0;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
 function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined||d===null)return true;if(d===0)return false;return cyDaysM(p,cyCur()).includes(d)}
 /* the TRAY (Kính sự phòng's view): her card is off while in her cycle (the played day with the ledger, else her cycle tuần), unless she

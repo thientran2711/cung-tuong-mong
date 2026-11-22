@@ -32,9 +32,11 @@
       a reconnect). The GUEST never rolls: she stores the host's days (S.ledger, so jcycle reads the same played day) and settles HER own
       nights on her seat (Sổ ghi line, kit pill, BAL.nt.extraFx, her own conception roll, nights / nightLog) + her tai-mắt line naming the
       other nights (the host's among them, as his names hers). Both seats read the same host-computed days; every number is BAL.nt.
-      A THIN part-E room (nfParked) stays on the live one-night flip: ldOn false there; S.ldPk = a tuần whose flip ran parked (no ledger).
+      A PARKED room (nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff)) stays on the live one-night flip: ldOn false there; S.ldPk = a tuần whose flip ran parked (no ledger).
+      A tuần ROLLED while unparked is settled even if the room parks before it is settled (host ldSettle, guest ldIn; the relay modes ld / ldask
+      pass the park): its nights happened (law 6, one world), the conception roll keeps BAL.nt.concF (window.__ldNt).
    Save: S.ledger = {wk, days:[{d, w ("me" | id | null), y ("custom"|"pick"|"blank"|"none"|"visit"|"played"), s (stolen)}], p (played index | -1), st}.
-   S.ldPk = the tuần whose flip ran in a PARKED (thin part-E) room. S.ldOut (host) / S.ldG (guest: the last tuần settled on her seat).
+   S.ldPk = the tuần whose flip ran in a PARKED room (nfParked: thin part-E, or a seat off the palace). S.ldOut (host) / S.ldG (guest: the last tuần settled on her seat).
    Old saves: absent → rolled at the next commit. ================================================================================== */
 (function(){
 const N=()=>BAL.nt||{};
@@ -87,7 +89,7 @@ function ldRoll0(fixed){const n=N(),w0=W(),base=(S.tuan||0)*10;const q=queenP(),
  S.ledger={wk:w0,days,p:pi,st:0};return S.ledger}
 function cur(){const L=S&&S.ledger;return L&&L.wk===W()?L:null}
 /* j8 flip asks for the played tối's holder: undefined = no ledger here (live flip), null = nobody, else the person */
-function ldPin(){if(!ldOn()||gst()||(S.ldPk===W()&&!cur()))return undefined;/* the tuần's flip ran PARKED (thin part-E): its one night, no ledger */const L=cur()||ldRoll();const e=L.days[L.p];if(!e)return null;const p=ent(e.w);return alive(p)?p:null}
+function ldPin(){if(!ldOn()||gst()||(S.ldPk===W()&&!cur()))return undefined;/* the tuần's flip ran PARKED (nfParked): its one night, no ledger */const L=cur()||ldRoll();const e=L.days[L.p];if(!e)return null;const p=ent(e.w);return alive(p)?p:null}
 window.ldPin=ldPin;
 /* the cause j75 writes in nightWhy for the played tối */
 window.ldCause=function(){const L=cur();const e=L&&L.days[L.p];return e&&e.y==="custom"?"custom":null};
@@ -106,15 +108,17 @@ function contest(h){if(typeof window.stealPass!=="function")return{holder:h,line
 const nm=p=>p===S?"ngươi":p.name;
 /* co-op: the host's view of a line (his own night: "ngươi" → his name, so the friend's seat reads it as hers would read any other) */
 const hv=x=>String(x).replace(/(của|thay vì) ngươi(?=[\s.,;:]|$)/g,(m,a)=>`${a} ${S.name}`);
-function ldSettle(){if(!ldOn())return;const d0=W();
- if(gst()){if(S.ldG!==d0)setTimeout(()=>{try{if(S&&S.ldG!==d0&&typeof window.nfLdAsk==="function")window.nfLdAsk(d0)}catch(e){}},400);return}   /* the guest never rolls: her nights come from the host (ldIn) */
+/* a tuần ROLLED while unparked and not yet settled (the room parked since: nfParked): it is settled all the same (law 6, one world) */
+function ldHas(){try{const L=cur();return !!(L&&!L.st&&N().on&&S&&!S.dead&&!gst())}catch(e){return false}}
+function ldSettle(){const on=ldOn();if(!on&&!ldHas())return;const d0=W();
+ if(gst()){if(on&&S.ldG!==d0)setTimeout(()=>{try{if(S&&S.ldG!==d0&&typeof window.nfLdAsk==="function")window.nfLdAsk(d0)}catch(e){}},400);return}   /* the guest never rolls: her nights come from the host (ldIn) */
  let L=cur();
- /* the day's flip ran in a PARKED (thin part-E) room (the live one-night flip) and she left the room before the day ended: that tuần keeps its one night */
+ /* the day's flip ran in a PARKED room (nfParked) (the live one-night flip) and she left the room before the day ended: that tuần keeps its one night */
  if(!L&&S.ldPk===d0){S.ledger={wk:d0,days:[],p:-1,st:1};return}
  if(!L)L=ldRoll(S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null));
  if(L.st)return;L.st=1;
  const pe=L.days[L.p];if(pe){const h=S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null);const w1=h?idOf(h):null;if(w1!==pe.w){pe.s=1;pe.o=pe.w}pe.w=w1}   /* the played tối as it ended (a won steal moved it) */
- const mine=[],npc=[],ln={},F=fr();let me=0;
+ const mine=[],npc=[],ln={},F=fr();let me=0;window.__ldNt=1;try{
  L.days.forEach((e,i)=>{if(i===L.p)return;
   if(e.y==="visit"){if(queenP()===S)log(`Kính sự phòng ghi: ngày ${e.d}, theo lệ Hoàng thượng sang cung ngươi thăm hỏi; ngươi không tiện hầu giá.`);return}
   let h=ent(e.w);if(!alive(h))return;
@@ -126,6 +130,7 @@ function ldSettle(){if(!ldOn())return;const d0=W();
   oneNight(h);const g=gain(h);night(h);
   if(h===S){me++;log(`Kính sự phòng ghi: ngày ${e.d}, ngươi được lật thẻ thêm một đêm.${g.sg?` Sủng +${g.sg}`:""}${g.an?`${g.sg?" ·":""} Ân tình +${g.an}`:""}${g.sg||g.an?".":""}`)}
   else npc.push(`ngày ${e.d} cung ${nm(h)}`)});
+ }finally{window.__ldNt=0}
  mine.forEach(x=>log(x));
  if(npc.length&&(S.mat||0)>=2)log(`Kính sự phòng ghi tuần này: ${npc.join(", ")}.`);
  pill(me);
@@ -141,12 +146,12 @@ function enc(L,ln){if(!L||typeof window.nfEnc!=="function")return null;
 window.ldOut=function(){try{if(!ldOn()||gst()||!room()||!fr())return null;const L=cur();return L?enc(L,null):null}catch(e){return null}};
 const dw=h=>{try{if(!h||typeof window.nfDec!=="function")return null;const t=window.nfDec(h);return t==null?null:t==="me"?"me":t.id}catch(e){return null}};
 /* the guest takes the host's ledger: the days (jcycle's played day, the same book), and once settled HER own nights on her seat */
-window.ldIn=function(o){try{if(!o||!Array.isArray(o.days)||!S||S.dead||!gst()||!ldOn())return;
+window.ldIn=function(o){try{if(!o||!Array.isArray(o.days)||!S||S.dead||!gst()||!N().on)return;const on=ldOn();if(!on&&!o.st)return;   /* parked now: only a tuần the host already rolled AND settled while unparked (its nights happened) */
  const days=o.days.map(e=>Object.assign({d:e.d,w:dw(e.w),y:e.y},e.s?{s:1,o:dw(e.o)}:{}));
- if(o.wk===W()&&!(S.ledger&&S.ledger.wk===o.wk&&S.ledger.st))S.ledger={wk:o.wk,days,p:o.p,st:0};
+ if(on&&o.wk===W()&&!(S.ledger&&S.ledger.wk===o.wk&&S.ledger.st))S.ledger={wk:o.wk,days,p:o.p,st:0};
  if(o.st&&S.ldG!==o.wk&&!(S.ldG!=null&&o.wk<S.ldG))gSettle(o.wk,days,o.p,o.ln||{})}catch(e){console.error(e)}};
 const meRe=n=>new RegExp(`(của|thay vì) ${String(n||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}(?=[\\s.,;:]|$)`,"g");
-function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meRe(S.name):null;
+function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meRe(S.name):null;window.__ldNt=1;try{
  days.forEach((e,i)=>{if(i===p)return;
   if(e.y==="visit"){if(queenP()===S)log(`Kính sự phòng ghi: ngày ${e.d}, theo lệ Hoàng thượng sang cung ngươi thăm hỏi; ngươi không tiện hầu giá.`);return}
   if(e.w==null)return;const h0=e.s?e.o:e.w;
@@ -154,6 +159,7 @@ function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meR
   if(e.w==="me"){oneNight(S,w);const g=gain(S);night(S);me++;
    log(`Kính sự phòng ghi: ngày ${e.d}, ngươi được lật thẻ thêm một đêm.${g.sg?` Sủng +${g.sg}`:""}${g.an?`${g.sg?" ·":""} Ân tình +${g.an}`:""}${g.sg||g.an?".":""}`)}
   else{const h=ent(e.w);if(h)npc.push(`ngày ${e.d} cung ${nm(h)}`)}});
+ }finally{window.__ldNt=0}
  out.forEach(x=>log(x));
  if(npc.length&&(S.mat||0)>=2)log(`Kính sự phòng ghi tuần này: ${npc.join(", ")}.`);
  pill(me);
@@ -163,10 +169,10 @@ function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meR
 window.ldAgain=function(w){try{const L=(S&&S.ldOut)||[];const o=w==null?L[L.length-1]:L.find(x=>x&&x.wk===w);if(o&&typeof window.nfLdSend==="function"){window.nfLdSend(o);return true}}catch(e){}return false};
 window.ldWant=()=>{try{return gst()&&S&&S.ledger&&S.ledger.wk!=null&&S.ldG!==S.ledger.wk?S.ledger.wk:null}catch(e){return null}};
 window.ldSettle=ldSettle;
-/* a flip made while a room is PARKED (jnf nfParked: thin part-E) is the live one-night flip: marked so the ledger does not add that tuần's other nights */
-const fl0=flip;flip=function(){try{if(S&&typeof nfParked==="function"&&nfParked())S.ldPk=W()}catch(e){}return fl0.apply(this,arguments)};   /* only a PARKED (thin part-E) room: a player room runs the ledger */
+/* a flip made while a room is PARKED (nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff)) is the live one-night flip: marked so the ledger does not add that tuần's other nights */
+const fl0=flip;flip=function(){try{if(S&&typeof nfParked==="function"&&nfParked())S.ldPk=W()}catch(e){}return fl0.apply(this,arguments)};   /* only a PARKED room (nfParked): a player room with both seats in the palace runs the ledger */
 /* the commit's live endTurn (jnf calls it after the choice and her night): the ledger's other nights are written first */
-const et0=endTurn;endTurn=function(){try{if(ldOn()&&!(typeof Q!=="undefined"&&Q.length)&&!S.mg)ldSettle()}catch(e){console.error(e)}return et0.apply(this,arguments)};
+const et0=endTurn;endTurn=function(){try{if((ldOn()||ldHas())&&!(typeof Q!=="undefined"&&Q.length)&&!S.mg)ldSettle()}catch(e){console.error(e)}return et0.apply(this,arguments)};
 /* ---------- 4. the float conception roll ---------- */
-const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{if(ldOn()&&c>0)return c*(N().concF==null?1:N().concF)}catch(e){}return c};
+const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{if((ldOn()||window.__ldNt)&&c>0)return c*(N().concF==null?1:N().concF)}catch(e){}return c};
 })();

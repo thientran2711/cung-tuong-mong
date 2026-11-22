@@ -26,7 +26,7 @@ if(typeof flip!=="function"||typeof endTurn!=="function"||typeof nightScene!=="f
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 const B4=()=>typeof B4L==="number"?B4L:2;
 const B=()=>BAL.steal;
-/* (HISTORY, superseded by UNPARKED below: only a thin part-E room is parked now) ⛔ CO-OP PARKED — THE ONE GATE (Foreman D #8, 17/11, fix F1 of review-night-final-r1; owner 17/11 02:05Z: no co-op patching, co-op goes to
+/* (HISTORY, superseded by UNPARKED below: only nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff) is parked now) ⛔ CO-OP PARKED — THE ONE GATE (Foreman D #8, 17/11, fix F1 of review-night-final-r1; owner 17/11 02:05Z: no co-op patching, co-op goes to
    Foreman B's coop-thin rebuild). The new night flow runs SOLO only: while a co-op room is on, nfOn() is false and EVERY jnf entry point falls
    back to the live path — flip (jfe.js start-of-tối flip), nightScene, endTurn (live commit), visRoll, the click guard, step, render rerun,
    resolveTonight / rivalNight wrappers, the relay (send / ask / act listener), stealPass (jsteal's own), the two Tranh sủng / Chặn ngự giá acts
@@ -34,8 +34,9 @@ const B=()=>BAL.steal;
    a tablet still waiting (S.nfP) is turned by jfe at tối; a co-op flip already made (S.nfF / nightWhy) is never turned again by jnf.
    coop-thin E: enable the co-op night by making nfParked() return false (this function) and deleting jfe.js from assemble.py. */
 /* UNPARKED (MAIN ROOT-82 20/11 22:58Z on the owner's 20/11 ~21:30Z rule «phải chạy được trên cả hai bản»): a co-op room runs the new night on
-   BOTH seats through the host-authoritative relay below. Parked only in a THIN part-E room (dev flag ctm-thin >= 5, Foreman B's coop-thin: the host
-   runs her buổi + night in withSeat there, so the per-seat relay must not run twice); no player room reaches that level. */
+   BOTH seats through the host-authoritative relay below. Parked (nfParked) in a THIN part-E room (dev flag ctm-thin >= 5, Foreman B's coop-thin: the host
+   runs her buổi + night in withSeat there, so the per-seat relay must not run twice; no player room reaches that level) or in a room with a seat
+   off the palace (roomOff, coop-night0, below). */
 function nfParked(){try{const c=window.COOPW;return !!(c&&c.on&&c.thin&&typeof c.thin.on==="function"&&c.thin.on(5))||roomOff()}catch(e){return false}}
 window.nfParked=nfParked;
 /* the palace night only (servant route j42 and the home route jkc keep their own week: the flip there is unchanged) */
@@ -64,7 +65,7 @@ let REAL=0,IN=0,SW=0,CUR=null,RR=null;
    her Hành sự deck (j2 deal: the two cards are deleted there), the person menu group "Hại nặng" (j15 RVGRP), the NPC harm bands (j24 BANDS:
    NPC agents pick their acts there), the weekly social act (j28 SOC.steal, already off in jsteal). ACT.steal / ACT.road stay defined (old
    callers) but can never be offered: ok() = false. */
-/* parked (nfParked: a THIN part-E room only): the live lists come back while that room is on — each removed key is put back at its own place (nfActs, on render) */
+/* parked (nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff)): the live lists come back while that room is on — each removed key is put back at its own place (nfActs, on render) */
 const ACTS=[];
 try{for(const g of (typeof RVGRP!=="undefined"?RVGRP:[]))for(const k of ["steal","road"]){const i=g[1].indexOf(k);if(i>=0)ACTS.push({g,f:1,k,i})}}catch(e){}
 try{for(const g of (typeof BANDS!=="undefined"?BANDS:[]))for(const k of ["steal","road"]){const i=(g[2]||[]).indexOf(k);if(i>=0)ACTS.push({g,f:2,k,i})}}catch(e){}
@@ -392,17 +393,21 @@ function apply(m){if(!S||S.dead)return;if(m.ld&&guest()&&typeof window.ldIn==="f
   if(w0&&!Q.length&&(S.buoi||0)>=B4()){try{COOPW.allowN=true;nextBuoi()}catch(e){console.error(e)}finally{COOPW.allowN=false}}}
  try{if(!window.__bot&&Q.length)showModal();render()}catch(e){}}
 try{if(typeof COOP==="object"&&COOP.on){
- COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat||!nfOn())return;
-  if(m.mode==="ask"){if(host())reply(m.d!=null?m.d:day());return}
-  /* the 10-night ledger (jledger §5): the host's settled tuần → the guest settles her own nights; her ask → the host sends it again */
+ COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat)return;
+  /* the 10-night ledger (jledger §5): the host's settled tuần → the guest settles her own nights; her ask → the host sends it again.
+     Before the park gate: a tuần rolled and settled while unparked still reaches her seat after the room parks (jledger ldIn takes only a settled one then) */
   if(m.mode==="ld"){if(guest()&&typeof window.ldIn==="function")window.ldIn(m.ld);return}
   if(m.mode==="ldask"){if(host()&&typeof window.ldAgain==="function")window.ldAgain(m.wk);return}
+  if(!nfOn())return;
+  if(m.mode==="ask"){if(host())reply(m.d!=null?m.d:day());return}
   if(m.mode==="h"&&guest())apply(m);
   else if(m.mode==="g"&&host()&&S&&m.d===day()){
    if(m.ph==="ch"){const x=X();if(x&&x.st==="open"&&x.fr===undefined){x.fr=m.ch?VALID(m.ch.v):null;step()}return}
    if(S.nfFin===day())return;
    apply(m);send()}}catch(e){console.error(e)}});
- const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d);if(typeof window.ldAgain==="function")window.ldAgain()}else if(guest()&&S){if((S.buoi||0)>=B4()&&S.nfFin!==day())ask();const w=typeof window.ldWant==="function"?window.ldWant():null;if(w!=null)window.nfLdAsk(w)}}catch(e){}},400);
+ const re=()=>setTimeout(()=>{try{if(!CO())return;const on=nfOn();
+  if(host()){if(on&&!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d);if(typeof window.ldAgain==="function")window.ldAgain()}   /* the last settled tuần again, parked or not (jledger ldIn) */
+  else if(guest()&&S){if(on&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask();const w=typeof window.ldWant==="function"?window.ldWant():null;if(w!=null)window.nfLdAsk(w)}}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfSend=()=>send();/* test hook: relay the holder now */
 /* the 10-night ledger's relay on this key (jledger §5): seat-neutral ids, the settled tuần (host → guest), the guest's ask */

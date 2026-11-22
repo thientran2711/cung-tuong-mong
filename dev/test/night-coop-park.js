@@ -38,9 +38,9 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   T.noCyc();S.toMorning=0;used=4;S.buoi=B4L;let seen=0;const sm=showModal;showModal=function(){if(Q[0]&&Q[0].pid==="nfch")seen++;return sm.apply(this,arguments)};
   /* one press at the end of tối: the flip + (a card turned) the choice */
   try{endTurn()}finally{}a.flipped=S.nfF===d;a.x=S.nfX&&S.nfX.d===d?{st:S.nfX.st,t:S.nfX.t,role:S.nfX.role}:null;a.nfch=Q.some(m=>m.pid==="nfch")||seen>0;
-  const n0=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);
+  const n0=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);
   const e=T.endDay();showModal=sm;a.moved=e.moved;a.presses=e.presses;a.done=!!(S.nfX&&S.nfX.d===d&&S.nfX.st==="done");
-  const n1=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;
+  const n1=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;
   a.msgs=T.sent.filter(m=>m&&m.k==="ctm-nf"&&m.d===d).map(m=>({ph:m.ph,open:m.open,fin:m.fin,mode:m.mode}));BAL.nt.on=true;T.room(false);render();return a});
  {const card=r.x&&r.x.t!=null;const relOpen=r.msgs.some(m=>m.mode==="h"&&m.open),relFin=r.msgs.some(m=>m.mode==="h"&&m.fin);
   ok("2 player room on: the NEW night on the host — no flip during tối, flip at the end, choice (a card turned), relay open + fin, ≤1 record, the week moves",
@@ -48,8 +48,8 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  /* 2b. (night-ledger-coop) the 10-night ledger in a PLAYER room (host seat): ONE ledger for the tuần, rolled at the flip and settled once at the
     day end; every record = the played tối + the ledger's other nights (no second count); the week moves. Both seats: dev/test/coop-ledger.js */
  r=await p.evaluate(()=>{T.fresh();T.room(true);render();const a={ld:ldOn()};const d=wk();T.toEvening();
-  const n0=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);const e=T.endDay();a.moved=e.moved;
-  const n1=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;const L=S.ledger&&S.ledger.wk===d?S.ledger:null;
+  const n0=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);const e=T.endDay();a.moved=e.moved;
+  const n1=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;const L=S.ledger&&S.ledger.wk===d?S.ledger:null;
   a.L=!!L;a.st=L&&L.st;a.got=L?L.days.filter((x,i)=>x.w&&x.y!=="visit"&&(i!==L.p||S.nightWhy)).length:-1;a.held=L?L.days.filter(x=>x.w&&x.y!=="visit").length:-1;T.room(false);render();return a});
  ok("2b player room on: ONE ledger on the host (rolled at the flip, settled once), records = its nights (no second count), the week moves",r.ld&&r.L&&r.st===1&&r.moved&&r.rec<=r.held&&r.rec>=r.held-1,r);
  /* 3. a THIN part-E room (Foreman B's coop-thin, COOPW.thin.on(5); jcoopthin is not in this build, so the level is a stub) stays PARKED at the
@@ -67,20 +67,38 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
     the choice resolves, ≤1 record, the day moves */
  /* (night-ledger-coop) counts the PLAYED tối: ledger off here (no flip ran in the room, so the solo ledger would be legit — case 5b) */
  r=await p.evaluate(()=>{T.fresh();T.room(true,true);BAL.nt.on=false;render();const d=wk();T.toEvening();const w0=S.nightWhy&&S.nightWhy.wk===d?JSON.stringify([S.nightWhy.wk,S.nightWhy.flip0]):null;
-  const n0=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);
+  const n0=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);
   T.room(false);render();const a={on:nfOn()};
   const e=T.endDay();a.moved=e.moved;a.presses=e.presses;a.w0=w0;a.w1=S.nightWhy&&S.nightWhy.wk===d?JSON.stringify([S.nightWhy.wk,S.nightWhy.flip0]):null;a.sameFlip=!w0||a.w1===w0;a.flipped=S.nfF===d||!!a.w1;
-  const n1=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;a.done=!!(S.nfX&&S.nfX.d===d&&S.nfX.st==="done");Object.assign(a,T.lists());BAL.nt.on=true;return a});
+  const n1=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;a.done=!!(S.nfX&&S.nfX.d===d&&S.nfX.st==="done");Object.assign(a,T.lists());BAL.nt.on=true;return a});
  ok("5 thin-E room → solo mid-day: one flip at most (never a second), the choice resolves, ≤1 record, the day moves",r.on&&r.flipped&&r.moved&&r.sameFlip&&r.rec<=1&&r.done&&!r.rv&&!r.bands,r);
  /* 5b. (night-ledger-coop) S.ldPk: the flip RAN in a PARKED thin part-E room (the live one-night flip), then she leaves mid-day → that tuần gets NO
     ledger (empty, settled), ≤1 record; the day moves. 5c: no flip in the thin room, then solo → that tuần gets ONE ledger (legit) */
  r=await p.evaluate(()=>{T.fresh();T.room(true,true);render();const d=wk();T.toEvening();try{flip()}catch(e){}const a={pk:S.ldPk===d,ld0:ldOn()};
-  const n0=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);T.room(false);render();a.ld1=ldOn();const e=T.endDay();a.moved=e.moved;
-  const n1=(S.nights||0)+liveRivals(false).reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;const L=S.ledger&&S.ledger.wk===d?S.ledger:null;a.empty=!!L&&L.st===1&&L.days.length===0;return a});
+  const n0=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);T.room(false);render();a.ld1=ldOn();const e=T.endDay();a.moved=e.moved;
+  const n1=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;const L=S.ledger&&S.ledger.wk===d?S.ledger:null;a.empty=!!L&&L.st===1&&L.days.length===0;return a});
  ok("5b flip ran in a PARKED thin-E room → solo mid-day: S.ldPk blocks the ledger (no other nights), ≤1 record, the day moves",r.pk&&!r.ld0&&r.ld1&&r.empty&&r.rec<=1&&r.moved,r);
  r=await p.evaluate(()=>{T.fresh();T.room(true,true);render();const d=wk();T.toEvening();const a={pk:S.ldPk===d};T.room(false);render();const e=T.endDay();a.moved=e.moved;
   const L=S.ledger&&S.ledger.wk===d?S.ledger:null;a.one=!!L&&L.st===1&&L.days.length===(BAL.nt.days||10);return a});
  ok("5c no flip in the thin-E room → solo mid-day: ONE ledger for that tuần (legit), the day moves",!r.pk&&r.one&&r.moved,r);
+ /* 5d. (night-ledger-coop-r2, mid-tuần park edge) the ledger was ROLLED in a player room (the flip of the commit), then the room PARKS before the
+    day end: that tuần is settled all the same (its nights happened: law 6, one world) — settled once, records = its nights, the day moves */
+ r=await p.evaluate(()=>{T.fresh();T.room(true);render();const d=wk();T.toEvening();T.noCyc();S.toMorning=0;used=4;S.buoi=B4L;
+  const n0=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);try{endTurn()}catch(e){}T.drain();const a={rolled:!!(S.ledger&&S.ledger.wk===d&&!S.ledger.st)};
+  T.room(true,true);render();a.park=nfParked();a.ld=ldOn();const e=T.endDay();a.moved=e.moved;
+  const n1=(S.nights||0)+rivals.reduce((s,v)=>s+(v.nights||0),0);a.rec=n1-n0;const L=S.ledger&&S.ledger.wk===d?S.ledger:null;a.st=L&&L.st;a.held=L?L.days.filter(x=>x.w&&x.y!=="visit").length:-1;
+  T.room(false);render();return a});
+ ok("5d ledger rolled in a player room, the room parks before the day end: the tuần is still settled once, records = its nights, the day moves",r.rolled&&r.park&&!r.ld&&r.st===1&&r.moved&&r.rec<=r.held&&r.rec>=r.held-1,r);
+ /* 5e. the GUEST seat after the room parked: a tuần the host rolled AND settled while unparked (ctm-nf "ld", st 1) still lands on her seat
+    (gSettle: her night recorded + Sổ ghi line, once; the conception roll keeps BAL.nt.concF); an unsettled word (st 0) is ignored while parked */
+ r=await p.evaluate(()=>{T.fresh();T.room(true);COOPW.seat="b";COOPW.thin={on:n=>n<=5};render();const a={gst:!worldOn(),park:nfParked(),ld:ldOn()};const w=wk(),b0=(S.tuan||0)*10;
+  const me=nfEnc("me"),o=st=>({wk:w,p:0,st,days:[{d:b0+1,w:null,y:"blank"},{d:b0+2,w:me,y:"pick"},{d:b0+3,w:null,y:"blank"}],ln:{}});
+  const n0=S.nights||0,g0=S.ldG;ldIn(o(0));a.unsettled=S.ldG===g0&&(S.nights||0)===n0;
+  const s0=S.logSeq||0;ldIn(o(1));a.ldG=S.ldG===w;a.n=(S.nights||0)-n0;a.line=S.logs.slice(0,Math.max(0,(S.logSeq||0)-s0)).some(x=>/Kính sự phòng ghi: ngày \d+, ngươi được lật thẻ thêm một đêm/.test(String(x)));
+  ldIn(o(1));a.once=(S.nights||0)-n0===a.n;
+  const c0=conceiveCh(S);window.__ldNt=1;const c1=conceiveCh(S);window.__ldNt=0;a.cf=c0>0?Math.abs(c1-c0*BAL.nt.concF)<1e-9:true;
+  COOPW.seat="a";T.room(false);render();return a});
+ ok("5e guest seat, room parked: a settled tuần (ld st 1) still settles her nights once (record + Sổ ghi line, BAL.nt.concF), an unsettled one is ignored",r.gst&&r.park&&!r.ld&&r.unsettled&&r.ldG&&r.n===1&&r.line&&r.once&&r.cf,r);
  /* 6. the solo choice is OPEN, then a player room comes on: the same choice finishes (one resolve), the day ends, no hang */
  r=await p.evaluate(()=>{T.fresh();const d=wk();T.toEvening();T.noCyc();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();const a={open:Q.some(m=>m.pid==="nfch")||!!(S.nfX&&S.nfX.d===d)};
   T.room(true);render();const e=T.endDay();a.moved=e.moved;a.presses=e.presses;a.left=Q.length;a.done=!!(S.nfX&&S.nfX.d===d&&S.nfX.st==="done");T.room(false);render();return a});
