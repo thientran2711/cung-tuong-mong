@@ -1,0 +1,5 @@
+base: dev/handover/prompts_L2095/M2342-16_th_act-tutin_A_still_TONEDOWN.txt
+allow: holding a small rolled painted scroll in both hands at chest height  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: Light posture only  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: no scroll held high  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: no big gesture  # owner L2349 + A29 (act seals = clear readable action, not restrained)

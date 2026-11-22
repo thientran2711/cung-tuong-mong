@@ -1,0 +1,5 @@
+base: dev/handover/prompts_L2095/M2342-05_th_act-ghen_A_still_TONEDOWN.txt
+allow: Light posture only  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: the fan held in one hand  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: the other hand resting still at the bottom of the medallion just inside the gold rim  # owner L2349 + A29 (act seals = clear readable action, not restrained)
+allow: no big gesture  # owner L2349 + A29 (act seals = clear readable action, not restrained)

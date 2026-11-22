@@ -68,3 +68,24 @@ Bases still_base/th-act-<k>-A.txt (17). Tools + all B/OUT/LOOP prompt texts: dev
 
 ## Coordinator change
 ROOT-C1 → ROOT-C2 (session_01D3E3NbRKVda1eN4trg7rnx). Its messages reached me only after the work was done, so batches 3–5 + final went to ROOT-C1 first; all resent to ROOT-C2. Still sheets (A row over B row): …/tonedown/act/th-act-tonedown-batch{1,2,3,45}-stills-AB.jpg.
+
+## (2) L2349 / A29 — act seals must show a CLEAR action (prompt work only, 0 cr, NOT generated — waits for owner yes via ROOT-C2)
+Owner L2349: vui money pouch odd; lo dark eye bags = sleepy; giận too restrained; 'act seals are over-restrained'. Re-checked all 21 (stills + MP4s).
+Kept: same Thái hậu, tone-down LOOK, two hands, no earrings, no big arms (B), arms inside the picture, BACK = reversed OUT. Changed: action clause ('Light posture only' → 'Clear readable action'), B 'small calm gesture only' → 'a clear readable action'.
+Files prompts_L2095/M2349-NN_th_act-<k>_{A_still,B_burst,clips}_ACTION.txt; .keep for A (base = M2342 A) and B (base = THACT1_tools/prompts/B_<k>.txt): 24/24 PASS (every allowed drop = a restrained-action phrase). seal_gate A 12, B 12, out 12, loop 12: all PASS.
+| code | seal | new action (VN) |
+|---|---|---|
+| M2349-01 | vui | vỗ tay cười lớn vui sướng (bỏ thỏi vàng + túi tiền) |
+| M2349-02 | lo | bồn chồn lần chuỗi tràng hạt, cắn môi, mắt ngước lo âu, giọt mồ hôi (bỏ quầng thâm/tóc rối = buồn ngủ) |
+| M2349-03 | giận | đập tay xuống vành ấn, tay kia chỉ thẳng quát, mặt đỏ, dấu giận + khói (bỏ chén trà, mặt kìm nén) |
+| M2349-04 | ẩn | ngón tay 'suỵt' + giấu lá thư sau tay áo, nháy mắt, sương + dấu hỏi (rõ hơn bản nhét thư) |
+| M2349-05 | mưu | đặt quân cờ vây đen lên bàn cờ nhỏ trên vành ấn, gõ cằm, cười mưu mô |
+| M2349-06 | ghen | quạt che miệng + ngón tay chỉ chế giễu sang bên, cười khẩy (thêm lại ngón chỉ) |
+| M2349-07 | buồn | khóc, chấm nước mắt bằng khăn tay trắng, mây mưa nhỏ (rõ hơn bản 1 giọt lệ) |
+| M2349-08 | sợ | trốn sau chăn hoa tím kéo tới mũi, run, mắt mở to (rõ hơn bản kéo tới cằm) |
+| M2349-09 | chán | quăng khung thêu qua vai, chống má chán nản, đảo mắt (rõ hơn bản cầm hờ) |
+| M2349-10 | khó chịu | chỉ tay sang bên quát người hầu, miệng mở cằn nhằn (rõ hơn bản chỉ nhẹ ngậm miệng) |
+| M2349-11 | tự tin | giơ cuộn tranh hoa mai mở ra khoe, hếch cằm nháy mắt (rõ hơn bản cầm cuộn thấp) |
+| M2349-12 | tinh nghịch | thả lủng lẳng con rắn giấy ra ngoài vành để trêu, che miệng cười khúc khích (rõ hơn bản cầm im) |
+KEEP as is (action already readable): bình (nhấp trà), đau lòng (ngọc bội áp ngực, 1 giọt lệ — L798 heartache ≠ crying), hổ thẹn (giả ốm, khăn trán), choáng (đờ đẫn, mây xám), hờn (quay mặt, giơ tay 'không'), tình tứ (thiệp mời + vẫy gọi), hăng hái (viết thư pháp), chuyên tâm (đọc sách), hưng khởi (bút lông + vệt mực).
+Cost if all 12: 12 × (2×135 + 2×940) = 25 800 cr (2 150 each; BACK 0).
