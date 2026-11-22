@@ -137,7 +137,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{const f=COOP.send;COOP.send=function(m){if(m&&m.t==='end')window.__sentW=JSON.stringify(m.state.W)===JSON.stringify(COOPW.base.W);return f.apply(this,arguments)}});
  const okw=await week(H,G,'C4');
  const c4=await G.p.evaluate(()=>({st:COOPW.thin.C.stat,c0:window.__c0,sentW:window.__sentW}));
- ok(okw&&c4.sentW===true,'C4 her sent week carries the room world unchanged (W from the host only)',{sentW:c4.sentW});
+ /* part G (level >= 13): her phone never runs / sends her week end (jcoopworld sendEnd returns at gG(); the Worker refuses a guest end): no world of hers travels */
+ ok(okw&&(LVL>=13?c4.sentW===null:c4.sentW===true),LVL>=13?'C4 level 13: she sends no week end (the host ran it), no world of hers travels':'C4 her sent week carries the room world unchanged (W from the host only)',{sentW:c4.sentW});
  ok(c4.st.drop>c4.c0.drop,'C4 her week end ran its world loops on the lens (writes dropped)',{drop:[c4.c0.drop,c4.st.drop],dropW:c4.st.dropW});
  await sync();
  const one=await (async()=>{const f=()=>rivals.filter(v=>v&&!v.coop).map(v=>[v.id,v.sung,v.bac,v.danh,v.suc,v.alive,v.rank,!!v.out]).sort((a,b)=>a[0]-b[0]);const [h,g]=await both(f);
