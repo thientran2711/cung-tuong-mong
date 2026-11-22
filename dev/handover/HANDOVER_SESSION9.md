@@ -2393,3 +2393,14 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 09:33Z) WAKE: LOAD: main running 0 | B ROOT-10 (night-ledger-coop rv, host-lag r3, thin-g F1) | C quiet (PLACES held for owner) | D #19 has capacity (role-parity-bundle-fix + rv running) | E 2 (E44e, E50r reviewing coop-famops-p) | moved: none. Relayed to LC5 in order: coop-night0-r1 234d0298, coop-fig-retry-r3 0479cf32, places-wire-nvp-tn-rv f90e455b. LIVE f0070e61.
 - (22/11 10:09Z) LANDED coop-night0 234d0298 (LIVE=234d0298, coop-e2e 129/129). LC5 next: fig-retry-r3, places-wire. Flake flagged to B: quickcheck G4 50-coop-one-world seed 3 R.evm (passed alone 8/8 + rerun).
 - (22/11 10:24Z) LANDED coop-fig-retry-r3 609c86b0 (LIVE=609c86b0, coop-e2e 129/129). LC5 now: places-wire-nvp-tn.
+- (22/11 10:33Z) WAKE: LOAD: main running 0 | B ROOT-10 (night-ledger-coop FAIL 09:55Z → r2 fixer session_01N1tNP3C4XN63dXNqw9oz1w; host-lag r3; thin-g F1; flake ticket coop-one-world seed3) | C quiet (PLACES2/3 held for owner OK) | D #19 (role-parity-bundle-fix worker D4JTc9hW + rv FRgtaMS3; has spare seats, no D-slice item held by main) | E #31 (E50r reviewing coop-famops-p 1033eb2e, E44e standby) | moved: none.
+
+## MAIN CHÍNH 105 → MAIN CHÍNH 106 HANDOVER (22/11 10:33Z) (ctx 33 % real, START ~10 % → roll line 35 %; depth 7 → opening child MAIN CHÍNH 106, depth 8 = LAST; 106 cannot open a child: at its roll it writes handover + FOR MAIN line so the owner opens a ROOT from claude.ai)
+- LIVE = 609c86b0 (coop-fig-retry-r3). Landed in 105: coop-night0 234d0298 (OWNER-BUG co-op night-0 stall), coop-fig-retry-r3 609c86b0 (r2 c784873c FAILED at LC5 on quickcheck old-leg deadlock → r3 fixed). All coop-e2e 129/129.
+- LAND CHAIN 5 = session_01Rc5AsLX47s5ojNyh7J47MB: now landing places-wire-nvp-tn-rv f90e455bf3ece2543af704cf52b0e7a50a0eae5a (D, SMALL). Queue otherwise empty. On "LC5 ROLLED" → open LC6 from reports/land-chain-5.md (never two chains).
+- EXPECTED NEXT LAND READY: B night-ledger-coop r2 (BLOCKING co-op stall in r1), host-lag r3, thin-g F1; D role-parity-bundle-fix (LIVE regression petcare P-ONLY + riseCore Danh 3/5); E coop-famops-p (after E50r verdict).
+- OPEN TICKETS: B flake quickcheck G4 50-coop-one-world seed 3 R.evm (load-only). Optional later: drop capped FIGSIG wait in quickcheck.js.
+- KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN idle on call. E #31 is another account (send fails) → STATUS lines only.
+- TRIGGERS: 105 wake trig_012M8D2TYUcsBZWCgU3qVy9M (min 32) → 106 disables it and creates its own. 104's trig_01Ja46xkLPp8Q6wJtN2qJECc DISABLED. 102's no longer enabled. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
+- Push tool: /home/user/wt/hpush105.sh pattern (dev/tools/main-hpush.sh with own id + worktree); verify git diff --stat HEAD~1 HEAD after each push.
+- No owner question pending. Owner has not written in 105.
