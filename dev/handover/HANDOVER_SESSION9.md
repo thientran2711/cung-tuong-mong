@@ -2443,3 +2443,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 18:38Z) 106 STOPS: context 62 % real (over 60 % hard ceiling). No LAND READY pending; LIVE b238857f; LC5 queue empty. Handover block above stands (LIVE now b238857f, footer ~71 % / 30). Owner must open ROOT MAIN CHÍNH 107 with the 106 Lượt 8 paste block. 106's wake trig_01Rap72qX3eefqACBs8Ke5sB keeps firing into 106 until 107 disables it — 106 answers wakes with nothing further.
 - (22/11 19:34Z) Relayed D coop-guest-staff 40cc2b92 (test-only) to LC5 (had waited since 18:45Z). Answered owner questions on nết list (24 pool + Emperor 9 + Thái hậu 4). 106 over ceiling; 107 still not opened.
 - (22/11 19:48Z) LANDED coop-guest-staff 40cc2b92 (LIVE=40cc2b92 FF, test-only, coop-e2e 141/141). LC5 queue empty.
+- (22/11 20:34Z) WAKE: no LAND READY (B r4 gating, D guest-men fixing, E -pv final-merge). LIVE 40cc2b92. 107 not opened. 106 over ceiling, minimal.
