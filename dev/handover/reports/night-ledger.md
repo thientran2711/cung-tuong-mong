@@ -401,3 +401,69 @@ Not run (verdict already FAIL): coop-ledger ×4 + DEVSWAP + NOREV, coop-night0, 
 4. Re-run on the fixed head: coop-night ×3 plain + FORCE4=g ×2 + h ×2, coop-e2e ×5, coop-ledger ×4 + DEVSWAP ×4 + NOREV both, coop-night0, night-coop-park ×4, quickcheck, one-core, undef, role-parity, ledger / night-final / night-multi.
 Closed from r2: FAIL 1 (AFK holder stall) — bounded both seats incl. partner reload; FAIL 2 — 0/21; FAIL 3 (4b) — closed; FAIL 4 — re-run pending with item 4 above.
 Scratch: /home/user/wt/nlr4-out (logs + _rv_cn.js; not git, no shots).
+
+## FIX r4 — review/night-ledger-coop-r4 (fixer #3; «REVIEW coop r3» FAIL 1–3 + Foreman B rulings 1–3)
+PRIORITY #1 CHECK: «REVIEW coop r3» FAIL 1–3 (above) | OD L680 (co-op countdown: «open dialogs resolved safely / carried»), OD 15/11 ~21:25Z / ~22:55Z (a real choice is never made for her), OD L594 / L96, LAW 2 / 3 / 4 / 11 | main LIVE b238857f (⊆ base; no rk / carry there) | review/night-ledger-coop-r3 7aff0de3 (base) | reused, not rebuilt: PEND / mkP / serQ / deserQ (j3 save route), jemo emoKey / emoByKey (the one person-by-id lookup), jcoopworld snapSave (seat copy), the card's own «Cáo bệnh» road (BAL.cv.decl, D.decline) | claims B row «night-ledger-coop r4 fixer #3» (this).
+Worker: opus, session_01N1tNP2ntVMAWS44p7tEVQd; coordinator Foreman B ROOT-10. START_CTX ≈ 3 % (own estimate; get_session reads 0).
+Branch: review/night-ledger-coop-r4 = 7aff0de3 (⊇ LIVE b238857f, main unchanged since) + the fixes below.
+
+### 1. What changed (game)
+| item | r3 (7aff0de3) | r4 | where |
+|---|---|---|---|
+| a non-pid choice card's identity | a JS object; its roads are closures over the people of the world it was made in | **carried as DATA**: `rcpReg(kind, generator)` wraps a card generator; every choice card it returns carries `rk` (kind) + `ra` (its arguments, every person as `{"@p":emoKey}`; plain values kept; a function / unknown object → no rk) | j3 rcpReg / rcpEnc / rcpDec |
+| made again | never (r3 put the same object back → `inWorld:false`) | `rcpMk`: arguments decoded against the CURRENT world (jemo emoByKey, the same lookup the seals use), the generator runs again (RCPRE = 1: no second rk stamp) → roads close over the merged world's people | j3 rcpMk |
+| a person gone / the card no longer offers a choice | — | the card LAPSES: no effect, one Sổ ghi line ««<title>»: việc đã qua, không còn kịp đáp.»; never a road whose effect is lost | j3 rcpLapse |
+| save form (serQ / deserQ) | pid → {pid,pp,t}; any other choice → dropped silently | + generator card → {rk,ra,t,cls} (rebuilt by deserQ); `serQ({lap:1})` writes a choice with no generator as {lap,t} → deserQ logs the lapse line | j3 serM / serQ / deserQ |
+| co-op week merge (fromCanon keepQ) — the LIVE bug (open non-pid choices dropped at every merge) | serQ(): non-pid choices dropped silently on every seat | serQ({lap:1}): generator cards rebuilt in the merged world, the rest lapse with the log line | jcoopworld fromCanon0 |
+| the AFK carry (nightAfk) | CQ = page memory, holding the JS object | **S.cq** (her save, both seats; ser() / seat copy / week blob carry it): each entry in save form + the week it was carried in (cw); a choice with no generator lapses AT the carry (no hollow road later); the seat copy is written at once (CW.snapNow) so a reload right after the carry keeps it | jcooptimer nightAfk |
+| carry back | on the COOP "week" event only | `carryBack` = deserQ of the entries whose week the room is past (rebuilt against the merged world, people by id), from the "week" event AND after every world load (jcoopworld fromCanon → CW.cqBack: merge, join, rejoin after a merge with no "week" on that page) | jcooptimer carryBack, jcoopworld fromCanon |
+| «no answer» to a summons after the AFK bound (ksp, amNight) | only the night is lost (cheaper than «Cáo bệnh») | `nafDecl`: the card's OWN «Cáo bệnh» road — its fx losses (Sủng −BAL.cv.decl.sung / −D.decline) applied and its go run (Ân tình −BAL.cv.decl.an, AMN.decline++, S.tonight = null) — **without** the rest it buys (Sức +): absence is never the cheaper decline (one core: the card's own BAL numbers, nothing typed); kit line names the cost. nfsum has no decline road (a won night) → unchanged (the night passes) | jcooptimer nafDecl |
+| debug / test hooks | — | CW.afterCarry (test hook, as CW.afterFC); window.__rcpFail (last 20 rebuild failures + why); naf() + lapsed / decl | jcooptimer, j3 |
+ONE CORE: no new number (one-core-guard fails 0). KIT: no new UI (kitLine + Sổ ghi only). No screen changed → no shots.
+
+### 2. LAW 11 — every choice family that can be open at tối (scan, not guessed)
+Scan: dev-scratch npscan.js = 6 lives × 6 months real day walk (ledger-bot walk + random deck acts), every NON-pid choice card that reaches Q tagged by its builder (stack) — 330 cards, 74 of them still open at tối; each rk card serialised → JSON → `rcpMk` in the same world (rebuilt with the same title).
+| family (builder) | cards seen / at tối | r4 route | rebuilt in scan |
+|---|---|---|---|
+| jgreet gmCard «Có người đến» (a visitor's reply card) | 47 / 8 | rk gmReply (v, provoke, G, lines; the act already ran) | 47 / 47 |
+| j24 approaches «Có người đến» / «Thái hậu triệu» / «Kẻ hầu xin» / «Một ánh mắt» (AP_MK ×9) | 52 / 15 | rk ap.<kind> (o with people as ids; apFriend's visit kind rides o.sub) | 50 / 52 (2: the same card offers a different number of roads in the new state — still the generator's own card) |
+| jagent agScene «Có người tìm đến» / «Ngươi bắt gặp» | 33 / 13 | rk agSeek / agSeen (plan p + doer) | 33 / 33 |
+| jagharm haScene «Ngươi bắt gặp» | 21 / 8 | rk haSeen | 21 / 21 |
+| j24 servCauses «Việc của kẻ hầu» | 7 / 2 | rk svCause (servant + cause) | 7 / 7 |
+| jagknow knSellCard «Có người bán tin» | 7 / 2 | rk knSell (seller + news) | 7 / 7 |
+| every pid card (ksp, nfsum, amNight, night1/2, Việc khó xử PEND …) | — | unchanged: pid (mkP) | — |
+| jdh dhNotice / dhPick «Danh hiệu mới» / «Đeo «…»» | 46 / 10 | lapse + log line = the same as its «Để sau» road (the title stays hers in S.dh; worn later from Nhiệm vụ › Danh hiệu) | — |
+| jwhy spyPick «Sai … đi dò la» (her own act's target picker) | 38 / 11 | lapse + log = its «Thôi, để sau» | — |
+| jts tsPanel (Lời cảnh báo, Hội phối đồ, Lễ tấn phong, đèn Trung thu), jworld worldShow (festivals, sứ đoàn, quốc tang …), econStipend «Bổng lộc», dcTurn «Y phục dự …», festival / endTurn contests, tyWeek, tyRob, j95bHear, mbComfort | 79 / 5 | lapse + log | — |
+Before r4 every family in this table (except pid) was dropped SILENTLY at every co-op week merge and came back hollow from the r3 carry; now 6 families (65 % of the cards open at tối in the scan, 51 % of all; every person-to-person family seen in the scan) are rebuilt against the merged world and the rest lapse with a line. Open: give the remaining families a generator route the same way (one rcpReg line each, after reading the generator for side effects).
+
+### 3. Tests changed (dev/test/coop-night.js case 4, FORCE4=g|h)
+- NEW: a REAL non-pid two-road card from a game generator (j24 apSorry «Có người đến» on a live world consort) on top of the AFK seat; asserted: it carries rk; after the merged week it is made AGAIN (not the old object) against the merged world (its consort is in `rivals`, not the old object); answered on her return («Nhận lời xin lỗi») its road lands on that consort (thiện cảm up); after the next merge the partner seat's room canon holds the same value (W.R[id].rl[her seat] = her thiện cảm). Read through the CW.afterCarry hook (the harness's clear() otherwise answers it first).
+- NEW RLX=1: the AFK seat's page reloads right after the carry, before the merged week (guest: leave + join; host: rejoinHost) → the carried card must come back from her save after the merge.
+- Traces: `gone` (the card left Q and S.cq before the carry), rcpFail ring, lapse lines.
+
+### 4. Gates (head 0e10a8f7 = the game of a7560a79; a7560a79 = + merge LIVE 40cc2b92, test-only, rebuilt; 3–4 lanes in parallel on a 4-core box)
+| gate | result |
+|---|---|
+| coop-night FORCE4=g (final build) | 119/119 · 119/119 (g5, g6: non-pid card back, rebuilt, road landed: thiện cảm 8→14 / 6→10, partner canon = 14 / 10); ONLY=4 ×3 (gd a/b/c) all case-4 asserts ok (3→11, 0→5, 6→12). g3: 116/119 — the non-pid card left the AFK guest's Q before the carry (not answered by her, not in S.cq) → 3 asserts FAIL (see open 1) |
+| coop-night FORCE4=g RLX=1 ONLY=4 | ok (gr4: carried → reload → S.cq kept [ap.apSorry, c4test] → after the merge apSorry rebuilt with its 2 roads; the test-only c4test generator died with the page → lapsed, as designed) |
+| coop-night FORCE4=h | 117/117 (h3: rebuilt, −5→0, partner canon 0 = 0) · 114/117 (cnh2: the same «card gone before the carry» as g3, on the HOST: `gone` at tối, wk 3, not in fromCanon, top then c4test) |
+| coop-night plain | 112/112 (p1) · 110/112 (cnp2, 4 lanes: case 4 «both in the next week (exactly one step) [3,3,3]» — dates moved to the next week on both seats but the room week stayed 3 until case 4b ([4,5,5]); the carried «Một ánh mắt» waited in S.cq (cw 3, room still 3) — see open 2) |
+| coop-e2e ×5 | 141/141 ×5 |
+| coop-ledger ×4 / DEVSWAP ×4 / NOREV host / guest | 45 · 42 · 43 · 46 / 45 · 44 · 42 · 43 / 43, 44 / 43, 43 (all passed, no STUCK) |
+| coop-night0 | 16/16 |
+| night-coop-park ×4 | ALL OK 13/13 ×4 |
+| ledger / night-final / night-multi | PASS / 11 pass 0 fail / 8 pass 0 fail |
+| role-parity | ALL PASS |
+| one-core-guard / undef-scan | PASS fails 0 / PASS (293) |
+| quickcheck | NOT RUN (the lane was stopped with the session's background processes; successor runs it) |
+
+### 5. Open (successor)
+1. **A rk card leaves Q on the AFK seat at tối before the carry** (g3 guest, cnh2 host; 2 of 8 g/h runs): `gone` trace = Q[0] was apSorry, then c4test on top, not inside fromCanon, not in S.cq, not answered by the test. Suspect: a holder that takes waiting cards off Q (jspread SP13 «waiting cards» uses serQ per card, sp13Ser; or the jdfv / jfocus encounter step taking a `who` card) — check where it went (it may come back later from that store = not lost, then the test must follow it; if it is dropped, that is the same family and must keep / lapse it).
+2. **cnp2 case 4 plain «exactly one step» [3,3,3]** (1 of 3 plain runs, under 4 lanes). Not shown to be caused by r4 (p1 plain 112/112; e2e ×5, ledger ×14, park ×4 clean) — rerun plain ×3 on a quiet box; if it repeats, read the DUMP 4 (pend false, sent 3, ngoW 3, ld st 1) against r3.
+3. Remaining families (table §2: danh hiệu, spyPick, tsPanel, worldShow, stipend, dress, contests …) lapse with a line; giving each a generator route is one rcpReg line after reading the generator for side effects (gmCard showed why: its act runs in the builder, so only the reply part is registered).
+4. A pid card that can no longer be made (mkP null) still drops silently in deserQ (pre-existing, every save load); not changed.
+5. quickcheck --runs 7 on the head.
+
+### HANDOVER (worker session_01N1tNP2ntVMAWS44p7tEVQd → successor, opened by Foreman B ROOT-11) — context past START_CTX + 25 %
+Head **review/night-ledger-coop-r4 @a7560a79f12b067c134afae016fb6951e65eef1c** (⊇ LIVE 40cc2b92). NOT SSK: open 1 (and 2) first. Scratch (this container only): /home/user/wt/nl4-out (npscan.js family scan, logs). Tips: run the co-op tests with the tool's run_in_background (plain nohup / & jobs died when this session's turn ended); `grep -q DONE` matched DONE4 — use unique end markers; page tests (ledger, night-final, night-multi, coop-night0, night-coop-park) need a URL: `python3 -m http.server 8765` in the worktree → http://127.0.0.1:8765/index.html.
