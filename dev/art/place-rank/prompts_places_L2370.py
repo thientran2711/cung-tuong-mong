@@ -111,6 +111,14 @@ for key, b in B.items():
     n = len(OUT) + 1
     OUT[key] = dict(prompt=white(b['prompt'], b['kind'] == 'out'), code=f'M2370-{n:02d}', name=b['name'], kind=b['kind'], refs=b['refs'], job=1,
                     base=f"dev/handover/prompts_L2095/{b['code']}_{key}_ha_sang.txt", layout=b['layout'])
+# REDO (ROOT-C3 06:25Z, owner standing rule): M2370-06 / -11 shelves read as modern upright ring binders = anachronism -> BOOKS sentence.
+BOOKS = (" BOOKS (owner L2370 redo: no modern binders): every book is an ancient Chinese thread-bound book lying FLAT in low stacks, many "
+         "kept in indigo-blue cloth book cases (hán sáo) tied with small ivory clasps, with rolled scrolls and scroll boxes; never upright "
+         "modern ring binders, file boxes, folders or hardback spines with paper labels.")
+for key in ('ngu-thu-phong', 'thuong-thu-phong'):
+    v = OUT[key]; n = len(OUT) + 1; p = v['prompt']; a = ' No Western sofa, no upholstered couch. '; assert p.count(a) == 1
+    OUT[key + '-r2'] = dict(v, prompt=p.replace(a, BOOKS + a), code=f'M2370-{n:02d}', job=1,
+                            base=f"dev/handover/prompts_L2095/{v['code']}_{key}_ha_sang.txt")
 import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items()}, 'places-M2370')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
