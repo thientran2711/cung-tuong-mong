@@ -2404,3 +2404,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 105 wake trig_012M8D2TYUcsBZWCgU3qVy9M (min 32) → 106 disables it and creates its own. 104's trig_01Ja46xkLPp8Q6wJtN2qJECc DISABLED. 102's no longer enabled. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
 - Push tool: /home/user/wt/hpush105.sh pattern (dev/tools/main-hpush.sh with own id + worktree); verify git diff --stat HEAD~1 HEAD after each push.
 - No owner question pending. Owner has not written in 105.
+- (22/11 10:33Z) Opened MAIN CHÍNH 106 = session_01Rc5AsJyexzSi2QyPxkqY3z (child, depth 8 = last). LC5 told. 105 stops; relays late messages to 106 only.
