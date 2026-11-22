@@ -75,7 +75,8 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both in the shared world');await clear(A);await clear(B);
  /* both get pets (B: a cat that follows her + a crane; A: one dog) */
  for(const [o,L] of [[B,['meo','hac']],[A,['cho']]])await o.p.evaluate(L=>{petMax=()=>4;/* test: room for a few pets at any rank */S.pets=[];S.petOn=-1;S.petB=null;S.petBn=0;for(const t of L){const P=petAdd(S,t,'thử','buy');P.full=40;P.clean=50;P.joy=50;P.aff=30;P.stg=1;petcSync(P)}S.bac=Math.max(S.bac||0,200);render()},L);
- ok(!!await A.p.evaluate(()=>COOPW.friend())&&!!await B.p.evaluate(()=>COOPW.friend()),'each has the other as a consort entry',[await A.p.evaluate(()=>!!(S.srv&&!S.srv.risen)),await B.p.evaluate(()=>!!(S.srv&&!S.srv.risen))]);
+ /* review/coop-guest-staff: waited like the next two checks (read once, it raced the friend entry's build after the rank/pet set-up: [false,false] in 2 of 7 runs) */
+ ok(await waitFr(A,()=>!!COOPW.friend())&&await waitFr(B,()=>!!COOPW.friend()),'each has the other as a consort entry',[await A.p.evaluate(()=>!!(S.srv&&!S.srv.risen)),await B.p.evaluate(()=>!!(S.srv&&!S.srv.risen))]);
  ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length===2}),'A\'s friend entry shows B\'s 2 pets (live pos)');
  ok(await waitFr(B,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length===1}),'B\'s friend entry shows A\'s pet');
  /* 1 help */
