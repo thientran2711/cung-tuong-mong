@@ -91,3 +91,25 @@ KEEP as is (action already readable): bình (nhấp trà), đau lòng (ngọc b�
 Cost if all 12: 12 × (2×135 + 2×940) = 25 800 cr (2 150 each; BACK 0).
 | M2349-13 | tình tứ | đưa bông mẫu đơn hồng mời, tay kia chạm má e thẹn, nháy mắt (bỏ thiệp đỏ giống bao lì xì — owner L2350) |
 Add-on L2350: tình tứ moved from KEEP to REDO → 13 seals, 27 950 cr if all.
+
+## (3) L2355 GO — 13 clear-action act seals GENERATED (M2349-01..13), one try each
+Recipe as (1): A ref = the seal's own M2342 tone-down A; B ref = new A; OUT/LOOP Seedance; BACK = reversed OUT + disc lock (clamp 1.00–1.10). Work dir separate; new CDN files carry -M2349 (old M2342 files untouched).
+Heavy fault auto-redo (L2324): chán OUT zoomed her to ~2x, disc vanished, hoop flew off the picture → OUT redone once with a same-size lock (prompt in M2349-09 clips file as OUT_REDO) → fixed. +940 cr.
+CDN …/tonedown/act/: th-act-action-batch1-anim.mp4 (vui lo giận tình-tứ ẩn) · batch2 (mưu ghen buồn sợ chán) · batch3 (khó-chịu tự-tin tinh-nghịch) + th-act-action-batchN-stills-AB.jpg; per seal th-act-<k>-{out,loop,back}-M2349.webp, th-act-<k>-{A,B}-M2349.png.
+| seal | code | A | ref | B | OUT | LOOP | note |
+|---|---|---|---|---|---|---|---|
+| vui | M2349-01 | iGK2WNd3uK | gOhwL3fSXO | rgBsJrlxtc | rgBsOrsxtc | aFzukaJfSh |  |
+| lo | M2349-02 | dt98aeoXSL | jU8l1NfLD0 | huACbhpvqL | 0ewDI0OTfW | ovimFIQ829 |  |
+| gian | M2349-03 | JNE4RJGOq4 | w4fOgZm7EI | 3zkATZCREY | xSolPLMjfW | bxD1UKh5Y2 |  |
+| an | M2349-04 | WDSVB0ScXe | gOhwxsHSXO | ksdj7jr16B→LwIS4faswO | LwIS9S3swO | EbWHjHYuuO | B flattened |
+| muu | M2349-05 | WDSVBmRcXe→bxD1gXY5Y2 | p8PX0pyehw | YMgTBT6WeC | VXJehaWMMU | IfRvqK1tvE | A flattened |
+| ghen | M2349-06 | 8a3hQK4IrU→Td7pIPRVNR | xSosKLPjfW | N2bRWZk6D9 | CqYFxsWEEy | 6A5Z0MNiJO | A flattened |
+| buon | M2349-07 | huACbjFvqL | VXJpcvIMMU | LwIS4w2swO | dt98EHqXSL | 4RHiYT59Aa |  |
+| so | M2349-08 | 4RHizV19Aa | VXJpcatMMU | IfRvHbktvE | 6A5Z0D6iJO | eI4oCHFdqL |  |
+| chan | M2349-09 | bxD1gPL5Y2 | nVlczO9YQD | 6A5ZcT9iJO | 79CP2YIJAL→REDO 4RHicuP9Aa | SyvJ3zOUb8 | OUT heavy fault (zoom ~2x, disc gone, hoop off picture) → redone once (L2324) |
+| khochiu | M2349-10 | rgBsJitxtc→jU8gyvsLD0 | lJmUsFtgv9 | 3zkATDxREY | bxD1URU5Y2 | KLex72Dkqp | A flattened |
+| tutin | M2349-11 | w4fy3WX7EI | MBOeMMuDCm | ksdj7Pi16B→ovimQGp829 | 1lXLOG5r4r | lJmw6TZgv9 | B flattened |
+| tinhnghich | M2349-12 | VXJetFeMMU | 6A5Z3EmiJO | xSoly6PjfW | jU8g4WhLD0 | tCZabwomZJ |  |
+| tinhtu | M2349-13 | huACqhevqL | 4RH644Q9Aa | vQGEKC7a47→6A5ZcjaiJO | w4fyZO37EI | N2bRc3b6D9 | B flattened |
+Looked at (stills, bursts, all frame strips): every action reads clearly; same Thái hậu, two hands, no earrings, disc colour + size steady after the chán fix. Small: giận slam makes a white burst spark at the rim; sợ has small shiver lines outside the rim; ẩn medallion drawn a bit smaller.
+Cost: 26×135 + 27×940 = 28 890 cr. Final 21 act set = these 13 (M2349) + 8 kept from M2342 (bình đau-lòng hổ-thẹn choáng hờn hăng-hái chuyên-tâm hưng-khởi).
