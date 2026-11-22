@@ -1073,3 +1073,4 @@ role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:h
 places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | RUNNING | 22/11 06:57Z (Foreman D #18)
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NbFfa8pY5JZfpw38A2 | RUNNING | 2026-11-22T06:59Z (Foreman C ROOT-C3; replaces THACT3)
 | RELAND rel-men-servants r7 on LIVE (opus; MAIN 103 ORDER, jstip.js conflict vs bongloc-options) | review/rel-men-servants-r7 | B | session_01N1tNP5VS6ZVp3CRYrxc8sA | RUNNING | 22/11 04:22Z |
+| RELAND night-ledger KP01 r2 on LIVE ddcca5c1 (opus BIG reviewer-lander; MAIN 98 ORDER 18:08Z, D night-balance-bundle now LIVE) | review/night-ledger-r2; reports/night-ledger.md | B | (opening) | RUNNING | 22/11 04:31Z |
