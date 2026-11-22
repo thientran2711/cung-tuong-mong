@@ -1,0 +1,7 @@
+base: dev/handover/prompts_L2095/M2355-15_ngu-hoa-vien_ha_sang.txt
+allow: same natural light  # white-light cause fix: head no longer copies image 1's warm light (owner L2370 job 1)
+allow: So the furniture stands BEHIND where they will stand  # Ngự hoa viên tables/chairs only inside pavilion (owner L2370 job 5)
+allow: the bases of the beds  # Ngự hoa viên tables/chairs only inside pavilion (owner L2370 job 5)
+allow: tables and stands in that band sit no lower than seven eighths of the picture height  # Ngự hoa viên tables/chairs only inside pavilion (owner L2370 job 5)
+allow: The corners are furnished  # Ngự hoa viên tables/chairs only inside pavilion (owner L2370 job 5)
+allow: and the left part of the room near the viewer holds only small  # Ngự hoa viên tables/chairs only inside pavilion (owner L2370 job 5)
