@@ -1028,3 +1028,4 @@ night-multi-kem review (SMALL, test-only) | review/night-multi-kem-rv | session_
 | RELAND coop-host-lag r3 successor #2 (opus BIG co-op; after rv 2r12Tji5 rollover; @be6b1446 contains LIVE 7303aa58) | review/coop-host-lag-r3; reports/coop-host-lag.md | B | session_01N1tNP4jNDqKuCaJcA6oGXx | RUNNING | 22/11 05:28Z |
 | coop-thin-g F1 fixer #6 (opus BIG co-op; successor of #5 2pYTX6fT at budget; @067ee9a9) | review/coop-thin-g-f1; reports/coop-thin-g.md | B | session_01N1tNP5Jr7qbmVoPEW64gzd | RUNNING | 22/11 05:30Z |
 L2370 places | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3Nb12FPNQWK9DvLyNqL | RUNNING | 2026-11-22T06:01Z (Foreman C ROOT-C3)
+L2370 th act seals redo 18 | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NXqvUukegEbMmDsxjA | RUNNING | 2026-11-22T06:02Z (Foreman C ROOT-C3)
