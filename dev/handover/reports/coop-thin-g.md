@@ -514,3 +514,20 @@ PRIORITY #1 CHECK: report + briefs/coop-thin-g.md + review/coop-thin-g-f1 log re
   (b) Finish the lane rows. Pending: trip0a/b, g4, g4s, e2e*, cyc*, timer, night, f3s–f6bs, as9/13*, emo, ow, perf. Then role-parity alone + quickcheck.
   (c) Write the '## F1 FIX' verdict, send "SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG", and add one line at END of FOREMAN_B_STATUS.
 - FYI kept: I left the e7b996f2 jcoopthine.js hunk (LIVE on review/coop-guest-week-lag 3f1cec27) untouched. The split above is the store-lag family, not the doubling family.
+
+#### F1 #4 lane result @99201b6c (ended 11/22/2026 02:44Z; logs /home/user/wt/out4/r-<name>.log in F1 #4's container only)
+| suite | result |
+|---|---|
+| trip1a TRIP swap1 | FAIL 73/83 (Danh store lag ×8 weeks; wk27 merge stall) |
+| trip1b TRIP swap1 | PASS 83/83 |
+| trip0a TRIP swap0 | PASS 83/83 |
+| trip0b TRIP swap0 | FAIL timeout 6600 s, 11 fails: G1 "week merged once" from wk14, hw stuck [14,14] (host stops merging her week) |
+| g4 / g4s | PASS 19/19 ×2 |
+| e2e / e2es / e2e0 / e2e0s | PASS 124/124 ×4 |
+| e2e0n | FAIL 122/124: world-people name split "Thải Vân" only on A (dup rename at load, old "Kim Quất") after wk3 + rejoin |
+| timer | FAIL 41/43: "mini game over → B steps" B stepped twice ["0:2","0:3","0:2"] |
+| as9 | FAIL 2: home / visitPal (host does not see her at home) — as9s PASS |
+| as13 | FAIL 1: visitPal (she at host palace does not see him at home) — as13s PASS |
+| cyc / cycs / night (105/105) / f3s f4s f5s f6 f6s f6b f6bs / emo 25/25 / ow ×10 / perf | PASS |
+| role-parity, quickcheck | NOT RUN (left for #5) |
+Before you call any red new, check it against main: e2e0n, timer, as9, as13 may be flakes or older reds. trip0b looks like the trip1a wk27 merge stall, but sticky.
