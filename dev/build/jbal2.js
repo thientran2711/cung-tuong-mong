@@ -122,7 +122,7 @@ Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ks
    ends it sooner) · pauseCapMs = the most the clock may stand still in one buổi while a player is in a mini game or a dialog ·
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
    graceMs = after the deadline the screens show "Hết buổi" this long before the step (lag between the two players). */
-Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500}});
+Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500,nightMs:30000}});
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});

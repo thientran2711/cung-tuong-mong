@@ -140,6 +140,25 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
    if(CW.forceNight)try{CW.forceNight()}catch(e){console.error(e)}
    if(!Q.length&&!S.mg&&!frozenRoom()){try{nextBuoi()}catch(e){console.error(e)}}}}
  if(overdue())autoRead()}
+/* review/night-ledger-coop-r3 (rv FAIL 1, NLC #9 coop-night case 4): HER OWN NIGHT DIALOGS at an overdue tối. The holder of the played tối
+   (ledger: the first day of EITHER player, so often a player) gets the Kính sự phòng summons after the flip, then the night talk; each is a
+   real choice and is never made for her (owner 15/11 ~21:25Z / ~22:55Z), so an AFK holder sat on it and her week end never went: the room
+   froze for the partner (the NLC #9 bound — every seat's choice in by BAL.steal.choice.waitMs — does not cover her own summons). Bound, both
+   seats, any thin level: once her buổi tối is overdue, one of these dialogs on top for BAL.coopTm.nightMs (one core) closes WITH NO ANSWER —
+   no road is taken for her, no Được / Mất of any road:
+     summons (ksp, nfsum, amNight): she did not answer → she does not serve tonight (S.tonight = null, the same state as when the night passes
+       her by; ldSettle records the played tối as nobody's);
+     the night itself (prep, night1, night2: she already went): the night passes quietly, nothing more is gained (her night record stays).
+   Her seat gets a kit line; then dueTick runs her night step as for any closed dialog. LAW 11 scan: dev/handover/reports/night-ledger.md «FIX r3». */
+const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"];let NA={m:null,t:0};
+/* when: her buổi tối is overdue, or the room's night is committed (CW.ngoW = this week: the host's time out / both ready) while her own week end
+   is not out — the partner is waiting on her (r3 FORCE4=g: the host commits and steps on, so the guest's own clock key never reads overdue) */
+function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
+function nightAfk(){const m=Q[0];if(!m||!nafWait()||!(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid))){NA.m=null;return}
+ if(NA.m!==m){NA.m=m;NA.t=pnow();return}if(!(pnow()-NA.t>=+BAL.coopTm.nightMs))return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ NA.m=null;const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
+ const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+ try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}}
 /* a dialog with no choice, or with one single road, is read for her once her buổi is overdue (never a real choice) */
 function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;return}const m=Q[0];
  if(m.act||/kptitle|kcoop/.test(m.cls||""))return;
@@ -362,7 +381,7 @@ function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.
 let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
- sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
+ sendSt(false);dueTick();nightAfk();paint(false)}catch(e){console.error("coop clock",e)}}
 /* a new viewport: the bar lays itself out again first (its grid / shell change after the resize); the slot is found once that has settled */
 let RZ=0;addEventListener("resize",()=>{RZ=pnow()});
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
@@ -372,5 +391,5 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),seen:NA.m===m,age:NA.m?pnow()-NA.t:null,n:CW.nafN||0}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();

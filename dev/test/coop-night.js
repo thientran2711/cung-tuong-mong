@@ -112,17 +112,24 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const a2=await D(A);ok(a2.b===LAST&&a2.w===w0,'3: closing the event does not advance by itself',a2);
   await clear(A);ok(await isRd(A)||await press(A),'3: host presses');await merged('3',w0);ok(await A.p.evaluate(()=>__pick)===1,'3: the choice ran once')}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
- /* 4 time out at tối, guest AFK */
- if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
-  for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
-  
-  /* NLC #9: the host plays on like a player (scene, morning panel, his choice); the AFK guest never answers. Bound (jnf): every seat's
+ /* 4 time out at tối, guest AFK. FORCE4=g|h (rv night-ledger-coop-r2 FAIL 1, deterministic): the host's ldRoll pins the played tối on the
+    guest (g) / on the host (h) before the flip, so the AFK seat is the PLAYED holder: her own summons «Kính sự phòng báo tin» (a real choice)
+    sits on her screen; h = mirrored, the HOST is AFK and the guest presses. Bound (jcooptimer nightAfk, BAL.coopTm.nightMs): it closes with
+    no answer once her tối is overdue → her night step runs, the room is not frozen. */
+ if(await toNight('4')){const w0=(await D(A)).w;const F4=process.env.FORCE4||'';const X=F4==='h'?A:B,Y=F4==='h'?B:A;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
+  for(let i=0;i<3;i++){await clear(X);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the AFK seat reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
+  if(F4){const pin=await A.p.evaluate(g=>{try{if(typeof ldRoll!=='function'||!ldOn())return 'no ledger';const f=rivals.find(v=>v&&v.coop&&v.alive!==false);S.ledger=null;ldRoll(g?f:S);const p=ldPin();return p===S?'host':p===f?'guest':String(p&&p.name)}catch(e){return e.message}},F4==='g');
+   console.log('4 FORCE4='+F4+' played tối pinned on:',pin);ok(pin===(F4==='g'?'guest':'host'),'4: the played tối is pinned on the AFK seat ('+F4+')',pin)}
+  /* NLC #9: the active seat plays on like a player (scene, morning panel, his choice); the AFK seat never answers. Bound (jnf): every seat's
      choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
      her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */
   const wm=await A.p.evaluate(()=>BAL.steal.choice.waitMs),lim=9000+wm+15000;
-  const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
-  let st=-1;while(Date.now()-t0<lim){await clear(A);const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
-  if(st<0)console.log('DUMP 4',JSON.stringify([await DUMP(A),await DUMP(B)]));ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK guest holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);await merged('4',w0)}
+  const t0=Date.now();await clear(Y);ok(await isRd(Y)||await press(Y),'4: '+Y.name+' presses, '+X.name+' AFK');
+  let st=-1;while(Date.now()-t0<lim){await clear(Y);const c=await D(X);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
+  const naf=await X.p.evaluate(()=>({n:COOPW.nafN||0,naf:COOPW.naf||null,dbg:COOPW.tm.naf&&COOPW.tm.naf(),Q:Q.map(x=>x&&(x.pid||x.t)),tonight:typeof S.tonight==='string'?S.tonight:S.tonight&&S.tonight.name}));console.log('4 AFK seat:',JSON.stringify(naf));
+  if(st<0)console.log('DUMP 4',JSON.stringify([await DUMP(A),await DUMP(B),await A.p.evaluate(require('./lib/coop-clear.js').SCR),await B.p.evaluate(require('./lib/coop-clear.js').SCR)]));
+  ok(st>=5000,'4: the AFK night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK seat holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);
+  if(F4)ok(naf.n>=1||!naf.Q.length,'4: the AFK holder\'s own summons closed with no answer (jcooptimer nightAfk) or never stayed',naf);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4b the guest misses the host's final word of the night (its "fin" lost on the way: a dropped socket, a sleeping phone). The host ended its day
     right after fin and runs ahead while the merged week waits for her: she asks again (jnf ask), the host — already past that day — sends that
@@ -130,8 +137,15 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  if(await toNight('4b')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);
   await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;window.__nfrx=[];COOP.rxWrap=function(go,m){try{if(m&&m.k==="ctm-nf")window.__nfrx.push([m.mode,m.ph,m.fin,m.open,m.d,m.week,!!m.ld])}catch(e){}if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  /* rv night-ledger-coop-r2 FAIL 3: a fin word exists only when BOTH seats run the jnf night relay that day (nfOn: not parked, not a servant /
+     Kính sự phòng road, alive). Her relay off (e.g. a seat off the palace: jnf roomOff) → no fin to drop → n/a with the reason, never a FAIL;
+     relay on on both → it must have been dropped once. */
+  const NO=o=>o.p.evaluate(()=>{try{return {on:nfOn(),why:{dead:!!S.dead,park:typeof nfParked==='function'?!!nfParked():null,srv:typeof isSrv==='function'?!!isSrv():null,kc:typeof isKc==='function'?!!isKc():null}}}catch(e){return {on:null,why:e.message}}});
+  const on0=[await NO(A),await NO(B)];
   for(const o of [A,B]){await clear(o);ok(await isRd(o)||await press(o),'4b: '+o.name+' presses')}
-  await merged('4b',w0,90000);{const fd=await B.p.evaluate(()=>window.__fdrop===1);if(!fd)console.log('DUMP 4b rx',JSON.stringify(await B.p.evaluate(()=>({rx:window.__nfrx,tr:(COOPW.tr||[]).slice(-25),nf:nfDebug()}))).slice(0,4000));ok(fd,'4b: the guest really missed the host\'s fin once')}
+  const on1=[await NO(A),await NO(B)];
+  await merged('4b',w0,90000);{const fd=await B.p.evaluate(()=>window.__fdrop===1);const rel=on0.concat(on1).every(x=>x.on===true);if(!fd)console.log('DUMP 4b rx',JSON.stringify(await B.p.evaluate(()=>({rx:window.__nfrx,tr:(COOPW.tr||[]).slice(-25),nf:nfDebug()}))).slice(0,4000));
+   if(!fd&&!rel)console.log('n/a 4b: the night relay was off on a seat that day (no fin word to drop)',JSON.stringify({before:on0,after:on1}));else ok(fd,'4b: the guest really missed the host\'s fin once',{before:on0,after:on1})}
   await B.p.evaluate(()=>{COOP.rxWrap=window.__rx0;delete window.__rx0})}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);

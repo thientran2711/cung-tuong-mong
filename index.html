@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"14093edc+","t":"2026-11-22T12:48Z","c":"night-ledger-coop-r2: coop-night 4b logs the guest's ctm-nf words when its drop hook saw no fin","b":"64498f2dbb30","h":[{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"}]};
+window.CTM_BI={"s":"135945ed+","t":"2026-11-22T14:26Z","c":"rv night-ledger-coop-r2: night-coop-park 5f (LDQ mutation guard: settled tuần while her week end is out waits, settled once after the merge…","b":"1a7c9d624c5d","h":[{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -35887,7 +35887,7 @@ Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ks
    ends it sooner) · pauseCapMs = the most the clock may stand still in one buổi while a player is in a mini game or a dialog ·
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
    graceMs = after the deadline the screens show "Hết buổi" this long before the step (lag between the two players). */
-Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500}});
+Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500,nightMs:30000}});
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
@@ -54809,6 +54809,25 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
    if(CW.forceNight)try{CW.forceNight()}catch(e){console.error(e)}
    if(!Q.length&&!S.mg&&!frozenRoom()){try{nextBuoi()}catch(e){console.error(e)}}}}
  if(overdue())autoRead()}
+/* review/night-ledger-coop-r3 (rv FAIL 1, NLC #9 coop-night case 4): HER OWN NIGHT DIALOGS at an overdue tối. The holder of the played tối
+   (ledger: the first day of EITHER player, so often a player) gets the Kính sự phòng summons after the flip, then the night talk; each is a
+   real choice and is never made for her (owner 15/11 ~21:25Z / ~22:55Z), so an AFK holder sat on it and her week end never went: the room
+   froze for the partner (the NLC #9 bound — every seat's choice in by BAL.steal.choice.waitMs — does not cover her own summons). Bound, both
+   seats, any thin level: once her buổi tối is overdue, one of these dialogs on top for BAL.coopTm.nightMs (one core) closes WITH NO ANSWER —
+   no road is taken for her, no Được / Mất of any road:
+     summons (ksp, nfsum, amNight): she did not answer → she does not serve tonight (S.tonight = null, the same state as when the night passes
+       her by; ldSettle records the played tối as nobody's);
+     the night itself (prep, night1, night2: she already went): the night passes quietly, nothing more is gained (her night record stays).
+   Her seat gets a kit line; then dueTick runs her night step as for any closed dialog. LAW 11 scan: dev/handover/reports/night-ledger.md «FIX r3». */
+const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"];let NA={m:null,t:0};
+/* when: her buổi tối is overdue, or the room's night is committed (CW.ngoW = this week: the host's time out / both ready) while her own week end
+   is not out — the partner is waiting on her (r3 FORCE4=g: the host commits and steps on, so the guest's own clock key never reads overdue) */
+function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
+function nightAfk(){const m=Q[0];if(!m||!nafWait()||!(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid))){NA.m=null;return}
+ if(NA.m!==m){NA.m=m;NA.t=pnow();return}if(!(pnow()-NA.t>=+BAL.coopTm.nightMs))return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ NA.m=null;const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
+ const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+ try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}}
 /* a dialog with no choice, or with one single road, is read for her once her buổi is overdue (never a real choice) */
 function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;return}const m=Q[0];
  if(m.act||/kptitle|kcoop/.test(m.cls||""))return;
@@ -55031,7 +55050,7 @@ function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.
 let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
- sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
+ sendSt(false);dueTick();nightAfk();paint(false)}catch(e){console.error("coop clock",e)}}
 /* a new viewport: the bar lays itself out again first (its grid / shell change after the resize); the slot is found once that has settled */
 let RZ=0;addEventListener("resize",()=>{RZ=pnow()});
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
@@ -55041,7 +55060,7 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),seen:NA.m===m,age:NA.m?pnow()-NA.t:null,n:CW.nafN||0}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();
 /* ================= jcoopchat: CO-OP CHAT "Thư từ" (owner 16/11, review/coop-chat) — KIT §80 =================
    Co-op only (COOPW.on); single-player never builds anything. Transport = the room's own Worker channel (PROTOCOL §10):
@@ -94484,7 +94503,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="64498f2dbb30";window.CTM_BUILD=BUILD;
+const BUILD="1a7c9d624c5d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
