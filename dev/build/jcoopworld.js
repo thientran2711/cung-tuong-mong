@@ -529,14 +529,14 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
    else CW.thin.doSend("inv",{id,k,item,e:!px&&extra!=null&&S.inv&&S.inv[extra]?J(S.inv[extra]):null,x:px});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item,x:px});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
  const pa=PETACT.includes(k);let L0=null;if(pa){petLoseHook();L0=tsbPets(t).map(P=>[P,Object.assign({},P)]);CW.petV=t;CW.petAdj={}}
- const inv0=(t.inv||[]).slice();const K0=famSnap(t);const b0=fsnap(t);let r;try{r=f.apply(this,arguments)}finally{CW.petV=null}
+ const inv0=(t.inv||[]).slice();const K0=famSnap(t);const b0=fsnap(t);let r;CW.famIn=(CW.famIn|0)+1;if(CW.famIn===1)CW.famBk=null;try{r=f.apply(this,arguments)}finally{CW.petV=null;CW.famIn--}
  /* things that landed in her entry's bag (Tặng quà, a handmade work, a gift with something in it) go to HER: she gets the normal
     "Quà tặng" dialog (keep / have it checked), exactly as from an NPC (review/coop-pets: before, the item left me and never reached her).
     B1: a hidden thing slipped into her chest (Cài đồ vào rương, Giá họa: e.h) lands there silently, as from an NPC. */
- const add=(t.inv||[]).filter(e=>!inv0.includes(e));const back=k==="plant"?add.filter(e=>!e.h):[];/* a stolen thing slipped back to its owner (jlost "Lén trả lại" through Cài đồ) is not a gift */
+ const add=(t.inv||[]).filter(e=>!inv0.includes(e));const bk=CW.famIn?null:CW.famBk;const back=add.filter(e=>!e.h&&(k==="plant"||!!(bk&&bk.has(e))));/* E44: also any lost-case piece the act handed back to her (lostReturn hook) *//* a stolen thing slipped back to its owner (jlost "Lén trả lại" through Cài đồ) is not a gift */
  const items=add.filter(e=>!e.h&&!back.includes(e)).map(e=>J(e));
  try{let pet=null;if(pa){pet=petDiff(t,L0);for(const x in CW.petAdj)b0[x]=(b0[x]||0)+CW.petAdj[x]}
-  const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push({op:"ret",k:e.k});sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}return r}})();
+  const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push(famRet(e));sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}return r}})();
 /* ---------- B1 (review/coop-b1b5): steal / burn / extort her ITEMS, harm / take her CHILDREN, miscarriage ----------
    The act runs on her entry (bag + children from buildFriend / pos). The loss reaches her as `res.fam` ops, applied to her OWN S:
      {op:"rm", ci, k, how}  an item left her chest (how: "lost" = thất lạc case, as an NPC thief; "burn"; "taken" = named; "gone")
@@ -550,7 +550,7 @@ const kidId=k=>String(k.name||"")+"#"+(k.bt==null?"":k.bt);
 function famSnap(t){return {kids:(t.kids||[]).map(k=>[k,Object.assign({},k)]),preg:t.preg||0}}
 const RMHOW={laydo:"lost",laydol:"lost",phonghoa:"burn",batnat:"taken",uyhiep:"taken",tieuhuy:"taken"};
 function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
- for(const e of inv0)if(!L1.includes(e)&&e.ci!=null)ops.push({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"});
+ for(const e of inv0)if(!L1.includes(e)&&e.ci!=null)ops.push(Object.assign({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"},e.iu?{iu:e.iu}:{}));/* E44: the piece by its ledger id */
  for(const e of plants){const x=J(e);if(x.by==="me")x.by=me();ops.push({op:"plant",e:x})}
  for(const [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:k==="pond"?"chết đuối ở hồ sen":k==="kpoison"?"trúng độc mà chết":"mất sớm"});continue}
@@ -560,24 +560,113 @@ function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
  try{if(typeof pmArtTake==="function")for(const ak of pmArtTake(t))ops.push({op:"art",ak})}catch(e){}/* jpma r3 fix B: «Cùng chơi» practice for her */
  return ops}
 /* her side: returns the lines for her note; `quiet` lines are told by their own dialog (Đồ thất lạc) */
+/* ---------- E44 coop-famops (law 6c REAL OBJECTS, law 1 TWO-WAY): every piece a friend's act (or a host NPC's act on her entry) moves is
+   found BY IDENTITY — its ledger id `iu` (jil ilUid; her entry's bag is bagOf(her chest), so the id is hers) — never «any piece of that kind».
+   rm: the piece with that id in her chest, or on her (worn trâm / áo: taken off first); an op with no id (old room / a piece the census had
+   not numbered yet) takes only the SAME slot with the same kind; no match = nothing moves (logged in CW.famMiss).
+   ret / add: a piece coming back to her closes HER open case of that piece (by id; old rooms: the case the friend holds), the copy her seat
+   kept for the holder leaves, and the piece lands in her chest ONCE — never when a piece with that id is already hers (chest, worn, pawn,
+   her ledger box). A lost-case piece handed back to her entry outside an act (Lén trả lại, a hearing, a holder who dies…) is sent the same
+   way (lostReturn hook below). Before: «ret» pushed a copy of the case piece whatever was already home, «rm» took another piece of the kind
+   (coop-dresscode-scan: guest trâm 2 copies / gone; a đàn case closed with the piece nowhere), and a failed loLose spliced her LAST piece. */
+/* E44b (E44r seed 4242: host pieces 1073 / 144 gone from her seat while his case still «held by 902»): the piece and the case on the sending
+   seat may carry different ids (a census renumbered one); `alt` = every other id that names this piece (its hiu, the id of the sender's
+   case of it: FA), so the receiver finds its case by ANY of them */
+const FA=new WeakMap();
+function famRet(e){const x=J(e);delete x.ci;delete x.lo;delete x.by;delete x.gh;delete x.h;delete x.w;
+ const alt=[...new Set([e.hiu].concat(FA.get(e)||[]))].filter(i=>i&&i!==e.iu);return Object.assign({op:"ret",k:e.k},e.iu?{iu:e.iu}:{},alt.length?{alt}:{},{e:x})}
+const famIds=o=>[o.iu].concat(Array.isArray(o.alt)?o.alt:[]).filter(Boolean);
+/* hiu = the id the HOST's copy of her piece carries when it differs from hers (her entry was numbered on the host before her own census
+   numbered the piece): both ids name the one piece */
+const famIs=(x,iu)=>!!x&&!!iu&&(x.iu===iu||x.hiu===iu);
+function famWhere(iu){if(!iu)return null;const L=typeof ilSlots==="function"?ilSlots(S):(S.inv||[]);const e=L.find(x=>famIs(x,iu));if(e)return e;
+ try{const B=S.il&&S.il.box;const b=B&&B.find(x=>x&&famIs(x.e,iu));if(b)return b.e}catch(z){}return null}
+function famItem(o){S.inv=S.inv||[];if(o.iu){const e=S.inv.find(x=>famIs(x,o.iu));if(e)return e;const w=S.wd;
+  if(w&&typeof w==="object")for(const sl of ["tram","y"]){const x=w[sl];if(x&&typeof x==="object"&&famIs(x,o.iu)&&x.from!=="base")return x}
+  if(famWhere(o.iu))return null}
+ /* no piece of hers carries that id: the same slot, the same kind (never «any piece of that kind»); a differing id of hers is kept, the host's rides as hiu */
+ const e=S.inv[o.ci];if(!e||e.k!==o.k||e.h)return null;if(o.iu&&e.iu&&e.iu!==o.iu)e.hiu=o.iu;return e}/* an op id the host gave a piece her census had not numbered yet: the same slot, same kind, no id of its own (the id is taken on below) */
+/* the piece leaves her (chest or worn slot); true when it was there */
+function famOff(e){const i=(S.inv||[]).indexOf(e);if(i>=0){S.inv.splice(i,1);return true}const w=S.wd;
+ if(w&&typeof w==="object")for(const sl of ["tram","y"])if(w[sl]===e){const k=sl==="y"&&typeof wdDefault==="function"?wdDefault(S,"y"):null;w[sl]=k?{k,from:"base"}:null;try{if(typeof wdOf==="function")wdOf(S)}catch(z){}return true}
+ return false}
+function famMiss(o,why){const iu=o.iu||(o.e&&o.e.iu)||0,k=o.k||(o.e&&o.e.k);(CW.famMiss=CW.famMiss||[]).push({w:wk(),op:o.op,k,iu,why});if(CW.famMiss.length>40)CW.famMiss.shift();console.warn("famApply: no move",o.op,k,iu,why)}
+/* her open case of that piece: by id; an op with no id (old room): the case of that kind the friend holds */
+function famCase(o){const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e&&c.own===key(S));for(const id of famIds(o)){const c=L.find(c=>famIs(c.e,id));if(c)return c}
+ /* E44b (E44r): a «ret» whose ids all miss (a census renumbered the piece on one seat) still closes THE case of that kind the friend holds
+    (an id-less one first): the piece comes home once and his side never stays «held» by her for a piece she no longer has */
+ const fh=L.filter(c=>c.k===o.k&&(c.by===fp()||c.at===fp()));
+ return o.iu&&L.some(c=>c.e.iu)?(fh.find(c=>!c.e.iu)||(o.op==="ret"?fh[0]:null)||null):fh[0]||null}
+/* the piece is back with her: close the case through the ONE owner change (jlost lostReturn), the holder's copy on this seat leaves.
+   Returns the piece put in her chest, or null (already hers / nothing real to put). */
+function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const ids=famIds(o);if(c&&c.e&&c.e.iu)ids.push(c.e.iu);const mineAny=()=>ids.some(i=>famWhere(i));
+ if(c){let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
+  if(x&&x.h!==S){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
+  if((x&&x.h===S)||mineAny()){c.st="done";c.end=wk();c.how="nha";try{if(typeof loLedgerBack==="function")loLedgerBack(c)}catch(z){}return null}
+  const n=(S.inv||[]).length;if(typeof lostReturn==="function"&&lostReturn(Object.assign({},c.e,{lo:c.id}),"nha")&&S.inv.length>n)return S.inv[S.inv.length-1];
+  if(c.st!=="done"){c.st="done";c.end=wk();c.how="nha"}}
+ if(mineAny())return null;
+ if(o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;delete x.lo;delete x.by;delete x.gh;S.inv.push(x);if(!c&&o.op==="ret")famMiss(o,"ret: no case, piece put in chest");return x}
+ famMiss(o,c?"case closed, no piece":"no case, no piece");return null}
+/* a lost-case piece handed back to the friend's ENTRY outside an act (my «Lén trả lại» from Tư trang › Việc, a hearing verdict, a holder who
+   dies…): her entry is only a copy of her chest, so the piece goes to her seat as the same «ret» op (inside an act on her the act's own diff
+   sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
+(function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
+ try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
+ let ca=[];try{const c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
+ const r=f0.apply(this,arguments);
+ try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];FA.set(x,ca.filter(Boolean));/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
+  if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
+/* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
+   (st done «mat») — the thief's «Lén trả lại» / «Trả lại» left Tư trang › Việc a week after every theft from her. Her own seat keeps her
+   side of the case; here such a case only waits (the expiry still ends it). */
+(function(){if(typeof loWeek!=="function")return;const f0=loWeek;loWeek=function(){if(!CW.on||!S)return f0.apply(this,arguments);
+ const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&(String(c.own)===F||String(c.at)===F)&&wk()-c.w<=ex);/* r2: also MY piece HELD by the friend (her entry is pulled out → «mất dấu»: vanish) */
+ const sv=L.map(c=>[c.st,c.end]);for(const c of L){c.st="done";c.end=wk()}try{return f0.apply(this,arguments)}finally{L.forEach((c,i)=>{c.st=sv[i][0];c.end=sv[i][1];if(c.end===undefined)delete c.end;if(S.lost&&!S.lost.includes(c))S.lost.push(c)})}};window.loWeek=loWeek})();
+/* E44b (E44r seed 4242 dup 10000054: in the host's chest AND in her own case lo2): the host's copy of her entry still carried a piece that
+   on her seat had already gone into HER open «thất lạc» case (no holder); his act took it. The piece is now on his side: the case is held by
+   the thief (how «lost», as fix 3) or closes «mất dấu bên hảo hữu» (any other road); her census routes it, never nets it. true = handled */
+function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&c.st==="lost"&&c.e&&c.own===key(S)&&famIs(c.e,o.iu));if(!c)return false;
+ try{if(typeof loEntry==="function"&&loEntry(c))return false}catch(z){}
+ if(o.how==="lost"){const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();Object.assign(c,{keep:1,by:fk,st:"held",at:fk})}else{c.st="done";c.end=wk();c.how="matdau"}
+ try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),o.how==="lost"?"sang hảo hữu":"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}
+ return true}
+/* E44b (COOP_SWAP seed 4242 w4: her case 1 «held» was read as host case 1's piece): the two seats number lost cases on their own (S.loSeq), and
+   the copies of the host's people on her seat carry HIS «lo» marks, so jlost loEntry (holder by c.at, else any consort's piece marked
+   lo === c.id) found another case's piece: her case took its id (census c.e.iu sync) and holder (c.at), and closed onto it (dup + vanish).
+   A piece of another kind is never that case's piece: no entry (c.at kept) */
+(function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
+ try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
- const itemAt=o=>{let e=S.inv[o.ci];if(!e||e.k!==o.k)e=S.inv.find(x=>x&&x.k===o.k&&!x.h);return e||null};
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
- const rm=ops.filter(o=>o.op==="rm").map(o=>[o,itemAt(o)]).filter(x=>x[1]);
- for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;
+ const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
+ for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;if(!famOff(e)){famMiss(o,"gone meanwhile");continue}if(o.iu&&!e.iu)e.iu=o.iu;
   if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
-   const th=o.by!=null?RV(o.by):null;const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:th?key(th):f?key(f):fp(),keep:1})}finally{S.inv=all.filter(x=>x!==e)}if(c)continue}
-  S.inv.splice(S.inv.indexOf(e),1);loud=1;
+   const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:fk,keep:1})}finally{S.inv=all.filter(x=>x!==e)}
+   /* E44: the piece IS with the thief on the other seat (his real chest / the host's NPC): her case is held there even when this seat has no
+      live copy of the holder to put it in (loKeepBy refused) — a case left «lost» counted the piece a second time and was later «found» to
+      Nội vụ phủ: 2 copies (coop-lost-scan COOP_FAM: host chest + guest case) */
+   if(c){if(c.st==="lost")Object.assign(c,{keep:1,by:fk,st:"held",at:fk});continue}}
+  loud=1;
   if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
   else if(o.how==="taken"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"bị lấy",who:fp(),by:friendName()})}catch(x){}out.push(`<span class="r">Ngươi phải nộp ${esc(nm)} cho ${esc(friendName())}.</span>`)}
   else out.push(`<span class="r">${esc(nm)} trong rương ngươi không còn nữa.</span>`)}
  for(const o of ops)if(o.op==="art"&&typeof pmArtIn==="function"){const l=pmArtIn(o.ak);if(l){out.push(esc(l));loud=1}}/* jpma r3 fix B: the practice of «Cùng chơi» on her own S */
- for(const o of ops)if(o.op==="plant"&&o.e&&o.e.k){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x)}
+ for(const o of ops)if(o.op==="plant"&&o.e&&o.e.k){if(o.e.iu&&famWhere(o.e.iu)){famMiss(o,"plant: already hers");continue}const x=Object.assign({},o.e);delete x.ci;S.inv.push(x)}
  /* p2 B4: a thing given to her in the host's world (a contest prize, a bestowal): into her chest, told */
- for(const o of ops)if(o.op==="add"&&o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x);loud=1;out.push(`<span class="g">Được ban ${esc(typeof iname==="function"?iname(x):x.k)}${o.why?` (${esc(o.why)})`:""}.</span>`)}
- for(const o of ops)if(o.op==="ret"){/* her thất lạc case closes: the thing is back in her chest, quietly (as when an NPC returns it) */
-  const c=(S.lost||[]).find(c=>c.k===o.k&&c.st!=="done"&&(c.by===fp()||c.at===fp()));const e=c&&c.e?Object.assign({},c.e):{k:o.k};delete e.lo;delete e.by;delete e.gh;
-  S.inv.push(e);if(c){c.st="done";c.end=wk();c.how="nha"}out.push(`${esc(typeof iname==="function"?iname(e):e.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`);loud=1}
+ for(const o of ops)if(o.op==="add"&&o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){/* E44: her own lost piece coming home through an NPC (a found case on the host) is a return, not a gift */
+  if(o.e.iu){if(famWhere(o.e.iu)){famMiss(o,"add: already hers");continue}const c=famCase({iu:o.e.iu,k:o.e.k});
+   if(c&&famIs(c.e,o.e.iu)){const x=famBack({op:"ret",k:o.e.k,iu:o.e.iu,e:o.e});if(x){loud=1;out.push(`${esc(typeof iname==="function"?iname(x):x.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`)}continue}}
+  const x=Object.assign({},o.e);delete x.ci;S.inv.push(x);loud=1;out.push(`<span class="g">Được ban ${esc(typeof iname==="function"?iname(x):x.k)}${o.why?` (${esc(o.why)})`:""}.</span>`)}
+ for(const o of ops)if(o.op==="ret"){/* her thất lạc case closes: the thing is back in her chest, quietly (as when an NPC returns it); E44: by identity, once */
+  const e=famBack(o);if(e){out.push(`${esc(typeof iname==="function"?iname(e):e.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`);loud=1}}
+ for(const o of ops)if(o.op==="gone"){/* E44 r2: the host's side of her case closed without a return (seized, lost track of): hers closes too, quietly */
+  const c=famCase(o);if(!c){famMiss(o,"gone: no open case");continue}let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
+  if(x&&x.h===S){famMiss(o,"gone: the piece is with her");continue}
+  if(x){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
+  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau";
+  /* r2: my census: the piece left this case for the friend's world (it sits in his box), routed, never netted */
+  try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}}
  for(const o of ops){if(o.op==="preg0"){if(S.preg){S.preg=0;S.hidden=false;loud=1;out.push(`<span class="r">Ngươi sảy thai.</span> Thái y nói trong thuốc có xạ hương.`)}continue}
   const kd=o.n&&kidBy(o.n);if(!kd)continue;loud=1;
   if(o.op==="kdie"){try{out.push(kidDie(kd,o.why||"mất sớm",true))}catch(x){kd.alive=false}continue}
@@ -590,6 +679,17 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    out.push(`<span class="r">${esc(kd.name)} gặp chuyện</span>${L.length?` (${L.join(", ")})`:""}.`)}}
  return {out,loud}}
 
+/* E44 (coop-famops r2, COOP_SWAP scan: a guest's xạ hương the host held was seized from his chest as tang vật — his side of her case
+   closed «mất dấu», hers stayed «thất lạc»: the piece in the host's evidence box AND in her open case = 2 places). The host's copy of a case
+   OWNED by the friend is the world's truth: when it closes on the host without a return (returns ride as «ret», lostReturn hook above),
+   her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
+function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
+ const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;const was=st[c.id]===1;st[c.id]=2;
+  if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
+ if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -888,14 +988,14 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
  if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */
- try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
+ try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}famSweep();if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  if(eW()&&!CW.allow&&!CW.allowN&&CW.eNext)return CW.eNext();
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;bend();return}
  /* buổi tối: "Sẵn sàng" only marks her ready; the night + week end (endTurn) runs on the host's `go` for both (nightReady below) */
  if(CW.p2&&!CW.allowN&&(S.buoi||0)>=LASTB()){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;nightReady();return}
- const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}return r}})();
+ const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}famSweep();return r}})();
 /* #next was wired to the bare nextBuoi in j6 (before any wrapper): in co-op route the button through the wrapped one */
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
 /* NPC whereabouts are the host's: the guest's own placement is replaced by the host's for this buổi; the host re-sends whenever it re-places */
@@ -1161,7 +1261,7 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
- for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci,th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;ops.push(Object.assign({op:"rm",ci,k:e.k,how:th?"lost":"gone"},th?{by:th.id}:{}))}
+ for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci,th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;ops.push(Object.assign({op:"rm",ci,k:e.k,how:th?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
  for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
  for(const [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
@@ -1170,7 +1270,8 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
  if(b.K0.preg&&!v.preg)ops.push({op:"preg0"});return ops}
 function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId();CW.rpend[rid]=Date.now();(CW.b4s=CW.b4s||[]).push({ops:ops.map(x=>x.op),tt:o.tt||""});if(CW.b4s.length>20)CW.b4s.shift();
  const msg=Object.assign({t:"res",id:rid,k:o.pet&&o.pet.some(x=>x.op==="lose")?"petsteal":"npc",n:"",who:"",fx:o.fx||{},flags:{},seen:"effect",fam:ops,hd:o.hd||"",tt:o.tt||""},o.fest?{fest:o.fest}:{},o.pet&&o.pet.length?{pet:o.pet}:{});
- if(dOn()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
+ /* E44b (E44r SWAP vanish 399 / 1571): the lostReturn hook sends from the GUEST too; D.resTo runs on the host only (as sendRes) — on the guest it ran the «ret» locally and the host case stayed «held» */
+ if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
 /* r1 fix 2: an NPC's pet act on her entry (jpetcare mindMenu petsteal / thaopet) → the same res.pet ops as mine: she loses it, not a copy */
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
