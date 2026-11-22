@@ -96,7 +96,7 @@ const BEAT={
   tap14:"Thái hậu dặn: đừng chỉ dựa vào cô mẫu. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận cho chắc."},
  muoi:{nhap14:"Bổng lộc còn thiếu, mà buổi họp mặt đầu đã có kẻ chê áo xiêm của nhà buôn muối. Ra mắt bề trên, thay y phục cho phải phép để khỏi ai cười.",
   sung14:"Nhà buôn biết giá từng món. Muốn lo quà cáp thì cần bạc: bán đồ trong rương, nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến. Bạc tiêu đi, tháng sau sẽ tiếc.",
-  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ lòng cung nữ."},
+  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ thiện cảm của cung nữ."},
  thd:{nhap14:"Nhà nghèo, chữ nghĩa là của hồi môn duy nhất. Ra mắt bề trên cho đủ lễ, thay y phục chỉnh tề, kẻo bị cười là nữ nhi nhà nghèo vào cung.",
   sung14:"Một nữ nhân nhà nho khó có bạc dư. Bán bớt đồ trong rương, điểm trang tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món cần dùng.",
   tap14:"Chữ nghĩa chỉ có giá khi có người đọc. Kết một phi tần, học thêm tài nghệ, giữ cung nữ thân cận."},
