@@ -113,7 +113,7 @@ function ldSettle(){if(!ldOn())return;const d0=W();
  if(!L&&S.ldPk===d0){S.ledger={wk:d0,days:[],p:-1,st:1};return}
  if(!L)L=ldRoll(S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null));
  if(L.st)return;L.st=1;
- const pe=L.days[L.p];if(pe){const h=S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null);pe.w=h?idOf(h):null}   /* the played tối as it ended (a won steal moved it) */
+ const pe=L.days[L.p];if(pe){const h=S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null);const w1=h?idOf(h):null;if(w1!==pe.w){pe.s=1;pe.o=pe.w}pe.w=w1}   /* the played tối as it ended (a won steal moved it) */
  const mine=[],npc=[],ln={},F=fr();let me=0;
  L.days.forEach((e,i)=>{if(i===L.p)return;
   if(e.y==="visit"){if(queenP()===S)log(`Kính sự phòng ghi: ngày ${e.d}, theo lệ Hoàng thượng sang cung ngươi thăm hỏi; ngươi không tiện hầu giá.`);return}
