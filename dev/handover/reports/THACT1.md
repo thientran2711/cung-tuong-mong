@@ -1,4 +1,4 @@
-# THACT1 — Thái hậu ACT (HĐ) seals: tone-down stills + animation (worker of Foreman C ROOT-C1 session_01D3E3NX4Gc3XCtkhsnipEAS)
+# THACT1 — Thái hậu ACT (HĐ) seals: tone-down stills + animation (worker of Foreman C ROOT-C2 session_01D3E3NbRKVda1eN4trg7rnx; started under ROOT-C1 session_01D3E3NX4Gc3XCtkhsnipEAS)
 depth 1 · START_CTX ≈ 3 % of 1M (get_session read 0 → own estimate) · roll line 28 %, ceiling 60 % · finished well below the line (no handover needed) · 22/11
 Order: owner L2341 (21 tone-down emotion anims OK) + L2342 "Ok làm đi" → (1) missing th-act ẩn, bình, đau lòng, mưu + act-ghen REDRAW, (2) the old 17 th-act seals remade in the tone-down look.
 Count: brief said 22; distinct seals = **21** (act-ghen is in both lists). All 21 done, one try each, no redo needed.
@@ -65,3 +65,6 @@ Bases still_base/th-act-<k>-A.txt (17). Tools + all B/OUT/LOOP prompt texts: dev
 - Đã làm xong 21 ấn hành động (HĐ) của Thái hậu bản dịu + hoạt hình: 4 ấn mới (ẩn, bình, đau lòng, mưu), ghen vẽ lại (đĩa xanh ngọc đậm), 16 ấn cũ làm lại dịu. Mã M2342-01 … 21.
 - 5 video MP4 trên CDN (thư mục tonedown/act). Không có lỗi nặng, không phải làm lại. Hưng khởi: vệt mực hơi to, tràn ra ngoài khung (nhẹ).
 - Tốn 45 150 credit.
+
+## Coordinator change
+ROOT-C1 → ROOT-C2 (session_01D3E3NbRKVda1eN4trg7rnx). Its messages reached me only after the work was done, so batches 3–5 + final went to ROOT-C1 first; all resent to ROOT-C2. Still sheets (A row over B row): …/tonedown/act/th-act-tonedown-batch{1,2,3,45}-stills-AB.jpg.
