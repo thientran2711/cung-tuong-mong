@@ -1,5 +1,6 @@
 START_CTX ~3 % (get_session read 0 at start; own estimate) · depth 3 · now 18 % (180 923 / 1 M), under the 28 % roll line
 # PLACES3 — owner L2376 places fixes (coordinator ROOT-C3 session_01D3E3NaHk4WXbAeqcG1iXWK)
+Coordinator now ROOT-C4 session_01D3E3NWqpW2ooEEFJyANw9a (ROOT-C3 rolled over 07:00Z). Idle until ROOT-C4 relays the owner verdict on L2377 / swap OK.
 Brief = PLACES2 handover @7150f4ad. One try each, details ours. The game swap is still HELD.
 
 ## Done
