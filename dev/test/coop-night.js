@@ -129,9 +129,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
     day's fin again as it was (jnf again / S.nfLast) → both reach the next week (NLC #10: before, the host answered only for its CURRENT day = stall) */
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  if(await toNight('4b')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);
-  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;COOP.rxWrap=function(go,m){if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;window.__nfrx=[];COOP.rxWrap=function(go,m){try{if(m&&m.k==="ctm-nf")window.__nfrx.push([m.mode,m.ph,m.fin,m.open,m.d,m.week,!!m.ld])}catch(e){}if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
   for(const o of [A,B]){await clear(o);ok(await isRd(o)||await press(o),'4b: '+o.name+' presses')}
-  await merged('4b',w0,90000);ok(await B.p.evaluate(()=>window.__fdrop===1),'4b: the guest really missed the host\'s fin once');
+  await merged('4b',w0,90000);{const fd=await B.p.evaluate(()=>window.__fdrop===1);if(!fd)console.log('DUMP 4b rx',JSON.stringify(await B.p.evaluate(()=>({rx:window.__nfrx,tr:(COOPW.tr||[]).slice(-25),nf:nfDebug()}))).slice(0,4000));ok(fd,'4b: the guest really missed the host\'s fin once')}
   await B.p.evaluate(()=>{COOP.rxWrap=window.__rx0;delete window.__rx0})}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);
