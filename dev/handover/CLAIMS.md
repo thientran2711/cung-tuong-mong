@@ -1082,3 +1082,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | (o
 REVIEW places-wire-nvp-tn (SMALL sonnet) | review/places-wire-nvp-tn-rv | session_01964izFfXLMw4vErQePQuKf | DONE LAND READY f90e455b | 22/11 07:51Z (Foreman D #18)
 | REVIEW coop-night0 (opus BIG co-op) of 32f4afb9 | review/coop-night0-r1 234d0298; reports/coop-night0.md | B | session_01N1tNP3KWzR2PZhLsfwtajY | PASS 234d0298 → LAND READY MAIN 105; on call | 22/11 07:56Z |
 REVIEW role-parity-bundle-fix (BIG opus) | review/role-parity-bundle-fix-rv | session_01964izFRgtaMS3fADE2hXYA | RUNNING | 22/11 09:14Z (Foreman D #18)
+| night-ledger-coop r2 fixer (opus BIG co-op; successor of 6wkABAL1 at budget; FAIL 96c62324 case-5 stall) | review/night-ledger-coop-r2; reports/night-ledger.md | B | session_01N1tNP3C4XN63dXNqw9oz1w | RUNNING | 22/11 09:59Z |
