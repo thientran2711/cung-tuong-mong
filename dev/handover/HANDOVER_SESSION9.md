@@ -2383,3 +2383,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 104 wake trig_01Ja46xkLPp8Q6wJtN2qJECc → 105 disables it and creates its own (min 32). 103's trig_01BZEhJBtaiQjTxceoem3Hph DISABLED. 102's trig_01E13SG1HWhNBW6G9ukrWFKH still on (owner asked to turn it off).
 - Push tool: copy /home/user/wt/hpush104.sh pattern (dev/tools/main-hpush.sh with own id + worktree); after every push verify `git diff --stat HEAD~1 HEAD` (shallow rebase can show add/add conflicts; final diff was clean each time).
 - (22/11 07:33Z) Opened MAIN CHÍNH 105 = session_01Rc5AsMuxHwBeP9e4iTpgW9 (child, depth 7). LC5 told. 104 stops; relays late messages to 105 only.
+
+## MAIN CHÍNH 105 (session_01Rc5AsMuxHwBeP9e4iTpgW9)
+- (22/11 07:38Z) MAIN = MAIN CHÍNH 105 session_01Rc5AsMuxHwBeP9e4iTpgW9; START_CTX ~10 % (est., used_tokens reads 0; window 1M) → roll line 35 %, ceiling 60 %; depth 7 (limit 8: child MAIN CHÍNH 106 at depth 8 is the last; it writes the FOR MAIN root line).
+- LOAD: main running 0 (owner bugs/UI/go-live only) | B running 5 (night0, host-lag r3, thin-g F1, night-ledger, fig-retry rv) | C running THACT4 done + PLACES3 held | D running 2 (role-parity-bundle-fix, places-wire-nvp-tn) | E running 1 (coop-famops-p E44d) | moved: none (no main-held non-UI items). LIVE f0070e61, LC5 queue empty.
