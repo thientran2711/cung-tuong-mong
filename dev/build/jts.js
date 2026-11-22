@@ -248,10 +248,10 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
 /* festivals (j3/j8 festival): the two judged banquets say beforehand what is judged and where she stands */
 const TS_FEST={1:["Yến tiệc đầu xuân","sac","Sắc và điệu múa"],7:["Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ"]};
-function tsFestScore(p,k){return k==="sac"?effSac(p)+artW2(p,"vu")*6:p.tai+(artW2(p,"cam")+artW2(p,"thi"))*3}
+function tsFestScore(p,k){return k==="sac"?effSac(p)+artOE(p,"vu"):p.tai+(artOE(p,"cam")+artOE(p,"thi"))/2}
 function tsFestPre(){const m=S.month%12+1;const F=TS_FEST[m];if(!F)return;const s=tsS();const [n,k,lbl]=F;const me=tsFestScore(S,k);const top=s.festTop&&s.festTop[k];
  Q.push({t:`Sắp tới: ${n}`,h:`<p>Đầu tháng sau có ${n}. Hoàng thượng chấm ${lbl.toLowerCase()}; người đứng đầu được ban thưởng.</p><div class="kpsec"><h4 class="kpst">Phần của ngươi lúc này</h4>${tsRows([
-  [k==="sac"?"Sắc":"Tài",`${k==="sac"?effSac(S):S.tai}`,"t"],[k==="sac"?"Vũ (nhân 6)":"Cầm + Thi (nhân 3)",`${k==="sac"?artW2(S,"vu"):artW2(S,"cam")+artW2(S,"thi")}`,"t"],["Tổng",`${me} (thêm vận may hôm ấy 0–30)`,"t"],
+  [k==="sac"?"Sắc":"Tài",`${k==="sac"?effSac(S):S.tai}`,"t"],[k==="sac"?"Vũ (theo bậc)":"Cầm + Thi (theo bậc, chia đôi)",`${k==="sac"?artOE(S,"vu"):Math.round((artOE(S,"cam")+artOE(S,"thi"))/2)}`,"t"],["Tổng",`${me} (thêm vận may hôm ấy 0–30)`,"t"],
   top?["Năm trước",`phần gốc cao nhất là ${top.sc} (${top.nm}), chưa kể vận may`,"n"]:["Năm trước","chưa có ghi chép","n"]])}</div>`,btn:"Đã hiểu",tsk:"fest"})}
 (function(){const f0=festival;festival=function(title,k){const C=consorts();const r=f0.apply(this,arguments);try{if(S&&(k==="sac"||k==="tai")){const best=C.map(p=>[p,tsFestScore(p,k)]).sort((a,b)=>b[1]-a[1])[0];if(best){tsS().festTop=tsS().festTop||{};tsS().festTop[k]={sc:Math.round(best[1]),nm:best[0]===S?"ngươi":best[0].name}}}}catch(e){}return r}})();
 
@@ -342,7 +342,7 @@ function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
 function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.denSung}
 /* ONE rule for every lantern (hers and the NPCs', mg2): the odds of being seen / heard without a far lantern, and "far" from the play (raw ≥ 6) */
-function tsDenOdds(p){return agOdd(45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4)}/* one cap BAL.odds (review ag-all-2 r2 C4) */
+function tsDenOdds(p){return agOdd(45+(p.tai||0)/4+artOE(p,"hoa"))}/* one cap BAL.odds (review ag-all-2 r2 C4) */
 function tsDenFar(raw){return raw>=6}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
  const odds=tsDenOdds(S);const seen=tsDenSeen();
