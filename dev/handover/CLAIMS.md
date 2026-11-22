@@ -1034,3 +1034,5 @@ L2370 th act seals redo 18 | claude/cung-tuong-mong-handover-hj0h8w | session_01
 night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | RUNNING | 22/11 03:22Z (Foreman D #18)
 | RELAND coop-host-lag r3 on LIVE bb92f986 (opus; MAIN 103 ORDER 02:50Z, clear() conflict → one shared helper) | review/coop-host-lag-r3 | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 22/11 03:23Z |
 | RELAND coop-host-lag r3 successor (opus BIG co-op; after rv 3VQoNHCT rollover) | review/coop-host-lag-r3 @624257fd; reports/coop-host-lag.md | B | session_01N1tNP2r12Tji5WTv34tiTY | RUNNING | 22/11 03:39Z |
+| BEDRUN1 redraw 13 bedrooms bed L29 (sonnet; OWNER L2342) | claude/cung-tuong-mong-handover-hj0h8w; reports/BEDRUN1.md | C | session_01D3E3NbTr3xRMKjjiWiQ6Ee | RUNNING | 22/11 04:12Z |
+| THACT1 22 Thái hậu act seals tone-down + anim (opus; OWNER L2342) | claude/cung-tuong-mong-handover-hj0h8w; reports/THACT1.md | C | session_01D3E3NXjSoX3YP2xrQyGVRy | RUNNING | 22/11 04:12Z |
