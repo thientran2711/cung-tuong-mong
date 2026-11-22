@@ -685,3 +685,26 @@ Alone: role-parity ALL PASS @54787f42 · coop-e2e ×3 141/141 ×3 · quickcheck 
 ### Handover to #9
 Worktrees: /home/user/wt/ctg8 (branch @54787f42), /home/user/wt/ctg8b (detached b3fa6bc0, built), /home/user/wt/live8 (LIVE b238857f built — refresh to 40cc2b92), /home/user/wt/ho8 (handover). Worker 127.0.0.1:8787 (THINMAX 13). Lane: `WT=<wt> O=<out> bash dev/test/coop-thin-g-reg.sh <suites>`. Never rebuild index.html while a lane runs (coop-serve reads it from disk per request).
 To do, in order: (1) rkOfFace writer (probe above) + thin-c on LIVE; (2) d / f1 / hn: base has them — check LIVE (THINMAX 9 vs 13) and root-fix if coop-thin-g made them (LAW 11); (3) f2 alone; cyc flake count; (5) SSK "SẴN SÀNG KIỂM <sha>" to Foreman B (session_01N1tNP4ubP78y1PJkcWfaWs).
+
+## F1 FIX #9 (session_01N1tNP4qJehLbXRzcT5RvfA, 22/11; depth 4/8; START_CTX ≈ 5 % of 1M → rollover ≈ 30 %, ceiling 60 %)
+PRIORITY #1 CHECK: OD co-op first (OD 16/11 20:29Z) | grep OD / HANDOVER / PROGRESS / reports for rkOfFace, `$r`, pSnap, pDiff, H2 face reveal, giau — only #8's notes | main 40cc2b92 → 0a3ceede (coop-guest-men; no fix of these) | review/* none for these | claims CLAIMS:1109 (this worker).
+
+Branch review/coop-thin-g-f1 **@afbc9115** (pushed) = #8 head 002a0814 + merge LIVE 0a3ceede (coop-guest-men: jcoopask man/th kinds + jmort; no conflict in co-op code; index.html/sw.js rebuilt by build_site.sh). No product code change by #9: every open red below is pre-existing on LIVE or pre-G.
+
+### (1) rkOfFace raw {$r} on her phone — ROOT FOUND, LIVE-identical → FOR MAIN
+LIVE 40cc2b92 thin-c L9 (Worker THINMAX 9, LIVE's own test): the same "no page errors" rkOfFace TypeError in **3/3** runs (branch L13: 2 in 3). Not made by coop-thin-g.
+Probe (guest WebSocket trap + host `ser` trap; copy of thin-c, not committed): the raw ref reaches her S through the **part-D person patch** (`pq` in the `delta` view):
+`["-",["visit","people",{i:5,id:"nTống Chiêu Hoa#"},"ref","id"]]`, `[... "ref","name"]`, `[... "ref","rank"]` … then `{"$r":9}` — the patch walks INTO the ref object key by key.
+Why: the host's stored store of her seat keeps a **stale copy** of a rival — host trap at pSnap inside withSeat('b'): `{id:6 Sử Tố Huyên, liveHas:true, same:false, vpIn:false}` (her visit person's ref is an object with the live rival's id but NOT in `rivals`). TH.withSeat resolves her store's refs only once (`if(B.fresh){fixRefs(S)…}`, jcoopthin.js:171); when the host's rival objects are rebuilt later and the store is kept (at level ≥ 2 COOP "week" no longer drops it, jcoopthin.js:508), `ser()` (j6: `rs.has(o)` only) writes the stale copy as a full object, the next snapshot after refreshHere (jcoopworld presAll → withSeat → rp(live v)) writes `{$r:id}`, and pDiff (jcoopthin.js:360, element match by eid = name) diffs the two key by key; on her phone pApply deletes the real ref's keys and leaves `{$r}` → rkOfFace(o.rank undefined).
+FOR MAIN (fix proposal, whole family = every ref in her stored store, not only visit.people): (a) in TH.withSeat re-link her store's rival refs by id to the live `rivals` whenever the host's rival objects changed since the store was built (or every entry, if cheap enough: measure), and (b) in pDiff treat a ref-shaped value (`{$r}`/`{$k}` or a rival object) as one value (`=` whole, then pApply's unref), never key by key. Test: thin-c "no page errors" + the probe check "her S.visit.people has no raw {$r}".
+
+### (2) d / f1 / hn
+| suite | branch (#8 / #9) | LIVE 40cc2b92 (L9, LIVE's test) | verdict |
+|---|---|---|---|
+| d | 8 reds (kit guest copies data-kfsp offsets, invite offer "") | **9 reds**: kit guest copy ×7 + invite offer "" + withSeat selfTest | pre-existing on LIVE → FOR MAIN |
+| f1 | 1 (F1 real tap under parallel time) | **F1 real tap under parallel time** red + the rkOfFace page error | pre-existing on LIVE → FOR MAIN |
+| hn | 1 (H2 face reveal) | test not on LIVE (comes with this branch's F6b/hostnull stack) | **pre-G**: H2 red at **L12 ×2** and L13 on this branch; base b3fa6bc0 too. Not the {$r} family (her people resolve: ids [4,"m3"]); on her phone `met61` is true but krvFlip never ran for that key (flips only "x18","x19"), KRV.ev unset → FOR B (hostnull / F2 lane owner) |
+
+### (3) f2 / cyc
+- f2 alone ×2: **PASS** (P2 'host sees her' red was load only).
+- cyc giau flake: branch @002a0814 THIN 13 alone **4/4 PASS (73/73)**; LIVE 40cc2b92 THIN 9 3/4 (one red "mixed: the host waited for the old guest", not giau). The giau "forced deck who:null" did not repeat in 4 runs → no cause to fix; treat as load flake (same family as #6's amPool bot note).
