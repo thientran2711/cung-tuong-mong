@@ -391,20 +391,12 @@ function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.na
  if(famIn(f,m.fam,m.pets))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
-function famIn(f,fm,pets){let ch=false;const rb=fm&&Array.isArray(fm.bag)&&(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])||JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])||(fm.preg||0)!==(f.preg||0))?famRebase(f):null;
+function famIn(f,fm,pets){let ch=false;
  if(fm&&Array.isArray(fm.bag)){if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>o&&typeof o==="object"?Object.assign({},o):o);if(typeof itCleanL==="function")itCleanL(f.inv);ch=true}
   if(JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])){f.kids=(fm.kids||[]).map(o=>Object.assign({},o));ch=true}
   if((fm.preg||0)!==(f.preg||0)){f.preg=fm.preg||0;f.fake=fm.fake||0;ch=true}f.fx7=fm.fx7||null}
  if(pets&&Array.isArray(pets.L)){const L=pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=pets.on;f.petB=pets.b;f.petBn=pets.bn;ch=true}}
- if(rb)rb();return ch}
-/* E44g T1 (law 6c REAL OBJECTS): her live bag / kids replace her entry's objects while the host's festival result is still pending (CW.f7: the
-   host's own contest minigame defers the scoring to fxFin7 → f7Done diffs her entry against the snapshot taken at the festival's START).
-   What she did meanwhile on her own seat (put a piece on, took one off, used, sold, a child born) is not the festival's doing. Before: f7Done
-   sent «rm gone» for the piece she had just put on (her famItem finds it in her worn slot → taken off her: vanish, coop-lost-scan T1
-   10000013 / 10000014 / 10000078) and «add» for the garment she took off (a second copy, «Được ban …»); a kids relay = «ktake» of every child.
-   Now: what the host did to her entry since the snapshot is sent first (the same b4Ops), then the snapshot is re-based on her live bag. */
-function famRebase(f){const c=CW.f7,b=c&&c.b;if(!b||b.v!==f||!host())return null;let ops=[];try{ops=b4Ops(b,c.title)}catch(e){console.error(e)}
- return ()=>{try{b.inv0=(f.inv||[]).slice();b.K0=famSnap(f);if(ops.length)b4Send(ops,{tt:c.title})}catch(e){console.error(e)}}}
+ return ch}
 function famTake(){const m=CW.famLast,f=friendEntry();if(!m||!f||(m.name&&m.name!==f.name))return false;CW.famGotH=m.h;/* compared with her entry each time: a rebuilt entry (merged week) gets the live bag back */return famIn(f,m.fam,m.pets)}
 function famAsk(h){const t=Date.now();if(CW.famAsk&&CW.famAsk.h===h&&t-CW.famAsk.t<4000)return;CW.famAsk={h,t};COOP.send({t:"act",k:FK,mode:"ask",h,id:FK+":"+newId()})}
 COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
@@ -1316,18 +1308,27 @@ function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId()
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
 /* the festival being scored with her entry (also when the host's own minigame defers the scoring to fxFin7) */
-function f7Done(L){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=b4Ops(c.b,c.title);if(i<0){b4Send(ops,{tt:c.title});return}
+function f7Done(L,pre){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=(pre||[]).concat(c.b?b4Ops(c.b,c.title):[]);if(i<0){b4Send(ops,{tt:c.title});return}
  const x=L[i],an=SC7[x.kind]?SC7[x.kind].n:"tài nghệ";const top=i===0;CW.f7last={i,n:L.length,kind:x.kind,reg:!!c.reg};
  const hd=top?`${c.title}: ${an} của ngươi đứng đầu, Hoàng thượng ban thưởng (Sủng, Danh tăng; về cùng tuần mới).`:`${c.title}: ngươi dâng ${an}, đứng hạng ${i+1} trong ${L.length} người dự thi${i>=L.length-1?"; lu mờ trước hậu cung":""}.`;
  b4Send(ops,{force:1,tt:c.title,hd,fx:c.reg&&typeof J71==="object"?{suc:-J71.cost}:{},fest:c.reg?{f:c.reg.F.f,y:S.year}:null})}
 if(typeof cScore7==="function"){const f=cScore7;cScore7=function(){const L=f.apply(this,arguments);try{const c=CW.on&&host()&&CW.f7;if(c&&Array.isArray(L)){
  if(c.reg){const pr=(c.reg.X.pr&&typeof J71==="object"?J71.prep:0)+(c.reg.X.pb||0);for(const x of L)if(isF(x.p)){x.pr=(x.pr||0)+pr;x.s+=pr}L.sort((a,b)=>b.s-a.s)}CW.f7.L=L}}catch(e){console.error(e)}return L}}
 if(typeof fxBest7==="function"){const f=fxBest7;fxBest7=function(p){const c=CW.on&&host()&&CW.f7;if(c&&c.reg&&isF(p))return c.reg.X.a;return f.apply(this,arguments)}}
-if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const r=f.apply(this,arguments);try{if(CW.on&&host()&&CW.f7&&CW.f7.title===t)f7Done(L)}catch(e){console.error(e)}return r}}
+/* E44g T1 (law 6c REAL OBJECTS): the festival result (fxFin7) diffs her entry around ITS OWN call. Before: f7Done diffed the snapshot taken when
+   festival() started; with the host's contest minigame deferring the scoring (and a festival that never closes keeping CW.f7 open for weeks),
+   everything that touched her entry meanwhile was sent again as the festival's doing: the garment she put on on her own seat («rm gone» →
+   her famItem takes it off her = vanish) and the one she took off («add» iu 0 = a second copy), the host's own Lấy đồ / Cài đồ already sent
+   by their acts (coop-lost-scan T1 10000013 / 10000014 / 10000078 / 10000165). A synchronous festival (no minigame) keeps its whole diff (pre). */
+function f7Snap(L){let v=null;try{const x=(L||[]).find(y=>y&&isF(y.p));v=x?x.p:friendEntry()}catch(e){}return v?{v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0:null}:null}
+if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const c=CW.on&&host()&&CW.f7&&CW.f7.title===t?CW.f7:null;let pre=[];
+ if(c){try{if(c.b)pre=b4Ops(c.b,c.title)}catch(e){console.error(e)}c.b=f7Snap(L)}
+ const r=f.apply(this,arguments);try{if(c&&CW.f7===c)f7Done(L,pre)}catch(e){console.error(e)}return r}}
 function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulled.length)return f.apply(this,arguments);
  const b=b4Snap();if(!b)return f.apply(this,arguments);const fest=n==="festival";if(fest){CW.f7={b,title:arguments[0]||"Hội thi",reg:f7reg(b.v,arguments[1]),L:null}}
  CW.b4in=true;let r;try{r=f.apply(this,arguments)}finally{CW.b4in=false}
- try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
+ try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}
+   else if(CW.f7&&CW.f7.b){/* E44g T1: the scoring waits for the host's minigame: what festival() did so far goes now, the start snapshot is dropped (fxFin7 diffs its own call) */const c=CW.f7;const ops=b4Ops(c.b,c.title);c.b=null;if(ops.length)b4Send(ops,{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
 /* E44g T6 (law 6c REAL OBJECTS, law 1): an NPC gives a piece to her entry OUTSIDE the diffed calls (rivalsTurn / rivalsMonth / festival / the

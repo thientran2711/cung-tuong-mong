@@ -100,19 +100,25 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     const e3=pc(P);v.inv.push(e3);const c3=loLoseE(v,e3,"srv");v.inv.splice(v.inv.indexOf(e3),1);loKeepBy(c3,S,"");Object.assign(c3,{keep:0,by:null,open:1});c3.kn.ome=1;
     used=0;loUI("giveback",c3.id);ck("18d «Trả về chủ» while SHE holds it: still works (one piece, at its owner)",c3.st==="done"&&cnt(e3.iu)===0&&v.inv.filter(e=>e.iu===e3.iu).length===1,{st:c3.st,me:cnt(e3.iu),v:v.inv.filter(e=>e.iu===e3.iu).length})}
    finally{CW.on=on5;v.inv=v.inv.filter(e=>!e.lo&&!(e.iu>9e6))}}
-  /* E44g T1 (coop-lost-scan vanish 10000013 / 10000014 / 10000078, both builds): the host's festival result waits for his contest minigame
-     (fxFin7 → f7Done diffs her entry vs the festival-START snapshot); meanwhile she puts on garment X on her own seat (X leaves her chest,
-     the one she wore, G, comes back to it) and her ctm-fam relay rebuilds her entry. Before: «rm gone» X (her famItem finds it WORN → taken
-     off her = vanish) + «add» G (a second copy) + «ktake» of her child. Now: no op; on her seat X stays on her, one G. */
-  {reset();const on21=CW.on,se21=CW.seat,sd21=COOP.send,f721=CW.f7;const sn=[];const Y=Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="y"&&IT[k]);
+  /* E44g T1 (coop-lost-scan vanish 10000013 / 10000014 / 10000078 / 10000165, both builds): the host's festival result waits for his contest
+     minigame (fxFin7 later; CW.f7 may stay open for weeks). Meanwhile she puts on garment X on her own seat (X leaves her chest, the one she
+     wore, G, comes back) → her relay rebuilds her entry; and the host's own act takes piece Q from her entry (that act sent its own op).
+     Before: f7Done diffed the festival-START snapshot → «rm gone» X (her famItem finds it WORN → vanish), «add» G (a 2nd copy), «rm» Q again,
+     «ktake» her child. Now: fxFin7 diffs its own call only; a synchronous festival still sends what it gave her. */
+  {reset();const on21=CW.on,se21=CW.seat,sd21=COOP.send,f721=CW.f7,pu21=CW.pulled;const sn=[];const Y=Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="y"&&IT[k]);
    const kid={name:"Tiểu B",bt:5,alive:true,hp:50,tal:10,fond:50};const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[Object.assign({},kid)],rank:3,fav:50};rivals.push(f);
-   const X=pc(Y[0]),Pz=pc(P),G={k:Y[1],from:"emp"};let o21=[],er21="";
+   const X=pc(Y[0]),Pz=pc(P),Qz=pc(P),G={k:Y[1],from:"emp"},Z=pc(P);let o21=[],o21d=[],er21="",def21=null;const TT="Hội thi T21";
    try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};
-    f.inv=[X,Pz].map((e,i)=>Object.assign({},e,{ci:i}));CW.f7={b:{v:f,inv0:f.inv.slice(),K0:{kids:f.kids.map(k=>[k,Object.assign({},k)]),preg:0},P0:[]},title:"Hội thi T21",reg:null,L:null};
+    f.inv=[X,Pz,Qz].map((e,i)=>Object.assign({},e,{ci:i}));CW.pulled=[[0,f]];
+    CW.b4Wrap("festival",t=>{Q.push({t,h:"<p>T21</p>",btn:"Đã hiểu"})})(TT);def21={open:!!CW.f7,b:CW.f7&&CW.f7.b};Q.length=0;CW.pulled=null;
+    f.inv.splice(2,1);/* the host's own act took Qz (its op went with that act) */
     COOP.emit("act",{t:"act",k:"ctm-fam",mode:"fam",h:"t21",from:"b",name:f.name,pets:null,fam:{bag:[Pz,G].map((e,i)=>Object.assign({},e,{ci:i})),kids:[Object.assign({},kid)],preg:0,fake:0,fx7:null}});
-    fxFin7("Hội thi T21",[]);o21=sn.flatMap(m=>m.fam||[])}catch(e){er21=e.message}
-   finally{CW.on=on21;CW.seat=se21;COOP.send=sd21;CW.f7=f721;rivals.splice(rivals.indexOf(f),1)}
-   ck("21 festival result pending, her relay rebuilt her entry (she put X on): no «rm» X / «add» / «ktake» (was: X taken off her = vanish, G twice)",!er21&&f.inv.length===2&&!o21.some(o=>o.op==="rm"||o.op==="add"||o.op==="ktake"),{er21,inv:f.inv.map(e=>e.k),ops:o21.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu)||0)+":"+(o.k||(o.e&&o.e.k)))});
+    fxFin7(TT,[]);o21=sn.flatMap(m=>m.fam||[]);
+    sn.length=0;CW.pulled=[[0,f]];CW.b4Wrap("festival",t=>{f.inv.push(Object.assign({},Z));CW.f7.L=[]})("Hội thi T21d");CW.pulled=null;o21d=sn.flatMap(m=>m.fam||[])}catch(e){er21=e.message}
+   finally{CW.on=on21;CW.seat=se21;COOP.send=sd21;CW.f7=f721;CW.pulled=pu21;rivals.splice(rivals.indexOf(f),1)}
+   const rmadd=o21.filter(o=>o&&(o.op==="rm"||o.op==="add"||o.op==="ktake"));
+   ck("21 festival result pending: her relay rebuilt her entry (X put on) + a host act took Q: no «rm» / «add» / «ktake» at the result (was: X off her, G twice, Q again)",!er21&&def21&&def21.open&&def21.b===null&&!rmadd.length,{er21,def21:def21&&{open:def21.open,b:!!def21.b},ops:rmadd.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu)||0)+":"+(o.k||(o.e&&o.e.k)))});
+   ck("21d a synchronous festival still sends what it gave her («add» of the prize, once)",!er21&&o21d.filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===Z.iu).length===1,{er21,ops:o21d.map(o=>o&&o.op)});
    reset();S.inv=[Object.assign({},Pz),Object.assign({},G)];S.wd={tram:null,y:Object.assign({},X)};FA(o21);
    ck("21b her seat applies the host's ops: X still worn, ONE G in her chest",S.wd.y&&S.wd.y.iu===X.iu&&S.inv.filter(e=>e.k===G.k).length===1,{y:S.wd.y,inv:S.inv.map(e=>e.k)})}
   /* E44g T6 (coop-lost-scan vanish 934 / 3385 / 2028): an NPC gives a piece to her entry OUTSIDE the diffed calls (an agent act, a monthly gift):
