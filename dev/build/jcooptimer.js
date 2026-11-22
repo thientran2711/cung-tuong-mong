@@ -175,7 +175,7 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  if(e&&(e.pid||e.rk)){CQ().push(e);CW.nacN=(CW.nacN||0)+1}else if(e&&e.lap){rcpLapse(e.t);CW.nalN=(CW.nalN||0)+1}/* a choice with no generator lapses now (no effect, one log line), never a hollow road later */
  else if(e){CQ().push(e);CW.nacN=(CW.nacN||0)+1}/* a notice: its text */
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
- try{showModal();render()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+ try{showModal();render()}catch(e){console.error(e)}try{if(CW.snapNow)CW.snapNow()}catch(e){}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
 /* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
    .krevok, a [data-km-close]): no choice, so it is read for her like a one-road dialog (r3 cn2 FORCE4=h DUMP: the AFK host's own flip-end
    scene sat 76 s with Q empty, her night never ran). A scene with more than one button (a choice) is left alone. */
@@ -187,7 +187,7 @@ function nafScene(){try{const L=[...document.querySelectorAll(".kmov")].filter(o
    (pid) is made again from its id (deserQ, the save path: it points at the people of the merged world); any other card comes back as it was. */
 function carryBack(){if(typeof S==="undefined"||!S||!Array.isArray(S.cq)||!S.cq.length||!live()||S.dead)return;const w=wkN(),L=S.cq.filter(e=>!(e.cw>=w));if(!L.length)return;S.cq=S.cq.filter(e=>e.cw>=w);let out=[];
  try{out=deserQ(L)}catch(x){out=[]}/* rebuilt against the merged world, people by id (j3 deserQ: pid → mkP, generator → rcpMk; a gone person → lapse + log) */
- CW.nacB=(CW.nacB||0)+L.length;CW.nacL=(CW.nacL||0)+(L.length-out.length);if(!out.length)return;Q.unshift(...out);try{showModal();render()}catch(e){console.error(e)}}
+ CW.nacB=(CW.nacB||0)+L.length;CW.nacL=(CW.nacL||0)+(L.length-out.length);if(!out.length)return;Q.unshift(...out);if(CW.afterCarry)try{CW.afterCarry(out)}catch(e){}/* test hook (as CW.afterFC) */try{showModal();render()}catch(e){console.error(e)}}
 /* LAW 2 / 3 (Foreman B ruling 3): «no answer» to a summons after the AFK bound costs what «Cáo bệnh» costs on that same card (its own fx losses
    and its go: Ân tình, the decline count …; one core: the card's own BAL numbers), without the rest it buys (Sức) — absence is never the cheaper decline */
 function nafDecl(m){try{const o=(m.opts||[]).find(x=>/^Cáo bệnh/.test(String(x&&x.n||"")));if(!o)return"";const L={};for(const k in (o.fx||{}))if(typeof o.fx[k]==="number"&&o.fx[k]<0)L[k]=o.fx[k];
