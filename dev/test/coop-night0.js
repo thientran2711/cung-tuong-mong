@@ -6,7 +6,8 @@
    Part 1 (always, no Worker): a local room stub on one page — every seat state × both seats → nfOn / nfRoomOff, plus a host day end with a
    cung-nữ friend (no jnf choice opened, the day moves).
    Part 2 (NIGHT0_E2E != 0): the real two-seat room, coop-e2e.js (its clear() = THE helper dev/test/lib/coop-clear.js where landed) with the
-   origin pairs pinned, COOP_WEEKS=1 (NIGHT0_WEEKS): cnv/tt (the repro: LIVE 114/138 STUCK) and tt/cnv (two-way). NIGHT0_PAIRS="cnv:tt,tt:cnv".
+   origin pairs pinned, COOP_WEEKS=1 (NIGHT0_WEEKS): cnv/tt (the repro: LIVE 114/138 STUCK) and tt/cnv (two-way), tt+nha/tt
+   (r1: the home-route host, LIVE f0070e61 STUCK night 0 too) and tt/tt+nha. NIGHT0_PAIRS="cnv:tt,tt:cnv,tt+nha:tt,tt:tt+nha".
    usage: python3 dev/build/assemble.py && node dev/test/coop-night0.js <url-of-dev/index.html> [outdir]   (exit 0 = all pass) */
 const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const {spawnSync}=require('child_process');
 const [,,URL,OUTA]=process.argv;const OUT=path.resolve(OUTA||path.join(__dirname,'../shots/coop-night0'));fs.mkdirSync(OUT,{recursive:true});
@@ -46,9 +47,12 @@ const R=[];const ok=(k,c,info)=>{R.push([!!c,k]);console.log((c?'ok  ':'FAIL')+'
  ok('page errors: none',!errs.length,errs.slice(0,5));
  await b.close();
  /* 3. the real room, origin pairs pinned */
- if(process.env.NIGHT0_E2E!=='0'){const pairs=(process.env.NIGHT0_PAIRS||'cnv:tt,tt:cnv').split(',').map(s=>s.split(':'));
-  for(const [A,B] of pairs){const out=path.join(OUT,`e2e-${A}-${B}`);
-   const x=spawnSync('node',[path.join(__dirname,'coop-e2e.js'),out],{env:Object.assign({},process.env,{COOP_A_ORIGIN:A,COOP_B_ORIGIN:B,COOP_WEEKS:process.env.NIGHT0_WEEKS||'1'}),encoding:'utf8',maxBuffer:1<<28});
+ if(process.env.NIGHT0_E2E!=='0'){const pairs=(process.env.NIGHT0_PAIRS||'cnv:tt,tt:cnv,tt+nha:tt,tt:tt+nha').split(',').map(s=>s.split(':'));
+  for(const [A,B] of pairs){const out=path.join(OUT,`e2e-${A}-${B}`.replace(/\+/g,'_'));
+   /* "tt+nha" = origin tt on the home route (coop-e2e COOP_*_KC, r1): a home seat is never placed in the palace, so coop-e2e's
+      "sees the other as a person" / "one place" rows fail BY DESIGN there; this test reads only the night / date rows */
+   const [oa,ka]=A.split('+'),[ob,kb]=B.split('+');const ev={COOP_A_ORIGIN:oa,COOP_B_ORIGIN:ob,COOP_WEEKS:process.env.NIGHT0_WEEKS||'1'};if(ka)ev.COOP_A_KC=ka;if(kb)ev.COOP_B_KC=kb;
+   const x=spawnSync('node',[path.join(__dirname,'coop-e2e.js'),out],{env:Object.assign({},process.env,ev),encoding:'utf8',maxBuffer:1<<28});
    const L=(x.stdout||'').split('\n');const bad=L.filter(l=>/^FAIL/.test(l)&&/advanced|same date|STUCK|night/i.test(l)).map(l=>l.slice(0,300));
    const sum=L.filter(l=>/^\s*\d+\/\d+/.test(l)||/passed|STUCK/.test(l)).slice(-2);
    ok(`3 coop-e2e host ${A} / guest ${B}: no seat stuck in a night, same date`,!bad.length&&x.status!==null,{bad:bad.slice(0,4),sum,status:x.status})}}
