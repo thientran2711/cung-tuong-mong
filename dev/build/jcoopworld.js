@@ -656,6 +656,15 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
  if(F&&r&&typeof r==="object"&&r.e){try{if(String(r.own)===F)r.own="";if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau";c.__fs=1}
   const iu=ids[0]||r.e.iu;b4Send([Object.assign({op:"gone",k:e.k,how:"matdau"},iu?{iu}:{},ids.length>1?{alt:ids.slice(1)}:{})],{})}catch(z){console.error("famops box",z)}}
  return r};window.ilGone=ilGone})();
+/* E44c P1/P2 (law 6c; coop-lost-scan dup 55 / 86 / 118 «B:box:mkt:sell», vanish 10000274 / 10000341 «cướp»): on the GUEST seat the people of
+   the world (every non-friend NPC) are COPIES of the host's — the host's canon owns their pieces, cases and boxes. A copy's own road on her
+   seat (an NPC agent selling, a robbery between two NPCs, any box road of a copy) never puts that piece into HER ledger box and never opens a
+   case in HER S.lost: it would be a 2nd copy of a host piece (dup) or a case over a piece nobody counts (vanish). Also for HER piece a copy
+   holds: the real holder is the host's NPC, and the host's own road tells her seat (c2 box rule «gone» / famSweep / «ret»). Her own chest,
+   her own acts and the friend's entry keep their roads (fam ops / ilSent). Host seat: unchanged. */
+function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"&&ilGuest()&&Array.isArray(rivals)&&rivals.indexOf(p)>=0)}catch(z){return false}}
+(function(){if(typeof ilGone!=="function")return;const g1=ilGone;ilGone=function(p){if(famCopy(p))return null;return g1.apply(this,arguments)};window.ilGone=ilGone})();
+(function(){if(typeof loLoseE!=="function")return;const l0=loLoseE;loLoseE=function(p){if(famCopy(p))return null;return l0.apply(this,arguments)};window.loLoseE=loLoseE})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);

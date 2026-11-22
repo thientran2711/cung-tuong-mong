@@ -78,6 +78,12 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   try{r16c=ilGone(S,pz,"dead",{own:901})}finally{CW.on=on3;COOP.send=s3}
   const rt16c=sn3.flatMap(m=>m.fam||[]).filter(o=>o.op==="ret");
   ck("16c friend-owned piece still in my chest: no «ret» home, the piece stays (no 2nd copy)",r16c==null&&!rt16c.length&&S.inv.indexOf(pz)>=0,{sent:sn3.map(m=>m.fam),inv:S.inv.length});
+  /* E44c P1/P2: on the GUEST seat a host-NPC copy's own road (sell / box, NPC→NPC robbery) never reaches HER box or HER S.lost; host seat unchanged */
+  reset();{const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);const on4=CW.on;CW.on=true;const bx=ilS().box.length,ls=(S.lost||[]).length;let r17,r17b,r17c;
+   try{r17=ilGone(v,{k:P,iu:++n},"sell");r17b=loLoseE(v,{k:P,iu:++n},"riv");CW.seat="a";r17c=ilGone(v,{k:P,iu:++n},"evid")}finally{CW.seat="b";CW.on=on4}
+   ck("17 guest seat: a host-NPC copy's sale never enters HER box (P1 dup)",r17==null&&ilS().box.length===bx+1&&!!r17c,{box:ilS().box.length-bx});
+   ck("17b guest seat: no case over a host-NPC copy's piece in HER S.lost (P2 vanish)",r17b==null&&(S.lost||[]).length===ls,{lost:(S.lost||[]).length-ls});
+   ck("17c host seat: the NPC's box road unchanged",r17c&&r17c.at==="cct",{at:r17c&&r17c.at})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
