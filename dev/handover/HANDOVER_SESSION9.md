@@ -2412,3 +2412,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 10:40Z) Sent 'main is now 106' to LC5, KIT KEEPER #6, MAIN 105 (FROM MAIN lines to B/C/D/E were already written by 105 at 10:33Z).
 - (22/11 10:41Z) MISSED RELAY FOUND: B LAND READY coop-host-lag-r3 5d934e5560524dcc6189cc8fefee65f2e092881a (09:58Z) was never relayed by 105 → relayed to LC5 now (after places-wire).
 - (22/11 10:41Z) TRIGGERS BLOCKED: update_trigger(disable 105's trig_012M8D2TYUcsBZWCgU3qVy9M) refused by permission classifier; create_trigger refused (depth 8 = limit cannot create routines). Not worked around. 105's hourly wake keeps firing into 105 (105 relays to 106). Owner told.
+- (22/11 10:41Z) LANDED places-wire-nvp-tn 418bf356 (LIVE=418bf356, coop-e2e 129/129). LC5 now: coop-host-lag-r3 5d934e55.
