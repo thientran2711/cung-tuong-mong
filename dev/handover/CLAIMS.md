@@ -1023,4 +1023,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 | RELAND coop-host-lag r3 successor (opus BIG co-op; after rv 3VQoNHCT rollover) | review/coop-host-lag-r3 @624257fd; reports/coop-host-lag.md | B | session_01N1tNP2r12Tji5WTv34tiTY | RUNNING | 22/11 03:39Z |
 night-multi-kem review (SMALL, test-only) | review/night-multi-kem-rv | session_01964izDB3m7tHHRtbyaUBZX | RUNNING | 22/11 04:50Z (Foreman D #18)
 | night-ledger CO-OP ledger fixer (opus BIG co-op; rv r2 FAIL e6bfa993 co-op LAND GATE) | review/night-ledger-r2 → review/night-ledger-coop; reports/night-ledger.md | B | session_01N1tNP6wkABAL1zSRFzwedG | RUNNING | 22/11 05:07Z |
-| PLACES1 redraw all 15 game places + Từ Ninh 2 (opus; OWNER L2355) | claude/cung-tuong-mong-handover-hj0h8w; reports/PLACES1.md | C | (opening) | RUNNING | 22/11 05:15Z |
+| PLACES1 redraw all 15 game places + Từ Ninh 2 (opus; OWNER L2355) | claude/cung-tuong-mong-handover-hj0h8w; reports/PLACES1.md | C | session_01D3E3NZLhP7ifmR9ocQ12cR | RUNNING | 22/11 05:15Z |
