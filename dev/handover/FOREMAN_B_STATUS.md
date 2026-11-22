@@ -294,3 +294,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - (22/11 18:04Z) WAKE 18:04Z 22/11 (B ROOT-10) → MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z: no new FROM MAIN/ORDER since 14:50Z; LIVE b238857f. No B LAND READY waiting. RUNNING B: REVIEW night-ledger-coop r3 opus 5JeCc1aE (7aff0de3; worker 4b8rvF5b idle for fixes), coop-thin-g F1 #8 4rfkfYSg (pushed 199cce3c; lane). Open FOR MAIN: co-op week merge keepQ drops open non-pid choices (17:39Z line). ctx ~26 %.
 - FOR MAIN 18:23Z 22/11: FOREMAN B ROOT-10 rolled over → ROOT-11 session_01N1tNP4ubP78y1PJkcWfaWs.
 - FOR MAIN 18:27Z 22/11: FOREMAN B is now ROOT-11 session_01N1tNP4ubP78y1PJkcWfaWs.
+- (22/11 18:28Z) B ROOT-11: rv 5JeCc1aE on call at 18 % ctx (budget 29 %) → will re-review night-ledger-coop r4 (FAIL 1/2 + gate list) when fixer 2ntVMAWS reports SSK.
