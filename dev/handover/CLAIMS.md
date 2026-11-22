@@ -989,3 +989,4 @@ night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964i
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
 | THUROOT10 rooms M2299-15 + M2300-12..22 (sonnet; succ. THUROOT9) | claude/cung-tuong-mong-handover-hj0h8w; reports/THUROOT10.md | C | session_01D3E3NbaCHna6Jaf9UA8uhJ | DONE (M2299-15 + M2300-12..22; archived) | 22/11 01:58Z |
 | PEOPLE1 in-game people on 27 new rooms (sonnet, 0 cr; OWNER L2315) | claude/cung-tuong-mong-handover-hj0h8w; reports/PEOPLE1.md | C | session_01D3E3NanuVpJmzox2spiCPb | RUNNING | 22/11 02:17Z |
+| BEDSIZE1 bed size measure + ladder proposal (opus, 0 cr; OWNER L2316) | claude/cung-tuong-mong-handover-hj0h8w; reports/BEDSIZE1.md | C | session_01D3E3NbJnqKH9o6RkcFZ66v | RUNNING | 22/11 02:18Z |
