@@ -59,3 +59,28 @@ Site rebuilt (build_site.sh: index.html, sw.js, assets.json).
 Commits: 492f1b19 (test WIP: syncFr, probes, vibrate family), 93816a3a (game fix + exact check + unit), 23b7cce5 (set-up hold, site rebuilt). No pull request; worktrees /home/user/wt/flakes{,-live} kept until review.
 
 SẴN SÀNG KIỂM review/coop-flakes 23b7cce524d194822af1446aa59c3f8e1a2f7b92
+
+## REVIEW (D20 rv, session_01964izDotpEe7VR68aY2P3K, opus) — PASS with 2 reviewer fixes
+PRIORITY #1 CHECK: brief D20-coop-flakes-review.md | main 0a3ceede (coop-guest-men: jcoopask collect/settle/hMan/hTh) | review/* coop-flakes 23b7cce5 | linkRange / keyMove: main 0, review/* only coop-flakes | claims coop-flakes E5gLnvQc. START_CTX ≈ 3 % (est.).
+Merge: review/coop-flakes-rv = LIVE 0a3ceede + 23b7cce5; only index.html / sw.js conflicted (rebuilt); jcoopask.js auto-merged (guest-men collect/settle + flakes remapS both kept; the guest-men settle calls remapS(d.S,t,r) unchanged).
+1. (b) game fix — root ACCEPTED: LIVE remapS `if(!(nk in o))o[nk]=v; delete o[k]` keeps the week's R and drops her T (worker table mb-1..5 on LIVE; repro by blob on the page: rl {1001:19, 11:-3} → LIVE 11:-3). Law 1 + 6b OK (the host never remaps; both seats end with one link per person).
+   Reviewer FIX R1 (law 4 ONE CORE): BAL.coop.linkRange was a SECOND source — j9 affAdd / oanAdd still typed -100,100 / 0,100. Now ONE key BAL.linkRange {rl:[-100,100], ro:[0,100]} (jbal2), read by affAdd / oanAdd (j9.js:32,34) AND keyMove; BAL.coop.linkRange removed. one-core-guard / bind / text PASS.
+   Reviewer FIX R2 (law 6, new defect in keyMove): remapS walks ALL of d.S, so «other numbers ADD unclamped» also summed week stamps: blob met {1001:40, 11:42} → met 82, askAt 83, dKnown 80 at week 42 (probe on the merged page before R2). Now only link maps (pk in BAL.linkRange) add+clamp; any other number keeps the larger (as jnamefix does for a renamed key); other values: the one at `to` stays. (Instrumented 3 coop-guest-maid runs: no T+R coincidence occurred in any, so the in-game frequency of the coincidence is the worker's 3/5.)
+   coop-keymove-unit now 12 checks (+ j9 affAdd/oanAdd read BAL.linkRange, no typed bound; week stamps keep the larger): 12/12.
+   Family table: correct and complete for co-op id-key moves. jcoopworld.js:146-152 = NOT the same family (LAW 11) and NO lost update: the write-back is a 3-way-merge input — the server tick merges merge3(base, A, B) (coop/worker/src/index.js:350, merge.js: number amounts add their deltas), and fP = CW.base.P[friend] is the same base the server merges against; base.P[friend] changes mid-week only on a new character (`me` → state → onState rebuilds her entry + __b) or a room snapshot of the same C. jnamefix max: name-keyed levels, fresh name ⇒ collision rare, max deliberate — not a stand-in/world-id merge; R2 aligns keyMove with it.
+2. Test-only parts — OK, nothing weakened: syncFr only waits before each aim (the «aim is one B really has» check stays); set-up hold re-writes a screen-only set-up and prints SETUP-RESET; vibrate filter = Chromium intervention text only (33 drivers, same regex as the 10 earlier); loose me-sign check replaced by the EXACT me == clamp(rlT+rlR) check (stricter).
+3. (a) not reproduced 0/20 — write-up ACCEPTED (cyHer / host-end-never-goes analysis, both-seat dump added). Open #6 (host Q «Biếu quà làm lành» stall) seen on LIVE base runs mb-2/mb-4 = pre-existing; #7 (step-3 guest rank 1→0, household cap no room → maid trimmed) recurred once here (maid run 1: «refused → her maid is back» + «she stays» FAIL, N.returned=1, staff []) — test set-up (screen-only rank), not keyMove (rank untouched). Both logged only here + FOREMAN_D_STATUS 22:10Z → Foreman D: carry #6/#7 into coop-real-port / a follow-up line.
+GATES on d1a36374 (merge + R1/R2, site rebuilt), one browser at a time:
+| gate | result |
+|---|---|
+| one-core-guard / bind / text | PASS / PASS / PASS |
+| coop-keymove-unit | 12/12 |
+| coop-famops-unit | 33/33 (needs the coop-serve BASE as arg; the default 127.0.0.1:8744 URL refuses) |
+| coop-e2e | 141/141 |
+| coop-pets | run1 42/58 (set-up NOT real: host «tt» rank 2 at home after the set-up merge; no SETUP-RESET → the 1.5 s hold passed and the MERGE undid the screen-only set-up = the #4 shape, coop-real-port) · run2 58/58 |
+| coop-guest-maid | run1 38/40 (#7) · run2 40/40 |
+| coop-guest-men | run1 52/53 («2 host: he is dead there too (relay)», guest-men code path, keyMove not involved) · run2 54/54 |
+| role-parity.test.js | ALL PASS |
+| quickcheck.sh | QUICKCHECK PASS · old save ok · perf new/live render 255/280, tab 468/512, buổi 1693/1376 (live runs 1087–5852: noise) · core gates PASS |
+Flakes seen once each (pets set-up, maid #7, men relay) → Foreman D for coop-real-port / guest-men follow-up; none in code this branch changes.
+LAND READY review/coop-flakes-rv d1a363748b4ddadedcbd66e1e6534f81efe3ee91
