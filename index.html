@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e23148e0+","t":"2026-11-22T01:19Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)","b":"5d7f5d91f36a","h":[{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"}]};
+window.CTM_BI={"s":"7efdc2cc","t":"2026-11-22T03:58Z","c":"coop-famops-p P3 family (E44d, law 6c): a lost piece a holder keeps comes back as THAT copy from THAT holder","b":"30e5a1b22e9c","h":[{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -42653,6 +42653,12 @@ function lostReturn(e,how){const c=loCaseOf(e);
 /* the piece the case holds is kept by p (a thief who keeps it, Kỳ ngộ «Giữ lại», a robber): her chest holds the one copy, marked */
 function loKeepBy(c,p,how,f){if(!loHolds(c)||!p||!loAlive(p))return null;const x=Object.assign({},c.e,{lo:c.id,gh:c.own,by:key(p)});delete x.from;delete x.giver;delete x.w;
  p.inv=p.inv||[];p.inv.push(x);Object.assign(c,{keep:1,by:key(p),st:"held",at:key(p)},f||{});try{if(how&&typeof ilLog==="function")ilLog(c.e,"lo"+c.id,key(p),how)}catch(z){}return x}
+/* E44d (law 6c, one owner change): the holder's copy leaves THAT holder (loEntry's x.h), whoever pressed or rolled the return.
+   Before: «Lén trả lại» / «Trả về chủ» / «Nộp» spliced HER chest, «Đòi lại» / an NPC owner's ask spliced the c.at read before loEntry moved it,
+   and loEvBack sent a fresh copy of c.e while a holder kept hers → the owner +1 and the holder's copy stayed (lost-one-home-scan DUP). */
+function loTake(x,a){if(!x||!x.h)return;lostUnwear(x.h,a);const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1)}
+/* a tra xét act runs only while Tư trang › Việc offers it (the same rule as its button): a stale button or call on a case that moved on does nothing */
+function loOffer(c,a){try{return loActs(c).some(b=>{const t=String(b);const h=t.slice(0,t.indexOf(">")+1);return h.includes(`data-lo="${a}"`)&&!/\sdisabled[\s>]/.test(h)})}catch(e){return false}}
 /* take a worn missing item off before a search (wardrobe slot or j8 worn flag) */
 function lostUnwear(t,a){if(!t)return;try{const w=typeof wdOf==="function"?wdOf(t):null;if(w)for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.lo&&(!a||e.gh===key(a))){const k=sl==="y"?wdDefault(t,"y"):null;w[sl]=k?{k,from:"base"}:null;try{wdOf(t)}catch(x){}t.inv=t.inv||[];t.inv.push(e)}}}catch(x){}
  for(const e of t.inv||[])if(e&&e.lo&&(!a||e.gh===key(a)))e.w=0}
@@ -42682,7 +42688,7 @@ function loKnowAt(c,p,how){if(!p||c.st==="done"||!c.at)return;c.kn[key(p)]=1;if(
   log(`${how}: ${loNm(c.k)} ${c.own==="me"?"của ngươi":"của "+wdNm(loP(c.own))} ở ${loPal(h)}.`)}}
 /* the owner decides: ask for it quietly, or raise it at Cung Chính ti (NPC owners; her own choice is an act card) */
 function loOwnerMove(c){const o=loP(c.own),h=loP(c.at);if(!o||o===S||!h||c.hear||c.asked||(c.reT||0)>wk())return;c.asked=1;
- if(npwPick(["ask","cct"],k=>k==="ask"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h)):BAL.ag.why.loTry.cct+Math.max(0,hostility(o,h)),{all:true})==="ask"/* G1 #7: weighted between her two real ways (top-only made Cung Chính ti searches 7→37) */){if(h===S){pushDil(mkP("loask",{id:c.id}),"Đồ thất lạc");return}if(roll(loAskOdds(h,o,c))){const x=loEntry(c);if(x){lostUnwear(h,o);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}return}}
+ if(npwPick(["ask","cct"],k=>k==="ask"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h)):BAL.ag.why.loTry.cct+Math.max(0,hostility(o,h)),{all:true})==="ask"/* G1 #7: weighted between her two real ways (top-only made Cung Chính ti searches 7→37) */){if(h===S){pushDil(mkP("loask",{id:c.id}),"Đồ thất lạc");return}if(roll(loAskOdds(h,o,c))){const x=loEntry(c);if(x){loTake(x,o);lostReturn(x.e,"tra")}return}}
  if(loHigh(h,o)&&loEmpEv(c,o,h)<BAL.il.empEv){c.asked=0;c.reT=wk()+LO.hearCd;return}loRaise(c,o)}
 /* a higher-rank holder (owner 16/11 13:30Z (3)): no search without the Emperor's decree; asking him needs REAL evidence = this case's evidence + evidence on the holder */
 function loHigh(h,a){return !!h&&!!a&&h!==a&&rkOf(h)>rkOf(a)}
@@ -42757,7 +42763,7 @@ function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p
 /* the owner asks her quietly (event: costs only) */
 PEND.loask=pp=>{const c=loGet(pp.id);if(!c||c.st==="done")return null;const o=loP(c.own);if(!o)return null;const nm=loNm(c.k);
  return{who:pv(o),t:`<p>${wdNmC(o)} sai người sang hỏi: <b>${nm}</b> của nàng thất lạc, nghe nói đang ở cung ngươi.</p>`,o:[
-  {n:"Trả lại",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=loEntry(c);if(x){lostUnwear(S,o);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"tra")}relAdd(S,o,BAL.eff.jlost.go);log(`Ngươi trả ${nm} cho ${wdNm(o)}.`)}},
+  {n:"Trả lại",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=loEntry(c);if(x&&x.h===S){loTake(x,o);lostReturn(x.e,"tra")}relAdd(S,o,BAL.eff.jlost.go);log(`Ngươi trả ${nm} cho ${wdNm(o)}.`)}},
   {n:"Nói không thấy",fx:{},j67:"tốn: không tốn gì",go:()=>{c.lied=1;relAdd(S,o,BAL.eff.jlost.go_2);loRaise(c,o)}}]}};
 /* §64 item events: the loask dialog shows the item; "Trả lại" sends it flying back to the owner (jitev loads later: register after load) */
 setTimeout(()=>{try{IEV_PID.loask=(p)=>{const c=loGet(p&&p.id);const x=c?loEntry(c):null;return x&&x.h===S?{e:x.e,acts:["back",null]}:null}}catch(e){}},0);
@@ -42808,13 +42814,13 @@ function loInvHTML(){if(!S||S.dead)return"";const L=loMine();const D=loL().filte
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{if(v&&v.alive&&!v.out){const k=key(v);
   const B=loMine().filter(c=>c.at===k||c.own===k).flatMap(c=>loActs(c));
   if(B.length)G.unshift(["Đồ thất lạc",B])}}catch(e){console.error(e)}return G}})();
-function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length)return;const nm=loNm(c.k);let r="";
+function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length||!loOffer(c,a))return;const nm=loNm(c.k);let r="";
  if(["ask","cct","book"].includes(a)){const C=LO.cost[a];if(!can(C.k)||(C.bac&&S.bac<C.bac))return;spend(C.k);r=loDo(a,S,c)}
- else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;const o=loAskOdds(h,S,c);/* odds read before the spend (shown-odds r2) */spend(1);if(roll(o)){const x=loEntry(c);if(x){lostUnwear(h,S);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,BAL.eff.jlost.loUI);r=`${wdNmC(h)} chối không thấy ${nm}. Thân ${balSg(BAL.eff.jlost.loUI)}.`}}
+ else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;const o=loAskOdds(h,S,c);/* odds read before the spend (shown-odds r2) */spend(1);if(roll(o)){const x=loEntry(c);if(x){loTake(x,S);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,BAL.eff.jlost.loUI);r=`${wdNmC(h)} chối không thấy ${nm}. Thân ${balSg(BAL.eff.jlost.loUI)}.`}}
  else if(a==="raise"){const h=loP(c.at);if(!can(LO.raiseK)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(LO.raiseK);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
- else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,a==="handin"?"nop":"tra")}
+ else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){loTake(x);lostReturn(x.e,a==="handin"?"nop":"tra")}
   if(a==="giveback"&&o){relAdd(S,o,BAL.eff.jlost.loUI_2);r=`Ngươi sai người trả ${nm} về ${wdNm(o)}. Thân ${balSg(BAL.eff.jlost.loUI_2)}.`}else{apply({danh:BAL.eff.jlost.danhLoUI});r=`Ngươi nộp ${nm} lên Nội vụ phủ trả về chủ. Danh ${balSg(BAL.eff.jlost.danhLoUI)}.`}}
- else if(a==="sneak"){if(!can(BAL.btn.loSneak.k))return;spend(BAL.btn.loSneak.k);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}
+ else if(a==="sneak"){if(!can(BAL.btn.loSneak.k))return;spend(BAL.btn.loSneak.k);const x=loEntry(c);const o=loP(c.own);if(x){loTake(x);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}
  else if(a==="tell"){if(!can(1))return;spend(1);const o=loP(c.own),h=loP(c.at);c.told=1;if(o){loKnowAt(c,o,"");relAdd(S,o,BAL.eff.jlost.loUI_3)}if(h)relAdd(S,h,BAL.eff.jlost.loUI_4);r=`Ngươi báo cho ${wdNm(o)} biết ${nm} đang ở ${loPal(h)}. Thân ${balSg(BAL.eff.jlost.loUI_3)}; ${h?h.name:""} thù ${balSg(BAL.eff.jlost.loUI_4)}.`}
  if(r){log(r);Q.push({t:a==="sneak"?"Đồ thất lạc":"Tra xét",who:pMe(),h:`<p>${r}</p>`,btn:"Đã hiểu"});try{showModal()}catch(e){}}try{render()}catch(e){}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lo]");if(!b||b.disabled)return;ev.stopPropagation();loUI(b.dataset.lo,+b.dataset.lc)},true);
@@ -42862,7 +42868,7 @@ function loEvCase(s,p){if(p.lc){const c=loGet(p.lc);return c&&c.e?c:null}
  const i=S.inv.indexOf(e);if(i<0)return null;S.inv.splice(i,1);
  const thief=s.id==="hairpinThief"?(()=>{try{const a=A6("sv",p["a"+(p.g|0)]);return a&&a.n}catch(x){return""}})():(p.c!=null?((typeof servById==="function"&&servById(p.c))||{}).name:"");
  const c=loLoseE(S,e,thief?"srv":"mis");if(!c){S.inv.push(e);return null}if(thief)c.sv=thief;c.ev68=s.id;p.lc=c.id;return c}
-function loEvBack(p,how){try{const c=p&&p.lc?loGet(p.lc):null;if(c&&c.st!=="done"&&c.e)lostReturn(Object.assign({},c.e,{lo:c.id}),how||"tra")/* the case's own piece (loLoseE keeps no lo mark on it) */}catch(e){console.error("lo ev back",e)}}
+function loEvBack(p,how){try{const c=p&&p.lc?loGet(p.lc):null;const x=c&&c.st!=="done"?loEntry(c):null;/* E44d (law 6c): someone holds it now (Kỳ ngộ «Giữ lại», a thief): THAT copy comes back, never a second one */if(x){loTake(x,loP(c.own));lostReturn(x.e,how||"tra")}else if(c&&c.st!=="done"&&c.e)lostReturn(Object.assign({},c.e,{lo:c.id}),how||"tra")/* the case's own piece (loLoseE keeps no lo mark on it) */}catch(e){console.error("lo ev back",e)}}
 (function(){try{
  for(const id in LO_EV){const s=E68I[id];if(!s)continue;const pp0=s.pp;s.pp=function(){return loEvOk()?(pp0?pp0.apply(this,arguments):{}):null}}
  const b0=e68Build;e68Build=function(s,p){if(!s||!LO_EV[s.id])return b0.apply(this,arguments);const c=loEvCase(s,p);if(!c)return null;
@@ -93821,7 +93827,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5d7f5d91f36a";window.CTM_BUILD=BUILD;
+const BUILD="30e5a1b22e9c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
