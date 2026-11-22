@@ -58,5 +58,5 @@ Owner order L2287 verbatim: "Read the attached XML before continuing costume des
 - Keep BOTH original 8-rank collections; soft clothing never simplified below its rank's luxury; no universal 85/15 historical/fantasy ratio (per group).
 - No personal favourite colour per character; a group is not one hue. Season may change hue family, neckline, mantle, layering.
 - Generate/edit images only when asked. Phoenix motif not granted at every rank.
-**PROPOSAL (NOT approved — never treat as locked):** light + deep tier HEX (90 × 4 seasons × 3 tiers × 8), Chu Sa HEX #B62832, exact royal coverage %, HH dominant royal main garment, any costume design in the file.
-**Conflicts to raise with the owner before changing rules:** G13 (one colour pair at every rank) vs rank tiers; B17/B21 (t7/t8 = yellow + own colours) vs gold+red t6–t8; F20 (flower ≠ main) and G56 (veil hue ≥ 60° from main) vs "main + secondary may share a family".
+**APPROVED owner L2290 (was proposal):** light + deep tier HEX (all 1080 palettes), Chu Sa #B62832, royal amount t6 few small points (trim, clasp) → t7 trims + centre panel → t8 most of the robe, HH MAIN robe = royal gold or Chu Sa with own colours secondary + embroidery → rule G77; G13 rewritten. Data flags = approved_L2290. Still NOT approved: any costume design inside the XML.
+**Still to check:** builder not yet wired to tiers (TIER_PAL); B17/B21 (t7/t8 = yellow + own colours) vs gold+red t6–t8; F20 (flower ≠ main) and G56 (veil hue ≥ 60° from main) vs "main + secondary may share a family".

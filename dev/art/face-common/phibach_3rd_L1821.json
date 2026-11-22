@@ -184,7 +184,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F0",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -192,7 +192,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCFCD",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -215,7 +215,7 @@
    "prompt_colour": "pale mint green silk (like #C2E4D6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8F2E7",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -223,7 +223,7 @@
      "prompt_colour": "pale mint green silk (like #D8F2E7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC3",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -246,7 +246,7 @@
    "prompt_colour": "mist blue silk (like #C1E0F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F0FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -254,7 +254,7 @@
      "prompt_colour": "mist blue silk (like #D7F0FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CCDB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -278,7 +278,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FB",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -286,7 +286,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCDD8",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -312,7 +312,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F1",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -320,7 +320,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCFCE",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -343,7 +343,7 @@
    "prompt_colour": "mist blue silk (like #CADDF6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -351,7 +351,7 @@
      "prompt_colour": "mist blue silk (like #DFEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BAC9DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -374,7 +374,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D3D9F6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -382,7 +382,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C1C6DE",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -406,7 +406,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -414,7 +414,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C4C5DD",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -440,7 +440,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -448,7 +448,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7BBB5",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -471,7 +471,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E9D1F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6E4FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -479,7 +479,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F6E4FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6BDDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -502,7 +502,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D4D8FC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -510,7 +510,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E7EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C0C4EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -534,7 +534,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E5FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -542,7 +542,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E5FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1BEE2",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -568,7 +568,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -576,7 +576,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -599,7 +599,7 @@
    "prompt_colour": "mist blue silk (like #C9DCFD)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -607,7 +607,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5C9EB",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -630,7 +630,7 @@
    "prompt_colour": "pale mint green silk (like #C4E5CA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F3DE",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -638,7 +638,7 @@
      "prompt_colour": "pale mint green silk (like #D9F3DE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0D2B6",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -662,7 +662,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FAE9CF",
      "name_vi": "ngà",
      "name_en": "ivory",
@@ -670,7 +670,7 @@
      "prompt_colour": "ivory silk (like #FAE9CF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAC3A1",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -696,7 +696,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E5",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -704,7 +704,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE3E5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEBFC0",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -727,7 +727,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E3D4EF)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E6FB",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -735,7 +735,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E6FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC1D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -758,7 +758,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DDD6F3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EDE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -766,7 +766,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EDE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C9C3DD",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -790,7 +790,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3F0DB",
      "name_vi": "kem chanh",
      "name_en": "lemon cream",
@@ -798,7 +798,7 @@
      "prompt_colour": "lemon cream silk (like #E3F0DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BFCDB5",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -824,7 +824,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4DE",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -832,7 +832,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4DE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCC0B9",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -855,7 +855,7 @@
    "prompt_colour": "pale earthy rose silk (like #F4D1CC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -863,7 +863,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCBFBB",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -886,7 +886,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DDD6F3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EDE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -894,7 +894,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EDE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C9C3DB",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -918,7 +918,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FA",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -926,7 +926,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CCD6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -952,7 +952,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -960,7 +960,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6C8EB",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -983,7 +983,7 @@
    "prompt_colour": "misty jade silk (like #B5E5E9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF3F7",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -991,7 +991,7 @@
      "prompt_colour": "misty jade silk (like #CEF3F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D2D6",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1014,7 +1014,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D5D7FC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -1022,7 +1022,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C1C3EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -1046,7 +1046,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF4F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1054,7 +1054,7 @@
      "prompt_colour": "misty jade silk (like #CEF4F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D3D0",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1080,7 +1080,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1088,7 +1088,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6CEE4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -1111,7 +1111,7 @@
    "prompt_colour": "mist blue silk (like #B9E2F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F1FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1119,7 +1119,7 @@
      "prompt_colour": "mist blue silk (like #D2F1FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4CFE2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -1142,7 +1142,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EFCFEA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FCE2F7",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -1150,7 +1150,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FCE2F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCBBD7",
      "name_vi": "tím mận sáng",
      "name_en": "light plum",
@@ -1174,7 +1174,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F1FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1182,7 +1182,7 @@
      "prompt_colour": "mist blue silk (like #D1F1FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3CFE1",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -1208,7 +1208,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2E5",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -1216,7 +1216,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2E5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CFC1",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -1239,7 +1239,7 @@
    "prompt_colour": "misty jade silk (like #BDE3EA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F7",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1247,7 +1247,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCED4",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1270,7 +1270,7 @@
    "prompt_colour": "mist blue silk (like #CFDAF6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1278,7 +1278,7 @@
      "prompt_colour": "mist blue silk (like #E3EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC7DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -1302,7 +1302,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1310,7 +1310,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC8DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -1336,7 +1336,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -1344,7 +1344,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC4EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -1367,7 +1367,7 @@
    "prompt_colour": "apricot cream silk (like #F4D4BA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE6D2",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -1375,7 +1375,7 @@
      "prompt_colour": "peach cream silk (like #FFE6D2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1C0A5",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -1398,7 +1398,7 @@
    "prompt_colour": "misty jade silk (like #B5E5EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF3F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1406,7 +1406,7 @@
      "prompt_colour": "misty jade silk (like #CEF3F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D2D8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1430,7 +1430,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F4EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -1438,7 +1438,7 @@
      "prompt_colour": "pale mint green silk (like #D1F4EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D3C7",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -1464,7 +1464,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F1F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1472,7 +1472,7 @@
      "prompt_colour": "misty jade silk (like #D4F1F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCED5",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -1495,7 +1495,7 @@
    "prompt_colour": "misty jade silk (like #BEE4DE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F3EE",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1503,7 +1503,7 @@
      "prompt_colour": "misty jade silk (like #D5F3EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AECFCA",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1526,7 +1526,7 @@
    "prompt_colour": "pale mint green silk (like #C6E3D0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBF2E3",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -1534,7 +1534,7 @@
      "prompt_colour": "pale mint green silk (like #DBF2E3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CFBE",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -1558,7 +1558,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FCE7D7",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -1566,7 +1566,7 @@
      "prompt_colour": "peach cream silk (like #FCE7D7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C2B1",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -1592,7 +1592,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -1600,7 +1600,7 @@
      "prompt_colour": "peach cream silk (like #FEE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBC1B5",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -1623,7 +1623,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E4D4EE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E6FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -1631,7 +1631,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E6FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC2D7",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -1654,7 +1654,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D7D8F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -1662,7 +1662,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C4C5DD",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -1686,7 +1686,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F5",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1694,7 +1694,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCED1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1720,7 +1720,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -1728,7 +1728,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9BFCE",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -1751,7 +1751,7 @@
    "prompt_colour": "mist blue silk (like #C6DEF4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1759,7 +1759,7 @@
      "prompt_colour": "mist blue silk (like #DBEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CADE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -1782,7 +1782,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D2D9F6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -1790,7 +1790,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E5EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C0C6DF",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -1814,7 +1814,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F6",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -1822,7 +1822,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCFD3",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -1848,7 +1848,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE8CF",
      "name_vi": "ngà",
      "name_en": "ivory",
@@ -1856,7 +1856,7 @@
      "prompt_colour": "ivory silk (like #FBE8CF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCC3A2",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -1879,7 +1879,7 @@
    "prompt_colour": "mist blue silk (like #C7DCFC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1887,7 +1887,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3C9EA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -1910,7 +1910,7 @@
    "prompt_colour": "apricot cream silk (like #F3D5B9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE7D1",
      "name_vi": "kem mơ",
      "name_en": "apricot cream",
@@ -1918,7 +1918,7 @@
      "prompt_colour": "apricot cream silk (like #FEE7D1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0C1A4",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -1942,7 +1942,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1950,7 +1950,7 @@
      "prompt_colour": "mist blue silk (like #DEEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CAEA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -1976,7 +1976,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -1984,7 +1984,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B4CBDB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -2007,7 +2007,7 @@
    "prompt_colour": "pale mint green silk (like #C0E4DA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F2EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2015,7 +2015,7 @@
      "prompt_colour": "pale mint green silk (like #D6F2EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC7",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2038,7 +2038,7 @@
    "prompt_colour": "pale mint green silk (like #BFE4DB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F3EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2046,7 +2046,7 @@
      "prompt_colour": "pale mint green silk (like #D6F3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC7",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2070,7 +2070,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE5DB",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -2078,7 +2078,7 @@
      "prompt_colour": "peach cream silk (like #FEE5DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBC1B7",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -2104,7 +2104,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -2112,7 +2112,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC4EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -2135,7 +2135,7 @@
    "prompt_colour": "pale powder pink silk (like #F6CEDE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2ED",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -2143,7 +2143,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BACB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -2166,7 +2166,7 @@
    "prompt_colour": "pale powder pink silk (like #F6CEDE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2ED",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -2174,7 +2174,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BACB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -2198,7 +2198,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8F3E0",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2206,7 +2206,7 @@
      "prompt_colour": "pale mint green silk (like #D8F3E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AED2B9",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -2232,7 +2232,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2240,7 +2240,7 @@
      "prompt_colour": "mist blue silk (like #E4EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BFC7DF",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -2263,7 +2263,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EDD1E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FAE4F3",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -2271,7 +2271,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FAE4F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7BFCF",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -2294,7 +2294,7 @@
    "prompt_colour": "peach cream silk (like #F3D3C5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -2302,7 +2302,7 @@
      "prompt_colour": "peach cream silk (like #FFE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDC0B4",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -2326,7 +2326,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -2334,7 +2334,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9BFCE",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -2360,7 +2360,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EDE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -2368,7 +2368,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EDE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C9C3DD",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -2391,7 +2391,7 @@
    "prompt_colour": "misty jade silk (like #BEE2EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F1F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -2399,7 +2399,7 @@
      "prompt_colour": "misty jade silk (like #D5F1F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AECED6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -2422,7 +2422,7 @@
    "prompt_colour": "mist blue silk (like #C4DFF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2430,7 +2430,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CBDD",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -2454,7 +2454,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2E6",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2462,7 +2462,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2E6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3D0C1",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -2488,7 +2488,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E8",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -2496,7 +2496,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE3E8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCBEC3",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -2519,7 +2519,7 @@
    "prompt_colour": "mist blue silk (like #C4DFF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2527,7 +2527,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CBDB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -2550,7 +2550,7 @@
    "prompt_colour": "mist blue silk (like #CFDBF6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2558,7 +2558,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC8DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -2582,7 +2582,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2590,7 +2590,7 @@
      "prompt_colour": "mist blue silk (like #DEEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B9C9DD",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -2616,7 +2616,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2624,7 +2624,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BDC8DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -2647,7 +2647,7 @@
    "prompt_colour": "lemon cream silk (like #DCDDBF)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ECEDD6",
      "name_vi": "kem chanh",
      "name_en": "lemon cream",
@@ -2655,7 +2655,7 @@
      "prompt_colour": "lemon cream silk (like #ECEDD6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C8C9B0",
      "name_vi": "ô liu sáng",
      "name_en": "light olive green",
@@ -2678,7 +2678,7 @@
    "prompt_colour": "pale mint green silk (like #C6E3D1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBF2E4",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2686,7 +2686,7 @@
      "prompt_colour": "pale mint green silk (like #DBF2E4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CEBF",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -2710,7 +2710,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F1",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -2718,7 +2718,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCFCD",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2744,7 +2744,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EBE8FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -2752,7 +2752,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EBE8FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C8C4DE",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -2775,7 +2775,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DDD6F2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EDE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -2783,7 +2783,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EDE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C9C3DC",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -2806,7 +2806,7 @@
    "prompt_colour": "pale mint green silk (like #C1E4D9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F2EA",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2814,7 +2814,7 @@
      "prompt_colour": "pale mint green silk (like #D7F2EA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1D0C6",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2838,7 +2838,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DD",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -2846,7 +2846,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE5DD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDC0B7",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -2872,7 +2872,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDF2DA",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -2880,7 +2880,7 @@
      "prompt_colour": "pale mint green silk (like #DDF2DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5D1B1",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -2903,7 +2903,7 @@
    "prompt_colour": "misty jade silk (like #B5E6E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF4F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -2911,7 +2911,7 @@
      "prompt_colour": "misty jade silk (like #CEF4F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D3D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2934,7 +2934,7 @@
    "prompt_colour": "misty jade silk (like #B5E5EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF3F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -2942,7 +2942,7 @@
      "prompt_colour": "misty jade silk (like #CEF3F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D2D8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -2966,7 +2966,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -2974,7 +2974,7 @@
      "prompt_colour": "mist blue silk (like #DBEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCCE9",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -3000,7 +3000,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3008,7 +3008,7 @@
      "prompt_colour": "mist blue silk (like #E4EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC7DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -3031,7 +3031,7 @@
    "prompt_colour": "pale powder pink silk (like #F1D0DD)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE3ED",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -3039,7 +3039,7 @@
      "prompt_colour": "pale powder pink silk (like #FDE3ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DABEC9",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -3062,7 +3062,7 @@
    "prompt_colour": "misty jade silk (like #BEE4E0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F2EF",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3070,7 +3070,7 @@
      "prompt_colour": "misty jade silk (like #D5F2EF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CFCC",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3094,7 +3094,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3102,7 +3102,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E7E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C5DE",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3128,7 +3128,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FB",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3136,7 +3136,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCDD8",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -3159,7 +3159,7 @@
    "prompt_colour": "misty jade silk (like #BDE3E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F3",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3167,7 +3167,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCFCF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3190,7 +3190,7 @@
    "prompt_colour": "mist blue silk (like #CDDCF6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3198,7 +3198,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BBC8DF",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -3222,7 +3222,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F3E8",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -3230,7 +3230,7 @@
      "prompt_colour": "pale mint green silk (like #D7F3E8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC4",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -3256,7 +3256,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F3EC",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -3264,7 +3264,7 @@
      "prompt_colour": "pale mint green silk (like #D6F3EC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3287,7 +3287,7 @@
    "prompt_colour": "misty jade silk (like #BEE4DF)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F2EE",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3295,7 +3295,7 @@
      "prompt_colour": "misty jade silk (like #D5F2EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CFCB",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3318,7 +3318,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DFD5F2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EFE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3326,7 +3326,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EFE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC3DB",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3350,7 +3350,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8F2E7",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -3358,7 +3358,7 @@
      "prompt_colour": "pale mint green silk (like #D8F2E7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CFC3",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -3384,7 +3384,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F4E5FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3392,7 +3392,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F4E5FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1C0D7",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -3415,7 +3415,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D2D9F6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3423,7 +3423,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E5EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C0C6DF",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3446,7 +3446,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D8D8F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E9E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3454,7 +3454,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E9E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C5C5DF",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3478,7 +3478,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ECE8FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3486,7 +3486,7 @@
      "prompt_colour": "pale smoky lilac silk (like #ECE8FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C8C3DD",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3512,7 +3512,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAF2E4",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -3520,7 +3520,7 @@
      "prompt_colour": "pale mint green silk (like #DAF2E4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B4CFC0",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -3543,7 +3543,7 @@
    "prompt_colour": "pale earthy rose silk (like #F4D1CC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -3551,7 +3551,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEBFBA",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -3574,7 +3574,7 @@
    "prompt_colour": "misty jade silk (like #BDE3E9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F6",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3582,7 +3582,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCFD4",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3606,7 +3606,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FB",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3614,7 +3614,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CDD9",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -3640,7 +3640,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E6FB",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3648,7 +3648,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E6FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC1D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3671,7 +3671,7 @@
    "prompt_colour": "misty jade silk (like #BEE2EC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F1F9",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3679,7 +3679,7 @@
      "prompt_colour": "misty jade silk (like #D5F1F9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AECED7",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -3702,7 +3702,7 @@
    "prompt_colour": "mist blue silk (like #C1E0F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F0FC",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3710,7 +3710,7 @@
      "prompt_colour": "mist blue silk (like #D7F0FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CCDA",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -3734,7 +3734,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EFE7FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3742,7 +3742,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EFE7FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC2DC",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3768,7 +3768,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3776,7 +3776,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC8DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -3799,7 +3799,7 @@
    "prompt_colour": "mist blue silk (like #CDDBF6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3807,7 +3807,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BCC7DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -3830,7 +3830,7 @@
    "prompt_colour": "pale mint green silk (like #C0E4DB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F2EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -3838,7 +3838,7 @@
      "prompt_colour": "pale mint green silk (like #D6F2EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CFC8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3862,7 +3862,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F1E6FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -3870,7 +3870,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F1E6FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CDC2D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -3896,7 +3896,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F3",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -3904,7 +3904,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCECF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -3927,7 +3927,7 @@
    "prompt_colour": "peach cream silk (like #F2D3C5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -3935,7 +3935,7 @@
      "prompt_colour": "peach cream silk (like #FEE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBC1B5",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -3958,7 +3958,7 @@
    "prompt_colour": "pale earthy rose silk (like #F3D3C7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE5DB",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -3966,7 +3966,7 @@
      "prompt_colour": "peach cream silk (like #FEE5DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBC1B7",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -3990,7 +3990,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F0FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -3998,7 +3998,7 @@
      "prompt_colour": "mist blue silk (like #D7F0FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B2CCDA",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -4024,7 +4024,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E6FB",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4032,7 +4032,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E6FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEC2D8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4055,7 +4055,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E2D4F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F1E6FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4063,7 +4063,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F1E6FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CDC2D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4086,7 +4086,7 @@
    "prompt_colour": "pale mint green silk (like #C7E3D0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCF2E3",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -4094,7 +4094,7 @@
      "prompt_colour": "pale mint green silk (like #DCF2E3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7CEBE",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -4118,7 +4118,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FCE7D7",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -4126,7 +4126,7 @@
      "prompt_colour": "peach cream silk (like #FCE7D7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8C3B2",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -4152,7 +4152,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -4160,7 +4160,7 @@
      "prompt_colour": "peach cream silk (like #FFE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BDAC",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -4183,7 +4183,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E9D1F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6E4FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4191,7 +4191,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F6E4FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6BDDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -4214,7 +4214,7 @@
    "prompt_colour": "misty jade silk (like #B5E6E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF4F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -4222,7 +4222,7 @@
      "prompt_colour": "misty jade silk (like #CEF4F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D3D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -4246,7 +4246,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4254,7 +4254,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C3EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4280,7 +4280,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF3FA",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -4288,7 +4288,7 @@
      "prompt_colour": "misty jade silk (like #CEF3FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D1DA",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -4311,7 +4311,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D6D7FC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4319,7 +4319,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C3EA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4342,7 +4342,7 @@
    "prompt_colour": "pale earthy rose silk (like #FACFC9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -4350,7 +4350,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7BBB5",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -4374,7 +4374,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E1",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -4382,7 +4382,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7BBB6",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -4408,7 +4408,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFF3FB",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -4416,7 +4416,7 @@
      "prompt_colour": "misty jade silk (like #CFF3FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A1D1DC",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -4439,7 +4439,7 @@
    "prompt_colour": "pale mint green silk (like #BAE6D8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F4E9",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -4447,7 +4447,7 @@
      "prompt_colour": "pale mint green silk (like #D2F4E9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A5D3C4",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -4470,7 +4470,7 @@
    "prompt_colour": "mist blue silk (like #B9E2F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F1FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -4478,7 +4478,7 @@
      "prompt_colour": "mist blue silk (like #D2F1FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4CFE2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -4502,7 +4502,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E9E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4510,7 +4510,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E9E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C5C2E9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4536,7 +4536,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F4E5FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4544,7 +4544,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F4E5FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3BEDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -4567,7 +4567,7 @@
    "prompt_colour": "misty jade silk (like #B9E4EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F2F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -4575,7 +4575,7 @@
      "prompt_colour": "misty jade silk (like #D1F2F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D1D9",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -4598,7 +4598,7 @@
    "prompt_colour": "peach cream silk (like #F2D4BE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE6D5",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -4606,7 +4606,7 @@
      "prompt_colour": "peach cream silk (like #FEE6D5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0C0A9",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -4630,7 +4630,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAF3E1",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -4638,7 +4638,7 @@
      "prompt_colour": "pale mint green silk (like #DAF3E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFD1BA",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -4664,7 +4664,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -4672,7 +4672,7 @@
      "prompt_colour": "mist blue silk (like #DEEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CAE7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -4695,7 +4695,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D6D8F8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4703,7 +4703,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C4E6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4726,7 +4726,7 @@
    "prompt_colour": "powder pink-lilac silk (like #E9D1ED)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F7E4FA",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -4734,7 +4734,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F7E4FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6BDDB",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -4758,7 +4758,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F8E4F8",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -4766,7 +4766,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F8E4F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8BDD9",
      "name_vi": "tím mận sáng",
      "name_en": "light plum",
@@ -4792,7 +4792,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2EE",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -4800,7 +4800,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2BBCB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -4823,7 +4823,7 @@
    "prompt_colour": "apricot cream silk (like #EFD6BC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE7D3",
      "name_vi": "kem mơ",
      "name_en": "apricot cream",
@@ -4831,7 +4831,7 @@
      "prompt_colour": "apricot cream silk (like #FBE7D3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDC2A7",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -4854,7 +4854,7 @@
    "prompt_colour": "pale mint green silk (like #BBE5DD)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3ED",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -4862,7 +4862,7 @@
      "prompt_colour": "misty jade silk (like #D3F3ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A5D2CA",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -4886,7 +4886,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDF2DD",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -4894,7 +4894,7 @@
      "prompt_colour": "pale mint green silk (like #DDF2DD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B4D0B4",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -4920,7 +4920,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E6F9",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4928,7 +4928,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E6F9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEC2D5",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4951,7 +4951,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DCD7F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ECE8FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4959,7 +4959,7 @@
      "prompt_colour": "pale smoky lilac silk (like #ECE8FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C8C4D8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -4982,7 +4982,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D5D9F2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7EAFE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -4990,7 +4990,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E7EAFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C3C6DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5014,7 +5014,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F0F7",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5022,7 +5022,7 @@
      "prompt_colour": "misty jade silk (like #D7F0F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CCD2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5048,7 +5048,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE5E1",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -5056,7 +5056,7 @@
      "prompt_colour": "pale earthy rose silk (like #FDE5E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C1BD",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -5079,7 +5079,7 @@
    "prompt_colour": "misty jade silk (like #C2E1EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8F0F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5087,7 +5087,7 @@
      "prompt_colour": "misty jade silk (like #D8F0F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B4CCD4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5110,7 +5110,7 @@
    "prompt_colour": "mist blue silk (like #C3E0ED)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFA",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5118,7 +5118,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CBD6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5142,7 +5142,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5EAFE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -5150,7 +5150,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E5EAFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C1C7DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -5176,7 +5176,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEFFB",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5184,7 +5184,7 @@
      "prompt_colour": "mist blue silk (like #DBEFFB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7CBD7",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5207,7 +5207,7 @@
    "prompt_colour": "powder pink-lilac silk (like #E8D3E7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6E5F5",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -5215,7 +5215,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F6E5F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2C1D1",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5238,7 +5238,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E1D5ED)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F0E7FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -5246,7 +5246,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F0E7FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CCC3D6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5270,7 +5270,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F5",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5278,7 +5278,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDD1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -5304,7 +5304,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F3EF",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5312,7 +5312,7 @@
      "prompt_colour": "misty jade silk (like #D2F3EF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D2CD",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -5335,7 +5335,7 @@
    "prompt_colour": "mist blue silk (like #BFE0F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5343,7 +5343,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5366,7 +5366,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DED5F6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EDE7FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -5374,7 +5374,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EDE7FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC1E5",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5398,7 +5398,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5406,7 +5406,7 @@
      "prompt_colour": "mist blue silk (like #DEEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CAE8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -5432,7 +5432,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E9E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -5440,7 +5440,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E9E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C3C3E7",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5463,7 +5463,7 @@
    "prompt_colour": "pale earthy rose silk (like #F7D0CD)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E2",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -5471,7 +5471,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6BCB8",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -5494,7 +5494,7 @@
    "prompt_colour": "misty jade silk (like #BBE5DE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3EE",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5502,7 +5502,7 @@
      "prompt_colour": "misty jade silk (like #D3F3EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4D2CB",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -5526,7 +5526,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE7D3",
      "name_vi": "kem mơ",
      "name_en": "apricot cream",
@@ -5534,7 +5534,7 @@
      "prompt_colour": "apricot cream silk (like #FBE7D3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDC2A6",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -5560,7 +5560,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5D9",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -5568,7 +5568,7 @@
      "prompt_colour": "peach cream silk (like #FFE5D9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BEAC",
      "name_vi": "cam quả hồng trầm sáng",
      "name_en": "light muted persimmon orange",
@@ -5591,7 +5591,7 @@
    "prompt_colour": "mist blue silk (like #BCE2F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5599,7 +5599,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6CFDF",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5622,7 +5622,7 @@
    "prompt_colour": "mist blue silk (like #CFDAFA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5630,7 +5630,7 @@
      "prompt_colour": "mist blue silk (like #E4EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BBC6E9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -5654,7 +5654,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5662,7 +5662,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5C9E8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -5688,7 +5688,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F3F5",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -5696,7 +5696,7 @@
      "prompt_colour": "misty jade silk (like #D1F3F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D1D4",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -5719,7 +5719,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EFD0E6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F4",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -5727,7 +5727,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDBCD3",
      "name_vi": "hồng mẫu đơn sáng",
      "name_en": "light peony pink",
@@ -5750,7 +5750,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EFD0E6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F4",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -5758,7 +5758,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDBCD3",
      "name_vi": "hồng mẫu đơn sáng",
      "name_en": "light peony pink",
@@ -5782,7 +5782,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -5790,7 +5790,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ABCDE3",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -5816,7 +5816,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE3F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -5824,7 +5824,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FDE3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFBCD0",
      "name_vi": "hồng mẫu đơn sáng",
      "name_en": "light peony pink",
@@ -5847,7 +5847,7 @@
    "prompt_colour": "lemon cream silk (like #D6E0BF)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7EFD5",
      "name_vi": "kem chanh",
      "name_en": "lemon cream",
@@ -5855,7 +5855,7 @@
      "prompt_colour": "lemon cream silk (like #E7EFD5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2CDAA",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -5878,7 +5878,7 @@
    "prompt_colour": "pale mint green silk (like #BDE5D9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F3EA",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -5886,7 +5886,7 @@
      "prompt_colour": "pale mint green silk (like #D4F3EA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A7D2C5",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -5910,7 +5910,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6E4FA",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -5918,7 +5918,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F6E4FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5BEDC",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -5944,7 +5944,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DB",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -5952,7 +5952,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE5DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4BEAF",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -5975,7 +5975,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E5D3F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F3E5FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -5983,7 +5983,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F3E5FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2BFDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -6006,7 +6006,7 @@
    "prompt_colour": "pale earthy rose silk (like #F7D0CA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -6014,7 +6014,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BCB6",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -6038,7 +6038,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6046,7 +6046,7 @@
      "prompt_colour": "mist blue silk (like #DFEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CAE7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6072,7 +6072,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6080,7 +6080,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AACDE3",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6103,7 +6103,7 @@
    "prompt_colour": "mist blue silk (like #BEE1F4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6111,7 +6111,7 @@
      "prompt_colour": "mist blue silk (like #D5F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A8CEE2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6134,7 +6134,7 @@
    "prompt_colour": "mist blue silk (like #CBDCF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6142,7 +6142,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7C9E7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6166,7 +6166,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E5",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -6174,7 +6174,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE3E5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BBBE",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -6200,7 +6200,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6208,7 +6208,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ABCDE3",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6231,7 +6231,7 @@
    "prompt_colour": "mist blue silk (like #CADCF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6239,7 +6239,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5C9E7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6262,7 +6262,7 @@
    "prompt_colour": "pale powder pink silk (like #F4CFDE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2EE",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -6270,7 +6270,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2BBCB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -6294,7 +6294,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -6302,7 +6302,7 @@
      "prompt_colour": "pale mint green silk (like #D3F3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6D2C8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6328,7 +6328,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6336,7 +6336,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCCE5",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6359,7 +6359,7 @@
    "prompt_colour": "peach cream silk (like #F4D3C0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5D7",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -6367,7 +6367,7 @@
      "prompt_colour": "peach cream silk (like #FFE5D7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2BFAB",
      "name_vi": "cam quả hồng trầm sáng",
      "name_en": "light muted persimmon orange",
@@ -6390,7 +6390,7 @@
    "prompt_colour": "misty jade silk (like #BAE5E1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F3F0",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6398,7 +6398,7 @@
      "prompt_colour": "misty jade silk (like #D2F3F0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4D2CE",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6422,7 +6422,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6430,7 +6430,7 @@
      "prompt_colour": "mist blue silk (like #D5F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A8CEE2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6456,7 +6456,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F3EF",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6464,7 +6464,7 @@
      "prompt_colour": "misty jade silk (like #D2F3EF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4D2CC",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6487,7 +6487,7 @@
    "prompt_colour": "mist blue silk (like #CCDBF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6495,7 +6495,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B8C8E7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6518,7 +6518,7 @@
    "prompt_colour": "mist blue silk (like #C2DFF7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6526,7 +6526,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCCE5",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -6550,7 +6550,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -6558,7 +6558,7 @@
      "prompt_colour": "pale mint green silk (like #D3F3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6D2C8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6584,7 +6584,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E9E9FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -6592,7 +6592,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E9E9FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C5C5DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -6615,7 +6615,7 @@
    "prompt_colour": "pale mint green silk (like #C5E3D7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAF2E8",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -6623,7 +6623,7 @@
      "prompt_colour": "pale mint green silk (like #DAF2E8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CEC4",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -6646,7 +6646,7 @@
    "prompt_colour": "pale mint green silk (like #C3E3DB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -6654,7 +6654,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CEC7",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6678,7 +6678,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EEE7FB",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -6686,7 +6686,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EEE7FB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC4D7",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -6712,7 +6712,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F5",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6720,7 +6720,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDD1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6743,7 +6743,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F4",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6751,7 +6751,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDD0",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6774,7 +6774,7 @@
    "prompt_colour": "mist blue silk (like #CBDDF2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFEDFD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6782,7 +6782,7 @@
      "prompt_colour": "mist blue silk (like #DFEDFD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BBC9DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6806,7 +6806,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EBE8FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -6814,7 +6814,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EBE8FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C7C4D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -6840,7 +6840,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -6848,7 +6848,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC7DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6871,7 +6871,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D3DAF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5EAFE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -6879,7 +6879,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E5EAFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C1C7DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -6902,7 +6902,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F5",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6910,7 +6910,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDD1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6934,7 +6934,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2EA",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -6942,7 +6942,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2EA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CEC6",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -6968,7 +6968,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F3",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -6976,7 +6976,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDCF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -6999,7 +6999,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F3",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7007,7 +7007,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDCF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7030,7 +7030,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DBD7F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EBE8FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -7038,7 +7038,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EBE8FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C7C4D9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -7062,7 +7062,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7070,7 +7070,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BDC8DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7096,7 +7096,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F4",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7104,7 +7104,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDD0",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7127,7 +7127,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DFD6EE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EEE7FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -7135,7 +7135,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EEE7FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC4D6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -7158,7 +7158,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7166,7 +7166,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDCE",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7190,7 +7190,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE5DF",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -7198,7 +7198,7 @@
      "prompt_colour": "pale earthy rose silk (like #FDE5DF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C1BB",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -7224,7 +7224,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2EA",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -7232,7 +7232,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2EA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CEC6",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -7255,7 +7255,7 @@
    "prompt_colour": "mist blue silk (like #C5DFEF)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEFFB",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7263,7 +7263,7 @@
      "prompt_colour": "mist blue silk (like #DAEFFB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CBD7",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -7286,7 +7286,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D4D9F3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -7294,7 +7294,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C6DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -7318,7 +7318,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7326,7 +7326,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BCC8DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7352,7 +7352,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F5E5F6",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -7360,7 +7360,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F5E5F6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1C1D2",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -7383,7 +7383,7 @@
    "prompt_colour": "pale earthy rose silk (like #F1D3CE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE5E1",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -7391,7 +7391,7 @@
      "prompt_colour": "pale earthy rose silk (like #FDE5E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C1BD",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -7414,7 +7414,7 @@
    "prompt_colour": "pale earthy rose silk (like #F1D3CA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE5DE",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -7422,7 +7422,7 @@
      "prompt_colour": "pale earthy rose silk (like #FDE5DE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C1BA",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -7446,7 +7446,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F8E4F2",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -7454,7 +7454,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F8E4F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4C0CE",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -7480,7 +7480,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7488,7 +7488,7 @@
      "prompt_colour": "mist blue silk (like #DFEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CAE8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7511,7 +7511,7 @@
    "prompt_colour": "mist blue silk (like #C8DDF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7519,7 +7519,7 @@
      "prompt_colour": "mist blue silk (like #DFEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CAE8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7542,7 +7542,7 @@
    "prompt_colour": "pale mint green silk (like #BEE5D8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F3E9",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -7550,7 +7550,7 @@
      "prompt_colour": "pale mint green silk (like #D5F3E9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A8D2C4",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -7574,7 +7574,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3ED",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7582,7 +7582,7 @@
      "prompt_colour": "misty jade silk (like #D3F3ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4D2CA",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7608,7 +7608,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F3E6",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -7616,7 +7616,7 @@
      "prompt_colour": "pale mint green silk (like #D6F3E6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AAD2C0",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -7639,7 +7639,7 @@
    "prompt_colour": "misty jade silk (like #B9E5E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F3F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7647,7 +7647,7 @@
      "prompt_colour": "misty jade silk (like #D1F3F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A2D2D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7670,7 +7670,7 @@
    "prompt_colour": "mist blue silk (like #CADCF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7678,7 +7678,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5C9E8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7702,7 +7702,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7710,7 +7710,7 @@
      "prompt_colour": "mist blue silk (like #DDEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CBE7",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7736,7 +7736,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7744,7 +7744,7 @@
      "prompt_colour": "mist blue silk (like #E3EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BAC7E9",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -7767,7 +7767,7 @@
    "prompt_colour": "mist blue silk (like #C2DFF7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7775,7 +7775,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ACCCE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -7798,7 +7798,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EFD0E6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F4",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -7806,7 +7806,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDBCD3",
      "name_vi": "hồng mẫu đơn sáng",
      "name_en": "light peony pink",
@@ -7830,7 +7830,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -7838,7 +7838,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BFC5E8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -7864,7 +7864,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7872,7 +7872,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCCE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -7895,7 +7895,7 @@
    "prompt_colour": "pale mint green silk (like #C4E4CE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAF3E1",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -7903,7 +7903,7 @@
      "prompt_colour": "pale mint green silk (like #DAF3E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AED1BA",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -7926,7 +7926,7 @@
    "prompt_colour": "misty jade silk (like #B9E5E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F3F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -7934,7 +7934,7 @@
      "prompt_colour": "misty jade silk (like #D1F3F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A2D2D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -7958,7 +7958,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -7966,7 +7966,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6CFE0",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -7992,7 +7992,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8000,7 +8000,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7C8E8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -8023,7 +8023,7 @@
    "prompt_colour": "peach cream silk (like #F5D2C2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5D9",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -8031,7 +8031,7 @@
      "prompt_colour": "peach cream silk (like #FFE5D9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BEAC",
      "name_vi": "cam quả hồng trầm sáng",
      "name_en": "light muted persimmon orange",
@@ -8054,7 +8054,7 @@
    "prompt_colour": "mist blue silk (like #BEE1F4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8062,7 +8062,7 @@
      "prompt_colour": "mist blue silk (like #D5F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A8CEE3",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -8086,7 +8086,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2EE",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -8094,7 +8094,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2BBCB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -8120,7 +8120,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F2FA",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -8128,7 +8128,7 @@
      "prompt_colour": "misty jade silk (like #D2F2FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D0DB",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8151,7 +8151,7 @@
    "prompt_colour": "misty jade silk (like #BAE5E2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F3F1",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -8159,7 +8159,7 @@
      "prompt_colour": "misty jade silk (like #D2F3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D2CF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8182,7 +8182,7 @@
    "prompt_colour": "mist blue silk (like #BCE2F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8190,7 +8190,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6CFDF",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -8214,7 +8214,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8222,7 +8222,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -8248,7 +8248,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ECE7FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -8256,7 +8256,7 @@
      "prompt_colour": "pale smoky lilac silk (like #ECE7FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CAC1E6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -8279,7 +8279,7 @@
    "prompt_colour": "ivory silk (like #ECD8B6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F9E9CE",
      "name_vi": "ngà",
      "name_en": "ivory",
@@ -8287,7 +8287,7 @@
      "prompt_colour": "ivory silk (like #F9E9CE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C4A1",
      "name_vi": "vàng nghệ dịu sáng",
      "name_en": "soft light turmeric yellow",
@@ -8310,7 +8310,7 @@
    "prompt_colour": "pale mint green silk (like #C3E5CB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F3DF",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -8318,7 +8318,7 @@
      "prompt_colour": "pale mint green silk (like #D9F3DF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFD2B7",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -8342,7 +8342,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEF3F7",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -8350,7 +8350,7 @@
      "prompt_colour": "misty jade silk (like #CEF3F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A0D2D6",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8376,7 +8376,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D0F4ED",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -8384,7 +8384,7 @@
      "prompt_colour": "pale mint green silk (like #D0F4ED)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A2D3CA",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8407,7 +8407,7 @@
    "prompt_colour": "mist blue silk (like #CEDAFD)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8415,7 +8415,7 @@
      "prompt_colour": "mist blue silk (like #E4EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BAC6EB",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -8438,7 +8438,7 @@
    "prompt_colour": "mist blue silk (like #C0DFFA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8446,7 +8446,7 @@
      "prompt_colour": "mist blue silk (like #DBEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ACCCE7",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -8470,7 +8470,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F3E5FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -8478,7 +8478,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F3E5FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2BEE1",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -8504,7 +8504,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6E4FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -8512,7 +8512,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F6E4FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6BDDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -8535,7 +8535,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E2D3F6)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F0E6FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -8543,7 +8543,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F0E6FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFBFE3",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -8566,7 +8566,7 @@
    "prompt_colour": "peach cream silk (like #F8D1C0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -8574,7 +8574,7 @@
      "prompt_colour": "peach cream silk (like #FFE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BDAC",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -8598,7 +8598,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8606,7 +8606,7 @@
      "prompt_colour": "mist blue silk (like #E3EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B9C6EB",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -8632,7 +8632,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8640,7 +8640,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -8663,7 +8663,7 @@
    "prompt_colour": "mist blue silk (like #C1DFFB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -8671,7 +8671,7 @@
      "prompt_colour": "mist blue silk (like #DBEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCCE9",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -8694,7 +8694,7 @@
    "prompt_colour": "misty jade silk (like #B6E4EE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFF3FA",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -8702,7 +8702,7 @@
      "prompt_colour": "misty jade silk (like #CFF3FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A1D1DB",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8726,7 +8726,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F4E8",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -8734,7 +8734,7 @@
      "prompt_colour": "pale mint green silk (like #D2F4E8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A5D3C3",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -8760,7 +8760,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5D9",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -8768,7 +8768,7 @@
      "prompt_colour": "peach cream silk (like #FFE5D9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BEAC",
      "name_vi": "cam quả hồng trầm sáng",
      "name_en": "light muted persimmon orange",
@@ -8791,7 +8791,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EED0E7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE3F5",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -8799,7 +8799,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FBE3F5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCBCD5",
      "name_vi": "tím mận sáng",
      "name_en": "light plum",
@@ -8822,7 +8822,7 @@
    "prompt_colour": "powder pink-lilac silk (like #EBD1EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F8E4F8",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -8830,7 +8830,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F8E4F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9BDD9",
      "name_vi": "tím mận sáng",
      "name_en": "light plum",
@@ -8854,7 +8854,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F3F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -8862,7 +8862,7 @@
      "prompt_colour": "misty jade silk (like #D1F3F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A2D2D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8888,7 +8888,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -8896,7 +8896,7 @@
      "prompt_colour": "pale mint green silk (like #D3F3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6D2C7",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -8919,7 +8919,7 @@
    "prompt_colour": "pale mint green silk (like #BCE5DB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F3EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -8927,7 +8927,7 @@
      "prompt_colour": "pale mint green silk (like #D3F3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6D2C8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -8950,7 +8950,7 @@
    "prompt_colour": "pale earthy rose silk (like #F6D2C4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DB",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -8958,7 +8958,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE5DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BEAF",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -8982,7 +8982,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -8990,7 +8990,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6BCB5",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -9016,7 +9016,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EFE6FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9024,7 +9024,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EFE6FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CDC0E3",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -9047,7 +9047,7 @@
    "prompt_colour": "mist blue silk (like #C7DDF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9055,7 +9055,7 @@
      "prompt_colour": "mist blue silk (like #DEEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B2CAE8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -9078,7 +9078,7 @@
    "prompt_colour": "misty jade silk (like #B9E5E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F3F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -9086,7 +9086,7 @@
      "prompt_colour": "misty jade silk (like #D1F3F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A2D2D1",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -9110,7 +9110,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9118,7 +9118,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4CFDF",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9144,7 +9144,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0F0E1",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -9152,7 +9152,7 @@
      "prompt_colour": "pale mint green silk (like #E0F0E1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BCCCBD",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -9175,7 +9175,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F3",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -9183,7 +9183,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDCF",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -9206,7 +9206,7 @@
    "prompt_colour": "mist blue silk (like #C3E0EC)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F0F9",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9214,7 +9214,7 @@
      "prompt_colour": "mist blue silk (like #D9F0F9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CBD5",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9238,7 +9238,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F0F9",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9246,7 +9246,7 @@
      "prompt_colour": "mist blue silk (like #D9F0F9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CBD5",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9272,7 +9272,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EEE7FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9280,7 +9280,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EEE7FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC4D6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9303,7 +9303,7 @@
    "prompt_colour": "mist blue silk (like #CFDBF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2EBFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9311,7 +9311,7 @@
      "prompt_colour": "mist blue silk (like #E2EBFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BEC7DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -9334,7 +9334,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E1D5ED)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F0E7FA",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9342,7 +9342,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F0E7FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CCC3D6",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9366,7 +9366,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F2EC",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -9374,7 +9374,7 @@
      "prompt_colour": "pale mint green silk (like #D9F2EC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CEC8",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -9400,7 +9400,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9408,7 +9408,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C4C5DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9431,7 +9431,7 @@
    "prompt_colour": "misty jade silk (like #C1E2E3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F1F2",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -9439,7 +9439,7 @@
      "prompt_colour": "misty jade silk (like #D7F1F2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B3CDCE",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -9462,7 +9462,7 @@
    "prompt_colour": "powder pink-lilac silk (like #E5D4EA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F3E6F7",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9470,7 +9470,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F3E6F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC2D3",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9494,7 +9494,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCEEFD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9502,7 +9502,7 @@
      "prompt_colour": "mist blue silk (like #DCEEFD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B9CAD9",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -9528,7 +9528,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F3E6F7",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9536,7 +9536,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F3E6F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC2D3",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9559,7 +9559,7 @@
    "prompt_colour": "powder pink-lilac silk (like #ECD2E2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F9E4F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -9567,7 +9567,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F9E4F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5C0CD",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -9590,7 +9590,7 @@
    "prompt_colour": "misty jade silk (like #C3E1EB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8F0F8",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -9598,7 +9598,7 @@
      "prompt_colour": "misty jade silk (like #D8F0F8)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CCD4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9622,7 +9622,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEFFA",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9630,7 +9630,7 @@
      "prompt_colour": "mist blue silk (like #DAEFFA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B6CCD7",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9656,7 +9656,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9664,7 +9664,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C6DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9687,7 +9687,7 @@
    "prompt_colour": "mist blue silk (like #CEDBF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E1ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9695,7 +9695,7 @@
      "prompt_colour": "mist blue silk (like #E1ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BDC7DA",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -9718,7 +9718,7 @@
    "prompt_colour": "powder pink-lilac silk (like #E6D4E9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F4E6F6",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -9726,7 +9726,7 @@
      "prompt_colour": "powder pink-lilac silk (like #F4E6F6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D0C2D3",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -9750,7 +9750,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE4E6",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -9758,7 +9758,7 @@
      "prompt_colour": "pale powder pink silk (like #FDE4E6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9C0C2",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -9784,7 +9784,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -9792,7 +9792,7 @@
      "prompt_colour": "peach cream silk (like #FFE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4BEAE",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -9815,7 +9815,7 @@
    "prompt_colour": "pale powder pink silk (like #F5CFDA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3EB",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -9823,7 +9823,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BBC7",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -9846,7 +9846,7 @@
    "prompt_colour": "mist blue silk (like #C4DEF8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9854,7 +9854,7 @@
      "prompt_colour": "mist blue silk (like #DCEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#AFCBE6",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -9878,7 +9878,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F1E6FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -9886,7 +9886,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F1E6FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CFC0E1",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -9912,7 +9912,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EBEED4",
      "name_vi": "kem chanh",
      "name_en": "lemon cream",
@@ -9920,7 +9920,7 @@
      "prompt_colour": "lemon cream silk (like #EBEED4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C7CBA8",
      "name_vi": "ô liu sáng",
      "name_en": "light olive green",
@@ -9943,7 +9943,7 @@
    "prompt_colour": "mist blue silk (like #BEE1F4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D5F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -9951,7 +9951,7 @@
      "prompt_colour": "mist blue silk (like #D5F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A8CEE2",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -9974,7 +9974,7 @@
    "prompt_colour": "pale earthy rose silk (like #F6D2C4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5DB",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -9982,7 +9982,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE5DB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4BEAF",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -10006,7 +10006,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE4E0",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -10014,7 +10014,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE4E0)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E5BCB6",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -10040,7 +10040,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10048,7 +10048,7 @@
      "prompt_colour": "mist blue silk (like #E3EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BAC6E8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10071,7 +10071,7 @@
    "prompt_colour": "powder pink-lilac silk (like #F1D0E2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE3F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -10079,7 +10079,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FDE3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFBCCF",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -10102,7 +10102,7 @@
    "prompt_colour": "pale smoky lilac silk (like #DBD6F7)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EBE8FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10110,7 +10110,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EBE8FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C8C2E5",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10134,7 +10134,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2F2FA",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -10142,7 +10142,7 @@
      "prompt_colour": "misty jade silk (like #D2F2FA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A4D0DB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10168,7 +10168,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E7",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -10176,7 +10176,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE3E7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4BBC1",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -10199,7 +10199,7 @@
    "prompt_colour": "pale mint green silk (like #C0E5D3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F3E5",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -10207,7 +10207,7 @@
      "prompt_colour": "pale mint green silk (like #D6F3E5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ABD2BF",
      "name_vi": "ngọc bích sáng",
      "name_en": "light jade green",
@@ -10230,7 +10230,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E4D3F2)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F2E5FE",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10238,7 +10238,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F2E5FE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1BFE0",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -10262,7 +10262,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE7D4",
      "name_vi": "kem mơ",
      "name_en": "apricot cream",
@@ -10270,7 +10270,7 @@
      "prompt_colour": "apricot cream silk (like #FDE7D4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFC1A8",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -10296,7 +10296,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EEE7FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10304,7 +10304,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EEE7FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CBC1E3",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10327,7 +10327,7 @@
    "prompt_colour": "pale powder pink silk (like #F6CFD5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E7",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -10335,7 +10335,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE3E7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4BBC1",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -10358,7 +10358,7 @@
    "prompt_colour": "misty jade silk (like #B9E4EA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D1F2F7",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -10366,7 +10366,7 @@
      "prompt_colour": "misty jade silk (like #D1F2F7)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A3D1D7",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -10390,7 +10390,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE3F1",
      "name_vi": "hồng tím phấn",
      "name_en": "powder pink-lilac",
@@ -10398,7 +10398,7 @@
      "prompt_colour": "powder pink-lilac silk (like #FDE3F1)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DFBCD0",
      "name_vi": "hồng mẫu đơn sáng",
      "name_en": "light peony pink",
@@ -10424,7 +10424,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FC",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10432,7 +10432,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A5CFDE",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10455,7 +10455,7 @@
    "prompt_colour": "apricot cream silk (like #EED6BB)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FBE8D3",
      "name_vi": "kem mơ",
      "name_en": "apricot cream",
@@ -10463,7 +10463,7 @@
      "prompt_colour": "apricot cream silk (like #FBE8D3)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCC2A5",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -10486,7 +10486,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E5D3F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F3E5FD",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10494,7 +10494,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F3E5FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2BFDF",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -10518,7 +10518,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9F3E2",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -10526,7 +10526,7 @@
      "prompt_colour": "pale mint green silk (like #D9F3E2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADD1BB",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -10552,7 +10552,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10560,7 +10560,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ACCCE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10583,7 +10583,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D6D8F8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10591,7 +10591,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C4E7",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10614,7 +10614,7 @@
    "prompt_colour": "mist blue silk (like #BFE0F4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10622,7 +10622,7 @@
      "prompt_colour": "mist blue silk (like #D6F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE3",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10646,7 +10646,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ECE7FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -10654,7 +10654,7 @@
      "prompt_colour": "pale smoky lilac silk (like #ECE7FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C9C1E5",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10680,7 +10680,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FDE6D4",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -10688,7 +10688,7 @@
      "prompt_colour": "peach cream silk (like #FDE6D4)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0C1A7",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -10711,7 +10711,7 @@
    "prompt_colour": "pale powder pink silk (like #F5CFDA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3EB",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -10719,7 +10719,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE3EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BBC7",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -10742,7 +10742,7 @@
    "prompt_colour": "mist blue silk (like #CADCF9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10750,7 +10750,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5C9E8",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -10774,7 +10774,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE5D9",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -10782,7 +10782,7 @@
      "prompt_colour": "peach cream silk (like #FFE5D9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E3BEAC",
      "name_vi": "cam quả hồng trầm sáng",
      "name_en": "light muted persimmon orange",
@@ -10808,7 +10808,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7EFFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10816,7 +10816,7 @@
      "prompt_colour": "mist blue silk (like #D7EFFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A9CDE4",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10839,7 +10839,7 @@
    "prompt_colour": "mist blue silk (like #BDE1F3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F0FF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10847,7 +10847,7 @@
      "prompt_colour": "mist blue silk (like #D4F0FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A7CEE1",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10870,7 +10870,7 @@
    "prompt_colour": "ivory silk (like #ECD7BA)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F9E9D2",
      "name_vi": "ngà",
      "name_en": "ivory",
@@ -10878,7 +10878,7 @@
      "prompt_colour": "ivory silk (like #F9E9D2)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAC3A4",
      "name_vi": "hổ phách sáng",
      "name_en": "light amber",
@@ -10902,7 +10902,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E4EBFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10910,7 +10910,7 @@
      "prompt_colour": "mist blue silk (like #E4EBFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BBC6E9",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -10936,7 +10936,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE2EE",
      "name_vi": "hồng phấn nhạt",
      "name_en": "pale powder pink",
@@ -10944,7 +10944,7 @@
      "prompt_colour": "pale powder pink silk (like #FFE2EE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E2BBCB",
      "name_vi": "hồng xuân sáng",
      "name_en": "light spring pink",
@@ -10967,7 +10967,7 @@
    "prompt_colour": "mist blue silk (like #BBE2F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FC",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -10975,7 +10975,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A5CFDE",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -10998,7 +10998,7 @@
    "prompt_colour": "mist blue silk (like #BCE2F1)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3F1FD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11006,7 +11006,7 @@
      "prompt_colour": "mist blue silk (like #D3F1FD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#A6CFDF",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -11030,7 +11030,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11038,7 +11038,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ACCCE6",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -11064,7 +11064,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11072,7 +11072,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C2C4E8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -11095,7 +11095,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D5D8F9)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E7E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11103,7 +11103,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E7E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C1C4E8",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -11126,7 +11126,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E6D2F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F4E5FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11134,7 +11134,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F4E5FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D3BEDE",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -11158,7 +11158,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#EFE6FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11166,7 +11166,7 @@
      "prompt_colour": "pale smoky lilac silk (like #EFE6FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CDC0E3",
      "name_vi": "tím sáng",
      "name_en": "light violet",
@@ -11192,7 +11192,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D8EFFD",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11200,7 +11200,7 @@
      "prompt_colour": "mist blue silk (like #D8EFFD)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B1CCDB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -11223,7 +11223,7 @@
    "prompt_colour": "pale smoky lilac silk (like #D7D8F5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E8E9FF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11231,7 +11231,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E8E9FF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C4C5DF",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -11254,7 +11254,7 @@
    "prompt_colour": "misty jade silk (like #BDE3E8)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D4F2F6",
      "name_vi": "xanh ngọc sương",
      "name_en": "misty jade",
@@ -11262,7 +11262,7 @@
      "prompt_colour": "misty jade silk (like #D4F2F6)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#ADCFD3",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -11286,7 +11286,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DAEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11294,7 +11294,7 @@
      "prompt_colour": "mist blue silk (like #DAEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B4CBDE",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -11320,7 +11320,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FEE5DA",
      "name_vi": "kem đào",
      "name_en": "peach cream",
@@ -11328,7 +11328,7 @@
      "prompt_colour": "peach cream silk (like #FEE5DA)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DCC0B4",
      "name_vi": "đất nung / gạch sáng",
      "name_en": "light terracotta brick",
@@ -11351,7 +11351,7 @@
    "prompt_colour": "mist blue silk (like #C6DEF4)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DBEEFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11359,7 +11359,7 @@
      "prompt_colour": "mist blue silk (like #DBEEFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CADE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -11382,7 +11382,7 @@
    "prompt_colour": "pale earthy rose silk (like #F4D1D3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#FFE3E5",
      "name_vi": "hồng đất nhạt",
      "name_en": "pale earthy rose",
@@ -11390,7 +11390,7 @@
      "prompt_colour": "pale earthy rose silk (like #FFE3E5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DEBFC0",
      "name_vi": "hồng đất sáng",
      "name_en": "light earthy rose",
@@ -11414,7 +11414,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D6F2EB",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -11422,7 +11422,7 @@
      "prompt_colour": "pale mint green silk (like #D6F2EB)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B0CFC7",
      "name_vi": "mòng két sáng",
      "name_en": "light teal",
@@ -11448,7 +11448,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11456,7 +11456,7 @@
      "prompt_colour": "mist blue silk (like #DDEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7C9DF",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -11479,7 +11479,7 @@
    "prompt_colour": "pale smoky lilac silk (like #E2D4F0)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F1E6FC",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11487,7 +11487,7 @@
      "prompt_colour": "pale smoky lilac silk (like #F1E6FC)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#CEC1DA",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -11510,7 +11510,7 @@
    "prompt_colour": "mist blue silk (like #C8DDF5)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#DDEDFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11518,7 +11518,7 @@
      "prompt_colour": "mist blue silk (like #DDEDFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B7C9DF",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",
@@ -11542,7 +11542,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E6EAFF",
      "name_vi": "tím khói nhạt",
      "name_en": "pale smoky lilac",
@@ -11550,7 +11550,7 @@
      "prompt_colour": "pale smoky lilac silk (like #E6EAFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#C0C6DF",
      "name_vi": "chàm sáng",
      "name_en": "light indigo blue",
@@ -11576,7 +11576,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D7F2E9",
      "name_vi": "bạc hà nhạt",
      "name_en": "pale mint green",
@@ -11584,7 +11584,7 @@
      "prompt_colour": "pale mint green silk (like #D7F2E9)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B2CFC5",
      "name_vi": "rêu sáng",
      "name_en": "light moss green",
@@ -11607,7 +11607,7 @@
    "prompt_colour": "mist blue silk (like #C4DFF3)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D9EFFE",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11615,7 +11615,7 @@
      "prompt_colour": "mist blue silk (like #D9EFFE)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#B5CBDB",
      "name_vi": "xanh băng sáng",
      "name_en": "light ice blue",
@@ -11638,7 +11638,7 @@
    "prompt_colour": "ivory silk (like #E8D9BE)",
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#F6EAD5",
      "name_vi": "ngà",
      "name_en": "ivory",
@@ -11646,7 +11646,7 @@
      "prompt_colour": "ivory silk (like #F6EAD5)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#D2C6B0",
      "name_vi": "vàng nghệ dịu sáng",
      "name_en": "soft light turmeric yellow",
@@ -11670,7 +11670,7 @@
    "used": false,
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#E0ECFF",
      "name_vi": "xanh sương",
      "name_en": "mist blue",
@@ -11678,7 +11678,7 @@
      "prompt_colour": "mist blue silk (like #E0ECFF)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "hex": "#BBC8DE",
      "name_vi": "lam ngọc sáng",
      "name_en": "light sapphire blue",

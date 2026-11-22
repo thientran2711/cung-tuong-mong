@@ -44,14 +44,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BAEDF9",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#75AFBC",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Teal",
@@ -81,14 +81,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BAEDF8",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#75AFBB",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Teal",
@@ -118,14 +118,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C2E9FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7CACC6",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -155,14 +155,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F3D7FA",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B698BD",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -195,14 +195,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CCD0F4",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8E92B7",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -232,14 +232,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C6C8",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4888A",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -269,14 +269,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC6D9",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF889C",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -306,14 +306,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D7D5AF",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9A9770",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -346,14 +346,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A2D7C1",
      "embroidery_vi": "ngọc bích sáng",
      "xml_name": "Soft Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#549D82",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -383,14 +383,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BDD1A6",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Soft Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7D965E",
      "embroidery_vi": "rêu đậm vừa",
      "xml_name": "Soft Olive",
@@ -420,14 +420,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DAC89B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A18A4D",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -457,14 +457,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A0D7C2",
      "embroidery_vi": "ngọc bích sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#529D84",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -497,14 +497,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0BAB3",
      "embroidery_vi": "hồng đất sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BA7871",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -534,14 +534,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7C0A0",
      "embroidery_vi": "hổ phách sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B18055",
      "embroidery_vi": "hổ phách đậm vừa",
      "xml_name": "Soft Coral",
@@ -571,14 +571,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E5BAD8",
      "embroidery_vi": "hồng mẫu đơn sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE789F",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -608,14 +608,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A4D0EE",
      "embroidery_vi": "xanh băng sáng",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#5994BA",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -648,14 +648,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFDAD1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C9978C",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Red",
@@ -685,14 +685,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFDAC9",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C79983",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Soft Coral",
@@ -722,14 +722,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ECDAFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF9BC4",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -759,14 +759,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CDE6FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#86A8CB",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -799,14 +799,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CFD8B3",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#929A75",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -836,14 +836,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C3DBBB",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#859E7D",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -873,14 +873,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EACDB1",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8F72",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -910,14 +910,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBC6DC",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE899E",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -950,14 +950,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D6C89B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9D8B4E",
      "embroidery_vi": "vàng nghệ dịu đậm vừa",
      "xml_name": "Soft Gold",
@@ -987,14 +987,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9B9D1",
      "embroidery_vi": "hồng mẫu đơn sáng",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B27796",
      "embroidery_vi": "hồng mẫu đơn đậm vừa",
      "xml_name": "Soft Rose",
@@ -1024,14 +1024,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDBDA9",
      "embroidery_vi": "đất nung / gạch sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B77B62",
      "embroidery_vi": "cam quả hồng trầm đậm vừa",
      "xml_name": "Soft Coral",
@@ -1061,14 +1061,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFB9BB",
      "embroidery_vi": "hồng đất sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9777A",
      "embroidery_vi": "hồng đất đậm vừa",
      "xml_name": "Soft Red",
@@ -1101,14 +1101,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFB9BE",
      "embroidery_vi": "hồng đất sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9767F",
      "embroidery_vi": "hồng đất đậm vừa",
      "xml_name": "Soft Red",
@@ -1138,14 +1138,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DDC69B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A5884E",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -1175,14 +1175,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BBD2A7",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Soft Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7B9760",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -1212,14 +1212,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3CA9B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Soft Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#998D4E",
      "embroidery_vi": "vàng nghệ dịu đậm vừa",
      "xml_name": "Soft Gold",
@@ -1252,14 +1252,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B8D6F3",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7A99B6",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Blue",
@@ -1289,14 +1289,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E6C7E3",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A989A6",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -1326,14 +1326,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EAC6DE",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC89A1",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -1363,14 +1363,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1D1AD",
      "embroidery_vi": "trắng ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A4936F",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -1403,14 +1403,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D1CB9C",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Soft Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#968E4F",
      "embroidery_vi": "vàng nghệ dịu đậm vừa",
      "xml_name": "Soft Gold",
@@ -1440,14 +1440,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#98D5DB",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#439BA3",
      "embroidery_vi": "mòng két đậm vừa",
      "xml_name": "Teal",
@@ -1477,14 +1477,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E0BBDE",
      "embroidery_vi": "tím mận sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A87AA6",
      "embroidery_vi": "tím mận đậm vừa",
      "xml_name": "Soft Orchid",
@@ -1514,14 +1514,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFBBB0",
      "embroidery_vi": "đất nung / gạch sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9796C",
      "embroidery_vi": "đất nung / gạch đậm vừa",
      "xml_name": "Soft Red",
@@ -1554,14 +1554,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BFEAFF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7AADC4",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -1591,14 +1591,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1EAFF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7BADC5",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -1628,14 +1628,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C6EFD4",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#84B195",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -1665,14 +1665,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1E8BF",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A2AA7D",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -1705,14 +1705,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C4DBBA",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#869E7C",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -1742,14 +1742,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CED8B3",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#919A75",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Olive",
@@ -1779,14 +1779,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0C9B7",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B38B79",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -1816,14 +1816,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8C7E1",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB8AA4",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -1856,14 +1856,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD7E0",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C794A1",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -1893,14 +1893,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E2DEFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A39ECA",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -1930,14 +1930,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FCD6F0",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BF96B3",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -1967,14 +1967,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D9E2FF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#96A3CD",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -2007,14 +2007,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#98D5DB",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#439BA3",
      "embroidery_vi": "mòng két đậm vừa",
      "xml_name": "Teal",
@@ -2044,14 +2044,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBBEA5",
      "embroidery_vi": "cam quả hồng trầm sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B67D5D",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Soft Coral",
@@ -2081,14 +2081,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BD7CE",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#489D92",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -2118,14 +2118,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BDD1A6",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Soft Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7D965E",
      "embroidery_vi": "rêu đậm vừa",
      "xml_name": "Soft Olive",
@@ -2158,14 +2158,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F3C7C2",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B58985",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -2195,14 +2195,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CCCFF4",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8F92B7",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -2232,14 +2232,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C0D4F5",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8296B7",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -2269,14 +2269,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BCDDC2",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7D9F84",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -2309,14 +2309,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C5CFA0",
      "embroidery_vi": "ô liu sáng",
      "xml_name": "Soft Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#889356",
      "embroidery_vi": "ô liu đậm vừa",
      "xml_name": "Soft Olive",
@@ -2346,14 +2346,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ACD5B5",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#649B73",
      "embroidery_vi": "ngọc bích đậm vừa",
      "xml_name": "Soft Green",
@@ -2383,14 +2383,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C9CE9F",
      "embroidery_vi": "ô liu sáng",
      "xml_name": "Soft Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8D9254",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -2420,14 +2420,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E2BBDB",
      "embroidery_vi": "tím mận sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB7AA3",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -2460,14 +2460,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1DFFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A29FCA",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -2497,14 +2497,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD8D8",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C99596",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -2534,14 +2534,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFDACD",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C89888",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -2571,14 +2571,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD9CE",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C89788",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Red",
@@ -2611,14 +2611,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD7DB",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C8949A",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -2648,14 +2648,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3E4FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8EA6CD",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -2685,14 +2685,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3DEFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A59EC9",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Blue",
@@ -2722,14 +2722,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BBECFB",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#77AEBF",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -2762,14 +2762,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCD3AD",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9E966F",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -2799,14 +2799,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F1C8B9",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B38A7B",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -2836,14 +2836,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C7BE",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B48A81",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Red",
@@ -2873,14 +2873,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C6C6",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B48889",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -2913,14 +2913,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC6D6",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B08899",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -2950,14 +2950,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C7D1F5",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8993B7",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -2987,14 +2987,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B1DAED",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#719DAF",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -3024,14 +3024,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1C9E9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A38BAB",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -3064,14 +3064,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFD9FE",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B29AC2",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -3101,14 +3101,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FDD6F0",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C096B3",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -3138,14 +3138,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BFEFDE",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7BB2A0",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -3175,14 +3175,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F5E0BB",
      "embroidery_vi": "ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B8A178",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -3215,14 +3215,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8B9D2",
      "embroidery_vi": "hồng mẫu đơn sáng",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B27798",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -3252,14 +3252,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E5BAD7",
      "embroidery_vi": "hồng mẫu đơn sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE789E",
      "embroidery_vi": "tím mận đậm vừa",
      "xml_name": "Soft Orchid",
@@ -3289,14 +3289,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEB9C2",
      "embroidery_vi": "hồng hoa đào sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B87683",
      "embroidery_vi": "hồng hoa đào đậm vừa",
      "xml_name": "Soft Red",
@@ -3326,14 +3326,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7C0A0",
      "embroidery_vi": "hổ phách sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B18055",
      "embroidery_vi": "hổ phách đậm vừa",
      "xml_name": "Soft Coral",
@@ -3366,14 +3366,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDCBB3",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8E75",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -3403,14 +3403,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D8D5AE",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9B9770",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -3440,14 +3440,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D8CBEF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9B8EB2",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -3477,14 +3477,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0C9B7",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B38B79",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -3517,14 +3517,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CFE5FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#88A8CC",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -3554,14 +3554,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CAE8FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#82AAC9",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Blue",
@@ -3591,14 +3591,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D4E3FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8FA5CD",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -3628,14 +3628,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D5E3FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#90A5CD",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -3668,14 +3668,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCC9EC",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9F8CAF",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -3705,14 +3705,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D9CBEF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9C8EB2",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -3742,14 +3742,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C6C7",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B48889",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -3779,14 +3779,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D9CBEF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9C8EB2",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -3819,14 +3819,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD9CB",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C79886",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -3856,14 +3856,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2D8FB",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B599BF",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Violet",
@@ -3893,14 +3893,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD6E5",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C694A7",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Soft Rose",
@@ -3930,14 +3930,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFDAC9",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C79983",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Soft Coral",
@@ -3970,14 +3970,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BDEFE2",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#79B2A4",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -4007,14 +4007,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FCDDBD",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C09E7A",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -4044,14 +4044,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BAEEF6",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#75B0B9",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Teal",
@@ -4081,14 +4081,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E2DEFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A39ECA",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -4121,14 +4121,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8D7F5",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BB97B8",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -4158,14 +4158,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9DBFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC9BC6",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -4195,14 +4195,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DBE1FF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9AA1CD",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -4232,14 +4232,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD7E1",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C794A2",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -4272,14 +4272,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EACDB0",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC8F71",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -4309,14 +4309,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E6CEAE",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A99170",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -4346,14 +4346,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9D6F3",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7B99B6",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Blue",
@@ -4383,14 +4383,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8CEAF",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB9070",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -4423,14 +4423,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D4CDF2",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#978FB4",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Blue",
@@ -4460,14 +4460,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9DEC5",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7AA087",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -4497,14 +4497,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D4D6B0",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#979971",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -4534,14 +4534,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0C6D3",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B28896",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -4574,14 +4574,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E4D0AD",
      "embroidery_vi": "ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A7926F",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Coral",
@@ -4611,14 +4611,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDCBB3",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8E75",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -4648,14 +4648,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D1CEF2",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9490B5",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -4685,14 +4685,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B2DECE",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#73A191",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -4725,14 +4725,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9AD7CF",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#479D94",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Jade",
@@ -4762,14 +4762,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9CD7CC",
      "embroidery_vi": "ngọc bích sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#499D90",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -4799,14 +4799,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CBC1EE",
      "embroidery_vi": "chàm sáng",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8F82BA",
      "embroidery_vi": "tím đậm vừa",
      "xml_name": "Soft Blue",
@@ -4836,14 +4836,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4D3AD",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#709968",
      "embroidery_vi": "xanh lá non đậm vừa",
      "xml_name": "Soft Green",
@@ -4876,14 +4876,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1BBDC",
      "embroidery_vi": "tím mận sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AA7AA4",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -4913,14 +4913,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D7C89B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9E8B4D",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -4950,14 +4950,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AFD5B3",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#699B70",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -4987,14 +4987,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#98D6D9",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#439CA0",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -5027,14 +5027,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ECBDA6",
      "embroidery_vi": "cam quả hồng trầm sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B77C5F",
      "embroidery_vi": "cam quả hồng trầm đậm vừa",
      "xml_name": "Soft Coral",
@@ -5064,14 +5064,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DABDE4",
      "embroidery_vi": "tím sáng",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A17DAE",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Violet",
@@ -5101,14 +5101,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0BAB4",
      "embroidery_vi": "hồng đất sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BA7872",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5138,14 +5138,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C9CE9F",
      "embroidery_vi": "ô liu sáng",
      "xml_name": "Soft Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8C9254",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -5178,14 +5178,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8D4AB",
      "embroidery_vi": "ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF955C",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -5215,14 +5215,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F4C7DC",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BE84A1",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -5252,14 +5252,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B7E2C7",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#6CA885",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -5289,14 +5289,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC6C9",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C58388",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5329,14 +5329,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC7CB",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C5838A",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5366,14 +5366,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2CEAF",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BC8E63",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -5403,14 +5403,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2CEAF",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BC8D63",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -5440,14 +5440,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D0DCB1",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#91A067",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -5480,14 +5480,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D6DAAE",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#999E62",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -5517,14 +5517,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A8E2E4",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#54A8AA",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Teal",
@@ -5554,14 +5554,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8CAEE",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF89B7",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -5591,14 +5591,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3CBF2",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A98ABD",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -5631,14 +5631,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC8C8",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8B8B",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5668,14 +5668,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC8C5",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8B88",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5705,14 +5705,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC8C6",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8B89",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -5742,14 +5742,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1C9E3",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A38CA5",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -5782,14 +5782,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCD2B3",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9E9577",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -5819,14 +5819,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DACCE9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9C8FAA",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -5856,14 +5856,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CBD1EF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8E93B0",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -5893,14 +5893,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E8CDB7",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AA8F7A",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -5933,14 +5933,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D8CDEA",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9A8FAC",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -5970,14 +5970,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DAD3B4",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9C9677",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -6007,14 +6007,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ECCABD",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8D80",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -6044,14 +6044,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DACCE9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9C8FAA",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -6084,14 +6084,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BE3D7",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#34AA9B",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Jade",
@@ -6121,14 +6121,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C3D1FF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7F91D6",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -6158,14 +6158,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FABFD8",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C7799C",
      "embroidery_vi": "hồng mẫu đơn dịu",
      "xml_name": "Rose",
@@ -6195,14 +6195,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3CAFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9788D0",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Blue",
@@ -6235,14 +6235,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCC7FB",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A385CA",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -6272,14 +6272,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FDC5AA",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CA815C",
      "embroidery_vi": "cam đào dịu",
      "xml_name": "Coral",
@@ -6309,14 +6309,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ABE2BF",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#59A87B",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -6346,14 +6346,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCD59C",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A39744",
      "embroidery_vi": "vàng chanh dịu",
      "xml_name": "Gold",
@@ -6386,14 +6386,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFC2B4",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CD7C6B",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Red",
@@ -6423,14 +6423,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A9D9FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#569CD0",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Blue",
@@ -6460,14 +6460,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B1D6FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#6199D4",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -6497,14 +6497,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FEBFCC",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CB798C",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Red",
@@ -6537,14 +6537,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E0CDF5",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A58CC0",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -6574,14 +6574,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3DCB0",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#95A064",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -6611,14 +6611,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ECD2AB",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4925E",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -6648,14 +6648,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC8C1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C5857D",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -6688,14 +6688,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCD8AC",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A19A5F",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -6725,14 +6725,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E5CBF1",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB8ABB",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -6762,14 +6762,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C8D4FD",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8695CB",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -6799,14 +6799,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BCE1C2",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#74A77D",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -6839,14 +6839,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4E2CB",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#68A88A",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -6876,14 +6876,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3D5AB",
      "embroidery_vi": "trắng ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A9975D",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -6913,14 +6913,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CBDDB5",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8AA26C",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Olive",
@@ -6950,14 +6950,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2CEAF",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BC8E63",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -6990,14 +6990,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8CBB7",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C3886F",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Coral",
@@ -7027,14 +7027,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8C7D2",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C38393",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Soft Red",
@@ -7064,14 +7064,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8C7D3",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C38394",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Soft Rose",
@@ -7101,14 +7101,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B1E3CF",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#63A98F",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -7141,14 +7141,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F3C7E0",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BC84A5",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -7178,14 +7178,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DBD9AC",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9F9B5F",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -7215,14 +7215,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E4D6AB",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AA975C",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -7252,14 +7252,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC9E9",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B587B0",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -7292,14 +7292,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFD0AD",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B89060",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -7329,14 +7329,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ACE3D7",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#5AA99A",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -7366,14 +7366,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D4D0FA",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9790C7",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -7403,14 +7403,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E4D5AB",
      "embroidery_vi": "trắng ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB965D",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -7443,14 +7443,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F7C6D8",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1839B",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Soft Rose",
@@ -7480,14 +7480,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8CAB8",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C38771",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Coral",
@@ -7517,14 +7517,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F7CBB4",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C18A6B",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Coral",
@@ -7554,14 +7554,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F4C7DC",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BE84A1",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -7594,14 +7594,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ECCABD",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8D80",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -7631,14 +7631,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1D4EF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8496B0",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -7668,14 +7668,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4D9E6",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#779CA8",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -7705,14 +7705,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DBD3B4",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9D9677",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -7745,14 +7745,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C9D2F0",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8C94B1",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -7782,14 +7782,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E6C9DD",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A88C9F",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -7819,14 +7819,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D5CEEC",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9890AD",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -7856,14 +7856,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC9C1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8C85",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -7896,14 +7896,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E5C9DF",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A78CA1",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -7933,14 +7933,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBCABB",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8D7F",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -7970,14 +7970,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9D7EC",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7C99AD",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -8007,14 +8007,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CAD1F0",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8D93B1",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -8047,14 +8047,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BFD6EF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8398B1",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -8084,14 +8084,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3CEED",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9691AE",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -8121,14 +8121,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E6C9DD",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A78CA0",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -8158,14 +8158,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC8CD",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE8B90",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -8198,14 +8198,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DDCAE6",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9F8DA8",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -8235,14 +8235,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3D0B4",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A59377",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Coral",
@@ -8272,14 +8272,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BFD5EF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8297B0",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -8309,14 +8309,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CAD9BB",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8D9B7E",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Olive",
@@ -8349,14 +8349,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B9D8EC",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7C9AAD",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -8386,14 +8386,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC8CD",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE8B90",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -8423,14 +8423,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1C9E4",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A38CA6",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -8460,14 +8460,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EAC8D6",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB8B99",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -8500,14 +8500,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC9C2",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8C85",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -8537,14 +8537,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D2D6B7",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#95997A",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -8574,14 +8574,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E5CFB4",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A79278",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -8611,14 +8611,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3D0B4",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A59377",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Coral",
@@ -8651,14 +8651,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C2D1FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7D92D6",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -8688,14 +8688,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC0D9",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C67A9E",
      "embroidery_vi": "hồng mẫu đơn dịu",
      "xml_name": "Soft Rose",
@@ -8725,14 +8725,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B8DFB3",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#6FA569",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -8762,14 +8762,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#99DFF1",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#32A5BE",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -8802,14 +8802,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A7E2C4",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#52A981",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -8839,14 +8839,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#99DFF1",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#32A5BE",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -8876,14 +8876,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A5DBFE",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#509ECE",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -8913,14 +8913,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCC7FC",
      "embroidery_vi": "tím sáng",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A285CB",
      "embroidery_vi": "tím dịu",
      "xml_name": "Violet",
@@ -8953,14 +8953,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F5C0E1",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C17AA8",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -8990,14 +8990,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F0C1E9",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BB7DB2",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -9027,14 +9027,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EAC3F0",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B47FBB",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -9064,14 +9064,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFC0BD",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CE7A77",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Red",
@@ -9104,14 +9104,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A7DAFF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#539DCF",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -9141,14 +9141,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BE3D6",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#36AA9A",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Jade",
@@ -9178,14 +9178,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9DE3D2",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#3BAA95",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Jade",
@@ -9215,14 +9215,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AFD7FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#5E9AD2",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -9255,14 +9255,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC2ED",
      "embroidery_vi": "tím mận sáng",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B87EB7",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -9292,14 +9292,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2CB9D",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BD8947",
      "embroidery_vi": "vàng xoài dịu",
      "xml_name": "Coral",
@@ -9329,14 +9329,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C7CFFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#858FD6",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Blue",
@@ -9366,14 +9366,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFC2B4",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CD7C6C",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Red",
@@ -9406,14 +9406,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9CDFF6",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#3BA4C3",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -9443,14 +9443,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B7D5FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#6A97D5",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -9480,14 +9480,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#97E1E9",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#2BA7B3",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -9517,14 +9517,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7C4F3",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B081C0",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -9557,14 +9557,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B8D3AA",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Soft Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#769864",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -9594,14 +9594,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9DD2E7",
      "embroidery_vi": "xanh băng sáng",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#4C97B2",
      "embroidery_vi": "xanh băng đậm vừa",
      "xml_name": "Teal",
@@ -9631,14 +9631,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C2C4F1",
      "embroidery_vi": "chàm sáng",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8486BE",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -9668,14 +9668,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEB9C3",
      "embroidery_vi": "hồng hoa đào sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B87685",
      "embroidery_vi": "hồng xuân đậm vừa",
      "xml_name": "Soft Red",
@@ -9708,14 +9708,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D9BDE5",
      "embroidery_vi": "tím sáng",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A07DAF",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -9745,14 +9745,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CBCD9E",
      "embroidery_vi": "ô liu sáng",
      "xml_name": "Soft Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8F9153",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Gold",
@@ -9782,14 +9782,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EAB9CD",
      "embroidery_vi": "hồng xuân sáng",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B47691",
      "embroidery_vi": "hồng xuân đậm vừa",
      "xml_name": "Soft Rose",
@@ -9819,14 +9819,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BD7CE",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#489D93",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Jade",
@@ -9859,14 +9859,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ADD5B4",
      "embroidery_vi": "rêu sáng",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#679B71",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -9896,14 +9896,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9FD7C5",
      "embroidery_vi": "ngọc bích sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#4F9D87",
      "embroidery_vi": "ngọc bích đậm vừa",
      "xml_name": "Soft Jade",
@@ -9933,14 +9933,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A2D7BF",
      "embroidery_vi": "ngọc bích sáng",
      "xml_name": "Soft Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#559D80",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -9970,14 +9970,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DDC69B",
      "embroidery_vi": "vàng nghệ dịu sáng",
      "xml_name": "Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A5884E",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -10010,14 +10010,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7C0A0",
      "embroidery_vi": "hổ phách sáng",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B18055",
      "embroidery_vi": "hổ phách đậm vừa",
      "xml_name": "Soft Coral",
@@ -10047,14 +10047,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EFBBAE",
      "embroidery_vi": "đất nung / gạch sáng",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B97969",
      "embroidery_vi": "đất nung / gạch đậm vừa",
      "xml_name": "Soft Red",
@@ -10084,14 +10084,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D7BEE7",
      "embroidery_vi": "tím sáng",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9E7EB1",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -10121,14 +10121,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9B9D1",
      "embroidery_vi": "hồng mẫu đơn sáng",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B27796",
      "embroidery_vi": "hồng mẫu đơn đậm vừa",
      "xml_name": "Soft Rose",
@@ -10161,14 +10161,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FBC5A7",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C88257",
      "embroidery_vi": "cam đào dịu",
      "xml_name": "Coral",
@@ -10198,14 +10198,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FEC2B0",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CC7D65",
      "embroidery_vi": "cam san hô dịu",
      "xml_name": "Red",
@@ -10235,14 +10235,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1C6F8",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A983C6",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -10272,14 +10272,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A2DBFC",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#49A0CB",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -10312,14 +10312,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#97E3E1",
      "embroidery_vi": "mòng két sáng",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#2BA9A9",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -10349,14 +10349,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#97E3E3",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#2BA9AB",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -10386,14 +10386,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFC1B9",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CE7B71",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Red",
@@ -10423,14 +10423,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F3CA9F",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BF884A",
      "embroidery_vi": "cam mơ dịu",
      "xml_name": "Coral",
@@ -10463,14 +10463,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFBFC6",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CD7984",
      "embroidery_vi": "hồng hoa đào dịu",
      "xml_name": "Red",
@@ -10500,14 +10500,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EAC3EF",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B47FBA",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -10537,14 +10537,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#99E3DD",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#2FA9A3",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Jade",
@@ -10574,14 +10574,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BCD4FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7295D6",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -10614,14 +10614,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CDD0EF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9093B0",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -10651,14 +10651,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CCD1EF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8F93B1",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -10688,14 +10688,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C6D2F0",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8995B1",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -10725,14 +10725,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC8C9",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8B8C",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -10765,14 +10765,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EACCB8",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB8F7C",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -10802,14 +10802,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EEC9C1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF8C85",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -10839,14 +10839,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBC8D5",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC8B98",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -10876,14 +10876,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3CEED",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9691AE",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -10916,14 +10916,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBC7D3",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8A96",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -10953,14 +10953,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E1C9E3",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A38CA5",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -10990,14 +10990,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9CCB7",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AA8F7B",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -11027,14 +11027,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBCABB",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AD8D7F",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Coral",
@@ -11067,14 +11067,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E4CFB4",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A69278",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -11104,14 +11104,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7CEB6",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A99079",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -11141,14 +11141,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DACCE9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9D8FAB",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -11178,14 +11178,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E6C9DD",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A88C9F",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -11218,14 +11218,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E7C8DA",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A98B9C",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -11255,14 +11255,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EBC8D5",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC8B98",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -11292,14 +11292,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC7CD",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AE8A90",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -11329,14 +11329,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D2D6B7",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#95997A",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -11369,14 +11369,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BFE1BE",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#79A679",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -11406,14 +11406,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C3E0BB",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7FA574",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -11443,14 +11443,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F4C7DD",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BE84A2",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -11480,14 +11480,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DDD8AC",
      "embroidery_vi": "vàng nhạt",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A29A5F",
      "embroidery_vi": "vàng nghệ dịu dịu",
      "xml_name": "Soft Gold",
@@ -11520,14 +11520,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D6D0FA",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9990C7",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -11557,14 +11557,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDD1AB",
      "embroidery_vi": "ngà",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B5915E",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -11594,14 +11594,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C0E1BE",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7BA678",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -11631,14 +11631,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#ABE3D9",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#59A99D",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Jade",
@@ -11671,14 +11671,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC8C1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C5857C",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Red",
@@ -11708,14 +11708,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B4E2CA",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#69A889",
      "embroidery_vi": "ngọc bích dịu",
      "xml_name": "Soft Green",
@@ -11745,14 +11745,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC8BE",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C58579",
      "embroidery_vi": "đất nung / gạch dịu",
      "xml_name": "Soft Red",
@@ -11782,14 +11782,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F8CBB5",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C2896C",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Coral",
@@ -11822,14 +11822,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CCDDB4",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8BA26B",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Olive",
@@ -11859,14 +11859,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D9CEF9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9D8EC5",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -11896,14 +11896,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D5DAAE",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Olive",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#989E62",
      "embroidery_vi": "ô liu dịu",
      "xml_name": "Soft Olive",
@@ -11933,14 +11933,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AAE1ED",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#57A6B7",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -11973,14 +11973,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F4CDB0",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BE8C66",
      "embroidery_vi": "cam quả hồng trầm dịu",
      "xml_name": "Coral",
@@ -12010,14 +12010,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BDE1C0",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#76A67B",
      "embroidery_vi": "xanh lá non dịu",
      "xml_name": "Soft Green",
@@ -12047,14 +12047,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E0CCF5",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A68BC0",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -12084,14 +12084,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C3E0BB",
      "embroidery_vi": "bạc hà nhạt",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7FA574",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -12124,14 +12124,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#98E0F0",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#30A6BC",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -12161,14 +12161,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9D09B",
      "embroidery_vi": "ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B29142",
      "embroidery_vi": "vàng chanh dịu",
      "xml_name": "Gold",
@@ -12198,14 +12198,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F5C0E2",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C07BAA",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -12235,14 +12235,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#97E3E3",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#2BA9AB",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Teal",
@@ -12275,14 +12275,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E3C5F6",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AB82C4",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -12312,14 +12312,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E0C6F9",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#A783C7",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -12349,14 +12349,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BDFF5",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#37A4C2",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -12386,14 +12386,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C1E6",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BD7DAF",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -12426,14 +12426,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F5C99F",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1874B",
      "embroidery_vi": "cam mơ dịu",
      "xml_name": "Coral",
@@ -12463,14 +12463,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFC0BD",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CE7A77",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Red",
@@ -12500,14 +12500,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D6CAFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9A88CF",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Violet",
@@ -12537,14 +12537,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9D09B",
      "embroidery_vi": "ngà",
      "xml_name": "Light Gold",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B29142",
      "embroidery_vi": "vàng chanh dịu",
      "xml_name": "Gold",
@@ -12577,14 +12577,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B3D7FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#6499D3",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -12614,14 +12614,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D3CAFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9788D0",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Blue",
@@ -12651,14 +12651,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FEC4AC",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CB7F5F",
      "embroidery_vi": "cam đào dịu",
      "xml_name": "Coral",
@@ -12688,14 +12688,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FAC0D9",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C67A9E",
      "embroidery_vi": "hồng mẫu đơn dịu",
      "xml_name": "Soft Rose",
@@ -12728,14 +12728,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FCBFD3",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C97996",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Rose",
@@ -12765,14 +12765,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9EDDF9",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#41A2C7",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Teal",
@@ -12802,14 +12802,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C0D2FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7993D6",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Blue",
@@ -12839,14 +12839,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C8CFFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#868FD4",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Blue",
@@ -12879,14 +12879,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D0CCFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#928AD2",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Blue",
@@ -12916,14 +12916,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FDBFCF",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CA7990",
      "embroidery_vi": "hồng xuân dịu",
      "xml_name": "Rose",
@@ -12953,14 +12953,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFBFCA",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CC798A",
      "embroidery_vi": "hồng hoa đào dịu",
      "xml_name": "Red",
@@ -12990,14 +12990,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FDC5AA",
      "embroidery_vi": "kem đào",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CA815C",
      "embroidery_vi": "cam đào dịu",
      "xml_name": "Coral",
@@ -13030,14 +13030,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CAE8FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#82AAC9",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Blue",
@@ -13067,14 +13067,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD7E1",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C794A2",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -13104,14 +13104,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BAF0EB",
      "embroidery_vi": "xanh ngọc sương",
      "xml_name": "Light Jade",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#75B2AE",
      "embroidery_vi": "mòng két dịu",
      "xml_name": "Soft Jade",
@@ -13141,14 +13141,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#E9DBFF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Violet",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AC9BC6",
      "embroidery_vi": "tím dịu",
      "xml_name": "Soft Violet",
@@ -13181,14 +13181,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FDDCBD",
      "embroidery_vi": "kem mơ",
      "xml_name": "Light Coral",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C19D7A",
      "embroidery_vi": "hổ phách dịu",
      "xml_name": "Soft Coral",
@@ -13218,14 +13218,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#DCE1FF",
      "embroidery_vi": "tím khói nhạt",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#9BA1CD",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -13255,14 +13255,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD7DB",
      "embroidery_vi": "hồng phấn nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C9949A",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
@@ -13292,14 +13292,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1EAFF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Teal",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#7BADC5",
      "embroidery_vi": "xanh băng dịu",
      "xml_name": "Soft Teal",
@@ -13332,14 +13332,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#D8E2FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#95A3CD",
      "embroidery_vi": "chàm dịu",
      "xml_name": "Soft Blue",
@@ -13369,14 +13369,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FFD6EA",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C395AC",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Rose",
@@ -13406,14 +13406,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#CCE7FF",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#85A9CA",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -13443,14 +13443,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#FBD6F2",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Orchid",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#BE96B5",
      "embroidery_vi": "tím mận dịu",
      "xml_name": "Soft Orchid",
@@ -13483,14 +13483,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C1D3F5",
      "embroidery_vi": "xanh sương",
      "xml_name": "Light Blue",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#8396B7",
      "embroidery_vi": "lam ngọc dịu",
      "xml_name": "Soft Blue",
@@ -13520,14 +13520,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#EDC6D9",
      "embroidery_vi": "hồng tím phấn",
      "xml_name": "Light Rose",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#AF889B",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Rose",
@@ -13557,14 +13557,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#C5DAB9",
      "embroidery_vi": "kem chanh",
      "xml_name": "Light Green",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#889D7B",
      "embroidery_vi": "rêu dịu",
      "xml_name": "Soft Green",
@@ -13594,14 +13594,14 @@
    },
    "by_tier": {
     "light": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#F2C6C1",
      "embroidery_vi": "hồng đất nhạt",
      "xml_name": "Light Red",
      "note": "hair flower not derived yet (L2013 enforce/ramp per tier runs only after approval)"
     },
     "deep": {
-     "status": "proposal_L2287",
+     "status": "approved_L2290",
      "embroidery_hex": "#B48983",
      "embroidery_vi": "hồng đất dịu",
      "xml_name": "Soft Red",
