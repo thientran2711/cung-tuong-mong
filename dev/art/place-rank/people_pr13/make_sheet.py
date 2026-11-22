@@ -1,5 +1,5 @@
 """PEOPLE1 (owner 22/11, 0 cr): pr13 rooms with the in-game people, Fold + iPad side by side, 5 rooms per JPEG sheet.
-Reuses dev/art/place-rank/stage_exact/exact.py (Fold, fold.json) and ipad_tags.py (iPad dư đồ 1162x599 + tags).
+Reuses stage_exact/fold755.py (Fold PORTRAIT 755x1000, fold755.json, template = live screenshot WD/tpl.png) and ipad_tags.py (iPad dư đồ 1162x599 + tags).
 python3 make_sheet.py OUT.jpg WORKDIR FIGDIR CODE:KEY [CODE:KEY ...]   (rooms downloaded to WORKDIR/rooms/<key>.webp)"""
 import sys, os, subprocess
 from PIL import Image, ImageDraw, ImageFont
@@ -13,12 +13,12 @@ def label(code, key):
     c, r = k.split('-cung-')
     return f"{code} · {CUNG[c]} Cung — {RANK[r]} — {'phòng ngủ' if ngu else 'chính điện'} · Fold | iPad"
 F = '/usr/share/fonts/truetype/dejavu/'; fb = ImageFont.truetype(F + 'DejaVuSans-Bold.ttf', 24)
-PWF, PWI, G = 700, 960, 12
+PWF, PWI, G = 520, 1000, 12
 rows = []
 for code, key in items:
     room = f'{wd}/rooms/{key}.webp'
     a, b = f'{wd}/{key}-fold.jpg', f'{wd}/{key}-ipad.jpg'
-    subprocess.run(['python3', f'{SE}/exact.py', room, f'{SE}/fold.json', a, '1', figd.rstrip('/') + '/'], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(['python3', f'{SE}/fold755.py', room, f'{wd}/tpl.png', a, figd], check=True, stdout=subprocess.DEVNULL)  # owner L2318: true PORTRAIT 755x1000
     subprocess.run(['python3', f'{SE}/ipad_tags.py', room, b, figd], check=True, stdout=subprocess.DEVNULL)
     fa = Image.open(a); fi = Image.open(b)
     fa = fa.resize((PWF, round(fa.height * PWF / fa.width)), Image.LANCZOS); fi = fi.resize((PWI, round(fi.height * PWI / fi.width)), Image.LANCZOS)
@@ -30,5 +30,5 @@ for lab, fa, fi in rows:
     sh.paste(fa, (G, y)); sh.paste(fi, (G * 2 + PWF, y)); y += max(fa.height, fi.height) + G
 for q in (86, 82, 78, 74, 70):
     sh.save(out, quality=q, optimize=True)
-    if os.path.getsize(out) <= 2900 * 1024: break
+    if os.path.getsize(out) <= 3000 * 1024: break
 print(out, sh.size, os.path.getsize(out) // 1024, 'KB q', q)
