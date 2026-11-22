@@ -1,0 +1,11 @@
+# D20 — coop-real-port (sonnet, TEST-ONLY, SMALL)
+PRIORITY #1 CHECK ('coop-real' / 'coop-setup-scan'): OD 0 | ledger 0 | main dev/test/lib/coop-real.js + dev/test/coop-setup-scan.js (LIVE 40cc2b92, from D coop-guest-staff) | review/* review/coop-flakes (worker session_01964izE5gLnvQcVeUAZdUGJ edits coop-pets.js, coop-guest-maid.js, maybe lib/coop-real.js) | claims coop-flakes (D #20) — this item = follow-up (b) of D #19/#20.
+
+READ FIRST, in full: dev/rules/START_CORE.md + dev/rules/START_WORKER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w), then only the topic files your task touches. All 18 laws apply verbatim.
+
+TASK (LAW 11 whole family): on LIVE main, run `node dev/test/coop-setup-scan.js`. Every driver marked «RISK: screen-only set-up, random origin» (≈30) must make its set-up REAL through dev/test/lib/coop-real.js (consort-start origin + REAL check after one merged week), the way coop-pets.js / coop-guest-maid.js do on LIVE. Keep each driver's own assertions; do not weaken any check.
+EXCLUDE (another worker owns them): coop-pets.js, coop-guest-maid.js, coop-guest-men.js. lib/coop-real.js: ADD helpers only, never change an existing helper's behaviour (coop-flakes may edit it; whichever lands second re-merges).
+TEST-ONLY: no dev/build or game file changes. If a driver fails on LIVE after the port, report it (driver, step, log) — do not fix game code.
+GATES: coop-setup-scan shows risk 0 (except the excluded files); each ported driver ≥2 clean runs on your branch AND compared with LIVE; coop-e2e; quickcheck.sh. Memory tight: one browser test at a time.
+DELIVER: push review/coop-real-port only (never main, no PR). Report dev/handover/reports/coop-real-port.md on the handover branch (flock /home/user/wt/fetch.lock git fetch --depth=30; checkout -f -B; append; push; never rebase): before/after scan table, per-driver runs, any real failures found, last line «SẴN SÀNG KIỂM review/coop-real-port <full sha>». Then send_message Foreman D (newest PICKUP line in dev/handover/FOREMAN_D_STATUS.md).
+ROLLOVER: at START_CTX % + 25 % of the window (ceiling 60 %) write a handover in your report and tell Foreman D; the coordinator opens the successor. Sparse worktree under /home/user/wt; never full-clone.
