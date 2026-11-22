@@ -119,7 +119,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     for(const f of Object.keys(h)){const N=+process.env.TRACE_N||160;console.log('TRACE',k,o.id,f,'b='+String(JSON.stringify(o.b[f])).slice(0,N),'a='+String(JSON.stringify(o.a[f])).slice(0,N),'host='+String(h[f]).slice(0,N),'her='+String(g[f]).slice(0,N))}}
    for(const o of r.ops.filter(x=>x.t!=='npc'))console.log('TRACE',k,'op',o.t,JSON.stringify(o).slice(0,300))}
   if(!good)ok(false,'C2 '+k,{same:r.same,got,chk,hostSame,ops:r.ops.map(o=>o.t+':'+o.id),glog:await G.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.lastId,COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.dr]),hlog:await H.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.stat.applied,COOPW.thin.held&&COOPW.thin.held('b'),(COOPW.thin.D&&COOPW.thin.D.log||[]).slice(-4)])})}
- if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`C2 every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);
+ /* level >= 6: part C's act frame + `do npc` ops are retired for runAct by design (jcoopthinf header: her act is an F intent, tested by coop-thin-f1):
+    no act needs to give a C op; each one still must leave her world untouched on her phone (the per-act C2 check above) */
+ if(!process.env.NOACT)ok((LVL>=6||nAct>0)&&nAct===nOk,`C2${LVL>=6?' (level '+LVL+': acts are F intents, C ops retired)':''} every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);
  /* C3: a person she causes */
  await sync();
  const c3=await G.p.evaluate(()=>{const C=COOPW.thin.C;let id=null,name=null;C.frame('act',()=>{const n=newRival(0);try{Object.assign(n,drawFace())}catch(e){}rivals.push(n);id=n.id;name=n.name});return {id,name,inList:rivals.some(v=>v.id===id),tmp:id>=1000}});
