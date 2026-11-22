@@ -4,7 +4,8 @@ room_vivid.py: no redraw, NO hue shift. 1. chroma x k in YCbCr (hue angle kept),
 air mix. python3 room_calm.py IN OUT {nhe|vua}"""
 import sys, numpy as np
 from PIL import Image
-P = {'nhe': dict(k=0.84, top=0.70, ease=0.05, air=0.03), 'vua': dict(k=0.76, top=0.62, ease=0.08, air=0.05)}
+P = {'nhe': dict(k=0.84, top=0.70, ease=0.05, air=0.03), 'vua': dict(k=0.76, top=0.62, ease=0.08, air=0.05),
+     'tuoi': dict(k=1.14, top=1.04, ease=-0.03, air=0.0)}   # owner L2381: NO desaturation; fresher than the original, soft limit on the strongest colours (no neon)
 def calm(im, k, top, ease, air):
     a = np.asarray(im.convert('RGB'), dtype=float) / 255
     Y = a @ [0.299, 0.587, 0.114]

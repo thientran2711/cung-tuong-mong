@@ -7,11 +7,11 @@ import os, sys, json, subprocess, shutil
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..')); os.chdir(ROOT)
 R = 'img/_review/place-rank/places-l2370'; ST = R + '/swap'; os.makedirs(ST, exist_ok=True)
 D = json.load(open('dev/art/place-rank/prompts_places_L2370.json'))
-# PLACES3 (L2376): the newest version of a place wins: base < -r2 < -r3; '-calm' = 0 cr calm grade of the same picture (Ngự hoa viên).
+# PLACES3 (L2376): the newest version of a place wins: base < -r2 < -r3; '-fresh' = 0 cr fresh grade of the same picture (Ngự hoa viên).
 import re
-D['ngu-hoa-vien-calm'] = dict(D['ngu-hoa-vien'], code=D['ngu-hoa-vien']['code'] + ' calm')
-def _base(k): return re.sub(r'-(r\d+|calm)$', '', k)
-def _rank(k): m = re.search(r'-r(\d+)$', k); return int(m.group(1)) if m else (9 if k.endswith('-calm') else 0)
+D['ngu-hoa-vien-fresh'] = dict(D['ngu-hoa-vien'], code=D['ngu-hoa-vien']['code'] + ' fresh')   # owner L2381: calm grade undone -> fresh grade
+def _base(k): return re.sub(r'-(r\d+|calm|fresh)$', '', k)
+def _rank(k): m = re.search(r'-r(\d+)$', k); return int(m.group(1)) if m else (9 if k.endswith('-fresh') else 0)
 best = {}
 for k in D:
     if _rank(k) and not os.path.exists(f'{R}/{k}-ha-sang.webp'): continue
