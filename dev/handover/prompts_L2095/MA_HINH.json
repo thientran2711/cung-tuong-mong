@@ -386,5 +386,7 @@
  "M2370-27": "M2370-27_thuong-thu-phong-r3_ha_sang.txt (= M2370-19 + owner L2376 sửa phòng)",
  "M2370-28": "M2370-28_phong-cung-nu-r3_ha_sang.txt (= M2370-23 + owner L2381)",
  "M2370-29": "M2370-29_a-ca-so-r3_ha_sang.txt (= M2370-22 + owner L2381)",
- "M2370-30": "M2370-30_thuong-thu-phong-r4_ha_sang.txt (= M2370-27 + owner L2381)"
+ "M2370-30": "M2370-30_thuong-thu-phong-r4_ha_sang.txt (= M2370-27 + owner L2381)",
+ "M2370-31": "M2370-31_a-ca-so-r4_ha_sang.txt (= M2370-29 + owner L2384 / HIST1 luật phòng a ca)",
+ "M2370-32": "M2370-32_thuong-thu-phong-r5_ha_sang.txt (= M2370-30 + owner L2384 / HIST1 luật phòng a ca)"
 }

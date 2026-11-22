@@ -53,3 +53,13 @@ Newest per place: phong-cung-nu←M2370-28, a-ca-so←29, lanh-cung←03, ngu-ho
 Verified live: a-ca-so / phong-cung-nu / ngu-hoa-vien return 2688×1386 from the CDN.
 FOR MAIN (not swapped): Nội vụ phủ (no img/nvp-ha-sang.webp; live has nvp-v4-* → which key?), Từ Ninh bedroom M2370-24 (approved by her; needs a code hook-up, no live file). Only ha-sang was swapped; the other 15 season×buổi variants per place are still old (later job).
 Total PLACES3: 10 gens = 1 350 cr.
+
+## L2384 (owner + HIST1 prince rule @e80219f; coordinator ROOT-C5 session_01D3E3Na19R1KD7i2QJSJgsf). 2 gens = 270 cr.
+| code | key | gen id | floor % | what |
+|---|---|---|---|---|
+| M2370-31 | a-ca-so-r4 | vQG5MOsa47 | 12.1 | layout/embroidery richness kept; dragons → qilin + bats among clouds + waves + pine; zitan pelmet; thin gold line only; no yellow |
+| M2370-32 | thuong-thu-phong-r5 | dt9fGgBXSL | 26.0 (HIGH, wide empty floor in front) | moderate: plum/orchid/bamboo curtains, narrow key-fret border, 2 plain lanterns, unpainted rosewood, few ornaments; bats-and-clouds beam |
+OLD|NEW sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l2370/people/L2385-old-new.jpg
+Builder bug fixed: rerunning prompts_places_L2376.py renumbered used codes (it deleted its own entries and numbered them by len(OUT)). Codes are now frozen (code_for); no pushed file was changed.
+Swap: waiting for the owner to see the sheet (ROOT-C5), then `python3 dev/art/place-rank/swap_L2370.py --go` (r4/r5 win automatically).
+PLACES3 total: 15 gens = 2 025 cr.
