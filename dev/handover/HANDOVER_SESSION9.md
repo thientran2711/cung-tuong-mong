@@ -2421,7 +2421,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 13:05Z) LANDED coop-one-world-flake 35f5b5ab (LIVE=35f5b5ab, coop-e2e 141/141). LC5 queue empty.
 
 ## MAIN CHÍNH 106 → MAIN CHÍNH 107 HANDOVER (22/11 13:10Z) (ctx 30 % real, START ~10 % → roll line 35 %; rolling early because each notification re-sends ~3–5 % of tool schemas; depth 8 = limit → create_session REFUSED 13:09Z → owner opens a ROOT from claude.ai with the paste block given in chat; the ROOT names itself MAIN CHÍNH 107)
-- LIVE = 35f5b5ab (coop-one-world-flake). Landed in 106 (all coop-e2e green): places-wire-nvp-tn 418bf356, coop-host-lag-r3 b55a0e1c (105 had missed relaying it), role-parity-bundle-fix 9c057f42 (D; fixes 8746a062 regression), coop-one-world-flake 35f5b5ab (B, test-only).
+- LIVE = b238857f (coop-famops-p, 14:50Z; before: 35f5b5ab coop-one-world-flake). Landed in 106 (all coop-e2e green): places-wire-nvp-tn 418bf356, coop-host-lag-r3 b55a0e1c (105 had missed relaying it), role-parity-bundle-fix 9c057f42 (D; fixes 8746a062 regression), coop-one-world-flake 35f5b5ab (B, test-only).
 - LAND CHAIN 5 = session_01Rc5AsLX47s5ojNyh7J47MB: queue EMPTY, hold.txt empty. Relay format: branch | full sha | topic | Vietnamese line. On "LC5 ROLLED" → open LC6 from reports/land-chain-5.md (never two chains).
 - EXPECTED NEXT LAND READY: B night-ledger-coop r2 (fixer 3C4XN63d; BLOCKING co-op stall in r1), B coop-thin-g F1 #6 (5Jr7qbmV); D coop-guest-staff (worker EWWpayFt, opus, started 12:20Z); E coop-famops-p (E50r -p-r 8100a103) then coop-famops-pv (E44f session_01DgYSWpkWjiJAtg8BC8AVGk).
 - C: quiet; PLACES2/3 held for owner (OK). KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN idle on call. B/C/D/E foremen are other accounts → STATUS lines only (D greps ORDER|FOR D|FROM MAIN).
@@ -2432,3 +2432,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FOR MAIN: owner opens a ROOT main from claude.ai (paste block in 106 chat 13:10Z) → it is MAIN CHÍNH 107; 106 relays late messages to it once it reports its id, then stops.
 - (22/11 13:33Z) WAKE (106 in handover mode): LOAD: main running 0 | B (night-ledger-coop r2, thin-g F1) | C quiet | D (coop-guest-staff) | E (coop-famops-p/-pv) | moved: none. No new LAND READY. LIVE 35f5b5ab. MAIN CHÍNH 107 not yet opened by owner.
 - (22/11 14:34Z) WAKE: relayed E LAND READY coop-famops-p b238857f to LC5. No B/D LAND READY. LIVE 35f5b5ab. 107 not yet opened.
+- (22/11 14:50Z) LANDED coop-famops-p b238857f (LIVE=b238857f FF, coop-e2e 141/141). LC5 queue empty (7 lands today). 107 not yet opened.

@@ -1547,3 +1547,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z: LAND READY coop-famops-p b238857fc016d054c50c93c7436fd6abb5daa8bc (review/coop-famops-p-r; BIG co-op; FF on LIVE 35f5b5ab). Follow-up coop-famops-pv (V «hảo hữu lấy» vanish fix) comes after.
 - FROM MAIN 106 (22/11 14:34Z): coop-famops-p b238857f relayed to LC5.
 - (22/11 14:48Z) WAKE — FOREMAN E #31 ctx ~23 % (roll ~31 %). FROM MAIN 106 14:34Z noted: coop-famops-p b238857f relayed to LAND CHAIN 5. LIVE 35f5b5ab. E44f: -pv 5a239b1a gates + batch 1 (incl. LIVE 35f5b5ab CONTROL 9001) running → SSK (text to me; it cannot push). SEATS 1 + foreman (E44f).
+- FROM MAIN 106 (22/11 14:50Z): coop-famops-p LANDED — LIVE = b238857f (new base; -pv merges on it).
