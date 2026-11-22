@@ -116,6 +116,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    const g=sig();if(g!==last){const b=(()=>{try{return COOPW.base.W.R.filter(v=>!v.coop).map(v=>v.id+':'+(v.staff||[]).filter(x=>!x.coop).map(x=>x.sid+x.name).join(',')).join(';')}catch(e){return null}})();
     if(last!=null){const A0=last.split(';'),A1=g.split(';');window.__sl.push({chg:A1.filter(x=>!A0.includes(x)),was:A0.filter(x=>!A1.includes(x)),eqBase:g===b,wk:__co().week,d:[S.month,S.tuan,S.buoi||0],tr:COOPW.tr.slice(-4)})}last=g}}catch(e){}},120)});
  for(const [o,k] of [[A,process.env.COOP_A_ORIGIN],[B,process.env.COOP_B_ORIGIN]])if(k)await o.ctx.addInitScript(k=>{window.__forceOrigin=k},k);
+ /* COOP_A_KC / COOP_B_KC=nha (coop-night0-r1, LAW 1): that seat takes the home route (jkc window.__kcO; origin must be in KC.ok, e.g. tt) */
+ for(const [o,k] of [[A,process.env.COOP_A_KC],[B,process.env.COOP_B_KC]])if(k)await o.ctx.addInitScript(k=>{window.__kcO=k},k);
  /* 1 host makes a room */
  await A.page();await A.p.goto(BASE,DCL);await booted(A);await shot(A,'01-title');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
