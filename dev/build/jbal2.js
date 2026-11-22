@@ -344,7 +344,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (j42 srvRise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
