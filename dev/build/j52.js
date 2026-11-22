@@ -36,7 +36,7 @@ function nlFaces(d){const H=nlHolders();let ch=false;const F=d.faces=d.faces||{h
 const _start52=start;
 function nlRun(d){const mr=Math.random;NLR={face:nlRng((d.seed^0x5bd1e995)>>>0)};Math.random=nlRng(d.seed);rid=0;try{if(typeof sidN!=="undefined")sidN=0}catch(e){}
  try{_start52()}finally{Math.random=mr;NLR=null}}
-function nlFigsReady(){try{return typeof FIGSIG==="undefined"||FIGSIG!==""}catch(e){return true}}
+function nlFigsReady(){try{return typeof FIGSIG==="undefined"||FIGSIG!==""||!!(window.KCDN&&KCDN.m1fail>0)}catch(e){return true}}  /* review/coop-fig-retry-r2: a FIGURES read that already FAILED does not hold the card (the loader retries in the background, the figures fill in via render()) = as fast as before the retry existed */
 function nlBegin(){const go=()=>{const d=nlGet();NLP={seed:d.seed};nlRun(d);if(d.re)S.nlRe=d.re;nlFaces(d);nlCard()};
  if(nlFigsReady())return go();let n=0;const t=setInterval(()=>{if(nlFigsReady()||++n>=25){clearInterval(t);go()}},100)}
 start=function(){if(window.__nlInner)return _start52.apply(this,arguments);return nlBegin()};
