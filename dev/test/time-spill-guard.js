@@ -65,7 +65,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  /* SEEDED (reviewer time-spill-r1 follow-up, flake 2/56): the life and every roll in the checks come from one seeded RNG (env SEED,
     default 7), like coop-one-world.js, so a FAIL replays exactly: SEED=<n> node dev/test/time-spill-guard.js <root> */
  const SEED=+process.env.SEED||7;console.log('seed '+SEED);
- await F.evaluate(sd=>{let x=sd;window.__tsgRnd=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};Math.random=window.__tsgRnd},SEED);
+ /* coop-one-world-flake 22/11 (LAW 11 family): the NPC agents decide in 3 ms wall-clock slices (BAL.ag.perf.slice); a loaded CPU lets fewer
+    decide per buổi and the seeded stream shifts. window.__agAll (the game's own switch) runs every slice at once: the same run on any CPU */
+ await F.evaluate(sd=>{let x=sd;window.__tsgRnd=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};Math.random=window.__tsgRnd;window.__agAll=1},SEED);
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;/* a consort life (the flake: a random life could be a maid, isSrv, where the consort gate greeting does not apply) */window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
  await F.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name&&!document.querySelector('#modal:not([hidden])'),null,{timeout:30000});/* real condition (the life exists, no dialog up), not an 800 ms timer */
  const R=await F.evaluate(()=>{if(window.__tsgRnd)Math.random=window.__tsgRnd;const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
