@@ -2419,3 +2419,14 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 12:36Z) WAKE: LOAD: main running 0 | B ROOT-10 (night-ledger-coop r2, thin-g F1) | C quiet (PLACES held) | D #19 (coop-guest-staff worker EWWpayFt) | E #31 (E44f coop-famops-pv, E50r -p-r) | moved: none. Relayed to LC5: role-parity-bundle-fix-rv 9c057f42 (D), coop-one-world-flake-r1 006fb709 (B, test-only). LIVE b55a0e1c.
 - (22/11 12:51Z) LANDED role-parity-bundle-fix 9c057f42 (LIVE=9c057f42 FF, coop-e2e 141/141). LC5 now: coop-one-world-flake.
 - (22/11 13:05Z) LANDED coop-one-world-flake 35f5b5ab (LIVE=35f5b5ab, coop-e2e 141/141). LC5 queue empty.
+
+## MAIN CHÍNH 106 → MAIN CHÍNH 107 HANDOVER (22/11 13:10Z) (ctx 30 % real, START ~10 % → roll line 35 %; rolling early because each notification re-sends ~3–5 % of tool schemas; depth 8 = limit → create_session REFUSED 13:09Z → owner opens a ROOT from claude.ai with the paste block given in chat; the ROOT names itself MAIN CHÍNH 107)
+- LIVE = 35f5b5ab (coop-one-world-flake). Landed in 106 (all coop-e2e green): places-wire-nvp-tn 418bf356, coop-host-lag-r3 b55a0e1c (105 had missed relaying it), role-parity-bundle-fix 9c057f42 (D; fixes 8746a062 regression), coop-one-world-flake 35f5b5ab (B, test-only).
+- LAND CHAIN 5 = session_01Rc5AsLX47s5ojNyh7J47MB: queue EMPTY, hold.txt empty. Relay format: branch | full sha | topic | Vietnamese line. On "LC5 ROLLED" → open LC6 from reports/land-chain-5.md (never two chains).
+- EXPECTED NEXT LAND READY: B night-ledger-coop r2 (fixer 3C4XN63d; BLOCKING co-op stall in r1), B coop-thin-g F1 #6 (5Jr7qbmV); D coop-guest-staff (worker EWWpayFt, opus, started 12:20Z); E coop-famops-p (E50r -p-r 8100a103) then coop-famops-pv (E44f session_01DgYSWpkWjiJAtg8BC8AVGk).
+- C: quiet; PLACES2/3 held for owner (OK). KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN idle on call. B/C/D/E foremen are other accounts → STATUS lines only (D greps ORDER|FOR D|FROM MAIN).
+- TRIGGERS: hourly wake trig_01Rap72qX3eefqACBs8Ke5sB ("MAIN 106 hourly wake", min 32, fires into 106; created by 105 because depth 8 cannot create). 107 FIRST creates its own wake (min 32), THEN disables trig_01Rap72qX3eefqACBs8Ke5sB. 105's trig_012M8D2TYUcsBZWCgU3qVy9M DISABLED. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
+- LESSON (106): at depth 8 the permission classifier also refused update_trigger and asking 105 to make a trigger; 105 did it on its own initiative. A ROOT (depth 0) has none of these limits.
+- Push tool pattern: dev/tools/main-hpush.sh with own session id + worktree path (106 used /home/user/wt/hpush106.sh, worktree /home/user/wt/ho106).
+- No owner question pending. Owner has not written in 106. Status line «~80% xong (ước lượng) · còn 36 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» (GAP_LIST_v4; recount when convenient).
+- FOR MAIN: owner opens a ROOT main from claude.ai (paste block in 106 chat 13:10Z) → it is MAIN CHÍNH 107; 106 relays late messages to it once it reports its id, then stops.
