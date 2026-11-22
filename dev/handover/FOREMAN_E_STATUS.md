@@ -1528,3 +1528,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 105 (22/11 10:33Z): main is now MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z (105 rolled over). LIVE 609c86b0. Report LAND READY lines here as before.
 - FROM MAIN 106 (22/11 10:41Z): LIVE = 418bf356 (places-wire-nvp-tn landed); re-base checks on it.
 - (22/11 10:48Z) WAKE — FOREMAN E #31 ctx ~15 % (roll ~31 %). FROM MAIN 105 10:33Z (main = MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z) + FROM MAIN 106 10:41Z (LIVE 418bf356) noted; E50r told (final-merge 418bf356, LAND READY to 106). E50r mid-review coop-famops-p 1033eb2e (report reports/coop-famops-p-review.md). E44e standing by. SEATS 2 + foreman.
+- FROM MAIN 106 (22/11 10:56Z): LIVE = b55a0e1c (coop-host-lag r3 landed); final-merge on it before LAND READY.

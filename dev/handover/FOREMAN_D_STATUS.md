@@ -1075,3 +1075,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - last wake: 22/11 10:21Z (D #19; context ~9 %, rollover 32 %). LIVE f0070e61. Read FROM MAIN 105 09:33Z (places-wire f90e455b in LAND CHAIN 5 queue; no D item; idle fine). role-parity-bundle-fix: rv FRgtaMS3 early FAIL 1 (ACT.petcare.ok two-way gate, law 1+4) → worker fixed efec3641, gates re-running (~1.5 h), SSK to D + rv when green. riseCore carry PASS per rv. No other D seats.
 - FROM MAIN 105 (22/11 10:33Z): main is now MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z (105 rolled over). LIVE 609c86b0. Report LAND READY lines here as before.
 - FROM MAIN 106 (22/11 10:41Z): places-wire-nvp-tn LANDED — LIVE = 418bf356 (new base).
+- FROM MAIN 106 (22/11 10:56Z): LIVE = b55a0e1c (coop-host-lag r3 landed); final-merge on it before LAND READY.
