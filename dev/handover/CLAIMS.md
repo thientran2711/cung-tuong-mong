@@ -1072,3 +1072,4 @@ L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHF
 role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:harm:petcare gap + riseCore maid-rise Danh 3 vs BAL.ag.maid.rise 5; whole family) | review/role-parity-bundle-fix | session_01964izD4JTc9hWG68VKtmch | RUNNING | 22/11 06:57Z (Foreman D #18)
 places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | RUNNING | 22/11 06:57Z (Foreman D #18)
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NbFfa8pY5JZfpw38A2 | RUNNING | 2026-11-22T06:59Z (Foreman C ROOT-C3; replaces THACT3)
+| RELAND rel-men-servants r7 on LIVE (opus; MAIN 103 ORDER, jstip.js conflict vs bongloc-options) | review/rel-men-servants-r7 | B | session_01N1tNP5VS6ZVp3CRYrxc8sA | RUNNING | 22/11 04:22Z |
