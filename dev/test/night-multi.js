@@ -70,11 +70,17 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   Math.random=()=>.001;try{const un=T.only(S);try{T.endDay()}finally{un()}}finally{Math.random=mr;relAdd=ra;keepRobbed=kr}
   const M=BAL.steal.m.road;out.rob={hit,base:-M.rel,extra:-Math.round(M.rel*(BAL.steal.keep.oan-1)),B:S.tonight!=="me"};T.fin();return out});
  ok("5 defence: kept → keepNoSteal; robbed → keepRobbed",r.kept.kg&&r.kept.kg[0]===r.kept.want&&r.kept.kg[1]>0&&r.rob.hit===r.rob.extra&&r.rob.B,r);
- /* 6. the choice cards print the BAL numbers: attacker sees each mode's own loss; the flipped one sees keep.rung / keep.gain */
- r=await p.evaluate(()=>{const L=T.setup();const [A]=L;T.ch="Thôi";T.commitA(A);const att=T.opts;T.expA=T.exp;const L2=T.setup();T.ch="Thôi";const un=T.only(S);try{T.endDay()}finally{un()}const def=T.opts;T.fin();
-  const has=(o,n,s)=>!!(o||[]).find(x=>x.n===n&&String(x.x||"").includes(s));const E=T.expA;
-  return{ax:att&&att.map(x=>x.x),E,att:att&&att.map(x=>x.n),def:def&&def.map(x=>x.n),f:has(att,"Tranh sủng",E.f)&&has(att,"Tranh sủng",E.fk),r:has(att,"Chặn ngự giá",E.r)&&has(att,"Chặn ngự giá",E.rk)&&has(att,"Chặn ngự giá",E.rw),
-   k:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)&&has(def,"Giữ chân Hoàng thượng",`Sủng +${BAL.steal.keep.gain}`)}});
+ /* 6. the choice cards print the BAL numbers: attacker sees each mode's own loss; the flipped one sees keep.rung / keep.gain.
+    Law 4 (shown == applied): her Sủng goes through sg() (Hoàng thượng nồng nàn ×1.3, lạnh lùng ×.7 on gains), so the defence card prints
+    sgStat(keep.gain), not the raw BAL number. The old check typed «Sủng +${keep.gain}» and went red whenever start() drew an Emperor with
+    one of those traits (night-multi-kem). Now: for EACH trait set the number on the card == the Sủng keepNoSteal really adds. */
+ r=await p.evaluate(()=>{const L=T.setup();const [A]=L;T.ch="Thôi";T.commitA(A);const att=T.opts;T.expA=T.exp;const has=(o,n,s)=>!!(o||[]).find(x=>x.n===n&&String(x.x||"").includes(s));const E=T.expA;
+  const K={};let def=null;for(const tr of [[],["nongnay"],["lanhlung"],["nongnay","lanhlung"]]){T.setup();S.emp.traits=tr.slice();T.ch="Thôi";const un=T.only(S);try{T.endDay()}finally{un()}def=T.opts;
+   const o=(def||[]).find(x=>x.n==="Giữ chân Hoàng thượng");const m=/không ai giành được thì Sủng[\s\u00a0]([+\-−]\d+)/.exec(String(o&&o.x||""));
+   S.emp.traits=tr.slice();const s0=S.sung;S.sung=50;keepNoSteal(S);const applied=S.sung-50;S.sung=s0;/* the Sủng the kept night really adds (keepNoSteal → ap → apply → sg) */
+   K[tr.join("+")||"none"]={shown:m?+m[1].replace("−","-"):null,applied,rung:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)}}T.fin();
+  return{ax:att&&att.map(x=>x.x),E,att:att&&att.map(x=>x.n),def:def&&def.map(x=>x.n),K,f:has(att,"Tranh sủng",E.f)&&has(att,"Tranh sủng",E.fk),r:has(att,"Chặn ngự giá",E.r)&&has(att,"Chặn ngự giá",E.rk)&&has(att,"Chặn ngự giá",E.rw),
+   k:Object.values(K).every(v=>v.rung&&v.shown!=null&&v.shown===v.applied&&v.applied>0)}});
  ok("6 choice cards print BAL numbers",r.f&&r.r&&r.k,r);
  /* 7. ledger night (not played): stealPass(holder,{live:false}) returns lines, no night record */
  r=await p.evaluate(()=>{const L=T.setup();const [A,B]=L;window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();

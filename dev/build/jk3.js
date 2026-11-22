@@ -72,7 +72,7 @@ function kitGroupBtns(){const d=["cn","ct"].map(k=>[k,kgfLab(k),kgfCount(k)]).fi
 window.kitGroupFold=kitGroupFold;window.kitGroupBtns=kitGroupBtns;
 /* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab).
    Cung nữ road (#36): the same box = «Đồng liêu», her colleagues (j42 srvColleagues, the people of her Hậu cung › Đồng liêu pager), value = Thiện cảm */
-function k3crewChip(f,name,loy,tip,lab,cls){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>${lab||"Lòng"}</small> <span class="ef ${cls||(n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n")}">${esc(String(loy))}</span></span></span></button>`}
+function k3crewChip(f,name,loy,tip,lab,cls){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>${lab||"Thiện cảm"}</small> <span class="ef ${cls||(n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n")}">${esc(String(loy))}</span></span></span></button>`}
 function k3crewList(){if(!S)return"";let h="";
  if(typeof isSrv==="function"&&isSrv()){try{srvColleagues().forEach((s,j)=>{const a=S.srv.af[s.sid]|0;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}
    h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,a,srkName(s),"Thiện cảm",a>=BAL.srvx.friendAf?"g":a<0?"r":"n").replace('data-k3go="staff"',`data-k3go="staff" data-k3pi="${j}"`)})}catch(e){}return h}
