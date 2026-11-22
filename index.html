@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …","b":"dde1e6a2d090","h":[{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"}]};
+window.CTM_BI={"s":"ddcca5c1+","t":"2026-11-22T02:51Z","c":"rival hầu-thay on LIVE bb92f986: replay review/rival-hauthay own diff (73a09248..ff63a590: j75 htCan + NPC decides before her night, jagmai…","b":"64c829753dd1","h":[{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2468,7 +2468,11 @@ function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSa
 function sendMaid(a){const m=a.maid;const rise=roll(BAL.rk.maidRise);a.maid=a===S?newMaid(nmNew("maid"),45):{name:nmNew("maid"),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=BAL.loy.close?BAL.eff.j8.sendMaid[0]:BAL.eff.j8.sendMaid[1]);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=BAL.loy.close?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}
  return `Cung nữ ${m.name} của ${NM(a)} hầu thay một đêm rồi được thả ra cung với chút bạc. `}
-function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length;p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
+/* NIGHT PACE (review/night-ledger-r1, LUẬT SỬA CẢ NHÓM): rules that count RECENT nights were tuned for one night a tuần; with the 10-night
+   ledger a tuần holds ≈ BAL.nt.days times as many. ntP() = that factor while the ledger runs (jledger ntPace), else 1. nightLog stays the
+   true record (books, evidence, words show real counts); only the RATE rules divide by it: anMonth (Ân fades), j75 favNow / satN. */
+function ntP(){try{return typeof ntPace==="function"?ntPace()||1:1}catch(e){return 1}}
+function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length/ntP();p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
 
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
@@ -2660,9 +2664,13 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<BAL.bacFee.itTest?"disabled":""}>Xét nghiệm<small>Bạc -${BAL.bacFee.itTest}</small></button>`);
   return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · Đang mặc":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
 /* the tablet: every consort weighted by the same night formula; others may steal it by the same act (the try is chosen in jsteal.js) */
-/* AG2 (jagemp): with the agent loop on, whether he calls anyone (empSummon, BAL.ag.emp.summon) and whom (empPick) are HIS choice */
-function flip(){S.tonight=null;if(S.dead)return;const E=typeof empOn==="function"&&empOn();if(E?!empSummon():!roll(has("chamchinh")?65:90))return;
- const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return;let t;if(E)t=empPick(C);else{const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}t=C[i]}
+/* AG2 (jagemp): with the agent loop on, whether he calls anyone (empSummon, BAL.ag.emp.summon) and whom (empPick) are HIS choice.
+   The 10-night ledger (jledger ldPin): the played tối's holder comes from the ledger roll (null = nobody that night); undefined = no ledger here */
+function flip(){S.tonight=null;if(S.dead)return;
+ const pin=typeof ldPin==="function"?ldPin():undefined;let t;
+ if(pin!==undefined){if(!pin)return;t=pin}
+ else{const E=typeof empOn==="function"&&empOn();if(E?!empSummon():!roll(BAL.ag.emp.summon[has("chamchinh")?1:0]))return;
+ const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return;if(E)t=empPick(C);else{const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}t=C[i]}}
  if(t===S)S.tonight="me";else S.tonight=t;
  /* NPC night stealing: agent choice by self-interest, personality, mood and relation (jsteal.js, owner 16/11 14:10Z/14:45Z, OD:L1386); the old hostility ≥ 50 + flat roll is gone */
  if(t===S)pushDil(mkP("ksp"),"Kính sự phòng báo tin")}
@@ -27167,18 +27175,18 @@ const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";
  ev+=monopoly()}catch(e){console.error(e)}return ev};
 /* (e) độc sủng and the world's answer */
 function nightsIn(p,n){const w0=wk();return (p.nightLog||[]).filter(w=>w0-w>=0&&w0-w<n).length}
-function favNow(){let best=null,bn=0;for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const n=nightsIn(p,6);if(n>bn){bn=n;best=p}}return bn>=FAIRN.fav?{p:best,n:bn}:null}
+function favNow(){let best=null,bn=0;for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const n=nightsIn(p,6);if(n>bn){bn=n;best=p}}return bn>=FAIRN.fav*ntP()?{p:best,n:bn}:null}/* fav nights at the one-night-a-tuần pace (× ntP with the 10-night ledger) */
 function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"ngươi":p.name;let ev="";
  for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)ghenUp(v,2,"thấy Hoàng thượng chỉ lật thẻ bài của ngươi",S);else if((v.malice||0)>=40)oanAdd(v,p,BAL.eff.j75.monopoly)}
  if(!(p.admonWk!=null&&wk()-p.admonWk<BAL.tw.g.admonCd)&&!(window.agDOn&&agDOn())){const q=queenP();/* npc-purpose: the Empress (else the Thái hậu) speaks up when the monopoly is real (kind admon: nights hogged × j75.admK); the player as Empress is never automated */
   const W=q&&q!==p&&q!==S?[q]:q===S?[]:(!S.thDead?[(S.thO=S.thO||{})]:[]);const ad=W.length?npcWhy("admon",{p,n:f.n,W}):null;const who=ad?(ad.who===q?`Hoàng hậu ${q.name}`:"Thái hậu"):null;
   if(who){const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
-   const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */
+   const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} đêm trong sáu tuần gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */
    if(me)Q.push({t:"Mưa móc đều khắp",who:q&&q!==S?pv(q):pTH(),h:`<p>${t}</p>`});ev+=t+" "}}
  {const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const fg=npcWhy("famGift",{L});const x=fg&&fg.tgt;if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
  return ev}
 window.favNow=favNow;
-function satN(p){return Math.max(0,nightsIn(p,6)-1)}
+function satN(p){return Math.max(0,nightsIn(p,6)/ntP()-1)}/* nights beyond the first at the one-night-a-tuần pace (float with the ledger) */
 {const ncS=nightCh;nightCh=function(p){p=p||S;const c=ncS.call(this,p);const k=satN(p);if(!c||!k||!FAIRN.sat)return c;return Math.max(1,Math.round(c*Math.max(FAIRN.satMin,1-FAIRN.sat*k)))}}
 {const os0=oSteal;oSteal=function(a,m){const o=os0.apply(this,arguments);const k=a?satN(a):0;return k&&FAIRN.satO?oddsCl(o-FAIRN.satO*k):o}}
 /* the admonition is heeded for 2 tuần: a visible cause, shown in the news and in nightWhy */
@@ -27191,11 +27199,13 @@ function whyRows(){const T=[];for(const p of consorts()){if(p!==S&&(!p.alive||p.
   T.push({id:p===S?"me":p.id,name:p===S?"Ngươi":p.name,rank:rkName(p),sung:p.sung,w,n6:nightsIn(p,6),reasons:rs})}
  const tot=T.reduce((a,x)=>a+x.w,0)||1;T.forEach(x=>x.share=Math.round(x.w*100/tot));return T.sort((a,b)=>b.w-a.w)}
 const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const r=fl0.apply(this,arguments);const t0=S&&S.tonight;let cause=S&&S.tonight?"tablet":"none";
- try{if(S&&!S.dead){const q=queenP();const CU=BAL.ag.emp.custom,tq=S.tuan===0?CU[0]:S.tuan===1?CU[1]:0;const cur=tonightOf();
+ try{if(S&&!S.dead){const q=queenP();const LD=typeof ldOn==="function"&&ldOn();/* 10-night ledger: the custom is BY DAY there (BAL.nt.customDays), never this tuần roll */const CU=BAL.ag.emp.custom,tq=LD?0:S.tuan===0?CU[0]:S.tuan===1?CU[1]:0;const cur=tonightOf();
   if(S.tonight&&q&&tq&&!ntTaken()&&cur!==q&&nightCh(q)>0&&(typeof empOn==="function"&&empOn()?empCustom(q,cur,tq):roll(tq))){const lost=cur;
    if(lost===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",who:pEunCourt?pEunCourt("ksp"):undefined,h:`<p>Thẻ bài của ngươi đã được lật, nhưng hôm nay là ${S.tuan===0?"mùng một":"rằm"}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.</p>`})}
    S.tonight=q===S?"me":q;if(q===S)pushDil(mkP("ksp"),"Kính sự phòng báo tin");cause="custom"}
   else if(S.tonight&&ntTaken()&&ntTaken().who!=="me")cause="stolen";
+  if(LD){const lc=typeof ldCause==="function"?ldCause():null;if(lc&&S.tonight&&cause==="tablet")cause=lc;
+   /* the Hoàng hậu's card is never on the tray (OD 19:00Z): she has her custom days */if(rows&&q&&typeof ldCustomOn==="function"&&ldCustomOn())rows=rows.filter(x=>x.id!==(q===S?"me":q.id)||cause==="custom")}
   const t=tonightOf();S.nightWhy={wk:wk(),pick:t?(t===S?"me":t.id):null,flip0:t0?(t0==="me"?"me":t0.id):null/* the card he turned (KIT §67 card-flip) */,cause,day:S.tuan===0?"mùng một":S.tuan===1?"rằm":"",mood:MOODW[S.emp.mood],rows:rows||[],emp:S.empWhy&&S.empWhy.wk===wk()?Object.assign({},S.empWhy):null}}}catch(e){console.error(e)}return r};
 window.nightWhy=function(){const d=S&&S.nightWhy;if(!d||d.wk!==wk())return null;const row=d.rows.find(x=>x.id===d.pick)||null;const tot=d.rows.reduce((a,x)=>a+x.w,0);
  const text=!d.pick?"Đêm nay Hoàng thượng không lật thẻ bài nào.":d.cause==="custom"?`Hôm nay là ${d.day}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.`:d.cause==="stolen"?"Hoàng thượng bị mời sang cung khác giữa đường.":row?`${row.name}: Sủng ${row.sung} · dịp được lật thẻ: ${typeof chanceLvl==="function"?chanceLvl(row.share):word(row.share)} · ${row.n6} đêm trong sáu tuần gần đây · Hoàng thượng đang ${d.mood}`:"";
@@ -36300,6 +36310,15 @@ BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35,w:2 /* draw weight of a month art his tr
 /* THE FLIP CHOICE timing (owner OD 16/11 22:45Z "Phải quyết định trong vòng 10 giây thôi"; jnf.js §2): ms = the countdown (timeout = Thôi);
    waitMs = the co-op host's cap waiting for the friend's choice. (keep.npcP lives in BAL.steal.keep above.) */
 BAL.steal.choice={ms:10000,waitMs:90000};
+/* THE 10-NIGHT LEDGER (owner OD 16/11 18:10Z / 18:40Z / 19:00Z / 19:05Z; jledger.js; spec reports/night-time.md V3-B §6): days = nights a tuần
+   (each its own summons: the chance he calls anyone that night is BAL.ag.emp.summon [calm, busy] (jagemp AG2, OD 18:10Z keeps 90 / 65; ONE
+   CORE, review r1: the ledger's own summon / summonBusy copies are gone)); customDays = days of the month he spends at the Hoàng hậu's palace by custom (mùng một, rằm; her card is then never on the tray);
+   extraFx = what a NOT-played night gives the woman (Sủng +sung with sungP chance, Ân tình +an; night-time.md [M]); concF = × on conceiveCh,
+   applied as a FLOAT at the roll (spec 7: keeps NPC births ≈ 0.10 per consort-year with 10 nights, [M] night-time-bot3). on:false = old flip. */
+/* RULES THAT COUNT RECENT NIGHTS (review r1 §5.2 / §5.3, LUẬT SỬA CẢ NHÓM): j8 anMonth (Ân fades), j75 favNow (FAIRN.fav) and satN
+   (FAIRN.sat / satO) divide the nights of their window by days (jledger ntPace: one night a tuần stood for the tuần's 10 days), so they keep
+   the one-night-a-tuần pace (bot before/after: report review-night-ledger-r1.md). extraFx.anP = chance a NOT-played night gives Ân +an. */
+BAL.nt={on:true,days:10,customDays:[1,15],extraFx:{sungP:50,sung:1,anP:25,an:1},concF:.065};
 /* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
    game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
    the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
@@ -72659,8 +72678,17 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
  for(let k=0;k<12;k++){const w=m0-3*k+t;if(w<=p.pregWk)break;if(w<=W)n++}return n}catch(e){return 0}}
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
-/* the TRAY (Kính sự phòng's view): her card is off while in her cycle tuần, unless she reported falsely this tuần (báo sớm / giấu) */
-function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
+/* BY DAY with the 10-night ledger (owner OD 16/11 19:00Z "only the actual cycle days block"; review/night-ledger-r1): while jledger runs
+   (ldOn) the tuần's ONE played tối is a real day of the month (ldNow().days[p].d), drawn at the end of tối. Once it is drawn her cycle
+   blocks the scene / the flip choice / the steal only when her cycle covers THAT day. While the ledger draws (jledger window.__ldRoll)
+   nothing blocks: it keeps every woman off her own cycle days night by night (jledger cyDayOf). Before the draw (the day's own acts: the
+   late visit's night option, the ksp bath, the tray she sees) the played day is not known yet: her cycle tuần blocks as before.
+   Without the ledger (co-op parked, BAL.nt.on false): the whole cycle tuần, as before. */
+function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;if(window.__ldRoll)return 0;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
+function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined||d===null)return true;if(d===0)return false;return cyDaysM(p,cyCur()).includes(d)}
+/* the TRAY (Kính sự phòng's view): her card is off while in her cycle (the played day with the ledger, else her cycle tuần), unless she
+   reported falsely this tuần (báo sớm / giấu) */
+function cyTray(p){if(!cyNow(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
 /* co-op (review/coop-b1b5-fix): the OTHER player's entry carries her own report too — her S.cyb, relayed at once by jcoopworld (ctm-p2
    "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
    her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
@@ -72673,7 +72701,7 @@ function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefine
 window.cyRec=cyRec;window.cyWk=()=>wk();window.cyAsk=()=>cyAsk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
-window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyNow=cyNow;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
@@ -72686,7 +72714,7 @@ for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(!A0)c
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(){if(cyTray(S))return RSN;return l0?l0.apply(this,arguments):""}}
 const ns0=nightScene;nightScene=function(){if(cyTray(S)){log(`${RSN}.`);if(S.tonight==="me")S.tonight=null;return}
  /* she lied to the book (báo sớm / giấu) and is called during her cycle: the Kính sự phòng mama checks before the sedan comes */
- try{if(cycOn(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
+ try{if(cyNow(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
    if(!roll(po)){const b=S.sung,d=S.danh;apply({sung:-R.lieSung,danh:-R.lieDanh});S.ksKnows=1;if(S.tonight==="me")S.tonight=null;
     const t=`Ma ma Kính sự phòng soát người trước khi lên kiệu, thấy ngươi đang kỳ nguyệt sự mà sổ ghi khác: tội khai man. Đêm nay mất, Sủng ${b} → ${S.sung}, Danh ${d} → ${S.danh}; Tổng quản biết chuyện của ngươi.`;
     log(t);try{Q.push({t:"Kính sự phòng",who:typeof pEunCourt==="function"?pEunCourt("ksp"):null,h:`<p>${t}</p>`})}catch(e){}return}
@@ -72698,7 +72726,8 @@ lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
   const d=S.nightWhy;if(d&&d.wk===wk()&&Array.isArray(d.rows))for(const row of d.rows){const p=row.id==="me"?S:(rivals||[]).find(v=>v.id===row.id);if(p&&cyTray(p)&&!(row.reasons||[]).some(x=>x.k==="cyc"))(row.reasons=row.reasons||[]).push({k:"cyc",t:"đang kỳ nguyệt sự",pub:p===S})}
   if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
-  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
+  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";const ld=cyLdDay()!==undefined;
+   log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":ld?`Kỳ nguyệt sự đã đến (${dName(cyDaysM(S,cyCur()))}): những đêm ấy Kính sự phòng tạm cất thẻ bài của ngươi.`:"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
  }catch(e){console.error(e)}return r};
 /* ---------- 7. FERTILE WINDOW (D57): conceiveCh × BAL.cyc.fert by her cycle phase this tuần; one notice when her peak tuần starts ---------- */
@@ -72736,14 +72765,16 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
- const H=[["sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất tuần này","an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
+ /* with the 10-night ledger the card is off only on her cycle days (review/night-ledger-r1, OD 19:00Z): the words say so (LUẬT SỬA CẢ NHÓM) */
+ const TN=cyLdDay()!==undefined?"những đêm ấy":"tuần này";
+ const H=[[`sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất ${TN}`,"an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
   [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn đoán ra; tổn Đức, tuần sau khó được lật thẻ; hỏng thì Tổng quản biết`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; tổn Đức; bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng; kẻ thù có thể nắm chứng cứ`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; cả cung đồn có tin vui, không có thai thì mừng hụt; bị soát ra thì mất sủng; kẻ thù có thể nắm chứng cứ`,"liều"]];
  const O=[
-  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:["thẻ bài tạm cất tuần này"],wl:"Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi tuần này."},"dung"),
+  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:[`thẻ bài tạm cất ${TN}`],wl:`Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi ${TN}.`},"dung"),
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
-    k:["thẻ bài tạm cất tuần này và khó được lật tuần sau","thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
+    k:[`thẻ bài tạm cất ${TN} và khó được lật tuần sau`,"thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
   mk("Báo sớm, nói đã sạch kỳ",{c:{duc:-R.somDuc},wt:[G6("thẻ bài vẫn nằm trên khay")],k:[risk,evi],wl:"Ma ma báo kỳ của ngươi đã qua; thẻ bài vẫn nằm trên khay."},"som",lie("som")),
   mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: ${sgStat(-B().rumSung)} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
@@ -79854,6 +79885,124 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
   const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
 }catch(e){console.error("artfx text",e)}})();
+/* ================= jledger: THE 10-NIGHT LEDGER OF KÍNH SỰ PHÒNG (owner OD 16/11 18:10Z, 18:40Z, 19:00Z, 19:05Z, OD:L1386; spec
+   dev/handover/reports/night-time.md V3-B, superseded where OD 22:45Z moved the flip to the END of tối) =================
+   A tuần is 10 days of the month. The ONE played tối of the tuần (the card-flip scene + the 10-second choice of jnf) stands for one of those
+   10 nights; the other nine happen too and are written in the Kính sự phòng book.
+   1. THE ROLL (ldRoll) at the commit, inside jnf realFlip → j8 flip (ldPin), host / single player only. Per day d = tuần×10 + 1..10:
+      - BAL.nt.customDays (mùng một, rằm) → the Emperor goes to the Hoàng hậu (queenP) by custom; barred that day (her cycle day, pregnant,
+        ill, confined: no night) → he only visits ("visit", no night). Her card is NEVER on the tray while the custom runs (OD 19:00Z).
+      - other days → the Emperor's own choice per night (AG2 jagemp, OD:L1386; review r1): empSummon() (BAL.ag.emp.summon [90, 65]; busy =
+        ill, Chăm chính sự or the court in crisis, OD 18:10Z) then empPick(C) (mindPick over nightCh × his memory). With the agent loop off
+        (BAL.ag.on 0): roll(BAL.ag.emp.summon[busy]) and a plain nightCh draw. Missed → "blank" (he sleeps alone). C = consorts() minus the
+        Hoàng hậu, minus every woman whose cycle covers THAT day (jcycle cycleDaysOf, by day; her own false report "báo sớm / giấu" keeps
+        her card on the tray). Each day is its own choice; the same woman may come up on several days.
+      - the cycle is BY DAY for the played tối too (review r1, OD 19:00Z / 19:05Z): while the ledger runs, jcycle's cyTray is "her cycle covers
+        the PLAYED day" (cyLdDay), so a woman in her cycle tuần plays her night on any other day of it. (while it draws, window.__ldRoll, jcycle blocks nobody for the whole tuần, so nightCh / empPick read every woman; wOf stays as a guard.)
+   2. THE PLAYED TỐI (OD 18:40Z): her FIRST day if she has one (S.tonight = "me", the jflip scene shows HER card); else the first NPC day; else the
+      Hoàng hậu's custom night; else nobody. The flip choice (jnf: Tranh sủng / Chặn ngự giá / Giữ chân) runs on that night only.
+      Already decided before the roll (his own visit, her night already played, a skipped flip): that holder takes the played tối.
+   3. THE OTHER NIGHTS (ldSettle, once, at "Sang ngày mới" right before the live endTurn): each is first contested by the NPCs' own choice
+      (window.stealPass(holder,{live:false}) = jnf stealPassNF, same odds, lines only; no steal on a custom night), then:
+      HER night → Sổ ghi line "Kính sự phòng ghi: ngày {d}, ngươi được lật thẻ thêm một đêm." + the gains BAL.nt.extraFx + its own conception
+      roll night(S); one kit pill (kitLine, KIT §42.2) for the tuần. An NPC night → the same gains + night(v); ONE Sổ ghi line for the tuần only
+      when she has tai mắt (S.mat ≥ 2), else silent. Every night is recorded (nights, nightLog) for her and NPCs alike (two-way).
+   4. CONCEPTION (spec 7, MUST): while the ledger runs every night's roll is conceiveCh(p) × BAL.nt.concF as a FLOAT (no rounding after the
+      factor; the inner wrappers round the whole-% base as before). conceiveCh() itself reads the same float, so every display "Có thai mỗi
+      lần thị tẩm" shows the true per-night chance on the odds ladder.
+   CO-OP: parked (jnf nfParked → nfOn false → ldOn false): the live one-night flip and the old conception roll stay. Servant / home routes too.
+   Save: S.ledger = {wk, days:[{d, w ("me" | id | null), y ("custom"|"pick"|"blank"|"none"|"visit"|"played")}], p (played index | -1), st}.
+   S.ldPk = the tuần whose flip ran in a co-op room (no ledger that tuần). Old saves: absent → rolled at the next commit. ================================================================================== */
+(function(){
+const N=()=>BAL.nt||{};
+function ldOn(){try{return !!(N().on&&(N().days||0)>1&&S&&!S.dead&&typeof nfOn==="function"&&nfOn())}catch(e){return false}}
+window.ldOn=ldOn;
+/* night pace for the rules that count recent nights (j8 ntP: anMonth, j75 favNow / satN): BAL.nt.days while the ledger runs, else 1 */
+window.ntPace=()=>ldOn()?(+N().days||1):1;/* one night a tuần stood for the tuần's 10 days (V3-B): the ledger holds BAL.nt.days times the old pace (measured: report r1) */
+const W=()=>wk();
+const idOf=p=>p===S?"me":p&&p.id;
+const ent=w=>w==="me"?S:w==null?null:(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===w)||null;
+const alive=p=>!!p&&(p===S?!S.dead:(p.alive&&!p.out));
+/* the custom (mùng một / rằm) is on while the Emperor's custom is (BAL.ag.emp.custom, jagemp; a test may switch it off) and there is a Hoàng hậu */
+function ldCustomOn(){try{const C=BAL.ag&&BAL.ag.emp&&BAL.ag.emp.custom;return !!(queenP()&&(!C||C.some(x=>x>0)))}catch(e){return false}}
+window.ldCustomOn=ldCustomOn;
+/* her cycle covers that day (jcycle, by day). Her false report hides those days from the book (her card stays on the tray). */
+function cyDayOf(p,day){try{if(typeof cycleDaysOf!=="function")return false;const L=cycleDaysOf(p,null,0)||[];if(!L.includes(day))return false;
+ if(p===S&&S.cyb&&S.cyb.lie===W())return false;return true}catch(e){return false}}
+window.ldCyDay=cyDayOf;
+/* the tray weight (nightCh, the Emperor's preference). A woman in her cycle tuần reads 0 from jcycle for the whole tuần: her weight for a
+   day outside her cycle is nightCh read as if outside her cycle tuần (wk() kept: tuần +3 / tháng −1, restored at once) */
+function wOf(p){try{if(typeof cyTray==="function"&&cyTray(p)){const t=S.tuan,u=S.turn;S.tuan=t+3;S.turn=u-1;try{return nightCh(p)||0}finally{S.tuan=t;S.turn=u}}return nightCh(p)||0}catch(e){return 0}}
+function draw(C,w){const tot=w.reduce((a,b)=>a+b,0);if(!(tot>0))return null;let r=Math.random()*tot,i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return C[i]}
+/* ---------- 1. the roll ---------- */
+function ldRoll(fixed){window.__ldRoll=1;try{return ldRoll0(fixed)}finally{window.__ldRoll=0}}
+function ldRoll0(fixed){const n=N(),w0=W(),base=(S.tuan||0)*10;const q=queenP(),cus=ldCustomOn();
+ const E=typeof empOn==="function"&&empOn(),SU=BAL.ag.emp.summon;
+ const busy=(typeof has==="function"&&has("chamchinh"))||(typeof illOf==="function"&&S.emp&&!!illOf(S.emp));
+ const C0=consorts().filter(p=>alive(p)&&!p.coop&&!(cus&&p===q));const W0=C0.map(wOf);
+ const days=[],zs=[];const z=()=>zs.push(E&&S.empWhy?JSON.parse(JSON.stringify(S.empWhy)):null);
+ for(let k=1;k<=(n.days||10);k++){const d=base+k;
+  if(cus&&(n.customDays||[]).includes(d)){const bar=cyDayOf(q,d)||!(wOf(q)>0)||(typeof illOf==="function"&&!!illOf(q));days.push({d,w:bar?null:idOf(q),y:bar?"visit":"custom"});zs.push(null);continue}
+  if(E&&S.empWhy)S.empWhy={wk:w0};
+  if(!(E?empSummon():roll(SU[busy?1:0]))){days.push({d,w:null,y:"blank"});z();continue}
+  const C=[],w=[];C0.forEach((p,i)=>{if(W0[i]>0&&!cyDayOf(p,d)){C.push(p);w.push(W0[i])}});
+  const t=!C.length?null:E?empPick(C):draw(C,w);days.push({d,w:t?idOf(t):null,y:t?"pick":"none"});z()}
+ let pi=-1;
+ if(fixed!==undefined){const fk=fixed?idOf(fixed):null;
+  pi=fk!=null?days.findIndex(e=>e.w===fk&&e.y!=="custom"):-1;if(pi<0)pi=days.findIndex(e=>e.y!=="custom"&&e.y!=="visit");if(pi<0)pi=0;
+  days[pi]={d:days[pi].d,w:fk,y:"played"}}
+ else{const ok=e=>{const p=ent(e.w);return !!p&&!cyDayOf(p,e.d)};
+  pi=days.findIndex(e=>e.w==="me"&&ok(e));if(pi<0)pi=days.findIndex(e=>e.y==="pick"&&e.w!=="me"&&ok(e));if(pi<0)pi=days.findIndex(e=>e.y==="custom"&&ok(e))}
+ /* his reason for the PLAYED night (AG2 nightWhy: rests / remembers her deed) is that day's, not the last day's */
+ if(E){S.empWhy=(pi>=0&&zs[pi])||{wk:w0}}
+ S.ledger={wk:w0,days,p:pi,st:0};return S.ledger}
+function cur(){const L=S&&S.ledger;return L&&L.wk===W()?L:null}
+/* j8 flip asks for the played tối's holder: undefined = no ledger here (live flip), null = nobody, else the person */
+function ldPin(){if(!ldOn())return undefined;const L=cur()||ldRoll();const e=L.days[L.p];if(!e)return null;const p=ent(e.w);return alive(p)?p:null}
+window.ldPin=ldPin;
+/* the cause j75 writes in nightWhy for the played tối */
+window.ldCause=function(){const L=cur();const e=L&&L.days[L.p];return e&&e.y==="custom"?"custom":null};
+window.ldRoll=ldRoll;window.ldNow=()=>cur();
+/* ---------- 3. the other nights ---------- */
+function gain(p){const f=N().extraFx||{};const sg=roll(f.sungP==null?100:f.sungP)?(f.sung||0):0,an=roll(f.anP==null?100:f.anP)?(f.an||0):0;
+ if(p===S){const b=S.sung;if(sg)apply({sung:sg});S.an=cl((S.an||0)+an,0,100);return{sg:S.sung-b,an}}
+ ap(p,{sung:sg,an});return{sg,an}}
+function oneNight(p){p.nights=(p.nights||0)+1;(p.nightLog=p.nightLog||[]).push(W())}
+/* an NPC contest of a not-played night (jnf stealPassNF via window.stealPass, live:false): every effect is real (oán, ghen, the loser's
+   loss), the played tối's state is untouched (tonight, ntk, ntTry, nightWhy restored) */
+function contest(h){if(typeof window.stealPass!=="function")return{holder:h,lines:[]};
+ const sv={t:S.tonight,k:S.ntk,y:S.ntTry,w:S.nightWhy};S.ntk=null;S.ntTry=null;S.nightWhy=null;
+ try{return window.stealPass(h,{live:false})||{holder:h,lines:[]}}catch(e){console.error(e);return{holder:h,lines:[]}}
+ finally{S.tonight=sv.t;S.ntk=sv.k;S.ntTry=sv.y;S.nightWhy=sv.w}}
+const nm=p=>p===S?"ngươi":p.name;
+function ldSettle(){if(!ldOn())return;const d0=W();let L=cur();
+ /* the day's flip ran in a co-op room (parked: the live one-night flip) and she left the room before the day ended: that tuần keeps its one night */
+ if(!L&&S.ldPk===d0){S.ledger={wk:d0,days:[],p:-1,st:1};return}
+ if(!L)L=ldRoll(S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null));
+ if(L.st)return;L.st=1;
+ const pe=L.days[L.p];if(pe){const h=S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null);pe.w=h?idOf(h):null}   /* the played tối as it ended (a won steal moved it) */
+ const mine=[],npc=[];let me=0;
+ L.days.forEach((e,i)=>{if(i===L.p)return;
+  if(e.y==="visit"){if(queenP()===S)log(`Kính sự phòng ghi: ngày ${e.d}, theo lệ Hoàng thượng sang cung ngươi thăm hỏi; ngươi không tiện hầu giá.`);return}
+  let h=ent(e.w);if(!alive(h))return;
+  if(e.y!=="custom"){const h0=h,r=contest(h);if(r&&r.holder&&r.holder!==h){h=r.holder;e.w=idOf(h);e.s=1}
+   /* her own night contested: every line; NPC against NPC: only a night that changed hands, and only with tai mắt */
+   if(r&&r.lines&&r.lines.length&&(h0===S||(e.s&&(S.mat||0)>=2)))r.lines.forEach(x=>mine.push(`Ngày ${e.d}: ${String(x).trim()}`))}
+  oneNight(h);const g=gain(h);night(h);
+  if(h===S){me++;log(`Kính sự phòng ghi: ngày ${e.d}, ngươi được lật thẻ thêm một đêm.${g.sg?` Sủng +${g.sg}`:""}${g.an?`${g.sg?" ·":""} Ân tình +${g.an}`:""}${g.sg||g.an?".":""}`)}
+  else npc.push(`ngày ${e.d} cung ${nm(h)}`)});
+ mine.forEach(x=>log(x));
+ if(npc.length&&(S.mat||0)>=2)log(`Kính sự phòng ghi tuần này: ${npc.join(", ")}.`);
+ if(me&&!window.__bot)try{if(typeof kitLine==="function")kitLine(`Kính sự phòng: ngươi được lật thẻ thêm ${typeof kitNumVi==="function"?kitNumVi(me):me} đêm`,4000)}catch(e){}
+ L.me=me}
+window.ldSettle=ldSettle;
+/* a flip made while co-op is on (jnf parked) is the live one-night flip: marked so the ledger does not add that tuần's other nights */
+const fl0=flip;flip=function(){try{if(S&&typeof nfParked==="function"&&nfParked())S.ldPk=W()}catch(e){}return fl0.apply(this,arguments)};
+/* the commit's live endTurn (jnf calls it after the choice and her night): the ledger's other nights are written first */
+const et0=endTurn;endTurn=function(){try{if(ldOn()&&!(typeof Q!=="undefined"&&Q.length)&&!S.mg)ldSettle()}catch(e){console.error(e)}return et0.apply(this,arguments)};
+/* ---------- 4. the float conception roll ---------- */
+const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{if(ldOn()&&c>0)return c*(N().concF==null?1:N().concF)}catch(e){}return c};
+})();
 /* ================= jnf: THE NIGHT — FLIP AT THE END OF TỐI, ONE 10-SECOND CHOICE, RESOLVED ONCE (owner OD 16/11 22:45Z FINAL + 22:50Z + 22:10Z) =================
    Owner (22:45Z canon overwrite of every older night-flow line): tối keeps its full 4 khắc for normal evening acts; Tranh sủng / Chặn ngự giá
    are NOT acts any more (no Hành sự card, no person-menu act, no NPC agent act) — they exist ONLY inside the card-flip scene.
@@ -93801,7 +93950,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dde1e6a2d090";window.CTM_BUILD=BUILD;
+const BUILD="64c829753dd1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
