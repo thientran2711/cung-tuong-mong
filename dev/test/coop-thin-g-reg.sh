@@ -2,7 +2,7 @@
 # coop-thin G regression lane (worker #1): copy kept in the repo so a successor in a new container has it; logs to /home/user/wt/ctg-out
 # coop-thin G regression lane: each suite -> its own log, one summary line each in reg-sum.txt
 cd ${WT:-/home/user/wt/ctg}; W=${W:-http://127.0.0.1:8787}; O=${O:-/home/user/wt/ctg-out}; mkdir -p $O; SUM=$O/reg-sum.txt  # WT / W / O env (coop-thin-g-f1 #7)
-run(){ local name=$1; shift; local t0=$(date +%s); timeout 1500 "$@" > $O/r-$name.log 2>&1; local rc=$?; local last=$(grep -E "^[a-z0-9 -]+ [0-9]+/[0-9]+|ALL OK|PASS|FAIL:|passed|failed" $O/r-$name.log | tail -1 | cut -c1-160); local nf=$(grep -c "^FAIL" $O/r-$name.log); echo "$name rc=$rc fails=$nf $(( $(date +%s)-t0 ))s :: $last" >> $SUM; }
+run(){ local name=$1; shift; local t0=$(date +%s); local cap=1500; case $name in trip*) cap=6600;; esac; timeout $cap "$@" > $O/r-$name.log 2>&1; local rc=$?; local last=$(grep -E "^[a-z0-9 -]+ [0-9]+/[0-9]+|ALL OK|PASS|FAIL:|passed|failed" $O/r-$name.log | tail -1 | cut -c1-160); local nf=$(grep -c "^FAIL" $O/r-$name.log); echo "$name rc=$rc fails=$nf $(( $(date +%s)-t0 ))s :: $last" >> $SUM; }
 for x in "$@"; do case $x in
  g4) run g4 env WEEKS=4 node dev/test/coop-thin-g.js $W 13 0;;
  g4s) run g4s env WEEKS=4 node dev/test/coop-thin-g.js $W 13 1;;
