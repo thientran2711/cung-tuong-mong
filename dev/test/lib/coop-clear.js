@@ -9,6 +9,8 @@
      3. a jfocus dialogue line «Tiếp ▸» (.kfoc-next, e.g. cnvScold on a cung nữ)                          (coop-thin-g-f1 30e12013)
      4. a jdfv encounter: an NPC's card plays in the jfocus scene (Q[0].dfSeen, centre modal hidden): pick a choice «m<k>» (.kfoc-b)
                                                                                                           (coop-thin-g-f1 c40d175b; OPEN A of coop-host-lag-r2)
+     5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip / the result frame's kit ✕ — was pasted in coop-e2e,
+        cn-force, coop-night only; the other bots sat on its intro for ever (x.st "mg": pool-face / room-faces / emo-seat / guest-names r3)
    tap(o)  → 'x' when it tapped something, '' otherwise (page closed / navigating = '').
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
@@ -18,6 +20,9 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const kf=[...document.querySelectorAll('.kfoc-next')].find(x=>x.offsetParent!==null);if(kf){window.__kfocN=(window.__kfocN||0)+1;kf.click();return'x'}
  const q=typeof Q!=='undefined'&&Q[0];const kb=q&&q.dfSeen?[...document.querySelectorAll('.kfoc-b:not(.kfoc-off)')].find(x=>x.offsetParent!==null&&/^m\d+$/.test(x.dataset.id||'')):null;
  if(kb){window.__kfocN=(window.__kfocN||0)+1;kb.click();return'x'}
+ /* 5. the steal mini-game window (jsmg herGame after «Tranh sủng» / «Chặn ngự giá», kg82): «Thôi, không chơi» on its intro, the result frame's kit ✕
+    — never under a full-screen scene (a player touches the scene first) */
+ if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}}
  return''};
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 async function first(o,fn,arg){if(await tap(o)==='x')return'x';return arg===undefined?o.p.evaluate(fn):o.p.evaluate(fn,arg)}
