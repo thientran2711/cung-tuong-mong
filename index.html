@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3dfbecec+","t":"2026-11-22T04:24Z","c":"rv coop-host-lag-r3: rebuild (index.html/sw.js)","b":"084d7e8c2668","h":[{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"}]};
+window.CTM_BI={"s":"6146a387+","t":"2026-11-22T05:25Z","c":"rv coop-host-lag-r3: THE helper step 5 = the steal mini-game window (kg82 #kg82skip «Thôi, không chơi» / result kit ✕, never under a scene)…","b":"2a393a083eb6","h":[{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -93230,7 +93230,7 @@ function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi
    caught up both carried the same change (a number added twice on the host). */
 E.bs=null;E.pn=0;E.last="";E.curP=curP;E.packs=packs;
 E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n|0)):0;const done=!E.last||!!(o&&o.dr&&o.dr.id===E.last);
- if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
+ if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&(o.w==null||o.w===(COOP.state.week||0))/* r1: never a view of an older week */&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
 COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
@@ -93245,7 +93245,12 @@ E.BAD=BAD;
    resent diff starts from what he really holds, nothing doubled) and, at the next view, if she still waits on that same buổi, her ready is
    sent again (once per loss; the host's ready is idempotent; a buổi he already stepped arrives in that view and nothing is resent). */
 const EID=[];let rr=0;
-COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null});
+COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null;
+ /* review coop-thin-g r1 (seat desync, g4s bạc 7 vs 67, TRIP week-36 Sức 83 vs 77): after the week her S IS the room's new C (fromCanon), which
+    is exactly what the host rebuilds her store from. Her diff baseline is that S, never the last VIEW: the view held at this moment is the
+    host's PRE-week copy, and a baseline taken from it made her first erd carry the week's own changes (his acts on her stand-in as deltas,
+    the merge's moves) as if they were hers: the host added them a second time to his store, her phone kept the single count. */
+ try{if(!host()&&on()&&S&&!S.dead){E.bs=curP();E.pn=(S.thpn|0);E.last=""}}catch(e){console.error("thin E week base",e)}});
 COOP.on("thin",()=>{if(rr&&!host())setTimeout(()=>{try{reNet()}catch(e){console.error(e)}},0)});
 COOP.on("error",m=>{try{if(host()||!m||m.code!=="nohost"||!m.id||!EID.includes(m.id))return;E.bs=null;E.last="";if(E.mine)rr=1;lg(["nohost",m.id])}catch(e){}});
 function reNet(){if(!rr)return;if(host()||!E.mine||E.mine!==bk()){rr=0;return}if(!on()||!TH.view||!S||S.dead||Q.length||S.mg||CW.inLife)return;/* the room level comes back after the reconnect snapshot ("thin"): wait for it */
@@ -94108,7 +94113,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="084d7e8c2668";window.CTM_BUILD=BUILD;
+const BUILD="2a393a083eb6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
