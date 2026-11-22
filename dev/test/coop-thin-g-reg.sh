@@ -1,7 +1,7 @@
 #!/bin/bash
 # coop-thin G regression lane (worker #1): copy kept in the repo so a successor in a new container has it; logs to /home/user/wt/ctg-out
 # coop-thin G regression lane: each suite -> its own log, one summary line each in reg-sum.txt
-cd /home/user/wt/ctg; W=http://127.0.0.1:8787; O=/home/user/wt/ctg-out; mkdir -p $O; SUM=$O/reg-sum.txt
+cd ${WT:-/home/user/wt/ctg}; W=${W:-http://127.0.0.1:8787}; O=${O:-/home/user/wt/ctg-out}; mkdir -p $O; SUM=$O/reg-sum.txt  # WT / W / O env (coop-thin-g-f1 #7)
 run(){ local name=$1; shift; local t0=$(date +%s); timeout 1500 "$@" > $O/r-$name.log 2>&1; local rc=$?; local last=$(grep -E "^[a-z0-9 -]+ [0-9]+/[0-9]+|ALL OK|PASS|FAIL:|passed|failed" $O/r-$name.log | tail -1 | cut -c1-160); local nf=$(grep -c "^FAIL" $O/r-$name.log); echo "$name rc=$rc fails=$nf $(( $(date +%s)-t0 ))s :: $last" >> $SUM; }
 for x in "$@"; do case $x in
  g4) run g4 env WEEKS=4 node dev/test/coop-thin-g.js $W 13 0;;
@@ -25,6 +25,14 @@ for x in "$@"; do case $x in
  night) run night env THIN=13 node dev/test/coop-night.js $O/night $W;;
  timer) run timer env THIN=13 node dev/test/coop-timer.js $O/timer $W;;
  cyc) run cyc env THIN=13 node dev/test/coop-cyc.js $O/cyc $W;; cycs) run cycs env THIN=13 COOP_SWAP=1 node dev/test/coop-cyc.js $O/cycs $W;;
+ trip0) run trip0 env TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js $W 13 0;; trip1) run trip1 env TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js $W 13 1;;
+ trip0b) run trip0b env TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js $W 13 0;; trip1b) run trip1b env TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js $W 13 1;;
+ e2e0s) run e2e0s env COOP_SWAP=1 node dev/test/coop-e2e.js $O/e2e0s $W;; e2e0n) run e2e0n env COOP_NC_FORCE=1 node dev/test/coop-e2e.js $O/e2e0n $W;;
+ as9) run as9 node dev/test/coop-arrive-see.js $W 9 0;; as9s) run as9s node dev/test/coop-arrive-see.js $W 9 1;;
+ as13) run as13 node dev/test/coop-arrive-see.js $W 13 0;; as13s) run as13s node dev/test/coop-arrive-see.js $W 13 1;;
+ emo) run emo node dev/test/coop-emo-seat.js $O/emo $W;; perf) run perf env CPU=4 MONTH=1 node dev/test/coop-thin-g-perf.js $W 13;;
+ bl) for s in 1 2 3 4 5 6; do run bl$s node dev/test/bongloc-coop.js $W 13; done;; blc) for s in 1 2 3; do run blc$s node dev/test/bongloc-coop-catch.js $W; done;;
+ wlag) run wlag node dev/test/coop-week-lag.js $W 13;;
  ow) for s in 1 2 3 4 5 6 7 8 9 10; do run ow$s env SEED=$s node dev/test/coop-one-world.js; done;;
 esac; done
 echo "== lane done $*" >> $SUM

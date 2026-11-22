@@ -25,7 +25,7 @@ const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
    
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||[...m.querySelectorAll('#mr button:not([disabled])')].find(x=>x.offsetParent!==null)/* coop-thin G #4: only a visible button (a kit info card hides #mclose; its close is the ✕) */||(()=>{const O=[...m.querySelectorAll('.opts button:not([disabled]):not([data-kcp])')];if(!O.length)return null;const k=(document.getElementById('mt')||{}).textContent+'|'+O.length;if(window.__clrK===k)window.__clrN=(window.__clrN|0)+1;else{window.__clrK=k;window.__clrN=0}return O[window.__clrN%O.length]})()/* coop-thin G #4: the same card still open after a pick (an option she cannot pay is ignored by chooseM) → the next option */||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const K=o=>o.p.evaluate(()=>({k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),bend:COOPW.bend,pend:COOPW.pend,pb:!!COOPW.pendBuoi,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,chip:(document.getElementById('kctm')||{}).textContent||'',chipOn:!!(document.getElementById('kctm')&&!document.getElementById('kctm').hidden)}));
@@ -74,7 +74,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await setTm(A,{buoiMs:15000});await reset(A);
  {const k=(await K(A)).k;
   ok(await press(A),'2: A presses Sẵn sàng');const t0=Date.now();
-  ok(await until(B,()=>{const t=((document.getElementById('kctm')||{}).textContent||'')+((document.getElementById('kctmf')||{}).textContent||'');return /Còn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
+  /* bot family (LIVE d541add9 hao-huu chip): the clock chip shows only m:ss, «Buổi này còn» sits in its aria-label — read text + labels */
+  ok(await until(B,()=>{const el=[document.getElementById('kctm'),document.getElementById('kctmf')].filter(Boolean);const t=el.map(e=>(e.textContent||'')+' '+[e,...e.querySelectorAll('[aria-label]')].map(x=>x.getAttribute('aria-label')||'').join(' ')).join(' ');return /[Cc]òn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
   const ms=await bothPast(A,B,k,40000);ok(ms>=5000,'2: AFK B: time out steps both (not before the clock)',ms);
   const a=await K(A),bb=await K(B);ok(a.k===bb.k,'2: same buổi after time out',[a.k,bb.k])}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
@@ -102,8 +103,11 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   /* A plays on: its own dialogs are cleared by the test, it does not press */
   const t0=Date.now();let aEnd=false;while(Date.now()-t0<30000){await clear(A);if(await A.p.evaluate(()=>COOPW.pend||COOPW.sent===(COOP.state.week||0))){aEnd=true;break}await sleep(400)}
   ok(aEnd,'4: time out → A (AFK at tối) ends its day');
-  ok(await until(B,()=>Q.length===1&&Q[0].t==='Việc thử',null,15000),'4: B: the info dialog was read for her, the choice is still open',await K(B));
-  await sleep(2500);const b1=await B.p.evaluate(()=>({q:Q.length,t:Q[0]&&Q[0].t,pick:__pick,pend:COOPW.pend,week:COOP.state.week}));
+  /* coop-thin G (level 13): the host's go runs her week end on the host at once (her open dialogs that block it are HER STORE's cards, thq:
+     a dialog pushed only on her phone, as this test does, is unknown to the host), so her week-end cards join her Q: only the test's two dialogs are judged */
+  const G13=(+process.env.THIN||0)>=13;
+  ok(await until(B,g=>{const L=Q.filter(m=>m&&(m.t==='Tin thử'||m.t==='Việc thử'));return g?L.length===1&&L[0].t==='Việc thử':Q.length===1&&Q[0].t==='Việc thử'},G13,15000),'4: B: the info dialog was read for her, the choice is still open',[await K(B),await B.p.evaluate(()=>Q.map(m=>m&&m.t))]);
+  await sleep(2500);const b1=await B.p.evaluate(g=>{const L=g?Q.filter(m=>m&&(m.t==='Tin thử'||m.t==='Việc thử')):Q;return {q:L.length,t:L[0]&&L[0].t,pick:__pick,pend:COOPW.pend,week:COOP.state.week}},G13);
   ok(b1.q===1&&b1.t==='Việc thử'&&b1.pick===0&&!b1.pend&&b1.week===w0,'4: no choice made for her, her day waits',b1);
   await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent));b.click()});
   const t1=Date.now();let merged=false;while(Date.now()-t1<45000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0)){merged=true;break}await sleep(400)}
