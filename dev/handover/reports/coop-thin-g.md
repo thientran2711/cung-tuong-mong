@@ -531,3 +531,27 @@ PRIORITY #1 CHECK: report + briefs/coop-thin-g.md + review/coop-thin-g-f1 log re
 | cyc / cycs / night (105/105) / f3s f4s f5s f6 f6s f6b f6bs / emo 25/25 / ow ×10 / perf | PASS |
 | role-parity, quickcheck | NOT RUN (left for #5) |
 Before you call any red new, check it against main: e2e0n, timer, as9, as13 may be flakes or older reds. trip0b looks like the trip1a wk27 merge stall, but sticky.
+
+## F1 FIX #5 — worker session_01N1tNP2pYTX6fTAsL7MNa3h (opus), Foreman B ROOT-8 lane, 11/22/2026
+PRIORITY #1 CHECK: OD/handover = §ROLLOVER F1 #4 → #5 above | main 02c6d8f4 (LIVE, merged here 9f58222a) | review/* review/coop-guest-week-lag (jcoopthine e7b996f2 hunk untouched here), review/coop-host-lag-r2-r3 (its coop-e2e clear() = ours VERBATIM 09a5a439: one helper, no change here) | claims: this lane only. START_CTX ≈ 4 % of 1M (own estimate; get_session reads 0) → rollover ≈ 29 %, ceiling 60 %.
+Worktree /home/user/wt/ctg5 (sparse), Worker 127.0.0.1:8787 (THINMAX 13), lane /home/user/wt/lane5/lane.sh (copy of coop-thin-g-reg.sh + trip0/1(b), as9/13(s), emo, perf, e2e0s/0n), logs /home/user/wt/out5/lane.
+
+### Danh split — ROOT CAUSE (reproduced, traced)
+#4's reading («host store stale, then catches up with no new patch») was the other way round. New DANHP trace (a setter on her phone's core numbers with the full stack; host log of every part-D patch / erd op / store build): TRIP swap 1 run b, weeks 21–32, every week at buổi 0 (and sometimes 1) her PHONE wrote `danh −1` through `apply` from a paint, not a patch; the host never ran it; the host caught up only at her next ready, by her `erd` diff (`["+",["danh"],-1]`) — that is the «catch-up with no patch». G1 samples before her ready → host +1 | phone.
+Writer: **jty.js tyCharge("home")** in a `renderStage` wrapper (a visitor at home while she is in trung y: Danh −BAL.ty.meet = 1, once per buổi by S.tyPaid). Render-diff family (jcoopthinf RDIFF: rules that run at paint and write her person — on the host they run as her context closes, on her phone they are read-only); tyCharge-home was missing from it.
+### Fix c5840d47 (jty +4 lines, jcoopthinf RDIFF +1 name; no number, no word, no UI)
+jty: the wrapper body becomes ONE named engine `tyHome()` (solo unchanged: renderStage → tyHome). jcoopthinf: `tyHome` in RDIFF (before prCheck = solo paint order) → host runs it in her context at every close; her phone's copy is read-only (the existing RDIFF wrap, rOn()).
+### LAW 11 — the whole family (scan `python3 dev/test/coop-rdiff-scan.py`: every render / renderStage / k3Stage wrapper that calls a function writing her numbers, 2 call levels; exit 1 on an unreviewed one)
+| | before (9f58222a) | after (c5840d47) |
+|---|---|---|
+| candidates | 7 (1 level) | 22 (2 levels) |
+| OPEN | **1: jty.js:69 tyCharge** | **0** (tyHome = RDIFF; 21 reviewed: guest-guarded resApply / nextBuoi→ready, deck-only j76Std / eaSync / kccoCards, DOM / notice only, co-op layer, next-line noise — table in the script) |
+### Tests so far
+| test | build | result |
+|---|---|---|
+| TRIP swap 1 + DANHP (repro) | 99201b6c/9f58222a | 6 runs: run b **FAIL G1 wk 22–32 danh +1** (trace above); 4 green; 1 cut. Run c: a **week-31 stall** (her phone held thin card tsgiftpick «Biếu quà làm lành», #modal hidden, Q[0] seen) — not the split; FOR B / next lane if it recurs (#4 saw a wk27 stall too) |
+| coop-thin-g G0b (new, deterministic: stub tyOn + one NPC visitor on both pages, her place set by the host) | before (old build) | **FAIL** phone 38→37 at render, store 38 |
+| same | after c5840d47 | **PASS** phone 14 at render, store 14→13, phone 13 by patch (×3 runs) |
+| G2 (her month = solo, same dice) | c5840d47 | 1× inv 17|18, then 2× green (flake, unrelated: G0b off also green) |
+| one-core / undef-scan / law4-typed | c5840d47 | PASS / PASS / 0 |
+Full lane @c5840d47 RUNNING (2 queues).
