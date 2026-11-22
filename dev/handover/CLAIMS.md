@@ -1094,3 +1094,4 @@ REVIEW coop-guest-staff (sonnet SMALL test-only; briefs/D19-coop-guest-staff-rev
 | night-ledger-coop r3 fixer #2 (opus BIG co-op; successor of 3C4XN63d at ceiling; @5efd53fb WIP) | review/night-ledger-coop-r3; reports/night-ledger.md | B | session_01N1tNP4b8rvF5b5qFYnqRUN | RUNNING | 22/11 14:54Z |
 | coop-thin-g F1 fixer #8 (opus BIG co-op; successor of #7 5YQBiBE3; @2cba26cd holds LIVE b238857f) | review/coop-thin-g-f1; reports/coop-thin-g.md | B | session_01N1tNP4rfkfYSgkooWkpGtQ | RUNNING | 22/11 16:14Z |
 coop-guest-men (opus BIG co-op; ORDER MAIN 106 15:36Z option A: guest-owned men as jcoopask request kind + whole HOST_ONLY family; briefs/D19-coop-guest-men.md) | review/coop-guest-men | session_01964izEPhZFbPAtPWQtfD1o | RUNNING | 22/11 16:32Z (Foreman D #19)
+| FOREMAN E #32 (opus; child of E #31, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #31 | session_01DgYSWnEGVzwkWhcG3Ys2Fi | RUNNING | 22/11 16:55Z |
