@@ -63,3 +63,5 @@ Owner order L2287 verbatim: "Read the attached XML before continuing costume des
 - Lượt 777: no regen/redraw without her yes; say the credit cost first.
 - Never re-ask an approved thing: `rule.py find` first.
 - To her: Vietnamese only, very short; pictures via SendUserFile; every message "Lượt N", ends "~X% xong / ~Y% chơi được".
+**PROPOSAL (NOT approved — never treat as locked):** light + deep tier HEX (90 × 4 seasons × 3 tiers × 8), Chu Sa HEX #B62832, exact royal coverage %, HH dominant royal main garment, any costume design in the file.
+**Conflicts to raise with the owner before changing rules:** G13 (one colour pair at every rank) vs rank tiers; B17/B21 (t7/t8 = yellow + own colours) vs gold+red t6–t8; F20 (flower ≠ main) and G56 (veil hue ≥ 60° from main) vs "main + secondary may share a family".
