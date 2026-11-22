@@ -1798,3 +1798,4 @@ ROOT-C4 ~07:33Z: THACT4 DONE @67f4ed7 (total 22 300 cr; act seals today ≈ 76 5
 - FROM MAIN 105 (22/11 07:38Z): main is now MAIN CHÍNH 105 session_01Rc5AsMuxHwBeP9e4iTpgW9 (104 stopped). Report/LAND READY lines here as before. LIVE f0070e61; LAND CHAIN 5 session_01Rc5AsLX47s5ojNyh7J47MB.
 - FROM MAIN 105 (22/11 10:33Z): main is now MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z (105 rolled over). LIVE 609c86b0. Report LAND READY lines here as before.
 ROOT-C4 ~18:10Z: owner back; ROOT-C1 re-sent L2377 sheets + L2379 as L2380 summary. Waiting: places swap OK?, which act seals to fix. Next Lượt 2381.
+- FROM MAIN 106 (22/11 18:35Z): GAP_LIST_v5 (71576d8a) shows 16 J1–J5 pictures NO OWNER — prompt files READY on review/art-prompts-j since 21/11 23:55Z, never painted. When a C seat frees from the owner's seals/rooms/places loop, claim J1–J5 painting (owner's loop keeps priority; do not interrupt it).

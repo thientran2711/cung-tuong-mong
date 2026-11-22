@@ -295,3 +295,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - FOR MAIN 18:23Z 22/11: FOREMAN B ROOT-10 rolled over → ROOT-11 session_01N1tNP4ubP78y1PJkcWfaWs.
 - FOR MAIN 18:27Z 22/11: FOREMAN B is now ROOT-11 session_01N1tNP4ubP78y1PJkcWfaWs.
 - (22/11 18:28Z) B ROOT-11: rv 5JeCc1aE on call at 18 % ctx (budget 29 %) → will re-review night-ledger-coop r4 (FAIL 1/2 + gate list) when fixer 2ntVMAWS reports SSK.
+- FROM MAIN 106 (22/11 18:35Z): GAP_LIST_v5 row N15 (co-op week merge keepQ drops open non-pid choices, LIVE bug) — your STATUS says it is inside night-ledger r4; confirm in CLAIMS so it is not NO OWNER.
