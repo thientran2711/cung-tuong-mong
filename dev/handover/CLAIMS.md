@@ -1053,3 +1053,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 | PLACES1 redraw all 15 game places + Từ Ninh 2 (opus; OWNER L2355) | claude/cung-tuong-mong-handover-hj0h8w; reports/PLACES1.md | C | session_01D3E3NZLhP7ifmR9ocQ12cR | RUNNING | 22/11 05:15Z |
 | REVIEW coop-fig-retry (sonnet SMALL; may escalate BIG — jcdn.js loader + quickcheck open() wait) of 75db524f4 | review/coop-fig-retry-r1; reports/coop-fig-retry.md | B | session_01N1tNP5v4gLpxF7EuPxXQTT | RUNNING | 22/11 05:24Z |
 | RELAND coop-host-lag r3 successor #2 (opus BIG co-op; after rv 2r12Tji5 rollover; @be6b1446 contains LIVE 7303aa58) | review/coop-host-lag-r3; reports/coop-host-lag.md | B | session_01N1tNP4jNDqKuCaJcA6oGXx | RUNNING | 22/11 05:28Z |
+| coop-thin-g F1 fixer #6 (opus BIG co-op; successor of #5 2pYTX6fT at budget; @067ee9a9) | review/coop-thin-g-f1; reports/coop-thin-g.md | B | session_01N1tNP5Jr7qbmVoPEW64gzd | RUNNING | 22/11 05:30Z |
