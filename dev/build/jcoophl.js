@@ -33,6 +33,11 @@ const NOADD=new Set(["mood","rank","buoi","tuan","month","year","turn","age","er
    week end carries the room base's housing (so m3 never adds two seats' resHead ids: R#11.resHead A=2 B=3 → 4 = a third consort), and the
    host sends its housing writes at once (numbers included: the guest never moves them, nothing is counted twice) */
 const HOUSE=["resHead","resHall","pal","palLone","palWait"],HSET=new Set(HOUSE);
+/* r3 (coop-e2e 3/7 STUCK NIGHT, guest week n buổi 3): the room CLOCK (year / month / tuần / turn = jnf / jnight / nCheck's day() = S.turn*3+S.tuan)
+   moves ONLY with the merged week, never as a live op. Before: the host's endTurn moved its tuần, its check sent ["s",["S","tuan"],n+1]
+   (NOADD = "the host's value"), the guest still in her tối of day n jumped to day n+1 → jnf asked the host's word for a day the host had not
+   flipped yet (host reply: d is not a past day, no LAST) → both seats «Chờ hảo hữu…» for ever. Never diffed (fromC), never applied (an older host). */
+const CLOCK=new Set(["year","month","tuan","turn"]);
 const VIEW=new Set(["rel","oan","ghen","ev","rl","ro","gp","ep","evm"]);/* viewer rows: per player, never a world fact */
 const plain=o=>!!o&&typeof o==="object"&&!Array.isArray(o);
 const isNum=x=>typeof x==="number"&&isFinite(x);
@@ -44,7 +49,7 @@ const lg=x=>{HL.log.push([Date.now()%1e7].concat(x));if(HL.log.length>40)HL.log.
 function npcW(r){if(!plain(r)||r.coop)return null;r=J(r);for(const f of VIEW)delete r[f];if(Array.isArray(r.staff))r.staff=r.staff.filter(s=>!(plain(s)&&s.coop));return r}
 function keyW(k,v){v=J(v);if(k==="emp"&&plain(v))delete v.known;if(k==="cm"&&plain(v))for(const f of X.CM_P)delete v[f];if(k==="men"&&Array.isArray(v))for(const x of v)if(plain(x))for(const f of X.MEN_P)delete x[f];return v}
 /* canonical world of a C (W part) or of this seat now (pid = this seat's player id) */
-function fromC(W){const o={S:{},R:{}};if(!W)return o;const s=W.S||{};for(const k of X.W_KEYS)if(k in s&&k!=="cnews")o.S[k]=keyW(k,s[k]);
+function fromC(W){const o={S:{},R:{}};if(!W)return o;const s=W.S||{};for(const k of X.W_KEYS)if(k in s&&k!=="cnews"&&!CLOCK.has(k))o.S[k]=keyW(k,s[k]);
  for(const r of W.R||[]){const n=npcW(r);if(n&&n.id!=null)o.R[n.id]=n}return o}
 function canon(){const d=ser(),pid=pidOf(CW.seat);const W={S:{},R:[]};for(const k of X.W_KEYS)if(k in d.S)W.S[k]=d.S[k];
  W.R=d.R.filter(r=>plain(r)&&!r.coop);const o=fromC(W);X.mapMe(o.S,true,pid);for(const id in o.R)X.mapMe(o.R[id],true,pid);return o}
@@ -265,7 +270,7 @@ function root(p){if(p[0]==="S")return{o:S,i:1};if(p[0]==="R"){if(p.length===1)re
 function resolve(p,upto){const r=root(p);let o=r.o;for(let i=r.i;i<upto;i++)o=step(o,p[i]);return o}
 function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=0;
  const q=quiet;quiet=true;CW.inFC=(CW.inFC||0)+1;/* a sync from the host, as fromCanon (the guest tripwire counts only writes outside it) */try{
-  for(const op of m.ops||[]){try{const [t,p]=op;
+  for(const op of m.ops||[]){try{const [t,p]=op;if(Array.isArray(p)&&p[0]==="S"&&CLOCK.has(p[1]))continue;/* the clock: merged week only (CLOCK) */
    if(t==="s"||t==="d"){const last=p[p.length-1];if(Array.isArray(last)){/* an id element replaced / dropped */const arr=resolve(p,p.length-1);if(!Array.isArray(arr)){miss++;continue}
       const i=arr.findIndex(e=>plain(e)&&(last[0]==="i"?e.id===last[1]:e.sid===last[1])&&!e.coop);if(t==="d"){if(i>=0)arr.splice(i,1)}else{const nv=toLive(op[2],"x");if(i>=0){const tg=arr[i];for(const k of Object.keys(tg))if(!(k in nv)&&!VIEW.has(k))delete tg[k];Object.assign(tg,nv)}else arr.push(nv)}ok++;continue}
     const par=resolve(p,p.length-1);if(!par||typeof par!=="object"){miss++;continue}const k=last===String(pidOf(CW.seat))?"me":last;
