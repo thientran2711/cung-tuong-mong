@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"51878a40+","t":"2026-11-22T06:53Z","c":"coop-thin-g-f1 #6: G2 root = the solo twin took two branches the thin room does not (test side, not the game)","b":"15267c7a40c7","h":[{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"}]};
+window.CTM_BI={"s":"3a0f39a0+","t":"2026-11-22T13:08Z","c":"coop-thin-g-f1 #7: ROOT of the cyc «som» / night / timer reds = TEST BOT, lost in the LIVE merge 067ee9a9","b":"c5f5164ee665","h":[{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49026,7 +49026,7 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);
  try{resApply(m)}catch(e){console.error(e)}
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
- try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
+ try{if(S&&!S.dead&&CW.sent===wk()&&!gG()/* part G (L13 guest): she never sends `end`; clearing sent would only drop her g-go (coop-thin-g-f1 #7, as re-end) */){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
  COOP.send({t:"actr",id:m.id,ok:true,ack:1})}
 /* thin F1 (level 6, foreman ruling 18/11): the act appliers (resApply → famApply / petApply) run ONLY on the host (her acts on him: his
    context once hers closes; his acts on her: D.resTo in her context b → patch). The guest never applies an act result locally: a call there
@@ -49671,7 +49671,7 @@ CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o
    side in the other player's context: from her card (picked in her context) → D.after = the host's side; from the host's own card →
    D.later(fs()) = her side. Old relays (act invite / actr, ctm-p2 bribe / briber / nbribe / ev) run only while dOn() is off. */
 CW.X.resApply=resApply;
-CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}};
+CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()&&!gG()/* part G (L13 guest): no `end` to resend — her g-go stays (her part-D patches after the host's go called this and dropped it: coop-thin-g-f1 #7) */){CW.sent=-1;sendEnd()}};
 CW.soonEnd=soonEnd;
 CW.hrCardTest=(h,was)=>hrCard(h,was);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
 /* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
@@ -95028,7 +95028,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="15267c7a40c7";window.CTM_BUILD=BUILD;
+const BUILD="c5f5164ee665";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

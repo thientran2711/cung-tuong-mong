@@ -737,7 +737,7 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);
  try{resApply(m)}catch(e){console.error(e)}
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
- try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
+ try{if(S&&!S.dead&&CW.sent===wk()&&!gG()/* part G (L13 guest): she never sends `end`; clearing sent would only drop her g-go (coop-thin-g-f1 #7, as re-end) */){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
  COOP.send({t:"actr",id:m.id,ok:true,ack:1})}
 /* thin F1 (level 6, foreman ruling 18/11): the act appliers (resApply → famApply / petApply) run ONLY on the host (her acts on him: his
    context once hers closes; his acts on her: D.resTo in her context b → patch). The guest never applies an act result locally: a call there
@@ -1382,7 +1382,7 @@ CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o
    side in the other player's context: from her card (picked in her context) → D.after = the host's side; from the host's own card →
    D.later(fs()) = her side. Old relays (act invite / actr, ctm-p2 bribe / briber / nbribe / ev) run only while dOn() is off. */
 CW.X.resApply=resApply;
-CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}};
+CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()&&!gG()/* part G (L13 guest): no `end` to resend — her g-go stays (her part-D patches after the host's go called this and dropped it: coop-thin-g-f1 #7) */){CW.sent=-1;sendEnd()}};
 CW.soonEnd=soonEnd;
 CW.hrCardTest=(h,was)=>hrCard(h,was);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
 /* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
