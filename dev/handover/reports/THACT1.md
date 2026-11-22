@@ -1,4 +1,5 @@
 # THACT1 — Thái hậu ACT (HĐ) seals: tone-down stills + animation (worker of Foreman C ROOT-C3 session_01D3E3NaHk4WXbAeqcG1iXWK; started under ROOT-C1, then ROOT-C2)
+# THACT1 — Thái hậu ACT (HĐ) seals: tone-down stills + animation (worker of Foreman C ROOT-C2 session_01D3E3NbRKVda1eN4trg7rnx; started under ROOT-C1 session_01D3E3NX4Gc3XCtkhsnipEAS)
 depth 1 · START_CTX ≈ 3 % of 1M (get_session read 0 → own estimate) · roll line 28 %, ceiling 60 % · finished well below the line (no handover needed) · 22/11
 Order: owner L2341 (21 tone-down emotion anims OK) + L2342 "Ok làm đi" → (1) missing th-act ẩn, bình, đau lòng, mưu + act-ghen REDRAW, (2) the old 17 th-act seals remade in the tone-down look.
 Count: brief said 22; distinct seals = **21** (act-ghen is in both lists). All 21 done, one try each, no redo needed.
