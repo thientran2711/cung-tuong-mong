@@ -134,3 +134,6 @@ Note: D (thin patches) is OFF in these rooms (D.N {} — withSeat changes made n
 | role-parity.test.js | ALL PASS |
 
 SẴN SÀNG KIỂM review/coop-guest-staff 40cc2b928
+
+## REVIEW r2 → LAND READY (recorded by D #20, 22/11 18:46Z, from rv F5fcyai6)
+LAND READY review/coop-guest-staff-rv3 40cc2b9288be4db7a15d3a6973e8a68586b58d45 (contains LIVE b238857f; test-only). coop-pets 54/54,54/54,53/54,54/54,54/54 (fail = old stress round 3 week merge, guest pend:true 4 vs 5); coop-guest-maid 39/39 ×2; coop-guest-lists-scan 11/10/1 (S.men open → coop-guest-men); coop-e2e 141/141; quickcheck PASS. Caveats: role-parity timed out on rv box (unverified; no game code); open flakes: coop-pets stress round 3 (~1/5), coop-guest-maid «links moved» (~1/3 at worker, 0/2 at rv).
