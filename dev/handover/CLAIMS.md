@@ -1070,7 +1070,7 @@ L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHF
 | coop-night0 stall fixer (opus BIG co-op LIVE bug; ORDER MAIN 104 06:28Z; root by rv 4jNDqKuC: host cung nữ nfOn false vs guest true, jnf.js:387) | review/coop-night0; reports/coop-night0.md | B | session_01N1tNP3HK3BJNWZ1ufSpLkD | SẴN SÀNG KIỂM 32f4afb9 | 22/11 06:45Z |
 | FOREMAN E #31 (opus; child of E #30, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #30 | session_01DgYSWoUyoZaYD9578iakz7 | RUNNING | 22/11 07:05Z |
 role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:harm:petcare gap + riseCore maid-rise Danh 3 vs BAL.ag.maid.rise 5; whole family) | review/role-parity-bundle-fix | session_01964izD4JTc9hWG68VKtmch | RUNNING | 22/11 06:57Z (Foreman D #18)
-places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | DONE LAND READY f90e455b | 22/11 06:57Z (Foreman D #18)
+places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | DONE LIVE 418bf356 (seat archived) | 22/11 06:57Z (Foreman D #18)
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NbFfa8pY5JZfpw38A2 | RUNNING | 2026-11-22T06:59Z (Foreman C ROOT-C3; replaces THACT3)
 | RELAND rel-men-servants r7 on LIVE (opus; MAIN 103 ORDER, jstip.js conflict vs bongloc-options) | review/rel-men-servants-r7 | B | session_01N1tNP5VS6ZVp3CRYrxc8sA | RUNNING | 22/11 04:22Z |
 | RELAND night-ledger KP01 r2 on LIVE ddcca5c1 (opus BIG reviewer-lander; MAIN 98 ORDER 18:08Z, D night-balance-bundle now LIVE) | review/night-ledger-r2; reports/night-ledger.md | B | (opening) | RUNNING | 22/11 04:31Z |
@@ -1079,7 +1079,7 @@ night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964i
 night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | (opening) | RUNNING | 22/11 03:22Z (Foreman D #18)
 | E44d coop-famops-p fixer (P1–P4 pre-existing co-op item dup/vanish; opus BIG; successor of E44c, depth 4) | review/coop-famops-p; reports/coop-famops.md | FOREMAN E #31 | session_01DgYSWnPPS3JD1PLTsrLBCp | SSK 1033eb2e (on LIVE f0070e61) | 22/11 07:45Z |
 | REVIEW E50r coop-famops-p BIG co-op (opus; briefs/E50r-review-coop-famops-p.md) of 1033eb2e | review/coop-famops-p-r; reports/coop-famops-p-review.md | FOREMAN E #31 | session_01DgYSWkzmNQRsuChoadrL1i | RUNNING | 22/11 07:37Z |
-REVIEW places-wire-nvp-tn (SMALL sonnet) | review/places-wire-nvp-tn-rv | session_01964izFfXLMw4vErQePQuKf | DONE LAND READY f90e455b | 22/11 07:51Z (Foreman D #18)
+REVIEW places-wire-nvp-tn (SMALL sonnet) | review/places-wire-nvp-tn-rv | session_01964izFfXLMw4vErQePQuKf | DONE LIVE 418bf356 (seat archived) | 22/11 07:51Z (Foreman D #18)
 | REVIEW coop-night0 (opus BIG co-op) of 32f4afb9 | review/coop-night0-r1 234d0298; reports/coop-night0.md | B | session_01N1tNP3KWzR2PZhLsfwtajY | PASS 234d0298 → LAND READY MAIN 105; on call | 22/11 07:56Z |
 REVIEW role-parity-bundle-fix (BIG opus) | review/role-parity-bundle-fix-rv | session_01964izFRgtaMS3fADE2hXYA | RUNNING | 22/11 09:14Z (Foreman D #18)
 | night-ledger-coop r2 fixer (opus BIG co-op; successor of 6wkABAL1 at budget; FAIL 96c62324 case-5 stall) | review/night-ledger-coop-r2; reports/night-ledger.md | B | session_01N1tNP3C4XN63dXNqw9oz1w | RUNNING | 22/11 09:59Z |
