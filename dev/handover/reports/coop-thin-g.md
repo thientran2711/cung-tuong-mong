@@ -502,3 +502,15 @@ Her phone held 3 cards (Q[0].dfSeen, #modal hidden), host gHold, the week never 
 99201b6c = merge LIVE 87ac1ff4: jbal2 (both blocks), jcoopworld famApply (main E44 held case + our coop-thin-laydo __inv0 mark), cyHold block (our 1 s eW check + main's coop-cyhold timeout / peer re-say; cyWait keeps cyLost / cyReask before main's cyTo), jentry/jkc (our kcPhucEnd seam kept, main's Phúc tuyển podium inside it, not drawn on the co-op host for her: COOPW.ctx). Seat-guard scan on main's new code: 0 raw seat reads. one-core / undef PASS.
 
 ### Item 2 — full lane @99201b6c — RUNNING (2 queues, /home/user/wt/out4/reg-sum.txt)
+
+### ROLLOVER HANDOVER F1 #4 → #5 (11/22/2026 01:30Z; context ≈30 % = START_CTX 5 % + 25 %)
+PRIORITY #1 CHECK: report + briefs/coop-thin-g.md + review/coop-thin-g-f1 log re-read; nothing new on main/review/* for jcoopthin* since 87ac1ff4.
+- Branch review/coop-thin-g-f1 @99201b6c (c40d175b bot fix ×16, 6a259bae PQ no-drop + assert, 99201b6c merge LIVE 87ac1ff4). Nothing unpushed.
+- Lane RUNNING from /home/user/wt/lane4 (q1.log/q2.log; script lane.sh; worktree /home/user/wt/ctg4; wrangler 127.0.0.1:8787 THINMAX 13, log /home/user/wt/wrangler.log). Summary /home/user/wt/out4/reg-sum.txt, per suite r-<name>.log. Do NOT rebuild ctg4 while it runs. If the container restarted: restart wrangler, then `bash lane.sh` queues again.
+- Results so far: trip1b (TRIP swap 1, DANHP) 83/83 PASS 1793 s. **trip1a (TRIP swap 1, DANHP) 73/83 FAIL — the Danh split REPRODUCED**: G1 weeks 11,12,14,15,18,20,21,23 diff ["danh",host,phone] = host +1 over phone, held ≥10 s, then the host store drops to the phone value with NO new patch (pn==N, pq 0, drop 0). Week 27: one stall (hw [26,26], noEnd 1, recovered at 28).
+- DANHP reading: her phone goes down FIRST through a patch, while COOPW.thin.seatOf('b').S.danh still shows the old value, and catches up seconds later. So it is NOT a doubled delta and NOT a lost patch (PQ fix holds: drop 0). The host's seat store is behind the patch it sent: something writes the old danh back into ST.b after the patch, then a later write restores the new value. Suspects: (1) the store rebuilt from canon after the week merge (jcoopthine.js:213 seatOf wrap; jcoopthin.js:117–131 seatDrop→seatOf from P.b of the merge); (2) E.wRestore/standBack in jcoopthing.js:81.
+- NEXT for #5:
+  (a) Add window.__drops (already recorded by the test, jcoopthin seatDrop stack) and the store's B.wk/fresh to the G1 FAIL print and to DANHP. Rerun trip1 swap 1 ×2 to confirm the rebuild suspect. Fix at the door for the whole family: every key restored by the rebuild, not only danh.
+  (b) Finish the lane rows. Pending: trip0a/b, g4, g4s, e2e*, cyc*, timer, night, f3s–f6bs, as9/13*, emo, ow, perf. Then role-parity alone + quickcheck.
+  (c) Write the '## F1 FIX' verdict, send "SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG", and add one line at END of FOREMAN_B_STATUS.
+- FYI kept: I left the e7b996f2 jcoopthine.js hunk (LIVE on review/coop-guest-week-lag 3f1cec27) untouched. The split above is the store-lag family, not the doubling family.
