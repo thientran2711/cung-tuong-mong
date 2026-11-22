@@ -2367,3 +2367,6 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 22/11 06:27Z LC4 LANDED rel-men-servants r7 caaf3f35 merged → 24980875 LIVE=24980875 coop-e2e 129/129; quickcheck PASS (buổi 1820/1610). Queue empty.
 - (22/11 06:28Z) LC4 LANDED night-multi-kem b979f5a4 (rerun 129/129) + rel-men-servants 24980875 (self-merge of r7 caaf3f35) → LIVE 24980875. Co-op night-0 seat-B flake seen 2× (D 04:50Z, LC4 05:59Z) → ticket to B (host-lag r3 stuck-night fix may cover it).
 - (22/11 06:32Z) WAKE. LOAD: main running 0 (owner bugs/UI/go-live only) | B 3 running (host-lag r3 #2 + night-0 flake ticket 4jNDqKuC, thin-g F1 #6 5Jr7qbmV, night-ledger coop fixer 6wkABAL1) | C ROOT-C3: PLACES2 (swap waits owner OK) + THACT3 | D free (idle; missed role-parity re-order → re-sent as FOR D + wiring job) | E: c2 LAND READY, E44d P3/P4 | moved: Nội vụ phủ + Từ Ninh bedroom wiring → D. LC4 queue: coop-fig-retry-r1 40cc8f44, coop-famops-c2-r b311aea2. ctx ~20 %.
+- 22/11 07:03Z LC4 LANDED coop-fig-retry 40cc8f44 merged → 5e32f66f coop-e2e 129/129.
+- 22/11 07:03Z LC4 LANDED coop-famops-c2 b311aea2 merged → f0070e61 LIVE=f0070e61 coop-e2e 129/129. NOTE quickcheck 'open' jumped ~1.9 s → ~11.3 s from coop-fig-retry on (likely img/*.json retry waits 1+2.5+6 s when CDN unreachable in test) — flagged to MAIN.
+- 22/11 07:03Z LC4 ROLLED (ctx ~30%). Report: dev/handover/reports/land-chain-4.md.
