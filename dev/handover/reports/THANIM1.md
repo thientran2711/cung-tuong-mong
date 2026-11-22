@@ -29,5 +29,15 @@ Giận B shows an anger mark (not steam) by the hair — fine.
 | ghen | M2301-07 | lJmUWkGgv9 | eI4Brq8dqL | aFzEJZVfSh | N2b38Q46D9 | xSoszd3jfW |
 Preview: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/anim/th-tonedown-batch2-anim.webp (4.7 MB)
 Notes: gestures small as asked; sợ B has open trembling mouth (face strength like its A). BACK glitches: đau lòng and ghen — disc goes dark/flat in 1–2 frames while shrinking; ẩn — mist fades mid clip. Cosmetic, no redo.
+## Batch 3 (5 seals) — 14 775 cr
+| seal | code | A (flattened upload) | B | OUT | LOOP | BACK |
+|---|---|---|---|---|---|---|
+| lo | M2301-08 | IfRhURUtvE | YMg0HymWeC | JNEPXnZOq4 | xSosWNTjfW | bxDk2Jt5Y2 |
+| mưu | M2301-09 | vQGCOG0a47 | s7tS0EHl8e | dt9osHBXSL | aFzEPLJfSh | 0ewMKaOTfW |
+| tự tin | M2301-10 | xSosYobjfW | Td7DK6UVNR | nVlcHtiYQD | 79CydYnJAL | EbWFNSzuuO |
+| tình tứ | M2301-11 | Syv7MaiUb8 | Syv7MqnUb8 | nVlcHm3YQD | gOhwMG2SXO | tCZv7xNmZJ |
+| hưng khởi | M2301-12 | dt9oLNLXSL | UPaJD5Jwny | 5jp1A9rKxe | xSosWRpjfW | lJmUVG1gv9 |
+Preview: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/anim/th-tonedown-batch3-anim.webp (4.9 MB)
+Notes: gestures small, two hands only (tình tứ ok). BACK glitches: tình tứ (disc goes flat pale pink 2 frames), hưng khởi (BACK ends in a dark pink "tunnel" disc for ~3 frames — worst so far, recommend BACK redo if owner agrees, 940 cr). Cosmetic otherwise.
 ## Next
-Batch 3 = M2301-08..12 (lo, mưu, tự tin, tình tứ, hưng khởi).
+Batch 4 = M2301-13..17 (tinh nghịch, hổ thẹn, chán, khó chịu, choáng), then 5 = hờn (1 seal).
