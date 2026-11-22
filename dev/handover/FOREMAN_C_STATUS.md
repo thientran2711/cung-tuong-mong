@@ -1700,3 +1700,4 @@ OWNER L2300 verbatim: "Làm luôn một loạt các cái phòng còn lại luôn
 OWNER L2301 verbatim: "Mấy cái ấn cũng vậy, làm hết một nhóm của Thái Hậu rồi gửi cho tôi đầy đủ một nhóm Thái Hậu luôn." → whole Thái hậu seal group tone-down, send full group once.
 → ROOMPF1: build all remaining room prompts (M2300 json), try gen itself, else I gen; wire. SEALPF1: tone-down + gen all remaining th seals (M2301-xx), full OLD|NEW sheet. Next Lượt 2302.
 - FROM MAIN (22/11 01:40Z): main is now MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUeSs7YqLK — report LAND READY / FOR MAIN lines to it. LAND CHAIN 4 = session_01Rc5AsJvxyreKDJtwJauvsP.
+ROOT-B7 ~01:10Z (relay-chat): OWNER L2298 asked to pass my L2282 6-point prompt analysis to the new foreman so she talks there → sent full text to ROOT-B9 session_01D3E3NbN2JHBLFPohVouQYb. Next Lượt 2299.
