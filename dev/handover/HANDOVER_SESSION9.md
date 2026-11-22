@@ -2339,3 +2339,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 01:56Z) LC4 LANDED night-balance-bundle 8746a062 → LIVE 8746a062 (FF, coop-e2e 124/124). D told: GO rival-hauthay; od03 re-merge.
 - (22/11 02:38Z) WAKE. LOAD: main running 0 | B free 0 (+FIGURES retry ordered) | C busy (ROOT-C1 now; owner room/bed/seal loop) | D: od03 landing, rival-hauthay GO | E: c2 BIG rv near PASS, E44d P3/P4 | moved: FIGURES.json retry bug → B. LC4 queue: od03-favart-rv bb92f986 (hold lifted), coop-host-lag-r2 273a527a6. C prompt J1–J5 handoff to owner: no ack yet.
 - 22/11 02:48Z LC4 LANDED od03-favart bb92f986 (FF) LIVE=bb92f986 coop-e2e 129/129. FAIL coop-host-lag-r2 273a527a: REAL CONFLICT dev/test/coop-ask-srvprobe.js vs LIVE bb92f986 → owed back to B (r3 on LIVE). Queue empty.
+- (22/11 02:50Z) LC4: od03-favart LANDED → LIVE bb92f986 (129/129). coop-host-lag-r2 FAILED (REAL CONFLICT clear() in 18 coop tests) → B owes r3 on bb92f986.
