@@ -37,6 +37,12 @@ const petKey=P=>P?[P.t,P.at,P.from].join("|"):"";
 const MAN_F=["away","ban"];
 const manSig=(m,f)=>f?Object.keys(f).sort().map(k=>k+"="+JSON.stringify(f[k])).join("&"):"new";
 const menP=()=>(CW.X&&CW.X.MEN_P)||[];
+/* her act on the Thái hậu's illness, on a host value: ONE rule for the host (hTh) and her stand-in (settle), so both seats show the same.
+   On the value she saw → hers; a cure still cures; an ease eases the host's illness by the same stages; else stale (undefined = no change) */
+const illEq=(x,y)=>x==null||y==null?x==null&&y==null:x.k===y.k&&(x.st|0)===(y.st|0)&&!!x.mort===!!y.mort;
+function thPredict(cur,a){cur=cur==null?null:cur;const b=a.b==null?null:a.b,v=a.v==null?null:a.v;
+ if(illEq(cur,b))return v==null?null:J(v);if(v==null)return null;
+ if(cur&&b&&v.k===b.k&&cur.k===b.k&&(v.st|0)<(b.st|0))return Object.assign(J(cur),{st:Math.max(1,(cur.st|0)-((b.st|0)-(v.st|0)))});return undefined}
 
 /* ---------- guest: temp ids ---------- */
 (function(){const f=newRival;newRival=function(){const v=f.apply(this,arguments);try{if(guest()&&live()&&v&&!v.coop){rid--;S.askT=(S.askT||0)+1;v.id=TMP+S.askT;N.made++;
@@ -77,9 +83,11 @@ function collect(d){const B=CW.base&&CW.base.W&&CW.base.W.R||[];const bm=new Map
     → request kind "th" {b: the host's value she saw at her last rebuild, v: hers}. Every world roll of it is host-only (j13 illMonth and
     jmort's month: worldOn), so what differs on her seat is her act, wherever it resolves (an act, a dialog, a j72 wait step in her week end). */
  {const bS=CW.askSnap;if(bS){const b=bS.th==null?null:bS.th,v=d.S.thIll==null?null:d.S.thIll;
-  const diff=!d.S.thDead&&!bS.thDead&&JSON.stringify(b)!==JSON.stringify(v),id=diff?"th:"+JSON.stringify(b)+">"+JSON.stringify(v)+"@"+(bS.g||0):null;/* @g: see man */
-  for(let i=L.length-1;i>=0;i--){const o=L[i];if(o&&o.k==="th"&&o.id!==id)L.splice(i,1)}
-  if(diff)add({id,k:"th",b:J(b),v:J(v)})}}
+  /* an open request whose stand-in is what she sees now is still the one (a rebuild moved the host's value under it, not her) */
+  const op=L.find(o=>o&&o.k==="th"),r0=op&&!d.S.thDead?thPredict(b,op):undefined,held=r0!==undefined&&illEq(r0,v);
+  if(!held){const diff=!d.S.thDead&&!bS.thDead&&!illEq(b,v),id=diff?"th:"+JSON.stringify(b)+">"+JSON.stringify(v)+"@"+(bS.g||0):null;/* @g: see man */
+   for(let i=L.length-1;i>=0;i--){const o=L[i];if(o&&o.k==="th"&&o.id!==id)L.splice(i,1)}
+   if(diff)add({id,k:"th",b:J(b),v:J(v)})}}}
  d.S.coopAsk=J(L);if(CW.askSnap)d.S.askSnap=J(CW.askSnap);/* rides her own saved week: a rejoin's restore takes it back (the room's C may already hold her own road's man) */
  if(fresh.length)setTimeout(()=>{try{if(COOP.state.status==="open")COOP.send({t:"act",k:"ctm-ask",mode:"ask",id:"ask:"+fresh.map(a=>a.id).join(","),L:J(fresh)})}catch(e){}},0)}
 (function(){const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(guest()&&live()&&d&&d.S&&d.R)collect(d)}catch(e){console.error("ask collect",e)}return d}})();
@@ -103,7 +111,7 @@ function settle(d){const L=d.S.coopAsk;if(!Array.isArray(L)||!L.length)return;co
    if(a.v&&Array.isArray(d.S.men)){const m=d.S.men.find(x=>x&&x.id===a.mid);
     if(!m){d.S.men.push(J(a.v));N.ghost++}else if(a.f){if(a.f.alive===false)m.alive=false;for(const k of MAN_F)if(k in a.f){if(a.f[k]==null)delete m[k];else m[k]=J(a.f[k])}}}
    keep.push(a);continue}
-  if(a.k==="th"){if(res)continue;d.S.thIll=J(a.v);keep.push(a);continue}/* open: her stand-in of her own act on the Thái hậu */
+  if(a.k==="th"){if(res)continue;const r=thPredict(d.S.thIll,a);if(r!==undefined)d.S.thIll=r;keep.push(a);continue}/* open: her stand-in = what the host will make of it (thPredict) */
   if(res){try{const b=CW.askBack&&CW.askBack[a.k];if(b)b(d,a,res)}catch(e){console.error("ask back",a.k,e)}
    if(res[0]===0&&a.k==="srv"&&a.s&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.s.sid)&&a.s.spyFor==null){d.S.staff.push(srvHome(a.s));N.returned++}continue}
   keep.push(a)}
@@ -136,11 +144,7 @@ function hMan(a){if(!a.v||a.mid==null)return 0;if(!Array.isArray(S.men)){try{men
  for(const k of MAN_F)if(k in f){if(f[k]==null)delete m[k];else m[k]=J(f[k])}return 1}
 /* her act on the Thái hậu's illness: applied on the value she saw; the host's own roll since then: a cure still cures, an eased stage eases
    the host's illness by the same steps (solo rules: j71 cure = null, j72 easeTH = one stage); anything else is stale (0, nothing changes) */
-const illEq=(x,y)=>x==null||y==null?x==null&&y==null:x.k===y.k&&(x.st|0)===(y.st|0)&&!!x.mort===!!y.mort;
-function hTh(a){if(S.thDead)return 0;const cur=S.thIll==null?null:S.thIll,b=a.b==null?null:a.b,v=a.v==null?null:a.v;
- if(illEq(cur,b)){S.thIll=J(v);return 1}
- if(v==null){S.thIll=null;return 1}
- if(cur&&b&&v.k===b.k&&cur.k===b.k&&(v.st|0)<(b.st|0)){cur.st=Math.max(1,(cur.st|0)-((b.st|0)-(v.st|0)));return 1}return 0}
+function hTh(a){if(S.thDead)return 0;const r=thPredict(S.thIll,a);if(r===undefined)return 0;S.thIll=r;return 1}
 const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid,srvout:hSrvOut,man:hMan,th:hTh};CW.askH=H;/* other modules add their kinds here (jdc: dcout / dcin) *//* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
 function hostApply(L,why){if(!host()||!live()||!Array.isArray(L))return 0;S.askDone=S.askDone||{};let n=0;
  for(const a of L){if(!a||!a.id||S.askDone[a.id]||!H[a.k])continue;let r=0;try{r=H[a.k](a)}catch(e){console.error("ask apply",a.k,e)}
