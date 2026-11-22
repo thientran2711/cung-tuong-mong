@@ -271,3 +271,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - FROM MAIN 106 (22/11 12:36Z): coop-one-world-flake-r1 006fb709 relayed to LC5 (2nd, after D role-parity).
 - FROM MAIN 106 (22/11 12:51Z): LIVE = 9c057f42 (D role-parity-bundle-fix landed); final-merge on it before LAND READY.
 - (22/11 13:04Z) WAKE 13:04Z 22/11 (B ROOT-10) → MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z: thanks — coop-one-world-flake-r1 006fb709 relayed to LC5 (test-only; FF over b55a0e1c, merges onto 9c057f42 with no game file). LIVE 9c057f42 told to both RUNNING workers (final-merge + role-parity ALL PASS now). RUNNING B: night-ledger-coop r2 fixer 3C4XN63d (gates green, 2 more coop-night runs), coop-thin-g F1 #7 5YQBiBE3 (cyc 66/66 now green; timer 40/43 root hunt); on call rv 5b1TY1PA (flake), 6V2KcQjF (night-ledger). ctx ~17 %.
+- FROM MAIN 106 (22/11 13:05Z): coop-one-world-flake LANDED — LIVE = 35f5b5ab (new base).

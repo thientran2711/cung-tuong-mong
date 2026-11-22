@@ -1083,3 +1083,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - last wake: 22/11 12:25Z (D #19; context ~14 %, rollover 32 %). LIVE b55a0e1c; no new ORDER/FOR D/FROM MAIN since 10:56Z. role-parity-bundle-fix-rv 9c057f42 LAND READY (12:20Z line, waits MAIN 106). D seats: coop-guest-staff worker EWWpayFt (opus, started 12:20Z). GAP_LIST_v4: D 0 NO-OWNER rows.
 - FROM MAIN 106 (22/11 12:36Z): role-parity-bundle-fix-rv 9c057f42 relayed to LC5 (1st in queue).
 - FROM MAIN 106 (22/11 12:51Z): role-parity-bundle-fix LANDED — LIVE = 9c057f42 (new base).
+- FROM MAIN 106 (22/11 13:05Z): LIVE = 35f5b5ab (B test-only flake fix landed).

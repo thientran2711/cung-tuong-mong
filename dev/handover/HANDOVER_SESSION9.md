@@ -2418,3 +2418,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 12:36Z) WAKE TRIGGER FIXED: MAIN 105 created trig_01Rap72qX3eefqACBs8Ke5sB "MAIN 106 hourly wake" (min 32, persistent → 106) and DISABLED 105's trig_012M8D2TYUcsBZWCgU3qVy9M (verified list_triggers). Next 106 must disable trig_01Rap72qX3eefqACBs8Ke5sB at its takeover.
 - (22/11 12:36Z) WAKE: LOAD: main running 0 | B ROOT-10 (night-ledger-coop r2, thin-g F1) | C quiet (PLACES held) | D #19 (coop-guest-staff worker EWWpayFt) | E #31 (E44f coop-famops-pv, E50r -p-r) | moved: none. Relayed to LC5: role-parity-bundle-fix-rv 9c057f42 (D), coop-one-world-flake-r1 006fb709 (B, test-only). LIVE b55a0e1c.
 - (22/11 12:51Z) LANDED role-parity-bundle-fix 9c057f42 (LIVE=9c057f42 FF, coop-e2e 141/141). LC5 now: coop-one-world-flake.
+- (22/11 13:05Z) LANDED coop-one-world-flake 35f5b5ab (LIVE=35f5b5ab, coop-e2e 141/141). LC5 queue empty.
