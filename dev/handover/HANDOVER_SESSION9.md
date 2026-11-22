@@ -2365,3 +2365,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 05:59Z) LC4 FAIL night-multi-kem b979f5a4 coop-e2e 110/130 (seat B stuck night 0; test-only diff) — same pattern D #18 saw 04:50Z on LIVE-identical build → likely pre-existing LIVE co-op flake. LC4 reruns queue once; if fails again → bare LIVE check → flake to B (host-lag r3 has stuck-night fix 6ff0f85f).
 - 22/11 06:27Z LC4 LANDED night-multi-kem b979f5a4 (FF) coop-e2e 129/129 on rerun (first run 110/130: seat B stuck «night 0» = pre-existing LIVE co-op flake, seen 2× incl. D #18).
 - 22/11 06:27Z LC4 LANDED rel-men-servants r7 caaf3f35 merged → 24980875 LIVE=24980875 coop-e2e 129/129; quickcheck PASS (buổi 1820/1610). Queue empty.
+- (22/11 06:28Z) LC4 LANDED night-multi-kem b979f5a4 (rerun 129/129) + rel-men-servants 24980875 (self-merge of r7 caaf3f35) → LIVE 24980875. Co-op night-0 seat-B flake seen 2× (D 04:50Z, LC4 05:59Z) → ticket to B (host-lag r3 stuck-night fix may cover it).
