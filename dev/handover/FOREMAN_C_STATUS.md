@@ -1762,3 +1762,4 @@ ROOT-C2 ~05:27Z: THACT1 act redo batch 1/3 (vui lo giận tình tứ ẩn, M2349
 ROOT-C2 ~05:30Z: PLACES1 batch 1/4 (M2355-01..05 DTĐ, Ngự thư phòng, Thái y viện, Lãnh cung, Nội vụ phủ; 675 cr) looked → forwarded to ROOT-C1 as L2357. Next Lượt 2358.
 ROOT-C2 ~05:33Z: PLACES1 batch 2/4 (M2355-06..10 Kính sự phòng, Tẩm cung, Thượng thư phòng, Phòng cung nữ, Cung nhân) looked → ROOT-C1 as L2358. M2355-08 desks mid-floor = L2303 fault → auto-redo (L2324). Floors 09/10 19.0/19.9 note. Next Lượt 2359.
 ROOT-C2 ~05:36Z: PLACES1 batch 3/4 (M2355-11..15 Tân giả khố, A ca sở, Đông cung, Phi tần cung, Ngự hoa viên) looked → ROOT-C1 as L2359 (mild: A ca sở bed cut right edge; Đông cung phoenix beam). Next Lượt 2360.
+ROOT-C2 ~05:40Z: THACT1 DONE 13 clear-action act seals @464072b (28 890 cr; chán OUT heavy zoom auto-redone). Batches 2–3 looked → ROOT-C1 as L2360. Final th act set = 13 M2349 + 8 kept M2342. THACT1 idle (archive refused for me). Next Lượt 2361.
