@@ -978,3 +978,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW coop-host-lag-r2 r2-r3 (opus BIG co-op; of 97efea56, after rv 4aNyydwD rollover) | review/coop-host-lag-r2-r1; reports/coop-host-lag.md | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 21/11 23:51Z |
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | RUNNING | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | REVIEW coop-guest-week-lag (opus BIG co-op OWNER-BUG) of 0860f601 | review/coop-guest-week-lag; reports/coop-guest-week-lag.md | B | session_01N1tNP5x6xp5Bx55tM27hes | RUNNING | 22/11 01:09Z |
+| coop-thin-g F1 fixer #5 (opus BIG co-op; successor of #4 48cvPSep) | review/coop-thin-g-f1 @99201b6c; reports/coop-thin-g.md | B | session_01N1tNP2pYTX6fTAsL7MNa3h | RUNNING | 22/11 01:23Z |
