@@ -1037,4 +1037,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 | BEDRUN1 redraw 13 bedrooms bed L29 (sonnet; OWNER L2342) | claude/cung-tuong-mong-handover-hj0h8w; reports/BEDRUN1.md | C | session_01D3E3NbTr3xRMKjjiWiQ6Ee | RUNNING | 22/11 04:12Z |
 | THACT1 22 Thái hậu act seals tone-down + anim (opus; OWNER L2342) | claude/cung-tuong-mong-handover-hj0h8w; reports/THACT1.md | C | session_01D3E3NXjSoX3YP2xrQyGVRy | RUNNING | 22/11 04:12Z |
 | coop-fig-retry (sonnet; MAIN 103 ORDER 03:38Z; FIGURES*.json fetch never retried → blank figure on weak network) | review/coop-fig-retry; reports/coop-fig-retry.md | B | session_01N1tNP4hS8MDh45AQmPKqGS | RUNNING | 22/11 04:22Z |
-| RELAND rel-men-servants r7 on LIVE (opus; MAIN 103 ORDER, jstip.js conflict vs bongloc-options) | review/rel-men-servants-r7 | B | session_01N1tNP5VS6ZVp3CRYrxc8sA | RUNNING | 22/11 04:22Z |
+| RELAND rel-men-servants r7 on LIVE (opus; MAIN 103 ORDER, jstip.js conflict vs bongloc-options) | review/rel-men-servants-r7 | B | session_01N1tNP6JwLm1fZbL7BEyGfE (5VS6ZVp3 rolled over unstarted) | RUNNING | 22/11 04:22Z |
