@@ -8,6 +8,8 @@ OUTD = os.path.join(ROOT, 'dev', 'handover', 'prompts_L2095')
 OUT = json.load(open(os.path.join(D, 'prompts_places_L2370.json')))
 # used codes are frozen: a key keeps its code forever; a new key gets the next free number (bug fixed 22/11 L2384: renumbering)
 CODE = {k: v['code'] for k, v in OUT.items()}
+CODE['khon-ninh-cung-r1'] = 'M2370-39'   # used by PLACES4 L2387 (Khôn Ninh edit, no builder prompt): frozen
+CODE['khon-ninh-cung-r2'] = 'M2370-46'   # PLACES4 L2389 Khôn Ninh open-window edit (no builder prompt): frozen
 def code_for(k):
     if k in CODE: return CODE[k]
     n = max(int(c.split('-')[1]) for c in CODE.values() if c.startswith('M2370-')) + 1; CODE[k] = f'M2370-{n:02d}'; return CODE[k]
@@ -227,7 +229,7 @@ for src, nk, reps in (('a-ca-so-r3', 'a-ca-so-r4', ACS4), ('thuong-thu-phong-r4'
 # Only the WINDOW clause changes (curtains -> lattice + paper); the shared style sentence says "carved lattice windows" instead of
 # "curtains"; the L30 window block (dev/art/common_blocks/window_L30.txt) is appended. Bed curtains stay (allowed by L30).
 for k in [k for k, v in OUT.items() if v.get('job') == 2387]: del OUT[k]
-WIN = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30.txt'), encoding='utf-8').read().strip()
+WIN = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30_v1_L2387.txt'), encoding='utf-8').read().strip()   # frozen: codes -33..38 used
 STY = ('same depth with furniture, curtains and objects', 'same depth with furniture, carved lattice windows and objects')
 def cut_to(p, start, end):   # the clause from `start` up to (not incl.) the first `end` after it
     i = p.index(start); j = p.index(end, i); return p[i:j]
@@ -263,16 +265,42 @@ for src, (nk, start, end, rep) in W87.items():
     p = p + WIN; CUT87[nk] = (old, v['code'], src)
     OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2387, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
     assert len(p) < 10000, (nk, len(p))
-import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387)}, 'places-M2370-L2376')
+# ===== PLACES4 L2389 (owner on the L2388 sheet: "Tạo sao cửa sổ kín mít vậy"): windows OPEN + bright (L30 overwritten).
+# Same sources as job 2387 (the ORIGINAL approved prompts); only the window clause differs; the current L30 block is appended.
+for k in [k for k, v in OUT.items() if v.get('job') == 2389]: del OUT[k]
+WIN2 = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30.txt'), encoding='utf-8').read().strip()
+OPEN = ("with NO curtains (rule L30) and the windows OPEN and bright: {f} lattice frames filled with translucent summer silk gauze "
+        "through which the sunny garden is clearly seen, one or two window panels swung open on their hinges showing green trees, "
+        "small clear glass panes in the lattice, daylight pouring in")
+F89 = {'a-ca-so-r4': ('a-ca-so-r6', "dark zitan bubu-jin and key-fret (only a thin gold line on the edges)"),
+       'thuong-thu-phong-r5': ('thuong-thu-phong-r7', "natural rosewood ice-crack and key-fret"),
+       'ngu-thu-phong-r3': ('ngu-thu-phong-r5', "gilded bubu-jin and key-fret"),
+       'phi-tan-cung': ('phi-tan-cung-r3', "pale green painted ice-crack"),
+       'tu-ninh-cung-r2': ('tu-ninh-cung-r4', "dark red lacquered longevity-character and key-fret with gilt edges"),
+       'dong-cung': ('dong-cung-r3', "gilt-edged bubu-jin")}
+CUT89 = {}
+for src, (nk87, start, end, rep87) in W87.items():
+    nk, f = F89[src]; v = OUT[src]; p = v['prompt']; old = cut_to(p, start, end)
+    rep = OPEN.format(f=f)
+    if src == 'phi-tan-cung' or src == 'dong-cung': rep = ' ' + rep
+    if src == 'dong-cung': rep += "; royal yellow like #EFBD69 silk stays on the cushions and lantern tassels"
+    if src == 'ngu-thu-phong-r3': rep += "; imperial yellow like #E3B04B dragon-roundel silk stays on the cushions and lanterns"
+    p = p.replace(old, rep).replace(*STY)
+    if src == 'tu-ninh-cung-r2':
+        p = p.replace('every curtain and hanging is rich amber', 'every hanging, cushion and door curtain is rich amber')
+    p = p + WIN2; CUT89[nk] = (old, v['code'], src)
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2389, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
+    assert len(p) < 10000, (nk, len(p))
+import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389)}, 'places-M2370-L2376')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
 for k, v in OUT.items():
-    if v['job'] not in (2376, 2381, 2384, 2387): continue
+    if v['job'] not in (2376, 2381, 2384, 2387, 2389): continue
     open(os.path.join(OUTD, f"{v['code']}_{k}_ha_sang.txt"), 'w').write(v['prompt'] + CAP.format(v['code']))
-print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387)}, 'ROOM GATE PASS')
-for nk, (old, bc, src) in CUT87.items():   # A38 sidecars: base = the prompt each was edited from; allow = the window clause only
+print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389)}, 'ROOM GATE PASS')
+for nk, (old, bc, src) in list(CUT87.items()) + list(CUT89.items()):   # A38 sidecars: base = the prompt each was edited from; allow = the window clause only
     k = OUT[nk]; f = os.path.join(OUTD, f"{k['code']}_{nk}_ha_sang.txt")
     why = '  # owner L2387 "Cửa sổ là không có rèm" + rule L30 (HIST2)'
     al = [x.strip(' ,;:') for x in re.split(r'[;:,]', old) if len(x.split()) >= 3] + ['curtains and objects arranged through the room']
-    if nk == 'tu-ninh-cung-r3': al.append('every curtain and hanging is rich amber')
+    if nk in ('tu-ninh-cung-r3', 'tu-ninh-cung-r4'): al.append('every curtain and hanging is rich amber')
     open(f + '.keep', 'w').write(f"base: dev/handover/prompts_L2095/{bc}_{src}_ha_sang.txt\n" + ''.join(f"allow: {a}{why}\n" for a in al))

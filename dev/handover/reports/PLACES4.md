@@ -89,3 +89,21 @@ Swap (after the owner sees): `swap_L2370.py` picks the highest -rN, so r5/r6/r4/
 - All 41 review pictures downloaded; `python3 dev/art/place-rank/swap_L2370.py` dry run = 17 rows, newest wins: a-ca-so←M2370-33, thuong-thu-phong←34, ngu-thu-phong←35, phi-tan-cung←36, tu-ninh-cung←37, dong-cung←38. md5 vs live CDN: exactly these 6 change, the other 9 are byte-identical (nvp / tu-ninh-cung-ngu are skipped by --go as before). Decap checked on all 6.
 - Khôn Ninh: new `python3 dev/art/place-rank/swap_L2387_khon.py` (dry run done): M2370-39 decapped (decap.py missed this caption → patched x0-275 y0-95 from the block to its right), resized to 1280×720 like its variants; `--go` writes img/khon-ninh-cung.webp + img/khon-ninh-cung-ha-sang.webp and cdn_syncs.
 - ON OK: `python3 dev/art/place-rank/swap_L2370.py --go && python3 dev/art/place-rank/swap_L2387_khon.py --go`, then check live sizes on the CDN.
+
+## L2389 — owner on the L2388 sheet: "Tạo sao cửa sổ kín mít vậy" → windows OPEN (ROOT-C5 GO 22:09Z; swap of -33..39 CANCELLED)
+- L30 overwritten (rule.py set, same number): no drapes, but windows OPEN and bright, never a closed wall of paper (gauze panes you see the garden through, 1–2 panels swung open, small glass panes). window_L30.txt = the new text; the old text is frozen as window_L30_v1_L2387.txt for the used codes -33..38.
+- Builder job 2389: record prompts M2370-40..45 (same ORIGINAL sources as 2387, open-window clause); room_gate PASS, keep_check PASS ×6. Codes: khon-ninh-cung-r1 = M2370-39 and khon-ninh-cung-r2 = M2370-46 are frozen in CODE (they have no builder prompt; a first rerun had wrongly given 39 to a-ca-so-r6 — removed before any gen).
+- 7 EDITs of the ORIGINAL approved pictures (garden view kept), 7 × 135 = **945 cr**:
+| code | key | from | gen id |
+|---|---|---|---|
+| M2370-40 | a-ca-so-r6 | M2370-31 vQG5MOsa47 | 8a3HKvgIrU |
+| M2370-41 | thuong-thu-phong-r7 | M2370-32 dt9fGgBXSL | rgByNS4xtc |
+| M2370-42 | ngu-thu-phong-r5 | M2370-26 O6u9Co7ynm | u5cLS1HQLD |
+| M2370-43 | phi-tan-cung-r3 | M2370-15 huACyU8vqL | dt9EHaFXSL |
+| M2370-44 | tu-ninh-cung-r4 | M2370-25 MBOd7xtDCm | iGKTp0F3uK |
+| M2370-45 | dong-cung-r3 | M2370-14 6A5ZvesiJO | lJm6Z6rgv9 |
+| M2370-46 | khon-ninh-cung-r2 | live khon-ninh-cung 6A5c5BsiJO | CqYxlLVEEy |
+Looked at all 7 (sheet, 2 halves): no window drapes; lattice frames with panels swung open, garden and trees clearly seen, daylight; furniture, beds + bed curtains, layout, colours kept. Note: A ca sở — the wall behind the bed (inside the canopy) also became an open window.
+Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l2370/people/L2389-old-new.jpg
+- Swap re-prepared (dry runs): swap_L2370.py now picks -40..45 (highest rN); swap_L2387_khon.py now uses M2370-46. Decap checked on all 7. ON OK: `python3 dev/art/place-rank/swap_L2370.py --go && python3 dev/art/place-rank/swap_L2387_khon.py --go`.
+PLACES4 credits total: 945 + 945 = **1 890 cr**.
