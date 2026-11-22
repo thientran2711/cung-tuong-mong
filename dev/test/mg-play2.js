@@ -64,9 +64,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  ok(fb&&fb.shown&&!fb.row,'fallback anchor (no row, no points) is SHOWN',fb);
  /* 4–6 Hoa đăng */
  await p.evaluate(()=>{mgCalRun("den")});await sleep(900);
- const rules=await p.evaluate(()=>{const d=document.querySelector('#kg82 .kgr-demo');const o=d&&d.querySelector('.kgr-obj');return{m:d&&d.dataset.m,bc:o&&getComputedStyle(o).borderTopColor,bad:getComputedStyle(document.documentElement).getPropertyValue('--bad').trim()}});
+ const rules=await p.evaluate(()=>({demo:!!document.querySelector('#kg82 .kgr-demo'),ev:!!document.querySelector('#kg82 .kgr-ev img')}));
  if(DIR){await sleep(900);await p.screenshot({path:`${DIR}/den-rules-${VW}x${VH}.png`})}
- ok(f.demoDen==='dodge'&&rules.m==='dodge'&&/rgb\(194, 59, 34\)|rgb\(/.test(rules.bc||''),'rules picture of Hoa đăng = «dodge» (plain lotus on a lit path)',rules);
+ ok(f.demoDen==='dodge'&&!rules.demo,'Hoa đăng rules screen: no rules-demo picture (mg-intro-2; the «Hướng dẫn» round teaches); the event picture is on top when the manifest has it',rules);
  await p.evaluate(()=>document.querySelector('#kg82 .kgr-go').click());await p.waitForFunction(()=>KG82.denPeek&&KG82.denPeek(),null,{timeout:30000});await sleep(3500);
  /* pixels from a real screenshot (the board paints CDN pictures, so the canvas itself is not readable) */
  const geo=await p.evaluate(()=>{const P=KG82.denPeek();const r=document.querySelector('#kg82 canvas').getBoundingClientRect(),k=r.width/P.W;const out=P.chan+P.cw*.8+28<P.W-6?P.chan+P.cw*.8+28:P.chan-P.cw*.8-28;

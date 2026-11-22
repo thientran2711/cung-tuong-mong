@@ -1,7 +1,7 @@
 /* coop-ge-npc (B LANDER #2b co-op land gate for review/ge-npc-r1): an NPC's grand ending (GE09) is resolved ONCE on the host (world owner), both seats
    read the same v.ge result through the thin lens, and the «Thiên hạ truyền tin» centre pop-up (GE08) shows on EACH seat once (geNs per player); the guest phone
    never resolves / moves an NPC road itself. Harness = coop-thancan.js head (lines 3-53 copied).
-   usage: python3 dev/build/assemble.py && node dev/test/coop-ge-npc.js <workerURL> [level=9] [swap=0|1] */
+   usage: python3 dev/build/assemble.py && [GE_BR=pt_tang] node dev/test/coop-ge-npc.js <workerURL> [level=9] [swap=0|1]  (GE_BR: road the NPC walks; origin = geOrig) */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -55,11 +55,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const [hv,gv]=[await H.p.evaluate(()=>COOPW.thin.hv),await G.p.evaluate(()=>COOPW.thin.view&&COOPW.thin.view.v)];if(hv===gv)return true}return false};
  await G.p.evaluate(()=>{window.__gN=[];const P=Q.push;Q.push=function(...a){for(const q of a)if(q&&q.t==="Thiên hạ truyền tin")__gN.push(JSON.stringify((q.kit&&q.kit.facts)||q.h||''));return P.apply(this,a)}});
  /* G1: host resolves an NPC road (forced success on a stay ending, as ge-npc-unit (2)) */
- const pick=await H.p.evaluate(()=>{const br=Object.keys(GE_DATA).find(b=>b==="tt_tranh")||Object.keys(GE_DATA).find(b=>nrRoads(b.split("_")[0]).includes(b));
-  const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.coop&&!x.queen&&x.name);if(!v)return{err:'no npc'};v.nr=nrNew(br.split("_")[0],br);v.ge=undefined;geNpcDbg.state(v);
+ const pick=await H.p.evaluate((BR)=>{const br=BR||Object.keys(GE_DATA).find(b=>b==="tt_tranh")||Object.keys(GE_DATA).find(b=>nrRoads(b.split("_")[0]).includes(b));
+  const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.coop&&!x.queen&&x.name);if(!v)return{err:'no npc'};v.nr=nrNew(geOrig(br),br);v.ge=undefined;geNpcDbg.state(v);
   const E=GE_CAT[br].e;const i=E.findIndex(e=>e[3]!==3&&!BAL.ge.npc.leave.includes(e[5])&&!BAL.ge.seat.includes(e[5]));const roll0=roll;let res=null;
   for(let t=0;t<40&&!(res&&res.ok&&res.i===i);t++){const g=v.ge;g.st=["o","o","o","o"];g.done=0;g.res=null;g.pull=[0,0,0,0];g.pull[i]=200;roll=()=>true;try{res=geNpcResolve(v)}finally{roll=roll0}v.alive=true}
-  return{id:v.id,name:v.name,b:v.ge.b,ok:!!(res&&res.ok),ti:res&&res.ti}});
+  return{id:v.id,name:v.name,b:v.ge.b,ok:!!(res&&res.ok),ti:res&&res.ti}},process.env.GE_BR||'');
  ok(pick.ok&&pick.ti,'G1 host resolved an NPC road (success)',pick);
  await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(500);await sync();
  const gv=await G.p.evaluate(id=>{const v=rivals.find(x=>x&&String(x.id)===String(id));return v?{name:v.name,b:v.ge&&v.ge.b,ok:!!(v.ge&&v.ge.res&&v.ge.res.ok),ti:v.ge&&v.ge.res&&v.ge.res.ti,done:v.ge&&v.ge.done}:null},pick.id);

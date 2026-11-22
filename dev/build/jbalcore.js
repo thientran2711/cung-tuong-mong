@@ -98,17 +98,17 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
    = BAL.art.odds[bậc] (passive weights: × BAL.art.side), Tứ đức Dung / Ngôn odds = the same ladder ---- */
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
- for(const k in ARTFX){ARTFX[k].forEach((s,i,arr)=>{const l=i+1;
+ for(const k in ARTFX){ARTFX[k].forEach((s0,i,arr)=>{const l=i+1;const T=s=>{
   s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
   {const re=/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?), Danh \+\d+/;/* the bậc-up Danh (BAL.art.danh) sits on exactly the bậc that give it */
    if(BAL.art.danh[l])s=re.test(s)?s.replace(re,`$1, Danh +${BAL.art.danh[l]}`):s.replace(/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?)/,`$1, Danh +${BAL.art.danh[l]}`);else s=s.replace(re,"$1")}
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
   s=s.replace(/\(mỗi bậc \+[\d,]+\)/g,()=>`(+${(SIDE[k]||[]).includes(l)?String(side(O[l])).replace(".",","):O[l]})`);
-  /* the deck cards each course opens: Sủng / Danh / Tâm cơ printed from BAL.deck + BAL.tw.g.ky (one core) */
-  if(k==="cam")s=s.replace(/(«Đàn khúc Phượng cầu hoàng»: Sủng \+)\d+/,`$1${BAL.deck.cam.w.sung}`);
-  if(k==="ky")s=s.replace(/(«Đánh cờ với Hoàng thượng»: )Sủng \+\d+, Danh \+\d+, Tâm cơ \+\d+/,`$1Sủng +${BAL.deck.ky.w.sung}, Danh +${BAL.tw.g.ky[0]}, Tâm cơ +${BAL.tw.g.ky[1]}`);
-  if(k==="vu")s=s.replace(/(«Kinh hồng vũ»: )Sủng \+\d+, Danh \+\d+/,`$1Sủng +${BAL.deck.vu.w.sung}, Danh +${BAL.deck.vu.w.danh}`);
-  arr[i]=s})}/* in place: ARTMS (j82) holds the same arrays */
+  /* the deck cards each course opens: Sủng stays LIVE's {sg:deck.*.w.sung} token (j1 sgRule, trait-scaled, read live); Danh / Tâm cơ printed from BAL.deck + BAL.tw.g.ky (one core) */
+  if(k==="ky")s=s.replace(/(«Đánh cờ với Hoàng thượng»: Sủng[^,]*), Danh \+\d+, Tâm cơ \+\d+/,`$1, Danh +${BAL.tw.g.ky[0]}, Tâm cơ +${BAL.tw.g.ky[1]}`);
+  if(k==="vu")s=s.replace(/(«Kinh hồng vũ»: Sủng[^,]*), Danh \+\d+/,`$1, Danh +${BAL.deck.vu.w.danh}`);
+  return s};/* LIVE sgRuleArr makes a token element ({sg:deck.*.w.sung}) a getter: wrap it (the live Sủng first, then this rewrite) — a plain write would be dropped */
+  const d=Object.getOwnPropertyDescriptor(arr,i);if(d&&d.get){const g=d.get;Object.defineProperty(arr,i,{get:()=>T(g()),enumerable:true,configurable:true})}else arr[i]=T(s0)})}/* in place: ARTMS (j82) holds the same arrays */
  /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
  {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.ag.par3.anthai.self.y-1;/* the gate the LIVE readers use (BAL.ag.par3.anthai.self.y = BAL.ag.cx2.kidHeal.y) */const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}

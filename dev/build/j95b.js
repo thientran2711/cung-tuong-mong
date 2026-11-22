@@ -247,7 +247,7 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
   /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;
   if(npcWhy("lieMe",{x})){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */
- for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(30))continue;let t="";try{t=npcAct(y,S)}catch(e){}
+ for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(BAL.odb.j95b.dcJ95bWeek))continue;let t="";try{t=npcAct(y,S)}catch(e){}
   if(t){J95B.stat.revenge++;log(t);Q.push({t:"Có người ra tay",who:pv(y),opt:1,h:`<p>${t}</p>${r.known?`<p><i>Nghe đồn ${y.name} làm vậy vì tin lời đồn kia.</i></p>`:""}`})}}}
 
 /* ---------------- 5. WIRING ---------------- */

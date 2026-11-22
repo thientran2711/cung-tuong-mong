@@ -59,7 +59,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  async function sitting(good){await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.suc=90;S.toilette=null;S.toilSeen=null;S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');S.inv.push({k:'hd_dao'},{k:'hd_sen'});
    try{closeModal()}catch(e){}deal();render()});await p.waitForTimeout(500);
   for(let i=0;i<4;i++){try{await require('./lib/roulette').clearMoments(p)}catch(e){}await p.evaluate(()=>document.querySelectorAll('.kfgain').forEach(e=>e.remove()));await p.waitForTimeout(200)}
-  await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');if(c)c.click();else toilOpen()});await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
+  await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');if(c)c.click();else toilOpen()});await p.waitForSelector('#toilrdy');await p.click('#toilrdy');await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
   await p.click('#toilok');await p.waitForTimeout(300);await p.evaluate(()=>{TOIL.clock=.25});await p.click('#toilmk');await p.waitForSelector('#kg82 .kswt');
   await p.$eval('#toilgo',e=>e.click());await p.waitForFunction(()=>TOIL.geo&&TOIL.geo.ready(),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(500);
   for(let i=0;i<2;i++){await p.waitForSelector('#toilnx',{timeout:30000});await p.click('#toilnx');await p.waitForTimeout(250)}

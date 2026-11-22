@@ -129,7 +129,7 @@ function ktPEx(d){return cl(Math.round((21-KT.exc+d)/41*100),0,100)}function ktP
 function ktOdds(k,E,prep){return oddsCl(ktPEx(ktEdge(k,E,prep)))}
 function ktList(E){return allKids().filter(([k])=>ktEl(k,E))}
 const KTG={ex:{fond:6,sung:3,danh:2},top:{fond:3,sung:2,danh:2},ok:{fond:1},poor:{fond:-3,danh:-1},skip:{fond:-2}};
-function ktGain(){return `con xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, Sủng +${KTG.ex.sung}, Danh +${KTG.ex.danh} (đứng đầu thêm thương +${KTG.top.fond}, Sủng +${KTG.top.sung}, Danh +${KTG.top.danh})`}
+function ktGain(){return `con xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, ${sgStat(KTG.ex.sung)}, Danh +${KTG.ex.danh} (đứng đầu thêm thương +${KTG.top.fond}, ${sgStat(KTG.top.sung)}, Danh +${KTG.top.danh})`}
 function ktLoss(){return `con thi kém: Hoàng thượng thương con ${KTG.poor.fond}, Danh ${KTG.poor.danh}`}
 PEND.kt53=pp=>{const E=KTE[pp.e];if(!E||!S)return null;const L=ktList(E);const mine=L.filter(([,v])=>!v).map(([k])=>k).filter(k=>k.hp>=35);if(!mine.length)return null;
  const row=([k,v])=>{const sick=k.hp<35;return `<div class="ktr"><span>${mdH(kidFace(k),"xs")}<span>${k.name} · ${k.age} tuổi · ${v?"con "+v.name:"<strong class=\"g\">con ngươi</strong>"}</span></span><b>${sick?"đang ốm, không dự":oddsChip(word(ktOdds(k,E,0)))+" được khen"}</b></div>`};const oth=L.filter(([,v])=>v).length;
@@ -152,13 +152,13 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
   x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&npwPick(["tell","quiet"],y=>{const B=BAL.ag.why.g2b.rev;return y==="tell"?B.base+(x.k.tut||0)*B.tut:B.quiet})==="tell")rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
  if(top&&!top.v)ghenAll(BAL.ghen.kidTop,"con ngươi hơn con người khác");
  const RW={ex:"Xuất sắc",ok:"Khá",poor:"Kém",skip:"Ở nhà"};
- const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">Sủng +${g.sung}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
+ const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">${x.p?sgOf(x.p,g.sung):sgStat(g.sung)}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
  res.sort((a,b)=>b.s-a.s);const shown=res.filter(x=>!x.v||x===top||(x.r==="ex"&&res.indexOf(x)<4));const hid=res.filter(x=>!shown.includes(x));
  const cnt=r=>hid.filter(x=>x.r===r).length;const sum=hid.length?`Các hoàng tự khác (${hid.length}): ${["ex","ok","poor","skip"].filter(r=>cnt(r)).map(r=>`${cnt(r)} ${RW[r].toLowerCase()}`).join(", ")}.`:"";
  const rows=shown.map(x=>`<div class="ktr"><span>${mdH(kidFace(x.k),"xs")}<span>${x.k.name} · ${x.v?"con "+x.v.name:"<strong class=\"g\">con ngươi</strong>"}</span></span><b class="${x.r==="ex"?"g":x.r==="poor"||x.r==="skip"?"r":""}">${x===top?"Đứng đầu · ":""}${RW[x.r]}</b>${x.v?"":`<small>${eff(x)}</small>`}</div>`).join("");
  const mineT=res.filter(x=>!x.v).map(x=>`${x.k.name}: ${x===top?"đứng đầu, ":""}${RW[x.r].toLowerCase()}`).join("; ");
  log(`${E.n}: ${mineT}.${top&&top.v?` Đứng đầu: ${top.k.name} (con ${top.v.name}).`:""} ${rev}`);
- Q.unshift({t:`Kết quả ${E.n.toLowerCase()}`,h:`<div class="ktlist">${rows}</div>${sum?`<p>${sum}</p>`:""}${rev?`<p>${rev}</p>`:""}<p class="past">Xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, mẹ Sủng +${KTG.ex.sung}, Danh +${KTG.ex.danh}; đứng đầu thêm. Khá: thương +1. Kém: thương ${KTG.poor.fond}, mẹ Danh ${KTG.poor.danh}. Ở nhà: thương ${KTG.skip.fond}.</p>`})}
+ Q.unshift({t:`Kết quả ${E.n.toLowerCase()}`,h:`<div class="ktlist">${rows}</div>${sum?`<p>${sum}</p>`:""}${rev?`<p>${rev}</p>`:""}<p class="past">Xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, mẹ ${sgStat(KTG.ex.sung)}, Danh +${KTG.ex.danh}; đứng đầu thêm. Khá: thương +1. Kém: thương ${KTG.poor.fond}, mẹ Danh ${KTG.poor.danh}. Ở nhà: thương ${KTG.skip.fond}.</p>`})}
 /* chỉ phi tần khác có con dự: một dòng tin, không hộp thoại */
 function ktQuiet(e){const E=KTE[e];S.kt53t=S.turn;const L=ktList(E).filter(([k])=>k.hp>=35);let best=null;
  for(const [k,v] of L){const s=ktEdge(k,E,0)+R(41)-20,r=s>=KT.exc?"ex":s<=KT.poor?"poor":"ok";ktApply(k,v||S,KTG[r]);k.lt={n:E.n,y:S.year,r,top:0};if(r==="ex"&&(!best||s>best.s))best={k,v,s}}
@@ -194,7 +194,7 @@ function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=wh
   if(cur&&!small)continue;/* thầy đang dạy: ghi ở dòng "Thầy" bên trái */
   B.push(pbtn(`data-kt53="tut" data-t="${t}" data-kn="${k.name}"`,t===0?"Cho con học chung":`Mời ${TUT[t]}`,sm,small||t1||(t&&S.bac<fee*2?`thiếu bạc (cần ${fee*2} cho hai tháng)`:"")))}
  const fo=od(KT.favO+S.sung/2);
- B.push(pbtn(`data-kt53="fav" data-kn="${k.name}"`,"Xin Hoàng thượng cử Đại học sĩ",`${word(fo)} · tốn: 2 khắc, Sủng -4 · thành: Đại học sĩ dạy con, học phí chỉ Bạc -${KT.feeFav} mỗi tháng · hỏng: ngài không cho, mất Sủng`,small||(k.tut===3&&k.fav?"đã có Đại học sĩ do ngài cử":t2)||(S.out?"đang ở lãnh cung":"")));
+ B.push(pbtn(`data-kt53="fav" data-kn="${k.name}"`,"Xin Hoàng thượng cử Đại học sĩ",`${word(fo)} · tốn: 2 khắc, ${sgStat(BAL.eff.j53.sungFav)} · thành: Đại học sĩ dạy con, học phí chỉ Bạc -${KT.feeFav} mỗi tháng · hỏng: ngài không cho, mất Sủng`,small||(k.tut===3&&k.fav?"đã có Đại học sĩ do ngài cử":t2)||(S.out?"đang ở lãnh cung":"")));
  const vr=ktRates(Object.assign({},k,{vt:1,age:Math.max(6,k.age)}),true).w,v0=ktRates(Object.assign({},k,{vt:0,age:Math.max(6,k.age)}),true).w;
  B.push(k.vt?pbtn(`data-kt53="vo" data-t="0" data-kn="${k.name}"`,"Thôi học võ",`thành: bớt Bạc ${KT.feeVo} mỗi tháng · kèm: Võ chậm lại (khoảng +${ktYear(k,"tw",v0)}/năm)`,small||t1)
   :pbtn(`data-kt53="vo" data-t="1" data-kn="${k.name}"`,"Mời thầy cưỡi ngựa bắn cung",`tốn: 1 khắc, Bạc -${KT.feeVo} mỗi tháng · thành: Võ khoảng +${ktYear(k,"tw",vr)}/năm${v0?"":" (không thầy: con gái không học võ)"}`,small||t1||(S.bac<KT.feeVo*2?`thiếu bạc (cần ${KT.feeVo*2})`:"")));
@@ -204,7 +204,7 @@ function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k
   log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}
- else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;const fo=od(KT.favO+S.sung/2);/* the odds on the card, read before the spend and the Sủng cost (shown-odds r2-rv) */spend(2);apply({sung:-4});title="Xin Hoàng thượng cử Đại học sĩ";
+ else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;const fo=od(KT.favO+S.sung/2);/* the odds on the card, read before the spend and the Sủng cost (shown-odds r2-rv) */spend(2);apply({sung:BAL.eff.j53.sungFav});title="Xin Hoàng thượng cử Đại học sĩ";
   if(roll(fo)){k.tut=3;k.fav=1;log(`Hoàng thượng chuẩn tấu, cử một Đại học sĩ dạy ${k.name}; học phí chỉ Bạc ${KT.feeFav} mỗi tháng.`);ok=true}
   else{log(`Hoàng thượng không cho: “Thượng thư phòng đã có thầy.” Xin không thành.`);ok=false}}
  else if(a==="vo"){t=+t;if(k.age<6||!can(t?1:0)||(t&&S.bac<KT.feeVo*2))return;if(t)spend(1);k.vt=t;title=t?"Mời thầy cưỡi ngựa bắn cung":"Thôi học võ";

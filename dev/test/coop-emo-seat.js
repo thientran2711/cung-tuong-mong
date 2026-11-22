@@ -21,7 +21,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{/* a manual kit scene (night-end «Nhận» #kneov, reward box): a player closes it with its own button [data-km-close] (rv night-balance-bundle, like coop-night) */const kc=[...document.querySelectorAll('.kmov [data-km-close]')].find(x=>x.offsetParent!==null&&!x.disabled&&x.getClientRects().length);if(kc){kc.click();return'x'}
    const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
@@ -95,8 +95,16 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const live=diff(await WORLD(A),await WORLD(B),'',[]);console.log('     (info) live view now differs on',live.length,'paths:',live.slice(0,6).join(' ; '));return sa[w]}
  await hook(A);await hook(B);await toDay();
  const w0=(await D(A)).w;await same('start');
- /* week 1: a plain week */
+ /* week 1: HER OWN ACT on an NPC sets that NPC's feeling (review/coop-emo-seat r2): on the guest it is recorded (S.coopEmo), the server merge keeps
+    the host's feelings, and at the merged week BOTH seats replay it the same; the host marks it taken (S.emoDone), the guest then drops it */
+ const WHY='thử lòng: được hảo hữu đối đãi chu đáo';
+ const tgt=await B.p.evaluate(why=>{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!sameHouse(S,x));if(!v)return null;
+   ACT.__emoT={f:(a,t)=>{emoSet(t,'vui',40,why);return ''}};runAct(S,v,'__emoT');delete ACT.__emoT;return {id:v.id,q:(S.coopEmo||[]).length}},WHY);
+ ok(tgt&&tgt.q===1,'guest: her own act on an NPC recorded once in her queue',tgt);
  ok(await nextWeek(w0),'week 1 merged on both');const W1=await same('after week 1');
+ if(tgt){const cz=o=>o.p.evaluate(([id,why])=>{const v=rivals.find(x=>x&&String(x.id)===String(id));const m=(v&&v.mk||[]).filter(c=>c.why===why);return {n:m.length,s:m.map(c=>c.s),done:S.emoDone||0,q:(S.coopEmo||[]).length}},[tgt.id,WHY]);
+  const ca=await cz(A),cb=await cz(B);ok(ca.n===1&&cb.n===1&&JSON.stringify(ca.s)===JSON.stringify(cb.s)&&ca.done>0,'merged week 1: her act\'s feeling is on that NPC once, the same on both seats; the host marked it taken',[ca,cb]);
+  W1.__tgt=tgt}
  const E1=Object.values(W1.R||{});ok(E1.length>0&&E1.every(o=>Array.isArray(o.emo)&&Array.isArray(o.emoMul)),'emotion + act weights read on every NPC (not an error string)',E1.map(o=>[o.name,o.emo,o.emoMul]).slice(0,4));ok(typeof W1.feel==='string'&&W1.feel.length>10,'BAL.feel read on both seats',W1.feel);
  /* week 2: the guest leaves mid-week and comes back by the link */
  {const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k);await leaveBack(B,A,'week 2 guest');await hook(B);
@@ -104,6 +112,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* week 3: the host leaves mid-week and comes back */
  {const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k);await leaveBack(A,B,'week 3 host');await hook(A);
   ok(await nextWeek(w0+2),'week 3 merged on both');const W3=await same('after week 3 (host rejoined)');
+ if(W1.__tgt){const q=await B.p.evaluate(([id,why])=>{const v=rivals.find(x=>x&&String(x.id)===String(id));return {q:(S.coopEmo||[]).length,n:(v&&v.mk||[]).filter(c=>c.why===why).length}},[W1.__tgt.id,WHY]);ok(q.q===0&&q.n<=1,'later weeks: the guest dropped the taken entry; the feeling was never applied twice',q)}
   /* the world moved at all (not a frozen probe) */
   const moved=Object.keys(W3.R).filter(id=>W1.R[id]&&JSON.stringify(W1.R[id])!==JSON.stringify(W3.R[id])).length;ok(moved>0,'the world moved between week 1 and week 3 ('+moved+' NPCs changed)')}
  ok(A.errs.length===0&&B.errs.length===0,'no page errors',[A.errs.slice(0,3),B.errs.slice(0,3)]);

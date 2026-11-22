@@ -24,8 +24,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    try{(0,eval)(src)}catch(e){r.openErr=String(e.message||e);return r}
    await sleep(o.wait||900);
    const box=o.j5?document.getElementById('mgb'):kg82Box();if(!box){r.nobox=1;return r}
-   const go=box.querySelector('.kgr-go');r.rules=!!box.querySelector('.kgr .kpst')&&/Luật chơi/.test(box.querySelector('.kgr .kpst').textContent)&&!!box.querySelector('.kgr .kgr-demo');
-   r.luat=!!box.querySelector('.kgr .kb');r.go=go?go.firstChild.textContent.trim():null;r.tutBtn=!!box.querySelector('#kgrtut');
+   const go=box.querySelector('.kgr-go');r.rules=!!box.querySelector('.kgr .kpst')&&/Luật chơi/.test(box.querySelector('.kgr .kpst').textContent)&&!!box.querySelector('.kgr .kpst .kfx')&&!box.querySelector('.kgr .kgr-demo');
+   r.luat=!!box.querySelector('.kgr .kpst .kfx')&&!box.querySelector('.kgr .kb');r.go=go?go.firstChild.textContent.trim():null;r.tutBtn=!!box.querySelector('#kgrtut');
    const clk=()=>{const c=document.querySelector('.kgame .kgclk');return !c||c.hidden};const tv=()=>{const e=document.querySelector('#kg82 [data-kg="time"]');return e?e.textContent:""};
    const idle=()=>KG82.phase!=='play'&&!KG82.run&&!box.querySelector('canvas')&&clk()&&!(o.j5&&!mgDone&&typeof mgStop==='function'&&mgStop);
    r.idle0=idle();const t0=tv();await sleep(1500);r.idle1=idle()&&tv()===t0;

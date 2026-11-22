@@ -79,6 +79,7 @@ function realFlip(){S.nfP=null;S.nfF=day();
  const n=typeof ntTaken==="function"?ntTaken():null;
  if(n){S.tonight=n.who==="me"?"me":((typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===n.who)||null);return}
  REAL=1;let r;try{r=f0.apply(this,arguments)}finally{REAL=0}
+ try{if(CO()&&!guest())S.nfH={d:day(),hold:enc(S.tonight)}}catch(e){}   /* the host's draw of this day, for a late fin (again) */
  /* her own summons (ksp / prep) waits for the choice from the moment the flip writes it: while another dialog holds the choice back
     (step's gate), the summons sitting in Q could be answered first and play her night before the choice (no defence, no tries) */
  try{const x=X();if(x&&x.st==="wait")for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}}catch(e){console.error(e)}
@@ -196,7 +197,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -235,7 +236,7 @@ function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t)
  let h,o;
  if(x.role==="def"){const ok=typeof stealShown==="function"?stealShown(S,"keep"):nfOdds(S,"keep");
   h=`<p>Thẻ bài của ngươi được lật. Kẻ khác có thể tranh mất đêm nay; ngươi có giữ chân Hoàng thượng không?</p>${clk()}`;
-  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
+  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì ${sgStat(B().keep.gain)} · hỏng: không mất gì`,go:()=>mine("keep")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
  else{const sh=m=>typeof stealShown==="function"?stealShown(S,m):nfOdds(S,m),o1=sh("feign"),o2=sh("road");/* the word she may know (the month's art unread = neutral, jbalcore) */const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
   h=`<p>Tối nay thẻ bài của ${NM(t)} được lật. Ngươi có ra tay giành đêm nay không?</p>${clk()}`;
@@ -277,7 +278,7 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  if(keep&&t===S)log(defOk?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
  const out=nfResolve(t,L,true,"flip");const won=out.res.find(r=>r.won);
  if(keep&&L.length){
-  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${n}.`);x.def.gain=n}
+  if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(n)}.`);x.def.gain=n}
   else{const w=entOf(won.w);if(w)keepRobbed(t,w,won.mode);x.def.oan=B().keep.oan}}
  gres(out,t===f?x.def:null);
  if(t===S&&!won)sealMe();   /* she kept her own flipped night */
@@ -298,7 +299,14 @@ function rerun(){if(RR!==day()||!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4()||(g
  RR=null;
  setTimeout(()=>{try{if(!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4())return;
   if(CO()){if(COOPW.pend)return;COOPW.allowN=true;try{nextBuoi()}finally{COOPW.allowN=false}}else nextBuoi()}catch(e){console.error(e)}},300)}
-const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this,arguments);try{if(nfOn())rerun()}catch(e){}return r};
+/* bundle (coop-night case 1): the host's day can move on before its choice of day d ends (jcoopworld cyFree → flip → soonEnd after the
+   cycle hold): no fin for d is ever sent, and a guest who waits on d (S.nfFin!==d → ask) is never answered. The host sends that day's fin
+   itself, once, from the draw (again); the guest asks again every BAL.steal.choice.ms while she waits (a lost ask / an early reply). */
+function finLate(){try{if(!CO()||!S||S.dead)return;
+ if(!guest()){const x=S.nfX;if(x&&x.d!=null&&x.d<day()&&S.nfFin!==x.d&&!x.late){x.late=1;x.st="done";again(x.d)}return}
+ if(S.nfW===day()&&S.nfFin!==day()&&Date.now()-(ASKT||0)>B().choice.ms){ASKT=Date.now();ask()}}catch(e){console.error(e)}}
+let ASKT=0;
+const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this,arguments);try{if(nfOn()){rerun();finLate()}}catch(e){}return r};
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
@@ -334,7 +342,9 @@ function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m
 /* the host's final word of a day (fin: holder, record, results) is kept in her save (S.nfLast) and sent again, AS IT WAS, when the guest asks
    for a day the host has already left: the host ends its day right after fin and runs ahead to the next one while the merged week is pending,
    so a guest who missed fin (dropped socket, reload, AFK phone) would wait for it forever — and the room with her (coop-night case 4/12, NLC #10) */
-function again(d){try{const f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);if(!f)return false;
+function again(d){try{let f=LAST&&LAST.d===d&&LAST.fin?LAST:(S&&S.nfLast&&S.nfLast.d===d?S.nfLast:null);
+ if(!f&&S&&d<day()){const h=S.nfH&&S.nfH.d===d?S.nfH:null;f={t:"act",k:NK,mode:"h",ph:"fin",d,week:COOP.state.week,hold:h?h.hold:(S.nfN===d?enc("me"):null)/* her night already played that day (no flip): the host held it */,ntk:null,fin:1,open:1,nw:null,ch:null,gres:null,gdef:null}}
+ if(!f)return false;
  COOP.send(Object.assign({},f,{id:NK+"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));return true}catch(e){console.error(e);return false}}
 /* the host answers "which word for day d?": a past day → its fin as it was; today → the last word again, or — after a reload, when LAST is gone —
    today's word rebuilt from the saved state (the flip / the choice / fin), so a guest is never left without the host's word (NLC #10) */
@@ -365,7 +375,7 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
    else if(g.txt)log(String(g.txt))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
    log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
-   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
+   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. ${sgStat(gd.gain)}.`)}}
   if(hadMe&&t!=="me"&&!won){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
   if(t==="me"&&!won)sealMe();

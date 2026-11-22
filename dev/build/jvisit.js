@@ -83,7 +83,7 @@ PEND.vnight=function(p){const d=PEND.night1({q:(p&&p.q)||B().q,vp:0});if(!d)retu
 /* the visit's extras, once, right after the night itself (nightFx) */
 (function(){const n0=nightFx;nightFx=function(s){const vis=S&&S.visNight!=null&&day()-S.visNight<=1;const r=n0.apply(this,arguments);
  if(vis)try{S.visNight=null;visAfter()}catch(e){console.error("visit after",e)}return r}})();
-function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen,"Hoàng thượng ngự giá đến cung ngươi");const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
+function visAfter(){const V=B();const L=[sgStat(V.sung),`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen,"Hoàng thượng ngự giá đến cung ngươi");const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
  const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
  if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
  if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}

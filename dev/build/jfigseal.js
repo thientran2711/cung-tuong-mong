@@ -23,7 +23,7 @@ const KFS_REG=new Map();let KFS_ID=0;
   if(q&&h&&h.indexOf('<span class="kszfs"><img ')>=0){const id=++KFS_ID;KFS_REG.set(id,q);if(KFS_REG.size>600)KFS_REG.delete(KFS_REG.keys().next().value);h=h.replace('<span class="kszfs"><img ',`<span class="kszfs"><img data-kfsp="${id}" `)}}catch(e){}return h}})();
 function kfsPerson(fig){try{if(fig.id==="mefig")return S;const id=fig.dataset&&fig.dataset.kfsp;if(id)return KFS_REG.get(+id)||null;const tok=fig.closest&&fig.closest("#tokens .tok");
  if(tok){const ppl=typeof curPeople==="function"?curPeople():[];return ppl[+tok.dataset.p]||null}}catch(e){}return null}
-function kfsFigs(){return[...document.querySelectorAll("#mefig,#tokens .tok.fig img.figimg,img.kesimg,.kszfs>img")].filter(e=>!e.closest(".kgfig,.kpfig,.kidfig2,.kfsno"))}
+function kfsFigs(){return[...document.querySelectorAll("#mefig,#tokens .tok.fig img.figimg,img.kesimg,.kszfs>img")].filter(e=>!e.closest(".kgfig,.kpfig,.kidfig2,.kfsno")&&!(e.closest(".dlg")&&!e.closest(".kbk-pg")&&e.closest("#modal")))/* owner 21/11 #73: a person frame shows the person ONCE: the left figure of a dialog carries no round head seal (it read as a second portrait of the same person); the feeling of a mood event sits on the event picture corner (KIT 28.19b mark) */}
 /* the drawn picture box inside the <img> (object-fit: contain, picture centred) */
 function kfsBox(fig){const r=fig.getBoundingClientRect();let bx=r.left,by=r.top,bw=r.width,bh=r.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh&&bw>0&&bh>0){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
