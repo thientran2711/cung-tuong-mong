@@ -1068,7 +1068,7 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NYKnmk9GLouSV3undg | RUNNING | 2026-11-22T06:31Z (Foreman C ROOT-C3; replaces THACT2)
 L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHFYCRGHbQSaDznRv | RUNNING | 2026-11-22T06:40Z (Foreman C ROOT-C3; replaces PLACES2)
 | coop-night0 stall fixer (opus BIG co-op LIVE bug; ORDER MAIN 104 06:28Z; root by rv 4jNDqKuC: host cung nữ nfOn false vs guest true, jnf.js:387) | review/coop-night0; reports/coop-night0.md | B | session_01N1tNP3HK3BJNWZ1ufSpLkD | SẴN SÀNG KIỂM 32f4afb9 | 22/11 06:45Z |
-| FOREMAN E #31 (opus; child of E #30, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #30 | session_01DgYSWoUyoZaYD9578iakz7 | RUNNING | 22/11 07:05Z |
+| FOREMAN E #31 (opus; child of E #30, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #30 | session_01DgYSWoUyoZaYD9578iakz7 | ROLLED → E #32 session_01DgYSWnEGVzwkWhcG3Ys2Fi | 22/11 07:05Z |
 role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:harm:petcare gap + riseCore maid-rise Danh 3 vs BAL.ag.maid.rise 5; whole family) | review/role-parity-bundle-fix | session_01964izD4JTc9hWG68VKtmch | DONE LIVE 9c057f42 (seat archived) | 22/11 06:57Z (Foreman D #18)
 places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | DONE LIVE 418bf356 (seat archived) | 22/11 06:57Z (Foreman D #18)
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NbFfa8pY5JZfpw38A2 | RUNNING | 2026-11-22T06:59Z (Foreman C ROOT-C3; replaces THACT3)
