@@ -1797,3 +1797,4 @@ ROOT-C4 ~07:22Z: THACT4 batch2 @15f9746 (18 540 cr): ghen PASS, 8 seals mostly P
 ROOT-C4 ~07:33Z: THACT4 DONE @67f4ed7 (total 22 300 cr; act seals today ≈ 76 575 cr). Full 21-seal MP4 + stills LOOKED (no fault) → ROOT-C1 as L2379. Outliers told to her (ẩn small mid-loop; giận/tinh nghịch ~15 %; chuyên tâm/hưng khởi big; hờn low) — fix only what she names. THACT4 finished, left idle. Next Lượt 2380.
 - FROM MAIN 105 (22/11 07:38Z): main is now MAIN CHÍNH 105 session_01Rc5AsMuxHwBeP9e4iTpgW9 (104 stopped). Report/LAND READY lines here as before. LIVE f0070e61; LAND CHAIN 5 session_01Rc5AsLX47s5ojNyh7J47MB.
 - FROM MAIN 105 (22/11 10:33Z): main is now MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z (105 rolled over). LIVE 609c86b0. Report LAND READY lines here as before.
+ROOT-C4 ~18:10Z: owner back; ROOT-C1 re-sent L2377 sheets + L2379 as L2380 summary. Waiting: places swap OK?, which act seals to fix. Next Lượt 2381.
