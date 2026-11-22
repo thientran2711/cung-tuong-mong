@@ -7,7 +7,8 @@ out, wd, figd = sys.argv[1:4]; items = [a.split(':') for a in sys.argv[4:]]
 SE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'stage_exact')
 import json
 NAMES = {k: v['name'] for k, v in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'prompts_places_L2355.json'))).items()}
-def label(code, key): return f"{code} · {NAMES[key]}"
+import re
+def label(code, key): return f"{code} · {NAMES[re.sub(r'-(r\d+|calm)$', '', key)]}"  # PLACES3: -r2/-r3/-calm keys
 F = '/usr/share/fonts/truetype/dejavu/'; fb = ImageFont.truetype(F + 'DejaVuSans-Bold.ttf', 24)
 PWF, PWI, G = 520, 1000, 12
 rows = []

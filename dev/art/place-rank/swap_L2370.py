@@ -7,9 +7,17 @@ import os, sys, json, subprocess, shutil
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..')); os.chdir(ROOT)
 R = 'img/_review/place-rank/places-l2370'; ST = R + '/swap'; os.makedirs(ST, exist_ok=True)
 D = json.load(open('dev/art/place-rank/prompts_places_L2370.json'))
-LIVE = {k: k for k in D if not k.endswith('-r2')}
+# PLACES3 (L2376): the newest version of a place wins: base < -r2 < -r3; '-calm' = 0 cr calm grade of the same picture (Ngự hoa viên).
+import re
+D['ngu-hoa-vien-calm'] = dict(D['ngu-hoa-vien'], code=D['ngu-hoa-vien']['code'] + ' calm')
+def _base(k): return re.sub(r'-(r\d+|calm)$', '', k)
+def _rank(k): m = re.search(r'-r(\d+)$', k); return int(m.group(1)) if m else (9 if k.endswith('-calm') else 0)
+best = {}
 for k in D:
-    if k.endswith('-r2') and os.path.exists(f'{R}/{k}-ha-sang.webp'): LIVE[k[:-3]] = None; LIVE[k] = k[:-3]   # r2 wins
+    if _rank(k) and not os.path.exists(f'{R}/{k}-ha-sang.webp'): continue
+    b = _base(k)
+    if b not in best or _rank(k) > _rank(best[b]): best[b] = k
+LIVE = {k: b for b, k in best.items()}
 NOTE = {'nvp': 'no img/nvp-ha-sang.webp live (live has nvp-v4-*, not referenced by index.html) -> ask foreman which key',
         'tu-ninh-cung-ngu': 'new picture, no live file yet -> needs a code hook-up (Từ Ninh bedroom)'}
 plan = []
