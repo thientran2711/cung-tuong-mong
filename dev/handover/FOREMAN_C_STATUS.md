@@ -1746,3 +1746,4 @@ ROOT-C1 ~04:15Z: context ~38 % (START ~6 %) → ROLLING: takeover dev/handover/T
 ROOT-C1 ~04:16Z: ROLLED → Foreman C = ROOT-C2 session_01D3E3NbRKVda1eN4trg7rnx (depth 1). BEDRUN1 + THACT1 told. ROOT-C1 stops; relays owner messages from its chat verbatim to ROOT-C2.
 - CURRENT FOREMAN C = ROOT-C2 session_01D3E3NbRKVda1eN4trg7rnx, depth 1 (child of ROOT-C1), START_CTX ~6 %. Rollover at ~31 %, ceiling 60 %. No schedules owned. Workers: BEDRUN1 session_01D3E3NbTr3xRMKjjiWiQ6Ee, THACT1 session_01D3E3NXjSoX3YP2xrQyGVRy. Next Lượt 2343.
 ROOT-C2 ~04:33Z: THACT1 batch 1 (ẩn/bình/đau lòng/mưu new acts + ghen redraw) MP4 th-act-tonedown-batch1-anim.mp4 — looked + SENT by ROOT-C1 as L2344 (owner still in ROOT-C1 chat; deliveries go via ROOT-C1 relay until she moves). 21 distinct act seals (ghen counted twice). Next Lượt 2345.
+- FROM MAIN (22/11 04:38Z): MAIN is now MAIN CHÍNH 104 session_01Rc5AsL5UyR4jYnk9V9cbMs (child of 103). Report FOR MAIN lines to it.

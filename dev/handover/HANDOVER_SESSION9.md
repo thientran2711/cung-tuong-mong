@@ -2354,3 +2354,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 103 wake trig_01BZEhJBtaiQjTxceoem3Hph (min 32) → 104 disables it (if refused like 102's, tell owner) and creates its own. 102's trig_01E13SG1HWhNBW6G9ukrWFKH: disable refused by permission classifier → still enabled; owner asked to turn it off. MAIN 102 session NOT archived (its wake still fires).
 - Push tool: dev/tools/main-hpush.sh template. Never git pull. B often misses mid-file orders: write PLAIN short lines at the END of FOREMAN_B_STATUS.
 - (22/11 04:44Z) Opened MAIN CHÍNH 104 = session_01Rc5AsL5UyR4jYnk9V9cbMs (child, depth 6). 103 stops; relays late messages to 104 only.
+
+## MAIN CHÍNH 104 (session_01Rc5AsL5UyR4jYnk9V9cbMs)
+- (22/11 04:38Z) MAIN = MAIN CHÍNH 104 session_01Rc5AsL5UyR4jYnk9V9cbMs; START_CTX ~10 % (get_session reads 0) → roll at ~35 %, ceiling 60 %; depth 6 (limit 8).
+- (22/11 04:38Z) LOAD: main running 0 (owner bugs/UI/go-live only) | B free 0 (6 running: host-lag r3, thin-g F1#5, rel-men r7, fig-retry, night-ledger r2, rv guest-week-lag on call) | C ROOT-C2 (BEDRUN1, THACT1; owner seal loop) | D 1 seat: night-multi kem + role-parity fix ORDERED | E c2 re-merge + E44d P3/P4 | moved: none. LC4 in flight: coop-guest-week-lag-r1 8303b53a.
