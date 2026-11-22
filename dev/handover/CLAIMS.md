@@ -952,7 +952,7 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-pframe-overlay | PASS | review/kit-pframe-overlay-rv 042d2b43724ce0efe8a091a19b838f234b389a71 | kit-pframe-overlay.js ALL PASS Fold+iPad, leftcol-read, quickcheck, coop-e2e 124/124 (one flake) |
 | rv-kit-pframe-overlay r2 | FAIL | review/kit-pframe-overlay-rv3 a8ccb93a1f39cbf109e1dcec44f5f2b7265b73c6 | band table not re-measured: 11/34 frames 6-26 units off; emp/consort-7 rows 19-21 px under band instead of 10-11 |
 | RELAND r3 ui-leftover-fold (opus; jk4 conflict vs kit-mark-fix resolved = LIVE rule) | review/ui-leftover-fold-r3 bca0052c; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 20:45Z |
-| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | RUNNING | 21/11 20:50Z |
+| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | ROLLED → E #31 | 21/11 20:50Z |
 | rv mg-craft-r4 (OPUS BIG reviewer-lander, MAIN 97 ORDER 17:02Z) | PASS | review/mg-craft-r4 c674cd021716bf5bf39a8239a8ad05076d6a544f | jtd.js both sides; quickcheck + coop-e2e 124/124 + coop-craft-hand both seats | session_01N1tNP3ZWMeRDarhzz276Yb | 21/11 |
 | rv-kit-pframe-overlay r3 | PASS | review/kit-pframe-overlay-rv4 95fd1253f13a033fbb343010367cdf8ce054fb9c | band within 3 units of independent measure; gap 10-12 px all cards; no halo; quickcheck + coop-e2e 124/124 |
 | REVIEW E48r coop-famops RELAND on LIVE 04afaeb7 + coop-famops-c2 BIG review (opus; briefs/E48r-review-coop-famops-reland-c2.md) | review/coop-famops-r2, review/coop-famops-c2-r | FOREMAN E #30 | session_01DgYSWpBzP3A6Bn8pRU8jcw | PASS 5341fe36 (LIVE) + c2 b311aea2 → LAND READY; ARCHIVED | 21/11 21:17Z |
@@ -968,7 +968,7 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-pframe-overlay | PASS | review/kit-pframe-overlay-rv 042d2b43724ce0efe8a091a19b838f234b389a71 | kit-pframe-overlay.js ALL PASS Fold+iPad, leftcol-read, quickcheck, coop-e2e 124/124 (one flake) |
 | rv-kit-pframe-overlay r2 | FAIL | review/kit-pframe-overlay-rv3 a8ccb93a1f39cbf109e1dcec44f5f2b7265b73c6 | band table not re-measured: 11/34 frames 6-26 units off; emp/consort-7 rows 19-21 px under band instead of 10-11 |
 | RELAND r3 ui-leftover-fold (opus; jk4 conflict vs kit-mark-fix resolved = LIVE rule) | review/ui-leftover-fold-r3 bca0052c; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 20:45Z |
-| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | RUNNING | 21/11 20:50Z |
+| FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | ROLLED → E #31 | 21/11 20:50Z |
 | rv mg-craft-r4 (OPUS BIG reviewer-lander, MAIN 97 ORDER 17:02Z) | PASS | review/mg-craft-r4 c674cd021716bf5bf39a8239a8ad05076d6a544f | jtd.js both sides; quickcheck + coop-e2e 124/124 + coop-craft-hand both seats | session_01N1tNP3ZWMeRDarhzz276Yb | 21/11 |
 | rv-kit-pframe-overlay r3 | PASS | review/kit-pframe-overlay-rv4 95fd1253f13a033fbb343010367cdf8ce054fb9c | band within 3 units of independent measure; gap 10-12 px all cards; no halo; quickcheck + coop-e2e 124/124 |
 | REVIEW E48r coop-famops RELAND on LIVE 04afaeb7 + coop-famops-c2 BIG review (opus; briefs/E48r-review-coop-famops-reland-c2.md) | review/coop-famops-r2, review/coop-famops-c2-r | FOREMAN E #30 | session_01DgYSWpBzP3A6Bn8pRU8jcw | PASS 5341fe36 (LIVE) + c2 b311aea2 → LAND READY; ARCHIVED | 21/11 21:17Z |
@@ -1060,3 +1060,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NYKnmk9GLouSV3undg | RUNNING | 2026-11-22T06:31Z (Foreman C ROOT-C3; replaces THACT2)
 L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHFYCRGHbQSaDznRv | RUNNING | 2026-11-22T06:40Z (Foreman C ROOT-C3; replaces PLACES2)
 | coop-night0 stall fixer (opus BIG co-op LIVE bug; ORDER MAIN 104 06:28Z; root by rv 4jNDqKuC: host cung nữ nfOn false vs guest true, jnf.js:387) | review/coop-night0; reports/coop-night0.md | B | session_01N1tNP3HK3BJNWZ1ufSpLkD | RUNNING | 22/11 06:45Z |
+| FOREMAN E #31 (opus; child of E #30, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #30 | session_01DgYSWoUyoZaYD9578iakz7 | RUNNING | 22/11 07:05Z |
