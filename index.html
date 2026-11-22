@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3a0f39a0+","t":"2026-11-22T13:08Z","c":"coop-thin-g-f1 #7: ROOT of the cyc «som» / night / timer reds = TEST BOT, lost in the LIVE merge 067ee9a9","b":"c5f5164ee665","h":[{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"}]};
+window.CTM_BI={"s":"b8ce6545+","t":"2026-11-22T13:37Z","c":"coop-thin-g-f1 #7: L13 guest keeps her g-go — reEnd / onRes no longer clear CW.sent when she sends no `end` (part G)","b":"52a9e3fec3f6","h":[{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -7651,7 +7651,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
  return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
-function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* balance-2 fault 9: a maid's name among servants is not a consort's name: only BAL.danhG.srvRise of it carries over */S.danh=Math.round((S.danh||0)*BAL.danhG.srvRise);/* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
+function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* balance-2 fault 9 (only BAL.danhG.srvRise of her servant Danh carries over) lives in riseCore, the same rule for an NPC maid (role-parity-bundle-fix) *//* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
  S.maid=newMaid(nmNew("maid"),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
  if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
@@ -36128,7 +36128,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (j42 srvRise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -51552,7 +51552,7 @@ function petTipShow(){try{kitModal({kind:"rule",title:"Thú nuôi",sub:"lời d�
    4. NPCs: same stages and stats (data only, they feed when they have the bạc). Old saves: stage from the time already owned, stats from khí lực. */
 Object.assign(BAL,{pet:{freeHiSung:3,/* Sủng lost when she sends back a pet the Emperor gave (jpet free) */stages:["Non","Thiếu niên","Trưởng thành","Linh thú"],ageW:[0,8,20,40],affNeed:[0,25,50,80],mul:[0,.6,1,1.4],
  decay:{full:14,clean:9,joy:11,aff:2},khac:1,gain:{feed:[12,40],bath:[10,40],play:[8,36]},affGain:[2,6],maidEff:.5,maidW:4,sad:30,sick:15,neglectW:3,
- helpRel:6,helpGain:25,stealO:[55,38,22,8],stealBite:[6,10,16,24],stealSuc:8,stealCaughtDanh:6,stolenAff:5,npcCare:.8}});
+ helpRel:6,helpGain:25,stealO:[55,38,22,8],stealBite:[6,10,16,24],stealSuc:8,stealCaughtDanh:6,stolenAff:5,npcCare:.8,/* role-parity-bundle-fix (law 1 + law 4): who an NPC CHOOSES to help — p3PetFr (jagacts3, AG plan) asks rel ≥ helpFr, the mind menu (below) rel ≥ helpMind; the act gate ACT.petcare.ok is ONE gate for her and an NPC */helpFr:10,helpMind:20}});
 const PETC_FOOD={meo:"cá",cho:"xương",chim:"hạt kê",tho:"cà rốt",ca:"mồi bánh",ho:"thịt",lan:"quả linh",phuong:"hạt ngô đồng",long:"ngọc châu",loc:"cỏ linh chi",hac:"cá nhỏ"};
 function petcKind(k){k=String(k||"");return /meo|mieu/.test(k)?"meo":/cho|sutu/.test(k)?"cho":/hoami|sao|vet|uyen|camke|ke/.test(k)?"chim":/tho/.test(k)?"tho":/cavang|cachep|lyngu|ly/.test(k)?"ca":/cuuvi|ho/.test(k)?"ho":/kylan|lan/.test(k)?"lan":/phuong/.test(k)?"phuong":/thanhlong|long/.test(k)?"long":/loc|thienma|ma/.test(k)?"loc":/quy|hac/.test(k)?"hac":"meo"}
 const PETC_FOODS=Object.values(PETC_FOOD).filter((x,i,a)=>a.indexOf(x)===i);
@@ -51727,7 +51727,7 @@ function petcQuick(kind){if(kitQuickRoll()){petcGain(kind,BAL.skip.care);return}
 function petcBestOf(t){return petTarget(t)}
 function petStealO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return BAL.odds.lo;const s=petStage(P),T=petT(P);return oddsCl(Math.min(Math.round(odA(a,BAL.pet.stealO[s]+(a.tamco||0)/6-T.tr*3)-(typeof tsbGuard==="function"?tsbGuard(t):0)),90))}
 function petStealWhy(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";return `${BAL.pet.stages[petStage(P)]} (càng lớn càng khó), ${PET_TIER[petT(P).tr]}, Tâm cơ ngươi, chó canh cung`}
-A("petcare","Giúp chăm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&(a===S?true:rel(a,t)>=10),o:()=>null,x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";petcInit(P);
+A("petcare","Giúp chăm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0,/* law 1: the same gate for her and an NPC; an NPC's friend test is her CHOICE (p3PetFr BAL.pet.helpFr, mind menu BAL.pet.helpMind) */o:()=>null,x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";petcInit(P);
  P.full=cl(P.full+BAL.pet.helpGain,0,100);P.clean=cl(P.clean+BAL.pet.helpGain,0,100);P.joy=cl(P.joy+BAL.pet.helpGain,0,100);petcSync(P);relAdd(t,a,BAL.pet.helpRel);
  return `${NMc(a)} sang giúp ${NM(t)} chăm ${petT(P).n.toLowerCase()}; thiện cảm của ${NM(t)} +${BAL.pet.helpRel}. `}});
 A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&petHasFree(a),o:(a,t)=>petStealO(a,t),x:`có được con thú (giữ nguyên độ lớn, chưa quen chủ mới) · mất: có thể bị cắn, cào (Sức -${BAL.pet.stealSuc}), làm náo động, bị bắt quả tang (Danh -${BAL.pet.stealCaughtDanh}, nàng thù, nắm chứng cứ)`,f:(a,t)=>{
@@ -51744,7 +51744,7 @@ try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[
  LACK.petsteal=t=>!tsbPets(t).length?"nàng không nuôi thú":!petHasFree(S)?"hết ô thú nuôi":"";LACK.petcare=t=>!tsbPets(t).length?"nàng không nuôi thú":""}catch(e){console.error("petcare acts",e)}
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&tsbPets(t).length){
-  if(rel(v,t)>=20&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Xảo quyệt"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
+  if(rel(v,t)>=BAL.pet.helpMind&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Xảo quyệt"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
 /* co-op (review/coop-pets): the friend's entry carries her live pets, so the act tabs offer petcare / thaopet / petsteal on her exactly as on an
    NPC; jcoopworld's runAct wrapper sends what happened to her pets (res.pet) and her client applies it to her own pets.
    coopPetAct(kind) = the same act from code/tests: kind "care"|"harm"|"steal" (or the act key) on the friend entry; returns the result text. */
@@ -76766,7 +76766,12 @@ function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());co
    Returns loy (true = she stays her old master's friend). */
 function riseLoyal(m){return (m===S?S.tin:m&&m.loyal)||0}
 function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(loy0!=null?loy0:riseLoyal(m))>=B.riseLoy;const reg=amSung(m);
- n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
+ n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);
+ /* balance-2 fault 9 (night-balance-bundle), now in the ONE core: a maid's name among servants is not a consort's name — only BAL.danhG.srvRise of
+    the Danh she held AS A MAID carries over, then the rise gain D.danh. An NPC maid keeps no servant Danh (her staff record has none), so her new
+    consort record keeps its born Đáp ứng Danh; the player maid's servant Danh is S.danh (role-parity-bundle-fix: was a player-only step in j42 srvRise) */
+ const md=m===S?S.danh:m&&m.danh;if(md!=null)n.danh=Math.round((md||0)*BAL.danhG.srvRise);
+ if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
  if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
  return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
@@ -84041,7 +84046,7 @@ Object.assign(window,{p3InvLand,p3InvQ});
 Object.assign(AGC3BTN,{petBuy:"Nhờ thái giám tìm thú nuôi",petcare:"Giúp chăm thú nuôi của nàng",teachV:"học chữ",teachD:"Dạy lễ nghi"});
 Object.assign(AGC3ACT,{petBuy:"nhờ thái giám tìm thú nuôi",petcare:"sang giúp chăm thú nuôi",teachV:"tự tay dạy con học chữ",teachD:"tự tay dạy con lễ nghi"});
 function p3PetL(v){const X=BAL.ag.par3.petBuy;if(typeof PETK==="undefined"||!petHasFree(v))return[];return PETK.filter(k=>PET[k].pr&&(v.bac||0)-PET[k].pr>=X.keep&&!tsbPets(v).some(P=>P.t===k))}
-function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&ACT.petcare.ok(v,t))}
+function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t))}/* the friend test is the NPC's choice (BAL.pet.helpFr), the gate is the shared ACT.petcare.ok */
 function p3KidT(v,f){const s=ktSea();return kidsOf(v).filter(k=>k&&k.alive&&k.age>=BAL.kidTeach.age&&k[f==="tv"?"mtv":"mtd"]!==s)}
 agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
  try{if(nd(X.petBuy.g)&&typeof petBuyOne==="function"){const L=p3PetL(v);if(L.length){const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);P(p3O(v,"petBuy",{n:AGC3BTN.petBuy,c:{bac:-PET[k].pr},o:petBuyO(k,v),k:1},N,X.petBuy.g,"self"));if(O.length)O[O.length-1].pk=k}}
@@ -84050,7 +84055,7 @@ agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.
  }catch(e){agdErr("par3life",e)}return O});
 agRunReg("cx3:petBuy",v=>{const L=p3PetL(v);if(!L.length)return"";const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);const ok=petBuyOne(k,v);
  return p3Res("petBuy",ok?`Thái giám tìm về cho ${v.name} ${PET[k].n.replace(/^./,c=>c.toLowerCase())}`:`${v.name} nhờ thái giám tìm thú nuôi, mua phải con ốm`)});
-agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
+agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
 for(const f of ["tv","td"]){const K=f==="tv"?"teachV":"teachD";agRunReg("cx3:"+K,v=>{const L=p3KidT(v,f);if(!L.length||(v.suc||0)<BAL.kidTeach.suc)return"";L.forEach(ktSync);const k=L.sort((a,b)=>a[f]-b[f])[0];
  ap(v,{suc:-BAL.kidTeach.suc});const g=ktTeach(k,v,f);return p3Res(K,`${v.name} tự tay dạy ${k.name}${f==="tv"?" học chữ":" lễ nghi"} (${f==="tv"?"Văn":"Đức"} +${ktG(g)})`)})}
 /* ---------------- toilette answers of an NPC consort (jtoilr: the same functions as her answer buttons, toilRxGrudge / toilRxTell / toilRxGive / toilRxAsk; jagtoil tl2See calls p3ToilAns)
@@ -95028,7 +95033,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c5f5164ee665";window.CTM_BUILD=BUILD;
+const BUILD="52a9e3fec3f6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
