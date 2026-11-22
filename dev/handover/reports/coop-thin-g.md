@@ -592,3 +592,35 @@ Branch review/coop-thin-g-f1 @**b3fa6bc0** (pushed). Commits: dc12c917 merge LIV
 **Lane still running (logs /home/user/wt/out6/r-*.log, sum /home/user/wt/out6/reg-sum.txt, lane /home/user/wt/lane6/lane.sh):** coop-thin-a…e, f1, f2 both swaps, hostnull (queue q4), then f3s f4s f5s f6 f6s f6b f6bs trip0 trip1c ow (q5). Not yet run: trip1b/trip0b on 9f51f6d6, quickcheck, one-core, undef-scan, law4, role-parity vs LIVE (2 pre-existing FAILs expected: petcare P-ONLY gap, riseCore Danh 3/5), rdiff scan.
 Local Worker: `cd coop/worker && npx wrangler dev --port 8787 --ip 127.0.0.1 --local` (THINMAX 13; restart after a container restart).
 NOT READY for SSK: cyc/night/timer reds open, rkOfFace root not proven.
+
+## F1 FIX #7 — worker session_01N1tNP5YQBiBE3rC8f1nj4k (opus), Foreman B ROOT-10 lane, 11/22/2026
+PRIORITY #1 CHECK: re-read §F1 FIX #6 HANDOVER + #5 above | main LIVE b55a0e1c → 35f5b5ab (merged here 6ea3e8af) | review/coop-thin-g-f1 @b3fa6bc0 | lib/coop-clear.js = LIVE r3 helper (extended here, no second copy) | claims: CLAIMS row «F1 fixer #7» (this session). START_CTX ≈ 3 % of 1M (own estimate; get_session reads 0) → rollover ≈ 28 %, ceiling 60 %.
+Worktree /home/user/wt/ctg7 (sparse), Worker 127.0.0.1:8787 (THINMAX 13), logs /home/user/wt/out7 (lane: /home/user/wt/out7/lane/reg-sum.txt, script = dev/test/coop-thin-g-reg.sh with WT / W / O env).
+
+### ROOT (cyc / cycs «som», night run-4, timer) = TEST BOT, lost in the LIVE merge 067ee9a9 — plus one small L13 guest flag bug (G)
+1. **067ee9a9** (#5, merge LIVE bb92f986) took r3's helper dev/test/lib/coop-clear.js VERBATIM and replaced the own clear() of coop-cyc / coop-night / coop-timer with it. The helper had no step for a mini game in the game frame #ov, so the F1 bot fixes were dropped: e6a5feeb (#ov play-out + result ✕), b07ec7ea (scene tap), 45222abc(c) (timer case 4 L13), G #4 (option rotation, visible #mr), G #6 (AG maid route off in the forced deck), G #8 (every nightCh blocker staged), the night stuck dump. Proof: `git show <c>:dev/test/coop-{cyc,night,timer}.js | grep -c "getElementById('ov')"` → e6a5feeb 3/2/1, 067ee9a9 0/0/0.
+   Repro (CYC_DBG, dung→lui→som): the week that turns the month (wk 3 → 4) gives her the F6b dress board «Hội phối đồ · <đề>»; clear() picked «Tự tay phối đồ», her phone sat on the board (#ov, S.mg false), FS.pz true → host CW.frPz → jcoopthing gHold true → week 3 never merged («som» asked at wk 4 with cyHold null; night case 4 [3,3,3]). Game rule right (the room waits while she plays); the bot never played it out. Order-dependent only because «som» is the case that lands on the month turn.
+2. **G (game, L13 guest only):** after her g-go (CW.sent = the week) her part-D patches from her week end on the host call CW.reEnd() (jcoopthin gSync / D.afterRun) → CW.sent = −1, sendEnd() returns at gG() → her committed flag was dropped (night case 4 «the guest night runs only when the clock ends» −1, 2 of 3 runs). Fix b8ce6545: onRes + CW.reEnd skip at gG() (as the room re-end at 841 already did).
+
+### LAW 11 — before / after
+| family | scan | before | after |
+|---|---|---|---|
+| room bot can play out a mini game on a phone (#ov) | `node dev/test/coop-mgout-scan.js` (new) | 38 of 84 room bots (2 pasted copies: coop-e2e clear, coop-thin-g mgSkip); 43 OPEN incl. coop-cyc / coop-night / coop-timer | 80 via THE helper (lib/coop-clear.js step 6 + 2b; coop-e2e and coop-thin-g copies now call it) + 1 reviewed (sw-update) · **0 OPEN** |
+| guest path clears CW.sent to resend `end` | `grep -n 'CW.sent=-1' dev/build/jcoop*.js` | 2 OPEN at L13 (onRes, CW.reEnd) | 0 (both !gG(); 841 already; sendMe / begin / stop correct) |
+| F1 test fixes lost in 067ee9a9 | `git diff 067ee9a9^1 HEAD -- dev/test/coop-{cyc,night,timer,e2e}.js` | 9 dropped | all back (cyc / timer = pre-merge file + helper clear; night: G #4, dump, NIGHT_UPTO, case 4 g-go, 4b level-only; e2e COOP_FOLD) |
+coop-night 4b at THIN ≥ 5 = level-only (jnf nfParked: no ctm-nf fin is ever sent at ≥ 5): the check is now «none came, the week merged once», as case 4's g-go rule.
+
+### Commits (review/coop-thin-g-f1)
+3a0f39a0 test bot root (helper step 6 / 2b, restores, scan) · b8ce6545 G: L13 g-go kept (jcoopworld 2 guards) · 6ea3e8af merge LIVE 35f5b5ab · 70e6f5a8 lane script caps.
+
+### Tests so far (before → after)
+| suite | before (b3fa6bc0) | after |
+|---|---|---|
+| cyc THIN13 | 49/66 | **66/66 ×2** |
+| cycs THIN13 | 49/66 | **66/66** |
+| night THIN13 | 98/103 | **111/111 ×3** (one 109/111 before b8ce6545) |
+| timer THIN13 | 40/43 | **43/43 ×3** (one 41/43 case 3 under 4 parallel runs; 43/43 alone and under 3) |
+| e2e THIN13 | — | 141/141 |
+| one-core / undef / law4 / rdiff / mgout | — | PASS / PASS / 0 / 0 OPEN / 0 OPEN |
+rkOfFace PVBAD probe kept (b3fa6bc0, not touched); grep PVBAD in the TRIP logs of the lane.
+Full lane @70e6f5a8 RUNNING (2 queues): trip1 trip1b trip0 g4 g4s e2e e2es e2e0 e2e0s e2e0n cyc cycs night timer f3s f4s f5s f6 f6s f6b f6bs as9 as9s as13 as13s emo perf a–e (both) f1 f1s f2 f2s hn bongloc ×6 catch ×3 wlag ow 1–10. Then role-parity + quickcheck alone.
