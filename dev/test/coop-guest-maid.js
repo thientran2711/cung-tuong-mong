@@ -78,9 +78,13 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
 const RISE=async(o,drop)=>o.p.evaluate(drop=>{/* one maid of hers, only she can catch the eye this time */
   if(!window.__dropP){window.__dropP=1;const s0=COOP.send;COOP.send=function(m){if(m&&m.k==='ctm-ask'&&window.__dropAsk===1)return;return s0.apply(this,arguments)}}
   window.__dropAsk=drop?1:2;
-  const m=mkServ('maid');m.age=18;m.loyal=drop?20:80;S.staff.push(m);const e0=mlEye;mlEye=function(p,s){return s===m};const n0=rivals.length;let ev='';
+  /* review/coop-guest-staff: the maid is a LEGAL member of her household (BAL.promo.cap via capOf/hhHas). Before, a rank-0 guest (table [1,0]:
+     only her personal maid) got a maid over the table; refused, she came home (srvHome) and the one household law (capSweep → capTrim) sent her
+     away at once ("Nội vụ phủ … điều sang hầu nơi khác") — the 36/37 FAIL of step 3, not a merge drop. */
+  let m=(S.staff||[]).find(x=>x&&x.role==='maid'&&!x.eid&&!x.coop&&!x.home&&!x.spyFor&&!x.lover);/* a real cung nữ of her household (Nội vụ phủ fills a free slot) */
+  if(!m){if(hhHas(S)[0]>=capOf(S)[0])return{full:{rank:S.rank,cap:capOf(S),has:hhHas(S)}};m=mkServ('maid');S.staff.push(m)}m.age=18;m.loyal=drop?20:80;const e0=mlEye;mlEye=function(p,s){return s===m};const n0=rivals.length;let ev='';
   try{ev=servRanks()||''}finally{mlEye=e0}const g=rivals.find(v=>v.id>=1000&&!S.staff.includes(m));try{render()}catch(e){}
-  return{sid:m.sid,maid:m.name,ghost:g?{id:g.id,name:g.name,rel:g.rel}:null,stillHers:S.staff.includes(m),ev,n:rivals.length-n0,rl:g?S.rl[g.id]:null}},!!drop);
+  return{legal:hhHas(S)[0]<=capOf(S)[0],sid:m.sid,maid:m.name,ghost:g?{id:g.id,name:g.name,rel:g.rel}:null,stillHers:S.staff.includes(m),ev,n:rivals.length-n0,rl:g?S.rl[g.id]:null}},!!drop);
 const view=o=>o.p.evaluate(()=>({R:rivals.filter(v=>!v.coop&&v.id<1000).map(v=>v.id+':'+v.name).sort().join(),ghosts:rivals.filter(v=>v.id>=1000).map(v=>v.id+':'+v.name),
   asks:(S.coopAsk||[]).map(a=>a.id),done:S.askDone||null,N:window.__askN,staff:(S.staff||[]).map(s=>s.sid)}));
 const byAsk=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x.coopAsk===id);return v?{id:v.id,name:v.name,rank:v.rank,rel:v.rel,me:S.rl[v.id]==null?null:S.rl[v.id],ro:S.ro[v.id]==null?null:S.ro[v.id],alive:v.alive}:null},id);
@@ -98,8 +102,11 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  const bc=await B.p.evaluate(()=>({srv:!!(S.srv&&!S.srv.risen),inC:consorts().includes(S),rank:S.rank,room:roomFor('consort')}));ok(bc.inC&&bc.room,'B is a consort with a free consort seat',bc);
+ /* her household must have room for the maid who rises (a rank whose table holds a cung nữ besides her personal maid: Thường tại [2,0]) */
+ {const h=await B.p.evaluate(()=>{if(capOf(S)[0]-hhHas(S)[0]<1){S.rank=Math.max(S.rank|0,1);render()}return{rank:S.rank,cap:capOf(S),has:hhHas(S)}});
+  ok(h.cap[0]>=2&&h.has[0]<=h.cap[0],'B: her household table holds a cung nữ besides her personal maid, not over it',h)}
  /* 1 live path */
- const r1=await RISE(B,false);ok(r1.ghost&&!r1.stillHers&&r1.n===1,'1 guest: her maid rose, stand-in shown at once, maid left her household',r1);
+ const r1=await RISE(B,false);ok(r1.legal&&r1.ghost&&!r1.stillHers&&r1.n===1,'1 guest: her maid rose, stand-in shown at once, maid left her household',r1);
  ok(/lọt mắt xanh Hoàng thượng/.test(r1.ev),'1 guest: the solo rise line',r1.ev.slice(0,160));
  const id1=await B.p.evaluate(g=>{for(let i=0;i<20&&!(S.coopAsk||[]).length;i++)ser();return(S.coopAsk||[]).map(a=>a.id).find(x=>x.endsWith(':'+g))||null},r1.ghost&&r1.ghost.id);ok(!!id1,'1 guest: request in her blob',id1);
  ok(await until(A,id=>rivals.some(v=>v.coopAsk===id),id1,20000),'1 host: made the consort on the relay (same week)');
@@ -119,10 +126,11 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
   const vb=await view(B),va=await view(A);ok(va.R===vb.R&&!vb.ghosts.length,'2 both: same consort list, no stand-in',[va.R.length,vb.R.length,vb.ghosts])}
  /* 3 refusal */
  await A.p.evaluate(()=>{window.__rf0=roomFor;roomFor=r=>r==='consort'?false:window.__rf0(r)});
- const r3=await RISE(B,false);ok(r3.ghost,'3 guest: third maid rose',r3);await sleep(3000);
+ const r3=await RISE(B,false);ok(r3.legal&&r3.ghost,'3 guest: third maid rose (a legal member of her household)',r3);await sleep(3000);
  await weekAll(A,B,'3a');await weekAll(A,B,'3b');await A.p.evaluate(()=>{roomFor=window.__rf0});
  {const v=await view(B);ok(v.staff.includes(r3.sid)&&!v.ghosts.length,'3 guest: refused (no seat) → her maid is back, no stand-in',v);
-  ok(await B.p.evaluate(n=>(S.logs||[]).some(l=>l.includes(n)&&/đủ người/.test(l)),r3.maid),'3 guest: a log line tells her')}
+  ok(await B.p.evaluate(n=>(S.logs||[]).some(l=>l.includes(n)&&/đủ người/.test(l)),r3.maid),'3 guest: a log line tells her');
+  ok(await B.p.evaluate(n=>!(S.logs||[]).some(l=>l.includes(n)&&/Nội vụ phủ định lại/.test(l))&&hhHas(S)[0]<=capOf(S)[0],r3.maid),'3 guest: she stays (within the household table, no Nội vụ phủ trim)')}
  /* 4 world events muted on the guest */
  {const r=await B.p.evaluate(()=>{const n0=rivals.length;const s={m:S.month,t:S.tuan,d:S.ttDone,y:S.year};S.month=2;S.tuan=0;S.ttDone=-1;tuyenTu();Object.assign(S,{month:s.m,tuan:s.t,ttDone:s.d});
    const v=rivals.find(x=>!x.coop&&x.id<900);const m0=v.maid;v.maid={name:'Thử',loyal:90};const R0=Math.random;Math.random=()=>0;let t='';try{t=sendMaid(v)}finally{Math.random=R0;v.maid=m0}return{made:rivals.length-n0,t}});
