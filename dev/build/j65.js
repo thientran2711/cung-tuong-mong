@@ -69,7 +69,7 @@ function fixHud2(){const el=document.getElementById("hud2");if(!el)return;
  const d=el.querySelector('.hc[data-hx="date"]');if(d&&top&&top.startsWith(T(d.textContent)))HIDE(d);
  const b=el.querySelector('.hc[data-hx="buoi"]');if(b&&top){const f=b.firstChild;if(f&&f.nodeType===3&&/·\s*còn/.test(f.textContent)){const w=f.textContent.split("·")[0].trim();if(w&&top.toLowerCase().includes("buổi "+w.toLowerCase()))f.textContent="còn "}}
  /* servant loyalty: hidden while her own card (with the Lòng bar) is open */
- const m=el.querySelector('.hc[data-hx="maid"]');if(m){const pn=document.querySelector('#popw .pcname')||document.querySelector('#panel[data-tab="staff"] .pc .pcname');const nm=(T(m.textContent).match(/^Lòng (.+?) \d+/)||[])[1];HIDE(m,!!(pn&&nm&&T(pn.textContent)===nm))}}
+ const m=el.querySelector('.hc[data-hx="maid"]');if(m){const pn=document.querySelector('#popw .pcname')||document.querySelector('#panel[data-tab="staff"] .pc .pcname');const nm=(T(m.textContent).match(/^Thiện cảm (.+?) \d+/)||[])[1];HIDE(m,!!(pn&&nm&&T(pn.textContent)===nm))}}
 function fixStage(){document.querySelectorAll("#tokens .tok").forEach(t=>{if(!t.querySelector(".rk-kid"))return;const g=t.querySelector(".tag");if(g&&KT.test(g.textContent)){g.title=g.textContent;g.textContent=g.textContent.replace(KT,"")}})}
 function fixPanel(){const P=document.getElementById("panel");if(!P)return;const tab=P.dataset.tab;
  /* act cards: time limit said once */
@@ -130,7 +130,7 @@ function fixToast(){const t=document.getElementById("rtoast");if(!t||t.dataset.n
  if(sm){let w=T(sm.textContent);if(ti&&w.startsWith(ti+"."))w=w.slice(ti.length+1).trim();
   const sw={"THÀNH":"Thành.","BẠI":"Bại.","XONG":"Xong."}[seal];if(sw&&w.startsWith(sw))w=w.slice(sw.length).trim();
   t.querySelectorAll(".rd .ef").forEach(e=>{const m=T(e.textContent).match(/^(.+?) (-?\d+) → (-?\d+)$/);if(!m)return;const d=+m[3]-+m[2];if(!d)return;
-   const labs=[m[1]];if(typeof S!=="undefined"&&S&&S.maid&&m[1]==="Lòng "+S.maid.name)labs.push("Lòng cung nữ");
+   const labs=[m[1]];if(typeof S!=="undefined"&&S&&S.maid&&m[1]==="Thiện cảm "+S.maid.name)labs.push("Thiện cảm của cung nữ");
    for(const lb of labs){const tok=`${lb} ${d>0?"+":"-"}${Math.abs(d)}`;const esc=tok.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${esc}(?: \\((?:đã đầy|chạm đáy) -?\\d+\\))?(?=\\s|·|$|\\.|,|;)`),"$1");const e2=`${lb} ${m[2]} → ${m[3]}`.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${e2}(?: \\((?:đã đầy|chạm đáy)\\))?(?=\\s|·|$|\\.|,|;)`),"$1")}});
   w=w.replace(/^[\s·.]+/,"").replace(/(\s*·\s*)+$/,"").replace(/·\s*·/g,"·").trim();
   if(w)sm.textContent=w;else sm.remove()}
@@ -169,7 +169,7 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
  const f=norm(seg[0]);const R=realD(b);const out=[seg[0]];
  for(const sgm of seg.slice(1)){let t=T(sgm);
   if(/→/.test(t)&&!/[.:;]/.test(t.replace(/·/g,""))){ /* "Sủng 30 → 34 · …" line: drop items already stated in line one */
-   const items=t.split("·").map(x=>x.trim()).filter(x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+$/);if(!m)return true;const lb=m[1];const al=S.maid&&lb==="Lòng "+S.maid.name?"Lòng cung nữ":lb;return !(first.includes(lb+" ")||first.includes(al+" "))});
+   const items=t.split("·").map(x=>x.trim()).filter(x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+$/);if(!m)return true;const lb=m[1];const al=S.maid&&lb==="Thiện cảm "+S.maid.name?"Thiện cảm của cung nữ":lb;return !(first.includes(lb+" ")||first.includes(al+" "))});
    if(!items.length)continue;if(items.length===t.split("·").length){out.push(sgm);continue}
    out.push(items.map(x=>`<span class="ef ${/→ /.test(x)&&(+x.split("→")[1]>+x.split("→")[0].split(" ").pop())?"g":"r"}">${x}</span>`).join('<span class="ksep">·</span>'));continue}
   if(f){for(const v of [`${ttl}. ${f}`,`${ttl}: ${f}`,`${ttl}. Thành. ${f}`,`${ttl}. Hỏng. ${f}`,`${ttl}. Bại. ${f}`,f])t=t.split(v).join("");t=t.replace(/\s+/g," ").trim();if(!t||/^[.·\s]*$/.test(t))continue;
@@ -181,14 +181,14 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
    "<literary line> <title>. <facts>" — a different order than line one, so the whole-string strip above missed it. Sentence by sentence:
    drop a sentence line one already says, the bare title / Thành / Hỏng, and "X a → b" items whose label line one already moved. Every action. */
 function popDedup(t,first,ttl){const F=T(first).replace(/\s+/g," ");const lab=x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+(?: \([^)]*\))?$/);return m?m[1]:null};
- const has=l=>{const al=S&&S.maid&&l==="Lòng "+S.maid.name?"Lòng cung nữ":l;return F.includes(l+" ")||F.includes(al+" ")};
+ const has=l=>{const al=S&&S.maid&&l==="Thiện cảm "+S.maid.name?"Thiện cảm của cung nữ":l;return F.includes(l+" ")||F.includes(al+" ")};
  const keep=[];for(const s0 of String(t).split(/(?<=[.!?])\s+/)){const s=s0.trim().replace(/[.!?]+$/,"").trim();if(!s)continue;
   if(s===ttl||/^(Thành|Hỏng|Bại|thành|hỏng|bại)$/.test(s)||F.includes(s))continue;
   const it=s.split("·").map(x=>x.trim()).filter(Boolean);if(it.length&&it.every(lab)){const k=it.filter(x=>!has(lab(x)));if(k.length)keep.push(k.join(" · ")+".");continue}
   keep.push(s0.trim())}
  return keep.join(" ").trim()}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
-try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
+try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/thiện cảm -?\d+/,"thiện cảm "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
 /* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;
    it now runs once in the next frame, after every write of the render is done (one layout, the one the paint needs anyway). */
 let nrTT=0;function fixTitlesSoon(){if(nrTT)return;nrTT=requestAnimationFrame(()=>{nrTT=0;try{fixTitles()}catch(e){}})}
@@ -213,7 +213,7 @@ const LONE=/^[^\s.·:]+(?: [^\s.·:]+)?\.$/;          /* "Thôi." — a choice l
 const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng|Bại)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|-?\d+ → -?\d+(?: \((?:đã đầy|chạm đáy)\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
 try{const ws0=wkSnap;wkSnap=function(){const r=ws0.apply(this,arguments);try{r.maid=S.maid?S.maid.loyal:null}catch(e){}return r}}catch(e){}
 try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(this,arguments);try{if(r&&r.groups){
-  if(s&&s.maid!=null&&S.maid&&S.maid.loyal!==s.maid)r.D.push([`Lòng ${S.maid.name}`,S.maid.loyal-s.maid]);
+  if(s&&s.maid!=null&&S.maid&&S.maid.loyal!==s.maid)r.D.push([`Thiện cảm ${S.maid.name}`,S.maid.loyal-s.maid]);
   const seen=new Set();const ok=x=>{const t=T(x);if(!t||LONE.test(t))return false;const k=t;if(seen.has(k))return false;seen.add(k);return true};
   r.groups=r.groups.filter(g=>g[0]!=="Chuyện khác").map(([h,L])=>[h,L.filter(ok)]);
   /* "Chuyện khác" rebuilt from the whole week: no leftover labels, no own act results (their numbers are the totals above) */

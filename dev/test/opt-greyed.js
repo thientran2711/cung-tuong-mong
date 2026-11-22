@@ -38,7 +38,7 @@ const {chromium}=require('playwright');const [,,URL,DIR,SIZES]=process.argv;cons
    const b=[...document.querySelectorAll("#modal .opt")].find(x=>/Trình chứng cứ/.test(x.textContent));out.dom=b?{dis:b.disabled,kneed:!!b.dataset.kneed,txt:b.textContent.replace(/\s+/g," ").slice(0,160)}:null;if(b)b.click();out.clicked=!!(b&&!document.getElementById('modal').hidden);return out});
   await p.screenshot({path:`${DIR}/g2-${sz}.png`});
   const ck=(x,re)=>x&&x.off&&re.test(x.why||"");
-  const ok2=!r2.err&&ck(r2.antNo,/thiếu thuốc giải/)&&r2.antYes&&!r2.antYes.off&&ck(r2.maidNo,/lòng .* chưa tới/)&&ck(r2.tyNo,/thiếu thái y/)&&ck(r2.evNo,/thiếu chứng cứ/)&&r2.maidYes&&!r2.maidYes.off&&r2.tyYes&&!r2.tyYes.off&&r2.evYes&&!r2.evYes.off&&r2.give&&r2.give.off&&/thiếu món đồ/.test(r2.give.why)&&r2.giveYes&&!r2.giveYes.off&&ck(r2.accNo,/thiếu chứng cứ/)&&r2.accYes&&!r2.accYes.off&&r2.dom&&r2.dom.dis&&r2.dom.kneed&&r2.clicked&&errs.length===0;
+  const ok2=!r2.err&&ck(r2.antNo,/thiếu thuốc giải/)&&r2.antYes&&!r2.antYes.off&&ck(r2.maidNo,/thiện cảm .* chưa tới/)&&ck(r2.tyNo,/thiếu thái y/)&&ck(r2.evNo,/thiếu chứng cứ/)&&r2.maidYes&&!r2.maidYes.off&&r2.tyYes&&!r2.tyYes.off&&r2.evYes&&!r2.evYes.off&&r2.give&&r2.give.off&&/thiếu món đồ/.test(r2.give.why)&&r2.giveYes&&!r2.giveYes.off&&ck(r2.accNo,/thiếu chứng cứ/)&&r2.accYes&&!r2.accYes.off&&r2.dom&&r2.dom.dis&&r2.dom.kneed&&r2.clicked&&errs.length===0;
   console.log(sz,ok2?'PASS2':'FAIL2',JSON.stringify(r2));if(!ok2)bad++;
   const ok=r.dis&&r.grey&&/thiếu 37 bạc/.test(r.txt)&&/mở lại khi đủ bạc/.test(r.txt)&&!r.took&&errs.length===0;
   console.log(sz,ok?'PASS':'FAIL',JSON.stringify(r),errs.join('|'));if(!ok)bad++;await ctx.close()}

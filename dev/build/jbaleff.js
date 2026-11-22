@@ -107,7 +107,7 @@ Object.assign(BAL,{eff:{
  jroute:{evFail:1,evRtSeen:[3,2],evFail_2:2,evRtMonth:1,loyalFail:15},
  jsgame:{},
  jstaff:{meAct:1},
- jstip:{go:5,go_2:10,evN:1,loyalGo:5,sucUse:3,sucUse_2:4,ducUse:1,sucUse_3:1,sucUse_4:3,sucUse_5:4,sacUse:3,sucUse_6:5,danhGo:-1},
+ jstip:{maidUse:3,go:5,go_2:10,evN:1,loyalGo:5,sucUse:3,sucUse_2:4,ducUse:1,sucUse_3:1,sucUse_4:3,sucUse_5:4,sacUse:3,sucUse_6:5,danhGo:-1},
  jthaiy:{npcMonth:8,evNpcMonth:1},
  jtin:{loyalTop:1,loyalTop_2:1},
  jtruth:{frameExpose:-20,evN:1,evFrameExpose:2,evGo:-1,bacFx:-10,danhGuilty:-6},
