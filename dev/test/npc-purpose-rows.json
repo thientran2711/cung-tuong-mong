@@ -847,7 +847,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"done": "npcWhy(\"hEmpWed\",{p,k},()=>roll(8))"
+"done": "npcWhy(\"hEmpWed\",{p,k},()=>roll(H54.ask))"
 },
 {
 "f": "j54.js",
@@ -1813,7 +1813,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "mind slips; heir plot; crisis night; study/charity",
-"fp": "ut||(window.agDOn&&agDOn())||!roll(40*(1+BAL.net.k.study*netQ(v,\"study"
+"fp": "ut||(window.agDOn&&agDOn())||!roll(BAL.start.npc.study*(1+BAL.net.k.study*netQ(v,\"study"
 },
 {
 "f": "j85.js",

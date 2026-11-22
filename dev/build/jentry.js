@@ -39,7 +39,7 @@ function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise
 function entWord(p){return word(p)}
 /* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
 function entBotRaw(){const b=BAL.entry.bot;return cl(b.min+R(b.r),0,b.max)}/* review/errand-bal: one bot / broken-round score (BAL.entry.bot) */
-function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
+function entSkipRaw(){try{const k=entKind(entBest()),lv=entArtLv(k);/* cal-p2c N1: the skip is her identity level on this board, like j82 / jexam (mgSkipRaw) */return typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(mgTier(k,{occ:"tuyen",lv})):Math.round(kg82NpcMean(lv))}catch(e){return 4}}
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
@@ -50,7 +50,7 @@ function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(
 /* ---------- 1. the exam round ---------- */
 function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entWordy(k)){art=entBest();k=entKind(art)}
  const K=KG82_KIND[k];const lv=entArtLv(k);let t=null;try{t=mgSet(k,{occ:"tuyen",lv})}catch(e){KG82.lv=lv}KG82.ctx="thi";try{kg82Preload(k)}catch(e){}
- const SK=Math.round(kg82NpcMean(lv));let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
+ const SK=t&&typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(t):Math.round(kg82NpcMean(lv));/* cal-p2c N1 */let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
  const X=entCtx(o);/* review/origin-intros: the frame names the selection of this road (Lễ ra mắt, Xét phong danh phận, Tuyển cung nữ…) */
  const d=kg82Open({art:String(X.head||"Tuyển chọn").replace(/ trước ngày phong$/,""),title:`Môn thi · ${K.n}`,how:K.how,round:"Vòng",roundV:"1/1",pic:kg82Pic(k)});if(!d){end(SK);return}
  const rows=[["Giám khảo",X.judge,"t"],["Môn thi",`${K.n} · ${K.t}`,"t"],["Độ khó",t?mgDiffTxt(t,k):`bậc ${lv}`,"n"],["Xét thêm",X.also,"n"]];

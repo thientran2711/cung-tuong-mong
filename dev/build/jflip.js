@@ -114,7 +114,8 @@ function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;cons
 
 /* ---------- the scene ---------- */
 function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
- const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const SL=CF.slow||1;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red();
+ const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const SL=CF.slow||1;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red()||!!o.still;
+ /* the "THỊ TẨM" seal: only when the night is truly hers (night-final: o.seal false while the flip choice is still to come; cfSeal stamps it after the resolve) */const seal=o.seal!==false;
  const ov=document.createElement("div");ov.className="kmov kcf km-full"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
  const B=plateBox();const P=PL();let F=P.fa;let fx=B.W*F.x0,fy=B.H*F.y0,FW=B.W*(F.x1-F.x0),FH=B.H*(F.y1-F.y0);
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
@@ -149,7 +150,7 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   W.classList.add("kcf-on-b");toB();deck.forEach((c,i)=>{const el=els[i];if(c.bar){el.classList.add("kcf-gone")}else place(el,keepPos.get(c))});
   hand.classList.remove("on");
   if(tel){const r=centreRect();tel.classList.add("kcf-pick");Object.assign(tel.style,{left:(r.x-B.x)+"px",top:(r.y-B.y)+"px",width:r.w+"px"});ov.classList.add("kcf-dim")}
-  showRes(true);kitSceneEnd(ov,me?"Chuẩn bị thị tẩm":"Ta biết rồi",close)}  /* KIT 81: no auto-close; ONE kit button ends the scene */
+  showRes(true);kitSceneEnd(ov,o.end||(me?"Chuẩn bị thị tẩm":"Ta biết rồi"),close)}  /* KIT 81: no auto-close; ONE kit button ends the scene */
  function close(){if(phase===2)return;phase=2;Q.forEach(clearTimeout);ov.classList.remove("kcf-act");ov.classList.add("km-out");edgeH.forEach(h=>{try{h&&h.stop&&h.stop(200)}catch(e){}});edgeH.length=0;setTimeout(()=>ov.remove(),260);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}}
  ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap")});   /* a tap while it plays = the final still; closing is only the kit button */
  let shown=false;const edgeH=[];
@@ -167,7 +168,7 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   const hit=(b,r)=>!!r&&b.right>r.left-4&&b.left<r.right+4&&b.bottom>r.top-4&&b.top<r.bottom+4;
   ov.querySelectorAll(".kcf-c:not(.kcf-pick) .kcf-tag:not(.kcf-tag-l)").forEach(t=>{t.style.visibility="";const b=t.getBoundingClientRect();if(b.width&&(hit(b,P)||hit(b,RR)))t.style.visibility="hidden"})}catch(e){}}
  function showRes(now){if(shown)return;shown=true;edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");coverTags();setTimeout(coverTags,560*SL);
-  if(me){ov.classList.add("kcf-mine");stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
+  if(me){ov.classList.add("kcf-mine");if(seal)stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
  function petals(){try{if(typeof kitFxBurst==="function"){kitFxBurst("petal-peach",null,18);return}}catch(e){}
   let h="";for(let i=0;i<14;i++)h+=`<img class="kcf-pt" src="${ART.petal}" alt="" draggable="false" style="--x:${(i*37+9)%96}%;--d:${((i*.41)%1.8).toFixed(2)}s;--s:${(.55+((i*29)%45)/100).toFixed(2)};--r:${(i*67)%360}deg;--w:${((i%5)-2)*24}px">`;
@@ -212,7 +213,7 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
  let ew="";try{ew=typeof empWhyTxt==="function"?esc(empWhyTxt(S.nightWhy)||""):""}catch(e){}const sp=x=>ew?`${x} ${ew}`:x;
  if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.",ew);
  const tn=`${esc(rankName(tp))} ${esc(nameOf(tp))}`;
- if(o.pick==="me"&&o.turned==="me")return `${chip(S,"Đêm nay ngươi được thị tẩm.",sp("Thẻ bài của ngươi được lật."))}`;
+ if(o.pick==="me"&&o.turned==="me")return o.pending?chip(S,"Thẻ bài của ngươi được lật.",sp("Hoàng thượng chọn ngươi hầu đêm nay.")):`${chip(S,"Đêm nay ngươi được thị tẩm.",sp("Thẻ bài của ngươi được lật."))}`;   /* pending: the flip choice comes next (jnf), nothing is sealed yet */
  if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,sp("được chọn hầu đêm nay."));
  /* he turned one card, the night went elsewhere (custom: the Empress on mùng một / rằm; stolen on the way) */
  const why=d.cause==="custom"?esc(txt):"Giữa đường, Hoàng thượng bị mời sang cung khác.";
@@ -223,32 +224,55 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
 let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
-try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
+try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;CFN=0;JOBS.clear();try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
 function want(){return typeof S!=="undefined"&&S&&!S.dead&&!screenOff()&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
 function cfPlan(){const d=S.nightWhy;if(!d||(typeof wk==="function"&&d.wk!==wk()))return null;
  const was=S.tonight;const pick=d.pick||null;const turned=stoleFrom||d.flip0||pick;
- if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause}}
+ if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause,pending:typeof window.nfOn==="function"&&window.nfOn()}}   /* pending = the palace night: the flip choice (jnf) follows the scene */
 /* the week panel / Tuần lục book (#dawn, j87 .kbk) or the title cover the screen: the tablet comes after them */
 function busy(){if(typeof NLP!=="undefined"&&NLP)return true;/* the Luân hồi identity card is open: the palace scene waits until she has accepted it (j52 NLP) */
  const d=document.getElementById("dawn");if(d&&!d.hidden&&(d.classList.contains("on")||d.classList.contains("kbkdawn")))return true;
  if([...document.querySelectorAll(".kbk")].some(e=>e.offsetParent||e.getClientRects().length))return true;const ti=document.getElementById("title");return !!(ti&&!ti.hidden)}
 const DBG=window.__cfdbg=[];const dbg=x=>{DBG.push(x);if(DBG.length>30)DBG.shift()};
-function cfPlay(plan){dbg('push '+plan.wk);const gen=life;kmPush(done=>{dbg('run');const go=()=>{try{
+/* cfBusy(): a card-flip scene is queued or on screen (jnf opens the flip choice only after it, owner OD 16/11 22:45Z) */
+let CFN=0;
+/* every scene job (queued in j93 KMQ or on screen): {t: pushed at, v: void}. A queued job may wait behind a blocker the player has not cleared
+   (#dawn morning panel, podium, roulette, reward — j93 kmFree; the co-op merged week; busy()): an AFK seat never starts it. jnf holds the flip
+   choice / the night step only while a LIVE job is younger than its bound (jnf scene(): BAL.steal.choice.waitMs − choice.ms), then cfDrop():
+   the scene on screen closes, queued ones turn void and finish unplayed when j93 reaches them — never a scene after the choice (NLC #9). */
+const JOBS=new Set();
+window.cfBusy=()=>{for(const j of JOBS)if(!j.v)return true;return false};
+window.cfAge=()=>{let a=0;const n=Date.now();for(const j of JOBS)if(!j.v)a=Math.max(a,n-j.t);return a};
+window.cfDrop=()=>{dbg('drop');for(const j of JOBS)j.v=1;try{cur&&cur.close&&cur.close()}catch(e){console.error(e)}};
+function cfJob(){const j={t:Date.now(),v:0};JOBS.add(j);return j}
+/* the flip scene ends (closed, voided, stale): jnf's step runs right after (next task), not on its own 250 ms tick — the choice due now goes up
+   in front of any dialog that waited behind the scene (a gift, a person met) (night-final case 7, NLC #10). Never inside the closing tap itself:
+   the choice shown while that tap is still dispatched was answered by it (tap-through, Thôi at once) */
+function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j);setTimeout(()=>{try{if(typeof window.nfStep==="function")window.nfStep()}catch(e){console.error(e)}},0)}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
+   if(j.v){dbg('void');done();return}   /* jnf dropped it (the choice went up without it): never a flip scene after the choice */
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */
    if(!S||S.dead||(S.nightWhy&&S.nightWhy.wk!==plan.wk)){dbg('stale');done();return}
    const deck=deckOf(S.nightWhy);if(!deck.length){dbg('nodeck');done();return}dbg('play '+deck.length);
-   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
+   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}if(j.v){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),seal:!plan.pending,onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
 if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom=null;let r;try{r=f0.apply(this,arguments)}finally{inFlip=false}
  try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}else{/* co-op thin (hostnull d): her flip run on the host (her pick there): the scene is hers, shown on HER phone. The plan is taken HERE (her
    night, her stoleFrom — per-seat state of this run; her phone does not have it) and plays there as is (review r1: cfShow with no plan re-read
    stoleFrom on her phone = null → the wrong turned card after a stolen night) */const T=window.COOPW&&COOPW.ctx&&COOPW.thin;if(T&&T.uiCap){const plan=cfPlan();if(plan)T.uiCap.push(["cfShow",[JSON.parse(JSON.stringify(plan))]])}}}catch(e){console.error(e)}return r}}
 window.cfShow=function(plan){try{if(want()){const p=plan&&typeof plan==="object"&&plan.wk!=null?plan:cfPlan();if(p)cfPlay(p)}}catch(e){console.error(e)}};
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
+/* play the scene of today's decided tablet now (the co-op guest: the host's flip arrives over the act channel, jnf §4) */
+window.cfShow=function(){try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}}catch(e){console.error(e)}};
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
+/* the seal AFTER the flip choice (main s26 23:39Z, night-final): she kept her flipped night or won it → her card alone, at rest, gets the painted
+   "THỊ TẨM" seal (same scene, final still, KIT §81 ONE button "Chuẩn bị thị tẩm"); robbed → nothing (the winner's seat stamps hers). Once a day. */
+window.cfSeal=function(){try{if(!want()||!S||S.dead)return false;const d=typeof wk==="function"?wk():0;if(S.cfSl===d)return false;S.cfSl=d;const gen=life;CFN++;let out=0;const j=cfJob();
+ kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};const go=()=>{try{if(gen!==life||!S||S.dead||j.v||(typeof wk==="function"&&wk()!==d)/* dropped, or the day moved on: no seal of an old night */){done();return}if(busy()){setTimeout(go,300);return}
+   Promise.all([ART.a,ART.b,ART.seal].map(preload)).then(()=>{try{if(gen!==life||j.v){done();return}const sc=kitCardFlip({deck:[{id:"me",p:S,bar:false}],pick:"me",turned:"me",still:true,seal:true,
+    resHTML:resHTML({pick:"me",turned:"me"},{}),end:"Chuẩn bị thị tẩm",onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()});return true}catch(e){console.error(e);return false}};
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
 window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];n=Math.min(n,L.length);/* one card per person, never a duplicate or a fake extra */for(let i=0;i<n;i++){const p=L[i];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
  const tid=who==="me"?"me":who==null?null:"x"+who;if(tid&&tid!=="me")deck.forEach(c=>{if(c.id===tid)c.bar=false});

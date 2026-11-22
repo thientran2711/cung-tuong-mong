@@ -21,7 +21,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const origins=ORIGINS.map(x=>x.k).concat(Object.keys(ORIGIN_BR));
   /* 1 */
   o.survey=origins.map(k=>{const roads=nrRoads(k).slice().sort();return{k,roads:roads.length,match:JSON.stringify(roads)===JSON.stringify(keysOf(k)),own:!!(T[k]&&T[k][""])}});
-  o.ids=origins.reduce((a,k)=>a+keysOf(k).length,0);o.extra=Object.keys(T).filter(k=>!origins.includes(k));
+  o.ids=origins.reduce((a,k)=>a+keysOf(k).length,0);o.extra=Object.keys(T).filter(k=>!origins.includes(k)&&!(BAL.start&&BAL.start.npcW&&k in BAL.start.npcW));/* NPC-only origins (balance-core quan) keep an own row only */
   /* 2 */
   const AK=ARTS.map(a=>a.k),VK=VIR.map(v=>v.k);o.bad=[];for(const k in T)for(const rd in T[k])for(const a in T[k][rd]){const v=T[k][rd][a];if(!(AK.includes(a)||VK.includes(a))||!(Number.isInteger(v)&&v>=1&&v<=5))o.bad.push(k+"/"+rd+"/"+a+"="+v)}
   o.oldArt=ORIGINS.filter(x=>x.art).map(x=>x.k).concat(Object.keys(ORIGIN_BR).filter(k=>ORIGIN_BR[k].art));

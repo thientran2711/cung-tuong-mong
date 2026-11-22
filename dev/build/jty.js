@@ -90,9 +90,17 @@ function tyHome(){try{if(S&&!S.dead&&S.place==="home"&&tyOn(S)&&!Q.length)tyChar
 (function(){if(typeof aaThieuLe0!=="function")return;const a0=aaThieuLe0;aaThieuLe0=function(p){if(tyOn(p))return false;return a0.apply(this,arguments)}})();
 /* ---------- robbery on the road (cướp / giật y phục) ---------- */
 function tyEnemies(p){try{return liveRivals(true).filter(v=>v!==p&&!v.out&&typeof rel==="function"&&rel(v,p)<=BAL.ty.plotRel&&netRx(v,/Xảo quyệt|Kiêu ngạo|Tham vọng|Thù dai/))}catch(e){return[]}}
-function tyRobOdds(k){const T=BAL.ty;let o=0;const night=(S.buoi||0)>=(typeof B4L==="number"?B4L:3);const lonely=(curPeople()||[]).length<=1;
+/* n = people at that place (default: who is with her now; the map shows the destination's count, countAt) */
+function tyRobOdds(k,n){const T=BAL.ty;let o=0;const night=(S.buoi||0)>=(typeof B4L==="number"?B4L:3);const lonely=(n!=null?n:(curPeople()||[]).length)<=1;
  const plot=S.tyOmen&&S.tyOmen.until>=wk()&&RV(S.tyOmen.by);
  if(!night&&!lonely)return 0;if(plot)o+=T.robPlot;else if(night&&lonely)o+=T.robThug;else return 0;if(night)o+=T.robNight;if(lonely)o+=T.robLonely;return Math.min(80,o)}
+/* balance-2 (hidden-risk family): the map spot names the robbery risk before she walks (same tyRobOdds, chance words j1 chanceW; KIT map spot «mmeta» warning <em>, as the spot's own "why") */
+(function(){if(typeof mapHTML!=="function")return;const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
+ try{if(!S||S.dead||S.out||tyOn(S)||(typeof isSrv==="function"&&isSrv())||!wdOf(S).y)return h;
+  h=h.replace(/<button class="mspot([^"]*)" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,cls,k,attrs,inner)=>{if(k==="home"||k===S.place||/ off/.test(cls))return all;
+   const o=tyRobOdds(k,typeof countAt==="function"?countAt(k):0);if(!(o>0))return all;const w=`<em>bị giật y phục: ${chanceW(o)}</em>`;
+   inner=/<span class="mmeta">/.test(inner)?inner.replace(/(<span class="mmeta">[\s\S]*?)(<\/span>)/,`$1 · ${w}$2`):inner.replace(/(<\/span>)/,`$1<span class="mmeta">${w}</span>`);
+   return `<button class="mspot${cls}" data-go="${k}"${attrs}>${inner}</button>`})}catch(e){}return h}})();
 function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))return false;const it=wdItem(e);const plot=S.tyOmen&&S.tyOmen.until>=wk()?RV(S.tyOmen.by):null;
  w.y=null;/* item conservation (jil): the robe sits in the plotter's chest */if(typeof ilRob==="function")ilRob(S,e,plot);S.tyOmen=null;tyLost(S,"cuop");S.tyRobbed=(S.tyRobbed||0)+1;
  const nm=typeof accName==="function"?accName(k):k;apply({danh:-(T.robDanh+T.robWalk)});

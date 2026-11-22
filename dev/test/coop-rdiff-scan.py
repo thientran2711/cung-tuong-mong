@@ -29,7 +29,8 @@ OK={'tyHome':'RDIFF','resApply':'jcoopworld resApply: guest at level >= 5 return
     'nextBuoi':'guest at level >= 5: jcoopthine nextBuoi = her ready (the host steps her)','facOf':'next line, not in the wrapper','roll':'next line, not in the wrapper',
     'kfFestFx':'DOM effect only','k61Gate':'next line, not in the wrapper','j76Std':'deck cards only (ctxOut runs it on the host too)',
     'eaSync':'deck cards only (ctxOut runs it on the host too)','abortGone':'co-op layer (jcoopthinf6b)','tick':'jcooptimer / jstagehere notices only',
-    'kcHud':'DOM only','kccoCards':'deck cards only','kccoPalHTML':'HTML only','helpAsk':'next line, not in the wrapper'}
+    'kcHud':'DOM only','kccoCards':'deck cards only','kccoPalHTML':'HTML only','helpAsk':'next line, not in the wrapper',
+    'deal':'deck cards only (the stealWin it names sits in a card go = an act: part F intent on the host); jfe night flip is off at level >= 5 (jnf nfParked)'}
 ENT=re.compile(r'(?:render|renderStage|k3Stage)\s*=\s*function')
 rows=[];bad=0
 for f in sorted(src):
