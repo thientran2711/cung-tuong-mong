@@ -89,3 +89,5 @@ Files prompts_L2095/M2349-NN_th_act-<k>_{A_still,B_burst,clips}_ACTION.txt; .kee
 | M2349-12 | tinh nghịch | thả lủng lẳng con rắn giấy ra ngoài vành để trêu, che miệng cười khúc khích (rõ hơn bản cầm im) |
 KEEP as is (action already readable): bình (nhấp trà), đau lòng (ngọc bội áp ngực, 1 giọt lệ — L798 heartache ≠ crying), hổ thẹn (giả ốm, khăn trán), choáng (đờ đẫn, mây xám), hờn (quay mặt, giơ tay 'không'), tình tứ (thiệp mời + vẫy gọi), hăng hái (viết thư pháp), chuyên tâm (đọc sách), hưng khởi (bút lông + vệt mực).
 Cost if all 12: 12 × (2×135 + 2×940) = 25 800 cr (2 150 each; BACK 0).
+| M2349-13 | tình tứ | đưa bông mẫu đơn hồng mời, tay kia chạm má e thẹn, nháy mắt (bỏ thiệp đỏ giống bao lì xì — owner L2350) |
+Add-on L2350: tình tứ moved from KEEP to REDO → 13 seals, 27 950 cr if all.
