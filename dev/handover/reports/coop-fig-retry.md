@@ -55,3 +55,7 @@ Measured (Fold 755x1000@2, fresh context, 5 runs, medians; title = goto→"Chơi
 (a) reachable CDN: NOT slower. (b) dead-online CDN: title never held; the new-life card was held 2.5 s (nlBegin cap) because the failed read no longer settled at once → slower than before, so fixed here.
 Fix: jcdn.js counts `KCDN.m1fail` = first read of a FIGURES*.json that failed; j52 `nlFigsReady()` is also true when m1fail>0 (retries continue in the background, figures fill in via render()). Slow-but-working lines still wait the old ≤2.5 s. quickcheck open() FIGSIG wait removed (back to original; open 2035 ms vs 11 s).
 Gates: fig-retry Fold 755x1000@2 + iPad 1180x820@2 both seats ALL OK; coop-e2e 129/129; quickcheck PASS (open 2035 ms); undef/one-core/manifest-fetch-scan PASS; newlife-oldsave FAIL 0.
+
+## REVIEW r3 (sonnet reviewer-lander, 11/22/2026) — r2 + capped FIGSIG wait restored in quickcheck open()
+Cause of the r2 land FAIL (MAIN 105 LAND CHAIN 5): quickcheck also runs NEWLIFE on the OLD (LIVE f0070e61) build, which still opens its new-life card only after the figure lists answered (~9.5 s of retries with CDN aborted). r3 = r2 + quickcheck.js open() waits (cap 30 s, never fails) for FIGSIG!=="" or KCDN.m1fail>0; fast on the new build, covers the old one. Drop the wait once r2 is LIVE.
+Gates (LIVE still f0070e61): quickcheck new vs LIVE PASS — open 2772 ms, old save ok, perf render 250/257, tab 503/494, buổi 1910/1397, tasks>200ms 27/21; coop-e2e 129/129; fig-retry both seats Fold 755x1000@2 + iPad 1180x820@2 ALL OK.
