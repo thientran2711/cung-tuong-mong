@@ -2344,3 +2344,12 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 22/11 03:46Z LC4 LANDED rival-hauthay ddcca5c1 (FF) LIVE=ddcca5c1 coop-e2e 129/129; quickcheck PASS (buổi 1284/994). Queue empty.
 - (22/11 03:47Z) LC4 LANDED rival-hauthay ddcca5c1 → LIVE ddcca5c1 (FF, coop-e2e 129/129). Queue empty.
 - (22/11 04:38Z) WAKE. LOAD: main running 0 | B 6 running (host-lag r3, thin-g F1#5, rel-men r7, fig-retry, night-ledger r2) | C ROOT-C2 (rolled 04:16Z, depth 1) owner seal loop | D night-multi kem + role-parity fix ORDERED | E c2 re-merge + P3/P4 | moved: role-parity regression → D. LC4 queue: guest-week-lag 8303b53a.
+
+## MAIN CHÍNH 103 → MAIN CHÍNH 104 HANDOVER (22/11 04:42Z) (ctx 33 % real, START ~10 % → roll line 35 %; depth 5 → opening child MAIN CHÍNH 104, depth 6)
+- LIVE = ddcca5c1 (rival-hauthay). Landed in 103 via LC4 (landq-e2e gate): night-balance-bundle 8746a062 (124/124), od03-favart bb92f986 (129/129), rival-hauthay ddcca5c1 (129/129).
+- LAND CHAIN 4 = session_01Rc5AsJvxyreKDJtwJauvsP (child of 103; ctx low). Queue: coop-guest-week-lag-r1 8303b53a (sent 04:38Z, merge onto LIVE). No HOLD. LC4 rolls by telling MAIN "LC4 ROLLED" + reports/land-chain-4.md → MAIN opens LC5 (never two chains).
+- OWED/RUNNING: B ROOT-9 (other account, STATUS only): RELAND coop-host-lag r3 2r12Tji5 (clear() conflict family: ONE shared helper, .kmov close first), rel-men-servants r7 6JwLm1fZ, coop-fig-retry 4hS8MDh4 (FIGURES.json no-retry), night-ledger r2 6V2KcQjF, coop-thin-g F1 #5 2pYTX6fT. D #18: night-multi kem flake + ORDERED role-parity LIVE regression (bundle: petcare P-ONLY gap, riseCore Danh 3 vs 5). E #30: coop-famops-c2 (E48r re-merge ddcca5c1 → LAND READY), E44d P3/P4.
+- C = ROOT-C2 session_01D3E3NbRKVda1eN4trg7rnx (depth 1, rolled 04:16Z) — owner seal/room/bed loop with owner. J1–J5+KP09 prompt handoff to owner: no ack from C yet (FOREMAN_C_STATUS 23:55Z line).
+- KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN on call (nothing open).
+- TRIGGERS: 103 wake trig_01BZEhJBtaiQjTxceoem3Hph (min 32) → 104 disables it (if refused like 102's, tell owner) and creates its own. 102's trig_01E13SG1HWhNBW6G9ukrWFKH: disable refused by permission classifier → still enabled; owner asked to turn it off. MAIN 102 session NOT archived (its wake still fires).
+- Push tool: dev/tools/main-hpush.sh template. Never git pull. B often misses mid-file orders: write PLAIN short lines at the END of FOREMAN_B_STATUS.
