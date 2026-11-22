@@ -70,3 +70,8 @@ Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l
 17 decapped copies in img/_review/place-rank/places-l2370/swap/ (not uploaded); r2 pictures replace their first version. 15 swap into img/<place>-ha-sang.webp.
 Open: Nội vụ phủ (no img/nvp-ha-sang.webp; live has nvp-v4-* which index.html does not use → which key?), Từ Ninh bedroom (new, no live file; needs a code hook-up).
 Only the hạ-sáng base is swapped; the 15 season×buổi variants per place stay old (separate job). decap corners: text gone in all 17; a few show a cut lantern / curtain block in the top-left corner (under the top bar on Fold).
+
+## ROOT-C3 06:32Z: 18/19 accepted; KSP 10.4 % accepted as mild note (no more redo). Swap = 15 hạ-sáng files only, `swap_L2370.py --go` ONLY when ROOT-C3 relays the owner's OK (script already SKIPs the two below). Idle.
+FOR MAIN (code wiring, not art):
+- Nội vụ phủ: new picture M2370-08, key `nvp`, CDN img/_review/place-rank/places-l2370/nvp-ha-sang.webp (decapped copy: …/places-l2370/swap/nvp-ha-sang.webp). No live file uses it (live has img/nvp-v4-*, not referenced by index.html; SCIMG has no nvp entry). Scene: the Nội vụ phủ place (srvMerit / "Nội vụ phủ" giver lines) → needs a SCIMG/scene key + live name img/nvp-ha-sang.webp.
+- Từ Ninh cung phòng ngủ: new picture M2370-16, key `tu-ninh-cung-ngu`, CDN img/_review/place-rank/places-l2370/tu-ninh-cung-ngu-ha-sang.webp (decapped: …/swap/tu-ninh-cung-ngu-ha-sang.webp). No live slot (SCIMG tn = tu-ninh-cung = reception). Scene: Thái hậu's bedroom at Từ Ninh → needs a scene key + live name img/tu-ninh-cung-ngu-ha-sang.webp.
