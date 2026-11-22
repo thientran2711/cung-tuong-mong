@@ -1061,5 +1061,5 @@ L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01
 L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHFYCRGHbQSaDznRv | RUNNING | 2026-11-22T06:40Z (Foreman C ROOT-C3; replaces PLACES2)
 | coop-night0 stall fixer (opus BIG co-op LIVE bug; ORDER MAIN 104 06:28Z; root by rv 4jNDqKuC: host cung nữ nfOn false vs guest true, jnf.js:387) | review/coop-night0; reports/coop-night0.md | B | session_01N1tNP3HK3BJNWZ1ufSpLkD | RUNNING | 22/11 06:45Z |
 | FOREMAN E #31 (opus; child of E #30, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #30 | session_01DgYSWoUyoZaYD9578iakz7 | RUNNING | 22/11 07:05Z |
-role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:harm:petcare gap + riseCore maid-rise Danh 3 vs BAL.ag.maid.rise 5; whole family) | review/role-parity-bundle-fix | (opening) | RUNNING | 22/11 06:57Z (Foreman D #18)
-places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | (opening) | RUNNING | 22/11 06:57Z (Foreman D #18)
+role-parity-bundle-fix (opus BIG; LIVE regression from bundle 8746a062: P-ONLY:harm:petcare gap + riseCore maid-rise Danh 3 vs BAL.ag.maid.rise 5; whole family) | review/role-parity-bundle-fix | session_01964izD4JTc9hWG68VKtmch | RUNNING | 22/11 06:57Z (Foreman D #18)
+places-wire-nvp-tn (sonnet; code hook-up nvp + tu-ninh-cung-ngu scene keys, PLACES2 L71-77) | review/places-wire-nvp-tn | session_01964izBkKhrTs2P14hVfJc1 | RUNNING | 22/11 06:57Z (Foreman D #18)
