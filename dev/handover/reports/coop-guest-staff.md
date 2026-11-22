@@ -79,3 +79,15 @@ runs after the debug + watchdog were clean. If a reviewer sees it again, the FAI
 - dev/test/coop-guest-lists-scan.js — NEW family scan (LAW 11).
 
 SẴN SÀNG KIỂM review/coop-guest-staff 9c3701b3b7cbcc506817068f956fc1ce4ed78d83 (base LIVE b55a0e1c; test files only).
+
+## Re-gate after merging LIVE 35f5b5ab (Foreman D #19 order) — head a8eaf45efe603925ff910e8533bf56e93c9b0bb1
+Merge clean (only my 3 test files differ from LIVE).
+| gate | result |
+|---|---|
+| coop-guest-maid | 39/39 |
+| role-parity.test.js | ALL PASS (the riseCore FAIL cleared by 9c057f42, as expected) |
+| coop-e2e | 141/141 |
+| coop-pets | 47/51 twice. Step 5 (mine) PASS («A holds…» ok, re 0). 4 NEW FAILs in steps 0/1b, reproducible 2/2, absent on b55a0e1c (51/51 ×3, same driver steps): «each has the other as a consort entry [false,false]», «B's friend entry shows A's pet», «B: the hairpin is in her own bag» (B's screen shows the first-time rule panel «Thú nuôi · LUẬT · lời dặn lần đầu» over the gift dialog), «B: exactly one hairpin arrived». LIVE b55a0e1c..35f5b5ab touched jpetcare (petcare gate, helpFr/helpMind), jagmaid, jbal2. Not caused by this branch (test-only). FOR FOREMAN: a LIVE regression of 9c057f42 / 35f5b5ab, or a new first-time panel coop-clear does not close; needs its own worker. |
+
+HANDOVER: none needed. The work is complete; only the LIVE coop-pets finding above is open.
+SẴN SÀNG KIỂM review/coop-guest-staff a8eaf45efe603925ff910e8533bf56e93c9b0bb1
