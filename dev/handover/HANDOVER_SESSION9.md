@@ -2436,3 +2436,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 15:36Z) WAKE: no new LAND READY; LIVE b238857f. Answered D's S.men question (13:44Z) → ORDER option A (law 1 + 6b; bug, not feature) in FOREMAN_D_STATUS. 107 not yet opened.
 - (22/11 16:35Z) WAKE: LOAD: main running 0 | B (night-ledger-coop r3 fixer 4b8rvF5b, thin-g F1 #8 4rfkfYSg) | C quiet | D (coop-guest-staff r2 E9EtsVK9, coop-guest-men EPhZFbPA = ORDER 15:36Z claimed ✓) | E (-pv review) | moved: none. No LAND READY. LIVE b238857f. 107 not yet opened.
 - (22/11 17:35Z) WAKE: LOAD: main 0 | B (thin-g F1 #8, night-ledger-coop r3) | C quiet | D (coop-guest-staff r2, coop-guest-men) | E (-pv) | moved: none. No LAND READY. LIVE b238857f. 107 not yet opened.
+- (22/11 18:14Z) LATE OWNER REQUEST (via 105←104, asked 07:40Z): per-item recheck report. 106 cannot open sessions → ORDER to D: read-only opus checker builds GAP_LIST_v5 (per-row proof + VN per-item list). Interim per-item note sent to MAIN 104 for the owner.
