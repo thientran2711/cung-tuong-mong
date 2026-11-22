@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"df73f5dd+","t":"2026-11-22T10:04Z","c":"coop-night0-r1: test reads only FAIL row titles (trace JSON says night on every row); never hangs on a build without nfRoomOff (rows FAIL: …","b":"2473b9f7d6e5","h":[{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"}]};
+window.CTM_BI={"s":"8014037f+","t":"2026-11-22T10:53Z","c":"night-ledger-coop-r2: co-op night stall root (test harness never pressed the kit item reveal «Nhận»), mid-tuần park edge, 2b count, comments","b":"8eb76d1edb49","h":[{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -80140,7 +80140,13 @@ const dw=h=>{try{if(!h||typeof window.nfDec!=="function")return null;const t=win
 window.ldIn=function(o){try{if(!o||!Array.isArray(o.days)||!S||S.dead||!gst()||!N().on)return;const on=ldOn();if(!on&&!o.st)return;   /* parked now: only a tuần the host already rolled AND settled while unparked (its nights happened) */
  const days=o.days.map(e=>Object.assign({d:e.d,w:dw(e.w),y:e.y},e.s?{s:1,o:dw(e.o)}:{}));
  if(on&&o.wk===W()&&!(S.ledger&&S.ledger.wk===o.wk&&S.ledger.st))S.ledger={wk:o.wk,days,p:o.p,st:0};
- if(o.st&&S.ldG!==o.wk&&!(S.ldG!=null&&o.wk<S.ldG))gSettle(o.wk,days,o.p,o.ln||{})}catch(e){console.error(e)}};
+ if(o.st&&S.ldG!==o.wk&&!(S.ldG!=null&&o.wk<S.ldG)){if(endOut()){LDQ=LDQ.filter(x=>x.wk!==o.wk).concat([o]);return}gSettle(o.wk,days,o.p,o.ln||{})}}catch(e){console.error(e)}};
+/* r2 (coop-ledger «the guest got the settled ledger» FAIL): a settled tuần that lands while HER week end is out (COOPW.sent = this week, the
+   merged week not in yet) would be written into an S the merged week then rebuilds from that end (jcoopworld onWeek → fromCanon): her nights,
+   Sổ ghi lines and S.ldG lost. It waits (LDQ, not in S) and is settled right after the merged week; then she asks once for any tuần still missing. */
+let LDQ=[];
+const endOut=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.sent===((COOP.state&&COOP.state.week)||0))}catch(e){return false}};
+try{if(typeof COOP==="object"&&COOP.on)COOP.on("week",()=>setTimeout(()=>{try{const L=LDQ;LDQ=[];L.forEach(o=>window.ldIn(o));const w=window.ldWant();if(w!=null&&typeof window.nfLdAsk==="function")window.nfLdAsk(w)}catch(e){console.error(e)}},0))}catch(e){}
 const meRe=n=>new RegExp(`(của|thay vì) ${String(n||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}(?=[\\s.,;:]|$)`,"g");
 function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meRe(S.name):null;window.__ldNt=1;try{
  days.forEach((e,i)=>{if(i===p)return;
@@ -94139,7 +94145,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2473b9f7d6e5";window.CTM_BUILD=BUILD;
+const BUILD="8eb76d1edb49";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

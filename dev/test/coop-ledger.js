@@ -100,7 +100,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    cc:(()=>{try{const c=conceiveCh(S);return{c,int:Math.round(c)===c}}catch(e){return null}})(),fr:(()=>{const f=rivals.find(v=>v&&v.coop);return f?{id:f.id,name:f.name}:null})()}});
  const strip=h=>String(h).replace(/<[^>]*>/g,'');
  const FRD=[];
- async function tuan(tag,X,Y){if(!await toNight(tag))return;await prep();const EL=await A.p.evaluate(()=>{try{const f=rivals.find(v=>v&&v.coop);return f?{nc:nightCh(f),cy:typeof cyTray==='function'&&cyTray(f),preg:!!f.preg,ill:!!(typeof illOf==='function'&&illOf(f)),alive:f.alive!==false}:null}catch(e){return String(e)}});const a0=await snap(A),b0=await snap(B);const w0=(await D(A)).w;const wk0=await A.p.evaluate(()=>wk());
+ async function tuan(tag,X,Y){if(!await toNight(tag))return;await prep();await A.p.evaluate(()=>{/* r2: was her card among the Emperor's candidates of a day (jledger ldRoll → empPick(C))? whether she then wins a day is his choice */if(!window.__epW&&typeof empPick==='function'){const e0=empPick;window.empPick=function(C){try{(window.__epC=window.__epC||[]).push((C||[]).some(p=>p&&p.coop))}catch(e){}return e0.apply(this,arguments)};window.__epW=1}window.__epC=[]});const EL=await A.p.evaluate(()=>{try{const f=rivals.find(v=>v&&v.coop);return f?{nc:nightCh(f),cy:typeof cyTray==='function'&&cyTray(f),preg:!!f.preg,ill:!!(typeof illOf==='function'&&illOf(f)),alive:f.alive!==false}:null}catch(e){return String(e)}});const a0=await snap(A),b0=await snap(B);const w0=(await D(A)).w;const wk0=await A.p.evaluate(()=>wk());
   await clear(X);ok(await isRd(X)||await press(X),tag+': '+X.name+' presses Sẵn sàng first');await sleep(2500);await clear(Y);ok(await isRd(Y)||await press(Y),tag+': '+Y.name+' presses');
   await merged(tag,w0);
   if((await D(A)).w===w0)for(const o of [A,B])console.log('ERRS',o.name,JSON.stringify(o.errs.slice(-6)).slice(0,1500));
@@ -113,7 +113,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(JSON.stringify(a.days)===JSON.stringify(b.days)&&a.p===b.p,tag+'a: the SAME days (d / kind / holder) and played index on both seats');
   const held=id=>(a.days||[]).filter((e,i)=>e[2]===id&&i!==a.p&&e[1]!=='visit').length;const hk=held(901),gk=held(902);
   /* r2: whether she holds a day in ONE tuần is a draw (her weight among the NPCs): per tuần it is logged; the run asserts it over both tuần below */
-  {const has=(a.days||[]).some(e=>e[2]===902),el=!!(EL&&EL.nc>0&&EL.alive);FRD.push({has,el,EL});if(!has)console.log('n/a '+tag+'b: the friend held no day in this tuần\'s draw — asserted over the run',JSON.stringify({hk,gk,EL}))}
+  {const has=(a.days||[]).some(e=>e[2]===902),el=!!(EL&&EL.nc>0&&EL.alive),inC=await A.p.evaluate(()=>(window.__epC||[]).some(x=>x));FRD.push({has,el,inC,EL});if(!has)console.log('n/a '+tag+'b: the friend held no day in this tuần\'s draw — asserted over the run',JSON.stringify({hk,gk,EL}))}
   {const fi=(a.o||[]).findIndex(w=>w===901||w===902);ok(fi<0||a.p===fi||(a.days[a.p]&&a.days[a.p][1]==='played'&&fi<=a.p),tag+'b: the played tối = the first day of either player',{fi,p:a.p})}
   for(const [o,s0,s1,k] of [[A,a0,a,hk],[B,b0,b,gk]]){const L=s1.logs.slice(0,Math.max(0,s1.seq-s0.seq)).map(strip);
    const mine=L.filter(x=>/Kính sự phòng ghi: ngày \d+, ngươi được lật thẻ thêm một đêm/.test(x));
@@ -132,7 +132,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   for(const o of [A,B])await o.p.evaluate(()=>{try{tab='act';render()}catch(e){}})}
  await tuan('1',A,B);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  await tuan('2',B,A);
- if(!FRD.some(x=>x.el))console.log('n/a b: the friend was not on the tray (nightCh 0: pregnant / ill / cycle) in any tuần of the run',JSON.stringify(FRD));else ok(FRD.some(x=>x.has),'b: the friend\'s card was in the host\'s draw (she holds ≥ 1 day in at least one tuần of the run)',FRD);
+ if(!FRD.some(x=>x.el))console.log('n/a b: the friend was not on the tray (nightCh 0: pregnant / ill / cycle) in any tuần of the run',JSON.stringify(FRD));else ok(FRD.some(x=>x.has||x.inC),'b: the friend\'s card was in the host\'s draw (a candidate of the Emperor\'s pick, or she holds ≥ 1 day, in a tuần she was on the tray)',FRD);
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

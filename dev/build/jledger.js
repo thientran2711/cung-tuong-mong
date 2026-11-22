@@ -149,7 +149,13 @@ const dw=h=>{try{if(!h||typeof window.nfDec!=="function")return null;const t=win
 window.ldIn=function(o){try{if(!o||!Array.isArray(o.days)||!S||S.dead||!gst()||!N().on)return;const on=ldOn();if(!on&&!o.st)return;   /* parked now: only a tuần the host already rolled AND settled while unparked (its nights happened) */
  const days=o.days.map(e=>Object.assign({d:e.d,w:dw(e.w),y:e.y},e.s?{s:1,o:dw(e.o)}:{}));
  if(on&&o.wk===W()&&!(S.ledger&&S.ledger.wk===o.wk&&S.ledger.st))S.ledger={wk:o.wk,days,p:o.p,st:0};
- if(o.st&&S.ldG!==o.wk&&!(S.ldG!=null&&o.wk<S.ldG))gSettle(o.wk,days,o.p,o.ln||{})}catch(e){console.error(e)}};
+ if(o.st&&S.ldG!==o.wk&&!(S.ldG!=null&&o.wk<S.ldG)){if(endOut()){LDQ=LDQ.filter(x=>x.wk!==o.wk).concat([o]);return}gSettle(o.wk,days,o.p,o.ln||{})}}catch(e){console.error(e)}};
+/* r2 (coop-ledger «the guest got the settled ledger» FAIL): a settled tuần that lands while HER week end is out (COOPW.sent = this week, the
+   merged week not in yet) would be written into an S the merged week then rebuilds from that end (jcoopworld onWeek → fromCanon): her nights,
+   Sổ ghi lines and S.ldG lost. It waits (LDQ, not in S) and is settled right after the merged week; then she asks once for any tuần still missing. */
+let LDQ=[];
+const endOut=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.sent===((COOP.state&&COOP.state.week)||0))}catch(e){return false}};
+try{if(typeof COOP==="object"&&COOP.on)COOP.on("week",()=>setTimeout(()=>{try{const L=LDQ;LDQ=[];L.forEach(o=>window.ldIn(o));const w=window.ldWant();if(w!=null&&typeof window.nfLdAsk==="function")window.nfLdAsk(w)}catch(e){console.error(e)}},0))}catch(e){}
 const meRe=n=>new RegExp(`(của|thay vì) ${String(n||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}(?=[\\s.,;:]|$)`,"g");
 function gSettle(w,days,p,ln){S.ldG=w;let me=0;const out=[],npc=[],re=S.name?meRe(S.name):null;window.__ldNt=1;try{
  days.forEach((e,i)=>{if(i===p)return;
