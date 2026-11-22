@@ -46,3 +46,17 @@ This file is an INDEX + the current core. It does NOT copy rules: it points at r
 - Lượt 777: no regen/redraw without her yes; say the credit cost first.
 - Never re-ask an approved thing: `rule.py find` first.
 - To her: Vietnamese only, very short; pictures via SendUserFile; every message "Lượt N", ends "~X% xong / ~Y% chơi được".
+
+## 5. Colour system L2287 (owner attached GPT handoff, dev/art/color_system_L2287/Imperial_Court_Color_System_Handoff.xml, 688 KB — grep, don't read whole)
+Owner order L2287 verbatim: "Read the attached XML before continuing costume design. Follow its color hierarchy and flexible tonal-rendering rules. Distinguish confirmed rules from generated proposals; do not treat proposed HEX values or costume designs as approved."
+**CONFIRMED (follow):** its `<ApprovalBoundaries>` + `<DesignRules>` (lines 9–32) + `<ReusablePromptInstruction>`:
+- Royal gold #EFBD69 AND Chu Sa red allowed at ranks 6/7/8 with growing presence (t6 tiny accents < t7 < t8 strongest). Gold/red not chosen by personality.
+- Rank depth tiers: t1–3 light / t4–6 medium / t7–8 deep — separate from royal-colour placement. Medium = source atlas = palette_gpt_L2272 (now LIVE).
+- HEX = midtone anchors, not flat fills; lighter/deeper tones of the same family across fabric layers OK; main + secondary may share a family; natural light/shadow; designed tone placement written in the prompt.
+- Gauze HEX = solid colour; transparency is separate (never white).
+- Sexy = shared game aesthetic (Dịu dàng / Đoan trang may be open-neck / off-shoulder too). Personality = whole garment construction (neckline, overlaps, shoulders, sleeves, waist, skirt, fabric behaviour, embroidery), never exposure/face/hair/pose. Dịu dàng ≠ Đoan trang.
+- Keep BOTH original 8-rank collections; soft clothing never simplified below its rank's luxury; no universal 85/15 historical/fantasy ratio (per group).
+- No personal favourite colour per character; a group is not one hue. Season may change hue family, neckline, mantle, layering.
+- Generate/edit images only when asked. Phoenix motif not granted at every rank.
+**PROPOSAL (NOT approved — never treat as locked):** light + deep tier HEX (90 × 4 seasons × 3 tiers × 8), Chu Sa HEX #B62832, exact royal coverage %, HH dominant royal main garment, any costume design in the file.
+**Conflicts to raise with the owner before changing rules:** G13 (one colour pair at every rank) vs rank tiers; B17/B21 (t7/t8 = yellow + own colours) vs gold+red t6–t8; F20 (flower ≠ main) and G56 (veil hue ≥ 60° from main) vs "main + secondary may share a family".
