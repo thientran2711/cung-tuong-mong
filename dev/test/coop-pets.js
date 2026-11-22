@@ -14,7 +14,7 @@ const WURL=process.argv[4]||'https://ctm-coop.victoria-tntt.workers.dev';
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,600):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);/* r2: consort starts (lib/coop-real.js; env COOP_A_ORIGIN / COOP_B_ORIGIN, 'rand' = random) */await REALL.origin(ctx,name==='host'?'a':'b');await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code||'',seat:c.seat,week:c.week||0,online:c.online||{},ended:c.ended||{},
       frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const o={ctx,name,errs:[]};const p=await ctx.newPage();p.setDefaultTimeout(30000);
@@ -57,6 +57,12 @@ async function samePets(A,B,tag){
   const k=L=>JSON.stringify((L||[]).map(x=>[x.t,x.at,x.stg]).sort());
   ok(k(fa)===k(b),tag+': A sees B\'s real pets',[fa,b]);ok(k(fb)===k(a),tag+': B sees A\'s real pets',[fb,a]);
   const na=await npcPets(A),nb=await npcPets(B);ok(na===nb,tag+': NPC pets identical on both',na===nb?undefined:[na.slice(0,200),nb.slice(0,200)])}
+const REALL=require('./lib/coop-real.js');const DBGF=o=>o.p.evaluate(REALL.DBGF).catch(e=>'dbg err '+e.message);
+/* r2: step 5 state of one seat for a failure dump (her queue titles, the week-end relay, D's patch queue / log, the host's stored copy of the guest's pets) */
+const DBG5=o=>o.p.evaluate(()=>{const T=COOPW.thin||{},D=T.D||{};let hb=null;try{const ob=COOPW.seat==='a'?'b':'a';const x=COOPW.seat==='a'&&T.seatOf?T.seatOf(ob):null;hb=x&&x.S?(x.S.pets||[]).map(P=>P.t+'/'+Math.round(P.full)):null}catch(e){hb='err '+e.message}
+  return{seat:COOPW.seat,wk:__co().week,day:typeof wk==='function'?wk():null,sent:COOPW.sent,pend:COOPW.pend,bend:COOPW.bend,rpend:Object.keys(COOPW.rpend||{}),Q:Q.map(m=>String(m&&(m.t||m.pid||'')).slice(0,30)+(m&&m.opts?'['+m.opts.length+']':'')+(m&&m.thin?'(thin)':'')),
+   pets:(S.pets||[]).map(P=>P.t+'/'+Math.round(P.full)),thpn:S.thpn,N:D.N,PQ:D.PQ?Object.fromEntries(Object.entries(D.PQ).map(([k,L])=>[k,(L||[]).map(x=>x.n+':'+(x.p||[]).length+(x.rid?'r':''))])):null,
+   dlog:(D.log||[]).slice(-14),fW:COOPW.fW?COOPW.fW():null,dOn:T.dOn?T.dOn():null,lvl:T.lvl,resIn:window.__resIn||null,resOut:window.__resOut||null,hostCopyB:hb,inLife:!!COOPW.inLife,life:T.life?{ask:!!T.life.ask}:null,tr:(COOPW.tr||[]).slice(-10)}}).catch(e=>'dbg err '+e.message);
 async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms){if(await o.p.evaluate(fn).catch(()=>false))return true;await sleep(300)}return false}
 
 (async()=>{const b=await chromium.launch();
@@ -74,8 +80,15 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  for(const o of [A,B])await o.p.evaluate(()=>{if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=Math.max(S.rank||0,3);render()});
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both in the shared world');await clear(A);await clear(B);
  /* both get pets (B: a cat that follows her + a crane; A: one dog) */
- for(const [o,L] of [[B,['meo','hac']],[A,['cho']]])await o.p.evaluate(L=>{petMax=()=>4;/* test: room for a few pets at any rank */S.pets=[];S.petOn=-1;S.petB=null;S.petBn=0;for(const t of L){const P=petAdd(S,t,'thử','buy');P.full=40;P.clean=50;P.joy=50;P.aff=30;P.stg=1;petcSync(P)}S.bac=Math.max(S.bac||0,200);render()},L);
- ok(!!await A.p.evaluate(()=>COOPW.friend())&&!!await B.p.evaluate(()=>COOPW.friend()),'each has the other as a consort entry',[await A.p.evaluate(()=>!!(S.srv&&!S.srv.risen)),await B.p.evaluate(()=>!!(S.srv&&!S.srv.risen))]);
+ for(const [o,L] of [[B,['meo','hac']],[A,['cho']]])await o.p.evaluate(L=>{petMax=()=>4;/* test: room for a few pets at any rank */S.petTip=1;/* r2: she has had a pet before (legal state): no first-time «Thú nuôi · lời dặn lần đầu» panel lands on top of the gift checks */S.pets=[];S.petOn=-1;S.petB=null;S.petBn=0;for(const t of L){const P=petAdd(S,t,'thử','buy');P.full=40;P.clean=50;P.joy=50;P.aff=30;P.stg=1;petcSync(P)}S.bac=Math.max(S.bac||0,200);render()},L);
+ /* r2: the set-up above wrote each seat's own screen; the guest's person lives on the host (thin co-op) and the world's entries are built from the
+    merged week, so one week merge makes it real on both seats (rank ≥ PAL_HEAD = her own palace, never «Người cùng cung»; her pets in the host's copy) */
+ if(!process.env.COOP_PETS_NOMERGE){const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(A);await press(B);ok(await weekWait(A,wk)&&await weekWait(B,wk),'set-up week merged');await clear(A);await clear(B);
+  ok(await waitFr(A,REALL.REAL)&&await waitFr(B,REALL.REAL),'set-up is real on both seats (consort entry, own palace)',[await DBGF(A),await DBGF(B)])}
+ if(process.env.COOP_PETS_PROBE){for(const t of [3000,15000]){await sleep(t);const hs=async o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?{fRank:f.rank,fRes:f.resHead,fPets:(f.pets||[]).map(P=>P.t+'/'+Math.round(P.full)),same:sameHouse(S,f),hm:houseOf(S),hf:houseOf(f)}:null});
+   console.log('PROBE',t,JSON.stringify({A:await DBGF(A),B:await DBGF(B),Ah:await hs(A),Bh:await hs(B),Ap:await DBG5(A)}))}await b.close();process.exit(0)}
+ /* review/coop-guest-staff: waited like the next two checks (read once, it raced the friend entry's build after the rank/pet set-up: [false,false] in 2 of 7 runs) */
+ ok(await waitFr(A,()=>!!COOPW.friend())&&await waitFr(B,()=>!!COOPW.friend()),'each has the other as a consort entry',[await DBGF(A),await DBGF(B)]);
  ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length===2}),'A\'s friend entry shows B\'s 2 pets (live pos)');
  ok(await waitFr(B,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length===1}),'B\'s friend entry shows A\'s pet');
  /* 1 help */
@@ -124,15 +137,33 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
   await samePets(A,B,'after week 1')}
  /* 5 late res: B ends the week first, THEN A helps her; the help must be in the merged week */
  {await B.p.evaluate(()=>{for(const P of S.pets||[]){P.full=30;petcSync(P)}render()});await sleep(1500);
-  const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(B);
-  /* r1 fix 6: the night gate (both ready, or the host forces the night) — A holds a dialog open so only B runs the night and ends */
-  await A.p.evaluate(()=>{pushModal({t:"Chờ",h:"<p>Chờ</p>"});showModal();COOPW.forceNight()});
-  {const t0=Date.now();while(Date.now()-t0<30000&&!await B.p.evaluate(()=>COOPW.sent===__co().week)){await clear(B);await sleep(300)}}
+  const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);
+  /* review/coop-guest-staff: under jnf co-op the guest's night needs the HOST's flip (host endTurn) and the host's {fin}; a dialog the host
+     holds BEFORE its flip holds the guest's night too, so B can never end first that way. Real order now: both close tối, the host's flip +
+     the one choice resolve (S.nfFin = today, {fin} sent to B), and at THAT moment the host's player opens a dialog and keeps it open
+     (setter on S.nfFin, synchronous: nothing of A's own night or week end can slip in first). B then plays her own night and ends first. */
+  await A.p.evaluate(()=>{window.__hold=0;const s=S;let v=s.nfFin;Object.defineProperty(s,'nfFin',{configurable:true,enumerable:true,get:()=>v,
+    set:x=>{v=x;try{if(!window.__hold&&x===(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0)))){/* jnf day(), private there */window.__hold=1;pushModal({t:"Chờ",h:"<p>Chờ</p>"});window.__holdQ=Q[Q.length-1];window.__holdRe=0;window.__holdW=setInterval(()=>{try{if(window.__hold===1&&!Q.includes(window.__holdQ)){window.__holdRe++;window.__holdWhy=(window.__holdWhy||[]).concat([{wk:__co().week,sent:COOPW.sent,m:!$('modal').hidden}]);Q.unshift(window.__holdQ)}}catch(e){}},20);window.__sentAtHold={sent:COOPW.sent,wk:__co().week,q:Q.length,pend:COOPW.pend,tr:(COOPW.tr||[]).slice(-8)}}}catch(e){}}})});
+  await press(A);await press(B);
+  /* both choices resolve (the 10-second clock); keep clearing B only, and A only until its hold is up */
+  {const t0=Date.now();while(Date.now()-t0<90000){if(await B.p.evaluate(()=>COOPW.sent===__co().week))break;
+    if(!await A.p.evaluate(()=>window.__hold))await clear(A);await clear(B);await sleep(300)}}
+  ok(await A.p.evaluate(()=>!!window.__hold&&COOPW.sent!==__co().week&&Q.includes(window.__holdQ)),'A holds a dialog after the flip, her end not sent',await A.p.evaluate(()=>({hold:window.__hold,re:window.__holdRe,why:window.__holdWhy,at:window.__sentAtHold,sent:COOPW.sent,wk:__co().week,nfFin:S.nfFin,inQ:Q.includes(window.__holdQ),tr:(COOPW.tr||[]).slice(-14)})));
   ok(await B.p.evaluate(()=>COOPW.sent===__co().week),'B ended the week (end sent)');
   ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length>0}),'A still sees B\'s pets');
-  const before=await myPets(B);await B.p.evaluate(f=>{window.__f0=f},Math.max(...before.map(x=>x.full)));const hh=await act(A,'petcare',false);ok(hh.okk,'A helps B after B ended',hh);
-  ok(await waitFr(B,()=>(S.pets||[]).some(P=>P.full>=window.__f0+25||P.full>=100)),'B applied the late help',await myPets(B));
-  await press(A);ok(await weekWait(A,wk)&&await weekWait(B,wk),'week 2 merged');await clear(A);await clear(B);
+  /* r2: the res relay of the late help, both ends (what A sent, what reached B) for a failure dump */
+  await B.p.evaluate(()=>{window.__resIn=[];COOP.on('res',m=>{try{__resIn.push({id:m.id,k:m.k,from:m.from,pet:m.pet,sent:COOPW.sent,wk:__co().week})}catch(e){}})});
+  await A.p.evaluate(()=>{window.__resOut=[];const s0=COOP.send;COOP.send=function(m){try{if(m&&(m.t==='res'||m.t==='actr'))__resOut.push({t:m.t,id:m.id,k:m.k,pet:m.pet,ack:m.ack})}catch(e){}return s0.apply(this,arguments)};COOP.on('actr',m=>{try{if(m.from!==COOPW.seat)__resOut.push({in:'actr',id:m.id,ack:m.ack})}catch(e){}})});
+  const before=await myPets(B);await B.p.evaluate(f=>{window.__f0=f},Math.max(...before.map(x=>x.full)));const aim=await A.p.evaluate(()=>{const f=COOPW.friend();const P=f&&f.pets[petTarget(f)];return P?{t:P.t,at:P.at||0,full:Math.round(P.full)}:null});const hh=await act(A,'petcare',false);ok(hh.okk&&/giúp/.test(hh.r),'A helps B after B ended',hh);
+  ok(!!aim&&before.some(x=>x.t===aim.t&&x.at===aim.at),'the pet A aims at is one B really has (friend entry not stale)',{aim,before});
+  {const lh=await waitFr(B,()=>(S.pets||[]).some(P=>P.full>=window.__f0+25||P.full>=100));ok(lh,'B applied the late help',lh?await myPets(B):{B:await DBG5(B),A:await DBG5(A)})}
+  /* r2: deterministic release. A random host-side dialog (a visitor's kit choice, e.g. Hà cô cô) can be pushed while the hold is up; A's player
+     answers EVERY dialog in her queue (the first open choice, or closes it) until her queue is empty, then ends her week */
+  await A.p.evaluate(()=>{window.__hold=2;clearInterval(window.__holdW);const i=Q.indexOf(window.__holdQ);if(i>=0)Q.splice(i,1);const s=S,v=s.nfFin;delete s.nfFin;s.nfFin=v;try{showModal();render()}catch(e){}});
+  {const t0=Date.now();const drain=[];while(Date.now()-t0<30000){const st=await clear(A);const n=await A.p.evaluate(()=>Q.length);if(!n&&st!=='x')break;
+    if(n&&st!=='x')drain.push(await A.p.evaluate(()=>{const m=Q[0];const t=String(m&&(m.t||'')).slice(0,40);try{if(m&&m.opts){const k=m.opts.findIndex(o=>o&&!o.off);chooseM(k<0?0:k)}else closeModal()}catch(e){Q.shift()}try{showModal();render()}catch(e){}return t}));await sleep(250)}
+  if(drain.length)console.log('step 5 release: answered by hand',JSON.stringify(drain))}
+  await press(A);{const w2=await weekWait(A,wk)&&await weekWait(B,wk);ok(w2,'week 2 merged',w2?undefined:{A:await DBG5(A),B:await DBG5(B)})}await clear(A);await clear(B);
   const after=await myPets(B);const t0=before.find(x=>true);
   ok(after.some(x=>x.full>=Math.min(100,Math.max(...before.map(y=>y.full))+25)),'merged week keeps the late help',{before,after});
   await samePets(A,B,'after week 2')}
