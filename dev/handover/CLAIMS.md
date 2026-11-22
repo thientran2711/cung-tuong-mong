@@ -1102,3 +1102,4 @@ REVIEW coop-guest-men (opus BIG co-op; briefs/D19-coop-guest-men-review.md) of 8
 | REVIEW night-ledger-coop r3 (opus BIG reviewer-lander) of 7aff0de3 | review/night-ledger-coop-r3-rv; reports/night-ledger.md | B | session_01N1tNP5JeCc1aEETUicwLpq | FAIL 7aff0de3 (carried non-pid choice hollow after the merged week; «REVIEW coop r3») → worker 4b8rvF5b | 22/11 17:39Z |
 | night-ledger-coop r4 fixer #3 (opus BIG co-op; r3 7aff0de3 FAIL: hollow carried non-pid choice, CQ memory-only, AFK cheaper decline; + LIVE keepQ bug) | review/night-ledger-coop-r4; reports/night-ledger.md | B | session_01N1tNP2ntVMAWS44p7tEVQd | RUNNING | 22/11 18:22Z |
 coop-flakes (opus report-first; coop-pets stress round 3 + coop-guest-maid «links moved»; briefs/D20-coop-flakes.md) | review/coop-flakes | session_01964izE5gLnvQcVeUAZdUGJ | RUNNING | 22/11 19:12Z (Foreman D #20)
+THACT5 | L2381 act seal fixed scale | session_01D3E3NY9DHseZozKjjHVfNB | RUNNING | 2026-11-22T19:10Z
