@@ -88,7 +88,7 @@ document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target
  kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`,{inside:true})}catch(x){}},true);
 /* ---------- 5. Nội vụ phủ: a place (map spot on the office court west of the inner palace; scene = the office picture) ---------- */
 try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places.nvp)MAPH.places.nvp={box:{x:.085,y:.575,w:.13,h:.075},anchor:{x:.15,y:.6}};if(typeof ACC_DAY==="object")ACC_DAY.nvp=1}catch(e){}
-(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"ksp"})}catch(e){}return L}})();
+(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"nvp"})}catch(e){}return L}})();
 (function(){const c0=countAt;countAt=function(k){return c0.apply(this,arguments)+(k==="nvp"?1:0)}})();
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(k==="nvp"&&S.place==="nvp"&&S.visit&&!S.visit.people.some(x=>x.kind==="peddler")){const c=S.court&&S.court.ped;
   S.visit.people.push({kind:"peddler",name:c&&c.name?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"});
