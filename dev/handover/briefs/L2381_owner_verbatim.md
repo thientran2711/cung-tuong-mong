@@ -7,3 +7,7 @@
 4. Thượng thư phòng = study hall of the princes (A ca); curtains embroidered to match its chairs/lanterns → redraw.
 5. Ngự hoa viên: keep the detail level; undo the desaturating grade, colours fresh and lively (0 cr).
 6. Từ Ninh bedroom + reception APPROVED. Swap all 15 places into the game after 2–5 land (approved-plan rule).
+
+# OWNER L2384 (22/11 ~19:23Z, via ROOT-C1) — VERBATIM
+"Phòng của các AK là không có chạm chỗ rồng nha, rồng là chỉ có vua thôi. Còn con của vua ngày xưa là dùng cái gì? Tôi nghĩ cũng không có nên cho sắc vàng, bởi vì AK cũng chưa phải là thái tử, chỉ có thái tử mới có sắc vàng. Về mặt hình thức và mấy cái kiểu thiết kế gọi là gì ta, theo thùa là đã ổn rồi, chỉ là sửa lại cái trạm trổ. Hình như là coi lại thử con cái ngày xưa của vua là dùng cái con gì. Làm tương tự cho phòng ngủ và phòng khách của thượng thư phòng này. Thượng thư phòng này nó đang bị too much nữa rồi. Bạn đang làm too much, over quá mức. Vừa phải thôi chứ. Tiếp đến là hình ngựa hoa viên. Ok, trước mắt là giữ ngựa hoa viên mới như vậy đi."
+## Foreman C reading: history expert first (OD:L1327) on prince motif/colour; A ca sở: keep design/embroidery, replace dragon carving with correct prince motif, no royal yellow; same motif rule for every a-ca/prince room (bedroom + reception) — whole group; Thượng thư phòng: tone down to moderate, no dragons; Ngự hoa viên new version APPROVED.
