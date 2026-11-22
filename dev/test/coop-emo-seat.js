@@ -21,8 +21,8 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{/* a manual kit scene (night-end «Nhận» #kneov, reward box): a player closes it with its own button [data-km-close] (rv night-balance-bundle, like coop-night) */const kc=[...document.querySelectorAll('.kmov [data-km-close]')].find(x=>x.offsetParent!==null&&!x.disabled&&x.getClientRects().length);if(kc){kc.click();return'x'}
-   const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
+   
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
@@ -74,7 +74,10 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const a=await rd(A)||await press(A,15000),c=await rd(B)||await press(B,15000);return a&&c&&await bothPast(A,B,k,30000)>=0}
  async function nextWeek(w0){for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;
    if(a.w>w0||c.w>w0){await sleep(500);continue}const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k)}
-  const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;await sleep(500)}return false}
+  const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;await sleep(500)}
+  /* stuck dump (same as the other bots' «advanced for both»): both seats' screen + night word (THE helper's SCR) + the co-op trace */
+  const SCR=require('./lib/coop-clear.js').SCR,dq=o=>o.p.evaluate(()=>({w:COOP.state.week,k:COOPW.tm.myKey(),pend:COOPW.pend,sent:COOPW.sent,cyHold:COOPW.cyHold,nf:typeof nfDebug==='function'?nfDebug():null,next:(document.getElementById('next')||{}).textContent,tr:(COOPW.tr||[]).slice(-16)})).catch(e=>e.message);
+  console.log('STUCK week '+w0+' '+JSON.stringify({A:await dq(A),B:await dq(B),sA:await A.p.evaluate(SCR).catch(e=>e.message),sB:await B.p.evaluate(SCR).catch(e=>e.message)}));return false}
  async function toDay(){for(let g=0;g<6;g++){const a=await D(A);if(a.b<LAST)return;await nextWeek(a.w)}}
  await A.p.evaluate(()=>Object.assign(BAL.coopTm,{buoiMs:240000,pauseCapMs:6000}));await A.p.evaluate(()=>COOPW.tm.reset());
  /* the shared world as this seat sees it: every NPC's public numbers + the Emperor / Thái hậu / court / palace men / weather / date */
