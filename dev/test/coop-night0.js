@@ -17,7 +17,8 @@ const R=[];const ok=(k,c,info)=>{R.push([!!c,k]);console.log((c?'ok  ':'FAIL')+'
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
- await p.waitForFunction(()=>typeof start==='function'&&typeof nfOn==='function'&&typeof nfRoomOff==='function',null,{timeout:0});await p.waitForTimeout(2000);
+ await p.waitForFunction(()=>typeof start==='function'&&typeof nfOn==='function',null,{timeout:0});/* nfRoomOff missing (LIVE before the fix) = rows FAIL, never a hang */
+ await p.evaluate(()=>{if(typeof window.nfRoomOff!=='function')window.nfRoomOff=()=>'missing'});await p.waitForTimeout(2000);
  await p.evaluate(()=>{window.T={sent:[]};BAL.visit.cap=0;
   COOP.send=m=>{T.sent.push(m)};
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
@@ -53,7 +54,7 @@ const R=[];const ok=(k,c,info)=>{R.push([!!c,k]);console.log((c?'ok  ':'FAIL')+'
       "sees the other as a person" / "one place" rows fail BY DESIGN there; this test reads only the night / date rows */
    const [oa,ka]=A.split('+'),[ob,kb]=B.split('+');const ev={COOP_A_ORIGIN:oa,COOP_B_ORIGIN:ob,COOP_WEEKS:process.env.NIGHT0_WEEKS||'1'};if(ka)ev.COOP_A_KC=ka;if(kb)ev.COOP_B_KC=kb;
    const x=spawnSync('node',[path.join(__dirname,'coop-e2e.js'),out],{env:Object.assign({},process.env,ev),encoding:'utf8',maxBuffer:1<<28});
-   const L=(x.stdout||'').split('\n');const bad=L.filter(l=>/^FAIL/.test(l)&&/advanced|same date|STUCK|night/i.test(l)).map(l=>l.slice(0,300));
+   const L=(x.stdout||'').split('\n');const bad=L.filter(l=>/^FAIL/.test(l)&&/advanced|same date|STUCK|night/i.test(l.split(' {')[0].split(' [')[0])).map(l=>l.slice(0,300));/* the row title only (its JSON trace says «night 0» on every row) */
    const sum=L.filter(l=>/^\s*\d+\/\d+/.test(l)||/passed|STUCK/.test(l)).slice(-2);
    ok(`3 coop-e2e host ${A} / guest ${B}: no seat stuck in a night, same date`,!bad.length&&x.status!==null,{bad:bad.slice(0,4),sum,status:x.status})}}
  const n=R.filter(x=>x[0]).length;console.log(`coop-night0: ${n}/${R.length}`);process.exit(n===R.length?0:1)})().catch(e=>{console.error(e);process.exit(1)});
