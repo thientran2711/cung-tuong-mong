@@ -147,7 +147,7 @@ COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear();try{FLAST.clear()}ca
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
 COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
 /* every rename the host makes (any sweep: load, start, month) goes to the guest's own texts */
-if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){const r=f0.apply(this,arguments);try{if(CW.on&&host()&&Array.isArray(r)&&r.length){
+if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){let o0;try{o0=typeof S!=="undefined"&&S?JSON.stringify(S.nmOrd):undefined}catch(e){}const r=f0.apply(this,arguments);try{/* r2-r3 (same family, e2e NC_FORCE 1/1: S.nmOrd host {} vs guest the old order after week 3 + rejoin): the host's nmOrdPrune drops a done order with no rename, a world write no check sent */if(CW.on&&host()&&!(Array.isArray(r)&&r.length)&&typeof S!=="undefined"&&S&&JSON.stringify(S.nmOrd)!==o0)soon("nm")}catch(e){}try{if(CW.on&&host()&&Array.isArray(r)&&r.length){
   for(const x of r)if(x&&x.old&&x.neu&&x.old!==x.neu&&x.kind!=="lbl")nmQ.push([x.old,x.neu,x.why==="dup"?0:1]);if(nmQ.length>200)nmQ.splice(0,nmQ.length-200);soon("nm")}}catch(e){}return r};window.nmFix=nmFix}
 /* a lazy face pick on the host (render) is sent at once */
 function wrapPick(name){const f=window[name];if(typeof f!=="function")return;const g=function(who){let w=null,a;try{w=who||(name==="figThPick"&&S?S.thO:null);a=w&&w.fid}catch(e){}const r=f.apply(this,arguments);
