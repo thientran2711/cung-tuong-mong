@@ -10,6 +10,8 @@ Repo thientran2711/cung-tuong-mong, branch claude/cung-tuong-mong-handover-hj0h8
 - SEND PICTURES IN CHAT with SendUserFile (display render) — NEVER links. LOOK at every picture full size before sending (A11, A22).
 - Before asking her ANYTHING: `python3 dev/art/rule.py find <words>` (VN or EN, accents optional). Never re-ask an approved thing (she was angry, Lượt 779/780).
 - NO REDRAW / regen / small fix without her explicit yes (A20/A21 Lượt 777). Faults → RECOMMENDED-REDRAW list to her first (L21 Lượt 807). Our own critiques are notes only (A18 LAW #0).
+- APPROVED PLAN = DETAILS ARE OURS (owner L2370 22/11, verbatim: "Cái mức nào thì quản đốc nào đưa ra khuyến nghị gì đó thì bạn cứ làm theo cái ý của tôi thôi, khỏi cần tôi duyệt nữa. Bây giờ tôi đã duyệt rồi, đừng có hỏi lại nữa."): once she approves a plan, the foreman decides levels/details itself (follow her words + the recommendation) and does NOT ask her again.
+- NO ROOM LOOKS POOR (owner L2370 verbatim: "Trong game này tôi không muốn cái phòng nào hay ai là nhìn thấy nghèo hết trơn á, bởi vì bản chất tôi cũng chơi cái tuyến cung nhân, mà khi vào một cái phòng nhìn nó nghèo nàn quá tôi thấy chán lắm"): low-rank rooms/places (maid, servants, phối, Lãnh cung) are simple but still beautiful and well-kept, never shabby/poor.
 - Only "duyệt" approves (A7). Credits are shared and she is very sensitive about spending: say the cost before big jobs.
 
 ## Rollover + lineage (copied verbatim from TAKEOVER_FOREMAN_C_ROOT58.md — every takeover prompt copies them)
