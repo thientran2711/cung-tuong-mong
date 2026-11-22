@@ -64,3 +64,12 @@ the gate honest. Suggested follow-up ticket: find the load-dependent pick (start
 
 ## Handover
 Done; nothing left. Scratch logs /home/user/wt/cowf-logs (not in git).
+
+## REVIEW r1 (reviewer sonnet, SMALL, 22/11) — PASS f4cb9ceb118163c774e2c583b0a3fbb8fe5421f5
+PRIORITY #1 CHECK: ticket FROM MAIN 105 10:09Z | main LIVE b55a0e1c | review/coop-one-world-flake f4cb9ceb is already on top of LIVE (FF, no merge needed).
+1. Diff = dev/test/coop-one-world.js, time-spill-guard.js, budget-race-scan.py (new), this report. NO game file (dev/build, BAL, save, co-op runtime). SMALL confirmed.
+2. Tighter, not looser. Mutation: guestNet (dev/build/jcoopworld.js, reverted after) writes evm["41"] (NPC-on-NPC) on an NPC that already has evm keys, seed 3.
+   New test: FAIL ("guest week changes the world", R.evm 8). LIVE old test: PASS (miss, the old regex skipped evm.* whole). Mutation on an NPC with EMPTY evm: both fail (the '{}' leaf), as expected.
+3. Runs on the branch build, seed 3, 4 cores: coop-one-world idle 10/10 PASS; under load (4 parallel lanes + 4 busy loops) 10/10 PASS; quickcheck hook 50 (seeds 7+3) PASS; time-spill-guard PASS (79 checks, 0 bad).
+4. LAW 11 scan real: budget-race-scan 0 flagged (core 0) of 97; on LIVE, coop-one-world / time-spill-guard have no __agAll (flagged), coop-host-lag-scan allow-listed with a valid reason (endTurn unseeded, only face picks seeded).
+5. LAW check: no law touched (test-only). OPEN item (asset-load-dependent RNG) accepted as follow-up for Foreman B, not a blocker.
