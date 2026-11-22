@@ -18,6 +18,9 @@ for k in D:
     b = _base(k)
     if b not in best or _rank(k) > _rank(best[b]): best[b] = k
 LIVE = {k: b for b, k in best.items()}
+LIVE = {k: k for k in D if not k.endswith('-r2')}
+for k in D:
+    if k.endswith('-r2') and os.path.exists(f'{R}/{k}-ha-sang.webp'): LIVE[k[:-3]] = None; LIVE[k] = k[:-3]   # r2 wins
 NOTE = {'nvp': 'no img/nvp-ha-sang.webp live (live has nvp-v4-*, not referenced by index.html) -> ask foreman which key',
         'tu-ninh-cung-ngu': 'new picture, no live file yet -> needs a code hook-up (Từ Ninh bedroom)'}
 plan = []
