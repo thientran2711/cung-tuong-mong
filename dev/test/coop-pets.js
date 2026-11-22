@@ -83,6 +83,13 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both in the shared world');await clear(A);await clear(B);
  /* both get pets (B: a cat that follows her + a crane; A: one dog) */
  for(const [o,L] of [[B,['meo','hac']],[A,['cho']]])await o.p.evaluate(L=>{petMax=()=>4;/* test: room for a few pets at any rank */S.petTip=1;/* r2: she has had a pet before (legal state): no first-time «Thú nuôi · lời dặn lần đầu» panel lands on top of the gift checks */S.pets=[];S.petOn=-1;S.petB=null;S.petBn=0;for(const t of L){const P=petAdd(S,t,'thử','buy');P.full=40;P.clean=50;P.joy=50;P.aff=30;P.stg=1;petcSync(P)}S.bac=Math.max(S.bac||0,200);render()},L);
+ /* D20 coop-flakes (pb-1: the host's rank 3 → 2 by the set-up check): the set-up above is screen-only; if a rebuild lands on a seat in the
+    same moment it puts back that seat's stored state. Hold until it has stayed for 1.5 s on both seats; a reset is printed (with the rank
+    trail) and the set-up is written again, like a player whose screen reloaded does it again */
+ for(let k=0;k<4;k++){await sleep(1500);const bad=[];for(const [o,n] of [[A,1],[B,2]])if(!await o.p.evaluate(n=>S.rank>=3&&(S.pets||[]).length===n,n).catch(()=>false))bad.push(o.name);if(!bad.length)break;
+  console.log('SETUP-RESET',k,JSON.stringify(bad),JSON.stringify(await A.p.evaluate(()=>({rk:window.__rk,tr:(COOPW.tr||[]).slice(-10)}))),JSON.stringify(await B.p.evaluate(()=>({rk:window.__rk,tr:(COOPW.tr||[]).slice(-10)}))));
+  for(const o of [A,B])await o.p.evaluate(()=>{if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=Math.max(S.rank||0,3);render()});
+  for(const [o,L] of [[B,['meo','hac']],[A,['cho']]])await o.p.evaluate(L=>{if((S.pets||[]).length===L.length)return;S.petTip=1;S.pets=[];S.petOn=-1;S.petB=null;S.petBn=0;for(const t of L){const P=petAdd(S,t,'thử','buy');P.full=40;P.clean=50;P.joy=50;P.aff=30;P.stg=1;petcSync(P)}render()},L)}
  /* r2: the set-up above wrote each seat's own screen; the guest's person lives on the host (thin co-op) and the world's entries are built from the
     merged week, so one week merge makes it real on both seats (rank ≥ PAL_HEAD = her own palace, never «Người cùng cung»; her pets in the host's copy) */
  if(!process.env.COOP_PETS_NOMERGE){const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(A);await press(B);ok(await weekWait(A,wk)&&await weekWait(B,wk),'set-up week merged');await clear(A);await clear(B);
