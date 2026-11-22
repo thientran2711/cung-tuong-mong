@@ -219,3 +219,22 @@ CONTROL for P = c2 runs above (P1 dup 55/86/118, P2 vanish 10000274/10000341).
 - NEXT on -p: (1) rerun SEED=9001 (and SKEW again for traffic) on e23148e0; try SEED=7 if 9001 degenerates again. (2) P3 vanish (control 3119, c2 270 = E44b 248, HOST side only): an NPC-owned case kept by an NPC finder via Kỳ ngộ «giữ lại» (jky.js:196 SPEC.item), later closed «tra» (NPC↔NPC loask jlost.js:122 / lostReturn) or re-lost («mis» case 28 closed «kyngo» w11 for 270); the piece is gone 2 weeks later with NO ledger line. Leads: jil census renumber (jil.js:97 `e.iu=0` when an id is seen twice → the piece lives on under a NEW id with a «nhận» line = a hidden dup turned into a renumber); lostReturn pushes loClean(c.e) while the holder copy x.e may stay in the holder's chest (check every lostReturn caller that splices the holder copy: jlost.js:122/197/250/252, jky.js:195/212 kyLc makes a COPY of c.e and nobody removes a holder copy). Add a LOST_DBG trace of new ids of the same kind in the week the old id vanishes. (3) P4 dup 246 (c2 SEED=9001, one run): host NPC 3 case 99 «riv», thief = friend entry (held at 902, her seat has it as lo99), and the host confiscates «conf» a piece with the SAME id from NPC 3 → NPC 3 kept a copy when the riv case was made (loLose riv + loKeepBy to the friend entry: check that the owner's piece leaves NPC 3). (4) gates: unit, 3×76 wk dup0/van0, coop-e2e 124, quickcheck + old save (run ALONE: G4 coop-one-world flakes under 3× load), coop-b1, role-parity ×2 → SSK to E #30 AND E48r + line in FOREMAN_E_STATUS.md.
 - Ticket for other rows (not -p): buổi handshake stalls «Chờ hảo hữu…» in ~1 of 3 long runs; «stip show rkOf null queen» page error (LIVE stipend).
 - E44c's container logs (/home/user/wt/e44c-out) are gone with it; the successor starts fresh: sparse worktree of review/coop-famops-p.
+
+## E44d (depth 4, session_01DgYSWnPPS3JD1PLTsrLBCp) — coop-famops-p, 22/11 ~05:10Z (interim)
+PRIORITY #1 CHECK ('kyLc|loKeepBy|loEvBack|loUI|famCopy'): OD law 6c | main bb92f986 | review/coop-famops-p e23148e0 → e2d2dcf1, c2 f766a052 (E48r) | claims E44c → E44d.
+76 wk LOST_DBG on e23148e0 (P1/P2 head, before LIVE merge): SEED=9001 90/91 dup0 van0 (1 harness «#next» wait) · SEED=7 88/97 dup0 van0 (stalls w47/w60 «Chờ hảo hữu…», pre-existing) · SKEW=24 **91/91** dup0 van0.
+Commits: 175caff9 merge LIVE bb92f986 (generated-file conflicts only) · **7efdc2cc** P3 family + harness · e2d2dcf1 site build.
+- HARNESS: on LIVE bb92f986 (night-final jnf) coop-lost-scan stalled every week at «night N» (its CSS hide of .kcf/#kroul = the shape coop-e2e on main dropped). Ported coop-e2e's clear(): roulette «Bỏ qua», kg82 mini-game, no CSS hide.
+- P3 FAMILY (law 6c, PRE-EXISTING on LIVE): lost-one-home-scan (solo, 10 tuần) DUP after Kỳ ngộ «Giữ lại» — seeds 2–5 on e23148e0+LIVE merge, seed 6 on LIVE bb92f986 alone (CONTROL). Trace (lostReturn / c.st setter probe): case owned by her, held by NPC 10 (kyngo giữ lại); loUI «sneak» (offered only to the thief) ran on it → spliced HER chest (not the holder's), lostReturn → her +1, NPC 10's copy stayed.
+  Group scan of every «holder copy → owner» road (jlost.js):
+  | road | before | after |
+  |---|---|---|
+  | loUI sneak / giveback / handin | splice S.inv, whoever holds it | loOffer: runs only while loActs offers the act (same rule as the button); loTake(x) = splice loEntry's x.h |
+  | loUI askback | splice h = c.at read BEFORE loEntry (loEntry may move c.at) | loTake(x) |
+  | loOwnerMove (NPC owner asks) | same as askback | loTake(x) |
+  | «Trả lại» dialog (loask) | splice S.inv even if she no longer holds it | only when x.h === S, loTake(x) |
+  | loEvBack (j68e/f/h «tìm lại được») | fresh copy of c.e while a holder kept hers | holder holds it → THAT copy back (loTake) |
+  | loHolderMove / loKeepHear / loQuietHear / soat / kyLc / census dead | already x.h / own chest / lost-only | unchanged |
+  Unit 18 / 18b / 18c / 18d → coop-famops-unit 31/31 (18–18c FAIL on the old jlost). Solo seeds 2–8 (10 tuần) after: dup0 van0, no page errors.
+- RUNNING: 76 wk LOST_DBG on e2d2dcf1: COOP_SWAP, default 4242, SEED=9001. Then quickcheck alone + old save, coop-e2e, coop-b1, role-parity ×2, lost-one-home-scan 108 tuần.
+- P4 (246, one run): not reproduced yet (0 in 6 runs); E48r judged it a conf-road copy that pre-existed (ticket).
