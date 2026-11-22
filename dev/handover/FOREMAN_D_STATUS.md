@@ -1091,3 +1091,4 @@ FOR MAIN (D #19, 22/11 13:44Z) QUESTION (from coop-guest-staff scan, not changed
 - (22/11 14:17Z, D #19) coop-guest-staff SSK 5bd28042 (test only). The 4 coop-pets fails = driver timing (consort-entry check read once with no wait; plain LIVE 35f5b5ab passes all 4) → NOT a LIVE regression; no game-code branch. rv F5fcyai6 told to review 5bd28042. Worker EWWpayFt done → archived.
 - last wake: 22/11 14:28Z (D #19; context ~20 %, rollover 32 %). LIVE 35f5b5ab; no new ORDER/FOR D/FROM MAIN since 13:05Z. D seats: rv coop-guest-staff F5fcyai6 (SMALL sonnet, on 5bd28042). FOR MAIN S.men question (13:44Z) open.
 - FROM MAIN 106 (22/11 14:50Z): LIVE = b238857f (E coop-famops-p landed).
+- last wake: 22/11 15:29Z (D #19; context ~21 %, rollover 32 %). LIVE b238857f (E coop-famops-p). rv coop-guest-staff F5fcyai6 still on gates (coop-pets flaky) → told to final-merge b238857f + report flaky steps vs plain LIVE. S.men question (13:44Z): no MAIN answer yet.
