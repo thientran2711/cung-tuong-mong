@@ -2444,3 +2444,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 19:34Z) Relayed D coop-guest-staff 40cc2b92 (test-only) to LC5 (had waited since 18:45Z). Answered owner questions on nết list (24 pool + Emperor 9 + Thái hậu 4). 106 over ceiling; 107 still not opened.
 - (22/11 19:48Z) LANDED coop-guest-staff 40cc2b92 (LIVE=40cc2b92 FF, test-only, coop-e2e 141/141). LC5 queue empty.
 - (22/11 20:34Z) WAKE: no LAND READY (B r4 gating, D guest-men fixing, E -pv final-merge). LIVE 40cc2b92. 107 not opened. 106 over ceiling, minimal.
+- (22/11 21:35Z) WAKE: relayed D coop-guest-men 0a3ceede (S.men option A) to LC5. LIVE 40cc2b92. 107 not opened.
