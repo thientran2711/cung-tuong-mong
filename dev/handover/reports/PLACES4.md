@@ -58,3 +58,29 @@ Every places prompt (L2355 + L2370 json, all 49) carries the shared style-ref se
 - Group 2 consort rooms 16 + toilette 13 = 29 bases: redraw 3 915 / edit ~1 160 cr.
 - Variants 345 × 40 = ~13 800 cr (or re-derive from the fixed base).
 - Total > 60 → group 2 + variants WAIT for ROOT-C5 / owner.
+
+## 2. RULE L30 + shared blocks (HIST2 @6e8e23b via ROOT-C5)
+- `rule.py add L` → **L30 WINDOW RULE** (owner L2387 verbatim + HIST2 text; prince rule L2384 wins for gold in A ca sở / Thượng thư phòng).
+- Shared block file `dev/art/common_blocks/window_L30.txt` (no word "Qing": room_gate F14 bans it even negated).
+- `prompts.py` C9_STYLE (the common room block every later builder imports): "furniture, curtains and objects" → "furniture, carved lattice windows and objects" + `WINDOW_L30` appended; SYH same word fix. prompts.py was NOT re-run (prompts.json unchanged).
+- `prompts_places_L2376.py` job 2387: record prompts M2370-33..38 = the source prompt with ONLY the window clause swapped (curtains → lattice + paper), the shared-sentence word fixed, L30 block appended; bed curtains kept. room_gate PASS (18); keep_check --sidecar PASS ×6 (allow = the cut window clause, reason L2387/L30). Old codes M2370-01..32 byte-identical.
+
+## 3. FIX group 1 — 7 EDITs of the approved pictures (ROOT-C5 GO, method = edit)
+Cost note: gpt-2-6 edit at 2k = 135 cr (simulate_cost exact), not 40 (old 1k rate). Edit prompts `dev/handover/prompts_L2095/M2370-3N_<key>_EDIT_ha_sang.txt` (room_gate PASS).
+| code | key | from | gen id | floor % | result (looked at, OLD|NEW sheet) |
+|---|---|---|---|---|---|
+| M2370-33 | a-ca-so-r5 | M2370-31 vQG5MOsa47 | 6A5cKYQiJO | 12.1 | blue window drapes gone → dark zitan lattice + paper; bed + bed curtains, desk, bow, screen identical |
+| M2370-34 | thuong-thu-phong-r6 | M2370-32 dt9fGgBXSL | ksd7XwH16B | 26.0 (as before) | blue drapes gone → ice-crack rosewood lattice with small glass panes |
+| M2370-35 | ngu-thu-phong-r4 | M2370-26 O6u9Co7ynm | KLewd7jkqp | 12.1 | yellow drapes gone → gilded lattice + paper |
+| M2370-36 | phi-tan-cung-r2 | M2370-15 huACyU8vqL | 4RHnqWD9Aa | 13.0 | green gauze gone → ice-crack lattice green frames (moon-gate partition also got paper backing) |
+| M2370-37 | tu-ninh-cung-r3 | M2370-25 MBOd7xtDCm | aFzknxlfSh | 15.6 | amber drapes gone → red-lacquer longevity lattice |
+| M2370-38 | dong-cung-r2 | M2370-14 6A5ZvesiJO | 9ZqYbTCNYZ | 20.3 | yellow drapes gone → gilt lattice + paper (garden view now behind paper) |
+| M2370-39 | khon-ninh-cung-r1 | live img/khon-ninh-cung.webp (uploaded 6A5c5BsiJO) | fHn1YsACDY | n/a (old 16:9 1280×720 layout; 2688×1512) | white drape gone; left open garden view became a lattice wall |
+Credits: 7 × 135 = **945 cr**. Pictures: img/_review/place-rank/places-l2370/<key>-ha-sang.webp (CDN). Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l2370/people/L2387-old-new.jpg
+Ledger 7 lines; MA_HINH M2370-33..39.
+Swap (after the owner sees): `swap_L2370.py` picks the highest -rN, so r5/r6/r4/r2/r3/r2 win automatically; its dry run needs every review picture downloaded locally first (decap step fails on missing files). Khôn Ninh is outside swap_L2370 (live key khon-ninh-cung, 1280×720 + 15 variants) → own swap step.
+
+## Group 2 + variants (HOLD, ROOT-C5 → owner)
+- Group 2: 16 consort rooms + 13 toilette rooms = 29 edits × 135 = **3 915 cr**.
+- Variants: 23 rooms with drapes × 15 season×time variants = 345 (1280×720). Recommend RE-DERIVE from the fixed base with the original season prompts (same pipeline that made them, no drift, matches the new base) at 1k = 80 cr each = **27 600 cr**; re-editing each old variant costs the same but can leave drapes the season edit re-adds and drifts from the new base.
+- Total still to do: 3 915 + 27 600 = **31 515 cr** (+ 945 done).

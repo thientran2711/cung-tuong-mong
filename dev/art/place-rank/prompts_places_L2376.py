@@ -1,7 +1,7 @@
 # PLACES3 (owner L2376 22/11 via ROOT-C3): 7 redraws M2370-21..27. Reads the FROZEN prompts_places_L2370.json (= the generated M2370-01..20
 # files; prompts_places_L2370.py can no longer rebuild it because prompts_places_L2355.json on the branch is broken JSON / changed) and
 # appends new codes only; used codes are never rewritten. Ngự hoa viên = 0 cr calm grade (room_calm.py), no prompt.
-import os, sys, json
+import os, sys, json, re
 D = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, D)
 ROOT = os.path.abspath(os.path.join(D, '..', '..', '..'))
 OUTD = os.path.join(ROOT, 'dev', 'handover', 'prompts_L2095')
@@ -223,10 +223,56 @@ for src, nk, reps in (('a-ca-so-r3', 'a-ca-so-r4', ACS4), ('thuong-thu-phong-r4'
     for a, b in reps: assert p.count(a) == 1, (nk, a[:60]); p = p.replace(a, b)
     a = ' No Western sofa, no upholstered couch. '; assert p.count(a) == 1; p = p.replace(a, PRINCE + a)
     OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2384, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
-import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384)}, 'places-M2370-L2376')
+# ===== PLACES4 L2387 (owner: "Cửa sổ là không có rèm" + HIST2 @6e8e23b, rule L30). job=2387, codes after M2370-32.
+# Only the WINDOW clause changes (curtains -> lattice + paper); the shared style sentence says "carved lattice windows" instead of
+# "curtains"; the L30 window block (dev/art/common_blocks/window_L30.txt) is appended. Bed curtains stay (allowed by L30).
+for k in [k for k, v in OUT.items() if v.get('job') == 2387]: del OUT[k]
+WIN = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30.txt'), encoding='utf-8').read().strip()
+STY = ('same depth with furniture, curtains and objects', 'same depth with furniture, carved lattice windows and objects')
+def cut_to(p, start, end):   # the clause from `start` up to (not incl.) the first `end` after it
+    i = p.index(start); j = p.index(end, i); return p[i:j]
+W87 = {
+ 'a-ca-so-r4': ('a-ca-so-r5', 'with luxurious layered princely curtains:', ';',
+   "with NO curtains at all (rule L30): the windows are densely carved dark zitan lattice in a strong straight bubu-jin and key-fret "
+   "pattern with only a thin gold line on the edges, backed by glowing white window paper with a few small glass panes in the lattice "
+   "centre, warm diffused light falling through the paper"),
+ 'thuong-thu-phong-r5': ('thuong-thu-phong-r6', 'hung with refined embroidered curtains, moderate and quiet:', ';',
+   "with NO curtains (rule L30): densely carved rosewood lattice in an ice-crack and key-fret pattern in the natural wood, backed by "
+   "glowing white window paper with small glass panes in the centre, soft diffused light through the paper"),
+ 'ngu-thu-phong-r3': ('ngu-thu-phong-r4', 'hung with imperial yellow silk brocade curtains', ',  a large',
+   ""),
+ 'phi-tan-cung': ('phi-tan-cung-r2', ' with pale green gauze curtains', ';',
+   " with NO curtains (rule L30): carved lattice in an ice-crack pattern with pale green painted frames, backed by glowing white "
+   "window paper, soft light through the paper"),
+ 'tu-ninh-cung-r2': ('tu-ninh-cung-r3', 'hung with heavy curtains of amber-brown silk brocade', ';',
+   "with NO curtains (rule L30): densely carved dark red lacquered lattice with gilt edges in a longevity-character and key-fret "
+   "pattern, backed by glowing white window paper, warm amber light through the paper"),
+ 'dong-cung': ('dong-cung-r2', ' with royal yellow like #EFBD69 silk curtains tied back', ';',
+   " with NO curtains (rule L30): densely carved lattice in a bubu-jin pattern with gilt edges, backed by glowing white window paper; "
+   "royal yellow like #EFBD69 silk stays on the cushions and lantern tassels"),
+}
+W87['ngu-thu-phong-r3'] = ('ngu-thu-phong-r4', 'hung with imperial yellow silk brocade curtains', ', a large',
+   "with NO curtains (rule L30): densely carved gilded lattice in a bubu-jin and key-fret pattern, backed by glowing white window "
+   "paper with small glass panes in the centre; imperial yellow like #E3B04B dragon-roundel silk stays on the cushions and lanterns")
+CUT87 = {}
+for src, (nk, start, end, rep) in W87.items():
+    v = OUT[src]; p = v['prompt']; old = cut_to(p, start, end); assert p.count(old) == 1, (nk, old[:60])
+    p = p.replace(old, rep); assert p.count(STY[0]) == 1, nk; p = p.replace(*STY)
+    if src == 'tu-ninh-cung-r2':
+        p = p.replace('every curtain and hanging is rich amber', 'every hanging, cushion and door curtain is rich amber')
+    p = p + WIN; CUT87[nk] = (old, v['code'], src)
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2387, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
+    assert len(p) < 10000, (nk, len(p))
+import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387)}, 'places-M2370-L2376')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
 for k, v in OUT.items():
-    if v['job'] not in (2376, 2381, 2384): continue
+    if v['job'] not in (2376, 2381, 2384, 2387): continue
     open(os.path.join(OUTD, f"{v['code']}_{k}_ha_sang.txt"), 'w').write(v['prompt'] + CAP.format(v['code']))
-print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384)}, 'ROOM GATE PASS')
+print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387)}, 'ROOM GATE PASS')
+for nk, (old, bc, src) in CUT87.items():   # A38 sidecars: base = the prompt each was edited from; allow = the window clause only
+    k = OUT[nk]; f = os.path.join(OUTD, f"{k['code']}_{nk}_ha_sang.txt")
+    why = '  # owner L2387 "Cửa sổ là không có rèm" + rule L30 (HIST2)'
+    al = [x.strip(' ,;:') for x in re.split(r'[;:,]', old) if len(x.split()) >= 3] + ['curtains and objects arranged through the room']
+    if nk == 'tu-ninh-cung-r3': al.append('every curtain and hanging is rich amber')
+    open(f + '.keep', 'w').write(f"base: dev/handover/prompts_L2095/{bc}_{src}_ha_sang.txt\n" + ''.join(f"allow: {a}{why}\n" for a in al))
