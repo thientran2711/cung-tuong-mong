@@ -84,3 +84,8 @@ Swap (after the owner sees): `swap_L2370.py` picks the highest -rN, so r5/r6/r4/
 - Group 2: 16 consort rooms + 13 toilette rooms = 29 edits × 135 = **3 915 cr**.
 - Variants: 23 rooms with drapes × 15 season×time variants = 345 (1280×720). Recommend RE-DERIVE from the fixed base with the original season prompts (same pipeline that made them, no drift, matches the new base) at 1k = 80 cr each = **27 600 cr**; re-editing each old variant costs the same but can leave drapes the season edit re-adds and drifts from the new base.
 - Total still to do: 3 915 + 27 600 = **31 515 cr** (+ 945 done).
+
+## Swap prepared (0 cr), HOLD until the owner's OK (ROOT-C5 21:07Z)
+- All 41 review pictures downloaded; `python3 dev/art/place-rank/swap_L2370.py` dry run = 17 rows, newest wins: a-ca-so←M2370-33, thuong-thu-phong←34, ngu-thu-phong←35, phi-tan-cung←36, tu-ninh-cung←37, dong-cung←38. md5 vs live CDN: exactly these 6 change, the other 9 are byte-identical (nvp / tu-ninh-cung-ngu are skipped by --go as before). Decap checked on all 6.
+- Khôn Ninh: new `python3 dev/art/place-rank/swap_L2387_khon.py` (dry run done): M2370-39 decapped (decap.py missed this caption → patched x0-275 y0-95 from the block to its right), resized to 1280×720 like its variants; `--go` writes img/khon-ninh-cung.webp + img/khon-ninh-cung-ha-sang.webp and cdn_syncs.
+- ON OK: `python3 dev/art/place-rank/swap_L2370.py --go && python3 dev/art/place-rank/swap_L2387_khon.py --go`, then check live sizes on the CDN.
