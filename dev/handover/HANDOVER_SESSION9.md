@@ -2343,3 +2343,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 03:36Z) WAKE. LOAD: main running 0 | B: host-lag r3 (3VQoNHCT) + guest-week-lag rv + thin-g F1 #5 | C: owner seal loop (21 th tone-down seals OK by owner) | D: rival-hauthay LAND READY → LC4; night-multi kem flake | E: c2 verdict pending, E44d P3/P4 | moved: none. LC4 queue: rival-hauthay-rv ddcca5c1.
 - 22/11 03:46Z LC4 LANDED rival-hauthay ddcca5c1 (FF) LIVE=ddcca5c1 coop-e2e 129/129; quickcheck PASS (buổi 1284/994). Queue empty.
 - (22/11 03:47Z) LC4 LANDED rival-hauthay ddcca5c1 → LIVE ddcca5c1 (FF, coop-e2e 129/129). Queue empty.
+- (22/11 04:38Z) WAKE. LOAD: main running 0 | B 6 running (host-lag r3, thin-g F1#5, rel-men r7, fig-retry, night-ledger r2) | C ROOT-C2 (rolled 04:16Z, depth 1) owner seal loop | D night-multi kem + role-parity fix ORDERED | E c2 re-merge + P3/P4 | moved: role-parity regression → D. LC4 queue: guest-week-lag 8303b53a.
