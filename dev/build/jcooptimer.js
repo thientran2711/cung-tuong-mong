@@ -161,7 +161,8 @@ const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OW
 function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
 let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
 function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
- if(!on||!m||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ if(!m){nafScene();return}
  if(NAF_OWN.includes(m.pid))return;
  if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
   const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
@@ -170,6 +171,13 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  Q.shift();CQ.push(m.pid?{pid:m.pid,pp:m.pp,t:m.t,m}:{m});CW.nacN=(CW.nacN||0)+1;
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
  try{showModal();render()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+/* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
+   .krevok, a [data-km-close]): no choice, so it is read for her like a one-road dialog (r3 cn2 FORCE4=h DUMP: the AFK host's own flip-end
+   scene sat 76 s with Q empty, her night never ran). A scene with more than one button (a choice) is left alone. */
+function nafScene(){try{const L=[...document.querySelectorAll(".kmov")].filter(o=>o.offsetParent!==null||getComputedStyle(o).position==="fixed");
+ for(const o of L){const bs=[...o.querySelectorAll("button")].filter(b=>b.offsetParent!==null&&!b.disabled);if(bs.length!==1)continue;const b=bs[0];
+  if(!(b.classList.contains("kmend")||b.classList.contains("krevok")||b.hasAttribute("data-km-close")))continue;
+  CW.nasN=(CW.nasN||0)+1;b.click();return}}catch(e){console.error(e)}}
 /* the carried dialogs come back on top once the merged week is in (jcoopworld onWeek keeps Q: fromCanon keepQ). A card of the save's kind
    (pid) is made again from its id (deserQ, the save path: it points at the people of the merged world); any other card comes back as it was. */
 function carryBack(){if(!CQ.length||!live()||S.dead)return;const L=CQ.splice(0),out=[];
@@ -408,5 +416,5 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,scene:CW.nasN||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();

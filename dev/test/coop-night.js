@@ -123,8 +123,11 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
    /* no ledger in this room (nfOn false: a seat off the palace / a parked room, by her random thân phận): nothing to pin — n/a, not a FAIL */
    if(pin==='no ledger')console.log('n/a  4: the played tối is pinned on the AFK seat ('+F4+'): no ledger in this room');else ok(pin===(F4==='g'?'guest':'host'),'4: the played tối is pinned on the AFK seat ('+F4+')',pin);
    /* the carry rule (coordinator, OD L680): a real non-night choice on top of the AFK seat (like «Một ánh mắt»): two roads, each marks if taken */
-   await X.p.evaluate(()=>{window.__c4=0;window.__c4back=0;const c=window.__c4m={t:"Việc khó xử",h:"<p>Một việc cần ngươi tự quyết.</p>",opts:[{n:"Nhận lời",fx:{},go:()=>{window.__c4=1;return""}},{n:"Từ chối",fx:{},go:()=>{window.__c4=2;return""}}]};Q.unshift(c);try{showModal()}catch(e){}
-    /* back on top after the merged week: seen on her screen (the harness's clear() may then press it, as she would on her return) */const iv=setInterval(()=>{if((COOPW.nacB||0)>0&&Q[0]===c&&!document.getElementById('modal').hidden){window.__c4back=1;window.__c4atBack=window.__c4;clearInterval(iv)}},50)})}
+   await X.p.evaluate(()=>{window.__c4=0;window.__c4back=0;window.__c4atBack=null;
+    /* a card of the save's kind (pid): every co-op week merge rebuilds Q through serQ / deserQ (fromCanon keepQ), which keeps only pid cards */
+    PEND.c4test=()=>({t:"<p>Một việc cần ngươi tự quyết.</p>",o:[{n:"Nhận lời",fx:{},go:()=>{window.__c4=1}},{n:"Từ chối",fx:{},go:()=>{window.__c4=2}}]});
+    Q.unshift(deserQ([{pid:"c4test",pp:{},t:"Việc khó xử"}])[0]);try{showModal()}catch(e){}
+    /* back on top after the merged week: seen on her screen (the harness's clear() may then press it, as she would on her return) */const iv=setInterval(()=>{if((COOPW.nacB||0)>0&&Q[0]&&Q[0].pid==="c4test"&&!document.getElementById('modal').hidden){window.__c4back=1;window.__c4atBack=window.__c4;clearInterval(iv)}},50)})}
   /* NLC #9: the active seat plays on like a player (scene, morning panel, his choice); the AFK seat never answers. Bound (jnf): every seat's
      choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
      her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */

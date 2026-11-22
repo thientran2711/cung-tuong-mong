@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f48f4d42+","t":"2026-11-22T15:26Z","c":"night-ledger-coop r3: nightAfk times the WAIT (not each dialog) — root of nafN 0: a real non-night choice («Một ánh mắt») stood above the s…","b":"78220744962a","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
+window.CTM_BI={"s":"a3a5c5df+","t":"2026-11-22T15:26Z","c":"night-ledger-coop r3: nightAfk times the WAIT (not each dialog) — root of nafN 0: a real non-night choice («Một ánh mắt») stood above the s…","b":"7ce725b64f2c","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -54849,7 +54849,8 @@ const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OW
 function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
 let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
 function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
- if(!on||!m||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ if(!m){nafScene();return}
  if(NAF_OWN.includes(m.pid))return;
  if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
   const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
@@ -54858,6 +54859,13 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  Q.shift();CQ.push(m.pid?{pid:m.pid,pp:m.pp,t:m.t,m}:{m});CW.nacN=(CW.nacN||0)+1;
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
  try{showModal();render()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+/* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
+   .krevok, a [data-km-close]): no choice, so it is read for her like a one-road dialog (r3 cn2 FORCE4=h DUMP: the AFK host's own flip-end
+   scene sat 76 s with Q empty, her night never ran). A scene with more than one button (a choice) is left alone. */
+function nafScene(){try{const L=[...document.querySelectorAll(".kmov")].filter(o=>o.offsetParent!==null||getComputedStyle(o).position==="fixed");
+ for(const o of L){const bs=[...o.querySelectorAll("button")].filter(b=>b.offsetParent!==null&&!b.disabled);if(bs.length!==1)continue;const b=bs[0];
+  if(!(b.classList.contains("kmend")||b.classList.contains("krevok")||b.hasAttribute("data-km-close")))continue;
+  CW.nasN=(CW.nasN||0)+1;b.click();return}}catch(e){console.error(e)}}
 /* the carried dialogs come back on top once the merged week is in (jcoopworld onWeek keeps Q: fromCanon keepQ). A card of the save's kind
    (pid) is made again from its id (deserQ, the save path: it points at the people of the merged world); any other card comes back as it was. */
 function carryBack(){if(!CQ.length||!live()||S.dead)return;const L=CQ.splice(0),out=[];
@@ -55096,7 +55104,7 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,scene:CW.nasN||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();
 /* ================= jcoopchat: CO-OP CHAT "Thư từ" (owner 16/11, review/coop-chat) — KIT §80 =================
    Co-op only (COOPW.on); single-player never builds anything. Transport = the room's own Worker channel (PROTOCOL §10):
@@ -94539,7 +94547,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="78220744962a";window.CTM_BUILD=BUILD;
+const BUILD="7ce725b64f2c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
