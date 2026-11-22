@@ -25,8 +25,10 @@ function stNeed(v){const N=B().need;const fav=cl(1-(v.sung||0)/100,0,1),rank=rkO
  const heir=kidsOf(v).some(k=>k.sex==="m")?B().heirHas:1;return (N.fav*fav+N.rank*rank+N.heir*heir)/(N.fav+N.rank+N.heir)}
 function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/b.friend):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
 function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&rkOf(t)>=7)f*=b.custom;return f}
-function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",oSteal(v,"feign")]);
- if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",oSteal(v,"road")]);return M}
+/* OD03 two-way: she weighs each mode by the odds she SEES (stealShown: the month art only once she knows it, as the player's flip card); the roll stays the true oSteal (stealNight) */
+function stSeen(v,m){return typeof stealShown==="function"?stealShown(v,m):oSteal(v,m)}
+function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",stSeen(v,"feign")]);
+ if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",stSeen(v,"road")]);return M}
 /* her wish to try tonight against holder t; mode is drawn now (weighted by its odds) */
 function stealWant(v,t){const M=stModes(v);if(!M.length)return{u:0,p:0,mode:null};let r=Math.random()*M.reduce((a,m)=>a+m[1],0),i=0;while(r>M[i][1]&&i<M.length-1){r-=M[i][1];i++}
  const mode=M[i][0],o=M[i][1];let mind=1;try{if(typeof mindW==="function")mind=mindW(v,"scheme")||1}catch(e){}
@@ -57,5 +59,5 @@ for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(A0)Ob
 /* the weekly social menu's old "steal" (j28 SOC, made a real act by j75) is folded into this one choice: one path, not two */
 if(typeof SOC==="object"&&SOC.steal)SOC.steal.ok=()=>false;
 /* the flip: after the tablet and the custom night are decided (j8 → j75), the consorts choose */
-const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead&&S.tonight)stealPass(tonightOf(),{live:true})}catch(e){console.error(e)}return r};
+const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead&&S.tonight&&!(typeof nfOn==="function"&&nfOn()))(window.stealPass||stealPass)(tonightOf(),{live:true})/* jnf: one batch, ties → Sủng → seeded (no 'first win ends it') */}catch(e){console.error(e)}return r};
 })();

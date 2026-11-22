@@ -875,7 +875,8 @@ const tnDec=w=>w==null?null:w==="p"?fp():w==="f"?me():w;
    night meanwhile (crossing), the host's word stands */
 const tnVer=()=>CW.tnV&&CW.tnV.w===wk()?CW.tnV.n:0;
 function tnFinal(re){S.tn={w:wk(),who:tnWho()};CW.tnLast=JSON.stringify([wk(),tnWho()]);CW.tnV={w:wk(),n:tnVer()+1};COOP.send({t:"act",k:TK,mode:"tn",fin:1,v:CW.tnV.n,re:re||null,week:wk(),who:tnEnc(tnWho()),id:TK+wk()+":"+newId()})}
-function tnRelay(){if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
+function tnRelay(){if(typeof window.nfOn==="function"&&window.nfOn())return;/* jnf (night-final, unparked 20/11 ROOT-82) owns the palace night in co-op: ONE relay (jnf send/apply: holder, flip, choice, result); this B2 word would undo her won night */
+ if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
  if(eW()){if(CW.ctx)return;CW.tnLast=k;if(host()){S.tn={w:wk(),who:tnWho()};CW.tnAt={w:wk(),v:(CW.thin.hv|0)+1};if(CW.tnHer()&&CW.herNight)CW.herNight()}else CW.thin.doSend("tn",{who:tnEnc(tnWho())});return}
  if(host()){tnFinal();return}
  CW.tnLast=k;const id=TK+wk()+":"+newId();CW.tnClaim=id;sentOr(COOP.send({t:"act",k:TK,mode:"claim",week:wk(),who:tnEnc(tnWho()),v:CW.tnSeen&&CW.tnSeen.w===wk()?CW.tnSeen.n:0,id}),()=>{if(CW.tnLast===k)CW.tnLast=""})}
@@ -919,7 +920,8 @@ CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2
  /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */
  if(t&&t!=="me"&&(isF(t)||!host())){S.tonight=null;return""}return f.apply(this,arguments)}})();
 /* the guest takes the host's night when the merged week is in (onWeek → CW.tnWeek) */
-CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
+CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;if(typeof window.nfOn==="function"&&window.nfOn()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}/* jnf owns her night (its relay) */
+ const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
  const who=tn.who===fp()?fp():tn.who;const was=S.tonight==="me";tnSet(who);
  if(S.tonight==="me"&&!was&&!eW()){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}}};
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}try{if(CW.on)cySend()}catch(e){}return r}})();
@@ -927,12 +929,18 @@ CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||
 /* ---------- B5 (review/coop-b1b5): seat caps count BOTH players ----------
    (1) the week's promotions (monthTick → promote / fillSeats) run while endTurn has taken the friend out of the harem: the seat count
        (holders, j30 SEATCAP) now counts her entry too, so a full seat is full on both screens.
-   (2) both promoted into the same last seat in the same week (neither could see the other's decree): the host keeps it; on the guest's
-       merged week she is put back one rank (the seat is full) and told why, on the kit dialog. */
+   (2) both promoted into the same last seat in the same week (neither could see the other's decree): the higher Sủng keeps it (equal →
+       seeded roll; night-final audit of OD 22:10Z, was "the host keeps it"); the other is put back one rank and told why (kit dialog). */
 (function(){if(typeof holders!=="function")return;const f=holders;holders=function(r){const L=f.apply(this,arguments);if(!CW.on||!S)return L;
  for(const x of CW.pulled||[]){const v=x[1];if(x[0]>=0&&v&&v.alive&&!v.out&&!L.includes(v)&&rkOf(v)===r)L.push(v)}return L}})();
-CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"||!CW.mine)return;const r=S.rank||0,r0=CW.mine.rank||0;
+/* night-final audit (owner OD 16/11 22:10Z: no rule may favour who acts first / which seat; 22:17Z ties): the seat no longer goes to the
+   host by default. Both seats decide the SAME way from the same merged data: the higher Sủng keeps the seat; equal Sủng → a fair seeded
+   roll (week + rank). Each seat runs this for itself; only the loser is put back. */
+CW.seatWeek=function(){if(!CW.on||!S||S.dead||typeof SEATCAP!=="object"||!CW.mine)return;const r=S.rank||0,r0=CW.mine.rank||0;
  const f=friendEntry();if(r<=r0||!f||rkOf(f)!==r||SEATCAP[r]==null)return;if(holders(r).length<=SEATCAP[r])return;
+ const me=Math.round(S.sung||0),fr=Math.round(f.sung||0);let lose=me<fr;
+ if(me===fr){const k=`seat|${wk()}|${r}`;let h=2166136261;for(let i=0;i<k.length;i++){h^=k.charCodeAt(i);h=Math.imul(h,16777619)>>>0}lose=CW.seat!==(h%2?"a":"b")}
+ if(!lose)return;const why=me===fr?"hai người ngang sủng, rút thăm công bằng, ghế về tay nàng":"nàng được sủng ái hơn nên giữ ghế";
  const nr=Math.max(r0,r-1);S.rank=nr;if(S.justCrowned)S.justCrowned=0;
  /* she did not take the seat (not a demotion for a fault): no "Bị giáng" scene from the j93 rank watcher */
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMS===S)KMSNAP.rank=nr}catch(e){}
@@ -940,7 +948,7 @@ CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"|
     promoFullSeat, the ONE implementation since promo-skip is on main; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
     rank change, favour for her family; loss: the consorts' jealousy. Her rank stays; the next one goes through the normal exam. */
  let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{}).replace(/^<b class="g">[^<]*<\/b>:\s*/,"")/* the card already says the seat is full */}catch(e){console.error(e)}}
- pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
+ pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} cũng được tấn phong ${esc(RANKS[r].n)}. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}; ${why}.</p>${t?`<p>${t}</p>`:""}`})};
 
 /* ---------- hooks ---------- */
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};

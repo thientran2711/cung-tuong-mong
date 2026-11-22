@@ -14,7 +14,10 @@
    (4) REAL PRECONDITIONS (whole group, dev/review/scan_claims.py): j68 "doubtVisit" variant "trả lại quà ngươi tặng" only when that
        consort really holds a gift from her, names it, and the gift really comes back to her chest; "borrowDress" asks only for a thing she
        really owns (a robe, a hairpin, an instrument when she plays Cầm, her maid). ============================================== */
-Object.assign(BAL,{ctxTaste:12,ctxRelDiv:10,ctxRelCap:8,ctxMoodBad:-9,ctxMoodGood:6,ctxEmp:[8,0,-5,-10],ctxCap:22,moodEvGood:28,moodEvBad:30,moodKeep:4});
+/* balance-2 (S3-126 bot-proof hint, owner OD:L478 "skilful play MUST clearly beat random"): ctxTaste 12→18, ctxCap 22→30. Measured (sens bot, Vừa, 40 lives per arm,
+   dev/handover/reports/balance-2-measure/bp_*): old 12/22 hint-reading bot HH 5 % / early end 30 % vs random 2 % / 15 % (skill did not pay);
+   new 18/30 hint HH 12 % / early 15 %, Danh m36 89 vs random HH 5 % / early 25 %, Danh m36 30. */
+Object.assign(BAL,{ctxTaste:18,ctxRelDiv:10,ctxRelCap:8,ctxMoodBad:-9,ctxMoodGood:6,ctxEmp:[8,0,-5,-10],ctxCap:30,moodEvGood:28,moodEvBad:30,moodKeep:4});
 /* jemo-bal (law 4): the typed numbers of jevb's context odds and event moods. steps = a person's hidden taste steps (× ctxTaste); sureDiv = a sure option's
    relation × (1 + taste ÷ sureDiv); arcK = an arc scene's taste share; scK = odds per scene point of an extra / chapter option; moodSo = a frightened person's odds
    (the other bad feelings: −moodSo); heavyLv = grief at this level counts as anger; causeN = mood causes kept; rankLoss = loss points of a rank lost in an event;

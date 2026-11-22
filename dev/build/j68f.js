@@ -8,7 +8,7 @@ EV6("heatStroke","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Hạ"?(C.wx.f===2?3:1.2):
 EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
  v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
  o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
-  c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(BAL.odb.j68f.odP_2+S.tai/2+(S.arts.thi||0)*6),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
+  c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(BAL.odb.j68f.odP_2+S.tai/2+artOE(S,"thi")),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
   c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:typeof trSnowGreet==="function"?trSnowGreet():5,duc:1}})]});
 EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Thu"?2:0,
  v:["Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.","Gió heo may, lá phong đỏ rụng đầy lối; {A} rủ ngươi đi nhặt lá ép vào sách.","Đêm thu nghe tiếng sáo từ cung {A} vọng sang, buồn da diết.","Mùa cua béo, {A} gửi sang một giỏ cua và rượu hoa cúc."],
@@ -18,7 +18,7 @@ EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a
 EV6("springAllergy","sea",{a:["doc"],pp:()=>({a0:0}),w:C=>C.sea==="Xuân"?1.5:0,
  v:["Phấn hoa xuân bay khắp nơi, ngươi hắt hơi không dứt, mắt đỏ hoe.","Mưa phùn kéo dài, chăn đệm ẩm mốc, ngươi ngứa ngáy khắp người.","Hoa đào nở rộ, nhưng cung nữ nổi mẩn đỏ từng mảng.","Sương sớm lạnh, ngươi đau họng mất tiếng đúng lúc sắp có yến."],
  o:X=>[c6(`Mời ${X.A.n} kê thuốc`,{c:{bac:-15},w:{suc:6}}),
-  c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(BAL.odb.j68f.odP_4+(S.arts.y||0)*15),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
+  c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(BAL.odb.j68f.odP_4+artO(S,"y")),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
   c6("Gắng chịu, che mặt the",{w:{bac:5},k:[R6(`Sắc ${balSg(BAL.eff.j68f.sacOk)} vài hôm, ngài thấy ngươi tiều tụy`)],ok:()=>{apply({sac:BAL.eff.j68f.sacOk});return "Ngươi gắng chịu cho qua."}})]});
 EV6("stormNight","sea",{a:["emp"],pp:()=>({a0:0}),w:C=>C.wx.f===3?3:0,
  v:["Giông tố nổi lên, sét đánh gãy cây hòe cổ trước điện; cả cung xôn xao điềm gở.","Mưa giông cả đêm, cung nhân đồn Hoàng thượng sợ sấm từ thuở nhỏ.","Gió lớn làm đổ giàn hoa, đè lên một tiểu thái giám.","Sấm chớp đùng đùng, các con khóc thét, không ai dỗ được."],
