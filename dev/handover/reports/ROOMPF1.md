@@ -49,3 +49,10 @@ Owner orders: L2291 "tranh phòng … làm tiếp đi"; L2293 "vẫn cứ giữ 
 - Còn lại: Phi 9 phòng, Quý phi 12, Từ Ninh ~2, Trường Xuân, ~35 cảnh nơi chốn.
 
 Commit: see git log "ROOMPF1".
+
+## L2296 Magnific order (relayed by ROOT-B8 00:56Z: "bạn tự làm bên mặt đi") — BLOCKED, 0 gens, 0 cr
+- Balance checked: 3 015 079 cr available (stop line 60 000).
+- 1st call refused by the session permission check (auto-mode classifier: "Destructive or Unwanted Actions"). I did NOT retry or work around it. The call:
+  images_generate mode gpt-2-6, resolution 2k, width 2688, height 1386, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, refs image gOmYI7iSXO + EbYJzsMuuO + cpS5YIl0eP + 1lduM4wr4r, prompt = prompts_roompf1_M2294.json['thua-minh-cung-tan-ngu'].prompt (the .txt without its CAPTION line: no code text in a backdrop).
+- All 5 are ready in prompts_roompf1_M2294.json (prompt + refs). Phi image 4 = strip img/_review/place-rank/roompf1/tone-swatch-phi-t5.png: cdn_sync was still running at the time of writing; upload with creations_upload_image once the CDN serves it.
+- Needs: the gen allowed for this session, or a session where Magnific generation is permitted.
