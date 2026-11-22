@@ -39,7 +39,7 @@ function A6(kind,id){try{
 /* relation tokens and effects, coloured explicitly (never through the 'nàng' heuristic) */
 function relTok(a,n){if(!a||!n)return"";const nm=a.k==="th"?"Thái hậu với ngươi":a.k==="emp"?"Sủng":a.n;
  if(a.k==="rv")return n>0?G6(`${nm} thiện cảm +${n}`):R6(`${nm} thiện cảm ${n}`);
- if(a.k==="sv"||a.k==="maid")return (n>0?G6:R6)(`Lòng ${nm} ${n>0?"+":""}${n}`);
+ if(a.k==="sv"||a.k==="maid")return (n>0?G6:R6)(`Thiện cảm ${nm} ${n>0?"+":""}${n}`);
  if(a.k==="kid")return (n>0?G6:R6)(`${nm} quyến luyến ${n>0?"+":""}${n}`);
  if(a.k==="man")return (n>0?G6:R6)(`${nm} cảm kích ${n>0?"+":""}${n}`);
  if(a.k==="th")return (n>0?G6:R6)(`Thái hậu với ngươi ${n>0?"+":""}${n}`);

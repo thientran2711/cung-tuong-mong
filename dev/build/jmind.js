@@ -124,7 +124,7 @@ const loyW=who=>!!who&&typeof who==="object"&&who.loyal!=null&&!isRiv(who);/* se
 function bump(who,n){if(who==="th")ap(S,{th:n});else if(loyW(who))who.loyal=Math.max(0,Math.min(100,who.loyal+n));else if(typeof affAdd==="function"&&typeof who==="object")affAdd(who,S,n)}
 function giftKeys(e){const K=[];if(!e)return K;if(e.wk){K.push("art:"+e.wk.a)}else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
 /* the word of the regard that moves (Thái hậu's is "Thái hậu", a servant's "Lòng", others "thiện cảm") */
-function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Lòng":"thiện cảm"}
+function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Thiện cảm":"thiện cảm"}
 /* a liked gift: a little more regard (everyone but the Emperor, whose likes already work through j2/j83) */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];let lk=false,dk=null,G0=[];const who=r==="th"?"th":r==="maid"?S.maid:r;
  try{if(e&&!e.h&&who&&who!=="emp"&&r!==S&&a===S){const G=G0=giftKeys(e);lk=G.some(k=>mindLike(who).includes(k))&&!(jdisOwn(who)&&typeof disHit==="function"&&disHit(who,e));
