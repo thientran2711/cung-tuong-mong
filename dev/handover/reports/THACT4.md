@@ -1,4 +1,4 @@
-START_CTX ≈ 6 % of 1M (get_session used_tokens reads 0 → own estimate) · depth 3 · roll line ≈ 31 %, ceiling 60 % · running cr 18 540
+START_CTX ≈ 6 % of 1M (get_session used_tokens reads 0 → own estimate) · depth 3 · roll line ≈ 31 %, ceiling 60 % · running cr 22 300 (final) · ended ≈ 25 % (own estimate)
 # THACT4: Thái hậu act seals — ghen/chán OUT redo + 8 kept seals A11–A18 (MID2). Worker of ROOT-C3 → now ROOT-C4 (session_01D3E3NWqpW2ooEEFJyANw9a)
 
 ## Prompt changes (all seal_gate PASS + keep_check --sidecar PASS)
@@ -36,13 +36,28 @@ BACK = reversed OUT + stock disc lock (rebuild_back_clamp), 0 cr.
 ## Cost: 2 OUT redo × 940 + 12 B × 135 + 16 clips × 940 = 18 540 cr (gen_ledger: 30 lines "THACT4"). Balance before 2 803 806.
 Ids: dev/handover/reports/THACT4_tools/log.txt (B, flat keyframes, clips).
 
-## Waiting for ROOT-C4 (no gen without a yes)
+## Round 1 open points (answered by ROOT-C4 07:20Z: chán 1 more OUT no toss, hổ thẹn OUT+LOOP, chuyên tâm OUT once, hưng khởi ACCEPT; cap 3 760)
 1. chán: 2nd OUT also faulty. Options: (a) keep THACT3 OUT (medallion swell) ; (b) one more OUT with the toss taken out ("she sets the hoop down behind her inside the medallion, no throwing") — 940.
 2. hổ thẹn: redo OUT + LOOP (1 880), maybe new B (current B fine, 23 %).
 3. chuyên tâm (big) and hưng khởi (swirl out): accept, or OUT/LOOP redo with "the book stays at the same distance" / "the ink swirl stays inside the medallion".
 4. Full-set MP4 of all 21 act seals: after the above decisions.
 
+## Round 3 (ROOT-C4, 4 × 940 = 3 760 cr) — keep the best, no further tries
+Prompts: chán `_out_SEATED` (toss → "staying seated, slowly lifts the hoop back over her shoulder with her fingertips (no throwing …)" + "She stays seated the whole time and never stands up."); hổ thẹn `_out_SEATED` (+ "never grows or moves. She stays seated and slumped over the rim …") and `_loop_LOCK` (+ "she never shrinks back inside the medallion and the medallion never moves, shrinks or grows"); chuyên tâm `_out_SAMEDIST` (+ "The book stays at the same distance …"). All seal_gate + keep_check PASS.
+- chán 1lXLakur4r: stays seated, hoop stays in the picture, leans out to one side mid-OUT; rim 25 / 21 → KEPT (best of 3).
+- hổ thẹn nVl0PntYQD + rgBsfrfxtc: steady, no drop-back; rim 30.5 / 26.9 (loop min 20) → KEPT (official 55 = disc shifted up, misfit).
+- chuyên tâm 5jprhk2Kxe: still grows to the B size mid-OUT — cause = the B keyframe itself is big (figure ≈1.3× A); rim 34.5 / 32.5 → KEPT (smoother than round 1). A real fix needs a smaller B (135) + OUT/LOOP.
+
+## FULL SET (21 seals, owner judges side by side)
+- th-act-lean-full21-anim.mp4 (3 rows × 7, OUT + LOOP×2 + BACK, 16 s) sha 86634c352b9a
+- th-act-lean-full21-stills.jpg (LOOP mid-frame of each) sha 86becedcfc3c
+Rim-fit peak / loop: vui 37/30 · lo 37/31 · ẩn 29/19 · mưu 34/33 · ghen 27/22 · buồn 26/23 · sợ 35/28 · chán 25/21 · khó chịu 29/26 · tình tứ 24/22 · bình 47/29 · đau lòng 57/28 · hổ thẹn 31/27 · choáng 32/32 · hờn 21/19 · hăng hái 37/25 · chuyên tâm 35/33 · hưng khởi 41/34 · giận 25/15 · tự tin 71/67 (scroll + sparkles, misfit) · tinh nghịch 25/15. (peaks > 40 = short pops / effects, see verdicts.)
+Outliers by eye: ẩn sits small mid-loop (reads the letter inside); giận and tinh nghịch (kept M2349, not redone) loop ≈ 15 %, lower than the rest; chuyên tâm and hưng khởi on the big side; hờn on the low side.
+Files: hổ thẹn / chuyên tâm -M2370m now = round 3; chán -M2370s = round 3 (loop = THACT3 -M2370m).
+
 ## Vietnamese (cho chủ, qua ROOT-C4)
 - ghen làm lại đoạn OUT: đã mượt, không còn chồm ra. chán làm lại vẫn lỗi (giữa đoạn bà đứng bật lên, cái khung thêu bay ra ngoài).
 - 8 ấn mới (bình, đau lòng, hổ thẹn, choáng, hờn, hăng hái, chuyên tâm, hưng khởi): bình, đau lòng, choáng, hờn, hăng hái đạt; hổ thẹn lỗi (lúc ra lúc thụt vào); chuyên tâm hơi to; hưng khởi vệt mực bay ra ngoài khung.
-- Tốn 18 540 credit.
+- Lần 3: chán giờ ngồi yên, khung thêu không bay; hổ thẹn hết thụt vào; chuyên tâm vẫn to (do hình gốc B to).
+- Đã có video cả 21 ấn chạy cùng lúc + 1 tấm ảnh tĩnh để chủ so.
+- Tổng tốn 22 300 credit.

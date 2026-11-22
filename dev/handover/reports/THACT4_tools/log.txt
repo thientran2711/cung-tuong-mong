@@ -5,3 +5,4 @@ re-roll: hungkhoi MID2 CqYF0MWEEy 27.6 USED, yiQNqK5PW9 19 ; hon MID3 w4fyuqM7EI
 flat: binh eI4oiREdqL dau jU8ghaMLD0 hothen UPaOuFQwny choang YMgT7OYWeC hon P3F651e42C hanghai UPaOuHFwny chuyentam u5cqMd5QLD hungkhoi 5jprBtyKxe (B used: B1 except hon B2=w4fyuqM7EI, hungkhoi B2=CqYF0MWEEy)
 clips: binh 1lXLtUsr4r/nVl07pbYQD dau CqYFVkQEEy/u5cqDriQLD hothen s7tUfPxl8e/6A5ZxW8iJO choang KLex8UCkqp/N2bRrWM6D9
 clips: hon s7tUfVql8e/mE2fYyxhJQ hanghai bxD1BG85Y2/KLex8YUkqp chuyentam VXJe9jyMMU/fHnQTinCDY hungkhoi jU8gvD3LD0/5jprockKxe
+round3 (ROOT-C4): chan OUT 1lXLakur4r SEATED ; hothen OUT nVl0PntYQD LOOP rgBsfrfxtc ; chuyentam OUT 5jprhk2Kxe
