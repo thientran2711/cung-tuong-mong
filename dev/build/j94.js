@@ -11,7 +11,11 @@ const SCN_HAVE={};for(const s in SCN_VAR)for(const v of SCN_VAR[s].split(" "))if
 const SCN_NEAR={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]};
 function sceneImg(base){try{if(!base||!S)return base;const se=SCN_SEAS[SEASON[(S.month||1)-1]];if(!se)return base;
  const four=typeof BUOI!=="undefined"&&BUOI.length>=4,b=S.buoi||0,bu=(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[b]||"sang";
- for(const x of SCN_NEAR[bu]){const n=base+"-"+se+"-"+x;if(SCN_HAVE[n])return n}return base}catch(e){return base}}
+ for(const x of SCN_NEAR[bu]){const n=base+"-"+se+"-"+x;if(SCN_HAVE[n])return n}return SCN_FALL[base]?sceneImg(SCN_FALL[base]):base}catch(e){return base}}
+/* SCN_FALL: a place whose own picture is not live yet shows the stand-in's picture (base -> stand-in base, its own seasons/floor); scnLive(pic) probes the file
+   once and registers it in SCN_HAVE the moment it exists, so the real picture takes over with no code change (review/places-wire-nvp-tn) */
+const SCN_FALL={};
+function scnLive(pic){try{const im=new Image();im.onload=()=>{try{SCN_HAVE[pic]=1;if(typeof scnSync==="function")scnSync();if(typeof PX==="object")PX.key=""}catch(e){}};im.src="img/"+pic+".webp"}catch(e){}}
 /* review/place-art (coordinator 15/11): own paintings for the two places that borrowed another place's picture.
    Tân Giả khố (j42 placeOf sc "tgk", was the lãnh cung painting "lc") = tan-gia-kho-<mùa>-<buổi>; the maid's room (j42 placeOf "home"
    while isSrv(), sc "maid", was her consort room tam-cung-dem) = phong-cung-nu-<mùa>-<buổi>. Floor line + open-floor anchor read from

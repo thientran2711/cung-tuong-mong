@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"5e32f66f+","t":"2026-11-22T06:33Z","c":"SELF-MERGE LAND coop-fig-retry: merge LIVE 24980875 (index.html/sw.js rebuilt)","b":"6f3fdd312355","h":[{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"}]};
+window.CTM_BI={"s":"91d5220c+","t":"2026-11-22T07:57Z","c":"places-wire: nvp + tu-ninh-cung-ngu scene keys through SCIMG/j94 with fallback to the current picture","b":"cff44e73c199","h":[{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"},{"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ"},{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -40475,7 +40475,11 @@ const SCN_HAVE={};for(const s in SCN_VAR)for(const v of SCN_VAR[s].split(" "))if
 const SCN_NEAR={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]};
 function sceneImg(base){try{if(!base||!S)return base;const se=SCN_SEAS[SEASON[(S.month||1)-1]];if(!se)return base;
  const four=typeof BUOI!=="undefined"&&BUOI.length>=4,b=S.buoi||0,bu=(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[b]||"sang";
- for(const x of SCN_NEAR[bu]){const n=base+"-"+se+"-"+x;if(SCN_HAVE[n])return n}return base}catch(e){return base}}
+ for(const x of SCN_NEAR[bu]){const n=base+"-"+se+"-"+x;if(SCN_HAVE[n])return n}return SCN_FALL[base]?sceneImg(SCN_FALL[base]):base}catch(e){return base}}
+/* SCN_FALL: a place whose own picture is not live yet shows the stand-in's picture (base -> stand-in base, its own seasons/floor); scnLive(pic) probes the file
+   once and registers it in SCN_HAVE the moment it exists, so the real picture takes over with no code change (review/places-wire-nvp-tn) */
+const SCN_FALL={};
+function scnLive(pic){try{const im=new Image();im.onload=()=>{try{SCN_HAVE[pic]=1;if(typeof scnSync==="function")scnSync();if(typeof PX==="object")PX.key=""}catch(e){}};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+pic+".webp"}catch(e){}}
 /* review/place-art (coordinator 15/11): own paintings for the two places that borrowed another place's picture.
    Tân Giả khố (j42 placeOf sc "tgk", was the lãnh cung painting "lc") = tan-gia-kho-<mùa>-<buổi>; the maid's room (j42 placeOf "home"
    while isSrv(), sc "maid", was her consort room tam-cung-dem) = phong-cung-nu-<mùa>-<buổi>. Floor line + open-floor anchor read from
@@ -48880,6 +48884,25 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
    A piece of another kind is never that case's piece: no entry (c.at kept) */
 (function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
  try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
+/* E44b (c) whole group (law 6c / law 11; seed 4242: 148 «di vật» into MY box w35 → sold; 1173 / 576 / 1182 seized from my chest as tang
+   vật → «trả kho» → sold — each time the owner's case on her seat stayed «held by me» = vanish): a piece OWNED by the friend (box own = her
+   key, or the piece's gh / my case of it names her) that leaves my hands through the ONE box rule (jil ilGone) reaches her seat:
+   - «di vật» (nobody here to take it): it goes home to her as «ret» (b4Send), my census routes it «sang hảo hữu»;
+   - any other road (tang vật, tịch thu, bán, cầm cố, đem sửa, kẻ hầu bớt xén …): the piece is really in MY box now (counted here); it is no
+     longer hers to reclaim through my box (own cleared), my case of it closes «mất dấu», and her case closes the same way («gone», by id).
+   «thất lạc» (loLose) keeps its own road. Two-way: either seat. */
+(function(){if(typeof ilGone!=="function")return;const g0=ilGone;ilGone=function(p,e,how,o){
+ let F=null,c=null,ids=[];
+ try{if(CW.on&&!CW.ctx&&how!=="lost"&&e&&typeof e==="object"&&e.k){F=String(fp());try{c=typeof loCaseOf==="function"?loCaseOf(e):null}catch(z){c=null}if(c&&String(c.own)!==F)c=null;
+  const fo=(o&&o.own!=null&&String(o.own)===F)||(e.gh!=null&&String(e.gh)===F)||!!c;if(!fo)F=null;else ids=[e.iu,e.hiu,c&&c.e&&c.e.iu,c&&c.e&&c.e.hiu].filter(Boolean)}}catch(z){F=null}
+ /* E44c (asked by E48r): «dead» goes home only past jil ilGone's own guards — a piece still in a living slot / the box (ilAt), already in
+    the friend's slot (ilToFriend → ilSent) or not durable (ilDur) is left to the ONE box rule, never sent as «ret» (would be a 2nd copy) */
+ if(F&&how==="dead"){try{if((typeof ilAt==="function"&&ilAt(e))||(typeof ilToFriend==="function"&&ilToFriend(e))||(typeof ilDur==="function"&&!ilDur(e)))F=null}catch(z){F=null}}
+ if(F&&how==="dead"){try{if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="nha"}b4Send([famRet(e)],{});if(typeof ilSent==="function")ilSent(e,friendEntry());return null}catch(z){console.error("famops dead",z)}}
+ const r=g0.apply(this,arguments);
+ if(F&&r&&typeof r==="object"&&r.e){try{if(String(r.own)===F)r.own="";if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau";c.__fs=1}
+  const iu=ids[0]||r.e.iu;b4Send([Object.assign({op:"gone",k:e.k,how:"matdau"},iu?{iu}:{},ids.length>1?{alt:ids.slice(1)}:{})],{})}catch(z){console.error("famops box",z)}}
+ return r};window.ilGone=ilGone})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
@@ -48928,7 +48951,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
 function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
  const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
- for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;const was=st[c.id]===1;st[c.id]=2;
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone» */const was=st[c.id]===1;st[c.id]=2;
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
@@ -89266,18 +89289,16 @@ function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window
    fallback place's (KIT_FLOOR / KIT_FANCHOR copies), same kit stage as every place scene. */
 const PLW={nvp:{fb:"kinh-su-phong",pic:"nvp-ha-sang"},"tu-ninh-cung-ngu":{fb:"tu-ninh-cung",pic:"tu-ninh-cung-ngu-ha-sang"}};
 (function(){
- if(typeof SCIMG!=="object"||typeof sceneImg!=="function")return;
+ if(typeof SCIMG!=="object"||typeof SCN_FALL!=="object")return;
  SCIMG.nvp="nvp";SCIMG.tnn="tu-ninh-cung-ngu";/* scene keys: the base name; j94 sync turns it into the season/buổi (or fallback) picture */
  const F=window.KIT_FLOOR=window.KIT_FLOOR||{};
  for(const k in PLW){if(F[k]==null&&F[PLW[k].fb]!=null)F[k]=F[PLW[k].fb]}/* sync copies it to the variant names */
- const s0=sceneImg;
- sceneImg=function(b){const r=s0.apply(this,arguments);const x=PLW[b];return x&&r===b?s0(x.fb):r};/* no live variant for this season/buổi -> the current picture */
+ for(const k in PLW)SCN_FALL[k]=PLW[k].fb;/* no live variant yet -> the current picture (j94 sceneImg) */
  const p0=placeOf;
  placeOf=function(k){const P=p0.apply(this,arguments);try{
   if(k==="tn"&&P&&P.sc==="tn"&&S&&(S.buoi||0)===B4L)return Object.assign({},P,{sc:"tnn"});/* night at Đức Thọ/Từ Ninh = her bedroom */
  }catch(e){}return P};
- /* probe the live files once; present -> register the variant, resync, repaint on the next render */
- for(const k in PLW){const n=PLW[k].pic;try{const im=new Image();im.onload=()=>{try{SCN_HAVE[n]=1;if(typeof scnSync==="function")scnSync();if(typeof PX==="object")PX.key=""}catch(e){}};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+n+".webp"}catch(e){}}
+ for(const k in PLW)scnLive(PLW[k].pic);/* j94: auto-activates when the file is live */
  if(typeof scnSync==="function")scnSync();
 })();
 /* ================= jpma: PERSON MINIGAME ACTS — «Cùng chơi» + «Thách đấu» with any real person (owner OD 19/11 ~23:55Z, PARKING_LOT #8) =================
@@ -93916,7 +93937,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6f3fdd312355";window.CTM_BUILD=BUILD;
+const BUILD="cff44e73c199";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
