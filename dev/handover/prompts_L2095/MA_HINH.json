@@ -376,5 +376,12 @@
  "M2370-A18": "M2370-A18_th_act-hungkhoi_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)",
  "M2370-18": "M2370-18_ngu-thu-phong-r2_ha_sang.txt (= M2370-06 + câu sách cổ nằm phẳng, không bìa còng hiện đại)",
  "M2370-19": "M2370-19_thuong-thu-phong-r2_ha_sang.txt (= M2370-11 + câu sách cổ nằm phẳng)",
- "M2370-20": "M2370-20_kinh-su-phong-r2_ha_sang.txt (= M2370-09 + câu sàn trống phía trước)"
+ "M2370-20": "M2370-20_kinh-su-phong-r2_ha_sang.txt (= M2370-09 + câu sàn trống phía trước)",
+ "M2370-21": "M2370-21_phong-cung-nu-r2_ha_sang.txt (= M2370-01 + owner L2376 sửa phòng)",
+ "M2370-22": "M2370-22_a-ca-so-r2_ha_sang.txt (= M2370-02 + owner L2376 sửa phòng)",
+ "M2370-23": "M2370-23_cung-nhan-r2_ha_sang.txt (= M2370-12 + owner L2376 sửa phòng)",
+ "M2370-24": "M2370-24_tu-ninh-cung-ngu-r2_ha_sang.txt (= M2370-16 + owner L2376 sửa phòng)",
+ "M2370-25": "M2370-25_tu-ninh-cung-r2_ha_sang.txt (= M2370-17 + owner L2376 sửa phòng)",
+ "M2370-26": "M2370-26_ngu-thu-phong-r3_ha_sang.txt (= M2370-18 + owner L2376 sửa phòng)",
+ "M2370-27": "M2370-27_thuong-thu-phong-r3_ha_sang.txt (= M2370-19 + owner L2376 sửa phòng)"
 }
