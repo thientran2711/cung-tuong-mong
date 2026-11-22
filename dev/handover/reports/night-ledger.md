@@ -299,3 +299,74 @@ Branch **review/night-ledger-coop-r3 @5efd53fb** (from rv 135945ed). WIP — NOT
 - Gates (none run on r3 yet): coop-night ×5 111/111 incl. FORCE4=g ×3 and FORCE4=h ×3, coop-e2e ×5, coop-ledger ×4 + DEVSWAP ×4 + NOREV both, coop-night0, night-coop-park ×4 (13), quickcheck, one-core (PASS on 5efd53fb), undef, role-parity, ledger / night-final / night-multi.
 - Tips: page tests need `python3 dev/build/assemble.py && bash dev/site/build_site.sh`; one coop-night run ≈ 12–15 min; 2 in parallel are fine on this box.
 Scratch logs: /home/user/wt/nlr2-out/r3 (g1/h1 = no fix firing, g2/h2 = tick-called nightAfk; not git).
+
+## FIX r3 — review/night-ledger-coop-r3 (fixer #2, successor of 3C4XN63d; «REVIEW coop r2» FAIL 1–4)
+PRIORITY #1 CHECK: «REVIEW coop r2» FAIL 1–4 + «FIX r3 — HANDOVER» (this report) | OD L680 (co-op shared buổi countdown: «When the timer runs out, the buổi advances for both (open dialogs resolved safely / carried …)»), OD 15/11 ~21:25Z / ~22:55Z (a real choice is never made for her), OD L1479 (flip choice timeout = Thôi), L594 / L96 | main LIVE b238857f (⊇ 35f5b5ab; no nightAfk / carry there) | review/night-ledger-coop-r3 5efd53fb (base, WIP), review/night-ledger-coop-r2-rv 135945ed | claims B row «night-ledger-coop r3 fixer #2» (this). Coordinator decision (Foreman B, under OD L680): a real non-night choice an AFK seat sits on is never answered for her — when the bounded wait runs out it is CARRIED and her week end goes.
+Worker: opus, session_01N1tNP4b8rvF5b5qFYnqRUN; coordinator Foreman B ROOT-10. START_CTX ≈ 5 % (own estimate).
+Branch: review/night-ledger-coop-r3 = 5efd53fb + the fixes below + merge LIVE b238857f (only index.html / sw.js conflicted, rebuilt).
+
+### 1. ROOT of «nightAfk never fires» (nafN 0) — found by a transition trace (COOPW.tm.naf().tr), not guessed
+The 5efd53fb bound aged ONE dialog (the summons) from the moment it reached the top of Q. Trace, run g3 (guest AFK, played tối pinned on her): «Một ánh mắt» (a non-night real choice, no pid) stood on top for 82 s, then nfch (its own 10-second clock), then ksp — the summons only started its 30 s at 252.5 s, after the test's 114 s bound (age 12.4 s when the case ended). h1 (host AFK) the same: age 5.5 s at the end. The trace terms nafWait (live, buổi tối, sent ≠ week, !pend, overdue / ngoW) were all true; the bound was simply started too late and per dialog.
+A second blocker showed once the carry ran (G cn2, FORCE4=h DUMP): Q empty, but the AFK host's OWN flip-end kit scene («Lật thẻ bài» kcf-fin km-endon, one button «Chuẩn bị thị tẩm» .kmend) waited for her tap for 76 s (cfBusy) → her night never ran.
+
+### 2. What changed (game: dev/build/jcooptimer.js only; number: BAL.coopTm.nightMs = 30000, already in jbal2)
+| item | before (5efd53fb) | after | where |
+|---|---|---|---|
+| what is timed | each night dialog from its own arrival on top | the WAIT: from the first tick the partner waits on her (nafWait: her tối overdue, or the room's night committed CW.ngoW = week, while her own week end is not out); once it reaches BAL.coopTm.nightMs every dialog on top is handled at once | nightAfk |
+| summons ksp / nfsum / amNight | close, no answer (S.tonight = null) — never reached | unchanged rule, now fires (g5, G2 runs: COOPW.nafN 1, pid ksp) | nightAfk |
+| the night prep / night1 / night2 | pass quietly | unchanged rule | nightAfk |
+| flip choice nfch | — | untouched: its own 10 s clock says Thôi (OD L1479) | NAF_OWN |
+| ANY other dialog (real choice, notice) on top at that point | froze the room | CARRIED (coordinator ruling, OD L680): taken off her screen unanswered (Q.shift, no onClose, no road), kept on her seat (CQ), one kit line «Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.»; right after the merged week (COOP week → setTimeout 0, after jcoopworld onWeek / fromCanon keepQ) it goes back on TOP of Q: a pid card is made again from its id (deserQ, the save path → points at the merged world's people), any other card as it was | nightAfk / carryBack |
+| a kit scene waiting only on its ONE end button (.kmend, item reveal «Nhận» .krevok, [data-km-close]) | froze the room (cn2 DUMP) | read for her like a one-road dialog (no choice) — the button's own handler; a scene with more than one button (a choice) is left alone | nafScene |
+| after a close / carry | waited for the next dueTick | CW.nCheck() at once (jcoopworld night gate: the guest runs her night as soon as no dialog is open) | nightAfk |
+| debug | naf() snapshot | naf() + tr (transitions: top card, wait, overdue, ngoW, 10 s buckets of the wait) + carried / back / scene / cq counters | CW.tm.naf |
+Found on the way (not changed, FYI): every co-op week merge rebuilds Q through serQ / deserQ (jcoopworld fromCanon keepQ), which keeps only pid cards — an open NON-pid real choice («Một ánh mắt», j24 manPoem pushed as a plain card) is dropped at every week merge on LIVE today. The carry puts such a card back after the merge, so it survives until the next merge; the general drop is a separate family (not this branch).
+
+### 3. LAW 11 — her dialogs / scenes at an overdue tối (AFK seat), whole family
+| her dialog / scene | where | LIVE / 5efd53fb | r3 |
+|---|---|---|---|
+| nfch (flip choice) | jnf | own 10 s clock → Thôi (OD L1479) | unchanged |
+| flip scene queued behind a panel (kcf) | jflip / jnf scene() | jnf CAP drop (waitMs − ms) | unchanged |
+| flip scene RUNNING, one end button «Chuẩn bị thị tẩm» (.kmend) | jflip / j93 kitSceneEnd | none → FREEZE (cn2) | nafScene: read for her past nightMs |
+| item reveal «Nhận» (.krevok, kitGain) | jfx | jnf CAP / host waitMs (rv r2 NOREV) | nafScene as well (same one-button family) |
+| ksp (Kính sự phòng báo tin) | j8 / j75 / jnf / jcoopworld / jcoopthine | none → FREEZE | close, no answer → not serving |
+| nfsum (Hoàng thượng đổi ý), amNight (maid road summons) | jnf / jagmaid | none | close, no answer |
+| prep / night1 / night2 | j8 / j75 | none | night passes quietly |
+| any other real choice («Một ánh mắt», Biến cố đêm, Việc khó xử …) | many | none → FREEZE (g3: 82 s) | CARRIED, back on top after the merged week (never answered) |
+| a notice / one-road dialog | many | autoRead (readMs) only when HER clock is overdue (not on the guest's ngoW path) | carried like the rest if still open at nightMs (autoRead unchanged) |
+| mini game (S.mg) / Tạm dừng | jcooptimer | the clock's own pause cap (pauseCapMs) | unchanged (nafWait is false while HOLD) |
+Case 3 (a reading host, the clock not out, guest ready) is untouched: nafWait needs her tối overdue or the room's night committed.
+
+### 4. FAIL 2 (coop-e2e «after week 2: the same world» S.emp.mood host 1 / guest 0 + S.fidUsed.49)
+Not reproduced: coop-e2e ×5 on a3a5c5df and ×6 on the head — same world clean 11 of 11 (see gates). A trace is in place for the next time it shows: coop-e2e now polls every change of S.emp.mood per seat (old → new, room week, buổi, calendar day, COOPW.sent, top card, last Sổ ghi line) and prints «MOODTR host / guest» whenever the same-world diff names S.emp.mood. Read of the code: the guest's settled tuần after the merged week (jledger LDQ → gSettle) writes only her own fields (nights, nightLog, sung / an, preg via night(S)); the only S.emp.mood writers at night are jne's «Đêm thị tẩm» card (her played night, before her week end) and the weather / story writers (each seat, both before the end) — none runs after the merge on one seat only. With 0 of 11 here and 1 of 6 at the reviewer (LIVE 0 of 3), the rate is not shown to differ from LIVE; the trace names the writer if it comes back.
+
+### 5. Tests changed
+| test | change |
+|---|---|
+| coop-night | ONLY=<cases> (debug: run just those cases); FORCE4=g/h: «no ledger» in the room (a seat off the palace, by her random thân phận: nfOn false) → n/a, not a FAIL; NEW: a real two-road pid card («Việc khó xử», PEND.c4test, each road marks if taken) is put on top of the AFK seat before she goes AFK → asserted carried, NOT answered, and back on top of her screen after the merged week; every carried card back (carried = back, CQ empty); the summons assert accepts a summons resolved as a one-road dialog (autoRead) — it fails only if a summons / night dialog is still on her screen |
+| coop-e2e | S.emp.mood trace (MOODTR) for FAIL 2 |
+
+### 6. Gates (head 7aff0de33866ce5dd07af355c0c0e6c85fa41ff3 on this box; LIVE b238857f merged; 3 lanes in parallel → one screenshot timeout under load, see e2e)
+| gate | result |
+|---|---|
+| coop-night FORCE4=g ×2 | 115/115 · 115/115 (summons closed by nightAfk, «Việc khó xử» carried 2, back 2, unanswered; AFK hold 48–105 s ≤ 114 s) |
+| coop-night FORCE4=h ×2 | 115/115 · 113/113 (the second: no ledger in that room → pin n/a + 4b n/a, still bounded and carried); plus ONLY=1-4 h 6/6 case-4 asserts on the same code |
+| coop-night plain ×2 | 111/111 · 112/112 |
+| coop-e2e ×6 (COOP_WDIFF) | 141/141 ×5 · 140/141 once = «09-rejoined ipad: screenshot timeout 120 s» while the box ran 3 lanes (load 37); same-world clean in all 6; rerun e2e6 141/141. Earlier build a3a5c5df: 141/141 ×5 |
+| coop-ledger ×4 | 45/45 · 44/44 · 45/45 · 45/45, no STUCK |
+| coop-ledger DEVSWAP ×4 | 45/45 · 45/45 · 43/43 · 43/43 |
+| coop-ledger NOREV=host / NOREV=guest | 43/43 / 45/45 |
+| coop-night0 | 16/16 |
+| night-coop-park ×4 | ALL OK 13/13 ×4 |
+| quickcheck --runs 7 | PASS · old save ok · render 330/293, tab 670/671, buổi 1870/1704 ms (box still warm from the lanes) · core gates PASS |
+| one-core-guard / undef-scan | PASS / PASS (293) |
+| role-parity | ALL PASS |
+| ledger / night-final / night-multi | ALL PASS / PASS / PASS |
+ONE CORE: no new number (BAL.coopTm.nightMs was added in 5efd53fb). KIT: kitLine only (existing kit pill); no new UI. No shots (no screen changed; the carried card is the same kit dialog). Scratch: /home/user/wt/nlr3-out (not git).
+
+### 7. Open (not built)
+1. FAIL 2 not reproduced (0 of 11 here); MOODTR stays in coop-e2e to name the writer if it returns.
+2. Pre-existing, other family (FYI coordinator): the co-op week merge (fromCanon keepQ = serQ) drops every open NON-pid real choice on every seat at each week end.
+3. A carried card lives in the seat's memory (CQ): a reload before the merged week loses it (as a reload loses any non-pid card today).
+
+SẴN SÀNG KIỂM 7aff0de33866ce5dd07af355c0c0e6c85fa41ff3
