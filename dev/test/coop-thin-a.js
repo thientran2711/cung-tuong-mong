@@ -61,7 +61,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  /* build-match hold → level off */
  ok(await H.p.evaluate(()=>{const h=COOPW.hold;COOPW.hold=true;const r=COOPW.thin.on(1);COOPW.hold=h;return r===false}),'build-match hold: no part on');
  if(LVL){
-  ok(await until(H,()=>COOPW.thin.lvl===1,null,20000)&&await until(G,()=>COOPW.thin.lvl===1,null,20000),'level 1 on both (same build, host asked)',await both(()=>({lvl:COOPW.thin.lvl,want:COOPW.thin.want(),tx:__tx.filter(t=>t!=='ping'),rx:__rxT.filter(t=>t!=='pong').slice(-12)})));
+  ok(await until(H,x=>COOPW.thin.lvl===x,LVL,20000)&&await until(G,x=>COOPW.thin.lvl===x,LVL,20000),'level '+LVL+' on both (same build, host asked)',await both(()=>({lvl:COOPW.thin.lvl,want:COOPW.thin.want(),tx:__tx.filter(t=>t!=='ping'),rx:__rxT.filter(t=>t!=='pong').slice(-12)})));
   ok(await until(G,()=>COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.P&&COOPW.thin.view.o.P.a,null,20000),'guest received the host snapshot');
   await H.p.evaluate(()=>{S.danh=(S.danh||0)+1;COOPW.thin.flush()});
   const hv=await H.p.evaluate(()=>[COOPW.thin.hv,S.danh]);ok(await until(G,x=>COOPW.thin.view.v===x[0]&&COOPW.thin.view.o.P.a.danh===x[1],hv,20000),'delta: guest view follows the host (version + value)',hv);
