@@ -19,5 +19,15 @@ Per-seal cuts th-<k>-{out,loop,back}.webp + th-<k>-B.png in the same CDN folder 
 All 5: same woman/crown/robe, no earrings, gestures small, green flat, hands not cut. OUT/LOOP motion is gentle (little visible "burst" — that is the toned-down brief).
 BACK glitches: chuyên tâm and vui — the disc brightens / goes gold-flat while shrinking in the last frames; giận BACK shows the disc going dark red-flat at the end. Cosmetic, last 2–3 frames. Candidate RECOMMENDED-REDRAW (BACK only, 940 cr each) if owner wants.
 Giận B shows an anger mark (not steam) by the hair — fine.
+## Batch 2 (5 seals) — 5×135 + 15×940 = 14 775 cr
+| seal | code | A (flattened upload) | B (flattened upload if RGBA) | OUT | LOOP | BACK |
+|---|---|---|---|---|---|---|
+| sợ | M2301-03 | N2b3owM6D9 | tCZvSrimZJ | N2b38a76D9 | MBOeKsKDCm | EbWFPRIuuO |
+| ẩn | M2301-04 | s7tSY5Xl8e | s7tSYLhl8e | dt9oxwKXSL | aFzEJicfSh | bxDk3WL5Y2 |
+| bình | M2301-05 | KLerREEkqp | 6A5R86EiJO | w4fOMId7EI | 79CyDthJAL | N2b38Ey6D9 |
+| đau lòng | M2301-06 | vQGCwBfa47 | bxDk3yf5Y2 | JNEPphtOq4 | lJmUcBsgv9 | ksdx2M616B |
+| ghen | M2301-07 | lJmUWkGgv9 | eI4Brq8dqL | aFzEJZVfSh | N2b38Q46D9 | xSoszd3jfW |
+Preview: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/anim/th-tonedown-batch2-anim.webp (4.7 MB)
+Notes: gestures small as asked; sợ B has open trembling mouth (face strength like its A). BACK glitches: đau lòng and ghen — disc goes dark/flat in 1–2 frames while shrinking; ẩn — mist fades mid clip. Cosmetic, no redo.
 ## Next
-Batch 2 = M2301-03..07 (sợ, ẩn, bình, đau lòng, ghen). Not started — awaiting coordinator ok? (brief says continue; will proceed unless told to stop.)
+Batch 3 = M2301-08..12 (lo, mưu, tự tin, tình tứ, hưng khởi).
