@@ -2327,3 +2327,10 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:34Z) LAND CHAIN 3: ROLLED at ctx ~33 % (queue empty, LIVE 02c6d8f4, HOLD od03-favart-rv). Handover dev/handover/reports/land-chain-3.md (12 landed, landq-e2e recipe, rel-men r7 owed by B). MAIN 103 opens LAND CHAIN 4.
 - (01:35Z) Opened MAIN CHÍNH 103 = session_01Rc5AsKQ599YyHUeSs7YqLK (child, depth 5). 102 stops; relays late messages to 103 only.
 - (01:34Z) LAND CHAIN 3: ROLLED at ctx ~33 % (queue empty, LIVE 02c6d8f4, HOLD od03-favart-rv). Handover dev/handover/reports/land-chain-3.md (10 landed, landq-e2e recipe, rel-men r7 owed by B). MAIN 103 opens LAND CHAIN 4.
+
+## MAIN CHÍNH 103 (session_01Rc5AsKQ599YyHUeSs7YqLK)
+- (22/11 01:40Z) MAIN = MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUeSs7YqLK; START_CTX ~10 % (get_session reads 0) → roll at ~35 %, ceiling 60 %; depth 5 (limit 8).
+- (22/11 01:40Z) LOAD: main running 0 (owner bugs/UI/go-live only) | B free 0 (RUNNING: guest-week-lag rv, host-lag rv, thin-g F1 #5, rel-men r7 owed) | C free ? (ROOT-B9 depth 8, STANDBY 01D3E3NX4Gc3 ready; owner room/seal loop) | D free (bundle LAND READY; rival-hauthay waits GO) | E free (E49 closed dup; famops-c2 SSK) | moved: none.
+- (22/11 01:40Z) LAND CHAIN 4 = session_01Rc5AsJvxyreKDJtwJauvsP opened (from reports/land-chain-3.md, landq-e2e gate); LC3 archived. Queued: night-balance-bundle-rv 8746a062 (D LAND READY 01:25Z, FF). HOLD od03-favart-rv.
+- (22/11 01:40Z) Wake = trig_01BZEhJBtaiQjTxceoem3Hph (min 32). Disabling 102's trig_01E13SG1HWhNBW6G9ukrWFKH was refused by the permission classifier → left enabled; it fires into archived 102 (harmless) — owner may disable it.
+- (22/11 01:40Z) Notes: B guest-week-lag and E49 = same finding → land only ONE (E49 closed as dup of B e7b996f2). E asks B to add bongloc-coop.js ×6 + bongloc-coop-catch.js to thin-g-f1 gates (ORDER below in B STATUS). C line OK: ROOT-B9 depth 8 has STANDBY session_01D3E3NX4Gc3XCtkhsnipEAS.

@@ -179,3 +179,5 @@ SẴN SÀNG KIỂM coop-guest-week-lag 0860f601 TIER BIG (22/11 01:05Z, worker s
 
 - 11/22 01:30Z coop-thin-g F1 #4: ROLLOVER at ctx ≈30 %; trip1a reproduced the Danh split (host store lags its own patch, not doubling); handover in reports/coop-thin-g.md; lane still running in /home/user/wt/lane4; B please open F1 #5.
 - (22/11 01:24Z) B ROOT-8: coop-thin-g F1 #4 48cvPSep rolled over (99201b6c; Danh split REPRODUCED trip1a 73/83: host seat store +1 stale ≥10 s, drop 0 → store lag, not a lost delta) → opus F1 #5 session_01N1tNP2pYTX6fTAsL7MNa3h. #4 kept only to post its running lane results, then archive.
+- FROM MAIN (22/11 01:40Z): main is now MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUeSs7YqLK — report LAND READY / FOR MAIN lines to it. LAND CHAIN 4 = session_01Rc5AsJvxyreKDJtwJauvsP.
+- ORDER MAIN 103 (22/11 01:40Z) — PRIORITY #1 CHECK: E STATUS L1480 (E49 closed dup of B e7b996f2). B: add `node dev/test/bongloc-coop.js` ×6 + `node dev/test/bongloc-coop-catch.js` to coop-thin-g-f1 / guest-week-lag gates; check 1 rkOfFace console error (RANKS[r].n, r out of range) seen in 1 catch run. rel-men-servants r7 on LIVE (keep both jstip.js sides) still owed.
