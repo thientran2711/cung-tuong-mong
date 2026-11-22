@@ -185,3 +185,51 @@ Leads not yet checked (my own, unverified):
 - d. re() on reconnect: the host now calls ldAgain() (sends the last settled tuần) and the guest nfLdAsk(w) — check that an "ld" for an OLD wk arriving after her reload does not touch today's S.ledger (ldIn only sets S.ledger when o.wk===W()) and that gSettle never runs twice (S.ldG).
 - e. apply(m) now calls ldIn BEFORE the m.d!==day() return — harmless by design, but rule it out first by moving it after.
 Debug aid in coop-ledger.js: STUCK dump (nfDebug + COOPW state) after merged(); NTOFF=1 = same room, ledger off (baseline). Scratch shots /home/user/wt/nlc-shots (not git). Worktree /home/user/wt/nlc (branch review/night-ledger-coop) can be reused or removed.
+
+## FIX r2 — review/night-ledger-coop-r2 (successor of 6wkABAL1; «REVIEW coop r1» FAIL list 1–4)
+PRIORITY #1 CHECK ('night-ledger|jledger|ldIn|kfgain|krevok|ctm-nf|nfParked|roomOff'): OD L594 (co-op LAND GATE), L96 (one world) | main f0070e61: jledger absent; jnf relay + kit item reveal (jfx kitGain, «Nhận» .krevok) present | review/night-ledger-coop 96c62324 (base), review/coop-night0-r1 234d0298 (PASS, merged here; same jnf gate) | claims B row "night-ledger-coop r2 fixer" (this).
+Worker: opus, session_01N1tNP3C4XN63dXNqw9oz1w; coordinator Foreman B ROOT-10. START_CTX ≈ 3 % (own estimate; get_session reads 0).
+Branch: review/night-ledger-coop-r2 = 96c62324 + merge review/coop-night0-r1 234d0298 (only index.html / sw.js conflicted, rebuilt) + the fixes below.
+
+### 1. ROOT of the «stall» (FAIL 1) — found by dump, not guessed
+STUCK dump (coop-ledger DEVSWAP, tuần 2 «guest presses first», reproduced 2 of 10 runs on 96c62324+coop-night0): on BOTH seats `cfBusy() true, cfAge 62 s, __cfdbg [push 0, run, play 11, push 1]` (the tuần-2 card-flip job queued, never run) behind `.kmov.kfgain` = the kit ITEM REVEAL (jfx kitGain, KIT §81 manual scene: only its «Nhận» button closes it; host «Son hoa hồng» from Nội vụ phủ, guest «Bản chép tay mẫu may …»). The flip choice waits for the flip scene (jnf scene(), bounded at CAP = choice.waitMs − choice.ms = 80 s); the host waits for the friend's choice up to BAL.steal.choice.waitMs = 90 s. The test windows are 60 s (coop-ledger / coop-night merged()) → «stall».
+Why only with the ledger: every co-op harness clear() presses the kit scene buttons a player presses (`.kmend`, `[data-km-close]`, reward box) but NOT the item reveal's «Nhận» (`.krevok`, it carries neither marker); `press()` clicks #next under the overlay by script. A real player cannot reach «Sẵn sàng» under that full-screen reveal and taps «Nhận». The ledger gives each player up to 10 nights a tuần (Sủng / Ân / ranks / gifts move faster) → more item gains → the harness gap shows. Not a game stall: with an AFK seat the existing NLC #9 bound (CAP, then her 10-second clock, host waitMs) still ends the night.
+Leads a–e of the handover checked: (c) contest() runs only inside the host's endTurn after fin — no relay in that window; (d) ldIn sets S.ledger only for o.wk === W(); gSettle once (S.ldG); (e) ldIn before the m.d check is harmless (kept). (a) and (b) led to a REAL bug, item 2 below.
+
+### 2. What changed
+| item | before | after | file |
+|---|---|---|---|
+| harness: the kit item reveal (LAW 11, whole family) | 39 co-op / scene harnesses `clear()` click `.kmov [data-km-close]` only → «Nhận» of kitGain never pressed; flip held 80–90 s | the same selector + `.kmov .krevok` (what a player taps); scan list below | 39 dev/test/*.js |
+| guest's settled tuần lost (lead a, found by coop-ledger «the guest got the settled ledger» FAIL 1/8: guest ldG 0, ledger [1,0]) | the host's `ld` (settled tuần) can land while HER week end is out (COOPW.sent = week): gSettle wrote into an S that the merged week (jcoopworld onWeek → fromCanon) then rebuilt from that end → her nights, Sổ ghi lines, S.ldG gone for good | ldIn keeps it in LDQ (not in S) while her end is out; on `week` it is settled right after the merge, then ONE ldask for a tuần still missing | jledger |
+| mid-tuần park edge (FAIL 3) | a tuần rolled unparked: guest ldIn returned on ldOn false (nights never settled); host ldSettle returned too; jnf listener dropped every ctm-nf word while parked | host `ldHas()` (a current unsettled ledger) settles even if parked now; guest ldIn takes a SETTLED tuần while parked (an unsettled word is ignored); `ld` / `ldask` handled before jnf's park gate; re() resends the last settled tuần parked or not; conception keeps BAL.nt.concF during those settles (`window.__ldNt`) | jledger, jnf |
+| night-coop-park 2b flake (FAIL 2) | counted S + liveRivals(false) = WITHOUT the Hoàng hậu (her custom nights mùng một / rằm) and without anyone dead / out → rec 7 vs held 10 | counts S + every rival (8 count lines of the file); 2b now rec = held (9/9, 10/10) | night-coop-park.js |
+| night-coop-park NEW 5d / 5e | — | 5d: ledger rolled in a player room, room parks before the day end → settled once, rec = held; 5e: guest seat parked: settled ld → her night + Sổ ghi line once, concF kept; unsettled ld ignored. Before the jledger/jnf change: 5d st 0, rec 1 / 10; 5e ldG false (both FAIL) | night-coop-park.js |
+| coop-ledger «b friend in the draw» (random 1b / 2b) | per tuần: she must HOLD a day (the Emperor's agent pick may pass her: 0 of 20 days seen with nightCh 60) | per tuần logged; asserted over the run: she is a candidate of empPick(C) in ldRoll or holds a day, in a tuần she is on the tray (nightCh > 0) | coop-ledger.js |
+| stale comments (FAIL 3 wording) | «nfParked: a THIN part-E room only» | «nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff)» — j2 L67, jfe L9, jnf L29 / L37 / L67, jledger header §5 + S.ldPk + ldPin + ldSettle + flip wrapper, jcycle L83 (scan `grep -n -i "parked\|thin part-e" dev/build/j*.js`: 0 left) | j2, jfe, jnf, jledger, jcycle |
+| debug | — | coop-night DUMP on a stuck case (jnf, Q, modal, night gate, ledger, scene queue, gains) + 4b ctm-nf receive log; coop-ledger STUCK dump + errors + scene queue / gains | tests |
+ONE CORE: no new number (BAL.nt / BAL.steal / BAL.coop only). KIT: no UI change. Note for the kit keeper (not a blocker): kitGain's «Nhận» has neither `.kmend` nor `data-km-close` (KIT §81 «STILL TO SWEEP: item fly / reveal»); with the marker every harness would see it without a special case.
+
+Scan (LAW 11, harness family): `grep -l "kmov" dev/test/*.js` with a clear(): 77 files; 39 use the idiom `querySelectorAll('.kmov [data-km-close]')` → all 39 patched (list: `grep -l "kmov .krevok" dev/test/*.js`); the other 38 have their own clear without that idiom (no co-op night gate among them except the thin-E / perf probes) — untouched, listed for the coordinator.
+
+### 3. Gates (branch head on this box, LIVE Worker)
+| gate | result |
+|---|---|
+| coop-ledger (host Fold / guest iPad) ×4 | 44/44 · 43/43 · 45/45 · 44/44, stuck 0 |
+| coop-ledger DEVSWAP ×4 | 45/45 · 45/45 · 44/44 · 44/44, stuck 0 (before: 2 STUCK in 10 runs) |
+| coop-night (ledger ON) ×5 | run 1 110/111 (only «4b: the guest really missed the host's fin once»: the test's own drop hook saw no fin word that tuần; both seats merged, same date — test plumbing, a receive log is now dumped if it repeats), then **111/111 ×4 in a row** (runs 2–5); cases 4 (AFK clock) and 5 (reload) green in all 5 |
+| coop-e2e ×3 | 129/129 ×3 |
+| coop-night0 | 16/16 |
+| night-coop-park ×4 | ALL OK 12/12 ×4 |
+| quickcheck --runs 7 | PASS · old save ok · render 271/293, tab 500/525, buổi 1337/1493 ms · core gates PASS |
+| undef-scan / one-core-guard | PASS (292) / PASS |
+| role-parity | FAIL 2 = petcare P-ONLY + riseCore = LIVE's pre-existing 2 |
+| ledger.js | ALL PASS |
+| night-final / night-multi / log-sync-night / night-steal-unit | PASS / PASS / PASS / 29 PASS 0 FAIL |
+
+### 4. Open (not built)
+1. Kit keeper (FYI, KIT §81 sweep list): give kitGain's «Nhận» the scene-end marker (`data-km-close` or `.kmend`) so no harness needs `.krevok`.
+2. The 38 harnesses with their own clear() (not the patched idiom) were not touched; none is a night gate of this branch.
+3. coop-night 4b «missed fin» bookkeeping: seen 1 of 5 runs; dump in place.
+Head: 14093edc31e5f44321e8da6249f1a6d670f6f258 (review/night-ledger-coop-r2). Scratch: /home/user/wt/nlr2-out (not in git, no shots taken: no UI change).
+
+SẴN SÀNG KIỂM 14093edc31e5f44321e8da6249f1a6d670f6f258
