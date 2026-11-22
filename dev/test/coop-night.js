@@ -73,7 +73,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ld:S.ledger?{wk:S.ledger.wk,p:S.ledger.p,st:S.ledger.st}:null,ldG:S.ldG,cyHold:COOPW.cyHold,kmov:[...document.querySelectorAll('.kmov')].filter(x=>!x.classList.contains('km-out')).map(x=>x.id||x.className).slice(0,4),
   dawn:!!(document.getElementById('dawn')&&document.getElementById('dawn').classList.contains('on')),tr:(COOPW.tr||[]).slice(-12),cf:{busy:window.cfBusy&&cfBusy(),age:window.cfAge&&cfAge(),dbg:(window.__cfdbg||[]).slice(-12),kmov:[...document.querySelectorAll('.kmov')].map(x=>x.className.slice(0,60)+':'+(x.getAttribute('aria-label')||'')),gains:(window.KFX&&KFX.gains||[]).slice(-4),inv:(S.inv||[]).slice(-3).map(x=>x&&[x.k,x.n||x.name,x.src||x.from,x.wk])},nw:S.nightWhy&&{wk:S.nightWhy.wk,pick:S.nightWhy.pick},day:typeof day==='function'&&day()}}catch(e){return e.message}}).catch(e=>e.message);
  /* both press through the day buổi until both are at tối */
- async function toNight(tag){for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
+ async function toNight(tag){if(process.env.ONLY&&!process.env.ONLY.split(',').includes(tag))return false;/* debug: ONLY=4,5 runs just those cases */for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await clear(A);await clear(B);await press(A);await press(B);
    await bothPast(A,B,k,30000);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}}
   const a=await D(A),c=await D(B);return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
@@ -119,7 +119,12 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  if(await toNight('4')){const w0=(await D(A)).w;const F4=process.env.FORCE4||'';const X=F4==='h'?A:B,Y=F4==='h'?B:A;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
   for(let i=0;i<3;i++){await clear(X);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the AFK seat reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
   if(F4){const pin=await A.p.evaluate(g=>{try{if(typeof ldRoll!=='function'||!ldOn())return 'no ledger';const f=rivals.find(v=>v&&v.coop&&v.alive!==false);S.ledger=null;ldRoll(g?f:S);const p=ldPin();return p===S?'host':p===f?'guest':String(p&&p.name)}catch(e){return e.message}},F4==='g');
-   console.log('4 FORCE4='+F4+' played tối pinned on:',pin);ok(pin===(F4==='g'?'guest':'host'),'4: the played tối is pinned on the AFK seat ('+F4+')',pin)}
+   console.log('4 FORCE4='+F4+' played tối pinned on:',pin);
+   /* no ledger in this room (nfOn false: a seat off the palace / a parked room, by her random thân phận): nothing to pin — n/a, not a FAIL */
+   if(pin==='no ledger')console.log('n/a  4: the played tối is pinned on the AFK seat ('+F4+'): no ledger in this room');else ok(pin===(F4==='g'?'guest':'host'),'4: the played tối is pinned on the AFK seat ('+F4+')',pin);
+   /* the carry rule (coordinator, OD L680): a real non-night choice on top of the AFK seat (like «Một ánh mắt»): two roads, each marks if taken */
+   await X.p.evaluate(()=>{window.__c4=0;window.__c4back=0;const c=window.__c4m={t:"Việc khó xử",h:"<p>Một việc cần ngươi tự quyết.</p>",opts:[{n:"Nhận lời",fx:{},go:()=>{window.__c4=1;return""}},{n:"Từ chối",fx:{},go:()=>{window.__c4=2;return""}}]};Q.unshift(c);try{showModal()}catch(e){}
+    /* back on top after the merged week: seen on her screen (the harness's clear() may then press it, as she would on her return) */const iv=setInterval(()=>{if((COOPW.nacB||0)>0&&Q[0]===c&&!document.getElementById('modal').hidden){window.__c4back=1;window.__c4atBack=window.__c4;clearInterval(iv)}},50)})}
   /* NLC #9: the active seat plays on like a player (scene, morning panel, his choice); the AFK seat never answers. Bound (jnf): every seat's
      choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
      her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */
@@ -129,7 +134,12 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const naf=await X.p.evaluate(()=>({n:COOPW.nafN||0,naf:COOPW.naf||null,dbg:COOPW.tm.naf&&COOPW.tm.naf(),Q:Q.map(x=>x&&(x.pid||x.t)),tonight:typeof S.tonight==='string'?S.tonight:S.tonight&&S.tonight.name}));console.log('4 AFK seat:',JSON.stringify(naf));
   if(st<0)console.log('DUMP 4',JSON.stringify([await DUMP(A),await DUMP(B),await A.p.evaluate(require('./lib/coop-clear.js').SCR),await B.p.evaluate(require('./lib/coop-clear.js').SCR)]));
   ok(st>=5000,'4: the AFK night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK seat holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);
-  if(F4)ok(naf.n>=1||!naf.Q.length,'4: the AFK holder\'s own summons closed with no answer (jcooptimer nightAfk) or never stayed',naf);await merged('4',w0)}
+  if(F4)ok(naf.n>=1||!naf.Q.some(x=>['ksp','nfsum','amNight','prep','night1','night2'].includes(x)),'4: the AFK holder\'s own summons / night closed with no answer (jcooptimer nightAfk) or never stayed (a one-road dialog is read for her)',naf);await merged('4',w0);
+  /* the carry rule (coordinator, OD L680): a real non-night choice she sat on is never answered for her: kept and back on top after the merged week */
+  {const c=await X.p.evaluate(()=>({carried:COOPW.nacN||0,back:COOPW.nacB||0,cq:COOPW.tm.naf().cq}));console.log('4 carry:',JSON.stringify(c));
+   const tq=await X.p.evaluate(()=>({unansweredAtBack:window.__c4atBack,back:window.__c4back}));
+   ok(c.back===c.carried&&c.cq===0,'4: every dialog carried off the AFK seat is back on her screen after the merged week (never answered)',c);
+   if(F4)ok(c.carried>=1&&tq.back===1&&tq.unansweredAtBack===0,'4: her real choice («Việc khó xử», two roads) was carried, not answered, and came back on top of her screen after the merged week',[c,tq])}}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4b the guest misses the host's final word of the night (its "fin" lost on the way: a dropped socket, a sleeping phone). The host ended its day
     right after fin and runs ahead while the merged week waits for her: she asks again (jnf ask), the host — already past that day — sends that

@@ -140,25 +140,42 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
    if(CW.forceNight)try{CW.forceNight()}catch(e){console.error(e)}
    if(!Q.length&&!S.mg&&!frozenRoom()){try{nextBuoi()}catch(e){console.error(e)}}}}
  if(overdue())autoRead()}
-/* review/night-ledger-coop-r3 (rv FAIL 1, NLC #9 coop-night case 4): HER OWN NIGHT DIALOGS at an overdue tối. The holder of the played tối
-   (ledger: the first day of EITHER player, so often a player) gets the Kính sự phòng summons after the flip, then the night talk; each is a
-   real choice and is never made for her (owner 15/11 ~21:25Z / ~22:55Z), so an AFK holder sat on it and her week end never went: the room
-   froze for the partner (the NLC #9 bound — every seat's choice in by BAL.steal.choice.waitMs — does not cover her own summons). Bound, both
-   seats, any thin level: once her buổi tối is overdue, one of these dialogs on top for BAL.coopTm.nightMs (one core) closes WITH NO ANSWER —
-   no road is taken for her, no Được / Mất of any road:
+/* review/night-ledger-coop-r3 (rv FAIL 1, NLC #9 coop-night case 4): AN AFK SEAT AT AN OVERDUE TỐI. The holder of the played tối (ledger:
+   the first day of EITHER player, so often a player) gets the Kính sự phòng summons after the flip, then the night talk; on top of them any
+   other real choice of the tối («Một ánh mắt», a night event …). Each is a real choice and is never made for her (owner 15/11 ~21:25Z /
+   ~22:55Z, OD L680: when the timer runs out the buổi advances for both, open dialogs resolved safely / carried), so an AFK seat sat on one
+   and her week end never went: the room froze for the partner (the NLC #9 bound — every seat's flip choice in by BAL.steal.choice.waitMs —
+   does not cover her own dialogs). ROOT of «nightAfk never fires» (r3 trace COOPW.tm.naf().tr, FORCE4=g): the bound aged only the summons,
+   and only from the moment it reached the top — «Một ánh mắt» stood above it for 82 s, so the summons came up after the test's bound.
+   Bound now (both seats, any thin level): the WAIT is timed, not each dialog — from the first tick the partner waits on her (nafWait: her tối
+   overdue, or the room's night committed, CW.ngoW = this week, while her own week end is not out). Once that wait reaches
+   BAL.coopTm.nightMs (one core), the dialog on top (and each one after it) is handled at once, with NO ANSWER:
      summons (ksp, nfsum, amNight): she did not answer → she does not serve tonight (S.tonight = null, the same state as when the night passes
        her by; ldSettle records the played tối as nobody's);
-     the night itself (prep, night1, night2: she already went): the night passes quietly, nothing more is gained (her night record stays).
-   Her seat gets a kit line; then dueTick runs her night step as for any closed dialog. LAW 11 scan: dev/handover/reports/night-ledger.md «FIX r3». */
-const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"];let NA={m:null,t:0};
-/* when: her buổi tối is overdue, or the room's night is committed (CW.ngoW = this week: the host's time out / both ready) while her own week end
-   is not out — the partner is waiting on her (r3 FORCE4=g: the host commits and steps on, so the guest's own clock key never reads overdue) */
+     the night itself (prep, night1, night2: she already went): the night passes quietly, nothing more is gained (her night record stays);
+     the flip choice (nfch): untouched — its own 10-second clock says Thôi (OD L1479);
+     ANY OTHER dialog (a real choice, a notice): CARRIED (coordinator ruling under OD L680) — taken off her screen unanswered (no onClose, no
+       road), kept on her seat (CQ) and put back on top right after the merged week, so she answers it when she returns.
+   Then her night step runs as for any closed dialog (dueTick / jcoopworld nCheck) and her week end goes. LAW 11 table: reports/night-ledger.md «FIX r3». */
+const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OWN=["nfch"];let NA={w0:0,said:-1},CQ=[];
 function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
-function nightAfk(){const m=Q[0];if(!m||!nafWait()||!(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid))){NA.m=null;return}
- if(NA.m!==m){NA.m=m;NA.t=pnow();return}if(!(pnow()-NA.t>=+BAL.coopTm.nightMs))return;/* one core: the bound lives only in BAL.coopTm.nightMs */
- NA.m=null;const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
- const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
- try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}}
+let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
+function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
+ if(!on||!m||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
+ if(NAF_OWN.includes(m.pid))return;
+ if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN()};
+  const t=sum?"Quá giờ chờ: ngươi chưa đáp lời Kính sự phòng, kiệu đã quay về. Đêm nay ngươi không hầu giá.":"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+  try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
+ /* carry: off her screen with no answer (no onClose: nothing is decided), back on top after the merged week */
+ Q.shift();CQ.push(m.pid?{pid:m.pid,pp:m.pp,t:m.t,m}:{m});CW.nacN=(CW.nacN||0)+1;
+ if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
+ try{showModal();render()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+/* the carried dialogs come back on top once the merged week is in (jcoopworld onWeek keeps Q: fromCanon keepQ). A card of the save's kind
+   (pid) is made again from its id (deserQ, the save path: it points at the people of the merged world); any other card comes back as it was. */
+function carryBack(){if(!CQ.length||!live()||S.dead)return;const L=CQ.splice(0),out=[];
+ for(const e of L){let c=null;if(e.pid){try{c=(typeof deserQ==="function"?deserQ([{pid:e.pid,pp:e.pp,t:e.t}]):[])[0]||null}catch(x){c=null}}out.push(c||e.m)}
+ Q.unshift(...out);CW.nacB=(CW.nacB||0)+out.length;try{showModal();render()}catch(e){console.error(e)}}
+COOP.on("week",()=>setTimeout(()=>{try{carryBack()}catch(e){console.error(e)}},0));
 /* a dialog with no choice, or with one single road, is read for her once her buổi is overdue (never a real choice) */
 function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;return}const m=Q[0];
  if(m.act||/kptitle|kcoop/.test(m.cls||""))return;
@@ -391,5 +408,5 @@ if(CW.on)go();
 /* the «Hảo hữu» partner sheet (jhaohuu.js) reads the same live status as the chip: FST tone + glyph + words */
 CW.frHold=on=>hold(!!on);/* «Tạm dừng» from the partner sheet (jhaohuu); NOT CW.hold = the build-hold flag of jcoopworld */
 CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign(o,{tone:f[0],glyph:f[1],word:frWord(o)})};
-CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),seen:NA.m===m,age:NA.m?pnow()-NA.t:null,n:CW.nafN||0}}/* r3 debug: why nightAfk does (not) fire */};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,cq:CQ.length,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 }catch(e){console.error(e)}})();
