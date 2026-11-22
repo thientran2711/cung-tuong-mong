@@ -1,4 +1,28 @@
-# REVIEW coop-guest-men (D19 brief; reviewer session_01964izEo6EDw2BwHHJErxNB) — VERDICT: FAIL
+# REVIEW coop-guest-men (D19 brief; reviewer session_01964izEo6EDw2BwHHJErxNB) — r1 FAIL (below) · r2 PASS (top)
+
+
+## r2 RE-REVIEW — VERDICT: PASS · LAND READY review/coop-guest-men-rv2 0a3ceede59cb5868d27bb23852b50e47880155df
+PRIORITY #1 CHECK: OD 0 | main jcoopworld.js:44 HOST_ONLY 8 keys, jcoopask kinds | review/* coop-guest-staff landed (LIVE 40cc2b92, test-only) | claims: worker EPhZFbPA r2 + this review; coop-flakes worker patches remapS only (out of scope).
+Target review/coop-guest-men f98ceec2 (r2 2d4daa13 + r2b) on b238857f. Merged LIVE 40cc2b92 → review/coop-guest-men-rv2 0a3ceede (FF from LIVE). One conflict: dev/test/coop-guest-lists-scan.js (add/add) → branch side kept (superset: S.men kind row + HOST_ONLY family table); main's one-line change is inside it. index.html/sw.js rebuilt; assets.json kept = LIVE.
+- F1 FIXED: blanket endTurn take-back removed; jmort.js:124 now `worldOn()`-guarded like j13:27 (solo: worldOn() = true → unchanged). Driver 6d = my repro (ease inside her week end via rivalsTurn) → request reaches the host, both seats same. PASS both runs.
+- F2 FIXED: collect diffs against CW.askSnap (taken in deser from the room's C at a real rebuild; her own replay via CW.restore keeps it; host ctm-wfix ops are folded into it by snapOps); ids carry @g. thPredict = one rule for hTh and her stand-in. Driver 6g: every applied "th" request is one of hers — host logs show only st3→st2 / st3→null (no `null>st3` any more).
+- F3 FIXED: step 6 re-sets the illness per sub-step; step-4 root (rejoin voided her open request) fixed by the snapshot restore.
+- Laws: 1 / 6b — nothing guest-owned vanishes (men in/kill/away/ban, Thái hậu ease/cure incl. week-end resolution); host's m\d+ set never asked. 4 — one-core trio PASS, no new number. 9–12 — no UI change; stand-in only changes data shown by existing kit screens; driver shots Fold 755x1000@2 (host) + iPad 1180x820@2 (guest) looked at: no overflow, kit only.
+
+| gate (r2, on 0a3ceede, one at a time) | result |
+|---|---|
+| coop-guest-men.js | run 1 **54/54** · run 2 53/54 — `2 host: he is dead there too (relay)` timed out (20 s); `2 both: he stays dead after the merged week` PASS on the same run. Test-made: the driver calls mortKill raw and never ser()s after it (asks() does), so the live relay waits on an unrelated autosave; the durable path held. Nit for the worker: ser() after the act in step 2 (like step 1's asks()). |
+| coop-guest-lists-scan | 11 lists · 11 survive; HOST_ONLY 8 · 0 dropped; exit 0 (r1: unknown key → exit 1) |
+| coop-e2e ×3 | 141/141 · 141/141 · 141/141 |
+| coop-guest-maid | 39/39 |
+| coop-famops-unit | PASS 33/33 |
+| one-core guard / bind / text | PASS · PASS · PASS |
+| role-parity | ALL PASS |
+| quickcheck (old save from LIVE loads + plays) | QUICKCHECK PASS · old save ok · core gates PASS · perf ≈ live (render 212/206, tab 451/444, buổi 1219/1079 ms) |
+Shots: scratch only, none uploaded.
+
+---
+# r1 (superseded)
 
 PRIORITY #1 CHECK: OD 0 hits on S.men host-only | main jcoopworld.js:44 HOST_ONLY (8 keys), jcoopone.js:12, jcoopask.js kinds np/srv/pet/kidout/srvout | review/* review/coop-guest-staff (scan reused, fine) | claims: worker EPhZFbPA + this review. No second system found.
 
