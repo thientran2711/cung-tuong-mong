@@ -10,7 +10,7 @@ Object.assign(GE_DATA,{
   {pull:["Đền bạc, xin nàng về hầu","Đứng đúng chỗ ấy mà nhìn nàng","Lấy lại thể diện năm xưa","Chuẩn bị đối phó","Xin nàng sang hầu ngươi","Nhận nàng về cung","Cho nàng một việc tốt hơn","Xin giữ cả ba người ở gần","Lặng lẽ kéo nàng về phía mình","Nhận lời chào của người dưới","Đứng chờ {v} chào theo phẩm","Thưa thật: thần thiếp muốn","Xin lấy bộ chén men lam","Ban thưởng cho cung nữ cả hai cung","Cho {maid} đứng cạnh mình trong lễ","@st_the=win"],
    close:["Xin Hoàng thượng khoan bàn phẩm","Thưa: thần thiếp không muốn gì","Viện cớ có chỉ triệu, lui ra","Chào {v} trước, như xưa"],
    cond:[["s","danh"],["s","maid"]],fo:[],
-   cw:"cần Danh vang khắp cung và lòng kẻ hầu theo ngươi",
+   cw:"cần Danh vang khắp cung và thiện cảm của kẻ hầu với ngươi",
    a:"Ngày ngươi được phong Quý phi, chủ cũ đứng hàng dưới, tay bưng khay trà. Ngươi nhận chén mà không ngẩng lên. Từ đó cung nữ khắp lục cung đều biết: kẻ từng quỳ dâng trà nay chỉ cần nhướng mày là cả dãy nhà hầu lặng tiếng.",
    t:"Ngày ngươi được phong Quý phi, việc đầu tiên ngươi xin là sửa lại dãy nhà cung nữ, thêm chăn bông cho mùa rét. Kẻ hầu các cung gọi ngươi là “nương nương của chúng ta”, và không ai còn phải quỳ dâng trà dưới nắng.",
    ht:"từ cung nữ lên ngôi Quý phi mà không quên kẻ hầu",ha:"từ cung nữ lên ngôi Quý phi, bắt cả lục cung cúi đầu",

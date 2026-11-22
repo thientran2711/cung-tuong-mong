@@ -206,14 +206,14 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
   oanAdd(c,by,BAL.eff.jmen.menReport);affAdd(c,by,BAL.eff.jmen.menReport_2);
   if(roll(o)){m.alive=false;log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: bắt được ${nm} cùng ${c===S?"ngươi":`${rkName(c)} ${c.name}`} ở ${at}. ${nm} bị xử trảm.</span>`);
    gain({danh:4});if(c===S)deathSentence(`Bị ban chết vì tư thông với ${nm}`);else deathSentence(c,`tư thông với ${nm}`);return true}
-  m.ban=wk()+MEN.banS;log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"} chuyện ở ${at}; ${c===S?"ngươi":`${rkName(c)} ${c.name}`} chối phăng, chỉ ${nm} bị đánh trượng, đuổi ra ngoại triều.</span>`);gain({danh:-2});return false}
- if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);
+  m.ban=wk()+MEN.banS;oanAdd(m,by,BAL.relMS.grudge);/* rel-men-servants: beaten and sent out on her word */log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"} chuyện ở ${at}; ${c===S?"ngươi":`${rkName(c)} ${c.name}`} chối phăng, chỉ ${nm} bị đánh trượng, đuổi ra ngoại triều.</span>`);gain({danh:-2});return false}
+ if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);oanAdd(m,by,BAL.relMS.grudge);
   if(roll(o)){log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} và ${c===S?"ngươi":`${rkName(c)} ${c.name}`} gặp riêng ở ${at}${y.r==="letter"?", trao thư lén":""}.</span>`);
    punish(c,y.r==="letter"?"trao thư lén cho nam nhân ra ngoài cung":"gặp riêng nam nhân nơi cấm địa",formal?2:1);gain({danh:3});
    if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:BAL.eff.jmen.unhappySung});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+2,-100,100);return true}
   log(`<span class="r">${menCap(byT)} trình Cung Chính ti chuyện ở ${at}, nhưng không đủ chứng: ${c===S?"ngươi":`${rkName(c)} ${c.name}`} vô can; ${byT} mang tiếng vu khống.</span>`);gain({danh:-5});return false}
- m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;gain({danh:formal?3:2});if(by===S)S.th=cl((S.th||0)+1,-100,100);
- if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1}}}
+ m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;oanAdd(m,by,BAL.relMS.grudge);gain({danh:formal?3:2});if(by===S)S.th=cl((S.th||0)+1,-100,100);
+ if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1;oanAdd(g,by,BAL.relMS.grudge2)}}}
  log(`${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
 /* by hides m (and c): a debt and evidence; found → by is punished */
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
@@ -266,7 +266,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
     if(roll(o)){/* her threat's success odds (BAL); what he reveals = what he really knows (npwPick below) */const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const TW=BAL.ag.why.men.tell;const v=npwPick(T,v=>v.affair===m.id?TW.own:m.likeV===v.id?TW.like:TW._);const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}
      apply({bac:BAL.eff.jmen.bacRun});m.af=(m.af||0)-10;return `Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc ${balSg(BAL.eff.jmen.bacRun)}.`}
-    m.grudge="me";m.grudgeN=2;m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();
+    m.grudge="me";m.grudgeN=2;oanAdd(m,S,BAL.relMS.grudge);m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const o of npcWhyAll("menGrudge")){const m=o.who;
   m.grudgeN--;menStat("revenge");apply({danh:BAL.eff.jmen.danhTop_2});ev+=`<span class="r">Trong cung rộ lời đồn ác ý về ngươi; nghe nói phát ra từ đám ${m.rw==="thị vệ"?"thị vệ":"người ngoài cung"} từng bị ngươi làm khó. Danh ${balSg(BAL.eff.jmen.danhTop_2)}.</span> `}}}catch(e){}return ev}})();
 

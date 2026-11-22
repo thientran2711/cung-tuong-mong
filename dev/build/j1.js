@@ -54,7 +54,7 @@ const TUAN=["thượng tuần","trung tuần","hạ tuần"];
 const MAIDS=NM_MAID;
 const PRINCE=NM_PX;
 const PRINCESS=NM_PRINCESS;
-const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu → ta: thiện cảm",hh:"Hoàng hậu → ta: thiện cảm",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Lòng cung nữ"};
+const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu → ta: thiện cảm",hh:"Hoàng hậu → ta: thiện cảm",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Thiện cảm của cung nữ"};
 const ETRAITS={
  danghi:["Đa nghi","Mưu kế dễ bị lộ hơn, nhưng lời vu cáo khó gỡ hơn."],
  mesac:["Mê sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."],

@@ -60,7 +60,7 @@ function plxServants(){const out=[];try{const b=S.buoi||0,night=b>=(typeof B4L==
  const others=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))others.push(s);
  const pickN=(L,n)=>L.map(s=>[plxHash(s.sid+":"+bkeyNow()+":"+b),s]).sort((x,y)=>x[0]-y[0]).slice(0,n).map(x=>x[1]);
  const ent=s=>({kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):s.role==="maid"?"Cung nữ":"Thái giám"} · ${s.role==="maid"?"cung nữ":"thái giám"} nghỉ tay`});
- if(night){if(S.maid)out.push({kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · lòng ${S.maid.loyal}`});mine.forEach(s=>out.push(ent(s)))}
+ if(night){if(S.maid)out.push({kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`});mine.forEach(s=>out.push(ent(s)))}
  pickN(others,night?3:2).forEach(s=>out.push(ent(s)))}catch(e){}return out}
 function bkeyNow(){try{return `${S.year}/${S.month}/${S.tuan}`}catch(e){return""}}
 function plxTgk(){const out=[];try{out.push({kind:"npc",name:"Quản sự Tân Giả khố",ini:"Quản",col:"#8a8aa0",info:"Quản sự · trông coi việc giặt giũ"});
