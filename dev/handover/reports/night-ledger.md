@@ -270,3 +270,32 @@ Shots LOOKED 3× (scratch /home/user/wt/nlr-out, not git, not uploaded): host Fo
 3. coop-night 4b «the guest really missed the host's fin once» 1 of 3 (worker: 1 of 5): DUMP shows the guest `nfOn false` that day (no fin word exists to drop) → the assert must be n/a when her night relay is off (log why: nfDebug().why), not a FAIL; keep it a FAIL when nfOn is true.
 4. Re-run the full gate list on the fixed head: coop-ledger ×4 + DEVSWAP ×4 + NOREV both seats, coop-night ×3 111/111, coop-night0, night-coop-park ×4 (13 cases), coop-e2e ×3, quickcheck, one-core, undef, role-parity ALL PASS, ledger / night-final / night-multi.
 Scratch: /home/user/wt/nlr-out (logs, shots; not git).
+
+## FIX r3 — HANDOVER (worker session_01N1tNP3C4XN63dXNqw9oz1w; context at the rollover ceiling → the coordinator opens the successor)
+PRIORITY #1 CHECK: «REVIEW coop r2» FAIL 1–4 (above) | OD 15/11 ~21:25Z / ~22:55Z (co-op clock: when time runs out the buổi advances for both, open dialogs resolved safely / carried; a real choice is never made for her — jcooptimer autoRead) | OD L1479 (flip choice timeout = Thôi) | precedent jcoopworld coop-cyhold (AFK friend's card bounded by BAL.coop.cyWaitMs, «no answer» outcome) | main LIVE 35f5b5ab.
+Branch **review/night-ledger-coop-r3 @5efd53fb** (from rv 135945ed). WIP — NOT ready for review.
+
+### Done
+1. **FAIL 1 reproduced deterministically, BOTH seats.** coop-night `FORCE4=g` (the host's `ldRoll(friend)` pins the played tối on the guest before the flip) and `FORCE4=h` (pinned on the host; mirrored: the HOST is AFK, the guest presses). Without a fix both stall: the AFK holder sits on her own `ksp` «Kính sự phòng báo tin» (3 real roads: Tắm gội chờ giá / Tiến cử … hầu thay / Cáo bệnh), her week end never goes (guest: COOPW.sent 2, host already in the next day waiting). In h, a non-night real choice («Một ánh mắt») even sat on top of her ksp.
+2. **Game fix written (jcooptimer.js `nightAfk` / `nafWait`, BAL.coopTm.nightMs = 30000, one core):** her own night dialogs on top of Q while the partner waits on her (her tối overdue, or CW.ngoW = this week) for nightMs close WITH NO ANSWER (no road taken): summons (ksp, nfsum, amNight) → S.tonight = null (the same state Cáo bệnh / a passed night leaves; ldSettle records the played tối as nobody's); the night itself (prep, night1, night2) → passes quietly, nothing more gained. Kit line + log «Quá giờ chờ: …». Called from the clock tick (not from dueTick: dueTick returns while her own `due` is empty, which is the guest's case when the host commits and steps on).
+3. coop-night **4b**: n/a (with nfOn + why per seat, before and after the presses) when a seat's night relay is off; FAIL only when nfOn is true on both.
+
+### NOT done / open (successor)
+- **nightAfk does not fire yet**: run g2/h2 on the build before 5efd53fb: `COOPW.nafN` 0 on the AFK seat (h: still stuck on ksp; g: the guest left at 114.4 s, just over the 114 s bound, nafN 0 — something else freed her). 5efd53fb adds the debug hook `COOPW.tm.naf()` (pid, buoi, sent, wk, pend, overdue, due, myKey/roomKey, ngoW, HOLD, inLife, nafWait, seen, age) printed in coop-night «4 AFK seat:» → run `FORCE4=h node dev/test/coop-night.js <out>` and `FORCE4=g …` and read which nafWait term is false. Suspects: on the host-AFK seat `overdue()` false (due ≠ myKey after forceNight) and CW.ngoW ≠ wkN; or Q[0] object identity changes per render (NA.m !== m every tick → never ages).
+- **Non-night real choices on top of her summons** (h: «Một ánh mắt») also freeze the room at an overdue tối — the same family. Owner OD 15/11 ~21:25Z says time out = the buổi advances, open dialogs carried. Decide: carry them (keep in Q, do not block her night step) or bound them the same way; check OD first; keep case 3 (a reading host, clock not out: nobody advances) green.
+- LAW 11 table (to finish and prove):
+
+| her dialog at an overdue tối | where | bound today | r3 |
+|---|---|---|---|
+| nfch (flip choice) | jnf | own 10 s clock → Thôi (OD L1479) | unchanged |
+| flip / reveal scenes (kcf, kfgain) | jflip / jfx | jnf CAP drop (waitMs − ms) | unchanged |
+| ksp (Kính sự phòng báo tin) | j8 / j75 / jnf / jcoopworld / jcoopthine | none → FREEZE | nightAfk: no answer → not serving |
+| nfsum (Hoàng thượng đổi ý) | jnf | none | nightAfk (summons) |
+| amNight (maid road summons) | jagmaid | none | nightAfk (summons) |
+| prep / night1 / night2 (the night) | j8 / j75 | none | nightAfk: night passes quietly |
+| any other real choice (night event, «Một ánh mắt») | many | none at overdue tối (case 3 wants a reading host to hold) | OPEN (above) |
+
+- **FAIL 2** (coop-e2e same-world S.emp.mood 1/6 + S.fidUsed.49): not investigated. Plan: coop-e2e ×5 branch vs LIVE ×5 on one box; if the branch rate is higher, look at the guest gSettle `night(S)` / the host ldSettle `night(h)` running after the week end (a mood write outside the merged world).
+- Gates (none run on r3 yet): coop-night ×5 111/111 incl. FORCE4=g ×3 and FORCE4=h ×3, coop-e2e ×5, coop-ledger ×4 + DEVSWAP ×4 + NOREV both, coop-night0, night-coop-park ×4 (13), quickcheck, one-core (PASS on 5efd53fb), undef, role-parity, ledger / night-final / night-multi.
+- Tips: page tests need `python3 dev/build/assemble.py && bash dev/site/build_site.sh`; one coop-night run ≈ 12–15 min; 2 in parallel are fine on this box.
+Scratch logs: /home/user/wt/nlr2-out/r3 (g1/h1 = no fix firing, g2/h2 = tick-called nightAfk; not git).
