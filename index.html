@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b238857f+","t":"2026-11-22T13:47Z","c":"coop-famops-p-r: merge LIVE 35f5b5ab (coop-one-world-flake; test files only, index.html rebuilt)","b":"b3c4934933c5","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
+window.CTM_BI={"s":"8044a63c+","t":"2026-11-22T16:51Z","c":"coop-guest-men: palace men + Thái hậu illness as jcoopask request kinds (man, th)","b":"91fd05dc7258","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38544,7 +38544,7 @@ window.mortKill=function(p,why){return kill(p,why,kidSet())};
 (function(){const i0=illMonth;illMonth=function(){if(!M.on||!S)return i0.apply(this,arguments);
  const e=S.emp&&S.emp.ill&&S.emp.ill.mort?S.emp.ill:null,t=S.thIll&&S.thIll.mort?S.thIll:null;if(e)S.emp.ill=null;if(t)S.thIll=null;
  /* the old Thái hậu illness (j13) killed on its own; her lifespan now carries most of that: a critical old illness keeps its death roll only thIllKeep % of months */
- if(!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;
+ if((typeof worldOn!=="function"||worldOn())&&!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;/* review/coop-guest-men r1: a world roll (the Thái hậu's illness is the host's, HOST_ONLY thIll), host only like j13 */
  let ev=i0.apply(this,arguments);if(e)S.emp.ill=e;if(t&&!S.thDead)S.thIll=t;if(S.dead)return ev;return ev+monthMort()}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-M.pre.omenSuc*p.ill.st});return ""}
  const had=!!illOf(p);let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;
@@ -75009,26 +75009,26 @@ function collect(d){const B=CW.base&&CW.base.W&&CW.base.W.R||[];const bm=new Map
     jrd_bd bdMan / jrd_pt pfMan) or a change her own act / road makes to a palace man (he dies: affairExposed, j24, j95accuse, jmen report,
     jagstaff, jroute, jpq mortKill; he leaves or comes back: bdMan / pfMan away / ban) was dropped at her next rebuild. Each becomes a
     request kind "man" (one per man, the latest state replaces an older open one); the host applies it (hMan), she sees a stand-in till then.
-    Diff against the host's set she was last rebuilt from (CW.base): her world loops are muted / her-only on this seat (jcoopone), so what
+    Diff against the host's set she was last rebuilt from (CW.askSnap, taken in deser before settle): her world loops are muted / her-only on this seat (jcoopone), so what
     differs is hers. The menInit / jmen set (ids m0, m1 …) is the host's: never asked. */
- const BM=CW.base&&CW.base.W&&CW.base.W.S&&CW.base.W.S.men;
+ const SN=CW.askSnap,BM=SN&&SN.men;/* review r1 F2: her own snapshot of the host's set at her last rebuild (CW.base can move mid-week without a rebuild) */
  if(Array.isArray(BM)&&Array.isArray(d.S.men)){const bmm=new Map(BM.filter(Boolean).map(m=>[m.id,m])),now=new Set();
   for(const m of d.S.men){if(!m||m.id==null)continue;const b=bmm.get(m.id);let f=null;
    if(!b){if(/^m\d+$/.test(String(m.id)))continue}
    else{f={};if(m.alive===false&&b.alive!==false)f.alive=false;for(const k of MAN_F)if(JSON.stringify(m[k]==null?null:m[k])!==JSON.stringify(b[k]==null?null:b[k]))f[k]=m[k]==null?null:J(m[k]);if(!Object.keys(f).length)continue}
-   const id="man:"+m.id+":"+manSig(m,f);now.add(id);
+   const id="man:"+m.id+":"+manSig(m,f)+"@"+(SN.g||0);now.add(id);/* @g: the rebuild it was seen from (the same change again later is a new request, never an old answer) */
    for(let i=L.length-1;i>=0;i--){const o=L[i];if(o&&o.k==="man"&&o.mid===m.id&&o.id!==id)L.splice(i,1)}
    add({id,k:"man",mid:m.id,v:J(m),f})}
   /* her change is gone again (or the host's set now holds it): an open older request of that man is void */
   for(let i=L.length-1;i>=0;i--){const o=L[i];if(o&&o.k==="man"&&!now.has(o.id))L.splice(i,1)}}
  /* same family, HOST_ONLY thIll (review/coop-guest-men): her own act nurses / cures / eases the Thái hậu (j71 thbenh, j72 easeTH, jface cure)
-    → request kind "th" {b: the host's value she saw, v: hers}. Her week end's own illness rolls are taken back (thWk below), so what
-    differs from the host's value here is her act. */
- {const bS=CW.base&&CW.base.W&&CW.base.W.S;if(bS){const b=bS.thIll==null?null:bS.thIll,v=d.S.thIll==null?null:d.S.thIll;
-  const diff=!d.S.thDead&&!bS.thDead&&JSON.stringify(b)!==JSON.stringify(v),id=diff?"th:"+JSON.stringify(b)+">"+JSON.stringify(v):null;
+    → request kind "th" {b: the host's value she saw at her last rebuild, v: hers}. Every world roll of it is host-only (j13 illMonth and
+    jmort's month: worldOn), so what differs on her seat is her act, wherever it resolves (an act, a dialog, a j72 wait step in her week end). */
+ {const bS=CW.askSnap;if(bS){const b=bS.th==null?null:bS.th,v=d.S.thIll==null?null:d.S.thIll;
+  const diff=!d.S.thDead&&!bS.thDead&&JSON.stringify(b)!==JSON.stringify(v),id=diff?"th:"+JSON.stringify(b)+">"+JSON.stringify(v)+"@"+(bS.g||0):null;/* @g: see man */
   for(let i=L.length-1;i>=0;i--){const o=L[i];if(o&&o.k==="th"&&o.id!==id)L.splice(i,1)}
   if(diff)add({id,k:"th",b:J(b),v:J(v)})}}
- d.S.coopAsk=J(L);
+ d.S.coopAsk=J(L);if(CW.askSnap)d.S.askSnap=J(CW.askSnap);/* rides her own saved week: a rejoin's restore takes it back (the room's C may already hold her own road's man) */
  if(fresh.length)setTimeout(()=>{try{if(COOP.state.status==="open")COOP.send({t:"act",k:"ctm-ask",mode:"ask",id:"ask:"+fresh.map(a=>a.id).join(","),L:J(fresh)})}catch(e){}},0)}
 (function(){const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(guest()&&live()&&d&&d.S&&d.R)collect(d)}catch(e){console.error("ask collect",e)}return d}})();
 
@@ -75084,8 +75084,9 @@ function hMan(a){if(!a.v||a.mid==null)return 0;if(!Array.isArray(S.men)){try{men
  for(const k of MAN_F)if(k in f){if(f[k]==null)delete m[k];else m[k]=J(f[k])}return 1}
 /* her act on the Thái hậu's illness: applied on the value she saw; the host's own roll since then: a cure still cures, an eased stage eases
    the host's illness by the same steps (solo rules: j71 cure = null, j72 easeTH = one stage); anything else is stale (0, nothing changes) */
+const illEq=(x,y)=>x==null||y==null?x==null&&y==null:x.k===y.k&&(x.st|0)===(y.st|0)&&!!x.mort===!!y.mort;
 function hTh(a){if(S.thDead)return 0;const cur=S.thIll==null?null:S.thIll,b=a.b==null?null:a.b,v=a.v==null?null:a.v;
- if(JSON.stringify(cur)===JSON.stringify(b)){S.thIll=J(v);return 1}
+ if(illEq(cur,b)){S.thIll=J(v);return 1}
  if(v==null){S.thIll=null;return 1}
  if(cur&&b&&v.k===b.k&&cur.k===b.k&&(v.st|0)<(b.st|0)){cur.st=Math.max(1,(cur.st|0)-((b.st|0)-(v.st|0)));return 1}return 0}
 const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid,srvout:hSrvOut,man:hMan,th:hTh};CW.askH=H;/* other modules add their kinds here (jdc: dcout / dcin) *//* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
@@ -75097,19 +75098,41 @@ function hostApply(L,why){if(!host()||!live()||!Array.isArray(L))return 0;S.askD
   for(const id of Object.keys(S.askDone))if(!open.has(id)&&!cur.has(id)&&wk()-(S.askDone[id][1]||0)>=3)delete S.askDone[id]}catch(e){}
  return n}
 CW.askApply=hostApply;CW.askN=N;CW.askSettle=settle;/* test hook (staff-root-fix-1: settle on a blob, both returns) */
-(function(){const f=deser;deser=function(d){try{if(guest()&&CW.base&&!CW.inLife&&d&&d.S&&Array.isArray(d.R))settle(d)}catch(e){console.error("ask settle",e)}
+/* rejoin / reload: CW.restore replays HER OWN saved week (deser of her ser): not a host rebuild, so the snapshot stays the one of the room's C */
+if(typeof CW.restore==="function"){const f=CW.restore;CW.restore=function(){CW.askOwn=(CW.askOwn||0)+1;try{return f.apply(this,arguments)}finally{CW.askOwn--}}}
+(function(){const f=deser;deser=function(d){try{if(guest()&&CW.base&&d&&d.S&&Array.isArray(d.R)&&!CW.askOwn){
+  /* review r1 F2: the host's palace men + Thái hậu illness as THIS rebuild (or her first life) gives them, before her stand-ins: what
+     collect diffs against. Kept equal to the host's truth between rebuilds by the host's live world fixes (ctm-wfix, below). */
+  /* from the room's C this rebuild comes from (CW.base, set before fromCanon), not d: a deser wrapper outside this one may already have put her
+     own road's man into d (review r2: after a rejoin her open request was voided) */
+  const bS=CW.base.W&&CW.base.W.S||d.S;CW.askG=(CW.askG||0)+1;
+  CW.askSnap={g:CW.askG,men:Array.isArray(bS.men)?J(bS.men):null,th:bS.thIll==null?null:J(bS.thIll),thDead:!!bS.thDead};if(!CW.inLife)settle(d)}
+  else if(CW.askOwn&&guest()&&CW.base&&!CW.inLife&&d&&d.S&&Array.isArray(d.R)){if(d.S.askSnap&&typeof d.S.askSnap==="object")CW.askSnap=J(d.S.askSnap);settle(d)}}catch(e){console.error("ask settle",e)}
  const r=f.apply(this,arguments);
  try{if(guest()&&S&&S.askNote&&S.askNote.length){for(const l of S.askNote)log(l);S.askNote=null}}catch(e){}
  try{if(host()&&live()){const fP=CW.base.P&&CW.base.P.b;if(fP&&!fP.dead&&fP.S)hostApply(fP.S.coopAsk,"base")}}catch(e){console.error("ask base",e)}return r}})();
+/* review r1 F2: the host's live world fixes (jcoophl ctm-wfix: ops written straight into her S between merged weeks) are the host's truth:
+   the same ops go onto her snapshot first (this listener runs before jcoophl's, in the same dispatch), so a host write is never read as hers */
+function snapOps(ops){const SN=CW.askSnap;if(!SN||!Array.isArray(ops))return;const sh={men:SN.men,thIll:SN.th};
+ const idOf=e=>e&&typeof e==="object"?(e.id!=null?e.id:e.sid):undefined,hit=(a,x)=>Array.isArray(x)?a.findIndex(e=>e&&(x[0]==="i"?e.id===x[1]:e.sid===x[1])):-1;
+ const walk=(o,rest)=>{for(const x of rest){if(o==null)return undefined;if(Array.isArray(x)){if(!Array.isArray(o))return undefined;const i=hit(o,x);o=i>=0?o[i]:undefined}else o=o[x]}return o};
+ for(const op of ops){try{const [t,p]=op;if(!Array.isArray(p)||p[0]!=="S"||!(p[1]==="men"||p[1]==="thIll"))continue;const key=p[1],rest=p.slice(2);
+  if(!rest.length){if(t==="s")sh[key]=op[2]==null?null:J(op[2]);else if(t==="d")sh[key]=null;
+   else if(t==="a"&&Array.isArray(sh[key])){const e=J(op[2]);if(!sh[key].some(x=>idOf(x)===idOf(e)))sh[key].push(e)}
+   else if(t==="r"&&Array.isArray(sh[key])){const i=sh[key].findIndex(x=>idOf(x)===op[2]);if(i>=0)sh[key].splice(i,1)}continue}
+  const last=rest[rest.length-1],par=walk(sh[key],rest.slice(0,-1));if(par==null||typeof par!=="object")continue;
+  if(Array.isArray(last)){if(!Array.isArray(par))continue;const i=hit(par,last);if(t==="d"){if(i>=0)par.splice(i,1)}else if(t==="s"){const nv=J(op[2]);if(i>=0)par[i]=nv;else par.push(nv)}continue}
+  if(t==="d")delete par[last];else if(t==="s")par[last]=op[2]==null?op[2]:J(op[2]);
+  else if((t==="a"||t==="r")&&Array.isArray(par[last])){const arr=par[last];if(t==="a"){const e=J(op[2]);if(!arr.some(x=>idOf(x)===idOf(e)))arr.push(e)}else{const i=arr.findIndex(x=>idOf(x)===op[2]);if(i>=0)arr.splice(i,1)}}
+ }catch(e){console.error("ask snapOps",e)}}
+ SN.men=sh.men;SN.th=sh.thIll==null?null:sh.thIll}
+COOP.on("act",m=>{try{if(!guest()||!m||m.k!=="ctm-wfix"||m.from===CW.seat||m.ask||CW.inLife)return;snapOps(m.ops)}catch(e){console.error("ask wfix",e)}});
+CW.askSnapOps=snapOps;/* test hook */
 /* the live relay: applied now when this week's `end` has not gone yet (else the copy in her blob comes with the merged week) */
 COOP.on("act",m=>{try{if(!host()||!m||m.from===CW.seat||m.k!=="ctm-ask"||!live())return;const e=COOP.state.ended||{};if(CW.sent===wk()||e.a)return;
  if(hostApply(m.L,"live"))try{render()}catch(x){}}catch(e){console.error("ask live",e)}});
 
 /* ---------- world events that roll once, on the host ---------- */
-/* thWk (review/coop-guest-men): the Thái hậu's illness is the host's (HOST_ONLY thIll); her week end's own rolls of it (j13 illMonth is
-   guarded, jmort's month is not) are taken back on the guest, so only her ACTS on it become a "th" request */
-if(typeof endTurn==="function"){const f=endTurn;endTurn=function(){if(!guest()||!live())return f.apply(this,arguments);const t0=J(S.thIll==null?null:S.thIll),d0=!!S.thDead;
- try{return f.apply(this,arguments)}finally{try{if(S&&!S.thDead&&!d0)S.thIll=t0}catch(e){}}}}
 if(typeof tuyenTu==="function"){const f=tuyenTu;tuyenTu=function(){if(guest())return;return f.apply(this,arguments)}}
 if(typeof tdSoMonth==="function"){const f=tdSoMonth;tdSoMonth=function(){if(!guest())return f.apply(this,arguments);
  let T=null,y0;try{T=trS();y0=T.tyY;T.tyY=S.year}catch(e){}try{return f.apply(this,arguments)}finally{try{if(T&&T.tyY===S.year)T.tyY=y0}catch(e){}}}}
@@ -94326,7 +94349,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b3c4934933c5";window.CTM_BUILD=BUILD;
+const BUILD="91fd05dc7258";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -121,7 +121,7 @@ window.mortKill=function(p,why){return kill(p,why,kidSet())};
 (function(){const i0=illMonth;illMonth=function(){if(!M.on||!S)return i0.apply(this,arguments);
  const e=S.emp&&S.emp.ill&&S.emp.ill.mort?S.emp.ill:null,t=S.thIll&&S.thIll.mort?S.thIll:null;if(e)S.emp.ill=null;if(t)S.thIll=null;
  /* the old Thái hậu illness (j13) killed on its own; her lifespan now carries most of that: a critical old illness keeps its death roll only thIllKeep % of months */
- if(!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;
+ if((typeof worldOn!=="function"||worldOn())&&!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;/* review/coop-guest-men r1: a world roll (the Thái hậu's illness is the host's, HOST_ONLY thIll), host only like j13 */
  let ev=i0.apply(this,arguments);if(e)S.emp.ill=e;if(t&&!S.thDead)S.thIll=t;if(S.dead)return ev;return ev+monthMort()}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-M.pre.omenSuc*p.ill.st});return ""}
  const had=!!illOf(p);let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;

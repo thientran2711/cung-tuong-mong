@@ -8,7 +8,8 @@
    4 durable path: relay dropped, she rejoins before the week ends; a Phù Tang road man (jrd_pt pfMove) → request survives her blob →
      host applies it at the rebuild → both see him.
    5 a man of the host's own set (m0…) is never asked; nothing asked when nothing changed; rejoin: both still agree.
-   6 same family (HOST_ONLY thIll): her act eases / cures the Thái hậu → the host's illness too; it never comes back at her rebuild.
+   6 same family (HOST_ONLY thIll): her act eases / cures the Thái hậu → the host's illness too; it never comes back at her rebuild;
+     6d her ease resolving INSIDE her week end (review r1 F1); 6g no request from the host's own value (review r1 F2).
    Helpers copied from coop-guest-maid.js (from coop-e2e.js).  usage: node dev/test/coop-guest-men.js [outdir] [workerURL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
 const {serve,BASE}=require('./coop-serve.js');
@@ -121,27 +122,49 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  await DROP(B);const r4=await B.p.evaluate(()=>{pfMove('huuthanh','kinh');const m=S.men.find(x=>x.id==='mpt_huuthanh');try{render()}catch(e){}return m?m.name:null});
  ok(!!r4,'4 guest: her Phù Tang road brings Kim Hựu Thành (relay dropped)',r4);await asks(B);await B.p.waitForTimeout(2500);
  ok(!(await man(A,'mpt_huuthanh')),'4 host: nothing yet (relay dropped)');
+ console.log('4 before rejoin',JSON.stringify(await B.p.evaluate(()=>({asks:(S.coopAsk||[]).map(a=>a.id),snap:COOPW.askSnap&&(COOPW.askSnap.men||[]).map(m=>m.id),men:(S.men||[]).map(m=>m.id)}))));
  ok(await rejoinB(B,code),'4 guest: left and rejoined before the week end');await clear(A);await clear(B);
+ console.log('4 after rejoin',JSON.stringify(await B.p.evaluate(()=>({asks:(S.coopAsk||[]).map(a=>a.id),snap:COOPW.askSnap&&(COOPW.askSnap.men||[]).map(m=>m.id),men:(S.men||[]).map(m=>m.id)}))));
  {const g=await man(B,'mpt_huuthanh');const a=await asks(B);ok(g&&a.some(x=>x.startsWith('man:mpt_huuthanh:')),'4 guest: stand-in + request survive the rejoin',{g,a})}
  await weekAll(A,B,'4a');
- ok(!!(await man(A,'mpt_huuthanh'))&&(await A.p.evaluate(()=>((window.__askN||{}).log||[]).some(l=>/^base man:mpt_huuthanh/.test(l)))),'4 host: applied from her blob at the rebuild');
+ ok(!!(await man(A,'mpt_huuthanh'))&&(await A.p.evaluate(()=>((window.__askN||{}).log||[]).some(l=>/^base man:mpt_huuthanh:/.test(l)))),'4 host: applied from her blob at the rebuild');
  await weekAll(A,B,'4b');
  {const g=await man(B,'mpt_huuthanh'),h=await man(A,'mpt_huuthanh');ok(g&&h&&g.name===h.name,'4 both: he is there two weeks later',{g,h})}
- /* 6 same family, HOST_ONLY thIll: her own act on the Thái hậu's illness (j71 thbenh cure = KIT_FACEFX.api.cure, j72 easeTH = one stage) */
+ /* 6 same family, HOST_ONLY thIll: her own act on the Thái hậu's illness (j72 easeTH = one stage, j71 thbenh cure = KIT_FACEFX.api.cure).
+    review r1 F3: the host's own month roll may change the illness during a week, so the set-up re-sets it until both seats show st 3, and
+    every check reads the PAIR + the host's applied "th" request (b → v), never a fixed stage after a merged week. */
  const th=o=>o.p.evaluate(()=>S.thIll==null?null:{k:S.thIll.k,st:S.thIll.st});
- await A.p.evaluate(()=>{S.thDead=false;S.thIll={k:'phonghan',st:3,known:true};try{render()}catch(e){}});await weekAll(A,B,'6a');
- {const g=await th(B),h=await th(A);ok(g&&h&&g.st===h.st&&h.st>=2,'6 both: the Thái hậu is ill (host\'s roll)',{g,h});
-  const want=h?h.st-1:0;await B.p.evaluate(()=>{const i=S.thIll;if(i.st>1)i.st--;else S.thIll=null;try{render()}catch(e){}});/* easeTH's body (j72:308, a closure) */
-  ok(await until(A,w=>S.thIll&&S.thIll.st===w,want,20000),'6 host: her act eased the illness one stage (relay)',await th(A));
-  await weekAll(A,B,'6b');const g2=await th(B),h2=await th(A);ok(g2&&h2&&g2.st===h2.st&&h2.st<=want,'6 both: eased after the merged week (her act stands)',{g2,h2,want})}
+ const thLog=()=>A.p.evaluate(()=>((window.__askN||{}).log||[]).filter(l=>/ th:/.test(l)));
+ async function ill3(tag){for(let i=0;i<4;i++){await A.p.evaluate(()=>{S.thDead=false;S.thIll={k:'phonghan',st:3,known:true};try{render()}catch(e){}});await weekAll(A,B,tag+i);
+   const g=await th(B),h=await th(A);if(g&&h&&g.st===3&&h.st===3)return true}return false}
+ /* diagnostics: every change of thIll on the guest with the week / buổi and the last log line (who changed it) */
+ await B.p.evaluate(()=>{window.__thw=[];let last=JSON.stringify(S&&S.thIll||null),lo=null;setInterval(()=>{try{const v=JSON.stringify(S&&S.thIll||null);const L=(S.logs||[]);if(v!==last){window.__thw.push([__co().week,S.buoi||0,last,v,(COOPW.askSnap&&JSON.stringify(COOPW.askSnap.th))||'',String(L[L.length-1]||'').slice(0,140),String(L[L.length-2]||'').slice(0,100)]);last=v}}catch(e){}},40)});
+ ok(await ill3('6a'),'6 both: the Thái hậu is ill, stage 3 on both seats (host\'s value)');
+ await B.p.evaluate(()=>{const i=S.thIll;if(i.st>1)i.st--;else S.thIll=null;try{render()}catch(e){}});/* easeTH's body (j72:308, a closure) */
+ ok(await until(A,()=>S.thIll&&S.thIll.st===2,null,20000),'6 host: her act eased the illness 3 → 2 (relay)',await th(A));
+ await weekAll(A,B,'6b');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r1$/.test(l)),'6 both: same illness after the merged week, her ease applied (3 → 2)',{g,h,L})}
+ /* 6d (review r1 F1): her act RESOLVES inside her week end (j72 th_thuoc2's wait step ends in q72Tick, endTurn → easeTH); hook as the review repro */
+ ok(await ill3('6c'),'6d both: stage 3 again');
+ /* reached = applied (r1) or refused because the host's own roll moved the illness meanwhile (r0, solo rule: nothing left to ease) */
+ const E33=l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r[01]$/.test(l),n33=(await thLog()).filter(E33).length;
+ await B.p.evaluate(()=>{window.__wke=null;window.__rtN=0;const q0=rivalsTurn;rivalsTurn=function(){window.__rtN++;const r=q0.apply(this,arguments);try{if(!window.__wke&&S.thIll){const b=S.thIll.st;if(S.thIll.st>1)S.thIll.st--;else S.thIll=null;window.__wke=[b,S.thIll&&S.thIll.st]}}catch(e){}return r}});
+ await weekAll(A,B,'6d');
+ {const w=await B.p.evaluate(()=>window.__wke),rtN=await B.p.evaluate(()=>[window.__rtN,rivalsTurn.toString().slice(0,60)]),L=await thLog(),g=await th(B),h=await th(A);ok(w&&w[0]===3&&w[1]===2,'6d guest: her ease ran inside her week end',{w,rtN});
+  ok(L.filter(E33).length>n33,'6d host: the "th" request of her week-end ease reached the host',L);
+  if(!(h&&g))await weekAll(A,B,'6d+');ok(JSON.stringify(await th(B))===JSON.stringify(await th(A)),'6d both: same illness (her week-end ease kept)',{g,h})}
+ /* 6e cure */
+ ok(await ill3('6e'),'6e both: ill again');
  await B.p.evaluate(()=>{KIT_FACEFX.api.cure(S.thO);try{render()}catch(e){}});/* j71 thbenh success: S.thIll=null */
- ok(await until(A,()=>S.thIll==null,null,20000),'6 host: her cure cured the Thái hậu (relay)',await th(A));
- await weekAll(A,B,'6c');{const g=await th(B),h=await th(A);ok(g==null&&h==null,'6 both: cured after the merged week (no illness comes back)',{g,h})}
+ ok(await until(A,()=>S.thIll==null,null,20000),'6e host: her cure cured the Thái hậu (relay)',await th(A));
+ await weekAll(A,B,'6f');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/>null@\d+ w\d+ r1$/.test(l)),'6e both: same after the merged week, her cure applied (no illness comes back from her rebuild)',{g,h,L})}
+ /* 6g (review r1 F2): no request is ever built from the host's own value: every applied "th" request is one of hers (st 3 → 2 or → null) */
+ {const L=await thLog();const bad=L.filter(l=>!/"st":3.*>.*("st":2|null)/.test(l));ok(!bad.length,'6g host: every "th" request is one of her acts (none from the host\'s own value)',{L,thw:await B.p.evaluate(()=>window.__thw)})}
+ console.log('thw',JSON.stringify(await B.p.evaluate(()=>window.__thw)));
  /* 5b rejoin: same set on both, nothing open */
  ok(await rejoinB(B,code),'5 guest: rejoined');await clear(A);await clear(B);
  {const f=o=>o.p.evaluate(()=>(S.men||[]).map(m=>m.id+':'+(m.alive!==false?1:0)+(m.away?'a':'')).sort().join());const la=await f(A),lb=await f(B),a=await asks(B);
   ok(la===lb,'5 both: same palace men (alive / away) after rejoin',{la,lb});ok(!a.length,'5 guest: no open request',a);
-  ok(!a.some(x=>/^man:m\d+:new/.test(x)),'5 guest: never asks for the host\'s own set')}
+  ok(!a.some(x=>/^man:m\d+:new@/.test(x)),'5 guest: never asks for the host\'s own set')}
  await shot(A,'gmen-host');await shot(B,'gmen-guest');
  console.log('askN A',JSON.stringify(await A.p.evaluate(()=>window.__askN)),'B',JSON.stringify(await B.p.evaluate(()=>window.__askN)));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
