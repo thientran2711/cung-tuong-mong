@@ -57,3 +57,16 @@ M2370-05..17 = the M2355 prompt + WHITE only (keep PASS ×13, allow line 'same n
 All walls now clean white; wood/gilt keep their colour. Sheets: …/places-l2370/people/L2370-batch2.jpg (05–09), batch3.jpg (10–13), batch4.jpg (14–17) on https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/
 
 ## Caption stamp (ROOT-C3): the code IS burned into every picture (CAPTION line of the prompt). 0-cr tool `dev/art/place-rank/decap.py IN OUT` (finds the white letters top-left, refills that box with the right-hand neighbour block, feathered). Tested on M2370-01..04: text gone; Ngự hoa viên shows a slight repeat. Run it on every picture at swap time (not done: live swap OFF).
+
+## Redos ordered by ROOT-C3 (06:25Z) — 3 × 135 = 405 cr; PLACES2 total 20 gens = 2 700 cr
+| code | place | Magnific | fix | result |
+|---|---|---|---|---|
+| M2370-18 | Ngự thư phòng (r2 of -06) | dt98SEMXSL | BOOKS sentence: thread-bound books flat + blue cloth cases, never upright ring binders | books flat + cases ✓, floor 16.0 % |
+| M2370-19 | Thượng thư phòng (r2 of -11) | EbWH3L3uuO | same BOOKS sentence | ✓, floor 16.5 % (was 22.9) |
+| M2370-20 | Kính sự phòng (r2 of -09) | xSolTDajfW | FLOOR IN FRONT sentence | floor 6.1 → 10.4 % (still under 12.5; desk base at ~88 %); small golden phoenix pair on the beam (as M2355-06) — not redone (one try) |
+Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l2370/people/L2370-redo.jpg
+
+## Swap prepared (DRY RUN only) — `dev/art/place-rank/swap_L2370.py` (add `--go` on the owner's word)
+17 decapped copies in img/_review/place-rank/places-l2370/swap/ (not uploaded); r2 pictures replace their first version. 15 swap into img/<place>-ha-sang.webp.
+Open: Nội vụ phủ (no img/nvp-ha-sang.webp; live has nvp-v4-* which index.html does not use → which key?), Từ Ninh bedroom (new, no live file; needs a code hook-up).
+Only the hạ-sáng base is swapped; the 15 season×buổi variants per place stay old (separate job). decap corners: text gone in all 17; a few show a cut lantern / curtain block in the top-left corner (under the top bar on Fold).

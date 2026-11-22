@@ -373,5 +373,8 @@
  "M2370-A15": "M2370-A15_th_act-hon_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)",
  "M2370-A16": "M2370-A16_th_act-hanghai_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)",
  "M2370-A17": "M2370-A17_th_act-chuyentam_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)",
- "M2370-A18": "M2370-A18_th_act-hungkhoi_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)"
+ "M2370-A18": "M2370-A18_th_act-hungkhoi_B_burst_LEAN.txt (+ _clips_LEAN, _B_burst_LEAN_REDO where redone; A = own M2349/M2342 A; L2363/L2370 lean-out seals, THACT2)",
+ "M2370-18": "M2370-18_ngu-thu-phong-r2_ha_sang.txt (= M2370-06 + câu sách cổ nằm phẳng, không bìa còng hiện đại)",
+ "M2370-19": "M2370-19_thuong-thu-phong-r2_ha_sang.txt (= M2370-11 + câu sách cổ nằm phẳng)",
+ "M2370-20": "M2370-20_kinh-su-phong-r2_ha_sang.txt (= M2370-09 + câu sàn trống phía trước)"
 }
