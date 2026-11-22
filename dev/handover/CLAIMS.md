@@ -1105,3 +1105,4 @@ coop-flakes (opus; now BIG co-op game fix jcoopask remapS; coop-pets stress roun
 THACT5 | L2381 act seal fixed scale | session_01D3E3NY9DHseZozKjjHVfNB | RUNNING | 2026-11-22T19:10Z
 HIST1 | L2384 prince motif history check | session_01D3E3NbWYkzzWuDPGkJiAPc | RUNNING | 2026-11-22T19:25Z
 coop-real-port (sonnet test-only; port ≈30 RISK co-op drivers to lib/coop-real.js; briefs/D20-coop-real-port.md) | review/coop-real-port | session_01964izFXSeyvCrYfhAxY8EG | RUNNING | 22/11 20:12Z (Foreman D #20)
+| night-ledger-coop r4 fixer #4 (opus BIG co-op; successor of #3 2ntVMAWS at budget; @a7560a79 ⊇ LIVE 40cc2b92; + GAP_LIST_v5 N15) | review/night-ledger-coop-r4; reports/night-ledger.md | B | session_01N1tNP6tXgJZ4M8zrKZms4c | RUNNING | 22/11 20:34Z |
