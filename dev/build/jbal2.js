@@ -126,6 +126,10 @@ Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:80
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
+/* review/coop-flakes (D20): the range of each of her id-keyed links (the same bounds affAdd / oanAdd keep: rl thiện cảm, ro oán) — read by
+   COOPW.keyMove when one person's link moves to another id in co-op (a stand-in → her world id, a renamed person) and must ADD to the link
+   already there */
+BAL.coop.linkRange={rl:[-100,100],ro:[0,100]};
 /* ITEM DETAIL (KIT §70, review/item-info): allow = show "hạn mức phẩm ta N" (her rank's luxury allowance) on the Xa xỉ row of every item detail,
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").

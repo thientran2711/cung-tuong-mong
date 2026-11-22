@@ -91,7 +91,7 @@ const byAsk=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x.coopAsk===id);ret
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
 async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;const wd=o=>o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,bend:COOPW.bend,cyHold:COOPW.cyHold,rp:Object.keys(COOPW.rpend||{}).length,Q:Q.map(m=>String(m&&(m.t||m.pid)||'').slice(0,30)),mg:!!S.mg,b:S.buoi,nx:[document.getElementById('next').disabled,document.getElementById('next').textContent],tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message);
- ok(r,tag+': week advanced for both',r?undefined:{A:await wd(A),B:await wd(B)});await clear(A);await clear(B);return r}
+ ok(r,tag+': week advanced for both',r?undefined:{A:await wd(A),B:await wd(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),cA:await clear(A),q0:await A.p.evaluate(()=>{const m=Q[0];return m?{t:m.t,pid:m.pid,opts:(m.opts||[]).map(o=>String(o&&(o.t||o.n)||'').slice(0,30)+(o&&o.off?'(off)':'')),thin:!!m.thin,dfSeen:!!m.dfSeen,mHidden:document.getElementById('modal').hidden}:null}).catch(e=>e.message)});await clear(A);await clear(B);return r}
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  await B.ctx.addInitScript(()=>{window.__forceOrigin='thd'});
@@ -120,9 +120,14 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  await A.p.evaluate(([T,R])=>{window.__lp={hb:[]};const k=(o,i)=>o&&o[i]!=null?o[i]:null;let last='';window.__lpI=setInterval(()=>{try{const T0=COOPW.thin;const x=T0&&T0.seatOf?T0.seatOf('b'):null;const P=COOPW.base&&COOPW.base.P&&COOPW.base.P.b;
   const y=JSON.stringify([__co().week,x&&x.S?[k(x.S.rl,T),k(x.S.rl,R)]:null,P&&P.S?[k(P.S.rl,T),k(P.S.rl,R)]:null]);if(y!==last){last=y;__lp.hb.push(y)}}catch(e){}},250)},LP);
  await weekAll(A,B,'1');
- const LPD=async()=>({B:await B.p.evaluate(()=>{clearInterval(__lpI);return Object.assign({logs:(S.logs||[]).slice(-12)},__lp)}).catch(e=>e.message),A:await A.p.evaluate(()=>{clearInterval(__lpI);return __lp}).catch(e=>e.message)});
+ const LPD=async()=>({B:await B.p.evaluate(()=>{clearInterval(window.__lpI);return Object.assign({logs:(S.logs||[]).slice(-12)},__lp)}).catch(e=>e.message),A:await A.p.evaluate(()=>{clearInterval(window.__lpI);return window.__lp}).catch(e=>e.message)});
  {const g1=await byAsk(B,id1);const v=await view(B);ok(g1&&g1.id===h1.id&&g1.name===h1.name,'1 guest: sees the same consort (id, name) after the week',{g1,h1});
-  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);ok(g1&&g1.me!=null&&Math.sign(g1.me)===Math.sign(r1.rl)&&Math.abs(g1.me-r1.rl)<Math.abs(r1.rl)&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; the week may move them a little, never double)',{g1,r1,tempKeys:tk,lp:await LPD()})}
+  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);
+  /* D20 coop-flakes: EXACT carry of her links (law 6b real people): at the merge her link to the stand-in (T, moved by her own week) and the
+     week's link to the world id (R, from 0 on the host, j9 affAdd) are ONE person: after the move she has T + R, never R alone (that dropped her
+     25 → −3: mb-5) and never T twice */
+  {const lp=await LPD();const de=(lp.B&&lp.B.de||[]).filter(x=>x.rlT!=null).pop();const clp=x=>Math.max(-100,Math.min(100,x));
+   const exp=de?clp(de.rlT+(de.rlR||0)):null;ok(de&&g1&&g1.me===exp,'1 guest: her link to the new consort = her own link + the week\'s change, exactly',{me:g1&&g1.me,exp,de,lp})}{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);/* D20: her side is checked EXACTLY below (own link + the week's change); a week whose change outweighs her link may legally flip its sign */ok(g1&&g1.me!=null&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; no stand-in key left)',{g1,r1,tempKeys:tk})}
   const va=await view(A);ok(va.R===v.R,'1 both: same consort list',[va.R.length,v.R.length])}
  /* 2 durable path + rejoin */
  const r2=await RISE(B,true);ok(r2.ghost,'2 guest: second maid rose (relay dropped)',r2);

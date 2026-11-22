@@ -180,7 +180,7 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
   for(let i=0;i<4;i++){const o=i%2?B:A;const k=['petcare','thaopet','petsteal'][Math.floor(Math.random()*3)];await act(o,k,Math.random()<.5);await sleep(300)}
   const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);
   if(r%2){await press(B);await act(A,'petcare',false);await press(A)}else{await press(A);await press(B)}
-  {const w=await weekWait(A,wk)&&await weekWait(B,wk);const dbg=async o=>o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,rp:Object.keys(COOPW.rpend||{}).length,Q:Q.length,mg:!!S.mg,b:S.buoi,nx:document.getElementById('next').disabled,tr:COOPW.tr.slice(-6)}));
+  {const w=await weekWait(A,wk)&&await weekWait(B,wk);const dbg=async o=>o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,rp:Object.keys(COOPW.rpend||{}).length,Q:Q.map(m=>String(m&&(m.t||m.pid)||'').slice(0,30)),mg:!!S.mg,dead:!!S.dead,b:S.buoi,nx:[document.getElementById('next').disabled,document.getElementById('next').textContent],cyHold:COOPW.cyHold,cyHer:COOPW.cyHer?COOPW.cyHer():null,ended:COOP.state.ended,inLife:!!COOPW.inLife,tr:COOPW.tr.slice(-16)})).catch(e=>'dbg err '+e.message);
    ok(w,`stress round ${r+1}: week merged`,w?undefined:[await dbg(A),await dbg(B)])}await clear(A);await clear(B);await samePets(A,B,`stress round ${r+1}`)}
  await A.p.screenshot({path:OUT+'/03-host-end.png'});
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));

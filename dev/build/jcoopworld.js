@@ -290,6 +290,13 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W|
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
+/* review/coop-flakes (D20, law 6b: ONE person, ONE link). Move key `from` of an id-keyed map to `to` (a stand-in → her world id: jcoopask
+   settle; a person the host had to give another id: jcoopthinc lens re). When `to` already holds a number it is the SAME person's (the
+   host ran her week with that id; a missing link starts at 0, j9 affAdd), so the two ADD, clamped to BAL.coop.linkRange[pk] for a link map
+   (rl / ro); keeping one and dropping the other lost her thiện cảm (25 → −3, coop-guest-maid). Other values: the one already at `to` stays.
+   to == null: the key is dropped (a refused stand-in). */
+CW.keyMove=function(o,from,to,pk){if(!o||typeof o!=="object"||!(from in o))return;const v=o[from];delete o[from];if(to==null)return;
+ if(!(to in o)){o[to]=v;return}const w=o[to];if(typeof v==="number"&&typeof w==="number"){const L=((BAL.coop||{}).linkRange||{})[pk];const s=v+w;o[to]=L?Math.max(L[0],Math.min(L[1],s)):s}};
 CW.netWrap=function(f,self,args){if(!CW.on||host()||stateOn("netWrap")){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */||cyHer())return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
