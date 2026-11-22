@@ -1293,7 +1293,12 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
- for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci,th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;ops.push(Object.assign({op:"rm",ci,k:e.k,how:th?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
+ for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci;let th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;
+  /* E44e (V «hảo hữu lấy» vanish, law 6c + 1): an NPC thief's laydo on her entry puts the piece in a «thất lạc» case of her entry (jlost loLose:
+     the case holds it, or the thief keeps a COPY via loKeepBy), never this object in a chest → before: «gone» = she lost it with no case, no road back.
+     Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
+  let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
+  ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
  for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
  for(const [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}

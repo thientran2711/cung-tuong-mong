@@ -89,6 +89,19 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    try{c18=ilRob(S,e18,v);CW.seat="a";c18h=ilRob(S,e18h,v)}finally{CW.seat="b";CW.on=on6}
    ck("17d guest seat: a copy's robbery leaves HER case «thất lạc» holding the piece (P2 vanish 10000137)",c18&&c18.st==="lost"&&c18.e===e18&&!v.inv.some(e=>e.iu===e18.iu),{st:c18&&c18.st});
    ck("17e host seat: the robber keeps it as before",c18h&&c18h.st==="held"&&v.inv.some(e=>e.iu===e18h.iu),{st:c18h&&c18h.st});v.inv=v.inv.filter(e=>!(e.iu>9e6))}
+  /* E44e (V «hảo hữu lấy» vanish): HOST seat, a host NPC's theft from her ENTRY (jlost loLose riv, as laydo does; the NPC-turn diff b4Ops, same as the r1 runAct wrapper): the piece goes into a
+     «thất lạc» case of her entry (kept as a COPY by the thief, or held by the case to plant) → the op is «rm lost» by that NPC (her seat opens her case),
+     never «gone» (before: she lost it with no case, the host's case of her entry was the only trace) */
+  reset();{const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&x.out!==true);const on7=CW.on,se7=CW.seat,sd=COOP.send,cg=window.caught,ar=window.aRoll,kp=window.loKeepPick,nk=window.npcKnows,jg=window.j95gate;const sn7=[],nkn0=S.nkn,j9=window.__j95off;
+   const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,maid:{loyal:50}};rivals.push(f);const res=[];
+   try{CW.on=true;CW.seat="a";COOP.send=m=>sn7.push(m);caught=()=>null;aRoll=()=>true;S.nkn=null;window.__j95off=1;
+    for(const kpv of ["keep","plant"]){loKeepPick=()=>kpv;const e=pc(P);e.ci=0;f.inv=[e];S.loSeq=S.loSeq||0;(S.lost||[]).forEach(c=>{if(c.own===902)c.st="done"});
+     v.bac=Math.max(v.bac||0,9999);const n0=sn7.length;let er="";try{CW.b4Run(()=>{const c=loLose(f,{cause:"riv",by:key(v),keep:kpv==="keep"?1:0});er=c?c.st+"@"+(c.at||""):"no case"})}catch(z){er=z.message}
+     const ops=sn7.slice(n0).flatMap(m=>m.fam||[]).filter(o=>o.op==="rm"&&o.iu===e.iu);const c=(S.lost||[]).find(c=>c.e&&c.e.iu===e.iu);res.push({kpv,er,left:!f.inv.includes(e),ops,cst:c&&c.st})}}
+   finally{S.nkn=nkn0;window.__j95off=j9;CW.on=on7;CW.seat=se7;COOP.send=sd;caught=cg;aRoll=ar;loKeepPick=kp;rivals.splice(rivals.indexOf(f),1);v.inv=(v.inv||[]).filter(e=>!(e.iu>9e6))}
+   const okr=r=>r.left&&r.ops.length===1&&r.ops[0].how==="lost"&&r.ops[0].by===v.id;
+   ck("19 host NPC steals from her entry and KEEPS it (copy): «rm lost» by that NPC, never «gone»",okr(res[0]||{}),res[0]);
+   ck("19b host NPC steals to PLANT (the case holds it): «rm lost» by that NPC, never «gone»",okr(res[1]||{}),res[1])}
   /* E44d (law 6c): a lost piece a holder keeps comes back as THAT copy, from THAT holder (lost-one-home-scan DUP: Kỳ ngộ «Giữ lại» → «Lén trả lại» pressed on a case she owns) */
   {reset();const on5=CW.on;CW.on=false;const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&x.out!==true);v.inv=v.inv||[];const vi=v.inv.length;
    try{const mk=()=>{const e=pc(P);S.inv.push(e);const c=loLoseE(S,e,"srv");S.inv.splice(S.inv.indexOf(e),1);loKeepBy(c,v,"kyngo: giữ lại");return c};
