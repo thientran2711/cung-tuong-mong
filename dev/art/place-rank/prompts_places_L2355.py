@@ -148,14 +148,19 @@ P = [
   "green summer leaves over the wall. Plain and humble: grey, white linen, warm wood and green; hard-working but clean, no lanterns, no rich "
   "furniture, no bed anywhere.",
   "GROUND: plain grey brick paving, clean and evenly lit, no rug or carpet."),
- ('a-ca-so', 'A ca sở', 'bed', 2, 'LEFT', 'cheerful, well-furnished room',
-  "A ca sở, the quarters of the young princes in an ancient Chinese palace where a boy prince lives, sleeps, studies and plays, a real "
-  "room in daily use, {W}: pillars, lattice windows in the LEFT side wall onto a sunny garden with light blue gauze curtains; against the "
-  "back wall in its RIGHT half, square to it and seen straight on, the large clear main subject: ONE canopy bed: a carved wooden canopy bed for the boy, its light blue gauze curtains tied back, with "
-  "light blue and green silk bedding and a bolster; in the LEFT half of the back wall a bookcase of books and scrolls and a folding screen "
-  "painted with wisteria; a low study desk with brushes and books and a floor cushion against the window wall, square to it; a small bow and "
-  "a quiver of arrows on a wall rack, a wooden toy horse on wheels, a kite, a hanging paper lantern with blue tassels. Light blue, green and "
-  "warm wood; lively and young, never girlish.", None),
+ ('a-ca-so', 'A ca sở', 'bed', 2, 'LEFT', 'well-furnished room',
+  # L2363 redo (owner: 'A ca là con trai thì cái rèm, cái phong cách trong cái phòng nó phải mang hơi hướng của đàn ông một xíu'): boyish/
+  # masculine décor (deep blue, ink, bronze, plain silks, no florals); the cool white light of v1 kept (same light sentence, cool colours).
+  "A ca sở, the quarters of the young princes in an ancient Chinese palace where a boy prince lives, sleeps, studies and trains, a real "
+  "room in daily use, a boy's room with a slightly masculine, scholarly and martial taste, {W}: pillars, lattice windows in the LEFT side "
+  "wall onto a sunny garden with plain deep blue silk curtains tied back; against the back wall in its RIGHT half, square to it and seen "
+  "straight on, the large clear main subject: ONE canopy bed: a carved dark wooden canopy bed for the boy with plain deep indigo-blue silk "
+  "curtains tied back with dark blue cords, plain deep blue and slate-grey silk bedding with a simple cloud-scroll border and a bolster; in "
+  "the LEFT half of the back wall a bookcase of books and scrolls and a plain folding screen painted in ink with mountains and pines; a low "
+  "study desk with brushes, an ink stone and an open book of calligraphy and a plain floor cushion against the window wall, square to it; a "
+  "bow and a quiver of arrows on a wall rack, a small wooden practice sword on a stand, a wooden toy horse, a hanging calligraphy scroll, a "
+  "bronze incense burner, a hanging paper lantern with dark blue tassels. Deep blue, ink grey, bronze and warm wood; boyish and noble, "
+  "never girlish: no pink, no floral silks, no lace.", None),
  ('dong-cung', 'Đông cung', 'rec', 3, 'RIGHT', 'richly furnished hall',
   "Đông cung, the hall of the crown prince in an ancient Chinese palace where he studies and receives visitors, a real room in daily use, "
   "no bed anywhere, {W}: red pillars, lattice windows in both side walls onto a sunny garden with royal yellow like #EFBD69 silk curtains "
@@ -173,13 +178,20 @@ P = [
   "mirror, jewellery boxes, combs and a round stool; vases of lotus flowers on slim stands, a bronze incense burner on a side table, hanging "
   "paper lanterns with tassels. Pale jade green, cream, soft pink and warm wood; elegant, feminine and gentle.", None),
  ('ngu-hoa-vien', 'Ngự hoa viên', 'out', 2, 'LEFT', 'beautiful imperial garden',
-  "Ngự hoa viên, the imperial flower garden of an ancient Chinese palace, a real garden in daily use, {C}: across the back, square to the "
-  "picture and seen straight on, the large clear main subject: a calm lotus pond with pink lotus flowers and an open pavilion with red "
-  "pillars and a golden-yellow glazed tiled roof standing over the water, a white marble balustrade along the near edge of the pond and a "
-  "small arched bridge; along the LEFT side, a red garden wall with a covered walkway and a weeping willow; raised white marble flower beds "
-  "of pink, red and white peonies along the back and the sides, a tall grey scholar's rock, distant palace roofs beyond the trees. Fresh "
-  "greens, pink and red peonies, white marble and red; bright, airy and lovely; no bed anywhere.",
-  "GROUND: a wide, clean garden path of pale grey paving bricks, evenly lit, no rug or carpet."),
+  # L2363 redo (owner: frontal camera is right, but the background is not good: show the lake and the beautiful pavilion like the old
+  # picture): no building across the back any more (v1 used the courtyard layout); image 4 = old live ngu-hoa-vien (scenery only).
+  "Ngự hoa viên, the imperial flower garden of an ancient Chinese palace, a real garden in daily use, no bed anywhere, seen straight on "
+  "like a stage set: the near edge of a wide lotus lake runs straight across the picture behind where the people will stand, and along the "
+  "LEFT side a red covered walkway with red pillars runs towards the viewer in clear perspective, like the wall layout of image 3; across "
+  "the back, seen straight on, the large clear main subject: the SAME lake and pavilion as image 4: a wide calm lake full of pink and white "
+  "lotus flowers and green lotus leaves filling the middle of the picture, and standing on the water a beautiful open pavilion with red "
+  "pillars, a white marble base and a golden-yellow glazed tiled roof with gracefully upturned eaves, reached by a white marble bridge "
+  "with carved balustrades; a white marble balustrade along the near shore of the lake; weeping willows and flowering trees along the far "
+  "shore, a tall grey scholar's rock, raised white marble beds of pink, red and white peonies at both sides of the near shore, distant "
+  "golden palace roofs and red walls beyond the water. Image 4 is the old picture of this same garden, used ONLY for its scenery (the "
+  "lake, the pavilion, the bridge, the flowers): paint that scenery again but with the camera of image 3, straight on, never the camera "
+  "of image 4. Fresh greens, pink lotus, pink and red peonies, white marble, red and gold; bright, airy and lovely.",
+  "GROUND: a wide, clean garden terrace of pale grey paving bricks along the near shore, evenly lit, no rug or carpet."),
  # ---- B4 (Từ Ninh, Thái hậu: B22 #CE9C48)
  ('tu-ninh-cung-ngu', 'Từ Ninh cung (phòng ngủ)', 'bed', 3, 'LEFT', 'richly furnished room',
   "Từ Ninh cung bedroom, the private bedchamber of the Thái hậu (the emperor's mother, the highest lady of the palace) in an ancient Chinese "
@@ -217,8 +229,9 @@ for n, (key, vn, kind, nw, side, noun, room, ground) in enumerate(P, 1):
         mid = room.replace('{W}', walls(nw, side))
     if 'ONE canopy bed' in mid: mid += BED1
     p = head + mid + NOSOFA + tail
-    assert '{' not in p and 'image 4' not in p and 'RANK COLOUR' not in p and 'stone' not in p.replace('ink stone', ''), key
-    OUT[key] = dict(prompt=p, code=f'M2355-{n:02d}', name=vn, kind=kind, refs=[*G9, GUIDE[(nw, side)]],
+    assert '{' not in p and ('image 4' not in p or key == 'ngu-hoa-vien') and 'RANK COLOUR' not in p and 'stone' not in p.replace('ink stone', ''), key
+    OUT[key] = dict(prompt=p, code=f'M2355-{n:02d}', name=vn, kind=kind, refs=[*G9, GUIDE[(nw, side)]] + (['ksdj6iw16B'] if key == 'ngu-hoa-vien' else []),   # ksdj6iw16B = old live img/ngu-hoa-vien-ha-sang.webp (uploaded 0 cr, L2363)
+                    
                     base=f"dev/handover/prompts_L2095/{'M2300-03_vinh-hoa-cung-phi-ngu' if kind == 'bed' else 'M2300-02_dien-huy-cung-phi'}_ha_sang.txt",
                     layout=f"{nw}w windows {side} {kind}")
 import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items()}, 'places-M2355')

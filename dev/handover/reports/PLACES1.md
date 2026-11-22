@@ -26,10 +26,10 @@ People sheets (Fold 755 portrait | iPad): `people_pr13/make_sheet_places.py` (Fo
 | M2355-09 | Phòng cung nữ | phong-cung-nu | IfRv5QQtvE | 19.0 | 50a8135d1251 | |
 | M2355-10 | Cung nhân | cung-nhan | WDSVtXJcXe | 19.9 | 2a7c3c6f73ae | |
 | M2355-11 | Tân giả khố | tan-gia-kho | tCZaKdgmZJ | 11.7 | 1438a42af96a | outdoor |
-| M2355-12 | A ca sở | a-ca-so | ovimqpt829 | 12.6 | 4488deb5834e | bed cut at right edge (mild) |
+| M2355-12 | A ca sở | a-ca-so | tCZaj6ImZJ (L2363 redo; v1 ovimqpt829 4488deb5834e) | 12.6 | 46bb22e61949 | REDO owner L2363: masculine décor (deep blue/ink/bronze, bow, sword, calligraphy), white light kept (R−B 21) |
 | M2355-13 | Đông cung | dong-cung | SyvJZjtUb8 | 15.6 | 565cc6d7defe | phoenix pair on beam (mild) |
 | M2355-14 | Phi tần cung | phi-tan-cung | 4RHicJD9Aa | 19.5 | 711473cb393e | |
-| M2355-15 | Ngự hoa viên | ngu-hoa-vien | huAC18YvqL | 19.5 | 6a65de56922d | outdoor |
+| M2355-15 | Ngự hoa viên | ngu-hoa-vien | IfRvx6ytvE (L2363 redo; v1 huAC18YvqL 6a65de56922d) | 11.7 | cb22815c5250 | REDO owner L2363: frontal, lake + pavilion + bridge behind a terrace; ref image 4 = old live picture (ksdj6iw16B, uploaded 0 cr) |
 | M2355-16 | Từ Ninh cung (phòng ngủ) | tu-ninh-cung-ngu | YMgTtbXWeC | 14.3 | 5ea70eb35f0f | |
 | M2355-17 | Từ Ninh cung (phòng khách) | tu-ninh-cung | KLexyzDkqp | 15.6 | d13d828c8689 | |
 
@@ -38,3 +38,8 @@ People sheets (Fold 755 portrait | iPad): `people_pr13/make_sheet_places.py` (Fo
 - Prompt notes: gate R11 forced canopy-bed words for A ca sở / Cung nhân / Phòng cung nữ (head names image 1 'the bedroom'); Phi tần cung written as lowercase 'phi tần cung' so the gate does not read it as a t5 Phi room.
 - Repo note: the container's local branch was a stale divergent copy; I reset it to origin and kept the old ref as `stale-local-backup` (local only, not pushed).
 - MA_HINH.json: M2355-01..17 added.
+
+## L2363 (owner via ROOT-C2) — answers + 2 redos (2 × 135 cr; total now 20 gens = 2 700 cr)
+- (a) Phòng cung nữ = the heroine's OWN room while she is a maid (scene "maid", isSrv); Cung nhân = "Tích Cần viện", the shared servants' row (cung nữ, ma ma, thái giám; residenceOf part "cungnhan"). Same low tier; both prompts said "no gilt", but M2355-10 came out with gilt chests = picture fault. Proposed: redraw Cung nhân plainer (waiting for her yes).
+- (b) A ca sở is whiter NOT because of the light sentence (identical in all 17) but because of its cool palette words (blue/green); the others ask for red/royal yellow/gilt, so the model warms the whole light. Warmth R−B: A ca sở 21, Tân giả khố 23, Lãnh cung 26 vs indoor rooms 38–58. Proposed ONE group fix (not applied): 0-cr white-balance grade of walls/floor to ~R−B 25–30, test on one picture first.
+- Sheet of the 2 redos: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places/people/L2363-redo.jpg (batch3 sheet re-made at the same URL).
