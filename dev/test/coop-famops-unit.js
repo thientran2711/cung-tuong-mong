@@ -102,6 +102,12 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    const okr=r=>r.left&&r.ops.length===1&&r.ops[0].how==="lost"&&r.ops[0].by===v.id;
    ck("19 host NPC steals from her entry and KEEPS it (copy): «rm lost» by that NPC, never «gone»",okr(res[0]||{}),res[0]);
    ck("19b host NPC steals to PLANT (the case holds it): «rm lost» by that NPC, never «gone»",okr(res[1]||{}),res[1])}
+  /* E44e: her entry REBUILT during a diffed NPC call (new objects, same ledger ids; the festival result diffs the snapshot from its start): nothing moved */
+  reset();{const on8=CW.on,se8=CW.seat,sd=COOP.send;const sn8=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);let ops8=[];
+   try{CW.on=true;CW.seat="a";COOP.send=m=>sn8.push(m);const e1=pc(P),e2=pc(P);e1.ci=0;e2.ci=1;f.inv=[e1,e2];f.kids=[{name:"Tiểu A",bt:7,alive:true,hp:50,tal:10,fond:50}];
+    CW.b4Run(()=>{f.inv=f.inv.map(e=>Object.assign({},e));f.kids=f.kids.map(k=>Object.assign({},k))});ops8=sn8.flatMap(m=>m.fam||[])}
+   finally{CW.on=on8;CW.seat=se8;COOP.send=sd;rivals.splice(rivals.indexOf(f),1)}
+   ck("20 her entry rebuilt (same ids): no «rm» / «add» / «ktake» (was: every piece taken and given again, every child taken)",!ops8.some(o=>o.op==="rm"||o.op==="add"||o.op==="ktake"||o.op==="kd"),ops8.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu))))}
   /* E44d (law 6c): a lost piece a holder keeps comes back as THAT copy, from THAT holder (lost-one-home-scan DUP: Kỳ ngộ «Giữ lại» → «Lén trả lại» pressed on a case she owns) */
   {reset();const on5=CW.on;CW.on=false;const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&x.out!==true);v.inv=v.inv||[];const vi=v.inv.length;
    try{const mk=()=>{const e=pc(P);S.inv.push(e);const c=loLoseE(S,e,"srv");S.inv.splice(S.inv.indexOf(e),1);loKeepBy(c,v,"kyngo: giữ lại");return c};

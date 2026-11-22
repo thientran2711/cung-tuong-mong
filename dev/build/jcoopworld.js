@@ -549,10 +549,10 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
 const kidId=k=>String(k.name||"")+"#"+(k.bt==null?"":k.bt);
 function famSnap(t){return {kids:(t.kids||[]).map(k=>[k,Object.assign({},k)]),preg:t.preg||0}}
 const RMHOW={laydo:"lost",laydol:"lost",phonghoa:"burn",batnat:"taken",uyhiep:"taken",tieuhuy:"taken"};
-function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
- for(const e of inv0)if(!L1.includes(e)&&e.ci!=null)ops.push(Object.assign({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"},e.iu?{iu:e.iu}:{}));/* E44: the piece by its ledger id */
+function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];const iu1=new Set(L1.filter(e=>e&&e.iu).map(e=>e.iu));/* E44e: same rule as b4Ops (a piece = its ledger id) */
+ for(const e of inv0)if(!L1.includes(e)&&e.ci!=null&&!(e.iu&&iu1.has(e.iu)))ops.push(Object.assign({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"},e.iu?{iu:e.iu}:{}));/* E44: the piece by its ledger id */
  for(const e of plants){const x=J(e);if(x.by==="me")x.by=me();ops.push({op:"plant",e:x})}
- for(const [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
+ for(let [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd))kd=(t.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:k==="pond"?"chết đuối ở hồ sen":k==="kpoison"?"trúng độc mà chết":"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
@@ -1293,14 +1293,17 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
- for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci;let th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;
+ /* E44e (law 6c, one piece = its ledger id): her entry rebuilt meanwhile (a festival's result diffs the snapshot taken at its start) holds NEW objects
+    of the SAME pieces: matched by iu they did not move. Before: every piece «rm gone» + «add» (≈35 «Được ban …» lines, a piece mid-case lost: vanish 10000013) */
+ const iu1=new Set(L1.filter(e=>e&&e.iu).map(e=>e.iu)),iu0=new Set(b.inv0.filter(e=>e&&e.iu).map(e=>e.iu));
+ for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null&&!(e.iu&&iu1.has(e.iu))){const ci=e.ci;let th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;
   /* E44e (V «hảo hữu lấy» vanish, law 6c + 1): an NPC thief's laydo on her entry puts the piece in a «thất lạc» case of her entry (jlost loLose:
      the case holds it, or the thief keeps a COPY via loKeepBy), never this object in a chest → before: «gone» = she lost it with no case, no road back.
      Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
   let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
   ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
- for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
- for(const [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
+ for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!(e.iu&&iu0.has(e.iu))){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
+ for(let [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd))kd=(v.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
