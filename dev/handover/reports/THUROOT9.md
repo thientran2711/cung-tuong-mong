@@ -57,3 +57,22 @@ Wired with roompf1_wire.py (prompt == json checked for all 10) → webp q88 img/
 | M2300-10 | ham-an-cung-quyphi | ksdx63916B | 82.3 | ⚠ same: armchairs along left window wall come close to the left edge |
 | M2300-11 | thua-minh-cung-quyphi-ngu | EbWFwJduuO | 82.3 | ⚠ 2 armchairs at the right edge come low, near the name strip |
 No people, no text in any; nothing free-standing mid-floor (L2303 OK in all 10). QP royal-yellow touch barely visible (as asked: tiny). Notes only — no redraw without the owner's yes (A20).
+
+## M2299 redos (ROOT-B9 01:45Z, fixed prompts_roompf1_M2299.json WALL PLACEMENT) — 3 gens, 405 cr
+| code | room | Magnific id | base_c | look |
+|---|---|---|---|---|
+| M2299-11 | chung-tu-cung-phi (Chung Tú cung – phòng khách Phi) | tCZvL4dmZJ | 85.7 | OK: chairs + tea table against back wall |
+| M2299-13 | ham-an-cung-phi (Hàm An cung – phòng khách Phi) | s7tSGtYl8e | 84.0 | OK: chairs against back wall; guqin table at right edge |
+| M2299-14 | thua-minh-cung-phi-ngu (Thừa Minh cung – phòng ngủ Phi) | ksdximV16B | 88.3 | OK: tall canopy bed centred, fan door |
+Wired over the old pr13 files (no local copy existed, so nothing had to be removed) + cdn_sync uploaded 3 (index v=d3d335a1ad39). The wire dump was built from the json prompt + creations_get urls. creations_get had returned the full Magnific prompt for all 3, and it read the same as the json.
+M2299-15 thua-minh-cung-phi (old 3zk2pBxREY): ⚠ chair pair + tea table stand out on the open floor at the right, angled → NEEDS regen from the fixed json (NOT done).
+
+## HANDOVER (THUROOT9 → successor; coordinator ROOT-C1 session_01D3E3NX4Gc3XCtkhsnipEAS). depth 7. START_CTX ~3 %; now ~31 % ≥ roll line 28 % → stop.
+DONE rooms: M2300-02..11 (ids above, wired, CDN) + M2299-11/13/14 redo (wired, CDN). Last code done: M2299-14.
+TODO: (1) M2299-15 regen (fixed json). (2) M2300-12..22 from prompts_roompf1_M2300.json @522b391, one try each, batches of 5 → after each 5: look + wire + message coordinator (owner L2306). (3) M2300-01 s7tSRLNl8e (ROOMPF1, OLD json without WALL PLACEMENT) → check chairs; regen if they float.
+Method that saves context: print each prompt from the json right before its call; for wiring, call creations_get on MANY ids at once, so the big result is saved to a file you pass to roompf1_wire.py. With 3 or fewer ids it comes back inline and costs ~15k tokens. Settings: gpt-2-6, 2k, 2688×1386, folder ba4aecfe-efce-47e2-b53f-30d292091886, refs from json (image type, in order). Images never in git.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
