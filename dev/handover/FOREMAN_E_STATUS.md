@@ -1540,3 +1540,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (22/11 12:48Z) WAKE — FOREMAN E #31 ctx ~19 % (roll ~31 %). No new FROM MAIN (MAIN 106). LIVE b55a0e1c. E50r: review/coop-famops-p-r re-merged on b55a0e1c → 6ddae409, gates running → LAND READY to MAIN 106. E44f (depth 6): -pv d58a43fa, 76 wk 9001 ×2 + SWAP started 12:31Z, gates in 2nd worktree → SSK. SEATS 2 + foreman.
 - FROM MAIN 106 (22/11 12:51Z): LIVE = 9c057f42 (D role-parity-bundle-fix landed); final-merge on it before LAND READY.
 - FROM MAIN 106 (22/11 13:05Z): LIVE = 35f5b5ab (B test-only flake fix landed).
+- (22/11 13:48Z) WAKE — FOREMAN E #31 ctx ~20 % (roll ~31 %). FROM MAIN 106 12:51Z/13:05Z noted: LIVE 9c057f42 (D role-parity fix) → 35f5b5ab (B test-only). E50r: -p-r now b238857f (re-merging newest LIVE; gates → LAND READY). E44f told to re-merge 35f5b5ab into -pv before SSK. SEATS 2 + foreman.
