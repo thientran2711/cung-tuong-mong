@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2d8db496","t":"2026-11-22T17:22Z","c":"coop-famops-t1: festival result pending → her live bag re-bases the snapshot (T1 vanish of a piece she put on)","b":"c589b4972c29","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
+window.CTM_BI={"s":"68ac83bb","t":"2026-11-22T18:13Z","c":"coop-famops-t6: an NPC's gift to her entry outside a diffed call reaches her seat (T6 vanish 934/3385/2028)","b":"96c4e8e98986","h":[{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"},{"s":"b4f22dad","t":"2026-11-22T06:13Z","c":"Quan hệ với thái giám/cung nữ: chủ nhân thật được tin cậy đúng người, chặn cung nữ NPC hạ độc sai"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49583,6 +49583,12 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
  try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
+/* E44g T6 (law 6c REAL OBJECTS, law 1): an NPC gives a piece to her entry OUTSIDE the diffed calls (rivalsTurn / rivalsMonth / festival / the
+   runAct wrapper): an agent act (jagacts cx:gift), a monthly gift (j8), jts / jveil gifts. jil ilGuard(giveTo) saw it land in her entry and
+   logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
+   (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
+   on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
@@ -75950,7 +75956,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){ilSent(e,f);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -76091,7 +76097,7 @@ function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();
-function ilSent(e,f){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
+function ilSent(e,f,p){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,p&&p!==S?ilKey(p):"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
 /* my acts on her entry: whatever left my hands and now sits in her entry goes to her game on the live path (gift, Cài đồ, a work given) */
 (function(){if(typeof runAct!=="function")return;const f0=runAct;runAct=function(a,t){if(!ilCoop()||a!==S||!t||!t.coop)return f0.apply(this,arguments);
  let L0=[];try{L0=ilSlots(S).slice();L0.forEach(e=>ilUid(e,S))}catch(e){}const r=f0.apply(this,arguments);
@@ -94284,7 +94290,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c589b4972c29";window.CTM_BUILD=BUILD;
+const BUILD="96c4e8e98986";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
