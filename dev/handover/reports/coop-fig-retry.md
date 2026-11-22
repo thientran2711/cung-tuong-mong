@@ -26,6 +26,11 @@ Scan: `node dev/test/manifest-fetch-scan.js` (every fetch site goes through the 
 ## Gates
 - fig-retry Fold 755x1000@2: solo ALL OK, coop (host + guest) ALL OK; iPad 1180x820@2 solo+coop ALL OK (26 checks).
 - one-core-guard PASS, one-core-text-rule PASS, undef-scan PASS, manifest-fetch-scan PASS.
-- quickcheck / coop-e2e: see STATUS line / below.
+- quickcheck PASS (289 s; core gates PASS). coop-e2e 129/129 PASS (live Worker).
+- fig-retry final: Fold 755x1000@2 and iPad 1180x820@2, solo ALL OK + coop (host+guest) ALL OK.
+
+## Side effect found + handled (needs Foreman B's eye)
+quickcheck aborts every CDN request (no --net). j52 `nlBegin()` holds start() until the figure lists have answered (nlFigsReady, max 2.5 s), and before this change a failed read answered at once; now it answers after the retries (~9.5 s), so quickcheck's perf `NEWLIFE` read `S` while the new-life card was still pending ("Cannot read properties of undefined (reading 'origin')", reproduced twice, main passes). Fix: `dev/tools/quickcheck.js open()` now also waits (cap 30 s, never fails) for `FIGSIG!==""` — a readiness condition, no threshold touched. Quickcheck "open" step is now ~11 s (was ~2 s) on the new build only; perf numbers unchanged. Player effect on a dead line: the new-life card appears after at most the same 2.5 s cap, then figures arrive when a retry lands. No retry while `navigator.onLine===false`.
+
 
 Risk: low. Worst case a persistently failing manifest delays its caller by ~9.5 s once (was: instant empty); the 5-min re-read still runs.
