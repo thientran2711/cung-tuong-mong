@@ -238,3 +238,26 @@ Commits: 175caff9 merge LIVE bb92f986 (generated-file conflicts only) · **7efdc
   Unit 18 / 18b / 18c / 18d → coop-famops-unit 31/31 (18–18c FAIL on the old jlost). Solo seeds 2–8 (10 tuần) after: dup0 van0, no page errors.
 - RUNNING: 76 wk LOST_DBG on e2d2dcf1: COOP_SWAP, default 4242, SEED=9001. Then quickcheck alone + old save, coop-e2e, coop-b1, role-parity ×2, lost-one-home-scan 108 tuần.
 - P4 (246, one run): not reproduced yet (0 in 6 runs); E48r judged it a conf-road copy that pre-existed (ticket).
+
+### E44d SẴN SÀNG KIỂM — review/coop-famops-p 1033eb2e (on LIVE f0070e61 = c2 landed + 5e32f66f), 22/11 ~07:45Z
+PRIORITY #1 CHECK ('loTake|loOffer|loEvBack|famCopy|loKeepBy'): OD law 6c | main f0070e61 (c2 LIVE) | review/coop-famops-p (this), c2-r b311aea2 merged then LIVE | claims E44d.
+Diff vs LIVE f0070e61: dev/build/jcoopworld.js +13 (P1/P2 famCopy wrappers E44c + loKeepBy wrapper E44d), dev/build/jlost.js +13/−7 (loTake, loOffer, loEvBack), dev/test/coop-famops-unit.js +22, dev/test/coop-lost-scan.js harness ±4 (+ generated index.html/sw.js). No new number (law 4), no new player word.
+Commits: eb02cec6 P1/P2 (E44c) · 7efdc2cc P3 family + harness · f47f781c P2 family (keep into a copy) · merges 175caff9 / 3983e125 / 0ef3743d (c2-r) / **1033eb2e** (LIVE f0070e61) + site builds.
+Fix P2 family (f47f781c): guest seat, loKeepBy into a COPY of a host NPC (ilRob «cướp» / jty robbers, Kỳ ngộ «Giữ lại», rival keep) is refused like any refused keep → her case stays «thất lạc» holding the piece. Before: piece in the copy's chest = vanish (10000137 y_tang, 4242). Unit 17d (FAILs on old code) / 17e (host unchanged).
+P3 family: see interim table above (loTake / loOffer / loEvBack), CONTROL = LIVE bb92f986 solo seed 6 DUP.
+| gate | result |
+|---|---|
+| coop-famops-unit | 33/33 (1033eb2e); 18–18c + 17d FAIL on the old code |
+| quickcheck + old save (ALONE) | PASS on 0ef3743d and on 1033eb2e (core gates PASS, old save loads + plays a buổi) |
+| coop-e2e (LIVE suite) | 129/129 on 0ef3743d and on 1033eb2e |
+| coop-b1 | 42/43 (step 9 «week merged» = buổi stall) → rerun alone 43/43 (0ef3743d) |
+| role-parity ×2 | 2 FAIL ×2, identical: «up:P-ONLY:harm:petcare» + riseCore danh 3 vs 5 — SAME 2 FAIL on LIVE 7303aa58 alone (CONTROL) = pre-existing, not this row |
+| lost-one-home-scan solo, 10 tuần, seeds 2–8 | dup0 van0 (before: dup on seeds 2–5; LIVE seed 6) |
+| 76 wk e23148e0 (P1/P2): 9001 / 7 / SKEW | dup0 van0 ×3 (traffic / stall FAILs only) |
+| 76 wk 3983e125 (+LIVE 7303aa58, all fixes): SWAP | 86/96 dup0 van0 (stalls) |
+| 76 wk 3983e125: 4242 | 88/94 dup0 van0 (Kỳ ngộ traffic 2<3, stalls) |
+| 76 wk 3983e125: 9001 run 1 | dup0, **3 vanish** (10000053 kimngu, 10000177 chuongngoc w47; 1131 tranhco w65), all labelled «hảo hữu lấy» = the HOST's take from her entry («rm» op), host has no line / host case 98 still «held at 902» |
+| 76 wk 3983e125: 9001 run 2 | 88/93 dup0 **van0** |
+| CONTROL 76 wk LIVE 7303aa58 alone (same harness), 9001 | dup0, **6 vanish** (P2 cướp on copies 10000326; Kỳ ngộ «giữ lại» by host NPC then «sang hảo hữu» 2767 / 1125; 10000180 / 10000105 / 10000201 «sang hảo hữu» of NPC-owned cases held by NPC 1) — none of the «hảo hữu lấy» shape |
+OPEN (ticket, reviewer decides): (V) «hảo hữu lấy» vanish, 1 of 2 runs of seed 9001 on -p, not in the control run: host laydo on her entry sends «rm» (her piece leaves her chest) but no host copy is counted; note jil ilCoopRes (jil.js:215) picks the FIRST id of that kind missing from her chest, not o.iu, so the label may be a guess. P4 (246, one c2 run): not seen in 9 runs on -p (likely the P3-family return road: owner +1 while holder copy stayed — loTake closes that shape; unproven). Buổi handshake stalls «Chờ hảo hữu…/Sẵn sàng» in ~1 of 3 long runs (coop sync; one trace shows «err seatresync undefined» on the guest) — other row.
+Worktree /home/user/wt/fp, logs /home/user/wt/e44d-out (this container only).
