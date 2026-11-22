@@ -2,6 +2,7 @@
 depth 2 · START_CTX ~4 % (get_session context_usage read 0; estimate) · finished at ~22 % (under the 29 % roll line) → no handover needed.
 
 ## Done (22/11): 17/17 pictures, ONE try each, 17 × 135 = 2 295 cr + 1 redo (M2355-08, foreman-ordered L2303/L2324) = 2 430 cr. Balance ~2.86 M before.
+## Done (22/11): 17/17 pictures, ONE try each, 17 × 135 = 2 295 cr, 0 redraws (no heavy fault seen). Balance ~2.86 M before.
 Builder `dev/art/place-rank/prompts_places_L2355.py` → `prompts_places_L2355.json` + `dev/handover/prompts_L2095/M2355-NN_<key>_ha_sang.txt` (+ `.keep`).
 Recipe (A17 diff): M2300 room prompt head + tail copied VERBATIM from prompts_roompf1_M2300.json (M2300-03 / M2300-02); ONLY the middle
 (ROOM sentence + palace card + RANK COLOUR + TONE + rank lux + no-phoenix/yellow line) replaced by a per-place ROOM part keeping the live old
@@ -30,6 +31,14 @@ People sheets (Fold 755 portrait | iPad): `people_pr13/make_sheet_places.py` (Fo
 | M2355-13 | Đông cung | dong-cung | SyvJZjtUb8 | 15.6 | 565cc6d7defe | phoenix pair on beam (mild) |
 | M2355-14 | Phi tần cung | phi-tan-cung | 4RHicJD9Aa | 19.5 | 711473cb393e | |
 | M2355-15 | Ngự hoa viên | ngu-hoa-vien | IfRvx6ytvE (L2363 redo; v1 huAC18YvqL 6a65de56922d) | 11.7 | cb22815c5250 | REDO owner L2363: frontal, lake + pavilion + bridge behind a terrace; ref image 4 = old live picture (ksdj6iw16B, uploaded 0 cr) |
+| M2355-08 | Thượng thư phòng | thuong-thu-phong | 9Zq30G1NYZ | 10.8 | 40b5f9bc6870 | student desks in the people band (mild) |
+| M2355-09 | Phòng cung nữ | phong-cung-nu | IfRv5QQtvE | 19.0 | 50a8135d1251 | |
+| M2355-10 | Cung nhân | cung-nhan | WDSVtXJcXe | 19.9 | 2a7c3c6f73ae | |
+| M2355-11 | Tân giả khố | tan-gia-kho | tCZaKdgmZJ | 11.7 | 1438a42af96a | outdoor |
+| M2355-12 | A ca sở | a-ca-so | ovimqpt829 | 12.6 | 4488deb5834e | bed cut at right edge (mild) |
+| M2355-13 | Đông cung | dong-cung | SyvJZjtUb8 | 15.6 | 565cc6d7defe | phoenix pair on beam (mild) |
+| M2355-14 | Phi tần cung | phi-tan-cung | 4RHicJD9Aa | 19.5 | 711473cb393e | |
+| M2355-15 | Ngự hoa viên | ngu-hoa-vien | huAC18YvqL | 19.5 | 6a65de56922d | outdoor |
 | M2355-16 | Từ Ninh cung (phòng ngủ) | tu-ninh-cung-ngu | YMgTtbXWeC | 14.3 | 5ea70eb35f0f | |
 | M2355-17 | Từ Ninh cung (phòng khách) | tu-ninh-cung | KLexyzDkqp | 15.6 | d13d828c8689 | |
 
