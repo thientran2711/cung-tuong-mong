@@ -84,6 +84,17 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    ck("17 guest seat: a host-NPC copy's sale never enters HER box (P1 dup)",r17==null&&ilS().box.length===bx+1&&!!r17c,{box:ilS().box.length-bx});
    ck("17b guest seat: no case over a host-NPC copy's piece in HER S.lost (P2 vanish)",r17b==null&&(S.lost||[]).length===ls,{lost:(S.lost||[]).length-ls});
    ck("17c host seat: the NPC's box road unchanged",r17c&&r17c.at==="cct",{at:r17c&&r17c.at})}
+  /* E44d (law 6c): a lost piece a holder keeps comes back as THAT copy, from THAT holder (lost-one-home-scan DUP: Kỳ ngộ «Giữ lại» → «Lén trả lại» pressed on a case she owns) */
+  {reset();const on5=CW.on;CW.on=false;const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&x.out!==true);v.inv=v.inv||[];const vi=v.inv.length;
+   try{const mk=()=>{const e=pc(P);S.inv.push(e);const c=loLoseE(S,e,"srv");S.inv.splice(S.inv.indexOf(e),1);loKeepBy(c,v,"kyngo: giữ lại");return c};
+    const c1=mk();const k0=S.kh,u0=typeof used!=="undefined"?used:0;loUI("sneak",c1.id);
+    ck("18 «Lén trả lại» on a case she OWNS (an NPC keeps it): refused, nothing moves",c1.st==="held"&&cnt(c1.e.iu)===0&&v.inv.filter(e=>e.lo===c1.id).length===1,{st:c1.st,me:cnt(c1.e.iu),v:v.inv.filter(e=>e.lo===c1.id).length});
+    loUI("giveback",c1.id);loUI("handin",c1.id);ck("18b «Trả về chủ» / «Nộp» on it: refused too",c1.st==="held"&&cnt(c1.e.iu)===0,{st:c1.st});
+    const c2=mk();loEvBack({lc:c2.id},"tra");
+    ck("18c loEvBack on a held case: the holder's copy comes home, ONE piece",c2.st==="done"&&cnt(c2.e.iu)===1&&!v.inv.some(e=>e.lo===c2.id),{st:c2.st,me:cnt(c2.e.iu),v:v.inv.filter(e=>e.lo===c2.id).length});
+    const e3=pc(P);v.inv.push(e3);const c3=loLoseE(v,e3,"srv");v.inv.splice(v.inv.indexOf(e3),1);loKeepBy(c3,S,"");Object.assign(c3,{keep:0,by:null,open:1});c3.kn.ome=1;
+    used=0;loUI("giveback",c3.id);ck("18d «Trả về chủ» while SHE holds it: still works (one piece, at its owner)",c3.st==="done"&&cnt(e3.iu)===0&&v.inv.filter(e=>e.iu===e3.iu).length===1,{st:c3.st,me:cnt(e3.iu),v:v.inv.filter(e=>e.iu===e3.iu).length})}
+   finally{CW.on=on5;v.inv=v.inv.filter(e=>!e.lo&&!(e.iu>9e6))}}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
