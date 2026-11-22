@@ -67,3 +67,40 @@ Sổ ghi: "Kính sự phòng ghi: ngày 6, ta được lật thẻ thêm một �
 6. Her-side conception knob by difficulty (V3 note 5) not in scope.
 
 SẴN SÀNG KIỂM 551411588e404648a40a274c3ee5cc4c232729e2
+
+## REVIEW r2 — re-land of review/night-ledger-r1 37018e74 on LIVE ddcca5c1 → review/night-ledger-r2 @e6bfa993 — **FAIL (co-op LAND GATE)**
+PRIORITY #1 CHECK ('night-ledger|jledger|ldPin|BAL.nt|ntPace'): OD 1 (L594 co-op LAND GATE) | main: jledger.js absent, BAL.nt / ldPin 0 hits | review/* review/night-ledger-r1 37018e74, review/night-ledger 55141158 | claims B CLAIMS row "RELAND night-ledger KP01 r2" (this) → not a duplicate (law 14): the night bundle built no ledger.
+Reviewer-lander: opus, session_01N1tNP6V2KcQjF1vXk4QeoT; coordinator Foreman B ROOT-9. START_CTX ≈ 3 % (own estimate); end well under START + 25 %.
+
+### 1. Why a plain merge was impossible (history)
+37018e74 IS already an ancestor of LIVE (balance-chain 3299ae9a merged it), but the D bundle merge **49912535** ("night-balance-bundle: merge review/balance-final … night-ledger r1 -> Foreman B's job, not bundled") took nobc's side and deleted jledger.js / ledger.js / ledger-bot.js and the ledger hunks. `git merge origin/main` into 37018e74 = a fast-forward to LIVE with NO ledger. So r2 = a REPLAY of the ledger's own diff on LIVE (as rival-hauthay ddcca5c1 did), one commit e6bfa993:
+| file | what was replayed (LIVE kept) |
+|---|---|
+| jledger.js, test ledger.js, measure ledger-bot.js | r1's files unchanged |
+| assemble.py | jledger.js between jbalcore.js and jnf.js (LIVE list otherwise) |
+| jbal2 | BAL.nt block after BAL.steal.choice (no summon copies: BAL.ag.emp.summon) |
+| j8 | flip = ldPin first, else AG2 / roll(BAL.ag.emp.summon[busy]) — **LIVE's typed `65:90` was back; gone again (ONE CORE)**; ntP() + anMonth = LIVE's BAL.anFade formula with recent/ntP() |
+| j75 | favNow ×ntP, satN /ntP, custom tuần-roll off while the ledger runs (by day), Empress row filter + ldCause, monopoly words "n đêm trong sáu tuần gần đây"; LIVE htCan / AG2 kept |
+| jcycle | r1 by-day hunks (diff 968e6209..37018e74 applied 3-way, clean): cyLdDay / cyNow / cyTray, start notice + cyrep "những đêm ấy" |
+| tests | night-final (LIVE custom-off line AND ledger-off line both kept), night-multi, preg-rate (tryst without concF) |
+Site rebuilt (build_site.sh), assets.json = LIVE.
+
+### 2. Gates run (e6bfa993; LIVE ddcca5c1 same box for compare)
+| gate | r2 | LIVE |
+|---|---|---|
+| ledger.js 7 cases | **ALL PASS 7/7**, 0 page errors (c0 21 → 1.365 float; 6 weeks rolled/settled, rec = got) | — |
+| quickcheck --runs 7 | **PASS** · old save ok · render 249/272, tab 459/482, buổi 1270/1305 ms · core gates PASS (one-core-guard 0) · time-spill PASS | — |
+| undef-scan | PASS (296 names) | — |
+| night-final / night-multi / log-sync-night | 11/11 · 8/8 · 4/4 PASS | — |
+| night-steal-unit | PASS | PASS |
+| preg-rate | FAIL (same line) | FAIL (pre-existing) |
+| **night-coop-park** (LIVE rewrite for the co-op UNPARK, 7 cases) | **FAIL 2** (case 2 rec 5, case 5 rec 9) | **ALL OK 7/7** |
+| role-parity, coop-e2e, both-seat check, Fold/iPad shots | NOT RUN — stopped at the co-op gate below (FAIL is certain from code + night-coop-park) | — |
+
+### 3. FAIL list (for the fixer)
+1. **BLOCKING — co-op LAND GATE (OD:L594 owner 20/11 ~21:30Z «phải chạy được trên cả hai bản»; law 1 TWO-WAY).** The ledger was designed "CO-OP: parked" (jledger header: nfParked → nfOn false → ldOn false). LIVE has since UNPARKED the new night in player rooms (MAIN ROOT-82 20/11 22:58Z; night-coop-park rewrite): nfOn() is true on the host of a player room, so ldOn() is true there now. Result: the host seat rolls a 10-night ledger, **the friend is excluded from every draw** (jledger ldRoll `C0 … !p.coop`), nothing of S.ledger / the other nights / the notices / gains / conception rolls is relayed to the guest seat (jnf relay ctm-nf carries the played tối only). Host ≈ 2.5 nights a month, friend ≈ 0 ledger nights and sees no ledger = solo-only feature + broken two-way. night-coop-park case 2: rec 5 (spec ≤ 1 for the played tối) — LIVE 7/7.
+   Needed: the co-op ledger — host rolls ONE ledger for the world with the friend's card in the draw (her nightCh weight read from her blob as the tray does), relay days[] + each night's holder to the guest (jnf relay / coopworld), the guest's own other nights settled on HER seat (Sổ ghi line, kit pill, BAL.nt.extraFx, her own conception roll, nightLog) and her NPC tai-mắt line; same ledger visible on both seats; coop-e2e + coop-night + a both-seat ledger check (both see the same host-computed days). Parking it again in rooms = solo-only = FAIL by the same gate (owner decision would be needed to accept that).
+   Also stale: jledger header lines 26/28 "CO-OP: parked", S.ldPk comment, report §1 "co-op parked" row.
+2. **night-coop-park case 5** (thin-E room → solo mid-day, rec 9): no flip ran in the room (w0 null), the flip ran solo → the ledger is legit there; the test counts all records. Make the case ledger-aware (count the played tối: BAL.nt.on=false in that case as night-final does, plus a ledger case that the tuần gets ONE ledger) and re-check S.ldPk still blocks a tuần whose flip ran PARKED (thin-E) — case 3/5 variants.
+3. After 1–2: role-parity (2 pre-existing FAILs only, compare LIVE), coop-e2e, Fold 755x1000@2 + iPad 1180x820@2 shots of both seats' Sổ ghi / pill.
+Base for the fix: **review/night-ledger-r2 @e6bfa993** (solo replay done and green; FF of LIVE ddcca5c1). Scratch: /home/user/wt/nl2-scratch (not in git).
