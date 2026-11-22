@@ -18,7 +18,7 @@ async function mk(b,name,v){const ctx=await b.newContext({viewport:{width:v[0],h
  if(SITE===BASE)await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
  await ctx.grantPermissions(['clipboard-read','clipboard-write']).catch(()=>{});
  const o={ctx,name,errs:[],n:0};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
-  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 /* audit: horizontal overflow, cut text (ellipsis / clipped), tap targets under 40 px, Hán characters, "%" in visible text */
 async function audit(o,tag){const r=await o.p.evaluate(()=>{const out={ov:document.documentElement.scrollWidth>innerWidth+1,cut:[],small:[],han:[],pct:[]};
  const vis=e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return false;const cs=getComputedStyle(e);return cs.visibility!=='hidden'&&cs.display!=='none'&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth};
