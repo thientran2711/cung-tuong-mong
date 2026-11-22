@@ -1,5 +1,7 @@
 # emo-anim prompt templates (break-out mood seals)
 
+> **DISC SCALE (rule A58, owner L2381):** every animated seal's medallion size per frame = `disc_scale_spec.py` (rest r 74 px @ (144,144); OUT → 112 % in 15 frames; LOOP 112 %; BACK → 100 % in its last 15). Apply with `dev/handover/reports/THACT5_tools/apply.py` after cutting; never choose your own %.
+
 Recipe = dev/handover/briefs/emo-anim-mass.md (owner-approved giận pilot, Magnific creation Xm9fz3fBfo).
 These templates made the women set (vui binh an buon dau ghen lo muu so) on 19/11; giận = main's pilot files.
 Replace the `{…}` slots. Keep every other word: the wording about the rim, the chroma green and "no text" is what makes the cut work.
