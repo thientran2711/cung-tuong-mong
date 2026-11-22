@@ -1024,3 +1024,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 night-multi-kem review (SMALL, test-only) | review/night-multi-kem-rv | session_01964izDB3m7tHHRtbyaUBZX | DONE LAND READY b979f5a4 | 22/11 04:50Z (Foreman D #18)
 | night-ledger CO-OP ledger fixer (opus BIG co-op; rv r2 FAIL e6bfa993 co-op LAND GATE) | review/night-ledger-r2 → review/night-ledger-coop; reports/night-ledger.md | B | session_01N1tNP6wkABAL1zSRFzwedG | RUNNING | 22/11 05:07Z |
 | PLACES1 redraw all 15 game places + Từ Ninh 2 (opus; OWNER L2355) | claude/cung-tuong-mong-handover-hj0h8w; reports/PLACES1.md | C | session_01D3E3NZLhP7ifmR9ocQ12cR | RUNNING | 22/11 05:15Z |
+| REVIEW coop-fig-retry (sonnet SMALL; may escalate BIG — jcdn.js loader + quickcheck open() wait) of 75db524f4 | review/coop-fig-retry-r1; reports/coop-fig-retry.md | B | session_01N1tNP5v4gLpxF7EuPxXQTT | RUNNING | 22/11 05:24Z |
