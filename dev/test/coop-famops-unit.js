@@ -84,6 +84,11 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    ck("17 guest seat: a host-NPC copy's sale never enters HER box (P1 dup)",r17==null&&ilS().box.length===bx+1&&!!r17c,{box:ilS().box.length-bx});
    ck("17b guest seat: no case over a host-NPC copy's piece in HER S.lost (P2 vanish)",r17b==null&&(S.lost||[]).length===ls,{lost:(S.lost||[]).length-ls});
    ck("17c host seat: the NPC's box road unchanged",r17c&&r17c.at==="cct",{at:r17c&&r17c.at})}
+  /* E44d: a host-NPC copy robs HER piece on the guest seat (jty robbers → ilRob): her case keeps the piece, the copy gets nothing */
+  reset();{const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);const on6=CW.on;CW.on=true;v.inv=v.inv||[];const vi=v.inv.length;let c18,c18h;const e18=pc(P),e18h=pc(P);
+   try{c18=ilRob(S,e18,v);CW.seat="a";c18h=ilRob(S,e18h,v)}finally{CW.seat="b";CW.on=on6}
+   ck("17d guest seat: a copy's robbery leaves HER case «thất lạc» holding the piece (P2 vanish 10000137)",c18&&c18.st==="lost"&&c18.e===e18&&!v.inv.some(e=>e.iu===e18.iu),{st:c18&&c18.st});
+   ck("17e host seat: the robber keeps it as before",c18h&&c18h.st==="held"&&v.inv.some(e=>e.iu===e18h.iu),{st:c18h&&c18h.st});v.inv=v.inv.filter(e=>!(e.iu>9e6))}
   /* E44d (law 6c): a lost piece a holder keeps comes back as THAT copy, from THAT holder (lost-one-home-scan DUP: Kỳ ngộ «Giữ lại» → «Lén trả lại» pressed on a case she owns) */
   {reset();const on5=CW.on;CW.on=false;const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&x.out!==true);v.inv=v.inv||[];const vi=v.inv.length;
    try{const mk=()=>{const e=pc(P);S.inv.push(e);const c=loLoseE(S,e,"srv");S.inv.splice(S.inv.indexOf(e),1);loKeepBy(c,v,"kyngo: giữ lại");return c};

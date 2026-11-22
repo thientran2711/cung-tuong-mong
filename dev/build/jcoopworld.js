@@ -665,6 +665,10 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
 function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"&&ilGuest()&&Array.isArray(rivals)&&rivals.indexOf(p)>=0)}catch(z){return false}}
 (function(){if(typeof ilGone!=="function")return;const g1=ilGone;ilGone=function(p){if(famCopy(p))return null;return g1.apply(this,arguments)};window.ilGone=ilGone})();
 (function(){if(typeof loLoseE!=="function")return;const l0=loLoseE;loLoseE=function(p){if(famCopy(p))return null;return l0.apply(this,arguments)};window.loLoseE=loLoseE})();
+/* E44d (P2 family, law 6c): on the guest seat a keep road (ilRob «cướp» / jty robbers, Kỳ ngộ «Giữ lại», a rival thief who keeps it) never puts
+   HER piece into a COPY of a host NPC (that chest is rebuilt from the host: the piece vanished, her case closed «mất dấu», coop-lost-scan 10000137).
+   The keep is refused like any refused keep (loLose: c.keep=0): her case stays «thất lạc» holding the piece, jlost finds it later. Host seat unchanged. */
+(function(){if(typeof loKeepBy!=="function")return;const k0=loKeepBy;loKeepBy=function(c,p){if(famCopy(p))return null;return k0.apply(this,arguments)};window.loKeepBy=loKeepBy})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
