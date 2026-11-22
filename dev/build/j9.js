@@ -1,9 +1,47 @@
 /* ================= RELATION WEB, PALACE MAP, PRESENCE, TALK ================= */
 /* two bars between every pair: Thiện cảm (aff, -100..100, directional) and Oán (0..100, directional) */
-function aff(x,y){if(x===y)return 0;if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
-function affAdd(x,y,n){if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
-function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
-function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+/* rel-men-servants (KP22, law 1 two-way + law 14 one store): the SAME two bars between every pair of people, men and servants included.
+   Consorts / ta keep their maps (S.rl / S.ro, v.rel / v.oan, v.rl / v.ro). A man or a servant (relMS) keeps the stores the game already
+   writes: a man → ta = m.af (+ m.oan), → a consort = m.afw[id] (+ m.ro[id]); a servant / maid / court official → ta = s.af.me (servant road:
+   S.srv.af[sid]) (+ s.oan), → another servant = s.af[sid] (j10 / jagstaff), → a consort = s.af["r"+id] (court officials: s.af[id], j13)
+   (+ s.ro, same keys). Toward a man / servant the key is relKey (man "m<n>", servant "s<sid>", else the j61 person key kOf61). */
+const relRv=p=>p===S||!!(p&&p.rl&&p.sid==null&&p.id!=null);
+const relMan=p=>!!(p&&typeof p.id==="string"&&/^m\d+$/.test(p.id));
+function relMS(p){return !!p&&typeof p==="object"&&!relRv(p)}
+function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)if(C[k]===p)return true}catch(e){}return false}
+function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}
+function relHk(h,t){if(t===S)return"me";if(relRv(t))return relMan(h)||relCourt(h)?t.id:"r"+t.id;if(t.sid!=null&&!relMan(h)&&!relCourt(h))return t.sid;return relKey(t)}
+function relMap(h,f){if(!h[f]||typeof h[f]!=="object")h[f]={};return h[f]}
+/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng" + law 4 one core (r6 F5, Fix A): a servant toward ITS master is ONE store, s.loyal (j10) — the
+   number the game already writes — for EVERY master: her (S.maid / her household) and an NPC consort (her maid v.maid / her household, ownerOf).
+   relOwner = that master (court officials and men have none). Servant road: S is the maid there, her own bond stays S.srv.af (isSrv guard below). */
+function relOwner(x){if(!relMS(x)||relMan(x)||relCourt(x)||typeof x.loyal!=="number")return null;if(S&&x===S.maid)return S;try{const o=typeof ownerOf==="function"?ownerOf(x):null;if(o)return o}catch(e){}
+ return (typeof rivals!=="undefined"&&rivals||[]).find(v=>v&&v.maid===x)||null}
+function relMaster(x,y){return !!y&&relOwner(x)===y}
+function msAff(x,y){if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv()))return +x.loyal||0;if(relMS(x)){if(y===S){if(relMan(x))return +x.af||0;if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv())return S.srv.af[x.sid]||0;return x.af&&typeof x.af==="object"?(+x.af.me||0):(+x.af||0)}
+  const M=relMan(x)?x.afw:x.af;return M&&typeof M==="object"?(+M[relHk(x,y)]||0):0}
+ const M=x===S?S.rl:x.rl;return (M&&M[relKey(y)])||0}
+function msAffAdd(x,y,n){const c=v=>cl(v,-100,100);if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv())){x.loyal=cl((+x.loyal||0)+n,0,100);return}if(relMS(x)){if(y===S){if(relMan(x)){x.af=c((+x.af||0)+n);return}if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv()){S.srv.af[x.sid]=c((S.srv.af[x.sid]||0)+n);return}
+   if(typeof x.af==="number"){x.af=c(x.af+n);return}const M=relMap(x,"af");M.me=c((+M.me||0)+n);return}
+  const M=relMap(x,relMan(x)?"afw":"af"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
+ const M=x===S?S.rl:relMap(x,"rl"),k=relKey(y);M[k]=c((M[k]||0)+n)}
+function msOan(x,y){if(relMS(x)){if(y===S)return +x.oan||0;return (x.ro&&+x.ro[relHk(x,y)])||0}const M=x===S?S.ro:x.ro;return (M&&M[relKey(y)])||0}
+function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===S){x.oan=c((+x.oan||0)+n);return}const M=relMap(x,"ro"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
+ const M=x===S?S.ro:relMap(x,"ro"),k=relKey(y);M[k]=c((M[k]||0)+n)}
+function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
+function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
+function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
+function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+/* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
+function relMSAll(){const L=[],add=p=>{if(p&&typeof p==="object"&&!L.includes(p))L.push(p)};if(!S)return L;(S.men||[]).forEach(add);add(S.maid);(S.staff||[]).forEach(add);
+ for(const k in (S.court||{}))add(S.court[k]);((S.thO&&S.thO.staff)||[]).forEach(add);(rivals||[]).forEach(v=>{add(v.maid);(v.staff||[]).forEach(add)});return L}
+/* old saves (normAll): oán that the game already recorded as a grudge becomes the oán number (never invented): a man's m.grudge (jmen: the one who
+   reported or threatened him), a servant's s.grudge (j24: punished without cause by her mistress), s.bullyBy (jagstaff: the servant who bullies her) */
+function relMSMig(){if(!S||S.relMSv)return;S.relMSv=1;const B=BAL.relMS;
+ for(const m of S.men||[]){if(!m||m.grudge==null||m.grudge===0||!(m.grudgeN>0))continue;const t=m.grudge==="me"?S:(rivals||[]).find(v=>String(v.id)===String(m.grudge));if(t&&!oan(m,t))oanAdd(m,t,B.grudge)}
+ for(const s of relMSAll()){if(s.grudge&&s.oan==null){const o=s===S.maid?S:typeof ownerOf==="function"?ownerOf(s):null;if(o)oanAdd(s,o,B.srvGrudge)}
+  if(s.bullyBy!=null){const b=servById(s.bullyBy);if(b&&!oan(s,b))oanAdd(s,b,B.bully)}}}
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{relMSMig()}catch(e){console.error('relMSMig',e)}return r}})();
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
 function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}

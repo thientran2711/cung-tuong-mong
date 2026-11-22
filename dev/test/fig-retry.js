@@ -1,0 +1,52 @@
+/* review/coop-fig-retry: the figure list (img/FIGURES*.json, CDN) is read through the ONE manifest loader in jcdn.js. A weak line must not leave the
+   full-body pictures blank: the first reads FAIL here (abort / 503 / half a JSON body) and the pictures must still appear after the loader's retries.
+   usage: node dev/test/fig-retry.js <WxH@dpr> [solo|coop|both] [rootDir]      (rootDir = another build to test, e.g. the OLD one: expected FAIL)
+   solo: one player. coop: host (seat a) + guest (seat b) against the live Worker (COOP_URL env or the default), BOTH seats get the blocked reads.
+   Blocked reads per manifest (then it passes):  FIGURES.json  abort, 503, truncated JSON  |  FIGURES-others.json  abort, abort  |  FIGURES-servants.json  abort.
+   Checks per player: KCDN.mretries >= 6 (the loader retried), FIGS filled, Thái hậu + heroine full-body files really found (kitFigOf), the picture loads. */
+const {chromium}=require('playwright');const path=require('path');const {serve,BASE}=require('./coop-serve.js');
+const SZ=process.argv[2]||'755x1000@2',MODE=process.argv[3]||'both',ROOT=process.argv[4]||null;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
+const WURL=process.env.COOP_URL||'https://ctm-coop.victoria-tntt.workers.dev';const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
+const PLAN={'FIGURES.json':['abort','503','half'],'FIGURES-others.json':['abort','abort'],'FIGURES-servants.json':['abort']};
+async function block(ctx,log){const seen={};await ctx.route(/\/img\/FIGURES(-others|-servants)?\.json(\?.*)?$/,route=>{const f=route.request().url().replace(/\?.*$/,'').split('/').pop();
+  const n=seen[f]=(seen[f]||0)+1,step=(PLAN[f]||[])[n-1];log[f]=n;
+  if(step==='abort')return route.abort('failed');if(step==='503')return route.fulfill({status:503,body:'busy'});
+  if(step==='half')return route.fetch().then(r=>r.text().then(t=>route.fulfill({status:200,contentType:'application/json',body:t.slice(0,Math.floor(t.length/2))})));
+  route.continue()})}
+const mk=async(b,tag)=>{const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR||1,hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
+  const log={},errs=[];await serve(ctx,ROOT);await block(ctx,log);await ctx.addInitScript(u=>{window.COOP_URL=u;window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};const on=typeof c.on==='boolean'?c.on:(c.active!=null?!!c.active:!!(s.playing||(s.status&&s.status!=='off')));    return{seat:you,week:c.week!=null?c.week:(s.week||0),on,frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you])))}};},WURL);
+  const p=await ctx.newPage();p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));return{ctx,p,log,errs,tag}};
+/* the pictures: retry count, list filled, Thái hậu + the heroine get their own full-body file, and that file loads */
+async function check(o){const t=o.tag;const r=await o.p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0&&typeof FIGIX!=='undefined'&&FIGIX.thaihau,null,{timeout:45000}).then(()=>true,()=>false);
+  const s=await o.p.evaluate(async()=>{const K=window.KCDN||{};let th='',me='';try{th=kitFigOf({kind:'th'})}catch(e){th='ERR '+e.message}try{me=figFor(S);if(!me){const v=(typeof rivals!=='undefined'?rivals:[]).find(x=>x&&!x.coop&&figFor(x));me=v?figFor(v):''}}catch(e){me='ERR '+e.message}
+    const load=u=>new Promise(y=>{if(!u||/unknown-fig|^ERR/.test(u))return y(false);const i=new Image();i.onload=()=>y(i.naturalWidth>0);i.onerror=()=>y(false);i.src=u});
+    return{figs:typeof FIGS!=='undefined'?FIGS.length:-1,ix:Object.keys(FIGIX||{}).join(),retries:K.mretries,fail:K.mfail,th:th.split('/').pop(),me:me.split('/').pop(),thOk:await load(th),meOk:await load(me)}});
+  ok(r,t+': figure list arrived after the blocked reads',s.figs);ok(s.retries>=6,t+': the loader retried (KCDN.mretries >= 6)',[s.retries,s.fail]);
+  ok(/thaihau/.test(s.ix)&&/consort/.test(s.ix)&&/maid|mama/.test(s.ix),t+': all three manifests merged (thaihau + consort + servants)',s.ix);
+  ok(s.thOk&&!/unknown/.test(s.th),t+': Thái hậu full-body picture found + loads',s.th);ok(s.meOk&&!/unknown/.test(s.me),t+': her own (or a world consort, when her origin has no full-body art) full-body picture found + loads',s.me);
+  ok(!o.errs.length,t+': no page errors',o.errs);ok(o.log['FIGURES.json']>=4,t+': FIGURES.json was asked again (reads: '+JSON.stringify(o.log)+')')}
+/* verbatim from coop-e2e.js (closes the story / news dialogs, the roulette and the scenes like a player) */
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}/* a manual kit scene (night-end «Nhận» #kneov, reward box): a player closes it with its own button [data-km-close] (rv night-balance-bundle, like coop-night) */const kc=[...document.querySelectorAll('.kmov [data-km-close]')].find(x=>x.offsetParent!==null&&!x.disabled&&x.getClientRects().length);if(kc){kc.click();return'x'}const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}/* a mini-game on screen (the steal game after Tranh sủng, jsmg herGame): play it out like a player (quick option «Thôi, không chơi», then the result frame's kit ✕ «Quay lại», which presses the hidden «Đã hiểu», jk4 kitOvSync); wiping S.mg leaves jsmg BUSY and jnf's choice in st "mg" for good */const c=__co();if(c.frozen||c.waiting)return'coop';
+   const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
+  const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
+  if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
+  if(st!=='x')return st;await sleep(200)}return'many'}
+/* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
+
+const start=o=>o.p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;const kl=document.getElementById('kload');if(kl)kl.remove();window.__nlInner=1;for(let i=0;i<400;i++){start();if(!isSrv())break}window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.th=Math.max(S.th||0,40);render()});
+async function tap(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);return[...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
+  const el=h.asElement();if(el){try{await el.click({noWaitAfter:true,timeout:15000});return true}catch(e){}}await sleep(250)}return false}
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});
+ if(MODE!=='coop'){const o=await mk(b,'solo '+SZ);await o.p.goto(BASE,{waitUntil:'domcontentloaded'});await o.p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});
+  await sleep(500);await start(o);await check(o);await o.ctx.close()}
+ if(MODE!=='solo'){const A=await mk(b,'coop host '+SZ),B=await mk(b,'coop guest '+SZ);const DCL={waitUntil:'domcontentloaded'};
+  await A.p.goto(BASE,DCL);await A.p.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:120000}).catch(()=>{});
+  ok(await tap(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await sleep(600);ok(await tap(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
+  const got=await A.p.waitForFunction(()=>window.COOP&&COOP.state&&COOP.state.room&&COOP.state.you==='a',null,{timeout:60000}).then(()=>true,()=>false);ok(got,'A has a room, seat a');
+  const code=await A.p.evaluate(()=>COOP.state.room);await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:120000}).catch(()=>{});await tap(B,/^Vào phòng/,6000);
+  const inRoom=await B.p.waitForFunction(()=>COOP.state.you==='b'&&COOP.state.peerOnline,null,{timeout:60000}).then(()=>true,()=>false);ok(inRoom,'B joined seat b');
+  const world=async o=>{const t0=Date.now();while(Date.now()-t0<90000){await clear(o);if(await o.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!window.COOPW&&!!COOPW.base).catch(()=>false))return true;await sleep(400)}return false};
+  const wa=await world(A),wb=await world(B);ok(wa&&wb,'both seats are in the shared world');await clear(A);await clear(B);await check(A);await check(B);await A.ctx.close();await B.ctx.close()}
+ await b.close();console.log(bad?'FAIL '+bad:'ALL OK');process.exit(bad?1:0)})().catch(e=>{console.log('ERR',e.message);process.exit(2)});

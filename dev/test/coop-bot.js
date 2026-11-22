@@ -25,9 +25,9 @@ const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){
   const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
 const until=async(o,fn,arg,ms=30000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
 /* one step of the bot inside the page: returns what it did */
+/* THE shared co-op tap step (roulette «Bỏ qua», kit scene close, jfocus / jdfv, kg82 skip) runs before STEP: dev/test/lib/coop-clear.js (LAW 11) */
+const CLR=require('./lib/coop-clear.js');
 const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;render()}catch(e){}return'mg'}
-  /* the Luân hồi roulette (jk2b kitRoulette, shown over every new life's card): skip it, as a player may (review/coop-thin-b) */
-  {const ks=document.querySelector('.kroul .krskip');if(ks&&ks.offsetParent!==null){ks.click();return'roul'}}
   if(S&&S.dead){const b=[...document.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Nhập cung/.test(x.textContent))||b.find(x=>x.closest('#modal'));if(k){k.click();return'reborn:'+k.textContent.trim().slice(0,20)}return'dead'}
   const T=document.getElementById('title');if(T&&!T.hidden){const b=[...T.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Lật|Chọn/.test(x.textContent))||b[0];if(k){k.click();return'title'}}
   const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'overlay'}
@@ -78,7 +78,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
        pd.forEach(x=>posDiff.push(pa.key+' '+x));
        if((pa.fst&&pa.fst!==pb.mst)||(pb.fst&&pb.fst!==pa.mst)){statLag++;if(statLag<=4)L(`buổi ${pa.key} stats: A sees B ${pa.fst} (B ${pb.mst}) · B sees A ${pb.fst} (A ${pa.mst})`)}
        if(buoiN===1)L(`first buổi: friend known-state A ${pa.fk} B ${pb.fk} (0 = Người lạ)`);knownLog[pa.fk+'/'+pb.fk]=(knownLog[pa.fk+'/'+pb.fk]||0)+1;}}
-   for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
+   for(const o of [A,B]){const r=await CLR.first(o,STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
    const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(wa>wk&&wb>wk)break;await sleep(60)}
   const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(!(wa>wk&&wb>wk)){L(`FAIL week ${w}: stuck (A week ${wa}, B week ${wb})`);
    for(const o of [A,B])L(o.name+' trace: '+await o.p.evaluate(()=>JSON.stringify({buoi:S&&S.buoi,week:COOP.state.week,bend:COOPW.bend,pendBuoi:COOPW.pendBuoi,pend:COOPW.pend,sent:COOPW.sent,whereKey:COOPW.whereKey,Q:Q.length,Qt:Q.map(x=>x.t+(x.cls?'/'+x.cls:'')),mh:document.getElementById('modal').hidden,book:!!document.querySelector('.kbk-bar'),mg:!!(S&&S.mg),dead:S&&S.dead,next:document.getElementById('next').textContent+(document.getElementById('next').disabled?' (off)':''),tr:COOPW.tr.slice(-25)})).catch(e=>e.message));

@@ -77,7 +77,7 @@ function j95bGate(role,a,t,kind,ctx){t=t||S;ctx=ctx||{};
  if(role.n!=null)return{ok:true,why:"trung lập: "+role.n};
  if(!a)return role.opt?{ok:true,why:"không có ai"}:{ok:false,why:"không có người"};
  if(a.rel==null||a===S){/* not a consort: servants / court eunuchs */
-  if(kind==="svthief"){const s=a;if(netIs(s,"greed"))return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<BAL.loy.bad)return{ok:true,why:`lòng với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
+  if(kind==="svthief"){const s=a;if(netIs(s,"greed"))return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<BAL.loy.bad)return{ok:true,why:`thiện cảm với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
   if(kind==="squeeze"){if(S.rank<=2)return{ok:true,why:`thái giám khinh cung phẩm thấp (phẩm ${S.rank}), đòi lệ phí`};return{ok:false,why:"phẩm cao, thái giám không dám làm khó"}}
   return{ok:true,why:role.h?"kẻ dưới làm theo lệ":"kẻ dưới lấy lòng"}}
  if(role.h&&a===t)return{ok:false,why:"không ai tự hại mình"};

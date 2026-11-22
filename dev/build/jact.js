@@ -66,7 +66,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`thiện cảm +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
   if(p.kind==="peddler")A=[{n:"Để ta xem",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
@@ -88,7 +88,7 @@ document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target
  kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`,{inside:true})}catch(x){}},true);
 /* ---------- 5. Nội vụ phủ: a place (map spot on the office court west of the inner palace; scene = the office picture) ---------- */
 try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places.nvp)MAPH.places.nvp={box:{x:.085,y:.575,w:.13,h:.075},anchor:{x:.15,y:.6}};if(typeof ACC_DAY==="object")ACC_DAY.nvp=1}catch(e){}
-(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"ksp"})}catch(e){}return L}})();
+(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"nvp"})}catch(e){}return L}})();
 (function(){const c0=countAt;countAt=function(k){return c0.apply(this,arguments)+(k==="nvp"?1:0)}})();
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(k==="nvp"&&S.place==="nvp"&&S.visit&&!S.visit.people.some(x=>x.kind==="peddler")){const c=S.court&&S.court.ped;
   S.visit.people.push({kind:"peddler",name:c&&c.name?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"});

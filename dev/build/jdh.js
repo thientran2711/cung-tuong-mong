@@ -68,7 +68,7 @@ const BLAB={gSung:"Sủng dễ lên",gDanh:"Danh dễ lên",gBac:"Bạc dư dả
 function bLab(t){return BLAB[t]||`Thêm ${(typeof NAMES==="object"&&NAMES[t])||t}`}
 function bTxt(t,v){if(!v)return "";if(FLAT.includes(t))return statTxt(t,v);
  switch(t){case"gSung":return `Sủng được thêm ${ph(v)}`;case"gDanh":return `Danh được thêm ${ph(v)}`;case"gBac":return `Bạc thu vào thêm ${ph(v)}`;
-  case"gTren":return `Thái hậu, Hoàng hậu quý ta thêm ${ph(v)}`;case"gHau":return `Phi tần quý ta thêm ${ph(v)}`;case"gTrung":return `Lòng cung nữ thêm ${ph(v)}`;
+  case"gTren":return `Thái hậu, Hoàng hậu quý ta thêm ${ph(v)}`;case"gHau":return `Phi tần quý ta thêm ${ph(v)}`;case"gTrung":return `Thiện cảm của cung nữ thêm ${ph(v)}`;
   case"phuc":return `Phúc khí +${v}: việc may rủi dễ thành hơn`;case"thai":return v<2?"Có thai: dễ hơn một chút":"Có thai: dễ hơn";
   case"nghe":return `Tự học tài nghệ: ${v<20?"đôi khi":v<30?"khá thường":"thường"} tiến thêm một phần`;case"thi":return `Hội thi: thêm ${v} phần tài nghệ`;
   case"suc":return `Ngủ dậy Sức +${v}`;case"don":return `Tin đồn về ta khó lan ${v<=5?"hơn một chút":v<=8?"hơn":"hơn hẳn"}`}return ""}

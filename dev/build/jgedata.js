@@ -78,7 +78,7 @@ const GE_DATA={
     /* ác side of the leave (ha: «mang theo … bí mật hậu cung»): secrets she gathers and holds */"Nhờ người dò ai giữ lại","Giữ kín, chờ thời","Đem chuyện gói bùa ra nói lại"],
    close:["Bước đến che ô cho ngài","Bắt tay {v} chèn {mis}"],
    cond:[["s","duc"],["s","maid"]],fo:[],
-   cw:"cần Đức dày và lòng cung nữ theo ngươi",
+   cw:"cần Đức dày và thiện cảm của cung nữ theo ngươi",
    t:"Ngươi xin Hoàng thượng cho mình và mấy cung nữ theo hầu được xuất cung. Ngài trả lại chiếc ô: “Mang theo, đừng để ướt.” Ngoài cổng Thần Vũ, kinh thành đang họp chợ sớm. Mấy năm sau, tiệm thêu nhỏ bên sông của ngươi nổi tiếng khắp kinh thành, và chẳng ai biết bà chủ từng được Hoàng thượng che ô.",
    a:"Ngươi ra khỏi cổng Thần Vũ với ân thưởng của Hoàng thượng và mọi bí mật của hậu cung ngươi từng giữ. Tiệm thêu bên sông mở bằng bạc của những người không muốn ngươi nói ra. Ngươi không ngoái lại.",
    ht:"gác lại ân sủng, xin cho mình và người hầu được ra cung",ha:"mang theo ân thưởng và bí mật hậu cung mà ra đi",

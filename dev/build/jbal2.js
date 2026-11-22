@@ -561,6 +561,12 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* relAdd (j9): oán that a change of thiện cảm n leaves — on a hurt (n<0) the hurt one gains |n|×hurt, the doer |n|×doer; a kindness (n>0) melts |n|×mend.
    One number for the act and the card text (stealKem: oán ngươi +rel×hurt). */
 BAL.relOan={hurt:.6,doer:.2,mend:.3};
+/* rel-men-servants (KP22): oán a man / servant takes from a real deed (j9 one model; old saves: j9 relMSMig from the recorded grudge).
+   grudge = a man reported to the guards / Cung Chính ti, or threatened and refusing (jmen m.grudge); grudge2 = the guard shamed beside him (grudgeN 1);
+   hail = a greeting with a man (j22 manHail, both ways: relAdd); srvGrudge = a servant punished without cause (j24 s.grudge); bully = a servant bullied by another (jagstaff s.bullyBy);
+   threat = a servant threatened over a secret tie (j10 threatServ, j42 the servant road); bribe = thiện cảm of a servant who took the bribe toward the giver.
+   The fade is the shared BAL.oanFade (j28 oanMonth), the caps the shared −100..100 / 0..100. */
+BAL.relMS={hail:5,grudge:40,grudge2:20,srvGrudge:30,bully:20,threat:30,bribe:10};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
 /* ================= BALANCE CORE (review/balance-core, owner OD 16/11 23:00Z / 23:05Z / 23:08Z, 22:50Z) =================

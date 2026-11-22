@@ -55,7 +55,9 @@ async function page(b,dev){const ctx=await D.newDeviceContext(b,dev,{deviceScale
   addEventListener('unhandledrejection',e=>{try{const r=e.reason;const m=String(r&&r.message||r);if(!/Failed to fetch|NetworkError|net::|Load failed|aborted/i.test(m))window.__qcErr.push('unhandled: '+m)}catch(x){}})});
  if(!NET)await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));return {ctx,p,errs}}
-async function open(p,url){const g=await D.openHost(p,url,{timeout:120000});await g.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});return g}
+async function open(p,url){const g=await D.openHost(p,url,{timeout:120000});await g.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});
+  /* review/coop-fig-retry-r3: the OLD build quickcheck also runs (LIVE before jcdn m1fail / j52 nlFigsReady) still opens its new-life card only after the figure lists answered; with every CDN request aborted that is ~9.5 s of retries there. Capped, never fails; harmless on the new build. Drop once r2 is LIVE. */
+  await g.waitForFunction(()=>typeof FIGSIG==='undefined'||FIGSIG!==''||(window.KCDN&&KCDN.m1fail>0),null,{timeout:30000}).catch(()=>{});return g}
 const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[]).catch(()=>[]));
 (async()=>{const srv=await serve();const b=await chromium.launch();
  /* 1. open */
