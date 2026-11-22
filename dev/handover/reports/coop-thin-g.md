@@ -624,3 +624,24 @@ coop-night 4b at THIN ≥ 5 = level-only (jnf nfParked: no ctm-nf fin is ever se
 | one-core / undef / law4 / rdiff / mgout | — | PASS / PASS / 0 / 0 OPEN / 0 OPEN |
 rkOfFace PVBAD probe kept (b3fa6bc0, not touched); grep PVBAD in the TRIP logs of the lane.
 Full lane @70e6f5a8 RUNNING (2 queues): trip1 trip1b trip0 g4 g4s e2e e2es e2e0 e2e0s e2e0n cyc cycs night timer f3s f4s f5s f6 f6s f6b f6bs as9 as9s as13 as13s emo perf a–e (both) f1 f1s f2 f2s hn bongloc ×6 catch ×3 wlag ow 1–10. Then role-parity + quickcheck alone.
+
+### F1 FIX #7 — UPDATE + ROLLOVER HANDOVER (11/22/2026 ~16:30Z; context ≈ START 3 % + 25 % → the COORDINATOR opens #8)
+PRIORITY #1 CHECK: this report §F1 FIX #7 above | LIVE b238857f (merged here 2cba26cd) | review/coop-thin-g-f1 @**2cba26cd** (pushed) | claims: row «F1 fixer #7».
+**CORRECTION to §F1 FIX #7 item 2:** b8ce6545 (L13 g-go guard in jcoopworld) was WRONG and is REVERTED (35c8306b). Her part-D patches right after the host's go bring her dawn cards; CW.reEnd's reset of CW.sent is what puts her back to «answering» (not ready to the host, bots answer her cards). Keeping it stalled her cards: coop-thin-a «a week still ends and merges» red, TRIP swap 0 wk 20/24 «week merged once» (thq cards held). The night case-4 red it chased was a TEST read of a transient flag → coop-night now also reads her trace line «g-go <week>» (same fact). The LAW 11 row «guest path clears CW.sent» is void: **#7 changed no game code** (net: dev/test only + merges).
+**cyc lane red 61/66 (G #8 family, test):** a world window barring every night (jworld nightBlocked, e.g. quốc tang) gave her nightCh 0 under the forced deck → the forced flip + the lui check read nightCh with WW.noGate on (as jworld rawNight) — 35c8306b.
+Commits #7: 3a0f39a0 (bot root: helper step 6 / 2b, restores, coop-mgout-scan) · b8ce6545 (reverted) · 6ea3e8af merge LIVE 35f5b5ab · 70e6f5a8 lane caps · 35c8306b revert + night g-go trace + cyc world gate · 2cba26cd merge LIVE b238857f.
+
+| suite | build | result |
+|---|---|---|
+| cyc THIN13 | 2cba26cd | **66/66** |
+| night THIN13 | 2cba26cd | **111/111** |
+| coop-thin-a 13 | 2cba26cd | 4 FAIL = the same 4 as base b3fa6bc0 (pre-existing at level 13) |
+| lane @70e6f5a8 (contained the bad b8ce6545) | | trip1 85/85, trip1b 85/85, g4 21/21, e2e / e2e0 141/141, e2e0n 143/143, timer 43/43, f3s / f5s / f6 / f6bs / f2 / e PASS, as9 / as13 PASS, emo 25/25, bongloc ×3 16/16 · RED: cyc 61/66 (fixed above), trip0 rc 124 wk20/24 (b8ce6545, reverted), a / b / c / d / f1 / hn |
+| base b3fa6bc0, same Worker | | coop-thin-a 4 / b 11 / c 1 FAIL → parts A–C at level 13 are PRE-EXISTING reds (level-only assumptions; the reg script runs them at 13); lane vs base differed only in the b8ce6545 rows |
+PVBAD (rkOfFace probe): 0 lines in trip0 / trip1 / trip1b.
+
+**SUCCESSOR #8 — TODO (in order):**
+1. Setup: sparse `git worktree add` of review/coop-thin-g-f1 @2cba26cd; `cd coop/worker && npm install && setsid nohup npx wrangler dev --port 8787 --ip 127.0.0.1 --local &`; `python3 dev/build/assemble.py` (dev/index.html is untracked).
+2. Full lane on 2cba26cd: `WT=<wt> O=<out> bash dev/test/coop-thin-g-reg.sh <suites>` in 2 queues — q1: trip1 g4 e2e e2e0 e2e0n cyc timer f3s f5s f6 f6bs as9 as13 emo bl; q2: trip1b trip0 g4s night e2es e2e0s cycs f4s f6s f6b as9s as13s perf blc wlag ow. a–e / f1 / f2 / hn: compare with base b3fa6bc0 (a / b / c pre-existing; run d / f1 / hn on b3fa6bc0 too before judging).
+3. Alone: role-parity (`node dev/test/role-parity.test.js`; LIVE 9c057f42 D fix → expect ALL PASS), `bash dev/tools/quickcheck.sh`, one-core / undef / law4 / rdiff / `node dev/test/coop-mgout-scan.js` (all PASS / 0 OPEN @70e6f5a8).
+4. grep PVBAD in every TRIP log; CLAIMS; «SẴN SÀNG KIỂM <sha>» to Foreman B (BIG reviewer for the whole coop-thin-g).
