@@ -105,6 +105,12 @@ for n, (key, job, vn) in enumerate(JOBS, 1):
     assert '{' not in p, key
     OUT[key] = dict(prompt=p, code=f'M2370-{n:02d}', name=vn, kind=b['kind'], refs=b['refs'], job=job,
                     base=f"dev/handover/prompts_L2095/{b['code']}_{key}_ha_sang.txt", layout=b['layout'])
+# GROUP (ROOT-C3 GO 22/11 06:15Z on the owner's standing rule; 13 × 135 cr): the other 13 drawn places get WHITE only, nothing else changed.
+for key, b in B.items():
+    if key in OUT: continue
+    n = len(OUT) + 1
+    OUT[key] = dict(prompt=white(b['prompt'], b['kind'] == 'out'), code=f'M2370-{n:02d}', name=b['name'], kind=b['kind'], refs=b['refs'], job=1,
+                    base=f"dev/handover/prompts_L2095/{b['code']}_{key}_ha_sang.txt", layout=b['layout'])
 import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items()}, 'places-M2370')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'

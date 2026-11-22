@@ -1,0 +1,2 @@
+base: dev/handover/prompts_L2095/M2355-17_tu-ninh-cung_ha_sang.txt
+allow: same natural light  # white-light cause fix: head no longer copies image 1's warm light (owner L2370 job 1, group GO ROOT-C3)
