@@ -13,7 +13,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
 /* SHOTS=<dir outside git> (the Luân hồi intro overlay is hidden for the shot): host + guest at a buổi step (E3) and at her night card (E11), scratch only */
 const shot=async(o,n)=>{if(!process.env.SHOTS)return;try{await o.p.evaluate(()=>{for(const b of document.querySelectorAll('.krbox')){const ov=b.parentElement;if(ov&&ov!==document.body)ov.style.display='none'}});await o.p.screenshot({path:require('path').join(process.env.SHOTS,n+'.png')})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
-async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
+const REALL=require('./lib/coop-real.js');async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
@@ -41,6 +41,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await inW();
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
+ await REALL.realize(H,G,()=>week(H,G,'setup'),ok);
  const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];ok(lv[0]===LVL&&lv[1]===LVL,'E1 room level '+LVL+' on both seats',lv);
  /* the guest's outgoing messages */
  await G.p.evaluate(()=>{window.__sent=[];const s=COOP.send;COOP.send=function(m){try{window.__sent.push(m.t==='act'?'act:'+m.k+':'+(m.mode||''):m.t==='do'?'do:'+m.op:m.t)}catch(e){}return s.apply(this,arguments)}});

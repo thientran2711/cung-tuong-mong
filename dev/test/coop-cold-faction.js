@@ -9,8 +9,8 @@ const OUT=path.resolve(process.argv[2]||'/tmp/coop-cold-faction');fs.mkdirSync(O
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,600):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+const REALL=require('./lib/coop-real.js');async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+  await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code||'',seat:c.seat,week:c.week||0,online:c.online||{},ended:c.ended||{},
       frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const o={ctx,name,errs:[]};const p=await ctx.newPage();p.setDefaultTimeout(30000);
@@ -69,6 +69,7 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  /* both as consorts in the palace (a servant / tiểu thư-at-home start has no consort entry to aim pet acts at) */
  for(const o of [A,B])await o.p.evaluate(()=>{if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=Math.max(S.rank||0,3);render()});
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both in the shared world');await clear(A);await clear(B);
+ {const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(A);await press(B);ok(await weekWait(A,wk)&&await weekWait(B,wk),'set-up week merged');await clear(A);await clear(B);await REALL.realize(A,B,null,ok)}
 
  const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?{id:f.id,out:!!f.out}:null});
  /* harness: the friend's consort entry arrives with the next world sync (flaked 2/3 under load at SETUP) → wait for it on both seats */

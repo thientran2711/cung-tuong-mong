@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const {cardShot,sameDom}=require('./coop-
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||0);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(c?JSON.stringify(x).slice(0,400):JSON.stringify(x.paths?{paths:x.paths,dels:x.dels,err:x.err}:x).slice(0,3000)):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
+const REALL=require('./lib/coop-real.js');async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;try{localStorage.setItem('ctm-thin-part-4','1')}catch(e){};window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code,seat:c.seat,week:c.week,frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}};if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    const W0=window.WebSocket;window.__tx=[];window.__rxT=[];window.WebSocket=function(a,p){const s=p===undefined?new W0(a):new W0(a,p);const sd=s.send.bind(s);
     s.send=d=>{try{if(typeof d==='string'){const j=JSON.parse(d);__tx.push(j.t);if(j.t==='act'||j.t==='actr')(window.__old=window.__old||[]).push([j.t,j.k||'',j.mode||''])}}catch(e){}return sd(d)};s.addEventListener('message',e=>{try{if(typeof e.data==='string')__rxT.push(JSON.parse(e.data).t)}catch(x){}});return s};
@@ -39,6 +39,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await inW();
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;/* D r1 5a: the "Kiếp này chưa trọn" warning (an option that names death) is asked once per life; seeded so the bribe step never waits on it */render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
+ await REALL.realize(H,G,()=>week(H,G,'setup'),ok);
  ok(await until(H,()=>!!COOPW.friend(),null,30000)&&await until(G,()=>!!COOPW.friend(),null,30000),'each seat has the other as a consort entry');
 
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];

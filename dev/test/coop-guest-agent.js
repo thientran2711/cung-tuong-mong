@@ -7,6 +7,7 @@
           (s.coop stand-in in an NPC's staff) is skipped by asMonth / asStaff (her own phone lives her month).
    Also: j42 maidLoveMonth's old Ban gả dice never grant one of her own maids on the guest while her agent month runs (never twice).
    usage: python3 dev/build/assemble.py && node dev/test/coop-guest-agent.js [dev/index.html]   → exit 1 on FAIL or page error */
+/* coop-real: n/a — ONE page, no room and no second seat (the guest/host modes only stub agGuest()); there is no friend entry or host copy to make real (review/coop-real-port) */
 const {chromium}=require('playwright');const path=require('path');
 const HTML=path.resolve(process.argv[2]||'dev/index.html');
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
