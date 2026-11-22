@@ -36,9 +36,17 @@ const B=()=>BAL.steal;
 /* UNPARKED (MAIN ROOT-82 20/11 22:58Z on the owner's 20/11 ~21:30Z rule «phải chạy được trên cả hai bản»): a co-op room runs the new night on
    BOTH seats through the host-authoritative relay below. Parked only in a THIN part-E room (dev flag ctm-thin >= 5, Foreman B's coop-thin: the host
    runs her buổi + night in withSeat there, so the per-seat relay must not run twice); no player room reaches that level. */
-function nfParked(){try{const c=window.COOPW;return !!(c&&c.on&&c.thin&&typeof c.thin.on==="function"&&c.thin.on(5))}catch(e){return false}}
+function nfParked(){try{const c=window.COOPW;return !!(c&&c.on&&c.thin&&typeof c.thin.on==="function"&&c.thin.on(5))||roomOff()}catch(e){return false}}
 window.nfParked=nfParked;
 /* the palace night only (servant route j42 and the home route jkc keep their own week: the flip there is unchanged) */
+/* co-op: ONE night path for the room (coop-night0, LAW 11). The jnf relay is host-authoritative: a seat on jnf whose friend is off it (a cung
+   nữ, the tiểu thư at home, dead) waits for a word that never comes (host cung nữ + guest phi tần: guest «night 0» for ever) or for a choice that
+   never comes. So in a room jnf runs only while BOTH seats live in the palace, read from the room's shared world (COOPW.base.P, the same on
+   both phones; a seat that rose this week counts from the merged week on): otherwise the room is PARKED (nfParked, the one gate) and both
+   seats play the live co-op night (jfe start-of-tối flip, the live Tranh sủng / Chặn ngự giá cards, jsteal pass, jcoopworld tnRelay). */
+function seatOff(P){if(!P)return false;const s=P.S||{};return !!(P.dead||s.dead||(s.srv?!s.srv.risen:P.srv)||(s.kc&&!s.kc.inPal))}
+function roomOff(){try{const c=window.COOPW;if(!c||!c.on||!c.base||!c.base.P)return false;return seatOff(c.base.P.a)||seatOff(c.base.P.b)}catch(e){return false}}
+window.nfRoomOff=roomOff;
 function nfOn(){try{return !!(S&&!S.dead&&!nfParked()&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
 window.nfOn=nfOn;
 const CO=()=>{try{return window.COOPW&&COOPW.on&&typeof COOP==="object"?COOPW:null}catch(e){return null}};
