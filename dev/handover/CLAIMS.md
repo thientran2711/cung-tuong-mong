@@ -1004,7 +1004,7 @@ night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964i
 | REVIEW coop-host-lag-r2 r2-r3 (opus BIG co-op; of 97efea56, after rv 4aNyydwD rollover) | review/coop-host-lag-r2-r1; reports/coop-host-lag.md | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 21/11 23:51Z |
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | DONE LIVE 8746a062 22/11 | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
-night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | RUNNING | 22/11 03:22Z (Foreman D #18)
+night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | DONE LAND READY b979f5a4 | 22/11 03:22Z (Foreman D #18)
 | RELAND coop-host-lag r3 on LIVE bb92f986 (opus; MAIN 103 ORDER 02:50Z, clear() conflict → one shared helper) | review/coop-host-lag-r3 | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 22/11 03:23Z |
 | RELAND coop-host-lag r3 successor (opus BIG co-op; after rv 3VQoNHCT rollover) | review/coop-host-lag-r3 @624257fd; reports/coop-host-lag.md | B | session_01N1tNP2r12Tji5WTv34tiTY | RUNNING | 22/11 03:39Z |
 | BEDRUN1 redraw 13 bedrooms bed L29 (sonnet; OWNER L2342) | claude/cung-tuong-mong-handover-hj0h8w; reports/BEDRUN1.md | C | session_01D3E3NbTr3xRMKjjiWiQ6Ee | DONE @06a265b (13 rooms, 1 890 cr; owner OK L2350) | 22/11 04:45Z |
@@ -1018,9 +1018,9 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 | REVIEW coop-host-lag-r2 r2-r3 (opus BIG co-op; of 97efea56, after rv 4aNyydwD rollover) | review/coop-host-lag-r2-r1; reports/coop-host-lag.md | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 21/11 23:51Z |
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | DONE LIVE 8746a062 22/11 | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
-night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | RUNNING | 22/11 03:22Z (Foreman D #18)
+night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | session_01964izCK8uahRape4j1DLrp | DONE LAND READY b979f5a4 | 22/11 03:22Z (Foreman D #18)
 | RELAND coop-host-lag r3 on LIVE bb92f986 (opus; MAIN 103 ORDER 02:50Z, clear() conflict → one shared helper) | review/coop-host-lag-r3 | B | session_01N1tNP3VQoNHCTut3Sc6VXC | RUNNING | 22/11 03:23Z |
 | RELAND coop-host-lag r3 successor (opus BIG co-op; after rv 3VQoNHCT rollover) | review/coop-host-lag-r3 @624257fd; reports/coop-host-lag.md | B | session_01N1tNP2r12Tji5WTv34tiTY | RUNNING | 22/11 03:39Z |
-night-multi-kem review (SMALL, test-only) | review/night-multi-kem-rv | session_01964izDB3m7tHHRtbyaUBZX | RUNNING | 22/11 04:50Z (Foreman D #18)
+night-multi-kem review (SMALL, test-only) | review/night-multi-kem-rv | session_01964izDB3m7tHHRtbyaUBZX | DONE LAND READY b979f5a4 | 22/11 04:50Z (Foreman D #18)
 | night-ledger CO-OP ledger fixer (opus BIG co-op; rv r2 FAIL e6bfa993 co-op LAND GATE) | review/night-ledger-r2 → review/night-ledger-coop; reports/night-ledger.md | B | session_01N1tNP6wkABAL1zSRFzwedG | RUNNING | 22/11 05:07Z |
 | PLACES1 redraw all 15 game places + Từ Ninh 2 (opus; OWNER L2355) | claude/cung-tuong-mong-handover-hj0h8w; reports/PLACES1.md | C | session_01D3E3NZLhP7ifmR9ocQ12cR | RUNNING | 22/11 05:15Z |
