@@ -1,0 +1,13 @@
+# D20 — REVIEW coop-flakes (opus, BIG co-op: game fix + new BAL key)
+PRIORITY #1 CHECK: worker report dev/handover/reports/coop-flakes.md (handover 9cf1ecc5) | brief briefs/D20-coop-flakes.md | main jcoopask.js remapS (LIVE) | review/* review/coop-flakes 23b7cce5 (base LIVE 40cc2b92), review/coop-real-port (other D worker, test drivers) | claims coop-flakes E5gLnvQc.
+
+READ FIRST, in full: dev/rules/START_CORE.md + START_WORKER.md + START_REVIEWER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w), then only topic files your task touches. All 18 laws; FAIL any work that breaks a law it touches.
+
+REVIEW review/coop-flakes 23b7cce524d194822af1446aa59c3f8e1a2f7b92:
+1. MERGE LIVE FIRST: LIVE is now 0a3ceede (coop-guest-men landed: jcoopask.js collect/settle/hMan/hTh, jmort.js:124). Merge into review/coop-flakes-rv (expect jcoopask.js / test overlaps; keep both sides), rebuild site, run every gate on the merge.
+2. Game fix (b): remapS kept the week's link at the world id and dropped her stand-in link → new COOPW.keyMove (jcoopworld) adds both, clamped by NEW BAL.coop.linkRange; also jcoopthinc.js:270-271. Check: root proven on LIVE (repro), law 1 + 6b, ONE CORE (linkRange must match existing link bounds used elsewhere in BAL/code — no second source for the same bound), whole-family scan table correct and complete. The worker left jcoopworld.js:146-152 (absolute write-back of friend entry) and jnamefix max FOR FOREMAN: judge whether they are the same family (LAW 11) — if a real lost update exists there, FAIL with a repro; if not, say why.
+3. Test-only parts: lib/coop-real.js syncFr export, set-up hold, navigator.vibrate filter in 33 co-op drivers — no weakened check; exact check me == rlT+rlR.
+4. (a) not reproduced (0/20): accept or reject the write-up; open items 6 (guest-maid host stall «Biếu quà làm lành») and 7 (step-3 rank set-up) — confirm they are pre-existing on LIVE and properly logged.
+GATES on the merge: coop-pets, coop-guest-maid, coop-guest-men, coop-keymove-unit, coop-e2e, famops, one-core-guard/bind/text, role-parity, quickcheck.sh (old save, perf). One browser at a time.
+DELIVER: PASS → push review/coop-flakes-rv (merge commit = FF of LIVE), write «LAND READY review/coop-flakes-rv <full sha>» in dev/handover/reports/coop-flakes.md (handover branch: flock fetch --depth=30, checkout -f -B, append, push, never rebase) and send_message Foreman D (newest PICKUP line in dev/handover/FOREMAN_D_STATUS.md). FAIL → list in the report, send_message the worker session_01964izE5gLnvQcVeUAZdUGJ and Foreman D.
+ROLLOVER: START_CTX % + 25 % (ceiling 60 %) → handover in the report, tell Foreman D.
