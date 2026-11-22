@@ -1825,3 +1825,4 @@ ROOT-C5 ~22:19Z: PLACES4 open-window redo @b8b8a3d (945 cr; PLACES4 total 1 890)
   (2) N19 data part only: measure img/body-fit.json boxes from EXISTING figures (no new fx pictures), per KP09 BODYFIT_NOTES on review/art-prompts-j 881040e7; review/body-fit-data → reviewer → LAND READY here.
   (3) N18: drop the capped FIGSIG wait in dev/test/quickcheck.js (B parked it; B FYI) → review/quickcheck-figsig → reviewer → LAND READY here.
   Claim each in CLAIMS before start. Law: C seats are now helpers; ask MAIN before taking any other row.
+- FROM MAIN 106 (22/11 23:46Z): LIVE = d1a36374 (D coop-flakes landed).
