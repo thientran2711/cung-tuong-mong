@@ -60,3 +60,19 @@ All 3 came back RGBA transparent (no green) — fine for stills; flatten on #00F
 - hăng hái: fist gone, eager smile, coral disc, hands on rim. Eyes glance a little sideways (both the same way) — old looked straight.
 - chuyên tâm: chin on hand OK, no book; BUT side-glance + one brow up reads more sceptical/scheming (close to mưu) than calm focus. Mild.
 - All 3 NEW: earrings gone (F15, correct); she is drawn a bit lower/wider, hands visible at the bottom of the rim (more body than the old bust-only stills).
+
+## (3) WHOLE THÁI HẬU GROUP — owner L2299 "Duyệt, tiếp đi" + L2301 (via ROOT-B9) — 22/11 ~01:55Z, 18 × 135 = 2 430 cr
+Scope: the 18 remaining NON-HĐ feeling seals (vui buồn sợ ẩn bình đau-lòng ghen lo mưu tự-tin tình-tứ hưng-khởi tinh-nghịch hổ-thẹn chán khó-chịu choáng hờn);
+with M2294-01..03 = all 21 feeling seals. HĐ (act-*) seals NOT touched (owner ~02:10Z 20/11: HĐ seals OK, never redo).
+Prompt files M2301-01..18_th_<k>_A_still_TONEDOWN.txt (+ .keep; bases still_base/th-<k>-A.txt = th_prompts.py A output). Change = one "Light posture only: …"
+clause before "Both eyes looking together"; cut only tinh nghịch "one finger near her cheek" and khó chịu "tugging her collar with one hand" (allow lines).
+tình tứ adds "exactly two hands" (old 3-hands fault). keep_check 18 PASS · seal_gate --json 18 prompts 0 FAIL.
+Gen: gpt-2-6 1:1 2k, ref = each seal's OWN A keyframe (ledger ids); đau lòng ref = dau2 heartache A O6Et0g2ynm (old th-dau A is the sobbing one). One try each.
+Ids: vui ksdx4yl16B · buồn N2b3MTj6D9 · sợ ksdx4Py16B · ẩn YMg0mtAWeC · bình rgBLNNDxtc · đau p8PXQFwehw · ghen O6u4WBWynm · lo YMg0mbeWeC · mưu mE2arOnhJQ ·
+tự tin DoyduLupcl · tình tứ xSos60bjfW · hưng khởi P3FN0mv42C · tinh nghịch 8a3mKRTIrU · hổ thẹn rgBLN8Bxtc · chán cpUVvJu0eP · khó chịu 1lXj9Isr4r · choáng ovit52Y829 · hờn P3FN0K142C
+CDN tonedown/: th-<k>-A-M2301.png (green keyed → alpha), th-<k>-M2301-still160.webp; FULL GROUP sheet (21, old|new, VN names + codes):
+https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/th-tonedown-full-group.jpg — looked at.
+Looked at: all 18 read as their feeling, style/crown/robe/disc colours match the old set, no earrings, no extra hands. Big gestures gone (no waving,
+handkerchief, wringing, collar tug, eyelid pull). Đau lòng now quiet heartache (old one sobbed). Kept on purpose (light): ẩn finger 'shh', mưu finger at chin,
+chán/hổ thẹn/tình tứ hand at cheek, choáng hand at forehead, hờn arms crossed. Because each ref is the old still, several new ones are close to the old (vui, bình, lo).
+Game wiring: th seals are NOT in the game (no js/html/json references; they live only under img/_review) → nothing to wire.
