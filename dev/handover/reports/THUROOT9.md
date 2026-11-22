@@ -39,3 +39,21 @@ Chars: t2 10144→10310 · t3 10928→11132 · t4 11469→11740 · t5 11471→11
 - QP/HQP/HH: thêm một câu cho vải bay nhẹ như các bậc dưới (tay áo, gấu váy, dây đai lay trong gió).
 - **Đai Phi (khuyến nghị):** thêu chỉ vàng dày suốt đai, khoá vàng nhỏ dạng tấm nạm ngọc trai, dây viền vàng, mỗi tua có một hạt ngọc bích phía trên — vẫn mảnh, không cộm. Tần giữ đai tím + khoá tròn như cũ. QP/HQP/HH đi lên từ đó: thêm vàng, ngọc trai, ngọc bích, không to hơn.
 - **"Đã nói độ dài tua rua chưa?"** Đã nói rồi (L2206), chữ trong prompt cũng ghi như nhau, nhưng máy vẽ HQP/HH ngắn hơn — nay ghi rõ "dây + tua dài bằng mọi bậc, tua xuống dưới gối, không bao giờ dừng ở giữa đùi".
+
+## ROOMS M2300-02..11 (ROOT-B9 01:42Z; owner L2296/L2300 "we draw on Magnific", L2303 wall placement) — 10 gens + 1 superseded = 1 485 cr
+Settings: images_generate gpt-2-6, 2k, 2688×1386, folder ba4aecfe…, refs = json refs (image, in order), prompt = json prompt @522b391 (WALL PLACEMENT version). ONE try each, no retries.
+Superseded (old json, chairs facing each other mid-floor; NOT wired): M2300-02 xSosiCyjfW (135 cr), made before ROOT-B9's HOLD.
+Wired with roompf1_wire.py (prompt == json checked for all 10) → webp q88 img/_review/place-rank/pr13/<key>-ha-sang.webp, cdn_sync uploaded 10 (index v=c3af0f3f72f1). Images not in git.
+| code | key | Magnific id | base_c (target ≥ 82 %) | look (sheet, 896 px) |
+|---|---|---|---|---|
+| M2300-02 | dien-huy-cung-phi | EbWFUyouuO | 82.3 | OK: chairs + tea table against back wall, octagonal door |
+| M2300-03 | vinh-hoa-cung-phi-ngu | jU8lRnWLD0 | 82.7 | OK: tall wide canopy bed, gourd door; 2 armchairs along right wall |
+| M2300-04 | vinh-hoa-cung-phi | gOhwGhJSXO | 80.5 | OK walls; floor a little wide; guqin bench at the left edge (low) |
+| M2300-05 | khai-tuong-cung-quyphi-ngu | IfRhrR9tvE | 86.6 | OK: tall bed, vase door |
+| M2300-06 | khai-tuong-cung-quyphi | xSos3F9jfW | 77.1 | ⚠ too much open floor (below target); chairs against wall OK |
+| M2300-07 | chung-tu-cung-quyphi-ngu | 79CyWxwJAL | 83.5 | OK; 2 armchairs along right wall reach low near the bottom-right |
+| M2300-08 | chung-tu-cung-quyphi | Bh6Ikv6oQR | 82.7 | OK |
+| M2300-09 | ham-an-cung-quyphi-ngu | jU8lZ7iLD0 | 81.8 | ⚠ 2 large armchairs close up at the LEFT edge, low in the frame (prompt says only small low objects there) |
+| M2300-10 | ham-an-cung-quyphi | ksdx63916B | 82.3 | ⚠ same: armchairs along left window wall come close to the left edge |
+| M2300-11 | thua-minh-cung-quyphi-ngu | EbWFwJduuO | 82.3 | ⚠ 2 armchairs at the right edge come low, near the name strip |
+No people, no text in any; nothing free-standing mid-floor (L2303 OK in all 10). QP royal-yellow touch barely visible (as asked: tiny). Notes only — no redraw without the owner's yes (A20).
