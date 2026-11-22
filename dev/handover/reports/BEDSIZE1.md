@@ -8,60 +8,67 @@ depth 1 · START_CTX ~3 % (roll at ~28 %, ceiling 60 %) · worker of ROOT-C1 ses
 - "rộng ÷ cao người" = bề ngang giường / chiều cao nhân vật trong game. R:C = tỉ lệ ngang:cao của khối giường (px) — < 1.0 = "vuông/hộp" (cao hơn ngang).
 - Trạng thái: M = mẫu đã duyệt (L16: bộ Cảnh Phúc, HQP v7, Khôn Ninh, Thừa Minh đông phối v6) · D = chủ OK/duyệt (L23 phối, PR19–21 Tần, M2294-11..15 L2299) · S = đã gửi, chủ nói không cần chờ duyệt (L2300) · O = bản cũ không còn dùng.
 
-## Bảng (python3 dev/art/place-rank/bed_measure.py table)
-| hạng | phòng | trạng thái | rộng %ảnh | cao %ảnh | rộng ÷ cao người | cao ÷ cao người | R:C | ghi chú |
-|---|---|---|---|---|---|---|---|---|
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/ham-an-cung-tay-phoi-ngu | D | 30 | 58 | 0.79 | 0.79 | 1.00 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/khai-tuong-cung-tay-phoi-ngu | D | 30 | 60 | 0.79 | 0.82 | 0.97 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/vinh-hoa-cung-tay-phoi-ngu | D | 29 | 63 | 0.77 | 0.86 | 0.89 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/dien-huy-cung-dong-phoi-ngu | D | 28 | 70 | 0.74 | 0.96 | 0.78 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/ham-an-cung-dong-phoi-ngu | D | 28 | 62 | 0.74 | 0.85 | 0.88 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/canh-phuc-cung-tay-phoi-ngu | D | 27 | 50 | 0.71 | 0.68 | 1.05 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/chung-tu-cung-tay-phoi-ngu | D | 27 | 56 | 0.71 | 0.76 | 0.94 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/dien-huy-cung-tay-phoi-ngu | D | 27 | 62 | 0.71 | 0.85 | 0.84 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/khai-tuong-cung-dong-phoi-ngu | D | 27 | 60 | 0.71 | 0.82 | 0.87 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/thua-minh-cung-tay-phoi-ngu | D | 27 | 55 | 0.71 | 0.75 | 0.95 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | thua-minh-cung-dong-phoi-ngu | M | 26 | 73 | 0.69 | 1.00 | 0.69 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-tay-phoi-ngu | D | 25 | 68 | 0.66 | 0.93 | 0.71 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-dong-phoi-ngu | D | 22 | 85 | 0.58 | 1.16 | 0.50 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/canh-phuc-cung-dong-phoi-ngu | D | 21 | 55 | 0.56 | 0.75 | 0.74 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/chung-tu-cung-dong-phoi-ngu-r3 | D | 20 | 58 | 0.53 | 0.79 | 0.67 |  |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/vinh-hoa-cung-dong-phoi-ngu | D | 20 | 70 | 0.53 | 0.96 | 0.55 |  |
-| 4 Tần | pr21/chung-tu-cung-tan-ngu | D | 51 | 77 | 1.35 | 1.05 | 1.28 |  |
-| 4 Tần | pr20/chung-tu-cung-tan-ngu | O | 48 | 77 | 1.27 | 1.05 | 1.21 |  |
-| 4 Tần | pr13/ham-an-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 |  |
-| 4 Tần | pr13/khai-tuong-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 |  |
-| 4 Tần | pr20/dien-huy-cung-tan-ngu | D | 42 | 77 | 1.11 | 1.05 | 1.06 |  |
-| 4 Tần | pr20/vinh-hoa-cung-tan-ngu | D | 42 | 75 | 1.11 | 1.02 | 1.09 |  |
-| 4 Tần | pr19/chung-tu-cung-tan-ngu | O | 41 | 68 | 1.09 | 0.93 | 1.17 |  |
-| 4 Tần | pr13/thua-minh-cung-tan-ngu | D | 40 | 74 | 1.06 | 1.01 | 1.05 |  |
-| 4 Tần | pr19/ham-an-cung-tan-ngu | O | 40 | 74 | 1.06 | 1.01 | 1.05 |  |
-| 4 Tần | canh-phuc-cung-tan-ngu | M | 38 | 77 | 1.01 | 1.05 | 0.96 | vuông/hộp |
-| 4 Tần | pr13/truong-xuan-cung-tan-ngu | S | 38 | 70 | 1.01 | 0.96 | 1.05 |  |
-| 4 Tần | pr19/khai-tuong-cung-tan-ngu | O | 38 | 68 | 1.01 | 0.93 | 1.08 |  |
-| 5 Phi | canh-phuc-cung-phi-ngu | M | 42 | 76 | 1.11 | 1.04 | 1.07 |  |
-| 5 Phi | pr13/chung-tu-cung-phi-ngu | D | 42 | 66 | 1.11 | 0.90 | 1.23 |  |
-| 5 Phi | pr13/khai-tuong-cung-phi-ngu | D | 40 | 70 | 1.06 | 0.96 | 1.11 | nhỏ hơn mốc B 43% |
-| 5 Phi | pr13/thua-minh-cung-phi-ngu | S | 39 | 70 | 1.03 | 0.96 | 1.08 | nhỏ hơn mốc B 43% |
-| 5 Phi | pr13/truong-xuan-cung-phi-ngu | S | 39 | 80 | 1.03 | 1.09 | 0.95 | nhỏ hơn mốc B 43%, vuông/hộp |
-| 5 Phi | pr13/vinh-hoa-cung-phi-ngu | S | 38 | 73 | 1.01 | 1.00 | 1.01 | nhỏ hơn mốc B 43% |
-| 5 Phi | pr13/ham-an-cung-phi-ngu | S | 35 | 65 | 0.93 | 0.89 | 1.04 | nhỏ hơn mốc B 43% |
-| 5 Phi | pr13/dien-huy-cung-phi-ngu | S | 35 | 70 | 0.93 | 0.96 | 0.97 | nhỏ hơn mốc B 43%, vuông/hộp |
-| 6 Quý phi | canh-phuc-cung-quyphi-ngu | M | 44 | 80 | 1.17 | 1.09 | 1.07 |  |
-| 6 Quý phi | pr13/dien-huy-cung-quyphi-ngu | S | 41 | 70 | 1.09 | 0.96 | 1.14 | nhỏ hơn mốc B 46% |
-| 6 Quý phi | pr13/chung-tu-cung-quyphi-ngu | S | 39 | 72 | 1.03 | 0.98 | 1.05 | nhỏ hơn mốc B 46% |
-| 6 Quý phi | pr13/ham-an-cung-quyphi-ngu | S | 37 | 73 | 0.98 | 1.00 | 0.98 | nhỏ hơn mốc B 46%, vuông/hộp |
-| 6 Quý phi | pr13/truong-xuan-cung-quyphi-ngu | S | 37 | 70 | 0.98 | 0.96 | 1.03 | nhỏ hơn mốc B 46% |
-| 6 Quý phi | pr13/khai-tuong-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | nhỏ hơn mốc B 46%, vuông/hộp |
-| 6 Quý phi | pr13/thua-minh-cung-quyphi-ngu | S | 33 | 75 | 0.87 | 1.02 | 0.85 | nhỏ hơn mốc B 46%, vuông/hộp |
-| 6 Quý phi | pr13/vinh-hoa-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | nhỏ hơn mốc B 46%, vuông/hộp |
-| 7 Hoàng quý phi | truong-xuan-cung-hqp-ngu | M | 34 | 80 | 0.90 | 1.09 | 0.82 | nhỏ hơn mốc B 49%, vuông/hộp |
-| 8 Hoàng hậu | khon-ninh-cung-ngu | M | 52 | 87 | 1.38 | 1.19 | 1.16 |  |
+## Bảng (python3 dev/art/place-rank/bed_measure.py table DLDIR) — có cột sàn floor_c (measure_floor.py)
+| hạng | phòng | trạng thái | rộng %ảnh | cao %ảnh | rộng ÷ cao người | cao ÷ cao người | R:C | sàn floor_c % | ghi chú |
+|---|---|---|---|---|---|---|---|---|---|
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/ham-an-cung-tay-phoi-ngu | D | 30 | 58 | 0.79 | 0.79 | 1.00 | 14.3 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/khai-tuong-cung-tay-phoi-ngu | D | 30 | 60 | 0.79 | 0.82 | 0.97 | 10.4 | sàn hẹp |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/vinh-hoa-cung-tay-phoi-ngu | D | 29 | 63 | 0.77 | 0.86 | 0.89 | 12.1 | sàn hẹp |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/dien-huy-cung-dong-phoi-ngu | D | 28 | 70 | 0.74 | 0.96 | 0.78 | 16.0 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/ham-an-cung-dong-phoi-ngu | D | 28 | 62 | 0.74 | 0.85 | 0.88 | 18.2 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/canh-phuc-cung-tay-phoi-ngu | D | 27 | 50 | 0.71 | 0.68 | 1.05 | 11.7 | sàn hẹp |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/chung-tu-cung-tay-phoi-ngu | D | 27 | 56 | 0.71 | 0.76 | 0.94 | 13.0 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/dien-huy-cung-tay-phoi-ngu | D | 27 | 62 | 0.71 | 0.85 | 0.84 | 19.0 | sàn rộng |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/khai-tuong-cung-dong-phoi-ngu | D | 27 | 60 | 0.71 | 0.82 | 0.87 | 14.3 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/thua-minh-cung-tay-phoi-ngu | D | 27 | 55 | 0.71 | 0.75 | 0.95 | 23.4 | sàn rộng |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | thua-minh-cung-dong-phoi-ngu | M | 26 | 73 | 0.69 | 1.00 | 0.69 | 2.6 | sàn hẹp |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-tay-phoi-ngu | D | 25 | 68 | 0.66 | 0.93 | 0.71 | 10.8 | sàn hẹp |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-dong-phoi-ngu | D | 22 | 85 | 0.58 | 1.16 | 0.50 | 14.7 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/canh-phuc-cung-dong-phoi-ngu | D | 21 | 55 | 0.56 | 0.75 | 0.74 | 19.0 | sàn rộng |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/chung-tu-cung-dong-phoi-ngu-r3 | D | 20 | 58 | 0.53 | 0.79 | 0.67 | 16.0 |  |
+| 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/vinh-hoa-cung-dong-phoi-ngu | D | 20 | 70 | 0.53 | 0.96 | 0.55 | 18.6 | sàn rộng |
+| 4 Tần | pr21/chung-tu-cung-tan-ngu | D | 51 | 77 | 1.35 | 1.05 | 1.28 | 15.6 |  |
+| 4 Tần | pr20/chung-tu-cung-tan-ngu | O | 48 | 77 | 1.27 | 1.05 | 1.21 | 13.0 |  |
+| 4 Tần | pr13/ham-an-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 | 12.6 |  |
+| 4 Tần | pr13/khai-tuong-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 | 16.0 |  |
+| 4 Tần | pr20/dien-huy-cung-tan-ngu | D | 42 | 77 | 1.11 | 1.05 | 1.06 | 18.6 | sàn rộng |
+| 4 Tần | pr20/vinh-hoa-cung-tan-ngu | D | 42 | 75 | 1.11 | 1.02 | 1.09 | 19.0 | sàn rộng |
+| 4 Tần | pr19/chung-tu-cung-tan-ngu | O | 41 | 68 | 1.09 | 0.93 | 1.17 | 16.5 |  |
+| 4 Tần | pr13/thua-minh-cung-tan-ngu | D | 40 | 74 | 1.06 | 1.01 | 1.05 | 15.6 |  |
+| 4 Tần | pr19/ham-an-cung-tan-ngu | O | 40 | 74 | 1.06 | 1.01 | 1.05 | 12.6 |  |
+| 4 Tần | canh-phuc-cung-tan-ngu | M | 38 | 77 | 1.01 | 1.05 | 0.96 | 3.9 | vuông/hộp, sàn hẹp |
+| 4 Tần | pr13/truong-xuan-cung-tan-ngu | S | 38 | 70 | 1.01 | 0.96 | 1.05 | 13.0 |  |
+| 4 Tần | pr19/khai-tuong-cung-tan-ngu | O | 38 | 68 | 1.01 | 0.93 | 1.08 | 16.0 |  |
+| 5 Phi | canh-phuc-cung-phi-ngu | M | 42 | 76 | 1.11 | 1.04 | 1.07 | 3.5 | sàn hẹp |
+| 5 Phi | pr13/chung-tu-cung-phi-ngu | D | 42 | 66 | 1.11 | 0.90 | 1.23 | 13.0 |  |
+| 5 Phi | pr13/khai-tuong-cung-phi-ngu | D | 40 | 70 | 1.06 | 0.96 | 1.11 | 15.6 | nhỏ hơn mốc B 43% |
+| 5 Phi | pr13/thua-minh-cung-phi-ngu | S | 39 | 70 | 1.03 | 0.96 | 1.08 | 11.7 | nhỏ hơn mốc B 43%, sàn hẹp |
+| 5 Phi | pr13/truong-xuan-cung-phi-ngu | S | 39 | 80 | 1.03 | 1.09 | 0.95 | 12.6 | nhỏ hơn mốc B 43%, vuông/hộp |
+| 5 Phi | pr13/vinh-hoa-cung-phi-ngu | S | 38 | 73 | 1.01 | 1.00 | 1.01 | 17.3 | nhỏ hơn mốc B 43% |
+| 5 Phi | pr13/ham-an-cung-phi-ngu | S | 35 | 65 | 0.93 | 0.89 | 1.04 | 15.2 | nhỏ hơn mốc B 43% |
+| 5 Phi | pr13/dien-huy-cung-phi-ngu | S | 35 | 70 | 0.93 | 0.96 | 0.97 | 10.0 | nhỏ hơn mốc B 43%, vuông/hộp, sàn hẹp |
+| 6 Quý phi | canh-phuc-cung-quyphi-ngu | M | 44 | 80 | 1.17 | 1.09 | 1.07 | 3.5 | sàn hẹp |
+| 6 Quý phi | pr13/dien-huy-cung-quyphi-ngu | S | 41 | 70 | 1.09 | 0.96 | 1.14 | 14.3 | nhỏ hơn mốc B 46% |
+| 6 Quý phi | pr13/chung-tu-cung-quyphi-ngu | S | 39 | 72 | 1.03 | 0.98 | 1.05 | 16.5 | nhỏ hơn mốc B 46% |
+| 6 Quý phi | pr13/ham-an-cung-quyphi-ngu | S | 37 | 73 | 0.98 | 1.00 | 0.98 | 18.2 | nhỏ hơn mốc B 46%, vuông/hộp |
+| 6 Quý phi | pr13/truong-xuan-cung-quyphi-ngu | S | 37 | 70 | 0.98 | 0.96 | 1.03 | 14.3 | nhỏ hơn mốc B 46% |
+| 6 Quý phi | pr13/khai-tuong-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | 13.4 | nhỏ hơn mốc B 46%, vuông/hộp |
+| 6 Quý phi | pr13/thua-minh-cung-quyphi-ngu | S | 33 | 75 | 0.87 | 1.02 | 0.85 | 17.7 | nhỏ hơn mốc B 46%, vuông/hộp |
+| 6 Quý phi | pr13/vinh-hoa-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | 12.1 | nhỏ hơn mốc B 46%, vuông/hộp, sàn hẹp |
+| 7 Hoàng quý phi | truong-xuan-cung-hqp-ngu | M | 34 | 80 | 0.90 | 1.09 | 0.82 | 7.8 | nhỏ hơn mốc B 49%, vuông/hộp, sàn hẹp |
+| 8 Hoàng hậu | khon-ninh-cung-ngu | M | 52 | 87 | 1.38 | 1.19 | 1.16 | 2.6 | sàn hẹp |
 
 ## Kết quả chính
 - Mẫu đã duyệt: Cảnh Phúc Quý phi 44 % (1.17× người, R:C 1.07), Khôn Ninh HH 52 % (1.38×, R:C 1.16), Cảnh Phúc Phi 42 %, Cảnh Phúc Tần 38 %.
 - 7 phòng Quý phi mới (M2300-05..21) đều NHỎ HƠN mẫu Quý phi đã duyệt (33–41 % so với 44 %) — tức là hiện tại Quý phi mới còn nhỏ hơn Tần (Tần đã duyệt 40–51 %). Thừa Minh QP (M2300-11) và Vĩnh Hòa QP (M2300-15) = 33 % (0.87× người), R:C 0.85 → đúng "nhỏ, vuông, hộp" như chủ thấy. Khải Tường QP (M2300-05) cũng 33 %, R:C 0.86.
 - Phi mới: 35–40 %, Diên Huy Phi (M2300-01) và Hàm An Phi (M2299-12) 35 % nhỏ nhất.
+
+## SÀN (owner L2317 qua ROOT-C1: sàn đẹp nhất = M2300-05 Khải Tường QP + M2300-03 Vĩnh Hòa Phi; hẹp quá = M2300-01 Diên Huy Phi)
+- floor_c (độ sâu sàn trống giữa ảnh, % chiều cao): M2300-05 = 13.4 · M2300-03 = 17.3 · M2300-01 = 10.0 → khoảng sàn tốt 12.5–18.5 %.
+- Phòng mới dưới 12.5 (sàn hẹp): M2300-01 Diên Huy Phi 10.0 · M2299-14 Thừa Minh Phi 11.7 · M2300-15 Vĩnh Hòa QP 12.1 (sát). Các phòng mới khác 12.6–18.2 = ổn.
+- Phòng đã OK (phối, Tần pr20) có vài cái ngoài khoảng (10.4–23.4) → chỉ báo, giữ theo L23.
+- Các mẫu cũ ở thư mục gốc (Cảnh Phúc ×3, Khôn Ninh, HQP v7, Thừa Minh đông phối v6) đo ra 2.6–7.8: KHÔNG tin được — sàn có thảm/hoa văn/bóng phản chiếu nên script dừng sớm (nhìn ảnh thì sàn trống ~15–20 %). Không dùng làm mốc sàn.
+- Neo giường theo M2300-05/-03 thì KHÔNG hợp lý: giường M2300-05 33 % vuông hộp (cùng lỗi chủ chê), M2300-03 38 %. → Sàn neo M2300-05/-03; cỡ giường neo Khôn Ninh + Cảnh Phúc QP (phương án B giữ nguyên).
 
 ## Hai phương án (gửi chủ)
 - (A) MỘT cỡ cho mọi phòng 1 giường: khung giường rộng ≥ 44 % bề ngang ảnh (= mẫu Cảnh Phúc Quý phi, ~1.2× chiều cao nhân vật), ngang hơn cao (R:C ≥ 1.05).
@@ -70,11 +77,12 @@ depth 1 · START_CTX ~3 % (roll at ~28 %, ceiling 60 %) · worker of ROOT-C1 ses
 
 ## Danh sách KHUYẾN NGHỊ VẼ LẠI theo (B) (L21 — chưa vẽ, chờ chủ chọn)
 Ưu tiên 1 (Quý phi, dưới mốc 46 % nhiều + vuông hộp): M2300-11 Thừa Minh QP 33 % R:C 0.85 · M2300-15 Vĩnh Hòa QP 33 % 0.86 · M2300-05 Khải Tường QP 33 % 0.86 · M2300-09 Hàm An QP 37 % 0.98 · M2300-21 Trường Xuân QP 37 % · M2300-07 Chung Tú QP 39 % · M2300-13 Diên Huy QP 41 %.
-Ưu tiên 2 (Phi, dưới 43 %): M2300-01 Diên Huy Phi 35 % R:C 0.97 · M2299-12 Hàm An Phi 35 % · M2300-03 Vĩnh Hòa Phi 38 % · M2300-19 Trường Xuân Phi 39 % R:C 0.95 · M2299-14 Thừa Minh Phi 39 % · (M2294-13 Khải Tường Phi 40 % — chủ đã duyệt L2299; theo L23 giữ, chỉ vẽ nếu chủ gọi tên).
+Ưu tiên 2 (Phi, dưới 43 %): M2300-01 Diên Huy Phi 35 % R:C 0.97 + SÀN HẸP 10.0 (chủ L2317 nói hẹp quá) — sửa cả giường lẫn sàn · M2299-12 Hàm An Phi 35 % · M2300-03 Vĩnh Hòa Phi 38 % · M2300-19 Trường Xuân Phi 39 % R:C 0.95 · M2299-14 Thừa Minh Phi 39 % (sàn 11.7 hơi hẹp) · (M2294-13 Khải Tường Phi 40 % — chủ đã duyệt L2299; theo L23 giữ, chỉ vẽ nếu chủ gọi tên).
 Ghi chú: HQP v7 (Trường Xuân HQP) 34 %, R:C 0.82 — là mẫu đã duyệt nên theo L23 giữ nguyên, chỉ báo chủ biết nó nhỏ hơn mốc B 49 %. Tần: tất cả đạt (Trường Xuân Tần M2300-17 38 % sát mốc, trong sai số).
+Khi vẽ lại: giữ sàn trong 12.5–18.5 % như M2300-05/-03 (room_gate/measure_floor kiểm sau khi vẽ).
 Cách sửa khi chủ đồng ý (A17, chỉ một chỗ): thêm câu cỡ giường vào prompt phòng đó, ví dụ "the canopy bed is wide and grand, its frame spanning about 46 % of the picture width, wider than tall" — chưa sửa prompt nào.
 
-## Tờ so sánh
+## Tờ so sánh (chỉ iPad — Fold chờ PEOPLE1 stage_exact/fold755.json)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/bedsize/bedsize-compare.jpg (2366×1468, 1.1 MB) — Cảnh Phúc QP (mẫu) · Khôn Ninh (mẫu) · M2300-11 · M2300-15, mỗi ảnh có 1 nhân vật đúng cỡ + chỗ đứng game iPad, khung xanh = khung giường đo. Đã xem.
 
 ## Gens: 0. Không đổi prompt, không vẽ lại.

@@ -7,7 +7,9 @@ typed below. For phối rooms (2 beds) the width is ONE bed.
 In-game scale = the live iPad stage of stage_exact/nf_tags.py (W 1162 x H 599, cover crop -> the whole 2688x1386
 picture is shown, scale 0.4323): figure visible height 438.7 px = 73.2 % of the picture height = 37.7 % of its width;
 feet 69.7 px above the bottom (88.4 % H).
-  python3 bed_measure.py table             -> markdown table
+  python3 bed_measure.py table [DLDIR]     -> markdown table (+ floor_c of measure_floor.py when DLDIR is given)
+FLOOR (owner L2317 via ROOT-C1): best floor = M2300-05 khai-tuong-cung-quyphi-ngu (13.4) + M2300-03 vinh-hoa-cung-phi-ngu (17.3);
+too narrow = M2300-01 dien-huy-cung-phi-ngu (10.0) -> floor band FLOOR_OK = 12.5 .. 18.5 % (floor_c).
   python3 bed_measure.py sheet DLDIR FIG OUT.jpg   (DLDIR = downloaded <folder>__<key>-ha-sang.webp, FIG = fig cut-out)"""
 import sys
 W, H, VH, GAP = 1162, 599, 438.7, 69.7
@@ -69,6 +71,7 @@ B = {
 LADDER = {'phoi': None,  # 2-bed rooms: info only (side-wall beds read narrow by perspective; L23 OK'd rooms stay)
           'tan': 40, 'phi': 43, 'quyphi': 46, 'hqp': 49, 'hh': 52}
 TOL = 2
+FLOOR_OK = (12.5, 18.5)
 
 def row(k):
     r, x0, x1, t, b, st = B[k]; w = x1 - x0; h = b - t
@@ -76,15 +79,22 @@ def row(k):
     return dict(key=k, rank=r, w=w, h=h, wf=w / FIG_W, hf=h / FIG_H, ratio=ratio, st=st,
                 low=LADDER[r] is not None and w < LADDER[r] - TOL, boxy=ratio < 1.0 and r != 'phoi')
 
-def table():
-    order = list(LADDER)
-    print('| hạng | phòng | trạng thái | rộng %ảnh | cao %ảnh | rộng ÷ cao người | cao ÷ cao người | R:C | ghi chú |')
-    print('|---|---|---|---|---|---|---|---|---|')
+def table(dl=None):
+    order = list(LADDER); FL = {}
+    if dl:
+        import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import measure_floor as mf
+        FL = {k: mf.measure(f"{dl}/{k.replace('/', '__')}-ha-sang.webp")['floor_c'] for k in B}
+    print('| hạng | phòng | trạng thái | rộng %ảnh | cao %ảnh | rộng ÷ cao người | cao ÷ cao người | R:C | sàn floor_c % | ghi chú |')
+    print('|---|---|---|---|---|---|---|---|---|---|')
     for k in sorted(B, key=lambda k: (order.index(B[k][0]), -(B[k][2] - B[k][1]))):
         d = row(k); n = []
         if d['low']: n.append(f"nhỏ hơn mốc B {LADDER[d['rank']]}%")
         if d['boxy']: n.append('vuông/hộp')
-        print(f"| {RANK[d['rank']].split(' (')[0]} | {k} | {d['st']} | {d['w']} | {d['h']} | {d['wf']:.2f} | {d['hf']:.2f} | {d['ratio']:.2f} | {', '.join(n)} |")
+        f = FL.get(k)
+        if f is not None and f < FLOOR_OK[0]: n.append('sàn hẹp')
+        if f is not None and f > FLOOR_OK[1]: n.append('sàn rộng')
+        fs = '' if f is None else f'{f:.1f}'
+        print(f"| {RANK[d['rank']].split(' (')[0]} | {k} | {d['st']} | {d['w']} | {d['h']} | {d['wf']:.2f} | {d['hf']:.2f} | {d['ratio']:.2f} | {fs} | {', '.join(n)} |")
 
 def sheet(dl, fig, out):
     from PIL import Image, ImageDraw, ImageFont
@@ -115,5 +125,5 @@ def sheet(dl, fig, out):
     sh.save(out, quality=84); print(out, sh.size)
 
 if __name__ == '__main__':
-    if sys.argv[1] == 'table': table()
+    if sys.argv[1] == 'table': table(sys.argv[2] if len(sys.argv) > 2 else None)
     else: sheet(*sys.argv[2:5])
