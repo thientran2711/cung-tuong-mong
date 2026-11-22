@@ -124,14 +124,23 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
   await samePets(A,B,'after week 1')}
  /* 5 late res: B ends the week first, THEN A helps her; the help must be in the merged week */
  {await B.p.evaluate(()=>{for(const P of S.pets||[]){P.full=30;petcSync(P)}render()});await sleep(1500);
-  const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(B);
-  /* r1 fix 6: the night gate (both ready, or the host forces the night) — A holds a dialog open so only B runs the night and ends */
-  await A.p.evaluate(()=>{pushModal({t:"Chờ",h:"<p>Chờ</p>"});showModal();COOPW.forceNight()});
-  {const t0=Date.now();while(Date.now()-t0<30000&&!await B.p.evaluate(()=>COOPW.sent===__co().week)){await clear(B);await sleep(300)}}
+  const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);
+  /* review/coop-guest-staff: under jnf co-op the guest's night needs the HOST's flip (host endTurn) and the host's {fin}; a dialog the host
+     holds BEFORE its flip holds the guest's night too, so B can never end first that way. Real order now: both close tối, the host's flip +
+     the one choice resolve (S.nfFin = today, {fin} sent to B), and at THAT moment the host's player opens a dialog and keeps it open
+     (setter on S.nfFin, synchronous: nothing of A's own night or week end can slip in first). B then plays her own night and ends first. */
+  await A.p.evaluate(()=>{window.__hold=0;const s=S;let v=s.nfFin;Object.defineProperty(s,'nfFin',{configurable:true,enumerable:true,get:()=>v,
+    set:x=>{v=x;try{if(!window.__hold&&x===day()){window.__hold=1;pushModal({t:"Chờ",h:"<p>Chờ</p>"});window.__holdQ=Q[Q.length-1];window.__sentAtHold=COOPW.sent}}catch(e){}}})});
+  await press(A);await press(B);
+  /* both choices resolve (the 10-second clock); keep clearing B only, and A only until its hold is up */
+  {const t0=Date.now();while(Date.now()-t0<90000){if(await B.p.evaluate(()=>COOPW.sent===__co().week))break;
+    if(!await A.p.evaluate(()=>window.__hold))await clear(A);await clear(B);await sleep(300)}}
+  ok(await A.p.evaluate(()=>!!window.__hold&&COOPW.sent!==__co().week&&Q.includes(window.__holdQ)),'A holds a dialog after the flip, her end not sent',await A.p.evaluate(()=>({hold:window.__hold,sent:COOPW.sent,wk:__co().week,nfFin:S.nfFin})));
   ok(await B.p.evaluate(()=>COOPW.sent===__co().week),'B ended the week (end sent)');
   ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length>0}),'A still sees B\'s pets');
   const before=await myPets(B);await B.p.evaluate(f=>{window.__f0=f},Math.max(...before.map(x=>x.full)));const hh=await act(A,'petcare',false);ok(hh.okk,'A helps B after B ended',hh);
   ok(await waitFr(B,()=>(S.pets||[]).some(P=>P.full>=window.__f0+25||P.full>=100)),'B applied the late help',await myPets(B));
+  await A.p.evaluate(()=>{const s=S,v=s.nfFin;delete s.nfFin;s.nfFin=v});/* A closes her dialog (clear) and ends her week */
   await press(A);ok(await weekWait(A,wk)&&await weekWait(B,wk),'week 2 merged');await clear(A);await clear(B);
   const after=await myPets(B);const t0=before.find(x=>true);
   ok(after.some(x=>x.full>=Math.min(100,Math.max(...before.map(y=>y.full))+25)),'merged week keeps the late help',{before,after});
