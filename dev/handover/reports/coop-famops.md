@@ -323,3 +323,16 @@ PRIORITY #1 CHECK ('famDiff|b4Ops|famSame|f7Done|famApply'): OD law 6c + law 1 |
  T5 dup 10000030: jil.js:122 market resale picks HER entry (liveRivals(true)) as buyer on the host → f7Done «add» to her → host census nets its own copy (mkt→nvp net).
  T6 lead 934 = 3385 (-pv d58a43fa): Kỳ ngộ-kept NPC piece, w72 host ilSent «me → coop:902 sang hảo hữu», NO fam op with 3385 (famRet with no case DOES put it in her chest, so not that); suspect the gift-items path (sendRes items / thin «inv», «Quà tặng» dialog) — not in the LOST_DBG trace yet.
 - NEXT (my child): kyngo-lead CONTROL on LIVE + 934/T6 trace of the items path; T1 fix proposal (report-only unless ordered).
+
+## E44g (depth 7, session_01DgYSWpJKPpcZbLgpxa9tkM) — T1 root + fix proposal, 22/11 ~17:30Z (report-only; -pv NOT moved)
+PRIORITY #1 CHECK ('f7Done|b4Ops|famSame|famIn|famRebase'): OD law 6c + law 1 | main b238857f jcoopworld.js famIn / f7Done | review/coop-famops-pv 5a239b1a (famSame; famIn unchanged) | claims E44g.
+- ROOT T1 (E44f's iu-vs-hiu guess is not it): the host's own contest minigame defers the festival scoring to fxFin7 → f7Done diffs her entry against CW.f7.b, the snapshot from the festival's START. Meanwhile she puts on garment X on her own seat (j92 wdWear: X leaves S.inv, the non-base garment G she wore goes back to S.inv) → her ctm-fam relay → famIn replaces her entry's bag → f7Done: «rm gone» X + «add» G (worn pieces carry no iu → «add y_… iu 0», the scan trace). Her seat: famItem finds X in her WORN slot, famOff takes it off = vanish; G arrives a second time («Được ban …»). famSame cannot help (X really left the bag). Same window: LIVE «ktake» of every child (kids rebuilt), «preg0» on a preg change.
+- FIX PROPOSAL branch **review/coop-famops-t1 2d8db496** (on LIVE b238857f, 1 commit, jcoopworld.js +10/-2 + unit): famIn (host), only when her bag / kids / preg are about to change while CW.f7 is open on that entry: send what the host did since the snapshot (the same b4Ops), then re-base the snapshot (inv0, K0) on her live bag. b4Ops runs only when a change comes (its «delete e.ci» for a thief must not eat the later op). No new number, no new player word. NOT SSK: no gates / scans yet.
+  | build | unit 21 / 21b | coop-famops-unit |
+  |---|---|---|
+  | LIVE b238857f | FAIL (rm X y_cungnu, rm+add Pz, add y_luamoc iu 0) / FAIL (X taken off, G ×2) | 33/35 |
+  | LIVE + fix (t1 2d8db496) | ok / ok | 35/35 |
+  | -pv 5a239b1a | FAIL (rm X, add G iu 0) / FAIL | 37/39 |
+  | -pv + same patch (local only) | ok / ok | 39/39 |
+- Scan trace for T6 (scratch copy of -pv coop-lost-scan.js, not committed): host sendRes «items» (COOP.send + D.resTo) and her received «items» in tA/tB; per seat a Q watch: a dialog holding a piece (giftin «Quà tặng» …) that leaves Q → where the piece is (mine / box / NOWHERE) + the option chosen; the scan's own Q drops (ui Q.length=0, cap 8, unstick shift) logged as SCANDROP. Fault output gains tA/tB.gq.
+- RUNNING 17:26Z: LIVE b238857f SEED=9001 + LIVE COOP_SWAP (kyngo-lead control + T6), t1 2d8db496 SEED=9001.
