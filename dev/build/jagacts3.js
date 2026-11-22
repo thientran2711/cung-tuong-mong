@@ -251,7 +251,7 @@ Object.assign(window,{p3InvLand,p3InvQ});
 Object.assign(AGC3BTN,{petBuy:"Nhờ thái giám tìm thú nuôi",petcare:"Giúp chăm thú nuôi của nàng",teachV:"học chữ",teachD:"Dạy lễ nghi"});
 Object.assign(AGC3ACT,{petBuy:"nhờ thái giám tìm thú nuôi",petcare:"sang giúp chăm thú nuôi",teachV:"tự tay dạy con học chữ",teachD:"tự tay dạy con lễ nghi"});
 function p3PetL(v){const X=BAL.ag.par3.petBuy;if(typeof PETK==="undefined"||!petHasFree(v))return[];return PETK.filter(k=>PET[k].pr&&(v.bac||0)-PET[k].pr>=X.keep&&!tsbPets(v).some(P=>P.t===k))}
-function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&ACT.petcare.ok(v,t))}
+function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t))}/* the friend test is the NPC's choice (BAL.pet.helpFr), the gate is the shared ACT.petcare.ok */
 function p3KidT(v,f){const s=ktSea();return kidsOf(v).filter(k=>k&&k.alive&&k.age>=BAL.kidTeach.age&&k[f==="tv"?"mtv":"mtd"]!==s)}
 agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
  try{if(nd(X.petBuy.g)&&typeof petBuyOne==="function"){const L=p3PetL(v);if(L.length){const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);P(p3O(v,"petBuy",{n:AGC3BTN.petBuy,c:{bac:-PET[k].pr},o:petBuyO(k,v),k:1},N,X.petBuy.g,"self"));if(O.length)O[O.length-1].pk=k}}
@@ -260,7 +260,7 @@ agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.
  }catch(e){agdErr("par3life",e)}return O});
 agRunReg("cx3:petBuy",v=>{const L=p3PetL(v);if(!L.length)return"";const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);const ok=petBuyOne(k,v);
  return p3Res("petBuy",ok?`Thái giám tìm về cho ${v.name} ${PET[k].n.replace(/^./,c=>c.toLowerCase())}`:`${v.name} nhờ thái giám tìm thú nuôi, mua phải con ốm`)});
-agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
+agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
 for(const f of ["tv","td"]){const K=f==="tv"?"teachV":"teachD";agRunReg("cx3:"+K,v=>{const L=p3KidT(v,f);if(!L.length||(v.suc||0)<BAL.kidTeach.suc)return"";L.forEach(ktSync);const k=L.sort((a,b)=>a[f]-b[f])[0];
  ap(v,{suc:-BAL.kidTeach.suc});const g=ktTeach(k,v,f);return p3Res(K,`${v.name} tự tay dạy ${k.name}${f==="tv"?" học chữ":" lễ nghi"} (${f==="tv"?"Văn":"Đức"} +${ktG(g)})`)})}
 /* ---------------- toilette answers of an NPC consort (jtoilr: the same functions as her answer buttons, toilRxGrudge / toilRxTell / toilRxGive / toilRxAsk; jagtoil tl2See calls p3ToilAns)
