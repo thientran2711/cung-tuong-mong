@@ -36,3 +36,20 @@ The new prompts carry a NOPAINT sentence (WALLS OF A SERVANTS' ROOM).
 
 ## Open
 - Swap HELD (needs the owner's OK via ROOT-C3): `python3 dev/art/place-rank/swap_L2370.py --go`.
+
+## L2381 (owner via ROOT-C4 19:07Z; verbatim dev/handover/briefs/L2381_owner_verbatim.md). 3 gens = 405 cr. Ctx 22 %.
+| job | code | key | gen id | floor % | what |
+|---|---|---|---|---|---|
+| (2) Phòng cung nữ = Cung nhân prompt copied | M2370-28 | phong-cung-nu-r3 | WDSBlj3cXe | 15.2 | the M2370-23 prompt byte-for-byte; only the caption code differs |
+| (3) A ca sở luxurious curtains + bed | M2370-29 | a-ca-so-r3 | dt9fPy5XSL | 11.3 (a bit low) | layered sapphire dragon-cloud brocade curtains with gold/silver embroidered borders, fringe, tassels and a gilt pelmet; zitan canopy bed carved with dragons and waves, embroidered valance |
+| (4) Thượng thư phòng embroidered curtains | M2370-30 | thuong-thu-phong-r4 | CqY1zzVEEy | 15.6 | deep-blue brocade embroidered with peonies, clouds and cranes like its chairs/lanterns; gilt pelmet |
+| (5) Ngự hoa viên fresh | M2370-04 fresh | ngu-hoa-vien-fresh | 0 cr | — | calm grade undone; room_calm.py 'tuoi' on the original (mean S 60 → 66), detail kept |
+Before|after sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/places-l2370/people/L2382-before-after.jpg
+Gates: room_gate PASS; keep_check PASS (sidecars, base = the M2370 prompt each was edited from).
+Repairs (line-based rebase merges broke these): MA_HINH.json rebuilt from its key lines (388 codes); swap_L2370.py had the old r2 lines merged back in, which gave a 23-row plan, removed. room_vivid.py on the branch is broken (repeated headers, unclosed '{'); NOT fixed, not used.
+
+## GAME SWAP DONE (approved plan, ROOT-C4 order). 15 live files: img/<place>-ha-sang.webp, decapped, 2688×1386 q88, cdn_sync index v=81df8ded440d.
+Newest per place: phong-cung-nu←M2370-28, a-ca-so←29, lanh-cung←03, ngu-hoa-vien←04 fresh, duong-tam-dien←05, ngu-thu-phong←26, thai-y-vien←07, kinh-su-phong←20, tam-cung-dem←10, thuong-thu-phong←30, cung-nhan←23, tan-gia-kho←13, dong-cung←14, phi-tan-cung←15, tu-ninh-cung←25.
+Verified live: a-ca-so / phong-cung-nu / ngu-hoa-vien return 2688×1386 from the CDN.
+FOR MAIN (not swapped): Nội vụ phủ (no img/nvp-ha-sang.webp; live has nvp-v4-* → which key?), Từ Ninh bedroom M2370-24 (approved by her; needs a code hook-up, no live file). Only ha-sang was swapped; the other 15 season×buổi variants per place are still old (later job).
+Total PLACES3: 10 gens = 1 350 cr.
