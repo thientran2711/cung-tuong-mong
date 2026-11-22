@@ -56,3 +56,14 @@ Not touched (pre-existing, flagged): srvRise's dead fallback branch `if(loyR==nu
 | co-op pet check: coop-pets.js | every petcare / thaopet / petsteal / gift check PASS on both seats, both no page errors; «week merged» checks FAIL 6 — LIVE 5e32f66f (my files reverted): 5 FAIL of the same checks → pre-existing family (old drivers vs the bundle's night-end scenes); FOR D: a co-op test-driver fix, not this task |
 
 «SẴN SÀNG KIỂM c0ac67f6» — review/role-parity-bundle-fix (BIG reviewer: numbers/rules). Files: dev/build/jagmaid.js (riseCore), dev/build/j42.js (srvRise), dev/tools/role-parity-scan.js (ALIAS), dev/test/role-parity.test.js (Danh check both sides), index.html/sw.js rebuilt.
+
+### r1 — merge LIVE f0070e61 + reviewer FAIL 1 fix → efec3641
+- Merge LIVE f0070e61 (coop-famops-c2) = bf1988f6 (only index.html/sw.js conflicted, rebuilt). Gates on bf1988f6: rp/guard/bind/text/bc/sg/nm/quickcheck PASS.
+- Reviewer (session_01964izFRgtaMS3fADE2hXYA) FAIL 1, law 1 + 4: ACT.petcare.ok had an actor branch (`a===S?true:rel(a,t)>=10`). FIX as proposed: jpetcare ACT.petcare.ok = `tsbPets(t).length>0` (ONE gate both sides);
+  the NPC friend test is now the NPC's CHOICE: jagacts3 p3PetFr + the cx3:petcare run-time recheck use rel ≥ BAL.pet.helpFr (10), the jpetcare mind menu rel ≥ BAL.pet.helpMind (20) — new BAL.pet keys, no typed number, NPC behaviour unchanged.
+  Family scan (reviewer): this was the only ACT ok gate with an actor-side `a===S` branch. jbal2 danhG.srvRise comment → «(jagmaid riseCore, every rise)».
+- Gates on efec3641: role-parity ALL PASS · one-core guard/bind/text PASS · balance-core PASS · sg-card-scan PASS · night-multi PASS · quickcheck PASS ·
+  coop-e2e ×3 serial: 129/129, 129/129, 129/129 (an earlier triple had run 3 at 110/130 with the known week-stall family; the full serial ×3 rerun is green) ·
+  coop-pets: every petcare/thaopet/petsteal/gift check PASS both seats; its «week merged» checks FAIL 5 = LIVE 5e32f66f count (pre-existing driver family, reviewer is checking the press() done-test).
+
+«SẴN SÀNG KIỂM efec3641»
