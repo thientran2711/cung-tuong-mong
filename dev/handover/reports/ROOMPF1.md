@@ -85,3 +85,34 @@ Commit: see git log "ROOMPF1".
 - Phi ×4: Diên Huy bed + rec, Vĩnh Hòa bed + rec
 - Quý phi ×12: KT, CT, HA, TM, DH, VH × bed + rec. These need a Quý phi rank swap (B24 t6 #E3A25B + small royal-yellow touch; RANK['quyphi'] lux words) like the Phi one: no new style words, but the first QP batch is a new rank recipe → owner sample first.
 - Từ Ninh ~2 · Trường Xuân versions (Q1) · ~35 place scenes
+
+## L2300 (via ROOT-B9; owner "Làm luôn một loạt các cái phòng còn lại … cứ làm hết … gửi cho tôi một lần luôn")
+- WIRED M2299-11..15 (0 cr) at CDN img/_review/place-rank/pr13/<key>-ha-sang.webp:
+  | code | key | Magnific id | base_c |
+  |---|---|---|---|
+  | M2299-11 | chung-tu-cung-phi | xSos91QjfW | 89.6 |
+  | M2299-12 | ham-an-cung-phi-ngu | 6A5RVNKiJO | 84.8 |
+  | M2299-13 | ham-an-cung-phi | 1lXj4Nor4r | 81.4 |
+  | M2299-14 | thua-minh-cung-phi-ngu | aFzEjlGfSh | 87.4 |
+  | M2299-15 | thua-minh-cung-phi | 3zk2pBxREY | 84.0 |
+  Each prompt was checked identical to its json prompt.
+- BUILT M2300-01..22, ALL remaining chính điện bed + reception rooms. Builder dev/art/place-rank/prompts_roompf1_M2300.py → prompts_roompf1_M2300.json (prompt + refs + layout); room_gate PASS ×22, keep_check PASS ×22; ATTACH M2300_ATTACH.md.
+  - Phi ×4: Diên Huy, Vĩnh Hòa × bed + rec.
+  - Quý phi ×12: Khải Tường, Chung Tú, Hàm An, Thừa Minh, Diên Huy, Vĩnh Hòa × bed + rec. New QP rank swap: #E3A25B honey orange + a small royal-yellow touch #EFBD69 (B24/B21/G77); approved RANK['quyphi'] lux + furniture words; QP strip EbWFgREuuO (CDN roompf1/tone-swatch-quyphi-t6.png).
+  - Trường Xuân Tần/Phi/QP ×6 (Q1), CARD_TX.
+  - NOT built: Từ Ninh (Thái hậu). This chain has no rank recipe for her rooms → foreman decision.
+- MA_HINH.json: the upstream file was broken (two JSON objects glued + conflict markers). Rebuilt as one JSON, 271 codes, no clashing values (472611ff9).
+- GEN: M2300-01 dien-huy-cung-phi-ngu → s7tSRLNl8e queued (135 cr; this time the permission check allowed it). NOT yet waited / looked at / wired.
+
+## HANDOVER (ROOMPF1 → successor or ROOT-B9). depth 8. START_CTX ~3 %; now 28.7 % ≥ roll line 28 % → stop. Coordinator ROOT-B9 session_01D3E3NbN2JHBLFPohVouQYb opens the successor (or generates itself).
+TODO:
+1. creations_wait s7tSRLNl8e (M2300-01) → LOOK at it full size (bed height L21).
+2. Generate M2300-02..22, ONE try each. Settings: images_generate mode gpt-2-6, resolution 2k, 2688×1386, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, references = json refs (image type, in order), prompt = json prompt (no caption). ~21 × 135 = 2 835 cr.
+3. Wire each one: creations_register_download + creations_get → dump file → `python3 dev/art/place-rank/roompf1_wire.py DUMP dev/art/place-rank/prompts_roompf1_M2300.json M2300-NN=<id> …`. The tool checks prompt == json, downloads, saves webp q88 to img/_review/place-rank/pr13/<key>-ha-sang.webp and runs measure_floor. Script copy: dev/art/place-rank/roompf1_wire.py. Then `python3 dev/site/cdn_sync.py <files>` (~5 min with the index rebuild).
+4. ONE sheet of all rooms with Vietnamese captions + codes → owner (L2300 "gửi cho tôi một lần").
+5. FOR MAIN: no game table uses these chính điện rank rooms yet (rooms 31–40 neither). room_vivid.py is GLUED (SyntaxError line 9): fix before any grade; the approved rooms are wired ungraded.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
