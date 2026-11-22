@@ -113,3 +113,52 @@ CDN …/tonedown/act/: th-act-action-batch1-anim.mp4 (vui lo giận tình-tứ �
 | tinhtu | M2349-13 | huACqhevqL | 4RH644Q9Aa | vQGEKC7a47→6A5ZcjaiJO | w4fyZO37EI | N2bRc3b6D9 | B flattened |
 Looked at (stills, bursts, all frame strips): every action reads clearly; same Thái hậu, two hands, no earrings, disc colour + size steady after the chán fix. Small: giận slam makes a white burst spark at the rim; sợ has small shiver lines outside the rim; ẩn medallion drawn a bit smaller.
 Cost: 26×135 + 27×940 = 28 890 cr. Final 21 act set = these 13 (M2349) + 8 kept from M2342 (bình đau-lòng hổ-thẹn choáng hờn hăng-hái chuyên-tâm hưng-khởi).
+
+## (4) L2362 — lean-out / frame-interaction measure (0 cr, analysis only)
+Owner L2362: the 5 act seals played together do not match — some lean far out of the frame, some barely touch it (giận most, ẩn gentle); wants ONE consistent level, not necessarily a full jump out; refers to the earlier/rejected act videos.
+Method (THACT1_tools/leanout_measure.py): per seal, disc circle from OUT frame 0 (= A): centre x + radius from the equator band, centre y = widest row. Every OUT + LOOP frame (288 px cuts; current sets are disc-locked to A): **area** = figure pixels outside the rim (r×1.03) as % of the disc area; **reach** = 98th-percentile distance past the rim, % of disc diameter (98th pct so steam/sparkle specks don't count). Peak = max over OUT+LOOP; loop = mean over the LOOP. 'Rim touched' = yes for all (hands/forearms always over the rim from B on).
+Contact sheet (peak frame per seal, same disc scale 160 px, blue ring = measured disc): https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/act/th-act-leanout-measure-sheet.jpg
+| set | seal | peak area % | peak reach % | loop area % |
+|---|---|---|---|---|
+| M2349 (current) | tự tin | 40.4 | 27.3 | 33.3 |
+| M2349 (current) | giận | 39.4 | 32.7 | 19.4 |
+| M2349 (current) | tinh nghịch | 28.9 | 32.1 | 18.0 |
+| M2349 (current) | chán | 21.8 | 37.7 | 5.0 |
+| M2349 (current) | lo | 19.2 | 14.9 | 18.4 |
+| M2349 (current) | buồn | 18.9 | 16.0 | 18.3 |
+| M2349 (current) | vui | 14.6 | 8.7 | 13.5 |
+| M2349 (current) | khó chịu | 13.7 | 9.7 | 12.9 |
+| M2349 (current) | tình tứ | 12.1 | 11.0 | 8.4 |
+| M2349 (current) | sợ | 11.8 | 7.4 | 3.8 |
+| M2349 (current) | ghen | 11.1 | 7.5 | 10.7 |
+| M2349 (current) | ẩn | 10.2 | 8.3 | 6.2 |
+| M2349 (current) | mưu | 9.9 | 6.1 | 9.3 |
+| M2342 kept (current) | hưng khởi | 47.5 | 26.5 | 20.8 |
+| M2342 kept (current) | hờn | 16.0 | 10.1 | 10.6 |
+| M2342 kept (current) | hăng hái | 12.4 | 9.2 | 11.7 |
+| M2342 kept (current) | bình | 10.6 | 10.2 | 8.1 |
+| M2342 kept (current) | đau lòng | 9.9 | 10.1 | 9.8 |
+| M2342 kept (current) | hổ thẹn | 9.9 | 10.2 | 9.6 |
+| M2342 kept (current) | choáng | 9.9 | 8.1 | 9.8 |
+| M2342 kept (current) | chuyên tâm | 8.3 | 8.3 | 7.6 |
+| OLD strong set (SEAL6-8) | hưng khởi | 87.3 | 42.0 | 38.8 |
+| OLD strong set (SEAL6-8) | tự tin | 69.1 | 30.4 | 47.6 |
+| OLD strong set (SEAL6-8) | hờn | 66.9 | 37.7 | 57.0 |
+| OLD strong set (SEAL6-8) | hăng hái | 51.4 | 29.3 | 23.5 |
+| OLD strong set (SEAL6-8) | tinh nghịch | 42.9 | 40.4 | 23.2 |
+| OLD strong set (SEAL6-8) | ghen | 40.3 | 18.2 | 28.4 |
+| OLD strong set (SEAL6-8) | giận | 37.0 | 39.2 | 22.4 |
+| OLD strong set (SEAL6-8) | khó chịu | 35.4 | 21.8 | 26.2 |
+| OLD strong set (SEAL6-8) | choáng | 33.6 | 31.9 | 32.0 |
+| OLD strong set (SEAL6-8) | vui | 33.2 | 17.9 | 30.8 |
+| OLD strong set (SEAL6-8) | hổ thẹn | 30.4 | 38.8 | 23.9 |
+| OLD strong set (SEAL6-8) | chán | 28.1 | 40.3 | 19.1 |
+| OLD strong set (SEAL6-8) | chuyên tâm | 26.9 | 20.0 | 25.9 |
+| OLD strong set (SEAL6-8) | buồn | 24.4 | 21.7 | 21.5 |
+| OLD strong set (SEAL6-8) | tình tứ | 23.0 | 16.0 | 20.4 |
+| OLD strong set (SEAL6-8) | lo | 22.5 | 20.6 | 14.3 |
+| OLD strong set (SEAL6-8) | sợ | 19.7 | 12.2 | 9.5 |
+Reading: current 21 range 8–48 % (spread ×6): too far = hưng khởi 47.5, tự tin 40, giận 39, tinh nghịch 29; barely out (≈8–12) = chuyên tâm, mưu, choáng, hổ thẹn, đau lòng, ẩn, bình, ghen, sợ (loop 4), tình tứ, hăng hái. OLD strong set: 20–87 %, median ≈ 33 %. Old sets B frames decide the lean (clips interpolate A→B), so a level change needs a new B + OUT + LOOP (BACK = reversed OUT, 0 cr).
+PROPOSAL (one level, 'clear action, interacts with the rim, moderate lean-out, no full jump out'): peak area 15–25 % of the disc, reach ≤ 25 % of the diameter, loop 12–20 %; head + shoulders + forearms over the lower rim, props stay inside the picture. Prompt wording to lock it in B + clips: 'she leans out so her head, shoulders and forearms come over the lower gold rim (about a quarter of her body outside the medallion), not further; she does not jump out of the frame'.
+Redo to match (B + OUT + LOOP = 2 015 cr each): pull IN (4): tự tin, giận, tinh nghịch, hưng khởi · push OUT (11): mưu, ẩn, ghen, sợ, tình tứ, chuyên tâm, choáng, hổ thẹn, đau lòng, bình, hăng hái · in band, keep (6): lo, buồn, vui, khó chịu, hờn, chán (chán LOOP only 5 % — optional LOOP redo 940). → 15 × 2 015 = 30 225 cr (+940 optional chán LOOP).
+OPEN (ambiguous wording): the owner's text could also mean 'all like ẩn' (ẩn is only 10 % = the second-lowest). If she wants the ẩn level (≤ 12 %), redo instead the 10 above 12 %: hưng khởi, tự tin, giận, tinh nghịch, chán, lo, buồn, hờn, vui, khó chịu → 20 150 cr. Ask her to pick: band 15–25 % (≈ old-video feel, toned) or ẩn level.
