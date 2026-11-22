@@ -99,6 +99,19 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   const c0=conceiveCh(S);window.__ldNt=1;const c1=conceiveCh(S);window.__ldNt=0;a.cf=c0>0?Math.abs(c1-c0*BAL.nt.concF)<1e-9:true;
   COOPW.seat="a";T.room(false);render();return a});
  ok("5e guest seat, room parked: a settled tuần (ld st 1) still settles her nights once (record + Sổ ghi line, BAL.nt.concF), an unsettled one is ignored",r.gst&&r.park&&!r.ld&&r.unsettled&&r.ldG&&r.n===1&&r.line&&r.once&&r.cf,r);
+/* 5f. (rv night-ledger-coop-r2, mutation guard of the LDQ fix) the GUEST seat, room unparked, HER week end is out (COOPW.sent = COOP.state.week):
+   a settled tuần (ld st 1) waits (LDQ, nothing written into S); the merged week rebuilds S from her sent end (here: nights / ldG put back), then
+   the "week" event settles it once → her night is kept. Before the fix it was settled into the S the merge then threw away (n 0). */
+ r=await p.evaluate(()=>{T.fresh();T.room(true);COOPW.seat="b";render();const a={gst:!worldOn(),ld:ldOn()};const w=wk(),b0=(S.tuan||0)*10;
+  const me=nfEnc("me"),o={wk:w,p:0,st:1,days:[{d:b0+1,w:null,y:"blank"},{d:b0+2,w:me,y:"pick"},{d:b0+3,w:null,y:"blank"}],ln:{}};
+  const wq=(COOP.state.week||0);COOP.state.week=wq;COOPW.sent=wq;const n0=S.nights||0,g0=S.ldG;
+  a.n0=n0;ldIn(o);a.held=S.ldG===g0&&(S.nights||0)===n0;
+  /* the merged week: S rebuilt from her sent end (jcoopworld onWeek → fromCanon), then the room's "week" event */
+  S.nights=n0;S.ldG=g0;COOPW.sent=-1;COOP.emit("week",{week:wq+1});return a});
+ await p.waitForTimeout(300);
+ r=Object.assign(r,await p.evaluate(w=>({ldG:S.ldG!=null,n:(S.nights||0)})));r.n-=r.n0;
+ ok("5f guest seat, her week end out: a settled tuần waits (LDQ) and is settled once after the merged week (her night kept)",r.gst&&r.ld&&r.held&&r.ldG&&r.n===1,r);
+ await p.evaluate(()=>{COOPW.seat="a";T.room(false);render()});
  /* 6. the solo choice is OPEN, then a player room comes on: the same choice finishes (one resolve), the day ends, no hang */
  r=await p.evaluate(()=>{T.fresh();const d=wk();T.toEvening();T.noCyc();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();const a={open:Q.some(m=>m.pid==="nfch")||!!(S.nfX&&S.nfX.d===d)};
   T.room(true);render();const e=T.endDay();a.moved=e.moved;a.presses=e.presses;a.left=Q.length;a.done=!!(S.nfX&&S.nfX.d===d&&S.nfX.st==="done");T.room(false);render();return a});
