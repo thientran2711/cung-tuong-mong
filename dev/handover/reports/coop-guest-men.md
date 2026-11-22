@@ -63,3 +63,35 @@ Solo unchanged: every new path needs a co-op seat (`guest()` / `host()` read COO
 
 HANDOVER: none needed (work complete).
 SẴN SÀNG KIỂM review/coop-guest-men 8044a63c163336d2b9e17e19008b662fa06e416d
+
+## r2 — review FAIL fixes (review dev/handover/reports/coop-guest-men-review.md, D #20 order 18:29Z)
+PRIORITY #1 CHECK: rv report (handover a893dc08) | repro review/coop-guest-men-rv a92d5c55 dev/test/rv-cgm-j72.js | main jcoophl.js ctm-wfix (host live world fixes), jcoopworld CW.restore | claims: this seat; coop-flakes worker owns remapS (untouched here).
+Head: f98ceec2 (r2 2d4daa13 + r2b). Base still LIVE b238857f.
+
+| finding | root | fix (dev/build/jcoopask.js unless named) |
+|---|---|---|
+| **F1** her ease resolving in her week end erased | my blanket endTurn take-back of thIll restored everything inside endTurn, her acts too | take-back DROPPED; the only unguarded world roll of it, **jmort.js:124**, now `worldOn()`-guarded like j13. Every thIll world roll is host-only, so what differs on her seat is hers wherever it resolves |
+| **F2** requests built from the host's value | collect diffed against `CW.base`; but the host's live world fixes (**jcoophl ctm-wfix**) write host values straight into her S mid-week, and CW.base moves without a rebuild (jcoopworld :808/:848) | diff against **CW.askSnap** = her snapshot of the host's truth: taken from the room's C at every rebuild (also her first life); the same ctm-wfix ops for S.men / S.thIll are applied to it first (`snapOps`, same dispatch, before jcoophl); her rejoin's `CW.restore` (her own saved week) never retakes it — it rides her saved week as S.askSnap (a rejoin's room C already held her own road's man → her open request was voided: **this was the step-4 flake**). Ids carry the snapshot generation (`@g`): the same change later is a new request, never an old answer. Same window closed for kind "man" (away/ban never revert the host) |
+| F2b (found in r2 runs) | the host eases ITS current value when her request lands after its own month roll; her stand-in showed her raw value → one week st2 vs st1 | one rule `thPredict` for the host (hTh) AND her stand-in (settle); collect does not re-ask while an open request's prediction is what she sees; illness compared by fields (illEq), not JSON order |
+| **F3** driver | step 6 relied on the host's month roll | `ill3` re-sets st3 until BOTH seats agree; checks read pairs + the host's applied request; new **6d** (ease inside her week end, hook as the repro), **6g** (every applied "th" request is one of her acts), thIll watcher printed each run |
+
+LAW 11 family (same scan): every guest-side writer of the two keys now diffs against the snapshot; HOST_ONLY 8 keys classified, 0 guest-owned dropped; lists 11/11.
+
+### Gates r2 (head f98ceec2, one at a time)
+| gate | result |
+|---|---|
+| coop-guest-men.js | r2 runs: 43/55 → 49/54 → 50/54 → 52/54 → 55/55 (debug rounds) → on f98ceec2: **53/53 · 53/53 · 54/54** (count varies with ill3 retries) |
+| rv-cgm-j72.js (reviewer repro, on 2d4daa13) | **40/40** — RV7 «a "th" request from her week-end ease reached the host … r1», host st3→2 |
+| rv-cgm-j72.js (on f98ceec2) | run 1 38/40: RV7 hook never ran — the host's own roll had already cured her (h null, nothing to ease; the repro has no re-set, as rv r1) · run 2 **40/40** (her week-end ease 3→2 reached the host, r1) |
+| coop-e2e ×3 | 141/141 · 141/141 · 141/141 |
+| coop-guest-maid (coop-guest-staff driver) | 39/39 |
+| coop-guest-maid (main driver) | 36/37 — known test-made step 3 (same on plain LIVE) |
+| coop-guest-lists-scan | 11 · 11; HOST_ONLY 8 · 0 dropped; exit 0 |
+| coop-famops-unit | PASS 33/33 |
+| one-core-guard | PASS (fails 0) |
+| role-parity | ALL PASS |
+| quickcheck | **QUICKCHECK PASS** · old save ok · core gates PASS · time-spill PASS |
+No UI touched (no shots needed).
+
+HANDOVER: none needed (r2 complete).
+SẴN SÀNG KIỂM review/coop-guest-men f98ceec2e799b47890c5bb9e59c5ca3b55fe2f38
