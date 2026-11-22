@@ -104,3 +104,44 @@ Site rebuilt (build_site.sh), assets.json = LIVE.
 2. **night-coop-park case 5** (thin-E room → solo mid-day, rec 9): no flip ran in the room (w0 null), the flip ran solo → the ledger is legit there; the test counts all records. Make the case ledger-aware (count the played tối: BAL.nt.on=false in that case as night-final does, plus a ledger case that the tuần gets ONE ledger) and re-check S.ldPk still blocks a tuần whose flip ran PARKED (thin-E) — case 3/5 variants.
 3. After 1–2: role-parity (2 pre-existing FAILs only, compare LIVE), coop-e2e, Fold 755x1000@2 + iPad 1180x820@2 shots of both seats' Sổ ghi / pill.
 Base for the fix: **review/night-ledger-r2 @e6bfa993** (solo replay done and green; FF of LIVE ddcca5c1). Scratch: /home/user/wt/nl2-scratch (not in git).
+
+## FIX co-op — review/night-ledger-coop (FAIL r2 items 1–3)
+PRIORITY #1 CHECK ('night-ledger|jledger|ldPin|ldOut|ldIn|ctm-nf|coop ledger'): OD L594 (co-op LAND GATE), L96 (one world) | main 7303aa58: jledger.js absent, jnf relay ctm-nf (open / fin / ask) present | review/* review/night-ledger-r2 e6bfa993 (base), review/coop-night-sync(-r1) = the night gate (no ledger relay) → reused jnf's ctm-nf relay, no new channel | claims B row "night-ledger CO-OP ledger fixer" (this).
+Worker: opus, session_01N1tNP6wkABAL1zSRFzwedG; coordinator Foreman B ROOT-9. START_CTX ≈ 5 % (own estimate); end ≈ 30 % (under START + 25 %).
+Base e6bfa993 + merge LIVE 7303aa58, then LIVE f0070e61 (only index.html / sw.js conflicted both times, rebuilt). review/coop-night0 not LIVE yet (Foreman B FYI) — not merged.
+
+### 1. What changed (one ledger, host-computed, both seats)
+| item | before (r2) | after | file |
+|---|---|---|---|
+| who rolls in a player room | host rolls, **friend filtered out** (`!p.coop`); the guest seat rolled its OWN private ledger at its endTurn (its own NPC copy, host excluded) | ONLY the host rolls (ldPin / ldSettle return on the guest seat, `gst()` = room && !worldOn()); the friend's card is in every draw: nightCh from her blob (as the tray), her cycle by day (cycleDaysOf), her «báo sớm / giấu» through COOPW.fcyb | jledger §1, §5 |
+| played tối | her first day, else first NPC day | the first day of EITHER player, else first NPC day, else the custom (two-way); a steal that moves the played night keeps its first holder (`s`, `o`) | jledger |
+| relay | none (ctm-nf carried the played tối only) | ON the existing ctm-nf key: (a) every host word (open / fin) carries `ld` = the tuần's days + played index (seat-neutral ids via jnf `enc`: 901 / 902 / NPC id) → guest stores S.ledger (jcycle's played day reads the same fact); (b) after the host's settle, mode `ld` = the settled tuần + the contest lines per day; kept in S.ldOut (last 3), sent again on the guest's mode `ldask` (her day end / reconnect) and on room / peer events | jnf (send, apply, listener, re; exports nfEnc / nfDec / nfLdSend / nfLdAsk), jledger (ldOut / ldIn / ldAgain / ldWant) |
+| the friend's nights | none | contested on the host (same NPC batch, same odds; effects on NPCs real there); then settled on HER seat by `gSettle`: Sổ ghi "Kính sự phòng ghi: ngày {d}, ngươi được lật thẻ thêm một đêm." + BAL.nt.extraFx gains + her own conception roll night(S) (float × BAL.nt.concF, ldOn is true on her seat) + nights / nightLog (tuần = the host's wk) + kit pill (kitLine → kitNotice) + contest lines of her days (her name → «ngươi»; the host's own lines carry his name, not «ngươi») + tai-mắt line naming the other nights (the host's among them) | jledger §5 |
+| the host's view | — | the friend's nights are NOT applied on his seat (her seat owns her stats); his tai-mắt line names hers (two-way) | jledger ldSettle |
+| S.ldPk (parked thin-E) | only in ldSettle when no ledger existed → a solo commit after leaving the thin room rolled a ledger anyway (night-coop-park 5b found: rec 4) | ldPin returns undefined (live one-night draw) for a tuần whose flip ran parked; ldSettle writes the empty settled ledger | jledger |
+| ONE CORE | every number BAL.nt / BAL.steal (host); the guest reads the host's numbers, rolls only her own conception (her own chance, as the played night does) | — | — |
+| stale "co-op parked" comments (law 11 scan `grep -n -i "parked" dev/build/j*.js`) | jledger header §CO-OP + S.ldPk, jcycle L83, jnf L29 / L59, j2 L67, jfe L9 | rewritten: only a THIN part-E room is parked; player rooms run the ledger | jledger, jcycle, jnf, j2, jfe |
+
+### 2. Tests (branch head; LIVE 7303aa58 same box where compared)
+| test | after | LIVE / before |
+|---|---|---|
+| **coop-ledger.js NEW** (LIVE Worker, both seats consorts `__forceOrigin='cn'`, host Fold 755x1000@2 + guest iPad 1180x820@2; DEVSWAP=1 the other way; per tuần: 1 host presses first, 2 guest first): a same days / kind / holder / played index on both seats · b friend in the host draw, played = first player day · c each seat settles only its own nights (lines = held days, nights / nightLog, kit pill) · d tai-mắt names the other player · e ledger on + float conception on both · shots | **44/44, 43/43, 46/47** (the 1 = host tai mắt, see note) · DEVSWAP 41/44 (tuần 2 stuck, below) · DEVSWAP final 45/45 · on LIVE f0070e61 merge: 44/44 | — |
+| night-coop-park (10 cases: 2 and 5 count the PLAYED tối with BAL.nt.on false as night-final does; NEW 2b ledger in a player room = one ledger, rec = its nights; 5b flip ran PARKED then solo → S.ldPk: empty ledger, rec ≤ 1; 5c no flip in the thin room → one legit ledger) | **ALL OK 10/10** | r2: FAIL 2 (case 2 rec 5, case 5 rec 9) |
+| ledger.js 7 cases | ALL PASS 6/6 runs alone; 2 of 4 runs with "1 FAIL" while 2–3 Playwright suites ran beside it (random-draw case under load) | — |
+| quickcheck --runs 7 (after the f0070e61 merge) | **PASS** · old save ok · render 236/279, tab 505/496, buổi 1398/1435 ms · core gates PASS (one-core-guard 0); before the merge: PASS 251/240, 473/475, 1235/1284 | — |
+| undef-scan / one-core-guard | PASS (296 names) / PASS fails 0 | — |
+| role-parity | FAIL 2: `up:P-ONLY:harm:petcare` + riseCore Danh/Bạc | **LIVE: the same 2** (pre-existing) |
+| night-final / night-multi / log-sync-night / night-steal-unit | PASS (exit 0) / PASS / PASS / PASS | — |
+| coop-night (LIVE Worker) | 112/115 (case 5 reconnect + day step) | LIVE run 1: 4 cases stuck at week 0; run 2: 103/105 (case 2 «guest presses first» stuck at [1,1,1]) |
+| coop-e2e (LIVE Worker) | **129/129** | — |
+Note tuần-2 stalls: 2 of 7 coop-ledger runs stopped at «guest presses first» ([1,1,1], same date, both at tối) — the SAME stall LIVE coop-night case 2 shows on this box without the ledger (run 2 above); NTOFF=1 (ledger off) 2/2 runs had no stall, so it is a LIVE flake, not the ledger. A later debug run with a STUCK dump did not reproduce (44/44, 43/43).
+Note tai mắt: the room's week merge puts a script-set S.mat back (only real acts merge), so the host-side tai-mắt line is n/a in some runs (reported «n/a», the line itself is ledger.js case 4); the guest's line passed where her S.mat held.
+
+### 3. What the player sees (LOOKED 3×; scratch /home/user/wt/nlc-shots + /swap, not git, not uploaded)
+Files: ledger-{1,2}-host-755x1000 / -guest-1180x820 and swap/ledger-{1,2}-host-1180x820 / -guest-755x1000. Host Fold 755x1000@2 Sổ ghi: "Ngày 7: Đáp ứng … định giành đêm của ta nhưng Hoàng thượng không động lòng. Sủng -4 · Đức -1." / "Kính sự phòng ghi: ngày 7, ta được lật thẻ thêm một đêm. Sủng +1 · Ân tình +1." Guest iPad 1180x820@2 Sổ ghi: "Ngày 8: Một vị Đáp ứng chưa quen biết định giành đêm của ta …" / "Kính sự phòng ghi: ngày 8, ta được lật thẻ thêm một đêm. Sủng +1." / "… ngày 6 …" (names of people she has not met masked by the kit fog-of-knowledge scrub, k61). The kit result card (#rtoast) shows the same line. No overlap, nothing cut, 0 page errors. Swap: guest Fold «Ngày 10: Một vị Thường tại chưa quen biết định giành đêm của ta …» + «Kính sự phòng ghi: ngày 10, ta được lật thẻ thêm một đêm.»; the host iPad held no other night of his own in those tuần (no ledger line to show; his contest line «Ta định giành đêm của Đáp ứng …» shows). The guest's lines land under the NEXT tuần header when the host's settle arrives after her day turned (the line carries "ngày {d}").
+
+### 4. Open (not built)
+1. coop-night0 (Foreman B FYI, review/coop-night0): a room where the host is a cung nữ (host nfOn false) and the friend a consort: the host never rolls, so the friend gets the night path the host decides there (no ledger). The ledger follows that decision (the guest never rolls); when coop-night0 lands, merge it and re-run coop-ledger.
+2. The kit pill shot: kitLine is routed to kitNotice (KIT §42.2), seen by the hook in coop-ledger (c); no shot of the transient chip.
+
+SẴN SÀNG KIỂM 96c62324e8df5efe5c09517a145228c55a9382ef
