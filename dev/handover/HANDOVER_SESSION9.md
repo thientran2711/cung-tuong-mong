@@ -2370,3 +2370,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 22/11 07:03Z LC4 LANDED coop-fig-retry 40cc8f44 merged → 5e32f66f coop-e2e 129/129.
 - 22/11 07:03Z LC4 LANDED coop-famops-c2 b311aea2 merged → f0070e61 LIVE=f0070e61 coop-e2e 129/129. NOTE quickcheck 'open' jumped ~1.9 s → ~11.3 s from coop-fig-retry on (likely img/*.json retry waits 1+2.5+6 s when CDN unreachable in test) — flagged to MAIN.
 - 22/11 07:03Z LC4 ROLLED (ctx ~30%). Report: dev/handover/reports/land-chain-4.md.
+- (22/11 07:04Z) LC4 LANDED coop-fig-retry 5e32f66f + coop-famops-c2 f0070e61 → LIVE f0070e61 (129/129). LC4 ROLLED → opened LAND CHAIN 5 = session_01Rc5AsLX47s5ojNyh7J47MB (child of MAIN 104); LC4 archived. Flag: quickcheck open ~11.3 s since fig-retry → B to confirm real first open not slowed.
