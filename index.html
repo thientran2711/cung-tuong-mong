@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"97efea56+","t":"2026-11-21T23:49Z","c":"rv coop-host-lag-r2-r2: co-op test bots answer an NPC card played in the Du do focus scene (jdfv (3), modal hidden while it plays) like a p…","b":"97d1a8bd8c37","h":[{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"}]};
+window.CTM_BI={"s":"d19ac61d","t":"2026-11-22T00:50Z","c":"rv coop-host-lag-r2-r3: host relays a pruned rename order (same family: nmOrdPrune drops a done S.nmOrd order with no rename = a host world…","b":"6942f5125c8f","h":[{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -93261,7 +93261,7 @@ COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear();try{FLAST.clear()}ca
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
 COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
 /* every rename the host makes (any sweep: load, start, month) goes to the guest's own texts */
-if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){const r=f0.apply(this,arguments);try{if(CW.on&&host()&&Array.isArray(r)&&r.length){
+if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){let o0;try{o0=typeof S!=="undefined"&&S?JSON.stringify(S.nmOrd):undefined}catch(e){}const r=f0.apply(this,arguments);try{/* r2-r3 (same family, e2e NC_FORCE 1/1: S.nmOrd host {} vs guest the old order after week 3 + rejoin): the host's nmOrdPrune drops a done order with no rename, a world write no check sent */if(CW.on&&host()&&!(Array.isArray(r)&&r.length)&&typeof S!=="undefined"&&S&&JSON.stringify(S.nmOrd)!==o0)soon("nm")}catch(e){}try{if(CW.on&&host()&&Array.isArray(r)&&r.length){
   for(const x of r)if(x&&x.old&&x.neu&&x.old!==x.neu&&x.kind!=="lbl")nmQ.push([x.old,x.neu,x.why==="dup"?0:1]);if(nmQ.length>200)nmQ.splice(0,nmQ.length-200);soon("nm")}}catch(e){}return r};window.nmFix=nmFix}
 /* a lazy face pick on the host (render) is sent at once */
 function wrapPick(name){const f=window[name];if(typeof f!=="function")return;const g=function(who){let w=null,a;try{w=who||(name==="figThPick"&&S?S.thO:null);a=w&&w.fid}catch(e){}const r=f.apply(this,arguments);
@@ -93443,7 +93443,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="97d1a8bd8c37";window.CTM_BUILD=BUILD;
+const BUILD="6942f5125c8f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
