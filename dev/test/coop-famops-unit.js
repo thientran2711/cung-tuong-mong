@@ -100,6 +100,21 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     const e3=pc(P);v.inv.push(e3);const c3=loLoseE(v,e3,"srv");v.inv.splice(v.inv.indexOf(e3),1);loKeepBy(c3,S,"");Object.assign(c3,{keep:0,by:null,open:1});c3.kn.ome=1;
     used=0;loUI("giveback",c3.id);ck("18d «Trả về chủ» while SHE holds it: still works (one piece, at its owner)",c3.st==="done"&&cnt(e3.iu)===0&&v.inv.filter(e=>e.iu===e3.iu).length===1,{st:c3.st,me:cnt(e3.iu),v:v.inv.filter(e=>e.iu===e3.iu).length})}
    finally{CW.on=on5;v.inv=v.inv.filter(e=>!e.lo&&!(e.iu>9e6))}}
+  /* E44g T1 (coop-lost-scan vanish 10000013 / 10000014 / 10000078, both builds): the host's festival result waits for his contest minigame
+     (fxFin7 → f7Done diffs her entry vs the festival-START snapshot); meanwhile she puts on garment X on her own seat (X leaves her chest,
+     the one she wore, G, comes back to it) and her ctm-fam relay rebuilds her entry. Before: «rm gone» X (her famItem finds it WORN → taken
+     off her = vanish) + «add» G (a second copy) + «ktake» of her child. Now: no op; on her seat X stays on her, one G. */
+  {reset();const on21=CW.on,se21=CW.seat,sd21=COOP.send,f721=CW.f7;const sn=[];const Y=Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="y"&&IT[k]);
+   const kid={name:"Tiểu B",bt:5,alive:true,hp:50,tal:10,fond:50};const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[Object.assign({},kid)],rank:3,fav:50};rivals.push(f);
+   const X=pc(Y[0]),Pz=pc(P),G={k:Y[1],from:"emp"};let o21=[],er21="";
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};
+    f.inv=[X,Pz].map((e,i)=>Object.assign({},e,{ci:i}));CW.f7={b:{v:f,inv0:f.inv.slice(),K0:{kids:f.kids.map(k=>[k,Object.assign({},k)]),preg:0},P0:[]},title:"Hội thi T21",reg:null,L:null};
+    COOP.emit("act",{t:"act",k:"ctm-fam",mode:"fam",h:"t21",from:"b",name:f.name,pets:null,fam:{bag:[Pz,G].map((e,i)=>Object.assign({},e,{ci:i})),kids:[Object.assign({},kid)],preg:0,fake:0,fx7:null}});
+    fxFin7("Hội thi T21",[]);o21=sn.flatMap(m=>m.fam||[])}catch(e){er21=e.message}
+   finally{CW.on=on21;CW.seat=se21;COOP.send=sd21;CW.f7=f721;rivals.splice(rivals.indexOf(f),1)}
+   ck("21 festival result pending, her relay rebuilt her entry (she put X on): no «rm» X / «add» / «ktake» (was: X taken off her = vanish, G twice)",!er21&&f.inv.length===2&&!o21.some(o=>o.op==="rm"||o.op==="add"||o.op==="ktake"),{er21,inv:f.inv.map(e=>e.k),ops:o21.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu)||0)+":"+(o.k||(o.e&&o.e.k)))});
+   reset();S.inv=[Object.assign({},Pz),Object.assign({},G)];S.wd={tram:null,y:Object.assign({},X)};FA(o21);
+   ck("21b her seat applies the host's ops: X still worn, ONE G in her chest",S.wd.y&&S.wd.y.iu===X.iu&&S.inv.filter(e=>e.k===G.k).length===1,{y:S.wd.y,inv:S.inv.map(e=>e.k)})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

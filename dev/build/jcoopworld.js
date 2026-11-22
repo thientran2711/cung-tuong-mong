@@ -391,12 +391,20 @@ function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.na
  if(famIn(f,m.fam,m.pets))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
-function famIn(f,fm,pets){let ch=false;
+function famIn(f,fm,pets){let ch=false;const rb=fm&&Array.isArray(fm.bag)&&(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])||JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])||(fm.preg||0)!==(f.preg||0))?famRebase(f):null;
  if(fm&&Array.isArray(fm.bag)){if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>o&&typeof o==="object"?Object.assign({},o):o);if(typeof itCleanL==="function")itCleanL(f.inv);ch=true}
   if(JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])){f.kids=(fm.kids||[]).map(o=>Object.assign({},o));ch=true}
   if((fm.preg||0)!==(f.preg||0)){f.preg=fm.preg||0;f.fake=fm.fake||0;ch=true}f.fx7=fm.fx7||null}
  if(pets&&Array.isArray(pets.L)){const L=pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=pets.on;f.petB=pets.b;f.petBn=pets.bn;ch=true}}
- return ch}
+ if(rb)rb();return ch}
+/* E44g T1 (law 6c REAL OBJECTS): her live bag / kids replace her entry's objects while the host's festival result is still pending (CW.f7: the
+   host's own contest minigame defers the scoring to fxFin7 → f7Done diffs her entry against the snapshot taken at the festival's START).
+   What she did meanwhile on her own seat (put a piece on, took one off, used, sold, a child born) is not the festival's doing. Before: f7Done
+   sent «rm gone» for the piece she had just put on (her famItem finds it in her worn slot → taken off her: vanish, coop-lost-scan T1
+   10000013 / 10000014 / 10000078) and «add» for the garment she took off (a second copy, «Được ban …»); a kids relay = «ktake» of every child.
+   Now: what the host did to her entry since the snapshot is sent first (the same b4Ops), then the snapshot is re-based on her live bag. */
+function famRebase(f){const c=CW.f7,b=c&&c.b;if(!b||b.v!==f||!host())return null;let ops=[];try{ops=b4Ops(b,c.title)}catch(e){console.error(e)}
+ return ()=>{try{b.inv0=(f.inv||[]).slice();b.K0=famSnap(f);if(ops.length)b4Send(ops,{tt:c.title})}catch(e){console.error(e)}}}
 function famTake(){const m=CW.famLast,f=friendEntry();if(!m||!f||(m.name&&m.name!==f.name))return false;CW.famGotH=m.h;/* compared with her entry each time: a rebuilt entry (merged week) gets the live bag back */return famIn(f,m.fam,m.pets)}
 function famAsk(h){const t=Date.now();if(CW.famAsk&&CW.famAsk.h===h&&t-CW.famAsk.t<4000)return;CW.famAsk={h,t};COOP.send({t:"act",k:FK,mode:"ask",h,id:FK+":"+newId()})}
 COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
