@@ -247,12 +247,6 @@
  "M2299-12": "M2299-12_ham-an-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Hàm An, công thức M2294)",
  "M2299-13": "M2299-13_ham-an-cung-phi_ha_sang.txt (phòng khách Phi Hàm An, công thức M2294)",
  "M2299-14": "M2299-14_thua-minh-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Thừa Minh, thẻ cung Thừa Minh đã duyệt L2299)",
-<<<<<<< HEAD
- "M2299-15": "M2299-15_thua-minh-cung-phi_ha_sang.txt (phòng khách Phi Thừa Minh, thẻ cung Thừa Minh đã duyệt L2299)"
-}
- "M2231-08": "M2231-08_s62_t8_thu.txt (= M2227-08 + HH KHÓA: chỉ cổ thấp L2228 + tua dài bằng các bậc + dải dọc)"
-}
-=======
  "M2299-15": "M2299-15_thua-minh-cung-phi_ha_sang.txt (phòng khách Phi Thừa Minh, thẻ cung Thừa Minh đã duyệt L2299)",
  "M2300-01": "M2300-01_dien-huy-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi, công thức M2294, L2300 làm hết)",
  "M2300-02": "M2300-02_dien-huy-cung-phi_ha_sang.txt (phòng khách Phi, công thức M2294, L2300 làm hết)",
@@ -277,4 +271,3 @@
  "M2300-21": "M2300-21_truong-xuan-cung-quyphi-ngu_ha_sang.txt (phòng ngủ Quý phi, công thức M2294, L2300 làm hết)",
  "M2300-22": "M2300-22_truong-xuan-cung-quyphi_ha_sang.txt (phòng khách Quý phi, công thức M2294, L2300 làm hết)"
 }
->>>>>>> 99e7db944 (ROOMPF1: M2300-01..22 all remaining chính điện rooms (Phi ×4, Quý phi ×12, Trường Xuân ×6), gates PASS; M2299 wired)
