@@ -555,3 +555,14 @@ jty: the wrapper body becomes ONE named engine `tyHome()` (solo unchanged: rende
 | G2 (her month = solo, same dice) | c5840d47 | 1× inv 17|18, then 2× green (flake, unrelated: G0b off also green) |
 | one-core / undef-scan / law4-typed | c5840d47 | PASS / PASS / 0 |
 Full lane @c5840d47 RUNNING (2 queues).
+
+### F1 FIX #5 — HANDOVER (rollover at ~37 % context, budget START ~4 % + 25 %), 11/22/2026 05:35Z
+PRIORITY #1 CHECK: re-read this report's #4/#5 sections, FOREMAN_B_STATUS tail (ROOT-9 05:28Z: r3 helper now has kg82 close 6146a387), review/coop-thin-g-f1 @067ee9a9.
+- Branch review/coop-thin-g-f1 @067ee9a9 (pushed): fix c5840d47 (tyHome into RDIFF, LAW 11 scan dev/test/coop-rdiff-scan.py 1→0 OPEN, test G0b) + merges LIVE 02c6d8f4, bb92f986. NOT yet merged: LIVE 7303aa58 and r3's newer coop-clear.js (6146a387 kg82 close) — successor: merge LIVE, then take dev/test/lib/coop-clear.js VERBATIM from review/coop-host-lag-r3 (never write another), rebuild, re-run.
+- Lane at 067ee9a9 (lane script /home/user/wt/lane5/lane.sh, logs /home/user/wt/out5/lane): only 2 of ~30 done before rollover:
+  - trip1 rc=1 82/84: FAIL G2 [bac 41|34, inv 79|76]; FAIL page error NEW: guest TypeError "reading 'n'" in rkOfFace (assembled line ~4487) — check if main has it.
+  - trip1b rc=1 82/85: FAIL G1 wk21 "week merged once", G1 wk22 (her phone ran no week end … store diff), G2 [bac 76|26, danh 42|40, suc 100|88, th 25|26, inv 117|109].
+  - The swap-1 Danh split host +1|phone (the target) did NOT recur at swap 1 in either trip; the wk21/22 G1 red in trip1b is a different symptom — compare with #4's lane @99201b6c and main before calling it new.
+  - trip0/trip0b were running, not finished (killed at rollover is fine; re-run).
+- Still to do: full lane (queue 1: trip1 trip0 g4 e2e e2e0 e2e0n cyc timer f3s f5s f6 f6bs as9 as13 emo; queue 2: trip1b trip0b g4s night e2es e2e0s cycs f4s f6s f6b as9s as13s perf ow), role-parity alone, quickcheck (old save + perf), '## F1 FIX' verdict, SSK "SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG" to Foreman B, one line at the end of FOREMAN_B_STATUS.md.
+- Open FOR B: wk31 stall in trip1c (her Q[0] thin card tsgiftpick, #modal hidden, host gHold) — likely same family as #4's trip0b wk14 / trip1a wk27 stalls.
