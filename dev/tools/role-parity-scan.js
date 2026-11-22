@@ -42,7 +42,9 @@ const fnClass=k=>SAMEK.has(k)||SAMEPFX.some(p=>k.startsWith(p))||/^[a-z]+$/.test
 /* documented exemptions (role, key or label, reason) — information-only buttons or a side with no state for it (ag-all-parity.md exemption lists) */
 const EXEMPT=require('./role-parity-exempt.json');
 const SRCONLY={"cx3:facDiv":/^facHTML$/};
-const ALIAS={"harm:ally":"cx:ally","harm:gift":"cx:gift"};
+/* role-parity-bundle-fix: harm:petcare = cx3:petcare (jagacts3 agRunReg cx3:petcare → runAct(v,t,"petcare") = ACT.petcare, the same act as her button);
+   P-ONLY by mapping only once the night-balance-bundle dice gave a consort a pet in the maid-life world (up column) */
+const ALIAS={"harm:ally":"cx:ally","harm:gift":"cx:gift","harm:petcare":"cx3:petcare"};
 const CON=["t1","t2","t3","t4","t5","t6","t7"];const ROLES=["maid","t1","t2","t3","t4","t5","t6","t7","hh","up"];
 const ROLE_N={maid:"cung nữ",t1:"Đáp ứng",t2:"Thường tại",t3:"Quý nhân",t4:"Tần",t5:"Phi",t6:"Quý phi",t7:"Hoàng quý phi",hh:"Hoàng hậu",up:"cung nữ → phi tần"};
 
