@@ -2430,3 +2430,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Push tool pattern: dev/tools/main-hpush.sh with own session id + worktree path (106 used /home/user/wt/hpush106.sh, worktree /home/user/wt/ho106).
 - No owner question pending. Owner has not written in 106. Status line «~80% xong (ước lượng) · còn 36 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» (GAP_LIST_v4; recount when convenient).
 - FOR MAIN: owner opens a ROOT main from claude.ai (paste block in 106 chat 13:10Z) → it is MAIN CHÍNH 107; 106 relays late messages to it once it reports its id, then stops.
+- (22/11 13:33Z) WAKE (106 in handover mode): LOAD: main running 0 | B (night-ledger-coop r2, thin-g F1) | C quiet | D (coop-guest-staff) | E (coop-famops-p/-pv) | moved: none. No new LAND READY. LIVE 35f5b5ab. MAIN CHÍNH 107 not yet opened by owner.
