@@ -74,9 +74,6 @@ keep_check --all 496 PASS; check_store maid a18 ×6 PASS; nhất 9.93k (limit 10
 ## JOB 9 — owner L1797 (via Foreman C #22), 0 gens
 - test18_nhat_L1797 + test18_nhat_thancan_L1797 = test17 nhất files with ONE change: "a small embroidered silk fragrant sachet (túi thơm) on a silk cord with a tassel hanging at the centre between the two panels" → "... (túi thơm) with a tassel hanging from the sash at the waist on a short silk cord looped over the sash, never low at the knees". Everything else byte-identical; tc word diff = colour only.
 - keep PASS ×2 (all 502), check_store maid a18 PASS ×2; 9974 / 9981 chars (limit 10 000, ~20 chars left).
-<<<<<<< HEAD
-=======
->>>>>>> a30918c (#22 L1779)
 
 ## HANDOVER (MAIDFIX2, depth 1) — JOB 10 (owner L1836) NOT started
 START_CTX ≈ 3 % · now 391k/1M ≈ 39 % (get_session) > roll line 28 % → rolled over; the COORDINATOR (Foreman C #23/#24) opens the successor.
