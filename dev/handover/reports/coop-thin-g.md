@@ -649,7 +649,7 @@ PVBAD (rkOfFace probe): 0 lines in trip0 / trip1 / trip1b.
 ## F1 FIX #8 (session_01N1tNP4rfkfYSgkooWkpGtQ, 22/11) — HANDOVER at context budget (NOT SSK)
 PRIORITY #1 CHECK: grep OWNER_DECISIONS / HANDOVER / PROGRESS for rstats maid, nmReg, rkOfFace, thin-c C2/C4; git grep origin/main + origin/review/* for `d("maid"` and the PVBAD probe — no other fix exists; reused #7's lane script (dev/test/coop-thin-g-reg.sh, env WT / W / O) and the PVBAD probe.
 
-Branch review/coop-thin-g-f1 **@54787f42** (pushed). Commits #8:
+Branch review/coop-thin-g-f1 **@002a0814** (pushed). Commits #8:
 - 199cce3c — **root fix (law 6b)**: j8 rstats built its default maid `{name:nmNew("maid"),…}` BEFORE testing `v.maid==null`, so every rstats call (each load, the co-op stand-in of every withSeat) registered one name of nobody in S.nmReg. Now `if(v.maid==null)v.maid={…}`. Family scan (default-setter whose value is a name maker, dev/build): 1 hit, this one. + thin-a waits for the asked level on both seats.
 - 5357fe8d — thin-c C4 reads the level (part G: no week end from her phone at level ≥ 13, by design gG()).
 - 1da1c63a — thin-c C2 reads the level (part C act ops retired at level ≥ 6, part F).
@@ -680,8 +680,8 @@ Full lane @199cce3c (2 queues, load ~6; logs /home/user/wt/out8/lane) then every
 | f1 | 4 | 1 (F1 real tap under parallel time) | 1 (another F1 real-tap check) — same family, pre-existing at base |
 | hn | 1 | 1 (H2 face reveal) | **1 same — pre-existing at base** |
 Static @199cce3c: one-core PASS, undef PASS, law4 0, rdiff 0 OPEN, mgout 0 OPEN.
-role-parity / quickcheck / coop-e2e ×3 @54787f42: see the line below (running at hand-over).
+Alone: role-parity ALL PASS @54787f42 · coop-e2e ×3 141/141 ×3 · quickcheck first run FAIL "NOT BUILT" (index.html not from build_site.sh) → 002a0814 site rebuilt → **QUICKCHECK PASS** @002a0814 (core gates PASS, old save ok, perf buổi 1182/3585 ms new/live). Branch head now **@002a0814** (pushed).
 
 ### Handover to #9
 Worktrees: /home/user/wt/ctg8 (branch @54787f42), /home/user/wt/ctg8b (detached b3fa6bc0, built), /home/user/wt/live8 (LIVE b238857f built — refresh to 40cc2b92), /home/user/wt/ho8 (handover). Worker 127.0.0.1:8787 (THINMAX 13). Lane: `WT=<wt> O=<out> bash dev/test/coop-thin-g-reg.sh <suites>`. Never rebuild index.html while a lane runs (coop-serve reads it from disk per request).
-To do, in order: (1) rkOfFace writer (probe above) + thin-c on LIVE; (2) d / f1 / hn: base has them — check LIVE (THINMAX 9 vs 13) and root-fix if coop-thin-g made them (LAW 11); (3) f2 alone; cyc flake count; (4) role-parity / quickcheck / e2e ×3 if my line below is missing; (5) SSK "SẴN SÀNG KIỂM <sha>" to Foreman B (session_01N1tNP4ubP78y1PJkcWfaWs).
+To do, in order: (1) rkOfFace writer (probe above) + thin-c on LIVE; (2) d / f1 / hn: base has them — check LIVE (THINMAX 9 vs 13) and root-fix if coop-thin-g made them (LAW 11); (3) f2 alone; cyc flake count; (5) SSK "SẴN SÀNG KIỂM <sha>" to Foreman B (session_01N1tNP4ubP78y1PJkcWfaWs).
