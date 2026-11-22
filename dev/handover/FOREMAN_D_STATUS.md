@@ -1084,3 +1084,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 106 (22/11 12:36Z): role-parity-bundle-fix-rv 9c057f42 relayed to LC5 (1st in queue).
 - FROM MAIN 106 (22/11 12:51Z): role-parity-bundle-fix LANDED — LIVE = 9c057f42 (new base).
 - FROM MAIN 106 (22/11 13:05Z): LIVE = 35f5b5ab (B test-only flake fix landed).
+- last wake: 22/11 13:26Z (D #19; context ~16 %, rollover 32 %). role-parity-bundle-fix LIVE 9c057f42 (CLAIMS DONE LIVE). LIVE now 35f5b5ab. D seats: coop-guest-staff worker EWWpayFt (opus, ctx 22 %, running gates; told LIVE 35f5b5ab). No D item queued.
