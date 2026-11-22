@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0860f601+","t":"2026-11-22T00:56Z","c":"coop-guest-week-lag: site rebuilt","b":"08d5377b3c43","h":[{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"}]};
+window.CTM_BI={"s":"8303b53a+","t":"2026-11-22T02:56Z","c":"Chơi chung: thẻ tháng và bạc của khách không còn trễ một tuần trên máy chủ","b":"b97828eb1e6c","h":[{"s":"bb92f986+","t":"2026-11-22T01:38Z","c":"review od03-favart-rv: merge final reviewed bundle review/night-balance-bundle-rv 8746a062 (holds LIVE 02c6d8f4); coop-e2e: od03 month-art …"},{"s":"50bea9c9+","t":"2026-11-21T13:50Z","c":"review od03-favart-rv: one Kính sự phòng ask rule for her and NPCs (law 1) + shown odds = true chance (law 7)"},{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -27107,7 +27107,18 @@ const FAIRN=window.FAIRN={eff:1,fav:4,sat:.2,satMin:.35,satO:8};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
-rivalNight=function(v){v.nights++;v.nightLog.push(wk());
+/* law 1 «Tiến cử hầu thay» (two-way with her own PEND.ksp option, OD:L33 / L1534): she chooses it on the summons BEFORE the night, and only on
+   a night the tablet (or the custom mùng 1 / rằm) gave her — never on a night she took (Tranh sủng / Chặn ngự giá) nor on his visit, where
+   her cards offer no «Tiến cử». An NPC decides at the same point (amSendQ / npcWhy, her own need) and then has NO night of her own: no prep
+   spend, no Sủng / Ân, no jealousy rise, no conception roll, no pillow talk, no bestow, the tablet bribe kept (her nightFx is what spends it);
+   the maid's night is the one sendMaid (jagmaid: amNightGain, amRise → night() / amFav, BAL.ag.maid), the same call as her «Tiến cử». */
+function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,x=S.visNpc;/* S.ntk is NOT a steal mark: resolveTonight (below) writes it for every holder */
+  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;
+  if(!v.maid||(typeof ptMaidOut==="function"&&ptMaidOut(v)))return false;/* no maid at hand (jptime: busy elsewhere) → nobody to send: her night plays */return true}catch(e){return false}}
+window.htCan=htCan;
+rivalNight=function(v){
+ if(htCan(v)&&(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);/* AG3: her own choice (jagmaid), before the night */
+ v.nights++;v.nightLog.push(wk());
  let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
  const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});pgUp(v,BAL.mood2.ghen.pgNight,`${v.name} được thị tẩm`);v.tablet=0;v.lastNightS=sc;
@@ -27117,7 +27128,6 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
   else if(v.rel<-20&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(empGive(v,BAL.odb.j75.rbTop+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
 /* npc-purpose: who carries it to her — her own tai mắt serving in v's house (that is their job), else a consort who sees inside v's house (npwIn) with a reason (npcTell) */
@@ -76589,13 +76599,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
    return w.n==="me"?"Ngài cho gọi ngươi đến Dưỡng Hòa điện hầu.":`Ngài cho gọi ${w.n}, cung nữ cung ${w.of==="me"?"ngươi":w.of}, đến Dưỡng Hòa điện hầu.`}return wt0.apply(this,arguments)};
  const rt0=resolveTonight;resolveTonight=function(){const a=S&&S.amT,tn=S&&S.tonight;const r=rt0.apply(this,arguments);let x="";
   try{if(a){S.amT=null;const dw=wk()-a.w;if(!tn&&dw>=0&&dw<=1&&amOn()){const f=amFind(a.k);if(f&&f.m!==S&&f.o)x=amNight(f.m,f.o,"pick")}}}catch(e){console.error("jagmaid night",e)}return (r||"")+x};
- const rn0=rivalNight;rivalNight=function(v){const r=rn0.apply(this,arguments);let x="";try{x=amNightTea(v)}catch(e){}return (r||"")+x};
+ const rn0=rivalNight;rivalNight=function(v){const s0=AMN.send;const r=rn0.apply(this,arguments);let x="";try{if(AMN.send===s0)x=amNightTea(v)}catch(e){}return (r||"")+x};/* her maids' tea is for HER night: none when her maid served in her place */
  const rw0=rivalsTurn;rivalsTurn=function(){const r=rw0.apply(this,arguments);let x="";try{x=amWeek()}catch(e){}return (r||"")+x};
  /* rows 6, 7, 12: Tiến cử */
  const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;
-  /* law 1 (her own «Tiến cử hầu thay» gives up her night): an NPC who sends her maid from her own night (rivalNight → sendMaid) gives up
-     the night record too — the maid served, the book holds ONE night for the day */
-  else{const L=a.nightLog;if(Array.isArray(L)&&L.length&&L[L.length-1]===wk()){L.pop();a.nights=Math.max(0,(a.nights||1)-1)}}
+  /* law 1: an NPC sends her maid BEFORE her night (j75 rivalNight → htCan), so she has no night record to give up — the book holds ONE night */
   AMN.send++;amNightGain(m);
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
@@ -93798,7 +93806,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="08d5377b3c43";window.CTM_BUILD=BUILD;
+const BUILD="b97828eb1e6c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
