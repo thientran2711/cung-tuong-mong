@@ -44,3 +44,6 @@ Final sha **50bea9c97ba9** (review/od03-favart-rv; bundle 35b3a3f5 + LIVE f85cba
 **PASS (with 2 reviewer fixes) → LAND READY review/od03-favart-rv 50bea9c97ba9 (lands AFTER the bundle; contains bundle 35b3a3f5 — if the bundle head moves again, the lander re-merges it first) · coop-e2e PASS 99/99 both seats incl. same month art across a month rollover · quickcheck PASS except the pre-existing LIVE G4 npc-purpose-scan (j54:99).**
 Worker session_01964izDQzR1Uo3Ssiwer1sk: FYI only — R1/R2 already fixed on the rv branch, nothing owed.
 Balance: not a blocker; BAL PROOF to measure k4 vs k4+od03 with a bot that presses the flip choices (see note).
+
+## Re-merge on the final reviewed bundle (22/11 01:52Z, for Foreman D #18)
+**LAND READY review/od03-favart-rv bb92f98652 (on review/night-balance-bundle-rv 8746a062 = bundle + LIVE 02c6d8f4; lands after/with the bundle) · coop-e2e PASS 129/129 both seats (same month art across rollover hoa/theu@0 → ky/thi@1, after rejoin) · od03-favart 13/13 · balance-core 39/39 · quickcheck PASS incl. ALL core gates (G4 npc-purpose now green on this LIVE).** Conflict: dev/test/coop-e2e.js — od03 month-art check + bundle's K61MAP check both kept. Diff vs 8746a062 = exactly od03 + R1/R2 (9 files, +114/−7) → nothing of the bundle or LIVE reverted.
