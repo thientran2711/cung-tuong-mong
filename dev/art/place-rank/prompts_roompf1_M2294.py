@@ -58,7 +58,7 @@ def to_phi(p):
     p = p.replace('soft pink', 'soft lavender-violet')
     return p
 
-G9 = list(B.G9); SW4 = '1lduM4wr4r'; SW5 = 'local:dev/handover/prompts_L2095/refs/rooms/anh4_mau_phi_t5.png (not uploaded: A53 ChatGPT)'
+G9 = list(B.G9); SW4 = '1lduM4wr4r'; SW5 = 'nVlcVgLYQD'   # Phi strip = CDN img/_review/place-rank/roompf1/tone-swatch-phi-t5.png, uploaded 0 cr
 ROOMS = [
  # 41 Tần TM bedroom — 3 walls, windows RIGHT (image 3 = M3), bed centred (pr19 bed3R layout; Tần rooms 31/35 used it)
  ('thua-minh-cung-tan-ngu', 'M2294-11', 4, B.M3,

@@ -56,3 +56,4 @@ Commit: see git log "ROOMPF1".
   images_generate mode gpt-2-6, resolution 2k, width 2688, height 1386, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, refs image gOmYI7iSXO + EbYJzsMuuO + cpS5YIl0eP + 1lduM4wr4r, prompt = prompts_roompf1_M2294.json['thua-minh-cung-tan-ngu'].prompt (the .txt without its CAPTION line: no code text in a backdrop).
 - All 5 are ready in prompts_roompf1_M2294.json (prompt + refs). Phi image 4 = strip img/_review/place-rank/roompf1/tone-swatch-phi-t5.png: cdn_sync was still running at the time of writing; upload with creations_upload_image once the CDN serves it.
 - Needs: the gen allowed for this session, or a session where Magnific generation is permitted.
+- Phi strip uploaded 0 cr → Magnific nVlcVgLYQD (CDN img/_review/place-rank/roompf1/tone-swatch-phi-t5.png); json refs updated. Gens still blocked.
