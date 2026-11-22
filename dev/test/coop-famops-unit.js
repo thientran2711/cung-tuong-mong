@@ -115,6 +115,17 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    ck("21 festival result pending, her relay rebuilt her entry (she put X on): no «rm» X / «add» / «ktake» (was: X taken off her = vanish, G twice)",!er21&&f.inv.length===2&&!o21.some(o=>o.op==="rm"||o.op==="add"||o.op==="ktake"),{er21,inv:f.inv.map(e=>e.k),ops:o21.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu)||0)+":"+(o.k||(o.e&&o.e.k)))});
    reset();S.inv=[Object.assign({},Pz),Object.assign({},G)];S.wd={tram:null,y:Object.assign({},X)};FA(o21);
    ck("21b her seat applies the host's ops: X still worn, ONE G in her chest",S.wd.y&&S.wd.y.iu===X.iu&&S.inv.filter(e=>e.k===G.k).length===1,{y:S.wd.y,inv:S.inv.map(e=>e.k)})}
+  /* E44g T6 (coop-lost-scan vanish 934 / 3385 / 2028): an NPC gives a piece to her entry OUTSIDE the diffed calls (an agent act, a monthly gift):
+     before, jil logged «sang hảo hữu» and no op carried it (the piece stayed on the host's copy of her entry). Now one «add» to her seat;
+     inside a diffed call still exactly one (b4Ops). */
+  {reset();const on22=CW.on,se22=CW.seat,sd22=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);v.inv=v.inv||[];let er22="",n1=-1,n2=-1,e1=null,e2=null;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};
+    e1=pc(P);v.inv.push(e1);giveTo(v,f,v.inv.indexOf(e1));n1=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e1.iu).length;
+    e2=pc(P);v.inv.push(e2);CW.b4Run(()=>giveTo(v,f,v.inv.indexOf(e2)));n2=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e2.iu).length}catch(e){er22=e.message}
+   finally{CW.on=on22;CW.seat=se22;COOP.send=sd22;rivals.splice(rivals.indexOf(f),1);v.inv=v.inv.filter(e=>!(e.iu>9e6))}
+   ck("22 an NPC gives a piece to her entry outside a diffed call: ONE «add» to her seat (was: none, stranded on the host's copy)",!er22&&f.inv.some(e=>e.iu===e1.iu)&&n1===1,{er22,n1,inv:f.inv.map(e=>e.iu)});
+   ck("22b the same gift inside a diffed NPC call: still exactly one «add»",!er22&&n2===1,{er22,n2})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
