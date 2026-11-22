@@ -2353,3 +2353,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN on call (nothing open).
 - TRIGGERS: 103 wake trig_01BZEhJBtaiQjTxceoem3Hph (min 32) → 104 disables it (if refused like 102's, tell owner) and creates its own. 102's trig_01E13SG1HWhNBW6G9ukrWFKH: disable refused by permission classifier → still enabled; owner asked to turn it off. MAIN 102 session NOT archived (its wake still fires).
 - Push tool: dev/tools/main-hpush.sh template. Never git pull. B often misses mid-file orders: write PLAIN short lines at the END of FOREMAN_B_STATUS.
+- (22/11 04:44Z) Opened MAIN CHÍNH 104 = session_01Rc5AsL5UyR4jYnk9V9cbMs (child, depth 6). 103 stops; relays late messages to 104 only.
