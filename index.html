@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"eaebce79+","t":"2026-11-21T23:39Z","c":"coop-famops-c2 (E44c, asked by E48r): ilGone wrapper «dead» goes home only past jil's own guards (ilAt / ilToFriend / ilDur) — no «ret» for…","b":"94b72923e6b3","h":[{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"}]};
+window.CTM_BI={"s":"eb02cec6","t":"2026-11-22T01:19Z","c":"coop-famops-p P1/P2 (E44c, law 6c): on the guest seat a host-NPC copy's own road (sell / any box road, NPC→NPC robbery) never reaches HER l…","b":"50ba1810e2ea","h":[{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48754,6 +48754,15 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
  if(F&&r&&typeof r==="object"&&r.e){try{if(String(r.own)===F)r.own="";if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau";c.__fs=1}
   const iu=ids[0]||r.e.iu;b4Send([Object.assign({op:"gone",k:e.k,how:"matdau"},iu?{iu}:{},ids.length>1?{alt:ids.slice(1)}:{})],{})}catch(z){console.error("famops box",z)}}
  return r};window.ilGone=ilGone})();
+/* E44c P1/P2 (law 6c; coop-lost-scan dup 55 / 86 / 118 «B:box:mkt:sell», vanish 10000274 / 10000341 «cướp»): on the GUEST seat the people of
+   the world (every non-friend NPC) are COPIES of the host's — the host's canon owns their pieces, cases and boxes. A copy's own road on her
+   seat (an NPC agent selling, a robbery between two NPCs, any box road of a copy) never puts that piece into HER ledger box and never opens a
+   case in HER S.lost: it would be a 2nd copy of a host piece (dup) or a case over a piece nobody counts (vanish). Also for HER piece a copy
+   holds: the real holder is the host's NPC, and the host's own road tells her seat (c2 box rule «gone» / famSweep / «ret»). Her own chest,
+   her own acts and the friend's entry keep their roads (fam ops / ilSent). Host seat: unchanged. */
+function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"&&ilGuest()&&Array.isArray(rivals)&&rivals.indexOf(p)>=0)}catch(z){return false}}
+(function(){if(typeof ilGone!=="function")return;const g1=ilGone;ilGone=function(p){if(famCopy(p))return null;return g1.apply(this,arguments)};window.ilGone=ilGone})();
+(function(){if(typeof loLoseE!=="function")return;const l0=loLoseE;loLoseE=function(p){if(famCopy(p))return null;return l0.apply(this,arguments)};window.loLoseE=loLoseE})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
@@ -93160,7 +93169,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="94b72923e6b3";window.CTM_BUILD=BUILD;
+const BUILD="50ba1810e2ea";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
