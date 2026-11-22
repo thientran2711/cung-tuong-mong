@@ -1,0 +1,9 @@
+# THACT3 gens (key kind id credits note)
+lo B DoyXga3pcl 135 MID (16%) ; an B yiQNhnpPW9 135 MID (15%)
+lo B rgBsVoAxtc 135 MID2 USED (28%) flat gOh7BtbSXO ; an B N2bRC5y6D9 135 MID2 (18%)
+an B 8a3hPQaIrU 135 MID2 USED (24%) flat 6A5Zuq6iJO ; an B vQGEi55a47 135 MID2 (22%)
+lo OUT 0ewDL2tTfW 940 ; lo LOOP jU8gpqtLD0 940 ; an OUT huAC6XgvqL 940 ; an LOOP LwISe5CswO 940
+vui B aFzuRkrfSh 135 (29%) flat N2bRQqU6D9 ; muu B mE2f65qhJQ 135 (31%) flat Td7pg7FVNR ; chan B gOh7o3OSXO 135 (19% miss)
+khochiu B nVl0ro7YQD 135 (25%) flat 1lXLDXtr4r ; ghen B 1lXLMPGr4r 135 (25%) flat 0ewDlwYTfW ; so B 3zkAHpoREY 135 (31%) flat XmNIy6QBfo ; tinhtu B rgBsD9Kxtc 135 (25%) flat iGK2HkH3uK
+chan B KLexVYNkqp 135 (14%) ; chan B s7tUBD0l8e 135 (14%) ; chan B MID3 EbWHzs4uuO 0ewDghjTfW 270
+vui OUT s7tUB1bl8e LOOP 1lXLDblr4r ; muu OUT O6u9aUoynm LOOP jU8gdkFLD0 ; khochiu OUT cpUMsnC0eP LOOP ovim4dG829 ; ghen OUT tCZa68EmZJ LOOP eI4oJDJdqL ; so OUT lJmw87dgv9 LOOP WDSVsDvcXe ; tinhtu OUT xSoldSBjfW LOOP yiQNC3GPW9  (12x940)

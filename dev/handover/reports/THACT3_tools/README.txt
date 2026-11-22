@@ -1,0 +1,1 @@
+Scratch paths are hard-coded to the THACT3 scratchpad (S=…/scratchpad, work dir $S/wx with mp4/ webp/ webp2/, stills in $S/b as <k>-A.png / <k>-B*.png). Copy and fix S. bm3.py <dir> <k> <tags> = still rim-fit measure; vh.py <webp2> <keys> = per-frame rim measure; vm.py = official THACT1 measure; proc.sh <urls.txt> = download+cut+rebuild+measure+strip.
