@@ -89,3 +89,39 @@ disc.py: per-frame disc circle = RANSAC on alpha-edge points (alpha > 48 — tea
 | tinhnghich | 74.1 | 1.00 | 1.119 | 1.120 | 1.119 | 1.120 | 1.000 | 57/61/45 |
 
 Output (same CDN folder): **th-act-disc112b45-full21-anim.mp4** (228 frames = 61 + 2×61 + 45; every seal held at rest after BACK) sha256 d99dba73e978 · **th-act-disc112b45-full21-stills.jpg** sha256 bc301fe2ef52 · per seal th-act-<k>-{out,loop,back}-D112.webp **overwritten with this final version**. Looked: f0/f14/f120/f190/f215/f227 + BACK strips of lo/ẩn/choáng/mưu — all discs equal, BACK clean, all at rest together at the end.
+
+## Round 3 (ROOT-C5 20:17Z: one fixed OUT length too) — 0 cr — FINAL
+- Spec + A58: **OUT_N = 60 frames (4.0 s)** for every seal; shorter → end (lean) pose held at the end, longer (61) → frames dropped evenly. Disc ramp unchanged (first 15 frames). Every seal now **60 / 61 / 45** frames (OUT / LOOP / BACK), webp q50 m4, 32 MB for 63 files, border clip 0 px.
+- Visible side effect: **lo**'s source OUT is only 27 frames → it now holds its lean pose ≈ 2.2 s before the LOOP (all others hold ≤ 6 frames). If the owner dislikes it: a new lo OUT clip (940 cr, ask first) or accept.
+- Measure: same as round 2 (19/21 inside 1.12 ± 0.01; ⚠ mưu, ghen = halo instrument issue, eye-checked).
+
+| seal | rest r px | rest | OUT end | peak | LOOP min | LOOP max | BACK end | frames out/loop/back |
+|---|---|---|---|---|---|---|---|---|
+| vui | 74.1 | 1.00 | 1.118 | 1.120 | 1.118 | 1.119 | 1.000 | 60/61/45 |
+| lo | 74.3 | 1.00 | 1.117 | 1.118 | 1.116 | 1.118 | 1.016 | 60/61/45 |
+| an | 74.3 | 1.00 | 1.117 | 1.119 | 1.117 | 1.118 | 1.000 | 60/61/45 |
+| muu | 74.2 | 1.00 | 1.089 | 1.138 | 1.064 | 1.138 | 0.997 | 60/61/45 | ⚠
+| ghen | 74.1 | 1.00 | 1.119 | 1.144 | 1.114 | 1.144 | 1.001 | 60/61/45 | ⚠
+| buon | 74.1 | 1.00 | 1.118 | 1.118 | 1.118 | 1.118 | 1.000 | 60/61/45 |
+| so | 74.2 | 1.00 | 1.118 | 1.121 | 1.118 | 1.121 | 0.999 | 60/61/45 |
+| chan | 74.1 | 1.00 | 1.119 | 1.121 | 1.118 | 1.119 | 1.000 | 60/61/45 |
+| khochiu | 74.1 | 1.00 | 1.117 | 1.130 | 1.117 | 1.120 | 1.000 | 60/61/45 |
+| tinhtu | 74.1 | 1.00 | 1.118 | 1.132 | 1.118 | 1.119 | 1.000 | 60/61/45 |
+| binh | 74.2 | 1.00 | 1.117 | 1.121 | 1.117 | 1.119 | 1.000 | 60/61/45 |
+| dau | 74.3 | 1.00 | 1.117 | 1.119 | 1.117 | 1.119 | 1.000 | 60/61/45 |
+| hothen | 74.2 | 1.00 | 1.118 | 1.118 | 1.117 | 1.118 | 1.000 | 60/61/45 |
+| choang | 74.2 | 1.00 | 1.116 | 1.117 | 1.116 | 1.117 | 1.000 | 60/61/45 |
+| hon | 74.2 | 1.00 | 1.121 | 1.131 | 1.120 | 1.121 | 1.000 | 60/61/45 |
+| hanghai | 74.2 | 1.00 | 1.117 | 1.120 | 1.117 | 1.120 | 1.000 | 60/61/45 |
+| chuyentam | 73.9 | 1.00 | 1.116 | 1.122 | 1.116 | 1.121 | 1.001 | 60/61/45 |
+| hungkhoi | 74.2 | 1.00 | 1.118 | 1.118 | 1.116 | 1.118 | 1.000 | 60/61/45 |
+| gian | 74.0 | 1.00 | 1.123 | 1.128 | 1.120 | 1.125 | 0.999 | 60/61/45 |
+| tutin | 74.2 | 1.00 | 1.121 | 1.121 | 1.110 | 1.121 | 1.015 | 60/61/45 |
+| tinhnghich | 74.1 | 1.00 | 1.119 | 1.120 | 1.119 | 1.120 | 1.000 | 60/61/45 |
+
+Output (CDN …/img/_review/emo-anim-groups/tonedown/act/): **th-act-disc112-final-full21-anim.mp4** (227 frames = 60 + 2×61 + 45, 15.1 s) sha256 20532fb2b97f · **th-act-disc112-final-full21-stills.jpg** (LOOP mid, = round 2) sha256 bc301fe2ef52 · per seal **th-act-<k>-{out,loop,back}-D112.webp = FINAL** (overwritten; CDN lo OUT checked 60 frames). Looked: f0 / f14 / f59 / f150 / f200 / f226 + OUT strips lo, vui.
+
+## HANDOVER STATE (THACT5 finished)
+- Job complete: spec A58 + dev/art/emo-anim/disc_scale_spec.py (R0 74 @ (144,144), PEAK 1.12, RAMP 15, OUT_N 60, BACK_N 45, webp q50 m4); 21 seals normalised; final MP4 + stills on CDN; nothing pending from me.
+- To redo/extend (new seals, other characters): download out/loop/back → `THACT5_tools/meas_raw.py src k…` (disc track; mưu/ghen-type halo discs: `fix_track.py rim src k`) → `apply.py src out k…` → `meas_after.py out k…` (+ `eyecheck.py` for halo/sparkle seals) → `mk_full21.py out x.mp4 x.jpg` → copy to img/_review/… → `dev/site/cdn_sync.py <paths>`. ~1 min for all 21 at m4.
+- Open for owner: lo's 2.2 s hold (above); game swap of the -D112 files is ROOT-C5's call.

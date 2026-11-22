@@ -12,6 +12,8 @@ Every worker uses THIS file (import it); never pick your own numbers. Lean-out o
   LOOP        exactly 112 % on every frame (first frame = last frame size)
   BACK        exactly 112 % until the last RAMP frames, then shrinks 112 % -> 100 % on the SAME smoothstep (mirror of OUT);
               last frame = rest (100 %)
+  OUT length  every seal's OUT has exactly OUT_N = 60 frames (4.0 s): shorter → hold the end (lean) pose at the end,
+              longer → drop frames evenly (ROOT-C5 22/11)
   BACK length every seal's BACK has exactly BACK_N = 45 frames (3.0 s) — the body return is fitted to this length: shorter → hold the
               lean pose at the start, longer → drop frames evenly (no blended frames: they ghost) (ROOT-C5 22/11 from owner L2381 "same timing for all"); LOOP = 61 frames as cut
   encode      animated webp lossy quality 50, method 4 (≈ the old file size)
@@ -28,6 +30,7 @@ R0 = 74.0
 C0 = (144.0, 144.0)
 PEAK = 1.12
 RAMP = 15
+OUT_N = 60
 BACK_N = 45
 WEBP_Q, WEBP_M = 50, 4
 

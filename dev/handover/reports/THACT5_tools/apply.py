@@ -24,9 +24,10 @@ for k in sys.argv[3:]:
     parts=[(p,frames(f'{src}/{k}-{p}.webp')) for p in ('out','loop','back')]; D=np.load(f'{src}/{k}.disc.npy'); i0=0; clip=0
     for p,fr in parts:
         res=[]; Dp=D[i0:i0+len(fr)]
-        if p=='back':   # fixed BACK_N frames, no blending (blends ghost on fast pose jumps):
-            n=len(fr)       # short -> hold the first (lean) pose at the start; long -> drop frames evenly (nearest)
-            idx=[0]*(SP.BACK_N-n)+list(range(n)) if n<SP.BACK_N else list(np.round(np.linspace(0,n-1,SP.BACK_N)).astype(int))
+        if p in ('out','back'):   # fixed OUT_N / BACK_N frames, no blending (blends ghost on fast pose jumps):
+            n=len(fr); N=SP.OUT_N if p=='out' else SP.BACK_N   # short -> hold the lean pose (OUT: at the end, BACK: at the start)
+            if n<N: idx=list(range(n))+[n-1]*(N-n) if p=='out' else [0]*(N-n)+list(range(n))
+            else: idx=list(np.round(np.linspace(0,n-1,N)).astype(int))   # long -> drop frames evenly (nearest)
             fr=[fr[i] for i in idx]; Dp=Dp[idx]
         for i,f in enumerate(fr):
             cx,cy,r,_=Dp[i]; s=SP.R0*SP.scale(p,i,len(fr))/r; g=warp(f,s,(cx,cy),SP.C0,SP.W); res.append(g)
