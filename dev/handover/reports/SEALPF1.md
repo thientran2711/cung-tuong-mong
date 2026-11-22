@@ -44,3 +44,19 @@ Optional for M2294-03 only: still/th-chuyentam.webp (same disc, same face) if he
 
 ## HANDOVER
 Done; nothing pending in this worker. Commit hash in the message to Foreman C.
+
+## (2) GENERATED — owner L2296 via ROOT-B8 ~01:45Z: "bạn tự làm bên mặt đi" (A53 exception) — 22/11 ~01:05Z, 3 × 135 = 405 cr
+Balance before 3 015 079 (stop line 60 000). Recipe exactly as SEAL5/SEAL7 A stills: gpt-2-6, 1:1, 2k, ref eIPl4i6dqL (th-gian A), folder as before;
+prompt = line 1 of each M2294 file (the CAPTION line is for ChatGPT only, not sent). One try each (A20). Ledger: 3 lines in gen_ledger.jsonl.
+| code | gen id | CDN (img/_review/emo-anim-groups/tonedown/) |
+|---|---|---|
+| M2294-01 giận | Syv7O0AUb8 | th-gian-A-M2294.png · th-gian-M2294-still160.webp |
+| M2294-02 hăng hái | Syv7OTGUb8 | th-hanghai-A-M2294.png · th-hanghai-M2294-still160.webp |
+| M2294-03 chuyên tâm | iGKZAtS3uK | th-chuyentam-A-M2294.png · th-chuyentam-M2294-still160.webp |
+OLD|NEW sheet (VN captions + codes): https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/tonedown/th-tonedown-old-new.jpg — looked at.
+All 3 came back RGBA transparent (no green) — fine for stills; flatten on #00FF00 before any B/clip.
+### Looked at — notes only (no redraw)
+- giận: good — same angry face, fist gone, hands resting on the rim, small steam puff top-left. Style/crown/robe match the old one.
+- hăng hái: fist gone, eager smile, coral disc, hands on rim. Eyes glance a little sideways (both the same way) — old looked straight.
+- chuyên tâm: chin on hand OK, no book; BUT side-glance + one brow up reads more sceptical/scheming (close to mưu) than calm focus. Mild.
+- All 3 NEW: earrings gone (F15, correct); she is drawn a bit lower/wider, hands visible at the bottom of the rim (more body than the old bust-only stills).
