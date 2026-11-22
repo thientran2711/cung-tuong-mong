@@ -18,7 +18,7 @@ FIG_W = FIG_H * 1386 / 2688          # 37.7 % of picture width
 RANK = {'phoi': '1-3 Đáp ứng/Thường tại/Quý nhân (phối, 2 giường)', 'tan': '4 Tần', 'phi': '5 Phi', 'quyphi': '6 Quý phi',
         'hqp': '7 Hoàng quý phi', 'hh': '8 Hoàng hậu'}
 # key: (rank, x0, x1, top, base, status)   all % of picture; status: M = approved MODEL room (L16), D = owner duyệt/OK,
-# S = sent, owner said no need to wait for approval (L2300), O = older version / not live
+# S = sent / NO owner OK found (L2300 'no need to wait' is NOT an approval), X = owner REJECTED ('xấu', L2329), O = older version
 B = {
  # CURRENT FRONTAL models only (L14; owner L2318: Khôn Ninh v6/v7 angled picture is DROPPED). File = img/_review/place-rank/<key>-ha-sang.webp
  'v9/khon-ninh-cung-ngu-B3':          ('hh', 31, 69, 17, 85, 'M'),      # cpS5YIl0eP, HH bedroom B frontal 3-wall (L14 model)
@@ -29,9 +29,9 @@ B = {
  'pr13/khai-tuong-cung-tan-ngu':      ('tan', 30, 72, 10, 80, 'D'),
  'pr13/thua-minh-cung-tan-ngu':       ('tan', 30, 70, 8, 82, 'D'),   # M2294-11
  'pr13/truong-xuan-cung-tan-ngu':     ('tan', 30, 68, 8, 78, 'S'),   # M2300-17
- 'pr20/dien-huy-cung-tan-ngu':        ('tan', 15, 57, 3, 80, 'D'),
- 'pr20/vinh-hoa-cung-tan-ngu':        ('tan', 38, 80, 5, 80, 'D'),
- 'pr21/chung-tu-cung-tan-ngu':        ('tan', 29, 80, 5, 82, 'D'),
+ 'pr20/dien-huy-cung-tan-ngu':        ('tan', 15, 57, 3, 80, 'S'),
+ 'pr20/vinh-hoa-cung-tan-ngu':        ('tan', 38, 80, 5, 80, 'S'),
+ 'pr21/chung-tu-cung-tan-ngu':        ('tan', 29, 80, 5, 82, 'X'),
  'pr13/chung-tu-cung-phi-ngu':        ('phi', 31, 73, 10, 76, 'D'),  # M2294-15
  'pr13/khai-tuong-cung-phi-ngu':      ('phi', 42, 82, 8, 78, 'D'),   # M2294-13
  'pr13/ham-an-cung-phi-ngu':          ('phi', 27, 62, 15, 80, 'S'),  # M2299-12
@@ -54,18 +54,19 @@ B = {
  'pr13/dien-huy-cung-tay-phoi-ngu':   ('phoi', 25, 52, 10, 72, 'D'),
  'pr13/ham-an-cung-dong-phoi-ngu':    ('phoi', 15, 43, 10, 72, 'D'),
  'pr13/ham-an-cung-tay-phoi-ngu':     ('phoi', 18, 48, 10, 68, 'D'),
- 'pr13/khai-tuong-cung-dong-phoi-ngu': ('phoi', 28, 55, 15, 75, 'D'),
- 'pr13/khai-tuong-cung-tay-phoi-ngu': ('phoi', 15, 45, 15, 75, 'D'),
- 'pr13/thua-minh-cung-tay-phoi-ngu':  ('phoi', 17, 44, 20, 75, 'D'),
- 'pr13/truong-xuan-cung-dong-phoi-ngu': ('phoi', 78, 100, 0, 85, 'D'),
- 'pr13/truong-xuan-cung-tay-phoi-ngu': ('phoi', 18, 43, 10, 78, 'D'),
- 'pr13/vinh-hoa-cung-dong-phoi-ngu':  ('phoi', 80, 100, 10, 80, 'D'),
- 'pr13/vinh-hoa-cung-tay-phoi-ngu':   ('phoi', 18, 47, 15, 78, 'D'),
+ 'pr13/khai-tuong-cung-dong-phoi-ngu': ('phoi', 28, 55, 15, 75, 'S'),
+ 'pr13/khai-tuong-cung-tay-phoi-ngu': ('phoi', 15, 45, 15, 75, 'S'),
+ 'pr13/thua-minh-cung-tay-phoi-ngu':  ('phoi', 17, 44, 20, 75, 'S'),
+ 'pr13/truong-xuan-cung-dong-phoi-ngu': ('phoi', 78, 100, 0, 85, 'S'),
+ 'pr13/truong-xuan-cung-tay-phoi-ngu': ('phoi', 18, 43, 10, 78, 'S'),
+ 'pr13/vinh-hoa-cung-dong-phoi-ngu':  ('phoi', 80, 100, 10, 80, 'S'),
+ 'pr13/vinh-hoa-cung-tay-phoi-ngu':   ('phoi', 18, 47, 15, 78, 'S'),
 }
 # option B ladder (% of picture width, canopy outer); tolerance 2 points
-LADDER = {'phoi': None,  # 2-bed rooms: info only (side-wall beds read narrow by perspective; L23 OK'd rooms stay)
-          'tan': 40, 'phi': 43, 'quyphi': 46, 'hqp': 49, 'hh': 52}
-TOL = 2
+LADDER = {'phoi': None,  # rule L29 (owner L2329): Tần = Phi = Quý phi >= 43 (anchor CP Phi 3w), HQP 47, HH 51
+           # 2-bed rooms: info only (side-wall beds read narrow by perspective; L23 OK'd rooms stay)
+          'tan': 43, 'phi': 43, 'quyphi': 43, 'hqp': 47, 'hh': 51}
+TOL = 0  # L29: minimum is the anchor size itself
 FLOOR_OK = (12.5, 18.5)
 
 def row(k):
@@ -83,7 +84,7 @@ def table(dl=None):
     print('|---|---|---|---|---|---|---|---|---|---|')
     for k in sorted(B, key=lambda k: (order.index(B[k][0]), -(B[k][2] - B[k][1]))):
         d = row(k); n = []
-        if d['low']: n.append(f"nhỏ hơn mốc B {LADDER[d['rank']]}%")
+        if d['low']: n.append(f"nhỏ hơn mốc L29 {LADDER[d['rank']]}%")
         if d['boxy']: n.append('vuông/hộp')
         f = FL.get(k)
         if f is not None and f < FLOOR_OK[0]: n.append('sàn hẹp')
@@ -96,7 +97,7 @@ def sheet(dl, fig, out):
     FB = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 30)
     FS = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 24)
     panels = [('v10/canh-phuc-cung-phi-ngu-3w', 'Cảnh Phúc Phi — mẫu trực diện đã duyệt'),
-              ('pr21/chung-tu-cung-tan-ngu', 'Chung Tú Tần — đã duyệt (giường to nhất)'),
+              ('v12/truong-xuan-cung-hqp-ngu-F-r2', 'Hoàng quý phi — trực diện hiện tại'),
               ('v9/khon-ninh-cung-ngu-B3', 'Khôn Ninh Hoàng hậu — trực diện hiện tại'),
               ('v11f/canh-phuc-cung-quyphi-ngu-F', 'Cảnh Phúc Quý phi — trực diện hiện tại'),
               ('pr13/thua-minh-cung-quyphi-ngu', 'M2300-11 Thừa Minh Quý phi (chủ: giường nhỏ)'),

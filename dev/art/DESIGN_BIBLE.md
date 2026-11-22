@@ -31,7 +31,7 @@ This file is an INDEX + the current core. It does NOT copy rules: it points at r
 - **Thu signature**: G75 soft vân kiên every rank; HQP vân kiên = HH's (phoenix under pearl net, L2233). Latest thu set = M2231-02..08 (THUROOT9 report).
 - **Colour**: royal yellow #EFBD69 (B17 t7/t8, B21) · Thái hậu deeper yellow (B22) · HH yellow set LOCKED (L2226) · phoenix plumage G33 (L2235 set **superseded by GPT palette L2274** when PALGPT1 lands).
 - **Palette (L2274)**: "giữ cái bảng màu của ChatGPT" → GPT v3 dev/art/palette_gpt_L2272/ is the game palette; being written into palettes_season.json / flower / veil / plumage by PALGPT1 (report dev/handover/reports/PALGPT1.md).
-- **Others**: F14 no Qing headdress · E1 angles · B9 gen sizes · C5 men · L21 bed height.
+- **Others**: F14 no Qing headdress · E1 angles · B9 gen sizes · C5 men · L21 bed height · **L29 bed width ladder** (L2329: anchor Cảnh Phúc Phi frontal UPve2vXwny 43 % W; Tần = Phi = Quý phi ≥ 43 %, HQP ~47 %, HH ~51 %, wider than tall; phối smaller, not measured; dev/art/place-rank/bed_measure.py).
 
 ## 3. New direction — NOT approved yet (no "duyệt")
 - **Style**: she prefers the GPT semi-realistic anime look (L2253; her red HH dev/art/owner_runs/L2264_*, L2266_*, L2268). GPT style block = wording in M2246-01 / M2248-04/05 / M2255-08; anime tests attach NO mau_net_ve image. Face consistency would need an anime face ref per person (proposed, not done).
