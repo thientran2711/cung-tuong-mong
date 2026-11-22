@@ -74,7 +74,10 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const a=await rd(A)||await press(A,15000),c=await rd(B)||await press(B,15000);return a&&c&&await bothPast(A,B,k,30000)>=0}
  async function nextWeek(w0){for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;
    if(a.w>w0||c.w>w0){await sleep(500);continue}const k=await A.p.evaluate(()=>COOPW.tm.myKey());await step1(k)}
-  const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;await sleep(500)}return false}
+  const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)return true;await sleep(500)}
+  /* stuck dump (same as the other bots' «advanced for both»): both seats' screen + night word (THE helper's SCR) + the co-op trace */
+  const SCR=require('./lib/coop-clear.js').SCR,dq=o=>o.p.evaluate(()=>({w:COOP.state.week,k:COOPW.tm.myKey(),pend:COOPW.pend,sent:COOPW.sent,cyHold:COOPW.cyHold,nf:typeof nfDebug==='function'?nfDebug():null,next:(document.getElementById('next')||{}).textContent,tr:(COOPW.tr||[]).slice(-16)})).catch(e=>e.message);
+  console.log('STUCK week '+w0+' '+JSON.stringify({A:await dq(A),B:await dq(B),sA:await A.p.evaluate(SCR).catch(e=>e.message),sB:await B.p.evaluate(SCR).catch(e=>e.message)}));return false}
  async function toDay(){for(let g=0;g<6;g++){const a=await D(A);if(a.b<LAST)return;await nextWeek(a.w)}}
  await A.p.evaluate(()=>Object.assign(BAL.coopTm,{buoiMs:240000,pauseCapMs:6000}));await A.p.evaluate(()=>COOPW.tm.reset());
  /* the shared world as this seat sees it: every NPC's public numbers + the Emperor / Thái hậu / court / palace men / weather / date */
