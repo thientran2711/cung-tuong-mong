@@ -1,0 +1,4 @@
+base: dev/art/emo-anim/groups/still_base/th-act-buon-A.txt
+allow: crying face with eyes squeezed shut  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)
+allow: tears running down  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)
+allow: at one eye  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)

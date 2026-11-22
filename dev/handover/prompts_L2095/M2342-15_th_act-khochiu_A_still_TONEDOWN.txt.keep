@@ -1,0 +1,4 @@
+base: dev/art/emo-anim/groups/still_base/th-act-khochiu-A.txt
+allow: irritated scolding face  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)
+allow: mouth open  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)
+allow: pointing sharply to the side  # owner L2342 'Ok làm đi' (act tone-down: small gesture, calm face strength)
