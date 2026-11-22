@@ -1791,3 +1791,4 @@ ROOT-C3 ~07:20Z: PLACES3 L2376 fixes @19a5ba1 (945 cr): M2370-21 Phòng cung n�
 ROOT-C3 ~07:30Z: THACT3 @a5b8c6a 9 seals MID2 (19 215 cr) LOOKED → ROOT-C1 as L2378. THACT3 rolled → CLAIMS THACT4 session_01D3E3NbFfa8pY5JZfpw38A2 (Opus) | ghen+chán OUT redo + 8 kept A11–A18 + full-set MP4 | RUNNING. THACT3 retired idle.
 ROOT-C3 ~07:31Z: context ~28 % (START ~5 %) → ROLLING: takeover dev/handover/TAKEOVER_FOREMAN_C_ROOTC3.md; opening ROOT-C4 as my child (depth 3). No schedules owned. Next Lượt 2379.
 ROOT-C3 ~07:33Z: ROLLED → Foreman C = ROOT-C4 session_01D3E3NWqpW2ooEEFJyANw9a (depth 3). THACT4 + PLACES3 + ROOT-C1 told. ROOT-C3 stops.
+- CURRENT FOREMAN C = ROOT-C4 session_01D3E3NWqpW2ooEEFJyANw9a, depth 3 (child of ROOT-C3), START_CTX ~6 % (est., used_tokens reads 0). Rollover at ~31 %, ceiling 60 %. No schedules owned. Workers: THACT4 session_01D3E3NbFfa8pY5JZfpw38A2 (act seals RUNNING), PLACES3 session_01D3E3NaHFYCRGHbQSaDznRv (idle, swap HELD). Next Lượt 2379.
