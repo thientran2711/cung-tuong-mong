@@ -44,3 +44,18 @@ Merged LIVE 7303aa58 into review/coop-fig-retry-r1 (only index.html/sw.js confli
 - JUDGEMENT on quickcheck open() FIGSIG wait: acceptable as a readiness wait (cap 30 s, never fails, no threshold touched). It does mirror a real player effect: measured with every CDN manifest aborted but browser online, the new-life card now appears after the existing 2.5 s nlBegin cap (~3.0 s), where OLD main answered at once (failed read → FIGSIG "0|0"), and figures fill in at ~9.5 s via render(). Worker's report said "same cap" — true, but it is a NEW 2.5 s only on a dead-CDN-but-online line, once per new life. Offline = instant (no retry). Weak line = card waits ≤1 s for the first retry and then has the faces. JUSTIFIED, not blocked: rare (CDN outage), small (2.5 s, capped), self-healing. If the owner later wants zero wait on a dead CDN, make nlFigsReady() also true when KCDN.mretries>0 after 2.5 s — not done here (would be a behaviour change beyond this topic).
 - Note: on a fully dead CDN ~26 manifest chains each make 3 extra GETs (~78 requests in 9.5 s); bounded, once per page load + the 5-min re-read.
 Verdict: PASS. No fixes needed on r1 beyond the merge.
+
+## REVIEW r2 (sonnet reviewer-lander, 11/22/2026) — side-effect check on LIVE f0070e61 + fix
+PRIORITY #1 CHECK: OD 103 | main f0070e61 has coop-fig-retry | review/coop-fig-retry-r1 (PASS) | claims B row.
+Measured (Fold 755x1000@2, fresh context, 5 runs, medians; title = goto→"Chơi một mình" visible; card = start()→new-life card in Q):
+| case | OLD LIVE 7303aa58 | f0070e61 | r2 fix |
+|---|---|---|---|
+| CDN reachable: title / card | 1712 / 900 ms | 1728 / 955 ms | 1682 / 874 ms |
+| CDN dead but online: title / card | 1775 / 652 ms | 1685 / **3020 ms** | 1745 / 722 ms |
+(a) reachable CDN: NOT slower. (b) dead-online CDN: title never held; the new-life card was held 2.5 s (nlBegin cap) because the failed read no longer settled at once → slower than before, so fixed here.
+Fix: jcdn.js counts `KCDN.m1fail` = first read of a FIGURES*.json that failed; j52 `nlFigsReady()` is also true when m1fail>0 (retries continue in the background, figures fill in via render()). Slow-but-working lines still wait the old ≤2.5 s. quickcheck open() FIGSIG wait removed (back to original; open 2035 ms vs 11 s).
+Gates: fig-retry Fold 755x1000@2 + iPad 1180x820@2 both seats ALL OK; coop-e2e 129/129; quickcheck PASS (open 2035 ms); undef/one-core/manifest-fetch-scan PASS; newlife-oldsave FAIL 0.
+
+## REVIEW r3 (sonnet reviewer-lander, 11/22/2026) — r2 + capped FIGSIG wait restored in quickcheck open()
+Cause of the r2 land FAIL (MAIN 105 LAND CHAIN 5): quickcheck also runs NEWLIFE on the OLD (LIVE f0070e61) build, which still opens its new-life card only after the figure lists answered (~9.5 s of retries with CDN aborted). r3 = r2 + quickcheck.js open() waits (cap 30 s, never fails) for FIGSIG!=="" or KCDN.m1fail>0; fast on the new build, covers the old one. Drop the wait once r2 is LIVE.
+Gates (LIVE still f0070e61): quickcheck new vs LIVE PASS — open 2772 ms, old save ok, perf render 250/257, tab 503/494, buổi 1910/1397, tasks>200ms 27/21; coop-e2e 129/129; fig-retry both seats Fold 755x1000@2 + iPad 1180x820@2 ALL OK.
