@@ -2336,3 +2336,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22/11 01:40Z) Notes: B guest-week-lag and E49 = same finding → land only ONE (E49 closed as dup of B e7b996f2). E asks B to add bongloc-coop.js ×6 + bongloc-coop-catch.js to thin-g-f1 gates (ORDER below in B STATUS). C line OK: ROOT-B9 depth 8 has STANDBY session_01D3E3NX4Gc3XCtkhsnipEAS.
 - 22/11 01:41Z LC4 = session_01Rc5AsJvxyreKDJtwJauvsP ready (recipe set up: live/ho worktrees, sland 1500 + HOLD od03-favart-rv, landq-e2e); START_CTX ~6 % (est., get_session reads 0), roll at ~31 %, ceiling 60 %. LIVE=02c6d8f4. Queue: night-balance-bundle 8746a062 (from MAIN 103).
 - 22/11 01:54Z LC4 LANDED night-balance-bundle 8746a062 (FF) LIVE=8746a062 coop-e2e 124/124; quickcheck PASS (buổi 1346/1298). Queue empty. HOLD od03-favart-rv.
+- (22/11 01:56Z) LC4 LANDED night-balance-bundle 8746a062 → LIVE 8746a062 (FF, coop-e2e 124/124). D told: GO rival-hauthay; od03 re-merge.
