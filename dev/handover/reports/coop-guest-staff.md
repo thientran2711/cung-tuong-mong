@@ -91,3 +91,14 @@ Merge clean (only my 3 test files differ from LIVE).
 
 HANDOVER: none needed. The work is complete; only the LIVE coop-pets finding above is open.
 SẴN SÀNG KIỂM review/coop-guest-staff a8eaf45efe603925ff910e8533bf56e93c9b0bb1
+
+## The 4 coop-pets FAILs after the 35f5b5ab merge (Foreman D #19 order 14:04Z) — not a LIVE regression
+| run | build | driver | result |
+|---|---|---|---|
+| plain LIVE | 35f5b5ab | LIVE driver | 48/50: the 4 early checks PASS; only the old step-5 pair fails (fixed on this branch) |
+| branch driver on LIVE | 35f5b5ab | a8eaf45e driver | 51/51 |
+| hardened driver | 35f5b5ab + this branch | 5bd280426405aa0a40050aacdf10084f22942386 | 51/51 |
+| (earlier, merged branch) | same code | a8eaf45e | 47/51 ×2 |
+Bisect b55a0e1c..35f5b5ab not needed: the game range (j42, jagacts3, jagmaid, jbal2, jpetcare) does not touch the friend entry, the first-time pet panel (jpet petTipShow, unchanged since a1a90fc0) or lib/coop-clear.js (unchanged), and plain LIVE passes the 4 checks.
+Root of the 2 bad runs: timing. «each has the other as a consort entry» was read ONCE right after the rank/pet set-up (no wait; [false,false] = COOPW.friend() not built yet) while its two neighbour checks wait 15 s; the gift checks that followed ran on a B page still settling (first-time panel «Thú nuôi» from her first petAdd on top). Fix (test only): that check now waits (waitFr) like its neighbours. No game code, no coop-clear change.
+SẴN SÀNG KIỂM review/coop-guest-staff 5bd280426405aa0a40050aacdf10084f22942386
