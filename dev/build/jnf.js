@@ -26,7 +26,7 @@ if(typeof flip!=="function"||typeof endTurn!=="function"||typeof nightScene!=="f
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 const B4=()=>typeof B4L==="number"?B4L:2;
 const B=()=>BAL.steal;
-/* ⛔ CO-OP PARKED — THE ONE GATE (Foreman D #8, 17/11, fix F1 of review-night-final-r1; owner 17/11 02:05Z: no co-op patching, co-op goes to
+/* (HISTORY, superseded by UNPARKED below: only a thin part-E room is parked now) ⛔ CO-OP PARKED — THE ONE GATE (Foreman D #8, 17/11, fix F1 of review-night-final-r1; owner 17/11 02:05Z: no co-op patching, co-op goes to
    Foreman B's coop-thin rebuild). The new night flow runs SOLO only: while a co-op room is on, nfOn() is false and EVERY jnf entry point falls
    back to the live path — flip (jfe.js start-of-tối flip), nightScene, endTurn (live commit), visRoll, the click guard, step, render rerun,
    resolveTonight / rivalNight wrappers, the relay (send / ask / act listener), stealPass (jsteal's own), the two Tranh sủng / Chặn ngự giá acts
@@ -56,7 +56,7 @@ let REAL=0,IN=0,SW=0,CUR=null,RR=null;
    her Hành sự deck (j2 deal: the two cards are deleted there), the person menu group "Hại nặng" (j15 RVGRP), the NPC harm bands (j24 BANDS:
    NPC agents pick their acts there), the weekly social act (j28 SOC.steal, already off in jsteal). ACT.steal / ACT.road stay defined (old
    callers) but can never be offered: ok() = false. */
-/* co-op parked (nfParked): the live lists come back while a room is on — each removed key is put back at its own place (nfActs, on render) */
+/* parked (nfParked: a THIN part-E room only): the live lists come back while that room is on — each removed key is put back at its own place (nfActs, on render) */
 const ACTS=[];
 try{for(const g of (typeof RVGRP!=="undefined"?RVGRP:[]))for(const k of ["steal","road"]){const i=g[1].indexOf(k);if(i>=0)ACTS.push({g,f:1,k,i})}}catch(e){}
 try{for(const g of (typeof BANDS!=="undefined"?BANDS:[]))for(const k of ["steal","road"]){const i=(g[2]||[]).indexOf(k);if(i>=0)ACTS.push({g,f:2,k,i})}}catch(e){}
@@ -337,7 +337,7 @@ function nwOut(){const w=S.nightWhy;if(!w||w.wk!==day())return null;return{pick:
  rows:(w.rows||[]).map(z=>Object.assign({},z,{id:mapId(z.id),name:z.id==="me"?S.name:z.name}))}}
 function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m={t:"act",k:NK,mode:host()?"h":"g",ph:ph||null,d:day(),week:COOP.state.week,hold:enc(S.tonight),
   ntk:S.ntk&&S.ntk.w===day()?mapId(S.ntk.who):null,fin:host()&&S.nfFin===day()?1:0,open:host()&&x&&x.st!=="wait"?1:0,nw:host()?nwOut():null,
-  ch:ph==="ch"&&x?{v:x.me}:null,gres:host()&&S.nfG&&S.nfG.d===day()?S.nfG.L:null,gdef:host()&&S.nfG&&S.nfG.d===day()?S.nfG.def:null,
+  ch:ph==="ch"&&x?{v:x.me}:null,ld:host()&&typeof window.ldOut==="function"?window.ldOut():null/* the 10-night ledger's days (jledger) */,gres:host()&&S.nfG&&S.nfG.d===day()?S.nfG.L:null,gdef:host()&&S.nfG&&S.nfG.d===day()?S.nfG.def:null,
   id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host()){LAST=m;if(m.fin)S.nfLast=m}COOP.send(m)}catch(e){console.error(e)}}
 /* the host's final word of a day (fin: holder, record, results) is kept in her save (S.nfLast) and sent again, AS IT WAS, when the guest asks
    for a day the host has already left: the host ends its day right after fin and runs ahead to the next one while the merged week is pending,
@@ -352,7 +352,7 @@ function reply(d){if(!host()||!S)return false;if(d!==day())return again(d);if(LA
  const x=X();if(S.nfFin===d||(x&&x.st!=="wait")){send(S.nfFin===d?"fin":null);return true}return false}
 function ask(){const c=CO();if(!c||!nfOn())return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
 /* the guest applies the host's word: the holder, the flip (scene + her own choice), the result */
-function apply(m){if(!S||S.dead||m.d!==day())return;
+function apply(m){if(!S||S.dead)return;if(m.ld&&guest()&&typeof window.ldIn==="function")window.ldIn(m.ld);if(m.d!==day())return;
  const t=dec(m.hold);S.tonight=t;
  if(m.ntk){const who=unId(m.ntk);const v=who==="me"?null:(rivals||[]).find(z=>z&&z.id===who);S.ntk={w:day(),who,nm:who==="me"?"ngươi":(v&&v.name)||""}}
  if(!guest())return;
@@ -386,14 +386,21 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
 try{if(typeof COOP==="object"&&COOP.on){
  COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat||!nfOn())return;
   if(m.mode==="ask"){if(host())reply(m.d!=null?m.d:day());return}
+  /* the 10-night ledger (jledger §5): the host's settled tuần → the guest settles her own nights; her ask → the host sends it again */
+  if(m.mode==="ld"){if(guest()&&typeof window.ldIn==="function")window.ldIn(m.ld);return}
+  if(m.mode==="ldask"){if(host()&&typeof window.ldAgain==="function")window.ldAgain(m.wk);return}
   if(m.mode==="h"&&guest())apply(m);
   else if(m.mode==="g"&&host()&&S&&m.d===day()){
    if(m.ph==="ch"){const x=X();if(x&&x.st==="open"&&x.fr===undefined){x.fr=m.ch?VALID(m.ch.v):null;step()}return}
    if(S.nfFin===day())return;
    apply(m);send()}}catch(e){console.error(e)}});
- const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d)}else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
+ const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()){if(!reply(day())&&S&&S.nfLast&&S.nfLast.d<day())again(S.nfLast.d);if(typeof window.ldAgain==="function")window.ldAgain()}else if(guest()&&S){if((S.buoi||0)>=B4()&&S.nfFin!==day())ask();const w=typeof window.ldWant==="function"?window.ldWant():null;if(w!=null)window.nfLdAsk(w)}}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfSend=()=>send();/* test hook: relay the holder now */
+/* the 10-night ledger's relay on this key (jledger §5): seat-neutral ids, the settled tuần (host → guest), the guest's ask */
+window.nfEnc=enc;window.nfDec=dec;
+window.nfLdSend=o=>{const c=CO();if(!c||!o||!host())return;try{COOP.send({t:"act",k:NK,mode:"ld",d:day(),week:COOP.state.week,ld:o,id:NK+"l"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)})}catch(e){console.error(e)}};
+window.nfLdAsk=w=>{const c=CO();if(!c||!guest()||w==null)return;try{COOP.send({t:"act",k:NK,mode:"ldask",wk:w,id:NK+"q"+Date.now().toString(36)})}catch(e){}};
 window.nfStep=step;
 window.nfDebug=()=>({on:nfOn(),host:host(),guest:guest(),nfP:S&&S.nfP,nfF:S&&S.nfF,nfC:S&&S.nfC,nfN:S&&S.nfN,nfFin:S&&S.nfFin,tonight:S&&(S.tonight==="me"?"me":S.tonight&&S.tonight.id),ntk:S&&S.ntk,x:S&&S.nfX,Q:(typeof Q!=="undefined"?Q:[]).map(m=>m&&(m.pid||m.t))});
 })();
