@@ -47,8 +47,20 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];
  /* diagnostic (env DANHP): every 400 ms her Danh on her phone vs the host's store of her; prints each change with her last log lines */
  if(process.env.DANHP){let last='';const lg=x=>(x||[]).slice(-2).map(l=>String(l&&l.t||l).replace(/<[^>]+>/g,'').slice(0,140));
-  (async()=>{while(true){try{const g=await G.p.evaluate(()=>({w:COOP.state.week,d:S.danh,b:S.buoi,t:S.tuan,L:(S.log||[]).slice(-2),tr:(COOPW.tr||[]).slice(-2),pn:S.thpn}));const h=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {d:s.danh,b:s.buoi,t:s.tuan,L:(s.log||[]).slice(-2),dl:(COOPW.thin.D.log||[]).slice(-2),N:(COOPW.thin.D.N||{}).b,pq:((COOPW.thin.D.PQ||{}).b||[]).length,drop:COOPW.thin.D.drop|0}});
-   const k=g.d+'|'+h.d+'|'+h.drop;if(k!==last){console.log('DANHP',JSON.stringify({w:g.w,ph:[g.d,g.t,g.b],st:[h.d,h.t,h.b],gL:lg(g.L),hL:lg(h.L),tr:g.tr,dl:h.dl,pn:g.pn,N:h.N,pq:h.pq,drop:h.drop}).slice(0,1400));last=k}}catch(e){}await sleep(400)}})()}
+  (async()=>{while(true){try{const g=await G.p.evaluate(()=>({w:COOP.state.week,d:S.danh,b:S.buoi,t:S.tuan,L:(S.log||[]).slice(-2),tr:(COOPW.tr||[]).slice(-2),pn:S.thpn,dw:(window.__dw||[]).filter(x=>x[2]==='danh').slice(-3)}));const h=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {d:s.danh,b:s.buoi,t:s.tuan,L:(s.log||[]).slice(-2),dl:(COOPW.thin.D.log||[]).slice(-2),N:(COOPW.thin.D.N||{}).b,pq:((COOPW.thin.D.PQ||{}).b||[]).length,drop:COOPW.thin.D.drop|0,hw:(window.__hw||[]).filter(x=>x[0]==='build'||/danh/.test(x[x.length-1])).slice(-4)}});
+   const k=g.d+'|'+h.d+'|'+h.drop;if(k!==last){console.log('DANHP',JSON.stringify({w:g.w,ph:[g.d,g.t,g.b],st:[h.d,h.t,h.b],gL:lg(g.L),hL:lg(h.L),tr:g.tr,dl:h.dl,pn:g.pn,N:h.N,pq:h.pq,drop:h.drop,dw:g.dw,hw:h.hw}).slice(0,4000));last=k}}catch(e){}await sleep(400)}})()}
+ /* DANHP #5: who writes her core numbers — a setter on her phone's S (re-armed when S is replaced) and on the host: every part-D patch / erd op
+    that touches them, every rebuild of her store (seatOf fresh build) with its source */
+ if(process.env.DANHP){const KW=['danh','bac','sung','suc','duc','th'];
+  await G.p.evaluate(KW=>{window.__dw=[];const arm=()=>{try{if(!S||S.__dwArm)return;Object.defineProperty(S,'__dwArm',{value:1,enumerable:false,configurable:true});
+    for(const k of KW){let v=S[k];Object.defineProperty(S,k,{enumerable:true,configurable:true,get(){return v},set(x){if(x!==v){const st=(new Error().stack||'').split('\n').slice(2,24).map(l=>l.trim().replace(/^at /,'').replace(/\(?http:\/\/[^ ]*\/([^/ :]+)(:\d+:\d+)\)?/,'@$1$2')).join(' < ');
+      window.__dw.push([COOP.state.week,S.buoi,k,v,x,S.thpn|0,st.slice(0,2400)]);if(window.__dw.length>400)window.__dw.shift()}v=x}})}}catch(e){}};
+   setInterval(arm,50);arm()},KW);
+  await H.p.evaluate(KW=>{window.__hw=[];const T=COOPW.thin,D=T.D;const hit=ops=>(ops||[]).filter(o=>o&&Array.isArray(o[1])&&o[1].length===1&&KW.includes(o[1][0]));
+   const po=D.patchOut;D.patchOut=function(seat,p){const r=po.apply(this,arguments);try{const h=hit(p);if(h.length)window.__hw.push(['patch',COOP.state.week,seat,D.N[seat],JSON.stringify(h)])}catch(e){}return r};
+   const fe=T.doFn('erd');if(fe)T.onDo('erd',function(a){try{const h=hit(a&&a.ops);if(h.length)window.__hw.push(['erd',COOP.state.week,COOPW.ctx,JSON.stringify(h)])}catch(e){}return fe.apply(this,arguments)});
+   const so=T.seatOf;T.seatOf=function(seat){const had=!!(T.__ST_has&&T.__ST_has(seat));const B=so.apply(this,arguments);try{if(B&&!B.__dwSeen){B.__dwSeen=1;window.__hw.push(['build',COOP.state.week,seat,B.S&&B.S.danh,B.S&&B.S.buoi,(new Error().stack||'').split('\n').slice(2,6).map(l=>l.trim().replace(/\(?http:\/\/[^ ]*\/([^/ :]+)(:\d+:\d+)\)?/,'@$1$2')).join(' < ').slice(0,400)])}}catch(e){}return B};
+   setInterval(()=>{if(window.__hw.length>400)window.__hw.splice(0,window.__hw.length-400)},2000)},KW);}
  const UP=+(process.env.UP||0);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
  const KEYS=['bac','sung','danh','suc','duc','th','tai','sac','tamco','rank'];/* mat (Tai mắt) is derived on the live S, not stored */
@@ -56,6 +68,20 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const g=await G.p.evaluate(K=>{const o={};for(const k of K)o[k]=S[k];o.kids=(S.kids||[]).length;o.kidAge=(S.kids||[]).map(k=>k&&k.age).join(',');o.inv=(S.inv||[]).length;o.staff=(S.staff||[]).length;o.preg=JSON.stringify(S.preg||null).slice(0,40);o.ill=!!S.ill;o.dead=!!S.dead;return o},KEYS);return {h,g}};
  const diff=(a,b)=>Object.keys(a).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k])).map(k=>[k,a[k],b[k]]);
  if(UP){ok(lv[0]===12&&lv[1]===12,'G4 upgrade: the room starts at level 12',lv)}else ok(lv[0]===LVL&&lv[1]===LVL,'G0 room level '+LVL+' on both seats',lv);
+ /* G0b (coop-thin-g-f1 #5, LAW 11 render-diff family, dev/test/coop-rdiff-scan.py): jty tyHome — a visitor at home while she is in trung y
+    (Danh −BAL.ty.meet once per buổi). Before: it ran in renderStage on HER PHONE only (TRIP swap 1: Danh host +1 | phone, until her next
+    ready). Now: read-only on her phone; the host runs it as her context closes; her phone gets it by patch. Staged with stubs (tyOn, one NPC
+    visitor) on both pages, her place set on the host (host-authoritative), then put back. */
+ if(!UP&&!process.env.NOG0B){const stub=v=>{window.__ty0=window.__ty0||{on:window.tyOn,cp:window.curPeople};window.tyOn=()=>true;window.curPeople=()=>{const r=(rivals||[]).find(x=>x&&x.id===v);return r?[{ref:r}]:[]}};
+  const unstub=()=>{if(window.__ty0){window.tyOn=window.__ty0.on;window.curPeople=window.__ty0.cp;window.__ty0=null}};
+  const vid=await H.p.evaluate(()=>{const L=(rivals||[]).filter(v=>v&&!v.coop&&v.alive!==false&&!v.out);return L.length?L[L.length-1].id:null});
+  await H.p.evaluate(`(${stub})(${JSON.stringify(vid)})`);await G.p.evaluate(`(${stub})(${JSON.stringify(vid)})`);
+  const d0=await G.p.evaluate(()=>S.danh),s0=await H.p.evaluate(()=>COOPW.thin.seatOf('b').S.danh);
+  await G.p.evaluate(()=>{try{render()}catch(e){}try{render()}catch(e){}});await sleep(600);const d1=await G.p.evaluate(()=>S.danh);
+  await H.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{S.place='home';S.tyPaid=null})});
+  let e=null;for(let t=0;t<25;t++){await sleep(400);e=[await G.p.evaluate(()=>S.danh),await H.p.evaluate(()=>COOPW.thin.seatOf('b').S.danh)];if(e[0]===e[1]&&e[1]<s0)break}
+  await H.p.evaluate(`(${unstub})()`);await G.p.evaluate(`(${unstub})()`);
+  ok(vid!=null&&d1===d0&&e[1]<s0&&e[0]===e[1],'G0b trung y at home with a visitor: her phone takes no Danh at render; the host takes it in her context; her phone == host store by patch',{vid,phone:[d0,d1,e[0]],store:[s0,e[1]]})}
  /* counters on the guest: her endTurn runs, her outgoing messages */
  await G.p.evaluate(()=>{window.__sent=[];const s=COOP.send;COOP.send=function(m){try{window.__sent.push(m.t==='act'?'act:'+m.k:m.t==='do'?'do:'+m.op:m.t)}catch(e){}return s.apply(this,arguments)};
   window.__et=0;const e=endTurn;endTurn=function(){window.__et++;return e.apply(this,arguments)}});
@@ -89,7 +115,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   let b=await her();const d0=diff(b.h,b.g);for(let t=0;t<20&&diff(b.h,b.g).length;t++){await sleep(500);b=await her()}if(d0.length&&process.env.TRIP)console.log('TRIP',JSON.stringify(await G.p.evaluate(()=>{const t=window.__trip&&window.__trip();return t?(t.top||[]).filter(x=>/bac|th\b|danh|sung|suc|duc/.test(JSON.stringify(x))).slice(0,15):null})));if(d0.length)console.log('TRANSIENT week '+(k+1),JSON.stringify(d0),'settled',JSON.stringify(diff(b.h,b.g)),'to',JSON.stringify(d0.map(([x])=>[x,b.h[x],b.g[x]])));const g1=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length,w:COOP.state.week}));const hs=await H.p.evaluate(()=>({w:COOPW.thin.G.stat.week,ms:COOPW.thin.G.ms.slice(-1)[0],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss}));
   const d=diff(b.h,b.g);const okk=g1.et===g0.et&&g1.end===g0.end&&hs.w===hs0+1&&!d.length;if(okk)pass++;
   rows.push({w:g1.w,her:b.h,ms:hs.ms});
-  ok(okk,'G1 week '+(k+1)+': her phone ran no week end, sent no end; the host ran hers once; her phone == host store',okk?{bac:[a.h.bac,b.h.bac],ms:hs.ms}:{et:[g0.et,g1.et],end:[g0.end,g1.end],hw:[hs0,hs.w],diff:d,G:hs.G})}
+  ok(okk,'G1 week '+(k+1)+': her phone ran no week end, sent no end; the host ran hers once; her phone == host store',okk?{bac:[a.h.bac,b.h.bac],ms:hs.ms}:{et:[g0.et,g1.et],end:[g0.end,g1.end],hw:[hs0,hs.w],diff:d,G:hs.G});if(!okk&&process.env.DANHP){console.log('DW phone',JSON.stringify(await G.p.evaluate(()=>(window.__dw||[]).filter(x=>!/pApply/.test(x[6])).slice(-6))));console.log('DW host',JSON.stringify(await H.p.evaluate(()=>(window.__hw||[]).slice(-16))))}}
  console.log('ROWS',JSON.stringify(rows));if(process.env.TABLE)fs.writeFileSync(process.env.TABLE,JSON.stringify(rows,null,1));
  console.log('GSTAT',JSON.stringify(await H.p.evaluate(()=>({E:COOPW.thin.E.stat,drops:window.__drops||[],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss||null,ms:COOPW.thin.G.ms,log:COOPW.thin.G.log.slice(-8)}))),'min',((Date.now()-t0)/60000).toFixed(1));
  /* G2 same dice + G3 isolation (probe: constant dice; everything put back after) */

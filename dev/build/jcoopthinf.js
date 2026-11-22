@@ -433,7 +433,10 @@ const L11=11;
    the host render is a no-op, so they run as her context closes; on her phone at level 11 they do not run (kpCheck only reads). */
 /* coop-thin G #5 (f3 B1 L13: her Sổ ghi had "+5 Phúc duyên" and "Kiếp này đã trọn" in the other order): run in SOLO's order = the render
    wrappers' order (the last-wrapped runs first; prCheck runs after the inner render): jallot, jration, jexam, jmark, jkiep, j52, then jpromo */
-const RDIFF=["alInitAll","lxInitAll","exTick","kmmCheck","kpCheck","pdCheck","prCheck"];
+/* coop-thin-g-f1 #5 (same family, scan dev/test/coop-rdiff-scan.py): jty tyHome (a visitor at home while she is in trung y: Danh −BAL.ty.meet,
+   once per buổi by S.tyPaid) ran in renderStage on her phone only → her Danh lower on her phone than in the host's store until her next ready.
+   It paints inside the inner render, so before jpromo */
+const RDIFF=["alInitAll","lxInitAll","exTick","kmmCheck","kpCheck","pdCheck","tyHome","prCheck"];
 /* a card that opens a picker keeps itself in window.__adPend until the pick (jact): per player, swapped with her context */
 try{TH.reg("__adPend",()=>window.__adPend||null,v=>{window.__adPend=v||null})}catch(e){}
 const isSteal=a=>{try{return typeof isStealCard==="function"&&isStealCard(a)}catch(e){return false}};

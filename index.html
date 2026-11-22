@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6a259bae+","t":"2026-11-21T23:40Z","c":"coop-thin-g-f1: the host never drops an unacked part-D patch (patchOut kept 40: her phone then skipped the lost n for good = a delta lost, …","b":"d69f76597f79","h":[{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"},{"s":"34ddce9a+","t":"2026-11-21T18:45Z","c":"Tuyển tú: bục đứng đúng chỗ (OR09)"}]};
+window.CTM_BI={"s":"9f58222a+","t":"2026-11-22T02:04Z","c":"coop-thin-g-f1: the host never drops an unacked part-D patch (patchOut kept 40: her phone then skipped the lost n for good = a delta lost, …","b":"f56e2b1156fe","h":[{"s":"c7ae6d07+","t":"2026-11-21T21:35Z","c":"Bổng lộc: thêm lựa chọn (E)"},{"s":"5341fe36+","t":"2026-11-21T22:09Z","c":"Chơi chung: việc trong họ (E)"},{"s":"bca0052c+","t":"2026-11-21T20:22Z","c":"Giao diện: sửa phần còn sót trên Fold (B)"},{"s":"c674cd02+","t":"2026-11-21T20:38Z","c":"Thủ công: trò Thêu (B)"},{"s":"95fd1253+","t":"2026-11-21T20:37Z","c":"Khung chân dung: lớp phủ đồng bộ (B)"},{"s":"3e65dbe7+","t":"2026-11-21T13:32Z","c":"Chơi chung: hết kẹt chờ lượt (D)"},{"s":"8e452f06+","t":"2026-11-21T19:09Z","c":"Nhà: các chương truyện trong phủ (E)"},{"s":"fd4af05b+","t":"2026-11-21T18:59Z","c":"Đời sống trong cung: lấp các chỗ trống (B)"},{"s":"9343d8c4+","t":"2026-11-21T18:15Z","c":"Đồ thất lạc: bấm trúng dễ hơn (B)"},{"s":"821727de+","t":"2026-11-21T18:57Z","c":"Bộ khung chung: thân khung vừa nội dung (KP09)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37660,6 +37660,13 @@ BAL.wearSlots={
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
    a month; lets her go when her lòng falls under drop. */
 BAL.thc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
+/* review/bongloc-options (M83, owner 21/11 ~05:39Z): «Đòi lại phần bị cắt xén» when she has no cung nữ to send — she goes to Nội vụ phủ herself.
+   Odds = BAL.stip.askBase + Danh / danhD + Sủng / sungD − sup (a superior is behind the cut). Read by jstip stipEvent. */
+BAL.blopt={danhD:4,sungD:4,sup:25,
+ /* review/bongloc-options r1 (E47r law 4 + 11): the sibling answers on the same frame read here too — Sai <cung nữ> đi đòi: lòng / loyD;
+    Tố lên: Hoàng hậu|Thái hậu regard / repStatD, Danh / repDanhD, + repEv per proof found, repRisky when the one she reports to is the one behind it;
+    Ghi nhớ: Tai mắt × memEyes. selfKhac = khắc her own trip to Nội vụ phủ costs (the maid's trip is parallel time). */
+ loyD:3,repStatD:2,repDanhD:5,repEv:15,repRisky:5,memEyes:10,selfKhac:1};
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -44540,7 +44547,7 @@ window.wdLux=wdLux;window.wdSew=wdSew;
       Trâm / y phục: j92 bán lén through a ma ma or eunuch. ================= */
 Object.assign(BAL,{
  pay:[40,55,70,95,125,165,215,280],payCold:5,payConfined:.5,payCut:.7,wage:3,
- duty:[0,4,10,18,30,48,72,100],banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
+ duty:[2,4,10,18,30,48,72,100]/* review/bongloc-options: Đáp ứng too has her lễ tiết, so every month offers the lễ nghĩa choice */,banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
  home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,pf:22,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
  sellPct:50,noivuPct:70,craftSell:[8,14,24,40],craftLv:3,craftGift:[2,3,5,7],
  giftLeak:{emp:35,th:25,hh:25},giftHit:{emp:{sung:-6,danh:-4},th:{th:-6,danh:-2},hh:{hh:-6,danh:-2}},
@@ -44555,6 +44562,8 @@ function econDuty(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.
 function econBan(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.banThuong[r]}
 /* who receives her ban thưởng: up to 2 lower consorts she likes best */
 function econBanTo(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)<rkOf(p)).sort((a,b)=>rel(p,b)-rel(p,a)).slice(0,2)}
+/* review/bongloc-options: why a month has no choice to make (said on the frame, kit words) */
+function econNoOpt(p){if(p.out)return"Đang ở lãnh cung: không lễ nghĩa, không ai cắt xén thêm, tháng này không có việc gì để chọn.";if(p.confined)return"Đang cấm túc: không phải lo lễ nghĩa tháng này, Nội vụ phủ phát đủ phần, không có việc gì để chọn.";return"Tháng này không có việc gì để chọn."}
 function econDoDuty(p,pay){const d=econDuty(p),b=econBan(p);const r=Math.min(7,rkOf(p));
  if(pay&&(p.bac||0)>=d+b){if(d)ap(p,{bac:-d});if(b){ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(v,p,BAL.eff.jecon.econDoDuty)}catch(e){}})}return{paid:1,d,b}}
  const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
@@ -44575,15 +44584,28 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
  const parts=[`+${base} bạc`];if(gn)parts.push(gn);if(skB)parts.push(`Nội vụ phủ cắt xén −${skB} bạc`);if(wage)parts.push(`trả công ${staff} kẻ hầu: −${wage} bạc`);if(bonus)parts.push(`ân thưởng +${bonus}`);if(home)parts.push(`nhà gửi +${home}`);if(pat)parts.push(`việc vặt +${pat.n}`);
  if(SK&&SK.why)why.push(`cắt xén vì ${SK.why}`);
  const line=`Bổng lộc tháng ${econMonthName()}: ${parts.join(" · ")} = ${tot>=0?"+":""}${tot} bạc${why.length?" ("+why.join("; ")+")":""}.`;
- try{if(!(typeof isSrv==="function"&&isSrv())){const R=[["Bổng",`${rkName(S)}: +${base} bạc`,"g"]];if(gn)R.push(["Đồ phát",gn,SK&&SK.items?"r":"g"]);if(skB)R.push(["Bị cắt xén",`Nội vụ phủ bớt ${skB} bạc`,"r"]);if(wage)R.push(["Công kẻ hầu",`trả công ${staff} kẻ hầu: −${wage} bạc`,"r"]);
+ try{if(!(typeof isSrv==="function"&&isSrv())){
+   /* review/bongloc-options (owner 21/11 ~04:30Z + ~05:39Z, M83): the notes go behind the kit «!» RIGHT NEXT TO the line they explain (no
+      visible Ghi chú row); EVERY month the frame carries its action options: the Nội vụ phủ cut answers ON this frame when something was cut
+      (Lót tay thái giám Nội vụ phủ / Sai <cung nữ> đòi lại / Đòi lại phần bị cắt xén / Tố lên / Ghi nhớ / Nhịn — the jstip stipEvent options, one
+      source), then the lễ nghĩa choice (Chu toàn / Bớt lễ nghĩa) on the next frame; a state with no choice (cấm túc / lãnh cung with nothing cut)
+      SAYS so on the frame. */
+   const bang=(L,t)=>L.length&&typeof kitNoteBang==="function"?" "+kitNoteBang(L.join(" · "),t||"Vì sao"):"";
+   const whyBase=why.filter(w=>!/^cắt xén vì/.test(w)),whySk=SK&&SK.why?[`cắt xén vì ${SK.why}`]:[];
+   const R=[["Bổng",`${rkName(S)}: +${base} bạc${bang(whyBase)}`,"g"]];if(gn)R.push(["Đồ phát",`${gn}${!skB&&SK&&SK.items?bang(whySk,"Vì sao bị cắt xén"):""}`,SK&&SK.items?"r":"g"]);if(skB)R.push(["Bị cắt xén",`Nội vụ phủ bớt ${skB} bạc${bang(whySk,"Vì sao bị cắt xén")}`,"r"]);if(wage)R.push(["Công kẻ hầu",`trả công ${staff} kẻ hầu: −${wage} bạc`,"r"]);
    if(bonus)R.push(["Ân thưởng",`+${bonus} bạc`,"g"]);if(home)R.push(["Nhà gửi vào",`${S.origin.n}: +${home} bạc`,"g"]);if(pat)R.push(["Việc vặt",`${rkName(pat.v)} ${pat.v.name} trả công: +${pat.n} bạc`,"g"]);
-   if(why.length)R.push(["Ghi chú",why.join(" · "),"n"]);R.push(["Còn",`Bạc ${S.bac}`,"n"]);
-   const card={ev:1,t:`Bổng lộc tháng ${econMonthName()}`,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
-   if(d||bt){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
-    card.h+=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;
-    card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
-   Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
+   R.push(["Còn",`Bạc ${S.bac}`,"n"]);
+   const ttl=`Bổng lộc tháng ${econMonthName()}`;const card={ev:1,t:ttl,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
+   const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
+   const dutyOpts=()=>[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
+     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}];
+   const dutyTxt=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;let follow=null;
+   const ev=SK&&typeof stipEvent==="function"?stipEvent(G,SK):null;
+   if(ev&&Array.isArray(ev.opts)&&ev.opts.length){card.h+=`<p class="past">Thái giám Nội vụ phủ đưa bổng lộc tới, mắt không dám nhìn thẳng. Phần bị cắt xén ngươi tính sao?</p>`;card.opts=ev.opts;card.evId=ev.evId;card.bl=1;
+    if(d||bt)follow={ev:1,t:`${ttl} · Lễ nghĩa`,who:card.who,h:dutyTxt,opts:dutyOpts(),bl:1}}
+   else if(d||bt){card.h+=dutyTxt;card.opts=dutyOpts();card.bl=1}
+   else card.h+=`<p class="past">${econNoOpt(S)}</p>`;
+   Q.push(card);if(follow)Q.push(follow);try{if(typeof stipShow==="function")stipShow(G,net,SK,1)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
@@ -44792,7 +44814,7 @@ window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc
       (her own eunuch loyal ≥ BAL.stip.allyLoyal, or BAL.stip.allyTips tips). Skimmed: silver (BAL.stip.cutSmall / cutBig of the bổng),
       goods one step worse (BAL.stip.down: gấm→lụa, lụa/vải→vải thô hàng kém, trà→trà mốc, than→than đen and one basket less, son phấn /
       yến / sâm missing). Not stacked on the old Hoàng hậu "khất bổng" (j20 payCuts, cutPay −30 %): that month the order IS the cause and
-      no second silver cut is taken. Her event (kitEventDp person dialog, event cost mode, the reason as Gợi ý): Nhịn / Đút bạc cho thái giám /
+      no second silver cut is taken. Her event (kitEventDp person dialog, event cost mode, the reason as Gợi ý): Nhịn / Lót tay thái giám Nội vụ phủ /
       Sai cung nữ đi đòi / Tố lên Hoàng hậu (or Thái hậu when the Empress is behind it or is the hostile one) / Ghi nhớ để trả thù sau.
       NPCs: the same rule, their answer by their purse / patron, news through newsAdd (Tai mắt decides what she hears).
    3. goodsGive(p, keys, {from, title, sub, kind}) — THE way any text that gives goods gives a real item (LUẬT SỬA CẢ NHÓM, dev/test/goods-scan.py):
@@ -44845,7 +44867,7 @@ function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là 
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
 function stipW(){if(!S.stipW||typeof S.stipW!=="object")S.stipW={};const W=S.stipW;if(W.greedy==null)W.greedy=roll(BAL.stip.greedy)?1:0;return W}
 /* the odds of «Sai <cung nữ> đi đòi» (one formula: the card and the parallel-time landing, jptime) */
-function stipAskOdds(m,SK){const B=BAL.stip;return oddsCl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK&&SK.sup?25:0))}
+function stipAskOdds(m,SK){const B=BAL.stip,O=BAL.blopt;return oddsCl(B.askBase+Math.round((m.loyal||0)/O.loyD)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/O.sungD)-(SK&&SK.sup?O.sup:0))}
 function stipEunName(){try{return S.court&&S.court.ped&&S.court.ped.name||"thái giám Nội vụ phủ"}catch(e){return"thái giám Nội vụ phủ"}}
 function stipWho(p){return p===S?"ngươi":p.name}
 function stipAlly(p){const st=stipSt(p);if((st.tips||0)>=BAL.stip.allyTips)return"người quen ở Nội vụ phủ (đã nhiều lần lót tay)";
@@ -44901,9 +44923,9 @@ function goodsGive(p,keys,o){o=o||{};p=p||S;const L=(Array.isArray(keys)?keys:[k
  const cnt={};L.forEach(k=>cnt[k]=(cnt[k]||0)+1);return Object.keys(cnt).map(k=>`${itm(k).n}${cnt[k]>1?" ×"+cnt[k]:""}`).join(", ")}
 window.goodsGive=goodsGive;
 /* ---------- her payout: the chest, then the skimming event ---------- */
-function stipShow(G,net,SK){const E=[];(G||[]).forEach(g=>E.push(...g.E));const base=(()=>{try{return BAL.pay[Math.min(7,rkOf(S))]}catch(e){return 0}})();
+function stipShow(G,net,SK,merged){const E=[];(G||[]).forEach(g=>E.push(...g.E));const base=(()=>{try{return BAL.pay[Math.min(7,rkOf(S))]}catch(e){return 0}})();
  if(E.length||net>0)stipReveal(E,{kind:"chest",title:`Bổng lộc tháng ${typeof econMonthName==="function"?econMonthName():S.month}`,sub:SK?"Nội vụ phủ phát · bị cắt xén":"Nội vụ phủ phát",bac:Math.max(0,net)});
- if(SK)Q.push(stipEvent(G,SK))}
+ if(SK&&!merged)Q.push(stipEvent(G,SK))/* review/bongloc-options: jecon puts the answers on the month frame itself (merged) */}
 function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;g.E.forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)});g.E=[];
   for(let i=0;i<g.n0;i++){const e={k:g.k0,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}g.k=g.k0;g.n=g.n0;g.kem=false;g.lost=false;n++}
  if(p===S&&n)stipReveal([].concat(...G.map(g=>g.E)),{kind:"chest",title:"Nội vụ phủ phát bù",sub:"đồ tốt thay hàng kém"});return n}
@@ -44917,16 +44939,21 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  const back=()=>{if(SK.bac)apply({bac:SK.bac});return stipRestore(S,G)};
  const O=[{n:"Nhịn",fx:{duc:BAL.cv.duc},x:"kèm: có thể bị bớt xén nữa vào tháng sau",go:()=>{st.meek=S.turn;log("Ngươi nhịn, không nói gì. Nội vụ phủ biết cung ngươi dễ bảo.")}}];
  const supTxt=SK.sup?`${rkName(SK.sup)} ${SK.sup.name}`:"";
- O.push({n:"Đút bạc cho thái giám",fx:{bac:-tip},x:SK.sup?`tốn: Bạc -${tip} · thành: ${eun} nhận bạc, từ nay ${B.tipM} tháng không bớt xén nữa, nhưng không dám trả lại đồ vì ${supTxt} đã dặn`:`tốn: Bạc -${tip} · thành: đổi lại đồ tốt, ${B.tipM} tháng tới không bớt xén`,
+ O.push({n:"Lót tay thái giám Nội vụ phủ",fx:{bac:-tip},x:SK.sup?`tốn: Bạc -${tip} · thành: ${eun} nhận bạc, từ nay ${B.tipM} tháng không bớt xén nữa, nhưng không dám trả lại đồ vì ${supTxt} đã dặn`:`tốn: Bạc -${tip} · thành: đổi lại đồ tốt, ${B.tipM} tháng tới không bớt xén`,
   go:()=>{st.tip=S.turn;st.tips=(st.tips||0)+1;const n=SK.sup?0:stipRestore(S,G);log(`Ngươi dúi ${tip} bạc cho ${eun}.${n?" Hắn đổi lại đồ tốt ngay.":SK.sup?` Hắn nhận bạc, nhưng không dám trái ý ${supTxt}.`:""}${st.tips>=B.allyTips?" Từ nay ngươi có người quen ở Nội vụ phủ.":""}`)}});
  if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=stipAskOdds(m,SK);
-  O.push({n:`Sai ${m.name} đi đòi`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
+  O.push({n:`Sai ${m.name} đòi lại phần bị cắt xén`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
- const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
+ else{/* review/bongloc-options: no cung nữ to send → she goes herself (owner 21/11 ~05:39Z «đi đòi lại đồ mình bị cắt xén»): her Danh + Sủng carry it */
+  const BO=BAL.blopt;const od=oddsCl(B.askBase+Math.round((S.danh||0)/BO.danhD)+Math.round((S.sung||0)/BO.sungD)-(SK.sup?BO.sup:0));
+  const kh=BAL.blopt.selfKhac;if(S.confined>0||(typeof can==="function"&&!can(kh)))O.push({n:"Đòi lại phần bị cắt xén",fx:{},lock:true,x:S.confined>0?"đang cấm túc: không được ra khỏi cung, không tự đến Nội vụ phủ được":"hôm nay hết khắc, chưa đi được",go:()=>{}});
+  else O.push({n:"Đòi lại phần bị cắt xén",fx:{},x:`${word(od)} · tốn: ${kh} khắc · thành: ${eun} đành trả lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: Danh ${balSg(BAL.eff.jstip.danhGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
+   go:()=>{if(typeof spend==="function")spend(kh);if(roll(od)){back();log(`Ngươi tự đến Nội vụ phủ đòi phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;log(`<span class="r">${eun} chối quanh, ngươi về tay không.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.`)}}})}
+ const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const BO=BAL.blopt;const od=T.risky?BO.repRisky:oddsCl(B.reportBase+Math.round(stat/BO.repStatD)+Math.round((S.danh||0)/BO.repDanhD)+ev*BO.repEv);
   O.push({n:`Tố lên ${T.n}`,fx:{},x:`${word(od)} · thành: được trả lại ${SK.bac?"bạc và ":""}đồ tốt · ${eun} phải chịu đòn${SK.sup&&!T.risky?`, ${supTxt} bị trách (Danh ${balSg(BAL.cv.stipSup.danh)})`:""} · hỏng: Danh ${balSg(BAL.eff.jstip.danhGo)}, Nội vụ phủ để bụng${T.risky?`, ${T.n} chính là người sai chèn ép: nàng thù ngươi thêm`:""}`,
    go:()=>{if(roll(od)){back();W.pun=S.turn;W.ev=0;if(SK.sup&&!T.risky){ap(SK.sup,{...BAL.cv.stipSup});oanAdd(SK.sup,S,BAL.eff.jstip.go)}log(`${T.n} nghe ngươi tâu, sai phạt ${eun}${SK.sup&&!T.risky?`, trách ${supTxt}`:""}. Nội vụ phủ trả lại đủ phần.`)}
     else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,BAL.eff.jstip.go_2);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
- const om=oddsCl(B.remember+eyes(S)*10);
+ const om=oddsCl(B.remember+eyes(S)*BAL.blopt.memEyes);
  O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ ${balSg(BAL.eff.jstip.evN)})`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
   go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,BAL.eff.jstip.evN):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ ${balSg(BAL.eff.jstip.evN)}`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
@@ -47612,8 +47639,11 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
     opts:[{n:"Vẫn đi",fx:{},x:`tốn: Danh -${c.danh}${c.duc?` · tốn: Đức -${c.duc}`:""}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
           {n:"Ở lại",fx:{},x:"(thay y phục trong Tư trang: Y phục → Mặc, rồi hãy đi)",go:()=>{}}]});render();return}
   const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r};window.goTo=goTo})();
-/* a visitor at home while she is in trung y */
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&S.place==="home"&&tyOn(S)&&!Q.length)tyCharge("home")}catch(e){}return r}})();
+/* a visitor at home while she is in trung y. ONE named engine (tyHome) so co-op can place it: coop-thin-g-f1 #5 (LAW 11, render-diff family,
+   TRIP swap 1 Danh split host +1 | phone): on the thin guest's phone this ran at every stage paint and took her Danh there only (the host
+   learnt it at her next ready); jcoopthinf RDIFF now runs it on the host as her context closes and keeps it read-only on her phone */
+function tyHome(){try{if(S&&!S.dead&&S.place==="home"&&tyOn(S)&&!Q.length)tyCharge("home")}catch(e){}}
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);tyHome();return r}})();
 /* the map: a red "Mất" line on every place outside her palace while she is in trung y */
 (function(){if(typeof mapHTMLgrid!=="function")return;const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);try{if(!tyOn(S))return h;
   h=h.replace(/(<(?:button|div) class="mtile[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>)/g,(all,open,k)=>k==="home"?all:open+`<span class="mchip">trung y · Danh -${tyCost(k,null).danh}</span>`)}catch(e){}return h}})();
@@ -83984,7 +84014,7 @@ function ptGLite(G){return(G||[]).map(g=>({k:g.k,k0:g.k0,n0:g.n0,kem:g.kem,lost:
 function ptGBack(L){/* the real pieces again (law 6c): by index when it still holds that piece, else the first pieces of that kind */const used=new Set();
  return(L||[]).map(g=>{const E=[];for(const i of g.E||[]){let e=i>=0?S.inv[i]:null;if(!e||e.k!==g.k||used.has(e))e=S.inv.find(x=>x&&x.k===g.k&&!used.has(x))||null;if(e){used.add(e);E.push(e)}}return Object.assign({},g,{E})})}
 (function(){try{if(typeof stipEvent!=="function")return;const s0=stipEvent;stipEvent=function(G,SK){const ev=s0.apply(this,arguments);try{if(!ptOn()||!ev||!Array.isArray(ev.opts)||!S.maid)return ev;const m=S.maid;
-  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đi đòi`)return o;const why=ptLockWhy("mm:me");
+  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đòi lại phần bị cắt xén`)return o;const why=ptLockWhy("mm:me");
    return Object.assign({},o,{x:ptX("ask",o.x)},why?{lock:true,x:why,go:()=>{}}:{go:()=>{ptSend({who:"mm:me",nm:m.name,kind:"ask",place:"nvp",a:{G:ptGLite(G),bac:SK.bac||0,sup:SK.sup?key(SK.sup):null},lbl:"đến Nội vụ phủ đòi phần"});if(ptRow("ask").o)spend(ptRow("ask").o)}})})}catch(e){ptErr("stipEvent",e)}return ev}}catch(e){ptErr("stip wire",e)}})();
 ptReg("ask",a=>{const m=S.maid;if(!m){return{ok:null}}const SK={bac:a.a.bac,sup:a.a.sup?byKey(a.a.sup):null};const od=stipAskOdds(m,SK);const eun=stipEunName();const st=stipSt(S);
  if(roll(od)){if(SK.bac)apply({bac:SK.bac});stipRestore(S,ptGBack(a.a.G));log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`);return{ok:true,t:`${m.name} đi đòi trở về`}}
@@ -93366,7 +93396,10 @@ const L11=11;
    the host render is a no-op, so they run as her context closes; on her phone at level 11 they do not run (kpCheck only reads). */
 /* coop-thin G #5 (f3 B1 L13: her Sổ ghi had "+5 Phúc duyên" and "Kiếp này đã trọn" in the other order): run in SOLO's order = the render
    wrappers' order (the last-wrapped runs first; prCheck runs after the inner render): jallot, jration, jexam, jmark, jkiep, j52, then jpromo */
-const RDIFF=["alInitAll","lxInitAll","exTick","kmmCheck","kpCheck","pdCheck","prCheck"];
+/* coop-thin-g-f1 #5 (same family, scan dev/test/coop-rdiff-scan.py): jty tyHome (a visitor at home while she is in trung y: Danh −BAL.ty.meet,
+   once per buổi by S.tyPaid) ran in renderStage on her phone only → her Danh lower on her phone than in the host's store until her next ready.
+   It paints inside the inner render, so before jpromo */
+const RDIFF=["alInitAll","lxInitAll","exTick","kmmCheck","kpCheck","pdCheck","tyHome","prCheck"];
 /* a card that opens a picker keeps itself in window.__adPend until the pick (jact): per player, swapped with her context */
 try{TH.reg("__adPend",()=>window.__adPend||null,v=>{window.__adPend=v||null})}catch(e){}
 const isSteal=a=>{try{return typeof isStealCard==="function"&&isStealCard(a)}catch(e){return false}};
@@ -93889,7 +93922,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d69f76597f79";window.CTM_BUILD=BUILD;
+const BUILD="f56e2b1156fe";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
