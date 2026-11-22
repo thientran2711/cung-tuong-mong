@@ -66,3 +66,47 @@ only: tell that worker the sha (done).
 
 ## SẴN SÀNG KIỂM 32f4afb9cd03b4071a28894205e7144d9604da72
 review/coop-night0 @ 32f4afb9cd03b4071a28894205e7144d9604da72 (fix c347a849 + site rebuild). Reviewer: run the r3 + fix lane too (cherry-pick c347a849 onto review/coop-host-lag-r3: clean) — main-base coop-e2e lacks THE helper for cung-nữ jfocus dialogs.
+
+## REVIEW r1 — PASS (opus BIG reviewer-lander session_01N1tNP3KWzR2PZhLsfwtajY, 22/11; START_CTX ≈ 6 %)
+PRIORITY #1 CHECK: ORDER MAIN 104 06:28Z | LIVE f0070e61 (no nfParked/roomOff change) | review/coop-night0 32f4afb9, review/coop-host-lag-r3 7e7e7dd9 (THE helper), review/night-ledger-coop 96c62324 (ldOn = … && nfOn()) | CLAIMS B row 'REVIEW coop-night0'.
+**PASS review/coop-night0-r1 @ 234d0298** = 32f4afb9 + merge LIVE f0070e61 (only index.html/sw.js conflicted → build_site.sh) + 2 test-only commits. jnf.js hunk = the worker's, unchanged.
+
+### Root real (deterministic, LIVE f0070e61 vs branch)
+| run | LIVE f0070e61 | branch |
+|---|---|---|
+| coop-e2e host cnv / guest tt | **110/130 STUCK**: «buổi 0:3 advanced» FAIL, host «Chờ hảo hữu…», dates [1,3,1] vs [1,3,0] | 129/129 |
+| coop-e2e host tt **home route** (COOP_A_KC=nha, NEW) / guest tt | **76/92 STUCK night 0, same shape** (a 2nd root case of the same family, not in the worker's repro) | night/date rows all ok (85/91: 6 rows = by design, see below) |
+| coop-night0 part 1 (file run on LIVE, test copied) | **1/12** (nfOn true with a cung-nữ / home / dead friend; host day end opens the jnf tablet + 2 ctm-nf words) | 12/12 |
+
+### LAW 1 — every seat class, both directions (classes that decide the night path: palace / cung nữ / home / dead)
+| pair (host / guest) | main base (branch) | r3 + fix (cherry-pick c347a849 onto 7e7e7dd9: clean) |
+|---|---|---|
+| cnv / tt | 129/129 | 141/141 |
+| tt / cnv | night 0 ok; FAIL at buổi 1:1 Q:1 «e68q6srvMood: Kẻ hầu» on the cung-nữ guest = main bot's known jfocus gap (THE helper on r3), not jnf; 2nd run inside coop-night0: ok | **141/141** |
+| tt+nha / tt (home host) | night/date ok | — |
+| tt / tt+nha (home guest) | night/date ok (83/91; +2 «reborn friend» rows: the reborn seat takes the home route again, __kcO) | — |
+| dead seat / mid-week rise / not joined / old blob | part 1 stub rows (seat table reads both blobs: roomOff is symmetric a‖b) | — |
+By-design FAILs with a home seat (both directions, LIVE too): «each sees the other as a person», «friend starts as Người lạ», «one place» — a home seat is never placed in the palace (jcoopworld friendHome → buildFriend null). coop-night0 part 2 reads only the night / date row titles.
+Mid-week change: both seats read COOPW.base.P (relayed by sendMe «me» / the week merge), so a rise / palace entry counts from the merged week on both phones; part 1 row «host-blob cung nữ (this seat, as the friend sees it)» = the riser's own view → parked. Residual (not new, LOW): the few-hundred-ms window between a seat's own sendMe and the friend's receipt; jnf step()/endTurn fall to the live path on !nfOn, so a flip mid-night does not hang (no stall seen in 13 e2e runs).
+
+### LAW 11 scan — every per-seat night-path decision
+`grep -n "nfOn()\|nfParked()" dev/build/*.js | grep -v all.js`: every call site (jnf, jcoopworld tnRelay/tnWeek, jflip, jsteal, j2, jfe PK) sits behind nfOn → nfParked → roomOff; no other per-seat night gate (isSrv / isKc / S.dead used for the night only inside nfOn). Worker's table confirmed row by row. Night-ledger (other branch): ldOn() = … && nfOn() → same gate, see below.
+
+### Fixes by the reviewer (test-only, on review/coop-night0-r1)
+1. `coop-e2e.js`: COOP_A_KC / COOP_B_KC=nha (jkc window.__kcO) — one line, no hunk overlap with r3's coop-e2e edits.
+2. `coop-night0.js`: default pairs + `tt+nha:tt,tt:tt+nha`; the bad-row filter reads the FAIL row title only (the trace JSON says «night 0» on every row → false FAIL); a build without nfRoomOff gives FAIL rows instead of a hang.
+
+### Gates (branch 234d0298 unless said)
+| gate | result |
+|---|---|
+| coop-night0 full (part 1 + cnv/tt + tt/cnv) | 14/16 before fix 2 (2 false rows = filter), then home pairs 14/14 exit 0; part 1 12/12 |
+| coop-e2e random ×5 | 5/5 129/129 |
+| coop-night | 111/111 (1st run under 4-job load: 111/113, row 5 «guest reloads» merge timeout; rerun 111/111; LIVE 111/111) — load flake |
+| night-final / night-multi / night-coop-park | exit 0 / exit 0 / ALL OK 7/7 |
+| quickcheck vs LIVE index.html | PASS (open 11963 ms under load, both builds alike; perf medians new/live render 251/262, buổi 1608/1727) |
+| one-core-guard | 0 fails · undef-scan PASS |
+| role-parity | 2 FAIL = LIVE f0070e61 exactly (up:P-ONLY:harm:petcare; riseCore Danh) — pre-existing |
+| CO-OP LAND GATE | coop-e2e PASS (5 random + cnv/tt + r3 both ways) + own both-seat check coop-night0 (4 pinned pairs, both directions) |
+
+### night-ledger-coop (96c62324, rv session_01N1tNP6V2KcQjF1vXk4QeoT told 22/11)
+Trial merge with r1: code clean (index.html/sw.js only). ldOn gates on nfOn → same gate, no conflict. Its comments reword nfParked as «a THIN part-E room only» — stale once this lands (asked to reword); asked to check a ledger rolled unparked then parked mid-tuần (friend dies / new life as cung nữ).
