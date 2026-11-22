@@ -64,7 +64,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){ilSent(e,f);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -205,7 +205,7 @@ function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();
-function ilSent(e,f){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
+function ilSent(e,f,p){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,p&&p!==S?ilKey(p):"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
 /* my acts on her entry: whatever left my hands and now sits in her entry goes to her game on the live path (gift, Cài đồ, a work given) */
 (function(){if(typeof runAct!=="function")return;const f0=runAct;runAct=function(a,t){if(!ilCoop()||a!==S||!t||!t.coop)return f0.apply(this,arguments);
  let L0=[];try{L0=ilSlots(S).slice();L0.forEach(e=>ilUid(e,S))}catch(e){}const r=f0.apply(this,arguments);
