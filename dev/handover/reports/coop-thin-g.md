@@ -645,3 +645,43 @@ PVBAD (rkOfFace probe): 0 lines in trip0 / trip1 / trip1b.
 2. Full lane on 2cba26cd: `WT=<wt> O=<out> bash dev/test/coop-thin-g-reg.sh <suites>` in 2 queues — q1: trip1 g4 e2e e2e0 e2e0n cyc timer f3s f5s f6 f6bs as9 as13 emo bl; q2: trip1b trip0 g4s night e2es e2e0s cycs f4s f6s f6b as9s as13s perf blc wlag ow. a–e / f1 / f2 / hn: compare with base b3fa6bc0 (a / b / c pre-existing; run d / f1 / hn on b3fa6bc0 too before judging).
 3. Alone: role-parity (`node dev/test/role-parity.test.js`; LIVE 9c057f42 D fix → expect ALL PASS), `bash dev/tools/quickcheck.sh`, one-core / undef / law4 / rdiff / `node dev/test/coop-mgout-scan.js` (all PASS / 0 OPEN @70e6f5a8).
 4. grep PVBAD in every TRIP log; CLAIMS; «SẴN SÀNG KIỂM <sha>» to Foreman B (BIG reviewer for the whole coop-thin-g).
+
+## F1 FIX #8 (session_01N1tNP4rfkfYSgkooWkpGtQ, 22/11) — HANDOVER at context budget (NOT SSK)
+PRIORITY #1 CHECK: grep OWNER_DECISIONS / HANDOVER / PROGRESS for rstats maid, nmReg, rkOfFace, thin-c C2/C4; git grep origin/main + origin/review/* for `d("maid"` and the PVBAD probe — no other fix exists; reused #7's lane script (dev/test/coop-thin-g-reg.sh, env WT / W / O) and the PVBAD probe.
+
+Branch review/coop-thin-g-f1 **@54787f42** (pushed). Commits #8:
+- 199cce3c — **root fix (law 6b)**: j8 rstats built its default maid `{name:nmNew("maid"),…}` BEFORE testing `v.maid==null`, so every rstats call (each load, the co-op stand-in of every withSeat) registered one name of nobody in S.nmReg. Now `if(v.maid==null)v.maid={…}`. Family scan (default-setter whose value is a name maker, dev/build): 1 hit, this one. + thin-a waits for the asked level on both seats.
+- 5357fe8d — thin-c C4 reads the level (part G: no week end from her phone at level ≥ 13, by design gG()).
+- 1da1c63a — thin-c C2 reads the level (part C act ops retired at level ≥ 6, part F).
+- 54787f42 — merge LIVE 40cc2b92 (test-only, no conflict).
+
+thin-a/b/c level-13 reds (task 2):
+| red | on LIVE b238857f? | verdict | after |
+|---|---|---|---|
+| thin-a 3× nmReg (name of nobody) | YES (live-a1 21/24, level 1) | pre-existing on LIVE, root-fixed here (FOR MAIN: arrives with this branch) | a PASS (lane) |
+| thin-b | — | none at 13 | 136/136 |
+| thin-c C4 sentW | n/a (level-blind test) | test assumption, fixed | PASS |
+| thin-c C2 nAct | n/a (level-blind test) | test assumption, fixed | PASS |
+| thin-c "no page errors" rkOfFace TypeError 'n' (MAIN 103) | NOT CHECKED on LIVE | **OPEN** — see below | 1 red solo |
+
+rkOfFace (OPEN, #9 job 1): PVBAD proof — on the GUEST, S.visit.people[i].ref = a raw `{"$r":id}` (keys ["$r"], inR false, place vuon, kind rival), right after she joins, after C1, before acts (4/~10 runs; 0/6 with NOACT / KINDS=tat,trip,pushp). Ruled out as writer: pApply with root S (unrefs), deser fix (resolves or null); JTRAP hits on curP / E.base / E.sent are by design. VTRAP says "inplace": S.visit already held the raw ref when the trap first saw that S ⇒ suspect a guest S built WITHOUT deser fix (jcoopthinb show / relens jcoopthinc:223 / lens paths) or a write dropped on a lens object. Probe: /home/user/wt/out8/zz-cprobe.tmp.js (not in git; copy of thin-c with PVBAD/VTRAP/JTRAP/ATRAP/DTRAP traps; copy into dev/test/ to run, delete before commit). Also check thin-c on LIVE (task 2 rule) before calling it new.
+
+Full lane @199cce3c (2 queues, load ~6; logs /home/user/wt/out8/lane) then every red re-run ALONE (/home/user/wt/out8/re) and d/f1/hn on base b3fa6bc0 (/home/user/wt/out8/base):
+| suite | lane | alone | base b3fa6bc0 |
+|---|---|---|---|
+| trip1 / trip1b / trip0 | 85/85 ×3 | | |
+| g4 / g4s 21/21 · e2e e2e0 e2e0n e2e0s 141–142 · timer 43/43 · night 111/111 · f3s f4s f5s f6s f6b f6bs · as9s as13 as13s · emo 25/25 · perf · wlag 5/5 · ow ×10 · bongloc ×6 + catch ×3 · a b e f2s | PASS | | |
+| cyc | 61/66 | 66/66, 66/66 (and 66/66 on a j8-reverted build), then 64/66 (giau forced deck who:null) | — flake, ~1 in 3 alone; #9: count runs on 2cba26cd too |
+| cycs | 61/66 | PASS | |
+| f6 / as9 / e2es | 1 red each | PASS | |
+| f2 | 2 (P2 host sees her) | not re-run (f2s PASS) | #9 |
+| c | 1 | 1 (rkOfFace) | OPEN above |
+| d | 8 | 8 (kit guest copies: data-kfsp offsets, invite offer "") | **9 — same set, pre-existing at base** |
+| f1 | 4 | 1 (F1 real tap under parallel time) | 1 (another F1 real-tap check) — same family, pre-existing at base |
+| hn | 1 | 1 (H2 face reveal) | **1 same — pre-existing at base** |
+Static @199cce3c: one-core PASS, undef PASS, law4 0, rdiff 0 OPEN, mgout 0 OPEN.
+role-parity / quickcheck / coop-e2e ×3 @54787f42: see the line below (running at hand-over).
+
+### Handover to #9
+Worktrees: /home/user/wt/ctg8 (branch @54787f42), /home/user/wt/ctg8b (detached b3fa6bc0, built), /home/user/wt/live8 (LIVE b238857f built — refresh to 40cc2b92), /home/user/wt/ho8 (handover). Worker 127.0.0.1:8787 (THINMAX 13). Lane: `WT=<wt> O=<out> bash dev/test/coop-thin-g-reg.sh <suites>`. Never rebuild index.html while a lane runs (coop-serve reads it from disk per request).
+To do, in order: (1) rkOfFace writer (probe above) + thin-c on LIVE; (2) d / f1 / hn: base has them — check LIVE (THINMAX 9 vs 13) and root-fix if coop-thin-g made them (LAW 11); (3) f2 alone; cyc flake count; (4) role-parity / quickcheck / e2e ×3 if my line below is missing; (5) SSK "SẴN SÀNG KIỂM <sha>" to Foreman B (session_01N1tNP4ubP78y1PJkcWfaWs).
