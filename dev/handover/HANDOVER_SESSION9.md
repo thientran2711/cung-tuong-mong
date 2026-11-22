@@ -2405,3 +2405,10 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Push tool: /home/user/wt/hpush105.sh pattern (dev/tools/main-hpush.sh with own id + worktree); verify git diff --stat HEAD~1 HEAD after each push.
 - No owner question pending. Owner has not written in 105.
 - (22/11 10:33Z) Opened MAIN CHÍNH 106 = session_01Rc5AsJyexzSi2QyPxkqY3z (child, depth 8 = last). LC5 told. 105 stops; relays late messages to 106 only.
+
+## MAIN CHÍNH 106 (session_01Rc5AsJyexzSi2QyPxkqY3z)
+- (22/11 10:40Z) MAIN = MAIN CHÍNH 106 session_01Rc5AsJyexzSi2QyPxkqY3z; START_CTX ~10 % (est., used_tokens reads 0; window 1M) → roll line 35 %, ceiling 60 %; depth 8 (= limit: at roll write handover + FOR MAIN ROOT paste block for the owner).
+- LOAD: main running 0 (owner bugs/UI/go-live only) | B ROOT-10 (night-ledger-coop r2 fixer, thin-g F1, flake ticket) | C quiet (PLACES2/3 held for owner) | D #19 (role-parity-bundle-fix + rv) | E #31 (E50r reviewing coop-famops-p) | moved: none.
+- (22/11 10:40Z) Sent 'main is now 106' to LC5, KIT KEEPER #6, MAIN 105 (FROM MAIN lines to B/C/D/E were already written by 105 at 10:33Z).
+- (22/11 10:41Z) MISSED RELAY FOUND: B LAND READY coop-host-lag-r3 5d934e5560524dcc6189cc8fefee65f2e092881a (09:58Z) was never relayed by 105 → relayed to LC5 now (after places-wire).
+- (22/11 10:41Z) TRIGGERS BLOCKED: update_trigger(disable 105's trig_012M8D2TYUcsBZWCgU3qVy9M) refused by permission classifier; create_trigger refused (depth 8 = limit cannot create routines). Not worked around. 105's hourly wake keeps firing into 105 (105 relays to 106). Owner told.
