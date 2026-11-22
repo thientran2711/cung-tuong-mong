@@ -1076,3 +1076,4 @@ L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01
 | RELAND night-ledger KP01 r2 on LIVE ddcca5c1 (opus BIG reviewer-lander; MAIN 98 ORDER 18:08Z, D night-balance-bundle now LIVE) | review/night-ledger-r2; reports/night-ledger.md | B | (opening) | RUNNING | 22/11 04:31Z |
 night-balance-bundle review #2 | review/night-balance-bundle-rv | session_01964izFb9QXR42QbmzBLAyU | RUNNING | 21/11 23:56Z (Foreman D #18; successor of rv session_01964izF4zCJPJBUmUsHpksK, rolled over at 36 %)
 | THANIM1 th tone-down seal animation (21 seals, sonnet; OWNER L2307) | claude/cung-tuong-mong-handover-hj0h8w; briefs/TH_TONEDOWN_ANIM.md; reports/THANIM1.md | C | session_01D3E3NZ9xhvmbpbajER1AQd | RUNNING | 22/11 01:50Z |
+night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | (opening) | RUNNING | 22/11 03:22Z (Foreman D #18)
