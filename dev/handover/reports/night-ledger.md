@@ -145,3 +145,32 @@ Files: ledger-{1,2}-host-755x1000 / -guest-1180x820 and swap/ledger-{1,2}-host-1
 2. The kit pill shot: kitLine is routed to kitNotice (KIT §42.2), seen by the hook in coop-ledger (c); no shot of the transient chip.
 
 SẴN SÀNG KIỂM 96c62324e8df5efe5c09517a145228c55a9382ef
+
+## REVIEW coop r1 — review/night-ledger-coop @96c62324 (FF of LIVE f0070e61) — **FAIL (co-op stall caused by the ledger)**
+PRIORITY #1 CHECK: r2 FAIL list 1–3 (this report) | main f0070e61 (jledger absent) | review/night-ledger-coop 96c62324, review/coop-night0(-r1) (PASS 234d0298, not LIVE yet) | claims B row "RELAND night-ledger KP01" (this reviewer).
+Reviewer: opus, session_01N1tNP6V2KcQjF1vXk4QeoT; coordinator Foreman B ROOT-10 session_01N1tNP5avzy2FEnnpAjoWDX. Context well under START + 25 %.
+
+### 1. Design check (code read, jledger §5 + jnf relay)
+Host-only roll with the friend's card in the draw, seat-neutral ids (nfEnc/nfDec), days on every host word + settled tuần on mode `ld`, guest `ldask` → `ldAgain`, the guest settles only her own nights (gSettle: Sổ ghi line, BAL.nt.extraFx, own float conception, nightLog, pill) — **meets r2 FAIL 1 as designed**; S.ldPk at ldPin — meets r2 FAIL 2; ONE CORE kept (one-core-guard 0). ldOn() = BAL.nt.on && nfOn() → follows coop-night0's nfParked/roomOff with no code change (trial merge by the coop-night0 reviewer: only index.html/sw.js).
+
+### 2. Gates (96c62324; LIVE f0070e61 worktree on the same box)
+| gate | branch | LIVE / control |
+|---|---|---|
+| quickcheck --runs 7 | PASS · old save ok · render 257/288, tab 498/543, buổi 1356/1469 ms · core gates PASS (one-core-guard 0) | — |
+| undef-scan | PASS (292) | — |
+| role-parity | FAIL 2 = petcare P-ONLY + riseCore | the same 2 (pre-existing) |
+| ledger.js | ALL PASS 7/7 | — |
+| night-final / night-multi / log-sync-night / night-steal-unit | PASS / PASS / PASS / PASS | — |
+| night-coop-park | 10/10 in 3 of 4 runs; 1 run FAIL 2b (rec 7 vs held 10: 3 nights not recorded — likely a holder out/dead before the settle; the test bound is too tight or a real skip, fixer to check) | — |
+| coop-e2e (LIVE Worker) | **129/129** | — |
+| coop-ledger (host Fold / guest iPad) | 46/46 | — |
+| coop-ledger DEVSWAP | 36/44 (tuần 2 stall «guest presses first», STUCK: both seats nfX st "open", nfFin 0, Q [] — the jnf choice never closes), 45/46 (1b: neither player drew a day — random), 44/44 | NTOFF=1 (ledger off): no stall (37/47 = ledger asserts n/a) |
+| **coop-night (LIVE Worker)** | **run 1 109/113: FAIL 4 (guest night / AFK clock) + 5 stall [5,5,5]; run 2 112/115: FAIL 5 stall [5,5,5] + day step** | **LIVE f0070e61: 111/111, 111/111 · SAME BRANCH with BAL.nt.on=false (scratch, not committed): 111/111, 111/111** |
+Shots LOOKED 3× (scratch /home/user/wt/nl3, not git): host Fold 755x1000 Sổ ghi «Kính sự phòng ghi: ngày 10/9/8/6, ta được lật thẻ thêm một đêm …» + contest lines «Ngày 3: …»; guest Fold (swap) «Kính sự phòng ghi: ngày 3, ta được lật thẻ thêm một đêm. Ân tình +1.» after her played night; host iPad 1180x820 Sổ ghi + kit result card. No overlap / cut text / private UI; wording cổ trang, no %.
+
+### 3. FAIL list
+1. **BLOCKING — co-op stall caused by the ledger (LAND GATE OD:L594).** coop-night case 5 (guest presses ready at tối, reloads, host presses) stays at the same tối on both seats ([5,5,5], both buổi 3) in 2/2 runs with the ledger ON (the fixer's own run also: «112/115 case 5 reconnect + day step»); the SAME build with BAL.nt.on=false passes 111/111 twice, LIVE passes 111/111 twice. coop-ledger DEVSWAP tuần 2 «guest presses first» stalls 1/4 with the ledger, 0 with NTOFF: the dump shows both seats' jnf choice x.st "open", nfFin 0, Q empty. The report's «LIVE flake» explanation is refuted by these controls. Leads (not proven): the host's ledger work inside the commit (ldSettle in the endTurn wrapper: contest → stealPass live:false, night() / gain() on S and NPCs, Q pushes) running between the choice and jnf's fin; the `ld` field riding on open / fin words (size / ordering vs the guest's own reply); the `re` reconnect hook (host ldAgain + guest nfLdAsk right after a reload) racing jnf's ask/reply. Fix + prove: coop-night 3 runs green (incl. case 4 AFK clock), coop-ledger both directions 3 runs no stall.
+2. night-coop-park 2b: 1 of 4 runs rec 7 / held 10 — explain the 3 missing records (holder out/dead → document and relax the bound, or a real skip bug).
+3. (from the coop-night0 reviewer, for when coop-night0 is LIVE — it PASSED 234d0298) comments «nfParked: a THIN part-E room only» in j2 / jfe / jnf / jledger become wrong: word them «nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff)». Edge: a settled tuần sent (ld) just before the room parks → the guest's ldIn returns (ldOn false) and her nights of that tuần are never settled; decide: ldIn applies a settled tuần already rolled while unparked, or document the loss.
+4. Re-merge LIVE (coop-night0 lands first per Foreman B) and re-run coop-ledger + coop-night before the next review.
+Scratch: /home/user/wt/nl3 (not in git).
