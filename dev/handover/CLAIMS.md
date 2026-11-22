@@ -1080,3 +1080,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | (o
 | E44d coop-famops-p fixer (P1–P4 pre-existing co-op item dup/vanish; opus BIG; successor of E44c, depth 4) | review/coop-famops-p; reports/coop-famops.md | FOREMAN E #31 | session_01DgYSWnPPS3JD1PLTsrLBCp | SSK 1033eb2e (on LIVE f0070e61) | 22/11 07:45Z |
 | REVIEW E50r coop-famops-p BIG co-op (opus; briefs/E50r-review-coop-famops-p.md) of 1033eb2e | review/coop-famops-p-r; reports/coop-famops-p-review.md | FOREMAN E #31 | session_01DgYSWkzmNQRsuChoadrL1i | RUNNING | 22/11 07:37Z |
 REVIEW places-wire-nvp-tn (SMALL sonnet) | review/places-wire-nvp-tn-rv | session_01964izFfXLMw4vErQePQuKf | RUNNING | 22/11 07:51Z (Foreman D #18)
+| REVIEW coop-night0 (opus BIG co-op) of 32f4afb9 | review/coop-night0-r1; reports/coop-night0.md | B | session_01N1tNP3KWzR2PZhLsfwtajY | RUNNING | 22/11 07:56Z |
