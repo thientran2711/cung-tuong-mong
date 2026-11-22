@@ -40,3 +40,18 @@ coop-e2e PASS 68/68 + feature co-op check coop-hauthay 12/12 on both seats (2 pl
 - G1 root cause per chain #5: nf-r3 73a09248 carries the list of LIVE 983a9436 (4212); LIVE 548dcd0d shrank it to 3930; fixed by nf-r3's LIVE merge fc480ca8 (guard 3740 ≤ 3930). This branch adds 0 (verified: baseline file byte-identical to its base).
 - MAIN ROOT-82 UNPARK: night-final-r3 runs the NEW night in co-op on both seats (flip choice + giữ chân). At the final merge re-run coop-hauthay against the unparked co-op night (add a case if needed: host NPC hầu-thay must look the same on the guest under the new flow), plus all gates above. Worker DuRCG31a archived → FAIL needing code: tell D, D opens a fixer.
 - (D #12, 21/11 01:47Z) ⚠ night-final-r3 73a09248 REVERTS LIVE hunks (stale shallow-merge side: jbal2 BAL.orig.id gone, old cal-p2b tunes); ff63a590 inherits it. NIGHT LAND CHAIN #7 re-ports night-final onto LIVE. FINAL MERGE METHOD: do NOT merge LIVE into ff63a590; replay ONLY this branch's own diff (git diff 73a09248..ff63a590: j75.js, jagmaid.js, dev/test/rival-hauthay.js, dev/test/coop-hauthay.js; rebuild index.html/sw.js) onto the NEW night-final-r3 head after it lands, on a full-history clone; check `git diff LIVE..yours` holds only night + hầu-thay intent; re-run all gates + coop-hauthay vs the unparked co-op night. Push to review/rival-hauthay-rv.
+
+## FINAL — LAND READY review/rival-hauthay-rv ddcca5c1 (FF on LIVE bb92f986) — 22/11 ~03:50Z, GO from D #18
+Method (D #12 01:47Z): replayed ONLY 73a09248..ff63a590 (j75.js, jagmaid.js, tests rival-hauthay.js + coop-hauthay.js) onto LIVE bb92f986 (bundle 8746a062 + od03-favart); patch applied cleanly at --depth=30 (no deepen, no full clone); site rebuilt with build_site.sh. `git diff bb92f986..ddcca5c1` = j75 +14/-1, jagmaid +2/-4, 2 new tests, index.html/sw.js: hầu-thay intent only. LIVE still routes every NPC night through resolveTonight → rivalNight (j3/j42/jkc endTurn); the stolen (jnf/jsteal), visit (jvisit) and busy-maid (jptime ptMaidOut) markers htCan reads are unchanged on LIVE.
+| Gate (on ddcca5c1, one at a time) | Result |
+|---|---|
+| rival-hauthay.js ×10 (solo) | 10/10 ALL PASS 11/11 |
+| night-book-day | exit 0, 0 page errors |
+| agmaid_check | ALL 23 PASS |
+| night-final | 11/11 |
+| night-day | ok true |
+| night-multi | 4 branch runs: 1 green, 3 fail ONLY case 6 «choice cards print BAL numbers» sub-check k (the «kèm» line of the Tranh sủng / Chặn ngự giá cards). PRE-EXISTING LIVE FLAKE: LIVE bb92f986 index.html fails the same case 1 of 2 runs; this branch does not touch those cards. Owner: night-balance bundle 8746a062 (night-multi.js). |
+| coop-hauthay (feature co-op check, 2 seats, live Worker, LIVE's unparked co-op night) | 12/12 ×2 |
+| coop-e2e (2 seats, 3 serial runs) | 129/129 ×3 |
+| quickcheck vs LIVE bb92f986 | PASS · core gates PASS (G1 resolved) · open 1640 ms · old save ok · perf new/live render 259/268, tab 412/408, buổi 1152/1283 |
+CO-OP LAND GATE: coop-e2e PASS (129/129 ×3) + the feature's own co-op check coop-hauthay 12/12 on both seats (2 players) + solo rival-hauthay 11/11.
