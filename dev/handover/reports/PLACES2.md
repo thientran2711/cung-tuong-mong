@@ -36,3 +36,24 @@ People sheet (Fold 755 | iPad): https://ctm-img.victoria-tntt.workers.dev/img/_r
 
 ### Prompt diffs (A17) — all vs M2355 base, listed as allow lines in the .keep files
 WHITE (all 4) · M2370-01 ROOM part rewritten + noun "plain, tidy" → "pretty, well-kept" · M2370-02 3 curtain/palette phrases · M2370-03 ROOM rewritten + noun "neglected" → "old, quiet" + GROUND · M2370-04 GARDEN FURNITURE sentence + 2 tail phrases (furniture band → balustrade/flower beds; corners → flowers and plants).
+
+## Group white-light redraw (ROOT-C3 GO 06:15Z on owner standing rule) — 13 × 135 = 1 755 cr; PLACES2 total 17 gens = 2 295 cr
+M2370-05..17 = the M2355 prompt + WHITE only (keep PASS ×13, allow line 'same natural light'; room_gate PASS). One try each, no redo, no heavy fault seen.
+| code | place | Magnific | R−B before → after | floor % |
+|---|---|---|---|---|
+| M2370-05 | Dưỡng Tâm điện | p8PBjw9ehw | 51 → 41 | 14.3 |
+| M2370-06 | Ngự thư phòng | dt98s9jXSL | 41 → 35 | 11.3 |
+| M2370-07 | Thái y viện | VXJe19tMMU | 38 → 34 | 10.8 |
+| M2370-08 | Nội vụ phủ | JNE4X1bOq4 | 48 → 41 | 12.6 |
+| M2370-09 | Kính sự phòng | 6A5ZhO8iJO | 46 → 34 | 6.1 |
+| M2370-10 | Tẩm cung | fHnQ4aJCDY | 48 → 38 | 14.7 |
+| M2370-11 | Thượng thư phòng | Td7p1pGVNR | 43 → 34 | 22.9 (above band, as M2355-08 20.3; desks along the right window wall kept) |
+| M2370-12 | Cung nhân | cpUMKXS0eP | 42 → 24 | 19.5 |
+| M2370-13 | Tân giả khố | lJmwMiHgv9 | 23 → 13 | outdoor |
+| M2370-14 | Đông cung | 6A5ZvesiJO | 49 → 38 | 20.3 |
+| M2370-15 | Phi tần cung | huACyU8vqL | 46 → 31 | 13.0 |
+| M2370-16 | Từ Ninh cung (ngủ) | p8PBLlJehw | 58 → 39 | 17.7 |
+| M2370-17 | Từ Ninh cung (khách) | eI4osy5dqL | 49 → 39 | 16.5 |
+All walls now clean white; wood/gilt keep their colour. Sheets: …/places-l2370/people/L2370-batch2.jpg (05–09), batch3.jpg (10–13), batch4.jpg (14–17) on https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/
+
+## Caption stamp (ROOT-C3): the code IS burned into every picture (CAPTION line of the prompt). 0-cr tool `dev/art/place-rank/decap.py IN OUT` (finds the white letters top-left, refills that box with the right-hand neighbour block, feathered). Tested on M2370-01..04: text gone; Ngự hoa viên shows a slight repeat. Run it on every picture at swap time (not done: live swap OFF).
