@@ -23,7 +23,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),online,ended,on,
         frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);/* a loaded test machine can take > 30 s to load the 3.7 MB page */
-    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 const shot=async(o,n)=>{await o.p.waitForTimeout(400);const t0=Date.now();const alive=await Promise.race([o.p.evaluate(()=>1),sleep(10000).then(()=>0)]);if(!alive){ok(false,`${n} ${o.name}: page responsive`);return}
   try{await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`,timeout:120000})}catch(e){ok(false,`${n} ${o.name}: screenshot (${e.message.split('\n')[0]})`);return}
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
@@ -90,7 +90,8 @@ const view=o=>o.p.evaluate(()=>({R:rivals.filter(v=>!v.coop&&v.id<1000).map(v=>v
 const byAsk=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x.coopAsk===id);return v?{id:v.id,name:v.name,rank:v.rank,rel:v.rel,me:S.rl[v.id]==null?null:S.rl[v.id],ro:S.ro[v.id]==null?null:S.ro[v.id],alive:v.alive}:null},id);
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
-async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');await clear(A);await clear(B);return r}
+async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;const wd=o=>o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,bend:COOPW.bend,cyHold:COOPW.cyHold,rp:Object.keys(COOPW.rpend||{}).length,Q:Q.map(m=>String(m&&(m.t||m.pid)||'').slice(0,30)),mg:!!S.mg,b:S.buoi,nx:[document.getElementById('next').disabled,document.getElementById('next').textContent],tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message);
+ ok(r,tag+': week advanced for both',r?undefined:{A:await wd(A),B:await wd(B)});await clear(A);await clear(B);return r}
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  await B.ctx.addInitScript(()=>{window.__forceOrigin='thd'});
@@ -111,9 +112,17 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  const id1=await B.p.evaluate(g=>{for(let i=0;i<20&&!(S.coopAsk||[]).length;i++)ser();return(S.coopAsk||[]).map(a=>a.id).find(x=>x.endsWith(':'+g))||null},r1.ghost&&r1.ghost.id);ok(!!id1,'1 guest: request in her blob',id1);
  ok(await until(A,id=>rivals.some(v=>v.coopAsk===id),id1,20000),'1 host: made the consort on the relay (same week)');
  const h1=await byAsk(A,id1);ok(h1&&h1.name===r1.ghost.name&&h1.id<900,'1 host: same name, a world id',h1);
+ /* D20 coop-flakes: links probe (dump only on FAIL): B's links to the stand-in id (T) and the world id (R) as every rebuild receives them (before
+    the ask settle moves T → R), B's own screen every 250 ms, and the host's stored copy of B */
+ const LP=[r1.ghost&&r1.ghost.id,h1&&h1.id];
+ await B.p.evaluate(([T,R])=>{window.__lp={de:[],own:[]};const k=(o,i)=>o&&o[i]!=null?o[i]:null;const f=deser;deser=function(d){try{if(d&&d.S)__lp.de.push({w:__co().week,rlT:k(d.S.rl,T),rlR:k(d.S.rl,R),roT:k(d.S.ro,T),roR:k(d.S.ro,R),ask:(d.S.coopAsk||[]).map(a=>a.id)})}catch(e){}return f.apply(this,arguments)};
+  let last='';window.__lpI=setInterval(()=>{try{const x=JSON.stringify([__co().week,S.buoi|0,k(S.rl,T),k(S.rl,R),k(S.ro,T),k(S.ro,R)]);if(x!==last){last=x;__lp.own.push(x)}}catch(e){}},250)},LP);
+ await A.p.evaluate(([T,R])=>{window.__lp={hb:[]};const k=(o,i)=>o&&o[i]!=null?o[i]:null;let last='';window.__lpI=setInterval(()=>{try{const T0=COOPW.thin;const x=T0&&T0.seatOf?T0.seatOf('b'):null;const P=COOPW.base&&COOPW.base.P&&COOPW.base.P.b;
+  const y=JSON.stringify([__co().week,x&&x.S?[k(x.S.rl,T),k(x.S.rl,R)]:null,P&&P.S?[k(P.S.rl,T),k(P.S.rl,R)]:null]);if(y!==last){last=y;__lp.hb.push(y)}}catch(e){}},250)},LP);
  await weekAll(A,B,'1');
+ const LPD=async()=>({B:await B.p.evaluate(()=>{clearInterval(__lpI);return Object.assign({logs:(S.logs||[]).slice(-12)},__lp)}).catch(e=>e.message),A:await A.p.evaluate(()=>{clearInterval(__lpI);return __lp}).catch(e=>e.message)});
  {const g1=await byAsk(B,id1);const v=await view(B);ok(g1&&g1.id===h1.id&&g1.name===h1.name,'1 guest: sees the same consort (id, name) after the week',{g1,h1});
-  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);ok(g1&&g1.me!=null&&Math.sign(g1.me)===Math.sign(r1.rl)&&Math.abs(g1.me-r1.rl)<Math.abs(r1.rl)&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; the week may move them a little, never double)',{g1,r1,tempKeys:tk})}
+  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);ok(g1&&g1.me!=null&&Math.sign(g1.me)===Math.sign(r1.rl)&&Math.abs(g1.me-r1.rl)<Math.abs(r1.rl)&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; the week may move them a little, never double)',{g1,r1,tempKeys:tk,lp:await LPD()})}
   const va=await view(A);ok(va.R===v.R,'1 both: same consort list',[va.R.length,v.R.length])}
  /* 2 durable path + rejoin */
  const r2=await RISE(B,true);ok(r2.ghost,'2 guest: second maid rose (relay dropped)',r2);
