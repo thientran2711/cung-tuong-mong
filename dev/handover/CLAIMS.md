@@ -1059,3 +1059,4 @@ night-multi case-6k «kèm» flake (bundle family) | review/night-multi-kem | se
 | coop-e2e night-0 flake ticket (opus; ORDER MAIN 104 06:28Z; check vs stuck-night fix 6ff0f85f, ≥5× branch vs ≥5× LIVE) | review/coop-host-lag-r3; reports/coop-host-lag.md | B | session_01N1tNP4jNDqKuCaJcA6oGXx | RUNNING | 22/11 06:30Z |
 L2370 th act seals (cont.) | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NYKnmk9GLouSV3undg | RUNNING | 2026-11-22T06:31Z (Foreman C ROOT-C3; replaces THACT2)
 L2376 places fixes | claude/cung-tuong-mong-handover-hj0h8w | session_01D3E3NaHFYCRGHbQSaDznRv | RUNNING | 2026-11-22T06:40Z (Foreman C ROOT-C3; replaces PLACES2)
+| coop-night0 stall fixer (opus BIG co-op LIVE bug; ORDER MAIN 104 06:28Z; root by rv 4jNDqKuC: host cung nữ nfOn false vs guest true, jnf.js:387) | review/coop-night0; reports/coop-night0.md | B | session_01N1tNP3HK3BJNWZ1ufSpLkD | RUNNING | 22/11 06:45Z |
