@@ -8,7 +8,14 @@ depth 1 · START_CTX ~3 % (roll at ~28 %, ceiling 60 %) · worker of ROOT-C1 ses
 - "rộng ÷ cao người" = bề ngang giường / chiều cao nhân vật trong game. R:C = tỉ lệ ngang:cao của khối giường (px) — < 1.0 = "vuông/hộp" (cao hơn ngang).
 - Trạng thái: M = mẫu đã duyệt (L16: bộ Cảnh Phúc, HQP v7, Khôn Ninh, Thừa Minh đông phối v6) · D = chủ OK/duyệt (L23 phối, PR19–21 Tần, M2294-11..15 L2299) · S = đã gửi, chủ nói không cần chờ duyệt (L2300) · O = bản cũ không còn dùng.
 
-## Bảng (python3 dev/art/place-rank/bed_measure.py table DLDIR) — có cột sàn floor_c (measure_floor.py)
+## SỬA LẦN 2 (owner L2318 qua ROOT-C1: Khôn Ninh v6/v7 góc xéo là mẫu ĐÃ BỎ; mọi phòng TRỰC DIỆN — L14)
+- Bỏ các ảnh cũ ở thư mục gốc (Cảnh Phúc Tần/Phi/QP v5–v7 góc xéo, Khôn Ninh v6/v7, HQP v7, Thừa Minh đông phối v6) và bản cũ pr19 / pr20 Chung Tú Tần.
+- Mẫu TRỰC DIỆN hiện tại (đối chiếu mã ảnh + floor_c trong place-rank-sample.md): Khôn Ninh HH = v9/khon-ninh-cung-ngu-B3 (cpS5YIl0eP, floor 11.7 khớp) · HQP = v12/truong-xuan-cung-hqp-ngu-F-r2 (ov6w4kO829, 9.5 khớp) · Quý phi = v11f/canh-phuc-cung-quyphi-ngu-F (eIPlheldqL, 10.8 khớp) · Phi = v10/canh-phuc-cung-phi-ngu-3w (UPve2vXwny, 20.3 khớp; Phi v9 4RFIyNR9Aa là góc xéo nên không dùng). Không tìm thấy file Cảnh Phúc Tần trực diện → Tần lấy theo các phòng Tần đã duyệt.
+- SỐ MỚI: Khôn Ninh HH 38 % (1.01× người) · HQP 40 % (R:C 0.91, cao hơn ngang) · Cảnh Phúc QP 37 % · Cảnh Phúc Phi 43 % (1.14×, R:C 1.24). → Giường Hoàng hậu trực diện hiện tại NHỎ hơn giường Tần đã duyệt (40–51 %); không mẫu trực diện nào lớn dần theo bậc. Không dùng được Khôn Ninh làm mốc "to nhất".
+- MỐC MỚI: giường đẹp nhất đã duyệt = Cảnh Phúc Phi 3w (43 %, ngang rõ) + Chung Tú Tần pr21 (51 %). (A) một cỡ ≥ 43 %. (B) giữ: Tần 40 · Phi 43 (= Phi 3w) · QP 46 · HQP 49 · HH 52 (+3 mỗi bậc; HQP/HH là số đề xuất, không còn ảnh duyệt nào to cỡ đó).
+- Thêm vào danh sách (chỉ báo, đã duyệt → L23 giữ trừ khi chủ gọi tên): Khôn Ninh HH 38 % (dưới 52), HQP 40 % vuông, Cảnh Phúc QP 37 %.
+
+## Bảng (python3 dev/art/place-rank/bed_measure.py table DLDIR) — chỉ ảnh hiện tại, có cột sàn floor_c
 | hạng | phòng | trạng thái | rộng %ảnh | cao %ảnh | rộng ÷ cao người | cao ÷ cao người | R:C | sàn floor_c % | ghi chú |
 |---|---|---|---|---|---|---|---|---|---|
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/ham-an-cung-tay-phoi-ngu | D | 30 | 58 | 0.79 | 0.79 | 1.00 | 14.3 |  |
@@ -21,25 +28,19 @@ depth 1 · START_CTX ~3 % (roll at ~28 %, ceiling 60 %) · worker of ROOT-C1 ses
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/dien-huy-cung-tay-phoi-ngu | D | 27 | 62 | 0.71 | 0.85 | 0.84 | 19.0 | sàn rộng |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/khai-tuong-cung-dong-phoi-ngu | D | 27 | 60 | 0.71 | 0.82 | 0.87 | 14.3 |  |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/thua-minh-cung-tay-phoi-ngu | D | 27 | 55 | 0.71 | 0.75 | 0.95 | 23.4 | sàn rộng |
-| 1-3 Đáp ứng/Thường tại/Quý nhân | thua-minh-cung-dong-phoi-ngu | M | 26 | 73 | 0.69 | 1.00 | 0.69 | 2.6 | sàn hẹp |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-tay-phoi-ngu | D | 25 | 68 | 0.66 | 0.93 | 0.71 | 10.8 | sàn hẹp |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/truong-xuan-cung-dong-phoi-ngu | D | 22 | 85 | 0.58 | 1.16 | 0.50 | 14.7 |  |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/canh-phuc-cung-dong-phoi-ngu | D | 21 | 55 | 0.56 | 0.75 | 0.74 | 19.0 | sàn rộng |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/chung-tu-cung-dong-phoi-ngu-r3 | D | 20 | 58 | 0.53 | 0.79 | 0.67 | 16.0 |  |
 | 1-3 Đáp ứng/Thường tại/Quý nhân | pr13/vinh-hoa-cung-dong-phoi-ngu | D | 20 | 70 | 0.53 | 0.96 | 0.55 | 18.6 | sàn rộng |
 | 4 Tần | pr21/chung-tu-cung-tan-ngu | D | 51 | 77 | 1.35 | 1.05 | 1.28 | 15.6 |  |
-| 4 Tần | pr20/chung-tu-cung-tan-ngu | O | 48 | 77 | 1.27 | 1.05 | 1.21 | 13.0 |  |
 | 4 Tần | pr13/ham-an-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 | 12.6 |  |
 | 4 Tần | pr13/khai-tuong-cung-tan-ngu | D | 42 | 70 | 1.11 | 0.96 | 1.16 | 16.0 |  |
 | 4 Tần | pr20/dien-huy-cung-tan-ngu | D | 42 | 77 | 1.11 | 1.05 | 1.06 | 18.6 | sàn rộng |
 | 4 Tần | pr20/vinh-hoa-cung-tan-ngu | D | 42 | 75 | 1.11 | 1.02 | 1.09 | 19.0 | sàn rộng |
-| 4 Tần | pr19/chung-tu-cung-tan-ngu | O | 41 | 68 | 1.09 | 0.93 | 1.17 | 16.5 |  |
 | 4 Tần | pr13/thua-minh-cung-tan-ngu | D | 40 | 74 | 1.06 | 1.01 | 1.05 | 15.6 |  |
-| 4 Tần | pr19/ham-an-cung-tan-ngu | O | 40 | 74 | 1.06 | 1.01 | 1.05 | 12.6 |  |
-| 4 Tần | canh-phuc-cung-tan-ngu | M | 38 | 77 | 1.01 | 1.05 | 0.96 | 3.9 | vuông/hộp, sàn hẹp |
 | 4 Tần | pr13/truong-xuan-cung-tan-ngu | S | 38 | 70 | 1.01 | 0.96 | 1.05 | 13.0 |  |
-| 4 Tần | pr19/khai-tuong-cung-tan-ngu | O | 38 | 68 | 1.01 | 0.93 | 1.08 | 16.0 |  |
-| 5 Phi | canh-phuc-cung-phi-ngu | M | 42 | 76 | 1.11 | 1.04 | 1.07 | 3.5 | sàn hẹp |
+| 5 Phi | v10/canh-phuc-cung-phi-ngu-3w | M | 43 | 67 | 1.14 | 0.91 | 1.24 | 20.3 | sàn rộng |
 | 5 Phi | pr13/chung-tu-cung-phi-ngu | D | 42 | 66 | 1.11 | 0.90 | 1.23 | 13.0 |  |
 | 5 Phi | pr13/khai-tuong-cung-phi-ngu | D | 40 | 70 | 1.06 | 0.96 | 1.11 | 15.6 | nhỏ hơn mốc B 43% |
 | 5 Phi | pr13/thua-minh-cung-phi-ngu | S | 39 | 70 | 1.03 | 0.96 | 1.08 | 11.7 | nhỏ hơn mốc B 43%, sàn hẹp |
@@ -47,19 +48,19 @@ depth 1 · START_CTX ~3 % (roll at ~28 %, ceiling 60 %) · worker of ROOT-C1 ses
 | 5 Phi | pr13/vinh-hoa-cung-phi-ngu | S | 38 | 73 | 1.01 | 1.00 | 1.01 | 17.3 | nhỏ hơn mốc B 43% |
 | 5 Phi | pr13/ham-an-cung-phi-ngu | S | 35 | 65 | 0.93 | 0.89 | 1.04 | 15.2 | nhỏ hơn mốc B 43% |
 | 5 Phi | pr13/dien-huy-cung-phi-ngu | S | 35 | 70 | 0.93 | 0.96 | 0.97 | 10.0 | nhỏ hơn mốc B 43%, vuông/hộp, sàn hẹp |
-| 6 Quý phi | canh-phuc-cung-quyphi-ngu | M | 44 | 80 | 1.17 | 1.09 | 1.07 | 3.5 | sàn hẹp |
 | 6 Quý phi | pr13/dien-huy-cung-quyphi-ngu | S | 41 | 70 | 1.09 | 0.96 | 1.14 | 14.3 | nhỏ hơn mốc B 46% |
 | 6 Quý phi | pr13/chung-tu-cung-quyphi-ngu | S | 39 | 72 | 1.03 | 0.98 | 1.05 | 16.5 | nhỏ hơn mốc B 46% |
+| 6 Quý phi | v11f/canh-phuc-cung-quyphi-ngu-F | M | 37 | 69 | 0.98 | 0.94 | 1.04 | 10.8 | nhỏ hơn mốc B 46%, sàn hẹp |
 | 6 Quý phi | pr13/ham-an-cung-quyphi-ngu | S | 37 | 73 | 0.98 | 1.00 | 0.98 | 18.2 | nhỏ hơn mốc B 46%, vuông/hộp |
 | 6 Quý phi | pr13/truong-xuan-cung-quyphi-ngu | S | 37 | 70 | 0.98 | 0.96 | 1.03 | 14.3 | nhỏ hơn mốc B 46% |
 | 6 Quý phi | pr13/khai-tuong-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | 13.4 | nhỏ hơn mốc B 46%, vuông/hộp |
 | 6 Quý phi | pr13/thua-minh-cung-quyphi-ngu | S | 33 | 75 | 0.87 | 1.02 | 0.85 | 17.7 | nhỏ hơn mốc B 46%, vuông/hộp |
 | 6 Quý phi | pr13/vinh-hoa-cung-quyphi-ngu | S | 33 | 74 | 0.87 | 1.01 | 0.86 | 12.1 | nhỏ hơn mốc B 46%, vuông/hộp, sàn hẹp |
-| 7 Hoàng quý phi | truong-xuan-cung-hqp-ngu | M | 34 | 80 | 0.90 | 1.09 | 0.82 | 7.8 | nhỏ hơn mốc B 49%, vuông/hộp, sàn hẹp |
-| 8 Hoàng hậu | khon-ninh-cung-ngu | M | 52 | 87 | 1.38 | 1.19 | 1.16 | 2.6 | sàn hẹp |
+| 7 Hoàng quý phi | v12/truong-xuan-cung-hqp-ngu-F-r2 | M | 40 | 85 | 1.06 | 1.16 | 0.91 | 9.5 | nhỏ hơn mốc B 49%, vuông/hộp, sàn hẹp |
+| 8 Hoàng hậu | v9/khon-ninh-cung-ngu-B3 | M | 38 | 68 | 1.01 | 0.93 | 1.08 | 11.7 | nhỏ hơn mốc B 52%, sàn hẹp |
 
 ## Kết quả chính
-- Mẫu đã duyệt: Cảnh Phúc Quý phi 44 % (1.17× người, R:C 1.07), Khôn Ninh HH 52 % (1.38×, R:C 1.16), Cảnh Phúc Phi 42 %, Cảnh Phúc Tần 38 %.
+- (lần 1, ĐÃ THAY bằng mục SỬA LẦN 2) mẫu cũ góc xéo: CP QP 44 %, Khôn Ninh 52 % — không dùng nữa.
 - 7 phòng Quý phi mới (M2300-05..21) đều NHỎ HƠN mẫu Quý phi đã duyệt (33–41 % so với 44 %) — tức là hiện tại Quý phi mới còn nhỏ hơn Tần (Tần đã duyệt 40–51 %). Thừa Minh QP (M2300-11) và Vĩnh Hòa QP (M2300-15) = 33 % (0.87× người), R:C 0.85 → đúng "nhỏ, vuông, hộp" như chủ thấy. Khải Tường QP (M2300-05) cũng 33 %, R:C 0.86.
 - Phi mới: 35–40 %, Diên Huy Phi (M2300-01) và Hàm An Phi (M2299-12) 35 % nhỏ nhất.
 
@@ -82,7 +83,8 @@ Ghi chú: HQP v7 (Trường Xuân HQP) 34 %, R:C 0.82 — là mẫu đã duyệt
 Khi vẽ lại: giữ sàn trong 12.5–18.5 % như M2300-05/-03 (room_gate/measure_floor kiểm sau khi vẽ).
 Cách sửa khi chủ đồng ý (A17, chỉ một chỗ): thêm câu cỡ giường vào prompt phòng đó, ví dụ "the canopy bed is wide and grand, its frame spanning about 46 % of the picture width, wider than tall" — chưa sửa prompt nào.
 
-## Tờ so sánh (chỉ iPad — Fold chờ PEOPLE1 stage_exact/fold755.json)
+## Tờ so sánh v2 (chỉ ảnh trực diện hiện tại): https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/bedsize/bedsize-compare-v2.jpg — CP Phi 3w · CT Tần pr21 · Khôn Ninh B3 · CP QP F · M2300-11 · M2300-15. Tờ v1 bên dưới dùng Khôn Ninh đã bỏ → bỏ qua.
+## Tờ so sánh v1 (CŨ, chỉ iPad — Fold chờ PEOPLE1 stage_exact/fold755.json)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/bedsize/bedsize-compare.jpg (2366×1468, 1.1 MB) — Cảnh Phúc QP (mẫu) · Khôn Ninh (mẫu) · M2300-11 · M2300-15, mỗi ảnh có 1 nhân vật đúng cỡ + chỗ đứng game iPad, khung xanh = khung giường đo. Đã xem.
 
 ## Gens: 0. Không đổi prompt, không vẽ lại.

@@ -20,19 +20,15 @@ RANK = {'phoi': '1-3 Đáp ứng/Thường tại/Quý nhân (phối, 2 giường
 # key: (rank, x0, x1, top, base, status)   all % of picture; status: M = approved MODEL room (L16), D = owner duyệt/OK,
 # S = sent, owner said no need to wait for approval (L2300), O = older version / not live
 B = {
- 'canh-phuc-cung-tan-ngu':            ('tan', 34, 72, 5, 82, 'M'),
- 'canh-phuc-cung-phi-ngu':            ('phi', 20, 62, 2, 78, 'M'),
- 'canh-phuc-cung-quyphi-ngu':         ('quyphi', 30, 74, 5, 85, 'M'),
- 'truong-xuan-cung-hqp-ngu':          ('hqp', 30, 64, 5, 85, 'M'),
- 'khon-ninh-cung-ngu':                ('hh', 3, 55, 3, 90, 'M'),
+ # CURRENT FRONTAL models only (L14; owner L2318: Khôn Ninh v6/v7 angled picture is DROPPED). File = img/_review/place-rank/<key>-ha-sang.webp
+ 'v9/khon-ninh-cung-ngu-B3':          ('hh', 31, 69, 17, 85, 'M'),      # cpS5YIl0eP, HH bedroom B frontal 3-wall (L14 model)
+ 'v12/truong-xuan-cung-hqp-ngu-F-r2': ('hqp', 49, 89, 5, 90, 'M'),      # ov6w4kO829, HQP frontal (v12, owner L710 OK)
+ 'v11f/canh-phuc-cung-quyphi-ngu-F':  ('quyphi', 35, 72, 13, 82, 'M'),  # eIPlheldqL, Quý phi frontal (kept)
+ 'v10/canh-phuc-cung-phi-ngu-3w':     ('phi', 31, 74, 13, 80, 'M'),     # UPve2vXwny, Phi bedroom 3w frontal (L14 model)
  'pr13/ham-an-cung-tan-ngu':          ('tan', 30, 72, 10, 80, 'D'),
  'pr13/khai-tuong-cung-tan-ngu':      ('tan', 30, 72, 10, 80, 'D'),
  'pr13/thua-minh-cung-tan-ngu':       ('tan', 30, 70, 8, 82, 'D'),   # M2294-11
  'pr13/truong-xuan-cung-tan-ngu':     ('tan', 30, 68, 8, 78, 'S'),   # M2300-17
- 'pr19/chung-tu-cung-tan-ngu':        ('tan', 49, 90, 10, 78, 'O'),
- 'pr19/ham-an-cung-tan-ngu':          ('tan', 30, 70, 8, 82, 'O'),
- 'pr19/khai-tuong-cung-tan-ngu':      ('tan', 30, 68, 10, 78, 'O'),
- 'pr20/chung-tu-cung-tan-ngu':        ('tan', 50, 98, 5, 82, 'O'),
  'pr20/dien-huy-cung-tan-ngu':        ('tan', 15, 57, 3, 80, 'D'),
  'pr20/vinh-hoa-cung-tan-ngu':        ('tan', 38, 80, 5, 80, 'D'),
  'pr21/chung-tu-cung-tan-ngu':        ('tan', 29, 80, 5, 82, 'D'),
@@ -50,7 +46,6 @@ B = {
  'pr13/dien-huy-cung-quyphi-ngu':     ('quyphi', 35, 76, 8, 78, 'S'),   # M2300-13
  'pr13/vinh-hoa-cung-quyphi-ngu':     ('quyphi', 33, 66, 8, 82, 'S'),   # M2300-15  (owner: too small)
  'pr13/truong-xuan-cung-quyphi-ngu':  ('quyphi', 23, 60, 8, 78, 'S'),   # M2300-21
- 'thua-minh-cung-dong-phoi-ngu':      ('phoi', 22, 48, 10, 83, 'M'),
  'pr13/canh-phuc-cung-dong-phoi-ngu': ('phoi', 79, 100, 25, 80, 'D'),
  'pr13/canh-phuc-cung-tay-phoi-ngu':  ('phoi', 15, 42, 22, 72, 'D'),
  'pr13/chung-tu-cung-dong-phoi-ngu-r3': ('phoi', 17, 37, 15, 73, 'D'),
@@ -100,17 +95,19 @@ def sheet(dl, fig, out):
     from PIL import Image, ImageDraw, ImageFont
     FB = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 30)
     FS = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 24)
-    panels = [('canh-phuc-cung-quyphi-ngu', 'Cảnh Phúc Quý phi — MẪU ĐÃ DUYỆT'),
-              ('khon-ninh-cung-ngu', 'Khôn Ninh Hoàng hậu — MẪU ĐÃ DUYỆT'),
+    panels = [('v10/canh-phuc-cung-phi-ngu-3w', 'Cảnh Phúc Phi — mẫu trực diện đã duyệt'),
+              ('pr21/chung-tu-cung-tan-ngu', 'Chung Tú Tần — đã duyệt (giường to nhất)'),
+              ('v9/khon-ninh-cung-ngu-B3', 'Khôn Ninh Hoàng hậu — trực diện hiện tại'),
+              ('v11f/canh-phuc-cung-quyphi-ngu-F', 'Cảnh Phúc Quý phi — trực diện hiện tại'),
               ('pr13/thua-minh-cung-quyphi-ngu', 'M2300-11 Thừa Minh Quý phi (chủ: giường nhỏ)'),
               ('pr13/vinh-hoa-cung-quyphi-ngu', 'M2300-15 Vĩnh Hòa Quý phi (chủ: giường nhỏ)')]
     SC = 1; PW, PH = W * SC, H * SC; LH = 84; G = 14
-    sh = Image.new('RGB', (2 * PW + 3 * G, 2 * (PH + LH) + 3 * G + 60), (26, 22, 20)); d = ImageDraw.Draw(sh)
+    sh = Image.new('RGB', (3 * PW + 4 * G, 2 * (PH + LH) + 3 * G + 60), (26, 22, 20)); d = ImageDraw.Draw(sh)
     d.text((G, 14), 'Giường so với người trong game (iPad, đúng cỡ + vị trí đứng như game). Khung xanh = khung giường đo; vạch trắng = chiều cao người.', font=FS, fill=(245, 235, 215))
     fg0 = Image.open(fig).convert('RGBA'); fg0 = fg0.crop(fg0.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox())
     fg0 = fg0.resize((round(fg0.width * VH * SC / fg0.height), round(VH * SC)), Image.LANCZOS)
     for i, (k, lab) in enumerate(panels):
-        x, y = G + (i % 2) * (PW + G), 60 + G + (i // 2) * (PH + LH + G)
+        x, y = G + (i % 3) * (PW + G), 60 + G + (i // 3) * (PH + LH + G)
         im = Image.open(f"{dl}/{k.replace('/', '__')}-ha-sang.webp").convert('RGB')
         s = max(W / im.width, H / im.height); w, h = round(im.width * s * SC), round(im.height * s * SC)
         st = im.resize((w, h), Image.LANCZOS); x0 = (w - PW) // 2; st = st.crop((x0, h - PH, x0 + PW, h)).convert('RGBA')
