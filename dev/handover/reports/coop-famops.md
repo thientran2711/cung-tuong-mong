@@ -295,3 +295,31 @@ PRIORITY #1 CHECK ('b4Ops|RMHOW|ilCoopRes|loKeepBy|famApply'): OD law 6c + law 1
 - -pv commits on 1033eb2e: e1c1d173 V fix (b4Ops «rm lost» for NPC theft from her entry; ilCoopRes labels o.iu; scan LOST_DBG op trace) · 4c63006a merge -p-r · de6d94ce merge LIVE b55a0e1c · 0a3493ef her-entry diffs by id / kidId (festival stale snapshot) · d58a43fa famSame one-to-one.
 - Scans on d58a43fa were started in MY container at 12:33Z (die with it): rerun them. NEVER rebuild dev/index.html (assemble / build_site) while scans run — the scan's B rejoin reloads the page from the build (mixed versions). Use a 2nd worktree for unit/gates if needed.
 - Tools: python3 dev/build/assemble.py first (dev/index.html is untracked); scan = LOST_DBG=1 [SEED=9001|COOP_SWAP=1] node dev/test/coop-lost-scan.js <outdir> (≈1.5–3 h per 76 wk, max 3 parallel; logs may need grep -a); faults print as PERSIST {…, last, hist, tA/tB op traces}; unit = node dev/test/coop-famops-unit.js http://ctm.local/; site build = bash dev/site/build_site.sh (commit index.html/sw.js/assets.json with code changes).
+
+## E44f (depth 6, session_01DgYSWpkWjiJAtg8BC8AVGk) — SSK review/coop-famops-pv 5a239b1a, 22/11 ~17:15Z (pushed by FOREMAN E #32; E44f cannot push)
+PRIORITY #1 CHECK ('famDiff|b4Ops|famSame|f7Done|famApply'): OD law 6c + law 1 | main b238857f (coop-famops-p landed) | review/coop-famops-pv 5a239b1a | claims E44f.
+- Head 5a239b1a = d58a43fa + merge LIVE 35f5b5ab (pushed by E #31; my local b5d58740 differs only by the index.html build stamp). vs LIVE b238857f the source delta = jcoopworld.js + jil.js only; a merge of b238857f = generated files only (reviewer final-merges).
+| gate | result |
+|---|---|
+| coop-famops-unit | 37/37 |
+| coop-e2e (LIVE suite) | 141/141 fold-host + 141/141 SWAP |
+| coop-b1 | 43/43 alone (42/43 step 9 «week merged» flake: ALSO 42/43 on LIVE 35f5b5ab alone) |
+| role-parity ×2 | ALL PASS ×2 (alone; LIVE ALL PASS) — next to 3 scans chrome was OOM-killed (dmesg), not a fault |
+| quickcheck ALONE + old save | PASS 216 s, old save ok, core gates PASS, perf new/live render 271/236 ms, buổi 2506/2974 ms |
+- 76 wk (LOST_DBG=1, -pv scan script also used for the LIVE CONTROL):
+| run | -pv | LIVE CONTROL |
+|---|---|---|
+| 9001 #1 (d58a43fa on b55a0e1c) | 87/96 dup0 van0 | — |
+| 9001 #2 (d58a43fa) | 85/96 dup2 (117, 10000030) van1 (3385) | — |
+| SWAP (d58a43fa) | 89/92 dup0 van0 | — |
+| 9001 (5a239b1a / LIVE 35f5b5ab) | stalled w41; van 10000014 (w30) | 89/90 van 10000045 |
+| SWAP (5a239b1a / LIVE b238857f) | 87/94 dup0 van0 | 88/92 van 10000013 |
+| 9001 (5a239b1a / LIVE b238857f) | 87/90 van 10000078 | 85/98 van 10000013 + 841 |
+- VERDICT: no fault caused by -pv; every -pv fault shape has a LIVE twin or sits in code -pv does not change → tickets:
+ T1 (festival stale diff, both builds): host f7Done (fxFin7) diffs her entry vs the festival-start snapshot and sends «rm gone» (+ «add y_…» iu 0) for her piece → her seat drops it, host has no copy/ledger line. -pv 10000014, 10000078; LIVE b238857f 10000013 (stack b4Send←f7Done←fxFin7 on both). -pv's 0a3493ef/d58a43fa (famSame by iu) closed the mass case, not this one: likely her rebuilt entry carries her own iu ≠ the host's (hiu) → famSame misses → «rm» by hiu matches her real piece. Next: match famSame by iu OR hiu, unit with a hiu-keyed rebuilt entry.
+ T2 (host-held keep copy missing): LIVE 35f5b5ab 10000045 — host «Lấy đồ» her piece 3×, the 3rd case «held at me» but the host has no copy.
+ T3 (ret with no case on her seat): LIVE SWAP 10000013 lxma2 (laydo w1, ret via res:plant w4, her seat had no case → gone).
+ T4 dup 117 (-pv d58a43fa): guest laydo «rm lost» for a piece the host had in box cct evid since w1 → host still opened case 14 (famItem/famLostCase path, unchanged by -pv).
+ T5 dup 10000030: jil.js:122 market resale picks HER entry (liveRivals(true)) as buyer on the host → f7Done «add» to her → host census nets its own copy (mkt→nvp net).
+ T6 lead 934 = 3385 (-pv d58a43fa): Kỳ ngộ-kept NPC piece, w72 host ilSent «me → coop:902 sang hảo hữu», NO fam op with 3385 (famRet with no case DOES put it in her chest, so not that); suspect the gift-items path (sendRes items / thin «inv», «Quà tặng» dialog) — not in the LOST_DBG trace yet.
+- NEXT (my child): kyngo-lead CONTROL on LIVE + 934/T6 trace of the items path; T1 fix proposal (report-only unless ordered).
