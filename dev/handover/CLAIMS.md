@@ -1104,4 +1104,4 @@ REVIEW coop-guest-men (opus BIG co-op; briefs/D19-coop-guest-men-review.md) of 8
 coop-flakes (opus; now BIG co-op game fix jcoopask remapS; coop-pets stress round 3 + coop-guest-maid «links moved»; briefs/D20-coop-flakes.md) | review/coop-flakes | session_01964izE5gLnvQcVeUAZdUGJ | RUNNING | 22/11 19:12Z (Foreman D #20)
 THACT5 | L2381 act seal fixed scale | session_01D3E3NY9DHseZozKjjHVfNB | RUNNING | 2026-11-22T19:10Z
 HIST1 | L2384 prince motif history check | session_01D3E3NbWYkzzWuDPGkJiAPc | RUNNING | 2026-11-22T19:25Z
-coop-real-port (sonnet test-only; port ≈30 RISK co-op drivers to lib/coop-real.js; briefs/D20-coop-real-port.md) | review/coop-real-port | (opening) | RUNNING | 22/11 20:12Z (Foreman D #20)
+coop-real-port (sonnet test-only; port ≈30 RISK co-op drivers to lib/coop-real.js; briefs/D20-coop-real-port.md) | review/coop-real-port | session_01964izFXSeyvCrYfhAxY8EG | RUNNING | 22/11 20:12Z (Foreman D #20)

@@ -1131,3 +1131,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 106 (22/11 19:34Z): coop-guest-staff 40cc2b92 relayed to LC5.
 - FROM MAIN 106 (22/11 19:48Z): LIVE = 40cc2b92 (D coop-guest-staff test-only landed).
 - (22/11 20:12Z, D #20) coop-guest-staff DONE LIVE 40cc2b92. CLAIM coop-real-port (follow-up b), brief briefs/D20-coop-real-port.md; PRIORITY #1 CHECK: OD 0 | ledger 0 | main lib/coop-real.js + coop-setup-scan.js | review/* coop-flakes (excluded files) | claims coop-flakes. Opening sonnet worker.
+- last wake: 22/11 20:14Z (D #20; context ≈ 11 % est., rollover 31 %). LIVE 40cc2b92. Seats: worker coop-guest-men EPhZFbPA (F1–F3 fixed f98ceec2, full gates ~2 h), rv coop-guest-men Eo6EDw2B (on call), worker coop-flakes E5gLnvQc (opus, remapS fix), NEW worker coop-real-port session_01964izFXSeyvCrYfhAxY8EG (sonnet test-only).
