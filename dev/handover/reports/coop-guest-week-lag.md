@@ -81,3 +81,24 @@ Old saves: no save format changed (her baseline lives in memory only); quickchec
 - rkOfFace console error (E49's side note): also on main 02c6d8f4-era runs (main-thin-f1) = pre-existing.
 - Pre-existing fails seen identically on main (FOR B, not this ticket): coop-thin-a nmReg round trip; coop-thin-e swap E6; coop-thin-f1 doAct / host→guest pet, kid, gift / rkOfFace console error; coop-cyc flakes; coop-timer THIN=9 «4: no choice made for her».
 - Coop-thin lane names g4 / g4s belong to coop-thin-g (level 13, not on main): not run here.
+
+## REVIEW r1 (independent BIG reviewer session_01N1tNP5x6xp5Bx55tM27hes, 22/11 03:50Z) — **PASS 8303b53a**
+PRIORITY #1 CHECK ('week-lag|E.base|thin E week base|coop-oneworld'): OD/handover = ORDER MAIN 100 20:35Z + this report | main bb92f986 (no guard: `coop-week-lag-scan.py` FAIL on LIVE) | review/*: review/coop-thin-g-r1 + review/coop-thin-g-f1 hold e7b996f2 (same hunk); review/coop-thin-g 7fcae66b does NOT yet | E49 reports/coop-oneworld-lag.md: «NOT rebuilt; no review/coop-oneworld-lag branch made» (ls-remote: no review/*oneworld*) | claims: this review row.
+Branch **review/coop-guest-week-lag-r1 @ 8303b53a** = worker 0860f601 + merge of LIVE **bb92f986** (LIVE moved during review: night-balance-bundle / od03-favart; only index.html / sw.js conflicted, rebuilt with build_site.sh; assets.json untouched). Ancestor of FF: origin/main bb92f986 ✔.
+| check | result |
+|---|---|
+| (1) root cause real — LIVE repro | LIVE 02c6d8f4 coop-week-lag L9 10 weeks: **FAIL 3/10** (W3 bạc 9/0 Sức 108/97; W4 month change bạc 78/39 + Sủng/Danh/Sức/Đức/Thanh danh; W8 Danh/Sức/Đức/Thanh danh). bongloc-coop L6 on LIVE ×2 = PASS (the race is intermittent there; coop-week-lag is the reliable repro) |
+| (1) green on the branch (0860f601) | coop-week-lag L9 PASS 10/10 · L9 swap PASS · L7 PASS · L0 PASS 8 wk · bongloc-coop L6 15/15 · L9 16/16 · L9 swap 15/15 · coop-e2e 124/124 |
+| (1) green after LIVE bb92f986 merge (8303b53a) | coop-week-lag L9 / L9 swap / L7 / L0 all PASS (stale-view race hit 2/2/6/0 times, all handled) · bongloc-coop L6 15/15 · L9 swap 15/15 · **coop-e2e 129/129** (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc) |
+| (2) byte-identical to e7b996f2 | the +/- lines of `git diff e7b996f2~1 e7b996f2 -- dev/build/jcoopthine.js` == the branch's jcoopthine diff vs main (diff of the two hunks: empty). File vs review/coop-thin-g-f1 differs only in F1's cy section (cyLost / cyReask / cyHostOwns). e7b996f2's other parts (jcoopthing.js PREC / gBlob thpn / gEmp) are level-13 only and not on main → not needed here. coop-thin-g will merge clean on this region. |
+| (3) ONE fix only (law 14) | E49 has no branch and no code (STEP 0: «already fixed in B's lane, not rebuilt»). The ONLY other carrier of this hunk is B's own coop-thin-g-f1 / -r1 = the same bytes, so after this lands there is one version, not two. |
+| (4) law 11 family | independent grep: the guest's only person diffs are `TH.pDiff(E.base(V),…)` at jcoopthine.js:46 (ready erd) and jcoopthinf.js:53 (F intent: packs as erd at :55 + last pack in `do f` via sendF :42) → all 3 senders go through the guarded E.base. jcoopthin.js:167 pDiff is the HOST's part-D patch out from his own store (p0), not a view → not this family. When E.bs is reset (room / host-net / nohost) and only an old-week view exists, E.base returns {} → pDiff emits absolute "=" ops (no "+" delta from an undefined base) → no doubling. `coop-week-lag-scan.py`: LIVE FAIL → branch PASS. |
+| (5) law 1 both seats | every week in L9 / L9 swap / L7 / L0: her phone's copy of HIM == his phone (PASS); swap = the devices exchanged (host iPad / guest Fold) PASS |
+| law 4 one core | no number added; quickcheck core gates (one-core-guard) PASS |
+| quickcheck 8303b53a | **QUICKCHECK PASS** · open 1869 ms · old save ok · core gates PASS · perf new/live render 239/265, tab 483/504, buổi 1375/1254 (noise; 0860f601 run: 1366/1266 and 1570/1163) |
+| undef-scan | PASS (289 names) |
+| role-parity.test.js | 2 FAIL (`up:P-ONLY:harm:petcare` new gap; riseCore Danh 3 vs 5) — **identical on LIVE bb92f986 alone** → pre-existing LIVE regression from the bb92f986 land (it passed on 02c6d8f4 per worker), NOT this branch (co-op sync only). FOR MAIN / B. |
+| old saves | no save format change (baseline in memory); quickcheck old save loads and plays |
+| UI / words | none changed → no shots |
+Reviewer env note: quickcheck gates 50-coop-one-world / 60-mk-layer-scan first failed only because my sparse worktree lacked coop/worker and dev/art/mkfit; after adding them both PASS and the full quickcheck PASS.
+VERDICT: **PASS 8303b53a** — LAND = fast-forward main to 8303b53a. One version of the fix: when review/coop-thin-g lands later its jcoopthine E-region is the same bytes (no second version).
