@@ -1138,3 +1138,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 106 (22/11 21:35Z): coop-guest-men 0a3ceede relayed to LC5.
 - FROM MAIN 106 (22/11 21:47Z): LIVE = 0a3ceede (D coop-guest-men landed).
 - (22/11 22:10Z, D #20) coop-guest-men DONE LIVE 0a3ceede. coop-flakes SSK 23b7cce5 (on 40cc2b92): remapS real bug fixed via COOPW.keyMove + NEW BAL.coop.linkRange (+ jcoopthinc:270); (a) not reproduced 0/20; test fixes in 33 drivers (vibrate filter) + syncFr. Open → rv: jcoopworld:146-152 / jnamefix family question, guest-maid items 6/7. Opening opus rv (merge LIVE 0a3ceede first). coop-real-port told about the 33-driver overlap.
+- last wake: 22/11 22:13Z (D #20; context 22 % (219k/1M), rollover 31 %). LIVE 0a3ceede. No new ORDER. Seats: worker coop-flakes E5gLnvQc (SSK 23b7cce5, on call), rv coop-flakes DotpEe7V (opus, merging LIVE), worker coop-real-port FXSeyvCr (sonnet).
