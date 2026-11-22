@@ -2325,3 +2325,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - KIT KEEPER #6 session_01Rc5AsMcbXamjsY8CHXdjGN on call for owner pframe-overlay feedback (none yet); archive when she is happy or after ~1 more day idle.
 - TRIGGERS: 102 wake trig_01E13SG1HWhNBW6G9ukrWFKH (min 32) → 103 DISABLES it and creates its own. Push tool template dev/tools/main-hpush.sh. Never git pull.
 - (01:34Z) LAND CHAIN 3: ROLLED at ctx ~33 % (queue empty, LIVE 02c6d8f4, HOLD od03-favart-rv). Handover dev/handover/reports/land-chain-3.md (12 landed, landq-e2e recipe, rel-men r7 owed by B). MAIN 103 opens LAND CHAIN 4.
+- (01:35Z) Opened MAIN CHÍNH 103 = session_01Rc5AsKQ599YyHUeSs7YqLK (child, depth 5). 102 stops; relays late messages to 103 only.
