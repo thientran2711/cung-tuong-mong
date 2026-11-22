@@ -144,10 +144,43 @@ for key in ORDER3:
     if key.startswith('tu-ninh'): assert p.count(WALLS_IN) == 1; p = p.replace(WALLS_IN, WALLS_TN)
     nk = (key[:-3] + '-r3') if key.endswith('-r2') else key + '-r2'
     OUT[nk] = dict(v, prompt=p, code=f'M2370-{n:02d}', job=2376, base=f"dev/handover/prompts_L2095/{v['code']}_{key}_ha_sang.txt")
-import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] == 2376}, 'places-M2370-L2376')
+# ===== PLACES3 L2381 (owner via ROOT-C4, approved plan; one try each). job=2381, codes continue after M2370-27.
+for k in [k for k, v in OUT.items() if v.get('job') == 2381]: del OUT[k]
+# (2) Phòng cung nữ = the Cung nhân prompt COPIED as-is (owner: "copy cái prompt của cung nhân qua làm cái prompt của cung nữ").
+# (3) A ca sở M2370-22: everything kept; curtains + bed made princely-luxurious (owner: "độ cầu kỳ của cái rèm không có ... giống như những người phi tần").
+ACS3 = [("with straight-hanging curtains of crisp, firm sapphire-blue silk like #2E5C9E with a navy-blue key-fret border, neatly tied "
+         "back with navy cords",
+         "with luxurious layered princely curtains: an outer drape of heavy sapphire-blue silk brocade like #2E5C9E woven with silver-grey "
+         "cloud-and-dragon roundels, a wide navy border embroidered in gold and silver thread with key-fret and waves, a gold-fringed edge, "
+         "over an inner layer of fine pale-blue silk, all under a carved gilt pelmet with a short embroidered valance, gathered and tied back "
+         "with thick braided gold-and-navy cords ending in large tassels and jade toggles"),
+        ("a carved dark wooden canopy bed with straight, clean lines and carved cloud-scroll motifs, its curtains of the same crisp "
+         "sapphire-blue silk like #2E5C9E with a navy key-fret border, hanging straight and neatly tied back with navy cords and small dark jade "
+         "toggles, bedding in steel blue like #5B7FA6 and deep navy like #1F3355 with a silver-grey key-fret border and a firm round bolster",
+         "a grand canopy bed of dark zitan wood as rich as an imperial consort's, its canopy frame, posts and front panels richly carved in deep "
+         "relief with clouds, waves and coiling young dragons, picked out in gold and silver; a deep embroidered valance runs round the "
+         "canopy top; its curtains are layered: heavy sapphire-blue silk brocade like #2E5C9E woven with silver-grey cloud-and-dragon "
+         "roundels, with a wide navy border embroidered in gold and silver thread and a gold-fringed edge, over fine pale-blue silk, gathered "
+         "and tied back with thick braided gold-and-navy cords, large silk tassels and jade toggles; bedding of steel-blue like #5B7FA6 and "
+         "deep navy like #1F3355 silk brocade embroidered with silver clouds, a silver-grey key-fret border and a firm round brocade bolster "
+         "with gold-thread ends"),
+        ("crisp, fresh and young, a noble young man's taste",
+         "crisp, fresh and young, a noble young man's taste, as rich and luxurious as an imperial consort's room")]
+# (4) Thượng thư phòng M2370-27: curtains as finely embroidered as its chairs and lanterns.
+TTP3 = [("hung with refined deep-blue silk curtains like #2F4E7A with a small gold-thread border, tied back with silk cords",
+         "hung with refined, finely embroidered curtains: deep-blue silk brocade like #2F4E7A embroidered with gold and cream peonies, "
+         "clouds and cranes in the same rich embroidery as the brocade chair cushions and silk lanterns, a wide embroidered border, a "
+         "gold-fringed edge and a carved gilt pelmet with an embroidered valance, gathered and tied back with braided gold cords and silk tassels")]
+for src, nk, reps in (('cung-nhan-r2', 'phong-cung-nu-r3', []), ('a-ca-so-r2', 'a-ca-so-r3', ACS3), ('thuong-thu-phong-r3', 'thuong-thu-phong-r4', TTP3)):
+    v = OUT[src]; p = v['prompt']
+    for a, b in reps: assert p.count(a) == 1, (nk, a[:50]); p = p.replace(a, b)
+    base = OUT['phong-cung-nu'] if nk.startswith('phong-cung-nu') else v
+    OUT[nk] = dict(base, prompt=p, code=f'M2370-{len(OUT) + 1:02d}', job=2381, refs=v['refs'], layout=v['layout'],
+                   base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt", name=base['name'])
+import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381)}, 'places-M2370-L2376')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
 for k, v in OUT.items():
-    if v['job'] != 2376: continue
+    if v['job'] not in (2376, 2381): continue
     open(os.path.join(OUTD, f"{v['code']}_{k}_ha_sang.txt"), 'w').write(v['prompt'] + CAP.format(v['code']))
-print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] == 2376}, 'ROOM GATE PASS')
+print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381)}, 'ROOM GATE PASS')
