@@ -203,3 +203,19 @@ The (c) family (a friend-owned piece leaving the holder through the box rule) is
 - P3 vanish (control 3119; c2 270; = E44b's 248): host Kỳ ngộ «giữ lại» by an NPC (holder of an NPC-owned case) → case «tra» → the piece is nowhere. Host side only.
 - P4 dup (c2 246, one run): host NPC 3's case «riv» held by the friend entry (her seat has the piece, lo99) while the host confiscates a piece with the same id from NPC 3 («conf» into nvp box), so NPC 3 kept a copy on the host.
 NEXT (order E #30): P1–P4 on NEW branch review/coop-famops-p (from LIVE / on c2), whole group, CONTROL vs fix tables.
+
+## coop-famops-p (P1–P4 ticket, order E #30) — E44c, 22/11 ~02:10Z
+PRIORITY #1 CHECK ('ilGuest|famCopy|loLoseE|ilRob|kyLc'): OD law 6c | main 02c6d8f4 | review/coop-famops-c2 f766a052 (SSK, E48r) | claims E44c.
+Branch **review/coop-famops-p** ON c2 f766a052: eb02cec6 P1/P2 fix + e23148e0 site build (pushed).
+Fix P1/P2 (jcoopworld.js, after the c2 wrapper): famCopy(p) = GUEST seat (ilGuest) and p a non-friend person of rivals (a COPY of a host NPC). ilGone(copy, …) → null (nothing in HER box), loLoseE(copy, …) → null (no case in HER S.lost, so ilRob falls to ilGone → null). Same idea as jil's census, which already skips dead routing on the guest (jil.js:96 !ilGuest()). Host seat unchanged. Unit 17 / 17b / 17c → 27/27.
+| 76 wk on e23148e0 | result | dup | vanish |
+|---|---|---|---|
+| COOP_SWAP | **90/90** | 0 | 0 |
+| COOP_SKEW=24 | 89/91: 2 traffic FAILs only (cases 18 < 20; B.steal 2 < 3 = LIVE theft odds) | 0 | 0 |
+| SEED=9001 | degenerate (A.nofriend 76, stalls 67/76) → RERUN | 0 | 0 |
+CONTROL for P = c2 runs above (P1 dup 55/86/118, P2 vanish 10000274/10000341).
+## HANDOVER (E44c rolls on context, 22/11 ~02:10Z) — row review/coop-famops-p, foreman E #30 session_01DgYSWn34K38PMxUZdZc9yb, reviewer E48r session_01DgYSWpBzP3A6Bn8pRU8jcw
+- c2 is in review: review/coop-famops-c2 f766a052 SSK sent (E48r). If E48r FAILs it → fix on c2 first, then re-merge c2 into -p.
+- NEXT on -p: (1) rerun SEED=9001 (and SKEW again for traffic) on e23148e0; try SEED=7 if 9001 degenerates again. (2) P3 vanish (control 3119, c2 270 = E44b 248, HOST side only): an NPC-owned case kept by an NPC finder via Kỳ ngộ «giữ lại» (jky.js:196 SPEC.item), later closed «tra» (NPC↔NPC loask jlost.js:122 / lostReturn) or re-lost («mis» case 28 closed «kyngo» w11 for 270); the piece is gone 2 weeks later with NO ledger line. Leads: jil census renumber (jil.js:97 `e.iu=0` when an id is seen twice → the piece lives on under a NEW id with a «nhận» line = a hidden dup turned into a renumber); lostReturn pushes loClean(c.e) while the holder copy x.e may stay in the holder's chest (check every lostReturn caller that splices the holder copy: jlost.js:122/197/250/252, jky.js:195/212 kyLc makes a COPY of c.e and nobody removes a holder copy). Add a LOST_DBG trace of new ids of the same kind in the week the old id vanishes. (3) P4 dup 246 (c2 SEED=9001, one run): host NPC 3 case 99 «riv», thief = friend entry (held at 902, her seat has it as lo99), and the host confiscates «conf» a piece with the SAME id from NPC 3 → NPC 3 kept a copy when the riv case was made (loLose riv + loKeepBy to the friend entry: check that the owner's piece leaves NPC 3). (4) gates: unit, 3×76 wk dup0/van0, coop-e2e 124, quickcheck + old save (run ALONE: G4 coop-one-world flakes under 3× load), coop-b1, role-parity ×2 → SSK to E #30 AND E48r + line in FOREMAN_E_STATUS.md.
+- Ticket for other rows (not -p): buổi handshake stalls «Chờ hảo hữu…» in ~1 of 3 long runs; «stip show rkOf null queen» page error (LIVE stipend).
+- E44c's container logs (/home/user/wt/e44c-out) are gone with it; the successor starts fresh: sparse worktree of review/coop-famops-p.
