@@ -57,3 +57,35 @@ disc.py: per-frame disc circle = RANSAC on alpha-edge points (alpha > 48 — tea
 - Không vẽ lại gì: chỉnh từng khung hình bằng máy (0 credit). Độ nhô người ra giữ nguyên.
 - Trước đây: ấn ẩn vòng nhỏ nhất (68 px), chuyên tâm to nhất (85 px), mưu và ghen lúc lặp vòng nở thêm ~9 %, có ấn vòng còn trôi lên trên — giờ hết.
 - Video 21 ấn mới: th-act-disc112-full21-anim.mp4.
+
+## Round 2 (ROOT-C5 20:08Z: equalise BACK length, re-encode ≈ old size, keep R0) — 0 cr
+- Spec (disc_scale_spec.py + A58 via rule.py set): **BACK_N = 45 frames (3.0 s) for every seal**; shorter source BACK → lean pose held at the start, longer → frames dropped evenly (first try with blended frames ghosted on lo/ẩn fast pose jumps → dropped). Encode **webp q50 m4** (WEBP_Q/WEBP_M): 32 MB for 63 files vs 39 MB old (round 1 was 1.5× old).
+- libwebp merges identical held frames into one long frame → apply.py puts a 1/255-alpha marker on the transparent corner pixel every other frame so every BACK really has 45 frames (checked on the CDN copy).
+- Re-run from source (no double lossy). LOOP 61 frames all; OUT still as cut (54–61, lo 27) — not asked; say if OUT should be fixed too.
+- Measure (same tracker): 19/21 inside 1.12 ± 0.01; ⚠ mưu, ghen = halo instrument issue as round 1 (eye-checked); tự tin now passes. lo BACK end reads 1.016 (tracker on its fast last-frame pop; looks at rest).
+
+| seal | rest r px | rest | OUT end | peak | LOOP min | LOOP max | BACK end | frames out/loop/back |
+|---|---|---|---|---|---|---|---|---|
+| vui | 74.1 | 1.00 | 1.119 | 1.120 | 1.118 | 1.119 | 1.000 | 58/61/45 |
+| lo | 74.3 | 1.00 | 1.117 | 1.118 | 1.116 | 1.118 | 1.016 | 27/61/45 |
+| an | 74.3 | 1.00 | 1.118 | 1.119 | 1.117 | 1.118 | 1.000 | 55/61/45 |
+| muu | 74.2 | 1.00 | 1.090 | 1.138 | 1.064 | 1.138 | 0.997 | 56/61/45 | ⚠
+| ghen | 74.1 | 1.00 | 1.120 | 1.144 | 1.113 | 1.144 | 1.001 | 58/61/45 | ⚠
+| buon | 74.1 | 1.00 | 1.118 | 1.118 | 1.118 | 1.118 | 1.000 | 54/61/45 |
+| so | 74.2 | 1.00 | 1.118 | 1.121 | 1.118 | 1.121 | 0.999 | 60/61/45 |
+| chan | 74.1 | 1.00 | 1.118 | 1.120 | 1.118 | 1.119 | 1.000 | 57/61/45 |
+| khochiu | 74.1 | 1.00 | 1.117 | 1.130 | 1.117 | 1.120 | 1.000 | 58/61/45 |
+| tinhtu | 74.1 | 1.00 | 1.119 | 1.132 | 1.119 | 1.119 | 1.000 | 57/61/45 |
+| binh | 74.2 | 1.00 | 1.117 | 1.121 | 1.117 | 1.119 | 1.000 | 54/61/45 |
+| dau | 74.3 | 1.00 | 1.117 | 1.119 | 1.117 | 1.119 | 1.000 | 56/61/45 |
+| hothen | 74.2 | 1.00 | 1.118 | 1.119 | 1.117 | 1.118 | 1.000 | 61/61/45 |
+| choang | 74.2 | 1.00 | 1.116 | 1.117 | 1.116 | 1.117 | 1.000 | 54/61/45 |
+| hon | 74.2 | 1.00 | 1.121 | 1.131 | 1.120 | 1.121 | 1.000 | 58/61/45 |
+| hanghai | 74.2 | 1.00 | 1.117 | 1.120 | 1.117 | 1.120 | 1.000 | 58/61/45 |
+| chuyentam | 73.9 | 1.00 | 1.127 | 1.127 | 1.116 | 1.126 | 1.001 | 58/61/45 |
+| hungkhoi | 74.2 | 1.00 | 1.117 | 1.118 | 1.116 | 1.118 | 1.000 | 57/61/45 |
+| gian | 74.0 | 1.00 | 1.123 | 1.128 | 1.120 | 1.125 | 0.999 | 61/61/45 |
+| tutin | 74.2 | 1.00 | 1.121 | 1.121 | 1.110 | 1.121 | 1.015 | 56/61/45 |
+| tinhnghich | 74.1 | 1.00 | 1.119 | 1.120 | 1.119 | 1.120 | 1.000 | 57/61/45 |
+
+Output (same CDN folder): **th-act-disc112b45-full21-anim.mp4** (228 frames = 61 + 2×61 + 45; every seal held at rest after BACK) sha256 d99dba73e978 · **th-act-disc112b45-full21-stills.jpg** sha256 bc301fe2ef52 · per seal th-act-<k>-{out,loop,back}-D112.webp **overwritten with this final version**. Looked: f0/f14/f120/f190/f215/f227 + BACK strips of lo/ẩn/choáng/mưu — all discs equal, BACK clean, all at rest together at the end.

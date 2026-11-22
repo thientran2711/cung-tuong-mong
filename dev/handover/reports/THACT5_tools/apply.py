@@ -12,15 +12,24 @@ def warp(fr,s,src_c,dst_c,W):
     a=np.clip(ch[3],0,255); rgb=np.where(a[...,None]>1,np.stack(ch[:3],2)/np.maximum(a[...,None]/255.,1e-3),0)
     out=np.concatenate([np.clip(rgb,0,255),a[...,None]],2).astype(np.uint8); out[...,3]=np.where(out[...,3]<8,0,out[...,3]); return out
 def save(fr,p):
+    # libwebp merges identical consecutive frames (held BACK poses) into one long frame; an invisible marker (alpha 0/1 alternating) on the
+    # transparent corner pixel keeps every frame (lossy webp drops RGB under alpha 0), so every BACK has exactly BACK_N frames
+    fr=[f.copy() for f in fr]
+    for i,f in enumerate(fr):
+        if f[0,0,3]==0: f[0,0]=(128,128,128,i%2)   # 1/255 alpha on one corner pixel every other frame
     ims=[Image.fromarray(f) for f in fr]
-    ims[0].save(p,save_all=True,append_images=ims[1:],duration=1000//SP.FPS,loop=0,quality=82,method=6,lossless=False,exact=True)
+    ims[0].save(p,save_all=True,append_images=ims[1:],duration=1000//SP.FPS,loop=0,quality=SP.WEBP_Q,method=SP.WEBP_M,lossless=False,exact=True)
 src,dst=sys.argv[1],sys.argv[2]; os.makedirs(dst,exist_ok=True)
 for k in sys.argv[3:]:
     parts=[(p,frames(f'{src}/{k}-{p}.webp')) for p in ('out','loop','back')]; D=np.load(f'{src}/{k}.disc.npy'); i0=0; clip=0
     for p,fr in parts:
-        res=[]
+        res=[]; Dp=D[i0:i0+len(fr)]
+        if p=='back':   # fixed BACK_N frames, no blending (blends ghost on fast pose jumps):
+            n=len(fr)       # short -> hold the first (lean) pose at the start; long -> drop frames evenly (nearest)
+            idx=[0]*(SP.BACK_N-n)+list(range(n)) if n<SP.BACK_N else list(np.round(np.linspace(0,n-1,SP.BACK_N)).astype(int))
+            fr=[fr[i] for i in idx]; Dp=Dp[idx]
         for i,f in enumerate(fr):
-            cx,cy,r,_=D[i0+i]; s=SP.R0*SP.scale(p,i,len(fr))/r; g=warp(f,s,(cx,cy),SP.C0,SP.W); res.append(g)
+            cx,cy,r,_=Dp[i]; s=SP.R0*SP.scale(p,i,len(fr))/r; g=warp(f,s,(cx,cy),SP.C0,SP.W); res.append(g)
             a=g[...,3]>24; clip=max(clip,int(a[0].sum()+a[-1].sum()+a[:,0].sum()+a[:,-1].sum()))
-        save(res,f'{dst}/{k}-{p}.webp'); i0+=len(fr)
+        save(res,f'{dst}/{k}-{p}.webp'); i0+=len(parts[[q for q,_ in parts].index(p)][1])
     print(k,'done; alpha px on canvas border (max/frame):',clip,flush=True)
