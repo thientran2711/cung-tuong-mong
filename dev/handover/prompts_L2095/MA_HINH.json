@@ -242,5 +242,10 @@
  "M2294-12": "M2294-12_thua-minh-cung-tan_ha_sang.txt (phòng khách Tần Thừa Minh, công thức phòng cũ + thẻ cung Thừa Minh MỚI)",
  "M2294-13": "M2294-13_khai-tuong-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Khải Tường, màu bậc tím #A88BCB)",
  "M2294-14": "M2294-14_khai-tuong-cung-phi_ha_sang.txt (phòng khách Phi Khải Tường, màu bậc tím #A88BCB)",
- "M2294-15": "M2294-15_chung-tu-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Chung Tú, màu bậc tím #A88BCB)"
+ "M2294-15": "M2294-15_chung-tu-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Chung Tú, màu bậc tím #A88BCB)",
+ "M2299-11": "M2299-11_chung-tu-cung-phi_ha_sang.txt (phòng khách Phi Chung Tú, công thức M2294)",
+ "M2299-12": "M2299-12_ham-an-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Hàm An, công thức M2294)",
+ "M2299-13": "M2299-13_ham-an-cung-phi_ha_sang.txt (phòng khách Phi Hàm An, công thức M2294)",
+ "M2299-14": "M2299-14_thua-minh-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Thừa Minh, thẻ cung Thừa Minh đã duyệt L2299)",
+ "M2299-15": "M2299-15_thua-minh-cung-phi_ha_sang.txt (phòng khách Phi Thừa Minh, thẻ cung Thừa Minh đã duyệt L2299)"
 }

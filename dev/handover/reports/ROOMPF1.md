@@ -57,3 +57,31 @@ Commit: see git log "ROOMPF1".
 - All 5 are ready in prompts_roompf1_M2294.json (prompt + refs). Phi image 4 = strip img/_review/place-rank/roompf1/tone-swatch-phi-t5.png: cdn_sync was still running at the time of writing; upload with creations_upload_image once the CDN serves it.
 - Needs: the gen allowed for this session, or a session where Magnific generation is permitted.
 - Phi strip uploaded 0 cr → Magnific nVlcVgLYQD (CDN img/_review/place-rank/roompf1/tone-swatch-phi-t5.png); json refs updated. Gens still blocked.
+
+## OWNER L2299 "Duyệt, tiếp đi" (via ROOT-B9 session_01D3E3NbN2JHBLFPohVouQYb): M2294-11..15 APPROVED, Thừa Minh card APPROVED
+### (1) Wired, 0 cr (same as approved rooms 31/32/35: CDN img/_review/place-rank/pr13/<key>-ha-sang.webp, webp q88 2688×1386; images never in git)
+| code | Magnific id | CDN path | measure_floor base_c (target ≥ 82 %) |
+|---|---|---|---|
+| M2294-11 | CqYQqr0EEy | img/_review/place-rank/pr13/thua-minh-cung-tan-ngu-ha-sang.webp | 84.4 |
+| M2294-12 | UPaJ4z1wny | img/_review/place-rank/pr13/thua-minh-cung-tan-ha-sang.webp | 86.1 |
+| M2294-13 | rgBLSivxtc | img/_review/place-rank/pr13/khai-tuong-cung-phi-ngu-ha-sang.webp | 84.4 |
+| M2294-14 | LwIg7DQswO | img/_review/place-rank/pr13/khai-tuong-cung-phi-ha-sang.webp | 79.7 (a little more floor than the target; note only, no redraw) |
+| M2294-15 | 0ewMdjfTfW | img/_review/place-rank/pr13/chung-tu-cung-phi-ngu-ha-sang.webp | 87.0 |
+- Every Magnific prompt was checked as identical to prompts_roompf1_M2294.json (ids ↔ rooms verified).
+- The pictures were wired UNGRADED, exactly as the owner approved them on the sheet. Reasons:
+  - later owner notes say 'rất nhẹ' was too strong (L1695 → sieunhe preset) and that room 31 needed no grade (L1689);
+  - dev/art/place-rank/room_vivid.py is GLUED again: three versions are concatenated and it fails with a SyntaxError at line 9, so it cannot run. Foreman: fix it (keep the top version), then grade only if the owner asks.
+- ⚠ FOR MAIN: no game table or JSON references the chính điện rank rooms yet. Rooms 31–40 are not live either (they also sit only at the pr13 review path). Going live is MAIN's wiring step, for these 5 together with 31–40.
+### (2) NEXT 5 prompts M2299-11..15 (builder dev/art/place-rank/prompts_roompf1_M2299.py → prompts_roompf1_M2299.json; recipe = M2294 exactly; no new style words, only the existing cards CT, HA and TM (approved L2299); no palace needs a new card)
+- M2299-11 chung-tu-cung-phi: 2w, windows LEFT, M2X; daybed in the left half, doorway in the right half, rose chairs facing each other.
+- M2299-12 ham-an-cung-phi-ngu: 3w, windows LEFT, M3X; bed in the left half, begonia doorway in the right half.
+- M2299-13 ham-an-cung-phi: 2w, windows RIGHT, M2; daybed in the right half, begonia doorway in the left half, yoke-rail chairs facing each other.
+- M2299-14 thua-minh-cung-phi-ngu: 3w, windows LEFT, M3X; bed centred, fan doorway in the right side wall.
+- M2299-15 thua-minh-cung-phi: 2w, windows RIGHT, M2; daybed in the left half, fan doorway in the right half, spindle-back chairs facing each other.
+- Layouts differ from the same palace's Tần room (L19), and 3-wall / 2-wall rooms alternate.
+- room_gate PASS ×5 · keep_check PASS ×5 (bases prompts_pr20_tone_vinh-hoa-*) · MA_HINH appended · ATTACH dev/handover/prompts_L2095/M2299_ATTACH.md (Magnific ids + local refs).
+- Refs: [gOmYI7iSXO, EbYJzsMuuO, image-3 guide, nVlcVgLYQD Phi strip].
+### Remaining rooms after M2299
+- Phi ×4: Diên Huy bed + rec, Vĩnh Hòa bed + rec
+- Quý phi ×12: KT, CT, HA, TM, DH, VH × bed + rec. These need a Quý phi rank swap (B24 t6 #E3A25B + small royal-yellow touch; RANK['quyphi'] lux words) like the Phi one: no new style words, but the first QP batch is a new rank recipe → owner sample first.
+- Từ Ninh ~2 · Trường Xuân versions (Q1) · ~35 place scenes
