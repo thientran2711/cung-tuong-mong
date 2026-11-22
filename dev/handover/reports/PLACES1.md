@@ -39,6 +39,10 @@ People sheets (Fold 755 portrait | iPad): `people_pr13/make_sheet_places.py` (Fo
 | M2355-13 | Đông cung | dong-cung | SyvJZjtUb8 | 15.6 | 565cc6d7defe | phoenix pair on beam (mild) |
 | M2355-14 | Phi tần cung | phi-tan-cung | 4RHicJD9Aa | 19.5 | 711473cb393e | |
 | M2355-15 | Ngự hoa viên | ngu-hoa-vien | IfRvx6ytvE (L2363 redo; v1 huAC18YvqL 6a65de56922d) | 11.7 | cb22815c5250 | REDO owner L2363: frontal, lake + pavilion + bridge behind a terrace; ref image 4 = old live picture (ksdj6iw16B, uploaded 0 cr) |
+| M2355-12 | A ca sở | a-ca-so | ovimqpt829 | 12.6 | 4488deb5834e | bed cut at right edge (mild) |
+| M2355-13 | Đông cung | dong-cung | SyvJZjtUb8 | 15.6 | 565cc6d7defe | phoenix pair on beam (mild) |
+| M2355-14 | Phi tần cung | phi-tan-cung | 4RHicJD9Aa | 19.5 | 711473cb393e | |
+| M2355-15 | Ngự hoa viên | ngu-hoa-vien | huAC18YvqL | 19.5 | 6a65de56922d | outdoor |
 | M2355-16 | Từ Ninh cung (phòng ngủ) | tu-ninh-cung-ngu | YMgTtbXWeC | 14.3 | 5ea70eb35f0f | |
 | M2355-17 | Từ Ninh cung (phòng khách) | tu-ninh-cung | KLexyzDkqp | 15.6 | d13d828c8689 | |
 
