@@ -465,5 +465,35 @@ Before r4 every family in this table (except pid) was dropped SILENTLY at every 
 4. A pid card that can no longer be made (mkP null) still drops silently in deserQ (pre-existing, every save load); not changed.
 5. quickcheck --runs 7 on the head.
 
+### 6. Fixer #4 (worker session_01N1tNP6tXgJZ4M8zrKZms4c, coordinator Foreman B ROOT-11; START_CTX ≈ 5 % own estimate, get_session reads 0; depth 4) — open 1, 2, 5 closed
+PRIORITY #1 CHECK: «FIX r4» §5 open 1–5 (above) | OD L680, LAW 11 | main LIVE 40cc2b92 → 0a3ceede (merged, 030799c9) | review/night-ledger-coop-r4 a7560a79 (base) | reused: j68 evGate / EVHOLD / evDropInfo (the scheduler's own hold + drop), j3 serM / rcpMk / deserQ (the r4 carry route) | claims B row «night-ledger-coop r4 fixer #4» (this).
+**Open 1 — ROOT (found by trace, not guessed).** Scratch harness (not git): the case-4 card wrapped in a Proxy (every read / write / delete logged with its stack), Q's own shift / splice / pop logging the call that takes it out, `deser` wrapped, Q identity watched. 3/3 failing runs gave the same answer: **no save load, no Q swap, no read of the card — `Q.splice(i,1)` from j68 `evGate` (wrapped around every showModal)**. The card is OPTIONAL (j24 approach), and the j68 scheduler shows at most one optional card per buổi / per person / per template: «Kẻ hầu xin» had already been shown that buổi, so the test's card was HELD in `EVHOLD` the moment it was shown — it never reached her screen, so the AFK carry never saw it. That part is the game's pacing (single player too), the test's fault.
+The game fault behind it (same family, LAW 11 «every store that keeps a card outside Q»): `EVHOLD` is page memory holding the JS card object; it survives the co-op week merge (and join / rejoin / relens / snapshot restore, all through `deser`) and `evRelease` later puts it on her screen with roads that close over people of the OLD world = the r3 «hollow road», by another door.
+Scan of every holder of cards outside Q (grep of every `Q.splice/shift/pop` and every `.push({m…})` in dev/build):
+| holder | keeps the card for later? | r4 fixer #4 |
+|---|---|---|
+| j68 EVHOLD (held optional cards) | yes, page memory, released by evRelease | **made again at every deser**: `evHoldRe` (j68) — serM → generator card rcpMk / pid card mkP / notice text; a card that cannot be made again is dropped as the scheduler drops a stale hold (evDropInfo; she never saw it) |
+| jspread SP13.L (waiting cards) | yes | off in a co-op room (SP13.off); single player saves it as data (S.sp13.q) — unchanged |
+| jcooptimer S.cq (the AFK carry) | yes | r4 (#3): save form, rebuilt by deserQ — unchanged |
+| every other splice site (jnf ksp/prep/nfch, j70 dedupe, j95b false warnings, jkc kcE, jworld Quốc tang, jdc festival items, jcoopthin thin cards, j74 title panels, jflip = its own timer list) | no: the card is dropped (its replacement is queued) or put straight back | unchanged |
+Test (coop-night case 4): the j68 scheduler is pinned for the test's card (as ldRoll is pinned for the played tối) and `shown` is asserted (the card IS on top of her screen when she goes AFK); NEW assert: an optional card held in EVHOLD at the merge is made again against the merged world and its road lands on the merged world's consort. Negative control (evHoldRe switched off in a scratch copy): that assert FAILS (`made:false`) → the test sees the bug.
+**Open 2 — cnp2 «exactly one step» [3,3,3]: not reproduced, not shown to be r4-caused.** Plain on this branch 112 / 111 / 112 + 112 on the merge (0 FAIL, 4/4) under 3 lanes; plain on the r3 base 111 / 112 (0 FAIL). Total r4 1/7 (the predecessor's cnp2, 4 lanes) vs base 0/2: no evidence either way; closed as a load flake unless it comes back (then read its DUMP 4 against r3).
+**Open 5 — quickcheck:** see gates.
+Open 3 (other families lapse with a line) and 4 (a pid card mkP null drops in deserQ, pre-existing) unchanged.
+
+| gate (merge head 030799c9 unless said) | result |
+|---|---|
+| coop-night FORCE4=g | 121/121 · 121/121 (merge) · pre-merge 121/121, 120/121 (G1: «host: no page errors» = WebSocket handshake to the LIVE Worker failed once; network, not the game) |
+| coop-night FORCE4=h | 121/121 · 121/121 (merge) · pre-merge 121/121, 119/119 |
+| coop-night plain | 112/112 (merge) · pre-merge 112 · 111 · 112 · 112 (all pass) |
+| coop-e2e | 141/141 (merge; same world after week 3 + after rejoin) · pre-merge 141/141 |
+| coop-ledger / DEVSWAP / NOREV=guest | 43/43 (merge) · pre-merge 43 / 43 / 43, no STUCK |
+| coop-night0 · night-coop-park · ledger · night-final · night-multi | 16/16 · ALL OK 13/13 · ALL PASS · pass · pass (merge) |
+| role-parity | ALL PASS (merge; run alone, 783 s — 900 s lane timeout under 3 lanes once, then rerun alone) |
+| one-core-guard / undef-scan | PASS fails 0 / PASS (294) (merge) |
+| quickcheck | PASS (merge): --runs 3: open 2020 ms, old save ok, buổi 2730/1400 ms (noise) → --runs 7: render 300/310, tab 586/598, **buổi 1523/1794 ms**, tasks>200 26/26, core gates PASS |
+Own both-seat check (co-op gate): case 4 runs both ways — g = the guest is the AFK seat, h = the host is; in each the carried non-pid card's road lands on the merged world's consort and the PARTNER seat's room canon holds the same value after the next merge (`partner rl[her seat] = her thiện cảm`), the EVHOLD card is rebuilt on the AFK seat; coop-e2e same-world asserts on both seats.
+Scratch (this container only, not git): /home/user/wt/out (logs), dev/test/_cn_dbg.js / _cn_ctl.js (trace harness / negative control, git-excluded).
+
 ### HANDOVER (worker session_01N1tNP2ntVMAWS44p7tEVQd → successor, opened by Foreman B ROOT-11) — context past START_CTX + 25 %
-Head **review/night-ledger-coop-r4 @a7560a79f12b067c134afae016fb6951e65eef1c** (⊇ LIVE 40cc2b92). NOT SSK: open 1 (and 2) first. Scratch (this container only): /home/user/wt/nl4-out (npscan.js family scan, logs). Tips: run the co-op tests with the tool's run_in_background (plain nohup / & jobs died when this session's turn ended); `grep -q DONE` matched DONE4 — use unique end markers; page tests (ledger, night-final, night-multi, coop-night0, night-coop-park) need a URL: `python3 -m http.server 8765` in the worktree → http://127.0.0.1:8765/index.html.
+Head **review/night-ledger-coop-r4 @a7560a79f12b067c134afae016fb6951e65eef1c** (⊇ LIVE 40cc2b92). NOT SSK: open 1 (and 2) first. → taken over by fixer #4 (§6 above): SSK 030799c9. Scratch (this container only): /home/user/wt/nl4-out (npscan.js family scan, logs). Tips: run the co-op tests with the tool's run_in_background (plain nohup / & jobs died when this session's turn ended); `grep -q DONE` matched DONE4 — use unique end markers; page tests (ledger, night-final, night-multi, coop-night0, night-coop-park) need a URL: `python3 -m http.server 8765` in the worktree → http://127.0.0.1:8765/index.html.
