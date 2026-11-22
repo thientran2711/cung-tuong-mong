@@ -566,3 +566,29 @@ PRIORITY #1 CHECK: re-read this report's #4/#5 sections, FOREMAN_B_STATUS tail (
   - trip0/trip0b were running, not finished (killed at rollover is fine; re-run).
 - Still to do: full lane (queue 1: trip1 trip0 g4 e2e e2e0 e2e0n cyc timer f3s f5s f6 f6bs as9 as13 emo; queue 2: trip1b trip0b g4s night e2es e2e0s cycs f4s f6s f6b as9s as13s perf ow), role-parity alone, quickcheck (old save + perf), '## F1 FIX' verdict, SSK "SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG" to Foreman B, one line at the end of FOREMAN_B_STATUS.md.
 - Open FOR B: wk31 stall in trip1c (her Q[0] thin card tsgiftpick, #modal hidden, host gHold) — likely same family as #4's trip0b wk14 / trip1a wk27 stalls.
+
+### F1 FIX #6 — progress + HANDOVER (rollover: context past budget), 11/22/2026 11:50Z
+PRIORITY #1 CHECK: re-read #4/#5 + HANDOVER #5 above, FOREMAN_B ROOT-10 notes (LIVE b55a0e1c 11:03Z), r3 helper (coop-host-lag-r3 6146a387, now LANDED in LIVE), review/coop-thin-g-f1 @067ee9a9.
+Branch review/coop-thin-g-f1 @**b3fa6bc0** (pushed). Commits: dc12c917 merge LIVE 7303aa58 · 48d411b7/382911c2/87d1699d cherry-pick r3 helper (dev/test/lib/coop-clear.js SCR + kg82 close; no pasted copy) · **51878a40 G2 root fix (test)** · **9f51f6d6 merge LIVE b55a0e1c** (assemble.py keeps jcoopthinf6b + jcoopthing, then LIVE's jcoophl; test helper files = LIVE; site rebuilt) · b3fa6bc0 rkOfFace probe (diagnostic).
+
+**G2 ROOT (trip1 bac 93|53, trip1b bac 98|71 …, g4s bac 136|84) = TEST, not game.** The G2 solo twin took two branches the thin room does not: (1) jnf new night: solo endTurn re-flips and holds (S.buoi=B4()) during the 10 s choice, the thin room parks it (nfParked); (2) jcycle cyrep card: solo asks and the flip waits, at her week end on the host cyHostOwns() is true. So the twin ran NO week end (turn unchanged) and the table compared a month against nothing. Fix in coop-thin-g.js: twin sets cyHostOwns=()=>true and S.nfC/nfN/nfX=done for that one nextBuoi, plus a new check «G2 the solo twin ran its week end». Proof tool g2replay (saved snap, twin fix on): twin bac 84→136 = host.
+
+| test | before (067ee9a9 / 87d1699d) | after (51878a40 / b3fa6bc0) |
+|---|---|---|
+| trip1 TRIP swap 1 36 wk | 82–83/84, G2 red | **85/85 ×3** (one with DANHP) |
+| trip1b | 82–83/85, G2 red (wk21/22 G1 not recurring) | (in queue) |
+| g4 / g4s | G2 red | **21/21 / 21/21** |
+| bongloc-coop ×6 / bongloc-coop-catch ×3 | — | **15/15 ×6 / 21/21 ×3** |
+| e2e / e2e0 / e2e0s / e2e0n | — | 129/129 / 129/129 / 129/129 / 132/132 (@51878a40) |
+| e2es | 110/130 under load | **141/141 alone @9f51f6d6** |
+| coop-week-lag | — | WEEK-LAG PASS 5/5 |
+
+**Guest rkOfFace TypeError 'n' (MAIN 103 ORDER):** seen ONLY in one trip1 run under heavy parallel load (50× from wk 6 to ~15, guest, renderStage → pFaceOf base → pv(p.ref) → rkOfFace: RANKS[undefined]). NOT reproduced in 4 later 36-wk / 12-wk trip1 runs (2 with probe). Static read: signature = a consort ref with no rank, i.e. a raw {$r:id} ref that skipped unref (jcoopthin.js:132 comment, review coop-thin-e) — pApply only unrefs when path[0] is refKey (not "kids", not W_KEYS), and unref of an unknown id gives null (safe). Probe now in coop-thin-g (PVBAD line: isS, r, id, keys, visit entry, place, stack). Successor: grep PVBAD in every trip log; when it fires, the keys list tells raw-ref vs non-consort object.
+
+**OPEN reds (still red ALONE @9f51f6d6; ALSO red at 067ee9a9, so NOT from the LIVE merges; earlier F1 reports had them green):**
+- cyc / cycs THIN=13 49/66: case 3 «som» — after case 2 the store of her is at tuan 0 when STG stages (want 1), the next ask comes at tuan 1 wk 4 with cyHold null; «som» ALONE = 21/21 (CYC_ONLY=som). Order/week dependent → likely bot (staging reads S.tuan of her store before the week merged) — check COOP.state.week vs her tuan at STG.
+- night THIN=13 98/103: run 4 «guest night only when the clock ends» -1, AFK hold, [3,3,3] stall, 4b/5 «both at buổi tối» (pend true, Chờ hảo hữu…).
+- timer THIN=13 40/43: «B chip shows the clock + friend ready» "", step 4 info dialog / her day waits.
+**Lane still running (logs /home/user/wt/out6/r-*.log, sum /home/user/wt/out6/reg-sum.txt, lane /home/user/wt/lane6/lane.sh):** coop-thin-a…e, f1, f2 both swaps, hostnull (queue q4), then f3s f4s f5s f6 f6s f6b f6bs trip0 trip1c ow (q5). Not yet run: trip1b/trip0b on 9f51f6d6, quickcheck, one-core, undef-scan, law4, role-parity vs LIVE (2 pre-existing FAILs expected: petcare P-ONLY gap, riseCore Danh 3/5), rdiff scan.
+Local Worker: `cd coop/worker && npx wrangler dev --port 8787 --ip 127.0.0.1 --local` (THINMAX 13; restart after a container restart).
+NOT READY for SSK: cyc/night/timer reds open, rkOfFace root not proven.
