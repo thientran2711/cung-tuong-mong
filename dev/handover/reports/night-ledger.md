@@ -233,3 +233,40 @@ Scan (LAW 11, harness family): `grep -l "kmov" dev/test/*.js` with a clear(): 77
 Head: 14093edc31e5f44321e8da6249f1a6d670f6f258 (review/night-ledger-coop-r2). Scratch: /home/user/wt/nlr2-out (not in git, no shots taken: no UI change).
 
 SẴN SÀNG KIỂM 14093edc31e5f44321e8da6249f1a6d670f6f258
+
+## REVIEW coop r2 — review/night-ledger-coop-r2 @14093edc → final-merge LIVE 35f5b5ab (⊇ 9c057f42) on review/night-ledger-coop-r2-rv @135945ed — **FAIL (co-op AFK stall, NLC #9 case 4)**
+PRIORITY #1 CHECK: «REVIEW coop r1» FAIL 1–4 + «FIX r2» (this report) | main 35f5b5ab (jledger absent; LIVE lib/coop-clear.js = the one shared bot clear) | review/night-ledger-coop-r2 14093edc | claims B row "REVIEW night-ledger-coop r2" (this reviewer).
+Reviewer: opus, session_01N1tNP653B5Ehwx7XZFGXnm; coordinator Foreman B ROOT-10. START_CTX ≈ 4 % (own estimate); end well under START + 25 %.
+
+### 1. Merge (LIVE 35f5b5ab)
+40 conflicts: 37 harness clear() (LIVE moved the pasted taps into dev/test/lib/coop-clear.js) → took LIVE's `require('./lib/coop-clear.js').first(...)` and added the item reveal «Nhận» `.kmov .krevok` ONCE in its step 2 (respects window.__noclose); assemble.py = LIVE list (+ jplw.js) + jledger.js before jnf.js; index.html / sw.js rebuilt. Commit ce2079ab.
+
+### 2. The four checks of the order
+| check | result |
+|---|---|
+| (a) a REAL player who leaves the kit item reveal open | **bounded, not a stall.** NEW coop-ledger NOREV=host / NOREV=guest (that seat opens kitGain at tối and never taps «Nhận»): both seats reach the next week in 107 / 103 s (guest) and 109 / 98 s (host), 45/45 + 44/44, the reveal still open at the end. jnf scene() drops the queued flip at CAP = waitMs − ms (80 s), the host stops waiting at waitMs (90 s). The «stall» of r1 was the 60 s harness window. |
+| (b) previous FAIL items | 1 (coop-night case 5 + DEVSWAP stall): case 5 green 3/3, DEVSWAP 4/4 no STUCK — **but case 4 (AFK guest) FAILED 1/3, see FAIL 1** (r1 also logged «run 1 FAIL 4 (guest night / AFK clock)», never root-caused). 2 (2b count): fixed (all rivals) 6/6 runs. 3 (comments + mid-tuần park edge): done, 5d / 5e. 4 (re-merge LIVE): done by the worker on 234d0298 and by me on 35f5b5ab. |
+| (c) mutation of the 2 game fixes | M1 (ldIn settles at once while her week end is out, LDQ removed) → NEW night-coop-park **5f FAILS** (held false, n 0); the worker's own suites did not catch M1 deterministically (coop-ledger 1/8), so 5f is added. M2a (ldHas → false) → **5d FAILS**. M2b (guest ldIn drops a settled tuần while parked) → **5e FAILS**. Restored: ALL OK 13/13 (×2). |
+| (d) LAW 11 harness scan | the 39 patched harnesses: 37 now go through lib/coop-clear.js (one place), coop-e2e / coop-ledger keep their inline `.krevok`. Asserts: only coop-ledger «b friend in the draw» changed — per tuần «holds a day» → over the run «a candidate of empPick or holds a day while on the tray» (the Emperor's pick is a draw; still proves her card is in the draw) — accepted. 36 harnesses with their own clear() (bongloc-coop*, coop-thin-*, coop-places, coop-palace-life, reign, trung-y …) still miss the reveal → KIT REQUEST filed (give «Nhận» the §81 `data-km-close` marker; then no special case anywhere). |
+
+### 3. Gates (review/night-ledger-coop-r2-rv; LIVE 35f5b5ab worktree on the same box for coop-e2e)
+| gate | result |
+|---|---|
+| coop-ledger (host Fold / guest iPad) ×4 | 43/43 · 44/44 · 45/45 · 46/46, no STUCK |
+| coop-ledger DEVSWAP ×4 | 46/46 · 42/42 · 43/43 · 43/43, no STUCK |
+| coop-ledger NOREV=guest / NOREV=host+DEVSWAP | 45/45 / 44/44 (see (a)) |
+| **coop-night ×3** | **111/111 · 109/111 (FAIL 4 ×2, FAIL 1) · 110/111 (FAIL 4b)** |
+| coop-night0 | 16/16 |
+| coop-e2e ×6 | 141/141 ×5 · **140/141 once** («after week 2: the same world on both seats» S.emp.mood A=1 B=0, S.fidUsed.49) — LIVE 35f5b5ab ×3: 141/141 ×3 |
+| night-coop-park (+5f) | ALL OK 13/13 ×2 |
+| role-parity | **ALL PASS** |
+| one-core-guard / undef-scan | PASS fails 0 / PASS (293) |
+| quickcheck, ledger, night-final, night-multi | not run (verdict already FAIL on the co-op LAND GATE) |
+Shots LOOKED 3× (scratch /home/user/wt/nlr-out, not git, not uploaded): host Fold 755x1000@2 Sổ ghi «Kính sự phòng ghi: ngày 19, ta được lật thẻ thêm một đêm. Sủng +1.» + «Hảo hữu của ta định giành đêm của ta …» (two-way); guest iPad 1180x820@2 «Kính sự phòng ghi: ngày 8, ta được lật thẻ thêm một đêm. Ân tình +1.»; swap guest Fold / host iPad: Sổ ghi + kit stage, no overlap / cut text / private UI, cổ trang, no %.
+
+### 4. FAIL list (for worker 3C4XN63d, on review/night-ledger-coop-r2-rv 135945ed)
+1. **BLOCKING — AFK guest holding the PLAYED tối stalls the room (coop-night case 4, 1 of 3; also r1 run 1).** DUMP 4: the guest is `tonight "me"` (ledger played day = the first day of EITHER player → she holds the played tối far more often than on LIVE), x.st "done", nfFin 3 received, but her `ksp` summons («Kính sự phòng báo tin», jnf openChoice: shown after the choice) waits in Q / on screen for her tap and the flip scene `kcf-fin km-endon` sits on her screen; her week end is never sent (COOPW.sent 2) → the host waits; the night ran only when the test's merged() tapped it for her (> 114 s bound). A real pair: one AFK partner holding the played night freezes the other until she returns — the NLC #9 bound (every seat in by clock + waitMs) does not cover her own summons. Fix in game, both seats (host-held played tối as well), and prove: coop-night case 4 with the guest forced to hold the played tối (a deterministic variant: the host's ldRoll pins her day as p) green ×3, and coop-night ×3 111/111. Do not reword «a summons is never auto-made» without the owner rule: check OD first (PRIORITY #1); if the summons must stay a real choice, the bound must still end her night for the room (e.g. the summons' own timer / the room clock takes her neutral answer).
+2. coop-e2e «after week 2: the same world on both seats» 1 of 6 on the branch (S.emp.mood host 1 / guest 0 + S.fidUsed.49), LIVE 0 of 3: check whether the host's ledger nights (ldSettle → night(h) / gain on NPCs, jne night-end mood) move S.emp.mood outside the merged world; prove ×5 green or show the same rate on LIVE.
+3. coop-night 4b «the guest really missed the host's fin once» 1 of 3 (worker: 1 of 5): DUMP shows the guest `nfOn false` that day (no fin word exists to drop) → the assert must be n/a when her night relay is off (log why: nfDebug().why), not a FAIL; keep it a FAIL when nfOn is true.
+4. Re-run the full gate list on the fixed head: coop-ledger ×4 + DEVSWAP ×4 + NOREV both seats, coop-night ×3 111/111, coop-night0, night-coop-park ×4 (13 cases), coop-e2e ×3, quickcheck, one-core, undef, role-parity ALL PASS, ledger / night-final / night-multi.
+Scratch: /home/user/wt/nlr-out (logs, shots; not git).
