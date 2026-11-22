@@ -121,6 +121,7 @@ P = [
   "bookcases full of thread-bound books and boxed scrolls, square to the wall; three small low students' desks with brushes and paper in a "
   "straight row ALONG the RIGHT window wall, square to it, each with a flat silk floor cushion beside it against the wall (owner L2303: "
   "furniture along the walls, never in the middle of the floor), the open floor in front left clear; a blue-and-white vase of lotus "
+  "straight row in front of the dais, each with a flat silk floor cushion, set square to the back wall; a blue-and-white vase of lotus "
   "leaves, a brush pot, hanging paper lanterns with tassels. Warm wood, deep blue books and cream paper; orderly, calm and scholarly.", None),
  ('phong-cung-nu', 'Phòng cung nữ', 'bed', 2, 'RIGHT', 'plain, tidy room',
   "Phòng cung nữ, the plain shared sleeping room of the palace maids in an ancient Chinese palace, a real room in daily use, {W}: pillars, "
@@ -161,6 +162,14 @@ P = [
   "bow and a quiver of arrows on a wall rack, a small wooden practice sword on a stand, a wooden toy horse, a hanging calligraphy scroll, a "
   "bronze incense burner, a hanging paper lantern with dark blue tassels. Deep blue, ink grey, bronze and warm wood; boyish and noble, "
   "never girlish: no pink, no floral silks, no lace.", None),
+ ('a-ca-so', 'A ca sở', 'bed', 2, 'LEFT', 'cheerful, well-furnished room',
+  "A ca sở, the quarters of the young princes in an ancient Chinese palace where a boy prince lives, sleeps, studies and plays, a real "
+  "room in daily use, {W}: pillars, lattice windows in the LEFT side wall onto a sunny garden with light blue gauze curtains; against the "
+  "back wall in its RIGHT half, square to it and seen straight on, the large clear main subject: ONE canopy bed: a carved wooden canopy bed for the boy, its light blue gauze curtains tied back, with "
+  "light blue and green silk bedding and a bolster; in the LEFT half of the back wall a bookcase of books and scrolls and a folding screen "
+  "painted with wisteria; a low study desk with brushes and books and a floor cushion against the window wall, square to it; a small bow and "
+  "a quiver of arrows on a wall rack, a wooden toy horse on wheels, a kite, a hanging paper lantern with blue tassels. Light blue, green and "
+  "warm wood; lively and young, never girlish.", None),
  ('dong-cung', 'Đông cung', 'rec', 3, 'RIGHT', 'richly furnished hall',
   "Đông cung, the hall of the crown prince in an ancient Chinese palace where he studies and receives visitors, a real room in daily use, "
   "no bed anywhere, {W}: red pillars, lattice windows in both side walls onto a sunny garden with royal yellow like #EFBD69 silk curtains "
@@ -192,6 +201,13 @@ P = [
   "lake, the pavilion, the bridge, the flowers): paint that scenery again but with the camera of image 3, straight on, never the camera "
   "of image 4. Fresh greens, pink lotus, pink and red peonies, white marble, red and gold; bright, airy and lovely.",
   "GROUND: a wide, clean garden terrace of pale grey paving bricks along the near shore, evenly lit, no rug or carpet."),
+  "Ngự hoa viên, the imperial flower garden of an ancient Chinese palace, a real garden in daily use, {C}: across the back, square to the "
+  "picture and seen straight on, the large clear main subject: a calm lotus pond with pink lotus flowers and an open pavilion with red "
+  "pillars and a golden-yellow glazed tiled roof standing over the water, a white marble balustrade along the near edge of the pond and a "
+  "small arched bridge; along the LEFT side, a red garden wall with a covered walkway and a weeping willow; raised white marble flower beds "
+  "of pink, red and white peonies along the back and the sides, a tall grey scholar's rock, distant palace roofs beyond the trees. Fresh "
+  "greens, pink and red peonies, white marble and red; bright, airy and lovely; no bed anywhere.",
+  "GROUND: a wide, clean garden path of pale grey paving bricks, evenly lit, no rug or carpet."),
  # ---- B4 (Từ Ninh, Thái hậu: B22 #CE9C48)
  ('tu-ninh-cung-ngu', 'Từ Ninh cung (phòng ngủ)', 'bed', 3, 'LEFT', 'richly furnished room',
   "Từ Ninh cung bedroom, the private bedchamber of the Thái hậu (the emperor's mother, the highest lady of the palace) in an ancient Chinese "
@@ -232,6 +248,8 @@ for n, (key, vn, kind, nw, side, noun, room, ground) in enumerate(P, 1):
     assert '{' not in p and ('image 4' not in p or key == 'ngu-hoa-vien') and 'RANK COLOUR' not in p and 'stone' not in p.replace('ink stone', ''), key
     OUT[key] = dict(prompt=p, code=f'M2355-{n:02d}', name=vn, kind=kind, refs=[*G9, GUIDE[(nw, side)]] + (['ksdj6iw16B'] if key == 'ngu-hoa-vien' else []),   # ksdj6iw16B = old live img/ngu-hoa-vien-ha-sang.webp (uploaded 0 cr, L2363)
                     
+    assert '{' not in p and 'image 4' not in p and 'RANK COLOUR' not in p and 'stone' not in p.replace('ink stone', ''), key
+    OUT[key] = dict(prompt=p, code=f'M2355-{n:02d}', name=vn, kind=kind, refs=[*G9, GUIDE[(nw, side)]],
                     base=f"dev/handover/prompts_L2095/{'M2300-03_vinh-hoa-cung-phi-ngu' if kind == 'bed' else 'M2300-02_dien-huy-cung-phi'}_ha_sang.txt",
                     layout=f"{nw}w windows {side} {kind}")
 import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items()}, 'places-M2355')
