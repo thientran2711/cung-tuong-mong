@@ -713,7 +713,7 @@ ARC67.cn_ban=arcFx("cn_ban",{o:"cn",t:"Tri kỷ ở Tân Giả khố",w:"maid",s
   {n:"Bảo nàng giữ kín để giữ mạng",wx:"Tố Nga an toàn",lx:"bí mật vẫn chôn",rt:"Tố Nga gật đầu."}]},
  c2:{h:"Tố Nga ốm nặng",w:"doc",t:"Mùa rét, Tố Nga ho ra máu. Không có thầy thuốc, nàng không qua nổi tháng.",o:[
   {n:"Lén mời thái y",wx:"cứu được nàng",lx:"thái y báo lên",rt:"Tố Nga qua cơn nguy.",rf:"Tố Nga khỏi, nhưng chuyện ngươi mời thái y cho tội nô bị đồn."},
-  {n:"Tự bốc thuốc gửi xuống",if:()=>S.arts.y>=2,wx:"nàng khỏi bệnh",rt:"Thuốc của ngươi hiệu nghiệm."},
+  {n:"Tự bốc thuốc gửi xuống",if:()=>S.arts.y>=yCareT(),wx:"nàng khỏi bệnh",rt:"Thuốc của ngươi hiệu nghiệm."},
   {n:"Gửi bạc, phó mặc",wx:"tròn chút tình",lx:"nàng có thể không qua",rt:"Tố Nga gượng qua mùa rét."}]},
  c3:{h:"Có người hỏi về Tố Nga",w:"hh",need:["hh"],t:"Người của Càn Ninh cung hỏi ngươi: “{Nc} có quen Tố Nga ở Tân Giả khố?”",o:[
   {n:"Chối",wx:"che được",lx:"Hoàng hậu nghi",rt:"Họ tin.",rf:"Họ không tin."},

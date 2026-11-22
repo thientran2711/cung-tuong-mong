@@ -609,7 +609,9 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
  if(dlg.dataset.pres==="fig")return (L||!dlg.querySelector(".k3fill")?need<=lh+2:true)&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
-function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
+/* a live 3-part frame is still the one on screen: its body is in #mb and its options (if any) were not replaced by a rebuild */
+function kszLive3Ok(dlg){const X=dlg&&dlg.__ksz3;return !!(X&&X.body.isConnected&&X.mb.isConnected&&X.mb.contains(X.body)&&(!X.opts||X.mb.contains(X.opts)))}
+function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X||!kszLive3Ok(dlg))return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;const keepMk=dlg.querySelector(".k3ev .ksart>img.kemo.ksart-mark,.k3mpic .ksart>img.kemo.ksart-mark");if(keepMk)keepMk.remove();/* mark #68: the live corner seal keeps its own element through every re-lay (size pick, picture step), so its motion is never restarted */
@@ -657,12 +659,14 @@ function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of[
    is DOWN on an option card when the re-pick runs loses its click (the node is detached between touch-down and touch-up). The re-pick therefore never runs while a pointer is down inside the modal:
    it waits for the pointer to go up and for the click to be delivered (kszPtrUp3 → 120 ms), then runs once. One place for every live frame. */
 let kszRepT=0,kszPtrDown3=0,kszPtrT3=0,kszRepWait3=null;
-function kszRepRun3(dlg){try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}}
+function kszRepRun3(dlg){try{if(dlg.isConnected&&kszLive3Ok(dlg))kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}}
 function kszLiveRepick3(dlg){clearTimeout(kszRepT);if(kszPtrDown3){kszRepWait3=dlg;return}kszRepT=setTimeout(()=>{if(kszPtrDown3){kszRepWait3=dlg;return}kszRepRun3(dlg)},30)}
 (function(){const dn=e=>{const M=document.getElementById("modal");if(M&&!M.hidden&&e.target&&e.target.closest&&e.target.closest("#modal")){kszPtrDown3=1;clearTimeout(kszPtrT3);kszPtrT3=setTimeout(up,1500)/* safety: a lost pointerup never freezes the layout for good */}},up=()=>{if(!kszPtrDown3)return;kszPtrDown3=0;clearTimeout(kszPtrT3);if(kszRepWait3){const d=kszRepWait3;kszRepWait3=null;clearTimeout(kszRepT);kszRepT=setTimeout(()=>{if(kszPtrDown3){kszRepWait3=d;return}kszRepRun3(d)},120)}};
  document.addEventListener("pointerdown",dn,true);document.addEventListener("pointerup",up,true);document.addEventListener("pointercancel",up,true);document.addEventListener("touchend",up,true);document.addEventListener("touchcancel",up,true);document.addEventListener("dragend",up,true);window.addEventListener("blur",up)})();
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
- if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
+ /* the same .dlg can be filled again (kpBuild rebuilds #mb while the dialog stays open): the old __ksz3 then points at nodes that left the page; drop it, lay the new body out again */
+ if(dlg&&dlg.__ksz3&&!kszLive3Ok(dlg))delete dlg.__ksz3;
+if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
  if(M.classList.contains("kptitle")||mb.querySelector(".kpmenu,.kpt-mount"))return false;/* menu-panel (owner 21/11): the ☰ / title menu is the one kit menu frame, never an event frame */
  const kind=dlg.dataset.kind;if(!KIT_SIZE.v3.focus[kind])return false;const body=mb.querySelector(":scope > .kpb");if(!body||body.matches(".kpid"))return false;
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
@@ -670,7 +674,7 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
  let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:kszSubject3(m,main);/* a place card (jplace) has no person column (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
- dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
+ dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll","kdpall");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  /* #76 an item tag leading the text (.kiev: Đồ thất lạc, Tìm thấy đồ …) or m.item is the main subject: it leaves the text and fills the left slot of a small frame */
  let itemEl=null;try{const k0=main.querySelector(":scope > .kiev, :scope > .kiev-txt");if(k0&&k0.matches(".kiev")){itemEl=k0;k0.remove()}else if(m&&m.item)itemEl=m.item}catch(e){}
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);

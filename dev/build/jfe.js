@@ -5,14 +5,16 @@
    Fix (= review/night-final jnf.js part 1, copied unchanged in behaviour so night-final keeps the same code): on the palace route a flip()
    before buổi tối only marks the tablet as waiting (S.nfP = day); entering buổi tối (nextBuoi) runs it; a night the Emperor already spends
    with someone (j75 ntTaken: a won steal, his own visit) = no flip. Nothing else of the night rules changes (commit, steals, co-op relay).
-   Servant route (j42) and home route (jkc) keep their own week. When jnf.js (review/night-final) is live it owns this: this file is a no-op
-   (it runs after jnf.js and sees window.nfOn) and can be deleted on that merge.
+   Servant route (j42) and home route (jkc) keep their own week.
+   With jnf.js (night-final) this file runs ONLY while jnf's co-op gate is closed (window.nfParked(), a co-op room on): co-op keeps the live
+   start-of-tối flip until Foreman B's coop-thin E; solo = jnf owns the flip (this file is a no-op there). Delete with the nfParked gate (jnf.js).
    Save: S.nfP / S.nfF (same names as jnf) — absent in old saves = harmless; an old save flipped in the morning keeps its pick. */
 (function(){
-if(typeof flip!=="function"||typeof nextBuoi!=="function"||typeof window.nfOn==="function")return;
+if(typeof flip!=="function"||typeof nextBuoi!=="function")return;
+const PK=()=>typeof window.nfParked!=="function"||window.nfParked();   /* jnf present: only the parked co-op room */
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 const B4=()=>typeof B4L==="number"?B4L:2;
-function on(){try{return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
+function on(){try{return !!(S&&!S.dead&&PK()&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
 function flippedToday(){return S.nfF===day()||!!(S.nightWhy&&S.nightWhy.wk===day())}
 let REAL=0;const f0=flip;
 function realFlip(){S.nfP=null;S.nfF=day();
