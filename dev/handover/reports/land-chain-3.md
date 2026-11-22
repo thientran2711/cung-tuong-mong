@@ -14,6 +14,7 @@ LIVE = 02c6d8f4. Queue empty. HOLD: review/od03-favart-rv 50bea9c9 (after D bund
 - coop/worker/** changes deploy via GitHub Action coop-worker.yml (paths: coop/worker/**) — none of LC3's lands touched it.
 
 ## Landed by LC3 (21–22/11) — 10
+## Landed by LC3 (21–22/11) — 12
 ksz-lost-tap ee36e62f, palace-life-gaps d0f75fa4, home-chapters e804edfc, coop-cyhold 2fd4e0b4, kit-pframe-overlay 04afaeb7, mg-craft r4 (Thêu) ea112384, coop-home-tabs 34245fe2 (FF), ui-leftover-fold r3 0cb05ac2, coop-famops r2 87ac1ff4, bongloc-options r2 02c6d8f4 (+ coop-e2e 124/124 on each of the last 4).
 
 ## FAIL / owed back
