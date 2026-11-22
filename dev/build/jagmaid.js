@@ -135,13 +135,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
    return w.n==="me"?"Ngài cho gọi ngươi đến Dưỡng Hòa điện hầu.":`Ngài cho gọi ${w.n}, cung nữ cung ${w.of==="me"?"ngươi":w.of}, đến Dưỡng Hòa điện hầu.`}return wt0.apply(this,arguments)};
  const rt0=resolveTonight;resolveTonight=function(){const a=S&&S.amT,tn=S&&S.tonight;const r=rt0.apply(this,arguments);let x="";
   try{if(a){S.amT=null;const dw=wk()-a.w;if(!tn&&dw>=0&&dw<=1&&amOn()){const f=amFind(a.k);if(f&&f.m!==S&&f.o)x=amNight(f.m,f.o,"pick")}}}catch(e){console.error("jagmaid night",e)}return (r||"")+x};
- const rn0=rivalNight;rivalNight=function(v){const r=rn0.apply(this,arguments);let x="";try{x=amNightTea(v)}catch(e){}return (r||"")+x};
+ const rn0=rivalNight;rivalNight=function(v){const s0=AMN.send;const r=rn0.apply(this,arguments);let x="";try{if(AMN.send===s0)x=amNightTea(v)}catch(e){}return (r||"")+x};/* her maids' tea is for HER night: none when her maid served in her place */
  const rw0=rivalsTurn;rivalsTurn=function(){const r=rw0.apply(this,arguments);let x="";try{x=amWeek()}catch(e){}return (r||"")+x};
  /* rows 6, 7, 12: Tiến cử */
  const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;
-  /* law 1 (her own «Tiến cử hầu thay» gives up her night): an NPC who sends her maid from her own night (rivalNight → sendMaid) gives up
-     the night record too — the maid served, the book holds ONE night for the day */
-  else{const L=a.nightLog;if(Array.isArray(L)&&L.length&&L[L.length-1]===wk()){L.pop();a.nights=Math.max(0,(a.nights||1)-1)}}
+  /* law 1: an NPC sends her maid BEFORE her night (j75 rivalNight → htCan), so she has no night record to give up — the book holds ONE night */
   AMN.send++;amNightGain(m);
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};

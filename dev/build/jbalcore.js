@@ -62,8 +62,17 @@ function eaText(p){const ea=empArt();if(!ea)return"";if(!eaKnows(p))return"Thán
 function eaLearn(start){if(!S||S.dead||!empArt())return"";const E=BAL.steal.ea;const P=[S].concat(typeof liveRivals==="function"?liveRivals(true):[]);
  for(const p of P){if(!p||p.eaK===S.turn)continue;const m=p.mat||0;if(start&&m>=E.mat)eaTell(p,"tai mắt báo");else if(!start&&roll(E.r0+m*E.rMat))eaTell(p,"nghe lời đồn")}return""}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{empArtMonth();eaLearn(true)}catch(e){console.error("ea",e)}return ev}})();
+/* OD03: an old save (no month art yet) draws his month art on load, not only at the next played week (co-op guest: muted, the host's arrives) */
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&S.emp&&!empArt())empArtMonth()}catch(e){}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(!empArt())empArtMonth();eaLearn(false)}}catch(e){}return r}})();
-(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{if(empArt()&&!eaKnows(S)&&roll(BAL.steal.ea.disc)&&eaTell(S,"dò được"))return true}catch(e){}return d0.apply(this,arguments)}})();
+/* OD03: asking Kính sự phòng (her discover, an NPC's cx2:likes) names the month art at BAL.steal.ea.disc — one rule for everyone (two-way) */
+function eaOpen(p){return !!(p&&empArt()&&!eaKnows(p))}
+/* sure = nothing else is left to learn at the ask (her: every like + dislike known; an NPC: every like) → a won ask names it (the shown odds are the true chance) */
+function eaAsk(p,sure){return eaOpen(p)&&(sure||roll(BAL.steal.ea.disc))&&eaTell(p,"dò được")}
+/* the Emperor card rows (kit pcard group rows [label, value, tone]): his month art as she knows it */
+function eaRows(p){const ea=empArt();if(!ea)return[];const k=eaKnows(p),n=x=>(ARTS.find(a=>a.k===x)||{}).n||x;
+ return [["Tháng này chuộng",k?n(ea.f):"chưa rõ",k?"t":"n"],["Tháng này không ưa",k?n(ea.d):"chưa rõ",k?"t":"n"]]}
+(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{const left=Object.keys(LIKES).some(k=>!S.emp.known[k])||(typeof disUnk==="function"&&disUnk("emp"));if(eaAsk(S,!left))return true}catch(e){}return d0.apply(this,arguments)}})();
 /* ---- night choices ---- */
 /* her best art (most points; a tie prefers his favoured art, never his disfavoured one first) */
 function stBestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=artPts(p,a.k);const pr=ea?(a.k===ea.f?1:a.k===ea.d?-1:0):0;
