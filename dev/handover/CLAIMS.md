@@ -1084,3 +1084,4 @@ REVIEW places-wire-nvp-tn (SMALL sonnet) | review/places-wire-nvp-tn-rv | sessio
 REVIEW role-parity-bundle-fix (BIG opus) | review/role-parity-bundle-fix-rv | session_01964izFRgtaMS3fADE2hXYA | RUNNING | 22/11 09:14Z (Foreman D #18)
 | night-ledger-coop r2 fixer (opus BIG co-op; successor of 6wkABAL1 at budget; FAIL 96c62324 case-5 stall) | review/night-ledger-coop-r2; reports/night-ledger.md | B | session_01N1tNP3C4XN63dXNqw9oz1w | RUNNING | 22/11 09:59Z |
 | coop-one-world G4 load flake (opus; FROM MAIN 105 10:09Z; report-only unless real bug) | review/coop-one-world-flake f4cb9ceb; reports/coop-one-world-flake.md | B | session_01N1tNP5NvgmvUdQD8GT9aXH | SẴN SÀNG KIỂM f4cb9ceb (test-only fix: evm empty-map compare + __agAll; no game bug) | 22/11 11:58Z |
+| REVIEW coop-one-world-flake (sonnet SMALL test-only) of f4cb9ceb | review/coop-one-world-flake(-r1); reports/coop-one-world-flake.md | B | session_01N1tNP5b1TY1PAcxvEQxGMs | RUNNING | 22/11 11:53Z |
