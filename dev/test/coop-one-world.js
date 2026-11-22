@@ -25,18 +25,21 @@ const out=await p.evaluate(([WEEKS,RUNS,SEED])=>{
  const solo=worldOn();Math.random=rnd;/* one seeded run (env SEED): a failure can be replayed */
  window.__nlInner=1;document.getElementById('title').hidden=true;for(let i=0;i<20&&!(typeof S!=='undefined'&&S&&S.name);i++)start();Q.length=0;
  const drain=()=>{for(let i=0;i<80&&Q.length;i++)Q.shift();S.mg=null};
- for(let w=0;w<WEEKS;w++){drain();S.buoi=B4L;try{endTurn()}catch(e){}drain()}
+ /* the night-final step (jnf) holds tối's week end until tonight's flip choice is settled; this probe has no host / no player to answer it:
+    mark tonight settled before each week end (a no-op without jnf's nfOn) */
+ const nfDone=()=>{if(typeof nfOn==='function'&&typeof wk==='function'){const d=wk();S.nfC=d;S.nfN=d;S.nfX={d,st:'done'};S.nfFin=d}};
+ for(let w=0;w<WEEKS;w++){drain();S.buoi=B4L;nfDone();try{endTurn()}catch(e){}drain()}
  const fake=seat=>{COOPW.on=true;COOPW.seat=seat;COOPW.base={P:{},W:{S:{}}};COOPW.sent=-1;COOPW.pend=false;COOPW.p2=false;COOPW.net=null;
   COOP.state.status='open';COOP.state.peerOnline=true;COOP.state.week=0;COOP.state.ended={};COOP.state.you=seat};
  const res=[];
- for(let r=0;r<RUNS;r++){drain();S.buoi=B4L;try{endTurn()}catch(e){}drain();
+ for(let r=0;r<RUNS;r++){drain();S.buoi=B4L;nfDone();try{endTurn()}catch(e){}drain();
   if(r%2)S.tuan=2;if(r===RUNS-1){S.month=12;S.tuan=2}
   const base=JSON.stringify(ser());
   const runSeat=(seat,sd)=>{quiet=true;try{deser(JSON.parse(base))}finally{quiet=false}Q.length=0;S.mg=null;fake(seat);
    /* the room base holds the world as the host wrote it (HOST_ONLY keys: thIll/cm/men/menG2) */
    if(seat==='b'){const h=JSON.parse(JSON.stringify(res.length?res[res.length-1].hostBaseW:null));COOPW.base.W={S:h||{}}}
    const c0=COOPW.toCanon();seed=sd;Math.random=rnd;let err=null;
-   try{S.buoi=B4L;endTurn()}catch(e){err=String(e&&e.stack||e)}seed=sd+1;drain();
+   try{S.buoi=B4L;nfDone();endTurn()}catch(e){err=String(e&&e.stack||e)}seed=sd+1;drain();
    const c1=COOPW.toCanon();
    /* her own act after the week end (a dawn dialog): an NPC loses 5 Sủng */
    let act=null;if(seat==='b'){const v=rivals.find(x=>!x.coop&&x.alive&&!x.out&&(x.sung||0)>=10);if(v){v.sung-=5;act=v.id}}
