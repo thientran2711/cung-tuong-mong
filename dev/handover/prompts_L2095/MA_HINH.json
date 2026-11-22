@@ -237,5 +237,10 @@
  "M2231-08": "M2231-08_s62_t8_thu.txt (= M2227-08 + HH KHÓA: chỉ cổ thấp L2228 + tua dài bằng các bậc + dải dọc)",
  "M2294-01": "M2294-01_th_gian_A_still_TONEDOWN.txt (ấn Thái hậu, SEALPF1)",
  "M2294-02": "M2294-02_th_hanghai_A_still_TONEDOWN.txt (ấn Thái hậu, SEALPF1)",
- "M2294-03": "M2294-03_th_chuyentam_A_still_TONEDOWN.txt (ấn Thái hậu, SEALPF1)"
+ "M2294-03": "M2294-03_th_chuyentam_A_still_TONEDOWN.txt (ấn Thái hậu, SEALPF1)",
+ "M2294-11": "M2294-11_thua-minh-cung-tan-ngu_ha_sang.txt (phòng ngủ Tần Thừa Minh, công thức phòng cũ + thẻ cung Thừa Minh MỚI)",
+ "M2294-12": "M2294-12_thua-minh-cung-tan_ha_sang.txt (phòng khách Tần Thừa Minh, công thức phòng cũ + thẻ cung Thừa Minh MỚI)",
+ "M2294-13": "M2294-13_khai-tuong-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Khải Tường, màu bậc tím #A88BCB)",
+ "M2294-14": "M2294-14_khai-tuong-cung-phi_ha_sang.txt (phòng khách Phi Khải Tường, màu bậc tím #A88BCB)",
+ "M2294-15": "M2294-15_chung-tu-cung-phi-ngu_ha_sang.txt (phòng ngủ Phi Chung Tú, màu bậc tím #A88BCB)"
 }
