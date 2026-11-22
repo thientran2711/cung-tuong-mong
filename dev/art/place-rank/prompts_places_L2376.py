@@ -6,6 +6,11 @@ D = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, D)
 ROOT = os.path.abspath(os.path.join(D, '..', '..', '..'))
 OUTD = os.path.join(ROOT, 'dev', 'handover', 'prompts_L2095')
 OUT = json.load(open(os.path.join(D, 'prompts_places_L2370.json')))
+# used codes are frozen: a key keeps its code forever; a new key gets the next free number (bug fixed 22/11 L2384: renumbering)
+CODE = {k: v['code'] for k, v in OUT.items()}
+def code_for(k):
+    if k in CODE: return CODE[k]
+    n = max(int(c.split('-')[1]) for c in CODE.values() if c.startswith('M2370-')) + 1; CODE[k] = f'M2370-{n:02d}'; return CODE[k]
 for k in [k for k, v in OUT.items() if v.get('job') == 2376]: del OUT[k]   # rebuild own codes only
 WALLS_IN = ("WALLS AND WHITES (owner L2370, the clean white light of A ca sở): the plaster walls, wall panels and lattice window paper are a "
             "clean soft white like #F3F2EE, never cream, beige, yellow, peach or pink; white gauze and white porcelain read pure white; the wood "
@@ -143,7 +148,7 @@ for key in ORDER3:
     if key == 'phong-cung-nu': p = p.replace('lived-in, pretty, well-kept room', 'lived-in, neat, well-kept room')
     if key.startswith('tu-ninh'): assert p.count(WALLS_IN) == 1; p = p.replace(WALLS_IN, WALLS_TN)
     nk = (key[:-3] + '-r3') if key.endswith('-r2') else key + '-r2'
-    OUT[nk] = dict(v, prompt=p, code=f'M2370-{n:02d}', job=2376, base=f"dev/handover/prompts_L2095/{v['code']}_{key}_ha_sang.txt")
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2376, base=f"dev/handover/prompts_L2095/{v['code']}_{key}_ha_sang.txt")
 # ===== PLACES3 L2381 (owner via ROOT-C4, approved plan; one try each). job=2381, codes continue after M2370-27.
 for k in [k for k, v in OUT.items() if v.get('job') == 2381]: del OUT[k]
 # (2) Phòng cung nữ = the Cung nhân prompt COPIED as-is (owner: "copy cái prompt của cung nhân qua làm cái prompt của cung nữ").
@@ -175,12 +180,53 @@ for src, nk, reps in (('cung-nhan-r2', 'phong-cung-nu-r3', []), ('a-ca-so-r2', '
     v = OUT[src]; p = v['prompt']
     for a, b in reps: assert p.count(a) == 1, (nk, a[:50]); p = p.replace(a, b)
     base = OUT['phong-cung-nu'] if nk.startswith('phong-cung-nu') else v
-    OUT[nk] = dict(base, prompt=p, code=f'M2370-{len(OUT) + 1:02d}', job=2381, refs=v['refs'], layout=v['layout'],
+    OUT[nk] = dict(base, prompt=p, code=code_for(nk), job=2381, refs=v['refs'], layout=v['layout'],
                    base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt", name=base['name'])
-import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381)}, 'places-M2370-L2376')
+# ===== PLACES3 L2384 (owner via ROOT-C4/C5 + HIST1 prince rule e80219f). job=2384, codes after M2370-30.
+for k in [k for k, v in OUT.items() if v.get('job') == 2384]: del OUT[k]
+PRINCE = (" PRINCE ROOM RULE (owner L2384 + history expert HIST1): the quarters of a prince (a-ge), NOT imperial: absolutely no dragons of "
+          "any kind, no python-dragons, no phoenix anywhere, in carving, weaving or embroidery; carvings and embroidery use only qilin, bats "
+          "among auspicious clouds, key-fret borders, scrolling grass, lotus, peony, plum, orchid, bamboo, chrysanthemum, gourds, "
+          "pomegranates, pine and crane, books and antiques; no yellow silk, yellow curtains or yellow bedding; gold only as thin restrained "
+          "trim and small brass fittings, never gilded panels, gilt carving or gold walls.")
+ACS4 = [("woven with silver-grey cloud-and-dragon roundels, a wide navy border embroidered in gold and silver thread with key-fret and waves, "
+         "a gold-fringed edge, over an inner layer of fine pale-blue silk, all under a carved gilt pelmet with a short embroidered valance, "
+         "gathered and tied back with thick braided gold-and-navy cords ending in large tassels and jade toggles",
+         "woven with silver-grey roundels of bats among auspicious clouds, a wide navy border embroidered in silver and pale-blue thread with "
+         "key-fret and waves and a thin gold line, a navy silk-fringed edge, over an inner layer of fine pale-blue silk, all under a carved "
+         "dark zitan pelmet with a short embroidered valance, gathered and tied back with thick braided navy silk cords ending in large "
+         "tassels and jade toggles"),
+        ("richly carved in deep relief with clouds, waves and coiling young dragons, picked out in gold and silver",
+         "richly carved in deep relief with qilin, bats among auspicious clouds, waves and pine, in the natural dark wood with only a thin "
+         "gold line on the edges"),
+        ("woven with silver-grey cloud-and-dragon roundels, with a wide navy border embroidered in gold and silver thread and a gold-fringed "
+         "edge, over fine pale-blue silk, gathered and tied back with thick braided gold-and-navy cords",
+         "woven with silver-grey roundels of bats among auspicious clouds, with a wide navy border embroidered in silver and pale-blue thread "
+         "with a thin gold line and a navy silk-fringed edge, over fine pale-blue silk, gathered and tied back with thick braided navy silk "
+         "cords"),
+        ("a firm round brocade bolster with gold-thread ends", "a firm round brocade bolster with silver-thread ends"),
+        ("as rich and luxurious as an imperial consort's room", "as rich and luxurious as an imperial consort's room, but a prince's: no dragons, no yellow, no gilding")]
+TTP5 = [("a beam above with finely carved, lightly gilded cloud scrolls", "a beam above with finely carved bats among clouds in the natural wood"),
+        ("hung with refined, finely embroidered curtains: deep-blue silk brocade like #2F4E7A embroidered with gold and cream peonies, clouds "
+         "and cranes in the same rich embroidery as the brocade chair cushions and silk lanterns, a wide embroidered border, a gold-fringed "
+         "edge and a carved gilt pelmet with an embroidered valance, gathered and tied back with braided gold cords and silk tassels",
+         "hung with refined embroidered curtains, moderate and quiet: deep-blue silk like #2F4E7A embroidered with a few sprays of plum, "
+         "orchid and bamboo in cream and soft green thread, matching the embroidered chair cushions, a narrow key-fret border, tied back "
+         "with plain blue silk cords and small tassels"),
+        ("hanging palace lanterns of silk with tassels", "two plain hanging silk lanterns"),
+        ("cream paper and touches of gold", "cream paper and small brass fittings"),
+        ("never plain, never bare, never poor, no white curtains.",
+         "never plain, never bare, never poor, no white curtains; but moderate and uncluttered, never over-decorated: plain polished "
+         "rosewood furniture with light carving and no gilding, few ornaments, books and calligraphy first.")]
+for src, nk, reps in (('a-ca-so-r3', 'a-ca-so-r4', ACS4), ('thuong-thu-phong-r4', 'thuong-thu-phong-r5', TTP5)):
+    v = OUT[src]; p = v['prompt']
+    for a, b in reps: assert p.count(a) == 1, (nk, a[:60]); p = p.replace(a, b)
+    a = ' No Western sofa, no upholstered couch. '; assert p.count(a) == 1; p = p.replace(a, PRINCE + a)
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2384, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
+import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384)}, 'places-M2370-L2376')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
 for k, v in OUT.items():
-    if v['job'] not in (2376, 2381): continue
+    if v['job'] not in (2376, 2381, 2384): continue
     open(os.path.join(OUTD, f"{v['code']}_{k}_ha_sang.txt"), 'w').write(v['prompt'] + CAP.format(v['code']))
-print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381)}, 'ROOM GATE PASS')
+print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384)}, 'ROOM GATE PASS')
