@@ -1,7 +1,7 @@
 # PLACES1 — redraw ALL game places + Từ Ninh (owner L2355) — worker of Foreman C ROOT-C2 (session_01D3E3NbRKVda1eN4trg7rnx)
 depth 2 · START_CTX ~4 % (get_session context_usage read 0; estimate) · finished at ~22 % (under the 29 % roll line) → no handover needed.
 
-## Done (22/11): 17/17 pictures, ONE try each, 17 × 135 = 2 295 cr, 0 redraws (no heavy fault seen). Balance ~2.86 M before.
+## Done (22/11): 17/17 pictures, ONE try each, 17 × 135 = 2 295 cr + 1 redo (M2355-08, foreman-ordered L2303/L2324) = 2 430 cr. Balance ~2.86 M before.
 Builder `dev/art/place-rank/prompts_places_L2355.py` → `prompts_places_L2355.json` + `dev/handover/prompts_L2095/M2355-NN_<key>_ha_sang.txt` (+ `.keep`).
 Recipe (A17 diff): M2300 room prompt head + tail copied VERBATIM from prompts_roompf1_M2300.json (M2300-03 / M2300-02); ONLY the middle
 (ROOM sentence + palace card + RANK COLOUR + TONE + rank lux + no-phoenix/yellow line) replaced by a per-place ROOM part keeping the live old
@@ -22,7 +22,7 @@ People sheets (Fold 755 portrait | iPad): `people_pr13/make_sheet_places.py` (Fo
 | M2355-05 | Nội vụ phủ | nvp | P3F6YZY42C | 14.7 | 0966f400f0e9 | small phoenix beam carving |
 | M2355-06 | Kính sự phòng | kinh-su-phong | O6u9n3Oynm | 10.0 | 95d6c3155658 | |
 | M2355-07 | Tẩm cung | tam-cung-dem | LwIS6O2swO | 12.6 | 29479c96f996 | |
-| M2355-08 | Thượng thư phòng | thuong-thu-phong | 9Zq30G1NYZ | 10.8 | 40b5f9bc6870 | student desks in the people band (mild) |
+| M2355-08 | Thượng thư phòng | thuong-thu-phong | MBOduBoDCm (redo; v1 9Zq30G1NYZ 40b5f9bc6870) | 20.3 | 3413e01e4f9d | REDO (ROOT-C2: desks mid-floor = L2303 heavy): desks now in a row along the right window wall; floor 20.3 % above band (note) |
 | M2355-09 | Phòng cung nữ | phong-cung-nu | IfRv5QQtvE | 19.0 | 50a8135d1251 | |
 | M2355-10 | Cung nhân | cung-nhan | WDSVtXJcXe | 19.9 | 2a7c3c6f73ae | |
 | M2355-11 | Tân giả khố | tan-gia-kho | tCZaKdgmZJ | 11.7 | 1438a42af96a | outdoor |

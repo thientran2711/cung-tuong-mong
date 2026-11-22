@@ -119,7 +119,8 @@ P = [
   "half, square to it and seen straight on, the large clear main subject: the tutor's carved desk on a low wooden dais with brushes, an ink "
   "stone and stacked books, a carved armchair behind it and a plain hanging scroll on the wall above; in the LEFT half of the back wall tall "
   "bookcases full of thread-bound books and boxed scrolls, square to the wall; three small low students' desks with brushes and paper in a "
-  "straight row in front of the dais, each with a flat silk floor cushion, set square to the back wall; a blue-and-white vase of lotus "
+  "straight row ALONG the RIGHT window wall, square to it, each with a flat silk floor cushion beside it against the wall (owner L2303: "
+  "furniture along the walls, never in the middle of the floor), the open floor in front left clear; a blue-and-white vase of lotus "
   "leaves, a brush pot, hanging paper lanterns with tassels. Warm wood, deep blue books and cream paper; orderly, calm and scholarly.", None),
  ('phong-cung-nu', 'Phòng cung nữ', 'bed', 2, 'RIGHT', 'plain, tidy room',
   "Phòng cung nữ, the plain shared sleeping room of the palace maids in an ancient Chinese palace, a real room in daily use, {W}: pillars, "
