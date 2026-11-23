@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)","b":"e11ddee56427","h":[{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"},{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"},{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."}]};
+window.CTM_BI={"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)","b":"875db02b0ba1","h":[{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"},{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"},{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48870,10 +48870,14 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
 const kidId=k=>String(k.name||"")+"#"+(k.bt==null?"":k.bt);
 function famSnap(t){return {kids:(t.kids||[]).map(k=>[k,Object.assign({},k)]),preg:t.preg||0}}
 const RMHOW={laydo:"lost",laydol:"lost",phonghoa:"burn",batnat:"taken",uyhiep:"taken",tieuhuy:"taken"};
-function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
- for(const e of inv0)if(!L1.includes(e)&&e.ci!=null)ops.push(Object.assign({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"},e.iu?{iu:e.iu}:{}));/* E44: the piece by its ledger id */
+/* E44e: a piece that left her entry's list while a NEW object of the same ledger id came in = the same piece re-made (entry rebuilt), not moved;
+   paired one to one (two objects of one id and one taken = still one «rm»: coop-lost-scan SWAP dup 10000063 with an id-set match) */
+function famSame(L0,L1){const out=new Set(),nw=new Map();for(const e of L1)if(e&&e.iu&&!L0.includes(e)){const a=nw.get(e.iu)||[];a.push(e);nw.set(e.iu,a)}
+ for(const e of L0)if(e&&e.iu&&!L1.includes(e)){const a=nw.get(e.iu);if(a&&a.length){out.add(e);out.add(a.shift())}}return out}
+function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];const SM=famSame(inv0,L1);/* E44e: same rule as b4Ops (a piece = its ledger id) */
+ for(const e of inv0)if(!L1.includes(e)&&e.ci!=null&&!SM.has(e))ops.push(Object.assign({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"},e.iu?{iu:e.iu}:{}));/* E44: the piece by its ledger id */
  for(const e of plants){const x=J(e);if(x.by==="me")x.by=me();ops.push({op:"plant",e:x})}
- for(const [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
+ for(let [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd))kd=(t.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:k==="pond"?"chết đuối ở hồ sen":k==="kpoison"?"trúng độc mà chết":"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
@@ -49615,9 +49619,17 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
- for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null){const ci=e.ci,th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;ops.push(Object.assign({op:"rm",ci,k:e.k,how:th?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
- for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
- for(const [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
+ /* E44e (law 6c, one piece = its ledger id): her entry rebuilt meanwhile (a festival's result diffs the snapshot taken at its start) holds NEW objects
+    of the SAME pieces: matched by iu they did not move. Before: every piece «rm gone» + «add» (≈35 «Được ban …» lines, a piece mid-case lost: vanish 10000013) */
+ const SM=famSame(b.inv0,L1);
+ for(const e of b.inv0)if(!L1.includes(e)&&e&&e.ci!=null&&!SM.has(e)){const ci=e.ci;let th=rivals.find(r=>r!==v&&!isF(r)&&(r.inv||[]).includes(e));if(th)delete e.ci;
+  /* E44e (V «hảo hữu lấy» vanish, law 6c + 1): an NPC thief's laydo on her entry puts the piece in a «thất lạc» case of her entry (jlost loLose:
+     the case holds it, or the thief keeps a COPY via loKeepBy), never this object in a chest → before: «gone» = she lost it with no case, no road back.
+     Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
+  let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
+  ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
+ for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
+ for(let [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd))kd=(v.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
@@ -76309,6 +76321,8 @@ function ilSent(e,f){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid
 function ilCoopRes(m){try{if(!ilCoop()||!m||m.from===COOPW.seat||!S||S.dead||!Array.isArray(m.fam))return;const I=ilS();if(!I.at)return;
  const now=new Set();for(const e of ilSlots(S))if(e.iu)now.add(e.iu);const RM={lost:"hảo hữu lấy (thất lạc)",burn:"hảo hữu đốt",taken:"nộp cho hảo hữu",gone:"hảo hữu lấy"};
  for(const o of m.fam){if(!o||o.op!=="rm"||!o.k)continue;
+  /* E44e: the op names its piece (famDiff / b4Ops carry e.iu): label THAT id; only an op without iu falls back to the first missing id of the kind */
+  if(o.iu&&I.at[o.iu]&&I.at[o.iu][1]==="me"&&!now.has(+o.iu)&&!ilWhere({k:I.at[o.iu][0],iu:+o.iu})){ilLog({k:I.at[o.iu][0],iu:+o.iu},"me","coop:"+(m.from||""),RM[o.how]||RM.gone);delete I.at[o.iu];continue}
   for(const id in I.at){const [k,h]=I.at[id];if(h!=="me"||k!==o.k||now.has(+id)||ilWhere({k,iu:+id}))continue;
    const e0={k,iu:+id};ilLog(e0,"me","coop:"+(m.from||""),RM[o.how]||RM.gone);delete I.at[id];break}}}catch(e){console.error("ilCoopRes",e)}}
 setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function")COOP.on("res",m=>Promise.resolve().then(()=>ilCoopRes(m)))}catch(e){}},0);
@@ -94701,7 +94715,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e11ddee56427";window.CTM_BUILD=BUILD;
+const BUILD="875db02b0ba1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
