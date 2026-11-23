@@ -1147,4 +1147,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | REVIEW-MG10A: SMALL review review/mg10a @87ad5da4 (briefs/C7-review-mg10a.md) | reports/REVIEW-MG10A.md | FOREMAN C ROOT-C7 | (opening) | RUNNING | 23/11 07:35Z |
 | REVIEW kit-ap01-frame (sonnet SMALL kit) of 57061678 | reports/KIT-AP01.md «## REVIEW» | MAIN 109 | session_01Rc5AsKwSnGFsj7p8CQxCc7 | RUNNING | 23/11 07:51Z |
 | KP23 outings wiring: code reader so the 4 outing pictures (img/outing-{ngu-uyen-ngoai,chua-ho-quoc}-{port,land}.webp, C GAPART2) show where outings play (sonnet; MAIN 109 ORDER 07:29Z) | review/outing-art; reports/outing-art.md | B | session_01N1tNP5iasNKdRpY67DYyCp | RUNNING | 23/11 08:25Z |
-| REVIEW coop-thin-g WHOLE (opus BIG co-op reviewer-lander) of review/coop-thin-g-f1 dea00576 | reports/coop-thin-g.md «## REVIEW» | B | (opening) | RUNNING | 23/11 08:32Z |
+| REVIEW coop-thin-g WHOLE (opus BIG co-op reviewer-lander) of review/coop-thin-g-f1 dea00576 | reports/coop-thin-g.md «## REVIEW» | B | session_01N1tNP5MAkuoXRAJ7HMLDnA | RUNNING | 23/11 08:32Z |
