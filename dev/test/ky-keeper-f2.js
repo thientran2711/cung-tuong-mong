@@ -51,6 +51,21 @@ const HTML=process.argv[2]||'dev/index.html';
   /* J món quý Nội vụ phủ sold meanwhile: no second piece from nothing, no pay */
   {const r={k:kk,sold:1,w:wk()};const nB=(F.inv||[]).length;F.bac=1e4;const b0=F.bac;const s=KY.SPEC.item({F,X:{rr:r},oi:0,E:{o:[{s:"item"},{s:"item"}]},b:0},{});
    ck("J stale món quý (sold): no new piece, no pay",!s&&(F.inv||[]).length===nB&&F.bac===b0,{s,bac:[b0,F.bac]})}
+  /* K (review -r) another seat's case under the same id + kind (seats number cases on their own): a different owner / piece is never that case */
+  {const c=mkCase(),iu=c.e.iu;const L=JSON.parse(JSON.stringify(c));L.own=key(G);L.e.iu=iu+777;const r=KY.SPEC.item(card(L,1),{});
+   ck("K same id+kind, other owner/piece: nothing moves, live case still lost",!r&&c.st==="lost"&&holds(F,iu)===0&&cnt(iu)===1,{r,st:c.st,n:cnt(iu)})}
+  /* L (review -r) her own card, di vật bought meanwhile: the option charged her through fx; the special gives the price back (no cost for nothing) */
+  {const e={k:kk,from:"emp"};ilUid(e);const x={e,at:"nvp",why:"dead",own:"",w:wk()};ilS().box.push(x);const cS={F:S,X:{box:x},oi:0,E:{o:[{s:"item"},{s:"item"}]},b:0};
+   const pr=KY.buyPr?KY.buyPr(cS):null;ilTake(x,G,"mua");S.bac=1e4;const b0=S.bac;const fxp=pr!=null?pr:0;S.bac-=fxp;const r=KY.SPEC.item(cS,{});
+   ck("L her stale di vật: price back, nothing moves",!r&&S.bac===b0&&holds(S,e.iu)===0&&holds(G,e.iu)===1&&cnt(e.iu)===1,{r,pr,bac:[b0,S.bac]})}
+  /* M (review -r) rebuilt world: the box entry is a twin of the live one (same piece id) → the live entry moves, one piece */
+  {const e={k:kk,from:"emp"};ilUid(e);const x={e,at:"nvp",why:"dead",own:"",w:wk()};ilS().box.push(x);const tw=JSON.parse(JSON.stringify(x));F.bac=1e4;
+   const r=KY.SPEC.item({F,X:{box:tw},oi:0,E:{o:[{s:"item"},{s:"item"}]},b:0},{});
+   ck("M rebuilt box twin: live entry moves to the buyer, one piece",!!r&&holds(F,e.iu)===1&&!ilS().box.includes(x)&&cnt(e.iu)===1,{r,n:cnt(e.iu)})}
+  /* N (review -r) rebuilt world: the rare offer is a twin; the live S.adRare was sold meanwhile → no piece from nothing */
+  {const live={k:kk,w:wk(),sold:1};const keep=S.adRare;S.adRare=live;const tw={k:kk,w:wk()};const nB=(F.inv||[]).length;F.bac=1e4;const b0=F.bac;
+   const s=KY.SPEC.item({F,X:{rr:tw},oi:0,E:{o:[{s:"item"},{s:"item"}]},b:0},{});S.adRare=keep;
+   ck("N stale rare twin, live sold: no new piece, no pay",!s&&(F.inv||[]).length===nB&&F.bac===b0,{s,bac:[b0,F.bac]})}
   return out});
  let fail=0;for(const [n,ok,i] of R){console.log((ok?'ok  ':'FAIL')+' '+n+(i?' · '+i:''));if(!ok)fail++}
  if(errs.length){fail++;console.log('FAIL page errors '+JSON.stringify(errs.slice(0,4)))}else console.log('ok   no page errors');
