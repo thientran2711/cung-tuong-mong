@@ -2635,3 +2635,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - ROBOT-10 additions (orders in FOREMAN_D_STATUS FROM MAIN 111 ~20:45Z–21:00Z): rates of every death cause / rank (HH, Nữ đế, HTH, each step) / every ending; real-life minutes per kiếp + per ending (human-pace model); one row per kiếp + averages table + «cách tính»; MAIN-widened 11-metric set; .md + .csv → MAIN turns into PDF for sếp after round 1. MAIN share: tt, dtq, td, ch when D's harness lands (not landed yet; proof run restarted 21:17Z ~50 min).
 - D child session_01964izGQbgvTAnQ9pJktncj is NOT reachable by send_message (other account) → orders only via FOREMAN_D_STATUS. D told: poisonedFish law-3 fix is theirs to decide.
 - Wake: trig_01VdTT7ZCy9HEuzCdrSk8Ygd (minute 32) → child creates its own and disables this one.
+- (21:34Z) Opened MAIN CHÍNH 112 = session_01Rc5AsNGsPSDAJiSHyVCNx1. MAIN 111 stops after 112 confirms (112 disables trig_01VdTT7ZCy9HEuzCdrSk8Ygd).
