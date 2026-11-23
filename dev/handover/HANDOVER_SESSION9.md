@@ -2503,3 +2503,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - MAIN CHÍNH 109 = session_01Rc5AsMAkWe3fwq2w85eAKc; START_CTX ~6 % (get_session reads 0; own estimate ~60k/1M) → roll at 31 %, ceiling 60 %; depth 2 (limit 8). LIVE = bda5b75b. LC5 = session_01Rc5AsLX47s5ojNyh7J47MB (queue empty).
 - LOAD: main running 0 (owner bugs/UI/go-live only) | B free 11 | C free ? (art resume + N13/N14 + M14 pending ack) | D free 0 new (N16 coop-real-port + rv) | E: N11/N12/N17 | moved: none
 - TRIGGERS: 109 hourly wake trig_013WV4SZJWfQdwMYDPLzYmfV (min 32) created; 108 wake trig_01YWv7JaTkWDf6sV7wxESQx5 disabled; daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays. LC5 + 108 told. Push tool /home/user/wt/hpush109.sh, worktree /home/user/wt/ho.
+- (23/11 03:36Z) LC5 ROLLED (14 lands, queue empty) → archived. LAND CHAIN 6 = session_01Rc5AsMFGsdDXzKjwP9Vndc (child of 109), handover reports/land-chain-6.md. Relay to LC6 from now.
