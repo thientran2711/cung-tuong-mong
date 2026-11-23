@@ -149,11 +149,15 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  {const r=await until(A,()=>S.thIll&&S.thIll.st===2,null,20000);ok(r,'6 host: her act eased the illness 3 → 2 (relay)',r?undefined:{h:await th(A),G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'6b');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r1$/.test(l)),'6 both: same illness after the merged week, her ease applied (3 → 2)',{g,h,L})}
  /* 6d (review r1 F1): her act RESOLVES inside her week end (j72 th_thuoc2's wait step ends in q72Tick, endTurn → easeTH); hook as the review repro */
- ok(await ill3('6c'),'6d both: stage 3 again');
  /* reached = applied (r1) or refused because the host's own roll moved the illness meanwhile (r0, solo rule: nothing left to ease) */
- const E33=l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r[01]$/.test(l),n33=(await thLog()).filter(E33).length;
- await B.p.evaluate(()=>{window.__wke=null;window.__rtN=0;const q0=rivalsTurn;rivalsTurn=function(){window.__rtN++;const r=q0.apply(this,arguments);try{if(!window.__wke&&S.thIll){const b=S.thIll.st;if(S.thIll.st>1)S.thIll.st--;else S.thIll=null;window.__wke=[b,S.thIll&&S.thIll.st]}}catch(e){}return r}});
- await weekAll(A,B,'6d');
+ /* review/coop-driver-fails #2: the host's own month roll (j13:30 illMonth, host-only: roll(30) → the illness ends) can end the set-up
+    illness BEFORE her week end (LIVE G4: guest thw w8 b3 st3 → null with askSnap.th null = a host rebuild) → her ease has nothing to ease
+    (__wke null). Not her act, not the relay: the set-up is re-armed (≤ 3 tries) until her week end meets the illness. */
+ let n33=0;const E33=l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r[01]$/.test(l);
+ for(let t6=0;t6<3;t6++){ok(await ill3('6c'+t6)||t6<2,'6d both: stage 3 again');
+  n33=(await thLog()).filter(E33).length;
+  await B.p.evaluate(()=>{window.__wke=null;window.__rtN=0;const q0=rivalsTurn;rivalsTurn=function(){window.__rtN++;const r=q0.apply(this,arguments);try{if(!window.__wke&&S.thIll){const b=S.thIll.st;if(S.thIll.st>1)S.thIll.st--;else S.thIll=null;window.__wke=[b,S.thIll&&S.thIll.st]}}catch(e){}return r}});
+  await weekAll(A,B,'6d'+t6);if(await B.p.evaluate(()=>!!window.__wke))break;console.log('6d re-arm: the host\'s own roll ended the illness before her week end',await B.p.evaluate(()=>(window.__thw||[]).slice(-3).map(x=>x.slice(0,5))))}
  {const w=await B.p.evaluate(()=>window.__wke),rtN=await B.p.evaluate(()=>[window.__rtN,rivalsTurn.toString().slice(0,60)]),L=await thLog(),g=await th(B),h=await th(A);ok(w&&w[0]===3&&w[1]===2,'6d guest: her ease ran inside her week end',{w,rtN});
   ok(L.filter(E33).length>n33,'6d host: the "th" request of her week-end ease reached the host',L);
   if(!(h&&g))await weekAll(A,B,'6d+');ok(JSON.stringify(await th(B))===JSON.stringify(await th(A)),'6d both: same illness (her week-end ease kept)',{g,h})}
