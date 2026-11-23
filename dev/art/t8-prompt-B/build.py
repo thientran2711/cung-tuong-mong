@@ -2045,7 +2045,6 @@ F2_FL={1:[("osmanthus cluster","osmanthus clusters","quế"),("lilac flower","li
        5:[("formal double camellia","formal double camellias","trà kép trắng"),("double hollyhock","double hollyhocks","thục quỳ kép"),
           ("tea-scented China rose","tea-scented China roses","hồng trà vàng"),("double cotton-rose hibiscus","double cotton-rose hibiscus flowers","phù dung kép"),
           ("double gardenia","double gardenias","dành dành kép")],
-          ("peony-flowered Chinese aster","peony-flowered Chinese asters","thúy cúc")],
        6:[("centifolia hundred-petal rose","centifolia hundred-petal roses","hồng bách diệp"),("formal double thousand-petal camellia","formal double thousand-petal camellias","trà ngàn cánh"),
           ("thousand-petal lotus","thousand-petal lotuses","sen ngàn cánh"),("mophead hydrangea","mophead hydrangeas","cẩm tú cầu"),
           ("double crabapple blossom","double crabapple blossoms","hải đường kép")],   # BUILDFIX1: F19 (4) (owner L1723/L1726): no chrysanthemum, no peony at t6
