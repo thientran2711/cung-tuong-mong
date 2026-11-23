@@ -64,3 +64,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - YARD DRAMA ≥ 60 seeds, each COMPOSED from parts (actors by nết/birth × incident/object × place × bystander reactions × outcome) → thousands of variants. HÀNH XỬ ≥ 40. ĐỐI ĐÁP ≥ 40. Mini-games: the full kit list allowed by BAL.entry.word.
 - NO-REPEAT memory per player ACROSS lives (stored with the player's life log / meta save, survives new lives): a seed/test is not shown again until its pool is used up, then the cycle restarts.
 - CONTENT is written by MAIN's sonnet writer seats into dev/handover/content/selscene/ on the handover branch (yard.md, hanhxu.md, doidap.md, one entry per block in a fixed machine-readable format agreed in §8 of HIST-TUYENTU.md). SELSCENE builds the GENERATOR + seen-memory + a loader that turns those files into a data module (one source), and validates every entry (roles fill, options equal value, gain+loss, BAL keys only).
+
+## ADDENDUM 11 (MAIN 112, 22:36Z) — DRAMA KNOWLEDGE (owner OD 23/11 ~22:44Z, read verbatim)
+- She STEPS IN (defend / join / mediate) → she knows the FACES of all participants and they know hers (two-way); NAMES by nết + rank (the defended girl likely gives her name in thanks; a proud bully may throw her name/family as a threat) — via the existing j61 stages.
+- She STAYS OUT → she sees participants' faces only, no names; they do NOT register her.
