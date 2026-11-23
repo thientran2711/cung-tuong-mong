@@ -164,7 +164,7 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
 window.evbDedup=evbDedup;
 /* the option's chance in words, from its own ladder word (what it shows elsewhere in the game) — never a number */
 function evbChance(o){const s=String((o&&(o.x||o.j67))||"")+" "+String((o&&o.n)||"");const w=(s.replace(/<[^>]+>/g,"").match(new RegExp("("+KIT_ODDS_ALT+")(?=\\s|·|$)"))||[])[1]||(o&&o.p!=null?word(o.p):"");
- const lv=w?kitOddsIdx(w):-1;return lv<0?"":lv<=2?"khó thành":lv===3?"thành bại khó đoán":lv===6?"gần như chắc thành":"dễ thành"}
+ const lv=w?kitOddsIdx(w):-1;return lv<0?"":lv<=2?"dễ hỏng":lv===3?"hên xui":lv===6?"rất vững, ít khi hỏng":"thường ổn"}
 /* how big the option's gain is: the sum of the positive numbers in its success part (fx + thành:) */
 function evbGain(o){let s=0;try{const f=Object.assign({},o.w||{});for(const v of Object.values(f))if(v>0)s+=v;const x=String(o.x||o.j67||"").replace(/<[^>]+>/g,"");const m=x.split(/hỏng:|kèm:/)[0];
  (m.match(/\+\s?\d+/g)||[]).forEach(n=>s+=+n.replace(/\D/g,""))}catch(e){}return s}
