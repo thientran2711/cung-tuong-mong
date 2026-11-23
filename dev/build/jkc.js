@@ -376,7 +376,7 @@ const KCE={
   kcO("Xin tổ mẫu cho tra xét",{suc:-10},()=>kcDo("Bài vị",()=>{const to=kcR("to");if(roll(BAL.kc2.kcCard.xinToMauCho_rb+S.tamco/3+(to?to.af/5:0))){d.oan+=BAL.eff.jkc.oanO_3;S.kc.diBan=S.turn+3;return `Gia nhân khai thật: chính người của ${d.t.toLowerCase()} làm đổ.`}S.kgt-=BAL.eff.jkc.kgtO_2;if(to)kcAf(to,BAL.eff.jkc.o_4);return"Không tra ra ai. Tổ mẫu phạt ngươi quỳ ba canh giờ."})),
   kcO("Quỳ nhận lỗi cho yên nhà",{suc:-15},()=>kcDo("Bài vị",()=>{apply({duc:2});const to=kcR("to");if(to)kcAf(to,BAL.eff.jkc.o_5);return"Ngươi quỳ trước từ đường đến tối. Tổ mẫu thở dài."}))]}}},
  ao:{t:"Mượn y phục",b:()=>{const m=kcR("muoi");return{who:kcFace(m),t:`<p>Thứ muội ${m.name} xin mượn bộ y phục đẹp nhất của ngươi để đi hội ngắm hoa, nơi các nhà quyền quý đến xem mặt.</p>`,o:[
-  kcO("Cho mượn",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_6);m.danh+=3;return `${m.name} được khen ở hội hoa.`})),
+  kcO("Cho mượn",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_6);statSet(m,"danh",(m.danh||0)+3);return `${m.name} được khen ở hội hoa.`})),
   kcO("Từ chối",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_7);m.oan+=BAL.eff.jkc.oanO_4;return `${m.name} đi hội bằng áo cũ, về nhà khóc với ${kcR("di")?kcR("di").t.toLowerCase():"mẹ"}.`})),
   kcO("Cho mượn bộ khác, giữ bộ đẹp",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_8);apply({tamco:1});return"Nàng cầm áo, nhìn ngươi một lúc rồi đi."}))]}}},
  tranhmoi:{t:"Thứ muội giành mối",b:()=>{const m=kcR("muoi");const s=S.kc.suit[0];if(!s||!m)return null;return{who:kcFace(m),t:`<p>${m.name} lén gặp bà mối, nói tốt cho mình và nói xấu ngươi trước nhà ${s.n}.</p>`,o:[
@@ -392,7 +392,7 @@ const KCE={
   kcO("Từ chối, giữ kín",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_15);/* he tries to raise it himself: fails at BAL.ag.why.kcDebt.fail odds → the creditor comes */if(roll(BAL.ag.why.kcDebt.fail)){S.kgt-=BAL.eff.jkc.kgtO_5;return"Chủ sòng đến tận cửa đòi nợ. Cả phố biết."}return"Huynh trưởng tự xoay xở được."}))]}}},
  tobenh:{t:"Tổ mẫu lâm bệnh",b:()=>{const t=kcR("to");S.kc.ev.tobenh=1;return{who:kcFace(t),t:`<p>Tổ mẫu lâm bệnh nặng. Cả nhà bàn ai sẽ hầu thuốc ngày đêm.</p>`,o:[
   kcO("Xin được hầu thuốc",{suc:-25},()=>kcDo("Hầu thuốc",()=>{kcAf(t,BAL.eff.jkc.o_16);apply({duc:4,kgt:2});return"Ngươi thức trắng nửa tháng. Tổ mẫu khỏi bệnh, nắm tay ngươi không buông."})),
-  kcO("Để thứ muội hầu",{},()=>kcDo("Hầu thuốc",()=>{const m=kcR("muoi");if(m){m.danh+=2;kcAf(t,BAL.eff.jkc.o_17)}return"Thứ muội được khen hiếu thảo."}))]}}},
+  kcO("Để thứ muội hầu",{},()=>kcDo("Hầu thuốc",()=>{const m=kcR("muoi");if(m){statSet(m,"danh",(m.danh||0)+2);kcAf(t,BAL.eff.jkc.o_17)}return"Thứ muội được khen hiếu thảo."}))]}}},
  dithai:{t:"Di nương có thai",b:()=>{const d=kcR("di");S.kc.ev.dithai=1;return{who:kcFace(d),t:`<p>${d.t} ${d.name} có thai. Cả phủ đổi chiều, cha ở viện phía tây nhiều hơn.</p>`,o:[
   kcO("Mang thuốc bổ sang chúc mừng",{bac:-10},()=>kcDo("Di nương có thai",()=>{kcAf(d,BAL.eff.jkc.o_18);return"Nàng cười, nhận thuốc mà không uống."})),
   kcO("Đứng ngoài",{},()=>kcDo("Di nương có thai",()=>{const me=kcR("me");if(me)kcAf(me,BAL.eff.jkc.o_19);return"Mẫu thân ngồi một mình dưới giàn tử đằng."}))]}}},
@@ -449,7 +449,7 @@ PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e
 function kcFest(t,art,extra){const b=rsnap();const sc=artOE(S,art)*BAL.art.score+S.tai/3+S.sac/6+R(30);let txt;
  if(sc>=60){S.danh=Math.min(100,S.danh+4);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
  else if(sc>=40){S.danh=Math.min(100,S.danh+2);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))mu.danh+=sc<40?3:1;const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+ const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<40?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 function kcIll(p,extra){const b=rsnap();let txt="";if(roll(p)){apply({suc:-35});txt="Ngươi lên cơn sốt.";if(S.suc<=0||roll(S.suc<20?40:8)){kcRes("Dịch",b,txt);kcDie("Chết vì dịch sốt trước kỳ tuyển tú");return}}else txt="Ngươi qua được mùa dịch.";if(extra)txt+=" "+extra();kcRes("Dịch",b,txt)}
 function kcRare(id,p){S.kc.r97=S.kc.r97||{};if(S.kc.r97[id]!=null)return S.kc.r97[id];const ok=roll(p*(typeof R97CFG==="object"?R97CFG.p:1)*BAL.kcRareX);S.kc.r97[id]=ok?1:0;return ok}
 /* origin chapter: three beats per origin; the choices seed the palace arcs (S.kc.oc counts the "loyal to the house" path) */

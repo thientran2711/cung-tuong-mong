@@ -35,4 +35,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ok(r.stale.kept&&!r.stale.flag,`heirDanh=${H} deposeHeir on a son who is not S.heir: S.heir kept`,r.stale);
   ok(r.die.kept&&r.die.cleared&&r.die.ddW===0,`heirDanh=${H} kidDie clears S.heir only when it is that son, no Danh`,r.die);
   ok(r.j79.includes('Danh nàng thêm '+r.sg)&&r.j17.includes('nàng Danh thêm '+r.sg),`heirDanh=${H} j79 card + j17 preview print −heirDanh`,{j79:r.j79,j17:r.j17})}
+ /* robot10 «Danh 101» (D add-on): the following pet's Danh bonus at the cap, and the statSet road */
+ {const r=await p.evaluate(()=>{const key=Object.keys(PET).find(k=>PET[k].st==="danh");const P0=S.pets,O0=S.petOn,B0=S.petB,N0=S.petBn,D0=S.danh;
+   try{S.petB=null;S.petBn=0;S.pets=[{t:key,from:"probe",care:80}];S.petOn=0;const n=1+(PET[key].sacX||0);
+    S.danh=100;petBonus(S,true);const capOn=S.danh;petBonus(S,false);const capOff=S.danh;
+    S.danh=50;petBonus(S,true);const midOn=S.danh;petBonus(S,false);const midOff=S.danh;
+    const v=liveRivals(false).find(x=>x&&!x.coop&&x.alive);const vd=v.danh;statSet(v,"danh",99+4);const vOver=v.danh;statSet(v,"danh",-5);const vUnder=v.danh;v.danh=vd;
+    return{key,n,capOn,capOff,midOn,midOff,vOver,vUnder}}finally{S.pets=P0;S.petOn=O0;S.petB=B0;S.petBn=N0;S.danh=D0}});
+  ok(r.capOn===100&&r.capOff===100&&r.midOn===50+r.n&&r.midOff===50&&r.vOver===100&&r.vUnder===0,'Danh never passes 100: pet bonus at 100 stays 100 and comes off clean; 50 -> 50+n -> 50; statSet clamps an NPC 0..100',r)}
  ok(!errs.length,'no page errors',errs.slice(0,3));await b.close();console.log(res.every(Boolean)?'PROBE PASS':'PROBE FAIL');process.exit(res.every(Boolean)?0:1)})();
