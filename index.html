@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c39e5009+","t":"2026-11-23T23:06Z","c":"SELF-MERGE LAND kit-odds-row: merge LIVE 3e8981e1 (index.html/sw.js rebuilt)","b":"5fb4c28b5de4","h":[{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"}]};
+window.CTM_BI={"s":"27295b89","t":"2026-11-23T23:51Z","c":"ORDER THIN P1 batch 1: jmgpool.js composed mini-game pools (hat 120, hoa 504, banh 78, huong 216, ve 240, kim 320) drawn through jnorep mg:…","b":"92440616b573","h":[{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25276,6 +25276,70 @@ function nrPick(fam,list,idf,wf){list=list||[];if(!list.length)return null;idf=i
  if(!(T>0))return list[Math.floor(Math.random()*list.length)];let r=Math.random()*T;for(let i=0;i<list.length;i++){r-=W[i];if(r<0)return list[i]}return list[list.length-1]}
 function nrDraw(fam,list,idf,wf){const x=nrPick(fam,list,idf,wf);if(x!=null)nrMark(fam,(idf||(y=>y))(x));return x}
 function nrFresh(fam,list,idf){idf=idf||(x=>x);const f=(list||[]).filter(x=>!nrSeen(fam,idf(x)));return f.length?f:(list||[])}
+/* ================= jmgpool: MINI-GAME CONTENT POOLS composed from parts (ORDER THIN P1, owner OD 23/11 ~22:50Z; EVCAT §3 P1) =================
+   One pool per test type, >= BAL.mgp.min (40) items, each built from parts (hat: theme × omitted line × melody contour; hoa: season × tray;
+   banh: dish type × main × two extras; huong: essence triple × target mix; ve: layout × motif set; kim: shape set × layout seed) and drawn
+   through the ONE shared cross-life no-repeat memory (jnorep, family `mg:<kind>`, key = item id: last BAL.nr.lives lives, weight BAL.nr.w per life seen).
+   Rules, board sizes and difficulty-by-rank stay in the engines (BAL.mgTier*); a pool item only decides WHICH content the board shows.
+   API: mgpItems(kind) -> the composed pool · mgpOne(kind,used?,filter?) -> one item drawn through P0 (used = ids already shown this game, pushed on)
+        mgpRng(seedString) -> deterministic () => 0..1 · mgpSkin(kind) -> skin id or "" (mgskin:<kind>, today's art when no skin is registered).
+   Player-visible words (song lines, dish names) are cổ trang, no digits, no %, per dev/kit/VANPHONG.md. ONE CORE: counts/limits read BAL.mgp (jbal2.js). */
+const MGP_C={};
+function mgpRng(s){s=String(s);let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}
+ let a=(h=Math.imul(h^h>>>16,2246822507)^Math.imul(h^h>>>13,3266489909))^h>>>16;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+/* hat: eight themes × five lục bát lines; a song = one theme with one line left out (5) × three melody contours = 120 songs */
+const MGP_HAT={
+ "Tây Hồ":["Gió đưa cành trúc la đà","Tiếng chuông Trấn Vũ canh gà Thọ Xương","Mịt mù khói tỏa ngàn sương","Nhịp chày Yên Thái mặt gương Tây Hồ","Sen vừa hé nụ bên bờ"],
+ "Xuân":["Xuân về én liệng trước hiên","Đào hồng thắm nụ bên thềm sớm mai","Mưa phùn thấm ướt tóc mây","Cành mai rụng cánh vương đầy lối đi","Nắng non vàng cả mái ngói"],
+ "Hạ":["Sen hồng thơm ngát mặt hồ","Ve ngân khúc hạ giữa trưa vắng người","Bóng đa che mát sân đình","Thuyền ai chở nắng ngang dòng sông xanh","Gió nồm thổi mát lầu son"],
+ "Thu":["Thu sang lá rụng đầy sân","Cúc vàng khoe sắc bên hàng giậu thưa","Trăng thu soi bóng song đào","Nhạn bay về phía chân mây xa xôi","Hương cốm thoảng ngõ chiều thu"],
+ "Đông":["Đông sang gió buốt lầu cao","Lò than ấm áp bên bàn trà thơm","Mai vàng nở rộ trong sương","Tuyết rơi phủ trắng mái hiên thâm cung","Đèn khuya soi bóng thêu hoa"],
+ "Trăng":["Đêm rằm trăng tỏ giữa trời","Bóng nga thấp thoáng bên thềm hoa lê","Ngân hà vắt ngang đỉnh trời","Gió đưa tiếng sáo vọng về canh khuya","Vầng trăng soi tỏ lòng ai"],
+ "Hội":["Đèn hoa rực rỡ khắp thành","Tiếng trống hội vọng quanh đình sớm hôm","Áo là phấp phới ngoài sân","Pháo hồng nổ rộn khắp vùng xuân tươi","Người đi trảy hội chen chân"],
+ "Thuyền":["Thuyền ai neo bến sông trăng","Mái chèo khua nhẹ nước trong lững lờ","Sương giăng mờ mịt bờ đê","Tiếng ca vọng lại bên hồ xa xa","Cánh buồm no gió về xuôi"]};
+function mgpGenHat(){const out=[],CT=[[1.05,2.2,3.5,.19,.08,.035],[.9,2,3.2,.19,.085,.03],[1,1.8,3.4,.18,.09,.03]];/* contours never steeper than today's (sum of amplitude × frequency <= .498) */
+ for(const th of Object.keys(MGP_HAT)){const L=MGP_HAT[th];for(let o=0;o<L.length;o++)for(let c=0;c<CT.length;c++){const id=`hat-${th}-${o}-${c}`,R=mgpRng(id);
+  out.push({id,theme:th,lines:L.filter((_,i)=>i!==o),f:CT[c].slice(0,3),a:CT[c].slice(3),ph:[R()*6,R()*6,R()*6]})}}return out}
+/* hoa: four seasons × six look-alike orders × twenty-one pairs of other flowers = 504 trays */
+function mgpGenHoa(){const out=[],NS=4,NL=3,NO=7,PR=[];for(let a=0;a<NO;a++)for(let b=a+1;b<NO;b++)PR.push([a,b]);
+ const ROT=[[0,1,2],[1,2,0],[2,0,1],[0,2,1],[2,1,0],[1,0,2]];
+ for(let si=0;si<NS;si++)for(let t=0;t<ROT.length*PR.length;t++)out.push({id:`hoa-${si}-${t}`,si,like:ROT[t%ROT.length],oth:PR[Math.floor(t/ROT.length)]});return out}
+/* banh: dish type × main × two extras (only ingredients that have a painting on the CDN; fire zone 2 big / 1 middle / 0 small, as K91_RC) */
+function mgpGenBanh(){const out=[],seen=new Set(),lc=s=>s.charAt(0).toLowerCase()+s.slice(1);
+ const add=(nm,st)=>{const n=st.map(x=>x[0]);if(new Set(n).size!==n.length)return;const id="banh-"+n.join("|");if(seen.has(id))return;seen.add(id);out.push({id,nm,steps:st})};
+ add("Chè hạt sen long nhãn",[["Nước giếng",2],["Hạt sen",1],["Long nhãn",0],["Đường phèn",0]]);add("Gà ác tần thuốc bắc",[["Gà ác",2],["Thuốc bắc",1],["Táo đỏ",1],["Kỷ tử",0]]);
+ add("Cháo yến sào",[["Gạo tám",2],["Nước dùng",1],["Yến sào",0],["Đường phèn",0]]);add("Canh hạt sen hầm xương",[["Xương ống",2],["Hạt sen",1],["Củ sen",1],["Hành ngò",0]]);
+ const SW=["Hạt sen","Long nhãn","Táo đỏ","Kỷ tử","Củ sen"];
+ for(const m of SW)for(const a of ["Long nhãn","Đường phèn","Kỷ tử","Táo đỏ"])for(const b of ["Đường phèn","Kỷ tử"])add(`Chè ${lc(m)} ${lc(a)}${b===a?"":" "+lc(b)}`,[["Nước giếng",2],[m,1],[a,0],[b,0]]);
+ for(const m of ["Yến sào","Hạt sen","Gà ác","Kỷ tử","Táo đỏ"])for(const f of ["Đường phèn","Hành ngò","Kỷ tử"])add(`Cháo ${lc(m)} ${lc(f)}`,[["Gạo tám",2],["Nước dùng",1],[m,0],[f,0]]);
+ for(const m of ["Hạt sen","Củ sen","Táo đỏ"])for(const s of ["Củ sen","Hạt sen","Táo đỏ","Thuốc bắc"])for(const f of ["Hành ngò","Kỷ tử"])add(`Canh ${lc(m)} ${lc(s)} hầm xương`,[["Xương ống",2],[m,1],[s,1],[f,0]]);
+ for(const m of ["Thuốc bắc","Hạt sen","Củ sen"])for(const s of ["Táo đỏ","Kỷ tử","Long nhãn"])for(const f of ["Kỷ tử","Hành ngò","Đường phèn"])add(`Gà ác tần ${lc(m)} ${lc(s)}`,[["Gà ác",2],[m,1],[s,1],[f,0]]);
+ return out}
+/* huong: three essences (colour apart) × a target mix (three weights 1..6, spread >= 2) */
+const MGP_ES=[[122,74,42],[236,230,170],[200,80,30],[224,122,154],[79,176,160],[176,136,80],[160,120,200]];
+function mgpGenHuong(){const out=[],TV=[[1,3,5],[5,2,3],[2,5,1],[4,1,5],[3,6,1],[6,2,4],[2,4,6],[6,3,1],[1,4,2],[3,1,5],[5,5,2],[4,6,2]],D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
+ for(let a=0;a<7;a++)for(let b=a+1;b<7;b++)for(let c=b+1;c<7;c++){const E=[a,b,c];if(!(D(MGP_ES[a],MGP_ES[b])>90&&D(MGP_ES[a],MGP_ES[c])>90&&D(MGP_ES[b],MGP_ES[c])>90))continue;
+  for(let t=0;t<TV.length;t++)out.push({id:`huong-${a}${b}${c}-${t}`,E,tv:TV[t]})}return out}
+/* ve: six layouts (the three masters' scrolls and their mirror images) × forty motif sets (far = núi khách / hạc, middle = núi chủ / tùng / hạc, near = thuyền / tùng) */
+function mgpGenVe(){const out=[],LAY=[[[.30,.46],[.74,.28],[.62,.80],[.12,.74],[.88,.58],[.50,.22]],[[.22,.26],[.62,.42],[.26,.78],[.78,.82],[.84,.18],[.46,.84]],[[.74,.38],[.26,.24],[.44,.58],[.16,.76],[.62,.84],[.92,.62]]];
+ const far=["sonkhach","hac"],mid=["sonchu","tung","hac"],near=["thuyen","tung"],ROLE=v=>v<.36?far:v<.66?mid:near;
+ for(let l=0;l<6;l++){const S=LAY[l%3].map(([u,v])=>[l<3?u:+(1-u).toFixed(2),v]);
+  for(let k=0;k<40;k++){const m=S.map(([u,v],i)=>{const R=ROLE(v);return[R[(k+i*(1+(k>>1)))%R.length],u,v]});
+   /* the first motifs (a game shows 3–4 of them) must hold two kinds at least */
+   if(new Set(m.slice(0,3).map(x=>x[0])).size<2){const R=ROLE(m[1][2]),a=R.find(t=>t!==m[0][0]);if(a)m[1][0]=a}
+   out.push({id:`ve-${l}-${k}`,m})}}return out}
+/* kim: a fold set × a layout seed (hole places are drawn from the seed: the same item = the same paper) */
+function mgpGenKim(){const out=[],SH=[["moon","tri"],["moon","drop"],["tri","drop"],["moon","tri","drop"]];/* never a single shape: the board keeps its choice */
+ for(let s=0;s<SH.length;s++)for(let q=0;q<80;q++)out.push({id:`kim-${s}-${q}`,sh:SH[s],seed:`kim${s}-${q}`});return out}
+const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:mgpGenVe,kim:mgpGenKim};
+function mgpItems(kind){return MGP_C[kind]||(MGP_C[kind]=MGP_GEN[kind]?MGP_GEN[kind]():[])}
+function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if(filt){const f=L.filter(filt);if(f.length)L=f}
+ if(used&&used.length){const f=L.filter(x=>used.indexOf(x.id)<0);if(f.length)L=f}
+ const wn=((typeof BAL==="object"&&BAL&&BAL.mgp)||{}).now,it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,L,x=>x.id,wn==null?null:x=>nrNow("mg:"+kind,x.id)?wn:1):null)||L[Math.floor(Math.random()*L.length)];if(used&&it)used.push(it.id);return it}
+/* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
+const MGP_SKIN={};
+function mgpSkin(kind){const L=MGP_SKIN[kind]||[];if(!L.length)return"";try{return(typeof nrDraw==="function"?nrDraw("mgskin:"+kind,L):L[0])||""}catch(e){return""}}
+Object.assign(window,{mgpItems,mgpOne,mgpRng,mgpSkin,MGP_SKIN});
 
 /* ================= j68 ĐỜI SỐNG TRONG CUNG: common daily/situational events as composable templates =================
    Engine + shared helpers here; content in j68e. Wraps only; edits no other module. (Chains = j70, merit/festivals = j71, quests = j72.)
@@ -33114,8 +33178,8 @@ function k91SegX(a,b,c,d){const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[
 /* =============== 1. HOLD (Hát): keep a finger down to raise the voice, lift to lower; follow the melody ribbon =============== */
 const K91_CA=["Gió đưa cành trúc la đà","Tiếng chuông Trấn Vũ canh gà Thọ Xương","Mịt mù khói tỏa ngàn sương","Nhịp chày Yên Thái mặt gương Tây Hồ"];
 function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.lv||0;const DUR=20000,SPD=W*.2/1000,MX=W*.24,band=H*(.075+.007*lv)*mgTol(env),V=H*.72/1000;
- const ph=[Math.random()*6,Math.random()*6,Math.random()*6];const cy=t=>H*.5+H*.19*Math.sin(t/1000*1.05+ph[0])+H*.08*Math.sin(t/1000*2.2+ph[1])+H*.035*Math.sin(t/1000*3.5+ph[2]);
- const words=[];K91_CA.forEach((l,i)=>{const w=l.split(" ");w.forEach((x,j)=>words.push({x,t:i*5000+300+j*(4400/w.length),c:i}))});
+ const SG=typeof mgpOne==="function"?mgpOne("hat"):null;/* ORDER THIN P1: one composed song (theme · lines · melody contour), drawn through the no-repeat memory */const ph=SG?SG.ph:[Math.random()*6,Math.random()*6,Math.random()*6],FQ=SG?SG.f:[1.05,2.2,3.5],AM=SG?SG.a:[.19,.08,.035];const cy=t=>H*.5+H*AM[0]*Math.sin(t/1000*FQ[0]+ph[0])+H*AM[1]*Math.sin(t/1000*FQ[1]+ph[1])+H*AM[2]*Math.sin(t/1000*FQ[2]+ph[2]);
+ const words=[];(SG?SG.lines:K91_CA).forEach((l,i)=>{const w=l.split(" ");w.forEach((x,j)=>words.push({x,t:i*5000+300+j*(4400/w.length),c:i}))});
  let y=H*.5,vy=0,held=new Set(),t0=performance.now()+1600,last=performance.now(),inb=0,tot=0,done=false;const pops=[];
  const ratio=()=>tot?Math.min(1,inb/tot/mgFull(env,.82)):0;
  const stop=k91Loop(now=>{const dt=Math.min(50,now-last);last=now;const t=now-t0;const tgt=held.size?-V:V;vy+=(tgt-vy)*Math.min(1,dt/80);y=cl(y+vy*dt,H*.06,H*.94);
@@ -33295,7 +33359,7 @@ const K91_RX=["Ớt hiểm","Giấm chua","Mắm tôm","Rượu nặng","Muối 
 const K91_ING={"Nước giếng":"nuoc","Hạt sen":"sen","Long nhãn":"nhan","Đường phèn":"duong","Gà ác":"ga","Thuốc bắc":"thuoc","Táo đỏ":"tao","Kỷ tử":"kytu","Gạo tám":"gao","Nước dùng":"dung",
  "Yến sào":"yen","Xương ống":"xuong","Củ sen":"cusen","Hành ngò":"hanh","Ớt hiểm":"ot","Giấm chua":"giam","Mắm tôm":"mam","Rượu nặng":"ruou","Muối hột":"muoi"};
 function k91Ing(g,t,x,y,w,h,st,fs){k91Tile(g,x,y,w,h,"",st,fs,"tho-slip");const ic=h*1.02;kg82Spr(g,"banh-"+K91_ING[t.n],x+w/2,y+h/2,ic,ic)}/* picture only: no ingredient name in play */
-function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const [nm,steps]=kg82Shuf(K91_RC)[0];const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
+function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const RCP=K91_RC.length<4||typeof mgpOne!=="function"?kg82Shuf(K91_RC)[0]:(r=>[r.nm,r.steps])(mgpOne("banh"));/* ORDER THIN P1: K91_RC shorter than 4 = a handmade recipe (jwkr) keeps its own; else one of the composed recipes */const [nm,steps]=RCP;const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
  /* mg-balance-2: the fire answers the fan with a LAG and draughts of wind (gusts) push it up or down; both grow as the ease falls (BAL.mgTier.lev.banh) */
  const LAG=Math.max(.02,mgLev(env,"banh","lag")),GUA=mgLev(env,"banh","gust"),GAP=mgLev(env,"banh","gap"),REACH=mgLev(env,"banh","reach"),FAN=.34,COOL=.1;/* her hand: fan heats up to FAN/s, no fan cools COOL/s (one place; the gust cap reads the same two) */let rr=-.1,gu=0,guEnd=0,guNext=GAP*(.6+.8*Math.random());
  const DUR=55000,SIM=3200;let heat=.3,fan=new Set(),si=0,simAt=0,inz=0,qual=[],miss=0,t0=performance.now()+1200,last=performance.now(),drag=null,done=false,msg="";const pops=[];
@@ -33355,12 +33419,12 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
 
 /* =============== 10. BLEND (Điều hương): move three sliders until your smoke matches the sample's colour; then "Dâng hương" =============== */
 const K91_ES=[["Trầm",[122,74,42],"tram"],["Hoa nhài",[236,230,170],"nhai"],["Quế",[200,80,30],"que"],["Hoa hồng",[224,122,154],"hong"],["Bạc hà",[79,176,160],"bacha"],["Đàn hương",[176,136,80],"dan"],["Mộc lan",[160,120,200],"moclan"]];
-function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,LIM=22000+lv*2000;let r=-1,sum=0,P=null,phase="",t0=0,drag=-1,done=false;const pops=[];
+function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,LIM=22000+lv*2000;let r=-1,sum=0,P=null,phase="",t0=0,drag=-1,done=false;const pops=[];const HU=[];
  const bt=k91Btns(box,[["k91done","✓","","Dâng hương: chấm độ khớp"]]);const bd=bt.querySelector("#k91done");
- const pick3=()=>{for(let t=0;t<50;t++){const E=kg82Shuf(K91_ES).slice(0,3);const ok=E.every((a,i)=>E.every((b,j)=>i===j||Math.hypot(a[1][0]-b[1][0],a[1][1]-b[1][1],a[1][2]-b[1][2])>90));if(ok)return E}return K91_ES.slice(0,3)};
+ let HI=null;const pick3=()=>{HI=typeof mgpOne==="function"?mgpOne("huong",HU):null;if(HI)return HI.E.map(i=>K91_ES[i]);for(let t=0;t<50;t++){const E=kg82Shuf(K91_ES).slice(0,3);const ok=E.every((a,i)=>E.every((b,j)=>i===j||Math.hypot(a[1][0]-b[1][0],a[1][1]-b[1][1],a[1][2]-b[1][2])>90));if(ok)return E}return K91_ES.slice(0,3)};
  const ratio=v=>{const s=v.reduce((a,b)=>a+b,0);return s>0?v.map(x=>x/s):v.map(()=>1/v.length)};const mix=(E,v)=>{const q=ratio(v);return[0,1,2].map(c=>Math.round(E.reduce((a,e,i)=>a+e[1][c]*q[i],0)))};
  const dist=(a,b)=>{const p=ratio(a),q=ratio(b);return p.reduce((s,x,i)=>s+Math.abs(x-q[i]),0)/2};
- function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
+ function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;if(HI)tv=HI.tv.slice();else do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
  /* cal-p2b: ONE round score for the live hint, the verdict and the grade (BAL.mgTier.blend) */const rs=d=>cl(1-d/(BAL.mgTier.blend.w*mgTol(env)),0,1);
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
@@ -33734,7 +33798,7 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const side=W>=H*1.05;/* sample left / wedge right (wide); sample above / wedge below (narrow) */
  const SX=side?W*.2:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.17,H*.34):Math.min(W*.3,H*.17);
  const AX=side?W*.7:W*.5,AY=side?H*.72:H*.74,R=side?Math.min(W*.27,H*.55):Math.min(W*.42,H*.4);
- const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
+ const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];const KU=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
  const bt=k91Btns(box,[["crkok","✓","","Mở giấy: xem hoa cắt"]]);const okb=bt.querySelector("#crkok");
  /* wedge-plane point (rr share of R, ph radians from the wedge's left fold) → board px */
  const wA0=a=>-Math.PI/2-a/2;
@@ -33745,8 +33809,9 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const dist=(c,t)=>{const a=pl(c.r,c.ph),b=pl(t.r,t.ph);return Math.hypot(a[0]-b[0],a[1]-b[1])};
  function next(){if(done)return;r++;if(r>=NR){done=true;okb.disabled=true;phase="end";return crLater(()=>env.end(pts),300)}
   const f=FOLDS[r],a=Math.PI*2/f,shapes=CRK_SH.concat(CRK_ALIKE.slice(0,ALIKE));const z=SIZE;const T=[];
-  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+Math.random()*.55,edge=Math.random()<.2?(Math.random()<.5?0:a):null;
-    const ph=edge!=null?edge:a*(.18+Math.random()*.64);const t={sh:shapes[Math.floor(Math.random()*shapes.length)],r:rr,ph};
+  const KI=typeof mgpOne==="function"?mgpOne("kim",KU):null,RN=KI?mgpRng(KI.seed):Math.random,hs=KI?KI.sh.concat(CRK_ALIKE.slice(0,ALIKE)):shapes;/* ORDER THIN P1: one composed paper (hole shapes × layout seed), drawn through the no-repeat memory; the tray keeps every cutter */
+  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+RN()*.55,edge=RN()<.2?(RN()<.5?0:a):null;
+    const ph=edge!=null?edge:a*(.18+RN()*.64);const t={sh:hs[Math.floor(RN()*hs.length)],r:rr,ph};
     /* holes apart from each other (and from their own mirror images across the folds) */
     if(T.every(o=>dist(o,t)>z*3.2)&&(edge!=null||(rr*Math.sin(Math.min(ph,a-ph))>z*1.6))){T.push(t);break}}}
   const tray=shapes.map((sh,i)=>({sh,x:(side?W*.42:W*.1)+(i+.5)*((side?W*.56:W*.8)/shapes.length),y:TY}));
@@ -33833,13 +33898,13 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const TW=W*.38,TH=TW*SH/SW,TX=W*.04,TY=H*.03;/* the master's sample pinned top-left, same shape as the scroll */
  const ST={x:W*.57,y:H*.04,w:W*.38,h:H*.15};/* the inkstone */
  const OFF=UN*.9;/* a dragged stamp rides above the finger */
- let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;/* act = the one finger (pointer id) being followed */const pops=[];
+ let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;const VU=[];/* act = the one finger (pointer id) being followed */const pops=[];
  const btn=k91Btns(box,[["k91vdone","✓","","Bố cục xong: bắt đầu tô mực"]]);const bd=btn.querySelector("#k91vdone");
  const sc=cy=>Z.far+(1-Z.far)*cl((cy-SY)/SH,0,1),pa=cy=>Z.pale+(1-Z.pale)*cl((cy-SY)/SH,0,1);
  const toneF=v=>cl((v-Z.near[0])/(Z.near[1]-Z.near[0]),0,1),toneOf=v=>Math.round(toneF(v)*(T-1));
  const tgPt=t=>[SX+t.u*SW,SY+t.v*SH];
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return crLater(()=>env.end(Math.min(10,pts)),300)}
-  const n=Math.min(K91VE_PAINT[r].length,K91VE_BASE[r]+mgMore(env));const M=K91VE_PAINT[r].slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
+  const VI=typeof mgpOne==="function"?mgpOne("ve",VU):null,PT=VI?VI.m:K91VE_PAINT[r];/* ORDER THIN P1: one composed painting (layout × motif set), drawn through the no-repeat memory */const n=Math.min(PT.length,K91VE_BASE[r]+mgMore(env));const M=PT.slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
   const S=kg82Shuf(M.map((m,i)=>({ti:i,type:m.type,placed:false,x:0,y:0})));const tw=(W-12)/n;S.forEach((s,i)=>{s.hx=6+tw*(i+.5);s.hy=H*.915});
   P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=crNow();peekAt=t0;drag=null;fl=null;bd.disabled=true}
  /* the best way to name which stamp stands for which motif (same type only; ≤ 6! tries) */
@@ -33957,7 +34022,7 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const ghost=L("ghost"),cutTol=L("cutTol"),angTol=L("angTol"),sway=L("sway"),nAlike=Math.round(L("alike"));
  /* a handmade-work recipe (j83 «Cắm hoa», jwkr WKR_FL) with one of this board's four flowers arranges only that flower: every vase takes its season (orchid / peony / mixed recipes keep the shuffle) */
  const wk=(typeof wkrNow==="function"&&wkrNow())||null,rf=wk&&wk.kind==="bhoa"&&typeof WKR_FL!=="undefined"?KCH_RCP[WKR_FL[wk.r]]:null,ri=rf?KCH_SEAS.findIndex(x=>x.k===rf):-1;
- const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
+ const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);const HU=[],HS=[];let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
  const btn=k91Btns(box,[["k91done","✓","","Cắm xong: chấm thế hoa"]]);const bd=btn.querySelector("#k91done");
  const rad=d=>d*Math.PI/180,dg=a=>a*180/Math.PI,wob=now=>rad(sway*180)*Math.sin(now/110);
  /* target of stem i: length in px (chain Thiên → Nhân → Địa; guests hang off Nhân / Địa alternately) and the lean in degrees */
@@ -33966,8 +34031,9 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const pickPos=i=>({x:W*(.2+.3*(i%3)),y:H*(.5+.2*Math.floor(i/3))});
  const tipOf=(s,a)=>({x:MX+s.L*Math.sin(a),y:MY-s.L*Math.cos(a)});
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;phase="end";return setTimeout(()=>env.end(Math.max(0,Math.min(10,sum))),300)}
-  const si=seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=kg82Shuf(SE.like).slice(0,Math.max(0,Math.min(3,nAlike)));
-  const oth=kg82Shuf(KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER));const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
+  const IT=typeof mgpOne==="function"?mgpOne("hoa",HU,x=>ri>=0?x.si===ri:HS.indexOf(x.si)<0):null;/* ORDER THIN P1: one composed tray (season × look-alike order × two other flowers), drawn through the no-repeat memory */if(IT)HS.push(IT.si);
+  const si=IT?IT.si:seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=(IT?IT.like.map(i=>SE.like[i]):kg82Shuf(SE.like)).slice(0,Math.max(0,Math.min(3,nAlike)));
+  const oAll=KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER);const oth=IT?IT.oth.map(i=>oAll[i]).concat(kg82Shuf(oAll.filter((_,i)=>IT.oth.indexOf(i)<0))):kg82Shuf(oAll);const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
   P={si,SE,fl:kg82Shuf(fl).map(f=>Object.assign(f,{wilt:false})),wrong:0,picked:false,cur:0,last:null,t0:performance.now(),lim:n*L("limStem"),
    st:Array.from({length:n},(_,i)=>({i,Lt:lenT(i),at:angT(i),cut:false,L:0,seated:false,a:0,leaned:false}))};phase="pick";bd.disabled=true}
  function score(){const S=P.st,n=S.length;const z=B.zero-1;let ln=0,an=0;
@@ -37901,6 +37967,8 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold; now = weight of an item already shown this life (test dev/test/mg-pool.js). */
+BAL.mgp={min:40,now:.2};/* now = weight of an item already shown in THIS life (past lives: BAL.nr.w each) */
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -94866,7 +94934,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5fb4c28b5de4";window.CTM_BUILD=BUILD;
+const BUILD="92440616b573";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
