@@ -96,3 +96,8 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 ## ADDENDUM 18 (MAIN 112, 23:15Z) — OWNER FINAL PICK «±1, trần Tần» (OD 23/11 ~23:25Z, read verbatim; she wants lives to move faster; overwrites ~23:16Z «cách cũ»)
 - Result = origin rank +1 / same / −1 (ADDENDUM 3 re-instated). BAL.entry.cap = Tần, clamp after the step (e.g. Cao Ly princess entering at Tần: good/middling → Tần, poor → Quý nhân; Cháu gái Thái hậu Quý nhân: good → Tần).
 - ADDENDUM 17 is VOID; Addenda 9/16 stay void (this addendum is the cap). Canon dev/rules/topic/story-roads.md:31 updated by MAIN 111. BIG review; new lives only; per-origin before/after table in the report.
+
+## ADDENDUM 19 (MAIN 113, 22:19Z) — HÒA THÂN EXCEPTION to the Tần cap (OD 23/11 ~23:28Z, read verbatim in dev/OWNER_DECISIONS.md)
+- Hòa thân princess origins (nc Cao Ly, bd Bắc Địch, pf Phù Tang) follow ±1 with cap PHI (not Tần). The +1 above the origin rank needs a GOOD selection result AND high Sắc ("vua thấy đẹp"); the Sắc threshold is a new BAL key (one core), e.g. BAL.entry.hoaThanSac. Good result without high Sắc → same rank (still capped by Phi).
+- So Cao Ly (Tần) → can enter as Phi; Bắc Địch / Phù Tang (Quý nhân) → up to Tần. Every other origin keeps ADDENDUM 18 (cap Tần).
+- Per-origin before/after table in the report must show these 3 rows with and without high Sắc. BIG review; new lives only.
