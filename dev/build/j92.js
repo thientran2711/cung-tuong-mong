@@ -139,7 +139,7 @@ function wdKnowsItem(k){return !!(S&&S.wdk&&S.wdk[k])}
 function wdKnowsE(e){const it=wdItem(e);return !!it&&(wdKnowsItem(it.k)||!!(it.nt&&e.own))}
 function wdKnownStatus(p){const w=wdOf(p);const es=["tram","y"].map(sl=>w[sl]).filter(Boolean);if(wdTang())return wdStatus(p);if(!es.length||!es.every(wdKnowsE))return null;return wdStatus(p)}
 function wdReveal(k,how){if(!S||!k||!WD_ITEMS[k])return "";S.wdk=S.wdk||{};if(S.wdk[k])return "";S.wdk[k]=1;const it=WD_ITEMS[k];
- const t=`Biết được: ${it.n} là đồ phẩm ${wdPName(it.P)}${how?` (${how})`:""}.`;try{log(t)}catch(e){}return t}
+ const t=`Biết được: ${it.n} là đồ phẩm ${wdPName(it.P)}${how?` (${how})`:""}.`;try{log(t);kitKnow({key:"wd:"+k,text:t})}catch(e){}return t}
 function wdRevealOutfit(p,how){const w=wdOf(p);let r="";for(const sl of ["tram","y"])if(w[sl])r+=wdReveal(w[sl].k,how)+" ";return r.trim()}
 /* the visible data of p's two slots (for the kit: K1 in dev/PROGRESS_wardrobe.md) */
 function wdSlots(p){const w=wdOf(p);const lab=wdKnownStatus(p);return ["tram","y"].map(sl=>{const e=w[sl],it=wdItem(e);
@@ -280,7 +280,7 @@ function wdTaimat(){const w=watcher();if(!w)return"";
  const C=liveRivals(true).filter(v=>(typeof knows!=="function"||knows(v)));const cand=[];for(const v of C){const ww=wdOf(v);for(const sl of ["tram","y"]){const e=ww[sl];if(e&&!wdKnowsE(e))cand.push([v,e])}}
  if(!cand.length)return"";const sp=npcWhy("wdSpy",{w:w.s||S.maid,cand});if(!sp)return"";const [v,e]=sp.place;const t=wdReveal(e.k,`${w.name} dò được ở Nội vụ phủ`);const ks=wdKnownStatus(v);let more="";
  if(ks){wdSee(S,v,ks,w.name,true);more=` Vậy ${wdNm(v)} đang ăn vận ${WD_ST_WORD[ks]}.`}
- const txt=`${w.name} báo: ${WD_ITEMS[e.k].n} mà ${wdNm(v)} đang dùng là đồ phẩm ${wdPName(WD_ITEMS[e.k].P)}.${more}`;try{noteAdd(v.id,txt)}catch(x){}try{intelAdd(v,{k:"wd",kind:"wd",txt},{by:w.name,how:"tai mắt dò ở Nội vụ phủ"})}catch(x){}log(txt);return""}
+ const txt=`${w.name} báo: ${WD_ITEMS[e.k].n} mà ${wdNm(v)} đang dùng là đồ phẩm ${wdPName(WD_ITEMS[e.k].P)}.${more}`;try{noteAdd(v.id,txt,1)}catch(x){}try{intelAdd(v,{k:"wd",kind:"wd",txt},{by:w.name,how:"tai mắt dò ở Nội vụ phủ"})}catch(x){}log(txt);return""}
 
 /* ---------- HẶC ĂN MẶC SAI PHẨM (act vp): needs a cause; the truth decides; a wrong cause turns on the accuser ---------- */
 function oWd(a,t){return oVP(a)}

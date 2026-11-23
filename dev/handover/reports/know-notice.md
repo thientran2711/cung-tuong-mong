@@ -30,3 +30,21 @@ KIT: fitting part exists = `kitNotice` (§42.2); added ONE thin kit entry `kitKn
 
 ## Test
 `DEV=fold|ipadAir node dev/test/know-notice.js` → 0 bad both devices (each path = exactly 1 notice; repeat/no-new = 0; batch = 1 «biết thêm 3 điều»; no %). Shots looked 3× on 755x1000 + 1180x820: chip «Ta biết thêm 3 điều» in the top bar, «Tin báo» panel with all lines. Old saves load (nothing new stored).
+
+
+## Round 3 (reviewer r1 FAIL list) — before / after
+Base review/know-notice-r a8176fbf (index.html/sw.js rebuilt, committed here too).
+| # | Site | Before | After |
+|---|---|---|---|
+| 1 | jmind.js learnDis (non-jdis path) | log only | 1 notice |
+| 1 | jmind.js learnLike else-branch (target not a rival) | log only | 1 notice |
+| 1 | jtrong.js trongLearn (Hoàng thượng/Thái hậu/any) | noteAdd skipped for emp/th → log only | 1 notice (same key as the Sổ line for rivals) |
+| 1 | j92.js wdReveal / jveil.js vlReveal (item's true phẩm) | log only | 1 notice (batched) |
+| 1 | j29.js servLearn (servant's nết) | log only | 1 notice |
+| 1 | j53.js ktReveal (kid's nết) | returned text: in the Thầy-dạy dialog (j53:152, card shows it → none) / log-only in j53:204 | j53:204 → 1 notice; dialog path unchanged |
+| 1 | j85.js S.kduc (true Đức of one caught) | card says only «Danh -5» | 1 notice «Ngươi đã thấy rõ đức của …» |
+| 1 | j78.js:125 Tai mắt auto «Dò la» (log only) | log only | 1 notice |
+| 2 | noteAdd(id,t,shown) — new 3rd arg: the act's own card/dialog/log tells it → no notice | double | quiet at j95b j95bHear (Q card «Nghe đồn»), jcycle 216/217 (Sổ nguyệt sự dialog list), j78 intelLearn (every caller shows the returned facts), j92:283 (wdReveal gives the one notice) |
+| 2 | other noteAdd callers (j21:8/17, j22, j24, j28:56, j68e/h, j70 ×4, j92:275, j95 ×2, jagday, jagent, jagknow ×2, jcycle:222, jdis, jdress, jroute, jshelf, jthaiy ×3, jts:352, jtsb ×2, jtwoway) | notice | unchanged: each tells her something via the Sổ / log / dialog without the same fact as a card line of its act (not verified card-by-card for every one; rule = a verified card line → pass shown=1) |
+| 3 | k61RankSync `v.queen?7:` | typed 7 | `rkOf(v)` (j8) |
+Tests: know-notice.js +6 rows (shown=1, intelLearn, j95bHear = 0 notice; servLearn, wdReveal, trongLearn(emp) = 1) → fold 0 bad / ipadAir 0 bad. coop-e2e 141/141 (Fold host) and COOP_SWAP=1 141/141.

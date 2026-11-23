@@ -50,7 +50,7 @@ function j78facts(v){const F=[];const W=j78Who(v);
 function intelLearn(v,n,src){if(!S||!v||v===S)return"";S.intel=S.intel||{};const L=S.intel[v.id]||[];
  const F=j78facts(v).filter(f=>{const o=L.find(x=>x.k===f.k);return !o||o.txt!==f.txt||(f.kind==="where"&&o.bk!==bkey())}).map(f=>Object.assign(f,{r:f.pri+R(25)})).sort((a,b)=>b.r-a.r).slice(0,n||1);
  let out=[];for(const f of F){let extra="";try{if(f.go)extra=f.go()||""}catch(e){}intelAdd(v,f,src);out.push(f.txt+extra)}
- if(out.length)noteAdd(v.id,`${src.by} dò được: ${out.join(" ")}`);return out.join(" ")}
+ if(out.length)noteAdd(v.id,`${src.by} dò được: ${out.join(" ")}`,1);/* KNOW-NOTICE: every caller shows the returned facts on its card / log */return out.join(" ")}
 const J78_WHERE="(Đã ghi vào mục Đã biết trên thẻ nàng và Nhật ký.)";
 function intelOf(p){if(!S||!p||p===S)return[];S.intel=S.intel||{};return (S.intel[p.id]||[]).map(x=>{let now=true;
   if(x.kind==="where")now=x.bk===bkey();else if(x.k==="plan")now=!!p.plan;else if(x.k==="preg")now=!!(p.preg&&p.hidden);else if(x.k==="affair")now=!!p.affair;
@@ -122,7 +122,7 @@ overhear=function(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 /* the Dò la act (player): one fact besides the piece of evidence */
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(!v||k!=="spy")return d0.apply(this,arguments);const e0=v.ev||0;const n0=S.logSeq||0;J78.ctx={how:"Ngươi sai người dò la"};let r;try{r=d0.apply(this,arguments)}finally{J78.ctx=null}
   try{if((v.ev||0)>e0){const m=v.affair&&manById(v.affair);const L=(S.evd||{})[v.id]||[];if(m&&S.logs.slice(0,(S.logSeq||0)-n0).some(x=>x.includes("lén gặp"))){L.slice(-2).forEach(e=>{e.proves=`${j78Who(v)} lén lút tư thông với ${m.name}`;e.ref="affair";e.how="Tai mắt bắt gặp tận mắt"})}
-   const f=intelLearn(v,1,{by:"Tai mắt",how:"Dò la"});if(f){log(`Dò la ${j78who(v)}: ${f} ${J78_WHERE}`);render()}}}catch(e){}return r}})();
+   const f=intelLearn(v,1,{by:"Tai mắt",how:"Dò la"});if(f){log(`Dò la ${j78who(v)}: ${f} ${J78_WHERE}`);try{kitKnow({key:"intel:"+v.id,pri:2,text:`Dò la ${j78who(v)}: ${String(f).replace(/<[^>]+>/g,"")}`})}catch(e){}render()}}}catch(e){}return r}})();
 (function(){const f0=ACT.spy.f;ACT.spy.f=function(a,t){const r=f0.apply(this,arguments);if(a===S&&/bị phát hiện/.test(r||""))return r+`(Người của ${j78who(t)} bắt gặp kẻ rình rập: nàng quý ngươi ${balSg(BAL.eff.j8.f)}, oán ngươi +${balOan(BAL.eff.j8.f,"hurt")}.) `;return r}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="chest"&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Lục rương tìm chứng cứ");if(i>=0){const r0=A[i].run;A[i]=Object.assign({},A[i],{x:evSg(BAL.ag.ev.one),risk:`cung nhân của ${j78who(v)} bắt gặp: nàng quý ngươi ${balSg(-BAL.ag.cx2.chest.rel)}, oán ngươi +${balOan(-BAL.ag.cx2.chest.rel,"hurt")}, ngươi bị cấm túc vì lục lọi cung phi tần`,run:()=>{const r=r0();return /bắt gặp/.test(r)?`Cung nhân của ${j78who(v)} bắt gặp ngươi lục rương: nàng quý ngươi ${balSg(-BAL.ag.cx2.chest.rel)}, oán ngươi +${balOan(-BAL.ag.cx2.chest.rel,"hurt")}; ngươi bị phạt vì lục lọi cung phi tần.`:r}})}}}catch(e){}return A}})();
 /* scouting where she is: the place is a fact too */

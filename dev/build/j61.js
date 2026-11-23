@@ -57,7 +57,7 @@ function k61MetSet(v){try{if(!S||!v||v.id==null)return;S.met=S.met||{};const fir
 /* KNOW-NOTICE (owner rule covers "phẩm"): the rank of ANOTHER person she knows (face seen) changes — promotion, demotion, crowned Hoàng hậu, a friend in co-op — she is told once, batched
    (S.rkSeen[id] = the rank she last knew; the first sight of a face is already told by k61Know with the rank in its title/descriptor, this only records it). Called after every week, every promoteP and every k61Know/k61MetSet. */
 function k61RankSync(){try{if(!S||!S.known||S.dead||typeof kitKnow!=="function")return;S.rkSeen=S.rkSeen||{};
- for(const v of rivals||[]){if(!v||v.id==null||v.out||v.alive===false||!isKnown61(v))continue;const k=String(v.id),r=v.queen?7:(v.rank|0);
+ for(const v of rivals||[]){if(!v||v.id==null||v.out||v.alive===false||!isKnown61(v))continue;const k=String(v.id),r=rkOf(v)|0;
   if(S.rkSeen[k]==null){S.rkSeen[k]=r;continue}if(S.rkSeen[k]===r)continue;const up=r>S.rkSeen[k];S.rkSeen[k]=r;
   kitKnow({key:"rk:"+k,pri:3,text:`${k61Named(v)?v.name:k61Desc(v)} nay ${up?"được tấn phong":"bị giáng xuống"} ${rkName(v)}.`})}}catch(e){console.error("k61RankSync",e)}}
 (function(){if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);k61RankSync();return r}}if(typeof promoteP==="function"){const p0=promoteP;promoteP=function(){const r=p0.apply(this,arguments);k61RankSync();return r}}})();
