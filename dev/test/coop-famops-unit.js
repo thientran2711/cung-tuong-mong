@@ -286,6 +286,31 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     const L0=f.inv.length;delete f.wdI;wdNpcInit(f);R33.init=f.inv.length===L0;R33.ky=ky;R33.kb=kb}catch(z){er33=z.message+" "+String(z.stack).split("\n")[1]}
    finally{rivals.splice(rivals.indexOf(f),1)}
    ck("33 NPC dressing never touches her entry (wdAutoFor: j92 month / Quốc tang / jlux / jworld; wdNpcInit starting pieces)",!er33&&R33.auto&&R33.init,{er33,R33})}
+  /* E44k F1 (coop-lost-scan-traced 9001 dup 2576 «quatcong»: her «Lấy đồ» on the host's entry w68 → her seat kept the piece + case 27, the host never
+     received the «res» (tA.rcv empty) and kept the piece = 2 places): a «res» went out ONCE; a socket down / a peer offline lost it. Now an outbox keeps
+     it until the ack (resent on peer back / reconnect / timer), the receiver applies an id once (seenIds + S.coopRs: a reload never applies it twice)
+     and acks every copy. */
+  {const on34=CW.on,se34=CW.seat,sd34=COOP.send;const sn=[];let up=false,er34="",R34={};
+   try{CW.on=true;CW.seat="b";COOP.send=m=>{sn.push(JSON.parse(JSON.stringify(m)));return up};
+    R34.hook=typeof CW.resOut==="function"&&typeof CW.rqFlush==="function";
+    /* (a) an act result («res» with fam ops) while the socket is down: sent again (same id) once it is up, never after the ack */
+    const id="t34a"+Date.now();CW.resOut({t:"res",id,k:"laydo",fam:[{op:"rm",ci:0,k:P,iu:777,how:"lost"}],fx:{},flags:{},seen:"effect"});
+    R34.first=sn.filter(m=>m.id===id).length;up=true;CW.rqFlush(true);R34.again=sn.filter(m=>m.id===id).length;
+    CW.onActrT({t:"actr",id,ack:1,from:"a"});const n0=sn.length;CW.rqFlush(true);R34.afterAck=sn.slice(n0).filter(m=>m.id===id).length;
+    /* (b) the receiver: the same id twice → applied once, both copies acked */
+    reset();const g=pc(P);S.inv.push(g);const h=pc(P);S.inv.push(h);const n1=sn.length;const rm={t:"res",id:"t34b"+Date.now(),from:"a",k:"npc",fx:{},flags:{},seen:"",fam:[{op:"rm",ci:0,k:P,iu:g.iu,how:"gone"}]};
+    CW.onResT(rm);const ad=Object.assign({},rm,{fam:[{op:"add",e:{k:P,iu:h.iu+1000}}]});CW.onResT(ad);
+    R34.once=cnt(g.iu)===0&&cnt(h.iu+1000)===0&&cnt(h.iu)===1;R34.acks=sn.slice(n1).filter(m=>m.t==="actr"&&m.ack&&m.id===rm.id).length;
+    /* (c) after a reload (seenIds empty): an id her save already holds (S.coopRs) is not applied again, still acked */
+    const id3="t34c"+Date.now();S.coopRs=(S.coopRs||[]).concat([id3]);const n2=sn.length;const nk=++n;CW.onResT({t:"res",id:id3,from:"a",k:"npc",fx:{},flags:{},seen:"",fam:[{op:"add",e:{k:P,iu:nk}}]});
+    R34.reload=cnt(nk)===0&&sn.slice(n2).filter(m=>m.t==="actr"&&m.ack&&m.id===id3).length===1;
+    /* (d) law-11 family: the P2 item answer «iltake» (her choice for her piece in the host's box) rides the same outbox; the host runs one id once and acks */
+    up=false;const n3=sn.length;CW.ilWant({u:4242,e:{k:P}},"về",null);const it=sn.slice(n3).find(m=>m.mode==="iltake");up=true;CW.rqFlush(true);R34.p2again=it?sn.filter(m=>m.id===it.id).length:0;
+    CW.p2InT({t:"act",k:"ctm-p2",mode:"ack",ack:it&&it.id,from:"a"});const n4=sn.length;CW.rqFlush(true);R34.p2acked=sn.slice(n4).filter(m=>it&&m.id===it.id).length===0;
+    CW.seat="a";const n5=sn.length;const tk={t:"act",k:"ctm-p2",mode:"iltake",id:"t34d"+Date.now(),u:4243,k2:P,from:"b",pay:{bac:7}};CW.p2InT(tk);CW.p2InT(tk);
+    R34.p2once=sn.slice(n5).filter(m=>m.mode==="ilrefund").length===1&&sn.slice(n5).filter(m=>m.mode==="ack"&&m.ack===tk.id).length===2}catch(z){er34=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{CW.on=on34;CW.seat=se34;COOP.send=sd34;if(CW.rq)CW.rq.length=0;Q.length=0}
+   ck("34 F1 a res (and a P2 item answer) lost on a down socket is sent again (same id) until acked; the receiver applies an id once (also after a reload) and acks every copy",!er34&&R34.hook&&R34.first===1&&R34.again===2&&R34.afterAck===0&&R34.once&&R34.acks===2&&R34.reload&&R34.p2again===2&&R34.p2acked&&R34.p2once,{er34,R34})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
