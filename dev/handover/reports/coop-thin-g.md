@@ -900,3 +900,35 @@ Successor TODO:
 4. Known test-data weakness (not the game): G0b red when her Danh starts at 0 (store cannot drop below 0) — seen once in a FAMSCAN run; harden G0b by staging Danh ≥ 5 on both sides if it shows in a gate.
 5. CLAIMS row + SSK line here + send_message Foreman B (session_01N1tNP5gpi4qbwxRpor8Ayw).
 FOR MAIN: coop-thin-trip.js meter fix reaches every TRIP lane on main at landing; hn H2 / rkOfFace / dialog-fixed #54 / thin-d / f1 / as9s / cyc / lost-scan items from r2 unchanged; Worker THINMAX 13 deploy at landing.
+
+## REVIEW r3 — BIG reviewer-lander session_01N1tNP3bRx51vs6Simxpejf (opus), 11/23/2026 — VERDICT: PASS 70dc7244 (70dc72446a4436d2a3ac045fa7360fd77033a067)
+PRIORITY #1 CHECK ('coop-thin-g'): OD 1 | ledger 0 | claims 8 (row 'REVIEW coop-thin-g r3' = this session) | main 6 | review/* 5 | archive 0 — reused review/coop-thin-g-f2 @d0e55df1, r2 / F2 reports and probes; nothing rebuilt. START_CTX ≈ 4 %. Depth: child of Foreman B ROOT-2.
+Branch **review/coop-thin-g-r3**: a0529076→8438de28 = d0e55df1 + merge LIVE 225c5c08 (KP23 history + kp23-swap) · 2a40e277 = + merge LIVE **72521d62** (odds-ladder-words + hdr-kiep) · **70dc7244** = + merge LIVE **3e8981e1** (ky-keeper-f2: jky.js only, no co-op file). Both merges: only index.html / sw.js conflicted → LIVE taken + `build_site.sh`; assets.json = LIVE (no diff); no new runtime file (pages_stage 144, allowlist unchanged; new jcoopthinf6b / jcoopthing are assembled j*.js).
+
+### r2 blocking items — closed
+| item | judged | evidence |
+|---|---|---|
+| Danh drift (host store vs her phone) | **REAL game fix, right root, whole family.** jcoopthinf rOn: (a) no inFC exemption (a host sync is not her step), (b) WKD counts endTurn / monthTick only — read jcoopthine:130/153 + jcoopthing:78-79: every real step of hers runs under CW.allow / CW.allowN, so the press wrapper (jcoopthine:261) can no longer pass as her step. Her phone writes no stat outside an allowed step: LAW 11 table (F2 HELPER §1: 8 places × render/renderStage × sync/no sync, before danh/tyPaid/tyShame/emoSeen → after none; remaining writes = display caches + cm.seen local by design). No number, no word, no UI. | G9 / G9b PASS in all 3 trip1 runs; G0b PASS; trip1 ×3 DANHP: every week 'her phone == host store' ok (0 diff, 36/36 weeks ×3); DANHP phone writes all via pApply ← gSync (host patches) |
+| trip1 week stall | **TEST METER, not the game** (coop-thin-trip.js Proxy identity; fix test-only f1051845). A real player has no meter. | INVP probe rerun by me @8438de28 (WEEKS=1, 4 renders): no TRIP → kitReward 0, KMSNAP.inv.includes true; TRIP (fixed meter) → 0. trip1 ×3: 0 stall (a 87/87, b 87/87, c: all 36 weeks merged + G9/G9b ok, then the solo-compare page.goto timed out under 3-run load = harness, after the week checks) |
+
+### Gates
+| gate | head | result |
+|---|---|---|
+| quickcheck (one-core guard, rules-one-source, kit-conform, co-op one-world, time-spill, old save loads + plays a buổi, perf) | 8438de28 | **PASS** (open 1838 ms; perf render 238/286, tab 520/483, buổi 1265/1518) |
+| quickcheck | 2a40e277 | perf buổi 4189/1055 once (known bimodal) → `--runs 5` **PASS** (buổi 2667/1207, core gates PASS) |
+| quickcheck `--runs 5` | **70dc7244** | **PASS** (render 256/256, tab 425/434, buổi 1262/1326; core gates PASS; old save ok) |
+| undef-scan | 8438de28 | PASS (301 names) |
+| role-parity (alone) | 8438de28 | ALL PASS |
+| coop-famops-unit (http://ctm.local/index.html) | 8438de28 | PASS 46/46 |
+| coop-e2e THIN 13 (Fold 686 / iPad) both seat orders | 8438de28 | 141/141 ×2 |
+| coop-e2e THIN 13 **Fold 755x1000@2** host-Fold (fA) + swapped (fB) | 8438de28 | 141/141 ×2 |
+| coop-e2e THIN 13 both orders | 2a40e277 | 141/141 ×2 |
+| coop-e2e THIN 13 | **70dc7244** | 141/141 |
+| thin lanes | 8438de28 | g4 23/23; a c e f6 f6s f6b f6bs PASS; night 111/111; timer 43/43; g4s 23/24 in lane (G2 constant-dice probe) → alone ×2 **23/23** = load flake |
+| trip1 ×3 DANHP | 8438de28 | see above |
+| LOOK both seats (scratch only, none in git) | 8438de28 | fA 07-after3 Fold (season card «Tháng tư») + iPad Tháng tư; fB 05-world Fold guest, 07-after3 Fold guest («Trong cung vừa qua» week-end card on her phone) + iPad host Tháng tư — same month both seats, kit cards, no overflow / cut text. Looked 3×. |
+
+18 LAWS touched: 4 ONE CORE (core gates PASS, no number added) · 6b/one world (her phone now writes no stat of her person outside a real step = the shared truth stays the host's) · 9 KIT (no UI change) · 11 (family table above). None broken.
+FOR MAIN (unchanged, LIVE-identical): hn H2 k61PortEnt p.kk · rkOfFace {$r} · dialog-fixed #54 · thin d / f1 / as9s / cyc / lost-scan · coop-thin-trip.js meter fix reaches every TRIP lane on main at landing · **Worker THINMAX 13 deploy at landing** (LIVE Worker caps 9).
+
+LAND READY: coop-thin-g **70dc7244 (70dc72446a4436d2a3ac045fa7360fd77033a067)** (review/coop-thin-g-r3; contains origin/main 3e8981e1) — gates above; CO-OP GATE: coop-e2e THIN 13 PASS both seat orders (+ Fold 755x1000@2) + both-seat LOOK done. Deploy coop Worker (THINMAX 13) with the landing.
