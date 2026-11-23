@@ -76,3 +76,8 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - At the ceremony only KEPT (giữ thẻ bài) vs BAN HOA is known — no ranks for anyone.
 - A few days later (BAL key, in-game days) the conferral EDICT (thánh chỉ sắc phong): short scene — a eunuch reads it at her lodging, she kneels → she learns her OWN rank (−1/0/+1 rule, cap Addendum 9).
 - Round-mates' and befriended girls' ranks become known as the edict news spreads (news line); everyone else's rank only when met.
+
+## ADDENDUM 14 (MAIN 112, 22:58Z) — YARD = ONE BUỔI OF 4 KHẮC (owner OD 23/11 ~23:05Z, read verbatim; OVERWRITES the seconds countdown in Addenda 1/6/12)
+- The waiting yard is ONE BUỔI of 4 KHẮC using the normal khắc system — NO seconds countdown anywhere.
+- She takes actions of her choice (greet, Hỏi danh tính, step into the drama, observe, tidy her dress, rest …), each costing khắc exactly as in the game (existing costs; Hỏi danh tính uses its normal khắc cost, not seconds).
+- The yard drama and NPC moves advance with the khắc (who talks to whom, the drama escalates on its own if she does nothing). Acquaintance cap = whatever 4 khắc allow (no separate ~3 cap).
