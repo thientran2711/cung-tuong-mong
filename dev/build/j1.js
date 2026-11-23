@@ -160,8 +160,10 @@ function sgFix(v,lbl){const t=statTxt("sung",v,lbl);return t.replace(/ (?=[+\-�
    bare signed number. sgRuleArr / sgRuleObj turn every element holding a token into a getter, so every reader gets the live number. */
 function sgRule(s){return typeof s!=="string"||s.indexOf("{")<0?s:s.replace(/\{(sg|sgRaw|n):([\w.]+)\}/g,(m,f,p)=>{let v=typeof BAL!=="undefined"?BAL:null;for(const k of p.split("."))v=v&&v[k];v=+v||0;
  return f==="sg"?(typeof S==="object"&&S&&S.emp?sgStat(v):statTxt("sung",v)):f==="sgRaw"?sgFix(v):`${v>0?"+":v<0?"-":""}${Math.abs(v)}`})}
-function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(a,i,{get:()=>sgRule(s),enumerable:true,configurable:true})});return a}
-function sgRuleObj(o,k){const s=o&&o[k];if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),enumerable:true,configurable:true});return o}
+/* typed-stat-bal: the getter keeps a setter (a later module may overwrite the text: it then holds the new plain value) */
+function sgRuleSet(o,k){return v=>Object.defineProperty(o,k,{value:v,writable:true,enumerable:true,configurable:true})}
+function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(a,i,{get:()=>sgRule(s),set:sgRuleSet(a,i),enumerable:true,configurable:true})});return a}
+function sgRuleObj(o,k){const s=o&&o[k];if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),set:sgRuleSet(o,k),enumerable:true,configurable:true});return o}
 function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
 function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
 function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}

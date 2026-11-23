@@ -437,3 +437,24 @@ BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
 /* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
 BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
+/* typed-stat-bal (law 4 ONE CORE, OD:L1267): the item effects of the j8 IT table — w = worn bonus (wearBonus), use = one use (useItem), dr = the Sắc of
+   a dress sewn from the fabric (3 months). IT reads them from here (linked below: j8 loads before BAL); the item texts print them ({n:itFx.k.w.sac}).
+   wear = the jinv worn-not-used pieces (ngọc bội at the waist, túi thơm as scent). */
+Object.assign(BAL,{itFx:{tramngoc:{w:{sac:2}},
+ boodieu:{w:{sac:5,danh:2}},
+ tramphuong:{w:{sac:8,danh:4}},
+ vongngoc:{w:{sac:2,danh:1}},
+ vongvang:{w:{sac:4,danh:3}},
+ sonphan:{use:{sac:2}},
+ luahang:{dr:3},
+ gamto:{dr:6},
+ gamvang:{dr:9},
+ nhansam:{use:{suc:25}},
+ yensao:{use:{suc:15,sac:1}},
+ agiao:{use:{suc:10}},
+ huongtram:{use:{duc:1,suc:5}},
+ tuithom:{use:{suc:3}},
+ thunha:{use:{suc:10,duc:2}},
+ wear:{ngocboi:{danh:1},tuithom:{sac:1}},
+ veil:{sac:2}/* the hủy dung veil while the mark is on her face (jinv wearBonus wrap) */}});
+if(typeof IT!=="undefined")for(const k in BAL.itFx)if(IT[k])Object.assign(IT[k],BAL.itFx[k]);
