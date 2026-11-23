@@ -74,7 +74,18 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}
 /* logs (her journal) and the life's ending text are player-visible too */
 let logSeen=0;function auditLogs(){try{const L=S.logs||[];const n=Math.min(L.length,8);for(let i=0;i<n;i++){const t=strip(L[i]);if(R.seen["l|"+t])continue;R.seen["l|"+t]=1;words(t,"nhật ký")}}catch(e){}}
-{const o0=over;over=function(h,t,fate){try{words(h+" "+t+" "+fate,"ending");R.ending={h:strip(h),fate:strip(fate).slice(0,200)}}catch(e){}return o0.apply(this,arguments)}}
+/* the owner's tally (OD 23/11 ~20:45Z): ending id + type, death cause / age / stage, max rank, every rank step, top titles */
+const GROUP={death:"death",grand:"đại kết cục",rare:"rare",fate:"kỳ ngộ",exile:"thường",fail:"thường",leave:"thường",throne:"thường"};
+{const o0=over;over=function(h,t,fate,alive){const was=!S||S.dead;try{words(h+" "+t+" "+fate,"ending")}catch(e){}const r=o0.apply(this,arguments);
+ try{if(!was&&S&&S.dead&&!R.life){life0();const f=strip(fate);let type=S.kesT||"";try{if(!type&&typeof kesLife==="function")type=kesLife(h,fate,false)}catch(e){}
+  let cause="";try{const ch=typeof deathChain==="function"?deathChain(fate):[];cause=strip(ch[0]||"")}catch(e){}
+  const P=(typeof BAL!=="undefined"&&BAL.st14&&BAL.st14.parts)||null,ch=S.st&&S.st.ch?S.st.ch.n:null;let part=null;if(P&&ch!=null)P.forEach((x,i)=>{if(ch>=x[0]&&ch<=x[1])part=i});
+  const all=strip(h)+" · "+f;
+  R.life={id:strip(h),type,group:GROUP[type]||(type?"thường":"?"),fate:f.slice(0,240),death:type==="death",cause:cause.slice(0,160),age:S.age,year:S.year,years:+((S.turn||0)/12).toFixed(2),
+   chapter:ch,part,rank:S.rank,rankN:RANKS[S.rank]&&RANKS[S.rank].n,maxRank:Math.max(R.maxR,S.maxRank||0),maxRankN:RANKS[Math.max(R.maxR,S.maxRank||0)]&&RANKS[Math.max(R.maxR,S.maxRank||0)].n,
+   top:{hoangHau:Math.max(R.maxR,S.maxRank||0)>=7,nuDe:/Nữ đế|nhất đế/i.test(strip(h))&&!/phế|thoái vị/i.test(strip(h)),hoangThaiHau:/Thái hậu/i.test(strip(h))}/* read from the ending title (j99succ titles: Hoàng thái hậu / Nhiếp chính Thái hậu / Nữ đế …) */,
+   steps:R.steps.slice(),kids:(S.kids||[]).length}}}catch(e){R.life={err:String(e.message)}}
+ return r}}
 
 /* ---- stat sanity: inpage6 __bad already lists NaN / negative / over-cap stats; robot10.js turns them into bugs ---- */
 
@@ -89,13 +100,26 @@ const VOL=new Set(["at"]);
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
  try{const d1=ser();VOL.forEach(k=>delete d1[k]);s1=JSON.stringify(d1)}catch(e){bug("save","ser() throws",e.message);return}
  R.lastSave=s1;if(!R.firstSave)R.firstSave=s1;
+ /* in-place load only at a quiet moment (no card waiting, no night flip pending): loading the bot's own game under a pending night flip
+    (jnf S.nfX open/wait, cards tracked by object in FLIPQ) locks the clock — the harness must not cause that itself; the real load path is
+    tested at the UI checkpoints (robot10.js nightAfterLoad) */
+ if(Q.length||(S.nfX&&S.nfX.st&&S.nfX.st!=="done")){R.rtSkip=(R.rtSkip||0)+1;try{JSON.parse(s1)}catch(e){bug("save","save is not valid JSON",e.message)}
+  /* once per life (after the first checkpoint), a save taken while the night flip is pending goes to the real pages too: she can close the game there */
+  if(C.uiEvery&&S.nfX&&S.nfX.st!=="done"&&!R.nightCp&&R.nextCp){R.nightCp=1;R.cps.push({buoi:R.buoi,at:where()+" (night flip pending)",save:s1,q:(Q[0]&&strip(Q[0].t||Q[0].title||"").slice(0,60))||""})}return}
  try{quiet=true;deser(JSON.parse(s1));quiet=false;const d2=ser();VOL.forEach(k=>delete d2[k]);const s2=JSON.stringify(d2);
   if(s1!==s2){const dp=diffPath(JSON.parse(s1),JSON.parse(s2),"save");bug("save","save→load→save changes the state",dp)}}
  catch(e){quiet=false;bug("save","load of her own save throws",String(e.message)+" "+(String(e.stack).split("\n")[1]||"").trim())}
  R.rt++;R.rtMs+=performance.now()-t0;
- if(C.uiEvery&&R.buoi%C.uiEvery===1)R.cps.push({buoi:R.buoi,at:where(),save:s1,q:(Q[0]&&strip(Q[0].t||Q[0].title||"").slice(0,60))||""})}
-{const nb0=nextBuoi;nextBuoi=function(){const t0=performance.now();let r;try{r=nb0.apply(this,arguments)}finally{const dt=performance.now()-t0;R.nbMs.push(Math.round(dt));
-  if(dt>(C.lagMs||1500))bug("lag","one buổi change took "+Math.round(dt/100)/10+" s (bot page, render off)",where())}
-  R.buoi++;try{if(!R.road&&S&&S.st&&S.st.f14)R.road=S.st.f14.road;R.origin=S&&S.origin&&S.origin.k}catch(e){}
-  auditLogs();if(!(R.buoi%(C.rtEvery||1)))roundTrip();return r}}
+ if(C.uiEvery&&R.buoi>=(R.nextCp||1)){R.nextCp=R.buoi+C.uiEvery;R.cps.push({buoi:R.buoi,at:where(),save:s1,q:(Q[0]&&strip(Q[0].t||Q[0].title||"").slice(0,60))||""})}}
+/* game time: a buổi only counts when the clock really moves (a «Sang ngày mới» that does nothing is a soft-lock, not a buổi) */
+const gt=()=>S?((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0):0;R.noAdv=0;R.calls=0;R.steps=[];R.maxR=-1;
+function life0(){try{if(S&&S.rank>R.maxR){R.maxR=S.rank;R.steps.push({r:S.rank,n:RANKS[S.rank]&&RANKS[S.rank].n,buoi:R.buoi,age:S.age,year:S.year})}
+ if(C.road&&C.locked&&R.lock){if(R.lock.openAt==null&&arcOk67(ARC67[C.road]))R.lock.openAt={buoi:R.buoi,age:S.age,year:S.year};
+  if(R.lock.playAt==null&&S.st&&S.st.ch&&(S.st.f14&&S.st.f14.road===C.road||JSON.stringify(S.st.ch.past||[]).includes(C.road)||(S.st.ch.cur&&JSON.stringify(S.st.ch.cur).includes(C.road))))R.lock.playAt={buoi:R.buoi,age:S.age,year:S.year}}}catch(e){}}
+if(C.locked)R.lock={road:C.road,openAt:null,playAt:null};
+{const nb0=nextBuoi;nextBuoi=function(){const t0=performance.now(),g0=gt();let r;try{r=nb0.apply(this,arguments)}finally{const dt=performance.now()-t0;R.nbMs.push(Math.round(dt));
+  if(dt>(C.lagMs||1500))bug("lag","one buổi change took over "+(C.lagMs||1500)/1e3+" s (bot page, render off)",Math.round(dt)+" ms @ "+where())}
+  R.calls++;try{if(!R.road&&S&&S.st&&S.st.f14)R.road=S.st.f14.road;R.origin=S&&S.origin&&S.origin.k}catch(e){}
+  if(S&&!S.dead&&gt()===g0&&!Q.length&&!S.mg){if(++R.noAdv>=20&&!R.halt){R.halt="softlock";bug("stuck","«Sang ngày mới» does nothing: the clock does not move (soft-lock)",where()+" · used "+used+" · place "+S.place+" · Q 0 · S.mg "+!!S.mg);R.haltSave=R.lastSave}return r}
+  R.noAdv=0;R.buoi++;life0();auditLogs();if(!(R.buoi%(C.rtEvery||1)))roundTrip();return r}}
 })();

@@ -10,7 +10,7 @@
      out     output folder (default dev/handover/robot). Writes <origin>-<yyyymmdd-hhmm>.md (THE bug file of the run), results JSON,
              saves/ (repro saves), shots/ (first screenshot of each UI bug; shots never go in git — upload with dev/site/cdn_sync.py if needed)
    env GAME=<index.html path or https URL> (default: this checkout's index.html = LIVE when on main) · PAR=3 parallel browsers (4 CPUs)
-       CAP=1500 s wall cap per life · UIEVERY=60 buổi between UI checkpoints (0 = off) · DEV=fold,ipad · SEED=<n> base seed
+       CAP=1800 s wall cap per life · UIEVERY=150 buổi between UI checkpoints (0 = off) · DEV=fold,ipad · SEED=<n> base seed
        LAGMS=1500 lag flag per buổi in the bot page · UILAG=400 long-task flag (ms) in the real pages · OLDSAVE=<file.json,...> extra old saves
  WHAT ONE LIFE DOES
    fast bot page (inpage6.js bot + inty.js + robot10-in.js; render off, seeded Math.random) plays one whole kiếp of the forced origin + road with
@@ -39,7 +39,7 @@ function serve(file){const http=require('http');const root=path.dirname(path.res
   sv.listen(0,'127.0.0.1',()=>{sv.unref();res('http://127.0.0.1:'+sv.address().port+'/'+idx)})})}
 /* noise that is the harness, not the game: blocked pictures/sounds */
 const NOISE=/Failed to load resource|net::ERR_|Fetch API cannot load|ERR_FAILED|ERR_ABORTED/;
-const PAR=+process.env.PAR||3,CAP=(+process.env.CAP||1500)*1e3,UIEVERY=process.env.UIEVERY==null?60:+process.env.UIEVERY,SEED=+process.env.SEED||1;
+const PAR=+process.env.PAR||3,CAP=(+process.env.CAP||1800)*1e3,UIEVERY=process.env.UIEVERY==null?150:+process.env.UIEVERY,SEED=+process.env.SEED||1;
 const DEVS={fold:[755,1000],ipad:[1180,820]};const DEV=(process.env.DEV||'fold,ipad').split(',').filter(d=>DEVS[d]);
 const UILAG=+process.env.UILAG||400,UILOAD=+process.env.UILOAD||5000;
 const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
@@ -63,7 +63,9 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
  const vis=e=>{if(!e.isConnected)return false;const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return false;for(let x=e;x&&x!==document.body;x=x.parentElement){const s=cs(x);if(s.display==='none'||s.visibility==='hidden'||+s.opacity<.05||x.hidden)return false}return true};
  const name=e=>{let s=e.tagName.toLowerCase();if(e.id)s+='#'+e.id;else if(e.className&&typeof e.className==='string')s+='.'+e.className.trim().split(/\s+/).slice(0,2).join('.');const p=e.parentElement;return (p&&p.id?'#'+p.id+' > ':'')+s};
  const ov=document.getElementById('ov'),md=document.getElementById('modal');
- const root=(ov&&!ov.hidden&&vis(ov))?ov:(md&&!md.hidden&&vis(md))?md:document.getElementById('game')||document.body;
+ /* scan the layer she actually sees: the body child under the screen centre (a flip scene, a card, a mini-game or the game itself) */
+ let top=document.elementFromPoint(W/2,H/2);while(top&&top.parentElement&&top.parentElement!==document.body)top=top.parentElement;
+ const root=(top&&top!==document.body&&top!==document.documentElement)?top:(ov&&!ov.hidden&&vis(ov))?ov:(md&&!md.hidden&&vis(md))?md:document.getElementById('game')||document.body;
  if(document.documentElement.scrollWidth>W+2)out.push({k:'overflow',msg:'page scrolls sideways',ex:document.documentElement.scrollWidth+'px > '+W+'px'});
  const els=[...root.querySelectorAll('*')].filter(e=>!/^(svg|path|g|img|canvas|video|picture|source|use|defs|clippath|lineargradient|stop|filter)$/i.test(e.tagName));
  const scrollAnc=e=>{for(let x=e.parentElement;x&&x!==document.documentElement;x=x.parentElement){const s=cs(x);if(/(auto|scroll)/.test(s.overflowY+s.overflowX)&&(x.scrollHeight>x.clientHeight+1||x.scrollWidth>x.clientWidth+1))return x}return null};
@@ -115,7 +117,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  p.on('console',m=>{if(m.type()==='error'&&!NOISE.test(m.text()))errs.push(['console.error',m.text(),'']);});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(500);
  await p.evaluate(()=>localStorage.clear());
- await p.evaluate(`window.__r10cfg=${JSON.stringify({origin:job.origin,road:job.road,pers:job.bot,uiEvery:UIEVERY,lagMs:+process.env.LAGMS||1500})}`);
+ await p.evaluate(`window.__r10cfg=${JSON.stringify({origin:job.origin,road:job.road,locked:!!job.locked,pers:job.bot,uiEvery:UIEVERY,lagMs:+process.env.LAGMS||1500,rtEvery:+process.env.RTEVERY||1})}`);
  await p.evaluate(rd('inpage6.js'));await p.evaluate(rd('inty.js'));await p.evaluate(rd('robot10-in.js'));
  const mode=await p.evaluate(()=>window.__r10.mode);
  await p.evaluate(()=>{clean0();document.getElementById('title').hidden=true;SLOT=1;Q=[];start();function clean0(){document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove())}});
@@ -127,17 +129,20 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
   const cps=await p.evaluate(()=>window.__r10.cps.splice(0));
   for(const cp of cps){R.cps++;for(const d of DEV)await uiCheck(ui[d],d,cp,job,bug,R);
    if(!oldDone){oldDone=true;const first=await p.evaluate(()=>window.__r10.firstSave);for(const d of DEV.slice(0,1))await oldSaves(ui[d],d,cp.save,first,bug)}}
-  if(n>=1)break;if(Date.now()-t1>CAP){cap=true;break}}
+  if(n>=1||await p.evaluate(()=>!!window.__r10.halt))break;if(Date.now()-t1>CAP){cap=true;break}}
  R.t.play=Date.now()-t1;
- const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
+ const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave,life:window.__r10.life||null,lock:window.__r10.lock||null,halt:window.__r10.halt||null,calls:window.__r10.calls,steps:window.__r10.steps},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
  const res=st.res[0]||null;R.res=res&&{title:res.title,fate:res.fate,rank:res.rank,maxRank:res.maxRank,years:res.years,age:res.age,origin:res.origin,lb:res.lb,stuck:res.stuck,state:res.state,ring:res.ring};
- R.buoi=st.r.buoi;R.road=st.r.road;R.origin=st.r.origin;R.rt={n:st.r.rt,ms:st.r.rtMs};R.words=st.r.words;R.opts=st.r.opts;
+ R.buoi=st.r.buoi;R.calls=st.r.calls;R.halt=st.r.halt;R.lock=st.r.lock;
+ /* the owner's tally fields (same JSON from every runner; robot10-agg.js reads them) */
+ R.life=st.r.life||{id:st.r.halt?'SOFTLOCK':cap?'CAP':(res&&res.title)||'?',type:st.r.halt?'softlock':cap?'cap':(res&&res.title==='TIMEOUT')?'stuck':(res&&res.title==='CRASH')?'crash':'?',group:'no ending',death:false,
+  maxRank:Math.max(-1,...(st.r.steps||[]).map(x=>x.r)),steps:st.r.steps,age:st.state&&st.state.age,year:st.state&&st.state.year};R.road=st.r.road;R.origin=st.r.origin;R.rt={n:st.r.rt,ms:st.r.rtMs};R.words=st.r.words;R.opts=st.r.opts;
  const nb=st.r.nbMs.slice().sort((a,b)=>a-b);R.nb={n:nb.length,p50:nb[nb.length>>1]||0,p95:nb[Math.floor(nb.length*.95)]||0,max:nb[nb.length-1]||0};
  for(const x of st.r.bugs)bug(x.type,x.msg,x.detail+(x.at?' @ '+x.at:''),{n:x.n,save:x.save});
  if(cap)bug('stuck','no ending within the wall cap ('+CAP/1e3+' s)','state '+JSON.stringify(st.state),{save:st.r.lastSave});
  if(res&&res.title==='TIMEOUT')bug('stuck','life stuck (inpage6 TIMEOUT'+(res.stuck?': no progress in one buổi':': 60000 steps')+')',(res.state||'')+' ring '+JSON.stringify(res.ring||[]),{save:st.r.lastSave});
  if(res&&res.title==='CRASH')bug('crash','bot step threw: '+res.fate,'',{save:st.r.lastSave});
- if(job.road&&R.road!==job.road)bug('harness','forced road '+job.road+' not played (life got '+R.road+')','arcOk67 false at start? (road locked)');
+ if(job.road&&!job.locked&&R.road!==job.road)bug('harness','forced road '+job.road+' not played (life got '+R.road+')','arcOk67 false at start? (road locked)');
  if(R.origin&&R.origin!==job.origin)bug('harness','forced origin '+job.origin+' not played (life got '+R.origin+')','');
  for(const s of (st.x.bad||[]))bug('number','stat out of range: '+s.replace(/ \w+$/,'').replace(/=.*/,''),s,{save:st.r.lastSave});
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);
@@ -160,6 +165,7 @@ async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.
  /* the open card first (as she would see it on load), then every tab */
  if(await p.evaluate(()=>!document.getElementById('modal').hidden))await scan('card «'+cp.q+'»');
  await p.evaluate(()=>{try{Q.length=0;closeModal();document.getElementById('ov').hidden=true}catch(e){}});
+ if(d===DEV[0])await nightAfterLoad(p,d,cp,bug);
  const tabs=await p.evaluate(()=>[...document.querySelectorAll('.bar [data-tab]')].filter(e=>e.offsetParent!==null).map(e=>e.dataset.tab));
  for(const t of tabs){const ok=await p.evaluate(t=>{const b=document.querySelector('.bar [data-tab="'+t+'"]');if(!b||b.disabled)return false;b.click();return true},t);if(!ok)continue;
   await p.waitForTimeout(250);await p.evaluate(()=>document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove()));
@@ -169,6 +175,13 @@ async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.
  if(big.length)bug('lag','['+d+'] tab switch freezes over '+UILAG+' ms',Math.max(...big)+' ms longest · '+big.length+' long tasks @ '+cp.at,{save:cp.save});
  R.ui.ms=(R.ui.ms||0)+Date.now()-t0}
 const UILAG_=UILAG;
+/* after a real load, she must be able to play on: «Sang ngày mới» (kit card buttons closed as she would) must move the clock within 12 presses */
+async function nightAfterLoad(p,d,cp,bug){const r=await p.evaluate(()=>{const gt=()=>((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0);const g=gt();let n=0;
+  for(;n<12&&gt()===g&&!S.dead;n++){let k=0;while(k++<20&&(!document.getElementById('modal').hidden||!document.getElementById('ov').hidden)){
+    const b=[...document.querySelectorAll('#ov button,#modal button')].filter(x=>x.offsetParent!==null&&!x.disabled);const pick=b.find(x=>!/kit-x/.test(x.className))||b[0];if(!pick)break;pick.click()}
+   const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()}
+  return{moved:gt()!==g||S.dead,n,nf:S.nfX&&S.nfX.st}});
+ if(!r.moved)bug('stuck','['+d+'] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)','12 presses, night flip S.nfX '+r.nf+' @ '+cp.at,{save:cp.save})}
 /* old saves: the same life saved under older headers + the life's first save + OLDSAVE files; each must load and render with no error */
 async function oldSaves(p,d,save,first,bug){const v=JSON.parse(save);const L=[];
  for(const ver of [5,4,3]){const x=JSON.parse(save);x.v=ver;L.push(['v'+ver+' header',JSON.stringify(x)])}
@@ -188,17 +201,17 @@ function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0)
  const L=await list();if(!L[ORIGIN]){console.error('unknown origin '+ORIGIN+'; the game has: '+Object.keys(L).join(' '));process.exit(2)}
  const roads=L[ORIGIN].map(x=>x.id);
  const bots=/^\d+$/.test(BOTA||'10')?BOTS.slice(0,Math.min(10,+(BOTA||10))):BOTA.split(',').filter(x=>BOTS.includes(x));
- const lives=+LIVES||1;const jobs=[];
+ const lives=+LIVES||1;const jobs=[];const LK=Object.fromEntries(L[ORIGIN].map(x=>[x.id,!x.ok]));
  const roadOf=(i)=>BR==='all'?null:BR==='spread'?roads[i%roads.length]:/^\d$/.test(BR)?roads[+BR-1]:BR;
  if(BR!=='all'&&BR!=='spread'&&!roads.includes(roadOf(0))){console.error('unknown branch '+BR+' for '+ORIGIN+'; roads: '+roads.join(' '));process.exit(2)}
  const RS=BR==='all'?roads:[null];
- for(const r of RS)bots.forEach((bot,i)=>{for(let l=1;l<=lives;l++){const road=r||roadOf(i);const id=`${ORIGIN}-${road}-${bot}-${l}`;jobs.push({id,origin:ORIGIN,road,bot,life:l,seed:hash(id+':'+SEED)})}});
+ for(const r of RS)bots.forEach((bot,i)=>{for(let l=1;l<=lives;l++){const road=r||roadOf(i);const id=`${ORIGIN}-${road}-${bot}-${l}`;jobs.push({id,origin:ORIGIN,road,locked:!!LK[road],bot,life:l,seed:hash(id+':'+SEED)})}});
  const d=new Date(),stamp=d.toISOString().slice(0,16).replace(/[-:]/g,'').replace('T','-');
  fs.mkdirSync(path.join(OUT,'saves'),{recursive:true});const T0=Date.now();
  console.log(`ROBOT-10 ${ORIGIN} ${BR} · ${bots.length} bots × ${lives} kiếp → ${jobs.length} lives, ${PAR} in parallel · game ${URL}`);
  const done=[];let k=0;
  await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async()=>{while(k<jobs.length){const j=jobs[k++];const r=await life(j);done.push(r);
-  console.log(`  ${j.id}: ${r.res?r.res.title:'—'} · rank ${r.res?r.res.maxRank:'?'} · ${r.res?r.res.years:'?'} y · ${r.buoi} buổi · ${r.bugs.length} bugs · ${(r.t.total/1e3).toFixed(0)} s`);
+  console.log(`  ${j.id}: ${r.life.id} [${r.life.group}] · max ${r.life.maxRankN||r.life.maxRank} · ${r.life.years!=null?r.life.years:'?'} y · ${r.buoi} buổi · ${r.bugs.length} bugs · ${(r.t.total/1e3).toFixed(0)} s`);
   fs.writeFileSync(path.join(OUT,`${ORIGIN}-${stamp}.json`),JSON.stringify(done.map(x=>Object.assign({},x,{bugs:x.bugs.map(b=>Object.assign({},b,{save:undefined}))})),null,1))}}));
  report(done,jobs,stamp,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
 
@@ -207,7 +220,7 @@ function report(done,jobs,stamp,ms){done.sort((a,b)=>jobs.indexOf(a.job)-jobs.in
  const ORDER=['crash','stuck','js','save','number','word','harness','lag','ui-overflow','ui-offscreen-btn','ui-covered-btn','ui-overlap','ui-cut','ui-offscreen-text','ui-word','ui-number'];
  const bl=[...all.values()].sort((a,b)=>(ORDER.indexOf(a.type)+1||99)-(ORDER.indexOf(b.type)+1||99)||b.lives.length-a.lives.length);
  let i=0;const saveOf=(x)=>{if(!x.ex.save)return '';const f=path.join('saves',`${stamp}-${String(++i).padStart(3,'0')}.json`);fs.writeFileSync(path.join(OUT,f),typeof x.ex.save==='string'?x.ex.save:JSON.stringify(x.ex.save));return f};
- const per=done.map(r=>`| ${r.job.id} | ${r.job.bot} | ${r.road||'?'} | ${r.res?r.res.title:'—'} | ${r.res?r.res.maxRank:''} | ${r.res?r.res.years:''} | ${r.buoi} | ${r.cps} | ${r.bugs.length} | ${(r.t.total/1e3).toFixed(0)} s (play ${((r.t.play||0)/1e3).toFixed(0)}, UI ${((r.ui.ms||0)/1e3).toFixed(0)}) | buổi p50/p95/max ${r.nb?r.nb.p50+'/'+r.nb.p95+'/'+r.nb.max:''} ms · save rt ${r.rt?r.rt.n+'×, '+(r.rt.ms/Math.max(1,r.rt.n)).toFixed(1)+' ms':''} | ${r.job.seed} |`).join('\n');
+ const per=done.map(r=>`| ${r.job.id} | ${r.job.bot} | ${r.road||'?'}${r.lock?' (locked: opens '+(r.lock.openAt?'y'+r.lock.openAt.year+' age '+r.lock.openAt.age:'never')+', played '+(r.lock.playAt?'y'+r.lock.playAt.year:'no')+')':''} | ${r.life.id} [${r.life.group}${r.life.cause?': '+r.life.cause.slice(0,50):''}] | ${r.life.maxRankN||r.life.maxRank} | ${r.life.years!=null?r.life.years:''} (age ${r.life.age}) | ${r.buoi} | ${r.cps} | ${r.bugs.length} | ${(r.t.total/1e3).toFixed(0)} s (play ${((r.t.play||0)/1e3).toFixed(0)}, UI ${((r.ui.ms||0)/1e3).toFixed(0)}) | buổi p50/p95/max ${r.nb?r.nb.p50+'/'+r.nb.p95+'/'+r.nb.max:''} ms · save rt ${r.rt?r.rt.n+'×, '+(r.rt.ms/Math.max(1,r.rt.n)).toFixed(1)+' ms':''} | ${r.job.seed} |`).join('\n');
  const md=[`# ROBOT-10 run ${ORIGIN} · ${BR} · ${stamp} (UTC)`,'',`Game: ${URL} · ${done.length} lives (${jobs.length} planned) · ${PAR} parallel · wall ${(ms/6e4).toFixed(1)} min · UI checkpoints every ${UIEVERY} buổi at ${DEV.map(d=>d+' '+DEVS[d].join('x')).join(' + ')}`,
   `Runner: node dev/measure/robot10.js ${process.argv.slice(2).join(' ')} · repro: put saves/<file> into localStorage "hclh-save-v2-1", open the game, «Tiếp tục kiếp này» (Ô 1); seed = SEED for the bot page`,'',
   `## Bugs (${bl.length} distinct; one row per bug, lives = how many lives hit it)`,'',
