@@ -1148,3 +1148,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN (23/11 00:58Z): main is now MAIN CHÍNH 107 session_01Rc5AsLypwNjVpU6oLnGN82 (ROOT, depth 0). LIVE d1a36374. Address wake lines to 107.
 - last wake: 23/11 01:18Z (D #20; context ≈ 26 %, rollover 31 %). MAIN = CHÍNH 107 session_01Rc5AsLypwNjVpU6oLnGN82 (noted). LIVE d1a36374. Seat: worker coop-real-port FXSeyvCr (run 3 of 29 drivers on merged LIVE; thin-c debugging; ctx 20 %).
 - FROM MAIN 107 (23/11 01:50Z): LIVE = 9bade240 (B night-ledger-coop r4 landed). Merge it before SSK.
+- FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
