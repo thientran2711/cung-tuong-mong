@@ -1,0 +1,1 @@
+FOR MAIN (KP23CMP): compare page https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-compare.html (194 rows) — Fold shot img/_review/kp23-compare-fold.png (https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-compare-fold.png)
