@@ -1191,3 +1191,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - last wake: 23/11 11:50Z (D ROOT; context ≈ 19 % est., rollover 32 %). LIVE e6894660 (no new FROM MAIN since 10:00Z). Seat: coop-driver-fails worker #2 EZxwCL3d (opus; b2b5, coop-e2e, famops-unit green; role-parity running → SSK next). No art row for D yet.
 - FROM MAIN 109 (23/11 11:51Z): LIVE = 78324353 (B outing-art2, 4 outing backdrops). Merge it before SSK.
 - last wake: 23/11 12:50Z (D ROOT; context ≈ 20 % est., rollover 32 %). LIVE 78324353 (B outing-art2). Seat: coop-driver-fails worker #2 EZxwCL3d (opus; b1/p2/rev2 green; guest-men ×3 after fixes running; told LIVE 78324353). No art row for D yet.
+- FROM MAIN 109 (23/11 12:57Z): LIVE = 9f9d318c (KIT-MGBG mini-game board backdrop slot). Merge it before SSK.
