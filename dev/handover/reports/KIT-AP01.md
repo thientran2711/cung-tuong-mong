@@ -37,3 +37,13 @@ quickcheck on this sha was started but had not finished when this verdict was wr
 3. KIT.md ORIGIN FRAME paragraph updated in place.
 Looked at: all 9 origins x short + long synthetic card (2 choice buttons) x Fold 755x1000 + iPad 1180x820 (contact sheets): frame visible all round, seal clear of ornament, text not cut, long cards scroll with the kit's «Kéo xuống» cue. Limit: my synthetic long card is not a real main-story card; I did not measure button-to-bottom clearance on a real long card (reviewer's measure should be repeated).
 quickcheck PASS on 7cd4d5fe: open 1955 ms, old save ok, core gates PASS, perf render 287/262, tab 476/501, buổi 1380/1358.
+
+## REVIEW 2 (small kit reviewer, 23/11) — **PASS** f38a40b1454b6c3e670a18b99b22be4ef3eba7de
+Reviewed keeper FIX 1 review/kit-ap01-frame @7cd4d5fe9db93ea5493ab2bfd9d6de70fad33bc4. origin/main had moved to a689bb80: source merged clean; only generated index.html/sw.js/assets.json conflicted → took main's, rebuilt with dev/site/build_site.sh. Merge commit **f38a40b1** (descends from origin/main a689bb80), pushed as review/kit-ap01-frame-r7. Fast-forward main to it (site already rebuilt in the commit).
+PRIORITY #1 CHECK: unchanged from review 1 (AP01 only, no other branch).
+1. Buttons / last line vs frame: iPad 1180x820, all 9 origins, long card (7 paragraphs + 2 choice buttons): buttons + last line end 3 px above the frame band (band now 24-14 = 10 px inside the card) — clear (was covered by 26 px before). Frame outset 14 px: dialog-to-screen margin >= 83 px on every side on Fold/iPad, so not clipped by screen edge, no overlap with neighbours.
+2. Seal: 15 px below card top, clear of the top-right ornament on all 9 (looked at Fold + iPad short sheets); ✕ and seal do not collide.
+3. Regression: all 9 origins (tt dtq muoi cn nc td ch thd srv) x short+long x Fold 755x1000@2 + iPad 1180x820@2 looked at; identical geometry per origin, no horizontal overflow, 0 page errors (only unrelated face-man-*/nvp-ha-sang 404s on CDN).
+4. quickcheck on f38a40b1 finished: PASS 253 s, open 1809 ms, old save ok, render 245/247, tab 519/500, buổi 1238/1279, core gates PASS.
+Note (not a defect of this part): on Fold, an artificially over-long card (7 paragraphs) clips its button row at the dialog bottom exactly the same WITHOUT the frame (baseline layout, verified by comparing KPO_ART cleared) — not caused by AP01; real cards should be checked by the card-length work, not this kit part.
+Law 9 kit-first ok, law 12 two devices ok, law 7 no new player text.
