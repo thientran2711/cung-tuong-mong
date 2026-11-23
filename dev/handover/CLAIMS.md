@@ -1111,4 +1111,4 @@ REVIEW coop-flakes (opus BIG co-op; briefs/D20-coop-flakes-review.md) of 23b7cce
 | M14 refresh ui-tour-states PDF vs LIVE (sonnet; MAIN 106 order 22/11 22:45Z) | review/ui-tour-states; reports/HELP-M14.md | C | session_01D3E3NY8LSw4bXUfgsJG5vH | RUNNING | 23/11 00:19Z (ROOT-C5) |
 | N19 body-fit.json data from existing figures, no new pictures (sonnet; MAIN 106 order) | review/body-fit-data; reports/HELP-N19.md | C | session_01D3E3NaaX7UWgpnF2u9c8BW | RUNNING | 23/11 00:19Z (ROOT-C5) |
 | N18 drop capped FIGSIG wait in quickcheck.js (sonnet; MAIN 106 order) | review/quickcheck-figsig; reports/HELP-N18.md | C | session_01D3E3NbPX6N9CL5SJr4PaUC | RUNNING | 23/11 00:19Z (ROOT-C5) |
-| REVIEW N19 body-fit-data @6e845d8e (sonnet) | reports/REVIEW-N19.md | C | session_01D3E3NakuSUvDgL4Z9pUGAZ | RUNNING | 23/11 00:32Z (ROOT-C5) |
+| REVIEW N19 body-fit-data @6e845d8e (sonnet) | reports/REVIEW-N19.md | C | session_01D3E3NakuSUvDgL4Z9pUGAZ | PASS → LAND READY, archived | 23/11 00:32Z (ROOT-C5) |
