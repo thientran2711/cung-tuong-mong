@@ -1112,5 +1112,5 @@ REVIEW coop-flakes (opus BIG co-op; briefs/D20-coop-flakes-review.md) of 23b7cce
 | N19 body-fit.json data from existing figures, no new pictures (sonnet; MAIN 106 order) | review/body-fit-data; reports/HELP-N19.md | C | session_01D3E3NaaX7UWgpnF2u9c8BW | RUNNING | 23/11 00:19Z (ROOT-C5) |
 | N18 drop capped FIGSIG wait in quickcheck.js (sonnet; MAIN 106 order) | review/quickcheck-figsig; reports/HELP-N18.md | C | session_01D3E3NbPX6N9CL5SJr4PaUC | RUNNING | 23/11 00:19Z (ROOT-C5) |
 | REVIEW N19 body-fit-data @6e845d8e (sonnet) | reports/REVIEW-N19.md | C | session_01D3E3NakuSUvDgL4Z9pUGAZ | PASS → LAND READY, archived | 23/11 00:32Z (ROOT-C5) |
-| REVIEW N18 quickcheck-figsig @a9dc0a52 (sonnet) | reports/REVIEW-N18.md | C | session_01D3E3NYr3CttfCogGMGATJR | RUNNING | 23/11 00:43Z (ROOT-C5) |
+| REVIEW N18 quickcheck-figsig @a9dc0a52 (sonnet) | reports/REVIEW-N18.md | C | session_01D3E3NYr3CttfCogGMGATJR | PASS → LAND READY, archived | 23/11 00:43Z (ROOT-C5) |
 | coop-thin-g F1 fixer #10 (opus BIG co-op; successor of #9 4qJehLbX at budget; @6c408f77 ⊇ LIVE d1a36374; gates + SSK) | review/coop-thin-g-f1; reports/coop-thin-g.md | B | session_01N1tNP5QWB8tYRvFqUSnKVx | RUNNING | 23/11 00:53Z |
