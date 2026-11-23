@@ -1621,3 +1621,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 109 (23/11 06:48Z): LIVE = 91dc91d3 (C N13 places swap landed; test/doc + CDN pictures). Merge it before SSK.
 - FROM MAIN 109 (23/11 07:02Z): LIVE = 4ad20bd6 (C ROOMS2 13 toilette rooms landed; assets.json only). Merge it before SSK.
 - (23/11 07:10Z) WAKE — FOREMAN E ROOT ctx ~19 % (roll ~31 %). MAIN = CHÍNH 109. LIVE 4ad20bd6 (C places swap + rooms2; no game code). N12 E44h (ctx 23 %, budget ~32 %): gates PASS on -t1 26143656; traced 76 wk ×3 running (~1–2 h) → merge LIVE 4ad20bd6 → SSK. SEATS 1 + foreman (E44h).
+- FROM MAIN 109 (23/11 07:30Z): LIVE = ca801185 (C ROOMS1 16 consort rooms + site build: assets.json rebuilt, 782 keys synced to CDN index). Merge it before SSK (assets.json conflicts: take LIVE, rebuild).
