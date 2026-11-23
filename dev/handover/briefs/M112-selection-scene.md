@@ -19,3 +19,10 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - CEREMONY IN 3 ROUNDS: she is in round 3. In rounds 1–2 she watches real NPCs (law 6b: girls who exist in this life's roster) receive «giữ thẻ bài» / «trả thẻ» (and «ban hoa» = phỏng theo phim, per HIST-TUYENTU); unknown girls show as «một tú nữ», befriended ones by face + name. Who passes/fails comes from the real NPC roster outcome (not random text).
 - KNOWLEDGE: she learns ranks ONLY of girls in her own round + girls she befriended; everyone else stays unknown until met later in the game.
 - Include the yard + rounds in the MOCKUP VIDEO.
+
+## ADDENDUM 2 (MAIN 112, 22:03Z) — STORY + NARRATOR; OVERWRITES the «giá đáo» entrances (owner OD 23/11 ~22:12Z, read verbatim)
+- The scene is a STORY told by a NARRATOR (the palace ma ma, OD:L1432 — reuse that narrator voice/figure).
+- Flow: arrival → waiting yard (tú nữ chatting, 20 s acquaintance, Addendum 1) → she is summoned in with a few girls (her round) → Hoàng thượng is ALREADY SEATED, Thái hậu + Hoàng hậu beside him. NO «giá đáo» announcements, NO name labels at first (the player infers who is who from look/seat/words).
+- Frames in order: Thái hậu → Hoàng thượng → Hoàng hậu; each speaks (layout A) and sets ONE existing mini-game (Thái hậu theu, Hoàng thượng dan, Hoàng hậu huong; NVP/ma ma kim+theu for cung nữ).
+- Each round ALSO moves her thiện cảm with THAT royal up/down by BAL amounts (two-way, law 1/4), besides feeding the combined raw → entScore → rank (cut unchanged).
+- Rounds 1–2 watching (Addendum 1) stay. Remove all entrance-announcement beats from the mock video.
