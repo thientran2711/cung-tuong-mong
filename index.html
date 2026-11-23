@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a674bca9+","t":"2026-11-23T20:37Z","c":"Kit: odds meter bar + word on ONE row everywhere (no kodstk), general no-needless-wrap layout law, ladder popover widens, odds-one-row regr…","b":"c420004d4811","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
+window.CTM_BI={"s":"4d3119d1+","t":"2026-11-23T20:51Z","c":"KIT: line-breaks-at-the-right-place law (new work only); drop test experiment knob","b":"72b1cf843e84","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29217,7 +29217,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
  let W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
- /* GENERAL LAYOUT LAW (KIT §0b): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
+ /* LINE BREAKS AT THE RIGHT PLACE (KIT §5): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
  if(p.querySelector(".kpopr")){p.style.width="max-content";p.style.maxWidth=(innerWidth-24)+"px";const nw=Math.ceil(p.offsetWidth)+2;p.style.maxWidth="";W=Math.min(innerWidth-24,Math.max(W,nw));p.style.width=W+"px"}
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
@@ -29859,7 +29859,7 @@ try{if(document.fonts){document.fonts.ready.then(kitOdAll);if(document.fonts.add
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
 (function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
 .kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
-/* GENERAL LAYOUT LAW (KIT §0b, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
+/* LINE BREAKS AT THE RIGHT PLACE (KIT §5, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
 .kodm.kodm,.kodm.kodm>b,.kodm.kodm>.kseg{white-space:nowrap!important;flex-wrap:nowrap!important;flex-direction:row!important}.kodm.kodm>b{flex:none}
 /* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
 button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
@@ -94795,7 +94795,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c420004d4811";window.CTM_BUILD=BUILD;
+const BUILD="72b1cf843e84";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -301,7 +301,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
  let W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
- /* GENERAL LAYOUT LAW (KIT §0b): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
+ /* LINE BREAKS AT THE RIGHT PLACE (KIT §5): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
  if(p.querySelector(".kpopr")){p.style.width="max-content";p.style.maxWidth=(innerWidth-24)+"px";const nw=Math.ceil(p.offsetWidth)+2;p.style.maxWidth="";W=Math.min(innerWidth-24,Math.max(W,nw));p.style.width=W+"px"}
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
@@ -943,7 +943,7 @@ try{if(document.fonts){document.fonts.ready.then(kitOdAll);if(document.fonts.add
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
 (function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
 .kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
-/* GENERAL LAYOUT LAW (KIT §0b, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
+/* LINE BREAKS AT THE RIGHT PLACE (KIT §5, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
 .kodm.kodm,.kodm.kodm>b,.kodm.kodm>.kseg{white-space:nowrap!important;flex-wrap:nowrap!important;flex-direction:row!important}.kodm.kodm>b{flex:none}
 /* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
 button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
