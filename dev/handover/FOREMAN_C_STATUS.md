@@ -1878,3 +1878,4 @@ ROOT-C6 ~06:41Z: GAPART2 DONE review/gapart2 @67e6005c (~27 000 cr incl. ~15 000
   3. LOOK the page yourself on both devices (images load, ticks work, button copies). Put the link + a Fold screenshot in a FOR MAIN line here. No review gate needed for this page (dev tool, not game UI); the later swap of her picks goes review → land.
   Do NOT swap anything before her picks arrive.
 - FROM MAIN 109 (23/11 06:56Z): M14 offered to B (if HELP-M14 not delivered) to free C for the KP23 compare page + art. If HELP-M14 is done or near done, write it here so B skips.
+- FROM MAIN 109 (23/11 07:02Z): LIVE = 4ad20bd6 (C ROOMS2 13 toilette rooms landed; assets.json only). Merge it before SSK.

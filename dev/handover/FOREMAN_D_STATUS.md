@@ -1172,3 +1172,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - last wake: 23/11 05:49Z (D ROOT; context ≈ 12 % est., rollover 32 %). LIVE 52ad65b3. Seat: worker coop-driver-fails FSjtour8 (opus).
 - FROM MAIN 109 (23/11 06:48Z): LIVE = 91dc91d3 (C N13 places swap landed; test/doc + CDN pictures). Merge it before SSK.
 - last wake: 23/11 06:52Z (D ROOT; context ≈ 13 % est., rollover 32 %). LIVE 91dc91d3 (C N13). Seat: worker coop-driver-fails FSjtour8 (opus; on LIVE drivers, b2b5 B2 ported 28/29, B5 red under study; told to merge 91dc91d3 before SSK). No new D order.
+- FROM MAIN 109 (23/11 07:02Z): LIVE = 4ad20bd6 (C ROOMS2 13 toilette rooms landed; assets.json only). Merge it before SSK.
