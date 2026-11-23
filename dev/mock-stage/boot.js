@@ -1,7 +1,10 @@
 // shared boot for mock-stage probes: opens the real game (local build of origin/main) into a playing state
 const {chromium}=require('playwright');
-async function boot(b,W,H,dpr){
-  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:dpr||1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
+const ROOT=process.env.MKROOT||'/home/user/cung-tuong-mong';const fs=require('fs'),path=require('path');
+const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.mp3':'audio/mpeg','.ogg':'audio/ogg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
+async function boot(b,W,H,dpr,extra){
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:dpr||1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',...(extra||{})});
+  await ctx.route('http://localhost:8811/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:MT[path.extname(f)]||'application/octet-stream',body:fs.readFileSync(f)})});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);p.errs=[];p.on('pageerror',e=>p.errs.push(e.message.slice(0,200)));
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));

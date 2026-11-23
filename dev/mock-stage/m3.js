@@ -1,5 +1,5 @@
 // M3 toilette room hub mockups on the live game. usage: node m3.js [fold|ipad|both]
-const {boot,settle,chromium}=require('./boot');const fs=require('fs');const OUT='/home/user/wt/mock-shots/m';fs.mkdirSync(OUT,{recursive:true});
+const {boot,settle,chromium}=require('./boot');const fs=require('fs');const OUT='/home/user/wt/mock2-shots/m3s';fs.mkdirSync(OUT,{recursive:true});
 const LIB=fs.readFileSync(__dirname+'/mklib.js','utf8');
 const ROOM='https://ctm-img.victoria-tntt.workers.dev/img/toil-room-c1-dapung.webp';
 // room helper: picture placed by hand (so the glow outlines map exactly), outlines traced on toil-room-c1-dapung (900x600 coords)
@@ -21,7 +21,7 @@ const ROOMJS=`window.MKR={
 (async()=>{const which=process.argv[2]||'both';const b=await chromium.launch();
  for(const [W,H,name] of [[755,1000,'fold'],[1180,820,'ipad']]){if(which!=='both'&&which!==name)continue;const {ctx,p}=await boot(b,W,H,2);await p.addScriptTag({content:LIB});await p.addScriptTag({content:ROOMJS});
   const hideToast=()=>p.evaluate(()=>{document.querySelectorAll('body *').forEach(e=>{if(e.offsetHeight<320&&/Trong cung vừa qua/.test(e.textContent||'')&&getComputedStyle(e).position==='fixed')e.style.display='none'})});
-  const shot=async(n)=>{await p.evaluate(()=>{Q.length=0;const M=document.getElementById('modal');M.hidden=true;document.documentElement.classList.add('mkhide')});await settle(p);await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(600);await hideToast();await p.screenshot({path:`${OUT}/${n}-${name}.png`});console.log('shot',n,name)};
+  const shot=async(n)=>{await p.evaluate((n)=>{const vo=document.getElementById('ov');if(vo)vo.style.display=/^m3-f/.test(n)?'none':'';Q.length=0;const M=document.getElementById('modal');M.hidden=true;document.documentElement.classList.add('mkhide')},n);await settle(p);await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(600);await hideToast();await p.screenshot({path:`${OUT}/${n}-${name}.png`});console.log('shot',n,name)};
   await p.evaluate(()=>{try{nightScene=function(){};S.tonight=null}catch(e){}});
   // T1 today: the entry (top-bar chip «Chưa điểm trang» + the Điểm trang act card)
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c){c.style.outline='3px solid #e0a800';c.style.outlineOffset='3px';c.style.borderRadius='6px'}});await shot('m3-t1');
