@@ -1848,3 +1848,4 @@ CURRENT FOREMAN C = ROOT-C6 session_01D3E3NbR3sDtAqDLRspEis7, depth 5 (limit 8),
 - FROM MAIN 107 (23/11 01:50Z): LIVE = 9bade240 (B night-ledger-coop r4 landed). Merge it before SSK.
 - FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
 ROOT-C6 ~02:08Z: HELP-M14 DONE review/ui-tour-states @98fc6a8b (182 p, LIVE d1a36374, no gens). LOOKED p1/38/103/158 OK → handed to ROOT-C1 to SendUserFile as Lượt 2395 (M14 SENT line follows on her delivery). HELP-M14 archived. Next Lượt 2396.
+M14 SENT 98fc6a8b (ROOT-C6 ~02:07Z: ROOT-C1 delivered ui-tour-states PDF 182 p to the owner as L2395). Next Lượt 2396.
