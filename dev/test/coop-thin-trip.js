@@ -27,8 +27,13 @@ const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map(),QS=new Map()/* F6: 
    ~half of all counted writes; R.__b = the friend bridge baseline). `state` / `statePart` = the meter without them (the number to report). */
 const priv=(root,key)=>/^__/.test(String(key))||/^[A-Za-z]+\.__/.test(root);
 const unw=x=>(x&&typeof x==="object"&&RAW.has(x))?RAW.get(x):x;
-for(const m of ["indexOf","includes","lastIndexOf"]){const f=Array.prototype[m];Array.prototype[m]=function(x,...a){return f.call(unw(this),unw(x),...a)}}
-for(const C of [Set,Map])for(const m of ["has","get","delete","add","set"]){const f=C.prototype[m];if(!f)continue;C.prototype[m]=function(k,...a){return f.call(this,unw(k),...a)}}
+/* F2 helper (coop-thin-g, trip1 «stall» = this meter, not the game): an array the code copied through a Proxy (KMSNAP.inv = S.inv.slice()) holds the
+   PROXIES; comparing them with a raw item failed → jfx kmDiff saw every item as new on each render → one «Rương đồ / Vừa vào Tư trang» gift scene
+   per render (KMQ ~2400 by week 34, the bot's «Nhận» never got to her card). The ELEMENTS are unwrapped too, and WeakSet keys (jfx kfSeen) see
+   through the Proxies like Set / Map. Whole identity family: indexOf / includes / lastIndexOf · Set / Map / WeakSet. WeakMap is NOT patched: this
+   meter's own RAW / PX maps are WeakMaps keyed by the Proxy (patching them recursed; jfx KFX.lt only tags a loss reason). */
+for(const m of ["indexOf","includes","lastIndexOf"]){const f=Array.prototype[m],mp=Array.prototype.map;Array.prototype[m]=function(x,...a){const t=unw(this);return f.call(mp.call(t,unw),unw(x),...a)}}
+for(const C of [Set,Map,WeakSet])for(const m of ["has","get","delete","add","set"]){const f=C.prototype[m];if(!f)continue;C.prototype[m]=function(k,...a){return f.call(this,unw(k),...a)}}
 const plainP=o=>{const p=Object.getPrototypeOf(o);return p===Object.prototype||p===Array.prototype||p===null};
 function who(st){st=st||(new Error().stack||"").split("\n").slice(2);for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.)?([^ (]+)/);const n=m?m[1]:"";
   if(!n||/^(__trip|set|deleteProperty|defineProperty|Reflect\.|new|eval|<anonymous>)/.test(n)||/coop-thin-trip|\(<anonymous>\)|\(native\)/.test(l))continue;
