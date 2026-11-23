@@ -2726,3 +2726,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:45Z) Seats ack 114: LC8 idle (queue empty) · W5 offline-all READY 3bf27ac7 → rv-lander JjPE1Lvb (no 2nd rv) · map-label-overlap rv FAIL phone 390 only, waits W4 · KNOW-NOTICE r2 37312b96 waits BIG rv · SELSCENE holding for sếp. Archived W1 JaFJSoKr + rv L1nEGqb5 + rv N8oTu6WZ (both landed).
 - (23:50Z) odds-no-thanh-r bf75a0a3 SMALL PASS → relayed to LC8 (after N17). Archive rv JBY4hfzp + W2 MmpzDKtR after LANDED.
 - (23:52Z) offline-all-r 9b10d883 SMALL PASS → LC8, priority first. Archive rv JjPE1Lvb + W5 HiB54y5c after LANDED; then tell sếp how to use (Thiết lập → Tải hết, on Wi-Fi, before the flight).
+- (23:33Z wake) ctx 15.6 % (156k/1M). LOAD: main running 8 (W2+rv, W4+rv, W5+offline rv, KNOW-NOTICE+rv, KK14, kit-selscene rv, SELSCENE) | B free 0 | C free ? (no new line) | D free 0 | E free yes (TITLES2 ack pending) | F MGSKIN (no first line yet) | moved: none. LC8 queue: offline-all (first), N17, odds-no-thanh.
