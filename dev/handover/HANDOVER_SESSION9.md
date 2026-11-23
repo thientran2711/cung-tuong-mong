@@ -2495,3 +2495,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Follow up at wakes: C ack + claims for the art resume and N13/N14; update GAP_LIST L8 on each land. Do NOT ask the owner about pictures (she was annoyed). No owner question pending.
 - TRIGGERS: 108 hourly wake trig_01YWv7JaTkWDf6sV7wxESQx5 (min 32, fires into 108). 109 FIRST creates its own (min 32), THEN disables trig_01YWv7JaTkWDf6sV7wxESQx5. 107 wake trig_01CSSZ2MWEyuaVZNBKNeY1xw already disabled. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
 - Push tool: copy dev/tools/main-hpush.sh with own session id (108 used /home/user/wt/hpush108.sh, worktree /home/user/wt/ho108).
+- (23/11 03:33Z) 108 opened MAIN CHÍNH 109 = session_01Rc5AsMAkWe3fwq2w85eAKc (child, depth 2). 108 now relay-only: forwards late messages to 109 until 109 disables trig_01YWv7JaTkWDf6sV7wxESQx5.
