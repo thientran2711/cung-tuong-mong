@@ -2,7 +2,7 @@
 window.MKX={
  geo(){const h=document.querySelector('header.hud').getBoundingClientRect(),b=document.querySelector('nav.bar').getBoundingClientRect();const t=Math.round(h.bottom+4),bt=Math.round(b.top-4);return {t,b:bt,H:bt-t,W:innerWidth,L:Math.round(h.left),R:Math.round(innerWidth-h.right)}},
  css(){if(document.getElementById('mkcss'))return;const s=document.createElement('style');s.id='mkcss';s.textContent=`
-#mk{position:fixed;z-index:41;overflow:hidden;border-radius:12px;background:#2a1a12}
+#mk{position:fixed;z-index:58;overflow:hidden;border-radius:12px;background:#2a1a12}
 #mk .mkbg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(6px)}
 #mk .mkbg.sharp{filter:none;inset:0}
 #mk .mkveil{position:absolute;inset:0;background:rgba(20,12,8,.45)}
@@ -47,7 +47,7 @@ html.mkhide #modal{display:none!important}
  openEvent(LONG,i){try{nightScene=function(){};S.tonight=null;pushFront=function(){};Q.unshift=function(){return this.length}}catch(e){}const L0=liveRivals(true).filter(x=>x.alive&&!x.out);let v=null;const M=document.getElementById('modal');
   const mine=()=>/Lệ quý nhân/.test(M.textContent)&&M.querySelector('.kpmain');
   for(let j=0;j<L0.length*2;j++){v=L0[((i||0)+j)%L0.length];try{kmReset()}catch(e){}Q.length=0;
-   Q.push({ev:1,t:window.__mksolo?'Chuyện trong cung':'Có người đến',who:pv(v),h:LONG.replace('{N}',v.name),opts:window.__mksolo?[{n:'Cất khăn đi, âm thầm dò xem ai đánh rơi',fx:{}},{n:'Mang khăn trình Hoàng hậu ngay',fx:{danh:1}},{n:'Sai người đem trả, xem Lệ quý nhân đổi sắc ra sao',fx:{duc:1}}]:[{n:'Khuyên nàng giữ kín, chờ chứng cứ',fx:{duc:1}},{n:'Cùng nàng đi báo Hoàng hậu ngay',fx:{danh:1}},{n:'Âm thầm sai người theo dõi Lệ quý nhân',fx:{}}]});showModal();
+   Q.push({ev:1,t:window.__mksolo?'Chuyện trong cung':'Có người đến',who:pv(v),h:LONG.replace('{N}',v.name)+(window.__mkN?'<!--'+(window.__mkN++)+'-->':''),opts:window.__mkopts?window.__mkopts(window.__mksolo):window.__mksolo?[{n:'Cất khăn đi, âm thầm dò xem ai đánh rơi',fx:{}},{n:'Mang khăn trình Hoàng hậu ngay',fx:{danh:1}},{n:'Sai người đem trả, xem Lệ quý nhân đổi sắc ra sao',fx:{duc:1}}]:[{n:'Khuyên nàng giữ kín, chờ chứng cứ',fx:{duc:1}},{n:'Cùng nàng đi báo Hoàng hậu ngay',fx:{danh:1}},{n:'Âm thầm sai người theo dõi Lệ quý nhân',fx:{}}]});showModal();
    for(let k=0;k<6&&!mine();k++){try{const keep=Q.filter(q=>q.h&&/Lệ quý nhân/.test(q.h));Q.length=0;Q.push(...keep);if(!Q.length)break;showModal()}catch(e){}}
    if(mine())break}window.__mkv=v;return mine()?v.name:''},
  closeModal(){document.documentElement.classList.remove('mkhide');document.querySelectorAll('.mkpan,.mkpan2').forEach(e=>e.remove());const dd=document.querySelector('#modal .dlg');if(dd)dd.style.display='';Q.length=0;const M=document.getElementById('modal');M.hidden=true;M.style.background='';try{kszLiveReset3&&kszLiveReset3()}catch(e){}}
