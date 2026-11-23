@@ -86,6 +86,8 @@ const hold=(o,on)=>o.p.evaluate(on=>{const H=window.__H=window.__H||{ea:window._
 const NF=await REALL.nfBoth(A,B);console.log('night path:',NF?'jnf (night record per day; claims = the flip choice, coop-steal)':'parked (live B2 path)');
 for(const o of [A,B])await hold(o,true);
 await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
+/* review/coop-driver-fails #2: as B2.3, the force can land one night late (LIVE B run 1: forced flip at wk 1, day 0's record was his own pick) → a second forced week */
+if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);if(!(r0.same&&r0.a.flip0==='guest')){console.log('B2.1 force landed late:',JSON.stringify(r0),JSON.stringify(await A.p.evaluate(()=>window.__fdl)));await forceFlip(A,'f');ok(await week(A,B,'B2.1b'),'B2.1 second week')}}
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);
   ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r.same&&r.a.flip0==='guest'?r:{r,NW:await A.p.evaluate(()=>({nw:S.nightWhy,nfX:S.nfX,fw:window.__fw,fd:window.__fdl||null,tr:(COOPW.tr||[]).slice(-30)})).catch(e=>e.message),G:await B.p.evaluate(()=>({cy:typeof cycOn==='function'&&cycOn(S),tray:typeof cyTray==='function'&&cyTray(S),tuan:S.tuan,cyb:S.cyb||null})).catch(e=>e.message)});
   ok(r.same&&r.a.pick!=null,'B2.1 (jnf) one holder of that night on both seats (her keep / a Tranh sủng by him or an NPC, resolved once on the host)',r);
