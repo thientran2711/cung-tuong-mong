@@ -29,7 +29,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   run("jgreet grFace / grLearn (greeting reveal)",()=>{reset(b);grFace(S,b);grLearn(S,b)},1,"biết tên|thấy mặt|gặp mặt");
   run("j28 learnTrait + its Sổ line = ONE notice",()=>{S.trK=S.trK||{};S.notes=S.notes||{};delete S.trK[c.id];S.known[kOf61(c)]=3;learnTrait(c,"Chuyện trò")},1,"nết");
   run("j28 newsAdd (a rumour reaches her)",()=>{newsAdd(c,"ky","Nghe nói "+c.name+" gặp kỳ ngộ.",true)},1,"Nghe nói");
-  run("j1/jdis discover (Hoàng thượng thích / không ưa …)",()=>{S.emp.known={};S.disK={};let r=false;for(let i=0;i<20&&!r;i++){S.emp.known={};r=discover()}},1,"Hoàng thượng");
+  run("j1/jdis discover (Hoàng thượng thích / không ưa …)",()=>{S.emp.known={};S.disK={};let r=false;for(let i=0;i<20&&!r;i++){S.emp.known={};r=discover()}},1,"Hoàng thượng|biết thêm");
   run("jdis learn (Hoàng thượng không ưa …)",()=>{S.disK={};disLearn("emp")},1,"không ưa");
   run("jbalcore eaTell (tháng này Hoàng thượng chuộng …)",()=>{S.eaK=null;if(!empArt())empArtMonth();S.eaK=-1;eaTell(S,"tai mắt báo")},1,"chuộng");
   const K1=rivals.find(v=>v.alive&&!v.out&&!v.queen&&v!==a&&v!==b&&v!==c&&v!==d&&v.rank<5);S.known[kOf61(K1)]=3;S.met=S.met||{};S.met[K1.id]=wk();S.rkSeen={};k61RankSync();kitKnowFlush();
