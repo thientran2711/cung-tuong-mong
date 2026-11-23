@@ -1,0 +1,12 @@
+# Brief — ROBOT-10 harness phase 1, PART 2 (successor; Foreman D child; opus)
+PRIORITY #1 CHECK ('robot10|robot-10|ROBOT PLAYTEST'): OD 2 (+ ~20:45Z and ~21:00Z tally orders) | main dev/measure/runb.js + inpage6.js | review/* review/robot10-harness 84da4a4d (YOUR BASE — predecessor's work) | claims D robot10 row
+Read first: handover branch dev/rules/START_CORE.md (THE 18 LAWS) + START_WORKER.md; the first brief briefs/D-robot10-harness.md (owner's words verbatim inside); the predecessor's report dev/handover/reports/robot10-harness.md IN FULL (its HANDOVER section is your task list); FOREMAN_D_STATUS lines «FROM MAIN 110 (20:33Z 23/11)», «FROM MAIN 111 (20:46Z 23/11)», «FROM MAIN 111 (20:50Z 23/11): OWNER ORDER #4» + its 11 numbered sub-lines, «FROM MAIN 111 (21:33Z 23/11)» point 4.
+Branch: continue review/robot10-harness from 84da4a4d (push rights: this session has the repo). First merge newest LIVE origin/main.
+Do:
+(A) OWNER ORDER #4 full metric set (enumerate every die(why) and every over(title) from code, list + count; 0 hits across the round = «chưa ai gặp»; per-life JSON + robot10-agg tables DEATH / ENDINGS / RANK / FAMILY / FAVOR+SCHEMES / ECONOMY / MINI-GAMES win rate per rank band (law 5) / KỲ NGỘ / BALANCE FLAGS / HEALTH / TIME real minutes per kiếp + cumulative; .md + .csv per round). Hooks: see predecessor's HANDOVER.
+(B) odds-word check reads window.KIT_ODDS from the game (owner changed the act-odds ladder tonight; review/kit-odds-row-r), never a typed list; «khả năng vừa/cao/thấp» stays unflagged (OD:L221).
+(C) Tab crash 2/10 lives at ~14 min: re-check with PAR=1; if renderer memory grows, recycle the page between checkpoints (harness side) and report whether the GAME leaks (that is a game bug to list).
+(D) Re-run the proof `nc spread 10 1` on LIVE; replace the proof table; bug file + rates + csv into dev/handover/robot/ on the handover branch.
+TEST-ONLY: dev/measure, dev/test, dev/handover/robot. Game bugs = REPORT ONLY (D routes them to fixers).
+Finish: update reports/robot10-harness.md (add a «Part 2» section), line 'SẴN SÀNG KIỂM review/robot10-harness <full sha>' + send_message Foreman D session_01964izGQbgvTAnQ9pJktncj. Never push to main; no PRs.
+Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
