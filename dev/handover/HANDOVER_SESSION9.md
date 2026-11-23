@@ -2692,3 +2692,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:39Z) Owner: mini-game visual skins → OD row + C ART ORDER MGSKIN + B P1 add + KK13 kit slot (send).
 - (22:41Z) Owner goal all figures animated → OD row + D ORDER #8 ANIM-STRESS (measure budget first; art later via C).
 - (22:42Z) Owner Q Thử tay: LIVE jmgcal lists all 39 kinds (mgCalKinds); BAL.ag.mg2.cal.k has 28; not in BAL: ban, huong, td_dung, nghe, truyen, mac, thoico, thu_tam, thu_choi, tuoi, co7; dauho record 11/20 < redo 11/21 02:30 → retest. Asked her for «Chép mã» CTM-CAL code → apply with dev/tools/mgcal_apply.py (first try only).
+- (22:42Z) know-notice rv r1 FAIL (a8176fbf): silent learners jmind/jtrong/j92/jveil/j29 + doubles j95bHear/cyBook/j78 → worker JtR95DF2 fixing; rv MzkmnYoW re-reviews.
