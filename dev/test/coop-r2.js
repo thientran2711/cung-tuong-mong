@@ -81,8 +81,17 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
   ok(await until(A,s=>{const f=COOPW.friend();return f&&f.sung===s.sung&&COOPW.fpos&&COOPW.fpos.place===s.place},st0,15000),'1 A: her place + Sủng still update with the big chest',[st0,await A.p.evaluate(()=>{const f=COOPW.friend();return [f&&f.sung,COOPW.fpos&&COOPW.fpos.place]})]);}
  const mx=await B.p.evaluate(()=>Math.max(0,...window.__pos));ok(mx>0&&mx<4000,'1 every pos B sent < 4000 chars',[mx,await B.p.evaluate(()=>window.__pos.length)]);
  /* a relay lost (A forgot it): the next pos hash makes A ask, B sends again */
- {await A.p.evaluate(()=>{COOPW.famGotH='';COOPW.famLast=null;const f=COOPW.friend();f.inv=[];f.kids=[]});await B.p.evaluate(()=>{S.danh=Math.min(100,(S.danh||0)+1);render()});
-  ok(await until(A,n=>{const f=COOPW.friend();return f&&(f.inv||[]).length===n.inv&&(f.kids||[]).length===n.kids},nB,15000),'1 A: a lost relay is asked again and restored')}
+ /* review/coop-driver-fails #2 probe (dump on FAIL only): every ctm-fam act each seat sends / gets in the lost-relay step (LIVE C3 red: one ask,
+    nothing restored; jcoopworld famAsk asks once per pos hash and B's pos may not change again → is the ask or the reply lost?) */
+ for(const o of [A,B])await o.p.evaluate(()=>{window.__fq=[];if(!window.__fqW){window.__fqW=1;const s0=COOP.send;COOP.send=function(m){const r=s0.apply(this,arguments);try{if(m&&m.k==='ctm-fam'&&window.__fq)__fq.push(['out',m.mode,m.h,Date.now()%1e6,r===false?'false':(r&&r.then?'p':String(r))])}catch(e){}return r};
+   COOP.on('act',m=>{try{if(m&&m.k==='ctm-fam'&&window.__fq)__fq.push(['in',m.mode,m.h,m.name||'',m.from,Date.now()%1e6])}catch(e){}});COOP.on('pos',m=>{try{if(window.__fq&&__fq.length<40)__fq.push(['pos',m.fh,Date.now()%1e6])}catch(e){}})}});
+ {await A.p.evaluate(()=>{COOPW.famGotH='';COOPW.famLast=null;const f=COOPW.friend();f.inv=[];f.kids=[]});/* review/coop-driver-fails #2 (proof M3 probe): famAsk asks once per bag hash per 4 s (jcoopworld.js:410). The host's last ask for this hash was
+     1.4 s before the reset, so the one pos this step sends fell inside the throttle: no ask went out (host fq: no 'out', guest fq: []), and no
+     later pos came. In play her next update after 4 s asks again; here the trigger waits the throttle out. */
+  await sleep(4500);await B.p.evaluate(()=>{S.danh=Math.min(100,(S.danh||0)+1);render()});
+  {const r=await until(A,n=>{const f=COOPW.friend();return f&&(f.inv||[]).length===n.inv&&(f.kids||[]).length===n.kids},nB,15000);
+   ok(r,'1 A: a lost relay is asked again and restored',r?undefined:{A:await A.p.evaluate(()=>{const f=COOPW.friend();return{gotH:COOPW.famGotH,last:!!COOPW.famLast,ask:COOPW.famAsk,fh:COOPW.fpos&&COOPW.fpos.fh,fpw:COOPW.fpos&&[COOPW.fpos.week,COOPW.fpos.buoi],f:f&&{n:f.name,inv:(f.inv||[]).length,kids:(f.kids||[]).length},tr:(COOPW.tr||[]).slice(-12),fq:window.__fq}}).catch(e=>e.message),FQB:await B.p.evaluate(()=>({fq:window.__fq,st:COOP.state.status})).catch(e=>e.message),
+    B:await B.p.evaluate(()=>({sentH:COOPW.famSentH,h:COOPW.famPack().h,p2:!!COOPW.p2,ctx:!!COOPW.ctx,dead:!!S.dead,tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message)})}}
  /* B steals from the big chest of A? no: A steals from B's big chest — the item op still names the right entry */
  {const a0=await A.p.evaluate(()=>(S.inv||[]).length),b0=await nOk(B);const r=await act(A,'laydo');ok(r.okk,'1 laydo offered on the big chest',r);const g=await A.p.evaluate(n=>(S.inv||[]).length===n+1,a0);ok(g,'1 laydo: gain on A');
   ok(g&&await waitFr(B,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,b0),'1 laydo: loss on B');await clear(B);await clear(A)}
@@ -92,7 +101,13 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
    window.__usedN=window.__usedN||[];const L=liveRivals(true).filter(r=>!r.coop&&r.alive&&!r.out&&!r.confined&&!window.__usedN.includes(r.id)).sort((a,b)=>rkOf(b)-rkOf(a));let last={err:'no npc'};
    for(const v of L.slice(0,6)){if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}/* trait pool d296f3cd: no loyal runner (netIs 'loyal'), swap the loyal nết for a non-loyal one of the same group */(v.staff||[]).forEach(x=>{if(!netIs(x,'loyal'))return;const n=netOf(x).slice(),P=BAL.net[netSex(x)==='m'?'M':'F'],lq=t=>((BAL.net.T[t]||{}).q||{}).loyal>0;['tt','ld','ch'].forEach((g,i)=>{if(lq(n[i]))n[i]=P[g].find(t=>!lq(t))||n[i]});x.net=n});
     const ok=!!(ACT[k]&&ACT[k].ok(v,f));if(!ok){last={ok,v:v.id};continue}const kids0=(v.kids||[]).length,pets0=(v.pets||[]).length,inv0=(v.inv||[]).length;
-    roll=()=>true;caught=()=>"";const j0=window.__j95off;window.__j95off=1;/* main j95 motive gate (schedules3): a forced act by a random NPC has no motive; this suite checks the co-op relay, not motives */let r="";try{r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0;window.__j95off=j0}window.__usedN.push(v.id);
+    roll=()=>true;caught=()=>"";const j0=window.__j95off;window.__j95off=1;/* main j95 motive gate (schedules3): a forced act by a random NPC has no motive; this suite checks the co-op relay, not motives */let r="";try{r=mindRun(v,f,k,0);
+     /* review/coop-driver-fails: since parallel time (jptime, OD 18/11 ~20:15Z) an NPC's harm deed is SENT (jptime ptNpcSent: one of her servants
+        walks, S.away) and lands at the due khắc (ptTick → ptLand → the deed's own runner); only ACT_NOSEND acts (takeaway…) run at once. Here
+        the clock reaches that khắc (the real landing path, rolls still forced); r = the landing's own result line(s) */
+     if(!r&&window.PTIME&&PTIME.on()){const a=(S.away||[]).find(x=>x&&!x.back&&x.a&&x.a.v===v.id&&x.a.k===k);if(a){const n0=(S.logs||[]).length;a.due=Math.min(a.due,PTIME.now());PTIME.tick();
+       r=a.back?('landed: '+(S.logs||[]).slice(0,Math.max(1,(S.logs||[]).length-n0)).join(' ')):''}}
+    }finally{roll=r0;caught=c0;window.__j95off=j0}window.__usedN.push(v.id);
     last={ok,v:v.id,vn:v.name,r:String(r).replace(/<[^>]+>/g,'').slice(0,200),kids:(v.kids||[]).length-kids0,pets:(v.pets||[]).length-pets0,inv:(v.inv||[]).length-inv0,
      kidN:(v.kids||[]).length>kids0?v.kids[v.kids.length-1].name:null,on:(COOPW.npcOn||[]).slice(-1)[0]||null};if(last.r)return last}
    return last},[k,pre]);
@@ -100,7 +115,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  {await sleep(1200);const b0=await B.p.evaluate(()=>S.kids.filter(k=>k.alive!==false).length);const x=await npc('takeaway','rank');ok(x.ok,'2 NPC takeaway offered on her',x);
   ok(x.kids===1&&!!x.kidN,'2 takeaway: the child is in the NPC\'s house (gain)',x);
   ok(!!x.kidN&&await waitFr(B,([n,b])=>!(S.kids||[]).some(k=>k.name===n)&&S.kids.filter(k=>k.alive!==false).length===b-1,[x.kidN,b0]),'2 takeaway: the child left HER house (loss)',await B.p.evaluate(()=>S.kids.map(k=>k.name)));
-  ok(!!x.kidN&&await A.p.evaluate(n=>{const f=COOPW.friend();return !(f.kids||[]).some(k=>k.name===n)},x.kidN),'2 takeaway: not on her entry either (no copy)');CW_kid=x.kidN;await clear(B)}
+  ok(!!x.kidN&&await until(A,n=>{const f=COOPW.friend();return !(f.kids||[]).some(k=>k.name===n)},x.kidN,15000),'2 takeaway: not on her entry either (no copy)')/* reviewer r1: her entry on the host follows her next pos (as every other check here waits); read at once it was red on plain LIVE too */;CW_kid=x.kidN;await clear(B)}
  /* petsteal: her pet to the NPC */
  {await sleep(1200);const p0=await B.p.evaluate(()=>(S.pets||[]).length);const x=await npc('petsteal','pet');ok(x.ok,'2 NPC petsteal offered on her',x);
   ok(x.pets===1,'2 petsteal: the NPC has the pet (gain)',x);ok(x.pets===1&&await waitFr(B,n=>(S.pets||[]).length===n-1,p0),'2 petsteal: her pet is gone on HER side (loss)',await B.p.evaluate(()=>(S.pets||[]).map(P=>P.t)));await clear(B)}
@@ -115,18 +130,28 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  /* ================= (3) night: host-authoritative ================= */
  const night=o=>o.p.evaluate(()=>{const t=S.tonight;return t==='me'?(COOPW.seat==='a'?901:902):t&&t.id!=null?t.id:null});
  const claim=o=>o.p.evaluate(()=>{S.tonight='me';render();return true});
- {for(let i=0;i<3;i++){await clear(A);await clear(B)}await claim(B);await sleep(2500);const a=await night(A),b=await night(B);ok(a===902&&b===902,'3 guest claim alone: the host takes it, both say the guest',[a,b]);
+ /* review/coop-driver-fails: jnf owns the palace night when both seats live in the palace (MAIN ROOT-82, lib/coop-real nfBoth): a claim is then
+    only the flip choice at the end of tối (crossing claims resolve ONCE on the host: coop-steal case 2), and the old B2 claim word (a seat's own
+    S.tonight write → tnRelay) is off on purpose; this step checks it stays off. A parked room keeps the old checks. */
+ if(await REALL.nfBoth(A,B)){for(let i=0;i<3;i++){await clear(A);await clear(B)}const d=await A.p.evaluate(()=>COOP.state.week);const r0=[await A.p.evaluate(REALL.NREC,d),await B.p.evaluate(REALL.NREC,d)];
+  await claim(B);await sleep(2500);const a=await night(A),b=await night(B);ok(a!==902&&b===902,'3 (jnf) a guest\'s own S.tonight write is not the old claim word: the host does not take it',[a,b]);
+  await claim(A);await sleep(2500);const a2=await night(A),b2=await night(B);const r1=[await A.p.evaluate(REALL.NREC,d),await B.p.evaluate(REALL.NREC,d)];
+  ok(a2===901&&b2===902&&JSON.stringify(r0)===JSON.stringify(r1),'3 (jnf) crossing writes move neither seat nor the night record (one night = the flip, resolved once on the host)',{a2,b2,r0,r1});
+  for(const o of [A,B])await o.p.evaluate(()=>{S.tonight=null;render()})}
+ else{for(let i=0;i<3;i++){await clear(A);await clear(B)}await claim(B);await sleep(2500);const a=await night(A),b=await night(B);ok(a===902&&b===902,'3 guest claim alone: the host takes it, both say the guest',[a,b]);
   await Promise.all([claim(A),claim(B)]);await sleep(3000);for(let i=0;i<3;i++){await clear(A);await clear(B)}await sleep(800);const a2=await night(A),b2=await night(B);
   ok(a2===b2&&a2!=null,'3 crossing claims (both in the same buổi): ONE night on both screens',[a2,b2]);ok(a2===901,'3 crossing: the host\'s word stands',a2);
   ok(await A.p.evaluate(()=>S.tn&&S.tn.w===COOP.state.week&&S.tn.who===901),'3 host world key S.tn = the final night',await A.p.evaluate(()=>S.tn))}
  /* ================= (4) full seat: compensation, no waiting claim ================= */
  {for(let i=0;i<3;i++){await clear(A);await clear(B)}
-  const x=await B.p.evaluate(()=>{const r=6,f=COOPW.friend();const was={rank:S.rank,ex:S.ex};COOPW.mine=COOPW.mine||{};const m0=COOPW.mine.rank;COOPW.mine.rank=r-1;S.rank=r;f.rank=r;
+  /* review/coop-driver-fails (family of b2b5 B5): the seat goes to the higher Sủng (seatWeek; equal → a fair seeded draw): she is set one Sủng
+     below the host's entry so she is the one who steps back (the card's own gains are measured from here) */
+  const x=await B.p.evaluate(()=>{const r=6,f=COOPW.friend();const was={rank:S.rank,ex:S.ex};COOPW.mine=COOPW.mine||{};const m0=COOPW.mine.rank;COOPW.mine.rank=r-1;S.rank=r;f.rank=r;f.sung=Math.max(Math.round(f.sung||0),20);S.sung=f.sung-1;const fe=COOPW.friend();window.__pre={mine:COOPW.mine.rank,fe:!!fe,same:fe===f,rk:fe&&rkOf(fe),hold:holders(r).length,cap:SEATCAP[r],sung:[S.sung,fe&&fe.sung]};
    const b0=S.bac,d0=S.danh,h0=S.hieu,g0=liveRivals(true).filter(v=>!v.coop).map(v=>v.ghen);Q.length=0;
    COOPW.seatWeek();const txt=Q.map(q=>q.t+' '+q.h).join(' ');const g1=liveRivals(true).filter(v=>!v.coop).map(v=>v.ghen);
    const out={rank:S.rank,bac:S.bac-b0,danh:S.danh-d0,hieu:S.hieu&&S.hieu!==h0?S.hieu:'',txt:txt.replace(/<[^>]+>/g,''),ghen:g1.filter((g,i)=>g>g0[i]).length,n:g1.length,
      exp:Math.round(BAL.psk.seat.bacM*BAL.pay[Math.min(7,r)]),B:BAL.psk.seat};COOPW.mine.rank=m0;return out});
-  ok(x.rank===5,'4 seat full: she stays one rank lower',x.rank);ok(!/đợi khi có ghế/.test(x.txt),'4 no waiting claim on the seat (OD:L1228)',x.txt);
+  ok(x.rank===5,'4 seat full: she stays one rank lower',[x.rank,await B.p.evaluate(()=>window.__pre)]);ok(!/đợi khi có ghế/.test(x.txt),'4 no waiting claim on the seat (OD:L1228)',x.txt);
   ok(x.bac>=x.exp,'4 large silver = BAL.psk.seat.bacM × the seat rank\'s stipend',[x.bac,x.exp]);ok(x.danh>0,'4 Danh up',x.danh);
   ok(!!x.hieu||x.bac>=x.exp+x.B.hieuBac,'4 a phong hiệu (or its silver)',x.hieu);ok(/khảo hạch/.test(x.txt),'4 she must pass the normal exam later',x.txt);
   ok(x.ghen>0,'4 loss: the consorts\' jealousy',[x.ghen,x.n]);console.log('seat card:',x.txt.slice(0,400));
