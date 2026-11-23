@@ -2727,3 +2727,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:50Z) odds-no-thanh-r bf75a0a3 SMALL PASS → relayed to LC8 (after N17). Archive rv JBY4hfzp + W2 MmpzDKtR after LANDED.
 - (23:52Z) offline-all-r 9b10d883 SMALL PASS → LC8, priority first. Archive rv JjPE1Lvb + W5 HiB54y5c after LANDED; then tell sếp how to use (Thiết lập → Tải hết, on Wi-Fi, before the flight).
 - (23:33Z wake) ctx 15.6 % (156k/1M). LOAD: main running 8 (W2+rv, W4+rv, W5+offline rv, KNOW-NOTICE+rv, KK14, kit-selscene rv, SELSCENE) | B free 0 | C free ? (no new line) | D free 0 | E free yes (TITLES2 ack pending) | F MGSKIN (no first line yet) | moved: none. LC8 queue: offline-all (first), N17, odds-no-thanh.
+- (23:36Z) KK14 KIT READY mg-skin review/kit-mgskin 1b91ac14 → SMALL kit rv-lander session_01Rc5AsLG8CETU5oT3t3s98h (sonnet). F + B told the resolver.
