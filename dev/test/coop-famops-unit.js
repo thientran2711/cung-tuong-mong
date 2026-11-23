@@ -243,6 +243,29 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    finally{CW.on=on30;CW.seat=se30;COOP.send=sd30;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(x=>!(x.e&&x.e.iu>9e6));Q.length=0}
    ck("30 her piece in the host's box: the due week asks her seat (tịch thu + ransom), her answer → ONE «add» to her entry, out of the box; a gone piece refunds; her seat shows the same dialogs",
     !er30&&R30.askConf===1&&R30.askBack===1&&R30.addC===1&&R30.boxC===0&&R30.inF===1&&R30.ref===1&&R30.dlg&&R30.want===1&&R30.dlgC,{er30,R30})}
+  /* E44j (c) (E52r finding c, T9 family, law 6c + 1): actor picks outside npwAsk with her entry in the pool / as the chooser. Today they sit behind
+     the day plan (BAL.ag.day.on: j20 queenRewards, j8 the queen's monthly judgment) or behind jthaiy's bribers (j13 fallback): forced on here
+     (stubs) so a switch can never reopen them. A target pick stays (NPCs may act on her: law 1). */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:6,fav:50,bac:9999,queen:true,evm:{},ro:{},arts:{}};rivals.unshift(f);const W=window;
+   const sv={agDOn:W.agDOn,thy:W.thyBribedBy,qp:W.queenP,npcWhy:W.npcWhy,judge:W.judge,evG:W.evG,rel:W.rel,roll:W.roll,hos:W.hostility,mpb:W.mindPickBy,ml:W.mindLog};let er31="",R31={};const mo=S.month,ct=S.court;
+   try{W.agDOn=()=>false;
+    /* j13 treat: the bribed physician's payer */
+    W.thyBribedBy=undefined;S.court=S.court||{ty:{af:{}}};const af0=JSON.stringify(S.court.ty&&S.court.ty.af||{});S.court.ty=S.court.ty||{af:{}};S.court.ty.af=Object.assign({},S.court.ty.af,{[f.id]:99});
+    W.hostility=(a,b)=>a===f?99:sv.hos(a,b);let got=null;W.npcWhy=(k,c,d)=>{if(k==="thyHarm"){got=c.b;return null}return sv.npcWhy(k,c,d)};
+    const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&!x.out);const ill0=v.ill;v.ill={k:Object.keys(ILL)[0],st:1};try{treat(v,"ty")}finally{v.ill=ill0;S.court.ty.af=JSON.parse(af0)}R31.briber=got===f?"her":got?"npc":"none";
+    W.npcWhy=sv.npcWhy;W.hostility=sv.hos;W.thyBribedBy=sv.thy;
+    /* j20 queenRewards with her entry as Hoàng hậu */
+    W.queenP=()=>f;S.month=3;const b0=consorts().map(x=>[x,x.bac]);W.rel=(a,b)=>a===f?50:sv.rel(a,b);try{queenRewards()}finally{W.rel=sv.rel}R31.reward=consorts().filter(x=>x!==f&&b0.find(y=>y[0]===x)[1]!==x.bac).length;for(const [x,b] of b0)x.bac=b;W.queenP=sv.qp;S.month=mo;
+    /* j8 rivalsTurn (her entry is in the harem on the host): the Empress's weekly judgment chosen by her entry's NPC mind */
+    let ch=0;W.mindPickBy=(L,sc,p)=>{if(p===f)ch++;return null};W.evG=(h,t)=>h===f?999:sv.evG(h,t);W.rel=(a,b)=>a===f?-50:sv.rel(a,b);
+    try{rivalsTurn()}catch(z){R31.rt=z.message}finally{W.mindPickBy=sv.mpb;W.evG=sv.evG;W.rel=sv.rel}R31.judgeBy=ch;
+    /* j8 rivalsMonth: her entry's NPC month (npcMonthly: study, buy, useItem / wear of HER pieces, gifts, deeds) */
+    let nm=0;const nm0=W.npcMonthly;W.npcMonthly=v=>{if(v===f)nm++;return ""};try{rivalsMonth()}catch(z){R31.rm=z.message}finally{W.npcMonthly=nm0}R31.month=nm;
+    /* npcAct (the old NPC harm menu; muted today by AG-ALL harm jagharm haOn) never decides for her entry */
+    let dec=0;const ho=W.__haOff;W.__haOff=true;W.mindLog=(v,k)=>{if(v===f&&k==="_decide"){dec++;throw new Error("stop")}return sv.ml(v,k)};try{npcAct(f,v)}catch(z){}finally{W.mindLog=sv.ml;W.__haOff=ho}R31.act=dec}
+   catch(z){er31=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{Object.assign(W,{agDOn:sv.agDOn,thyBribedBy:sv.thy,queenP:sv.qp,npcWhy:sv.npcWhy,judge:sv.judge,evG:sv.evG,rel:sv.rel,roll:sv.roll,hostility:sv.hos,mindPickBy:sv.mpb,mindLog:sv.ml});S.month=mo;S.court=ct;rivals.splice(rivals.indexOf(f),1);Q.length=0}
+   ck("31 actor picks outside npwAsk never make her entry the NPC actor (j13 physician briber, j20 the Empress's reward, j8 the Empress's judgment, j8 her NPC month, npcAct)",!er31&&R31.briber!=="her"&&R31.reward===0&&R31.judgeBy===0&&R31.act===0&&R31.month===0,{er31,R31})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
