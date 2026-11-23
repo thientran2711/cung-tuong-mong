@@ -1,0 +1,11 @@
+# Brief — REVIEW fix-evening-softlock (Foreman D child; opus BIG — time/buổi core; TOP priority)
+PRIORITY #1 CHECK ('Sang ngày mới|soft-lock|softlock'): OD 3 | ledger 0 | claims worker Cj26a6VP | main 15 | review/* review/fix-evening-softlock
+Read handover branch dev/rules/START_CORE.md (THE 18 LAWS) + START_WORKER.md + START_REVIEWER.md; brief briefs/D-softlock-hadoc.md; report reports/fix-evening-softlock.md; FOREMAN_D_STATUS lines of 23/11 21:03Z–21:17Z about the robot repro.
+Target review/fix-evening-softlock 8350d536538f6bea95a8841ba2090df75eb696a2 (base LIVE 225c5c08). Push fixes/merges only to review/fix-evening-softlock-rv.
+Check:
+1. Root cause covers BOTH robot findings: (a) «Kính sự phòng» card pid nfch dropped by deserQ (no PEND builder) and (b) the robot's sharper repro: load a save taken at tối right after the first «Sang ngày mới» press while the flip card «Hoàng thượng lật thẻ bài» is queued (S.nfX.st open/wait; jnf.js:322–326 endTurn wrapper; flip cards tracked by identity in FLIPQ WeakSet, lost on deser). Build that save yourself (play/force to tối, press once, save, reload via title «Tiếp tục kiếp này», press «Sang ngày mới» ×12) on LIVE (must lock) and on the branch (must move on, the card shows again and works). Also the steal-game (jsmg) path.
+2. Whole family: the worker's scans (23 day-turn holds; pid cards without PEND) — spot-check 5; any WeakSet/identity-tracked queue item that must survive deser.
+3. No double effects after heal (card answered once only; no double night; no extra khắc/buổi); co-op night (coop-night, coop-e2e) unchanged; old saves load.
+4. Gates: dev/test/night-softlock.js, night-* tests, night-steal-unit, coop-night, coop-e2e, quickcheck, one-core-guard. Final-merge newest LIVE before verdict.
+Verdict in the report: 'REVIEW PASS — LAND READY review/fix-evening-softlock-rv <full sha>' or FAIL list to worker Cj26a6VP (session_01964izCj26a6VP5u2Sr3qT5); send_message Foreman D session_01964izGQbgvTAnQ9pJktncj.
+Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
