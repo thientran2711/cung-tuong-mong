@@ -42,7 +42,7 @@ function j78facts(v){const F=[];const W=j78Who(v);
   if(b>0)F.push({k:"hate",kind:"hate",pri:60,txt:`${W} để bụng ${j78who(h[0])} nhất; mức nguy hiểm với người ấy: ${BANDS[b][1]}.`,go:()=>{if(h[0]===S){S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk()}return ""}});
   else F.push({k:"hate",kind:"hate",pri:20,txt:`${W} hiện chưa oán ai đến mức ra tay.`});
   const f=O.map(x=>[x,aff(v,x)]).sort((a,b)=>b[1]-a[1])[0];if(f&&f[1]>=30)F.push({k:"ally",kind:"ally",pri:40,txt:`${W} thân với ${j78who(f[0])} nhất.`})}
- try{const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(T.length)F.push({k:"trait:"+T[0],kind:"trait",pri:50,txt:`${W} có nết ${T[0]}.`,go:()=>{const N=(kn().notes[v.id]||[]).length;learnTrait(v,"Tai mắt dò được");const L=S.notes[v.id]||[];if(L.length>N||L.length===6)L.shift();return ""}})}catch(e){}
+ try{const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(T.length)F.push({k:"trait:"+T[0],kind:"trait",pri:50,txt:`${W} có nết ${T[0]}.`,go:()=>{const N=(kn().notes[v.id]||[]).length;learnTrait(v,"Tai mắt dò được",1);const L=S.notes[v.id]||[];if(L.length>N||L.length===6)L.shift();return ""}})}catch(e){}
  if(!together(S,v))F.push({k:"where",kind:"where",pri:35,txt:`Buổi này ${j78who(v)} ở ${placeName(whereOf(v))}.`,go:()=>{seeLoc(v);return ""}});
  const nm=(v.nightLog||[]).filter(w=>w>=S.turn*3).length;F.push({k:"sung",kind:"sung",pri:30,txt:`${W} được lật thẻ ${nm} lần trong tháng này; Sủng ${v.sung}.`,go:()=>{kn();S.kf[v.id]={s:v.sung,n:nm,w:wk()};return ""}});
  return F}
