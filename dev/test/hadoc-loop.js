@@ -19,8 +19,10 @@ const {chromium}=require('playwright');const URL=process.argv[2]||('file://'+req
    /* musk / catswap need a pregnancy / a birth: their own gate (ACT.ok) is opened for this test only — the card routing is what is tested */
    const ok0=ACT[k].ok;fresh();if(!liveRivals(false).some(v=>ok0(S,v))){ACT[k].ok=function(){return true};row.gate="opened"}
    try{for(let t=0;t<15&&!row.ok&&!row.done&&!row.skip;t++){fresh();const L=liveRivals(false).filter(v=>v.alive&&!v.out&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&ACT[k].ok(S,v));const v=L[t%Math.max(1,L.length)];if(!v)continue;
+    /* review r1: a person she does not know yet is dropped by j61 (no act, no khắc) — the direct rows passed on that for nothing: she knows the target */
+    if(typeof k61Named==="function"&&!k61Named(v)&&typeof k61Know==="function")k61Know(v,"",false,3);
     if(road==="direct")window.__j70off=1;
-    const i=rivals.indexOf(v),u0=used,lg0=S.logSeq||0;const seen=[];let taps=0;
+    const i=rivals.indexOf(v),u0=used,lg0=S.logSeq||0,s0=window.PT&&PT.stat?PT.stat.sent:0;const seen=[];let taps=0;
     try{doAct(i,k);
      while(Q.length&&taps<6){const m=Q[0];seen.push(m.pid||m.t);let j=-1;const o=m.opts||[];
       if(m.pid==="j70start")j=o.findIndex(x=>/^Ra tay ngay/.test(x.n));else if(m.pid==="roadpick"){j=o.findIndex(x=>x.n===(road==="direct"?"Làm như thường":road));if(j>=0&&o[j].off){row.skip="road off";break}}
@@ -33,7 +35,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||('file://'+req
     const rolls=typeof econRoadRolls==="function"&&econRoadRolls(k,S,v);/* musk / catswap: no odds roll → no road card by design (jtamco F2) */
     if(road!=="direct"&&road!=="Làm như thường"&&!rolls){row={k,road,skip:"no road card for this act (no odds roll)"};break}
     if(rp!==(rolls?1:0))continue;/* no road card for this person (econRoadOk): try another */
-    row={k,road,gate:row.gate,ok:bm<=1&&rp<=1&&taps<6&&!Q.some(m=>m.pid==="j70start"||m.pid==="roadpick")&&(used>u0||S.logSeq>lg0),taps,bm,rp,spent:used-u0,seen:seen.slice(0,8),who:v.name,log:(S.logs||[]).slice(0,Math.max(0,(S.logSeq||0)-lg0)).join(" ").replace(/<[^>]+>/g,"").slice(0,140)}}}finally{ACT[k].ok=ok0}
+    row={k,road,gate:row.gate,ok:bm<=1&&rp<=1&&taps<6&&!Q.some(m=>m.pid==="j70start"||m.pid==="roadpick")&&used>u0/* law 3: the act cost its khắc (run now, or sent as an errand: 1 khắc + PT.stat.sent) */,sent:(window.PT&&PT.stat?PT.stat.sent:0)-s0,taps,bm,rp,spent:used-u0,seen:seen.slice(0,8),who:v.name,log:(S.logs||[]).slice(0,Math.max(0,(S.logSeq||0)-lg0)).join(" ").replace(/<[^>]+>/g,"").slice(0,140)}}}finally{ACT[k].ok=ok0}
    out.rows.push(row)}
   return out});
  let bad=0;console.log("keys "+r.keys.join(","));
