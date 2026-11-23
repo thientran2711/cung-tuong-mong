@@ -1,3 +1,18 @@
+# MOCK-STAGE v3.1 — DONE (KIT KEEPER #13 · session_01Rc5AsMPKKF3gPRDRKmFPRD · for MAIN 113) — 23/11 ~23:40Z
+START_CTX ~4 % (own estimate of a 1M window; get_session reads 0).
+PRIORITY #1 CHECK: OD L2207–L2211 verbatim | main none (mock only; base build = origin/main 225c5c08) | review/mock-stage @c2adca45 → eea1bd93 (continued) | claims KK13 row.
+PAGE (fetch-verified: 200 text/html, 47 refs all 200): https://ctm-img.victoria-tntt.workers.dev/img/_review/mock-stage.html
+- A1 = the EVENT PICTURE is the full stage background: clear ~1.4 s → blur 6 px + veil (night: same picture + deeper night veil, .mkev) → figures from the left, boxes from the right; no picture in the boxes (A1 solo hides .k3ev too). Page has an «intro» still per A1 clip.
+- A2 = today's picture-in-box layout, KEPT (MAIN 113 22:21Z).
+- No figure ever clipped: MK3.ob = opaque bbox (CORS canvas, ok on all CDN figures), MK3.fitH shifts a figure so its painted part is ≥4 px inside the layer; check noClip = 4 sides.
+- Odds word beside the bar on one row: mock CSS on #modal.mkon cards + removal of .kodstk/.kodrow in R.apply; check oddsOneRow.
+- Checks 12 stills + 12 videos = 24/24 PASS (fixed, onlyOpts, storyFits, oddsOnTitle, picFills, fullBody, noClip, oddsOneRow, boxIn, onTop). m13.js retries a clip when the event does not open (flaky ~1 in 12).
+- Wipe after her verdict: `python3 dev/site/cdn_sync.py --wipe-review mock-stage` + delete img/_review/mock-stage.html.
+## KIT §93 for SELSCENE (requests 1–5) — review/kit-selscene @e481193d (from origin/main 225c5c08), KIT READY
+jkitsel.js (after jfocus): kitScene.open/show/close + Sc.fig (never clipped) + kitDlgBox + Sc.pair (A1 geometry, kv1/kv2), kitNameTag/kitNameTagBox/kitUnkName, kitNewsRankRow/kitNewsRankList, kitBareOpt/kitBareOpts (selection scene only; jopic kitOptFinal + jk2b kitOptOdds skip .kbare), kitResultCard; j93 kitEdict fromWord; j59 tag rules extended to .kscn-tag. KIT.md §93 + kit page samples §93.5/93.6/93.7. Test `node dev/test/kit-selscene.js <out>` ALL PASS Fold + iPad (shots CDN img/_review/kit-selscene/, wipe after review).
+Queue: mg-skin kit request (MAIN 113 22:39Z).
+
+---
 # MOCK-STAGE v3 — DONE (KIT KEEPER #12 · session_01Rc5AsLLYr8sHGVYNmfHpMF · for MAIN 110) — 23/11
 START_CTX ~4 % (own estimate of a 1M window; get_session reads 0). Page v3 delivered (below), BUT 3 owner additions (OD L2209-2211) arrived during the build and are NOT in it yet → ROLLOVER at ~START+25 % (own estimate): see HANDOVER v3 just below; MAIN opens the successor.
 PRIORITY #1 CHECK: OD 23/11 ~20:20Z + ~20:22Z (read in full) + OD L1867 + 21/11 ~04:00Z (1)-(4) | main dev/test/dialog-fixed.js (assertions reused), jk4 kitOptFit, j79 kitOdFit, real .k3ev event picture (v2 had deleted it) | review/mock-stage @17bcf6ac -> now @c2adca45 | claims: row "KIT KEEPER #12" (MAIN).
