@@ -72,7 +72,7 @@ heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.hei
  if(S.kvHW==null)S.kvHW=wk();if(!npcWhy("heirName",{wait,c}))return"";
  /* NPC-PURPOSE G3: Hoàng thượng names the son his own reckoning ranks first (lệ đích / trưởng / hiền weights), near-best — never a lottery */const x=npwPick(c,y=>y.w)||c[0];setHeir(x.k,x.v);fx("gold");
  const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}; mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}${x.truong?", lại là con trưởng":""}`/* r1: keeps the "lập hiền: Tài N, được ngài thương N" form so j53 swaps the raw talent for the Văn/Đức/Võ words (rival: rumour word) */:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
- return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
+ return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh ${balSg(BAL.kid.heirDanh)}. `};
 /* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử (ván mới S.ps: người nặng ký nhất, trưởng tử chỉ là một phần) */
 (function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>S.ps?b.w-a.w:a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
 /* ---- hiển thị: nhãn trên thẻ con, chip con của phi tần, bảng thứ tự kế vị ---- */

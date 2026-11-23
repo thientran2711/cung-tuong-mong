@@ -117,3 +117,20 @@ Object.assign(BAL,{eff:{
  jweather:{sucSlip:-20},
  jwhy:{f:-8,evRun:[1,0],evSpyMaidRun:1,loyalSpyMaidRun:5}
 }});
+
+/* typed-stat-bal GROUP B block (law 4): new amounts of group-B modules — Object.assign(BAL.eff.<module>,{…}) or new keys, never a key set twice */
+Object.assign(BAL.eff.j55,{dadCut:-15,danhDadCut:-4/* father dismissed for graft (tdLeak / tdImpeach): her house-father support (t.dad) and her Danh; j55 rule + cards */,danhSoMonth:2/* «Sớ khen» a house: Danh of each consort of that house (j55 tdSoMonth) */});
+Object.assign(BAL.eff.j71,{danhFxRank:1/* tribute contest (fxFin7) she played: 2nd / 3rd place Danh; j71 rule + sign-up card */});
+Object.assign(BAL.eff.j30,{sungSick:-4/* slow poison (hạ độc dần) sick months: Sủng a month (j30 month tick + «slowpoison» card) */,danhTocao:3/* «Tố tội thật» success: the accuser's Danh (j30 rule, j78 evidence card) */});
+Object.assign(BAL.eff.j78,{danhUyhiep:-3/* «Uy hiếp đòi bạc» refused: her Danh */,ducTrinhth:-2/* «Trình Thái hậu» cost: Đức */,ducTieuhuy:2/* «Trả chứng cứ lấy lòng»: Đức */,
+ tieuhuy:{aff:8,oan:10,cap:30}/* «Trả chứng cứ lấy lòng»: target's thiện cảm +aff×n / oán −oan×n per returned piece, each capped at cap (j78thAff / j78thOan) */});
+Object.assign(BAL.eff.j92,{danhWdAccuseFalse:-5,danhWdAccuseT:2/* «hặc vượt phẩm» but she was dressed by rank: accuser's Danh / the accused's Danh (j92 wdAccuse + AOUT.vp) */});
+Object.assign(BAL.eff.jmen,{danhTryst:4,danhTrystFail:-2/* menReport a tryst: reporter's Danh when caught / when she denies it */,danhMeet:3,danhMeetFail:-5,thMeet:2/* menReport a private meeting: reporter's Danh (proved / slander), her Thái hậu regard */,
+ danhMan:2,danhManF:3,thMan:1/* menReport a lone intruder: reporter's Danh (thị vệ / Cung Chính ti), her Thái hậu regard */,danhHide:-6/* «Giấu giúp» seen: hider's Danh (jmen rule + cards) */});
+Object.assign(BAL.eff.j42,{ord:{spy:{tin:4,bac:3,tamco:1},plant:{tin:8,bac:10,duc:-5},poison:{tin:12,bac:20,duc:-10},fail:{tin:-2}}/* servant does her master's order (srvDoOrder): her gain per order / her Chủ tin when it fails; j42 rule + ordRow card */});
+Object.assign(BAL.eff.j4,{danhWin:5/* «đạo thơ» accusation cleared (PEND.thd1 win): her Danh; j4 rule + both option cards */});
+Object.assign(BAL.eff.j54,{tinh:{duc:3,danh:2,hM:15,askM:5}/* a child wed to the one she loves (h54Betroth «tinh»): mother's Đức / Danh, child's Mẫu tử (hM); askM = Mẫu tử when the Emperor refuses; j54 rule + option card */});
+Object.assign(BAL.eff.j7,{comet:{rel:25,sung:-15,thu:-20}/* «Sao chổi» omen on a rival: «Đứng ra nói đỡ» her regard (v.rel) / «Đổ thêm dầu vào lửa» her Sủng (raw, NPC) and regard */,
+ cane:{rel:30,sung:-10,thu:-30}/* «caning» of a rival: «Quỳ xin tha» her regard / «Thêm một lời buộc tội» her Sủng (raw, NPC) and regard; j7 rule + option text */});
+Object.assign(BAL.eff.j9,{ducPushPond:-12/* «Đẩy xuống hồ sen» (pushPond, her and NPCs): the pusher's Đức; j9 rule, ACT cost getter + card */});
+Object.assign(BAL.eff.j99succ,{costB:{bac:-100,suc:-10},costC:{bac:-300,suc:-20}/* succession: «Buông rèm nhiếp chính» / «Tự lên ngôi Nữ đế» cost (succTry + PEND.succ0 card) */,danhB:8,danhBFail:-10/* «Buông rèm» succeeds / court refuses: her Danh */});
