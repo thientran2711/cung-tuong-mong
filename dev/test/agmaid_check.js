@@ -11,6 +11,7 @@
    8 30 played tuần as a maid and 30 as a consort: 0 throws; co-op guest: amOn false
    usage: node dev/test/agmaid_check.js <page URL or file>   → exit 1 on any FAIL or page error */
 const {chromium}=require('playwright');const [,,URL0]=process.argv;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -48,7 +49,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const m=v.maid;const nm=m.name;const rf=roomFor;roomFor=()=>false;let a,b;try{sendMaid(v);a={same:v.maid===m,fav:!!m.fav};roomFor=()=>true;const n0=rivals.length;sendMaid(v);const n=rivals[rivals.length-1];b={added:rivals.length-n0,name:n.name,nm,newMaid:v.maid!==m}}finally{roomFor=rf}
   const d=PEND.ksp();const x=d.o[1].x;return{roll3:seen.includes(3),a,b,x}});
  ok(!r5.roll3,'Tiến cử: the NPC consort decides by her need, no flat roll 3',r5);ok(r5.a.same&&r5.a.fav,'Tiến cử, seats full: the maid stays, favoured (no "thả ra cung")',r5.a);
- ok(r5.b.added===1&&r5.b.name.endsWith(" "+r5.b.nm)&&r5.b.newMaid,'Tiến cử with a seat: the same maid raised (her name), a new maid serves',r5.b);ok(!/Năm ăn năm thua|Khó|Liều/.test(r5.x),'Tiến cử option text: no invented odds (odds cap: a sure choice prints no ladder word)',r5.x);
+ ok(r5.b.added===1&&r5.b.name.endsWith(" "+r5.b.nm)&&r5.b.newMaid,'Tiến cử with a seat: the same maid raised (her name), a new maid serves',r5.b);ok(!OW.RE.test(r5.x),'Tiến cử option text: no invented odds (odds cap: a sure choice prints no ladder word)',r5.x);
  /* 6 the player maid picked */
  await fresh(true);
  const r6=await p.evaluate(()=>{S.age=Math.max(S.age,18);S.srv.lau=0;S.emp.met={me:[[wk(),"tea",1]]};S.sung=30;const C=consorts().filter(p=>nightCh(p)>0);const mp=mindPick;mindPick=(O)=>{const x=O.find(z=>z[0]&&z[0].m===S);return x?x[0]:mp(O)};

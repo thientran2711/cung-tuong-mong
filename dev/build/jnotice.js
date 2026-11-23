@@ -5,7 +5,7 @@
    ONE ENTRY POINT for every game notice: kitNotice({id, line, text, pic, kind, sticky, go, goLabel}) (or kitNotice("one line")).
      id      same id = the same notice (updated, not doubled; the chip shows again only when its line changed). Default = the line itself.
      line    the SHORT one line of the chip («Ngự hoa viên sắp đóng cửa sau khắc này»). Plain text.
-     text    the FULL text of the panel («… Ở lại = như lẻn vào: Khá chắc.»), plain text; default = line.
+     text    the FULL text of the panel («… Ở lại = như lẻn vào: Có cơ.»), plain text; default = line.
      pic     representative picture (img/… path); default = the kit info picture of «Tin báo» (kitInfoArt).
      sticky  the box keeps its busy light while this notice exists, even when read (closing alert: until she leaves / the place opens).
      go      optional real action of the panel (one option row, label goLabel), e.g. the Tai mắt news «Để ta xem».
@@ -168,5 +168,5 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kit
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="krailb kglyph kntb kbusy kbadge" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0">!</i></button>`+
   `<button type="button" class="krailb kglyph kntb kntcalm" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0;opacity:.5">!</i></button>`+
   `<span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ngự hoa viên sắp đóng cửa sau khắc này</span></span>`+
-  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối). Ở lại = như lẻn vào: Khá chắc.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
+  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối). Ở lại = như lẻn vào: Có cơ.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
 }catch(e){console.error("jnotice",e)}})();

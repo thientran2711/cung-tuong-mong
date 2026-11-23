@@ -1,3 +1,14 @@
+/* ONE SOURCE of the odds ladder words (owner 23/11 ~21:40Z, review/kit-odds-row: 7 EQUAL bands; cuts BAL.odds.cut = 18/31/44/57/70/83 in jbal: 5–17 · 18–30 · 31–43 · 44–56 · 57–69 · 70–82 · 83–95).
+   RULE: no ladder word reads as a promise («thành», no numbers). Every module reads KIT_ODDS / KIT_ODDS_ALT (regex source, longest first) / kitOddsCanon / kitOddsNorm / kitOddsIdx: nobody types the words.
+   KIT_ODDS_OLD = every word of older builds (and of the words tried on 23/11), parse only (old saves / logs), NEVER shown, mapped to the band that holds the CENTRE of its old band
+   (Liều 5–30 → 1st · Khó 31–45 → 3rd · Năm ăn năm thua 46–55 → 4th · Khá chắc 56–65 → 5th · Chắc 66–80 → 6th · Rất chắc 81–90 / Nắm chắc 91–95 → 7th). */
+const KIT_ODDS=["Mong manh","Hiểm","Khó lường","Tùy duyên","Có cơ","Vững","Rất vững"];
+const KIT_ODDS_OLD={"Liều":"Mong manh","Thập tử nhất sinh":"Mong manh","Khó":"Khó lường","Hơi khó":"Khó lường","Bấp bênh":"Khó lường","Năm ăn năm thua":"Tùy duyên","Ngang ngửa":"Tùy duyên","Năm phần":"Tùy duyên","Khá chắc":"Có cơ","Chắc":"Vững","Rất chắc":"Rất vững","Nắm chắc":"Rất vững","Ắt thành":"Rất vững","Chín phần chắc":"Rất vững","Mười phần chắc":"Rất vững"};
+const KIT_ODDS_ALT=KIT_ODDS.concat(Object.keys(KIT_ODDS_OLD)).sort((a,b)=>b.length-a.length).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
+function kitOddsCanon(w){return KIT_ODDS_OLD[w]||w}
+const KIT_ODDS_LEAD=new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)");
+function kitOddsNorm(s){return String(s).replace(KIT_ODDS_LEAD,m=>kitOddsCanon(m))}/* a leading old ladder word → the current one (parse only) */
+function kitOddsIdx(w){return KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()))}
 /* kRx(src, flags) — a RegExp that may use LOOKBEHIND (?<= (?<! and still runs on older iPad/iPhone Safari (< 16.4), which cannot even PARSE
    a lookbehind (owner iPad 15/11 "Bị gì đây mới vào game": one lookbehind literal anywhere in the one game <script> = the whole game dead,
    the raw skeleton stays). RULE: never write a lookbehind as a /literal/ — write kRx("…","flags") (dev/test/webkit-syntax.js FAILs a literal).

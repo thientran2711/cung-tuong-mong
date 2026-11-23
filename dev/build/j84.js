@@ -17,7 +17,7 @@ const R=(src,f="g")=>kRx(src,f+"u");/* kRx: lookbehind that also runs on Safari 
 const srvMode=()=>{try{return typeof isSrv==="function"&&!!S&&isSrv()}catch(e){return false}};/* servant start: "Chủ tin" is the mistress's trust in HER — keep the word */
 /* ordered phrase rules: [regex, replacement|function] */
 const RULES=[
- /* internal attack tags "[Tung tin đồn · Năm ăn năm thua · hỏng]" → a sentence */
+ /* internal attack tags "[Tung tin đồn · Tùy duyên · hỏng]" → a sentence */
  [/^\[([^\[\]]+?) · (thành|hỏng)\]$/u,(m,a,ok)=>{const p=a.split(" · ");const x=p[0],y=p[1];return `«${x}» nhắm vào ngươi${y?` (việc ${y.toLowerCase()})`:""}: ${ok==="thành"?"đã thành":"không thành"}.`}],
  /* dates */
  [R(B+"T(\\d{1,2})\\/(\\d{1,3})( · | )(thượng|trung|hạ) tuần"),(m,a,b,s,t)=>`Tháng ${mon(a)}, năm thứ ${ord(b)} · ${t} tuần`],
