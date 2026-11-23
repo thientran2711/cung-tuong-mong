@@ -2621,3 +2621,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:52Z) W2 kit-odds-row: B/C rejected (title crush banned 18/11; C breaks owner rule) → MAIN chose A (meter under title where needed, titles + card heights unchanged). Awaiting READY → sonnet SMALL reviewer.
 - (20:53Z) W3 hdr-kiep READY 5d0039de → reviewer session_01Rc5AsK7hQdkb2rweb6hVxD. W3 stays until verdict.
 - (21:02Z) hdr-kiep PASS 5d0039de → relayed to LC7; W3 + reviewer archived.
+- (21:07Z) W1 ky-keeper-f2 LAND READY? 7d7a77d7 (jky.js only; 4/10→10/10) → opus BIG reviewer-lander session_01Rc5AsL1nEGqb52Rx9C8tgz. 2235 vanish not reproduced = watch item for N17.
