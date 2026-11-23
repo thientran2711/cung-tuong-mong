@@ -2684,3 +2684,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:24Z) OD ~23:40Z (via MAIN 111) → SELSCENE ADDENDUM 20 + SELW-TESTS2 sonnet session_01Rc5AsKjzDpebhh6UgrTLEQ. W1 FINAL scan relayed to rv L1nEGqb5 (LIVE F1 twin, no new fault). KK13 told: keep picture-in-box as A2.
 - (22:25Z) ADDENDUM 21 (OD ~23:43Z result card) sent to SELSCENE. PROMO-HIST DONE 652d7de2 → summary to sếp, session archived; 3 gaps (grand-occasion batch promo, favour-only promo, deathbed/posthumous) WAIT OWNER (law 16, no change without her). map-label-overlap rv FAIL (phone 390 DOM overlap) → W4 fixing; rv now reports to 113.
 - (22:32Z) Owner Q (entry per origin) → answered + OD row + SELSCENE ADDENDUM 23 (cnv sắc phong scene, hòa thân triều kiến scene).
+- (22:32Z) Owner order (robot report → tuning recommendations) → OD row + FOREMAN_D ORDER #6.
