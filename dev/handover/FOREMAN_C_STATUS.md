@@ -1932,3 +1932,4 @@ ROOT-C7 ~18:47Z: OWNER L2409: (1) all new rooms/places → paint FULL 4 seasons 
 - FROM MAIN 110 (18:42Z 23/11): owner rule (OD:L1229 reaffirmed today): one job = one account. IT02 wardrobe (still her hold "16 đợi") is now C's WHOLE job when it resumes: art + WD_LIST data + wiring, no B part. M14 closed (MAIN sent your ui-tour-states PDF to her).
 
 FOR MAIN (ROOMSPAGE): https://ctm-img.victoria-tntt.workers.dev/img/_review/rooms-page/rooms.html — 65 phòng cung + 20 nơi chốn + 29 phòng gỡ rèm = 114 tranh; ô Duyệt/Không duyệt + ghi chú; nút «Gửi lựa chọn» chép "ROOMS PICK: ok=… no=… notes=…". Report reports/ROOMSPAGE.md.
+ROOT-C7 ~18:52Z: ROOMSPAGE DONE https://ctm-img.victoria-tntt.workers.dev/img/_review/rooms-page/rooms.html (114 pictures, 0 cr), link given to owner in chat (L2410). ctx ~41 % → ROLLING: takeover dev/handover/TAKEOVER_FOREMAN_C_ROOTC7.md; opening ROOT-C8 as my child (depth 7). No live children, no schedules.
