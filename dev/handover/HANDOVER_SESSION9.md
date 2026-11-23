@@ -2521,3 +2521,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 07:30Z) LC6 ROLLED (5 lands) → archived. LAND CHAIN 7 = session_01Rc5AsLJoRXS3EU8sX8nrzQ (child of 109, depth 3), handover reports/land-chain-7.md; first job N14 seals (LC6 never took it). Trigger prompt → LC7.
 - WAKE 23/11 07:32Z — LOAD: main running 1 (KIT KEEPER #8: AP01 frame + mini-game backdrop slot) | B free ~10 (coop-thin-g #10 SSK ~08:00Z; M14 + outings reader ordered, no ack yet) | C active (REVIEW-GAPART1/2, REVIEW-MG10A) | D 1 seat (coop-driver-fails) | E 1 seat (N12) | moved: MG backdrop kit request → KIT KEEPER #8. LC7 landing N14. ctx ~16 %.
 - (23/11 07:51Z) KIT-AP01 READY 57061678 (KIT KEEPER #8) → reviewer session_01Rc5AsKwSnGFsj7p8CQxCc7 opened. Keeper now on KIT-MGBG.
+- (23/11 08:00Z) REVIEW KIT-AP01 FAIL (frame border covers buttons/last line on long cards; seal hits top-right ornament) → back to KIT KEEPER #8 (fix first, then MGBG); reviewer kept on call.
