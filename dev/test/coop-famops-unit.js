@@ -132,6 +132,14 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    finally{CW.on=on22;CW.seat=se22;COOP.send=sd22;rivals.splice(rivals.indexOf(f),1);v.inv=v.inv.filter(e=>!(e.iu>9e6))}
    ck("22 an NPC gives a piece to her entry outside a diffed call: ONE «add» to her seat (was: none, stranded on the host's copy)",!er22&&f.inv.some(e=>e.iu===e1.iu)&&n1===1,{er22,n1,inv:f.inv.map(e=>e.iu)});
    ck("22b the same gift inside a diffed NPC call: still exactly one «add»",!er22&&n2===1,{er22,n2})}
+  /* E44g T5 (coop-lost-scan dup 10000030): the jil market buyer (npc-purpose ilBuy) picked HER entry on the host; with the stale festival diff
+     gone the piece would be stranded on the host's copy. Now she is never an NPC buyer, and any box piece handed to her entry goes to her seat. */
+  {reset();const on23=CW.on,se23=CW.seat,sd23=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);let er23="",w23=null,n23=-1;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P);const x={e,at:"mkt",own:"",w:wk(),pr:1};
+    w23=NPW.reg.ilBuy.who({x,o:null});ilS().box.push(x);ilTake(x,f,"mua");n23=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e.iu).length}catch(z){er23=z.message}
+   finally{CW.on=on23;CW.seat=se23;COOP.send=sd23;rivals.splice(rivals.indexOf(f),1)}
+   ck("23 the market buyer list never holds her entry (a player seat)",!er23&&Array.isArray(w23)&&!w23.includes(f),{er23,n:w23&&w23.length});
+   ck("23b a box piece handed to her entry on the host: ONE «add» to her seat",!er23&&n23===1,{er23,n23})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
