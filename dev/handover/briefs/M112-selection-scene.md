@@ -101,3 +101,10 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Hòa thân princess origins (nc Cao Ly, bd Bắc Địch, pf Phù Tang) follow ±1 with cap PHI (not Tần). The +1 above the origin rank needs a GOOD selection result AND high Sắc ("vua thấy đẹp"); the Sắc threshold is a new BAL key (one core), e.g. BAL.entry.hoaThanSac. Good result without high Sắc → same rank (still capped by Phi).
 - So Cao Ly (Tần) → can enter as Phi; Bắc Địch / Phù Tang (Quý nhân) → up to Tần. Every other origin keeps ADDENDUM 18 (cap Tần).
 - Per-origin before/after table in the report must show these 3 rows with and without high Sắc. BIG review; new lives only.
+
+## ADDENDUM 20 (MAIN 113, 22:23Z) — TESTS ADAPT TO THIS LIFE + NO GUIDANCE (OD 23/11 ~23:40Z, read verbatim in dev/OWNER_DECISIONS.md; relayed by MAIN 111)
+PRIORITY #1 CHECK ('sở thích|chữ trọng|hobby'): OD 7 | ledger 0 | claims 0 | main 15 | review/* 0 | archive 0 (REUSE: emperor likes = LIKES in j2.js:181 / jagacts2.js «Hỏi sở thích»; chữ trọng = jagknow.js btTerms (static + offended/honoured); nết = BAL.net/jnet.js).
+1. Each royal's test is picked from THIS life's royal: MINI-GAME = cầm kỳ thi họa drawn from that royal's likes (e.g. Emperor loves music → zither mini-game) OR công dung ngôn hạnh by what he/she wants to test; ĐỐI ĐÁP / HÀNH XỬ lean to the virtue that royal values (chữ trọng: hiếu, lễ, tiết, trung …) + nết.
+2. All 3 (or 4) answers read reasonable/virtuous; which is best depends on that royal's values this life — the same answer may please one royal and displease another. Data: each option tagged by the value(s) it expresses; score = match with the asker's chữ trọng + nết (BAL weights).
+3. NO GUIDANCE on selection answers: no odds word, no gain/loss line, no hint label (EXCEPTION to the option-card rule, selection scene only — note it in KIT.md where the option card is defined). Results shown AFTER (thiện cảm notice + entScore at the edict).
+4. Content rewrite of doidap.jsonl + hanhxu.jsonl → writer SELW-TESTS2 (same files, new fields: values[], no obvious ranking); build reads the new fields.

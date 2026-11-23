@@ -1222,3 +1222,4 @@ REVIEW typed-stat-bal (opus BIG numbers; briefs/D-typed-stat-review.md) of 37264
 | REVIEW know-notice BIG (opus reviewer-lander; merge LIVE; co-op UICAP touched) of 6205f686 | review/know-notice-r; reports/know-notice.md «## REVIEW» | MAIN 113 | session_01Rc5AsMzkmnYoWhKFiCDBgU | RUNNING | 23/11 22:19Z |
 | PROMO-HIST: history expert, Qing promotion practice vs game promotion rules (report-only, law 8; owner Q OD ~23:32Z) | reports/PROMO-HIST.md | MAIN 113 | session_01Rc5AsLMSvJdQe4JDF44zrs | RUNNING | 23/11 22:19Z |
 REVIEW fix-hadoc-loop (opus BIG schemes/khắc; briefs/D-hadoc-review.md) of 5ecfce53 | review/fix-hadoc-loop-rv | session_01964izF1kUMZR34FJms1QV9 | RUNNING | 23/11 22:21Z (Foreman D child)
+| SELW-TESTS2: rewrite 44 ĐỐI ĐÁP + 44 HÀNH XỬ so answers are ambiguous and tagged by value (owner OD ~23:40Z; ADDENDUM 20) | dev/handover/content/selscene/doidap.jsonl, hanhxu.jsonl | MAIN 113 | (opening) | RUNNING | 23/11 22:23Z |
