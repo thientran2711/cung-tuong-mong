@@ -1238,3 +1238,4 @@ robot10 ORDERS #7 LAG + #8 ANIM-STRESS (sonnet; MAIN 113 22:38Z/22:41Z; briefs/D
 | REVIEW offline-all SMALL (sonnet rv-lander; deadline Wed 25/11) of 3bf27ac7 | review/offline-all-r; reports/offline-all.md «## REVIEW» | MAIN 113→114 | session_01Rc5AsJjPE1Lvb1iuMsiN2m | RUNNING | 23/11 23:25Z |
 kit-mgskin review | review/kit-mgskin-r | session_01Rc5AsLG8CETU5oT3t3s98h | RUNNING | 23/11 23:36Z (MAIN 114, SMALL kit rv-lander of KK14 1b91ac14) → PASS 1b91ac14, LC8, rv archived 23:44Z
 | ORDER THIN P0 shared no-repeat memory + P2 j7 composer ENGINE (opus) | review/thin-p0, review/thin-p2 | B | session_01N1tNP4Dsh2FQd5z5vKP2qy | P0 SẴN SÀNG KIỂM 00b3a4ec; P2 engine cd448e99 (waiting for seeds) | 24/11 00:30Z |
+| REVIEW thin-p0 r1 (opus BIG reviewer-lander) of review/thin-p0 00b3a4ec | review/thin-p0-r1; reports/thin.md «## REVIEW thin-p0 r1» | B | session_01N1tNP4cfeKd94zTHNC7jSu | RUNNING | 23/11 23:55Z |
