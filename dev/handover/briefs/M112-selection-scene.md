@@ -108,3 +108,7 @@ PRIORITY #1 CHECK ('sở thích|chữ trọng|hobby'): OD 7 | ledger 0 | claims 
 2. All 3 (or 4) answers read reasonable/virtuous; which is best depends on that royal's values this life — the same answer may please one royal and displease another. Data: each option tagged by the value(s) it expresses; score = match with the asker's chữ trọng + nết (BAL weights).
 3. NO GUIDANCE on selection answers: no odds word, no gain/loss line, no hint label (EXCEPTION to the option-card rule, selection scene only — note it in KIT.md where the option card is defined). Results shown AFTER (thiện cảm notice + entScore at the edict).
 4. Content rewrite of doidap.jsonl + hanhxu.jsonl → writer SELW-TESTS2 (same files, new fields: values[], no obvious ranking); build reads the new fields.
+
+## ADDENDUM 21 (MAIN 113, 22:24Z) — RESULT CARD AFTER EACH CHOICE (OD 23/11 ~23:43Z, relayed by MAIN 111; read the OD row verbatim)
+- The no-hint exception of ADDENDUM 20.3 is ONLY the nhập cung selection scene; every other option card in the game keeps odds + gain/loss (do not touch them).
+- In nhập cung, RIGHT AFTER each choice (đối đáp, hành xử, mini-game, yard acts) show a clear RESULT card from kit rows: what she gained/lost — thiện cảm ± with that royal (or girl), and the score effect in words (no numbers, no %; VANPHONG). Kit part only (kitNotice / kit rows); missing → KIT REQUEST to KIT KEEPER #13.
