@@ -52,8 +52,8 @@ try{for(const k in KCRARE)RARE97.add(k,{t:"Tiểu thư ngoài cung",tag:KCRARE[k
 /* OWNER #8 (15/11 20:05Z): a life as a thiếu nữ starts with a chest of her girlhood belongings that fills her slots with ordinary girlhood
    things; she keeps them into the palace (fallback outfit). New items: Ngọc bội khuê các (painting img/item-ngocboikc.webp, gpt-2-6,
    dev/art/ITEM_ART.md §5) and Vòng bạc hoa mai (img/item-vongbackc.webp); the rest are existing items. */
-try{IT.ngocboikc=IT.ngocboikc||{n:"Ngọc bội khuê các",kd:"Trang sức",d:"Đeo eo: Sắc +1 · ngọc bội con gái mang từ nhà",pr:10,rk:0,sl:"waist",w:{sac:1}};
- IT.vongbackc=IT.vongbackc||{n:"Vòng bạc hoa mai",kd:"Trang sức",d:"Đeo tay: Sắc +1 · đôi vòng bạc con gái mang từ nhà",pr:10,rk:0,sl:"wrist",w:{sac:1}};
+try{IT.ngocboikc=IT.ngocboikc||{n:"Ngọc bội khuê các",kd:"Trang sức",d:`Đeo eo: Sắc ${balSg(BAL.itFx.ngocboikc.w.sac)} · ngọc bội con gái mang từ nhà`,pr:10,rk:0,sl:"waist",w:BAL.itFx.ngocboikc.w};
+ IT.vongbackc=IT.vongbackc||{n:"Vòng bạc hoa mai",kd:"Trang sức",d:`Đeo tay: Sắc ${balSg(BAL.itFx.vongbackc.w.sac)} · đôi vòng bạc con gái mang từ nhà`,pr:10,rk:0,sl:"wrist",w:BAL.itFx.vongbackc.w};
  for(const k of ["ngocboikc","vongbackc"]){if(typeof ITEM_ART_G==="object")ITEM_ART_G[k]=0;if(typeof ITIMG==="object")ITIMG[k]=k}}catch(e){}
 
 function isKc(){return !!(typeof S!=="undefined"&&S&&S.kc&&!S.kc.inPal)}

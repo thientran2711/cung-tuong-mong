@@ -27,16 +27,16 @@ Object.assign(BAL,{stip:{
  askBase:30,reportBase:25,remember:20}});
 /* ---------- the items (art: dev/art/ITEM_ART.md §3, 16 icons gpt-2-6) ---------- */
 (function(){const N={
- vaibong:{n:"Vải bông",kd:"Vải vóc",d:"May áo thường: Sắc +1 trong 3 tháng · tặng, bán được",pr:8,rk:0,dr:1,tg:["rv"]},
+ vaibong:{n:"Vải bông",kd:"Vải vóc",d:`May áo thường: Sắc ${balSg(BAL.itFx.vaibong.dr)} trong 3 tháng · tặng, bán được`,pr:8,rk:0,dr:BAL.itFx.vaibong.dr,tg:["rv"]},
  vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(BAL.eff.jstip.maidUse)}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
  tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
  trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
  tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
- thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:"Đốt sưởi: mùa đông Sức +6, mùa khác Sức +2",pr:6,heat:[6,2],tg:["rv"]},
- thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:"Than khói Nội vụ phủ phát: mùa đông Sức +3, mùa khác Sức +1",pr:1,heat:[3,1],tg:[]},
+ thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:`Đốt sưởi: mùa đông Sức ${balSg(BAL.itFx.thanbac.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanbac.heat[1])}`,pr:6,heat:BAL.itFx.thanbac.heat,tg:["rv"]},
+ thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:`Than khói Nội vụ phủ phát: mùa đông Sức ${balSg(BAL.itFx.thanden.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanden.heat[1])}`,pr:1,heat:BAL.itFx.thanden.heat,tg:[]},
  banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_4)} · tặng, chia kẻ hầu`,pr:5,use:{suc:BAL.eff.jstip.sucUse_4},tg:["rv"]},
  ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:`Uống: Sức ${balSg(BAL.eff.jstip.sucUse_5)} · tặng Hoàng thượng, phi tần`,pr:12,use:{suc:BAL.eff.jstip.sucUse_5},gv:3,tg:["emp","rv"]},
- aolong:{n:"Áo lông chồn tiến cống",kd:"Vải vóc",d:"Mặc mùa đông: Sắc +4 trong 3 tháng",pr:120,rk:0,dr:4,tg:["th"]},
+ aolong:{n:"Áo lông chồn tiến cống",kd:"Vải vóc",d:`Mặc mùa đông: Sắc ${balSg(BAL.itFx.aolong.dr)} trong 3 tháng`,pr:120,rk:0,dr:BAL.itFx.aolong.dr,tg:["th"]},
  cocngoc:{n:"Bộ cờ ngọc",kd:"Lễ vật",d:"Tặng người mê cờ: rất hợp ý",pr:100,gv:10,tg:["emp","th","rv"]},
  guong:{n:"Gương Tây dương",kd:"Trang sức",d:`Dùng: bày lên bàn trang điểm, Sắc ${balSg(BAL.eff.jstip.sacUse)}`,pr:60,use:{sac:BAL.eff.jstip.sacUse},tg:["rv"]},
  thamba:{n:"Thảm Ba Tư",kd:"Lễ vật",d:"Tặng: êm ấm, quý hiếm",pr:120,gv:9,tg:["th","rv","hh"]},
