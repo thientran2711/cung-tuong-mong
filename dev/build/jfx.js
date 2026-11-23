@@ -196,12 +196,12 @@ const KF_WX={
  heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat glare patches, brighter and more of them with the level */
  heat:{k:["glowburst"],cap:4,vx:[-.05,.05],vy:[-.14,-.05],a0:.17,float:1,tint:0xffd29a,sc:[3.2,4.8],life:[420,640]},
  heat3:{k:["glowburst","ember"],cap:4,vx:[-.06,.06],vy:[-.2,-.06],a0:.3,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
- cloud1:{k:["smoke"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
- cloud:{k:["smoke"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
- cloud3:{k:["smoke"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
- mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- mist3:{k:["smoke"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
- mist:{k:["smoke"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ cloud1:{k:["fogbank"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
+ cloud:{k:["fogbank"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
+ cloud3:{k:["fogbank"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
+ mist1:{k:["fogbank"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist3:{k:["fogbank"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
+ mist:{k:["fogbank"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}
 };
@@ -233,7 +233,7 @@ function kfWxSpawn(c,scatter){const clip=kfClipLay(c.lay)&&!!KFX.sr,sr=clip?KFX.
  if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);if(c.ray){x=sr.x+RS(.3,1.02)*sr.w;y=sr.y+RS(-.05,.3)*sr.h}v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1,tw:c.tw||0}}
  else{const ln=c.line&&k==="streak";x=c.fromLeft?(scatter?sr.x+RS(0,sr.w):sr.x-50):sr.x+RS(-.04,1.04)*sr.w;y=c.fromLeft||scatter?sr.y+RS(0,sr.h*.95):sr.y+RS(-30,-8);v={vx:ln?vx*2.4:vx,vy:ln?vy*.5:vy,life:ln?Math.ceil((sr.w+200)/(vx*2.4))+30:c.fromLeft?Math.ceil((sr.w+200)/vx)+30:Math.ceil((sr.h+140)/vy)+60,sway:ln?0:c.sway||0,spin:c.rain||ln?0:RS(-c.spin,c.spin),fade:"none",a0:ln?.7:a0,amb:1,ln}}
  v.lay=c.lay;v.clip=clip;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
- const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
+ const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;if(k==="fogbank"){s.rotation=0;s.v.spin=0}/* a fog bank lies flat (KP08 painted fogbank) */
  if(zs!=null&&!c.rain){/* REAL SNOW: soft round flakes of mixed size; far = tiny + crisp + slow, near = big + soft (blurred look) + faster + wider sway; blue-white so it reads on light paintings */
   const b=s.v.sc/sc,z=zs;s.scale.set(b*(.3+.9*z));s.blendMode="normal";s.tint=z<.5?0x8cade6:0xc2d5f7;s.v.a0=.98-.45*z*z;s.v.sway=(c.sway||0)*(.5+1*z);s.v.spin=0;
   /* crisp white core on the soft blue body: reads on light AND dark paintings; same path, same sway */

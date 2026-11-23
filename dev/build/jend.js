@@ -79,7 +79,9 @@ if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{co
   const r=s0.apply(this,arguments);try{kesShow()}catch(e){console.error("kes",e)}return r};window.showModal=showModal}
 /* a rare ending (Kỳ ngộ, j97): the arc's result card that r97Take queues (card67 "result" → kit panel) is that ending's screen */
 if(typeof r97Take==="function"){const r0=r97Take;r97Take=function(){const before=new Set(typeof Q!=="undefined"?Q:[]);const r=r0.apply(this,arguments);
-  try{(Q||[]).forEach(m=>{if(m&&!before.has(m)&&m.kit&&m.kit.kind==="result")kesMark(m,"rare")})}catch(e){console.error("kes",e)}return r}}
+  try{const A=typeof th67==="function"?th67(arguments[0]):null;/* GE11 (GAPART1 23/11): a road-finale rare ending (RD97L) shows its painted picture (j89 ST_RD97ART) */
+  const ra=A&&A.a&&typeof ST_RD97ART!=="undefined"&&ST_RD97ART.has(A.a)?stArtOf(A.a,null,"r97"):"";
+  (Q||[]).forEach(m=>{if(m&&!before.has(m)&&m.kit&&m.kit.kind==="result"){if(ra&&!m.art)m.art=ra;kesMark(m,"rare")}})}catch(e){console.error("kes",e)}return r}}
 /* the frame inside: the ending screen always takes the kit's LARGEST v3 layout (XL: figure XL, the event picture grows into what the text leaves) — the
    kit size system picks the smallest size that holds the content, which on a full-screen frame leaves the figure small in a sea of paper */
 if(typeof kszLivePick3_0==="function"&&typeof kszLiveLay3==="function"){const p0=kszLivePick3_0;kszLivePick3_0=function(dlg){try{const M=document.getElementById("modal");
