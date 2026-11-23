@@ -51,4 +51,9 @@ const NREC=d=>{const SEAT=COOP.seat==='a'?'host':'guest',OTH=SEAT==='host'?'gues
   const n=id=>id==null?null:id==='me'?SEAT:(f&&id===f.id)?OTH:id;const w=S.nightWhy;if(!w||w.wk!==d)return{none:1,wk:w&&w.wk};return{flip0:n(w.flip0),pick:n(w.pick),cause:w.cause}};
 async function nightRec(A,B,d,ms=20000){let a=null,c=null;const t0=Date.now();while(Date.now()-t0<ms){a=await A.p.evaluate(NREC,d).catch(e=>({err:e.message}));c=await B.p.evaluate(NREC,d).catch(e=>({err:e.message}));
   if(!a.none&&!a.err&&JSON.stringify(a)===JSON.stringify(c))break;await _sl(500)}return{a,c,same:!a.none&&!a.err&&JSON.stringify(a)===JSON.stringify(c)}}
-module.exports={origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
+/* repress(o) — review/coop-driver-fails #2 (LAW 11, one shared step for every bot's buoiBoth): a press of #next can open a card instead of
+   ending the buổi (coop-guest-men G3-1: her tối «Sẵn sàng» opened the world news «Thái hậu bệnh nặng», jworld2 thb; clear() closed it, her
+   #next stayed enabled and the bot never pressed again → the room waited for ever). A player presses again: a seat still on the old buổi,
+   #next enabled, no dialog, no buổi / week end out → one more tap (counted in window.__rePress). */
+async function repress(o){try{await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled&&n.offsetParent!==null&&!(typeof Q!=='undefined'&&Q.length)&&!(window.COOPW&&(COOPW.bend||COOPW.pend))&&!(window.__co&&__co().waiting)){window.__rePress=(window.__rePress||0)+1;n.click()}})}catch(e){}}
+module.exports={repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
