@@ -1224,3 +1224,4 @@ REVIEW typed-stat-bal (opus BIG numbers; briefs/D-typed-stat-review.md) of 37264
 REVIEW fix-hadoc-loop (opus BIG schemes/khắc; briefs/D-hadoc-review.md) of 5ecfce53 | review/fix-hadoc-loop-rv | session_01964izF1kUMZR34FJms1QV9 | RUNNING | 23/11 22:21Z (Foreman D child)
 | SELW-TESTS2: rewrite 44 ĐỐI ĐÁP + 44 HÀNH XỬ so answers are ambiguous and tagged by value (owner OD ~23:40Z; ADDENDUM 20) | dev/handover/content/selscene/doidap.jsonl, hanhxu.jsonl | MAIN 113 | session_01Rc5AsKjzDpebhh6UgrTLEQ | DONE | 23/11 22:23Z |
 | THIN (EVCAT §3 P0 memory + P1 mini-game ≥40/type + P2 j7 ≥60, then P3–P8; owner OD ~22:50Z real) | review/thin-* | B (ORDER MAIN 113 22:36Z) | (B opens) | ORDERED | 23/11 22:36Z |
+| TITLES2 (chapter/side-line titles + reputation titles good/bad; expert first; owner OD ~22:55Z real) | review/titles2 | E (ORDER MAIN 113 22:37Z) | (E opens) | ORDERED | 23/11 22:37Z |
