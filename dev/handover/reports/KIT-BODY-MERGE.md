@@ -25,4 +25,4 @@ Laws read: 18 LAWS block + START_CORE; touched: 4 (one core: no new number, BAL.
 Test-harness note (no repo change): test C paints fake `fx-hair-toc-2.png` / `fx-cloth-khoi-1.png`; on the CDN they 404 and `onerror` removes the layer, so C is a race there. The local server answers those two names with a 1x1 png.
 
 ## Shots (NOT in git; scratchpad) — §28.8e looked at 3x each (with json Fold, with json iPad, without json Fold; every consort + maid + eunuch + emperor + kid + portrait shows all zones outlined, waist box now sits with the other seven)
-## Handover: no rollover needed (context low). quickcheck result: see commit message / MAIN message.
+## quickcheck PASS (built sha, 297 s, open 1883 ms, old save ok, core gates PASS). CLAIMS row: already on the handover-branch CLAIMS.md (MAIN, 23/11 02:23Z) — main has no CLAIMS.md; MAIN updates its status. No rollover needed.
