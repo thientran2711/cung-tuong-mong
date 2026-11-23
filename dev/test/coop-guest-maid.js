@@ -140,6 +140,11 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
   const vb=await view(B),va=await view(A);ok(va.R===vb.R&&!vb.ghosts.length,'2 both: same consort list, no stand-in',[va.R.length,vb.R.length,vb.ghosts])}
  /* 3 refusal */
  await A.p.evaluate(()=>{window.__rf0=roomFor;roomFor=r=>r==='consort'?false:window.__rf0(r)});
+ /* review/coop-driver-fails (coop-flakes rv #7, 1 in 6: «guest rank 1 at step 1 → 0 by step 3», table [1,0] = no room, the maid trimmed): the
+    rank-1 set-up above is her own screen's; a rebuild can put back the stored rank. Like a player whose screen reloaded, the precondition of
+    THIS step is checked again here and written again if it is gone (printed SETUP-RESET with her rank trail: never silent) */
+ {const h=await B.p.evaluate(()=>({rank:S.rank,cap:capOf(S),has:hhHas(S)}));if(h.cap[0]-h.has[0]<1){console.log('SETUP-RESET step3',JSON.stringify(h),JSON.stringify(await B.p.evaluate(()=>({logs:(S.logs||[]).slice(-8),tr:(COOPW.tr||[]).slice(-12)}))));
+  await B.p.evaluate(()=>{S.rank=Math.max(S.rank|0,1);render()})}}
  const r3=await RISE(B,false);ok(r3.legal&&r3.ghost,'3 guest: third maid rose (a legal member of her household)',r3);await sleep(3000);
  await weekAll(A,B,'3a');await weekAll(A,B,'3b');await A.p.evaluate(()=>{roomFor=window.__rf0});
  {const v=await view(B);ok(v.staff.includes(r3.sid)&&!v.ghosts.length,'3 guest: refused (no seat) → her maid is back, no stand-in',v);

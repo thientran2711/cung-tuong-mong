@@ -48,8 +48,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',[await D(A),await D(B)]);await sleep(1500);return okw}
 /* the host's tablet forced to one card (pick(p) → true for the chosen one), dice inside flip set so the draw always happens and nobody steals */
 const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){window.__ff=1;const f=flip;flip=function(){const w=window.__fw;if(w==null)return f.apply(this,arguments);
-  const r0=roll,n0=nightCh;roll=x=>x>=60;nightCh=p=>{const id=p===S?'me':p.coop?'f':'npc'+p.id;return (w==='npc'?(!p.coop&&p!==S&&p.id===window.__npc):id===w)?100:0};try{return f.apply(this,arguments)}finally{roll=r0;nightCh=n0}}}
-  if(who==='npc')window.__npc=liveRivals(true).filter(v=>!v.coop&&v.alive&&!v.out)[0].id},who);
+  const r0=roll,n0=nightCh;try{(window.__fdl=window.__fdl||[]).push([wk(),S.buoi|0,w,!!rivals.find(v=>v&&v.coop),(COOPW.pulled||[]).length,COOPW.inTurn?1:0]);if(__fdl.length>8)__fdl.shift()}catch(e){}roll=x=>x>=60;nightCh=p=>{const id=p===S?'me':p.coop?'f':'npc'+p.id;return (w==='npc'?(!p.coop&&p!==S&&p.id===window.__npc):id===w)?100:0};try{return f.apply(this,arguments)}finally{roll=r0;nightCh=n0}}}
+  /* review/coop-driver-fails: an NPC whose card is on the tray (jflip cycleOf / jcycle cyTray: a consort in her Kỳ nguyệt tuần is never turned;
+     the forced nightCh bypasses jcycle's wrapper, the tablet does not) */
+  if(who==='npc'){const L=liveRivals(true).filter(v=>!v.coop&&v.alive&&!v.out);const ok=v=>{try{return !(typeof cycleOf==='function'?cycleOf(v):(window.cyTray&&cyTray(v)))&&!(window.cycOn&&cycOn(v))}catch(e){return true}};window.__npc=(L.find(ok)||L[0]).id}},who);
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,2]);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
@@ -77,7 +79,7 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
 const NF=await REALL.nfBoth(A,B);console.log('night path:',NF?'jnf (night record per day; claims = the flip choice, coop-steal)':'parked (live B2 path)');
 await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);
-  ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r);
+  ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r.same&&r.a.flip0==='guest'?r:{r,NW:await A.p.evaluate(()=>({nw:S.nightWhy,nfX:S.nfX,fw:window.__fw,fd:window.__fdl||null,tr:(COOPW.tr||[]).slice(-30)})).catch(e=>e.message),G:await B.p.evaluate(()=>({cy:typeof cycOn==='function'&&cycOn(S),tray:typeof cyTray==='function'&&cyTray(S),tuan:S.tuan,cyb:S.cyb||null})).catch(e=>e.message)});
   ok(r.same&&['guest','host'].includes(r.a.pick),'B2.1 (jnf) one player holds that night on both seats (her keep / his Tranh sủng, resolved once)',r);
   await B.p.screenshot({path:OUT+'/b2-guest-night-1180x820.png'})}
  else{const a=await D(A),c=await D(B);ok(a.tn&&a.tn.who===902&&a.tonight===902,'B2.1 host: tn = the guest (902), her own night = the friend',a);

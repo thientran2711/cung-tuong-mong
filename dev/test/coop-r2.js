@@ -139,7 +139,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  {for(let i=0;i<3;i++){await clear(A);await clear(B)}
   /* review/coop-driver-fails (family of b2b5 B5): the seat goes to the higher Sủng (seatWeek; equal → a fair seeded draw): she is set one Sủng
      below the host's entry so she is the one who steps back (the card's own gains are measured from here) */
-  const x=await B.p.evaluate(()=>{const r=6,f=COOPW.friend();const was={rank:S.rank,ex:S.ex};COOPW.mine=COOPW.mine||{};const m0=COOPW.mine.rank;COOPW.mine.rank=r-1;S.rank=r;f.rank=r;f.sung=Math.max(Math.round(f.sung||0),20);S.sung=f.sung-1;const fe=friendEntry();window.__pre={mine:COOPW.mine.rank,fe:!!fe,same:fe===f,rk:fe&&rkOf(fe),hold:holders(r).length,cap:SEATCAP[r],sung:[S.sung,fe&&fe.sung]};
+  const x=await B.p.evaluate(()=>{const r=6,f=COOPW.friend();const was={rank:S.rank,ex:S.ex};COOPW.mine=COOPW.mine||{};const m0=COOPW.mine.rank;COOPW.mine.rank=r-1;S.rank=r;f.rank=r;f.sung=Math.max(Math.round(f.sung||0),20);S.sung=f.sung-1;const fe=COOPW.friend();window.__pre={mine:COOPW.mine.rank,fe:!!fe,same:fe===f,rk:fe&&rkOf(fe),hold:holders(r).length,cap:SEATCAP[r],sung:[S.sung,fe&&fe.sung]};
    const b0=S.bac,d0=S.danh,h0=S.hieu,g0=liveRivals(true).filter(v=>!v.coop).map(v=>v.ghen);Q.length=0;
    COOPW.seatWeek();const txt=Q.map(q=>q.t+' '+q.h).join(' ');const g1=liveRivals(true).filter(v=>!v.coop).map(v=>v.ghen);
    const out={rank:S.rank,bac:S.bac-b0,danh:S.danh-d0,hieu:S.hieu&&S.hieu!==h0?S.hieu:'',txt:txt.replace(/<[^>]+>/g,''),ghen:g1.filter((g,i)=>g>g0[i]).length,n:g1.length,

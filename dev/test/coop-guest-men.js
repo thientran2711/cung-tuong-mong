@@ -19,7 +19,8 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);/* night-final (as coop-e2e): .kcf / #kroul are no longer hidden — clear() (lib/coop-clear.js) ends them like a player */await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);{const fo=process.env[name==='fold'?'COOP_A_ORIGIN':'COOP_B_ORIGIN'];if(fo)await ctx.addInitScript(k=>{window.__forceOrigin=k},fo)}/* repro only (default: the game's own origin) */
+  /* night-final (as coop-e2e): .kcf / #kroul are no longer hidden — clear() (lib/coop-clear.js) ends them like a player */await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -80,7 +81,8 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 /* relay diagnostics (dump only on FAIL): her thIll trail, open requests, trace, sent/ended */
-const RDBG=o=>o.p.evaluate(()=>({seat:COOPW.seat,wk:__co().week,b:S.buoi|0,th:S.thIll,snapTh:COOPW.askSnap&&COOPW.askSnap.th,ask:(S.coopAsk||[]).map(a=>a.id),thw:window.__thw||null,sent:COOPW.sent,ended:COOP.state.ended,inLife:!!COOPW.inLife,tr:(COOPW.tr||[]).slice(-25),askN:window.__askN&&(window.__askN.log||[]).slice(-8)})).catch(e=>e.message);
+const RDBG=o=>o.p.evaluate(()=>({seat:COOPW.seat,wk:__co().week,b:S.buoi|0,th:S.thIll,snapTh:COOPW.askSnap&&COOPW.askSnap.th,ask:(S.coopAsk||[]).map(a=>a.id),thw:window.__thw||null,sent:COOPW.sent,ended:COOP.state.ended,inLife:!!COOPW.inLife,tr:(COOPW.tr||[]).slice(-25),askN:window.__askN&&(window.__askN.log||[]).slice(-8),srv:typeof isSrv==='function'&&isSrv(),thDead:!!S.thDead,done:Object.keys(S.askDone||{}).filter(k=>/^th:/.test(k)),serT:window.__serT||null,kc:typeof isKc==='function'&&isKc(),o:S.origin&&S.origin.k,
+  /* after the fail only: one save of her week (ser → the ask builder) — is the request built then? */post:(()=>{try{const d=ser();return{R:!!(d&&d.R),ask:(S.coopAsk||[]).map(a=>a.id)}}catch(e){return 'ser err '+e.message}})()})).catch(e=>e.message);
 const DROP=o=>o.p.evaluate(()=>{if(!window.__dropP){window.__dropP=1;const s0=COOP.send;COOP.send=function(m){if(m&&m.k==='ctm-ask'&&window.__dropAsk===1)return;return s0.apply(this,arguments)}}window.__dropAsk=1});
 const man=(o,id)=>o.p.evaluate(id=>{const m=(S.men||[]).find(x=>x&&x.id===id);return m?{id:m.id,name:m.name,alive:m.alive!==false,away:m.away||0,ban:m.ban==null?null:m.ban,tinh:m.tinh||0}:null},id);
 const asks=o=>o.p.evaluate(()=>{for(let i=0;i<3;i++)ser();return (S.coopAsk||[]).filter(a=>a.k==='man'||a.k==='th').map(a=>a.id)});
@@ -142,6 +144,7 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  /* diagnostics: every change of thIll on the guest with the week / buổi and the last log line (who changed it) */
  await B.p.evaluate(()=>{window.__thw=[];let last=JSON.stringify(S&&S.thIll||null),lo=null;setInterval(()=>{try{const v=JSON.stringify(S&&S.thIll||null);const L=(S.logs||[]);if(v!==last){window.__thw.push([__co().week,S.buoi||0,last,v,(COOPW.askSnap&&JSON.stringify(COOPW.askSnap.th))||'',String(L[L.length-1]||'').slice(0,140),String(L[L.length-2]||'').slice(0,100)]);last=v}}catch(e){}},40)});
  ok(await ill3('6a'),'6 both: the Thái hậu is ill, stage 3 on both seats (host\'s value)');
+ await B.p.evaluate(()=>{/* probe (dump only on FAIL): every save of her week after the ease: illness, open th requests */window.__serT=[];if(!window.__serW){window.__serW=1;const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(window.__serT&&__serT.length<12)__serT.push([__co().week,S.buoi|0,S.thIll&&S.thIll.st,(S.coopAsk||[]).filter(a=>a.k==='th').map(a=>a.id),COOPW.askSnap&&COOPW.askSnap.th&&COOPW.askSnap.th.st])}catch(e){}return d}}});
  await B.p.evaluate(()=>{const i=S.thIll;if(i.st>1)i.st--;else S.thIll=null;try{render()}catch(e){}});/* easeTH's body (j72:308, a closure) */
  {const r=await until(A,()=>S.thIll&&S.thIll.st===2,null,20000);ok(r,'6 host: her act eased the illness 3 → 2 (relay)',r?undefined:{h:await th(A),G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'6b');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r1$/.test(l)),'6 both: same illness after the merged week, her ease applied (3 → 2)',{g,h,L})}
