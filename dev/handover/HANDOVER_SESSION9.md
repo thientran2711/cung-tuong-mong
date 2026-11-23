@@ -2505,3 +2505,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 109 hourly wake trig_013WV4SZJWfQdwMYDPLzYmfV (min 32) created; 108 wake trig_01YWv7JaTkWDf6sV7wxESQx5 disabled; daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays. LC5 + 108 told. Push tool /home/user/wt/hpush109.sh, worktree /home/user/wt/ho.
 - (23/11 03:36Z) LC5 ROLLED (14 lands, queue empty) → archived. LAND CHAIN 6 = session_01Rc5AsMFGsdDXzKjwP9Vndc (child of 109), handover reports/land-chain-6.md. Relay to LC6 from now.
 - WAKE 23/11 04:33Z — LOAD: main running 0 (owner bugs/UI/go-live only) | B free 11 (coop-thin-g #10 → SSK) | C free ? (no line since 03:25Z order) | D free 0 new (N16 rv running) | E: N11 LAND READY, N12 E44h gates | moved: none. RELAYED N11 coop-famops-pv-r 81d76c8b → LC6. Trigger prompt updated LC5→LC6. ctx ~8 %.
+- (23/11 04:47Z) LANDED N11 coop-famops-pv 81d76c8b (LC6, FF, quickcheck + e2e 141/141). LIVE = 81d76c8b. GAP L8 → «~78% xong · còn 23 việc».
