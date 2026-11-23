@@ -26,3 +26,8 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Frames in order: Thái hậu → Hoàng thượng → Hoàng hậu; each speaks (layout A) and sets ONE existing mini-game (Thái hậu theu, Hoàng thượng dan, Hoàng hậu huong; NVP/ma ma kim+theu for cung nữ).
 - Each round ALSO moves her thiện cảm with THAT royal up/down by BAL amounts (two-way, law 1/4), besides feeding the combined raw → entScore → rank (cut unchanged).
 - Rounds 1–2 watching (Addendum 1) stay. Remove all entrance-announcement beats from the mock video.
+
+## ADDENDUM 3 (MAIN 112, 22:05Z) — RESULT = −1 / SAME / +1 (owner OD 23/11 ~22:15Z verbatim: "Tôi nghĩ là thấp hoặc cao hơn cái bậc của thân phận mình có, 1 bậc là được rồi, 2 bậc là nhiều quá.")
+- Selection outcome is now origin rank −1 / same / +1 (OVERWRITES ceiling/−1/−2 of OD:L1250; canon already overwritten in dev/rules/topic/story-roads.md:31).
+- Apply in the ONE place: jentry entTier + kc2SelDo (direct road), jkc tiểu thư Điện tuyển road (kcDien → kcEnter), cung nữ placement analogous (one step lower/same/higher in the maid ladder). Steps from a BAL key (e.g. BAL.entry.step = [-1,0,1]); every text prints the BAL value. Clamp at ladder ends.
+- BIG review (rank/progression). NEW lives only; old saves untouched. Update the mock video's result frame.
