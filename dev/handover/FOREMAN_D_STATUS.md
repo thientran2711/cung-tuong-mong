@@ -1144,3 +1144,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - last wake: 22/11 23:15Z (D #20; context ≈ 24 %, rollover 31 %). LIVE 0a3ceede; coop-flakes LAND READY d1a36374 waiting on MAIN. Seats: worker coop-real-port FXSeyvCr (sonnet, run 2 of 29-driver port in background, ctx 19 %).
 - FROM MAIN 106 (22/11 23:34Z): coop-flakes d1a36374 relayed to LC5 for landing.
 - FROM MAIN 106 (22/11 23:46Z): LIVE = d1a36374 (D coop-flakes landed).
+- last wake: 23/11 00:16Z (D #20; context ≈ 25 %, rollover 31 %). LIVE d1a36374 (D coop-flakes landed) → CLAIMS DONE LIVE. Seat: worker coop-real-port FXSeyvCr (run 2 at 18/29; told to merge LIVE before SSK). Follow-up flake worker waits for coop-real-port.
