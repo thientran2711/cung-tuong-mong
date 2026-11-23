@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK ('Sang ngày mới|soft-lock|softlock|nfX|nfch'): OD 3 | ledger 0 | claims 1 (this job, session_01964izCj26a6VP5u2Sr3qT5) | main: jnf.js night-flip choice (S.nfX state machine), jsmg.js steal game (render guard for st "mg" after reload already on LIVE, jsmg.js:134 — reused, not rebuilt) | review/* none.
 
-SẴN SÀNG KIỂM review/fix-evening-softlock 8350d536538f6bea95a8841ba2090df75eb696a2
+SẴN SÀNG KIỂM review/fix-evening-softlock fcfcd9d3eac6be5eaf1bc600d8b436415a8a21d1
 
 Base: LIVE origin/main 225c5c08. Size: BIG-by-script (time/buổi core), code change small: dev/build/jnf.js (+heal), dev/build/jsmg.js (+stealMgBusy), dev/test/night-softlock.js (new), dev/measure/scan-dayturn-holds.py + scan-pid-nopend.py (family scans), index.html + sw.js (build). Gates below ran on 3f5b3ebb; the two later commits add only the scan scripts.
 
@@ -42,3 +42,6 @@ Same hold when her steal game layer is closed without its onDone (j82 `kg82Close
 
 ## Robot repro
 The robot's save (SAVE-A, nc / nc_gian / schemer, seed 110002505) was not yet forwarded when this was built; the repro is reproduced from the state the robot reported (Q 0, buổi 3, nfOn true, S.mg null) and the robot loop itself (case 7: save→reload round trip at each tối press). When SAVE-A arrives it can be checked with: load it, press «Sang ngày mới» until tối, press again → the choice shows, answer → new day.
+
+## Merge with new LIVE 72521d62 (23/11 ~22:10Z)
+fcfcd9d3 = 8350d536 + merge of LIVE 72521d62 (only index.html/sw.js conflicted → rebuilt; no source overlap). LIVE is ancestor (clean FF). Re-run on fcfcd9d3: night-softlock 9/9 PASS; quickcheck: old save ok, perf ok (render 189/184 ms, buổi 869/944 ms), core gates all PASS except G4 70-manifest-guard, which failed twice on CDN network errors (IncompleteRead / RemoteDisconnected while downloading the live manifests; this branch touches no manifest) and PASSES 3/3 when run alone right after (MANIFEST GUARD PASS, selftest 16/16).
