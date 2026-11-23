@@ -162,13 +162,14 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{rfYi
 
 /* ---------- canonical → local game ---------- */
 /* CW.inFC: inside fromCanon (the guest tripwire, dev/test/coop-thin-trip.js, counts only writes outside it); CW.afterFC: test hook */
-function fromCanon(C,opt){CW.inFC=(CW.inFC||0)+1;try{return fromCanon0(C,opt)}finally{CW.inFC--;if(CW.afterFC)try{CW.afterFC()}catch(e){}}}
+function fromCanon(C,opt){CW.inFC=(CW.inFC||0)+1;try{return fromCanon0(C,opt)}finally{CW.inFC--;if(CW.afterFC)try{CW.afterFC()}catch(e){}if(CW.cqBack)try{CW.cqBack()}catch(e){}/* r4: carried cards back once the room is past their week */}}
 function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
  const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));joinP(sS,Pm.S);if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
   r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
   return mapMe(r,false,mp)});
- const qs=(typeof serQ==="function"&&opt.keepQ)?serQ():[];
+ /* night-ledger-coop r4: her open cards ride the rebuild as data (j3 serQ / deserQ: pid, generator rk); a choice with no generator lapses with a log line (lap), never silently */
+ const qs=(typeof serQ==="function"&&opt.keepQ)?serQ({lap:1}):[];
  const fP=C.P[fs()];if(fP)freshFriend(fP,sS);
  const f=fP&&!friendSrv(fP)?buildFriend(fP,sS):null;if(f)R.push(f);
  try{rfWorldDup(sS,R)}catch(e){console.error("face dup",e)}
@@ -1097,6 +1098,7 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+CW.snapNow=()=>{try{clearTimeout(svT)}catch(e){}snapSave(true)};/* r4: a carried card is in her seat copy at once (a reload right after the carry keeps it) */
 /* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
    the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
    "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */

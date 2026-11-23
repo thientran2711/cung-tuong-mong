@@ -161,6 +161,17 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
 function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale){evDropInfo(h.m);return false}return true});
  if(!EVHOLD.length||sc.bk===bk6()||(sc.day===now&&sc.dn>=E68S.day)||!roll(65))return;const h=EVHOLD.shift();h.m.__held=1;Q.push(h.m);showModal()}
 (function(){const s0=showModal;showModal=function(){try{evGate()}catch(x){console.error(x)}return s0.apply(this,arguments)}})();
+/* review/night-ledger-coop-r4 (LAW 11, every store that keeps a card OUTSIDE Q; scan in reports/night-ledger.md «FIX r4»): a held optional
+   card (EVHOLD) is page memory that holds the people of the world it was made in. When the world is rebuilt in place (co-op week merge, join,
+   rejoin, room level change, snapshot restore: all through deser), it is made again from its data against the new world (pid → mkP,
+   generator → rcpMk, a notice keeps its text); a held card that cannot be made again is dropped as the scheduler drops a stale hold
+   (evDropInfo: she never saw it), never released later with roads that write to people no longer in the world. */
+function evHoldRe(){if(!EVHOLD.length)return 0;const keep=[];let n=0;
+ for(const h of EVHOLD){let c=null;try{const e=serM(h.m,{});if(e&&e.rk)c=rcpMk(e);else if(e)c=deserQ([e])[0]||null}catch(x){c=null}
+  if(c){if(h.m.opt)c.opt=1;keep.push({m:c,at:h.at,K:h.K});n++}else evDropInfo(h.m)}
+ EVHOLD=keep;return n}
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{evHoldRe()}catch(x){console.error(x)}return r}})();
+
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
 (function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();
 (function(){const s0=start;start=function(){EVHOLD=[];EVLAST=null;return s0.apply(this,arguments)}})();

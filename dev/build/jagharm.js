@@ -125,7 +125,9 @@ function haLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.s
 function agVentH(v,t,k){const pts=(haGain(k).g||{}).spite;if(!(pts>0))return;v.ag=v.ag||{};const V=v.ag.vent=v.ag.vent||{};const kk=key(t);V[kk]=[wk(),agVentM(V[kk])+pts]}
 /* what she sees when she stands there (the existing witness card + reactions, jagent agReact: Nghe lén gives evidence on a scheme) */
 function haScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
- Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} ${p.prep?"":"đang "}${p.act}.</p>`,opts:agReact(p,v,t)})}
+ Q.push(haSeenCard(p,v))}
+/* r4: carried as data (j3 rcpReg) */
+const haSeenCard=rcpReg("haSeen",(p,v)=>{const t=agPerson(p.t),W=agPlaceTxt(p.pl);return{t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} ${p.prep?"":"đang "}${p.act}.</p>`,opts:agReact(p,v,t)}});
 
 /* ---------- §3 night stealing: her choice, not a try roll ---------- */
 function haStealTry(v,t,w){if(!haOn())return Math.random()<w.p;const c=mindPick([[1,w.u],[0,haB().steal.no]],v);const z=agZ();
