@@ -59,6 +59,17 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
 const hold=(o,on)=>o.p.evaluate(on=>{const H=window.__H=window.__H||{ea:window.__eaOff,sw:window.stealWant,es:typeof empSummon==='function'?empSummon:null};
   if(on){window.__eaOff=true;window.stealWant=()=>({u:0,p:0,mode:null});if(H.es)empSummon=function(){try{const z=empWhyZ();z.k='call';z.busy=false}catch(e){}return true}}
   else{window.__eaOff=H.ea;window.stealWant=H.sw;if(H.es)empSummon=H.es;window.__fw=null}},on);
+/* review/coop-driver-fails #2: under jnf the Emperor's card is the jagemp pick (empSummon → empPick over nightCh weights), NOT flip():
+   forceFlip (a flip() wrapper, the parked B2 path) reached the jnf night only by luck (LIVE B runs 1–3: one __fdl entry, the record = his
+   own pick). forceNight = coop-steal's force (nightCh 100 for the target, his pick = the target, no mùng 1 / rằm custom, no jvisit visit),
+   kept for every night of the week (the record of day COOP.week-1 is read); unforceNight restores (before B5). */
+const forceNight=(o,who)=>o.p.evaluate(who=>{const T=window.__TN=window.__TN||{nc:nightCh,rl:roll,cu:BAL.ag.emp.custom,vc:BAL.visit.cap,ep:typeof empPick==='function'?empPick:null};
+  if(who==='npc'){const L=liveRivals(true).filter(v=>!v.coop&&v.alive&&!v.out);const ok=v=>{try{return !(typeof cycleOf==='function'?cycleOf(v):(window.cyTray&&cyTray(v)))&&!(window.cycOn&&cycOn(v))}catch(e){return true}};window.__npc=(L.find(ok)||L[0]).id}
+  const isT=p=>!!p&&(who==='f'?!!p.coop:(p!==S&&!p.coop&&p.id===window.__npc));
+  nightCh=function(p){p=p||S;return isT(p)?100:0};roll=function(x){return x===90||x===65?true:T.rl.apply(this,arguments)};BAL.ag.emp.custom=[0,0];BAL.visit.cap=0;
+  if(T.ep)empPick=function(C){const t=C.find(isT);if(!t)return T.ep.apply(this,arguments);try{const z=empWhyZ();z.pick=key(t);z.k='call'}catch(e){}return t};
+  S.cyb=Object.assign(S.cyb||{},{lie:wk()});return who==='npc'?window.__npc:who},who);
+const unforceNight=o=>o.p.evaluate(()=>{const T=window.__TN;if(!T)return;nightCh=T.nc;roll=T.rl;BAL.ag.emp.custom=T.cu;BAL.visit.cap=T.vc;if(T.ep)empPick=T.ep;window.__TN=null});
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,2]);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
@@ -85,9 +96,9 @@ const hold=(o,on)=>o.p.evaluate(on=>{const H=window.__H=window.__H||{ea:window._
    there on purpose → the B2 checks read the jnf night record (lib/coop-real nightRec, as coop-steal); the old checks stay for a parked room */
 const NF=await REALL.nfBoth(A,B);console.log('night path:',NF?'jnf (night record per day; claims = the flip choice, coop-steal)':'parked (live B2 path)');
 for(const o of [A,B])await hold(o,true);
-await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
+if(NF)await forceNight(A,'f');else await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
 /* review/coop-driver-fails #2: as B2.3, the force can land one night late (LIVE B run 1: forced flip at wk 1, day 0's record was his own pick) → a second forced week */
-if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);if(!(r0.same&&r0.a.flip0==='guest')){console.log('B2.1 force landed late:',JSON.stringify(r0),JSON.stringify(await A.p.evaluate(()=>window.__fdl)));await forceFlip(A,'f');ok(await week(A,B,'B2.1b'),'B2.1 second week')}}
+if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);if(!(r0.same&&r0.a.flip0==='guest')){console.log('B2.1 force landed late:',JSON.stringify(r0),JSON.stringify(await A.p.evaluate(()=>window.__fdl)));await forceNight(A,'f');ok(await week(A,B,'B2.1b'),'B2.1 second week')}}
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);
   ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r.same&&r.a.flip0==='guest'?r:{r,NW:await A.p.evaluate(()=>({nw:S.nightWhy,nfX:S.nfX,fw:window.__fw,fd:window.__fdl||null,tr:(COOPW.tr||[]).slice(-30)})).catch(e=>e.message),G:await B.p.evaluate(()=>({cy:typeof cycOn==='function'&&cycOn(S),tray:typeof cyTray==='function'&&cyTray(S),tuan:S.tuan,cyb:S.cyb||null})).catch(e=>e.message)});
   ok(r.same&&r.a.pick!=null,'B2.1 (jnf) one holder of that night on both seats (her keep / a Tranh sủng by him or an NPC, resolved once on the host)',r);
@@ -110,13 +121,13 @@ if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.n
   await A.p.evaluate(()=>{S.tonight='me';render()});ok(await until(B,()=>S.tonight&&S.tonight!=='me'&&S.tonight.coop,null,15000),'B2.2 guest: the night is now the host\'s',await D(B))}
  for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- B2.3 an NPC's night: same NPC on both ---- */
- await forceFlip(A,'npc');ok(await week(A,B,'B2.3'),'B2.3 week');
+ if(NF)await forceNight(A,'npc');else await forceFlip(A,'npc');ok(await week(A,B,'B2.3'),'B2.3 week');
  /* jnf: the force can land one night late (the tablet waits from the day's start, S.nfP): a second forced week, its night is read */
- if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);const npc0=await A.p.evaluate(()=>window.__npc);if(!(r0.same&&r0.a.flip0===npc0)){await forceFlip(A,'npc');ok(await week(A,B,'B2.3b'),'B2.3 second week')}}
+ if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);const npc0=await A.p.evaluate(()=>window.__npc);if(!(r0.same&&r0.a.flip0===npc0)){console.log('B2.3 force landed late:',JSON.stringify(r0));await forceNight(A,'npc');ok(await week(A,B,'B2.3b'),'B2.3 second week')}}
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);const npc=await A.p.evaluate(()=>window.__npc);
   ok(r.same&&r.a.flip0===npc,'B2.3 (jnf) the same NPC\'s card turned on both seats',[r,npc])}
  else{const a=await D(A),c=await D(B);ok(a.tonight!=null&&a.tonight!=='me'&&a.tonight<900&&a.tonight===c.tonight,'B2.3 the same NPC on both',[a.tonight,c.tonight])}
- for(const o of [A,B])await hold(o,false);
+ for(const o of [A,B])await hold(o,false);await unforceNight(A);
  /* ---- B5 seat caps ---- */
  {  const a=await A.p.evaluate(()=>{const f=COOPW.friend();const rk=rkOf(f);const L0=holders(rk).includes(f);let L1=null;const P=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i].coop)P.push([i,rivals.splice(i,1)[0]]);
    COOPW.pulled=P;try{L1=holders(rk).includes(f)}finally{COOPW.pulled=null;for(const [i,v] of P.reverse())rivals.splice(i,0,v)}return [L0,L1,rk]});
