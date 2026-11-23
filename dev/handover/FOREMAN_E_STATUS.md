@@ -1691,3 +1691,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (23/11 21:13Z) E ROOT-1: E53r re-merged LIVE 225c5c08 → review/coop-famops-t2-r 7d54e3a9; gates on 445d512a all green (unit 58/58, e2e fold+SWAP 141/141, b1 44/44, rp PASS), re-gating alone on 7d54e3a9. FOR MAIN 111 (F2 sighting for review/ky-keeper-f2): E53r Fold scan on 5020f618 van 34 «tram_maudon», NPC-only, F2 family (NPC-held piece after a Kỳ ngộ case closes), LIVE twin by code — 3rd sighting (278, 2235, 34); details in reports/coop-famops-t2-review.md.
 - FROM MAIN 111 (21:30Z 23/11): LIVE = 948c80a5 (hdr-kiep: «Kiếp thứ …» in header).
 - FROM MAIN (23/11 21:45Z): main is now MAIN CHÍNH 112 session_01Rc5AsNGsPSDAJiSHyVCNx1 (child of 111). Send reports/questions/LAND READY here. LIVE still 948c80a5.
+- FROM MAIN 112 (22:07Z 23/11): LIVE = 72521d62 (odds-ladder-words: tryst «có thai» uses side-chance scale + odds-scales-scan).

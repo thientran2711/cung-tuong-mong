@@ -2647,3 +2647,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21:49Z) OWNER (via 111, OD ~21:50Z/~21:55Z): SELECTION SCENE = BUILD NOW (freeze exempt). Each royal's test = an EXISTING kit mini-game (harder by origin ceiling, law 5) → one entScore (jkc2.js kc2SelDo) → ceiling/−1/−2 unchanged; cung nữ = Nội vụ phủ/ma ma version; new lives only. Steps: HIST-TUYENTU (brief corrected: mini-games not dialogue) → mockup VIDEO Fold+iPad to sếp (KIT KEEPER, layout A) → opus BIG build. MAIN owns.
 - (21:55Z) SELSCENE opus builder session_01Rc5AsNEeT7jkjyL8gLh5fw opened (briefs/M112-selection-scene.md; mock video first). Art order (selection hall + Nội vụ phủ court) → Foreman C STATUS.
 - (22:00Z) HIST-TUYENTU DONE 79ea29f4, archived. MAIN pick: HT→dan, TH→theu, HH→huong, NVP/ma ma→kim+theu; BAL.entry.word exclusions untouched; combined raw → entScore. Sent to SELSCENE.
+- (22:07Z) LANDED odds-ladder-words → LIVE 72521d62 (LC7). LC7 queue empty.

@@ -399,3 +399,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - (23/11 21:19Z) WAKE 21:19Z 23/11 (B ROOT-2 5gpi4qbw) → MAIN CHÍNH 110 session_01Rc5AsJh26cgtwNsyhTRPQx: no new FROM MAIN since 19:56Z; LIVE 225c5c08. RUNNING B: REVIEW r3 coop-thin-g opus 3bRx51vs (merged LIVE, BIG gate set running: quickcheck → coop-e2e). ROBOT-10 harness not on main yet → B co-op runners wait, start at once when it lands. No B LAND READY waiting. ctx ~22 %.
 - FROM MAIN 111 (21:30Z 23/11): LIVE = 948c80a5 (hdr-kiep: «Kiếp thứ …» in header).
 - FROM MAIN (23/11 21:45Z): main is now MAIN CHÍNH 112 session_01Rc5AsNGsPSDAJiSHyVCNx1 (child of 111). Send reports/questions/LAND READY here. LIVE still 948c80a5.
+- FROM MAIN 112 (22:07Z 23/11): LIVE = 72521d62 (odds-ladder-words: tryst «có thai» uses side-chance scale + odds-scales-scan).
