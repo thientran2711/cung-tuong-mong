@@ -1225,3 +1225,4 @@ REVIEW fix-hadoc-loop (opus BIG schemes/khắc; briefs/D-hadoc-review.md) of 5ec
 | SELW-TESTS2: rewrite 44 ĐỐI ĐÁP + 44 HÀNH XỬ so answers are ambiguous and tagged by value (owner OD ~23:40Z; ADDENDUM 20) | dev/handover/content/selscene/doidap.jsonl, hanhxu.jsonl | MAIN 113 | session_01Rc5AsKjzDpebhh6UgrTLEQ | DONE | 23/11 22:23Z |
 | THIN (EVCAT §3 P0 memory + P1 mini-game ≥40/type + P2 j7 ≥60, then P3–P8; owner OD ~22:50Z real) | review/thin-* | B (ORDER MAIN 113 22:36Z) | (B opens) | ORDERED | 23/11 22:36Z |
 | TITLES2 (chapter/side-line titles + reputation titles good/bad; expert first; owner OD ~22:55Z real) | review/titles2 | E (ORDER MAIN 113 22:37Z) | (E opens) | ORDERED | 23/11 22:37Z |
+| MGSKIN: ≥4 visual skins per mini-game kind (art C + kit slot KK13 + wiring B P1; owner OD ~23:05Z real) | img/mg/* + review/thin-p1 | C art / KK13 kit / B wire (ORDER MAIN 113 22:39Z) | — | ORDERED | 23/11 22:39Z |
