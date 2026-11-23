@@ -721,3 +721,42 @@ Head now **@6c408f77** = + merge LIVE d1a36374 (coop-flakes: j9, jbal2, jcoopask
 Worktrees (this box): /home/user/wt/ctg9 (branch @6c408f77, built), /home/user/wt/live9 (LIVE 40cc2b92 — refresh to d1a36374), /home/user/wt/ho9 (handover). Local Workers: branch 127.0.0.1:8787 (THINMAX 13: `cd /home/user/wt/ctg9/coop/worker && npx wrangler dev --port 8787 --ip 127.0.0.1`), LIVE :8789. Launch lanes DETACHED (`setsid nohup bash <lane.sh> &`; a run_in_background lane dies at 2 h): `WT=/home/user/wt/ctg9 O=<out> bash dev/test/coop-thin-g-reg.sh <ids>`. coop-cyc needs .tmp/old.html = LIVE build. rkOfFace probe: /home/user/wt/out9/zz-cprobe.tmp.js (not in git).
 To do on the FINAL head (merge newest LIVE first): (1) quickcheck, role-parity alone, coop-e2e ×3; (2) full lane (trip1 trip1b trip0 g4 g4s timer night emo perf wlag | e2e e2e0 e2e0n e2e0s e2es f3s f4s f5s f6s f6b f6bs as9s as13 as13s a b c d e f1 f2 f2s f6 as9 cyc cycs hn ow bl blc), then every red ALONE (expected left: LIVE-identical c/d/f1, pre-G hn H2); confirm trip1 G2 green with the fix; as9s / b alone. (3) own both-seat check (e2es / e2e0s = swapped seats) stated in SSK. (4) "## F1 FIX #10", CLAIMS, send_message Foreman B "SẴN SÀNG KIỂM coop-thin-g-f1 <sha>" + gate summary.
 FOR MAIN: rkOfFace raw {$r} (root in (1) above, LIVE 3/3) · thin-d 9 kit-copy / invite reds (LIVE) · thin-f1 'F1 real tap under parallel time' (LIVE). FOR B: hn H2 face reveal (pre-G, L12 red). Worker THINMAX 13 deploy at landing.
+
+## F1 FIX #10 (session_01N1tNP5QWB8tYRvFqUSnKVx, 11/23/2026; START_CTX ≈ 4 % → ended ≈ 17 %) — SẴN SÀNG KIỂM @dea00576
+PRIORITY #1 CHECK: OD co-op first (OD 16/11 20:29Z) | #9 report + handover read | LIVE moved d1a36374 → d2cc5679 → bda5b75b → 81d76c8b → 52ad65b3 → ca801185 during the gates (Foreman B wakes) | review/* none for these reds | claims row CLAIMS:1116.
+No product code change by #10: only LIVE merges.
+
+### Branch history (#10)
+- 70f1e5fa — merge LIVE d2cc5679 (night-ledger-coop r4). Real conflicts, union kept: jbal2 `coopTm` = LIVE `nightMs:30000` + branch `coopUi`; lib/coop-clear step 2 = branch kmov end-button tap + LIVE `.kmov .krevok`; coop-night = LIVE r4 cases 4/4b + the branch's thin g-go read re-applied in the case-4 wait (4b thin parked = LIVE's own n/a when nfOn is off). index.html/sw.js rebuilt.
+- ab64671a — merge LIVE 81d76c8b (coop-famops-pv jcoopworld/jil + kit-body-fit jbody); only built files conflicted, rebuilt.
+- b27d6257 — merge LIVE 52ad65b3 (coop-real-port, test-only, clean).
+- **dea00576** — merge LIVE ca801185 (⊇ 4ad20bd6, 91dc91d3: places swap / toilette rooms, assets.json + docs); built files rebuilt. FINAL head.
+
+### Gates
+| gate | head | result |
+|---|---|---|
+| quickcheck | dea00576 | **PASS** (core gates PASS, old save ok, dirty 0); also PASS on 70f1e5fa, ab64671a. One time-spill-guard red on 6c408f77 inside quickcheck, then the guard alone ×2 PASS on branch and LIVE → flake |
+| role-parity (alone) | dea00576 | **ALL PASS** (also 70f1e5fa, ab64671a) |
+| coop-e2e THIN 13 (alone) | dea00576 ×1, ab64671a ×3, 70f1e5fa ×3 | **141/141** every run |
+| Worker npm test | 70f1e5fa | PASS |
+| coop-famops-unit | ab64671a | **37/37** (needs `http://ctm.local/index.html` as argv[2]; its default :8744 is not served — FOR MAIN nit) |
+| coop-lost-scan | ab64671a / LIVE 52ad65b3 | 'A has a room code' red on BOTH → LIVE-identical (test harness), FOR MAIN |
+| full lane | 70f1e5fa (2 queues) | PASS: trip1 / trip1b / trip0 85/85 (trip1 G2 fix confirmed), g4 g4s 21/21, timer 43/43, night 111/111, emo 25/25, perf, wlag 5/5, e2e 141, e2e0 141, e2e0n 143, e2e0s 141, f3s f4s f5s f6s f6b f6bs as13 as13s a c e f2s f6 as9, ow 1–10, bl 1–6 15/15, blc 1–3 21/21. Reds under load: e2es 1, as9s 2, b 1, d 8, f1 2, f2 3, cyc 1, cycs 6, hn 1 |
+| both-seat check | dea00576 | e2e host Fold 755x1000@2 + guest iPad 1180x820@2 (05-world, 07-after3) LOOKED: figures fit, labels clear, both seats play; e2es / e2e0s (swapped seats) 141/141. Only nit: the kit stand-in chip «tạm» (jgrey kitTam, not touched by this branch) sits over the palace name top-right on iPad — LIVE kit, FOR MAIN |
+
+### Every lane red rerun ALONE: branch b27d6257 (same build as dea00576 for co-op) vs LIVE 52ad65b3 (LIVE tests, Worker THINMAX 9)
+| suite | branch alone | LIVE alone | verdict |
+|---|---|---|---|
+| e2es | 141/141 | 141/141 | load only |
+| b | PASS | 12 reds | load only on branch |
+| f2 | PASS | 1 red | load only on branch |
+| as9s | 1 red ('run1 tgk host-first: her phone sees the host'), then ×3 more: 1 red / 2 PASS | same line red 1 of 3 | **LIVE-identical flake** → FOR MAIN |
+| d | 8 (kit guest copy ×7 + invite offer "") | 9 (the same 8 + withSeat selfTest) | **LIVE-identical** → FOR MAIN |
+| f1 | 1 ('F1 a real tap (doAct)…') | 5 (incl. the same line + rkOfFace page error) | **LIVE-identical** → FOR MAIN |
+| cyc / cycs | 1 each ('mixed (old guest in her cycle tuần): the week still merges') | 2 each (the same line + set-up) | **LIVE-identical** → FOR MAIN |
+| hn | 1 (H2 face reveal) | test not on LIVE | pre-G (#9: L12 red too) → FOR B, unchanged |
+| c (rkOfFace) | PASS in the lane this time | — | root in #9 §(1), FOR MAIN unchanged |
+No red is branch-made → no root-fix owed by #10.
+
+FOR MAIN: rkOfFace raw {$r} (#9 §1) · thin-d kit-copy / invite / selfTest · thin-f1 real tap · cyc mixed-old-guest · as9s tgk host-first flake · coop-lost-scan room code · coop-famops-unit default URL · «tạm» chip over the palace name (iPad). FOR B: hn H2. Worker THINMAX 13 deploy at landing.
+Worktrees (this box): /home/user/wt/ctg10 (branch), /home/user/wt/live10 (LIVE 52ad65b3), logs /home/user/wt/out10.
