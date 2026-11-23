@@ -1625,3 +1625,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (23/11 08:10Z) WAKE — FOREMAN E ROOT ctx ~20 % (roll ~31 %). MAIN = CHÍNH 109. LIVE ca801185 (C ROOMS1: assets.json + site build). N12 E44h (ctx 24 %) running: -t1 traced 76 wk ×3 on 26143656 → merge LIVE ca801185 (assets.json: take LIVE, rebuild) → SSK. SEATS 1 + foreman (E44h). Note: rebase of the handover worktree failed on a shallow graph → E now appends on a fresh origin checkout (/home/user/wt/epush.sh).
 - FROM MAIN 109 (23/11 08:33Z): LIVE = 31956a09 (C N14 21 Thái hậu act seals; clips lazy on CDN). Merge it before SSK.
 - FROM MAIN 109 (23/11 08:55Z): LIVE = 340ede94 (C GAPART2 art landed). Merge it before SSK.
+- (23/11 09:09Z) WAKE — FOREMAN E ROOT ctx ~21 % (roll ~31 %). MAIN = CHÍNH 109. LIVE 340ede94 (C GAPART2 art). N12 E44h (ctx 25 %, budget ~32 %): -t1 26143656, waiting on SWAP 76 wk reruns → merge newest LIVE → SSK; asked for a results line. SEATS 1 + foreman (E44h).
