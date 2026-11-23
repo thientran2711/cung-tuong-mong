@@ -19,7 +19,8 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);/* night-final (as coop-e2e): .kcf / #kroul are no longer hidden — clear() (lib/coop-clear.js) ends them like a player */await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);{const fo=process.env[name==='fold'?'COOP_A_ORIGIN':'COOP_B_ORIGIN'];if(fo)await ctx.addInitScript(k=>{window.__forceOrigin=k},fo)}/* repro only (default: the game's own origin) */
+  /* night-final (as coop-e2e): .kcf / #kroul are no longer hidden — clear() (lib/coop-clear.js) ends them like a player */await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -75,17 +76,25 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
   const key=o=>o.p.evaluate(()=>COOPW.pend||__co().waiting?'end':__co().week+':'+(S.buoi||0));
   for(let t=0;t<80;t++){const a=await key(A),b=await key(B);if(a!==k0&&b!==k0&&(a===b||a==='end'||b==='end')){
     if(sp&&sp.carry===1){await sleep(600);const st=await A.p.evaluate(()=>Object.assign({k:__co().week+':'+(S.buoi||0),now:used},window.__tu||{used:-1}));ok(st.used===1&&!st.carry,'spill '+k0+' → '+st.k+': the next buổi pays the carry once',st)}
-    return true}await clear(A);await clear(B);await sleep(250)}
+    return true}await clear(A);await clear(B);
+    /* review/coop-driver-fails #2 (G3-1 stall): a press that only opened a card is pressed again (lib/coop-real repress) */
+    if(t%8===7)for(const [o,k] of [[A,a],[B,b]])if(k===k0)await require('./lib/coop-real.js').repress(o);
+    await sleep(250)}
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
+/* relay diagnostics (dump only on FAIL): her thIll trail, open requests, trace, sent/ended */
+const RDBG=o=>o.p.evaluate(()=>({seat:COOPW.seat,wk:__co().week,b:S.buoi|0,th:S.thIll,snapTh:COOPW.askSnap&&COOPW.askSnap.th,ask:(S.coopAsk||[]).map(a=>a.id),thw:window.__thw||null,sent:COOPW.sent,ended:COOP.state.ended,inLife:!!COOPW.inLife,tr:(COOPW.tr||[]).slice(-25),askN:window.__askN&&(window.__askN.log||[]).slice(-8),srv:typeof isSrv==='function'&&isSrv(),thDead:!!S.thDead,done:Object.keys(S.askDone||{}).filter(k=>/^th:/.test(k)),serT:window.__serT||null,kc:typeof isKc==='function'&&isKc(),o:S.origin&&S.origin.k,
+  /* after the fail only: one save of her week (ser → the ask builder) — is the request built then? */post:(()=>{try{const d=ser();return{R:!!(d&&d.R),ask:(S.coopAsk||[]).map(a=>a.id)}}catch(e){return 'ser err '+e.message}})()})).catch(e=>e.message);
 const DROP=o=>o.p.evaluate(()=>{if(!window.__dropP){window.__dropP=1;const s0=COOP.send;COOP.send=function(m){if(m&&m.k==='ctm-ask'&&window.__dropAsk===1)return;return s0.apply(this,arguments)}}window.__dropAsk=1});
 const man=(o,id)=>o.p.evaluate(id=>{const m=(S.men||[]).find(x=>x&&x.id===id);return m?{id:m.id,name:m.name,alive:m.alive!==false,away:m.away||0,ban:m.ban==null?null:m.ban,tinh:m.tinh||0}:null},id);
 const asks=o=>o.p.evaluate(()=>{for(let i=0;i<3;i++)ser();return (S.coopAsk||[]).filter(a=>a.k==='man'||a.k==='th').map(a=>a.id)});
 const hostHas=(o,id,f)=>until(o,([id,f])=>{const m=(S.men||[]).find(x=>x&&x.id===id);if(!m)return false;for(const k in f)if((k==='alive'?m.alive!==false:(m[k]||0))!==f[k])return false;return true},[id,f],20000);
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
-async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');await clear(A);await clear(B);return r}
+async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both',r?undefined:{/* review/coop-driver-fails #2: G2-2 stalled from 6a on (every week timed out): who waits for what */
+  A:await A.p.evaluate(()=>({co:__co(),st:COOP.state.status,ended:COOP.state.ended,sent:COOPW.sent,Q:(Q||[]).map(q=>String(q.t||'').slice(0,40)),modal:((document.getElementById('modal')||{}).textContent||'').slice(0,120),tr:(COOPW.tr||[]).slice(-14)})).catch(e=>e.message),
+  B:await B.p.evaluate(()=>({co:__co(),st:COOP.state.status,ended:COOP.state.ended,sent:COOPW.sent,Q:(Q||[]).map(q=>String(q.t||'').slice(0,40)),modal:((document.getElementById('modal')||{}).textContent||'').slice(0,120),tr:(COOPW.tr||[]).slice(-14)})).catch(e=>e.message)});await clear(A);await clear(B);return r}
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
@@ -108,9 +117,9 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  {const g=await man(B,'mbd_lie'),h=await man(A,'mbd_lie');ok(g&&h&&g.name===h.name&&g.alive&&h.alive,'1 both: he is still there after the merged week',{g,h});
   ok(g&&g.tinh>=7,'1 guest: her own tie to him (tinh) kept (≥ 7: play may raise it, never back to 0)',g);const a=await asks(B);ok(!a.length,'1 guest: request closed',a)}
  /* 2 her act kills a palace man of the host's set */
- const vid=await B.p.evaluate(()=>{const m=(S.men||[]).find(x=>x&&x.alive!==false&&/^m\d+$/.test(x.id));if(!m)return null;mortKill(m,'thử');return m.id});
+ const vid=await B.p.evaluate(()=>{const m=(S.men||[]).find(x=>x&&x.alive!==false&&/^m\d+$/.test(x.id));if(!m)return null;mortKill(m,'thử');try{render()}catch(e){}return m.id});/* review/coop-driver-fails #2: a real act ends in render(), which starts the rolling save (jcoopworld snapSoon → ser → jcoopask collect) that carries her request; without it the request waited for an unrelated render (LIVE H1 red: ask [] but one ser() built man:m0:alive=false at once) */
  ok(!!vid,'2 guest: her act kills a palace man (mortKill)',vid);
- ok(await hostHas(A,vid,{alive:false}),'2 host: he is dead there too (relay)');
+ {const r=await hostHas(A,vid,{alive:false});ok(r,'2 host: he is dead there too (relay)',r?undefined:{G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'2');
  {const g=await man(B,vid),h=await man(A,vid);ok(g&&h&&!g.alive&&!h.alive,'2 both: he stays dead after the merged week (no man comes back)',{g,h})}
  /* 3 her road sends the envoy home */
@@ -134,21 +143,29 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
     review r1 F3: the host's own month roll may change the illness during a week, so the set-up re-sets it until both seats show st 3, and
     every check reads the PAIR + the host's applied "th" request (b → v), never a fixed stage after a merged week. */
  const th=o=>o.p.evaluate(()=>S.thIll==null?null:{k:S.thIll.k,st:S.thIll.st});
- const thLog=()=>A.p.evaluate(()=>((window.__askN||{}).log||[]).filter(l=>/ th:/.test(l)));
+ /* review/coop-driver-fails #2: __askN.log keeps only the last 10 applies (jcoopask.js:153), so servant requests of the same weeks pushed the th
+    lines out (LIVE H3 6d red: L = []). The host's durable record S.askDone[id] = [r, week] (pruned only 3 weeks after) is read too, one line per id */
+ const thLog=()=>A.p.evaluate(()=>{const L=((window.__askN||{}).log||[]).filter(l=>/ th:/.test(l)),seen=new Set(L.map(l=>l.split(' ')[1]));
+  for(const [id,v] of Object.entries(S.askDone||{}))if(/^th:/.test(id)&&!seen.has(id))L.push('done '+id+' w'+(v&&v[1])+' r'+(v&&v[0]));return L});
  async function ill3(tag){for(let i=0;i<4;i++){await A.p.evaluate(()=>{S.thDead=false;S.thIll={k:'phonghan',st:3,known:true};try{render()}catch(e){}});await weekAll(A,B,tag+i);
    const g=await th(B),h=await th(A);if(g&&h&&g.st===3&&h.st===3)return true}return false}
  /* diagnostics: every change of thIll on the guest with the week / buổi and the last log line (who changed it) */
  await B.p.evaluate(()=>{window.__thw=[];let last=JSON.stringify(S&&S.thIll||null),lo=null;setInterval(()=>{try{const v=JSON.stringify(S&&S.thIll||null);const L=(S.logs||[]);if(v!==last){window.__thw.push([__co().week,S.buoi||0,last,v,(COOPW.askSnap&&JSON.stringify(COOPW.askSnap.th))||'',String(L[L.length-1]||'').slice(0,140),String(L[L.length-2]||'').slice(0,100)]);last=v}}catch(e){}},40)});
  ok(await ill3('6a'),'6 both: the Thái hậu is ill, stage 3 on both seats (host\'s value)');
+ await B.p.evaluate(()=>{/* probe (dump only on FAIL): every save of her week after the ease: illness, open th requests */window.__serT=[];if(!window.__serW){window.__serW=1;const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(window.__serT&&__serT.length<12)__serT.push([__co().week,S.buoi|0,S.thIll&&S.thIll.st,(S.coopAsk||[]).filter(a=>a.k==='th').map(a=>a.id),COOPW.askSnap&&COOPW.askSnap.th&&COOPW.askSnap.th.st])}catch(e){}return d}}});
  await B.p.evaluate(()=>{const i=S.thIll;if(i.st>1)i.st--;else S.thIll=null;try{render()}catch(e){}});/* easeTH's body (j72:308, a closure) */
- ok(await until(A,()=>S.thIll&&S.thIll.st===2,null,20000),'6 host: her act eased the illness 3 → 2 (relay)',await th(A));
+ {const r=await until(A,()=>S.thIll&&S.thIll.st===2,null,20000);ok(r,'6 host: her act eased the illness 3 → 2 (relay)',r?undefined:{h:await th(A),G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'6b');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r1$/.test(l)),'6 both: same illness after the merged week, her ease applied (3 → 2)',{g,h,L})}
  /* 6d (review r1 F1): her act RESOLVES inside her week end (j72 th_thuoc2's wait step ends in q72Tick, endTurn → easeTH); hook as the review repro */
- ok(await ill3('6c'),'6d both: stage 3 again');
  /* reached = applied (r1) or refused because the host's own roll moved the illness meanwhile (r0, solo rule: nothing left to ease) */
- const E33=l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r[01]$/.test(l),n33=(await thLog()).filter(E33).length;
- await B.p.evaluate(()=>{window.__wke=null;window.__rtN=0;const q0=rivalsTurn;rivalsTurn=function(){window.__rtN++;const r=q0.apply(this,arguments);try{if(!window.__wke&&S.thIll){const b=S.thIll.st;if(S.thIll.st>1)S.thIll.st--;else S.thIll=null;window.__wke=[b,S.thIll&&S.thIll.st]}}catch(e){}return r}});
- await weekAll(A,B,'6d');
+ /* review/coop-driver-fails #2: the host's own month roll (j13:30 illMonth, host-only: roll(30) → the illness ends) can end the set-up
+    illness BEFORE her week end (LIVE G4: guest thw w8 b3 st3 → null with askSnap.th null = a host rebuild) → her ease has nothing to ease
+    (__wke null). Not her act, not the relay: the set-up is re-armed (≤ 3 tries) until her week end meets the illness. */
+ let n33=0;const E33=l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r[01]$/.test(l);
+ for(let t6=0;t6<3;t6++){ok(await ill3('6c'+t6)||t6<2,'6d both: stage 3 again');
+  n33=(await thLog()).filter(E33).length;
+  await B.p.evaluate(()=>{window.__wke=null;window.__rtN=0;const q0=rivalsTurn;rivalsTurn=function(){window.__rtN++;const r=q0.apply(this,arguments);try{if(!window.__wke&&S.thIll){const b=S.thIll.st;if(S.thIll.st>1)S.thIll.st--;else S.thIll=null;window.__wke=[b,S.thIll&&S.thIll.st]}}catch(e){}return r}});
+  await weekAll(A,B,'6d'+t6);if(await B.p.evaluate(()=>!!window.__wke))break;console.log('6d re-arm: the host\'s own roll ended the illness before her week end',await B.p.evaluate(()=>(window.__thw||[]).slice(-3).map(x=>x.slice(0,5))))}
  {const w=await B.p.evaluate(()=>window.__wke),rtN=await B.p.evaluate(()=>[window.__rtN,rivalsTurn.toString().slice(0,60)]),L=await thLog(),g=await th(B),h=await th(A);ok(w&&w[0]===3&&w[1]===2,'6d guest: her ease ran inside her week end',{w,rtN});
   ok(L.filter(E33).length>n33,'6d host: the "th" request of her week-end ease reached the host',L);
   if(!(h&&g))await weekAll(A,B,'6d+');ok(JSON.stringify(await th(B))===JSON.stringify(await th(A)),'6d both: same illness (her week-end ease kept)',{g,h})}

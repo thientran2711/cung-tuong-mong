@@ -35,7 +35,7 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/
 async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(()=>{if(window.COOPW&&COOPW.on&&((COOPW.nReady&&COOPW.nReady())||COOPW.bend||COOPW.pend||COOPW.sent===(COOP.state.week||0)))return true;const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});if(r)return true;await sleep(250)}
   ok(false,o.name+' #next enabled');return false}
 async function buoiBoth(A,B){const k0=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0));await press(A);await press(B);
-  for(let t=0;t<80;t++){const a=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0)),b=await B.p.evaluate(()=>__co().week+':'+(S.buoi||0));if(a!==k0&&b!==k0&&a===b)return true;await clear(A);await clear(B);await sleep(250)}
+  for(let t=0;t<80;t++){const a=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0)),b=await B.p.evaluate(()=>__co().week+':'+(S.buoi||0));if(a!==k0&&b!==k0&&a===b)return true;await clear(A);await clear(B);if(t%8===7)for(const [o,k] of [[A,a],[B,b]])if(k===k0)await require('./lib/coop-real.js').repress(o);/* review/coop-driver-fails #2: a press that only opened a card is pressed again */await sleep(250)}
   ok(false,'buổi '+k0+' advanced for both');return false}
 const nB=o=>o.p.evaluate(()=>typeof B4N==='number'?B4N:3);
 /* play to the last buổi of the week (both) */
