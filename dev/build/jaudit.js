@@ -84,7 +84,7 @@ function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
 /* consort acts: outcome texts written from the code (j8 ACT.f) with the scaled numbers for the card's target */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;const def=(k,fn)=>{try{const old=AOUT[k];Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=T();return t?fn(t):old},set(v){}})}catch(e){}};
- def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2`,`bị lộ: ${pvRel(t,-8)}`]);
+ def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ ${balSg(BAL.eff.j8.spyTam)}`,`bị lộ: ${pvRel(t,-8)}`]);
  def("ally",t=>[`${pvRel(t,BAL.eff.j8.f_2)}, nàng bớt ghen ${BAL.rcv.prop.ghen}`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
  def("rumor",t=>[`Danh nàng ${balSg(BAL.eff.j8.rumorDanh)}`,`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,BAL.eff.j8.f_4)}`]);
  def("frame",t=>[`nàng mất Danh và Sủng -${BAL.eff.j8.framedSung}, Danh ${balSg(BAL.eff.j8.frameDanh)}, Tâm cơ ${balSg(BAL.eff.j8.frameTam)}`,`bị lộ: Danh ${balSg(BAL.eff.j8.frameFailDanh)}, ${sgStat(BAL.eff.j8.frameFailSung)}, ${pvRel(t,BAL.eff.j8.f_5)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();

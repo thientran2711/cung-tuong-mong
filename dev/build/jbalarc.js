@@ -204,3 +204,8 @@ Object.assign(BAL,{rl:{j85:{hanhDucMonth:1,ducTf:1,ducStaff:1},
  jpet:{danhPetMonthOf:-1,danhPetMonthOf_2:-1,sucAsthma:-2/* Sức a week for an asthmatic owner of a shedding pet */,followN:1/* stat a following pet gives (+ PET.sacX) */},
  jstip:{sacUse:3},
  jface:{penQuy:-8/* «Phạt quỳ» Sức the knelt one loses */}}});
+/* typed-stat-bal review (law 4 + law 11): the stat words «Ân tình» / «Tâm cơ» were missing from typed-stat-text — the same family, same values */
+Object.assign(BAL.eff.j8,{anGoMaid:1/* «Xin tha cho cung nữ bị phạt»: Ân tình */,anLean:2/* «Im lặng, tựa vai ngài»: Ân tình */});
+Object.assign(BAL.eff.j31,{anGo_4:2/* «Thức đón giao thừa bên ngài» win: Ân tình */});
+Object.assign(BAL.eff.jts,{anOnDone:3/* summon «hộ giá» (guard) success: Ân tình */});
+Object.assign(BAL.rl,{jecon:{spykTam:1/* «tự đi nghe ngóng» (jecon spy road) found: Tâm cơ; jecon rule + AOUT.spyk preview */}});

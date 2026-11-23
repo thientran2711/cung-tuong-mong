@@ -23,7 +23,7 @@ const PET={
  cavang:{n:"Cá vàng chậu sứ",tr:0,st:"tai",pr:30,up:0,dc:4,suc:BAL.petFx.cavang.suc,easy:1,get use(){return `ngắm cá khuây khỏa: Sức ${balSg(this.suc)} mỗi tuần`},bad:"kẻ xấu dễ bỏ thuốc vào chậu",d:"đôi cá vàng trong chậu sứ lam"},
  meo:{n:"Mèo tuyết",tr:1,st:"sac",pr:120,up:3,dc:9,sniff:55,al:1,use:"đánh hơi đồ ăn lạ: khá tinh, báo trước một lần bị hại qua đồ ăn",get bad(){return `rụng lông: chủ có bệnh hen thì Sức ${balSg(BAL.rl.jpet.sucAsthma)} mỗi tuần`},d:"mèo lông trắng dài, mắt xanh"},
  sao:{n:"Sáo nói",tr:1,st:"tamco",pr:110,up:2,dc:9,guard:6,leak:8,use:"kêu khi có kẻ lạ: canh cung nhẹ",get bad(){return `nhại lời chủ trước khách: đôi khi Danh ${balSg(BAL.rl.jpet.danhPetMonthOf)}`},d:"sáo đen mỏ vàng, học tiếng người"},
- uyenuong:{n:"Đôi uyên ương",tr:1,st:"sac",pr:100,up:2,dc:9,anN:2,pond:1,use:"điềm phu thê: Ân tình +2 mỗi đêm thị tẩm",bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi uyên ương nép bên nhau"},
+ uyenuong:{n:"Đôi uyên ương",tr:1,st:"sac",pr:100,up:2,dc:9,anN:2,pond:1,use:"điềm phu thê: Ân tình {anN} mỗi đêm thị tẩm",bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi uyên ương nép bên nhau"},
  cachep:{n:"Cá chép gấm",tr:1,st:"danh",pr:140,up:2,dc:7,omen:BAL.petFx.cachep.omen,pond:1,get use(){return `điềm cá vượt vũ môn: mỗi tháng có khi Danh ${balSg(this.omen[1])}`},bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi cá chép gấm trong bồn men ngọc"},
  vet:{n:"Vẹt ngũ sắc",tr:1,st:"tamco",pr:160,up:3,dc:9,spy:15,leak:10,/* previews: petMonthOf */get use(){return `nhại lời khách ghé cung: có khi nắm được ${balAb(BAL.eff.jpet.evPetMonthOf)} chứng cứ của kẻ thù`},bad:"cũng nhại lời nàng: nàng từng bày mưu thì kẻ thù có khi nắm chứng cứ",d:"vẹt đỏ lục lam trên giá mạ vàng"},
  sutu:{n:"Chó sư tử lông vàng",tr:1,st:"danh",pr:0,up:3,dc:8,guard:12,noise:1,bite:1,use:"canh cung chặt: kẻ lạ khó lẻn vào",bad:`sủa đêm (người ở chung cung dễ oán) · hay cắn kẻ hầu (Thiện cảm -${balAb(BAL.eff.jpet.loyalPetMonthOf)})`/* previews: petMonthOf */,d:"chó sư tử nhỏ lông vàng óng, vòng tua đỏ"},
@@ -44,6 +44,8 @@ function petK(k){return PET[k]?k:PET_OLD[k]||k}
 const PETK=Object.keys(PET);
 /* r2 sg-card: «{sungN}» in a pet's use text = its sungN as applied each night (nightFx → apply → sg), read when shown (was typed twice) */
 PETK.forEach(k=>{const t=PET[k],u=t&&t.use;if(typeof u==="string"&&u.includes("{sungN}"))Object.defineProperty(t,"use",{get:()=>u.replace("{sungN}",typeof S==="object"&&S&&S.emp?sgStat(t.sungN):statTxt("sung",t.sungN)),enumerable:true,configurable:true})});
+/* typed-stat-bal review: «{anN}» in a pet use text prints the table's own anN (the night rule reads petBest(S,"anN")) */
+PETK.forEach(k=>{const t=PET[k],u=t&&t.use;if(typeof u==="string"&&u.includes("{anN}"))Object.defineProperty(t,"use",{get:()=>u.replace("{anN}",balSg(t.anN)),enumerable:true,configurable:true})});
 /* sổ cũ: con đã bỏ → PET_OLD (cùng phẩm); khóa lạ hẳn → coi như mèo mướp */
 function petT(P){return PET[petK(P&&P.t)]||PET.meomuop}
 function petLux(k){const T=PET[petK(k)]||PET.meomuop;return PET_LUX[T.tr]+Math.round((T.pr||T.up*20)/40)}

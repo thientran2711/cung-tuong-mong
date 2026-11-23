@@ -7,7 +7,7 @@
    usage: node dev/test/typed-stat-text.js [buildDir] [--list]     exit 1 when a hit is left outside ALLOW */
 const fs=require('fs'),path=require('path');
 const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node-tools/node_modules/acorn')}})();
-const STAT='(?:Danh|Sủng|Bạc|bạc|Đức|Tài|Sắc|Ghen|Sức|Thiện cảm|Uy|Trí|Mưu|Thanh danh|Oán|Tín)';
+const STAT='(?:Danh|Sủng|Bạc|bạc|Đức|Tài|Sắc|Ghen|Sức|Thiện cảm|Uy|Trí|Mưu|Thanh danh|Oán|Tín|Ân tình|Tâm cơ|Tai mắt)';
 const RX=new RegExp(STAT+'\\s*[+\\-−]\\s?\\d+','g');
 /* [file, text regex, why] */
 const ALLOW=[
