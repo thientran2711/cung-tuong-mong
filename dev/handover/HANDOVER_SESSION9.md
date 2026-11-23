@@ -2691,3 +2691,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:38Z) Owner Q lag → OD row + D ORDER #7 (LAG metrics solo + co-op) + B note for co-op runners.
 - (22:39Z) Owner: mini-game visual skins → OD row + C ART ORDER MGSKIN + B P1 add + KK13 kit slot (send).
 - (22:41Z) Owner goal all figures animated → OD row + D ORDER #8 ANIM-STRESS (measure budget first; art later via C).
+- (22:42Z) Owner Q Thử tay: LIVE jmgcal lists all 39 kinds (mgCalKinds); BAL.ag.mg2.cal.k has 28; not in BAL: ban, huong, td_dung, nghe, truyen, mac, thoico, thu_tam, thu_choi, tuoi, co7; dauho record 11/20 < redo 11/21 02:30 → retest. Asked her for «Chép mã» CTM-CAL code → apply with dev/tools/mgcal_apply.py (first try only).
