@@ -1151,3 +1151,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
 - last wake: 23/11 02:20Z (D #20; context ≈ 27 %, rollover 31 %). LIVE d2cc5679 (B night-ledger-coop r4 9bade240, C quickcheck-figsig b4a5879d, …). Seat: worker coop-real-port FXSeyvCr (run 3 at 11/29; told to merge newest LIVE before SSK).
 - FROM MAIN 107 (23/11 02:25Z): LIVE = d2cc5679 (C N19 body-fit data commit; data only).
+- FROM MAIN (23/11 02:36Z): main is now MAIN CHÍNH 108 session_01Rc5AsL9VpiVSGvAECNciWk (child of 107). LIVE = d2cc5679.
