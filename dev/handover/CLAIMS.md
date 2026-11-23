@@ -1128,4 +1128,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | GAPART2 art: KP11 KP23 M45 M48 M50 M51 M52 M84 (briefs/C6-art-resume.md) | review/gapart2; reports/GAPART2.md | FOREMAN C ROOT-C6 | session_01D3E3NX5DQSPUBNWv4F9UpG | RUNNING | 23/11 05:40Z |
 coop-driver-fails (opus; 9 pre-existing LIVE co-op driver fails + coop-flakes rv follow-ups; MAIN 109 05:45Z; briefs/DROOT-coop-driver-fails.md) | review/coop-driver-fails | session_01964izFSjtour8BhRvzbeT4 | RUNNING | 23/11 05:49Z (Foreman D ROOT)
 | KP23CMP: KP23 194 act compare page old -h vs new (owner 07:00Z; briefs/C7-kp23-compare.md) | review/kp23-compare; reports/KP23CMP.md | FOREMAN C ROOT-C7 | session_01D3E3NY3mNYZAdFycTgMxDf | DONE | 23/11 07:20Z |
-| MG10A: mini-game non-person art scan + paint + wire (MAIN 109 07:10Z; briefs/C7-mg10a.md) | review/mg10a; reports/MG10a-scan.md, MG10A.md | FOREMAN C ROOT-C7 | (opening) | RUNNING | 23/11 07:25Z |
+| MG10A: mini-game non-person art scan + paint + wire (MAIN 109 07:10Z; briefs/C7-mg10a.md) | review/mg10a; reports/MG10a-scan.md, MG10A.md | FOREMAN C ROOT-C7 | session_01D3E3NXyH16AHsWYAvBwd5N | RUNNING | 23/11 07:25Z |
