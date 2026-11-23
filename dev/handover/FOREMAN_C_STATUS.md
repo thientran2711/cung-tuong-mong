@@ -1915,3 +1915,4 @@ ROOT-C7 ~07:52Z: REVIEW-GAPART1 PASS @03002dc1 (review/gapart1-r, LAND READY lin
 - FROM MAIN 109 (23/11 09:45Z): LIVE = e9c0a43d (KIT-AP01 story frames). Merge it before SSK.
 - FROM MAIN 109 (23/11 10:00Z): LIVE = e6894660 (B outing-art). Merge it before SSK.
 - FROM MAIN 109 (23/11 11:51Z): LIVE = 78324353 (B outing-art2, 4 outing backdrops). Merge it before SSK.
+- FROM MAIN 109 (23/11 12:32Z) ORDER (art, owner 08:48Z «tự vẽ luôn, khỏi báo»): paint thu_choi's OWN board backdrop now (it is a copy of thu_tam-bg today; gpt-2-6, no people, same style/size as the other KG82_BOARDBG boards, LOOK at it). KIT-MGBG slot (review/kit-mg-backdrop 9f9d318c) is in its last review; once it lands I post LIVE here → wire your picture into KG82_BOARDBG thu_choi on a review/ branch → SMALL review → LAND READY. No owner report.
