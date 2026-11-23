@@ -163,6 +163,24 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    finally{CW.on=on23;CW.seat=se23;COOP.send=sd23;rivals.splice(rivals.indexOf(f),1)}
    ck("23 the market buyer list never holds her entry (a player seat)",!er23&&Array.isArray(w23)&&!w23.includes(f),{er23,n:w23&&w23.length});
    ck("23b a box piece handed to her entry on the host: ONE «add» to her seat",!er23&&n23===1,{er23,n23})}
+  /* E44h (coop-lost-scan-traced 9001 vanish 10000200, «kyngo lead»): an NPC holds a piece of HERS (her case on the host); Kỳ ngộ returns it
+     (lostReturn how «kyngo»): ONE «ret» to her seat and famSweep sends NO «gone» after it (was: «gone matdau» → her seat dropped it). Every
+     return road of jlost (tra / xet / nop / soat / nha / kyngo) is covered by identity. */
+  {const R24=[];for(const how of ["kyngo","tra","xet","nop","soat","nha"]){reset();const on24=CW.on,se24=CW.seat,sd24=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);let er24="",nr=-1,ng=-1;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};CW.famSt={};CW.famSw=1;const e=pc(P);S.loSeq=(S.loSeq||0)+1;
+    const c={id:S.loSeq,k:P,e,own:902,w:wk(),due:wk()+9,st:"held",at:key(v),by:key(v),keep:1,cause:"riv",kn:{},open:0,cev:0,hear:0};loL().push(c);
+    const x=Object.assign({},e,{lo:c.id,gh:902,by:key(v)});v.inv=v.inv||[];v.inv.push(x);CW.famSweep();
+    lostReturn(x,how);CW.famSweep();const ops=sn.flatMap(m=>m.fam||[]);nr=ops.filter(o=>o&&o.op==="ret").length;ng=ops.filter(o=>o&&o.op==="gone").length;
+    v.inv=v.inv.filter(y=>y!==x);loL().splice(loL().indexOf(c),1)}catch(z){er24=z.message}
+   finally{CW.on=on24;CW.seat=se24;COOP.send=sd24;rivals.splice(rivals.indexOf(f),1)}R24.push([how,er24,nr,ng])}
+   ck("24 her piece returned by any road (kyngo, tra, xet, nop, soat, nha): ONE «ret», no «gone» after it",R24.every(([h,er,nr,ng])=>!er&&nr===1&&ng===0),R24)}
+  /* E44h T8 (coop-lost-scan-traced SWAP dup 54): the npc-purpose roll (npwAsk) never makes her entry (a player seat) the NPC actor — loTake made her
+     the keeping thief of an NPC's piece. Checked on a test kind whose who list is liveRivals(true) and on loTake itself. */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);let er25="",a25=null,l25=null;
+   try{NPW.reg.__t25={grp:"t",who:()=>liveRivals(true),why:()=>({s:9999})};a25=npwAsk("__t25",{}).map(o=>o.who);const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);l25=npwAsk("loTake",{p:v}).map(o=>o.who)}catch(z){er25=z.message}
+   finally{delete NPW.reg.__t25;rivals.splice(rivals.indexOf(f),1)}
+   ck("25 the npc-purpose roll never picks her entry as the NPC actor (any kind; loTake)",!er25&&a25&&a25.length>0&&!a25.includes(f)&&l25&&!l25.includes(f),{er25,n:a25&&a25.length,hasF:a25&&a25.includes(f),lo:l25&&l25.includes(f)})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

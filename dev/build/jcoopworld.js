@@ -626,8 +626,13 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const 
    sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
 (function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
  try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
- let ca=[];try{const c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
+ let ca=[],c0=null;try{c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
  const r=f0.apply(this,arguments);
+ /* E44h (coop-lost-scan-traced 9001 vanish 10000200, the «kyngo lead»): a case of HERS closed here by a return (any road: Kỳ ngộ «kyngo»,
+    tra / xet / nop / soat / nha …) already sends the piece back («ret», or «add» inside an NPC turn); famSweep read every closing whose
+    how was not on its hand list (nha/tra/soat/nop/xet) as «mất dấu» and sent «gone» after the «ret» → her seat dropped the piece it had
+    just got back. Marked by identity (like the box rule's __fs), so no return road can miss. */
+ try{if(r&&CW.on&&host()&&c0&&c0.st==="done"&&String(c0.own)===String(fp()))c0.__rt=1}catch(z){}
  try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];FA.set(x,ca.filter(Boolean));/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
   if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
 /* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
@@ -730,7 +735,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
 function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
  const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
- for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone» */const was=st[c.id]===1;st[c.id]=2;
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs||c.__rt){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone»; E44h: closed by a return (lostReturn hook: «ret» sent) */const was=st[c.id]===1;st[c.id]=2;
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
