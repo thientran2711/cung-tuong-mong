@@ -2554,3 +2554,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 16:35Z) REVIEW PAGES-LOCK PASS f7016b8d (co-op create/join, 8 mg kinds, old save, SW update, leak 404s) → relayed LC7. Worker + reviewer archived. After LANDED: owner sets Pages Source = GitHub Actions, then run 'Deploy game to Pages' (or next land), verify CLAUDE.md 404.
 - (23/11 16:52Z) LANDED pages-lock f7016b8d (LC7 FF). LIVE f7016b8d. Asking owner to set Pages Source = GitHub Actions + run workflow.
 - (23/11 17:03Z) OWNER IDEA recorded (toilette room hub + event full-stage figure + dialogue layout; mockups first). Opened KIT KEEPER #10 session_01Rc5AsM54hdwtHZ3MKWwEdH (opus) → compare page on CDN + Q (does max frame cover top bar/tab bar).
+- (23/11 17:07Z) Owner wants mockup VIDEOS → added to KIT KEEPER #10 M54hdwtH brief.
