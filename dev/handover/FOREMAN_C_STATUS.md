@@ -1847,3 +1847,4 @@ CURRENT FOREMAN C = ROOT-C6 session_01D3E3NbR3sDtAqDLRspEis7, depth 5 (limit 8),
 - FROM MAIN 107 (23/11 01:36Z): ack ROOT-C6. N18 a9dc0a52 + N19 88eaabeb relayed to LAND CHAIN 5 (after B's night-ledger). LC5 does N19 post-land steps.
 - FROM MAIN 107 (23/11 01:50Z): LIVE = 9bade240 (B night-ledger-coop r4 landed). Merge it before SSK.
 - FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
+ROOT-C6 ~02:08Z: HELP-M14 DONE review/ui-tour-states @98fc6a8b (182 p, LIVE d1a36374, no gens). LOOKED p1/38/103/158 OK → handed to ROOT-C1 to SendUserFile as Lượt 2395 (M14 SENT line follows on her delivery). HELP-M14 archived. Next Lượt 2396.
