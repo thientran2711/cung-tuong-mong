@@ -17,9 +17,9 @@ Every player text that TYPED «stat ±N» while its rule code typed the same num
 | A arts | j85 94, j23 18, j83 9 | 121 | 0 |
 | B events | j55, j71, jmen 12 · j78 11 · j92 10 · j72 7 · jaudit 5 · j4, j15, j42 4 · j7, j53, j54, j75, j99succ 2 · j3, j9, j20, j22, j24, j30, j51, j67, j70, j79 1 | 101 | 0 (+1 allowed) |
 | C misc | jpet 13 · jkitpage 10 · jtsb 9 · jtabs 8 · jrcp 7 · jstip 6 · jpetcare, jts, jtoil 4 · jecon, jstatfx 3 · jface, jkc 2 · jkinl, jlost, jopic, jtruth 1 | 80 | 0 (+6 allowed) |
-| **total** | | **334** | **0 typed, 7 allowed** |
+| **total** | | **334** | **0 typed, 11 allowed** |
 
-ALLOWED (justified, in the guard): j75:103 night-gain RATE note («mỗi +1: Ân tình +1 …», a per-step unit of the nightGain formula, not an amount) · jkinl:95, jkitpage:159 ×2, jstatfx:66 ×3 kit sample page demos (no rule applies them).
+ALLOWED (justified, in the guard): j75:103 night-gain RATE note («mỗi +1: Ân tình +1 …», a per-step unit of the nightGain formula, not an amount) · jkinl:95, jkitpage:63/64/159, jstatfx:66 ×3 kit sample page demos (fx:{} — no rule applies them; printing a real rule key there fails one-core-bind, a demo is not that option). MAIN 110 nit «jkitpage:64 Danh +10» = this ALLOW (kit keeper's demo).
 
 ## New BAL keys (all commented at their definition)
 - jbal.js: BAL.itFx (j8 item w/use/dr, wear ngocboi/tuithom, veil).
@@ -28,8 +28,11 @@ ALLOWED (justified, in the guard): j75:103 night-gain RATE note («mỗi +1: Ân
 - jbalarc.js GROUP C block: eff.jface.penQuy, eff.jpet, eff.jpetcare, eff.jrcp, eff.jts, eff.jtsb, eff.jtoil, BAL.petFx, BAL.itFx extras (jkc/jstip pieces), BAL.artLes (lesson Sức).
 - Many existing keys reused (BAL.eff.j8.*, art.stUp/danh, td.selfSuc/mSuc, house.*, kid.heirDanh, ag.hh.pardonDuc, …).
 
+## BAL.rl (one-core-bind)
+one-core-bind binds a BAL.eff key to the option that shows it. 23 amounts are applied AWAY from the card that shows them (monthly ticks, deferred night / contest results, pet table, Đức help panel, AOUT previews of a later rule): they moved BAL.eff → BAL.rl (jbalarc.js end, same values, comment per module): j85 hanhDucMonth/ducTf/ducStaff · j83 ducIllBuy · j42 sucSrvMeet, ord · j71 danhCRun7/_2, danhBrbTick7, danhFxFin7 · j8 hit, ducGo, danhGo_2 · j92 danhWdFrameResolve/_2 (bind called it a SWAP; checked j92:336/338/345 — the printed keys are right) · jinv danhTop · jmen danhTop_2 · jpet danhPetMonthOf/_2, sucAsthma, followN · jstip sacUse · jface penQuy. Every reader (incl. local aliases, j85 v85Month) reads BAL.rl.
+
 ## Same values (typed-stat-same vs LIVE 225c5c08)
-503 rule tables, **0 rule diffs** (3 runs; one run showed A.v85Month all-empty on the NEW side = the probe's seeded character was dead at that moment, v85Month returns early; the 2 other runs 0 diffs). Text diffs, all explained:
+503 rule tables, **0 rule diffs** (final build 2942f0b1: 0 rule / 5 text diffs; earlier 3 runs; one run showed A.v85Month all-empty on the NEW side = the probe's seeded character was dead at that moment, v85Month returns early; the 2 other runs 0 diffs). Text diffs, all explained:
 - IT.aolong / IT.vaibong: jwdinv picks the dress name with Math.random → differs on every load (same on LIVE vs LIVE).
 - A.ARTFX / v85Table cam·ky·vu: LIVE showed the «mở …» card line twice (bậc 2 and bậc 3); now once (the setter added to sgRuleArr keeps jbalcore's rewrite).
 - A.artTab: teacher fee is random per load (Bạc -3/-4), same on LIVE vs LIVE.

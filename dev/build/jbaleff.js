@@ -134,3 +134,4 @@ Object.assign(BAL.eff.j7,{comet:{rel:25,sung:-15,thu:-20}/* «Sao chổi» omen 
  cane:{rel:30,sung:-10,thu:-30}/* «caning» of a rival: «Quỳ xin tha» her regard / «Thêm một lời buộc tội» her Sủng (raw, NPC) and regard; j7 rule + option text */});
 Object.assign(BAL.eff.j9,{ducPushPond:-12/* «Đẩy xuống hồ sen» (pushPond, her and NPCs): the pusher's Đức; j9 rule, ACT cost getter + card */});
 Object.assign(BAL.eff.j99succ,{costB:{bac:-100,suc:-10},costC:{bac:-300,suc:-20}/* succession: «Buông rèm nhiếp chính» / «Tự lên ngôi Nữ đế» cost (succTry + PEND.succ0 card) */,danhB:8,danhBFail:-10/* «Buông rèm» succeeds / court refuses: her Danh */});
+Object.assign(BAL.eff.j68f,{fishSwapBac:-10,fishSwapSuc:2/* poisonedFish «Thay hết nước, đồ ăn»: Bạc for new water / food, Sức she keeps by being safe. Was c:{bac:-10,suc:-2} w:{suc:2} = Sức cost and gain cancel (law 3, MAIN 111 21:33Z): the Sức cost is dropped, net Sức +2 for Bạc -10 */});
