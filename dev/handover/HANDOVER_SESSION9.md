@@ -2619,3 +2619,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:47Z) W3 hdr-kiep opened session_01Rc5AsLTYHkB2oX3fnkWMqk (sonnet SMALL UI; on READY open sonnet SMALL reviewer). D child unreachable by send_message (other account) → orders via FOREMAN_D_STATUS only.
 - (20:49Z) W2 READY f3eb43bb but moved meter under title on 7→25 cards = breaks owner limit; sent back: keep baseline 7, word 0 below bar, gate in test. Review after re-READY.
 - (20:52Z) W2 kit-odds-row: B/C rejected (title crush banned 18/11; C breaks owner rule) → MAIN chose A (meter under title where needed, titles + card heights unchanged). Awaiting READY → sonnet SMALL reviewer.
+- (20:53Z) W3 hdr-kiep READY 5d0039de → reviewer session_01Rc5AsK7hQdkb2rweb6hVxD. W3 stays until verdict.

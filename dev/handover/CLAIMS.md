@@ -1202,3 +1202,4 @@ fix-evening-softlock + fix-hadoc-loop (opus; MAIN 110 20:33Z; briefs/D-softlock-
 odds-ladder-words (sonnet; MAIN 110 20:33Z; briefs/D-odds-ladder.md) | review/odds-ladder-words | session_01964izG87jYFUEWkiatPXTX | RUNNING | 23/11 20:55Z (Foreman D child)
 fix-kframe-heir (opus; MAIN 110 20:33Z; briefs/D-kframe-heir.md) | review/fix-kframe-heir | session_01964izF3TRAfuFcfdQV1Lie | RUNNING | 23/11 20:55Z (Foreman D child)
 typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | review/typed-stat-bal | session_01964izBsY2xJwtJ9Zr9pzuF | RUNNING | 23/11 20:55Z (Foreman D child)
+| REVIEW hdr-kiep (sonnet SMALL) of 5d0039de | review/hdr-kiep; reports/hdr-kiep.md «## REVIEW» | MAIN 111 | session_01Rc5AsK7hQdkb2rweb6hVxD | RUNNING | 23/11 20:53Z |
