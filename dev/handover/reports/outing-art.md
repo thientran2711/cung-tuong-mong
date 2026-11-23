@@ -28,3 +28,13 @@ ART NEEDED (no painting yet, keep fallback): Nam Giao altar outing (đông chí 
 ## Shots (Fold 755x1000@2 + iPad 1180x820@2, looked 3x)
 CDN img/_review/outing-art/: fold-chua.jpg, fold-ngoai.jpg, ipadAir-chua.jpg, ipadAir-ngoai.jpg (delete after verdict: `python3 dev/site/cdn_sync.py --wipe-review outing-art`).
 NOTE for review: the dialog picture is a WIDE band on both devices, so the Fold portrait file shows as a cropped horizontal slice (readable: meadow + bridge). Kept the kv port/land rule as ordered; switching the band to always `land` is a one-word change if the keeper prefers.
+
+## REVIEW r1 (sonnet SMALL reviewer session_01N1tNP2ksTW8GR3PpKSJH3d, 11/23/2026)
+PRIORITY #1 CHECK ('outing'): OD 13 | ledger 0 | claims KP23 + REVIEW = B | main no reader | review/outing-art 4627c50b | GAPART2 (C) painted.
+Verdict: **PASS with fix** on review/outing-art-r1 @ ede8e07e97de72118423ca205e7f8d7341e3850c (contains newest origin/main 31956a09).
+- Diff SMALL: jevban.js (+16), dev/test/outing-art.js, generated index.html/sw.js/assets.json. No BAL/save/co-op/time/progression.
+- KEY POINT: dialog picture slot = wide band on Fold AND iPad. Every ev-* banner is ONE 4:3 landscape file used on every device (kitEvArt, no port/land). KIT LAW 10 → outing must follow its kind: **FIXED to always -land** (kitOutingSrc; test expectations updated; header comment). Fold shot after fix: temple/bridge now readable in the band (before: thin cropped slice of the portrait file). -port files stay unused (full-screen use later).
+- KIT FIRST: no private part (reuses kitEvArt/kitSceneArt band). Fallback when not in CDN index OK (tested).
+- Tests: outing-art.js ALL OK (Fold+iPad, 12 cases, real dialogs, 0 page errors); quickcheck PASS (open 1685 ms, old save ok, core gates PASS); coop-e2e live: 141/141 on final run (two earlier runs 133/138 failed only 'same world both seats' on inventory item id R#9.inv.10.iu = coop-host-lag family, flaky, unrelated: no state change in this diff). Both seats now get the same file (land) → same picture.
+- Shots Fold 755x1000@2 + iPad 1180x820@2 LOOKED 3x (worker's iPad + my post-fix Fold). CDN img/_review/outing-art/ wiped.
+- Art by eye: both OK. Note (not repainted): chùa Hộ Quốc stone lanterns (tōrō-like) may read Japanese.
