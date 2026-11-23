@@ -121,6 +121,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    COOPW.inFC=(COOPW.inFC||0)+1;try{for(const n of N)try{window[n](S)}catch(e){}try{render()}catch(e){}}finally{COOPW.inFC--}
    return {N:N.length,ro:(st.roFC|0)-r0,same:snap()===s0,a:s0,b:snap()}});
   ok(r.N>=8&&r.ro>=r.N&&r.same,'G9 a host sync on her phone runs no render-time engine of her person (tyHome / kmm / pd / pr / al / lx / kp / emo / feel / mkSync): stopped, numbers unchanged',r)}
+ /* G9b (coop-thin-g F2 helper, Danh drift #2): her «Sẵn sàng» PRESS on her phone (nextBuoi outside a real step: jcoopthine sends the ready; gReady → gSync
+    + render) is not her own step: the render-time engines stay stopped (trip1 wk 33: tyHome → tyCharge Danh −1 on her phone + the host's −1 = 20 | 19).
+    The press is made deterministic: CW.eNext renders (as gReady does); trung y + one visitor at home (tyHome would charge). */
+ {const r=await G.p.evaluate(()=>{const CW=COOPW,F=CW.thin.F||{},st=F.stat||{};const on0=window.tyOn,cp0=window.curPeople,en0=CW.eNext;const v=(rivals||[]).filter(x=>x&&!x.coop&&x.alive!==false&&!x.out).pop();
+   window.tyOn=()=>true;window.curPeople=()=>v?[{ref:v}]:[];const p0=S.place,t0=S.tyPaid,d00=S.danh;S.place='home';S.tyPaid=null;if((S.danh|0)<5)S.danh=20;const d0=S.danh,ro0=st.ro|0;let in1=0;
+   CW.eNext=()=>{in1=1;try{render()}catch(e){}};try{nextBuoi()}catch(e){}finally{CW.eNext=en0;window.tyOn=on0;window.curPeople=cp0}
+   const o={press:in1,ro:(st.ro|0)-ro0,danh:[d0,S.danh],tyPaid:S.tyPaid};S.place=p0;S.tyPaid=t0;S.danh=d00;return o});
+  ok(r.press&&r.ro>0&&r.danh[0]===r.danh[1]&&r.tyPaid==null,'G9b her «Sẵn sàng» press on her phone (nextBuoi outside a real step) runs no render-time engine of her person: tyHome stopped, Danh unchanged',r)}
  for(let k=0;k<W;k++){const a=await her();const g0=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length}));const hs0=await H.p.evaluate(()=>COOPW.thin.G?COOPW.thin.G.stat.week:0);
   await week(H,G,'G1 week '+(k+1));for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
   let b=await her();const d0=diff(b.h,b.g);for(let t=0;t<20&&diff(b.h,b.g).length;t++){await sleep(500);b=await her()}if(d0.length&&process.env.TRIP)console.log('TRIP',JSON.stringify(await G.p.evaluate(()=>{const t=window.__trip&&window.__trip();return t?(t.top||[]).filter(x=>/bac|th\b|danh|sung|suc|duc/.test(JSON.stringify(x))).slice(0,15):null})));if(d0.length)console.log('TRANSIENT week '+(k+1),JSON.stringify(d0),'settled',JSON.stringify(diff(b.h,b.g)),'to',JSON.stringify(d0.map(([x])=>[x,b.h[x],b.g[x]])));const g1=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length,w:COOP.state.week}));const hs=await H.p.evaluate(()=>({w:COOPW.thin.G.stat.week,ms:COOPW.thin.G.ms.slice(-1)[0],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss}));
