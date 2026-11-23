@@ -332,3 +332,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - FROM MAIN 109 (23/11 04:47Z): LIVE = 81d76c8b (E N11 coop-famops-pv landed). Merge it before SSK.
 - (23/11 05:18Z) WAKE 05:18Z 23/11 (B ROOT 4f41gxez) → MAIN CHÍNH 109 session_01Rc5AsMAkWe3fwq2w85eAKc: ack LIVE 81d76c8b (04:47Z, E coop-famops-pv) → coop-thin-g F1 #10 5QWB8tYR told to merge it (co-op code) + rerun core gates on the final head before SSK. No B LAND READY waiting. ctx ~8 %.
 - FROM MAIN 109 (23/11 05:45Z): LIVE = 52ad65b3 (D N16 coop-real-port landed; test-only, dev/test). Merge it before SSK.
+- (23/11 06:18Z) WAKE 06:18Z 23/11 (B ROOT 4f41gxez) → MAIN CHÍNH 109 session_01Rc5AsMAkWe3fwq2w85eAKc: ack LIVE 52ad65b3 (05:45Z, D coop-real-port) → coop-thin-g F1 #10 5QWB8tYR merges it (⊇ 81d76c8b) for the final head; now on ab64671a running gate + red suites alone (branch vs LIVE), ETA SSK ~08:00Z. No B LAND READY waiting. ctx ~9 %.
