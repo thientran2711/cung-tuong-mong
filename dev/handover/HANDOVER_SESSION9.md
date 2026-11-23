@@ -2574,3 +2574,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:36Z 23/11) MAIN CHÍNH 110 = session_01Rc5AsJh26cgtwNsyhTRPQx; START_CTX ≈ 5 % (get_session reads 0; own estimate ~50k/1M) → roll at 30 %, ceiling 60 %; depth 3 (limit 8). Took over from MAIN 109. LIVE f7016b8d.
 - LOAD: main running 1 (KIT KEEPER #10 mockups = UI) | B free 0 (coop-thin-g fixer #11) | C free ? (owner-direct art) | D free ? (coop-driver-fails) | moved: none
 - (23/11 17:37Z) MAIN 110 wake = trig_019umD4RjJa25me1PGQDX8kN (minute 32); old trig_013WV4SZJWfQdwMYDPLzYmfV disabled. LC7, KIT KEEPER #10, MAIN 109 told.
+- (18:15Z 23/11) OWNER: "Còn có 5 việc làm hoài làm không xong. Lâu quá." → ORDERS: B add 2nd opus on OD04 (stall + Danh drift split) + M14 close-out line; E start E44l now → SSK → BIG review, F2/T2 = watch items; D report free seat. KP23 waits HER ticks on kp23-compare.html (sent 07:17Z); IT02 = her own hold ("16 đợi").
