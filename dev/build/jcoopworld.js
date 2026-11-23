@@ -753,7 +753,7 @@ function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
-CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.rqLoadT=()=>rqLoad();CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -770,12 +770,15 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
    twice) and acks every copy. Both seats, every res road (sendRes = acts, b4Send = NPC turns / returns / box answers / sweeps). */
 const RQK=()=>{try{return "ctm-resq:"+(COOP.state.room||COOP.code||"")+":"+(CW.seat||"")}catch(e){return "ctm-resq:"}};
 CW.rq=CW.rq||[];
-function rqSave(){try{localStorage.setItem(RQK(),JSON.stringify(CW.rq.slice(-40)))}catch(e){}}
-function rqLoad(){try{const L=JSON.parse(localStorage.getItem(RQK())||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id))CW.rq.push(x)}catch(e){}}
+function rqSave(){try{const k=RQK();localStorage.setItem(k,JSON.stringify(CW.rq.filter(x=>!x.rk||x.rk===k).slice(-40)))}catch(e){}}
+/* E53r (review): the outbox belongs to ONE room + seat. leave() → join() of another room keeps this page (no reload): the old room's unacked
+   «res» must never go to the new room (its «add» would land in another friend's world = a piece from nowhere). Each entry carries its key (rk);
+   a room message keeps in memory only this room's entries (the others wait in localStorage under their own key until that room is back). */
+function rqLoad(){try{const k=RQK();CW.rq=CW.rq.filter(x=>x&&x.rk===k);const L=JSON.parse(localStorage.getItem(k)||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id)){x.rk=k;CW.rq.push(x)}}catch(e){}}
 function rqSend(x){x.at=Date.now();x.n=(x.n||0)+1;try{return COOP.send(x.msg)}catch(e){return false}}
-function resOut(msg){const x={id:msg.id,msg,t0:Date.now()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
+function resOut(msg){const x={id:msg.id,msg,t0:Date.now(),rk:RQK()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
 function resAck(id){const i=CW.rq.findIndex(x=>x.id===id);if(i>=0){CW.rq.splice(i,1);rqSave()}}
-function rqFlush(all){if(!CW.on)return;const n=Date.now();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if(all||n-(x.at||0)>5000)rqSend(x)}
+function rqFlush(all){if(!CW.on)return;const n=Date.now(),k=RQK();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if((!x.rk||x.rk===k)&&(all||n-(x.at||0)>5000))rqSend(x)}
 COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
 setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
 const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));

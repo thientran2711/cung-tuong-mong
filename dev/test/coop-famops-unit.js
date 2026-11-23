@@ -191,13 +191,13 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   /* E44i T9 probe (coop-lost-scan-traced SWAP: a host case of an NPC's piece «held» by her entry): the month's maid sale (j8 maidMonthP, run by
      rivalsMonth WITH her entry in the harem) picks the buyer over others(p) = every consort: her entry (a player seat) could be the NPC buyer
      → maidTheft → loKeepBy(c, her entry): the NPC's piece lands on the host's copy of her entry, her silver paid by an NPC roll. */
-  {reset();const on27=CW.on,se27=CW.seat,nw=window.npcWhy;const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:99999};rivals.push(f);let er27="",c27=null,bk=null;
+  {reset();const on27=CW.on,se27=CW.seat,nw=window.npcWhy;const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:99999};rivals.push(f);let er27="",c27=null,bk=null,fb27=null,iv27=null;
    const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&!x.out&&x!==f);const sv=consorts().map(x=>[x,x.bac]);const e27=pc(P);
-   try{CW.on=true;CW.seat="a";for(const x of consorts())if(x!==f)x.bac=0;v.inv=v.inv||[];v.inv.push(e27);v.schemes=0;v.loCd=0;if(!v.maid)v.maid=maidMk(v);v.maid.loyal=0;
+   try{CW.on=true;CW.seat="a";for(const x of consorts())if(x!==f)x.bac=0;iv27=v.inv;v.inv=[e27];/* E53r: e27 is the only piece the maid can take (the case of it is the one checked) */v.schemes=0;v.loCd=0;if(!v.maid)v.maid=maidMk(v);v.maid.loyal=0;
     window.npcWhy=(k,c,d)=>k==="maidSell"?{who:v,s:1}:nw(k,c,d);(S.lost||[]).forEach(c=>{if(c.own===key(v))c.st="done"});
-    maidMonthP(v);c27=(S.lost||[]).find(c=>c.e&&c.e.iu===e27.iu);bk=c27&&c27.at}catch(z){er27=z.message}
-   finally{window.npcWhy=nw;CW.on=on27;CW.seat=se27;for(const [x,b] of sv)x.bac=b;rivals.splice(rivals.indexOf(f),1);v.inv=(v.inv||[]).filter(e=>e.iu!==e27.iu&&!(e.lo&&c27&&e.lo===c27.id));if(c27)c27.st="done"}
-   ck("27 the month's maid sale never makes her entry the NPC buyer (no NPC piece held by her entry, her silver untouched)",!er27&&String(bk)!==String(key(f))&&f.bac===99999,{er27,at:bk,bac:f.bac,st:c27&&c27.st})}
+    maidMonthP(v);c27=(S.lost||[]).find(c=>c.e&&c.e.iu===e27.iu);bk=c27&&c27.at;fb27=f.bac/* E53r: read before finally puts every silver back */}catch(z){er27=z.message}
+   finally{window.npcWhy=nw;CW.on=on27;CW.seat=se27;for(const [x,b] of sv)x.bac=b;rivals.splice(rivals.indexOf(f),1);v.inv=(iv27||[]).filter(e=>e.iu!==e27.iu&&!(e.lo&&c27&&e.lo===c27.id));if(c27)c27.st="done"}
+   ck("27 the month's maid sale never makes her entry the NPC buyer (no NPC piece held by her entry, her silver untouched)",!er27&&String(bk)!==String(key(f))&&fb27===99999,{er27,at:bk,bac:fb27,st:c27&&c27.st})}
   /* E44i T2 (coop-lost-scan LIVE 35f5b5ab 10000045: the host «Lấy đồ» her piece 3×, the 3rd case «held at me» with no copy in his hands): the host's own
      road, three thefts with a «Cài đồ vào rương» return between them: after each theft ONE copy marked lo=case in his chest and ONE «rm lost» of that id
      to her seat; after each return the case closes, his copy leaves, ONE «ret». */
@@ -311,6 +311,16 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     R34.p2once=sn.slice(n5).filter(m=>m.mode==="ilrefund").length===1&&sn.slice(n5).filter(m=>m.mode==="ack"&&m.ack===tk.id).length===2}catch(z){er34=z.message+" "+String(z.stack).split("\n")[1]}
    finally{CW.on=on34;CW.seat=se34;COOP.send=sd34;if(CW.rq)CW.rq.length=0;Q.length=0}
    ck("34 F1 a res (and a P2 item answer) lost on a down socket is sent again (same id) until acked; the receiver applies an id once (also after a reload) and acks every copy",!er34&&R34.hook&&R34.first===1&&R34.again===2&&R34.afterAck===0&&R34.once&&R34.acks===2&&R34.reload&&R34.p2again===2&&R34.p2acked&&R34.p2once,{er34,R34})}
+  /* E53r (review of -t2, law 6c + 11): the outbox belongs to ONE room + seat. leave() → join() of another room keeps the page (no reload): an
+     unacked «res» of the old room must never be sent into the new room (its «add» = a piece from nowhere in another friend's world), and it is
+     not lost: back in the old room it goes out again. */
+  {const on35=CW.on,se35=CW.seat,sd35=COOP.send,rm35=COOP.state.room;const sn=[];let er35="",R35={};
+   try{CW.on=true;CW.seat="b";COOP.send=m=>{sn.push(JSON.parse(JSON.stringify(m)));return false};if(CW.rq)CW.rq.length=0;
+    COOP.state.room="T35A";const id="t35a"+Date.now();CW.resOut({t:"res",id,k:"npc",fam:[{op:"add",e:{k:P,iu:8835}}],fx:{},flags:{},seen:""});
+    COOP.state.room="T35B";CW.rqLoadT();const n0=sn.length;CW.rqFlush(true);R35.leak=sn.slice(n0).filter(m=>m.id===id).length;
+    COOP.state.room="T35A";CW.rqLoadT();const n1=sn.length;CW.rqFlush(true);R35.back=sn.slice(n1).filter(m=>m.id===id).length}catch(z){er35=z.message}
+   finally{CW.on=on35;CW.seat=se35;COOP.send=sd35;COOP.state.room=rm35;if(CW.rq)CW.rq.length=0;try{localStorage.removeItem("ctm-resq:T35A:b");localStorage.removeItem("ctm-resq:T35B:b")}catch(z){}}
+   ck("35 the res outbox never sends an old room's unacked res into another room (leave → join, same page), and sends it again back in its own room",!er35&&R35.leak===0&&R35.back===1,{er35,R35})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
