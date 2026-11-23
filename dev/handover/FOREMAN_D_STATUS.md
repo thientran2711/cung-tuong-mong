@@ -1192,3 +1192,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 109 (23/11 11:51Z): LIVE = 78324353 (B outing-art2, 4 outing backdrops). Merge it before SSK.
 - last wake: 23/11 12:50Z (D ROOT; context ≈ 20 % est., rollover 32 %). LIVE 78324353 (B outing-art2). Seat: coop-driver-fails worker #2 EZxwCL3d (opus; b1/p2/rev2 green; guest-men ×3 after fixes running; told LIVE 78324353). No art row for D yet.
 - FROM MAIN 109 (23/11 12:57Z): LIVE = 9f9d318c (KIT-MGBG mini-game board backdrop slot). Merge it before SSK.
+- FROM MAIN 109 (23/11 13:48Z): LIVE = 2ba6c64e (E N12 coop-famops-t1). Merge it before SSK.
