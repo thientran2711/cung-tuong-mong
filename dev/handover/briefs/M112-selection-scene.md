@@ -27,7 +27,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Each round ALSO moves her thiện cảm with THAT royal up/down by BAL amounts (two-way, law 1/4), besides feeding the combined raw → entScore → rank (cut unchanged).
 - Rounds 1–2 watching (Addendum 1) stay. Remove all entrance-announcement beats from the mock video.
 
-## ADDENDUM 3 (MAIN 112, 22:05Z) — RESULT = −1 / SAME / +1 (owner OD 23/11 ~22:15Z verbatim: "Tôi nghĩ là thấp hoặc cao hơn cái bậc của thân phận mình có, 1 bậc là được rồi, 2 bậc là nhiều quá.")
+## [VOID by ADDENDUM 17] ADDENDUM 3 (MAIN 112, 22:05Z) — RESULT = −1 / SAME / +1 (owner OD 23/11 ~22:15Z verbatim: "Tôi nghĩ là thấp hoặc cao hơn cái bậc của thân phận mình có, 1 bậc là được rồi, 2 bậc là nhiều quá.")
 - Selection outcome is now origin rank −1 / same / +1 (OVERWRITES ceiling/−1/−2 of OD:L1250; canon already overwritten in dev/rules/topic/story-roads.md:31).
 - Apply in the ONE place: jentry entTier + kc2SelDo (direct road), jkc tiểu thư Điện tuyển road (kcDien → kcEnter), cung nữ placement analogous (one step lower/same/higher in the maid ladder). Steps from a BAL key (e.g. BAL.entry.step = [-1,0,1]); every text prints the BAL value. Clamp at ladder ends.
 - BIG review (rank/progression). NEW lives only; old saves untouched. Update the mock video's result frame.
@@ -57,7 +57,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - MAIN pick (unless she objects): which type each royal gives is drawn per life from that royal's nết (seeded); a POOL per type (HIST-TUYENTU §8) so tests rarely repeat across lives; options of (b)/(c) equal value with gain + loss (laws 2/3), numbers in BAL (law 4). Harder by origin ceiling (law 5).
 - Cung nữ origin (Nội vụ phủ/ma ma) uses the same 3 types.
 
-## ADDENDUM 9 (MAIN 112, 22:27Z) — ENTRY-RANK CAP (MAIN 111 recommendation to owner, OD ~22:40Z; number = MAIN's)
+## [VOID by ADDENDUM 17] ADDENDUM 9 (MAIN 112, 22:27Z) — ENTRY-RANK CAP (MAIN 111 recommendation to owner, OD ~22:40Z; number = MAIN's)
 - Keep ±1 (Addendum 3) with two guards: (1) tests harder by origin rank (law 5, already in brief); (2) a BAL entry-rank CAP: BAL.entry.cap = the highest rank ANY origin can reach on entry TODAY (the current top origin's ceiling under the old rule) — so +1 never lifts a new life above what the game already allowed; clamp after the ±1 step. Report the chosen rank name + before/after table per origin in your report.
 
 ## ADDENDUM 10 (MAIN 112, 22:30Z) — POOL SIZES + NO-REPEAT (owner OD 23/11 ~22:40Z, read verbatim: 5–10 dramas far too few)
@@ -86,5 +86,9 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Right after the edict scene: a clear SẮC PHONG NEWS screen listing each girl she now knows (round-mates + befriended): face + name (if known) + new rank, ONE KIT ROW each (kit part only; missing → KIT REQUEST). Never skipped, never silent.
 - Standing whole-game rule (every time she learns a name/rank/face/relation/secret she gets a clear notice) is a separate MAIN job KNOW-NOTICE; use its shared notice part once it exists (coordinate via MAIN).
 
-## ADDENDUM 16 (MAIN 112, 23:05Z) — CAP VALUE (owner OD 23/11 ~23:12Z, read verbatim; OVERWRITES the cap value of Addendum 9)
+## [VOID by ADDENDUM 17] ADDENDUM 16 (MAIN 112, 23:05Z) — CAP VALUE (owner OD 23/11 ~23:12Z, read verbatim; OVERWRITES the cap value of Addendum 9)
 - The +1 must work for the TOP origin too: Cháu gái Thái hậu (enters Quý nhân) + top result → Tần. BAL.entry.cap = top-origin entry rank + 1 (Tần), so the cap never blocks a +1.
+
+## ADDENDUM 17 (MAIN 112, 23:10Z) — OWNER FINAL: OLD RULE (OD 23/11 ~23:16Z, she picked «Cách cũ (trần)»)
+- Entry rank = OLD rule OD:L1250: origin rank is the CEILING; good → that rank, poor → −1, very poor → −2. The existing kc2SelDo / entTier math stays EXACTLY as on LIVE (no new BAL step/cap keys).
+- ADDENDUM 3 (±1), 9 (cap) and 16 (Tần) are VOID. No new life starts above its origin rank. (Canon dev/rules/topic/story-roads.md:31 restored.) The edict (Add. 13) announces the rank from this rule.
