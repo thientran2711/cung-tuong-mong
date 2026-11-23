@@ -27,7 +27,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Each round ALSO moves her thiện cảm with THAT royal up/down by BAL amounts (two-way, law 1/4), besides feeding the combined raw → entScore → rank (cut unchanged).
 - Rounds 1–2 watching (Addendum 1) stay. Remove all entrance-announcement beats from the mock video.
 
-## [VOID by ADDENDUM 17] ADDENDUM 3 (MAIN 112, 22:05Z) — RESULT = −1 / SAME / +1 (owner OD 23/11 ~22:15Z verbatim: "Tôi nghĩ là thấp hoặc cao hơn cái bậc của thân phận mình có, 1 bậc là được rồi, 2 bậc là nhiều quá.")
+## [RE-INSTATED by ADDENDUM 18] ADDENDUM 3 (MAIN 112, 22:05Z) — RESULT = −1 / SAME / +1 (owner OD 23/11 ~22:15Z verbatim: "Tôi nghĩ là thấp hoặc cao hơn cái bậc của thân phận mình có, 1 bậc là được rồi, 2 bậc là nhiều quá.")
 - Selection outcome is now origin rank −1 / same / +1 (OVERWRITES ceiling/−1/−2 of OD:L1250; canon already overwritten in dev/rules/topic/story-roads.md:31).
 - Apply in the ONE place: jentry entTier + kc2SelDo (direct road), jkc tiểu thư Điện tuyển road (kcDien → kcEnter), cung nữ placement analogous (one step lower/same/higher in the maid ladder). Steps from a BAL key (e.g. BAL.entry.step = [-1,0,1]); every text prints the BAL value. Clamp at ladder ends.
 - BIG review (rank/progression). NEW lives only; old saves untouched. Update the mock video's result frame.
@@ -89,6 +89,10 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 ## [VOID by ADDENDUM 17] ADDENDUM 16 (MAIN 112, 23:05Z) — CAP VALUE (owner OD 23/11 ~23:12Z, read verbatim; OVERWRITES the cap value of Addendum 9)
 - The +1 must work for the TOP origin too: Cháu gái Thái hậu (enters Quý nhân) + top result → Tần. BAL.entry.cap = top-origin entry rank + 1 (Tần), so the cap never blocks a +1.
 
-## ADDENDUM 17 (MAIN 112, 23:10Z) — OWNER FINAL: OLD RULE (OD 23/11 ~23:16Z, she picked «Cách cũ (trần)»)
+## [VOID by ADDENDUM 18] ADDENDUM 17 (MAIN 112, 23:10Z) — OWNER FINAL: OLD RULE (OD 23/11 ~23:16Z, she picked «Cách cũ (trần)»)
 - Entry rank = OLD rule OD:L1250: origin rank is the CEILING; good → that rank, poor → −1, very poor → −2. The existing kc2SelDo / entTier math stays EXACTLY as on LIVE (no new BAL step/cap keys).
 - ADDENDUM 3 (±1), 9 (cap) and 16 (Tần) are VOID. No new life starts above its origin rank. (Canon dev/rules/topic/story-roads.md:31 restored.) The edict (Add. 13) announces the rank from this rule.
+
+## ADDENDUM 18 (MAIN 112, 23:15Z) — OWNER FINAL PICK «±1, trần Tần» (OD 23/11 ~23:25Z, read verbatim; she wants lives to move faster; overwrites ~23:16Z «cách cũ»)
+- Result = origin rank +1 / same / −1 (ADDENDUM 3 re-instated). BAL.entry.cap = Tần, clamp after the step (e.g. Cao Ly princess entering at Tần: good/middling → Tần, poor → Quý nhân; Cháu gái Thái hậu Quý nhân: good → Tần).
+- ADDENDUM 17 is VOID; Addenda 9/16 stay void (this addendum is the cap). Canon dev/rules/topic/story-roads.md:31 updated by MAIN 111. BIG review; new lives only; per-origin before/after table in the report.
