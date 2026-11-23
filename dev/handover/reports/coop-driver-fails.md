@@ -87,3 +87,8 @@ coop-e2e 141/141 ×2 · coop-guest-maid 40/40 · coop-pets 58/58 · coop-guest-m
 Files changed by this branch (all dev/test, none on B's/E's diffs): coop-b1, coop-b2b5, coop-guest-men, coop-r2, lib/coop-real.js (+repress) and the buoiBoth repress line in 16 more bots (list in root 18). Logs: /home/user/wt/cdf-logs (container-local).
 
 SẴN SÀNG KIỂM review/coop-driver-fails 65324cb820aeed95b9dc551bbab759f9b35937e6
+
+### Worker #2 addendum (23/11 ~14:50Z) — merged LIVE 2ba6c64e (contains e9c0a43d / e6894660 / 78324353; brings jcoopworld.js + jil.js of E's famops-t1)
+Re-run on the new merge: coop-e2e 141/141, guest-men 53/53, pets 58/58, famops-unit PASS 46/46, setup-scan risk 0, one-core-guard PASS.
+19. r2 step 1 «lost relay» (item 15) PROVEN = TEST FAULT (timing). M3 probe: the host's last famAsk for this bag hash was 1.4 s before the test cleared its copy; the one pos the step sends fell inside famAsk's 4 s per-hash throttle (jcoopworld.js:410) → no ask out (host fq has no 'out'), guest received nothing (fq []), and the test sends no later pos. In play her next update after 4 s asks again (not a game bug; the FOR D note on item 15 is withdrawn). Fix: the step waits 4.5 s before its trigger. After: r2 46/46 ×3.
+SẴN SÀNG KIỂM review/coop-driver-fails c1634814339e4b85d048c71ac14287c9177205c8
