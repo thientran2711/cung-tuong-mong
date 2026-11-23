@@ -2587,3 +2587,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:51Z 23/11) OWNER: 2 kiếp too few → 5 kiếp/bot/round (2000 lives/round) + continuous background runs after 2 clean rounds. OD plan row edited in place; B/C/D/E told.
 - (19:52Z 23/11) OWNER: co-op robots 10 kiếp per pair (200 co-op lives/round) → OD row + B order.
 - (19:56Z 23/11) OWNER: more runners to shorten testing → up to 10 runners/account; B co-op only; MAIN takes tt, dtq, td, ch (4 thân phận, ~10 runners). Estimate: solo round ~3–4 h, co-op ~5 h → whole robot phase ~2 days.
+- (20:05Z 23/11) LANDED via LC7: coop-driver-fails da829e9b, kp23-swap 225c5c08 (63 act pictures swapped). LIVE = 225c5c08. KP23 row done.
