@@ -14,3 +14,15 @@ Shots (wipe after review: `python3 dev/site/cdn_sync.py --wipe-review kit-mgskin
 - Foreman C: paint `img/mg/<kind>-<id>.webp` (same size/aspect as `img/kit/mg-<kind>-bg.webp`) and, where the look needs it, `img/mg/<sprite>-<id>.webp` (transparent, same size as the default sprite). Ids `[a-z0-9_]` (e.g. xuan, dong, hoidem).
 - THIN P1 (Foreman B): `kitMgSkinAdd(kind, id, {name:«…», pal})` per painted skin (name per VANPHONG), pick with the shared no-repeat memory, set `KG82.preSkin` before opening. Canvas option pills read `kitMgPal()`.
 - Not skinned on purpose: figure-column backdrop img/mgbg-<kind>.webp, header ✕, .kdanger.
+
+## REVIEW — SMALL kit reviewer-lander (23/11) — PASS
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main 0 (new part) | review/* 1 (review/kit-mgskin only) | archive 0.
+Target review/kit-mgskin @1b91ac14f5090a62813b6ecb63cece6d487a1787. origin/main c39e5009 is already its parent → merge = "Already up to date", no conflict; review/kit-mgskin-r pushed at the SAME sha.
+- Rebuild: assemble.py + build_site.sh OK (built files not committed; coordinator rebuilds on land).
+- `kit-mgskin.js` ALL PASS (Fold + iPad: default unchanged; 5 palettes via open + preSkin; contrast ≥4.5 / rim ≥3:1; buttons inside, no cut; resolver keys; unpainted → default art; kitBoardBg index rule; close resets; no page errors). `kit-kg82-stack.js` PASS 12. `img-allowlist.py` OK.
+- Old save: a save made by the origin/main build loads in the new build (name intact, no page errors); a skin opened then closed resets to son.
+- KIT FIRST (Law 9/11): one shared slot on kg82, one resolver (kg82Img + kitBoardBg), palettes from kit tokens only, no per-screen variant; KIT.md §MG-SKIN + kit page sample §MG-SKIN + KIT_REQUESTS in the same branch. jts.js's own kg82Img override (TS_IMG) is unskinned = default art, no hole.
+- Laws: no BAL number (4), no player-visible new words / no % (7 — only dev kit-page labels son/ngoc/kim/mac/dao), mini-game rules untouched (5).
+- Shots looked at (sheet-fold: 5 stacked frames; sheet-ipad: 5 stacked frames; plus per-palette crops): lacquer/green/gold/ink/pink main buttons, cream buttons with palette rim, all text readable, nothing cut. CDN folder wiped (12 objects).
+NITS (not blocking, for KK14 / next kit pass): (1) sheets are frame crops, not full 755x1000 / 1180x820 screens (Law 12 wants full screen) — fine for a palette sheet, but the first real skinned screen from THIN P1 must be shot full-screen on both devices. (2) `kitMgPal().b` returns the raw string `color-mix(in srgb,…)` for ngoc/kim/dao; fine for CSS and modern canvas fillStyle, but a canvas engine that needs rgb math must resolve it first.
+VERDICT: PASS → LAND review/kit-mgskin-r @1b91ac14f5090a62813b6ecb63cece6d487a1787.
