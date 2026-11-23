@@ -31,4 +31,5 @@ Ledger 5 lines; MA_HINH M2370-47..51.
 
 ## Swap (after the owner's OK only)
 swap_L2370.py picks the highest rN: a-ca-so←-47 (r7), ngu-thu-phong←-48 (r6), tu-ninh-cung←-49 (r5), dong-cung←-51 (r5), thuong-thu-phong←-41 (r7), phi-tan-cung←-43 (r3). Its dry run needs every review picture downloaded locally first. Khôn Ninh: no swap.
-## Queued (NOT started): 29 rooms option (1) ~3 915 cr, same L30 structure-true rule — wait for ROOT-C5.
+## 29 rooms: CANCELLED (ROOT-C5 00:17Z: MAIN 106 order — Group 2 CLOSED, C stops painting). Not started.
+## STATE: STOPPED. No more gens. Total 675 cr (4 planned redos + 1 Đông cung retry, -50 self-rejected). Open: owner verdict on the L2391 sheet → swap only after her OK.
