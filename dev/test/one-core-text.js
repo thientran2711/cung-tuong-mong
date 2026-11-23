@@ -254,5 +254,5 @@ if(require.main===module){
     rule's number lives in BAL and the text prints it (${balSg(BAL…)} or a {n:path} token). dev/test/typed-stat-text.js (acorn, strings + template
     text only); its ALLOW list holds the justified exceptions. */
  {const T=require('./typed-stat-text.js').scan(B).filter(r=>!r.ok);
-  if(T.length){console.log('FAIL: a player text types «stat ±N» (print the BAL constant: ${balSg(BAL…)} / {n:path} token; dev/test/typed-stat-text.js)\n  '+T.slice(0,+(process.env.OCG_MAX||60)).map(r=>`${r.f}:${r.line} ${r.t}  «${r.ctx.replace(/\s+/g,' ')}»`).join('\n  '));process.exit(1)}}
+  if(T.length){console.log('FAIL: a player text types «stat ±N» (print the BAL constant: ${balSg(BAL…)} / {n:path} token; dev/test/typed-stat-text.js)\n  '+T.slice(0,+(process.env.OCG_MAX||60)).map(r=>`${r.f}:${r.line} ${r.t}  «${(r.ctx||"").replace(/\s+/g,' ')}»`).join('\n  '));process.exit(1)}}
  console.log('PASS: no player text types an amount or a cut that lives in BAL (eff / road / arc amounts, loy / ducLv / quyLv … cuts; no typed «stat ±N»)')}

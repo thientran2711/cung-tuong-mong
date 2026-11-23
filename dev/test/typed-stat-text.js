@@ -25,7 +25,7 @@ function scan(dir){const D=dir||path.join(__dirname,'..','build');const rows=[];
  return rows}
 module.exports={scan,ALLOW};
 if(require.main===module){const dir=process.argv.slice(2).find(a=>!a.startsWith('--'));const rows=scan(dir);const bad=rows.filter(r=>!r.ok);
- if(process.argv.includes('--list'))rows.forEach(r=>console.log(`${r.ok?'ALLOW':'TYPED'} ${r.f}:${r.line}\t${r.t}\t«${r.ctx.replace(/\s+/g,' ')}»${r.ok?'  ('+r.ok+')':''}`));
- else bad.forEach(r=>console.log(`TYPED ${r.f}:${r.line}\t${r.t}\t«${r.ctx.replace(/\s+/g,' ')}»`));
+ if(process.argv.includes('--list'))rows.forEach(r=>console.log(`${r.ok?'ALLOW':'TYPED'} ${r.f}:${r.line}\t${r.t}\t«${(r.ctx||"").replace(/\s+/g,' ')}»${r.ok?'  ('+r.ok+')':''}`));
+ else bad.forEach(r=>console.log(`TYPED ${r.f}:${r.line}\t${r.t}\t«${(r.ctx||"").replace(/\s+/g,' ')}»`));
  const by={};bad.forEach(r=>by[r.f]=(by[r.f]||0)+1);
  console.log(`typed-stat-text: ${bad.length} typed (${rows.length-bad.length} allowed) ${JSON.stringify(by)}`);process.exit(bad.length?1:0)}
