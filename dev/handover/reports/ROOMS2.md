@@ -1,5 +1,5 @@
 # ROOMS2 — 13 toilette room plates: window drapes off (L30 structure-true, owner L2391/L2392 + C6 brief 03:25Z "thay luôn")
-START_CTX ~3 % (own estimate) · worker of ROOT-C6 session_01D3E3Nbr3sDtAqDLRspEis7 · branch review/rooms2 @5355780d
+START_CTX ~3 % (own estimate) · worker of ROOT-C6 session_01D3E3NbR3sDtAqDLRspEis7 · branch review/rooms2 @5355780d
 PRIORITY #1 CHECK ('toil-room|toil-mirror|toilette'): OD 3 | ledger 4 | claims 4 | main 15 | review/* 3 | archive 78 — reused: the 13 live CDN plates (KIT_REQUESTS on review/toil-room-art, 16/11), no new pictures drawn; main uses only img/toil-mirror-room.webp (jtoil.js reveal plate), the per-rank plates wait for review/toil-room-rank (not built).
 
 ## Group (fix-the-whole-group)
@@ -37,4 +37,4 @@ cdn_sync of the 14 keys (md5 checked against the live CDN: 14/14 OK). review/roo
 LOOK both devices (live site, the CDN plate): dev/test/mirror-center.js PASS 755x1000@2 (dc 2.2 / 3.9, mean 3) and 1180x820@2 (dc 0 / 2.4, mean 1.2), plate axis 629.5, 0 page errors. Shots: img/_review/rooms2/live-reveal-fold-ipad.jpg (before zoom: lattice windows, no drapes) + live-zoom-fold-ipad.jpg.
 
 ## Cost
-14 × 135 = **1 890 cr** (pilot c5 + 12 + 0 redo; 13 pictures, the 14th key is a copy). Balance before: 2 778 266.
+13 × 135 = **1 755 cr** (pilot c5 + 12, 0 redo; the 14th key is a copy of c5). Balance before: 2 778 266.
