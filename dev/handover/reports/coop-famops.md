@@ -517,3 +517,14 @@ HEAD **review/coop-famops-t2 e027b540** (= fdcd0d18 + 4f33db9b F1 + index.html/s
 2. Gates alone on the merged head: coop-famops-unit, coop-e2e fold + SWAP, coop-b1, role-parity ×2 (`node dev/test/role-parity.test.js`), `node dev/tools/quickcheck.js` + old save.
 3. Final traced 76 wk: `LOST_DBG=1 SEED=9001 node dev/test/coop-lost-scan-traced.js <out>` ×2 + `COOP_SWAP=1 …` ×2, ≤3 parallel; a run with A.nofriend/B.nofriend ≈ 76 = rerun (9001 #1 on fdcd0d18 had A.nofriend 76). New log rows: `SNDLOST <seat> {snd}` at the end; trace.json gains snd / ws / fm; HDROP rows in gq.
 4. Clean (dup0 van0, stall rows only) → SSK. Open: F2, T2 shape (10000025), T7.
+
+### «E44k» FINAL traced scans on 5020f618 (23/11, ~20:50Z)
+| run | weeks both | dup | van | friend traffic | pass | note |
+|---|---|---|---|---|---|---|
+| 9001 #1 | 75/76 | 0 | 0 | yes (lost A90/B12) | 89/92 | FAILs = T7 stall w32 |
+| 9001 #2 | 73/76 | 0 | 0 | yes (lost A89/B14) | 87/94 | FAILs = T7 stalls w3/w55/w68 |
+| SWAP #1 | 75/76 | 0 | **1 (id 2235, w72-75)** | yes | 85/94 | NEW vanish + T7 stalls w8/w55 |
+| SWAP #2 | 76/76 | 0 | 0 | **NO (B.nofriend 76) -> INVALID** | 88/90 | needs rerun; not rerun (head already not clean) |
+
+**NEW VANISH (SWAP #1, /home/user/wt/fin/s1.log line 97):** piece 2235 y_vanthuy. At w69 NPC 19 bought it at the market (L [69,2235,"mkt",19,"mua"]). Lost case 133 (own 19, how kyngo, cause mis) opened and closed done in w70. At w71 host HDROP (holder 19 alive, rank 1), no record. From w72: PERSIST van, at=[]. No SNDLOST/famMiss on either seat, so it is NOT the F1 res-relay road. Same shape as F2 / van 278: an NPC-held piece dropped after a Kỳ ngộ case closes. Suspect the solo side (jky/jlost NPC holding). No root work done per foreman order MAIN 110. E53r decides.
+Verdict: 5020f618 is NOT scan-clean (1 vanish, F2 family). E44k stops here.
