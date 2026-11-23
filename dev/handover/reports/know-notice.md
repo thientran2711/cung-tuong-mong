@@ -17,9 +17,13 @@ KIT: fitting part exists = `kitNotice` (§42.2); added ONE thin kit entry `kitKn
 | Already notices: Tai mắt tin báo (jnotice tbHook), errands, kitLearn (art/vir), flip note, evidence deltas (result card), tấn phong panel (jts) | – | yes | unchanged |
 | Co-op | guest's knowledge raised on host | – | kitKnow in UICAP → her phone |
 
+## Round 2 (MAIN 112 asks)
+- RANK of another person: `k61RankSync` (j61) — rank changes of a known person (promoteP, demotion, crowned, co-op friend; after every week) = one batched notice; strangers silent; first sight already carries the rank. Tested 4 rows.
+- Built ON §42.2 (kind `know`, no private chip/panel), kit page sample §42.3, KIT.md §42.3.
+- `kitKnowMany(list)` for SELSCENE sắc phong list → ONE notice.
+
 ## NOT done (for MAIN)
 - SẮC PHONG NEWS screen (rows face+name+new rank per girl) = the SELSCENE job, not this one; kitKnow gives the batched notice for it meanwhile.
-- Ranks of others learned via tấn phong/edict news: only the existing panel; no per-rank kitKnow yet (no single writer; a rank is read live from `rivals`). Needs the SELSCENE edict flow.
 - Secrets/evidence: shown as stat deltas on the result card (yes); no separate silent writer found beyond noteAdd.
 - Panel joins several facts with « · » in one paragraph (jnotice panel renders `text`); a one-line-per-fact list would need a kitNoticeOpen tweak — suggest later.
 - Not exhaustively traced: every direct `S.notes`/`trK` writer outside j21/j28 (none found by grep).
