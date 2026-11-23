@@ -32,7 +32,7 @@ async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  {const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)break;await sleep(500)}}
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.kpWarn=1;render()});
- await REALL.realize(H,G,()=>REALL.weekGeneric(H,G,clear,press1),ok);
+ await REALL.realize(H,G,()=>REALL.weekGeneric(H,G,clear,press1),ok,{low:1});
  const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];ok(lv[0]===LVL&&lv[1]===LVL,'room level '+LVL+' on both seats',lv);
  /* a day buổi with both seats free: her ready not asked yet */
  for(let i=0;i<6;i++){await clear(H);await clear(G);await sleep(300)}

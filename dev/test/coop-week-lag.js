@@ -46,7 +46,7 @@ async function week(A,B){for(let i=0;i<3;i++){await clear(A);await clear(B)}cons
  await inW();
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G);
- await REALL.realize(H,G,()=>week(H,G),ok);
+ await REALL.realize(H,G,()=>week(H,G),ok,{low:1});
  if(LVL)ok(await until(G,lv=>COOPW.thin.lvl>=lv,LVL,40000),'level on',await G.p.evaluate(()=>COOPW.thin.lvl));
  const sync=async(ms=15000)=>{if(!LVL)return true;const t0=Date.now();while(Date.now()-t0<ms){await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(500);
    const [hv,gv]=[await H.p.evaluate(()=>COOPW.thin.hv),await G.p.evaluate(()=>COOPW.thin.view&&COOPW.thin.view.v)];if(hv===gv)return true}return false};
