@@ -81,3 +81,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - The waiting yard is ONE BUỔI of 4 KHẮC using the normal khắc system — NO seconds countdown anywhere.
 - She takes actions of her choice (greet, Hỏi danh tính, step into the drama, observe, tidy her dress, rest …), each costing khắc exactly as in the game (existing costs; Hỏi danh tính uses its normal khắc cost, not seconds).
 - The yard drama and NPC moves advance with the khắc (who talks to whom, the drama escalates on its own if she does nothing). Acquaintance cap = whatever 4 khắc allow (no separate ~3 cap).
+
+## ADDENDUM 15 (MAIN 112, 23:00Z) — SẮC PHONG NEWS SCREEN (owner OD 23/11 ~23:08Z, read verbatim)
+- Right after the edict scene: a clear SẮC PHONG NEWS screen listing each girl she now knows (round-mates + befriended): face + name (if known) + new rank, ONE KIT ROW each (kit part only; missing → KIT REQUEST). Never skipped, never silent.
+- Standing whole-game rule (every time she learns a name/rank/face/relation/secret she gets a clear notice) is a separate MAIN job KNOW-NOTICE; use its shared notice part once it exists (coordinate via MAIN).
