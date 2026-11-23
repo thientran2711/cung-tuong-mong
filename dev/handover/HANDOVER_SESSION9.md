@@ -2700,3 +2700,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:56Z) W5 offline-all sonnet session_01Rc5AsHib54y5c78kFHKKFC (deadline before Wed 25/11) → on READY open SMALL rv-lander fast.
 - (22:58Z) Owner offered another foreman → MAIN advised ONE art foreman F (MGSKIN moved from C so C finishes SELART + KP10 by Wed). Files FOREMAN_F.md + FOREMAN_F_STATUS.md written; paste block given to sếp.
 - (22:59Z) LANDED ky-keeper-f2 3e8981e1 (LC8). LIVE = 3e8981e1. W1 + rv archived. SELSCENE MOCK READY (fold 2:42 / ipad 2:44) → frames looked → mp4s sent to sếp; waiting her OK/fixes. SELSCENE adds KIT REQUEST (5) bare option card + result card for KK13.
+- (23:00Z) Owner: C upload 32 m09-redrawn consorts (clean cut) → OD + C order; she opens Foreman F herself.
