@@ -407,5 +407,21 @@
  "M2370-48": "M2370-48_ngu-thu-phong-r6_EDIT_ha_sang.txt (= M2370-26 minus drapes at REAL windows only, structure-true, owner L2391 / L30)",
  "M2370-49": "M2370-49_tu-ninh-cung-r5_EDIT_ha_sang.txt (= M2370-25 minus drapes at REAL windows only, structure-true, owner L2391 / L30)",
  "M2370-50": "M2370-50_dong-cung-r4_EDIT_ha_sang.txt (= M2370-14 minus drapes at REAL windows only, structure-true, owner L2391 / L30) — REJECTED by PLACES5 structure check: map still floats, superseded by M2370-51",
- "M2370-51": "M2370-51_dong-cung-r5_EDIT_ha_sang.txt (= M2370-14 minus drapes at REAL windows only, structure-true, owner L2391 / L30)"
+ "M2370-51": "M2370-51_dong-cung-r5_EDIT_ha_sang.txt (= M2370-14 minus drapes at REAL windows only, structure-true, owner L2391 / L30)",
+ "RM1-01": "RM1-01_canh-phuc-cung_EDIT_ha_sang.txt (= live img/canh-phuc-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-02": "RM1-02_canh-phuc-cung-tay-phoi_EDIT_ha_sang.txt (= live img/canh-phuc-cung-tay-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-03": "RM1-03_chung-tu-cung-dong-phoi_EDIT_ha_sang.txt (= live img/chung-tu-cung-dong-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-04": "RM1-04_chung-tu-cung_EDIT_ha_sang.txt (= live img/chung-tu-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-05": "RM1-05_dien-huy-cung-dong-phoi_EDIT_ha_sang.txt (= live img/dien-huy-cung-dong-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-06": "RM1-06_dien-huy-cung_EDIT_ha_sang.txt (= live img/dien-huy-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-07": "RM1-07_dien-huy-cung-tay-phoi_EDIT_ha_sang.txt (= live img/dien-huy-cung-tay-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-08": "RM1-08_ham-an-cung-dong-phoi_EDIT_ha_sang.txt (= live img/ham-an-cung-dong-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-09": "RM1-09_ham-an-cung_EDIT_ha_sang.txt (= live img/ham-an-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-10": "RM1-10_khai-tuong-cung-tay-phoi_EDIT_ha_sang.txt (= live img/khai-tuong-cung-tay-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-11": "RM1-11_thua-minh-cung-dong-phoi_EDIT_ha_sang.txt (= live img/thua-minh-cung-dong-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-12": "RM1-12_thua-minh-cung_EDIT_ha_sang.txt (= live img/thua-minh-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-13": "RM1-13_thua-minh-cung-tay-phoi_EDIT_ha_sang.txt (= live img/thua-minh-cung-tay-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-14": "RM1-14_truong-xuan-cung-dong-phoi_EDIT_ha_sang.txt (= live img/truong-xuan-cung-dong-phoi-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-15": "RM1-15_truong-xuan-cung_EDIT_ha_sang.txt (= live img/truong-xuan-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)",
+ "RM1-16": "RM1-16_vinh-hoa-cung_EDIT_ha_sang.txt (= live img/vinh-hoa-cung-ha-sang.webp minus window drapes, structure-true, L30/G78)"
 }
