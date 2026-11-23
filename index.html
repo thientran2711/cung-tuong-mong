@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới.","b":"11c9ba6be7ec","h":[{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
+window.CTM_BI={"s":"225c5c08+","t":"2026-11-23T19:49Z","c":"SELF-MERGE LAND kp23-swap: merge LIVE da829e9ba (index.html/sw.js rebuilt)","b":"a353bb4e2370","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32034,9 +32034,16 @@ function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length
 
 /* ---------- places and her own spying reveal plots ---------- */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j70On()&&S.place===k){const z=j70();for(const p of z.pl){if(p.end||p.kn||p.st!=="prep"||p.a==="me")continue;const R=pr70(p);if(!R||R.pl!==k||!roll(35))continue;const a=pa70(p);p.kn=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(a.id,`Ở ${placeName(k)}, ngươi thấy người của nàng ${tellOf70(p,p.pg)}`);log(`Ở ${placeName(k)}, ngươi tình cờ thấy người của ${a.name} ${tellOf70(p,p.pg)}.`);break}}}catch(e){console.error(e)}return r}})();
+/* does her act k on v open the «Bày mưu» card first? (one test for j70 and jtamco's road card, review/fix-hadoc-loop) — not when she already chose
+   to act now: «Ra tay ngay» (__j70inst) or the road card she answered after it (jtamco econRoadGo: window.ECON_HER for this act and person).
+   ROBOT-10 bug B: «Ra tay ngay» → jtamco's road card → «Làm như thường» called doAct again with __j70inst already back to 0, so «Bày mưu» came
+   again, then the road card again … for ever, the act never ran and no khắc was spent. */
+function j70Wants(v,k){try{const h=window.ECON_HER;if(h&&v&&h.k===k&&h.t===v.id)return false;
+ return !!(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v)))}catch(e){console.error(e);return false}}
+window.j70Wants=j70Wants;
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];
   /* her own plot: a big act can be done at once (as before) or prepared as a chain */
-  try{if(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v))){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
+  try{if(j70Wants(v,k)){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
   const r=d0.apply(this,arguments);
   try{if(j70On()&&k==="spy"&&v){const p=j70().pl.find(p=>!p.end&&p.a===v.id&&!p.kn);if(p&&roll(50)){p.kn=1;p.dig=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(v.id,`dò la ra: nàng đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}`);log(`Dò la ra: ${v.name} đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}.`)}}}catch(e){console.error(e)}
   return r}})();
@@ -44982,6 +44989,9 @@ setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")re
    if(lack){a.back=1;try{PT.stat.back++}catch(x){}a.rep={t:a.lbl||"Đã về",ok:false,L:[`${lack}: ${ACT[e.k].n} không thành, chưa tốn gì.`],d:[]};return}/* F4: she cannot pay it any more → the deed comes back undone */econRoadPay(S,e.k,t,e.road,e.c)}}else e=null}catch(x){console.error("econ road land",x)}
   const A=arguments;return econPrFz(e,()=>l0.apply(this,A))}}catch(e){console.error("econ road ptime",e)}},0);
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
+  /* j70's «Bày mưu» card goes first (review/fix-hadoc-loop): its «Ra tay ngay» comes back here (__j70inst) and gets the road card; the road
+     she then picks runs the act with ECON_HER set, which j70Wants reads, so neither card can call the other again */
+  if(typeof window.j70Wants==="function"&&window.j70Wants(v,k))return d0.apply(this,arguments);
   if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}
   return d0.apply(this,arguments)}})();
 window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc=econRoadNpc;
@@ -94795,7 +94805,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="11c9ba6be7ec";window.CTM_BUILD=BUILD;
+const BUILD="a353bb4e2370";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
