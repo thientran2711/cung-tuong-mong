@@ -1140,3 +1140,7 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | E44h coop-famops-t1 finisher (N12; opus BIG co-op; successor of E44g at budget; gates + traced 76 wk → SSK; briefs/E44h-coop-famops-t1.md) | review/coop-famops-t1; reports/coop-famops.md | FOREMAN E ROOT | session_01DgYSWmLLqhxSYANRY7v8g6 | RUNNING dfda0723 | 23/11 03:45Z |
 | N13 room-picture swap (PLACES4/5 finished places; Khôn Ninh old) | review/places-swap-n13; reports/PLACES5.md | FOREMAN C ROOT-C6 | session_01D3E3NX3WxvWG9ceZsmjPVe (PLACES5) | RUNNING | 23/11 05:40Z |
 | N14 ACTWIRE wire 21 Thái hậu act seals (THACT5 @95994a39b) | review/act-seals-n14; reports/ACTWIRE.md | FOREMAN C ROOT-C6 | session_01D3E3NWuoMku5UQb8BmDxgU | RUNNING | 23/11 05:40Z |
+| ROOMS1 art: 16 consort-room bases, drapes off real windows (briefs/C6-art-resume.md) | review/rooms1; reports/ROOMS1.md | FOREMAN C ROOT-C6 | session_01D3E3Nbe6Bq694LDaKecAKd | RUNNING | 23/11 05:40Z |
+| ROOMS2 art: 13 toilette bases (briefs/C6-art-resume.md) | review/rooms2; reports/ROOMS2.md | FOREMAN C ROOT-C6 | session_01D3E3NYS445c4FUEk4HCE5g | RUNNING | 23/11 05:40Z |
+| GAPART1 art: OR17 GE06 GE07 GE11 IT02 AP01 KP08 KP10 (briefs/C6-art-resume.md) | review/gapart1; reports/GAPART1.md | FOREMAN C ROOT-C6 | session_01D3E3NbPGDx6gC7WMHy8pN9 | RUNNING | 23/11 05:40Z |
+| GAPART2 art: KP11 KP23 M45 M48 M50 M51 M52 M84 (briefs/C6-art-resume.md) | review/gapart2; reports/GAPART2.md | FOREMAN C ROOT-C6 | session_01D3E3NX5DQSPUBNWv4F9UpG | RUNNING | 23/11 05:40Z |
