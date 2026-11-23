@@ -1,0 +1,6 @@
+# REVIEW-MG10A (session_01D3E3NXZ... reviewer, sonnet) — verdict: HOLD (art + merge OK; live LOOK + slap-mg NOT done)
+Branch review/mg10a @87ad5da4.
+- (2) CDN: all 27 mg-* keys return 200. Contact sheet looked: no character art in the sprites (hand+jade bangle is a hand only, not a person). tat-bg/ne-bg halls show a tiny far-back figure (worker already declared it) - owner said no characters; ROOT-C7 decide if acceptable.
+- (3) thu_tam-bg and thu_choi-bg are BYTE-IDENTICAL (md5 93fe3bc3...) - same picture twice; both unwired, so harmless now but thu_choi needs its own picture before the KIT REQUEST slot lands. I did not check whether old live keys were overwritten (CDN history not inspected); replacing tat/ne/nghe/truyen/mac/thoico is the stated intent.
+- (4) Diff vs 4ad20bd6 is minimal (jcraft.js CR_HAVE 12 names, CHANGE.txt, KIT_REQUESTS, report, rebuilt index/sw/assets). Merge onto current origin/main: conflicts ONLY in generated index.html, sw.js, assets.json -> lander must take main's side and rerun build_site.sh (CHANGE.txt/jcraft.js merge cleanly).
+- (5) ag-mgcal: all ok, 0 page errors. slap-mg: could not run (my http.server was refused by the sandbox; file:// run timed out waiting #k91demo, inconclusive, not compared with main). The 13-kind Fold/iPad LOOK was NOT done by me; rely on worker's own LOOK (reports/MG10A.md).
