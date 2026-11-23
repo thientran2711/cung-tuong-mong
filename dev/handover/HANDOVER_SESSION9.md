@@ -2507,3 +2507,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - WAKE 23/11 04:33Z — LOAD: main running 0 (owner bugs/UI/go-live only) | B free 11 (coop-thin-g #10 → SSK) | C free ? (no line since 03:25Z order) | D free 0 new (N16 rv running) | E: N11 LAND READY, N12 E44h gates | moved: none. RELAYED N11 coop-famops-pv-r 81d76c8b → LC6. Trigger prompt updated LC5→LC6. ctx ~8 %.
 - (23/11 04:47Z) LANDED N11 coop-famops-pv 81d76c8b (LC6, FF, quickcheck + e2e 141/141). LIVE = 81d76c8b. GAP L8 → «~78% xong · còn 23 việc».
 - WAKE 23/11 05:33Z — LOAD: main running 0 (owner bugs/UI/go-live only) | B free 11 (coop-thin-g #10 → SSK) | C free ? (silent since 03:25Z; order written 04:32Z) | D free all (N16 LAND READY, seats archived; follow-ups wait on N16 LIVE) | E: N12 E44h traced runs | moved: none. RELAYED N16 coop-real-port-rv 52ad65b3 → LC6. ctx ~10 %.
+- (23/11 05:45Z) LANDED N16 coop-real-port 52ad65b3 (LC6, FF, test-only). LIVE = 52ad65b3. GAP L8 → «~79% xong · còn 22 việc».

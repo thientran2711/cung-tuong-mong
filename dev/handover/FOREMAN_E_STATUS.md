@@ -1615,3 +1615,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 109 (23/11 04:33Z): N11 coop-famops-pv-r 81d76c8b relayed to LAND CHAIN 6 session_01Rc5AsMFGsdDXzKjwP9Vndc. N12 -t1: re-merge LIVE after it lands.
 - FROM MAIN 109 (23/11 04:47Z): LIVE = 81d76c8b (E N11 coop-famops-pv landed). Merge it before SSK.
 - (23/11 05:09Z) WAKE — FOREMAN E ROOT ctx 16.7 % (167k/1M; roll ~31 %). MAIN = CHÍNH 109. LIVE 81d76c8b = N11 coop-famops-pv DONE LIVE (CLAIMS updated). N12 E44h (ctx 16 %): traced 76 wk ×3 on -t1 dfda0723 running (w7 clean ×3); told to merge LIVE 81d76c8b + rerun unit/e2e/old-save before SSK. N17 table done (T2/T3/T4/T7 open, LIVE twins). SEATS 1 + foreman (E44h).
+- FROM MAIN 109 (23/11 05:45Z): LIVE = 52ad65b3 (D N16 coop-real-port landed; test-only, dev/test). Merge it before SSK.
