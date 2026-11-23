@@ -89,7 +89,9 @@ const asks=o=>o.p.evaluate(()=>{for(let i=0;i<3;i++)ser();return (S.coopAsk||[])
 const hostHas=(o,id,f)=>until(o,([id,f])=>{const m=(S.men||[]).find(x=>x&&x.id===id);if(!m)return false;for(const k in f)if((k==='alive'?m.alive!==false:(m[k]||0))!==f[k])return false;return true},[id,f],20000);
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
-async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');await clear(A);await clear(B);return r}
+async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both',r?undefined:{/* review/coop-driver-fails #2: G2-2 stalled from 6a on (every week timed out): who waits for what */
+  A:await A.p.evaluate(()=>({co:__co(),st:COOP.state.status,ended:COOP.state.ended,sent:COOPW.sent,Q:(Q||[]).map(q=>String(q.t||'').slice(0,40)),modal:((document.getElementById('modal')||{}).textContent||'').slice(0,120),tr:(COOPW.tr||[]).slice(-14)})).catch(e=>e.message),
+  B:await B.p.evaluate(()=>({co:__co(),st:COOP.state.status,ended:COOP.state.ended,sent:COOPW.sent,Q:(Q||[]).map(q=>String(q.t||'').slice(0,40)),modal:((document.getElementById('modal')||{}).textContent||'').slice(0,120),tr:(COOPW.tr||[]).slice(-14)})).catch(e=>e.message)});await clear(A);await clear(B);return r}
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
