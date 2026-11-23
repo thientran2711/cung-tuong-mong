@@ -10,7 +10,11 @@ const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node
 const STAT='(?:Danh|Sủng|Bạc|bạc|Đức|Tài|Sắc|Ghen|Sức|Thiện cảm|Uy|Trí|Mưu|Thanh danh|Oán|Tín)';
 const RX=new RegExp(STAT+'\\s*[+\\-−]\\s?\\d+','g');
 /* [file, text regex, why] */
-const ALLOW=[];
+const ALLOW=[
+ ['j75.js',/mỗi \+1: Ân tình \+1/,'night-gain RATE note (per step of the nightGain formula round(s/2)), not an amount applied'],
+ ['jkinl.js',/Sắc \+6/,'kit sample page §70.6: fake strip sum, no rule applies it'],
+ ['jkitpage.js',/Sủng -1|Danh \+2/,'kit sample page «Hoàng hậu triệu kiến» demo (fx shown only), no game event matches it'],
+ ['jstatfx.js',/Danh \+2|Sủng [−-]3/,'kit sample §57.1: buttons that only play the stat-change animation, no rule applies them']];
 function walk(n,f){if(!n||typeof n.type!=='string')return;f(n);for(const k in n){if(k==='type'||k==='start'||k==='end')continue;const v=n[k];
  if(Array.isArray(v))v.forEach(x=>x&&typeof x.type==='string'&&walk(x,f));else if(v&&typeof v.type==='string')walk(v,f)}}
 function scan(dir){const D=dir||path.join(__dirname,'..','build');const rows=[];
