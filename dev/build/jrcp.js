@@ -180,11 +180,11 @@ function rcpPayTy(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[
 PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?byKey(pp.acc):null;const who=rcpWho(r),A=RCP_ALN[pp.al]||"";
  const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+eyes(S)*4-(pp.knew?35:0);
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
- const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm ${balAb(BAL.eff.jrcp.evLose)} chứng cứ của ta`:""}`;
- const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
- const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
- const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
-  {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];
+ const fail=`bị phạt vì mưu hại ${who}, Danh ${balSg(BAL.eff.jrcp.danhLose)}${acc&&acc!==r?`, ${accN} nắm ${balAb(BAL.eff.jrcp.evLose)} chứng cứ của ta`:""}`;
+ const lose=()=>{apply({danh:BAL.eff.jrcp.danhLose});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
+ const win=()=>{apply({danh:BAL.eff.jrcp.danhWin});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
+ const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh ${balSg(BAL.eff.jrcp.danhWin)} · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
+  {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh ${balSg(BAL.eff.jrcp.danhWin)} · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];
  if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Thiện cảm -${balAb(BAL.eff.jrcp.loyalGo)}`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
  O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,BAL.eff.jrcp.go)}});
  return{who:acc&&acc!==S?(typeof pv==="function"?pv(acc):undefined):undefined,
@@ -249,8 +249,8 @@ function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
 tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.rcp.tFavor);S.askAt=S.askAt||{};S.askAt[v.id]=wk();log(`${rkName(v)} ${v.name} dạy ta ${ARTS.find(a=>a.k===k).n}: ta nợ nàng ta một ân (thiện cảm -${BAL.rcp.tFavor}).`)}}catch(e){}RCPT.started=1;RCPT.k=null;RCPT.t=null};
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
- O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
+ O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch} · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
@@ -264,13 +264,13 @@ function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||
   const open=()=>{const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
   try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}};
   /* KIT §13.9: Sức, the fee, the favour owed and 2 khắc are taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
-  const pc={suc:-10,bac:-fee,tch:k,khac:2};if(typeof kgDefer==="function")kgDefer(pc,open);else{apply({suc:pc.suc,bac:pc.bac});tchPaid(k);spend(pc.khac);open()}})})}
+  const pc={suc:-BAL.artLes.tch,bac:-fee,tch:k,khac:2};if(typeof kgDefer==="function")kgDefer(pc,open);else{apply({suc:pc.suc,bac:pc.bac});tchPaid(k);spend(pc.khac);open()}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
-  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
   const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>!kn&&rcpHasR(S,kind,r.id)?`${r.n} (đã học món này)`:r.n).join(", ");

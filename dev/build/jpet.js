@@ -16,25 +16,25 @@ const PET_SN={sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",danh:"Danh"};
    mặt trái: al (dị ứng với người hen), noise, bite, pond (cần ao: dưới Tần khó nuôi), fox (lời đồn hồ ly), leak (nhại lời), weak (yếu rét), easy (dễ bị hại) */
 /* sếp 15/11: Thường + Tinh phẩm = thú thật; Trân phẩm trở lên = linh vật/thần thú nhỏ (không sư tử, hổ, cáo thường) */
 const PET={
- meomuop:{n:"Mèo mướp",tr:0,st:"sac",pr:40,up:1,dc:8,sniff:35,al:1,use:"đánh hơi đồ ăn lạ, đôi khi báo trước được một lần bị hại qua đồ ăn",bad:"rụng lông: chủ có bệnh hen thì Sức -2 mỗi tuần",d:"mèo mướp béo tròn, đeo dây đỏ chuông vàng"},
+ meomuop:{n:"Mèo mướp",tr:0,st:"sac",pr:40,up:1,dc:8,sniff:35,al:1,use:"đánh hơi đồ ăn lạ, đôi khi báo trước được một lần bị hại qua đồ ăn",get bad(){return `rụng lông: chủ có bệnh hen thì Sức ${balSg(BAL.eff.jpet.sucAsthma)} mỗi tuần`},d:"mèo mướp béo tròn, đeo dây đỏ chuông vàng"},
  cho:{n:"Chó nhỏ lông xù",tr:0,st:"tamco",pr:40,up:1,dc:8,guard:10,noise:1,use:"canh cửa cung: kẻ lạ khó lẻn vào cài đồ, thả thú dữ, phóng hỏa",bad:"sủa đêm: người ở chung cung dễ oán",d:"chó nhỏ lông trắng xù, đeo nơ đỏ chuông vàng"},
  hoami:{n:"Chim họa mi",tr:0,st:"tai",pr:40,up:1,dc:10,sungN:1,easy:1,use:"hót khi Hoàng thượng ngự: {sungN} mỗi đêm thị tẩm",bad:"dễ sổ lồng: kẻ xấu dễ thả đi",d:"họa mi trong lồng tre, hót trong trẻo"},
  tho:{n:"Thỏ ngọc",tr:0,st:"duc",pr:30,up:1,dc:12,soft:2,weak:1,get use(){return `ai thấy cũng mềm lòng: mỗi tháng người oán nàng nhất bớt oán ${balAb(this.soft)}`},bad:"yếu: mùa đông dễ ốm, phải chăm luôn",d:"thỏ trắng tai hồng, hiền lành"},
- cavang:{n:"Cá vàng chậu sứ",tr:0,st:"tai",pr:30,up:0,dc:4,suc:1,easy:1,use:"ngắm cá khuây khỏa: Sức +1 mỗi tuần",bad:"kẻ xấu dễ bỏ thuốc vào chậu",d:"đôi cá vàng trong chậu sứ lam"},
- meo:{n:"Mèo tuyết",tr:1,st:"sac",pr:120,up:3,dc:9,sniff:55,al:1,use:"đánh hơi đồ ăn lạ: khá tinh, báo trước một lần bị hại qua đồ ăn",bad:"rụng lông: chủ có bệnh hen thì Sức -2 mỗi tuần",d:"mèo lông trắng dài, mắt xanh"},
- sao:{n:"Sáo nói",tr:1,st:"tamco",pr:110,up:2,dc:9,guard:6,leak:8,use:"kêu khi có kẻ lạ: canh cung nhẹ",bad:"nhại lời chủ trước khách: đôi khi Danh -1",d:"sáo đen mỏ vàng, học tiếng người"},
+ cavang:{n:"Cá vàng chậu sứ",tr:0,st:"tai",pr:30,up:0,dc:4,suc:BAL.petFx.cavang.suc,easy:1,get use(){return `ngắm cá khuây khỏa: Sức ${balSg(this.suc)} mỗi tuần`},bad:"kẻ xấu dễ bỏ thuốc vào chậu",d:"đôi cá vàng trong chậu sứ lam"},
+ meo:{n:"Mèo tuyết",tr:1,st:"sac",pr:120,up:3,dc:9,sniff:55,al:1,use:"đánh hơi đồ ăn lạ: khá tinh, báo trước một lần bị hại qua đồ ăn",get bad(){return `rụng lông: chủ có bệnh hen thì Sức ${balSg(BAL.eff.jpet.sucAsthma)} mỗi tuần`},d:"mèo lông trắng dài, mắt xanh"},
+ sao:{n:"Sáo nói",tr:1,st:"tamco",pr:110,up:2,dc:9,guard:6,leak:8,use:"kêu khi có kẻ lạ: canh cung nhẹ",get bad(){return `nhại lời chủ trước khách: đôi khi Danh ${balSg(BAL.eff.jpet.danhPetMonthOf)}`},d:"sáo đen mỏ vàng, học tiếng người"},
  uyenuong:{n:"Đôi uyên ương",tr:1,st:"sac",pr:100,up:2,dc:9,anN:2,pond:1,use:"điềm phu thê: Ân tình +2 mỗi đêm thị tẩm",bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi uyên ương nép bên nhau"},
- cachep:{n:"Cá chép gấm",tr:1,st:"danh",pr:140,up:2,dc:7,omen:[12,1],pond:1,use:"điềm cá vượt vũ môn: mỗi tháng có khi Danh +1",bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi cá chép gấm trong bồn men ngọc"},
+ cachep:{n:"Cá chép gấm",tr:1,st:"danh",pr:140,up:2,dc:7,omen:BAL.petFx.cachep.omen,pond:1,get use(){return `điềm cá vượt vũ môn: mỗi tháng có khi Danh ${balSg(this.omen[1])}`},bad:"cần ao: chưa có cung riêng (dưới Tần) thì khó nuôi",d:"đôi cá chép gấm trong bồn men ngọc"},
  vet:{n:"Vẹt ngũ sắc",tr:1,st:"tamco",pr:160,up:3,dc:9,spy:15,leak:10,/* previews: petMonthOf */get use(){return `nhại lời khách ghé cung: có khi nắm được ${balAb(BAL.eff.jpet.evPetMonthOf)} chứng cứ của kẻ thù`},bad:"cũng nhại lời nàng: nàng từng bày mưu thì kẻ thù có khi nắm chứng cứ",d:"vẹt đỏ lục lam trên giá mạ vàng"},
  sutu:{n:"Chó sư tử lông vàng",tr:1,st:"danh",pr:0,up:3,dc:8,guard:12,noise:1,bite:1,use:"canh cung chặt: kẻ lạ khó lẻn vào",bad:`sủa đêm (người ở chung cung dễ oán) · hay cắn kẻ hầu (Thiện cảm -${balAb(BAL.eff.jpet.loyalPetMonthOf)})`/* previews: petMonthOf */,d:"chó sư tử nhỏ lông vàng óng, vòng tua đỏ"},
  hac:{n:"Hạc đỉnh hồng",tr:2,st:"duc",pr:0,up:2,dc:6,th:1,use:"điềm thọ, Thái hậu ưa: Thái hậu quý nàng +1 mỗi tháng",bad:"Thái hậu ban: để chết hay bị hại thì Thái hậu quý nàng -8",d:"hạc trắng đỉnh đầu đỏ, dáng thanh nhã"},
- linhmieu:{n:"Linh miêu mắt ngọc",tr:2,st:"sac",pr:260,up:5,dc:9,sniff:75,al:1,use:"đánh hơi đồ ăn lạ rất tinh: báo trước một lần bị hại qua đồ ăn",bad:"rụng lông (hen: Sức -2/tuần) · quý giá nên dễ bị ghen",d:"mèo linh lông bạc, mắt xanh ngọc, đuôi tỏa ánh nhẹ"},
+ linhmieu:{n:"Linh miêu mắt ngọc",tr:2,st:"sac",pr:260,up:5,dc:9,sniff:75,al:1,use:"đánh hơi đồ ăn lạ rất tinh: báo trước một lần bị hại qua đồ ăn",get bad(){return `rụng lông (hen: Sức ${balSg(BAL.eff.jpet.sucAsthma)}/tuần) · quý giá nên dễ bị ghen`},d:"mèo linh lông bạc, mắt xanh ngọc, đuôi tỏa ánh nhẹ"},
  camke:{n:"Cẩm kê",tr:2,st:"danh",pr:0,up:4,dc:8,guard:15,beast:20,noise:1,use:"gáy vang khi có kẻ lạ: canh cung chặt, thú dữ khó lọt vào",bad:"gáy sớm: người ở chung cung dễ oán",d:"gà gấm lông ngũ sắc, đuôi dài như phượng"},
- lyngu:{n:"Long lý vảy vàng",tr:2,st:"tai",pr:0,up:4,dc:7,suc:2,omen:[10,1],easy:1,use:"cá chép sắp hóa rồng: ngắm khuây khỏa Sức +2 mỗi tuần, có khi điềm Danh +1",bad:"kẻ xấu dễ bỏ thuốc vào bồn",d:"cá chép vảy vàng, râu rồng, vây như mây, trong bồn men ngọc"},
- cuuvi:{n:"Cửu vĩ hồ",tr:3,st:"sac",pr:0,up:5,dc:9,sacX:1,fox:1,use:"đẹp lạ thường: theo hầu được Sắc +2 (con khác chỉ +1)",bad:"lời đồn hồ ly tinh: Thái hậu không vừa ý, có khi Danh -1",d:"hồ ly trắng nhỏ, chín đuôi bồng như mây"},
- thienma:{n:"Thiên mã",tr:3,st:"danh",pr:0,up:8,dc:8,guard:18,beast:25,omen:[10,1],use:"ngựa trời giữ cung: kẻ lạ, thú dữ khó lọt vào; có khi Danh +1",bad:"ăn cỏ linh chi quý: Bạc -8 mỗi tháng",d:"ngựa trời non trắng tuyết, bờm như mây, vó tỏa mây sáng"},
+ lyngu:{n:"Long lý vảy vàng",tr:2,st:"tai",pr:0,up:4,dc:7,suc:BAL.petFx.lyngu.suc,omen:BAL.petFx.lyngu.omen,easy:1,get use(){return `cá chép sắp hóa rồng: ngắm khuây khỏa Sức ${balSg(this.suc)} mỗi tuần, có khi điềm Danh ${balSg(this.omen[1])}`},bad:"kẻ xấu dễ bỏ thuốc vào bồn",d:"cá chép vảy vàng, râu rồng, vây như mây, trong bồn men ngọc"},
+ cuuvi:{n:"Cửu vĩ hồ",tr:3,st:"sac",pr:0,up:5,dc:9,sacX:BAL.petFx.cuuvi.sacX,fox:1,get use(){return `đẹp lạ thường: theo hầu được Sắc ${balSg(BAL.eff.jpet.followN+this.sacX)} (con khác chỉ ${balSg(BAL.eff.jpet.followN)})`},get bad(){return `lời đồn hồ ly tinh: Thái hậu không vừa ý, có khi Danh ${balSg(BAL.eff.jpet.danhPetMonthOf_2)}`},d:"hồ ly trắng nhỏ, chín đuôi bồng như mây"},
+ thienma:{n:"Thiên mã",tr:3,st:"danh",pr:0,up:BAL.petFx.thienma.up,dc:8,guard:18,beast:25,omen:BAL.petFx.thienma.omen,get use(){return `ngựa trời giữ cung: kẻ lạ, thú dữ khó lọt vào; có khi Danh ${balSg(this.omen[1])}`},get bad(){return `ăn cỏ linh chi quý: Bạc ${balSg(-this.up)} mỗi tháng`},d:"ngựa trời non trắng tuyết, bờm như mây, vó tỏa mây sáng"},
  ngoctho:{n:"Ngọc thố",tr:3,st:"duc",pr:0,up:5,dc:10,sniff:88,soft:2,weak:1,get use(){return `thỏ cung trăng biết mùi thuốc: đánh hơi độc cực tinh; ai thấy cũng mềm lòng (người oán nàng nhất bớt oán ${balAb(this.soft)} mỗi tháng)`},bad:"yếu rét: mùa đông dễ ốm",d:"thỏ ngọc trắng muốt, tỏa ánh trăng dịu"},
- phuong:{n:"Phượng hoàng non",tr:3,st:"sac",pr:0,up:8,dc:9,sungN:2,noise:1,use:"múa khi Hoàng thượng ngự: {sungN} mỗi đêm thị tẩm",bad:"kêu vang: người ở chung cung dễ oán · Bạc -8 mỗi tháng",d:"phượng non lông đỏ vàng, đuôi dài rực mà dịu"},
+ phuong:{n:"Phượng hoàng non",tr:3,st:"sac",pr:0,up:BAL.petFx.phuong.up,dc:9,sungN:2,noise:1,use:"múa khi Hoàng thượng ngự: {sungN} mỗi đêm thị tẩm",get bad(){return `kêu vang: người ở chung cung dễ oán · Bạc ${balSg(-this.up)} mỗi tháng`},d:"phượng non lông đỏ vàng, đuôi dài rực mà dịu"},
  bachloc:{n:"Bạch lộc",tr:4,st:"duc",pr:0,up:0,dc:6,omen:[15,2],rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; điềm lành Danh",bad:"ai cũng thèm muốn: rất dễ bị ghen, bị nhắm hại",d:"hươu thần trắng như ngọc, tỏa ánh bạc"},
  kylan:{n:"Kỳ lân",tr:4,st:"duc",pr:0,up:0,dc:6,th:1,rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; điềm nhân đức, Thái hậu quý nàng +1/tháng",bad:"Thái hậu ban: để mất thì Thái hậu quý nàng -8 · dễ bị ghen",d:"kỳ lân vảy ngọc lục, bờm vàng như mây"},
  thanhlong:{n:"Thanh long con",tr:4,st:"danh",pr:0,up:0,dc:7,sungN:2,rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; bay lượn khi Hoàng thượng ngự ({sungN})",bad:"rồng là tượng thiên tử: rất dễ bị ghen, bị nhắm hại",d:"rồng xanh nhỏ vảy lam ngọc, hào quang dịu"}};
@@ -59,7 +59,7 @@ function petGuard(t,beast){try{return petBest(t,"guard")+(beast?petBest(t,"beast
 window.PETSTAT=window.PETSTAT||{got:[0,0,0,0,0],rescue:0,rescueNpc:0,sniff:0,lost:0};
 function petBonus(p,on){/* the +1 (or +2) of the following pet: applied once, removed when it stops following */const P=tsbPetOn(p);
  if(p.petB){const k=p.petB,n=p.petBn||1;if(p===S)S[k]=Math.max(0,(S[k]||0)-n);else p[k]=Math.max(0,(p[k]||0)-n);p.petB=null;p.petBn=0}
- if(on&&P){const T=petT(P),k=T.st,n=1+(T.sacX||0);if(p===S)S[k]=(S[k]||0)+n;else p[k]=(p[k]||0)+n;p.petB=k;p.petBn=n}}
+ if(on&&P){const T=petT(P),k=T.st,n=BAL.eff.jpet.followN+(T.sacX||0);if(p===S)S[k]=(S[k]||0)+n;else p[k]=(p[k]||0)+n;p.petB=k;p.petBn=n}}
 const tsbPetBonus=petBonus;
 function petAdd(p,t,from,src){t=petK(t);const T=PET[t];if(!T)return null;p.pets=p.pets||[];if(p.pets.length>=petMax(p))return null;
  const P={t,from,src:src||"",care:80,at:tsbWk()};p.pets.push(P);try{PETSTAT.got[T.tr]++}catch(e){}
@@ -156,10 +156,10 @@ function petMonthOf(p){const L=tsbPets(p);if(!L.length)return;const me=p===S;let
   if(T.soft){const v=liveRivals(true).filter(x=>x!==p&&oan(x,p)>0).sort((x,y)=>oan(y,p)-oan(x,p))[0];if(v)oanAdd(v,p,-T.soft)}
   if(T.spy&&roll(T.spy)){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1).sort((x,y)=>danger(y,p)-danger(x,p))[0];if(v&&evA(p,v,BAL.eff.jpet.evPetMonthOf)){if(me)log(`<span class="g">${T.n} nhại lại câu ${v.name} lỡ nói khi ghé cung: ngươi nắm thêm ${balAb(BAL.eff.jpet.evPetMonthOf)} chứng cứ của nàng.</span>`)}}
   if(T.leak&&roll(T.leak)){if(T.spy&&(p.schemes||0)>0){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1)[0];if(v){/*evok: schemes>0*/evA(v,p,BAL.eff.jpet.evPetMonthOf_2);if(me)log(`<span class="r">${T.n} nhại lời ngươi trước mặt người của ${v.name}: nàng nắm ${balAb(BAL.eff.jpet.evPetMonthOf_2)} chứng cứ của ngươi.</span>`)}}
-   else if(!T.spy){if(me){apply({danh:BAL.eff.jpet.danhPetMonthOf});log(`${T.n} nhại lời ngươi trước khách, thành chuyện cười (Danh ${balSg(BAL.eff.jpet.danhPetMonthOf)}).`)}else ap(p,{danh:-1})}}
+   else if(!T.spy){if(me){apply({danh:BAL.eff.jpet.danhPetMonthOf});log(`${T.n} nhại lời ngươi trước khách, thành chuyện cười (Danh ${balSg(BAL.eff.jpet.danhPetMonthOf)}).`)}else ap(p,{danh:BAL.eff.jpet.danhPetMonthOf})}}
   if(T.noise&&roll(40)){const hk=typeof houseOf==="function"?houseOf(p):null;const v=liveRivals(true).find(x=>x!==p&&hk&&houseOf(x)===hk);if(v)oanAdd(v,p,BAL.eff.jpet.petMonthOf)}
   if(T.bite&&roll(40)){if(me)tsbLoyal(-BAL.eff.jpet.loyalPetMonthOf);else if(p.maid)p.maid.loyal=cl((p.maid.loyal||0)-BAL.eff.jpet.loyalPetMonthOf,0,100)}
-  if(T.fox){if(roll(40)){if(me)apply({th:-1});else p.th=(p.th||0)-1}if(roll(15)){if(me){apply({danh:BAL.eff.jpet.danhPetMonthOf_2});log(`Lời đồn ngươi nuôi hồ ly trong cung lan ra (Danh ${balSg(BAL.eff.jpet.danhPetMonthOf_2)}).`)}else ap(p,{danh:-1})}}});
+  if(T.fox){if(roll(40)){if(me)apply({th:-1});else p.th=(p.th||0)-1}if(roll(15)){if(me){apply({danh:BAL.eff.jpet.danhPetMonthOf_2});log(`Lời đồn ngươi nuôi hồ ly trong cung lan ra (Danh ${balSg(BAL.eff.jpet.danhPetMonthOf_2)}).`)}else ap(p,{danh:BAL.eff.jpet.danhPetMonthOf_2})}}});
  if(up){const has=me?S.bac:(p.bac||0);if(has>=up){if(me)apply({bac:-up});else ap(p,{bac:-up})}else{L.forEach(P=>{P.care=(P.care||0)-25;/* the care numbers (jpetcare) are the truth: hunger shows on No */if(P.full!=null){P.full=Math.max(0,P.full-25);P.joy=Math.max(0,(P.joy||0)-10);P.care=Math.round((P.full+(P.clean||0)+P.joy)/3)}});if(me)log(`<span class="r">Không đủ bạc nuôi thú (cần ${up} lượng): thú nuôi đói kém.</span>`)}}}
 function petWeek(){for(const p of [S].concat(petNpcs())){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
   if(p.out){for(let i=L.length-1;i>=0;i--)petLose(p,i,"Nội vụ phủ thu lại khi vào lãnh cung");if(me)log(`<span class="r">Vào lãnh cung, thú nuôi của ngươi bị Nội vụ phủ thu lại hết.</span>`);continue}
@@ -167,14 +167,14 @@ function petWeek(){for(const p of [S].concat(petNpcs())){const L=tsbPets(p);if(!
   for(let i=L.length-1;i>=0;i--){const P=L[i],T=petT(P);let dc=T.dc||8;if(T.pond&&rkOf(p)<3)dc+=5;if(T.weak&&winter)dc+=6;
    if(me){P.care=(P.care||0)-(tsbMaid(S)?Math.ceil(dc/2):dc)}else{P.care=cl((P.care||0)-dc+((p.bac||0)>=(T.up||0)?dc+2:0)-(roll(4)?30:0),0,100)}
    if(petOk(P)){if(T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,sucCap(S));else p.suc=cl((p.suc||0)-2,0,sucCap(p))}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc+BAL.eff.jpet.sucAsthma,0,sucCap(S));else p.suc=cl((p.suc||0)+BAL.eff.jpet.sucAsthma,0,sucCap(p))}
    if(me&&P.care<30&&!P.warn){P.warn=1;if(tsbOn()&&!petCardQ("tsbPetW"))petCard("tsbPetW",{i},"Thú nuôi biếng ăn")}
    if(P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|hac|thienma/.test(P.t)?"bỏ đi mất vì bỏ bê":"yếu dần vì bỏ bê");if(me&&n)log(`<span class="r">${tsbCap(n)} của ngươi bị bỏ bê lâu ngày, không còn nữa.</span>`)}}}}
 function tsbPetWeek(){return petWeek()}function tsbPetMonth(){return petMonth()}
 
 /* ---------------- thẻ sự kiện ---------------- */
 function petLine(t,acc){t=petK(t);const T=PET[t];const sw=petHasFree(S)?"":(()=>{const j=petWorst(S);return j>=0?` · Mất: ${petT(tsbPets(S)[j]).n} phải gửi về Ngự thú viên (đủ ô)`:""})();
- return `thành: có ${T.n} (${PET_TIER[T.tr]}) · ${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu · ${T.use}${sw} · kèm: Xa xỉ +${petLux(t)} · ${T.up?`Bạc -${T.up} mỗi tháng · `:""}${T.bad}${acc||""} · (mỗi tuần phải chăm)`}
+ return `thành: có ${T.n} (${PET_TIER[T.tr]}) · ${PET_SN[T.st]} +${BAL.eff.jpet.followN+(T.sacX||0)} khi theo hầu · ${T.use}${sw} · kèm: Xa xỉ +${petLux(t)} · ${T.up?`Bạc -${T.up} mỗi tháng · `:""}${T.bad}${acc||""} · (mỗi tuần phải chăm)`}
 function petTake(t,from,src){if(!petHasFree(S)){const j=petWorst(S);if(j<0)return null;petLose(S,j,"gửi về Ngự thú viên")}return petAdd(S,t,from,src)}
 /* review/ev-art-fit (owner 15/11): pet events showed the ROOM she stands in; now the picture of what happens — a pet given (gift group),
    the autumn hunt (Đi săn group), caring for a pet (act-cham-thu-nuoi) */
@@ -229,7 +229,7 @@ function petStageTxt(P){return typeof petStage==="function"&&BAL.pet&&BAL.pet.st
 function petAgeTxt(P){const w=Math.max(0,tsbWk()-(P.at||0));return (w>=48?Math.floor(w/48)+" tuổi":Math.floor(w/4)+" tháng tuổi")}
 function petSideHTML(){const sv=typeof isSrv==="function"&&isSrv();if(!S||!(tsbOn()||sv))return"";/* the cung nữ road too: the same (empty) pet slot (maid-8tabs) */const L=sv?[]:tsbPets(S);const i=Math.max(0,L.findIndex((P,j)=>j===S.petOn)),P=L[i];let slot;
  if(P){const T=petT(P),cw=petCareW(P);slot={k:"p"+i,label:T.n,lc:KIT_GRADE[T.tr].c,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]} · chạm để mở Thú cưng`},
-   info:`<span>${petAgeTxt(P)}</span>${S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"<span>ở tẩm cung</span>"}${L.length>1?`<span>+${L.length-1} con nữa</span>`:""}`}}
+   info:`<span>${petAgeTxt(P)}</span>${S.petOn===i?kitChip(PET_SN[T.st],BAL.eff.jpet.followN+(T.sacX||0)):"<span>ở tẩm cung</span>"}${L.length>1?`<span>+${L.length-1} con nữa</span>`:""}`}}
  else slot={k:"e0",label:"Chưa nuôi con nào",i:0,item:null,ghost:petSrc("cho")};
  return kitEquipSlots({key:"pets",title:"Thú cưng",slots:[slot],onPick:()=>{KINV_SUB="thu";try{localStorage.setItem("hclh-inv-sub","thu")}catch(e){}try{renderPanel()}catch(e){render()}},col:true})}
 /* Tư trang › Thú cưng sub-tab: every pet as a kit card (kitSkillCard) + Chăm (jpetcare) / Cho theo hầu / Gửi về, and the shop button */
@@ -237,7 +237,7 @@ function petPanelHTML(){if(!S||S.dead)return"";/* maid-8tabs (owner 21/11 ~03:15
  const shop=pbtn(`data-petshop="1"`,"Nhờ thái giám tìm thú nuôi",free>0?`tốn: 1 khắc, Bạc · thành: một con thú nhỏ về tẩm cung (còn ${free} ô)`:"",free>0?(typeof whyTime==="function"?whyTime(1):""):"hết ô nuôi");
  const cards=L.map((P,i)=>{const T=petT(P),cw=petCareW(P),cur=tsbPetOn(S),B=[];
   B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`thành: cho ăn, tắm chải, chơi (mỗi việc ${BAL.pet.khac} khắc) · No, Sạch, Vui, Tình cảm tăng`,""));
-  if(S.petOn!==i)B.push(pbtn(`data-pet="follow" data-i="${i}"`,"Cho theo hầu",`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""));
+  if(S.petOn!==i)B.push(pbtn(`data-pet="follow" data-i="${i}"`,"Cho theo hầu",`thành: ${PET_SN[T.st]} +${BAL.eff.jpet.followN+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${BAL.eff.jpet.followN+(petT(cur).sacX||0)}`:""}`,""));
   const fromHi=/emp|hunt|trib/.test(P.src||"")||P.from==="Hoàng thượng ban",fromTh=P.src==="th";
   B.push(pbtn(`data-pet="free" data-i="${i}"`,"Gửi về Ngự thú viên",`thành: bớt Xa xỉ ${S.petOn===i?petLux(P.t):Math.round(petLux(P.t)/2)}${T.up?` · thôi tốn Bạc ${T.up} mỗi tháng`:""} · Mất: ${T.n}${fromHi?` · Hoàng thượng phật ý, ${sgStat(-BAL.pet.freeHiSung)}`:fromTh?" · Thái hậu quý ngươi -8":P.src==="hh"?" · Hoàng hậu quý ngươi -3":""}`,""));
   return kitSkillCard({kind:"pet",k:String(i),name:T.n,kicker:`${PET_TIER[T.tr]} · ${petStageTxt(P)} · ${petAgeTxt(P)} · ${S.petOn===i?"theo hầu":"ở tẩm cung"}`,max:0,img:petPSrc(P),
@@ -247,7 +247,7 @@ function petPanelHTML(){if(!S||S.dead)return"";/* maid-8tabs (owner 21/11 ~03:15
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-petshop]");if(!b||b.disabled)return;ev.stopPropagation();petShop()},true);
 /* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
 function petRows(P,i){return kitRows(petRowsL(P,i))}
-function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
+function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${BAL.eff.jpet.followN+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
  const G=[`Xa xỉ ${petLux(P.t)} (theo hầu tính đủ, ở tẩm cung tính nửa)`,P.from?P.from:""].filter(Boolean);/* no "khí lực": the care numbers are the Chăm row (jpetcare) */if(T.rescue)G.push("chỉ đỡ được một lần");
  return [["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]]}
 /* bag-inline-3 F2: the old petPick pop-up (a pet tile opened kitModal info) was dead code, never wired to a tile (the side pet tile opens the Thú cưng sub-tab; the pet cards there are kit cards with their acts inline) — removed; the pet SHOP (petShop, kitShop) is an act dialog and stays. */
@@ -259,9 +259,9 @@ function petBuyOne(t,p){const T=PET[t];if(p&&p!==S){if(!T||!T.pr||(p.bac||0)<T.p
 function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
  return PETK.filter(k=>PET[k].pr).map(k=>{const T=PET[k],o=petBuyO(k),t1=whyTime(1);
   const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Cơ may",`${word(o)} (tùy Tai mắt của ngươi${T.tr?"; con càng quý càng khó tìm":""}) · tốn 1 khắc`],
-   ["Được",[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use],"g"],["Mất",[T.bad].concat(T.up?[`Bạc -${T.up} mỗi tháng`]:[],["hỏng: mua phải con ốm, mất bạc"]),"r"],["Ghi chú",[`Xa xỉ ${petLux(k)}`,`về tay còn Non, nuôi mới lớn`],"n"]]);
+   ["Được",[`${PET_SN[T.st]} +${BAL.eff.jpet.followN+(T.sacX||0)} khi theo hầu`,T.use],"g"],["Mất",[T.bad].concat(T.up?[`Bạc -${T.up} mỗi tháng`]:[],["hỏng: mua phải con ốm, mất bạc"]),"r"],["Ghi chú",[`Xa xỉ ${petLux(k)}`,`về tay còn Non, nuôi mới lớn`],"n"]]);
   return{k,src:petSrc(k,0,sfx),src512:petSrc(k,1,sfx),name:T.n,sub:`${PET_TIER[T.tr]} · Xa xỉ ${petLux(k)}`,grade:T.tr,lux:petLux(k),price:T.pr,
-   eff:`${PET_SN[T.st]} +${1+(T.sacX||0)}`/* shop-panel-r2: ONE short gain row; odds + use are on the item card */,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
+   eff:`${PET_SN[T.st]} +${BAL.eff.jpet.followN+(T.sacX||0)}`/* shop-panel-r2: ONE short gain row; odds + use are on the item card */,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
    onBuy:(x,q)=>{for(let i=0;i<q;i++)if(!petBuyOne(k))break}}})}
 function petShop(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";try{if(nm&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}/* same seller + naming as kitShopNvp */
  return kitShop({key:"pet",title:"Nhờ thái giám tìm thú nuôi",carry:Math.max(0,petMax(S)-tsbPets(S).length),

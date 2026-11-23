@@ -17,9 +17,9 @@ function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,sucC
 function tchFee(k){return artFee(S.arts[k])}
 function tchPaid(k){}
 function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg||l>=5)return;let c;
- if(mode==="self"){if(!can(2)||S.suc<BAL.sucNeed.self)return;c={suc:-15}}
- else if(mode==="th"){if(!can(2)||S.th<40||(S.buoi||0)!==0||S.thDead)return;c={suc:-10,th:3}}
- else{if(!can(2)||S.bac<cost)return;c={suc:-10,bac:-cost,tch:k}}
+ if(mode==="self"){if(!can(2)||S.suc<BAL.sucNeed.self)return;c={suc:-BAL.artLes.self}}
+ else if(mode==="th"){if(!can(2)||S.th<40||(S.buoi||0)!==0||S.thDead)return;c={suc:-BAL.artLes.th,th:3}}
+ else{if(!can(2)||S.bac<cost)return;c={suc:-BAL.artLes.tch,bac:-cost,tch:k}}
  c.khac=2;/* KIT §13.9 (j82 kgDefer): the lesson's charge is taken on «Sẵn sàng»; the ✕ before it is a free back */
  const open=()=>{S.mg={k,l,mode};save();render();resumeMG()};if(typeof kgDefer==="function")kgDefer(c,open);else{const f={suc:c.suc};if(c.bac)f.bac=c.bac;if(c.th)f.th=c.th;apply(f);if(c.tch)tchPaid(k);spend(2);open()}}
 (function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);

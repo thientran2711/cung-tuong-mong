@@ -127,7 +127,7 @@ kinvGroups=function(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e
   return Object.assign(x,{cat:"tp",name:w.n,grade:econWkGrade(w),src:a?a.src:x.src,src512:a?(a.src512||a.src):x.src512,tip:`${w.n} · ${KIT_GRADE[econWkGrade(w)].n}`})})}})();
 function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a);const gr=KIT_GRADE[econWkGrade(w)];const t1=whyTime(1),t2=whyTime(2);
  const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: 2 khắc · thành: chọn người (Hoàng thượng, Thái hậu, phi tần), quý theo phẩm (${gr.n}: ${BAL.craftGift[econWkGrade(w)]})`,t2),econSellBtn(i),
-  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh -3, mất tác phẩm`,t1)];
+  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh ${balSg(BAL.eff.j83.danhWkSell)}, mất tác phẩm`,t1)];
  if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
  /* the rows = KIT §70 kitItemDetailRows (same Phẩm · Loại · Được · Lai lịch · Ghi chú as every item) */
  const rows=kitItemDetailRows({ix:i});
@@ -172,7 +172,7 @@ function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
-A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),x:"không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh -2",f:(a,t)=>{
+A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),x:`không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh ${balSg(BAL.eff.jecon.danhF)}`,f:(a,t)=>{
  if(aRoll(oddsCl(oSpy(a)-BAL.selfMinus),a)){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
  relAdd(a,t,BAL.eff.jecon.f);ap(a,{danh:BAL.eff.jecon.danhF});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh ${balSg(BAL.eff.jecon.danhF)}. `}});
 /* RECEIVER CHOICE (OD 18/11 ~21:15Z, no forced action): her trusted maid is the ORDERED one (j29 runAct: DIRTY + DIRTY_SENT → jagstf2 stf2Ord, obey / refuse /
@@ -189,7 +189,7 @@ function rcvBlockGo(p,v,t,pen){relAdd(v,p,-BAL.favorCost);const c=caught(p,t,fal
 A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor(a)&&!t.block,o:a=>oBlock(a),xw:(a,t)=>{const v=econFavor(a);return v&&typeof rcvWord==="function"?`${v===S?"ngươi":v.name}: ${rcvWord(v,a)}`:""},x:`không tốn bạc · người quen của ngươi trả ơn: thiện cảm -${BAL.favorCost} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách · thành: 2 tuần nàng không được lật thẻ`,f:(a,t)=>{
  /* RECEIVER CHOICE (jrcv RCVK.blockf, OD 18/11 ~21:15Z): the acquaintance answers (her: a card) */const v=econFavor(a);if(!v)return"";return rcvAsk("blockf",a,v,key(t))}});
 try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["blockf","Hại nặng"]]){const G=RVGRP.find(x=>x[0]===g);if(G&&!G[1].includes(k))G[1].push(k);ACTDOM[k]=ACTDOM[k]||"Mưu kế"}
- AOUT.spyk=aoLz(()=>`nắm thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ, Tâm cơ +1`/* previews: spyFind */,`bị bắt gặp: Danh -2, nàng thù ${balSg(BAL.eff.jecon.f)}`);AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
+ AOUT.spyk=aoLz(()=>`nắm thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ, Tâm cơ +1`/* previews: spyFind */,`bị bắt gặp: Danh ${balSg(BAL.eff.jecon.danhF)}, nàng thù ${balSg(BAL.eff.jecon.f)}`);AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
  J78VERB.spyk="tự dò la {t}";J78VERB.bribel="sai cung nữ lấy lòng người của {t}";J78VERB.blockf="nhờ người rút thẻ bài của {t}"}catch(e){}
 /* watched more at high rank */
 (function(){const c0=caught;caught=function(a,t,ps,desc){const r=c0.apply(this,arguments);try{if(r&&a&&rkOf(a)>=BAL.watchRank){const n=rkOf(a)-BAL.watchRank+1;ap(a,{danh:-n});return r+`Phẩm cao, nhiều mắt nhìn: Danh -${n}. `}}catch(e){}return r}})();
