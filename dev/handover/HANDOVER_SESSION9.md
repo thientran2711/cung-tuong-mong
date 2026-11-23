@@ -2477,3 +2477,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 02:40Z) 107 opened MAIN CHÍNH 108 = session_01Rc5AsL9VpiVSGvAECNciWk (child, depth 1). 107 now relay-only: forwards late messages to 108 until 108 disables trig_01CSSZ2MWEyuaVZNBKNeY1xw.
 - (23/11 02:36Z) MAIN CHÍNH 108 = session_01Rc5AsL9VpiVSGvAECNciWk; START_CTX ~6 % (used_tokens reads 0, own estimate) → roll line 31 %, ceiling 60 %; depth 1 (limit 8). Worktree /home/user/wt/ho108, push /home/user/wt/hpush108.sh.
 - (23/11 02:36Z) LOAD: main running 1 (KIT KEEPER #7 jbody merge fix = UI/kit) | B free 0 (coop-thin-g F1 #10 running; rkOfFace queued) | C free ~ (helper only; no open order) | D free 0 (coop-real-port) | moved: none
+- (23/11 02:36Z) TRIGGERS: 108 hourly wake trig_01YWv7JaTkWDf6sV7wxESQx5 (min 32) created; 107 wake trig_01CSSZ2MWEyuaVZNBKNeY1xw DISABLED. Sent 'main is now 108' to LC5, KIT KEEPER #7, 107.
