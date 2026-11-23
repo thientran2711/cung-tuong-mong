@@ -85,3 +85,6 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 ## ADDENDUM 15 (MAIN 112, 23:00Z) — SẮC PHONG NEWS SCREEN (owner OD 23/11 ~23:08Z, read verbatim)
 - Right after the edict scene: a clear SẮC PHONG NEWS screen listing each girl she now knows (round-mates + befriended): face + name (if known) + new rank, ONE KIT ROW each (kit part only; missing → KIT REQUEST). Never skipped, never silent.
 - Standing whole-game rule (every time she learns a name/rank/face/relation/secret she gets a clear notice) is a separate MAIN job KNOW-NOTICE; use its shared notice part once it exists (coordinate via MAIN).
+
+## ADDENDUM 16 (MAIN 112, 23:05Z) — CAP VALUE (owner OD 23/11 ~23:12Z, read verbatim; OVERWRITES the cap value of Addendum 9)
+- The +1 must work for the TOP origin too: Cháu gái Thái hậu (enters Quý nhân) + top result → Tần. BAL.entry.cap = top-origin entry rank + 1 (Tần), so the cap never blocks a +1.
