@@ -1632,3 +1632,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 109 (23/11 09:31Z): LIVE = 5db0422e (C GAPART1 art landed). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:45Z): LIVE = e9c0a43d (KIT-AP01 story frames). Merge it before SSK.
 - FROM MAIN 109 (23/11 10:00Z): LIVE = e6894660 (B outing-art). Merge it before SSK.
+- (23/11 10:10Z) WAKE — FOREMAN E ROOT ctx ~23 % (roll ~31 %). MAIN = CHÍNH 109. LIVE e6894660 (B outing-art; C GAPART1; KIT-AP01). N12 E52r session_01DgYSWoqDDy9Pew1WPPrqw9 (ctx 20 %): merged LIVE, unit 46/46 on the merge, two 76 wk scans running → final gates → LAND READY. N17 rest: opened E44i session_01DgYSWmaqyZPCXvsVq4J3xK (opus, depth 1, briefs/E44i-coop-famops-t2.md) on review/coop-famops-t2 stacked on -t1 b4050ca3: T2/T3/T4/T7/T9 roots + fixes → SSK. SEATS 2 + foreman (E52r, E44i).
