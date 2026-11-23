@@ -1,7 +1,7 @@
 /* palace-intrigue events: each is {id, ok (gate), pp (params, saved), b (builder from params)}; registered in PEND so a pending one survives reload */
 const EV=[];const EVI={};
 function ev(id,ok,pp,b){const e={id,ok,pp,b};EV.push(e);EVI[id]=e;PEND[id]=b}
-function mkEv(id){const e=EVI[id];if(!e)return null;const pp=e.pp?e.pp():{};if(pp===null)return null;S.seen=S.seen||{};S.seen[id]=S.turn;return mkP(id,pp)}
+function mkEv(id){const e=EVI[id];if(!e)return null;const pp=e.pp?e.pp():{};if(pp===null)return null;S.seen=S.seen||{};S.seen[id]=S.turn;const d=mkP(id,pp);if(d&&typeof nrMark==="function")nrMark("j7",id);/* ORDER THIN: cross-life memory */return d}
 function evFresh(e){const s=S.seen&&S.seen[e.id];return s==null||S.turn-s>=12}
 function freshEvents(){return EV.filter(e=>{try{return evFresh(e)&&e.ok()}catch(x){return false}})}
 const KID=n=>S.kids.find(k=>k.name===n&&k.alive)||null;
