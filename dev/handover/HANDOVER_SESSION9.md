@@ -2699,3 +2699,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:55Z) Owner flies Wed 25/11: verified offline reload of LIVE build (local serve, SW controls, title + menu render offline). Assets: core 837 files 53 MB + fig 610 files 121 MB auto-cached; lazy 30 652 files 4.2 GB only when shown (no 'download all' sensible). Told her the pre-flight checklist.
 - (22:56Z) W5 offline-all sonnet session_01Rc5AsHib54y5c78kFHKKFC (deadline before Wed 25/11) → on READY open SMALL rv-lander fast.
 - (22:58Z) Owner offered another foreman → MAIN advised ONE art foreman F (MGSKIN moved from C so C finishes SELART + KP10 by Wed). Files FOREMAN_F.md + FOREMAN_F_STATUS.md written; paste block given to sếp.
+- (22:59Z) LANDED ky-keeper-f2 3e8981e1 (LC8). LIVE = 3e8981e1. W1 + rv archived. SELSCENE MOCK READY (fold 2:42 / ipad 2:44) → frames looked → mp4s sent to sếp; waiting her OK/fixes. SELSCENE adds KIT REQUEST (5) bare option card + result card for KK13.
