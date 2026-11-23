@@ -9,12 +9,15 @@ const SCR=()=>{let e=document.getElementById('panel');while(e&&e!==document.body
  const d=document.scrollingElement;return d.scrollHeight>d.clientHeight+60?d:null};
 const DISMISS=()=>{let n=0;for(let r=0;r<4;r++){const vis=e=>!!(e&&!e.hidden&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none');
   const g=[...document.querySelectorAll('button')].filter(b=>vis(b)&&!b.closest('#panel')&&/^Đã hiểu$/.test(b.textContent.trim())&&!b.closest('#modal')&&!b.closest('.kmbox'));g.forEach(b=>b.click());n+=g.length;
-  const L=[...document.querySelectorAll('#modal,.kmbox,#kmrew,.kmov,#dawn')].filter(vis);if(!L.length&&!g.length)break;
+  /* stage dialogue scenes (random cung nữ talk) advance with «Tiếp▸» outside the panel */
+  const t=[...document.querySelectorAll('button')].filter(b=>vis(b)&&!b.closest('#panel')&&!b.closest('#modal')&&!b.closest('.kmbox')&&/^Tiếp\s*▸?$/.test(b.textContent.trim()));t.forEach(b=>b.click());n+=t.length;
+  const L=[...document.querySelectorAll('#modal,.kmbox,#kmrew,.kmov,#dawn')].filter(vis);if(!L.length&&!g.length&&!t.length)break;
   for(const e of L){const x=e.querySelector('[data-km-close]');const b=[...e.querySelectorAll('button')].find(b=>vis(b)&&/^(Nhận|Đóng|Thôi|Tiếp|Đã hiểu|Đã rõ|Xong)/.test(b.textContent.trim()));
    if(x)x.click();else if(b)b.click();else{e.hidden=true}n++}Q.length=0}
  try{render()}catch(e){}return n};
-async function view(f,shot,group,title){if(await f.evaluate(DISMISS))await f.waitForTimeout(500);await f.evaluate(`(()=>{const e=(${SCR})();if(e)e.scrollTop=0})()`);await shot(group,title);
- const sc=await f.evaluate(`(()=>{const e=(${SCR})();if(!e)return 0;e.scrollTop=e.scrollHeight;return 1})()`);if(sc){await f.waitForTimeout(350);await shot(group,title+' (cuộn xuống)')}
+async function view(f,shot,group,title){/* delayed overlays (edict/bloom .kmov, birth cards) arrive ~0.5-1 s after a tab switch: dismiss until two quiet checks in a row (22/11 refresh) */
+ for(let q=0,i=0;q<2&&i<8;i++){if(await f.evaluate(DISMISS)){q=0;await f.waitForTimeout(600)}else{q++;await f.waitForTimeout(500)}}await f.evaluate(`(()=>{const e=(${SCR})();if(e)e.scrollTop=0})()`);await shot(group,title,'',1);
+ const sc=await f.evaluate(`(()=>{const e=(${SCR})();if(!e)return 0;e.scrollTop=e.scrollHeight;return 1})()`);if(sc){await f.waitForTimeout(350);await shot(group,title+' (cuộn xuống)','',1)}
  await f.evaluate(`(()=>{const e=(${SCR})();if(e)e.scrollTop=0})()`)}
 /* modal visible? + click first real option */
 const MODAL_ON=()=>{const vis=e=>!!(e&&!e.hidden&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden');const m=document.getElementById('modal');return vis(m)||[...document.querySelectorAll('.kmbox')].some(vis)};
@@ -26,12 +29,12 @@ async function richWalk(ctx,group,opt,onlyTabs){const {f,shot,walk,seed}=ctx;awa
   const ks=await f.evaluate(()=>{const row=document.querySelector('#panel [data-ktsub]');return row?[...row.querySelectorAll('[data-ktsv]')].map(b=>[b.dataset.ktsv,b.textContent.trim().replace(/\s+/g,' ')]):[]});
   for(const [k,kn] of ks.slice(1)){await f.evaluate(k=>{const b=document.querySelector(`#panel [data-ktsub] [data-ktsv="${k}"]`);if(b)b.click()},k);await f.waitForTimeout(450);await view(f,shot,group,t+' › '+kn)}
   if(ks.length>1)await f.evaluate(k=>{const b=document.querySelector(`#panel [data-ktsub] [data-ktsv="${k}"]`);if(b)b.click()},ks[0][0]);
- },onlyTabs)}
+ },onlyTabs,()=>f.evaluate(DISMISS))}
 module.exports.list=[
  {k:'tabs',run:async c=>richWalk(c,'A. Tab — đời đầy đủ (Quý phi, có phe, có con)',{org:'tt',rank:5})},
  {k:'queen',seed:777,run:async c=>{await richWalk(c,'B. Tab — khi ta là Hoàng hậu',{org:'tt',rank:7,queen:1},['court','rel','kid'])}},
 ];
-module.exports.h={clean,view,waitModal,pickFirst,MODAL_ON};
+module.exports.h={DISMISS,clean,view,waitModal,pickFirst,MODAL_ON};
 /* ---------- popups / dialogs in filled states ---------- */
 const H=module.exports.h;
 const NOMOV=()=>{document.querySelectorAll('.kmov').forEach(e=>{if(e.getClientRects().length){e.hidden=true;e.classList.remove('on')}});[...document.querySelectorAll('button')].filter(b=>b.getClientRects().length&&/^Đã hiểu$/.test(b.textContent.trim())&&!b.closest('#modal,.kmbox,#panel')).forEach(b=>b.click())};
@@ -59,8 +62,10 @@ module.exports.list.push(
   await chain(c,G,'Hôn sự — Bàn hôn sự cho công chúa 17 tuổi',3)}},
  {k:'night',run:async c=>{const {f}=c;await rich(c,{org:'tt',rank:2,nokids:1});await f.evaluate(()=>{nightScene();showModal()});await chain(c,G,'Thị tẩm — Chuẩn bị thị tẩm',4)}},
  {k:'dress',run:async c=>{const {f,shot}=c;await rich(c);await f.evaluate(()=>{try{toilOpen()}catch(e){console.log('dress',e.message)}});await f.waitForTimeout(2500);await f.evaluate(NOMOV);await f.waitForTimeout(600);await shot(G,'Trước gương đồng — chọn y phục (kitDressPicker)')}},
- {k:'mg',run:async c=>{const {f,shot}=c;await rich(c,{org:'tt',rank:3,nokids:1,nofac:1});const kinds=await f.evaluate(()=>Object.keys(KG82_KIND));console.log('kinds',kinds.length);
+ {k:'mg',run:async c=>{const {f}=c;await rich(c,{org:'tt',rank:3,nokids:1,nofac:1});const kinds=await f.evaluate(()=>Object.keys(KG82_KIND));console.log('kinds',kinds.length);
   const MG='D. Trò chơi nhỏ — màn kết quả';
+  /* the promotion edict (Thánh chỉ, .kmov) left by the seed covered every result screen in the first refresh: hide it before each shot (22/11) */
+  const shot=async(g,t)=>{await f.evaluate(NOMOV);await f.waitForTimeout(400);await f.evaluate(NOMOV);return c.shot(g,t)};
   const reset=()=>f.evaluate(()=>{try{kg82Close()}catch(e){}document.querySelectorAll('.kmbox').forEach(b=>{let r=b;while(r.parentElement&&r.parentElement!==document.body)r=r.parentElement;r.remove()});const k=document.getElementById('krkov');if(k)k.remove()});
   const skip=async()=>{await f.waitForTimeout(900);await f.evaluate(()=>{const b=document.getElementById('kg82skip');if(b)b.click()});let res=false;
    for(let t=0;t<30&&!res;t++){await f.waitForTimeout(250);res=await f.evaluate(()=>{const r=document.getElementById('kg82box-res');return !!(r&&!r.hidden&&r.textContent.trim())})}return res};

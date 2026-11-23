@@ -29,3 +29,8 @@ The life is seeded through the game's own functions (seed.js): Quý phi (rank 5)
 - Known small defects (looked at every page): a few after-choice shots show a result toast over the view (e.g. p.92–93 Fold, p.66–67 iPad queen Chí tôn); some cung nữ page titles name the popup that was queued while a «Lệ tháng» reward card was on top; tutorial page titles carry extra card text.
 - Pages: 188 (TOC 2 + 186 frames), 23.9 MB, one file.
 - Build is c3a398dd; main moved to 64d2e094 during the run (MAIN 85). Re-run on newest main: `node dev/test/ui-tour-states/cap.js <fold|ipad> <dir>` then compose (README).
+
+
+## Refresh 22/11 (HELP-M14) on LIVE main d1a36374
+- Rebuilt on main d1a36374 (merged into this branch); 182 pages (TOC 3 + 179 frames... see report), 22.6 MB. Fixes in the capture scripts: delayed overlays (edict/bloom/reward/servant cards, stage dialogue «Tiếp▸») are dismissed before each tab shot; sub-tab row retry in walk.js; promotion edict no longer covers the 43 mini-game result pages.
+- Still: Fold has no «cuộn xuống» twin where the Fold panel does not scroll (blank «không chụp được»); iPad-only/Fold-only random cung nữ popups; some detail pages show a grey figure ghost (sprite not loaded at shot time); mini-game result card is a thin card (game design, not a capture bug).
