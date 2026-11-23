@@ -21,7 +21,7 @@ const KDR_BG="img/kit/bg-default.webp";
    reports/display-bg.md (measured slot points) lands: then paste its slot arrays into KDR_PIC.*.slots / .segs[].slots; nothing else changes. Picture missing on the CDN = the stub look (.kdr-nopic). */
 const gridSlots=(cols,rows,m)=>{m=m==null?.035:m;const w=(1-2*m)/cols,h=(1-2*m)/rows,o=[];for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)o.push({cx:m+w*(c+.5),fy:m+h*(r+1)-h*.06,w:w*.92,h:h*.88});return o};
 const KDR_PIC={land:{segs:[{src:"img/display/cabinet-land.webp",ar:1.5,slots:gridSlots(2,6)}]},
- port:{segs:[{src:"img/display/cabinet-port.webp",ar:.42,slots:gridSlots(1,12)}]}};
+ port:{segs:[{src:"img/display/cabinet-port-1.webp",ar:2/3,slots:gridSlots(1,6)},{src:"img/display/cabinet-port-2.webp",ar:2/3,slots:gridSlots(1,6)}]}};
 const kv2=()=>document.documentElement.classList.contains("kv2");
 const GFIX=[["cay","Cây cảnh"],["chuong","Chuông gió"],["rem","Rèm, mành"],["phong","Bình phong"],["su","Đồ sứ"],["tranh","Tranh, thư pháp"],["van","Văn phòng tứ bảo"],["nhac","Nhạc khí"],["ngoc","Ngọc khí"],["huong","Lư hương"],["den","Đèn, lồng"],["tham","Thảm, gối tựa"]];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -150,7 +150,7 @@ const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)
 /* the room is her room's view: leaving the game (title screen) closes it */
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{if($k()&&(typeof S==="undefined"||!S||S.dead))kitDisplayRoomClose();else if($k()){place()}}catch(e){}return r};window.render=render}catch(e){}
 /* ---------- rail icon (KIT §77): only when the real data API exists ---------- */
-try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"img/kit/ico-room.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
+try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"img/kit/ico-disp.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
 window.kitSetLines=kitSetLines;window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
 /* ---------- css ---------- */
 const css=document.createElement("style");css.id="kit-disp";css.textContent=`
