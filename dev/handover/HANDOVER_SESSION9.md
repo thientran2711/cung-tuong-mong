@@ -2585,3 +2585,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:35Z 23/11) OWNER: "Rồi tài khoản chính làm gì mà không phụ tụi nó đi." → MAIN takes whole jobs: (1) F2 LIVE item-vanish family W1 session_01Rc5AsJaFJSoKrXkhjQ2zdv (E told not to open its row); (2) ROBOT-10 phase 2 td + ch moved D → MAIN (OD plan row edited in place). C rooms: correction (pick page was her request).
 - (19:37Z 23/11) OWNER: robots start as soon as the harness lands (no wait). Explained: robot ≠ worker; 2 runners per thân phận + 1 fixer per account. Heads-up written to B/C/D/E.
 - (19:51Z 23/11) OWNER: 2 kiếp too few → 5 kiếp/bot/round (2000 lives/round) + continuous background runs after 2 clean rounds. OD plan row edited in place; B/C/D/E told.
+- (19:52Z 23/11) OWNER: co-op robots 10 kiếp per pair (200 co-op lives/round) → OD row + B order.
