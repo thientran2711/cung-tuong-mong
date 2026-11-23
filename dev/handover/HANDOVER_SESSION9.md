@@ -2717,3 +2717,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - MAIN 111 session_01Rc5AsND3CwtWZx1yyFP5Lp still relays owner rows → SELSCENE addenda.
 - Wake: trig_011S5WL6D3HQFgDD2TCkpRAZ (min 32) → 114 creates its own and disables this one. Push script pattern dev/tools/main-hpush.sh (113's: /home/user/wt/hpush113.sh, fetch with explicit refspec).
 - (23:23Z) Opened MAIN CHÍNH 114 = session_01Rc5AsJ9cyBfxnzFoPSAU2V (depth 7). 113 stops after 114 confirms (114 disables trig_011S5WL6D3HQFgDD2TCkpRAZ).
+- (23:25Z, 113 after handover) W5 READY offline-all 3bf27ac7 → SMALL rv-lander session_01Rc5AsJjPE1Lvb1iuMsiN2m opened by 113; reports to 114. 114 told.
