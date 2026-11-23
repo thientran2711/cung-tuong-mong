@@ -1248,3 +1248,16 @@ SLEEP = STANDBY PASTE BLOCK (owner 18/11 ~07:45Z): when the owner says she is go
 - FROM MAIN 111 (20:48Z 23/11): OWNER ORDER #3 (OD row ~20:55Z, verbatim there): rates report must have (a) ONE ROW PER KIẾP: kiếp no., thân phận+nhánh, bot, total real minutes, in-game years, highest rank, ending (type), death cause; (b) AVERAGES table: mean/median/fastest/slowest minutes per kiếp — per thân phận, per ending type, overall; (c) short plain «cách tính» note (pace model numbers). Output also as CSV next to the .md so MAIN can turn it into a PDF/table for her.
 - (23/11 20:50Z, D child) ORDERS MAIN 110 20:33Z + MAIN 111 20:46Z read. robot10 worker FciAUDi8 told: coverage 36 arcs + bd + pf + dan (exact list+count), locked arcs play-until-open, OWNER metrics (death cause/stage, max rank, every ending) + robot10-agg.js → robot/rates-<date>.md; asked to send soft-lock/Hạ độc repro now. CLAIMS (all with source_url): fix-evening-softlock (TOP) + fix-hadoc-loop | session_01964izCj26a6VP5u2Sr3qT5 (opus) · odds-ladder-words | session_01964izG87jYFUEWkiatPXTX (sonnet; words only, kit-odds-row is the kit keeper's) · fix-kframe-heir | session_01964izF3TRAfuFcfdQV1Lie (opus) · typed-stat-bal (352 family, BIG) | session_01964izBsY2xJwtJ9Zr9pzuF (opus). PRIORITY #1 lines in each brief (briefs/D-softlock-hadoc.md, D-odds-ladder.md, D-kframe-heir.md, D-typed-stat-family.md).
 - last wake: 23/11 20:50Z (D child GQbgvTAn; context ≈ 16 % est., rollover 31 %). MAIN = CHÍNH 111 session_01Rc5AsND3CwtWZx1yyFP5Lp. Seats (5): robot10 FciAUDi8 (no push; patch via message), softlock Cj26a6VP, odds G87jYFUE, kframe F3TRAfuF, typed-stat BsY2xJwt.
+- FROM MAIN 111 (20:50Z 23/11): OWNER ORDER #4 (OD row ~21:00Z): rate of EACH death cause + MAIN-widened metric set. Enumerate from code (every die(why) ≈24 distinct + every over(title) ending; write the full list with count in the report; any cause/ending with 0 hits across the round = flag «chưa ai gặp» (maybe unreachable)). Per life JSON + agg tables:
+  1 DEATH: cause, age, rank at death, kiếp minute, who caused it (NPC/scheme/fate/illness/childbirth/poison/execution), was she framed; rate per cause overall / per thân phận / per age band / per rank.
+  2 ENDINGS: every ending title (thường / kỳ ngộ / đại kết cục / rare / exile / lãnh cung / xuất cung / death), rate + mean real minutes to reach.
+  3 RANK: highest rank distribution, real minutes + in-game years to each rank step, demotions, lãnh cung entries.
+  4 FAMILY: pregnancy, births (son/daughter), child deaths, Thái tử made, heir lost.
+  5 FAVOR/SCHEMES: thị tẩm count, peak Sủng, times framed (won/lost), schemes she ran (won/lost).
+  6 ECONOMY: bạc peak/end, «hết bạc» rate.
+  7 MINI-GAMES: win rate per game per rank band (law 5 check: must fall as rank rises).
+  8 KỲ NGỘ: count per life, which ones.
+  9 BALANCE FLAGS: options chosen ≥90 % or ≤2 % when offered (law 2), roads never reached.
+  10 HEALTH: soft-locks, JS errors, stuck buổi per life (bug list).
+  11 TIME: total real minutes per kiếp + cumulative over the kiếp series (e.g. 10 kiếp = N giờ), as ordered #2/#3.
+  Output .md + .csv per round.
