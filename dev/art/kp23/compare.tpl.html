@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>So tranh hành động KP23</title>
+<style>
+:root{--bg:#1d1613;--card:#2b211c;--tx:#f3e6d3;--mut:#b9a58c;--gold:#e0b25a;--ok:#4caf6a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,sans-serif;padding-bottom:90px}
+header{position:sticky;top:0;z-index:5;background:#120d0b;padding:10px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #4a382c}
+header b{flex:1;min-width:140px}#cnt{color:var(--gold);font-weight:700}
+button{font:inherit;font-weight:700;background:var(--gold);color:#241a10;border:0;border-radius:10px;padding:12px 18px;min-height:48px}
+button.s{background:#4a382c;color:var(--tx)}
+.row{margin:12px;background:var(--card);border-radius:14px;padding:10px}
+.nm{font-weight:700;margin-bottom:8px}.nm small{display:block;color:var(--mut);font-weight:400;font-size:12px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cell{display:block;border-radius:10px;border:3px solid transparent;padding:4px;cursor:pointer}
+.cell img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#000;display:block}
+.cell .lb{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;font-weight:700;min-height:48px}
+.cell input{width:34px;height:34px;accent-color:var(--ok)}
+.cell.on{border-color:var(--ok);background:#1f3a29}
+.hd{color:var(--mut);font-size:13px;text-align:center}
+#msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#000;border:1px solid var(--gold);padding:12px 16px;border-radius:10px;display:none;z-index:9;max-width:90vw}
+</style></head><body>
+<header><b>So tranh hành động (194 cảnh)<br><span style="font-weight:400;font-size:13px;color:var(--mut)">Trái: tranh cũ trong game · Phải: tranh mới. Tích vào bên muốn giữ.</span></b>
+<span>Đã tích: <span id="cnt">0</span></span><button id="send">Gửi lựa chọn</button><button class="s" id="clr">Xoá hết</button></header>
+<main id="m"></main><div id="msg"></div>
+<script>
+const B='https://ctm-img.victoria-tntt.workers.dev/img/',ROWS=/*ROWS*/[],LS='kp23-picks';
+let P={};try{P=JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(P))}catch(e){}};
+const m=document.getElementById('m');
+function cell(k,side,src,lab){const l=document.createElement('label');l.className='cell';l.dataset.k=k;l.dataset.s=side;
+ l.innerHTML='<img loading="lazy" decoding="async" alt="">'+'<div class="lb"><input type="checkbox"><span>'+lab+'</span></div>';
+ l.querySelector('img').src=src;const c=l.querySelector('input');c.checked=P[k]===side;l.classList.toggle('on',c.checked);
+ c.onchange=()=>{if(c.checked)P[k]=side;else if(P[k]===side)delete P[k];save();sync()};return l}
+ROWS.forEach(([k,n])=>{const r=document.createElement('div');r.className='row';r.dataset.k=k;
+ const t=document.createElement('div');t.className='nm';t.textContent=n;const p=document.createElement('div');p.className='pair';
+ p.append(cell(k,'old',B+'act-'+k+'-h.webp','Giữ cũ'),cell(k,'new',B+'act-'+k+'.webp','Giữ mới'));r.append(t,p);m.append(r)});
+function sync(){document.querySelectorAll('.cell').forEach(l=>{const on=P[l.dataset.k]===l.dataset.s;l.classList.toggle('on',on);l.querySelector('input').checked=on});
+ document.getElementById('cnt').textContent=Object.keys(P).length+'/'+ROWS.length}
+function txt(){const n=[],o=[];ROWS.forEach(([k])=>{if(P[k]==='new')n.push(k);else if(P[k]==='old')o.push(k)});return 'KP23 PICK: new='+n.join(',')+' old='+o.join(',')}
+function msg(s){const e=document.getElementById('msg');e.textContent=s;e.style.display='block';clearTimeout(msg.t);msg.t=setTimeout(()=>e.style.display='none',3500)}
+document.getElementById('send').onclick=async()=>{const s=txt();try{await navigator.clipboard.writeText(s);msg('Đã sao chép '+Object.keys(P).length+' lựa chọn. Dán vào khung chat chính.')}catch(e){const ta=document.createElement('textarea');ta.value=s;document.body.append(ta);ta.select();try{document.execCommand('copy');msg('Đã sao chép. Dán vào khung chat chính.')}catch(x){msg('Không chép được — bấm giữ để chép: '+s)}ta.remove()}};
+document.getElementById('clr').onclick=()=>{if(confirm('Xoá hết lựa chọn?')){P={};save();sync()}};
+sync();
+</script></body></html>

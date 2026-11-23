@@ -39,7 +39,7 @@ STATE = os.path.join(R, "dev", "site", ".cdn-state.json")  # untracked: md5 of m
 TOPS = ("img",)  # audio/ (4.6 MB, rarely changes) stays in git
 INDEX = "img/_index.json"
 TYPES = {"webp": "image/webp", "png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "image/gif", "svg": "image/svg+xml",
-         "avif": "image/avif", "json": "application/json", "txt": "text/plain; charset=utf-8", "mp3": "audio/mpeg", "ogg": "audio/ogg",
+         "avif": "image/avif", "json": "application/json", "txt": "text/plain; charset=utf-8", "html": "text/html; charset=utf-8", "mp3": "audio/mpeg", "ogg": "audio/ogg",
          "m4a": "audio/mp4", "woff2": "font/woff2", "mp4": "video/mp4", "webm": "video/webm"}
 SKIP = (".DS_Store", "Thumbs.db")
 
