@@ -33,3 +33,10 @@ Ledger 5 lines; MA_HINH M2370-47..51.
 swap_L2370.py picks the highest rN: a-ca-so←-47 (r7), ngu-thu-phong←-48 (r6), tu-ninh-cung←-49 (r5), dong-cung←-51 (r5), thuong-thu-phong←-41 (r7), phi-tan-cung←-43 (r3). Its dry run needs every review picture downloaded locally first. Khôn Ninh: no swap.
 ## 29 rooms: CANCELLED (ROOT-C5 00:17Z: MAIN 106 order — Group 2 CLOSED, C stops painting). Not started.
 ## STATE: STOPPED. No more gens. Total 675 cr (4 planned redos + 1 Đông cung retry, -50 self-rejected). Open: owner verdict on the L2391 sheet → swap only after her OK.
+
+## N13 SWAP DONE (ROOT-C6 GO 05:39Z; owner 23/11 03:25Z via MAIN 107 verbatim "Bây giờ á, tranh vẽ xong rồi thì thay luôn đi, chứ có gì đâu mà phải đợi tôi.")
+- `swap_L2370.py --go` → CDN: a-ca-so ← -47, ngu-thu-phong ← -48, tu-ninh-cung ← -49, dong-cung ← -51, thuong-thu-phong ← -41, phi-tan-cung ← -43 (6 uploaded, 9 same, nvp + tu-ninh-cung-ngu skipped as before). Khôn Ninh untouched. 0 cr.
+- Captions decapped (checked top-left of all 6). Only the hạ-sáng base changed; each place's other 15 season×buổi variants are still the old picture.
+- Look 755x1000@2 + 1180x820@2 (summer morning, place cards acs/thu/tn/dc/ttp/r0): the new picture loads in all 12, 0 page errors.
+- Branch review/places-swap-n13 @569f891 (off main 81d76c8b): SWAP_N13.md + dev/test/places-swap-look.js → reviewer (ROOT-C6 opens it).
+STATE: done; no gens. ctx ~16 %.
