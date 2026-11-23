@@ -50,3 +50,9 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 ## ADDENDUM 7 (MAIN 112, 22:20Z) — HER ROUND (owner OD 23/11 ~22:32Z, read verbatim)
 - Girls in HER round (round 3): she knows their face + their result/rank, and they know hers (two-way).
 - MAIN (unless she objects): the presenting eunuch reads each girl's name + father's office aloud when the round is presented → round-mates' NAMES known too (j61 stage 2). This is the only extra name source; girls of rounds 1–2 are known only through yard chat (Addendum 5).
+
+## ADDENDUM 8 (MAIN 112, 22:25Z) — THREE TEST TYPES (owner OD 23/11 ~22:36Z, read verbatim; OVERWRITES "each royal sets a mini-game")
+- The 3 royals set 3 DIFFERENT test types, one each: (a) MINI-GAME (existing kit mini-game, per HIST-TUYENTU §4 mapping); (b) ĐỐI ĐÁP — the royal asks, she picks a WAY to answer (tone/stance), which pleases or displeases by THAT royal's nết; no right/wrong trivia; (c) HÀNH XỬ — a surprise incident (e.g. a cat thrown at her feet, tea spilled on her dress) → options what to do.
+- Each test → contributes to the combined raw → entScore (−1/0/+1 rank, Addendum 3) + thiện cảm with that royal (Addendum 2).
+- MAIN pick (unless she objects): which type each royal gives is drawn per life from that royal's nết (seeded); a POOL per type (HIST-TUYENTU §8) so tests rarely repeat across lives; options of (b)/(c) equal value with gain + loss (laws 2/3), numbers in BAL (law 4). Harder by origin ceiling (law 5).
+- Cung nữ origin (Nội vụ phủ/ma ma) uses the same 3 types.
