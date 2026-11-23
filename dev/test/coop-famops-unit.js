@@ -181,6 +181,13 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    try{NPW.reg.__t25={grp:"t",who:()=>liveRivals(true),why:()=>({s:9999})};a25=npwAsk("__t25",{}).map(o=>o.who);const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);l25=npwAsk("loTake",{p:v}).map(o=>o.who)}catch(z){er25=z.message}
    finally{delete NPW.reg.__t25;rivals.splice(rivals.indexOf(f),1)}
    ck("25 the npc-purpose roll never picks her entry as the NPC actor (any kind; loTake)",!er25&&a25&&a25.length>0&&!a25.includes(f)&&l25&&!l25.includes(f),{er25,n:a25&&a25.length,hasF:a25&&a25.includes(f),lo:l25&&l25.includes(f)})}
+  /* E44i T3 (coop-lost-scan LIVE SWAP 10000013: laydo w1, «ret» w4, her seat had no case): the host's «rm lost» takes a durable piece of hers that
+     her own seat's loLose filter refuses (here: marked keep): before, the piece left with NO case (untraceable on her seat; the host's «ret» found
+     nothing to close). Now her case is opened and held by the thief; the «ret» closes it with one piece home. */
+  {reset();const t3=pc(P);t3.keep=1;S.inv.push(t3);const ok0=loOk(t3);FA([{op:"rm",ci:0,k:P,iu:t3.iu,how:"lost"}]);const c26=(S.lost||[]).find(c=>c.e&&c.e.iu===t3.iu);
+   ck("26 rm lost of her durable piece her loLose refuses: her case opens, held by the thief (was: no case)",!ok0&&cnt(t3.iu)===0&&c26&&c26.st==="held"&&c26.own==="me"&&c26.at,{ok0,st:c26&&c26.st,at:c26&&c26.at,n:cnt(t3.iu)});
+   const r26=FA([{op:"ret",k:P,iu:t3.iu,e:{k:P,iu:t3.iu}}]);ck("26b the host's «ret» closes that case, ONE piece home, no famMiss «no case»",c26&&c26.st==="done"&&cnt(t3.iu)===1&&!CW.famMiss.some(m=>/no case/.test(m.why)),{st:c26&&c26.st,n:cnt(t3.iu),miss:CW.famMiss});
+   reset();const t3b={k:P,iu:++n,lo:4242};S.inv.push(t3b);FA([{op:"rm",ci:0,k:P,iu:t3b.iu,how:"lost"}]);ck("26c a piece marked lo (someone else's case piece) opens no case of hers",!(S.lost||[]).some(c=>c.e&&c.e.iu===t3b.iu),(S.lost||[]).length)}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

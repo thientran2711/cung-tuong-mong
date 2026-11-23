@@ -696,6 +696,12 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    /* E44: the piece IS with the thief on the other seat (his real chest / the host's NPC): her case is held there even when this seat has no
       live copy of the holder to put it in (loKeepBy refused) — a case left «lost» counted the piece a second time and was later «found» to
       Nội vụ phủ: 2 copies (coop-lost-scan COOP_FAM: host chest + guest case) */
+   /* E44i T3 (coop-lost-scan LIVE SWAP 10000013 lxma2: laydo w1, «ret» w4, her seat had no case): loLose takes only a piece its own filter
+      (loOk) allows; a piece of hers that this seat reads otherwise (her copy on the host was a step behind) left with NO case = untraceable
+      here, the host's «ret» / «gone» found nothing to close. Her durable piece of her own (no lo mark: not someone else's case piece) gets its
+      case all the same (jlost loLoseE, the ONE case maker for a given piece), held by the thief. */
+   if(!c&&!e.lo&&typeof loLoseE==="function"&&typeof ilDur==="function"&&ilDur(e)){c=loLoseE(S,e,"riv");if(c){Object.assign(c,{keep:1,by:fk,st:"held",at:fk});
+     Q.push({t:"Đồ thất lạc",who:typeof pMe==="function"?pMe():"",h:`${typeof loTag==="function"?loTag(e):""}<p><b>${typeof loNm==="function"?loNm(e.k):esc(nm)}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});continue}}
    if(c){if(c.st==="lost")Object.assign(c,{keep:1,by:fk,st:"held",at:fk});continue}}
   loud=1;
   if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
