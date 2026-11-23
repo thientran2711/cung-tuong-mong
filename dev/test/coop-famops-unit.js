@@ -198,6 +198,19 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     maidMonthP(v);c27=(S.lost||[]).find(c=>c.e&&c.e.iu===e27.iu);bk=c27&&c27.at}catch(z){er27=z.message}
    finally{window.npcWhy=nw;CW.on=on27;CW.seat=se27;for(const [x,b] of sv)x.bac=b;rivals.splice(rivals.indexOf(f),1);v.inv=(v.inv||[]).filter(e=>e.iu!==e27.iu&&!(e.lo&&c27&&e.lo===c27.id));if(c27)c27.st="done"}
    ck("27 the month's maid sale never makes her entry the NPC buyer (no NPC piece held by her entry, her silver untouched)",!er27&&String(bk)!==String(key(f))&&f.bac===99999,{er27,at:bk,bac:f.bac,st:c27&&c27.st})}
+  /* E44i T2 (coop-lost-scan LIVE 35f5b5ab 10000045: the host «Lấy đồ» her piece 3×, the 3rd case «held at me» with no copy in his hands): the host's own
+     road, three thefts with a «Cài đồ vào rương» return between them: after each theft ONE copy marked lo=case in his chest and ONE «rm lost» of that id
+     to her seat; after each return the case closes, his copy leaves, ONE «ret». */
+  {reset();const on28=CW.on,se28=CW.seat,sd28=COOP.send,cg=window.caught,ar=window.aRoll,kp=window.loKeepPick;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999,maid:{name:"Cung nữ",loyal:50}};rivals.push(f);
+   const R28=[];let er28="";const b0=S.bac,inv0=S.inv,so=window.stf2Ord;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};caught=()=>null;aRoll=()=>true;window.stf2Ord=()=>"obey";const x=pc(P);f.inv=[Object.assign({},x,{ci:0})];S.inv=[];
+    for(let i=0;i<3;i++){S.bac=9999;try{used=0}catch(z){}Q.length=0;const n0=sn.length;const rv=runAct(S,f,"laydo");const c=(S.lost||[]).find(c=>c.own===key(f)&&c.st!=="done");
+     const cp=c?S.inv.filter(e=>e.lo===c.id).length:-1;const rm=sn.slice(n0).flatMap(m=>m.fam||[]).filter(o=>o.op==="rm"&&o.how==="lost"&&o.iu===x.iu).length;
+     let back=-1,ret=-1;if(c){const hx=S.inv.findIndex(e=>e.lo===c.id);const n1=sn.length;Q.length=0;var pv=runAct(S,f,"plant",hx);back=S.inv.filter(e=>e.lo===c.id).length;ret=sn.slice(n1).flatMap(m=>m.fam||[]).filter(o=>o.op==="ret"&&o.iu===x.iu).length;
+      f.inv=f.inv.filter(e=>e&&e.iu===x.iu).slice(0,1).map(e=>Object.assign({},loClean(e),{ci:0}))}
+     R28.push({i,rv:String(rv).slice(0,90),pv:typeof pv==="undefined"?"":String(pv).slice(0,120),st:c&&c.st,at:c&&c.at,cp,rm,cst:c&&c.st,back,ret,fin:f.inv.length})}}catch(z){er28=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{window.stf2Ord=so;CW.on=on28;CW.seat=se28;COOP.send=sd28;caught=cg;aRoll=ar;loKeepPick=kp;S.bac=b0;S.inv=inv0;rivals.splice(rivals.indexOf(f),1);Q.length=0}
+   ck("28 the host's Lấy đồ ×3 with a return between: each time ONE marked copy in his chest + ONE «rm lost»; each return closes the case, copy gone, ONE «ret»",!er28&&R28.length===3&&R28.every(r=>r.at==="me"&&r.cp===1&&r.rm===1&&r.back===0&&r.ret===1&&r.fin===1),{er28,R28})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
