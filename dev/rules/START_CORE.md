@@ -8,7 +8,7 @@ Every chat (main, foreman, worker, reviewer, art) reads this block FIRST (all 18
 4. ONE CORE (một lõi số): every number comes from BAL; nothing computes or types its own number (OD:L1267).
 5. HARDER AS SHE CLIMBS (càng lên càng khó): mini-games and trials get harder with rank (OD:L1254).
 6. REAL-WORLD LAW (luật thế giới thực) = (a) REAL EVIDENCE: others can frame her and win, her defence can fail; proof must truly exist (OD:L1109); (b) REAL PEOPLE: every person is a living NPC with her own life, schedule and goals; a person named in any road really exists (OD:L1246, L1385, L1389); (c) REAL OBJECTS: every item that appears in the game really exists somewhere — it never vanishes, is never unfindable; it is owned, stored, given, sold, stolen or used up, always traceable (OD 18/11 ~16:20Z).
-7. CỔ TRANG WORDING: no %, odds in words (Liều / Khó / Năm phần / Khá chắc / Chắc / Rất chắc / Nắm chắc) (VANPHONG.md).
+7. CỔ TRANG WORDING: no %, odds in words (Liều / Khó / Hơi khó / Năm phần / Khá chắc / Chắc / Nắm chắc (7 equal bands, BAL.odds.cut)) (VANPHONG.md).
 8. HISTORY / DRAMA IDEAS → EXPERT FIRST (OD:L1327).
 UI LAWS
 9. KIT FIRST: every frame, button, card, chip comes from the one shared kit; a missing part → stop, kit keeper builds it first (OD:L491, L1090).
