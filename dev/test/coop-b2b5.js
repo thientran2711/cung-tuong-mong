@@ -80,7 +80,7 @@ const NF=await REALL.nfBoth(A,B);console.log('night path:',NF?'jnf (night record
 await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);
   ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r.same&&r.a.flip0==='guest'?r:{r,NW:await A.p.evaluate(()=>({nw:S.nightWhy,nfX:S.nfX,fw:window.__fw,fd:window.__fdl||null,tr:(COOPW.tr||[]).slice(-30)})).catch(e=>e.message),G:await B.p.evaluate(()=>({cy:typeof cycOn==='function'&&cycOn(S),tray:typeof cyTray==='function'&&cyTray(S),tuan:S.tuan,cyb:S.cyb||null})).catch(e=>e.message)});
-  ok(r.same&&['guest','host'].includes(r.a.pick),'B2.1 (jnf) one player holds that night on both seats (her keep / his Tranh sủng, resolved once)',r);
+  ok(r.same&&r.a.pick!=null,'B2.1 (jnf) one holder of that night on both seats (her keep / a Tranh sủng by him or an NPC, resolved once on the host)',r);
   await B.p.screenshot({path:OUT+'/b2-guest-night-1180x820.png'})}
  else{const a=await D(A),c=await D(B);ok(a.tn&&a.tn.who===902&&a.tonight===902,'B2.1 host: tn = the guest (902), her own night = the friend',a);
   ok(c.tonight==='me','B2.1 guest: tonight is HER night (from the host\'s tn)',c);
@@ -101,6 +101,8 @@ await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- B2.3 an NPC's night: same NPC on both ---- */
  await forceFlip(A,'npc');ok(await week(A,B,'B2.3'),'B2.3 week');
+ /* jnf: the force can land one night late (the tablet waits from the day's start, S.nfP): a second forced week, its night is read */
+ if(NF){const d0=await A.p.evaluate(()=>COOP.state.week-1);const r0=await REALL.nightRec(A,B,d0,3000);const npc0=await A.p.evaluate(()=>window.__npc);if(!(r0.same&&r0.a.flip0===npc0)){await forceFlip(A,'npc');ok(await week(A,B,'B2.3b'),'B2.3 second week')}}
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);const npc=await A.p.evaluate(()=>window.__npc);
   ok(r.same&&r.a.flip0===npc,'B2.3 (jnf) the same NPC\'s card turned on both seats',[r,npc])}
  else{const a=await D(A),c=await D(B);ok(a.tonight!=null&&a.tonight!=='me'&&a.tonight<900&&a.tonight===c.tonight,'B2.3 the same NPC on both',[a.tonight,c.tonight])}
