@@ -52,6 +52,13 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
   /* review/coop-driver-fails: an NPC whose card is on the tray (jflip cycleOf / jcycle cyTray: a consort in her Kỳ nguyệt tuần is never turned;
      the forced nightCh bypasses jcycle's wrapper, the tablet does not) */
   if(who==='npc'){const L=liveRivals(true).filter(v=>!v.coop&&v.alive&&!v.out);const ok=v=>{try{return !(typeof cycleOf==='function'?cycleOf(v):(window.cyTray&&cyTray(v)))&&!(window.cycOn&&cycOn(v))}catch(e){return true}};window.__npc=(L.find(ok)||L[0]).id}},who);
+/* review/coop-driver-fails #2: under jnf the forced card is only the START of the night; three live-game draws can still take it away
+   (the B2.1/B2.3 reds left in 5 LIVE runs): the emotion no-flip (jemoact eaQ: S.tonight=null → «cause none»), his rest roll (jagemp
+   empSummon busy/mood → no card) and an NPC's Tranh sủng at the choice (jsteal stealWant → another holder). They are not the B2 relay under
+   test: held off for B2.1–B2.3 exactly as coop-steal does (window.__eaOff, stealWant none, empSummon a call), restored after (hold(o,false)). */
+const hold=(o,on)=>o.p.evaluate(on=>{const H=window.__H=window.__H||{ea:window.__eaOff,sw:window.stealWant,es:typeof empSummon==='function'?empSummon:null};
+  if(on){window.__eaOff=true;window.stealWant=()=>({u:0,p:0,mode:null});if(H.es)empSummon=function(){try{const z=empWhyZ();z.k='call';z.busy=false}catch(e){}return true}}
+  else{window.__eaOff=H.ea;window.stealWant=H.sw;if(H.es)empSummon=H.es;window.__fw=null}},on);
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,2]);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
@@ -77,6 +84,7 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
 /* review/coop-driver-fails: jnf owns the palace night when both seats live in the palace (MAIN ROOT-82); the B2 week key S.tn / tnRelay is off
    there on purpose → the B2 checks read the jnf night record (lib/coop-real nightRec, as coop-steal); the old checks stay for a parked room */
 const NF=await REALL.nfBoth(A,B);console.log('night path:',NF?'jnf (night record per day; claims = the flip choice, coop-steal)':'parked (live B2 path)');
+for(const o of [A,B])await hold(o,true);
 await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);
   ok(r.same&&r.a.flip0==='guest','B2.1 (jnf) the host\'s tablet turned the GUEST\'s card: the same night record of the day on both seats',r.same&&r.a.flip0==='guest'?r:{r,NW:await A.p.evaluate(()=>({nw:S.nightWhy,nfX:S.nfX,fw:window.__fw,fd:window.__fdl||null,tr:(COOPW.tr||[]).slice(-30)})).catch(e=>e.message),G:await B.p.evaluate(()=>({cy:typeof cycOn==='function'&&cycOn(S),tray:typeof cyTray==='function'&&cyTray(S),tuan:S.tuan,cyb:S.cyb||null})).catch(e=>e.message)});
@@ -106,6 +114,7 @@ await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  if(NF){const d=await A.p.evaluate(()=>COOP.state.week-1);const r=await REALL.nightRec(A,B,d);const npc=await A.p.evaluate(()=>window.__npc);
   ok(r.same&&r.a.flip0===npc,'B2.3 (jnf) the same NPC\'s card turned on both seats',[r,npc])}
  else{const a=await D(A),c=await D(B);ok(a.tonight!=null&&a.tonight!=='me'&&a.tonight<900&&a.tonight===c.tonight,'B2.3 the same NPC on both',[a.tonight,c.tonight])}
+ for(const o of [A,B])await hold(o,false);
  /* ---- B5 seat caps ---- */
  {  const a=await A.p.evaluate(()=>{const f=COOPW.friend();const rk=rkOf(f);const L0=holders(rk).includes(f);let L1=null;const P=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i].coop)P.push([i,rivals.splice(i,1)[0]]);
    COOPW.pulled=P;try{L1=holders(rk).includes(f)}finally{COOPW.pulled=null;for(const [i,v] of P.reverse())rivals.splice(i,0,v)}return [L0,L1,rk]});
