@@ -19,6 +19,9 @@ const [,,DEV='fold',OUT='/tmp/rankroom-shots']=process.argv;fs.mkdirSync(OUT,{re
  const wired=await game.evaluate(()=>Object.keys(RANK_ROOM).length);console.log('wired bases:',wired,'| table rows:',table.length,'| falling back to the old picture:',table.filter(r=>!/-ha-sang$/.test(r[4])||!r[4]).length);
  for(const [pal,rn,nm] of [[1,3,'tan'],[1,4,'phi'],[1,5,'quyphi'],[2,4,'phi'],[5,5,'quyphi'],[4,3,'tan']])for(const night of [0,3]){
   await game.evaluate(([pal,r,night])=>{quiet=true;S.rank=r;S.prSeen={r,s:null};S.pal=pal;S.out=false;S.buoi=night;tab="act";goTo("home");render();quiet=false;render()},[pal,rn,night]);
+  await game.evaluate(()=>{const hide=e=>{while(e&&e!==document.body){const cs=getComputedStyle(e);if(cs.position==='fixed'||cs.position==='absolute'&&e.id==='modal'){e.style.display='none';return}e=e.parentElement}};
+   for(const e of document.querySelectorAll('*')){if(e.children.length===0&&/Chạm để mở|Vào cung ngay/.test(e.textContent||''))hide(e)}
+   for(const id of ['kload','modal','pop'])document.querySelectorAll('#'+id+',.'+id).forEach(x=>x.style.display='none')});
   await sleep(2500);const key=await game.evaluate(()=>resScene(residenceOf(S)));
   await p.screenshot({path:`${OUT}/${DEV}-${RES_SLUG_NAME(pal)}-${nm}-${night?"night":"day"}.jpg`,type:'jpeg',quality:70}).catch(()=>{});console.log(DEV,pal,nm,night?'night':'day','->',key)}
  console.log('page errors:',errs.length,errs.slice(0,3));await b.close();srv.close()})();
