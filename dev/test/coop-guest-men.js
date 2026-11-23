@@ -79,6 +79,8 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
+/* relay diagnostics (dump only on FAIL): her thIll trail, open requests, trace, sent/ended */
+const RDBG=o=>o.p.evaluate(()=>({seat:COOPW.seat,wk:__co().week,b:S.buoi|0,th:S.thIll,snapTh:COOPW.askSnap&&COOPW.askSnap.th,ask:(S.coopAsk||[]).map(a=>a.id),thw:window.__thw||null,sent:COOPW.sent,ended:COOP.state.ended,inLife:!!COOPW.inLife,tr:(COOPW.tr||[]).slice(-25),askN:window.__askN&&(window.__askN.log||[]).slice(-8)})).catch(e=>e.message);
 const DROP=o=>o.p.evaluate(()=>{if(!window.__dropP){window.__dropP=1;const s0=COOP.send;COOP.send=function(m){if(m&&m.k==='ctm-ask'&&window.__dropAsk===1)return;return s0.apply(this,arguments)}}window.__dropAsk=1});
 const man=(o,id)=>o.p.evaluate(id=>{const m=(S.men||[]).find(x=>x&&x.id===id);return m?{id:m.id,name:m.name,alive:m.alive!==false,away:m.away||0,ban:m.ban==null?null:m.ban,tinh:m.tinh||0}:null},id);
 const asks=o=>o.p.evaluate(()=>{for(let i=0;i<3;i++)ser();return (S.coopAsk||[]).filter(a=>a.k==='man'||a.k==='th').map(a=>a.id)});
@@ -110,7 +112,7 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  /* 2 her act kills a palace man of the host's set */
  const vid=await B.p.evaluate(()=>{const m=(S.men||[]).find(x=>x&&x.alive!==false&&/^m\d+$/.test(x.id));if(!m)return null;mortKill(m,'thử');return m.id});
  ok(!!vid,'2 guest: her act kills a palace man (mortKill)',vid);
- ok(await hostHas(A,vid,{alive:false}),'2 host: he is dead there too (relay)');
+ {const r=await hostHas(A,vid,{alive:false});ok(r,'2 host: he is dead there too (relay)',r?undefined:{G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'2');
  {const g=await man(B,vid),h=await man(A,vid);ok(g&&h&&!g.alive&&!h.alive,'2 both: he stays dead after the merged week (no man comes back)',{g,h})}
  /* 3 her road sends the envoy home */
@@ -141,7 +143,7 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  await B.p.evaluate(()=>{window.__thw=[];let last=JSON.stringify(S&&S.thIll||null),lo=null;setInterval(()=>{try{const v=JSON.stringify(S&&S.thIll||null);const L=(S.logs||[]);if(v!==last){window.__thw.push([__co().week,S.buoi||0,last,v,(COOPW.askSnap&&JSON.stringify(COOPW.askSnap.th))||'',String(L[L.length-1]||'').slice(0,140),String(L[L.length-2]||'').slice(0,100)]);last=v}}catch(e){}},40)});
  ok(await ill3('6a'),'6 both: the Thái hậu is ill, stage 3 on both seats (host\'s value)');
  await B.p.evaluate(()=>{const i=S.thIll;if(i.st>1)i.st--;else S.thIll=null;try{render()}catch(e){}});/* easeTH's body (j72:308, a closure) */
- ok(await until(A,()=>S.thIll&&S.thIll.st===2,null,20000),'6 host: her act eased the illness 3 → 2 (relay)',await th(A));
+ {const r=await until(A,()=>S.thIll&&S.thIll.st===2,null,20000);ok(r,'6 host: her act eased the illness 3 → 2 (relay)',r?undefined:{h:await th(A),G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'6b');{const g=await th(B),h=await th(A),L=await thLog();ok(JSON.stringify(g)===JSON.stringify(h)&&L.some(l=>/"st":3.*>.*"st":2.*@\d+ w\d+ r1$/.test(l)),'6 both: same illness after the merged week, her ease applied (3 → 2)',{g,h,L})}
  /* 6d (review r1 F1): her act RESOLVES inside her week end (j72 th_thuoc2's wait step ends in q72Tick, endTurn → easeTH); hook as the review repro */
  ok(await ill3('6c'),'6d both: stage 3 again');

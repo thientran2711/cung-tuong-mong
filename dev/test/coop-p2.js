@@ -109,7 +109,11 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
  ok(await until(A,n=>{const f=COOPW.friend();return f&&(f.kids||[]).some(k=>k.name===n)},kn,15000),'B2 host: her son is on her entry (live)');
  ok(await B.p.evaluate(()=>{const h=S.heir,hr=S.hr,r0=roll;roll=()=>true;try{heirMonth()}finally{roll=r0}return S.heir===h&&S.hr===hr}),'B2 guest: her own heirMonth never runs (no heir drawn even with the dice forced)');
  const hp=await A.p.evaluate(n=>{const keep=[];for(const [k,v] of allKids())if(!(v&&v.coop&&k.name===n)&&k.age>=6){keep.push([k,k.age]);k.age=0}S.heir=null;for(const [k] of allKids())k.heir=false;
-   const r0=roll,m0=Math.random;roll=()=>true;try{const L=COOPW.pulled;heirMonth()}finally{roll=r0;for(const [k,a] of keep)k.age=a}
+   const r0=roll,m0=Math.random;roll=()=>true;
+   /* review/coop-driver-fails: since npc-purpose (j51 heirMonth → npcWhy("heirName"): the Emperor names an heir when his own reckoning is ripe)
+      the forced roll alone never names one; his reckoning is forced ripe too (as npc-purpose tests force npcWhy), the candidates stay the game's */
+   const nw0=window.npcWhy;if(typeof nw0==='function')window.npcWhy=function(k){return k==='heirName'?{s:1,r:'test'}:nw0.apply(this,arguments)};
+   try{const L=COOPW.pulled;heirMonth()}finally{roll=r0;if(typeof nw0==='function')window.npcWhy=nw0;for(const [k,a] of keep)k.age=a}
    return {hr:S.hr,v:S.heir&&S.heir.v&&S.heir.v.coop,k:S.heir&&S.heir.k.name}},kn);
  ok(hp.v&&hp.k===kn&&/^p902\|/.test(hp.hr||''),'B2 host: the host\'s heirMonth names HER son (world key hr)',hp);
  const d0=await B.p.evaluate(()=>S.danh);ok(await week(A,B,'B2'),'B2 week');
@@ -143,7 +147,7 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
   for(let g=0;g<12;g++){if((await EL(A)).length&&(await EL(B)).length)break;if(!(await EL(A)).length)await press(A);if(!(await EL(B)).length){if(!await press1(B))await clear(B,3)}const t0=Date.now();while(Date.now()-t0<15000){if((await EL(A)).length&&(await EL(B)).length)break;await sleep(400)}
    if(!(await EL(A)).length)await clear(A)}
   const la=await EL(A),lb=await EL(B);ok(la.length===1&&lb.length===1&&la[0].w===w0+1&&lb[0].w===w0+1,'B3 the reign ends on both in the same merged week',[la,lb]);
-  const c=await B.p.evaluate(()=>({succ:!!(S.succ&&S.succ.on),q:Q[0]&&Q[0].t,year:S.year}));ok(c.succ&&c.q==='Tiên đế băng hà','B3 guest (the mother): the j99succ choice card',c);
+  const c=await B.p.evaluate(()=>({succ:!!(S.succ&&S.succ.on),q:Q[0]&&Q[0].t,year:S.year,Q:Q.map(q=>[q.t,q.pid||'']).slice(0,6),emp:S.emp&&[S.emp.era,S.emp.age,!!S.emp.dead],nfX:S.nfX||null,nw:S.nightWhy&&{wk:S.nightWhy.wk,pick:S.nightWhy.pick,flip0:S.nightWhy.flip0},w:COOP.state.week,tr:(COOPW.tr||[]).slice(-16)}));ok(c.succ&&c.q==='Tiên đế băng hà','B3 guest (the mother): the j99succ choice card',c);
   ok(la[0]&&la[0].dead,'B3 host: the base reign ending (no NPC claim on a player\'s son)',la);
   await B.p.screenshot({path:OUT+'/b3-guest-succ-1180x820.png'});
   const ch=[];for(let i=0;i<12;i++){const st=await B.p.evaluate(()=>({end:S.succ&&S.succ.end||'',t:Q[0]&&Q[0].t||''}));if(st.end)break;if(st.t)ch.push(st.t);if(!await tapM(B,/./,4000))await clear(B,2);await sleep(400)}
