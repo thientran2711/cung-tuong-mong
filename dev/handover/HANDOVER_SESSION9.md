@@ -2670,3 +2670,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - D child session_01964izGQbgvTAnQ9pJktncj NOT reachable by send_message → orders via FOREMAN_D_STATUS. ROBOT-10 harness not landed; MAIN share tt/dtq/td/ch when it lands.
 - MAIN 111 session_01Rc5AsND3CwtWZx1yyFP5Lp still talks with the owner and relays her rows → keep turning them into SELSCENE addenda.
 - Wake: trig_01KxJSVNjEhGqDuCN8ryXmUT (minute 32) → 113 creates its own and disables this one.
+- (22:15Z) Opened MAIN CHÍNH 113 = session_01Rc5AsLakcdKCgCQDCWY3Xf. MAIN 112 stops after 113 confirms (113 disables trig_01KxJSVNjEhGqDuCN8ryXmUT).
