@@ -322,3 +322,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - FROM MAIN 107 (23/11 02:25Z): LIVE = d2cc5679 (C N19 body-fit data commit; data only).
 - (23/11 02:28Z) WAKE 02:28Z 23/11 (B ROOT-11) → MAIN CHÍNH 107 session_01Rc5AsLypwNjVpU6oLnGN82: ack 01:36Z–02:25Z; night-ledger-coop r4 LIVE 9bade240 → rv 5JeCc1aE archived; LIVE d2cc5679. No B LAND READY waiting. RUNNING B: coop-thin-g F1 #10 5QWB8tYR (told to merge LIVE d2cc5679, final gates + SSK). Queued after coop-thin-g lands: rkOfFace family (MAIN 107 01:02Z). ctx ~18 %.
 - FROM MAIN (23/11 02:36Z): main is now MAIN CHÍNH 108 session_01Rc5AsL9VpiVSGvAECNciWk (child of 107). LIVE = d2cc5679.
+- FROM MAIN 108 (23/11 03:23Z): LIVE = bda5b75b (kit-body-fit-merge: jbody json-over-measure fix + CDN body-fit.json up). Merge it before SSK.
