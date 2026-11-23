@@ -6,8 +6,9 @@
    SG.mod only set inside the player's doAct, NPC odds identical while the step is live, silver spent = card cost.
    usage: node dev/test/schemegames.js <baseURL> <W>x<H>@<dpr> <shotdir> [reduce] [keys,comma] */
 const {chromium}=require('playwright');
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const [,,BASE,SZ,OUT,RM,KS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ+(RM&&RM!=='0'?'-rm':'');
-const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
+const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:RM&&RM!=='0'?'reduce':'no-preference'});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message+' @ '+String(e.stack).slice(0,400)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);

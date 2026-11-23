@@ -3,6 +3,7 @@
    lost = Vụng về; works = no product), and shoots the intro of 4 games (makeup, Tài nghệ lesson, Tu đức lesson, the old j5 overlay).
    usage: node dev/test/mg-skip.js <url of dev/index.html> <WxH@dpr> <shotdir> */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const [,,URL,VP,DIR]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});
@@ -23,7 +24,7 @@ console.log('step0');
  /* 0. the core: one key, one roll */
  const core=await p.evaluate(()=>({od:BAL.skip&&BAL.skip.od,old5:!!(BAL.odb.j5),old83:!!(BAL.odb.j83),w:word(od(BAL.skip.od)),roll:String(kitQuickRoll).includes('BAL.skip.od')}));
  ck('BAL.skip.od = 40, old odb keys gone, kitQuickRoll reads it',core.od===40&&!core.old5&&!core.old83&&core.roll,core);
- const wordOK=t=>/(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(t)&&!/%|Chắc chắn/.test(t);
+ const wordOK=t=>OW.RE.test(t)&&!/%|Chắc chắn/.test(t);
 
  /* 1. MAKEUP (morning mirror): quick on the dress screen; won = Đoan trang (vua), lost = Vụng về */
  for(const ok of [true,false]){await reset();await p.evaluate(()=>toilOpen());await p.waitForSelector('#kg82',{state:'visible'});
