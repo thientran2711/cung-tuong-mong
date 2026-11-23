@@ -31,4 +31,10 @@ async function realize(A,B,weekFn,ok,opts){const chk=ms=>opts&&opts.low?bothLow(
 /* one merged week for a driver that has none of its own: press the next-buoi button on both seats (the driver's clear/press1) until both seats' week counters advance */
 async function weekGeneric(A,B,clear,press1,ms=120000){const w=o=>o.p.evaluate(()=>COOP.state.week||0);const w0=await w(A);const t0=Date.now();
   while(Date.now()-t0<ms){if(await w(A)>w0&&await w(B)>w0)return true;await clear(A);await clear(B);await press1(A);await press1(B);await _sl(800)}return false}
-module.exports={origin,REAL,DBGF,DEF,waitReal,bothReal,bothLow,realize,weekGeneric};
+/* review/coop-flakes (D20): aim at what the friend REALLY has (law 6). Her entry on the other seat follows her own screen by the live pos, a
+   moment later; a target read from it right after she changed (a pet lost to a harm, a new one bought) can be one she no longer has
+   (coop-pets pb-4: B lost the crane to thaopet, A's entry still showed it, tg2 = crane, the steal took the cat). Wait until X's entry of
+   the friend shows exactly Y's own list (key = a page function (who) => string, who = 'own' | 'fr') before reading the target. */
+const PETK=who=>{const L=who==='own'?S.pets:(COOPW.friend()||{}).pets;return L?JSON.stringify(L.map(P=>[P.t,P.at||0]).sort()):'none'};
+async function syncFr(X,Y,key=PETK,ms=15000){const t0=Date.now();let a,b;while(Date.now()-t0<ms){b=await Y.p.evaluate(key,'own').catch(()=>null);a=await X.p.evaluate(key,'fr').catch(()=>null);if(a!=null&&a===b)return true;await new Promise(r=>setTimeout(r,300))}return{fr:a,own:b}}
+module.exports={origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric};
