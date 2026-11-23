@@ -90,10 +90,12 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
  /* text over text: two words-bearing leaves drawn on top of each other (e.g. a chip over a title) */
  {const deco=e=>{for(let x=e;x&&x!==document.body;x=x.parentElement){const s=cs(x);if(s.pointerEvents==='none'&&s.position!=='static')return true}return false};
   /* picture placeholders (pictures are blocked: portraits are not checked) and pointer-events:none floaters (stat pops) are not layout */
-  const T=els.filter(e=>vis(e)&&!/Đang thỉnh tranh/.test(e.textContent)&&!deco(e)&&[...e.childNodes].some(n=>n.nodeType===3&&/\p{L}{2}/u.test(n.textContent))).slice(0,600).map(e=>{const rg=document.createRange();rg.selectNodeContents(e);return{e,r:rg.getBoundingClientRect()}}).filter(x=>x.r.width>4&&x.r.height>4);
-  for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){const a=T[i],b=T[j];if(a.e.contains(b.e)||b.e.contains(a.e))continue;
-   const ix=Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left),iy=Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top);if(ix<=3||iy<=3)continue;
-   const sm=Math.min(a.r.width*a.r.height,b.r.width*b.r.height);if(ix*iy>.2*sm&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
+  const T=els.filter(e=>vis(e)&&!/Đang thỉnh tranh/.test(e.textContent)&&!deco(e)&&[...e.childNodes].some(n=>n.nodeType===3&&/\p{L}{2}/u.test(n.textContent))).slice(0,600).map(e=>{const rg=document.createRange();rg.selectNodeContents(e);/* per line box: a wrapped inline chip is two boxes, not one tall rectangle */
+   return{e,rs:[...rg.getClientRects()].filter(r=>r.width>4&&r.height>4)}}).filter(x=>x.rs.length);
+  for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){const a=T[i],b=T[j];if(a.e.contains(b.e)||b.e.contains(a.e))continue;let hit=false;
+   for(const r1 of a.rs){for(const r2 of b.rs){const ix=Math.min(r1.right,r2.right)-Math.max(r1.left,r2.left),iy=Math.min(r1.bottom,r2.bottom)-Math.max(r1.top,r2.top);
+    if(ix>3&&iy>3&&ix*iy>.2*Math.min(r1.width*r1.height,r2.width*r2.height)){hit=true;break}}if(hit)break}
+   if(hit&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
  txt.replace(/khả năng\s*:?\s*(liều|khó|năm ăn năm thua|khá chắc|rất chắc|nắm chắc|chắc)(?![\p{L}])/giu,(a)=>{out.push({k:'word',msg:'two odds scales mixed «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
