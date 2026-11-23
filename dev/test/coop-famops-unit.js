@@ -188,6 +188,16 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    ck("26 rm lost of her durable piece her loLose refuses: her case opens, held by the thief (was: no case)",!ok0&&cnt(t3.iu)===0&&c26&&c26.st==="held"&&c26.own==="me"&&c26.at,{ok0,st:c26&&c26.st,at:c26&&c26.at,n:cnt(t3.iu)});
    const r26=FA([{op:"ret",k:P,iu:t3.iu,e:{k:P,iu:t3.iu}}]);ck("26b the host's «ret» closes that case, ONE piece home, no famMiss «no case»",c26&&c26.st==="done"&&cnt(t3.iu)===1&&!CW.famMiss.some(m=>/no case/.test(m.why)),{st:c26&&c26.st,n:cnt(t3.iu),miss:CW.famMiss});
    reset();const t3b={k:P,iu:++n,lo:4242};S.inv.push(t3b);FA([{op:"rm",ci:0,k:P,iu:t3b.iu,how:"lost"}]);ck("26c a piece marked lo (someone else's case piece) opens no case of hers",!(S.lost||[]).some(c=>c.e&&c.e.iu===t3b.iu),(S.lost||[]).length)}
+  /* E44i T9 probe (coop-lost-scan-traced SWAP: a host case of an NPC's piece «held» by her entry): the month's maid sale (j8 maidMonthP, run by
+     rivalsMonth WITH her entry in the harem) picks the buyer over others(p) = every consort: her entry (a player seat) could be the NPC buyer
+     → maidTheft → loKeepBy(c, her entry): the NPC's piece lands on the host's copy of her entry, her silver paid by an NPC roll. */
+  {reset();const on27=CW.on,se27=CW.seat,nw=window.npcWhy;const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:99999};rivals.push(f);let er27="",c27=null,bk=null;
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&!x.out&&x!==f);const sv=consorts().map(x=>[x,x.bac]);const e27=pc(P);
+   try{CW.on=true;CW.seat="a";for(const x of consorts())if(x!==f)x.bac=0;v.inv=v.inv||[];v.inv.push(e27);v.schemes=0;v.loCd=0;if(!v.maid)v.maid=maidMk(v);v.maid.loyal=0;
+    window.npcWhy=(k,c,d)=>k==="maidSell"?{who:v,s:1}:nw(k,c,d);(S.lost||[]).forEach(c=>{if(c.own===key(v))c.st="done"});
+    maidMonthP(v);c27=(S.lost||[]).find(c=>c.e&&c.e.iu===e27.iu);bk=c27&&c27.at}catch(z){er27=z.message}
+   finally{window.npcWhy=nw;CW.on=on27;CW.seat=se27;for(const [x,b] of sv)x.bac=b;rivals.splice(rivals.indexOf(f),1);v.inv=(v.inv||[]).filter(e=>e.iu!==e27.iu&&!(e.lo&&c27&&e.lo===c27.id));if(c27)c27.st="done"}
+   ck("27 the month's maid sale never makes her entry the NPC buyer (no NPC piece held by her entry, her silver untouched)",!er27&&String(bk)!==String(key(f))&&f.bac===99999,{er27,at:bk,bac:f.bac,st:c27&&c27.st})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
