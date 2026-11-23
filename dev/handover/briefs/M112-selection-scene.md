@@ -40,3 +40,9 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 
 ## ADDENDUM 5 (MAIN 112, 22:15Z) — CORRECTION (owner OD 23/11 ~22:25Z, read verbatim)
 - Waiting-yard chat reveals the FACE (j61 stage 1); the NAME only when that girl's nết + rank/birth make her give it (existing rule OD 17/11 ~05:28Z). Same both ways. Reuse existing greet/name-reveal code — no new logic. Addendum 1 text fixed in place; in rounds 1–2 a girl whose name is unknown shows by face only.
+
+## ADDENDUM 6 (MAIN 112, 22:17Z) — HOW MANY TÚ NỮ (owner asked, OD 23/11 ~22:28Z; MAIN 111 recommendation, build unless she objects)
+- 12 tú nữ in the yard incl. her = 3 rounds × 4 (BAL key, e.g. BAL.entry.yard = {n:12, perRound:4, kept:4}).
+- About 4 kept (giữ thẻ bài) incl. her; the rest «ban hoa» (sent home) but remain REAL people who exist afterwards (law 6b: they go home / marry / may reappear).
+- Kept girls join the existing start roster (≈12 consorts, OD 17/11 ~04:32Z; cap 20) — no duplicate people.
+- Screen: 4–6 figures visible at a time, the yard PANS so figures stay full size on Fold 755x1000 (never shrink to fit, never clip — layout A rules).
