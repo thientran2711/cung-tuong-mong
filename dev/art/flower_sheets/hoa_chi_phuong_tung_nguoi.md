@@ -55,7 +55,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -97,7 +97,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -167,7 +167,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -293,7 +293,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -335,7 +335,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -405,7 +405,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -503,7 +503,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -573,7 +573,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -643,7 +643,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -713,7 +713,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -783,7 +783,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -853,7 +853,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -923,7 +923,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -993,7 +993,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -1063,7 +1063,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -1133,7 +1133,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -1203,7 +1203,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
@@ -1273,7 +1273,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342) đã sửa bởi F19 (L17
 - t2 Thường tại: hoa cài tóc Hoa lựu (pomegranate flower) — chỉ: chỉ tơ trơn + viền chỉ tơ nhuộm chuyển màu
 - t3 Quý nhân: hoa cài tóc Hoa lạp mai (wintersweet) — chỉ: chỉ tơ nhuộm chuyển màu
 - t4 Tần: hoa cài tóc Hoa huyên thảo kép (double daylily) — chỉ: chỉ tơ chuyển màu + viền chỉ bạc mảnh + lưới ngọc trai
-- t5 Phi: hoa cài tóc Hoa thúy cúc (peony-flowered Chinese aster) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
+- t5 Phi: hoa cài tóc Hoa dành dành kép (double gardenia) — chỉ: chỉ tơ chuyển màu + chỉ bạc, lưới ngọc trai, tua vàng
 - t6 Quý phi: hoa cài tóc Hoa hải đường kép (double crabapple blossom) — chỉ: chỉ vàng xe phủ toàn áo + ngọc trai hạt nhỏ — bậc đầu tiên có chỉ vàng
 - t7 Hoàng quý phi: chỉ vàng xe + chỉ ngũ sắc theo màu phượng bên dưới
 - t8 Hoàng hậu: chỉ vàng xe + kim tuyến + chỉ ánh lông công theo màu phượng bên dưới
