@@ -68,3 +68,6 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 ## ADDENDUM 11 (MAIN 112, 22:36Z) — DRAMA KNOWLEDGE (owner OD 23/11 ~22:44Z, read verbatim)
 - She STEPS IN (defend / join / mediate) → she knows the FACES of all participants and they know hers (two-way); NAMES by nết + rank (the defended girl likely gives her name in thanks; a proud bully may throw her name/family as a threat) — via the existing j61 stages.
 - She STAYS OUT → she sees participants' faces only, no names; they do NOT register her.
+
+## ADDENDUM 12 (MAIN 112, 22:40Z) — YARD GREETING = EXISTING RULE (owner OD 23/11 ~22:50Z, read verbatim)
+- Follow OD 17/11 ~05:28Z + j61.js exactly: greet → face known; equals (tú nữ) exchange names unless proud/cold by nết; if no name, offer the existing «Hỏi danh tính» (j61.js:180/190, odds BAL.odb.j61) — in the yard it costs COUNTDOWN SECONDS (BAL key) instead of khắc; on refusal, the existing refusal line explains why. Reuse code; no new logic.
