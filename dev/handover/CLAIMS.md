@@ -1149,3 +1149,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | KP23 outings wiring: code reader so the 4 outing pictures (img/outing-{ngu-uyen-ngoai,chua-ho-quoc}-{port,land}.webp, C GAPART2) show where outings play (sonnet; MAIN 109 ORDER 07:29Z) | review/outing-art; reports/outing-art.md | B | session_01N1tNP5iasNKdRpY67DYyCp | READY FOR CHECK 4627c50b | 23/11 09:10Z |
 | REVIEW coop-thin-g WHOLE (opus BIG co-op reviewer-lander) of review/coop-thin-g-f1 dea00576 | reports/coop-thin-g.md «## REVIEW» | B | session_01N1tNP5MAkuoXRAJ7HMLDnA | RUNNING | 23/11 08:32Z |
 | REVIEW outing-art (sonnet SMALL) of review/outing-art 4627c50b | reports/outing-art.md «## REVIEW r1» | B | session_01N1tNP2ksTW8GR3PpKSJH3d | RUNNING | 23/11 08:47Z |
+coop-driver-fails worker #2 (opus; successor of FSjtour8 at 36 %; @82c21e84 test-only) | review/coop-driver-fails | session_01964izEZxwCL3dekrzAxh79 | RUNNING | 23/11 09:01Z (Foreman D ROOT)
