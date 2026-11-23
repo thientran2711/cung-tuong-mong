@@ -918,7 +918,7 @@ function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isC
  const rowW=segW+(w?KIT_ODFIT.gap+wordW:0)+rest;const fs=parseFloat(getComputedStyle(kan).fontSize)||13;const natW=kitOdTextW(kan,kan.textContent.replace(/\s+/g," ").trim());
  const room=room0-rowW;/* ONE ROW (owner 23/11 ~20:30Z, review/kit-odds-row): the meter is ALWAYS bar + word on one line — never stacked (kodstk is gone). The title takes the rest and may wrap to two lines; only a title row that leaves the title less than min(its one-line width, KIT_ODFIT.min em) puts the whole meter (still bar + word on one row) under the title at the right (.kodrow). */
  let row=room<Math.min(natW+KIT_ODFIT.pad,KIT_ODFIT.min*fs);
- b.__kodRoom=room/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
+ b.__kodRoom=(row?room0:room)/fs;/* the title's room in em beside the meter (a kodrow card: the title has the whole row)  (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
  if(b.classList.contains("kodstk"))b.classList.remove("kodstk");if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row);
  /* VERIFY against the real layout: a meter that still drops under the title without .kodrow (a title min-width, a font that differs from the canvas) → under the title on purpose */
  const own=()=>{const K=kan.getBoundingClientRect(),O=od.getBoundingClientRect();return O.height>0&&(O.top>=K.bottom-2||O.bottom<=K.top+2)};
