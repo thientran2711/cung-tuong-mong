@@ -2555,3 +2555,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 16:52Z) LANDED pages-lock f7016b8d (LC7 FF). LIVE f7016b8d. Asking owner to set Pages Source = GitHub Actions + run workflow.
 - (23/11 17:03Z) OWNER IDEA recorded (toilette room hub + event full-stage figure + dialogue layout; mockups first). Opened KIT KEEPER #10 session_01Rc5AsM54hdwtHZ3MKWwEdH (opus) → compare page on CDN + Q (does max frame cover top bar/tab bar).
 - (23/11 17:07Z) Owner wants mockup VIDEOS → added to KIT KEEPER #10 M54hdwtH brief.
+- (23/11 17:11Z) Owner set Pages Source = GitHub Actions. pages.yml run #1 (push) SUCCESS, #2 (dispatch) running. github.io unreachable from our proxy → asked owner to confirm CLAUDE.md 404 + game opens. perf.yml minutes choice still pending (owner asked price: ~12k extra min × $0.006 ≈ $70/month).
