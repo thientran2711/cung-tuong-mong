@@ -239,7 +239,7 @@ function optVal(E,i,b){const B=KB(),O=E.o?E.o[i]:E.plain;let v=0;const G=O.g||{}
 KY.optVal=optVal;
 function fireNpc(c){ctx(c);const F=c.F;let i=0;try{if(c.E.o){const P=c.E.o.map((O,j)=>[j,Math.max(1,optVal(c.E,j,c.b))]);const j=mindPick(P,F);i=j==null?0:j}}catch(e){}
  const r=runOpt(c,i);const touchMe=(c.W&&c.W.ref===S)||(c.X.lc&&c.X.lc.own==="me")||(c.W&&c.W.own===S);
- try{const txt=`Nghe nói ${F.name} gặp kỳ ngộ${c.W&&c.W.ref&&!c.W.hide?` với ${wName(c.W)===S.name?"ngươi":wName(c.W)}`:""}${r?": "+r:""}.`;newsAdd(F,"ky",txt,touchMe);if(touchMe&&typeof kitNotice==="function")kitNotice({line:txt})}catch(e){kerr("news",e)}}
+ try{const txt=`Nghe nói ${F.name} gặp kỳ ngộ${c.W&&c.W.ref&&!c.W.hide?` với ${wName(c.W)===S.name?"ngươi":wName(c.W)}`:""}${r?": "+r:""}.`;newsAdd(F,"ky",txt,touchMe)/* KNOW-NOTICE: newsAdd raises the ONE notice (was a second kitNotice here) */}catch(e){kerr("news",e)}}
 /* ---------- Sổ luân hồi (memory only) ---------- */
 function book(){try{return JSON.parse(localStorage.getItem("ctm-kyngo")||"{}")||{}}catch(e){return{}}}
 function meet(c,opt){try{const b=book();const e=b[c.id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[c.id]=e;localStorage.setItem("ctm-kyngo",JSON.stringify(b))}catch(e){}}
