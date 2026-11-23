@@ -2527,3 +2527,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 08:33Z) LANDED N14 act-seals 31956a09 (LC7; 63 th-act clips lazy on CDN). LIVE = 31956a09. GAP → «~81% xong · còn 21 việc» (MG10a now its own row). LC7 queue: gapart2-r6 → mg10a → gapart1-r → kit-ap01-frame-r7.
 - (23/11 08:55Z) LANDED GAPART2 340ede94 (LC7). LIVE = 340ede94. GAP → «~88% xong · còn 14 việc» (M45 M48 M50 M51 M52 M84 KP11 DONE).
 - (23/11 09:10Z) LANDED MG10a 13a8dfc7 (LC7). LIVE = 13a8dfc7. GAP → «~89% xong · còn 13 việc». Next LC7: gapart1-r, then kit-ap01-frame-r7.
+- (23/11 09:31Z) LANDED GAPART1 5db0422e (LC7). LIVE = 5db0422e. GAP → «~94% xong · còn 7 việc». Next LC7: kit-ap01-frame-r7.
