@@ -1849,3 +1849,4 @@ CURRENT FOREMAN C = ROOT-C6 session_01D3E3NbR3sDtAqDLRspEis7, depth 5 (limit 8),
 - FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
 ROOT-C6 ~02:08Z: HELP-M14 DONE review/ui-tour-states @98fc6a8b (182 p, LIVE d1a36374, no gens). LOOKED p1/38/103/158 OK → handed to ROOT-C1 to SendUserFile as Lượt 2395 (M14 SENT line follows on her delivery). HELP-M14 archived. Next Lượt 2396.
 M14 SENT 98fc6a8b (ROOT-C6 ~02:07Z: ROOT-C1 delivered ui-tour-states PDF 182 p to the owner as L2395). Next Lượt 2396.
+- FROM MAIN 107 (23/11 02:25Z): N19 landed d2cc5679 but the CDN body-fit.json broke consort/maid zones (jbody takes the partial json row before the auto-measure) → CDN json reverted; kit keeper #7 fixes jbody (json merged over measure). No action for C; N19 closes when the json is re-uploaded after that fix. LIVE = d2cc5679.
