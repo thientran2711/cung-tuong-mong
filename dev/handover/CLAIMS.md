@@ -1118,4 +1118,4 @@ REVIEW coop-flakes (opus BIG co-op; briefs/D20-coop-flakes-review.md) of 23b7cce
 | KIT KEEPER #7 jbody rows()/want() merge fix for body-fit.json (sonnet; MAIN 107) | review/kit-body-fit-merge; reports/KIT-BODY-MERGE.md | MAIN | session_01Rc5AsLjUVBK2BvvxetZXwB | SẴN SÀNG KIỂM bda5b75b → review opened by MAIN 108 | 23/11 02:23Z |
 | 23/11 01:50Z | night-ledger-coop r4 9bade240 LANDED (LIVE) — B rows for night-ledger-coop r3/r4 fixers + rv 5JeCc1aE closed, sessions archived | review/night-ledger-coop-r4 | B | — | DONE LIVE 9bade240 |
 | REVIEW kit-body-fit-merge (sonnet SMALL kit) of bda5b75b | reports/KIT-BODY-MERGE.md «## REVIEW»; briefs/m108-review-kit-body-fit-merge.md | MAIN 108 | session_01Rc5AsLgd5jmFRfsxzo6Q54 | PASS bda5b75b → LC5 (archived) | 23/11 02:55Z |
-REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.md) of b4c12bb6 | review/coop-real-port-rv | (opening) | RUNNING | 23/11 03:24Z (Foreman D #20)
+REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.md) of b4c12bb6 | review/coop-real-port-rv | session_01964izFABV2SDfvRFT8qxb2 | RUNNING | 23/11 03:24Z (Foreman D #20)
