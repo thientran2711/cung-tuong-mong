@@ -2590,3 +2590,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:05Z 23/11) LANDED via LC7: coop-driver-fails da829e9b, kp23-swap 225c5c08 (63 act pictures swapped). LIVE = 225c5c08. KP23 row done.
 - (20:09Z 23/11) MOCK-STAGE v2 READY (KIT KEEPER #11, review/mock-stage @17bcf6ac): merged event layout A/B (B recommended) day/night/solo + M3 toilette flow, 14 mp4 Fold+iPad; MAIN checked page + a B-day frame → link sent to owner. #11 archived. Wipe CDN after verdict.
 - (20:20Z 23/11) OWNER picked event layout A + fixes (figure LEFT, event picture in, info fixed / only options scroll — OD row). Opening KIT KEEPER #12 for mockup v3.
+- (20:21Z 23/11) KIT KEEPER #12 session_01Rc5AsLLYr8sHGVYNmfHpMF (opus): mockup v3 layout A (figure left full body, box over figure, event picture top of story box A1 (+A2 max), fixed info/only options scroll with on-camera scroll in videos).
