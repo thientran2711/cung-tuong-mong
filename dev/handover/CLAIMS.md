@@ -1127,3 +1127,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | GAPART1 art: OR17 GE06 GE07 GE11 IT02 AP01 KP08 KP10 (briefs/C6-art-resume.md) | review/gapart1; reports/GAPART1.md | FOREMAN C ROOT-C6 | session_01D3E3NbPGDx6gC7WMHy8pN9 | RUNNING | 23/11 05:40Z |
 | GAPART2 art: KP11 KP23 M45 M48 M50 M51 M52 M84 (briefs/C6-art-resume.md) | review/gapart2; reports/GAPART2.md | FOREMAN C ROOT-C6 | session_01D3E3NX5DQSPUBNWv4F9UpG | RUNNING | 23/11 05:40Z |
 coop-driver-fails (opus; 9 pre-existing LIVE co-op driver fails + coop-flakes rv follow-ups; MAIN 109 05:45Z; briefs/DROOT-coop-driver-fails.md) | review/coop-driver-fails | session_01964izFSjtour8BhRvzbeT4 | RUNNING | 23/11 05:49Z (Foreman D ROOT)
+| KP23CMP: KP23 194 act compare page old -h vs new (owner 07:00Z; briefs/C7-kp23-compare.md) | review/kp23-compare; reports/KP23CMP.md | FOREMAN C ROOT-C7 | (opening) | RUNNING | 23/11 07:20Z |
