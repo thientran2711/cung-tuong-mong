@@ -19,3 +19,14 @@ PRIORITY #1 CHECK: reused jload.js getOne/kitProgress/storage.persist/estimate, 
 - sw.js unchanged (only rebuilt). Main still needs go-live rebuild by coordinator.
 ## Handover (if rolled): nothing pending; START_CTX not measured.
 ~95% xong / ~90% chơi được
+
+## REVIEW (reviewer-lander, review/offline-all-r)
+PRIORITY #1 CHECK: OD 23/11 ~23:35Z | main jload.js/sw.js | review/offline-all 3bf27ac7 | claims W5.
+Merged 3bf27ac7 onto origin/main c39e5009 (index.html/sw.js conflicts = generated; rebuilt with build_site.sh). Gates on the rebuilt site:
+- offline-all.js ALL PASS (34): same keys as sw.js, skips cached, pause/reload resume, offline stop / online resume, quota notice, new-build diff, 404 skip, no page errors.
+- kit-progress-run PASS 36; oldsave-r1 16/16 (old main build as old.html). No "quickcheck" script exists in repo (as W5 noted).
+- Code: kit rows/kitPanel/kitProgress/.kbtn only, no private frame; no % shown; storage.persist() at start; yields to LIFE; dfEncOn `!!S&&` fix safe (guard only).
+- Shots looked at (Fold + iPad): row new/idle/done, panels run/done/quota/lowroom: clean, no overflow/cut text.
+- Notes (non-blocking): report says button «Lui», code opt «Đóng» (kit renders «Lui») ; MB unit + «Tải hết» per owner words; plan of 32k files may take seconds on phone; not tested on real 4.4 GB / iPad.
+VERDICT: PASS
+~100% xong / ~90% chơi được
