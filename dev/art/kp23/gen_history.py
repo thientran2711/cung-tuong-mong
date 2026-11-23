@@ -10,9 +10,11 @@ SHOW={'-h':('Cũ (-h)','Cận cảnh tay/áo, không thấy mặt · đang dùng
 rows=[]
 for k in un:
     pics=[]
-    for f,_ in P[k]:
+    for f,mg in P[k]:
         st=f.split('/')[-1][:-5]
-        if f.startswith('img/act-'+k):
+        if f.startswith('img/_review/kp23-hist/'):
+            lab,note='Magnific '+mg.split(', ',1)[0].replace('Magnific ','')+' · '+st,mg.split(', ',1)[1]
+        elif f.startswith('img/act-'+k):
             suf=st[len('act-'+k):];lab,note=SHOW[suf]
         else: lab,note=st+' (cùng tên)','Tranh sự kiện/thông tin cùng tên'
         if k=='xin-th-do-loi' and st.endswith('xin-th-do-loi'):note='Ngồi nghiêng, thấy một phần má'
