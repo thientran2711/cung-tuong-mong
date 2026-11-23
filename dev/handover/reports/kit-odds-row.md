@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK: OD 23/11 ~20:30Z (verbatim «xuống hàng chi cho tốn chỗ») + 21/11 ~04:00Z (L2133–2135, meter on the title row) | main KIT.md §11 (kitOdds→.kodm, j79), §6.2b-1 (kodstk stack = the thing removed), kit-opt-title-wrap.js, dialog-fixed.js | review/* none | claims none.
 
-Branch `review/kit-odds-row` = **f3eb43bb7201354f0b8e48feaa57b84427705fc1** (from origin/main b1033eb). Files: dev/build/j79.js (kit part), dev/kit/KIT.md (§5 GENERAL LAYOUT LAW + §6.2b rows overwritten), dev/test/odds-one-row.js (new), dev/test/dialog-fixed.js (accepts kodrow), index.html/sw.js/assets.json rebuilt.
+Branch `review/kit-odds-row` = **176aea47afcc3f96e12a31ab7ccc4e258c24fc3c** (from origin/main b1033eb). Files: dev/build/j79.js (kit part), dev/kit/KIT.md (§5 GENERAL LAYOUT LAW + §6.2b rows overwritten), dev/test/odds-one-row.js (new), dev/test/dialog-fixed.js (accepts kodrow), index.html/sw.js/assets.json rebuilt.
 
 ## What changed (kit part only, every host at once)
 1. `.kodm` is `flex-direction:row; white-space:nowrap!important` for bar AND word (id-free but `.kodm.kodm` weighted) — card, popover, person card, hud. The stacked form (`kodstk`) is **removed**; `kitOdFit1` only decides `kodrow` (WHOLE meter, still bar+word on one row, under the title at the right) when the title would get < min(one-line width, 7.5 em). A `kodrow` card reports the whole row as title room, so `kitOptTier` keeps iPad 2 columns.
@@ -28,3 +28,6 @@ With the word beside the bar the meter is ~130 px wide on «Năm ăn năm thua»
 - LOOKED at: Fold dialog (after/before), iPad dialog, iPad Hành sự act with ladder popover, Fold popover — word right beside the bar everywhere; popover rows one line.
 
 ~100% xong (kit) / ~100% chơi được (UI only; needs reviewer).
+
+## UPDATE (decision A from MAIN 111, 23/11 ~20:52Z)
+Final branch sha 176aea47afcc3f96e12a31ab7ccc4e258c24fc3c. Titles untouched; meter under the title only where the title needs the room (kodrow, bar+word still ONE row): 755: 7→21, 1180: 7→21, 390: 14→26 placements; word below bar 0 / wrapped 0 at all three.  now reads the title room the OLD stacked meter left, so no dialog changes its column count: card heights at the real widths (auto, 460 px column) identical to main in both dialogs at Fold/iPad/phone (dev/test/odds-one-row.js, HLOG=1 logs heights); only the artificially forced 260/320 px columns differ by a few px (one scene 140→104, shorter). title-wrap test (no one-word lines) PASS 755+1180; old-save 16/16; dialog-fixed same 4 baseline FAILs. KIT.md law renamed "LINE BREAKS AT THE RIGHT PLACE" (new work only, per owner 23/11 ~20:47Z).
