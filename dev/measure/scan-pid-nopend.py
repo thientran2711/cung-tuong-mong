@@ -1,7 +1,7 @@
 # family scan: Q cards pushed with a literal pid; which have no PEND builder (so deserQ drops them on reload)
 import re,glob,sys
 root=sys.argv[1] if len(sys.argv)>1 else 'dev/build'
-src={f:open(f,encoding='utf8').read() for f in glob.glob(root+'/*.js')}
+src={f:open(f,encoding='utf8').read() for f in glob.glob(root+'/*.js') if not f.endswith('/all.js')}  # all.js = the assembled copy (gitignored)
 pend=set()
 for s in src.values():
   for m in re.finditer(r'PEND(?:\.(\w+)|\[\s*"(\w+)"\s*\])\s*=',s):pend.add(m.group(1) or m.group(2))

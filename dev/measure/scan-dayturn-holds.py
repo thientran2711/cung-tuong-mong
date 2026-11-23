@@ -3,7 +3,7 @@ import re,glob,sys
 root=sys.argv[1] if len(sys.argv)>1 else 'dev/build'
 pat=re.compile(r'(?:const|let)\s+(\w+)\s*=\s*(endTurn|nextBuoi)\s*;\s*\2\s*=\s*function\s*\([^)]*\)\s*\{')
 rows=[]
-for f in sorted(glob.glob(root+'/*.js')):
+for f in sorted(g for g in glob.glob(root+'/*.js') if not g.endswith('/all.js')):
   s=open(f,encoding='utf8').read()
   for m in pat.finditer(s):
     v,fn=m.group(1),m.group(2);i=m.end();
