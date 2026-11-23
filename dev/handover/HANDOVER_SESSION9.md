@@ -2532,3 +2532,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 09:45Z) LANDED KIT-AP01 e9c0a43d (LC7). LIVE = e9c0a43d. GAP → «~95% xong · còn 6 việc». Next LC7: outing-art-r1.
 - (23/11 10:00Z) LANDED outing-art e6894660 (LC7; KP23 outings wiring). LIVE = e6894660. KP23 still open (act picks wait owner; 4 outing backdrops B paints). LC7 queue empty.
 - WAKE 23/11 10:33Z — LOAD: main running 1 (KIT KEEPER #8 MGBG) | B: OD04 BIG rv; outing-art2 painting; D follow-ups queued | C idle (KP23 picks wait owner) | D: coop-driver-fails #2 | E: N12 BIG rv E52r; N17 E44i | moved: none. LC7 queue empty. ctx ~24 %.
+- (23/11 10:51Z) KIT-MGBG READY ce2f2289 (KIT KEEPER #8) → reviewer session_01Rc5AsLAkzEGrfY8oZa63vX opened (plays 4 games live). Keeper at ~45 % ctx: no new kit work; archive after verdict.
