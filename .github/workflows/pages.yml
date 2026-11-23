@@ -1,0 +1,32 @@
+name: Deploy game to Pages (player files only)
+# Owner 23/11: the repo is private, so the public Pages site must serve ONLY the game (no dev/, docs/, *.md, tests, workers).
+# Settings -> Pages -> Source must be "GitHub Actions". The allowlist lives in dev/site/pages_stage.sh.
+on:
+  push:
+    branches: [main]
+    paths: ["index.html", "sw.js", "assets.json", "manifest.webmanifest", "audio/**", "icons/**", "dev/site/robots.txt", "dev/site/pages_stage.sh", "dev/vendor/pixi-8.5.2.min.js", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage player files only
+        run: bash dev/site/pages_stage.sh _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
