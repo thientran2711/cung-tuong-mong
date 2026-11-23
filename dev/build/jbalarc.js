@@ -176,9 +176,6 @@ Object.assign(BAL,{arc:{
 BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
 
 /* typed-stat-bal GROUP C block (law 4): new amounts of group-C modules — Object.assign(BAL.eff.<module>,{…}) or new keys, never a key set twice */
-Object.assign(BAL.eff.jface,{penQuy:-8/* «Phạt quỳ» Sức the knelt one loses (jface FXF.penQuy, act text + AOUT) */});
-Object.assign(BAL.eff.jpet,{sucAsthma:-2/* Sức a week for an asthmatic owner of a shedding pet (jpet petWeek + jpetcare copy, PET bad texts) */,
- followN:1/* stat a following pet gives (+ PET.sacX): jpet follow bonus, cards, cửu vĩ hồ text */});
 Object.assign(BAL.eff.jpetcare,{babySuc:1/* Sức a week at least from a Non-stage pet (petcStageT X.suc + its text) */,playSuc:1/* Sức from the «Chơi» care game (petcBody text + petc result) */});
 Object.assign(BAL.eff.jrcp,{danhLose:-4,danhWin:1/* «dâng đồ kiêng» accusation (PEND.rcpacc): Danh when punished / cleared — rule + option texts */});
 Object.assign(BAL.eff.jts,{ducDenMiss:1/* hoa đăng «Cầu thánh ân» unseen: Đức (jts) */,dressVp:-3,dressTop3:2/* dress contest: Danh for over-rank pieces / for 2nd–3rd (jts finish + option + result texts) */});
@@ -193,3 +190,17 @@ Object.assign(BAL.itFx,{ngocboikc:{w:{sac:1}},vongbackc:{w:{sac:1}},vaibong:{dr:
 /* Tài nghệ lesson Sức cost (magnitudes): self = «Tự học» (j23 lessonMode, j83 deck card), tch = «Học với thầy» (j23, j2 lesson, jrcp teacher / bậc-5 new style),
    th = «Học với Thái hậu» (j23), prac = bậc-5 «Tự học, làm tác phẩm» (j83 wkPractice + deck card). Texts: jtabs, jrcp. (Tứ đức lessons: BAL.td) */
 BAL.artLes={self:15,tch:10,th:10,prac:10};
+
+/* typed-stat-bal (law 4): RULE AMOUNTS APPLIED AWAY FROM THE OPTION THAT SHOWS THEM (a monthly tick, a deferred night result, a pet table, a
+   help panel). Moved out of the per-site BAL.eff (one-core-bind binds an eff key to its own option) — same values; the rule and every text read BAL.rl. */
+Object.assign(BAL,{rl:{j85:{hanhDucMonth:1,ducTf:1,ducStaff:1},
+ j83:{ducIllBuy:-3},
+ j42:{sucSrvMeet:-5,ord:{spy:{tin:4,bac:3,tamco:1},plant:{tin:8,bac:10,duc:-5},poison:{tin:12,bac:20,duc:-10},fail:{tin:-2}}},
+ j71:{danhCRun7:1,danhCRun7_2:-1,danhBrbTick7:-5,danhFxFin7:-1},
+ j8:{hit:{lo:45,r:30,strong:120}/* poison hit Sức loss lo+R(r) (hắc độc: strong), her and every NPC */,ducGo:3,danhGo_2:-4},
+ j92:{danhWdFrameResolve:-10,danhWdFrameResolve_2:-10},
+ jinv:{danhTop:-1},
+ jmen:{danhTop_2:-3},
+ jpet:{danhPetMonthOf:-1,danhPetMonthOf_2:-1,sucAsthma:-2/* Sức a week for an asthmatic owner of a shedding pet */,followN:1/* stat a following pet gives (+ PET.sacX) */},
+ jstip:{sacUse:3},
+ jface:{penQuy:-8/* «Phạt quỳ» Sức the knelt one loses */}}});

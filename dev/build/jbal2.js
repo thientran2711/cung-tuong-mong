@@ -845,7 +845,7 @@ Object.assign(BAL,{ag:{on:1,
    hit      × on a consort's spite when she weighs hitting another palace's maid (jmline mlHit as a choice) */
 /* BAL.srvGate — the player maid's gates read by SRVA (j42) and the NPC staff: Chủ tin for "Xin chủ ban thưởng" (rew) / "Xin chủ tiến cử" (rec);
    frameLoy = the framed colleague's lòng after "Tố lỗi với chủ"; bully = Sức lost when bullied at Nội vụ phủ (Lĩnh đồ) */
-BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},get bully(){return -BAL.eff.j42.sucSrvMeet}};/* frameLoy: one number with BAL.eff.j42 */
+BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},get bully(){return -BAL.rl.j42.sucSrvMeet}};/* frameLoy: one number with BAL.eff.j42 */
 /* one table for every maid / eunuch, player or NPC (AG-ALL r1 F2 ONE CORE): srvRiskOf place risk (base by place, def elsewhere, -fr per friend,
    -tamco/tc, clamp min..max); srvGrant = the Ban gả trigger (Chủ tin >= tin, roll(base + bond if a sworn man), loyalty -stayLoy if she asks to stay);
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
@@ -2044,9 +2044,9 @@ Object.assign(BAL.eff.j85,{
  nauSuc4:4,        /* Nấu bậc 4: Sức each month instead */
  nauAn:1,          /* Nấu bậc 3: Ân tình each month (j85 v85Month, ARTFX.nau, ARTS.u) */
  nauAn5:2,         /* Nấu bậc 5: Ân tình each month instead */
- hanhDucMonth:1,   /* Hạnh bậc 3: Đức each month up to BAL.virx.hanhCap (j85 v85Month, VIRFX.hanh, Đức panel) */
- ducTf:1,          /* Đức ≥ ducLv.up / < ducLv.down: Thái hậu, Hoàng hậu regard ± each month (j85 v85Month, Đức panel) */
- ducStaff:1,       /* Đức ≥ ducLv.staffUp / < staffDown: servants' Thiện cảm ± each month (j85 v85Month, Đức panel) */
+    /* Hạnh bậc 3: Đức each month up to BAL.virx.hanhCap (j85 v85Month, VIRFX.hanh, Đức panel) */
+           /* Đức ≥ ducLv.up / < ducLv.down: Thái hậu, Hoàng hậu regard ± each month (j85 v85Month, Đức panel) */
+        /* Đức ≥ ducLv.staffUp / < staffDown: servants' Thiện cảm ± each month (j85 v85Month, Đức panel) */
  caughtDanh:-5     /* a scheme caught (j85 caught wrap): the schemer's Danh */
 });
 Object.assign(BAL.eff.j23,{
@@ -2055,7 +2055,7 @@ Object.assign(BAL.eff.j23,{
 Object.assign(BAL.eff.j83,{
  danhIllThaiy:-6,  /* đồ cấm via Thái y viện caught: buyer's Danh (j83 illBuy, IROUTE.thaiy.fail) */
  danhIllCho:-8,    /* đồ cấm at the black market caught: buyer's Danh (j83 illBuy, IROUTE.cho.fail) */
- ducIllBuy:-3      /* buying đồ cấm: buyer's Đức (j83 illBuy and its cards) */
+       /* buying đồ cấm: buyer's Đức (j83 illBuy and its cards) */
 });
 if(typeof VIRB!=="undefined")Object.assign(VIRB,BAL.virB);/* j85 tables load before this file: link the BAL objects into them */
 if(typeof ARTB85!=="undefined")Object.assign(ARTB85,BAL.artB);

@@ -60,7 +60,7 @@ petWeek=function(){for(const p of [S].concat(typeof petNpcs==="function"?petNpcs
    if(!me){const can=(p.bac||0)>=(T.up||0);const k=BAL.pet.npcCare*(can?1:.4);P.full=cl(P.full+D.full*1.2*k,0,100);P.clean=cl(P.clean+D.clean*1.2*k,0,100);P.joy=cl(P.joy+D.joy*1.2*k,0,100);P.aff=cl(P.aff+3*k,0,100)}
    petcSync(P);
    if(petOk(P)&&T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc+BAL.eff.jpet.sucAsthma,0,sucCap(S));else p.suc=cl((p.suc||0)+BAL.eff.jpet.sucAsthma,0,sucCap(p))}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc+BAL.rl.jpet.sucAsthma,0,sucCap(S));else p.suc=cl((p.suc||0)+BAL.rl.jpet.sucAsthma,0,sucCap(p))}
    if(P.care<BAL.pet.sad){P.bad=(P.bad||0)+1;if(me&&P.bad===1&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi biếng ăn",who:typeof pMe==="function"?pMe():null,h:`<p>${T.n} nằm lì một góc, lông xơ, không buồn ăn. Phải chăm ngay kẻo ốm.</p>`})}
    else P.bad=0;
    if(P.bad>=BAL.pet.neglectW||P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|phuong|camke|hac|thanhlong/.test(P.t)?"bay mất vì bỏ bê":"bỏ đi vì bỏ bê");

@@ -38,7 +38,7 @@ Object.assign(BAL,{stip:{
  ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:`Uống: Sức ${balSg(BAL.eff.jstip.sucUse_5)} · tặng Hoàng thượng, phi tần`,pr:12,use:{suc:BAL.eff.jstip.sucUse_5},gv:3,tg:["emp","rv"]},
  aolong:{n:"Áo lông chồn tiến cống",kd:"Vải vóc",d:`Mặc mùa đông: Sắc ${balSg(BAL.itFx.aolong.dr)} trong 3 tháng`,pr:120,rk:0,dr:BAL.itFx.aolong.dr,tg:["th"]},
  cocngoc:{n:"Bộ cờ ngọc",kd:"Lễ vật",d:"Tặng người mê cờ: rất hợp ý",pr:100,gv:10,tg:["emp","th","rv"]},
- guong:{n:"Gương Tây dương",kd:"Trang sức",d:`Dùng: bày lên bàn trang điểm, Sắc ${balSg(BAL.eff.jstip.sacUse)}`,pr:60,use:{sac:BAL.eff.jstip.sacUse},tg:["rv"]},
+ guong:{n:"Gương Tây dương",kd:"Trang sức",d:`Dùng: bày lên bàn trang điểm, Sắc ${balSg(BAL.rl.jstip.sacUse)}`,pr:60,use:{sac:BAL.rl.jstip.sacUse},tg:["rv"]},
  thamba:{n:"Thảm Ba Tư",kd:"Lễ vật",d:"Tặng: êm ấm, quý hiếm",pr:120,gv:9,tg:["th","rv","hh"]},
  cungbac:{n:"Cung bạc chạm rồng",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý người mê săn bắn",pr:60,gv:8,tg:["emp"]},
  traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_6)} · tặng`,pr:15,use:{suc:BAL.eff.jstip.sucUse_6},tg:["rv","th"]},

@@ -242,7 +242,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  try{if(typeof knSrvCards==="function")for(const a of knSrvCards(m))X.push(a)}catch(e){console.error("jagknow cards",e)}
  X.forEach(a=>a.dom="");return X}
 function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid));
- if(roll(SRVA.nvp.bully)){apply({suc:BAL.eff.j42.sucSrvMeet});log(`Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức ${balSg(BAL.eff.j42.sucSrvMeet)}.`);return}
+ if(roll(SRVA.nvp.bully)){apply({suc:BAL.rl.j42.sucSrvMeet});log(`Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức ${balSg(BAL.rl.j42.sucSrvMeet)}.`);return}
  if(L.length){const s=pick(L);S.srv.met.push(s.sid);srvAf(s,5);log(`Ở Nội vụ phủ ngươi quen ${s.name}, ${srkName(s).toLowerCase()} của ${NM(ownerOf(s))}.`)}}
 (function(){const d0=deal;deal=function(){if(isSrv()){deck=srvCards();return}return d0.apply(this,arguments)}})();
 (function(){const a0=act;act=function(i){const a=deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);
@@ -326,11 +326,11 @@ function ordOdds(k){const o=od(k==="spy"?45+S.tamco/5+S.tai/10:k==="plant"?30+S.
 function srvOrder(){const m=srvM();const t=srvW(()=>pickTarget(m));if(!t||t===S||!t.alive)return;const mal=m.malice||40;
  const k=npwPick(["poison","plant","spy"],x=>srvOrdW(m,t,x))||"spy";/* npc-purpose G2a: the deed fits her malice and her grudge against the target */pushDil(mkP("cnvOrd",{k,t:t.id}),`Lệnh của ${m.name}`)}
 function srvDoOrder(k,t){const m=srvM();if(!m||!t)return;m.schemes=(m.schemes||0)+1;S.srv.msch=m.schemes;const o=ordOdds(k);
- if(roll(o)){if(k==="spy"){const n=evA(m,t,BAL.eff.j42.evN);apply(Object.assign({},BAL.eff.j42.ord.spy));log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j42.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái; về bẩm ${m.name} ${harmTxt(t)}.`)}
-  else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;let d=1;try{d=framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply(Object.assign({},BAL.eff.j42.ord.plant));log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.${d===0?" "+FRAME_LAST:""}`)}
-  else{const H=BAL.eff.j8.hit,d=H.lo+R(H.r);ap(t,{suc:-d});const dd=dieIf(t,"chết sau một bát canh");apply(Object.assign({},BAL.eff.j42.ord.poison));log(dd||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span>`)}
+ if(roll(o)){if(k==="spy"){const n=evA(m,t,BAL.eff.j42.evN);apply(Object.assign({},BAL.rl.j42.ord.spy));log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j42.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái; về bẩm ${m.name} ${harmTxt(t)}.`)}
+  else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;let d=1;try{d=framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply(Object.assign({},BAL.rl.j42.ord.plant));log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.${d===0?" "+FRAME_LAST:""}`)}
+  else{const H=BAL.rl.j8.hit,d=H.lo+R(H.r);ap(t,{suc:-d});const dd=dieIf(t,"chết sau một bát canh");apply(Object.assign({},BAL.rl.j42.ord.poison));log(dd||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span>`)}
   srvMerit(srvOrdMerit());return}
- apply(Object.assign({},BAL.eff.j42.ord.fail));if(!roll(BAL.odb.j42.rlSrvDoOrder)){log("Việc không thành, may chưa ai thấy.");return}
+ apply(Object.assign({},BAL.rl.j42.ord.fail));if(!roll(BAL.odb.j42.rlSrvDoOrder)){log("Việc không thành, may chưa ai thấy.");return}
  if(roll(BAL.odb.j42.rlSrvDoOrder_2)){die(`Bị bắt quả tang khi ${k==="poison"?"bỏ độc":k==="plant"?"cài bùa ngải":"dò la"} ${t.name}, bị đánh chết ở Thận Hình ti`);return}
  if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){/*evok: ordered scheme (schemes++)*/evA(t,m,BAL.eff.j42.evSrvDoOrder);relAdd(m,t,BAL.eff.j42.srvDoOrder);srvLaundry(`Bị bắt, ngươi khai ra ${m.name}. ${t.name} nắm ${balAb(BAL.eff.j42.evSrvDoOrder)} chứng cứ; chủ hận ngươi.`,BAL.ag.why.srv.pun.orderWk);S.tin=BAL.ag.why.srv.pun.orderTin;return}
  apply({suc:BAL.eff.j42.sucSrvDoOrder,tin:3});log(`Bị bắt và tra khảo, ngươi cắn răng không khai. Sức ${balSg(BAL.eff.j42.sucSrvDoOrder)}. Chủ nhân nhớ ơn.`);if(S.suc<=0)die("Chết dưới đòn tra khảo ở Thận Hình ti")}
@@ -345,8 +345,8 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;
  return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:cnvPend(S,cnvScoldOpts(S,m))}};
 /* the one row of a master's order (the card here and the receiver card in jptime read it): what, the gain, the loss */
 function ordRow(k,t){const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin ${balSg(BAL.eff.j42.ord.spy.tin)} · Bạc ${balSg(BAL.eff.j42.ord.spy.bac)} · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin ${balSg(BAL.eff.j42.ord.plant.tin)} · Bạc ${balSg(BAL.eff.j42.ord.plant.bac)} · ${t.name} bị vu, mất Danh`,poison:`Chủ tin ${balSg(BAL.eff.j42.ord.poison.tin)} · Bạc ${balSg(BAL.eff.j42.ord.poison.bac)} · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${srvOrdMerit()}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
- return{say:desc,gain,loss:`Chủ tin ${balSg(BAL.eff.j42.ord.fail.tin)}, nửa phần bị bắt`}}
+ const gain={spy:`Chủ tin ${balSg(BAL.rl.j42.ord.spy.tin)} · Bạc ${balSg(BAL.rl.j42.ord.spy.bac)} · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin ${balSg(BAL.rl.j42.ord.plant.tin)} · Bạc ${balSg(BAL.rl.j42.ord.plant.bac)} · ${t.name} bị vu, mất Danh`,poison:`Chủ tin ${balSg(BAL.rl.j42.ord.poison.tin)} · Bạc ${balSg(BAL.rl.j42.ord.poison.bac)} · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${srvOrdMerit()}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
+ return{say:desc,gain,loss:`Chủ tin ${balSg(BAL.rl.j42.ord.fail.tin)}, nửa phần bị bắt`}}
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k);const R=ordRow(k,t),desc=R.say;
  const tail=` · thành: ${R.gain} · hỏng: ${R.loss}`;const O=cnvOrdOpts(S,m,t,()=>srvDoOrder(k,t));O[0].x=word(o)+tail;const hf=O.find(x=>x.id==="half");if(hf)hf.x=word(oddsCl(o-BAL.road.hp.half))+tail;
  return{t:`<p>${m.name} gọi ngươi vào phòng trong, đóng cửa: “Ngươi đi ${desc}.”</p><p class="past">Kẻ hầu nào làm cũng một luật: hỏng thì nửa phần bị bắt; bị bắt thì 3 phần bị đánh chết ở Thận Hình ti, hoặc phải khai ra chủ.</p>`,who:pv(m),o:cnvPend(S,O)}};
