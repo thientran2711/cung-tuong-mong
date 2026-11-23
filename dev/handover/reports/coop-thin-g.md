@@ -824,7 +824,7 @@ New container: worktrees /home/user/wt/r2 (test tree, at bd98d53c, dev/index.htm
 | role-parity | bd98d53c | page closed under load (box load 20, 10/15 GB) → rerun alone |
 | coop-e2e THIN 13 ×1, famops-unit, quickcheck | bd98d53c | NOT YET RUN |
 
-#### HANDOVER (successor TODO; probe copy: dev/handover/reports/coop-thin-g-tripprobe.js on this branch → copy to dev/test/zz-tripprobe.tmp.js, untracked)
+#### HANDOVER (successor TODO; probe copy: dev/handover/reports/coop-thin-g-probe/tripprobe.js on this branch → copy to dev/test/zz-tripprobe.tmp.js, untracked)
 1. Read trip1-p8/p9.log DANHP lines around the TRANSIENT week → name the writer of the +1 Danh on the host store that never reaches her phone; branch-made (G week end × LIVE famops ops) → root-fix on review/coop-thin-g-r2 or FAIL to the fixer with the evidence.
 2. Stall: keep 2–3 REPL probe runs going on the final head; when 'PROBE REPL ready' appears, read the PROBE net / sent-after-click / host-after-click lines, then use the REPL (her `Q`, `COOPW.thin`, `TH.doSend`, `SENT`) to see whether her close is sent and whether the host's pick handler runs. Foreman B (14:26Z): real co-op stall, blocks PASS; fix if small (whole family: every part-D card closed on her phone while the host holds gHold — the pick must land or the hold must release), else FAIL coop-thin-g <sha> trip1 stall (fixer #10 session_01N1tNP5QWB8tYRvFqUSnKVx knows the code). Then trip1 ×5 green.
 3. Final: ONE merge of newest origin/main, quickcheck + coop-e2e ×1 (THIN=13) + role-parity (alone) + coop-famops-unit (argv[2] http://ctm.local/index.html) → verdict.
