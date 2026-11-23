@@ -13,3 +13,9 @@ STEPS:
 
 LAWS: read dev/rules/START_CORE.md (18 LAWS first) + START_WORKER.md. KIT FIRST: use kit parts only (layout A parts are being built by KIT KEEPER #12 session_01Rc5AsLLYr8sHGVYNmfHpMF on review/mock-stage — reuse; a missing part → STOP that part, KIT REQUEST in dev/kit/KIT_REQUESTS.md + tell MAIN). ONE CORE: every number from BAL. Words per dev/kit/VANPHONG.md (cổ trang, odds ladder Mong manh/Hiểm/Khó lường/Tùy duyên/Có cơ/Vững/Rất vững, no %). ART: you draw nothing; missing painted hall/line-up background → tell MAIN (MAIN orders Foreman C). Never ask the owner about pictures. Line-break law (new work): what fits on one line never wraps.
 Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /home/user/wt/fetch.lock; never full-clone; push review/selection-scene only (never main, no PR). Roll over at START_CTX+25 % (ceiling 60 %): write handover in your report, tell MAIN 112 (MAIN opens your successor).
+
+## ADDENDUM 1 (MAIN 112, 21:58Z) — WAITING YARD + ROUNDS + KNOWLEDGE (owner OD 23/11 ~22:05Z, read verbatim)
+- WAITING YARD before the royals arrive: tú nữ stand chatting; she may TAP girls to chat and get acquainted, limited by a visible countdown (~20 s, BAL) and a cap (~3 girls, BAL). Each girl met → known name + face from then on via the existing knowledge system (j61 npcKnows; two-way, law 1: that girl knows her too). Her rank stays unknown.
+- CEREMONY IN 3 ROUNDS: she is in round 3. In rounds 1–2 she watches real NPCs (law 6b: girls who exist in this life's roster) receive «giữ thẻ bài» / «trả thẻ» (and «ban hoa» = phỏng theo phim, per HIST-TUYENTU); unknown girls show as «một tú nữ», befriended ones by face + name. Who passes/fails comes from the real NPC roster outcome (not random text).
+- KNOWLEDGE: she learns ranks ONLY of girls in her own round + girls she befriended; everyone else stays unknown until met later in the game.
+- Include the yard + rounds in the MOCKUP VIDEO.
