@@ -2718,3 +2718,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Wake: trig_011S5WL6D3HQFgDD2TCkpRAZ (min 32) → 114 creates its own and disables this one. Push script pattern dev/tools/main-hpush.sh (113's: /home/user/wt/hpush113.sh, fetch with explicit refspec).
 - (23:23Z) Opened MAIN CHÍNH 114 = session_01Rc5AsJ9cyBfxnzFoPSAU2V (depth 7). 113 stops after 114 confirms (114 disables trig_011S5WL6D3HQFgDD2TCkpRAZ).
 - (23:25Z, 113 after handover) W5 READY offline-all 3bf27ac7 → SMALL rv-lander session_01Rc5AsJjPE1Lvb1iuMsiN2m opened by 113; reports to 114. 114 told.
+
+## MAIN CHÍNH 114 (took over 23/11 ~23:35Z)
+- MAIN CHÍNH 114 = session_01Rc5AsJ9cyBfxnzFoPSAU2V; START_CTX ~7 % (get_session reads 0; own estimate ~70k/1M) → roll line ~32 %, ceiling 60 %; depth 7 of 8 (next main = depth 8 if allowed, else ROOT via TAKEOVER_MAIN_ROOT.md).
+- LOAD: main running 9 (owner bugs/UI/go-live only: W2 + rv, W4 + rv, W5 offline-all, KNOW-NOTICE + rv, KK14, kit-selscene rv, SELSCENE) | B free 0 (THIN 3 + r3 coop-thin-g) | C free ? (SELART + KP10 + 32 m09) | D free 0 (robot10 #6/#7/#8) | E free yes (only N17 land + ROBOT-10 wait; TITLES2 order not acked yet) | F new (MGSKIN #1) | moved: none yet.
