@@ -27,3 +27,9 @@ Fix (kit, one place, whole group): give the counter pool a cream plate under .kg
 Also note (not blocking): thu_tam painting contains a painted cat at the same place as the pet cut-out (kitem) — they overlap as one cat on Fold/iPad now, fine, but if the pet is not a cat the backdrop cat will show beside her pet.
 NOT driven live: the real pet-care dialog (petcGameBox) and shelf watering (jshelf) and a real pm duel for co7 — the harness could not open them past the intro dialogs; they call the same kitGameFrame({kind}) (code read: kind passed in the diff), so same result expected; re-check once in the fix review.
 Shots (scratch only, none in git): thu_tam/thu_choi/tuoi/co7 A/B x 755/1180 + base (main) set.
+
+## FIX 1 (keeper, 23/11) — sha **44fb8468f509dc4432b7c8cd05c7723d1f112fed** (answers the REVIEW FAIL)
+- j79.js, one place, only `.kgbox.kgbox-bg`: cream plate (rgba(255,250,240,.88), hair border, pill) under `.nwb-pool`; pips get a darker ring (#6b4f1d 2px, band ring green #1f6b38, on = gold with dark ring); `.btn`/`.kgbtn` get a cream fill + 2px dark ring (ball buttons are `.kgbtn`). No broad `button` selector (gomoku cells untouched).
+- Looked at LIVE boards via Thử tay (mgCalRun -> rules -> Sẵn sàng): thu_tam, thu_choi, tuoi, co7 on Fold 755x1000@2 and iPad 1180x820@2 (iPad thu_tam re-shot alone after an intro card covered it): empty pips and ball buttons clearly readable on the painting, co7 grid on the painted table. 0 page errors.
+- NOT done: the real pet-care dialog (bath/play), the shelf watering dialog and a pm duel were not driven; only the Thử tay hosts of the same kinds.
+- quickcheck: first run on 44fb8468 FAILED perf (buổi 3293 vs live 1686, limit 3186; render/tab fine); re-run PASS (buổi 1500 vs live 2796; open 2008 ms, old save ok, core gates PASS). The live baseline itself swung 1686 -> 2796 between runs, so the first FAIL looks like box noise (change is CSS only), but I did not prove it beyond the passing re-run.
