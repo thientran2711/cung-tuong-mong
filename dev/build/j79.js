@@ -836,6 +836,9 @@ button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
 const KP_MON=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"];
 const KP_NUM=["nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
 const kpYear=y=>`năm thứ ${y>=1&&y<=10?KP_NUM[y-1]:y}`;
+/* life number in words for the top-left header chip (hdr-kiep, owner 23/11): "Kiếp thứ nhất / hai / ba…", digits only beyond ten; the count = geK.lifeNo (jge geLifeNo, the one source) */
+const kpLife=n=>`Kiếp thứ ${n>=1&&n<=10?KP_NUM[n-1]:n}`;
+window.kpLife=kpLife;
 /* dates in the wording guide (dev/kit/VANPHONG.md): full "Tháng ba, năm thứ nhất, thượng tuần, buổi chiều"; short "Tháng ba · thượng tuần · năm thứ nhất" */
 function kitDate(m,y,t,b,full){if(window.VP&&typeof VP.date==="function"){try{return VP.date(m,y,t,b)}catch(e){}}const mo=`Tháng ${KP_MON[(m-1)%12]||m}`,tu=t!=null?TUAN[t]:null,bu=b!=null?String(BUOI[b]).toLowerCase():null;
  return full?[mo,kpYear(y),tu,bu].filter(Boolean).join(", "):[mo,tu,kpYear(y)].filter(Boolean).join(" · ")}
