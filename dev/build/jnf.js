@@ -206,7 +206,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -319,8 +319,17 @@ const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
+/* SOFT-LOCK GUARD (review/fix-evening-softlock, ROBOT-10 bug A): S.nfX is SAVED but what releases it is not — the choice card (Q pid "nfch",
+   no PEND builder: deserQ drops it on reload) and her steal game (jsmg BUSY, the j82 #kg82 layer). After a reload (or a game layer closed without
+   its onDone) S.nfX stayed {st:"open",dlg:1} or {st:"mg"} for ever: every «Sang ngày mới» went to hold() and the day never turned (Q 0, no modal).
+   heal(): a choice whose card is gone is shown again (dlg cleared → step → showChoice, her 10 s clock anew); a steal game that is no longer on
+   screen counts as over without a rung (st back to "open"; her pick x.me is kept, the one resolve runs). Runs at each press and each step tick. */
+function heal(){try{const x=X();if(!x)return;
+ if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
+ if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
+window.nfHeal=heal;
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
- const d=day();
+ const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}

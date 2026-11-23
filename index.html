@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới.","b":"11c9ba6be7ec","h":[{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
+window.CTM_BI={"s":"225c5c08+","t":"2026-11-23T19:49Z","c":"SELF-MERGE LAND kp23-swap: merge LIVE da829e9ba (index.html/sw.js rebuilt)","b":"b4d166433c7b","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -80681,7 +80681,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -80794,8 +80794,17 @@ const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
+/* SOFT-LOCK GUARD (review/fix-evening-softlock, ROBOT-10 bug A): S.nfX is SAVED but what releases it is not — the choice card (Q pid "nfch",
+   no PEND builder: deserQ drops it on reload) and her steal game (jsmg BUSY, the j82 #kg82 layer). After a reload (or a game layer closed without
+   its onDone) S.nfX stayed {st:"open",dlg:1} or {st:"mg"} for ever: every «Sang ngày mới» went to hold() and the day never turned (Q 0, no modal).
+   heal(): a choice whose card is gone is shown again (dlg cleared → step → showChoice, her 10 s clock anew); a steal game that is no longer on
+   screen counts as over without a rung (st back to "open"; her pick x.me is kept, the one resolve runs). Runs at each press and each step tick. */
+function heal(){try{const x=X();if(!x)return;
+ if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
+ if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
+window.nfHeal=heal;
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
- const d=day();
+ const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
@@ -90513,6 +90522,9 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
 window.stealMgPlay=herGame;
+/* is her steal game really running? (jnf heal, review/fix-evening-softlock): BUSY with no game layer on screen (#kg82 closed without its onDone,
+   or a reload: BUSY is not saved) is no game — BUSY drops so the next try can play */
+window.stealMgBusy=function(){if(BUSY&&typeof window.__smgFake!=="function"&&!document.getElementById("kg82"))BUSY=0;return !!(BUSY||PEND)/* PEND: her pick is being recorded inside chooseM, the game opens right after */};
 
 /* her Hành sự deck cards (j2 deal; j75 marks them __steal where its buổi check matches): the game first, then the card as before with that try's odds */
 const isStealCard=a=>!!(a&&a.o!=null&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===(typeof B4L==="number"?B4L:2))));
@@ -94795,7 +94807,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="11c9ba6be7ec";window.CTM_BUILD=BUILD;
+const BUILD="b4d166433c7b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
