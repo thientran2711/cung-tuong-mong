@@ -8,3 +8,7 @@
 # OWNER L2389 (22/11 ~22:08Z, via ROOT-C1) — VERBATIM
 "Tạo sao cửa sổ kín mít vậy"
 ## Foreman C reading: windows no drapes but OPEN/bright — gauze panes see-through + 1–2 panels propped open + garden visible; L30 updated; redo the 7 once (~945 cr); same rule for 29 rooms later.
+
+# OWNER L2391 (23/11 ~00:10Z, via ROOT-C1) — VERBATIM (angry)
+"Lượt 2390, bạn mở cửa sổ mà bạn làm mọi thứ ép vào làm cửa sổ hết. Chỗ không phải cửa sổ cũng thành cửa sổ, xóa rèm sao mà thành ra biến thành cửa sổ luôn. Giống như là ở cái hình là từ Ninh Cung cũ nè, cái chỗ cái bức tượng Phật này có cái rèm, cái tự nhiên bạn phá cái rèm thành ra là cái chỗ đó có cái cửa sổ sau lưng luôn. Còn ở cái chỗ hay là Đông Cung bên phải nó có cái bản đồ á, cái bạn mở, bạn cố tình bạn mở cái cửa sổ ra, cái là thành ra cái tấm bản đồ nó đang lơ lửng trên không trung. Tức là vậy nè, tôi đâu có bắt buộc là phải mở cửa sổ là phải thấy cái cánh cửa sổ hay như thế nào đâu, có những cái hình ban đầu nó đã đẹp rồi, tự nhiên cái lại đi gắn cái cửa sổ vô kỳ cục kinh khủng. Hôm Ninh Cung đã ok rồi, tự nhiên cái hình mới, cái chỗ cái cột đó thành ra cái cửa sổ là làm sao lấy lại Khôn Ninh Cung cũ. Mình làm phải make sense với chứ, phải tự bạn phải tự kiểm tra cái kết cấu của cái nhà như thế nào trước khi đưa hình cho thôi chứ."
+## Foreman C reading: Khôn Ninh restore old; remove drapes only on REAL windows, never turn walls/niches/columns into windows, hung objects on solid walls; redo Từ Ninh, Đông cung, A ca sở + recheck 3; STANDING STRUCTURE CHECK before sending any picture.

@@ -1826,3 +1826,4 @@ ROOT-C5 ~22:19Z: PLACES4 open-window redo @b8b8a3d (945 cr; PLACES4 total 1 890)
   (3) N18: drop the capped FIGSIG wait in dev/test/quickcheck.js (B parked it; B FYI) → review/quickcheck-figsig → reviewer → LAND READY here.
   Claim each in CLAIMS before start. Law: C seats are now helpers; ask MAIN before taking any other row.
 - FROM MAIN 106 (22/11 23:46Z): LIVE = d1a36374 (D coop-flakes landed).
+ROOT-C5 ~00:13Z: OWNER L2391 (angry): L2390 turned walls/niche/column into windows (Từ Ninh Buddha niche, Đông cung map floating, Khôn Ninh column). I missed it in my look. → PLACES4: Khôn Ninh restore old; L30 = drapes off REAL windows only; redo Từ Ninh/Đông cung/A ca sở + recheck 3; STRUCTURE CHECK rule added to START_FOREMAN_C + art rules. Next Lượt 2392.
