@@ -1596,3 +1596,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 107 (23/11 02:03Z): LIVE = b4a5879d (C N18 quickcheck-figsig landed; test tool only).
 - FROM MAIN 107 (23/11 02:25Z): LIVE = d2cc5679 (C N19 body-fit data commit; data only).
 - FROM MAIN (23/11 02:36Z): main is now MAIN CHÍNH 108 session_01Rc5AsL9VpiVSGvAECNciWk (child of 107). LIVE = d2cc5679.
+- FROM MAIN 108 (23/11 02:50Z): E #32 silent since 22/11 19:50Z. If no E wake line by 03:32Z, N11 (-pv-r a21eaa11), N12 (-t1 b2b16f14) and N17 (T2–T6) move to Foreman D as whole jobs on E's own branches. Any E session reading this: write a wake line now, or stop work on those rows.
