@@ -1148,4 +1148,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | REVIEW kit-ap01-frame (sonnet SMALL kit) of 57061678 | reports/KIT-AP01.md «## REVIEW» | MAIN 109 | session_01Rc5AsKwSnGFsj7p8CQxCc7 | PASS f38a40b1 → LC7, archived | 23/11 07:51Z |
 | KP23 outings wiring: code reader so the 4 outing pictures (img/outing-{ngu-uyen-ngoai,chua-ho-quoc}-{port,land}.webp, C GAPART2) show where outings play (sonnet; MAIN 109 ORDER 07:29Z) | review/outing-art; reports/outing-art.md | B | session_01N1tNP5iasNKdRpY67DYyCp | READY FOR CHECK 4627c50b | 23/11 09:10Z |
 | REVIEW coop-thin-g WHOLE (opus BIG co-op reviewer-lander) of review/coop-thin-g-f1 dea00576 | reports/coop-thin-g.md «## REVIEW» | B | session_01N1tNP5MAkuoXRAJ7HMLDnA | RUNNING | 23/11 08:32Z |
-| REVIEW outing-art (sonnet SMALL) of review/outing-art 4627c50b | reports/outing-art.md «## REVIEW r1» | B | (opening) | RUNNING | 23/11 08:47Z |
+| REVIEW outing-art (sonnet SMALL) of review/outing-art 4627c50b | reports/outing-art.md «## REVIEW r1» | B | session_01N1tNP2ksTW8GR3PpKSJH3d | RUNNING | 23/11 08:47Z |
