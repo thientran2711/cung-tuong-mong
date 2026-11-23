@@ -177,7 +177,7 @@ function wdApply(p,pair){if(!pair)return;const w=wdOf(p);const take=x=>{if(!x)re
 /* obs's belief of the P of entry e worn by owner (a ngự tứ worn by its owner is known to be by right) */
 function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&owner&&e.own===wdKey(owner))return Math.min(it.P,wdPOf(owner));if(obs===owner&&(e.from==="base"||e.nvp))return it.P;/* her own issued phẩm phục */return wdBelP(obs,it.k)}
 function wdBelStatus(obs,t){return wdStatusBy(t,e=>wdBelPE(obs,e,t))}
-function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
+function wdAutoFor(p,bias){if(p&&p.coop)return;/* E44j (law 6c + 1; coop-lost-scan-traced 9001 vanish 10000001 y_saxanh): her entry on the host is a player seat: her outfit is her own seat's choice. The j92 month / Quốc tang / jlux luxCalm / jworld tang re-dressed it by NPC roll → b4Ops «rm gone» of the garment put on + «add» of the one taken off → her seat lost it */const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
 function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Ân cần|Khiêm nhường/.test(t)?-.5:0}
 
@@ -400,7 +400,7 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
 
 /* ---------- monthly: quốc tang, NPC dressing, remarks, tai mắt, pawns, ngự tứ, promotions (all consorts alike) ---------- */
 function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy("wdDress",{v},()=>roll(npw1B("wd").dressGo)/* G1 #9 flat-roll audit: she changes her outfit by the old odds (base skipped 70 %; with no done roll NPC re-dressing rose 4390 → 8115) */)))return;wdAutoFor(v,wdNpcBias(v))}
-function wdNpcInit(v){if(v.wdI)return;v.wdI=1;v.inv=v.inv||[];const P=wdPOf(v);const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(cl(P-1+R(4),0,8),roll(50)?"tram":"y",0);if(k)v.inv.push({k,from:"base0"})}}
+function wdNpcInit(v){if(v.wdI||v.coop)return;/* E44j: never NPC starting pieces into her entry (each one = an «add» to her seat from nowhere) */v.wdI=1;v.inv=v.inv||[];const P=wdPOf(v);const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(cl(P-1+R(4),0,8),roll(50)?"tram":"y",0);if(k)v.inv.push({k,from:"base0"})}}
 function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  /* quốc tang: Thái hậu or Hoàng hậu passes away → 3 months, no red or yellow */
  let why="";if(!pre.th&&S.thDead)why="Thái hậu băng hà";else if(pre.q){const q=rivals.find(v=>v.id===pre.q);if(q&&!q.alive)why=`Hoàng hậu ${q.name} băng hà`}
