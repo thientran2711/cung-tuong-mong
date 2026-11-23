@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const path=require('path');
 const URL0=process.argv[2]||'index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 (async()=>{const b=await chromium.launch();const pg=await b.newPage({viewport:{width:755,height:1000},deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(String(e)));pg.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|file:\/\/|not supported/.test(m.text()))errs.push(m.text())});
  await pg.goto(URL);await pg.waitForFunction(()=>typeof KG82_ENG!=="undefined"&&typeof mgpOne==="function",null,{timeout:60000});
- const r=await pg.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const KINDS=["hat","hoa","banh","huong","ve","kim"],o={};
+ const r=await pg.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const KINDS=["hat","hoa","banh","huong","ve","kim","tho","le","td_cong"],o={};
   try{if(!S)S={}}catch(e){}
   for(const k of KINDS){o[k]={runs:0,throws:[],draws:0};for(let i=0;i<10;i++){const box=document.createElement("div");box.className="kgbox";box.style.width="640px";document.body.appendChild(box);
    const env={kind:k,lv:mgSet(k,{occ:"hoc",lv:i%5,d:0}).ease,hud:()=>{},end:x=>{}};let stop=null;try{stop=KG82_ENG[KG82_KIND[k].e](box,env);await sleep(120);o[k].runs++;if(!box.querySelector("canvas"))o[k].throws.push("no canvas")}catch(e){o[k].throws.push(e.message)}

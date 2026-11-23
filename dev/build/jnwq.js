@@ -90,13 +90,14 @@ function nwqSprItem(name){return(g,it,x,y,s,st)=>{g.save();if(st==="on"){g.shado
 
 /* =============== 1. LAY (Lễ nghi): the model altar is shown; drag every object to its place on the table =============== */
 const NWQ_LE=["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan","ve-inkstone","mua-bell","banh-pot"];
+const LEU=[];/* altar ids shown in this game */
 const NWQ_LAY={3:[[.5,.28],[.24,.72],[.76,.72]],4:[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],5:[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]]};
 function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem tờ mẫu.",hintT:"Vật sáng đặt vào chỗ sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
  demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-92,42,184,58,"MẪU",10);const m=[[cx-48,74],[cx+48,74]],nm=["huong-censer","hoa-vase"];m.forEach(([x,y],i)=>nwqFit(g,nm[i],x,y,34));
    nwqPanel(g,cx-92,110,184,58,"BÀN LỄ",10);const sx=[cx-48,cx+48],sy=142;sx.forEach(x=>{nwqSlotRing(g,{x,y:sy,w:40,h:40},"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx,hy=196,tx=hx+(sx[1]-hx)*e,ty=hy+(sy-hy)*e;nwqFit(g,"hoa-vase",tx,ty,36);nwqFit(g,"huong-censer",sx[0],sy,34,{alpha:.9});return 236}},
- build(r,tier,W,H0){const B=BAL.nwq,N=B.n.le[tier],L=NWQ_LAY[N],objs=kg82Shuf(NWQ_LE).slice(0,N);
+ build(r,tier,W,H0){if(!r)LEU.length=0;const B=BAL.nwq,N=B.n.le[tier],IT=typeof mgpOne==="function"?mgpOne("le",LEU,x=>x.n===N):null,L=IT?IT.lay:NWQ_LAY[N],objs=IT?IT.objs.slice():kg82Shuf(NWQ_LE).slice(0,N);/* ORDER THIN P1: one composed altar (object set × table layout), drawn through the no-repeat memory */
   const H=H0*Math.min(1,Math.max(.7,((typeof innerHeight==='number'?innerHeight:800)-185)/H0));/* short landscape: keep tray + altar above the sticky hint bar */
   const mx=W*.18,mw=W*.64,my=H*.03,mh=H*.29,ax=W*.05,aw=W*.9,ay=H*.36,ah=H*.4;const mS=Math.min(mh*.44,mw/(N>3?3.1:2.7)),aS=Math.min(ah*.44,aw/(N>3?3.7:3));
   const slots=L.map((p,j)=>({x:ax+p[0]*aw,y:ay+p[1]*ah,w:aS*1.1,h:aS*1.1,ok:it=>it.k===j,paint:(g,s,st)=>nwqSlotRing(g,s,st)}));

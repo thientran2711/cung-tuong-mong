@@ -53,8 +53,21 @@ function mgpGenVe(){const out=[],LAY=[[[.30,.46],[.74,.28],[.62,.80],[.12,.74],[
 /* kim: a fold set × a layout seed (hole places are drawn from the seed: the same item = the same paper) */
 function mgpGenKim(){const out=[],SH=[["moon","tri"],["moon","drop"],["tri","drop"],["moon","tri","drop"]];/* never a single shape: the board keeps its choice */
  for(let s=0;s<SH.length;s++)for(let q=0;q<80;q++)out.push({id:`kim-${s}-${q}`,sh:SH[s],seed:`kim${s}-${q}`});return out}
-const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:mgpGenVe,kim:mgpGenKim};
-function mgpItems(kind){return MGP_C[kind]||(MGP_C[kind]=MGP_GEN[kind]?MGP_GEN[kind]():[])}
+/* tho: every calligraphy glyph (jnwp NW_GLYPH, the one table) × six brush manners (upright · narrow · leaning right · leaning left · slight lean · narrow lean); a manner only reshapes the unit square, strokes and order stay */
+function mgpGenTho(){const out=[],G=typeof NW_GLYPH!=="undefined"?NW_GLYPH:null;if(!G)return out;const MAN=[[1,0],[.88,0],[1,.08],[.9,-.08],[.94,.04],[.84,-.05]],cl=v=>Math.max(.06,Math.min(.94,+v.toFixed(3)));
+ for(const n of Object.keys(G))for(const [nm,S] of G[n])for(let m=0;m<MAN.length;m++){const [k,sk]=MAN[m];out.push({id:`tho-${n}-${nm}-${m}`,n:+n,g:[nm,S.map(st=>st.map(([x,y])=>[cl(.5+(x-.5)*k+sk*(.5-y)),y]))]})}return out}
+/* le: object set (N of the eight altar pieces, jnwq NWQ_LE) × a layout of the sample table (three per N) */
+const MGP_LAYLE={3:[[[.5,.28],[.24,.72],[.76,.72]],[[.24,.28],[.76,.28],[.5,.72]],[[.5,.5],[.2,.3],[.8,.7]]],
+ 4:[[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],[[.5,.2],[.22,.5],[.78,.5],[.5,.8]],[[.2,.3],[.5,.24],[.8,.3],[.5,.74]]],
+ 5:[[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]],[[.2,.26],[.8,.26],[.5,.5],[.2,.76],[.8,.76]],[[.5,.2],[.2,.46],[.8,.46],[.33,.76],[.67,.76]]]};
+function mgpGenLe(){const out=[],O=typeof NWQ_LE!=="undefined"?NWQ_LE:[];if(!O.length)return out;
+ for(const N of [3,4,5])for(let l=0;l<MGP_LAYLE[N].length;l++){const comb=(st,k)=>k===0?[[]]:O.slice(st).flatMap((x,i)=>comb(st+i+1,k-1).map(r=>[x].concat(r)));
+  comb(0,N).forEach((set,i)=>{const r=(i+l)%N;out.push({id:`le-${N}-${l}-${i}`,n:N,lay:MGP_LAYLE[N][l],objs:set.slice(r).concat(set.slice(0,r))})})}return out}
+/* td_cong: slot (the three pieces of a game, band count by slot as today) × petal count × palette (ten dark/light pairs) */
+const MGP_PAL=[[[150,28,58],[255,214,224]],[[128,18,40],[255,206,206]],[[150,78,8],[255,234,170]],[[18,92,110],[200,238,240]],[[84,40,120],[226,210,246]],[[38,102,58],[212,238,208]],[[30,50,110],[208,218,246]],[[170,70,20],[255,222,190]],[[150,28,36],[255,208,196]],[[120,96,12],[250,238,176]]];
+function mgpGenTdCong(){const out=[];for(let sl=0;sl<3;sl++)for(const pet of [5,6,7,8,9,10])MGP_PAL.forEach((p,i)=>out.push({id:`tdc-${sl}-${pet}-${i}`,slot:sl,pet,dk:p[0],lt:p[1]}));return out}
+const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:mgpGenVe,kim:mgpGenKim,tho:mgpGenTho,le:mgpGenLe,td_cong:mgpGenTdCong};
+function mgpItems(kind){if(MGP_C[kind])return MGP_C[kind];const L=MGP_GEN[kind]?MGP_GEN[kind]():[];if(L.length)MGP_C[kind]=L;return L}
 function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if(filt){const f=L.filter(filt);if(f.length)L=f}
  if(used&&used.length){const f=L.filter(x=>used.indexOf(x.id)<0);if(f.length)L=f}
  const wn=((typeof BAL==="object"&&BAL&&BAL.mgp)||{}).now,it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,L,x=>x.id,wn==null?null:x=>nrNow("mg:"+kind,x.id)?wn:1):null)||L[Math.floor(Math.random()*L.length)];if(used&&it)used.push(it.id);return it}
