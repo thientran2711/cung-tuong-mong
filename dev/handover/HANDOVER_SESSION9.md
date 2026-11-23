@@ -2579,3 +2579,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:42Z 23/11) M14 DONE: MAIN sent review/ui-tour-states 98fc6a8b PDF (184 pp) to owner. Owner angry at split jobs → OD row; B M14 order withdrawn; IT02 → C whole. GAP: «còn 4 việc».
 - (19:09Z 23/11) MOCK-STAGE v1 (via MAIN 109 relay) checked: no videos + M1/M2 not merged → back to KIT KEEPER #10 to fix; not sent to owner yet.
 - (19:10Z 23/11) KIT KEEPER #10 rolled (context) → archived; opened KIT KEEPER #11 session_01Rc5AsMtL55o1wM5pU2K9t2 (opus) from reports/MOCK-STAGE.md HANDOVER: merged event layout + videos.
+- (19:20Z 23/11) OWNER RULE ROBOT-10 (OD row) → ORDER D: harness phase 1 (reuse runb). Phase 2 split by thân phận after open items land: B tt,dtq+co-op · C muoi,cn · D nc,td,ch · E thd,cnv.
