@@ -215,6 +215,8 @@ function ilSent(e,f,p){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilU
 function ilCoopRes(m){try{if(!ilCoop()||!m||m.from===COOPW.seat||!S||S.dead||!Array.isArray(m.fam))return;const I=ilS();if(!I.at)return;
  const now=new Set();for(const e of ilSlots(S))if(e.iu)now.add(e.iu);const RM={lost:"hảo hữu lấy (thất lạc)",burn:"hảo hữu đốt",taken:"nộp cho hảo hữu",gone:"hảo hữu lấy"};
  for(const o of m.fam){if(!o||o.op!=="rm"||!o.k)continue;
+  /* E44e: the op names its piece (famDiff / b4Ops carry e.iu): label THAT id; only an op without iu falls back to the first missing id of the kind */
+  if(o.iu&&I.at[o.iu]&&I.at[o.iu][1]==="me"&&!now.has(+o.iu)&&!ilWhere({k:I.at[o.iu][0],iu:+o.iu})){ilLog({k:I.at[o.iu][0],iu:+o.iu},"me","coop:"+(m.from||""),RM[o.how]||RM.gone);delete I.at[o.iu];continue}
   for(const id in I.at){const [k,h]=I.at[id];if(h!=="me"||k!==o.k||now.has(+id)||ilWhere({k,iu:+id}))continue;
    const e0={k,iu:+id};ilLog(e0,"me","coop:"+(m.from||""),RM[o.how]||RM.gone);delete I.at[id];break}}}catch(e){console.error("ilCoopRes",e)}}
 setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function")COOP.on("res",m=>Promise.resolve().then(()=>ilCoopRes(m)))}catch(e){}},0);
