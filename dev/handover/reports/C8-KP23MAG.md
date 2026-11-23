@@ -1,0 +1,10 @@
+# C8-KP23MAG — Magnific search for face versions of the 52 KP23 events
+depth ~9 · START_CTX ~6% → ~25% · 0 gens, 0 credits · no handover needed (done).
+Method: 6 sonnet sub-agents (9 keys each), creations_search from=all-assets, perPage 10, dateEnd 23/11, creations_read to confirm faces. Whole pictures, uncropped.
+## Result
+Magnific is dominated by "NO VISIBLE FACE"/hands-only prompts for these scenes (the hands-style cards + the 'tiny/far/from behind' variants). The only face pictures are the 'Portrait 3:4 single story illustration ... serene faces' family, which cover OTHER scenes. **No exact face version of any of the 52 exists.**
+Loose/partial face pictures found (9 keys, 8 images), all added to the history page (img/_review/kp23-hist/<key>/<id>.webp, label "Magnific 23/11, có mặt, gần"):
+thu-mui-ten ksDo6Ph16B (no Emperor) · to-giac-truoc lJ8m3LNgv9 (standing, lacquer box) · xin-an-ve-tham Sytu3sMUb8 · xin-ht-tra-xet + to-giac-truoc-ht ksDIqaE16B (kneeling, papers, no guards) · khoc-xin-tha WDsggdAcXe · quay-lung-bo-di nVjstwMYQD (leaving cold palace) · so-hac-can-chinh ksDICdB16B · van-dong-do-dau 0egUS8DTfW (maid, not consort) · vang-menh LwBayXZswO.
+None: the other 43 keys. Seen but NOT a face version (no-face): keu-oan s7t3ju7l8e (exact scene, tiny far figures), bi-bat-mang-thu-lanh-cung 79CzgKoJAL, trung-doc rgBNLaTxtc, tuyen-tu s7tRU1Bl8e, vu-oan cloth doll.
+Weak coverage (search thin, honest): bat-gap-trao-anh-mat, cam-quan-vay-cung, hh-gat-loi, hh-thuong-hien-thuc, ke-len-cai-bi-bat, vien-co-thoai-thac, viet-thu-hoi-han, xin-th-do-loi, vang-lenh, to-khong-tin, trung-doc-thuoc-giai got 0-1 key-specific queries; loose fallback not added: keu-oan? (none), khoc-ke-ht lJIiGybgv9, giai-cau-do-den If6AgsptvE, quy-xin-tha rgemuFrxtc.
+Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-history.html (source dev/art/kp23 on review/kp23-swap, pushed). Conclusion: owner's remembered face versions do not exist in Magnific under these scenes; they need generation with faces.
