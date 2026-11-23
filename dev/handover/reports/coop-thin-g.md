@@ -799,3 +799,33 @@ lane run @e72acc8b (box load ~11): weeks 20→36 never merge. Dump: host gHold t
 Worktrees (this box): /home/user/wt/r2 (branch, built, coop/worker node_modules), /home/user/wt/live (LIVE a689bb80 + its build, Worker :8789 THINMAX 9), /home/user/wt/ho (handover, sparse). Workers running: `npx wrangler dev --port 8787` (r2) / 8789 (live). Lane logs /home/user/wt/out (reg-sum.txt), alone reruns /home/user/wt/outA, LIVE reds /home/user/wt/outL.
 Successor TODO: trip1 item above → then merge LIVE e6894660 (or newer) into review/coop-thin-g-r2, rebuild, quickcheck (use `--runs 5` if perf buổi flips) + coop-e2e ×1 + g4 on the merge → PASS <sha> (must contain origin/main) or FAIL; CLAIMS row; send_message Foreman B.
 FOR MAIN: hn H2 root above (k61PortEnt p.kk) · thin-d kit-copy / invite / selfTest · thin-f1 real tap · as9s tgk host-first + visitPal · cyc giau/set-up load flakes · coop-lost-scan room code · rkOfFace {$r} (#9) · Worker THINMAX 13 deploy at landing.
+
+### REVIEW r2 #2 — successor session_01N1tNP4SqoXFkxcf2TuXdJb (opus), 11/23/2026 — VERDICT PENDING + HANDOVER
+PRIORITY #1 CHECK ('coop-thin-g'): LIVE moved e6894660 → 78324353 → 2ba6c64e during the review (Foreman B wakes) | review/coop-thin-g-r2 | claims 'REVIEW coop-thin-g WHOLE' = this session.
+New container: worktrees /home/user/wt/r2 (test tree, at bd98d53c, dev/index.html built), /home/user/wt/m (merge tree, + dev/measure + dev/art), /home/user/wt/live (LIVE 78324353 build), /home/user/wt/ho (this file). Workers: `npx wrangler dev --port 8787` (r2 coop/worker, THINMAX 13) and 8789 (LIVE, THINMAX 9). Logs /home/user/wt/out (trip1-*.log, qc-m.log, rp.log). Probe test (untracked, both trees): dev/test/zz-tripprobe.tmp.js = coop-thin-g.js + on the first failed week: dump her #modal / Q[0] / socket, one bot clear(), her COOP.send log after the click, host D.log/thq, then a FILE REPL (write `/home/user/wt/out/cmd-<PTAG>.js` as `A <js>` or `B <js>`, answer in res-<PTAG>.txt, `END` to go on).
+
+#### Branch head
+**review/coop-thin-g-r2 @bd98d53c** (pushed) = e72acc8b + merge LIVE e6894660 (d3449a2d: KIT_REQUESTS union, built files rebuilt) + merge LIVE 78324353 (859e389c) + merge LIVE **2ba6c64e** (bd98d53c: coop-famops-t1 co-op code jcoopworld/jil/jagwhyg2c + KIT-MGBG; jagwhy npwAsk conflict = the SAME `p.coop` guard on both sides → LIVE text kept; assets.json = LIVE, index.html/sw.js rebuilt). Contains origin/main 2ba6c64e.
+
+#### trip1 (TRIP=1 WEEKS=36 swap 1), alone or 2–3 in parallel, local Worker THINMAX 13
+| build | runs | result |
+|---|---|---|
+| e72acc8b | 5 (1 alone, 4 in pairs) | 4× **85/85**; 1× **week stall at week 23** (below) |
+| bd98d53c | 3 (in parallel, + quickcheck / role-parity load) | 0 stall; p6 84/85 + p5 (wk 30+) **Danh drift** (below); p7 84/85 = rkOfFace {$r} PVBAD (place lc) = the known LIVE-identical #9 item (FOR MAIN) |
+| LIVE | — | coop-thin-g cannot run on LIVE (no part G: room capped at L9, G0 [9,9], COOPW.thin.G undefined) → the gHold stall mechanism exists only on the branch |
+
+**Stall (e72acc8b, wk 23)** — NOT the tsgiftpick picker of r2 #1: after she closed «Lãnh cung» (host D.log ["pick","Lãnh cung",-1]) her phone holds 3 part-D cards (Q = «Nội vụ phủ thu đồ» (jdemo kitPanel notice, btn «Tuân chỉ», no opts), «Có người đến an ủi» (pid live), «Sứ đoàn vào triều» (wwc)), #modal shown, Sẵn sàng disabled; host thq = the same 3 cards, gHold true, cyHold null, held false, D.DF empty. The bot's clear() clicks «Tuân chỉ» (#mr = #mclose → closeModal → the jcoopthin guest wrapper should Q.shift + send pick i:-1) and **the same card is still shown 200 ms later**; no pick reaches the host (D.log unchanged). So: not a bot gap (the bot taps the real close button, as on every other notice card that landed) — her close does not leave her phone or is not applied. The probe died on my own typo before the send log was taken; the REPL version has not caught it again (0 of 3 on bd98d53c). Two stall shapes seen so far (r2 #1 tsgiftpick, this one) share: her phone shows a part-D card, the host waits on her thq (gHold), her answer never lands.
+**Danh drift (bd98d53c only, 2 of 3 runs; e72acc8b 0 of 5)**: after a week her Danh host store 37 vs her phone 36 (wk 12), 17/16 (wk 23); does not settle in 10 s, gone at the next week (her phone rebuilt from C). Candidate: LIVE 2ba6c64e co-op code (jcoopworld npcToFriend «add» ops from ilGone/ilTake, fxFin7 f7Done re-snapshot) meeting the G week end — not proven. Running now: 2 runs with DANHP=1 (logs trip1-p8/p9.log: every Danh write on her phone + the host's patches) to name the writer.
+
+#### Other gates on the merges
+| gate | head | result |
+|---|---|---|
+| quickcheck | 859e389c | open 2493 ms, old save loads + plays a buổi, perf new/live render 88/94, buổi 1874/2877 PASS, time-spill PASS; core gates: mk-layer-scan 12960/0 bad + anchor-table 5992/0 bad PASS once dev/art is in the tree; dialog-fixed #54 (iPad title plate) red = also red on LIVE 78324353 and 2ba6c64e → LIVE-identical; #71 (Fold L-frame width 538/560) red under load once, green on rerun |
+| role-parity | bd98d53c | page closed under load (box load 20, 10/15 GB) → rerun alone |
+| coop-e2e THIN 13 ×1, famops-unit, quickcheck | bd98d53c | NOT YET RUN |
+
+#### HANDOVER (successor TODO)
+1. Read trip1-p8/p9.log DANHP lines around the TRANSIENT week → name the writer of the +1 Danh on the host store that never reaches her phone; branch-made (G week end × LIVE famops ops) → root-fix on review/coop-thin-g-r2 or FAIL to the fixer with the evidence.
+2. Stall: keep 2–3 REPL probe runs going on the final head; when 'PROBE REPL ready' appears, read the PROBE net / sent-after-click / host-after-click lines, then use the REPL (her `Q`, `COOPW.thin`, `TH.doSend`, `SENT`) to see whether her close is sent and whether the host's pick handler runs. Foreman B (14:26Z): real co-op stall, blocks PASS; fix if small (whole family: every part-D card closed on her phone while the host holds gHold — the pick must land or the hold must release), else FAIL coop-thin-g <sha> trip1 stall (fixer #10 session_01N1tNP5QWB8tYRvFqUSnKVx knows the code). Then trip1 ×5 green.
+3. Final: ONE merge of newest origin/main, quickcheck + coop-e2e ×1 (THIN=13) + role-parity (alone) + coop-famops-unit (argv[2] http://ctm.local/index.html) → verdict.
+FOR MAIN (unchanged from r2 #1): hn H2 k61PortEnt p.kk · rkOfFace {$r} (seen again, place lc) · dialog-fixed #54 · thin-d / thin-f1 / as9s / cyc / lost-scan items · Worker THINMAX 13 deploy at landing.
