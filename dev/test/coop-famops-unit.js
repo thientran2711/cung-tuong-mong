@@ -277,6 +277,15 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     CW.seat="b";S.loSeq=(S.loSeq||0)+1;const hc={id:S.loSeq,k:P,e:Object.assign({},e),own:901,w:wk(),due:wk()+9,st:"held",by:"me",at:"me",keep:1,cause:"riv",kn:{},open:0,cev:0,hear:0};loL().push(hc);const g=Object.assign({},e,{lo:hc.id});S.inv=[g];FA(back);R32.her=cnt(e.iu);R32.hc=hc.st;loL().splice(loL().indexOf(hc),1)}catch(z){er32=z.message+" "+String(z.stack).split("\n")[1]}
    finally{CW.on=on32;CW.seat=se32;COOP.send=sd32;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(y=>!(y.e&&y.e.iu>9e6))}
    ck("32 T4 her act took a piece that is only in my box: ONE «rm gone» back by id, the box keeps it, her phantom copy leaves and her case of it closes; a piece in no box: no answer",!er32&&R32.back===1&&R32.box===1&&R32.none===0&&R32.her===0&&R32.hc==="done",{er32,R32})}
+  /* E44j (coop-lost-scan-traced 9001 vanish 10000001 y_saxanh, w71 rivalsMonth b4Ops «rm gone» + «add y_vanthuy»): the j92 month re-dressed her entry
+     by NPC roll (wdNpcDress → wdAutoFor; also Quốc tang, jlux luxCalm, jworld tang) and gave it NPC starting pieces (wdNpcInit): the garment put on
+     left her bag = «rm gone» → her seat lost it. Her outfit is her seat's choice: wdAutoFor / wdNpcInit leave her entry as it is. */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:5,fav:50,bac:0};rivals.push(f);let er33="",R33={};
+   try{const P5=wdPOf(f);const ky=wdPickAt(P5,"y",1)||Object.keys(WD_ITEMS).find(k=>WD_ITEMS[k].sl==="y");const kb=Object.keys(WD_ITEMS).find(k=>WD_ITEMS[k].sl==="y"&&k!==ky);
+    f.wd={tram:null,y:{k:kb,iu:++n}};f.inv=[{k:ky,iu:++n}];const s0=JSON.stringify([f.wd,f.inv]);wdAutoFor(f,0);R33.auto=JSON.stringify([f.wd,f.inv])===s0;
+    const L0=f.inv.length;delete f.wdI;wdNpcInit(f);R33.init=f.inv.length===L0;R33.ky=ky;R33.kb=kb}catch(z){er33=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{rivals.splice(rivals.indexOf(f),1)}
+   ck("33 NPC dressing never touches her entry (wdAutoFor: j92 month / Quốc tang / jlux / jworld; wdNpcInit starting pieces)",!er33&&R33.auto&&R33.init,{er33,R33})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
