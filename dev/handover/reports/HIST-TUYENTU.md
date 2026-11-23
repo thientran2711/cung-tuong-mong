@@ -83,3 +83,80 @@ Four **player stances** (equal weight, Law 2/3; every cell has a gain and a cost
 |12| **Thù cũ giữa hai kỳ** (two clans' girls with a family feud; one insults the other's banner) [K: banner rivalries; D: Như Ý/Diên Hi family politics] | Vì gia tộc+Thù dai on both sides / Điềm tĩnh mediator / others side by banner | Both are bully and victim; player's banner decides who counts as "her side". Ma ma: "Thù nhà không nên mang vào chỗ này." |
 Seed generator rule: pick the seed by the life seed; then fill roles from real tú nữ of this life by nết + thiện cảm (Role fit, 7.0); if no girl fits well, a seed with a lower fit bar is picked (e.g. 9, 7, 11) instead of forcing a bully. Seeds 1, 3, 4, 10 have *her* as the victim in some lives (two-way).
 Pitfalls: no one dies or is permanently hurt in the yard; slaps and torn dresses only (palace discipline). Girls speak low; eunuchs and ma ma stand near, so a loud brawl would be stopped fast. Avoid Han-Chinese footbinding references (Manchu banner girls did not bind). Avoid naming real historical persons as bully/victim.
+
+## 8. Three test types: mini-game / ĐỐI ĐÁP / HÀNH XỬ (MAIN 112 ADDENDUM 8; owner OD 23/11 ~22:36Z)
+PRIORITY #1 CHECK: OD 23/11 ~21:55Z (royals' tests = mini-games) + ~22:36Z (3 types) | brief M112 ADD.8 | main: ETRAITS j1.js:58 (Emperor: Đa nghi, Mê sắc, Trọng tài, Hiếu thảo, Nóng nảy, Nhân từ, Chăm chính sự, Đa tình, Lạnh lùng), TH_ARCH jtrong.js:32 (Thái hậu: Từ ái, Nghiêm khắc, Đa nghi, Quyền uy, Sùng Phật), BAL.net F pool for Hoàng hậu | review/* none | claims SELSCENE.
+Tags [K]/[D] as in §7. Historical honesty: *no* source records a questionnaire or an incident staged for a girl in the selection hall; these are drama devices ([D]) built on [K] values the Qing court really judged: lễ nghi, đức hạnh, phúc tướng, khiêm cung, biết giữ mình. Wording draft cổ trang for VANPHONG.
+**Four WAYS to answer/act (same labels in both pools):** **Khiêm** (humble, deferential), **Mạnh** (bold, with spirit), **Dí dỏm** (witty, light), **Thật** (honest, plain). Order in the UI is randomised per draw (Law 2: none is the correct one).
+### 8.0 Reaction table by royal nết (+ pleased, − displeased; same table for both pools; ± sizes are BAL keys, never typed here)
+| Royal nết | + | − |
+|---|---|---|
+| Hoàng thượng: Trọng tài | Dí dỏm, Mạnh | Khiêm (flat) |
+| Chăm chính sự | Thật, Mạnh (with substance) | Dí dỏm (empty) |
+| Mê sắc / Đa tình | Dí dỏm, Mạnh | Khiêm (stiff) |
+| Nhân từ / Hiếu thảo | Thật, Khiêm | Mạnh |
+| Đa nghi | Thật (consistent) | Dí dỏm (reads as scheming) |
+| Lạnh lùng | Khiêm, Thật (composed) | Dí dỏm |
+| Nóng nảy | Mạnh | Khiêm (hesitation), and Thật that criticises him |
+| Thái hậu: Từ ái | Khiêm, Thật | Mạnh |
+| Nghiêm khắc | Khiêm | Dí dỏm, Mạnh |
+| Đa nghi | Thật | Dí dỏm, Mạnh |
+| Quyền uy | Khiêm (deference), Mạnh only when respectful | Dí dỏm |
+| Sùng Phật | Khiêm, Thật (piety, compassion) | Mạnh |
+| Hoàng hậu (BAL.net F): Ân cần / Rộng lượng / Thanh liêm / Thật thà | Thật, Khiêm | Dí dỏm at her expense |
+| Kiêu ngạo / Tham vọng / Vì mình | Khiêm (you are no rival) | Mạnh, Dí dỏm (a threat) |
+| Xảo quyệt / Thù dai | Khiêm (but she "ghi tên" anyway) | Mạnh |
+| Điềm tĩnh / Kín đáo | Thật, Khiêm | Mạnh |
+Equal-value guard (Law 2/3): every way has a + with some nết and a − with others; across the 7–9 nết of one royal no way is always + or always −; each answer also carries one small **gain** (e.g. "mark of đức", "thiện cảm") and one **cost** (a different royal, or a later rivalry mark). A *nết unknown to her* (royal nết not shown) keeps it a gamble: the player reads cues (how the royal sits, tone) — odds shown as ladder words only.
+### 8.1 ĐỐI ĐÁP pool (the royal asks; she chooses HOW to answer; no trivia)
+| # | Royal prompt (draft) | Khiêm | Mạnh | Dí dỏm | Thật | Tag |
+|1| «Vì sao ngươi vào cung?» | Hầu hạ bề trên, cầu phận nhỏ | Vì muốn làm nên việc | Vì cha mẹ bảo, còn ta tự chọn ở lại | Vì nhà đã lo, ta chưa nghĩ kỹ | [D] Chân Hoàn |
+|2| «Nếu người trên coi nhẹ, ngươi làm sao?» | Nhận lỗi, sửa mình | Chứng tỏ bằng việc làm | Nhận một lần, sau không thấy lần hai | Buồn, nhưng không oán | [D] |
+|3| «Hoa nở sớm hay hoa nở muộn tốt hơn?» | Hoa nào cũng nhờ nắng | Nở sớm để thấy cuộc đời | Nở đúng lúc người ngắm | Muộn mới biết quý | [D] |
+|4| «Ngươi có mong được sủng ái không?» | Chỉ mong giữ phận | Mong, và sẽ xứng | Ai chẳng mong; khéo giữ mới lâu | Có, nhưng không dám mong nhiều | [D] |
+|5| «Thấy người tranh sủng, ngươi nghĩ gì?» | Tránh xa | Không sợ tranh | Xem họ tranh, mình làm việc mình | Hiểu, nhưng không thích | [D] |
+|6| «Nhà ngươi dặn điều gì khi vào cung?» | Giữ lễ, nhẫn nhịn | Giữ tâm cao, đừng khom | Nhớ ăn ít, nói ít | Dặn phải nghe lời ma ma | [K] family teaching |
+|7| Tiếp thơ: «Hoa rơi ai quét…» (continue a line by *stance*, not by the right word) | Quét giúp, không để người thấy | Để hoa rơi, đó cũng là ý trời | Quét xong, hoa tặng người thương | Người quét là kẻ cô đơn | [D]; stance, not quote |
+|8| «Thấy ai làm sai, ngươi nói hay im?» | Im, báo bề trên | Nói thẳng | Nhắc nhẹ một câu | Tùy việc | [K] value: biết giữ mình |
+|9| «Nếu hôm nay không được giữ thẻ, ngươi làm sao?» | Về nhà, hầu cha mẹ | Thử lại, ba năm nữa | Về, rồi sẽ có hoa khác | Buồn, rồi cũng đi | [D] |
+|10| «Điều ngươi sợ nhất?» | Sợ làm phiền người | Không sợ gì | Sợ nhất là chán | Sợ cô độc | [D] |
+|11| «Ngươi muốn bề trên nhớ ngươi vì điều gì?» | Vì lễ độ | Vì có chí | Vì làm người ta cười | Vì thật thà | [D] |
+|12| «Có lời đồn nói ngươi kiêu, thật chăng?» | Xin nhận lỗi nếu có | Ai nói, dám đối chất | Kiêu ở đâu, xin chỉ giúp | Có lúc, ta biết | [D]; rival's earlier words can reappear (Law 6) |
+Hard-by-rank (Law 5): at a higher origin ceiling the royal may follow with a *second* prompt (pressure), or hides her nết cues.
+### 8.2 HÀNH XỬ pool (a surprise incident; options = what she does; gain **and** loss each, Law 2/3)
+Options are 4 kinds: **Giữ yên** (stay composed) · **Tự xử** (act at once by herself) · **Cầu người** (ask a ma ma / eunuch / neighbour) · **Nhận lỗi / Nói thật** (own it / name the cause). Each carries a gain and a cost (examples below; numbers to BAL).
+| # | Incident (draft) | Giữ yên | Tự xử | Cầu người | Nhận / Nói thật | Likes (+) | Tag |
+|1| Mèo bị ném tới chân (cat flung at her feet) | G dáng điềm tĩnh · L bị coi lạnh nhạt | G nhanh nhẹn, bế mèo đưa ra · L lộ dáng không đoan | G nhờ ma ma, giữ lễ · L bị coi yếu | G nói thật mèo sợ, ai vứt · L làm người ném thù | Đa nghi/Quyền uy: Giữ yên; Nhân từ/Từ ái: Tự xử bế mèo; Nóng nảy: Tự xử | [D] Như Ý truyện / Diên Hi (cat gag) |
+|2| Nước trà đổ lên xiêm y | G không loạn, giữ thể diện · L áo ướt vẫn đứng | G tự lau nhanh · L trễ, làm ồn | G xin ma ma thay áo · L chậm khắc | G nói "là con vô ý" · L nhận lỗi không phải của mình | Nghiêm khắc/Quyền uy: Giữ yên; Ân cần: Cầu người | [D] |
+|3| Một tú nữ cố ý ngáng chân | G không đáp, bước đi · L bị chê vấp | G đỡ lấy và đứng dậy nhẹ nhàng · L lộ vết bẩn | G ma ma thấy liền · L bị coi mách | G nói rõ ai ngáng · L không bằng chứng (Law 6a) | Thanh liêm / Thật: Nói thật nếu có bằng chứng; Thù dai (Hoàng hậu) − | [D] Chân Hoàn |
+|4| Trâm cài đầu rơi | G bước tiếp, nhặt sau · L trâm nằm đó | G cúi nhặt, nói "xin tha lỗi" · L ngắt nhịp | G nhờ người nhặt · L mất mặt | G nói "trâm của mẹ" · L lộ gia cảnh | Từ ái: Tự xử / Nói thật; Quyền uy: Giữ yên | [D] |
+|5| Con ong bay tới | G đứng yên · L bị ong đốt | G khẽ phất · L bị coi thất lễ | G gọi thị nữ · L ồn | G nói "sợ ong" · L coi yếu | Điềm tĩnh/Quyền uy: Giữ yên; Nhân từ: Nói thật | [D] |
+|6| Đứa trẻ (cháu / hoàng tử nhỏ) chạy vào | G cúi người giữ lễ · L bị coi lạnh | G ôm trẻ, dỗ · L vượt phép | G tìm nhũ mẫu · L chậm | G nói "xin ma ma dắt" · L không tự chủ | Từ ái/Nhân từ: Tự xử dỗ; Nghiêm khắc: Giữ lễ | [D] Chân Hoàn (royal child scene) |
+|7| Ai đó hét "có rắn!" | G không động · L bị coi thờ ơ | G đứng chắn · L liều | G gọi thị vệ · L ồn | G nhìn rõ "chỉ là dây" · L không chắc | Chăm chính sự/Đa nghi: Giữ yên + nhìn rõ | [D] |
+|8| Giỏ hoa bị rơi vỡ ngay chân | G bước qua · L bị coi vô tâm | G nhặt hoa, xếp lại · L trễ | G gọi thái giám · L chậm | G nói "xin phạt con vô ý" · L chịu phạt oan | Từ ái/Sùng Phật: Tự xử nhặt hoa | [D] |
+|9| Tay áo bị người kéo giật | G rút tay, im · L bị coi yếu | G giữ tay áo, nhìn thẳng · L căng | G gọi ma ma · L mách | G nói "xin đừng kéo" · L mất lòng người đó | Quyền uy: Giữ yên; Nóng nảy: Tự xử | [D] |
+|10| Chuông / pháo bất ngờ nổ | G không giật mình · L cứng | G cúi che tai, nhanh bình tĩnh · L lộ sợ | G nép sau người · L bị coi nhát | G nói "xin tha, con hơi giật mình" · L coi yếu | Đa nghi / Lạnh lùng: Giữ yên | [K] ceremonial fire-crackers not unusual; [D] |
+|11| Ngọc bội của người bên cạnh rơi vỡ, cô ta trách mình | G im, chờ hỏi · L chịu tiếng oan | G chỉ ra chỗ rơi · L làm to chuyện | G gọi ma ma xem · L chậm | G nói thật mình không đụng · L không bằng chứng | Thanh liêm / Thật thà: Nói thật; Đa nghi: Giữ yên | [D] |
+|12| Gió thổi bay khăn / quạt của mình | G đứng, nhặt sau · L khăn lấm | G nhặt nhanh · L mất nhịp | G nhờ cung nữ · L chậm | G nói "xin tha lỗi" · L mất khí độ | Nghiêm khắc: Giữ yên; Từ ái: Tự xử | [D] |
+Hoàng hậu's nết can *cause* an incident (Thù dai / Xảo quyệt: #3, #11) while Thái hậu / Hoàng thượng only *judge* it — avoids "the Empress is always the villain": it needs a real motive from §7 (rivalry mark).
+### 8.3 Which royal-nết fits which test type (per-life draw weights; all in BAL)
+| Royal nết | Mini-game (§4) | ĐỐI ĐÁP | HÀNH XỬ |
+|---|---|---|---|
+| Hoàng thượng: Trọng tài | **high** (tests art) | mid | low |
+| Chăm chính sự | low | **high** (asks about duty) | mid |
+| Mê sắc / Đa tình | mid (múa / đàn) | **high** (banter) | low |
+| Nhân từ / Hiếu thảo | low | **high** | mid |
+| Đa nghi | low | mid | **high** (tests composure) |
+| Lạnh lùng | mid | low | **high** |
+| Nóng nảy | low | mid | **high** (sudden) |
+| Thái hậu: Từ ái | mid (thêu) | **high** | mid |
+| Nghiêm khắc | mid (thêu / lễ) | mid | **high** (tests lễ) |
+| Đa nghi | low | mid | **high** |
+| Quyền uy | mid | **high** (deference) | **high** |
+| Sùng Phật | mid | **high** | low |
+| Hoàng hậu: Ân cần / Rộng lượng / Thanh liêm / Thật thà | **high** (tea / huong) | mid | low |
+| Kiêu ngạo / Tham vọng / Vì mình | mid | **high** (rival probe) | mid |
+| Xảo quyệt / Thù dai | low | mid | **high** (she stages it) |
+| Điềm tĩnh / Kín đáo | **high** | mid | low |
+Draw rule: the three royals take three **different** types (a draw without repeats, weighted by the table), the pool item is seeded per life and excludes the last life's items so tests rarely repeat; the cung nữ origin uses the same 3 types with the Nội vụ phủ / ma ma as the third judge. All odds shown to the player in ladder words only (Law 7); the royal's nết is hidden at the start and read from cues (Law 6b: real person).
+Pitfalls: no one in a selection hall ever "throws a cat" — a drama gag, so mark scene text "phỏng theo phim" and keep it brief; keep the royals polite (they never insult a candidate); incidents never injure; avoid modern slang in the answers; do not let the Hoàng hậu be the only source of trouble.
