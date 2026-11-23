@@ -2609,3 +2609,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - MAIN CHÍNH 111 = session_01Rc5AsND3CwtWZx1yyFP5Lp; START_CTX ~6 % (get_session reads 0; own estimate ~60k/1M) → roll line 31 %, ceiling 60 %; depth 4/8.
 - LOAD: main running 3 (owner bugs/UI/go-live only: W1 ky-keeper-f2 JaFJSoKr, W2 kit-odds-row Mmp9zDKt, KIT KEEPER #12 LLYr8sHG) | B free ~10 (reviewer-lander coop-thin-g r3; ROBOT-10 co-op seats wait for harness) | C free ~11 (RANKROOM idle) | D free ~9 (robot10 harness, j51 rv) | E free ~11 (E53r) | moved: none
 - PRIORITY #1 CHECK ('robot10'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 0 | archive 0 (harness not landed; ROBOT-10 MAIN share tt, dtq, td, ch starts when D lands it).
+- (20:37Z) Wake = trig_01VdTT7ZCy9HEuzCdrSk8Ygd (minute 32); old trig_019umD4RjJa25me1PGQDX8kN disabled. LC7, W1, W2, KK12, MAIN 110 told.
