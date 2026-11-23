@@ -760,3 +760,42 @@ No red is branch-made → no root-fix owed by #10.
 
 FOR MAIN: rkOfFace raw {$r} (#9 §1) · thin-d kit-copy / invite / selfTest · thin-f1 real tap · cyc mixed-old-guest · as9s tgk host-first flake · coop-lost-scan room code · coop-famops-unit default URL · «tạm» chip over the palace name (iPad). FOR B: hn H2. Worker THINMAX 13 deploy at landing.
 Worktrees (this box): /home/user/wt/ctg10 (branch), /home/user/wt/live10 (LIVE 52ad65b3), logs /home/user/wt/out10.
+
+## REVIEW r2 — BIG reviewer session_01N1tNP5MAkuoXRAJ7HMLDnA (opus), 11/23/2026 — VERDICT PENDING (1 open item) + HANDOVER
+PRIORITY #1 CHECK ('coop-thin-g'): OD co-op rows (coop.md) | main LIVE a689bb80 at start (now e6894660 per Foreman B 10:17Z) | review/coop-thin-g-f1 dea00576 | claims 'REVIEW coop-thin-g WHOLE' = this session. START_CTX ≈ 5 % → rollover at ≈ 26–30 % (reached). Depth 1.
+Branch **review/coop-thin-g-r2 @e72acc8b** (pushed) = dea00576 + merge LIVE a689bb80 (act-seals-n14: jemo/jemoseal/jevb/jfeel, no co-op code; index.html/sw.js/assets.json rebuilt). **NOT yet merged: LIVE e6894660** (13a8dfc7 art/assets, e9c0a43d KIT-AP01 story frames, e6894660 jevban) — successor merges it (assets.json conflict → take LIVE, rebuild), then quickcheck + coop-e2e ×1 on the merge.
+
+### r1 FAIL item F1 (permanent week stall, cyHold) — re-checked
+Code read (jcoopthin pick → cyFree, jcoopworld 1 s cyFree belt, jcoopthine cyLost/cyReask, cyWait eW host): sound, both doors closed (answer that makes no event; card gone without answer → re-asked; cyTo timeout still frees). night 111/111, timer 43/43, cyc alone 4/4 (74/74), cycs PASS, trip0 85/85 → no cyHold stall seen. F1 = FIXED.
+
+### Gates (@e72acc8b, local Worker THINMAX 13; LIVE Worker :8789 THINMAX 9)
+| gate | result |
+|---|---|
+| quickcheck | run 1: one-core/core gates red only on coop-one-world seed 7 (S.fidUsed merge≠host) → alone ×2 PASS = flake. run 2: dialog-fixed #54 (iPad title plate on event picture) → alone ×2 PASS on branch AND LIVE = flake; perf buổi 2961/1344 → perf alone `--runs 5` **QUICKCHECK PASS** (render 270/268, tab 485/458, buổi 2343/1605; buổi is bimodal on LIVE itself 1141–3376 ms). time-spill PASS, old save loads + plays a buổi (Thượng Quan Uyển Nhi / Dư Lan Âm). |
+| one-core guard / undef / kit gates | inside quickcheck core gates: PASS except the 2 flakes above |
+| coop-e2e THIN 13 | lane e2e / e2es / e2e0 / e2e0s **141/141** ×4 + Fold 755x1000@2 runs A (host Fold, guest iPad) and B (swapped) **141/141** ×2 = 6 runs green |
+| coop-thin lanes | g4 g4s **21/21**, gup (old room C.thin<13 → 13, §0c) **17/17**, timer 43/43, night 111/111, a c e f2s f3s f4s f5s f6 f6s f6b f6bs as13 as13s PASS, trip0 **85/85**, bl1–6 PASS |
+| perf 0e (MONTH=1 CPU=4) | her week end in ctx b **+38.3 %** of his own (gate ≤ 40 %; r1 +33.2 %) PASS (own 1619 ms, her 620 ms) |
+| seat-guard family 0d | scan `grep COOPW.seat|CW.seat` non-coop j*.js after LIVE a689bb80: 29 files on coopGuest(); new hits jdc:302 (askH.dcout, host handler: seat "a" → 902 = her, right either way), jhaohuu blob, jpma pm-live sender = not guards. 0 new sites. |
+| LOOK both seats | e2e A host Fold 755x1000@2 + guest iPad 1180x820@2 and B swapped: 05-world, 07-after3 LOOKED 3×: same month on both seats (Tháng ba → Tháng tư), her week-end «Trong cung vừa qua» card on her phone, kit cards, no overflow/cut text. Scratch only (/home/user/wt/shots), none in git. |
+
+### Reds — every one rerun ALONE / on LIVE
+| suite | branch | LIVE a689bb80 (its own test, L9) | verdict |
+|---|---|---|---|
+| d | 8 (kit guest copy ×7 + invite offer "") | 9 (same 8 + selfTest) | LIVE-identical → FOR MAIN |
+| f1 | 1 'F1 a real tap (doAct)' | 4 (same line + accuse + every-ACT + rkOfFace page error) | LIVE-identical → FOR MAIN |
+| as9s | 1 'run1 tgk host-first: her phone sees the host' | same line + visitPal | LIVE-identical → FOR MAIN |
+| as9 | 1 visitPal (lane, load 11) | visitPal red on LIVE as9s | alone PASS → load + LIVE-identical line |
+| cyc | giau 'host drew her (forced deck) who:null' 2 of 6 runs (both under load: lane / beside trip1) | set-up red | alone 4/4 PASS → load flake (as #9) |
+| coop-lost-scan | 'A has a room code' + 'B joined seat b' | same 2 | LIVE-identical (test harness) → FOR MAIN |
+| hn H2 face reveal | red 3/3 | **same probe on LIVE build (L9): same red, same root** | **LIVE-IDENTICAL, not blocking** → FOR MAIN (root below) |
+
+**hn H2 ROOT (probe dev/test/zz-hnprobe.tmp.js, untracked, in /home/user/wt/r2):** after she talks to a stranger, her phone has S.known r1 = 2, S.met[1] set, isKnown61(rival) = true, KREG.r1 = the live rival — but kitKnown(rival) = false: the live rival object carries a stale kOf61 tag **v.kk = "x38"** (j61 kOf61 writes e.kk on any object not in `rivals` — a copy of that consort seen before it became the live object), and **k61PortEnt checks p.kk BEFORE rivals membership** → k61Ent("x38") = the old copy (not in rivals, isKnown61 false) → every portrait of her stays the grey stranger (data-krvs 0) after meeting, so the reveal never plays. Same numbers on LIVE (v.kk "x39"). Fix proposal FOR MAIN (j61, whole family = every p.kk lookup): in k61PortEnt test `p===S.emp||p===S.thO||rivals.includes(p)` first (and/or kOf61 never tags an object later found in rivals). Not made by this branch; the hostnull krvFlip capture itself is right (cap:true in her run).
+
+### OPEN ITEM (blocks PASS until explained) — trip1 (TRIP=1 WEEKS=36 swap 1) week stall from week 20
+lane run @e72acc8b (box load ~11): weeks 20→36 never merge. Dump: host gHold true on her thq = one card `tsgiftpick` «Biếu quà làm lành» (picker step after her pick 'tsgift' option 2 «Đồ trong rương»; host D.log [...,["pick","tsgift",2],["card","b",1],["patch","b",244,4]]), cyHold null, held false; her phone: Q = [that card] (__seen, mustChoose), **#modal shown (hidden=false)**, Sẵn sàng disabled «Sẵn sàng», no pick ever sent for it in 17 weeks. jts tsgift/tsgiftpick NOT changed by the branch (LIVE code); the card always has «Thôi». Likely the TRIP bot does not answer this act-card picker (KIT_ACT_PIDS layout; maybe «Thôi» folded into the frame ✕, all piece rows tsDis) → TEST BOT; but not proven. Rerun trip1 alone started 11:35Z → /home/user/wt/outA/trip1b.log. **Successor: (1) read trip1b; (2) at the stall dump her #modal (buttons, disabled, ✕) and tap «Thôi»/✕ by hand in a probe: if the week then merges → bot gap (fix the TRIP bot's card answer, rerun trip1 ×2) → PASS; if her pick never lands on the host → game fault (part D pick of a KIT_ACT_PIDS picker at L13) → FAIL to the worker.**
+
+### HANDOVER (rollover at context ≈ 26 %, START 5 % + ~25 %) — Foreman B opens the successor reviewer
+Worktrees (this box): /home/user/wt/r2 (branch, built, coop/worker node_modules), /home/user/wt/live (LIVE a689bb80 + its build, Worker :8789 THINMAX 9), /home/user/wt/ho (handover, sparse). Workers running: `npx wrangler dev --port 8787` (r2) / 8789 (live). Lane logs /home/user/wt/out (reg-sum.txt), alone reruns /home/user/wt/outA, LIVE reds /home/user/wt/outL.
+Successor TODO: trip1 item above → then merge LIVE e6894660 (or newer) into review/coop-thin-g-r2, rebuild, quickcheck (use `--runs 5` if perf buổi flips) + coop-e2e ×1 + g4 on the merge → PASS <sha> (must contain origin/main) or FAIL; CLAIMS row; send_message Foreman B.
+FOR MAIN: hn H2 root above (k61PortEnt p.kk) · thin-d kit-copy / invite / selfTest · thin-f1 real tap · as9s tgk host-first + visitPal · cyc giau/set-up load flakes · coop-lost-scan room code · rkOfFace {$r} (#9) · Worker THINMAX 13 deploy at landing.
