@@ -59,3 +59,8 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 
 ## ADDENDUM 9 (MAIN 112, 22:27Z) — ENTRY-RANK CAP (MAIN 111 recommendation to owner, OD ~22:40Z; number = MAIN's)
 - Keep ±1 (Addendum 3) with two guards: (1) tests harder by origin rank (law 5, already in brief); (2) a BAL entry-rank CAP: BAL.entry.cap = the highest rank ANY origin can reach on entry TODAY (the current top origin's ceiling under the old rule) — so +1 never lifts a new life above what the game already allowed; clamp after the ±1 step. Report the chosen rank name + before/after table per origin in your report.
+
+## ADDENDUM 10 (MAIN 112, 22:30Z) — POOL SIZES + NO-REPEAT (owner OD 23/11 ~22:40Z, read verbatim: 5–10 dramas far too few)
+- YARD DRAMA ≥ 60 seeds, each COMPOSED from parts (actors by nết/birth × incident/object × place × bystander reactions × outcome) → thousands of variants. HÀNH XỬ ≥ 40. ĐỐI ĐÁP ≥ 40. Mini-games: the full kit list allowed by BAL.entry.word.
+- NO-REPEAT memory per player ACROSS lives (stored with the player's life log / meta save, survives new lives): a seed/test is not shown again until its pool is used up, then the cycle restarts.
+- CONTENT is written by MAIN's sonnet writer seats into dev/handover/content/selscene/ on the handover branch (yard.md, hanhxu.md, doidap.md, one entry per block in a fixed machine-readable format agreed in §8 of HIST-TUYENTU.md). SELSCENE builds the GENERATOR + seen-memory + a loader that turns those files into a data module (one source), and validates every entry (roles fill, options equal value, gain+loss, BAL keys only).
