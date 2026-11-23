@@ -2513,3 +2513,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 06:48Z) LANDED N13 places-swap-n13 91dc91d3 (LC6 self-merge on 52ad65b3; quickcheck PASS, perf buổi 2565/1620 ms flag only). LIVE = 91dc91d3. GAP → «~80% xong · còn 21 việc». Next in LC6: rooms2, rooms1.
 - (23/11 06:56Z) OWNER: KP23 194 faceless act pictures = HER request → MAIN 06:32Z 'stock' decision VOID; C ordered to build the 194-row compare page (old left / new right / tick boxes / copy-picks button). M14 offered to B. Asked owner whether B/D/E may paint (OD:L1231 says all art = C).
 - (23/11 07:02Z) LANDED ROOMS2 4ad20bd6 (LC6 self-merge on 91dc91d3; quickcheck PASS; CDN img/_review/rooms2 wiped). LIVE = 4ad20bd6. Next LC6: rooms1.
+- (23/11 07:05Z) OWNER GO art 1–15 (M48 M50 M51 M52 M45 M84 KP11 KP08 KP10 GE07 GE06 GE11 AP01 OR17 KP23-rest); IT02 wardrobe WAIT. Order written to C.
