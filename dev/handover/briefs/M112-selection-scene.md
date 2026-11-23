@@ -112,3 +112,8 @@ PRIORITY #1 CHECK ('sở thích|chữ trọng|hobby'): OD 7 | ledger 0 | claims 
 ## ADDENDUM 21 (MAIN 113, 22:24Z) — RESULT CARD AFTER EACH CHOICE (OD 23/11 ~23:43Z, relayed by MAIN 111; read the OD row verbatim)
 - The no-hint exception of ADDENDUM 20.3 is ONLY the nhập cung selection scene; every other option card in the game keeps odds + gain/loss (do not touch them).
 - In nhập cung, RIGHT AFTER each choice (đối đáp, hành xử, mini-game, yard acts) show a clear RESULT card from kit rows: what she gained/lost — thiện cảm ± with that royal (or girl), and the score effect in words (no numbers, no %; VANPHONG). Kit part only (kitNotice / kit rows); missing → KIT REQUEST to KIT KEEPER #13.
+
+## ADDENDUM 22 (MAIN 113, 22:27Z) — SKILL, NOT LUCK (OD 23/11 ~23:47Z, owner worried đối đáp/hành xử = luck; MAIN 111 answer, build unless she objects; read the OD row verbatim)
+(a) Worst result stays −1 (ADDENDUM 18 ±1).
+(b) Make the royals' values/tastes LEARNABLE before the hall: yard action «Dò hỏi» (1 khắc; ask a ma ma / an older maid / a well-connected tú nữ e.g. «Thái hậu trọng điều gì?») reveals one royal's chữ trọng or like (odds from BAL like the existing ask roads); ORIGIN knowledge (Cháu gái Thái hậu knows her aunt's values; Cung nữ sủng hạnh knows the Emperor's likes); narration cues in the hall (look, dress, objects hint at values). What she learns is shown via the knowledge notice (kitKnow).
+(c) Score weights: mini-game ½, đối đáp ¼, hành xử ¼ + a base from Đức/Tài/Sắc → one bad guess cannot drop a rank alone; đối đáp/hành xử mostly move thiện cảm. All numbers in BAL (one core).
