@@ -16,8 +16,8 @@ const THIN=+process.env.THIN>=4;/* thin guest (part D cards, her person on the h
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level (coop-thin-e: 5) */
+const REALL=require('./lib/coop-real.js');async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+  await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level (coop-thin-e: 5) */
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
@@ -72,6 +72,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   if(THIN)await A.p.evaluate(src=>{COOPW.thin.withSeat('b',()=>(0,eval)('('+src+')')(3));try{COOPW.thin.flush()}catch(e){}},RK.toString());else await B.p.evaluate(RK,3)}
  if(!(await until(A,()=>!!COOPW.friend(),null,20000)))await merge(await wkA(),'setup: one week (a life that starts as a cung nữ / at home: her consort entry comes with the merged week)');
  {const fa=await until(A,()=>!!COOPW.friend(),null,60000),fb=await until(B,()=>!!COOPW.friend(),null,60000);console.log('guest sees the host entry:',fb);ok(fa,'the host has the guest as a consort entry (her card in the host deck)',[fa,fb,await A.p.evaluate(()=>[S.rank,!!S.srv,S.place]),await B.p.evaluate(()=>[S.rank,!!S.srv,S.place,typeof COOPW.friend])])}
+ await REALL.realize(A,B,async()=>merge(await wkA(),'real-port: one merged week'),ok);
  /* host: forced deck — only the friend's card can win; the REAL nightCh chain (with jcycle's tray rule) still decides whether it is on the tray */
  await A.p.evaluate(()=>{if(window.__ff)return;window.__ff=1;const f=flip;flip=function(){const r0=roll,n0=nightCh,v0=window.visRoll,e0=window.__eaOff;roll=x=>x>=60;
   /* main's other night routes stay out of the forced deck (r1 #2): Ngự giá lâm cung (jvisit: an NPC's held visit S.visNpc, the visit roll),

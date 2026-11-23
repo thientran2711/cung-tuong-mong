@@ -17,8 +17,8 @@ const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
+const REALL=require('./lib/coop-real.js');async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+  await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
@@ -78,6 +78,7 @@ const entryEq=async(o,p)=>{const f=await fr(o),w=await own(p);return f&&same(f.i
  for(const o of [A,B])await setTm(o,{buoiMs:600000});
  for(const [o,rk] of [[A,5],[B,1]])await o.p.evaluate(rk=>{if(S.srv)S.srv.risen=1;S.rank=rk;S.bac=Math.max(S.bac||0,400);S.duc=Math.max(S.duc||0,60);render()},rk);
  ok(await until(A,()=>!!COOPW.friend(),null,30000)&&await until(B,()=>!!COOPW.friend(),null,30000),'each has the other as a consort entry');
+ await REALL.realize(A,B,()=>REALL.weekGeneric(A,B,clear,press1),ok,{low:1});
  for(const o of [A,B])await hook(o);
  /* 64 real items with long provenance strings + 4 kids (<6) + a pregnancy on B; 12 items + 2 kids on A */
  await B.p.evaluate(()=>{const L=Object.keys(IT).filter(x=>loOk({k:x}));S.inv=S.inv||[];for(let i=0;i<64;i++)S.inv.push({k:L[(i*7)%L.length],src:'Ngự ban dịp Vạn thọ tiết năm thứ '+i+' của Hoàng thượng',giver:'Hoàng thượng',d:'được ban sau yến tiệc ở Ngự hoa viên, có khắc chữ'});
