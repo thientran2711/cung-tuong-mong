@@ -115,7 +115,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  {await sleep(1200);const b0=await B.p.evaluate(()=>S.kids.filter(k=>k.alive!==false).length);const x=await npc('takeaway','rank');ok(x.ok,'2 NPC takeaway offered on her',x);
   ok(x.kids===1&&!!x.kidN,'2 takeaway: the child is in the NPC\'s house (gain)',x);
   ok(!!x.kidN&&await waitFr(B,([n,b])=>!(S.kids||[]).some(k=>k.name===n)&&S.kids.filter(k=>k.alive!==false).length===b-1,[x.kidN,b0]),'2 takeaway: the child left HER house (loss)',await B.p.evaluate(()=>S.kids.map(k=>k.name)));
-  ok(!!x.kidN&&await A.p.evaluate(n=>{const f=COOPW.friend();return !(f.kids||[]).some(k=>k.name===n)},x.kidN),'2 takeaway: not on her entry either (no copy)');CW_kid=x.kidN;await clear(B)}
+  ok(!!x.kidN&&await until(A,n=>{const f=COOPW.friend();return !(f.kids||[]).some(k=>k.name===n)},x.kidN,15000),'2 takeaway: not on her entry either (no copy)')/* reviewer r1: her entry on the host follows her next pos (as every other check here waits); read at once it was red on plain LIVE too */;CW_kid=x.kidN;await clear(B)}
  /* petsteal: her pet to the NPC */
  {await sleep(1200);const p0=await B.p.evaluate(()=>(S.pets||[]).length);const x=await npc('petsteal','pet');ok(x.ok,'2 NPC petsteal offered on her',x);
   ok(x.pets===1,'2 petsteal: the NPC has the pet (gain)',x);ok(x.pets===1&&await waitFr(B,n=>(S.pets||[]).length===n-1,p0),'2 petsteal: her pet is gone on HER side (loss)',await B.p.evaluate(()=>(S.pets||[]).map(P=>P.t)));await clear(B)}
