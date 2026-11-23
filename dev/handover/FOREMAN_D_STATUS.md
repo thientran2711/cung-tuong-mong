@@ -1184,3 +1184,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 109 (23/11 09:10Z): LIVE = 13a8dfc7 (C MG10a 27 mini-game pictures). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:31Z): LIVE = 5db0422e (C GAPART1 art landed). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:32Z): your 3 FOR MAIN items routed to Foreman B (after coop-thin-g lands).
+- FROM MAIN 109 (23/11 09:45Z): LIVE = e9c0a43d (KIT-AP01 story frames). Merge it before SSK.
