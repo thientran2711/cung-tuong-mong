@@ -254,7 +254,8 @@ function kitAlarm(){if(kmReduced())return;const d=document.createElement("div");
 
 /* ================= 9 THỜI TIẾT: chip + real effects ================= */
 const KM_WX={"hoa đào bay":"hoadao","mưa phùn":"muaphun","sương sớm":"suongsom","trời quang":"troiquang","nắng gắt":"nanggat","ve kêu râm ran":"vekeu","giông tố":"giong","đom đóm":"domdom",
- "lá phong rơi":"laphong","nắng vàng":"nangvang","gió heo may":"gioheomay","trăng rằm":"trangram","tuyết nhẹ":"tuyetnhe","tuyết dày":"tuyetday","sương giá":"suonggia","mai nở trong tuyết":"maino"};
+ "lá phong rơi":"laphong","nắng vàng":"nangvang","gió heo may":"gioheomay","trăng rằm":"trangram","tuyết nhẹ":"tuyetnhe","tuyết dày":"tuyetday","sương giá":"suonggia","mai nở trong tuyết":"maino",
+ "trời âm u":"amu","mưa rào":"muarao","mưa thu":"muarao","gió lớn":"giolon","gió bấc":"giolon","sương mù":"suongmu"};
 /* exactly what the code does with the weather (j3 endTurn, j80 sleepRegen, j9 placeWhere/travel, j8 contest, j12 rollWx) */
 function kitWxEffects(w){w=w||(S&&S.wx);if(!w)return[];const L=[];const f=w.f;
  if([1,3,4].includes(f)){L.push(["r","Đi đến nơi xa tốn 3 khắc (ngày thường 2)."]);L.push(["n","Hoàng thượng không ra Ngự hoa viên, ngồi ở thư phòng; ít người dạo vườn (chừng một phần tư ngày thường)."]);L.push(["n","Thi Sắc, thi tài ngoài trời may rủi hơn; thi Sắc ngày ướt thì người giỏi múa kém thế."])}

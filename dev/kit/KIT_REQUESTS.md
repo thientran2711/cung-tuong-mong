@@ -246,3 +246,7 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Family scan (`grep -n "manual:true" dev/build/*.js` + `st.later`): 5 manual kmStage scenes (j93 km-reward, jlevel kitLearn, jpromo person reveal, jtoil ktrv, jne night card); only jne uses `st.later` → 1 site.
 - Suggested kit fix (kit keeper): jne `if(red())fin();else st.later(NE.list,fin)` (or kmStage: `finish()` keeps timers pushed after it was scheduled). Not changed here (law 9). Test bots tap the card meanwhile (coop-night / coop-timer clear, b07ec7ea).
 | 11/21 | B coop-thin-g-f1 | **kitNightEnd (jne) end button in reduced motion** | night card, every night she is drawn (Gọn / prefers-reduced-motion) | kit keeper via Foreman B | OPEN |
+## 23/11 MG10A (worker session_01D3E3NXyH16AHsWYAvBwd5N for ROOT-C7) — KIT REQUEST «painted board backdrop slot for DOM mini-games thu_tam, thu_choi, tuoi, co7»
+- These four boards (Chải lông thú, Chơi với thú, Tưới cây, Cờ năm quân; engines petc*/shelfWaterGame/kgGomoku) are DOM / plain cream with no `kg82Bg` call, so the painted backdrops are on the CDN but nothing reads them: `img/kit/mg-thu_tam-bg.webp`, `mg-thu_choi-bg.webp`, `mg-tuoi-bg.webp`, `mg-co7-bg.webp` (1024x768, ≤ 257 KB).
+- Ask: kit keeper gives these boards the same backdrop part as canvas boards (cover-fit picture + soft veil behind the play area, kg82Bg look), keyed `mg-<kind>-bg`. MG10A did not style it by hand.
+- Status: OPEN.

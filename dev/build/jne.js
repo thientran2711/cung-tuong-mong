@@ -162,7 +162,8 @@ function dawnOf(){const f=typeof festToday==="function"?festToday():null;const s
 /* owner 21/11 mark #84 («Sang buổi»: picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background): every beat is THE full-screen
    picture (KIT 81c kitFullPic): <name>-port.webp on the phone, <name>-land.webp on the iPad once Foreman C lists them in img/INFO.json; until then today's 4:3
    painting cropped to fill (its focus FOC). Title + line and the ONE kit button lie on the picture. */
-const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
+/* the site build turns "img/kit/" (DIR) into the CDN address: the INFO key is the path after img/ either way (review GAPART2-r6) */
+const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^https?:\/\/[^/]+\/img\//,"").replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
 function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow();
  if(o.night)beats.push({k:o.night.k,snd:o.night.snd,dk:"lonely-"+sea,src:`${DIR}ne-night-lonely-${sea}.webp`,t:TIER[o.night.k].t,sub:o.night.line,ms:NE.lonelyMs});
  beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});beats.forEach(b=>{b.src=fullSrc(b.src)});

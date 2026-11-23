@@ -33,3 +33,18 @@ window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
  try{const b=kitEvBanner(m);if(b&&b.own){const mb=document.getElementById("mb");const ov=mb&&mb.querySelector(".kdlgart .ksart > .kesov");if(ov){ov.remove();const band=mb.querySelector(":scope > .kdlgart");if(band)band.classList.add("kevown")}}}catch(e){}return r};window.kitEventStage=kitEventStage})();
 /* 4:3 scene pictures in the wide dialog band: keep the heads (people stand in the upper half of the painting) — crop from near the top */
 (function(){const st=document.createElement("style");st.id="kevban-css";st.textContent=`html body #mb .kdlgart .ksart>img[src*="img/ev-"]{object-position:50% 14%!important}`;document.head.appendChild(st)})();
+/* ---------- OUTING BACKDROPS (KP23, review/outing-art): the two painted establishing pictures of a trip outside the palace ----------
+   img/outing-<place>-land.webp on EVERY device (r1): the dialog picture slot is a wide band on phone and iPad, and every ev-* banner is one 4:3 landscape file; -port stays for a full-screen use. Live only when listed in the CDN index (KIT_CDNHAVE, like every banner here) — until then nothing changes (room-picture fallback).
+   KIT_OUTING = [{key, t: regex on the dialog TITLE, b: regex on the BODY text (start of it)}] — ONE table, narrow on purpose (a mere mention of the place in a chat / message / task is not an outing); a trip place without a painting is NOT listed (it keeps its fallback).
+   A dialog that already carries its own picture (m.art / m.stArt / m.headArt / a place card / an ending) is left alone. */
+const KIT_OUTING=[
+ {key:"chua-ho-quoc",t:/^Chùa Hộ Quốc|(?:ở|tại)\s+chùa Hộ Quốc/i,b:/^Ngươi gặp lại .{0,60} ở chùa Hộ Quốc/i},
+ {key:"ngu-uyen-ngoai",t:/^$/,b:/Hoàng thượng lên Cảnh Sơn/i}];
+const KIT_OUTING_NAME={"chua-ho-quoc":"Chùa Hộ Quốc","ngu-uyen-ngoai":"Ngự uyển ngoại"};
+function kitOutingKey(m){try{if(!m||m.art||m.stArt||m.headArt||m.placeK||m.pid==="over")return"";
+ const P=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();const t=P(m.t),b=P(m.h);
+ for(const o of KIT_OUTING)if(o.t.test(t)||o.b.test(b))return o.key}catch(e){}return""}
+function kitOutingSrc(key){try{if(!key)return"";const f=`img/outing-${key}-land.webp`;/* band slot = 4:3 landscape on every device, like every ev-* banner (KIT LAW 10); the -port file is kept for a full-screen use */
+ return KIT_CDNHAVE&&KIT_CDNHAVE.has(f.replace(/^.*?(?=img\/outing-)/,""))?f:""}/* the build may turn the literal into a full CDN url: the index keys are img/… */catch(e){return""}}
+window.KIT_OUTING=KIT_OUTING;window.kitOutingKey=kitOutingKey;window.kitOutingSrc=kitOutingSrc;
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{const k=kitOutingKey(m);if(k){const s=kitOutingSrc(k);if(s)return{src:s,lab:KIT_OUTING_NAME[k]||""}}}catch(e){}return k0.apply(this,arguments)}})();

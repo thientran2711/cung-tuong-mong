@@ -56,8 +56,8 @@ const KPC={
  "dau-doc":{sfx:"poison",fx:{edge:"poison"}},"hai-thai":{sfx:"gloom",fx:{edge:"blood"},mus:"bgm-sorrow"}};
 /* S3-152 / S3-181 ORIGIN FRAME PLACEHOLDER (ART REQUEST A1 = 9 painted frames, one per origin; until they land a main-story card gets a double rule in the origin's colour so it reads as main story at a glance).
    When the painted frame of an origin exists, KPO_ART[k] = its url and the rule is dropped (data-kpres-art). Colours: tt gold · dtq crimson · muoi salt-blue · cn rose · nc teal · td ash · ch amber · thd moss · cnv (maid start, the 9th) + srv jade. */
-const KPO={tt:"#c9952a",dtq:"#a8321f",muoi:"#6f95a8",cn:"#c4708a",nc:"#3f8a74",td:"#6d6779",ch:"#b8742f",thd:"#6c8a4f",srv:"#5a9a86",cnv:"#5a9a86"},KPO_ART={};
-(function(){const st=document.createElement("style");st.id="kpres-css";st.textContent=`.dlg[data-kpres-story="main"][data-kpres-origin]:not([data-kpres-art]){box-shadow:inset 0 0 0 2px var(--kpo),inset 0 0 0 4px transparent,inset 0 0 0 5px var(--kpo)}`;document.head.appendChild(st)})();
+const KPO={tt:"#c9952a",dtq:"#a8321f",muoi:"#6f95a8",cn:"#c4708a",nc:"#3f8a74",td:"#6d6779",ch:"#b8742f",thd:"#6c8a4f",srv:"#5a9a86",cnv:"#5a9a86"},KPO_ART={tt:"img/kit/kpo-tt.webp",dtq:"img/kit/kpo-dtq.webp",muoi:"img/kit/kpo-muoi.webp",cn:"img/kit/kpo-cn.webp",nc:"img/kit/kpo-nc.webp",td:"img/kit/kpo-td.webp",ch:"img/kit/kpo-ch.webp",thd:"img/kit/kpo-thd.webp",srv:"img/kit/kpo-srv.webp",cnv:"img/kit/kpo-srv.webp"};
+(function(){const st=document.createElement("style");st.id="kpres-css";st.textContent=`.dlg[data-kpres-story="main"][data-kpres-origin]:not([data-kpres-art]){box-shadow:inset 0 0 0 2px var(--kpo),inset 0 0 0 4px transparent,inset 0 0 0 5px var(--kpo)}html body #modal .dlg[data-kpres-story="main"][data-kpres-art]{position:relative;--kpo-w:24px;--kpo-out:14px}.dlg[data-kpres-story="main"][data-kpres-art]::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border:var(--kpo-w) solid transparent;border-image-source:var(--kpo-img);border-image-slice:110;border-image-width:var(--kpo-w);border-image-outset:var(--kpo-out);border-image-repeat:stretch}#modal .dlg[data-kpres-story="main"][data-kpres-art]>.kseal-ev{top:calc(var(--kpo-w) - var(--kpo-out) + 4px)!important}`;document.head.appendChild(st)})();
 const KPFEST={sfx:"festival",mus:"bgm-festival",fx:{kit:"lantern"}};
 const KPRES_LOG=window.KPRES_LOG=[];const KPRES_LAST={};
 /* the picture category of a card (null = not an event card): same sources as the picture itself (jk2b kitEvArt chain) */
@@ -79,7 +79,7 @@ function kpresFx(f,el){if(!f)return"";try{
  if(f.edge&&typeof kitFxEdge==="function"){kitFxEdge(f.edge,{in:500,hold:900,out:1100,opacity:.7});return"edge:"+f.edge}}catch(e){}return""}
 function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)return;m.__pres=P;
  const md=document.getElementById("modal"),dlg=md&&md.querySelector(".dlg");
- if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"){const ok=S&&S.origin?S.origin.k:(S&&S.srv?"srv":"");if(ok){dlg.dataset.kpresOrigin=ok;if(KPO_ART[ok])dlg.dataset.kpresArt=KPO_ART[ok];dlg.style.setProperty("--kpo",KPO[ok]||KPO.srv)}}}catch(e){}}}
+ if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"){const ok=S&&S.origin?S.origin.k:(S&&S.srv?"srv":"");if(ok){dlg.dataset.kpresOrigin=ok;if(KPO_ART[ok]){dlg.dataset.kpresArt=KPO_ART[ok];dlg.style.setProperty("--kpo-img",'url("'+KPO_ART[ok]+'")')}dlg.style.setProperty("--kpo",KPO[ok]||KPO.srv)}}}catch(e){}}}
  if(typeof S!=="undefined"&&S&&!S.dead&&P.mus)m.__presMus=P.mus;
  let sfx="",vo="",fx="";
  const kw=typeof ksfxText==="function"?ksfxText((m.t||"")+" "+(m.h||"")):null;

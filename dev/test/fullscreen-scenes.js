@@ -28,11 +28,14 @@ const DAY={k:'xuan',src:'img/kit/ne-dawn-xuan.webp',t:'Bình minh mùa xuân',su
 const NEWDAY=[
  {k:'newday',o:{night:null,day:DAY},beats:1},
  {k:'newday-2',o:{night:{k:'lonely',line:'Đêm qua Hoàng thượng không lật thẻ bài nào.'},day:{k:'fest',src:'img/ev-fest-newyear-b.webp',t:'Sáng Tết Nguyên Đán',sub:'Xuân · trời quang'}},beats:2},
- {k:'newday-art',o:{night:null,day:DAY},beats:1,art:'kit/ne-dawn-xuan',have:['kit/ne-dawn-xuan-port','kit/ne-dawn-xuan-land']}];
+ {k:'newday-art',o:{night:null,day:DAY},beats:1,art:'kit/ne-dawn-xuan',have:['kit/ne-dawn-xuan-port','kit/ne-dawn-xuan-land']},
+ /* the SHIPPED form (review GAPART2-r6): the site build makes jne DIR the CDN address (dawnOf + the lonely night use it) -> still the port / land painting */
+ {k:'newday-live',o:{sea:'xuan',night:{k:'lonely',line:'Đêm qua Hoàng thượng không lật thẻ bài nào.'},day:Object.assign({},DAY,{src:'https://ctm-img.victoria-tntt.workers.dev/img/kit/ne-dawn-xuan.webp'})},beats:2,art:'kit/ne-dawn-xuan',nart:'kit/ne-night-lonely-xuan',
+  have:['kit/ne-dawn-xuan-port','kit/ne-dawn-xuan-land','kit/ne-night-lonely-xuan-port','kit/ne-night-lonely-xuan-land']}];
 (async()=>{const b=await chromium.launch();
  for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ori=z.w>z.h?'land':'port';
   const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();
-  await p.route(/img\/(learn-art-ky|kit\/ne-dawn-xuan)-(port|land)\.webp/,r=>{const o=r.request().url().match(/-(port|land)\.webp/)[1];r.fulfill({body:STUB[o],contentType:'image/png'})});
+  await p.route(/img\/(learn-art-ky|kit\/ne-dawn-xuan|kit\/ne-night-lonely-xuan)-(port|land)\.webp/,r=>{const o=r.request().url().match(/-(port|land)\.webp/)[1];r.fulfill({body:STUB[o],contentType:'image/png'})});
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof kitLearn==='function'&&typeof kitNewDay==='function'&&typeof kitFullPicHTML==='function',null,{timeout:0});await p.waitForTimeout(2500);
   await p.evaluate(async()=>{quiet=true;document.getElementById('title').hidden=true;const kl=document.getElementById('kload');if(kl)kl.remove();window.__nlInner=1;start();window.__nlInner=0;quiet=false;
@@ -44,6 +47,8 @@ const NEWDAY=[
   const noOverflow=()=>p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1);
   const inScreen=(r)=>r&&r.x>=-1&&r.y>=-1&&r.x+r.w<=z.w+1&&r.y+r.h<=z.h+1&&r.w>0&&r.h>0;
   for(const C of LEARN){const N=`${tag} ${C.k}`;
+   /* real art is live now (GAPART2 23/11): the fallback cases start from an INFO list without any learn-* painting */
+   await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^learn-/.test(k))});
    await p.evaluate(C.go);await p.waitForSelector('#klearnov',{timeout:8000}).catch(()=>{});await p.waitForTimeout(4200);
    const m=await p.evaluate(()=>{const o=document.getElementById('klearnov');if(!o)return null;const r=s=>{const e=o.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height}};
     const im=o.querySelector('.kfull-img');return {full:o.classList.contains('km-full'),fig:r('.kfull.klearn-fig'),h:r('.klearn-h'),card:r('.klearn-card'),btn:r('.klearn-card .kmtake'),word:(o.querySelector('.klearn-h small')||{}).textContent||'',
@@ -65,6 +70,7 @@ const NEWDAY=[
    chk(`${N} seal back after`,await kemoVis()==='visible');
    await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^learn-/.test(k))});}
   for(const C of NEWDAY){const N=`${tag} ${C.k}`;
+   await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^kit\/ne-/.test(k))});
    await p.evaluate(C=>{if(C.have)KIT_INFOM.have=KIT_INFOM.have.concat(C.have);let w=document.getElementById('dawn');if(!w){w=document.createElement('div');w.id='dawn';w.className='dawn';document.body.appendChild(w)}
     window.__ndDone=0;kitNewDay(Object.assign({host:w,wx:null,then:()=>{w.classList.remove('on');window.__ndDone=1}},C.o))},C);
    await p.waitForTimeout(1600);
@@ -82,6 +88,7 @@ const NEWDAY=[
    chk(`${N} picture loaded`,m.loaded);
    if(C.art)chk(`${N} ${ori} painting (INFO.json)`,m.beats[m.beats.length-1].src.endsWith(`img/${C.art}-${ori}.webp`),m.beats);
    else chk(`${N} today's painting until the ${ori} one lands`,m.beats.every(B=>!/-(port|land)\.webp$/.test(B.src)),m.beats);
+   if(C.nart)chk(`${N} night beat ${ori} painting (INFO.json)`,m.beats[0].src.endsWith(`img/${C.nart}-${ori}.webp`),m.beats);
    chk(`${N} no horizontal overflow`,await noOverflow());
    if(OUT)await p.screenshot({path:`${OUT}/${tag}-${C.k}.jpg`,quality:72});
    await p.evaluate(()=>{const b=document.querySelector('#dawn>.kmend');if(b)b.click()});await p.waitForTimeout(500);

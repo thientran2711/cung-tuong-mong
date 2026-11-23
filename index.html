@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dea00576+","t":"2026-11-23T07:48Z","c":"coop-thin-g-f1 #9: G2 solo reference skips the worldOn() family like her week end on the host (gWk); LIVE coop-guest-men r1 gated jmort's T…","b":"68ed3810d0b5","h":[{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"},{"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)"},{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"},{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"}]};
+window.CTM_BI={"s":"e72acc8b+","t":"2026-11-23T08:22Z","c":"coop-thin-g-f1 #9: G2 solo reference skips the worldOn() family like her week end on the host (gWk); LIVE coop-guest-men r1 gated jmort's T…","b":"a48da4848be7","h":[{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1587,7 +1587,7 @@ function pushModal(m){Q.push(m);}
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
-function pushDil(d,title){if(!d)return"";pushModal({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return""}
+function pushDil(d,title){if(!d)return"";const m={t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(d.art)m.art=d.art;pushModal(m);return""}
 function WHO(w){if(!w)return null;const v=w[0]==="r"?RV(w[1]):null;return w[0]==="r"?(v?pv(v):null):w[0]==="e"?pEmp():w[0]==="t"?pTH():w[0]==="m"?pMaid():w[0]==="me"?pMe():w[0]==="d"?pDoc():null}
 /* the ☰ title menu and its sub pages (cls kptitle, j74 HM/SM) are screens, not events: a save made while one is open must not keep it (loading that save over a live kiếp, e.g. "Tiếp tục" / "Xem lại lời dặn", brought an empty menu back ~1 in 4) */
 const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
@@ -2369,7 +2369,7 @@ const TAINT={xa:{n:"trộn xạ hương",on:["tuithom","huongtram"],need:"xahuon
  trom:{n:"thành ngọc bội ngự dụng bị trộm",on:["ngocboi","vongngoc"],c:80,il:1,hurt:"khám ra là tội trộm"}};
 const SHOP_ALL=["tramngoc","vongngoc","luahang","gamto","nhansam","yensao","agiao","giaidoc","thuocanthai","huongtram","tuithom","tranhco","nghien","dancoc","demgam","boodieu","vongvang"];
 function restock(){const L=shuf(SHOP_ALL.slice()).slice(0,6);if(roll(45))L.push(pick(["xahuong","hacdinh","botngua"]));S.shop=L}
-const ITIMG={tramphuong:"tram-phuong",vongngoc:"vong-ngoc",boodieu:"bo-dieu",gamto:"gam-to-chau",luahang:"lua-hang-chau",nhansam:"nhan-sam",yensao:"yen-sao",agiao:"a-giao",giaidoc:"thuoc-giai",thuocanthai:"thuoc-an-thai",huongtram:"huong-tram",xahuong:"xa-huong",hacdinh:"hac-dinh-hong",botngua:"bot-ngua",tranhco:"tranh-co",nghien:"nghien-muc",dancoc:"dan-co",ngocboi:"ngoc-boi-ban",thunha:"thu-nha",tuithom:"tui-thom",sonphan:"phan-son",chungcu:"hinh-nhan"};
+const ITIMG={kimsachtm:"kim-sach-thien-menh",tramphuong:"tram-phuong",vongngoc:"vong-ngoc",boodieu:"bo-dieu",gamto:"gam-to-chau",luahang:"lua-hang-chau",nhansam:"nhan-sam",yensao:"yen-sao",agiao:"a-giao",giaidoc:"thuoc-giai",thuocanthai:"thuoc-an-thai",huongtram:"huong-tram",xahuong:"xa-huong",hacdinh:"hac-dinh-hong",botngua:"bot-ngua",tranhco:"tranh-co",nghien:"nghien-muc",dancoc:"dan-co",ngocboi:"ngoc-boi-ban",thunha:"thu-nha",tuithom:"tui-thom",sonphan:"phan-son",chungcu:"hinh-nhan"};
 function iic(k,s){return ITIMG[k]?ic("item-"+ITIMG[k],s||22):""}
 function iname(e){return itm(e&&e.k).n}
 function takeItem(p,k){const i=p.inv.findIndex(e=>e.k===k&&!e.h);if(i<0)return false;p.inv.splice(i,1);return true}
@@ -33549,7 +33549,7 @@ function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_K
 /* a board lever (mgLev) — the craft engines never type a number of their own */
 function crLev(env,kind,name){const v=mgLev(env,kind,name);if(v==null)throw new Error("BAL.mgTier.lev."+kind+"."+name+" missing");return v}
 /* painted sprites Foreman C has delivered (https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-<name>.webp); until then the stand-in is drawn and the name is listed as a missing picture */
-const CR_HAVE=new Set([]);
+const CR_HAVE=new Set(["ve-motif-sonchu","ve-motif-sonkhach","ve-motif-thuyen","ve-motif-tung","kim-sample","kim-wedge","kim-cut-moon","kim-cut-tri","kim-cut-drop","kim-cut-half","theu-hoop","theu-spool"]);
 function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,w,h,o))return true;
  try{if(typeof kitPhNote==="function")kitPhNote("mg",name,"light","mini-game craft sprite "+name)}catch(e){}if(stand)stand();return false}
 /* the frame loop on the craft clock (crNow), so a test can run the board faster; returns stop() */
@@ -35499,10 +35499,13 @@ function evArtTitle(id){const A=EVART;const c=A&&(evArtCat(id)||(id==="default"?
 /* ---- Mệnh truyện (j67): stArtOf(arcId, beat, ending) -> image path. beat = beat id ("s1","c2","t1","x1"...; "G.x" global beats use ev art),
    ending = ending key ("win","mid","lose",...) or null; with neither -> the arc cover ("bia"). Missing file -> the arc's own cover,
    then the ev-* category that fits (EVENTS.json stories[arc].fb / efb). */
+const ST_RD97ART=new Set(["bd_hen_11", "bd_san_11", "bd_soi_11", "bd_tuyet_11", "ch_benh_11", "ch_bi_11", "ch_co_11", "ch_ho_11", "cn_ban_11", "cn_chu_11", "cn_than_11", "cn_tinh_11", "cnv_ban_11", "cnv_chu_11", "cnv_ma_11", "cnv_mat_11", "dtq_bien_11", "dtq_binh_11", "dtq_huynh_11", "dtq_vu_11", "muoi_doi_11", "muoi_lau_11", "muoi_no_11", "muoi_tuoc_11", "nc_gian_11", "nc_su_11", "nc_tuc_11", "nc_vuong_11", "pt_dang_11", "pt_hai_11", "pt_su_11", "pt_tang_11", "td_an_11", "td_ke_11", "td_song_11", "td_tha_11", "thd_hoc_11", "thd_sach_11", "thd_tho_11", "thd_tro_11", "tt_co_11", "tt_mat_11", "tt_oan_11", "tt_tranh_11"]);
 function stArtOf(arc,beat,ending){try{const A=EVART;if(!A||!A.stories)return"";const s=A.stories[arc];
  const G={rumor:"tin-don",emp:"hoang-de-vui",spy:"tai-mat",th:"thinh-an",rival:"tranh-sung",hh:"thinh-an",gift:"khach-den",night:"hoang-de-dem",srv:"cung-nhan",ill:"benh-tat"};
  const evc=c=>{const C=c&&A.categories[c];return C&&C.files.length?C.files[0]:""};
  if(beat&&String(beat).startsWith("G."))return evc(G[String(beat).slice(2)])||evArtOf("j67:"+beat);
+ /* GE11 (GAPART1 23/11): the 44 road-finale rare endings (RD97L, ids like bd_san_11) have no stories entry: their painted picture is img/st-<id>-ket-r97.webp */
+ if(!s&&ending==="r97"&&ST_RD97ART.has(arc))return `https://ctm-img.victoria-tntt.workers.dev/img/st-${arc.replace(/_/g,"-")}-ket-r97.webp`;
  if(!s)return evArtOf("arc:"+arc);
  const key=ending?"ket-"+ending:(beat||"bia");
  return s.files[key]||(ending&&s.efb&&evc(s.efb[ending]))||s.files.bia||evc(s.fb)||evArtOf("arc:"+arc)}catch(e){return""}}
@@ -40247,7 +40250,8 @@ function kitAlarm(){if(kmReduced())return;const d=document.createElement("div");
 
 /* ================= 9 THỜI TIẾT: chip + real effects ================= */
 const KM_WX={"hoa đào bay":"hoadao","mưa phùn":"muaphun","sương sớm":"suongsom","trời quang":"troiquang","nắng gắt":"nanggat","ve kêu râm ran":"vekeu","giông tố":"giong","đom đóm":"domdom",
- "lá phong rơi":"laphong","nắng vàng":"nangvang","gió heo may":"gioheomay","trăng rằm":"trangram","tuyết nhẹ":"tuyetnhe","tuyết dày":"tuyetday","sương giá":"suonggia","mai nở trong tuyết":"maino"};
+ "lá phong rơi":"laphong","nắng vàng":"nangvang","gió heo may":"gioheomay","trăng rằm":"trangram","tuyết nhẹ":"tuyetnhe","tuyết dày":"tuyetday","sương giá":"suonggia","mai nở trong tuyết":"maino",
+ "trời âm u":"amu","mưa rào":"muarao","mưa thu":"muarao","gió lớn":"giolon","gió bấc":"giolon","sương mù":"suongmu"};
 /* exactly what the code does with the weather (j3 endTurn, j80 sleepRegen, j9 placeWhere/travel, j8 contest, j12 rollWx) */
 function kitWxEffects(w){w=w||(S&&S.wx);if(!w)return[];const L=[];const f=w.f;
  if([1,3,4].includes(f)){L.push(["r","Đi đến nơi xa tốn 3 khắc (ngày thường 2)."]);L.push(["n","Hoàng thượng không ra Ngự hoa viên, ngồi ở thư phòng; ít người dạo vườn (chừng một phần tư ngày thường)."]);L.push(["n","Thi Sắc, thi tài ngoài trời may rủi hơn; thi Sắc ngày ướt thì người giỏi múa kém thế."])}
@@ -52580,6 +52584,21 @@ window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
  try{const b=kitEvBanner(m);if(b&&b.own){const mb=document.getElementById("mb");const ov=mb&&mb.querySelector(".kdlgart .ksart > .kesov");if(ov){ov.remove();const band=mb.querySelector(":scope > .kdlgart");if(band)band.classList.add("kevown")}}}catch(e){}return r};window.kitEventStage=kitEventStage})();
 /* 4:3 scene pictures in the wide dialog band: keep the heads (people stand in the upper half of the painting) — crop from near the top */
 (function(){const st=document.createElement("style");st.id="kevban-css";st.textContent=`html body #mb .kdlgart .ksart>img[src*="https://ctm-img.victoria-tntt.workers.dev/img/ev-"]{object-position:50% 14%!important}`;document.head.appendChild(st)})();
+/* ---------- OUTING BACKDROPS (KP23, review/outing-art): the two painted establishing pictures of a trip outside the palace ----------
+   img/outing-<place>-land.webp on EVERY device (r1): the dialog picture slot is a wide band on phone and iPad, and every ev-* banner is one 4:3 landscape file; -port stays for a full-screen use. Live only when listed in the CDN index (KIT_CDNHAVE, like every banner here) — until then nothing changes (room-picture fallback).
+   KIT_OUTING = [{key, t: regex on the dialog TITLE, b: regex on the BODY text (start of it)}] — ONE table, narrow on purpose (a mere mention of the place in a chat / message / task is not an outing); a trip place without a painting is NOT listed (it keeps its fallback).
+   A dialog that already carries its own picture (m.art / m.stArt / m.headArt / a place card / an ending) is left alone. */
+const KIT_OUTING=[
+ {key:"chua-ho-quoc",t:/^Chùa Hộ Quốc|(?:ở|tại)\s+chùa Hộ Quốc/i,b:/^Ngươi gặp lại .{0,60} ở chùa Hộ Quốc/i},
+ {key:"ngu-uyen-ngoai",t:/^$/,b:/Hoàng thượng lên Cảnh Sơn/i}];
+const KIT_OUTING_NAME={"chua-ho-quoc":"Chùa Hộ Quốc","ngu-uyen-ngoai":"Ngự uyển ngoại"};
+function kitOutingKey(m){try{if(!m||m.art||m.stArt||m.headArt||m.placeK||m.pid==="over")return"";
+ const P=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();const t=P(m.t),b=P(m.h);
+ for(const o of KIT_OUTING)if(o.t.test(t)||o.b.test(b))return o.key}catch(e){}return""}
+function kitOutingSrc(key){try{if(!key)return"";const f=`https://ctm-img.victoria-tntt.workers.dev/img/outing-${key}-land.webp`;/* band slot = 4:3 landscape on every device, like every ev-* banner (KIT LAW 10); the -port file is kept for a full-screen use */
+ return KIT_CDNHAVE&&KIT_CDNHAVE.has(f.replace(/^.*?(?=img\/outing-)/,""))?f:""}/* the build may turn the literal into a full CDN url: the index keys are img/… */catch(e){return""}}
+window.KIT_OUTING=KIT_OUTING;window.kitOutingKey=kitOutingKey;window.kitOutingSrc=kitOutingSrc;
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{const k=kitOutingKey(m);if(k){const s=kitOutingSrc(k);if(s)return{src:s,lab:KIT_OUTING_NAME[k]||""}}}catch(e){}return k0.apply(this,arguments)}})();
 /* ================= jrest: HAI CÁCH NGHỈ — mỗi cách một lựa chọn thật (owner 11/15) =================
    Before: "Nghỉ ngơi dưỡng sức" (1 khắc, Sức +20, "uống thuốc bổ, ngủ sớm") and "Nghỉ ngơi một lát" (1 khắc, Sức +6) cost the same,
    so the second was never worth taking, and the first gave a tonic and a night's sleep for free in any buổi.
@@ -53550,14 +53569,14 @@ const WX_BUOI={
  "tuyết dày":[["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"]],
  "sương giá":[["sương giá","suonggia"],["trời giá lạnh","suonggia"],["chiều giá lạnh","suonggia"],["đêm sương giá","suonggia"]],
  "mai nở trong tuyết":[["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"]],
- /* weather-khac in-season day states (j12 WX_KH); icons reuse the nearest painted ones until Foreman C paints mo-wx-amu / mo-wx-muarao (KIT_REQUESTS) */
- "trời âm u":[["trời âm u","suongsom"],["trời âm u","suongsom"],["chiều âm u","suongsom"],["đêm u ám","suongsom"]],
- "mưa rào":[["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"]],
- "mưa thu":[["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"]],
- /* weather-khac-2: wind gusts + fog mornings (icons: nearest painted ones, KIT_REQUESTS) */
- "gió lớn":[["gió lớn","gioheomay"],["gió lớn","gioheomay"],["gió lớn","gioheomay"],["đêm gió lớn","gioheomay"]],
- "gió bấc":[["gió bấc","gioheomay"],["gió bấc","gioheomay"],["gió bấc","gioheomay"],["đêm gió bấc","gioheomay"]],
- "sương mù":[["sương mù","suongsom"],["sương mù","suongsom"],["chiều sương mù","suongsom"],["đêm sương mù","suongsom"]]};
+ /* weather-khac in-season day states (j12 WX_KH); own painted icons mo-wx-amu / mo-wx-muarao (KP08, GAPART1 23/11) */
+ "trời âm u":[["trời âm u","amu"],["trời âm u","amu"],["chiều âm u","amu"],["đêm u ám","amu"]],
+ "mưa rào":[["mưa rào","muarao"],["mưa rào","muarao"],["mưa rào","muarao"],["mưa rào","muarao"]],
+ "mưa thu":[["mưa thu","muarao"],["mưa thu","muarao"],["mưa thu","muarao"],["mưa thu","muarao"]],
+ /* weather-khac-2: wind gusts + fog mornings (own painted icons mo-wx-giolon / mo-wx-suongmu, KP08) */
+ "gió lớn":[["gió lớn","giolon"],["gió lớn","giolon"],["gió lớn","giolon"],["đêm gió lớn","giolon"]],
+ "gió bấc":[["gió bấc","giolon"],["gió bấc","giolon"],["gió bấc","giolon"],["đêm gió bấc","giolon"]],
+ "sương mù":[["sương mù","suongmu"],["sương mù","suongmu"],["chiều sương mù","suongmu"],["đêm sương mù","suongmu"]]};
 function wxAt(base,b){const R=WX_BUOI[base];return R?R[Math.max(0,Math.min(3,b|0))]:[base,null]}
 function wxSync(){try{if(!S||!S.wx)return;if(!S.wx.b||!WX_BUOI[S.wx.b])S.wx.b=WX_BUOI[S.wx.n]?S.wx.n:(S.wx.b||S.wx.n);const [n]=wxAt(S.wx.b,S.buoi||0);S.wx.n=n}catch(e){}}
 /* icons for the buổi words (KM_WX is keyed by the shown words) */
@@ -54768,6 +54787,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* KIT 83.9 danger button + kitConfirm (kit sample) */
 KIT_SAMPLES.push({id:"§83.9",title:"kitDanger · .kbtn.kdanger + kitConfirm",where:"<b>Irreversible actions</b> (delete the cloud sổ, new life, …). Same size as <code>.kbtn</code>; yes = danger button, no = the panel's own quiet button; optional type-to-confirm field. Samples: button, disabled button, and a live pop-up trigger.",
  html:()=>`<div class="kitpg-row"><button class="kbtn">Đã hiểu</button><button class="kbtn alt">Thôi</button><button class="kbtn kdanger">Xóa sổ mây</button><button class="kbtn kdanger" disabled>Xóa sổ mây</button></div><p><button class="lnk" style="font-size:.95rem" onclick="kitConfirm({title:'Xóa sổ trên mây?',lines:['Sổ trên mây sẽ mất, không lấy lại được.'],yes:'Xóa sổ mây',type:'XOA'})">Mở thử hộp xác nhận (gõ XOA)</button></p>`});
+
+/* KIT origin frame (AP01, jpres.js KPO_ART): one button per origin opens a sample main-story card with its painted frame */
+KIT_SAMPLES.push({id:"§AP01",title:"Origin frame · khung chính tuyến theo xuất thân (KPO_ART, 9 khung)",where:"<b>Chính tuyến</b> event cards. <code>KPO_ART[origin]</code> → <code>data-kpres-art</code> → one 9-slice overlay in jpres.js; the card padding keeps text inside. Tap an origin to open a sample card.",
+ html:()=>`<div class="kitpg-row">${["tt","dtq","muoi","cn","nc","td","ch","thd","srv"].map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{const o=S.origin;S.origin={k:'${k}'};Q.push({t:'Chính tuyến · Mẫu khung · Chương 1 · Hồi 1/5',h:'<p>Khung xuất thân mẫu.</p>',btn:'Đã rõ'});showModal();S.origin=o}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
 /* ================= jtitle: KIT 82 · TITLE SYSTEM PARTS (owner 11/16 13:00Z / 13:15Z / 13:20Z; review/title-tag) =================
    Two different things (owner 13:20Z): RANK (Tần, Phi, Quý phi…) vs DANH HIỆU (a worn title plate, line 1) — plus the EMPEROR'S HIỆU (Thục, Hiền, Đức…) that JOINS THE RANK everywhere ("Thục phi").
    - kitHieuJoin(rankName,p)  → "Thục phi" when p.hieu is set (S.hieu for her / v.hieu, granted by j8 giveReward "ban hiệu"; any rank except Hoàng hậu and lãnh cung). Called by rkOfFace / rkName (j19 / j8), so every rank word in the game carries it.
@@ -55699,12 +55722,12 @@ const KF_WX={
  heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat glare patches, brighter and more of them with the level */
  heat:{k:["glowburst"],cap:4,vx:[-.05,.05],vy:[-.14,-.05],a0:.17,float:1,tint:0xffd29a,sc:[3.2,4.8],life:[420,640]},
  heat3:{k:["glowburst","ember"],cap:4,vx:[-.06,.06],vy:[-.2,-.06],a0:.3,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
- cloud1:{k:["smoke"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
- cloud:{k:["smoke"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
- cloud3:{k:["smoke"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
- mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- mist3:{k:["smoke"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
- mist:{k:["smoke"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ cloud1:{k:["fogbank"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
+ cloud:{k:["fogbank"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
+ cloud3:{k:["fogbank"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
+ mist1:{k:["fogbank"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist3:{k:["fogbank"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
+ mist:{k:["fogbank"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}
 };
@@ -55736,7 +55759,7 @@ function kfWxSpawn(c,scatter){const clip=kfClipLay(c.lay)&&!!KFX.sr,sr=clip?KFX.
  if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);if(c.ray){x=sr.x+RS(.3,1.02)*sr.w;y=sr.y+RS(-.05,.3)*sr.h}v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1,tw:c.tw||0}}
  else{const ln=c.line&&k==="streak";x=c.fromLeft?(scatter?sr.x+RS(0,sr.w):sr.x-50):sr.x+RS(-.04,1.04)*sr.w;y=c.fromLeft||scatter?sr.y+RS(0,sr.h*.95):sr.y+RS(-30,-8);v={vx:ln?vx*2.4:vx,vy:ln?vy*.5:vy,life:ln?Math.ceil((sr.w+200)/(vx*2.4))+30:c.fromLeft?Math.ceil((sr.w+200)/vx)+30:Math.ceil((sr.h+140)/vy)+60,sway:ln?0:c.sway||0,spin:c.rain||ln?0:RS(-c.spin,c.spin),fade:"none",a0:ln?.7:a0,amb:1,ln}}
  v.lay=c.lay;v.clip=clip;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
- const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
+ const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;if(k==="fogbank"){s.rotation=0;s.v.spin=0}/* a fog bank lies flat (KP08 painted fogbank) */
  if(zs!=null&&!c.rain){/* REAL SNOW: soft round flakes of mixed size; far = tiny + crisp + slow, near = big + soft (blurred look) + faster + wider sway; blue-white so it reads on light paintings */
   const b=s.v.sc/sc,z=zs;s.scale.set(b*(.3+.9*z));s.blendMode="normal";s.tint=z<.5?0x8cade6:0xc2d5f7;s.v.a0=.98-.45*z*z;s.v.sway=(c.sway||0)*(.5+1*z);s.v.spin=0;
   /* crisp white core on the soft blue body: reads on light AND dark paintings; same path, same sway */
@@ -56029,7 +56052,7 @@ const KFK_SP={
  "petal-plum":{n:9,s:64,d:22},"petal-peach":{n:9,s:64,d:22},"petal-lotus":{n:9,s:80,d:30},osmanthus:{n:9,s:48,d:13},
  leaf:{n:9,s:80,d:26},snow:{n:5,s:48,d:15},ash:{n:9,s:56,d:16},paper:{n:9,s:72,d:20},coin:{n:9,s:64,d:22},ink:{n:9,s:128,d:44},
  lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
- streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
+ streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},fogbank:{n:2,s:512,d:150,t:1},
  glowburst:{n:1,s:256,d:220}, /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
  brush:{n:9,s:160,d:70},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
  "gift-hands":{n:3,s:288,d:200}, /* review/gift-pick: a maid's hands (celadon sleeves) carrying 0 the lacquer box with its ribbon · 1 the box, ribbon untied · 2 the silk bundle */
@@ -62257,7 +62280,8 @@ function dawnOf(){const f=typeof festToday==="function"?festToday():null;const s
 /* owner 21/11 mark #84 («Sang buổi»: picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background): every beat is THE full-screen
    picture (KIT 81c kitFullPic): <name>-port.webp on the phone, <name>-land.webp on the iPad once Foreman C lists them in img/INFO.json; until then today's 4:3
    painting cropped to fill (its focus FOC). Title + line and the ONE kit button lie on the picture. */
-const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
+/* the site build turns "https://ctm-img.victoria-tntt.workers.dev/img/kit/" (DIR) into the CDN address: the INFO key is the path after img/ either way (review GAPART2-r6) */
+const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^https?:\/\/[^/]+\/img\//,"").replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
 function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow();
  if(o.night)beats.push({k:o.night.k,snd:o.night.snd,dk:"lonely-"+sea,src:`${DIR}ne-night-lonely-${sea}.webp`,t:TIER[o.night.k].t,sub:o.night.line,ms:NE.lonelyMs});
  beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});beats.forEach(b=>{b.src=fullSrc(b.src)});
@@ -63851,8 +63875,8 @@ const KPC={
  "dau-doc":{sfx:"poison",fx:{edge:"poison"}},"hai-thai":{sfx:"gloom",fx:{edge:"blood"},mus:"bgm-sorrow"}};
 /* S3-152 / S3-181 ORIGIN FRAME PLACEHOLDER (ART REQUEST A1 = 9 painted frames, one per origin; until they land a main-story card gets a double rule in the origin's colour so it reads as main story at a glance).
    When the painted frame of an origin exists, KPO_ART[k] = its url and the rule is dropped (data-kpres-art). Colours: tt gold · dtq crimson · muoi salt-blue · cn rose · nc teal · td ash · ch amber · thd moss · cnv (maid start, the 9th) + srv jade. */
-const KPO={tt:"#c9952a",dtq:"#a8321f",muoi:"#6f95a8",cn:"#c4708a",nc:"#3f8a74",td:"#6d6779",ch:"#b8742f",thd:"#6c8a4f",srv:"#5a9a86",cnv:"#5a9a86"},KPO_ART={};
-(function(){const st=document.createElement("style");st.id="kpres-css";st.textContent=`.dlg[data-kpres-story="main"][data-kpres-origin]:not([data-kpres-art]){box-shadow:inset 0 0 0 2px var(--kpo),inset 0 0 0 4px transparent,inset 0 0 0 5px var(--kpo)}`;document.head.appendChild(st)})();
+const KPO={tt:"#c9952a",dtq:"#a8321f",muoi:"#6f95a8",cn:"#c4708a",nc:"#3f8a74",td:"#6d6779",ch:"#b8742f",thd:"#6c8a4f",srv:"#5a9a86",cnv:"#5a9a86"},KPO_ART={tt:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-tt.webp",dtq:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-dtq.webp",muoi:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-muoi.webp",cn:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-cn.webp",nc:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-nc.webp",td:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-td.webp",ch:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp",thd:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-thd.webp",srv:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-srv.webp",cnv:"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-srv.webp"};
+(function(){const st=document.createElement("style");st.id="kpres-css";st.textContent=`.dlg[data-kpres-story="main"][data-kpres-origin]:not([data-kpres-art]){box-shadow:inset 0 0 0 2px var(--kpo),inset 0 0 0 4px transparent,inset 0 0 0 5px var(--kpo)}html body #modal .dlg[data-kpres-story="main"][data-kpres-art]{position:relative;--kpo-w:24px;--kpo-out:14px}.dlg[data-kpres-story="main"][data-kpres-art]::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border:var(--kpo-w) solid transparent;border-image-source:var(--kpo-img);border-image-slice:110;border-image-width:var(--kpo-w);border-image-outset:var(--kpo-out);border-image-repeat:stretch}#modal .dlg[data-kpres-story="main"][data-kpres-art]>.kseal-ev{top:calc(var(--kpo-w) - var(--kpo-out) + 4px)!important}`;document.head.appendChild(st)})();
 const KPFEST={sfx:"festival",mus:"bgm-festival",fx:{kit:"lantern"}};
 const KPRES_LOG=window.KPRES_LOG=[];const KPRES_LAST={};
 /* the picture category of a card (null = not an event card): same sources as the picture itself (jk2b kitEvArt chain) */
@@ -63874,7 +63898,7 @@ function kpresFx(f,el){if(!f)return"";try{
  if(f.edge&&typeof kitFxEdge==="function"){kitFxEdge(f.edge,{in:500,hold:900,out:1100,opacity:.7});return"edge:"+f.edge}}catch(e){}return""}
 function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)return;m.__pres=P;
  const md=document.getElementById("modal"),dlg=md&&md.querySelector(".dlg");
- if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"){const ok=S&&S.origin?S.origin.k:(S&&S.srv?"srv":"");if(ok){dlg.dataset.kpresOrigin=ok;if(KPO_ART[ok])dlg.dataset.kpresArt=KPO_ART[ok];dlg.style.setProperty("--kpo",KPO[ok]||KPO.srv)}}}catch(e){}}}
+ if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"){const ok=S&&S.origin?S.origin.k:(S&&S.srv?"srv":"");if(ok){dlg.dataset.kpresOrigin=ok;if(KPO_ART[ok]){dlg.dataset.kpresArt=KPO_ART[ok];dlg.style.setProperty("--kpo-img",'url("'+KPO_ART[ok]+'")')}dlg.style.setProperty("--kpo",KPO[ok]||KPO.srv)}}}catch(e){}}}
  if(typeof S!=="undefined"&&S&&!S.dead&&P.mus)m.__presMus=P.mus;
  let sfx="",vo="",fx="";
  const kw=typeof ksfxText==="function"?ksfxText((m.t||"")+" "+(m.h||"")):null;
@@ -69647,13 +69671,15 @@ function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close"
 /* bang-words: ending texts carry the road's land tokens ({kha} {land} {quan} {dien} …) — filled by the one filler (j67 fill67), never shown raw */
 function geF(x){try{return typeof fill67==="function"&&/\{\w+\}/.test(x||"")?fill67(x,(S&&S.st&&S.st.M)||{}):x}catch(e){return x}}
 window.geF=geF;
+const GE_ART=new Set(["bd_hen-1-a", "bd_hen-1-t", "bd_hen-2-a", "bd_hen-2-t", "bd_hen-3-a", "bd_hen-3-t", "bd_hen-4-a", "bd_hen-4-t", "bd_san-1-a", "bd_san-1-t", "bd_san-2-a", "bd_san-2-t", "bd_san-3-a", "bd_san-3-t", "bd_san-4-a", "bd_san-4-t", "bd_soi-1-a", "bd_soi-1-t", "bd_soi-2-a", "bd_soi-2-t", "bd_soi-3-a", "bd_soi-3-t", "bd_soi-4-a", "bd_soi-4-t", "bd_tuyet-1-a", "bd_tuyet-1-t", "bd_tuyet-2-a", "bd_tuyet-2-t", "bd_tuyet-3-a", "bd_tuyet-3-t", "bd_tuyet-4-a", "bd_tuyet-4-t", "ch_benh-1-a", "ch_benh-1-t", "ch_benh-2-a", "ch_benh-2-t", "ch_benh-3-a", "ch_benh-3-t", "ch_benh-4-a", "ch_benh-4-t", "ch_bi-1-a", "ch_bi-1-t", "ch_bi-2-a", "ch_bi-2-t", "ch_bi-3-a", "ch_bi-3-t", "ch_bi-4-a", "ch_bi-4-t", "ch_co-1-a", "ch_co-1-t", "ch_co-2-a", "ch_co-2-t", "ch_co-3-a", "ch_co-3-t", "ch_co-4-a", "ch_co-4-t", "ch_ho-1-a", "ch_ho-1-t", "ch_ho-2-a", "ch_ho-2-t", "ch_ho-3-a", "ch_ho-3-t", "ch_ho-4-a", "ch_ho-4-t", "cn_ban-1-a", "cn_ban-1-t", "cn_ban-2-a", "cn_ban-2-t", "cn_ban-3-a", "cn_ban-3-t", "cn_ban-4-a", "cn_ban-4-t", "cn_chu-1-a", "cn_chu-1-t", "cn_chu-2-a", "cn_chu-2-t", "cn_chu-3-a", "cn_chu-3-t", "cn_chu-4-a", "cn_chu-4-t", "cn_than-1-a", "cn_than-1-t", "cn_than-2-a", "cn_than-2-t", "cn_than-3-a", "cn_than-3-t", "cn_than-4-a", "cn_than-4-t", "cn_tinh-1-a", "cn_tinh-1-t", "cn_tinh-2-a", "cn_tinh-2-t", "cn_tinh-3-a", "cn_tinh-3-t", "cn_tinh-4-a", "cn_tinh-4-t", "cnv_ban-1-a", "cnv_ban-1-t", "cnv_ban-2-a", "cnv_ban-2-t", "cnv_ban-3-a", "cnv_ban-3-t", "cnv_ban-4-a", "cnv_ban-4-t", "cnv_chu-1-a", "cnv_chu-1-t", "cnv_chu-2-a", "cnv_chu-2-t", "cnv_chu-3-a", "cnv_chu-3-t", "cnv_chu-4-a", "cnv_chu-4-t", "cnv_ma-1-a", "cnv_ma-1-t", "cnv_ma-2-a", "cnv_ma-2-t", "cnv_ma-3-a", "cnv_ma-3-t", "cnv_ma-4-a", "cnv_ma-4-t", "cnv_mat-1-a", "cnv_mat-1-t", "cnv_mat-2-a", "cnv_mat-2-t", "cnv_mat-3-a", "cnv_mat-3-t", "cnv_mat-4-a", "cnv_mat-4-t", "dtq_bien-1-a", "dtq_bien-1-t", "dtq_bien-2-a", "dtq_bien-2-t", "dtq_bien-3-a", "dtq_bien-3-t", "dtq_bien-4-a", "dtq_bien-4-t", "dtq_binh-1-a", "dtq_binh-1-t", "dtq_binh-2-a", "dtq_binh-2-t", "dtq_binh-3-a", "dtq_binh-3-t", "dtq_binh-4-a", "dtq_binh-4-t", "dtq_huynh-1-a", "dtq_huynh-1-t", "dtq_huynh-2-a", "dtq_huynh-2-t", "dtq_huynh-3-a", "dtq_huynh-3-t", "dtq_huynh-4-a", "dtq_huynh-4-t", "dtq_vu-1-a", "dtq_vu-1-t", "dtq_vu-2-a", "dtq_vu-2-t", "dtq_vu-3-a", "dtq_vu-3-t", "dtq_vu-4-a", "dtq_vu-4-t", "fail", "muoi_doi-1-a", "muoi_doi-1-t", "muoi_doi-2-a", "muoi_doi-2-t", "muoi_doi-3-a", "muoi_doi-3-t", "muoi_doi-4-a", "muoi_doi-4-t", "muoi_lau-1-a", "muoi_lau-1-t", "muoi_lau-2-a", "muoi_lau-2-t", "muoi_lau-3-a", "muoi_lau-3-t", "muoi_lau-4-a", "muoi_lau-4-t", "muoi_no-1-a", "muoi_no-1-t", "muoi_no-2-a", "muoi_no-2-t", "muoi_no-3-a", "muoi_no-3-t", "muoi_no-4-a", "muoi_no-4-t", "muoi_tuoc-1-a", "muoi_tuoc-1-t", "muoi_tuoc-2-a", "muoi_tuoc-2-t", "muoi_tuoc-3-a", "muoi_tuoc-3-t", "muoi_tuoc-4-a", "muoi_tuoc-4-t", "nc_gian-1-a", "nc_gian-1-t", "nc_gian-2-a", "nc_gian-2-t", "nc_gian-3-a", "nc_gian-3-t", "nc_gian-4-a", "nc_gian-4-t", "nc_su-1-a", "nc_su-1-t", "nc_su-2-a", "nc_su-2-t", "nc_su-3-a", "nc_su-3-t", "nc_su-4-a", "nc_su-4-t", "nc_tuc-1-a", "nc_tuc-1-t", "nc_tuc-2-a", "nc_tuc-2-t", "nc_tuc-3-a", "nc_tuc-3-t", "nc_tuc-4-a", "nc_tuc-4-t", "nc_vuong-1-a", "nc_vuong-1-t", "nc_vuong-2-a", "nc_vuong-2-t", "nc_vuong-3-a", "nc_vuong-3-t", "nc_vuong-4-a", "nc_vuong-4-t", "pt_dang-1-a", "pt_dang-1-t", "pt_dang-2-a", "pt_dang-2-t", "pt_dang-3-a", "pt_dang-3-t", "pt_dang-4-a", "pt_dang-4-t", "pt_hai-1-a", "pt_hai-1-t", "pt_hai-2-a", "pt_hai-2-t", "pt_hai-3-a", "pt_hai-3-t", "pt_hai-4-a", "pt_hai-4-t", "pt_su-1-a", "pt_su-1-t", "pt_su-2-a", "pt_su-2-t", "pt_su-3-a", "pt_su-3-t", "pt_su-4-a", "pt_su-4-t", "pt_tang-1-a", "pt_tang-1-t", "pt_tang-2-a", "pt_tang-2-t", "pt_tang-3-a", "pt_tang-3-t", "pt_tang-4-a", "pt_tang-4-t", "td_an-1-a", "td_an-1-t", "td_an-2-a", "td_an-2-t", "td_an-3-a", "td_an-3-t", "td_an-4-a", "td_an-4-t", "td_ke-1-a", "td_ke-1-t", "td_ke-2-a", "td_ke-2-t", "td_ke-3-a", "td_ke-3-t", "td_ke-4-a", "td_ke-4-t", "td_song-1-a", "td_song-1-t", "td_song-2-a", "td_song-2-t", "td_song-3-a", "td_song-3-t", "td_song-4-a", "td_song-4-t", "td_tha-1-a", "td_tha-1-t", "td_tha-2-a", "td_tha-2-t", "td_tha-3-a", "td_tha-3-t", "td_tha-4-a", "td_tha-4-t", "thd_hoc-1-a", "thd_hoc-1-t", "thd_hoc-2-a", "thd_hoc-2-t", "thd_hoc-3-a", "thd_hoc-3-t", "thd_hoc-4-a", "thd_hoc-4-t", "thd_sach-1-a", "thd_sach-1-t", "thd_sach-2-a", "thd_sach-2-t", "thd_sach-3-a", "thd_sach-3-t", "thd_sach-4-a", "thd_sach-4-t", "thd_tho-1-a", "thd_tho-1-t", "thd_tho-2-a", "thd_tho-2-t", "thd_tho-3-a", "thd_tho-3-t", "thd_tho-4-a", "thd_tho-4-t", "thd_tro-1-a", "thd_tro-1-t", "thd_tro-2-a", "thd_tro-2-t", "thd_tro-3-a", "thd_tro-3-t", "thd_tro-4-a", "thd_tro-4-t", "tt_co-1-a", "tt_co-1-t", "tt_co-2-a", "tt_co-2-t", "tt_co-3-a", "tt_co-3-t", "tt_co-4-a", "tt_co-4-t", "tt_mat-1-a", "tt_mat-1-t", "tt_mat-2-a", "tt_mat-2-t", "tt_mat-3-a", "tt_mat-3-t", "tt_mat-4-a", "tt_mat-4-t", "tt_oan-1-a", "tt_oan-1-t", "tt_oan-2-a", "tt_oan-2-t", "tt_oan-3-a", "tt_oan-3-t", "tt_oan-4-a", "tt_oan-4-t", "tt_tranh-1-a", "tt_tranh-1-t", "tt_tranh-2-a", "tt_tranh-2-t", "tt_tranh-3-a", "tt_tranh-3-t", "tt_tranh-4-a", "tt_tranh-4-t"]);/* GE06 (GAPART1): painted grand-ending pictures img/ge-<branch>-<n>-<t|a>.webp + img/ge-fail.webp */
+function geArt(s,res){const k=res.ok?`${s.b}-${res.i+1}-${res.sh}`:"fail";return GE_ART.has(k)?`https://ctm-img.victoria-tntt.workers.dev/img/ge-${k}.webp`:undefined}
 PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e[res.i];
  const rows=[];if(res.fx&&Object.keys(res.fx).length)rows.push([res.ok?"Được":"Mất",fmt(res.fx),res.ok?"g":"r"]);(res.ex||[]).forEach(x=>rows.push(["",x,"t"]));
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
-  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
+  return {who:pMe(),mustChoose:1,art:geArt(s,res),t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
    o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
- return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
+ return {who:pMe(),mustChoose:1,art:geArt(s,res),t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;
 function geStore(){const g=store.get("ctm-ge");return g&&typeof g==="object"?Object.assign({t:{},g:{},f:{}},g):{t:{},g:{},f:{}}}
@@ -84960,7 +84986,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.
  try{if(subj&&typeof kitFace==="function"){const fc=kitFace(subj);if(fc)sp.subject=fc}}catch(e){}return sp}
 let ptIconSet=false;
 function ptIconReg(){if(ptIconSet||ptErrOwn()||typeof kitStatusIcon==="undefined")return;ptIconSet=true;
- kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
   show:()=>!!(S&&!S.dead&&(ptMine().length||ptNews().length||ptOrdN())),busy:()=>!!(S&&ptMine().length&&!ptNews().length&&!ptOrdN()),badge:()=>!!(S&&(ptNews().length||ptOrdN())),panel:ptPanel})}
 /* after a state change: MAIN's icon refreshes itself (errIcon), else the fallback one; no re-registration */
 function ptIcon(){try{if(ptErrOwn()){if(typeof errIcon==="function")errIcon();else if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh();return}ptIconReg();if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh()}catch(e){ptErr("icon",e)}}
@@ -89465,7 +89491,7 @@ const KDR_BG="https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp"
    reports/display-bg.md (measured slot points) lands: then paste its slot arrays into KDR_PIC.*.slots / .segs[].slots; nothing else changes. Picture missing on the CDN = the stub look (.kdr-nopic). */
 const gridSlots=(cols,rows,m)=>{m=m==null?.035:m;const w=(1-2*m)/cols,h=(1-2*m)/rows,o=[];for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)o.push({cx:m+w*(c+.5),fy:m+h*(r+1)-h*.06,w:w*.92,h:h*.88});return o};
 const KDR_PIC={land:{segs:[{src:"https://ctm-img.victoria-tntt.workers.dev/img/display/cabinet-land.webp",ar:1.5,slots:gridSlots(2,6)}]},
- port:{segs:[{src:"https://ctm-img.victoria-tntt.workers.dev/img/display/cabinet-port.webp",ar:.42,slots:gridSlots(1,12)}]}};
+ port:{segs:[{src:"https://ctm-img.victoria-tntt.workers.dev/img/display/cabinet-port-1.webp",ar:2/3,slots:gridSlots(1,6)},{src:"https://ctm-img.victoria-tntt.workers.dev/img/display/cabinet-port-2.webp",ar:2/3,slots:gridSlots(1,6)}]}};
 const kv2=()=>document.documentElement.classList.contains("kv2");
 const GFIX=[["cay","Cây cảnh"],["chuong","Chuông gió"],["rem","Rèm, mành"],["phong","Bình phong"],["su","Đồ sứ"],["tranh","Tranh, thư pháp"],["van","Văn phòng tứ bảo"],["nhac","Nhạc khí"],["ngoc","Ngọc khí"],["huong","Lư hương"],["den","Đèn, lồng"],["tham","Thảm, gối tựa"]];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -89594,7 +89620,7 @@ const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)
 /* the room is her room's view: leaving the game (title screen) closes it */
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{if($k()&&(typeof S==="undefined"||!S||S.dead))kitDisplayRoomClose();else if($k()){place()}}catch(e){}return r};window.render=render}catch(e){}
 /* ---------- rail icon (KIT §77): only when the real data API exists ---------- */
-try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-room.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
+try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-disp.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
 window.kitSetLines=kitSetLines;window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
 /* ---------- css ---------- */
 const css=document.createElement("style");css.id="kit-disp";css.textContent=`
@@ -90718,7 +90744,7 @@ function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],
  const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));
  try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
-function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 /* ONE call for the notice of an errand = the game's ONE notice entry point (stage-here r4, dev/build/jnotice.js): kitNotice({id,line,text,pic,go,goLabel}) lights the top-bar «!» box + one short top chip,
    tap → small kit panel «Tin báo». No toast / chip / bar of my own (jnotice.js is in the build before this module). Call sites: errAdd (sent), errTick (back); jptime lands call errNotify too. */
@@ -92873,7 +92899,9 @@ if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{co
   const r=s0.apply(this,arguments);try{kesShow()}catch(e){console.error("kes",e)}return r};window.showModal=showModal}
 /* a rare ending (Kỳ ngộ, j97): the arc's result card that r97Take queues (card67 "result" → kit panel) is that ending's screen */
 if(typeof r97Take==="function"){const r0=r97Take;r97Take=function(){const before=new Set(typeof Q!=="undefined"?Q:[]);const r=r0.apply(this,arguments);
-  try{(Q||[]).forEach(m=>{if(m&&!before.has(m)&&m.kit&&m.kit.kind==="result")kesMark(m,"rare")})}catch(e){console.error("kes",e)}return r}}
+  try{const A=typeof th67==="function"?th67(arguments[0]):null;/* GE11 (GAPART1 23/11): a road-finale rare ending (RD97L) shows its painted picture (j89 ST_RD97ART) */
+  const ra=A&&A.a&&typeof ST_RD97ART!=="undefined"&&ST_RD97ART.has(A.a)?stArtOf(A.a,null,"r97"):"";
+  (Q||[]).forEach(m=>{if(m&&!before.has(m)&&m.kit&&m.kit.kind==="result"){if(ra&&!m.art)m.art=ra;kesMark(m,"rare")}})}catch(e){console.error("kes",e)}return r}}
 /* the frame inside: the ending screen always takes the kit's LARGEST v3 layout (XL: figure XL, the event picture grows into what the text leaves) — the
    kit size system picks the smallest size that holds the content, which on a full-screen frame leaves the figure small in a sea of paper */
 if(typeof kszLivePick3_0==="function"&&typeof kszLiveLay3==="function"){const p0=kszLivePick3_0;kszLivePick3_0=function(dlg){try{const M=document.getElementById("modal");
@@ -95500,7 +95528,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="68ed3810d0b5";window.CTM_BUILD=BUILD;
+const BUILD="a48da4848be7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
