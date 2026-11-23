@@ -2649,3 +2649,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:00Z) HIST-TUYENTU DONE 79ea29f4, archived. MAIN pick: HT→dan, TH→theu, HH→huong, NVP/ma ma→kim+theu; BAL.entry.word exclusions untouched; combined raw → entScore. Sent to SELSCENE.
 - (22:07Z) LANDED odds-ladder-words → LIVE 72521d62 (LC7). LC7 queue empty.
 - (22:10Z) LC7 rolled (14 landed today) → archived. LC8 = session_01Rc5AsNA3dV1edK14m3nUnE (sonnet; setup from land-chain-7.md ROLL block; log land-chain-8.md). On LAND READY relay to LC8.
+- (22:20Z) LC8 READY (setup rebuilt, log land-chain-8.md). SELSCENE brief now has ADDENDUM 1–7 (yard, narrator story, −1/0/+1, yard drama, face-first names, 12 tú nữ, her-round knowledge).

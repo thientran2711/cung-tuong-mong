@@ -46,3 +46,7 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - About 4 kept (giữ thẻ bài) incl. her; the rest «ban hoa» (sent home) but remain REAL people who exist afterwards (law 6b: they go home / marry / may reappear).
 - Kept girls join the existing start roster (≈12 consorts, OD 17/11 ~04:32Z; cap 20) — no duplicate people.
 - Screen: 4–6 figures visible at a time, the yard PANS so figures stay full size on Fold 755x1000 (never shrink to fit, never clip — layout A rules).
+
+## ADDENDUM 7 (MAIN 112, 22:20Z) — HER ROUND (owner OD 23/11 ~22:32Z, read verbatim)
+- Girls in HER round (round 3): she knows their face + their result/rank, and they know hers (two-way).
+- MAIN (unless she objects): the presenting eunuch reads each girl's name + father's office aloud when the round is presented → round-mates' NAMES known too (j61 stage 2). This is the only extra name source; girls of rounds 1–2 are known only through yard chat (Addendum 5).
