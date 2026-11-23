@@ -160,3 +160,46 @@ Hoàng hậu's nết can *cause* an incident (Thù dai / Xảo quyệt: #3, #11)
 | Điềm tĩnh / Kín đáo | **high** | mid | low |
 Draw rule: the three royals take three **different** types (a draw without repeats, weighted by the table), the pool item is seeded per life and excludes the last life's items so tests rarely repeat; the cung nữ origin uses the same 3 types with the Nội vụ phủ / ma ma as the third judge. All odds shown to the player in ladder words only (Law 7); the royal's nết is hidden at the start and read from cues (Law 6b: real person).
 Pitfalls: no one in a selection hall ever "throws a cat" — a drama gag, so mark scene text "phỏng theo phim" and keep it brief; keep the royals polite (they never insult a candidate); incidents never injure; avoid modern slang in the answers; do not let the Hoàng hậu be the only source of trouble.
+
+### 8.4 FIXED MACHINE-READABLE ENTRY FORMAT (MAIN 112 ADDENDUM 10; for the writer seats, files in dev/handover/content/selscene/)
+§8.1 / §8.2 / §7 above are the 12 + 12 + 12 design examples; writers fill ≥40 đối đáp, ≥40 hành xử, ≥60 yard. One JSON object per entry, files `doidap.jsonl`, `hanhxu.jsonl`, `yard.jsonl` (one entry per line). **No numbers anywhere**: gain/loss/reacts name BAL keys only (Law 4); wording cổ trang per VANPHONG (no %, no modern words, no word-game riddles).
+Common rules: `id` unique `dd-###` / `hx-###` / `yd-###`; `tag` = "K" or "D" (+ `src` e.g. "Chân Hoàn truyện", "Như Ý truyện", "Diên Hi công lược", "Qing practice"); exactly **4 options**, with the 4 stances all distinct; each option has ≥1 gain AND ≥1 loss (Law 3); across the 4 options no one is dominant for every royal-nết (Law 2); `lo`: "origin ceiling ≥" the rank index from which the entry may appear (Law 5, harder as she climbs: 0 = all origins); `cue`: a visible hint of the royal's mood, one line, so she can read the room (royal nết stays hidden).
+**Royal nết keys** (use these exact strings): Emperor `E.trongtai, E.chamchinh, E.mesac, E.datinh, E.nhantu, E.hieuthao, E.danghi, E.lanhlung, E.nongnay` (= ETRAITS j1.js:58); Thái hậu `T.tuai, T.nghiem, T.danghi, T.quyen, T.phat` (= TH_ARCH jtrong.js:32); Hoàng hậu `H.<nết>` with the BAL.net F names, e.g. `H.AnCan, H.KieuNgao, H.XaoQuyet, H.ThuDai, H.DiemTinh`. `reacts` maps a key to "+" or "−" (the sizes are BAL.selx.react).
+**Stances**: đối đáp `khiem | manh | dido | that`; hành xử `giuyen | tuxu | caunguoi | nhan`; yard `benh | hua | hoagiai | ngoai`.
+**BAL key names** for gain/loss (writer picks from the list; new key → ask MAIN to add to BAL): `fav` (thiện cảm with the asking royal), `fav.E`, `fav.T`, `fav.H` (with a specific royal), `duc` (mark of đức), `sac`/`tai`/`tamco` (Sắc/Tài/Tâm cơ), `grudge.<npc|role>`, `friend.<npc|role>`, `mark.hau` (Hoàng hậu "ghi tên"), `time` (khắc / countdown), `face` (thể diện), `raw` (adds to the combined entry raw).
+**Format A — ĐỐI ĐÁP / HÀNH XỬ entry:**
+```json
+{"id":"dd-001","type":"doidap","lo":0,"fit":["E.trongtai","E.mesac","T.tuai","H.AnCan"],
+ "asker":"E|T|H|any","prompt":"«Vì sao ngươi vào cung?»","cue":"Hoàng thượng ngả người, mắt không rời ngươi.",
+ "options":[
+  {"text":"Hầu hạ bề trên, cầu phận nhỏ.","stance":"khiem",
+   "gain":{"duc":1,"fav.T":1},"loss":{"fav.E":1},
+   "reacts":{"E.trongtai":"−","E.nhantu":"+","T.tuai":"+","T.nghiem":"+","H.KieuNgao":"+"}},
+  {"text":"…","stance":"manh","gain":{},"loss":{},"reacts":{}},
+  {"text":"…","stance":"dido","gain":{},"loss":{},"reacts":{}},
+  {"text":"…","stance":"that","gain":{},"loss":{},"reacts":{}}],
+ "tag":"D","src":"Chân Hoàn truyện"}
+```
+Gain/loss values are the key's own unit: `{"duc":1}` means "one step of BAL.selx.duc" (1 = a step marker, not a number printed to the player). A hành xử entry has `"type":"hanhxu"`, `"incident"` in place of `"prompt"` (text of what happens), `"stances":` `giuyen|tuxu|caunguoi|nhan`, same option fields. A cung-nữ-origin variant sets `"asker":"ma"` (Nội vụ phủ ma ma) and is used by the same entries when `asker` is `any`.
+**Format B — composable YARD drama (waiting-yard) entry:** parts the generator composes per life from real tú nữ of this life (j61 npcKnows; reuse greet/name-reveal, ADD.5):
+```json
+{"id":"yd-001","type":"yard","lo":0,"tag":"D","src":"Chân Hoàn truyện",
+ "roles":{
+   "bully":{"nết":["Kiêu ngạo","Nóng nảy"],"lòng":["Thù dai","Ham lợi"],"birth":"high|any"},
+   "victim":{"nết":["Khiêm nhường","Kín đáo"],"birth":"low|any"},
+   "instigator":{"nết":["Nhiều chuyện"],"optional":true},
+   "bystanders":{"min":2,"max":4}},
+ "place":"hành lang Thần Vũ môn|sân chờ phía đông|dưới hiên Ngự hoa viên",
+ "incident":{"object":"chén trà","text":"{bully} làm đổ chén trà lên xiêm y của {victim}.","clue":"vệt nước loang trên áo; mảnh chén dưới chân {bully}"},
+ "bystander":{"defend":["Ân cần","Trọng nghĩa","Rộng lượng","Thanh liêm"],"join":["Kiêu ngạo","Xảo quyệt","Thù dai","Vì mình","Tham vọng"],
+              "silent":["Kín đáo","An phận","Khiêm nhường","Lạnh lùng"],"ma":["Nhiều chuyện"],"flex":["Nóng nảy","Điềm tĩnh"]},
+ "stances":{
+  "benh":{"text":"…","gain":{"friend.victim":1,"duc":1},"loss":{"grudge.bully":1,"time":1}},
+  "hua":{"text":"…","gain":{"friend.bully":1},"loss":{"grudge.victim":1,"face":1}},
+  "hoagiai":{"text":"…","gain":{"friend.victim":1,"friend.bully":1},"loss":{"time":2}},
+  "ngoai":{"text":"…","gain":{"time":1},"loss":{"friend.victim":1}}},
+ "outcomes":{"benh":"…1–2 lines","hua":"…","hoagiai":"…","ngoai":"…","maMa":"{ma ma closing line, 1–2 lines, no number}"},
+ "needs":{"min_girls":3,"fallback":"yd-0xx"}}
+```
+Composition rules: placeholders `{bully}` `{victim}` `{instigator}` `{bystander1..4}` are filled with the real tú nữ chosen by `roles` (nết + birth + thiện cảm); each gets a face (name only when the name-reveal rule allows). Two-way (Law 1): the generator may put *her* in `victim` or `bully` role, and the stance set is rewritten ("she is the victim: tu nhận / cầu / phản / im"). If no tú nữ fits, use `needs.fallback` (a lighter seed such as 7, 9, 11 of §7). Saved outcome: friend/grudge marks go onto those real NPCs (Law 6b), known + thiện cảm updates as BAL says.
+**Writer quality bar** (fail = reviewer FAIL): 4 distinct stances per option set; every option has gain AND loss; no option wins with all royals (Law 2); wording cổ trang, no word games / riddles / quotation trivia (OD 16/11); `tag` honest ([K] only if the practice is documented; the staged incident is always [D]); `lo` stepped (Law 5); every entry unique in `id` and in text; at least one `reacts` per royal group (E, T, H) for đối đáp/hành xử.
