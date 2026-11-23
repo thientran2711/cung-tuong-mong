@@ -84,7 +84,10 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
   ok(se.own,'B1 host: the guest is a servant entry in an NPC house',se);
   const b0=await B.p.evaluate(()=>({bac:S.bac,tin:S.tin}));
   const r1=await A.p.evaluate(()=>{const s=allServ().find(x=>x.coop);return String(bribeServ(S,s))});ok(/đợi nàng trả lời/.test(r1),'B1 host: Mua chuộc on her = an offer, no dice on my screen',r1);
-  ok(await until(B,()=>{const M=document.getElementById('modal');return M&&!M.hidden&&/Bạc lạ/.test(M.textContent)},null,15000),'B1 guest: the Bạc lạ card from the player',await MT(B));
+  /* reviewer r1: a world BÁO card of the game itself (e.g. «Nội vụ phủ điều người», staff trimmed to rank) can be open when the offer arrives and the offer queues
+     behind it (FIN p2 red, 1 in ~10): like a player, close that card first, then read the offer */
+  let bl=false;for(let i=0;i<8&&!bl;i++){bl=await until(B,()=>{const M=document.getElementById('modal');return M&&!M.hidden&&/Bạc lạ/.test(M.textContent)},null,i?4000:15000);if(!bl)await tapM(B,/^Đành vậy|^Đã rõ|^Thôi/,2000)}
+  ok(bl,'B1 guest: the Bạc lạ card from the player',await MT(B));
   await B.p.screenshot({path:OUT+'/b1-guest-bribe-1180x820.png'});
   ok(await tapM(B,/^Nhận bạc/),'B1 guest: Nhận bạc, làm tai mắt');
   ok(await until(A,()=>{const s=allServ().find(x=>x.coop);return s&&s.spyFor==='me'},null,15000),'B1 host: she is now my tai mắt');
