@@ -168,7 +168,7 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
 /* PERSON SET (ACTWIRE, owner OD 23/11 ~03:25Z: the 21 Thái hậu act seals go in as they are): emoArtSet(p,k) with a key k = that person's OWN painted set
    (KIT_EMOSEAL.roleSet[role], e.g. thaihau → "th-") when img/kit/emo-<own><k>.webp is on the CDN index (strict: index loaded), else the base set below. */
 function emoArtSet(p,k){const b=emoArtBase(p);if(!k)return b;try{const R=window.KIT_EMOSEAL&&KIT_EMOSEAL.roleSet;if(!R)return b;if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return b;
- const o=R[personRoleRank(p.kind&&!p.name?p:q).role];if(o&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(`img/kit/emo-${o}${k}.webp`))return o}catch(e){}return b}
+ const o=R[personRoleRank(p.kind&&!p.name?p:q).role];if(o&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(`img/kit/emo-${o}${k}.webp`.replace(/^.*?(?=img\/)/,"")))return o}/* the build turns the literal into a full CDN url; the index keys are img/… */catch(e){}return b}
 function emoArtBase(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
  if(r.role==="emp"||r.role==="heir"||r.role==="prince"||r.role==="eunuch"||r.role==="guard")return"m-";
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
