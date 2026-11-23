@@ -2611,3 +2611,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - PRIORITY #1 CHECK ('robot10'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 0 | archive 0 (harness not landed; ROBOT-10 MAIN share tt, dtq, td, ch starts when D lands it).
 - (20:37Z) Wake = trig_01VdTT7ZCy9HEuzCdrSk8Ygd (minute 32); old trig_019umD4RjJa25me1PGQDX8kN disabled. LC7, W1, W2, KK12, MAIN 110 told.
 - (20:39Z 23/11) OWNER refined the layout law (break at the right place: short pairs never split + text breaks per idea, no wall of text) → OD row edited in place; W2 + MAIN 111 told.
+- (20:39Z) MAIN 110 stopped. Owner refined OD 20:30Z row (2) = LINE BREAKS AT THE RIGHT PLACE (short pairs never split; text breaks per idea, no wall of text) — 1c6831ff. W2 writes KIT.md + run-on-text scan; when W2 reports the scan, MAIN orders the text fix as a whole group.
