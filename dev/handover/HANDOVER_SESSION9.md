@@ -2580,3 +2580,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:09Z 23/11) MOCK-STAGE v1 (via MAIN 109 relay) checked: no videos + M1/M2 not merged → back to KIT KEEPER #10 to fix; not sent to owner yet.
 - (19:10Z 23/11) KIT KEEPER #10 rolled (context) → archived; opened KIT KEEPER #11 session_01Rc5AsMtL55o1wM5pU2K9t2 (opus) from reports/MOCK-STAGE.md HANDOVER: merged event layout + videos.
 - (19:20Z 23/11) OWNER RULE ROBOT-10 (OD row) → ORDER D: harness phase 1 (reuse runb). Phase 2 split by thân phận after open items land: B tt,dtq+co-op · C muoi,cn · D nc,td,ch · E thd,cnv.
+- (19:32Z 23/11) OWNER correction: 40 thân phận = 10 origins × 4 branches (MAIN was wrong saying 9). OD plan row + D order rewritten in place: harness must force origin+branch; phase 2 = 10 bots × 40 × 2 kiếp = 800 lives/round; E gets thd, cnv, dan.
