@@ -237,9 +237,9 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     const n0=sn.length;CW.P2H.iltake({u:ec.iu,how:"sám hối xin lại"});R30.addC=sn.slice(n0).flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===ec.iu).length;
     R30.boxC=I.box.filter(x=>x.e&&x.e.iu===ec.iu).length;R30.inF=f.inv.filter(e=>e.iu===ec.iu).length;
     const n1=sn.length;CW.P2H.iltake({u:424242,k:P,how:"chuộc về",pay:{bac:7}});R30.ref=sn.slice(n1).filter(m=>m.mode==="ilrefund"&&m.bac===7).length;
-    CW.seat="b";Q.length=0;const n2=sn.length;CW.P2H.ilask({kind:"back",u:em.iu,e:{k:P,iu:em.iu},pr:7});const d=Q.find(q=>q&&q.t==="Đồ cũ trở về");R30.dlg=!!d;
+    CW.seat="b";Q.length=0;const bac30=S.bac;S.bac=9999;const n2=sn.length;CW.P2H.ilask({kind:"back",u:em.iu,e:{k:P,iu:em.iu},pr:7});const d=Q.find(q=>q&&q.t==="Đồ cũ trở về");R30.dlg=!!d;
     if(d&&d.opts&&d.opts[0])d.opts[0].go();R30.want=sn.slice(n2).filter(m=>m.mode==="iltake"&&m.u===em.iu&&m.pay&&m.pay.bac===7).length;
-    Q.length=0;CW.P2H.ilask({kind:"conf",u:ec.iu,e:{k:P,iu:ec.iu},pr:0});R30.dlgC=!!Q.find(q=>q&&q.t==="Đồ bị tịch thu");Q.length=0}catch(z){er30=z.message+" "+String(z.stack).split("\n")[1]}
+    Q.length=0;CW.P2H.ilask({kind:"conf",u:ec.iu,e:{k:P,iu:ec.iu},pr:0});R30.dlgC=!!Q.find(q=>q&&q.t==="Đồ bị tịch thu");Q.length=0;S.bac=bac30}catch(z){er30=z.message+" "+String(z.stack).split("\n")[1]}
    finally{CW.on=on30;CW.seat=se30;COOP.send=sd30;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(x=>!(x.e&&x.e.iu>9e6));Q.length=0}
    ck("30 her piece in the host's box: the due week asks her seat (tịch thu + ransom), her answer → ONE «add» to her entry, out of the box; a gone piece refunds; her seat shows the same dialogs",
     !er30&&R30.askConf===1&&R30.askBack===1&&R30.addC===1&&R30.boxC===0&&R30.inF===1&&R30.ref===1&&R30.dlg&&R30.want===1&&R30.dlgC,{er30,R30})}
