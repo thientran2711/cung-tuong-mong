@@ -515,8 +515,12 @@ reg11("sgServ",["v","v"],{snap:"soft",noRes:true,dec:a=>{const x=decA9(["v","v"]
    (feelMig). On her phone at level 11 they do not write her person. (Display strings / net-zero probes stay local: report family 6.) */
 /* (a render is a part-C world frame on her phone: gOn is false there; her own week end / buổi step still on her phone = G / E, left as is) */
 let WKD=0;for(const n of ["endTurn","nextBuoi","monthTick"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){WKD++;try{return f.apply(this,arguments)}finally{WKD--}}}
-const rOn=()=>on(L11)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inFC&&!CW.inLife&&!CW.allow&&!CW.allowN&&!WKD;
-for(const [n,me] of [["mkSync",1],["emoSee",0],["feelMig",0]].concat(RDIFF.filter(x=>x!=="exTick").map(x=>[x,0])))if(typeof window[n]==="function"){const f=window[n];window[n]=function(p){if(rOn()&&(!me||isMe(p))){F.stat.ro=(F.stat.ro|0)+1;if(n==="kpCheck")return !!(S&&S.kpTron);return}return f.apply(this,arguments)}}
+/* coop-thin-g F2 #11 (Danh drift, one world): a SYNC from the host (CW.inFC: fromCanon at the week, the part-C world apply, the hl sync, nmOrd relay)
+   is no licence to run these engines on her phone: its render ran tyHome → tyCharge (Danh −1, trung y) locally while the host charged the same
+   buổi in her context and patched −1 → her phone paid twice (host store 37 | phone 36 until the week rebuilt her phone). Only her own local
+   runs (inLife throwaway world, allow / allowN, her own week end WKD) keep them; jcoopone mkSync already stops under inFC the same way. */
+const rOn=()=>on(L11)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.allow&&!CW.allowN&&!WKD;
+for(const [n,me] of [["mkSync",1],["emoSee",0],["feelMig",0]].concat(RDIFF.filter(x=>x!=="exTick").map(x=>[x,0])))if(typeof window[n]==="function"){const f=window[n];window[n]=function(p){if(rOn()&&(!me||isMe(p))){F.stat.ro=(F.stat.ro|0)+1;if(CW.inFC)F.stat.roFC=(F.stat.roFC|0)+1;if(n==="kpCheck")return !!(S&&S.kpTron);return}return f.apply(this,arguments)}}
 /* F6b (jcoopthinf6b, level 12) builds on the F5 helpers: its own registrations go through reg10 with lv 12 + its ctx */
 F.x5={reg10,CX10,payAA,inR,MSC,bad,lg,gOn,host,live,isMe,encA9,decA9,mgOk,get MGC(){return MGC},set MGC(v){MGC=v},get SKH(){return SKH}};
 }catch(e){console.error("jcoopthinf",e)}})();
