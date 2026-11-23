@@ -47,13 +47,23 @@ function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&
  let i=RES_SLUG.indexOf(String(k).replace(/-cung$/,""));if(i>=0)return i;i=(typeof PALN!=="undefined"?PALN:[]).indexOf(k);return i>=0?i:null}
 /* the west palaces jpal adds (PAL_WEST, the PALN indices past RES_SLUG) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
 function resTamPal(pal){const i=resPalIdx(pal);return i!=null&&i>=RES_SLUG.length}
-function resBase(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
+/* RANK ROOMS (owner L2406, C8-RANKROOM): frontal rooms per chủ vị rank × {chính điện, phòng ngủ} + phối phòng ngủ. Table = dev/art/place-rank/rank_rooms.json (script rank_rooms_wire.py rewrites the block below with the WIRED bases).
+   Rank is read from the game's own state (rkOf(head)) and named by RANKS[r].n - no rank number is typed here (law 4). One painting per room (hạ-sáng file), any mùa/buổi. A missing rank room falls back to the old picture. */
+/*@RANK_ROOM*/const RANK_ROOM={};/*@END_RANK_ROOM*/
+const RES_RANKSUF={"Tần":"tan","Phi":"phi","Quý phi":"quyphi"};
+function resRankSuf(head){try{if(!head)return"";const r=rkOf(head);return RES_RANKSUF[RANKS[r]&&RANKS[r].n]||""}catch(e){return""}}
+function resBase0(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
  return RES_SLUG[i%RES_SLUG.length]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
-function resPick(base,se,ti){if(!base)return null;se=se||resSeason();ti=ti||resTime();
+/* resBase(pal,part,head,ngu): the rank/bedroom room when its picture is wired, else the old base. head = the chủ vị of the room; ngu = true at night in her own room */
+function resBase(pal,part,head,ngu){const b=resBase0(pal,part);if(!b||part==="cungnhan")return b;
+ const rk=part==="chinh"||part==null?(resRankSuf(head)?b+"-"+resRankSuf(head):""):"";
+ if(ngu){const n=(rk||b)+"-ngu";if(RANK_ROOM[n])return n}
+ if(rk&&RANK_ROOM[rk])return rk;return b}
+function resPick(base,se,ti){if(!base)return null;if(RANK_ROOM[base])return base+"-ha-sang";se=se||resSeason();ti=ti||resTime();
  const near=(typeof SCN_NEAR!=="undefined"?SCN_NEAR:{})[ti]||[ti];
  for(const s of [se,"xuan"])for(const x of near.concat(ti==="toi"?[]:[])){if(RES_HAVE[`${base}-${s}-${x}`])return`${base}-${s}-${x}`}
  return RES_HAVE[`${base}-xuan-sang`]||!Object.keys(RES_HAVE).length?`${base}-xuan-sang`:null}
-function residenceArt(palaceKey,part,season,time){const n=resPick(resBase(palaceKey,part||"chinh"),season,time);return n?`img/${n}.webp`:null}
+function residenceArt(palaceKey,part,season,time,head,ngu){const n=resPick(resBase(palaceKey,part||"chinh",head,ngu),season,time);return n?`img/${n}.webp`:null}
 /* who lives where, now */
 function resAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 function resHeadOf(p){try{const h=byKey(houseOf(p));return h||null}catch(e){return null}}
@@ -83,14 +93,16 @@ function roomResidents(pal,part){const T={pal:resPalIdx(pal),part};return[S].con
 function roomPeople(pal,part){const W=(S&&S.where)||{};return roomResidents(pal,part).filter(p=>p===S?S.place==="home":W[p.id]===palaceOf(p))}
 /* the scene file for a residence (null → keep the old generic one) */
 function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r.part==="lc")return null;
- return resPick(r.part==="cungnhan"?"cung-nhan":resBase(r.pal,r.part))}
+ return resPick(r.part==="cungnhan"?"cung-nhan":resBase(r.pal,r.part,r.head,resTime()==="toi"))}
 /* floor line + open-floor anchor of each room (read from the paintings; same in every season/buổi) */
 (function(){const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};
  const fx={"canh-phuc-cung":.5,"canh-phuc-cung-dong-phoi":.56,"canh-phuc-cung-tay-phoi":.45,"khai-tuong-cung":.46,"khai-tuong-cung-dong-phoi":.5,"khai-tuong-cung-tay-phoi":.36,
   "chung-tu-cung":.55,"chung-tu-cung-dong-phoi":.62,"chung-tu-cung-tay-phoi":.45,"ham-an-cung":.48,"ham-an-cung-dong-phoi":.5,"ham-an-cung-tay-phoi":.5,
   "thua-minh-cung":.5,"thua-minh-cung-dong-phoi":.5,"thua-minh-cung-tay-phoi":.46,"dien-huy-cung":.5,"dien-huy-cung-dong-phoi":.56,"dien-huy-cung-tay-phoi":.42,
   "vinh-hoa-cung":.5,"vinh-hoa-cung-dong-phoi":.36,"vinh-hoa-cung-tay-phoi":.42,"truong-xuan-cung":.5,"truong-xuan-cung-dong-phoi":.5,"truong-xuan-cung-tay-phoi":.5,"cung-nhan":.42};
- for(const k in fx){if(F[k]==null)F[k]=.6;if(!A[k])A[k]={x:fx[k],feet:.9}}})();
+ for(const k in fx){if(F[k]==null)F[k]=.6;if(!A[k])A[k]={x:fx[k],feet:.9}}
+ /* rank rooms: same floor line / open-floor anchor as the palace's chính điện (every picture: the aisle is open, centre of the room) */
+ for(const k in RANK_ROOM)for(const n of [k,k+"-ha-sang"]){if(F[n]==null)F[n]=.6;if(!A[n])A[n]={x:.5,feet:.9}}})();
 /* stage: the room where the place's people really live, recomputed at every render */
 (function(){if(typeof renderStage!=="function"||typeof SCIMG!=="object")return;const HOME0="tam-cung-dem",RV0="phi-tan-cung";
  window.resStageRoom=function(){try{if(!S)return null;if(S.place==="home")return residenceOf(S);
