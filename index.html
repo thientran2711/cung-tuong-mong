@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)","b":"67dde3487179","h":[{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"}]};
+window.CTM_BI={"s":"ce2f2289+","t":"2026-11-23T10:37Z","c":"KIT-MGBG: one board backdrop slot in kitGameFrame for thu_tam/thu_choi/tuoi/co7; KIT.md + kit sample","b":"2e78832eebde","h":[{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29626,7 +29626,11 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}
 /* KIT BOARD BACKDROP SLOT (KIT-MGBG): a DOM mini-game board whose kind is in KG82_BOARDBG (j82) gets the painted mg-<kind>-bg picture cover-fitted behind the play area under a soft cream veil (same look as the canvas boards' kg82Bg), set by kitGameFrame({kind}) alone */
-.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}
+/* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
+.kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
+.kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
@@ -94761,7 +94765,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="67dde3487179";window.CTM_BUILD=BUILD;
+const BUILD="2e78832eebde";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

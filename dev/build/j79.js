@@ -711,7 +711,11 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}
 /* KIT BOARD BACKDROP SLOT (KIT-MGBG): a DOM mini-game board whose kind is in KG82_BOARDBG (j82) gets the painted mg-<kind>-bg picture cover-fitted behind the play area under a soft cream veil (same look as the canvas boards' kg82Bg), set by kitGameFrame({kind}) alone */
-.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}
+/* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
+.kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
+.kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
