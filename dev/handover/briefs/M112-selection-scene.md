@@ -56,3 +56,6 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Each test → contributes to the combined raw → entScore (−1/0/+1 rank, Addendum 3) + thiện cảm with that royal (Addendum 2).
 - MAIN pick (unless she objects): which type each royal gives is drawn per life from that royal's nết (seeded); a POOL per type (HIST-TUYENTU §8) so tests rarely repeat across lives; options of (b)/(c) equal value with gain + loss (laws 2/3), numbers in BAL (law 4). Harder by origin ceiling (law 5).
 - Cung nữ origin (Nội vụ phủ/ma ma) uses the same 3 types.
+
+## ADDENDUM 9 (MAIN 112, 22:27Z) — ENTRY-RANK CAP (MAIN 111 recommendation to owner, OD ~22:40Z; number = MAIN's)
+- Keep ±1 (Addendum 3) with two guards: (1) tests harder by origin rank (law 5, already in brief); (2) a BAL entry-rank CAP: BAL.entry.cap = the highest rank ANY origin can reach on entry TODAY (the current top origin's ceiling under the old rule) — so +1 never lifts a new life above what the game already allowed; clamp after the ±1 step. Report the chosen rank name + before/after table per origin in your report.
