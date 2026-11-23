@@ -2725,3 +2725,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:40Z) 114 first actions done: STATUS lines B–F + 14 seats told; wake trig_01S84CUDctuYXpDp6YD5mCqf (min 32) created, 113's trig_011S5WL6D3HQFgDD2TCkpRAZ disabled. N17 review/coop-famops-t2-r dbbbf3c6 relayed to LC8 (self-merge with LIVE). New seat: offline-all SMALL rv-lander session_01Rc5AsJjPE1Lvb1iuMsiN2m.
 - (23:45Z) Seats ack 114: LC8 idle (queue empty) · W5 offline-all READY 3bf27ac7 → rv-lander JjPE1Lvb (no 2nd rv) · map-label-overlap rv FAIL phone 390 only, waits W4 · KNOW-NOTICE r2 37312b96 waits BIG rv · SELSCENE holding for sếp. Archived W1 JaFJSoKr + rv L1nEGqb5 + rv N8oTu6WZ (both landed).
 - (23:50Z) odds-no-thanh-r bf75a0a3 SMALL PASS → relayed to LC8 (after N17). Archive rv JBY4hfzp + W2 MmpzDKtR after LANDED.
+- (23:52Z) offline-all-r 9b10d883 SMALL PASS → LC8, priority first. Archive rv JjPE1Lvb + W5 HiB54y5c after LANDED; then tell sếp how to use (Thiết lập → Tải hết, on Wi-Fi, before the flight).
