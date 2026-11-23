@@ -2716,3 +2716,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Foreman orders open (in STATUS files): B THIN + MGSKIN wiring + co-op LAG; C SELART (21:55Z/23:05Z) + KP10 REPAINT URGENT + 32 m09 consorts upload; D ROBOT-10 orders #6/#7/#8; E TITLES2; F MGSKIN. D grandchild = session_01964izD1aWCsuZgFrvs7Hpq (orders via FOREMAN_D_STATUS only).
 - MAIN 111 session_01Rc5AsND3CwtWZx1yyFP5Lp still relays owner rows → SELSCENE addenda.
 - Wake: trig_011S5WL6D3HQFgDD2TCkpRAZ (min 32) → 114 creates its own and disables this one. Push script pattern dev/tools/main-hpush.sh (113's: /home/user/wt/hpush113.sh, fetch with explicit refspec).
+- (23:23Z) Opened MAIN CHÍNH 114 = session_01Rc5AsJ9cyBfxnzFoPSAU2V (depth 7). 113 stops after 114 confirms (114 disables trig_011S5WL6D3HQFgDD2TCkpRAZ).
