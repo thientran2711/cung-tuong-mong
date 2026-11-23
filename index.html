@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e027b540+","t":"2026-11-23T16:46Z","c":"coop-famops-t2: index.html / sw.js rebuilt (build_site.sh) for F1; assets.json = LIVE","b":"a0c110709e31","h":[{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
+window.CTM_BI={"s":"9e8f4dd2","t":"2026-11-23T19:22Z","c":"coop-famops-t2-r (E53r review): res outbox keyed by room + seat in memory (leave → join of another room never sends an old room's unacked r…","b":"83ae4172869f","h":[{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49084,7 +49084,7 @@ function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
-CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.rqLoadT=()=>rqLoad();CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -49101,12 +49101,15 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
    twice) and acks every copy. Both seats, every res road (sendRes = acts, b4Send = NPC turns / returns / box answers / sweeps). */
 const RQK=()=>{try{return "ctm-resq:"+(COOP.state.room||COOP.code||"")+":"+(CW.seat||"")}catch(e){return "ctm-resq:"}};
 CW.rq=CW.rq||[];
-function rqSave(){try{localStorage.setItem(RQK(),JSON.stringify(CW.rq.slice(-40)))}catch(e){}}
-function rqLoad(){try{const L=JSON.parse(localStorage.getItem(RQK())||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id))CW.rq.push(x)}catch(e){}}
+function rqSave(){try{const k=RQK();localStorage.setItem(k,JSON.stringify(CW.rq.filter(x=>!x.rk||x.rk===k).slice(-40)))}catch(e){}}
+/* E53r (review): the outbox belongs to ONE room + seat. leave() → join() of another room keeps this page (no reload): the old room's unacked
+   «res» must never go to the new room (its «add» would land in another friend's world = a piece from nowhere). Each entry carries its key (rk);
+   a room message keeps in memory only this room's entries (the others wait in localStorage under their own key until that room is back). */
+function rqLoad(){try{const k=RQK();CW.rq=CW.rq.filter(x=>x&&x.rk===k);const L=JSON.parse(localStorage.getItem(k)||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id)){x.rk=k;CW.rq.push(x)}}catch(e){}}
 function rqSend(x){x.at=Date.now();x.n=(x.n||0)+1;try{return COOP.send(x.msg)}catch(e){return false}}
-function resOut(msg){const x={id:msg.id,msg,t0:Date.now()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
+function resOut(msg){const x={id:msg.id,msg,t0:Date.now(),rk:RQK()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
 function resAck(id){const i=CW.rq.findIndex(x=>x.id===id);if(i>=0){CW.rq.splice(i,1);rqSave()}}
-function rqFlush(all){if(!CW.on)return;const n=Date.now();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if(all||n-(x.at||0)>5000)rqSend(x)}
+function rqFlush(all){if(!CW.on)return;const n=Date.now(),k=RQK();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if((!x.rk||x.rk===k)&&(all||n-(x.at||0)>5000))rqSend(x)}
 COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
 setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
 const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));
@@ -94860,7 +94863,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a0c110709e31";window.CTM_BUILD=BUILD;
+const BUILD="83ae4172869f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
