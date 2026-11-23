@@ -2538,3 +2538,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 11:41Z) KIT-MGBG FIX 1 READY 44fb8468 (plate+ring scoped .kgbox-bg) → re-check sent to rv LAkzEGrf (plus pet/shelf/duel live, leak scan, quickcheck ×2 vs LIVE for perf noise). KIT KEEPER #8 archived at its roll line (~32 %). Next kit work → new keeper #9.
 - (23/11 11:51Z) LANDED outing-art2 78324353 (LC7 FF). LIVE 78324353. GAP L8 recount: ~95 % · 6 open. FROM MAIN LIVE sent B/C/D/E.
 - (23/11 12:06Z) REVIEW 2 KIT-MGBG FAIL 44fb8468: fix 1 OK (pips, no leak in 22 kinds, pet+shelf live OK, perf = noise), but real Cờ (jpma pmKyRun playArt art:'co') gets no backdrop — only Thử tay co7. Opened KIT KEEPER #9 session_01Rc5AsMQorApCUd9KAFuczY (sonnet) for FIX 2; rv LAkzEGrf on call.
+- (23/11 12:25Z) KIT-MGBG FIX 2 READY 9f9d318c (playArt gomoku→co7; plain co untouched; on LIVE 78324353) → REVIEW 3 sent to rv LAkzEGrf (real pmKyRun with stones, Thử tay, plain co, quickcheck).
