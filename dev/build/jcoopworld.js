@@ -1204,6 +1204,20 @@ function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)
 (function(){if(typeof evA!=="function")return;const f=evA;evA=function(h,t,n){const d=f.apply(this,arguments);
  try{if(CW.on&&!CW.b4in&&d>0&&isF(h)&&t&&t!==S&&!isF(t)&&t.id!=null&&t.id<900){if(dOn())evOut(t.id,d);else p2say("ev",{tg:t.id,n:d})}}catch(e){}return d}})();
 P2H.ev=m=>evIn(m.tg,m.n);
+/* E44j (b) (E52r finding b, law 1 + 6c REAL OBJECTS): HER piece taken into the HOST's box (tịch thu, sold out of her entry) had no road back:
+   the NPC owner's road (ilConf / ilBack) never picks a player seat (npwAsk guard T8). The host keeps the box record (the world's truth) and, at
+   the same due points as the player's own (jil ilWeek: confW wait, ransom visit), asks HER seat with the SAME dialog (PEND ilconf / ilback, pp.f);
+   her choice comes back, the host hands the piece to her entry (jil ilTake → npcToFriend «add» = one piece home). Silver she paid for a piece
+   that left the box meanwhile comes back to her. */
+CW.ilAsk=(kind,x)=>{try{if(!CW.on||!host()||!x||!x.e)return;ilUid(x.e);p2say("ilask",{kind,u:x.e.iu,e:J(x.e),pr:x.pr|0})}catch(e){console.error("ilAsk",e)}};
+P2H.ilask=m=>{if(host()||!S||S.dead||!m||!m.e||!m.e.k)return;const pp={u:m.u,f:1,kind:m.kind==="conf"?"conf":"back",e:m.e,pr:m.pr|0};
+ pushDil(mkP(pp.kind==="conf"?"ilconf":"ilback",pp),pp.kind==="conf"?"Đồ bị tịch thu":"Đồ cũ trở về");try{showModal();render()}catch(e){}};
+CW.ilWant=(pp,how,pay)=>{p2say("iltake",{u:pp.u,k:pp.e&&pp.e.k,how,pay:pay||null})};
+P2H.iltake=m=>{if(!host()||!m)return;const f=friendEntry();const x=typeof ilFind==="function"?ilFind(m.u):null;
+ if(f&&x&&String(x.own)===String(key(f))&&typeof ilTake==="function"){ilTake(x,f,m.how||"về");return}
+ if(m.pay&&m.pay.bac>0)p2say("ilrefund",{bac:m.pay.bac|0,k:x&&x.e?x.e.k:m.k||""})};
+P2H.ilrefund=m=>{if(host()||!S||S.dead||!(m&&m.bac>0))return;ap(S,{bac:m.bac|0});const nm=m.k&&typeof ilNm==="function"?ilNm({k:m.k}):"Món đồ ấy";log(`${nm} đã không còn ở ngoài cung; ${m.bac|0} lượng bạc chuộc được đem trả lại.`)};
+CW.P2H=P2H;/* test hook (dev/test/coop-famops-unit.js) */
 function evIn(tg,n){if(S.dead)return;const v=RV(tg);if(!v||!v.alive)return;const d=evA(S,v,+n||0);if(d>0){try{log(`Tai mắt ${esc(friendName())} lén báo tin: chứng cứ với ${esc(v.name)} +${d}.`)}catch(e){}render()}}
 /* part D: the proof goes to the player who holds it, run by the host in that player's context */
 function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if(host())T.D.kind(fs(),"ev",{tg,n});else T.doSend("ev",{tg,n})}
