@@ -2655,3 +2655,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:38Z) W4 map-label-overlap READY 2a17fc28 → SMALL reviewer-lander session_01Rc5AsMK4aJrehLVxmNekUh. ADDENDUM 11 (drama knowledge) to SELSCENE + SELW-YARD.
 - (22:50Z) HIST-TUYENTU §8 (280d6ca8) + §8.4 entry formats (75a59b42) done; expert archived. Writers + SELSCENE use §8.4. ADDENDUM 12 (greeting = existing j61 rule) + 13 (rank by edict days later) written.
 - (22:55Z) Owner Q (OD ~23:00Z) enough events? → EVCAT ordered to Foreman B (report-only, whole job; non-UI per OD:L1197/spread law). MAIN shows her the table when B reports. LOAD: main running 9 (LC8, W1+rv, W2+rv, W4 rv, KK12, SELSCENE, SELW-YARD, SELW-TESTS) | B free ~10 | C free ~11 | D free ~6 | moved: EVCAT → B.
+- (23:02Z) ADDENDUM 14 (yard = 1 buổi 4 khắc) + 15 (sắc phong news screen). KNOW-NOTICE sonnet UI session_01Rc5AsJt95DF2ssFmW5DLmF (owner standing rule OD ~23:08Z: every knowledge gain → clear notice; scan + one kit notice + wire all).
