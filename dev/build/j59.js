@@ -317,11 +317,11 @@ html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;b
 .stage.j59 #mefig{filter:${HG(5,45)};pointer-events:auto;cursor:pointer}
 .stage.j59 #mefig.j59sel,.stage.j59 .tok.fig.j59sel .figimg{filter:${SG(9,.95)}}
 .stage.j59 .tok.j59sel:not(.fig) .md{box-shadow:0 0 0 2px #fff3c4,0 0 10px 2px rgba(255,243,196,.9)!important}
-.stage.j59 .tok .tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:var(--ink);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
+.stage.j59 .tok .tag .j59t,.kscn-tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:var(--ink);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
 .stage.j59 .tok.fig.j59unk .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
 .stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important}
-.stage.j59 .tok .tag .j59t.j59only{font-size:.76rem}
-.stage.j59 .tok .tag .j59n{display:block;line-height:1.2}
+.stage.j59 .tok .tag .j59t.j59only,.kscn-tag .j59t.j59only{font-size:.76rem}
+.stage.j59 .tok .tag .j59n,.kscn-tag .j59n{display:block;line-height:1.2}
 .stage.j59 .tok.j59me{position:absolute;z-index:2;min-width:0;padding:0;transform:translateX(-50%);pointer-events:none;cursor:default}
 .stage.j59 .tok.j59me .tag{width:max-content;text-align:center}
 /* review/face-sharp (owner 15/11 "mặt bị mất nét"): NO continuous animation on a people picture. The old idle sway (meidle/figidle,
