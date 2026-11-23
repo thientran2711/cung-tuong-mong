@@ -96,7 +96,7 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
    const sm=Math.min(a.r.width*a.r.height,b.r.width*b.r.height);if(ix*iy>.2*sm&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
- txt.replace(/khả năng\s*:?\s*(rất |khá |hơi )?(vừa|cao|thấp|lớn|nhỏ|trung bình|mỏng|dày)(?![\p{L}])/giu,(a)=>{out.push({k:'word',msg:'odds word off the ladder «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
+ txt.replace(/khả năng\s*:?\s*(liều|khó|năm ăn năm thua|khá chắc|rất chắc|nắm chắc|chắc)(?![\p{L}])/giu,(a)=>{out.push({k:'word',msg:'two odds scales mixed «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
  const m=txt.match(/tỉ lệ|xác suất|phần trăm/i);if(m)out.push({k:'word',msg:'machine odds word «'+m[0]+'»',ex:txt.slice(0,80)});
  /* HUD numbers = state (law 4: what she reads is the number the rules use) */
  try{const hud=document.querySelector('.hud');if(hud&&vis(hud)&&typeof S!=='undefined'&&S){const ht=strip(hud.innerText);const MAP={'Sủng':['sung'],'Danh':['danh'],'Đức':['duc'],'Bạc':['bac'],'Sức':['suc'],'Tài':['tai'],'Tâm cơ':['tamco'],'Sắc':['sac']};

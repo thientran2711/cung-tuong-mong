@@ -55,9 +55,10 @@ const LADDER=["liều","khó","năm ăn năm thua","khá chắc","chắc","rất
 function words(txt,ctx){txt=strip(txt);if(!txt)return;R.words++;
  if(/\d\s*%|%/.test(txt))bug("word","% shown to the player",ctx+": "+txt.slice(Math.max(0,txt.indexOf("%")-80),txt.indexOf("%")+20));
  const m=txt.match(/tỉ lệ|xác suất|phần trăm/i);if(m)bug("word","machine odds word «"+m[0]+"»",ctx+": "+txt.slice(0,200));
- txt.replace(ODDS,(a)=>{bug("word","odds word off the VANPHONG ladder: «"+a.trim()+"»",ctx+": "+txt.slice(0,240));return a})}
-/* "khả năng" + a size word (vừa / cao / thấp / lớn / nhỏ / trung bình …) is an odds reading in machine words; the ladder words are the only odds words */
-const ODDS=/khả năng\s*:?\s*(rất |khá |hơi )?(vừa|cao|thấp|lớn|nhỏ|trung bình|mỏng|dày)\b/gi;R.ODDS=ODDS;
+ txt.replace(ODDS,(a)=>{bug("word","two odds scales mixed: «"+a.trim()+"»",ctx+": "+txt.slice(0,240));return a})}
+/* two odds scales, never mixed (OD:L221, VANPHONG 66-67, j1 chanceW): «khả năng vừa/cao/thấp…» is the side-chance scale (correct);
+   the 7-step ladder is an act's own odds. Flag only a ladder word used as a «khả năng» reading (the two scales mixed) */
+const ODDS=/khả năng\s*:?\s*(liều|khó|năm ăn năm thua|khá chắc|rất chắc|nắm chắc|chắc)(?![\p{L}])/giu;R.ODDS=ODDS;
 R.words_=words;
 
 /* ---- one-core number audit (law 4): a number printed on an option ("Sủng +3", "Bạc -20") must be the number the option applies ---- */
