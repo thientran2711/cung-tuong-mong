@@ -99,8 +99,10 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 /* r2 (slap-mg-r2, whole family): a kind whose painting is not on the CDN yet (img/_index.json, jevban KIT_CDNHAVE) gets no picture column at all,
    instead of a broken picture for the ~2 s the CDN retry takes; it is listed once in CTM_MISSING_PICS (kind "mg") so it gets painted. */
 /* KIT §N.1 figure-column backdrop (owner OD 21/11 ~03:48Z/~03:50Z, mg-5s-clear): on the wide screen the figure stands on a NEW tall (portrait) painting per subject, never the board picture and never the flat yellow. ONE table: kind -> file in img/ (art: Foreman C, img/mgbg-<kind>.webp); a missing file = the old cream gradient (CSS fallback). */
+/* KIT-MGBG: the DOM boards that take the painted board backdrop slot (kitGameFrame .kgbox-bg, key mg-<kind>-bg) */
+const KG82_BOARDBG=new Set(["thu_tam","thu_choi","tuoi","co7"]);window.KG82_BOARDBG=KG82_BOARDBG;
 const KG82_MGBG=new Proxy({},{get:(o,k)=>typeof k==="string"?`img/mgbg-${k}.webp`:undefined});window.KG82_MGBG=KG82_MGBG;
-function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
+function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind)||KG82_BOARDBG.has(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
  try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal,kind:o.kind||KG82.picKind});
@@ -520,7 +522,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
 /* optional (review/steal-minigame, jsmg): o.rows = intro rows (kit rows, heading o.rowsHead) · o.go = the start button label · o.resRows(raw, skipped) =
    the result rows instead of "Màn chơi" + note. The skip button is always the KIT §13.6 quick option (o.quick). Absent → unchanged. */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),EG=o.eng&&typeof o.eng==="object"&&KG82_ENG[o.eng.e]?o.eng:null,K=EG?Object.assign({},KG82_KIND[kind],EG):KG82_KIND[kind];/* o.eng = {e, n, t, how, timed} (jpmc 7×7 Cờ): another engine + its rules text on this kind's numbers (talent, hand, tier) */KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc",rank:o.rank})}catch(e){KG82.lv=0}
- const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
+ const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(EG&&EG.e==="gomoku"&&KG82_KIND.co7?"co7":kind)/* KIT-MGBG fix 2: the pm Cờ (art "co" + eng gomoku, the same 7×7 board as Thử tay co7) frames as kind co7 so the real game gets the same backdrop; plain "co" (Ăn quân, another board) keeps its own picture */});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const QK=o.quick||{n:"Để trời định",sub:"tính 5/10"};/* KIT §13.6: the caller names its quick option (o.quick: kitQuick fields; roll:1 = the BAL.skip.od roll) */
  const done=(raw,skipped,ok)=>{KG82.phase="result";const qRow=skipped&&o.quick&&o.quick.sub==null?[QK.n,QK.roll?`${ok?"thành":"hỏng"}: ${ok?QK.win:QK.lose}`:`${QK.win}`,"t"]:null;
   const html=kg82Rows([qRow||["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;

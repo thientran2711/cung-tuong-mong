@@ -86,13 +86,13 @@ function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=
   (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
 function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.classList.remove("kg-open");box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
-function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
+function petcGameBox(title,how,kind){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame",kind:kind==="bath"?"thu_tam":kind==="play"?"thu_choi":""})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
   `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 /* KIT §13.7 (mg-ui-rest, owner OD:L1981): EVERY care game opens on the kit rules screen (kgReady: luật + picture of the move, «Hướng dẫn» guided round, «Sẵn sàng»);
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
-function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
+function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how,kind);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
  box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kpcgo">Bắt đầu</button></div>`;
  kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",ev:false,timed:false,tutor});
  try{const t=box.querySelector("#kgrtut")||box.querySelector("#kpcgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}

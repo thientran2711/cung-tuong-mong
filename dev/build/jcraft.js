@@ -27,7 +27,7 @@ function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_K
 /* a board lever (mgLev) — the craft engines never type a number of their own */
 function crLev(env,kind,name){const v=mgLev(env,kind,name);if(v==null)throw new Error("BAL.mgTier.lev."+kind+"."+name+" missing");return v}
 /* painted sprites Foreman C has delivered (img/kit/mg-<name>.webp); until then the stand-in is drawn and the name is listed as a missing picture */
-const CR_HAVE=new Set([]);
+const CR_HAVE=new Set(["ve-motif-sonchu","ve-motif-sonkhach","ve-motif-thuyen","ve-motif-tung","kim-sample","kim-wedge","kim-cut-moon","kim-cut-tri","kim-cut-drop","kim-cut-half","theu-hoop","theu-spool"]);
 function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,w,h,o))return true;
  try{if(typeof kitPhNote==="function")kitPhNote("mg",name,"light","mini-game craft sprite "+name)}catch(e){}if(stand)stand();return false}
 /* the frame loop on the craft clock (crNow), so a test can run the board faster; returns stop() */

@@ -239,3 +239,8 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Also (c): inside the same slot the picture `.kszfs` is shorter when the kit name plate `.kt3` has two lines (rank + name, 36 px) than one line (17 px): Bảng Thiên mệnh 220x650 @107 vs rare result 220x669 @88 (slot `.kszfig` is the same 69/688 in both). The test therefore compares the SLOT `.kszfig`, grouped by header + footer height.
 - Ask: the kit keeper decides ONE figure slot per frame size (e.g. the footer button sits under the right column like `.opts`, header height fixed per frame size) so owner rule (f) «same figure in every dialog of the same frame size» holds for button-only dialogs too; dialog-fixed.js (f) today only measures option dialogs.
 - Status: OPEN (ending screens add no size of their own; they follow whatever the kit decides).
+
+## 23/11 MG10A (worker session_01D3E3NXyH16AHsWYAvBwd5N for ROOT-C7) — KIT REQUEST «painted board backdrop slot for DOM mini-games thu_tam, thu_choi, tuoi, co7»
+- These four boards (Chải lông thú, Chơi với thú, Tưới cây, Cờ năm quân; engines petc*/shelfWaterGame/kgGomoku) are DOM / plain cream with no `kg82Bg` call, so the painted backdrops are on the CDN but nothing reads them: `img/kit/mg-thu_tam-bg.webp`, `mg-thu_choi-bg.webp`, `mg-tuoi-bg.webp`, `mg-co7-bg.webp` (1024x768, ≤ 257 KB).
+- Ask: kit keeper gives these boards the same backdrop part as canvas boards (cover-fit picture + soft veil behind the play area, kg82Bg look), keyed `mg-<kind>-bg`. MG10A did not style it by hand.
+- Status: OPEN.
