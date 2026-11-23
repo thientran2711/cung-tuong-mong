@@ -2704,3 +2704,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:06Z) LAND READY kit-odds-row-r 1a94dca1 (BIG PASS) → LC8. W2 follow-up review/odds-no-thanh («gần như chắc thành» + family scan). Open Q to sếp: no-roll acts show «Rất vững» chip vs no chip. Archive W2 rv N8oTu6WZ after LANDED.
 - (23:10Z) W2 READY odds-no-thanh a234c91d → SMALL rv-lander session_01Rc5AsJBY4hfzpj2n5rn34M.
 - (23:20Z) LANDED kit-odds-row c39e5009 (LC8). LIVE = c39e5009. W2 rv archived; W2 kept for odds-no-thanh FAIL fixes. MOCK-STAGE v3.1 READY → link sent to sếp (A1/A2 pick).
+- (23:21Z) KK13 KIT READY §93 kit-selscene e481193d → kit rv-lander session_01Rc5AsN76XbyLe1CDHXYtiX; SELSCENE told. KK13 next: mg-skin.

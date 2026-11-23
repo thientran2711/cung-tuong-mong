@@ -1233,3 +1233,4 @@ robot10 ORDERS #7 LAG + #8 ANIM-STRESS (sonnet; MAIN 113 22:38Z/22:41Z; briefs/D
 | THIN ENGINE (opus): P0 shared no-repeat memory → P2 j7 composer + validator + grounding gate; then P3–P8 engine | review/thin-p0, review/thin-p2; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP4Dsh2FQd5z5vKP2qy | RUNNING | 23/11 23:20Z |
 | THIN P1 (sonnet): mini-game content ≥40/type + skin pick wiring (mgskin, kg82 skin slot) | review/thin-p1; reports/thin.md | B (ORDER MAIN 113 22:36Z+22:39Z) | session_01N1tNP4CJBgjm16DHpJFUBX | RUNNING | 23/11 23:20Z |
 | THIN P2-SEEDS (sonnet writer): ≥60 j7 intrigue seeds | content/thin/j7seeds.md → review/thin-p2; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP5oJPHJDgZkGKbhzU4 | RUNNING | 23/11 23:20Z |
+| REVIEW kit-selscene SMALL kit (sonnet rv-lander) of e481193d | review/kit-selscene-r | MAIN 113 | session_01Rc5AsN76XbyLe1CDHXYtiX | RUNNING | 23/11 23:21Z |
