@@ -498,3 +498,34 @@ Scratch (this container only, not git): /home/user/wt/out (logs), dev/test/_cn_d
 
 ### HANDOVER (worker session_01N1tNP2ntVMAWS44p7tEVQd → successor, opened by Foreman B ROOT-11) — context past START_CTX + 25 %
 Head **review/night-ledger-coop-r4 @a7560a79f12b067c134afae016fb6951e65eef1c** (⊇ LIVE 40cc2b92). NOT SSK: open 1 (and 2) first. → taken over by fixer #4 (§6 above): SSK 9bade240. Scratch (this container only): /home/user/wt/nl4-out (npscan.js family scan, logs). Tips: run the co-op tests with the tool's run_in_background (plain nohup / & jobs died when this session's turn ended); `grep -q DONE` matched DONE4 — use unique end markers; page tests (ledger, night-final, night-multi, coop-night0, night-coop-park) need a URL: `python3 -m http.server 8765` in the worktree → http://127.0.0.1:8765/index.html.
+
+## REVIEW coop r4 — review/night-ledger-coop-r4 @9bade240e898ee864d2c0e1786d7f97988c2f145 (⊇ LIVE d1a36374 = origin/main now; nothing to final-merge) — **PASS**
+PRIORITY #1 CHECK: «REVIEW coop r3» FAIL 1–3 + «FIX r4» §1–§6 (this report) | OD L680, OD 15/11 ~21:25Z / ~22:55Z, LAW 2 / 3 / 4 / 6c / 11 | main LIVE d1a36374 | review/night-ledger-coop-r4 9bade240 | claims B rows fixer #3 2ntVMAWS / #4 6tXgJZ4M; this reviewer 5JeCc1aE (same as r3).
+Reviewer: opus, session_01N1tNP5JeCc1aEETUicwLpq; coordinator Foreman B ROOT-11. Context ≈ 19 % at the verdict (budget 29 %).
+
+### 1. r3 FAIL items
+| r3 item | r4 | reviewer evidence |
+|---|---|---|
+| 1 hollow carried non-pid choice | carried as data (j3 rcpReg / rcpMk, people by emoKey) and made again against the merged world; a choice with no generator LAPSES at the carry with a Sổ ghi line; held optional cards (j68 EVHOLD) remade at every deser (evHoldRe) | my r3 harness ported (/home/user/wt/nlr5-out/_rv_cn_r4.js): a RAW no-generator two-road card on the AFK seat → lapsed at the carry («Một ánh mắt RV»: việc đã qua, không còn kịp đáp.), never back in Q, never answered (g and h). The worker's apSorry asserts (rk card rebuilt, road lands on the merged world's consort, partner canon equal) green in every g/h run below. Code read: generators wrapped (AP_MK ×9, svCause, agSeek/agSeen, haSeen, knSell, gmReply) — side effects checked: apFriend's gift branch (S.inv.push, relAdd at build) and maidWarn (S.dKnown) return cards with NO opts → never stamped, never rebuilt (no double gift, LAW 6c ok); the rest build text + opts only. |
+| 2 CQ memory-only | S.cq in her save (save form + cw), CW.snapNow at the carry, back from the week event AND fromCanon (join / rejoin) | S.cq is not a world key (jcoopworld W_KEYS whitelist) → never overwritten by the partner. RL=y (partner leaves + rejoins mid-wait) g ×1, h ×2: no freeze (63 s / 58 s / ≤ 114 s), carried = back, cq 0 |
+| 3 AFK no-answer cheaper than Cáo bệnh | nafDecl: the card's own «Cáo bệnh» losses (fx < 0) + its go (Ân tình −, S.tonight null), without its Sức gain; nfsum (no decline road) unchanged | h run: naf dc "Sủng -2", decl 1. Numbers = the card's own BAL (one-core 0). Absence is not a choice (no road picked) → LAW 2/3 ok |
+
+### 2. Gates (head 9bade240; 2–3 lanes on a 4-core box)
+| gate | result |
+|---|---|
+| coop-night FORCE4=g / FORCE4=h / plain | 121/121 · 121/121 · 112/112 |
+| reviewer case-4 variants (ONLY=4) g / h / RL=y g / RL=y h ×2 | 0 FAIL · 0 FAIL · 0 FAIL · 1 FAIL then 0 FAIL (the one: my variant's 50 ms watcher never saw c4test on TOP after the merge while carried = back = 2, cq 0, rcpFail empty — harness timing in the reviewer-only RL variant, not repeated; official test untouched) |
+| coop-e2e ×3 (COOP_WDIFF) | 141/141 ×3, same world clean |
+| coop-ledger ×2 / DEVSWAP / NOREV=host / NOREV=guest | 43 · 44 / 44 / 45 / 44, all ok, no STUCK |
+| coop-night0 | 16/16 |
+| night-coop-park | ALL OK 13/13 |
+| ledger / night-final / night-multi | ALL PASS / 11 pass / 8 pass |
+| role-parity | ALL PASS |
+| one-core-guard / undef-scan | PASS fails 0 / PASS (294) |
+| quickcheck --runs 7 | PASS · old save ok · render 269/249, tab 505/494, buổi 1319/2556 ms, tasks>200 23/25 · core gates PASS |
+Page tests ran on file:// (a local http server was refused by this session's permission mode). Both-seat shots LOOKED 3× (coop-ledger, scratch only): host Fold 755x1000@2 Sổ ghi + «KẾT QUẢ» kit panel («Kính sự phòng ghi: ngày 6, ta được lật thẻ thêm một đêm.» Sủng/Sức/Danh rows), guest iPad 1180x820@2 Sổ ghi + kit panel; no overlap / cut text / private UI, cổ trang, no %. No screen changed by r4 beyond kitLine + Sổ ghi lines.
+
+### 3. Notes (not blocking)
+- Families still lapsing (danh hiệu, spyPick, tsPanel, worldShow, stipend, dress, contests …; «FIX r4» §5 open 3) lapse with a line — honest, never hollow. Giving each a generator route = parked follow-up.
+- pid card whose mkP returns null still drops silently in deserQ (pre-existing, §5 open 4).
+Scratch: /home/user/wt/nlr5-out (logs, harness; not git).

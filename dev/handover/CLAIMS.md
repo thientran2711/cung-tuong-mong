@@ -1114,3 +1114,4 @@ REVIEW coop-flakes (opus BIG co-op; briefs/D20-coop-flakes-review.md) of 23b7cce
 | REVIEW N19 body-fit-data @6e845d8e (sonnet) | reports/REVIEW-N19.md | C | session_01D3E3NakuSUvDgL4Z9pUGAZ | PASS → LAND READY, archived | 23/11 00:32Z (ROOT-C5) |
 | REVIEW N18 quickcheck-figsig @a9dc0a52 (sonnet) | reports/REVIEW-N18.md | C | session_01D3E3NYr3CttfCogGMGATJR | PASS → LAND READY, archived | 23/11 00:43Z (ROOT-C5) |
 | coop-thin-g F1 fixer #10 (opus BIG co-op; successor of #9 4qJehLbX at budget; @6c408f77 ⊇ LIVE d1a36374; gates + SSK) | review/coop-thin-g-f1; reports/coop-thin-g.md | B | session_01N1tNP5QWB8tYRvFqUSnKVx | RUNNING | 23/11 00:53Z |
+| REVIEW night-ledger-coop r4 (opus BIG reviewer-lander) of 9bade240 | review/night-ledger-coop-r4; reports/night-ledger.md «REVIEW coop r4» | B | session_01N1tNP5JeCc1aEETUicwLpq | PASS 9bade240e898ee864d2c0e1786d7f97988c2f145 (⊇ LIVE d1a36374) | 23/11 01:23Z |
