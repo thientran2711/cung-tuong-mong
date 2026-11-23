@@ -2615,3 +2615,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:40Z 23/11) OWNER LIMIT: layout approved; W2 only odds meter + law text, nothing else (OD row). W2 + MAIN 111 told.
 - (20:40Z) OWNER LIMIT (f6165b37): only odds meter one-row + KIT.md law for future work; NO whole-game text reflow; W2 scan is report-only. Supersedes my previous line about ordering a whole-group text fix. Mockup v3 continues.
 - (20:41Z) OWNER: line-break law applies to NEW work only; never reflow old layouts; W2 scan dropped (OD 20:45Z row extended).
+- (20:46Z) OWNER ORDER (OD ~20:45Z): ROBOT-10 measures death/rank/ending rates → D (harness). Text scan → report-only PDF with screenshots for her approval → W2.
