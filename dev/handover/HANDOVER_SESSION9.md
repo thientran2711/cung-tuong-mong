@@ -2696,3 +2696,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:45Z) LAND READY ky-keeper-f2-r 7091cc7f (BIG PASS, via MAIN 111) → relayed to LC8. Archive W1 JaFJSoKr + rv L1nEGqb5 after LANDED.
 - (22:46Z) KK13 confirmed: mock v3.1 stills 12/12, re-shoot running (MOCK-STAGE READY ~45 min), SELSCENE kit 1–4 on review/kit-selscene (KIT §93) KIT READY ~70 min, mg-skin next. KK12 archived. ky-keeper-f2 rv addendum: E53r van 34 = scan artefact (not blocking).
 - (22:48Z) Owner: Đa Bảo Các bg wrong (bare cabinet) → OD row + C URGENT repaint order (palace room + shelves).
+- (22:55Z) Owner flies Wed 25/11: verified offline reload of LIVE build (local serve, SW controls, title + menu render offline). Assets: core 837 files 53 MB + fig 610 files 121 MB auto-cached; lazy 30 652 files 4.2 GB only when shown (no 'download all' sensible). Told her the pre-flight checklist.
