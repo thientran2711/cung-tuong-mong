@@ -165,7 +165,11 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
 /* men wear the men's seals (owner 11/15, review/emo-men; same 10 moods, same backgrounds and marks): img/kit/emo-m-<k> = a young man
    (Hoàng thượng, hoàng tử, công tử / nam nhân, vương gia, thái giám, thị vệ); img/kit/emo-mo-<k> = a mature man with cap and beard
    (quan, thái y, and any other man of 45+ except Hoàng thượng). Women and girls keep img/kit/emo-<k>. One rule: personRoleRank's sex. */
-function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
+/* PERSON SET (ACTWIRE, owner OD 23/11 ~03:25Z: the 21 Thái hậu act seals go in as they are): emoArtSet(p,k) with a key k = that person's OWN painted set
+   (KIT_EMOSEAL.roleSet[role], e.g. thaihau → "th-") when img/kit/emo-<own><k>.webp is on the CDN index (strict: index loaded), else the base set below. */
+function emoArtSet(p,k){const b=emoArtBase(p);if(!k)return b;try{const R=window.KIT_EMOSEAL&&KIT_EMOSEAL.roleSet;if(!R)return b;if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return b;
+ const o=R[personRoleRank(p.kind&&!p.name?p:q).role];if(o&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(`img/kit/emo-${o}${k}.webp`.replace(/^.*?(?=img\/)/,"")))return o}/* the build turns the literal into a full CDN url; the index keys are img/… */catch(e){}return b}
+function emoArtBase(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
  if(r.role==="emp"||r.role==="heir"||r.role==="prince"||r.role==="eunuch"||r.role==="guard")return"m-";
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
 /* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): emoSealKey(p,m) = the key drawn. The Sims model (AG-MOODKNOW, window.sealKeyFor(pid) = strongest summed feeling among live causes) decides it for a person she SEES; an unknown mood stays "an". Never a second source: a new event shows through the causes list, not a pop. */
@@ -177,8 +181,8 @@ function emoBadge(p){let m=window.kitEmotion(p);if(!m)return"";const sk=emoSealK
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
  /* FEELINGS-18 + kit-figure-mood: the seal = faceKeyFor "vẻ mặt" (active act > strongest feeling; intent never). art = its painting on the CDN (feelArt chain), onerror walks feelFb; name/alt/data-kemo = f.name (same word as the card) */
- const set=emoArtSet(p);const art=(f&&f.art)||sk;let fb="";try{if(typeof feelFb==="function")fb=feelFb(art)||""}catch(e){}
- const oe=fb?`if(!this.dataset.fb){this.dataset.fb=1;this.src='img/kit/emo-${set}${fb}.webp'}else this.remove()`:"this.remove()";
+ const set=f&&f.set!=null?f.set:emoArtSet(p,sk),bset=emoArtSet(p);const art=(f&&f.art)||sk;let fb="";try{if(typeof feelFb==="function")fb=feelFb(art)||""}catch(e){}
+ const oe=fb?`if(!this.dataset.fb){this.dataset.fb=1;this.src='img/kit/emo-${bset}${fb}.webp'}else this.remove()`:"this.remove()";
  return `<img class="kemo kemo-${sk}" data-kemop="${E(emoKey(emoRes(p)))}" src="img/kit/emo-${set}${art}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" data-kemoc="${m.causeKnown===false?"0":"1"}" role="button" tabindex="0" onerror="${oe}">`}
 /* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
 function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

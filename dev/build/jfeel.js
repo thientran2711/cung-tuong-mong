@@ -295,7 +295,7 @@ function faceKeyFor(pid){try{if(!S)return null;const p=typeof mckRes==="function
  const e=emoGet(p);const k=e&&e.k||"binh";const lv=k==="binh"?0:feelLv(p,k);const lines=[];const act=feelActNow(p);
  if(act)lines.push(`Đang: ${act.n}`);if(k!=="binh"&&lv)lines.push(`Cảm xúc: ${feelName(k,lv)} (${FEEL_LVN[lv]})`);
  const af=act&&feelActFace(act);let r;if(act&&af)r={kind:"act",key:af,level:act.f?feelLv(p,act.f):lv,name:act.n};else r={kind:"feel",key:k,level:lv,name:k==="binh"?FEEL_N.binh:feelName(k,lv)};
- r.fb=feelFb(r.key);try{r.set=typeof emoArtSet==="function"?emoArtSet(p):"";r.art=feelArt(r.key,r.set)}catch(e){r.art=r.key}r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
+ r.fb=feelFb(r.key);try{r.set=typeof emoArtSet==="function"?emoArtSet(p,r.key):"";r.art=feelArt(r.key,r.set)}catch(e){r.art=r.key}r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
 /* the seal art key to draw for set ("" women, "m-", "mo-"): the key when its painting is on the CDN (img/_index.json, kitPhOnCdn), else down its fallback chain */
 function feelArt(key,set){for(let i=0;i<3&&key;i++){const fb=feelFb(key);if(!fb)return key;try{if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(`img/kit/emo-${set||""}${key}.webp`)){key=fb;continue}}catch(e){}return key}return key}
 window.feelArt=feelArt;window.feelFb=feelFb;
