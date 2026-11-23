@@ -23,6 +23,7 @@ NO redraw / regen / retry / fix gen of ANY picture — even a 1-gen small fix �
 
 ## 4. Look at every picture before sending
 Open every result full size yourself (face, eyes, teeth, hands, sleeves, colours, background) before it goes anywhere (A11, A22). Send finished pictures right away (A6) to your foreman / the chat as your brief says, with SendUserFile (display render), never links; every caption starts "Lượt N" (A5). Keep image reads few — each costs a lot.
+**STRUCTURE CHECK (rule G78, owner L2391): before any picture leaves you, compare OLD vs NEW element by element — walls, columns, niches/shrines, doors, windows (open or shut), hung objects (maps, scrolls). Any unasked structural change = redo/drop, never send. One "structure:" line per picture in your message.**
 
 ## 5. Report file
 Write dev/handover/reports/<YOUR-ID>.md (short): what you did, gens used + ids, gate results, prompt diffs, open questions, commit hash. Push it, then send_message your foreman with a 3–6 line summary + hash. Your handover (when you roll over) goes in this same file.

@@ -268,7 +268,7 @@ for src, (nk, start, end, rep) in W87.items():
 # ===== PLACES4 L2389 (owner on the L2388 sheet: "Tạo sao cửa sổ kín mít vậy"): windows OPEN + bright (L30 overwritten).
 # Same sources as job 2387 (the ORIGINAL approved prompts); only the window clause differs; the current L30 block is appended.
 for k in [k for k, v in OUT.items() if v.get('job') == 2389]: del OUT[k]
-WIN2 = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30.txt'), encoding='utf-8').read().strip()
+WIN2 = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30_v2_L2389.txt'), encoding='utf-8').read().strip()   # frozen: codes -40..45 used
 OPEN = ("with NO curtains (rule L30) and the windows OPEN and bright: {f} lattice frames filled with translucent summer silk gauze "
         "through which the sunny garden is clearly seen, one or two window panels swung open on their hinges showing green trees, "
         "small clear glass panes in the lattice, daylight pouring in")
@@ -291,16 +291,51 @@ for src, (nk87, start, end, rep87) in W87.items():
     p = p + WIN2; CUT89[nk] = (old, v['code'], src)
     OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2389, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
     assert len(p) < 10000, (nk, len(p))
-import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389)}, 'places-M2370-L2376')
+# ===== PLACES5 L2391 (owner, angry: "Chỗ không phải cửa sổ cũng thành cửa sổ ... phải tự kiểm tra cái kết cấu của cái nhà"): L30 overwritten
+# = STRUCTURE-TRUE. Redo of the 4 rooms whose -40..45 edit changed the building (Từ Ninh shrine wall, Đông cung map wall, A ca sở bed wall,
+# Ngự thư phòng invented open sash). Same ORIGINAL sources; only the window clause differs; the current L30 block is appended.
+for k in [k for k, v in OUT.items() if v.get('job') == 2391]: del OUT[k]
+WIN3 = " " + open(os.path.join(D, '..', 'common_blocks', 'window_L30.txt'), encoding='utf-8').read().strip()
+SHUT = ("with NO curtains at the real windows (rule L30): the same window openings keep their {f} lattice, backed by translucent silk "
+        "gauze lightly glowing with daylight, the garden softly seen through it; the window panels stay shut in their frames{x}")
+F91 = {'a-ca-so-r4': ('a-ca-so-r7', "dark zitan bubu-jin and key-fret (only a thin gold line on the edges)",
+                      "; the wall behind the bed inside its canopy stays solid wall"),
+       'ngu-thu-phong-r3': ('ngu-thu-phong-r6', "gilded bubu-jin and key-fret",
+                      "; imperial yellow like #E3B04B dragon-roundel silk stays on the cushions and lanterns"),
+       'tu-ninh-cung-r2': ('tu-ninh-cung-r5', "dark red lacquered longevity-character and key-fret with gilt edges",
+                      "; the Buddhist shrine stands against solid carved wall panel, never a window behind it, and its amber silk hanging beside it stays"),
+       'dong-cung': ('dong-cung-r4', "gilt-edged bubu-jin",
+                      "; the framed map hangs on solid wall; royal yellow like #EFBD69 silk stays on the cushions and lantern tassels")}
+CUT91 = {}
+for src, (nk, f, x) in F91.items():
+    _, start, end, _r = W87[src]; v = OUT[src]; p = v['prompt']; old = cut_to(p, start, end)
+    rep = SHUT.format(f=f, x=x)
+    if src == 'dong-cung': rep = ' ' + rep
+    p = p.replace(old, rep).replace(*STY)
+    if src == 'tu-ninh-cung-r2':
+        p = p.replace('every curtain and hanging is rich amber', 'every hanging, cushion and door curtain is rich amber')
+    p = p + WIN3; CUT91[nk] = (old, v['code'], src)
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2391, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
+    assert len(p) < 10000, (nk, len(p))
+# L2391 Đông cung second try: in the ORIGINAL (M2370-14) the map already hangs in front of the right-wall lattice window, so -50
+# (faithful edit) still shows the map floating; the owner wants the map on solid wall -> that stretch of the right wall becomes solid.
+for src, nk in [('dong-cung', 'dong-cung-r5')]:
+    v = OUT[src]; p = v['prompt']; old = cut_to(p, W87[src][1], W87[src][2])
+    rep = ' ' + SHUT.format(f="gilt-edged bubu-jin", x="; on the right side wall the framed map hangs on a solid carved red-lacquered wall panel that fills the whole stretch of wall behind and around it from the dado up to the beam, with no window behind the map; royal yellow like #EFBD69 silk stays on the cushions and lantern tassels")
+    p = p.replace(old, rep).replace(*STY) + WIN3; CUT91[nk] = (old, v['code'], src)
+    OUT[nk] = dict(v, prompt=p, code=code_for(nk), job=2391, base=f"dev/handover/prompts_L2095/{v['code']}_{src}_ha_sang.txt")
+    assert len(p) < 10000, (nk, len(p))
+import room_gate; room_gate.guard({k: v['prompt'] for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389, 2391)}, 'places-M2370-L2376')
 json.dump(OUT, open(os.path.join(D, 'prompts_places_L2370.json'), 'w'), ensure_ascii=False, indent=1)
 CAP = '\n\nCAPTION: write ONLY this code, small, bold, in the top-left corner, the only text in the picture: "{}"\n'
 for k, v in OUT.items():
-    if v['job'] not in (2376, 2381, 2384, 2387, 2389): continue
+    if v['job'] not in (2376, 2381, 2384, 2387, 2389, 2391): continue
     open(os.path.join(OUTD, f"{v['code']}_{k}_ha_sang.txt"), 'w').write(v['prompt'] + CAP.format(v['code']))
-print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389)}, 'ROOM GATE PASS')
-for nk, (old, bc, src) in list(CUT87.items()) + list(CUT89.items()):   # A38 sidecars: base = the prompt each was edited from; allow = the window clause only
+print({v['code']: (k, len(v['prompt'])) for k, v in OUT.items() if v['job'] in (2376, 2381, 2384, 2387, 2389, 2391)}, 'ROOM GATE PASS')
+for nk, (old, bc, src) in list(CUT87.items()) + list(CUT89.items()) + list(CUT91.items()):   # A38 sidecars: base = the prompt each was edited from; allow = the window clause only
     k = OUT[nk]; f = os.path.join(OUTD, f"{k['code']}_{nk}_ha_sang.txt")
     why = '  # owner L2387 "Cửa sổ là không có rèm" + rule L30 (HIST2)'
+    if nk in CUT91: why = '  # owner L2391 "Chỗ không phải cửa sổ cũng thành cửa sổ" + rule L30 structure-true'
     al = [x.strip(' ,;:') for x in re.split(r'[;:,]', old) if len(x.split()) >= 3] + ['curtains and objects arranged through the room']
-    if nk in ('tu-ninh-cung-r3', 'tu-ninh-cung-r4'): al.append('every curtain and hanging is rich amber')
+    if nk in ('tu-ninh-cung-r3', 'tu-ninh-cung-r4', 'tu-ninh-cung-r5'): al.append('every curtain and hanging is rich amber')
     open(f + '.keep', 'w').write(f"base: dev/handover/prompts_L2095/{bc}_{src}_ha_sang.txt\n" + ''.join(f"allow: {a}{why}\n" for a in al))

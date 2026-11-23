@@ -1,0 +1,3 @@
+base: dev/handover/prompts_L2095/M2370-14_dong-cung_ha_sang.txt
+allow: with royal yellow like #EFBD69 silk curtains tied back  # owner L2391 "Chỗ không phải cửa sổ cũng thành cửa sổ" + rule L30 structure-true
+allow: curtains and objects arranged through the room  # owner L2391 "Chỗ không phải cửa sổ cũng thành cửa sổ" + rule L30 structure-true
