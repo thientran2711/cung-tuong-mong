@@ -38,15 +38,15 @@ const KIT_OPT_RULES=[
  [/^hỏi .*(thái giám|người coi)/i,"do-la-h"],[/^thề thốt/i,"minh-oan-h"],[/^làm như không nghe/i,"lam-nhu-khong-thay-h"],
  [/^tự tay vào bếp/i,"opt-vao-bep"],[/^thuê đầu bếp/i,"opt-thue-dau-bep"],[/^nhường .* phần đẹp/i,"opt-nhuong-phan-dep"],[/^cho nghỉ/i,"opt-nghi-viec"],
  [/^bắt làm tiếp/i,"opt-bat-lam-tiep"],[/^nói thật món ăn/i,"opt-noi-that-mon"],[/^[^()]{4,40} \((liều|khó|năm ăn năm thua|khá|chắc|rất chắc|nắm chắc)\)$/i,"opt-mon-an"],
- [/^nằm yên/i,"o-yen-nghi-h"],[/^ở nhà đọc sách/i,"doc-sach-giai-khuay"],[/^gắng chịu, che mặt/i,"deo-mang-che-h"],
+ [/^nằm yên/i,"o-yen-nghi"],[/^ở nhà đọc sách/i,"doc-sach-giai-khuay"],[/^gắng chịu, che mặt/i,"deo-mang-che-h"],
  /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
  /* — leave it / not now — */
  [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
  /* r1: "Đi / Vẫn đi" = going, "Ở lại" = staying put — not the turning-away picture */
- [/^(vẫn đi|đi$|đi \()/i,"den-ngay-h"],[/^ở lại/i,"o-yen-nghi-h"],
- [/(che phần lớn)/i,"giau-trong-ruong-h"],
- [/^(im lặng|làm thinh|lặng thinh|nín lặng|cười trừ|giả vờ không hiểu|nghe và giữ kín)/i,"im-lang-h"],
- [/^(không dự|không đến|không dâng lễ|không phát|không bày tiệc|cáo mệt|khéo cáo mệt|bỏ thi|đóng cửa giữ mình|ở yên|ở cung|sống thật thanh tĩnh|để mặc, giữ mình|bình thản chờ|đứng ngoài|mặc kệ|làm ngơ|bỏ mặc|bỏ ngoài tai|mặc họ|không dính vào)/i,"o-yen-nghi-h"],
+ [/^(vẫn đi|đi$|đi \()/i,"den-ngay-h"],[/^ở lại/i,"o-yen-nghi"],
+ [/(che phần lớn)/i,"giau-trong-ruong"],
+ [/^(im lặng|làm thinh|lặng thinh|nín lặng|cười trừ|giả vờ không hiểu|nghe và giữ kín)/i,"im-lang"],
+ [/^(không dự|không đến|không dâng lễ|không phát|không bày tiệc|cáo mệt|khéo cáo mệt|bỏ thi|đóng cửa giữ mình|ở yên|ở cung|sống thật thanh tĩnh|để mặc, giữ mình|bình thản chờ|đứng ngoài|mặc kệ|làm ngơ|bỏ mặc|bỏ ngoài tai|mặc họ|không dính vào)/i,"o-yen-nghi"],
  [/(ngồi xem|chỉ xem|đứng xem|đứng nhìn|cổ vũ)/i,"dung-xem-h"],
  [/^(không cho|không giao|không bán|khéo từ chối|từ chối|cự tuyệt|không nhận|không chịu|khiêm nhường)/i,"tu-choi-h"],
  [/(trả lại|gửi trả)/i,"tra-lai-qua"],
@@ -72,7 +72,7 @@ const KIT_OPT_RULES=[
  [/(lì xì)/i,"li-xi-h"],
  [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
  [/(dâng lễ|lễ vật|lễ mọn|mang lễ|gửi lễ|biếu|dâng ngọc|đáp lễ|tặng)/i,"bieu-qua-h"],
- [/(gửi bạc|góp bạc|quyên|cho vay|xóa nợ|cứu lụt|lều cháo|dâng thóc|kèm bạc)/i,"gui-bac-chua-benh-h"],
+ [/(gửi bạc|góp bạc|quyên|cho vay|xóa nợ|cứu lụt|lều cháo|dâng thóc|kèm bạc)/i,"gui-bac-chua-benh"],
  [/(cược|ván nhỏ|ván lớn|chơi ván)/i,"cuoc-thien-xa-h"],
  /* — answer back / warn / cold — */
  [/(lạnh nhạt|lạnh lùng|ngoảnh mặt)/i,"lanh-lung-h"],
@@ -88,7 +88,7 @@ const KIT_OPT_RULES=[
  [/(xin cung chính ti tra|tra xét)/i,"xin-ht-tra-xet-h"],
  /* — hide / burn / secret love — */
  [/(đốt|xóa mọi dấu|xóa dấu|tiêu hủy)/i,"dot-tho-h"],
- [/(giấu|giữ kín|giữ lại|giữ thư|giữ tín vật|ép cành hoa|cất)/i,"giau-trong-ruong-h"],
+ [/(giấu|giữ kín|giữ lại|giữ thư|giữ tín vật|ép cành hoa|cất)/i,"giau-trong-ruong"],
  [/(buông tay|quên ta|quên mình|đừng tìm ta|đừng chờ ta|cắt hẳn|ngừng mọi liên lạc|tránh hẳn|giữ khoảng cách|ta còn gia tộc)/i,"opt-buong-tay"],
  [/(lời hẹn|nắm tay|như năm ấy|giả sơn)/i,"hen-gap"],
  /* — harm / timing — */
@@ -106,7 +106,7 @@ const KIT_OPT_RULES=[
  [/(chúc mừng|bái kiến|thỉnh an|chào)/i,"bai-kien-h"],
  [/(xin hoàng thượng|xin ngài|xin thái hậu|xin hoàng hậu|ân điển|ban hôn|ban mạng|xin nội vụ|^xin )/i,"xin-an-dien-h"],
  /* — prayer / medicine / children — */
- [/(chép|kinh)/i,"chep-kinh-h"],
+ [/(chép|kinh)/i,"chep-kinh"],
  [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
  [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
  [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
@@ -404,6 +404,6 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Vi�
 /* bag-inline (owner mark #23, 21/11 ~02:50Z "Tư trang › Việc: act cards have no picture"): the six Việc acts had no ACTS.json entry, so they showed the placeholder.
    Code-side alias (no CDN manifest push; ACTS.json wins when it gains the same title): each reuses the picture of its meaning group
    (owner 15/11: one picture per meaning group). Chợ đen has no picture of its own yet (ART REQUEST in FOREMAN_C_STATUS) and uses "buôn bán lén". */
-const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong-h","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
+const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
 try{const kak0=kitActKey;kitActKey=function(name){try{const a=KIT_ACT_ALIAS[kpPlain(name)];if(a&&!((KIT_ACTS.acts||{})[kpPlain(name)]))return a}catch(e){}return kak0.apply(this,arguments)}}catch(e){}
 try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,arguments);try{const n=kpPlain(name),a=KIT_ACT_ALIAS[n];if(a&&r&&!((KIT_ACTS.acts||{})[n]))r.src=`img/act-${a}.webp`}catch(e){}return r};window.kitActArt=kitActArt}catch(e){}
