@@ -2474,3 +2474,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 107 hourly wake trig_01CSSZ2MWEyuaVZNBKNeY1xw (min 32, fires into 107). 108 FIRST creates its own (min 32), THEN disables trig_01CSSZ2MWEyuaVZNBKNeY1xw. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
 - Footer «~76% xong · còn 25 việc không tính hình nhân vật» (GAP_LIST_v5 RECOUNT line, overwritten in place by 107; update it on each land). No owner question pending. Owner last wrote 01:10Z (asked recount).
 - Push tool: copy dev/tools/main-hpush.sh with own session id (107 used /home/user/wt/hpush107.sh, worktree /home/user/wt/ho).
+- (23/11 02:40Z) 107 opened MAIN CHÍNH 108 = session_01Rc5AsL9VpiVSGvAECNciWk (child, depth 1). 107 now relay-only: forwards late messages to 108 until 108 disables trig_01CSSZ2MWEyuaVZNBKNeY1xw.
