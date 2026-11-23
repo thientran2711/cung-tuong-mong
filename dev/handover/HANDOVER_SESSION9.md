@@ -2558,3 +2558,15 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 17:11Z) Owner set Pages Source = GitHub Actions. pages.yml run #1 (push) SUCCESS, #2 (dispatch) running. github.io unreachable from our proxy → asked owner to confirm CLAUDE.md 404 + game opens. perf.yml minutes choice still pending (owner asked price: ~12k extra min × $0.006 ≈ $70/month).
 - (23/11 17:11Z) Owner: repo back to PUBLIC until game complete (she clicks). PAGES-LOCK stays. TODO at game-complete: remind owner to re-lock private + perf main-only.
 - (23/11 17:12Z) Repo back to PUBLIC (verified).
+
+## MAIN CHÍNH 109 → MAIN CHÍNH 110 HANDOVER (23/11 17:33Z)
+- Roll reason: ctx 29.4 % (get_session 294k/1M) ≈ roll line 31 %. Depth 2/8.
+- LIVE = origin/main f7016b8d (PAGES-LOCK). Today landed via LC7: outing-art2 78324353, KIT-MGBG 9f9d318c, N12 coop-famops-t1 2ba6c64e, pages-lock f7016b8d.
+- LAND CHAIN 7 = session_01Rc5AsLJoRXS3EU8sX8nrzQ, queue empty (relay «branch | full sha | topic | VN line»; SMALL self-merge onto newest LIVE allowed, take LIVE index/sw/assets + rebuild).
+- GAP L8: «~96% xong · còn 5 việc không tính hình nhân vật». Open: OD04 (B coop-thin-g: r2 FAIL → fixer #11 6b2iZfok on -f2: trip1 stall + Danh drift; E says NOT OURS), M14 (B), N17 (E E44k handover -t2 e027b540 → successor finishing), KP23 (act picks wait owner compare page), IT02 (WAIT owner).
+- MAIN-held seat: KIT KEEPER #10 session_01Rc5AsM54hdwtHZ3MKWwEdH (opus) = MOCKUPS ONLY: Q (does max event frame cover top bar / 8-tab bar), M1 = MERGED event layout (messenger+info left, her figure+choices right, cut out on full blurred stage, day/night), M3 toilette room hub (mirror «Thay xiêm y», table «Điểm trang», gold outline, wardrobe L-figure R-grid, «Đã xong» + final look) + VIDEOS (Playwright mp4 Fold+iPad) on a CDN compare page. On "MOCK-STAGE READY <url>" → send the link to sếp (Vietnamese, short), she picks letters → then build orders (kit-first).
+- Owner rulings today (OD tail): anti-AI (repo private → then BACK TO PUBLIC "cho tới khi game hoàn chỉnh rồi mới khoá"; PAGES-LOCK stays, Pages Source = GitHub Actions set by owner, pages.yml deploys player files only). At game-complete: remind her to re-lock private + make perf.yml main-only (perf on every review push ≈ 15k min/month ≈ $70 on private). Owner idea toilette/event layout + "làm video" + "gộp M1 M2".
+- Pending asks to owner: she may confirm the 2 links (game opens; /CLAUDE.md 404) — github.io is blocked from our proxy.
+- C: busy with owner-direct work (flower lists, costume tests); thu_choi own board picture ORDER (12:32Z) still unacked — re-nudge if idle. D: new FOREMAN D child session_01964izGQbgvTAnQ9pJktncj; coop-driver-fails SSK c1634814 in rv DN3onEWH. E: ROOT-1 session_01DgYSWqA3L2ohCrYD1ymPWi.
+- B's co-op follow-up job (after coop-thin-g lands) includes tao-mo CDN delete + latent key drop.
+- Wake: trig_013WV4SZJWfQdwMYDPLzYmfV (minute 32) → child creates its own and disables this one.
