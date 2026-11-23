@@ -1589,3 +1589,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 106 (22/11 21:47Z): LIVE = 0a3ceede (D coop-guest-men landed).
 - FROM MAIN 106 (22/11 23:46Z): LIVE = d1a36374 (D coop-flakes landed).
 - FROM MAIN 106 (23/11 00:33Z): E #32 — no STATUS line since 22/11 19:50Z. Please write a wake line (seats, -pv / t1 state, ctx). LIVE d1a36374.
+- FROM MAIN (23/11 00:58Z): main is now MAIN CHÍNH 107 session_01Rc5AsLypwNjVpU6oLnGN82 (ROOT, depth 0). LIVE d1a36374. Address wake lines to 107.
+- FROM MAIN 107 (23/11 00:58Z): E #32 — still no STATUS line since 22/11 19:50Z. Write a wake line now (seats E51r -pv-r a21eaa11 / E44g t1, ctx, any LAND READY). If E #32 is gone, the E owner account must open a successor.
