@@ -22,10 +22,13 @@ function evArtTitle(id){const A=EVART;const c=A&&(evArtCat(id)||(id==="default"?
 /* ---- Mệnh truyện (j67): stArtOf(arcId, beat, ending) -> image path. beat = beat id ("s1","c2","t1","x1"...; "G.x" global beats use ev art),
    ending = ending key ("win","mid","lose",...) or null; with neither -> the arc cover ("bia"). Missing file -> the arc's own cover,
    then the ev-* category that fits (EVENTS.json stories[arc].fb / efb). */
+const ST_RD97ART=new Set(["bd_hen_11", "bd_san_11", "bd_soi_11", "bd_tuyet_11", "ch_benh_11", "ch_bi_11", "ch_co_11", "ch_ho_11", "cn_ban_11", "cn_chu_11", "cn_than_11", "cn_tinh_11", "cnv_ban_11", "cnv_chu_11", "cnv_ma_11", "cnv_mat_11", "dtq_bien_11", "dtq_binh_11", "dtq_huynh_11", "dtq_vu_11", "muoi_doi_11", "muoi_lau_11", "muoi_no_11", "muoi_tuoc_11", "nc_gian_11", "nc_su_11", "nc_tuc_11", "nc_vuong_11", "pt_dang_11", "pt_hai_11", "pt_su_11", "pt_tang_11", "td_an_11", "td_ke_11", "td_song_11", "td_tha_11", "thd_hoc_11", "thd_sach_11", "thd_tho_11", "thd_tro_11", "tt_co_11", "tt_mat_11", "tt_oan_11", "tt_tranh_11"]);
 function stArtOf(arc,beat,ending){try{const A=EVART;if(!A||!A.stories)return"";const s=A.stories[arc];
  const G={rumor:"tin-don",emp:"hoang-de-vui",spy:"tai-mat",th:"thinh-an",rival:"tranh-sung",hh:"thinh-an",gift:"khach-den",night:"hoang-de-dem",srv:"cung-nhan",ill:"benh-tat"};
  const evc=c=>{const C=c&&A.categories[c];return C&&C.files.length?C.files[0]:""};
  if(beat&&String(beat).startsWith("G."))return evc(G[String(beat).slice(2)])||evArtOf("j67:"+beat);
+ /* GE11 (GAPART1 23/11): the 44 road-finale rare endings (RD97L, ids like bd_san_11) have no stories entry: their painted picture is img/st-<id>-ket-r97.webp */
+ if(!s&&ending==="r97"&&ST_RD97ART.has(arc))return `img/st-${arc.replace(/_/g,"-")}-ket-r97.webp`;
  if(!s)return evArtOf("arc:"+arc);
  const key=ending?"ket-"+ending:(beat||"bia");
  return s.files[key]||(ending&&s.efb&&evc(s.efb[ending]))||s.files.bia||evc(s.fb)||evArtOf("arc:"+arc)}catch(e){return""}}

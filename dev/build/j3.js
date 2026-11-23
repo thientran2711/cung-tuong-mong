@@ -23,7 +23,7 @@ function pushModal(m){Q.push(m);}
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
-function pushDil(d,title){if(!d)return"";pushModal({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return""}
+function pushDil(d,title){if(!d)return"";const m={t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(d.art)m.art=d.art;pushModal(m);return""}
 function WHO(w){if(!w)return null;const v=w[0]==="r"?RV(w[1]):null;return w[0]==="r"?(v?pv(v):null):w[0]==="e"?pEmp():w[0]==="t"?pTH():w[0]==="m"?pMaid():w[0]==="me"?pMe():w[0]==="d"?pDoc():null}
 /* the ☰ title menu and its sub pages (cls kptitle, j74 HM/SM) are screens, not events: a save made while one is open must not keep it (loading that save over a live kiếp, e.g. "Tiếp tục" / "Xem lại lời dặn", brought an empty menu back ~1 in 4) */
 const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
