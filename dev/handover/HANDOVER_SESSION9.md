@@ -2516,3 +2516,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 07:05Z) OWNER GO art 1–15 (M48 M50 M51 M52 M45 M84 KP11 KP08 KP10 GE07 GE06 GE11 AP01 OR17 KP23-rest); IT02 wardrobe WAIT. Order written to C.
 - (23/11 07:05Z) OWNER asked where the mini-game pictures are: MG10 was tagged ART-CHAR (people+objects) so it sat outside the count. Split: MG10a objects/boards/backgrounds → C GO now (scan first); MG10b people stays out.
 - (23/11 07:28Z) OWNER: MG10a scan then paint straight away, no report to her. Do not send art lists/progress to the owner.
+- (23/11 07:29Z) N14 seals relayed to LC6 (after rooms1). KIT KEEPER #8 opened session_01Rc5AsKKDSbRv5DjavkwbVJ for AP01 frame overlay. OWNER: B + D may paint (Magnific). Outings reader → B. C: 1–15 all painted, in review (GAPART1/2); compare page link https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-compare.html; MG10A painting 28.

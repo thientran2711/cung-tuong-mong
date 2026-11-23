@@ -1130,3 +1130,4 @@ coop-driver-fails (opus; 9 pre-existing LIVE co-op driver fails + coop-flakes rv
 | KP23CMP: KP23 194 act compare page old -h vs new (owner 07:00Z; briefs/C7-kp23-compare.md) | review/kp23-compare; reports/KP23CMP.md | FOREMAN C ROOT-C7 | session_01D3E3NY3mNYZAdFycTgMxDf | DONE | 23/11 07:20Z |
 | MG10A: mini-game non-person art scan + paint + wire (MAIN 109 07:10Z; briefs/C7-mg10a.md) | review/mg10a; reports/MG10a-scan.md, MG10A.md | FOREMAN C ROOT-C7 | session_01D3E3NXyH16AHsWYAvBwd5N | RUNNING | 23/11 07:25Z |
 | REVIEW-GAPART1: review review/gapart1 @f478b213 (briefs/C7-review-gapart1.md) | reports/REVIEW-GAPART1.md | FOREMAN C ROOT-C7 | (opening) | RUNNING | 23/11 07:30Z |
+| KIT KEEPER #8 AP01 event-frame overlay kit part + wire 9 AP01 frames (sonnet; MAIN 109) | review/kit-ap01-frame; reports/KIT-AP01.md | MAIN 109 | session_01Rc5AsKKDSbRv5DjavkwbVJ | RUNNING | 23/11 07:29Z |
