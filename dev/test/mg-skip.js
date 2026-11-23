@@ -23,7 +23,7 @@ console.log('step0');
  /* 0. the core: one key, one roll */
  const core=await p.evaluate(()=>({od:BAL.skip&&BAL.skip.od,old5:!!(BAL.odb.j5),old83:!!(BAL.odb.j83),w:word(od(BAL.skip.od)),roll:String(kitQuickRoll).includes('BAL.skip.od')}));
  ck('BAL.skip.od = 40, old odb keys gone, kitQuickRoll reads it',core.od===40&&!core.old5&&!core.old83&&core.roll,core);
- const wordOK=t=>/(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(t)&&!/%|Chắc chắn/.test(t);
+ const wordOK=t=>/(Liều|Khó|Năm phần|Khá chắc|Chắc|Nắm chắc|Nắm chắc)/.test(t)&&!/%|Chắc chắn/.test(t);
 
  /* 1. MAKEUP (morning mirror): quick on the dress screen; won = Đoan trang (vua), lost = Vụng về */
  for(const ok of [true,false]){await reset();await p.evaluate(()=>toilOpen());await p.waitForSelector('#kg82',{state:'visible'});

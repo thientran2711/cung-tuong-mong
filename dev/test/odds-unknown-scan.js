@@ -6,7 +6,7 @@
    usage: node dev/test/odds-unknown-scan.js [build dir] [--all]   — exit 1 when any option is left */
 const fs=require('fs'),path=require('path');let espree;try{espree=require('espree')}catch(e){espree=require('/opt/node-tools/node_modules/espree')}
 const DIR=process.argv[2]&&!process.argv[2].startsWith('--')?process.argv[2]:path.join(__dirname,'../build');
-const ODDW=/(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/,CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
+const ODDW=/(Nắm chắc|Nắm chắc|Khá chắc|Năm phần|Chắc|Khó|Liều)/,CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 const WORDF=/\b(word|chanceW|oddsW|kitOddsW|plantOdds|kitCapLine)\(/;const ROLL=/\b(roll|aRoll)\(/;
 const PAR=new Map();const enclosing=n=>{let c=PAR.get(n);while(c&&!/Function/.test(c.type))c=PAR.get(c);return c};
 /* rolls that are NOT the card's own outcome (checked by hand, review/odds-no-unknown) — file + option name → why */

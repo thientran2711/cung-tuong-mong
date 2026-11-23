@@ -19,7 +19,7 @@ Object.assign(BAL,{banCung:{
  ok:{danhStep:3,danhNear:2,ducHumble:3,ducTake:1},   /* granted: Danh + per step up; same standing but nearer the Emperor: Danh + danhNear (nearness = prestige, research §1.2);
                                                          a humble ask (lower standing, or same standing and not nearer) Đức +; accepting the decree Đức + */
  fail:{sung:2,sungStep:3,danh:1,danhStep:2,rel:6},  /* refused: Sủng −(sung + sungStep×steps up), Danh −(danh + danhStep×steps up), the first rival's relation −rel */
- npcLv:3                  /* an NPC asks only when her odds word is at least this ladder step (KIT_ODDS index: Khá chắc) */
+ npcLv:4                  /* an NPC asks only when her odds word is at least this ladder step (KIT_ODDS index: Khá chắc; was 3 before the 7-equal-bands ladder, the word is the same) */
 }});
 function bcDanh(i){const n=PALN[i];const d=BAL.banCung.danh[n];return d==null?1:d}
 function bcNeed(i){return BAL.banCung.need[bcDanh(i)]}

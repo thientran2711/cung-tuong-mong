@@ -1,3 +1,13 @@
+/* ONE SOURCE of the odds ladder words (owner 23/11 ~21:25Z, review/kit-odds-row: 7 EQUAL bands; cuts BAL.odds.cut = 18/31/44/57/70/83 in jbal: 5–17 · 18–30 · 31–43 · 44–56 · 57–69 · 70–82 · 83–95).
+   Every module reads KIT_ODDS / KIT_ODDS_ALT (regex source, longest first) / kitOddsCanon / kitOddsIdx: nobody types the words. KIT_ODDS_OLD = every word of older builds, mapped to the band that holds the CENTRE of its old band
+   (Liều 5–30 → 1st · Khó 31–45 → 3rd · Năm ăn năm thua 46–55 → 4th · Khá chắc 56–65 → 5th · Chắc 66–80 → 6th · Rất chắc 81–90 / Nắm chắc 91–95 → 7th); accepted on PARSE only (old saves / logs), NEVER shown. */
+const KIT_ODDS=["Thập tử nhất sinh","Hiểm","Bấp bênh","Năm phần","Có cơ","Vững","Mười phần chắc"];
+const KIT_ODDS_OLD={"Liều":"Thập tử nhất sinh","Khó":"Bấp bênh","Hơi khó":"Bấp bênh","Năm ăn năm thua":"Năm phần","Ngang ngửa":"Năm phần","Khá chắc":"Có cơ","Chắc":"Vững","Rất chắc":"Mười phần chắc","Nắm chắc":"Mười phần chắc"};
+const KIT_ODDS_ALT=KIT_ODDS.concat(Object.keys(KIT_ODDS_OLD)).sort((a,b)=>b.length-a.length).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
+function kitOddsCanon(w){return KIT_ODDS_OLD[w]||w}
+const KIT_ODDS_LEAD=new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)");
+function kitOddsNorm(s){return String(s).replace(KIT_ODDS_LEAD,m=>kitOddsCanon(m))}/* a leading old ladder word → the current one (parse only) */
+function kitOddsIdx(w){return KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()))}
 /* kRx(src, flags) — a RegExp that may use LOOKBEHIND (?<= (?<! and still runs on older iPad/iPhone Safari (< 16.4), which cannot even PARSE
    a lookbehind (owner iPad 15/11 "Bị gì đây mới vào game": one lookbehind literal anywhere in the one game <script> = the whole game dead,
    the raw skeleton stays). RULE: never write a lookbehind as a /literal/ — write kRx("…","flags") (dev/test/webkit-syntax.js FAILs a literal).

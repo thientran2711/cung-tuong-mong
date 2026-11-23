@@ -39,5 +39,5 @@ const VPS=(process.env.VPS||'755x1000x2,820x1180x2,1180x820x2,1366x1024x2,412x10
   /* collapsed chip -> its card */
   r.card=await p.evaluate(async()=>{const c=document.querySelector('#kshR .kas-one');if(!c)return null;c.click();await new Promise(r=>setTimeout(r,600));const m=document.querySelector('.kascard');return m&&m.offsetParent?m.innerText.replace(/\n+/g,' | '):'(no card)'});
   if(r.card)await p.screenshot({path:`${OUT}/${TAG}-an-sung-card-${W}x${H}.png`,animations:'disabled',timeout:120000});
-  r.ladder=/Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc/.test(r.state.text+(r.card||''));r.errs=errs;await ctx.close()}
+  r.ladder=/Liều|Khó|Năm phần|Khá chắc|Nắm chắc|Nắm chắc/.test(r.state.text+(r.card||''));r.errs=errs;await ctx.close()}
  fs.writeFileSync(`${OUT}/${TAG}-an-sung.json`,JSON.stringify(R,null,1));for(const k in R)console.log(k,JSON.stringify(R[k]));await b.close()})();

@@ -81,7 +81,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
     let m=pop();if(!m)f.push('no monthly pop-up in her cycle tuần');else{
      const N=m.opts.map(o=>o.n);info.popup=m.opts.map(o=>o.n+' :: '+String(o.x).replace(/<[^>]+>/g,''));if(N.length!==4)f.push('pop-up options '+N.length);
      if(S.tonight)f.push('flip not deferred');if(m.opts.some(o=>/%/.test(o.x)))f.push('% in option');
-     if(!/Khó|Liều|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc/.test(m.opts[1].x))f.push('lùi: no odds word');if(!/khả năng/.test(m.opts[2].x)||!/khả năng/.test(m.opts[3].x))f.push('lies: no risk chance');
+     if(!/Khó|Liều|Năm phần|Khá chắc|Chắc|Nắm chắc|Nắm chắc/.test(m.opts[1].x))f.push('lùi: no odds word');if(!/khả năng/.test(m.opts[2].x)||!/khả năng/.test(m.opts[3].x))f.push('lies: no risk chance');
      /* a: báo đúng → card off this tuần, the deferred flip ran */
      clear();m.opts[0].go();if(S.cyb.rk!==wk()||S.cyb.rv!=='dung')f.push('đúng not stored');if(nightCh(S)!==0)f.push('đúng: card on tray');if(S.tonight==='me')f.push('đúng: flipped');
      if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up again after answer');clear();flip();if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up twice same tuần');clear()}
