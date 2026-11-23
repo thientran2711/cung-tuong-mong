@@ -1201,7 +1201,7 @@ REVIEW j51-heir-danh (sonnet SMALL text-only law 4; briefs/D-j51-heir-danh-revie
 fix-evening-softlock + fix-hadoc-loop (opus; MAIN 110 20:33Z; briefs/D-softlock-hadoc.md) | review/fix-evening-softlock, review/fix-hadoc-loop | session_01964izCj26a6VP5u2Sr3qT5 | RUNNING | 23/11 20:55Z (Foreman D child)
 odds-ladder-words (sonnet; MAIN 110 20:33Z; briefs/D-odds-ladder.md) | review/odds-ladder-words | session_01964izG87jYFUEWkiatPXTX | LAND READY via -rv f1ee0636 (archived) | 23/11 20:55Z (Foreman D child)
 fix-kframe-heir (opus; MAIN 110 20:33Z; briefs/D-kframe-heir.md) | review/fix-kframe-heir | session_01964izF3TRAfuFcfdQV1Lie | SSK 2c241f86 (on call) | 23/11 20:55Z (Foreman D child)
-typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | review/typed-stat-bal | session_01964izBsY2xJwtJ9Zr9pzuF | RUNNING | 23/11 20:55Z (Foreman D child)
+typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | review/typed-stat-bal | session_01964izBsY2xJwtJ9Zr9pzuF | SSK 37264f7d (worker archived) | 23/11 20:55Z (Foreman D child)
 | REVIEW hdr-kiep (sonnet SMALL) of 5d0039de | review/hdr-kiep; reports/hdr-kiep.md «## REVIEW» | MAIN 111 | session_01Rc5AsK7hQdkb2rweb6hVxD | RUNNING | 23/11 20:53Z |
 REVIEW odds-ladder-words (sonnet SMALL; briefs/D-odds-ladder-review.md) of c31a047b | review/odds-ladder-words-rv | session_01964izCkYP9G2bKW92gPvfX | LAND READY f1ee0636 (archived) | 23/11 21:03Z (Foreman D child)
 | REVIEW hdr-kiep (sonnet SMALL) of 5d0039de | review/hdr-kiep; reports/hdr-kiep.md «## REVIEW» | MAIN 111 | session_01Rc5AsK7hQdkb2rweb6hVxD | PASS → LC7 (archived) | 23/11 20:53Z |
@@ -1217,3 +1217,4 @@ REVIEW fix-kframe-heir (opus BIG rules; briefs/D-kframe-heir-review.md) of 2c241
 | REVIEW map-label-overlap (sonnet SMALL UI; merge LIVE 72521d62) of 2a17fc28 | review/map-label-overlap-r; reports/map-label-overlap.md «## REVIEW» | MAIN 112 | session_01Rc5AsMK4aJrehLVxmNekUh | RUNNING | 23/11 22:37Z |
 | EVCAT: whole-game event catalog count + thin spots + content proposal (report-only; owner OD 23/11 ~23:00Z) | reports/EVCAT.md | B (ORDER MAIN 112 22:55Z) | (B opens) | ORDERED | 23/11 22:55Z |
 | KNOW-NOTICE: every knowledge gain (name/rank/face/relation/secret) shows a clear notice — scan + one kit notice + wire all (sonnet UI; owner OD 23/11 ~23:08Z; briefs/M112-know-notice.md) | review/know-notice; reports/know-notice.md | MAIN 112 | session_01Rc5AsJt95DF2ssFmW5DLmF | RUNNING | 23/11 23:00Z |
+REVIEW typed-stat-bal (opus BIG numbers; briefs/D-typed-stat-review.md) of 37264f7d | review/typed-stat-bal-rv | session_01964izEPKE9ZyzururowDAA | RUNNING | 23/11 22:12Z (Foreman D child)
