@@ -34,6 +34,14 @@ const {chromium}=require('playwright');const URL=process.argv[2]||('file://'+req
   /* first press after the reload: the choice comes back (attacker options), then she answers and the day turns */
   used=4;S.buoi=B4L;nextBuoi();a.back=(Q.find(m=>m.pid==="nfch")||{opts:[]}).opts.map(o=>o.n).join("/");Object.assign(a,T.press(6));return a});
  ok("1 reload at her attack choice: the card comes back, the day turns",r.x0&&r.x0.st==="open"&&r.x0.dlg===1&&r.qAfter===0&&r.back==="Tranh sủng/Chặn ngự giá/Thôi"&&r.turned,r);
+ /* 1c the robot's sharper case: a reload while the flip is still "wait" with the flip's own cards queued (FLIPQ, a WeakSet by object
+       identity, is empty after deser: the loaded cards are new objects) → press «Sang ngày mới» ×12 → the day must turn */
+ r=await p.evaluate(()=>{const L=T.fresh();T.toEvening();const d=wk();
+  /* the state saved right after the first tối press: flip done (nfF/nightWhy), choice "wait", the flip's notice card queued (FLIPQ holds it by identity) */
+  S.nfC=d;S.nfF=d;S.tonight=L[0];S.nfX={d,st:"wait",at:Date.now()};S.buoi=B4L;used=3;
+  Q.push({t:"Hoàng thượng lật thẻ bài",h:"<p>Tối nay thẻ bài của "+L[0].name+" được lật.</p>"});
+  const a={found:true,x0:T.nx(),q0:Q.map(m=>m.pid||m.t)};T.reload();a.qLoaded=Q.map(m=>m.pid||m.t);Object.assign(a,T.press(12));a.x1=T.nx();return a});
+ ok("1c reload while the flip is wait with its cards queued (FLIPQ lost): the day turns",r.found&&r.turned,r);
  r=await p.evaluate(()=>{const a={ready:T.choice("def"),x0:T.nx(),q:Q.map(m=>m.pid)};T.reload();a.qAfter=Q.length;
   used=4;S.buoi=B4L;nextBuoi();a.back=(Q.find(m=>m.pid==="nfch")||{opts:[]}).opts.map(o=>o.n).join("/");T.drain("Giữ chân Hoàng thượng");Object.assign(a,T.press(6));return a});
  ok("2 reload while she is the flipped one: Giữ chân/Thôi again, the day turns",r.x0&&r.x0.role==="def"&&r.qAfter===0&&r.back==="Giữ chân Hoàng thượng/Thôi"&&r.turned,r);
