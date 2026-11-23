@@ -856,3 +856,31 @@ Successor TODO (stall only; Danh is done — Foreman B also put session_01N1tNP3
 2. At a stall the 'PICKP guest' line names the .kmov (class, buttons) and the 'clk' ring shows what the bot taps. If the scene's button closes nothing / the scene re-opens → GAME fault: fix that scene family (every kmStage / kitGain / kmPush scene must end on its own end button; a part-D card under a scene must stay answerable) + test. If the bot taps a scene button that is not its end → BOT gap: fix lib/coop-clear TAP (one helper for every bot) + rerun trip1 ×2.
 3. Rule from the brief still owed whatever the cause: every guest card the host holds gHold for must deliver its pick or release the hold — consider the guest resending a pick whose card is still in the host view after SENT expiry (jcoopthin gSync) only if the dump shows a lost send.
 4. Then: merge newest origin/main ONCE (≥ f7016b8d PAGES-LOCK; any new runtime file → dev/site/pages_stage.sh allowlist), rebuild index.html/sw.js (dev/site/build_site.sh), gates on the final head: quickcheck, one-core guard, role-parity alone, coop-e2e ×3 (THIN=13), famops-unit (argv[2] http://ctm.local/index.html), trip1 ×5 85/85, thin lane tests touching jcoopthinf (f6, f6s, f6b, a, c, e), both-seat Fold 755x1000@2 + iPad 1180x820@2 LOOK; reds rerun alone + LIVE table; report «## F2 FIX» final + SSK to Foreman B.
+
+## F2 HELPER — Danh drift + trip1 stall (worker session_01N1tNP3XsdqVYQXYm7CSPxB, opus, Foreman B ROOT-2; 11/23/2026; START_CTX ≈ 3 % of 1M)
+PRIORITY #1 CHECK ('danh drift|coop-thin-g'): OD 1 | ledger 0 | claims 8 | main 6 | review/* 5 | archive 0 — job existed: review/coop-thin-g-f2 (fixer #11, root-fix @8dbc92dd, then archived); re-tasked by Foreman B 18:21Z as #11's successor for the trip1 stall.
+Branch **review/coop-thin-g-f2** (pushed): 1de2077c = 8dbc92dd + merge LIVE **f7016b8d** (PAGES-LOCK; only index.html/sw.js conflicted → rebuilt; no new runtime file; pages_stage.sh OK, 144 files) · f1051845 (test meter fix) · **d0e55df1** (Danh drift #2 root fix + G9b).
+
+### 1. Danh drift — TWO doors, both closed
+| door | evidence | fix | test |
+|---|---|---|---|
+| (a) a host SYNC (CW.inFC) on her phone ran the render-time engines (tyHome → tyCharge) | #11: trip1-r8 wk 18 | #11 @8dbc92dd: rOn no longer exempts inFC | G9 (before ro 0 → after PASS) |
+| (b) her «Sẵn sàng» PRESS: jcoopthinf WKD wrapped nextBuoi OUTSIDE jcoopthine's press wrapper, so a press (E: gReady → gSync + render, no step) counted as "her own step" → rOn false → tyHome → tyCharge Danh −1 on her phone while the host charged the same buổi in her context | trip1 pk-c @1de2077c (after #11's fix): wk 33 store 20 \| phone 19, wk 36 8 \| 7 + G2 red; DW phone stack `renderStage → rOn wrapper → tyHome → tyCharge` at buổi 0, no inFC. Probe PRESSP (coop-thin-g-probe/press.block.js): render 7→7, press nextBuoi **7→6** (tyPaid set) | WKD counts endTurn / monthTick only; a real step of hers on her phone is always under CW.allow / CW.allowN (jcoopthine lets nothing else through), already exempt | **G9b** (press with a render, trung y + visitor): before **FAIL** ro 0, after **PASS** ro 12, Danh unchanged |
+Branch-made: jcoopthinf is not on LIVE (main has no jcoopthinf / part F6+ / G) → nothing FOR MAIN.
+
+LAW 11 family scan (coop-thin-g-probe/fam-scan.block.js, FAMSCAN=1): on her phone, 8 places (home vuon tn nvp ksp tyv kn lc) × render + renderStage × (no sync / under a host sync) + home with trung y + one visitor:
+| build | keys of HER S written on her phone |
+|---|---|
+| before bd98d53c, under a sync | **danh 20→19, tyPaid, tyShame, emoSeen, logs** (= drift) |
+| after 8dbc92dd+, under a sync | none |
+| both, no sync (first touch only) | display caches porMe, visit.msg, __resName, __resTam; cm.seen (her own spy line, local by design jcoopone:51) — no stat |
+Press path: G9b (above). rOn's remaining exemptions: inLife (throwaway world), allow / allowN (real step), WKD (endTurn / monthTick inside a real step).
+
+### 2. trip1 «stall» = the TEST METER, not the game (proven)
+Caught @1de2077c pk-b wk 34: her Q = «Yến đầy tháng hoàng tử», host gHold on it; her page: one .kmov «Hộp gấm · Đào Tĩnh Thù tặng» with KMQ **≈2405** queued scenes; the bot (lib/coop-clear TAP 2b, scene first) clicked «Nhận» 60× in 12 s, each opened the next. Probe KRW (every kitReward on her phone): from week 0 one «Rương đồ · Vừa vào Tư trang» (her whole starting Tư trang) **per render**. Probe INVP (coop-thin-g-probe/invp.block.js, WEEKS=1): **without TRIP 0 boxes in 4 renders; with TRIP=1 one per render** (KMSNAP.inv.includes(S.inv[0]) false).
+Root: dev/test/coop-thin-trip.js (TRIP=1 guest tripwire) wraps S in Proxies; its identity patch unwrapped only the array and the needle, not the ELEMENTS — KMSNAP.inv = S.inv.slice() taken through the Proxy holds proxies → jfx kmDiff `before.includes(x)` false; jfx kfSeen (WeakSet) keyed by proxy. A real player has no tripwire → no flood, no stall. r2 #2's shape («Tuân chỉ» card stays) fits the same flood (scene on top of the card).
+Fix (f1051845, test only): indexOf / includes / lastIndexOf compare unwrapped elements; WeakSet keys unwrapped like Set / Map. WeakMap NOT patched (the meter's own RAW / PX maps are WeakMaps keyed by the Proxy: patching recursed — seen as 'guest joined seat b' red). After: INVP with TRIP 0 boxes. Rule 3 of #11's TODO (gHold must release / pick must land): her card re-asks itself after SENT expiry (jcoopthin gSync, 15 s) → no lost-send path was seen; nothing added.
+LIVE: trip1 cannot run on LIVE (no part G). The meter file is shared by every TRIP lane on main → FOR MAIN: TRIP lanes on main inherit the meter fix when this lands.
+
+### 3. Gates @d0e55df1
+(filled below when the lane ends)

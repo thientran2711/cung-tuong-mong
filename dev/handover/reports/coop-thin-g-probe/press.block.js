@@ -1,0 +1,5 @@
+/* F2 HELPER probe (press): insert after the 'G9 a host sync' ok(...) line of dev/test/coop-thin-g.js as dev/test/zz-press.tmp.js (untracked); run with PRESSP=1 WEEKS=1 node dev/test/zz-press.tmp.js http://127.0.0.1:8787 13 1 */
+ if(process.env.PRESSP){const r=await G.p.evaluate(async()=>{const on0=window.tyOn,cp0=window.curPeople;const v=(rivals||[]).filter(x=>x&&!x.coop&&x.alive!==false&&!x.out).pop();
+   window.tyOn=()=>true;window.curPeople=()=>v?[{ref:v}]:[];S.place='home';const out=[];const F=COOPW.thin.F||{};const st=F.stat||{};
+   for(const [nm,fn] of [["render",()=>render()],["press nextBuoi",()=>nextBuoi()],["#next click",()=>{const b=document.getElementById('next');if(b)b.onclick&&b.onclick()}]]){S.tyPaid=null;if((S.danh|0)<5)S.danh=20;const d0=S.danh,ro0=st.ro|0;try{fn()}catch(e){out.push(nm+' err '+e)}await new Promise(r=>setTimeout(r,400));out.push({nm,danh:[d0,S.danh],tyPaid:S.tyPaid,ro:(st.ro|0)-ro0})}
+   window.tyOn=on0;window.curPeople=cp0;return out});console.log('PRESSP',JSON.stringify(r));process.exit(0)}
