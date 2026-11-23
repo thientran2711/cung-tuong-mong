@@ -138,7 +138,10 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
     review r1 F3: the host's own month roll may change the illness during a week, so the set-up re-sets it until both seats show st 3, and
     every check reads the PAIR + the host's applied "th" request (b → v), never a fixed stage after a merged week. */
  const th=o=>o.p.evaluate(()=>S.thIll==null?null:{k:S.thIll.k,st:S.thIll.st});
- const thLog=()=>A.p.evaluate(()=>((window.__askN||{}).log||[]).filter(l=>/ th:/.test(l)));
+ /* review/coop-driver-fails #2: __askN.log keeps only the last 10 applies (jcoopask.js:153), so servant requests of the same weeks pushed the th
+    lines out (LIVE H3 6d red: L = []). The host's durable record S.askDone[id] = [r, week] (pruned only 3 weeks after) is read too, one line per id */
+ const thLog=()=>A.p.evaluate(()=>{const L=((window.__askN||{}).log||[]).filter(l=>/ th:/.test(l)),seen=new Set(L.map(l=>l.split(' ')[1]));
+  for(const [id,v] of Object.entries(S.askDone||{}))if(/^th:/.test(id)&&!seen.has(id))L.push('done '+id+' w'+(v&&v[1])+' r'+(v&&v[0]));return L});
  async function ill3(tag){for(let i=0;i<4;i++){await A.p.evaluate(()=>{S.thDead=false;S.thIll={k:'phonghan',st:3,known:true};try{render()}catch(e){}});await weekAll(A,B,tag+i);
    const g=await th(B),h=await th(A);if(g&&h&&g.st===3&&h.st===3)return true}return false}
  /* diagnostics: every change of thIll on the guest with the week / buổi and the last log line (who changed it) */
