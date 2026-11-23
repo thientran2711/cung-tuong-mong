@@ -480,3 +480,40 @@ NOT RUN yet (after the final scans): coop-famops-unit (56/56 now), coop-e2e fold
 - Earlier final head cd5f2a8e: 9001 #1 van 10000001 (→ fixed in fdcd0d18, unit 33); 9001 #2 dup0 van0 (low steal traffic); SWAP #1 dup0 van0 but A.nofriend 76.
 - Logs / dumps (die with the E44j container): /home/user/wt/t2s/{hn1,hn2,hs1}.log + dirs (faults.json, trace.json).
 - Gates NOT run on fdcd0d18. Head **review/coop-famops-t2 fdcd0d18** pushed (on LIVE 2ba6c64e).
+
+## E44k (worker, depth 2 under E ROOT-1, session_01DgYSWo5tFKniEY5jsbeVXu) — row N17 rest: F1 / F2 / gates, 23/11 ~17:15Z — INTERIM + HANDOVER (context ~31 %)
+PRIORITY #1 CHECK ('coop-famops-t2|kyngo'; 'rpend|seenIds|RQ|sentOr|p2say'): OD 0 for the topic (law 6c + 1 + 11) | ledger 0 | claims E44k | main 2ba6c64e (now f7016b8d) | review/* = this branch | precedents reused: jkcco RQ relay queue (ack + resend on peer / room / timer, done keys), jcoopworld sentOr (send false = lost), seenIds dedupe.
+HEAD **review/coop-famops-t2 e027b540** (= fdcd0d18 + 4f33db9b F1 + index.html/sw.js rebuilt, assets.json = LIVE). NOT yet merged with LIVE f7016b8d (PAGES-LOCK).
+### F1 dup 2576 — ROOT + FIX
+- Root: every «res» (an act's result: items by id, stats, children, pets) was sent ONCE (sendRes / b4Send → COOP.send). COOP.send returns false on a socket that is not open, and the Worker relays act/actr/res only to ONLINE seats (coop/worker index.js:185 bcast): a reconnect or an offline peer lost the message for good; CW.rpend only waited 10 s. 2576: her «Lấy đồ» res never reached the host (tA.rcv empty) → host kept the piece + her case copy = dup.
+- Proof on fdcd0d18 (new tracers SNDLOST / WS): 9001 #1 guest «res laydo» ×4 SNDLOST (send false) w22; SWAP: **vanish 10000032** (w5) and **vanish 10000012** (w27) = the mirror: the host's «Cài đồ vào rương» ret («sang hảo hữu» on his seat) lost during socket retry/open flaps on both seats (tB.rcv has no ret) → the piece left the host and never reached her.
+- Fix 4f33db9b (jcoopworld.js): res OUTBOX (CW.rq, per room + seat in localStorage, like jkcco RQ): resOut keeps every res until its ack (actr ack), resent on peer back / room reconnect / every 2.5 s (age > 5 s), 30 min cap; receiver applies an id ONCE (seenIds + S.coopRs, last 80 ids in her save: a reload never applies twice) and acks EVERY copy. Both seats, every res road.
+- Law-11 family table (every message that moves an item × seat):
+| channel | roads | before | after |
+|---|---|---|---|
+| res via sendRes | every act on the friend entry, both seats (relay level 0) | once, lost on down socket / offline peer | outbox (fixed) |
+| res via b4Send | host NPC turns (b4Ops), lostReturn hook ret (both seats), famBoxBack, famSweep gone, ilGone box rule ret/gone | once | outbox (fixed) |
+| P2 iltake / ilrefund | her choice for her piece in the host box / her silver back (E44j b) | once | outbox + ack + once per id (fixed) |
+| P2 ilask | host asks her seat | once | not changed: jil ilWeek asks again after againW (by design) |
+| act fam (sendFam) / pos | live state, keyed | sentOr clears the key → resent | ok already |
+| thin D.resTo / patch PQ | thin level ≥ D | own ack queue (rpend pq) | not changed |
+| jkcco relay | clan-hall gifts | RQ outbox | ok already (the precedent) |
+- unit **34** (coop-famops-unit): pre-fix FAIL (no outbox: CW.resOut missing) → ok; (a) send false → same id resent once up, none after ack; (b) the same id twice applied once, both acked; (c) id in S.coopRs (reload) not applied, acked; (d) P2 iltake resent until acked, a duplicate runs once. coop-famops-unit **57/57**.
+### F2 van 278 (NPC Kỳ ngộ keep → gone) — NOT reproduced, open (as T7)
+- Checked: jky SPEC.item keep → jlost loKeepBy (ledger «kyngo: giữ lại»); every jlost road that takes a held piece from its holder (loHolderMove ret/wear, loQuietHear, lostReturn, Soát rương, expiry «giữ luôn», loGoneOwner) moves it with a ledger line or ilGone; j92 wdApply / wdWearEntry keep worn pieces; itClean drops only non-pieces. Note (not proven a fault): jlost loWeek trims S.lost to the last 40 cases (.slice(-40)) — an OPEN case can be dropped under heavy traffic; the piece stays in the holder's chest (still counted), so it does not explain a vanish alone.
+- Scans: solo lost-one-home-scan (dev/index.html of -t2, 160 tuần) seeds 9001 / 20261121 / 4242 / 77: dup 0 van 0 (traffic row FAIL only: few NPC Kỳ ngộ moves 1–3). Traced SWAP on fdcd0d18 to w33 with the new HDROP tracer (host: any case piece leaving every slot / box / case → row with holder state): F2 shape not hit (its 2 HDROP rows = the F1 mirror vanishes above).
+### T2 shape (vanish 10000025, 9001 #2 on fdcd0d18 w2) — open, no root
+- Host's own «laydol» on her entry w2: host case 5 own 902 held at me keep 1 (LOKEEPBY:902>me logged), but no copy in his hands (HELDME-NOCOPY w2/w3), her seat case 3 held at 901 (correct); no SENT / GONE / plant / ret op for it. Not the F1 road (nothing to send). The rerun with HDROP reached w32 without a repeat. Successor: keep HELDME-NOCOPY + HDROP on; on a hit the HDROP row gives the buổi / Q / last messages.
+### Gates on e027b540 (pre-LIVE-merge; must be rerun on the merged head)
+| gate | result |
+|---|---|
+| coop-famops-unit | 57/57 |
+| coop-e2e fold-host | 141/141 |
+| coop-e2e COOP_SWAP | 140/141 (S.nmReg maid names host-only after week 3 = known LIVE flake, root-fixed in B's coop-thin-g) → rerun **141/141** |
+| coop-b1 | **44/44** (step 8 passed this time) |
+| role-parity ×2, quickcheck + old save | not run (stopped for the LIVE merge) |
+### HANDOVER (E44k) — what remains (E ROOT-1: finish only)
+1. Merge LIVE f7016b8d into review/coop-famops-t2 (index.html / sw.js rebuilt with build_site.sh, assets.json = LIVE; no new runtime file in -t2 → pages_stage.sh untouched).
+2. Gates alone on the merged head: coop-famops-unit, coop-e2e fold + SWAP, coop-b1, role-parity ×2 (`node dev/test/role-parity.test.js`), `node dev/tools/quickcheck.js` + old save.
+3. Final traced 76 wk: `LOST_DBG=1 SEED=9001 node dev/test/coop-lost-scan-traced.js <out>` ×2 + `COOP_SWAP=1 …` ×2, ≤3 parallel; a run with A.nofriend/B.nofriend ≈ 76 = rerun (9001 #1 on fdcd0d18 had A.nofriend 76). New log rows: `SNDLOST <seat> {snd}` at the end; trace.json gains snd / ws / fm; HDROP rows in gq.
+4. Clean (dup0 van0, stall rows only) → SSK. Open: F2, T2 shape (10000025), T7.
