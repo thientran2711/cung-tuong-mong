@@ -1,7 +1,7 @@
 # E53r — BIG co-op review of review/coop-famops-t2 (N17 rest) — reviewer session_01DgYSWnXUrXsk75X7QMXWtm (depth 2, opus)
 PRIORITY #1 CHECK (brief E53r, prio1 "coop-famops-t2|kyngo"): OD 2 (owner first-try codes, not this) | ledger 0 | claims = E44i→E44j→E44k rows + this row | main: t1 landed 2ba6c64e; LIVE now 225c5c08 | review/* = review/coop-famops-t2 (5020f618) | precedent reused for my fix: jkcco RQ relay queue (jkcco.js:68 `COOP.on("room",()=>{RQ.length=0;rqLoad()})`).
 
-Reviewed **5020f618** (verified on origin; LIVE f7016b8d ancestor). Final branch **review/coop-famops-t2-r 7d54e3a9** = 5020f618 + my 2 review commits + merge LIVE 225c5c08.
+Reviewed **5020f618** (verified on origin; LIVE f7016b8d ancestor). Final branch **review/coop-famops-t2-r dbbbf3c6c45943dac8744a8f1820c52fdb2fb28c** = 5020f618 + my 2 review commits + merge LIVE 225c5c08 + merge LIVE 72521d62. **VERDICT: PASS dbbbf3c6** (LIVE 72521d62 ancestor).
 
 ## Review fixes (mine, small; on -r)
 | # | finding | fix | unit |
@@ -31,21 +31,21 @@ Reviewed **5020f618** (verified on origin; LIVE f7016b8d ancestor). Final branch
 - T2 shape (10000025) / T7: not hit in my runs.
 
 ## Final merge
-review/coop-famops-t2-r = 5020f618 + 9e8f4dd2 (R1 + R2) + 445d512a (index/sw) + **7d54e3a9 merge LIVE 225c5c08**. LIVE delta (jopic.js, dev/test/*, dev/art/kp23/*, cdn_sync.py, ACTS.json) disjoint from the -t2 code files (j8 j13 j20 j40 j92 jcoopworld jhd jil + coop-famops-unit + coop-lost-scan-traced); only index.html / sw.js conflicted → rebuilt (assemble + build_site.sh), assets.json = LIVE byte for byte. No new runtime file → pages_stage.sh untouched.
+review/coop-famops-t2-r = 5020f618 + 9e8f4dd2 (R1 + R2) + 445d512a (index/sw) + 7d54e3a9 merge LIVE 225c5c08 + **dbbbf3c6 merge LIVE 72521d62**. LIVE deltas (225c5c08: jopic.js, dev/test/*, dev/art/kp23/*, cdn_sync.py, ACTS.json; 72521d62: j79.js, jk3.js, jroute.js + tests/docs) checked file by file: disjoint from the -t2 code files (j8 j13 j20 j40 j92 jcoopworld jhd jil + coop-famops-unit + coop-lost-scan-traced); only index.html / sw.js conflicted → rebuilt (assemble + build_site.sh), assets.json = LIVE byte for byte. No new runtime file → pages_stage.sh untouched.
 
-## Gates (alone)
-| gate | 445d512a (base f7016b8d) | 7d54e3a9 (base 225c5c08) |
-|---|---|---|
-| coop-famops-unit | 58/58 | RUNNING |
-| coop-e2e Fold host | 141/141 | RUNNING |
-| coop-e2e COOP_SWAP iPad host | 141/141 | RUNNING |
-| coop-b1 | 44/44 (step 8 passed) | RUNNING |
-| role-parity ×2 | #1 ALL PASS (#2 stopped: LIVE moved) | RUNNING |
-| quickcheck + old save | — | RUNNING |
+## Gates (alone; full set on each head)
+| gate | 445d512a (base f7016b8d) | 7d54e3a9 (base 225c5c08) | **dbbbf3c6 (base 72521d62) FINAL** |
+|---|---|---|---|
+| coop-famops-unit | 58/58 | 58/58 | **58/58** |
+| coop-e2e Fold host | 141/141 | 141/141 | **141/141** |
+| coop-e2e COOP_SWAP iPad host | 141/141 | 141/141 | **141/141** (1st run crashed at step 4 join, no FAIL row = Worker/infra; rerun 141/141) |
+| coop-b1 | 44/44 | 44/44 | **44/44** (step 8 passed: no LIVE-twin flake this time) |
+| role-parity ×2 | ALL PASS (#1) | ALL PASS ×2 | **ALL PASS ×2** |
+| quickcheck + old save | — | PASS (old save ok) | **PASS** (old save ok; 1st run perf-only FAIL buổi 2751/1029, rerun buổi 1089 vs LIVE 3229 = machine noise both ways; core gates PASS both) |
 
 ## Ticket lines (for E ROOT-1, not FAILs)
 - F2 (LIVE twin): see scans; jky.js:196 candidate.
 - Outbox age cap: rqFlush drops an unacked «res» after 30 min (jkcco RQ has no age cap) → a peer away > 30 min loses it (the F1 shape). Watch item; not reproduced.
 
-## HANDOVER (if E53r rolls before the verdict)
-Gates are running in /home/user/wt/e53g on 7d54e3a9 (log /home/user/wt/e53s/g2/gates.log; dies with my container). Successor: fetch review/coop-famops-t2-r, rerun the gate list above alone on its head (re-merge first if LIVE moved), then PASS → LAND READY line.
+## Verdict
+**PASS dbbbf3c6** → LAND READY (FOREMAN_E_STATUS). No handover needed.
