@@ -27,13 +27,13 @@ const CASES=[ /* [title, body, expected key] — titles/bodies copied from the g
   const r=await p.evaluate(C=>{const out=C.map(([t,h,e])=>({t,e,k:kitOutingKey({t,h})}));
    const src=["chua-ho-quoc","ngu-uyen-ngoai"].map(k=>kitOutingSrc(k));
    const own=[{t:"Chùa Hộ Quốc cầu an",h:"x",art:"img/a.webp"},{t:"Chùa Hộ Quốc cầu an",h:"x",headArt:{src:"a"}},{t:"Gặp ở chùa Hộ Quốc",h:"x",placeK:"vuon"}].map(m=>kitOutingKey(m));
-   const live=KIT_CDNHAVE&&KIT_CDNHAVE.has("img/outing-chua-ho-quoc-"+kitFullOri()+".webp");
+   const live=KIT_CDNHAVE&&KIT_CDNHAVE.has("img/outing-chua-ho-quoc-land.webp");
    /* not in the CDN index → no outing picture, the old chain answers (never throws) */
    const h=KIT_CDNHAVE;KIT_CDNHAVE=new Set();const off=kitOutingSrc("chua-ho-quoc");const a0=kitEvArt({t:"Gặp ở chùa Hộ Quốc",h:"x"});KIT_CDNHAVE=h;
    return{out,src,own,live,off,offArt:a0&&a0.src||null}},CASES);
   ck(dev+' CDN index lists the outing pictures',r.live);
   r.out.forEach(o=>ck(dev+' key "'+o.t+'" → '+(o.e||'none'),o.k===o.e,o.k));
-  ck(dev+' src port/land by device',r.src.every((s,i)=>s.endsWith(`img/outing-${["chua-ho-quoc","ngu-uyen-ngoai"][i]}-${ori}.webp`)),r.src);
+  ck(dev+' src = land on every device (band slot)',r.src.every((s,i)=>s.endsWith(`img/outing-${["chua-ho-quoc","ngu-uyen-ngoai"][i]}-land.webp`)),r.src);
   ck(dev+' own picture / headArt / place card untouched',r.own.every(k=>k===""),r.own);
   ck(dev+' not in the CDN index → fallback, no outing picture',r.off===""&&!/outing-/.test(r.offArt||''),[r.off,r.offArt]);
   /* real dialogs on a started game */
@@ -50,8 +50,8 @@ const CASES=[ /* [title, body, expected key] — titles/bodies copied from the g
      {const M=document.getElementById('modal');M.hidden=false;M.style.removeProperty('display')}showModal&&showModal();await new Promise(r=>setTimeout(r,4000));
      const img=[...document.querySelectorAll("#mb img")].find(i=>/img\/outing-/.test(i.src));const r=img&&img.getBoundingClientRect();
      return{src:img&&(img.currentSrc||img.src)||"",cls:(document.querySelector('#mb')||{}).className,kinds:[...document.querySelectorAll('#mb img')].map(i=>i.src.slice(-40)).join('|'),w:r&&Math.round(r.width),h:r&&Math.round(r.height),text:(document.querySelector("#mb")||{}).innerText?.slice(0,60)}},[nm,t,h]);
-    const want=nm==="plain"?null:new RegExp(`outing-${nm==="chua"?"chua-ho-quoc":"ngu-uyen-ngoai"}-${ori}\\.webp`);
-    ck(dev+' dialog '+nm+' picture '+(want?'= outing '+ori:'is not an outing'),want?want.test(got.src):!/outing-/.test(got.src),got);
+    const want=nm==="plain"?null:new RegExp(`outing-${nm==="chua"?"chua-ho-quoc":"ngu-uyen-ngoai"}-land\\.webp`);
+    ck(dev+' dialog '+nm+' picture '+(want?'= outing land':'is not an outing'),want?want.test(got.src):!/outing-/.test(got.src),got);
     if(process.env.DBG)console.log(await p.evaluate(()=>{const o=[];let e=document.elementFromPoint(innerWidth/2,innerHeight/2);while(e&&o.length<8){o.push(e.tagName+'#'+e.id+'.'+String(e.className).slice(0,40)+' hid='+e.hidden+' d='+getComputedStyle(e).display);e=e.parentElement}return o}));
     if(SH)await p.screenshot({path:path.join(SH,`${dev}-${nm}.png`)});
     await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});
