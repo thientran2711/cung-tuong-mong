@@ -336,3 +336,44 @@ PRIORITY #1 CHECK ('f7Done|b4Ops|famSame|famIn|famRebase'): OD law 6c + law 1 | 
   | -pv + same patch (local only) | ok / ok | 39/39 |
 - Scan trace for T6 (scratch copy of -pv coop-lost-scan.js, not committed): host sendRes «items» (COOP.send + D.resTo) and her received «items» in tA/tB; per seat a Q watch: a dialog holding a piece (giftin «Quà tặng» …) that leaves Q → where the piece is (mine / box / NOWHERE) + the option chosen; the scan's own Q drops (ui Q.length=0, cap 8, unstick shift) logged as SCANDROP. Fault output gains tA/tB.gq.
 - RUNNING 17:26Z: LIVE b238857f SEED=9001 + LIVE COOP_SWAP (kyngo-lead control + T6), t1 2d8db496 SEED=9001.
+
+### E44g — row coop-famops-t1 (T1 + T6 + T5, one family: her-entry pieces leave the host world with no op / a stale diff), 23/11 ~04:00Z
+PRIORITY #1 CHECK ('f7Done|fxFin7|b4Wrap|ilSent|ilGone|ilTake|ilBuy|npcToFriend'): OD law 6c + law 1 + law 11 | main bda5b75b jcoopworld.js f7Done/fxFin7 wrapper, jil.js ilGone/ilTake, jagwhyg2c ilBuy | review/coop-famops-pv 5a239b1a (famSame; no overlap with these lines) | claims E44g.
+HEAD **review/coop-famops-t1 dfda0723d624e2abc537bd824d8cb62bc119fd27** (on LIVE bda5b75b; source delta vs LIVE: jcoopworld.js, jil.js, jagwhyg2c.js, coop-famops-unit.js).
+- T1 root = the festival-START snapshot (CW.f7.b): the host's contest minigame defers fxFin7, CW.f7 can stay open for WEEKS, and f7Done re-sent everything that touched her entry meanwhile as the festival's doing: the garment she put on on her own seat («rm gone» → her famItem takes it off her = vanish), the one she took off («add» iu 0 = 2nd copy, «add: already hers» misses), the host's own Lấy đồ / Cài đồ already sent by their acts. r1 (famRebase, 2d8db496) was not enough (scan stack b4Send←famRebase←famIn, vanish 10000165). r2 3170b625: b4Wrap sends festival()'s own ops when the scoring is deferred and drops the start snapshot; the fxFin7 wrapper diffs her entry around ITS OWN call (sync festival keeps its pre-diff).
+- T6 root: an NPC gift to her entry OUTSIDE the diffed calls (ilGuard giveTo → ilGone → ilToFriend → ilSent) = ledger «sang hảo hữu» only (logged from «me»), no op → stranded on the host copy. Fix: ilGone's friend branch with an NPC giver → COOPW.npcToFriend = the same «add»/«plant» op b4Ops sends (host only, skipped while CW.b4in); ilSent logs the real giver. Caller not stack-proven (the ilSent stack hook ran on 3170b625 scans, no T6 recurrence there); proof = unit 22 + the no-op trace (rm/add/plant/items/gift dialog all traced empty for 2028).
+- T5 root (found while checking r2): jil market (ilWeek ilBuy, npc-purpose who = liveRivals(true)) could pick HER entry as an NPC buyer → ilTake onto the host copy, no op; on LIVE the stale f7Done diff happened to carry it (dup 10000030); with r2 it would be stranded. Fix: ilBuy never picks v.coop (player seat); ilTake onto her entry → npcToFriend «add».
+| check | LIVE b238857f / bda5b75b | -pv 5a239b1a | t1 dfda0723 |
+|---|---|---|---|
+| unit 21 festival deferred + relay rebuild + host act in window | FAIL (rm X, rm+add, add G iu0) | FAIL | ok |
+| unit 21b her seat: X still worn, one G | FAIL (X off, G×2) | FAIL | ok |
+| unit 21d sync festival sends its prize once | ok | ok | ok |
+| unit 22 NPC gift outside a diffed call → one «add» | FAIL (0) | FAIL (0) | ok |
+| unit 22b same inside a diffed call → exactly one | ok | ok | ok |
+| unit 23 market buyer list never holds her entry | FAIL | — | ok |
+| unit 23b box piece onto her entry → one «add» | FAIL (0) | — | ok |
+| coop-famops-unit | 33/40 shape | 37/39 (+T5 n/a) | 40/40 |
+| 76 wk 9001 (LIVE control b238857f, traced) | 85/98 dup0 **van2**: 10000013 (T1: f7Done w48 «rm gone» + «add y_saxanh iu0»), 10000275 (T7) | — | 3170b625: killed at w47 by worker restart ×2: dup1 (id 10 = T4) van0 / clean |
+| 76 wk SWAP | (E44f: 88/92 van 10000013) | — | 3170b625: 84/100 (71/76 merged weeks, stall FAILs only) dup0 van0 |
+| T6 shape | 934 / 3385 (-pv) | yes | twin 2028 on 87021bb5 SWAP (before T6) → none after |
+- Evidence-only runs on older t1 heads: 87021bb5 coop-e2e 141/141 both seats, 9001 89/90 dup0 van0 (traffic count only).
+- GATES on dfda0723 started 04:00Z ALONE in E44g's container: coop-b1 → role-parity ×2 → quickcheck (+ old save) → coop-e2e fold-host → SWAP. NOT yet: 76 wk 9001 ×2 + SWAP on dfda0723 (game code changed vs 3170b625 by LIVE bda5b75b + T5).
+#### N17 — ticket state T1–T7 (scan faults with traces; 23/11)
+| ticket | shape | LIVE twin | fixed by |
+|---|---|---|---|
+| T1 festival stale diff | f7Done «rm gone» + «add iu0» | yes (b238857f 10000013 ×2 runs) | **t1** (r2) |
+| T2 host-held keep copy missing | host «Lấy đồ» her piece 3×, 3rd case «held at me», host has no copy | yes (35f5b5ab 10000045) | none (open) |
+| T3 ret with no case on her seat | laydo w1, ret via res:plant w4, her seat had no case → gone | yes (LIVE SWAP 10000013) | none (open) |
+| T4 box cct evid dup | guest laydo / plantItem evid of a host piece → «gone matdau» / case, host keeps a copy | code unchanged by -pv/-t1; seen on -pv d58a43fa (117) and t1 3170b625 (id 10); no LIVE scan hit yet | none (open) |
+| T5 market resale to her entry | jil ilBuy picks her entry | yes (code); old shape dup 10000030 | **t1** |
+| T6 NPC gift outside diffed calls | ledger «sang hảo hữu», no op | yes (code; -pv 3385, t1-old 2028) | **t1** |
+| T7 her seat drops a returned piece silently | 10000275 tram_maudon back by «ret» w47, gone w54, no op received, no ledger line on her seat | yes (b238857f control) | none (open; needs a her-seat removal trace) |
+| (V) «hảo hữu lấy» NPC theft from her entry | b4Ops «gone» | yes | -pv (e1c1d173) |
+| kyngo lead (250/255/10000260) | kyngo-closed case piece gone later, no ledger line | not hit in the traced LIVE 9001 control (2 runs incl. E44f) | open; likely T7 family (same «no op, no ledger line» end) |
+- Out-of-scope note (law 11 scan for the successor): many npc-purpose pickers (jagwhy*.js) use liveRivals(true), which holds the co-op friend entry; only ilBuy moves an item onto her entry (T5); the others were not audited here.
+
+## HANDOVER (E44g rolls on context, 23/11 ~04:05Z) — row review/coop-famops-t1 dfda0723, FOREMAN E ROOT session_01DgYSWn3UrQT4ne326ZguM3
+- depth 7 (E44g session_01DgYSWpJKPpcZbLgpxa9tkM); per E #32 / E ROOT: the foreman opens the successor (not me).
+- NEXT: (1) gates ALONE on dfda0723 (if my container's 04:00Z run did not report: rerun) — coop-famops-unit (40/40 now), coop-b1 (step 9 «week merged» is a LIVE flake), role-parity ×2, `node dev/tools/quickcheck.js` (+ old save), coop-e2e fold-host + COOP_SWAP. (2) 76 wk LOST_DBG=1 SEED=9001 ×2 + COOP_SWAP=1 on dfda0723 with the traced scan (below), ≤3 parallel, never rebuild index.html meanwhile. (3) SSK dfda0723 (or newer) to the foreman with the table above + scan rows. -pv stays frozen for E51r; whichever lands second re-merges (jcoopworld.js: famSame vs f7Snap/npcToFriend do not touch the same lines).
+- Traced scan (NOT committed; recreate): -pv's dev/test/coop-lost-scan.js + (a) host «items» in COOP.send / D.resTo traces (itOf), her received «items» in __rcv, (b) per seat Q watch: a dialog holding a piece leaving Q → mine/box/NOWHERE + chosen option, scan's own Q drops as SCANDROP (ui / cap8 / unstick), gq in tA/tB, (c) ilSent stack hook into __gst ('SENT'). My copy: /home/user/wt/scan-g.js (dies with my container).
+- Stalls: 9001 runs on this world stall a lot (Chờ hảo hữu… / empty «Đồ thất lạc» dialog on the guest); a full 76 wk took 1.2–2.5 h, the killed ones were ~2.5 h at w47.
