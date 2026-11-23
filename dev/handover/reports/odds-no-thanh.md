@@ -19,3 +19,11 @@ No «chắc chắn» / number remained in the odds family; the no-roll «Rất v
 
 ## Tests
 balance-core 0 FAIL; odds-unknown-scan unchanged; old-save 16/16; odds-one-row (iPad) PASS + 7-band/alias gate; LOOKED at the iPad popover (all 7 rows one line, no «thành»).
+
+## REVIEW (reviewer-lander) — PASS — review/odds-no-thanh-r @ bf75a0a3b16b35e63c1f6bf252b1a2c9e5fcb27b
+PRIORITY #1 CHECK: OD 23/11 ~21:36Z/~21:40Z | main c39e5009 (KIT_ODDS j0, kit-odds-row landed) | review/kit-odds-row-r 1a94dca1 (in main) | claim W2.
+- Merge: a234c91d + origin/main c39e5009; only index.html/sw.js conflicted (build outputs) → rebuilt via assemble.py + build_site.sh, source merged clean. No rule/number change.
+- Own family scan (j*.js, KIT.md): no ladder meaning contains «thành», «chắc chắn», «bậc n/7», numbers or %. Remaining «thành» hits are result labels («thành: <được>»), SHIFT lines («dễ/khó thành hơn»: quẻ, nghệ, glossary, mưu, jdh) — allowed.
+- Notes (not blockers, outside the ladder): jrd_td.js:526 option hint wx «dễ thành» (plot choice, not a ladder word); jtut.js:258 «việc chắc thì không ghi» (describes a no-roll act); j67.js:1397 «chắc chắn hơn» (comparative). MAIN may decide.
+- Gates: balance-core 0 FAIL, page errors 0; odds-one-row 755x1000 / 1180x820 / 390x844 PASS; odds-words, odds-scales-scan OK; odds-unknown-scan unchanged. Old-save (oldsave-r1 etc.) not rerun beyond W2's 16/16 — merge touched only ky-keeper-f2 + builds.
+- LOOKED at popover shots Fold 755x1000 and iPad 1180x820: 7 rows, one line each, meanings: rất vững vàng, ít khi hỏng / thường ổn, ít khi hỏng / hơi nghiêng về ổn / hên xui, tùy duyên / hơi nghiêng về hỏng / dễ hỏng hơn là ổn / rất dễ hỏng. No promise.
