@@ -1,7 +1,7 @@
 # typed-stat-bal — law 4 typed «stat ±N» family (Foreman D, order MAIN 110 20:33Z 23/11)
 PRIORITY #1 CHECK ('scan-typed-stat|typed stat'): OD 0 | ledger 0 | claims 1 (this job, D 20:50Z) | main 0 | review/* review/j51-heir-danh-rv (scan-typed-stat-text.py, taken) | archive 0. Reused: j1 sgRule/sgRuleArr/sgRuleObj tokens, jbal balSg/balAb, BAL.eff.* (jbaleff), one-core-text guard.
 
-Branch review/typed-stat-bal, base LIVE origin/main 225c5c08. Worker session_01964izBsY2xJwtJ9Zr9pzuF (opus) + 3 in-session helpers (groups A/B/C, separate worktrees, merged here).
+Branch review/typed-stat-bal, base LIVE origin/main 225c5c08, merged LIVE 72521d62 (= 948c80a5 + odds-ladder-words). Worker session_01964izBsY2xJwtJ9Zr9pzuF (opus) + 3 in-session helpers (groups A/B/C, separate worktrees, merged here).
 
 ## What
 Every player text that TYPED «stat ±N» while its rule code typed the same number now prints ONE BAL value, and the rule reads that value. No applied value changed.
@@ -38,6 +38,12 @@ one-core-bind binds a BAL.eff key to the option that shows it. 23 amounts are ap
 - A.artTab: teacher fee is random per load (Bạc -3/-4), same on LIVE vs LIVE.
 - C.kitPgEvOpts (kit sample page): the demo now prints the real j8/j4 option values (Danh +3→+5, Sủng -4→-3, Danh +10→+5).
 
+## Law 3 fix (MAIN 111 21:33Z ruling, numbers ours) — the ONE intended value change
+| card | before | after |
+|---|---|---|
+| j68f:115 poisonedFish «Thay hết nước, đồ ăn» | c {Bạc -10, Sức -2} · w {Sức +2} → Sức cancels, pure cost | c {Bạc -10} · w {Sức +2} (BAL.eff.j68f.fishSwapBac / fishSwapSuc) |
+Family scan NEW dev/test/c6-cancel-scan.js (every c6 card: cost and win of the same stat that cancel or do not beat the cost): whole game 1 → 0; run in core gate G1 (coregates.sh).
+
 ## Gates
 - typed-stat-text 0 typed (7 allowed) · one-core-text PASS · one-core-text-rule PASS · law4-typed 0 · one-core-guard PASS (inline numbers 3521 → 3134, baseline 3592, 0 fails, no key set twice).
 - quickcheck: see last line below.
@@ -48,6 +54,6 @@ one-core-bind binds a BAL.eff key to the option that shows it. 23 amounts are ap
 3. j71.js:394 «hạng nhì hoặc ba: Danh +1 và quà nhỏ»: fxFin7 gives +1 only when she played the minigame; no «quà nhỏ» is given anywhere.
 4. jkitpage.js:159 (kit demo) «Danh +2» vs fx {danh:1}.
 5. «Học với Thái hậu … Thái hậu +3» (j23:31, j85:194): text + lessonMode th:3 both typed; «Thái hậu» is not in the stat-word family → next family (relation words).
-6. Robot case «Thay hết nước, đồ ăn» (j68f:115): text is built from the card's own data (tốn Bạc -10, Sức -2 · thành Sức +2), «Sức +6» not reproducible statically → repro save needed. Sức cost and gain cancel (law 3 question).
+6. Robot case «Thay hết nước, đồ ăn» (j68f:115): text is built from the card's own data; «Sức +6» not reproducible statically → repro save needed. Law 3 part FIXED (above).
 7. j8:517 Ân xá fallback apply({duc:2}) still typed (live path reads BAL.ag.hh.pardonDuc); j24 apHost duc:2 typed in the rule table (text prints the table) — next family.
 Not in this family, still typed (for a later job): durations «trong 3 tháng» (dress until+3), «2 tháng» (agiao fert), relation words «Thái hậu +N / thiện cảm +N» outside BAL.eff, J71.cost / ORD70.theodoi.bac module constants (text and rule share them, not BAL).
