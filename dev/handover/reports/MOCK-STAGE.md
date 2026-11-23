@@ -1,3 +1,22 @@
+# MOCK-STAGE v2 — DONE (KIT KEEPER #11 · session_01Rc5AsMtL55o1wM5pU2K9t2 · for MAIN 110) — 23/11 ~20:10Z
+START_CTX ~4 % (own estimate of a 1M window; get_session reads 0). Finished well under +25 %: no successor needed.
+PRIORITY #1 CHECK: OD 23/11 17:03Z/17:07Z/17:08Z (verbatim, read) | main none (mockup only; base build = local main f7016b8d as v1) | review/mock-stage @2124c0e6 → now @17bcf6ac | claims: #10 row handed over, #11 row by MAIN.
+PAGE (re-uploaded, verified by fetch: 200 text/html, 14 <video>, 50 jpg + 14 mp4 all 200, no M1/M2 left): https://ctm-img.victoria-tntt.workers.dev/img/_review/mock-stage.html
+Sections: Q (stills kept) · "Khung sự kiện gộp (M1 + M2 làm một)" · Phòng trang điểm (M3 stills re-shot with the bars un-veiled for the new frames + one flow video).
+## Merged event layout (owner 17:08Z) — recommend **B**
+One layout for every event: messenger figure (left) + story box attached to her (kit .dlg frame, kit .kph header = speaker name, tail pointing at her); HER figure figFor(S) (right) + choice box attached to her (the game's real option cards). Both cut out on the blurred stage between the bars (bars bright + live); day = -sang picture, night = -toi picture + deeper veil. No messenger → her figure alone with one box (story + choices).
+- A: box beside the speaker. Fold: two rows, half body (messenger top-left / story right; her bottom-right / choices left). iPad: both full body at the two ends, story top-centre, choices bottom-centre.
+- **B: box directly under the speaker's face, two columns (Fold half body; iPad full-height figures behind).** Faces always visible, obvious who says what; Fold columns still fit long text + cards (scroll when long). Solo = her face centre, one wide box below.
+Videos (each ~6–8 s, Fold 755x1000 + iPad 1180x820): A day, A night, A solo; B day, B night, B solo night — open (layer fade, figures slide in from their sides, boxes pop) → story scrolls when long → a choice is tapped (gold ring + highlight) → close. Frames extracted and looked at.
+NEW kit parts this needs if chosen: speech-box tail (L/R/up) on the kit dialog frame; cut-figure window part (crop to half body by device); stage event layer (kitFocus §92 base) routed from showModal for person events with the bars un-veiled; night veil knob. Small known mock flaw: the stage's round portrait bubble shows through over the messenger in some shots (stage element above the layer) — a real build puts the layer above it.
+## M3 flow video
+Tap Trang điểm → zoom into the room (0.75 s) → gold outlines (pulse, always on) → mirror «Thay xiêm y» → wardrobe: 3 taps, figure cross-fades trung y ↔ robe → Quay lại → table «Điểm trang» → the real makeup canvas over the blurred room (figure gets the makeup layer) → Quay lại → «Đã chỉnh tề» → outlines fade, she walks to the middle → zoom back to the stage. ~20 s each device.
+## Scripts (review/mock-stage @17bcf6ac, never land)
+dev/mock-stage/boot.js now serves the main checkout via Playwright route (no local http server needed; MKROOT env), m12.js (merged layout stills + videos), m3v.js (M3 video), cut.js (magenta marker frame before each clip → exact ffmpeg cut), page2.py (page). cdn_sync "html" type added locally only (as v1).
+Wipe after her verdict: `python3 dev/site/cdn_sync.py --wipe-review mock-stage` + delete img/_review/mock-stage.html.
+
+---
+# (v1 below, KIT KEEPER #10)
 # MOCK-STAGE — mockups: event full-stage (M1), dialogue (M2), toilette room hub (M3) + fact Q
 KIT KEEPER #10 · session_01Rc5AsM54hdwtHZ3MKWwEdH · for MAIN 109 · MOCKUPS ONLY (no game build, nothing to land)
 START_CTX ~3 % (own estimate; get_session reads 0). Finished near the +25 % line: successor not needed (task done).
