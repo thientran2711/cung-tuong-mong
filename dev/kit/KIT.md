@@ -143,7 +143,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | piece | function / class | rules |
 |---|---|---|
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
-| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Mong manh/Hiểm/Khó lường/Tùy duyên/Có cơ/Vững/Rất vững; never %, never "Chắc chắn"; ODDS CAP (owner 17/11): a formerly-sure CHANCE act shows the cap word `capW()` (= word(BAL.odds.hi), Nắm chắc) and fails softly through the ONE kit path `oddsSoft` (j63; hint `kitSoftW` / `kitCapLine`, button gate `capAt(khắc,cost)`); pure bookkeeping (walking, fixed price, opening a panel, a decision) shows no word and never rolls |
+| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Mong manh/Hiểm/Khó lường/Tùy duyên/Có cơ/Vững/Rất vững; never %, never "Chắc chắn"; ODDS CAP (owner 17/11): a formerly-sure CHANCE act shows the cap word `capW()` (= word(BAL.odds.hi), Rất vững) and fails softly through the ONE kit path `oddsSoft` (j63; hint `kitSoftW` / `kitCapLine`, button gate `capAt(khắc,cost)`); pure bookkeeping (walking, fixed price, opening a panel, a decision) shows no word and never rolls |
 | any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
 | act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Cần / Tốn / Được / Mất / Kèm / Ghi chú |
 | option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
