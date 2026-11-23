@@ -16,3 +16,4 @@ Helpers: /home/user/wt/land1.sh (sland + coop-e2e, no push) + push1.sh (FF-check
 - 23/11 ~10:00Z LANDED outing-art e6894660 (b2f84cd0 self-merged on e9c0a43d; outing-art.js ALL OK; QUICKCHECK PASS 649 s; coop-e2e 141/141). LIVE = e6894660. Queue empty.
 - 23/11 ~11:50Z LANDED outing-art2 78324353 (FF on e6894660; outing-art.js ALL OK; QUICKCHECK PASS 700 s; coop-e2e 141/141). LIVE = 78324353. Queue empty.
 - 23/11 ~13:00Z LANDED kit-mgbg 9f9d318c (FF on 78324353; ag-mgcal ok; QUICKCHECK PASS 700 s; coop-e2e 141/141). LIVE = 9f9d318c. Queue empty.
+- 23/11 ~13:55Z LANDED coop-famops-t1 (N12) 2ba6c64e (e74b0808 self-merged on 9f9d318c, no source conflict; coop-famops-unit 46/46 (run with url http://ctm.local/index.html — default 127.0.0.1:8744 needs a server); QUICKCHECK PASS 634 s; coop-e2e 141/141). LIVE = 2ba6c64e. Queue empty.
