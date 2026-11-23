@@ -148,7 +148,8 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);
  for(const [k,m,s] of errs)bug('js',k+': '+m.split('\n')[0].slice(0,200),s,{save:st.r.lastSave});
  for(const d of DEV)for(const m of ui[d].__errs)bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');
- }catch(e){bug('harness','runner error: '+String(e.message).split('\n')[0],String(e.stack).slice(0,400))}
+ }catch(e){const m=String(e.message).split('\n')[0];/* a tab that dies mid-life (Target crashed: renderer out of memory) is a game finding (memory growth over a long life), not a runner fault */
+  if(/Target crashed|Page crashed/i.test(m))bug('crash','browser tab crashed mid-life (renderer out of memory?)','after '+Math.round((Date.now()-t0)/1e3)+' s of play');else bug('harness','runner error: '+m,String(e.stack).slice(0,400))}
  finally{await b.close().catch(()=>{})}
  R.bugs=[...bugs.values()];R.t.total=Date.now()-t0;return R}
 
