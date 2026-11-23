@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK ('Sang ngày mới|soft-lock|softlock|nfX|nfch'): OD 3 | ledger 0 | claims 1 (this job, session_01964izCj26a6VP5u2Sr3qT5) | main: jnf.js night-flip choice (S.nfX state machine), jsmg.js steal game (render guard for st "mg" after reload already on LIVE, jsmg.js:134 — reused, not rebuilt) | review/* none.
 
-SẴN SÀNG KIỂM review/fix-evening-softlock 2f3474d8f2e196816fe9ed8a34f1f508bc14d791
+SẴN SÀNG KIỂM review/fix-evening-softlock f3d427a103781500fcb47f1c83fe4f9a88fc130a
 
 Base: LIVE origin/main 225c5c08. Size: BIG-by-script (time/buổi core), code change small: dev/build/jnf.js (+heal), dev/build/jsmg.js (+stealMgBusy), dev/test/night-softlock.js (new), dev/measure/scan-dayturn-holds.py + scan-pid-nopend.py (family scans), index.html + sw.js (build). Gates below ran on 3f5b3ebb; the two later commits add only the scan scripts.
 
@@ -48,3 +48,6 @@ fcfcd9d3 = 8350d536 + merge of LIVE 72521d62 (only index.html/sw.js conflicted �
 
 ## Robot's sharper case (Foreman D 21:15Z / 21:22Z): load while the flip card is queued, FLIPQ identity lost
 2f3474d8 = fcfcd9d3 + test case 1c only (no game code change). Case 1c builds the exact saved state: flip done (nfF), S.nfX {st:"wait"}, the flip's notice card in Q, then save→reload→«Sang ngày mới» ×12. Result: PASS on this branch AND on LIVE — the "wait" state alone does not lock: FLIPQ is a fresh WeakSet after deser, so the loaded card no longer holds step(); the card shows (Q blocks the press until answered), then step → openChoice → the choice card. The lock the robot hit is the NEXT state: once the choice is open (S.nfX {st:"open",dlg:1}), its card (pid nfch, no PEND builder) is the one lost on reload → cases 1/2/6/7, red on LIVE, green here via heal(). So yes, heal() covers the robot's path end to end (case 7 = save→reload at every tối press over 20 days). night-softlock now 10/10 PASS.
+
+## The robot's own save (dev/handover/robot/saves/proof-save-001-softlock-after-load.json)
+f3d427a1 = 2f3474d8 + dev/test/robot-save-replay.js only. The save holds exactly the predicted state: S.nfX {st:"open",role:"def",dlg:1}, P [nfch]. Loaded through a REAL page reload (title «Tiếp tục»): LIVE → 12 presses, day not turned, nfX unchanged (exit 1); this branch → day turned at press 2, nfX done (exit 0). `node dev/test/robot-save-replay.js <url> <save> A`.

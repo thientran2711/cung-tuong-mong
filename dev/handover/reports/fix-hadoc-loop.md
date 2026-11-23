@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK ('Hạ độc|ha_doc|hadoc|roadpick|j70start'): OD 4 | claims 1 (this job, session_01964izCj26a6VP5u2Sr3qT5) | main: j70.js «Bày mưu» plan card (PEND.j70start), jtamco.js road card (PEND.roadpick, ECONOMY §5) — reused, not rebuilt | review/* none.
 
-SẴN SÀNG KIỂM review/fix-hadoc-loop 5ecfce53b3ce6aff5d15f417afc2e256a8ca9800
+SẴN SÀNG KIỂM review/fix-hadoc-loop 2a8553dcf433b7ccb9aca80da77e1185100a93a4
 
 Base: LIVE origin/main 225c5c08 (separate from review/fix-evening-softlock; no shared file). SMALL code change: dev/build/j70.js (+j70Wants), dev/build/jtamco.js (+3 lines), dev/test/hadoc-loop.js (new), dev/measure/scan-act-intercepts.py (new), index.html + sw.js (build). No rule, number, wording or UI changed.
 
@@ -44,3 +44,6 @@ SAVE-B (nc / nc_su / speed bot, seed 1086252990) was not forwarded yet; the loop
 
 ## Merge with new LIVE 72521d62 (23/11 ~22:10Z)
 5ecfce53 = a8004db6 + merge of LIVE 72521d62 (only index.html/sw.js conflicted → rebuilt; no source overlap). LIVE is ancestor (clean FF). Re-run on 5ecfce53: hadoc-loop ALL PASS; QUICKCHECK PASS (core gates PASS, old save ok, perf render 177/196 ms, buổi 924/1088 ms).
+
+## The robot's own save (dev/handover/robot/saves/save-B-hadoc-loop.json)
+2a8553dc = 5ecfce53 + dev/test/robot-save-replay.js only. The save is from AFTER the loop (she was confined later for «vu oan» and holds 5 bạc), so the replay lifts the confinement and gives bạc (test only; the routing is what is checked). Real page reload, «Hạ độc» on Đoan Mộc Hàm Hương → «Ra tay ngay» → «Làm như thường»: LIVE → Bày mưu ×4 + road card ×4 in 8 taps, 0 khắc (loop, exit 1); this branch → Bày mưu ×1 + road card ×1, the act runs, 2 khắc spent (exit 0). `node dev/test/robot-save-replay.js <url> <save> B`.
