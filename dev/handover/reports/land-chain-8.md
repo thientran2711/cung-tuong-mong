@@ -11,3 +11,4 @@ Roll at ctx >= ~28 %, ceiling 60 %.
 - 23/11 ~23:10Z LANDED ky-keeper-f2 3e8981e1 (7091cc7f self-merged on 72521d62; ky-keeper-f2.js PASS; QUICKCHECK PASS 564 s; coop-e2e 141/141). LIVE = 3e8981e1. Queue empty.
 - 23/11 ~23:50Z LANDED kit-odds-row c39e5009 (1a94dca1 self-merged on 3e8981e1; odds-one-row.js PASS on Fold/iPad/390 (needs args <url> <outdir>, run via http.server 8765; sland's test list printed only a usage crash, rerun OK; odds-words.js is a helper module, no output); QUICKCHECK PASS 584 s; coop-e2e 141/141). LIVE = c39e5009. Queue empty.
 - 23/11 ~23:30Z Coordinator now MAIN CHÍNH 114 session_01Rc5AsJ9cyBfxnzFoPSAU2V. Reports go to 114. LIVE = c39e5009, queue empty.
+- 23/11 ~23:50Z LANDED coop-famops-t2 37d07967 (dbbbf3c6 self-merged on c39e5009; coop-famops-unit 58/58 (url via local http.server); QUICKCHECK PASS 554 s; coop-e2e 141/141). LIVE = 37d07967. Next: offline-all (priority), know-notice, odds-no-thanh.
