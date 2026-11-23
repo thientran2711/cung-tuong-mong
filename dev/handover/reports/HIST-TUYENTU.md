@@ -45,3 +45,41 @@ Owner symbols: the owner's word "ban hoa" is the scene's own symbol for the one 
 - "Ban hoa" unverified; "lật thẻ" (翻牌子) is the Emperor's nightly choice, NOT the selection — avoid confusing the two.
 - Selection happened at Thần Vũ môn/garden halls, not Thái Hòa điện. Girls did not shout; eunuch announced them. Rank "Đáp ứng/Thường tại/Quý nhân" per game RANKS only.
 - Stars of drama (Ngụy Anh Lạc, Chân Hoàn) are fiction; real records name ranks by Nội vụ phủ ("theo thế gia").
+
+## 7. Waiting-yard drama seeds (MAIN 112 ADDENDUM 4; owner OD 23/11 ~22:20Z)
+PRIORITY #1 CHECK: OD 23/11 ~22:20Z + brief M112 ADD.4/5 | main: nết pools BAL.net F/M (jbal2.js:923), traits j1.js:45, netOf/netIs jnet.js, j61 npcKnows | review/* none | claims SELSCENE. Tags: [K] = real-history type of event from Qing records / secondary literature (no single quoted case, treat as plausible); [D] = palace drama; wording draft cổ trang for VANPHONG pass (no %, no modern words).
+Honesty note: no source gives a named real brawl in the waiting yard. Real records show the *pressures* (banner pride, concealed age/defect, bribes to eunuch/ma ma, poor girls in borrowed clothes); the scenes below turn these into dramatic form.
+
+### 7.0 Shared tables (use for every seed)
+Our nết groups (female pool): Tính tình = Ân cần, Lạnh lùng, Nóng nảy, Điềm tĩnh, Nhiều chuyện, Kín đáo, Kiêu ngạo, Khiêm nhường · Lòng dạ = Thật thà, Xảo quyệt, Thanh liêm, Ham lợi, Rộng lượng, Thù dai, Trọng nghĩa, Thực dụng · Chí hướng = Tham vọng, An phận, Ham học, Ham vui, Mê tín, Thực tế, Vì gia tộc, Vì mình.
+**Role fit** (pick by nết, not by rank alone): Bully ← Kiêu ngạo / Nóng nảy + (Thù dai, Ham lợi, Xảo quyệt) + (Tham vọng, Vì gia tộc, Vì mình). Victim ← Khiêm nhường / Kín đáo / An phận + (Thật thà, Thanh liêm) or a low-birth girl; a Kiêu ngạo victim makes a "pride clash" variant. Instigator (whispers, steals, bribes) ← Nhiều chuyện / Xảo quyệt / Ham lợi / Thực dụng.
+**Bystander by nết** (fixed default; thiện cảm to victim/bully or banner shifts it up one step; rank above bully makes "defend" harder, not impossible):
+| Nết | Acts |
+|---|---|
+| Ân cần, Trọng nghĩa, Rộng lượng, Thanh liêm | defend victim (Thanh liêm: speaks of the rule) |
+| Nóng nảy | defend or join, whichever side she likes more |
+| Nhiều chuyện | fetch ma ma / spread it (bring the drama to the royals' ears) |
+| Điềm tĩnh | mediate softly, or stay silent if bully is above her |
+| Kín đáo, An phận, Khiêm nhường | stay silent, eyes down; afterwards a small quiet kindness |
+| Kiêu ngạo, Xảo quyệt, Thù dai, Vì mình, Tham vọng | join the bully (stronger if bully's banner/rank is higher) |
+| Lạnh lùng | watch, no act; remembers who acted |
+Four **player stances** (equal weight, Law 2/3; every cell has a gain and a cost, written once below as G/L and re-used with seed-specific nouns): **Bênh** (defend) = G victim's thiện cảm + "nghĩa" mark / L bully's grudge, risk of being noticed by ma ma as brawler. **Hùa** (join) = G bully's thiện cảm, safe from her / L victim's grudge, loss of face if the royals hear. **Hoà giải** (mediate) = G both lessen, calm name with ma ma / L takes time (the countdown) and neither fully thanks her. **Đứng ngoài** (stay out) = G keeps the clock for chatting with other girls, nobody marks her / L those two both think her cold; the victim may be the girl who would have been a friend. Deltas come from BAL (never typed here). Two-way (Law 1): any of the four can be done *to her* by the same roles; seed the player as victim in some lives.
+**Ma ma close**: after the round the ma ma (narrator) speaks 1–2 lines about what she saw, naming no outcome in numbers.
+
+### 7.1–7.12 Seeds
+| # | Trigger | Bully / Victim / Others | Notes + ma ma closing line (draft) |
+|---|---|---|---|
+|1| **Chén trà đổ lên xiêm y** (a eunuch pours water; a girl "slips") [D: Như Ý/Diên Hi household spite; K: borrowed clothes] | Kiêu ngạo+Thù dai bully / Khiêm nhường victim / Nhiều chuyện fetches ma ma | Dress ruined 20 s before the royals; the victim must go on stained. Ma ma: "Xiêm áo có thể thay, lòng người một lần dơ khó rửa." |
+|2| **Cây trâm bị mất** (a hairpin the victim borrowed from her mother) [D: Chân Hoàn-type theft] | Ham lợi+Xảo quyệt / Thật thà / Điềm tĩnh | Trâm found in the bully's sleeve if someone checks (Law 6c: the pin exists, it was taken; traceable). Ma ma: "Của đã mất, tìm được hay không, trời cho nhìn rõ ai." |
+|3| **Chê xuất thân thấp** (a Bao-y / minor-official girl mocked by a great-banner girl) [K: banner/Bao-y class divide; D: An Lăng Dung] | Kiêu ngạo+Vì gia tộc / low-birth victim (Khiêm nhường / Vì mình) / Trọng nghĩa defends | Strongest seed for "known by face, name by nết". Ma ma: "Thứ bậc do cha mẹ cho, đức hạnh là ta tự lập." |
+|4| **Tát tai** (a slap over a thin voice / a sharp tongue) [D per MAIN: Hạ Đông Xuân slaps An Lăng Dung, Chân Hoàn truyện] | Nóng nảy+Kiêu ngạo bully / Kín đáo victim / Nhiều chuyện, Lạnh lùng | Violence in the yard is a rule break: ma ma may mark both girls. Ma ma: "Chốn này không cho động tay; ai đánh, ai nhịn, ta đều nhớ." |
+|5| **Hối lộ thái giám** (a girl pays the eunuch to be put in front of the Emperor's sight / to hide her age) [K: eunuch and ma ma bribery reported; also false-age concealment] | Ham lợi+Tham vọng / honest Thanh liêm or Thật thà witness / Nhiều chuyện | Player can *see* the bribe (real object, Law 6c). Ma ma: "Bạc mua được chỗ đứng, không mua được cái nhìn của bề trên." |
+|6| **Giấu tuổi / giấu tật** (a girl hides a limp, scar or age; another sees) [K: ill/disabled girls were excused only through certification; concealment is an offence] | Xảo quyệt, Vì gia tộc (the concealer) / Thanh liêm witness / any | No one is "bully", the dilemma is report vs shield. Ma ma: "Khuyết điểm có thể giấu một buổi, giấu không nổi một đời." |
+|7| **Tranh chỗ đứng** (who stands in front, first-row; banner order) [K: banner/father's rank ordering] | Kiêu ngạo+Tham vọng / Điềm tĩnh victim / Nhiều chuyện | Social, not violent: lets Điềm tĩnh/mediate shine. Ma ma: "Đứng trước hay sau, bề trên đều thấy cả." |
+|8| **Cố ý làm xấu để khỏi vào cung** (a girl smears her face / blackens teeth so she is "撂牌子") [K/D: folk anecdote of girls avoiding the palace] | Reluctant girl (Vì mình / An phận, Ham vui) / Vì gia tộc sister forces her / bystanders | Player may help her escape or shame her. Ma ma: "Muốn đi hay muốn ở là tâm người; mặt chỉ là cái cớ." |
+|9| **Khoe của, khoe thơ** (a girl boasts her jewelry/family; another is humiliated by comparison) [D: Diên Hi, Chân Hoàn] | Kiêu ngạo+Ham vui / Khiêm nhường / Thực tế (cool onlooker) | Light, funny variant for low-conflict lives. Ma ma: "Vàng ngọc trên người, chẳng bằng nét mặt khi gặp việc." |
+|10| **Nói xấu sau lưng** (a whisper that a girl's father was dismissed / mother is a concubine) [K: pre-selection scandal; D: Như Ý] | Nhiều chuyện+Thù dai (instigator) / Kín đáo victim / Ân cần comforts | Rumour is evidence-less (Law 6a: she can be framed). Ma ma: "Lời đồn gió thổi, ai tin ai nghe đều tự chịu." |
+|11| **Xô vào nhau, ngã** (crowding on the steps; a girl is pushed, her gown tears) [D: Diên Hi action scene] | Nóng nảy pusher (maybe accidental) / Thật thà victim / Rộng lượng helps | Ambiguous intent: stance of *Hoà giải* has bite. Ma ma: "Vô ý cũng là lỗi, cố ý lại là tội." |
+|12| **Thù cũ giữa hai kỳ** (two clans' girls with a family feud; one insults the other's banner) [K: banner rivalries; D: Như Ý/Diên Hi family politics] | Vì gia tộc+Thù dai on both sides / Điềm tĩnh mediator / others side by banner | Both are bully and victim; player's banner decides who counts as "her side". Ma ma: "Thù nhà không nên mang vào chỗ này." |
+Seed generator rule: pick the seed by the life seed; then fill roles from real tú nữ of this life by nết + thiện cảm (Role fit, 7.0); if no girl fits well, a seed with a lower fit bar is picked (e.g. 9, 7, 11) instead of forcing a bully. Seeds 1, 3, 4, 10 have *her* as the victim in some lives (two-way).
+Pitfalls: no one dies or is permanently hurt in the yard; slaps and torn dresses only (palace discipline). Girls speak low; eunuchs and ma ma stand near, so a loud brawl would be stopped fast. Avoid Han-Chinese footbinding references (Manchu banner girls did not bind). Avoid naming real historical persons as bully/victim.
