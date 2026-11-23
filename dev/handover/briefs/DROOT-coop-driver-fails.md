@@ -1,0 +1,18 @@
+# D ROOT — coop-driver-fails (opus, report-first; BIG co-op review if any game code changes)
+PRIORITY #1 CHECK ('coop-thin|coop-flake|driver fail'): OD 3 | ledger 5 | claims 8 | main 15 | review/* 10 | archive 0 — sources: reports/coop-real-port.md L23/L37 (9 pre-existing LIVE driver fails), FOREMAN_D_STATUS 22/11 23:12Z (coop-flakes rv follow-ups), reports/coop-thin-g.md L705/L723 (B's F1 #10 marks thin-d / thin-f1 / rkOfFace «FOR MAIN», not fixed by B). ORDER: MAIN 109 23/11 05:45Z (one job).
+
+READ FIRST, in full: dev/rules/START_CORE.md + dev/rules/START_WORKER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w), then only the dev/rules/topic files your task touches. All 18 laws apply verbatim (law 1 two-way, law 4 one core BAL, law 6 real people/objects, law 11 fix the whole group).
+
+BASE: LIVE origin/main 52ad65b3 (contains lib/coop-real.js + the 29 ported drivers). Branch review/coop-driver-fails.
+
+TASK — co-op test drivers that fail the SAME way on LIVE (not caused by recent branches). For EACH: run ≥3× on LIVE, decide REAL GAME BUG vs TEST FAULT with proof (log lines, file:line), then fix (test fault → fix the driver via lib/coop-real.js helpers, whole family scan; game bug → fix the game, whole family, scan + before/after table).
+Group A (reports/coop-real-port.md L23, counts r3/live2): b1 1/3 (step 8 flake), b2b5 6/7, cyc 12/12 (night / Kính sự phòng draws), p2 3/2, r2 18/16 (laydo / NPC takeaway steps), rev2 2/2.
+Group B (FOR MAIN from B's coop-thin-g report L705/L723): thin-d-probe 1/1 (P6 withSeat round trip), thin-d 8–9 (kit DOM-diff / kit-copy / invite reds), thin-f1 1/1 («F1 real tap under parallel time» doAct result card + rkOfFace raw {$r} page error).
+Group C (coop-flakes rv follow-ups, FOREMAN_D_STATUS 22/11 23:12Z): coop-pets set-up undone by the set-up merge (#4 shape); coop-guest-maid #6 host stall on dialog «Biếu quà làm lành», #7 rank 1→0 screen-only set-up; coop-guest-men «he is dead there too (relay)» flake + step-2 relay timeout.
+OVERLAP GUARD: Foreman B's worker (session_01N1tNP5QWB8tYRvFqUSnKVx) is on review/coop-thin-g-f1. Before touching any file, `git diff --name-only origin/main origin/review/coop-thin-g-f1`; do NOT edit files that branch changes — if your root fix needs one, stop and report to Foreman D (it coordinates with B). Also check origin/review/* for E's coop-famops-t1 (jcoopworld.js) the same way.
+Order: Group C + A first (co-op first), then B. If a root is a big design question, write it as a FOR MAIN question in your report; do not invent rules.
+
+GATES (one browser test at a time; memory tight): every fixed driver ≥3× clean; coop-e2e ×2, coop-guest-maid, coop-pets, coop-guest-men, coop-famops-unit, coop-setup-scan (risk 0), one-core-guard, role-parity, dev/test/quickcheck (old save, perf). Fold 755x1000 + iPad 1180x820 shots only if UI code changes.
+DELIVER: push review/coop-driver-fails only (never main, no PR). Report dev/handover/reports/coop-driver-fails.md on the handover branch (flock /home/user/wt/fetch.lock git fetch --depth=30; append; pull --rebase; push): table per driver (root, TEST/GAME, fix, runs before/after), last line «SẴN SÀNG KIỂM review/coop-driver-fails <full sha>». Then send_message Foreman D (newest PICKUP line in dev/handover/FOREMAN_D_STATUS.md; now session_01964izFdVYXDDw4FGSc4JLA).
+ROLLOVER: at START_CTX % + 25 % of the window (ceiling 60 %) write a handover in your report and tell Foreman D; the coordinator opens the successor. You may finish if only push + report remain.
+Work in a sparse worktree under /home/user/wt; fetch --depth=30 under flock /home/user/wt/fetch.lock; never full-clone.
