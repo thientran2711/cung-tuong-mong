@@ -1,0 +1,52 @@
+name: Perf budget (frame time, memory, bytes per scene)
+# OD:L719 budget rule 6 / GAP AP04: on every push to main and review/*, build the site and run the perf tests at
+# 755x1000 (Galaxy Z Fold inner, PRIMARY) and a mid-phone profile (Pixel landscape 915x412; the portrait phone shows the rotate prompt in host mode); any miss against
+# dev/test/perf-budget.json or dev/test/play-perf-budget.json fails the job. Numbers live ONLY in those two JSON files.
+on:
+  push:
+    branches: [main, "review/**"]
+    paths-ignore: ["**.md", "dev/handover/**", "dev/PROGRESS_*.md"]
+  workflow_dispatch:
+concurrency:
+  group: perf-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  perf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+      - name: Build the site (same script as release)
+        run: bash dev/site/build_site.sh
+      - name: Load + memory + bytes (perf.js; fold = 755x1000, pixelLand = mid phone)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
+        run: node dev/test/perf.js --devices fold,pixelLand --out perf-load.json | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Play time - tap latency, long tasks, fps, soak (play-perf.js)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
+        run: node dev/test/play-perf.js --devices fold,pixelLand --minutes 2 --out perf-play.json | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Frame time with weather FX on vs off (perf-fx-gate.js)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
+        run: |
+          node dev/test/perf-fx-gate.js --kind rain --vp 755x1000 --out fx-fold.json | tee -a "$GITHUB_STEP_SUMMARY"
+          node dev/test/perf-fx-gate.js --kind rain --vp 915x412 --out fx-pixel.json | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Keep the numbers
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-results
+          path: |
+            perf-load.json
+            perf-play.json
+            fx-fold.json
+            fx-pixel.json
+          if-no-files-found: ignore

@@ -43,7 +43,7 @@ function amJealP(o){const J=amD().jeal;return cl(J.b+((o&&o.malice)||40)/J.d,0,1
 function amJealN(o){return nv(o,"misJealTin")}/* the trust she loses: ONE table BAL.net.n.misJealTin (show-why) */
 function amJealD(o){if(!o||!roll(agCap(amJealP(o))))return 0;return amJealN(o)}
 /* ---------- 2 an NPC maid's deed ---------- */
-function amMaids(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
+function amMaids(){const L=[];const mine=typeof agMine==="function"&&agMine();for(const p of consorts()){if(!p||!p.staff||(mine&&p!==S))continue;/* coop-guest-agent r2: her own maids only on her seat */if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
 function amSeeking(s){return !!(s.seek&&s.seek.until>=(S.turn||0))}
 function amNeed(s){const G=BAL.ag.goal,W=BAL.ag.road.cn||BAL.ag.road._;return cl((G.sung-(s.sung||0))/G.sung,0,1)*W.sung}
 function amMW(s){try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}}
@@ -75,7 +75,12 @@ function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());co
    Returns loy (true = she stays her old master's friend). */
 function riseLoyal(m){return (m===S?S.tin:m&&m.loyal)||0}
 function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(loy0!=null?loy0:riseLoyal(m))>=B.riseLoy;const reg=amSung(m);
- n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
+ n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);
+ /* balance-2 fault 9 (night-balance-bundle), now in the ONE core: a maid's name among servants is not a consort's name — only BAL.danhG.srvRise of
+    the Danh she held AS A MAID carries over, then the rise gain D.danh. An NPC maid keeps no servant Danh (her staff record has none), so her new
+    consort record keeps its born Đáp ứng Danh; the player maid's servant Danh is S.danh (role-parity-bundle-fix: was a player-only step in j42 srvRise) */
+ const md=m===S?S.danh:m&&m.danh;if(md!=null)n.danh=Math.round((md||0)*BAL.danhG.srvRise);
+ if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
  if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
  return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
@@ -84,7 +89,9 @@ function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m)
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
  const loy=riseCore(n,m,o);rivals.push(n);
- try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
+ /* the Kính sự phòng book keeps her night on its REAL day (law 6a, one night a day): a favoured maid raised at the month served in her
+    favoured week (m.fav.w), not today — today's night belongs to whoever the flip gives it */
+ try{const nw=via==="fav"&&m.fav&&m.fav.w!=null?m.fav.w:wk();n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(nw);night(n)}catch(e){}
  AMN.rise++;if(via==="fav")AMN.favRise++;
  const how=via==="send"?"hầu thay":via==="fav"?"đã được sủng hạnh, nay hậu cung có chỗ":"được Hoàng thượng cho gọi đến hầu";
  return `Cung nữ ${m.name} của ${o?NM(o):"Nội vụ phủ"} ${how}, được phong ${RANKS[0].n} ${n.name}${loy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `}
@@ -133,17 +140,20 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
    return w.n==="me"?"Ngài cho gọi ngươi đến Dưỡng Hòa điện hầu.":`Ngài cho gọi ${w.n}, cung nữ cung ${w.of==="me"?"ngươi":w.of}, đến Dưỡng Hòa điện hầu.`}return wt0.apply(this,arguments)};
  const rt0=resolveTonight;resolveTonight=function(){const a=S&&S.amT,tn=S&&S.tonight;const r=rt0.apply(this,arguments);let x="";
   try{if(a){S.amT=null;const dw=wk()-a.w;if(!tn&&dw>=0&&dw<=1&&amOn()){const f=amFind(a.k);if(f&&f.m!==S&&f.o)x=amNight(f.m,f.o,"pick")}}}catch(e){console.error("jagmaid night",e)}return (r||"")+x};
- const rn0=rivalNight;rivalNight=function(v){const r=rn0.apply(this,arguments);let x="";try{x=amNightTea(v)}catch(e){}return (r||"")+x};
+ const rn0=rivalNight;rivalNight=function(v){const s0=AMN.send;const r=rn0.apply(this,arguments);let x="";try{if(AMN.send===s0)x=amNightTea(v)}catch(e){}return (r||"")+x};/* her maids' tea is for HER night: none when her maid served in her place */
  const rw0=rivalsTurn;rivalsTurn=function(){const r=rw0.apply(this,arguments);let x="";try{x=amWeek()}catch(e){}return (r||"")+x};
  /* rows 6, 7, 12: Tiến cử */
- const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;AMN.send++;amNightGain(m);
+ const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;
+  /* law 1: an NPC sends her maid BEFORE her night (j75 rivalNight → htCan), so she has no night record to give up — the book holds ONE night */
+  AMN.send++;amNightGain(m);
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
  /* the month: his regard fades (the player's: j42), a free seat goes to a favoured maid first */
- const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";if(!amOn())return r;try{const D=amD();
+ const amMonth=()=>{let r="";const D=amD();const mine=typeof agMine==="function"&&agMine();
    for(const [s] of amMaids())if(s.sung>0)s.sung=Math.max(0,s.sung-D.decay);
-   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");
-   for(const p of consorts())if(p&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav")}catch(e){console.error("jagmaid month",e)}return r};
+   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");/* her maid's rise on her seat = newRival → the guest→host request (jcoopask), as mlEye */
+   for(const p of consorts())if(p&&(!mine||p===S)&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav");return r};
+ const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{if(amOn())r+=amMonth();else if(typeof agMine==="function"&&agMine()&&typeof agSelf==="function"&&agSelf(S)&&BAL.ag.maid)r+=agSelfRun(()=>amOn()?amMonth():"")/* coop-guest-agent r2: her own maids' regard fades on her seat, once */}catch(e){console.error("jagmaid month",e)}return r};
  const sM0=srvMonth;srvMonth=function(){const r=sM0.apply(this,arguments);try{if(amOn()&&isSrv()&&!S.dead&&S.srv.fav&&!(S.srv.lau>0)&&roomFor("consort"))srvRise("Nội vụ phủ dâng tên cung nữ đã được sủng hạnh, Hoàng thượng phong")}catch(e){console.error(e)}return r};
 })();
 Object.assign(window,{amOn,amAlias,amTeaO,amTeaG,amJealD,amJealP,amWeek,amPool,amCh,amNight,amRise,amSendQ,amSendX,amMeNight,amDecide});

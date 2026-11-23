@@ -141,7 +141,7 @@ function nrMenMonth(news){const B=nrB();let n=news||0;
   /* fix (r1 finding 6, whole group): his help hồi decides THIS chapter — wait while the player works on it; an unshown request is withdrawn */
   if(N.hs===1&&e.a&&nrHoldM(x=>nrSameA(x,e.a[0],e.a[1])))continue;
   const r=nrMenPlay(e);if(!r)continue;
-  const line=`<span class="past">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  const line=`<span class="past nochip">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
  return n}
 /* the voice of a man in the help hồi (VANPHONG §2): eunuchs nô tài, a Vương gia bản vương, other men and officials thần */

@@ -222,16 +222,17 @@ window.hdFaceLayer=hdFaceLayer;window.HD_FL=HD_FL;window.hdVung=hdVung;
 /* ---------- Thử tay / mini-game kind: the same board on her own face ---------- */
 function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";let por={src:""};try{por=toilPor()}catch(e){}
  const file=String(por.src||"").split("?")[0].split("/").pop();const G=toilGeom(W,H,por.src);const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;
- const k="hoadien_bac";let run=null,stop=false,raf=0;const t0=performance.now();
+ const k="hoadien_bac";let run=null,stop=false,raf=0,moved=0;const t0=performance.now();
  function paint(gg){gg.fillStyle="#efe0c6";gg.fillRect(0,0,W,H);const bg=kg82Img("chai-bg");if(bg.complete&&bg.naturalWidth)gg.drawImage(bg,G.bg.x,G.bg.y,G.bg.s,G.bg.s);
   gg.save();gg.beginPath();gg.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);gg.clip();gg.fillStyle="#d9c7a3";gg.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);
   if(face.complete&&face.naturalWidth)gg.drawImage(face,G.img.x,G.img.y,G.img.w,G.img.h);gg.restore();
-  }/* mg-play2: no words in play (the face guides; rules screen holds the how) */
+  kg82Guide(gg,moved?"Thả vào giữa hai đầu mày, rồi bấm ✓ Dán":"Kéo hoa điền vào giữa hai đầu mày",W/2,16,moved?"go":"wait",13,W-16);/* owner 21/11 ~00:50Z: one guiding line (mg-5s-clear); clarity only, the board is unchanged */
+  }
  /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
  function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||(typeof HD_ANC!=="undefined"&&HD_ANC[file])||now-t0>BAL.toil.meshWait){/* rv mg-play2: a spot-table row = no wait for the face-points file */let sk=0;try{sk=toilSkill().sk}catch(e){}
-   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.hud({score:mgLive(env,Math.round(q*100)/10)});/* review/mg-score-same: one placement, its mark on the board = the mark given */env.end(Math.round(q*100)/10)}}});return}
+   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:(q,info)=>{if(!stop){stop=true;{const dx=info&&info.dx||0,dy=info&&info.dy||0;KG82.why=q>=BAL.hd.pop[0]?"Hoa điền đặt đúng giữa hai đầu mày":`Hoa điền đặt lệch ${Math.abs(dx)>=Math.abs(dy)?(dx>0?"sang phải":"sang trái"):(dy>0?"xuống thấp":"lên cao")} so với giữa hai đầu mày`}env.hud({score:mgLive(env,Math.round(q*100)/10)});/* review/mg-score-same: one placement, its mark on the board = the mark given */env.end(Math.round(q*100)/10)}}});{const ok=$("hdok");if(ok){ok.innerHTML="✓ Dán";ok.dataset.kgkeep=1}}/* labelled button (mg-5s-clear) */return}
   paint(g);raf=requestAnimationFrame(wait)}
- raf=requestAnimationFrame(wait);
+ raf=requestAnimationFrame(wait);C.cv.addEventListener("pointerdown",()=>{moved=1});
  return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
 try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền đặt vào giữa hai đầu mày rồi bấm Dán. Không có dấu chỉ chỗ: nhìn đôi mày mà đặt. Không tính giờ: đặt càng khớp càng được phần."};
  KG82_SPR.hoadien=["chai-bg"]}catch(e){console.error("hd kind",e)}

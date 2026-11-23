@@ -55,10 +55,10 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
    const t=spyTarget();S.dsn={};const lr=Math.random;Math.random=()=>.001;let r;try{r=spyMaidRun(t)}catch(e){r=String(e)}Math.random=lr;ok("8d maid dò la (success) → her dress seen",!!S.dsn[wdKey(t)],[r,Object.keys(S.dsn)])}
   /* 9. wear row: 7 cells; marks/Xa xỉ only when seen */
   {plain(v);const k=over(v);delete S.dsn[wdKey(v)];const d=document.createElement('div');d.innerHTML=kitWearSlots(v,{size:"sm"});
-   const c=d.querySelectorAll('.kitem').length;ok("9a 7 cells",c===7,c);ok("9b unseen: no Vượt phẩm mark, no Xa xỉ label",!/Vượt phẩm/.test(d.textContent)&&!/Xa xỉ \d+ \//.test(d.textContent),d.textContent.slice(0,200));
+   const c=d.querySelectorAll('.kitem').length;ok("9a 9 cells (8 wear slots + pet, GAP IT03)",c===9,c);ok("9b unseen: no Vượt phẩm mark, no Xa xỉ label",!/Vượt phẩm/.test(d.textContent)&&!/Xa xỉ \d+ \//.test(d.textContent),d.textContent.slice(0,200));
    dressLook(S,v,"cùng chỗ");d.innerHTML=kitWearSlots(v,{size:"sm"});ok("9c seen: worn total only, 'Xa xỉ N' — NO allowance (OD line 187)",/Xa xỉ \d+/.test(d.textContent)&&!/Xa xỉ \d+ ?\/|mức|hạn/.test(d.textContent)&&BAL.lux.xx.showBud===false,d.textContent.slice(0,240));
    ok("9d seen: red Vượt phẩm mark when an item is above rank",!k||!!d.querySelector('.kitm-r'),k);
-   d.innerHTML=kitWearSlots(S,{size:"sm"});ok("9e her own row 7 cells",d.querySelectorAll('.kitem').length===7)}
+   d.innerHTML=kitWearSlots(S,{size:"sm"});ok("9e her own row 9 cells (8 wear slots + pet, GAP IT03)",d.querySelectorAll('.kitem').length===9)}
   /* 9f (r1). the allowance is never shown in any result text: proven / waved / false xx, Dò la dress line */
   {const T=[];plain(S);noCd(S,v,w);const o=window.rank;
    lavish(v);dressLook(S,v,"cùng chỗ");force(.001);T.push(runAct(S,v,"xx"));unforce();

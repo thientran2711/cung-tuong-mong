@@ -22,7 +22,7 @@ function giftEval(e,t){const pre="tốn: 2 khắc";
  const it=IT[e.k];if(!it)return{ok:false,why:"",v:-1};
  if((t==="emp"||t==="th")&&e.t)return{ok:false,why:"không thể dâng đồ đã tẩm",v:-1};
  const g=giftVal(Object.assign({k:e.k},it),t);
- if(t==="emp")return{ok:true,x:`${pre} · thành: Sủng +${Math.max(1,Math.round(g/2))}`,v:g};
+ if(t==="emp")return{ok:true,x:`${pre} · thành: ${sgStat(Math.max(1,Math.round(g/2)))}`,v:g};
  if(t==="th")return{ok:true,x:`${pre} · thành: Thái hậu quý ngươi +${g}`,v:g};
  let x=`${pre} · thành: nàng quý ngươi +${g+3}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
  if(e.t){/* previews: giveTo */const sp=typeof oSee==="function"?oSee(t,true):30;x+=` · kèm: nàng phát hiện đồ có vấn đề, nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ, quý ngươi ${balSg(BAL.eff.j8.giveTo)}: ${chanceW(sp)}`/* a side chance (the roll giveTo uses): chanceW, never a ladder word */}
@@ -74,7 +74,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
      chip (kitOptPic cannot find a masked "Phi ???" by name). A stranger's portrait is already the kit silhouette (pv). */
   if(o.kgt){try{const t=o.kgt;const f=t==="emp"?pEmp():t==="th"?pTH():t==="maid"?kitFace(S.maid):pv(t);if(f&&f.src&&typeof kitArtFrame==="function"){let art=b.querySelector(":scope > .kaart");
     if(!art&&typeof kpOptArt==="function"){kpOptArt(b);art=b.querySelector(":scope > .kaart")}
-    if(art){art.innerHTML=kitArtFrame(f.src,"","kopic kopface","");art.dataset.kzoom=f.src;b.dataset.kopic="face:gift";b.querySelectorAll(":scope > .md").forEach(x=>x.remove())}
+    if(art){if(typeof kitOptAvatar==="function"&&kitOptAvatar(b,f,t==="emp"?S.emp:t==="th"?S.thO:t==="maid"?S.maid:t,f.src))b.dataset.kopic="face:gift";else{art.innerHTML=kitArtFrame(f.src,"","kopic kopface","");art.dataset.kzoom=f.src;b.dataset.kopic="face:gift";b.querySelectorAll(":scope > .md").forEach(x=>x.remove())}}
     else if(!b.querySelector(".md"))b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))}
    else if(f&&!b.querySelector(".md"))b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))}catch(x){}}
   if(o.lock){b.disabled=true;b.classList.add("kgiftno")}const c=cnt[b.dataset.kgg]||(cnt[b.dataset.kgg]=[0,0]);c[1]++;if(!o.lock)c[0]++});
@@ -126,7 +126,7 @@ function kitOtherItem(v,x,sl){try{/* KIT §70: the shared item detail card (who 
   html:`${own}${rows?`<div class="kinvrows">${rows}</div>`:""}${kitFacts(F)}`,btn:"Lui"})}catch(e){console.error("kitOtherItem",e)}}
 addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t||t.dataset.kwho==="me")return;
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===t.dataset.kwho))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===t.dataset.kwear);if(!x||x.empty)return;
- ev.stopPropagation();ev.preventDefault();kitOtherItem(v,x,t.dataset.kwear)},true);
+ ev.stopPropagation();ev.preventDefault();if(typeof kinlWear==="function"&&kinlWear(t,v,t.dataset.kwear))return;kitOtherItem(v,x,t.dataset.kwear)},true);
 /* ✕ for kitOtherItem: the kit (32.10) already turns its "Lui" button into kit-x; the private ✕ that stood beside it is gone (reviewer r6) */
 /* a gift that ARRIVES (PEND.giftin) shows the item, too */
 (function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
@@ -187,12 +187,12 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
    mời ngài dạo ngự hoa viên: not in a storm; odds Sủng + Sắc + mood; thành: Sủng +2, a better chance of the tablet tonight (shown as a
    ladder word); hỏng: ngài từ chối khéo; consorts already in the garden see it (ghen +3).
    All need ngài rảnh (daytime, not at Cần Chính điện, not in another palace) and one such act per day per consort (S.kmEmpDay = wk()). */
-window.BAL=window.BAL||{};BAL.empDay=Object.assign({suc:5,walkNight:15},BAL.empDay||{}); /* npc-purpose: p .06 gone → BAL.ag.why.seekEmp */
+window.BAL=window.BAL||{};BAL.empDay=Object.assign({suc:5,walkNight:15,walkSung:2,walkGhen:3,kmSung:2,kmArt:2,kmArtDiv:2,kmAn:1}/* r2 sg-card: the walk / hầu cờ-đàn gains were typed in kmEmpAct + kmEmpLine (law 4) */,BAL.empDay||{}); /* npc-purpose: p .06 gone → BAL.ag.why.seekEmp */
 function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=B4L)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
  if(k==="thu")return{ok:false,why:"ngài đang phê tấu ở Cần Chính điện"};if(/^r\d/.test(k)||k==="kn")return{ok:false,why:"ngài đang ở cung phi tần khác"};return{ok:true,k}}
 function kmStorm(){const f=S.wx&&S.wx.f;return f===3||f===4}  /* j12 weather flags: 3 giông tố, 4 tuyết dày */
 function kmEmpO(a,kind){const sung=a.sung||0;
- if(kind==="ky"||kind==="cam"){const L=(a.arts&&a.arts[kind])||0;return odA(a,25+artW(kind,L)*10+mm()+sung/5)}
+ if(kind==="ky"||kind==="cam"){const L=(a.arts&&a.arts[kind])||0;return odA(a,25+artOE(a,kind)+mm()+sung/5)}
  return odA(a,20+sung/3+effSac(a)/6+mm())}
 const KM_DAYWHY="hôm nay đã gặp ngài một lần";
 function kmEmpWhy(a,kind){if(a.kmEmpDay===wk())return KM_DAYWHY;const f=kmEmpFree();if(!f.ok)return f.why;
@@ -202,16 +202,16 @@ const KM_EMPACT={ky:["Xin hầu cờ","Ngươi xin bày bàn cờ, hầu Hoàng 
 function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=nightCh(S),n1=cl(n0+BAL.empDay.walkNight,0,70),w0=word(n0),w1=word(n1);
   /* reviewer r6: never "Liều → Liều"; the walk only helps when she can be picked tonight at all (nightCh wrapper: r > 0) */
   const night=n0<=0||n1<=n0?"":w0===w1?`, tối nay dễ được lật thẻ hơn (vẫn ${w0})`:`, tối nay được lật thẻ: ${w0} → ${w1}`;
-  return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2${night} · hỏng: ngài từ chối khéo · kèm: phi tần đang ở vườn thấy, ghen +3`}
- return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2 đến +4, Ân tình +1, rồi chọn thắng khéo hay cố ý thua · hỏng: ngài chán, Sủng -1`}
+  return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: ${sgStat(BAL.empDay.walkSung)}${night} · hỏng: ngài từ chối khéo · kèm: phi tần đang ở vườn thấy, ghen +${BAL.empDay.walkGhen}`}
+ return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: ${sgRange(BAL.empDay.kmSung,BAL.empDay.kmSung+BAL.empDay.kmArt)}, Ân tình +${BAL.empDay.kmAn}, rồi chọn thắng khéo hay cố ý thua · hỏng: ngài chán, ${sgStat(BAL.eff.jgift.sungKmEmpAct)}`}
 /* the act itself — the same function for her and for every consort */
 function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpDay=wk();const o=kmEmpO(a,kind);/* odds read before the spend + the Sức cost (shown-odds r2): the word on the card */if(a===S)spend(2);ap(a,{suc:-BAL.empDay.suc});const ok=roll(o);const me=a===S;const nm=me?"Ngươi":`${rkName(a)} ${a.name}`;
- if(kind==="walk"){if(ok){ap(a,{sung:2});a.kmWalk=wk();const seen=liveRivals(true).filter(v=>v!==a&&whereOf(v)==="vuon");seen.forEach(v=>{ghenUp(v,3,`thấy ${a===S?"ngươi":a.name} được cùng Hoàng thượng dạo vườn`,a)});
-   if(!me)newsAdd(a,"emp",`${nm} cùng Hoàng thượng dạo ngự hoa viên.`);return{ok,txt:`${nm} cùng Hoàng thượng dạo ngự hoa viên. Sủng +2${seen.length?` · ${kitNameList(seen)} thấy cả, ghen +3`:""}.`}}
+ if(kind==="walk"){if(ok){ap(a,{sung:BAL.empDay.walkSung});a.kmWalk=wk();const seen=liveRivals(true).filter(v=>v!==a&&whereOf(v)==="vuon");seen.forEach(v=>{ghenUp(v,BAL.empDay.walkGhen,`thấy ${a===S?"ngươi":a.name} được cùng Hoàng thượng dạo vườn`,a)});
+   if(!me)newsAdd(a,"emp",`${nm} cùng Hoàng thượng dạo ngự hoa viên.`);return{ok,txt:`${nm} cùng Hoàng thượng dạo ngự hoa viên. ${sgOf(a,BAL.empDay.walkSung)}${seen.length?` · ${kitNameList(seen)} thấy cả, ghen +${BAL.empDay.walkGhen}`:""}.`}}
   return{ok,txt:`Hoàng thượng cười, bảo hôm nay còn bận, hẹn dịp khác.`}}
- if(ok){const g=2+Math.min(2,Math.floor(((a.arts&&a.arts[kind])||0)/2));ap(a,{sung:g,an:1});if(!me)newsAdd(a,"emp",`${nm} ${kind==="ky"?"hầu cờ":"đánh đàn hầu"} Hoàng thượng.`);
-  return{ok,g,txt:`${nm} ${kind==="ky"?"hầu Hoàng thượng một ván cờ":"gảy đàn cho Hoàng thượng nghe"}; ngài vui. Sủng +${g} · Ân tình +1.`}}
- ap(a,{sung:BAL.eff.jgift.sungKmEmpAct});return{ok,txt:`Hoàng thượng ${kind==="ky"?"xem":"nghe"} một lúc rồi ngáp dài, cho lui. Sủng ${balSg(BAL.eff.jgift.sungKmEmpAct)}.`}}
+ if(ok){const E=BAL.empDay,g=E.kmSung+Math.min(E.kmArt,Math.floor(((a.arts&&a.arts[kind])||0)/E.kmArtDiv));ap(a,{sung:g,an:E.kmAn});if(!me)newsAdd(a,"emp",`${nm} ${kind==="ky"?"hầu cờ":"đánh đàn hầu"} Hoàng thượng.`);
+  return{ok,g,txt:`${nm} ${kind==="ky"?"hầu Hoàng thượng một ván cờ":"gảy đàn cho Hoàng thượng nghe"}; ngài vui. ${sgOf(a,g)} · Ân tình +${E.kmAn}.`}}
+ ap(a,{sung:BAL.eff.jgift.sungKmEmpAct});return{ok,txt:`Hoàng thượng ${kind==="ky"?"xem":"nghe"} một lúc rồi ngáp dài, cho lui. ${sgOf(a,BAL.eff.jgift.sungKmEmpAct)}.`}}
 /* tonight: the walk raises her tablet chance */
 (function(){const n0=nightCh;nightCh=function(p){const r=n0.apply(this,arguments);try{const q=p||S;if(q&&q.kmWalk===wk()&&r>0)return cl(r+BAL.empDay.walkNight,0,70)}catch(e){}return r}})();
 /* her: buttons in the Emperor card, result + the choice inside it */
@@ -220,8 +220,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  try{closeModal()}catch(e){}const r=kmEmpAct(S,kind);if(!r){render();return}log(r.txt);
  if(r.ok&&kind!=="walk"){const tc=S.tamco||0;const oW=odA(S,30+tc/2),oL=odA(S,40+tc/2);
   Q.push({ev:1,t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
-   opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh ${balSg(BAL.eff.jgift.danhGo)}, Sủng ${balSg(BAL.eff.jgift.sungGo)} · hỏng: ngài phật ý, Sủng ${balSg(BAL.eff.jgift.sungGo_2)}`,go:()=>{if(roll(oW)){ap(S,{danh:BAL.eff.jgift.danhGo,sung:BAL.eff.jgift.sungGo});log(`Ngài khen ngươi khéo léo. Danh ${balSg(BAL.eff.jgift.danhGo)} · Sủng +1.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_2});log("Ngài thoáng phật ý. Sủng -1.")}}},
-    {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình ${balSg(BAL.eff.jgift.anGo)} · hỏng: ngài nhận ra, Sủng ${balSg(BAL.eff.jgift.sungGo_3)}`,go:()=>{if(roll(oL)){ap(S,{an:BAL.eff.jgift.anGo});log("Ngài đắc ý, càng thương ngươi. Ân tình +1.")}else{ap(S,{sung:BAL.eff.jgift.sungGo_3});log("Ngài nhận ra ngươi cố ý nhường. Sủng -1.")}}}]})}
+   opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh ${balSg(BAL.eff.jgift.danhGo)}, Sủng ${balSg(BAL.eff.jgift.sungGo)} · hỏng: ngài phật ý, Sủng ${balSg(BAL.eff.jgift.sungGo_2)}`,go:()=>{if(roll(oW)){ap(S,{danh:BAL.eff.jgift.danhGo,sung:BAL.eff.jgift.sungGo});log(`Ngài khen ngươi khéo léo. Danh ${balSg(BAL.eff.jgift.danhGo)} · ${sgStat(BAL.eff.jgift.sungGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_2});log(`Ngài thoáng phật ý. ${sgStat(BAL.eff.jgift.sungGo_2)}.`)}}},
+    {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình ${balSg(BAL.eff.jgift.anGo)} · hỏng: ngài nhận ra, Sủng ${balSg(BAL.eff.jgift.sungGo_3)}`,go:()=>{if(roll(oL)){ap(S,{an:BAL.eff.jgift.anGo});log(`Ngài đắc ý, càng thương ngươi. Ân tình ${balSg(BAL.eff.jgift.anGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_3});log(`Ngài nhận ra ngươi cố ý nhường. ${sgStat(BAL.eff.jgift.sungGo_3)}.`)}}}]})}
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});
  showModal();render()},true);
 (function(){const c0=courtMeet;courtMeet=function(t){const B=c0.apply(this,arguments);if(t==="emp")try{B.splice(Math.max(0,B.length-1),0,...kmEmpBtns())}catch(e){}return B}})();

@@ -51,12 +51,17 @@ Object.assign(BAL,{feel:{
   hon:{c:["giao-thiep"],p:[-1,-2,-3]},
   ghen:{c:["giao-thiep"],p:[0,-1,-2]}},
  /* act weights of NPCs (jemo EMO_W shape: harm / kind / idle / an act key), scaled by strength like every feeling */
- w:{tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
+ w:{vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.35,kind:.6,provoke:1.15,humiliate:1.15,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
+  so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
+  tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
   tinhnghich:{kind:1.3,visit:1.3,harm:.8},hothen:{visit:.5,idle:1.4,kind:.8,harm:.8},chan:{idle:1.3,visit:1.2},khochiu:{harm:1.1,idle:1.3,kind:.9},
-  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.15,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+ /* anger / jealousy / sulk aimed at someone: danger toward that person + strength/div × the Đức brake, capped at cap (jemo danger wrap);
+    wd = idle weight of a high-Đức consort who withdraws instead of lashing out when angry or jealous (jemo emoMul) */
+ dg:{cap:5,div:8},wd:1.4,
  /* odds points of any act at strength 100 (jemo EMO_OD shape, "a little") and servants' Lòng a month by their own feeling (EMO_LOY shape) */
- odAll:{tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
- loy:{tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
+ odAll:{vui:1,binh:0,buon:0,gian:-1,so:-1,lo:0,tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
+ loy:{vui:2,binh:0,buon:-1,gian:-2,so:-1,lo:-1,tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
  /* the Emperor's tablet chance × (Tình tứ of the consort, by level) */
  night:{tinhtu:[1.03,1.06,1.1]},
  /* thiện cảm gains of others toward a joyful person × (1 + this, by level); a sulk drifts the sulker's thiện cảm toward its target by this a day */
@@ -251,7 +256,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
   h=me?`Còn hờn ${t===S.emp?"Hoàng thượng":emoName(t)}, ngươi bỏ về, không muốn tiếp.`:`${emoName(p)} còn hờn ${t===S?"ngươi":emoName(t)}, bỏ về không tiếp.`;break}
  case"moi":pay({sung:F.sung});if(me){try{ghenAll(F.ghen)}catch(e){}add("các phi tần ganh ghét thêm")}else{try{for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}}
   h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break;
- case"caugat":{const L=eaH().staffOf(p);if(!L.length)return null;const m=L[Math.floor(Math.random()*L.length)];eaH().loyAdd(m,-F.loy);if(me)add(`lòng ${m.name||"cung nhân"} −${F.loy}`);try{emoEv(m,"loyalDown","bị chủ nhân cáu gắt")}catch(e){}
+ case"caugat":{const L=eaH().staffOf(p);if(!L.length)return null;const m=L[Math.floor(Math.random()*L.length)];eaH().loyAdd(m,-F.loy);if(me)add(`thiện cảm ${m.name||"cung nhân"} −${F.loy}`);try{emoEv(m,"loyalDown","bị chủ nhân cáu gắt")}catch(e){}
   h=me?`Trong lòng bực bội, chuyện nhỏ cũng khiến ngươi cáu gắt với ${m.name||"cung nhân"}.`:`${emoName(p)} cáu gắt với người hầu.`;break}
  case"ngoithu":h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
  case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);
@@ -279,7 +284,7 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
 function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`)}catch(e){}if(window.__bot||typeof Q==="undefined")return;
- Q.push({t:r.n,art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
+ Q.push({t:r.n,emoSeal:{k,who:"me"},art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}
 window.feelActTick=feelActTick;
 /* ---------- 6. VẺ MẶT: the ONE seal key (active act > strongest feeling; an intent is never shown, owner 20:15Z / 20:20Z) + the tap-card lines ---------- */

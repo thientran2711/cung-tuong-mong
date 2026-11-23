@@ -32,7 +32,7 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
   const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)}});};await boot();
  const roads=(await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)))).filter(r=>!ONLY||ONLY.split(',').includes(r));console.log('full roads:',roads.join(' ')||'(none)');
  chk('at least one full road registered',roads.length>0,roads);
- for(const rd of roads){const k=rd.split('_')[0];
+ for(const rd of roads){const k=await p.evaluate(rd=>ARC67[rd]&&ARC67[rd].o&&ARC67[rd].o!=='rd'?ARC67[rd].o:rd.split('_')[0],rd);/* review/phutang-road: the origin is the premise arc's o (pt_* roads belong to the pf branch), else the id prefix */
   for(let L=0;L<NLIV;L++){let R;for(let t=0;t<4;t++){R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);if(R&&R.err==='boot'){await p.waitForTimeout(5000);continue}/* the premise cannot be rolled in this life (its ok(), e.g. thd_hoc needs a pupil): a new life, told */if(R&&R.seq&&R.road!==rd&&R.gate===false&&t<3){console.log(rd,'life',L+1,'premise not rollable in this world (ok() false), a fresh world');await boot();continue}break}
    if(!R.seq){chk(`${rd} L${L+1}: no error`,false,R.err||R);continue}/* __run returned {err} (B2 finding) */
    console.log(rd,'life',L+1,R.n,R.all?'ALL':'',R.months+'m','fin='+R.fin,'|',R.seq.join(' '),R.err||'');

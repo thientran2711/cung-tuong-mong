@@ -36,7 +36,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of heads)if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
  for(const v of rivals)if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){v.pal=null;v.palLone=0}else occ[v.pal]=key(v)}
  const free=()=>PALN.findIndex((_,i)=>occ[i]==null);const moved=[];
- for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null){let f=free();
+ for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null){let f=typeof bcGrantIx==="function"?bcGrantIx(p,occ):-1;if(f<0)f=free();/* ban-cung: the decree follows the palace locks + her favour (jbancung), one rule for all */
   if(f<0){const lone=rivals.find(v=>v.palLone&&v.pal!=null);if(lone){f=lone.pal;lone.pal=null;lone.palLone=0;delete occ[f]}}
   if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S)S.palCer=1;else{if(p.palWait)moved.push(p);p.palWait=0;p.resHead=null}}
  /* SIDE HALLS (owner 17/11 04:08Z/04:20Z, BAL.res): each chủ vị (Tần/Phi/Quý phi, the player too) takes at most resCap() co-residents,

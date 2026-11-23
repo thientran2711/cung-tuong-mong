@@ -96,7 +96,7 @@ const BEAT={
   tap14:"Thái hậu dặn: đừng chỉ dựa vào cô mẫu. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận cho chắc."},
  muoi:{nhap14:"Bổng lộc còn thiếu, mà buổi họp mặt đầu đã có kẻ chê áo xiêm của nhà buôn muối. Ra mắt bề trên, thay y phục cho phải phép để khỏi ai cười.",
   sung14:"Nhà buôn biết giá từng món. Muốn lo quà cáp thì cần bạc: bán đồ trong rương, nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến. Bạc tiêu đi, tháng sau sẽ tiếc.",
-  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ lòng cung nữ."},
+  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ thiện cảm của cung nữ."},
  thd:{nhap14:"Nhà nghèo, chữ nghĩa là của hồi môn duy nhất. Ra mắt bề trên cho đủ lễ, thay y phục chỉnh tề, kẻo bị cười là nữ nhi nhà nghèo vào cung.",
   sung14:"Một nữ nhân nhà nho khó có bạc dư. Bán bớt đồ trong rương, điểm trang tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món cần dùng.",
   tap14:"Chữ nghĩa chỉ có giá khi có người đọc. Kết một phi tần, học thêm tài nghệ, giữ cung nữ thân cận."},
@@ -115,6 +115,14 @@ const BEAT={
  cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
   sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
   tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
+/* bang-words review (E40r, law 6b / 11): BEAT.bd above is the Bắc Địch (old-premise) line; a NEW bd life is the Ba Tư princess
+   (owner OD 19/11) and reads the Ba Tư line through THE one switch bdTxtProp (jrd_bd.js). Phù Tang (pf) has its own row. */
+if(typeof bdTxtProp==="function"){const B=BEAT.bd;
+ bdTxtProp(B,"nhap14",B.nhap14,"Phụ vương gửi {x} sang cầu Đại Hy làm đồng minh, Lễ bộ nhìn xem người Ba Tư có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai bảo người phương tây thô lỗ.");
+ bdTxtProp(B,"sung14",B.sung14,"Mang theo của hồi môn từ Ba Tư, tấm thảm hay chuỗi ngọc nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.")}
+BEAT.pf={nhap14:"Thuyền sứ đoàn đưa {x} qua bể sang Đại Hy, Lễ bộ nhìn xem người Phù Tang có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai cười là người bên kia bể.",
+ sung14:"Mang theo của hồi môn từ Phù Tang, món nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.",
+ tap14:"Xa quê thì phải có người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận."};
 /* a road's person is cast only when the road starts (j67 newThread67 fill67), so a {v}/{foe}/{mis} subject is told without a name: the
    person stays unnamed here and is named by the road itself (law 6b: nobody is made up); any other {tag} → no road line */
 const SJ0={v:"một phi tần",foe:"một phi tần",mis:"chủ nhân"};

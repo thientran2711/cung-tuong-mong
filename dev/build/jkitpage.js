@@ -22,7 +22,8 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"art",k:"cam",name:"Cầm",level:2,max:5,prog:[1,4],desc:"Tài: thơ, đàn, thi tài",next:"Tài +2",stepsAttr:'data-v85tab="cam"',
    acts:[pbtn('data-kitsample="1"',"Tự học",capW()+" · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần",""),pbtn('data-kitsample="2"',"Học với thầy",capW()+" · tốn: 2 khắc, Bạc -15 · thành: tiến bộ một đến ba phần","thiếu bạc (cần 15)")]})+
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
-  kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
+  kitEmpty("Ta chưa có việc nhờ nào",["Người trong cung sẽ tìm đến khi cần.","Ta cũng có thể đến các nơi và hỏi han để nghe ai cần giúp."],{topic:"Việc nhờ"})+
+  kitSkillCard({kind:"story",k:"big",kicker:"Chương 2",name:"Thẻ lớn (Mệnh truyện)",level:1,max:4,word:"Hồi",bar:false,next:"",big:true,img:kitInfoArt("Mệnh truyện").src,body:kitRows([["Mục tiêu","Tranh ảnh to bên trái (cỡ ảnh thẻ Hành sự), tên chương bên phải, mục tiêu và hàng kit ngay dưới tên."],["Hạn","còn ít tháng nữa"]])})+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
  {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
@@ -104,6 +105,18 @@ KIT_SAMPLES.push({id:"§28.8d",title:"kitFigSeal: biểu tượng tâm trạng c
  if(!live)return `<div class="kitpg-row"><span>Mở một ván để xem: hình toàn thân đứng trong phòng, Dư đồ và hộp thoại đều có biểu tượng tâm trạng ở bên đầu (cùng ấn với khung chân dung).</span></div>`;
  const v=typeof rivals!=="undefined"?rivals.filter(x=>x.alive)[0]:null;
  return `<div class="kitpg-row" style="align-items:flex-start;gap:24px"><div style="width:230px;height:420px;position:relative">${kitStageFig(S,{cap:false})}</div>${v?`<div style="width:230px;height:420px;position:relative">${kitStageFig(v,{cap:false})}</div>`:""}</div>`}});
+/* §4.1c frame column (review/kit-pframe-overlay): label centred on the frame axis, rows over the pendant + tassel at band + KIT_PFO.gap */
+KIT_SAMPLES.push({id:"§4.1c",title:"Cột khung chân dung: tên giữa trục khung · dòng tin đè lên ngọc bội + tua rua",where:"<b>KIT_PFO</b> (jk2b §20b) — <code>KIT_PFO.fit(pc)</code> in the kitPcFix hook; band per frame <code>KIT_PFO.band</code>, gap <code>KIT_PFO.gap</code>.",html:()=>{
+ const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
+ const em=live?pEmp():sf("emp","Hoàng thượng","Đế","img/kit/unknown-m.webp","#f0d070"),me=live?pMe():sf("c3","Quý nhân","Ta","img/kit/unknown-f.webp","#c9a0e0");
+ const col=(f,nm,rows)=>`<div class="pc kpwide kpfo-demo" data-k2="1" style="--kpcw:200px;display:grid;grid-template-columns:200px;overflow:visible;max-width:220px"><div class="pcl" style="display:flex;flex-direction:column;gap:3px"><b class="pcname krt" style="justify-content:center;text-align:center">${nm}</b>${pcPort(f)}<div class="kpkey" data-k="1" style="order:1">${rows}</div></div></div>`;
+ setTimeout(()=>{try{document.querySelectorAll("#kitpage .kpfo-demo").forEach(pc=>KIT_PFO.fit(pc))}catch(e){}},50);
+ return `<div class="kitpg-row" style="align-items:flex-start;gap:24px">${col(em,"Hoàng thượng",`<div class="kpk-st"><span class="chip">Đã quen</span></div><div>Hoàng thượng → ta · Sủng <b>7</b></div>`)}${col(me,"Quý nhân",`<div class="kpk-st"><span class="chip">Biết tên</span></div><div>Nàng → ta · Thiện cảm <b>12</b></div>`)}</div>`}});
+/* §28.8e KIT_BODY body-fit box (KP09, review/kit-body-fit): every zone outlined on a woman, a maid, a eunuch, the emperor, a child + a portrait */
+KIT_SAMPLES.push({id:"§28.8e",title:"KIT_BODY: ô thân theo hình (tóc · đầu · ngực · eo · tay áo · váy · gấu)",where:"<b>KIT_BODY</b> (jbody) — rows from img/body-fit.json (Foreman C) or measured from the picture (kitFigBody + veil-fit). Layers: <code>KIT_BODY.img(cls,src,file,zone)</code> inside the one kitFxLayers stack.",html:()=>{
+ if(typeof KIT_BODY==="undefined")return "";const F=["fig-consort-c01-t1-a18.webp","fig-maid-m01-a26.webp","fig-eunuch-u01-a26.webp","fig-emperor-a26-1.webp","fig-kid-f01-a14.webp"];
+ setTimeout(()=>KIT_BODY.debugFill(document.getElementById("kitpage")),0);
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap">${F.map(f=>KIT_BODY.debugHtml(f,130)).join("")}${KIT_BODY.debugHtml("por-consort-c01-t1-a18.webp",130)}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});

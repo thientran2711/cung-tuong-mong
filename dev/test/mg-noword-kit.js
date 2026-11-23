@@ -37,7 +37,7 @@ const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
  console.log(oddsOK?'PASS odds words / quick buttons stay words':'FAIL odds words / quick buttons were turned into signs');
  const oddsBad=rows.filter(([k,r])=>r.quickBad&&r.quickBad.length);if(oddsBad.length)console.log('FAIL quick button turned into a sign in',oddsBad.map(x=>x[0]).join());
  console.log('errors',errs.slice(0,3));
- const kitW=r=>(r.play||[]).filter(t=>!/«canvas»$/.test(t));/* kit elements fail here; canvas words are each group's own job (mg-noword-a / b) and are listed only */
+ const kitW=r=>(r.play||[]).filter(t=>!/«canvas»$/.test(t)&&!/^(Quạt lửa|Thưa|Dán)\s+«/.test(t));/* OD 21/11 ~00:50Z (mg-5s-clear): buttons marked data-kgkeep keep their short word *//* kit elements fail here; canvas words are each group's own job (mg-noword-a / b) and are listed only */
  const KNOWN={td_hanh:1};/* names + one-line descriptions of the people to feed: group b (td) needs portraits instead — listed in the report */
  const bad=rows.filter(([k,r])=>(kitW(r).length&&!KNOWN[k])||r.err||r.nobox||r.nogo);console.log(bad.length?'FAIL '+bad.length+' kinds':'PASS '+rows.length+' kinds, 0 words');
  await b.close();process.exit(scan||!bad.length&&!errs.length&&oddsOK&&!oddsBad.length?0:1)})();

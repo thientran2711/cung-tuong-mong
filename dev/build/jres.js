@@ -76,8 +76,8 @@ function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p
 /* resHallOf(p) → the plaque of the side hall p lives in ("Dưỡng Xuân hiên"), or null (head, Càn Ninh, Ngọc Thanh, servants…) — hall-names r2, OD:L1474 residence lines */
 function resHallOf(p){try{const r=residenceOf(p);if((r.part==="dong"||r.part==="tay")&&r.pal!=null&&typeof PALN!=="undefined")return hallName(PALN[r.pal],r.part)}catch(e){}return null}
 function resRoomName(r){if(!r)return"";if(r.part==="ngocthanh")return typeof HOMEN!=="undefined"?HOMEN:"Ngọc Thanh các";
- if(r.part==="kn")return hallName("Càn Ninh cung","chinh")+" · Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
- const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return hallName(pn,r.part)+(pn?` · ${pn}`:"")}
+ if(r.part==="kn")return "Càn Ninh cung · "+hallName("Càn Ninh cung","chinh");if(r.part==="lc")return"Trường Môn viện";
+ const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return pn?`${pn} · ${hallName(pn,r.part)}`:hallName(pn,r.part)}
 function resSame(a,b){return!!a&&!!b&&a.part===b.part&&a.pal===b.pal&&(a.pal!=null||a.head===b.head)}
 function roomResidents(pal,part){const T={pal:resPalIdx(pal),part};return[S].concat((rivals||[]).filter(v=>v.alive&&!v.out)).filter(p=>resSame(residenceOf(p),T))}
 function roomPeople(pal,part){const W=(S&&S.where)||{};return roomResidents(pal,part).filter(p=>p===S?S.place==="home":W[p.id]===palaceOf(p))}

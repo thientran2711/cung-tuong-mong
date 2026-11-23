@@ -41,7 +41,7 @@ const rt0=resolveTonight;resolveTonight=function(){const t=S&&S.tonight;if(t&&t!
 /* --- deck cards Tranh sủng / Chặn ngự giá: closed with the reason, true result text --- */
 const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||!Array.isArray(deck))return r;
  deck=deck.filter(a=>!(S.pregUnk&&a&&a.n==="Báo tin có thai"));
- for(const a of deck){if(!a||a.__steal||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.b!==2)continue;const road=a.n==="Chặn ngự giá";const desc=a.t;const v=tonightOf();if(!v||v===S)continue;
+ for(const a of deck){if(!a||a.__steal||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.b!==(typeof B4L==="number"?B4L:2))continue;const road=a.n==="Chặn ngự giá";const desc=a.t;const v=tonightOf();if(!v||v===S)continue;
   a.__steal=1;Object.defineProperty(a,"lock",{get:()=>!ntCan(S),set:()=>{},enumerable:true,configurable:true});Object.defineProperty(a,"t",{get:()=>ntCan(S)?desc:ntReason(S),set:()=>{},enumerable:true,configurable:true});
   a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${stealKem(v)} · mỗi đêm chỉ thử một lần`;
   a.go=()=>{ntTry(S);const n=ntTaken();if(n){log(`${ntReason(S)}.`);return}const t=tonightOf();if(!t||t===S)return;log(`${stealWin(S,t,road?"road":"feign")}Đêm thị tẩm đang chờ; Sủng, Ân tình tính sau đêm.`)};
@@ -134,8 +134,19 @@ const FAIRN=window.FAIRN={eff:1,fav:4,sat:.2,satMin:.35,satO:8};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
-rivalNight=function(v){v.nights++;v.nightLog.push(wk());
- let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
+/* law 1 «Tiến cử hầu thay» (two-way with her own PEND.ksp option, OD:L33 / L1534): she chooses it on the summons BEFORE the night, and only on
+   a night the tablet (or the custom mùng 1 / rằm) gave her — never on a night she took (Tranh sủng / Chặn ngự giá) nor on his visit, where
+   her cards offer no «Tiến cử». An NPC decides at the same point (amSendQ / npcWhy, her own need) and then has NO night of her own: no prep
+   spend, no Sủng / Ân, no jealousy rise, no conception roll, no pillow talk, no bestow, the tablet bribe kept (her nightFx is what spends it);
+   the maid's night is the one sendMaid (jagmaid: amNightGain, amRise → night() / amFav, BAL.ag.maid), the same call as her «Tiến cử». */
+function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,x=S.visNpc;/* S.ntk is NOT a steal mark: resolveTonight (below) writes it for every holder */
+  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;
+  if(!v.maid||(typeof ptMaidOut==="function"&&ptMaidOut(v)))return false;/* no maid at hand (jptime: busy elsewhere) → nobody to send: her night plays */return true}catch(e){return false}}
+window.htCan=htCan;
+rivalNight=function(v){
+ if(htCan(v)&&(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);/* AG3: her own choice (jagmaid), before the night */
+ v.nights++;v.nightLog.push(wk());
+ let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
  const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});pgUp(v,BAL.mood2.ghen.pgNight,`${v.name} được thị tẩm`);v.tablet=0;v.lastNightS=sc;
  const grade=sc>=BAL.nightEnd.warm?"đêm vui":sc>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt";
@@ -144,7 +155,6 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
   else if(v.rel<-20&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(empGive(v,BAL.odb.j75.rbTop+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
 /* npc-purpose: who carries it to her — her own tai mắt serving in v's house (that is their job), else a consort who sees inside v's house (npwIn) with a reason (npcTell) */

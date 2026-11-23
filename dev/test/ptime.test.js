@@ -33,11 +33,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const pn=ptPanel();o.panel=!!(pn&&Array.isArray(pn.facts)&&pn.facts.join(" ").length>20&&!pn.h);o.news2=PTIME.news().length;
   /* 4 Đợi tin across a buổi: send "Nghe ngóng chung" at khắc 3 */
   toB0();spend(2);const L=talkOpts({kind:"maid"}).find(a=>a&&a.n==="Nghe ngóng chung");o.lpk=L&&L.pk;spend(talkK(L));const txt=L.run();o.ltxt=txt;
-  const la=PTIME.away("mm:me");o.ldue=la&&la.due;o.lnow=ptNow();o.waitOk=PTIME.waitOk();const b0=S.buoi||0;Q.length=0;S.mg=0;for(let w=0;w<3&&!la.back;w++){PTIME.wait();Q.length=0;S.mg=0}/* a modal popping on the way stops the jump (the player reads it, then taps «Đợi tin» again) */o.wb=[b0,S.buoi||0,used];o.lback=!!(la&&la.back);
+  const la=PTIME.away("mm:me");o.ldue=la&&la.due;o.lnow=ptNow();Q.length=0;S.mg=0;/* walk-cost de-flake: a random card queued at send time hides «Đợi tin» until read (ptWaitOk) — the player closes it first */o.waitOk=PTIME.waitOk();const b0=S.buoi||0;Q.length=0;S.mg=0;for(let w=0;w<6&&!la.back;w++){PTIME.wait();Q.length=0;S.mg=0}/* walk-cost de-flake: random cards (news, an NPC asking) can stop the jump more than twice *//* a modal popping on the way stops the jump (the player reads it, then taps «Đợi tin» again) */o.wb=[b0,S.buoi||0,used];o.lback=!!(la&&la.back);
   /* 5 invite */
   toB0();const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&!sameHouse(S,x));o.inv=!!v;
   if(v){BAL.invite.hate=-999;const before=used;invite(v.id);const ia=ptZ().find(a=>a.kind==="invite"&&!a.back);o.ia=ia?{who:ia.who,due:ia.due,now:ptNow()}:null;o.iused=used-before;
-   const oo=ia.a.o;ia.a.o=100;spend(R.invite.n-R.invite.o);o.iback=!!ia.back;o.iwhere=S.where[v.id];ia.a.o=oo}
+   const oo=ia.a.o;ia.a.o=100;/* walk-cost: pin the guest's answer (jrcv rcvInviteGo is the guest's own random choice; this check is the TIMING) - was a ~1/3 flake */const rg=typeof rcvInviteGo==="function"?rcvInviteGo:null;if(rg)rcvInviteGo=()=>true;try{spend(R.invite.n-R.invite.o)}finally{if(rg)rcvInviteGo=rg}o.iback=!!ia.back;o.iwhere=S.where[v.id];ia.a.o=oo}
   /* 6 NPC sender two-way */
   toB0();const n=liveRivals(true).find(x=>x.maid&&x.alive&&!x.out);o.npc=!!n;
   if(n&&typeof AGRUN!=="undefined"&&AGRUN["cx2:maidSpy"]){const tg=S;const s1=ptZ().length;const ret=AGRUN["cx2:maidSpy"](n,tg);const na=ptZ().find(a=>a.who==="mm:"+n.id&&!a.back);o.npcAway=na?{due:na.due,now:ptNow(),by:na.by}:null;o.npcRet=ret;
@@ -57,7 +57,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.back&&r.rep&&r.rep.L>0&&r.q===0,"3 landed at the due khắc as a report, no modal",{rep:r.rep,q:r.q});
  ok(r.news===1&&r.panel&&r.news2===0,"3 status icon panel shows and reads the report");
  ok(r.lpk==="listen"&&/về/.test(r.ltxt||""),"4 Nghe ngóng chung is a parallel order",r.ltxt);
- ok(r.waitOk&&r.lback&&r.wb[1]===r.wb[0]+1,"4 Đợi tin jumps to the return khắc in the next buổi and lands it",{wb:r.wb,due:r.ldue,now:r.lnow});
+ ok(r.waitOk&&r.lback&&r.wb[1]===r.wb[0]+1,"4 Đợi tin jumps to the return khắc in the next buổi and lands it",{wb:r.wb,due:r.ldue,now:r.lnow,waitOk:r.waitOk});
  ok(!r.inv||(r.ia&&r.iused===R.o&&r.iback&&r.iwhere==="home"),"5 invite: messenger away, guest comes at the due khắc",{ia:r.ia,used:r.iused,where:r.iwhere});
  ok(!r.npc||(r.npcAway&&r.npcAway.due===r.npcAway.now+R.n&&r.npcBack),"6 NPC cx2:maidSpy: her maid away n khắc, lands at due",{a:r.npcAway,back:r.npcBack});
  ok(r.old,"7 old save without S.away");
@@ -106,13 +106,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const far=liveRivals(true).filter(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)&&palaceOf(v)!==mk);
   for(const k of ["spy","plant","poison"])for(const t of far.slice(0,2)){toB0();S.place="home";S.srv.lau=0;const pl=palaceOf(t);const kind=k==="spy"?"spy":k==="plant"?"plant":"harm";
    const oq=give(k,t);if(!oq){o.rows.push({k,t:t.id,none:1});continue}const N=ptRecvN(pl,kind,0),H=ptRecvN(pl,kind,1);const c=click(oq,0);
-   o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,exp:(srvM()&&pl===palaceOf(srvM()))?"home":pl,left:S.ordQ.length,logs:c&&c.logs})}
+   o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,exp:(srvM()&&pl===palaceOf(srvM()))?"home":pl,left:S.ordQ.filter(q=>q.id===oq.id).length/* walk-cost de-flake: only THIS order (a new random order — an NPC's rcvAsk — may arrive while the khắc pass) */,logs:c&&c.logs})}
   /* refused walk (Tân Giả khố): the order stays, nothing paid */
   /* first rival who can take an order (mkP may refuse one in this random world: its rows above then read none:1) */
   {let t=null,oq=null;for(const v of far){toB0();S.place="home";oq=give("spy",v);if(oq){t=v;break}}if(oq){S.srv.lau=1;const c=click(oq,0);o.refused={used:c&&c.used,left:S.ordQ.length,same:!!(S.ordQ[0]&&S.ordQ[0].id===oq.id),pass:!!(S.acPass&&S.acPass[palaceOf(t)]&&accHas(S,palaceOf(t)))};S.srv.lau=0}}
   /* walk 0 (a consort in the master's own palace, or the errand at home): never 0 khắc, qua loa = hết lòng − 1, charged = shown */
   for(const [kind,pl] of [["spy",mk],["plant",mk],["errand","home"],["errand",S.place]]){const F=ptRecvN(pl,kind,0),Hh=ptRecvN(pl,kind,1);o.zero.push({kind,pl,F,Hh})}
-  {toB0();S.place="home";const t=liveRivals(true).find(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)===mk);if(t){const oq=give("spy",t);if(oq){const H=ptRecvN(mk,"spy",1);const c=click(oq,1);o.half0={H,used:c&&c.used,left:S.ordQ.length}}}}
+  {toB0();S.place="home";const t=liveRivals(true).find(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)===mk);if(t){const oq=give("spy",t);if(oq){const H=ptRecvN(mk,"spy",1);const c=click(oq,1);o.half0={H,used:c&&c.used,left:S.ordQ.filter(q=>q.id===oq.id).length}}}}
   /* item 4: ONE NOTICE SYSTEM — every jptime notice goes through window.kitNotice({id,line,text,go,goLabel}) when jnotice is in the build (no kitLine) */
   {const got=[];let kl=0;const kn0=window.kitNotice,kl0=window.kitLine;window.kitNotice=sp=>{got.push(sp);return sp};const klW=kitLine;kitLine=function(){kl++;return null};
    try{toB0();const a=ptSend({who:"pt:test",nm:"Cung nữ thử",kind:"spy",lbl:"đi nghe ngóng"});if(a)spend(a.due-ptNow());/* first rival who can take an order (review #4 de-flake, same as test 11: mkP may refuse far[0] → no order notice) */for(const t of far){if(give("spy",t))break}

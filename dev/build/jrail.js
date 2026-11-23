@@ -87,7 +87,18 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail.kstdock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700}
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
+/* KIT §77b kitStBadge: the round STATUS BADGE at the bottom-right corner of a kit square rail button (.krailb): ✓ green = ready, … grey = busy, ⏸ amber = paused; none = no badge. Offline = class koff on the button (picture goes grey). K-BADGE-HAOHUU */
+.krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
+.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+/* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+/* the same two bars inline in any kit chip text (.kpzb, K-CHIP-PAUSE): never a ⏸ font glyph in a chip — it reads as a smudge at chip size */
+.kpzb{display:inline-flex;gap:3px;align-items:center;vertical-align:-1px;margin-right:4px}.kpzb::before,.kpzb::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:currentColor}
+.krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
+.krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${t.charAt(0)}" class="krailb${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+function kitStBadge(st){const m={ok:"✓",busy:"…",pause:"⏸"};return m[st]?`<b class="kbdg ${st}" aria-hidden="true">${m[st]}</b>`:""}window.kitStBadge=kitStBadge;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77b",title:"kitStBadge · huy hiệu trạng thái ở góc nút vuông (✓ sẵn sàng · … đang bận · ⏸ tạm dừng · xám = ngoại tuyến)",
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;padding:8px">${[["ok",""],["busy",""],["pause",""],["","koff"]].map(([st,c])=>`<button type="button" class="krailb ${c}" aria-label="${st||"ngoại tuyến"}"><span class="krailg">♥</span>${kitStBadge(st)}</button>`).join("")}</div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();

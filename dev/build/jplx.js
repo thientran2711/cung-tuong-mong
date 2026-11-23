@@ -1,10 +1,13 @@
 /* ================= jplx: NƠI CHỐN CÒN THIẾU TRÊN DƯ ĐỒ (D42, owner 14-15/11: OD L82, L86, L87) =================
-   Five places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
+   Seven places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
      cnh  Tích Cần viện (role: dãy nhà cung nhân; servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
      tgk  Tân Giả khố        (= Hoán y cục, the laundry; picture tan-gia-kho already existed; now a place on the map)
      ttp  Thượng thư phòng   (the princes' study hall = "học đường"; new picture)
      acs  A ca sở            (where the princes from 6 years old live; new picture)
      dc   Đông cung          (where the crown prince lives; new picture)
+     nth  Ngự thiện phòng    (the imperial kitchen; review/map-places 20/11, OD:L82; STAND-IN picture, tạm: the painted kitchen board room img/kit/mg-banh-bg-hoc; ART REQUEST in reports/map-places.md)
+     pd   Phật đường         (the Buddha hall; review/map-places 20/11, OD:L82; STAND-IN picture, tạm: Đức Thọ cung with its golden Buddha altar, tu-ninh-cung-*; ART REQUEST in the report)
+   (Nội vụ phủ `nvp` is already a map place in jact.js:90-97 with its peddler and rare item; not touched here.)
    Pictures: img/<tên>-<mùa>-<buổi>.webp (gpt-2-6 EDITS of approved game rooms, CDN). Everything else is wrapped, no old module edited:
    places / PLNAME / MAPH.places (map hotspots + names) · mapPos (walk cost) · SCN_HAVE + SCIMG + KIT_FLOOR (pictures) · ACC_ROLE (who may enter)
    · goTo + countAt (people at the place) · homePeople (children who moved out are not at home).
@@ -18,8 +21,11 @@ const PLX={
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
  acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
- dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62}};
+ dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62},
+ nth:{n:"Ngự thiện phòng",fn:"bếp ngự, lo bữa cho Hoàng thượng",d:"Bếp lớn của cung, thái giám bếp nhóm lửa từ tờ mờ sáng.",img:"kit/mg-banh-bg-hoc",box:{x:.733,y:.455,w:.052,h:.137},anchor:{x:.758,y:.49},pos:[1,4],fl:.74,stand:1},
+ pd:{n:"Phật đường",fn:"nơi lễ Phật, tụng kinh",d:"Điện có tượng Phật mạ vàng, khói hương không dứt.",img:"tu-ninh-cung",box:{x:.77,y:.235,w:.065,h:.155},anchor:{x:.80,y:.29},pos:[0,4],stand:1}};
 const PLX_NEW=["cnh","ttp","acs","dc"]; /* places with their own picture file; tgk keeps j94's */
+const PLX_STAND=["nth","pd"]; /* places on a STAND-IN picture (tạm) until Foreman C paints their own: SCIMG only, the stand-in's own seasons/floor come from j94 / jk2b */
 const PLX_AGE=6,PLX_ADULT=18;
 (function(){
  /* names and map hotspots */
@@ -27,9 +33,9 @@ const PLX_AGE=6,PLX_ADULT=18;
  /* pictures: 16 season x buổi variants each; SCIMG base name, floor line for the kit stage */
  const V=[];["xuan","ha","thu","dong"].forEach(s=>["sang","trua","chieu","toi"].forEach(t=>V.push(s+"-"+t)));
  if(typeof SCN_HAVE==="object")PLX_NEW.forEach(k=>V.forEach(v=>{SCN_HAVE[PLX[k].img+"-"+v]=1}));
- if(typeof SCIMG==="object")PLX_NEW.forEach(k=>{SCIMG["plx-"+k]=PLX[k].img});
+ if(typeof SCIMG==="object")PLX_NEW.concat(PLX_STAND).forEach(k=>{SCIMG["plx-"+k]=PLX[k].img});
  const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};
- PLX_NEW.forEach(k=>{const n=PLX[k].img;if(F[n]==null)F[n]=PLX[k].fl||.6;if(!A[n])A[n]={x:.5,feet:.9}});
+ PLX_NEW.concat(PLX_STAND).forEach(k=>{const n=PLX[k].img;if(F[n]==null)F[n]=PLX[k].fl||.6;if(!A[n])A[n]={x:.5,feet:.9}});
  /* the list of places (Dư đồ list, placeOf) */
  const p0=places;places=function(){const L=p0.apply(this,arguments);
   for(const k in PLX)if(!L.some(x=>x.k===k))L.push({k,n:PLX[k].n,fn:PLX[k].fn,d:PLX[k].d,sc:k==="tgk"?"tgk":"plx-"+k});
@@ -37,7 +43,7 @@ const PLX_AGE=6,PLX_ADULT=18;
  /* walk cost: own cells outside the old 3x3 + rival rows (west cluster cnh/tgk next to tyv/kn; east column ttp/dc/acs next to tn/ksp/home) */
  const m0=mapPos;mapPos=function(k){return k&&PLX[k]?PLX[k].pos:m0.apply(this,arguments)};
  /* the list view shows them too (MAPL rows are only borrowed for the call: mapPos must not read them) */
- const g0=mapHTMLgrid;mapHTMLgrid=function(){MAPL.push(["cnh","tgk","ttp"],["acs","dc"]);try{return g0.apply(this,arguments)}finally{MAPL.length-=2}};
+ const g0=mapHTMLgrid;mapHTMLgrid=function(){MAPL.push(["cnh","tgk","ttp"],["acs","dc","nth"],["pd"]);try{return g0.apply(this,arguments)}finally{MAPL.length-=3}};
  /* small labels on the plan, like the lãnh cung */
  const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);L.forEach(s=>{if(s&&PLX[s.k]){s.small=s.k!=="dc";s.fn=PLX[s.k].fn}});return L};
 })();
@@ -54,14 +60,19 @@ function plxServants(){const out=[];try{const b=S.buoi||0,night=b>=(typeof B4L==
  const others=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))others.push(s);
  const pickN=(L,n)=>L.map(s=>[plxHash(s.sid+":"+bkeyNow()+":"+b),s]).sort((x,y)=>x[0]-y[0]).slice(0,n).map(x=>x[1]);
  const ent=s=>({kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):s.role==="maid"?"Cung nữ":"Thái giám"} · ${s.role==="maid"?"cung nữ":"thái giám"} nghỉ tay`});
- if(night){if(S.maid)out.push({kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · lòng ${S.maid.loyal}`});mine.forEach(s=>out.push(ent(s)))}
+ if(night){if(S.maid)out.push({kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`});mine.forEach(s=>out.push(ent(s)))}
  pickN(others,night?3:2).forEach(s=>out.push(ent(s)))}catch(e){}return out}
 function bkeyNow(){try{return `${S.year}/${S.month}/${S.tuan}`}catch(e){return""}}
 function plxTgk(){const out=[];try{out.push({kind:"npc",name:"Quản sự Tân Giả khố",ini:"Quản",col:"#8a8aa0",info:"Quản sự · trông coi việc giặt giũ"});
  const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&(s.lau>0||s.trouble))L.push(s);
  L.slice(0,3).forEach(s=>out.push({kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:"Cung nữ bị phạt giặt giũ"}))}catch(e){}return out}
+/* Ngự thiện phòng / Phật đường: the one who keeps the place (always there by day, like the Quản sự of Tân Giả khố). No servants are drawn here by sampling: every servant has ONE place per buổi in the j95 ledger (law 6), so an errand-runner shows here only when j95 sends her (follow-up: ledger rows for these two places, plan §2) */
+function plxNth(){return [{kind:"npc",name:"Quản sự Ngự thiện phòng",ini:"Quản",col:"#8a8aa0",info:"Quản sự · trông coi bếp ngự"}]}
+function plxPd(){return [{kind:"npc",name:"Sư cô Phật đường",ini:"Sư",col:"#9a9a8a",info:"Sư cô · giữ hương đèn, tụng kinh"}]}
 function plxPeople(k){try{
  if(k==="cnh")return plxServants();
+ if(k==="nth")return plxNth();
+ if(k==="pd")return plxPd();
  if(k==="tgk")return plxTgk();
  const L=[];for(const [kid,v] of plxKids(k)){const mine=v==null;L.push(mine?plxHomeKid(kid):plxKidEntry(kid,v))}
  if(k==="ttp"&&L.length)L.unshift({kind:"npc",name:"Thầy dạy Thượng thư phòng",ini:"Thầy",col:"#8a9ab0",info:"Thầy dạy · giảng sách cho các hoàng tử, công chúa"});
@@ -69,7 +80,7 @@ function plxPeople(k){try{
 /* her own children keep the line the home stage gives them (Văn/Võ/Đức bars): take it from the unfiltered home list */
 let plxHomeFull=null;
 function plxHomeKid(kid){try{const f=plxHomeFull?plxHomeFull():[];const p=f.find(x=>x.kind==="kid"&&x.ref===kid);if(p)return p}catch(e){}return plxKidEntry(kid,null)}
-function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
+function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao.",nth:"Bếp ngự vắng người, lửa trong lò đã tàn.",pd:"Phật đường vắng, chỉ còn khói hương lẩn quẩn."})[k]||""}
 
 /* her palace: children who live elsewhere this buổi are not on the home stage (and not in its head count) */
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;plxHomeFull=()=>h0.apply(null,[]);
@@ -85,6 +96,9 @@ function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhâ
 /* the Dư đồ count of these places = the people she meets on arrival (outermost wrap: after j59's own, which is queued at load) */
 setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length+(k==="tgk"&&typeof elderBy==="function"&&elderBy("tn")?1:0)}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 
+/* nth / pd are not in the j95 ledger (j95.js:113 / :371 only know cnh tgk ttp acs dc): j95's countAt wrap (j95.js:656) would read 0 for them, so their count is wrapped once more, one tick later (outside j95's) */
+setTimeout(()=>setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if((k==="nth"||k==="pd")&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length}catch(e){}return c1.apply(this,arguments)}}catch(e){}},0),0);
+
 /* ---------- who may enter (j41 ACC_ROLE; the servant road keeps j42's hook, patched for her own quarters) ---------- */
 (function(){
  const day=()=>(S.buoi||0)<(typeof B4L==="number"?B4L:3);
@@ -98,6 +112,9 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.v
   if(k==="ttp"||k==="acs"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
    if(r>=3||p.queen||(k==="acs"?hasPrince(p):hasStudent(p)))return{ok:true};
    return{ok:false,why:k==="ttp"?"chỉ Tần trở lên hoặc người có con đang học":"chỉ Tần trở lên hoặc mẹ của hoàng tử",kind:"rule"}}
+  if(k==="nth"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
+   if(r>=2||p.queen)return{ok:true};return{ok:false,why:"bếp ngự: cần phẩm Quý nhân",kind:"rule"}}
+  if(k==="pd")return day()?{ok:true}:{ok:false,why:"đóng cửa tối",kind:"hour"};
   if(k==="dc"){if(!day())return{ok:false,why:"đóng cửa tối",kind:"hour"};
    if(p.queen||r>=7||mumOfHeir(p))return{ok:true};
    return{ok:false,why:"điện của Thái tử: chỉ mẹ Thái tử và Hoàng hậu; người khác xin bái kiến",kind:"rule",ask:"bk"}}

@@ -38,6 +38,10 @@ const GW=60,longW=a=>(a||[]).some(t=>t.replace(/\s+«.*$/,'').length>GW);const r
  for(const k of KINDS){const exists=await p.evaluate(k=>!!KG82_KIND[k],k);if(!exists){console.log('skip kind '+k+' (not a KG82 kind)');continue}
   const src=k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
   let r;try{r=await p.evaluate(s=>window.__nw(s),src)}catch(e){r={err:String(e.message).slice(0,120)}}
+  /* OD 21/11 ~00:50Z (canon overwrite, mg-5s-clear): the short GUIDING words stay (the kit guide pill kg82Guide, zone labels); everything else is still a FAIL */
+  {const GU={ban:/^(Chạm ngay!|Chờ mũi ngắm vào giữa hồng tâm, rồi chạm|Chạm khi mũi ngắm ở giữa hồng tâm)$/,
+   tat:/^(Nặng|Vừa|Chạm ngay!|Tay đang lướt qua thước · chạm khi kim vào vùng đỏ)$/,ne:/^(Né|Chạm ngay để né!|Đòn đang lướt qua thước · chạm khi kim vào vùng xanh)$/}[k];
+   if(GU){const f=l=>(l||[]).filter(x=>!GU.test(String(x).replace(/\s+«.*»$/,'').trim()));r.play=f(r.play);if(r.tut)r.tut=f(r.tut)}}
   rows.push([k,r]);const n=(r.play||[]).length+((r.tut||[]).length);
   console.log(k.padEnd(7),n?('WORDS '+JSON.stringify({play:r.play,tut:r.tut})):('0 words'+(r.err||r.nobox||r.nogo?' ('+JSON.stringify(r)+')':'')))}
  console.log('errors',errs.slice(0,3));

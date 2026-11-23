@@ -28,7 +28,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
      valid:!!ARC67[v.nr.r]&&ARC67[v.nr.r].o===v.nr.o,chs:[4,5,6,7,8,9,10,11].filter(n=>nrCh(v.nr.r,n)),off:offers[v.id]?[...offers[v.id]]:[]});
    const logs=S.logs.filter(l=>/Tin trong cung/.test(l)).length;
    return{k,me:S.origin.k,myRoad:S.st&&S.st.f14&&S.st.f14.road,R,bad,err,mon,logs,save:JSON.stringify(rivals.map(v=>v.nr||null)).length,saveAll:(()=>{try{return JSON.stringify(S).length+JSON.stringify(rivals).length}catch(e){return -1}})()}}})};
- const ORG=['tt','dtq','thd','muoi','td','ch','cn'];
+ const ORG=(process.env.ORG||'tt,dtq,thd,muoi,td,ch,cn').split(',');/* ORG=pf (review/phutang-road): NPC roads around a Phù Tang player */
  for(let L=0;L<NLIV;L++){await open();const k=ORG[L%ORG.length];let R;for(let t=0;t<4;t++){R=await p.evaluate(([k,m])=>window.__life(k,m),[k,MON]);if(R&&R.err==='boot'){await p.waitForTimeout(5000);continue}break}
   if(!R.R){chk(`life ${L+1} ${k}: ran`,false,R);continue}
   console.log(`life ${L+1} origin ${R.me} road ${R.myRoad} · ${R.mon} months · NPC roads ${R.R.length} · news ${R.logs} · nr bytes ${R.save} / save ${R.saveAll}`);

@@ -1,0 +1,6 @@
+# dialog-dedup (owner mark #85 ~05:45Z, shot owner-2111-warning-dup.jpg)
+PRIORITY #1 CHECK: OD 2176 | main j70.js PEND j70/j70thr kit override (boxed kitThreat card first) + j24 maidWarn («thành: biết …» row) | review/* none | claims none
+Cause: the j70 warning dialogs put a boxed `kitThreat` card (who + how + when) ABOVE the messenger's words, and the maid's «thành: biết X có ý hại ngươi» row said again what the card said.
+Fix (j70.js): j70thr, j70 seen/warn and the npc report now read: messenger → ONE plain fact line (`thrLine70`: who + how + when) → «Vì …» (seen/warn) → evidence line → options. The maid's duplicate «biết …» row is filtered. Also fixed the double word «vì vì lợi riêng». KIT.md: «WARNING / REPORT ORDER».
+Scan dev/test/dialog-dup-scan.js (53/54 dialogs: every PEND that can be built here + the maid warning through the real flow; exact repeated sentence, boxed card, order): before (main) 1 bad (boxed card first, wrong order), after 0 bad, Fold + iPad, 0 page errors. Shots looked.
+Limit: the scan catches exact repeated sentences and the warning order only; a fact worded two ways (like «ghen 52» vs «mức nặng») is fixed here by reading, not detected by script. Dialogs built only from specific game state (events with their own PEND args) are not all reachable by the scan.

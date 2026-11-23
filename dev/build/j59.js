@@ -396,4 +396,5 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===
 try{const st=document.getElementById("stage");if(st&&window.ResizeObserver)new ResizeObserver(j59sched).observe(st)}catch(e){}
 addEventListener("resize",j59sched);
 window.j59lay=j59lay;
+window.j59tagHTML=j59tagHTML;window.j59col=j59col;window.j59fac=j59fac;
 })();

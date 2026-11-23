@@ -18,6 +18,8 @@
    ======================================================================================================================================== */
 const ASN=window.__asN={maid:{},srv:{},n:0,ms:0,tick:0};
 function asOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
+/* coop-guest-agent: asOn for p's OWN household on this seat (jagent agSelf): host / solo = asOn(); a co-op guest = her own staff only */
+function asSelfOn(p){try{return !!(typeof agSelf==="function"&&agSelf(p)&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
 function asB(){return BAL.ag.staff}
 function asGrp(s){return s&&s.role==="maid"?"maid":"srv"}
 function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
@@ -111,7 +113,7 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
-  const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
+  const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
  spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
@@ -144,7 +146,7 @@ function asEmpTea(s){const m=ownerOf(s);asC(s,"empTea");const T=S.turn||0;if(!s.
 /* ---------- the choice: needs × traits (mindPick with jmind's slip) against keeping her routine ---------- */
 function asDecide(s,N){N=N||asNeeds(s);const O=asOpts(s,N);if(!O.length)return null;const mw=(()=>{try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}})();
  const c=mindPick([["keep",BAL.ag.routine/BAL.ag.unit]].concat(O.map(o=>[o,o.u*BAL.ag.needW*mw])),s);return c==="keep"?null:c}
-function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out)L.push(s)}return L}
+function asStaff(){const L=[];const mine=typeof agMine==="function"&&agMine();for(const p of consorts()){if(!p||!p.staff||(mine&&p!==S))continue;/* r2: her own household only on her seat */if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out&&!s.coop)L.push(s)}return L}/* s.coop = a co-op friend who plays a maid: she decides on her own phone (coop-guest-agent) */
 /* ---------- 5 DAY PLAN (OD 17/11 ~13:40Z): at the first buổi of each day every staff draws 4 slots {k, t, pl} by her needs (asDecide at
    plan time); each buổi she carries out her slot — the option is rebuilt with today's odds (same k and target); gone → she keeps her duties
    that buổi. Saved in S.agS (lazy; old saves load). Part A's jagday draws the consorts / Emperor / Thái hậu; staff plans are drawn here,
@@ -156,16 +158,24 @@ function asPlanDraw(){const D=S.agS={d:wk(),P:{}};const t0=performance.now();let
 function asDo(s,sl){if(!sl||!sl.k)return"";const N=asNeeds(s);const O=asOpts(s,N);const c=O.find(o=>o.k===sl.k&&asSlot(o).t===sl.t)||O.find(o=>o.k===sl.k&&!sl.t);
  if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(s)||""}
 function asPlanned(){try{return typeof agDrawReg==="function"&&typeof agDOn==="function"&&agDOn()}catch(e){return false}}
-function asTick(){if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
+/* coop-guest-agent r2: her OWN staff's day acts on the seat that steps her buổi (her phone at level < 5 / her week end; the host in her context
+   at level >= 5, jcoopthine E): one tick per buổi key kept in HER person (S.asK travels with her blob), solo rules inside agSelfRun; the world part
+   of a deed follows that seat's contract (her phone: part C lens; host context: E put-back), her household's part stays. */
+function asTickMine(){if(!asSelfOn(S))return"";const key=agKey();if(S.asK===key)return"";S.asK=key;let ev="";
+ try{ev=agSelfRun(()=>{let e="";if(!S.agS||S.agS.d!==wk())asPlanDraw();const b=Math.min(3,S.buoi||0);const P=S.agS.P;
+  for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}e+=asDo(s,L[b])}return e})}catch(e){console.error("jagstaff tickMine",e)}
+ ASN.mine=(ASN.mine||0)+1;if(ev)try{log(ev)}catch(e){}return ev}
+function asTick(){if(typeof agMine==="function"&&agMine())return asTickMine();if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
  try{if(!S.agS||S.agS.d!==wk())asPlanDraw();const b=Math.min(3,S.buoi||0);const P=S.agS.P;
   for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}ev+=asDo(s,L[b])}}catch(e){console.error("jagstaff tick",e)}ASN.ms+=performance.now()-t0;
  if(ev)try{log(ev)}catch(e){}return ev}
 /* ---------- the month: wage, secrets, betrayal found, grant, age (the player maid's rules) ---------- */
-function asMonth(){if(!asOn())return"";let ev="";const B=asB();
- for(const p of consorts()){if(!p||!p.staff)continue;const sch=(p.schemes||0)>(p.schLast||0);
-  for(const s of p.staff.slice()){if(s.sid==null)continue;asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
+function asMonth(){if(!asSelfOn(S))return""; const mine=typeof agMine==="function"&&agMine();if(mine)return agSelfRun(()=>asMonth0(mine));return asMonth0(false)}
+function asMonth0(mine){let ev="";const B=asB();
+ for(const p of consorts()){if(!p||!p.staff||!asSelfOn(p)||(mine&&p!==S))continue;/* coop-guest-agent: a co-op guest runs her OWN household only (the host runs the world's) */const sch=(p.schemes||0)>(p.schLast||0);
+  for(const s of p.staff.slice()){if(s.sid==null||s.coop)continue;/* s.coop: a co-op friend playing a maid lives her own month on her phone */asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
-   if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
+   if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(p,k))==="kill"){/* law 1 (r1): the same kill-vs-Tân Giả khố pick as the player maid (j42 srvMonth) */asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
    if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
     if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}
@@ -203,6 +213,8 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
 (function(){
  const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{asTick()}catch(e){console.error("jagstaff pw",e)}return r};
  const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{r+=asMonth()}catch(e){console.error("jagstaff month",e)}return r};
- const aw0=amWeek;amWeek=function(){if(asOn())return"";return aw0.apply(this,arguments)};
+ /* r2: the host steps her buổi in her context (jcoopthine E, placeWhere does not run there): her staff's day acts tick after her step */
+ if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{const c=window.COOPW;if(c&&c.on&&c.ctx&&c.ctx!==c.seat)asTick()}catch(e){console.error("jagstaff her step",e)}return r}}
+ const aw0=amWeek;amWeek=function(){if(asOn()||(typeof agMine==="function"&&agMine()&&asSelfOn(S)))return"";/* r2: her maids seek by their day acts on her seat */return aw0.apply(this,arguments)};
 })();
-Object.assign(window,{asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
+Object.assign(window,{asSelfOn,asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});

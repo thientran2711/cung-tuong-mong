@@ -25,7 +25,7 @@ function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
  F.push(["Tài "+(me?"ngươi ":"")+(a.tai||0),(a.tai||0)/10]);
  if(ag===false)F.push(["Không có kẻ hầu đáng tin để sai đi",-BAL.spyNoAgent]);
  else if(ag){const nm=ag.name||"kẻ hầu";F.push([`Phải sai ${nm} đi, không tận mắt`,-BAL.spySent]);
-  F.push([`Lòng ${nm} ${ag.loyal}`,((ag.loyal||0)-50)/5]);
+  F.push([`Thiện cảm ${nm} ${ag.loyal}`,((ag.loyal||0)-50)/5]);
   const tb=qv({lanh:8,chuyen:5,trung:2,tham:0,nhat:-5},ag,0);if(tb)F.push([ag.kn||ag===S.maid?`${nm} ${netTxt(ag)}`:`Nết ${nm} (ngươi chưa rõ)`,tb]);
   if(ag.rk)F.push([`${nm} bậc ${srk(ag)}`,srk(ag)*3-3]);
   const f=whyKnows(ag,t);if(f)F.push([`${nm} quen người ${whyPal(t)}`,BAL.spyKnow])}
@@ -42,7 +42,7 @@ function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
 function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyRoll(a,t):oSpy(a);/* the roll's own odds (lá số included; review/shown-odds-one-path) */A0.why=(a,t)=>spyFactors(a,t);
- A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
+ A0.f=(a,t)=>{ap(a,{bac:-actBac("spy",a,t)})/* one core: the jecon §5 price the card shows (was a flat 15) */;const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
 (function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
 /* her maid at home: "Sai đi dò la" — SHE chooses whom (owner 08:45Z: never a silent random target for a player act).
@@ -58,17 +58,17 @@ function spyTarget(){S.mspy=S.mspy||{};const L=spyList();if(!L.length)return nul
  S.mspy.b=spyBk();return t}
 function spyMaidRun(t,ag){const m=ag||whyMaidInit(S.maid);S.mspy={b:spyBk(),id:t.id};const o=spyRoll(S,t,m);const ok=aRoll(o);
  if(ok){if(typeof j78maidSpy==="function")j78maidSpy(ag);else{log(evA(S,t,BAL.eff.jwhy.evSpyMaidRun)?`${m.name} dò la ${spyWho(t)}: chứng cứ ${balSg(BAL.eff.jwhy.evSpyMaidRun)}.`:`${m.name} dò la ${spyWho(t)}: không tìm ra điều gì sai trái.`)}}
- else{if(ag)ag.loyal=cl((ag.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);else apply({maid:-5});if(typeof j78maidFail==="function")j78maidFail(ag);else log(`${m.name} bị bắt gặp khi dò la ${spyWho(t)}: lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}.`)}
+ else{if(ag)ag.loyal=cl((ag.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);else apply({maid:-5});if(typeof j78maidFail==="function")j78maidFail(ag);else log(`${m.name} bị bắt gặp khi dò la ${spyWho(t)}: thiện cảm -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}.`)}
  window.__lastOk=ok;return ok}
 /* review/pick-hint (owner 15/11 "Giải thích khó hiểu quá"): the picker's "what decides the odds" line is ONE short sentence — who raises it
    (the servant's skill, people she knows there), who lowers it (how watchful the target's palace is); the full list stays in "Vì sao…?" */
 function spyHint(m){return `Thành hay bại tùy: Tai mắt của ngươi, ${m.name} khéo hay vụng, có quen ai bên ấy không; bên ấy càng đa nghi, canh giữ càng chặt thì càng khó.`}
 /* ag: the servant sent (any maid / eunuch of her household, review/servant-system); none = her trusted maid */
 function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cur=spyTarget();
- const opts=L.map(v=>{const fz=spyRoll(S,v,m);/* the odds printed = the odds rolled after the pay (j9 fzRun) */return{kgt:v,n:`${mdH(pv(v),"xs")}${spyWho(v)}${v===cur?" · đang nhắm":""}`,x:`${word(fz)} · thành: biết 2 điều thật về nàng, chứng cứ ${balSg(BAL.eff.j78.evN)} · hỏng: Lòng ${m.name} -5, nàng đoán ra: ${typeof pvOan==="function"?pvOan(v,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
+ const opts=L.map(v=>{const fz=spyRoll(S,v,m);/* the odds printed = the odds rolled after the pay (j9 fzRun) */return{kgt:v,n:`${mdH(pv(v),"xs")}${spyWho(v)}${v===cur?" · đang nhắm":""}`,x:`${word(fz)} · thành: biết 2 điều thật về nàng, chứng cứ ${balSg(BAL.eff.j78.evN)} · hỏng: Thiện cảm ${m.name} -5, nàng đoán ra: ${typeof pvOan==="function"?pvOan(v,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,v,m),dom:"Mưu kế",o:spyO(S,v,m),go:()=>{/* review/servant-system: the khắc is paid when a target is chosen (j25 payOnPick: the card is an "open" act); before, nothing was paid and "Thôi" gave 2 khắc back */if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0}const b=rsnap();const ok=fzRun(fz,null,()=>spyMaidRun(v,ag));try{if(S.visit){S.visit.tk=S.visit.tk||{};if(popIdx!=null)S.visit.tk[popIdx]=1}}catch(e){}setTimeout(()=>{try{resultShow(`Sai ${m.name} dò la ${spyWho(v)}`,b,ok)}catch(e){}},0)}}});
  opts.push({n:"Thôi, để sau",x:"không sai đi (khắc vừa tốn được trả lại)",go:()=>{if(S.payOnPick)S.payOnPick=0;else if(refund)used=Math.max(0,used-refund)}});
- Q.push({t:`Sai ${m.name} đi dò la`,who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p>`,opts});showModal()}
+ Q.push({t:`Sai ${m.name} đi dò la`,ownAct:1,/* dialog-person (owner 21/11): the choice is HERS alone — her own figure stands on the left (jk4 kitStagePeople); `who` stays only to name the servant she sends (no chip of her inside the text) */who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p>`,opts});showModal()}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||p.kind!=="maid"||!S.maid)return A;const i=A.findIndex(a=>a.n==="Sai đi dò la");if(i<0)return A;
  const m=whyMaidInit(S.maid),t=spyTarget();if(!t){A[i]=Object.assign({},A[i],{lock:true,t:"không còn phi tần nào để dò"});return A}
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
@@ -93,7 +93,7 @@ const WHYK=[["mat","Tai mắt",0],["tamco","Tâm cơ",0],["tai","Tài",0],["sac"
 function whyDiff(fn,subj){const L=[];let o0;try{o0=fn()}catch(e){return L}if(o0==null)return L;
  for(const [p,who] of subj){if(!p)continue;for(const [k,lab,ref] of WHYK){if(typeof p[k]!=="number"||p[k]===ref)continue;const v=p[k];let o1;try{p[k]=ref;o1=fn()}catch(e){o1=o0}finally{p[k]=v}
    if(o1!=null&&o1!==o0)L.push([who===S?`${lab} ngươi ${v}`:`${lab} ${whyNm(who)}`,o0-o1])}
-  if(p.maid&&typeof p.maid.loyal==="number"){const v=p.maid.loyal;let o1;try{p.maid.loyal=50;o1=fn()}catch(e){o1=o0}finally{p.maid.loyal=v}if(o1!=null&&o1!==o0)L.push([who===S?`Lòng ${p.maid.name||"cung nữ"} ${v}`:`Lòng cung nữ của ${whyNm(who)}`,o0-o1])}
+  if(p.maid&&typeof p.maid.loyal==="number"){const v=p.maid.loyal;let o1;try{p.maid.loyal=50;o1=fn()}catch(e){o1=o0}finally{p.maid.loyal=v}if(o1!=null&&o1!==o0)L.push([who===S?`Thiện cảm ${p.maid.name||"cung nữ"} ${v}`:`Thiện cảm của cung nữ của ${whyNm(who)}`,o0-o1])}
   if(p.arts)for(const k in p.arts){if(typeof p.arts[k]!=="number"||!p.arts[k])continue;const v=p.arts[k];let o1;try{p.arts[k]=0;o1=fn()}catch(e){o1=o0}finally{p.arts[k]=v}
    if(o1!=null&&o1!==o0)L.push([`${(typeof ARTS!=="undefined"&&(ARTS.find?((ARTS.find(x=>x.k===k)||{}).n):ARTS[k]&&ARTS[k].n))||"Tài nghệ"} ${who===S?"ngươi":whyNm(who)} bậc ${v}`,o0-o1])}}
  if(S&&S.emp&&typeof S.emp.mood==="number"){const v=S.emp.mood;let o1;try{S.emp.mood=1;o1=fn()}catch(e){o1=o0}finally{S.emp.mood=v}if(o1!=null&&o1!==o0)L.push([`Hoàng thượng ${String(MOODS[v][0]).toLowerCase()}`,o0-o1])}

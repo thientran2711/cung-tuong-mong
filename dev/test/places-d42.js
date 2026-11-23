@@ -1,4 +1,4 @@
-/* D42 places: Dư đồ shows cnh/tgk/ttp/acs/dc; princes' rooms show children by age; count on map = people on arrival.
+/* D42 places: Dư đồ shows cnh/tgk/ttp/acs/dc/nth/pd; princes' rooms show children by age; count on map = people on arrival.
    usage: node dev/test/places-d42.js <url> <W>x<H>@dpr <outdir> <tag> */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
@@ -16,15 +16,15 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
   setHeir(a,null);S.buoi=1;used=0;S.place='home';placeWhere();tab='go';window.__mapZ=1;render();setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);
   return{mine:[a.name,b.name,c.name],rival:[d.name,e.name,v.name],heir:S.heir&&S.heir.k.name}});
  const R={setup,errs};
- /* map: five spots, labels, counts */
+ /* map: seven spots, labels, counts */
  await shot('1-map');
- R.spots=await p.evaluate(()=>['cnh','tgk','ttp','acs','dc'].map(k=>{const el=document.querySelector(`#panel .mspot[data-go="${k}"]`);return{k,found:!!el,label:el&&el.textContent.trim().slice(0,60),count:countAt(k),walk:travel('home',k),acc:accessOf(S,k).ok}}));
+ R.spots=await p.evaluate(()=>['cnh','tgk','ttp','acs','dc','nth','pd'].map(k=>{const el=document.querySelector(`#panel .mspot[data-go="${k}"]`);return{k,found:!!el,label:el&&el.textContent.trim().slice(0,60),count:countAt(k),walk:travel('home',k),acc:accessOf(S,k).ok}}));
  /* each place, buổi 1 (trưa): arrive, compare the stage people with the map count */
  const placeLog=[];
- for(const k of ['acs','dc','ttp','cnh','tgk']){
-  const r=await p.evaluate(k=>{Q.length=0;S.buoi=1;used=0;S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};placeWhere();const cnt=countAt(k);accGrant&&accGrant(S,k);goTo(k);
-   return{k,place:S.place,cnt,ppl:(S.visit&&S.visit.people||[]).map(x=>x.kind+':'+x.name),msg:S.visit&&S.visit.msg,sc:placeOf(k).sc,img:(document.getElementById('scimg')||{style:{}}).style.backgroundImage.slice(0,90)}},k);
-  await p.waitForTimeout(1500);if(k==='acs'||k==='dc')await shot('2-'+k);placeLog.push(r)}
+ for(const k of ['acs','dc','ttp','cnh','tgk','nth','pd']){
+  const r=await p.evaluate(k=>{Q.length=0;S.buoi=1;used=0;S.place='tn';S.visit={k:'tn',people:[],talked:false,tk:{}};placeWhere();const cnt=countAt(k);accGrant&&accGrant(S,k);goTo(k);
+   return{k,place:S.place,match:cnt===(S.visit&&S.visit.people||[]).filter(x=>x.kind!=='task'&&x.kind!=='elder').length,cnt,ppl:(S.visit&&S.visit.people||[]).map(x=>x.kind+':'+x.name),msg:S.visit&&S.visit.msg,sc:placeOf(k).sc,img:(document.getElementById('scimg')||{style:{}}).style.backgroundImage.slice(0,90)}},k);
+  await p.waitForTimeout(1500);if(k==='acs'||k==='dc'||k==='nth'||k==='pd')await shot('2-'+k);placeLog.push(r)}
  R.places=placeLog;
  /* buổi sáng: boys are at the study; at home the children who moved out are gone */
  R.morning=await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};const o={home:homePeople().filter(x=>x.kind==='kid').map(x=>x.name),acs:plxPeople('acs').length,dc:plxPeople('dc').length,ttp:plxPeople('ttp').map(x=>x.kind+':'+x.name),homeCount:countAt('home')};

@@ -32,7 +32,11 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
  if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
   rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push({l:"Hay",f:T.join("; ")})}
+  /* owner 21/11 ~03:40Z: header rows are SHORT WORDS: «Tính nết | Đa nghi, Hiếu thảo» (one word per trait = ETRAITS name), «Trọng | tài nghệ, sắc» (his tend phrases «trọng X», «trọng» never repeated); each word is the kit tap-word (kitFactTap: dotted underline, tap → only that word's meaning = the ETRAITS sentence, same source as the old trait box). No long «Hay» sentence. */
+  const tw=(w,t)=>typeof kitFactTap==="function"&&ETRAITS[t]?kitFactTap(w,`<div class="kpopx">${ETRAITS[t][1]}</div>`):w;
+  const TS=(E.traits||[]).filter(t=>ETRAITS[t]),tr=[];
+  for(const t of TS){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(tw(m[1],t))}}
+  if(TS.length)rows.push({l:"Tính nết",f:TS.map(t=>tw(ETRAITS[t][0],t)).join(", ")});if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}}
@@ -41,21 +45,21 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
   try{if(typeof disLikeKnown==="function"){const keys=disLikeKeys(e),kn_=disLikeKnown(e).filter(k=>keys.includes(k));
     const r=kn_.length?pcfPrefRow(e,L,"Thích",kn_.map(k=>disEntry(k).n),keys.length,"thích"):(keys.length?{l:"Thích",f:"chưa rõ",c:"n"}:null);if(r)rows.push(r)}}catch(x){}
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push({l:"Hay",f:tend.join("; ")})}
- const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitFactRows(R)}</div>`}catch(x){return""}}
+  /* owner 21/11: no long «Hay» sentence: the trait words above carry their meaning on tap (kitGloss) */}
+ const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec kpno">${kitFactRows(R)}</div>`}catch(x){return""}}
 const PREF=/^(thích|không ưa|ghét)\b/i;
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=KNOWN(e).filter(x=>!PREF.test(x.f));/* likes / dislikes already sit in Sở trọng */const n=KNOWN(e).length;const ev=e.ev||0;
- const rows=L.slice(0,2).map(x=>({l:"Tin",f:x.f,d:x}));
+ const rows=L.slice(0,2).map(x=>({l:"Đã biết",f:x.f,d:x}));
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
- return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
+ return `<div class="kpsec kpno pcf-i">${rows.length?kitFactRows(rows):kitFactRows([{l:"Đã biết",f:"chưa biết gì thêm; dò la, hỏi kẻ hầu để biết",c:"n"}])}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
 /* greet-stranger (owner 18/11 01:38Z: the result read twice): the line the open result note (popMsg) already shows is not repeated as "Dạo này" */
 function pcfShown(t){try{/* person-dialog-restore (OD:L1852): popMsg is the result shown in the BOTTOM result card now (not a note in this column); the line it already says is still not repeated here as "Dạo này" (the result read twice, owner 18/11 01:38Z) */const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];let sk=0;
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;if(pcfShown(t)){sk=1;continue}
-  rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
+  rows.push({l:"Dạo này",f:"Trong cung: "+m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
  if(!rows.length&&sk)return"";/* the only story is the result shown above */
- if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
- return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitFactRows(rows)}</div>`}catch(x){return""}}
+ if(!rows.length)return `<div class="kpsec kpno">${kitFactRows([{l:"Dạo này",f:`Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}`,c:"n"}])}</div>`;
+ return `<div class="kpsec kpno">${kitFactRows(rows)}</div>`}catch(x){return""}}
 /* quick acts: only for a rival, only when her card has no act (the pop-up after the one talk of the visit) */
 function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="function")return"";const i=rivals.indexOf(e);if(i<0||!e.alive||e.out||typeof pbtn!=="function")return"";
  const B=[];const push=b=>{if(b&&/<button(?![^>]*disabled)/.test(b))B.push(b)};
@@ -119,7 +123,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: bảng thông tin bên phải (sở trọng, đã biết, dạo này) + khối chính bên trái (lòng người gọn)",html:()=>{
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính cách là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính cách",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính nết là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính nết",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
  try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true),k=pcfKey(v);if(h||k)return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div style="flex:0 0 172px">${k}</div><div style="flex:1;min-width:0">${h}</div></div>`}
   /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
   return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div class="kpkey" style="flex:0 0 172px">${kitRelTable([{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:12,d:0,kind:"good"},{dir:"them",label:"Nàng oán ta",w:"Oán",sj:"Nàng",ob:"nàng",now:3,d:0,kind:"bad"},{dir:"them",label:"Nàng ghen",w:"Ghen",sj:"Nàng",ob:"nàng",now:8,d:0,kind:"bad"},{dir:"me",label:"Ta → nàng: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:20,d:0,kind:"good"}],{compact:true})}</div><div style="flex:1;min-width:0">${kitRows([["Sở trường","Thi họa"],["Tính nết","Hay giúp người"],["Tin","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}</div></div>`}catch(e){return""}}})}catch(e){}

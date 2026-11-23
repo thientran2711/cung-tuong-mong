@@ -83,7 +83,7 @@ function fxSeen(p){return KIT_FACEFX.seen(p)}                        /* the one 
 function fxLive(p){return KIT_FACEFX.live(p)}
 function fxKey(by){try{return by&&["consort","player"].includes(KIT_FACEFX.kind(by))?key(by):null}catch(e){return null}}
 function fxLeft(u){return Math.max(1,(u|0)-wk())}
-function fxName(p){try{if(p===S)return"Ngươi";if(p&&p.name)return p.name;const k=KIT_FACEFX.kind(p);if(k==="thaihau")return"Thái hậu";if(k==="emp")return typeof empName==="function"?empName():"Hoàng thượng"}catch(e){}return""}
+function fxName(p){try{if(p===S)return"Ngươi";if(p&&p.name)return p.name;const k=KIT_FACEFX.kind(p);if(k==="thaihau")return"Thái hậu";if(k==="emp")return"Hoàng thượng"}catch(e){}return""}
 function fxWho(p){return fxName(p)}
 function fxIllSeen(p){try{const i=fxIll(p);if(!i)return false;if(typeof illOf==="function"&&i===illOf(p)&&typeof illKnown==="function")return !!illKnown(p);return !!i.known}catch(e){return false}}
 function fxIllName(i){try{return `${ILL[i.k].n} · ${STG[i.st|0]||STG[1]}`}catch(e){return"Người ốm yếu, xanh xao"}}
@@ -116,7 +116,7 @@ function pzGive(p,sev,how,by,weeks){if(!p||!fxLive(p))return;sev=cl(sev|0,1,2);c
  p.pz={sev,until:u,how:how||"",by:fxKey(by),at:wk(),dx:0,nt:0}}
 function pzOf(p){if(!p||!fxLive(p))return null;if(p.pz&&p.pz.until>wk())return p.pz;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k==="docman")return{sev:i.st>=2?2:1,ill:1};return null}
 function fxTogether(p){try{return typeof together!=="function"||!!together(S,p)}catch(e){return false}}
-function fxObservant(){try{return eyes(S)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
+function fxObservant(){try{return eyes(S)>=3||((S.arts&&S.arts.y)||0)>=yCareT()||!!S.doctor}catch(e){return false}}
 KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pilot 2) */
  state:p=>pzOf(p),
  seen:(p,st)=>fxSeen(p),                                /* the face itself shows to anyone who sees her; what it MEANS needs an eye (chip) */
@@ -128,7 +128,7 @@ KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pi
 (function(){try{const P=ACT.slowpoison,f0=P.f;P.f=function(a,t){const s0=t?(t.sick||0):0;const r=f0.apply(this,arguments);try{if(t&&(t.sick||0)>s0)pzGive(t,1,"độc ngấm dần",a,FXF.slowWk)}catch(e){}return r}}catch(e){}})();
 /* weekly: wears off; Thái y medicine / Y thuật / NPC care heal faster; she may NOTICE it on someone she sees — a clue for the evidence system */
 function pzWeek(p){const z=p&&p.pz;if(!z)return;if(z.until<=wk()){p.pz=null;fxLog(p,p===S?"Môi ngươi đã hồng trở lại, độc tan hết.":`${fxName(p)} đã khỏe lại, sắc môi hồng như cũ.`);return}
- if(p!==S&&(roll(FXF.docNpcHeal)||((p.arts&&p.arts.y)||0)>=2))z.until--;
+ if(p!==S&&(roll(FXF.docNpcHeal)||((p.arts&&p.arts.y)||0)>=yCareT()))z.until--;
  if(p!==S&&!z.nt&&fxObservant()&&fxSeen(p)&&(fxTogether(p)||roll(40))){z.nt=1;let t=`Ngươi để ý môi ${fxName(p)} tím tái, sắc mặt xám, giống người trúng độc.`;
   const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(FXF.docNotice+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evPzWeek);t+=` Ngươi lần theo thang thuốc, ra dấu vết người của ${by.name}: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evPzWeek)}.`}try{log(t)}catch(e){}}}
 PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];const y=(S.arts&&S.arts.y)||0;
@@ -157,7 +157,7 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
  state:p=>p&&p.pen&&p.pen.until>wk()?p.pen:null,
  seen:(p,st)=>fxSeen(p),
  chip:(p,st)=>[`${PEN_N[st.k]||PEN_N.quy} · đi chậm · còn ${fxLeft(st.until)} tuần`,"hot"]});
-(function(){const t0=travel;travel=function(a,b){const r=t0.apply(this,arguments);try{if(r>0&&S&&S.pen&&S.pen.until>wk())return r+1}catch(e){}return r}})();
+walkSlow=function(p){try{return p&&p.pen&&p.pen.until>wk()?BAL.walk.pen:0}catch(e){return 0}}; /* «đi chậm»: j9 travel adds it per walker (walk-cost r3; was a travel wrapper that jclose overwrote) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&npwPick(["go","low"],k=>fxPenW(v,t,k))==="low")return[]}/* npc-purpose G2c: while punished she lies low unless her grudge outweighs her fear */catch(e){}return O}})();
 
 /* ---------- causes for slap + punishment ---------- */
@@ -178,7 +178,7 @@ A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.
  const B=BAL.slap;let sev=cl(SLAP.next|0||B.def,1,3);SLAP.next=0;const dc=B.duc[sev];
  if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(t,a,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
  if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
- if((t.sung||0)>=B.hoangMin&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${a===S?"ngươi":NM(a)} ${B.sung[sev]}). `}
+ if((t.sung||0)>=B.hoangMin&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (${sgOf(a,B.sung[sev],a===S?"Sủng ngươi":`Sủng ${NM(a)}`)}). `}
  r+=slapEvidence(a,t,sev);return `<span class="${t===S?"r":"g"}">${r}</span>`}});
 A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);

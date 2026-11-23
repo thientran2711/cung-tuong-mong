@@ -143,7 +143,9 @@ F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
  dec:a=>{if(!a||!ACT[a.k])return null;const t=(rivals||[]).find(v=>v&&v.id===a.t);if(!t||t===S)return null;let x=a.xv;
   if(a.xe){const i=itemFind(a.xe,a.x);if(i<0)return null;x=i}
   else if(typeof a.x==="number")x=a.x;return [S,t,a.k,x]},
- ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}]]});
+ ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}],
+  /* econ-tamco: her scheme road (Tâm cơ / hired hand + the odds she saw) rides with the act; the host pays and rolls it in her context (jtamco runAct) */
+  ["econ",()=>window.ECON_HER||null,v=>{window.ECON_HER=v||null}]]});
 function C0(e){const o=Object.assign({},e);delete o.ci;return o}
 /* F3 (whole family, F1's runAct item too): the item she tapped, found in her stored bag on the host. Tiers: the same index and the same
    item (keys in any order: a patch / ilUid can add a key in another order on one phone), any same item, then the same index with the same

@@ -15,7 +15,7 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf,#kroul{display:none!important}';document.head.appendChild(s)})});await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);/* night-final (as coop-e2e): .kcf / #kroul are no longer hidden — clear() (lib/coop-clear.js) ends them like a player */await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -23,7 +23,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),online,ended,on,
         frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);/* a loaded test machine can take > 30 s to load the 3.7 MB page */
-    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 const shot=async(o,n)=>{await o.p.waitForTimeout(400);const t0=Date.now();const alive=await Promise.race([o.p.evaluate(()=>1),sleep(10000).then(()=>0)]);if(!alive){ok(false,`${n} ${o.name}: page responsive`);return}
   try{await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`,timeout:120000})}catch(e){ok(false,`${n} ${o.name}: screenshot (${e.message.split('\n')[0]})`);return}
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
@@ -39,7 +39,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){/* the click itself is done; a navigation it starts (Chơi một mình → the sổ) is waited for by the caller's own state checks (a slow machine held 'scheduled navigations' past 30 s) *//* the panel may re-render between finding the button and clicking it (element detached): find it again */
   try{await el.click({noWaitAfter:true,timeout:15000});return true}catch(e){}}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
@@ -73,20 +73,25 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
     if(sp&&sp.carry===1){await sleep(600);const st=await A.p.evaluate(()=>Object.assign({k:__co().week+':'+(S.buoi||0),now:used},window.__tu||{used:-1}));ok(st.used===1&&!st.carry,'spill '+k0+' → '+st.k+': the next buổi pays the carry once',st)}
     return true}await clear(A);await clear(B);await sleep(250)}
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
-  ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B)});return false}
+  ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 const RISE=async(o,drop)=>o.p.evaluate(drop=>{/* one maid of hers, only she can catch the eye this time */
   if(!window.__dropP){window.__dropP=1;const s0=COOP.send;COOP.send=function(m){if(m&&m.k==='ctm-ask'&&window.__dropAsk===1)return;return s0.apply(this,arguments)}}
   window.__dropAsk=drop?1:2;
-  const m=mkServ('maid');m.age=18;m.loyal=drop?20:80;S.staff.push(m);const e0=mlEye;mlEye=function(p,s){return s===m};const n0=rivals.length;let ev='';
+  /* review/coop-guest-staff: the maid is a LEGAL member of her household (BAL.promo.cap via capOf/hhHas). Before, a rank-0 guest (table [1,0]:
+     only her personal maid) got a maid over the table; refused, she came home (srvHome) and the one household law (capSweep → capTrim) sent her
+     away at once ("Nội vụ phủ … điều sang hầu nơi khác") — the 36/37 FAIL of step 3, not a merge drop. */
+  let m=(S.staff||[]).find(x=>x&&x.role==='maid'&&!x.eid&&!x.coop&&!x.home&&!x.spyFor&&!x.lover);/* a real cung nữ of her household (Nội vụ phủ fills a free slot) */
+  if(!m){if(hhHas(S)[0]>=capOf(S)[0])return{full:{rank:S.rank,cap:capOf(S),has:hhHas(S)}};m=mkServ('maid');S.staff.push(m)}m.age=18;m.loyal=drop?20:80;const e0=mlEye;mlEye=function(p,s){return s===m};const n0=rivals.length;let ev='';
   try{ev=servRanks()||''}finally{mlEye=e0}const g=rivals.find(v=>v.id>=1000&&!S.staff.includes(m));try{render()}catch(e){}
-  return{sid:m.sid,maid:m.name,ghost:g?{id:g.id,name:g.name,rel:g.rel}:null,stillHers:S.staff.includes(m),ev,n:rivals.length-n0,rl:g?S.rl[g.id]:null}},!!drop);
+  return{legal:hhHas(S)[0]<=capOf(S)[0],sid:m.sid,maid:m.name,ghost:g?{id:g.id,name:g.name,rel:g.rel}:null,stillHers:S.staff.includes(m),ev,n:rivals.length-n0,rl:g?S.rl[g.id]:null}},!!drop);
 const view=o=>o.p.evaluate(()=>({R:rivals.filter(v=>!v.coop&&v.id<1000).map(v=>v.id+':'+v.name).sort().join(),ghosts:rivals.filter(v=>v.id>=1000).map(v=>v.id+':'+v.name),
   asks:(S.coopAsk||[]).map(a=>a.id),done:S.askDone||null,N:window.__askN,staff:(S.staff||[]).map(s=>s.sid)}));
 const byAsk=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x.coopAsk===id);return v?{id:v.id,name:v.name,rank:v.rank,rel:v.rel,me:S.rl[v.id]==null?null:S.rl[v.id],ro:S.ro[v.id]==null?null:S.ro[v.id],alive:v.alive}:null},id);
 async function rejoinB(B,code){await B.p.close();await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  return until(B,()=>__co().seat==='b'&&!__co().frozen&&__co().world,null,60000)}
-async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;ok(r,tag+': week advanced for both');await clear(A);await clear(B);return r}
+async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1);let r=true;for(const o of [A,B])r=await untilC(o,x=>__co().week===x+1,wk,90000)&&r;const wd=o=>o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,bend:COOPW.bend,cyHold:COOPW.cyHold,rp:Object.keys(COOPW.rpend||{}).length,Q:Q.map(m=>String(m&&(m.t||m.pid)||'').slice(0,30)),mg:!!S.mg,b:S.buoi,nx:[document.getElementById('next').disabled,document.getElementById('next').textContent],tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message);
+ ok(r,tag+': week advanced for both',r?undefined:{A:await wd(A),B:await wd(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),cA:await clear(A),q0:await A.p.evaluate(()=>{const m=Q[0];return m?{t:m.t,pid:m.pid,opts:(m.opts||[]).map(o=>String(o&&(o.t||o.n)||'').slice(0,30)+(o&&o.off?'(off)':'')),thin:!!m.thin,dfSeen:!!m.dfSeen,mHidden:document.getElementById('modal').hidden}:null}).catch(e=>e.message)});await clear(A);await clear(B);return r}
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  await B.ctx.addInitScript(()=>{window.__forceOrigin='thd'});
@@ -98,15 +103,31 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world))break;await sleep(500)}}
  await clear(A);await clear(B);
  const bc=await B.p.evaluate(()=>({srv:!!(S.srv&&!S.srv.risen),inC:consorts().includes(S),rank:S.rank,room:roomFor('consort')}));ok(bc.inC&&bc.room,'B is a consort with a free consort seat',bc);
+ /* her household must have room for the maid who rises (a rank whose table holds a cung nữ besides her personal maid: Thường tại [2,0]) */
+ {const h=await B.p.evaluate(()=>{if(capOf(S)[0]-hhHas(S)[0]<1){S.rank=Math.max(S.rank|0,1);render()}return{rank:S.rank,cap:capOf(S),has:hhHas(S)}});
+  ok(h.cap[0]>=2&&h.has[0]<=h.cap[0],'B: her household table holds a cung nữ besides her personal maid, not over it',h)}
  /* 1 live path */
- const r1=await RISE(B,false);ok(r1.ghost&&!r1.stillHers&&r1.n===1,'1 guest: her maid rose, stand-in shown at once, maid left her household',r1);
+ const r1=await RISE(B,false);ok(r1.legal&&r1.ghost&&!r1.stillHers&&r1.n===1,'1 guest: her maid rose, stand-in shown at once, maid left her household',r1);
  ok(/lọt mắt xanh Hoàng thượng/.test(r1.ev),'1 guest: the solo rise line',r1.ev.slice(0,160));
  const id1=await B.p.evaluate(g=>{for(let i=0;i<20&&!(S.coopAsk||[]).length;i++)ser();return(S.coopAsk||[]).map(a=>a.id).find(x=>x.endsWith(':'+g))||null},r1.ghost&&r1.ghost.id);ok(!!id1,'1 guest: request in her blob',id1);
  ok(await until(A,id=>rivals.some(v=>v.coopAsk===id),id1,20000),'1 host: made the consort on the relay (same week)');
  const h1=await byAsk(A,id1);ok(h1&&h1.name===r1.ghost.name&&h1.id<900,'1 host: same name, a world id',h1);
+ /* D20 coop-flakes: links probe (dump only on FAIL): B's links to the stand-in id (T) and the world id (R) as every rebuild receives them (before
+    the ask settle moves T → R), B's own screen every 250 ms, and the host's stored copy of B */
+ const LP=[r1.ghost&&r1.ghost.id,h1&&h1.id];
+ await B.p.evaluate(([T,R])=>{window.__lp={de:[],own:[]};const k=(o,i)=>o&&o[i]!=null?o[i]:null;const f=deser;deser=function(d){try{if(d&&d.S)__lp.de.push({w:__co().week,rlT:k(d.S.rl,T),rlR:k(d.S.rl,R),roT:k(d.S.ro,T),roR:k(d.S.ro,R),ask:(d.S.coopAsk||[]).map(a=>a.id)})}catch(e){}return f.apply(this,arguments)};
+  let last='';window.__lpI=setInterval(()=>{try{const x=JSON.stringify([__co().week,S.buoi|0,k(S.rl,T),k(S.rl,R),k(S.ro,T),k(S.ro,R)]);if(x!==last){last=x;__lp.own.push(x)}}catch(e){}},250)},LP);
+ await A.p.evaluate(([T,R])=>{window.__lp={hb:[]};const k=(o,i)=>o&&o[i]!=null?o[i]:null;let last='';window.__lpI=setInterval(()=>{try{const T0=COOPW.thin;const x=T0&&T0.seatOf?T0.seatOf('b'):null;const P=COOPW.base&&COOPW.base.P&&COOPW.base.P.b;
+  const y=JSON.stringify([__co().week,x&&x.S?[k(x.S.rl,T),k(x.S.rl,R)]:null,P&&P.S?[k(P.S.rl,T),k(P.S.rl,R)]:null]);if(y!==last){last=y;__lp.hb.push(y)}}catch(e){}},250)},LP);
  await weekAll(A,B,'1');
+ const LPD=async()=>({B:await B.p.evaluate(()=>{clearInterval(window.__lpI);return Object.assign({logs:(S.logs||[]).slice(-12)},__lp)}).catch(e=>e.message),A:await A.p.evaluate(()=>{clearInterval(window.__lpI);return window.__lp}).catch(e=>e.message)});
  {const g1=await byAsk(B,id1);const v=await view(B);ok(g1&&g1.id===h1.id&&g1.name===h1.name,'1 guest: sees the same consort (id, name) after the week',{g1,h1});
-  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);ok(g1&&g1.me!=null&&Math.sign(g1.me)===Math.sign(r1.rl)&&Math.abs(g1.me-r1.rl)<Math.abs(r1.rl)&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; the week may move them a little, never double)',{g1,r1,tempKeys:tk})}
+  ok(!v.ghosts.length&&!v.asks.includes(id1),'1 guest: stand-in gone, request closed',v);
+  /* D20 coop-flakes: EXACT carry of her links (law 6b real people): at the merge her link to the stand-in (T, moved by her own week) and the
+     week's link to the world id (R, from 0 on the host, j9 affAdd) are ONE person: after the move she has T + R, never R alone (that dropped her
+     25 → −3: mb-5) and never T twice */
+  {const lp=await LPD();const de=(lp.B&&lp.B.de||[]).filter(x=>x.rlT!=null).pop();const clp=x=>Math.max(-100,Math.min(100,x));
+   const exp=de?clp(de.rlT+(de.rlR||0)):null;ok(de&&g1&&g1.me===exp,'1 guest: her link to the new consort = her own link + the week\'s change, exactly',{me:g1&&g1.me,exp,de,lp})}{const tk=await B.p.evaluate(t=>[S.rl[t],S.ro[t]].filter(x=>x!=null).length,r1.ghost.id);/* D20: her side is checked EXACTLY below (own link + the week's change); a week whose change outweighs her link may legally flip its sign */ok(g1&&g1.me!=null&&Math.sign(g1.rel)===Math.sign(r1.ghost.rel)&&!tk,'1 guest: her links moved to the world id (both sides; no stand-in key left)',{g1,r1,tempKeys:tk})}
   const va=await view(A);ok(va.R===v.R,'1 both: same consort list',[va.R.length,v.R.length])}
  /* 2 durable path + rejoin */
  const r2=await RISE(B,true);ok(r2.ghost,'2 guest: second maid rose (relay dropped)',r2);
@@ -119,10 +140,11 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
   const vb=await view(B),va=await view(A);ok(va.R===vb.R&&!vb.ghosts.length,'2 both: same consort list, no stand-in',[va.R.length,vb.R.length,vb.ghosts])}
  /* 3 refusal */
  await A.p.evaluate(()=>{window.__rf0=roomFor;roomFor=r=>r==='consort'?false:window.__rf0(r)});
- const r3=await RISE(B,false);ok(r3.ghost,'3 guest: third maid rose',r3);await sleep(3000);
+ const r3=await RISE(B,false);ok(r3.legal&&r3.ghost,'3 guest: third maid rose (a legal member of her household)',r3);await sleep(3000);
  await weekAll(A,B,'3a');await weekAll(A,B,'3b');await A.p.evaluate(()=>{roomFor=window.__rf0});
  {const v=await view(B);ok(v.staff.includes(r3.sid)&&!v.ghosts.length,'3 guest: refused (no seat) → her maid is back, no stand-in',v);
-  ok(await B.p.evaluate(n=>(S.logs||[]).some(l=>l.includes(n)&&/đủ người/.test(l)),r3.maid),'3 guest: a log line tells her')}
+  ok(await B.p.evaluate(n=>(S.logs||[]).some(l=>l.includes(n)&&/đủ người/.test(l)),r3.maid),'3 guest: a log line tells her');
+  ok(await B.p.evaluate(n=>!(S.logs||[]).some(l=>l.includes(n)&&/Nội vụ phủ định lại/.test(l))&&hhHas(S)[0]<=capOf(S)[0],r3.maid),'3 guest: she stays (within the household table, no Nội vụ phủ trim)')}
  /* 4 world events muted on the guest */
  {const r=await B.p.evaluate(()=>{const n0=rivals.length;const s={m:S.month,t:S.tuan,d:S.ttDone,y:S.year};S.month=2;S.tuan=0;S.ttDone=-1;tuyenTu();Object.assign(S,{month:s.m,tuan:s.t,ttDone:s.d});
    const v=rivals.find(x=>!x.coop&&x.id<900);const m0=v.maid;v.maid={name:'Thử',loyal:90};const R0=Math.random;Math.random=()=>0;let t='';try{t=sendMaid(v)}finally{Math.random=R0;v.maid=m0}return{made:rivals.length-n0,t}});

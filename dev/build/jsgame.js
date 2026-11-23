@@ -25,7 +25,7 @@ const SG_FILL=["Trà hôm nay hơi đắng.","Hoa đào nở sớm quá.","Mai t
 function sgPh(t,k){return t.replace("{k}",k).replace("{K}",k[0].toUpperCase()+k.slice(1))}
 function sgNghe(box,env){const R=sgRM();const C=kg82Canvas(box,.86,400),{g,W,H}=C;
  k91Btns(box,[["sgnep","Nép sau bình phong","giữ bóng trong dải xanh"]]);let glow=null,gUntil=0;
- const KW=sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=6500,SHOW=2600;
+ const KW=sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=mgLev(env,"nghe","cross"),SHOW=2600;/* MG11: the crossing time follows the board ease (BAL.mgTier.lev.nghe, law 5) */
  /* 16 lines: 7 with a word to listen for, 3 decoys (another secret word), 6 small talk; the last two are always small talk */
  const kinds=sgShuf(["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);
  const imp=sgShuf(SG_IMP),fil=sgShuf(SG_FILL);let ii=0,fi=0;
@@ -80,7 +80,7 @@ function sgGraph(){/* layered: 0 = Ngươi, columns 1–3 two courtiers each, 4 
  const best=N.map(()=>Infinity),prev=N.map(()=>-1);best[0]=0;const ord=N.map((x,i)=>i).sort((a,b)=>N[a].c-N[b].c);
  for(const a of ord)for(const x of E)if(x.a===a&&best[a]+4-x.t<best[x.b]){best[x.b]=best[a]+4-x.t;prev[x.b]=a}
  const T=N.length-1;const path=[];for(let k=T;k>=0;k=prev[k])path.unshift(k);return{N,E,best:best[T],path,T}}
-function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}=C;const NB=3,LIM=12000;
+function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}=C;const NB=3,LIM=mgLev(env,"truyen","lim");/* MG11: BAL.mgTier.lev.truyen */
  const nw=Math.min(78,(W-24)/5-20),nh=32;let b=0,G=null,path=[0],t0=0,phase="play",stop=false,pts=0,anim=null,risk=0,gl=-1,glU=0,hc=0;const pops=[];
  const HI_=sgHint(box,10000,auto=>{if(stop||phase!=="play"||!G)return;const ok=path.every((v,k)=>G.path[k]===v);const i=ok?G.path[path.length]:path[path.length-1];if(i==null||!G.N[i])return;gl=i;glU=performance.now()+3500;hc+=auto?.3:.6;
   const q=P(i);kg82Pop(pops,q.x,q.y-nh,ok?(auto?"Ma ma nhắc: người này tin cậy hơn":"Đi qua người sáng viền"):"Lùi lại: chặng này dễ bị lần ra","#8a7350")});
@@ -128,7 +128,7 @@ function sgLoyW(l){return l>=BAL.loy.trust?"rất trung":l>=BAL.loy.mid?"trung":
 function sgThr(v){const m=v&&v.maid||{};const loy=m.loyal==null?50:m.loyal;return cl(.3+loy/220+sgTemper(m)[1]+(Math.random()-.5)*.1,.18,.86)}
 const SG_GIA=["Ít ỏi","Nhẹ tay","Vừa phải","Hậu","Rất hậu"];
 function sgGiaW(x){return SG_GIA[Math.min(4,Math.floor(x*5))]}
-function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C;const NR=3,LIM=10000;
+function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C;const NR=3,LIM=mgLev(env,"mac","lim");/* MG11: BAL.mgTier.lev.mac */
  const v=env.v;let T=sgThr(v);let X=.3,r=0,t0=0,phase="play",stop=false,deal=0,shown=null,mt=0,drag=false;const H0=[];const pops=[];
  k91Btns(box,[["sgminus","Bớt",""],["sgplus","Thêm",""],["sggive","Ngỏ giá","trao lời ngỏ này"]]);
  const HI_=sgHint(box,9000,auto=>{if(phase!=="play"||stop)return;const d=X-T;const w=d>.2?"Hậu quá, nàng sinh nghi: bớt đi":d>=0?"Giá này nàng chịu, ngỏ đi":d>=-.08?"Gần rồi, thêm chút nữa":d>=-.2?"Còn thấp, thêm một ít":"Còn thấp lắm, thêm hẳn";kg82Pop(pops,W/2,H*.3,auto?"Ma ma nhắc: "+w.toLowerCase():w,"#8a7350")});
@@ -166,7 +166,7 @@ function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C
 /* ---------- 4. THỜI CƠ (generic timing; Hại nặng / Sát hại acts; owner 11/15: fully abstract, card wording only) ----------
    A watcher's attention rises and falls; tap «Ra tay» when it is lowest. Waiting raises suspicion; a tap at high attention raises it more. 3 rounds. */
 KG82_SPR.thoico=[];
-function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}=C;const NR=3,LIM=8000;
+function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}=C;const NR=3,LIM=mgLev(env,"thoico","lim");/* MG11: BAL.mgTier.lev.thoico */
  k91Btns(box,[["sgtap","Ra tay","khi chú ý thấp nhất"]]);
  const HI_=sgHint(box,0,auto=>{if(phase!=="play"||stop)return;const n=performance.now(),a=att(n),b=att(n+350);const w=a<.25?"Ngay lúc này!":b<a?"Chú ý đang hạ, chờ thêm chút":"Chú ý đang lên, chờ nó hạ";kg82Pop(pops,W/2,H*.5,auto?"Ma ma nhắc: "+w.toLowerCase():w,"#8a7350")});
  let r=0,t0=0,ph0=Math.random()*6,sus=0,q=[],phase="play",stop=false,last=0,mark=null;const pops=[];
@@ -252,10 +252,12 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
    pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
+/* review r1 (MG11): the round time on the card follows the board (BAL.mgTier.lev.<g>.lim by her rank, law 5 / ONE CORE), not the typed seconds */
+function sgDur(G){const n=typeof mgPlaySec==="function"?mgPlaySec(G.g,"lim"):null;return n==null?G.dur:G.dur.replace(/\d+ giây/,n+" giây")}
 /* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
- const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
+ const gl=base+` · (tự chơi ${sgDur(G)}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
  const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();
   /* KIT §13.9: the pay (khắc / the visit's turn) is taken on «Sẵn sàng» or «Giao cho người làm» (kgDefer); the ✕ before it = free back. pay.chk = can she pay now */
   const dfr=typeof kgDefer==="function"&&typeof J2.pay.chk==="function";if(dfr){if(!J2.pay.chk()){try{render()}catch(e){}return}}else if(!J2.pay()){try{render()}catch(e){}return}
@@ -280,15 +282,15 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how,seal:"MƯU"});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
  const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
- if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
+ if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, thiện cảm với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
   rows.push(["Tốn",`${J.cost} · như thẻ việc, mặc cả chỉ đổi cơ may`])}
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
  /* KIT §13.7 (mg-ready-guide): the step rules sit in the shared rules block EVERY time (was: first time only) + «Sẵn sàng» / «Hướng dẫn» (guided round of the same engine) */
  const hint=`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`;
  const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
-  kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,lv:0}))});
+  kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,kind:G.g}))/* MG11: the guided round keeps its easiest board (env.lv), was lv 0 = no ease read */});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
- const finish=(raw,o)=>{KG82.phase="result";const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
+ const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayLearn(G.g,raw0);/* review r1: hand b learns; the odds step reads the graded play (class "" ±0, law 2) */const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];
   if(G.eng===sgNghe)parts.push(["Câu thật nghe được",`${o.hits||0} / ${o.NI||0}${o.wrong?` · lầm lời đồn ${o.wrong}`:""}`]);
   if(G.g==="mac")parts.push(["Mặc cả",o.deal?`nàng nhận lời ở hồi ${o.deal}${o.over?", nhưng giá quá hậu nên sinh nghi":""}`:"nàng chưa nhận lời"]);
@@ -300,7 +302,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
   KG82.xdo=()=>kg82Ask([`Ra tay ngay: việc làm theo cơ may ${word(p1)}.`,"Kết quả hiện ở thẻ kết quả."],"Ra tay",()=>{const b=$("sgdo");if(b)b.click()},"Ra tay?","Ở lại");const dd=kg82El();if(dd)dd.scrollTop=0};
  intro()}
 function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";let done=false,dead=false,stop=null;
- KG82.peekBad=null;const env=KG82.cur={v,lv:0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};
+ KG82.peekBad=null;const env=KG82.cur={v,kind:G.g,lv:mgPlayLv(G.g),hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};
  let guard=0;if(KG82.giveUp){KG82.giveUp=0;env.end(0,{gaveUp:1});return}/* KIT §13.9 ✕ «Quay lại» on the rules screen: given up = 0/10, the scheme's own odds result */
  guard=setTimeout(()=>env.end(0,{}),70000);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>env.end(0,{gaveUp:1});
  kg82Preload(G.g).then(()=>{if(dead||done)return;try{stop=G.eng(box,env)}catch(e){console.error(e);env.end(5,{})}})}

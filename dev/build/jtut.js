@@ -196,7 +196,7 @@ const R=(k,v,c)=>[k,v,c||"n"];
 /* ---------- tab groups, read live (data-tab, KG, .ksub .ksubb[data-ksub]) ---------- */
 const GROUP_ANCHORS=["rv","rel","staff"];
 const SUBSAY={rv:"thẻ từng phi tần: chạm mặt để xem, giao thiệp hay ra tay",rel:"ai thương, ai ghen, ai oán {x}",fac:"các phe trong cung và chỗ đứng của {x}",
- staff:`kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Lòng dưới ${balAb(BAL.loy.warn)} dễ bị mua chuộc`,
+ staff:`kẻ hầu của {x}: Thiện cảm là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Thiện cảm dưới ${balAb(BAL.loy.warn)} dễ bị mua chuộc`,
  court:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",emp:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",th:"Thái hậu: thỉnh an, xem lòng người",men:"nam nhân trong cung: thái y, thị vệ, quan viên",
  story:"truyện riêng của thân phận {x}",log:"mọi việc đã qua",kid:"con của {x}",art:"các môn tài nghệ",inv:"rương đồ của {x}"};
 function grpOf(k){try{for(const g in KG)if(KG[g].keys.includes(k))return g}catch(e){}return null}
@@ -226,10 +226,11 @@ const INTRO=[
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
  {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc; làm được hay không là tính theo tổng số khắc còn lại trong ngày, việc dài hơn buổi thì kéo sang buổi sau"],
-   [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
-   srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
-   srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
-   srv()?null:["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
+   /* maid-8tabs (owner 21/11 ~03:15Z): the same 8 tabs on every road; the cung nữ finds her Đồng liêu under Hậu cung */
+   ["Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
+   ["Hậu cung · Giao tình",srv()?"người trong cung; đồng liêu ở Hậu cung: kết bạn, đề phòng kẻ vu cáo":"người trong cung; ai thương, ai ghen, ai oán {x}"],
+   ["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
+   ["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
    ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới, cũng là sang tuần mới"]].filter(Boolean))},
  {t:"Được · mất",p:()=>ia("Luân hồi")||ia("Mệnh truyện"),h:()=>rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
@@ -313,7 +314,7 @@ const TIPS={
  "tab-fac":{t:"Phe phái",h:"Trong cung ai cũng có chỗ dựa. Theo một phe thì được che chở, nhưng phe đối nghịch sẽ để mắt tới {x}."},
  "tab-court":{t:"Chí tôn",h:"Hoàng thượng và Thái hậu: hầu hạ, thỉnh an, xem lòng người trên. Người trên thương thì đường tấn phong rộng mở."},
  "tab-men":{t:"Nam nhân",h:"Thái y, thị vệ, quan viên trong cung. Giao thiệp có ích, nhưng gần gũi quá dễ sinh lời ra tiếng vào."},
- "tab-staff":{t:"Cung nhân",h:`Lòng là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Lòng dưới ${balAb(BAL.loy.warn)} thì dễ bị người khác mua chuộc.`},
+ "tab-staff":{t:"Cung nhân",h:`Thiện cảm là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Thiện cảm dưới ${balAb(BAL.loy.warn)} thì dễ bị người khác mua chuộc.`},
  "tab-kid":{t:"Hoàng tự",h:"Con của {x} ở đây: Sức khỏe, Tài và lòng Hoàng thượng thương. Chăm dạy con chu đáo; con được trọng thì mẫu thân cũng được nể."},
  "tab-inv":{t:"Tư trang",h:"Rương đồ của {x}: trâm cài, y phục, quà được ban. Mặc vượt phẩm hay quá giản dị đều có người để ý; đồ ngự tứ không được bán."},
  "tab-art":{t:"Tài nghệ",h:"Mỗi môn có bậc; mỗi bài học là một trò nhỏ, chơi khéo thì lên bậc nhanh. Bậc cao mở việc mới và giúp thắng thi tài."},

@@ -71,10 +71,8 @@ try{kitSealHud()}catch(e){}
    Every event dialog (#modal showing an event of the queue: kitEventDp person dialogs, the 32.7 person dialog, place-event frames, event stages,
    plain event cards, news / intel / result / night / end / reward cards — kpKind in KSEAL_EV.kinds; tool panels such as rules, info, the person
    card, shop, act pickers, the calendar are not events) wears ONE kitSeal in a corner of its frame. A mark only (aria-hidden, no tap).
-   Placement is MEASURED every time the dialog renders, resizes or its content changes: the first corner (bottom-right, bottom-left, top-right,
-   top-left) at the first size (KSEAL_EV.sz) whose box touches no text line, button, picture, chip or scrolling area of the dialog; if no corner
-   is free at any size, the frame grows a bottom strip (.kseal-room) and the seal sits in it — it never covers text or buttons. */
-const KSEAL_EV={sz:[40,34,28,24],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
+   Placement (owner 21/11 ~03:47Z, #44): ONE fixed place on every frame, never measured: the top-right corner of the header bar (.kph), one size (KSEAL_EV.fix); the header reserves the room. */
+const KSEAL_EV={fix:34,padT:4,padR:52,sz:[34],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
 function kitSealEvIs(m,dlg){try{if(!m||!dlg)return false;if(/pcm/.test(m.cls||"")||m.act||m.shop)return false;
  if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;
  const k=dlg.dataset.kind||(typeof kpKind==="function"?kpKind(m):"");const own=m.kit&&m.kit.kind;
@@ -94,17 +92,9 @@ function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&
  if(dlg.__ksM!==m){dlg.__ksM=m;dlg.classList.remove("kseal-room")}
  if(!s){dlg.insertAdjacentHTML("beforeend",kitSeal({cls:"kseal-ev"}));s=dlg.querySelector(":scope > .kseal-ev")}
  if(getComputedStyle(dlg).position==="static")dlg.style.position="relative";
- const D=dlg.getBoundingClientRect(),bl=dlg.clientLeft,bt=dlg.clientTop,iw=dlg.clientWidth,ih=dlg.clientHeight;const occ=kitSealOcc(dlg,s);const P=KSEAL_EV.pad,G=KSEAL_EV.gap;
- const free=(x,y,z)=>{const a={l:D.left+bl+x-G,t:D.top+bt+y-G,r:D.left+bl+x+z+G,b:D.top+bt+y+z+G};if(a.l<0||a.t<0||a.r>innerWidth||a.b>innerHeight)return false;
-  for(const r of occ)if(Math.min(a.r,r.right)>Math.max(a.l,r.left)&&Math.min(a.b,r.bottom)>Math.max(a.t,r.top))return false;return true};
- /* anchored to its corner (right / bottom), so a frame that later grows or shrinks keeps the seal in the same corner */
- const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");const R=c==="br"||c==="tr"||c==="room",B=c==="br"||c==="bl"||c==="room";
-  s.style.left=R?"auto":x+"px";s.style.right=R?P+"px":"auto";s.style.top=B?"auto":y+"px";s.style.bottom=B?P+"px":"auto";s.dataset.c=c;s.dataset.sz=z;
-  try{if(window.__ksRO&&dlg.__ksRO!==1){dlg.__ksRO=1;window.__ksRO.observe(dlg)}}catch(e){}};
- const big=KSEAL_EV.sz;
- if(!dlg.classList.contains("kseal-room"))for(const z of big){const C=[["br",iw-z-P,ih-z-P],["bl",P,ih-z-P],["tr",iw-z-P,P],["tl",P,P]];for(const [c,x,y] of C)if(free(x,y,z)){put(x,y,z,c);return}}
- const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
- const ih2=dlg.clientHeight;put(iw-z-P,ih2-z-P,z,"room")}
+ /* OWNER 21/11 ~03:47Z (#44): "chỗ có, chỗ không" — ONE rule, ONE place, ONE size on EVERY dialog frame, Fold + iPad: the TOP-RIGHT corner of the frame's header bar (.kph),
+    size KSEAL_EV.fix; the header reserves the room (padding-right), so it never covers a word. No measuring, no corner search, no bottom strip. */
+ dlg.classList.remove("kseal-room");s.style.setProperty("--kseal",KSEAL_EV.fix+"px");s.style.left="auto";s.style.bottom="auto";s.style.right=KSEAL_EV.padR+"px";s.style.top=KSEAL_EV.padT+"px";s.dataset.c="tr";s.dataset.sz=KSEAL_EV.fix}
 window.kitSealEvPlace=kitSealEvPlace;
 (function(){let tm=0;const later=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}
@@ -116,4 +106,4 @@ window.kitSealEvPlace=kitSealEvPlace;
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
 (function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
 #modal .dlg>.kseal-ev{position:absolute;width:var(--kseal,36px);height:var(--kseal,36px);z-index:3;pointer-events:none;opacity:.9;mix-blend-mode:multiply}
-#modal .dlg.kseal-room{padding-bottom:calc(var(--ksealroom,36px) + 2px)!important}`;document.head.appendChild(st)})();
+#modal .dlg:has(>.kseal-ev)>.kph{padding-right:calc(var(--kseal,34px) + 62px)!important;box-sizing:border-box}`;document.head.appendChild(st)})();

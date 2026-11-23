@@ -50,9 +50,16 @@ function pidFor(code){try{const m=JSON.parse(LS.get("ctm-coop-pids")||"{}");cons
 function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pidFor(code))}&name=${encodeURIComponent(COOP.name||"")}`}
 async function gz(s){const cs=new CompressionStream("gzip");const w=cs.writable.getWriter();w.write(new TextEncoder().encode(s));w.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}
 async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.writable.getWriter();w.write(new Uint8Array(buf));w.close();return await new Response(ds.readable).text()}
-async function rx(ev){lastRx=Date.now();let m;
+/* review/coop-week-stall: frames are handled ONE AT A TIME, in the order the socket received them (rxQ), and only while that socket is
+   still ours. Before, rx ran per frame as its own async call: a big gzip frame (room / week / snap, > 200 k chars) waited on its
+   DecompressionStream while the small text frames behind it (buoi, presence, bended, delta …) ran first, so a room snapshot could land
+   AFTER newer news ("late room snapshot": the seat's week / buổi / ended taken back to the older picture); and a socket we had already
+   replaced (connect) could still hand in its last frames after the new socket's room snapshot. */
+let rxQ=Promise.resolve();
+function rxIn(s,ev){if(ws!==s)return;rxQ=rxQ.then(()=>rx(ev,s)).catch(e=>console.error("COOP rx",e))}
+async function rx(ev,s){if(s&&ws!==s)return;lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
- if(!m||!m.t)return;
+ if(!m||!m.t||(s&&ws!==s))return;
  if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
   if(pend){pend.res({room:st.room,you:st.you});pend=null}}
  else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
@@ -70,7 +77,7 @@ function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}c
  let s;try{s=new WebSocket(wsURL(code))}catch(e){return drop()}
  s.binaryType="arraybuffer";ws=s;
  s.onopen=()=>{lastRx=Date.now()};
- s.onmessage=rx;
+ s.onmessage=ev=>rxIn(s,ev);
  /* 4001 "replaced": the same seat (same pid, Sổ mây) was opened on another device / tab. Do not take it back (the two would steal the
     seat from each other and the stale one would write an old week copy): stop here; "Về màn đầu" › Trở lại phòng takes it back. */
  s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001&&abandonAt&&Date.now()-abandonAt<30000){abandonAt=0;tries=0;connect(st.room);return}if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};

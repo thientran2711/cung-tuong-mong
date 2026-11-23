@@ -6,6 +6,7 @@
       option name of that road (.4–.11), ch12–14 (noi14 hau14 ke14 st_con st_dong st_the) or a shared line, every "@arc=end" names a real arc + ending,
       every condition term is known, every gate stat has a BAL.ge.gate number, every ending has t / a / ht / ha / cw / fail / ft text, BAL.ge.rw and BAL.ge.fail exist;
       no "%" and no digits in player text (VANPHONG); the Thiên mệnh titles are registered in the jdh catalogue (DH_CAT) with one step at BAL.ge.title.tier.
+   5. (E35b Phù Tang wave) the 4 pt roads are live; every branch's identity (geOrig) is its road's own origin and a GE_ID key.
    4. (E28 Ba Tư wave) the 4 bd roads are live and no bd ending text / title / GE_ID carries a steppe or Bắc Địch word.
    usage: node dev/test/ge-guard.js <url-of-dev/index.html> */
 const {execSync}=require('child_process');const fs=require('fs');const path=require('path');const {chromium}=require('playwright');
@@ -53,10 +54,16 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
   for(const b in GE_DATA)if(/^bd_/.test(b))GE_DATA[b].e.forEach((e,i)=>{for(const k of ['t','a','ht','ha','cw','fail','ft'])if(STEPPE.test(String(e[k]||'')))steppe.push(`${b}_${i+1}.${k}`);
    for(const k of [6,7])if(STEPPE.test(String(GE_CAT[b].e[i][k]||'')))steppe.push(`${b}_${i+1} title`)});
   if(GE_ID.bd&&!/Ba Tư/.test(GE_ID.bd))steppe.push('GE_ID.bd = '+GE_ID.bd);
-  return {bad,info,steppe,live:Object.keys(GE_DATA),it:!!IT[BAL.ge.kimsach]&&IT[BAL.ge.kimsach].pr===0&&IT[BAL.ge.kimsach].keep===1}});
+  /* Phù Tang wave (E35b) + the identity family: every live branch's identity (geOrig = its road's own ARC67 o) is an origin key with a GE_ID name,
+     so geBranch can open it on that origin's life (pt_* roads are origin pf: a prefix check left them dark); and no Phù Tang text names an era-wrong word (Wokou / thập nhị đơn) */
+  const orig=[];for(const b in GE_DATA){const o=typeof geOrig==='function'?geOrig(b):b.split('_')[0];if(!GE_ID[o]||!ARC67[b]||ARC67[b].o!==o)orig.push(`${b}: identity ${o}`)}
+  const ERA=/oa khấu|wokou|thập nhị đơn/i;for(const b in GE_DATA)if(/^pt_/.test(b))GE_DATA[b].e.forEach((e,i)=>{for(const k of ['t','a','ht','ha','cw','fail','ft'])if(ERA.test(String(e[k]||'')))orig.push(`${b}_${i+1}.${k}: era word`)});
+  return {bad,info,steppe,orig,live:Object.keys(GE_DATA),it:!!IT[BAL.ge.kimsach]&&IT[BAL.ge.kimsach].pr===0&&IT[BAL.ge.kimsach].keep===1}});
  console.log('live branches',R.live.join(' '),JSON.stringify(R.info));
  chk('3 pilot branches live (tt_co, cnv_mat, one nc road)',R.live.includes('tt_co')&&R.live.includes('cnv_mat')&&R.live.some(b=>/^nc_/.test(b)),R.live);
  chk('Ba Tư wave: the 4 bd roads are live (bd_san bd_soi bd_tuyet bd_hen)',['bd_san','bd_soi','bd_tuyet','bd_hen'].every(b=>R.live.includes(b)),R.live);
+ chk('Phù Tang wave: the 4 pt roads are live (pt_hai pt_su pt_tang pt_dang)',['pt_hai','pt_su','pt_tang','pt_dang'].every(b=>R.live.includes(b)),R.live);
+ chk('every live branch opens on its own origin (geOrig = ARC67 o, a GE_ID key); no era-wrong word in pt texts',!R.orig.length,R.orig);
  chk('Ba Tư wave: no steppe / Bắc Địch word in bd ending texts, titles, GE_ID',!R.steppe.length,R.steppe);
  chk('pilot data integrity (real option names, terms, gates, texts, BAL rows, titles)',!R.bad.length,R.bad.slice(0,30));
  chk('Kim sách Thiên mệnh: one item kind, no sale, kept',R.it,null);

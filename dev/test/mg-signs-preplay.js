@@ -12,7 +12,7 @@ const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(UR
  const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};let bad=0;
  /* makeup own screens FIRST (fresh KG82 state, as in the real game) */
  const m=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};try{kg82Close()}catch(e){}try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());Q.length=0;
-  toilOpen();await sleep(1500);o.dress=__btn();document.getElementById('toilok').click();await sleep(1500);o.pre=__btn();document.getElementById('toilmk').click();await sleep(1500);o.col=__btn();document.getElementById('toilgo').click();await sleep(1800);o.draw=__btn();try{kg82Close()}catch(e){}return o});
+  toilOpen();await sleep(600);{const r=document.getElementById('toilrdy');if(r)r.click()}await sleep(900);o.dress=__btn();document.getElementById('toilok').click();await sleep(1500);o.pre=__btn();document.getElementById('toilmk').click();await sleep(1500);o.col=__btn();document.getElementById('toilgo').click();await sleep(1800);o.draw=__btn();try{kg82Close()}catch(e){}return o});
  for(const s of ['dress','pre','col'])ok(m[s].length>0&&m[s].every(x=>!x.sign),`makeup ${s} screen: every button keeps its word`,m[s].map(x=>x.t.slice(0,12)));
  ok(m.draw.some(x=>x.sign),'makeup drawing step: its done button is still a sign',m.draw.map(x=>x.t));
  const kinds=await p.evaluate(()=>Object.keys(KG82_KIND).filter(k=>typeof KG82_ENG[KG82_KIND[k].e]==='function'));

@@ -86,7 +86,7 @@ const CHU_Q=()=>CNV_QN();/* who holds the inner palace: Hoàng hậu / Thái h�
 /* {mis} relation, real both ways (OD:L1247); as a maid also Chủ tin */
 function CHU_MIS(n){return CNV_REL(n)}
 /* the Emperor's eye: Hoàng thượng để ý while a maid (BAL.ntRise then offers the rise), Sủng once raised */
-function CHU_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `Sủng +${Math.round(n/3)}.`}catch(e){return""}}
+function CHU_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `${sgStat(Math.round(n/3))}.`}catch(e){return""}}
 const CHU_E=()=>CHU_R()?S.sung:S.nt;/* odds term for options that reach the Emperor */
 
 rdDef("cnv_chu",5,{t:"Gói thuốc",w:"doc",sj:"gói thuốc của {mis}",cast(A){return CNV_MC(A,1)&&rdCast(A,["v"])},
@@ -138,7 +138,7 @@ rdDef("cnv_chu",6,{t:"Kẻ dò hỏi",w:"v",sj:"kẻ dò hỏi chuyện cung {mi
  c1:{h:"Đôi hoa tai bạc",w:"maid",t:CHU_T("Một cung nữ cùng phòng có thêm đôi hoa tai bạc mới. Nàng tránh mắt ngươi.","Một cung nữ trong cung ngươi có thêm đôi hoa tai bạc mới. Nàng tránh mắt ngươi."),o:[
   {n:"Hỏi thẳng nàng",wx:"nàng khai đã bán tin gì",lx:"nàng chạy đi mách, tiếng ngươi sút",rt:CHU_T("Nàng khóc: chỉ kể giờ ngươi trực đêm.","Nàng khóc: chỉ kể giờ ngươi đi ngủ, giờ ngươi đi thỉnh an."),rf:"Nàng chối, rồi xin đổi chỗ."},
   {n:"Theo xem nàng gặp ai",f:"own",wx:"biết đường tin đi",lx:"bị nàng phát hiện, đi đồn ngươi rình người, tiếng sút; ngươi mệt rã",rt:"Nàng đưa tin cho cung nữ áo xanh ở sau giả sơn.",rf:"Nàng ngoái lại, thấy ngươi."},
-  {n:"Cho nàng bạc gấp đôi để quay về",wx:"đường rò thành của ngươi",lx:"tốn bạc, nàng có thể ăn hai đầu",rt:"Nàng nhận bạc, dập đầu."}]},
+  {n:"Cho nàng bạc gấp đôi để quay về",wx:"đường rò thành của ngươi",lx:"tốn bạc, nàng có thể ăn bạc cả hai bên",rt:"Nàng nhận bạc, dập đầu."}]},
  c2:{h:"{v} ra mặt",w:"v",need:["v"],t:"{v} chặn ngươi ở cửa ngự hoa viên: “Thứ gì của cung ta, sớm muộn cũng về cung ta. Ngươi nên nghĩ cho mình.”",o:[
   {n:"Cúi đầu, không đáp",wx:"không để lọt một lời",lx:"{v} cho là ngươi sợ, người trong cung coi thường, tiếng sút",rt:"{v} phẩy tay áo bỏ đi."},
   {n:"Đáp cứng: không biết gì",wx:"{v} biết ngươi không dễ dọa",lx:"{v} nổi giận, oán nặng hơn; tiếng ngươi sút",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} nhìn ngươi một lúc, rồi cười: “Được.”",rf:"{v} tát ngươi trước mặt người qua lại."},
@@ -196,7 +196,7 @@ rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về 
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, ${({hh:S.thDead?"có ý chỉ Hoàng hậu, Hoàng thượng chuẩn":"có ý chỉ Hoàng hậu, Thái hậu chuẩn",th:"theo lệnh Thái hậu",emp:"theo khẩu dụ Hoàng thượng"})[CNV_QM()]}. Gói thuốc vẫn ở chỗ cũ.`,o:[
   {n:"Mang gói thuốc ra khỏi cung",f:"hide",wx:"gói thuốc không còn ở cung {mis}",lx:"bị bắt đang mang xạ hương, tiếng ngươi sút nặng",rt:CHU_T("Ngươi giấu gói thuốc trong giỏ đồ giặt, đưa ra khỏi cung trước canh tư.","Ngươi bọc gói thuốc trong hộp bánh lễ, sai người thân tín mang ra khỏi cung {mis} trước canh tư."),rf:CHU_T("Thị vệ gác cửa nhìn giỏ đồ rất lâu, nhớ mặt ngươi.","Thị vệ gác cửa mở hộp bánh lễ ra xem, nhớ mặt người của ngươi.")},
-  {n:"Giấu vào chỗ không ai khám",f:"hide",wx:"gói thuốc vẫn trong tầm tay",lx:"chỗ giấu bị lộ, tiếng ngươi sút",rt:CHU_T("Ngươi nhét gói thuốc vào ruột chiếc gối thêu của {mis}.","Ngươi bảo {mis} khâu gói thuốc vào ruột chiếc gối thêu nàng vẫn gối."),rf:"Chỗ giấu ngươi chọn, Nội vụ phủ nào cũng biết."},
+  {n:"Giấu vào chỗ không ai khám",f:"hide",wx:"gói thuốc vẫn trong tầm tay",lx:"chỗ giấu bị lộ, tiếng ngươi sút",rt:CHU_T("Ngươi nhét gói thuốc vào ruột chiếc gối thêu của {mis}.","Ngươi bảo {mis} khâu gói thuốc vào ruột chiếc gối thêu nàng vẫn gối."),rf:"Chỗ giấu ấy, thái giám Nội vụ phủ nào cũng biết mà lục."},
   {n:"Khuyên {mis} tự đem nộp trước",f:"clean",wx:"không còn gì để bị khám ra",lx:"{mis} cho là ngươi bỏ nàng, bớt tin; tiếng ngươi sút",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} nghĩ rất lâu: “Nếu nộp, ta phải nói nó từ đâu.”",rf:"{mis} hất tay ngươi ra."}]},
  s2:{h:"Ánh mắt cả cung",w:"mis",if:RDW(0),t:"Cả cung đồn có kẻ từng hầu cung {mis} đã khai chuyện xạ hương. Mọi ánh mắt đổ về ngươi, và sáng mai Nội vụ phủ khám cung.",o:[
   {n:"Đến gặp {mis} trước khi ai khác",wx:"{mis} nghe ngươi trước",lx:"{mis} đã tin lời đồn, bớt tin ngươi; ngươi mệt mà vô ích",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} nghe xong, nói: “Không phải ngươi. Ta biết là ai.”",rf:"{mis} không cho ngươi vào."},
@@ -217,7 +217,7 @@ rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về 
  x1:{h:"Trời sáng",w:"eun",t:"Đoàn khám cung đến rương cuối cùng. Gói thuốc ở đâu, chỉ ngươi và {mis} biết.",o:[
   {n:"Đánh lạc hướng đoàn khám",e:["win","lose"],rt:"Đoàn khám về tay không.",rf:"Gói thuốc lộ ra giữa sân."},
   {n:"Để {mis} tự nộp, nói rõ gốc gác",lx:"{mis} phải kể nỗi đau của mình, ngươi bị kéo vào tội",e:["mid","lose"],rt:()=>`${CHU_Q()} nghe nửa đầu câu chuyện, cho {mis} thời gian.`,rf:"Không ai tin nửa sau câu chuyện."},
-  {n:"Nhận gói thuốc là của mình",e:"take",lx:"ngươi mang tiếng giữ xạ hương, tiếng sút nặng",rt:"Ngươi bước ra, quỳ xuống: “Gói ấy là của người này.”"}]}},
+  {n:"Nhận gói thuốc là của mình",e:"take",lx:"ngươi mang tiếng giữ xạ hương, tiếng sút nặng",rt:"Ngươi bước ra, quỳ xuống, nhận gói ấy là của mình."}]}},
  E:{win:{tag:"Đoàn khám về tay không",w:"mis",t:"Nội vụ phủ không tìm thấy gì. Lời đồn chết dần. {mis} biết đêm ấy ai đã cứu nàng.",go:(A,G)=>{rdOan(A,"v",G[0]);CHU_MIS(G[1]);return e67merit(G[2])}},
   mid:{tag:"Nửa sự thật trước Trung cung",t:"Trung cung biết có gói thuốc, biết nó ra từ cung {v}, nhưng chưa biết vì sao nó ở cung {mis}."},
   take:{tag:"Gánh thay chủ",w:"mis",t:CHU_T("Ngươi nhận gói thuốc là của mình, bị phạt quỳ ba ngày ở sân Nội vụ phủ. {mis} đứng sau bình phong nhìn, không nói gì, nhưng đêm ấy sai người mang thuốc xuống cho ngươi.","Ngươi nhận gói thuốc là của mình. Nội vụ phủ tâu lên, Hoàng thượng phê cấm túc ngươi một tháng. {mis} sai người lén mang trà sang, kèm một chữ: «Nợ»."),go:(_A,G)=>CHU_MIS(G[0])},
@@ -336,7 +336,7 @@ CNV_QFIX("cnv_chu");
 const BAN_R=()=>!!(S.srv&&S.srv.risen);
 const BAN_T=(a,b)=>A=>{const x=BAN_R()?b:a;return typeof x==="function"?x(A):x};/* text: maid wording / consort wording */
 function BAN_MIS(n){return CNV_REL(n)}
-function BAN_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `Sủng +${Math.round(n/3)}.`}catch(e){return""}}
+function BAN_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `${sgStat(Math.round(n/3))}.`}catch(e){return""}}
 const BAN_E=()=>BAN_R()?S.sung:S.nt;/* odds term for options that reach the Emperor */
 
 rdDef("cnv_ban",5,{t:"Chiếc vòng ngọc",w:"maid",sj:"chiếc vòng ngọc thật",cast(A){return CNV_MC(A,0)&&rdCast(A,["v"])},
@@ -397,7 +397,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
  t1:{h:"Sổ nợ của Thu Cúc",w:"me",t:"Ngươi biết được: Thu Cúc nợ Phúc An một món bạc lớn vì đánh bạc ở cửa sau. Người trả nợ thay nàng là cung {v}, đổi lại nàng phải làm theo lệnh.",o:[
   {n:"Trả nợ cho Thu Cúc để kéo nàng về",f:"turn",wx:"Thu Cúc thoát khỏi tay cung {v}",lx:"Thu Cúc nhận bạc mà không đổi lòng, ngươi áy náy vì đã mua người; bạc mất trắng",rt:"Thu Cúc cầm bạc, khóc: “Sao ngươi lại giúp ta?”",rf:"Thu Cúc cầm bạc, quay đi không nói."},
   {n:"Nói chuyện nợ với {mis}",if:CNV_MOK,wx:"{mis} biết Thu Cúc bị nắm thóp",lx:"chạy việc đến rã người; Thu Cúc biết ngươi mách, thù ngươi thêm",go:(_A,_ok,G)=>BAN_MIS(G[0]),rt:"{mis} lặng người: “Tám năm. Vậy mà ta không biết.”"},
-  {n:"Giữ làm lá bài",wx:"cầm được điểm yếu của Thu Cúc",lx:"chưa ai được cứu, lòng ngươi áy náy vì giữ bí mật làm vốn",rt:"Ngươi ghi số nợ vào sổ riêng."}]},
+  {n:"Giữ làm lá bài",wx:"nắm được thóp Thu Cúc",lx:"chưa ai được cứu, lòng ngươi áy náy vì giữ bí mật làm vốn",rt:"Ngươi ghi số nợ vào sổ riêng."}]},
  x1:{h:"Đêm Thu Cúc đến cung {v}",w:"v",t:"Đêm nay Thu Cúc lẻn đến cung {v} lần cuối, mang theo bạc. Chặn đường nàng, theo đến tận cửa, hay để nàng đi?",o:[
   {n:"Chặn Thu Cúc giữa đường, ép nàng khai",e:["win","lose"],rt:"Thu Cúc quỳ xuống: “Là {v} sai. Ta khai.”",rf:"Thu Cúc la lên. Thị vệ cung {v} chạy ra."},
   {n:"Theo đến cửa cung {v}, nhìn tận mắt",lx:"bạc lo đường mất trắng, thấy mà chưa bắt được, vụ chỉ dừng ở giữa",e:["win","mid"],rt:"Ngươi thấy cung nữ của {v} nhận bạc, và cả {v} đứng sau song cửa.",rf:"Cửa đóng trước khi ngươi kịp nhìn."},
@@ -485,13 +485,13 @@ rdDef("cnv_ban",9,{t:"Chủ phân xử",w:"mis",sj:"lời phân xử của {mis}
   {n:"Xin được trình bày trước",wx:"{mis} nghe ngươi trước",lx:"bị cho là lấn lời, tiếng ngươi sút; ngươi mệt mà vô ích",rt:"{mis} gật đầu cho ngươi nói.",rf:"{mis} nói: “Chờ đến lượt.”"},
   {n:"Đưa Xuân Đào đến cùng",f:"wit",wx:"Xuân Đào có mặt khi bị xử thay",lx:"Xuân Đào phải nhìn Thu Cúc, người ta bảo ngươi làm to chuyện, tiếng sút",rt:"Xuân Đào đứng nép sau lưng ngươi."}]},
  s2:{h:"Chủ không muốn xử",w:"mis",if:RDW(0),t:"Vụ án dở dang. {mis} không muốn xử, cứ hẹn lần hẹn lữa. Trong lúc ấy Thu Cúc vẫn hầu trà cho nàng mỗi sáng.",o:[
-  {n:"Xin {mis} xử cho dứt",wx:"{mis} đặt ngày xử",lx:"{mis} khó chịu, bớt tin; tiếng sút",go:(A,ok,G)=>BAN_MIS(ok?G[0]:G[1]),rt:"{mis} thở dài: “Mười lăm này.”",rf:"{mis} nói: “Ngươi giục ta?”"},
+  {n:"Xin {mis} xử cho dứt",wx:"{mis} đặt ngày xử",lx:"{mis} khó chịu, bớt tin; tiếng sút",go:(A,ok,G)=>BAN_MIS(ok?G[0]:G[1]),rt:"{mis} thở dài: “Đợi đến rằm.”",rf:"{mis} nói: “Ngươi giục ta?”"},
   {n:"Đưa thêm chứng cứ cho {mis}",wx:"{mis} không thể làm ngơ",lx:"chứng cứ bị Thu Cúc giành trước, đồn ngươi bịa, tiếng sút; bạc mất trắng",rt:"{mis} đọc tờ sổ cầm đồ, mặt tái.",rf:"Thu Cúc nói tờ sổ là giả."},
   {n:"Chờ thêm",wx:"không bị coi là ép chủ",lx:"Thu Cúc có thời gian lo liệu, người ta bảo ngươi nhát, tiếng sút",rt:"Ngươi chờ."}]},
  c1:{h:"Thu Cúc quỳ",w:"me",t:"Thu Cúc quỳ trước {mis}, khóc kể món nợ ở cửa sau, kể cung {v} ép nàng thế nào. Nàng xin tha một mạng.",o:[
   {n:"Xin {mis} tha Thu Cúc một mạng",f:"mercy",wx:"Thu Cúc nợ ngươi một ân",lx:"Xuân Đào chịu oan không ai đền, người ta bảo ngươi mềm, tiếng sút",rt:"Thu Cúc ngẩng lên nhìn ngươi, không tin nổi."},
   {n:"Nhắc {mis} Xuân Đào đã chịu những gì",wx:"{mis} nhìn Xuân Đào",lx:"{mis} cho là ngươi thiên vị, tiếng sút",rt:"{mis} nhìn những vết roi trên tay Xuân Đào, im lặng.",rf:"{mis} nói: “Ta biết. Không cần nhắc.”"},
-  {n:"Im lặng",wx:"không để ai bắt lỗi",lx:"mất lượt nói, lòng ngươi áy náy",rt:"Ngươi đứng yên."}]},
+  {n:"Im lặng",wx:"không để ai bắt lỗi",lx:"lỡ dịp nói, lòng ngươi áy náy",rt:"Ngươi đứng yên."}]},
  c2:{h:"{v} gửi lời",w:"v",need:["v"],t:"{v} sai người đến nói với {mis}: “Chuyện trong cung ai nấy tự xử. Đừng để lan sang cung khác.”",o:[
   {n:"Nói với {mis}: {v} đang sợ",wx:"{mis} thấy rõ ai đứng sau",lx:"{mis} sợ thay vì giận, lòng ngươi áy náy vì đã dọa chủ; {v} vẫn thêm oán",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{mis} đặt chén trà xuống: “Sợ thì phải có lý do.”",rf:"{mis} nói: “Cung ta không đủ sức đối đầu.”"},
   {n:"Tránh nhắc đến {v}",wx:"vụ án nhỏ lại",lx:"{v} thoát, người ta bảo ngươi sợ cung {v}, tiếng sút",rt:"Ngươi chỉ nói về Thu Cúc."},
@@ -501,11 +501,11 @@ rdDef("cnv_ban",9,{t:"Chủ phân xử",w:"mis",sj:"lời phân xử của {mis}
   {n:"Thưa: xử theo lẽ phải, việc sau tính sau",wx:"giữ được lẽ thẳng",lx:"{mis} thấy ngươi để nàng gánh một mình, người ta chê ngươi, tiếng sút",rt:"{mis} cười buồn: “Lẽ phải không có ai gánh hộ.”"},
   {n:"Khuyên xử nhẹ cho êm",f:"soft",wx:"cung {mis} yên",lx:"Xuân Đào không được rửa hẳn, lòng ngươi áy náy",rt:"{mis} gật đầu, như trút được gánh."}]},
  x1:{h:"Lời phân xử",w:"mis",t:"{mis} cầm bút. Trên bàn là sổ cầm đồ, lời khai của Phúc An và vết roi trên tay Xuân Đào.",o:[
-  {n:"Xin {mis} xử theo chứng cứ",lx:"hỏng thì {mis} che Thu Cúc, Thu Cúc thành kẻ thù",e:["win","lose"],rt:"{mis} viết: Thu Cúc đuổi về Tân Giả khố, Xuân Đào rửa oan.",rf:"{mis} buông bút: “Ta không xử được người tám năm.”"},
+  {n:"Xin {mis} xử theo chứng cứ",lx:"hỏng thì {mis} che Thu Cúc, Thu Cúc thành kẻ thù",e:["win","lose"],rt:"{mis} viết: Thu Cúc đuổi về Tân Giả khố, Xuân Đào rửa oan.",rf:"{mis} buông bút: “Người đã theo ta tám năm, ta không nỡ xử.”"},
   {n:"Xin xử nhẹ cả hai, giữ êm cung",e:"mid",lx:"Xuân Đào chưa được rửa sạch, lòng ngươi áy náy; vụ chỉ dừng ở giữa",rt:"Thu Cúc bị phạt bổng, Xuân Đào được về phòng cũ."},
   {n:"Dâng chứng cứ thẳng lên Nội vụ phủ, bỏ qua {mis}",lx:"{mis} mất mặt, không bao giờ quên ngươi vượt đầu nàng",e:["out","lose"],rt:"Nội vụ phủ xử Thu Cúc theo phép.",rf:"Nội vụ phủ trả hồ sơ về cho {mis}."}]}},
  E:{win:{tag:"Chủ xử theo lẽ phải",w:"mis",t:"Thu Cúc bị đuổi về Tân Giả khố. Xuân Đào được rửa oan trước cả cung. {mis} nói với ngươi: “Ngươi làm ta mất một người, nhưng trả lại cho ta chữ tín.”",go:(_A,G)=>{BAN_MIS(G[0]);return e67merit(G[1])}},
-  mid:{tag:"Xử cho êm",t:"Cả hai bị phạt nhẹ, không ai được rửa hẳn. Cung {mis} yên, nhưng chỉ là yên mặt nước."},
+  mid:{tag:"Xử cho êm",t:"Cả hai bị phạt nhẹ, không ai được rửa hẳn. Cung {mis} yên, nhưng chỉ yên bề ngoài."},
   out:{tag:"Vượt mặt chủ",w:"eun",t:"Nội vụ phủ xử đúng, nhưng {mis} không bao giờ quên ngươi đã đi qua đầu nàng.",go:(_A,G)=>BAN_MIS(G[0])},
   lose:{tag:"Chủ che Thu Cúc",w:"mis",t:"{mis} không nỡ xử Thu Cúc. Xuân Đào vẫn mang tiếng, còn Thu Cúc nhìn ngươi bằng ánh mắt của kẻ được tha.",go:(_A,G)=>BAN_MIS(G[0])}}});
 
@@ -610,7 +610,7 @@ rdDef("cnv_mat",5,{t:"Chủ nhân ghen",w:"mis",sj:"cơn ghen của {mis}",cast(
   {n:"Cắn răng giặt áo",need:["srv"],f:"bear",wx:"chủ thấy ngươi biết phận",lx:"tay nứt nẻ, ngươi kiệt sức, mà Hoàng thượng chẳng thấy ngươi",rt:"Mười ngày sau, {mis} cho ngươi về hầu trà. Nàng không nói gì, nhưng thôi lườm."},
   {n:"Nhờ tiểu thái giám truyền tin cho Hoàng thượng",need:["srv"],f:"bold",wx:"ngài biết ngươi bị đày",lx:"chủ biết ngươi mách, Chủ tin sút; bạc mua miệng mất trắng",rt:"Hoàng thượng sai người mang lò sưởi tay ra hậu viện. Cả cung im phắc.",rf:"Tiểu thái giám nhận bạc rồi đem chuyện kể cho {mis}."},
   {n:"Cúi đầu đáp lễ như xưa",need:["nsrv"],f:"bear",wx:"người ta thấy ngươi không quên gốc",lx:"bị cười là còn nô tính, tiếng ngươi sút",go:(_A,_ok,G)=>matMis(G[0]),rt:"Ngươi cúi đầu. {mis} sững lại, rồi quay đi không nói nữa."},
-  {n:"Đáp: nay thiếp cùng hầu Hoàng thượng như tỷ",need:["nsrv"],f:"bold",wx:"cả điện nể ngươi",lx:()=>`thành chuyện cãi nhau trước ${CNV_QM()==="emp"?"cả điện":"Hoàng hậu"}, Hoàng thượng phiền, Sủng sút; {mis} thêm oán`,go:(A,ok,G)=>matMis(0,ok?G[0]:G[1]),rt:"Câu đáp vừa đủ lễ vừa đủ cứng. {mis} đỏ mặt, không cãi được.",rf:"Hoàng hậu nhíu mày: “Mới lên đã học cãi.”"},
+  {n:"Đáp: nay {tx} cùng hầu Hoàng thượng như {tg}",need:["nsrv"],f:"bold",wx:"cả điện nể ngươi",lx:()=>`thành chuyện cãi nhau trước ${CNV_QM()==="emp"?"cả điện":"Hoàng hậu"}, Hoàng thượng phiền, Sủng sút; {mis} thêm oán`,go:(A,ok,G)=>matMis(0,ok?G[0]:G[1]),rt:"Câu đáp vừa đủ lễ vừa đủ cứng. {mis} đỏ mặt, không cãi được.",rf:"Hoàng hậu nhíu mày: “Mới lên đã học cãi.”"},
   {n:"Lặng lẽ tìm {v} xin chỗ dựa",f:"v",wx:"có người che chở",lx:"{v} trở mặt, đồn ngươi đi cầu cạnh, tiếng sút; lòng ngươi áy náy vì tìm kẻ thù của chủ cũ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} mỉm cười: “Người ta không thương ngươi, ta thương.”",rf:"{v} chỉ hứa suông, rồi đem chuyện ra làm trò cười."}]},
  s2:{h:"Chủ tiến cử rồi hối",w:"mis",if:()=>rdPrev()==="win2",t:MATT("Chính {mis} tự tay tiến cử ngươi. Nhưng từ đó Hoàng thượng đến cung chỉ hỏi “con bé pha trà đâu”. Đêm qua nàng ngồi một mình rất lâu, sáng nay sai ngươi trực đêm suốt một tháng.",
    "Chính {mis} tiến cử ngươi lên. Nay ngài đến cung ngươi nhiều hơn đến cung nàng. Nàng gửi sang một hộp bánh, kèm một lời: “Đừng quên ai đã mở cửa cho ngươi.”"),o:[
@@ -623,7 +623,7 @@ rdDef("cnv_mat",5,{t:"Chủ nhân ghen",w:"mis",sj:"cơn ghen của {mis}",cast(
    "Ngươi đã được phong, nhưng {mis} đi khắp các cung kể chuyện ngươi từng làm vỡ chén, từng ăn vụng, từng bị phạt quỳ. Chuyện cũ thành trò cười mới."),o:[
   {n:"Gánh nước, không nói một lời",need:["srv"],f:"bear",wx:"cả bếp thương ngươi",lx:"gánh nước đến kiệt sức, Hoàng thượng không thấy ngươi nữa",rt:"Lão thái giám bếp lén cho ngươi bát cháo nóng."},
   {n:"Hát khẽ bài dân ca bên giếng",need:["srv"],f:"bold",wx:"có người đứng nghe",lx:"chủ cho là ngươi cố ý, Chủ tin sút",rt:"Sáng hôm sau, ngự thiện phòng nhận lệnh: “Ai hát bên giếng, cho về hầu trà.”",rf:"Người nghe là chưởng sự, mách lại với {mis}."},
-  {n:"Cười mà nhận hết",need:["nsrv"],f:"bear",wx:"người ta thấy ngươi rộng lượng",lx:"chuyện cũ càng lan, tiếng ngươi sút",rt:"Ngươi cười: “Đúng là thiếp từng làm vỡ chén của tỷ.” Câu chuyện tự nhạt."},
+  {n:"Cười mà nhận hết",need:["nsrv"],f:"bear",wx:"người ta thấy ngươi rộng lượng",lx:"chuyện cũ càng lan, tiếng ngươi sút",rt:"Ngươi cười: “Đúng là {tx} từng làm vỡ chén của {tg}.” Câu chuyện tự nhạt."},
   {n:"Kể lại một chuyện cũ của {mis}",need:["nsrv"],f:"bold",wx:"nàng biết ngươi cũng có chuyện để nói",lx:"thành ra hai người cùng mất mặt, tiếng sút; lòng ngươi áy náy, {mis} thêm oán",go:(_A,_ok,G)=>matMis(0,G[0]),rt:"{mis} im bặt. Từ đó nàng thôi kể.",rf:"Cả hậu cung bàn tán cả hai."},
   {n:"Lặng lẽ tìm {v} xin chỗ dựa",f:"v",wx:"có người che chở",lx:"{v} trở mặt, đồn ngươi đi cầu cạnh, tiếng sút; lòng ngươi áy náy vì tìm kẻ thù của chủ cũ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} cho người đến xin ngươi sang giúp việc vài hôm.",rf:"{v} cười, bảo ngươi tự lo."}]},
  c1:{h:"Một chén trà bị đổ",w:"mis",t:MATT("Hoàng thượng ghé cung. {mis} cố ý gọi ngươi dâng trà, rồi hất tay áo cho chén trà đổ lên long bào.",
@@ -649,8 +649,8 @@ rdDef("cnv_mat",5,{t:"Chủ nhân ghen",w:"mis",sj:"cơn ghen của {mis}",cast(
  E:{win:{tag:"Cơn ghen lắng xuống",w:"emp",t:MATT("Hoàng thượng nói một câu, cả cung hiểu: người ngài nhìn thì đừng ai đày đọa. {mis} thôi làm khó ngươi, dù trong mắt nàng vẫn còn gai.",
    "Hoàng thượng nói một câu, cả hậu cung hiểu: tiểu chủ mới không phải nô tỳ của ai nữa. {mis} thôi kể chuyện cũ, dù trong mắt nàng vẫn còn gai."),go:(A,G)=>{matMis(G[0]);return [matSrv(rdGo("cnv_mat_5",4)),matCon(rdGo("cnv_mat_5",5))].join(" ")}},
   mid:{tag:"Ghen ngầm",t:"Không ai bị phạt. {mis} thôi ra mặt, nhưng ngươi biết nàng chỉ đang chờ.",go:()=>matSrv(rdGo("cnv_mat_5",6))},
-  lose:{tag:"Chủ cũ thành kẻ thù",w:"mis",t:MATT("{mis} thắng ván này. Ngươi bị đẩy xuống bếp sau, Hoàng thượng ít thấy ngươi hơn, và cả cung biết nàng ghét ngươi.",
-   "{mis} thắng ván này. Hậu cung cười chuyện cũ của ngươi, Hoàng thượng ngại đến cung ngươi, và nàng không giấu nữa: nàng ghét ngươi."),go:(_A,G)=>{matMis(G[0],G[1]);return [matSrv(rdGo("cnv_mat_5",7)),matCon(rdGo("cnv_mat_5",8))].join(" ")}}}});
+  lose:{tag:"Chủ cũ thành kẻ thù",w:"mis",t:MATT("Lần này {mis} thắng. Ngươi bị đẩy xuống bếp sau, Hoàng thượng ít thấy ngươi hơn, và cả cung biết nàng ghét ngươi.",
+   "Lần này {mis} thắng. Hậu cung cười chuyện cũ của ngươi, Hoàng thượng ngại đến cung ngươi, và nàng không giấu nữa: nàng ghét ngươi."),go:(_A,G)=>{matMis(G[0],G[1]);return [matSrv(rdGo("cnv_mat_5",7)),matCon(rdGo("cnv_mat_5",8))].join(" ")}}}});
 
 rdDef("cnv_mat",6,{t:"Tránh hay gặp",w:"emp",sj:"những lần Hoàng thượng tìm ngươi",cast(A){return CNV_MC(A,1)&&rdCast(A,["v"],MATV)},
  g:MATT("Hoàng thượng bắt đầu tìm cớ gặp ngươi: một lời gọi qua tiểu thái giám, một lần đi lạc vào hậu viện. Gặp thì {mis} biết, tránh thì ngài quên.",
@@ -685,7 +685,7 @@ rdDef("cnv_mat",6,{t:"Tránh hay gặp",w:"emp",sj:"những lần Hoàng thượ
   {n:"Cáo ốm ở lại",e:"mid",lx:"lỡ một đêm hội, chuyện chỉ dừng ở giữa",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi."}]}},
  E:{win:{tag:"Gặp nhau dưới đèn",w:"emp",t:MATT("Chiếc đèn cá chép treo trên đầu giường ngươi. Cả cung biết: Hoàng thượng không còn nhìn trộm nữa, ngài nhìn thẳng.",
    "Chiếc đèn cá chép treo trước cửa cung ngươi. Cả hậu cung biết: ngài đã tìm đến người ngài phong."),go:(_A,G)=>{matMis(0,G[0]);return [matSrv(rdGo("cnv_mat_6",2)),matCon(rdGo("cnv_mat_6",3))].join(" ")}},
-  mid:{tag:"Lỡ một lần",t:"Ngài vẫn nhớ, ngươi vẫn giữ mình. Giữa hai người chỉ còn một khoảng hành lang.",go:()=>matSrv(rdGo("cnv_mat_6",4))},
+  mid:{tag:"Lỡ một lần",t:"Ngài vẫn nhớ, ngươi vẫn giữ mình. Giữa hai người chỉ còn cách một bước, mà chưa ai bước tới.",go:()=>matSrv(rdGo("cnv_mat_6",4))},
   lose:{tag:"{mis} chen giữa",w:"mis",t:"{mis} đứng giữa ngươi và ngài suốt đêm hội. Ngài đi với nàng, còn ngươi bị người ta nhìn thấy đứng chờ.",go:(_A,G)=>{matMis(G[0],G[1]);return [matSrv(rdGo("cnv_mat_6",5)),matCon(rdGo("cnv_mat_6",6))].join(" ")}}}});
 
 rdDef("cnv_mat",7,{t:"Kính sự phòng ghi tên",w:"eun",sj:"tên ngươi trong sổ Kính sự phòng",cast(A){return CNV_MC(A,1)&&rdCast(A,["v"],MATV)},
@@ -775,7 +775,7 @@ rdDef("cnv_mat",8,{t:"Đêm đầu",w:"emp",sj:"đêm đầu tiên bên Hoàng t
 
 rdDef("cnv_mat",9,{t:"Từ tớ thành chủ",w:"mis",sj:"ngươi và {mis}",cast(A){return CNV_MC(A,1)&&rdCast(A,["v"],MATV)},
  g:MATT("Hoàng thượng đã gọi tên ngươi, mà ngươi vẫn mặc áo cung nữ, vẫn hầu {mis}. Cả cung không biết gọi ngươi là gì. {mis} cũng không biết.",
-  "Ngươi nay ngồi ngang hàng với người ngươi từng quỳ hầu. Người hầu cũ của {mis} phải cúi chào ngươi. Đứng thế nào cho phải, là việc của chương này."),
+  "Ngươi nay ngồi ngang hàng với người ngươi từng quỳ hầu. Người hầu cũ của {mis} phải cúi chào ngươi. Từ nay đứng thế nào cho phải, ngươi phải tự tính."),
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Chỗ ngồi",w:"hh",if:RDW(1),t:MATT(()=>CNV_QM()==="emp"?"Hoàng thượng mở yến. {mis} được mời, còn ngươi được gọi theo hầu. Giữa yến, ngài sai đặt thêm một chiếc ghế đẩu cạnh ngự tọa “cho con bé hầu trà”.":"Hoàng hậu mở yến. {mis} được mời, còn ngươi được gọi theo hầu. Nhưng Hoàng thượng sai đặt thêm một chiếc ghế đẩu cạnh ngự tọa “cho con bé hầu trà”.",
    "Yến thưởng cúc ở cung Hoàng hậu. Ghế của ngươi được đặt ngay trên ghế {mis}: ngài vừa ban ngươi thêm ân sủng, phép cung xếp theo ơn."),o:[
@@ -798,14 +798,14 @@ rdDef("cnv_mat",9,{t:"Từ tớ thành chủ",w:"mis",sj:"ngươi và {mis}",cas
   {n:"Bắt tay {v} chèn {mis}",f:"high",wx:"{mis} yếu đi",lx:"thành kẻ phản chủ cũ, lòng ngươi cắn rứt, {mis} thêm oán; hỏng thì tiếng sút",go:(A,ok,G)=>{rdRel(A,"v",G[0]);matMis(G[1],ok?G[2]:G[3])},rt:"Một tháng sau, {mis} bị cắt bổng vì “quản người không nghiêm”.",rf:"{mis} biết ngươi bắt tay {v}."},
   {n:"Từ chối, báo {mis}",f:"low",wx:"người cũ thấy ngươi giữ nghĩa",lx:"{v} phật ý, thêm oán; mất lòng người, tiếng sút",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);matMis(G[1])},rt:"{mis} nghe xong, lần đầu gọi ngươi là “muội”."},
   {n:"Gật đầu cho {v} yên, không làm gì",wx:"không ai biết ý ngươi",lx:"{v} sẽ đòi, thêm oán; lòng ngươi áy náy",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tưởng ngươi đã theo nàng."}]},
- t1:{h:"Chuyện cũ trong tay {mis}",w:"mis",if:MATM,t:"{mis} cầm một tờ giấy: sổ phạt ngày ngươi làm vỡ ngự trản năm đầu vào cung. Một tờ giấy nhỏ, đủ để người ta nói ngươi gian dối.",o:[
+ t1:{h:"Chuyện cũ trong tay {mis}",w:"mis",if:MATM,t:"{mis} cầm một tờ giấy: sổ phạt ngày ngươi làm vỡ chén ngự năm đầu vào cung. Một tờ giấy nhỏ, đủ để người ta nói ngươi gian dối.",o:[
   {n:"Xin {mis} đốt đi",f:"low",wx:"chuyện cũ khép lại",lx:"phải hạ mình, tiếng sút; ngươi mệt rã",go:(A,ok,G)=>matMis(ok?G[0]:G[1]),rt:"{mis} thả tờ giấy vào lò.",rf:"{mis} cất tờ giấy vào tay áo."},
-  ...MAT2({n:"Tự kể với Hoàng thượng trước",f:"high",wx:"tờ giấy hết giá",lx:"ngài biết thêm một lỗi cũ, Sủng sút; hỏng thì tiếng sút",rt:"Ngài cười: “Ngự trản ấy trẫm cũng chẳng thích.”",rf:"Ngài nhíu mày, nhưng không hỏi thêm."},{lx:"ngài biết thêm một lỗi cũ, Hoàng thượng để ý sút; hỏng thì tiếng sút"}),
+  ...MAT2({n:"Tự kể với Hoàng thượng trước",f:"high",wx:"tờ giấy hết giá",lx:"ngài biết thêm một lỗi cũ, Sủng sút; hỏng thì tiếng sút",rt:"Ngài cười: “Cái chén ấy trẫm cũng chẳng thích.”",rf:"Ngài nhíu mày, nhưng không hỏi thêm."},{lx:"ngài biết thêm một lỗi cũ, Hoàng thượng để ý sút; hỏng thì tiếng sút"}),
   {n:"Đổi lấy một lời hứa",wx:"cả hai giữ thóp nhau",lx:"không ai tin ai, người ta bảo ngươi mặc cả, tiếng sút",go:(_A,_ok,G)=>matMis(G[0]),rt:"Ngươi hứa không bao giờ nói xấu nàng trước mặt ngài. Nàng giữ tờ giấy, nhưng không dùng."}]},
  x1:{h:"Một lời của {mis}",w:"mis",t:MATT("Hoàng thượng hỏi {mis} trước mặt ngươi: “Người này, nàng thấy thế nào?” Một lời của nàng có thể mở cửa hay khóa cửa.",
    ()=>({hh:"Hoàng hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của muội, nay là tiểu chủ. Muội thấy thế nào?”",th:"Thái hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy thế nào?”",emp:"Hoàng thượng hỏi {mis} trước mặt cả điện: “Người hầu cũ của ái phi, nay là tiểu chủ. Ái phi thấy thế nào?”"})[CNV_QM()]),o:[
   {n:"Nhìn {mis}, không nói gì",e:["win","mid"],lx:"phó mặc cho người cũ, người ta bảo ngươi vẫn nép sau chủ cũ, tiếng sút; hỏng thì chỉ dừng ở giữa",rt:"{mis} nói: “Là người tốt.” Câu ấy, cả cung nghe.",rf:MATT("{mis} chỉ nói: “Tùy bệ hạ.”","{mis} chỉ nói: “Thiếp không dám nói.”")},
-  {n:"Tự trả lời trước",e:["win","lose"],rt:"Ngươi nói: “Nếu không có tỷ, không có hôm nay.” {mis} ngẩn ra.",rf:"Ngươi nói hớ một câu, {mis} cười lạnh."},
+  {n:"Tự trả lời trước",e:["win","lose"],rt:"Ngươi nói: “Nếu không có {tg}, không có hôm nay.” {mis} ngẩn ra.",rf:"Ngươi nói hớ một câu, {mis} cười lạnh."},
   {n:"Cúi đầu lui",e:"mid",lx:"không ai biết lòng ngươi, chuyện chỉ dừng ở giữa",rt:"Ngươi lui ra. Câu hỏi treo lơ lửng."}]}},
  E:{win:{tag:"Ngang hàng mà còn nghĩa",w:"mis",t:MATT("{mis} xin Hoàng thượng cho ngươi thôi hầu nàng, “để nó chờ chỉ dụ cho đàng hoàng”. Ngươi vẫn ở cung nàng, nhưng không còn là nô tỳ của ai.",
    "{mis} gọi ngươi là “muội” trước mặt cả điện. Từ đó không ai còn dám nhắc ngươi từng hầu nàng."),go:(_A,G)=>{matMis(G[0]);return [matSrv(rdGo("cnv_mat_9",1)),matCon(rdGo("cnv_mat_9",2))].join(" ")}},
@@ -884,7 +884,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
   lose:{tag:"Ánh mắt khép lại",t:MATT("Ngài thôi nhìn về phía hậu viện. Ngươi vẫn là cung nữ, vẫn pha trà, vẫn sống. Con đường còn dài, chỉ không còn chiếc ô năm ấy.",
    "Ngài thôi đến. Ngươi vẫn là tiểu chủ, vẫn có cung riêng, chỉ không còn ai nhìn ngươi như chiều mưa năm ấy."),go:()=>[matSrv(rdGo("cnv_mat_11",5)),matCon(rdGo("cnv_mat_11",6))].join(" ")}}});
 RD97L.push(rdRare({a:"cnv_mat_11",tag:"Chủ cũ thành tỷ muội",w:"mis",n:"Xin {mis} cùng đứng dưới mái hiên",
- path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&(m.rel||0)>=RR("cnv_mat_11").bar)},"Chủ cũ thương ngươi (quan hệ từ "+RR("cnv_mat_11").bar+")"],
+ path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&(m.rel||0)>=RR("cnv_mat_11").bar)},"Chủ cũ thương ngươi (giao tình từ "+RR("cnv_mat_11").bar+")"],
  t:"Ngươi sai người mời {mis} ra mái hiên. Hoàng thượng thấy hai người đứng chung một chiếc ô, bật cười: “Hóa ra người trẫm nhìn năm ấy, là người nàng dạy ra.” Từ đó, cung {mis} và cung ngươi đi chung một đường, ai động đến người này là động đến cả hai.",
  go:(_A,G)=>{matMis(G[0]);return [matSrv(rdGo("cnv_mat_11",7)),matCon(rdGo("cnv_mat_11",8))].join(" ")},rw:"nt_nhuy",ti:"Chủ tớ thành tỷ muội"}));
 CNV_QFIX("cnv_mat");
@@ -1017,7 +1017,7 @@ rdDef("cnv_ma",7,{t:"Ma ma bị tố",w:"eun",sj:"lời tố Lưu ma ma",cast(A)
  s2:{h:"Ma ma đã nhận tội?",w:"eun",if:RDW(0),t:"Ngươi nghe tin: Lưu ma ma bị giải đi, và có người nói bà đã điểm chỉ một tờ nhận tội. Ngươi không tin.",o:[
   {n:"Sai người tin cẩn vào ngục gặp bà",if:LMMR,f:"heart",wx:"biết sự thật",lx:"tên cung ngươi vào sổ thăm tù, tiếng sút; bạc mất trắng",rt:"Người ngươi sai về kể: ma ma lắc đầu, “Ta chưa điểm chỉ gì cả.”",rf:"Lính ngục không cho vào."},
   {n:"Xin vào ngục gặp bà",if:()=>!LMMR(),f:"heart",wx:"biết sự thật",lx:"tên ngươi vào sổ thăm tù, tiếng sút; bạc mất trắng",rt:"Ma ma lắc đầu: “Ta chưa điểm chỉ gì cả.”",rf:"Lính ngục không cho vào."},
-  {n:"Dò xem tờ nhận tội ở đâu",f:"proof",wx:"biết tờ ấy giả",lx:"Thận hình ty biết ngươi dò, tiếng sút; ngươi mệt rã",rt:"Tờ nhận tội điểm chỉ ngón trái. Ma ma thuận tay trái đã cụt một đốt từ năm xưa.",rf:"Không ai cho xem."},
+  {n:"Dò xem tờ nhận tội ở đâu",f:"proof",wx:"biết tờ ấy giả",lx:"Thận hình ty biết ngươi dò, tiếng sút; ngươi mệt rã",rt:"Dấu điểm chỉ trên tờ nhận tội là một ngón tay trái lành lặn, mà ngón tay trái của ma ma đã cụt một đốt từ năm xưa.",rf:"Không ai cho xem."},
   {n:"Lặng lẽ giữ khoảng cách",f:"cold",wx:"không bị kéo vào",lx:"ma ma tưởng ngươi bỏ bà, người ta bảo ngươi bạc, tiếng sút",rt:"Ngươi không đến."}]},
  c1:{h:"Học trò của ma ma",w:"maid",t:LMMT("Mấy cung nữ cùng được ma ma dạy rủ nhau ký đơn xin tha. Nếu đơn bị bác, ai ký cũng bị ghi tên.",
    "Học trò của Lưu ma ma đang hầu ở các cung tìm đến ngươi: họ muốn ký đơn xin tha, nhưng cần một tiểu chủ đứng tên đầu."),o:[
@@ -1051,7 +1051,7 @@ rdDef("cnv_ma",8,{t:"Bảo vệ thầy",w:"maid",sj:"Lưu ma ma trước ngày c
   {n:"Lo thuốc vào ngục",f:"heart",wx:"ma ma qua cơn sốt",lx:"tốn bạc, có người thấy",rt:"Ma ma uống thuốc, đêm ấy hạ sốt."},
   {n:"Xin thái y vào khám",f:"high",wx:"có thái y làm chứng vết đòn",lx:"Thái y viện ngại dính vào, đồn ngươi làm to chuyện, tiếng sút",rt:"Thái y ghi vết đòn vào sổ.",rf:"Thái y không dám đến."},
   {n:"Viết lại lời khai của ma ma",f:"proof",wx:"có lời khai trước khi muộn",lx:"chép đến đèn cạn, ngươi mệt rã",rt:LMMT("Ma ma đọc, ngươi chép, đến khi đèn cạn.","Ma ma đọc, người ngươi sai vào ngục chép, đến khi đèn cạn.")}]},
- c1:{h:"Tiểu thái giám giữ kho",w:"eun",t:"Tiểu thái giám giữ kho từng thấy Phùng cô cô tự đóng dấu phiếu xuất. Hắn sợ: làm chứng thì mất mạng nghề, không làm thì lương tâm cắn.",o:[
+ c1:{h:"Tiểu thái giám giữ kho",w:"eun",t:"Tiểu thái giám giữ kho từng thấy Phùng cô cô tự đóng dấu phiếu xuất. Hắn sợ: làm chứng thì mất nghề, có khi mất mạng; không làm thì lương tâm cắn rứt.",o:[
   {n:"Hứa che chở cho hắn",f:"wit",wx:"có nhân chứng",lx:"hắn bỏ trốn, người ta bảo ngươi hứa suông, tiếng sút; ngươi mệt rã",rt:"Hắn gật đầu: “Nô tài nói.”",rf:"Hắn bỏ trốn khỏi kinh thành."},
   {n:"Cho hắn bạc về quê sau khi khai",f:"wit",wx:"nhân chứng chắc",lx:"mang tiếng mua chứng, tiếng sút; bạc mất trắng",rt:"Hắn nhận bạc, hứa khai.",rf:"Hắn nhận bạc rồi đổi lời."},
   {n:"Để hắn tự quyết",wx:"không ép ai",lx:"có thể không có nhân chứng, mất một đầu mối",rt:"Hắn cúi đầu, không hứa."}]},

@@ -8,7 +8,7 @@ EV6("heatStroke","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Hạ"?(C.wx.f===2?3:1.2):
 EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
  v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
  o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
-  c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(BAL.odb.j68f.odP_2+S.tai/2+(S.arts.thi||0)*6),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
+  c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(BAL.odb.j68f.odP_2+S.tai/2+artOE(S,"thi")),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
   c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:typeof trSnowGreet==="function"?trSnowGreet():5,duc:1}})]});
 EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Thu"?2:0,
  v:["Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.","Gió heo may, lá phong đỏ rụng đầy lối; {A} rủ ngươi đi nhặt lá ép vào sách.","Đêm thu nghe tiếng sáo từ cung {A} vọng sang, buồn da diết.","Mùa cua béo, {A} gửi sang một giỏ cua và rượu hoa cúc."],
@@ -18,7 +18,7 @@ EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a
 EV6("springAllergy","sea",{a:["doc"],pp:()=>({a0:0}),w:C=>C.sea==="Xuân"?1.5:0,
  v:["Phấn hoa xuân bay khắp nơi, ngươi hắt hơi không dứt, mắt đỏ hoe.","Mưa phùn kéo dài, chăn đệm ẩm mốc, ngươi ngứa ngáy khắp người.","Hoa đào nở rộ, nhưng cung nữ nổi mẩn đỏ từng mảng.","Sương sớm lạnh, ngươi đau họng mất tiếng đúng lúc sắp có yến."],
  o:X=>[c6(`Mời ${X.A.n} kê thuốc`,{c:{bac:-15},w:{suc:6}}),
-  c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(BAL.odb.j68f.odP_4+(S.arts.y||0)*15),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
+  c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(BAL.odb.j68f.odP_4+artO(S,"y")),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
   c6("Gắng chịu, che mặt the",{w:{bac:5},k:[R6(`Sắc ${balSg(BAL.eff.j68f.sacOk)} vài hôm, ngài thấy ngươi tiều tụy`)],ok:()=>{apply({sac:BAL.eff.j68f.sacOk});return "Ngươi gắng chịu cho qua."}})]});
 EV6("stormNight","sea",{a:["emp"],pp:()=>({a0:0}),w:C=>C.wx.f===3?3:0,
  v:["Giông tố nổi lên, sét đánh gãy cây hòe cổ trước điện; cả cung xôn xao điềm gở.","Mưa giông cả đêm, cung nhân đồn Hoàng thượng sợ sấm từ thuở nhỏ.","Gió lớn làm đổ giàn hoa, đè lên một tiểu thái giám.","Sấm chớp đùng đùng, các con khóc thét, không ai dỗ được."],
@@ -105,9 +105,9 @@ const MYST6=["cây trâm hồ điệp bằng vàng","ấn tín nhỏ của cung"
 EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<3)return null;const G=npwPick(L,s=>(netIs(s,"greed")?BAL.ag.why.e68.greed:0)+Math.max(0,BAL.loy.mid-(s.loyal||50)));if(!G)return null;const T=shuf(L.filter(s=>s!==G)).slice(0,2);T.splice(R(3),0,G);return{a0:T[0].sid,a1:T[1].sid,a2:T[2].sid,g:T.indexOf(G),it:R(MYST6.length)}},w:C=>hasStaff6(3)?1.4:0,
  v:["Sáng ra, {it} trong tráp của ngươi biến mất. Đêm qua chỉ {A}, {B} và {C} ra vào buồng trong.","{it} mất ngay sau buổi dọn dẹp; ba người có mặt: {A}, {B}, {C}.","Tráp khóa còn nguyên mà {it} không thấy; chìa khóa chỉ {A}, {B} và {C} từng cầm.","Mất {it} giữa ban ngày. {M} nhớ lại chỉ {A}, {B}, {C} lui tới gần đó."],
  o:X=>{const G=[X.A,X.B,X.C][X.p.g];return[
-  c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(BAL.odb.j68f.odP_19+S.tamco/3+eyes(S)*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>`Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`,no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
-  c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6(`chuyện xấu lan ra ngoài: Danh ${balSg(BAL.eff.j68f.danhL)}`)],l:{danh:BAL.eff.j68f.danhL},lt:[R6("tra không ra")],ok:()=>{apply({danh:BAL.eff.j68f.danhL});return `Cung Chính ti tra ra ${G.n}.`}}),
-  c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,BAL.eff.j68f.relOk);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
+  c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(BAL.odb.j68f.odP_19+S.tamco/3+eyes(S)*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ còn thất lạc")],ok:()=>{loEvBack(X.p);return `Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`},no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
+  c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6(`chuyện xấu lan ra ngoài: Danh ${balSg(BAL.eff.j68f.danhL)}`)],l:{danh:BAL.eff.j68f.danhL},lt:[R6("tra không ra")],ok:()=>{loEvBack(X.p);apply({danh:BAL.eff.j68f.danhL});return `Cung Chính ti tra ra ${G.n}, đồ về lại tráp.`}}),
+  c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ còn thất lạc")],l:{tamco:-1},ok:()=>{loEvBack(X.p);relDo(G,BAL.eff.j68f.relOk);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
 EV6("poisonedFish","myst",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.","Chú vẹt trong cung bỗng lăn ra chết, mỏ tím tái.","Chậu lan quý héo rũ chỉ sau một đêm, đất có mùi lạ.","Con chó nhỏ cung nữ nuôi ăn thức ăn thừa xong thì nôn mửa."],
  o:X=>[c6("Cho thái y nghiệm độc",{c:{bac:-20},p:70,wt:[G6("biết có độc hay không")],w:{tamco:1},l:{bac:-5},lt:[R6("xét không ra")],ok:()=>{const bad=liveRivals(true).some(v=>{try{return bandOf(danger(v,S))>=3}catch(e){return false}});return bad?"Thái y nói có dấu độc nhẹ; có kẻ đang thử tay. Ngươi đề phòng hơn.":"Thái y nói là do nước tù và trời trở, không có độc."}}),

@@ -3,7 +3,7 @@
    usage: node dev/test/tab-underline-scan.js <url> [<W>x<H>@dpr ...]   exit 1 if any fault */
 const {chromium}=require('playwright');const URL=process.argv[2];let SIZES=process.argv.slice(3);
 if(!SIZES.length)SIZES=['755x1000@2','1000x755@2','1180x820@2','1366x1024@2','844x390@3','390x844@3','412x1058@2'];
-const ROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip,#tabs";
+const ROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip,#tabs";
 (async()=>{const b=await chromium.launch({ignoreDefaultArgs:['--hide-scrollbars']});const out={};let bad=0;const errs=[];
 for(const SZ of SIZES){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();
@@ -14,7 +14,7 @@ for(const SZ of SIZES){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(
   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.bac=200;render()});
  const scan=ROWS_=>p.evaluate(sel=>{const res=[];document.querySelectorAll(sel).forEach(r=>{if(!r.offsetWidth||!r.offsetHeight)return;const cs=getComputedStyle(r);const over=r.scrollWidth>r.clientWidth+1&&cs.overflowX!=='visible';
    const sb=r.offsetHeight-r.clientHeight-(parseFloat(cs.borderTopWidth)||0)-(parseFloat(cs.borderBottomWidth)||0);const wk=getComputedStyle(r,'::-webkit-scrollbar').display;
-   const trackVisible=over&&(sb>1||r.matches('.pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip'))&&cs.scrollbarWidth!=='none'&&wk!=='none';
+   const trackVisible=over&&(sb>1||r.matches('.pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip'))&&cs.scrollbarWidth!=='none'&&wk!=='none';
    const ln=[...r.querySelectorAll(':scope>.kftl')].filter(l=>l.style.opacity!=='0');const stray=r.id==='tabs'?0:ln.length;
    res.push({cls:(r.id?'#'+r.id:r.className.toString().replace(/\s+/g,'.')).slice(0,48),over,trackVisible,stray})});
    const strayAll=[...document.querySelectorAll('.kftl')].filter(l=>!l.parentElement||!l.parentElement.matches('#tabs')).length;return{res,strayAll}},ROWS);

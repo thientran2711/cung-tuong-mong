@@ -28,8 +28,8 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
-   const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
+   
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
@@ -109,9 +109,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    await A.p.evaluate(()=>{const b=document.getElementById('next');b.click()});
    ok(await until(B,()=>/Đã sẵn sàng/.test((document.getElementById('kctmf')||{}).textContent||''),null,6000),'4: A ready → B sees "✓ Đã sẵn sàng"',await fr(B));
    await shot(B,'f-ready-1180x820');await shot(A,'f-mewait-755x1000');
-   await B.p.click('#kctmf .kctmf');ok(await until(B,()=>!!document.querySelector('#kctmp .kpanel'),null,3000),'4: tap the chip → panel');
-   await shot(B,'f-panel-1180x820');await B.p.click('#kctmp [data-ctm=frx]');
-   await A.p.click('#kctmf .kctmf');await sleep(500);await shot(A,'f-panel-755x1000');await A.p.click('#kctmp [data-ctm=frx]');
+   await B.p.click('#kctmf .kctmf');ok(await until(B,()=>{const M=document.getElementById('modal');return !M.hidden&&!!M.querySelector('.dlg.kpanel')},null,3000),'4: tap the «Hảo hữu» icon → partner sheet (KIT §69.2, owner 21/11 ~06:30Z)');
+   await shot(B,'f-panel-1180x820');await B.p.click('#modal .kph .kit-x');
+   await A.p.click('#kctmf .kctmf');await sleep(500);await shot(A,'f-panel-755x1000');await A.p.click('#modal .kph .kit-x');
    await B.p.evaluate(()=>document.querySelector('[data-ctm=hold]')&&document.querySelector('[data-ctm=hold]').click());await sleep(1500);await shot(A,'f-hold-755x1000');
    await B.p.evaluate(()=>{const g=document.querySelector('[data-ctm=go]');if(g)g.click()});await sleep(800);
    await press(B);await bothPast(A,B,k,15000)}}

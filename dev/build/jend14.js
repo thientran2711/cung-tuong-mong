@@ -80,7 +80,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   {n:"Xin Hoàng thượng thương",e:"mid",lx:"bị coi là yếu",rt:"Hoàng thượng đỡ ngươi dậy."}]}},
  E:{win:{tag:"Không con mà vẫn đứng vững",w:"th",t:()=>(S.thDead?"Hoàng thượng đứng sau ngươi":"Thái hậu đứng sau ngươi")+", lục cung biết ngươi là người hiền. Không có đứa trẻ nào, ngươi vẫn có chỗ đứng của riêng mình, và trời còn cho ngươi thời gian.",get fx(){return egThGone()?rdGo("noi14",0):rdGo("noi14",1)},go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM);return "Mấy tháng tới dễ thụ thai hơn."}},
   mid:{tag:"Lấy đức thay con",t:"Ngươi không còn đếm ngày chờ con. Người ta nể đức ngươi, dù vẫn có kẻ xì xào sau lưng."},
-  lose:{tag:"Cung vắng tiếng trẻ",t:"Lời bàn tán thắng. Ngươi bị coi là người không có phúc, Hoàng thượng thưa đến."}}};rdFx("noi14",ARC67.noi14);/* ONE CORE: option / ending numbers from BAL.road.fx (jbalroad.js) */
+  lose:{tag:"Cung vắng tiếng trẻ",t:"Lời bàn tán thắng. Ngươi bị coi là người không có phúc, Hoàng thượng cũng ít ghé cung ngươi."}}};rdFx("noi14",ARC67.noi14);/* ONE CORE: option / ending numbers from BAL.road.fx (jbalroad.js) */
 
 /* ---------- ch13 · hau14 · Tranh ngôi Trung cung ---------- */
 ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
@@ -117,7 +117,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
  x1:{h:"Thánh ý",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng triệu ngươi và {v} cùng đến điện. Ngài hỏi: lục cung loạn đã lâu, lỗi tại ai?":"Hoàng thượng triệu ngươi đến điện, hỏi: “Nếu trẫm giao lục cung cho nàng, nàng lấy gì giữ nó yên?”",o:[
   {n:"Thưa: lấy đức mà giữ",e:["win","mid"],rt:"Hoàng thượng gật đầu thật lâu.",rf:"Hoàng thượng nói: đức thì ai cũng tự xưng."},
   {n:"Thưa: lấy phép mà giữ",e:["win","lose"],rt:"Hoàng thượng thấy ngươi cứng rắn, đủ sức trị lục cung.",rf:"Hoàng thượng lắc đầu: nàng quá cứng."},
-  {n:"Thưa: thiếp không dám nhận",e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
+  {n:"Thưa: thần thiếp không dám nhận",e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
  E:{win:{tag:"Một bước gần ngôi Trung cung",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng phạt {v}, tuyên trước lục cung rằng Trung cung là ngươi. Từ nay không ai dám nhắc chuyện thay ngôi.":"Hoàng thượng ghi tên ngươi trong lòng. Lục cung biết: ngày bàn lập hậu, ngươi là người phải nhắc đến.",go:(A,G)=>{if(rv67(A,"v"))rdOan(A,"v",G[0]);return egHauWin()}},
   mid:{tag:"Thánh ý còn để ngỏ",t:"Hoàng thượng chưa định. Ngươi giữ được chỗ đứng, nhưng ngôi Trung cung vẫn còn xa một bước."},
   lose:{tag:"Người khác được thế",t:A=>(rv67(A,"v")?"Hoàng thượng nghiêng về {v}.":"Hoàng thượng chưa thấy ngươi đủ sức giữ lục cung.")+" Ngươi lùi một bước, nhưng đường lên ngôi Trung cung vẫn còn mở.",go:(A,G)=>{rdRel(A,"v",G[0])}}}};rdFx("hau14",ARC67.hau14);/* ONE CORE: option / ending numbers from BAL.road.fx (jbalroad.js) */

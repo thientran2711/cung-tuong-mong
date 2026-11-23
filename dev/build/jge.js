@@ -18,12 +18,15 @@
 (function(){try{
 const GB=()=>BAL.ge;
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* the identity (origin key) a branch belongs to = its road's own declared origin ARC67[b].o (pt_* roads are origin "pf"); prefix only as fallback */
+const geOrig=b=>{try{const a=typeof ARC67==="object"&&ARC67[b];return a&&a.o&&a.o!=="rd"?a.o:String(b).split("_")[0]}catch(e){return String(b).split("_")[0]}};
+window.geOrig=geOrig;
 const R1N=["Ở lại, giữ trọn phận mình","Ở lại, nắm lấy quyền bính","Rời khỏi cung cấm","Theo người ấy đi"];
 const R2N=["Lấy ân mà đối đãi","Lấy uy mà trị","Buông bỏ tất cả"];
 const SHN={t:"thiện",a:"ác"};
 /* ---------- branch + state ---------- */
 function geBranch(){try{if(!GB().on||!S||!S.st||!S.st.f14)return null;const rd=S.st.f14.rd;if(!rd||!GE_DATA[rd]||!GE_CAT[rd])return null;
- if(!S.origin||rd.split("_")[0]!==S.origin.k)return null;/* a country branch (Bắc Địch) playing nc roads owns its own set (D2, out of scope): not live */
+ if(!S.origin||geOrig(rd)!==S.origin.k)return null;/* a country branch (Bắc Địch) playing nc roads owns its own set (D2, out of scope): not live */
  return rd}catch(e){return null}}
 function geS(){if(typeof S==="undefined"||!S)return null;if(S.ge&&S.ge.b)return S.ge;const b=geBranch();if(!b)return null;
  S.ge={b,st:["o","o","o","o"],cx:[0,0,0,0],pull:[0,0,0,0],lt:0,d0:S.duc|0,ce:{},oc:{},done:0};return S.ge}
@@ -32,7 +35,9 @@ const D=s=>GE_DATA[s.b],C=s=>GE_CAT[s.b];
 const chN=()=>{try{return S.st.ch.n|0}catch(e){return 0}};
 /* ---------- the world: seats, people ---------- */
 function geMis(){try{const id=S.st.f14.act&&S.st.f14.act.mis;return id!=null?RV(id):null}catch(e){return null}}
-function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};return !!W[X]&&W[X]!=="me"}catch(e){return false}}
+/* GE09 seat locks both ways: a seat an NPC took by her own grand ending (v.ge.seat, jgenpc.js; rides the rivals in co-op) is taken for her too */
+function geSeatTaken(X){try{if(X==="HH")return S.rank<RANKS.length-1&&typeof qOn==="function"&&qOn();const W=S.geSeat||{};if(!!W[X]&&W[X]!=="me")return true;
+ return (typeof rivals==="object"&&rivals||[]).some(v=>v&&v.alive!==false&&v.ge&&v.ge.seat===X)}catch(e){return false}}
 function geStat(k){try{if(k==="dad")return S.dad||0;if(k==="maid")return S.maid?S.maid.loyal||0:0;if(k==="mis"){const v=geMis();return v?aff(v,S):-100}return S[k]||0}catch(e){return 0}}
 const gate=(s,i)=>(GB().gate[s.b+"_"+(i+1)]||{});
 function geTerm(s,i,t){const k=t[0];
@@ -130,13 +135,16 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
  res.ex=out}
 /* ---------- the result event (kit dialog; serialisable) ---------- */
 function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close")return true;if(A==="stay")return false;return GB().exitSum.includes(C(s).e[res.i][5])}
+/* bang-words: ending texts carry the road's land tokens ({kha} {land} {quan} {dien} …) — filled by the one filler (j67 fill67), never shown raw */
+function geF(x){try{return typeof fill67==="function"&&/\{\w+\}/.test(x||"")?fill67(x,(S&&S.st&&S.st.M)||{}):x}catch(e){return x}}
+window.geF=geF;
 PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e[res.i];
  const rows=[];if(res.fx&&Object.keys(res.fx).length)rows.push([res.ok?"Được":"Mất",fmt(res.fx),res.ok?"g":"r"]);(res.ex||[]).forEach(x=>rows.push(["",x,"t"]));
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
-  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${res.sh==="t"?e.t:e.a}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
-   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,res.sh==="t"?e.t:e.a,`Đại kết cục: ${res.ti}`,true)}}]}}
- return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":e.ft}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
+  return {who:pMe(),mustChoose:1,t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
+   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
+ return {who:pMe(),mustChoose:1,t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;
 function geStore(){const g=store.get("ctm-ge");return g&&typeof g==="object"?Object.assign({t:{},g:{},f:{}},g):{t:{},g:{},f:{}}}
@@ -148,7 +156,7 @@ window.geStore=geStore;
 /* ---------- titles: the jdh catalogue group «Thiên mệnh» (one step, tier BAL.ge.title.tier, no bonus: cosmetic) ---------- */
 function geTitles(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const b in GE_DATA){const Cb=GE_CAT[b];if(!Cb)continue;Cb.e.forEach((e,i)=>{["t","a"].forEach(sh=>{
   const key=geKey(b,i,sh),nm=e[sh==="t"?6:7],how=GE_DATA[b].e[i][sh==="t"?"ht":"ha"];
-  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[b.split("_")[0]]||"";return `${how}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
+  DH_CAT[key]={n:nm,g:"tm",how:()=>{const r=geStore().t[key];const id=GE_ID[geOrig(b)]||"";return `${geF(how)}. ${r&&r.first?`Kiếp ${r.first.life} · `:""}${id} · ${Cb.n}`}};
   BAL.dh.T[key]={n:[1],b:GB().title.tier,ch:[]}})})}}catch(e){console.error("ge",e)}}
 geTitles();
 /* carry (D5): a new life may wear the grand title of the life before ("prev") or any title ever earned ("any"); cosmetic only */
@@ -163,22 +171,26 @@ window.geCarry=geCarry;
 /* Sổ luân hồi: the collection rows (kit rows, like the kỳ ngộ book of j97) */
 function geBookHTML(){const g=geStore();const nT=Object.keys(g.t).length,tot=Object.keys(GE_CAT).length*GB().n.grand*2;
  const rows=[["Danh hiệu Thiên mệnh",`<b>${nT}/${tot}</b>`,nT?"g":""]];
- for(const k in g.t){const e=g.t[k],Cb=GE_CAT[e.b];if(!Cb)continue;rows.push([`«${esc(e.name)}»`,`${esc(Cb.e[e.i][0])} · ${esc(GE_ID[e.b.split("_")[0]]||"")} · ${esc(Cb.n)} · kiếp ${e.lives.join(", ")}`,"g"])}
+ for(const k in g.t){const e=g.t[k],Cb=GE_CAT[e.b];if(!Cb)continue;rows.push([`«${esc(e.name)}»`,`${esc(Cb.e[e.i][0])} · ${esc(GE_ID[geOrig(e.b)]||"")} · ${esc(Cb.n)} · kiếp ${e.lives.join(", ")}`,"g"])}
  rows.push(["Ghi chú","Chỉ danh hiệu Thiên mệnh của kiếp ngay trước được mang sang kiếp sau, để đeo cho đẹp."]);
  return `<h3>Thiên mệnh</h3>`+rows67(rows)}
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{return h+geBookHTML()}catch(e){return h}}})();
 window.geBookHTML=geBookHTML;
 /* ---------- Bảng «Thiên mệnh»: who reached a grand ending in THIS life ---------- */
 function geBoardAdd(p,ti,sh,b){S.geBoard=S.geBoard||[];S.geBoard.push({id:p===S?"me":String(p.id),ti,sh,b,when:(typeof VP==="object"&&VP.date?VP.date(S.month,S.year):`Tháng ${S.month}, năm thứ ${S.year}`),pt:GB().pt})}
-function geBoardList(){return (S&&S.geBoard||[]).map((x,i)=>{const p=x.id==="me"?S:(typeof RV==="function"?RV(+x.id)||RV(x.id):null);return p?Object.assign({},x,{who:p,place:i+1}):null}).filter(Boolean).sort((a,b)=>(a.id==="me"?-1:0)-(b.id==="me"?-1:0))}
+/* GE09: NPC rows come from the NPCs themselves (v.ge.res, jgenpc.js) so the co-op friend sees the same Bảng; her row first, then in order reached */
+function geBoardList(){const L=(S&&S.geBoard||[]).filter(x=>x.id==="me").map(x=>Object.assign({},x,{who:S}));
+ try{for(const v of (typeof rivals==="object"&&rivals||[])){const r=v&&v.ge&&v.ge.res;if(!r||!r.ok||!v.name)continue;L.push({id:String(v.id),ti:r.ti,sh:r.sh,b:v.ge.b,when:r.when||"",pt:GB().pt,t:r.t||0,who:v})}}catch(e){}
+ const me=L.filter(x=>x.id==="me"),np=L.filter(x=>x.id!=="me").sort((a,b)=>(a.t||0)-(b.t||0));return me.concat(np).map((x,i)=>Object.assign(x,{place:i+1}))}
+window.geBoardList=geBoardList;
 function geBoardPanel(tabs){if(!S||typeof kitPanel!=="function")return;const L=geBoardList();const sec=[];if(tabs)sec.push({h:"",html:tabs});
  const rows=L.map(x=>{const o=typeof dhObj==="function"?dhObj(x.who,geKey(x.b,GE_CAT[x.b].e.findIndex(e=>e[6]===x.ti||e[7]===x.ti),x.sh)):null;
   const plate=o&&typeof kitTitlePlate==="function"?kitTitlePlate(o):`«${esc(x.ti)}»`;const nm=typeof kitName==="function"?kitName(x.who,x.who===S?{named:true}:{}):esc(x.who.name);
-  return [plate,[nm,`${esc(GE_ID[x.b.split("_")[0]]||"")} · ${esc(x.when)}`],"t"]});
+  return [plate,[nm,`${esc(GE_ID[geOrig(x.b)]||"")} · ${esc(x.when)}`],"t"]});
  sec.push({h:`Bảng Thiên mệnh · ${L.length} người`,rows:rows.length?rows:[["Bảng","Kiếp này chưa ai đạt Đại kết cục"]]});
  const opts=[];if(L.length>=2&&typeof kitPodiumShow==="function")opts.push({n:"Xem bảng vàng",fx:{},x:"",go:()=>kitPodiumShow(L.map(x=>({who:x.who,place:x.place,sub:x.ti,score:x.pt})),{title:"Bảng Thiên mệnh",next:"Đóng"})});
  opts.push({n:"Đóng",fx:{},go:()=>{}});
- kitPanel({kind:"info",title:"Thiên mệnh",sub:"Những người kiếp này đạt Đại kết cục",sections:sec,opts,dh:1},true);showModal()}
+ kitPanel({kind:"info",title:"Thiên mệnh",sub:"Những người kiếp này đạt Đại kết cục",sections:sec,opts,dh:1,cls:"kes-t-fate"/* KIT §91 ending screen (owner #51) */},true);showModal()}
 window.geBoardPanel=geBoardPanel;
 /* ---------- the Kim sách item (one kind) ---------- */
 try{IT[GB().kimsach]=IT[GB().kimsach]||{n:"Kim sách Thiên mệnh",kd:"Kỷ vật",d:"Sách vàng khắc danh hiệu Thiên mệnh của ngươi; không bán, không tặng, không mất",pr:0,keep:1,tg:[]}}catch(e){}
@@ -201,16 +213,16 @@ function geMap(b){const Cb=GE_CAT[b];if(!Cb)return null;const g=geStore(),rb=sto
    fail:{n:g.f[node]&&GE_DATA[b]?GE_DATA[b].e[i].fail:"?"},
    card:any?{r1:R1N[e[3]],r2:R2N[e[4]],cw:GE_DATA[b]?GE_DATA[b].e[i].cw:"",lives}:{txt:"Chưa ai biết ngả này dẫn tới đâu."}}});
  const nG=ends.filter(x=>x.n!=="?").length,nT=ends.reduce((a,x)=>a+x.slots.filter(y=>y.ti!=="?").length,0),nK=rare.filter(x=>x.seen).length;
- return {b,n:Cb.n,id:GE_ID[b.split("_")[0]]||"",spine,rare,ends,count:{g:nG,t:nT,k:nK,txt:`Đại kết cục ${nG}/${GB().n.grand} · Danh hiệu ${nT}/${GB().n.grand*2} · Kỳ ngộ ${nK}/${GB().n.rare}`}}}
+ return {b,n:Cb.n,id:GE_ID[geOrig(b)]||"",spine,rare,ends,count:{g:nG,t:nT,k:nK,txt:`Đại kết cục ${nG}/${GB().n.grand} · Danh hiệu ${nT}/${GB().n.grand*2} · Kỳ ngộ ${nK}/${GB().n.rare}`}}}
 window.geMap=geMap;
 /* ---------- the «Sơ đồ nhánh» PAGE in Sổ luân hồi (GE03, design GRAND_ENDINGS §2.10; BAL.ge.mapOn): kit parts only —
    identity tab row (kitTabRowHTML, count = Đại kết cục earned / all of that identity) × road tab row (kitTabRowHTML, the roads of that identity) × kitBranchMap of the picked branch (counts chip, spine, her chip, 4 ends, card on tap = kitBranchMapOpen);
    the whole-book totals are a kitRows row. Only her own lives are read (geMap: ctm-ge / ctm-rare97 / ctm-gech + this life's S.ge) — unseen nodes stay «?». The branch of the life she plays opens first. ---------- */
 let GEMP=null;
-function geMapIds(){return Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>k.split("_")[0]===id))}
-function geMapRoads(id){return Object.keys(GE_CAT).filter(k=>k.split("_")[0]===id)}
+function geMapIds(){return Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>geOrig(k)===id))}
+function geMapRoads(id){return Object.keys(GE_CAT).filter(k=>geOrig(k)===id)}
 function geMapLive(){try{return S&&S.ge&&GE_CAT[S.ge.b]?S.ge.b:null}catch(e){return null}}
-function geMapPick(){if(GEMP&&GE_CAT[GEMP.b])return GEMP;const b=geMapLive()||Object.keys(GE_CAT)[0];return GEMP={id:b.split("_")[0],b}}
+function geMapPick(){if(GEMP&&GE_CAT[GEMP.b])return GEMP;const b=geMapLive()||Object.keys(GE_CAT)[0];return GEMP={id:geOrig(b),b}}
 function geMapInner(){const P=geMapPick(),ids=geMapIds(),GBn=GB().n;const cnt={};let tg=0,tt=0,tk=0,nb=0;
  for(const id of ids){let g=0;const roads=geMapRoads(id);for(const b of roads){const m=geMap(b);if(m){g+=m.count.g;tg+=m.count.g;tt+=m.count.t;tk+=m.count.k;nb++}}cnt[id]=`${g}/${roads.length*GBn.grand}`}
  const idTabs=ids.map(id=>({k:id,label:esc(GE_ID[id]),n:cnt[id],tip:`Đại kết cục đã đạt: ${cnt[id]}`}));
@@ -223,8 +235,8 @@ function geMapInner(){const P=geMapPick(),ids=geMapIds(),GBn=GB().n;const cnt={}
 function geMapPageHTML(){if(!GB().mapOn||typeof kitBranchMap!=="function"||typeof kitTabRowHTML!=="function")return"";if(GEMP&&GEMP.keep)GEMP.keep=false;else GEMP=null;/* a node card closing re-mounts the page: keep the picked branch then */
  try{return `<h3>Sơ đồ nhánh</h3><div class="kgm" data-kgm>${geMapInner()}</div>`}catch(e){console.error("ge",e);return""}}
 document.addEventListener("click",e=>{const t=e.target&&e.target.closest&&e.target.closest("[data-kgm-id],[data-kgm-rd]");if(!t)return;
- try{const P=geMapPick();if(t.dataset.kgmId){const id=t.dataset.kgmId;if(id===P.id)return;const live=geMapLive();GEMP={id,b:live&&live.split("_")[0]===id?live:geMapRoads(id)[0]}}
-  else GEMP={id:t.dataset.kgmRd.split("_")[0],b:t.dataset.kgmRd};
+ try{const P=geMapPick();if(t.dataset.kgmId){const id=t.dataset.kgmId;if(id===P.id)return;const live=geMapLive();GEMP={id,b:live&&geOrig(live)===id?live:geMapRoads(id)[0]}}
+  else GEMP={id:geOrig(t.dataset.kgmRd),b:t.dataset.kgmRd};
   const h=t.closest("[data-kgm]");if(h){h.innerHTML=geMapInner()}}catch(x){console.error("ge",x)}});
 /* the kit's node-card handler reads host.__kbm: refresh it from the data at the moment of the tap (capture phase = before the kit's own handler) */
 document.addEventListener("click",e=>{const n=e.target&&e.target.closest&&e.target.closest(".kgm-chart .kbm [data-kbm]");if(!n)return;const h=n.closest(".kgm-chart");if(h&&h.dataset.kgmB)try{h.__kbm=geMap(h.dataset.kgmB);if(GEMP)GEMP.keep=true}catch(x){}},true);
@@ -234,4 +246,6 @@ window.geMapPageHTML=geMapPageHTML;
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
 /* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
 window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:()=>geMis()};
+/* shared with the NPC parity module (jgenpc.js): the same names, keys, odds and lean formulas — nothing copied */
+window.geK={R1N,R2N,SHN,STATK,key:geKey,store:geStore,seatTaken:geSeatTaken,lifeNo:geLifeNo};
 }catch(e){console.error("jge",e)}})();

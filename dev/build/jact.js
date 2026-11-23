@@ -66,7 +66,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`thiện cảm +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
   if(p.kind==="peddler")A=[{n:"Để ta xem",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
@@ -76,10 +76,10 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
  const u0=typeof used!=="undefined"?used:0,l0=S?S.logSeq||0:0;const r=t0.apply(this,arguments);
  try{if(p&&a&&!a.open){const n=adDoorOfPop(p.kind,a.n);if(n&&((typeof used!=="undefined"&&used!==u0)||(S.logSeq||0)!==l0))adDoorMark(n)}}catch(e){}return r}})();
 /* ---------- 3. Hoàng tự: "Chữa bệnh cho con" moved from Hành sự (Y thuật ≥4, Sức -10, Sức khỏe con +30) ---------- */
-if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=4&&k.hp<70&&!adSrv()){const t2=whyTime(2);
+if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=BAL.ag.cx2.kidHeal.y&&k.hp<70&&!adSrv()){const t2=whyTime(2);
   L.push(pbtn(`data-kid="heal" data-kn="${k.name}"${capAt(BAL.btn.kidHeal)}`,"Tự bốc thuốc cho con",`${capW()} · tốn: ${BAL.btn.kidHeal.k} khắc, Sức -${BAL.btn.kidHeal.suc} · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<BAL.sucNeed.yKid?"thiếu Sức":"")))}}catch(e){}return L}}
 if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="heal")return k0.apply(this,arguments);const k=S.kids.find(x=>x.name===name&&x.alive);
- const K=BAL.btn.kidHeal;if(!k||S.dead||Q.length||!can(K.k)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=4))return;const b=rsnap();spend(K.k);apply({suc:-K.suc});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
+ const K=BAL.btn.kidHeal;if(!k||S.dead||Q.length||!can(K.k)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=BAL.ag.cx2.kidHeal.y))return;const b=rsnap();spend(K.k);apply({suc:-K.suc});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
@@ -88,7 +88,7 @@ document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target
  kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`,{inside:true})}catch(x){}},true);
 /* ---------- 5. Nội vụ phủ: a place (map spot on the office court west of the inner palace; scene = the office picture) ---------- */
 try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places.nvp)MAPH.places.nvp={box:{x:.085,y:.575,w:.13,h:.075},anchor:{x:.15,y:.6}};if(typeof ACC_DAY==="object")ACC_DAY.nvp=1}catch(e){}
-(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"ksp"})}catch(e){}return L}})();
+(function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"nvp"})}catch(e){}return L}})();
 (function(){const c0=countAt;countAt=function(k){return c0.apply(this,arguments)+(k==="nvp"?1:0)}})();
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(k==="nvp"&&S.place==="nvp"&&S.visit&&!S.visit.people.some(x=>x.kind==="peddler")){const c=S.court&&S.court.ped;
   S.visit.people.push({kind:"peddler",name:c&&c.name?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"});
@@ -107,7 +107,8 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const 
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
 const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
- ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
+ ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
+ nth:"suc",pd:"duc"}; /* nth/pd: STAND-IN glyphs (suc = health/food, duc = virtue, as Đức Thọ) until KIT REQUEST place-nth / place-pd is painted (dev/kit/KIT_REQUESTS.md 20/11 map-places) */
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
 /* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
@@ -165,7 +166,7 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
 PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: ONE card with the NPC (jagacts3 qinCard, BAL.ag.par3.qin) */const o=C.o;const w=C.w.sung;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(C.l.sung)}`,go:()=>{const b=rsnap();if(agTry(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else if(agSoft(o))agSoftTxt(S,"Đánh đàn chờ ngự giá");else{apply({sung:C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. Sủng ${balSg(C.l.sung)}.`)}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(C.l.sung)}`,go:()=>{const b=rsnap();if(agTry(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. ${sgStat(w)}.`)}else if(agSoft(o))agSoftTxt(S,"Đánh đàn chờ ngự giá");else{apply({sung:C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. ${sgStat(C.l.sung)}.`)}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{suc:BAL.cv.rest},x:"giữ sức, không gặp ngài"}]}};
 (function(){const st=document.createElement("style");st.textContent=`

@@ -37,6 +37,12 @@ window.kitPane=kitPane;
  addEventListener("resize",()=>{clearTimeout(window.__kpT);window.__kpT=setTimeout(kitPane,60)})})();
 (function(){const st=document.createElement("style");st.id="kit-pane";st.textContent=`
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
+/* NO SCROLL WHEN IT FITS (owner 21/11 "Đứng yên một cái khung hình khi mà không có thông tin dư"): .pgwrap was height:100% of the panel UNDER the sticky tab bar, so every
+   card tab / empty card overflowed by the bar's height (65 px) and the panel scrolled for nothing. The panel is a column; the card wrap takes what is left of it. */
+#panel.kpane:has(>.pgwrap){display:flex;flex-direction:column}
+#panel.kpane>.kpbar{flex:0 0 auto}
+#panel.kpane>.pgwrap{height:auto;flex:1 0 auto;min-height:0}/* grows to fill, NEVER shrinks below its content (rv fail: Ân oán / Chí tôn cards overlapped) */
+#panel.kpane>.kinvpane>.kinv:last-child{margin-bottom:0}/* the bag fits the panel: its 10 px bottom margin + padding made it scroll 3 px */
 #panel.kpane>.kpbar{position:sticky;top:0;z-index:29;display:flex;flex-direction:column;gap:6px;margin-top:0!important;margin-bottom:var(--k-tabgap,10px)!important;padding:8px 8px 6px;
  background:var(--panel,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);box-shadow:none}
 #panel.kpane>.kpbar>.ksub{position:static!important;margin:0!important;top:auto!important}

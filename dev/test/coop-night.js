@@ -26,8 +26,11 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
-   const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
+   
+   /* the morning panel (#dawn, jne kitNewDay): a player taps it (skip to the last beat), then its kit «Tiếp theo»; while it is on, j93 starts no scene */const dw=document.getElementById('dawn');if(dw&&!dw.hidden&&dw.classList.contains('on')){const de=dw.querySelector(':scope > .kmend');if(de&&de.offsetParent!==null){de.click();return'x'}if(!dw.dataset.tsk){dw.dataset.tsk=1;dw.click();return'x'}}
+   /* the jnf flip choice opens only after the card-flip scene (.kcf, kit end button), like coop-e2e */const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const rw=document.querySelector('.kmov .kmrew:not(.km-done)');if(rw&&!rw.dataset.tsk){rw.dataset.tsk=1;rw.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}
+   /* the steal mini-game window: THE helper (lib/coop-clear.js step 5) *//* a mini-game on screen (the steal game after Tranh sủng, jsmg herGame): play it out like a player (quick option «Thôi, không chơi», then the result frame's kit ✕ «Quay lại», which presses the hidden «Đã hiểu», jk4 kitOvSync); wiping S.mg leaves jsmg BUSY and jnf's choice in st "mg" for good */
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
@@ -108,10 +111,23 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
   
+  /* NLC #9: the host plays on like a player (scene, morning panel, his choice); the AFK guest never answers. Bound (jnf): every seat's
+     choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
+     her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */
+  const wm=await A.p.evaluate(()=>BAL.steal.choice.waitMs),lim=9000+wm+15000;
   const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
-  let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
-  ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);await merged('4',w0)}
+  let st=-1;while(Date.now()-t0<lim){await clear(A);const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
+  ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK guest holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+ /* 4b the guest misses the host's final word of the night (its "fin" lost on the way: a dropped socket, a sleeping phone). The host ended its day
+    right after fin and runs ahead while the merged week waits for her: she asks again (jnf ask), the host — already past that day — sends that
+    day's fin again as it was (jnf again / S.nfLast) → both reach the next week (NLC #10: before, the host answered only for its CURRENT day = stall) */
+ for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+ if(await toNight('4b')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);
+  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;COOP.rxWrap=function(go,m){if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  for(const o of [A,B]){await clear(o);ok(await isRd(o)||await press(o),'4b: '+o.name+' presses')}
+  await merged('4b',w0,90000);ok(await B.p.evaluate(()=>window.__fdrop===1),'4b: the guest really missed the host\'s fin once');
+  await B.p.evaluate(()=>{COOP.rxWrap=window.__rx0;delete window.__rx0})}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);
   await B.p.close();await until(A,()=>COOP.frozen,null,60000);await join(B,code);

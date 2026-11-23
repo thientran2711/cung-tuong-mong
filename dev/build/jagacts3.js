@@ -110,6 +110,7 @@ function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}
  const W=[];for(const C of L){const free=(/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")||String(C.x||"").includes(evSg(BAL.ag.ev.one)))/* the evidence words come from the one helper (evSg), never a typed "+1" */;let u;
   if(C.n==="Xuất gia")u=(v.suc||0)<X.nunSuc&&best<X.nunO?agcU(v,N,100,{rest:BAL.ag.unit},{},"self"):0;
   else if(free)u=agcU(v,N,C.o==null?100:C.o,X.gFree,C.c||{},"self");
+  else if(C.ag)u=agcU(v,N,C.o==null?100:C.o,C.ag,C.c||{},"social");/* cold-faction: a faction letter is worth what the same deed is worth outside (BAL.ag.par3.fac g*) */
   else{const g={};for(const k in C.w||{})g[k==="suc"?"rest":k]=(C.w[k]||0)*(X.gStay[k==="suc"?"rest":k]||0);u=agcU(v,N,C.o==null?100:C.o,g,C.c||{},"self")}
   if(u>0)W.push([C,u])}
  if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=eyes(S)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
@@ -154,7 +155,7 @@ agRunReg("cx3:talkGossip",(v,t)=>{if(!t)return"";const th=p3Third(v,t);return th
 agRunReg("cx3:invoke",(v,t)=>t?p3Res("invoke",memInvoke(t,v)):"");
 Object.assign(window,{P3T,p3ChatF,p3ChatMark});
 /* ---------------- household: the same functions as her Cung nhân tab (j8 itemTest, j14 recommend / searchMaids, j29 hireTake, j10 threatServ, staffTam) ---------------- */
-function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
+function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: thiện cảm ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
 /* Nội vụ phủ hands a candidate over (her hireCard choice / an NPC's pick); paid = her option already took the bạc */
 function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.house.hireBac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
 /* merge r2: room counted by main's household rule (staff-root: hhHas = maids incl. the close maid, eunuchs; BAL.promo.cap) */
@@ -183,7 +184,7 @@ agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(th
 Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
 /* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
 function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
-function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&(x===S||x.alive&&!x.out)&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&facIn(x)/* cold-faction: not her in lãnh cung (was x===S||…) */&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
 function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==v&&aff(v,l)>=F.clanAff})}
 /* facfound-parity (law 1 TWO-WAY): she can rủ an NPC to found a faction and ask to join an NPC's faction (j10 facAct lap / xin), so an NPC may rủ HER
    (p3FacFr keeps S) and ask to join HER faction (p3FacJoin keeps a faction she leads); her answer is the jrcv card (PEND.rcvAsk facFound / facJoin, 4 answers) */
@@ -202,7 +203,7 @@ agReg("consort","par3fac",(v,N,need)=>{const O=[];if(!p3FacOn()||v===S||v.out||!
 function p3FacRes(v,k,r){v.p3FacM=S.turn;r=String(r||"").trim();if(r&&typeof seenNPC==="function"){const s=seenNPC(v,v,r);if(s)try{log(s)}catch(e){}}return p3Res(k,r)}
 agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",rcvAsk("facFound",v,t)):"");
 agRunReg("cx3:facJoin",(v,l)=>{const g=l&&facOf(l);return g&&!facOf(v)?p3FacRes(v,"facJoin",askJoin(v,g)):""});
-agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFac(v)):"");
+agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFacSelf(v)):"");
 agRunReg("cx3:facSell",v=>facOf(v)?p3FacRes(v,"facSell",sellOut(v)):"");
 agRunReg("cx3:facDiv",(v,l)=>{const g=l&&facOf(l);return g&&g!==facOf(v)?p3FacRes(v,"facDiv",divide(v,g)):""});
 Object.assign(window,{p3FacOn});
@@ -250,7 +251,7 @@ Object.assign(window,{p3InvLand,p3InvQ});
 Object.assign(AGC3BTN,{petBuy:"Nhờ thái giám tìm thú nuôi",petcare:"Giúp chăm thú nuôi của nàng",teachV:"học chữ",teachD:"Dạy lễ nghi"});
 Object.assign(AGC3ACT,{petBuy:"nhờ thái giám tìm thú nuôi",petcare:"sang giúp chăm thú nuôi",teachV:"tự tay dạy con học chữ",teachD:"tự tay dạy con lễ nghi"});
 function p3PetL(v){const X=BAL.ag.par3.petBuy;if(typeof PETK==="undefined"||!petHasFree(v))return[];return PETK.filter(k=>PET[k].pr&&(v.bac||0)-PET[k].pr>=X.keep&&!tsbPets(v).some(P=>P.t===k))}
-function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&ACT.petcare.ok(v,t))}
+function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t))}/* the friend test is the NPC's choice (BAL.pet.helpFr), the gate is the shared ACT.petcare.ok */
 function p3KidT(v,f){const s=ktSea();return kidsOf(v).filter(k=>k&&k.alive&&k.age>=BAL.kidTeach.age&&k[f==="tv"?"mtv":"mtd"]!==s)}
 agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
  try{if(nd(X.petBuy.g)&&typeof petBuyOne==="function"){const L=p3PetL(v);if(L.length){const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);P(p3O(v,"petBuy",{n:AGC3BTN.petBuy,c:{bac:-PET[k].pr},o:petBuyO(k,v),k:1},N,X.petBuy.g,"self"));if(O.length)O[O.length-1].pk=k}}
@@ -259,7 +260,7 @@ agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.
  }catch(e){agdErr("par3life",e)}return O});
 agRunReg("cx3:petBuy",v=>{const L=p3PetL(v);if(!L.length)return"";const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);const ok=petBuyOne(k,v);
  return p3Res("petBuy",ok?`Thái giám tìm về cho ${v.name} ${PET[k].n.replace(/^./,c=>c.toLowerCase())}`:`${v.name} nhờ thái giám tìm thú nuôi, mua phải con ốm`)});
-agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
+agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&rel(v,t)>=BAL.pet.helpFr&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
 for(const f of ["tv","td"]){const K=f==="tv"?"teachV":"teachD";agRunReg("cx3:"+K,v=>{const L=p3KidT(v,f);if(!L.length||(v.suc||0)<BAL.kidTeach.suc)return"";L.forEach(ktSync);const k=L.sort((a,b)=>a[f]-b[f])[0];
  ap(v,{suc:-BAL.kidTeach.suc});const g=ktTeach(k,v,f);return p3Res(K,`${v.name} tự tay dạy ${k.name}${f==="tv"?" học chữ":" lễ nghi"} (${f==="tv"?"Văn":"Đức"} +${ktG(g)})`)})}
 /* ---------------- toilette answers of an NPC consort (jtoilr: the same functions as her answer buttons, toilRxGrudge / toilRxTell / toilRxGive / toilRxAsk; jagtoil tl2See calls p3ToilAns)
@@ -308,7 +309,7 @@ function p3MaidMonth(){if(!p3On()||!stf2On())return"";let ev="";const X=BAL.ag.p
   if(fest){const x=p3Cnv(s,cnvFestOpts(s,p),"fest");if(x&&asSee(p))ev+=x+". "}
   for(const v of lovers){if(v===p||(s.knowAff||[]).includes(v.id)||!(s.trSaw||[]).includes(v.id))continue;s.trSaw=s.trSaw.filter(x=>x!==v.id);if(!roll(BAL.ag.why.p3.see))continue;/* npc-purpose: she learns it only when she was really at the tryst's place at its khắc (recorded by j95secApply from the day record: s.trSaw); noticing = p3.see odds */s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
  return ev}
-(function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=p3MaidMonth()}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
+(function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=(typeof agMine==="function"&&agMine()&&!agOn())?(typeof asSelfOn==="function"&&asSelfOn(S)?agSelfRun(p3MaidMonth):""):p3MaidMonth()/* coop-guest-agent r2: her own maids' monthly cards on her seat (amMaids keeps to her household) */}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
 Object.assign(AGC3BTN,{cnvScold:"Khóc lóc xin tha",cnvFest:"Rót rượu gần ngự tọa",cnvBlack:"Đút bạc bịt miệng",cnvAff:"Dọa tố chuyện tư tình"});
 Object.assign(window,{p3MaidMonth});
 /* ================= 2e4: the "same button, different code" pairs → ONE function for her button and the NPC (ag-all-parity.md DIFF list) =================

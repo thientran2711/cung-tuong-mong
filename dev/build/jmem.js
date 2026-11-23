@@ -331,7 +331,7 @@ if(typeof q72End==="function"){const q0=q72End;q72End=function(x,res,X){let A=nu
 /* 5. a big relation swing inside an event (no specific deed above) = a generic memory named after the event (cause: that event) */
 if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.t)CTX={t:plainT(m.t).replace(/[.:]\s*$/,"").slice(0,40),at:Date.now()}}catch(e){}return c0.apply(this,arguments)}}
 if(typeof relAdd==="function"){const l0=relAdd;relAdd=function(x,y,n){const r=l0.apply(this,arguments);
- try{if(!off()&&!SUP&&n&&Math.abs(n)>=B().relMin&&CTX&&Date.now()-CTX.at<6000&&(x===S||y===S)){const o=x===S?y:x;if(o&&o!==S&&o.id!=null&&o.alive){const d=n>0?"good":"bad";
+ try{if(!off()&&!SUP&&n&&Math.abs(n)>=B().relMin&&CTX&&Date.now()-CTX.at<6000&&(x===S||y===S)){const o=x===S?y:x;if(o&&o!==S&&o.id!=null&&o.alive&&!(typeof relMS==="function"&&relMS(o))){/* rel-men-servants: memories are the consorts' (men / servants keep the bars only) */const d=n>0?"good":"bad";
    const c=causeAdd(S,o,"event",{s:n>0?1:-1,y:{k:"su",x:CTX.t},n:"trong chuyện",d,x:CTX.t});memAdd(o,S,d,{g:Math.min(B().relCap,Math.abs(n)),x:CTX.t,c,life:Math.abs(n)>=B().lifeRel})}}}catch(e){}return r}}
 /* secrets she sees are already written as notes (j21 noteAdd): an affair, a pregnancy that matches no night → a strong "secret" hook */
 if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);
@@ -385,11 +385,11 @@ function pcfMem(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk
  if(!rows.length)return"";const top=memTop(k,"me");const md=memMod(k,"me");
  const say=top&&top.g>=B().recallMin?`<div class="kpnote">“${memLine(k,"me",top)}”</div>`:"";
  const lean=md?[["Lòng nhớ",md>0?`ơn cũ khiến ${pr} dễ nghe ngươi hơn`:`hận cũ khiến ${pr} khó nghe ngươi hơn`,md>0?"g":"r"]]:[];
- return `<div class="kpsec"><h4 class="kpst">Kỷ niệm</h4>${say}${kitRows(rows.concat(lean))}</div>`}catch(x){return""}}
+ return `<div class="kpsec kpno">${say}${kitRows(rows.concat(lean))}</div>`}catch(x){return""}}
 function pcfHook(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk(e);if(!k||k==="me")return"";
  const L=hookQuery({who:k}).filter(h=>h.by==="me"||h.on==="me");if(!L.length)return"";
  const rows=L.slice(0,4).map(h=>[hookLabel(h),hookText(h)+(h.due!=null?` (còn ${Math.max(0,h.due-nowW())} tuần)`:""),h.by==="me"&&h.k!=="promise"?"g":h.on==="me"&&(h.k==="threat"||h.k==="debt")?"r":"n"]);
- return `<div class="kpsec"><h4 class="kpst">Ân oán chưa dứt</h4>${kitRows(rows)}</div>`}catch(x){return""}}
+ return `<div class="kpsec kpno">${kitRows(rows)}</div>`}catch(x){return""}}
 const PX=window.PCF_X=window.PCF_X||[];PX.push(pcfMem,pcfHook);
 window.pcfMem=pcfMem;window.pcfHook=pcfHook;
 })();

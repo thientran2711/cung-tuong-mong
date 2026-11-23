@@ -324,6 +324,47 @@ Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–
 - Grand-ending reach (both writers): each road's options must carry ge1–ge4 Chuỗi (pull) and Khóa (close) intents from GRAND_ENDINGS §3/§4.2 by RAW
   option name, with enough thiện- AND ác-leaning options on every Chuỗi so both shadings are reachable (the GE data wave lists them by name later).
 
+### 4.5c pf — Công chúa hòa thân · Phù Tang — NEW 4 ROADS (owner OD 19/11 ~06:40Z/~06:42Z/~06:50Z + FIGURE_GATE «OWNER LƯỢT 283»; PLAN review/phutang-road, E21)
+- pf = the THIRD country branch of the one hòa thân origin nc (no 10th origin; j1 ORIGIN_BR.pf, par "nc"; rolled with the origin by BAL.orig.br.nc.pf),
+  same jkc2 / KC2LAND home frame (.1–.3 in Phù Tang: KC2LAND.pf, place keys np_*), land-token row NCL.pf ({land} {pv} {mh} {quan} {pa} {pb} {canh} {laq} {nden}),
+  own STORY.pf / QUEST67.pf, own family letter (j72 fam_pf rows). New pf lives roll one of 4 roads: `pt_hai`, `pt_su` (lead), `pt_tang`, `pt_dang` (writer 2)
+  (.4 premise arc ARC67.<id> o:"pf" + .5–.11 rdDef + j97 rare at .4 (PF97 → R97L) + RD97L rare at .11). No legacy: pf is new (no old saves to migrate).
+- Era words (Foreman E rulings): Tang-like world; NO Wokou word → «hải tặc / giặc biển Đông Hải»; sea traders = «thương nhân Tân La»; dress = Tang-style
+  jacket + pleated skirt (never «thập nhị đơn», which is later); «Thiên hoàng» only inside Phù Tang scenes, Đại Hy calls him «Quốc chủ Phù Tang».
+- Files: `dev/build/jkc2_pf.js` (after jkc2.js: ORIGIN_BR.pf, STORY.pf, QUEST67.pf, KC2LAND.pf + KCPL np_*), `dev/build/jrd_pt.js` (lead: NCL.pf + TOK67 wrap,
+  PFP people book + pfMan, PFO object book, pt_hai, pt_su), `dev/build/jrd_pt2.js` (writer 2: pt_tang, pt_dang), numbers `dev/build/jbalpt.js` after jbalbd.js.
+- People (law 6b): one book PFP in jrd_pt.js (id, name, role, where hb «trên biển» / tn «Phù Tang» / cang «Minh Châu» / kinh / nguc, alive, met);
+  every man who is in the capital stands in S.men on the jmen schedule (pfMan, the bd pattern) and leaves it when he sails, is jailed or dies.
+  A moved / dead person never acts again: every later line reads pfP/pfAlive (scan dev/measure/pt-scan.py, 0 unguarded).
+- Objects (law 6c): one book PFO (fb "pt.o.<thing>" = holder): quốc thư, rương cống, gương đồng của mẫu hậu, thanh đao Phù Tang, hộp kinh, nhật ký hải trình,
+  danh sách sứ đoàn, hải đồ, giấy thông hành Thị bạc, hạt giống trà, ngọc trai chuộc người … set on every give/buy/receive/lose/burn/hide (scan: 0 unbooked).
+**pt_hai · Vượt bể** (Sinh tồn · Trung nghĩa; GE hooks: ge1 Người đếm tên kẻ chết đuối · ge2 Chủ thuyền Đông Hải · ge3 Đổ tội cho biển · ge4 Thuyền về Nan Ba)
+- .4 Thuyền thứ tư chưa tới — four ships sailed; hers reached Minh Châu, the fourth (her nurse-maid Tiểu Ngọc, the tribute chest, the ship log) is missing;
+  the court asks if Phù Tang sent half its tribute; who she blames / trusts [emp, v]. j97 rare «Lửa hiệu trên Ngũ Đảo».
+- .5 Thư từ Phúc Châu — a survivor's letter: the fourth ship drifted south; the ration and the water; who pays for the search [emp, maid]
+- .6 Người giữ kiêng — the ship's kiêng-keeper (Thân Lão, the Wei-shu «trì suy» custom) is blamed for the storm; he is held at Minh Châu [emp, v]
+- .7 Thương thuyền Tân La — Kim Hựu Thành's traders found the wreck; they ask a price; their ledger is the proof of who lived [maid, emp]
+- .8 Giặc biển Đông Hải — pirates (Ô Cửu) hold the survivors and the chest; ransom vs the Tân La ship's tax vs the navy [emp]
+- .9 Bến Minh Châu — survivors land; Tiểu Ngọc lives or not; the chest's seals [emp, v]
+- .10 Kiểm cống — Hồng Lư tự checks the tribute against the list; half is sea-spoilt; {v} says she swapped it [emp, v, th]
+- .11 Danh sách sứ đoàn — the roll of the living and the dead; who sails home on the next monsoon; finale rare «Đèn trên mặt bể» (RD97L).
+**pt_su · Khiển Đường sứ** (Quyền mưu · Trung nghĩa; GE hooks: ge1 Sứ giả của hai trời · ge2 Người dịch quốc thư · ge3 Bẻ gãy sứ đoàn · ge4 Hồi thư bằng máu)
+- .4 Quốc thư hai mặt trời — the envoy chief Tá Bá Kim Thành brings a letter in which the Phù Tang ruler writes as an equal Thiên tử; the Emperor is angry;
+  she is asked to read it aloud [emp, th]. j97 rare «Một chữ đổi một chiến thuyền».
+- .5 Hồi thư — the wording of the Đại Hy answer; she, the Hồng Lư tự khanh and {v}'s father each want a word changed [emp, v]
+- .6 Chỗ ngồi đêm Nguyên đán — the Phù Tang envoy seated below Tân La (the real 753 seat dispute); he asks to swap [emp, v]
+- .7 Lạy hay vái — the audience rite; the envoy refuses the full kowtow; she can teach, shame or shield him [emp, th]
+- .8 Hồi tứ — the gift quota and the trade list (silk, books, medicine vs pearls, silver, swords); Hộ bộ's count [emp]
+- .9 Lưu học sinh — scholar Cát Thành Trọng Lữ wants to sit the Đại Hy exam and stay; the envoy wants him home [emp, maid]
+- .10 Thuyền về — which ship sails when; a forged sailing order; the monsoon [emp, v]
+- .11 Ai về cố quốc — the embassy leaves; who goes (envoy, scholar, her letter, her son's name?) and who stays; finale rare «Bài thơ trăng Tam Lạp» (RD97L).
+**pt_tang · Tăng sư vượt biển** (writer 2; Tín ngưỡng · Nhân từ) — two Phù Tang monks (Tịnh Viên + Phổ Chiếu-like [D]) come to invite a Đại Hy master
+  (Pháp sư Trí Viễn [D], the Ganjin shape, attempts blocked, loses his sight) to cross; .5 kinh hay hạt giống, .6 chuyến vượt biển bị chặn, .7 mắt thầy,
+  .8 phe Phật – phe Đạo trong triều, .9 xá lợi, .10 thanh đao dâng chùa, .11 thầy đi hay ở. 2 rares.
+**pt_dang · Hải tặc và thương nhân** (writer 2; Mưu sinh · Quyền mưu) — the Tân La merchant Kim Hựu Thành and the pirate chief Ô Cửu at Minh Châu / Dương Châu:
+  .5 hàng đao và bạc, .6 thuyền giặc, .7 tiền chuộc, .8 Thị bạc ty (customs) đút lót, .9 thanh đao chém sắt, .10 bến cảng, .11 luật biển. 2 rares.
+- Shared people: Kim Hựu Thành and Ô Cửu appear in pt_hai .7/.8 and pt_dang (one book, one life = one road, so never two states at once).
+
 ### 4.6 td — Con gái tội thần — BUILT (review/road-b2, dev/build/jrd_td.js; all .5–.11 + one rare finale per road)
 **td_an · Lật lại án cũ**
 - .4 Lật lại án cũ — the family accused of treason by {foed}; his daughter {foe} is in the palace [foe, foed]
@@ -584,6 +625,17 @@ OD:L1327 history/drama questions → expert check (marked "HISTORY CHECK" in §4
 | A Sử Na Cát | bd_tuyet .4–.11 | old chief of the border tribe | elder servant |
 | Hộ bộ Lang trung | bd_tuyet .5–.6 | keeps the Thường Bình granary (unnamed) | official |
 | Thác Bạt Phong | bd_hen .4–.11 | her betrothed from the steppe, captain of the embassy guard | S.men |
+| Tá Bá Kim Thành | pt_su .4–.11, pt_hai .4/.11 | Khiển Đường đại sứ (envoy chief) of Phù Tang [D]; sea → capital (S.men, haunt thu) → home | S.men envoy face |
+| Cát Thành Trọng Lữ | pt_su .9–.11 | lưu học sinh (student-scholar, the Nakamaro shape) [D]; capital | S.men |
+| Tiểu Ngọc | pt_hai .4–.11 | her nurse-maid from Phù Tang, on the 4th ship (sea → Minh Châu → capital, or dead) | maid pool |
+| Thân Lão | pt_hai .6–.11 | the ship's kiêng-keeper («trì suy» custom) [D]; Minh Châu jail / freed / sent home | elder servant |
+| Nham Lão | pt_hai .5–.9 | old helmsman of the 4th ship [D] | elder servant |
+| Kim Hựu Thành | pt_hai .7–.11, pt_dang .4–.11 | Tân La sea merchant [D]; Minh Châu / capital | merchant |
+| Ô Cửu | pt_hai .8–.11, pt_dang .4–.11 | chief of the giặc biển Đông Hải [D]; sea / ngục / dead | S.men |
+| Tịnh Viên | pt_tang .4–.11 | Phù Tang monk inviting a master [D] (writer 2) | S.men monk |
+| Pháp sư Trí Viễn | pt_tang .4–.11 | Đại Hy master monk, the Ganjin shape [D] (writer 2) | elder servant |
+| Hồng Lư tự khanh | pt_su .5–.8, pt_hai .10 | chief of the court office for envoys (unnamed) | official |
+| Minh Châu thứ sử | pt_hai .6–.9, pt_dang | prefect of the port (unnamed) | official |
 | Giang Nam abbot (sư trụ trì) | td_an .6 | keeps lão thái giám Vương's written deposition | elder servant |
 | seal carver Lý | td_an .10 | carved the forged Binh bộ seal | merchant |
 | Nội các archive eunuch | td_an .5 | keeper of the archive | eunuch |

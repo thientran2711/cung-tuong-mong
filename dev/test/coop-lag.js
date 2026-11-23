@@ -43,7 +43,7 @@ const CLEAR1=()=>{const c=(window.__co2||(()=>({})))();if(c.frozen||c.waiting)re
  const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
  const m=document.getElementById('modal');if(!m||m.hidden)return'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null&&!x.dataset.kcp);
  const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||m.querySelector('.opts button:not([disabled])')||all.pop();if(b){b.click();return'x'}return''};
-async function clear(o){for(let i=0;i<25;i++){const s=await o.p.evaluate(CLEAR1).catch(()=>'');if(s!=='x'&&s!=='mg')return s;await sleep(200)}}
+async function clear(o){for(let i=0;i<25;i++){const s=await require('./lib/coop-clear.js').first(o,CLEAR1).catch(()=>'');if(s!=='x'&&s!=='mg')return s;await sleep(200)}}
 async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(k0=>{if(window.COOPW&&(COOPW.bend||COOPW.pend||__co2().waiting))return'end';
   const b=document.getElementById('next');if(!b||b.disabled)return'';b.click();return'pressed'},k0).catch(()=>'');if(r)return Date.now();await sleep(250)}return 0}
 (async()=>{const b=await chromium.launch({args:PP.LAUNCH_ARGS});const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);

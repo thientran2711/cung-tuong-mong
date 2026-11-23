@@ -21,7 +21,7 @@ function kitPersonDlg(o){o=o||{};try{
   `<div class="kpdr">${pic}<div class="kpdt">${o.html||""}</div></div></div>${btns?`<div class="kpopts kpdo">${btns}</div>`:""}</div>`}catch(e){console.error("kitPersonDlg",e);return""}}
 function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".kpdlg .kpsubj.kes").forEach(col=>{
  const box=col.querySelector(".kpdfig"),f=col.querySelector(".kesf"),im=f&&f.querySelector(".kesimg");if(!box||!im)return;
- const src=im.getAttribute("src");const again=()=>requestAnimationFrame(()=>kitPersonDlgFit(R));
+ const src=im.getAttribute("src");const again=()=>requestAnimationFrame(()=>typeof kszKeep3==="function"?kszKeep3(R===document?(document.querySelector("#modal .dlg")||document.body):R,()=>kitPersonDlgFit(R)):kitPersonDlgFit(R));
  /* KIT 56.15 (owner OD 18/11 ~21:20Z (1), via MAIN): the person dialog follows the SAME figure standard as the option frames: the crowned Hoàng hậu stands from just under the name tag to the bottom of the column at the standard body (KIT_SIZE.fig.L3.h + the crown room), and when the text is short the FRAME height follows that figure height (no empty band under her feet); the default pop-up height (--kph) is only the cap. --kph is set on the dialog itself, once per viewport. */
  try{const dlg=col.closest(".kpdlg"),db=col.closest(".kpdb"),key=innerWidth+"x"+innerHeight;if(dlg&&db&&dlg.__hFit!==key){dlg.__hFit=key;dlg.style.removeProperty("--kph");const ko=dlg.querySelector(":scope>.kpopts");dlg.style.setProperty("--kpbh",ko?ko.offsetHeight+10+"px":"0px");const cap=dlg.offsetHeight,chrome=dlg.offsetHeight-db.clientHeight,tg=col.querySelector(".kpsn"),G=(typeof KIT_DP_GAP!=="undefined"&&KIT_DP_GAP.min)||14,std=(typeof KIT_SIZE==="object"&&KIT_SIZE.fig&&KIT_SIZE.fig.L3&&KIT_SIZE.fig.L3.h)||351,cr=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131,colNeed=(tg?tg.offsetHeight:0)+2*G+std*(1+cr)+4,dr=db.querySelector(".kpdr"),cs=getComputedStyle(db),textNeed=dr?(()=>{const o=dr.style.alignSelf,o2=dr.style.height;dr.style.alignSelf="start";dr.style.height="auto";const h=dr.offsetHeight;dr.style.alignSelf=o;dr.style.height=o2;return h})()+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom):0,want=Math.round(chrome+Math.max(colNeed,textNeed));if(cap>0&&want>0&&want<cap-1){dlg.style.setProperty("--kph",want+"px");again();return}}}catch(e){}
  if(!im.complete&&!im.dataset.kpdl){im.dataset.kpdl=1;im.addEventListener("load",again,{once:true})}
@@ -58,7 +58,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdr{position:relative;z-index:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}/* KIT 56.4: text drawn ON TOP of the figure */
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,calc(17*var(--kvh,1dvh)),150px);aspect-ratio:auto}
-.kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
+.kpdlg .kdpban>.ksart img:not(.ksart-mark){width:100%;height:100%;object-fit:cover}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
 .kpdlg .kpdt p{margin:0 0 6px}
 .kpdlg .kpdt .kb{margin:4px 0 2px}

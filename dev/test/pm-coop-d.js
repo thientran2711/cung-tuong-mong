@@ -12,7 +12,7 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
     s.send=d=>{try{if(typeof d==='string'){const j=JSON.parse(d);__tx.push(j.t);if(j.t==='act'||j.t==='actr')(window.__old=window.__old||[]).push([j.t,j.k||'',j.mode||''])}}catch(e){}return sd(d)};s.addEventListener('message',e=>{try{if(typeof e.data==='string')__rxT.push(JSON.parse(e.data).t)}catch(x){}});return s};
    window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})},[WURL,want]);
   const p=await ctx.newPage();p.setDefaultTimeout(60000);const o={name,ctx,p,errs:[]};
-  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});return o}
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
   const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
 /* the dialog clearer of coop-e2e.js (one source): taken from that file's text */
@@ -51,15 +51,21 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* put the first thin card of that title in front (the test's own player reads it now) */
  const front=(o,t)=>o.p.evaluate(t=>{const i=Q.findIndex(q=>(q.thin||q.pid)&&q.t===t);if(i<0)return false;const m=Q.splice(i,1)[0];Q.unshift(m);showModal();return true},t);
  /* close everything on a seat except the thin cards under test */
- const settle=async()=>{for(let i=0;i<3;i++){await clear(H,6);await G.p.evaluate(()=>{for(let i=Q.length-1;i>=0;i--)if(!Q[i].thin)Q.splice(i,1);while(Q.length&&Q[0].thin&&!Q[0].opts)closeModal();for(let i=Q.length-1;i>=0;i--)if(Q[i].thin&&!Q[i].opts){const m=Q.splice(i,1)[0];Q.unshift(m);closeModal()}showModal()});await sleep(300)}};
+ const settle=async()=>{await shut();for(let i=0;i<3;i++){await clear(H,6);await G.p.evaluate(()=>{for(let i=Q.length-1;i>=0;i--)if(!Q[i].thin)Q.splice(i,1);while(Q.length&&Q[0].thin&&!Q[0].opts)closeModal();for(let i=Q.length-1;i>=0;i--)if(Q[i].thin&&!Q[i].opts){const m=Q.splice(i,1)[0];Q.unshift(m);closeModal()}showModal()});await sleep(300)}};
 
  /* every seat records the x each pm act really runs with (ACT.pmplay / ACT.pmduel .f, wherever the relay lands: own context or the seat's context on the host) */
- for(const o of [H,G])await o.p.evaluate(()=>{window.__pmx=[];for(const k of ["pmplay","pmduel"]){const f0=ACT[k].f;ACT[k].f=function(a,t,x){try{__pmx.push({k,x:x&&typeof x==="object"?{kind:x.kind,s:x.s||null,n:x.n}:x,ctx:!!COOPW.ctx})}catch(e){}return f0.apply(this,arguments)}}
+ for(const o of [H,G])await o.p.evaluate(()=>{window.__pmx=[];for(const k of ["pmplay","pmduel"]){const f0=ACT[k].f;ACT[k].f=function(a,t,x){try{__pmx.push({k,x:x&&typeof x==="object"?{kind:x.kind,s:x.s||null,n:x.n,live:x.live||null}:x,ctx:!!COOPW.ctx})}catch(e){}return f0.apply(this,arguments)}}
   S.bac=Math.max(S.bac||0,400);S.danh=Math.max(S.danh||0,60);for(const a of ARTS.slice(0,2))S.arts[a.k]=Math.min(4,Math.max(S.arts[a.k]||0,BAL.pm.minLv||1));/* r3: each seat has a real art to play */render()});
  await week(H,G,'stats in each other\'s entry');for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
  /* her pick: the LAST art on offer + the LAST stake that is ok (never the defaults pmX falls back to: first art, first ok stake) */
  const pick=(o,a)=>o.p.evaluate(a=>{const f=rivals.find(v=>v.coop);const A=pmArts(S,f);const AK=A.filter(z=>z.ak&&(S.arts[z.ak]||0)<5);const ar=a==="play"&&AK.length?AK[AK.length-1]:A[A.length-1];/* r3: a pastime with a real art (Đầu hồ has none) */const x={a,kind:ar.kind,ak:ar.ak,n:ar.n};
    if(a==="duel"){const L=pmStakes(S,f).filter(z=>z.ok);x.s=L.length?L[L.length-1].s:null}return {x,arts:A.map(z=>z.kind),stakes:pmStakes(S,f).map(z=>[z.s,z.ok])}},a);
+ /* Q-C2 live board: after «Nhận» both seats open the board (pm-live go / rdy); each takes «Để tài nghệ quyết định» then «Đã hiểu» */
+ const pmAll=async k=>[...(await H.p.evaluate(()=>__pmx)),...(await G.p.evaluate(()=>__pmx))].filter(z=>z.k===k);
+ /* a frame left open by the setup weeks (a game result nobody confirmed) is closed first: the live board never replaces an open game (jpma: «no» → fallback) */
+ const shut=async()=>{for(const o of [H,G])await o.p.evaluate(()=>{for(let i=0;i<3&&KG82.phase;i++){const k=document.getElementById('kg82ok');if(KG82.phase==='result'&&k)k.click();else{try{kg82Close()}catch(e){}}}})};
+ const boards=async(k,ms=90000)=>{const seen={H:0,G:0},sk={H:0,G:0};const t0=Date.now();while(Date.now()-t0<ms){for(const [o,n] of [[H,'H'],[G,'G']]){const r=await o.p.evaluate(()=>{const s=document.getElementById('kg82skip'),k=document.getElementById('kg82ok');if(KG82.phase==='intro'&&s){s.click();return 1}if(KG82.phase==='result'&&k){k.click();return 2}return 0});if(r===1)sk[n]=1;if(r)seen[n]|=r}
+   if((await pmAll(k)).length)break;await sleep(400)}return seen};
  /* ===== (A) Thách đấu host → guest, then a host «reload» (CW.acts is memory only): the card answer rebuilds from pp ===== */
  await settle();const pa=await pick(H,"duel");ok(pa.x.s,'host: a stake both sides can put up',pa);
  const ra=await H.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmduel',x)),pa.x);ok(/đợi nàng trả lời/.test(ra),'duel host→guest: an offer',ra);
@@ -70,8 +76,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(ca.o.length>=2&&ca.o[0][0]==='Nhận lời thách đấu'&&LAD.test(ca.o[0][1])&&/thành:/.test(ca.o[0][1])&&/hỏng:/.test(ca.o[0][1])&&ca.o.some(o=>o[0]==='Từ chối'&&/được:/.test(o[1])&&/mất:/.test(o[1])),'guest card answers = the NPC card answers (ladder word, thành / hỏng, được / mất)',ca.o);
  await H.p.evaluate(()=>{for(const k in COOPW.acts)delete COOPW.acts[k]});/* the host's memory is gone (reload) */
  await front(G,'Hảo hữu tìm đến');ok(await tapM(G,/^Nhận lời thách đấu/),'guest taps Nhận lời thách đấu');
+ {const bA=await boards('pmduel');ok(bA.H&&bA.G,'live board (Q-C2): both seats opened the board and played it out',bA)}
  ok(await until(H,()=>__pmx.some(z=>z.k==='pmduel'),null,20000),'host: the duel runs after her answer',await H.p.evaluate(()=>[__pmx,__dil]));
  const xa=await H.p.evaluate(()=>__pmx.filter(z=>z.k==='pmduel').pop());ok(xa&&xa.x&&xa.x.kind===pa.x.kind&&xa.x.s===pa.x.s,'host→guest after a host reload: HER game + stake kept',{sent:pa.x,ran:xa});
+ ok(xa&&xa.x&&xa.x.live&&xa.x.live.ra!=null&&xa.x.live.rt!=null&&(await pmAll('pmduel')).length===1,'live board: the duel ran ONCE, with both seats\' raws',{ran:xa,n:(await pmAll('pmduel')).length});
  /* ===== (B) Thách đấu guest → host: the host's own card, her side runs in her context ===== */
  await settle();await clear(H,6);await H.p.evaluate(()=>{__pmx=[]});await G.p.evaluate(()=>{__pmx=[]});
  const pb=await pick(G,"duel");const rb=await G.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmduel',x)),pb.x);ok(/đợi nàng trả lời/.test(rb),'duel guest→host: an offer',rb);
@@ -79,9 +87,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const cb=await H.p.evaluate(()=>{const q=Q.find(q=>q.pid==='thInv');return {h:String(q.h||""),o:(q.opts||[]).map(o=>[o.n,String(o.x||"")])}});
  ok(cb.h.includes(pb.x.n)&&/Cược:/.test(cb.h)&&cb.o[0]&&LAD.test(cb.o[0][1]),'host card names her game + stake, ladder word on Nhận',cb);
  await front(H,'Hảo hữu tìm đến');ok(await tapM(H,/^Nhận lời thách đấu/),'host taps Nhận lời thách đấu');
+ {const bB=await boards('pmduel');ok(bB.H&&bB.G,'live board guest→host: both seats opened the board',bB)}
  const got=async()=>[...(await H.p.evaluate(()=>__pmx)),...(await G.p.evaluate(()=>__pmx))].filter(z=>z.k==='pmduel');
  {const t0=Date.now();while(Date.now()-t0<20000&&!(await got()).length)await sleep(400)}
  const xb=(await got()).pop();ok(xb&&xb.x&&xb.x.kind===pb.x.kind&&xb.x.s===pb.x.s,'guest→host: HER game + stake kept',{sent:pb.x,ran:xb});
+ ok(xb&&xb.x&&xb.x.live&&xb.x.live.ra!=null&&xb.x.live.rt!=null&&(await got()).length===1,'live board guest→host: ran ONCE with both raws',{ran:xb,n:(await got()).length});
  /* ===== (C) Cùng chơi host → guest: her game kept ===== */
  /* r3 fix B (law 1): the practice of «Cùng chơi» lands on BOTH real S (the asker's own, and the receiver's through res.fam {op:"art"}) */
  const PT=(o,ak)=>o.p.evaluate(ak=>{if(!ak||!S.artp||S.artp[ak]==null)return null;let n=S.artp[ak];for(let l=0;l<(S.arts[ak]||0);l++)n+=l+2;return {n,lv:S.arts[ak]||0}},ak);
@@ -91,8 +101,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const cc=await G.p.evaluate(()=>{const q=Q.find(q=>q.thin&&q.t==='Hảo hữu tìm đến');return {h:String(q.h||""),o:(q.opts||[]).map(o=>[o.n,String(o.x||"")])}});
  ok(cc.h.includes(pc.x.n)&&cc.o[0]&&cc.o[0][0]==='Nhận lời'&&/được:/.test(cc.o[0][1])&&/mất:/.test(cc.o[0][1]),'guest pastime card: the game named, được / mất on Nhận lời',cc);
  await front(G,'Hảo hữu tìm đến');ok(await tapM(G,/^Nhận lời/),'guest taps Nhận lời');
+ {const bC=await boards('pmplay');ok(bC.H&&bC.G,'live board pastime: both seats played',bC)}
  ok(await until(H,()=>__pmx.some(z=>z.k==='pmplay'),null,20000),'host: the pastime runs');const xc=await H.p.evaluate(()=>__pmx.filter(z=>z.k==='pmplay').pop());
  ok(xc&&xc.x&&xc.x.kind===pc.x.kind,'host→guest pastime: HER game kept',{sent:pc.x,ran:xc});
+ ok(xc&&xc.x&&xc.x.live&&xc.x.live.ra!=null&&xc.x.live.rt!=null,'live board pastime: both raws',xc);
  {let g1=null;const t0=Date.now();while(Date.now()-t0<20000){g1=await PT(G,pc.x.ak);if(g1&&gC0&&g1.n>gC0.n)break;await sleep(400)}const h1=await PT(H,pc.x.ak);
   ok(gC0&&g1&&(g1.n-gC0.n===XP||g1.lv>=5)&&hC0&&h1&&(h1.n-hC0.n===XP||h1.lv>=5),'r3 fix B host→guest pastime: the RECEIVING guest gets the practice (BAL.pm.play.xp) on her own S, the host too',{ak:pc.x.ak,XP,g:[gC0,g1],h:[hC0,h1]})}
  /* ===== (D) Cùng chơi guest → host: the receiving host gets the practice ===== */
@@ -100,6 +112,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const rd=await G.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmplay',x)),pd.x);ok(/đợi nàng trả lời/.test(rd),'pastime guest→host: an offer',rd);
  ok(await until(H,()=>Q.some(q=>q.pid==='thInv'),null,20000),'host: his pastime card (thInv)');
  await front(H,'Hảo hữu tìm đến');ok(await tapM(H,/^Nhận lời/),'host taps Nhận lời');
+ {const bD=await boards('pmplay');ok(bD.H&&bD.G,'live board pastime guest→host: both seats played',bD)}
  {let h1=null,g1=null;const t0=Date.now();while(Date.now()-t0<25000){await clear(G);h1=await PT(H,pd.x.ak);g1=await PT(G,pd.x.ak);if(h1&&hD0&&h1.n>hD0.n&&g1&&gD0&&g1.n>gD0.n)break;await sleep(400)}
   ok(hD0&&h1&&(h1.n-hD0.n===XP||h1.lv>=5)&&gD0&&g1&&(g1.n-gD0.n===XP||g1.lv>=5),'r3 fix B guest→host pastime: the RECEIVING host gets the practice on his own S, the guest too',{ak:pd.x.ak,XP,h:[hD0,h1],g:[gD0,g1]})}
  const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch|navigator\.vibrate/.test(e));ok(!errs.length,'no page errors',errs.slice(0,6));

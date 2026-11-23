@@ -28,18 +28,18 @@ function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:qv(B.
 function spProud(s){return !!(s&&s.proud&&s.proud>S.turn)}
 function spSenior(o,s,r0){const L=(o.staff||[]).filter(x=>x!==s&&x.role===s.role&&srk(x)>=r0);L.sort((a,b)=>srk(b)-srk(a)||(b.age||0)-(a.age||0));return L[0]||null}
 /* the Kèm part of the Đề bạt card (jaudit button) */
-function spKemTxt(o,s){try{const B=BAL.sp;let t="";const sn=spSenior(o,s,srk(s));if(sn)t+=` · kèm: ${sn.name} bị vượt mặt: lòng -${B.envySenior}`;
- if(srk(s)+1>=B.head[s.role])t+=` · kèm: có thể sinh kiêu (${chanceW(spProudCh(s,true))}): ${B.proudMo} tháng lòng -${B.proudLoy} mỗi tháng, có khi xin đi`;return t}catch(e){return""}}
+function spKemTxt(o,s){try{const B=BAL.sp;let t="";const sn=spSenior(o,s,srk(s));if(sn)t+=` · kèm: ${sn.name} bị vượt mặt: thiện cảm -${B.envySenior}`;
+ if(srk(s)+1>=B.head[s.role])t+=` · kèm: có thể sinh kiêu (${chanceW(spProudCh(s,true))}): ${B.proudMo} tháng thiện cảm -${B.proudLoy} mỗi tháng, có khi xin đi`;return t}catch(e){return""}}
 function spAfter(o,s,r0){const B=BAL.sp;const me=o===S;const sn=spSenior(o,s,r0);
- if(sn){sn.loyal=cl(sn.loyal-B.envySenior,0,100);if(me)log(`${sn.name} hầu lâu hơn mà bị ${s.name} vượt mặt, trong lòng không phục (lòng -${B.envySenior}).`)}
+ if(sn){sn.loyal=cl(sn.loyal-B.envySenior,0,100);if(me)log(`${sn.name} hầu lâu hơn mà bị ${s.name} vượt mặt, trong lòng không phục (thiện cảm -${B.envySenior}).`)}
  if(spHead(s)&&!s.coop&&ag2Ch(s,spProudCh(s))){s.proud=S.turn+B.proudMo;if(me)log(`${s.name} từ khi lên ${srkName(s)} ra vẻ bề trên với kẻ hầu khác.`)}}
 /* the two-road card (KIT: tsPanel + tsOpt option cards with Cần / Tốn / Được / Mất / Kèm, the same as every dialog choice) */
 function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+1];if(!nx)return;const c=dbCost(s),fv=spFav(S,s),od=dbOdds(S,s);
- const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
- const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{const fz=dbOdds(S,s);/* read before the spend (j9 fzRun) */spend(BAL.sp.k);fzRun(fz,null,()=>dbDo(S,s,road,true))};
+ const kem=[`kẻ hầu khác ghen tị (thiện cảm -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
+ const duoc=[`${s.name} lên ${nx}`,`thiện cảm +${BAL.dbGain}`];const go=road=>()=>{const fz=dbOdds(S,s);/* read before the spend (j9 fzRun) */spend(BAL.sp.k);fzRun(fz,null,()=>dbDo(S,s,road,true))};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
-  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{},need:[tsNeedBac(c)],duoc:duoc.concat([`Bạc -${c}`]),mat:["không mất bạc",`lòng -${BAL.dbFail}`],kem,go:go("bac")})/* bạc only when approved (dbDo) */,
-   tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{},need:[tsNeedBac(c)],duoc:duoc.concat([`Bạc -${c}`]),mat:["không mất bạc",`thiện cảm -${BAL.dbFail}`],kem,go:go("bac")})/* bạc only when approved (dbDo) */,
+   tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`thiện cảm -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
 function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
@@ -66,13 +66,13 @@ function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.le
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
-  opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
-   tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
-   tsOpt({n:L.n,duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+  opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`thiện cảm +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
+   tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác thiện cảm +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`thiện cảm -${B.demoteLoy}`],kem:[`thiện cảm dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
+   tsOpt({n:L.n,duoc:[`kẻ hầu khác thiện cảm +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
  s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
- if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agOn&&agOn()?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
+ if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agSelf&&agSelf(o)?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
 window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;

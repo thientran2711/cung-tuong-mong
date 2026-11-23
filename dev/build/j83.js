@@ -100,7 +100,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
  if(r==="emp"){S.wkE=wkEmpLog();S.wkE.push({w:wk(),by:key(a),kind:w.kind});ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Hoàng thượng.`);
   return `${by} dâng ${wn} lên Hoàng thượng${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):"Sủng +"+ev.fx.sung}. `}
  if(r==="th"){ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Thái hậu.`);return `${by} dâng ${wn} lên Thái hậu${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):""}`}
- if(r==="maid"){ap(a,ev.fx);return `${by} tặng ${a.maid.name} ${wn}. Lòng ${a.maid.name} +${ev.fx.maid}. `}
+ if(r==="maid"){ap(a,ev.fx);return `${by} tặng ${a.maid.name} ${wn}. Thiện cảm ${a.maid.name} +${ev.fx.maid}. `}
  relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh});
  const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
@@ -172,14 +172,14 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
 function wkTgt(id){return id==="emp"||id==="th"||id==="maid"?id:RV(+id)}
-function wkGainTxt(ev){const F=[];if(ev.fx.sung)F.push(`Sủng +${sg(ev.fx.sung)}`);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Lòng +${ev.fx.maid}`);if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`);return F.concat(ev.notes.map(n=>n)).join(" · ")}
+function wkGainTxt(ev){const F=[];if(ev.fx.sung)F.push(sgStat(ev.fx.sung)/* SG-CARD marker: drawn once */);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Thiện cảm +${ev.fx.maid}`);if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`);return F.concat(ev.notes.map(n=>n)).join(" · ")}
 PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const O=[],no=[];
  for(const [id,n] of wkTargets(S)){const r=wkTgt(id);if(!r)continue;const ev=wkEval(S,w,r);if(!ev.ok){if(ev.why)no.push(`${n}: ${ev.why}`);continue}
   O.push({n,fx:{},x:wkGainTxt(ev),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
  if(w.kind==="mon"&&S.inv.some(x=>x.k==="hacdinh"&&!x.h))for(const v of liveRivals(true)){const sp=caughtOdds(S,v,true);
   O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức -120, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức -10 · nàng phát giác trước, nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ: ${chanceW(sp)}`,/* previews: caught (ACT.poison.f, via wkPoison) */go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
  O.push({n:"Thôi",fx:{}});
- return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: Tranh cổ, Đàn cổ dâng Hoàng thượng Sủng +5. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
+ return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: dâng Hoàng thượng: Tranh cổ ${sgStat(Math.max(1,Math.round(IT.tranhco.gv/2)))}, Đàn cổ ${sgStat(Math.max(1,Math.round(IT.dancoc.gv/2)))}. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
 function wkAct(a,ix){const e=S.inv[ix];if(!e||!e.wk||S.dead||Q.length)return;
  if(a==="give"){if(!can(2))return;pushDil(mkP("wkgive",{ix}),"Dâng, tặng tác phẩm");render();return}
  if(a==="sell"){if(!can(1))return;const fz=wkSellO(S);/* read before the spend (j9 fzRun) */spend(1);log(fzRun(fz,null,()=>wkSell(S,ix)));render();return}
@@ -240,7 +240,7 @@ function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().
 function illAllies(p){return consorts().filter(v=>v!==p&&(v===S||v.alive)&&!v.out&&!v.coop&&aff(v,p)>=40&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
 const IROUTE={
  maid:{n:"Sai cung nữ thân tín mua lén ngoài cung",k:1,ks:Object.keys(WILL),cost:k=>itm(k).pr+15,o:p=>oddsCl(Math.round(55+(p.maid?p.maid.loyal:0)/3+eyes(p)*2)),
-  need:p=>!p.maid?"không có cung nữ thân tín":p.maid.loyal<BAL.loy.low?`Lòng ${p.maid.name} dưới ${balAb(BAL.loy.low)}, nàng không dám đi`:"",when:"tuần sau mới mang về",fail:p=>`${p.maid?p.maid.name:"cung nữ"} bị bắt ở cửa Thần Vũ, khai ra ngươi (${balAb(BAL.eff.j83.evIllBuy_2)} chứng cứ), Lòng -${balAb(BAL.eff.j83.loyalIllBuy)}, mất bạc`},
+  need:p=>!p.maid?"không có cung nữ thân tín":p.maid.loyal<BAL.loy.low?`Thiện cảm ${p.maid.name} dưới ${balAb(BAL.loy.low)}, nàng không dám đi`:"",when:"tuần sau mới mang về",fail:p=>`${p.maid?p.maid.name:"cung nữ"} bị bắt ở cửa Thần Vũ, khai ra ngươi (${balAb(BAL.eff.j83.evIllBuy_2)} chứng cứ), Thiện cảm -${balAb(BAL.eff.j83.loyalIllBuy)}, mất bạc`},
  thaiy:{n:"Hối lộ người ở Thái y viện",k:1,ks:["hacdinh","xahuong"],cost:k=>itm(k).pr+40,o:p=>oddsCl(70+eyes(p)*3),need:()=>"",when:"có ngay",fail:()=>`thái y tố giác: Danh -6, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_3)} chứng cứ, mất bạc`},
  cho:{n:"Chợ đen ở cửa Thần Vũ",k:2,ks:Object.keys(WILL),cost:k=>itm(k).pr,o:p=>oddsCl(Math.round(60+(p.tamco||0)/5)),need:p=>p.confined?"đang bị cấm túc":!(S.tuan===2&&(S.buoi||0)===B4L)?"chỉ họp buổi tối hạ tuần":"",when:"có ngay",/* previews: illBuy */fail:()=>`thị vệ bắt gặp: Danh -8, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_4)} chứng cứ, mất bạc`},
  ally:{n:"Xin đồng minh",k:2,ks:Object.keys(WILL),cost:()=>0,o:()=>100,need:p=>illAllies(p).length?"":"chưa có đồng minh thân (thiện cảm 40) đang giữ đồ cấm",when:"tùy đồng minh trả lời",fail:()=>""}};

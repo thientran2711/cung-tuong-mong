@@ -121,7 +121,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  return{gr,D,M,G,lux,slot}}
 function kitItemRows(k,o){const L=kitItemLists(k,o);if(!L)return"";const G=(L.lux?[`xa xỉ ${L.lux}`]:[]).concat(L.G,L.slot?[L.slot]:[]);
  return kitRows([["Phẩm",`<span class="ef n" style="color:${L.gr.c};font-weight:700">${L.gr.n}</span>`],["Được",L.D,"g"],["Mất",L.M,"r"],["Ghi chú",G,"n"]])}
-function kitItemHint(sl){return sl==="hair"?"cài trâm, bộ diêu: thêm Sắc, có món thêm Danh":sl==="wrist"?"đeo vòng: thêm Sắc, Danh":sl==="waist"?"đeo ngọc bội ngự ban: thêm Danh":sl==="scent"?"đeo túi thơm: thêm Sắc":sl==="veil"?"che vết hủy dung hay mẩn ngứa":sl==="dress"?"may áo từ vải: thêm Sắc trong 3 tháng":""}
+function kitItemHint(sl){return sl==="hair"?"cài trâm, bộ diêu: thêm Sắc, có món thêm Danh":sl==="wrist"?"đeo vòng: thêm Sắc, Danh":sl==="waist"?"đeo ngọc bội ngự ban: thêm Danh":sl==="scent"?"đeo túi thơm: thêm Sắc":sl==="ear"?"đeo hoa tai: thêm Sắc, có món thêm Danh":sl==="shoe"?"đi giày thêu: thêm Sắc, có món thêm Danh":sl==="veil"?"che vết hủy dung hay mẩn ngứa":sl==="dress"?"may áo từ vải: thêm Sắc trong 3 tháng":""}
 function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===w.a):null;const t2=typeof whyTime==="function"?whyTime(2):"",t1=typeof whyTime==="function"?whyTime(1):"";
  const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng","tốn: 2 khắc · thành: chọn người, xem được bao nhiêu",t2),pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`tốn: 1 khắc · thành: Bạc +${typeof wkSellVal==="function"?wkSellVal(w):""}`,t1)];
  if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${typeof WSHOW!=="undefined"?WSHOW[w.ti|0]:""}`,t2));
@@ -253,7 +253,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 /* ---------- new wear slots (owner 11/15): EXTEND j8 IT, no new item list. Only items that have a painting get a slot:
    Đeo eo = ngocboi (ngọc bội ngự ban worn at the waist: shows imperial favour, Danh +1; still a keepsake: never given, never sold),
    Túi thơm = tuithom (worn at the belt: Sắc +1 instead of being used up; a tainted sachet keeps hurting through j8 taintHit as before).
-   Hoa tai / Khăn che mặt / Giày hoa: no item painting exists → not added (owner to approve new art first). Old saves: worn hair/wrist keep their slots;
+   Hoa tai / Giày: added by GAP IT03 (review/wear-slots, below, numbers in BAL.wearSlots). Khăn che mặt = the hủy dung veil. Old saves: worn hair/wrist keep their slots;
    a sachet or pendant becomes wearable, nothing is auto-worn. wearBonus counts every stat key (it only knew Sắc/Danh). ---------- */
 try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w={danh:1};IT.ngocboi.d=`Đeo eo: Danh ${balSg(IT.ngocboi.w.danh)} · còn giữ: Sủng không dưới ${BAL.ngocboiSung} · mất là đại họa`}
  if(IT.tuithom){IT.tuithom.sl="scent";IT.tuithom.w={sac:1};delete IT.tuithom.use;IT.tuithom.d="Đeo bên mình: Sắc +1, thơm dịu"}}catch(e){}
@@ -268,6 +268,17 @@ try{RANKED_W.forEach(([n,pr,d],r)=>{IT["ngocboi_r"+r]={n,kd:"Trang sức",d:`Đe
  for(const r in RANKED_B){const [n,pr,s,d]=RANKED_B[r];IT["vongngoc_r"+r]={n,kd:"Trang sức",d:`Đeo tay: Sắc +${s}, Danh +${d}`,pr,rk:+r,sl:"wrist",w:{sac:s,danh:d},tg:["th","hh","rv"]}}
  RANKED_S.forEach((x,r)=>{if(!x)return;const [n,pr,s]=x;IT["tuithom_r"+r]={n,kd:"Hương liệu",d:`Đeo bên mình: Sắc +${s}, thơm dịu`,pr,rk:r,sl:"scent",w:{sac:s},tg:["rv","hh"]};
   if(typeof TAINT==="object"){TAINT.xa.on.push("tuithom_r"+r);TAINT.bua.on.push("tuithom_r"+r)}})}catch(e){console.error("ranked items",e)}
+/* ---------- GAP IT03 (review/wear-slots): Hoa tai (IT.sl "ear") + Giày (IT.sl "shoe"), the existing paintings item-hoatai/-hoataivang/-giayhoa/-giaygam (j98).
+   Every number from BAL.wearSlots (law 4). Same rules as the other jewellery slots, for the player and every NPC (law 1): one piece per slot (j8 wear),
+   stat while worn (wearBonus, ×1.5 above her rank), vượt phẩm above IT.rk (vpItems → tố), luxury through luxVal (luxWorn reads every IT.sl piece),
+   NPCs put on what they own each month (j8 rivalsMonth) and get them from the Emperor's rewards (j8 bestow BEST lists, rank-filtered).
+   A worn piece stays an entry of p.inv with e.w = 1 (law 6c: owned, stealable, confiscable, giftable, traceable). Old saves: nothing to migrate. ---------- */
+const WEAR_SLOT_N={ear:"Hoa tai",shoe:"Giày"};
+try{for(const sl in BAL.wearSlots)for(const k in BAL.wearSlots[sl]){const B=BAL.wearSlots[sl][k],N=typeof NAMES==="object"?NAMES:{};
+  const fx=Object.entries(B.w).map(([a,v])=>`${N[a]||a} ${balSg(v)}`).join(", ");const rn=B.rk&&typeof RANKS==="object"&&RANKS[B.rk]?` · từ ${RANKS[B.rk].n}`:"";
+  IT[k]={n:B.n,kd:"Trang sức",d:`${WEAR_SLOT_N[sl]}: ${fx}${rn}`,pr:B.pr,rk:B.rk,sl,w:Object.assign({},B.w),tg:B.tg.slice()};
+  if(B.shop&&typeof SHOP_ALL==="object"&&!SHOP_ALL.includes(k))SHOP_ALL.push(k);
+  if(typeof BEST==="object")for(const w of B.best||[])if(BEST[w]&&!BEST[w].includes(k))BEST[w].push(k)}}catch(e){console.error("wear slots IT03",e)}
 /* ---------- LUXURY axis (owner 11/15): besides vượt phẩm (above her rank → tố), what she wears can be too LAVISH for her standing.
    Shown as NUMBERS (owner 11/15): every item / garment has "Xa xỉ N" = [8,16,28,44,64][grade] + giá/10 (luxVal);
    her allowance = 36 + 16 × rank (+10 if Sủng ≥ 60) (luxAllow). Total worn vs allowance, e.g. "Xa xỉ 112 / 84".
@@ -299,7 +310,7 @@ if(typeof wearBonus==="function")wearBonus=function(p){const b={sac:0,danh:0};if
  for(const e of p.inv)if(e.w&&!e.h&&IT[e.k]&&itm(e.k).w){const m=itm(e.k).rk>r?1.5:1;for(const s in itm(e.k).w)b[s]=(b[s]||0)+Math.round(itm(e.k).w[s]*m)}
  if(p.dress&&p.dress.until>S.turn&&IT[p.dress.k]){const it=itm(p.dress.k);b.sac+=Math.round(it.dr*(it.rk>r?1.5:1))}return b};
 /* Tư trang: the slots that really exist in the rules (j8): Cài tóc (IT.sl "hair"), Đeo tay (IT.sl "wrist"), Y phục (áo may từ vải: S.dress, 3 tháng) */
-const KEQ_TT=[["hair","Cài tóc","tramngoc"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["veil","Khăn che mặt",""],["dress","Y phục","luahang"]];
+const KEQ_TT=[["hair","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["veil","Khăn che mặt",""],["dress","Y phục","luahang"],["shoe","Giày","giayhoa"]];
 /* ---------- Khăn che mặt (owner 11/15): the hủy dung veil of j70 (`p.scar = {sev, known, veil}`; drawn by KIT_VEIL over every portrait).
    It is not a chest item: she has one once her face was harmed (p.scar exists). Art = KIT_VEIL's own veil for her rank
    (img/veil-t1..t8.png pearl strands for consorts, img/veil-silk-ivory/pink.png silk for cung nữ, ma ma, lãnh cung).
@@ -363,9 +374,12 @@ if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0
    "Việc" (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ… — the act cards, doable ones first: kitDoableFirst, KIT 37.1).
    The pick is remembered per viewer (hclh-inv-sub); both panes are rendered, the other one is hidden. ---------- */
 let KINV_SUB=(()=>{try{return localStorage.getItem("hclh-inv-sub")||"tui"}catch(e){return"tui"}})();
-function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],[["viec","Việc"]]);
+/* KINV_XTRA: more Tư trang sub-tabs a road registers ({k,label,on(),html()}, e.g. jkcg «Thư nhà»); same .ksubb control, same pane */
+const KINV_XTRA=[];
+function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const X=KINV_XTRA.filter(x=>{try{return x.on()}catch(e){return false}}).map(x=>{let h="";try{h=x.html()}catch(e){console.error("kinv xtra",e)}return[x.k,x.label,h]}).filter(x=>x[2]);
+ const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":X.some(x=>x[0]===KINV_SUB)?KINV_SUB:"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],X.map(x=>[x[0],x[1]]),[["viec","Việc"]]);
  const nav=`<div class="kinvsubw"><nav class="ksub kinvsub" role="tablist">${P.map(([k,l])=>`<button type="button" class="ksubb${k===cur?" on":""}" role="tab" aria-selected="${k===cur}" data-kinvsub="${k}">${l}</button>`).join("")}</nav></div>`;
- return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}<div class="kinvpane kdoable kpanec" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
+ return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}${X.map(x=>`<div class="kinvpane" data-kinvpane="${x[0]}"${cur===x[0]?"":" hidden"}>${x[2]}</div>`).join("")}<div class="kinvpane kdoable kpanec" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
 function kinvDoable(){try{const pane=document.querySelector('#panel [data-kinvpane="viec"]');if(!pane)return;
  const first=typeof kitDoableFirst==="function"?kitDoableFirst:function(box,sel){const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return;
    const off=e=>e.disabled||e.classList.contains("kdis")||e.getAttribute("aria-disabled")==="true"||(!/^(BUTTON|A)$/.test(e.tagName)&&!!(e.querySelector("button")&&e.querySelector("button").disabled));
@@ -443,7 +457,7 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
  const kinds=o.kinds.length?`<div class="pctabs kcattabs kshkinds" role="tablist">${kitTabRowHTML(o.kinds.map(t=>({k:t.k,label:t.label,n:t.n,tip:`${t.n} món`})),o.cat[o.mode],`data-kshop="${key}" data-kshkind`)}</div>`:"";
- const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
+ const empty=o.mode==="sell"&&!o.list.length?kitEmpty("Ta chưa có gì để bán",[(o.sell&&o.sell.empty)||"Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ; đồ trong rương Tư trang cũng bán được."],{topic:"Bạc"}):"";
  return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}${kinds}`+
   (empty||`<div class="kshg">${o.list.map((x,i)=>kitShopTile(o,x,i)).join("")}</div>`)+(o.det!=null?kitShopDet(o):"")+`</div>`}
 function kitShop(o){o=o||{};const key=o.key||"shop";o.q={};o.det=null;o.mode="buy";if(window.__kshData)return o;/* coop-thin F3: the shop's DATA only (kitShopBuy on the host, her context): no modal, the open shop (KSHOP.reg) untouched */KSHOP.reg[key]=o;
@@ -562,5 +576,5 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
   info:"",
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
-  sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
+  sell:{items:kitShopSellItems,empty:"Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}

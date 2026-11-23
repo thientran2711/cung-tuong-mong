@@ -105,12 +105,12 @@ function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.
 /* the target of a maid's dò la is fixed for the buổi, so the card can name her and the failure can say who caught the maid */
 function j78maidT(){const L=liveRivals(true);if(!L.length)return null;S.mspy=S.mspy||{};if(S.mspy.b!==bkey()||!L.some(v=>v.id===S.mspy.id))S.mspy={b:bkey(),id:npwPick(L,v=>1+Math.max(0,hostility(v,S))).id};/* NPC-PURPOSE G3: she is sent after the one who threatens her mistress most (near-best by hostility) */return RV(S.mspy.id)}
 function j78maidFail(ag){/* previews: spyMaidRun (jwhy takes the maid's lòng before it calls this) */const x=j78maidT();if(!x)return;oanAdd(x,S,BAL.eff.j78.j78maidFail);S.mspy.done=1;const M=ag||S.maid;
- log(`${M.name} nấp nghe ngoài cửa sổ ${placeName(palaceOf(x))} thì bị người của ${j78who(x)} bắt gặp, bị phạt quỳ ngoài sân. ${M.role==="eunuch"?"Hắn":"Nàng"} sợ vì bị sai việc nguy hiểm: lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}. ${j78Who(x)} đoán ra ngươi sai người dò mình: oán ngươi ${balSg(BAL.eff.j78.j78maidFail)}.`)}
+ log(`${M.name} nấp nghe ngoài cửa sổ ${placeName(palaceOf(x))} thì bị người của ${j78who(x)} bắt gặp, bị phạt quỳ ngoài sân. ${M.role==="eunuch"?"Hắn":"Nàng"} sợ vì bị sai việc nguy hiểm: thiện cảm -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}. ${j78Who(x)} đoán ra ngươi sai người dò mình: oán ngươi ${balSg(BAL.eff.j78.j78maidFail)}.`)}
 function j78maidSpy(ag){const x=j78maidT();if(!x)return"";const M=ag||S.maid;
  const facts=intelLearn(x,2,{by:M.name,how:"Sai đi dò la"});J78.ctx={how:`${M.name} được sai đi dò la`};const n=evA(S,x,BAL.eff.j78.evN);evdSync();J78.ctx=null;
  log(`${M.name} nghe lén chuyện của ${j78who(x)}: ${facts}${n?"":" Không có gì sai trái để làm chứng cứ."} ${J78_WHERE}`);return ""}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{
-  if(p&&p.kind==="maid"){const i=A.findIndex(a=>a.n==="Sai đi dò la");const x=j78maidT();if(i>=0&&x)A[i]=Object.assign({},A[i],{x:`nghe lén ${j78who(x)}: biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)} nếu nàng từng làm điều sai`,risk:`${S.maid.name} bị bắt gặp thì sợ hãi (lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · ${j78who(x)} đoán ra ngươi: oán ngươi ${balSg(BAL.eff.j78.j78maidFail)}`,go:j78maidSpy,fail:j78maidFail})}
+  if(p&&p.kind==="maid"){const i=A.findIndex(a=>a.n==="Sai đi dò la");const x=j78maidT();if(i>=0&&x)A[i]=Object.assign({},A[i],{x:`nghe lén ${j78who(x)}: biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)} nếu nàng từng làm điều sai`,risk:`${S.maid.name} bị bắt gặp thì sợ hãi (thiện cảm -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · ${j78who(x)} đoán ra ngươi: oán ngươi ${balSg(BAL.eff.j78.j78maidFail)}`,go:j78maidSpy,fail:j78maidFail})}
   if(p&&p.kind==="rival"){const i=A.findIndex(a=>a.n==="Nghe lén câu chuyện");if(i>=0)A[i]=Object.assign({},A[i],{x:`biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} nếu nàng từng làm điều sai`})}
   if(p&&p.kind==="fallen"&&p.ref){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");if(i>=0){const f=p.ref;A[i]=Object.assign({},A[i],{x:`biết 1 việc thật một phi tần đã làm · chứng cứ ${balSg(BAL.eff.j78.evN_2)} nếu có`,go:()=>{const t=liveRivals(true);if(!t.length)return;const withDeed=t.filter(v=>j78deeds(v).length);const x=pick(withDeed.length?withDeed:t);
     const facts=intelLearn(x,1,{by:`${j78Who(f)} (phế phi)`,how:"Hỏi chuyện cũ"});J78.ctx={how:`${j78Who(f)} (phế phi) kể chuyện cũ`};const n=evA(S,x,BAL.eff.j78.evN_2);evdSync();J78.ctx=null;log(`${j78Who(f)} kể chuyện của ${j78who(x)}: ${facts}${n?"":" Không có gì sai trái để làm chứng cứ."} ${J78_WHERE}`)}})}}
@@ -135,7 +135,7 @@ function j78buyer(a,t){const L=others(t).filter(x=>x!==a&&(x===S||x.alive&&!x.ou
 function j78pay(t){return Math.min(60,Math.max(0,Math.floor(t===S?S.bac:(t.bac||0))))}
 function j78thFav(a){/* two-way: an NPC brings her own Thái hậu regard, as the player does */return a===S?S.th:(a&&a.th)||0}
 A("trinhth","Trình Thái hậu",{c:{duc:-2},ok:(a,t)=>evG(a,t)>=1&&!S.thDead&&rkOf(t)<7,o:(a,t)=>odA(a,40+evG(a,t)*10+j78thFav(a)/5),
- f:(a,t)=>{ap(a,{duc:-2});const o=odA(a,40+evG(a,t)*10+j78thFav(a)/5);/* the card's odds, read before the evidence is spent */evA(a,t,BAL.eff.j78.evF);if(aRoll(o,a)){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (Sủng ${balSg(BAL.eff.j78.sungF)}). `}
+ f:(a,t)=>{ap(a,{duc:-2});const o=odA(a,40+evG(a,t)*10+j78thFav(a)/5);/* the card's odds, read before the evidence is spent */evA(a,t,BAL.eff.j78.evF);if(aRoll(o,a)){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (${sgOf(t,BAL.eff.j78.sungF)}). `}
   if(a===S)apply({th:BAL.eff.j78.trinhth_2});return `Thái hậu gạt chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
 A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return evG(a,t)>=2&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?oddsCl(35+aff(q,a)/2+evG(a,t)*8):5},
  f:(a,t)=>{const q=queenP();const o=oddsCl(35+aff(q,a)/2+evG(a,t)*8);evA(a,t,BAL.eff.j78.evF_2);if(aRoll(o,a)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.j78.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.j78.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
@@ -151,7 +151,7 @@ const J78NOSEND=["trinhth","trinhhh","banphe","tieuhuy"];for(const k of J78NOSEN
 (function(){const r0=runAct;runAct=function(a,t,k){if(!J78NOSEND.includes(k))return r0.apply(this,arguments);const tg=together;together=(x,y)=>(x===a&&y===t)||(x===t&&y===a)?true:tg(x,y);let r;try{r=r0.apply(this,arguments)}finally{together=tg}return String(r||"").replace(/ \(tại [^)]*\)\s*$/," ")}})();
 Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"Mưu kế",tieuhuy:"Giao thiệp"});
 /* the act card lines read the target being shown (true numbers per target) */
-function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=has("nongnay")?3:has("nhantu")?1:2;const W=t?j78who(t):"nàng";
+function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();const W=t?j78who(t):"nàng";
  if(k==="trinhth")return[`${W} Sủng -10 · Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`];
  if(k==="trinhhh")return[`${W} bị cấm túc ${m} tháng`,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`];
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`,`Danh -3 · ${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`];
@@ -175,7 +175,7 @@ BANDS[1][2].push("uyhiep","banphe");BANDS[2][2].push("trinhth","trinhhh");
 Object.assign(TELLS,{trinhhh:"sai người chép lại sổ sách, lời khai cung nhân"});
 
 /* ---------- 5. API for the kit ---------- */
-function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=rivals.indexOf(p);const t2=whyTime(2);const W=j78who(p);const m=has("nongnay")?3:has("nhantu")?1:2;const R0=[];
+function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=rivals.indexOf(p);const t2=whyTime(2);const W=j78who(p);const m=punishMonths();const R0=[];
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;

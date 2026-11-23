@@ -45,7 +45,7 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Nhờ thái giám mang lời ra ngoài cung","bac","lời nhắn bị chặn, tên ngươi dính vào"]]]);
  def("gd_tinh",HC,[
   ["che","Cho nàng một cớ nhắn lời","Cung nữ ấy hẹn {me} dưới cây hòe một đêm, mà ca trực của {me} lại trùng đúng đêm ấy. {Me} không dám bỏ cổng. Xin {call} gọi nàng sang cung {call} một lát, để nàng nhắn lại cho {me} một lời.",
-   ["Gọi nàng sang cung mình lấy đồ thêu","suc","chủ vị của nàng sinh nghi"],
+   ["Gọi nàng sang cung mình lấy đồ thêu","suc","chủ tử của nàng sinh nghi"],
    ["Nhờ cung nữ của mình chuyển lời","bac","lời nhắn đến sai tai"]],
   ["do","Dò kẻ ghi chép","Có một thái giám cứ ghi giờ {me} đổi ca vào một cuốn sổ nhỏ. {Me} cần biết hắn ghi cho {B} hay cho ai khác xem.",
    ["Sai người theo thái giám ấy","bac","thái giám ấy biết có người theo"],
@@ -128,7 +128,7 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Cho thư đi theo đường thư nhà","suc","thư bị mở giữa đường, tên ngươi dính vào việc triều"],
    ["Trả công phu trạm riêng","bac","phu trạm bị viên quan kia chặn lại"]],
   ["do","Dò lời con gái tri phủ","Viên tri phủ ở đất phong có con gái làm cung nữ trong cung, và nghe nói {B} đã bỏ bạc nhờ nàng dò việc của {me}. {Me} muốn biết nàng đã kể những gì.",
-   ["Sai người dò cung nữ ấy","bac","cung nữ ấy biết có người dò, mách lên chủ vị"],
+   ["Sai người dò cung nữ ấy","bac","cung nữ ấy biết có người dò, mách lên chủ tử"],
    ["Tự gọi nàng ta đến hỏi chuyện quê","suc","nàng ta đoán ra ý ngươi"]],
   ["emp","Đỡ lời trước thánh giá","Có tấu chương nói {me} tự ý thu thuế riêng. Đó là lúa cứu đói, có sổ ghi rõ. {Me} không thể tự vào cung tâu; xin {call}, nếu Hoàng thượng nhắc đến, nói giúp rằng sổ lúa ấy vẫn còn, ai muốn xem cứ xem.",
    ["Khi hầu Hoàng thượng, nói đỡ một câu","suc","Hoàng thượng nghi ngươi thân với vương phủ"],
@@ -157,8 +157,8 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Bỏ bạc lo cho nó một chỗ ở Nội vụ phủ","bac","chỗ ấy cực khổ, nó oán cả ngươi"]],
   ["emp","Nói rằng lời xin là thật lòng","Trong kinh đồn {me} giữ binh quyền không chịu nộp. {Me} xin dâng lại một nửa hổ phù. Xin {call} nói với Hoàng thượng rằng lời xin ấy là thật lòng, trước khi Nội các kịp bàn.",
    ["Hầu cờ Hoàng thượng, nhắc đến lời xin nộp hổ phù","suc","Hoàng thượng hỏi ai dạy ngươi nói chuyện binh quyền"],
-   ["Dâng Thái hậu lễ, xin người nói thay","bac","Thái hậu cho là ngươi mượn tay bà bàn việc triều"]],
-  ["hh","Xin chỗ ngồi trong tiệc mừng","{Me} về kinh, Hoàng hậu sẽ mở tiệc mừng. Chỗ ngồi trong tiệc nói thay lời Hoàng thượng. Nếu {call} xin cho {me} ngồi gần thượng tọa, cả kinh thành sẽ biết {me} không bị ngờ.",
+   ["Dâng Thái hậu lễ, xin người nói thay","bac","Thái hậu cho là ngươi mượn tay người bàn việc triều"]],
+  ["hh","Xin chỗ ngồi trong tiệc mừng","{Me} về kinh, Hoàng hậu sẽ mở tiệc mừng. Ai được ngồi gần ai trong tiệc, cả kinh thành sẽ đọc ra ý Hoàng thượng. Nếu {call} xin cho {me} ngồi gần thượng tọa, cả kinh thành sẽ biết {me} không bị ngờ.",
    ["Thỉnh an Hoàng hậu, nhắc chuyện chỗ ngồi","suc","Hoàng hậu cho là ngươi xen việc tiệc của Trung cung"],
    ["Góp đồ bày tiệc, xin Hoàng hậu xếp chỗ","bac","đồ góp bị trả về, chỗ ngồi vẫn xa"]]]);
 
@@ -206,7 +206,7 @@ var NRASK=window.NRASK||(window.NRASK={});
 
  /* hs — Họa sư (voice thần) */
  def("hs_hoa",HC,[
-  ["hh","Ngồi họa đầu tiên","Bức chân dung đầu tiên sẽ được Hoàng thượng xem trước, ai ngồi đầu sẽ định giọng cho cả bộ. Xin {call} thưa với Hoàng hậu cho {call} ngồi đầu; {me} sẽ vẽ hết sức.",
+  ["hh","Ngồi họa đầu tiên","Bức chân dung đầu tiên sẽ được Hoàng thượng xem trước, bức đầu được khen thì cả bộ tranh cũng được khen theo. Xin {call} thưa với Hoàng hậu cho {call} ngồi đầu; {me} sẽ vẽ hết sức.",
    ["Xin Hoàng hậu cho mình ngồi họa đầu tiên","suc","người ta bàn ngươi tranh trước các cung"],
    ["Gửi lễ cho quản sự họa viện xếp lượt","bac","quản sự họa viện đem chuyện kể ra"]],
   ["do","Nhận ra dấu trên hộp bạc","Có người gửi {me} hai thỏi bạc kèm lời dặn vẽ một vị chủ tử đẹp hơn thật; nghe nói hộp ấy đã đi qua tay người của {B}. Dấu trên hộp là dấu một cung trong hậu cung; xin {call} chỉ giúp đó là cung nào.",
@@ -242,8 +242,8 @@ var NRASK=window.NRASK||(window.NRASK={});
   ["th","Nhắc tên người cũ với Thái hậu","Thái hậu vốn trọng người làm lâu năm. Chỉ cần người nhắc một câu {me} là người cũ, không ai dám đẩy {me} xuống. Xin {call} khi hầu Thái hậu, nhắc tên {me}.",
    ["Hầu Thái hậu chép kinh, nhắc tên Tổng quản","suc","Thái hậu hỏi vì sao phi tần lo cho Tổng quản"],
    ["Dâng lễ Đức Thọ cung kèm lời của {he}","bac","Thái hậu nhận lễ, không nhắc một lời"]],
-  ["che","Xin người nối tay về cung","{Me} cần một đứa nối tay. Đứa {me} chọn đang hầu ở cung khác, chủ vị không chịu thả. Xin {call} xin nó về cung {call} một thời gian, để {me} dạy việc.",
-   ["Xin chủ vị kia cho nó sang cung mình","suc","chủ vị kia oán ngươi vì giành người"],
+  ["che","Xin người nối tay về cung","{Me} cần một đứa nối tay. Đứa {me} chọn đang hầu ở cung khác, chủ tử của nó không chịu thả. Xin {call} xin nó về cung {call} một thời gian, để {me} dạy việc.",
+   ["Xin chủ tử của nó cho nó sang cung mình","suc","chủ tử của nó oán ngươi vì giành người"],
    ["Bỏ bạc lo Nội vụ phủ đổi phiên cho nó","bac","Nội vụ phủ đổi nhầm người"]]]);
  def("tq_que",HC,[
   ["emp","Xin chỉ cho về quê","Mẹ già của {me} ở quê đã yếu lắm rồi. Thái giám xin về quê phải có chỉ của Hoàng thượng. Xin {call} khi Hoàng thượng vui, nhắc giúp một câu.",
@@ -267,7 +267,7 @@ var NRASK=window.NRASK||(window.NRASK={});
 
  /* ksp — Kính sự phòng (court eunuch; voice nô tài; his rival is a consort) */
  def("ksp_so",HC,[
-  ["emp","Che sai sót thẻ bài","Đêm qua thẻ bài lật ra lại là thẻ đã cất từ tháng trước. {Me} không dám tâu là {me} sai. Nếu Hoàng thượng hỏi đến, xin {call} nói rằng hôm trước {call} còn thấy thẻ ấy treo ở đó.",
+  ["emp","Che sai sót thẻ bài","Đêm qua, tấm thẻ bài Hoàng thượng lật trúng lại là thẻ đã được cất đi từ tháng trước. {Me} không dám tâu là {me} sai. Nếu Hoàng thượng hỏi đến, xin {call} nói rằng hôm trước {call} còn thấy thẻ ấy treo ở đó.",
    ["Nói với Hoàng thượng thẻ ấy vẫn còn treo","suc","lời ngươi bị vạch là sai, mang tiếng dối vua"],
    ["Lót tay thái giám ngự tiền cho êm chuyện","bac","chuyện vẫn đến tai bề trên, kèm tên ngươi"]],
   ["do","Gửi trả hộp ngọc","{B} sai người đưa {me} một hộp ngọc, nhờ dời tên lên đầu sổ. {Me} không nhận, mà trả thẳng thì sợ bị trả thù. Xin {call} cho cung nữ của {call} mang trả hộ, kèm một lời khéo, để người ấy khỏi mất mặt.",
@@ -313,7 +313,7 @@ var NRASK=window.NRASK||(window.NRASK={});
   ["do","Nghe ngóng lời thăng giáng","Có người trong bộ của {me} ngày ngày đến phủ {B} ăn tiệc. Nếu phủ ấy có người nhà trong hậu cung, chuyện thăng giáng của bộ {me} ắt lọt vào đây. Xin {call} để ý xem trong cung ai hay kể chuyện ấy.",
    ["Sai người nghe ngóng kẻ hay kể chuyện triều","bac","kẻ ấy biết có người dò, mách về phủ"],
    ["Tự hỏi chuyện các cung nữ về lời thăng giáng","suc","cung nữ đoán ra, kể lại với cả hậu cung"]],
-  ["thu","Gọi ma ma cũ đến hầu chuyện","Việc trong bộ ách vì một chữ ký của Nội các. Người giữ ấn ở Nội các có mẹ là ma ma cũ trong cung. Nếu {call} cho gọi bà ấy đến hầu chuyện một buổi, {me} sẽ có đường nói.",
+  ["thu","Gọi ma ma cũ đến hầu chuyện","Việc trong bộ đang kẹt lại, chỉ vì thiếu một chữ ký của Nội các. Người giữ ấn ở Nội các có mẹ là ma ma cũ trong cung. Nếu {call} cho gọi bà ấy đến hầu chuyện một buổi, {me} sẽ có đường nói.",
    ["Cho gọi ma ma đến cung hầu chuyện","suc","ma ma kể lại với con mình rằng ngươi lôi kéo"],
    ["Biếu ma ma một phần lễ thay lời","bac","ma ma trả lễ, cửa Nội các đóng hẳn"]],
   ["thu","Giữ giúp sổ cũ","Ngự sử sắp xét sổ của bộ. Có mấy trang sổ cũ {me} chưa kịp đối chiếu, để ở phủ thì sợ bị lấy. Xin {call} cho người nhà của {call} giữ giúp ít hôm.",
@@ -323,7 +323,7 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Hầu Hoàng thượng, nhắc tên vị quan","suc","Hoàng thượng ngờ ngươi kết bè với triều thần"],
    ["Nhờ thái giám ngự tiền xếp một buổi chầu riêng","bac","thái giám xếp rồi bị Nội các gạt ra"]],
   ["che","Nhận người nhà môn sinh về cung","Một môn sinh của {me} đỗ đạt mà không chịu nhận thầy, đi lại với phủ khác. Nhà hắn có cô con gái út làm cung nữ trong cung. Xin {call} nhận nàng về hầu cung {call}; môn sinh ấy sẽ biết nhà ai còn nhớ ơn.",
-   ["Xin nàng về hầu cung mình","suc","chủ vị cũ của nàng oán ngươi giành người"],
+   ["Xin nàng về hầu cung mình","suc","chủ tử cũ của nàng oán ngươi giành người"],
    ["Bỏ bạc lo cho nàng một chỗ nhẹ việc","bac","nàng biết mình bị dùng làm con tin, oán cả ngươi"]],
   ["th","Xin Thái hậu gọi phu nhân vào hầu","Buổi chầu lớn sắp tới, phe kia sẽ dâng sớ nhắm vào {me}. Nếu trước đó Thái hậu cho gọi phu nhân của {me} vào cung hầu chuyện, cả triều sẽ hiểu nhà {me} chưa mất chỗ dựa. Xin {call} xin giúp một lời.",
    ["Hầu Thái hậu, xin cho gọi phu nhân ấy","suc","Thái hậu biết ngươi kéo bà vào chuyện triều"],
@@ -348,9 +348,9 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Khi hầu Hoàng thượng, khuyên đọc hết bản tạ tội","suc","Hoàng thượng phật ý vì ngươi bàn án trong triều"],
    ["Nhờ thái giám ngự tiền đặt bản ấy riêng ra","bac","bản tạ tội bị xếp lẫn vào chồng sớ hặc"]]]);
  def("off_thong",HC,[
-  ["thu","Nhờ sư xem lại lá số","Lá số của con {me} đang nằm ở chùa Hộ Quốc, nhà kia nhờ sư trụ trì xem tuổi và bảo là xung. Nếu trong cung có người đến lễ chùa ấy, lời xin xem lại sẽ được nghe.",
+  ["thu","Nhờ sư xem lại lá số","Lá số của con {me} đang nằm ở chùa Hộ Quốc, nhà kia nhờ sư trụ trì xem tuổi rồi bảo tuổi hai trẻ xung khắc. Nếu trong cung có người đến lễ chùa ấy, lời xin xem lại sẽ được nghe.",
    ["Đến lễ chùa, nhờ sư xem lại lá số","suc","người ta bàn ngươi nhúng tay chuyện cưới hỏi nhà khác"],
-   ["Gửi bạc cúng dường kèm lời nhờ","bac","sư trụ trì trả bạc, nói lá số vẫn xung"]],
+   ["Gửi bạc cúng dường kèm lời nhờ","bac","sư trụ trì trả bạc, nói tuổi hai trẻ vẫn xung khắc"]],
   ["hh","Thưa trước chuyện sính lễ","Nhà có người trong cung kết thông gia, sính lễ phải được Trung cung gật đầu. Xin {call} thưa trước với Hoàng hậu, để lễ của {me} không bị chê là thiếu.",
    ["Thỉnh an Hoàng hậu, thưa chuyện sính lễ","suc","Hoàng hậu cho là ngươi lo việc cưới nhà khác"],
    ["Góp một món đồ cung mình vào sính lễ","bac","món đồ bị nhận ra là đồ ban, người ta bàn tán"]],
@@ -395,9 +395,9 @@ var NRASK=window.NRASK||(window.NRASK={});
   ["hh","Nói rõ ai xin người trực","Thái giám ghi sổ kia đã trình Trung cung rằng {me} hay đứng lâu trước cửa một cung. Cửa ấy là cửa cung {call}, nơi {me} được giao trực. Xin {call} thưa với Hoàng hậu rằng chính cung {call} xin người đứng đó.",
    ["Thỉnh an Hoàng hậu, nói rõ ai xin người trực","suc","Hoàng hậu hỏi vì sao ngươi xin đích danh một thị vệ"],
    ["Gửi lễ cho nữ quan giữ sổ Trung cung","bac","nữ quan nhận lễ rồi gạch thêm một dòng"]],
-  ["che","Cho nàng một chỗ yên","Cung nữ ấy sợ đến mức đốt cả thư của {me}, vì chủ vị của nàng hay lục rương. Nếu {call} xin nàng sang hầu cung {call} một mùa, nàng không phải sợ mỗi lần có thư.",
-   ["Xin chủ vị kia cho nàng sang hầu cung mình","suc","chủ vị kia ghi oán ngươi vì giành người hầu"],
-   ["Bỏ bạc lo cho nàng một chiếc rương có khóa","bac","chìa khóa rương lọt vào tay chủ vị của nàng"]],
+  ["che","Cho nàng một chỗ yên","Cung nữ ấy sợ đến mức đốt cả thư của {me}, vì chủ tử của nàng hay lục rương. Nếu {call} xin nàng sang hầu cung {call} một mùa, nàng không phải sợ mỗi lần có thư.",
+   ["Xin chủ tử của nàng cho nàng sang hầu cung mình","suc","chủ tử của nàng ghi oán ngươi vì giành người hầu"],
+   ["Bỏ bạc lo cho nàng một chiếc rương có khóa","bac","chìa khóa rương lọt vào tay chủ tử của nàng"]],
   ["emp","Một câu ở cổng tây","Hoàng thượng hay đi qua cổng tây vào giờ Thân. Nếu người hỏi vì sao cổng ấy đổi người, lệnh đổi ca của {me} sẽ phải tâu lại. Xin {call} khi đi cùng thánh giá, nhắc rằng thị vệ cũ đứng đó vẫn vững.",
    ["Đi cùng thánh giá qua cổng tây, nhắc một câu","suc","Hoàng thượng hỏi sao ngươi nhớ mặt thị vệ cổng tây"],
    ["Nhờ thái giám cầm lọng nhắc khéo","bac","thái giám cầm lọng nói hớ trước mặt Thống lĩnh"]],
@@ -475,7 +475,7 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Viết thư nhờ người nhà làm quan hỏi giúp","suc","người nhà bị bộ Lại để ý"]],
   ["do","Dò kẻ đưa tin ra ngoài","Tấu chương gièm {me} do một viên ngự sử dâng, mà viên ngự sử ấy vừa nhận lễ của {B}. Xin {call} dò giúp ai trong cung đã đưa tin cho {B}.",
    ["Sai người dò kẻ đưa tin cho {B}","bac","kẻ đưa tin biết, đốt hết thư từ"],
-   ["Hỏi chuyện các cung nữ hay ra cửa cung đưa thư","suc","cung nữ ấy sợ, kể lại với chủ vị"]],
+   ["Hỏi chuyện các cung nữ hay ra cửa cung đưa thư","suc","cung nữ ấy sợ, kể lại với chủ tử"]],
   ["hh","Gấm thay lúa","Phần thuế thiếu có thể bù bằng gấm của đất phong, nếu Trung cung chịu nhận gấm thay lúa cho đợt may áo sắp tới. Xin {call} thưa với Hoàng hậu việc ấy giúp {me}.",
    ["Thỉnh an Hoàng hậu, xin nhận gấm thay lúa","suc","Hoàng hậu cho là ngươi lo việc thuế vương phủ"],
    ["Gửi nữ quan một xấp gấm làm mẫu","bac","gấm mẫu bị chê thô, việc hỏng"]],
@@ -548,7 +548,7 @@ var NRASK=window.NRASK||(window.NRASK={});
  def("hs_hoa",HC,[
   ["do","Dò kẻ xếp chỗ ngồi","Họa sư được giao vẽ cùng {me} hôm nào cũng đến sớm, xếp các cung ngồi theo ý riêng, mà người đứng sau hắn là {B}. {Me} cần biết hắn nhận lời của cung nào.",
    ["Sai người dò xem họa sư ấy hay ghé cung nào","bac","{B} biết, kể với họa viện rằng ngươi dò người"],
-   ["Tự hỏi các cung nữ đứng hầu buổi họa","suc","cung nữ đứng hầu mách lại với chủ vị"]],
+   ["Tự hỏi các cung nữ đứng hầu buổi họa","suc","cung nữ đứng hầu mách lại với chủ tử"]],
   ["hh","Tự trình bạc lên Trung cung","Phép họa viện, họa sư nhận quà của hậu cung là có tội. {Me} muốn tự trình hai thỏi bạc lên Trung cung trước khi kẻ gửi đổi lời. Xin {call} đi cùng làm chứng.",
    ["Đi cùng {he} lên Trung cung làm chứng","suc","cung gửi bạc ghi oán ngươi"],
    ["Gửi lễ cho nữ quan Trung cung xin xét nhẹ","bac","nữ quan bảo ngươi cũng lo lót như kẻ kia"]],
@@ -637,7 +637,7 @@ var NRASK=window.NRASK||(window.NRASK={});
   ["do","Dò kẻ lấy bạc","Bạc {me} để dành bị mất hai lần, lần nào cũng vào hôm {B} ghé phòng thái giám. Xin {call} dò giúp {me} kẻ ấy là ai.",
    ["Sai người rình kẻ ghé phòng thái giám","bac","kẻ ấy biết bị rình, đổ tội cho {he}"],
    ["Tự đếm lượt người ra vào phòng","suc","người ta đồn ngươi rình phòng thái giám"]],
-  ["do","Dò phần chênh","{B} là kẻ đứng giữa đưa giá cho quan Nội vụ phủ ăn bớt, nên chẳng ai dám nói. {Me} cần biết phần chênh qua tay {B} đi về đâu.",
+  ["do","Dò phần chênh","{B} là kẻ đứng giữa, báo giá khống để quan Nội vụ phủ ăn bớt, nên chẳng ai dám nói. {Me} cần biết phần chênh qua tay {B} đi về đâu.",
    ["Sai người dò phần chênh đi về đâu","bac","quan Nội vụ phủ biết, chặn việc của cung ngươi"],
    ["Hỏi chuyện các thương nhân bán đồ lễ","suc","thương nhân kể lại với quan Nội vụ phủ"]],
   ["emp","Nhắc chén trà hôm nọ","Danh sách quản sự cuối cùng phải dâng Hoàng thượng xem. Nếu người thấy tên {me} mà nhớ ra kẻ hầu trà hôm nọ, tên ấy sẽ không bị gạch. Xin {call} khi hầu, nhắc chuyện chén trà hôm ấy.",
@@ -683,7 +683,7 @@ var NRASK=window.NRASK||(window.NRASK={});
    ["Thỉnh an Hoàng hậu, xin giữ chỗ cho phu nhân ấy","suc","Hoàng hậu cho là ngươi che chở nhà bị phạt"],
    ["Gửi Trung cung một lễ mừng của phủ ấy","bac","lễ mừng bị trả, chỗ ngồi vẫn mất"]]]);
  def("off_thong",HC,[
-  ["do","Dò lời nhờ nhà chùa","Sư trụ trì chùa Hộ Quốc vừa nhận cúng dường của phủ {B}, đúng hôm trước khi bảo hai tuổi xung. Xin {call} dò giúp {me} bên ấy đã nhờ sư nói gì.",
+  ["do","Dò lời nhờ nhà chùa","Sư trụ trì chùa Hộ Quốc vừa nhận cúng dường của phủ {B}, ngay hôm trước khi sư bảo tuổi hai trẻ xung khắc. Xin {call} dò giúp {me} bên ấy đã nhờ sư nói gì.",
    ["Sai người dò sổ cúng dường của chùa","bac","chùa biết, đóng cửa không tiếp người của ngươi"],
    ["Hỏi chuyện các phu nhân hay lễ chùa ấy","suc","các phu nhân đồn ngươi ngờ cả nhà chùa"]],
   ["th","Xin món ban của Đức Thọ cung","Sính lễ mà có một món ban từ Đức Thọ cung thì không ai dám chê, mà Thái hậu vốn thương nhà gái. Xin {call} khi hầu Thái hậu, kể chuyện hai trẻ, xin người ban cho nhà {me} một món nhỏ.",

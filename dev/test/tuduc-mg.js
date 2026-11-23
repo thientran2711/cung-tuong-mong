@@ -26,7 +26,7 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
     else if(pk.hold){const id=++pid;ev('pointerdown',pk.x,pk.y,id);setTimeout(()=>ev('pointerup',pk.x,pk.y,id),45)}
     else if(pk.sel){const e=document.querySelector(pk.sel);if(e&&!e.disabled)e.click()}
     else if(pk.x!=null){ev('pointerdown',pk.x,pk.y);ev('pointerup',pk.x,pk.y)}},50)});
-  while(Date.now()-t0<200000){if(await p.evaluate(()=>{const e=document.getElementById('kg82ok');return !!e&&KG82.phase==='result'&&!!document.querySelector('#kg82 .kit-x[data-kitx=ov]')}))break;await p.waitForTimeout(250)}
+  while(Date.now()-t0<200000){if(await p.evaluate(()=>{const e=document.getElementById('kg82ok');return !!e&&KG82.phase==='result'&&!!document.querySelector('#kg82 .kit-x[data-kitx=ov],#kg82 .kit-x[data-kitx=kgback]')}))break;await p.waitForTimeout(250)}
   await p.evaluate(()=>clearInterval(window.__bt));
   const ok=await p.evaluate(()=>{const e=document.getElementById('kg82ok');return e&&KG82.phase==='result'?1:0});await shot(`${k}-${mode}-3result`);
   const info=await p.evaluate(()=>{const d=document.getElementById('kg82');const o=document.documentElement.scrollWidth>innerWidth+1||(d&&d.scrollWidth>d.clientWidth+1);

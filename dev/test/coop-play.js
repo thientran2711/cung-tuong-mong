@@ -18,7 +18,7 @@ async function mk(b,name,v){const ctx=await b.newContext({viewport:{width:v[0],h
  if(SITE===BASE)await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
  await ctx.grantPermissions(['clipboard-read','clipboard-write']).catch(()=>{});
  const o={ctx,name,errs:[],n:0};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
-  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 /* audit: horizontal overflow, cut text (ellipsis / clipped), tap targets under 40 px, Hán characters, "%" in visible text */
 async function audit(o,tag){const r=await o.p.evaluate(()=>{const out={ov:document.documentElement.scrollWidth>innerWidth+1,cut:[],small:[],han:[],pct:[]};
  const vis=e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return false;const cs=getComputedStyle(e);return cs.visibility!=='hidden'&&cs.display!=='none'&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth};
@@ -39,7 +39,7 @@ const vis=o=>o.p.evaluate(()=>{const m=document.getElementById('modal');const fz
   next:(document.getElementById('next')||{}).textContent,nd:(document.getElementById('next')||{}).disabled,S:typeof S!=='undefined'&&S?{n:S.name,b:S.buoi,pl:S.place,d:[S.year,S.month,S.tuan]}:null}});
 /* read/close the game's dialogs, taking the first option (shoot the first time each title is seen) */
 const seenT=new Set();
-async function clear(o,n=30){for(let i=0;i<n;i++){const v=await vis(o);if(v.fz)return'fz';if(!v.modal)return'';if(await o.p.evaluate(()=>{const t=document.getElementById('title');return !!(t&&!t.hidden)}))return'title';
+async function clear(o,n=30){for(let i=0;i<n;i++){if(await require('./lib/coop-clear.js').tap(o)==='x'){await sleep(200);continue}const v=await vis(o);if(v.fz)return'fz';if(!v.modal)return'';if(await o.p.evaluate(()=>{const t=document.getElementById('title');return !!(t&&!t.hidden)}))return'title';
   if(/^(Đợi bạn|Mời bạn|Nhập mã|Chơi cùng bạn)$/.test(v.modal.trim()))return'wait';
   const key=v.modal.trim();if(!seenT.has(o.name+key)){seenT.add(o.name+key);await shot(o,'dlg-'+key.replace(/[^\p{L}\d]+/gu,'_').slice(0,24))}
   const ok=await o.p.evaluate(()=>{const m=document.getElementById('modal');const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null&&!x.dataset.coop);

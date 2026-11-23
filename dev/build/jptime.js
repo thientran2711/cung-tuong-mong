@@ -61,7 +61,7 @@ function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&
  try{r=a.fz!=null&&typeof fzRun==="function"?fzRun(a.fz,null,()=>fn(a)):fn(a)}catch(e){ptErr("run "+a.kind,e)}
  if(!me)return;
  const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-s0));const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
- const d=[];try{if(b)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b[k]||0);if(x)d.push([nm,x])}if(b&&S.maid&&S.maid.loyal!==b.maid)d.push(["Lòng cung nữ",S.maid.loyal-b.maid])}catch(e){}
+ const d=[];try{if(b)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b[k]||0);if(x)d.push([nm,x])}if(b&&S.maid&&S.maid.loyal!==b.maid)d.push(["Thiện cảm của cung nữ",S.maid.loyal-b.maid])}catch(e){}
  const ok=r&&typeof r==="object"&&"ok" in r?r.ok:(r===false?false:r===true?true:window.__lastOk!=null?!!window.__lastOk:null);
  a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
  try{if(typeof window.kitNoticeDrop==="function")window.kitNoticeDrop("pt:go:"+a.id)}catch(e){}
@@ -112,8 +112,9 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
      "errand" — the stage keeps her token (hidden + the kit chip «đang đi …») so she is SEEN walking off and back (OD 18/11 ~20:05Z); she is still busy
      (j95sBusy "errand"), never followed nor sent again, and the target stays in the row. NPC senders keep the target place (their stage is not hers). */
   const mine=a.by==="me";
-  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
-    if(!e[i]||e[i][0]!==x[0]||e[i][1]!=="errand"){e[i]=x;ch=true}}}}
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;if(mine&&(!a.mpl||a.mpl.b!==b0))a.mpl={b:b0,k:(e[i]&&e[i][0])||J95OUT_};/* round 4: one place for the whole window of this buổi (her slot when it began) — a later slot repaint never makes her jump while away */let x=[mine?a.mpl.k:(a.place||e[i][0]),"errand",a.tgt||null,why];
+    /* NPC senders: her road there / back inside the window (jwalk walkErrRow, review/jagday-walk; n includes the walk, OD 18/11 ~20:00Z) */if(!mine&&typeof walkErrRow==="function")x=walkErrRow(e,b0,a,i,x[0],x);
+    if(!e[i]||e[i][0]!==x[0]||e[i][1]!==x[1]||e[i][3]!==x[3]){e[i]=x;ch=true}}}}
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
  return ch}
 /* ---------- wiring: the clock ---------- */
@@ -167,7 +168,7 @@ ptReg("scout",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng�
 /* ---- 4. Mời đến cung ta (j21): the messenger goes, the answer (and the guest) comes at the due khắc ---- */
 function ptInvPend(id){return ptZ().some(a=>a.kind==="invite"&&!a.back&&a.a&&a.a.v===id)}
 ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Người được sai";if(!v||!v.alive||v.out||v.confined){log(`${nm} trở về: ${v?v.name:"nàng"} không thể nhận lời lúc này.`);return{ok:null}}
- /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
+ /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];iwBind("v"+v.id,j95kh());if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
   log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
  relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
 /* ---- 4b. HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z) — every invitation, every direction (law 1):
@@ -185,13 +186,29 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
 function iwZ(){if(!S)return[];if(!Array.isArray(S.invW))S.invW=[];return S.invW}
 function iwId(p){return p===S?"me":p&&p.id!=null?"v"+p.id:null}
 function iwP(id){if(id==="me")return S;try{return RV(+String(id).slice(1))}catch(e){return null}}
-let iwDest=null;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
-function iwHere(p,k){if(!p)return false;if(p===S)return(S.out?"lc":iwDest!=null?iwDest:S.place)===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
+let iwDest=null,iwRoad=0;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
+/* where SHE stands for this rule (OD L1976 «tôi bấm về nhà là tốn một khắc, khắc thứ tư tôi đã ở nhà»): she leaves a place at the khắc she taps
+   (walking off = no longer there) and is at the new place only once the walk is paid. null = on the road: the moment she taps (iwRoad, before
+   any khắc of the walk passes) and the whole of a walk that runs on into the next buổi (j9 walkSpill, until it lands) */
+function iwSpillOn(){const W=window.__walkSpill;return !!(W&&S&&W.from===S.place&&W.k!==S.place)}
+function iwMe(){if(S.out)return"lc";if(iwRoad)return null;if(iwDest!=null)return iwDest;if(iwSpillOn())return null;return S.place}
+function iwHere(p,k){if(!p)return false;if(p===S)return iwMe()===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
 /* the guest's odds of staying one more khắc (law 4: every number from BAL; law 7: shown only as a ladder word) */
 function iwStayO(g,h){const W=BAL.invite.wait;let n=0;try{n=tv(W.net,g,0)}catch(e){}return od(W.o+aff(g,h)/W.affD+(rkOf(h)-rkOf(g))*W.rk+n)}
 function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619)>>>0}return x%100}
+/* law 6b (one person, one place): an accepted invitation BINDS the guest's rows of this buổi the way a told text does — jagent agBound (read by
+   every deed placer: agReapply, jagday span / slot / go rows) also answers true for them, so a deed planned earlier no longer puts her back at
+   the deed's place while S.invW / the roster has her at the host's palace (WALK-COST #4: «cx2:fert» re-applied over a waiting guest → seen at
+   Thái y viện). Own list (not J95B.bind: j95b counts its text binds there). */
+const IWB=[];
+function iwBind(id,from,to){try{const R=S.roster,e=R&&R.P&&R.P[id];if(!e)return;const t=to==null?e.length-1:Math.min(to,e.length-1);for(let i=Math.max(0,from);i<=t;i++){const b=id+"|"+i+"|"+R.key;if(IWB.indexOf(b)<0)IWB.push(b)}if(IWB.length>200)IWB.splice(0,IWB.length-200)}catch(e){ptErr("iwBind",e)}}
+/* review walk-cost r4: the bind lasts only while the invitation holds — when the guest leaves, only her walk-back khắc stays bound; the rest of the
+   buổi is hers again (a deed may be planned / re-applied there), never a «stay» row nobody can move */
+function iwUnbind(id,from){try{const R=S.roster;if(!R)return;for(let j=IWB.length-1;j>=0;j--){const x=IWB[j].split("|");if(x[0]===id&&x[2]===String(R.key)&&+x[1]>=from)IWB.splice(j,1)}}catch(e){ptErr("iwUnbind",e)}}
+(function(){if(typeof start==="function"){const st0=start;start=function(){IWB.length=0;return st0.apply(this,arguments)}}/* a new life starts with no binds (as J95B.bind) */
+if(typeof agBound!=="function")return;const f0=agBound;agBound=function(id,kh,key){return f0.apply(this,arguments)||IWB.indexOf(id+"|"+kh+"|"+key)>=0}})();
 /* the guest's rows of this buổi: waiting at the host's place / walking back home */
-function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);
+function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);if(rest){iwUnbind("v"+g.id,i0);iwBind("v"+g.id,i0,i0)}else iwBind("v"+g.id,i0);
   const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("iwRows",e)}}
 /* a co-op friend seat (rival entry coop:true, jcoopworld) is a PLAYER, never rolled as an NPC: on her side of the visit the rule does not run (review FAIL 1) */
 function iwCoop(p){return !!(p&&p!==S&&p.coop)}
@@ -211,7 +228,7 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
   if(!g||!h||iwCoop(g)||iwCoop(h)||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
   if(w.b!==b){/* the buổi ended and the host never came */if(w.t!=null)iwLeave(w,now,"buoi");drop("buoi");continue}
   if(g===S){/* SHE is the guest: arrival when she stands there; host there = visit; walking off first = leaving */
-   const at=(S.out?"lc":S.place)===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
+   const at=iwMe()===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
    if(at&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop();continue}if(!at){iwLeave(w,now);drop("walked")}continue}
   /* an NPC guest: one decision per khắc after the arrival khắc, taken AT that khắc */
   /* the last khắc of the buổi is the last decision; the buổi end itself is handled above */const end=Math.min(now,b*ptKH()+ptKH()-1);let done=false;for(let K=w.last+1;K<=end&&!done;K++){w.last=K;
@@ -222,7 +239,9 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
 (function(){try{
  if(typeof rcvInvAt==="function"){const a0=rcvInvAt;rcvInvAt=function(h,g){const r=a0.apply(this,arguments);try{iwAdd(h,g)}catch(e){ptErr("iwAdd",e)}return r};window.rcvInvAt=rcvInvAt}
  const l1=ptLand;ptLand=function(a){const d0=PT.iwDue;PT.iwDue=a&&a.due;try{return l1.apply(this,arguments)}finally{PT.iwDue=d0}};
- const sp1=spend;spend=function(){const r=sp1.apply(this,arguments);iwTick();return r};
+ const sp1=spend;spend=function(){/* the first khắc of her walk: she has left the place she tapped away from AT the tap khắc (a guest of hers
+   leaves with the loss then; a host coming back during her walk no longer meets her there) — before any khắc passes */
+  if((iwDest!=null&&iwDest!==S.place)||iwSpillOn()){iwRoad=1;try{iwTick()}finally{iwRoad=0}}const r=sp1.apply(this,arguments);iwTick();return r};
  const g1=goTo;goTo=function(k){const d0=iwDest;iwDest=k;let r;try{r=g1.apply(this,arguments)}finally{iwDest=d0}iwTick();return r};
  if(typeof nextBuoi==="function"){const nb1=nextBuoi;nextBuoi=function(){iwTick();const old=iwZ().slice();const r=nb1.apply(this,arguments);/* a guest placed while the new buổi was drawn (j21 placeWhere) belongs to the new buổi */
   try{const now=ptNow();for(const w of iwZ())if(!old.includes(w)){w.b=bid();w.last=now;if(w.t!=null)w.t=now}}catch(e){ptErr("iw buoi",e)}iwTick();return r}}
@@ -375,11 +394,11 @@ function ptGLite(G){return(G||[]).map(g=>({k:g.k,k0:g.k0,n0:g.n0,kem:g.kem,lost:
 function ptGBack(L){/* the real pieces again (law 6c): by index when it still holds that piece, else the first pieces of that kind */const used=new Set();
  return(L||[]).map(g=>{const E=[];for(const i of g.E||[]){let e=i>=0?S.inv[i]:null;if(!e||e.k!==g.k||used.has(e))e=S.inv.find(x=>x&&x.k===g.k&&!used.has(x))||null;if(e){used.add(e);E.push(e)}}return Object.assign({},g,{E})})}
 (function(){try{if(typeof stipEvent!=="function")return;const s0=stipEvent;stipEvent=function(G,SK){const ev=s0.apply(this,arguments);try{if(!ptOn()||!ev||!Array.isArray(ev.opts)||!S.maid)return ev;const m=S.maid;
-  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đi đòi`)return o;const why=ptLockWhy("mm:me");
+  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đòi lại phần bị cắt xén`)return o;const why=ptLockWhy("mm:me");
    return Object.assign({},o,{x:ptX("ask",o.x)},why?{lock:true,x:why,go:()=>{}}:{go:()=>{ptSend({who:"mm:me",nm:m.name,kind:"ask",place:"nvp",a:{G:ptGLite(G),bac:SK.bac||0,sup:SK.sup?key(SK.sup):null},lbl:"đến Nội vụ phủ đòi phần"});if(ptRow("ask").o)spend(ptRow("ask").o)}})})}catch(e){ptErr("stipEvent",e)}return ev}}catch(e){ptErr("stip wire",e)}})();
 ptReg("ask",a=>{const m=S.maid;if(!m){return{ok:null}}const SK={bac:a.a.bac,sup:a.a.sup?byKey(a.a.sup):null};const od=stipAskOdds(m,SK);const eun=stipEunName();const st=stipSt(S);
  if(roll(od)){if(SK.bac)apply({bac:SK.bac});stipRestore(S,ptGBack(a.a.G));log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`);return{ok:true,t:`${m.name} đi đòi trở về`}}
- m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`);return{ok:false,t:`${m.name} đi đòi trở về`}});
+ m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Thiện cảm của cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`);return{ok:false,t:`${m.name} đi đòi trở về`}});
 /* ---- 13. Sai người mua lén ngoài cung (jveil PEND.vlout): the bạc is paid at the order (the card's fx), the person brings the veil at due ---- */
 (function(){try{const v0=PEND.vlout;if(!v0)return;PEND.vlout=function(pp){const d=v0.apply(this,arguments);try{if(!d||!ptOn()||PT.landing)return d;const ag=vlAgent(S);if(!ag)return d;const id=ptPid(ag);const why=ptLockWhy(id);
   d.o=(d.o||[]).map(o=>{const m=o&&o.fx&&o.fx.bac<0?/^(.+?) · /.exec(o.n||""):null;const k=m?(vlOutList(S)||[]).find(x=>itm(x).n===m[1]):null;if(!k)return o;

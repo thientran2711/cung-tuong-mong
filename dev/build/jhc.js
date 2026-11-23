@@ -67,26 +67,46 @@ function rel3(face,rank,name,col,mid,right,extra){
 window.kitRel3=rel3;
 const fcol=f=>(f&&f.col)||"#7a5530";
 /* who is who in a relation label: the player "ta", the Empress by title, the Emperor / Thái hậu by title, others by their short name */
-const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":shortN(p.name);
+const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":p&&relMS(p)&&relMSName(p)?relMSName(p):relMan(p)?p.name.split(" ").slice(-2).join(" "):shortN(p.name);
 const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
- if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":RANKS[S.rank].n,col:fcol(f),pid:"me"}}
+ if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":(typeof isSrv==="function"&&isSrv())?srvRkN()/* cung nữ road (maid-8tabs) */:RANKS[S.rank].n,col:fcol(f),pid:"me"}}
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
+ if(typeof k==="string"){const o=relMSOf(k);if(!o)return null;const f=relMSFace(o),pid=typeof kOf61==="function"?kOf61(o):k;
+  const nm=relMSName(o);return relMan(o)?{k,p:o,f,name:nm||o.name.split(" ").slice(-2).join(" "),rank:o.role,col:f.col||"#6a8aa0",met:relMSMet(o),pid}:{k,p:o,f,name:nm||shortN(o.name),rank:relSrvRank(o),col:fcol(f),met:relMSMet(o),pid}}
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
  return{k:v.id,p:v,f,name:v.name,rank:rkName(v),col:met?fcol(f):"#8a8a8a",met,pid:typeof kOf61==="function"?kOf61(v):String(v.id)}}
 window.relPerson=relPerson;
+/* rel-men-servants (KP22): men and servants in Ân oán. Keys = j9 relKey ("m<n>" a man, "s<sid>" a servant, the j61 person key for the trusted maid and
+   the court officials). Men: the ones she has met (menMet, the Nam nhân tab's own rule). Servants: the Cung nhân tab's own list (j15 staffTabHTML:
+   her trusted maid, her household, the court officials, Thái hậu's household, the other palaces' servants). Faces and titles = the Cung nhân cards'. */
+function relMSOf(k){if(/^m\d+$/.test(k))return (S.men||[]).find(m=>m.id===k&&m.alive!==false)||null;if(/^s\d+$/.test(k))return servById(+k.slice(1));
+ const e=typeof k61Ent==="function"?k61Ent(k):null;return e&&relMS(e)?e:null}
+/* known = the j61 rule every list uses (a stranger shows "Người lạ" and a silhouette): her numbers with a stranger stay "chưa rõ" */
+/* one name per person on the whole screen (strip, pair heading, side label): a man / servant whose NAME she has not learnt is the strip's stranger label "Người lạ" (never "???", VANPHONG §3) */
+function relMSName(o){try{if(S.known&&typeof k61Named==="function"&&!k61Named(o))return "Người lạ"}catch(e){}return ""}
+function relMSMet(o){try{if(S.known&&typeof k61St==="function")return k61St(o)>=1}catch(e){}return true}
+window.relMSMet=relMSMet;
+function relCourtK(o){for(const c in (S.court||{}))if(S.court[c]===o)return c;return null}
+function relMSFace(o){if(relMan(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
+function relSrvRank(o){if(o===S.maid)return kitMaidTitle();if(relCourtK(o))return o.n||"";const w=ownerOf(o);const r=o.role==="maid"?"Cung nữ":"Thái giám";
+ return w===S?r:S.thO&&w===S.thO?`${typeof srkName==="function"?srkName(o):r} · Thái hậu`:w?`${r} · cung ${w.name}`:r}
+function relMenL(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&menMet(m))}
+function relSrvL(){const L=[];const add=o=>{if(o&&!L.includes(o))L.push(o)};add(S.maid);(S.staff||[]).forEach(add);for(const c in (S.court||{}))add(S.court[c]);
+ ((S.thO&&S.thO.staff)||[]).forEach(add);liveRivals(true).forEach(v=>(v.staff||[]).forEach(add));return L}
 /* KIT §49.2 (owner 11/15): Ân oán = "Xem quan hệ của X" (strip 1) + "với Y" (strip 2) — both the Hậu cung pager strip (pager, j15: ‹ ›,
    N/M, selected highlight), grouped Ta · Chí tôn · Phi tần, labels = the name only. The panel shows ONE pair under the heading
    "Quan hệ giữa X và Y": X | the rows both ways | Y, then "Đã biết về X". Y defaults to Ta (her own relation with X); when X = Ta, Y
    defaults to the first person of strip 2. Never a hidden counterpart. PG.rel ↔ relSel (an outside link that sets relSel still works). */
-const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
+const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":typeof k!=="string"?"Phi tần":/^m\d+$/.test(k)?"Nam nhân":"Cung nhân";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
-function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
+function relItems(){const ms=(typeof isSrv==="function"&&isSrv())?[]:relMenL().concat(relSrvL()).map(o=>({k:relKey(o)})).filter(x=>x.k);
+ return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id})),ms))}
 /* KIT 49.2c: strip label = kitNameRank (rank in its rank colour over the short name); Ta keeps her kmy glow */
-const stripItem=(x,q)=>({small:true,sz:"xs",f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
+const stripItem=(x,q)=>({small:true,sz:"xs",f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"||typeof x.k==="string"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
@@ -96,12 +116,13 @@ let relYk=null;
    The relation card starts right under the row. relSel = X (outside links still set it), relYk = Y (default Ta; X = Ta → the first valid person). */
 function relCands(){const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
  if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;const X=all[ix(all,relSel)];
- const Ys=all.filter(x=>x.k!==X.k&&!((X.k==="emp"||X.k==="th")&&(x.k==="emp"||x.k==="th")));
+ const ct=k=>k==="emp"||k==="th",ms=k=>typeof k==="string"&&k!=="me"&&!ct(k);/* Chí tôn ↔ men/servants: no pair (no store) */
+ const Ys=all.filter(x=>x.k!==X.k&&!(ct(X.k)&&(ct(x.k)||ms(x.k)))&&!(ms(X.k)&&ct(x.k)));
  let yi=ix(Ys,relYk);if(yi<0){yi=Math.max(0,ix(Ys,"me"));relYk=Ys[yi].k}return{all,X,Ys,Y:Ys[yi]}}
 const relSlot=(x,w)=>`<button class="pface krslot" data-relslot="${w}" aria-haspopup="dialog" aria-label="${w==="x"?"Xem quan hệ của":"với"} ${ktEsc(x.q.name)}">${mdH(x.q.f,"xs")}${kitNameRank(x.q.rank,x.q.k==="me"?"Ta":x.q.name,x.q.col,x.k==="me"||undefined,true)}<span class="krcar" aria-hidden="true">▾</span></button>`;
 function hcRelHTML(){kn();const C=relCands();
  return `<div class="pgwrap krelpg"><div class="krelrow">${relSlot(C.X,"x")}<button class="krswap" data-relswap="1" aria-label="Đổi chỗ hai người">⇄</button>${relSlot(C.Y,"y")}</div>${relPair(C.X.q,C.Y.q)}</div>`}
-function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X.k:C.Y.k;const GR=["Ta","Chí tôn","Phi tần"];
+function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X.k:C.Y.k;const GR=["Ta","Chí tôn","Phi tần","Nam nhân","Cung nhân"];
  const tabs=GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);const key="relpop"+w;
  const cg=(L.find(x=>String(x.k)===String(cur))||L[0]).g;if(KTSUB[key]==null||!tabs.some(t=>t.k===KTSUB[key]))KTSUB[key]=cg;
  const tx=kitSubTabs(key,tabs);const items=L.filter(x=>x.g===tx.cur);const on=items.findIndex(x=>String(x.k)===String(cur));if(PG[key]==null)PG[key]=on<0?0:on;
@@ -119,7 +140,7 @@ document.addEventListener("click",e=>{const T=e.target;if(!T||!T.closest)return;
  const q=items[i];if(!q)return;if(w==="x"){relSel=q.k}else relYk=q.k;try{kitModalClose()}catch(x){}renderPanel()},true);
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
-function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
+function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&(relMS(p)?relMSMet(p):knows(p)));
  /* KIT §52 kitRel2 (owner 11/16 4.6): TWO columns — left = X → Y, right = Y → X; short words, number in its colour, no bars */
  const R=(w,v,kind,gloss)=>v==null?{w,unk:"chưa rõ",kind,gloss}:{w,now:Math.round(v),kind,gloss};
  if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[R("Sủng",S.sung,"pos"),R("Ân tình",S.an||0,"pos")]}]);
@@ -129,12 +150,12 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
  const col=(p,q)=>({head:`${capL(whoL(p))} → ${whoL(q)}`,dir:dirOf(p,q),rows:[R("Thiện cảm",ok(p,q)?aff(p,q):null,"good"),R("Oán",ok(p,q)?oan(p,q):null,"bad")]});
  return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
-function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
+function relPair(X,Y){const p=X.p,o=Y.p,rv=p!==S&&p!=="emp"&&p!=="th"&&!relMS(p);const strangers=[X,Y].filter(q=>q.met===false&&!relMS(q.p));
  /* the residence line (owner 21/11 ~02:16Z): ONE sentence from houseLine (chủ vị / ở cung của ta / cùng cung) about the person who is not Ta */
  const z=p===S?o:o===S?p:null;const hl=z&&z!=="emp"&&z!=="th"&&typeof houseLine==="function"?houseLine(z,"ta"):"";
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+(hl?`<p class="kr3note">${hl}.</p>`:"");
- const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
- const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
+ const btn=rv&&X.met!==false?seeBtn(p):"";
+ const known=rv&&X.met!==false?knownCol(p):"";
  /* KIT §49.2d: the card is the relation table only — full width, as tall as its content (the two faces are the picker slots above) */
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
   `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
@@ -151,14 +172,13 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
  const rl=T0.querySelector('[data-tab="rel"]'),fc=T0.querySelector('[data-tab="fac"]');if(rl&&st)st.after(rl);if(fc&&rl)rl.after(fc);
- /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
 try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
-(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
+(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const r8=k=>typeof road8Label==="function"&&road8Label(k);/* her road names its own sub-tab (jroad8 ROAD8) */const b=!r8("court")&&P&&P.querySelector('.ksub [data-ksub="court"]');
   if(b){/* oi-render: both widths say "Chí tôn": no width read (it forced a layout), no rewrite when equal */if(b.innerHTML!=="Chí tôn")b.innerHTML="Chí tôn";if(b.title!=="Chí tôn")b.title="Chí tôn"}
-  const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
+  const r2=!r8("rel")&&P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
@@ -168,7 +188,7 @@ function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.k
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);
  const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]).concat(typeof disRow==="function"&&disRow("emp")?[disRow("emp")]:[]);
- return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
+ return pcard({f:pEmp(),col:"#f0d070",name:empNm(),rank:"Hoàng thượng",rows:[["Niên hiệu",empEra(),"t"]],lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
   note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),
   groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Hoàng thượng (việc đổi theo buổi và theo quẻ). Gặp ngài: Dư đồ → nơi ngài ngự buổi này; tối: chờ lật thẻ.</p>`]],["Điều ngài thích",likes.concat([`<p class="kr3note">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`])]],empty:""})}
 window.courtTabHTML=function(){const L=[{f:pEmp(),name:"Hoàng thượng",mk:empCard}];if(!S.thDead)L.push({f:pTH(),name:"Thái hậu",mk:thCard});
@@ -186,7 +206,7 @@ window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}
 window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men||[]).filter(m=>m.alive&&menMet(m));
- if(!M.length)return `<div class="pgwrap"><p class="past kr3empty">Ngươi chưa gặp nam nhân nào ngoài Hoàng thượng. Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ngươi gặp mặt họ ở nơi họ hay lui tới (Dư đồ).</p></div>`;
+ if(!M.length)return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"img/act-hen-gap.webp"})+`</div>`;
  return `<div class="pgwrap">`+pager("men",M.map(m=>({f:pMan(m),name:m.name.split(" ").slice(-2).join(" ")})),i=>manCard(M[i]))+`</div>`};
 /* the men leave the Phi tần strip (j22 appended them) */
 /* (j22 no longer appends them: source edit) */
@@ -196,12 +216,12 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=tab==="court"?courtTabHTML():menTabHTML();
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* servant road keeps its own tab set */
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const srv=typeof isSrv==="function"&&isSrv();document.querySelectorAll('#tabs [data-tab="court"],#tabs [data-tab="men"]').forEach(b=>{if(srv)b.style.display="none"})}catch(e){}return r}})();
+/* maid-8tabs (owner 21/11 ~03:15Z): Chí tôn and Nam nhân are sub-tabs on the cung nữ road too (no servant-only hiding) */
 
 /* ---------- 4. Người chạy việc ---------- */
 if(typeof bestSent==="function"){const b0=bestSent;bestSent=function(p){try{if(p===S&&S.runner!=null){const s=(S.staff||[]).find(x=>x.sid===S.runner&&!x.spyFor);if(s)return s;S.runner=null}}catch(e){}return b0.apply(this,arguments)}}
 PEND.runner=()=>({t:"<p>Ai làm người chạy việc? Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi. Lòng cao thì ít khi khai ra ngươi.</p>",
- o:(S.staff||[]).filter(s=>!s.spyFor).map(s=>({n:`${s.name} (${s.role==="maid"?"cung nữ":"thái giám"})`,fx:{},x:`Lòng ${s.loyal}${netIs(s,"sharp")?" · lanh lợi":""}${bestSent(S)===s?" · đang chạy việc":""}`,go:()=>{S.runner=s.sid;log(`Từ nay ${s.name} lo chạy việc cho ngươi.`)}})).concat(S.runner!=null?[{n:"Để game tự chọn",fx:{},x:"chọn theo Lòng và tài",go:()=>{S.runner=null}}]:[],[{n:"Thôi",fx:{}}])});
+ o:(S.staff||[]).filter(s=>!s.spyFor).map(s=>({n:`${s.name} (${s.role==="maid"?"cung nữ":"thái giám"})`,fx:{},x:`Thiện cảm ${s.loyal}${netIs(s,"sharp")?" · lanh lợi":""}${bestSent(S)===s?" · đang chạy việc":""}`,go:()=>{S.runner=s.sid;log(`Từ nay ${s.name} lo chạy việc cho ngươi.`)}})).concat(S.runner!=null?[{n:"Để game tự chọn",fx:{},x:"chọn theo Lòng và tài",go:()=>{S.runner=null}}]:[],[{n:"Thôi",fx:{}}])});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-runner]");if(!b)return;e.preventDefault();e.stopPropagation();if(!S||Q.length)return;pushDil(mkP("runner"),"Người chạy việc");render()},true);
 window.runnerLine=function(){const s=bestSent(S);return `<span class="krun">${gl("Người chạy việc","Người chạy việc:")} <b>${s?s.name:"chưa có ai"}</b>${(S.staff||[]).filter(x=>!x.spyFor).length>1?` <button class="chip kchipb" data-runner="1">Đổi ›</button>`:""}</span>`};
 

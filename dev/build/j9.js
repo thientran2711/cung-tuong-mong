@@ -1,9 +1,47 @@
 /* ================= RELATION WEB, PALACE MAP, PRESENCE, TALK ================= */
 /* two bars between every pair: Thiện cảm (aff, -100..100, directional) and Oán (0..100, directional) */
-function aff(x,y){if(x===y)return 0;if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
-function affAdd(x,y,n){if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
-function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
-function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+/* rel-men-servants (KP22, law 1 two-way + law 14 one store): the SAME two bars between every pair of people, men and servants included.
+   Consorts / ta keep their maps (S.rl / S.ro, v.rel / v.oan, v.rl / v.ro). A man or a servant (relMS) keeps the stores the game already
+   writes: a man → ta = m.af (+ m.oan), → a consort = m.afw[id] (+ m.ro[id]); a servant / maid / court official → ta = s.af.me (servant road:
+   S.srv.af[sid]) (+ s.oan), → another servant = s.af[sid] (j10 / jagstaff), → a consort = s.af["r"+id] (court officials: s.af[id], j13)
+   (+ s.ro, same keys). Toward a man / servant the key is relKey (man "m<n>", servant "s<sid>", else the j61 person key kOf61). */
+const relRv=p=>p===S||!!(p&&p.rl&&p.sid==null&&p.id!=null);
+const relMan=p=>!!(p&&typeof p.id==="string"&&/^m\d+$/.test(p.id));
+function relMS(p){return !!p&&typeof p==="object"&&!relRv(p)}
+function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)if(C[k]===p)return true}catch(e){}return false}
+function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}
+function relHk(h,t){if(t===S)return"me";if(relRv(t))return relMan(h)||relCourt(h)?t.id:"r"+t.id;if(t.sid!=null&&!relMan(h)&&!relCourt(h))return t.sid;return relKey(t)}
+function relMap(h,f){if(!h[f]||typeof h[f]!=="object")h[f]={};return h[f]}
+/* OD:L352 "servants use only ONE word Thiện cảm; drop Lòng" + law 4 one core (r6 F5, Fix A): a servant toward ITS master is ONE store, s.loyal (j10) — the
+   number the game already writes — for EVERY master: her (S.maid / her household) and an NPC consort (her maid v.maid / her household, ownerOf).
+   relOwner = that master (court officials and men have none). Servant road: S is the maid there, her own bond stays S.srv.af (isSrv guard below). */
+function relOwner(x){if(!relMS(x)||relMan(x)||relCourt(x)||typeof x.loyal!=="number")return null;if(S&&x===S.maid)return S;try{const o=typeof ownerOf==="function"?ownerOf(x):null;if(o)return o}catch(e){}
+ return (typeof rivals!=="undefined"&&rivals||[]).find(v=>v&&v.maid===x)||null}
+function relMaster(x,y){return !!y&&relOwner(x)===y}
+function msAff(x,y){if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv()))return +x.loyal||0;if(relMS(x)){if(y===S){if(relMan(x))return +x.af||0;if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv())return S.srv.af[x.sid]||0;return x.af&&typeof x.af==="object"?(+x.af.me||0):(+x.af||0)}
+  const M=relMan(x)?x.afw:x.af;return M&&typeof M==="object"?(+M[relHk(x,y)]||0):0}
+ const M=x===S?S.rl:x.rl;return (M&&M[relKey(y)])||0}
+function msAffAdd(x,y,n){const c=v=>cl(v,-100,100);if(relMaster(x,y)&&!(y===S&&typeof isSrv==="function"&&isSrv())){x.loyal=cl((+x.loyal||0)+n,0,100);return}if(relMS(x)){if(y===S){if(relMan(x)){x.af=c((+x.af||0)+n);return}if(x.sid!=null&&S.srv&&S.srv.af&&typeof isSrv==="function"&&isSrv()){S.srv.af[x.sid]=c((S.srv.af[x.sid]||0)+n);return}
+   if(typeof x.af==="number"){x.af=c(x.af+n);return}const M=relMap(x,"af");M.me=c((+M.me||0)+n);return}
+  const M=relMap(x,relMan(x)?"afw":"af"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
+ const M=x===S?S.rl:relMap(x,"rl"),k=relKey(y);M[k]=c((M[k]||0)+n)}
+function msOan(x,y){if(relMS(x)){if(y===S)return +x.oan||0;return (x.ro&&+x.ro[relHk(x,y)])||0}const M=x===S?S.ro:x.ro;return (M&&M[relKey(y)])||0}
+function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===S){x.oan=c((+x.oan||0)+n);return}const M=relMap(x,"ro"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
+ const M=x===S?S.ro:relMap(x,"ro"),k=relKey(y);M[k]=c((M[k]||0)+n)}
+function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
+function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,R[0],R[1]);return}if(y===S){x.rel=cl(x.rel+n,R[0],R[1]);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,R[0],R[1])}
+function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
+function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const R=BAL.linkRange.ro,c=v=>cl(Math.round(v),R[0],R[1]);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+/* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
+function relMSAll(){const L=[],add=p=>{if(p&&typeof p==="object"&&!L.includes(p))L.push(p)};if(!S)return L;(S.men||[]).forEach(add);add(S.maid);(S.staff||[]).forEach(add);
+ for(const k in (S.court||{}))add(S.court[k]);((S.thO&&S.thO.staff)||[]).forEach(add);(rivals||[]).forEach(v=>{add(v.maid);(v.staff||[]).forEach(add)});return L}
+/* old saves (normAll): oán that the game already recorded as a grudge becomes the oán number (never invented): a man's m.grudge (jmen: the one who
+   reported or threatened him), a servant's s.grudge (j24: punished without cause by her mistress), s.bullyBy (jagstaff: the servant who bullies her) */
+function relMSMig(){if(!S||S.relMSv)return;S.relMSv=1;const B=BAL.relMS;
+ for(const m of S.men||[]){if(!m||m.grudge==null||m.grudge===0||!(m.grudgeN>0))continue;const t=m.grudge==="me"?S:(rivals||[]).find(v=>String(v.id)===String(m.grudge));if(t&&!oan(m,t))oanAdd(m,t,B.grudge)}
+ for(const s of relMSAll()){if(s.grudge&&s.oan==null){const o=s===S.maid?S:typeof ownerOf==="function"?ownerOf(s):null;if(o)oanAdd(s,o,B.srvGrudge)}
+  if(s.bullyBy!=null){const b=servById(s.bullyBy);if(b&&!oan(s,b))oanAdd(s,b,B.bully)}}}
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{relMSMig()}catch(e){console.error('relMSMig',e)}return r}})();
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
 function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
@@ -111,8 +149,8 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
-function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
- const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||(S.confined&&k!=="home")||S.dead||S.place===k;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${dis(k)?"disabled":""} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${S.place===k?"đang ở đây":typeof accWalkTxt==="function"?accWalkTxt(k):travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
  let h=`<div class="ph"><span>Đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} khắc · còn <b>${BAL.time.khac-used}</b> ${pips(BAL.time.khac-used)}. Đường xa hơn số khắc còn trong buổi thì đi tiếp sang buổi sau, miễn trong ngày còn đủ khắc; riêng buổi tối không đi qua đêm.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
  h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
@@ -131,7 +169,7 @@ function walkWhy(tc){const left=Math.max(0,BAL.time.khac-used);return left<=0?"h
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
+function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
  const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,BAL.time.khac-used),pre=(o&&o.pre)||0;if(pre+tc<=left)return null;
  let a={ok:true};if(!(o&&o.pass)&&typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
  const now=Math.max(0,left-pre);return{k,tc,now,rest:tc-now,b:b+1,ok:!!a.ok,why:a.why||""}}
@@ -144,7 +182,7 @@ function walkSpillGo(k,o){const P=walkSpill(k,o);if(!P||!P.ok||Q.length)return;w
    next buổi; walkGo(k) = go now, or spill into the next buổi. */
 function walkBlock(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return"";const P=walkSpill(k);return P&&P.ok?"":walkWhy(tc)}
 function walkLate(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return false;const P=walkSpill(k);return !!(P&&P.ok)}
-function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
+function walkGo(k){if(!S||S.dead||Q.length)return;if(k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
@@ -158,7 +196,11 @@ function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){
  else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
 /* khắc of a far walk right now (one-core: texts print this, BAL.walk) */
 function walkFarK(){return BAL.walk.far}
-function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?BAL.walk.far:BAL.walk.near}
+/* travel(a,b,p): the walk a→b for walker p (default: her, S; NPC callers pass the person, or null for a bare map distance).
+   walk-cost r3 (law 1, law 4): a walker under punishment (jface «đi chậm») walks BAL.walk.pen khắc longer — per person, never her penalty
+   on an NPC's road; the half-walk still owed after a spill (__walkSpill rest) already holds it. */
+function walkSlow(p){return 0}
+function travel(a,b,p){if(a===b)return 0;if(p===undefined)p=S;{const W=window.__walkSpill;if(W&&S&&p===S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;let s=0;try{s=walkSlow(p)||0}catch(e){s=0}return (far?BAL.walk.far:BAL.walk.near)+s}
 function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
  if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;/* review stage-here r4 (OD 18/11 ~19:45Z: her room comes back only at a new day or when she walks home): a card the buổi turn already queued (rivalsBuoi) must not make goTo refuse and leave her at home — hold the queue aside for this refresh, then put it back first */const q0=Q.splice(0);try{goTo(k)}finally{Q.unshift(...q0)}used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};

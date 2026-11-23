@@ -1,5 +1,6 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
 const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line stays on screen; stage-here r4 (owner OD 18/11 ~22:10Z "5 giây hay là 10 giây"): THE ms every notice chip (kitNotice, KIT §42.2) stays up */noticeMax:20,/* stage-here r4: notices kept in the top-bar «!» box list (oldest dropped) */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+ /* night-balance-bundle (D #15/#16 ruling 21/11): the Hoàng hậu gate keeps LIVE values (hhThNoSon 80 / Hiếu 70, outQ 60, RANKS HH Danh 78). balance-2 had lowered them while Danh was scarce; with the §7 Danh re-tune Danh m36 is at LIVE level and HH reach was already above LIVE (knobbot k3/k4 vs LIVE 94cbe0cd). */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,/* home road hazards (OUTSIDE_PLAN §12, GAP OR11; Vừa values; jdiff Dễ/Khó scale them like hz): kcSch = weight (100 = as shipped) of the hostile-kin schemes at home (stepmother, rival sister, assassin, the pestering suitor); kcRumFade = how much the city gossip about her (S.kld) fades each month; kcMatch = % of the monthly push toward a forced match (S.kap; 100 = as shipped; the sensible bot never loses to a forced match, so Vừa keeps it, GAP OR12) */kcSch:100,kcRumFade:2,kcMatch:100,/* kcRareX = the hidden roll (×100) of an outside rare ending once its gate is met (× its own weight and R97CFG.p; was a typed .12 in kcRare; value as shipped: the sensible bot meets no rare gate, so a bigger roll moved nothing, GAP OR12) */kcRareX:12,/* kcSelMax = the best chance (%) the court keeps a girl at Điện tuyển (was KC.selMax 80 in jkc; value as shipped, bot-checked for OUTSIDE_PLAN §12, GAP OR12) */kcSelMax:80,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
@@ -48,7 +49,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2,npc:1,pen:1/* jface «đi chậm»: extra khắc per walk while punished (per walker, j9 walkSlow) */},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
@@ -260,11 +261,6 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* say = the cuts of the office holder's greeting pool (jstaff): tn = Thái hậu thiện cảm [hi from, mid from]; kn = Hoàng hậu thiện cảm [hi from, mid above] (review/one-core-dup3-land) */
  say:{tn:[30,0],kn:[10,-10]},
- /* FRAME NARRATOR (owner 16/11 19:23Z s22, kit-size #4): a kit frame without its own person is told by the named palace official whose
-    office covers that topic. ONE map (kind of the frame → post id gt / tn / kn, or the Emperor's eunuchs tq / ksp; "maid" = her thân tín
-    maid, "me" = the player, where no office fits). Read by jksize kszWho3. */
- narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",
-  intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
  /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
  gtDays:4,
  posts:[
@@ -329,6 +325,7 @@ function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
 /* AG-ALL-2f (one-core text G1): THE ONE evidence-count text — "chứng cứ +1" always prints the BAL amount (default BAL.ag.ev.one); cap = "Chứng cứ" */
 function evSg(n,cap){return (cap?"Chứng cứ ":"chứng cứ ")+balSg(n==null?BAL.ag.ev.one:n)}
+function balDec(n){/* law4-typed: a BAL decimal as players read it (1.5 → 1,5) */return String(n).replace(".",",")}
 function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
@@ -367,15 +364,15 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
 /* part 2 (review/one-core-dup2):
    tinhLv  = a man's tình ý for the player (j22 / j42 / j24 / jmen): known 10 (shows), warm 30 (khăn tay, rumour), prince 40 (vương gia
              asks for her), close 50 (meets alone, helps), ally 60 (vương gia ally), love 70 (word "si mê"); tinhW words on 10/30/50/70.
-   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green; watch = the Chủ tin a servant needs to keep watch
+   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green; send = the Chủ tin a servant needs before her mistress sends her on a secret errand (jtin bestSent, j15 card line); watch = the Chủ tin a servant needs to keep watch
              at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
    rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
    oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
-Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10}});BAL.age.adult=18;
+Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});BAL.age.adult=18;
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
@@ -390,8 +387,8 @@ Object.assign(BAL,{
  ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
  sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
  m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
- srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
-                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10,tinUp:35}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  tinUp = the Chủ tin she needs to rise a rung (j42 srvMonth; jts Xét phẩm box prints it)  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
  virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
  tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
  sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
@@ -420,7 +417,7 @@ Object.assign(BAL,{
 Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
  tho:[40,60,75],succEnd:{an:5,q:6},veil:[6,10,14],lost:[40,100,200],kidHp:[35,60],exTier:[3,5],luxRep:[2,3],
- rgTrust:[15,35,60],summon:[3,5,8],sgStep:{up:7,down:3}}});
+ rgTrust:[15,35,60],summon:[3,5,8],summonGain:[{sung:1,an:1},{sung:2,an:1},{sung:3,an:2},{sung:4,an:3}]/* r2 sg-card: tsSummonGain per band (below summon[0], ≥[0], ≥[1], ≥[2]) — were typed in jts */,sgStep:{up:7,down:3}}});
 /* CHOICE VALUE (owner OD:L582 + OD 18/11 ~09:20Z; START_CORE laws 2 + 3; review/choice-value-audit): no option is cost-only, none is clearly better.
    rest = Sức she keeps when she declines / stays in her palace (the gain of every "Khéo từ chối / Không đến / Cáo bệnh / Mặc kệ / Lánh đi" option);
    duc = Đức of a virtuous refusal (burning a man's love poem); skipAff = thiện cảm the host loses when she skips a tấn phong feast (was a typed 6 in jts);
@@ -438,3 +435,5 @@ Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired
    colour, leaderboard and bow order (tam + nhị đẳng share the «Cung nữ» robe until Foreman C paints their own). wage = Bạc per month by rung (was j42 CNV_WAGE). */
 BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
+/* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
+BAL.tho={lv:3,sung:1,lv5:5,sung5:2};

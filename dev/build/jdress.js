@@ -110,8 +110,8 @@ try{if(!BANDS[2][2].includes("xx"))BANDS[2][2].push("xx")}catch(e){}
 try{for(const L of [DIRTY,RT_HARM,EMO_HARM,WHY_NOSEND])if(L&&!L.includes("xx"))L.push("xx")}catch(e){}
 try{if(ORD70&&ORD70.giuchung&&!ORD70.giuchung.acts.includes("xx"))ORD70.giuchung.acts.push("xx")}catch(e){}
 
-/* ---------- K1 wear row: 6 wear slots + the follow pet (KIT §28.14, kitItem cells; marks only when seen) ---------- */
-const DS_SLOTS=[["tram","Cài tóc"],["wrist","Đeo tay"],["waist","Đeo eo"],["scent","Túi thơm"],["veil","Khăn che mặt"],["y","Y phục"],["pet","Theo hầu"]];
+/* ---------- K1 wear row: 8 wear slots (+ Hoa tai, Giày: GAP IT03) + the follow pet (KIT §28.14, kitItem cells; marks only when seen) ---------- */
+const DS_SLOTS=[["tram","Cài tóc"],["ear","Hoa tai"],["wrist","Đeo tay"],["waist","Đeo eo"],["scent","Túi thơm"],["veil","Khăn che mặt"],["y","Y phục"],["shoe","Giày"],["pet","Theo hầu"]];
 function dsGrade(k){try{const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}catch(e){return 0}}
 /* the 7 cells of p as data: {slot,label,empty,k,name,grade,src,lux,over} */
 function dressSlots(p){const out=[];let w={};try{w=wdOf(p)}catch(e){}
@@ -140,6 +140,7 @@ window.dressView=dressView;
 /* tap a cell of someone else's row (the j92 handler covers Trâm cài / Y phục): the item, and what she knows */
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;const sl=t.dataset.kwear,who=t.dataset.kwho;if(who==="me"||sl==="tram"||sl==="y")return;
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===who))||null;if(!v)return;const c=dressSlots(v).find(x=>x.slot===sl);if(!c)return;const r=dressNow(S,v);
+ if(typeof kinlWear==="function"&&kinlWear(t,v,sl))return;/* bag-inline-3 F2: inline strip under the card, no pop-up */
  kitModal({kind:"info",title:`${c.label} của ${v.name}`,facts:[{who:v,text:c.empty?"Không mang gì.":`${c.name}${c.lux&&r?" · Xa xỉ "+c.lux:""}`},
   r?(c.over?"Món này vượt phẩm của nàng (Tố vượt phẩm).":"Ngươi đã thấy nàng mang món này."):"Ngươi chưa thấy tận mắt: gặp nàng cùng chỗ, hoặc dò la.",
   "Tố vượt phẩm · Tố xa xỉ: thẻ người của nàng, nhóm Hại nặng."],btn:"Đã hiểu"})},true);

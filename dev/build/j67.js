@@ -59,6 +59,14 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",/* {N}/{Nc} = what a servant calls her (was {xung}) — the one address core (jvoice) */N:()=>kSay({srv:"f"},S,"{goi}"),Nc:()=>kSay({srv:"f"},S,"{Goi}"),n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
+/* self-word (E39r follow-up, VANPHONG §2, one address core jvoice kAddr): HER words to the peer consort of the beat — {tx}/{Tx} = what she calls
+   herself (muội / tần thiếp / tỷ / bổn cung / ta by rank and mood), {tg}/{Tg} = what she calls that consort (muội muội / tỷ tỷ / title…).
+   The peer = the beat's rival {v}, else her old mistress {mis}; no such person → «ta» / «tỷ tỷ». Never typed by hand in a road line. */
+function peer67(A){try{return rv67(A,"v")||srvMis67()||null}catch(e){return null}}
+function my67(A,k){const p=peer67(A);try{if(p&&typeof kAddr==="function"){const a=kAddr(S,p);if(a&&a[k])return a[k]}}catch(e){}return k==="xung"?"ta":"tỷ tỷ"}
+const cap67=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+/* {tsv}: her self word to a servant / eunuch (bổn cung from Tần up, ta below — kAddr) */
+Object.assign(TOK67,{tsv:()=>{try{return kAddr(S,{srv:"m"}).xung||"ta"}catch(e){return"ta"}},tx:A=>my67(A,"xung"),Tx:A=>cap67(my67(A,"xung")),tg:A=>my67(A,"goi"),Tg:A=>cap67(my67(A,"goi"))});
 /* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
 function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
 /* palace voice: {goi}/{Goi} = how the beat's speaker w calls her, {xung}/{Xung} = the speaker's self word (jvoice kAddr, one core) */
@@ -189,7 +197,7 @@ function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=seatDo
 function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (thiện cảm +${n||30}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
-function e67demote(){const W=BAL.arc.e67.demote;apply(W);return `Hoàng thượng lạnh nhạt thêm: Sủng ${W.sung}.`}
+function e67demote(){const W=BAL.arc.e67.demote;apply(W);return `Hoàng thượng lạnh nhạt thêm: ${sgStat(W.sung)}.`}
 function e67bien(n){try{const T=trS();T.bien=cl(T.bien+n,0,100);return `Biên cương ${n>0?"+":""}${n}.`}catch(e){return""}}
 function e67kho(n){try{const T=trS();T.kho=cl(T.kho+n,0,100);return `Kho lúa ${n>0?"+":""}${n}.`}catch(e){return""}}
 function e67dad(n){try{const d=dad67();if(!d)return"";d.pow=cl((d.pow||50)+n,0,100);return `Thế lực nhà ${d.name} ${n>0?"+":""}${n}.`}catch(e){return""}}
@@ -210,7 +218,7 @@ th:{h:"Thái hậu để ý đến {sj}",w:"th",need:["th"],t:"Thái hậu gõ n
 emp:{h:"Hoàng thượng hỏi thẳng về {sj}",w:"emp",t:"Đêm ấy Hoàng thượng đặt chén trà xuống: “Trẫm nghe về {sj}. {Goi} nói thật cho trẫm.”",o:[
  {n:"Nói thật hết",wx:"Hoàng thượng tin ngươi hơn",rt:"Hoàng thượng im lặng hồi lâu rồi nắm tay ngươi."},
  {n:"Nói nửa thật nửa che",wx:"qua được đêm nay",lx:"ngài nghi ngươi",rt:"Hoàng thượng gật gù, không hỏi thêm.",rf:"Hoàng thượng nhíu mày: nàng có điều giấu trẫm."},
- {n:"Xin ngài đừng hỏi, để thiếp tự lo",wx:"giữ được thế chủ động",lx:"ngài phật ý đôi chút",rt:"Hoàng thượng thở dài, chiều theo ngươi."}]},
+ {n:"Xin ngài đừng hỏi, để thần thiếp tự lo",wx:"giữ được thế chủ động",lx:"ngài phật ý đôi chút",rt:"Hoàng thượng thở dài, chiều theo ngươi."}]},
 spy:{h:"Một kẻ gạ bán tin về {sj}",w:"eun",t:"Một thái giám Nội vụ phủ lén gặp ngươi sau giả sơn: hắn có tin về {sj}, giá không rẻ.",o:[
  {n:"Mua tin",wx:"có thêm manh mối thật",lx:"hắn cũng có thể bán tin của ngươi",rt:"Tin hắn bán là thật."},
  {n:"Ép hắn khai không công",wx:"có tin mà không tốn bạc",lx:"hắn đi rêu rao",rt:"Hắn sợ, khai hết.",rf:"Hắn chuồn mất, còn đi kể khắp nơi."},
@@ -237,7 +245,7 @@ srv:{h:"Đồng liêu dò hỏi về {sj}",w:"maid",need:["srv"],t:"Mấy cung n
  {n:"Biếu bánh trái để họ thôi tò mò",wx:"yên chuyện",rt:"Bánh trái làm mọi người quên chuyện."}]}
 });arcGb();
 /* ================= TỂ TƯỚNG ================= */
-ARC67.tt_co=arcFx("tt_co",{o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư từ giữa ngươi và phủ Tể tướng",g:"Cha ngươi, Tể tướng, coi ngươi là quân cờ cài bên long sàng. Mỗi bức thư nhà là một mệnh lệnh. Đi theo ván cờ của ông, hay tự cầm lấy quân cờ của mình.",
+ARC67.tt_co=arcFx("tt_co",{o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư từ giữa ngươi và phủ Tể tướng",g:"Cha ngươi, Tể tướng, coi ngươi là quân cờ cài bên cạnh Hoàng thượng. Mỗi bức thư nhà là một mệnh lệnh. Đi theo ván cờ của ông, hay tự cầm lấy quân cờ của mình.",
  p:[["s1","s2"],["c1","c2","c3","G.rumor","G.emp"],["t1"],["x1"]],
  B:{
  s1:{h:"Thư nhà của cha",w:"dad",t:"Thư của {dad}: “Thị lang Lại bộ còn trống. Con tìm lúc Hoàng thượng vui mà nhắc tên môn sinh của cha.”",o:[
@@ -264,7 +272,7 @@ ARC67.tt_co=arcFx("tt_co",{o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư 
   {n:"Viết thư nhắc cha công lao của ngươi",wx:"cha đổi ý",lx:"cha vẫn đưa em họ vào",rt:"Cha gác lại việc em họ.",rf:"Cha vẫn cho em họ học lễ nghi."},
   {n:"Tự đứng vững, không cần cha",f:"own",wx:"tự gây thế lực",rt:"Ngươi dùng bạc riêng nuôi tai mắt của mình."},
   {n:"Để mặc",wx:"giữ bạc riêng, êm chuyện với cha",lx:"thêm một đối thủ trong nhà",rt:"Ngươi không đáp."}]},
- x1:{h:"Ván cờ lớn của cha",w:"dad",t:"Cha muốn ngươi khuyên Hoàng thượng giao Lại bộ cho ông nắm trọn. Được thì nhà ngươi nghiêng triều, mà mất thì cả nhà mất.",o:[
+ x1:{h:"Ván cờ lớn của cha",w:"dad",t:"Cha muốn ngươi khuyên Hoàng thượng giao Lại bộ cho ông nắm trọn. Được thì nhà ngươi nắm cả triều đình; hỏng thì cả nhà mất hết.",o:[
   {n:"Đặt điều kiện: cha theo ngươi, không phải ngươi theo cha",e:["win","lose"],rt:"Cha im lặng rất lâu rồi đồng ý.",rf:"Cha nổi giận, coi ngươi là con bất hiếu."},
   {n:"Khuyên Hoàng thượng như lời cha",e:["win","mid"],rt:"Hoàng thượng nghe theo.",rf:"Hoàng thượng chỉ cười, không đáp."},
   {n:"Từ chối, cắt đứt dây cờ",e:"mid",lx:"mất chỗ dựa ở triều",rt:"Ngươi gửi trả thư cha, không mở."}]}},
@@ -314,7 +322,7 @@ ARC67.tt_tranh=arcFx("tt_tranh",{o:"tt",t:"Phủ Tể tướng chia đôi",w:"da
   {n:"Báo cho cha",wx:"cha đứng về phía ngươi",lx:"huynh trưởng thù ngươi",f:"dad",rt:"Cha nổi giận với huynh trưởng."},
   {n:"Lặng lẽ kết thân với {v}",f:"v",wx:"biết nàng hứa gì với huynh",lx:"{v} đề phòng ngươi",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)relAdd(S,v,G[0])},rt:"{v} cười nói thân mật, buột miệng kể chuyện huynh.",rf:"{v} khách sáo, chẳng nói gì."}]},
  s2:{h:"Gia yến chia phe",w:"dad",t:"Mừng thọ cha, gia yến chia làm hai bàn: một bàn theo huynh trưởng, một bàn theo cha. Cả nhà chờ xem ngươi gửi lễ cho ai trước.",o:[
-  {n:"Gửi lễ cho cha trước",f:"dad",wx:"cha yên lòng",lx:"huynh trưởng bẽ mặt",rt:"Cha nâng chén lễ vật của ngươi lên trước mặt cả họ."},
+  {n:"Gửi lễ cho cha trước",f:"dad",wx:"cha yên lòng",lx:"huynh trưởng bẽ mặt",rt:"Cha giơ lễ vật của ngươi lên khoe trước mặt cả họ."},
   {n:"Gửi hai phần lễ ngang nhau",wx:"cả hai phe nể ngươi",rt:"Cả nhà khen ngươi biết cư xử."},
   {n:"Gửi lễ cho huynh trưởng",f:"bro",wx:"huynh chịu ngồi nói chuyện",lx:"cha phật lòng",rt:"Huynh trưởng xúc động, viết thư cảm tạ.",rf:"Cha giận, huynh cũng chẳng tin ngươi."}]},
  c1:{h:"Huynh trưởng đòi chia gia sản",w:"dad",t:"Huynh trưởng đòi chia một nửa ruộng đất của phủ để tự lập môn hộ, kéo theo nửa số môn sinh.",o:[
@@ -377,7 +385,7 @@ ARC67.tt_mat=arcFx("tt_mat",{o:"tt",t:"Mật ước với Hoàng hậu",w:"hh",s
 ARC67.dtq_bien=arcFx("dtq_bien",{o:"dtq",t:"Khói lửa Nhạn Môn",w:"emp",sj:"trận chiến ở Nhạn Môn quan",g:"Giặc phương Bắc tràn qua Nhạn Môn quan. Cha ngươi cầm quân, mà lương thảo, viện binh, lòng vua đều ở trong cung. Thắng bại ngoài ải là vinh nhục của ngươi.",
  p:[["s1","s2"],["c1","c2","c3","G.night","G.th"],["t1"],["x1"]],
  B:{
- s1:{h:"Quân báo khẩn",w:"emp",t:"Quân báo tám trăm dặm: giặc vây Nhạn Môn. Hoàng thượng mất ngủ, cả cung nín thở. Cha ngươi xin thêm lương thảo.",o:[
+ s1:{h:"Quân báo khẩn",w:"emp",t:"Quân báo khẩn từ biên ải phi ngựa về: giặc vây Nhạn Môn. Hoàng thượng mất ngủ, cả cung nín thở. Cha ngươi xin thêm lương thảo.",o:[
   {n:"Bán trang sức góp quân lương",wx:"lính biên ải biết ơn",rt:"Tin con gái Đại tướng quân bán trang sức lan khắp kinh thành."},
   {n:"Khuyên Hoàng thượng thúc Hộ bộ",need:["nsrv"],wx:"lương thảo đi sớm",lx:"ngài cho là ngươi xen chính sự",rt:"Hộ bộ phải xuất kho ngay trong đêm.",rf:"Hoàng thượng gạt đi."},
   {n:"Cầu an cho cha ở Phụng Tiên điện",wx:"Thái hậu khen hiếu thảo",lx:"lương thảo vẫn chậm",rt:"Thái hậu thấy ngươi quỳ suốt đêm."}]},
@@ -426,9 +434,9 @@ ARC67.dtq_vu=arcFx("dtq_vu",{o:"dtq",t:"Bức thư mưu phản",w:"emp",sj:"lờ
   {n:"Xin chính ngươi chép thay",wx:"chặn tay nàng",lx:"{v} để ý ngươi",rt:"{v} hơi tái mặt.",rf:"Hoàng thượng vẫn giao cho {v}."},
   {n:"Để nàng chép, theo dõi bản chép",wx:"bắt được bản chép sửa chữ",rt:"Bản chép của {v} cố ý viết giống nét cha ngươi."},
   {n:"Không để ý",wx:"đỡ phiền",lx:"lỡ một manh mối",rt:"Ngươi không bận lòng."}]},
- c3:{h:"Quân của cha xôn xao",w:"maid",t:"Tin cha bị nghi lan ra biên ải. Tướng sĩ đòi dâng vạn danh thư bảo lãnh, có kẻ còn đòi kéo quân về kinh.",o:[
+ c3:{h:"Quân của cha xôn xao",w:"maid",t:"Tin cha bị nghi lan ra biên ải. Tướng sĩ đòi dâng tờ thư có tên hàng vạn người bảo lãnh cho cha, có kẻ còn đòi kéo quân về kinh.",o:[
   {n:"Viết thư can cha giữ quân yên",wx:"Hoàng thượng thấy nhà ngươi trung",rt:"Quân sĩ yên lặng giữ ải."},
-  {n:"Để vạn danh thư dâng lên",wx:"thanh thế của cha",lx:"Hoàng thượng thấy cha được lòng quân quá",rt:"Vạn danh thư làm Hoàng thượng cảm động.",rf:"Hoàng thượng càng sợ binh quyền của cha."}]},
+  {n:"Để vạn danh thư dâng lên",wx:"thanh thế của cha",lx:"Hoàng thượng thấy cha được lòng quân quá",rt:"Tờ thư vạn người đứng tên làm Hoàng thượng cảm động.",rf:"Hoàng thượng càng sợ binh quyền của cha."}]},
  t1:{h:"Kẻ chủ mưu lộ diện",w:"v",need:["v"],t:"Mọi manh mối dẫn về nhà {v}: cha nàng muốn thay cha ngươi cầm quân.",o:[
   {n:"Gom hết chứng cứ",f:"ev",wx:"vào phiên xử với chứng cứ đầy đủ",lx:"{v} biết",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)oanAdd(v,S,G[0])},rt:"Ngươi xếp chứng cứ vào một tráp."},
   {n:"Đe {v}: rút đơn hay mất hết",f:"deal",wx:"nhà nàng tự rút",lx:"{v} cắn ngược",rt:"{v} run giọng xin ngươi tha.",rf:"{v} cười nhạt, không sợ."}]},
@@ -454,7 +462,7 @@ ARC67.dtq_binh=arcFx("dtq_binh",{o:"dtq",t:"Binh phù và long ngai",w:"emp",sj:
   {n:"Kết giao với nhà tướng trẻ",wx:"đường lui cho nhà ngươi",rt:"Mẹ tướng trẻ cảm tạ ngươi."},
   {n:"Tìm lỗi của tướng trẻ",f:"dad",wx:"cha giữ được chỗ",lx:"Hoàng thượng thấy ngươi chống ý ngài",rt:"Tướng trẻ bị phát hiện từng thua trận giấu báo.",rf:"Hoàng thượng biết ngươi bới lông tìm vết."},
   {n:"Chúc mừng tướng trẻ trước mặt vua",f:"king",wx:"ngài thấy ngươi rộng lượng",rt:"Hoàng thượng khẽ gật."}]},
- c2:{h:"Đại thần đòi thu binh",w:"emp",t:"Triều đình dâng liên danh sớ: tướng giữ binh quá mười năm, nên đổi.",o:[
+ c2:{h:"Đại thần đòi thu binh",w:"emp",t:"Nhiều triều thần cùng đứng tên dâng sớ: tướng giữ binh quá mười năm, nên đổi.",o:[
   {n:"Nhờ Thái hậu nói đỡ",need:["th"],f:"dad",wx:"sớ bị gác",rt:"Thái hậu bảo: công thần không nên phụ.",rf:"Thái hậu đứng ngoài."},
   {n:"Đề nghị một lối giữa: chia quân",wx:"cả vua lẫn cha giữ thể diện",lx:"không bên nào ưng",rt:"Hoàng thượng khen kế hay.",rf:"Kế bị chê là lơ lửng."}]},
  c3:{h:"Cha muốn về kinh dự yến",w:"dad",t:"Cha xin về kinh dự Vạn thọ tiết, kèm ba nghìn thân binh. Trong triều xôn xao.",o:[
@@ -466,12 +474,12 @@ ARC67.dtq_binh=arcFx("dtq_binh",{o:"dtq",t:"Binh phù và long ngai",w:"emp",sj:
  x1:{h:"Binh phù",w:"emp",t:"Hoàng thượng triệu ngươi: “Trẫm muốn cha {goi} giao binh phù. {Goi} giúp trẫm, hay giúp cha?”",o:[
   {n:"Thuyết phục cha giao binh phù, đổi lấy tước vị",e:["win","mid"],rt:"Cha giao binh phù, được phong Quốc công.",rf:"Cha giao binh phù nhưng lòng không vui."},
   {n:"Xin ngài để cha giữ binh",e:["win2","lose"],rt:"Hoàng thượng ngẫm nghĩ, cho cha giữ quân thêm.",rf:"Hoàng thượng nổi giận, tước binh quyền của cha."},
-  {n:"Thưa: việc nước, thiếp không dám bàn",e:"mid",lx:"cả hai bên thất vọng",rt:"Hoàng thượng thở dài."}]}},
+  {n:"Thưa: việc nước, thần thiếp không dám bàn",e:"mid",lx:"cả hai bên thất vọng",rt:"Hoàng thượng thở dài."}]}},
  E:{win:{tag:"Binh phù đổi tước Quốc công",w:"emp",t:"Cha ngươi giao binh phù, được phong Quốc công, ăn lộc vạn hộ. Hoàng thượng coi ngươi là người hiểu lòng ngài nhất."},
   win2:{tag:"Cha giữ binh, vua vẫn tin",t:"Cha ngươi giữ ba mươi vạn quân, Hoàng thượng vẫn tin. Thế nhà ngươi vững như núi.",go:(_A,_ok,G)=>e67dad(G[0])},
   mid:{tag:"Cha về vườn",t:"Cha ngươi giao binh phù về quê. Nhà ngươi không còn binh quyền, nhưng cũng không còn bị nghi.",go:(_A,_ok,G)=>e67dad(G[0])},
   lose:{tag:"Bị tước binh quyền",w:"emp",t:"Cha ngươi bị tước binh quyền trong cơn giận của Hoàng thượng. Ngươi bị lạnh nhạt một thời gian.",go:(_A,_ok,G)=>e67dad(G[0])}}});
-ARC67.dtq_huynh=arcFx("dtq_huynh",{o:"dtq",t:"Người anh nơi đất giặc",w:"maid",sj:"chuyện huynh trưởng bị bắt",g:"Huynh trưởng của ngươi, một tướng trẻ, bị giặc bắt trong một trận phục kích. Giặc đòi chuộc, triều đình đòi giữ thể diện. Cứu anh mà không làm nhục nước.",
+ARC67.dtq_huynh=arcFx("dtq_huynh",{o:"dtq",t:"Người anh nơi đất giặc",w:"maid",sj:"chuyện huynh trưởng bị bắt",g:"Huynh trưởng của ngươi, một tướng trẻ, bị giặc bắt trong một trận phục kích. Giặc đòi chuộc, triều đình đòi giữ thể diện. Cứu huynh mà không làm nhục nước.",
  p:[["s1","s2"],["c1","c2","c3","G.night","G.gift"],["t1"],["x1"]],
  B:{
  s1:{h:"Tin dữ ngoài ải",w:"maid",t:"Thư cha run nét: huynh trưởng ngươi bị giặc bắt sống ở Hắc Thủy. Giặc đòi ba vạn lượng và hai châu.",o:[
@@ -501,7 +509,7 @@ ARC67.dtq_huynh=arcFx("dtq_huynh",{o:"dtq",t:"Người anh nơi đất giặc",w
  E:{win:{tag:"Đón huynh về",w:"emp",t:"Huynh ngươi về kinh, không mất một tấc đất. Hoàng thượng khen ngươi trí tuệ; nhà ngươi được lòng cả triều."},
   win2:{tag:"Huynh lập công trở về",t:"Huynh ngươi được cứu, còn dẫn đường cho kỵ binh phá trại giặc. Nhà ngươi thêm một tướng tài.",go:(_A,_ok,G)=>[e67bien(G[0]),e67dad(G[1])].join(" ")},
   mid:{tag:"Huynh về muộn",t:"Sau hai năm thương lượng, huynh ngươi được thả, gầy rộc. Nhà ngươi trả giá đắt nhưng giữ được người."},
-  lose:{tag:"Huynh bị đày lên bắc",t:"Huynh ngươi bị giặc giải lên tận bắc mạc. Nhà ngươi mất một tướng, cha ngươi già đi trông thấy.",go:(_A,_ok,G)=>[e67bien(G[0]),e67dad(G[1])].join(" ")}}});
+  lose:{tag:"Huynh bị đày lên bắc",t:"Huynh ngươi bị giặc giải lên tận sa mạc phương bắc. Nhà ngươi mất một tướng, cha ngươi già đi trông thấy.",go:(_A,_ok,G)=>[e67bien(G[0]),e67dad(G[1])].join(" ")}}});
 /* ================= NHÀ BUÔN MUỐI ================= */
 ARC67.muoi_tuoc=arcFx("muoi_tuoc",{o:"muoi",t:"Mua tước cho cha",w:"th",sj:"chuyện xin tước cho nhà buôn muối",g:"Nhà buôn muối giàu mà bị khinh. Cha muốn một tước vị để con cháu ngẩng đầu. Bạc thì có, thứ thiếu là người chịu nói giúp.",
  p:[["s1","s2"],["c1","c2","c3","G.th","G.gift"],["t1"],["x1"]],
@@ -524,15 +532,15 @@ ARC67.muoi_tuoc=arcFx("muoi_tuoc",{o:"muoi",t:"Mua tước cho cha",w:"th",sj:"c
  c3:{h:"Muối lậu của nhà khác",w:"maid",t:"Một nhà buôn muối khác bị bắt buôn lậu, có kẻ muốn kéo tên nhà ngươi vào.",o:[
   {n:"Đưa sổ sách sạch của nhà ra",wx:"nhà ngươi trong sạch",rt:"Hộ bộ xác nhận nhà ngươi nộp thuế đủ."},
   {n:"Mặc kệ",wx:"không tốn công",rt:"Lời đồn bám theo tên nhà ngươi một thời gian."}]},
- t1:{h:"Một tước hư hay một tước thật",w:"th",t:"Có lời nhắn từ Đức Thọ cung: Thái hậu có thể xin cho cha ngươi tước ‘Nghĩa thương’, một hư hàm. Muốn tước thật thì phải chờ, và phải hơn thế.",o:[
+ t1:{h:"Một tước hư hay một tước thật",w:"th",t:"Có lời nhắn từ Đức Thọ cung: Thái hậu có thể xin cho cha ngươi tước ‘Nghĩa thương’, có danh mà không có quyền. Muốn tước thật thì phải chờ, và phải hơn thế.",o:[
   {n:"Nhận hư hàm, đỡ phiền",f:"small",wx:"có ngay một danh hiệu",lx:"tước nhỏ",rt:"Cha ngươi mừng rơi nước mắt."},
   {n:"Xin chờ tước thật",wx:"nhắm cao hơn",lx:"có thể trắng tay",rt:"Thái hậu khẽ cười: ‘Tham vọng không nhỏ.’"}]},
  x1:{h:"Thánh chỉ phong tước",w:"emp",t:"Triều nghị chuyện phong tước cho nhà ngươi. Có kẻ phản đối: ‘Con buôn sao đứng hàng sĩ phu?’",o:[
-  {n:"Xin Thái hậu nói giúp",need:["th"],e:["win","mid"],rt:"Thái hậu một lời, triều đình im bặt.",rf:"Thái hậu nói giúp, nhưng chỉ được hư hàm."},
+  {n:"Xin Thái hậu nói giúp",need:["th"],e:["win","mid"],rt:"Thái hậu một lời, triều đình im bặt.",rf:"Thái hậu nói giúp, nhưng chỉ được tước hư danh."},
   {n:"Dâng thêm một vạn thạch thóc cứu đói",e:["win","lose"],rt:"Thóc đến các châu đói, triều đình hết lời chê.",rf:"Thóc bị ăn bớt dọc đường, tiếng không đến tai vua."},
   {n:"Nhận tước hư như đã có",if:A=>A.f.small,e:"mid",lx:"không có tước thật",rt:"Ngươi không đòi thêm."}]}},
- E:{win:{tag:"Nhà được phong tước",w:"emp",t:"Cha ngươi được phong tước Tử. Nhà buôn muối thành nhà có tước, không ai còn dám chê ngươi mùi muối."},
-  mid:{tag:"Được một hư hàm",t:"Cha ngươi có một hư hàm, treo biển trước cửa. Không nhiều, nhưng đủ để ngươi bớt bị chê."},
+ E:{win:{tag:"Nhà được phong tước",w:"emp",t:"Cha ngươi được phong làm Tử tước, một tước thật của triều đình. Nhà buôn muối thành nhà có tước, không ai còn dám chê ngươi mùi muối."},
+  mid:{tag:"Được một hư hàm",t:"Cha ngươi được một tước hư danh, treo biển trước cửa. Không nhiều, nhưng đủ để ngươi bớt bị chê."},
   lose:{tag:"Mất bạc, mất mặt",t:"Bạc tiêu như nước mà tước không thấy. Các phi tần lấy chuyện này làm trò cười."}}});
 ARC67.muoi_lau=arcFx("muoi_lau",{o:"muoi",t:"Thuyền muối đêm",w:"maid",sj:"vụ thuyền muối lậu của nhà",g:"Thuyền muối của nhà ngươi bị bắt ở bến Giang Khẩu, trong khoang có muối lậu. Cha nói bị hãm hại, quan nói bắt quả tang. Sự thật ở đâu, ngươi phải tự tìm.",
  cast(A){castRv67(A,"v");return true},
@@ -549,7 +557,7 @@ ARC67.muoi_lau=arcFx("muoi_lau",{o:"muoi",t:"Thuyền muối đêm",w:"maid",sj:
   {n:"Giữ hắn làm chứng",f:"wit",wx:"có nhân chứng",lx:"hắn có thể đổi lời",rt:"Hắn được giấu ở một quán trọ."},
   {n:"Bắt hắn viết lời khai rồi thả",wx:"có lời khai",lx:"hắn trốn",rt:"Lời khai có dấu tay.",rf:"Hắn trốn trước khi điểm chỉ."}]},
  c2:{h:"Thuyền muối thứ tư",w:"maid",t:"Còn một thuyền chưa bị khám. Nếu khám ra cũng có muối lậu, nhà ngươi khó cãi.",o:[
-  {n:"Cho người kiểm khoang trước",wx:"bắt được kẻ giấu muối tại trận",lx:"bị nghi phi tang",rt:"Người của ngươi bắt được kẻ lén khiêng muối lậu xuống.",rf:"Người của ngươi bị quan bến bắt gặp."},
+  {n:"Cho người soát khoang trước",wx:"bắt được kẻ giấu muối tại trận",lx:"bị nghi phi tang",rt:"Người của ngươi bắt được kẻ lén khiêng muối lậu xuống.",rf:"Người của ngươi bị quan bến bắt gặp."},
   {n:"Để quan khám",wx:"không ai nói ngươi phi tang",lx:"phó mặc may rủi",rt:"Thuyền thứ tư sạch."}]},
  c3:{h:"{v} ra vẻ thương cảm",w:"v",need:["v"],t:"{v} đến thăm, giọng thương cảm: ‘{Goi} có cần {xung} nói giúp với Hộ bộ không?’",o:[
   {n:"Cảm ơn, nhận lời",wx:"nàng có thể thật lòng",lx:"rơi vào bẫy",rt:"{v} giữ lời, nói giúp thật.",rf:"{v} quay đi kể ngươi đã nhận tội."},
@@ -594,7 +602,7 @@ ARC67.muoi_doi=arcFx("muoi_doi",{o:"muoi",t:"Năm đói ở Giang Nam",w:"emp",s
  E:{win:{tag:"Biển vàng ‘Nghĩa thương’",w:"emp",t:"Hoàng thượng ban biển vàng cho nhà ngươi. Thái hậu khen ngươi có lòng với dân. Tiếng thơm đi khắp Giang Nam.",go:(_A,_ok,G)=>e67kho(G[0])},
   mid:{tag:"Qua năm đói",t:"Năm đói qua đi. Nhà ngươi không được khen, cũng không bị trách."},
   lose:{tag:"Mang tiếng đầu cơ",t:"Nhà ngươi bị phạt vì đầu cơ trong năm đói. Thái hậu lạnh nhạt, các phi tần gọi ngươi là ‘nương nương gạo’."}}});
-ARC67.muoi_no=arcFx("muoi_no",{o:"muoi",t:"Món nợ trong cung",w:"v",sj:"món nợ của {v}",g:"Ngươi phát hiện {v} lén vay bạc của hiệu buôn nhà ngươi để lo lót, và không trả nổi. Món nợ là xích sắt hay là sợi chỉ đỏ, tùy ngươi.",
+ARC67.muoi_no=arcFx("muoi_no",{o:"muoi",t:"Món nợ trong cung",w:"v",sj:"món nợ của {v}",g:"Ngươi phát hiện {v} lén vay bạc của hiệu buôn nhà ngươi để lo lót, và không trả nổi. Món nợ ấy dùng để trói buộc nàng hay để kết thân với nàng, tùy ngươi.",
  cast(A){return castRv67(A,"v",v=>v.rank>=1)},
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.rumor"],["t1"],["x1"]],
  B:{
@@ -622,7 +630,7 @@ ARC67.muoi_no=arcFx("muoi_no",{o:"muoi",t:"Món nợ trong cung",w:"v",sj:"món 
   {n:"Đốt sổ nợ trước mặt nàng",e:["win","mid"],rt:"{v} quỳ xuống thề đứng về phía ngươi.",rf:"{v} cảm ơn, nhưng vẫn giữ khoảng cách."},
   {n:"Dùng sổ nợ ép nàng theo ngươi",e:["win2","lose"],rt:"{v} cắn răng nghe lời.",rf:"{v} liều tố ngươi cho vay nặng lãi."},
   {n:"Trả sổ cho cha, rút tay",e:"mid",lx:"mất một con bài",rt:"Ngươi không dính vào nữa."}]}},
- E:{win:{tag:"Món nợ thành tình chị em",w:"v",t:"{v} thành người của ngươi, bỏ phiếu cho ngươi ở Tranh ghế, mách tin cho ngươi khi cần.",go:(A,_ok,G)=>e67ally(rv67(A,"v"),G[0])},
+ E:{win:{tag:"Món nợ thành tình chị em",w:"v",t:"{v} thành người của ngươi, đứng về phía ngươi ở Tranh ghế, mách tin cho ngươi khi cần.",go:(A,_ok,G)=>e67ally(rv67(A,"v"),G[0])},
   win2:{tag:"Nắm thóp {v}",t:"{v} buộc phải nghe ngươi. Nàng không dám chống ngươi, nhưng trong lòng không phục.",go:(A,_ok,G)=>e67ally(rv67(A,"v"),G[0])},
   mid:{tag:"Nợ xong, người xa",t:"Món nợ khép lại. Không ai nợ ai, cũng chẳng ai thân ai."},
   lose:{tag:"Bị tố cho vay nặng lãi",t:"{v} tố ngươi cho vay nặng lãi trong cung. Ngươi bị phạt bổng, mang tiếng con buôn.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])}}});
@@ -689,7 +697,7 @@ ARC67.cn_tinh=arcFx("cn_tinh",{o:"cn",t:"Mối tình thuở hầu trà",w:"maid"
  E:{win:{tag:"Hoàng thượng tin ngươi",w:"emp",t:"Hoàng thượng coi trọng lòng thật của ngươi. Chuyện cũ khép lại, ngài càng tin ngươi hơn."},
   win2:{tag:"Lật ngược kẻ trình thư",t:"Kẻ trình thư bị phạt vì vu khống. Không ai dám nhắc chuyện cũ của ngươi nữa."},
   mid:{tag:"Chuyện cũ chôn vùi",t:"Chuyện cũ không ai nhắc, nhưng Hoàng thượng thỉnh thoảng nhìn ngươi lâu hơn trước."},
-  lose:{tag:"Lộ chuyện cũ",w:"emp",t:"Hoàng thượng giận vì ngươi nói dối, lạnh nhạt hẳn với ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: Sủng ${W.sung}.`}}}});
+  lose:{tag:"Lộ chuyện cũ",w:"emp",t:"Hoàng thượng giận vì ngươi nói dối, lạnh nhạt hẳn với ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: ${sgStat(W.sung)}.`}}}});
 ARC67.cn_ban=arcFx("cn_ban",{o:"cn",t:"Tri kỷ ở Tân Giả khố",w:"maid",sj:"chuyện người tri kỷ cũ ở Tân Giả khố",g:"Tố Nga, tri kỷ cùng phòng thuở ngươi còn là cung nữ, bị đày xuống Tân Giả khố vì một tội nàng không làm. Nàng biết một bí mật của Càn Ninh cung. Cứu nàng là ơn, mà cũng là rủi ro.",
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.spy"],["t1"],["x1"]],
  B:{
@@ -705,11 +713,11 @@ ARC67.cn_ban=arcFx("cn_ban",{o:"cn",t:"Tri kỷ ở Tân Giả khố",w:"maid",s
   {n:"Bảo nàng giữ kín để giữ mạng",wx:"Tố Nga an toàn",lx:"bí mật vẫn chôn",rt:"Tố Nga gật đầu."}]},
  c2:{h:"Tố Nga ốm nặng",w:"doc",t:"Mùa rét, Tố Nga ho ra máu. Không có thầy thuốc, nàng không qua nổi tháng.",o:[
   {n:"Lén mời thái y",wx:"cứu được nàng",lx:"thái y báo lên",rt:"Tố Nga qua cơn nguy.",rf:"Tố Nga khỏi, nhưng chuyện ngươi mời thái y cho tội nô bị đồn."},
-  {n:"Tự bốc thuốc gửi xuống",if:()=>S.arts.y>=2,wx:"nàng khỏi bệnh",rt:"Thuốc của ngươi hiệu nghiệm."},
+  {n:"Tự bốc thuốc gửi xuống",if:()=>S.arts.y>=yCareT(),wx:"nàng khỏi bệnh",rt:"Thuốc của ngươi hiệu nghiệm."},
   {n:"Gửi bạc, phó mặc",wx:"tròn chút tình",lx:"nàng có thể không qua",rt:"Tố Nga gượng qua mùa rét."}]},
  c3:{h:"Có người hỏi về Tố Nga",w:"hh",need:["hh"],t:"Người của Càn Ninh cung hỏi ngươi: “{Nc} có quen Tố Nga ở Tân Giả khố?”",o:[
   {n:"Chối",wx:"che được",lx:"Hoàng hậu nghi",rt:"Họ tin.",rf:"Họ không tin."},
-  {n:"Nhận là bạn cũ, chỉ thương tình",wx:"thật thà",lx:"Hoàng hậu để ý cả hai",rt:"Họ ghi lại rồi đi."}]},
+  {n:"Nhận là người quen cũ, chỉ thương tình",wx:"thật thà",lx:"Hoàng hậu để ý cả hai",rt:"Họ ghi lại rồi đi."}]},
  t1:{h:"Đưa Tố Nga ra khỏi Tân Giả khố",w:"maid",t:"Có dịp: Nội vụ phủ đang chọn người khâu vá cho cung ngươi.",o:[
   {n:"Xin Tố Nga về hầu",f:"saved",wx:"Tố Nga về bên ngươi",lx:"bị từ chối",rt:"Tố Nga về cung ngươi, quỳ khóc.",rf:"Nội vụ phủ không cho."},
   {n:"Chờ thời cơ khác",wx:"không lộ",lx:"nàng chịu khổ thêm",rt:"Ngươi chờ."}]},
@@ -784,7 +792,7 @@ ARC67.nc_gian=arcFx("nc_gian",{o:"nc",t:"Mật lệnh cố quốc",w:"emp",sj:"m
 ARC67.nc_su=arcFx("nc_su",{o:"nc",t:"Sứ đoàn cố quốc",w:"emp",sj:"sứ đoàn Cao Ly",g:"Thế tử huynh của ngươi dẫn sứ đoàn Cao Ly sang triều cống. Mỗi bữa yến là một ván cờ: nếu sứ đoàn thất lễ, ngươi mất mặt; nếu thuận buồm, ngươi là chiếc cầu giữa hai nước.",
  p:[["s1","s2"],["c1","c2","c3","G.th","G.rival"],["t1"],["x1"]],
  B:{
- s1:{h:"Thế tử huynh vào kinh",w:"emp",t:"Thế tử huynh mang theo nhân sâm, ngựa tốt và gốm phỉ sắc. Hoàng thượng cho ngươi ngồi cạnh trong yến đón sứ.",o:[
+ s1:{h:"Thế tử huynh vào kinh",w:"emp",t:"Thế tử huynh mang theo nhân sâm, ngựa tốt và gốm men ngọc. Hoàng thượng cho ngươi ngồi cạnh trong yến đón sứ.",o:[
   {n:"Dạy thế tử huynh lễ nghi Đại Hy",wx:"sứ đoàn ít thất lễ",rt:"Thế tử huynh cúi lạy đúng phép, Lễ bộ hài lòng."},
   {n:"Để sứ đoàn giữ lễ cố quốc",wx:"triều đình thấy phong tục lạ mà hay",lx:"bị chê lễ lạ",rt:"Điệu kiếm vũ khiến cả yến trầm trồ.",rf:"Thái hậu chê sứ đoàn vô lễ."}]},
  s2:{h:"Lễ vật bị đánh tráo",w:"maid",t:"Đêm trước buổi dâng lễ, một hòm nhân sâm bị phát hiện là rễ cát cánh giả.",o:[
@@ -804,12 +812,12 @@ ARC67.nc_su=arcFx("nc_su",{o:"nc",t:"Sứ đoàn cố quốc",w:"emp",sj:"sứ �
   {n:"Khuyên huynh thôi",wx:"tránh rắc rối",lx:"huynh buồn",rt:"Thế tử huynh im lặng."}]},
  x1:{h:"Yến tiễn sứ",w:"emp",t:"Yến tiễn sứ đoàn. Hoàng thượng định viết quốc thư trả lời Cao Ly, hỏi ý ngươi.",o:[
   {n:"Đề nghị minh ước hữu hảo mười năm",e:["win","mid"],rt:"Minh ước được ký, hai nước mở chợ biên.",rf:"Quốc thư chỉ có lời khách sáo."},
-  {n:"Đề nghị Đại Hy nhận thêm cống phẩm",e:["win2","lose"],rt:"Hoàng thượng hài lòng, Cao Ly nhận lời.",rf:"Thế tử huynh giận dữ bỏ về, quan hệ xấu đi."},
+  {n:"Đề nghị Đại Hy nhận thêm cống phẩm",e:["win2","lose"],rt:"Hoàng thượng hài lòng, Cao Ly nhận lời.",rf:"Thế tử huynh giận dữ bỏ về, hai nước sinh hiềm khích."},
   {n:"Không dám bàn",e:"mid",lx:"bỏ lỡ cơ duyên",rt:"Ngươi chỉ rót rượu."}]}},
  E:{win:{tag:"Chiếc cầu hai nước",w:"emp",t:"Minh ước ra đời nhờ ngươi. Chợ biên tấp nập, Hoàng thượng và Thái hậu đều nể ngươi.",go:(_A,_ok,G)=>e67bien(G[0])},
   win2:{tag:"Được lòng Hoàng thượng",t:"Hoàng thượng thấy ngươi đặt Đại Hy lên trước. Ngài tin ngươi hơn."},
   mid:{tag:"Sứ đoàn về yên",t:"Sứ đoàn về nước, không có gì lớn lao."},
-  lose:{tag:"Hai nước lạnh nhạt",t:"Sứ đoàn bỏ về trong giận dữ. Ngươi bị coi là nguyên nhân.",go:(_A,_ok,G)=>e67bien(G[0])}}});
+  lose:{tag:"Hai nước lạnh nhạt",t:"Sứ đoàn bỏ về trong giận dữ. Người ta đổ lỗi cho ngươi.",go:(_A,_ok,G)=>e67bien(G[0])}}});
 ARC67.nc_tuc=arcFx("nc_tuc",{o:"nc",t:"Người ngoại tộc",w:"th",sj:"phong tục Cao Ly của ngươi",g:"Thái hậu không ưa người nước phiên. Áo váy, món ăn, điệu múa của ngươi đều bị soi. Giữ lấy mình mà vẫn được Đức Thọ cung chấp nhận.",
  p:[["s1","s2"],["c1","c2","c3","G.rumor","G.rival"],["t1"],["x1"]],
  B:{
@@ -826,8 +834,8 @@ ARC67.nc_tuc=arcFx("nc_tuc",{o:"nc",t:"Người ngoại tộc",w:"th",sj:"phong 
   {n:"Mời các phi tần cùng chơi",f:"keep",wx:"thêm người quen",lx:"Thái hậu chê ồn",rt:"Cả hậu cung cười vui.",rf:"Thái hậu sai người dẹp."},
   {n:"Lặng lẽ thắp hương một mình",f:"bend",wx:"tròn lễ mà không ồn",rt:"Ngươi thắp hương hướng về phương Đông."}]},
  c3:{h:"Giọng đọc Đại Hy",w:"th",t:"Có người chê ngươi bắt chước người Đại Hy quá giỏi mà lễ nghi lại lạ.",o:[
-  {n:"Ngày đêm luyện vận luật và giọng Đại Hy",f:"bend",wx:"giọng ngay ngắn hơn",rt:"Ba tháng sau giọng đọc của ngươi đã ngay ngắn."},
-  {n:"Viết một khúc hương ca mượn âm Hán tặng Hoàng thượng",need:["nsrv"],f:"keep",wx:"ngài thấy mới lạ",rt:"Hoàng thượng đòi ngươi đọc cho ngài nghe.",rf:"Có người nói ngươi viết bùa chú."}]},
+  {n:"Ngày đêm luyện cách gieo vần và giọng nói Đại Hy",f:"bend",wx:"giọng ngay ngắn hơn",rt:"Ba tháng sau giọng đọc của ngươi đã ngay ngắn."},
+  {n:"Viết một bài ca quê nhà, mượn chữ Hán ghi âm, tặng Hoàng thượng",need:["nsrv"],f:"keep",wx:"ngài thấy mới lạ",rt:"Hoàng thượng đòi ngươi đọc cho ngài nghe.",rf:"Có người nói ngươi viết bùa chú."}]},
  t1:{h:"Thái hậu mời ngươi chép kinh",w:"th",need:["th"],t:"Thái hậu bỗng gọi ngươi chép kinh cùng bà, ngồi cả buổi.",o:[
   {n:"Kể chuyện Phật giáo Cao Ly",wx:"Thái hậu tò mò",rt:"Thái hậu nghe say mê.",rf:"Thái hậu bảo ngươi im lặng mà chép."},
   {n:"Chép kinh cẩn thận, không nói",f:"bend",wx:"Thái hậu khen nết na",rt:"Thái hậu gật đầu."}]},
@@ -838,7 +846,7 @@ ARC67.nc_tuc=arcFx("nc_tuc",{o:"nc",t:"Người ngoại tộc",w:"th",sj:"phong 
  E:{win:{tag:"Hạc của Thái hậu",w:"th",t:"Thái hậu thương ngươi như con. Giữ được mình mà vẫn được chấp nhận, ngươi là người nước phiên đầu tiên làm được thế."},
   win2:{tag:"Con dâu Đại Hy",w:"th",t:"Thái hậu coi ngươi là người nhà. Ngươi đã thành người Đại Hy, dù trong lòng còn nhớ quê."},
   mid:{tag:"Được dung, chưa được thương",t:"Thái hậu thôi chê ngươi, nhưng cũng chưa thương."},
-  lose:{tag:"Mãi là người ngoài",t:"Thái hậu chán ghét ngươi hơn. Trong cung, người ta gọi ngươi là ‘con bé Hải Đông bắt chước’."}}});
+  lose:{tag:"Mãi là người ngoài",t:"Thái hậu chán ghét ngươi hơn. Trong cung, người ta gọi ngươi là ‘con bé Cao Ly học đòi’."}}});
 ARC67.nc_vuong=arcFx("nc_vuong",{o:"nc",t:"Ngai vàng cố quốc",w:"emp",sj:"cuộc tranh ngôi ở Cao Ly",g:"Phụ vương băng hà. Thế tử huynh và Vương thúc tranh ngôi, cả hai đều xin Đại Hy ủng hộ, và đều nhắm đến ngươi. Chọn phe nào, Đại Hy sẽ theo.",
  p:[["s1","s2"],["c1","c2","c3","G.night","G.spy"],["t1"],["x1"]],
  B:{
@@ -898,7 +906,7 @@ ARC67.td_an=arcFx("td_an",{o:"td",t:"Lật lại án cũ",w:"foe",sj:"án mưu p
   {n:"Gác lại, sống tiếp",e:"mid",lx:"mối thù chưa trả",rt:"Ngươi cất tờ sớ."}]}},
  E:{win:{tag:"Đã báo thù",w:"emp",t:"Án cũ được lật. Nhà ngươi được rửa oan, {foed} bị xử trảm, {foe} bị đày vào lãnh cung. Hoàng thượng thương ngươi chịu khổ.",go:()=>{S.avenged=true;const e=foe67();if(e){e.out=true;return `${e.name} bị phế vào lãnh cung.`}return""}},
   mid:{tag:"Cha được truy phong",t:"Cha ngươi được truy phục danh dự, nhưng kẻ thù vẫn ung dung. Ngươi nhẹ lòng được một nửa."},
-  lose:{tag:"Lật án bất thành",t:"Hoàng thượng thu hủy chứng cứ, cấm nhắc chuyện cũ. {foe} cười trên nỗi đau của ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: Sủng ${W.sung}.`}}}});
+  lose:{tag:"Lật án bất thành",t:"Hoàng thượng thu hủy chứng cứ, cấm nhắc chuyện cũ. {foe} cười trên nỗi đau của ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: ${sgStat(W.sung)}.`}}}});
 ARC67.td_ke=arcFx("td_ke",{o:"td",t:"Kẻ đứng sau màn",w:"maid",sj:"kẻ thật sự hại nhà ngươi",g:"Càng lần theo án cũ, ngươi càng thấy {foed} chỉ là con dao. Bàn tay cầm dao ở cao hơn. Tìm ra hắn, rồi chọn: trả thù kẻ nào, và trả bằng cách nào.",
  cast(A){A.n1=pk67(["Hộ bộ thượng thư","Lễ bộ thượng thư","Thái sư"]);return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.th"],["t1"],["x1"]],
@@ -908,7 +916,7 @@ ARC67.td_ke=arcFx("td_ke",{o:"td",t:"Kẻ đứng sau màn",w:"maid",sj:"kẻ th
   {n:"Hỏi thẳng {foe}, xem nàng biết gì",f:"foeTalk",wx:"biết cha nàng cũng bị ép",lx:"{foe} cảnh giác",rt:"{foe} buột miệng: cha nàng từng sợ {n1}.",rf:"{foe} bỏ đi, ánh mắt đầy nghi ngờ."}]},
  s2:{h:"Người gửi tiền cho ngươi",w:"maid",t:"Ngươi chợt nhớ: năm ấy có người lén gửi bạc nuôi ngươi ở lại. Người ấy là ai?",o:[
   {n:"Tìm lại người đưa bạc",f:"ally",wx:"có người cùng chí",lx:"không tìm được",rt:"Người đưa bạc là môn sinh cũ của cha, nay làm Ngự sử.",rf:"Dấu vết đã mất."},
-  {n:"Thôi, không đào sâu",wx:"bớt nguy",lx:"mất một đồng minh tiềm năng",rt:"Ngươi không tìm."}]},
+  {n:"Thôi, không đào sâu",wx:"bớt nguy",lx:"mất một người có thể thành đồng minh",rt:"Ngươi không tìm."}]},
  c1:{h:"Ngự sử giúp sức",w:"maid",t:"Ngự sử, môn sinh cũ của cha, xin gặp ngươi: ông có sổ sách chi tiêu bất minh của {n1}.",o:[
   {n:"Nhận sổ, giữ kỹ",f:"ledger",wx:"có chứng cứ lớn",lx:"giữ sổ là giữ lửa",rt:"Sổ sách về tay ngươi."},
   {n:"Bảo ông tự dâng lên",wx:"ngươi không lộ mặt",lx:"ông bị giáng",rt:"Ngự sử dâng sớ, triều đình xôn xao.",rf:"Ngự sử bị giáng ra ngoài."}]},
@@ -1105,7 +1113,7 @@ ARC67.ch_bi=arcFx("ch_bi",{o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật n
   mid:{tag:"Bí mật chìm xuống",t:"Chuyện cũ chìm xuống đáy giếng. Không ai được, không ai mất."},
   lose:{tag:"Liên lụy chuyện cũ",t:"Hoàng thượng xa lánh Thái hậu, kéo theo cả ngươi. Đức Thọ cung không còn đủ sức che chở."}}});
 /* ================= CON GÁI THẦY ĐỒ ================= */
-ARC67.thd_tho=arcFx("thd_tho",{o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi",g:"Thơ ngươi có thể làm rạng danh người cha nghèo. Hàn lâm viện sắp mở kỳ thi Tài nữ trong cung, và có kẻ đang chờ vu ngươi đạo thơ.",
+ARC67.thd_tho=arcFx("thd_tho",{o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi",g:"Thơ ngươi có thể làm rạng danh người cha nghèo. Hàn lâm viện sắp mở kỳ thi Tài nữ trong cung, và có kẻ đang chờ vu ngươi chép trộm thơ người khác.",
  cast(A){A.n1="Hàn lâm "+nmNew("m");castRv67(A,"v");return true},
  p:[["s1","s2"],["c1","c2","c3","G.rival","G.night"],["t1"],["x1"]],
  B:{
@@ -1121,8 +1129,8 @@ ARC67.thd_tho=arcFx("thd_tho",{o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"th�
  c2:{h:"Đề thi bị lộ",w:"maid",t:"Có kẻ gạ bán đề thi Tài nữ.",o:[
   {n:"Từ chối, báo Hàn lâm viện",f:"clean",wx:"tiếng thanh bạch",lx:"kẻ khác có thể mua",rt:"Hàn lâm viện đổi đề."},
   {n:"Mua đề",f:"cheat",wx:"biết trước đề",lx:"lộ thì ô danh",rt:"Đề là thật.",rf:"Đề giả, còn bị đồn ngươi mua đề."}]},
- c3:{h:"Hoàng thượng thử tài",w:"emp",need:["nsrv"],t:"Hoàng thượng ra một vế đối: ‘Nguyệt chiếu song tiền, song chiếu nguyệt.’",o:[
-  {n:"Đối ngay",wx:"ngài thán phục",rt:"Ngươi đối: ‘Hoa khai lâu ngoại, lâu khai hoa.’ Hoàng thượng vỗ án.",rf:"Ngươi đối chậm, ngài cười trêu."},
+ c3:{h:"Hoàng thượng thử tài",w:"emp",need:["nsrv"],t:"Hoàng thượng ra một vế đối: ‘Nguyệt chiếu song tiền, song chiếu nguyệt’ (trăng soi trước cửa sổ, cửa sổ soi trăng).",o:[
+  {n:"Đối ngay",wx:"ngài thán phục",rt:"Ngươi đối: ‘Hoa khai lâu ngoại, lâu khai hoa’ (hoa nở ngoài lầu, lầu nở hoa). Hoàng thượng vỗ án.",rf:"Ngươi đối chậm, ngài cười trêu."},
   {n:"Xin ngài cho một đêm nghĩ",wx:"đối chỉnh hơn",lx:"mất cái duyên nhanh trí",rt:"Sáng hôm sau ngươi dâng vế đối."}]},
  t1:{h:"Đêm trước kỳ thi",w:"maid",t:"Đêm trước kỳ thi, có người lén để vào phòng ngươi một tập thơ cổ chép tay, như để gài tội.",o:[
   {n:"Đem nộp Hàn lâm viện ngay",wx:"lật được bẫy",rt:"Hàn lâm viện tra ra người gài.",rf:"Không tra ra ai."},
@@ -1139,7 +1147,7 @@ ARC67.thd_sach=arcFx("thd_sach",{o:"thd",t:"Bản thảo của cha",w:"maid",sj:
  cast(A){A.n1=pk67(["Hộ bộ thượng thư","Lễ bộ thượng thư","Công bộ thượng thư"]);return true},
  p:[["s1","s2"],["c1","c2","c3","G.gift","G.th"],["t1"],["x1"]],
  B:{
- s1:{h:"Rương sách cũ",w:"maid",t:"Mẹ gửi vào rương sách của cha. Trong có bộ ‘Trị quốc sách’, chương cuối chỉ đích danh {n1} tham ô đê điều.",o:[
+ s1:{h:"Rương sách cũ",w:"maid",t:"Mẹ gửi vào rương sách của cha. Trong có bộ ‘Trị quốc sách’, chương cuối chỉ đích danh {n1} tham ô bạc đắp đê.",o:[
   {n:"Đọc kỹ, chép thêm bản",wx:"hiểu sâu sách cha",lx:"giữ sách là giữ lửa",rt:"Ngươi chép xong một bản."},
   {n:"Cất kỹ, chưa đọc",wx:"chưa vướng",lx:"chưa biết hết",rt:"Rương sách nằm dưới gầm giường."}]},
  s2:{h:"{n1} nghe phong thanh",w:"maid",t:"Phủ {n1} gửi quà: ‘Nghe nói cha {N} viết được sách quý, xin được mua lại.’",o:[
@@ -1159,7 +1167,7 @@ ARC67.thd_sach=arcFx("thd_sach",{o:"thd",t:"Bản thảo của cha",w:"maid",sj:
   {n:"Nhận",f:"deal",wx:"mẹ được an nhàn",lx:"phụ lòng cha",rt:"Bạc gửi về quê."}]},
  x1:{h:"Sách ra đời hay không",w:"emp",t:"Đến lúc quyết số phận ‘Trị quốc sách’.",o:[
   {n:"Dâng trọn bộ lên Hoàng thượng",e:["win","lose"],rt:"Hoàng thượng cho khắc in, {n1} bị tra.",rf:"{n1} ra tay trước, sách bị cấm, ngươi bị trách."},
-  {n:"Chỉ in phần không nhắc tên ai",e:["mid","lose"],rt:"Sách in ra, danh cha vang khắp sĩ lâm.",rf:"{n1} vẫn chặn, sách không in được."},
+  {n:"Chỉ in phần không nhắc tên ai",e:["mid","lose"],rt:"Sách in ra, danh cha vang khắp giới nho sĩ.",rf:"{n1} vẫn chặn, sách không in được."},
   {n:"Đốt theo lời {n1}",if:A=>A.f.deal,e:"mid",lx:"sách cha mất",rt:"Lửa liếm sạch tâm huyết của cha."}]}},
  E:{win:{tag:"Sách cha được khắc in",w:"emp",t:"‘Trị quốc sách’ được khắc in, {n1} bị cách chức. Danh cha ngươi vang khắp thiên hạ; Hoàng thượng nhìn ngươi như một người có học thức thật sự."},
   mid:{tag:"Sách cha còn một nửa",t:"Sách cha còn lại một nửa trên đời. Ngươi giữ được mình."},
@@ -1189,7 +1197,7 @@ ARC67.thd_tro=arcFx("thd_tro",{o:"thd",t:"Học trò của cha",w:"maid",sj:"chu
  x1:{h:"Định đoạt khoa án",w:"emp",t:"Hoàng thượng hỏi ngươi: nên xử khoa án này thế nào?",o:[
   {n:"Tâu: xử nghiêm kẻ mua đề, trả công bằng cho sĩ tử",e:["win","lose"],rt:"Kẻ mua đề bị trị tội, {n1} được ghi tên bảng vàng.",rf:"Chứng cứ không đủ, ngươi bị trách xen việc triều."},
   {n:"Tâu: chỉ cần trả lại tên cho người bị oan",e:["mid","lose"],rt:"{n1} được ghi tên, không ai bị xử.",rf:"Án bị gác lại."},
-  {n:"Thưa: việc triều, thiếp không dám bàn",e:"mid",lx:"học trò cha chịu thiệt",rt:"Ngươi im lặng."}]}},
+  {n:"Thưa: việc triều, thần thiếp không dám bàn",e:"mid",lx:"học trò cha chịu thiệt",rt:"Ngươi im lặng."}]}},
  E:{win:{tag:"Trả công bằng cho sĩ tử",w:"emp",t:"Khoa án được xử công minh. Sĩ tử khắp nơi truyền tụng tên ngươi; {n1} làm quan, nhớ ơn cha con ngươi."},
   mid:{tag:"Học trò được ghi tên",t:"{n1} được ghi tên bảng vàng. Kẻ mua đề vẫn ung dung, nhưng học trò của cha đã có đường."},
   lose:{tag:"Bị trách xen việc triều",t:"Hoàng thượng trách ngươi xen chuyện khoa cử. Nhà quan mua đề thù ngươi.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])}}});
@@ -1230,7 +1238,7 @@ function e67srvUp(n){try{if(S.srv&&!S.srv.risen&&typeof isSrv==="function"&&isSr
   if((S.srv.rk||0)<mx){S.srv.rk=(S.srv.rk||0)+1;S.srv.mp=0;S.srv.ex={};try{if(typeof exSrvDrop==="function")exSrvDrop()}catch(e){}
    log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}</b> (không qua khảo hạch).`);return `Được thăng ${SRK.maid[S.srv.rk]}, không qua khảo hạch.`}}}catch(e){console.error(e)}return e67merit(n)}
 function e67merit(n){try{if(S.srv&&!S.srv.risen&&typeof srvMerit==="function"){srvMerit(n);return `Công lao +${n}.`}}catch(e){}return""}
-ARC67.cnv_chu=arcFx("cnv_chu",{o:"cnv",t:"Bí mật của chủ nhân",w:"mis",sj:"bí mật của {mis}",g:"Đêm trực, ngươi thấy {mis} lén đốt một bức thư và giấu một gói thuốc. Biết bí mật của chủ là cầm dao hai lưỡi: giữ thì được tin, lộ thì mất mạng nghề.",
+ARC67.cnv_chu=arcFx("cnv_chu",{o:"cnv",t:"Bí mật của chủ nhân",w:"mis",sj:"bí mật của {mis}",g:"Đêm trực, ngươi thấy {mis} lén đốt một bức thư và giấu một gói thuốc. Biết bí mật của chủ là cầm dao hai lưỡi: giữ thì được tin, lộ thì mất mạng như chơi.",
  p:[["s1","s2"],["c1","c2","c3","G.srv","G.spy"],["t1"],["x1"]],
  B:{
  s1:{h:"Đêm trực",w:"mis",t:"Nửa đêm, ngươi thấy {mis} đốt thư bên lò sưởi, tay run run. Nàng ngẩng lên, bắt gặp ánh mắt ngươi.",o:[
@@ -1278,7 +1286,7 @@ ARC67.cnv_ban=arcFx("cnv_ban",{o:"cnv",t:"Chị em đồng hương",w:"maid",sj:
  c3:{h:"Thu Cúc ra tay trước",w:"maid",t:"Thu Cúc đặt một chiếc khăn của ngươi cạnh hộp trang sức, như muốn kéo ngươi vào.",o:[
   {n:"Lấy lại khăn trước khi ai thấy",wx:"thoát bẫy",lx:"bị nghi",rt:"Ngươi lấy lại khăn kịp.",rf:"Chưởng sự thấy khăn của ngươi."},
   {n:"Báo trước với chưởng sự",lx:"Thu Cúc biết ngươi đề phòng",wx:"chưởng sự biết có kẻ gài",rt:"Chưởng sự nhíu mày về phía Thu Cúc."}]},
- t1:{h:"Ngày xử",w:"mis",t:"Mai Xuân Đào bị xử. Nếu thua, nàng bị đánh ba mươi trượng và đày Tân Giả khố.",o:[
+ t1:{h:"Ngày xử",w:"mis",t:"Ngày mai, Xuân Đào bị đem ra xử. Nếu thua, nàng bị đánh ba mươi trượng và đày Tân Giả khố.",o:[
   {n:"Tìm người làm chứng",f:"wit",wx:"có người làm chứng",lx:"không ai dám",rt:"Một tiểu thái giám nhận sẽ nói.",rf:"Không ai dám làm chứng."},
   {n:"Chuẩn bị lời bênh",wx:"lời lẽ chặt",rt:"Ngươi thức đêm soạn lời."}]},
  x1:{h:"Phiên xử ở sân sau",w:"mis",t:"Cả cung đứng xem. Xuân Đào quỳ giữa sân.",o:[
@@ -1360,7 +1368,7 @@ ARC67.s_than=arcFx("s_than",{o:"*",ok:nsrv67,t:"Người thân thất lạc",w:"
   {n:"Cho là trùng hợp",wx:"không nghi oan người thân",lx:"có thể là cài người",rt:"Ngươi bỏ qua."}]},
  c1:{h:"Hắn xin việc ở cung ngươi",w:"eun",t:"{n1} xin được về hầu cung ngươi.",o:[
   {n:"Nhận",f:"took",wx:"có người thân bên cạnh",lx:"hắn là tai mắt người khác",rt:"{n1} chăm chỉ, trung thành.",rf:"Ngươi bắt gặp hắn lục thư từ."},
-  {n:"Từ chối, giới thiệu nơi khác",wx:"giữ khoảng cách",lx:"hắn buồn",rt:"{n1} về hầu Ngự thiện phòng."}]},
+  {n:"Từ chối, tiến cử hắn sang nơi khác",wx:"giữ khoảng cách",lx:"hắn buồn",rt:"{n1} về hầu Ngự thiện phòng."}]},
  c2:{h:"{v} nhắc khéo",w:"v",need:["v"],t:"{v} cười: ‘Nghe nói {goi} có người thân trong đám thái giám. Thật thú vị.’",o:[
   {n:"Thản nhiên nhận",wx:"không ai bắt bẻ được",rt:"{v} cụt hứng."},
   {n:"Phản đòn: hỏi ai đưa hắn vào",wx:"{v} lộ mình",rt:"{v} khựng lại.",rf:"{v} cười khẩy."}]},
@@ -1378,7 +1386,7 @@ ARC67.s_than=arcFx("s_than",{o:"*",ok:nsrv67,t:"Người thân thất lạc",w:"
   win2:{tag:"Đoàn tụ người thân",t:"Hoàng thượng thương ngươi có người thân, cho {n1} hầu cận. Ngươi có thêm một người trung thành."},
   mid:{tag:"Người thân đi xa",t:"{n1} đi xa. Ngươi giữ được mình, lòng hơi trống."},
   lose:{tag:"Bị người thân liên lụy",t:"Chuyện {n1} thành cớ để người ta nói ngươi cài tai mắt."}}});
-ARC67.s_thu=arcFx("s_thu",{o:"*",ok:nsrv67,t:"Bức mật thư",w:"maid",sj:"bức mật thư nhặt được",g:"Ngươi nhặt được một bức thư rơi trong Ngự hoa viên, không đề tên người gửi. Trong thư là một kế hoạch hãm hại một phi tần. Ai viết, ai bị hại, và ngươi sẽ làm gì?",
+ARC67.s_thu=arcFx("s_thu",{o:"*",ok:nsrv67,t:"Bức mật thư",w:"maid",sj:"bức mật thư nhặt được",g:"Ngươi nhặt được một bức thư rơi trong Ngự hoa viên, không đề tên người gửi. Trong thư là một mưu kế hãm hại một phi tần. Ai viết, ai bị hại, và ngươi sẽ làm gì?",
  cast(A){if(!castRv67(A,"v"))return false;castRv67(A,"v2");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.hh"],["t1"],["x1"]],
  B:{
@@ -1483,7 +1491,7 @@ ARC67.s_dich=arcFx("s_dich",{o:"*",ok:nsrv67,t:"Mùa dịch đậu mùa",w:"doc"
  c3:{h:"Hoàng thượng sốt",need:["nsrv"],w:"emp",t:"Hoàng thượng sốt nhẹ, cả cung hoảng loạn.",o:[
   {n:"Xin vào hầu",wx:"ngài nhớ ơn",lx:"bị lây",rt:"Ngài khỏi, nắm tay ngươi cảm động.",rf:"Ngài khỏi, ngươi mệt lả."},
   {n:"Chép kinh cầu an",wx:"Thái hậu khen",rt:"Thái hậu cảm động."}]},
- t1:{h:"Dịch lên đỉnh",w:"doc",t:"Dịch lên đỉnh. Thái y viện cần người đứng ra điều phối.",o:[
+ t1:{h:"Dịch lên đỉnh",w:"doc",t:"Dịch lên đỉnh. Thái y viện cần người đứng ra lo liệu.",o:[
   {n:"Đứng ra điều phối",wx:"cứu nhiều người",rt:"Dịch dần lui.",rf:"Việc rối, ngươi kiệt sức."},
   {n:"Góp bạc mua thuốc",wx:"có thuốc",rt:"Thuốc về đủ."}]},
  x1:{h:"Dịch qua",w:"emp",t:"Dịch qua. Hoàng thượng xét công những người đã giúp.",o:[
@@ -1492,7 +1500,7 @@ ARC67.s_dich=arcFx("s_dich",{o:"*",ok:nsrv67,t:"Mùa dịch đậu mùa",w:"doc"
  E:{win:{tag:"Người cứu cả kinh thành",w:"emp",t:"Phương chủng đậu cứu vạn người. Hoàng thượng và Thái hậu đều ghi công ngươi."},
   mid:{tag:"Qua mùa dịch",t:"Mùa dịch qua. Ngươi còn sống, người của ngươi bình an."},
   lose:{tag:"Công bị cướp",t:"Thái y viện cướp công, còn bảo ngươi làm liều."}}});
-ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=18)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ có vị ngọt, và cái giá thật.",
+ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=18)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ thì ngọt, nhưng cái giá phải trả là thật.",
  cast(A){return !!man67(A)},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.ill"],["t1"],["x1"]],
  B:{
@@ -1650,7 +1658,7 @@ ARC67.st_con=arcFx("st_con",{o:"st",ok:()=>nsrv67()&&S.kids.some(k=>k.alive),t:"
   {n:"Để chúng chơi, mở lối làm hòa",wx:"hai nhà bớt căng",lx:"bị lợi dụng",rt:"Mẹ đứa kia gửi lời cảm ơn.",rf:"Đứa kia mách lẻo chuyện trong cung ngươi."},
   {n:"Cấm",wx:"an toàn",lx:"con buồn",rt:"Con ngươi buồn mấy ngày."}]},
  t1:{h:"Một lời đồn về con",w:"maid",t:"Có lời đồn con ngươi không giống Hoàng thượng.",o:[
-  {n:"Xin Hoàng thượng làm lễ nhỏ chứng minh",wx:"dập tắt lời đồn",lx:"ngài phật ý vì bị nghi",rt:"Lời đồn tắt ngấm.",rf:"Ngài bực vì chuyện bị nhắc."},
+  {n:"Xin Hoàng thượng làm lễ nhỏ, tỏ rõ con là cốt nhục của ngài",wx:"dập tắt lời đồn",lx:"ngài phật ý vì bị nghi",rt:"Lời đồn tắt ngấm.",rf:"Ngài bực vì chuyện bị nhắc."},
   {n:"Tìm kẻ tung tin",wx:"bắt được kẻ đặt điều",lx:"không tìm ra",rt:"Kẻ tung tin bị phạt.",rf:"Không tìm ra ai."}]},
  x1:{h:"Ngày con được định vị",w:"emp",t:"Hoàng thượng định phong hiệu và chỗ học cho các hoàng tự, công chúa. Mẹ nào cũng đến xin.",o:[
   {n:"Xin cho con học ở Thượng thư phòng cùng Thái tử",e:["win","lose"],rt:"Hoàng thượng chuẩn, con ngươi ngồi cạnh Đông cung.",rf:"Hoàng thượng cho là ngươi tham."},

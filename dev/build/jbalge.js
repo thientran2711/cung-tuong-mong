@@ -75,7 +75,12 @@ BAL.ge={
  bd_san_1:{tai:50,danh:35},bd_san_2:{sung:50,duc:35},bd_san_3:{tamco:45,mat:2},bd_san_4:{duc:35,suc:40},
  bd_soi_1:{tamco:45,danh:45},bd_soi_2:{sung:45,duc:40},bd_soi_3:{mat:2,tamco:45},bd_soi_4:{sung:45},
  bd_tuyet_1:{duc:45,danh:35},bd_tuyet_2:{tamco:40,danh:40},bd_tuyet_3:{mat:2,tamco:45},bd_tuyet_4:{tai:55},
- bd_hen_1:{duc:40},bd_hen_2:{sung:55,tamco:40},bd_hen_3:{duc:40,danh:35},bd_hen_4:{tamco:45}},
+ bd_hen_1:{duc:40},bd_hen_2:{sung:55,tamco:40},bd_hen_3:{duc:40,danh:35},bd_hen_4:{tamco:45},
+ /* Phù Tang wave (brief E35, jgedata_pt.js): pt_hai pt_su pt_tang pt_dang (same scales and sizes as the pilots) */
+ pt_hai_1:{duc:40,danh:35},pt_hai_2:{tamco:45,mat:2},pt_hai_3:{sung:45,tamco:40},pt_hai_4:{suc:45,danh:30},
+ pt_su_1:{danh:45,duc:35},pt_su_2:{tai:55,danh:30},pt_su_3:{mat:2,tamco:45},pt_su_4:{tamco:40,danh:40},
+ pt_tang_1:{duc:45,danh:35},pt_tang_2:{duc:40,sung:40},pt_tang_3:{mat:2,tamco:45},pt_tang_4:{duc:40},
+ pt_dang_1:{tamco:45,danh:35},pt_dang_2:{duc:40},pt_dang_3:{mat:2,sung:40},pt_dang_4:{duc:40,tai:40}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -121,7 +126,12 @@ BAL.ge={
  bd_san_1:{danh:-8,tai:-4},bd_san_2:{sung:-8,danh:-4},bd_san_3:{danh:-10,duc:-4},bd_san_4:{sung:-8,danh:-6},
  bd_soi_1:{rank:-1,danh:-12},bd_soi_2:{danh:-10,sung:-4},bd_soi_3:{sung:-10,danh:-6},bd_soi_4:{danh:-8,sung:-6},
  bd_tuyet_1:{danh:-8,duc:-4},bd_tuyet_2:{danh:-8,sung:-4},bd_tuyet_3:{rank:-1,danh:-10},bd_tuyet_4:{danh:-6},
- bd_hen_1:{sung:-10,danh:-6},bd_hen_2:{danh:-10,sung:-6},bd_hen_3:{danh:-8},bd_hen_4:{danh:-8,sung:-4}},
+ bd_hen_1:{sung:-10,danh:-6},bd_hen_2:{danh:-10,sung:-6},bd_hen_3:{danh:-8},bd_hen_4:{danh:-8,sung:-4},
+ /* Phù Tang wave (brief E35, jgedata_pt.js): pt_hai pt_su pt_tang pt_dang (same scales and sizes as the pilots) */
+ pt_hai_1:{danh:-8,duc:-4},pt_hai_2:{danh:-10,tamco:-4},pt_hai_3:{sung:-10,danh:-6},pt_hai_4:{sung:-8,danh:-4},
+ pt_su_1:{danh:-10,sung:-4},pt_su_2:{danh:-8,tai:-4},pt_su_3:{rank:-1,danh:-10},pt_su_4:{sung:-10,danh:-6},
+ pt_tang_1:{danh:-8,duc:-4},pt_tang_2:{danh:-6},pt_tang_3:{sung:-10,danh:-6},pt_tang_4:{danh:-8},
+ pt_dang_1:{danh:-8,tamco:-4},pt_dang_2:{danh:-8,duc:-4},pt_dang_3:{sung:-10,danh:-6},pt_dang_4:{danh:-8,sung:-4}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -168,9 +178,30 @@ BAL.ge={
  bd_san_1:{rank:1,danh:30,tai:10,rel:8},bd_san_2:{rank:1,sung:30,danh:18,rel:6},bd_san_3:{danh:30,tamco:10,mat:2,rel:8},bd_san_4:{danh:20,duc:12,bac:300,rel:6},
  bd_soi_1:{danh:36,sung:18,rel:8},bd_soi_2:{rank:1,danh:30,duc:10,rel:8},bd_soi_3:{rank:1,danh:30,tamco:10,rel:8},bd_soi_4:{seat:"TM",danh:30,sung:15,rel:8},
  bd_tuyet_1:{danh:36,duc:12,rel:8},bd_tuyet_2:{rank:1,danh:30,tamco:10,rel:8},bd_tuyet_3:{danh:30,mat:2,tamco:10,rel:8},bd_tuyet_4:{danh:30,tai:10,rel:8},
- bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8}},
- help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
- npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
+ bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8},
+ /* Phù Tang wave (brief E35, jgedata_pt.js): pt_hai pt_su pt_tang pt_dang (same scales and sizes as the pilots) */
+ pt_hai_1:{rank:1,danh:30,duc:10,rel:8},pt_hai_2:{rank:1,danh:30,tamco:10,mat:2,rel:8},pt_hai_3:{rank:1,sung:30,danh:18,rel:6},pt_hai_4:{danh:20,suc:12,bac:300,rel:6},
+ pt_su_1:{rank:1,danh:30,duc:10,rel:8},pt_su_2:{rank:1,danh:30,tai:10,rel:8},pt_su_3:{rank:1,danh:30,tamco:10,rel:8},pt_su_4:{danh:36,tamco:12,rel:8},
+ pt_tang_1:{rank:1,danh:30,duc:10,rel:8},pt_tang_2:{rank:1,sung:24,danh:24,rel:8},pt_tang_3:{rank:1,danh:30,mat:2,rel:8},pt_tang_4:{danh:24,duc:12,bac:300,rel:6},
+ pt_dang_1:{rank:1,danh:30,tamco:10,rel:8},pt_dang_2:{danh:30,duc:12,rel:8},pt_dang_3:{rank:1,danh:30,sung:10,rel:8},pt_dang_4:{danh:36,tai:12,rel:8}},
+ /* GE10 (design §2.9 "Helping"): her help on an NPC's road (the jnroad help hồi) moves that NPC's grand ending — help = +pull on the ending
+    the NPC leans toward most (it stays open), a betrayal = −push on it (at 0 pull it turns fail-only: sabotage can close one); the rival she
+    told gets the same +pull (two-way, laws 1–2, like BAL.nroad.help). rw = her reward when an NPC she helped (no betrayal) then unlocks. */
+ help:{rw:{danh:6,duc:3},pull:2,push:2},
+ /* GE09 NPC parity (design §2.9, OD:L1386/L1403/L1601 (4)): an NPC consort whose road is a live branch (GE_DATA) gets the same funnel —
+    pull / closing / lean from HER choices (each stage of each chapter she plays: she picks one option of that stage, weighted by her nature
+    via jmind mindPick, no flat roll) + her own Đức + the chapter ends; at the end of HER road (the chapter that closes it) the Hồi kết nhánh:
+    Ngã rẽ 1/2 picked from her nature (nat: trait → [weights of the 4 / 3 answers]) × (1 + pull of the open ending that owns the pair × pw);
+    «Theo người ấy» only with a real bond (BAL.ge.bond.sis toward a living consort). Same resolve, odds, shading, seat locks as hers.
+    w.lean = weight an option tagged to her nature's side gets; w.pull = weight of an option that pulls an ending her nature points to;
+    w.close = factor on an option that would close / doom an open ending her nature points to (she shies away, like a player aiming at it).
+    leave = summits after which an NPC leaves the palace (a Hoàng hậu never leaves this way); news = the world news pop-up for an NPC unlock (GE08). */
+ npc:{on:true,
+  nat:{"Ân cần":{r1:[3,1,1,1],r2:[4,1,1]},"Khiêm nhường":{r1:[3,1,1,1],r2:[3,1,2]},"Tham vọng":{r1:[1,4,1,1],r2:[1,4,1]},
+   "Kiêu ngạo":{r1:[2,3,1,1],r2:[1,4,1]},"Xảo quyệt":{r1:[1,3,1,1],r2:[1,4,1]},"Kín đáo":{r1:[1,1,3,1],r2:[1,1,4]}},
+  kind:["Ân cần","Khiêm nhường"],cruel:["Xảo quyệt","Kiêu ngạo","Tham vọng"],
+  w:{lean:3,pull:3,close:.25},pw:1,bondMul:2,
+  leave:["FREE","NUN","FOLLOW","REUNION","NV"],news:true},
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
     a random bot rarely does; the funnel leaves 1–2 open by .11; a bot that plays kindly / cruelly for most of a life gets that shading */
  target:{inChar:[.30,.60],random:[0,.20],open11:[1,2.6],shade:.70},

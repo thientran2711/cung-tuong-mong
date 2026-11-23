@@ -107,12 +107,12 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  const guilty=light=>{try{window.__framesMe=(window.__framesMe||0)+1}catch(e){}S.framedBy=pp.a;
   if(light){apply({danh:BAL.eff.jtruth.danhGuilty});const t=`Ngươi nhận tội, xin khoan hồng: Danh ${balSg(BAL.eff.jtruth.danhGuilty)}. Kẻ vu oan vẫn chưa lộ mặt.`;log(t);Q.push({t:"Nhận tội",who:pMe(),h:`<p>${t}</p>`});return}
   const A0=ACTX.a;ACTX.a=a;let d=0;window.__truthAuto=1;try{d=framed(S,why)}finally{window.__truthAuto=0;ACTX.a=A0}
-  const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, Sủng -10, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
+  const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, ${sgStat(-BAL.eff.j8.framedSung)}, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
  const go=(o,how)=>()=>{if(roll(clamp(o)))clear(how);else guilty(false)};
  const H="minh oan được thì kẻ vu oan bị lộ, bị phạt; hỏng thì ngươi mang tội: mất Danh, Sủng, bị phạt",RK="có rủi ro";
  const O=[];
  O.push({n:"Xin tra sổ Kính sự phòng",fx:{},p:clamp(base+(ks?T.ksB:-10)),hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
- O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},p:clamp(base+T.wB),hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`lòng ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
+ O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},p:clamp(base+T.wB),hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`thiện cảm ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
  O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:BAL.eff.jtruth.bacFx},p:clamp(base+T.tyB),hint:H,risk:RK,j67:`tốn: Bạc ${balSg(BAL.eff.jtruth.bacFx)}`,go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
  O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},p:clamp(base+T.evB*2+10),hint:H,risk:RK,j67:`tốn: ${balAb(BAL.eff.jtruth.evGo)} chứng cứ về ${a.name}`,go:()=>{evA(S,a,BAL.eff.jtruth.evGo);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
  O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});

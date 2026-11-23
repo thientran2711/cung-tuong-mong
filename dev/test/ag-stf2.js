@@ -19,7 +19,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r1=await p.evaluate(()=>{const m=srvM();const o=liveRivals(true).find(v=>v!==m&&(v.staff||[]).some(x=>x.role==="maid"));if(!o)return{skip:1};const x=o.staff.find(z=>z.role==="maid");
   S.srv.met.push(x.sid);const h0=hostility;hostility=()=>99;S.bac=100;used=0;const out={};
   const spy=(name)=>{const f=window[name];const c={n:0,a:null};window[name]=function(){c.n++;c.a=[...arguments];return f.apply(this,arguments)};return [c,()=>window[name]=f]};
-  try{const html=srvStaffHTML();out.btn=/data-cnv="poison"/.test(html);
+  try{const html=(()=>{const L=srvColleagues(),p0=PG.staff;let h="";try{L.forEach((_,i)=>{PG.staff=i;h+=srvStaffTabHTML()})}finally{PG.staff=p0}return h})();/* every card of the Đồng liêu pager */out.btn=/data-cnv="poison"/.test(html);
    /* the player's button → mlPoisonDo(master, S, …) */
    let [c,undo]=spy("mlPoisonDo");const d0=die;die=()=>{};const r0=roll;roll=()=>false;try{srvStaffAct("poison",x)}finally{roll=r0;die=d0;undo()}out.me=c.n===1&&c.a[0]===m&&c.a[1]===S&&c.a[3]===x;
    /* an NPC maid's option → the same mlPoisonDo */

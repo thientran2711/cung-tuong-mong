@@ -114,8 +114,7 @@ window.mindWho=mindWho;function mindWho(o){if(o.name===S.name||o.me)return S;if(
  if(!who)return p0.apply(this,arguments);
  try{const rows=mindRows(who);const h0=p0.call(this,Object.assign({},o,{__mind:1}));
   if(who!==S&&!isKid(who)&&/<div class="pcf">/.test(h0)){const kr=kitRows(rows);
-   if(h0.includes('<h4 class="kpst">Sở trọng</h4>'))return h0.replace('<h4 class="kpst">Sở trọng</h4>','<h4 class="kpst">Sở trọng</h4>'+kr);
-   return h0.replace('<div class="pcf">',`<div class="pcf"><div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kr}</div>`)}
+   return h0.replace('<div class="pcf">',`<div class="pcf"><div class="kpsec kpno">${kr}</div>`)}/* owner 21/11: one label column, no block heading */
   const L=(o.lines||[]).slice();for(const [k,v,c] of rows)if(c==="t"&&!L.some(x=>new RegExp("^"+k).test(String(x))))L.push(`${k}: <b>${v}</b>`);
   if(isKid(who)&&!L.some(x=>/Tính nết/.test(x))){const n=traitsOf(who)[0];if(n)L.push(`Tính nết: <b>${n}</b>`)}
   return p0.call(this,Object.assign({},o,{__mind:1,lines:L}))}catch(e){console.error("jmind card",e);return p0.apply(this,arguments)}}})();
@@ -125,7 +124,7 @@ const loyW=who=>!!who&&typeof who==="object"&&who.loyal!=null&&!isRiv(who);/* se
 function bump(who,n){if(who==="th")ap(S,{th:n});else if(loyW(who))who.loyal=Math.max(0,Math.min(100,who.loyal+n));else if(typeof affAdd==="function"&&typeof who==="object")affAdd(who,S,n)}
 function giftKeys(e){const K=[];if(!e)return K;if(e.wk){K.push("art:"+e.wk.a)}else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
 /* the word of the regard that moves (Thái hậu's is "Thái hậu", a servant's "Lòng", others "thiện cảm") */
-function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Lòng":"thiện cảm"}
+function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Thiện cảm":"thiện cảm"}
 /* a liked gift: a little more regard (everyone but the Emperor, whose likes already work through j2/j83) */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];let lk=false,dk=null,G0=[];const who=r==="th"?"th":r==="maid"?S.maid:r;
  try{if(e&&!e.h&&who&&who!=="emp"&&r!==S&&a===S){const G=G0=giftKeys(e);lk=G.some(k=>mindLike(who).includes(k))&&!(jdisOwn(who)&&typeof disHit==="function"&&disHit(who,e));
