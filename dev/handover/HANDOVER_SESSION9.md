@@ -2652,3 +2652,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:20Z) LC8 READY (setup rebuilt, log land-chain-8.md). SELSCENE brief now has ADDENDUM 1–7 (yard, narrator story, −1/0/+1, yard drama, face-first names, 12 tú nữ, her-round knowledge).
 - (22:22Z) HIST-TUYENTU §7 (12 yard-drama seeds, [K]/[D] tagged) 609f5b05 → SELSCENE; expert archived.
 - (22:33Z) ADDENDUM 10 (pools ≥60 yard / ≥40 hành xử / ≥40 đối đáp, no-repeat across lives). Writers: SELW-YARD session_01Rc5AsKtskVo6wA385KED1J, SELW-TESTS session_01Rc5AsJkYBBgWLqR3uJ37eH (content in dev/handover/content/selscene/, format = HIST-TUYENTU §8). Expert reopened for §8 (design + format).
+- (22:38Z) W4 map-label-overlap READY 2a17fc28 → SMALL reviewer-lander session_01Rc5AsMK4aJrehLVxmNekUh. ADDENDUM 11 (drama knowledge) to SELSCENE + SELW-YARD.
