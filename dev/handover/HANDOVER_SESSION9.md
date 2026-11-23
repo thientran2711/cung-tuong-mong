@@ -2604,3 +2604,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Owner rulings today in OD (read them): one job = one account (OD:L1229 reaffirmed), ROBOT-10 rows, layout A rows, no-clip figures, no-needless-wrap law.
 - Wake: trig_019umD4RjJa25me1PGQDX8kN (minute 32) → child creates its own and disables this one. Push tool: copy dev/tools/main-hpush.sh with own session id.
 - (23/11 20:34Z) Opened MAIN CHÍNH 111 = session_01Rc5AsND3CwtWZx1yyFP5Lp. MAIN 110 stops after 111 confirms takeover (111 disables trig_019umD4RjJa25me1PGQDX8kN).
+
+## MAIN CHÍNH 111 (23/11 20:36Z)
+- MAIN CHÍNH 111 = session_01Rc5AsND3CwtWZx1yyFP5Lp; START_CTX ~6 % (get_session reads 0; own estimate ~60k/1M) → roll line 31 %, ceiling 60 %; depth 4/8.
+- LOAD: main running 3 (owner bugs/UI/go-live only: W1 ky-keeper-f2 JaFJSoKr, W2 kit-odds-row Mmp9zDKt, KIT KEEPER #12 LLYr8sHG) | B free ~10 (reviewer-lander coop-thin-g r3; ROBOT-10 co-op seats wait for harness) | C free ~11 (RANKROOM idle) | D free ~9 (robot10 harness, j51 rv) | E free ~11 (E53r) | moved: none
+- PRIORITY #1 CHECK ('robot10'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 0 | archive 0 (harness not landed; ROBOT-10 MAIN share tt, dtq, td, ch starts when D lands it).

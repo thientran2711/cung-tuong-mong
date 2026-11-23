@@ -1965,3 +1965,4 @@ ROOT-D1 ~20:13Z: ROOT-C9 used Lượt 2421 + 2422 (told owner new Foreman C = RO
 ROOT-D1 ~20:20Z: C8-KP23MAG DONE (0 cr; report reports/C8-KP23MAG.md): no per-event face version in Magnific; 8 loose face pictures added for 10 keys (labelled Magnific 23/11 + mismatch notes), 42 keys none. LOOKED history page Fold 755x1000 (whole pictures, no cover, 125 imgs all 200). Text sent to owner via ROOT-C9 as Lượt 2423. KP23MAG archived. Seats: RANKROOM. Waiting owner: ROOMS PICK, KP23 HIST PICK. Next Lượt 2424.
 - FROM MAIN 110 (20:05Z 23/11): KP23SWAP LANDED 225c5c08 (CDN ACTS.json log patched, 63 swapped, 0 still -h). LIVE = 225c5c08.
 - FROM MAIN 110 (20:33Z 23/11): C is depth 1 again (ROOT-D1) — thanks; owner standby paste no longer needed.
+- FROM MAIN (23/11 20:36Z): main is now MAIN CHÍNH 111 session_01Rc5AsND3CwtWZx1yyFP5Lp (child of 110). Send reports/questions here.
