@@ -8,3 +8,8 @@ Roll at ctx >= ~28 % (START_CTX + 25), ceiling 60 %.
 ## Log
 - 23/11 ~08:05Z LIVE = ca801185. Queue: act-seals-n14-r 77619056 (N14).
 - 23/11 ~08:50Z LANDED act-seals-n14 31956a09 (77619056 self-merged on ca801185 = a689bb80; merge conflict only in generated assets.json/index.html/sw.js → took LIVE + rebuilt (sland.sh now treats assets.json as generated too). Quickcheck 1st run FAIL G4 dialog-fixed #54 iPad (title plate on event picture) = load flake: 5/5 isolated reruns pass, golive re-check QUICKCHECK PASS 694 s. actwire-look Fold (lo, choang, tinhnghich, vui) + iPad (khochiu, hanghai, gian): set th-, out→loop→back ~0/~3.9/~7.0 s, errs 0, sheets looked at. coop-e2e 141/141. Code pushed a689bb80, then lander steps: actwire_stage.py + cdn_sync 63 clips (33.4 MB, CDN index v=51fb81f57814), rebuild: 63 th-act clips listed 'lazy', none core; build commit 31956a09 QUICKCHECK PASS 662 s → pushed. LIVE = 31956a09. REVERT: revert code range AND wipe img/kit/emo-anim/th-act-* from CDN.
+- 23/11 ~08:55Z LANDED gapart2 340ede94 (8a957cca self-merged on 31956a09; ending-screens 272/272, fullscreen-scenes 202/202, QUICKCHECK PASS 636 s, coop-e2e 141/141).
+- 23/11 ~09:10Z LANDED mg10a 13a8dfc7 (87ad5da4 self-merged on 340ede94; dev/site/CHANGE.txt conflict → branch line (sland.sh now takes --ours for CHANGE.txt); ag-mgcal ok; QUICKCHECK PASS 649 s; coop-e2e 141/141).
+- 23/11 ~09:30Z LANDED gapart1 5db0422e (03002dc1 self-merged on 13a8dfc7; ending-screens 272/272; QUICKCHECK PASS 694 s; coop-e2e 141/141; no cdn_sync).
+- 23/11 ~09:45Z LANDED kit-ap01 e9c0a43d (f38a40b1 self-merged on 5db0422e; QUICKCHECK PASS 656 s; coop-e2e 141/141).
+Helpers: /home/user/wt/land1.sh (sland + coop-e2e, no push) + push1.sh (FF-check push).
