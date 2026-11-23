@@ -377,3 +377,42 @@ HEAD **review/coop-famops-t1 dfda0723d624e2abc537bd824d8cb62bc119fd27** (on LIVE
 - NEXT: (1) gates ALONE on dfda0723 (if my container's 04:00Z run did not report: rerun) — coop-famops-unit (40/40 now), coop-b1 (step 9 «week merged» is a LIVE flake), role-parity ×2, `node dev/tools/quickcheck.js` (+ old save), coop-e2e fold-host + COOP_SWAP. (2) 76 wk LOST_DBG=1 SEED=9001 ×2 + COOP_SWAP=1 on dfda0723 with the traced scan (below), ≤3 parallel, never rebuild index.html meanwhile. (3) SSK dfda0723 (or newer) to the foreman with the table above + scan rows. -pv stays frozen for E51r; whichever lands second re-merges (jcoopworld.js: famSame vs f7Snap/npcToFriend do not touch the same lines).
 - Traced scan (NOT committed; recreate): -pv's dev/test/coop-lost-scan.js + (a) host «items» in COOP.send / D.resTo traces (itOf), her received «items» in __rcv, (b) per seat Q watch: a dialog holding a piece leaving Q → mine/box/NOWHERE + chosen option, scan's own Q drops as SCANDROP (ui / cap8 / unstick), gq in tA/tB, (c) ilSent stack hook into __gst ('SENT'). My copy: /home/user/wt/scan-g.js (dies with my container).
 - Stalls: 9001 runs on this world stall a lot (Chờ hảo hữu… / empty «Đồ thất lạc» dialog on the guest); a full 76 wk took 1.2–2.5 h, the killed ones were ~2.5 h at w47.
+
+## E44h (depth 1 under E ROOT, session_01DgYSWmLLqhxSYANRY7v8g6) — SSK review/coop-famops-t1 b4050ca3, 23/11 ~09:55Z
+PRIORITY #1 CHECK ('famSweep|RET|kyngo|npwAsk|loTake|liveRivals(true)|v.coop'): OD law 6c + law 1 + law 11 | main 4ad20bd6 jcoopworld famSweep (hand list nha/tra/soat/nop/xet), jagwhy npwAsk (no seat guard), jagwhyg2 loTake who = liveRivals(true) | review/coop-famops-t1 (this row; -pv landed as LIVE 81d76c8b) | claims E44h.
+HEAD **review/coop-famops-t1 b4050ca3** = dfda0723 (T1 r2 + T6 + T5) + merge LIVE 81d76c8b (-pv; t1 delta onto LIVE unchanged line for line) + **bf6dd61a** (2 new roots below) + merges LIVE 52ad65b3 (test drivers) and 13a8dfc7 (LIVE game code in jcraft/jemo/jemoseal/jerr/jevb/jfeel/jne/jptime — none in -t1's files; LIVE assets.json kept; t1 delta onto LIVE unchanged line for line). Source delta vs LIVE: jcoopworld.js, jil.js, jagwhyg2c.js, jagwhy.js, coop-famops-unit.js, coop-lost-scan-traced.js (new, committed).
+### New roots found by the traced scan on dfda0723 (both have LIVE twins by code: the lines are unchanged by -t1)
+- **kyngo lead closed** (9001 #1 vanish 10000200, chuongngoc of HERS): host week 52: NPC 1 «hảo hữu lấy» from her entry («rm gone», case 88) → Kỳ ngộ «Của mình tìm lại» returns it (lostReturn how «kyngo» → «ret» to her seat) → famSweep at nextBuoi: «kyngo» is not on its hand list of return roads (nha/tra/soat/nop/xet) → «gone matdau» → her seat drops the piece it just got back. FIX jcoopworld: the lostReturn hook marks the case of HERS it closed (__rt, by identity, as the box rule's __fs); famSweep skips it — every return road covered, no list to drift. unit 24 (kyngo/tra/xet/nop/soat/nha: one «ret», no «gone»): LIVE FAIL (kyngo: gone 1) → ok.
+- **T8 her entry as an NPC actor** (SWAP dup 54 + scan guard «no host lost case held by a friend entry» FAIL): jagwhyg2 loTake (who = liveRivals(true)) picked her entry (player seat) as the keeping thief of NPC 4's piece → rivalsMonth diff «add» to her seat (lo24), while the host's box kept the piece (vượt phẩm «conf» from NPC 4) = 2 places. Law 11 audit: arson / omen / apFriend / apTaunt / apSorry / wdPawn / tsDen / mock / callMe (jagwhy1), g3scape (jworld2), loTake / dhTake (jagwhyg2/2d) all take actors from liveRivals(true); only ilBuy (T5), cmScorn, cmLand excluded v.coop by hand. FIX jagwhy npwAsk (the one road every kind passes): a v.coop entry is never a who. unit 25 (test kind with who = liveRivals(true) + loTake): LIVE FAIL (her entry picked) → ok. No caller reads a who list outside npwAsk (grep).
+### Gates (alone)
+| gate | dfda0723 | 26143656 (= bf6dd61a + LIVE 52ad65b3) | LIVE control |
+|---|---|---|---|
+| coop-famops-unit | 40/40 | 46/46 | pre-fix head bc3182e6: units 24 and 25 FAIL (shown above) |
+| coop-b1 | 41/43 (step 8 «Người cùng cung») | 42/44 (step 8, same) | 52ad65b3: **42/44 step 8 same** → LIVE twin |
+| role-parity ×2 | ALL PASS ×2 | ALL PASS ×2 | — |
+| quickcheck + old save | PASS (G4 FAIL was my sparse checkout lacking dev/art/*.json; G4 alone 12960 pictures 0 bad) | **PASS** 575 s, old save ok, render 233/207, buổi 1285/1315 ms | — |
+| coop-e2e fold-host / SWAP | E44g 141/141 ×2 | **141/141 / 141/141** | — |
+| merge LIVE 13a8dfc7 → **b4050ca3** | — | unit **46/46**, coop-e2e **141/141 / 141/141**, quickcheck **PASS** 623 s (old save ok; render 205/259, tab 557/552, buổi 2573/1412 ms, within the perf gate) | — |
+### 76 wk traced scans (LOST_DBG=1 SEED=9001, dev/test/coop-lost-scan-traced.js)
+| run | dfda0723 | 26143656 |
+|---|---|---|
+| 9001 #1 | 86/98 dup0 **van1 10000200** (→ kyngo lead, fixed) | 87/96 **dup0 van0** |
+| 9001 #2 | 86/96 dup0 van0 | 88/92 **dup0 van0** |
+| SWAP | 87/90 **dup1 54** (→ T8, fixed) | #1 89/90 dup0 van0 but B.nofriend 76 (the host started as a serving maid: S.srv → friendSrv, her entry on the guest is staff, not a rival — random start role, 1 of 3 probes; no friend traffic, so rerun) · #2 87/92 **dup0 van0** (guard «host case held by a friend entry» max 1 → T9) · #3 88/92 **dup0 van0** |
+- Other FAILs in every run = stall rows only («#next enabled» / «week advanced»: the known 9001 stalls «Chờ hảo hữu…»). SCANDROP 0 and GQ NOWHERE 0 in all 6 runs (no piece lost through a dialog, the scan dropped none).
+### T-table (N17, updated)
+| ticket | state |
+|---|---|
+| T1 festival stale diff | fixed (t1 r2) — none in 6 runs |
+| T2 host-held keep copy missing | open, not hit |
+| T3 ret with no case on her seat | open; seen as one step of 10000200 (her seat had no case 88: famBack «ret: no case, piece put in chest» = harmless now that no «gone» follows) |
+| T4 box cct evid dup | open, not hit |
+| T5 market resale to her entry | fixed (t1) — now covered too by the npwAsk guard |
+| T6 NPC gift outside diffed calls | fixed (t1) — none hit |
+| T7 her seat drops a returned piece silently | likely the same as the kyngo lead (back by «ret», gone later); not hit after the fix |
+| T8 (new) her entry as an NPC actor (loTake …) | **fixed** (npwAsk guard) |
+| kyngo lead | **fixed** (famSweep __rt) |
+| T9 (new, open) a host case of someone else held by her entry, no dup / vanish followed | SWAP #2 only (guard «no host lost case held by a friend entry» max 1). NOT through loKeepBy: trace.json's LOKEEPBY rows held by 902 are all own «me» (famApply «rm lost» of the host's own piece = by design, excluded from the guard). So some road writes c.at = her entry directly. Candidate actor picks outside npwAsk with LIVE twins by code: j8 maidMonthP buyer `a` = mindPickBy over others(p) = consorts(); jil ilRob `by`; jky «Giữ lại» finder F. NEXT (successor row): dump the guard's case (id, own, at, how, cause, w) + a hook on c.at writes, then a law-11 audit of every actor pick outside npwAsk with one seat guard. |
+- Scans ran on 26143656; b4050ca3 adds LIVE 13a8dfc7 only (game code in other files; t1 delta line for line the same), so they still count per E ROOT's rule for disjoint merges.
+- Not in -t1: the 9001 stall rows (both builds) and coop-b1 step 8 (LIVE twin).
+## HANDOVER (E44h, 23/11 ~09:55Z) — row N12 is SSK at b4050ca3; context ~30 %, stopping. Open follow-up = T9 (row above): a successor row, not part of this SSK.
