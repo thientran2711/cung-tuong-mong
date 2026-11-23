@@ -92,3 +92,6 @@ SẴN SÀNG KIỂM review/coop-driver-fails 65324cb820aeed95b9dc551bbab759f9b359
 Re-run on the new merge: coop-e2e 141/141, guest-men 53/53, pets 58/58, famops-unit PASS 46/46, setup-scan risk 0, one-core-guard PASS.
 19. r2 step 1 «lost relay» (item 15) PROVEN = TEST FAULT (timing). M3 probe: the host's last famAsk for this bag hash was 1.4 s before the test cleared its copy; the one pos the step sends fell inside famAsk's 4 s per-hash throttle (jcoopworld.js:410) → no ask out (host fq has no 'out'), guest received nothing (fq []), and the test sends no later pos. In play her next update after 4 s asks again (not a game bug; the FOR D note on item 15 is withdrawn). Fix: the step waits 4.5 s before its trigger. After: r2 46/46 ×3.
 SẴN SÀNG KIỂM review/coop-driver-fails c1634814339e4b85d048c71ac14287c9177205c8
+5. Gates: coop-e2e ×2 (`node dev/test/coop-e2e.js <out> https://ctm-coop.victoria-tntt.workers.dev`), coop-guest-maid, coop-pets, coop-guest-men, coop-famops-unit, coop-setup-scan, one-core-guard, role-parity (`node dev/test/role-parity.test.js`), `bash dev/tools/quickcheck.sh`. No UI code changed → no Fold/iPad shots.
+6. Report FOR D/B: items 9, 10, coop-cyc night port; FOR MAIN (law 4, one line, not fixed): j51.js:75 heir text types «Danh +10» while j3 prints balSg(BAL.kid.heirDanh).
+7. SSK line + send_message Foreman D.

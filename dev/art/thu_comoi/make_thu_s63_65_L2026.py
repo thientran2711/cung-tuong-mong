@@ -30,6 +30,7 @@ P = {
              hair={1: "light pink-lilac", 2: "soft pink-lilac", 3: "soft pink-lilac", 4: "pink-lilac", 5: "pink-lilac"},
              fl={1: ("plum blossom", "plum blossoms"), 2: ("pomegranate flower", "pomegranate flowers"), 3: ("wintersweet blossom", "wintersweet blossoms"),
                  4: ("double daylily", "double daylilies"), 5: ("double gardenia", "double gardenias")}),
+                 4: ("double daylily", "double daylilies"), 5: ("peony-flowered Chinese aster", "peony-flowered Chinese asters")}),
 }
 
 def face(pid):
