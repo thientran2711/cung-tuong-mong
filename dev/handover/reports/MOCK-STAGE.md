@@ -1,3 +1,25 @@
+# MOCK-STAGE v3 — DONE (KIT KEEPER #12 · session_01Rc5AsLLYr8sHGVYNmfHpMF · for MAIN 110) — 23/11
+START_CTX ~4 % (own estimate of a 1M window; get_session reads 0). Finished under +25 %: no successor needed.
+PRIORITY #1 CHECK: OD 23/11 ~20:20Z + ~20:22Z (read in full) + OD L1867 + 21/11 ~04:00Z (1)-(4) | main dev/test/dialog-fixed.js (assertions reused), jk4 kitOptFit, j79 kitOdFit, real .k3ev event picture (v2 had deleted it) | review/mock-stage @17bcf6ac -> now @c2adca45 | claims: row "KIT KEEPER #12" (MAIN).
+Note: the owner's 3 marked refs (owner-2311-mock-A-*.jpg) are NOT in git (jpg ignored) and not on the CDN; built from the OD rows + MAIN's brief.
+PAGE (re-uploaded, fetch-verified: 200 text/html, 14 <video> (12 new + 2 M3), 68 referenced jpg/mp4 all 200, video/mp4, no m12/old B left): https://ctm-img.victoria-tntt.workers.dev/img/_review/mock-stage.html
+Sections: Q (kept) · "Khung sự kiện A (bản sửa theo lời sếp)" A1 + A2 · Phòng trang điểm (kept).
+## Layout A v3
+Both: blurred stage between the bars (day -sang / night -toi + deeper veil); figures on the LEFT, full body, never cut (messenger top-left behind, 0.80 H Fold / 0.86 H iPad, top 0; her figure same scale, lower-left in front, feet on the floor; solo = her figure alone, 0.97 H); boxes on the RIGHT (x 43 % / 41 %, width 55.5 % / 57.5 %). The choice box sits over the lower part of the figures.
+- **A1 (recommended)**: two boxes. Story box = real header (VIỆC + speaker title+name + Trân nữ seal) > the real EVENT PICTURE (.k3ev, 124 px Fold / 118 px iPad) > story text, tail to the messenger; choice box = the REAL game dialog (#modal .dlg, kit kdper) re-placed, header = her name, only the option list, tail to her.
+- A2: one box = the real dialog re-placed: speaker > event picture > story > options (today's frame with the figure taken out, full body on the stage).
+- Solo (A1 = A2): her figure left, the real dialog right (header = event title).
+Because the choice list is the real dialog, every card is the kit's own (kitOptFit / kitOdFit run by the game: odds on the title row, picture fills the card, iPad 2 columns, Fold 1 column).
+## FIXED rule check (dev/test/dialog-fixed.js (a)(b)(c)(d)(e) logic, run in-page in m13.js MK3.check, 12 stills + 12 video runs = 24/24 PASS)
+fixed: figures + headers + event picture + story + seal do not move when every scroller scrolls to the end; the only scroller = .opts; story fits without scrolling; odds on title row; option picture fills card; iPad 2 cols / Fold 1 col; exactly one seal; figures inside the layer (full body); boxes inside the layer and on top (elementFromPoint).
+## Videos (12 mp4, Fold 755x1000 + iPad 1180x820, ~11-13 s): stage > event opens (figures slide in from the left, boxes from the right) > a finger dot DRAGS THE OPTION LIST down to the end and back up (picture + name + story stay still) > a choice is tapped (gold ring) > closes. Frames extracted and looked at for all 12.
+## Mock notes / kit parts if chosen
+Mock knobs: event picture height forced to 124/118 px (the kit shrinks .k3ev to 56-84 px in a tall narrow frame — a real build needs a min height knob for this layout); story box in A1 is a style-copied clone of the real header/picture/story. The game re-renders the dialog now and then on Fold; the mock re-applies its placement (a real build = a kit layout mode, not a re-placement). NEW kit parts: stage event layer (kitFocus §92 base) with the bars un-veiled; full-body figure pair (messenger behind/top, her front/bottom, one KIT_FIG scale); dialog "stage mode" (figure slot off, frame placed right, box tail); A1 split (story box + choice box from one dialog); .k3ev min height knob; night veil knob.
+## Scripts (review/mock-stage, never land)
+dev/mock-stage/m13.js (stills + videos + checks; one fresh page per clip — a second person event in the same page does not open), page3.py (page; writes only m13-* files, Q + M3 stay on the CDN), mklib.js (__mkopts hook, layer z 58). cdn_sync "html"/"mp4" type added locally only.
+Wipe after her verdict: `python3 dev/site/cdn_sync.py --wipe-review mock-stage` + delete img/_review/mock-stage.html.
+
+---
 # MOCK-STAGE v2 — DONE (KIT KEEPER #11 · session_01Rc5AsMtL55o1wM5pU2K9t2 · for MAIN 110) — 23/11 ~20:10Z
 START_CTX ~4 % (own estimate of a 1M window; get_session reads 0). Finished well under +25 %: no successor needed.
 PRIORITY #1 CHECK: OD 23/11 17:03Z/17:07Z/17:08Z (verbatim, read) | main none (mockup only; base build = local main f7016b8d as v1) | review/mock-stage @2124c0e6 → now @17bcf6ac | claims: #10 row handed over, #11 row by MAIN.
