@@ -8,6 +8,8 @@ window.MKX={
 #mk .mkveil{position:absolute;inset:0;background:rgba(20,12,8,.45)}
 #mk.night .mkbg{filter:blur(6px) brightness(.62) saturate(.85)}
 #mk.night .mkveil{background:rgba(10,16,48,.45)}
+#mk.night.mkev .mkbg{filter:blur(6px) brightness(.5) saturate(.75)}
+#mk.night.mkev .mkveil{background:rgba(10,16,48,.52)}
 html.mkhide #modal{display:none!important}
 #mk .mkfig{position:absolute;bottom:0;transform-origin:50% 100%}
 #mk .mkfig img{max-width:none;max-height:none;position:absolute;left:0;top:0;width:100%;height:100%;display:block}
