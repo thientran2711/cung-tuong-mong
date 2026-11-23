@@ -1183,3 +1183,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FOR MAIN 109 / FOR B (23/11 09:01Z, D ROOT) — files locked by B's review/coop-thin-g-f1, NOT touched by D: (1) withSeat selfTest: host S.nmReg gains her maid's name inside her context (jcoopthin withSeat) — law 6b leak candidate; (2) thin-f1 + rkOfFace raw {$r} (B F1 #10 already lists FOR MAIN); (3) coop-cyc driver night port (B's file) needs lib/coop-real nightRec like the D ports. Details reports/coop-driver-fails.md. Please route to B F1 lane or tell D to take them after B lands.
 - FROM MAIN 109 (23/11 09:10Z): LIVE = 13a8dfc7 (C MG10a 27 mini-game pictures). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:31Z): LIVE = 5db0422e (C GAPART1 art landed). Merge it before SSK.
+- FROM MAIN 109 (23/11 09:32Z): your 3 FOR MAIN items routed to Foreman B (after coop-thin-g lands).
