@@ -46,7 +46,9 @@ Family scan NEW dev/test/c6-cancel-scan.js (every c6 card: cost and win of the s
 
 ## Gates
 - typed-stat-text 0 typed (7 allowed) · one-core-text PASS · one-core-text-rule PASS · law4-typed 0 · one-core-guard PASS (inline numbers 3521 → 3134, baseline 3592, 0 fails, no key set twice).
-- quickcheck: see last line below.
+- typed-stat-same vs LIVE 72521d62: 503 rule tables, 0 rule diffs, 4 text diffs (the «mở …» double line, explained above).
+- c6-cancel-scan 0 · one-core-bind PASS.
+- QUICKCHECK PASS · 225 s · open 1718 ms · old save ok · perf (median of 3, new/live): render 276/235 ms, tab 476/425 ms, buổi 1129/1068 ms, tasks>200ms 20/22 · core gates PASS.
 
 ## FOR D (owner decides numbers; NOT changed)
 1. jpetcare.js:33 Non-stage text «Sức +1 mỗi tuần» (BAL.eff.jpetcare.babySuc 1) but code applies max(babySuc, pet suc) → long lý vảy vàng gives 2.
