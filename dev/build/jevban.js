@@ -39,8 +39,13 @@ window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
    A dialog that already carries its own picture (m.art / m.stArt / m.headArt / a place card / an ending) is left alone. */
 const KIT_OUTING=[
  {key:"chua-ho-quoc",t:/^Chùa Hộ Quốc|(?:ở|tại)\s+chùa Hộ Quốc/i,b:/^Ngươi gặp lại .{0,60} ở chùa Hộ Quốc/i},
- {key:"ngu-uyen-ngoai",t:/^$/,b:/Hoàng thượng lên Cảnh Sơn/i}];
-const KIT_OUTING_NAME={"chua-ho-quoc":"Chùa Hộ Quốc","ngu-uyen-ngoai":"Ngự uyển ngoại"};
+ {key:"ngu-uyen-ngoai",t:/^$/,b:/Hoàng thượng lên Cảnh Sơn/i},
+ /* review/outing-art2: the four outings that had no picture (the festival dialogs that carry their own banner stay with it — headArt wins in kitOutingKey) */
+ {key:"nam-giao",t:/^(?:Lễ tế |Tế )?(?:đàn )?Nam Giao\s*$/i,b:/đàn Nam Giao/i},
+ {key:"thu-san",t:/^Thu săn\s*$/i,b:/^Thu săn ở bãi săn hoàng gia/i},
+ {key:"du-ho",t:/^Du hồ/i,b:/^Tết Đoan ngọ, thuyền rồng đua/i},
+ {key:"tao-mo",t:/^(?:Xin )?(?:về )?tảo mộ/i,b:/^(?:Ngươi |Các cung )?(?:xin )?(?:về|ra|đi) tảo mộ/i}];
+const KIT_OUTING_NAME={"chua-ho-quoc":"Chùa Hộ Quốc","ngu-uyen-ngoai":"Ngự uyển ngoại","nam-giao":"Đàn Nam Giao","thu-san":"Bãi săn hoàng gia","du-ho":"Thái Dịch trì","tao-mo":"Hoàng lăng"};
 function kitOutingKey(m){try{if(!m||m.art||m.stArt||m.headArt||m.placeK||m.pid==="over")return"";
  const P=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();const t=P(m.t),b=P(m.h);
  for(const o of KIT_OUTING)if(o.t.test(t)||o.b.test(b))return o.key}catch(e){}return""}
