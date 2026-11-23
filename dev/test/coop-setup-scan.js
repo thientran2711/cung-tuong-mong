@@ -6,7 +6,7 @@
 const fs=require('fs'),path=require('path');const D=__dirname;const rows=[];
 for(const f of fs.readdirSync(D).filter(x=>/^coop-.*\.js$/.test(x)&&x!=='coop-setup-scan.js').sort()){const s=fs.readFileSync(path.join(D,f),'utf8');
  const set=(s.match(/S\.srv\.risen=1|S\.kc\.inPal=1|S\.rank=Math\.max/g)||[]).length;if(!set)continue;
- const lib=/lib\/coop-real\.js/.test(s),fo=/__forceOrigin|_ORIGIN/.test(s),fr=(s.match(/COOPW\.friend\(\)/g)||[]).length;
- rows.push({f,set,lib,fo,fr,st:lib?'real (lib/coop-real)':fo?'origin forced (no REAL check)':'RISK: screen-only set-up, random origin'})}
+ const na=/coop-real: n\/a/.test(s),lib=/lib\/coop-real\.js/.test(s),fo=/__forceOrigin|_ORIGIN/.test(s),fr=(s.match(/COOPW\.friend\(\)/g)||[]).length;
+ rows.push({f,set,lib,fo,fr,st:na?'n/a (single page, no room)':lib?'real (lib/coop-real)':fo?'origin forced (no REAL check)':'RISK: screen-only set-up, random origin'})}
 console.log('| driver | set-up writes | friend-entry reads | status |\n|---|---|---|---|');for(const r of rows)console.log(`| ${r.f} | ${r.set} | ${r.fr} | ${r.st} |`);
-const n=k=>rows.filter(r=>r.st.startsWith(k)).length;console.log(`\n${rows.length} drivers · real ${n('real')} · origin forced ${n('origin')} · risk ${n('RISK')}`);
+const n=k=>rows.filter(r=>r.st.startsWith(k)).length;console.log(`\n${rows.length} drivers · real ${n('real')} · n/a ${n('n/a')} · origin forced ${n('origin')} · risk ${n('RISK')}`);
