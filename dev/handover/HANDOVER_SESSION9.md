@@ -2730,3 +2730,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:36Z) KK14 KIT READY mg-skin review/kit-mgskin 1b91ac14 → SMALL kit rv-lander session_01Rc5AsLG8CETU5oT3t3s98h (sonnet). F + B told the resolver.
 - (23:38Z) know-notice-r ce2860f0 BIG PASS → LC8 (after offline-all). Archive KNOW-NOTICE JtW95DF2 + rv MzkmnYoW after LANDED.
 - (23:40Z) LANDED N17 coop-famops-t2 → LIVE 37d07967. GAP now 8 (N17 done). LC8 next: offline-all, know-notice, odds-no-thanh.
+- (23:44Z) kit-mgskin-r 1b91ac14 SMALL PASS → LC8 (last in queue); rv LG8CETU5 archived. Nit for THIN P1: first real skinned screen needs full-screen shots both devices.
