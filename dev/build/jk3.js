@@ -613,10 +613,10 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
 /* ---------- 12. HER AGE in the top bar (owner 11/14, KIT 31.1): "N tuổi" as a small chip right after her rank chip, every device and road;
    shown only here (one fact, one place). ---------- */
 (function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=document.getElementById("me-r");
- if(m&&S&&typeof S.age==="number"){let a=document.getElementById("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
+ if(m&&S&&typeof S.age==="number"){let a=document.getElementById("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t;/* hdr-kiep: same kit chip, life number in words, after the age chip */let k=document.getElementById("me-k");if(!k){k=document.createElement("span");k.id="me-k";k.className="k3age"}if(a.nextSibling!==k)a.after(k);const kt=window.geK&&typeof geK.lifeNo==="function"&&typeof kpLife==="function"?kpLife(geK.lifeNo()):"";if(kt){k.hidden=false;if(k.textContent!==kt)k.textContent=kt}else k.hidden=true}}catch(e){}return r}
  const st=document.createElement("style");st.id="k3-age";st.textContent=`
 #me .k3rr{display:flex;align-items:center;flex-wrap:nowrap;gap:0;min-width:0}
-#me-a.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
+#me-a.k3age,#me-k.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
  font-size:.72rem;font-weight:600;line-height:1.5;color:var(--ink);background:var(--k3pl,#fffaf0);white-space:nowrap}
 `;document.head.appendChild(st)})();
 
