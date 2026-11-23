@@ -687,10 +687,18 @@ function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"
    HER piece into a COPY of a host NPC (that chest is rebuilt from the host: the piece vanished, her case closed «mất dấu», coop-lost-scan 10000137).
    The keep is refused like any refused keep (loLose: c.keep=0): her case stays «thất lạc» holding the piece, jlost finds it later. Host seat unchanged. */
 (function(){if(typeof loKeepBy!=="function")return;const k0=loKeepBy;loKeepBy=function(c,p){if(famCopy(p))return null;return k0.apply(this,arguments)};window.loKeepBy=loKeepBy})();
+/* E44j T4 (law 6c; coop-lost-scan dup 117 / id 10): the other seat's act took a piece of mine that is NOT in my hands but in my box (seized as
+   tang vật, sold, đem sửa …): rooms run the relay path (thin level 0) by default, so that act ran on its seat's copy of me, a step behind, and
+   that seat now holds a copy of a piece my box holds = 2 places. My box is the world's truth here: the actor's seat is told «rm gone» by id
+   (its famApply takes the phantom copy off, the existing «… không còn nữa» line). Either seat (two-way). */
+function famBoxBack(o){try{if(!CW.on||!o||!o.iu||o.how==="gone")return;const B=S.il&&S.il.box;if(!Array.isArray(B)||!B.some(x=>x&&famIs(x.e,o.iu)))return;
+ if(typeof ilSlots==="function"&&ilSlots(S).some(x=>famIs(x,o.iu)))return;b4Send([{op:"rm",ci:-1,k:o.k,iu:o.iu,how:"gone"}],{})}catch(e){console.error("famBoxBack",e)}}
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
- const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
+ const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f)){famMiss(o,"not hers");famBoxBack(o)}return [o,e]}).filter(x=>x[1]);
  for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;if(!famOff(e)){famMiss(o,"gone meanwhile");continue}if(o.iu&&!e.iu)e.iu=o.iu;
+  /* E44j T4: a «gone» of a piece I held for a case (marked lo: someone's lost piece in my hands) closes that case here «mất dấu» (the piece is in the other world's box) — never «held at me» with no copy */
+  if(o.how==="gone"&&e.lo){try{const c=(S.lost||[]).find(c=>c&&c.id===e.lo&&c.st!=="done");if(c){c.st="done";c.end=wk();c.how="matdau";if(typeof ilLog==="function")ilLog(e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu")}}catch(z){}}
   if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
    const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:fk,keep:1})}finally{S.inv=all.filter(x=>x!==e)}
    /* E44: the piece IS with the thief on the other seat (his real chest / the host's NPC): her case is held there even when this seat has no

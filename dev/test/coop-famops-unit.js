@@ -266,6 +266,17 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    catch(z){er31=z.message+" "+String(z.stack).split("\n")[1]}
    finally{Object.assign(W,{agDOn:sv.agDOn,thyBribedBy:sv.thy,queenP:sv.qp,npcWhy:sv.npcWhy,judge:sv.judge,evG:sv.evG,rel:sv.rel,roll:sv.roll,hostility:sv.hos,mindPickBy:sv.mpb,mindLog:sv.ml});S.month=mo;S.court=ct;rivals.splice(rivals.indexOf(f),1);Q.length=0}
    ck("31 actor picks outside npwAsk never make her entry the NPC actor (j13 physician briber, j20 the Empress's reward, j8 the Empress's judgment, j8 her NPC month, npcAct)",!er31&&R31.briber!=="her"&&R31.reward===0&&R31.judgeBy===0&&R31.act===0&&R31.month===0,{er31,R31})}
+  /* E44j T4 (coop-lost-scan dup 117 / id 10: her laydo «rm lost» of a host piece that sat in his box «cct» tang vật since w1): rooms run the
+     relay path (thin level 0) by default, so her act ran on her seat's copy of the host, a step behind; the host found the piece only in his box
+     (famMiss «not hers») and her seat kept her gain = 2 places. Now the seat whose box holds it answers «rm gone» by id (either seat): the actor's
+     phantom copy leaves (her famApply «rm» by id, the existing «… không còn nữa» line), the box keeps the one piece. */
+  {reset();const on32=CW.on,se32=CW.seat,sd32=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);let er32="",R32={};const I=ilS();
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P),x={e,at:"cct",why:"evid",own:"me",w:wk()};I.box.push(x);
+    FA([{op:"rm",ci:0,k:P,iu:e.iu,how:"lost"}]);const back=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="rm"&&o.how==="gone"&&o.iu===e.iu);R32.back=back.length;R32.box=I.box.filter(y=>y.e&&y.e.iu===e.iu).length;
+    const n0=sn.length;const e2=pc(P);FA([{op:"rm",ci:0,k:P,iu:e2.iu,how:"lost"}]);R32.none=sn.slice(n0).length;/* a piece in no box of mine: nothing to answer */
+    CW.seat="b";S.loSeq=(S.loSeq||0)+1;const hc={id:S.loSeq,k:P,e:Object.assign({},e),own:901,w:wk(),due:wk()+9,st:"held",by:"me",at:"me",keep:1,cause:"riv",kn:{},open:0,cev:0,hear:0};loL().push(hc);const g=Object.assign({},e,{lo:hc.id});S.inv=[g];FA(back);R32.her=cnt(e.iu);R32.hc=hc.st;loL().splice(loL().indexOf(hc),1)}catch(z){er32=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{CW.on=on32;CW.seat=se32;COOP.send=sd32;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(y=>!(y.e&&y.e.iu>9e6))}
+   ck("32 T4 her act took a piece that is only in my box: ONE «rm gone» back by id, the box keeps it, her phantom copy leaves and her case of it closes; a piece in no box: no answer",!er32&&R32.back===1&&R32.box===1&&R32.none===0&&R32.her===0&&R32.hc==="done",{er32,R32})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
