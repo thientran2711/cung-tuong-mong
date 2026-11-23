@@ -207,7 +207,7 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
    kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
    An option may carry its own `hint` (string or fn(lv)); hints may never lie (an override must match the data). */
-const KIT_HINT_LADDER=/(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
+const KIT_HINT_LADDER=new RegExp("(?:^|[\\s·>])("+KIT_ODDS_ALT+")(?=$|[\\s·<,.;:])");
 function kitHintLevel(){try{const t=S.tamco||0,m=eyes(S);const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
 /* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
 function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
@@ -218,7 +218,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
-  const od=s.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
+  const od=s.match(KA_ODDS);if(od&&!M.odds){M.odds=kitOddsCanon(od[1]);continue}
   if(/^Quẻ: /.test(s))continue;
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
@@ -296,7 +296,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
   (od?win:sure).push([w,sg])}
  const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
  const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
- if(od&&lv>=1)parts.push(/^(Nắm chắc|Rất chắc|Chắc)$/.test(od)?"dễ thành":/^(Khó|Liều)$/.test(od)?"khó thành":"thành bại khó đoán");
+ if(od&&lv>=1)parts.push(kitOddsIdx(od)>=5?"dễ thành":kitOddsIdx(od)<=2?"khó thành":"thành bại khó đoán");
  if(bad.length)parts.push("nhưng "+bad.join(", "));
  const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
  if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}

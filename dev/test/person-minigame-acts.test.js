@@ -11,6 +11,7 @@
    (8) old save: a save without S.pmM / S.pmGo / v.pmW loads and plays; (9) one core: no number typed in jpma.js outside BAL.pm, Emperor summons untouched.
    usage: node dev/test/person-minigame-acts.test.js [dev/index.html]  → exit 1 on FAIL */
 const path=require('path');const fs=require('fs');const {execSync}=require('child_process');
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{
  const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -23,7 +24,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   /* (2) her card */Q.length=0;const xd=pmX(a,S,"duel",{s:"bac"});S.bac=Math.max(S.bac,200);rcvAsk("pmDuel",a,S,xd);const c=Q[0];out.card=c?c.opts.map(o=>({n:o.n,x:o.x})):null;
   const ser=serQ();const de=deserQ(JSON.parse(JSON.stringify(ser)));out.save={pid:ser[0]&&ser[0].pid,n:de[0]&&de[0].opts.length};Q.length=0;
   rcvAsk("pmPlay",a,S,pmX(a,S,"play"));out.card2=Q[0]?Q[0].opts.map(o=>({n:o.n,x:o.x})):null;Q.length=0;
-  out.rankHi=rkOf(a)>rkOf(S);out.ladder=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
+  out.rankHi=rkOf(a)>rkOf(S);out.ladder=KIT_ODDS.slice();
   /* (3) stakes */const R=pmR(S,a),Vv=BAL.pm.stake.bac[R];const st=pmStakes(S,a);out.st={V:Vv,bac:st[0].V,ia:st[1].ia?ilVal(st[1].ia):null,it:st[1].it?ilVal(st[1].it):null,danh:st[2].d*BAL.pm.val.danhBac,band:BAL.pm.stake.band};
   /* (4) conservation + item + memory */const sum=k=>S[k]+liveRivals(true).filter(x=>x!==S).reduce((s,v)=>s+(v[k]||0),0);a.bac=500;t.bac=500;a.danh=60;t.danh=60;
   const b0=sum("bac");for(let i=0;i<20;i++)pmDuelEnd(a,t,{a:"duel",kind:"dauho",n:"Đầu hồ",s:"bac"},i%2===0,"home");out.bacCons=sum("bac")===b0;
@@ -83,7 +84,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r.xp.called>=1&&r.xp.l1===r.xp.l0+1&&r.xp.s1>r.xp.s0,'r2 fix 3: NPC practice goes through addArtP (level-up gives the stat as for anyone)',r.xp);
  ok(Array.isArray(r.rk.off)&&r.rk.pm.every((w,i)=>w===(r.rk.off.includes(i)?0:r.rk.help[i]))&&r.rk.pm[3]===0,'r2 fix 4: BAL.rcv.k.pm = help weights, slots BAL.pm.rcvOff off (own key)',r.rk);
  ok(r.farTc>0&&/mất: Sức [^·]*, \d+ khắc$/.test(r.walkPlay||"")&&/tốn: \d+ khắc ·/.test(r.walkDuel||""),'r2 fix 5 / r3 fix A: her invite / challenge card shows the walk as a plain «N khắc» cost (the kit word mode keeps it; dev/test/pm-wordmode.test.js scans every pm option)',{tc:r.farTc,play:r.walkPlay,duel:r.walkDuel});
- ok(!/có thể (nhận lời|từ chối)/.test(r.btnX+r.rowX.join(" "))&&r.pickX.every(x=>!/\)$/.test(x)&&/^(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc) · nàng bậc/.test(x)),'r2 fix 6a: labelled segments only (no stray «nàng có thể từ chối», the level note before the labels)',{btn:r.btnX.slice(0,300),row:r.rowX,pick:r.pickX});
+ ok(!/có thể (nhận lời|từ chối)/.test(r.btnX+r.rowX.join(" "))&&r.pickX.every(x=>!/\)$/.test(x)&&new RegExp('^(?:'+OW.ALT+') · nàng bậc').test(x)),'r2 fix 6a: labelled segments only (no stray «nàng có thể từ chối», the level note before the labels)',{btn:r.btnX.slice(0,300),row:r.rowX,pick:r.pickX});
  ok(!/[.]\s*$/.test(r.runR||"")&&!/\.\./.test(r.runR+"."),'r2 fix 6b: the day-plan line has one full stop when logged',r.runR);
  ok(r.ts,'Emperor summons (jts tsSummon*) still in place');
  /* (6) NPC day plan over ≥ 10 days (fresh page) */

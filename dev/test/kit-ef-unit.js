@@ -23,7 +23,7 @@ const CHECK=`(root=>{const o={n:0,bad:[],sung:0};const RX=${STAT};root.querySele
   /* (A) real option dialog: the econ-tamco lines (Bạc / Tâm cơ / Sủng / khắc / Sức a→b) */
   await p.evaluate(()=>{Q.length=0;Q.push({t:'Mua chuộc người Nội vụ phủ',h:'<p>Tiểu Lý Tử ở Nội vụ phủ ngập ngừng, như chờ ngươi mở lời.</p>',opts:[
    {n:'Đưa bạc cho người Nội vụ phủ',x:'Khá chắc · tốn: Bạc -94 · 2 khắc · thành: Sức 80→98 (+18) · Sủng +2 · Danh +1',go:()=>{}},
-   {n:'Nhờ người quen nói giúp một lời',x:'Năm ăn năm thua · tốn: Tâm cơ -3 · 1 khắc · thành: Sủng +2 · Danh +1 · hỏng: Danh -2',go:()=>{}},
+   {n:'Nhờ người quen nói giúp một lời',x:'Tùy duyên · tốn: Tâm cơ -3 · 1 khắc · thành: Sủng +2 · Danh +1 · hỏng: Danh -2',go:()=>{}},
    {n:'Thôi, để lúc khác',x:'tốn: 1 khắc · thành: Tâm cơ +1 · Sủng +1',go:()=>{}}]});showModal()});
   await sleep(1500);
   for(const w of [0,560,460,380,320,280]){const r=await p.evaluate(([w,C])=>{const M=document.getElementById('modal');if(!M||M.hidden)return{nomodal:1};const op=M.querySelector('.opts');if(w&&op)op.style.setProperty('width',w+'px','important');
