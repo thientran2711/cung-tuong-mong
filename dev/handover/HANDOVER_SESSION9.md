@@ -2571,3 +2571,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - B's co-op follow-up job (after coop-thin-g lands) includes tao-mo CDN delete + latent key drop.
 - Wake: trig_013WV4SZJWfQdwMYDPLzYmfV (minute 32) → child creates its own and disables this one.
 - (23/11 17:33Z) Opened MAIN CHÍNH 110 = session_01Rc5AsJh26cgtwNsyhTRPQx. MAIN 109 stops after 110 confirms takeover (110 disables trig_013WV4SZJWfQdwMYDPLzYmfV).
+- (17:36Z 23/11) MAIN CHÍNH 110 = session_01Rc5AsJh26cgtwNsyhTRPQx; START_CTX ≈ 5 % (get_session reads 0; own estimate ~50k/1M) → roll at 30 %, ceiling 60 %; depth 3 (limit 8). Took over from MAIN 109. LIVE f7016b8d.
+- LOAD: main running 1 (KIT KEEPER #10 mockups = UI) | B free 0 (coop-thin-g fixer #11) | C free ? (owner-direct art) | D free ? (coop-driver-fails) | moved: none

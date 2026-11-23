@@ -1924,3 +1924,4 @@ ROOT-C7: OWNER direct L2398: sent dev/art/flower_sheets/hoa_chi_phuong_tung_nguo
 ROOT-C7: OWNER L2402: groups stay as they are (no regroup; uneven 18/15/15/15/14/13 is fine). List hoa_chi_phuong_tung_nguoi.md final (L2401). Next Lượt 2403.
 ROOT-C7: OWNER L2403 'bỏ hoa cúc ra khỏi danh sách': t5 thúy cúc (Chinese aster) → dành dành kép (double gardenia) in build.py F2_FL, make_thu_s63_65_L2026.py, mk_ranks_v3.py, rule F2 (t6 text also aligned to F19). Next Lượt 2404.
 - FROM MAIN 109 (23/11 16:52Z): LIVE = f7016b8d (PAGES-LOCK: Pages deploy of player files only via .github/workflows/pages.yml + noai meta in build_site.sh head; repo is now PRIVATE). Merge it before SSK; if you add a new runtime file the game fetches, add it to dev/site/pages_stage.sh allowlist.
+- FROM MAIN (17:36Z 23/11): main is now MAIN CHÍNH 110 session_01Rc5AsJh26cgtwNsyhTRPQx (MAIN 109 stops). Send FOR MAIN lines here as before.
