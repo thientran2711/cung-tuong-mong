@@ -5,7 +5,7 @@
    A zone row = [left%, top%, width%, height%, rotateDeg] in % of the picture box — the SAME unit as a veil-fit row (fig-*: % of the figure image box;
    por-*: % of the portrait picture), so it drops into the one face-fx box (.kfxf over a stage figure / podium / mirror, KIT_AV over an avatar).
    WHERE THE NUMBERS COME FROM (first hit wins):
-   1. img/body-fit.json { "<por-/fig- file>": { "<zone>": [l,t,w,h,deg], … } } — per-figure measures (Foreman C fills / corrects; a partial row overrides only its zones).
+   1. img/body-fit.json { "<por-/fig- file>": { "<zone>": [l,t,w,h,deg], … } } — per-figure measures (Foreman C fills / corrects; rows are OVERRIDES merged on top of the measured rows: a partial row overrides only its zones, the measure fills the rest; rows() waits (null) for the merge).
    2. MEASURED from the picture itself (BAL.body.auto = 1): fig-* = kitFigBody (jkit: alpha bbox, head top from img/fig-ht.json, head x, torso core column,
       width profile) + the veil-fit face box when the picture has one; por-* = the veil-fit face box only (a portrait has no feet). Ratios: BAL.body.
       A picture with neither (no fit row, no measure yet) gets NOTHING (never a guessed place). The measure is async: a layer asked before it lands is emitted
@@ -56,10 +56,14 @@ window.KIT_BODY={zones:["hair","head","chest","waist","sleeveL","sleeveR","skirt
   for(const z in R){const r=R[z];r[0]=cl(r[0],0,100);r[1]=cl(r[1],0,100);r[2]=Math.min(r[2],100-r[0]);r[3]=Math.min(r[3],100-r[1])}return R},
  faceRow:function(file){try{return window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file]||null}catch(e){return null}},
  /* rows known now (sync); null = not yet (start the measure with want) */
- rows:function(file){file=this.name(file);if(!file||!/^(por|fig)-/.test(file)||/unknown/.test(file))return null;this.load();
+ rows:function(file){file=this.name(file);if(!file||!/^(por|fig)-/.test(file)||/unknown/.test(file))return null;this.load();if(this.fit===null)return null;/* the override table is still loading: nobody places a layer on measured-only rows that the json then moves */
   const J=this.fit&&this.fit[file];let A=this.A[file];if(A!==undefined&&!this.AF[file]&&this.faceRow(file)){A=undefined;delete this.A[file]}/* the face table landed after the measure */
   if(A===undefined&&BAL.body.auto){if(/^por-/.test(file)){const f=this.faceRow(file);if(f){A=this.A[file]=this.calc(file,null,f);this.AF[file]=1}else if(window.KIT_VEIL&&KIT_VEIL.fit)A=this.A[file]=null}
    else if(typeof kitFigBody==="function"){const src=typeof IMG_U==="function"?IMG_U("img/"+file):"img/"+file;const v=kitFigBody(src,this.P[file]?null:()=>KIT_BODY.landed(file,src));this.P[file]=1;if(v){const f=this.faceRow(file);A=this.A[file]=this.calc(file,v,f);this.AF[file]=f?1:0}}}
+  /* json rows are OVERRIDES on top of the measured rows (json zone wins, measured zones fill the rest). While the measure is pending and the json row does not
+     cover every standard zone, answer null so want() waits for the merge (never half a body: waist box only). Measure never lands (A === null) → json alone. */
+  const need=/^por-/.test(file)?["hair","head","chest"]:this.zones,full=!!J&&need.every(z=>J[z]);
+  if(!full&&A===undefined&&BAL.body.auto)return null;
   if(!J&&!A)return null;return Object.assign({},A||{},J||{})},
  landed:function(file,src){try{const v=window.__KITFB&&__KITFB[src]&&__KITFB[src].v;const f=this.faceRow(file);this.A[file]=v?this.calc(file,v,f):null;this.AF[file]=f?1:0;this.flush(file)}catch(e){}},
  want:function(file,cb){file=this.name(file);const r=this.rows(file);if(r){cb&&cb(r);return r}(this.W[file]||(this.W[file]=[])).push(cb);return null},

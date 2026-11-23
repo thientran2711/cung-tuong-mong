@@ -162,13 +162,14 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{rfYi
 
 /* ---------- canonical → local game ---------- */
 /* CW.inFC: inside fromCanon (the guest tripwire, dev/test/coop-thin-trip.js, counts only writes outside it); CW.afterFC: test hook */
-function fromCanon(C,opt){CW.inFC=(CW.inFC||0)+1;try{return fromCanon0(C,opt)}finally{CW.inFC--;if(CW.afterFC)try{CW.afterFC()}catch(e){}}}
+function fromCanon(C,opt){CW.inFC=(CW.inFC||0)+1;try{return fromCanon0(C,opt)}finally{CW.inFC--;if(CW.afterFC)try{CW.afterFC()}catch(e){}if(CW.cqBack)try{CW.cqBack()}catch(e){}/* r4: carried cards back once the room is past their week */}}
 function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
  const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));joinP(sS,Pm.S);if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
   r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
   return mapMe(r,false,mp)});
- const qs=(typeof serQ==="function"&&opt.keepQ)?serQ():[];
+ /* night-ledger-coop r4: her open cards ride the rebuild as data (j3 serQ / deserQ: pid, generator rk); a choice with no generator lapses with a log line (lap), never silently */
+ const qs=(typeof serQ==="function"&&opt.keepQ)?serQ({lap:1}):[];
  const fP=C.P[fs()];if(fP)freshFriend(fP,sS);
  const f=fP&&!friendSrv(fP)?buildFriend(fP,sS):null;if(f)R.push(f);
  try{rfWorldDup(sS,R)}catch(e){console.error("face dup",e)}
@@ -290,6 +291,14 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W|
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
+/* review/coop-flakes (D20, law 6b: ONE person, ONE link). Move key `from` of an id-keyed map to `to` (a stand-in → her world id: jcoopask
+   settle; a person the host had to give another id: jcoopthinc lens re). When `to` already holds a number it is the SAME person's (the
+   host ran her week with that id; a missing link starts at 0, j9 affAdd), so a LINK (rl / ro: the map's key pk is in BAL.linkRange) ADDS,
+   clamped to that range; keeping one and dropping the other lost her thiện cảm (25 → −3, coop-guest-maid). Any other number is a week stamp /
+   turn / count (S.met, S.askAt, S.dKnown, S.seen = wk(); rv: adding them put «met» in week 82 at week 42): the larger stays, as jnamefix does
+   for a renamed key. Other values: the one already at `to` stays. to == null: the key is dropped (a refused stand-in). */
+CW.keyMove=function(o,from,to,pk){if(!o||typeof o!=="object"||!(from in o))return;const v=o[from];delete o[from];if(to==null)return;
+ if(!(to in o)){o[to]=v;return}const w=o[to];if(typeof v==="number"&&typeof w==="number"){const L=BAL.linkRange[pk];o[to]=L?Math.max(L[0],Math.min(L[1],v+w)):Math.max(v,w)}};
 CW.netWrap=function(f,self,args){if(!CW.on||host()||stateOn("netWrap")){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */||cyHer())return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
@@ -1093,6 +1102,7 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+CW.snapNow=()=>{try{clearTimeout(svT)}catch(e){}snapSave(true)};/* r4: a carried card is in her seat copy at once (a reload right after the carry keeps it) */
 /* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
    the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
    "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */
