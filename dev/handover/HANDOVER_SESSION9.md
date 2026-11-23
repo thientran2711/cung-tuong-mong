@@ -2623,3 +2623,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21:02Z) hdr-kiep PASS 5d0039de → relayed to LC7; W3 + reviewer archived.
 - (21:07Z) W1 ky-keeper-f2 LAND READY? 7d7a77d7 (jky.js only; 4/10→10/10) → opus BIG reviewer-lander session_01Rc5AsL1nEGqb52Rx9C8tgz. 2235 vanish not reproduced = watch item for N17.
 - (21:30Z) LANDED hdr-kiep 948c80a5 (LC7; quickcheck PASS incl. old save, coop-e2e 141/141). LIVE = 948c80a5.
+- (21:31Z) W2 kit-odds-row READY e74dff9d (final ladder) → opus BIG reviewer session_01Rc5AsN8oTu6WZUSrRF6UsK. W2 now on text-scan PDF.
