@@ -85,7 +85,10 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
     nothing restored; jcoopworld famAsk asks once per pos hash and B's pos may not change again → is the ask or the reply lost?) */
  for(const o of [A,B])await o.p.evaluate(()=>{window.__fq=[];if(!window.__fqW){window.__fqW=1;const s0=COOP.send;COOP.send=function(m){const r=s0.apply(this,arguments);try{if(m&&m.k==='ctm-fam'&&window.__fq)__fq.push(['out',m.mode,m.h,Date.now()%1e6,r===false?'false':(r&&r.then?'p':String(r))])}catch(e){}return r};
    COOP.on('act',m=>{try{if(m&&m.k==='ctm-fam'&&window.__fq)__fq.push(['in',m.mode,m.h,m.name||'',m.from,Date.now()%1e6])}catch(e){}});COOP.on('pos',m=>{try{if(window.__fq&&__fq.length<40)__fq.push(['pos',m.fh,Date.now()%1e6])}catch(e){}})}});
- {await A.p.evaluate(()=>{COOPW.famGotH='';COOPW.famLast=null;const f=COOPW.friend();f.inv=[];f.kids=[]});await B.p.evaluate(()=>{S.danh=Math.min(100,(S.danh||0)+1);render()});
+ {await A.p.evaluate(()=>{COOPW.famGotH='';COOPW.famLast=null;const f=COOPW.friend();f.inv=[];f.kids=[]});/* review/coop-driver-fails #2 (proof M3 probe): famAsk asks once per bag hash per 4 s (jcoopworld.js:410). The host's last ask for this hash was
+     1.4 s before the reset, so the one pos this step sends fell inside the throttle: no ask went out (host fq: no 'out', guest fq: []), and no
+     later pos came. In play her next update after 4 s asks again; here the trigger waits the throttle out. */
+  await sleep(4500);await B.p.evaluate(()=>{S.danh=Math.min(100,(S.danh||0)+1);render()});
   {const r=await until(A,n=>{const f=COOPW.friend();return f&&(f.inv||[]).length===n.inv&&(f.kids||[]).length===n.kids},nB,15000);
    ok(r,'1 A: a lost relay is asked again and restored',r?undefined:{A:await A.p.evaluate(()=>{const f=COOPW.friend();return{gotH:COOPW.famGotH,last:!!COOPW.famLast,ask:COOPW.famAsk,fh:COOPW.fpos&&COOPW.fpos.fh,fpw:COOPW.fpos&&[COOPW.fpos.week,COOPW.fpos.buoi],f:f&&{n:f.name,inv:(f.inv||[]).length,kids:(f.kids||[]).length},tr:(COOPW.tr||[]).slice(-12),fq:window.__fq}}).catch(e=>e.message),FQB:await B.p.evaluate(()=>({fq:window.__fq,st:COOP.state.status})).catch(e=>e.message),
     B:await B.p.evaluate(()=>({sentH:COOPW.famSentH,h:COOPW.famPack().h,p2:!!COOPW.p2,ctx:!!COOPW.ctx,dead:!!S.dead,tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message)})}}
