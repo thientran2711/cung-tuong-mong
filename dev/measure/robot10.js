@@ -105,7 +105,7 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
  return out}
 
 /* ---- one life ---- */
-async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scans:0,long:[]},t:{}};
+async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scans:0,long:[]},t:{},life:{id:'HARNESS',type:'harness',group:'no ending',death:false,maxRank:-1}};
  const b=await chromium.launch();const bugs=new Map();
  const bug=(type,msg,detail,extra)=>{const k=type+'|'+String(msg).slice(0,160);const x=bugs.get(k);if(x){x.n++;return x}const y=Object.assign({type,msg:String(msg).slice(0,300),detail:String(detail||'').slice(0,600),n:1},extra||{});bugs.set(k,y);return y};
  try{
@@ -210,7 +210,7 @@ function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0)
  fs.mkdirSync(path.join(OUT,'saves'),{recursive:true});const T0=Date.now();
  console.log(`ROBOT-10 ${ORIGIN} ${BR} · ${bots.length} bots × ${lives} kiếp → ${jobs.length} lives, ${PAR} in parallel · game ${URL}`);
  const done=[];let k=0;
- await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async()=>{while(k<jobs.length){const j=jobs[k++];const r=await life(j);done.push(r);
+ await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async()=>{while(k<jobs.length){const j=jobs[k++];let r;try{r=await life(j)}catch(e){r={job:j,bugs:[{type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],detail:String(e.stack).slice(0,300),n:1}],cps:0,ui:{scans:0,long:[]},t:{total:0},life:{id:'HARNESS',type:'harness',group:'no ending',death:false,maxRank:-1}}}done.push(r);
   console.log(`  ${j.id}: ${r.life.id} [${r.life.group}] · max ${r.life.maxRankN||r.life.maxRank} · ${r.life.years!=null?r.life.years:'?'} y · ${r.buoi} buổi · ${r.bugs.length} bugs · ${(r.t.total/1e3).toFixed(0)} s`);
   fs.writeFileSync(path.join(OUT,`${ORIGIN}-${stamp}.json`),JSON.stringify(done.map(x=>Object.assign({},x,{bugs:x.bugs.map(b=>Object.assign({},b,{save:undefined}))})),null,1))}}));
  report(done,jobs,stamp,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
