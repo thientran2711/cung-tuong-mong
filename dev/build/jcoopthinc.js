@@ -267,8 +267,8 @@ TH.onDo("npc",a=>{if(!on()||!a||!Array.isArray(a.ops))return {err:"off"};const r
  C.stat.applied+=r.n;lg(["applied",r.n,JSON.stringify(r.re)]);return r});
 /* the guest: a person the host had to give another id (rare: the host made one with that id the same moment) — her links follow */
 COOP.on("thinview",V=>{try{if(!gOn()||!V||!V.o||!V.o.dr)return;const d=V.o.dr;if(d.op!=="npc"||!d.r||!d.r.re||C.reDone===d.id)return;C.reDone=d.id;
- const re=d.r.re;const s=S[RAW]||S;const fix=o=>{if(!plain(o))return;for(const k of Object.keys(o)){const v=o[k];if(k in re&&plain(v)===false&&o!==s){o[re[k]]=v;delete o[k]}else if(plain(v))fix(v)}};
- for(const m of ["rl","ro","known"])if(plain(s[m]))for(const from in re)if(from in s[m]){s[m][re[from]]=s[m][from];delete s[m][from]}}catch(e){console.error("lens re",e)}});
+ const re=d.r.re;const s=S[RAW]||S;/* review/coop-flakes (D20, LAW 11 family of jcoopask remapS): a link already at the new id is the same person's → CW.keyMove adds (rl / ro clamped), never overwrites */const fix=(o,pk)=>{if(!plain(o))return;for(const k of Object.keys(o)){const v=o[k];if(k in re&&plain(v)===false&&o!==s){CW.keyMove(o,k,String(re[k]),pk)}else if(plain(v))fix(v,k)}};
+ for(const m of ["rl","ro","known"])if(plain(s[m]))for(const from in re)if(from in s[m])CW.keyMove(s[m],from,String(re[from]),m)}catch(e){console.error("lens re",e)}});
 
 /* ---------- 5. G7 on the host: NPC buổi acts can aim at her (her entry in the harem; items / children go out as res ops, B4) ---------- */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(!on()||!host()||!S||CW.pulled||!CW.b4Wrap)return f.apply(this,arguments);

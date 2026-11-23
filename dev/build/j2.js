@@ -64,7 +64,7 @@ function artActs(){const A=[],r=S.arts;
 function deal(){
  const X=[];
  /* Tranh sủng / Chặn ngự giá are no deck cards any more: they exist ONLY in the card-flip choice at the end of tối (owner OD 16/11 22:45Z; jnf.js §2).
-    CO-OP PARKED (jnf.js nfParked, until coop-thin E): in a co-op room the live night stays, so the two live cards stay there (live main code; loss = stealLose, one core) */
+    PARKED (jnf.js nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff); player rooms with both seats in the palace run the new night since ROOT-82): there the live night stays, so the two live cards stay there (live main code; loss = stealLose, one core) */
  {const v=typeof window.nfParked==="function"&&window.nfParked()&&S.tonight&&S.tonight!=="me"?S.tonight:null;
  if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:stealCost("feign"),o:oSteal(S),w:{},l:stealLose("feign"),b:B4L,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
   X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:stealCost("road"),o:oSteal(S,"road"),w:{},l:stealLose("road"),b:B4L,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}}

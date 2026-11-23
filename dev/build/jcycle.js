@@ -75,8 +75,17 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
  for(let k=0;k<12;k++){const w=m0-3*k+t;if(w<=p.pregWk)break;if(w<=W)n++}return n}catch(e){return 0}}
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
-/* the TRAY (Kính sự phòng's view): her card is off while in her cycle tuần, unless she reported falsely this tuần (báo sớm / giấu) */
-function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
+/* BY DAY with the 10-night ledger (owner OD 16/11 19:00Z "only the actual cycle days block"; review/night-ledger-r1): while jledger runs
+   (ldOn) the tuần's ONE played tối is a real day of the month (ldNow().days[p].d), drawn at the end of tối. Once it is drawn her cycle
+   blocks the scene / the flip choice / the steal only when her cycle covers THAT day. While the ledger draws (jledger window.__ldRoll)
+   nothing blocks: it keeps every woman off her own cycle days night by night (jledger cyDayOf). Before the draw (the day's own acts: the
+   late visit's night option, the ksp bath, the tray she sees) the played day is not known yet: her cycle tuần blocks as before.
+   Without the ledger (a PARKED room: nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff); BAL.nt.on false; a player room with both seats in the palace runs the ledger since night-ledger-coop): the whole cycle tuần, as before. */
+function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;if(window.__ldRoll)return 0;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
+function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined||d===null)return true;if(d===0)return false;return cyDaysM(p,cyCur()).includes(d)}
+/* the TRAY (Kính sự phòng's view): her card is off while in her cycle (the played day with the ledger, else her cycle tuần), unless she
+   reported falsely this tuần (báo sớm / giấu) */
+function cyTray(p){if(!cyNow(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
 /* co-op (review/coop-b1b5-fix): the OTHER player's entry carries her own report too — her S.cyb, relayed at once by jcoopworld (ctm-p2
    "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
    her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
@@ -89,7 +98,7 @@ function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefine
 window.cyRec=cyRec;window.cyWk=()=>wk();window.cyAsk=()=>cyAsk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
-window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyNow=cyNow;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
@@ -102,7 +111,7 @@ for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(!A0)c
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(){if(cyTray(S))return RSN;return l0?l0.apply(this,arguments):""}}
 const ns0=nightScene;nightScene=function(){if(cyTray(S)){log(`${RSN}.`);if(S.tonight==="me")S.tonight=null;return}
  /* she lied to the book (báo sớm / giấu) and is called during her cycle: the Kính sự phòng mama checks before the sedan comes */
- try{if(cycOn(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
+ try{if(cyNow(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
    if(!roll(po)){const b=S.sung,d=S.danh;apply({sung:-R.lieSung,danh:-R.lieDanh});S.ksKnows=1;if(S.tonight==="me")S.tonight=null;
     const t=`Ma ma Kính sự phòng soát người trước khi lên kiệu, thấy ngươi đang kỳ nguyệt sự mà sổ ghi khác: tội khai man. Đêm nay mất, Sủng ${b} → ${S.sung}, Danh ${d} → ${S.danh}; Tổng quản biết chuyện của ngươi.`;
     log(t);try{Q.push({t:"Kính sự phòng",who:typeof pEunCourt==="function"?pEunCourt("ksp"):null,h:`<p>${t}</p>`})}catch(e){}return}
@@ -114,7 +123,8 @@ lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
   const d=S.nightWhy;if(d&&d.wk===wk()&&Array.isArray(d.rows))for(const row of d.rows){const p=row.id==="me"?S:(rivals||[]).find(v=>v.id===row.id);if(p&&cyTray(p)&&!(row.reasons||[]).some(x=>x.k==="cyc"))(row.reasons=row.reasons||[]).push({k:"cyc",t:"đang kỳ nguyệt sự",pub:p===S})}
   if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
-  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
+  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";const ld=cyLdDay()!==undefined;
+   log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":ld?`Kỳ nguyệt sự đã đến (${dName(cyDaysM(S,cyCur()))}): những đêm ấy Kính sự phòng tạm cất thẻ bài của ngươi.`:"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
  }catch(e){console.error(e)}return r};
 /* ---------- 7. FERTILE WINDOW (D57): conceiveCh × BAL.cyc.fert by her cycle phase this tuần; one notice when her peak tuần starts ---------- */
@@ -152,14 +162,16 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
- const H=[["sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất tuần này","an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
+ /* with the 10-night ledger the card is off only on her cycle days (review/night-ledger-r1, OD 19:00Z): the words say so (LUẬT SỬA CẢ NHÓM) */
+ const TN=cyLdDay()!==undefined?"những đêm ấy":"tuần này";
+ const H=[[`sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất ${TN}`,"an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
   [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn đoán ra; tổn Đức, tuần sau khó được lật thẻ; hỏng thì Tổng quản biết`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; tổn Đức; bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng; kẻ thù có thể nắm chứng cứ`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; cả cung đồn có tin vui, không có thai thì mừng hụt; bị soát ra thì mất sủng; kẻ thù có thể nắm chứng cứ`,"liều"]];
  const O=[
-  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:["thẻ bài tạm cất tuần này"],wl:"Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi tuần này."},"dung"),
+  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:[`thẻ bài tạm cất ${TN}`],wl:`Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi ${TN}.`},"dung"),
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
-    k:["thẻ bài tạm cất tuần này và khó được lật tuần sau","thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
+    k:[`thẻ bài tạm cất ${TN} và khó được lật tuần sau`,"thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
   mk("Báo sớm, nói đã sạch kỳ",{c:{duc:-R.somDuc},wt:[G6("thẻ bài vẫn nằm trên khay")],k:[risk,evi],wl:"Ma ma báo kỳ của ngươi đã qua; thẻ bài vẫn nằm trên khay."},"som",lie("som")),
   mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: ${sgStat(-B().rumSung)} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];

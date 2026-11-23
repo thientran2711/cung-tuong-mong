@@ -6,7 +6,7 @@
    before buổi tối only marks the tablet as waiting (S.nfP = day); entering buổi tối (nextBuoi) runs it; a night the Emperor already spends
    with someone (j75 ntTaken: a won steal, his own visit) = no flip. Nothing else of the night rules changes (commit, steals, co-op relay).
    Servant route (j42) and home route (jkc) keep their own week.
-   With jnf.js (night-final) this file runs ONLY while jnf's co-op gate is closed (window.nfParked(), a co-op room on): co-op keeps the live
+   With jnf.js (night-final) this file runs ONLY while jnf's co-op gate is closed (window.nfParked (thin part-E, or a room with a seat off the palace: jnf roomOff); player rooms with both seats in the palace run jnf): co-op keeps the live
    start-of-tối flip until Foreman B's coop-thin E; solo = jnf owns the flip (this file is a no-op there). Delete with the nfParked gate (jnf.js).
    Save: S.nfP / S.nfF (same names as jnf) — absent in old saves = harmless; an old save flipped in the morning keeps its pick. */
 (function(){
