@@ -4,7 +4,8 @@
    Now each bot's clear() calls  require('./lib/coop-clear.js').first(o, <its own page step>)  and only its own extra steps stay inline.
    Order (a player always meets them on top of the game first):
      1. the Luân hồi roulette of a new life: «Bỏ qua» (#kroul .krskip)                                   (night-balance-bundle / coop-thin-g-f1)
-     2. a manual kit scene (night-end «Nhận» #kneov, reward box, person reveal): its own close [data-km-close]
+     2. a manual kit scene (night-end «Nhận» #kneov, reward box, person reveal): its own close [data-km-close]; the kit ITEM REVEAL (jfx kitGain)
+        closes only on its «Nhận» .krevok (no [data-km-close] marker yet, KIT_REQUESTS) — a player taps it (rv night-ledger-coop-r2)
         — skipped while window.__noclose is set (cn-force probe keeps the scene open on purpose)          (rv night-balance-bundle 735606d8)
      2b. a full-screen scene (.kmov): its own end (.kmend / .krevok / its last button), else one tap (skipped under window.__noclose)  (coop-thin-g-f1 #7)
      3. a jfocus dialogue line «Tiếp ▸» (.kfoc-next, e.g. cnvScold on a cung nữ)                          (coop-thin-g-f1 30e12013)
@@ -18,7 +19,7 @@
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
- if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close]')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
+ if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
  /* 2b. a full-screen scene on top (.kmov: night card, mirror reveal, item gain …): ended by its OWN end — KIT 81 «Tiếp theo» (.kmend), «Nhận» (.krevok) —
      else the scene's own last button (the item gain ✕), else — no button yet — one tap on the scene (was pasted in coop-e2e / coop-thin-g / coop-night / coop-cyc; lost from coop-timer in
      the LIVE merge 067ee9a9: coop-thin-g-f1 #7). Skipped while window.__noclose is set (cn-force keeps a scene open on purpose). */

@@ -252,9 +252,12 @@ function agWatch(){if(!agOn()||S.out)return;const H=agHereKh();if(!H)return;cons
  if(n)try{showModal()}catch(e){}}
 function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
 function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
- if(t===S){if(typeof agShOn==="function"&&agShOn()){Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} tìm đến ngươi ở ${W}: nàng muốn ${p.act} ngươi.</p>`,opts:agShOpts(p,v)});return}/* AG-ALL-2d one shared act (OD L1641) */
+ if(t===S){if(typeof agShOn==="function"&&agShOn()){Q.push(agSeekCard(p,v));return}/* AG-ALL-2d one shared act (OD L1641) */
   const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
- const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
+ Q.push(agSeenCard(p,v))}
+/* r4: both choice cards of a scene are carried as data (j3 rcpReg: the plan p with people as ids + the doer v) */
+const agSeekCard=rcpReg("agSeek",(p,v)=>{const W=agPlaceTxt(p.pl);return{t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} tìm đến ngươi ở ${W}: nàng muốn ${p.act} ngươi.</p>`,opts:agShOpts(p,v)}});
+const agSeenCard=rcpReg("agSeen",(p,v)=>{const t=agPerson(p.t),W=agPlaceTxt(p.pl);const tn=t?` ${t.name}`:"";return{t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)}});
 /* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source).
    The option is named by the player's own act of that deed (its kit act picture, KIT §6.2 kitOptPic "act"), so every reaction row has a picture. */
 const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`}},

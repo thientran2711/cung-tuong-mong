@@ -130,12 +130,14 @@ function gmReplies(v,G){const T=n=>{try{return topicOpts(v).find(a=>a.n===n)}cat
  const R=[];for(const n of ["Hỏi han sức khỏe","Khen tài nghệ nàng","Chia sẻ bí mật"]){const a=wrap(T(n));if(a)R.push(a)}
  R.push({n:"Khéo cáo lui",fx:{},x:"không thêm lời, giữ hòa khí đôi bên",go:()=>{}});return R}
 function gmCard(v){const O=gmOpts(v);if(!O.length)return null;const c=agPw(O.map(o=>[o,Math.max(BAL.mind.pickMin,o.w)]));GM.stat.byOpt[c.k]=(GM.stat.byOpt[c.k]||0)+1;
- const r=c.run();let opts;
- if(c.k==="provoke"){try{opts=apHostOpts(v)}catch(e){opts=null}}
- if(!opts)opts=gmReplies(v,r.G);
+ const r=c.run();
  try{log(`${r.h} ${r.line}`)}catch(e){}
+ return gmReplyCard(v,c.k==="provoke",r.G,r.h,r.line)}
+/* r4: the reply card (after the visitor's act ran) is carried as data (j3 rcpReg): v, provoke, G, the two lines */
+const gmReplyCard=rcpReg("gmReply",(v,prov,G,h1,h2)=>{let opts;if(prov){try{opts=apHostOpts(v)}catch(e){opts=null}}
+ if(!opts)opts=gmReplies(v,G);
  let who;try{who=k61Named(v)&&isKnown61(v)?pv(v):kitStrangerOf(v)}catch(e){who=pv(v)}
- return{ev:1,t:"Có người đến",who,h:`<p>${r.h}</p><p>${r.line}</p>`,opts}}
+ return{ev:1,t:"Có người đến",who,h:`<p>${h1}</p><p>${h2}</p>`,opts}});
 (function(){
  /* before the agent loop's deciders: approaching is one of her uses of the buổi's ONE deed; who approaches keeps her deed (agUse), the rest decide as before */
  const at0=agTick;agTick=function(){try{gmTick()}catch(e){}return at0.apply(this,arguments)};

@@ -67,20 +67,20 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);
  const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,date:[S.year,S.month,S.tuan,S.turn].join('/'),pend:!!COOPW.pend,sent:COOPW.sent,nr:COOPW.nrdy,
    ready:!!(COOPW.nReady&&COOPW.nReady()),next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,Q:Q.length,tr:(COOPW.tr||[]).slice(-6)}));
+ /* debug (night-ledger-coop-r2): what holds a seat (jnf choice, Q, modal, the night gate, the ledger) */
+const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');return {nf:typeof nfDebug==='function'?nfDebug():null,Q:Q.map(x=>x&&(x.pid||x.t)),modal:m&&!m.hidden?(document.getElementById('mt')||{}).textContent:null,
+  mg:!!S.mg,ngoW:COOPW.ngoW,nrdy:COOPW.nrdy,ngo:COOPW.ngo,wk:COOP.state.week,pend:COOPW.pend,sent:COOPW.sent,allowN:COOPW.allowN,buoi:S.buoi,used:typeof used!=='undefined'?used:null,
+  ld:S.ledger?{wk:S.ledger.wk,p:S.ledger.p,st:S.ledger.st}:null,ldG:S.ldG,cyHold:COOPW.cyHold,kmov:[...document.querySelectorAll('.kmov')].filter(x=>!x.classList.contains('km-out')).map(x=>x.id||x.className).slice(0,4),
+  dawn:!!(document.getElementById('dawn')&&document.getElementById('dawn').classList.contains('on')),tr:(COOPW.tr||[]).slice(-12),cf:{busy:window.cfBusy&&cfBusy(),age:window.cfAge&&cfAge(),dbg:(window.__cfdbg||[]).slice(-12),kmov:[...document.querySelectorAll('.kmov')].map(x=>x.className.slice(0,60)+':'+(x.getAttribute('aria-label')||'')),gains:(window.KFX&&KFX.gains||[]).slice(-4),inv:(S.inv||[]).slice(-3).map(x=>x&&[x.k,x.n||x.name,x.src||x.from,x.wk])},nw:S.nightWhy&&{wk:S.nightWhy.wk,pick:S.nightWhy.pick},day:typeof day==='function'&&day()}}catch(e){return e.message}}).catch(e=>e.message);
  /* both press through the day buổi until both are at tối */
- async function toNight(tag){for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
+ async function toNight(tag){if(process.env.ONLY&&!process.env.ONLY.split(',').includes(tag))return false;/* debug: ONLY=4,5 runs just those cases */for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await clear(A);await clear(B);await press(A);await press(B);
    await bothPast(A,B,k,30000);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}}
   const a=await D(A),c=await D(B);return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
  /* wait for the merged week on both, then compare */
  async function merged(tag,w0,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){await clear(A);await clear(B);
    const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)break;await sleep(400)}
-  await sleep(800);const a=await D(A),c=await D(B);ok(a.w===w0+1&&c.w===w0+1,tag+': both in the next week (exactly one step)',[w0,a.w,c.w]);
-  /* coop-thin-g-f1 #7: the stuck-week dump (lost in the LIVE merge 067ee9a9, restored) */
-  if(!(a.w===w0+1&&c.w===w0+1))console.log('dbg '+tag,JSON.stringify(await A.p.evaluate(()=>{const G=COOPW.thin&&COOPW.thin.G;let st=null;try{st=COOPW.thin.seatOf('b')}catch(e){}
-   return {gOn:!!(G&&G.on()),done:G&&G.done,stat:G&&G.stat,log:G&&G.log.slice(-6),thq:st&&st.S&&Array.isArray(st.S.thq)?st.S.thq.map(x=>x&&(x.t||x.k||x.kind)):null,frPz:!!(COOPW.frPz&&COOPW.frPz()),
-    hold:!!(COOPW.gHold&&COOPW.gHold()),cyHold:COOPW.cyHold,cyNo:COOPW.cyNo,cyA:COOPW.thin&&COOPW.thin.E&&COOPW.thin.E.cyA,cyb:st&&st.S&&st.S.cyb,dlog:COOPW.thin&&COOPW.thin.D&&COOPW.thin.D.log.slice(-14),elog:COOPW.thin&&COOPW.thin.E&&COOPW.thin.E.log&&COOPW.thin.E.log.slice(-10),sent:COOPW.sent,pend:COOPW.pend,ngo:COOPW.ngo,tr:(COOPW.tr||[]).slice(-10)}}).catch(e=>e.message)),
-   JSON.stringify(await B.p.evaluate(()=>{const m=document.getElementById('modal');return {Q:Q.length,mt:m&&!m.hidden?(document.getElementById('mt')||{}).textContent:'',btn:m&&!m.hidden?[...m.querySelectorAll('button')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,30)):[],ov:!!(document.getElementById('ov')&&!document.getElementById('ov').hidden),ovB:(()=>{const o=document.getElementById('ov');if(!o||o.hidden)return null;return {kids:[...o.children].map(c=>c.id+'.'+(c.className||'').slice(0,30)+(c.hidden?':h':'')),btn:[...o.querySelectorAll('button')].filter(b=>b.offsetParent!==null).slice(0,12).map(b=>{const r=b.getBoundingClientRect(),h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return [b.id,b.textContent.trim().slice(0,20),b.disabled?1:0,h?(h===b||b.contains(h)?'self':(h.id||'')+'.'+String(h.className||'').slice(0,30)):null]}),km:[...document.querySelectorAll('.kmov')].map(x=>String(x.className).slice(0,50))}})(),mg:!!S.mg,tr:(COOPW.tr||[]).slice(-8)}}).catch(e=>e.message)));
+  await sleep(800);const a=await D(A),c=await D(B);if(!(a.w===w0+1&&c.w===w0+1))console.log('DUMP '+tag,JSON.stringify([await DUMP(A),await DUMP(B)]));ok(a.w===w0+1&&c.w===w0+1,tag+': both in the next week (exactly one step)',[w0,a.w,c.w]);
   ok(a.date===c.date&&a.b===c.b&&a.b===0,tag+': same date, both at buổi sáng',[a.date,c.date,a.b,c.b])}
  /* one seat ready at tối: it must stay in tối, the other untouched */
  async function readyOnly(X,Y,tag){const x0=await D(X),y0=await D(Y);
@@ -112,26 +112,83 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const a2=await D(A);ok(a2.b===LAST&&a2.w===w0,'3: closing the event does not advance by itself',a2);
   await clear(A);ok(await isRd(A)||await press(A),'3: host presses');await merged('3',w0);ok(await A.p.evaluate(()=>__pick)===1,'3: the choice ran once')}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
- /* 4 time out at tối, guest AFK */
- if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
-  for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
-  
-  /* NLC #9: the host plays on like a player (scene, morning panel, his choice); the AFK guest never answers. Bound (jnf): every seat's
+ /* 4 time out at tối, guest AFK. FORCE4=g|h (rv night-ledger-coop-r2 FAIL 1, deterministic): the host's ldRoll pins the played tối on the
+    guest (g) / on the host (h) before the flip, so the AFK seat is the PLAYED holder: her own summons «Kính sự phòng báo tin» (a real choice)
+    sits on her screen; h = mirrored, the HOST is AFK and the guest presses. Bound (jcooptimer nightAfk, BAL.coopTm.nightMs): it closes with
+    no answer once her tối is overdue → her night step runs, the room is not frozen. */
+ if(await toNight('4')){const w0=(await D(A)).w;const F4=process.env.FORCE4||'';const X=F4==='h'?A:B,Y=F4==='h'?B:A;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
+  for(let i=0;i<3;i++){await clear(X);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the AFK seat reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
+  if(F4){const pin=await A.p.evaluate(g=>{try{if(typeof ldRoll!=='function'||!ldOn())return 'no ledger';const f=rivals.find(v=>v&&v.coop&&v.alive!==false);S.ledger=null;ldRoll(g?f:S);const p=ldPin();return p===S?'host':p===f?'guest':String(p&&p.name)}catch(e){return e.message}},F4==='g');
+   console.log('4 FORCE4='+F4+' played tối pinned on:',pin);
+   /* no ledger in this room (nfOn false: a seat off the palace / a parked room, by her random thân phận): nothing to pin — n/a, not a FAIL */
+   if(pin==='no ledger')console.log('n/a  4: the played tối is pinned on the AFK seat ('+F4+'): no ledger in this room');else ok(pin===(F4==='g'?'guest':'host'),'4: the played tối is pinned on the AFK seat ('+F4+')',pin);
+   /* the carry rule (coordinator, OD L680): a real non-night choice on top of the AFK seat (like «Một ánh mắt»): two roads, each marks if taken */
+   await X.p.evaluate(()=>{window.__c4=0;window.__c4back=0;window.__c4atBack=null;
+    /* a card of the save's kind (pid): every co-op week merge rebuilds Q through serQ / deserQ (fromCanon keepQ), which keeps only pid cards */
+    PEND.c4test=()=>({t:"<p>Một việc cần ngươi tự quyết.</p>",o:[{n:"Nhận lời",fx:{},go:()=>{window.__c4=1}},{n:"Từ chối",fx:{},go:()=>{window.__c4=2}}]});
+    Q.unshift(deserQ([{pid:"c4test",pp:{},t:"Việc khó xử"}])[0]);try{showModal()}catch(e){}
+    /* back on top after the merged week: seen on her screen (the harness's clear() may then press it, as she would on her return) */const iv=setInterval(()=>{if((COOPW.nacB||0)>0&&Q[0]&&Q[0].pid==="c4test"&&!document.getElementById('modal').hidden){window.__c4back=1;window.__c4atBack=window.__c4;clearInterval(iv)}},50);
+    /* r4 (rv r3 FAIL 1): a REAL non-pid two-road card from a game generator (j24 «Có người đến», apSorry) on a live world consort: carried as data,
+       made again after the merged week against the merged world; she answers it on her return («Nhận lời xin lỗi»: her thiện cảm with that consort
+       rises) → the effect must land on that consort IN the merged world (rivals), and reach the partner seat at the next week merge (rl[her seat]) */
+    window.__nr={};const v=rivals.find(x=>x&&!x.coop&&x.alive&&!x.out&&!x.confined);if(v){const m=AP_MK.apSorry({kind:"apSorry",who:v});window.__nr={id:v.id,rk:m.rk||null,ra:!!m.ra,pid:m.pid||null,n:m.opts.length,obj:v};/* r4 fixer #4 (open 1 of «FIX r4», g3 / cnh2): it is an OPTIONAL card, so the j68 scheduler (evGate, at every showModal) may hold it in EVHOLD (one optional card per buổi, same template / person lately) and it never reaches her screen; pin the scheduler for this one card (as ldRoll is pinned above) so it is really on top of her screen when she goes AFK */try{const sc=evS(),K=evKeys(m);sc.bk=-1;sc.dn=0;sc.last="";delete sc.tpl[K.tpl];delete sc.key[K.key]}catch(e){}Q.unshift(m);try{showModal()}catch(e){}window.__nr.shown=Q[0]===m;/* LAW 11 (the same family, another holder): an optional card the scheduler HELD (EVHOLD, page memory) when the week merges: made again against the merged world */window.__nh={};const v2=rivals.find(x=>x&&x!==v&&!x.coop&&x.alive&&!x.out&&!x.confined);if(v2&&typeof EVHOLD!=="undefined"){const h=AP_MK.apSorry({kind:"apSorry",who:v2});EVHOLD.push({m:h,at:wk(),K:evKeys(h)});window.__nh={id:v2.id,obj:v2,m:h}}
+     window.__nrM=m;window.__nrGone=null;const ivg=setInterval(()=>{if(!Q.some(x=>x&&x.rk==='ap.apSorry')&&!(S.cq||[]).some(e=>e.rk==='ap.apSorry')&&!window.__nr.back){window.__nrGone={t:Math.round(performance.now()),top:Q[0]&&(Q[0].pid||Q[0].t),fc:COOPW.inFC||0,wk:COOP.state.week,b:S.buoi,stack:(new Error().stack||'').slice(0,0)};clearInterval(ivg)}if(window.__nr.back)clearInterval(ivg)},5);COOPW.afterCarry=out=>{const q=out.find(x=>x&&x.rk==="ap.apSorry");if(q){COOPW.afterCarry=null;const w=rivals.find(x=>x.id===window.__nr.id);
+      window.__nr.back=1;try{const N=window.__nh;if(N&&N.id){const e=EVHOLD.find(x=>x&&x.m&&x.m.rk==="ap.apSorry")||(()=>{const c=Q.find(x=>x&&x!==q&&x.__held&&x.rk==="ap.apSorry");return c?{m:c}:null})();/* or released by evRelease already */const w2=rivals.find(x=>x.id===N.id);let r0=null,r1=null;if(e&&w2&&e.m!==N.m){r0=w2.rel;const o=e.m.opts[0];apply(o.fx||{});if(o.go)o.go();r1=w2.rel}window.__nr.held={kept:!!e,made:!!e&&e.m!==N.m,inWorld:!!w2&&rivals.includes(w2),old:N.obj===w2,r0,r1};delete N.obj;delete N.m}}catch(x){window.__nr.held={err:x.message}}window.__nr.top=Q[0]===q;window.__nr.same=q===window.__nrM;Q.splice(Q.indexOf(q),1);Q.unshift(q);window.__nr.n2=q.opts.length;window.__nr.inWorld=!!w&&rivals.includes(w);window.__nr.oldObj=window.__nr.obj===w;window.__nr.r0=w?w.rel:null;window.__nr.wk=COOP.state.week;
+      try{chooseM(0)}catch(e){window.__nr.err=e.message}window.__nr.r1=w?w.rel:null;window.__nr.myId=COOPW.seat==="a"?901:902;delete window.__nr.obj}}}})}
+  /* NLC #9: the active seat plays on like a player (scene, morning panel, his choice); the AFK seat never answers. Bound (jnf): every seat's
      choice is in by BAL.steal.choice.waitMs from the flip (a scene queued behind a panel she never closed is dropped at waitMs − choice.ms,
      her 10-second clock then says Thôi; the host stops waiting for her at waitMs) → the night runs within the room clock + waitMs. */
   const wm=await A.p.evaluate(()=>BAL.steal.choice.waitMs),lim=9000+wm+15000;
-  const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
-  let st=-1;while(Date.now()-t0<lim){await clear(A);const c=await D(B);if(c.pend||c.w>w0||c.sent===w0||await B.p.evaluate(w=>(COOPW.tr||[]).some(x=>x.indexOf('g-go '+w+' ')===0),w0)/* coop-thin G (level 13): her phone runs no night; the host's go reaches her as g-go (CW.sent = the week; restored after the LIVE merge 067ee9a9). Her part-D patches right after it reset CW.sent (jcoopthin reEnd: she is answering her dawn cards again, by design), so her trace line «g-go <week>» is read too (coop-thin-g-f1 #7) */){st=Date.now()-t0;break}await sleep(300)}
-  if(st<0)console.log('dbg 4 st',JSON.stringify(await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)).slice(0,3000),JSON.stringify(await D(B)),JSON.stringify(await A.p.evaluate(()=>{const G=COOPW.thin&&COOPW.thin.G;return{done:G&&G.done,log:G&&G.log.slice(-6),frPz:!!(COOPW.frPz&&COOPW.frPz()),hold:!!(COOPW.gHold&&COOPW.gHold()),FS:COOPW.tm.dbg().FS,sent:COOPW.sent,pend:COOPW.pend,wk:wk(),week:COOP.state.week}}).catch(e=>e.message)));ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK guest holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);await merged('4',w0)}
+  const t0=Date.now();await clear(Y);ok(await isRd(Y)||await press(Y),'4: '+Y.name+' presses, '+X.name+' AFK');
+  /* r4 (Foreman B ruling 2): RLX=1 — the AFK seat's page reloads right after the carry, before the merged week: the carried card lives in her
+     save (S.cq) and must come back (made again from data) after the merged week; the test's own c4test generator dies with the page → it lapses */
+  let rlx=null;if(F4&&process.env.RLX){const tc=Date.now();while(Date.now()-tc<lim){const n=await X.p.evaluate(()=>({n:COOPW.nacN||0,cq:(S.cq||[]).map(e=>e.rk||e.pid)})).catch(()=>({n:0}));if(n.n>=1&&n.cq.includes('ap.apSorry')){rlx=n;break}await clear(Y);await sleep(100)}
+   console.log('4 RLX carried before reload:',JSON.stringify(rlx));
+   if(rlx){if(X===B){await B.p.close();await until(A,()=>COOP.frozen,null,60000);await join(B,code);ok(await until(B,()=>COOP.seat==='b'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000),'4 RLX: guest back')}
+    else ok(await rejoinHost(),'4 RLX: host back');
+    await X.p.evaluate(()=>{window.__rlxSeen=0;COOPW.afterCarry=out=>{const q=out.find(x=>x&&x.rk==='ap.apSorry');if(q){window.__rlxSeen=1;window.__rlxN=q.opts.length;COOPW.afterCarry=null}}});
+    console.log('4 RLX after rejoin:',JSON.stringify(await X.p.evaluate(()=>({Q:Q.map(x=>x&&(x.rk||x.pid||x.t)),cq:(S.cq||[]).map(e=>[e.rk||e.pid,e.cw]),wk:COOP.state.week,b:S.buoi}))));
+    for(let i=0;i<3;i++){await clear(Y);await sleep(300)}}}
+  let st=-1;while(Date.now()-t0<lim){await clear(Y);const c=await D(X);if(c.pend||c.w>w0||c.sent===w0||await X.p.evaluate(w=>(COOPW.tr||[]).some(x=>x.indexOf('g-go '+w+' ')===0),w0)/* coop-thin G (level 13): her phone runs no night; the host's go reaches her as g-go (CW.sent = the week); her part-D patches right after it reset CW.sent (jcoopthin reEnd, by design), so her trace line «g-go <week>» is read too (coop-thin-g-f1 #7, re-applied on LIVE d2cc5679 #10) */){st=Date.now()-t0;break}await sleep(300)}
+  const naf=await X.p.evaluate(()=>({n:COOPW.nafN||0,naf:COOPW.naf||null,dbg:COOPW.tm.naf&&COOPW.tm.naf(),Q:Q.map(x=>x&&(x.pid||x.t)),tonight:typeof S.tonight==='string'?S.tonight:S.tonight&&S.tonight.name}));console.log('4 AFK seat:',JSON.stringify(naf));
+  if(st<0)console.log('DUMP 4',JSON.stringify([await DUMP(A),await DUMP(B),await A.p.evaluate(require('./lib/coop-clear.js').SCR),await B.p.evaluate(require('./lib/coop-clear.js').SCR)]));
+  ok(st>=5000,'4: the AFK night runs only when the clock ends (host commits)',st);ok(st>=0&&st<=lim,'4: the AFK seat holds the night at most the clock + BAL.steal.choice.waitMs',[st,lim]);
+  if(F4)ok(naf.n>=1||!naf.Q.some(x=>['ksp','nfsum','amNight','prep','night1','night2'].includes(x)),'4: the AFK holder\'s own summons / night closed with no answer (jcooptimer nightAfk) or never stayed (a one-road dialog is read for her)',naf);await merged('4',w0);
+  /* the carry rule (coordinator, OD L680): a real non-night choice she sat on is never answered for her: kept and back on top after the merged week */
+  if(rlx){await until(X,()=>window.__rlxSeen===1,null,30000);const q=await X.p.evaluate(()=>({seen:window.__rlxSeen,n:window.__rlxN,cq:(S.cq||[]).length,back:COOPW.nacB||0,lapsed:COOPW.nacL||0,lapLog:(S.logs||[]).filter(x=>/việc đã qua/.test(x)).slice(0,3)}));console.log('4 RLX after merge:',JSON.stringify(q));
+   ok(q.seen===1&&q.n===2&&q.cq===0,'4 RLX: a reload between the carry and the merged week keeps the carried non-pid card (her save), back after the merge',q)}
+  else{const c=await X.p.evaluate(()=>({carried:COOPW.nacN||0,back:COOPW.nacB||0,cq:COOPW.tm.naf().cq,lapsed:COOPW.tm.naf().lapsed,rcpFail:window.__rcpFail,lap:(S.logs||[]).filter(x=>/việc đã qua/.test(x)).slice(0,4)}));console.log('4 carry:',JSON.stringify(c));
+   const tq=await X.p.evaluate(()=>({unansweredAtBack:window.__c4atBack,back:window.__c4back}));
+   ok(c.back===c.carried&&c.cq===0,'4: every dialog carried off the AFK seat is back on her screen after the merged week (never answered)',c);
+   if(F4)ok(c.carried>=1&&tq.back===1&&tq.unansweredAtBack===0,'4: her real choice («Việc khó xử», two roads) was carried, not answered, and came back on top of her screen after the merged week',[c,tq]);
+   if(F4){await until(X,()=>!!(window.__nr&&(window.__nr.back||!window.__nr.id)),null,20000);const nr=await X.p.evaluate(()=>{const o=Object.assign({},window.__nr);delete o.obj;o.gone=window.__nrGone;o.rcpFail=window.__rcpFail;return o});console.log('4 non-pid card:',JSON.stringify(nr));
+    if(!nr.id)console.log('n/a  4: no live world consort for the non-pid card');else{
+     ok(nr.rk==='ap.apSorry'&&nr.ra&&!nr.pid,'4: the non-pid card carries its generator as data (rk)',nr);
+     ok(nr.shown===true,'4: the non-pid card was on top of her screen when she went AFK (j68 scheduler pinned)',nr);
+     if(nr.held)ok(nr.held.kept&&nr.held.made&&nr.held.inWorld&&!nr.held.old&&nr.held.r1>nr.held.r0,'4: an optional card the j68 scheduler held (EVHOLD) is made again against the merged world; its road lands on the merged world\'s consort',nr.held);else console.log('n/a  4: no second live world consort for the held card')
+     ok(nr.back===1&&!nr.same&&nr.n2===nr.n&&nr.inWorld&&!nr.oldObj,'4: the non-pid card came back after the merged week, made again against the merged world (its consort is the merged world\'s, not the old object)',nr);
+     ok(nr.r1>nr.r0,'4: answered on her return, its road lands on that consort in the merged world (thiện cảm up)',nr);
+     global.__NR4={X:X.name,Y:Y.name,id:nr.id,myId:nr.myId,r1:nr.r1,y0:null}}}}}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4b the guest misses the host's final word of the night (its "fin" lost on the way: a dropped socket, a sleeping phone). The host ended its day
     right after fin and runs ahead while the merged week waits for her: she asks again (jnf ask), the host — already past that day — sends that
     day's fin again as it was (jnf again / S.nfLast) → both reach the next week (NLC #10: before, the host answered only for its CURRENT day = stall) */
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  if(await toNight('4b')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);
-  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;COOP.rxWrap=function(go,m){if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  await B.p.evaluate(()=>{window.__rx0=COOP.rxWrap;window.__fdrop=0;window.__nfrx=[];COOP.rxWrap=function(go,m){try{if(m&&m.k==="ctm-nf")window.__nfrx.push([m.mode,m.ph,m.fin,m.open,m.d,m.week,!!m.ld])}catch(e){}if(m&&m.k==="ctm-nf"&&m.fin&&!window.__fdrop){window.__fdrop=1;return}return window.__rx0?window.__rx0.apply(this,arguments):go()}});
+  /* rv night-ledger-coop-r2 FAIL 3: a fin word exists only when BOTH seats run the jnf night relay that day (nfOn: not parked, not a servant /
+     Kính sự phòng road, alive). Her relay off (e.g. a seat off the palace: jnf roomOff) → no fin to drop → n/a with the reason, never a FAIL;
+     relay on on both → it must have been dropped once. */
+  const NO=o=>o.p.evaluate(()=>{try{return {on:nfOn(),why:{dead:!!S.dead,park:typeof nfParked==='function'?!!nfParked():null,srv:typeof isSrv==='function'?!!isSrv():null,kc:typeof isKc==='function'?!!isKc():null}}}catch(e){return {on:null,why:e.message}}});
+  const on0=[await NO(A),await NO(B)];
   for(const o of [A,B]){await clear(o);ok(await isRd(o)||await press(o),'4b: '+o.name+' presses')}
-  await merged('4b',w0,90000);/* coop-thin-g-f1 #7 (level-only, like case 4's g-go): in a thin room >= 5 jnf is parked (nfParked: the host owns the night), no ctm-nf fin is ever sent, so there is none to lose — the check is that none came and the week still merged once (above) */if((+process.env.THIN||0)>=5)ok(await B.p.evaluate(()=>window.__fdrop===0),'4b (thin >= 5): jnf parked, no fin sent to lose');else ok(await B.p.evaluate(()=>window.__fdrop===1),'4b: the guest really missed the host\'s fin once');
+  const on1=[await NO(A),await NO(B)];
+  await merged('4b',w0,90000);
+  /* r4: the non-pid card's effect (case 4) reached the partner seat through the next week merge: her thiện cảm row rl[her seat] on that consort */
+  if(global.__NR4){const N=global.__NR4;global.__NR4=null;const Yo=N.Y===A.name?A:B,Xo=N.X===A.name?A:B;const y1=await Yo.p.evaluate(([id,k])=>{try{const r=(COOPW.base&&COOPW.base.W&&COOPW.base.W.R||[]).find(x=>x.id===id);return r&&r.rl?r.rl[k]:null}catch(e){return 'err '+e.message}},[N.id,N.myId]);
+   const x1=await Xo.p.evaluate(id=>{const v=rivals.find(x=>x.id===id);return v?v.rel:null},N.id);console.log('4 non-pid card, partner seat:',JSON.stringify(Object.assign({},N,{y1,x1})));
+   ok(y1!=null&&x1!=null&&y1===x1,'4: the non-pid card\'s effect is in the same world on both seats after the next merge (partner rl[her seat] = her thiện cảm)',[N,y1,x1])}{const fd=await B.p.evaluate(()=>window.__fdrop===1);const rel=on0.concat(on1).every(x=>x.on===true);if(!fd)console.log('DUMP 4b rx',JSON.stringify(await B.p.evaluate(()=>({rx:window.__nfrx,tr:(COOPW.tr||[]).slice(-25),nf:nfDebug()}))).slice(0,4000));
+   if(!fd&&!rel)console.log('n/a 4b: the night relay was off on a seat that day (no fin word to drop)',JSON.stringify({before:on0,after:on1}));else ok(fd,'4b: the guest really missed the host\'s fin once',{before:on0,after:on1})}
   await B.p.evaluate(()=>{COOP.rxWrap=window.__rx0;delete window.__rx0})}
  /* 5 guest ready, reloads; host presses */
  if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);
