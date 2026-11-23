@@ -11,7 +11,7 @@ button.s{background:#4a382c;color:var(--tx)}
 h2{margin:22px 12px 6px;color:var(--gold);font-size:20px}h2 small{color:var(--mut);font-weight:400;font-size:14px}
 .row{margin:12px;background:var(--card);border-radius:14px;padding:10px;border:3px solid transparent}
 .row.ok{border-color:var(--ok)}.row.no{border-color:var(--no)}
-.row img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;background:#000;display:block}
+.row img{width:100%;height:auto;object-fit:contain;cursor:zoom-in;border-radius:10px;background:#000;display:block}
 .nm{font-weight:700;font-size:20px;margin:10px 2px 2px}.nm .lv{color:var(--ok);font-size:13px;margin-left:8px}
 .sm{color:var(--mut);font-size:12px;margin:0 2px 8px;word-break:break-all}
 .tk{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -47,5 +47,6 @@ function msg(s){const e=document.getElementById('msg');e.textContent=s;e.style.d
 document.getElementById('send').onclick=async()=>{const s=txt(),k=Object.keys(P).length;try{await navigator.clipboard.writeText(s);msg('Đã sao chép '+k+' lựa chọn. Dán vào khung chat chính.')}catch(e){const ta=document.createElement('textarea');ta.value=s;document.body.append(ta);ta.select();try{document.execCommand('copy');msg('Đã sao chép '+k+' lựa chọn. Dán vào khung chat chính.')}catch(x){msg('Không chép được — bấm giữ để chép: '+s)}ta.remove()}};
 document.getElementById('clr').onclick=()=>{if(confirm('Xoá hết lựa chọn?')){P={};N={};save();document.querySelectorAll('.note').forEach(n=>n.value='');sync()}};
 sync();
+document.addEventListener('click',e=>{if(e.target.tagName==='IMG'){e.preventDefault();window.open(e.target.src,'_blank','noopener')}});
 </script></body></html>
 <!-- rooms-page 23/11 -->
