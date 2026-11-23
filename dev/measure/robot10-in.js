@@ -82,7 +82,7 @@ const GROUP={death:"death",grand:"đại kết cục",rare:"rare",fate:"kỳ ng�
   let cause="";try{const ch=typeof deathChain==="function"?deathChain(fate):[];cause=strip(ch[0]||"")}catch(e){}
   const P=(typeof BAL!=="undefined"&&BAL.st14&&BAL.st14.parts)||null,ch=S.st&&S.st.ch?S.st.ch.n:null;let part=null;if(P&&ch!=null)P.forEach((x,i)=>{if(ch>=x[0]&&ch<=x[1])part=i});
   const all=strip(h)+" · "+f;
-  R.life={id:strip(h),type,group:GROUP[type]||(type?"thường":"?"),fate:f.slice(0,240),death:type==="death",cause:cause.slice(0,160),age:S.age,year:S.year,years:+((S.turn||0)/12).toFixed(2),
+  R.life={id:strip(h),type,group:GROUP[type]||(type?"thường":"?"),fate:f.slice(0,240),death:type==="death",cause:f.replace(/^Năm \d+,\s*/,"").slice(0,160),chain0:cause.slice(0,160),/* cause = the record line (fate); the first deathChain row kept apart (it can be «Kẻ thù còn sống: …», not a cause). Successor: map to the die(why) list (OWNER ORDER #4) */age:S.age,year:S.year,years:+((S.turn||0)/12).toFixed(2),
    chapter:ch,part,rank:S.rank,rankN:RANKS[S.rank]&&RANKS[S.rank].n,maxRank:Math.max(R.maxR,S.maxRank||0),maxRankN:RANKS[Math.max(R.maxR,S.maxRank||0)]&&RANKS[Math.max(R.maxR,S.maxRank||0)].n,
    top:{hoangHau:Math.max(R.maxR,S.maxRank||0)>=7,nuDe:/Nữ đế|nhất đế/i.test(strip(h))&&!/phế|thoái vị/i.test(strip(h)),hoangThaiHau:/Thái hậu/i.test(strip(h))}/* read from the ending title (j99succ titles: Hoàng thái hậu / Nhiếp chính Thái hậu / Nữ đế …) */,
    steps:R.steps.slice(),kids:(S.kids||[]).length}}}catch(e){R.life={err:String(e.message)}}
