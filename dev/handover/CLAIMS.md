@@ -1227,3 +1227,4 @@ REVIEW fix-hadoc-loop (opus BIG schemes/khắc; briefs/D-hadoc-review.md) of 5ec
 | TITLES2 (chapter/side-line titles + reputation titles good/bad; expert first; owner OD ~22:55Z real) | review/titles2 | E (ORDER MAIN 113 22:37Z) | (E opens) | ORDERED | 23/11 22:37Z |
 | MGSKIN: ≥4 visual skins per mini-game kind (art C + kit slot KK13 + wiring B P1; owner OD ~23:05Z real) | img/mg/* + review/thin-p1 | C art / KK13 kit / B wire (ORDER MAIN 113 22:39Z) | — | ORDERED | 23/11 22:39Z |
 | W5 offline-all: «Tải hết để chơi offline» (owner OD ~23:35Z real; deadline before Wed 25/11) | review/offline-all; reports/offline-all.md | MAIN 113 | session_01Rc5AsHib54y5c78kFHKKFC | RUNNING | 23/11 22:55Z |
+| REVIEW odds-no-thanh SMALL (sonnet rv-lander; waits kit-odds-row on main) of a234c91d | review/odds-no-thanh-r; reports/odds-no-thanh.md «## REVIEW» | MAIN 113 | session_01Rc5AsJBY4hfzpj2n5rn34M | RUNNING | 23/11 23:10Z |

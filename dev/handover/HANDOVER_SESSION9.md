@@ -2702,3 +2702,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:59Z) LANDED ky-keeper-f2 3e8981e1 (LC8). LIVE = 3e8981e1. W1 + rv archived. SELSCENE MOCK READY (fold 2:42 / ipad 2:44) → frames looked → mp4s sent to sếp; waiting her OK/fixes. SELSCENE adds KIT REQUEST (5) bare option card + result card for KK13.
 - (23:00Z) Owner: C upload 32 m09-redrawn consorts (clean cut) → OD + C order; she opens Foreman F herself.
 - (23:06Z) LAND READY kit-odds-row-r 1a94dca1 (BIG PASS) → LC8. W2 follow-up review/odds-no-thanh («gần như chắc thành» + family scan). Open Q to sếp: no-roll acts show «Rất vững» chip vs no chip. Archive W2 rv N8oTu6WZ after LANDED.
+- (23:10Z) W2 READY odds-no-thanh a234c91d → SMALL rv-lander session_01Rc5AsJBY4hfzpj2n5rn34M.
