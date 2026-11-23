@@ -2603,3 +2603,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Foremen: B ROOT-2 session_01N1tNP5gpi4qbwxRpor8Ayw depth 1 · C ROOT-D1 session_01D3E3NbTVTuNd2cSgQGq2e3 depth 1 (owner-direct art: ROOMS PICK page, RANKROOM wiring; rank rooms 57 need de-curtain repaint) · D child session_01964izGQbgvTAnQ9pJktncj depth 1 · E ROOT-1 session_01DgYSWqA3L2ohCrYD1ymPWi depth 1.
 - Owner rulings today in OD (read them): one job = one account (OD:L1229 reaffirmed), ROBOT-10 rows, layout A rows, no-clip figures, no-needless-wrap law.
 - Wake: trig_019umD4RjJa25me1PGQDX8kN (minute 32) → child creates its own and disables this one. Push tool: copy dev/tools/main-hpush.sh with own session id.
+- (23/11 20:34Z) Opened MAIN CHÍNH 111 = session_01Rc5AsND3CwtWZx1yyFP5Lp. MAIN 110 stops after 111 confirms takeover (111 disables trig_019umD4RjJa25me1PGQDX8kN).
