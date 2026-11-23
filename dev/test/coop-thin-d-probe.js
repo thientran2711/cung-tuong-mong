@@ -161,6 +161,6 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await Promise.all([tapM(G,/^Nhận(?!\s*bạc)/),tapM(H,/^Nhận(?!\s*bạc)/)]);
  ok(await until(H,()=>__dil.filter(t=>t==='Hảo hữu nhận lời').length===1,null,20000),'P6 host: her answer ran his act once',await H.p.evaluate(()=>__dil));
  ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu nhận lời'),null,20000),'P6 guest: his answer ran her act (her "Hảo hữu nhận lời")',await gQ());
- ok(await H.p.evaluate(()=>COOPW.thin.selfTest().ok),'P6 host: withSeat round trip still exact');
+ {const st=await H.p.evaluate(()=>{const o=COOPW.thin.selfTest();return{ok:o.ok,sameA:o.sameA,sameB:o.sameB,b:o.b,paths:o.paths,err:o.err}});ok(st.ok,'P6 host: withSeat round trip still exact',st.ok?undefined:st)}
  const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch|navigator\.vibrate/.test(e))/* vibrate: Chrome's no-gesture notice (the heart feedback of a pid card), not a page error */;ok(!errs.length,'no page errors',errs.slice(0,6));
  await b.close();const f=res.filter(r=>!r[0]).length;console.log(`coop-thin-d-probe: ${res.length-f}/${res.length}`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});

@@ -84,7 +84,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(await H.p.evaluate(n=>S.inv.length<n,it.n),'host: the item left his chest');
  /* ===== (3) Kết giao guest → host: the host's own card; her side runs in her context ===== */
  await settle();await H.p.evaluate(()=>{window.__dil=[];});
- const r3=await G.p.evaluate(()=>String(runAct(S,rivals.find(v=>v.coop),'ally')));ok(/đợi nàng trả lời/.test(r3),'invite guest→host: an offer (sent as do inv)',r3);
+ /* review/coop-driver-fails: at level >= 6 (thin F1, jcoopthinf TH.on(6)) her act is an INTENT run on the host; its words come back with the kit
+    result card (not as runAct's return, which is "" then); the offer itself is proved by the host's own card just below */
+ const r3=await G.p.evaluate(()=>({t:String(runAct(S,rivals.find(v=>v.coop),'ally')),f1:!!(COOPW.thin&&COOPW.thin.on&&COOPW.thin.on(6))}));ok(/đợi nàng trả lời/.test(r3.t)||(r3.f1&&r3.t===''),'invite guest→host: an offer (sent as do inv; at F1 an intent, no text yet)',r3);
  ok(await until(H,()=>Q.some(q=>q.pid==='thInv'),null,20000),'host: his card (pid thInv) in his own queue');
  await H.p.evaluate(()=>{const i=Q.findIndex(q=>q.pid==='thInv');const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});await shot(H,'d3-host-invite');
  const hrl0=await H.p.evaluate(()=>(S.rl||{})[902]||0);
@@ -148,7 +150,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ===== wire: no old relay used ===== */
  const old=await both(()=>(window.__old||[]).filter(x=>(x[0]==='act'&&(x[2]==='invite'||(x[1]==='ctm-p2'&&/^(bribe|briber|nbribe|ev)$/.test(x[2]))))||(x[0]==='actr'&&!x[2])).length);
  ok(old[0]===0&&old[1]===0,'wire: no act-invite / actr / ctm-p2 bribe-briber-nbribe-ev relay sent by either seat',old);
- ok(await H.p.evaluate(()=>COOPW.thin.selfTest().ok),'host: withSeat round trip still exact (selfTest)');
+ {const st=await H.p.evaluate(()=>{const o=COOPW.thin.selfTest();return{ok:o.ok,sameA:o.sameA,sameB:o.sameB,b:o.b,paths:o.paths,err:o.err}});ok(st.ok,'host: withSeat round trip still exact (selfTest)',st.ok?undefined:st)}
  ok(await H.p.evaluate(()=>!COOPW.thin.D.bad.length),'no card with handlers lost (D.bad empty)',await H.p.evaluate(()=>COOPW.thin.D.bad));
  const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch|navigator\.vibrate/.test(e))/* vibrate: Chrome's no-gesture notice (the heart feedback of a pid card), not a page error */;ok(!errs.length,'no page errors',errs.slice(0,6));
  await b.close();const f=res.filter(r=>!r[0]).length;console.log(`coop-thin-d: ${res.length-f}/${res.length}`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});

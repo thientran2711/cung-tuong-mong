@@ -71,7 +71,9 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
   const key=o=>o.p.evaluate(()=>COOPW.pend||__co().waiting?'end':__co().week+':'+(S.buoi||0));
   for(let t=0;t<80;t++){const a=await key(A),b=await key(B);if(a!==k0&&b!==k0&&(a===b||a==='end'||b==='end')){
     if(sp&&sp.carry===1){await sleep(600);const st=await A.p.evaluate(()=>Object.assign({k:__co().week+':'+(S.buoi||0),now:used},window.__tu||{used:-1}));ok(st.used===1&&!st.carry,'spill '+k0+' → '+st.k+': the next buổi pays the carry once',st)}
-    return true}await clear(A);await clear(B);await sleep(250)}
+    return true}await clear(A);await clear(B);
+    if(t%8===7)for(const [o,k] of [[A,a],[B,b]])if(k===k0)await require('./lib/coop-real.js').repress(o);/* review/coop-driver-fails #2: a press that only opened a card is pressed again (lib/coop-real repress) */
+    await sleep(250)}
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
@@ -140,6 +142,11 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
   const vb=await view(B),va=await view(A);ok(va.R===vb.R&&!vb.ghosts.length,'2 both: same consort list, no stand-in',[va.R.length,vb.R.length,vb.ghosts])}
  /* 3 refusal */
  await A.p.evaluate(()=>{window.__rf0=roomFor;roomFor=r=>r==='consort'?false:window.__rf0(r)});
+ /* review/coop-driver-fails (coop-flakes rv #7, 1 in 6: «guest rank 1 at step 1 → 0 by step 3», table [1,0] = no room, the maid trimmed): the
+    rank-1 set-up above is her own screen's; a rebuild can put back the stored rank. Like a player whose screen reloaded, the precondition of
+    THIS step is checked again here and written again if it is gone (printed SETUP-RESET with her rank trail: never silent) */
+ {const h=await B.p.evaluate(()=>({rank:S.rank,cap:capOf(S),has:hhHas(S)}));if(h.cap[0]-h.has[0]<1){console.log('SETUP-RESET step3',JSON.stringify(h),JSON.stringify(await B.p.evaluate(()=>({logs:(S.logs||[]).slice(-8),tr:(COOPW.tr||[]).slice(-12)}))));
+  await B.p.evaluate(()=>{S.rank=Math.max(S.rank|0,1);render()})}}
  const r3=await RISE(B,false);ok(r3.legal&&r3.ghost,'3 guest: third maid rose (a legal member of her household)',r3);await sleep(3000);
  await weekAll(A,B,'3a');await weekAll(A,B,'3b');await A.p.evaluate(()=>{roomFor=window.__rf0});
  {const v=await view(B);ok(v.staff.includes(r3.sid)&&!v.ghosts.length,'3 guest: refused (no seat) → her maid is back, no stand-in',v);
