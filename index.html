@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bddc9fc8","t":"2026-11-23T08:56Z","c":"build: index.html/sw.js/assets.json for outing backdrops","b":"9b9a8fb81c0b","h":[{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"},{"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)"},{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"}]};
+window.CTM_BI={"s":"ede8e07e+","t":"2026-11-23T09:00Z","c":"build: index.html for outing-art r1","b":"754a9b13dd7f","h":[{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"},{"s":"c6a3b213","t":"2026-11-23T06:34Z","c":"6 nơi chốn đổi tranh mới (bỏ rèm che cửa), Khôn Ninh giữ tranh cũ"},{"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)"},{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -33532,7 +33532,7 @@ function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_K
 /* a board lever (mgLev) — the craft engines never type a number of their own */
 function crLev(env,kind,name){const v=mgLev(env,kind,name);if(v==null)throw new Error("BAL.mgTier.lev."+kind+"."+name+" missing");return v}
 /* painted sprites Foreman C has delivered (https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-<name>.webp); until then the stand-in is drawn and the name is listed as a missing picture */
-const CR_HAVE=new Set([]);
+const CR_HAVE=new Set(["ve-motif-sonchu","ve-motif-sonkhach","ve-motif-thuyen","ve-motif-tung","kim-sample","kim-wedge","kim-cut-moon","kim-cut-tri","kim-cut-drop","kim-cut-half","theu-hoop","theu-spool"]);
 function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,w,h,o))return true;
  try{if(typeof kitPhNote==="function")kitPhNote("mg",name,"light","mini-game craft sprite "+name)}catch(e){}if(stand)stand();return false}
 /* the frame loop on the craft clock (crNow), so a test can run the board faster; returns stop() */
@@ -62176,7 +62176,8 @@ function dawnOf(){const f=typeof festToday==="function"?festToday():null;const s
 /* owner 21/11 mark #84 («Sang buổi»: picture FULL screen on phone + iPad, title + Tiếp theo on the picture, no black background): every beat is THE full-screen
    picture (KIT 81c kitFullPic): <name>-port.webp on the phone, <name>-land.webp on the iPad once Foreman C lists them in img/INFO.json; until then today's 4:3
    painting cropped to fill (its focus FOC). Title + line and the ONE kit button lie on the picture. */
-const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
+/* the site build turns "https://ctm-img.victoria-tntt.workers.dev/img/kit/" (DIR) into the CDN address: the INFO key is the path after img/ either way (review GAPART2-r6) */
+const fullSrc=src=>{try{return typeof kitFullSrc==="function"?kitFullSrc(String(src).replace(/^https?:\/\/[^/]+\/img\//,"").replace(/^img\//,"").replace(/\.webp$/,""),src).src:src}catch(e){return src}};
 function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow();
  if(o.night)beats.push({k:o.night.k,snd:o.night.snd,dk:"lonely-"+sea,src:`${DIR}ne-night-lonely-${sea}.webp`,t:TIER[o.night.k].t,sub:o.night.line,ms:NE.lonelyMs});
  beats.push({k:o.day.k,src:o.day.src,t:o.day.t,sub:o.day.sub,ms:NE.dawnMs,wx:o.wx});beats.forEach(b=>{b.src=fullSrc(b.src)});
@@ -84849,7 +84850,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.
  try{if(subj&&typeof kitFace==="function"){const fc=kitFace(subj);if(fc)sp.subject=fc}}catch(e){}return sp}
 let ptIconSet=false;
 function ptIconReg(){if(ptIconSet||ptErrOwn()||typeof kitStatusIcon==="undefined")return;ptIconSet=true;
- kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
   show:()=>!!(S&&!S.dead&&(ptMine().length||ptNews().length||ptOrdN())),busy:()=>!!(S&&ptMine().length&&!ptNews().length&&!ptOrdN()),badge:()=>!!(S&&(ptNews().length||ptOrdN())),panel:ptPanel})}
 /* after a state change: MAIN's icon refreshes itself (errIcon), else the fallback one; no re-registration */
 function ptIcon(){try{if(ptErrOwn()){if(typeof errIcon==="function")errIcon();else if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh();return}ptIconReg();if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh()}catch(e){ptErr("icon",e)}}
@@ -90603,7 +90604,7 @@ function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],
  const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));
  try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
-function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 /* ONE call for the notice of an errand = the game's ONE notice entry point (stage-here r4, dev/build/jnotice.js): kitNotice({id,line,text,pic,go,goLabel}) lights the top-bar «!» box + one short top chip,
    tap → small kit panel «Tin báo». No toast / chip / bar of my own (jnotice.js is in the build before this module). Call sites: errAdd (sent), errTick (back); jptime lands call errNotify too. */
@@ -94738,7 +94739,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9b9a8fb81c0b";window.CTM_BUILD=BUILD;
+const BUILD="754a9b13dd7f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

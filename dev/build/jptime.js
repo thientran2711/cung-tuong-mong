@@ -100,7 +100,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.
  try{if(subj&&typeof kitFace==="function"){const fc=kitFace(subj);if(fc)sp.subject=fc}}catch(e){}return sp}
 let ptIconSet=false;
 function ptIconReg(){if(ptIconSet||ptErrOwn()||typeof kitStatusIcon==="undefined")return;ptIconSet=true;
- kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"img/kit/ico-tin.webp",order:30,
   show:()=>!!(S&&!S.dead&&(ptMine().length||ptNews().length||ptOrdN())),busy:()=>!!(S&&ptMine().length&&!ptNews().length&&!ptOrdN()),badge:()=>!!(S&&(ptNews().length||ptOrdN())),panel:ptPanel})}
 /* after a state change: MAIN's icon refreshes itself (errIcon), else the fallback one; no re-registration */
 function ptIcon(){try{if(ptErrOwn()){if(typeof errIcon==="function")errIcon();else if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh();return}ptIconReg();if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh()}catch(e){ptErr("icon",e)}}
