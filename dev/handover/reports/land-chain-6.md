@@ -9,3 +9,6 @@ Roll at ctx >= ~30 % (START_CTX + 25), ceiling 60 %.
 - 23/11 ~03:45Z LIVE = bda5b75b. Queue empty. Waiting for relays from MAIN 109.
 - 23/11 ~04:55Z LANDED coop-famops-pv 81d76c8b (FF, QUICKCHECK PASS 498 s, coop-e2e 141/141). LIVE = 81d76c8b.
 - 23/11 ~05:55Z LANDED coop-real-port 52ad65b3 (FF, test-only, QUICKCHECK PASS 517 s, coop-e2e 141/141). LIVE = 52ad65b3.
+- 23/11 ~06:55Z LANDED places-swap-n13 91dc91d3 (569f8916 self-merged on 52ad65b3; QUICKCHECK PASS 565 s; places-swap-look 6/6 Fold+iPad; coop-e2e 141/141; perf buổi 2565/1620 flagged).
+- 23/11 ~07:05Z LANDED rooms2 4ad20bd6 (5355780d self-merged on 91dc91d3; QUICKCHECK PASS 576 s; coop-e2e 141/141). CDN img/_review/rooms2 wiped (3 obj).
+- 23/11 ~07:45Z LANDED rooms1 ca801185 (6770bcad merged on 4ad20bd6 = 0a69b7a5; swap_rooms1.py --go → 16 bases live on CDN (looked at all 16); build commit ca801185: assets.json rebuilt, 782 keys changed (stale vs CDN index); QUICKCHECK PASS 562 s; rooms1-look bad 0; coop-e2e 141/141). Revert: swap_rooms1.py --revert. LIVE = ca801185.
