@@ -2695,3 +2695,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:42Z) know-notice rv r1 FAIL (a8176fbf): silent learners jmind/jtrong/j92/jveil/j29 + doubles j95bHear/cyBook/j78 → worker JtR95DF2 fixing; rv MzkmnYoW re-reviews.
 - (22:45Z) LAND READY ky-keeper-f2-r 7091cc7f (BIG PASS, via MAIN 111) → relayed to LC8. Archive W1 JaFJSoKr + rv L1nEGqb5 after LANDED.
 - (22:46Z) KK13 confirmed: mock v3.1 stills 12/12, re-shoot running (MOCK-STAGE READY ~45 min), SELSCENE kit 1–4 on review/kit-selscene (KIT §93) KIT READY ~70 min, mg-skin next. KK12 archived. ky-keeper-f2 rv addendum: E53r van 34 = scan artefact (not blocking).
+- (22:48Z) Owner: Đa Bảo Các bg wrong (bare cabinet) → OD row + C URGENT repaint order (palace room + shelves).
