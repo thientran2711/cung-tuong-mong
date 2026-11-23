@@ -2458,3 +2458,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 01:02Z) TRIGGERS: 107 hourly wake trig_01CSSZ2MWEyuaVZNBKNeY1xw (min 32, fires into 107) CREATED; 106's trig_01Rap72qX3eefqACBs8Ke5sB DISABLED. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays. Told LC5 + 106 that main = 107.
 - (23/11 01:02Z) RELAYED C N19 review/body-fit-data 6e845d8e (REVIEW-N19 PASS, clean FF on d1a36374, data only + C's post-land steps) → LC5. B FOR MAIN 00:40Z (LIVE guest rkOfFace raw {$r} in S.visit.people) → answered: B keeps it (co-op = B), own branch after coop-thin-g lands.
 - (23/11 01:05Z) LC5 FAIL N19 6e845d8e (2 jpg shots in git vs img-allowlist) → C told to git rm + re-send; LC5 does post-land steps after re-land.
+- (23/11 01:15Z) OWNER asked to recount → 77/105 DONE vs LIVE d1a36374 (N09, N10 landed since v5) → footer «~73% xong · còn 28 việc không tính hình nhân vật» (GAP_LIST_v5 RECOUNT line overwritten).
