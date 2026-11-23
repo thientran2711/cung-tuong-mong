@@ -1192,4 +1192,4 @@ coop-driver-fails worker #2 (opus; successor of FSjtour8 at 36 %; @82c21e84 test
 ROBOT-10 harness phase 1 (opus; MAIN 110 19:20Z; briefs/D-robot10-harness.md) | review/robot10-harness | session_01964izFciAUDi8CYTVdLsUX | RUNNING | 23/11 19:48Z (Foreman D child)
 law-4 j51 heir Danh (opus worker #2 EZxwCL3d; MAIN 110 19:33Z; briefs/D-j51-heir-danh.md) | review/j51-heir-danh | session_01964izEZxwCL3dekrzAxh79 | SSK 9e6fea34 (on call) | 23/11 19:48Z (Foreman D child)
 | C8-KP23MAG: Magnific per-event prompt search for face versions of 52 KP23 events (owner ~19:50Z; briefs/C8-kp23-mag.md) | review/kp23-swap; reports/C8-KP23MAG.md | FOREMAN C ROOT-C8 | session_01D3E3NavWdxfgtnqPrv7Ms7 | RUNNING | 23/11 20:00Z |
-REVIEW j51-heir-danh (sonnet SMALL text-only law 4; briefs/D-j51-heir-danh-review.md) of 9e6fea34 | review/j51-heir-danh-rv | session_01964izCM3Fnb9C73mDjQfAF | RUNNING | 23/11 20:12Z (Foreman D child)
+REVIEW j51-heir-danh (sonnet SMALL text-only law 4; briefs/D-j51-heir-danh-review.md) of 9e6fea34 | review/j51-heir-danh-rv | session_01964izCXEvdY7yJ3jMtcyDV | RUNNING (reopened with repo source; CM3Fnb9C archived) | 23/11 20:12Z (Foreman D child)
