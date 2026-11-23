@@ -2617,3 +2617,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:41Z) OWNER: line-break law applies to NEW work only; never reflow old layouts; W2 scan dropped (OD 20:45Z row extended).
 - (20:46Z) OWNER ORDER (OD ~20:45Z): ROBOT-10 measures death/rank/ending rates → D (harness). Text scan → report-only PDF with screenshots for her approval → W2.
 - (20:47Z) W3 hdr-kiep opened session_01Rc5AsLTYHkB2oX3fnkWMqk (sonnet SMALL UI; on READY open sonnet SMALL reviewer). D child unreachable by send_message (other account) → orders via FOREMAN_D_STATUS only.
+- (20:49Z) W2 READY f3eb43bb but moved meter under title on 7→25 cards = breaks owner limit; sent back: keep baseline 7, word 0 below bar, gate in test. Review after re-READY.
