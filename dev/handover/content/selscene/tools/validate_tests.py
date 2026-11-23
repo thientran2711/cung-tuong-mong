@@ -1,37 +1,44 @@
 #!/usr/bin/env python3
-"""Validate doidap.md / hanhxu.md (provisional format). usage: validate_tests.py file.md [...]"""
-import re,sys
-FX={"danh","duc","bac","tamco","sung","quen","oan","mama","tin","phuc"}
-EMP={"danghi","mesac","trongtai","hieuthao","nongnay","nhantu","chamchinh","datinh","lanhlung"}
-TH={"tuai","nghiem","danghi","quyen","phat"}
-F={"Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Kiêu ngạo","Khiêm nhường","Thật thà","Xảo quyệt","Thanh liêm","Ham lợi","Rộng lượng","Thù dai","Trọng nghĩa","Thực dụng","Tham vọng","An phận","Ham học","Ham vui","Mê tín","Thực tế","Vì gia tộc","Vì mình"}
-POOL={"hoangthuong":EMP,"thaihau":TH,"hoanghau":F,"noivu":F}
+"""Validate doidap.jsonl / hanhxu.jsonl against HIST-TUYENTU §8.4 + SELW-TESTS extras.
+usage: python3 validate_tests.py doidap.jsonl hanhxu.jsonl"""
+import json,re,sys
+DD=["khiem","manh","dido","that"];HX=["giuyen","tuxu","caunguoi","nhan"]
+KEYS={"fav","fav.E","fav.T","fav.H","fav.ma","duc","sac","tai","tamco","grudge.rival","friend.mate","mark.hau","time","face","raw","bac"}
 bad=0
 def err(m):
     global bad;bad+=1;print("ERR",m)
 for fn in sys.argv[1:]:
-    txt=open(fn,encoding="utf8").read()
-    txt=re.sub(r"```.*?```","",txt,flags=re.S)
-    blocks=re.split(r"^### ",txt,flags=re.M)[1:]
-    n=0
-    for b in blocks:
-        h=b.split("\n")[0]
-        m=re.match(r"(\w+-\d+) \[(K|D)\] (?:royal=(\w+) )?V=([123]) rank=([0-3])",h)
-        if not m: err(f"{fn}: bad header {h}");continue
-        n+=1;id_,tag,royal,V,rank=m.groups()
-        if "ask:" not in b and "scene:" not in b: err(id_+" no ask/scene")
-        if "rise:" not in b: err(id_+" no rise")
-        opts=[l for l in b.split("\n") if l.startswith("- ")]
-        if not 3<=len(opts)<=4: err(f"{id_} {len(opts)} options")
-        for o in opts:
-            p=[x.strip() for x in o[2:].split(" | ")]
-            if len(p)<6: err(f"{id_} option fields {len(p)}: {o[:50]}");continue
-            gl=dict(re.findall(r"([GL])=(\w+)",p[3]))
-            if set(gl)!={"G","L"} or gl["G"]==gl["L"] or gl["G"] not in FX or gl["L"] not in FX: err(f"{id_} G/L {p[3]}")
-            for k,pref in (("like=",p[4]),("dislike=",p[5])):
-                if not pref.startswith(k): err(f"{id_} {k} missing");continue
-                for t in filter(None,pref[len(k):].split(",")):
-                    if royal and t not in POOL.get(royal,set()): err(f"{id_} nết {t} not in {royal}")
-            if "%" in o: err(id_+" has %")
-    print(fn,n,"entries")
+    rows=[json.loads(l) for l in open(fn,encoding="utf8") if l.strip()]
+    ids=set();texts=set();want=DD if "doidap" in fn else HX
+    for r in rows:
+        i=r["id"]
+        if i in ids:err(i+" dup id")
+        ids.add(i)
+        if r["tag"] not in "KD" or not r.get("src") or not r.get("cue"):err(i+" tag/src/cue")
+        if not isinstance(r["lo"],int) or not 0<=r["lo"]<=3:err(i+" lo")
+        o=r["options"]
+        if len(o)!=4 or [x["stance"] for x in o].count(want[0])+0<0:err(i+" opts")
+        if sorted(x["stance"] for x in o)!=sorted(want):err(i+" stances "+str([x["stance"] for x in o]))
+        tot=set()
+        for x in o:
+            g,l=x["gain"],x["loss"]
+            if not g or not l:err(i+" gain/loss empty")
+            if set(g)&set(l):err(i+" same key gain+loss")
+            for k in list(g)+list(l):
+                if k not in KEYS:err(i+" key "+k)
+            sg,sl=sum(g.values()),sum(l.values())
+            if sg!=sl:err(i+" gain!=loss")
+            tot.add((sg,sl))
+            if x["text"] in texts:err(i+" dup text")
+            texts.add(x["text"])
+            if "%" in x["text"]:err(i+" %")
+        if len(tot)!=1:err(i+" options not equal value")
+        for grp in "ETH":
+            if r["type"]=="doidap" and r["asker"]!=grp and not (r["asker"]=="ma" and grp=="H"): 
+                continue
+            for x in o:
+                v=[s for k,s in x["reacts"].items() if k.startswith(grp+".")]
+                if not("+" in v and "−" in v):err(f"{i} {x['stance']} not both +/− for {grp}")
+        # every royal group, hành xử: check all three
+    print(fn,len(rows),"entries")
 sys.exit(1 if bad else 0)
