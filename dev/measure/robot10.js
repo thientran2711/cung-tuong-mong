@@ -12,6 +12,12 @@
    env GAME=<index.html path or https URL> (default: this checkout's index.html = LIVE when on main) · PAR=3 parallel browsers (4 CPUs)
        CAP=1800 s wall cap per life · UIEVERY=150 buổi between UI checkpoints (0 = off) · DEV=fold,ipad · SEED=<n> base seed
        LAGMS=1500 lag flag per buổi in the bot page · UILAG=400 long-task flag (ms) in the real pages · OLDSAVE=<file.json,...> extra old saves
+       MEMEVERY=30 s between memory samples (JS heap / DOM nodes / listeners per page + renderer RSS) · RECYCLE=1 re-open the real pages at every
+       UI checkpoint (harness side; the bot page is never recycled, so its growth is the game's own)
+ OUTPUTS (besides the bug file): <out>/catalog.json = every death cause / ending of the game (robot10-cat.js: code scan + the game's ending tables),
+   read by robot10-agg.js · per life in the results JSON: life{… m:{die, framed, family, favor, economy, mini-games, kỳ ngộ, option pick counts,
+   events, pace counters, rankAt}} (OWNER ORDER #4 metric set) + mem{bot, ui, rss} samples. Round report: node dev/measure/robot10-agg.js <folders> → rates-*.md/.csv
+ ODDS WORDS: the act-odds ladder is read from the game (window.KIT_ODDS), never typed here; «khả năng vừa/cao/thấp» is the side-chance scale (OD:L221)
  WHAT ONE LIFE DOES
    fast bot page (inpage6.js bot + inty.js + robot10-in.js; render off, seeded Math.random) plays one whole kiếp of the forced origin + road with
    one personality, until the game's own ending (over()) or the cap. Checks: JS errors (pageerror + console.error the game swallows), stuck /
@@ -55,6 +61,9 @@ const clean=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEa
 /* ---- list: every origin + road the game has ---- */
 async function list(){const b=await chromium.launch();const p=await boot(b,[390,844]);
  const r=await p.evaluate(()=>{const ks=ORIGINS.map(o=>o.k).concat(Object.keys(ORIGIN_BR));const o={};ks.forEach(k=>o[k]=arcIds67(k).map(id=>({id,n:ARC67[id].n,ok:arcOk67(ARC67[id])})));return o});
+ /* the catalogue of every death cause / ending (robot10-cat.js: code scan + the game's own ending tables) → <out>/catalog.json, read by robot10-agg.js */
+ try{const CAT=require('./robot10-cat.js');const rt=await p.evaluate(CAT.RUNTIME);const c=CAT.build(CAT.staticScan(REPO),rt);c.roads=r;c.game=URL;
+  fs.mkdirSync(OUT,{recursive:true});fs.writeFileSync(path.join(OUT,'catalog.json'),JSON.stringify(c,null,1))}catch(e){console.error('catalog: '+e.message)}
  await b.close();return r}
 
 /* ---- the UI scan (runs in a real-render page) ---- */
@@ -98,7 +107,15 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
    if(hit&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
- txt.replace(/khả năng\s*:?\s*(liều|khó|năm ăn năm thua|khá chắc|rất chắc|nắm chắc|chắc)(?![\p{L}])/giu,(a)=>{out.push({k:'word',msg:'two odds scales mixed «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
+ /* odds words: the ladder is READ from the game (window.KIT_ODDS, j79), never typed here */
+ const KO=(Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);
+ if(KO.length){const esc=w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const RXO=new RegExp('khả năng\\s*:?\\s*('+KO.slice().sort((a,b)=>b.length-a.length).map(esc).join('|')+')(?![\\p{L}])','giu');
+  txt.replace(RXO,(a)=>{out.push({k:'word',msg:'two odds scales mixed «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
+  /* every kit odds chip (kitOdds → .kodm[data-kodds] b) must print KIT_ODDS[level] */
+  root.querySelectorAll('.kodm[data-kodds]').forEach(e=>{if(!vis(e))return;const lv=+e.dataset.kodds,w=strip((e.querySelector('b')||e).textContent);
+   if(lv>=0&&w!==KO[lv])out.push({k:'word',msg:'odds chip word is not KIT_ODDS[level]',ex:'level '+lv+' shows «'+w+'», ladder says «'+KO[lv]+'»'});
+   else if(lv>=0&&!KO.includes(w))out.push({k:'word',msg:'odds chip word off the ladder',ex:'«'+w+'»'})})}
+ else out.push({k:'word',msg:'window.KIT_ODDS not found (odds checks off)',ex:''});
  const m=txt.match(/tỉ lệ|xác suất|phần trăm/i);if(m)out.push({k:'word',msg:'machine odds word «'+m[0]+'»',ex:txt.slice(0,80)});
  /* HUD numbers = state (law 4: what she reads is the number the rules use) */
  try{const hud=document.querySelector('.hud');if(hud&&vis(hud)&&typeof S!=='undefined'&&S){const ht=strip(hud.innerText);const MAP={'Sủng':['sung'],'Danh':['danh'],'Đức':['duc'],'Bạc':['bac'],'Sức':['suc'],'Tài':['tai'],'Tâm cơ':['tamco'],'Sắc':['sac']};
@@ -127,18 +144,31 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  /* real-render pages for the UI checks */
  const ui={};for(const d of DEV)ui[d]=await boot(b,DEVS[d]);
  let oldDone=false;const t1=Date.now();let cap=false;
- while(true){const n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
+ /* (C) memory over a long life: JS heap / DOM nodes / listeners of the bot page and of each real page (CDP Performance metrics) + the RSS of every
+    renderer process on the box (exact for PAR=1) every MEMEVERY s → R.mem; growth is judged in the bug file. RECYCLE=1 re-opens the real pages at every
+    checkpoint (harness side) so a leak in those pages cannot kill the life; the bot page is never recycled (its growth = the game's) */
+ const cdp=await ctx.newCDPSession(p).catch(()=>null);if(cdp)await cdp.send('Performance.enable').catch(()=>{});
+ R.mem={bot:[],ui:{},rss:[]};let memT=0;const MEMEVERY=(+process.env.MEMEVERY||30)*1e3;
+ const metr=async(c)=>{try{const m=(await c.send('Performance.getMetrics')).metrics;const g=k=>(m.find(x=>x.name===k)||{}).value||0;return [Math.round(g('JSHeapUsedSize')/1048576),g('Nodes'),g('JSEventListeners'),g('Documents')]}catch(e){return null}};
+ const rss=()=>{try{return Math.round(require('child_process').execSync("ps -eo rss,args | grep -- '--type=renderer' | grep -v grep | awk '{s+=$1} END {print s+0}'").toString()/1024)}catch(e){return null}};
+ const memSample=async()=>{const sec=Math.round((Date.now()-t1)/1e3);const m=cdp&&await metr(cdp);if(m)R.mem.bot.push([sec,...m]);
+  for(const d of DEV){if(!ui[d].__cdp){ui[d].__cdp=await ui[d].context().newCDPSession(ui[d]).catch(()=>null);if(ui[d].__cdp)await ui[d].__cdp.send('Performance.enable').catch(()=>{})}
+   const u=ui[d].__cdp&&await metr(ui[d].__cdp);if(u)(R.mem.ui[d]=R.mem.ui[d]||[]).push([sec,...u])}
+  const r=rss();if(r!=null)R.mem.rss.push([sec,r])};
+ while(true){if(Date.now()-memT>MEMEVERY){memT=Date.now();await memSample()}
+  const n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
   const cps=await p.evaluate(()=>window.__r10.cps.splice(0));
-  for(const cp of cps){R.cps++;for(const d of DEV)await uiCheck(ui[d],d,cp,job,bug,R);
+  for(const cp of cps){R.cps++;if(process.env.RECYCLE==='1'&&R.cps>1)for(const d of DEV){(R.uiErrs=R.uiErrs||[]).push(...ui[d].__errs.map(m=>[d,m]));await ui[d].context().close().catch(()=>{});ui[d]=await boot(b,DEVS[d])}
+   for(const d of DEV)await uiCheck(ui[d],d,cp,job,bug,R);
    if(!oldDone){oldDone=true;const first=await p.evaluate(()=>window.__r10.firstSave);for(const d of DEV.slice(0,1))await oldSaves(ui[d],d,cp.save,first,bug)}}
   if(n>=1||await p.evaluate(()=>!!window.__r10.halt))break;if(Date.now()-t1>CAP){cap=true;break}}
  R.t.play=Date.now()-t1;
- const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave,life:window.__r10.life||null,lock:window.__r10.lock||null,halt:window.__r10.halt||null,calls:window.__r10.calls,steps:window.__r10.steps},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
+ const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave,life:window.__r10.life||null,lock:window.__r10.lock||null,halt:window.__r10.halt||null,calls:window.__r10.calls,steps:window.__r10.steps,m:window.__r10.mSnap?window.__r10.mSnap():null,kitOdds:window.__r10.KIT_ODDS},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
  const res=st.res[0]||null;R.res=res&&{title:res.title,fate:res.fate,rank:res.rank,maxRank:res.maxRank,years:res.years,age:res.age,origin:res.origin,lb:res.lb,stuck:res.stuck,state:res.state,ring:res.ring};
- R.buoi=st.r.buoi;R.calls=st.r.calls;R.halt=st.r.halt;R.lock=st.r.lock;
+ R.buoi=st.r.buoi;R.calls=st.r.calls;R.kitOdds=st.r.kitOdds;R.halt=st.r.halt;R.lock=st.r.lock;
  /* the owner's tally fields (same JSON from every runner; robot10-agg.js reads them) */
  R.life=st.r.life||{id:st.r.halt?'SOFTLOCK':cap?'CAP':(res&&res.title)||'?',type:st.r.halt?'softlock':cap?'cap':(res&&res.title==='TIMEOUT')?'stuck':(res&&res.title==='CRASH')?'crash':'?',group:'no ending',death:false,
-  maxRank:Math.max(-1,...(st.r.steps||[]).map(x=>x.r)),steps:st.r.steps,age:st.state&&st.state.age,year:st.state&&st.state.year};R.road=st.r.road;R.origin=st.r.origin;R.rt={n:st.r.rt,ms:st.r.rtMs};R.words=st.r.words;R.opts=st.r.opts;
+  maxRank:Math.max(-1,...(st.r.steps||[]).map(x=>x.r)),steps:st.r.steps,age:st.state&&st.state.age,year:st.state&&st.state.year};if(!R.life.m)R.life.m=st.r.m;R.life.botMin=+(R.t.play/6e4).toFixed(2);R.road=st.r.road;R.origin=st.r.origin;R.rt={n:st.r.rt,ms:st.r.rtMs};R.words=st.r.words;R.opts=st.r.opts;
  const nb=st.r.nbMs.slice().sort((a,b)=>a-b);R.nb={n:nb.length,p50:nb[nb.length>>1]||0,p95:nb[Math.floor(nb.length*.95)]||0,max:nb[nb.length-1]||0};
  for(const x of st.r.bugs)bug(x.type,x.msg,x.detail+(x.at?' @ '+x.at:''),{n:x.n,save:x.save});
  if(cap)bug('stuck','no ending within the wall cap ('+CAP/1e3+' s)','state '+JSON.stringify(st.state),{save:st.r.lastSave});
@@ -150,8 +180,13 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);
  for(const [k,m,s] of errs)bug('js',k+': '+m.split('\n')[0].slice(0,200),s,{save:st.r.lastSave});
  for(const d of DEV)for(const m of ui[d].__errs)bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');
+ for(const [d,m] of (R.uiErrs||[]))bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');delete R.uiErrs;await memSample().catch(()=>{});
+ /* a page whose JS heap or DOM keeps growing over the life (last samples ≥ 2× the early ones and +150 MB heap / +20000 nodes) = a leak finding */
+ const grow=(S0,lab)=>{if(!S0||S0.length<6)return;const a=S0.slice(1,4),z=S0.slice(-3);const av=(x,i)=>x.reduce((s,r)=>s+r[i],0)/x.length;
+  const h0=av(a,1),h1=av(z,1),n0=av(a,2),n1=av(z,2);if((h1>2*h0&&h1-h0>150)||(n1>2*n0&&n1-n0>20000))bug('mem',lab+' memory keeps growing over the life (leak)','JS heap '+Math.round(h0)+' → '+Math.round(h1)+' MB · DOM nodes '+Math.round(n0)+' → '+Math.round(n1)+' · listeners '+Math.round(av(a,3))+' → '+Math.round(av(z,3))+' over '+z[z.length-1][0]+' s',{save:st.r.lastSave})};
+ grow(R.mem.bot,'bot page (game, render off)');for(const d of DEV)grow(R.mem.ui[d],'['+d+'] real page');
  }catch(e){const m=String(e.message).split('\n')[0];/* a tab that dies mid-life (Target crashed: renderer out of memory) is a game finding (memory growth over a long life), not a runner fault */
-  if(/Target crashed|Page crashed/i.test(m))bug('crash','browser tab crashed mid-life (renderer out of memory?)','after '+Math.round((Date.now()-t0)/1e3)+' s of play');else bug('harness','runner error: '+m,String(e.stack).slice(0,400))}
+  if(/Target crashed|Page crashed/i.test(m)){const mb=R.mem&&R.mem.bot||[],rs=R.mem&&R.mem.rss||[];bug('crash','browser tab crashed mid-life (renderer out of memory?)','after '+Math.round((Date.now()-t0)/1e3)+' s of play · last bot-page sample [s, heap MB, nodes, listeners, docs] '+JSON.stringify(mb.slice(-1)[0]||null)+' (first '+JSON.stringify(mb[1]||mb[0]||null)+') · renderer RSS MB '+JSON.stringify(rs.slice(-1)[0]||null))}else bug('harness','runner error: '+m,String(e.stack).slice(0,400))}
  finally{await b.close().catch(()=>{})}
  R.bugs=[...bugs.values()];R.t.total=Date.now()-t0;return R}
 
@@ -220,7 +255,7 @@ function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0)
 
 function report(done,jobs,stamp,ms){done.sort((a,b)=>jobs.indexOf(a.job)-jobs.indexOf(b.job));
  const all=new Map();for(const r of done)for(const b of r.bugs){const k=b.type+'|'+b.msg.replace(/^\[(fold|ipad)\] /,'');const x=all.get(k)||{type:b.type,msg:b.msg,lives:[],n:0,ex:b};if(!x.lives.includes(r.job.id))x.lives.push(r.job.id);x.n+=b.n;all.set(k,x)}
- const ORDER=['crash','stuck','js','save','number','word','harness','lag','ui-overflow','ui-offscreen-btn','ui-covered-btn','ui-overlap','ui-cut','ui-offscreen-text','ui-word','ui-number'];
+ const ORDER=['crash','mem','stuck','js','save','number','word','harness','lag','ui-overflow','ui-offscreen-btn','ui-covered-btn','ui-overlap','ui-cut','ui-offscreen-text','ui-word','ui-number'];
  const bl=[...all.values()].sort((a,b)=>(ORDER.indexOf(a.type)+1||99)-(ORDER.indexOf(b.type)+1||99)||b.lives.length-a.lives.length);
  let i=0;const saveOf=(x)=>{if(!x.ex.save)return '';const f=path.join('saves',`${stamp}-${String(++i).padStart(3,'0')}.json`);fs.writeFileSync(path.join(OUT,f),typeof x.ex.save==='string'?x.ex.save:JSON.stringify(x.ex.save));return f};
  const per=done.map(r=>`| ${r.job.id} | ${r.job.bot} | ${r.road||'?'}${r.lock?' (locked: opens '+(r.lock.openAt?'y'+r.lock.openAt.year+' age '+r.lock.openAt.age:'never')+', played '+(r.lock.playAt?'y'+r.lock.playAt.year:'no')+')':''} | ${r.life.id} [${r.life.group}${r.life.cause?': '+r.life.cause.slice(0,50):''}] | ${r.life.maxRankN||r.life.maxRank} | ${r.life.years!=null?r.life.years:''} (age ${r.life.age}) | ${r.buoi} | ${r.cps} | ${r.bugs.length} | ${(r.t.total/1e3).toFixed(0)} s (play ${((r.t.play||0)/1e3).toFixed(0)}, UI ${((r.ui.ms||0)/1e3).toFixed(0)}) | buổi p50/p95/max ${r.nb?r.nb.p50+'/'+r.nb.p95+'/'+r.nb.max:''} ms · save rt ${r.rt?r.rt.n+'×, '+(r.rt.ms/Math.max(1,r.rt.n)).toFixed(1)+' ms':''} | ${r.job.seed} |`).join('\n');

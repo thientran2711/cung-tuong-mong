@@ -51,14 +51,18 @@ window.__persPick=P.pick?function(ok,m){return P.pick(ok,m)}:null;window.__persO
 window.__R10PERS=Object.fromEntries(Object.entries(PERS).map(([k,v])=>[k,{mode:v.mode,d:v.d}]));
 
 /* ---- cổ-trang wording audit (law 7, VANPHONG): no %, no machine odds words; "khả năng: X" only with a ladder word ---- */
-const LADDER=["liều","khó","năm ăn năm thua","khá chắc","chắc","rất chắc","nắm chắc"];
 function words(txt,ctx){txt=strip(txt);if(!txt)return;R.words++;
  if(/\d\s*%|%/.test(txt))bug("word","% shown to the player",ctx+": "+txt.slice(Math.max(0,txt.indexOf("%")-80),txt.indexOf("%")+20));
  const m=txt.match(/tỉ lệ|xác suất|phần trăm/i);if(m)bug("word","machine odds word «"+m[0]+"»",ctx+": "+txt.slice(0,200));
  txt.replace(ODDS,(a)=>{bug("word","two odds scales mixed: «"+a.trim()+"»",ctx+": "+txt.slice(0,240));return a})}
 /* two odds scales, never mixed (OD:L221, VANPHONG 66-67, j1 chanceW): «khả năng vừa/cao/thấp…» is the side-chance scale (correct);
    the 7-step ladder is an act's own odds. Flag only a ladder word used as a «khả năng» reading (the two scales mixed) */
-const ODDS=/khả năng\s*:?\s*(liều|khó|năm ăn năm thua|khá chắc|rất chắc|nắm chắc|chắc)(?![\p{L}])/giu;R.ODDS=ODDS;
+/* the act-odds ladder is READ from the game (window.KIT_ODDS, j79; the owner changes it — never a typed list here). Longest words first so
+   «Rất chắc» is not read as «chắc». No KIT_ODDS → no ladder check (logged once) */
+const KO=(Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);R.KIT_ODDS=KO.slice();
+const esc=w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const ODDS=KO.length?new RegExp("khả năng\\s*:?\\s*("+KO.slice().sort((a,b)=>b.length-a.length).map(esc).join("|")+")(?![\\p{L}])","giu"):/(?!)/g;R.ODDS=ODDS;
+if(!KO.length)bug("harness","window.KIT_ODDS not found: odds-ladder checks are off","");
 R.words_=words;
 
 /* ---- one-core number audit (law 4): a number printed on an option ("Sủng +3", "Bạc -20") must be the number the option applies ---- */
@@ -85,8 +89,50 @@ const GROUP={death:"death",grand:"đại kết cục",rare:"rare",fate:"kỳ ng�
   R.life={id:strip(h),type,group:GROUP[type]||(type?"thường":"?"),fate:f.slice(0,240),death:type==="death",cause:f.replace(/^Năm \d+,\s*/,"").slice(0,160),chain0:cause.slice(0,160),/* cause = the record line (fate); the first deathChain row kept apart (it can be «Kẻ thù còn sống: …», not a cause). Successor: map to the die(why) list (OWNER ORDER #4) */age:S.age,year:S.year,years:+((S.turn||0)/12).toFixed(2),
    chapter:ch,part,rank:S.rank,rankN:RANKS[S.rank]&&RANKS[S.rank].n,maxRank:Math.max(R.maxR,S.maxRank||0),maxRankN:RANKS[Math.max(R.maxR,S.maxRank||0)]&&RANKS[Math.max(R.maxR,S.maxRank||0)].n,
    top:{hoangHau:Math.max(R.maxR,S.maxRank||0)>=7,nuDe:/Nữ đế|nhất đế/i.test(strip(h))&&!/phế|thoái vị/i.test(strip(h)),hoangThaiHau:/Thái hậu/i.test(strip(h))}/* read from the ending title (j99succ titles: Hoàng thái hậu / Nhiếp chính Thái hậu / Nữ đế …) */,
-   steps:R.steps.slice(),kids:(S.kids||[]).length}}}catch(e){R.life={err:String(e.message)}}
+   steps:R.steps.slice(),kids:(S.kids||[]).length,m:R.mSnap?R.mSnap():null}}}catch(e){R.life={err:String(e.message)}}
  return r}}
+
+/* ==== OWNER ORDER #4 metric set (+ #2/#3 pace counters, #5 event variety): R.m, read by robot10.js into r.life.m; tables in robot10-agg.js ====
+   Every hook is a wrap of a global game function (callers reach it by its global name); a missing function = that metric stays empty. */
+const RB=()=>{try{return RANKS[S.rank]?S.rank:0}catch(e){return 0}};
+const M=R.m={die:null,exec:0,framed:[],cold:0,demote:0,preg:0,sons:0,daus:0,kidDead:0,heirMade:0,heirLost:0,nights:0,sungPk:0,bacPk:0,bacEnd:0,bacZero:0,
+ schemes:{},schemeCaught:0,mg:[],ky:[],opt:{},ev:{},evN:0,pace:{clicks:0,choices:0,chars:0,mgPlay:0,mgSkip:0,buoi:0},rankAt:{}};
+const wrapG=(n,f)=>{try{const o=window[n];if(typeof o!=="function")return;const w=f(o);window[n]=w;try{eval(n+"=w")}catch(e){}}catch(e){}};
+/* 1 DEATH: the exact die(why) text, an execution (deathSentence on her), framing (framed(S) = an accusation that stuck) */
+wrapG("die",o=>function(why){try{if(S&&!S.dead&&!M.die)M.die={why:strip(why).slice(0,200),buoi:R.buoi,rank:S.rank,age:S.age,exec:!!M._exec,framedRecent:M.framed.some(f=>R.buoi-f.buoi<=36)}}catch(e){}return o.apply(this,arguments)});
+wrapG("deathSentence",o=>function(p,why){const me=typeof p==="string"||p===S;if(me)M._exec=1;try{return o.apply(this,arguments)}finally{if(me){M.exec++;M._exec=0}}});
+wrapG("framed",o=>function(p,why){try{if(p===S)M.framed.push({buoi:R.buoi,why:strip(why).slice(0,80)})}catch(e){}return o.apply(this,arguments)});
+wrapG("cold",o=>function(){try{if(S&&!S.dead)M.cold++}catch(e){}return o.apply(this,arguments)});
+wrapG("punish",o=>function(p){try{if((typeof p==="string"||p===S)&&M._act)M._caught=1}catch(e){}return o.apply(this,arguments)});
+/* 5 SCHEMES she runs: doAct(i,k) on a rival; caught = she is punished / sentenced inside the same act */
+wrapG("doAct",o=>function(i,k){M._act=k;M._caught=0;try{return o.apply(this,arguments)}finally{const x=M.schemes[k]=M.schemes[k]||{n:0,caught:0};x.n++;if(M._caught){x.caught++;M.schemeCaught++}M._act=null}});
+/* 4 FAMILY: Thái tử made (setHeir on her child) */
+wrapG("setHeir",o=>function(k){try{if(S&&S.kids&&S.kids.includes(k))M.heirMade++}catch(e){}return o.apply(this,arguments)});
+/* 7 MINI-GAMES: every mini-game she plays or leaves to luck, with her rank at the time (law 5: harder as she climbs) */
+const mgRec=(k,how,win,score)=>{try{M.mg.push({k:String(k||"?"),r:S.rank,how,win:!!win,sc:score==null?null:Math.round(score*10)/10});if(how==="skip")M.pace.mgSkip++;else M.pace.mgPlay++}catch(e){}};
+wrapG("startContest",o=>function(spec){try{const sp=Object.assign({},spec);const d0=sp.onDone;sp.onDone=function(res){try{mgRec("thi:"+(sp.art||"?"),res&&res.skipped?"skip":"play",res&&res.place===1,res&&res.score)}catch(e){}return d0&&d0.apply(this,arguments)};return o.call(this,sp)}catch(e){return o.apply(this,arguments)}});
+wrapG("playArt",o=>function(spec){try{const sp=Object.assign({},spec);const d0=sp.onDone;sp.onDone=function(raw){try{mgRec("hoc:"+(sp.art||"?"),"play",raw>=5,raw)}catch(e){}return d0&&d0.apply(this,arguments)};return o.call(this,sp)}catch(e){return o.apply(this,arguments)}});
+wrapG("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,function(g){try{const sk=!document.getElementById("mgskip")||document.getElementById("mgskip").hidden;mgRec("j5:"+k,"play",g>=(S.master?4:2),g)}catch(e){}return cb&&cb.apply(this,arguments)})});
+/* 9 BALANCE + 12 EVENT VARIETY + pace: every card she answers (key = pid or the title without numbers/names), every option offered / taken */
+const cardKey=m=>{const t=strip(m.t||m.title||"").replace(/\d+/g,"#").slice(0,48);return (m.pid?String(m.pid).replace(/[-_:]?\d+$/,""):"")+"|"+t};
+const famOf=m=>{const p=String(m.pid||"");return p?p.replace(/[-_:\d].*$/,"").slice(0,16)||"pid":(m.ev?"ev":"card")};
+{const c1=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){const k=cardKey(m);const e=M.ev[k]=M.ev[k]||{f:famOf(m),n:0};e.n++;M.evN++;
+  M.pace.choices++;M.pace.chars+=strip((m.t||"")+" "+(m.h||"")).length+m.opts.reduce((a,o)=>a+strip((o.n||"")+" "+(o.x||"")).length,0);
+  if(m.pid==="kyngo")M.ky.push(strip(m.t||m.title||"").slice(0,60));
+  if(m.opts.length>1){const ok=m.opts.filter(o=>!o.off);if(ok.length>1){const ck=k.slice(0,60);const t=M.opt[ck]=M.opt[ck]||{};ok.forEach(o=>{const on=strip(o.n||"").replace(/\d+/g,"#").slice(0,40);const x=t[on]=t[on]||[0,0];x[0]++;if(o===m.opts[i])x[1]++})}}}}catch(e){}return c1.apply(this,arguments)}}
+/* per buổi: favor / economy / family / rank / pace (one click per buổi change + every bot step that is an action) */
+let kidsSeen=new Map(),pregOn=false,rk0=null;
+function perBuoi(){try{if(!S)return;M.pace.buoi++;M.pace.clicks++;M.sungPk=Math.max(M.sungPk,S.sung||0);M.bacPk=Math.max(M.bacPk,S.bac||0);M.bacEnd=S.bac;if((S.bac||0)<=0)M.bacZero++;M.nights=S.nights||0;
+ const pg=!!S.preg;if(pg&&!pregOn)M.preg++;pregOn=pg;
+ (S.kids||[]).forEach(k=>{const id=k.id!=null?k.id:k;if(!kidsSeen.has(id)){kidsSeen.set(id,k.alive!==false);if(k.sex==="m")M.sons++;else M.daus++}else if(kidsSeen.get(id)&&k.alive===false){kidsSeen.set(id,false);M.kidDead++;if(k.heir||(S.heir&&S.heir.k===k))M.heirLost++}});
+ if(S.heir&&S.heir.k&&S.heir.k.alive===false&&!M._hl){M._hl=1}
+ if(rk0!=null&&S.rank<rk0)M.demote++;rk0=S.rank;if(M.rankAt[S.rank]==null)M.rankAt[S.rank]={buoi:R.buoi,age:S.age,year:S.year,clicks:M.pace.clicks,choices:M.pace.choices,chars:M.pace.chars,mg:M.pace.mgPlay,mgs:M.pace.mgSkip}}catch(e){}}
+R.perBuoi=perBuoi;
+/* pace clicks: every act she takes (act / doAct / goTo / lesson buttons) + every card answer (choices) + every «Sang ngày mới» (perBuoi) */
+["act","goTo","lesson","lessonMode","lessonVir"].forEach(n=>wrapG(n,o=>function(){M.pace.clicks++;return o.apply(this,arguments)}));
+{const d1=doAct;doAct=function(){M.pace.clicks++;return d1.apply(this,arguments)}}
+R.mSnap=()=>{const o=JSON.parse(JSON.stringify(M,(k,v)=>k[0]==="_"?undefined:v));try{o.ky=(S&&S.ky&&S.ky.got||[]).map(id=>(window.KY&&KY.TITLE&&KY.TITLE[id])||id).concat(o.ky.filter(x=>x&&!/^\s*$/.test(x))).filter((x,i,a)=>a.indexOf(x)===i);o.nights=S?S.nights||0:o.nights}catch(e){}
+ o.evDistinct=Object.keys(o.ev).length;o.evRep=Object.values(o.ev).filter(e=>e.n>1).length;return o};
 
 /* ---- stat sanity: inpage6 __bad already lists NaN / negative / over-cap stats; robot10.js turns them into bugs ---- */
 
@@ -122,5 +168,5 @@ if(C.locked)R.lock={road:C.road,openAt:null,playAt:null};
   if(dt>(C.lagMs||1500))bug("lag","one buổi change took over "+(C.lagMs||1500)/1e3+" s (bot page, render off)",Math.round(dt)+" ms @ "+where())}
   R.calls++;try{if(!R.road&&S&&S.st&&S.st.f14)R.road=S.st.f14.road;R.origin=S&&S.origin&&S.origin.k}catch(e){}
   if(S&&!S.dead&&gt()===g0&&!Q.length&&!S.mg){if(++R.noAdv>=20&&!R.halt){R.halt="softlock";bug("stuck","«Sang ngày mới» does nothing: the clock does not move (soft-lock)",where()+" · used "+used+" · place "+S.place+" · Q 0 · S.mg "+!!S.mg);R.haltSave=R.lastSave}return r}
-  R.noAdv=0;R.buoi++;life0();auditLogs();if(!(R.buoi%(C.rtEvery||1)))roundTrip();return r}}
+  R.noAdv=0;R.buoi++;life0();try{R.perBuoi&&R.perBuoi()}catch(e){}auditLogs();if(!(R.buoi%(C.rtEvery||1)))roundTrip();return r}}
 })();
