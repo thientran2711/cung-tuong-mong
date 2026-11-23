@@ -123,6 +123,64 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
     const e3=pc(P);v.inv.push(e3);const c3=loLoseE(v,e3,"srv");v.inv.splice(v.inv.indexOf(e3),1);loKeepBy(c3,S,"");Object.assign(c3,{keep:0,by:null,open:1});c3.kn.ome=1;
     used=0;loUI("giveback",c3.id);ck("18d «Trả về chủ» while SHE holds it: still works (one piece, at its owner)",c3.st==="done"&&cnt(e3.iu)===0&&v.inv.filter(e=>e.iu===e3.iu).length===1,{st:c3.st,me:cnt(e3.iu),v:v.inv.filter(e=>e.iu===e3.iu).length})}
    finally{CW.on=on5;v.inv=v.inv.filter(e=>!e.lo&&!(e.iu>9e6))}}
+  /* E44g T1 (coop-lost-scan vanish 10000013 / 10000014 / 10000078 / 10000165, both builds): the host's festival result waits for his contest
+     minigame (fxFin7 later; CW.f7 may stay open for weeks). Meanwhile she puts on garment X on her own seat (X leaves her chest, the one she
+     wore, G, comes back) → her relay rebuilds her entry; and the host's own act takes piece Q from her entry (that act sent its own op).
+     Before: f7Done diffed the festival-START snapshot → «rm gone» X (her famItem finds it WORN → vanish), «add» G (a 2nd copy), «rm» Q again,
+     «ktake» her child. Now: fxFin7 diffs its own call only; a synchronous festival still sends what it gave her. */
+  {reset();const on21=CW.on,se21=CW.seat,sd21=COOP.send,f721=CW.f7,pu21=CW.pulled;const sn=[];const Y=Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="y"&&IT[k]);
+   const kid={name:"Tiểu B",bt:5,alive:true,hp:50,tal:10,fond:50};const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[Object.assign({},kid)],rank:3,fav:50};rivals.push(f);
+   const X=pc(Y[0]),Pz=pc(P),Qz=pc(P),G={k:Y[1],from:"emp"},Z=pc(P);let o21=[],o21d=[],er21="",def21=null;const TT="Hội thi T21";
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};
+    f.inv=[X,Pz,Qz].map((e,i)=>Object.assign({},e,{ci:i}));CW.pulled=[[0,f]];
+    CW.b4Wrap("festival",t=>{Q.push({t,h:"<p>T21</p>",btn:"Đã hiểu"})})(TT);def21={open:!!CW.f7,b:CW.f7&&CW.f7.b};Q.length=0;CW.pulled=null;
+    f.inv.splice(2,1);/* the host's own act took Qz (its op went with that act) */
+    COOP.emit("act",{t:"act",k:"ctm-fam",mode:"fam",h:"t21",from:"b",name:f.name,pets:null,fam:{bag:[Pz,G].map((e,i)=>Object.assign({},e,{ci:i})),kids:[Object.assign({},kid)],preg:0,fake:0,fx7:null}});
+    fxFin7(TT,[]);o21=sn.flatMap(m=>m.fam||[]);
+    sn.length=0;CW.pulled=[[0,f]];CW.b4Wrap("festival",t=>{f.inv.push(Object.assign({},Z));CW.f7.L=[]})("Hội thi T21d");CW.pulled=null;o21d=sn.flatMap(m=>m.fam||[])}catch(e){er21=e.message}
+   finally{CW.on=on21;CW.seat=se21;COOP.send=sd21;CW.f7=f721;CW.pulled=pu21;rivals.splice(rivals.indexOf(f),1)}
+   const rmadd=o21.filter(o=>o&&(o.op==="rm"||o.op==="add"||o.op==="ktake"));
+   ck("21 festival result pending: her relay rebuilt her entry (X put on) + a host act took Q: no «rm» / «add» / «ktake» at the result (was: X off her, G twice, Q again)",!er21&&def21&&def21.open&&def21.b===null&&!rmadd.length,{er21,def21:def21&&{open:def21.open,b:!!def21.b},ops:rmadd.map(o=>o.op+":"+(o.iu||(o.e&&o.e.iu)||0)+":"+(o.k||(o.e&&o.e.k)))});
+   ck("21d a synchronous festival still sends what it gave her («add» of the prize, once)",!er21&&o21d.filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===Z.iu).length===1,{er21,ops:o21d.map(o=>o&&o.op)});
+   reset();S.inv=[Object.assign({},Pz),Object.assign({},G)];S.wd={tram:null,y:Object.assign({},X)};FA(o21);
+   ck("21b her seat applies the host's ops: X still worn, ONE G in her chest",S.wd.y&&S.wd.y.iu===X.iu&&S.inv.filter(e=>e.k===G.k).length===1,{y:S.wd.y,inv:S.inv.map(e=>e.k)})}
+  /* E44g T6 (coop-lost-scan vanish 934 / 3385 / 2028): an NPC gives a piece to her entry OUTSIDE the diffed calls (an agent act, a monthly gift):
+     before, jil logged «sang hảo hữu» and no op carried it (the piece stayed on the host's copy of her entry). Now one «add» to her seat;
+     inside a diffed call still exactly one (b4Ops). */
+  {reset();const on22=CW.on,se22=CW.seat,sd22=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);v.inv=v.inv||[];let er22="",n1=-1,n2=-1,e1=null,e2=null;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};
+    e1=pc(P);v.inv.push(e1);giveTo(v,f,v.inv.indexOf(e1));n1=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e1.iu).length;
+    e2=pc(P);v.inv.push(e2);CW.b4Run(()=>giveTo(v,f,v.inv.indexOf(e2)));n2=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e2.iu).length}catch(e){er22=e.message}
+   finally{CW.on=on22;CW.seat=se22;COOP.send=sd22;rivals.splice(rivals.indexOf(f),1);v.inv=v.inv.filter(e=>!(e.iu>9e6))}
+   ck("22 an NPC gives a piece to her entry outside a diffed call: ONE «add» to her seat (was: none, stranded on the host's copy)",!er22&&f.inv.some(e=>e.iu===e1.iu)&&n1===1,{er22,n1,inv:f.inv.map(e=>e.iu)});
+   ck("22b the same gift inside a diffed NPC call: still exactly one «add»",!er22&&n2===1,{er22,n2})}
+  /* E44g T5 (coop-lost-scan dup 10000030): the jil market buyer (npc-purpose ilBuy) picked HER entry on the host; with the stale festival diff
+     gone the piece would be stranded on the host's copy. Now she is never an NPC buyer, and any box piece handed to her entry goes to her seat. */
+  {reset();const on23=CW.on,se23=CW.seat,sd23=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);let er23="",w23=null,n23=-1;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P);const x={e,at:"mkt",own:"",w:wk(),pr:1};
+    w23=NPW.reg.ilBuy.who({x,o:null});ilS().box.push(x);ilTake(x,f,"mua");n23=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e.iu).length}catch(z){er23=z.message}
+   finally{CW.on=on23;CW.seat=se23;COOP.send=sd23;rivals.splice(rivals.indexOf(f),1)}
+   ck("23 the market buyer list never holds her entry (a player seat)",!er23&&Array.isArray(w23)&&!w23.includes(f),{er23,n:w23&&w23.length});
+   ck("23b a box piece handed to her entry on the host: ONE «add» to her seat",!er23&&n23===1,{er23,n23})}
+  /* E44h (coop-lost-scan-traced 9001 vanish 10000200, «kyngo lead»): an NPC holds a piece of HERS (her case on the host); Kỳ ngộ returns it
+     (lostReturn how «kyngo»): ONE «ret» to her seat and famSweep sends NO «gone» after it (was: «gone matdau» → her seat dropped it). Every
+     return road of jlost (tra / xet / nop / soat / nha / kyngo) is covered by identity. */
+  {const R24=[];for(const how of ["kyngo","tra","xet","nop","soat","nha"]){reset();const on24=CW.on,se24=CW.seat,sd24=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);let er24="",nr=-1,ng=-1;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};CW.famSt={};CW.famSw=1;const e=pc(P);S.loSeq=(S.loSeq||0)+1;
+    const c={id:S.loSeq,k:P,e,own:902,w:wk(),due:wk()+9,st:"held",at:key(v),by:key(v),keep:1,cause:"riv",kn:{},open:0,cev:0,hear:0};loL().push(c);
+    const x=Object.assign({},e,{lo:c.id,gh:902,by:key(v)});v.inv=v.inv||[];v.inv.push(x);CW.famSweep();
+    lostReturn(x,how);CW.famSweep();const ops=sn.flatMap(m=>m.fam||[]);nr=ops.filter(o=>o&&o.op==="ret").length;ng=ops.filter(o=>o&&o.op==="gone").length;
+    v.inv=v.inv.filter(y=>y!==x);loL().splice(loL().indexOf(c),1)}catch(z){er24=z.message}
+   finally{CW.on=on24;CW.seat=se24;COOP.send=sd24;rivals.splice(rivals.indexOf(f),1)}R24.push([how,er24,nr,ng])}
+   ck("24 her piece returned by any road (kyngo, tra, xet, nop, soat, nha): ONE «ret», no «gone» after it",R24.every(([h,er,nr,ng])=>!er&&nr===1&&ng===0),R24)}
+  /* E44h T8 (coop-lost-scan-traced SWAP dup 54): the npc-purpose roll (npwAsk) never makes her entry (a player seat) the NPC actor — loTake made her
+     the keeping thief of an NPC's piece. Checked on a test kind whose who list is liveRivals(true) and on loTake itself. */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);let er25="",a25=null,l25=null;
+   try{NPW.reg.__t25={grp:"t",who:()=>liveRivals(true),why:()=>({s:9999})};a25=npwAsk("__t25",{}).map(o=>o.who);const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);l25=npwAsk("loTake",{p:v}).map(o=>o.who)}catch(z){er25=z.message}
+   finally{delete NPW.reg.__t25;rivals.splice(rivals.indexOf(f),1)}
+   ck("25 the npc-purpose roll never picks her entry as the NPC actor (any kind; loTake)",!er25&&a25&&a25.length>0&&!a25.includes(f)&&l25&&!l25.includes(f),{er25,n:a25&&a25.length,hasF:a25&&a25.includes(f),lo:l25&&l25.includes(f)})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

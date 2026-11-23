@@ -643,8 +643,13 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const 
    sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
 (function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
  try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
- let ca=[];try{const c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
+ let ca=[],c0=null;try{c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
  const r=f0.apply(this,arguments);
+ /* E44h (coop-lost-scan-traced 9001 vanish 10000200, the «kyngo lead»): a case of HERS closed here by a return (any road: Kỳ ngộ «kyngo»,
+    tra / xet / nop / soat / nha …) already sends the piece back («ret», or «add» inside an NPC turn); famSweep read every closing whose
+    how was not on its hand list (nha/tra/soat/nop/xet) as «mất dấu» and sent «gone» after the «ret» → her seat dropped the piece it had
+    just got back. Marked by identity (like the box rule's __fs), so no return road can miss. */
+ try{if(r&&CW.on&&host()&&c0&&c0.st==="done"&&String(c0.own)===String(fp()))c0.__rt=1}catch(z){}
  try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];FA.set(x,ca.filter(Boolean));/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
   if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
 /* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
@@ -747,7 +752,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
 function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
  const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
- for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone» */const was=st[c.id]===1;st[c.id]=2;
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs||c.__rt){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone»; E44h: closed by a return (lostReturn hook: «ret» sent) */const was=st[c.id]===1;st[c.id]=2;
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
@@ -1368,20 +1373,35 @@ function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId()
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
 /* the festival being scored with her entry (also when the host's own minigame defers the scoring to fxFin7) */
-function f7Done(L){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=b4Ops(c.b,c.title);if(i<0){b4Send(ops,{tt:c.title});return}
+function f7Done(L,pre){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=(pre||[]).concat(c.b?b4Ops(c.b,c.title):[]);if(i<0){b4Send(ops,{tt:c.title});return}
  const x=L[i],an=SC7[x.kind]?SC7[x.kind].n:"tài nghệ";const top=i===0;CW.f7last={i,n:L.length,kind:x.kind,reg:!!c.reg};
  const hd=top?`${c.title}: ${an} của ngươi đứng đầu, Hoàng thượng ban thưởng (Sủng, Danh tăng; về cùng tuần mới).`:`${c.title}: ngươi dâng ${an}, đứng hạng ${i+1} trong ${L.length} người dự thi${i>=L.length-1?"; lu mờ trước hậu cung":""}.`;
  b4Send(ops,{force:1,tt:c.title,hd,fx:c.reg&&typeof J71==="object"?{suc:-J71.cost}:{},fest:c.reg?{f:c.reg.F.f,y:S.year}:null})}
 if(typeof cScore7==="function"){const f=cScore7;cScore7=function(){const L=f.apply(this,arguments);try{const c=CW.on&&host()&&CW.f7;if(c&&Array.isArray(L)){
  if(c.reg){const pr=(c.reg.X.pr&&typeof J71==="object"?J71.prep:0)+(c.reg.X.pb||0);for(const x of L)if(isF(x.p)){x.pr=(x.pr||0)+pr;x.s+=pr}L.sort((a,b)=>b.s-a.s)}CW.f7.L=L}}catch(e){console.error(e)}return L}}
 if(typeof fxBest7==="function"){const f=fxBest7;fxBest7=function(p){const c=CW.on&&host()&&CW.f7;if(c&&c.reg&&isF(p))return c.reg.X.a;return f.apply(this,arguments)}}
-if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const r=f.apply(this,arguments);try{if(CW.on&&host()&&CW.f7&&CW.f7.title===t)f7Done(L)}catch(e){console.error(e)}return r}}
+/* E44g T1 (law 6c REAL OBJECTS): the festival result (fxFin7) diffs her entry around ITS OWN call. Before: f7Done diffed the snapshot taken when
+   festival() started; with the host's contest minigame deferring the scoring (and a festival that never closes keeping CW.f7 open for weeks),
+   everything that touched her entry meanwhile was sent again as the festival's doing: the garment she put on on her own seat («rm gone» →
+   her famItem takes it off her = vanish) and the one she took off («add» iu 0 = a second copy), the host's own Lấy đồ / Cài đồ already sent
+   by their acts (coop-lost-scan T1 10000013 / 10000014 / 10000078 / 10000165). A synchronous festival (no minigame) keeps its whole diff (pre). */
+function f7Snap(L){let v=null;try{const x=(L||[]).find(y=>y&&isF(y.p));v=x?x.p:friendEntry()}catch(e){}return v?{v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0:null}:null}
+if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const c=CW.on&&host()&&CW.f7&&CW.f7.title===t?CW.f7:null;let pre=[];
+ if(c){try{if(c.b)pre=b4Ops(c.b,c.title)}catch(e){console.error(e)}c.b=f7Snap(L)}
+ const r=f.apply(this,arguments);try{if(c&&CW.f7===c)f7Done(L,pre)}catch(e){console.error(e)}return r}}
 function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulled.length)return f.apply(this,arguments);
  const b=b4Snap();if(!b)return f.apply(this,arguments);const fest=n==="festival";if(fest){CW.f7={b,title:arguments[0]||"Hội thi",reg:f7reg(b.v,arguments[1]),L:null}}
  CW.b4in=true;let r;try{r=f.apply(this,arguments)}finally{CW.b4in=false}
- try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
+ try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}
+   else if(CW.f7&&CW.f7.b){/* E44g T1: the scoring waits for the host's minigame: what festival() did so far goes now, the start snapshot is dropped (fxFin7 diffs its own call) */const c=CW.f7;const ops=b4Ops(c.b,c.title);c.b=null;if(ops.length)b4Send(ops,{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
+/* E44g T6 (law 6c REAL OBJECTS, law 1): an NPC gives a piece to her entry OUTSIDE the diffed calls (rivalsTurn / rivalsMonth / festival / the
+   runAct wrapper): an agent act (jagacts cx:gift), a monthly gift (j8), jts / jveil gifts. jil ilGuard(giveTo) saw it land in her entry and
+   logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
+   (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
+   on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
