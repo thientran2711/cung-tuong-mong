@@ -2498,3 +2498,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 03:33Z) 108 opened MAIN CHÍNH 109 = session_01Rc5AsMAkWe3fwq2w85eAKc (child, depth 2). 108 now relay-only: forwards late messages to 109 until 109 disables trig_01YWv7JaTkWDf6sV7wxESQx5.
 - 23/11 03:34Z LC5 ROLLED (ctx ~29 %): 14 lands, LIVE=bda5b75b, queue empty; handover dev/handover/reports/land-chain-5.md; MAIN 108 opens LC6.
 - (23/11 03:34Z) LC5 ROLLED (handover reports/land-chain-5.md b8791f4f); relayed to 109 to open LC6 + archive LC5.
+
+## MAIN CHÍNH 109 (took over 23/11 03:35Z)
+- MAIN CHÍNH 109 = session_01Rc5AsMAkWe3fwq2w85eAKc; START_CTX ~6 % (get_session reads 0; own estimate ~60k/1M) → roll at 31 %, ceiling 60 %; depth 2 (limit 8). LIVE = bda5b75b. LC5 = session_01Rc5AsLX47s5ojNyh7J47MB (queue empty).
+- LOAD: main running 0 (owner bugs/UI/go-live only) | B free 11 | C free ? (art resume + N13/N14 + M14 pending ack) | D free 0 new (N16 coop-real-port + rv) | E: N11/N12/N17 | moved: none
