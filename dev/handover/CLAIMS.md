@@ -1197,3 +1197,8 @@ REVIEW j51-heir-danh (sonnet SMALL text-only law 4; briefs/D-j51-heir-danh-revie
 | KIT KEEPER #12 MOCK-STAGE v3: event layout A per owner 20:20Z/20:22Z (figure left full body, event picture in, info fixed / only options scroll, box over figure) | review/mock-stage; reports/MOCK-STAGE.md | MAIN 110 | session_01Rc5AsLLYr8sHGVYNmfHpMF | RUNNING | 23/11 20:20Z |
 | kit-odds-row: odds bar + word one row (whole group) + KIT.md no-needless-wrap law + regression test (sonnet SMALL kit) | review/kit-odds-row; reports/kit-odds-row.md | MAIN 110 | session_01Rc5AsMmp9zDKtRBPuSVVv7 | RUNNING | 23/11 20:24Z |
 | hdr-kiep: top-left name/age line shows «Kiếp thứ …» (owner 20:50Z; sonnet SMALL UI) | review/hdr-kiep; reports/hdr-kiep.md | MAIN 111 | session_01Rc5AsLTYHkB2oX3fnkWMqk | RUNNING | 23/11 20:47Z |
+| hdr-kiep: top-left name/age line shows «Kiếp thứ …» (owner 20:50Z; sonnet SMALL UI) | review/hdr-kiep; reports/hdr-kiep.md | MAIN 111 | (opening) | RUNNING | 23/11 20:47Z |
+fix-evening-softlock + fix-hadoc-loop (opus; MAIN 110 20:33Z; briefs/D-softlock-hadoc.md) | review/fix-evening-softlock, review/fix-hadoc-loop | (opening) | RUNNING | 23/11 20:55Z (Foreman D child)
+odds-ladder-words (sonnet; MAIN 110 20:33Z; briefs/D-odds-ladder.md) | review/odds-ladder-words | (opening) | RUNNING | 23/11 20:55Z (Foreman D child)
+fix-kframe-heir (opus; MAIN 110 20:33Z; briefs/D-kframe-heir.md) | review/fix-kframe-heir | (opening) | RUNNING | 23/11 20:55Z (Foreman D child)
+typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | review/typed-stat-bal | (opening) | RUNNING | 23/11 20:55Z (Foreman D child)
