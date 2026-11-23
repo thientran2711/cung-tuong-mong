@@ -2024,3 +2024,38 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
     Tố lên: Hoàng hậu|Thái hậu regard / repStatD, Danh / repDanhD, + repEv per proof found, repRisky when the one she reports to is the one behind it;
     Ghi nhớ: Tai mắt × memEyes. selfKhac = khắc her own trip to Nội vụ phủ costs (the maid's trip is parallel time). */
  loyD:3,repStatD:2,repDanhD:5,repEv:15,repRisky:5,memEyes:10,selfKhac:1};
+
+/* typed-stat-bal GROUP A block (law 4): arts / virtues / works numbers (j85, j23, j83) — new keys only, never a key set twice */
+Object.assign(BAL,{
+ virB:{cong:{5:{danh:4}},dung:{1:{sac:2},3:{sac:2},5:{sac:2,danh:4}},ngon:{3:{tamco:1},5:{danh:4}},hanh:{1:{duc:3},2:{duc:3,th:3},3:{duc:3},4:{duc:3,th:3,hh:5},5:{duc:3,danh:4}}},
+   /* Tứ đức one-time gains when a course reaches bậc l (courses have no base stat gain); j85 addVir applies VIRB (linked below), j85 virtueBonus dung.sac sums it, VIRFX texts print it */
+ artB:{ky:{1:{tamco:1},2:{tamco:1},4:{tamco:2},5:{tamco:2}},hoa:{2:{th:3},4:{th:5},5:{th:5}},vu:{4:{sac:2}},theu:{2:{th:2},4:{th:3}}},
+   /* art one-time gains at bậc l beyond BAL.art.stUp / BAL.art.danh: her = j23 addArt (theu: j85 addArt), NPC = j85 addArtP via ARTB85 (linked below); ARTFX texts print it */
+ ducF:{mid:50,odds:5,shield:6,danger:5,betray:4}
+   /* j85 Đức formulas: ducOdds (Đức − mid) ÷ odds, ducShield ÷ shield, ducDanger (mid − Đức) ÷ danger, ducBetray ÷ betray; the Đức panel and the danger card print them */
+});
+Object.assign(BAL.eff.j85,{
+ thiDanhSeason:1,  /* Thi bậc 2: Danh each season (j85 v85Month, ARTFX.thi) */
+ hoaDanhSeason:1,  /* Họa bậc 2: Danh each season (j85 v85Month, ARTFX.hoa) */
+ hoaDanhSeason4:2, /* Họa bậc 4: Danh each season instead (j85 v85Month, ARTFX.hoa) */
+ theuBac:5,        /* Thêu bậc 3: Bạc each month (j85 v85Month, ARTFX.theu, ARTS.u) */
+ theuBac5:10,      /* Thêu bậc 5: Bạc each month instead */
+ nauSuc:2,         /* Nấu bậc 2: Sức each month (j85 v85Month, ARTFX.nau) */
+ nauSuc4:4,        /* Nấu bậc 4: Sức each month instead */
+ nauAn:1,          /* Nấu bậc 3: Ân tình each month (j85 v85Month, ARTFX.nau, ARTS.u) */
+ nauAn5:2,         /* Nấu bậc 5: Ân tình each month instead */
+ hanhDucMonth:1,   /* Hạnh bậc 3: Đức each month up to BAL.virx.hanhCap (j85 v85Month, VIRFX.hanh, Đức panel) */
+ ducTf:1,          /* Đức ≥ ducLv.up / < ducLv.down: Thái hậu, Hoàng hậu regard ± each month (j85 v85Month, Đức panel) */
+ ducStaff:1,       /* Đức ≥ ducLv.staffUp / < staffDown: servants' Thiện cảm ± each month (j85 v85Month, Đức panel) */
+ caughtDanh:-5     /* a scheme caught (j85 caught wrap): the schemer's Danh */
+});
+Object.assign(BAL.eff.j23,{
+ camSucMonth:1     /* Cầm bậc 1: her Sức each month (j23 artMonth, ARTFX.cam) */
+});
+Object.assign(BAL.eff.j83,{
+ danhIllThaiy:-6,  /* đồ cấm via Thái y viện caught: buyer's Danh (j83 illBuy, IROUTE.thaiy.fail) */
+ danhIllCho:-8,    /* đồ cấm at the black market caught: buyer's Danh (j83 illBuy, IROUTE.cho.fail) */
+ ducIllBuy:-3      /* buying đồ cấm: buyer's Đức (j83 illBuy and its cards) */
+});
+if(typeof VIRB!=="undefined")Object.assign(VIRB,BAL.virB);/* j85 tables load before this file: link the BAL objects into them */
+if(typeof ARTB85!=="undefined")Object.assign(ARTB85,BAL.artB);

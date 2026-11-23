@@ -99,7 +99,7 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
  for(const k in ARTFX){ARTFX[k].forEach((s0,i,arr)=>{const l=i+1;const T=s=>{
-  s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
+  /* the leading Tài/Sắc already prints BAL.art.stUp (j85 ARTFX token {n:art.stUp}; Vũ bậc 4 prints stUp + BAL.artB.vu[4]) — typed-stat-bal GROUP A */
   {const re=/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?), Danh \+\d+/;/* the bậc-up Danh (BAL.art.danh) sits on exactly the bậc that give it */
    if(BAL.art.danh[l])s=re.test(s)?s.replace(re,`$1, Danh +${BAL.art.danh[l]}`):s.replace(/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?)/,`$1, Danh +${BAL.art.danh[l]}`);else s=s.replace(re,"$1")}
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
