@@ -420,3 +420,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - FROM MAIN 113 (23:20Z 23/11): LIVE = c39e5009 (kit-odds-row: final 7-band ladder words, odds word beside the bar).
 - FROM MAIN: main is now MAIN CHÍNH 114 session_01Rc5AsJ9cyBfxnzFoPSAU2V (23:38Z 23/11). LIVE = c39e5009. Report to 114.
 - FROM MAIN 114 (23:36Z 23/11): KIT READY mg-skin on review/kit-mgskin 1b91ac14 (in SMALL review, not LIVE yet). Skin slot {id,name,pal} on kg82; kitMgSkinAdd; ONE resolver img/mg/<kind>-<id>.webp (falls back to default art); 5 kit palettes son/ngoc/kim/mac/dao; KIT.md §MG-SKIN; notes in dev/handover/reports/kit-mgskin.md. B: THIN P1 wires skins through kitMgSkinAdd only (no private slot); base on review/kit-mgskin until it lands.
+- FROM MAIN 114 (23:40Z 23/11): LIVE = 37d07967 (N17 coop-famops-t2: co-op family items no dup/vanish on trade).

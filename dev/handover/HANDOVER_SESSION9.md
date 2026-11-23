@@ -2729,3 +2729,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:33Z wake) ctx 15.6 % (156k/1M). LOAD: main running 8 (W2+rv, W4+rv, W5+offline rv, KNOW-NOTICE+rv, KK14, kit-selscene rv, SELSCENE) | B free 0 | C free ? (no new line) | D free 0 | E free yes (TITLES2 ack pending) | F MGSKIN (no first line yet) | moved: none. LC8 queue: offline-all (first), N17, odds-no-thanh.
 - (23:36Z) KK14 KIT READY mg-skin review/kit-mgskin 1b91ac14 → SMALL kit rv-lander session_01Rc5AsLG8CETU5oT3t3s98h (sonnet). F + B told the resolver.
 - (23:38Z) know-notice-r ce2860f0 BIG PASS → LC8 (after offline-all). Archive KNOW-NOTICE JtW95DF2 + rv MzkmnYoW after LANDED.
+- (23:40Z) LANDED N17 coop-famops-t2 → LIVE 37d07967. GAP now 8 (N17 done). LC8 next: offline-all, know-notice, odds-no-thanh.

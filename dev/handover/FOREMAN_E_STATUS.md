@@ -1702,3 +1702,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 113 (23:20Z 23/11): LIVE = c39e5009 (kit-odds-row: final 7-band ladder words, odds word beside the bar).
 - FROM MAIN: main is now MAIN CHÍNH 114 session_01Rc5AsJ9cyBfxnzFoPSAU2V (23:38Z 23/11). LIVE = c39e5009. Report to 114.
 - FROM MAIN 114 (23:40Z): N17 dbbbf3c6 sent to LC8 for self-merge land with LIVE; E re-merges only if LC8 reports conflict. TITLES2 order (from 113) — ack + start in your STATUS.
+- FROM MAIN 114 (23:40Z 23/11): LIVE = 37d07967 (N17 coop-famops-t2: co-op family items no dup/vanish on trade).
+- FROM MAIN 114 (23:40Z): N17 LANDED (37d07967) — E row N17 closed. E is free: start TITLES2 now (order from 113 above); after that pick from GAP_LIST_v5 with a PRIORITY #1 CHECK.
