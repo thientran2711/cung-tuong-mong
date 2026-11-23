@@ -20,9 +20,12 @@ async function cardShot(o,name,swap){if(!process.env.SHOTS)return;const vp=o.p.v
 /* measured-size outcomes (kit size pass: viewport, text length, picture load timing) are not the card's look: left out of the signature.
    Affordability (kdis + data-kneed "thiếu … bạc") is state, not look: the stand-in carries the host's check on her STORED person (what the host
    will accept at pick time), the rebuilt one checks her live person; the two differ until part G (her week still runs on her phone). */
+/* review/coop-driver-fails (LIVE thin-d 7 kit-copy reds): data-kfsp (jfigseal KFS_ID), data-kav (KIT_AV.P) and data-kfp (kfpGet) are per-render
+   registry handles (a counter that names the person behind a picture / fact row), not look: every render takes the next number, so two
+   renders of the SAME card never match on them (the «noise» rows). Left out of the signature; the person they point to is the card's data. */
 const SIZEK=/^(kszf|ksz\d|kszlive|k3rows|k3grid|k3g\d|kpshort|k3odd|k3long|kdis|kasq)$/;
 async function sameDom(o){const sig=()=>o.p.evaluate(K=>{const R=new RegExp(K);const M=document.getElementById('modal');const L=[];for(const e of M.querySelectorAll('*')){
-  const d=[...e.attributes].filter(a=>/^(class|data-(?!m$|kzoom|kopic|subj|shot|ksz|lay|kbs|kneed|kapic)|role)/.test(a.name)).map(a=>a.name==='class'?'class='+a.value.split(/\s+/).filter(c=>c&&!R.test(c)).sort().join('.'):a.name+'='+a.value).sort().join(' ');L.push(e.tagName+' '+d)}return L},SIZEK.source);
+  const d=[...e.attributes].filter(a=>/^(class|data-(?!m$|kzoom|kopic|subj|shot|ksz|lay|kbs|kneed|kapic|kfsp$|kav$|kfp$)|role)/.test(a.name)).map(a=>a.name==='class'?'class='+a.value.split(/\s+/).filter(c=>c&&!R.test(c)).sort().join('.'):a.name+'='+a.value).sort().join(' ');L.push(e.tagName+' '+d)}return L},SIZEK.source);
  const st=await o.p.evaluate(()=>{const m=Q[0];if(!m||!m.thin)return {err:'no thin card in front'};window.__sdM=m;const J=x=>JSON.parse(JSON.stringify(x));
   const A=J(m);let B;if(m.pid){const x=mkP(m.pid,m.pp||{});if(!x)return {pid:m.pid,skip:1};B={t:m.t,h:x.t,opts:J(x.o),who:x.who,pid:x.pid,pp:x.pp,cls:x.cls,must:1}}else{B=J(m);delete B.thin}
   window.__sdA=A;window.__sdB=B;

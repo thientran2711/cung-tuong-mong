@@ -37,4 +37,23 @@ async function weekGeneric(A,B,clear,press1,ms=120000){const w=o=>o.p.evaluate((
    the friend shows exactly Y's own list (key = a page function (who) => string, who = 'own' | 'fr') before reading the target. */
 const PETK=who=>{const L=who==='own'?S.pets:(COOPW.friend()||{}).pets;return L?JSON.stringify(L.map(P=>[P.t,P.at||0]).sort()):'none'};
 async function syncFr(X,Y,key=PETK,ms=15000){const t0=Date.now();let a,b;while(Date.now()-t0<ms){b=await Y.p.evaluate(key,'own').catch(()=>null);a=await X.p.evaluate(key,'fr').catch(()=>null);if(a!=null&&a===b)return true;await new Promise(r=>setTimeout(r,300))}return{fr:a,own:b}}
-module.exports={origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric};
+/* review/coop-driver-fails (D ROOT, LAW 11 family «night»): since MAIN ROOT-82 (20/11 22:58Z, jnf UNPARKED) a room whose two seats both live in the
+   palace plays the palace night through jnf: the HOST turns the card at the end of tối, both seats get the 10-second choice, the host resolves
+   ONCE, each seat keeps the night record of that day in S.nightWhy (day = wk()) and S.nfX. The old B2 week key (S.tn, jcoopworld tnRelay /
+   CW.tnWeek, a direct S.tonight write) is switched off there on purpose (jcoopworld tnRelay / tnWeek: nfOn() → return: «this B2 word would
+   undo her won night»). A driver that checks the night reads it through these (the same seat-neutral record coop-steal checks):
+     nfBoth(A,B)        → true when jnf owns the night on both seats (else the room is parked: jnf nfParked, the live B2 path)
+     nightRec(A,B,d)    → {a,c,same}: the night record of day d on each seat (flip0 = the card turned, pick = who holds the night, cause),
+                          host / guest / NPC id, waited until both seats agree (≤ ms) */
+const NFON=()=>typeof nfOn==='function'&&!!nfOn();
+async function nfBoth(A,B){return !!(await A.p.evaluate(NFON).catch(()=>false))&&!!(await B.p.evaluate(NFON).catch(()=>false))}
+const NREC=d=>{const SEAT=COOP.seat==='a'?'host':'guest',OTH=SEAT==='host'?'guest':'host';const f=liveRivals(false).find(v=>v&&v.coop);
+  const n=id=>id==null?null:id==='me'?SEAT:(f&&id===f.id)?OTH:id;const w=S.nightWhy;if(!w||w.wk!==d)return{none:1,wk:w&&w.wk};return{flip0:n(w.flip0),pick:n(w.pick),cause:w.cause}};
+async function nightRec(A,B,d,ms=20000){let a=null,c=null;const t0=Date.now();while(Date.now()-t0<ms){a=await A.p.evaluate(NREC,d).catch(e=>({err:e.message}));c=await B.p.evaluate(NREC,d).catch(e=>({err:e.message}));
+  if(!a.none&&!a.err&&JSON.stringify(a)===JSON.stringify(c))break;await _sl(500)}return{a,c,same:!a.none&&!a.err&&JSON.stringify(a)===JSON.stringify(c)}}
+/* repress(o) — review/coop-driver-fails #2 (LAW 11, one shared step for every bot's buoiBoth): a press of #next can open a card instead of
+   ending the buổi (coop-guest-men G3-1: her tối «Sẵn sàng» opened the world news «Thái hậu bệnh nặng», jworld2 thb; clear() closed it, her
+   #next stayed enabled and the bot never pressed again → the room waited for ever). A player presses again: a seat still on the old buổi,
+   #next enabled, no dialog, no buổi / week end out → one more tap (counted in window.__rePress). */
+async function repress(o){try{await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled&&n.offsetParent!==null&&!(typeof Q!=='undefined'&&Q.length)&&!(window.COOPW&&(COOPW.bend||COOPW.pend))&&!(window.__co&&__co().waiting)){window.__rePress=(window.__rePress||0)+1;n.click()}})}catch(e){}}
+module.exports={repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
