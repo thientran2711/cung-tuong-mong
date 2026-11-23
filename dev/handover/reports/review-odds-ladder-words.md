@@ -14,3 +14,6 @@ Every other chanceW/word use passes the scan (jthaiy.js:96 "thấy mưu hại ng
 ## Gates
 assemble/build OK · one-core-guard PASS · odds-scales-scan 1→0 FAIL · quickcheck: see below.
 Shots (755x1000 + 1180x820): not taken — no robot/GUI route to a tryst card within this worker's budget; one-string change, same helper as 40 sibling cards.
+
+## Gate results (quickcheck on 225c5c08 + this change)
+CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, hooks) · TIME-SPILL PASS · open 2060 ms 0 errors · old save loads, 0 errors · odds-cap PASS. odds-no-unknown.js needs a URL arg (not run).
