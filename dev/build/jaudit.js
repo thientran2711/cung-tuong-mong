@@ -85,9 +85,9 @@ function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}
 /* consort acts: outcome texts written from the code (j8 ACT.f) with the scaled numbers for the card's target */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;const def=(k,fn)=>{try{const old=AOUT[k];Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=T();return t?fn(t):old},set(v){}})}catch(e){}};
  def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2`,`bị lộ: ${pvRel(t,-8)}`]);
- def("ally",t=>[`${pvRel(t,25)}, nàng bớt ghen 10`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
- def("rumor",t=>["Danh nàng -8",`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,-5)}`]);
- def("frame",t=>["nàng mất Danh và Sủng -10, Danh +3, Tâm cơ +2",`bị lộ: Danh -15, Sủng -8, ${pvRel(t,-30)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();
+ def("ally",t=>[`${pvRel(t,BAL.eff.j8.f_2)}, nàng bớt ghen ${BAL.rcv.prop.ghen}`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
+ def("rumor",t=>[`Danh nàng ${balSg(BAL.eff.j8.rumorDanh)}`,`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,BAL.eff.j8.f_4)}`]);
+ def("frame",t=>[`nàng mất Danh và Sủng -${BAL.eff.j8.framedSung}, Danh ${balSg(BAL.eff.j8.frameDanh)}, Tâm cơ ${balSg(BAL.eff.j8.frameTam)}`,`bị lộ: Danh ${balSg(BAL.eff.j8.frameFailDanh)}, ${sgStat(BAL.eff.j8.frameFailSung)}, ${pvRel(t,BAL.eff.j8.f_5)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();
 /* Tranh sủng / Chặn ngự giá (stealWin: relAdd −15, ghen +25) */
 (function(){if(typeof stealX!=="function")return;const s0=stealX;stealX=function(v,road){const h=s0.apply(this,arguments);try{return h.replace(/kèm: (.+?) ghen \+25, thù -15/,(m,n)=>`kèm: ${n} ghen +25, ${n} ${pvRel(v,-15)}`)}catch(e){return h}}})();
 /* talk options on a consort's card: "thiện cảm ±N" / "oán ±N" are affAdd/oanAdd on her → scaled, in the new labels */
@@ -268,7 +268,7 @@ function aaPunishTxt(sev){const m=punishMonths();return sev>=2?`bị phạt: c�
  if(i>=0)A[i]=Object.assign({},A[i],{risk:`cung nhân của nàng ta bắt gặp: ${pvRel(v,-15)}, ${aaPunishTxt(1)}`})}}catch(e){}return A}})();
 
 /* 22. servant start · Lĩnh đồ ở Nội vụ phủ: srvMeet (j42) has a hidden 1-in-4 "bắt nạt: Sức −5" — now on the card in Kèm */
-(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức -5: ${typeof chanceW==="function"?chanceW(25):"khả năng thấp"}`}catch(e){}return X}})();
+(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức ${balSg(BAL.eff.j42.sucSrvMeet)}: ${typeof chanceW==="function"?chanceW(SRVA.nvp.bully):"khả năng thấp"}`}catch(e){}return X}})();
 
 /* 23. MINI-GAME ACTS — one shared path (owner bug 11/15, live: one tap on the Hành sự card "Tự học Nấu nướng" paid Sức −15, Bạc −6
    and 2 khắc and showed a BẠI card, and only THEN the game intro opened). Cause: every act that opens a mini-game paid and rolled
