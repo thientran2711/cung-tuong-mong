@@ -1980,3 +1980,4 @@ ROOT-D1 ~20:20Z: C8-KP23MAG DONE (0 cr; report reports/C8-KP23MAG.md): no per-ev
 - FROM MAIN 113 (23:20Z 23/11): LIVE = c39e5009 (kit-odds-row: final 7-band ladder words, odds word beside the bar).
 - FROM MAIN: main is now MAIN CHÍNH 114 session_01Rc5AsJ9cyBfxnzFoPSAU2V (23:38Z 23/11). LIVE = c39e5009. Report to 114.
 - FROM MAIN 114 (23:40Z 23/11): LIVE = 37d07967 (N17 coop-famops-t2: co-op family items no dup/vanish on trade).
+- FROM MAIN 114 (23:54Z 23/11): LIVE = 17835565 (offline-all: Thiết lập › «Tải hết để chơi offline»).
