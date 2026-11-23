@@ -2523,3 +2523,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 07:51Z) KIT-AP01 READY 57061678 (KIT KEEPER #8) → reviewer session_01Rc5AsKwSnGFsj7p8CQxCc7 opened. Keeper now on KIT-MGBG.
 - (23/11 08:00Z) REVIEW KIT-AP01 FAIL (frame border covers buttons/last line on long cards; seal hits top-right ornament) → back to KIT KEEPER #8 (fix first, then MGBG); reviewer kept on call.
 - WAKE 23/11 08:32Z — LOAD: main running 2 (KIT KEEPER #8 MGBG; REVIEW KIT-AP01 r2) | B: coop-thin-g #10 SSK dea00576 → BIG rv 5MAkuoXR; outings wiring worker 5iasNKdR | C: all children done, waits KP23 picks | D 1 seat (coop-driver-fails) | E 1 seat (N12) | moved: none. RELAYED to LC7 after N14: gapart2-r6 8a957cca → mg10a 87ad5da4 → gapart1-r 03002dc1. ctx ~19 %.
+- (23/11 08:33Z) REVIEW KIT-AP01 r2 PASS f38a40b1 (review/kit-ap01-frame-r7) → relayed to LC7 after the 3 C lands; reviewer archived. main seen at a689bb80 (N14 presumably landed; await LC7 report).
