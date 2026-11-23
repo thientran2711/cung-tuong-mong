@@ -2690,3 +2690,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:37Z) Owner: build titles NOW → OD row + ORDER TITLES2 to Foreman E (expert first, then jdh build).
 - (22:38Z) Owner Q lag → OD row + D ORDER #7 (LAG metrics solo + co-op) + B note for co-op runners.
 - (22:39Z) Owner: mini-game visual skins → OD row + C ART ORDER MGSKIN + B P1 add + KK13 kit slot (send).
+- (22:41Z) Owner goal all figures animated → OD row + D ORDER #8 ANIM-STRESS (measure budget first; art later via C).
