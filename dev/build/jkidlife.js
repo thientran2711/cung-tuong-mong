@@ -78,6 +78,8 @@ function kmWardCard(k,mo){return pcard({tabKey:"kidward",f:kidFace(k),name:k.nam
  const sh=setHeir;setHeir=function(k,v){const B=kmB(),old=S.heir;const r=sh.apply(this,arguments);try{
    const om=old&&old.k&&old.k!==k?(old.v||S):null,nm=v||S;if(om&&om!==nm&&(om===S||om.alive))ap(om,{danh:-B.heirDanh});
    if(!(old&&old.k===k)&&om!==nm){ap(nm,{danh:B.heirDanh});if(nm===S&&typeof ghenAll==="function")ghenAll(B.heirGhen,"con ngươi được lập Thái tử")}}catch(e){console.error("kidlife heir",e)}return r};
+ /* fix-kframe-heir: a Thái tử put aside with no new one (j1 deposeHeir, j8 kframe): his mother loses BAL.kid.heirDanh, her AND an NPC mother (two-way), as the setHeir road */
+ if(typeof deposeHeir==="function"){const dh=deposeHeir;deposeHeir=function(k,m){const r=dh.apply(this,arguments);try{const om=m||S;if(r&&(om===S||om.alive))ap(om,{danh:-kmB().heirDanh})}catch(e){console.error("kidlife depose",e)}return r}}
  /* succession: her son's Mẫu tử moves the "mẹ con" score */
  if(typeof succOpen==="function"){const so=succOpen;succOpen=function(h){const r=so.apply(this,arguments);try{const k=h&&h.k,E=S.succ,H=kmB().succHoa;if(k&&E&&!h.v){kmHM(k);if(k.hM>=H.hi)E.hoa=(E.hoa||0)+1;else if(k.hM<H.lo)E.hoa=(E.hoa||0)-1}}catch(e){console.error("kidlife succ",e)}return r}}
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();
