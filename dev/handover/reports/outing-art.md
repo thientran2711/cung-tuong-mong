@@ -31,7 +31,7 @@ NOTE for review: the dialog picture is a WIDE band on both devices, so the Fold 
 
 ## REVIEW r1 (sonnet SMALL reviewer session_01N1tNP2ksTW8GR3PpKSJH3d, 11/23/2026)
 PRIORITY #1 CHECK ('outing'): OD 13 | ledger 0 | claims KP23 + REVIEW = B | main no reader | review/outing-art 4627c50b | GAPART2 (C) painted.
-Verdict: **PASS with fix** on review/outing-art-r1 @ ede8e07e97de72118423ca205e7f8d7341e3850c (contains newest origin/main 31956a09).
+Verdict: **PASS with fix** on review/outing-art-r1 @ b2f84cd0d7b2b6d0a9408362e387f503a608fdfd (contains newest origin/main 13a8dfc7; outing-art.js ALL OK after the merge).
 - Diff SMALL: jevban.js (+16), dev/test/outing-art.js, generated index.html/sw.js/assets.json. No BAL/save/co-op/time/progression.
 - KEY POINT: dialog picture slot = wide band on Fold AND iPad. Every ev-* banner is ONE 4:3 landscape file used on every device (kitEvArt, no port/land). KIT LAW 10 → outing must follow its kind: **FIXED to always -land** (kitOutingSrc; test expectations updated; header comment). Fold shot after fix: temple/bridge now readable in the band (before: thin cropped slice of the portrait file). -port files stay unused (full-screen use later).
 - KIT FIRST: no private part (reuses kitEvArt/kitSceneArt band). Fallback when not in CDN index OK (tested).
