@@ -128,7 +128,7 @@ function vlAsk(p,gk){const G=vlGivers(p).find(x=>x.k===gk);if(!G)return"";const 
 /* ---------- her side: dialogs in the kit modal ---------- */
 function vlWhen(c){return whyTime(c)}
 /* one option line in the kit modal: price + gain/loss + odds shown in full (these are acts, not hidden event choices) */
-function vlOpt(o){const fx=String(fmt(o.fx||{})).replace(/<[^>]+>/g,"");let L=o.x||"";if(fx)L=/tốn: /.test(L)?L.replace(/tốn: /,"tốn: "+fx+", "):(L?L.replace(/^((?:[^·]*?(?:Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)) · )?/,"$1tốn: "+fx+" · "):"tốn: "+fx);o.j67=L||"tốn: không tốn gì";return o}
+function vlOpt(o){const fx=String(fmt(o.fx||{})).replace(/<[^>]+>/g,"");let L=o.x||"";if(fx)L=/tốn: /.test(L)?L.replace(/tốn: /,"tốn: "+fx+", "):(L?L.replace(new RegExp("^((?:[^·]*?(?:"+KIT_ODDS_ALT+")) · )?"),"$1tốn: "+fx+" · "):"tốn: "+fx);o.j67=L||"tốn: không tốn gì";return o}
 PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O=[];const ag=vlAgent(S);
  O.push(vlOpt({n:"Tự tay kết mạng",fx:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: trò thêu, chơi càng khéo mạng càng quý`,go:()=>{if(!can(2)||S.suc<VL.craftSuc+5){log("Không đủ khắc hay Sức để tự tay kết mạng.");return}pushDil(mkP("vlcraft"),"Tự tay kết mạng")}}));
  O.push(vlOpt({n:"Đặt ở Nội vụ phủ",fx:{},x:`tốn: 1 khắc · thành: mạng đúng phẩm của ngươi, giá theo phẩm`,go:()=>{if(!can(1))return;pushDil(mkP("vlnvp"),"Nội vụ phủ")}}));
