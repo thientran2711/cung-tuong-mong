@@ -27,3 +27,12 @@ No driver fails on the branch that passes on LIVE, other than the flakes above (
 Done, no rollover needed. Worktrees to be deleted after push.
 
 SẴN SÀNG KIỂM review/coop-real-port b4c12bb6830133b09d2ea788f5394b05dc08a8ed
+
+## REVIEW D20 (reviewer, LIVE 81d76c8b merged)
+PRIORITY #1 CHECK: brief D20-coop-real-port-review.md, worker report above, claims coop-real-port, LIVE bda5b75b → 81d76c8b (both merged; final merge FF-clean).
+- Test-only: git diff --stat vs LIVE = 32 files, all dev/test (lib/coop-real.js only ADDED helpers; removed lines = the mk() signature lines re-added with origin forced). No game file, index.html/sw.js identical to LIVE. No assert removed or loosened; {low:1} is a justified rank check for drivers that keep the guest below PAL_HEAD.
+- coop-setup-scan: 33 drivers, real 30 / n/a 1 (coop-guest-agent: one page, no room, marker justified) / forced 2 (coop-guest-maid, other worker; coop-thin-b-r1, unchanged) / risk 0.
+- coop-e2e 141/141 (twice: LIVE bda5b75b and 81d76c8b merge). quickcheck PASS twice (core gates PASS).
+- Ported drivers, 2 runs of 5: cold-faction 0/0, craft-hand 0/0, places 0/0, palace-life 1 fail in 1 of 4 branch runs (P3 flake; 0 on LIVE 3 runs), thancan flaky same on LIVE (LIVE: 4 and 2 fails, same T0/T1/T2 steps; branch 1,0,4,1,0).
+- Pre-existing on LIVE, same step + same message: thin-d-probe (P6 withSeat round trip), thin-f1 (F1 real tap doAct result card): identical. b1: passes on branch, LIVE flakes at step 8.
+LAND READY review/coop-real-port-rv 52ad65b3c7c1ad1fbc36c22b71cf6ef3a56caf6d
