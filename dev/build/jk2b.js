@@ -310,7 +310,7 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
    roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
-function kitOptOdds(b){try{const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
+function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
  kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */

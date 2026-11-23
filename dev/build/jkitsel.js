@@ -33,6 +33,8 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
 .kpl .kplt .kscn-rk{margin-left:6px}
+body.kscn-on .kemo-big{visibility:hidden!important}
+button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
 .kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
@@ -43,7 +45,7 @@ function kscnOpaque(im){try{const W=120,H=Math.max(1,Math.round(120*im.naturalHe
 const kitScene={
  open(o){o=o||{};kitScene.close(true);const g=kscnGeo();const L=document.createElement("div");L.className="kscn"+(o.night?" kscn-night":"")+(o.intro&&!kscnCalm()?" kscn-clear":"");
   L.style.cssText=`left:${g.L}px;right:${g.R}px;top:${g.t}px;height:${g.H}px`;L.innerHTML=`<div class="kscn-bg" style="background-image:url('${String(o.bg||"").replace(/'/g,"%27")}')"></div><div class="kscn-veil"></div>`;
-  document.body.appendChild(L);L.g=g;L.figs=[];L.boxes=[];const S0={L,
+  document.body.appendChild(L);document.body.classList.add("kscn-on");/* the stage mood seal (.kemo-big, z 9990) must not pop over the scene */L.g=g;L.figs=[];L.boxes=[];const S0={L,
    fig:(src,f)=>kitScene.fig(L,src,f),box:(title,nodes,pos,tail,ho)=>kitDlgBox(L,title,nodes,pos,tail,ho),pair:x=>kitScene.pair(L,x),
    /* intro: the picture clear and full for o.intro ms, then blur + veil (KIT_SCN.toBlur), then figures from the left, boxes from the right */
    show(){const calm=kscnCalm();const D=o.intro&&!calm?o.intro+KIT_SCN.toBlur:0;if(D){setTimeout(()=>{const bg=L.querySelector(".kscn-bg"),vl=L.querySelector(".kscn-veil");L.classList.remove("kscn-clear");
@@ -63,9 +65,9 @@ const kitScene={
   const fh=Math.round(H*K.fh);await kitScene.fig(L,o.msgr,{cx:w*K.msgrX,top:0,fh,z:2});await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-fh,fh,z:3});
   const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height),top=gap+sh+12;
   const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:X,y:top,w:BW,h:H-top-gap},{y:Math.max(26,Math.round(H*(ip?.30:.36))-top)},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
- close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;if(now||kscnCalm()){L.remove();cb&&cb();return}
+ close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;const off=()=>document.body.classList.remove("kscn-on");if(now||kscnCalm()){L.remove();off();cb&&cb();return}
   L.boxes.forEach(b=>b.animate([{opacity:1},{opacity:0,transform:"translateX(30px)"}],{duration:260,fill:"both"}));L.figs.forEach(f=>f.animate([{opacity:1},{opacity:0,transform:"translateX(-50px)"}],{duration:380,delay:120,fill:"both"}));
-  L.animate([{opacity:1},{opacity:0}],{duration:420,delay:260,fill:"both"}).onfinish=()=>{L.remove();cb&&cb()}}};
+  L.animate([{opacity:1},{opacity:0}],{duration:420,delay:260,fill:"both"}).onfinish=()=>{L.remove();off();cb&&cb()}}};
 /* 93.3 the layout A dialogue box. nodes = DOM nodes or html strings; the node with class «opts» (or a list of kit option buttons wrapped by the caller) is the ONLY scroller */
 function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?" kscn-tl":"");
  b.innerHTML=typeof kpHeader==="function"?kpHeader(ho.kind||"choice",title||"","",ho.seal):`<div class="kph"><span class="kpht"><span class="kptitle">${title||""}</span></span></div>`;if(ho.noSeal)b.querySelectorAll(".kpseal").forEach(e=>e.remove());
@@ -87,10 +89,29 @@ function kitNewsRankRow(p,o){o=o||{};const named=typeof kitKnownName==="function
  const nameH=named?kitName(p,{cap:true,noTitle:true}):`<b class="kname">${kitUnkName(p,o)}</b>`;
  return `<div class="kpl">${kitFaceH(p,o.size||"sm")}<span class="kplt">${nameH}${rk?`<span class="kchip n kscn-rk"${col?` style="--rc:${col}"`:""}>${rk}</span>`:""}${o.how?`<small>${o.how}</small>`:""}</span></div>`}
 function kitNewsRankList(rows){return `<div class="krlist kscn-news" style="padding:6px 10px">${(rows||[]).join("")}</div>`}
+/* 93.7 «nhập cung» BARE OPTION CARD (SELSCENE request 5; EXCEPTION to §88 THÀNH/BẠI + odds rows, selection scene ONLY: the tests of the selection
+   ceremony show no odds and no gain/loss lines — the owner's scene hides them; every other option card keeps them). Same kit card: button.ka.kopt
+   (picture left .kaart, title .kat>.kan), no .kodds, no .kb rows. o = {n, pic, id}; pic missing → the kit option art picker (kpOptArt). */
+function kitBareOpt(o,onPick){o=o||{};const b=document.createElement("button");b.type="button";b.className="ka kart kopt kbare";if(o.id!=null)b.dataset.id=o.id;
+ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ b.innerHTML=`<span class="kaart">${o.pic?`<img src="${esc(o.pic)}" alt="" draggable="false">`:""}</span><span class="kabody"><span class="kat"><span class="kan">${esc(o.n)}</span></span></span>`;
+ if(!o.pic){try{if(typeof kpOptArt==="function")kpOptArt(b)}catch(e){}}if(onPick)b.addEventListener("click",()=>onPick(o,b));return b}
+function kitBareOpts(list,onPick){const d=document.createElement("div");d.className="opts kscn-opts";(list||[]).forEach(o=>d.appendChild(kitBareOpt(o,onPick)));return d}
+/* 93.8 RESULT CARD with given rows (SELSCENE request 5): the §7 result card (#rtoast.karesult, kitResultSeal, .kb rows, same classes) for a scene whose
+   changes are not plain stat diffs: rows [{k:"duoc"|"mat"|"note", label, items:[html]}] — e.g. Được «Hoàng hậu: quý ngươi hơn (thiện cảm +3)», «Điểm tuyển: Khá»;
+   Mất «Khắc −1». Words per VANPHONG (no %, odds/score in words). ok true/false/null → THÀNH / BẠI / KẾT QUẢ. Stays 9 s; tap closes. */
+function kitResultCard(o){o=o||{};let t=document.getElementById("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
+ const SL=typeof kitResultSeal==="function"?kitResultSeal(o.ok==null?null:!!o.ok):{cls:"sure",t:"KẾT QUẢ"};const rows=(o.rows||[]).filter(r=>r&&r.items&&r.items.length);
+ if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
+ const row=r=>`<span class="kr kr-${r.k||"note"}"><span class="krl">${r.label||""}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
+ t.className="rtoast karesult "+SL.cls;t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${o.title||""}</span></span>${o.sen?`<span class="ksen">${o.sen}</span>`:""}<span class="kb">${rows.map(row).join("")}</span></div>`;
+ t.onclick=()=>t.classList.remove("on");void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),o.ms||9000);
+ window.kaLastResult={title:o.title,ok:o.ok,seal:SL.t,sentence:o.sen||"",rows};return t}
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§93.5",title:"kitNameTag · thẻ tên người chỉ biết mặt / chỉ biết nhà",where:"cảnh tuyển tú (sân chờ, hàng tú nữ, lượt 1–2), mọi chỗ cần tên người chưa rõ",html:()=>{const v=(typeof rivals!=="undefined"&&rivals[0])||{name:"Tô Uyển Nhi"};
   return `<div style="display:flex;gap:28px;padding:10px">${[[1,""],[1,"Con gái Đô thống"],[2,""]].map(([s,ph])=>kitNameTagBox(v,{stage:s,ph,title:"Tú nữ"})).join("")}</div>`}});
  KIT_SAMPLES.push({id:"§93.6",title:"kitNewsRankRow · hàng tin sắc phong (mặt + tên + phẩm mới + biết qua đâu)",where:"màn tin sắc phong sau thánh chỉ (SELSCENE), mọi danh sách tin phong phẩm",html:()=>{const L=(typeof rivals!=="undefined"?rivals:[]).slice(0,3);
   return kitNewsRankList(L.map((v,i)=>kitNewsRankRow(v,{rank:Math.max(0,(v.rank||1)),how:i?"quen ở sân chờ":"cùng lượt"})))}});
+KIT_SAMPLES.push({id:"§93.7",title:"kitBareOpt · thẻ lựa chọn trần (chỉ cảnh tuyển tú: không độ chắc, không Được/Mất)",where:"cảnh tuyển tú (SELSCENE) — ngoại lệ duy nhất của §88",html:()=>`<div style="max-width:420px">${kitBareOpts([{n:"Cúi đầu đáp lời, giữ lễ"},{n:"Ngẩng lên thưa rõ ràng"}]).outerHTML}</div>`});
 }}catch(e){}
-try{window.kitScene=kitScene;window.kitDlgBox=kitDlgBox}catch(e){}
+try{window.kitScene=kitScene;window.kitDlgBox=kitDlgBox;window.kitBareOpt=kitBareOpt;window.kitResultCard=kitResultCard}catch(e){}
