@@ -49,3 +49,13 @@ PRIORITY #1 CHECK ('MGBG co7 kind'): KIT-MGBG REVIEW 2 | grep callers: only jpma
 - Looked at LIVE (CDN pictures on) Fold 755x1000 + iPad 1180x820: playArt({art:"co",eng:PM_KY,occ:"pm",...}) (the exact call of pmKyRun) -> .kgbox-bg set, picKind co7, painting visible, 7x7 board readable; Thử tay co7 identical on both; plain playArt({art:"co"}) -> no kgbox-bg, bg none, own picture kept. 0 page errors.
 - NOT done: pmKyRun itself not called (no NPC found by the harness; same playArt call shape used); no stones placed in this run (co7 pieces were already seen readable in REVIEW 1/2, board code untouched).
 - quickcheck PASS: open 1940 ms, old save ok, core gates + time-spill PASS, render 239/219, tab 511/465, buổi 1353/1374, tasks>200ms 24/25 (new/live; 3 runs each, live control in the same run).
+
+## REVIEW 3 (independent small-kit reviewer, 23/11) — **PASS** @9f9d318cc5a9bce3085cac64fb9cb9934c3b7428
+Scope: co7 fix only (playArt frames eng.e==="gomoku" as kind co7). Branch head 9f9d318c; origin/main now 78324353, merged LIVE per MAIN (branch contains the fix on top of 44fb8468).
+- REAL pm Cờ driven through pmRun → pmKyRun itself (x={a:"play",kind:"co"}, a live NPC from rivals): KG82.picKind=co7, `.kgbox.kgbox-bg`, painted backdrop visible; 4 stones placed (black + white replies) and looked at on Fold 755x1000 and iPad 1180x820 — cells/stones fully readable, painting at the sides, no overflow, no cut text, 0 page errors.
+- Thử tay co7 on both devices: identical look to the real duel (consistency OK).
+- Plain co (Ăn quân, playArt art "co" without gomoku eng): picKind=co, `.kgbox` has NO kgbox-bg, unchanged.
+- Earlier REVIEW 2 items stay valid (pips plate, no leak, pet/shelf live).
+- quickcheck PASS: open 1733 ms, old save ok, core gates + time-spill PASS, render 249/270, tab 495/470, tasks>200ms 25/26 (new/live); buổi 1315 new vs 3728 live (live control itself noisy 1.2–5.8 s earlier; branch not slower).
+Note: the pm Cờ duel path with a stake (x.a==="duel") shares pmKyRun/playArt, so it takes the same frame; not driven separately.
+Verdict PASS ce2f2289 → 44fb8468 → 9f9d318c. Shots scratch only.
