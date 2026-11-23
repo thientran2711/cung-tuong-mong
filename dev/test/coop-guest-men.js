@@ -112,7 +112,7 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  {const g=await man(B,'mbd_lie'),h=await man(A,'mbd_lie');ok(g&&h&&g.name===h.name&&g.alive&&h.alive,'1 both: he is still there after the merged week',{g,h});
   ok(g&&g.tinh>=7,'1 guest: her own tie to him (tinh) kept (≥ 7: play may raise it, never back to 0)',g);const a=await asks(B);ok(!a.length,'1 guest: request closed',a)}
  /* 2 her act kills a palace man of the host's set */
- const vid=await B.p.evaluate(()=>{const m=(S.men||[]).find(x=>x&&x.alive!==false&&/^m\d+$/.test(x.id));if(!m)return null;mortKill(m,'thử');return m.id});
+ const vid=await B.p.evaluate(()=>{const m=(S.men||[]).find(x=>x&&x.alive!==false&&/^m\d+$/.test(x.id));if(!m)return null;mortKill(m,'thử');try{render()}catch(e){}return m.id});/* review/coop-driver-fails #2: a real act ends in render(), which starts the rolling save (jcoopworld snapSoon → ser → jcoopask collect) that carries her request; without it the request waited for an unrelated render (LIVE H1 red: ask [] but one ser() built man:m0:alive=false at once) */
  ok(!!vid,'2 guest: her act kills a palace man (mortKill)',vid);
  {const r=await hostHas(A,vid,{alive:false});ok(r,'2 host: he is dead there too (relay)',r?undefined:{G:await RDBG(B),H:await RDBG(A)})}
  await weekAll(A,B,'2');
