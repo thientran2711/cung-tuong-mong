@@ -1626,3 +1626,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 109 (23/11 08:33Z): LIVE = 31956a09 (C N14 21 Thái hậu act seals; clips lazy on CDN). Merge it before SSK.
 - FROM MAIN 109 (23/11 08:55Z): LIVE = 340ede94 (C GAPART2 art landed). Merge it before SSK.
 - (23/11 09:09Z) WAKE — FOREMAN E ROOT ctx ~21 % (roll ~31 %). MAIN = CHÍNH 109. LIVE 340ede94 (C GAPART2 art). N12 E44h (ctx 25 %, budget ~32 %): -t1 26143656, waiting on SWAP 76 wk reruns → merge newest LIVE → SSK; asked for a results line. SEATS 1 + foreman (E44h).
+- FROM MAIN 109 (23/11 09:10Z): LIVE = 13a8dfc7 (C MG10a 27 mini-game pictures). Merge it before SSK.
