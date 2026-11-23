@@ -1,0 +1,10 @@
+# REVIEW-ROOMS2 — PASS 5355780d
+PRIORITY #1 CHECK: OD 23/11 03:15Z/03:25Z + L2387/L2391 (no European window drapes, never turn walls into windows) | origin/main latest | review/rooms2 @5355780d | claims ROOMS2 — all consistent with the worker report.
+Laws touched: art structure check (L30/G78), no code change, no UI/kit change, no player text.
+
+1. Diff vs origin/main: assets.json only, 1 line (`v` 3490848a8b42 -> cbf5f4fec7d3) + exactly 14 file entries (toil-mirror-room, c1..c8, maid1..maid5). Nothing else. PASS. (toil-mirror-room and c5 share hash 1495f0c4 = same picture, as reported.)
+2. Plates compared element by element (worker's OLD|NEW sheet L2391-toil-old-new.jpg, all 13 pairs looked at; OLD plates no longer on CDN since the keys were swapped): only the edge sheer/brocade drapes are gone. Lattice windows appearing where drapes were continue the window already seen through the sheer and mirror the opposite side (which already had lattice) — plausible. Red column / dark wall post / pillar continue where a drape covered them; no wall, column, screen or niche turned into a window; mirrors, tables, stools, lanterns, vases, screens, floor, light unchanged. PASS.
+   Notes (not FAIL): top fabric valances kept (c1-c4, c6-c8, maid3-5); a red/pink drape still shows inside the mirror reflections (reflected room, unchanged, covered by the face at zoom); c4 has a dark wall post at bottom-left where the drape hung.
+3. LIVE https://thientran2711.github.io/cung-tuong-mong/ dev/test/mirror-center.js: 755x1000@2 PASS (plate axis 629.5, dc 2.2/3.6/3.9/0.4/2.1/0.6, mean 2.1, bad 0, errs []); 1180x820@2 PASS (dc 0/2/2.4/1.9/2.2/4.4, mean 2.1, bad 0, errs []). Looked at the reveal/zoom shots (mirror-zoom faces centred in the glass, window panels behind the face, no drapes) and the worker's live-reveal-fold-ipad.jpg (lattice windows both sides, no drapes). PASS.
+
+VERDICT: PASS. Landable sha 5355780d (origin/main + 1 commit, fast-forward). Coordinator: wipe img/_review/rooms2 after landing (cdn_sync.py --wipe-review rooms2).
