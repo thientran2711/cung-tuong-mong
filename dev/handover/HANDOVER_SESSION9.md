@@ -2731,3 +2731,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:38Z) know-notice-r ce2860f0 BIG PASS → LC8 (after offline-all). Archive KNOW-NOTICE JtW95DF2 + rv MzkmnYoW after LANDED.
 - (23:40Z) LANDED N17 coop-famops-t2 → LIVE 37d07967. GAP now 8 (N17 done). LC8 next: offline-all, know-notice, odds-no-thanh.
 - (23:44Z) kit-mgskin-r 1b91ac14 SMALL PASS → LC8 (last in queue); rv LG8CETU5 archived. Nit for THIN P1: first real skinned screen needs full-screen shots both devices.
+- (23:46Z) OWNER toilette room fixes (4 points, OD row 23:50Z) → KK14 session_01Rc5AsLWeZHGsdxAetnF6CY as MOCK-STAGE v3.2 (toilette only); then re-shoot Fold+iPad videos → MAIN LOOKs → link to sếp. A1/A2 event pick still open (do not re-ask).
