@@ -61,3 +61,35 @@ Script: `python3 dev/tools/ky-holder-sites.py [files]` (default jky.js + jlost.j
   All carry «hảo hữu lấy (thất lạc)» / «sang hảo hữu» ledger lines and laydo res traffic = the LIVE F1 res-relay shape (LIVE baseline dup 10000061 above) that review/coop-famops-t2 (N17) fixes (res outbox). No jky / kyngo line on any of them; jky.js is the only game file changed here. Verdict: no new fault from this branch; these are N17 items.
 
 LAND READY? → needs BIG review (item / ledger rules, jky SPEC roads).
+
+## REVIEW (BIG reviewer-lander for MAIN 111, opus, 23/11)
+PRIORITY #1 CHECK ('ky-keeper-f2'): OD F2 rows 23/11 (E/MAIN 110 19:35Z) | main jky.js:196/:251 | review/ky-keeper-f2 7d7a77d7 (this), review/coop-famops-t2-r (watch 2235) | claims MAIN 110/111 ky-keeper-f2.
+
+**Verdict: PASS → LAND READY review/ky-keeper-f2-r 7091cc7f6fa5072b5bd093650147ac75a91b44a5** (descends from origin/main 225c5c08).
+
+Merge: worker head 7d7a77d7 + origin/main 225c5c08 → e05d4771 (only index.html/sw.js conflicted = generated; rebuilt with dev/site/build_site.sh). Reviewer fixes → 7091cc7f.
+
+Root cause judged: correct. LIVE :251 wrapper handed loKeepBy the dialog-time case; the :196 copy was dead behind it. One keep road on the LIVE case is the right fix; wrapper removal is correct (kept comment only). Family table (ky-holder-sites.py, 35 sites) re-read: the sites marked OK do act on live state (lostReturn/loKeepBy check loHolds/loCaseOf on the live case; jlost holder copies go through loEntry(live case); fireNpc has no stale window; PEND.kyngo drops cards after load).
+
+Reviewer fixes on -r (small, jky.js + test only; no BAL, no text, no kit):
+| # | finding on 7d7a77d7 | fix |
+|---|---|---|
+| R1 | kyLive matched id + kind only. Seats number cases on their own (S.loSeq), so a same-id same-kind case of ANOTHER owner was taken: test K on 7d7a77d7 → that other case kept by the finder | kyLive also needs the same owner and the same piece id (c.e.iu) |
+| R2 | her own card («Xin chuộc» di vật / món quý): the price is charged through the option fx (j3 apply(c.fx) before go) BEFORE SPEC runs; the new «gone → return ""» left her paying for nothing (law 3); report's «nothing paid» held only for NPC payers. Test L: 10000 → 9940 | kyBack: a card that moves nothing gives her buyPr back (not for «Dâng» of a box piece, which has no price) |
+| R3 | after a rebuilt world (co-op snapshot) the dialog-time box entry / S.adRare are twins: box.includes(x) → card dead even though the piece is still there (M); a stale rare twin with sold=0 while live S.adRare is sold made a piece from nothing (N, law 6c dup) | kyBox (live entry by piece id) / kyRr (live S.adRare of the same week + kind) |
+| R4 | SPEC.ev wrote its clue (cev) on the stale case object | clue goes to the live case |
+ky-keeper-f2.js grows to 14 checks (K/L/M/N added): **LIVE 225c5c08 FAIL 8 (E F I J K L M N) · worker 7d7a77d7 FAIL 4 (K L M N) · -r PASS 14/14.**
+
+Gates on 7091cc7f (merged tree):
+| gate | result |
+|---|---|
+| ky-keeper-f2.js | PASS 14/14 |
+| save → reload → «Giữ lại» (reviewer scratch: ser/deser round-trip, pre-save card, then 2nd keep, 2nd reload, stale «Mang trả») | 5/5 ok: one piece, live case held, 2nd keep / stale return move nothing |
+| quickcheck.sh (incl. old save from LIVE, core gates, perf) | PASS (render 245/185, tab 470/383, buổi 1248/873 ms new/live — within the gate; jky change is not on those paths) |
+| coop-e2e (Fold host / iPad guest) | 141/141 |
+| kyngo-unit | PASS · kyngo-eq PASS (eqTol 1.25) |
+| lost-one-home-scan 108 tuần seeds 20261121 / 9001 / 4242 | 0 dup · 0 vanish · 0 net each; only «every road exercised» FAILs = same on LIVE (re-run LIVE seed 9001: same FAIL) |
+| coop-lost-scan 76 wk (both seats), -r vs LIVE side by side | -r: 0 dup / 0 vanish (kyA 11) · LIVE: 0 dup / 0 vanish. Both have only «#next enabled» / «week advanced» UI-timing FAILs (-r 5, LIVE 4) = pre-existing flake class, not item rows |
+Dup/vanish hunt (task 4): keep after save round-trip, keep twice, keep on a closed/held/other-owner case, box/rare twins, co-op both seats → no dup, no vanish found. 2235 stays a WATCH item on N17 (-t2) scans, as the worker says.
+Laws touched: 6c (one piece, live case) ✔ · 3 (no cost for nothing: R2) ✔ · 4 (price = buyPr from BAL KB) ✔ · 11 (family scan + K–N) ✔ · 7/9 (no text / UI change) n/a.
+Shots: none (no UI change). Scratch worktrees removed after the verdict.
