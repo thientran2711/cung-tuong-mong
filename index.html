@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)","b":"875db02b0ba1","h":[{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"},{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"},{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"}]};
+window.CTM_BI={"s":"52ad65b3+","t":"2026-11-23T04:49Z","c":"Merge LIVE 81d76c8b into review/coop-real-port-rv","b":"f4a0a9135603","h":[{"s":"57c7d34c","t":"2026-11-23T03:39Z","c":"coop-famops-pv-r: site build (build line e93dfc5c)"},{"s":"d2cc5679+","t":"2026-11-23T02:01Z","c":"SELF-MERGE LAND body-fit-data-r2: merge LIVE b4a5879d (index.html/sw.js rebuilt)"},{"s":"bb1fa5b8","t":"2026-11-23T02:01Z","c":"Dữ liệu khớp dáng người cho khung hình."},{"s":"175687f2","t":"2026-11-23T01:47Z","c":"Công cụ kiểm tra nhanh bỏ chờ thừa, không đổi game."},{"s":"030799c9+","t":"2026-11-22T22:28Z","c":"night-ledger-coop r4: build (j68 EVHOLD remake)"},{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"},{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -84830,7 +84830,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.
  try{if(subj&&typeof kitFace==="function"){const fc=kitFace(subj);if(fc)sp.subject=fc}}catch(e){}return sp}
 let ptIconSet=false;
 function ptIconReg(){if(ptIconSet||ptErrOwn()||typeof kitStatusIcon==="undefined")return;ptIconSet=true;
- kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
   show:()=>!!(S&&!S.dead&&(ptMine().length||ptNews().length||ptOrdN())),busy:()=>!!(S&&ptMine().length&&!ptNews().length&&!ptOrdN()),badge:()=>!!(S&&(ptNews().length||ptOrdN())),panel:ptPanel})}
 /* after a state change: MAIN's icon refreshes itself (errIcon), else the fallback one; no re-registration */
 function ptIcon(){try{if(ptErrOwn()){if(typeof errIcon==="function")errIcon();else if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh();return}ptIconReg();if(typeof kitStatusIcon!=="undefined")kitStatusIcon.refresh()}catch(e){ptErr("icon",e)}}
@@ -90580,7 +90580,7 @@ function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],
  const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));
  try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
-function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-tin.webp",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 /* ONE call for the notice of an errand = the game's ONE notice entry point (stage-here r4, dev/build/jnotice.js): kitNotice({id,line,text,pic,go,goLabel}) lights the top-bar «!» box + one short top chip,
    tap → small kit panel «Tin báo». No toast / chip / bar of my own (jnotice.js is in the build before this module). Call sites: errAdd (sent), errTick (back); jptime lands call errNotify too. */
@@ -94715,7 +94715,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="875db02b0ba1";window.CTM_BUILD=BUILD;
+const BUILD="f4a0a9135603";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

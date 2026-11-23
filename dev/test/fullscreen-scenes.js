@@ -44,6 +44,8 @@ const NEWDAY=[
   const noOverflow=()=>p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1);
   const inScreen=(r)=>r&&r.x>=-1&&r.y>=-1&&r.x+r.w<=z.w+1&&r.y+r.h<=z.h+1&&r.w>0&&r.h>0;
   for(const C of LEARN){const N=`${tag} ${C.k}`;
+   /* real art is live now (GAPART2 23/11): the fallback cases start from an INFO list without any learn-* painting */
+   await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^learn-/.test(k))});
    await p.evaluate(C.go);await p.waitForSelector('#klearnov',{timeout:8000}).catch(()=>{});await p.waitForTimeout(4200);
    const m=await p.evaluate(()=>{const o=document.getElementById('klearnov');if(!o)return null;const r=s=>{const e=o.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height}};
     const im=o.querySelector('.kfull-img');return {full:o.classList.contains('km-full'),fig:r('.kfull.klearn-fig'),h:r('.klearn-h'),card:r('.klearn-card'),btn:r('.klearn-card .kmtake'),word:(o.querySelector('.klearn-h small')||{}).textContent||'',
@@ -65,6 +67,7 @@ const NEWDAY=[
    chk(`${N} seal back after`,await kemoVis()==='visible');
    await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^learn-/.test(k))});}
   for(const C of NEWDAY){const N=`${tag} ${C.k}`;
+   await p.evaluate(()=>{KIT_INFOM.have=KIT_INFOM.have.filter(k=>!/^kit\/ne-/.test(k))});
    await p.evaluate(C=>{if(C.have)KIT_INFOM.have=KIT_INFOM.have.concat(C.have);let w=document.getElementById('dawn');if(!w){w=document.createElement('div');w.id='dawn';w.className='dawn';document.body.appendChild(w)}
     window.__ndDone=0;kitNewDay(Object.assign({host:w,wx:null,then:()=>{w.classList.remove('on');window.__ndDone=1}},C.o))},C);
    await p.waitForTimeout(1600);
