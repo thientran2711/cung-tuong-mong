@@ -56,6 +56,8 @@ Script: `python3 dev/tools/ky-holder-sites.py [files]` (default jky.js + jlost.j
 
 ## 6. Co-op on the fix
 - coop-e2e Fold host / iPad guest on the fix: 141/141.
-- co-op traced scan SWAP 9001 (76 wk) on the fix: running at report time; result appended here by W1 when it ends (non-blocking: LIVE baseline above).
+- co-op traced scan SWAP 9001 (76 wk) on the fix (review/coop-famops-t2's coop-lost-scan-traced.js, ended 23/11 ~22:15Z): 80/110; 69/76 weeks merged (T7 stall rows); **1 dup, 2 vanish, all in the friend-act family, none on a Kỳ ngộ road**:
+  · van 550 y_phuongbao (w26): host «Lấy đồ» rm by the guest (laydo res) → her case 15 «nop» → gone; · dup 10000069 kimngu (w26): A:me:lo40 + B:me after laydo res; · van 10000434 hd_maudon (w66): laydo × 2 → host cases 112/114 «nop»/«nha» → gone.
+  All carry «hảo hữu lấy (thất lạc)» / «sang hảo hữu» ledger lines and laydo res traffic = the LIVE F1 res-relay shape (LIVE baseline dup 10000061 above) that review/coop-famops-t2 (N17) fixes (res outbox). No jky / kyngo line on any of them; jky.js is the only game file changed here. Verdict: no new fault from this branch; these are N17 items.
 
 LAND READY? → needs BIG review (item / ledger rules, jky SPEC roads).
