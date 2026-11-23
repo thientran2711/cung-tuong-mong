@@ -1,141 +1,59 @@
-ok   01-title ipad: no horizontal overflow
+ok   01-title fold: no horizontal overflow
 ok   A taps Chơi cùng bạn
-ok   02-coop-menu ipad: no horizontal overflow
+ok   02-coop-menu fold: no horizontal overflow
 ok   A taps Mời bạn
 ok   A has a room code, seat a
-ok   03-invite-waiting ipad: no horizontal overflow
+ok   03-invite-waiting fold: no horizontal overflow
 ok   A waits for the friend (frozen before join)
-ok   04-join fold: no horizontal overflow
+ok   04-join ipad: no horizontal overflow
 ok   B joined seat b, both online
 ok   A unfrozen when B is in
 ok   both players are in the shared world
-ok   ipad: the 8 bottom tabs, her own road in them (phi tần)
-ok   fold: the 8 bottom tabs, her own road in them (phi tần)
 ok   start: same Emperor and same consorts
 ok   start: same date
-ok   start: both seats show the same Thái hậu picture (a pool face)
-ok   start: both seats read the same month art (host-computed)
-ok   start ipad: mask never prints another record's title over a shared person (K61MAP)
-ok   start ipad: one j61 key = one person
-ok   start ipad: friend's name after the mask
-ok   start fold: mask never prints another record's title over a shared person (K61MAP)
-ok   start fold: one j61 key = one person
-ok   start fold: friend's name after the mask
 ok   start: each sees the other as a person
-ok   ipad: friend starts as Người lạ (unknown, like any NPC)
 ok   fold: friend starts as Người lạ (unknown, like any NPC)
-ok   05-world ipad: no horizontal overflow
+ok   ipad: friend starts as Người lạ (unknown, like any NPC)
 ok   05-world fold: no horizontal overflow
-ok   06-waiting-friend ipad: no horizontal overflow
-ok   week 1: ipad advanced
+ok   05-world ipad: no horizontal overflow
+ok   06-waiting-friend fold: no horizontal overflow
 ok   week 1: fold advanced
+ok   week 1: ipad advanced
 ok   after week 1: same Emperor and same consorts
 ok   after week 1: same date
-ok   after week 1: same names of the world people (consorts, their staff and kids, court) on both seats
-ok   after week 1 ipad: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 1 ipad: no world person shares a player's full name (names-unique lane)
-ok   after week 1 fold: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 1 fold: no world person shares a player's full name (names-unique lane)
-ok   after week 1: one name list over both seats (world + host's people + guest's people), no full name held twice
-ok   after week 1: every person a world record points to (house head, spy master) exists
-ok   after week 1: the same world on both seats (canonical W; coop-host-lag family)
-ok   after week 1: both seats show the same Thái hậu picture (a pool face)
-ok   after week 1: the Thái hậu keeps the face she had at the start
-ok   after week 1: both seats read the same month art (host-computed)
-ok   after week 1 ipad: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 1 ipad: one j61 key = one person
-ok   after week 1 ipad: friend's name after the mask
-ok   after week 1 fold: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 1 fold: one j61 key = one person
-ok   after week 1 fold: friend's name after the mask
 ok   after week 1: each sees the other as a person
-ok   week 2: ipad advanced
 ok   week 2: fold advanced
+ok   week 2: ipad advanced
 ok   after week 2: same Emperor and same consorts
 ok   after week 2: same date
-ok   after week 2: same names of the world people (consorts, their staff and kids, court) on both seats
-ok   after week 2 ipad: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 2 ipad: no world person shares a player's full name (names-unique lane)
-ok   after week 2 fold: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 2 fold: no world person shares a player's full name (names-unique lane)
-ok   after week 2: one name list over both seats (world + host's people + guest's people), no full name held twice
-ok   after week 2: every person a world record points to (house head, spy master) exists
-ok   after week 2: the same world on both seats (canonical W; coop-host-lag family)
-ok   after week 2: both seats show the same Thái hậu picture (a pool face)
-ok   after week 2: the Thái hậu keeps the face she had at the start
-ok   after week 2: both seats read the same month art (host-computed)
-ok   after week 2 ipad: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 2 ipad: one j61 key = one person
-ok   after week 2 ipad: friend's name after the mask
-ok   after week 2 fold: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 2 fold: one j61 key = one person
-ok   after week 2 fold: friend's name after the mask
 ok   after week 2: each sees the other as a person
-ok   week 3: ipad advanced
 ok   week 3: fold advanced
+ok   week 3: ipad advanced
 ok   after week 3: same Emperor and same consorts
 ok   after week 3: same date
-ok   after week 3: same names of the world people (consorts, their staff and kids, court) on both seats
-ok   after week 3 ipad: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 3 ipad: no world person shares a player's full name (names-unique lane)
-ok   after week 3 fold: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after week 3 fold: no world person shares a player's full name (names-unique lane)
-ok   after week 3: one name list over both seats (world + host's people + guest's people), no full name held twice
-ok   after week 3: every person a world record points to (house head, spy master) exists
-ok   after week 3: the same world on both seats (canonical W; coop-host-lag family)
-ok   after week 3: both seats show the same Thái hậu picture (a pool face)
-ok   after week 3: the Thái hậu keeps the face she had at the start
-ok   after week 3: both seats read the same month art (host-computed)
-ok   after week 3 ipad: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 3 ipad: one j61 key = one person
-ok   after week 3 ipad: friend's name after the mask
-ok   after week 3 fold: mask never prints another record's title over a shared person (K61MAP)
-ok   after week 3 fold: one j61 key = one person
-ok   after week 3 fold: friend's name after the mask
 ok   after week 3: each sees the other as a person
-ok   agent loop: the host ticks
-ok   agent loop: the guest never runs agTick
-ok   07-after3 ipad: no horizontal overflow
 ok   07-after3 fold: no horizontal overflow
+ok   07-after3 ipad: no horizontal overflow
 ok   A frozen when B left
-ok   08-frozen ipad: no horizontal overflow
+ok   08-frozen fold: no horizontal overflow
 ok   A cannot advance while frozen
 ok   B back in same seat and week
 ok   A resumes
 ok   after rejoin: same Emperor and same consorts
 ok   after rejoin: same date
-ok   after rejoin: same names of the world people (consorts, their staff and kids, court) on both seats
-ok   after rejoin ipad: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after rejoin ipad: no world person shares a player's full name (names-unique lane)
-ok   after rejoin fold: each player sits in exactly one place (one coop entry = the friend, none for herself)
-ok   after rejoin fold: no world person shares a player's full name (names-unique lane)
-ok   after rejoin: one name list over both seats (world + host's people + guest's people), no full name held twice
-ok   after rejoin: every person a world record points to (house head, spy master) exists
-ok   after rejoin: the same world on both seats (canonical W; coop-host-lag family)
-ok   after rejoin: both seats show the same Thái hậu picture (a pool face)
-ok   after rejoin: the Thái hậu keeps the face she had at the start
-ok   after rejoin: both seats read the same month art (host-computed)
-ok   after rejoin ipad: mask never prints another record's title over a shared person (K61MAP)
-ok   after rejoin ipad: one j61 key = one person
-ok   after rejoin ipad: friend's name after the mask
-ok   after rejoin fold: mask never prints another record's title over a shared person (K61MAP)
-ok   after rejoin fold: one j61 key = one person
-ok   after rejoin fold: friend's name after the mask
 ok   after rejoin: each sees the other as a person
-ok   NPC Sức khỏe / Sức tối đa: guest = host
-ok   09-rejoined fold: no horizontal overflow
-ok   10-death fold: no horizontal overflow
-ok   reborn guest: same consorts as the room world, no ghost (temp-id) consorts, no requests, a real mistress
+ok   09-rejoined ipad: no horizontal overflow
+ok   10-death ipad: no horizontal overflow
 ok   B reborn as a new person in the same world
 ok   A sees the reborn friend by her new name
 ok   reborn friend is a stranger again (Người lạ)
-ok   12-reborn-seen ipad: no horizontal overflow
-ok   12-reborn fold: no horizontal overflow
+ok   12-reborn-seen fold: no horizontal overflow
+ok   12-reborn ipad: no horizontal overflow
 ok   week after rebirth advances
 ok   13-title-solo solo: no horizontal overflow
 ok   solo: Chơi một mình
 ok   solo: old save loads, no co-op
 ok   14-solo-game solo: no horizontal overflow
-ok   ipad: no page errors
 ok   fold: no page errors
+ok   ipad: no page errors
 ok   solo: no page errors
