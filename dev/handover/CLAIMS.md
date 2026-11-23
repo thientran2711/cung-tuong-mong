@@ -1138,3 +1138,5 @@ coop-driver-fails (opus; 9 pre-existing LIVE co-op driver fails + coop-flakes rv
 REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.md) of b4c12bb6 | review/coop-real-port-rv | session_01964izFABV2SDfvRFT8qxb2 | RUNNING | 23/11 03:24Z (Foreman D #20)
 REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.md) of b4c12bb6 | review/coop-real-port-rv | session_01964izFABV2SDfvRFT8qxb2 | LAND READY 52ad65b3 | 23/11 03:24Z (Foreman D #20)
 | E44h coop-famops-t1 finisher (N12; opus BIG co-op; successor of E44g at budget; gates + traced 76 wk → SSK; briefs/E44h-coop-famops-t1.md) | review/coop-famops-t1; reports/coop-famops.md | FOREMAN E ROOT | session_01DgYSWmLLqhxSYANRY7v8g6 | RUNNING dfda0723 | 23/11 03:45Z |
+| N13 room-picture swap (PLACES4/5 finished places; Khôn Ninh old) | review/places-swap-n13; reports/PLACES5.md | FOREMAN C ROOT-C6 | session_01D3E3NX3WxvWG9ceZsmjPVe (PLACES5) | RUNNING | 23/11 05:40Z |
+| N14 ACTWIRE wire 21 Thái hậu act seals (THACT5 @95994a39b) | review/act-seals-n14; reports/ACTWIRE.md | FOREMAN C ROOT-C6 | session_01D3E3NWuoMku5UQb8BmDxgU | RUNNING | 23/11 05:40Z |
