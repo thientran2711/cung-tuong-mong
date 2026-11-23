@@ -72,7 +72,9 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;
  words(txt,"option «"+strip(m.t||m.title||"").slice(0,60)+"»");
  /* segments: "thành:" numbers belong to the win block, "hỏng:" to the loss block, the rest to the sure effect / cost */
  const obj=x=>x&&typeof x==="object"?x:null;const PW=[o.w,o.win].map(obj).filter(Boolean),PL=[o.l,o.lose].map(obj).filter(Boolean),PF=[o.fx,o.c,o.cost].map(obj).filter(Boolean);
- txt.split(/(?=thành:|hỏng:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{const pools=/^thành:/i.test(seg)?PW:/^hỏng:/i.test(seg)?PL:PF;if(!pools.length)return;
+ /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
+    sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
+ txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
  seg.replace(RX,(a,lab,sg,n)=>{const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
