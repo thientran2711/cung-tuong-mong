@@ -2496,3 +2496,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 108 hourly wake trig_01YWv7JaTkWDf6sV7wxESQx5 (min 32, fires into 108). 109 FIRST creates its own (min 32), THEN disables trig_01YWv7JaTkWDf6sV7wxESQx5. 107 wake trig_01CSSZ2MWEyuaVZNBKNeY1xw already disabled. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj stays.
 - Push tool: copy dev/tools/main-hpush.sh with own session id (108 used /home/user/wt/hpush108.sh, worktree /home/user/wt/ho108).
 - (23/11 03:33Z) 108 opened MAIN CHÍNH 109 = session_01Rc5AsMAkWe3fwq2w85eAKc (child, depth 2). 108 now relay-only: forwards late messages to 109 until 109 disables trig_01YWv7JaTkWDf6sV7wxESQx5.
+- 23/11 03:34Z LC5 ROLLED (ctx ~29 %): 14 lands, LIVE=bda5b75b, queue empty; handover dev/handover/reports/land-chain-5.md; MAIN 108 opens LC6.
