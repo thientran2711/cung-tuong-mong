@@ -1150,3 +1150,4 @@ REVIEW coop-real-port (sonnet SMALL test-only; briefs/D20-coop-real-port-review.
 | REVIEW coop-thin-g WHOLE (opus BIG co-op reviewer-lander) of review/coop-thin-g-f1 dea00576 | reports/coop-thin-g.md «## REVIEW» | B | session_01N1tNP5MAkuoXRAJ7HMLDnA | RUNNING | 23/11 08:32Z |
 | REVIEW outing-art (sonnet SMALL) of review/outing-art 4627c50b | reports/outing-art.md «## REVIEW r1» | B | session_01N1tNP2ksTW8GR3PpKSJH3d | PASS with fix (always -land) review/outing-art-r1 $(git -C /home/user/cung-tuong-mong rev-parse --short HEAD) | 23/11 |
 coop-driver-fails worker #2 (opus; successor of FSjtour8 at 36 %; @82c21e84 test-only) | review/coop-driver-fails | session_01964izEZxwCL3dekrzAxh79 | RUNNING | 23/11 09:01Z (Foreman D ROOT)
+| REVIEW E52r coop-famops-t1 BIG co-op (N12; opus; briefs/E52r-review-coop-famops-t1.md) of b4050ca3 | review/coop-famops-t1-r; reports/coop-famops-t1-review.md | FOREMAN E ROOT | (opening) | RUNNING | 23/11 09:33Z |
