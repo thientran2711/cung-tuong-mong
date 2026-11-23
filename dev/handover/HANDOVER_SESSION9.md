@@ -2648,3 +2648,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21:55Z) SELSCENE opus builder session_01Rc5AsNEeT7jkjyL8gLh5fw opened (briefs/M112-selection-scene.md; mock video first). Art order (selection hall + Nội vụ phủ court) → Foreman C STATUS.
 - (22:00Z) HIST-TUYENTU DONE 79ea29f4, archived. MAIN pick: HT→dan, TH→theu, HH→huong, NVP/ma ma→kim+theu; BAL.entry.word exclusions untouched; combined raw → entScore. Sent to SELSCENE.
 - (22:07Z) LANDED odds-ladder-words → LIVE 72521d62 (LC7). LC7 queue empty.
+- (22:10Z) LC7 rolled (14 landed today) → archived. LC8 = session_01Rc5AsNA3dV1edK14m3nUnE (sonnet; setup from land-chain-7.md ROLL block; log land-chain-8.md). On LAND READY relay to LC8.
