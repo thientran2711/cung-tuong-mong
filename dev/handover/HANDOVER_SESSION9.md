@@ -2688,3 +2688,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - WAKE 22:33Z (113): ctx 20.5 % (205k/1M; roll ~34 %). LOAD: main running 9 (W1+rv, W2+rv, W4+rv, KK13, SELSCENE, KNOW-NOTICE+rv) | B free (EVCAT DONE cc22fc10; r3 coop-thin-g rv running; co-op runners wait ROBOT-10) | C ? (SELART orders open, no new line) | D grandchild D1aWCsuZ (depth 2) took over; robot10 part 2 running | moved: none. LIVE 72521d62, no LAND READY. SELW-TESTS2 DONE f5083f04 (schema 2, values[]), archived. EVCAT summary → sếp; P1–P8 content proposal WAIT OWNER (law 18).
 - (22:36Z) Owner: build EVCAT thin parts NOW → OD row + ORDER THIN to Foreman B (P0 memory, P1+P2 parallel, then P3–P8). Titles Q answered (Lượt 11), waiting her pick.
 - (22:37Z) Owner: build titles NOW → OD row + ORDER TITLES2 to Foreman E (expert first, then jdh build).
+- (22:38Z) Owner Q lag → OD row + D ORDER #7 (LAG metrics solo + co-op) + B note for co-op runners.
