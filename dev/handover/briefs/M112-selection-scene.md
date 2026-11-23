@@ -31,3 +31,9 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 - Selection outcome is now origin rank −1 / same / +1 (OVERWRITES ceiling/−1/−2 of OD:L1250; canon already overwritten in dev/rules/topic/story-roads.md:31).
 - Apply in the ONE place: jentry entTier + kc2SelDo (direct road), jkc tiểu thư Điện tuyển road (kcDien → kcEnter), cung nữ placement analogous (one step lower/same/higher in the maid ladder). Steps from a BAL key (e.g. BAL.entry.step = [-1,0,1]); every text prints the BAL value. Clamp at ladder ends.
 - BIG review (rank/progression). NEW lives only; old saves untouched. Update the mock video's result frame.
+
+## ADDENDUM 4 (MAIN 112, 22:12Z) — WAITING-YARD DRAMA, one per life (owner OD 23/11 ~22:20Z, read verbatim)
+- Each new life plays ONE yard drama before she is summoned; generated so no two lives match: drama SEED pool (HIST-TUYENTU adds real/drama seeds to its report as §7) × ACTORS chosen from the real tú nữ of this life by nết (BAL.net / jnet.js; traits j1.js:45) + their relations: a bully, a victim, bystanders who each act by nết + thiện cảm (defend / join / stay silent / fetch the ma ma).
+- She can act too: defend / join / mediate / stay out — EQUAL value (law 2), each with gain AND loss (law 3), two-way (law 1). All numbers in BAL (law 4).
+- Outcomes carry into the game: known (j61 npcKnows), thiện cảm changes, grudge / friend marks on those NPCs (real people, law 6b). Seeded per life (deterministic from the life seed; co-op: each player's own life).
+- Show one drama in the mock video.
