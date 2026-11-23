@@ -2613,3 +2613,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:39Z 23/11) OWNER refined the layout law (break at the right place: short pairs never split + text breaks per idea, no wall of text) → OD row edited in place; W2 + MAIN 111 told.
 - (20:39Z) MAIN 110 stopped. Owner refined OD 20:30Z row (2) = LINE BREAKS AT THE RIGHT PLACE (short pairs never split; text breaks per idea, no wall of text) — 1c6831ff. W2 writes KIT.md + run-on-text scan; when W2 reports the scan, MAIN orders the text fix as a whole group.
 - (20:40Z 23/11) OWNER LIMIT: layout approved; W2 only odds meter + law text, nothing else (OD row). W2 + MAIN 111 told.
+- (20:40Z) OWNER LIMIT (f6165b37): only odds meter one-row + KIT.md law for future work; NO whole-game text reflow; W2 scan is report-only. Supersedes my previous line about ordering a whole-group text fix. Mockup v3 continues.
