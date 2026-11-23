@@ -75,3 +75,23 @@ Probe (kframe-heir.js, new case): Danh pet at Danh 100 → 100, off → 100 (bef
 act-missing-scan 0 fail · scan-stat-clamp 0 · kframe-heir.js PROBE PASS (now incl. Danh cap) · j51-heir-danh.js PASS · scan-heir-family 30/0 · one-core-guard / text / text-rule PASS · quickcheck PASS (old save ok, open 1643 ms, perf new/live render 180/240, tab 377/416, buổi 1122/1031 ms, core gates PASS incl. G4) · **coop-e2e 141/141 PASS** (both seats; her Danh via toCanon road unchanged) · pets-fix.js 755x1000: fails at line 88 «getBoundingClientRect of null» on LIVE 225c5c08 too (pre-existing stale UI test, not this branch).
 
 SẴN SÀNG KIỂM review/fix-kframe-heir 2c241f860a1d7b998e74c6ccd196663279492872
+
+## REVIEW (reviewer for Foreman D, brief briefs/D-kframe-heir-review.md, 23/11)
+PRIORITY #1 CHECK ('kframe|deposeHeir|phế Thái tử|actNone|statSet'): OD 0 | ledger 0 | main: no deposeHeir / actNone / statSet before this branch | review/*: review/fix-kframe-heir (target), review/j51-heir-danh-rv 1a9d2bd0 (base, NOT landed yet: carried) | claims: worker F3TRAfuF only.
+Target 2c241f86 merged onto LIVE 948c80a5, then LIVE 72521d62 (odds-ladder-words) → review/fix-kframe-heir-rv fcdf5b19 (2 merges, index.html/sw.js rebuilt each time; no conflict outside the built files). Carries j51-heir-danh-rv 1a9d2bd0.
+
+Laws touched: 1 two-way PASS (deposeHeir wrap hits her and an NPC mother, same BAL number; she can depose an NPC's heir, NPC can depose hers; co-op both seats) · 3 gain-and-loss PASS (an act with no target takes no cost: ksab/kpoison/pond/kframe Đức, thaopet bạc moved after the pet check; takeaway had no cost) · 4 one core PASS (heirDanh from BAL.kid.heirDanh, j79 age → BAL.eff.j8.kframeAge; statSet bounds = the SAME 0..100 / ±100 scale literals apply + ap already use — the stat scale, no BAL key exists for it, not a new number; one-core-guard 3559 ≤ 3592) · 6b real people/objects PASS (takeaway no longer splices her last child / pushes undefined) · 7 wording PASS (actNone line cổ trang, no %, signs via balSg) · 11 whole group PASS (scan-heir-family 30/0, act-missing-scan 55 acts 0 fail, scan-stat-clamp 0) · no UI change (kit / devices n/a).
+
+| check | result |
+|---|---|
+| 1 heir: j1 deposeHeir one road; S.heir only when that son; kidDie same; j8/j79/j17 texts | PASS — read code; kframe-heir.js PROBE PASS (heirDanh 10 and 7) |
+| 2 «reading 'heir'» family; no cost / no child lost | PASS — act-missing-scan 0 fail; read every guard: actNone returns before ap / schemes / caught |
+| 3 statSet clamp; petBonus real delta; remove after clamped add | PASS — same list as ap; petBn==null→1 keeps oldest saves right, petBn 0 at cap takes 0 off |
+| 4a co-op | coop-e2e 141/141 PASS; own driver (scratch, from coop-b1 set-up, LIVE worker): host kframe on the guest's Thái tử → host text «Danh <her> −10», her entry 33→13, guest own S 33→13 (= kframeDanh −10 + heirDanh −10, rides the stat delta, no double from the heir0 op), guest son deposed + S.heir null, 0 page errors — RV COOP KFRAME PASS |
+| 4b old saves | quickcheck old save ok; own probe: save with Danh 101 + petB danh petBn 1 (LIVE state) round-tripped through ser/deser → pet off 100, re-follow at cap +0, off 100; NPC with petB and NO petBn → −1 / +1 — RV OLDSAVE PET PASS |
+| 5 gates on fcdf5b19 | kframe-heir.js PASS · j51-heir-danh.js PASS · act-missing-scan 0 · scan-heir-family 30/0 · scan-stat-clamp 0 · one-core-guard / text / text-rule PASS · quickcheck PASS on the 948c80a5 merge (old save ok, render 209/244, tab 442/410, buổi 1163/1047 ms, core gates PASS); on the 72521d62 merge quickcheck PASS except one G3 kit-conform MIXED (T1 #mb kpscroll, one dialog of 108) — re-run kit-conform alone: branch 2× clean (111/110 CONFORMS, 0 MIXED), LIVE 72521d62 same → flaky dialog roll, no UI in this branch |
+| pets-fix.js 755x1000 | line 88 «getBoundingClientRect of null» on LIVE 72521d62 AND on the branch — pre-existing, confirmed |
+
+Notes (not blocking): an old save that already holds Danh 101 keeps 101 until the next apply / pet change (deser does not clamp) — it self-heals on the first stat change. The kframe win text prints the deposition Danh only (kframeDanh is in the card / preview, unchanged).
+
+REVIEW PASS — LAND READY review/fix-kframe-heir-rv fcdf5b1972655d48db0b13e7acaa5d02ae47c03e
