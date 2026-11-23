@@ -17,4 +17,10 @@ const DBGF=()=>{try{const T=COOPW.thin||{};const me=x=>x?{o:x.origin&&x.origin.k
   const cr=rivals.filter(v=>v.coop).map(v=>({id:v.id,rank:v.rank,out:!!v.out,alive:v.alive}));const cs=[];for(const v of rivals)for(const x of v.staff||[])if(x&&x.coop)cs.push({in:v.id,role:x.role});
   let bp=null;try{const P=COOPW.base&&COOPW.base.P;bp=P?Object.fromEntries(Object.entries(P).map(([k,v])=>[k,v&&v.S?me(v.S):null])):null}catch(e){}
   return{seat:COOPW.seat,me:me(S),friend:!!COOPW.friend(),coopRivals:cr,coopStaff:cs,baseP:bp,hostCopyB:hb,inLife:!!COOPW.inLife}}catch(e){return'dbg err '+e.message}};
-module.exports={origin,REAL,DBGF,DEF};
+/* review/coop-flakes (D20): aim at what the friend REALLY has (law 6). Her entry on the other seat follows her own screen by the live pos, a
+   moment later; a target read from it right after she changed (a pet lost to a harm, a new one bought) can be one she no longer has
+   (coop-pets pb-4: B lost the crane to thaopet, A's entry still showed it, tg2 = crane, the steal took the cat). Wait until X's entry of
+   the friend shows exactly Y's own list (key = a page function (who) => string, who = 'own' | 'fr') before reading the target. */
+const PETK=who=>{const L=who==='own'?S.pets:(COOPW.friend()||{}).pets;return L?JSON.stringify(L.map(P=>[P.t,P.at||0]).sort()):'none'};
+async function syncFr(X,Y,key=PETK,ms=15000){const t0=Date.now();let a,b;while(Date.now()-t0<ms){b=await Y.p.evaluate(key,'own').catch(()=>null);a=await X.p.evaluate(key,'fr').catch(()=>null);if(a!=null&&a===b)return true;await new Promise(r=>setTimeout(r,300))}return{fr:a,own:b}}
+module.exports={origin,REAL,DBGF,DEF,syncFr,PETK};

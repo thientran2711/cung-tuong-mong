@@ -93,10 +93,12 @@ function collect(d){const B=CW.base&&CW.base.W&&CW.base.W.R||[];const bm=new Map
 (function(){const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(guest()&&live()&&d&&d.S&&d.R)collect(d)}catch(e){console.error("ask collect",e)}return d}})();
 
 /* ---------- guest: settle requests on every rebuild (before the engine resolves {$r:id} refs) ---------- */
-function remapS(o,t,r){if(!o||typeof o!=="object")return o;if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=remapS(o[i],t,r);return o}
+/* review/coop-flakes (D20): a key t moves to r through CW.keyMove (jcoopworld): the same person's two numbers ADD (her stand-in link + the
+   week's link to her world id), never «keep r, drop t» (her thiện cảm 25 → −3). pk = the map's own key (rl / ro clamp, BAL.linkRange). */
+function remapS(o,t,r,pk){if(!o||typeof o!=="object")return o;if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=remapS(o[i],t,r);return o}
  if(o.$r===t&&Object.keys(o).length===1){o.$r=r;return o}
- for(const k of Object.keys(o)){const v=o[k];if(k===String(t)||k==="r"+t){const nk=k===String(t)?String(r):"r"+r;if(r!=null&&!(nk in o))o[nk]=v;delete o[k];continue}
-  if(k==="pal"&&v===t){o[k]=r;continue}o[k]=remapS(v,t,r)}return o}
+ for(const k of Object.keys(o)){const v=o[k];if(k===String(t)||k==="r"+t){CW.keyMove(o,k,r==null?null:(k===String(t)?String(r):"r"+r),pk);continue}
+  if(k==="pal"&&v===t){o[k]=r;continue}o[k]=remapS(v,t,r,k)}return o}
 function settle(d){const L=d.S.coopAsk;if(!Array.isArray(L)||!L.length)return;const hP=CW.base&&CW.base.P&&CW.base.P.a;
  const done=(hP&&hP.S&&hP.S.askDone)||{};const keep=[],lines=[];
  for(const a of L){if(!a||!a.id)continue;const res=done[a.id];

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"002a0814+","t":"2026-11-22T21:19Z","c":"coop-thin-g-f1 #8: site rebuilt (build_site.sh; quickcheck NOT BUILT gate)","b":"0513d3323144","h":[{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"},{"s":"40cc8f44+","t":"2026-11-22T05:35Z","c":"Mạng yếu không còn làm mất hình nhân vật: game tự tải lại một lần"}]};
+window.CTM_BI={"s":"13269a80+","t":"2026-11-22T23:37Z","c":"coop-thin-g-f1 #9: G2 solo reference skips the worldOn() family like her week end on the host (gWk); LIVE coop-guest-men r1 gated jmort's T…","b":"dbfa823045bb","h":[{"s":"0a3ceede+","t":"2026-11-22T20:16Z","c":"rv2 coop-guest-men: merge LIVE 40cc2b92 (coop-guest-lists-scan.js: branch side kept = S.men kind + HOST_ONLY family; index.html/sw.js rebui…"},{"s":"f98ceec2","t":"2026-11-22T19:27Z","c":"coop-guest-men r2b: her Thái hậu stand-in = what the host will do (one rule thPredict)"},{"s":"ba110043","t":"2026-11-22T13:03Z","c":"coop-famops-p: site build (index.html/sw.js rebuilt)"},{"s":"8f4bfc8a","t":"2026-11-22T12:50Z","c":"Sửa bài kiểm tra chơi chung chập chờn (không đổi gì trong game)"},{"s":"efec3641+","t":"2026-11-22T09:46Z","c":"role-parity-bundle-fix r1 (reviewer FAIL 1, law 1 + law 4): ACT.petcare.ok = ONE gate for her and an NPC (pets present); the NPC friend tes…"},{"s":"5d934e55+","t":"2026-11-22T09:37Z","c":"Chơi chung: máy chủ không còn chậm/kẹt so với bạn, khuôn mặt hai bên hiện đúng"},{"s":"f90e455b+","t":"2026-11-22T07:57Z","c":"Gắn sẵn chỗ cho hình Nội vụ phủ và phòng ngủ Từ Ninh cung — hình mới tự hiện khi vẽ xong."},{"s":"0479cf32+","t":"2026-11-22T09:11Z","c":"Sửa lỗi thẻ đời mới mở chậm khi mạng hình lỗi — giờ hiện ngay, hình tải lại phía sau."},{"s":"32f4afb9+","t":"2026-11-22T07:26Z","c":"coop-night0: rebuild site (build_site.sh)"},{"s":"b311aea2+","t":"2026-11-22T04:48Z","c":"Chơi chung: việc nhà/gia tộc hai người khớp nhau, không lệch đồ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3628,9 +3628,9 @@ function msOan(x,y){if(relMS(x)){if(y===S)return +x.oan||0;return (x.ro&&+x.ro[r
 function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===S){x.oan=c((+x.oan||0)+n);return}const M=relMap(x,"ro"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
  const M=x===S?S.ro:relMap(x,"ro"),k=relKey(y);M[k]=c((M[k]||0)+n)}
 function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
-function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
+function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,R[0],R[1]);return}if(y===S){x.rel=cl(x.rel+n,R[0],R[1]);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,R[0],R[1])}
 function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
-function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const R=BAL.linkRange.ro,c=v=>cl(Math.round(v),R[0],R[1]);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
 /* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
 function relMSAll(){const L=[],add=p=>{if(p&&typeof p==="object"&&!L.includes(p))L.push(p)};if(!S)return L;(S.men||[]).forEach(add);add(S.maid);(S.staff||[]).forEach(add);
  for(const k in (S.court||{}))add(S.court[k]);((S.thO&&S.thO.staff)||[]).forEach(add);(rivals||[]).forEach(v=>{add(v.maid);(v.staff||[]).forEach(add)});return L}
@@ -35911,6 +35911,10 @@ Object.assign(BAL,{coopUi:{batch:4,gapMs:900}});
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
+/* review/coop-flakes (D20; rv: ONE CORE, law 4): the range of every person-to-person link — rl thiện cảm, ro oán — ONE source: j9 affAdd /
+   oanAdd clamp with it, and COOPW.keyMove (co-op: one person's link moving to another id, a stand-in → her world id, a re-id'd person) clamps
+   the ADDED link with it. Before, affAdd / oanAdd typed −100…100 / 0…100 themselves. */
+BAL.linkRange={rl:[-100,100],ro:[0,100]};
 /* ITEM DETAIL (KIT §70, review/item-info): allow = show "hạn mức phẩm ta N" (her rank's luxury allowance) on the Xa xỉ row of every item detail,
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
@@ -48599,6 +48603,14 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W|
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
+/* review/coop-flakes (D20, law 6b: ONE person, ONE link). Move key `from` of an id-keyed map to `to` (a stand-in → her world id: jcoopask
+   settle; a person the host had to give another id: jcoopthinc lens re). When `to` already holds a number it is the SAME person's (the
+   host ran her week with that id; a missing link starts at 0, j9 affAdd), so a LINK (rl / ro: the map's key pk is in BAL.linkRange) ADDS,
+   clamped to that range; keeping one and dropping the other lost her thiện cảm (25 → −3, coop-guest-maid). Any other number is a week stamp /
+   turn / count (S.met, S.askAt, S.dKnown, S.seen = wk(); rv: adding them put «met» in week 82 at week 42): the larger stays, as jnamefix does
+   for a renamed key. Other values: the one already at `to` stays. to == null: the key is dropped (a refused stand-in). */
+CW.keyMove=function(o,from,to,pk){if(!o||typeof o!=="object"||!(from in o))return;const v=o[from];delete o[from];if(to==null)return;
+ if(!(to in o)){o[to]=v;return}const w=o[to];if(typeof v==="number"&&typeof w==="number"){const L=BAL.linkRange[pk];o[to]=L?Math.max(L[0],Math.min(L[1],v+w)):Math.max(v,w)}};
 CW.netWrap=function(f,self,args){if(!CW.on||host()||stateOn("netWrap")){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */||cyHer())return;
@@ -75161,10 +75173,12 @@ function collect(d){const B=CW.base&&CW.base.W&&CW.base.W.R||[];const bm=new Map
 (function(){const f=ser;ser=function(){const d=f.apply(this,arguments);try{if(guest()&&live()&&d&&d.S&&d.R)collect(d)}catch(e){console.error("ask collect",e)}return d}})();
 
 /* ---------- guest: settle requests on every rebuild (before the engine resolves {$r:id} refs) ---------- */
-function remapS(o,t,r){if(!o||typeof o!=="object")return o;if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=remapS(o[i],t,r);return o}
+/* review/coop-flakes (D20): a key t moves to r through CW.keyMove (jcoopworld): the same person's two numbers ADD (her stand-in link + the
+   week's link to her world id), never «keep r, drop t» (her thiện cảm 25 → −3). pk = the map's own key (rl / ro clamp, BAL.linkRange). */
+function remapS(o,t,r,pk){if(!o||typeof o!=="object")return o;if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=remapS(o[i],t,r);return o}
  if(o.$r===t&&Object.keys(o).length===1){o.$r=r;return o}
- for(const k of Object.keys(o)){const v=o[k];if(k===String(t)||k==="r"+t){const nk=k===String(t)?String(r):"r"+r;if(r!=null&&!(nk in o))o[nk]=v;delete o[k];continue}
-  if(k==="pal"&&v===t){o[k]=r;continue}o[k]=remapS(v,t,r)}return o}
+ for(const k of Object.keys(o)){const v=o[k];if(k===String(t)||k==="r"+t){CW.keyMove(o,k,r==null?null:(k===String(t)?String(r):"r"+r),pk);continue}
+  if(k==="pal"&&v===t){o[k]=r;continue}o[k]=remapS(v,t,r,k)}return o}
 function settle(d){const L=d.S.coopAsk;if(!Array.isArray(L)||!L.length)return;const hP=CW.base&&CW.base.P&&CW.base.P.a;
  const done=(hP&&hP.S&&hP.S.askDone)||{};const keep=[],lines=[];
  for(const a of L){if(!a||!a.id)continue;const res=done[a.id];
@@ -93578,8 +93592,8 @@ TH.onDo("npc",a=>{if(!on()||!a||!Array.isArray(a.ops))return {err:"off"};const r
  C.stat.applied+=r.n;lg(["applied",r.n,JSON.stringify(r.re)]);return r});
 /* the guest: a person the host had to give another id (rare: the host made one with that id the same moment) — her links follow */
 COOP.on("thinview",V=>{try{if(!gOn()||!V||!V.o||!V.o.dr)return;const d=V.o.dr;if(d.op!=="npc"||!d.r||!d.r.re||C.reDone===d.id)return;C.reDone=d.id;
- const re=d.r.re;const s=S[RAW]||S;const fix=o=>{if(!plain(o))return;for(const k of Object.keys(o)){const v=o[k];if(k in re&&plain(v)===false&&o!==s){o[re[k]]=v;delete o[k]}else if(plain(v))fix(v)}};
- for(const m of ["rl","ro","known"])if(plain(s[m]))for(const from in re)if(from in s[m]){s[m][re[from]]=s[m][from];delete s[m][from]}}catch(e){console.error("lens re",e)}});
+ const re=d.r.re;const s=S[RAW]||S;/* review/coop-flakes (D20, LAW 11 family of jcoopask remapS): a link already at the new id is the same person's → CW.keyMove adds (rl / ro clamped), never overwrites */const fix=(o,pk)=>{if(!plain(o))return;for(const k of Object.keys(o)){const v=o[k];if(k in re&&plain(v)===false&&o!==s){CW.keyMove(o,k,String(re[k]),pk)}else if(plain(v))fix(v,k)}};
+ for(const m of ["rl","ro","known"])if(plain(s[m]))for(const from in re)if(from in s[m])CW.keyMove(s[m],from,String(re[from]),m)}catch(e){console.error("lens re",e)}});
 
 /* ---------- 5. G7 on the host: NPC buổi acts can aim at her (her entry in the harem; items / children go out as res ops, B4) ---------- */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(!on()||!host()||!S||CW.pulled||!CW.b4Wrap)return f.apply(this,arguments);
@@ -95130,7 +95144,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0513d3323144";window.CTM_BUILD=BUILD;
+const BUILD="dbfa823045bb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
