@@ -250,4 +250,9 @@ if(require.main===module){
  console.log(JSON.stringify({sites:sites.length,early:early.length,per}));
  if(early.length){console.log('FAIL: a BAL.eff / road / arc read at load time in a module that loads before it (TDZ): read it lazily\n  '+early.join('\n  '));process.exit(1)}
  if(sites.length){console.log('FAIL: a player text types an amount (BAL.eff / road / arc) or a cut (BAL.loy / ducLv / quyLv / wit / sungLv / tinhLv / tinLv / sucLv / rareLv / tsDanger / cut / …) that lives in BAL (print the constant: ${balSg(BAL…)} / ${balAb(BAL…)})\n  '+sites.slice(0,+(process.env.OCG_MAX||60)).map(row).join('\n  '));process.exit(1)}
- console.log('PASS: no player text types an amount or a cut that lives in BAL (eff / road / arc amounts, loy / ducLv / quyLv … cuts)')}
+ /* review/typed-stat-bal (law 4, Foreman D order MAIN 110 23/11): no player text TYPES «stat ±N» at all (Danh +3, Sủng -10, Bạc -20 …) — the
+    rule's number lives in BAL and the text prints it (${balSg(BAL…)} or a {n:path} token). dev/test/typed-stat-text.js (acorn, strings + template
+    text only); its ALLOW list holds the justified exceptions. */
+ {const T=require('./typed-stat-text.js').scan(B).filter(r=>!r.ok);
+  if(T.length){console.log('FAIL: a player text types «stat ±N» (print the BAL constant: ${balSg(BAL…)} / {n:path} token; dev/test/typed-stat-text.js)\n  '+T.slice(0,+(process.env.OCG_MAX||60)).map(r=>`${r.f}:${r.line} ${r.t}  «${r.ctx.replace(/\s+/g,' ')}»`).join('\n  '));process.exit(1)}}
+ console.log('PASS: no player text types an amount or a cut that lives in BAL (eff / road / arc amounts, loy / ducLv / quyLv … cuts; no typed «stat ±N»)')}
