@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"01f23e76","t":"2026-11-23T12:15Z","c":"coop-famops-t2 T2: unit 28 (the host's Lấy đồ ×3 with returns between: one marked copy + one «rm lost» each time, each return closes the ca…","b":"be4583b0d9f8","h":[{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"}]};
+window.CTM_BI={"s":"c14f2f74+","t":"2026-11-23T14:26Z","c":"coop-famops-t2: NPC dressing never touches her entry (law 6c + 1; scan 9001 vanish 10000001)","b":"da94ec5cc850","h":[{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2596,7 +2596,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
   if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>20?3:1),0,100);v.pg=Math.max(0,v.pg-1);
-  if(v.queen&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
+  if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
@@ -2615,7 +2615,7 @@ if(queenP())S.vacSince=null;
  return ev}
 function rivalsMonth(){let ev="";
  for(const v of liveRivals(true)){if((S.storms||0)&&roll(4*S.storms)){ap(v,{suc:-15});}if(v.confined)v.confined--;if(v.shield)v.shield--;if(v.pray)v.pray--;if(v.fert)v.fert--;v.anthai=0;
-  itemMonth(v);ev+=seenNPC(v,v,"")||"";const pm=pregMonthP(v);if(pm)ev+=pm;if(!v.alive||v.out)continue;anMonth(v);ev+=npcMonthly(v);ev+=maidMonthP(v);
+  itemMonth(v);ev+=seenNPC(v,v,"")||"";const pm=pregMonthP(v);if(pm)ev+=pm;if(!v.alive||v.out)continue;anMonth(v);if(!v.coop)ev+=npcMonthly(v)/* E44j (c) T9 family (law 1 + 6c): her entry's month (study, buy, use / wear her pieces, gifts, deeds) is her own seat's, never an NPC roll on the host: useItem here used up her piece → b4Ops «rm gone» */;ev+=maidMonthP(v);
   if(v.duc>=BAL.ducLv.up)v.th=cl(v.th+1,-100,100);else if(v.duc<BAL.ducLv.down)v.th=cl(v.th-1,-100,100);ev+=promoteP(v)}
  /* Thái hậu and the Empress reward or punish, by the same rule for every consort */
  const qq=queenP();
@@ -4356,7 +4356,7 @@ function fakeIllRisk(){const c=BAL.tw.g.illCatch/100;return Math.round(100*(1-Ma
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
 function treatO(p,way){return oddsCl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p)))}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p));
- const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&!v.coop/* E44j (c) T9 family: a co-op friend entry is a player seat, never the NPC briber (as jthaiy bribers rv) */&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
  const ob=way==="ty"&&bribed?npcWhy("thyHarm",{p,b:bribed},()=>roll(BAL.ag.why.thyHarm.p)):null;/* npc-purpose G2: only a rival who really paid the physician (thyBribedBy) and still wants her harmed; the old 25 = the success */
  if(ob){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(oddsCl(o))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(BAL.rk.treatStep)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
@@ -4870,7 +4870,7 @@ function stipend0(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let bas
 /* a hostile Empress (or her, when Empress, by her own act) may have Nội vụ phủ hold back a consort's pay */
 function payCuts(){const q=queenP();if(!q)return;for(const p of consorts()){if(p===q||p.out)continue;if(q!==S&&rel(q,p)<-30&&!(window.agDOn&&agDOn())&&roll(20)){p.cutPay=Math.max(p.cutPay||0,1);p.cutBy=q.name;if(p===S)log(`<span class="r">Hoàng hậu ${q.name} sai Nội vụ phủ khất bổng lộc của ngươi tháng tới.</span>`)}}}
 /* the NPC Empress rewards her closest ally a little each season (two-way: she, as Empress, has 'Ban thưởng') */
-function queenRewards(){const q=queenP();if(!q||q===S||S.month%3||(window.agDOn&&agDOn()))return;const w=mindPickBy(consorts().filter(p=>p!==q&&!p.out&&rel(q,p)>=20),p=>rel(q,p)*mindW(p,"help"),q);if(!w)return;/* npc-mind: was ARGMAX rel; gate rel≥20 kept */ap(w,{bac:BAL.eff.j20.bacQueenRewards});w.ghen=cl((w.ghen||0)-5,0,100);if(w===S)log(`Hoàng hậu ${q.name} ban thưởng ngươi 20 bạc vì hiền thục. Bạc ${balSg(BAL.eff.j20.bacQueenRewards)}.`)}
+function queenRewards(){const q=queenP();if(!q||q===S||q.coop/* E44j (c) T9 family: her entry as Hoàng hậu is a player seat, never an NPC roll */||S.month%3||(window.agDOn&&agDOn()))return;const w=mindPickBy(consorts().filter(p=>p!==q&&!p.out&&rel(q,p)>=20),p=>rel(q,p)*mindW(p,"help"),q);if(!w)return;/* npc-mind: was ARGMAX rel; gate rel≥20 kept */ap(w,{bac:BAL.eff.j20.bacQueenRewards});w.ghen=cl((w.ghen||0)-5,0,100);if(w===S)log(`Hoàng hậu ${q.name} ban thưởng ngươi 20 bạc vì hiền thục. Bạc ${balSg(BAL.eff.j20.bacQueenRewards)}.`)}
 function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng.</p>${kitRows(BL.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,BLG[i]].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (Hoàng hậu quý ngươi dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${chanceW(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
 /* ân thưởng: every reward has silver + item + jealousy; recorded */
 const BBAC={night:0,contest:20,son:30,dau:15,promo:20,accuse:10,story:10,birthday:15,sinhthan:20,nurse:15};
@@ -6082,7 +6082,7 @@ function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[
  const s=w[i][0];oanAdd(t,s,BAL.eff.j40.mindBelief_2);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
  if(s===S&&roll(BAL.odb.j40.rbMindBelief+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
 /* the mind's turn: replaces the plain weighted pick */
-npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
+npcAct=function(v,t){try{if(!v||!t||v.coop/* E44j (c) T9 family (law 1 + 6c): a co-op friend entry is a player seat, never an NPC actor */)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
   /* Nhu mì hesitates */
   if(T.includes("Khiêm nhường")&&roll(35)){mindLog(v,"_hesitate");return""}
   /* Đa nghi wastes effort on a false suspicion */
@@ -29550,11 +29550,13 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+window.kitBoardBg=kitBoardBg;
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
- `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
+ `<div class="kgbox${bgb?" kgbox-bg":""}" id="${g.id||"kgbox"}"${bgb?` data-mgbg="${g.kind}" style="--kgbg:url('${bgb}')"`:""}></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
 /* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
    outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
    corner (never a second big picture), a play animation while the game runs (.kg-idle off). html.kv1 (Fold portrait / one page): NO column, the game alone at full width.
@@ -29622,7 +29624,13 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgame .kghow .krl{font-size:.64rem;font-weight:700;color:var(--k-lab);text-transform:uppercase}
 .kghud[hidden]{display:none!important}.kgmk{margin-left:auto;flex:0 0 auto}.kgmk[hidden]{display:none}.kgmk .kchips{flex-wrap:nowrap}.kgmk .kchip{white-space:nowrap}.kgmk-pop .kchip{animation:kgmkPop .38s ease-out}@keyframes kgmkPop{0%{transform:scale(1)}35%{transform:scale(1.22)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.kgmk-pop .kchip{animation:none}}.kgclk{margin-left:auto;flex:0 0 auto}.kgmk:not([hidden])~.kgclk{margin-left:6px}.kgclk[hidden]{display:none}.kgclk .kchips{flex-wrap:nowrap}.kgclk .kchip{white-space:nowrap}.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
-.kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
+.kgbox{margin:8px 14px;min-height:120px}
+/* KIT BOARD BACKDROP SLOT (KIT-MGBG): a DOM mini-game board whose kind is in KG82_BOARDBG (j82) gets the painted mg-<kind>-bg picture cover-fitted behind the play area under a soft cream veil (same look as the canvas boards' kg82Bg), set by kitGameFrame({kind}) alone */
+.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}
+/* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
+.kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
+.kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
@@ -32392,8 +32400,10 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 /* r2 (slap-mg-r2, whole family): a kind whose painting is not on the CDN yet (https://ctm-img.victoria-tntt.workers.dev/img/_index.json, jevban KIT_CDNHAVE) gets no picture column at all,
    instead of a broken picture for the ~2 s the CDN retry takes; it is listed once in CTM_MISSING_PICS (kind "mg") so it gets painted. */
 /* KIT §N.1 figure-column backdrop (owner OD 21/11 ~03:48Z/~03:50Z, mg-5s-clear): on the wide screen the figure stands on a NEW tall (portrait) painting per subject, never the board picture and never the flat yellow. ONE table: kind -> file in img/ (art: Foreman C, img/mgbg-<kind>.webp); a missing file = the old cream gradient (CSS fallback). */
+/* KIT-MGBG: the DOM boards that take the painted board backdrop slot (kitGameFrame .kgbox-bg, key mg-<kind>-bg) */
+const KG82_BOARDBG=new Set(["thu_tam","thu_choi","tuoi","co7"]);window.KG82_BOARDBG=KG82_BOARDBG;
 const KG82_MGBG=new Proxy({},{get:(o,k)=>typeof k==="string"?`https://ctm-img.victoria-tntt.workers.dev/img/mgbg-${k}.webp`:undefined});window.KG82_MGBG=KG82_MGBG;
-function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind))return "";const s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kg82BgName(kind)}.webp`;
+function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind)||KG82_BOARDBG.has(kind))return "";const s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kg82BgName(kind)}.webp`;
  try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal,kind:o.kind||KG82.picKind});
@@ -32813,7 +32823,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
 /* optional (review/steal-minigame, jsmg): o.rows = intro rows (kit rows, heading o.rowsHead) · o.go = the start button label · o.resRows(raw, skipped) =
    the result rows instead of "Màn chơi" + note. The skip button is always the KIT §13.6 quick option (o.quick). Absent → unchanged. */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),EG=o.eng&&typeof o.eng==="object"&&KG82_ENG[o.eng.e]?o.eng:null,K=EG?Object.assign({},KG82_KIND[kind],EG):KG82_KIND[kind];/* o.eng = {e, n, t, how, timed} (jpmc 7×7 Cờ): another engine + its rules text on this kind's numbers (talent, hand, tier) */KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc",rank:o.rank})}catch(e){KG82.lv=0}
- const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
+ const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(EG&&EG.e==="gomoku"&&KG82_KIND.co7?"co7":kind)/* KIT-MGBG fix 2: the pm Cờ (art "co" + eng gomoku, the same 7×7 board as Thử tay co7) frames as kind co7 so the real game gets the same backdrop; plain "co" (Ăn quân, another board) keeps its own picture */});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const QK=o.quick||{n:"Để trời định",sub:"tính 5/10"};/* KIT §13.6: the caller names its quick option (o.quick: kitQuick fields; roll:1 = the BAL.skip.od roll) */
  const done=(raw,skipped,ok)=>{KG82.phase="result";const qRow=skipped&&o.quick&&o.quick.sub==null?[QK.n,QK.roll?`${ok?"thành":"hỏng"}: ${ok?QK.win:QK.lose}`:`${QK.win}`,"t"]:null;
   const html=kg82Rows([qRow||["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
@@ -38951,7 +38961,7 @@ function wdApply(p,pair){if(!pair)return;const w=wdOf(p);const take=x=>{if(!x)re
 /* obs's belief of the P of entry e worn by owner (a ngự tứ worn by its owner is known to be by right) */
 function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&owner&&e.own===wdKey(owner))return Math.min(it.P,wdPOf(owner));if(obs===owner&&(e.from==="base"||e.nvp))return it.P;/* her own issued phẩm phục */return wdBelP(obs,it.k)}
 function wdBelStatus(obs,t){return wdStatusBy(t,e=>wdBelPE(obs,e,t))}
-function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
+function wdAutoFor(p,bias){if(p&&p.coop)return;/* E44j (law 6c + 1; coop-lost-scan-traced 9001 vanish 10000001 y_saxanh): her entry on the host is a player seat: her outfit is her own seat's choice. The j92 month / Quốc tang / jlux luxCalm / jworld tang re-dressed it by NPC roll → b4Ops «rm gone» of the garment put on + «add» of the one taken off → her seat lost it */const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
 function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Ân cần|Khiêm nhường/.test(t)?-.5:0}
 
@@ -39174,7 +39184,7 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
 
 /* ---------- monthly: quốc tang, NPC dressing, remarks, tai mắt, pawns, ngự tứ, promotions (all consorts alike) ---------- */
 function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy("wdDress",{v},()=>roll(npw1B("wd").dressGo)/* G1 #9 flat-roll audit: she changes her outfit by the old odds (base skipped 70 %; with no done roll NPC re-dressing rose 4390 → 8115) */)))return;wdAutoFor(v,wdNpcBias(v))}
-function wdNpcInit(v){if(v.wdI)return;v.wdI=1;v.inv=v.inv||[];const P=wdPOf(v);const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(cl(P-1+R(4),0,8),roll(50)?"tram":"y",0);if(k)v.inv.push({k,from:"base0"})}}
+function wdNpcInit(v){if(v.wdI||v.coop)return;/* E44j: never NPC starting pieces into her entry (each one = an «add» to her seat from nowhere) */v.wdI=1;v.inv=v.inv||[];const P=wdPOf(v);const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(cl(P-1+R(4),0,8),roll(50)?"tram":"y",0);if(k)v.inv.push({k,from:"base0"})}}
 function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  /* quốc tang: Thái hậu or Hoàng hậu passes away → 3 months, no red or yellow */
  let why="";if(!pre.th&&S.thDead)why="Thái hậu băng hà";else if(pre.q){const q=rivals.find(v=>v.id===pre.q);if(q&&!q.alive)why=`Hoàng hậu ${q.name} băng hà`}
@@ -49007,10 +49017,18 @@ function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"
    HER piece into a COPY of a host NPC (that chest is rebuilt from the host: the piece vanished, her case closed «mất dấu», coop-lost-scan 10000137).
    The keep is refused like any refused keep (loLose: c.keep=0): her case stays «thất lạc» holding the piece, jlost finds it later. Host seat unchanged. */
 (function(){if(typeof loKeepBy!=="function")return;const k0=loKeepBy;loKeepBy=function(c,p){if(famCopy(p))return null;return k0.apply(this,arguments)};window.loKeepBy=loKeepBy})();
+/* E44j T4 (law 6c; coop-lost-scan dup 117 / id 10): the other seat's act took a piece of mine that is NOT in my hands but in my box (seized as
+   tang vật, sold, đem sửa …): rooms run the relay path (thin level 0) by default, so that act ran on its seat's copy of me, a step behind, and
+   that seat now holds a copy of a piece my box holds = 2 places. My box is the world's truth here: the actor's seat is told «rm gone» by id
+   (its famApply takes the phantom copy off, the existing «… không còn nữa» line). Either seat (two-way). */
+function famBoxBack(o){try{if(!CW.on||!o||!o.iu||o.how==="gone")return;const B=S.il&&S.il.box;if(!Array.isArray(B)||!B.some(x=>x&&famIs(x.e,o.iu)))return;
+ if(typeof ilSlots==="function"&&ilSlots(S).some(x=>famIs(x,o.iu)))return;b4Send([{op:"rm",ci:-1,k:o.k,iu:o.iu,how:"gone"}],{})}catch(e){console.error("famBoxBack",e)}}
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
- const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
+ const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f)){famMiss(o,"not hers");famBoxBack(o)}return [o,e]}).filter(x=>x[1]);
  for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;if(!famOff(e)){famMiss(o,"gone meanwhile");continue}if(o.iu&&!e.iu)e.iu=o.iu;
+  /* E44j T4: a «gone» of a piece I held for a case (marked lo: someone's lost piece in my hands) closes that case here «mất dấu» (the piece is in the other world's box) — never «held at me» with no copy */
+  if(o.how==="gone"&&e.lo){try{const c=(S.lost||[]).find(c=>c&&c.id===e.lo&&c.st!=="done");if(c){c.st="done";c.end=wk();c.how="matdau";if(typeof ilLog==="function")ilLog(e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu")}}catch(z){}}
   if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
    const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:fk,keep:1})}finally{S.inv=all.filter(x=>x!==e)}
    /* E44: the piece IS with the thief on the other seat (his real chest / the host's NPC): her case is held there even when this seat has no
@@ -49524,6 +49542,22 @@ function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)
 (function(){if(typeof evA!=="function")return;const f=evA;evA=function(h,t,n){const d=f.apply(this,arguments);
  try{if(CW.on&&!CW.b4in&&d>0&&isF(h)&&t&&t!==S&&!isF(t)&&t.id!=null&&t.id<900){if(dOn())evOut(t.id,d);else p2say("ev",{tg:t.id,n:d})}}catch(e){}return d}})();
 P2H.ev=m=>evIn(m.tg,m.n);
+/* E44j (b) (E52r finding b, law 1 + 6c REAL OBJECTS): HER piece taken into the HOST's box (tịch thu, sold out of her entry) had no road back:
+   the NPC owner's road (ilConf / ilBack) never picks a player seat (npwAsk guard T8). The host keeps the box record (the world's truth) and, at
+   the same due points as the player's own (jil ilWeek: confW wait, ransom visit), asks HER seat with the SAME dialog (PEND ilconf / ilback, pp.f);
+   her choice comes back, the host hands the piece to her entry (jil ilTake → npcToFriend «add» = one piece home). Silver she paid for a piece
+   that left the box meanwhile comes back to her (no new player words). */
+CW.ilAsk=(kind,x)=>{try{if(!CW.on||!host()||!x||!x.e)return;ilUid(x.e);p2say("ilask",{kind,u:x.e.iu,e:J(x.e),pr:x.pr|0})}catch(e){console.error("ilAsk",e)}};
+P2H.ilask=m=>{if(host()||!S||S.dead||!m||!m.e||!m.e.k)return;const pp={u:m.u,f:1,kind:m.kind==="conf"?"conf":"back",e:m.e,pr:m.pr|0};
+ pushDil(mkP(pp.kind==="conf"?"ilconf":"ilback",pp),pp.kind==="conf"?"Đồ bị tịch thu":"Đồ cũ trở về");try{showModal();render()}catch(e){}};
+CW.ilWant=(pp,how,pay)=>{p2say("iltake",{u:pp.u,k:pp.e&&pp.e.k,how,pay:pay||null})};
+P2H.iltake=m=>{if(!host()||!m)return;const f=friendEntry();const x=typeof ilFind==="function"?ilFind(m.u):null;
+ if(f&&x&&String(x.own)===String(key(f))&&typeof ilTake==="function"){ilTake(x,f,m.how||"về");return}
+ if(m.pay&&m.pay.bac>0)p2say("ilrefund",{bac:m.pay.bac|0,k:x&&x.e?x.e.k:m.k||""})};
+/* refund: only when the piece left the host box before her answer came (her entry died meanwhile: while it lives, jil ilWeek keeps every
+   other road off her pieces); no new player words (E ROOT: existing wording only) */
+P2H.ilrefund=m=>{if(host()||!S||S.dead||!(m&&m.bac>0))return;ap(S,{bac:m.bac|0})};
+CW.P2H=P2H;/* test hook (dev/test/coop-famops-unit.js) */
 function evIn(tg,n){if(S.dead)return;const v=RV(tg);if(!v||!v.alive)return;const d=evA(S,v,+n||0);if(d>0){try{log(`Tai mắt ${esc(friendName())} lén báo tin: chứng cứ với ${esc(v.name)} +${d}.`)}catch(e){}render()}}
 /* part D: the proof goes to the player who holds it, run by the host in that player's context */
 function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if(host())T.D.kind(fs(),"ev",{tg,n});else T.doSend("ev",{tg,n})}
@@ -49637,6 +49671,9 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    paid: S.j71.fx, sent live in pos) is used for her score, not the NPC "best art"; she pays the same Sức as when she plays it herself,
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
+/* E44j (a) (E52r finding a): a piece b4Ops sends to her seat («add» / «plant») is marked (object and ledger id) until the current call stack ends: jil ilGuard's
+   after-check of the same call (rivalsMonth: ilGuard is OUTSIDE b4Wrap) routes it again through ilGone → npcToFriend, which then sends nothing */
+function b4Mark(e){if(!CW.b4Sent){CW.b4Sent=new Set();Promise.resolve().then(()=>{CW.b4Sent=null})}CW.b4Sent.add(e);if(e.iu)CW.b4Sent.add("i"+e.iu)}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
  /* E44e (law 6c, one piece = its ledger id): her entry rebuilt meanwhile (a festival's result diffs the snapshot taken at its start) holds NEW objects
     of the SAME pieces: matched by iu they did not move. Before: every piece «rm gone» + «add» (≈35 «Được ban …» lines, a piece mid-case lost: vanish 10000013) */
@@ -49647,7 +49684,7 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
      Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
   let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
   ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
- for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
+ for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""});b4Mark(e)}
  for(let [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd))kd=(v.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
@@ -49689,7 +49726,7 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
    logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
    (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
    on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
-CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;if(CW.b4Sent&&(CW.b4Sent.has(e)||(e.iu&&CW.b4Sent.has("i"+e.iu)))){CW.b4Sent.delete(e);if(e.iu)CW.b4Sent.delete("i"+e.iu);return}/* E44j (a): b4Ops of this call already sent it (the same object, or the copy giveTo made: same id) */const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
@@ -51677,13 +51714,13 @@ function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=
   (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
 function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.classList.remove("kg-open");box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
-function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
+function petcGameBox(title,how,kind){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame",kind:kind==="bath"?"thu_tam":kind==="play"?"thu_choi":""})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
   `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 /* KIT §13.7 (mg-ui-rest, owner OD:L1981): EVERY care game opens on the kit rules screen (kgReady: luật + picture of the move, «Hướng dẫn» guided round, «Sẵn sàng»);
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
-function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
+function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how,kind);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
  box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kpcgo">Bắt đầu</button></div>`;
  kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",ev:false,timed:false,tutor});
  try{const t=box.querySelector("#kgrtut")||box.querySelector("#kpcgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
@@ -54732,6 +54769,10 @@ KIT_SAMPLES.push({id:"§83.9",title:"kitDanger · .kbtn.kdanger + kitConfirm",wh
 /* KIT origin frame (AP01, jpres.js KPO_ART): one button per origin opens a sample main-story card with its painted frame */
 KIT_SAMPLES.push({id:"§AP01",title:"Origin frame · khung chính tuyến theo xuất thân (KPO_ART, 9 khung)",where:"<b>Chính tuyến</b> event cards. <code>KPO_ART[origin]</code> → <code>data-kpres-art</code> → one 9-slice overlay in jpres.js; the card padding keeps text inside. Tap an origin to open a sample card.",
  html:()=>`<div class="kitpg-row">${["tt","dtq","muoi","cn","nc","td","ch","thd","srv"].map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{const o=S.origin;S.origin={k:'${k}'};Q.push({t:'Chính tuyến · Mẫu khung · Chương 1 · Hồi 1/5',h:'<p>Khung xuất thân mẫu.</p>',btn:'Đã rõ'});showModal();S.origin=o}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
+
+/* KIT board backdrop slot (KIT-MGBG, j79 kitGameFrame .kgbox-bg): one button per DOM board opens an empty kit game frame with the painted backdrop */
+KIT_SAMPLES.push({id:"§MGBG",title:"Board backdrop slot · nền tranh bàn chơi (thu_tam · thu_choi · tuoi · co7)",where:"<b>DOM mini-game boards</b> (care games, Cờ năm quân). <code>kitGameFrame({kind})</code> with <code>kind</code> in <code>KG82_BOARDBG</code> → <code>.kgbox.kgbox-bg</code> (cover picture + soft veil). Tap to open an empty frame.",
+ html:()=>`<div class="kitpg-row">${["thu_tam","thu_choi","tuoi","co7"].map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{Q.push({t:'Mẫu nền bàn chơi',h:kitGameFrame({art:'Mẫu',title:'${k}',how:'Nền tranh sau khu chơi.',id:'kgsample',kind:'${k}'}),btn:'Đã rõ',cls:'pcm'});showModal()}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
 /* ================= jtitle: KIT 82 · TITLE SYSTEM PARTS (owner 11/16 13:00Z / 13:15Z / 13:20Z; review/title-tag) =================
    Two different things (owner 13:20Z): RANK (Tần, Phi, Quý phi…) vs DANH HIỆU (a worn title plate, line 1) — plus the EMPEROR'S HIỆU (Thục, Hiền, Đức…) that JOINS THE RANK everywhere ("Thục phi").
    - kitHieuJoin(rankName,p)  → "Thục phi" when p.hieu is set (S.hieu for her / v.hieu, granted by j8 giveReward "ban hiệu"; any rank except Hoàng hậu and lãnh cung). Called by rkOfFace / rkName (j19 / j8), so every rank word in the game carries it.
@@ -76280,11 +76321,12 @@ function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);re
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
 function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
  return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
-function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
+function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false,askF=false;
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
   if(x.at==="mkt"){
    if(live&&o===S){if(!x.shop&&roll(B.shopP)){x.shop=1;log(`Thái giám Nội vụ phủ báo: khay đồ mua ngoài cung có ${ilNm(x.e)}, giống đồ cũ của ngươi.`)}
     /* the ceiling holds (reviewer r1): due → queued even when other dialogs wait (one ransom visit a week) */if(!ask&&wk()>=x.ret){ask=true;x.ret=wk()+ilRng(B.againW);pushDil(mkP("ilback",{u:x.e.iu}),"Đồ cũ trở về")}continue}
+   if(live&&o.coop){if(!askF&&wk()>=x.ret&&typeof COOPW==="object"&&COOPW.ilAsk){askF=true;x.ret=wk()+ilRng(B.againW);COOPW.ilAsk("back",x)}continue}/* E44j (b): her piece: the same ransom visit, on her seat */
    if(live&&o!==S&&(o.bac||0)>=x.pr&&npcWhy("ilBack",{p:o,x},()=>roll(B.npcBackP))){/* npc-purpose G2c: she wants her piece back and can pay */ap(o,{bac:-x.pr});ilTake(x,o,"chuộc về");continue}
    {const bw=npcWhy("ilBuy",{x,o},()=>roll(B.npcBuyP));if(bw){const v=bw.who;ap(v,{bac:-x.pr});ilTake(x,v,"mua");continue}}/* npc-purpose G2c: the buyer = one who wants that piece and can pay */
    if(!live&&!x.shop&&npwPick(liveRivals(true),v=>ilWant(v,x,null))&&roll(B.shopP))x.shop=1;continue}/* npc-purpose G2c: put on the tray only when someone would buy it */
@@ -76295,7 +76337,7 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
   if(x.at!=="nvp")continue;
   if(x.dh)continue;/* jdh2 (sắc phong book / seal): its own atonement / census road; never resold */
   if((x.why==="fix"||x.why==="burn")&&wk()>=x.rel){if(live){ilTake(x,o,"sửa xong");if(o===S)Q.push({t:"Đồ sửa xong",who:pMe(),h:`${ilTag(x.e)}<p>Nội vụ phủ sửa xong <b>${ilNm(x.e)}</b>, sai người đem trả về rương ngươi.</p>`,btn:"Đã hiểu"})}else{x.why="dead";x.own=""}continue}
-  if(x.why==="conf"&&wk()>=x.rel){if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
+  if(x.why==="conf"&&wk()>=x.rel){if(live&&o.coop){if(!askF&&typeof COOPW==="object"&&COOPW.ilAsk){askF=true;x.rel=wk()+ilRng(B.againW);COOPW.ilAsk("conf",x)}}/* E44j (b): her piece: the same atonement ask, on her seat */else if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
    else if(live&&npcWhy("ilConf",{p:o,x},()=>roll(B.npcConfP)))ilTake(x,o,"xin lại");/* npc-purpose G2c: she asks for it back when it matters to her */else if(!live){x.why="dead";x.own=""}continue}
   if((x.why==="dead"||x.why==="kho"||x.why==="net")&&!live&&npwPick(liveRivals(true),v=>ilWant(v,x,null,Math.round(ilVal(x.e)*B.ransomPct/100)))&&roll(B.resaleP)){x.at="mkt";/* npc-purpose G2c: resold only when someone in the cung wants it */x.why="sell";x.own="";x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));x.ret=1e9;ilLog(x.e,"nvp","mkt","bán lại")}}
  /* ownerless pieces outside (a dead person's effects resold, released stock) beyond mktCap: Nội vụ phủ buys them back and hands them out
@@ -76306,14 +76348,18 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
 function ilFind(u){return ilS().box.find(x=>x.e&&x.e.iu===u)||null}
 function ilTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return""}
 /* ransom visit (owner: "có người mang đến cho mình chuộc", ceiling time; cannot pay → it comes again later) */
-PEND.ilback=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="mkt"||x.own!=="me")return null;const nm=ilNm(x.e),pr=x.pr;const ok=S.bac>=pr;
- const O=[];if(ok)O.push({n:"Chuộc về",fx:{bac:-pr},j67:`tốn: Bạc -${pr} · thành: ${nm} về lại rương`,go:()=>{ilTake(x,S,"chuộc về");log(`Ngươi chuộc lại ${nm}: Bạc -${pr}.`)}});
+/* E44j (b) (E52r finding b, law 1 + 6c): pp.f = HER piece in the HOST's box (co-op guest seat): the host keeps the box record (world truth) and asks
+   her seat with the same dialog (jcoopworld ilAsk); her choice goes back (COOPW.ilWant) and the host hands the piece to her entry (one «add») */
+const ilFx=pp=>pp&&pp.f&&pp.e&&pp.e.k?{e:pp.e,pr:pp.pr|0,at:pp.kind==="conf"?"nvp":"mkt",why:pp.kind==="conf"?"conf":"sell",own:"me",f:1}:null;
+const ilGo=(x,pp,how,pay)=>()=>{if(x.f){if(typeof COOPW==="object"&&COOPW.ilWant)COOPW.ilWant(pp,how,pay)}else ilTake(x,S,how)};
+PEND.ilback=pp=>{const x=ilFx(pp)||ilFind(pp.u);if(!x||x.at!=="mkt"||x.own!=="me")return null;const nm=ilNm(x.e),pr=x.pr;const ok=S.bac>=pr;
+ const O=[];if(ok)O.push({n:"Chuộc về",fx:{bac:-pr},j67:`tốn: Bạc -${pr} · thành: ${nm} về lại rương`,go:()=>{ilGo(x,pp,"chuộc về",{bac:pr})();log(`Ngươi chuộc lại ${nm}: Bạc -${pr}.`)}});
  O.push({n:ok?"Thôi, không chuộc":"Chưa đủ bạc, hẹn lần sau",fx:{},j67:ok?`tốn: món đồ còn ở ngoài cung · thành: giữ lại ${pr} lượng bạc · kèm: ít lâu sau có thể lại có người mang đến`:"tốn: không tốn gì · kèm: món đồ còn ở ngoài cung, ít lâu sau có thể lại có người mang đến",go:()=>{log(`Ngươi chưa chuộc ${nm}; món đồ còn ở ngoài cung.`)}});
  return{who:pEunCourt("ped"),t:`<p>Thái giám Nội vụ phủ dò được <b>${nm}</b>, đồ cũ của ngươi, đang ở ngoài cung. Người giữ chịu đem vào nếu được chuộc Bạc ${pr}.</p>${ok?"":`<p class="past">Ngươi đang có Bạc ${S.bac}.</p>`}`,o:O}};
 /* confiscated: after the minimum wait she may atone to ask for it back (owner 13:20Z (5): back only through atonement, minimum wait) */
-PEND.ilconf=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own!=="me")return null;const nm=ilNm(x.e),s=BAL.il.confSuc;
+PEND.ilconf=pp=>{const x=ilFx(pp)||ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own!=="me")return null;const nm=ilNm(x.e),s=BAL.il.confSuc;
  return{who:pEunCourt("ped"),t:`<p>Đã ${BAL.il.confW} tuần từ khi <b>${nm}</b> bị tịch thu. Thái giám Nội vụ phủ ngầm báo: chép kinh sám hối dâng lên, có thể xin lại.</p>`,o:[
-  {n:"Chép kinh sám hối, xin lại",fx:{suc:-s},j67:`tốn: Sức -${s} · thành: ${nm} về lại rương`,go:()=>{ilTake(x,S,"sám hối xin lại");log(`Ngươi chép kinh sám hối, xin lại ${nm}.`)}},
+  {n:"Chép kinh sám hối, xin lại",fx:{suc:-s},j67:`tốn: Sức -${s} · thành: ${nm} về lại rương`,go:()=>{ilGo(x,pp,"sám hối xin lại",null)();log(`Ngươi chép kinh sám hối, xin lại ${nm}.`)}},
   {n:"Để sau",fx:{},j67:"tốn: không tốn gì · kèm: món đồ còn ở Nội vụ phủ, ít lâu sau lại xin được",go:()=>{}}]}};
 /* Nội vụ phủ tray: her sold pieces that came back appear as one more tile (kitShop, same tile as every other) */
 function ilShopTiles(){const I=ilS();return I.box.filter(x=>x.at==="mkt"&&x.shop&&(x.own==="me"||!ilAlive(ilP(x.own)))).map(x=>{const e=x.e,nm=ilNm(e);
@@ -76368,7 +76414,10 @@ window.ilGone=ilGone;window.ilAudit=ilAudit;window.ilCensus=ilCensus;window.ilWh
 function ilFilter(p,keep,how){const out=(p.inv||[]).filter(e=>!keep(e));p.inv=(p.inv||[]).filter(keep);for(const e of out)ilGone(p,e,how);return p.inv}
 window.ilFilter=ilFilter;
 /* co-op, RECORD ONLY (item-ledger-solo): the live path (jcoopworld) carries the piece; the ledger writes the line and the census does not net it */
-function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&v.coop)}catch(e){return[]}}
+/* E44j (a) (E52r finding a, law 6c): her entry taken out of the harem for the host's week end (jcoopworld withoutFriend: COOPW.pulled) is still her
+   entry: jil ilGuard's after-check of rivalsMonth runs OUTSIDE the call that puts her back, so a piece an NPC gave her there read as «gone from
+   the NPC, nowhere» and went into the host box «bị tịch thu» while b4Ops had already sent it to her seat = 2 places (coop-famops-unit 29) */
+function ilFriends(){if(!ilCoop())return[];try{const L=(rivals||[]).filter(v=>v&&v.coop);const P=typeof COOPW==="object"&&Array.isArray(COOPW.pulled)?COOPW.pulled:[];for(const x of P){const v=x&&x[1];if(v&&v.coop&&L.indexOf(v)<0)L.push(v)}return L}catch(e){return[]}}
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();
@@ -76394,7 +76443,7 @@ function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
  return ilGone(p,e,"lost",{cause:"srv"})}
 window.ilRob=ilRob;
 /* §64 item events: the ransom / atonement dialogs show the piece in the picture frame; "Chuộc về" / "xin lại" fly it into the chest */
-setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null};IEV_PID.ilconf=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null}}catch(e){}},0);
+setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFx(pp)||ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null};IEV_PID.ilconf=pp=>{const x=ilFx(pp)||ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null}}catch(e){}},0);
 /* ================= jagent: NPC AGENT LOOP — every NPC plays the game like a player (AG1 + AG1b) =================
    Owner OD:L1386 (16/11 17:50Z): every NPC is an agent playing the game like a player: same actions, same rules, same odds, choices driven
    by its own needs, personality and road; no special bars, gates or flat random rolls for NPC outcomes. Design: dev/handover/reports/npc-agent.md
@@ -88075,7 +88124,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
  if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
-  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
+  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
   kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",ev:false,timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
     KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
@@ -94786,7 +94835,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="be4583b0d9f8";window.CTM_BUILD=BUILD;
+const BUILD="da94ec5cc850";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
