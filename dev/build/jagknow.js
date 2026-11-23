@@ -579,3 +579,5 @@ function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K
  const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knwGossip()}catch(e){agErr("knwGossip",e)}return r};
 })();
 Object.assign(window,{knwSee,knwGossip,knwOf});
+/* night-ledger-coop r4: the seller's card is carried as data (j3 rcpReg: seller + news, people as ids) */
+knSellCard=rcpReg("knSell",knSellCard);
