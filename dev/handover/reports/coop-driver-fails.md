@@ -41,6 +41,49 @@ Next, in order:
 2. b2b5: decide B2.1/B2.3 under jnf — remaining reds are night outcomes, not relay faults (an NPC Tranh sủng; a night with no card). Option: force the NPC choices off (Thôi) the way coop-steal does (`window.__eaOff`, stealWant) so the forced card is the night; then 3× clean.
 3. guest-men step 6 (2/8 LIVE): read the new probe (`serT`, `post`) on the next red; candidate law-1/6 game bug in jcoopask.js collect "th" (lines 84–90): her ease built no request although askSnap.th ≠ her thIll. jcoopask.js is NOT on B's/E's branches. Loop: `bash lane.sh G guest-men guest-men guest-men guest-men`.
 4. 3× clean each: b1, p2, r2, rev2, b2b5, pets, guest-maid, thin-d (expect only selfTest red = item 9).
-5. Gates: coop-e2e ×2 (`node dev/test/coop-e2e.js <out> https://ctm-coop.victoria-tntt.workers.dev`), coop-guest-maid, coop-pets, coop-guest-men, coop-famops-unit, coop-setup-scan, one-core-guard, role-parity (`node dev/test/role-parity.test.js`), `bash dev/tools/quickcheck.sh`. No UI code changed → no Fold/iPad shots.
+5. Gates: coop-e2e ×2 (`node dev/test/coop-e2e.js <out> https://ctm-coop.victoria-tntt.workers.dev`), coop-guest-maid, coop-pets, coop-guest-men, coop-famops-unit, coop-setup-scan, one-core-guard, role-parity (`node dev/test/role-parity.test.js`), `bash dev/tools/quickcheck.sh`. Final merge (9f9d318c): coop-e2e 141/141, quickcheck PASS (old save ok; perf new/live render 325/274, tab 713/640, buổi 1530/1650 ms), coop-setup-scan risk 0, one-core-guard PASS. Also coop-errand 16/16 (a repress smoke). No UI code changed → no Fold/iPad shots.
 6. Report FOR D/B: items 9, 10, coop-cyc night port; FOR MAIN (law 4, one line, not fixed): j51.js:75 heir text types «Danh +10» while j3 prints balSg(BAL.kid.heirDanh).
 7. SSK line + send_message Foreman D.
+
+## Worker #2 (session_01964izEZxwCL3dekrzAxh79, successor) — 23/11
+PRIORITY #1 CHECK: brief + #1's report re-read; overlap guard re-run on LIVE 340ede94: none of B's (review/coop-thin-g-f1) or E's (coop-famops-t1) files edited — only dev/test/coop-b1.js, coop-b2b5.js, coop-guest-men.js, coop-r2.js (none on B's/E's diff). Still TEST-ONLY (no game file, no index.html/sw.js change; assemble reproduces LIVE index.html byte for byte).
+Merged LIVE 340ede94 (contains 31956a09), later LIVE 9f9d318c, into review/coop-driver-fails (both clean, no conflict; LIVE 9f9d318c changes kit/UI game files only, none of this branch's files).
+
+### New roots (each with proof on LIVE 340ede94)
+11. b2b5 B2.1/B2.3 (the open flake) = TEST FAULT. Under jnf the Emperor's card is the jagemp pick (empSummon → empPick over nightCh), NOT flip(); b2b5's forceFlip wraps flip() (the parked path) and reached the jnf night only by luck — proof B runs 1–3: a single __fdl entry [wk 1, friend pulled out], the night record = his own pick ("host"/NPC 2/NPC 9, cause tablet/stolen). Fix: forceNight = coop-steal's force (nightCh 100 for the target, empPick = the target, no mùng 1/rằm custom, no jvisit visit) for B2.1–B2.3 under jnf + hold() of the three live-game draws that take a forced card away (jemoact eaQ no-flip, empSummon rest, NPC Tranh sủng stealWant), restored before B5; forceFlip kept for a parked room; a second forced week if the force lands late. After: 29/29 ×3, the card turned at the first week each time.
+12. guest-men step 2 «he is dead there too (relay)» (Group C) = TEST FAULT. The step called mortKill(m) with no render(); the request rides the rolling save that render starts (jcoopworld.js:1142 render → snapSoon → snapSave → CW.snap → ser → jcoopask collect). Proof H1: guest coopAsk [] at the 20 s timeout, and ONE ser() right after built man:m0:alive=false@2 at once → collect is right, no save ran. Fix: render() after her act, as every real act does.
+13. guest-men 6d (2 shapes) = TEST FAULT. (a) G4: the host's own month roll (j13.js:30, host-only, roll(30) → illness ends) ended the set-up illness before her week end (guest thw w8 b3 st3 → null with askSnap.th null = a host rebuild) → set-up re-armed ≤ 3×. (b) H3: thLog read window.__askN.log, which keeps only the last 10 applies (jcoopask.js:153) → servant requests pushed the th lines out (L = []); thLog now also reads the host's durable S.askDone.
+14. b1 step 8 (the old «step-8 flake») = TEST FAULT (real rule). laydo answered «Người cùng cung, ngươi không thể ra tay hay lấy lòng» (j9.js:108 sameHouse): host rank 5 (palace head, PAL_HEAD 3), guest rank 1 → the month's assignHouses (j9.js:53, roll 70) can house her under the host mid-test. Fix: b1's act helper un-houses the pair first (counted window.__shFix, logged).
+15. r2 step 1 «a lost relay is asked again and restored» — 1 red in 5 on this base (C3), 0 in the next 4. Host asked once (famAsk h = B's sentH) and nothing came back in 15 s. jcoopworld famAsk asks once per pos hash (4 s throttle) and only when a new pos arrives; a lost ask or reply is not retried until her pos changes again. Possible robustness gap (law 6c: her bag on her entry), but jcoopworld.js is on B's locked branch and the red is not proven → probe added (ctm-fam in/out + pos on both seats, dump on FAIL) → FOR D (see below).
+16. famops-unit default URL is http://127.0.0.1:8744 (no server in a worker container) → run with `node dev/test/coop-famops-unit.js http://ctm.local/` (coop-serve BASE). Not edited (E's file).
+17. role-parity timed out once at 900 s with browser lanes in parallel; alone: ALL PASS. Not a fault.
+
+18. guest-men room stall (G2-2, G3-1: from 6a every merged week timed out) = TEST FAULT, whole family. Proof G3-1 dump: host sent week 5 (ended a), guest at buổi 5:3 with #next «Sẵn sàng» enabled, Q empty, no bend/pend; her one press at tối had opened the world news «VIỆC — Thái hậu bệnh nặng» (jworld2 thb, raised by the test's illness set-up), clear() closed it, and buoiBoth never pressed again. A player presses again → ONE shared step lib/coop-real.js repress(o) (a seat still on the old buổi, #next enabled, no dialog, no buổi/week end out → one more tap, window.__rePress) called from buoiBoth in all 19 free copies (coop-ask-srvprobe, ban-cung, cold-faction, dresscode-scan, dresscode, e2e-tr, errand, guest-maid, guest-men, hauthay, looks-act, looks, lost-scan, pets, pool-face, room-faces, toil-look, ton-row, or20-j68q-coop). coop-e2e.js has the same copy but is on B's branch → FOR D.
+
+### Per-driver table (LIVE 340ede94 + this branch; deployed Worker; thin at level 9)
+| driver | before (this base) | root | TEST/GAME | fix | after |
+|---|---|---|---|---|---|
+| coop-b2b5 | 28/29, 28/29, 30/31 (B2.1) | 11 | TEST | forceNight + hold | 29/29 ×3 |
+| coop-guest-men | 53, 54, 54 ok + 52/54 (6d), 52/53 (step 2), 53/54 (6d), 2 room stalls (G2-2, G3-1) | 12, 13, 18 | TEST | render after act; 6d re-arm; thLog askDone; repress | 54/54, 55/55, 53/53 (G4 ×3 after all fixes) |
+| coop-b1 | 44/44, 42/44 (step 8) | 14 | TEST | un-house in act helper | 44/44 ×3 |
+| coop-r2 | 36/45 (step 1 + its follow-ons), 46/46 ×4 | 15 (open, probe) | ? | probe | 46/46 ×4 since |
+| coop-p2 | 46/46 ×2 | — | — | — | 46/46 ×3 |
+| coop-rev2 | 39/39 ×2 | — | — | — | 39/39 ×3 |
+| coop-pets | 58/58 | — | — | — | 58/58 (+3 on #1's base) |
+| coop-guest-maid | 40/40 | — | — | — | 40/40 (+3 on #1's base) |
+| coop-thin-d | 52/53 ×3 | 9 (only selfTest nmReg) | GAME (B's file) | none | 52/53 ×3 |
+
+### Gates (this branch; full set on LIVE 340ede94 + branch, sanity re-run on the final merge with LIVE 9f9d318c)
+coop-e2e 141/141 ×2 · coop-guest-maid 40/40 · coop-pets 58/58 · coop-guest-men see table · coop-famops-unit PASS 37/37 · coop-setup-scan 33 drivers risk 0 · one-core-guard PASS · role-parity ALL PASS · quickcheck PASS (old save ok; perf new/live render 268/386, tab 683/642, buổi 1746/4691 ms). Final merge (9f9d318c): coop-e2e 141/141, quickcheck PASS (old save ok; perf new/live render 325/274, tab 713/640, buổi 1530/1650 ms), coop-setup-scan risk 0, one-core-guard PASS. Also coop-errand 16/16 (a repress smoke). No UI code changed → no Fold/iPad shots.
+
+### FOR D (B's locked files; not touched)
+- item 9: TH.withSeat(her seat) leaves her maid's name in the host's S.nmReg / g.KMS.nmReg (thin-d selfTest, 3/3 runs: Lạc Mai / Hạnh Nhi / Xảo Nhi → "maid"). Root in jcoopthin.js withSeat (review/coop-thin-g-f1).
+- item 10: thin-f1 (doAct result card + rkOfFace raw {$r}) — file + root on review/coop-thin-g-f1.
+- coop-e2e.js buoiBoth: same one-press gap as root 18 (coop-e2e passed 141/141 ×2 here) → add `if(t%8===7)for(const [o,k] of [[A,a],[B,b]])if(k===k0)await require('./lib/coop-real.js').repress(o);` in its buoiBoth loop.
+- coop-cyc.js night family (item 1) — file on B's branch: needs the same nightRec/forceNight port (b2b5 forceNight is the pattern).
+- item 15: jcoopworld famAsk retries a lost ask/reply only on her next pos change; if the r2 probe ever shows the ask or reply lost, the fix is in jcoopworld (B/E's file): re-ask on a timer while famGotH ≠ fpos.fh.
+### FOR MAIN (law 4, one line, not fixed): j51.js:75 heir text types «Danh +10» while j3 prints balSg(BAL.kid.heirDanh).
+
+Files changed by this branch (all dev/test, none on B's/E's diffs): coop-b1, coop-b2b5, coop-guest-men, coop-r2, lib/coop-real.js (+repress) and the buoiBoth repress line in 16 more bots (list in root 18). Logs: /home/user/wt/cdf-logs (container-local).
+
+SẴN SÀNG KIỂM review/coop-driver-fails 65324cb820aeed95b9dc551bbab759f9b35937e6
