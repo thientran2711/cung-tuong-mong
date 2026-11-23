@@ -186,18 +186,22 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
 /* r4b (E30c, law 6c — the reviewer's P1): a lost case found here (lostHere: st "lost", the piece only in the case) goes home through jlost's ONE
    return with the case's mark (lo). Before, the case's bare object (no lo) was passed: lostReturn took its «case gone» branch, wrote a «dead» copy to
    the ledger box (owner unknown → her), the owner never got it and the case stayed open — the next Kỳ ngộ wrote another (coop-dresscode-scan: 2–3 copies). */
-function kyLc(L){/* the dialog was built earlier: a case closed (or held by someone) meanwhile moves nothing */const c=L&&typeof loGet==="function"?loGet(L.id):L;return c&&c.st==="lost"&&c.e?Object.assign({},c.e,{lo:c.id}):null}
+/* ky-keeper-f2 (law 6c + 11): the LIVE case behind a dialog-time case L (a card answered later, a save / co-op world rebuilt since): the same id and
+   the same kind, else none (another seat's numbering or a pruned case is never that case) */
+function kyLive(L){if(!L||typeof loGet!=="function")return L||null;const c=loGet(L.id);return c&&(c===L||c.k===L.k)?c:null}
+function kyLc(L){/* the dialog was built earlier: a case closed (or held by someone) meanwhile moves nothing */const c=kyLive(L);return c&&c.st==="lost"&&c.e?Object.assign({},c.e,{lo:c.id}):null}
 /* ---------- specials: every piece only moves (jil / jlost), every fact is a real one ---------- */
 const SPEC=KY.SPEC={
  ret:(c,O)=>SPEC.item(c,O),
  give:(c,O)=>SPEC.item(c,O),
  item:(c,O)=>{const F=c.F;
   if(c.X.lc){const L=c.X.lc,o=loP(L.own);if(c.oi===0){const x=kyLc(L);if(!x)return"";lostReturn(x,"kyngo");return `${loNm(L.k)} về lại tay ${nm(o)}`}
-   const x=Object.assign({},L.e,{lo:L.id,gh:L.own,by:key(F)});delete x.from;delete x.giver;F.inv=F.inv||[];F.inv.push(x);L.keep=1;L.by=key(F);L.st="held";L.at=key(F);
-   try{ilLog(L.e,"lo"+L.id,key(F),"kyngo: giữ lại")}catch(e){}return `${loNm(L.k)} nằm trong rương ${nm(F)}`}
-  if(c.X.box){const x=c.X.box;if(c.oi===1){ilTake(x,F,"kyngo");const i=F.inv.indexOf(x.e);if(i>=0)F.inv.splice(i,1);ilGone(F,x.e,"th");return `${itm(x.e.k).n} dâng lên Đức Thọ cung`}
+   /* «Giữ lại» (ky-keeper-f2): jlost's ONE keep road (loKeepBy: only while the LIVE case still holds its piece). Before: a keeper copy built from the
+      dialog-time L with no state check (a case closed / held meanwhile → a 2nd copy, the real case object left behind) */
+   const lc=kyLive(L);return lc&&typeof loKeepBy==="function"&&loKeepBy(lc,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:""}
+  if(c.X.box){const x=c.X.box;/* ky-keeper-f2: the piece left the box meanwhile (bought / ransomed / taken by a later card): nothing moves, nothing is paid */if(!ilS().box.includes(x))return"";if(c.oi===1){ilTake(x,F,"kyngo");const i=F.inv.indexOf(x.e);if(i>=0)F.inv.splice(i,1);ilGone(F,x.e,"th");return `${itm(x.e.k).n} dâng lên Đức Thọ cung`}
    const pr=buyPr(c);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}ilTake(x,F,"kyngo: chuộc di vật");return `${itm(x.e.k).n} vào rương`}
-  if(c.X.rr){const r=c.X.rr,pr=buyPr(c);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}r.sold=1;const e={k:r.k,from:"nvp",own:key(F),d:S.turn};F.inv=F.inv||[];F.inv.push(e);
+  if(c.X.rr){const r=c.X.rr,pr=buyPr(c);/* ky-keeper-f2: sold meanwhile (another card / the shop): no second piece made from nothing */if(r.sold)return"";if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}r.sold=1;const e={k:r.k,from:"nvp",own:key(F),d:S.turn};F.inv=F.inv||[];F.inv.push(e);
    try{ilUid(e);ilLog(e,"nvp",key(F),"kyngo: Nội vụ phủ")}catch(x){}
    if(c.oi===1){F.inv.splice(F.inv.indexOf(e),1);ilGone(F,e,"th");return `${itm(r.k).n} dâng lên Đức Thọ cung`}return `${itm(r.k).n} vào rương`}
   return""},
@@ -248,7 +252,7 @@ KY.TITLE=TITLE;
 /* E42 (law 6c, jlost one owner change): «Giữ lại» keeps the piece through jlost's ONE keep road (loKeepBy): only while the case still holds it
    (st "lost"); a card answered after the piece moved on (found / returned / held) moves nothing. Before: an own copy pushed with no check (2–7 copies
    with the «dead» box copies; lost-one-home-scan / coop-lost-scan). «Mang trả» / «Của mình tìm lại» go through lostReturn (jlost finds the case). */
-{const it0=SPEC.item;SPEC.item=function(c,O){if(c&&c.X&&c.X.lc&&c.oi!==0&&typeof loKeepBy==="function"){const L=c.X.lc,F=c.F;return loKeepBy(L,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:""}return it0.apply(this,arguments)}}
+/* (ky-keeper-f2: the keep now lives in SPEC.item itself, on the LIVE case — kyLive; the old wrapper here passed the dialog-time object) */
 function bookHTML(){const b=book();const ids=Object.keys(b).filter(id=>DEF[id]);const y=Object.keys(DEF).length;
  const rows=[["Kỳ ngộ đã gặp",`<b>${ids.length}/${y}</b> kỳ ngộ đã gặp`,ids.length?"g":""]].concat(ids.map(id=>[`✧ ${TITLE[id]}`,`${b[id].n>1?`${b[id].n} lần · `:""}${b[id].first?`lần đầu: ${b[id].first.who||""}${b[id].first.o?", "+b[id].first.o:""}`:""}`]));
  rows.push(["Ghi chú","Sổ chỉ để nhớ: kỳ ngộ không mang lợi thế nào sang kiếp sau."]);
