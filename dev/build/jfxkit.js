@@ -22,7 +22,7 @@ const KFK_SP={
  "petal-plum":{n:9,s:64,d:22},"petal-peach":{n:9,s:64,d:22},"petal-lotus":{n:9,s:80,d:30},osmanthus:{n:9,s:48,d:13},
  leaf:{n:9,s:80,d:26},snow:{n:5,s:48,d:15},ash:{n:9,s:56,d:16},paper:{n:9,s:72,d:20},coin:{n:9,s:64,d:22},ink:{n:9,s:128,d:44},
  lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
- streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
+ streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},fogbank:{n:2,s:512,d:150,t:1},
  glowburst:{n:1,s:256,d:220}, /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
  brush:{n:9,s:160,d:70},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
  "gift-hands":{n:3,s:288,d:200}, /* review/gift-pick: a maid's hands (celadon sleeves) carrying 0 the lacquer box with its ribbon · 1 the box, ribbon untied · 2 the silk bundle */
