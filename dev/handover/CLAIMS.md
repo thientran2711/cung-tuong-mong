@@ -1208,3 +1208,4 @@ REVIEW odds-ladder-words (sonnet SMALL; briefs/D-odds-ladder-review.md) of c31a0
 | REVIEW ky-keeper-f2 BIG (opus reviewer-lander; merge LIVE → review/ky-keeper-f2-r) of 7d7a77d7 | review/ky-keeper-f2-r; reports/ky-keeper-f2.md «## REVIEW» | MAIN 111 | session_01Rc5AsL1nEGqb52Rx9C8tgz | RUNNING | 23/11 21:07Z |
 REVIEW fix-evening-softlock (opus BIG time/buổi; briefs/D-softlock-review.md) of 8350d536 | review/fix-evening-softlock-rv | session_01964izF9amWbvj8fxTZA1rG | RUNNING | 23/11 21:23Z (Foreman D child)
 | REVIEW kit-odds-row BIG (opus reviewer-lander; final ladder words) of e74dff9d | review/kit-odds-row-r; reports/kit-odds-row.md «## REVIEW» | MAIN 111 | session_01Rc5AsN8oTu6WZUSrRF6UsK | RUNNING | 23/11 21:31Z |
+| map-label-overlap: Dư đồ labels overlap at iPad 1180 (D robot find 21:17Z; sonnet SMALL UI, whole group) | review/map-label-overlap; reports/map-label-overlap.md | MAIN 111 | session_01Rc5AsNFbkYChxCZCRzCKSb | RUNNING | 23/11 21:34Z |
