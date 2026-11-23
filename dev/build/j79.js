@@ -635,11 +635,13 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+window.kitBoardBg=kitBoardBg;
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
- `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
+ `<div class="kgbox${bgb?" kgbox-bg":""}" id="${g.id||"kgbox"}"${bgb?` data-mgbg="${g.kind}" style="--kgbg:url('${bgb}')"`:""}></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
 /* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
    outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
    corner (never a second big picture), a play animation while the game runs (.kg-idle off). html.kv1 (Fold portrait / one page): NO column, the game alone at full width.
@@ -707,7 +709,9 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgame .kghow .krl{font-size:.64rem;font-weight:700;color:var(--k-lab);text-transform:uppercase}
 .kghud[hidden]{display:none!important}.kgmk{margin-left:auto;flex:0 0 auto}.kgmk[hidden]{display:none}.kgmk .kchips{flex-wrap:nowrap}.kgmk .kchip{white-space:nowrap}.kgmk-pop .kchip{animation:kgmkPop .38s ease-out}@keyframes kgmkPop{0%{transform:scale(1)}35%{transform:scale(1.22)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.kgmk-pop .kchip{animation:none}}.kgclk{margin-left:auto;flex:0 0 auto}.kgmk:not([hidden])~.kgclk{margin-left:6px}.kgclk[hidden]{display:none}.kgclk .kchips{flex-wrap:nowrap}.kgclk .kchip{white-space:nowrap}.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
-.kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
+.kgbox{margin:8px 14px;min-height:120px}
+/* KIT BOARD BACKDROP SLOT (KIT-MGBG): a DOM mini-game board whose kind is in KG82_BOARDBG (j82) gets the painted mg-<kind>-bg picture cover-fitted behind the play area under a soft cream veil (same look as the canvas boards' kg82Bg), set by kitGameFrame({kind}) alone */
+.kgbox.kgbox-bg{position:relative;border-radius:var(--k-rad);background:linear-gradient(rgba(255,250,240,.32),rgba(255,250,240,.32)),var(--kgbg) center/cover no-repeat,var(--k-card)}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
