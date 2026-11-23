@@ -1200,7 +1200,7 @@ REVIEW j51-heir-danh (sonnet SMALL text-only law 4; briefs/D-j51-heir-danh-revie
 | hdr-kiep: top-left name/age line shows «Kiếp thứ …» (owner 20:50Z; sonnet SMALL UI) | review/hdr-kiep; reports/hdr-kiep.md | MAIN 111 | (opening) | RUNNING | 23/11 20:47Z |
 fix-evening-softlock + fix-hadoc-loop (opus; MAIN 110 20:33Z; briefs/D-softlock-hadoc.md) | review/fix-evening-softlock, review/fix-hadoc-loop | session_01964izCj26a6VP5u2Sr3qT5 | RUNNING | 23/11 20:55Z (Foreman D child)
 odds-ladder-words (sonnet; MAIN 110 20:33Z; briefs/D-odds-ladder.md) | review/odds-ladder-words | session_01964izG87jYFUEWkiatPXTX | LAND READY via -rv f1ee0636 (archived) | 23/11 20:55Z (Foreman D child)
-fix-kframe-heir (opus; MAIN 110 20:33Z; briefs/D-kframe-heir.md) | review/fix-kframe-heir | session_01964izF3TRAfuFcfdQV1Lie | RUNNING | 23/11 20:55Z (Foreman D child)
+fix-kframe-heir (opus; MAIN 110 20:33Z; briefs/D-kframe-heir.md) | review/fix-kframe-heir | session_01964izF3TRAfuFcfdQV1Lie | SSK 2c241f86 (on call) | 23/11 20:55Z (Foreman D child)
 typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | review/typed-stat-bal | session_01964izBsY2xJwtJ9Zr9pzuF | RUNNING | 23/11 20:55Z (Foreman D child)
 | REVIEW hdr-kiep (sonnet SMALL) of 5d0039de | review/hdr-kiep; reports/hdr-kiep.md «## REVIEW» | MAIN 111 | session_01Rc5AsK7hQdkb2rweb6hVxD | RUNNING | 23/11 20:53Z |
 REVIEW odds-ladder-words (sonnet SMALL; briefs/D-odds-ladder-review.md) of c31a047b | review/odds-ladder-words-rv | session_01964izCkYP9G2bKW92gPvfX | LAND READY f1ee0636 (archived) | 23/11 21:03Z (Foreman D child)
@@ -1209,3 +1209,4 @@ REVIEW odds-ladder-words (sonnet SMALL; briefs/D-odds-ladder-review.md) of c31a0
 REVIEW fix-evening-softlock (opus BIG time/buổi; briefs/D-softlock-review.md) of 8350d536 | review/fix-evening-softlock-rv | session_01964izF9amWbvj8fxTZA1rG | RUNNING | 23/11 21:23Z (Foreman D child)
 | REVIEW kit-odds-row BIG (opus reviewer-lander; final ladder words) of e74dff9d | review/kit-odds-row-r; reports/kit-odds-row.md «## REVIEW» | MAIN 111 | session_01Rc5AsN8oTu6WZUSrRF6UsK | RUNNING | 23/11 21:31Z |
 | map-label-overlap: Dư đồ labels overlap at iPad 1180 (D robot find 21:17Z; sonnet SMALL UI, whole group) | review/map-label-overlap; reports/map-label-overlap.md | MAIN 111 | session_01Rc5AsNFbkYChxCZCRzCKSb | RUNNING | 23/11 21:34Z |
+REVIEW fix-kframe-heir (opus BIG rules; briefs/D-kframe-heir-review.md) of 2c241f86 | review/fix-kframe-heir-rv | session_01964izDHvGUVX8XEnLNTTBK | RUNNING | 23/11 21:38Z (Foreman D child)
