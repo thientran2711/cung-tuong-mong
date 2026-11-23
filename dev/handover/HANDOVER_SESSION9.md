@@ -2578,3 +2578,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:33Z 23/11) WAKE LOAD: main running 1 (KIT KEEPER #10 mockups) | B 2 on OD04 (fixer #11 ROOT-FIXED Danh drift 8dbc92dd; helper 3XsdqVYQ = successor on trip1 stall → SSK) | C owner-direct + ORDER rank-room wiring (owner L2406) | D rv DN3onEWH coop-driver-fails | E E44k gates ALL PASS on -t2 5020f618 → SSK → E53r reviewer | moved: rank-room table → C (whole job).
 - (18:42Z 23/11) M14 DONE: MAIN sent review/ui-tour-states 98fc6a8b PDF (184 pp) to owner. Owner angry at split jobs → OD row; B M14 order withdrawn; IT02 → C whole. GAP: «còn 4 việc».
 - (19:09Z 23/11) MOCK-STAGE v1 (via MAIN 109 relay) checked: no videos + M1/M2 not merged → back to KIT KEEPER #10 to fix; not sent to owner yet.
+- (19:10Z 23/11) KIT KEEPER #10 rolled (context) → archived; opened KIT KEEPER #11 session_01Rc5AsMtL55o1wM5pU2K9t2 (opus) from reports/MOCK-STAGE.md HANDOVER: merged event layout + videos.
