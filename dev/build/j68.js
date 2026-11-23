@@ -3,17 +3,18 @@
    Engine + shared helpers here; content in j68e. Wraps only; edits no other module. (Chains = j70, merit/festivals = j71, quests = j72.)
    Template = family x actor (real NPC picked by traits/relations) x context weight x text variants; outcomes truthful.
    Cadence: at most one j68 modal per tuần, only when the queue is short; some of the stock 'Có người đến' visits are swapped for a j68 event (no extra modals).
-   Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
+   Anti-repetition: per-life cooldown per template and per variant; cross-life history in the shared no-repeat memory jnorep (localStorage 'ctm-nr', BAL.nr.lives lives; was 'ctm-e68h') lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
 const E68CFG={cd:54}; /* npc-purpose: the weekly p / visit-swap rolls are gone: BAL.ag.why.e68.gap; a j68 visit only when no stock visitor has a reason */
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
- if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
-function e68H(){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");return H.L||[]}catch(x){return[]}}
-function e68Mark(key){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=H.L||[[]];if(H.cur!==S.e68.lid){H.L=[[]].concat(H.L).slice(0,6);H.cur=S.e68.lid}if(!H.L[0].includes(key))H.L[0].push(key);if(H.L[0].length>400)H.L[0]=H.L[0].slice(-400);localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}
+ if(!e.lid)e.lid=nrLife();return e}
+/* cross-life history = the shared no-repeat memory (jnorep.js, ORDER THIN P0); j68 keys are family "j68" (old ctm-e68h data migrated there) */
+function e68H(){const C=nrStore();return C.H.L}
+function e68Mark(key){if(S)e68();nrMark("j68",key)}
 /* how many of the previous lives (not this one) saw this key */
-function e68Past(key,pre){const L=e68H().slice(1,6);let n=0;for(const l of L)if(l.some(k=>pre?k.indexOf(key+":")===0||k===key:k===key))n++;return n}
+function e68Past(key,pre){return nrSeen("j68",key,pre)}
 function e68Busy(){const e=S&&S.e68;return !!(e&&e.bigM===S.turn)}
 function e68Story(){try{return typeof storyBusy==="function"&&!!storyBusy()}catch(x){return false}}
 function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
@@ -106,7 +107,7 @@ window.e68Count=function(){let v=0;for(const s of E68)if(s.fam!=="plot")v+=(s.v|
    evActor(kind,id) -> the same object from saved params (null if gone).  evRelTok(actor,n) / evRelDo(actor,n): coloured relation token + the real change.
    evChoice(name,spec) -> a dilemma option with gain AND cost/risk line (see c6 above: c,p,w,l,r,lr,wt,lt,k,ok,no,wl,ll).
    evCooldown(key,weeks) -> true and marks key used now if it was not used in the last `weeks` tuần (per life); evCooldownLeft(key,weeks) -> tuần left (0 = ready), no mark.
-   evHistSeen(key) -> how many of the previous 5 lives saw key (localStorage 'ctm-e68h'); evHistMark(key) marks it for this life.
+   evHistSeen(key) -> how many of the previous 5 lives saw key (jnorep, localStorage 'ctm-nr'); evHistMark(key) marks it for this life.
    evBusy() -> true if a big beat already fired this tuần (by j68 or anyone calling evBusyMark()), or storyBusy() says so; evBusyMark() claims the tuần.
    evBusyMonth() -> true if a big beat fired this month (e68Busy, for once-a-month beats). */
 function evPickActor(sp){sp=sp||{};const k=sp.kind||"rv";let id=null;
@@ -117,8 +118,8 @@ function evActor(kind,id){const a=A6(kind,id);return a?Object.assign(a,{id}):nul
 const evRelTok=relTok,evRelDo=relDo,evChoice=c6;
 function evCooldownLeft(key,weeks){const e=e68();if(!e)return 0;e.kc=e.kc||{};const t=e.kc[key];return t==null?0:Math.max(0,weeks-(wk()-t))}
 function evCooldown(key,weeks){const e=e68();if(!e)return false;if(evCooldownLeft(key,weeks)>0)return false;e.kc[key]=wk();return true}
-function evHistSeen(key){return e68Past(key)}
-function evHistMark(key){if(S)e68();e68Mark(key)}
+function evHistSeen(key){return nrSeenK(key)}
+function evHistMark(key){if(S)e68();nrMarkK(key)}
 function evBusyMark(){const e=e68();if(e)e.busyWk=wk()}
 function evBusy(){const e=S&&S.e68;return !!(e&&e.busyWk===wk())||e68Story()}
 function evBusyMonth(){return e68Busy()}

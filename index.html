@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh","b":"ec624c56f12f","h":[{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"}]};
+window.CTM_BI={"s":"c39e5009+","t":"2026-11-23T23:06Z","c":"SELF-MERGE LAND kit-odds-row: merge LIVE 3e8981e1 (index.html/sw.js rebuilt)","b":"5fb4c28b5de4","h":[{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25233,22 +25233,66 @@ function eg12(){try{if(typeof isSrv67==="function"&&isSrv67())return"ms:len14";f
 (function(){const a0=chAdvance67;chAdvance67=function(E){try{if(egOn()){const c=S.st.ch,P=c.plan;let j=c.i+1;while(j<P.length&&(P[j]==="fin"||P[j]==="s"))j++;
   if(P[j]==="end:12")P[j]=eg12()}}catch(e){console.error(e)}return a0.apply(this,arguments)}})();
 window.eg12=eg12;
+/* ================= jnorep: ONE shared cross-life NO-REPEAT memory (ORDER THIN P0, owner OD 23/11 ~22:50Z; EVCAT §3) =================
+   Generalises j68's 'ctm-e68h'. One store in localStorage 'ctm-nr' = {v:1, cur:<life id>, L:[[keys of this life], [previous life], ...]}.
+   A key is "family:seed" (j68:<tpl>:<variant>, j7:<seed>, mg:<kind>:<item>, mgskin:<kind>:<skin>, j70:/j71:/j72: as before).
+   BAL.nr: lives = how many lives are kept (this one + lives-1 past ones), w = weight factor per past life that saw a key, cap = keys kept per life.
+   Life id = S.nrl (personal: not a co-op world key, never synced; each seat's phone keeps its own store). Old saves: S.e68.lid is adopted,
+   and the old 'ctm-e68h' history is copied once into 'ctm-nr' (j68 keys get the "j68:" family; j70/j71/j72 and scheduler p:/t: keys kept).
+   API (names published in dev/handover/reports/thin.md «## API»):
+   nrSeen(fam,seed,pre) -> how many PAST lives saw fam:seed (pre=true: also any fam:seed:* key)      nrNow(fam,seed) -> seen this life?
+   nrW(fam,seed,pre) -> BAL.nr.w ** nrSeen                                                         nrMark(fam,seed) -> mark for this life
+   nrPick(fam,list,idf,wf) -> weighted pick (wf(x) × nrW), no mark                                 nrDraw(...) -> nrPick + nrMark
+   nrFresh(fam,list,idf) -> the items no past life saw (or the whole list when none is fresh)       nrLife() -> this life's id
+   Raw-key forms for callers that build their own key: nrSeenK(key,pre), nrMarkK(key). */
+const NR_KEY="ctm-nr",NR_OLD="ctm-e68h";
+let NR_C=null;   /* in-memory copy of the store (+ Sets per life); dropped when another tab writes */
+try{window.addEventListener("storage",ev=>{if(!ev||ev.key===NR_KEY||ev.key==null)NR_C=null})}catch(e){}
+function nrCfg(){const b=(typeof BAL==="object"&&BAL&&BAL.nr)||{};return{lives:b.lives||6,w:b.w==null?.5:b.w,cap:b.cap||1500}}
+/* one-time copy of the j68 history: same lives, same order, same current life */
+function nrMigrate(){let O={};try{O=JSON.parse(localStorage.getItem(NR_OLD)||"{}")||{}}catch(e){O={}}
+ const fam=k=>{const t=String(k).split(":")[0];return /^(j\d+|p|t)$/.test(t)?k:"j68:"+k};
+ return{v:1,cur:O.cur||null,L:(Array.isArray(O.L)?O.L:[]).map(l=>Array.isArray(l)?l.map(fam):[])}}
+function nrStore(){if(NR_C)return NR_C;let H=null;try{H=JSON.parse(localStorage.getItem(NR_KEY)||"null")}catch(e){H=null}
+ if(!H||!Array.isArray(H.L)){H=nrMigrate();try{localStorage.setItem(NR_KEY,JSON.stringify(H))}catch(e){}}
+ NR_C={H,sets:H.L.map(l=>new Set(l))};return NR_C}
+function nrSave(){const C=NR_C;if(!C)return;try{localStorage.setItem(NR_KEY,JSON.stringify(C.H))}catch(e){}}
+/* start a new life in the store (the old j68 rule: a new empty list in front, keep `lives` lists) */
+function nrRotate(id){const C=nrStore(),n=nrCfg().lives;C.H.L=[[]].concat(C.H.L).slice(0,n);C.sets=[new Set()].concat(C.sets).slice(0,n);C.H.cur=id;nrSave()}
+function nrLife(){if(typeof S==="undefined"||!S)return null;
+ if(!S.nrl){S.nrl=(S.e68&&S.e68.lid)||(Date.now().toString(36)+Math.floor(Math.random()*1000))}
+ const C=nrStore();if(C.H.cur!==S.nrl)nrRotate(S.nrl);return S.nrl}
+function nrK(fam,seed){return seed==null||seed===""?String(fam):fam+":"+seed}
+function nrMarkK(key){if(!nrLife())return;const C=nrStore();key=String(key);if(!C.H.L.length){C.H.L=[[]];C.sets=[new Set()]}
+ if(C.sets[0].has(key))return;C.H.L[0].push(key);C.sets[0].add(key);const cap=nrCfg().cap;
+ if(C.H.L[0].length>cap){C.H.L[0]=C.H.L[0].slice(-cap);C.sets[0]=new Set(C.H.L[0])}nrSave()}
+function nrSeenK(key,pre){const C=nrStore(),n=nrCfg().lives;key=String(key);let c=0;const P=key+":";
+ for(let i=1;i<Math.min(n,C.H.L.length);i++){if(C.sets[i].has(key)){c++;continue}if(pre&&C.H.L[i].some(k=>k.indexOf(P)===0))c++}return c}
+function nrSeen(fam,seed,pre){return nrSeenK(nrK(fam,seed),pre)}
+function nrNow(fam,seed){if(!nrLife())return false;const C=nrStore();return !!(C.sets[0]&&C.sets[0].has(nrK(fam,seed)))}
+function nrW(fam,seed,pre){return Math.pow(nrCfg().w,nrSeen(fam,seed,pre))}
+function nrMark(fam,seed){nrMarkK(nrK(fam,seed))}
+function nrPick(fam,list,idf,wf){list=list||[];if(!list.length)return null;idf=idf||(x=>x);let T=0;const W=list.map(x=>{const w=Math.max(0,(wf?wf(x):1))*nrW(fam,idf(x));T+=w;return w});
+ if(!(T>0))return list[Math.floor(Math.random()*list.length)];let r=Math.random()*T;for(let i=0;i<list.length;i++){r-=W[i];if(r<0)return list[i]}return list[list.length-1]}
+function nrDraw(fam,list,idf,wf){const x=nrPick(fam,list,idf,wf);if(x!=null)nrMark(fam,(idf||(y=>y))(x));return x}
+function nrFresh(fam,list,idf){idf=idf||(x=>x);const f=(list||[]).filter(x=>!nrSeen(fam,idf(x)));return f.length?f:(list||[])}
 
 /* ================= j68 ĐỜI SỐNG TRONG CUNG: common daily/situational events as composable templates =================
    Engine + shared helpers here; content in j68e. Wraps only; edits no other module. (Chains = j70, merit/festivals = j71, quests = j72.)
    Template = family x actor (real NPC picked by traits/relations) x context weight x text variants; outcomes truthful.
    Cadence: at most one j68 modal per tuần, only when the queue is short; some of the stock 'Có người đến' visits are swapped for a j68 event (no extra modals).
-   Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
+   Anti-repetition: per-life cooldown per template and per variant; cross-life history in the shared no-repeat memory jnorep (localStorage 'ctm-nr', BAL.nr.lives lives; was 'ctm-e68h') lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
 const E68CFG={cd:54}; /* npc-purpose: the weekly p / visit-swap rolls are gone: BAL.ag.why.e68.gap; a j68 visit only when no stock visitor has a reason */
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
- if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
-function e68H(){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");return H.L||[]}catch(x){return[]}}
-function e68Mark(key){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=H.L||[[]];if(H.cur!==S.e68.lid){H.L=[[]].concat(H.L).slice(0,6);H.cur=S.e68.lid}if(!H.L[0].includes(key))H.L[0].push(key);if(H.L[0].length>400)H.L[0]=H.L[0].slice(-400);localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}
+ if(!e.lid)e.lid=nrLife();return e}
+/* cross-life history = the shared no-repeat memory (jnorep.js, ORDER THIN P0); j68 keys are family "j68" (old ctm-e68h data migrated there) */
+function e68H(){const C=nrStore();return C.H.L}
+function e68Mark(key){if(S)e68();nrMark("j68",key)}
 /* how many of the previous lives (not this one) saw this key */
-function e68Past(key,pre){const L=e68H().slice(1,6);let n=0;for(const l of L)if(l.some(k=>pre?k.indexOf(key+":")===0||k===key:k===key))n++;return n}
+function e68Past(key,pre){return nrSeen("j68",key,pre)}
 function e68Busy(){const e=S&&S.e68;return !!(e&&e.bigM===S.turn)}
 function e68Story(){try{return typeof storyBusy==="function"&&!!storyBusy()}catch(x){return false}}
 function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
@@ -25341,7 +25385,7 @@ window.e68Count=function(){let v=0;for(const s of E68)if(s.fam!=="plot")v+=(s.v|
    evActor(kind,id) -> the same object from saved params (null if gone).  evRelTok(actor,n) / evRelDo(actor,n): coloured relation token + the real change.
    evChoice(name,spec) -> a dilemma option with gain AND cost/risk line (see c6 above: c,p,w,l,r,lr,wt,lt,k,ok,no,wl,ll).
    evCooldown(key,weeks) -> true and marks key used now if it was not used in the last `weeks` tuần (per life); evCooldownLeft(key,weeks) -> tuần left (0 = ready), no mark.
-   evHistSeen(key) -> how many of the previous 5 lives saw key (localStorage 'ctm-e68h'); evHistMark(key) marks it for this life.
+   evHistSeen(key) -> how many of the previous 5 lives saw key (jnorep, localStorage 'ctm-nr'); evHistMark(key) marks it for this life.
    evBusy() -> true if a big beat already fired this tuần (by j68 or anyone calling evBusyMark()), or storyBusy() says so; evBusyMark() claims the tuần.
    evBusyMonth() -> true if a big beat fired this month (e68Busy, for once-a-month beats). */
 function evPickActor(sp){sp=sp||{};const k=sp.kind||"rv";let id=null;
@@ -25352,8 +25396,8 @@ function evActor(kind,id){const a=A6(kind,id);return a?Object.assign(a,{id}):nul
 const evRelTok=relTok,evRelDo=relDo,evChoice=c6;
 function evCooldownLeft(key,weeks){const e=e68();if(!e)return 0;e.kc=e.kc||{};const t=e.kc[key];return t==null?0:Math.max(0,weeks-(wk()-t))}
 function evCooldown(key,weeks){const e=e68();if(!e)return false;if(evCooldownLeft(key,weeks)>0)return false;e.kc[key]=wk();return true}
-function evHistSeen(key){return e68Past(key)}
-function evHistMark(key){if(S)e68();e68Mark(key)}
+function evHistSeen(key){return nrSeenK(key)}
+function evHistMark(key){if(S)e68();nrMarkK(key)}
 function evBusyMark(){const e=e68();if(e)e.busyWk=wk()}
 function evBusy(){const e=S&&S.e68;return !!(e&&e.busyWk===wk())||e68Story()}
 function evBusyMonth(){return e68Busy()}
@@ -37854,6 +37898,9 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
     Tố lên: Hoàng hậu|Thái hậu regard / repStatD, Danh / repDanhD, + repEv per proof found, repRisky when the one she reports to is the one behind it;
     Ghi nhớ: Tai mắt × memEyes. selfKhac = khắc her own trip to Nội vụ phủ costs (the maid's trip is parallel time). */
  loyD:3,repStatD:2,repDanhD:5,repEv:15,repRisky:5,memEyes:10,selfKhac:1};
+/* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
+   ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
+BAL.nr={lives:6,w:.5,cap:1500};
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -94819,7 +94866,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ec624c56f12f";window.CTM_BUILD=BUILD;
+const BUILD="5fb4c28b5de4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
