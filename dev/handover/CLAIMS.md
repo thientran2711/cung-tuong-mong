@@ -1206,3 +1206,4 @@ typed-stat-bal (opus BIG; MAIN 110 20:33Z; briefs/D-typed-stat-family.md) | revi
 REVIEW odds-ladder-words (sonnet SMALL; briefs/D-odds-ladder-review.md) of c31a047b | review/odds-ladder-words-rv | session_01964izCkYP9G2bKW92gPvfX | LAND READY f1ee0636 (archived) | 23/11 21:03Z (Foreman D child)
 | REVIEW hdr-kiep (sonnet SMALL) of 5d0039de | review/hdr-kiep; reports/hdr-kiep.md «## REVIEW» | MAIN 111 | session_01Rc5AsK7hQdkb2rweb6hVxD | PASS → LC7 (archived) | 23/11 20:53Z |
 | REVIEW ky-keeper-f2 BIG (opus reviewer-lander; merge LIVE → review/ky-keeper-f2-r) of 7d7a77d7 | review/ky-keeper-f2-r; reports/ky-keeper-f2.md «## REVIEW» | MAIN 111 | session_01Rc5AsL1nEGqb52Rx9C8tgz | RUNNING | 23/11 21:07Z |
+REVIEW fix-evening-softlock (opus BIG time/buổi; briefs/D-softlock-review.md) of 8350d536 | review/fix-evening-softlock-rv | session_01964izF9amWbvj8fxTZA1rG | RUNNING | 23/11 21:23Z (Foreman D child)
