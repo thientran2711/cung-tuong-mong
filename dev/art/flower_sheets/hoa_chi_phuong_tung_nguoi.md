@@ -1,6 +1,6 @@
 # Hoa · chỉ thêu · màu phượng · mũ — từng người (dữ liệu đang dùng trong prompt)
 
-Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342), H15 (thang chỉ theo bậc, L2152), G33 + bảng long phượng L2227 duyệt L2235, hệ màu L2287/L2290 (t7–t8 = tông ĐẬM), F21 (chim thêu), A46 (đá đỏ chỉ trên mũ t7/t8).
+Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342), H15 (thang chỉ theo bậc, L2152), G33 + bảng long phượng L2227 duyệt L2235, hệ màu L2287/L2290 (t7–t8 = tông ĐẬM), F21 (chim thêu).
 
 ## Phần chung (áp cho mọi người)
 
@@ -16,7 +16,7 @@ Nguồn: luật F2 (hoa theo bậc, Lượt 1352/1342), H15 (thang chỉ theo b�
   - t8 Hoàng hậu: chỉ vàng xe + vài chỗ đính kim tuyến vàng phẳng + chỉ ÁNH LÔNG CÔNG theo màu lông phượng của người đó (chỉ Hoàng hậu) + ngọc trai (twisted gold thread, touches of flat gold couching, iridescent peacock-feather thread sheen in her phoenix plumage colours + pearls)
 - **Chim thêu (F21):** từ t4 Tần tới t6 Quý phi có chim nhỏ theo mùa (t4 một cặp, t5 một cặp + một con, t6 hai cặp); Xuân = én / oanh · Hạ = uyên ương cạnh sen / bói cá · Thu = nhạn bay hàng / hạc trắng (chỉ t6) · Đông = hỉ thước trên cành mai / chim sẻ trên cành tuyết. Màu chim = màu hoa thêu. t1–t3 không có chim. t1–t6 KHÔNG có phượng.
 - **Phượng (t7, t8):** lông NGOÀI = màu 'ngoài', lông TRONG = màu 'trong', chóp lông + mắt = màu 'chóp', viền chỉ vàng. Màu lấy theo mùa của bộ áo (bảng từng người bên dưới, tông đậm t7–t8).
-- **Mũ phượng (t7, t8):** phượng / lông vũ khảm trên mũ dùng ĐÚNG bộ màu lông phượng của người đó trong mùa đó (áo và mũ đồng bộ). Đá đỏ được phép trên mũ t7/t8 (không bao giờ trên áo). Mũ t7 nhỏ hơn mũ Hoàng hậu; Hoàng hậu ít tua rủ, không rối.
+- **Mũ phượng (t7, t8):** phượng / lông vũ khảm trên mũ dùng ĐÚNG bộ màu lông phượng của người đó trong mùa đó (áo và mũ đồng bộ). Mũ t7 nhỏ hơn mũ Hoàng hậu; Hoàng hậu ít tua rủ, không rối.
 - **Màu hoàng gia:** t6 Quý phi vài điểm nhỏ (viền, khuy); t7 viền + mảng giữa; t8 Hoàng hậu áo CHÍNH là màu hoàng gia (vàng #EFBD69 hoặc đỏ Chu Sa #B62832), màu riêng của người đó thành màu phụ + màu thêu.
 - **Long (rồng):** phi tần KHÔNG có rồng. Rồng chỉ có ở Nữ đế (mũ 'long phượng') — hiện chưa có bảng màu rồng riêng.
 
