@@ -8,3 +8,4 @@ Roll at ctx >= ~30 % (START_CTX + 25), ceiling 60 %.
 ## Log
 - 23/11 ~03:45Z LIVE = bda5b75b. Queue empty. Waiting for relays from MAIN 109.
 - 23/11 ~04:55Z LANDED coop-famops-pv 81d76c8b (FF, QUICKCHECK PASS 498 s, coop-e2e 141/141). LIVE = 81d76c8b.
+- 23/11 ~05:55Z LANDED coop-real-port 52ad65b3 (FF, test-only, QUICKCHECK PASS 517 s, coop-e2e 141/141). LIVE = 52ad65b3.
