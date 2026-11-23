@@ -57,12 +57,12 @@ function words(txt,ctx){txt=strip(txt);if(!txt)return;R.words++;
  txt.replace(ODDS,(a)=>{bug("word","two odds scales mixed: «"+a.trim()+"»",ctx+": "+txt.slice(0,240));return a})}
 /* two odds scales, never mixed (OD:L221, VANPHONG 66-67, j1 chanceW): «khả năng vừa/cao/thấp…» is the side-chance scale (correct);
    the 7-step ladder is an act's own odds. Flag only a ladder word used as a «khả năng» reading (the two scales mixed) */
-/* the act-odds ladder is READ from the game (window.KIT_ODDS, j79; the owner changes it — never a typed list here). Longest words first so
+/* the act-odds ladder is READ from the game (KIT_ODDS, a top-level const of j79 — not a window property; the owner changes it — never a typed list here). Longest words first so
    «Rất chắc» is not read as «chắc». No KIT_ODDS → no ladder check (logged once) */
-const KO=(Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);R.KIT_ODDS=KO.slice();
+const KO=((typeof KIT_ODDS!=="undefined"&&Array.isArray(KIT_ODDS))?KIT_ODDS:Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);R.KIT_ODDS=KO.slice();
 const esc=w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 const ODDS=KO.length?new RegExp("khả năng\\s*:?\\s*("+KO.slice().sort((a,b)=>b.length-a.length).map(esc).join("|")+")(?![\\p{L}])","giu"):/(?!)/g;R.ODDS=ODDS;
-if(!KO.length)bug("harness","window.KIT_ODDS not found: odds-ladder checks are off","");
+if(!KO.length)bug("harness","KIT_ODDS not found in the game: odds-ladder checks are off","");
 R.words_=words;
 
 /* ---- one-core number audit (law 4): a number printed on an option ("Sủng +3", "Bạc -20") must be the number the option applies ---- */
@@ -111,8 +111,9 @@ wrapG("setHeir",o=>function(k){try{if(S&&S.kids&&S.kids.includes(k))M.heirMade++
 /* 7 MINI-GAMES: every mini-game she plays or leaves to luck, with her rank at the time (law 5: harder as she climbs) */
 const mgRec=(k,how,win,score)=>{try{M.mg.push({k:String(k||"?"),r:S.rank,how,win:!!win,sc:score==null?null:Math.round(score*10)/10});if(how==="skip")M.pace.mgSkip++;else M.pace.mgPlay++}catch(e){}};
 wrapG("startContest",o=>function(spec){try{const sp=Object.assign({},spec);const d0=sp.onDone;sp.onDone=function(res){try{mgRec("thi:"+(sp.art||"?"),res&&res.skipped?"skip":"play",res&&res.place===1,res&&res.score)}catch(e){}return d0&&d0.apply(this,arguments)};return o.call(this,sp)}catch(e){return o.apply(this,arguments)}});
-wrapG("playArt",o=>function(spec){try{const sp=Object.assign({},spec);const d0=sp.onDone;sp.onDone=function(raw){try{mgRec("hoc:"+(sp.art||"?"),"play",raw>=5,raw)}catch(e){}return d0&&d0.apply(this,arguments)};return o.call(this,sp)}catch(e){return o.apply(this,arguments)}});
-wrapG("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,function(g){try{const sk=!document.getElementById("mgskip")||document.getElementById("mgskip").hidden;mgRec("j5:"+k,"play",g>=(S.master?4:2),g)}catch(e){}return cb&&cb.apply(this,arguments)})});
+/* a lesson opened by openMG can run on the j82 board (j83 routes it to playArt) and still call the j5 callback: count it ONCE (the j5 result) */
+wrapG("playArt",o=>function(spec){const inMG=!!M._mgOpen;try{const sp=Object.assign({},spec);const d0=sp.onDone;sp.onDone=function(raw,x){try{if(!inMG)mgRec("hoc:"+(sp.art||"?"),x&&x.skipped?"skip":"play",raw>=5,raw)}catch(e){}return d0&&d0.apply(this,arguments)};return o.call(this,sp)}catch(e){return o.apply(this,arguments)}});
+wrapG("openMG",o=>function(k,lv,cb){M._mgOpen=1;try{return o.call(this,k,lv,function(g){M._mgOpen=0;try{const t=(document.querySelector("#mgb .mgres")||{}).textContent||"";mgRec("hoc:"+k,/May mắn|Không vào/.test(t)?"skip":"play",g>=(S.master?4:2),g)}catch(e){}return cb&&cb.apply(this,arguments)})}catch(e){M._mgOpen=0;throw e}});
 /* 9 BALANCE + 12 EVENT VARIETY + pace: every card she answers (key = pid or the title without numbers/names), every option offered / taken */
 const cardKey=m=>{const t=strip(m.t||m.title||"").replace(/\d+/g,"#").slice(0,48);return (m.pid?String(m.pid).replace(/[-_:]?\d+$/,""):"")+"|"+t};
 const famOf=m=>{const p=String(m.pid||"");return p?p.replace(/[-_:\d].*$/,"").slice(0,16)||"pid":(m.ev?"ev":"card")};

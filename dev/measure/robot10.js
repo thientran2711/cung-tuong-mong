@@ -9,11 +9,11 @@
      lives   kiếp per bot per road
      out     output folder (default dev/handover/robot). Writes <origin>-<yyyymmdd-hhmm>.md (THE bug file of the run), results JSON,
              saves/ (repro saves), shots/ (first screenshot of each UI bug; shots never go in git — upload with dev/site/cdn_sync.py if needed)
-   env GAME=<index.html path or https URL> (default: this checkout's index.html = LIVE when on main) · PAR=3 parallel browsers (4 CPUs)
+   env GAME=<index.html path or https URL> (default: this checkout's index.html = LIVE when on main) · PAR=2 parallel browsers (a life peaks ~5 GB RSS; 15 GB box)
        CAP=1800 s wall cap per life · UIEVERY=150 buổi between UI checkpoints (0 = off) · DEV=fold,ipad · SEED=<n> base seed
        LAGMS=1500 lag flag per buổi in the bot page · UILAG=400 long-task flag (ms) in the real pages · OLDSAVE=<file.json,...> extra old saves
-       MEMEVERY=30 s between memory samples (JS heap / DOM nodes / listeners per page + renderer RSS) · RECYCLE=1 re-open the real pages at every
-       UI checkpoint (harness side; the bot page is never recycled, so its growth is the game's own)
+       MEMEVERY=30 s between memory samples (JS heap / DOM nodes / listeners per page + renderer RSS) · RECYCLE=0 keeps the real pages open across
+       UI checkpoints (default re-opens them each checkpoint, harness side; the bot page is never recycled, so its growth is the game's own)
  OUTPUTS (besides the bug file): <out>/catalog.json = every death cause / ending of the game (robot10-cat.js: code scan + the game's ending tables),
    read by robot10-agg.js · per life in the results JSON: life{… m:{die, framed, family, favor, economy, mini-games, kỳ ngộ, option pick counts,
    events, pace counters, rankAt}} (OWNER ORDER #4 metric set) + mem{bot, ui, rss} samples. Round report: node dev/measure/robot10-agg.js <folders> → rates-*.md/.csv
@@ -45,8 +45,9 @@ function serve(file){const http=require('http');const root=path.dirname(path.res
   sv.listen(0,'127.0.0.1',()=>{sv.unref();res('http://127.0.0.1:'+sv.address().port+'/'+idx)})})}
 /* noise that is the harness, not the game: blocked pictures/sounds */
 const NOISE=/Failed to load resource|net::ERR_|Fetch API cannot load|ERR_FAILED|ERR_ABORTED/;
-const PAR=+process.env.PAR||3,CAP=(+process.env.CAP||1800)*1e3,UIEVERY=process.env.UIEVERY==null?150:+process.env.UIEVERY,SEED=+process.env.SEED||1;
+const PAR=+process.env.PAR||2,CAP=(+process.env.CAP||1800)*1e3,UIEVERY=process.env.UIEVERY==null?150:+process.env.UIEVERY,SEED=+process.env.SEED||1;
 const DEVS={fold:[755,1000],ipad:[1180,820]};const DEV=(process.env.DEV||'fold,ipad').split(',').filter(d=>DEVS[d]);
+const RECYCLE=process.env.RECYCLE!=='0';/* default on (part 2, (C)): each real-page load of a save leaves ~5k DOM nodes + ~600 listeners behind (game finding); re-opening the pages keeps a 30-min life inside the box's RAM */
 const UILAG=+process.env.UILAG||400,UILOAD=+process.env.UILOAD||5000;
 const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -107,15 +108,15 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
    if(hit&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
- /* odds words: the ladder is READ from the game (window.KIT_ODDS, j79), never typed here */
- const KO=(Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);
+ /* odds words: the ladder is READ from the game (KIT_ODDS: top-level const of j79, not a window property), never typed here */
+ const KO=((typeof KIT_ODDS!=='undefined'&&Array.isArray(KIT_ODDS))?KIT_ODDS:Array.isArray(window.KIT_ODDS)?window.KIT_ODDS:[]).map(w=>String(w).trim()).filter(Boolean);
  if(KO.length){const esc=w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const RXO=new RegExp('khả năng\\s*:?\\s*('+KO.slice().sort((a,b)=>b.length-a.length).map(esc).join('|')+')(?![\\p{L}])','giu');
   txt.replace(RXO,(a)=>{out.push({k:'word',msg:'two odds scales mixed «'+a.trim()+'»',ex:txt.slice(Math.max(0,txt.indexOf(a)-60),txt.indexOf(a)+a.length+10)});return a});
   /* every kit odds chip (kitOdds → .kodm[data-kodds] b) must print KIT_ODDS[level] */
   root.querySelectorAll('.kodm[data-kodds]').forEach(e=>{if(!vis(e))return;const lv=+e.dataset.kodds,w=strip((e.querySelector('b')||e).textContent);
    if(lv>=0&&w!==KO[lv])out.push({k:'word',msg:'odds chip word is not KIT_ODDS[level]',ex:'level '+lv+' shows «'+w+'», ladder says «'+KO[lv]+'»'});
    else if(lv>=0&&!KO.includes(w))out.push({k:'word',msg:'odds chip word off the ladder',ex:'«'+w+'»'})})}
- else out.push({k:'word',msg:'window.KIT_ODDS not found (odds checks off)',ex:''});
+ else out.push({k:'harness',msg:'KIT_ODDS not found in the game (odds checks off)',ex:''});
  const m=txt.match(/tỉ lệ|xác suất|phần trăm/i);if(m)out.push({k:'word',msg:'machine odds word «'+m[0]+'»',ex:txt.slice(0,80)});
  /* HUD numbers = state (law 4: what she reads is the number the rules use) */
  try{const hud=document.querySelector('.hud');if(hud&&vis(hud)&&typeof S!=='undefined'&&S){const ht=strip(hud.innerText);const MAP={'Sủng':['sung'],'Danh':['danh'],'Đức':['duc'],'Bạc':['bac'],'Sức':['suc'],'Tài':['tai'],'Tâm cơ':['tamco'],'Sắc':['sac']};
@@ -158,7 +159,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  while(true){if(Date.now()-memT>MEMEVERY){memT=Date.now();await memSample()}
   const n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
   const cps=await p.evaluate(()=>window.__r10.cps.splice(0));
-  for(const cp of cps){R.cps++;if(process.env.RECYCLE==='1'&&R.cps>1)for(const d of DEV){(R.uiErrs=R.uiErrs||[]).push(...ui[d].__errs.map(m=>[d,m]));await ui[d].context().close().catch(()=>{});ui[d]=await boot(b,DEVS[d])}
+  for(const cp of cps){R.cps++;if(RECYCLE&&R.cps>1)for(const d of DEV){(R.uiErrs=R.uiErrs||[]).push(...ui[d].__errs.map(m=>[d,m]));await ui[d].context().close().catch(()=>{});ui[d]=await boot(b,DEVS[d])}
    for(const d of DEV)await uiCheck(ui[d],d,cp,job,bug,R);
    if(!oldDone){oldDone=true;const first=await p.evaluate(()=>window.__r10.firstSave);for(const d of DEV.slice(0,1))await oldSaves(ui[d],d,cp.save,first,bug)}}
   if(n>=1||await p.evaluate(()=>!!window.__r10.halt))break;if(Date.now()-t1>CAP){cap=true;break}}
@@ -248,7 +249,10 @@ function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0)
  fs.mkdirSync(path.join(OUT,'saves'),{recursive:true});const T0=Date.now();
  console.log(`ROBOT-10 ${ORIGIN} ${BR} · ${bots.length} bots × ${lives} kiếp → ${jobs.length} lives, ${PAR} in parallel · game ${URL}`);
  const done=[];let k=0;
- await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async()=>{while(k<jobs.length){const j=jobs[k++];let r;try{r=await life(j)}catch(e){r={job:j,bugs:[{type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],detail:String(e.stack).slice(0,300),n:1}],cps:0,ui:{scans:0,long:[]},t:{total:0},life:{id:'HARNESS',type:'harness',group:'no ending',death:false,maxRank:-1}}}done.push(r);
+ /* (C) one life peaks at ~5 GB renderer RSS (bot page up to ~3.6 GB + two real pages): never start a life while the box has < 2.5 GB free (PAR=3 on a
+   15 GB box ran it out of memory: «Target crashed» at ~14 min in the part-1 proof) */
+ const os=require('os');const roomy=async()=>{for(let w=0;w<60&&os.freemem()<2.5e9;w++)await sleep(5000)};
+ await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async(_,wi)=>{if(wi)await sleep(wi*20000);while(k<jobs.length){await roomy();const j=jobs[k++];let r;try{r=await life(j)}catch(e){r={job:j,bugs:[{type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],detail:String(e.stack).slice(0,300),n:1}],cps:0,ui:{scans:0,long:[]},t:{total:0},life:{id:'HARNESS',type:'harness',group:'no ending',death:false,maxRank:-1}}}done.push(r);
   console.log(`  ${j.id}: ${r.life.id} [${r.life.group}] · max ${r.life.maxRankN||r.life.maxRank} · ${r.life.years!=null?r.life.years:'?'} y · ${r.buoi} buổi · ${r.bugs.length} bugs · ${(r.t.total/1e3).toFixed(0)} s`);
   fs.writeFileSync(path.join(OUT,`${ORIGIN}-${stamp}.json`),JSON.stringify(done.map(x=>Object.assign({},x,{bugs:x.bugs.map(b=>Object.assign({},b,{save:undefined}))})),null,1))}}));
  report(done,jobs,stamp,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
