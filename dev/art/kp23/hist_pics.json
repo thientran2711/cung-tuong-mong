@@ -1,0 +1,566 @@
+{
+"bao-cho": [
+[
+"img/act-bao-cho-h.webp",
+"act-bao-cho-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bao-cho.webp",
+"act-bao-cho · tranh mới (KP23)"
+]
+],
+"bat-gap-trao-anh-mat": [
+[
+"img/act-bat-gap-trao-anh-mat-h.webp",
+"act-bat-gap-trao-anh-mat-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bat-gap-trao-anh-mat.webp",
+"act-bat-gap-trao-anh-mat · tranh mới (KP23)"
+]
+],
+"bi-bat-mang-thu-lanh-cung": [
+[
+"img/act-bi-bat-mang-thu-lanh-cung-h.webp",
+"act-bi-bat-mang-thu-lanh-cung-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bi-bat-mang-thu-lanh-cung.webp",
+"act-bi-bat-mang-thu-lanh-cung · tranh mới (KP23)"
+]
+],
+"bi-bat-tra-khao": [
+[
+"img/act-bi-bat-tra-khao-h.webp",
+"act-bi-bat-tra-khao-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bi-bat-tra-khao.webp",
+"act-bi-bat-tra-khao · tranh mới (KP23)"
+]
+],
+"bi-cam-tuc": [
+[
+"img/act-bi-cam-tuc-h.webp",
+"act-bi-cam-tuc-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bi-cam-tuc.webp",
+"act-bi-cam-tuc · tranh mới (KP23)"
+]
+],
+"bi-phat-giac-dinh": [
+[
+"img/act-bi-phat-giac-dinh-h.webp",
+"act-bi-phat-giac-dinh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-bi-phat-giac-dinh.webp",
+"act-bi-phat-giac-dinh · tranh mới (KP23)"
+]
+],
+"cam-quan-vay-cung": [
+[
+"img/act-cam-quan-vay-cung-h.webp",
+"act-cam-quan-vay-cung-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-cam-quan-vay-cung.webp",
+"act-cam-quan-vay-cung · tranh mới (KP23)"
+]
+],
+"cau-xin": [
+[
+"img/act-cau-xin-h.webp",
+"act-cau-xin-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-cau-xin.webp",
+"act-cau-xin · tranh mới (KP23)"
+],
+[
+"img/act-cau-xin-g-h.webp",
+"act-cau-xin-g-h · bản cũ (g)"
+]
+],
+"cau-xin-quan-su": [
+[
+"img/act-cau-xin-quan-su-h.webp",
+"act-cau-xin-quan-su-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-cau-xin-quan-su.webp",
+"act-cau-xin-quan-su · tranh mới (KP23)"
+],
+[
+"img/act-cau-xin-quan-su-g-h.webp",
+"act-cau-xin-quan-su-g-h · bản cũ (g)"
+]
+],
+"giai-cau-do-den": [
+[
+"img/act-giai-cau-do-den-h.webp",
+"act-giai-cau-do-den-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-giai-cau-do-den.webp",
+"act-giai-cau-do-den · tranh mới (KP23)"
+]
+],
+"giao-viec": [
+[
+"img/act-giao-viec-h.webp",
+"act-giao-viec-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-giao-viec.webp",
+"act-giao-viec · tranh mới (KP23)"
+]
+],
+"hh-ban-cho": [
+[
+"img/act-hh-ban-cho-h.webp",
+"act-hh-ban-cho-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-hh-ban-cho.webp",
+"act-hh-ban-cho · tranh mới (KP23)"
+]
+],
+"hh-gat-loi": [
+[
+"img/act-hh-gat-loi-h.webp",
+"act-hh-gat-loi-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-hh-gat-loi.webp",
+"act-hh-gat-loi · tranh mới (KP23)"
+]
+],
+"hh-nghe-giang": [
+[
+"img/act-hh-nghe-giang-h.webp",
+"act-hh-nghe-giang-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-hh-nghe-giang.webp",
+"act-hh-nghe-giang · tranh mới (KP23)"
+]
+],
+"hh-thuong-hien-thuc": [
+[
+"img/act-hh-thuong-hien-thuc-h.webp",
+"act-hh-thuong-hien-thuc-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-hh-thuong-hien-thuc.webp",
+"act-hh-thuong-hien-thuc · tranh mới (KP23)"
+]
+],
+"ke-len-cai-bi-bat": [
+[
+"img/act-ke-len-cai-bi-bat-h.webp",
+"act-ke-len-cai-bi-bat-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-ke-len-cai-bi-bat.webp",
+"act-ke-len-cai-bi-bat · tranh mới (KP23)"
+]
+],
+"keu-oan": [
+[
+"img/act-keu-oan-h.webp",
+"act-keu-oan-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-keu-oan.webp",
+"act-keu-oan · tranh mới (KP23)"
+]
+],
+"khoc-ke-ht": [
+[
+"img/act-khoc-ke-ht-h.webp",
+"act-khoc-ke-ht-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-khoc-ke-ht.webp",
+"act-khoc-ke-ht · tranh mới (KP23)"
+]
+],
+"khoc-xin-tha": [
+[
+"img/act-khoc-xin-tha-h.webp",
+"act-khoc-xin-tha-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-khoc-xin-tha.webp",
+"act-khoc-xin-tha · tranh mới (KP23)"
+],
+[
+"img/act-khoc-xin-tha-g-h.webp",
+"act-khoc-xin-tha-g-h · bản cũ (g)"
+]
+],
+"nho-th-dung-ra": [
+[
+"img/act-nho-th-dung-ra-h.webp",
+"act-nho-th-dung-ra-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-nho-th-dung-ra.webp",
+"act-nho-th-dung-ra · tranh mới (KP23)"
+]
+],
+"quay-lung-bo-di": [
+[
+"img/act-quay-lung-bo-di-h.webp",
+"act-quay-lung-bo-di-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-quay-lung-bo-di.webp",
+"act-quay-lung-bo-di · tranh mới (KP23)"
+]
+],
+"quoc-tang": [
+[
+"img/act-quoc-tang-h.webp",
+"act-quoc-tang-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-quoc-tang.webp",
+"act-quoc-tang · tranh mới (KP23)"
+],
+[
+"img/ev-quoc-tang.webp",
+"ev-quoc-tang · tranh sự kiện/thông tin cùng tên"
+]
+],
+"quy-xin-tha": [
+[
+"img/act-quy-xin-tha-h.webp",
+"act-quy-xin-tha-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-quy-xin-tha.webp",
+"act-quy-xin-tha · tranh mới (KP23)"
+]
+],
+"sai-di-do-la": [
+[
+"img/act-sai-di-do-la-h.webp",
+"act-sai-di-do-la-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-sai-di-do-la.webp",
+"act-sai-di-do-la · tranh mới (KP23)"
+]
+],
+"so-hac-can-chinh": [
+[
+"img/act-so-hac-can-chinh-h.webp",
+"act-so-hac-can-chinh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-so-hac-can-chinh.webp",
+"act-so-hac-can-chinh · tranh mới (KP23)"
+]
+],
+"tau-tuyen-nhieu": [
+[
+"img/act-tau-tuyen-nhieu-h.webp",
+"act-tau-tuyen-nhieu-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-tau-tuyen-nhieu.webp",
+"act-tau-tuyen-nhieu · tranh mới (KP23)"
+]
+],
+"tha-toi-chet": [
+[
+"img/act-tha-toi-chet-h.webp",
+"act-tha-toi-chet-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-tha-toi-chet.webp",
+"act-tha-toi-chet · tranh mới (KP23)"
+]
+],
+"thai-hau-bang-ha": [
+[
+"img/act-thai-hau-bang-ha-h.webp",
+"act-thai-hau-bang-ha-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-thai-hau-bang-ha.webp",
+"act-thai-hau-bang-ha · tranh mới (KP23)"
+]
+],
+"thai-y-phat-hien": [
+[
+"img/act-thai-y-phat-hien-h.webp",
+"act-thai-y-phat-hien-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-thai-y-phat-hien.webp",
+"act-thai-y-phat-hien · tranh mới (KP23)"
+]
+],
+"thanh-minh": [
+[
+"img/act-thanh-minh-h.webp",
+"act-thanh-minh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-thanh-minh.webp",
+"act-thanh-minh · tranh mới (KP23)"
+]
+],
+"theo-hau-le-te": [
+[
+"img/act-theo-hau-le-te-h.webp",
+"act-theo-hau-le-te-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-theo-hau-le-te.webp",
+"act-theo-hau-le-te · tranh mới (KP23)"
+]
+],
+"theo-len-nui": [
+[
+"img/act-theo-len-nui-h.webp",
+"act-theo-len-nui-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-theo-len-nui.webp",
+"act-theo-len-nui · tranh mới (KP23)"
+]
+],
+"thu-mui-ten": [
+[
+"img/act-thu-mui-ten-h.webp",
+"act-thu-mui-ten-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-thu-mui-ten.webp",
+"act-thu-mui-ten · tranh mới (KP23)"
+]
+],
+"tim-ke-tung-tin": [
+[
+"img/act-tim-ke-tung-tin-h.webp",
+"act-tim-ke-tung-tin-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-tim-ke-tung-tin.webp",
+"act-tim-ke-tung-tin · tranh mới (KP23)"
+]
+],
+"to-giac-khong-thanh": [
+[
+"img/act-to-giac-khong-thanh-h.webp",
+"act-to-giac-khong-thanh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-to-giac-khong-thanh.webp",
+"act-to-giac-khong-thanh · tranh mới (KP23)"
+]
+],
+"to-giac-truoc": [
+[
+"img/act-to-giac-truoc-h.webp",
+"act-to-giac-truoc-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-to-giac-truoc.webp",
+"act-to-giac-truoc · tranh mới (KP23)"
+]
+],
+"to-giac-truoc-ht": [
+[
+"img/act-to-giac-truoc-ht-h.webp",
+"act-to-giac-truoc-ht-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-to-giac-truoc-ht.webp",
+"act-to-giac-truoc-ht · tranh mới (KP23)"
+]
+],
+"to-khong-tin": [
+[
+"img/act-to-khong-tin-h.webp",
+"act-to-khong-tin-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-to-khong-tin.webp",
+"act-to-khong-tin · tranh mới (KP23)"
+]
+],
+"trung-doc": [
+[
+"img/act-trung-doc-h.webp",
+"act-trung-doc-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-trung-doc.webp",
+"act-trung-doc · tranh mới (KP23)"
+],
+[
+"img/act-trung-doc-g-h.webp",
+"act-trung-doc-g-h · bản cũ (g)"
+]
+],
+"trung-doc-thuoc-giai": [
+[
+"img/act-trung-doc-thuoc-giai-h.webp",
+"act-trung-doc-thuoc-giai-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-trung-doc-thuoc-giai.webp",
+"act-trung-doc-thuoc-giai · tranh mới (KP23)"
+],
+[
+"img/act-trung-doc-thuoc-giai-g-h.webp",
+"act-trung-doc-thuoc-giai-g-h · bản cũ (g)"
+]
+],
+"truy-ngu-thien": [
+[
+"img/act-truy-ngu-thien-h.webp",
+"act-truy-ngu-thien-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-truy-ngu-thien.webp",
+"act-truy-ngu-thien · tranh mới (KP23)"
+]
+],
+"tuyen-tu": [
+[
+"img/act-tuyen-tu-h.webp",
+"act-tuyen-tu-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-tuyen-tu.webp",
+"act-tuyen-tu · tranh mới (KP23)"
+],
+[
+"img/ev-tuyen-tu.webp",
+"ev-tuyen-tu · tranh sự kiện/thông tin cùng tên"
+],
+[
+"img/info-tuyen-tu.webp",
+"info-tuyen-tu · tranh sự kiện/thông tin cùng tên"
+]
+],
+"van-dong-do-dau": [
+[
+"img/act-van-dong-do-dau-h.webp",
+"act-van-dong-do-dau-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-van-dong-do-dau.webp",
+"act-van-dong-do-dau · tranh mới (KP23)"
+]
+],
+"vang-lenh": [
+[
+"img/act-vang-lenh-h.webp",
+"act-vang-lenh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-vang-lenh.webp",
+"act-vang-lenh · tranh mới (KP23)"
+]
+],
+"vang-menh": [
+[
+"img/act-vang-menh-h.webp",
+"act-vang-menh-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-vang-menh.webp",
+"act-vang-menh · tranh mới (KP23)"
+]
+],
+"vao-cung-phong": [
+[
+"img/act-vao-cung-phong-h.webp",
+"act-vao-cung-phong-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-vao-cung-phong.webp",
+"act-vao-cung-phong · tranh mới (KP23)"
+],
+[
+"img/act-vao-cung-phong-g-h.webp",
+"act-vao-cung-phong-g-h · bản cũ (g)"
+]
+],
+"vien-co-thoai-thac": [
+[
+"img/act-vien-co-thoai-thac-h.webp",
+"act-vien-co-thoai-thac-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-vien-co-thoai-thac.webp",
+"act-vien-co-thoai-thac · tranh mới (KP23)"
+]
+],
+"viet-thu-hoi-han": [
+[
+"img/act-viet-thu-hoi-han-h.webp",
+"act-viet-thu-hoi-han-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-viet-thu-hoi-han.webp",
+"act-viet-thu-hoi-han · tranh mới (KP23)"
+]
+],
+"vu-oan-bi-lo": [
+[
+"img/act-vu-oan-bi-lo-h.webp",
+"act-vu-oan-bi-lo-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-vu-oan-bi-lo.webp",
+"act-vu-oan-bi-lo · tranh mới (KP23)"
+]
+],
+"xin-an-ve-tham": [
+[
+"img/act-xin-an-ve-tham-h.webp",
+"act-xin-an-ve-tham-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-xin-an-ve-tham.webp",
+"act-xin-an-ve-tham · tranh mới (KP23)"
+],
+[
+"img/act-xin-an-ve-tham-g-h.webp",
+"act-xin-an-ve-tham-g-h · bản cũ (g)"
+]
+],
+"xin-ht-tra-xet": [
+[
+"img/act-xin-ht-tra-xet-h.webp",
+"act-xin-ht-tra-xet-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-xin-ht-tra-xet.webp",
+"act-xin-ht-tra-xet · tranh mới (KP23)"
+]
+],
+"xin-th-do-loi": [
+[
+"img/act-xin-th-do-loi-h.webp",
+"act-xin-th-do-loi-h · tranh cũ đang dùng trong game"
+],
+[
+"img/act-xin-th-do-loi.webp",
+"act-xin-th-do-loi · tranh mới (KP23)"
+],
+[
+"img/act-xin-th-do-loi-g-h.webp",
+"act-xin-th-do-loi-g-h · bản cũ (g)"
+]
+]
+}

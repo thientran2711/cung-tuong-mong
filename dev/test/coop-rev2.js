@@ -132,13 +132,22 @@ const entryEq=async(o,p)=>{const f=await fr(o),w=await own(p);return f&&same(f.i
   if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;if(S.cyb){delete S.cyb.rk;delete S.cyb.df}
   const want=((S.tuan||0)+1)%3,base=S.name;window.__nm0=base;for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}window.__cyWant=[want,cyBase(S).t,S.name];
   const p0=PEND.cyrep;PEND.cyrep=function(){window.__cyRan=1;return p0.apply(this,arguments)};render()});
- {const w0=await A.p.evaluate(()=>COOP.state.week||0);
-  for(let i=0;i<50;i++){await clear(A);await clear(B);await press1(A);await press1(B);await sleep(800);
-   const w=await A.p.evaluate(()=>COOP.state.week||0);const w2=await B.p.evaluate(()=>COOP.state.week||0);if(w>w0&&w2>w0)break}
+ {let w0=await A.p.evaluate(()=>COOP.state.week||0);const w00=w0;
+  /* review/coop-driver-fails: with jnf (both seats in the palace) the card is turned at the END of tối of the week whose tuần is the cycle tuần, and
+     his maid's Kỳ nguyệt card is asked when that week opens; the name above puts his cycle in the NEXT tuần, so the night to read is the one of
+     the week that opens it (merge one week, then the next; the old B2 path drew at the week's start: one merge) */
+  const NF=await REALL.nfBoth(A,B);
+  for(let k=0;k<(NF?2:1);k++){if(k)w0=await A.p.evaluate(()=>COOP.state.week||0);for(let i=0;i<50;i++){await clear(A);await clear(B);await press1(A);await press1(B);await sleep(800);
+   const w=await A.p.evaluate(()=>COOP.state.week||0);const w2=await B.p.evaluate(()=>COOP.state.week||0);if(w>w0&&w2>w0)break}}
   for(let i=0;i<4;i++){await clear(A);await sleep(300)}
   const a=await A.p.evaluate(()=>({w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,ran:window.__cyRan,want:window.__cyWant})),c=await B.p.evaluate(()=>({w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,dil:(window.__dl||[])}));
-  ok(a.ran&&a.tn&&a.tn.w===a.w&&a.tn.who===902&&a.t===902,'deferred flip (jcycle card): host drew the guest, tn = the new week',a);
-  ok(c.tn&&c.tn.w===c.w&&c.tn.who===902&&c.t==='me','deferred flip: the guest has her night from the host (one fact)',c);
+  /* review/coop-driver-fails: jnf owns the palace night when both seats live in the palace (MAIN ROOT-82); the B2 week key S.tn is off there
+     on purpose → the same fact read from the jnf night record of that day (lib/coop-real nightRec, as coop-steal); a parked room keeps tn */
+  if(NF){const r=await REALL.nightRec(A,B,w00+1);
+   ok(a.ran&&r.same&&r.a.flip0==='guest','deferred flip (jcycle card, jnf): the host turned the guest\'s card after his maid\'s card',{a,r});
+   ok(r.same&&['guest','host'].includes(r.a.pick),'deferred flip (jnf): one night record of the day on both seats (one fact)',r)}
+  else{ok(a.ran&&a.tn&&a.tn.w===a.w&&a.tn.who===902&&a.t===902,'deferred flip (jcycle card): host drew the guest, tn = the new week',a);
+  ok(c.tn&&c.tn.w===c.w&&c.tn.who===902&&c.t==='me','deferred flip: the guest has her night from the host (one fact)',c)}
   await A.p.evaluate(()=>{window.__fw=null})}
  /* mixed clients: B on the OLD build (origin/main) */
  B.ctx.__html=path.join(ROOT,'.tmp/old.html');B.errs.length=0;
