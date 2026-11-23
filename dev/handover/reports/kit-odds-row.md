@@ -11,16 +11,16 @@ Branch `review/kit-odds-row` = **f3eb43bb7201354f0b8e48feaa57b84427705fc1** (fro
 4. Regression: `node dev/test/odds-one-row.js <url> <out>` — every visible `.kodm` on the bar's row, word one line, no `kodstk`; exit 1 otherwise.
 
 ## Before / after (odds-one-row.js, same seeded world; meters whose word sits BELOW the bar / word wrapped)
-| device | meters scanned (before→after*) | word below bar before | after | word wrapped before | after | kodrow (meter under title, one row) before→after |
+| device | meters scanned before→after* | word BELOW bar before | after | word wrapped before | after | kodrow (whole meter under title, bar+word one row) before→after |
 |---|---|---|---|---|---|---|
-| Fold 755x1000 | 36→36 | 29 | **0** | 7 | **0** | 7→24 |
-| iPad 1180x820 | 74→98* | 29 | **0** | 7 | **0** | 7→24 |
-| phone 390x844 | 27→33* | 29 | **0** | 8 | **0** | 24→33 |
+| Fold 755x1000 | 37→37 | 28 | **0** | 7 | **0** | 7→25 |
+| iPad 1180x820 | 61→91* | 28 | **0** | 7 | **0** | 7→25 |
+| phone 390x844 | 39→39 | 32 | **0** | 8 | **0** | 14→29 |
 (*the tapped-popover scene scans every meter on the page behind it, so its count differs by scene state; below/wrapped are over all scenes: option dialogs ×2 at col auto/460/320/260 px, popover, Hành sự act, person card, staff, rv.)
 Other needless wraps found + fixed: ladder popover meaning (1). Short label pairs elsewhere (chips Tốn/Được, `.kef1` stat items) already nowrap by K-EF-UNIT — no change.
 
 ## Honest trade-off for MAIN / owner
-With the word beside the bar the meter is ~130 px wide on «Năm ăn năm thua», so on narrow cards (Fold dialog column ~310 px, iPad 2-col) the title room beside it is under 7.5 em and the meter drops under the title (right-aligned, bar+word still ONE row): 24 of the cards at Fold/iPad (was 7). If the owner prefers the meter always beside the title and a 2–3 line title, the single knob is `KIT_ODFIT.min` (j79, 7.5 em) — lower it; no other change.
+With the word beside the bar the meter is ~130 px wide on «Năm ăn năm thua», so on narrow cards (Fold dialog column ~310 px, iPad 2-col) the title room beside it is under 7.5 em and the meter drops under the title (right-aligned, bar+word still ONE row): 25 meter placements at Fold/iPad (was 7). If the owner prefers the meter always beside the title and a 2–3 line title, the single knob is `KIT_ODFIT.min` (j79, 7.5 em) — lower it; no other change.
 
 ## Tests run (build: `CTM_IMG_BASE= bash dev/site/build_site.sh`, served locally; CDN pictures absent so card pictures are empty boxes)
 - odds-one-row: Fold / iPad / phone PASS. kit-opt-title-wrap (REP=1): 755 + 1180 PASS. oldsave-r1 (old main build → new): 16/16, no page errors, no overflow.
