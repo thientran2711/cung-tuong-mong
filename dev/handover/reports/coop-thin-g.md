@@ -882,5 +882,21 @@ Root: dev/test/coop-thin-trip.js (TRIP=1 guest tripwire) wraps S in Proxies; its
 Fix (f1051845, test only): indexOf / includes / lastIndexOf compare unwrapped elements; WeakSet keys unwrapped like Set / Map. WeakMap NOT patched (the meter's own RAW / PX maps are WeakMaps keyed by the Proxy: patching recursed — seen as 'guest joined seat b' red). After: INVP with TRIP 0 boxes. Rule 3 of #11's TODO (gHold must release / pick must land): her card re-asks itself after SENT expiry (jcoopthin gSync, 15 s) → no lost-send path was seen; nothing added.
 LIVE: trip1 cannot run on LIVE (no part G). The meter file is shared by every TRIP lane on main → FOR MAIN: TRIP lanes on main inherit the meter fix when this lands.
 
-### 3. Gates @d0e55df1
-(filled below when the lane ends)
+### 3. Gates @d0e55df1 (partial at handover 20:20Z)
+| gate | result |
+|---|---|
+| G0b / G9 / G9b (coop-thin-g.js, inside every trip1) | PASS ×3 |
+| trip1 ×3 DANHP (real coop-thin-g.js, TRIP=1, fixed meter), in parallel | a/b/c at wk 19–20: **0 FAIL**, no Danh diff, no stall so far (lane still running in this container; logs /home/user/wt/out/t5-*.log may be lost with the container) |
+| family scan / INVP / PRESSP probes | see §1–§2 (before/after) |
+| quickcheck, coop-e2e ×1, role-parity alone, famops-unit | queued after trip1 in this container (lane5.sh); NOT reported yet |
+Earlier on 1de2077c (before d0e55df1, old meter): trip1 PICKP a 85/85, b 84/85 (wk 34 = meter flood), c 82/85 (Danh door b).
+
+### HANDOVER F2 HELPER → successor (11/23/2026 ~20:20Z; context ≈ 30 % ≥ START 3 % + 25 %) — Foreman B opens the successor
+State: review/coop-thin-g-f2 @**d0e55df1** pushed (both roots fixed, tests G9b + meter fix). Nothing uncommitted that matters (untracked probes only; copies in coop-thin-g-probe/: fam-scan / invp / press .block.js, trip-pk.js).
+Successor TODO:
+1. Worktree from review/coop-thin-g-f2 (sparse), `bash dev/site/hooks/install.sh`, `cd coop/worker && npm install && nohup npx wrangler dev --port 8787 --ip 127.0.0.1 &`.
+2. **Merge LIVE 225c5c08** (KP23 history page + kp23-swap; Foreman B 20:18Z) ONCE: generated-file conflicts (index.html / sw.js / assets.json) → take LIVE, `bash dev/site/build_site.sh`, `git checkout assets.json` if only its v changed (LIVE's), commit; any new runtime file → dev/site/pages_stage.sh allowlist (check `bash dev/site/pages_stage.sh /tmp/x`).
+3. Gates on the merge head: trip1 ×3 `DANHP=1 TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js http://127.0.0.1:8787 13 1` (3 in parallel ≈ 90 min; expect 85+/85+, G9b ok, no 'her phone == host store' red), quickcheck (`bash dev/tools/quickcheck.sh`; perf flips → `--runs 5`), `node dev/test/coop-e2e.js <out> http://127.0.0.1:8787` ×1, `node dev/test/role-parity.test.js dev/index.html` ALONE, `node dev/test/coop-famops-unit.js http://ctm.local/index.html`. Reds: rerun alone; compare LIVE where the suite runs there.
+4. Known test-data weakness (not the game): G0b red when her Danh starts at 0 (store cannot drop below 0) — seen once in a FAMSCAN run; harden G0b by staging Danh ≥ 5 on both sides if it shows in a gate.
+5. CLAIMS row + SSK line here + send_message Foreman B (session_01N1tNP5gpi4qbwxRpor8Ayw).
+FOR MAIN: coop-thin-trip.js meter fix reaches every TRIP lane on main at landing; hn H2 / rkOfFace / dialog-fixed #54 / thin-d / f1 / as9s / cyc / lost-scan items from r2 unchanged; Worker THINMAX 13 deploy at landing.
