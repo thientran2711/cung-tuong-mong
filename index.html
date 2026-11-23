@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e9451a50+","t":"2026-11-23T14:26Z","c":"coop-famops-t2: NPC dressing never touches her entry (law 6c + 1; scan 9001 vanish 10000001)","b":"19267f1ff59c","h":[{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
+window.CTM_BI={"s":"4f33db9b","t":"2026-11-23T16:17Z","c":"coop-famops-t2: F1 res outbox — every res (acts, NPC turns, returns, box answers, sweeps) and the P2 item answers (iltake / ilrefund) are r…","b":"a0c110709e31","h":[{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48828,7 +48828,7 @@ function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW()){/* jpma r3 fix B
   CW.thin.D.after(()=>{try{CW.fStat=(CW.fStat||0)+1;resApply(m)}catch(e){console.error("thin F1 res",e)}});return}
  const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
  const msg=Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{},fam&&fam.length?{fam}:{},Object.keys(fxl).length?{fxl}:{});
- if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}COOP.send(msg)}
+ if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}resOut(msg)}
 /* part D r1: the act's text is the host's ("Ngươi" = the host, her name / "nàng ta" = her); she reads it in her own perspective */
 function herView(t,her,me0){t=String(t||"");if(!t)return t;const H="\u0001";const L="(^|[^\\p{L}])",R="(?=$|[^\\p{L}])";
  t=t.replace(new RegExp(L+"([Nn])gươi"+R,"gu"),(x,p)=>p+H);
@@ -49083,7 +49083,7 @@ function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
-CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;/* test hooks (dev/test/coop-famops-unit.js) */
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -49092,7 +49092,25 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   ...askYield(m.k,()=>COOP.send({t:"actr",id:m.id,ok:"yield",k:m.k})),
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
-function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);
+/* E44k F1 (law 6c; coop-lost-scan-traced 9001 dup 2576: her «Lấy đồ» on the host's entry, her seat kept the piece + case 27, the host never
+   received the «res» and kept it too = 2 places): every «res» (an act's result: items by id, stats, children, pets) went out ONCE — a socket
+   down / reconnecting (COOP.send false) or a peer offline (the Worker relays to online seats only) lost it for good. Now the sender keeps each
+   «res» in an outbox (this phone, per room, like jkcco RQ) until the receiver's ack, and sends it again when the peer is back / the socket
+   reconnects / every few seconds; the receiver applies an id ONCE (seenIds + S.coopRs, which rides her save so a reload never applies it
+   twice) and acks every copy. Both seats, every res road (sendRes = acts, b4Send = NPC turns / returns / box answers / sweeps). */
+const RQK=()=>{try{return "ctm-resq:"+(COOP.state.room||COOP.code||"")+":"+(CW.seat||"")}catch(e){return "ctm-resq:"}};
+CW.rq=CW.rq||[];
+function rqSave(){try{localStorage.setItem(RQK(),JSON.stringify(CW.rq.slice(-40)))}catch(e){}}
+function rqLoad(){try{const L=JSON.parse(localStorage.getItem(RQK())||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id))CW.rq.push(x)}catch(e){}}
+function rqSend(x){x.at=Date.now();x.n=(x.n||0)+1;try{return COOP.send(x.msg)}catch(e){return false}}
+function resOut(msg){const x={id:msg.id,msg,t0:Date.now()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
+function resAck(id){const i=CW.rq.findIndex(x=>x.id===id);if(i>=0){CW.rq.splice(i,1);rqSave()}}
+function rqFlush(all){if(!CW.on)return;const n=Date.now();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if(all||n-(x.at||0)>5000)rqSend(x)}
+COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
+setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
+const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));
+function onRes(m){if(!CW.on||m.from===CW.seat||!S)return;if(rsSeen(m.id)){COOP.send({t:"actr",id:m.id,ok:true,ack:1});return}seenIds.add("r"+m.id);
+ S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);
  try{resApply(m)}catch(e){console.error(e)}
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
  try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
@@ -49117,7 +49135,7 @@ function resApply(m){if(fW()&&!host()&&!CW.ctx){oldRan("actApply");return}if(S.d
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
  if(note&&gotItem&&m.k==="gift"&&!g.dead&&!g.cold){showModal();render();return}  /* the Quà tặng dialog is her note */
  if(note){pushModal({t:m.tt?String(m.tt):m.k==="petcare"?"Hảo hữu sang giúp":m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
-function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}invRun(m.id,m.ok,null,m.lv)}
+function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];resAck(m.id);soonEnd();return}invRun(m.id,m.ok,null,m.lv)}
 /* her answer to my invite (old relay: actr; part D: her card's choice, run by the host after her context closes) */
 function invRun(id,ok,pp,lv){let a=CW.acts[id];delete CW.acts[id];
  /* part D r1: after a host reload CW.acts is empty: rebuild from the card's pp (target id, the item itself found by value, like invHer) */
@@ -49498,8 +49516,14 @@ addEventListener("pagehide",()=>{if(CW.on)snapSave(true)});document.addEventList
    Relays ride the existing free-form act channel (k "ctm-p2", mode = op): no Worker change, protocol stays backward-compatible
    (an old client ignores an unknown k). Every act has its gain AND its loss on both sides; numbers from BAL / the existing act code. */
 const P2K="ctm-p2",P2S=new Set();
-function p2say(mode,o){try{return COOP.send(Object.assign({t:"act",k:P2K,mode,week:wk(),id:P2K+mode+":"+newId()},o||{}))}catch(e){return false}}
-const P2H={};COOP.on("act",m=>{if(!m||m.k!==P2K||!CW.on||m.from===CW.seat||!S||P2S.has(m.id))return;P2S.add(m.id);const h=P2H[m.mode];if(h)try{h(m)}catch(e){console.error(e)}});
+/* E44k F1 family (law 11 + 6c): the P2 item answers (iltake = her choice for her piece in my box, ilrefund = her silver back) ride the same
+   outbox as «res» (resent until acked, applied once per id, also after a reload: S.coopRs). A lost «ilask» is asked again by jil ilWeek (againW). */
+const P2R=new Set(["iltake","ilrefund"]);
+function p2say(mode,o){try{const m=Object.assign({t:"act",k:P2K,mode,week:wk(),id:P2K+mode+":"+newId()},o||{});return P2R.has(mode)?resOut(m):COOP.send(m)}catch(e){return false}}
+const P2H={};const p2In=m=>{if(!m||m.k!==P2K||!CW.on||m.from===CW.seat||!S)return;if(m.mode==="ack"){resAck(m.ack);return}
+ const rl=P2R.has(m.mode);if(P2S.has(m.id)||(rl&&rsSeen(m.id))){if(rl)COOP.send({t:"act",k:P2K,mode:"ack",ack:m.id,id:P2K+"ack:"+newId()});return}P2S.add(m.id);
+ if(rl)S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);const h=P2H[m.mode];if(h)try{h(m)}catch(e){console.error(e)}
+ if(rl)COOP.send({t:"act",k:P2K,mode:"ack",ack:m.id,id:P2K+"ack:"+newId()})};COOP.on("act",p2In);CW.p2InT=p2In;/* test hook */
 const fSrvE=()=>{try{return allServ().find(isF)||null}catch(e){return null}};
 const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
 
@@ -49693,7 +49717,7 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
 function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId();CW.rpend[rid]=Date.now();(CW.b4s=CW.b4s||[]).push({ops:ops.map(x=>x.op),tt:o.tt||""});if(CW.b4s.length>20)CW.b4s.shift();
  const msg=Object.assign({t:"res",id:rid,k:o.pet&&o.pet.some(x=>x.op==="lose")?"petsteal":"npc",n:"",who:"",fx:o.fx||{},flags:{},seen:"effect",fam:ops,hd:o.hd||"",tt:o.tt||""},o.fest?{fest:o.fest}:{},o.pet&&o.pet.length?{pet:o.pet}:{});
  /* E44b (E44r SWAP vanish 399 / 1571): the lostReturn hook sends from the GUEST too; D.resTo runs on the host only (as sendRes) — on the guest it ran the «ret» locally and the host case stayed «held» */
- if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
+ if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;resOut(msg)}
 /* r1 fix 2: an NPC's pet act on her entry (jpetcare mindMenu petsteal / thaopet) → the same res.pet ops as mine: she loses it, not a copy */
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
@@ -94835,7 +94859,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="19267f1ff59c";window.CTM_BUILD=BUILD;
+const BUILD="a0c110709e31";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
