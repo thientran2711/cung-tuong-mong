@@ -1317,6 +1317,9 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    paid: S.j71.fx, sent live in pos) is used for her score, not the NPC "best art"; she pays the same Sức as when she plays it herself,
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
+/* E44j (a) (E52r finding a): a piece b4Ops sends to her seat («add» / «plant») is marked (object and ledger id) until the current call stack ends: jil ilGuard's
+   after-check of the same call (rivalsMonth: ilGuard is OUTSIDE b4Wrap) routes it again through ilGone → npcToFriend, which then sends nothing */
+function b4Mark(e){if(!CW.b4Sent){CW.b4Sent=new Set();Promise.resolve().then(()=>{CW.b4Sent=null})}CW.b4Sent.add(e);if(e.iu)CW.b4Sent.add("i"+e.iu)}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
  /* E44e (law 6c, one piece = its ledger id): her entry rebuilt meanwhile (a festival's result diffs the snapshot taken at its start) holds NEW objects
     of the SAME pieces: matched by iu they did not move. Before: every piece «rm gone» + «add» (≈35 «Được ban …» lines, a piece mid-case lost: vanish 10000013) */
@@ -1327,7 +1330,7 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
      Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
   let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
   ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
- for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
+ for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""});b4Mark(e)}
  for(let [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd))kd=(v.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
@@ -1369,7 +1372,7 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
    logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
    (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
    on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
-CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;if(CW.b4Sent&&(CW.b4Sent.has(e)||(e.iu&&CW.b4Sent.has("i"+e.iu)))){CW.b4Sent.delete(e);if(e.iu)CW.b4Sent.delete("i"+e.iu);return}/* E44j (a): b4Ops of this call already sent it (the same object, or the copy giveTo made: same id) */const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /

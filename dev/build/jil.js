@@ -201,7 +201,10 @@ window.ilGone=ilGone;window.ilAudit=ilAudit;window.ilCensus=ilCensus;window.ilWh
 function ilFilter(p,keep,how){const out=(p.inv||[]).filter(e=>!keep(e));p.inv=(p.inv||[]).filter(keep);for(const e of out)ilGone(p,e,how);return p.inv}
 window.ilFilter=ilFilter;
 /* co-op, RECORD ONLY (item-ledger-solo): the live path (jcoopworld) carries the piece; the ledger writes the line and the census does not net it */
-function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&v.coop)}catch(e){return[]}}
+/* E44j (a) (E52r finding a, law 6c): her entry taken out of the harem for the host's week end (jcoopworld withoutFriend: COOPW.pulled) is still her
+   entry: jil ilGuard's after-check of rivalsMonth runs OUTSIDE the call that puts her back, so a piece an NPC gave her there read as «gone from
+   the NPC, nowhere» and went into the host box «bị tịch thu» while b4Ops had already sent it to her seat = 2 places (coop-famops-unit 29) */
+function ilFriends(){if(!ilCoop())return[];try{const L=(rivals||[]).filter(v=>v&&v.coop);const P=typeof COOPW==="object"&&Array.isArray(COOPW.pulled)?COOPW.pulled:[];for(const x of P){const v=x&&x[1];if(v&&v.coop&&L.indexOf(v)<0)L.push(v)}return L}catch(e){return[]}}
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();

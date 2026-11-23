@@ -211,6 +211,18 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
      R28.push({i,rv:String(rv).slice(0,90),pv:typeof pv==="undefined"?"":String(pv).slice(0,120),st:c&&c.st,at:c&&c.at,cp,rm,cst:c&&c.st,back,ret,fin:f.inv.length})}}catch(z){er28=z.message+" "+String(z.stack).split("\n")[1]}
    finally{window.stf2Ord=so;CW.on=on28;CW.seat=se28;COOP.send=sd28;caught=cg;aRoll=ar;loKeepPick=kp;S.bac=b0;S.inv=inv0;rivals.splice(rivals.indexOf(f),1);Q.length=0}
    ck("28 the host's Lấy đồ ×3 with a return between: each time ONE marked copy in his chest + ONE «rm lost»; each return closes the case, copy gone, ONE «ret»",!er28&&R28.length===3&&R28.every(r=>r.at==="me"&&r.cp===1&&r.rm===1&&r.back===0&&r.ret===1&&r.fin===1),{er28,R28})}
+  /* E44j (a) (E52r finding a, law 6c): jil ilGuard wraps rivalsMonth OUTSIDE b4Wrap (jil is assembled after jcoopworld): an NPC gift to her entry
+     inside the month was sent by b4Ops («add»), then ilGuard's after-check saw the piece leave the NPC → ilGone → npcToFriend sent a 2nd «add»
+     (her seat dropped it by iu: «add: already hers»). Same layering here: ilGuard ⊃ b4Wrap ⊃ the gift. Exactly ONE «add»; a later gift of
+     another piece outside any diffed call still sends its own. */
+  {reset();const on29=CW.on,se29=CW.seat,sd29=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);v.inv=v.inv||[];let er29="",n29=-1,n29b=-1,L=null,bx29=-1,inF29=-1;const pullFriend=()=>{const o=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)o.push([i,rivals.splice(i,1)[0]]);return o},pushFriend=L=>{for(const [i,x] of L.slice().reverse())if(!rivals.includes(x))rivals.splice(Math.min(i,rivals.length),0,x)};
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P);v.inv.push(e);L=pullFriend();CW.pulled=L;
+    window.__t29=CW.b4Wrap("rivalsMonth",()=>{pushFriend(L.slice());try{giveTo(v,f,v.inv.indexOf(e))}finally{pullFriend()}});ilGuard("__t29",x=>x.t?"evid":"conf",()=>ilPeople());
+    window.__t29();CW.pulled=null;pushFriend(L);L=null;bx29=ilS().box.filter(x=>x.e&&x.e.iu===e.iu).length;inF29=f.inv.filter(x=>x.iu===e.iu).length;n29=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e.iu).length;
+    const e2=pc(P);v.inv.push(e2);giveTo(v,f,v.inv.indexOf(e2));n29b=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e2.iu).length}catch(z){er29=z.message}
+   finally{if(L){CW.pulled=null;pushFriend(L)}delete window.__t29;CW.on=on29;CW.seat=se29;COOP.send=sd29;rivals.splice(rivals.indexOf(f),1);v.inv=v.inv.filter(e=>!(e.iu>9e6))}
+   ck("29 an NPC gift to her entry inside the month (ilGuard outside b4Wrap): ONE «add» (was: 2), the piece in her entry only (never also in the host box), a later gift outside still ONE",!er29&&n29===1&&n29b===1&&bx29===0&&inF29===1,{er29,n29,n29b,bx29,inF29})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
