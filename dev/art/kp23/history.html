@@ -12,7 +12,7 @@ button.s{background:#4a382c;color:var(--tx)}
 .nm{font-weight:700;margin-bottom:8px}.nm small{display:block;color:var(--mut);font-weight:400;font-size:12px}
 .pair{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
 .cell{display:block;border-radius:10px;border:3px solid transparent;padding:4px;cursor:pointer}
-.cell img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#000;display:block}
+.cell img{width:100%;height:auto;object-fit:contain;cursor:zoom-in;border-radius:8px;background:#000;display:block}
 .cell .lb{display:flex;align-items:center;gap:10px;margin-top:8px;font-weight:700;min-height:48px;font-size:13px}
 .cell .lb small{display:block;color:var(--mut);font-weight:400}
 .cell input{width:34px;height:34px;flex:none;accent-color:var(--ok)}
@@ -46,4 +46,5 @@ function msg(s){const e=document.getElementById('msg');e.textContent=s;e.style.d
 document.getElementById('send').onclick=async()=>{const s=txt();try{await navigator.clipboard.writeText(s);msg('Đã sao chép '+Object.keys(P).length+' lựa chọn. Dán vào khung chat chính.')}catch(e){const ta=document.createElement('textarea');ta.value=s;document.body.append(ta);ta.select();try{document.execCommand('copy');msg('Đã sao chép. Dán vào khung chat chính.')}catch(x){msg('Không chép được — bấm giữ để chép: '+s)}ta.remove()}};
 document.getElementById('clr').onclick=()=>{if(confirm('Xoá hết lựa chọn?')){P={};save();sync()}};
 sync();
+document.addEventListener('click',e=>{if(e.target.tagName==='IMG'){e.preventDefault();window.open(e.target.src,'_blank','noopener')}});
 </script></body></html>
