@@ -167,7 +167,7 @@ function life0(){try{if(S&&S.rank>R.maxR){R.maxR=S.rank;R.steps.push({r:S.rank,n
  if(C.road&&C.locked&&R.lock){if(R.lock.openAt==null&&arcOk67(ARC67[C.road]))R.lock.openAt={buoi:R.buoi,age:S.age,year:S.year};
   if(R.lock.playAt==null&&S.st&&S.st.ch&&(S.st.f14&&S.st.f14.road===C.road||JSON.stringify(S.st.ch.past||[]).includes(C.road)||(S.st.ch.cur&&JSON.stringify(S.st.ch.cur).includes(C.road))))R.lock.playAt={buoi:R.buoi,age:S.age,year:S.year}}}catch(e){}}
 if(C.locked)R.lock={road:C.road,openAt:null,playAt:null};
-{const nb0=nextBuoi;nextBuoi=function(){const t0=performance.now(),g0=gt();let r;try{r=nb0.apply(this,arguments)}finally{const dt=performance.now()-t0;R.nbMs.push(Math.round(dt));
+{const nb0=nextBuoi;nextBuoi=function(){const t0=performance.now(),g0=gt();let r;try{r=nb0.apply(this,arguments)}finally{const dt=performance.now()-t0;R.nbMs.push(Math.round(dt));(R.nbY=R.nbY||[]).push([(S&&S.year)||0,(S&&S.month)||0,Math.round(dt)]);/* ORDER #7 LAG: [year, month, ms] per buổi change (game-year / month turn time) */
   if(dt>(C.lagMs||1500))bug("lag","one buổi change took over "+(C.lagMs||1500)/1e3+" s (bot page, render off)",Math.round(dt)+" ms @ "+where())}
   R.calls++;try{if(!R.road&&S&&S.st&&S.st.f14)R.road=S.st.f14.road;R.origin=S&&S.origin&&S.origin.k}catch(e){}
   if(S&&!S.dead&&gt()===g0&&!Q.length&&!S.mg){if(++R.noAdv>=20&&!R.halt){R.halt="softlock";bug("stuck","«Sang ngày mới» does nothing: the clock does not move (soft-lock)",where()+" · used "+used+" · place "+S.place+" · Q 0 · S.mg "+!!S.mg);R.haltSave=R.lastSave}return r}

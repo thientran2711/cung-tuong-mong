@@ -142,6 +142,8 @@ md.push(`# ROBOT-10 round report · ${stamp} (UTC)`,'',`${L.length} lives from $
  md.push('## 12 · EVENT VARIETY (cards she answered; key = pid or the title without numbers)','',`Per kiếp: distinct cards mean ${f1(mean(L.map(r=>M(r).evDistinct)))} · cards seen more than once in the same kiếp mean ${f1(mean(L.map(r=>M(r).evRep)))} · distinct cards in the whole round ${seen.size}`,'',
   tbl(['family (pid prefix)','distinct cards','shows'],Object.entries(fam).sort((a,b)=>b[1].shows-a[1].shows).slice(0,40).map(([k,f])=>[k,f.cards.size,f.shows])),'',
   tbl(['series','kiếp','distinct / kiếp','repeated in the kiếp','seen in an earlier kiếp of the series'],rep),'','Families / templates never seen in the round need an event catalogue (j68 EV6 / j70 / j71 / j72 / j7 / j24 / ARC67 beats): not built yet (gap, order #5).','')}
+/* ---------- 13 LAG + ANIM BUDGET (orders #7 / #8; robot10-lag.js owns these sections; the RECOMMENDATIONS section at the end is the reco worker's) ---------- */
+try{const LG=require('./robot10-lag.js');md.push(...LG.section(L,{dirs:ins}).md,...LG.animSection(ins).md)}catch(e){md.push('## LAG\n\nfailed: '+e.message,'')}
 /* ---------- per thân phận × nhánh × bot ---------- */
 md.push('## Per thân phận · nhánh · bot','',tbl(HEAD0,[...by(L,r=>r.job.origin).map(([k,G])=>row0(k,stats(G))),...by(L,r=>r.job.origin+' · '+r.job.road).map(([k,G])=>row0(k,stats(G))),...by(L,r=>'bot '+r.job.bot).map(([k,G])=>row0(k,stats(G)))]),'',
  tbl(HEAD0,by(L,r=>r.job.origin+' · '+r.job.road+' · '+r.job.bot).map(([k,G])=>row0(k,stats(G)))),'');
