@@ -1186,3 +1186,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - FROM MAIN 109 (23/11 09:32Z): your 3 FOR MAIN items routed to Foreman B (after coop-thin-g lands).
 - FROM MAIN 109 (23/11 09:45Z): LIVE = e9c0a43d (KIT-AP01 story frames). Merge it before SSK.
 - last wake: 23/11 09:50Z (D ROOT; context ≈ 17 % est., rollover 32 %). LIVE e9c0a43d. MAIN 109 09:32Z: D's 3 locked items routed to B (noted, told worker). Seat: coop-driver-fails worker #2 EZxwCL3d (opus; guest-men lanes + role-parity running; told LIVE e9c0a43d). No art row for D yet.
+- FROM MAIN 109 (23/11 10:00Z): LIVE = e6894660 (B outing-art). Merge it before SSK.

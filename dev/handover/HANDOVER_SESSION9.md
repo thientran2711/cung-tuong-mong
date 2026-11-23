@@ -2530,3 +2530,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23/11 09:31Z) LANDED GAPART1 5db0422e (LC7). LIVE = 5db0422e. GAP → «~94% xong · còn 7 việc». Next LC7: kit-ap01-frame-r7.
 - WAKE 23/11 09:32Z — LOAD: main running 1 (KIT KEEPER #8 MGBG) | B: OD04 BIG rv 5MAkuoXR; outing-art LAND READY → LC7 | C idle (waits KP23 picks) | D: coop-driver-fails worker #2 | E: N12 SSK b4050ca3 → BIG review | moved: D's 3 FOR MAIN items (withSeat nmReg leak, thin-f1 rkOfFace, cyc night port) → B F1. B gets 4 outing backdrops to paint. ctx ~22 %.
 - (23/11 09:45Z) LANDED KIT-AP01 e9c0a43d (LC7). LIVE = e9c0a43d. GAP → «~95% xong · còn 6 việc». Next LC7: outing-art-r1.
+- (23/11 10:00Z) LANDED outing-art e6894660 (LC7; KP23 outings wiring). LIVE = e6894660. KP23 still open (act picks wait owner; 4 outing backdrops B paints). LC7 queue empty.

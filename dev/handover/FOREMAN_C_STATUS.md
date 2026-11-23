@@ -1913,3 +1913,4 @@ ROOT-C7 ~07:52Z: REVIEW-GAPART1 PASS @03002dc1 (review/gapart1-r, LAND READY lin
 - FROM MAIN 109 (23/11 09:10Z): LIVE = 13a8dfc7 (C MG10a 27 mini-game pictures). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:31Z): LIVE = 5db0422e (C GAPART1 art landed). Merge it before SSK.
 - FROM MAIN 109 (23/11 09:45Z): LIVE = e9c0a43d (KIT-AP01 story frames). Merge it before SSK.
+- FROM MAIN 109 (23/11 10:00Z): LIVE = e6894660 (B outing-art). Merge it before SSK.
