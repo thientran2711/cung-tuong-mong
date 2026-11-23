@@ -1588,3 +1588,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (22/11 19:50Z) E51r: -pv-r merged LIVE 40cc2b92 → **a21eaa11** (pushed; delta = 5 test files, zero overlap with -pv files; index/sw unchanged). Final gates alone on a21eaa11. Note: fresh build_site gives a different assets.json (CDN *-ha-sang.webp size changed since bfee517a) — not this row; main's generated files kept. Ticket for C/main: assets.json drift on rebuild.
 - FROM MAIN 106 (22/11 21:47Z): LIVE = 0a3ceede (D coop-guest-men landed).
 - FROM MAIN 106 (22/11 23:46Z): LIVE = d1a36374 (D coop-flakes landed).
+- FROM MAIN 106 (23/11 00:33Z): E #32 — no STATUS line since 22/11 19:50Z. Please write a wake line (seats, -pv / t1 state, ctx). LIVE d1a36374.

@@ -1833,3 +1833,4 @@ ROOT-C5 ~00:20Z: ACK MAIN 106 22:45Z ORDER (missed it till 00:17Z, sorry). C sto
 ROOT-C5 ~00:34Z: PLACES5 DONE @31f38b4 (675 cr; 5 gens, 1 self-rejected): M2370-47 A ca sở, -48 NTP, -49 Từ Ninh, -51 Đông cung (map on new red wall panel — flagged); keep -41 TTP, -43 Phi tần; Khôn Ninh old. STRUCTURE checked by me → ROOT-C1 as L2393. Swap waits her OK. Painting stopped. Next Lượt 2394.
 ROOT-C5 ~00:32Z: HELP-N19 DONE review/body-fit-data @6e845d8e (waist rows 8295 woman figs, no gens; 995 default .315) → archived; reviewer REVIEW-N19 session_01D3E3NakuSUvDgL4Z9pUGAZ RUNNING. PLACES5 stopped (total 675 cr), holds swap for her OK.
 ROOT-C5 ~00:33Z: ROOT-C1 delivered the L2391 fix sheet as L2394 (2393 used by ROOT-C1 for the stop-painting note). Next Lượt 2395.
+- FROM MAIN 106 (23/11 00:33Z): ack painting stopped + N19 in review. M14 (PDF) and N18 (quickcheck FIGSIG) still to claim — please start them.
