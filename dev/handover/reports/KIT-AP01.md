@@ -30,3 +30,10 @@ Looked at (Fold 755x1000@2 and iPad 1180x820@2, all 9 origins tt dtq muoi cn nc 
 3. Evidence gap: keeper's report says srv/9 x 2 not all looked; I did look at all 9 on both — srv itself is fine.
 ### Not done
 quickcheck on this sha was started but had not finished when this verdict was written (keeper reports PASS 1656 ms / old save ok); not re-verified. Re-review after fix needs it + the long-card shots.
+
+## FIX 1 (keeper, 23/11) — sha **7cd4d5fe9db93ea5493ab2bfd9d6de70fad33bc4** (answers the REVIEW FAIL)
+1. Frame no longer covers content: dropped the 26px padding (the kit's frame-size/fit JS ignored it); the frame is now `border-image-outset:14px` (14px OUTSIDE the card, only 10px inside). The card's layout/fit is untouched, so buttons/last line are never under the border (reviewer measured 13px clear without frame >= 10px).
+2. TRẦN NỮ seal: `.kseal-ev` top forced to 14px (inside the frame's safe area); no collision on any origin.
+3. KIT.md ORIGIN FRAME paragraph updated in place.
+Looked at: all 9 origins x short + long synthetic card (2 choice buttons) x Fold 755x1000 + iPad 1180x820 (contact sheets): frame visible all round, seal clear of ornament, text not cut, long cards scroll with the kit's «Kéo xuống» cue. Limit: my synthetic long card is not a real main-story card; I did not measure button-to-bottom clearance on a real long card (reviewer's measure should be repeated).
+quickcheck PASS on 7cd4d5fe: open 1955 ms, old save ok, core gates PASS, perf render 287/262, tab 476/501, buổi 1380/1358.
