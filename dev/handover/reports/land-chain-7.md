@@ -21,3 +21,4 @@ Helpers: /home/user/wt/land1.sh (sland + coop-e2e, no push) + push1.sh (FF-check
 - 23/11 ~17:37Z Coordinator changed: MAIN CHÍNH 110 session_01Rc5AsJh26cgtwNsyhTRPQx (MAIN 109 stopped). Reports now go to MAIN 110. LIVE = f7016b8d, queue empty.
 - 23/11 ~19:50Z LANDED coop-driver-fails da829e9b (FF on f7016b8d, test-only; QUICKCHECK PASS 673 s; coop-e2e 141/141).
 - 23/11 ~20:10Z LANDED kp23-swap 225c5c08 (7e2d4e6d self-merged on da829e9b; QUICKCHECK PASS 647 s; coop-e2e 141/141). CDN step: live img/ACTS.json patched (log replaced from dev/art/manifests/ACTS.json, acts kept) + cdn_sync (index v=b59b194524ec). Verify: CDN acts 337, log == manifest, 63 changed values vs pre-swap, 0 still -h. LIVE = 225c5c08. Revert: restore old log (29cc02d2^ manifest) in CDN ACTS.json.
+- 23/11 ~20:37Z Coordinator changed: MAIN CHÍNH 111 session_01Rc5AsND3CwtWZx1yyFP5Lp (child of 110). LIVE = 225c5c08, queue empty.
