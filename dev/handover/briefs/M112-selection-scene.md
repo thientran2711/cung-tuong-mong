@@ -71,3 +71,8 @@ Worktree: sparse detached under /home/user/wt; fetch --depth=30 under flock /hom
 
 ## ADDENDUM 12 (MAIN 112, 22:40Z) — YARD GREETING = EXISTING RULE (owner OD 23/11 ~22:50Z, read verbatim)
 - Follow OD 17/11 ~05:28Z + j61.js exactly: greet → face known; equals (tú nữ) exchange names unless proud/cold by nết; if no name, offer the existing «Hỏi danh tính» (j61.js:180/190, odds BAL.odb.j61) — in the yard it costs COUNTDOWN SECONDS (BAL key) instead of khắc; on refusal, the existing refusal line explains why. Reuse code; no new logic.
+
+## ADDENDUM 13 (MAIN 112, 22:43Z) — RANK COMES BY EDICT (owner OD 23/11 ~22:53Z, read verbatim; OVERWRITES "rank known at the ceremony" in Addenda 1/7)
+- At the ceremony only KEPT (giữ thẻ bài) vs BAN HOA is known — no ranks for anyone.
+- A few days later (BAL key, in-game days) the conferral EDICT (thánh chỉ sắc phong): short scene — a eunuch reads it at her lodging, she kneels → she learns her OWN rank (−1/0/+1 rule, cap Addendum 9).
+- Round-mates' and befriended girls' ranks become known as the edict news spreads (news line); everyone else's rank only when met.
