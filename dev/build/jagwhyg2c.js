@@ -17,7 +17,7 @@ npwReg("emoKid",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(k,c)=>{const B=BAL.ag.why.em
  return x?{s:x.s,r:x.r}:null}});
 /* ---- jil: the item market (buy back, buy, ask back) ---- */
 npwReg("ilBack",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;return {s:W.back+ilVal(c.x.e)/W.valDiv,r:"muốn chuộc lại "+ilNm(c.x.e)}}});
-npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o),why:(v,c)=>{const s=ilWant(v,c.x,c.o);return s>0?{s,r:"muốn có "+ilNm(c.x.e)}:null}});
+npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o&&!v.coop/* E44g T5 (law 6c): the co-op friend is a player seat, never an NPC buyer (the piece landed on the host's copy of her entry, no op) */),why:(v,c)=>{const s=ilWant(v,c.x,c.o);return s>0?{s,r:"muốn có "+ilNm(c.x.e)}:null}});
 npwReg("ilConf",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;const s=W.conf+ilVal(c.x.e)/W.valDiv-Math.max(0,netQ(o,"timid"))*W.timid;return s>0?{s,r:"muốn xin lại "+ilNm(c.x.e)}:null}});
 /* ---- j83: her handmade work, poison seeking ---- */
 npwReg("wkUse",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{let b=0;for(const o of wkUseOpts(v,c.w))b=Math.max(b,o.s);return b>0?{s:b,r:"dùng đồ tự làm cho việc riêng"}:null}});

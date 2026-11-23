@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)","b":"ba167ad2e34a","h":[{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"},{"s":"6d4d92b4","t":"2026-11-23T06:48Z","c":"13 phòng trang điểm bỏ rèm che cửa sổ thật"}]};
+window.CTM_BI={"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game","b":"b1a8e1ed8893","h":[{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"},{"s":"a689bb80","t":"2026-11-23T07:36Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"77619056","t":"2026-11-23T07:05Z","c":"21 dấu triện hành động Thái hậu vẽ lại, vào game."},{"s":"0a69b7a5","t":"2026-11-23T07:03Z","c":"16 phòng phi tần bỏ rèm che cửa sổ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48956,8 +48956,13 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;const 
    sends it: famIn; inside a host NPC turn b4Ops sends it as «add»: b4in). Two-way: either seat. */
 (function(){if(typeof lostReturn!=="function")return;const f0=lostReturn;lostReturn=function(e,how){let o=null,n=0,mine=false;try{mine=!!e&&typeof ilSlots==="function"&&ilSlots(S).some(z=>z===e||(!!e.iu&&z&&z.iu===e.iu))}catch(z){}
  try{if(CW.on&&!CW.ctx&&e&&typeof loCaseOf==="function"){const c=loCaseOf(e);const ow=c&&c.st!=="done"?c.own:e.gh;const p=ow&&typeof loP==="function"?loP(ow):null;if(isF(p)){o=p;n=(p.inv||[]).length}}}catch(z){}
- let ca=[];try{const c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
+ let ca=[],c0=null;try{c0=typeof loCaseOf==="function"?loCaseOf(e):null;ca=[e&&e.iu,e&&e.hiu,c0&&c0.e&&c0.e.iu,c0&&c0.e&&c0.e.hiu]}catch(z){}
  const r=f0.apply(this,arguments);
+ /* E44h (coop-lost-scan-traced 9001 vanish 10000200, the «kyngo lead»): a case of HERS closed here by a return (any road: Kỳ ngộ «kyngo»,
+    tra / xet / nop / soat / nha …) already sends the piece back («ret», or «add» inside an NPC turn); famSweep read every closing whose
+    how was not on its hand list (nha/tra/soat/nop/xet) as «mất dấu» and sent «gone» after the «ret» → her seat dropped the piece it had
+    just got back. Marked by identity (like the box rule's __fs), so no return road can miss. */
+ try{if(r&&CW.on&&host()&&c0&&c0.st==="done"&&String(c0.own)===String(fp()))c0.__rt=1}catch(z){}
  try{if(o&&r&&(o.inv||[]).length>n){const x=o.inv[o.inv.length-1];FA.set(x,ca.filter(Boolean));/* r2: inside a host NPC turn b4Ops «add» carries it to her seat; my census still routes it «sang hảo hữu» (coop-lost-scan SKEW: her đàn netted on the host) */
   if(CW.b4in){if(mine&&typeof ilSent==="function")ilSent(x,o)}else if(CW.famIn)(CW.famBk=CW.famBk||new Set).add(x);else{b4Send([famRet(x)],{});if(typeof ilSent==="function")ilSent(x,o)/* jil: «sang hảo hữu», never netted */}}}catch(z){console.error("famops ret",z)}return r};window.lostReturn=lostReturn})();
 /* E44: the week end runs without the friend's entry (withoutFriend): jlost loWeek then read every case OWNED by the friend as «owner gone»
@@ -49060,7 +49065,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
 function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
  const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
- for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone» */const was=st[c.id]===1;st[c.id]=2;
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs||c.__rt){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone»; E44h: closed by a return (lostReturn hook: «ret» sent) */const was=st[c.id]===1;st[c.id]=2;
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
@@ -49660,20 +49665,35 @@ function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId()
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
 /* the festival being scored with her entry (also when the host's own minigame defers the scoring to fxFin7) */
-function f7Done(L){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=b4Ops(c.b,c.title);if(i<0){b4Send(ops,{tt:c.title});return}
+function f7Done(L,pre){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=(pre||[]).concat(c.b?b4Ops(c.b,c.title):[]);if(i<0){b4Send(ops,{tt:c.title});return}
  const x=L[i],an=SC7[x.kind]?SC7[x.kind].n:"tài nghệ";const top=i===0;CW.f7last={i,n:L.length,kind:x.kind,reg:!!c.reg};
  const hd=top?`${c.title}: ${an} của ngươi đứng đầu, Hoàng thượng ban thưởng (Sủng, Danh tăng; về cùng tuần mới).`:`${c.title}: ngươi dâng ${an}, đứng hạng ${i+1} trong ${L.length} người dự thi${i>=L.length-1?"; lu mờ trước hậu cung":""}.`;
  b4Send(ops,{force:1,tt:c.title,hd,fx:c.reg&&typeof J71==="object"?{suc:-J71.cost}:{},fest:c.reg?{f:c.reg.F.f,y:S.year}:null})}
 if(typeof cScore7==="function"){const f=cScore7;cScore7=function(){const L=f.apply(this,arguments);try{const c=CW.on&&host()&&CW.f7;if(c&&Array.isArray(L)){
  if(c.reg){const pr=(c.reg.X.pr&&typeof J71==="object"?J71.prep:0)+(c.reg.X.pb||0);for(const x of L)if(isF(x.p)){x.pr=(x.pr||0)+pr;x.s+=pr}L.sort((a,b)=>b.s-a.s)}CW.f7.L=L}}catch(e){console.error(e)}return L}}
 if(typeof fxBest7==="function"){const f=fxBest7;fxBest7=function(p){const c=CW.on&&host()&&CW.f7;if(c&&c.reg&&isF(p))return c.reg.X.a;return f.apply(this,arguments)}}
-if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const r=f.apply(this,arguments);try{if(CW.on&&host()&&CW.f7&&CW.f7.title===t)f7Done(L)}catch(e){console.error(e)}return r}}
+/* E44g T1 (law 6c REAL OBJECTS): the festival result (fxFin7) diffs her entry around ITS OWN call. Before: f7Done diffed the snapshot taken when
+   festival() started; with the host's contest minigame deferring the scoring (and a festival that never closes keeping CW.f7 open for weeks),
+   everything that touched her entry meanwhile was sent again as the festival's doing: the garment she put on on her own seat («rm gone» →
+   her famItem takes it off her = vanish) and the one she took off («add» iu 0 = a second copy), the host's own Lấy đồ / Cài đồ already sent
+   by their acts (coop-lost-scan T1 10000013 / 10000014 / 10000078 / 10000165). A synchronous festival (no minigame) keeps its whole diff (pre). */
+function f7Snap(L){let v=null;try{const x=(L||[]).find(y=>y&&isF(y.p));v=x?x.p:friendEntry()}catch(e){}return v?{v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0:null}:null}
+if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const c=CW.on&&host()&&CW.f7&&CW.f7.title===t?CW.f7:null;let pre=[];
+ if(c){try{if(c.b)pre=b4Ops(c.b,c.title)}catch(e){console.error(e)}c.b=f7Snap(L)}
+ const r=f.apply(this,arguments);try{if(c&&CW.f7===c)f7Done(L,pre)}catch(e){console.error(e)}return r}}
 function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulled.length)return f.apply(this,arguments);
  const b=b4Snap();if(!b)return f.apply(this,arguments);const fest=n==="festival";if(fest){CW.f7={b,title:arguments[0]||"Hội thi",reg:f7reg(b.v,arguments[1]),L:null}}
  CW.b4in=true;let r;try{r=f.apply(this,arguments)}finally{CW.b4in=false}
- try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
+ try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}
+   else if(CW.f7&&CW.f7.b){/* E44g T1: the scoring waits for the host's minigame: what festival() did so far goes now, the start snapshot is dropped (fxFin7 diffs its own call) */const c=CW.f7;const ops=b4Ops(c.b,c.title);c.b=null;if(ops.length)b4Send(ops,{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
+/* E44g T6 (law 6c REAL OBJECTS, law 1): an NPC gives a piece to her entry OUTSIDE the diffed calls (rivalsTurn / rivalsMonth / festival / the
+   runAct wrapper): an agent act (jagacts cx:gift), a monthly gift (j8), jts / jveil gifts. jil ilGuard(giveTo) saw it land in her entry and
+   logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
+   (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
+   on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
@@ -76219,7 +76239,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){ilSent(e,f);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -76230,7 +76250,7 @@ function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(
  try{if(typeof dhIsItem==="function"&&dhIsItem(e))x.dh=1}catch(z){}/* sắc phong book / seal: jdh2 owns its road in the store */
  I.box.push(x);ilUid(e);ilLog(e,own,at,how);return x}
 /* take a piece out of the box into a person's chest */
-function ilTake(x,p,how){const I=ilS();const i=I.box.indexOf(x);if(i<0||!p)return false;I.box.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);ilLog(x.e,x.at,ilKey(p),how||"về");return true}
+function ilTake(x,p,how){const I=ilS();const i=I.box.indexOf(x);if(i<0||!p)return false;I.box.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);ilLog(x.e,x.at,ilKey(p),how||"về");/* E44g T5: a box piece handed to her entry on the host goes to her seat (one «add», as an NPC gift) */if(p.coop&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend({id:null},x.e,p)}catch(z){console.error(z)}return true}
 /* guard: wrap a game function; whatever durable piece leaves the listed people during the call and is nowhere afterwards is routed by ilGone */
 function ilGuard(name,how,who){const f=window[name];if(typeof f!=="function"||f.__il)return;
  const g=function(){let P=[];try{P=(who?who.apply(null,arguments):[arguments[0]]).filter(x=>x&&typeof x==="object")}catch(e){}
@@ -76360,7 +76380,7 @@ function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();
-function ilSent(e,f){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
+function ilSent(e,f,p){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,p&&p!==S?ilKey(p):"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
 /* my acts on her entry: whatever left my hands and now sits in her entry goes to her game on the live path (gift, Cài đồ, a work given) */
 (function(){if(typeof runAct!=="function")return;const f0=runAct;runAct=function(a,t){if(!ilCoop()||a!==S||!t||!t.coop)return f0.apply(this,arguments);
  let L0=[];try{L0=ilSlots(S).slice();L0.forEach(e=>ilUid(e,S))}catch(e){}const r=f0.apply(this,arguments);
@@ -85408,7 +85428,11 @@ function npwShare(L,score,x,o){const B=npwB();const R=(L||[]).map(y=>[y,+score(y
  const w=top.map(r=>Math.pow(r[1],pw));return Math.round(100*w[i]/w.reduce((a,b)=>a+b,0))}
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  const lim=typeof d.lim==="function"?d.lim(ctx||{}):(d.lim||0);let n=0;
- for(const p of (d.who(ctx||{})||[])){if(!p)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
+ /* E44h T8 (law 6b/6c, co-op): the friend's entry on the host (v.coop) is a PLAYER seat: her deeds come from her own seat, never from an npc-purpose
+    roll. liveRivals(true) holds her entry, so a kind's who list could make her the NPC actor — loTake made her the keeping thief of an NPC's piece
+    (coop-lost-scan-traced SWAP dup 54: «add» to her seat while the host kept its own copy); arson / omen / wdPawn / mock / g3scape … the same. One
+    guard for every kind (as ilBuy / cmScorn / cmLand already did by hand). */
+ for(const p of (d.who(ctx||{})||[])){if(!p||p.coop)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,flag:r.flag||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}
@@ -85555,7 +85579,7 @@ npwReg("emoKid",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(k,c)=>{const B=BAL.ag.why.em
  return x?{s:x.s,r:x.r}:null}});
 /* ---- jil: the item market (buy back, buy, ask back) ---- */
 npwReg("ilBack",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;return {s:W.back+ilVal(c.x.e)/W.valDiv,r:"muốn chuộc lại "+ilNm(c.x.e)}}});
-npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o),why:(v,c)=>{const s=ilWant(v,c.x,c.o);return s>0?{s,r:"muốn có "+ilNm(c.x.e)}:null}});
+npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o&&!v.coop/* E44g T5 (law 6c): the co-op friend is a player seat, never an NPC buyer (the piece landed on the host's copy of her entry, no op) */),why:(v,c)=>{const s=ilWant(v,c.x,c.o);return s>0?{s,r:"muốn có "+ilNm(c.x.e)}:null}});
 npwReg("ilConf",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;const s=W.conf+ilVal(c.x.e)/W.valDiv-Math.max(0,netQ(o,"timid"))*W.timid;return s>0?{s,r:"muốn xin lại "+ilNm(c.x.e)}:null}});
 /* ---- j83: her handmade work, poison seeking ---- */
 npwReg("wkUse",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{let b=0;for(const o of wkUseOpts(v,c.w))b=Math.max(b,o.s);return b>0?{s:b,r:"dùng đồ tự làm cho việc riêng"}:null}});
@@ -94770,7 +94794,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ba167ad2e34a";window.CTM_BUILD=BUILD;
+const BUILD="b1a8e1ed8893";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
