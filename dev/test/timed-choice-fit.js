@@ -20,7 +20,7 @@ const VPS=(SIZES||'755x1000,412x1058,1180x820,390x844').split(',');if(OUT)fs.mkd
    await p.evaluate(v=>{Q.length=0;document.getElementById('modal').hidden=true;
     const nop=()=>{},clk=()=>`<p class="nfcd">${kitCoopClock({left:30000,len:30000})}</p>`;
     if(v==='sample'){kitPopSample('timed');return}
-    const o=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -3",go:nop},{n:"Chặn ngự giá",fx:{},x:"Năm phần · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -5",go:nop},{n:"Thôi",fx:{},go:nop}];
+    const o=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -3",go:nop},{n:"Chặn ngự giá",fx:{},x:"Tùy duyên · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -5",go:nop},{n:"Thôi",fx:{},go:nop}];
     Q.push({t:"Kính sự phòng",h:`<p>Tối nay thẻ bài của Quý phi được lật. Ngươi có ra tay giành đêm nay không?</p>${v==='nochip'?'':clk()}`,opts:v==='two'?o.slice(0,2):o,who:pEunCourt("ksp"),pid:"nfch"});showModal()},v);
    await sleep(1500);
    const r=await p.evaluate(()=>{const R=e=>{if(!e)return null;const r=e.getBoundingClientRect();return{l:r.left,t:r.top,r:r.right,b:r.bottom}};

@@ -305,7 +305,7 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
-/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Thập tử nhất sinh … Mười phần chắc, words in KIT_ODDS j0): an odds value o reaches word
+/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Mong manh … Rất vững, words in KIT_ODDS j0): an odds value o reaches word
    step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
    SG_LO / SG_HI (before: the cuts were typed in all four). */
 /* ODDS CAP (owner 17/11 ~17:35Z "Trần 95%"): lo / hi are ALSO the one cap of every roll in the game (j1 roll / oddsCl): nothing is ever above hi
@@ -317,7 +317,7 @@ Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
     the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
  /* the road with a man (j22 manCards, her and an NPC consort alike): Sắc / Tâm cơ divisors of «Liếc mắt» / «Trao khăn tay»; a tryst within seenW tuần may leave proof with a hostile woman whose tai mắt dig it up (npcWhy trystKnow, her and an NPC alike) */manRd:{sacD:5,tcD:5,seenW:3},
  btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2,mo:2,blk:50},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
- odds:{cut:[18,31,44,57,70,83]/* 7 EQUAL bands (owner 23/11 ~21:15Z): Liều 5–17 · Khó 18–30 · Bấp bênh 31–43 · Năm phần 44–56 · Khá chắc 57–69 · Chắc 70–82 · Nắm chắc 83–95 (was 31/46/56/66/81/91) */,lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
+ odds:{cut:[18,31,44,57,70,83]/* 7 EQUAL bands (owner 23/11 ~21:15Z): Mong manh 5–17 · Hiểm 18–30 · Khó lường 31–43 · Tùy duyên 44–56 · Có cơ 57–69 · Vững 70–82 · Rất vững 83–95 (was 31/46/56/66/81/91) */,lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these

@@ -2,8 +2,8 @@
    on a narrow card the title of an option / act card wrapped ONE WORD PER LINE beside the odds meter («Nhờ / người / quen / nói / giúp / một / lời», Fold).
    Whole group = EVERY button.ka that carries a meter (.kat > .kodds): dialog option cards (.kopt), act cards (.kart, Hành sự / person card / staff / rv), compact pane cards.
    For every visible card with a meter, at Fold 755x1000 + iPad 1180x820:
-   (1) ROW    the meter sits beside the title (its height overlaps the title's lines; never a row of its own above / below) — except .kodrow on a title row narrower than meter + 7.5 em (counted as fallback);
-   (2) ROOM   the title box is at least min(its one-line width, 7.5 em) wide;
+   (1) ROW    the meter sits beside the title (its height overlaps the title's lines; never a row of its own above / below) — except .kodrow on a title row narrower than meter + 5.5 em (counted as fallback);
+   (2) ROOM   the title box is at least min(its one-line width, 5.5 em) wide;
    (3) WORDS  a title of >= 3 words has no line holding ONE word except its last line;
    (4) INSIDE the meter stays inside the card and does not cover the title.
    Scenes: (A) two REAL option dialogs (Q + showModal), 4 options each, every odds word Liều … Nắm chắc, long and short titles, option column auto/560/460/380/320/280 px;
@@ -18,14 +18,14 @@ const CHECK=`(root=>{const o={n:0,bad:[],minRoom:1e9,maxLines:0};const cv=docume
   const L=[...lines.keys()].sort((a,b)=>a-b);o.maxLines=Math.max(o.maxLines,L.length);const lone=L.slice(0,-1).filter(k=>lines.get(k)===1).length;
   const tag=(b.classList.contains('kopt')?'opt':'act')+' «'+t.slice(0,34)+'» ['+od.textContent.trim()+']'+(window.__kotwDbg?' {'+b.className+' in '+(b.parentElement.className||b.parentElement.tagName)+' kat '+Math.round(kat.getBoundingClientRect().width)+' meter '+Math.round(O.width)+'x'+Math.round(O.height)+' hist '+(b.__kodHist||[]).slice(-8).join(' / ')+' kot '+((b.parentElement.dataset||{}).kol||'')+(b.parentElement.dataset||{}).kot+'}':'');
   const own=O.top>=K.bottom-2||O.bottom<=K.top+2;const kw=kat.clientWidth;
-  if(own&&b.classList.contains('kodrow')&&kw<O.width+6+24+7.5*fs+2){o.fb=(o.fb||0)+1}/* kodrow: the title row cannot hold the stacked meter + 7.5 em (tiny pane) — the allowed fallback */
+  if(own&&b.classList.contains('kodrow')&&kw<O.width+6+24+5.5*fs+2){o.fb=(o.fb||0)+1}/* kodrow: the title row cannot hold the stacked meter + 5.5 em (tiny pane) — the allowed fallback */
   else if(own)o.bad.push(tag+' meter on its own row');
-  const need=Math.min(nat,7.5*fs);o.minRoom=Math.min(o.minRoom,Math.round(K.width/fs*10)/10);if(K.width+1<need)if(!b.classList.contains('kodrow')||!own)o.bad.push(tag+' title box '+Math.round(K.width)+'px < '+Math.round(need)+'px');
+  const need=Math.min(nat,5.5*fs);o.minRoom=Math.min(o.minRoom,Math.round(K.width/fs*10)/10);if(K.width+1<need)if(!b.classList.contains('kodrow')||!own)o.bad.push(tag+' title box '+Math.round(K.width)+'px < '+Math.round(need)+'px');
   if(nw>=3&&lone)o.bad.push(tag+' '+lone+' one-word line(s) of '+L.length);
   if(O.right>B.right+1||O.left<B.left-1)o.bad.push(tag+' meter sticks out');
   if(O.left<K.right-1&&O.right>K.left+1&&O.top<K.bottom-1&&O.bottom>K.top+1)o.bad.push(tag+' meter covers the title')});return o})`;
 const DLG=[
- {t:'Mua chuộc người Nội vụ phủ',opts:[['Đưa bạc cho người Nội vụ phủ','Khá chắc · tốn: Bạc -94 · 2 khắc · thành: Sức 80→98 (+18) · Sủng +2 · Danh +1'],['Nhờ người quen nói giúp một lời','Năm phần · tốn: Tâm cơ -3 · 1 khắc · thành: Sủng +2 · Danh +1 · hỏng: Danh -2'],['Lén vào kho lấy sổ sách','Liều · tốn: 2 khắc · thành: Danh +2 · hỏng: Danh -4'],['Thôi, để lúc khác','tốn: 1 khắc · thành: Tâm cơ +1 · Sủng +1']]},
+ {t:'Mua chuộc người Nội vụ phủ',opts:[['Đưa bạc cho người Nội vụ phủ','Khá chắc · tốn: Bạc -94 · 2 khắc · thành: Sức 80→98 (+18) · Sủng +2 · Danh +1'],['Nhờ người quen nói giúp một lời','Tùy duyên · tốn: Tâm cơ -3 · 1 khắc · thành: Sủng +2 · Danh +1 · hỏng: Danh -2'],['Lén vào kho lấy sổ sách','Liều · tốn: 2 khắc · thành: Danh +2 · hỏng: Danh -4'],['Thôi, để lúc khác','tốn: 1 khắc · thành: Tâm cơ +1 · Sủng +1']]},
  {t:'Hội phối đồ: báo đề',opts:[['Sai tai mắt dò bên chủ hội','Khó · tốn: Bạc -20 · 1 khắc · thành: Danh +1'],['Tự mình đến xin chỉ giáo','Chắc · tốn: 2 khắc · thành: Tài +1'],['Đem lễ vật đến tạ ơn ma ma','Nắm chắc · tốn: Bạc -30 · thành: Thiện cảm +3'],['Đã hiểu, sẽ chuẩn bị','Nắm chắc · tốn: 1 khắc · thành: Tâm cơ +1']]}];
 (async()=>{const b=await chromium.launch();let bad=0;const TAB=[];
  const DEV=process.env.DEVS?process.env.DEVS.split(',').map(x=>x.split('x').map(Number)):[[755,1000],[1180,820]];/* DEVS=412x1058,390x844 for the secondary devices */

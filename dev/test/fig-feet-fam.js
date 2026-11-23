@@ -27,11 +27,11 @@ const VPS=(SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',');
   for(const cs of cases){
    await p.evaluate(async cs=>{Q.length=0;const M=document.getElementById('modal');M.hidden=true;const nop=()=>{};const [kind,a,i]=cs.split(':');
     if(kind==='timed'){const clk=()=>`<p class="nfcd">${kitCoopClock({left:30000,len:30000})}</p>`;if(a==='sample'){kitPopSample('timed');return}
-     const o=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -3",go:nop},{n:"Chặn ngự giá",fx:{},x:"Năm phần · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -5",go:nop},{n:"Thôi",fx:{},go:nop}];
+     const o=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -3",go:nop},{n:"Chặn ngự giá",fx:{},x:"Tùy duyên · thành: Hoàng thượng sang cung ngươi · hỏng: Sủng -5",go:nop},{n:"Thôi",fx:{},go:nop}];
      Q.push({t:"Kính sự phòng",h:`<p>Tối nay thẻ bài của Quý phi được lật. Ngươi có ra tay giành đêm nay không?</p>${a==='nochip'?'':clk()}`,opts:a==='two'?o.slice(0,2):o,who:pEunCourt("ksp"),pid:"nfch"});showModal();return}
     if(kind==='pop'){kitPopSample(a);return}
     const w=window.__FP[+i][1];const long="Hoàng thượng sang cung ta · thành: Danh +2, Sủng +3 · hỏng: Sủng -3, nàng oán +8 · cần: Bạc 40, Tài 20";
-    const one=[{n:'Tiếp',fx:{},x:'Chắc',go:nop}];const three=[{n:'Cúi đầu nhận lỗi',fx:{},x:'Khá chắc · '+long,go:nop},{n:'Thưa rằng do Hoàng thượng định',fx:{},x:'Năm phần · '+long,go:nop},{n:'Dâng lễ vật xin bỏ qua',fx:{},x:'Khó · '+long,go:nop}];
+    const one=[{n:'Tiếp',fx:{},x:'Chắc',go:nop}];const three=[{n:'Cúi đầu nhận lỗi',fx:{},x:'Khá chắc · '+long,go:nop},{n:'Thưa rằng do Hoàng thượng định',fx:{},x:'Tùy duyên · '+long,go:nop},{n:'Dâng lễ vật xin bỏ qua',fx:{},x:'Khó · '+long,go:nop}];
     Q.push({t:'Có người đến',stage:[w],h:'<p>Đến thăm, hỏi han chuyện trong cung rất lâu, chưa chịu đi.</p>',opts:kind==='person1'?one:three,must:1});showModal()},cs).catch(()=>{});
    /* wait for the figure pictures, then let the layout settle */
    for(let t=0;t<30;t++){await sleep(300);const ok=await p.evaluate(()=>{const M=document.getElementById('modal');if(M.hidden)return 1;const g=[...M.querySelectorAll('.dlg img')].filter(i=>/\/fig-|unknown-fig/.test(i.getAttribute('src')||''));return g.every(i=>i.complete)});if(ok)break}

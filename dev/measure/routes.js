@@ -1,6 +1,6 @@
 /* jroute bot: a route-seeking player on top of the inpage6 sensible bot.
    usage: node dev/measure/routes.js <mode tc|tt|hl|ad|off> <bot iterations> [out.json] [careful 0|1]
-   tc = escape seeker (gathers every prep step, goes when the odds word is Năm phần or better, or after 18 months);
+   tc = escape seeker (gathers every prep step, goes when the odds word is Tùy duyên or better, or after 18 months);
    tt = lover seeker (picks a man, meets him whenever possible, follows him out when he promises);
    hl = legal exit (asks Thái hậu, then any legal exit card that opens); ad = quiet life; off = no route acts (control).
    careful=0: goes as soon as any escape card is open. Needs zz-test.html at the repo root.

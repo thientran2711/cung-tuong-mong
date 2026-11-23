@@ -1,5 +1,5 @@
 # ONE CORE odds word (owner 17/11 17:00Z / 17:35Z; KIT.md: a decision shows NO ladder word; a real chance gets its word only from
-# word() / oddsOf / capW). Lists every ladder word TYPED into a player text (every rung: Liều, Khó, Năm phần, Khá chắc, Chắc,
+# word() / oddsOf / capW). Lists every ladder word TYPED into a player text (every rung: Liều, Khó, Tùy duyên, Khá chắc, Chắc,
 # Nắm chắc, Nắm chắc) as a hint segment: at the start of a string or right after " · ". Regex sources, comments and help prose
 # (the ladder explained as a list) are skipped.
 # usage: python3 dev/tools/typed-ladder-scan.py [git-ref]   -> count + file:line list
@@ -13,7 +13,7 @@ def files():
   else:
     for f in sorted(glob.glob('dev/build/*.js')):
       if not f.endswith('all.js'):yield f,open(f,encoding='utf-8').read()
-W=r'(?:Nắm chắc|Khá chắc|Năm phần|Bấp bênh|Chắc|Khó|Liều|Năm ăn năm thua|Ngang ngửa|Rất chắc|Hơi khó)'
+W=r'(?:Nắm chắc|Khá chắc|Tùy duyên|Khó lường|Chắc|Khó|Liều|Năm ăn năm thua|Ngang ngửa|Rất chắc|Hơi khó)'
 # a hint segment: string opener (" ` ') or "· " then the word, then " ·", end of string, or "${"
 SEG=re.compile(r'(?:(?<=["`\'])|(?<=· ))'+W+r'(?=\s*·|["`\']|\$\{|\s*$)')
 SKIP_LINE=re.compile(r'^\s*(/\*|\*|//)')

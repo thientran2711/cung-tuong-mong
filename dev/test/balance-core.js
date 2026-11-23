@@ -33,7 +33,7 @@ const {chromium}=require('playwright');const path=require('path');
    ok("NPC night art bonus = her own best art (Thêu favoured → up), hers (Cầm disfavoured → down)",stealArtB(z,"road")>0&&stealArtB(S,"road")<0&&stBestArt(z).k==="theu"&&stBestArt(S).k==="cam",[stealArtB(z,"road"),stealArtB(S,"road")]);
    S.emp.ea={m:S.turn,f:"nau",d:"theu"};ok("disfavoured Thêu lowers the NPC who is best at it",stealArtB(z,"feign")<0,stealArtB(z,"feign"));z.arts.theu=0;S.arts.cam=0;S.emp.ea=ea}
   const s0=S.sung,d0=S.danh;stealFail(S,w,"road");ok("Chặn ngự giá failure = BAL.steal.m.road.lose",Math.abs((S.sung-s0)-BAL.steal.m.road.lose.sung)<=2/* sg(): the Emperor's trait scales Sủng */&&S.danh===Math.max(0,d0+(BAL.steal.m.road.lose.danh||0)),[S.sung-s0,S.danh-d0]);
-  ok("word() reads BAL.odds.cut (the one ladder)",word(BAL.odds.cut[3])==="Có cơ"&&word(BAL.odds.cut[3]-1)==="Năm phần");
+  ok("word() reads BAL.odds.cut (the one ladder)",word(BAL.odds.cut[3])==="Có cơ"&&word(BAL.odds.cut[3]-1)==="Tùy duyên");
   ok("ARTFX texts print BAL.art.stUp",ARTFX.cam[0].startsWith(`Tài +${BAL.art.stUp}`),ARTFX.cam[0]);
   return out});
  let bad=0;for(const [n,c,d] of R){console.log(`${c?"PASS":"FAIL"} | ${n} | ${d}`);if(!c)bad++}console.log("page errors:",errs.length,errs.slice(0,3).join(" | "));

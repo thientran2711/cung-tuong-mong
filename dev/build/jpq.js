@@ -8,7 +8,7 @@
       Co-op: the Emperor's death stays muted (jmort / jcoopworld rule) → the Emperor is never offered; Thái hậu only on the host (host-only rolls).
    2. ODDS (pqOdds, kit "Vì sao"): BAL.pg.base + Tâm cơ/BAL.pg.tamDiv + the target's trust/BAL.pg.trustDiv (one table with jpoison pgOdds; khắc = BAL.pg.khac) + dish grade − the three royal checks (người nếm, Ngự thiện phòng
       kiểm hai lượt, đũa bạc) [− the kitchen alert after a failed try] [+ slow poison passes the taster] [+ the Vương gia's men] [+ a trusted maid];
-      capped at BAL.pq.max, then the one ODDS CAP oddsCl (BAL.odds.lo / hi) (never better than "Năm phần" band at the top: ladder words only, no %).
+      capped at BAL.pq.max, then the one ODDS CAP oddsCl (BAL.odds.lo / hi) (never better than "Tùy duyên" band at the top: ladder words only, no %).
    3. FAIL: the kitchens go on alert BAL.pq.guard.alertMo months; traced (cp) → treason: the doer dies ("Ban chết", over() / jmort kill) and her house
       falls (j55 tdPowAdd, members' Danh). SUCCESS: Hạc đỉnh hồng = death now (Emperor: S.mort.empDue → j3 emperorDies next month; Thái hậu: jmort kill →
       thShift); Độc ngấm dần = lifespan −BAL.pq.slowCut years (jmort omen + death later). After a royal death a poisoning is investigated

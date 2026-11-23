@@ -49,7 +49,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   Object.assign(BAL.stip,JSON.parse(B0));if(m0)m0.spyFor=sf;S.confined=0;Q.length=0;return c?(c.opts||[]).map(o=>o.n+" | "+(o.lock?"LOCK ":"")+o.x):[]},conf);
  const self=await selfRun(false);const selfC=await selfRun(true);
  ok(selfC.some(s=>/^Đòi lại phần bị cắt xén \| LOCK đang cấm túc/.test(s)),"no cung nữ + cấm túc: «Đòi lại phần bị cắt xén» locked with the reason (law 6: cannot leave her palace)",selfC);
- ok(self.some(s=>/^Đòi lại phần bị cắt xén \| (Liều|Khó|Năm phần|Khá chắc|Chắc|Nắm chắc|Nắm chắc)/.test(s)),"no cung nữ: «Đòi lại phần bị cắt xén» with odds in words",self);
+ ok(self.some(s=>/^Đòi lại phần bị cắt xén \| (Liều|Khó|Tùy duyên|Khá chắc|Chắc|Nắm chắc|Nắm chắc)/.test(s)),"no cung nữ: «Đòi lại phần bị cắt xén» with odds in words",self);
  if(SHOT){fs.mkdirSync(SHOT,{recursive:true});
   for(const [W,H,nm] of [[755,1000,"fold"],[1180,820,"ipad"]])for(const st of ["cut","confined"]){
    await p.setViewportSize({width:W,height:H});for(let k=0;k<40;k++){const bt=p.locator('text=Vào cung ngay');if(await bt.count()&&await bt.first().isVisible()){await bt.first().click().catch(()=>{});await sleep(1500)}else break}

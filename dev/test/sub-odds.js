@@ -6,7 +6,7 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,PAGE,OUT,TAG]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 /* a ladder word right after ':' or '(' = a side chance written on the act ladder (the act's own odds stand alone in the chip) */
-const BAD=/[:(]\s*(Liều|Khó|Năm phần|Khá chắc|Nắm chắc|Nắm chắc|Chắc)(?![a-zà-ỹđ]| chắn)/i;
+const BAD=/[:(]\s*(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững|Liều|Khó|Khá chắc|Nắm chắc|Chắc)(?![a-zà-ỹđ]| chắn)/i;
 const badLines=t=>String(t).split(/\n| · /).filter(s=>BAD.test(s));/* «Khó lường» retired (review/odds-no-unknown) */
 async function skipLoader(p){for(let i=0;i<300;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}
   return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')return;await sleep(500)}}

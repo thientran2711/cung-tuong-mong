@@ -191,7 +191,7 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
  KG82.peekBad=()=>{if(phase!=="play"||stop)return null;return att(performance.now())>.75?{sel:"#sgtap"}:null};
  return()=>{stop=true;stopL()}}
 
-/* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Bấp bênh / Năm phần / Khá chắc / Chắc / Nắm chắc ----------
+/* ---------- odds ladder: a game moves the odds by ONE step of Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
 const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
 function sgLv(o){return oddsLv(o)}

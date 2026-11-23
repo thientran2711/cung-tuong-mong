@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"176aea47+","t":"2026-11-23T20:59Z","c":"Kit odds row: tier reads the old stacked-meter title room (no column-count change); test logs card heights","b":"494c79255bac","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
+window.CTM_BI={"s":"467d8a06+","t":"2026-11-23T21:19Z","c":"Odds ladder: 7 equal bands, ONE source KIT_ODDS (j0), words Thập tử nhất sinh / Hiểm / Bấp bênh / Năm phần / Có cơ / Vững / Mười phần chắc,…","b":"20f9b7c0a604","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -924,11 +924,12 @@ function regEach(obj,fn,name){const seen=new Map();
   try{fn(k,v,late?1:0)}catch(e){console.error("regEach "+(name||""),k,e)}seen.set(k,obj[k]);n++}return n};
  const R={name:name||"",obj,run,n0:run(0)};REG_EACH.push(R);return R}
 function regSweep(){let n=0;for(const R of REG_EACH)n+=R.run(1);return n}
-/* ONE SOURCE of the odds ladder words (owner 23/11 ~21:25Z, review/kit-odds-row: 7 EQUAL bands; cuts BAL.odds.cut = 18/31/44/57/70/83 in jbal: 5–17 · 18–30 · 31–43 · 44–56 · 57–69 · 70–82 · 83–95).
-   Every module reads KIT_ODDS / KIT_ODDS_ALT (regex source, longest first) / kitOddsCanon / kitOddsIdx: nobody types the words. KIT_ODDS_OLD = every word of older builds, mapped to the band that holds the CENTRE of its old band
-   (Liều 5–30 → 1st · Khó 31–45 → 3rd · Năm ăn năm thua 46–55 → 4th · Khá chắc 56–65 → 5th · Chắc 66–80 → 6th · Rất chắc 81–90 / Nắm chắc 91–95 → 7th); accepted on PARSE only (old saves / logs), NEVER shown. */
-const KIT_ODDS=["Thập tử nhất sinh","Hiểm","Bấp bênh","Năm phần","Có cơ","Vững","Mười phần chắc"];
-const KIT_ODDS_OLD={"Liều":"Thập tử nhất sinh","Khó":"Bấp bênh","Hơi khó":"Bấp bênh","Năm ăn năm thua":"Năm phần","Ngang ngửa":"Năm phần","Khá chắc":"Có cơ","Chắc":"Vững","Rất chắc":"Mười phần chắc","Nắm chắc":"Mười phần chắc"};
+/* ONE SOURCE of the odds ladder words (owner 23/11 ~21:40Z, review/kit-odds-row: 7 EQUAL bands; cuts BAL.odds.cut = 18/31/44/57/70/83 in jbal: 5–17 · 18–30 · 31–43 · 44–56 · 57–69 · 70–82 · 83–95).
+   RULE: no ladder word reads as a promise («thành», no numbers). Every module reads KIT_ODDS / KIT_ODDS_ALT (regex source, longest first) / kitOddsCanon / kitOddsNorm / kitOddsIdx: nobody types the words.
+   KIT_ODDS_OLD = every word of older builds (and of the words tried on 23/11), parse only (old saves / logs), NEVER shown, mapped to the band that holds the CENTRE of its old band
+   (Liều 5–30 → 1st · Khó 31–45 → 3rd · Năm ăn năm thua 46–55 → 4th · Khá chắc 56–65 → 5th · Chắc 66–80 → 6th · Rất chắc 81–90 / Nắm chắc 91–95 → 7th). */
+const KIT_ODDS=["Mong manh","Hiểm","Khó lường","Tùy duyên","Có cơ","Vững","Rất vững"];
+const KIT_ODDS_OLD={"Liều":"Mong manh","Thập tử nhất sinh":"Mong manh","Khó":"Khó lường","Hơi khó":"Khó lường","Bấp bênh":"Khó lường","Năm ăn năm thua":"Tùy duyên","Ngang ngửa":"Tùy duyên","Năm phần":"Tùy duyên","Khá chắc":"Có cơ","Chắc":"Vững","Rất chắc":"Rất vững","Nắm chắc":"Rất vững","Ắt thành":"Rất vững","Chín phần chắc":"Rất vững","Mười phần chắc":"Rất vững"};
 const KIT_ODDS_ALT=KIT_ODDS.concat(Object.keys(KIT_ODDS_OLD)).sort((a,b)=>b.length-a.length).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
 function kitOddsCanon(w){return KIT_ODDS_OLD[w]||w}
 const KIT_ODDS_LEAD=new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)");
@@ -6428,7 +6429,7 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
-/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Thập tử nhất sinh … Mười phần chắc, words in KIT_ODDS j0): an odds value o reaches word
+/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Mong manh … Rất vững, words in KIT_ODDS j0): an odds value o reaches word
    step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
    SG_LO / SG_HI (before: the cuts were typed in all four). */
 /* ODDS CAP (owner 17/11 ~17:35Z "Trần 95%"): lo / hi are ALSO the one cap of every roll in the game (j1 roll / oddsCl): nothing is ever above hi
@@ -6440,7 +6441,7 @@ Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
     the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
  /* the road with a man (j22 manCards, her and an NPC consort alike): Sắc / Tâm cơ divisors of «Liếc mắt» / «Trao khăn tay»; a tryst within seenW tuần may leave proof with a hostile woman whose tai mắt dig it up (npcWhy trystKnow, her and an NPC alike) */manRd:{sacD:5,tcD:5,seenW:3},
  btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2,mo:2,blk:50},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
- odds:{cut:[18,31,44,57,70,83]/* 7 EQUAL bands (owner 23/11 ~21:15Z): Liều 5–17 · Khó 18–30 · Bấp bênh 31–43 · Năm phần 44–56 · Khá chắc 57–69 · Chắc 70–82 · Nắm chắc 83–95 (was 31/46/56/66/81/91) */,lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
+ odds:{cut:[18,31,44,57,70,83]/* 7 EQUAL bands (owner 23/11 ~21:15Z): Mong manh 5–17 · Hiểm 18–30 · Khó lường 31–43 · Tùy duyên 44–56 · Có cơ 57–69 · Vững 70–82 · Rất vững 83–95 (was 31/46/56/66/81/91) */,lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
@@ -9867,7 +9868,7 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
  return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}${wait67(b,A)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
   const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(fill67(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
   const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253).
-     VANPHONG: the act ladder (Thập tử nhất sinh…Mười phần chắc) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side
+     VANPHONG: the act ladder (Mong manh…Rất vững) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side
      chance → the chance scale Rất thấp…Rất cao (chanceLvl, j1), labelled with the result card's row name «Xoay chiều»; kept in brackets INSIDE the ending phrase so the kit hint
      of the story dialog (kitHint/kitOptModel, jk2b: splits on " · ") shows it with the ending (review/story14-p1-r3) */
   const sh=sure||(end&&end[0]===end[1]);const eT=k=>{const E=a.E[k];if(!E)return"";const w=sh&&typeof f14Hold==="function"?f14Hold(A,k):100;return (E.k<0?Rd:G)(`kết: ${fill67(E.tag,A)}${w<100?` (có thể xoay chiều: ${chanceLvl(100-w)})`:""}`)};
@@ -29188,7 +29189,7 @@ const KIT_GLOSS={
  "Nội vụ phủ":"Nơi lo đồ dùng, kẻ hầu và việc vặt của hậu cung.",
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
- "Cơ hội":"Thang 7 bậc: Liều < Khó < Bấp bênh < Năm phần < Khá chắc < Chắc < Nắm chắc."};
+ "Cơ hội":"Thang 7 bậc: "+KIT_ODDS.join(" < ")+"."};
 /* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
 let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
@@ -29835,9 +29836,9 @@ if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.
    under KIT_ODFIT.room em, (23/11 review/kit-odds-row: the stacked form kodstk is REMOVED — bar + word are ONE row, KIT §5) the title keeps the rest of the row
    and the odds stay on the title row; only a title row too narrow even for that (< stacked meter + KIT_ODFIT.min em, e.g. a person card pane on a 390 px phone) puts the meter under the title (.kodrow). Measured with the fonts (canvas), so the result does not depend on the current state; ResizeObserver (on the title row) re-runs it when the row changes width, web fonts arriving re-run every card, and every fit is VERIFIED on the real layout (a meter still under the title → stack, then .kodrow),
    kaNorm when its title / odds change. The title is flex 1 1 0 (kp-kat-css): the meter drops under it only when even 9 em + meter do not fit (was: whenever the title did not fit on ONE line, #49a). (Was: kitOptTier stacked under a 430 px CARD and only in dialogs, and the stack never showed: `.oc` (inline-block) won over `.kodm` (inline-flex).) */
-const KIT_ODFIT={room:12,word:5.4,gap:5,min:7.5,pad:4};window.KIT_ODFIT=KIT_ODFIT;
+const KIT_ODFIT={room:12,word:5.4,gap:5,min:5.5,pad:4};window.KIT_ODFIT=KIT_ODFIT;
 let kitOdCv=null;function kitOdTextW(el,t){try{kitOdCv=kitOdCv||document.createElement("canvas").getContext("2d");const c=getComputedStyle(el);kitOdCv.font=c.fontStyle+" "+c.fontWeight+" "+c.fontSize+" "+c.fontFamily;return kitOdCv.measureText(t).width}catch(e){return 0}}
-function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
+function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;if(!b.classList.contains("kodw"))b.classList.add("kodw");/* carries a meter: its title may shrink to KIT_ODFIT.min em before the whole meter goes under it */const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
  if(!kan||!m||!od.textContent.trim()){b.classList.remove("kodstk");return}const cw=kat.clientWidth;if(!cw)return;const kc=getComputedStyle(kat);const cbw=cw-parseFloat(kc.paddingLeft)-parseFloat(kc.paddingRight);kat.__kodW=Math.round(cbw);/* the width this choice was made for (= the observer's contentRect): a fit made inside kitOptTier's trial layouts is redone when the row ends at another width (rv round 1: kodrow stuck from a 180 px trial on a 204 px row) */const room0=cbw-(parseFloat(kc.columnGap)||6);
  const seg=m.querySelector(".kseg"),w=m.querySelector("b");const segW=seg?seg.offsetWidth:0,wordW=w?kitOdTextW(w,w.textContent.trim()):0;
  let rest=0;for(const c of od.children)if(c!==m&&c.getClientRects().length)rest+=c.offsetWidth+4;/* a note beside the meter («· 2 khắc») */
@@ -29872,6 +29873,7 @@ try{if(document.fonts){document.fonts.ready.then(kitOdAll);if(document.fonts.add
 /* LINE BREAKS AT THE RIGHT PLACE (KIT §5, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
 .kodm.kodm,.kodm.kodm>b,.kodm.kodm>.kseg{white-space:nowrap!important;flex-wrap:nowrap!important;flex-direction:row!important}.kodm.kodm>b{flex:none}
 /* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
+button.ka.kodw .kat>.kan:is(#kodw1,.kan):is(#kodw2,.kan){min-width:min(${KIT_ODFIT.min}em,100%)!important}
 button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
 button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
 button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
@@ -33005,7 +33007,7 @@ function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(
    with its word kept only in the tooltip / aria-label (OD 21/11 ~00:50Z, mg-5s-clear: a button the engine marks data-kgkeep=1 KEEPS its short word: «Quạt lửa», «Thưa», «✓ Dán»), a `small` line is hidden, and a kit row (.krl label + sentence) is hidden when it holds no number, else only its number stays. */
 (function(){const SIGN=[[/Gợi ý/,"?"],[/Nghiêng trái/,"↶"],[/Nghiêng phải/,"↷"],[/Quạt/,"♨"],[/xong|Xong|Dâng|Dán|Nộp|Chấm/,"✓"]];
  const inPlay=e=>e.closest("#kg82box,.kg82act")&&!e.closest(".kgr,.kgt-bar,.kgres");
- /* review/kit-signs-odds: the odds WORD (Thập tử nhất sinh … Mười phần chắc, VANPHONG) and the quick / skip button that carries it are the player's choice information: NEVER a sign, never hidden. Exempt = every kitQuick button
+ /* review/kit-signs-odds: the odds WORD (Mong manh … Rất vững, VANPHONG) and the quick / skip button that carries it are the player's choice information: NEVER a sign, never hidden. Exempt = every kitQuick button
     (.kquick), the makeup #toilquick, any id ending skip / quick, and any button / small whose text holds a word of the kit ladder KIT_ODDS (j79). */
  const ODDRE=(()=>{const L=(typeof KIT_ODDS!=="undefined"&&KIT_ODDS.length?KIT_ODDS.concat(Object.keys(KIT_ODDS_OLD)):[]).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));return new RegExp("(?<![\\p{L}])(?:"+L.join("|")+")(?![\\p{L}])","u")})();
  const isOdds=e=>!!(e.closest(".kquick,#toilquick,[id$='skip'],[id$='quick']")||ODDRE.test(e.textContent||""));
@@ -52379,7 +52381,7 @@ window.pgOdds=pgOdds;window.pgGive=pgGive;window.gfSincere=gfSincere;
       Co-op: the Emperor's death stays muted (jmort / jcoopworld rule) → the Emperor is never offered; Thái hậu only on the host (host-only rolls).
    2. ODDS (pqOdds, kit "Vì sao"): BAL.pg.base + Tâm cơ/BAL.pg.tamDiv + the target's trust/BAL.pg.trustDiv (one table with jpoison pgOdds; khắc = BAL.pg.khac) + dish grade − the three royal checks (người nếm, Ngự thiện phòng
       kiểm hai lượt, đũa bạc) [− the kitchen alert after a failed try] [+ slow poison passes the taster] [+ the Vương gia's men] [+ a trusted maid];
-      capped at BAL.pq.max, then the one ODDS CAP oddsCl (BAL.odds.lo / hi) (never better than "Năm phần" band at the top: ladder words only, no %).
+      capped at BAL.pq.max, then the one ODDS CAP oddsCl (BAL.odds.lo / hi) (never better than "Tùy duyên" band at the top: ladder words only, no %).
    3. FAIL: the kitchens go on alert BAL.pq.guard.alertMo months; traced (cp) → treason: the doer dies ("Ban chết", over() / jmort kill) and her house
       falls (j55 tdPowAdd, members' Danh). SUCCESS: Hạc đỉnh hồng = death now (Emperor: S.mort.empDue → j3 emperorDies next month; Thái hậu: jmort kill →
       thShift); Độc ngấm dần = lifespan −BAL.pq.slowCut years (jmort omen + death later). After a royal death a poisoning is investigated
@@ -54692,7 +54694,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
    sections:[{h:"Lòng người với ta",chips:[kitChip("Thiện cảm",12),kitChip("Đức",3)]},{h:"Cách lấy lòng",rows:[["Thỉnh an mỗi tuần",kitChip("Thiện cảm",2),"t"],["Dâng kinh chép tay",kitChip("Thiện cảm",5),"t"]]}],btn:"Đã hiểu"},
   rule:{kind:"rule",title:"Bổng lộc",facts:["Mỗi tháng Nội vụ phủ phát bổng lộc theo phẩm vị.","Phẩm càng cao, bạc càng nhiều."],rows:[["Thường tại",kitChip("Bạc",20,"g"),"t"],["Quý nhân",kitChip("Bạc",40,"g"),"t"]],btn:"Đã hiểu"},
   event:q&&{kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],
-   opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm phần · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
+   opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Tùy duyên · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
   long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
    opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`thành: Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"",go:nop}]},
@@ -54706,7 +54708,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
   else{const v=R[0];if(!v){back();return false}m={t:"Đêm thị tẩm",h:"<p>Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu.</p>",opts:[{n:"Xin ân cho gia đình",fx:{},x:`Khá chắc · thành: Danh +${BAL.kitpage.demo.ask.danh}`,go:nop},{n:"Thì thầm nói xấu "+v.name,fx:{},x:`Khó · thành: nàng Sủng -${BAL.kitpage.demo.ask.sung}`,go:nop},{n:"Im lặng, tựa vai ngài",fx:{},x:`Ân tình +${BAL.kitpage.demo.ask.an}`,go:nop}]}}
   m.onClose=back;m.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});Q.push(m);showModal();return true}
  if(k==="timed"&&typeof pEunCourt==="function"&&typeof kitCoopClock==="function"){/* §32.5c / §69: a TIMED choice = the event dialog (figure, picture band) with the countdown chip right under the question, above the options */
-  const T=BAL.kitpage.clock,o2=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ta · hỏng: mất một phần sủng",go:nop},{n:"Chặn ngự giá",fx:{},x:"Năm phần · thành: Hoàng thượng sang cung ta · hỏng: mất nhiều sủng",go:nop},{n:"Giữ chân Hoàng thượng",fx:{},x:"Chắc · thành: ai tranh đêm của ta cũng khó thêm một bậc",go:nop}];
+  const T=BAL.kitpage.clock,o2=[{n:"Tranh sủng",fx:{},x:"Khá chắc · thành: Hoàng thượng sang cung ta · hỏng: mất một phần sủng",go:nop},{n:"Chặn ngự giá",fx:{},x:"Tùy duyên · thành: Hoàng thượng sang cung ta · hỏng: mất nhiều sủng",go:nop},{n:"Giữ chân Hoàng thượng",fx:{},x:"Chắc · thành: ai tranh đêm của ta cũng khó thêm một bậc",go:nop}];
   o2.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});
   Q.unshift({t:"Kính sự phòng",h:`<p>Tối nay thẻ bài của ta được lật. Kẻ khác có thể tranh mất đêm nay; ta có giữ chân Hoàng thượng không?</p><p class="nfcd">${kitCoopClock({left:T.left,len:T.len})}</p>`,opts:o2,who:pEunCourt("ksp"),pid:"kitpg-timed",onClose:back});showModal();return true}
  const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
@@ -65411,7 +65413,7 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
  KG82.peekBad=()=>{if(phase!=="play"||stop)return null;return att(performance.now())>.75?{sel:"#sgtap"}:null};
  return()=>{stop=true;stopL()}}
 
-/* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Bấp bênh / Năm phần / Khá chắc / Chắc / Nắm chắc ----------
+/* ---------- odds ladder: a game moves the odds by ONE step of Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
 const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
 function sgLv(o){return oddsLv(o)}
@@ -65760,7 +65762,7 @@ const R=(src,f="g")=>kRx(src,f+"u");/* kRx: lookbehind that also runs on Safari 
 const srvMode=()=>{try{return typeof isSrv==="function"&&!!S&&isSrv()}catch(e){return false}};/* servant start: "Chủ tin" is the mistress's trust in HER — keep the word */
 /* ordered phrase rules: [regex, replacement|function] */
 const RULES=[
- /* internal attack tags "[Tung tin đồn · Năm phần · hỏng]" → a sentence */
+ /* internal attack tags "[Tung tin đồn · Tùy duyên · hỏng]" → a sentence */
  [/^\[([^\[\]]+?) · (thành|hỏng)\]$/u,(m,a,ok)=>{const p=a.split(" · ");const x=p[0],y=p[1];return `«${x}» nhắm vào ngươi${y?` (việc ${y.toLowerCase()})`:""}: ${ok==="thành"?"đã thành":"không thành"}.`}],
  /* dates */
  [R(B+"T(\\d{1,2})\\/(\\d{1,3})( · | )(thượng|trung|hạ) tuần"),(m,a,b,s,t)=>`Tháng ${mon(a)}, năm thứ ${ord(b)} · ${t} tuần`],
@@ -66750,7 +66752,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Năm phần · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
@@ -94805,7 +94807,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="494c79255bac";window.CTM_BUILD=BUILD;
+const BUILD="20f9b7c0a604";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
