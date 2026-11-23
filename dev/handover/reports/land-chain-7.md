@@ -13,3 +13,4 @@ Roll at ctx >= ~28 % (START_CTX + 25), ceiling 60 %.
 - 23/11 ~09:30Z LANDED gapart1 5db0422e (03002dc1 self-merged on 13a8dfc7; ending-screens 272/272; QUICKCHECK PASS 694 s; coop-e2e 141/141; no cdn_sync).
 - 23/11 ~09:45Z LANDED kit-ap01 e9c0a43d (f38a40b1 self-merged on 5db0422e; QUICKCHECK PASS 656 s; coop-e2e 141/141).
 Helpers: /home/user/wt/land1.sh (sland + coop-e2e, no push) + push1.sh (FF-check push).
+- 23/11 ~10:00Z LANDED outing-art e6894660 (b2f84cd0 self-merged on e9c0a43d; outing-art.js ALL OK; QUICKCHECK PASS 649 s; coop-e2e 141/141). LIVE = e6894660. Queue empty.
