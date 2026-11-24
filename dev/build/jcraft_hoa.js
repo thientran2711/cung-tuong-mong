@@ -41,7 +41,7 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const ghost=L("ghost"),cutTol=L("cutTol"),angTol=L("angTol"),sway=L("sway"),nAlike=Math.round(L("alike"));
  /* a handmade-work recipe (j83 «Cắm hoa», jwkr WKR_FL) with one of this board's four flowers arranges only that flower: every vase takes its season (orchid / peony / mixed recipes keep the shuffle) */
  const wk=(typeof wkrNow==="function"&&wkrNow())||null,rf=wk&&wk.kind==="bhoa"&&typeof WKR_FL!=="undefined"?KCH_RCP[WKR_FL[wk.r]]:null,ri=rf?KCH_SEAS.findIndex(x=>x.k===rf):-1;
- const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
+ const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);const HU=[],HS=[];let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
  const btn=k91Btns(box,[["k91done","✓","","Cắm xong: chấm thế hoa"]]);const bd=btn.querySelector("#k91done");
  const rad=d=>d*Math.PI/180,dg=a=>a*180/Math.PI,wob=now=>rad(sway*180)*Math.sin(now/110);
  /* target of stem i: length in px (chain Thiên → Nhân → Địa; guests hang off Nhân / Địa alternately) and the lean in degrees */
@@ -50,8 +50,9 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const pickPos=i=>({x:W*(.2+.3*(i%3)),y:H*(.5+.2*Math.floor(i/3))});
  const tipOf=(s,a)=>({x:MX+s.L*Math.sin(a),y:MY-s.L*Math.cos(a)});
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;phase="end";return setTimeout(()=>env.end(Math.max(0,Math.min(10,sum))),300)}
-  const si=seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=kg82Shuf(SE.like).slice(0,Math.max(0,Math.min(3,nAlike)));
-  const oth=kg82Shuf(KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER));const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
+  const IT=typeof mgpOne==="function"?mgpOne("hoa",HU,x=>ri>=0?x.si===ri:HS.indexOf(x.si)<0):null;/* ORDER THIN P1: one composed tray (season × look-alike order × two other flowers), drawn through the no-repeat memory */if(IT)HS.push(IT.si);
+  const si=IT?IT.si:seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=(IT?IT.like.map(i=>SE.like[i]):kg82Shuf(SE.like)).slice(0,Math.max(0,Math.min(3,nAlike)));
+  const oAll=KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER);const oth=IT?IT.oth.map(i=>oAll[i]).concat(kg82Shuf(oAll.filter((_,i)=>IT.oth.indexOf(i)<0))):kg82Shuf(oAll);const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
   P={si,SE,fl:kg82Shuf(fl).map(f=>Object.assign(f,{wilt:false})),wrong:0,picked:false,cur:0,last:null,t0:performance.now(),lim:n*L("limStem"),
    st:Array.from({length:n},(_,i)=>({i,Lt:lenT(i),at:angT(i),cut:false,L:0,seated:false,a:0,leaned:false}))};phase="pick";bd.disabled=true}
  function score(){const S=P.st,n=S.length;const z=B.zero-1;let ln=0,an=0;
