@@ -1,0 +1,12 @@
+CLAUDE — APPLY ONLY THE SIX AGE39LENGTH FIXES
+Date:11/24/2026
+
+Replace only the six age39generation sources listed in Replacement_Map.json with their complete Prompts/*.txt files in this patch. Each full source includes all headers and is under9800characters,UTF16units andUTF8bytes. Do not shorten it further or prepend/append runner instructions inside Magnific's prompt field. Copy prompt text only.
+
+Keep the other24age16/26/51/63sources exactly unchanged, along with their existing job identities and input mappings. This patch does not approve a credit budget, worker count, repo push or new generation. It only provides corrected runnable text for the six age39templates.
+
+Reference order is unchanged: Image1is the selected original person's identity PNG from the collection already supplied to you; Image2is the same Face_Style_Master_No_Text.png (SHA25614b67de21802cab92af64b4ffb8fc0499c819d7da329fba0819f2c46c53a1d34). Image2remains the full painting/skin/color/light master. Neither image is included in this small patch because both are already available in your current setup. Do not substitute another master or add a third reference.
+
+The complete personality, beauty-mark, shared style/skin/color/light, bare-face, ivory robe/hairpin/crop and no-visible-text blocks are unchanged. The repeated opening and the age paragraph alone were shortened. Gentle/Dignified remain game-age39with visual35-36; the other four retain their existing age39target. Do not alter face identity or add wrinkles, makeup or visible text.
+
+Use the HTML Copy page or exact UTF8TXT files. Replacement_Map.json identifies old/new template IDs and hashes. Age39_Job_Updates.json supplies the89updated age39job rows only; leave all other356job records untouched. Prior outputs remain history; do not mark jobs complete without actual observed outputs. No images were generated to produce this patch.
