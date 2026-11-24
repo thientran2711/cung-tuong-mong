@@ -93,3 +93,41 @@ At 12 games/life: nghe 28→0 · td_hanh 99→0 · kinh 98→0 · may 98→0. (N
 **GATES:** mg-pool-c ALL PASS (size ≥ BAL.mgp.min, ids unique, nghe triples all different + line mix as engine, td_hanh shape = TD_ALMS, no digits/%, kinh/may strokes inside the square and long enough, 4 draws per game all different) · mg-pool-c-play 4/4 (each engine opens 10×, no throw, draws marked in ctm-nr; kinh/may 4 figures per game) · mg-pool-play 9/9 (lane P1 #2 unchanged) · mg-allkinds 13/13 · undef-scan PASS · norep-unit ALL PASS.
 **SHOTS** Fold 755x1000 + iPad 1180x820, 3 items per pooled kind (nghe td_hanh kinh may), contact sheets LOOKED: nghe different words/lines, td_hanh different people, kinh/may different strokes. Scratch only (not on CDN, not in git).
 **FOR P1b:** my pooled engines touch jsgame.js / jtd.js / jwkg.js only (no overlap with your kinds' engines except none); built index.html/sw.js must be rebuilt after merging (`bash dev/site/build_site.sh`).
+
+## P1b
+PRIORITY #1 CHECK ('no-repeat|e68h|mgskin|thin-'): OD 8 | ledger 0 | claims 8 | main 15 | review/* 10 | archive 0 — reused jnorep (P0) + jmgpool.js API (mgpOne/mgpRng/mgpSkin) + the kit slot review/kit-mgskin 1b91ac14; nothing rebuilt. Worker sonnet P1b = session_01N1tNP6BvAwirSLY2Xhryvj, START_CTX ~5 % (est.). Branch **review/thin-p1b** (from thin-p1 b43fe174; merged review/thin-p0 00b3a4ec + review/kit-mgskin 1b91ac14). My files: `dev/build/jmgpool_b.js` (after jmgpool.js in assemble.py), `dev/test/mg-pool-b.js` + `mg-pool-b-play.js`, BAL block `BAL.mgpb` (jbal2.js, own line after BAL.mgp). Touched outside my files: jmgpool.js only `mgpSkin` (skin lane = mine); engines below.
+**VERDICT PER KIND (my 14):**
+| kind | verdict |
+|---|---|
+| dan | POOL 64 tunes = 5 phrases (8 contours × string shift) + the gaps; no 3 equal strings in a row (j82 kg82Rhythm) |
+| co | POOL 270 = group size 1/2/3 × 90 seeds, same generator kg82GoGen run on the item's seed (j82 kg82Go) |
+| dauho | POOL 60 throw sheets = 6 vase places × 6 winds (j91 k91Fling) |
+| theu | POOL 64 stitch sheets = 5 rounds of a shuffled 16-cell board (j82 kg82Pattern) |
+| mua | POOL 64 dance sheets = 5 rounds × 9 steps, no 3 equal in a row (j82 kg82Steps) |
+| doi | POOL 240 = rows 3/4/5 × 80 seeds, engine generator on the seed (jnwp nwDoi) |
+| doden | POOL 132 = round type 0/1/2 × 44 seeds (jlant k92Lamp) |
+| tc | POOL 100 seeds (jnwq nwqSort build, via nwqBuild) |
+| xa | POOL 200 seeds (jnwq nwqClue: culprit + decoys + row) |
+| thq | POOL 130 seeds (jnwq nwqSeat build, via nwqBuild) |
+| ban | **no pool: one painted target with a fixed sway, pure timing; nothing to tell apart** |
+| chai | **no pool: one mark gauge (pure timing, her own Tài/khéo tay set the zone)** |
+| hoadien | **no pool: the board is her own portrait; the seed only tilts the dock, no content list** |
+| co7 | **no pool: Cờ năm quân against the AI is a skill board; the AI noise is not content** |
+Seed items: `mgpWith(item, fn)` runs the engine's own generator with Math.random = the item's seeded stream and puts the real one back in `finally` (rules, sizes, difficulty by rank untouched; same item = same board). Draw = `mgpOne(kind,used,filter)` (fresh-first through jnorep, family `mg:<kind>`), `used` reset per game. Pool sizes are BAL.mgpb (jbal2.js), min ≥ BAL.mgp.min per group size / rows / round type.
+**SKINS (kit MG-SKIN wired):** merged review/kit-mgskin 1b91ac14. `mgpSkin(kind)` now = fresh-first draw over «default» + every skin registered with kitMgSkinAdd(kind,…) + ids listed in MGP_SKIN (family `mgskin:<kind>` via P0); `kg82Open` takes it when the caller passes no `skin` and `KG82.preSkin` is empty (j82). None registered (today: no MGSKIN keys from the art lane yet) = today's art + son buttons (tested). Test edit: dev/test/kit-mgskin.js clears `KG82_SKINS.dan` before its «no skin asked» step (an open without skin now draws a registered one). FOR MAIN: when Foreman F's skins land, register them with `kitMgSkinAdd(kind,id,{name,pal})` (names VANPHONG); nothing else to wire.
+**NO-REPEAT MEASURE** (`GAMES=6 node dev/test/mg-pool-b.js --measure`; 6 lives × 6 games of the kind; repeat % = shown before in this life or the 5 lives before; «before» = the number of boards a player can tell apart today, my estimate in the table, since today every board is a fresh roll):
+| kind | looks today (est.) | pool | before % | after % |
+|---|---|---|---|---|
+| dan | 32 | 64 | 36 | 0 |
+| co | 10 | 270 | 94 | 0 |
+| dauho | 12 | 60 | 67 | 0 |
+| theu | 16 | 64 | 61 | 0 |
+| mua | 16 | 64 | 61 | 0 |
+| doi | 6 | 240 | 94 | 0 |
+| doden | 8 | 132 | 93 | 0 |
+| tc | 10 | 100 | 86 | 0 |
+| xa | 14 | 200 | 92 | 0 |
+| thq | 10 | 130 | 91 | 0 |
+**GATES so far:** `node dev/test/mg-pool-b.js` ALL PASS (sizes, ids unique, dan/dauho/theu/mua rules, every co item gives a position at ease 0/1/2 + deterministic + ≥95 % distinct, mgpWith restores Math.random after a throw, 4 draws per game differ); `node dev/test/mg-pool-b-play.js dev/index.html` all 10 engines open 10×, draws marked in ctm-nr, 2 skin checks, no page errors; mg-pool 9 kinds ALL PASS, norep-unit ALL PASS, mg-allkinds 0 FAIL, kit-mgskin 0 FAIL, undef-scan PASS (295). quickcheck + coop + 3 old saves: run once at the merge with P1c.
+**SHOTS:** Fold 755x1000 + iPad 1180x820, 3 items × 10 kinds, contact sheets LOOKED: dan flowers fall on other strings, co other positions, theu other stitch cells, doi other strokes, doden other lamps, tc other storerooms, xa other cases, thq other pin counts. NOT visible in a still: mua (the order of lit steps) and dauho (vase place / wind per throw: the three first-throw vases sit near the same spot) — checked by unit test only. Scratch shots, not on CDN, not in git.
+**MERGE LANE:** waiting for P1c (review/thin-p1c 86f0a220 = 4 of 16 kinds so far); then merge it into review/thin-p1b, rebuild (bash dev/site/build_site.sh), all gates once, one SẴN SÀNG KIỂM.
