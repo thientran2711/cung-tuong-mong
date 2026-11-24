@@ -1424,7 +1424,7 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | VEIL-1 screen-change veil (opus; owner bug OD 24/11 ~10:20Z) | review/kit-screenveil; reports/screenveil.md | MAIN 118 | session_01V1ZZH1kjVkiTZ88EUdo1U6 | RUNNING | 24/11 07:12Z |
 | SELSCENE-6 opening 3 days (opus; successor of SELSCENE-5) | review/selection-scene | MAIN 118 | session_01V1ZZH3MNrUmsbyK2EQz7Wt | RUNNING | 24/11 07:22Z |
 | E69 B-MOMENT #9 Khoảnh khắc chân dung (opus; briefs/E69-moment.md) | review/moment 5a504f92; reports/moment.md | FOREMAN E | session_01DgYSWpc3VRPoSDT4hF2V2H | SSK 5a504f92 | 24/11 07:40Z |
-PROMO BUILD part A kỳ sắc phong + special-exam/patron routes + PHÂN CUNG phanCungEdict (opus BIG; OD 24/11 ~09:20Z/~09:35Z/~09:50Z; briefs/D-promo-build-A.md) | review/promo-build | session_01D3E3NZySUEoGSM1U1L4WvJ | RUNNING | 24/11 06:50Z (Foreman D depth 1)
+PROMO BUILD part A kỳ sắc phong + special-exam/patron routes + PHÂN CUNG phanCungEdict (opus BIG; OD 24/11 ~09:20Z/~09:35Z/~09:50Z; briefs/D-promo-build-A.md) | review/promo-build | session_01D3E3NZySUEoGSM1U1L4WvJ | SSK 7c4116de (archived) | 24/11 06:50Z (Foreman D depth 1)
 NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02Z/06:41Z; briefs/D-net-thresholds.md) | reports/net-thresholds.md | session_01D3E3NZ3P5j3cm5nr2pybFY | DONE (archived) | 24/11 06:55Z (Foreman D depth 1)
 | LANDER LC10 (opus; successor of LC9) | reports/land-chain-10.md | MAIN 118 | session_01V1ZZH4w5vkbybCTwK1DkHR | RUNNING | 24/11 06:44Z |
 | SIDE-LINE DIALOGUE SCENES LEAD (opus; ORDER MAIN 118 06:42Z, OD 24/11 ~10:05Z; briefs/b-sideline-dialogue.md; schema agreed once with Foreman E) | review/sideline-dlg; reports/sideline-dialogue.md | B | session_01N1tNP4b3uXPGSvnVmsC51b | RUNNING | 24/11 06:43Z |
@@ -1447,3 +1447,4 @@ NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds 
 | DLG WRITER W4+W5+W6 (j68_a/b/c; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP5omudWA4gV7MX7j4j | RUNNING | 24/11 07:40Z |
 | REVIEW E73r MOMENT BIG (opus; briefs/E73r-review-moment.md) of 5a504f92 | review/moment(-r); reports/moment-review.md | FOREMAN E (child2) | (opening) | RUNNING | 24/11 07:40Z |
 NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds (opus BIG; FROM MAIN 119 07:40Z; briefs/D-net-build.md) | review/net-build | session_01D3E3NYsFNUq9PXUiPGzBEH | RUNNING | 24/11 07:40Z (Foreman D depth 1)
+REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/promo-build-rv | (opening) | RUNNING | 24/11 07:45Z (Foreman D depth 1)
