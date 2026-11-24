@@ -1,0 +1,60 @@
+<title>90 gương mặt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
+<style>
+/* layout: sticky group pills over six sections, each a grid of face cards; tap a card to open the full-size picture */
+:root{--bg:#f5f2f1;--panel:#fff;--fg:#2a2226;--muted:#75696e;--line:#e2d9db;--accent:#7d2a44;--accent-fg:#fff;--f-head:"Noto Serif",Georgia,serif;--f-body:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1618;--panel:#261f22;--fg:#efe6e9;--muted:#a8999f;--line:#3a3135;--accent:#e08aa3;--accent-fg:#1b1618;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b1618;--panel:#261f22;--fg:#efe6e9;--muted:#a8999f;--line:#3a3135;--accent:#e08aa3;--accent-fg:#1b1618;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1{font-family:var(--f-head);font-weight:600;font-size:1.55rem;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 10px;max-width:68ch;line-height:1.5}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;padding-block:8px;border-bottom:1px solid var(--line)}
+nav a{color:var(--fg);text-decoration:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;font-size:.92rem}
+nav a:focus-visible,.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav b{font-weight:600;color:var(--accent);margin-left:4px;font-variant-numeric:tabular-nums}
+section{padding-top:18px;scroll-margin-top:60px}
+h2{font-family:var(--f-head);font-size:1.2rem;margin:0 0 10px;display:flex;gap:8px;align-items:baseline}
+h2 span{font:600 .85rem var(--f-body);color:var(--muted);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 0;background:var(--line)}
+.meta{padding:8px 10px 10px;display:flex;justify-content:space-between;gap:6px;align-items:baseline}
+.id{font-weight:700;font-variant-numeric:tabular-nums}.g{color:var(--accent);font-size:.82rem}
+dialog{border:0;padding:0;background:var(--bg);color:var(--fg);max-width:min(96vw,720px);max-height:96vh;border-radius:12px;overflow:auto}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog img{display:block;max-width:100%;height:auto;background:#eee}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;position:sticky;top:0;background:var(--bg)}
+.bar button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 14px;cursor:pointer}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+</style>
+<h1>90 gương mặt</h1>
+<p class="sub">Chín mươi gương mặt hiện có trong kho, chia theo sáu nhóm. Hình là bản lớn nhất đang giữ (1024 × 2304), chạm vào mặt nào để xem trọn người ở cỡ gốc.</p>
+<nav id="nav"></nav><main id="main"></main>
+<dialog id="dlg"><div class="bar"><b id="dt"></b><button id="dx" autofocus>Đóng</button></div><img id="di" alt=""></dialog>
+<script>
+const FACES=/*DATA*/[];const ORDER=/*ORDER*/[];
+const $=s=>document.querySelector(s);
+const nav=$("#nav"),main=$("#main"),dlg=$("#dlg");
+ORDER.forEach((g,k)=>{
+  const list=FACES.filter(f=>f.g===g);
+  const a=document.createElement("a");a.href="#n"+k;a.textContent=g;const b=document.createElement("b");b.textContent=list.length;a.append(b);nav.append(a);
+  const s=document.createElement("section");s.id="n"+k;
+  const h=document.createElement("h2");h.textContent=g;const c=document.createElement("span");c.textContent=list.length+" người";h.append(c);
+  const gr=document.createElement("div");gr.className="grid";
+  for(const f of list){
+    const d=document.createElement("button");d.className="card";d.type="button";
+    const im=document.createElement("img");im.loading="lazy";im.src=f.u;im.alt="Gương mặt "+f.id+", nhóm "+g;
+    const m=document.createElement("div");m.className="meta";
+    const i=document.createElement("span");i.className="id";i.textContent=f.id;
+    const gg=document.createElement("span");gg.className="g";gg.textContent=g;
+    m.append(i,gg);d.append(im,m);
+    d.onclick=()=>{$("#di").src=f.u;$("#dt").textContent=f.id+" · "+g;dlg.showModal()};
+    gr.append(d);
+  }
+  s.append(h,gr);main.append(s);
+});
+$("#dx").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+</script>
