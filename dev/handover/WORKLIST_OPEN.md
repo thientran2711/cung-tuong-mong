@@ -6,6 +6,10 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | storyboard pending |
 | 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
 | 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B (side lines) + E (roads) + KK18 (UI) | ordered 06:42Z |
+| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-4 | mock pending |
+| 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | storyboard pending |
+| 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
+| 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B + E (+KK) | to plan |
 | 5 | Day title card «Ngày … · Chương N — tên» | KK + E | ordered |
 | 6 | Event frame relayout (speaker left full, her right half) + toilette v3.5 standard size | KK | building |
 | 7 | Promotion redesign: kỳ sắc phong on festivals, đại lễ, weight table, caps, favour per Emperor nết, patron routes TH/HH | D | building |
