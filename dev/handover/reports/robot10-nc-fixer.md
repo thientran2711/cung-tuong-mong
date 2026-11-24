@@ -71,3 +71,25 @@ PRIORITY #1 CHECK: brief hits reused (jdfv glue, r10-tab-layers.js); no rebuild.
 - Law 9 KIT FIRST: only dfTabLayers glue in jdfv.js (hidden toggle + remove mood bubble); no CSS, no new part. Law 11 whole group: scan covers kfoc (talk/encounter say/mini-game) + kfoc-mood on all tabs both devices (story kchkt×kfoc-sayn, rel p.past×kfoc-next rows included); no other leaking stage layer found. Law 12: shots of every tab on both devices looked (iPad clean; focus back on «Hành sự»).
 - Note (not this fix): on Fold the go/court/rel/inv/art #panel reads 0×0 in my probe on BOTH main and fix (identical pixels) — probe/layout artefact or MAIN's Dư đồ lane, unchanged by this branch.
 - Conflict watch: review/map-label-overlap-r touches only j38.js; review/duodo-focus-rv differs from main in jdfv.js only at line ~55 (dfEncOn), jdfv fix is appended at the end → no overlap.
+
+## § REVIEW robot10-nc-fix-1 — PASS (reviewer session_01964izBqmsSifomtfYUK96U, opus BIG numbers/save, 24/11 ~02:30Z)
+PRIORITY #1 CHECK ('hhBind|emoSeen|rstats maid|r10-rt'): OD 0 | ledger 0 | claims D robot10 row | main j24 hhBind, j8 rstats, jemo emoSee | review/* robot10-nc-fix-1 (target), robot10-nc-fix-2 (other family) — reused the fixer's r10-rt.js + repro saves.
+START_CTX ≈ 6 %. Land branch: review/robot10-nc-fix-1-rv **ad3fa9be4cc009701858dcf5941864e501e2a7fc** = target 2e5d3da0 + merge LIVE 4a8c627b (index.html/sw.js rebuilt by build_site.sh, assets.json = LIVE) + one test guard (below).
+Code read: (a) j24 deser pre-bind — rivals=d.R are the same objects, so the getter set on them before normAll is the one the game uses; only entries WITHOUT an own hh are bound, so an old save with a numeric hh still blends once in consorts(). (b) j8 `if(v.maid==null)` = same rule as d(), but nmNew no longer runs eagerly. (c) S.emoSeen is write-only (no reader in dev/build), so dropping session-only x<n> keys changes nothing she sees.
+| check | main (LIVE) | fix (on the merge) |
+|---|---|---|
+| r10-rt.js, 12 nc saves 001-012 (round1 / round2) | 001 21/22 · 004 37/37 · 005 19/21 FAIL | 12/12 ok, 0 / 0 (run twice: on 2a80712b and 4a8c627b merges) |
+| first load of the FILE vs the file (rel, sung, maid name, rl of every R; S.rl), saves 001/005/009 | R[0].rl (= «Hoàng hậu với X») moves at random every load; nmReg +10 / +22 names per load | 0 diffs; nmReg unchanged |
+| old saves: same saves as v5 / v4 / v3 | same drift as above | load, 0 diffs, NaN 0, no lost maid names |
+| legacy save with numeric R[i].hh (v4) | blended row | identical blended row to main (001, 005) — migration unchanged |
+| new game: Empress's regard to each rival at start (law 4/BAL, 150 lives × 9) | mean 2.56 sd 3.09 [-6,16] | mean 2.30 sd 3.01 [-6,11] (earlier 60-life run: 2.24 vs 2.64 — noise, flips sign); maid names unique 150/150 both |
+| co-op coop-e2e full (live Worker) + NEW guard «R10RV after rejoin: maid names + Hoàng hậu với X same on both seats» | 141/142 — guard FAILS (guest's row differs from host after rejoin: the guest's deser blended a random hh) | 142/142 (two runs; one other run had 2 start-time friend-placement flakes, rerun clean) |
+| save-slots.js 755x1000 · ag-moodknow · feelings18 | — | ok · ALL 33 PASS · 34/34 PASS |
+| quickcheck HEAD (incl. core gates G1-G5) | — | PASS · old save ok · render 186/186, tab 310/335, buổi 1021/1743 ms |
+Reviewer change: dev/test/coop-e2e.js — the R10RV guard above (test only; the same family on the co-op seat, would catch a return of the drift).
+FAMILY SCAN (any other random draw at load, Math.random hooked during deser of saves 001/009, by call site):
+- rstats eager `d(k, R(..))` arguments (140-308 draws): values computed and thrown away (field already set) — no state change; harmless.
+- jmort initAll at deser → assign(): people who got NO lifespan yet (new staff / consorts added since the last month tick; initAll runs at month tick and at load) roll tho/thoM/thoO at load. Not a save→load→save drift (once rolled it is saved; r10-rt round 2 = 0), but loading the SAME file twice gives those newcomers a different lifespan (save 009: 7 people, e.g. a consort 52 → 63, her own maid 30 → 67). Suggest (not this branch, design call for Foreman D): roll the lifespan when the person is made, not at the next tick/load.
+- drawF (face pick) at load for a person with no face yet — same once-then-saved pattern; harmless.
+Laws: 1-3 untouched · 4 no number made at load (hh = the Empress's real regard; new-game values still from the same rstats/BAL path) · 5 untouched · 6b names kept, pool no longer burned · 6c n/a · 7/9/10/12 no UI or wording change · 11 whole family covered (hh, maid, emoSeen + co-op seat) · 13 check line above · 14-18 no rule changed.
+Shots: none (no UI change). Scratch probes deleted with the worktrees.
