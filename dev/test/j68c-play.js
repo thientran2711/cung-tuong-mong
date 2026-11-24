@@ -32,7 +32,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
     if(nd==="rain")S.wx={n:"mưa rào",k:"rain",f:1};if(nd==="snow")S.wx={n:"tuyết rơi",k:"snow",f:1};if(nd==="fest"){const F=Object.values(FEST)[0];S.month=F.m}}}
    return f};
   let i=0;for(const sd of FIX){if(sd.type!=='comp')continue;const r={id:sd.id};out.seeds.push(r);try{
-   if(!E68I["c:"+sd.id])j68cReg(sd,OP[sd.fam]||[]);const s=E68I["c:"+sd.id];r.reg=!!s;if(!s)continue;
+   /* review thin-p4 r2: an id already built from J68SEEDS with OTHER content = the file is stale (the test would play the built seed and check the file's numbers) */const SIG=x=>JSON.stringify([x.text,x.stances,x.roles,x.object]);if(E68I["c:"+sd.id]&&J68C_SEEDS[sd.id]&&SIG(J68C_SEEDS[sd.id])!==SIG(sd)){r.err="id collides with a different built seed (stale file row: give it its own id)";continue}if(!E68I["c:"+sd.id])j68cReg(sd,OP[sd.fam]||[]);const s=E68I["c:"+sd.id];r.reg=!!s;if(!s)continue;
    S.bac=Math.max(S.bac||0,9999);S.suc=100;tr6=tr0;const e=e68();delete e.cd[s.id];e.vu[s.id]=[];Q.length=0;
    let d=e68Make(s);if(!d){r.forced=force(sd);if(r.forced===2){r.skip='no man of that kind in this world';continue}delete e.cd[s.id];d=e68Make(s)}
    if(!d){tr6=v=>ALLN.slice();r.forced=1;delete e.cd[s.id];d=e68Make(s)}if(r.forced)out.forced++;
