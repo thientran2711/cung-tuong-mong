@@ -57,7 +57,7 @@ const CASES=[ /* [title, body, expected key] — titles/bodies copied from the g
                 ["san","Thu săn","<p>Thu săn ở bãi săn hoàng gia: Hoàng thượng cho các hoàng tử thi cưỡi ngựa bắn cung.</p>"],
                 ["taomo","Về tảo mộ","<p>Ngươi xin về tảo mộ tổ tiên, hương khói dưới mưa phùn.</p>"],["plain","Thị tẩm","<p>Đêm nay Hoàng thượng lật thẻ bài của ngươi.</p>"]];
    for(const [nm,t,h] of shots){
-    const got=await p.evaluate(async([nm,t,h])=>{Q.length=0;{const M=document.getElementById("modal");kitBackdrop(M,null);delete M.dataset.kreborn;M.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove())}
+    const got=await p.evaluate(async([nm,t,h])=>{/* this test checks the CARD picture: an old j7 card now opens with its dialogue scene (jdlgs wave 2), which hides the card until tapped through — dlgs-play checks the scenes */try{BAL.dlgs.on=false}catch(e){}Q.length=0;{const M=document.getElementById("modal");kitBackdrop(M,null);delete M.dataset.kreborn;M.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove())}
      if(nm==="ngoai"){S.month=9;S.seen={};try{const d=mkEv("trungcuu");pushDil(d,"Tiết Trùng cửu")}catch(e){return{err:e.message}}}
      else if(nm==="dongchi"||nm==="doanngo"){S.seen={};try{const d=mkEv(nm);pushDil(d,nm==="dongchi"?"Đông chí":"Tết Đoan ngọ")}catch(e){return{err:e.message}}}
      else pushModal({t,h,who:pEmp(),opts:[{n:"Tiếp",fx:{}}]});

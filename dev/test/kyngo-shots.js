@@ -14,7 +14,7 @@ const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
   await p.evaluate(()=>{try{localStorage.setItem("ctm-kyngo",JSON.stringify({ma_phe:{n:1,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:1}},de_mua:{n:2,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:2}}}))}catch(e){}});
   await p.evaluate(()=>{const b=document.querySelector('[data-tgo="past"]');if(b)b.click()});{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-0-book.png`});
    const t=await p.evaluate(()=>document.body.innerText.includes("kỳ ngộ đã gặp"));ck(`${sz} Sổ luân hồi shows the kỳ ngộ block`,t)}
-  await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true});
+  await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true;/* this test checks the CARD frame: the kỳ ngộ dialogue scene (jdlgs, wave 2) would hide the card until tapped through — dlgs-play checks the scenes */try{BAL.dlgs.on=false}catch(e){}});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}Q.length=0;render()});
   await sleep(2500);
   const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;BAL.kyngo.pity=0;
