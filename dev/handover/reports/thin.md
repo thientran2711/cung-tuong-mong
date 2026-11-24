@@ -1054,3 +1054,49 @@ FAIL items for the fixer:
 (script: scratch gap.mjs; also grep counts of game clamp sites: loyal 126, hp 26, tin 13, oan 7, pg 5, rel 4, ev 2, malice 1.) Fix = one range table (item 1) covering every clamped person field incl. nested maps (rl/ro per key, maid/staff loyal, kids hp), a scan script listing game clamp sites vs Worker table, before/after table. sucCap depends on khí huyết (BAL.kh + p.khScar/khTmp/age): either compute it in the Worker from the same BAL numbers or state why the next client apply re-clamps identically on both seats (both adopt the same merged state) — with a test.
 3. Note (harmless, keep in mind for the scan): isPerson() also matches S.nightWhy.rows[] (name + rank + sung snapshot rows of tonight's pick) — clamping a 0–100 copy is harmless, but the person test should be the same rule the scan uses.
 Next: fixer #4 fixes 1–2 on review/robot-coop-fix-2 (or -r1), then full gates (Worker tests, coop-e2e both orders vs local wrangler, A/B ≥3 each side with harness ≥ 0a593f8e, quickcheck, old save) → fresh BIG review.
+
+## REVIEW robot-coop-fix-2 r2 (BIG, opus; session_01N1tNP35VdFJ3CXbPW1oNRa; START_CTX ≈6 %) — FAIL
+PRIORITY #1 CHECK ('person range / coop merge clamp / gp ep canon maps / staff sucCap'): OD 2204–2205 | main coop/worker/src/merge.js (no clamp), dev/build/jcoopworld.js toCanon (r.rl/ro/gp/ep[mp]), jagstaff.js asSt/asAp | review/* robot-coop-fix-2-r2 1579b65c (this), robot-coop-fix-2 b9b88cda (r1 FAIL rv 53Ngf1bG) | claims B fixer #4 2dfra9gD.
+Reviewed: BARE review/robot-coop-fix-2-r2 1579b65c AND MERGED 0f8dd283 = 1579b65c + LIVE origin/main d0ed42e4 (robot-coop-fix-1-r2 15b5e1ff + kit-sqopt; only index.html/sw.js conflicted → build_site.sh rebuilt; ranges.gen.js regenerated = unchanged). Merged head pushed to review/robot-coop-fix-2-r2-rv for the fixer to start from (NOT land-ready).
+### r1 FAIL rows — status
+- Item 1 LAW 4: FIXED. BAL.personRange (jbalpr.js, pure data, BAL.linkRange moved there, canon overwrite) read by j8 ap, j1 apply, j1 statSet (prCl); no typed list left in those three (range.test greps it). Worker table GENERATED (dev/build/gen_coop_ranges.js → coop/worker/src/ranges.gen.js, run by assemble.py); stale test: I edited jbalpr.js tin:[0,99] → range.test.mjs throws (gen --check «STALE»), reverted. In npm test + coop-worker.yml. Load order OK (jbal.js 57 → jbalpr.js 58; readers call at run time).
+- Item 2 LAW 11: NOT fully fixed — see FAIL 1 + 2 below (the r1 table rows pass on the SOLO shape, but the co-op canonical state stores two of those numbers in maps the table lacks).
+- Item 3 isPerson: fixed (any object with a string name; nightWhy rows identity, tested).
+### FAIL items for fixer #4
+1. LAW 11 — the CANONICAL per-seat maps gp / ep are not clamped. The Worker never sees r.ghen / r.ev of a world person: jcoopworld.js toCanon (and jcoopthinb) MOVE them into maps keyed by the player id — `r.rl[mp]=r.rel; r.ro[mp]=r.oan; r.gp[mp]=r.ghen; r.ep[mp]=r.ev; delete r.rel/oan/ghen/ev` (also evm[mp], cev[mp]). BAL.personRange.map has rl ro af hA evm cev — no gp, no ep. The r2 test row «ev 3→0,1» tests the scalar r.ev that is deleted before the merge. merge3 on the real canonical shape (probe canonmaps.mjs, same on BARE and MERGED):
+| field (canon) | base→host,guest | merged | game range |
+|---|---|---|---|
+| R[].ep[mp] (her ev, j8 evA) | 3→0,1 | −2 | ≥ 0 |
+| R[].gp[mp] (her ghen) | 95→100,99 | 104 | 0…100 |
+| R[].gp[mp] low | 5→0,1 | −4 | 0…100 |
+| R[].rl[mp] (control) | 90→100,95 | 100 | −100…100 ✓ |
+Fix: add gp and ep to BAL.personRange.map as REFERENCES to the stat ranges (gp: stat.ghen, ep: stat.ev — like rl: BAL.linkRange.rl, not typed again); the scan must also read the canonical renames (every `x.<map>[mp]=` in jcoop*.js: rl ro gp ep evm cev) and FAIL when a renamed map is not in the table; range.test rows on the canonical shape (toCanon output), not the solo shape.
+2. The Worker cuts a number the game ALLOWS and neither seat changed — staff Sức above sucCap (answer to the fixer's question «does the clamp ever write a friend stat the guest did not change?»: yes, but staff, not the friend). jagstaff.js asSt draws s.suc from BAL.ag…st.suc with no sucCap; asAp clamps 0…100 only; so old servants hold Sức over the jkh cap in the game. clampP runs on EVERY named object of a person object both seats changed (most rivals, every week) and applies sucCap to all of them. Probe idclamp.mjs = clampP on a clone of every named object of real played states (would-be rewrites when nothing changed):
+| state | named objects | rewritten |
+|---|---|---|
+| coop save week 14 (review/robot10-coop-saves …p3-4-yr97b6) | 108 | R[0].staff[4].suc 81→79 (age 59), R[4].staff[1].suc 90→83 (age 54) |
+| solo seed 7 (rv2b build) | 80 | R[0].staff[5].suc 83→78 (age 60), R[1].staff[2].suc 90→80 (age 58) |
+| solo seed 11 | 84 | R[1].staff[2].suc 85→80, R[4].staff[1].suc 84→78 |
+| solo seed 23 | 82 | none |
+Every other field of every named object (her S, consorts, maids, kids, men): identity. Fix the group in ONE place, one rule for both: either the staff paths go through the game's own Sức rule (asSt / asAp → statSet / sucCap, jkh «the Sức ceiling every clamp reads»; balance note: old servants lose a few Sức) OR the Worker applies sucCap only to the objects the game caps — pick one and say why; then add the identity guard (clampP over every named object of ≥ 3 played states, solo + co-op, must change nothing) to range.test / the scan.
+3. Scan gap (why 1–2 passed COOP-RANGE PASS): coop-range-scan.js only reads constant-bound clamp SITES by field name; it cannot see renamed canonical maps (1) nor values the game stores over the table without a clamp site (2, sucCap is not in the scan at all). Add both checks (renames + identity on played states).
+### Friend-stats row (fixer flag: coop-world «sees the friend's sung/danh/suc wrong», clamp 1/5 vs main 0/5)
+No clamp mechanism found. Both seats adopt the ONE merged state whole (jcoopworld onWeek → fromCanon(C)); the friend on my screen = F.P[other].S = her own S after her adopt; clampP on her S (P[seat].S is a person: has name) is identity on all 14 real states (0 hits on $.S). The staff cut (2) is not a friend stat and is the same on both seats. → I read the 1/5 as the overloaded run (turn p95 252 s), not the clamp.
+### Spot checks (scan sites by hand)
+- jkc2.js:427 `S.danh=Math.min(30,Math.max(S.danh,…))` → hi 30 inside [0,100] ✓ (OK verdict right).
+- j71.js:214 `k.hp=Math.max(30,Math.min(k.hp,…))` → lo 30 inside [0,100] ✓.
+- jagacts2.js:21 `N.bac=cl(…,0,1)` → counted as a bac site but N is a needs weight, not a person (harmless false site; inside [0,∞)).
+- jmind.js:124 `who.loyal=Math.max(0,Math.min(100,…))` ✓.
+### Ran (commands + outputs; BARE 1579b65c = rv2a, MERGED 0f8dd283 = rv2b; local wrangler dev :8791 bare / :8792 merged)
+- `cd coop/worker && npm test` both: merge ok · vault ok 48 · seat ALL OK · ALL OK stale · thin ALL OK · range ok (exit 0). `node test/range.test.mjs --table` both: every r1 row in range (rl 100, ro 0, staff loyal 0, maid loyal 0, tin 100, pg 100, oan 0, ev 0, suc = sucCap, kids hp 100, af −100, hW.joy 100, nt 100, trieu 100/0).
+- `node test/ws.test.mjs http://127.0.0.1:879{1,2}` ALL OK · `node test/chat.test.mjs …` ALL OK (both).
+- `node dev/build/gen_coop_ranges.js` (no arg: rewrote, no diff) and `--check` «ranges.gen.js = BAL (personRange + kh)» both; stale probe above.
+- `node dev/test/coop-keymove-unit.js` 12/12 both.
+- `node dev/tools/coop-range-scan.js` and `--all`: COOP-RANGE PASS · 46 table fields · 0 wider · 863 clamp sites (both) — but see FAIL 3.
+- `COOP_SWAP=0|1 node dev/test/coop-e2e.js <out> http://127.0.0.1:879x`: bare 142/142 + 142/142, merged 142/142 + 142/142.
+- `bash dev/tools/quickcheck.sh` ALONE on MERGED 0f8dd283 vs live d0ed42e4: CORE GATES PASS · TIME-SPILL PASS · old save ok · perf median render 288/335, tab 623/694, buổi 1805/1642 → QUICKCHECK PASS. Bare quickcheck, coop-lag, own A/B: not run (FAIL found; the game code of bare = merged minus LIVE).
+- Probes (scratch /home/user/wt/rvout/probe, not in git): canonmaps.mjs (FAIL 1), solostates.js (3 seeds solo, ser() dumps) + idclamp.mjs (FAIL 2).
+### Notes (not blocking)
+- coop-worker.yml runs on `paths: coop/worker/**`: a BAL.personRange / BAL.kh change landed WITHOUT the regenerated ranges.gen.js triggers no Worker test (assemble.py regenerates, the lander must commit it). Add dev/build/jbalpr.js and dev/build/jbal2.js to the workflow paths so gen --check runs on such a land.
+- statSet now also clamps bac ≥ 0 and apply clamps S.ghen / S.an when present: no caller passes bac / ghen / an to statSet; scan shows ghen/an sites 0…100 → no behaviour change found.
+- Game-wide typed 0/100 at the 863 sites remain (scan-guarded inside the table) — outside this branch.
