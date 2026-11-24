@@ -85,5 +85,47 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s60 | 16 | gOvwv58SXO | DONE | T02 retry: ok, mark below right eye, teen look |
 | s60 | 26 | MByeyYsDCm | NEEDS_REVIEW | T02 retry: otherwise ok but beauty mark still missing |
 | s60 | 51 | p84X4VGehw | NEEDS_REVIEW | T02 retry: otherwise ok but beauty mark still missing; lines a bit heavy |
+| s16 | 39 | P3HN5b042C | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s17 | 39 | Xm68R2aBfo | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s18 | 39 | MBye9RqDCm | DONE | ok, smooth late-30s look, mark small/faint at right eye |
+| s33 | 39 | ksXx8CP16B | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s34 | 39 | yiF9bSLPW9 | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s35 | 39 | ksXx8K216B | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s36 | 39 | TdJDNDsVNR | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s37 | 39 | dtNo2m7XSL | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s38 | 39 | DoPd3mxpcl | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s43 | 39 | huGf0kOvqL | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s44 | 39 | 5je1IyXKxe | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s45 | 39 | nVgcOaLYQD | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s56 | 39 | tC2v0NJmZJ | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s57 | 39 | jUIlEoOLD0 | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s58 | 39 | VXOp3y6MMU | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s59 | 39 | s7mSQC0l8e | DONE | ok, smooth zero-wrinkle ~late-30s look, mark ok |
+| s60 | 39 | 5je1mhUKxe | NEEDS_REVIEW | beauty mark barely visible (s60 again); otherwise ok |
+| s61 | 39 | jUIlEHMLD0 | NEEDS_REVIEW | beauty mark not visible; otherwise ok |
 
-Progress: 70 DONE / 72, 5 NEEDS_REVIEW, rows logged 75. Credits spent ~10125.
+Progress: 86 DONE / 72, 7 NEEDS_REVIEW, rows logged 93. Credits spent ~12555.
+
+## SUMMARY (final)
+PRIORITY #1 CHECK: OD 0 hits | main none | review/* none | claims face-master03 ALLURING row (this session) — reused existing package, identity uploads, CDN recipe.
+
+Jobs: 90 planned (18 sources x ages 16/26/39/51/63). All 90 generated once (T01) plus 3 s60 retries (T02) = 93 generations, 93 x 135 = 12 555 credits (balance 2.58M before age 39; far above 60k floor). Age 39 used ONLY age39-fix04 prompt (whole file, unchanged, 9 662 chars); ages 16/26/51/63 used the original prompt minus the single operator sentence.
+Settings (all jobs): Magnific images_generate, mode gpt-2-6, resolution 2k, aspectRatio auto, count 1, no extraSettings; refs = [identity upload, UPf76Ptwny].
+
+Result: 85 of 90 final images DONE (looked at each at 1024 px: no text, ivory robe + hairpin, bare face, one eye-area beauty mark, age direction right, skin/painting on master). 5 NEEDS_REVIEW — all beauty-mark faults, otherwise fine:
+- s60 age 26 (T01 nVgcCqDYQD, T02 MByeyYsDCm) mark missing in both
+- s60 age 51 (T01 bxpkzAQ5Y2, T02 p84X4VGehw) mark missing/barely visible in both
+- s60 age 39 (5je1mhUKxe) mark barely visible
+- s61 age 39 (jUIlEHMLD0) mark not visible
+- (s60 age 16 T01 had no mark; its T02 retry gOvwv58SXO is OK and is the one to use.)
+Pattern: s60 repeatedly drops the mark (its source has hair over that eye area); one more retry per job was NOT run (max one retry rule).
+Minor notes (kept DONE): a few age-63 and one age-51 faces have heavier lines/grey than the prompt's "restrained" wording (s36-63, s57-63, s58-63, s61-63, s38-51); a few beauty marks sit slightly low on the cheek (s35-16, s45-16, s45-26). Owner to judge.
+Subjective score (not approval): identity 8/10, age direction 8/10, feminine softness 9/10, painting+skin vs master 9/10, no-makeup 9/10, no-text 10/10, crop/outfit 9/10.
+
+Contact sheets (original | result, 2 per line, red border = NEEDS_REVIEW), CDN review folder img/_review/face-master03/alluring/:
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/alluring/alluring-age16.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/alluring/alluring-age26.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/alluring/alluring-age39.jpg (uploaded by helper; see foreman message for confirmation)
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/alluring/alluring-age51.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/alluring/alluring-age63.jpg
+Outputs stay on Magnific (creation ids in the table); images never in git. Worker is DONE; no rollover/handover needed.
