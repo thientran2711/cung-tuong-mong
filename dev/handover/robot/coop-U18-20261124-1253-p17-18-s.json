@@ -68651,6 +68651,6905 @@
      "room": "NBQ7",
      "ms": 559836,
      "week": 28
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "bd",
+      "road": "bd_hen"
+     },
+     "kiep": 3,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "",
+      "age": 19,
+      "year": 1,
+      "years": 0.42,
+      "chapter": 1,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 1,
+        "age": 19,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 12,
+       "bacPk": 37,
+       "bacEnd": 14,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [
+        "kyc-sv-018",
+        "kyc-sv-003",
+        "kyc-sv-008",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          4,
+          1
+         ],
+         "Thôi, ở lại": [
+          4,
+          3
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          18,
+          8
+         ],
+         "Ở lại": [
+          18,
+          10
+         ]
+        },
+        "|Sai Thải Bình đi dò la": {
+         "Hoàng hậu Lục Uyển Hề": [
+          3,
+          0
+         ],
+         "Người lạ Phi ở một thiên điện (chưa quen": [
+          1,
+          1
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          1,
+          0
+         ],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [
+          1,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          3,
+          1
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          1,
+          0
+         ],
+         "Đáp ứng Lữ Lang Hoa": [
+          1,
+          0
+         ],
+         "Thôi, để sau": [
+          3,
+          0
+         ],
+         "Phi Lương Chỉ Lan": [
+          2,
+          0
+         ],
+         "Thường tại Thường tại La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Tần Đậu Ngữ Yên": [
+          2,
+          0
+         ],
+         "Tần Tần Khương Như Sương": [
+          2,
+          0
+         ],
+         "Quý nhân Quý nhân Trình Ngọc Huyền · đan": [
+          1,
+          0
+         ],
+         "Thường tại Thường tại Phú Sát Lưu Ly": [
+          2,
+          0
+         ],
+         "Thường tại Lữ Lang Hoa": [
+          2,
+          0
+         ],
+         "Thường tại La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Thường tại Trưởng Tôn Nghê Thường · đang": [
+          1,
+          1
+         ],
+         "Quý nhân Quý nhân Trình Ngọc Huyền": [
+          1,
+          0
+         ]
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          2,
+          1
+         ],
+         "Báo lùi vài hôm": [
+          2,
+          0
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          2,
+          1
+         ],
+         "Giấu, không báo": [
+          2,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "Giận dỗi, tránh mặt ngài": [
+          1,
+          0
+         ],
+         "Đón tiếp bình thường như chưa có chuyện": [
+          1,
+          1
+         ],
+         "Hỏi nhẹ vì sao lâu không ghé": [
+          1,
+          0
+         ],
+         "Giữ im, dâng trà, không nhắc": [
+          1,
+          0
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          1,
+          0
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          1,
+          0
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          1,
+          1
+         ]
+        },
+        "kyngo|Kỳ ngộ": {
+         "Đỡ bé dậy, bôi thuốc ngay": [
+          1,
+          1
+         ],
+         "Bế bé về tận cung của mẹ": [
+          1,
+          0
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [
+          1,
+          0
+         ],
+         "Cười trừ": [
+          1,
+          0
+         ],
+         "Đáp lại": [
+          1,
+          1
+         ],
+         "Ghi hận": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          1,
+          0
+         ],
+         "Đứng về phía La Thanh Hoan": [
+          1,
+          1
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "Nghe hết, tạ ơn nàng báo": [
+          1,
+          0
+         ],
+         "Bẩm nội giám để điều tra": [
+          1,
+          0
+         ],
+         "Hỏi nàng vì sao lại tới kể riêng": [
+          1,
+          0
+         ],
+         "Cười nói nàng nhìn lầm, đổi chuyện": [
+          1,
+          1
+         ],
+         "Pha Trà Long Tĩnh mời khách": [
+          1,
+          0
+         ]
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "Gảy đàn hòa theo từ cung mình": [
+          1,
+          0
+         ],
+         "Ngồi lặng nghe từ xa, không quấy": [
+          1,
+          1
+         ],
+         "Nhờ nàng dạy một khúc": [
+          1,
+          0
+         ]
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Nhan Ngọc Khê": [
+          1,
+          1
+         ],
+         "Giúp La Thanh Hoan một tay": [
+          1,
+          0
+         ],
+         "Ghi nhớ làm chứng cứ": [
+          1,
+          0
+         ]
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Chia phần ít ỏi cho người hầu": [
+          1,
+          1
+         ],
+         "Nhịn đói, chép kinh qua ngày": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 4
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 18
+        },
+        "|Sai Thải Bình đi dò la": {
+         "f": "card",
+         "n": 3
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 2
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "f": "q",
+         "n": 1
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "f": "e",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 1
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 1
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "f": "q",
+         "n": 1
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 1
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        }
+       },
+       "evN": 40,
+       "pace": {
+        "clicks": 152,
+        "choices": 40,
+        "chars": 18442,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 41
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 1,
+         "age": 19,
+         "year": 1,
+         "clicks": 5,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 17,
+       "evRep": 4
+      }
+     },
+     "room": "KMNW",
+     "ms": 231028,
+     "week": 15
+    },
+    {
+     "seat": "host",
+     "player": "Y",
+     "dev": "ipad",
+     "tp": {
+      "origin": "pf",
+      "road": "pt_dang"
+     },
+     "kiep": 1,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "Kẻ thù còn sống: Lục Uyển Hề, Nhan Ngọc Khê, Lương Chỉ Lan, Đậu Ngữ Yên.",
+      "age": 21,
+      "year": 2,
+      "years": 0.92,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 1,
+      "maxRankN": "Thường tại",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 1,
+        "n": "Thường tại",
+        "buoi": 1,
+        "age": 20,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 1,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 12,
+       "bacPk": 200,
+       "bacEnd": 7,
+       "bacZero": 27,
+       "schemes": {
+        "frame": {
+         "n": 1,
+         "caught": 0
+        }
+       },
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [
+        "kyc-ma-007",
+        "kyc-sv-001",
+        "kyc-sv-018",
+        "kyc-sv-003",
+        "kyc-sv-019",
+        "kyc-th-006",
+        "kyc-ma-008",
+        "Sớm mai Phật đường",
+        "kyc-ma-012",
+        "kyc-vat-005",
+        "kyc-sv-016",
+        "kyc-sv-008",
+        "kyc-sv-005",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng Cầm": [
+          1,
+          0
+         ],
+         "Dâng Kỳ": [
+          1,
+          1
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          0
+         ]
+        },
+        "|Thái hậu chê dung nhan": {
+         "Xin lỗi": [
+          6,
+          2
+         ],
+         "Cười trừ": [
+          6,
+          3
+         ],
+         "Đáp lại": [
+          6,
+          1
+         ]
+        },
+        "|Tiết Thanh minh": {
+         "Xin về tảo mộ tổ tiên": [
+          1,
+          1
+         ],
+         "Cúng các phi tần bạc mệnh": [
+          1,
+          0
+         ],
+         "Mượn dịp dò tin": [
+          1,
+          0
+         ]
+        },
+        "|Dực Khôn cung": {
+         "Bái kiến Quý phi rồi vào": [
+          1,
+          1
+         ],
+         "Vào thẳng, không bái kiến": [
+          1,
+          0
+         ],
+         "Thôi": [
+          2,
+          0
+         ],
+         "Đi (đến nơi vào buổi sau)": [
+          1,
+          1
+         ]
+        },
+        "|Có người bán tin": {
+         "Mua tin": [
+          3,
+          2
+         ],
+         "Không mua": [
+          3,
+          1
+         ]
+        },
+        "kyngo|Kỳ ngộ": {
+         "Xin ông kể thêm vài điều": [
+          1,
+          0
+         ],
+         "Lặng lẽ biếu ông một chén trà nóng": [
+          1,
+          1
+         ],
+         "Hỏi chuyện trong cung chủ nàng": [
+          1,
+          0
+         ],
+         "Dặn nàng cẩn thận rồi đi tiếp": [
+          1,
+          1
+         ],
+         "Sửa lời cho nàng, dạy ngắt câu": [
+          1,
+          0
+         ],
+         "Dạy nàng cách thưa lễ trước Thái hậu": [
+          1,
+          1
+         ],
+         "Đọc to từng chữ cho người nghe": [
+          1,
+          0
+         ],
+         "Chép lại bằng chữ lớn cho người": [
+          1,
+          1
+         ],
+         "Ngồi xuống nghe lệ phạt": [
+          1,
+          0
+         ],
+         "Hỏi ông việc đã xảy ra gần đây": [
+          1,
+          1
+         ],
+         "Ở lại chép kinh cùng người": [
+          1,
+          1
+         ],
+         "Xin người dạy lễ nghi": [
+          1,
+          0
+         ],
+         "Ngồi sưởi rồi học một đường chỉ": [
+          1,
+          0
+         ],
+         "Xin bà chỉ cách giữ ấm tay": [
+          1,
+          1
+         ],
+         "Trả lại, kể chuyện quạ tha": [
+          1,
+          0
+         ],
+         "Giữ lại, bảo là nhặt được": [
+          1,
+          1
+         ],
+         "Dặn nàng có chuyện lạ thì báo ngươi": [
+          1,
+          0
+         ],
+         "Chỉ dặn nàng giữ gìn sức khỏe": [
+          1,
+          1
+         ],
+         "Đỡ bé dậy, bôi thuốc ngay": [
+          1,
+          1
+         ],
+         "Bế bé về tận cung của mẹ": [
+          1,
+          0
+         ],
+         "Hỏi kỹ từng chuyện nàng nghe": [
+          1,
+          1
+         ],
+         "Đa tạ nàng, nhờ giữ kín": [
+          1,
+          0
+         ]
+        },
+        "|Đức Thọ cung": {
+         "Xin bái kiến": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          10,
+          4
+         ],
+         "Báo lùi vài hôm": [
+          10,
+          3
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          10,
+          1
+         ],
+         "Giấu, không báo": [
+          10,
+          2
+         ]
+        },
+        "q72o|Phụ tuyến · Giúp thái y chép lại sách thuốc cũ ·": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Hội phối đồ: báo đề": {
+         "Sai tai mắt dò bên chủ hội": [
+          2,
+          0
+         ],
+         "Đã hiểu, sẽ chuẩn bị": [
+          2,
+          1
+         ],
+         "Mượn Áo gấm Tô Châu thêu mẫu đơn của Nha": [
+          1,
+          1
+         ],
+         "Hỏi Nhan Ngọc Khê (từng dự hội)": [
+          1,
+          0
+         ]
+        },
+        "|Sai Thu Sương đi dò la": {
+         "Hoàng hậu Lục Uyển Hề": [
+          14,
+          1
+         ],
+         "Người lạ Phi ở một thiên điện (chưa quen": [
+          2,
+          2
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          2,
+          0
+         ],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [
+          1,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          4,
+          0
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          12,
+          1
+         ],
+         "Thôi, để sau": [
+          14,
+          0
+         ],
+         "Tần Tần La Thanh Hoan · đang nhắm": [
+          2,
+          0
+         ],
+         "Tần Tần Đậu Ngữ Yên": [
+          6,
+          0
+         ],
+         "Quý nhân Khương Như Sương": [
+          4,
+          0
+         ],
+         "Phi Lương Chỉ Lan": [
+          7,
+          1
+         ],
+         "Thường tại Trưởng Tôn Nghê Thường": [
+          4,
+          1
+         ],
+         "Thường tại Trình Ngọc Huyền": [
+          3,
+          0
+         ],
+         "Đáp ứng Lữ Lang Hoa": [
+          3,
+          3
+         ],
+         "Thường tại Trưởng Tôn Nghê Thường · đang": [
+          1,
+          0
+         ],
+         "Đáp ứng Phú Sát Lưu Ly": [
+          2,
+          0
+         ],
+         "Phi Lương Chỉ Lan · đang nhắm": [
+          3,
+          0
+         ],
+         "Thường tại Thường tại La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Tần Khương Như Sương": [
+          8,
+          1
+         ],
+         "Quý nhân Trình Ngọc Huyền": [
+          4,
+          1
+         ],
+         "Thường tại Phú Sát Lưu Ly": [
+          4,
+          1
+         ],
+         "Thường tại Lữ Lang Hoa": [
+          4,
+          0
+         ],
+         "Thường tại Thường tại La Thanh Hoan · đa": [
+          1,
+          0
+         ],
+         "Quý nhân La Thanh Hoan": [
+          2,
+          0
+         ],
+         "Phi Phi Đậu Ngữ Yên": [
+          6,
+          0
+         ],
+         "Quý nhân Trưởng Tôn Nghê Thường · đang n": [
+          2,
+          0
+         ],
+         "Quý nhân La Thanh Hoan · đang nhắm": [
+          2,
+          0
+         ],
+         "Quý nhân Trưởng Tôn Nghê Thường": [
+          4,
+          1
+         ],
+         "Tần Trình Ngọc Huyền": [
+          5,
+          1
+         ],
+         "Quý nhân Phú Sát Lưu Ly": [
+          5,
+          0
+         ],
+         "Quý nhân Lữ Lang Hoa": [
+          5,
+          0
+         ],
+         "Đáp ứng Thạch Bán Hạ": [
+          4,
+          0
+         ],
+         "Tần La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Tần La Thanh Hoan · đang nhắm": [
+          2,
+          0
+         ],
+         "Đáp ứng Đáp ứng Thạch Sơ Tuyết": [
+          1,
+          0
+         ],
+         "Hoàng quý phi Nhan Ngọc Khê": [
+          1,
+          0
+         ],
+         "Quý nhân Lương Chỉ Lan": [
+          1,
+          0
+         ],
+         "Phi Đậu Ngữ Yên": [
+          1,
+          0
+         ],
+         "Phi Khương Như Sương": [
+          1,
+          0
+         ],
+         "Thường tại Thạch Bán Hạ": [
+          1,
+          0
+         ],
+         "Thường tại Thường tại Thạch Sơ Tuyết": [
+          1,
+          0
+         ]
+        },
+        "rvbribe|Việc khó xử": {
+         "Góp bạc, giấu cả thẻ nàng": [
+          1,
+          0
+         ],
+         "Mách Nhan Ngọc Khê": [
+          1,
+          1
+         ],
+         "Không dính vào": [
+          1,
+          0
+         ]
+        },
+        "|Kẻ hầu xin": {
+         "Cho # lượng": [
+          1,
+          1
+         ],
+         "Từ chối": [
+          1,
+          0
+         ]
+        },
+        "e68c:j68c-rumor|Tin đồn": {
+         "Sang thăm Trình Ngọc Huyền một chuyến": [
+          1,
+          0
+         ],
+         "Cười nhẹ, bảo đừng nói thế": [
+          1,
+          1
+         ],
+         "Không tham gia, tránh xa chuyện": [
+          1,
+          0
+         ]
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          4,
+          3
+         ],
+         "Đốt đi, làm ngơ": [
+          4,
+          1
+         ]
+        },
+        "|Bổng lộc tháng ba": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "|Kẻ hầu ăn bớt": {
+         "Phạt nặng": [
+          2,
+          0
+         ],
+         "Răn dạy rồi tha": [
+          2,
+          1
+         ],
+         "Trả về Nội vụ phủ": [
+          2,
+          0
+         ],
+         "Làm ngơ": [
+          2,
+          1
+         ]
+        },
+        "|Nhật thực, sao chổi": {
+         "Thắp hương cùng cầu bình an": [
+          1,
+          0
+         ],
+         "Dâng thêm một đĩa hoa quả": [
+          1,
+          1
+         ],
+         "Khuyên Nhan Ngọc Khê đừng sợ hãi quá": [
+          1,
+          0
+         ],
+         "Lặng lẽ lui, giữ lòng thanh tịnh": [
+          1,
+          0
+         ]
+        },
+        "|Mắng cung nữ": {
+         "Mắng Thu Sương": [
+          2,
+          1
+         ],
+         "Mắng Bán Hạ": [
+          2,
+          1
+         ]
+        },
+        "|Lễ Phật đản": {
+         "Chép kinh cầu phúc": [
+          1,
+          1
+         ],
+         "Lễ Phật rồi về": [
+          1,
+          0
+         ],
+         "Cười lớn, kể chuyện giải vây": [
+          1,
+          1
+         ],
+         "Đứng ngoài hàng nhìn thôi": [
+          1,
+          0
+         ]
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [
+          2,
+          0
+         ],
+         "Đáp lại khéo": [
+          2,
+          0
+         ],
+         "Đáp trả gay gắt": [
+          2,
+          0
+         ],
+         "Im lặng lui đi": [
+          2,
+          0
+         ],
+         "Ghi hận": [
+          2,
+          0
+         ],
+         "Mách Hoàng hậu": [
+          2,
+          1
+         ],
+         "Hỏi bí quyết": [
+          2,
+          1
+         ]
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "Nhún nhường đáp lễ": [
+          1,
+          0
+         ],
+         "Khéo lời hóa giải": [
+          1,
+          0
+         ],
+         "Đáp trả thẳng thắn": [
+          1,
+          1
+         ],
+         "Im lặng ghi nhớ": [
+          1,
+          0
+         ]
+        },
+        "|Có người đến": {
+         "Nhịn": [
+          5,
+          4
+         ],
+         "Đáp trả sắc sảo": [
+          5,
+          1
+         ],
+         "Nhận lời": [
+          2,
+          2
+         ],
+         "Khéo từ chối": [
+          2,
+          0
+         ]
+        },
+        "|Lời cảnh báo": {
+         "Đóng cửa giữ mình": [
+          2,
+          0
+         ],
+         "Biếu quà làm lành": [
+          2,
+          0
+         ],
+         "Ghi nhớ, cứ như thường": [
+          2,
+          2
+         ]
+        },
+        "j71m|Lập công · Lễ Thân tằm": {
+         "Xin theo sát hàng đầu hái dâu": [
+          1,
+          1
+         ],
+         "Theo hầu hái dâu, cho tằm ăn": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [
+          2,
+          2
+         ],
+         "Để sau": [
+          2,
+          0
+         ]
+        },
+        "|Đeo «Thư hương»": {
+         "Thêm Tài": [
+          1,
+          0
+         ],
+         "Học mau tiến": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng tư": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "j70thr|Lời cảnh báo": {
+         "Ra lệnh phòng bị": [
+          4,
+          0
+         ],
+         "Dò la La Thanh Hoan": [
+          2,
+          0
+         ],
+         "Xin Thái hậu che chở": [
+          1,
+          0
+         ],
+         "Tránh mặt La Thanh Hoan": [
+          2,
+          0
+         ],
+         "Để sau": [
+          4,
+          2
+         ],
+         "Nhờ Thục quý phi Nhan Ngọc Khê để ý giúp": [
+          1,
+          0
+         ],
+         "Ra tay trước": [
+          3,
+          1
+         ],
+         "Dò la Lương Chỉ Lan": [
+          2,
+          0
+         ],
+         "Tố giác Thuần phi Lương Chỉ Lan": [
+          2,
+          1
+         ],
+         "Tránh mặt Lương Chỉ Lan": [
+          2,
+          0
+         ]
+        },
+        "poisongift|Việc khó xử": {
+         "Kêu oan, xin tra người đưa quà": [
+          1,
+          0
+         ],
+         "Nhờ Thái hậu đứng ra": [
+          1,
+          1
+         ],
+         "Đẩy tội cho cung nữ": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Báo lời thăm của Hàn lâm học sĩ Tôn ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Có người đến an ủi": {
+         "Giãi bày tâm sự với Thu Sương": [
+          1,
+          0
+         ],
+         "Gượng cười, cảm tạ": [
+          1,
+          1
+         ]
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "Khiêm tốn, nói đó là việc nam nhân": [
+          1,
+          0
+         ],
+         "Hỏi ngược ngài nghĩ sao": [
+          1,
+          1
+         ],
+         "Khuyên ngài nghe đại thần, đừng lo": [
+          1,
+          0
+         ],
+         "Uống thuốc, nghe ngài kể chuyện": [
+          1,
+          0
+         ],
+         "Nhờ ngài đi nghỉ, ngươi sẽ tự lo": [
+          1,
+          0
+         ],
+         "Nắm tay ngài tạ ơn": [
+          1,
+          1
+         ],
+         "Khuyên ngài đừng lỡ việc triều": [
+          1,
+          0
+         ],
+         "Quỳ nhận lệnh, không cãi": [
+          1,
+          0
+         ],
+         "Xin phép giải thích từng việc": [
+          1,
+          0
+         ],
+         "Nhờ Thái hậu nói giúp": [
+          1,
+          0
+         ],
+         "Xin hứa sửa mọi sai lầm": [
+          1,
+          1
+         ]
+        },
+        "|Thái hậu triệu": {
+         "Đến ngay": [
+          2,
+          1
+         ],
+         "Cáo bệnh": [
+          2,
+          1
+         ]
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "Mời vào, rót trà cho nghỉ": [
+          1,
+          1
+         ],
+         "Sai người dẫn ra điện ngoài": [
+          1,
+          0
+         ],
+         "Hỏi cặn kẽ rồi dặn chớ lan truyền": [
+          1,
+          0
+         ],
+         "Bảo đó là chuyện riêng người ta": [
+          1,
+          1
+         ],
+         "Sai Thu Sương thăm dò khéo": [
+          1,
+          0
+         ],
+         "Bẩm Hoàng hậu vài lời nhẹ nhàng": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng năm": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          1,
+          1
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          1,
+          0
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          1,
+          0
+         ],
+         "Cúi đầu vâng dạ": [
+          1,
+          0
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          1,
+          1
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          1,
+          0
+         ],
+         "Theo Hoàng thượng": [
+          1,
+          0
+         ],
+         "Theo Thái hậu": [
+          1,
+          0
+         ],
+         "Theo Tể tướng Bành Cảnh Diễm": [
+          1,
+          0
+         ],
+         "Đứng ngoài, giữ mình": [
+          1,
+          1
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [
+          1,
+          0
+         ],
+         "Cười trừ": [
+          1,
+          0
+         ],
+         "Đáp lại": [
+          1,
+          0
+         ],
+         "Ghi hận": [
+          1,
+          1
+         ]
+        },
+        "|Việc của kẻ hầu": {
+         "Thưởng vì làm việc chăm chỉ": [
+          1,
+          1
+         ],
+         "Khen một câu": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Che chở con gái nhà Đại tướng quân V": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo Nhan Ngọc Khê": [
+          1,
+          1
+         ],
+         "Tố lên Hoàng thượng": [
+          1,
+          0
+         ],
+         "Làm ngơ": [
+          1,
+          0
+         ]
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "Nghiệm ngay thẳng": [
+          8,
+          7
+         ],
+         "Thôi": [
+          8,
+          0
+         ],
+         "Sai người nhỏ dầu vào bát": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng sáu": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          1
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "j71f|Tết Thất tịch · Yến tiệc": {
+         "Mang lễ sang dự": [
+          1,
+          1
+         ],
+         "Cáo mệt, không đi": [
+          1,
+          0
+         ]
+        },
+        "|Tết Thất tịch · Chuyện bên lề hội": {
+         "Nói thật cả điều không hay": [
+          1,
+          0
+         ],
+         "Nói khéo, giữ cho mọi người đều yên": [
+          1,
+          1
+         ],
+         "Xin Thái hậu cho thời gian xem lại": [
+          1,
+          0
+         ]
+        },
+        "|Y phục dự Lễ Vu Lan": {
+         "Mượn Điểm thúy cửu điệp (Lam) của Quý ph": [
+          1,
+          0
+         ],
+         "Cứ thế vào dự": [
+          1,
+          1
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          0
+         ]
+        },
+        "j71f|Lễ Vu Lan · Lễ": {
+         "Xin đứng hầu gần hương án": [
+          1,
+          0
+         ],
+         "Lặng lẽ cầu cho gia đình": [
+          1,
+          1
+         ]
+        },
+        "|Lễ Vu Lan · Chuyện bên lề hội": {
+         "Mở ra xem tại chỗ": [
+          1,
+          0
+         ],
+         "Đem tới Nội vụ phủ xin ghi sổ": [
+          1,
+          0
+         ],
+         "Cất kín, chờ xem ai nhắc tới": [
+          1,
+          1
+         ]
+        },
+        "j70start|Bày mưu": {
+         "Ra tay ngay: vu oan": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng bảy": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          1
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          0
+         ]
+        },
+        "|Lễ tấn phong La Thanh Hoan": {
+         "Đến chúc mừng": [
+          2,
+          0
+         ],
+         "Gửi lễ mừng": [
+          2,
+          0
+         ],
+         "Không đến": [
+          2,
+          2
+         ]
+        },
+        "j71i|Tết Trung thu · Lời mời: Thi thơ “Vọng nguyệt”": {
+         "Ghi tên dự thi thơ": [
+          1,
+          1
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Nặn tượng đất thờ cho nhà Tể tướng B": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Quạt mực": {
+         "Né": [
+          3,
+          3
+         ],
+         "Đứng yên": [
+          3,
+          0
+         ]
+        },
+        "|Bổng lộc tháng tám": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "Nhận, cho người thử trước": [
+          1,
+          0
+         ],
+         "Khéo trả lại": [
+          1,
+          1
+         ]
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "Ký tên làm chứng ngay": [
+          1,
+          0
+         ],
+         "Xem kỹ rồi hãy ký": [
+          1,
+          1
+         ],
+         "Từ chối, bảo mình không rành": [
+          1,
+          0
+         ],
+         "Nhờ người thạo y học khác cùng ký": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng chín": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "tsbBul|Bị ép nộp của": {
+         "Giao": [
+          2,
+          1
+         ],
+         "Không giao": [
+          2,
+          1
+         ]
+        },
+        "j71m|Lập công · Cứu giá": {
+         "Lao vào cứu ngài": [
+          1,
+          0
+         ],
+         "Hô thị vệ, sai người chạy gọi": [
+          1,
+          0
+         ],
+         "Hoảng sợ đứng nhìn": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Đeo «Sớm viếng chiều thăm»": {
+         "Thêm Đức": [
+          1,
+          0
+         ],
+         "Bề trên quý mến": [
+          1,
+          1
+         ],
+         "Để sau": [
+          1,
+          0
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          1,
+          1
+         ],
+         "Đứng về phía Nhan Ngọc Khê": [
+          1,
+          0
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu lên bậc": {
+         "Đeo ngay": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          1
+         ]
+        },
+        "j|Mưu hại": {
+         "Tố giác Lương Chỉ Lan ngay": [
+          1,
+          0
+         ],
+         "Lấy kế trả kế: để nàng ra tay rồi bắt qu": [
+          1,
+          0
+         ],
+         "Ra lệnh phòng bị": [
+          1,
+          1
+         ],
+         "Mặc kệ, đợi xem": [
+          1,
+          0
+         ]
+        },
+        "j70def|Phòng bị": {
+         "Giao việc: canh chừng cung": [
+          1,
+          0
+         ],
+         "Giao việc: thử độc đồ ăn": [
+          1,
+          0
+         ],
+         "Giao việc: theo dõi một người": [
+          1,
+          0
+         ],
+         "Giao việc: giữ sổ sách, làm chứng": [
+          1,
+          1
+         ],
+         "Giữ nguyên": [
+          1,
+          0
+         ],
+         "Thu Sương (thiện cảm #)": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng mười": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Thu Sương đòi lại phần bị cắt xén": [
+          1,
+          1
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "j71i|Tiết Đông chí · Lời mời: Thi gói sủi cảo": {
+         "Ghi tên dự thi bếp núc": [
+          1,
+          0
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Hắt nước": {
+         "Né": [
+          2,
+          1
+         ],
+         "Đứng yên": [
+          2,
+          1
+         ]
+        },
+        "e68kindVisit|Có người đến": {
+         "Tiếp chuyện cả buổi": [
+          1,
+          0
+         ],
+         "Nhận lời giúp hết lòng": [
+          1,
+          1
+         ],
+         "Hẹn hôm khác": [
+          1,
+          0
+         ],
+         "Pha Trà Long Tĩnh mời khách": [
+          1,
+          0
+         ]
+        },
+        "doll|Việc khó xử": {
+         "Đốt ngay, lần dấu kẻ chôn": [
+          1,
+          1
+         ],
+         "Tự trình lên Hoàng thượng": [
+          1,
+          0
+         ]
+        },
+        "|Y phục dự Tiết Đông chí": {
+         "Mượn Điểm thúy cửu điệp (Lam) của Quý ph": [
+          1,
+          0
+         ],
+         "Cứ thế vào dự": [
+          1,
+          1
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          0
+         ]
+        },
+        "|Bị giật y phục giữa đường": {
+         "Sai Thu Sương đến Nội vụ phủ xin": [
+          1,
+          0
+         ],
+         "Viết thư xin nhà gửi áo": [
+          1,
+          0
+         ],
+         "Đợi Nội vụ phủ": [
+          1,
+          1
+         ]
+        },
+        "menEnc|Nam nhân nơi cấm địa": {
+         "Báo thị vệ": [
+          1,
+          1
+         ],
+         "Báo Cung Chính ti": [
+          1,
+          0
+         ],
+         "Giấu giúp": [
+          1,
+          0
+         ],
+         "Núp nghe lén": [
+          1,
+          0
+         ],
+         "Làm như không thấy": [
+          1,
+          0
+         ]
+        },
+        "j71i|Lễ Lạp bát · Lời mời: Thi vẽ tranh Phật": {
+         "Ghi tên dự thi vẽ": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          21,
+          10
+         ],
+         "Ở lại": [
+          21,
+          11
+         ]
+        },
+        "|Cảnh Phúc cung": {
+         "Đi (đến nơi vào buổi sau)": [
+          2,
+          2
+         ],
+         "Thôi": [
+          3,
+          0
+         ],
+         "Vào thẳng, không bái kiến": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng mười một": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        },
+        "cmLand|Cung nữ thân tín": {
+         "Để Cung Chính ti tra hỏi": [
+          1,
+          0
+         ],
+         "Đứng ra bảo lãnh cho nàng ta": [
+          1,
+          1
+         ]
+        },
+        "|Lễ tấn phong Nhan Ngọc Khê": {
+         "Đến chúc mừng": [
+          1,
+          0
+         ],
+         "Gửi lễ mừng": [
+          1,
+          1
+         ],
+         "Không đến": [
+          1,
+          0
+         ]
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "Ghi tên dâng múa (theo Vũ, Sắc)": [
+          1,
+          1
+         ],
+         "Ghi tên dâng hát (theo Sắc, Tài, Cầm, Vũ": [
+          1,
+          0
+         ],
+         "Ghi tên dâng đàn (theo Cầm, Tài)": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "j|Sau vụ mưu hại": {
+         "Tra xét đến cùng": [
+          1,
+          0
+         ],
+         "Nuốt giận, đợi thời": [
+          1,
+          1
+         ]
+        },
+        "|Lễ Lạp bát": {
+         "Tự tay nấu cháo phát cho cung nhân": [
+          1,
+          0
+         ],
+         "Dâng cháo lên Hoàng thượng": [
+          1,
+          1
+         ],
+         "Bỏ qua": [
+          1,
+          0
+         ]
+        },
+        "|Tích Cần viện": {
+         "Lẻn vào": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "|Đại hàn, tuyết lớn": {
+         "Khen nàng nhân hậu, mời nàng cùng trà": [
+          1,
+          0
+         ],
+         "Nói mình chẳng dư, xin lỗi": [
+          1,
+          0
+         ],
+         "Tâu xin cung dưới được sưởi chung": [
+          1,
+          1
+         ]
+        },
+        "maidhostage|Việc khó xử": {
+         "Bày kế phản gián": [
+          1,
+          0
+         ],
+         "Bỏ mặc": [
+          1,
+          1
+         ]
+        },
+        "|Hắt trà": {
+         "Né": [
+          1,
+          0
+         ],
+         "Đứng yên": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Vay Nhan Ngọc Khê # bạc, hẹn trả · L": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "ilback|Đồ cũ trở về": {
+         "Chuộc về": [
+          1,
+          1
+         ],
+         "Thôi, không chuộc": [
+          1,
+          0
+         ]
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Dúi bạc cho người của Tào Liên Thuận": [
+          1,
+          1
+         ],
+         "Chia phần ít ỏi cho người hầu": [
+          1,
+          0
+         ],
+         "Nhịn đói, chép kinh qua ngày": [
+          1,
+          0
+         ]
+        },
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          1,
+          1
+         ],
+         "Thôi, ở lại": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 1
+        },
+        "|Thái hậu chê dung nhan": {
+         "f": "card",
+         "n": 6
+        },
+        "|Tiết Thanh minh": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Dực Khôn cung": {
+         "f": "card",
+         "n": 2
+        },
+        "|Có người bán tin": {
+         "f": "card",
+         "n": 13
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 12
+        },
+        "|Đức Thọ cung": {
+         "f": "card",
+         "n": 1
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 10
+        },
+        "q72o|Phụ tuyến · Giúp thái y chép lại sách thuốc cũ ·": {
+         "f": "q",
+         "n": 1
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 2
+        },
+        "|Sai Thu Sương đi dò la": {
+         "f": "card",
+         "n": 14
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 1
+        },
+        "|Kẻ hầu xin": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68c:j68c-rumor|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 4
+        },
+        "|Bổng lộc tháng ba": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Kẻ hầu ăn bớt": {
+         "f": "ev",
+         "n": 2
+        },
+        "|Nhật thực, sao chổi": {
+         "f": "card",
+         "n": 1
+        },
+        "|Mắng cung nữ": {
+         "f": "ev",
+         "n": 2
+        },
+        "|Việc của kẻ hầu": {
+         "f": "ev",
+         "n": 2
+        },
+        "|Lễ Phật đản": {
+         "f": "card",
+         "n": 2
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 2
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "f": "tsbFirst",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 13
+        },
+        "|Lời cảnh báo": {
+         "f": "card",
+         "n": 2
+        },
+        "e68rumorEmpLove|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "j71m|Lập công · Lễ Thân tằm": {
+         "f": "j",
+         "n": 1
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 2
+        },
+        "|Đeo «Thư hương»": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bổng lộc tháng tư": {
+         "f": "ev",
+         "n": 1
+        },
+        "j70thr|Lời cảnh báo": {
+         "f": "j",
+         "n": 4
+        },
+        "|Thái hậu ban thưởng": {
+         "f": "card",
+         "n": 1
+        },
+        "poisongift|Việc khó xử": {
+         "f": "poisongift",
+         "n": 1
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Báo lời thăm của Hàn lâm học sĩ Tôn ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Có người đến an ủi": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "f": "e",
+         "n": 3
+        },
+        "|Thái hậu triệu": {
+         "f": "ev",
+         "n": 2
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "f": "e",
+         "n": 2
+        },
+        "|Bổng lộc tháng năm": {
+         "f": "ev",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 3
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Che chở con gái nhà Đại tướng quân V": {
+         "f": "q",
+         "n": 1
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 1
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "f": "rtNgNpc",
+         "n": 8
+        },
+        "e68c:j68c-serv|Kẻ hầu": {
+         "f": "e",
+         "n": 1
+        },
+        "e68rumorPreg|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng sáu": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71f|Tết Thất tịch · Yến tiệc": {
+         "f": "j",
+         "n": 1
+        },
+        "|Tết Thất tịch · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 1
+        },
+        "|Y phục dự Lễ Vu Lan": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71f|Lễ Vu Lan · Lễ": {
+         "f": "j",
+         "n": 1
+        },
+        "|Lễ Vu Lan · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 1
+        },
+        "j70start|Bày mưu": {
+         "f": "j",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "f": "q",
+         "n": 1
+        },
+        "|Bổng lộc tháng bảy": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Lễ tấn phong La Thanh Hoan": {
+         "f": "card",
+         "n": 2
+        },
+        "j71i|Tết Trung thu · Lời mời: Thi thơ “Vọng nguyệt”": {
+         "f": "j",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Nặn tượng đất thờ cho nhà Tể tướng B": {
+         "f": "q",
+         "n": 1
+        },
+        "|Quạt mực": {
+         "f": "card",
+         "n": 3
+        },
+        "|Bổng lộc tháng tám": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 1
+        },
+        "tsbBul|Bị ép nộp của": {
+         "f": "tsbBul",
+         "n": 2
+        },
+        "j71m|Lập công · Cứu giá": {
+         "f": "j",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Đeo «Sớm viếng chiều thăm»": {
+         "f": "card",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Danh hiệu lên bậc": {
+         "f": "card",
+         "n": 1
+        },
+        "j|Mưu hại": {
+         "f": "j",
+         "n": 1
+        },
+        "j70def|Phòng bị": {
+         "f": "j",
+         "n": 2
+        },
+        "|Bổng lộc tháng mười": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71i|Tiết Đông chí · Lời mời: Thi gói sủi cảo": {
+         "f": "j",
+         "n": 1
+        },
+        "|Hắt nước": {
+         "f": "card",
+         "n": 2
+        },
+        "e68kindVisit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "doll|Việc khó xử": {
+         "f": "doll",
+         "n": 1
+        },
+        "|Y phục dự Tiết Đông chí": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Điềm báo": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bị giật y phục giữa đường": {
+         "f": "card",
+         "n": 1
+        },
+        "menEnc|Nam nhân nơi cấm địa": {
+         "f": "menEnc",
+         "n": 1
+        },
+        "j71i|Lễ Lạp bát · Lời mời: Thi vẽ tranh Phật": {
+         "f": "j",
+         "n": 1
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 21
+        },
+        "|Cảnh Phúc cung": {
+         "f": "card",
+         "n": 3
+        },
+        "|Bổng lộc tháng mười một": {
+         "f": "ev",
+         "n": 1
+        },
+        "cmLand|Cung nữ thân tín": {
+         "f": "cmLand",
+         "n": 1
+        },
+        "|Lễ tấn phong Nhan Ngọc Khê": {
+         "f": "card",
+         "n": 1
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "f": "j",
+         "n": 1
+        },
+        "j|Sau vụ mưu hại": {
+         "f": "j",
+         "n": 1
+        },
+        "|Lễ Lạp bát": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Tích Cần viện": {
+         "f": "card",
+         "n": 1
+        },
+        "|Đại hàn, tuyết lớn": {
+         "f": "card",
+         "n": 2
+        },
+        "maidhostage|Việc khó xử": {
+         "f": "maidhostage",
+         "n": 1
+        },
+        "|Hắt trà": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Vay Nhan Ngọc Khê # bạc, hẹn trả · L": {
+         "f": "q",
+         "n": 1
+        },
+        "ilback|Đồ cũ trở về": {
+         "f": "ilback",
+         "n": 1
+        },
+        "|Khóc suốt đêm": {
+         "f": "card",
+         "n": 1
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 1
+        }
+       },
+       "evN": 219,
+       "pace": {
+        "clicks": 585,
+        "choices": 219,
+        "chars": 115003,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 161
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 151,
+         "age": 20,
+         "year": 1,
+         "clicks": 553,
+         "choices": 213,
+         "chars": 113907,
+         "mg": 0,
+         "mgs": 0
+        },
+        "1": {
+         "buoi": 1,
+         "age": 20,
+         "year": 1,
+         "clicks": 6,
+         "choices": 4,
+         "chars": 1389,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 100,
+       "evRep": 30
+      }
+     },
+     "room": "KMNW",
+     "ms": 965297,
+     "week": 32
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "dtq",
+      "road": "dtq_bien"
+     },
+     "kiep": 4,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "",
+      "age": 21,
+      "year": 2,
+      "years": 0.92,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 42,
+        "age": 20,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 2,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 14,
+       "bacPk": 150,
+       "bacEnd": 9,
+       "bacZero": 7,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [
+        {
+         "k": "hoc:hat",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        },
+        {
+         "k": "hoc:mua",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        },
+        {
+         "k": "hoc:mua",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        },
+        {
+         "k": "hoc:mua",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        }
+       ],
+       "ky": [
+        "kyc-sv-018",
+        "kyc-ma-008",
+        "kyc-ma-007",
+        "kyc-sv-005",
+        "kyc-sv-001",
+        "Phương thuốc gia truyền",
+        "kyc-sv-020",
+        "Sớm mai Phật đường",
+        "kyc-sv-019",
+        "kyc-ma-014",
+        "kyc-sv-016",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          null,
+          null
+         ],
+         "Thôi, ở lại": [
+          null,
+          null
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          null,
+          null
+         ],
+         "Ở lại": [
+          null,
+          null
+         ]
+        },
+        "|Sai Thải Bình đi dò la": {
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Đáp ứng Lữ Lang Hoa": [],
+         "Thôi, để sau": [],
+         "Phi Lương Chỉ Lan": [],
+         "Thường tại Thường tại La Thanh Hoan": [],
+         "Tần Đậu Ngữ Yên": [],
+         "Tần Tần Khương Như Sương": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền · đan": [],
+         "Thường tại Thường tại Phú Sát Lưu Ly": [],
+         "Thường tại Lữ Lang Hoa": [],
+         "Thường tại La Thanh Hoan": [],
+         "Thường tại Trưởng Tôn Nghê Thường · đang": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền": []
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null,
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null,
+          null
+         ],
+         "Giấu, không báo": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "Giận dỗi, tránh mặt ngài": [],
+         "Đón tiếp bình thường như chưa có chuyện": [],
+         "Hỏi nhẹ vì sao lâu không ghé": [],
+         "Giữ im, dâng trà, không nhắc": [],
+         "Ngồi bên ngài, không nói": [
+          1,
+          0
+         ],
+         "Pha trà và đàn khẽ": [
+          1,
+          1
+         ],
+         "Kể chuyện thuở nhỏ": [
+          1,
+          0
+         ],
+         "Nhắc ngài còn nhiều việc, nên nghỉ sớm": [
+          1,
+          0
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          null,
+          null
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          null
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          null
+         ],
+         "Cúi đầu vâng dạ": [
+          1,
+          0
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          1,
+          0
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          1,
+          1
+         ],
+         "Theo Hoàng thượng": [
+          1,
+          1
+         ],
+         "Theo Thái hậu": [
+          1,
+          0
+         ],
+         "Theo Tể tướng Bành Cảnh Diễm": [
+          1,
+          0
+         ],
+         "Đứng ngoài, giữ mình": [
+          1,
+          0
+         ]
+        },
+        "kyngo|Kỳ ngộ": {
+         "Đỡ bé dậy, bôi thuốc ngay": [],
+         "Bế bé về tận cung của mẹ": [],
+         "Sửa lời cho nàng, dạy ngắt câu": [
+          1,
+          0
+         ],
+         "Dạy nàng cách thưa lễ trước Thái hậu": [
+          1,
+          1
+         ],
+         "Ngồi xuống nghe lệ phạt": [
+          1,
+          0
+         ],
+         "Hỏi ông việc đã xảy ra gần đây": [
+          1,
+          1
+         ],
+         "Hỏi kỹ từng chuyện nàng nghe": [
+          1,
+          0
+         ],
+         "Đa tạ nàng, nhờ giữ kín": [
+          1,
+          1
+         ],
+         "Hỏi chuyện trong cung chủ nàng": [
+          1,
+          0
+         ],
+         "Dặn nàng cẩn thận rồi đi tiếp": [
+          1,
+          1
+         ],
+         "Ở lại chép kinh cùng người": [
+          1,
+          1
+         ],
+         "Xin người dạy lễ nghi": [
+          1,
+          0
+         ],
+         "Dặn nàng có chuyện lạ thì báo ngươi": [
+          1,
+          1
+         ],
+         "Chỉ dặn nàng giữ gìn sức khỏe": [
+          1,
+          0
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [
+          null
+         ],
+         "Cười trừ": [
+          null
+         ],
+         "Đáp lại": [
+          null,
+          null
+         ],
+         "Ghi hận": [
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          null,
+          null
+         ],
+         "Đứng về phía La Thanh Hoan": [
+          null
+         ],
+         "Mách Hoàng hậu": [
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "Nghe hết, tạ ơn nàng báo": [],
+         "Bẩm nội giám để điều tra": [],
+         "Hỏi nàng vì sao lại tới kể riêng": [],
+         "Cười nói nàng nhìn lầm, đổi chuyện": [],
+         "Pha Trà Long Tĩnh mời khách": []
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "Gảy đàn hòa theo từ cung mình": [],
+         "Ngồi lặng nghe từ xa, không quấy": [],
+         "Nhờ nàng dạy một khúc": [],
+         "Cho nàng về nghỉ, ngươi tự canh đèn": [
+          1,
+          0
+         ],
+         "Bảo nàng ngủ một lát, đừng cố": [
+          1,
+          0
+         ],
+         "Đem ít bánh nóng cho nàng ăn cùng": [
+          1,
+          0
+         ],
+         "Khen nàng chăm chỉ, hứa nhớ công": [
+          1,
+          1
+         ]
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Nhan Ngọc Khê": [
+          null
+         ],
+         "Giúp La Thanh Hoan một tay": [
+          null
+         ],
+         "Ghi nhớ làm chứng cứ": [
+          null,
+          null
+         ]
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Chia phần ít ỏi cho người hầu": [
+          null
+         ],
+         "Nhịn đói, chép kinh qua ngày": [
+          null
+         ],
+         "Dúi bạc cho người của Tào Liên Thuận": [
+          1,
+          1
+         ]
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng điệu múa Ba Tư": [
+          1,
+          0
+         ],
+         "Bắn cung trước điện": [
+          1,
+          1
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          0
+         ]
+        },
+        "|Dực Khôn cung": {
+         "Bái kiến Quý phi rồi vào": [
+          9,
+          6
+         ],
+         "Vào thẳng, không bái kiến": [
+          9,
+          3
+         ],
+         "Thôi": [
+          12,
+          0
+         ],
+         "Đi (đến nơi vào buổi sau)": [
+          3,
+          3
+         ]
+        },
+        "nfch|Kính sự phòng": {
+         "Tranh sủng": [
+          4,
+          1
+         ],
+         "Chặn ngự giá": [
+          4,
+          3
+         ],
+         "Thôi": [
+          6,
+          0
+         ],
+         "Giữ chân Hoàng thượng": [
+          2,
+          2
+         ]
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          1,
+          0
+         ],
+         "Đốt đi, làm ngơ": [
+          1,
+          1
+         ]
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "Chơi ván nhỏ (# bạc)": [
+          1,
+          1
+         ],
+         "Từ chối khéo": [
+          1,
+          0
+         ]
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "Ghi tên dự thi hát": [
+          1,
+          0
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "Mời nàng ngồi, tìm chỗ khác": [
+          1,
+          0
+         ],
+         "Đứng cạnh nàng, nói chuyện vui": [
+          1,
+          0
+         ],
+         "Ngồi vào chỗ của nàng khi nàng đi": [
+          1,
+          1
+         ],
+         "Nhờ cung nhân đổi chỗ tốt hơn": [
+          1,
+          0
+         ]
+        },
+        "rvbribe|Việc khó xử": {
+         "Góp bạc, giấu cả thẻ nàng": [
+          1,
+          0
+         ],
+         "Mách La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Không dính vào": [
+          1,
+          1
+         ]
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [
+          2,
+          0
+         ],
+         "Tiến cử Tú Châu hầu thay": [
+          2,
+          0
+         ],
+         "Cáo bệnh": [
+          2,
+          2
+         ]
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [
+          1,
+          0
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          1
+         ]
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "Cho xông khắp cung ngay": [
+          1,
+          0
+         ],
+         "Chỉ xông phòng người sốt": [
+          1,
+          0
+         ],
+         "Xin tự bào chế thêm, đỡ nặng mùi": [
+          1,
+          1
+         ],
+         "Tâu lên bề trên xin ý chỉ": [
+          1,
+          0
+         ]
+        },
+        "|Sai Tú Châu đi dò la": {
+         "Hoàng hậu Hoàng hậu Lục Uyển Hề": [
+          1,
+          0
+         ],
+         "Quý phi Nhan Ngọc Khê": [
+          3,
+          0
+         ],
+         "Người lạ Phi ở một thiên điện (chưa quen": [
+          1,
+          0
+         ],
+         "Phi Phi Đậu Ngữ Yên": [
+          4,
+          0
+         ],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [
+          1,
+          0
+         ],
+         "Quý nhân Trình Ngọc Huyền": [
+          1,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          3,
+          1
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          3,
+          0
+         ],
+         "Thôi, để sau": [
+          4,
+          1
+         ],
+         "Hoàng hậu Lục Uyển Hề": [
+          3,
+          0
+         ],
+         "Phi Lương Chỉ Lan": [
+          2,
+          0
+         ],
+         "Quý nhân Trưởng Tôn Nghê Thường": [
+          2,
+          0
+         ],
+         "Tần Trình Ngọc Huyền · đang nhắm": [
+          2,
+          0
+         ],
+         "Quý nhân Quý nhân Phú Sát Lưu Ly": [
+          3,
+          0
+         ],
+         "Quý nhân Quý nhân Lữ Lang Hoa": [
+          1,
+          1
+         ],
+         "Thường tại Thường tại Thượng Quan Nhã Ni": [
+          3,
+          1
+         ],
+         "Tần La Thanh Hoan": [
+          2,
+          0
+         ],
+         "Tần Trình Ngọc Huyền": [
+          1,
+          0
+         ],
+         "Hoàng quý phi Nhan Ngọc Khê": [
+          1,
+          0
+         ],
+         "Quý nhân Lương Chỉ Lan": [
+          1,
+          0
+         ],
+         "Tần Trưởng Tôn Nghê Thường": [
+          1,
+          0
+         ],
+         "Thường tại Thạch Bán Hạ": [
+          1,
+          0
+         ],
+         "Thường tại Thạch Sơ Tuyết": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng tám": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          1
+         ],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [
+          1,
+          0
+         ],
+         "Cứ thế vào dự": [
+          1,
+          1
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          0
+         ]
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "Cược ngựa Bạch Long": [
+          1,
+          0
+         ],
+         "Cược ngựa Xích Thố": [
+          1,
+          0
+         ],
+         "Không cược, chỉ xem": [
+          1,
+          1
+         ]
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "Viết hộ ngay tại chỗ": [
+          1,
+          0
+         ],
+         "Dạy ông tập viết vài chữ": [
+          1,
+          1
+         ],
+         "Nhờ Tú Châu viết giúp rồi ngươi duyệt lạ": [
+          1,
+          0
+         ],
+         "Xin lỗi, hẹn ông hôm khác": [
+          1,
+          0
+         ]
+        },
+        "|Có người đến": {
+         "Thu làm tai mắt": [
+          2,
+          1
+         ],
+         "Đuổi về": [
+          2,
+          1
+         ]
+        },
+        "j71m|Lập công · Chép kinh": {
+         "Chép trọn bộ bằng chữ khải": [
+          1,
+          0
+         ],
+         "Chép một quyển": [
+          1,
+          1
+         ],
+         "Nhờ cung nữ chép thay": [
+          1,
+          0
+         ]
+        },
+        "|Hội phối đồ: báo đề": {
+         "Sai tai mắt dò bên chủ hội": [
+          1,
+          0
+         ],
+         "Đã hiểu, sẽ chuẩn bị": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Thái hậu chê dung nhan": {
+         "Xin lỗi": [
+          2,
+          1
+         ],
+         "Cười trừ": [
+          2,
+          0
+         ],
+         "Đáp lại": [
+          2,
+          1
+         ]
+        },
+        "|Bổng lộc tháng chín": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "Ghi tên dự thi bếp núc": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "Nhún nhường đáp lễ": [
+          1,
+          1
+         ],
+         "Khéo lời hóa giải": [
+          1,
+          0
+         ],
+         "Đáp trả thẳng thắn": [
+          1,
+          0
+         ],
+         "Im lặng ghi nhớ": [
+          1,
+          0
+         ]
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "Tự tay phối đồ": [
+          1,
+          0
+         ],
+         "Cáo bệnh, không dự": [
+          1,
+          1
+         ]
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "Nhận, cho người thử trước": [
+          1,
+          0
+         ],
+         "Khéo trả lại": [
+          1,
+          1
+         ]
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "Nghiệm ngay thẳng": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [
+          1,
+          0
+         ],
+         "Đáp lại khéo": [
+          1,
+          1
+         ],
+         "Đáp trả gay gắt": [
+          1,
+          0
+         ],
+         "Im lặng lui đi": [
+          1,
+          0
+         ],
+         "Ghi hận": [
+          1,
+          0
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          0
+         ],
+         "Hỏi bí quyết": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [
+          2,
+          2
+         ],
+         "Để sau": [
+          2,
+          0
+         ]
+        },
+        "|Đeo «Thư hương»": {
+         "Thêm Tài": [
+          1,
+          1
+         ],
+         "Học mau tiến": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo La Thanh Hoan": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng thượng": [
+          1,
+          0
+         ],
+         "Làm ngơ": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Thái hậu triệu": {
+         "Đến ngay": [
+          1,
+          1
+         ],
+         "Cáo bệnh": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng mười một": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "Hầu chuyện Thái hậu, khéo dò ý": [
+          1,
+          0
+         ],
+         "Thưa rằng không tiện hỏi": [
+          1,
+          1
+         ]
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "Sai người mua Trâm gỗ đào (Nâu) ở Nội vụ": [
+          1,
+          0
+         ],
+         "Cứ thế vào dự": [
+          1,
+          0
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          1
+         ]
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "Ghi tên dâng múa (theo Vũ, Sắc)": [
+          1,
+          0
+         ],
+         "Ghi tên dâng hát (theo Sắc, Tài, Cầm, Vũ": [
+          1,
+          0
+         ],
+         "Ghi tên dâng đàn (theo Cầm, Tài)": [
+          1,
+          1
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "Gấp lại, giữ trong hộp của kho": [
+          1,
+          1
+         ],
+         "Giữ lại để nhớ, nhắc người sau": [
+          1,
+          0
+         ]
+        },
+        "|Hàm An cung": {
+         "Đi (đến nơi vào buổi sau)": [
+          1,
+          1
+         ],
+         "Thôi": [
+          3,
+          0
+         ],
+         "Bái kiến Tần rồi vào": [
+          2,
+          1
+         ],
+         "Vào thẳng, không bái kiến": [
+          2,
+          1
+         ]
+        },
+        "e68painter|Có người đến": {
+         "Ngồi cho vẽ đúng thật": [
+          1,
+          0
+         ],
+         "Hỏi học vài nét bút": [
+          1,
+          1
+         ]
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "Ghi tên dự thi múa": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "Ngủ lại sức": [
+          1,
+          0
+         ],
+         "Học mau tiến": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          1
+         ]
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "Cứ thế vào dự": [
+          1,
+          0
+         ],
+         "Cáo lỗi, về cung nghỉ": [
+          1,
+          1
+         ]
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "Ghi tên dự thi thơ": [
+          1,
+          1
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng chạp": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        }
+       },
+       "ev": {
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 2
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 29
+        },
+        "|Sai Thải Bình đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 5
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "f": "e",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 3
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 10
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 0
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 5
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 1
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 1
+        },
+        "|Dực Khôn cung": {
+         "f": "card",
+         "n": 15
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 6
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "f": "j",
+         "n": 1
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "f": "j",
+         "n": 1
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 1
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 1
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 2
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "f": "e",
+         "n": 1
+        },
+        "|Sai Tú Châu đi dò la": {
+         "f": "card",
+         "n": 4
+        },
+        "|Bổng lộc tháng tám": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "f": "j",
+         "n": 1
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 1
+        },
+        "j71m|Lập công · Chép kinh": {
+         "f": "j",
+         "n": 1
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "f": "q",
+         "n": 1
+        },
+        "|Thái hậu chê dung nhan": {
+         "f": "card",
+         "n": 2
+        },
+        "e68docCheck|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "f": "j",
+         "n": 1
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "f": "tsbFirst",
+         "n": 1
+        },
+        "|Y phục dự Thánh thọ Thái hậu": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "f": "card",
+         "n": 1
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "f": "rtNgNpc",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 1
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 2
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 2
+        },
+        "|Đeo «Thư hương»": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "f": "q",
+         "n": 1
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "f": "q",
+         "n": 1
+        },
+        "e68famineDonate|Tin triều đình": {
+         "f": "e",
+         "n": 1
+        },
+        "|Thái hậu triệu": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Bổng lộc tháng mười một": {
+         "f": "ev",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "f": "rg",
+         "n": 1
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "f": "j",
+         "n": 1
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 1
+        },
+        "|Hàm An cung": {
+         "f": "card",
+         "n": 3
+        },
+        "e68painter|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "f": "j",
+         "n": 1
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "f": "card",
+         "n": 1
+        },
+        "|Đại hàn, tuyết lớn": {
+         "f": "card",
+         "n": 1
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "f": "j",
+         "n": 1
+        },
+        "|Bổng lộc tháng chạp": {
+         "f": "ev",
+         "n": 1
+        }
+       },
+       "evN": 141,
+       "pace": {
+        "clicks": 325,
+        "choices": 141,
+        "chars": 64508,
+        "mgPlay": 0,
+        "mgSkip": 4,
+        "buoi": 86
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 69,
+       "evRep": 14
+      }
+     },
+     "room": "KMNW",
+     "ms": 588474,
+     "week": 32
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "cn",
+      "road": "cn_tinh"
+     },
+     "kiep": 5,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "",
+      "age": 19,
+      "year": 2,
+      "years": 1.25,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 128,
+        "age": 19,
+        "year": 2
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 1,
+       "sungPk": 31,
+       "bacPk": 168,
+       "bacEnd": 0,
+       "bacZero": 11,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [
+        "kyc-ma-008",
+        "kyc-sv-005",
+        "Sổ tay giáo tập",
+        "kyc-sv-010",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          null,
+          null
+         ],
+         "Thôi, ở lại": [
+          null
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [],
+         "Ở lại": []
+        },
+        "|Sai Thải Bình đi dò la": {
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Đáp ứng Lữ Lang Hoa": [],
+         "Thôi, để sau": [],
+         "Phi Lương Chỉ Lan": [],
+         "Thường tại Thường tại La Thanh Hoan": [],
+         "Tần Đậu Ngữ Yên": [],
+         "Tần Tần Khương Như Sương": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền · đan": [],
+         "Thường tại Thường tại Phú Sát Lưu Ly": [],
+         "Thường tại Lữ Lang Hoa": [],
+         "Thường tại La Thanh Hoan": [],
+         "Thường tại Trưởng Tôn Nghê Thường · đang": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền": []
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null,
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null,
+          null
+         ],
+         "Giấu, không báo": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "Giận dỗi, tránh mặt ngài": [],
+         "Đón tiếp bình thường như chưa có chuyện": [],
+         "Hỏi nhẹ vì sao lâu không ghé": [],
+         "Giữ im, dâng trà, không nhắc": [],
+         "Ngồi bên ngài, không nói": [],
+         "Pha trà và đàn khẽ": [],
+         "Kể chuyện thuở nhỏ": [],
+         "Nhắc ngài còn nhiều việc, nên nghỉ sớm": [],
+         "Nhận lỗi, im lặng chịu quở": [
+          1,
+          0
+         ],
+         "Bình tĩnh nói rõ vì sao": [
+          1,
+          0
+         ],
+         "Đưa bằng chứng Trình Ngọc Huyền làm hỏng": [
+          1,
+          1
+         ],
+         "Xin ngài đừng quở thêm, chuyện nhỏ thôi": [
+          1,
+          0
+         ],
+         "Rộng lượng đề xuất cung đẹp": [
+          1,
+          0
+         ],
+         "Đề xuất cung gần cung mình": [
+          1,
+          1
+         ],
+         "Nói không dám can dự": [
+          1,
+          0
+         ],
+         "Đề xuất cung xa cho nàng yên tĩnh": [
+          1,
+          0
+         ],
+         "Cất vào hộp, giữ làm kỷ niệm": [
+          1,
+          1
+         ],
+         "Khen ngọc đẹp, hỏi ngài mua ở đâu": [
+          1,
+          0
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          null,
+          null
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          null
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          null
+         ],
+         "Cúi đầu vâng dạ": [
+          null
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          null,
+          null
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          null
+         ],
+         "Theo Hoàng thượng": [
+          null,
+          null
+         ],
+         "Theo Thái hậu": [
+          null
+         ],
+         "Theo Tể tướng Bành Cảnh Diễm": [
+          null,
+          null
+         ],
+         "Đứng ngoài, giữ mình": [
+          null
+         ],
+         "Cáo bệnh, đóng cửa không tiếp ai": [
+          1,
+          0
+         ]
+        },
+        "kyngo|Kỳ ngộ": {
+         "Đỡ bé dậy, bôi thuốc ngay": [],
+         "Bế bé về tận cung của mẹ": [],
+         "Sửa lời cho nàng, dạy ngắt câu": [],
+         "Dạy nàng cách thưa lễ trước Thái hậu": [],
+         "Ngồi xuống nghe lệ phạt": [
+          null
+         ],
+         "Hỏi ông việc đã xảy ra gần đây": [
+          null,
+          null
+         ],
+         "Hỏi kỹ từng chuyện nàng nghe": [
+          null
+         ],
+         "Đa tạ nàng, nhờ giữ kín": [
+          null,
+          null
+         ],
+         "Hỏi chuyện trong cung chủ nàng": [],
+         "Dặn nàng cẩn thận rồi đi tiếp": [],
+         "Ở lại chép kinh cùng người": [],
+         "Xin người dạy lễ nghi": [],
+         "Dặn nàng có chuyện lạ thì báo ngươi": [],
+         "Chỉ dặn nàng giữ gìn sức khỏe": [],
+         "Đứng ra phân xử cho hai bé": [
+          1,
+          1
+         ],
+         "Dỗ bé này, nhường món khác": [
+          1,
+          0
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [],
+         "Cười trừ": [],
+         "Đáp lại": [],
+         "Ghi hận": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [
+          null
+         ],
+         "Khéo từ chối": [
+          null,
+          null
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          null
+         ],
+         "Đứng về phía La Thanh Hoan": [],
+         "Mách Hoàng hậu": [
+          null
+         ],
+         "Đứng về phía Lương Chỉ Lan": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "Nghe hết, tạ ơn nàng báo": [],
+         "Bẩm nội giám để điều tra": [],
+         "Hỏi nàng vì sao lại tới kể riêng": [],
+         "Cười nói nàng nhìn lầm, đổi chuyện": [],
+         "Pha Trà Long Tĩnh mời khách": [],
+         "Nói thật cả những lúc mệt": [
+          1,
+          0
+         ],
+         "Chỉ nói vài điều nhẹ nhàng": [
+          1,
+          0
+         ],
+         "Hỏi lại cách giữ gìn mùa này": [
+          1,
+          1
+         ]
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "Gảy đàn hòa theo từ cung mình": [],
+         "Ngồi lặng nghe từ xa, không quấy": [],
+         "Nhờ nàng dạy một khúc": [],
+         "Cho nàng về nghỉ, ngươi tự canh đèn": [],
+         "Bảo nàng ngủ một lát, đừng cố": [],
+         "Đem ít bánh nóng cho nàng ăn cùng": [],
+         "Khen nàng chăm chỉ, hứa nhớ công": []
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Nhan Ngọc Khê": [],
+         "Giúp La Thanh Hoan một tay": [],
+         "Ghi nhớ làm chứng cứ": []
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Chia phần ít ỏi cho người hầu": [],
+         "Nhịn đói, chép kinh qua ngày": [],
+         "Dúi bạc cho người của Tào Liên Thuận": []
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng điệu múa Ba Tư": [],
+         "Bắn cung trước điện": [],
+         "Cúi đầu chờ xét": []
+        },
+        "|Dực Khôn cung": {
+         "Bái kiến Quý phi rồi vào": [],
+         "Vào thẳng, không bái kiến": [],
+         "Thôi": [],
+         "Đi (đến nơi vào buổi sau)": []
+        },
+        "nfch|Kính sự phòng": {
+         "Tranh sủng": [],
+         "Chặn ngự giá": [],
+         "Thôi": [
+          null
+         ],
+         "Giữ chân Hoàng thượng": [
+          null,
+          null
+         ]
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          null
+         ],
+         "Đốt đi, làm ngơ": [
+          null,
+          null
+         ]
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "Chơi ván nhỏ (# bạc)": [],
+         "Từ chối khéo": []
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "Ghi tên dự thi hát": [],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [],
+         "Không dự": []
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "Mời nàng ngồi, tìm chỗ khác": [],
+         "Đứng cạnh nàng, nói chuyện vui": [],
+         "Ngồi vào chỗ của nàng khi nàng đi": [],
+         "Nhờ cung nhân đổi chỗ tốt hơn": []
+        },
+        "rvbribe|Việc khó xử": {
+         "Góp bạc, giấu cả thẻ nàng": [
+          null
+         ],
+         "Mách La Thanh Hoan": [],
+         "Không dính vào": [
+          null,
+          null
+         ],
+         "Mách Lương Chỉ Lan": [
+          1,
+          0
+         ]
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [
+          null,
+          null
+         ],
+         "Tiến cử Tú Châu hầu thay": [],
+         "Cáo bệnh": [
+          null
+         ],
+         "Tiến cử Như Họa hầu thay": [
+          1,
+          0
+         ]
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "Cho xông khắp cung ngay": [],
+         "Chỉ xông phòng người sốt": [],
+         "Xin tự bào chế thêm, đỡ nặng mùi": [],
+         "Tâu lên bề trên xin ý chỉ": []
+        },
+        "|Sai Tú Châu đi dò la": {
+         "Hoàng hậu Hoàng hậu Lục Uyển Hề": [],
+         "Quý phi Nhan Ngọc Khê": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Phi Phi Đậu Ngữ Yên": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Quý nhân Trình Ngọc Huyền": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Thôi, để sau": [],
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Phi Lương Chỉ Lan": [],
+         "Quý nhân Trưởng Tôn Nghê Thường": [],
+         "Tần Trình Ngọc Huyền · đang nhắm": [],
+         "Quý nhân Quý nhân Phú Sát Lưu Ly": [],
+         "Quý nhân Quý nhân Lữ Lang Hoa": [],
+         "Thường tại Thường tại Thượng Quan Nhã Ni": [],
+         "Tần La Thanh Hoan": [],
+         "Tần Trình Ngọc Huyền": [],
+         "Hoàng quý phi Nhan Ngọc Khê": [],
+         "Quý nhân Lương Chỉ Lan": [],
+         "Tần Trưởng Tôn Nghê Thường": [],
+         "Thường tại Thạch Bán Hạ": [],
+         "Thường tại Thạch Sơ Tuyết": []
+        },
+        "|Bổng lộc tháng tám": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [],
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "Cược ngựa Bạch Long": [],
+         "Cược ngựa Xích Thố": [],
+         "Không cược, chỉ xem": []
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "Viết hộ ngay tại chỗ": [],
+         "Dạy ông tập viết vài chữ": [],
+         "Nhờ Tú Châu viết giúp rồi ngươi duyệt lạ": [],
+         "Xin lỗi, hẹn ông hôm khác": []
+        },
+        "|Có người đến": {
+         "Thu làm tai mắt": [],
+         "Đuổi về": [],
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Đáp trả sắc sảo": [
+          1,
+          1
+         ]
+        },
+        "j71m|Lập công · Chép kinh": {
+         "Chép trọn bộ bằng chữ khải": [],
+         "Chép một quyển": [],
+         "Nhờ cung nữ chép thay": []
+        },
+        "|Hội phối đồ: báo đề": {
+         "Sai tai mắt dò bên chủ hội": [
+          null
+         ],
+         "Đã hiểu, sẽ chuẩn bị": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Thái hậu chê dung nhan": {
+         "Xin lỗi": [
+          null,
+          null
+         ],
+         "Cười trừ": [
+          null
+         ],
+         "Đáp lại": [
+          null
+         ]
+        },
+        "|Bổng lộc tháng chín": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "Ghi tên dự thi bếp núc": [],
+         "Không dự": []
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "Nhún nhường đáp lễ": [],
+         "Khéo lời hóa giải": [],
+         "Đáp trả thẳng thắn": [],
+         "Im lặng ghi nhớ": []
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "Tự tay phối đồ": [],
+         "Cáo bệnh, không dự": []
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "Nhận, cho người thử trước": [],
+         "Khéo trả lại": []
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "Nghiệm ngay thẳng": [],
+         "Thôi": []
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [],
+         "Đáp lại khéo": [],
+         "Đáp trả gay gắt": [],
+         "Im lặng lui đi": [],
+         "Ghi hận": [],
+         "Mách Hoàng hậu": [],
+         "Hỏi bí quyết": []
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [
+          null
+         ],
+         "Để sau": [
+          null,
+          null
+         ]
+        },
+        "|Đeo «Thư hương»": {
+         "Thêm Tài": [],
+         "Học mau tiến": [],
+         "Để sau": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo La Thanh Hoan": [],
+         "Tố lên Hoàng thượng": [],
+         "Làm ngơ": []
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Thái hậu triệu": {
+         "Đến ngay": [],
+         "Cáo bệnh": []
+        },
+        "|Bổng lộc tháng mười một": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "Hầu chuyện Thái hậu, khéo dò ý": [],
+         "Thưa rằng không tiện hỏi": []
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "Sai người mua Trâm gỗ đào (Nâu) ở Nội vụ": [],
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "Ghi tên dâng múa (theo Vũ, Sắc)": [],
+         "Ghi tên dâng hát (theo Sắc, Tài, Cầm, Vũ": [],
+         "Ghi tên dâng đàn (theo Cầm, Tài)": [],
+         "Không dự": []
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "Gấp lại, giữ trong hộp của kho": [],
+         "Giữ lại để nhớ, nhắc người sau": []
+        },
+        "|Hàm An cung": {
+         "Đi (đến nơi vào buổi sau)": [],
+         "Thôi": [],
+         "Bái kiến Tần rồi vào": [],
+         "Vào thẳng, không bái kiến": []
+        },
+        "e68painter|Có người đến": {
+         "Ngồi cho vẽ đúng thật": [],
+         "Hỏi học vài nét bút": []
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "Ghi tên dự thi múa": [],
+         "Không dự": []
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "Ngủ lại sức": [],
+         "Học mau tiến": [],
+         "Để sau": []
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "Ghi tên dự thi thơ": [],
+         "Không dự": []
+        },
+        "|Bổng lộc tháng chạp": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "kc2Sel|Tuyển chọn": {
+         "Dâng Vũ": [
+          1,
+          1
+         ],
+         "Dâng Kỳ": [
+          1,
+          0
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Thay Thái hậu thăm Đậu Ngữ Yên đang ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Tỉnh thân": {
+         "Nhận quà nhà gửi vào": [
+          1,
+          0
+         ],
+         "Nhờ cha nói giúp trước triều": [
+          1,
+          1
+         ]
+        },
+        "|Cảnh Phúc cung": {
+         "Bái kiến Phi rồi vào": [
+          1,
+          0
+         ],
+         "Vào thẳng, không bái kiến": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "|Sai Như Họa đi dò la": {
+         "Hoàng hậu Hoàng hậu Lục Uyển Hề": [
+          2,
+          0
+         ],
+         "Người lạ Hoàng quý phi ở một thiên điện ": [
+          6,
+          2
+         ],
+         "Quý nhân Quý nhân Lương Chỉ Lan": [
+          1,
+          0
+         ],
+         "Người lạ Phi ở một thiên điện (chưa quen": [
+          1,
+          0
+         ],
+         "Đáp ứng Đáp ứng Trưởng Tôn Nghê Thường ·": [
+          3,
+          0
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          11,
+          1
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          15,
+          2
+         ],
+         "Thôi, để sau": [
+          7,
+          0
+         ],
+         "Tần Lương Chỉ Lan": [
+          5,
+          1
+         ],
+         "Quý phi Quý phi Đậu Ngữ Yên": [
+          6,
+          1
+         ],
+         "Quý nhân Quý nhân Thạch Sơ Tuyết": [
+          6,
+          0
+         ],
+         "Hoàng hậu Lục Uyển Hề": [
+          5,
+          0
+         ],
+         "Tần Lương Chỉ Lan · đang nhắm": [
+          1,
+          0
+         ],
+         "Đáp ứng Đáp ứng Trưởng Tôn Nghê Thường": [
+          2,
+          0
+         ],
+         "Tần Phú Sát Lưu Ly": [
+          3,
+          0
+         ],
+         "Thường tại Thường tại Trưởng Tôn Nghê Th": [
+          2,
+          0
+         ],
+         "Hoàng quý phi Nhan Ngọc Khê": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng giêng": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        },
+        "|Yến đầy tháng công chúa": {
+         "Dâng quà quý": [
+          1,
+          1
+         ],
+         "Quà vừa phải": [
+          1,
+          0
+         ],
+         "Cáo bệnh không tới": [
+          1,
+          0
+         ]
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "Sang trông, đưa thuốc của mình": [
+          1,
+          1
+         ],
+         "Tâu xin Hoàng thượng cử viện phán": [
+          1,
+          0
+         ],
+         "Không dính vào": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng hai": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Như Họa đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "Chọn người hợp ý Thái hậu": [
+          1,
+          0
+         ],
+         "Xin Thái hậu tự quyết, ngươi góp ý": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Mượn tiền dành dụm của Như Họa · Lời": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Lời cảnh báo": {
+         "Đóng cửa giữ mình": [
+          2,
+          0
+         ],
+         "Biếu quà làm lành": [
+          2,
+          1
+         ],
+         "Ghi nhớ, cứ như thường": [
+          2,
+          1
+         ]
+        },
+        "|Bổng lộc tháng ba": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          1
+         ],
+         "Sai Như Họa đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "|Hắt nước": {
+         "Né": [
+          10,
+          6
+         ],
+         "Đứng yên": [
+          10,
+          4
+         ]
+        },
+        "|Hội phối đồ · Thanh nhã": {
+         "Tự tay phối đồ": [
+          1,
+          1
+         ],
+         "Cáo bệnh, không dự": [
+          1,
+          0
+         ]
+        },
+        "|Lễ Phật đản": {
+         "Chép kinh cầu phúc": [
+          1,
+          1
+         ],
+         "Lễ Phật rồi về": [
+          1,
+          0
+         ]
+        },
+        "prep|Chuẩn bị thị tẩm": {
+         "Đeo trang sức đẹp nhất": [
+          1,
+          0
+         ],
+         "Tập trước Vũ": [
+          1,
+          1
+         ],
+         "Để mộc, nghỉ ngơi": [
+          1,
+          0
+         ]
+        },
+        "night|Đêm thị tẩm": {
+         "Bàn thơ văn, cầm kỳ": [
+          1,
+          1
+         ],
+         "Bàn chuyện thiên hạ": [
+          1,
+          0
+         ],
+         "Rót rượu, nũng nịu": [
+          1,
+          0
+         ],
+         "Lặng lẽ xoa vai, nghe ngài kể": [
+          1,
+          0
+         ],
+         "Xin ân cho gia đình": [
+          1,
+          0
+         ],
+         "Xin tha cho cung nữ bị phạt": [
+          1,
+          1
+         ],
+         "Thì thầm nói xấu Tư Mã Ngọc Thù": [
+          1,
+          0
+         ],
+         "Im lặng, tựa vai ngài": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Khéo nhắc ma ma chuyện công của Như ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Lời ra tiếng vào": {
+         "Nhẫn nhịn": [
+          1,
+          0
+         ],
+         "Cười trừ": [
+          1,
+          0
+         ],
+         "Đáp lại": [
+          1,
+          1
+         ]
+        },
+        "tsgift|Biếu quà làm lành": {
+         "Tác phẩm tự tay làm": [
+          1,
+          0
+         ],
+         "Đồ trong rương": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "tsgiftpick|Biếu quà làm lành": {
+         "Hoa điền hoa đào": [
+          1,
+          1
+         ],
+         "Trà mốc (hàng kém)": [
+          1,
+          0
+         ],
+         "Nước bào hoa": [
+          4,
+          0
+         ],
+         "Than liễu": [
+          3,
+          0
+         ],
+         "Son sáp": [
+          3,
+          0
+         ],
+         "Yên chi giấy": [
+          1,
+          0
+         ],
+         "Phấn gạo": [
+          1,
+          0
+         ],
+         "Vải bông": [
+          2,
+          0
+         ],
+         "Trà Long Tĩnh": [
+          2,
+          0
+         ],
+         "Nến mỡ dê": [
+          8,
+          0
+         ],
+         "Vải thô (hàng kém)": [
+          1,
+          0
+         ],
+         "Váy sa xanh ngọc": [
+          1,
+          0
+         ],
+         "Trâm ngọc bích": [
+          1,
+          0
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "guardrumour|Việc khó xử": {
+         "Xin Hoàng thượng tra xét": [
+          1,
+          0
+         ],
+         "Tìm kẻ tung tin": [
+          1,
+          1
+         ]
+        },
+        "cmSec|Cung nữ thân tín": {
+         "Trả nợ thay (# lượng)": [
+          1,
+          1
+         ],
+         "Mặc kệ": [
+          1,
+          0
+         ]
+        },
+        "|Có người đến an ủi": {
+         "Giãi bày tâm sự với Như Họa": [
+          1,
+          0
+         ],
+         "Gượng cười, cảm tạ": [
+          1,
+          1
+         ]
+        },
+        "e68c:j68c-myst|Chuyện lạ cần tra": {
+         "Đốt túi ngay": [
+          1,
+          1
+         ],
+         "Giữ túi cẩn thận, tự điều tra": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 1
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 0
+        },
+        "|Sai Thải Bình đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 4
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "f": "e",
+         "n": 3
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 4
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 4
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 0
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 0
+        },
+        "|Dực Khôn cung": {
+         "f": "card",
+         "n": 0
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 2
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 2
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "f": "j",
+         "n": 0
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "f": "j",
+         "n": 0
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 1
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 1
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "f": "ev",
+         "n": 0
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "f": "e",
+         "n": 0
+        },
+        "|Sai Tú Châu đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "|Bổng lộc tháng tám": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "f": "j",
+         "n": 0
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "j71m|Lập công · Chép kinh": {
+         "f": "j",
+         "n": 0
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "f": "q",
+         "n": 0
+        },
+        "|Thái hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "e68docCheck|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "f": "j",
+         "n": 0
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "f": "tsbFirst",
+         "n": 0
+        },
+        "|Y phục dự Thánh thọ Thái hậu": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "f": "card",
+         "n": 0
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "f": "rtNgNpc",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 0
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 0
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 2
+        },
+        "|Đeo «Thư hương»": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "f": "q",
+         "n": 0
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68famineDonate|Tin triều đình": {
+         "f": "e",
+         "n": 0
+        },
+        "|Thái hậu triệu": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Bổng lộc tháng mười một": {
+         "f": "ev",
+         "n": 0
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "f": "rg",
+         "n": 0
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "f": "j",
+         "n": 0
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "|Hàm An cung": {
+         "f": "card",
+         "n": 0
+        },
+        "e68painter|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "f": "j",
+         "n": 0
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "f": "card",
+         "n": 0
+        },
+        "|Đại hàn, tuyết lớn": {
+         "f": "card",
+         "n": 0
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "f": "j",
+         "n": 0
+        },
+        "|Bổng lộc tháng chạp": {
+         "f": "ev",
+         "n": 0
+        },
+        "kc2Sel|Tuyển chọn": {
+         "f": "kc",
+         "n": 1
+        },
+        "|Khải Tường cung": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thay Thái hậu thăm Đậu Ngữ Yên đang ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Tỉnh thân": {
+         "f": "card",
+         "n": 1
+        },
+        "|Cảnh Phúc cung": {
+         "f": "card",
+         "n": 2
+        },
+        "|Sai Như Họa đi dò la": {
+         "f": "card",
+         "n": 7
+        },
+        "|Thái y viện": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bổng lộc tháng giêng": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Yến đầy tháng công chúa": {
+         "f": "card",
+         "n": 1
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "f": "j",
+         "n": 1
+        },
+        "|Bổng lộc tháng hai": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Mượn tiền dành dụm của Như Họa · Lời": {
+         "f": "q",
+         "n": 1
+        },
+        "|Lời cảnh báo": {
+         "f": "card",
+         "n": 2
+        },
+        "e68c:j68c-serv|Kẻ hầu": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng ba": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Hắt nước": {
+         "f": "card",
+         "n": 10
+        },
+        "|Hội phối đồ · Thanh nhã": {
+         "f": "card",
+         "n": 1
+        },
+        "|Lễ Phật đản": {
+         "f": "card",
+         "n": 1
+        },
+        "prep|Chuẩn bị thị tẩm": {
+         "f": "prep",
+         "n": 1
+        },
+        "night|Đêm thị tẩm": {
+         "f": "night",
+         "n": 2
+        },
+        "q72o|Phụ tuyến · Khéo nhắc ma ma chuyện công của Như ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Lời ra tiếng vào": {
+         "f": "card",
+         "n": 1
+        },
+        "tsgift|Biếu quà làm lành": {
+         "f": "tsgift",
+         "n": 1
+        },
+        "tsgiftpick|Biếu quà làm lành": {
+         "f": "tsgiftpick",
+         "n": 1
+        },
+        "guardrumour|Việc khó xử": {
+         "f": "guardrumour",
+         "n": 1
+        },
+        "cmSec|Cung nữ thân tín": {
+         "f": "cmSec",
+         "n": 1
+        },
+        "|Có người đến an ủi": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68c:j68c-myst|Chuyện lạ cần tra": {
+         "f": "e",
+         "n": 1
+        }
+       },
+       "evN": 77,
+       "pace": {
+        "clicks": 219,
+        "choices": 77,
+        "chars": 42616,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 61
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 98,
+       "evRep": 12
+      }
+     },
+     "room": "KMNW",
+     "ms": 583188,
+     "week": 44
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "td",
+      "road": "td_song"
+     },
+     "kiep": 6,
+     "extra": false,
+     "life": {
+      "id": "Phế làm thứ dân",
+      "type": "exile",
+      "group": "thường",
+      "fate": "Phế làm thứ dân, xuất cung",
+      "death": false,
+      "cause": "Phế làm thứ dân, xuất cung",
+      "chain0": "",
+      "age": 20,
+      "year": 2,
+      "years": 1.42,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 189,
+        "age": 20,
+        "year": 2
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 23,
+       "bacPk": 85,
+       "bacEnd": 1,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [
+        {
+         "k": "hoc:hat",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        },
+        {
+         "k": "hoc:mua",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        }
+       ],
+       "ky": [
+        "kyc-ma-008",
+        "Phương thuốc gia truyền",
+        "Hoàng tử lạc đường",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [],
+         "Thôi, ở lại": []
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          null,
+          null
+         ],
+         "Ở lại": [
+          null,
+          null
+         ]
+        },
+        "|Sai Thải Bình đi dò la": {
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Đáp ứng Lữ Lang Hoa": [],
+         "Thôi, để sau": [],
+         "Phi Lương Chỉ Lan": [],
+         "Thường tại Thường tại La Thanh Hoan": [],
+         "Tần Đậu Ngữ Yên": [],
+         "Tần Tần Khương Như Sương": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền · đan": [],
+         "Thường tại Thường tại Phú Sát Lưu Ly": [],
+         "Thường tại Lữ Lang Hoa": [],
+         "Thường tại La Thanh Hoan": [],
+         "Thường tại Trưởng Tôn Nghê Thường · đang": [],
+         "Quý nhân Quý nhân Trình Ngọc Huyền": []
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null
+         ],
+         "Giấu, không báo": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "Giận dỗi, tránh mặt ngài": [],
+         "Đón tiếp bình thường như chưa có chuyện": [],
+         "Hỏi nhẹ vì sao lâu không ghé": [],
+         "Giữ im, dâng trà, không nhắc": [],
+         "Ngồi bên ngài, không nói": [],
+         "Pha trà và đàn khẽ": [],
+         "Kể chuyện thuở nhỏ": [],
+         "Nhắc ngài còn nhiều việc, nên nghỉ sớm": [],
+         "Nhận lỗi, im lặng chịu quở": [],
+         "Bình tĩnh nói rõ vì sao": [],
+         "Đưa bằng chứng Trình Ngọc Huyền làm hỏng": [],
+         "Xin ngài đừng quở thêm, chuyện nhỏ thôi": [],
+         "Rộng lượng đề xuất cung đẹp": [],
+         "Đề xuất cung gần cung mình": [],
+         "Nói không dám can dự": [],
+         "Đề xuất cung xa cho nàng yên tĩnh": [],
+         "Cất vào hộp, giữ làm kỷ niệm": [],
+         "Khen ngọc đẹp, hỏi ngài mua ở đâu": []
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          null,
+          null
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          null
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          null
+         ],
+         "Cúi đầu vâng dạ": [
+          null
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          null
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          null,
+          null
+         ],
+         "Theo Hoàng thượng": [],
+         "Theo Thái hậu": [],
+         "Theo Tể tướng Bành Cảnh Diễm": [],
+         "Đứng ngoài, giữ mình": [],
+         "Cáo bệnh, đóng cửa không tiếp ai": []
+        },
+        "kyngo|Kỳ ngộ": {
+         "Đỡ bé dậy, bôi thuốc ngay": [],
+         "Bế bé về tận cung của mẹ": [],
+         "Sửa lời cho nàng, dạy ngắt câu": [],
+         "Dạy nàng cách thưa lễ trước Thái hậu": [],
+         "Ngồi xuống nghe lệ phạt": [
+          null
+         ],
+         "Hỏi ông việc đã xảy ra gần đây": [
+          null,
+          null
+         ],
+         "Hỏi kỹ từng chuyện nàng nghe": [],
+         "Đa tạ nàng, nhờ giữ kín": [],
+         "Hỏi chuyện trong cung chủ nàng": [],
+         "Dặn nàng cẩn thận rồi đi tiếp": [],
+         "Ở lại chép kinh cùng người": [],
+         "Xin người dạy lễ nghi": [],
+         "Dặn nàng có chuyện lạ thì báo ngươi": [],
+         "Chỉ dặn nàng giữ gìn sức khỏe": [],
+         "Đứng ra phân xử cho hai bé": [],
+         "Dỗ bé này, nhường món khác": [],
+         "Xin thái y chữa dứt": [
+          1,
+          1
+         ],
+         "Xin học phương thuốc": [
+          1,
+          0
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [],
+         "Cười trừ": [],
+         "Đáp lại": [],
+         "Ghi hận": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [
+          null
+         ],
+         "Khéo từ chối": [
+          null,
+          null
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [],
+         "Đứng về phía La Thanh Hoan": [],
+         "Mách Hoàng hậu": [],
+         "Đứng về phía Lương Chỉ Lan": []
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "Nghe hết, tạ ơn nàng báo": [],
+         "Bẩm nội giám để điều tra": [],
+         "Hỏi nàng vì sao lại tới kể riêng": [],
+         "Cười nói nàng nhìn lầm, đổi chuyện": [],
+         "Pha Trà Long Tĩnh mời khách": [],
+         "Nói thật cả những lúc mệt": [],
+         "Chỉ nói vài điều nhẹ nhàng": [],
+         "Hỏi lại cách giữ gìn mùa này": []
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "Gảy đàn hòa theo từ cung mình": [],
+         "Ngồi lặng nghe từ xa, không quấy": [],
+         "Nhờ nàng dạy một khúc": [],
+         "Cho nàng về nghỉ, ngươi tự canh đèn": [],
+         "Bảo nàng ngủ một lát, đừng cố": [],
+         "Đem ít bánh nóng cho nàng ăn cùng": [],
+         "Khen nàng chăm chỉ, hứa nhớ công": []
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Nhan Ngọc Khê": [],
+         "Giúp La Thanh Hoan một tay": [],
+         "Ghi nhớ làm chứng cứ": [
+          null
+         ],
+         "Báo cho Trình Ngọc Huyền": [
+          1,
+          1
+         ],
+         "Giúp Thạch Bán Hạ một tay": [
+          1,
+          0
+         ]
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Chia phần ít ỏi cho người hầu": [],
+         "Nhịn đói, chép kinh qua ngày": [],
+         "Dúi bạc cho người của Tào Liên Thuận": []
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng điệu múa Ba Tư": [],
+         "Bắn cung trước điện": [],
+         "Cúi đầu chờ xét": []
+        },
+        "|Dực Khôn cung": {
+         "Bái kiến Quý phi rồi vào": [],
+         "Vào thẳng, không bái kiến": [],
+         "Thôi": [],
+         "Đi (đến nơi vào buổi sau)": []
+        },
+        "nfch|Kính sự phòng": {
+         "Tranh sủng": [
+          null,
+          null
+         ],
+         "Chặn ngự giá": [
+          null,
+          null
+         ],
+         "Thôi": [
+          null
+         ],
+         "Giữ chân Hoàng thượng": []
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          null
+         ],
+         "Đốt đi, làm ngơ": [
+          null,
+          null
+         ]
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "Chơi ván nhỏ (# bạc)": [],
+         "Từ chối khéo": []
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "Ghi tên dự thi hát": [],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [],
+         "Không dự": []
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "Mời nàng ngồi, tìm chỗ khác": [],
+         "Đứng cạnh nàng, nói chuyện vui": [],
+         "Ngồi vào chỗ của nàng khi nàng đi": [],
+         "Nhờ cung nhân đổi chỗ tốt hơn": []
+        },
+        "rvbribe|Việc khó xử": {
+         "Góp bạc, giấu cả thẻ nàng": [],
+         "Mách La Thanh Hoan": [],
+         "Không dính vào": [],
+         "Mách Lương Chỉ Lan": []
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [],
+         "Tiến cử Tú Châu hầu thay": [],
+         "Cáo bệnh": [],
+         "Tiến cử Như Họa hầu thay": []
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "Cho xông khắp cung ngay": [],
+         "Chỉ xông phòng người sốt": [],
+         "Xin tự bào chế thêm, đỡ nặng mùi": [],
+         "Tâu lên bề trên xin ý chỉ": []
+        },
+        "|Sai Tú Châu đi dò la": {
+         "Hoàng hậu Hoàng hậu Lục Uyển Hề": [],
+         "Quý phi Nhan Ngọc Khê": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Phi Phi Đậu Ngữ Yên": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Quý nhân Trình Ngọc Huyền": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Thôi, để sau": [],
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Phi Lương Chỉ Lan": [],
+         "Quý nhân Trưởng Tôn Nghê Thường": [],
+         "Tần Trình Ngọc Huyền · đang nhắm": [],
+         "Quý nhân Quý nhân Phú Sát Lưu Ly": [],
+         "Quý nhân Quý nhân Lữ Lang Hoa": [],
+         "Thường tại Thường tại Thượng Quan Nhã Ni": [],
+         "Tần La Thanh Hoan": [],
+         "Tần Trình Ngọc Huyền": [],
+         "Hoàng quý phi Nhan Ngọc Khê": [],
+         "Quý nhân Lương Chỉ Lan": [],
+         "Tần Trưởng Tôn Nghê Thường": [],
+         "Thường tại Thạch Bán Hạ": [],
+         "Thường tại Thạch Sơ Tuyết": []
+        },
+        "|Bổng lộc tháng tám": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "Sai người mua Trâm đồng mai hoa (Vàng) ở": [],
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "Cược ngựa Bạch Long": [],
+         "Cược ngựa Xích Thố": [],
+         "Không cược, chỉ xem": []
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "Viết hộ ngay tại chỗ": [],
+         "Dạy ông tập viết vài chữ": [],
+         "Nhờ Tú Châu viết giúp rồi ngươi duyệt lạ": [],
+         "Xin lỗi, hẹn ông hôm khác": []
+        },
+        "|Có người đến": {
+         "Thu làm tai mắt": [],
+         "Đuổi về": [],
+         "Nhịn": [],
+         "Đáp trả sắc sảo": []
+        },
+        "j71m|Lập công · Chép kinh": {
+         "Chép trọn bộ bằng chữ khải": [],
+         "Chép một quyển": [],
+         "Nhờ cung nữ chép thay": []
+        },
+        "|Hội phối đồ: báo đề": {
+         "Sai tai mắt dò bên chủ hội": [],
+         "Đã hiểu, sẽ chuẩn bị": []
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Thái hậu chê dung nhan": {
+         "Xin lỗi": [],
+         "Cười trừ": [],
+         "Đáp lại": []
+        },
+        "|Bổng lộc tháng chín": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "Ghi tên dự thi bếp núc": [],
+         "Không dự": []
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "Nhún nhường đáp lễ": [],
+         "Khéo lời hóa giải": [],
+         "Đáp trả thẳng thắn": [],
+         "Im lặng ghi nhớ": []
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "Tự tay phối đồ": [],
+         "Cáo bệnh, không dự": []
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "Nhận, cho người thử trước": [],
+         "Khéo trả lại": []
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "Nghiệm ngay thẳng": [],
+         "Thôi": []
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [],
+         "Đáp lại khéo": [],
+         "Đáp trả gay gắt": [],
+         "Im lặng lui đi": [],
+         "Ghi hận": [],
+         "Mách Hoàng hậu": [],
+         "Hỏi bí quyết": []
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [],
+         "Để sau": []
+        },
+        "|Đeo «Thư hương»": {
+         "Thêm Tài": [],
+         "Học mau tiến": [],
+         "Để sau": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo La Thanh Hoan": [],
+         "Tố lên Hoàng thượng": [],
+         "Làm ngơ": []
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Thái hậu triệu": {
+         "Đến ngay": [],
+         "Cáo bệnh": []
+        },
+        "|Bổng lộc tháng mười một": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tú Châu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "Hầu chuyện Thái hậu, khéo dò ý": [],
+         "Thưa rằng không tiện hỏi": []
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "Sai người mua Trâm gỗ đào (Nâu) ở Nội vụ": [],
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "Ghi tên dâng múa (theo Vũ, Sắc)": [],
+         "Ghi tên dâng hát (theo Sắc, Tài, Cầm, Vũ": [],
+         "Ghi tên dâng đàn (theo Cầm, Tài)": [],
+         "Không dự": []
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "Gấp lại, giữ trong hộp của kho": [],
+         "Giữ lại để nhớ, nhắc người sau": []
+        },
+        "|Hàm An cung": {
+         "Đi (đến nơi vào buổi sau)": [],
+         "Thôi": [],
+         "Bái kiến Tần rồi vào": [],
+         "Vào thẳng, không bái kiến": []
+        },
+        "e68painter|Có người đến": {
+         "Ngồi cho vẽ đúng thật": [],
+         "Hỏi học vài nét bút": []
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "Ghi tên dự thi múa": [],
+         "Không dự": []
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "Ngủ lại sức": [],
+         "Học mau tiến": [],
+         "Để sau": []
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "Cứ thế vào dự": [],
+         "Cáo lỗi, về cung nghỉ": []
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "Ghi tên dự thi thơ": [],
+         "Không dự": []
+        },
+        "|Bổng lộc tháng chạp": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "kc2Sel|Tuyển chọn": {
+         "Dâng Vũ": [],
+         "Dâng Kỳ": [],
+         "Cúi đầu chờ xét": []
+        },
+        "q72o|Phụ tuyến · Thay Thái hậu thăm Đậu Ngữ Yên đang ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Tỉnh thân": {
+         "Nhận quà nhà gửi vào": [],
+         "Nhờ cha nói giúp trước triều": []
+        },
+        "|Cảnh Phúc cung": {
+         "Bái kiến Phi rồi vào": [],
+         "Vào thẳng, không bái kiến": [],
+         "Thôi": []
+        },
+        "|Sai Như Họa đi dò la": {
+         "Hoàng hậu Hoàng hậu Lục Uyển Hề": [],
+         "Người lạ Hoàng quý phi ở một thiên điện ": [],
+         "Quý nhân Quý nhân Lương Chỉ Lan": [],
+         "Người lạ Phi ở một thiên điện (chưa quen": [],
+         "Đáp ứng Đáp ứng Trưởng Tôn Nghê Thường ·": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Thôi, để sau": [],
+         "Tần Lương Chỉ Lan": [],
+         "Quý phi Quý phi Đậu Ngữ Yên": [],
+         "Quý nhân Quý nhân Thạch Sơ Tuyết": [],
+         "Hoàng hậu Lục Uyển Hề": [],
+         "Tần Lương Chỉ Lan · đang nhắm": [],
+         "Đáp ứng Đáp ứng Trưởng Tôn Nghê Thường": [],
+         "Tần Phú Sát Lưu Ly": [],
+         "Thường tại Thường tại Trưởng Tôn Nghê Th": [],
+         "Hoàng quý phi Nhan Ngọc Khê": []
+        },
+        "|Bổng lộc tháng giêng": {
+         "Chu toàn lễ nghĩa": [],
+         "Bớt lễ nghĩa": []
+        },
+        "|Yến đầy tháng công chúa": {
+         "Dâng quà quý": [],
+         "Quà vừa phải": [],
+         "Cáo bệnh không tới": []
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "Sang trông, đưa thuốc của mình": [],
+         "Tâu xin Hoàng thượng cử viện phán": [],
+         "Không dính vào": []
+        },
+        "|Bổng lộc tháng hai": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Như Họa đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "Chọn người hợp ý Thái hậu": [],
+         "Xin Thái hậu tự quyết, ngươi góp ý": []
+        },
+        "q72o|Phụ tuyến · Mượn tiền dành dụm của Như Họa · Lời": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Lời cảnh báo": {
+         "Đóng cửa giữ mình": [],
+         "Biếu quà làm lành": [],
+         "Ghi nhớ, cứ như thường": []
+        },
+        "|Bổng lộc tháng ba": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Như Họa đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "|Hắt nước": {
+         "Né": [],
+         "Đứng yên": []
+        },
+        "|Hội phối đồ · Thanh nhã": {
+         "Tự tay phối đồ": [],
+         "Cáo bệnh, không dự": []
+        },
+        "|Lễ Phật đản": {
+         "Chép kinh cầu phúc": [],
+         "Lễ Phật rồi về": []
+        },
+        "prep|Chuẩn bị thị tẩm": {
+         "Đeo trang sức đẹp nhất": [],
+         "Tập trước Vũ": [],
+         "Để mộc, nghỉ ngơi": []
+        },
+        "night|Đêm thị tẩm": {
+         "Bàn thơ văn, cầm kỳ": [],
+         "Bàn chuyện thiên hạ": [],
+         "Rót rượu, nũng nịu": [],
+         "Lặng lẽ xoa vai, nghe ngài kể": [],
+         "Xin ân cho gia đình": [],
+         "Xin tha cho cung nữ bị phạt": [],
+         "Thì thầm nói xấu Tư Mã Ngọc Thù": [],
+         "Im lặng, tựa vai ngài": []
+        },
+        "q72o|Phụ tuyến · Khéo nhắc ma ma chuyện công của Như ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Lời ra tiếng vào": {
+         "Nhẫn nhịn": [],
+         "Cười trừ": [],
+         "Đáp lại": []
+        },
+        "tsgift|Biếu quà làm lành": {
+         "Tác phẩm tự tay làm": [],
+         "Đồ trong rương": [],
+         "Thôi": []
+        },
+        "tsgiftpick|Biếu quà làm lành": {
+         "Hoa điền hoa đào": [],
+         "Trà mốc (hàng kém)": [],
+         "Nước bào hoa": [],
+         "Than liễu": [],
+         "Son sáp": [],
+         "Yên chi giấy": [],
+         "Phấn gạo": [],
+         "Vải bông": [],
+         "Trà Long Tĩnh": [],
+         "Nến mỡ dê": [],
+         "Vải thô (hàng kém)": [],
+         "Váy sa xanh ngọc": [],
+         "Trâm ngọc bích": [],
+         "Thôi": []
+        },
+        "guardrumour|Việc khó xử": {
+         "Xin Hoàng thượng tra xét": [],
+         "Tìm kẻ tung tin": []
+        },
+        "cmSec|Cung nữ thân tín": {
+         "Trả nợ thay (# lượng)": [],
+         "Mặc kệ": []
+        },
+        "|Có người đến an ủi": {
+         "Giãi bày tâm sự với Như Họa": [],
+         "Gượng cười, cảm tạ": []
+        },
+        "e68c:j68c-myst|Chuyện lạ cần tra": {
+         "Đốt túi ngay": [],
+         "Giữ túi cẩn thận, tự điều tra": []
+        },
+        "kc2Sel|Xét phong danh phận": {
+         "Pha một chén trà dâng lên": [
+          1,
+          1
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          0
+         ]
+        },
+        "|Cấm cung giới nghiêm": {
+         "Xin nội giám đặc cách cho thư đi": [
+          1,
+          0
+         ],
+         "Khuyên nàng cất thư, đợi hết lệnh": [
+          1,
+          1
+         ],
+         "Nhờ cung nữ nhỏ lén đem ra": [
+          1,
+          0
+         ],
+         "Lui vào, không đưa tay vào chuyện này": [
+          1,
+          0
+         ]
+        },
+        "|Bị giật y phục giữa đường": {
+         "Lót tay Nội vụ phủ cấp ngay": [
+          1,
+          0
+         ],
+         "Sai Thải Liên đến Nội vụ phủ xin": [
+          1,
+          1
+         ],
+         "Viết thư xin nhà gửi áo": [
+          1,
+          0
+         ],
+         "Đợi Nội vụ phủ": [
+          1,
+          0
+         ]
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn cung trên lưng ngự": {
+         "Ghi tên dự thi bắn cung": [
+          1,
+          0
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Khải Tường cung": {
+         "Bái kiến Tần rồi vào": [
+          10,
+          7
+         ],
+         "Vào thẳng, không bái kiến": [
+          10,
+          3
+         ],
+         "Thôi": [
+          12,
+          0
+         ],
+         "Đi (đến nơi vào buổi sau)": [
+          2,
+          2
+         ]
+        },
+        "menEnc|Nam nhân nơi cấm địa": {
+         "Báo thị vệ": [
+          1,
+          1
+         ],
+         "Báo Cung Chính ti": [
+          1,
+          0
+         ],
+         "Giấu giúp": [
+          1,
+          0
+         ],
+         "Núp nghe lén": [
+          1,
+          0
+         ],
+         "Làm như không thấy": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng năm": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          0
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          1
+         ]
+        },
+        "j71i|Hội Phượng · Lời mời: Thi thắt dây cương tua cờ": {
+         "Ghi tên dự thi khéo tay": [
+          1,
+          1
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "j71x|Thi tài ngày Thất tịch · Lời mời": {
+         "Ghi tên dâng đàn (theo Cầm, Tài)": [
+          1,
+          1
+         ],
+         "Ghi tên dâng thơ (theo Tài, Thi)": [
+          1,
+          0
+         ],
+         "Ghi tên dâng khéo tay (theo Tâm cơ, Tài,": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "e68empSulk|Hoàng thượng": {
+         "Lặng lẽ ở bên, pha trà": [
+          1,
+          0
+         ],
+         "Khuyên giải chuyện triều chính": [
+          1,
+          0
+         ],
+         "Kể chuyện vui cho ngài khuây": [
+          1,
+          1
+         ]
+        },
+        "e68rumorTH|Tin đồn": {
+         "Hỏi ma ma thân tín của Thái hậu": [
+          1,
+          0
+         ],
+         "Sang thỉnh an ngay": [
+          1,
+          1
+         ],
+         "Bỏ ngoài tai": [
+          1,
+          0
+         ]
+        },
+        "j71i|Tết Thất tịch · Lời mời: Thi thả kim đoán khéo": {
+         "Ghi tên dự thi khéo tay": [
+          1,
+          1
+         ],
+         "Không dự": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Thư đệ đệ nhỏ: xin quà đồ chơi · Lời": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Hỏa hoạn lớn": {
+         "Tâu Nội vụ phủ cấp đồ khẩn": [
+          1,
+          1
+         ],
+         "Đóng cửa cung, giữ đồ cho cung ta": [
+          1,
+          0
+         ]
+        },
+        "fire|Hỏa hoạn lớn": {
+         "Lao vào cứu người": [
+          1,
+          0
+         ],
+         "Chỉ huy cung nhân dập lửa": [
+          1,
+          0
+         ],
+         "Ngầm tra kẻ phóng hỏa": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng sáu": {
+         "Chu toàn lễ nghĩa": [
+          1,
+          1
+         ],
+         "Bớt lễ nghĩa": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 0
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 22
+        },
+        "|Sai Thải Bình đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 2
+        },
+        "q72o|Phụ tuyến · Làm bánh sinh nhật cho cung nữ nhỏ ·": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-emp|Hoàng thượng": {
+         "f": "e",
+         "n": 0
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 2
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 2
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 0
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời n": {
+         "f": "q",
+         "n": 0
+        },
+        "e68c:j68c-visit|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "e68c:j68c-day|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 1
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 0
+        },
+        "|Dực Khôn cung": {
+         "f": "card",
+         "n": 0
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 2
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71f|Tết Trung thu · Trò vui": {
+         "f": "j",
+         "n": 0
+        },
+        "j71i|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ": {
+         "f": "j",
+         "n": 0
+        },
+        "|Tết Trung thu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 0
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 0
+        },
+        "|Y phục dự Tiết Vạn thọ": {
+         "f": "ev",
+         "n": 0
+        },
+        "e68c:j68c-sea|Thời tiết": {
+         "f": "e",
+         "n": 0
+        },
+        "|Sai Tú Châu đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "|Bổng lộc tháng tám": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Bổng lộc tháng tám · Lễ nghĩa": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Y phục dự Tết Trùng cửu": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71f|Tết Trùng cửu · Đặt cược": {
+         "f": "j",
+         "n": 0
+        },
+        "|Tết Trùng cửu · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "j71m|Lập công · Chép kinh": {
+         "f": "j",
+         "n": 0
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "f": "q",
+         "n": 0
+        },
+        "|Thái hậu chê dung nhan": {
+         "f": "card",
+         "n": 0
+        },
+        "e68docCheck|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71i|Thánh thọ Thái hậu · Lời mời: Thi làm bánh thọ đ": {
+         "f": "j",
+         "n": 0
+        },
+        "tsbFirst|Lần đầu gặp mặt": {
+         "f": "tsbFirst",
+         "n": 0
+        },
+        "|Y phục dự Thánh thọ Thái hậu": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Hội phối đồ · Cổ phong": {
+         "f": "card",
+         "n": 0
+        },
+        "e68giftArrive|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "rtNgNpc|Tâu xin nghiệm thân": {
+         "f": "rtNgNpc",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 0
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 0
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 0
+        },
+        "|Đeo «Thư hương»": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Tổng quản (#/#): Đứa cháu": {
+         "f": "q",
+         "n": 0
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Dịch quốc thư của sứ đoàn · Lời nhờ ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68famineDonate|Tin triều đình": {
+         "f": "e",
+         "n": 0
+        },
+        "|Thái hậu triệu": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Bổng lộc tháng mười một": {
+         "f": "ev",
+         "n": 0
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Việc của phe": {
+         "f": "rg",
+         "n": 0
+        },
+        "|Y phục dự Lễ Lạp bát": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71x|Yến tiệc đầu xuân · Lời mời": {
+         "f": "j",
+         "n": 0
+        },
+        "|Lễ Lạp bát · Chuyện bên lề hội": {
+         "f": "card",
+         "n": 0
+        },
+        "|Hàm An cung": {
+         "f": "card",
+         "n": 0
+        },
+        "e68painter|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi múa mừng năm mới": {
+         "f": "j",
+         "n": 0
+        },
+        "|Đeo «Diệu thủ hồi xuân»": {
+         "f": "card",
+         "n": 0
+        },
+        "|Đại hàn, tuyết lớn": {
+         "f": "card",
+         "n": 0
+        },
+        "|Y phục dự Đêm Giao thừa": {
+         "f": "ev",
+         "n": 0
+        },
+        "j71i|Tết Nguyên đán · Lời mời: Thi thơ chúc xuân": {
+         "f": "j",
+         "n": 0
+        },
+        "|Bổng lộc tháng chạp": {
+         "f": "ev",
+         "n": 0
+        },
+        "kc2Sel|Tuyển chọn": {
+         "f": "kc",
+         "n": 0
+        },
+        "|Khải Tường cung": {
+         "f": "card",
+         "n": 13
+        },
+        "q72o|Phụ tuyến · Thay Thái hậu thăm Đậu Ngữ Yên đang ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Tỉnh thân": {
+         "f": "card",
+         "n": 0
+        },
+        "|Cảnh Phúc cung": {
+         "f": "card",
+         "n": 0
+        },
+        "|Sai Như Họa đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "|Thái y viện": {
+         "f": "card",
+         "n": 0
+        },
+        "|Bổng lộc tháng giêng": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Yến đầy tháng công chúa": {
+         "f": "card",
+         "n": 0
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "f": "j",
+         "n": 0
+        },
+        "|Bổng lộc tháng hai": {
+         "f": "ev",
+         "n": 0
+        },
+        "e68c:j68c-court|Tin triều đình": {
+         "f": "e",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Mượn tiền dành dụm của Như Họa · Lời": {
+         "f": "q",
+         "n": 0
+        },
+        "|Lời cảnh báo": {
+         "f": "card",
+         "n": 0
+        },
+        "e68c:j68c-serv|Kẻ hầu": {
+         "f": "e",
+         "n": 0
+        },
+        "|Bổng lộc tháng ba": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Hắt nước": {
+         "f": "card",
+         "n": 0
+        },
+        "|Hội phối đồ · Thanh nhã": {
+         "f": "card",
+         "n": 0
+        },
+        "|Lễ Phật đản": {
+         "f": "card",
+         "n": 0
+        },
+        "prep|Chuẩn bị thị tẩm": {
+         "f": "prep",
+         "n": 0
+        },
+        "night|Đêm thị tẩm": {
+         "f": "night",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Khéo nhắc ma ma chuyện công của Như ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Lời ra tiếng vào": {
+         "f": "card",
+         "n": 0
+        },
+        "tsgift|Biếu quà làm lành": {
+         "f": "tsgift",
+         "n": 0
+        },
+        "tsgiftpick|Biếu quà làm lành": {
+         "f": "tsgiftpick",
+         "n": 0
+        },
+        "guardrumour|Việc khó xử": {
+         "f": "guardrumour",
+         "n": 0
+        },
+        "cmSec|Cung nữ thân tín": {
+         "f": "cmSec",
+         "n": 0
+        },
+        "|Có người đến an ủi": {
+         "f": "ev",
+         "n": 0
+        },
+        "e68c:j68c-myst|Chuyện lạ cần tra": {
+         "f": "e",
+         "n": 0
+        },
+        "kc2Sel|Xét phong danh phận": {
+         "f": "kc",
+         "n": 1
+        },
+        "|Cấm cung giới nghiêm": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bị giật y phục giữa đường": {
+         "f": "card",
+         "n": 1
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn cung trên lưng ngự": {
+         "f": "j",
+         "n": 1
+        },
+        "menEnc|Nam nhân nơi cấm địa": {
+         "f": "menEnc",
+         "n": 1
+        },
+        "|Bổng lộc tháng năm": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71i|Hội Phượng · Lời mời: Thi thắt dây cương tua cờ": {
+         "f": "j",
+         "n": 1
+        },
+        "j71x|Thi tài ngày Thất tịch · Lời mời": {
+         "f": "j",
+         "n": 1
+        },
+        "e68empSulk|Hoàng thượng": {
+         "f": "e",
+         "n": 1
+        },
+        "e68rumorTH|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "j71i|Tết Thất tịch · Lời mời: Thi thả kim đoán khéo": {
+         "f": "j",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thư đệ đệ nhỏ: xin quà đồ chơi · Lời": {
+         "f": "q",
+         "n": 1
+        },
+        "|Hỏa hoạn lớn": {
+         "f": "card",
+         "n": 1
+        },
+        "fire|Hỏa hoạn lớn": {
+         "f": "fire",
+         "n": 1
+        },
+        "|Bổng lộc tháng sáu": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Khóc suốt đêm": {
+         "f": "card",
+         "n": 1
+        }
+       },
+       "evN": 63,
+       "pace": {
+        "clicks": 106,
+        "choices": 63,
+        "chars": 30239,
+        "mgPlay": 0,
+        "mgSkip": 2,
+        "buoi": 27
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 114,
+       "evRep": 6
+      }
+     },
+     "room": "KMNW",
+     "ms": 180986,
+     "week": 49
     }
    ],
    "lag": {
@@ -68864,6 +75763,221 @@
         },
         "longTasksPerMin": 165.4,
         "longTaskMax": 1067,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "KMNW",
+      "final": false,
+      "min": 2.34,
+      "turns": 23,
+      "metrics": {
+       "coopTurnP95": 27963,
+       "coopTurnsOk": "23/23",
+       "coopActionP95": 1940,
+       "coopActionMax": 19907,
+       "coopSyncKBMax": 59.2,
+       "coopKBPerMin": 843.9,
+       "coopResendPerMin": 14.3,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 294,
+       "coopLongTaskMax": 1593,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 898.2,
+        "upKB": 1723,
+        "dnKB": 380,
+        "posFlip": null,
+        "resend": 26,
+        "resendBy": {
+         "act": 25,
+         "where": 1
+        },
+        "longTasksPerMin": 307.1,
+        "longTaskMax": 1132,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 789.6,
+        "upKB": 1091,
+        "dnKB": 758,
+        "posFlip": null,
+        "resend": 41,
+        "resendBy": {
+         "act": 35,
+         "pos": 6
+        },
+        "longTasksPerMin": 281,
+        "longTaskMax": 1593,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "KMNW",
+      "final": false,
+      "min": 13.22,
+      "turns": 94,
+      "metrics": {
+       "coopTurnP95": 38151,
+       "coopTurnsOk": "94/94",
+       "coopActionP95": 16292,
+       "coopActionMax": 19988,
+       "coopSyncKBMax": 210.8,
+       "coopKBPerMin": 1396.7,
+       "coopResendPerMin": 13.6,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 304.5,
+       "coopLongTaskMax": 2021,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 1540.7,
+        "upKB": 15494,
+        "dnKB": 4872,
+        "posFlip": null,
+        "resend": 126,
+        "resendBy": {
+         "act": 113,
+         "where": 8,
+         "pos": 4,
+         "bend": 1
+        },
+        "longTasksPerMin": 279.8,
+        "longTaskMax": 1489,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 1265.3,
+        "upKB": 10626,
+        "dnKB": 6100,
+        "posFlip": null,
+        "resend": 233,
+        "resendBy": {
+         "act": 206,
+         "pos": 24,
+         "bend": 3
+        },
+        "longTasksPerMin": 329.1,
+        "longTaskMax": 2021,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 2,
+      "room": "KMNW",
+      "final": true,
+      "min": 19.53,
+      "turns": 78,
+      "metrics": {
+       "coopTurnP95": 101628,
+       "coopTurnsOk": "78/78",
+       "coopActionP95": 10529,
+       "coopActionMax": 19979,
+       "coopSyncKBMax": 215.3,
+       "coopKBPerMin": 1199.7,
+       "coopResendPerMin": 9.9,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 324.3,
+       "coopLongTaskMax": 2393,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 1287.5,
+        "upKB": 21018,
+        "dnKB": 4124,
+        "posFlip": null,
+        "resend": 151,
+        "resendBy": {
+         "act": 129,
+         "where": 12,
+         "pos": 9,
+         "bend": 1
+        },
+        "longTasksPerMin": 302.2,
+        "longTaskMax": 1678,
+        "errs": 1
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 1113.8,
+        "upKB": 13855,
+        "dnKB": 7896,
+        "posFlip": null,
+        "resend": 236,
+        "resendBy": {
+         "act": 206,
+         "pos": 30
+        },
+        "longTasksPerMin": 346.4,
+        "longTaskMax": 2393,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "W4P3",
+      "final": false,
+      "min": 8.93,
+      "turns": 22,
+      "metrics": {
+       "coopTurnP95": 101298,
+       "coopTurnsOk": "22/22",
+       "coopActionP95": 4103,
+       "coopActionMax": 19850,
+       "coopSyncKBMax": 90.6,
+       "coopKBPerMin": 506.7,
+       "coopResendPerMin": 7.6,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 453.6,
+       "coopLongTaskMax": 2032,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 507.7,
+        "upKB": 3986,
+        "dnKB": 546,
+        "posFlip": null,
+        "resend": 40,
+        "resendBy": {
+         "act": 38,
+         "bend": 1,
+         "where": 1
+        },
+        "longTasksPerMin": 447.9,
+        "longTaskMax": 2032,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 511,
+        "upKB": 1571,
+        "dnKB": 2991,
+        "posFlip": null,
+        "resend": 96,
+        "resendBy": {
+         "act": 83,
+         "pos": 12,
+         "bin": 1
+        },
+        "longTasksPerMin": 459.4,
+        "longTaskMax": 1711,
         "errs": 0
        }
       }
@@ -70862,6 +77976,1129 @@
       "posDiff": 7,
       "statLag": 0,
       "cmp": 451
+     },
+     {
+      "code": "KMNW",
+      "host": "Y",
+      "t0": 1795546431362,
+      "weeks": 51,
+      "buoi": 210,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 880
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1030
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 9097
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 27963
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 2497
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1024
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 5209
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 28446
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1582
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1043
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 4214
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 22885
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1566
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 828
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 4652
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 20588
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 2113
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 3807
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 18075
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1236
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1012
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 5363
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 19976
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 1997
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 998
+       },
+       {
+        "k0": "6:3",
+        "k1": "6:0",
+        "ms": 5529
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:1",
+        "ms": 26352
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 1207
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 1355
+       },
+       {
+        "k0": "7:3",
+        "k1": "7:0",
+        "ms": 6132
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 29783
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 1554
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 752
+       },
+       {
+        "k0": "8:3",
+        "k1": "8:0",
+        "ms": 3641
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:1",
+        "ms": 32837
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1312
+       },
+       {
+        "k0": "9:3",
+        "k1": "9:0",
+        "ms": 4678
+       },
+       {
+        "k0": "9:0",
+        "k1": "10:1",
+        "ms": 23773
+       },
+       {
+        "k0": "10:1",
+        "k1": "10:2",
+        "ms": 1194
+       },
+       {
+        "k0": "10:2",
+        "k1": "10:3",
+        "ms": 1262
+       },
+       {
+        "k0": "10:3",
+        "k1": "10:0",
+        "ms": 4675
+       },
+       {
+        "k0": "10:0",
+        "k1": "11:1",
+        "ms": 22239
+       },
+       {
+        "k0": "11:1",
+        "k1": "11:2",
+        "ms": 1920
+       },
+       {
+        "k0": "11:2",
+        "k1": "11:3",
+        "ms": 1599
+       },
+       {
+        "k0": "11:3",
+        "k1": "11:0",
+        "ms": 3439
+       },
+       {
+        "k0": "11:0",
+        "k1": "12:1",
+        "ms": 33135
+       },
+       {
+        "k0": "12:2",
+        "k1": "12:3",
+        "ms": 1143
+       },
+       {
+        "k0": "12:3",
+        "k1": "12:0",
+        "ms": 4866
+       },
+       {
+        "k0": "12:0",
+        "k1": "13:1",
+        "ms": 26501
+       },
+       {
+        "k0": "13:1",
+        "k1": "13:2",
+        "ms": 479
+       },
+       {
+        "k0": "13:2",
+        "k1": "13:3",
+        "ms": 1390
+       },
+       {
+        "k0": "13:3",
+        "k1": "13:0",
+        "ms": 1637
+       },
+       {
+        "k0": "13:0",
+        "k1": "14:1",
+        "ms": 21795
+       },
+       {
+        "k0": "14:1",
+        "k1": "14:2",
+        "ms": 1193
+       },
+       {
+        "k0": "14:2",
+        "k1": "14:3",
+        "ms": 766
+       },
+       {
+        "k0": "14:3",
+        "k1": "14:0",
+        "ms": 2698
+       },
+       {
+        "k0": "14:0",
+        "k1": "15:1",
+        "ms": 29914
+       },
+       {
+        "k0": "15:1",
+        "k1": "15:2",
+        "ms": 783
+       },
+       {
+        "k0": "15:3",
+        "k1": "15:0",
+        "ms": 10129
+       },
+       {
+        "k0": "15:0",
+        "k1": "16:1",
+        "ms": 28939
+       },
+       {
+        "k0": "16:1",
+        "k1": "16:2",
+        "ms": 1720
+       },
+       {
+        "k0": "16:2",
+        "k1": "16:3",
+        "ms": 725
+       },
+       {
+        "k0": "16:3",
+        "k1": "16:0",
+        "ms": 7840
+       },
+       {
+        "k0": "16:0",
+        "k1": "17:1",
+        "ms": 26127
+       },
+       {
+        "k0": "17:2",
+        "k1": "17:3",
+        "ms": 1534
+       },
+       {
+        "k0": "17:3",
+        "k1": "17:0",
+        "ms": 13268
+       },
+       {
+        "k0": "17:0",
+        "k1": "18:1",
+        "ms": 39552
+       },
+       {
+        "k0": "18:1",
+        "k1": "18:2",
+        "ms": 973
+       },
+       {
+        "k0": "18:2",
+        "k1": "18:3",
+        "ms": 1555
+       },
+       {
+        "k0": "18:3",
+        "k1": "18:0",
+        "ms": 8422
+       },
+       {
+        "k0": "18:0",
+        "k1": "19:1",
+        "ms": 26658
+       },
+       {
+        "k0": "19:1",
+        "k1": "19:2",
+        "ms": 869
+       },
+       {
+        "k0": "19:2",
+        "k1": "19:3",
+        "ms": 1796
+       },
+       {
+        "k0": "19:3",
+        "k1": "19:0",
+        "ms": 4658
+       },
+       {
+        "k0": "19:0",
+        "k1": "20:1",
+        "ms": 23837
+       },
+       {
+        "k0": "20:1",
+        "k1": "20:2",
+        "ms": 1331
+       },
+       {
+        "k0": "20:2",
+        "k1": "20:3",
+        "ms": 1427
+       },
+       {
+        "k0": "20:3",
+        "k1": "20:0",
+        "ms": 4511
+       },
+       {
+        "k0": "20:0",
+        "k1": "21:1",
+        "ms": 26056
+       },
+       {
+        "k0": "21:1",
+        "k1": "21:2",
+        "ms": 574
+       },
+       {
+        "k0": "21:2",
+        "k1": "21:3",
+        "ms": 1314
+       },
+       {
+        "k0": "21:3",
+        "k1": "21:0",
+        "ms": 5812
+       },
+       {
+        "k0": "21:0",
+        "k1": "22:1",
+        "ms": 28145
+       },
+       {
+        "k0": "22:1",
+        "k1": "22:2",
+        "ms": 1387
+       },
+       {
+        "k0": "22:3",
+        "k1": "22:0",
+        "ms": 7456
+       },
+       {
+        "k0": "22:0",
+        "k1": "23:1",
+        "ms": 32224
+       },
+       {
+        "k0": "23:1",
+        "k1": "23:2",
+        "ms": 1040
+       },
+       {
+        "k0": "23:2",
+        "k1": "23:3",
+        "ms": 1302
+       },
+       {
+        "k0": "23:3",
+        "k1": "23:0",
+        "ms": 6310
+       },
+       {
+        "k0": "23:0",
+        "k1": "24:1",
+        "ms": 33912
+       },
+       {
+        "k0": "24:1",
+        "k1": "24:2",
+        "ms": 1608
+       },
+       {
+        "k0": "24:2",
+        "k1": "24:3",
+        "ms": 1829
+       },
+       {
+        "k0": "24:3",
+        "k1": "24:0",
+        "ms": 6096
+       },
+       {
+        "k0": "24:0",
+        "k1": "25:1",
+        "ms": 31932
+       },
+       {
+        "k0": "25:1",
+        "k1": "25:2",
+        "ms": 1554
+       },
+       {
+        "k0": "25:2",
+        "k1": "25:3",
+        "ms": 1914
+       },
+       {
+        "k0": "25:3",
+        "k1": "25:0",
+        "ms": 3625
+       },
+       {
+        "k0": "25:0",
+        "k1": "26:1",
+        "ms": 35044
+       },
+       {
+        "k0": "26:2",
+        "k1": "26:3",
+        "ms": 2334
+       },
+       {
+        "k0": "26:3",
+        "k1": "26:0",
+        "ms": 3862
+       },
+       {
+        "k0": "26:0",
+        "k1": "27:1",
+        "ms": 38151
+       },
+       {
+        "k0": "27:1",
+        "k1": "27:2",
+        "ms": 1521
+       },
+       {
+        "k0": "27:2",
+        "k1": "27:3",
+        "ms": 3466
+       },
+       {
+        "k0": "27:3",
+        "k1": "27:0",
+        "ms": 13447
+       },
+       {
+        "k0": "27:0",
+        "k1": "28:1",
+        "ms": 47548
+       },
+       {
+        "k0": "28:1",
+        "k1": "28:2",
+        "ms": 5382
+       },
+       {
+        "k0": "28:2",
+        "k1": "28:3",
+        "ms": 2248
+       },
+       {
+        "k0": "28:3",
+        "k1": "28:0",
+        "ms": 7481
+       },
+       {
+        "k0": "28:0",
+        "k1": "29:1",
+        "ms": 33982
+       },
+       {
+        "k0": "29:1",
+        "k1": "29:2",
+        "ms": 2047
+       },
+       {
+        "k0": "29:2",
+        "k1": "29:3",
+        "ms": 1345
+       },
+       {
+        "k0": "29:3",
+        "k1": "29:0",
+        "ms": 6804
+       },
+       {
+        "k0": "29:0",
+        "k1": "30:1",
+        "ms": 30905
+       },
+       {
+        "k0": "30:1",
+        "k1": "30:2",
+        "ms": 834
+       },
+       {
+        "k0": "30:2",
+        "k1": "30:3",
+        "ms": 1271
+       },
+       {
+        "k0": "30:3",
+        "k1": "30:0",
+        "ms": 92622
+       },
+       {
+        "k0": "30:0",
+        "k1": "31:0",
+        "ms": 100923
+       },
+       {
+        "k0": "30:0",
+        "k1": "31:1",
+        "ms": 105406
+       },
+       {
+        "k0": "31:1",
+        "k1": "31:2",
+        "ms": 1062
+       },
+       {
+        "k0": "31:2",
+        "k1": "31:3",
+        "ms": 1158
+       },
+       {
+        "k0": "31:3",
+        "k1": "31:0",
+        "ms": 3139
+       },
+       {
+        "k0": "31:0",
+        "k1": "32:1",
+        "ms": 15115
+       },
+       {
+        "k0": "32:1",
+        "k1": "32:2",
+        "ms": 4421
+       },
+       {
+        "k0": "32:2",
+        "k1": "32:3",
+        "ms": 1308
+       },
+       {
+        "k0": "32:3",
+        "k1": "32:0",
+        "ms": 9411
+       },
+       {
+        "k0": "32:0",
+        "k1": "33:1",
+        "ms": 40173
+       },
+       {
+        "k0": "33:1",
+        "k1": "33:2",
+        "ms": 1864
+       },
+       {
+        "k0": "33:2",
+        "k1": "33:3",
+        "ms": 2828
+       },
+       {
+        "k0": "33:3",
+        "k1": "33:0",
+        "ms": 5271
+       },
+       {
+        "k0": "33:0",
+        "k1": "34:1",
+        "ms": 37363
+       },
+       {
+        "k0": "34:1",
+        "k1": "34:2",
+        "ms": 1135
+       },
+       {
+        "k0": "34:2",
+        "k1": "34:3",
+        "ms": 2479
+       },
+       {
+        "k0": "34:3",
+        "k1": "34:0",
+        "ms": 6805
+       },
+       {
+        "k0": "34:0",
+        "k1": "35:1",
+        "ms": 22518
+       },
+       {
+        "k0": "35:1",
+        "k1": "35:2",
+        "ms": 1138
+       },
+       {
+        "k0": "35:2",
+        "k1": "35:3",
+        "ms": 1545
+       },
+       {
+        "k0": "35:3",
+        "k1": "35:0",
+        "ms": 9655
+       },
+       {
+        "k0": "35:0",
+        "k1": "36:1",
+        "ms": 31550
+       },
+       {
+        "k0": "36:1",
+        "k1": "36:2",
+        "ms": 1706
+       },
+       {
+        "k0": "36:2",
+        "k1": "36:3",
+        "ms": 1187
+       },
+       {
+        "k0": "36:3",
+        "k1": "36:0",
+        "ms": 4520
+       },
+       {
+        "k0": "36:0",
+        "k1": "37:1",
+        "ms": 31660
+       },
+       {
+        "k0": "37:1",
+        "k1": "37:2",
+        "ms": 1291
+       },
+       {
+        "k0": "37:2",
+        "k1": "37:3",
+        "ms": 1009
+       },
+       {
+        "k0": "37:3",
+        "k1": "37:0",
+        "ms": 9147
+       },
+       {
+        "k0": "37:0",
+        "k1": "38:1",
+        "ms": 31668
+       },
+       {
+        "k0": "38:2",
+        "k1": "38:3",
+        "ms": 3405
+       },
+       {
+        "k0": "38:3",
+        "k1": "38:0",
+        "ms": 10158
+       },
+       {
+        "k0": "38:0",
+        "k1": "39:1",
+        "ms": 36568
+       },
+       {
+        "k0": "39:1",
+        "k1": "39:2",
+        "ms": 2812
+       },
+       {
+        "k0": "39:2",
+        "k1": "39:3",
+        "ms": 1036
+       },
+       {
+        "k0": "39:3",
+        "k1": "39:0",
+        "ms": 5134
+       },
+       {
+        "k0": "39:0",
+        "k1": "40:1",
+        "ms": 35668
+       },
+       {
+        "k0": "40:1",
+        "k1": "40:2",
+        "ms": 1628
+       },
+       {
+        "k0": "40:2",
+        "k1": "40:3",
+        "ms": 1614
+       },
+       {
+        "k0": "40:3",
+        "k1": "40:0",
+        "ms": 5304
+       },
+       {
+        "k0": "40:0",
+        "k1": "41:1",
+        "ms": 34227
+       },
+       {
+        "k0": "41:1",
+        "k1": "41:2",
+        "ms": 2175
+       },
+       {
+        "k0": "41:2",
+        "k1": "41:3",
+        "ms": 1452
+       },
+       {
+        "k0": "41:3",
+        "k1": "41:0",
+        "ms": 18958
+       },
+       {
+        "k0": "41:0",
+        "k1": "42:1",
+        "ms": 59740
+       },
+       {
+        "k0": "42:1",
+        "k1": "42:2",
+        "ms": 1365
+       },
+       {
+        "k0": "42:2",
+        "k1": "42:3",
+        "ms": 36520
+       },
+       {
+        "k0": "42:0",
+        "k1": "43:1",
+        "ms": 146211
+       },
+       {
+        "k0": "43:1",
+        "k1": "43:2",
+        "ms": 2011
+       },
+       {
+        "k0": "43:3",
+        "k1": "43:0",
+        "ms": 83630
+       },
+       {
+        "k0": "43:0",
+        "k1": "44:1",
+        "ms": 104123
+       },
+       {
+        "k0": "44:1",
+        "k1": "44:2",
+        "ms": 5476
+       },
+       {
+        "k0": "44:3",
+        "k1": "44:0",
+        "ms": 7435
+       },
+       {
+        "k0": "44:0",
+        "k1": "45:1",
+        "ms": 41450
+       },
+       {
+        "k0": "45:1",
+        "k1": "45:2",
+        "ms": 1628
+       },
+       {
+        "k0": "45:2",
+        "k1": "45:3",
+        "ms": 978
+       },
+       {
+        "k0": "45:3",
+        "k1": "45:0",
+        "ms": 6723
+       },
+       {
+        "k0": "45:0",
+        "k1": "46:1",
+        "ms": 39104
+       },
+       {
+        "k0": "46:1",
+        "k1": "46:2",
+        "ms": 1967
+       },
+       {
+        "k0": "46:2",
+        "k1": "46:3",
+        "ms": 3824
+       },
+       {
+        "k0": "46:0",
+        "k1": "47:1",
+        "ms": 26986
+       },
+       {
+        "k0": "47:1",
+        "k1": "47:2",
+        "ms": 1077
+       },
+       {
+        "k0": "47:2",
+        "k1": "47:3",
+        "ms": 1874
+       },
+       {
+        "k0": "47:3",
+        "k1": "47:0",
+        "ms": 9802
+       },
+       {
+        "k0": "47:0",
+        "k1": "48:1",
+        "ms": 37237
+       },
+       {
+        "k0": "48:1",
+        "k1": "48:2",
+        "ms": 1350
+       },
+       {
+        "k0": "48:3",
+        "k1": "48:0",
+        "ms": 8417
+       },
+       {
+        "k0": "48:0",
+        "k1": "49:1",
+        "ms": 39604
+       },
+       {
+        "k0": "49:1",
+        "k1": "49:2",
+        "ms": 2400
+       },
+       {
+        "k0": "49:2",
+        "k1": "49:3",
+        "ms": 2937
+       },
+       {
+        "k0": "49:3",
+        "k1": "49:0",
+        "ms": 10338
+       },
+       {
+        "k0": "49:0",
+        "k1": "50:1",
+        "ms": 46586
+       },
+       {
+        "k0": "50:1",
+        "k1": "50:2",
+        "ms": 1457
+       },
+       {
+        "k0": "50:2",
+        "k1": "50:3",
+        "ms": 2224
+       },
+       {
+        "k0": "50:3",
+        "k1": "50:0",
+        "ms": 86718
+       },
+       {
+        "k0": "50:0",
+        "k1": "51:0",
+        "ms": 101628
+       },
+       {
+        "k0": "51:0",
+        "k1": "51:1",
+        "ms": 1792
+       },
+       {
+        "k0": "51:1",
+        "k1": "51:2",
+        "ms": 1109
+       },
+       {
+        "k0": "51:2",
+        "k1": "51:3",
+        "ms": 3285
+       }
+      ],
+      "yr": {
+       "t": 1795548548287,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 3,
+      "statLag": 0,
+      "cmp": 200,
+      "min": 35.3,
+      "turnP95": 47548
+     },
+     {
+      "code": "W4P3",
+      "host": "Y",
+      "t0": 1795548567319,
+      "weeks": 10,
+      "buoi": 25,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1655
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 833
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 12541
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 30857
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 1473
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1028
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 99649
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1142
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1206
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 82521
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 101354
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1530
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 1881
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 100016
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1061
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1270
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 83685
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 101298
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1131
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1196
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 81771
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 98701
+       }
+      ],
+      "yr": {
+       "t": 1795549104604,
+       "turns": [],
+       "year": 1
+      },
+      "whereDiff": 0,
+      "posDiff": 3,
+      "statLag": 0,
+      "cmp": 35
      }
     ],
     "rejoin": [
@@ -70869,12 +79106,22 @@
       "room": "NBQ7",
       "week": 6,
       "ms": 5587
+     },
+     {
+      "room": "KMNW",
+      "week": 6,
+      "ms": 5689
+     },
+     {
+      "room": "W4P3",
+      "week": 6,
+      "ms": 5215
      }
     ]
    },
-   "rooms": 1,
+   "rooms": 3,
    "t": {
-    "total": 3218962
+    "total": 6295558
    },
    "partial": true,
    "bugs": [
@@ -70882,88 +79129,124 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 103485 > 10000 · game year 1 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":634.2,\"upKB\":4050,\"dnKB\":956,\"posFlip\":null,\"resend\":70,\"resendBy\":{\"act\":66,\"where\":1,\"thin\":3},\"longTasksPerMin\":337.7,\"longTaskMax\":1051,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":553.7,\"upKB\":1647,\"dnKB\":2724,\"posFlip\":null,\"resend\":76,\"resendBy\":{\"act\":64,\"pos\":11,\"bend\":1},\"longTasksPerMin\":404.9,\"longTaskMax\":1777,\"errs\":0}}",
-     "n": 4,
+     "n": 8,
      "nNew": 4,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "coopTurnP95 24277 > 10000 · game year 3 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3548.6,\"upKB\":34330,\"dnKB\":7094,\"posFlip\":null,\"resend\":69,\"resendBy\":{\"where\":3,\"act\":65,\"pos\":1},\"longTasksPerMin\":264.3,\"longTaskMax\":2240,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3207.3,\"upKB\":26447,\"dnKB\":10994,\"posFlip\":null,\"resend\":56,\"resendBy\":{\"act\":56},\"longTasksPerMin\":165.4,\"longTaskMax\":1067,\"errs\":0}}"
+     "lastDetail": "coopTurnP95 101298 > 10000 · game year 1 · room W4P3 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":507.7,\"upKB\":3986,\"dnKB\":546,\"posFlip\":null,\"resend\":40,\"resendBy\":{\"act\":38,\"bend\":1,\"where\":1},\"longTasksPerMin\":447.9,\"longTaskMax\":2032,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":511,\"upKB\":1571,\"dnKB\":2991,\"posFlip\":null,\"resend\":96,\"resendBy\":{\"act\":83,\"pos\":12,\"bin\":1},\"longTasksPerMin\":459.4,\"longTaskMax\":1711,\"errs\":0}}"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopActionP95",
      "detail": "coopActionP95 11921 > 8000 · game year 1 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":634.2,\"upKB\":4050,\"dnKB\":956,\"posFlip\":null,\"resend\":70,\"resendBy\":{\"act\":66,\"where\":1,\"thin\":3},\"longTasksPerMin\":337.7,\"longTaskMax\":1051,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":553.7,\"upKB\":1647,\"dnKB\":2724,\"posFlip\":null,\"resend\":76,\"resendBy\":{\"act\":64,\"pos\":11,\"bend\":1},\"longTasksPerMin\":404.9,\"longTaskMax\":1777,\"errs\":0}}",
-     "n": 3,
-     "nNew": 3,
+     "n": 5,
+     "nNew": 2,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "coopActionP95 18590 > 8000 · game year 3 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3548.6,\"upKB\":34330,\"dnKB\":7094,\"posFlip\":null,\"resend\":69,\"resendBy\":{\"where\":3,\"act\":65,\"pos\":1},\"longTasksPerMin\":264.3,\"longTaskMax\":2240,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3207.3,\"upKB\":26447,\"dnKB\":10994,\"posFlip\":null,\"resend\":56,\"resendBy\":{\"act\":56},\"longTasksPerMin\":165.4,\"longTaskMax\":1067,\"errs\":0}}"
+     "lastDetail": "coopActionP95 10529 > 8000 · game year 2 · room KMNW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1287.5,\"upKB\":21018,\"dnKB\":4124,\"posFlip\":null,\"resend\":151,\"resendBy\":{\"act\":129,\"where\":12,\"pos\":9,\"bend\":1},\"longTasksPerMin\":302.2,\"longTaskMax\":1678,\"errs\":1},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":1113.8,\"upKB\":13855,\"dnKB\":7896,\"posFlip\":null,\"resend\":236,\"resendBy\":{\"act\":206,\"pos\":30},\"longTasksPerMin\":346.4,\"longTaskMax\":2393,\"errs\":0}}"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 200.7 > 100 · game year 1 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":634.2,\"upKB\":4050,\"dnKB\":956,\"posFlip\":null,\"resend\":70,\"resendBy\":{\"act\":66,\"where\":1,\"thin\":3},\"longTasksPerMin\":337.7,\"longTaskMax\":1051,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":553.7,\"upKB\":1647,\"dnKB\":2724,\"posFlip\":null,\"resend\":76,\"resendBy\":{\"act\":64,\"pos\":11,\"bend\":1},\"longTasksPerMin\":404.9,\"longTaskMax\":1777,\"errs\":0}}",
-     "n": 4,
-     "nNew": 4,
+     "n": 6,
+     "nNew": 2,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "coopSyncKBMax 213.6 > 100 · game year 3 · room NBQ7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3548.6,\"upKB\":34330,\"dnKB\":7094,\"posFlip\":null,\"resend\":69,\"resendBy\":{\"where\":3,\"act\":65,\"pos\":1},\"longTasksPerMin\":264.3,\"longTaskMax\":2240,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3207.3,\"upKB\":26447,\"dnKB\":10994,\"posFlip\":null,\"resend\":56,\"resendBy\":{\"act\":56},\"longTasksPerMin\":165.4,\"longTaskMax\":1067,\"errs\":0}}"
+     "lastDetail": "coopSyncKBMax 215.3 > 100 · game year 2 · room KMNW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1287.5,\"upKB\":21018,\"dnKB\":4124,\"posFlip\":null,\"resend\":151,\"resendBy\":{\"act\":129,\"where\":12,\"pos\":9,\"bend\":1},\"longTasksPerMin\":302.2,\"longTaskMax\":1678,\"errs\":1},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":1113.8,\"upKB\":13855,\"dnKB\":7896,\"posFlip\":null,\"resend\":236,\"resendBy\":{\"act\":206,\"pos\":30},\"longTasksPerMin\":346.4,\"longTaskMax\":2393,\"errs\":0}}"
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "9 of 24 buổi in game year 1",
-     "n": 3,
+     "n": 6,
      "nNew": 3,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "2 of 143 buổi in game year 3"
+     "lastDetail": "9 of 22 buổi in game year 1"
     },
     {
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.R.3.resHall (text differs at char 0): «…tay» → «…dong»",
-     "n": 1,
-     "nNew": 1,
+     "n": 4,
+     "nNew": 3,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
-     "at": "coop-p18s-S1"
+     "at": "coop-p18s-S1",
+     "lastDetail": "save.R.11.palLone: 0 → 1"
     },
     {
      "type": "coop-pos",
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 8.3 host sees guest at P:b, guest is at r3 · {\"host\":{\"fpos\":\"8.3 home life1 Dư Tịch Nhan\",\"me\":\"8.3 home\",\"life\":0,\"f\":\"902 Dư Tịch Nhan pal r902 where r902\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"8.3 home life0 Thẩm Lạc Y\",\"me\":\"8.3 home\",\"life\":1,\"f\":\"901 Thẩm Lạc Y pal r5 where r5\",\"thl\":0,\"h7\":null}}",
-     "n": 7,
-     "nNew": 7,
+     "n": 13,
+     "nNew": 6,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "buổi 23.3 guest sees host at P:a, host is at r4 · {\"host\":{\"fpos\":\"23.3 r901 life2 Tống Chiêu Nghi\",\"me\":\"23.3 home\",\"life\":0,\"f\":\"902 Tống Chiêu Nghi pal r902 where home\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"23.3 home life0 Thẩm Lạc Y\",\"me\":\"23.3 r901\",\"life\":2,\"f\":\"901 Thẩm Lạc Y pal r901 where r901\",\"thl\":0,\"h7\":null}}"
+     "lastDetail": "buổi 10.3 host sees guest at r4, guest is at r5 · {\"host\":{\"fpos\":\"10.3 home life1 Tiêu Chỉ Lan\",\"me\":\"10.3 home\",\"life\":0,\"f\":\"902 Tiêu Chỉ Lan pal r4 where r4\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"10.3 home life0 Thẩm Nhược Lan\",\"me\":\"10.3 home\",\"life\":1,\"f\":\"901 Thẩm Nhược Lan pal r3 where r3\",\"thl\":0,\"h7\":null}}"
     },
     {
      "type": "number",
      "msg": "stat out of range: bac",
      "detail": "bac=-11 · fold guest week 10",
-     "n": 7,
-     "nNew": 7,
+     "n": 9,
+     "nNew": 2,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
-     "lastDetail": "bac=-2 · fold guest week 23"
+     "lastDetail": "bac=-11 · fold guest week 41"
     },
     {
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.R.6.staff.1.hue: 0 → undefined",
      "n": 22,
-     "nNew": 22,
+     "nNew": 0,
      "sha": "d521656c+dirty",
      "shaNew": "d521656c+dirty",
      "at": "coop-p18s-S1",
      "lastDetail": "save.R.2.staff.5.hue: 0 → undefined"
+    },
+    {
+     "type": "lag",
+     "msg": "co-op LAG budget miss: coopResendPerMin",
+     "detail": "coopResendPerMin 14.3 > 12 · game year 1 · room KMNW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":898.2,\"upKB\":1723,\"dnKB\":380,\"posFlip\":null,\"resend\":26,\"resendBy\":{\"act\":25,\"where\":1},\"longTasksPerMin\":307.1,\"longTaskMax\":1132,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":789.6,\"upKB\":1091,\"dnKB\":758,\"posFlip\":null,\"resend\":41,\"resendBy\":{\"act\":35,\"pos\":6},\"longTasksPerMin\":281,\"longTaskMax\":1593,\"errs\":0}}",
+     "n": 2,
+     "nNew": 2,
+     "sha": "d521656c+dirty",
+     "shaNew": "d521656c+dirty",
+     "at": "coop-p18s-S1",
+     "lastDetail": "coopResendPerMin 13.6 > 12 · game year 1 · room KMNW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1540.7,\"upKB\":15494,\"dnKB\":4872,\"posFlip\":null,\"resend\":126,\"resendBy\":{\"act\":113,\"where\":8,\"pos\":4,\"bend\":1},\"longTasksPerMin\":279.8,\"longTaskMax\":1489,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":1265.3,\"upKB\":10626,\"dnKB\":6100,\"posFlip\":null,\"resend\":233,\"resendBy\":{\"act\":206,\"pos\":24,\"bend\":3},\"longTasksPerMin\":329.1,\"longTaskMax\":2021,\"errs\":0}}"
+    },
+    {
+     "type": "stuck",
+     "msg": "co-op room stuck: no room week step in 240 s",
+     "detail": "host {\"buoi\":3,\"week\":51,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":50,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":51,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":50,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
+     "n": 1,
+     "nNew": 1,
+     "sha": "d521656c+dirty",
+     "shaNew": "d521656c+dirty",
+     "at": "coop-p18s-S1",
+     "shots": [
+      "shots/coop-p18s-S1-r2-host-stuck.png",
+      "shots/coop-p18s-S1-r2-guest-stuck.png"
+     ]
+    },
+    {
+     "type": "js",
+     "msg": "[host ipad] console: WebSocket connection to 'wss://ctm-coop.victoria-tntt.workers.dev/api/room/KMNW/ws?pid=atqpm48nmhhmwv1z8sm&name=' failed: Error during WebSocket handshake: Unexpected response code: 502",
+     "detail": "room KMNW",
+     "n": 1,
+     "nNew": 1,
+     "sha": "d521656c+dirty",
+     "shaNew": "d521656c+dirty",
+     "at": "coop-p18s-S1"
     }
    ]
   }
