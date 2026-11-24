@@ -355,3 +355,4 @@ OPEN OWNER QUESTION: đăng cơ đại lễ always inside 27-month quốc tang �
 OTHER FOLLOW-UPS (not started): net-build band-3 harm share ≤30 % target (was 43 %); servant-trust ring/vòng-nhóm UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
 Hourly trigger trig_017TL1ar1MxPSZc8cty4hJK6 DELETED by depth 4 at rollover; child makes its own (:37).
 - (24/11 16:46Z) D depth 4 ROLLED OVER → **FOREMAN D (depth 5) = session_01D3E3NbdxznDmmjziQxz3m1**. depth-4 hourly trigger deleted; FOLLOW-UPS 1 seat told to report to depth 5; depth 4 stops.
+- (24/11 16:52Z) FOREMAN D = session_01D3E3NbdxznDmmjziQxz3m1; START_CTX ≈ 10 % (get_session reads 0; tool lists); depth 5 (limit 8). Rollover at ≥35 %. Seat FOLLOW-UPS 1 Na18fpno told to report here.
