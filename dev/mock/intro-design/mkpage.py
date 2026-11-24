@@ -19,7 +19,14 @@ T=[
 ('E','Những lần gặp đầu tiên khác',
  'Cùng một cách làm cho mọi lần gặp đầu: người mới tới thăm và lần đầu Hoàng thượng ngự giá.',
  [('E1','Gặp người mới (dải tên)','Người đến bước vào, nền mờ nhẹ, dải «LẦN ĐẦU GẶP» + tên + nơi ở trượt vào rồi lui sau lời đầu.'),
-  ('E2','Hoàng thượng giá lâm (ánh sáng ở cửa)','Phòng của nàng tối đi, chùm sáng ở cửa, bóng đen rồi hiện màu, bảng «Hoàng thượng giá lâm».')],'E2')]
+  ('E2','Hoàng thượng giá lâm (ánh sáng ở cửa)','Phòng của nàng tối đi, chùm sáng ở cửa, bóng đen rồi hiện màu, bảng «Hoàng thượng giá lâm».')],'E2'),
+('F','Ngày đầu ở Dưỡng Tú viện: ma ma chia sở, chia phòng',
+ '12 cô xếp hàng trong sân. Giáo tập ma ma sáng lên, nền và các cô khác mờ đi. Bà xướng tên từng người, chữ chạy tới đâu: người đó hiện nửa thân to ở giữa rồi thu nhỏ đứng vào nhóm. Đủ 4 người thì cả nhóm dời về một góc: Tây sở, Đông sở, Bắc sở. Cuối cùng là phòng của nàng, có 3 bóng xám «Người lạ» (hình xám có sẵn trong kit). Ma ma tạm dùng hình một phu nhân lớn tuổi có sẵn.',
+ [('F1','Chia ba sở, bốn người một phòng','Một phương án duy nhất vì đã bám sát lời sếp; nếu sếp muốn đổi cách bố trí nhóm (góc nào, to nhỏ ra sao) thì nói em chỉnh.')],'F1'),
+('G','Kết quả chọn tú: ban hương nang (ở lại) và ban hoa (về nhà)',
+ 'Thái giám bưng khay đi dọc hàng. Cô nào được gọi thì sáng lên, túi thơm (ở lại) hoặc hoa (về nhà) được trao. Người ở lại bước sang bên, người ban hoa cúi chào rồi rời đi. Kết quả của chính nàng làm bản to riêng.',
+ [('G1','Cả hàng tú nữ','Thái giám đi dọc hàng, từng cô một: túi thơm thì đứng sang phải, ban hoa thì cúi chào rồi đi.'),
+  ('G2','Kết quả của chính nàng (bản to)','Nàng đứng giữa, khay bay túi thơm tới nàng, ánh sáng ấm. Cần một nền tranh riêng cho khoảnh khắc này (hiện tạm dùng nền điện), việc vẽ để sau vì đang giữ ngân sách ảnh.')],'G1')]
 stills={'A':['8%','23%','54%','82%']}
 out=['''<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cảnh giới thiệu nhân vật</title>
 <style>:root{--bg:#fbf3e6;--ink:#3a2410;--gold:#c99a3b;--red:#a8321f}@media(prefers-color-scheme:dark){:root{--bg:#1d1410;--ink:#f1e2c6}}
@@ -38,7 +45,7 @@ B='intro-design/'
 for L,title,desc,opts,rec in T:
     out.append(f'<h2><span class="tag">{L}</span>{html.escape(title)}</h2><p>{html.escape(desc)}</p>')
     for oid,on,od in opts:
-        out.append(f'<div class="opt"><h3><span class="tag">{oid}</span>{html.escape(on)}{" <span class=rec>· em khuyến nghị</span>" if oid==rec or (L=="E") else ""}</h3><p>{html.escape(od)}</p><div class="row">')
+        out.append(f'<div class="opt"><h3><span class="tag">{oid}</span>{html.escape(on)}{" <span class=rec>· em khuyến nghị</span>" if oid==rec or (L in "EG") else ""}</h3><p>{html.escape(od)}</p><div class="row">')
         for dev,dn in (('fold','Fold dọc 755×1000'),('ipad','iPad ngang 1180×820')):
             out.append(f'<figure><figcaption><b>{dn}</b></figcaption><video controls preload="metadata" playsinline src="{B}{oid}-{dev}.mp4" poster="{B}{oid}-{dev}-s2.jpg"></video><small><a href="{B}{oid}-{dev}-x2.mp4">bản nhanh gấp đôi</a></small><div class="st">'+''.join(f'<img loading="lazy" src="{B}{oid}-{dev}-s{i}.jpg" alt="">' for i in (1,2,3,4))+'</div></figure>')
         out.append('</div></div>')
