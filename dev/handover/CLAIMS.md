@@ -1555,7 +1555,7 @@ ring4 fixes (MAIN 7 FAILs) | review/ring-design-4 | session_01V1ZZH2FGU6ipDh8a2Q
 day-queue BIG review | review/day-queue | session_01V1ZZH1LA8QSoproNf1ie72 (opened by 125) | RUNNING | 2026-11-24T19:45Z
 motion4 fixes (MAIN 3 FAILs) | review/motion-design-4 | session_01V1ZZH1Y318MQY7unBNeZXG | RUNNING | 2026-11-24T19:49Z (MAIN 127)
 | ROBOT FIXER cnv #4 (opus; successor of #3; true-reload probe A/B f78c695c vs 80f49094, keep/revert jagent, S.tb trace, newlife-leak, merge LIVE, full gates) | review/robot-fix-cnv-2 on 80f49094; reports/robot-fix-cnv.md | F | session_01UV1SzhnKuNkgn4n6LmAkh3 | RUNNING | 24/11 20:08Z |
-| REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | session_01UV1Szjz8ctXWggjwCu5NY3 | RUNNING | 24/11 20:08Z |
+| REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | session_01UV1Szjz8ctXWggjwCu5NY3 | DONE PASS LAND READY e50af91a (FF from LIVE 502c48c9; pushed) | 24/11 20:08Z |
 selection-scene faults 2-11 + perf | review/selection-scene | session_01V1ZZH1gdgYpfYjzBmjLtyo | RUNNING | 2026-11-24T20:08Z (MAIN 127)
 | ROBOT-COOP FIXER #7 (opus; law1-maid-away gate, coop-tail N1–N3, save round-trip family) | review/law1-maid-away, review/robot-coop-tail, review/robot10-coop | B | session_01N1tNP3fqMhAjzz59xaXXqg | RUNNING | 24/11 20:28Z |
 save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | RUNNING | 24/11 20:58Z | FOREMAN E (child7)

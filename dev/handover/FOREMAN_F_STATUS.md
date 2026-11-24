@@ -117,3 +117,17 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
 - FOR MAIN 125 (20:08Z 24/11): robot-fix-cnv split in two: (1) r1 (already PASSED once) is being re-merged on newest LIVE by a BIG reviewer → LAND READY for LC12 in ~2–3 h; (2) -2 (R7 + residuals) continues with fixer #4. Note for owner/MAIN: a kỳ ngộ card open at the moment of save is dropped at load BY DESIGN (jky PEND.kyngo, encounter stays used).
 - (24/11 20:28Z) RUNNER DONE U5 (pairs 5-6, 40 seat-lives, 23 families; coop-20261124-0825-p5-6.md) → ARCHIVED. CO-OP ROUND 1 WIND-DOWN for F's units, following Foreman E 20:01Z/20:12Z (stuck rooms = HARNESS GAP: coop-clear never taps the jne kitNightEnd manual night picture; fix on review/robot10-coop-stuckcap; E closed U14–U21): told U4b, U6–U13 to stop after the running kiếp (≤30 min), push final files with stuck rows tagged «harness: night-picture tap (stuckcap)», report RUNNER DONE; U8 also re-checks its «life never ends» rows against the night picture. Solo queue (thd_sach / pt_dang / bd_soi) is NOT started on the old harness: folded into E's ROUND 2 plan (after fix-6-r LIVE + stuckcap PASS). Kept running: FIXER #4 1UV1SzhnKuN (robot-fix-cnv-2) + BIG REVIEW r1 re-land 1UV1Szjz8ct.
 - FOR MAIN 125 (20:28Z 24/11): F's co-op round 1 closing (pairs 3,5,6,9,11,13 complete; 7,8,10,12,14 partial; 4 deferred) — stuck rooms are a harness gap per E's FIXER #5, so further old-harness lives are waste. Round 2 (co-op + solo incl. thd_sach/pt_dang/bd_soi) waits for stuckcap PASS + fix-6-r LIVE; F can run part of it on its free seats — tell F the split.
+- FOR MAIN 127 / LC12 (20:52Z 24/11): LAND READY robot-fix-cnv-r1 e50af91abd5e827de3fcae27aeb26bf04c87196d (FF from LIVE 502c48c9) — BIG re-land review PASS (session_01UV1Szjz8ctXWggjwCu5NY3; pushed + ls-remote verified). = r1 659d2f09 (the reviewed r1 code) + merge LIVE 502c48c9; only index.html/sw.js conflicted (rebuilt); game/test delta vs LIVE byte-identical to the delta that PASSED at 98040f4c. Gates on e50af91a:
+
+| gate | result |
+|---|---|
+| quickcheck | PASS · core gates PASS · time-spill PASS · old save ok · perf new/live render 303/324, tab 604/532, buổi 3578/5434 ms, tasks>200ms 28/27 |
+| coop-e2e Fold-host · COOP_SWAP=1 | 142/142 · 142/142 |
+| r10-play-rt render on cnv/cnv_mat 120 ×3 (same build, same seed) | r1: 0 · 0 · 0 drift families — LIVE 502c48c9 with the same harness: 88 · 109 (3rd cut by time) → not worse than LIVE |
+| r10-rt render off (LIVE-written save) | round1 3 · round2 0 — LIVE alone also 3 · 0 (pre-existing: an old-save home rebuild puts a eunuch copy «Lão Minh Tử» sid 1 with no live servant in the room, dropped at the next load; same on LIVE) |
+| r10-shared-ref cnv 40 loads | 0 person splits (only S.empWhy = S.nightWhy.emp data record, as at the 98040f4c PASS) |
+| r10-weak-dead cnv 120 | 0 dead (kav 413 · kfs 40 · kfp 112 · emo 692) |
+| r10-load-leak 30 loads | 0.13 MB/load, old S reachable 1/30 (main before r1: 2.80) |
+| r10-night-after-load cnv_chu 3 lives | 6 saves at a pending flip · SYNC stuck 0 · REAL stuck 0 |
+| night-softlock · save-slots (755x1000, 1180x820) | 10/10 PASS · ALL OK, no page errors |
+| old saves: newlife-oldsave · evtruth-oldsave · care-oldsave | FAIL 0 · ok (evidence → rumour, errs 0) · ok (old/new errors 0 0) |
