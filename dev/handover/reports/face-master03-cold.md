@@ -89,7 +89,7 @@ Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, fol
 QC notes: all 60 outputs generated once (no retries) and each viewed at 512px. No printed text, no captions, ivory robe + pin on every image, no moles, ages read 16/26/51/63 in order, skin close to the master. Flagged NEEDS_REVIEW for the owner: s26-A26 (lips rosy), s46-A26 (pink eyelid shading), s50-A63 (background/skin warmer than master). Identity vs source was judged by eye only, not pixel-compared. Age 39 NOT run (owner hold).
 
 ## STATUS
-DONE 60/60 jobs (ages 16/26/51/63, 15 people). 57 DONE, 3 NEEDS_REVIEW. Cost 60 x 135 = 8,100 cr. Contact sheets: see section below if present.
+(updated below with age 39) DONE 60/60 jobs (ages 16/26/51/63, 15 people). 57 DONE, 3 NEEDS_REVIEW. Cost 60 x 135 = 8,100 cr. Contact sheets: see section below if present.
 
 ## Contact sheets (original | result, 3 pairs per row; original = head band of the source figure, result = centre crop)
 - age 16: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age16.jpg
@@ -110,3 +110,27 @@ QC notes: s13/s14/s15/s26 age16 looked at: no text, ivory robe+pin, skin matches
 ## HANDOVER (successor)
 Remaining jobs: every (src,age) in the 15x{16,26,51,63} grid not in the log above (also order: finish age16 for s27..s50, then 26, 51, 63). Prompts are re-buildable: read Prompts file, delete the operator sentence, check len. Status PENDING_QC means generated, not yet looked at. Still to do at the end: contact sheets per age uploaded to CDN img/_review/face-master03/cold/, link here.
 >>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
+
+## AGE 39 (owner unblocked 24/11 ~21:45Z; prompt age39-fix04 COLD, 9,393 chars, pasted whole and unchanged)
+Same settings (gpt-2-6, 2k, auto, count 1, refs identity upload + UPf76Ptwny). One attempt each, each looked at.
+| job | src | age | identity upload | output creation | status |
+|---|---|---|---|---|---|
+| FACE-COLD-S13-A39 | s13 | 39 | IfZhvvqtvE | O6Q4COoynm | DONE |
+| FACE-COLD-S14-A39 | s14 | 39 | eI9BoIfdqL | 1lBjdswr4r | DONE |
+| FACE-COLD-S15-A39 | s15 | 39 | VXOpeBYMMU | N253qnp6D9 | DONE |
+| FACE-COLD-S26-A39 | s26 | 39 | yiF9NZ5PW9 | 4Rq6FWn9Aa | DONE |
+| FACE-COLD-S27-A39 | s27 | 39 | BhiItCpoQR | 9ZbiHMtNYZ | DONE |
+| FACE-COLD-S28-A39 | s28 | 39 | jUIlgAaLD0 | nVgcgMbYQD | DONE |
+| FACE-COLD-S29-A39 | s29 | 39 | ov3tmL3829 | 1lBjBO7r4r | DONE |
+| FACE-COLD-S30-A39 | s30 | 39 | YMS0THvWeC | P3HNH0U42C | DONE |
+| FACE-COLD-S31-A39 | s31 | 39 | yiF9N89PW9 | nVgcgvUYQD | DONE |
+| FACE-COLD-S32-A39 | s32 | 39 | UPfJOXPwny | Sya7a0fUb8 | DONE |
+| FACE-COLD-S46-A39 | s46 | 39 | 0e7MDjETfW | UPfJERiwny | DONE |
+| FACE-COLD-S47-A39 | s47 | 39 | xS8slpOjfW | 9ZbiKVXNYZ | DONE |
+| FACE-COLD-S48-A39 | s48 | 39 | jUIlgdFLD0 | mEAazsFhJQ | DONE |
+| FACE-COLD-S49-A39 | s49 | 39 | P3HN6Ql42C | 0e7MOqsTfW | DONE |
+| FACE-COLD-S50-A39 | s50 | 39 | LwtgSmCswO | MBye4xeDCm | DONE |
+
+QC age 39: 15/15 viewed; no text, ivory robe + pin, smooth skin (no wrinkles), soft adult look, no moles, skin close to master. All DONE, none flagged.
+Age-39 contact sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age39.jpg
+Cost age 39: 15 x 135 = 2,025 cr. TOTAL Cold: 75/75 jobs (ages 16/26/39/51/63), 72 DONE, 3 NEEDS_REVIEW, 10,125 cr.
