@@ -93,3 +93,18 @@ FAMILY SCAN (any other random draw at load, Math.random hooked during deser of s
 - drawF (face pick) at load for a person with no face yet — same once-then-saved pattern; harmless.
 Laws: 1-3 untouched · 4 no number made at load (hh = the Empress's real regard; new-game values still from the same rstats/BAL path) · 5 untouched · 6b names kept, pool no longer burned · 6c n/a · 7/9/10/12 no UI or wording change · 11 whole family covered (hh, maid, emoSeen + co-op seat) · 13 check line above · 14-18 no rule changed.
 Shots: none (no UI change). Scratch probes deleted with the worktrees.
+
+## REVIEWS (Foreman D 02:18Z): nc-fix-1-rv ad3fa9be PASS, nc-fix-2-rv 977a70e9 PASS — LAND READY.
+
+## 4. FIX-3 family «a load draws dice» (save drift part 2) — review/robot10-nc-fix-3
+Order (Foreman D 02:18Z, from the fix-1 reviewer): jmort initAll at load rolled lifespans for people who joined since the last month tick → the same file loaded twice gave them different lifespans; whole family scan for any other load-time random draw.
+Scan: dev/test/r10-load-twice.js — the SAME save loaded in two fresh pages (title click: deser + deal + render) must serialise the same; every differing path listed.
+Found on main (14 robot saves): lifespans tho/thoM/thoO of new staff / maids / consorts, faces (S.maid.fc, R[i].fc, Thái hậu's staff fc, S.fseen), names given at load (S.court.ksp / ty, S.lcfPn, nmReg), tai mắt S.mspy.id, roster acts / agent queue (S.roster.acts, S.ag.rq).
+Fix: (1) jmort: initAll runs before ser — nobody is ever saved without a lifespan, whatever road made her (old saves: once at load, then saved). (2) jldseed.js (new, outermost deser wrapper, assemble.py): every die thrown DURING a load (deser + the title-click task: deal + first render) comes from a PRNG seeded by the save's own clock/counters → same file = same game, a reload re-rolls nothing; Math.random is native again right after (checked).
+| | main | fix-3 |
+|---|---|---|
+| saves loading differently twice (of 14) | 13 (1-26 paths each) | 0 |
+| r10-rt round1/round2 (001/004/005/008/009/010/save-C) | (fix-1 base) | 0 / 0 |
+Tests: mortality.js ok · save-slots 28 ok · coop-e2e 142 ok / 0 FAIL · quickcheck PASS.
+Stacked on review/robot10-nc-fix-1-rv ad3fa9be (LAND READY), which carries LIVE 4a8c627b.
+SẴN SÀNG KIỂM review/robot10-nc-fix-3 449cbe0848953be0f9f935bc8dffe2b4ef2c8e4b (BIG: save/rules) · quickcheck PASS (old save ok; render 201/278, tab 570/440, buổi 2358/3880 ms) · core gates PASS.
