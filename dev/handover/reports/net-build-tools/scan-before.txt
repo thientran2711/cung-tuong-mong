@@ -1,0 +1,101 @@
+j10.js:173	aff < 0	kBy(M.filter(m=>m!==S&&m!==l&&aff(m,l)<0),m=>-aff(
+j10.js:181	aff >= 35	e rule) */&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v
+j10.js:181	aff >= 15	)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts
+j10.js:181	oan >= 30	sorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)
+j10.js:181	oan >= 30	=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
+j10.js:183	aff >= 35	&&facIn(S)/* cold-faction */&&aff(l,S)>=35?npcWhy("f
+j13.js:39	hostility >= 40	(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hosti
+j21.js:67	aff >= 30	f=liveRivals(true).filter(v=>aff(v,S)>=30&&!v.confi
+j21.js:75	aff <= -40	if(i>=0){if(aff(v,S)<=-40){S.visit.
+j21.js:76	aff >= 20	t now=whereOf(v);const friend=aff(v,S)>=20||(v.staff
+j25.js:7	aff < 30	if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=t
+j28.js:54	aff >= 10	help:{w:1,ok:(v,t)=>aff(v,t)>=10,run:(v,t)
+j28.js:56	aff >= 20	warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRiva
+j28.js:57	oan >= 20	diate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=20,run:(v,t)
+j28.js:58	danger >= 10	provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)
+j28.js:59	danger >= 18	humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>
+j28.js:62	aff >= 0	test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)
+j28.js:65	aff >= 30	drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S
+j28.js:69	danger >= 20	feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)
+j28.js:70	oan >= 15	apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)
+j29.js:58	danger >= 20	r(x=>x!==p&&(x===S||x.alive)&&danger(x,p)>=20);const f=
+j32.js:16	oan >= 40	es=liveRivals(true).filter(v=>oan(v,S)>=40||bandOf(d
+j32.js:18	oan >= 40	es:liveRivals(true).filter(v=>oan(v,S)>=40).map(v=>v
+j34.js:20	aff >= 30	const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push("H
+j40.js:43	danger < 30	=t&&(x===S||x.alive&&!x.out)&&danger(x,v)<30);if(L.len
+j42.js:185	hostility >= 20	const hostile=p.sk==="hh"||hostility(v,m)>=20;
+j42.js:209	aff >= 0	Rivals(true).filter(v=>v!==m&&aff(m,v)>=0&&palaceOf
+j42.js:337	hostility >= 25	Rivals(true).filter(v=>v!==m&&hostility(v,m)>=25&&(v.bac||
+j42.js:621	aff >= 10	(m=>m.tinh>=BAL.tinhLv.known||aff(m,S)>=10);/* j9 on
+j51.js:27	aff >= 40	me(([x])=>x.k.heir))m*=1.3;if(aff(v,t)>=40)m*=.5;ret
+j61.js:141	aff >= 25	=>aff(S,b)-aff(S,a))[0];if(v&&aff(S,v)>=25){K(v);npc
+j68e.js:4	aff >= 10	const fr6=v=>aff(v,S)>=10,fo6=v=>{t
+j68e.js:4	aff < -10	nger(v,S))>=1}catch(e){return aff(v,S)<-10}};
+j68e.js:14	aff > -20	["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a
+j68g.js:22	aff < 0	null;const b=rv6(v=>v.id!==a&&aff(RV(a),v)<0)??rv6(v=>
+j68g.js:32	oan >= 15	nst a=rv6(v=>T6(v,"Kín đáo")||oan(v,S)>=15);return a
+j68h.js:56	aff < 0	ull;const b=rv6(v=>v.id!==a&&(aff(v,RV(a))<0||(v.ghen|
+j70.js:152	oan >= 20	onst t=mindPickBy(L.filter(x=>oan(v,x)>=20),x=>oan(v
+j70.js:195	aff >= 40	Rivals(true).filter(x=>x!==a&&aff(x,S)>=40&&!x.confi
+j70.js:241	oan >= 20	.filter(x=>x!==S&&alive70(x)&&oan(a,x)>=20&&!(typeof
+j70.js:458	aff >= 40	Rivals(true).filter(x=>x!==v&&aff(x,S)>=40&&!x.confi
+j71.js:276	aff < 0	(a=>L.some(b=>a!==b&&aff(a,b)+aff(b,a)<0))?1:0},
+j71.js:286	aff < 0	b of L)if(a.id<b.id&&aff(a,b)+aff(b,a)<0)P.push([a
+j72.js:38	aff >= 10	if(sp==="rv+")L=L.filter(v=>aff(v,S)>=10);if(sp===
+j72.js:40	aff > -30	L=L.filter(v=>aff(v,S)>-30&&!(typeof
+j72.js:320	aff <= -10	const feud=(a,b)=>aff(a,b)<=-10||aff(b,a)
+j72.js:320	aff <= -10	st feud=(a,b)=>aff(a,b)<=-10||aff(b,a)<=-10;
+j72.js:373	aff <= -10	l",{r:"hh",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=-10,t:"Khuyên
+j72.js:375	aff <= -15	",{r:"rvk",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=-15,t:"Đi cùn
+j72.js:380	aff < 15	eRivals(true).every(u=>u===v||aff(v,u)<15),t:"Mời {
+j72.js:382	aff < -10	const q=qn();return{tru:!!(q&&aff(X.B.o,q)<-10)}},rf:()=
+j72.js:382	aff > -40	q)<-10)}},rf:()=>!!qn(),bf:o=>aff(o,S)>-40,t:"Xác mi
+j72.js:412	aff < 0	b:"rv",bf:(o,z,A)=>o===A.own&&aff(o,S)<0,t:"Gặp {A
+j72.js:487	aff < -20	ls(true).filter(v=>v!==X.A.o&&aff(v,X.A.o)<-20);if(h.len
+j72.js:593	aff < -15	veRivals(true).some(u=>u!==o&&aff(u,o)<-15),t:"Thái
+j79.js:896	aff < 40	t?"nàng không phải Hoàng hậu":aff(q,S)<40?`Hoàng hậ
+j83.js:240	aff >= 40	S||v.alive)&&!v.out&&!v.coop&&aff(v,p)>=40&&(v.inv||
+j9.js:128	oan > 0	if(oan(v,S)>0){A.push({
+j95.js:79	hostility >= 50	===t)continue;if(evG(h,a)>=2&&hostility(h,t)>=50)return `b
+j95.js:80	hostility >= 60	f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=60&&aff(a,L)
+j95.js:80	aff >= 30	t&&L!==S&&hostility(L,t)>=60&&aff(a,L)>=30)return `v
+j95.js:139	hostility >= 45	if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=f
+j95.js:195	hostility >= 30	)||!motiveOK(v,x,"visit").ok||hostility(v,x)>=30)continue;
+j95.js:456	hostility >= 40	if(hard.ok&&hostility(v,S)>=40&&evG(v,S)
+j95.js:457	aff >= 20	else if(aff(v,S)>=20){j95z().o
+j95b.js:241	aff > -30	er(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff
+j95b.js:241	aff >= -5	ouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return
+j96.js:58	oan >= 15	(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=15))}
+jagacts3.js:134	aff < 0	x:aff(v,third)<0?`nàng ghé
+jagacts3.js:135	aff < 0	run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v
+jagacts3.js:150	aff < 0	const C=P3T.gossip(v,t,th);if(aff(t,th)<0)add("talk
+jagacts3.js:199	aff < 0	t l=facLeader(f);if(l&&l!==v&&aff(v,l)<0){if(nd(F.
+jagknow.js:350	aff < 0	let foe=false;try{foe=aff(a,o)<0||aff(o,a)
+jagknow.js:350	aff < 0	foe=false;try{foe=aff(a,o)<0||aff(o,a)<0}catch(e){
+jagstaff.js:73	hostility >= 20	true).find(v=>v!==m&&(v===hh||hostility(v,m)>=20));if(foe)
+jagwhy1.js:69	aff < 0	onst o=oan(v,S);if(o<A.sorry||aff(v,S)<0)return nu
+jagwhy1.js:78	aff >= 0	v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB()
+jagwhy1.js:147	aff < 0	eenP();if(!q||q===c.a||q===t||aff(t,q)<0)return nu
+jaudit.js:25	aff >= 30	sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(
+jgreet.js:118	aff < 0	ssip),run:()=>{chatMark(v);if(aff(S,third)<0){const n=
+jnroad.js:47	aff < 0	st meOk=!isSrv()&&!nrLearn()&&aff(v,S)<0&&meN<nrB(
+jpet.js:158	oan > 0	Rivals(true).filter(x=>x!==p&&oan(x,p)>0).sort((x,
+jpetcare.js:210	hostility >= 40	)||tr.includes("Xảo quyệt"))&&hostility(v,t)>=40&&ACT.pets
+jroute.js:259	aff < 0	es=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen|
+jroute.js:390	danger >= 60	&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&
+jts.js:268	aff >= 30	const gifts=G.filter(v=>aff(v,S)>=30&&v.inv&&v
+jts.js:279	aff >= 11	${aff(p,S)}`:KIT_REL.unknown,aff(p,S)>=11?"g":aff(p
+jts.js:279	aff <= -11	_REL.unknown,aff(p,S)>=11?"g":aff(p,S)<=-11?"r":"n"],
+jtsb.js:135	oan >= 15	ate.push("ghen với ngươi");if(oan(a,S)>=15)hate.push
+jtsb.js:153	aff >= 30	Rivals(true).filter(v=>v!==a&&aff(v,S)>=30&&rkOf(v)>
+jtsb.js:176	oan >= 15	)&&(rivals||[]).includes(b)&&(oan(a,b)>=15||aff(a,b)
+jtsb.js:176	aff <= -15	).includes(b)&&(oan(a,b)>=15||aff(a,b)<=-15)){oanAdd(
+jtsb.js:233	oan >= 20	ivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)
+jtsb.js:233	aff <= -20	lter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=
+jtwoway.js:51	oan > 0	",{n:"Tạ lỗi",req:(a,t)=>!!t&&oan(t,a)>0,run:(a,t)
+jtwoway.js:63	oan >= 30	(true).find(x=>x!==a&&x!==t&&(oan(x,t)>=30||bandOf(d
+jtwoway.js:70	aff >= 0	{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G()
+jtwoway.js:71	aff >= 30	n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung
+jtwoway.js:78	oan >= 20	rue)).filter(x=>x!==a&&x!==t&&oan(t,x)>=20);return L
+jveil.js:209	aff >= 50	er(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=50&&(v.bac||
+jwhy.js:82	danger >= 30	ame} quen người ${whyPal(v)}`:danger(v,S)>=30?"nàng đan
