@@ -77,7 +77,11 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;
  txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
  seg.replace(RX,(a,lab,sg,n)=>{const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
+  /* robot10-onecore: a RECURRING amount («mỗi tháng Bạc +8», «Sủng +1 mỗi năm») is paid later, each period, by its own rule (j42 spyPay …), not by
+     this option's sure effect: never compared with fx (the A/B harness flagged «Bạc +8» vs fx bac 20 in «Bạc lạ»: +20 now AND +8 each month, both true) */
+  {const i=seg.indexOf(a);const ctx=seg.slice(Math.max(0,i-16),i)+"|"+seg.slice(i+a.length,i+a.length+14);if(/mỗi (tháng|năm|tuần|buổi|ngày|kỳ|lần)/i.test(ctx))return a}
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
+R.auditOpt=auditOpt;/* robot10-onecore: dev/tools/choice-value-scan.js --numbers runs the same rule on every option it builds */
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}
 /* logs (her journal) and the life's ending text are player-visible too */
 let logSeen=0;function auditLogs(){try{const L=S.logs||[];const n=Math.min(L.length,8);for(let i=0;i<n;i++){const t=strip(L[i]);if(R.seen["l|"+t])continue;R.seen["l|"+t]=1;words(t,"nhật ký")}}catch(e){}}
