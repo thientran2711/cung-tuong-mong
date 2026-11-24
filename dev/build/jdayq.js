@@ -4,7 +4,7 @@
    event at the first morning.
    (a) OLD DAY FIRST: the buổi / day never turns while a big moment of the old buổi is pending — a kit motion scene (kmPush queue: kitGain «Nhận»,
        kitReward chest/tray, edict, bloom, night card …) open or waiting. The turn is HELD (not lost): it runs by itself once the last scene is closed.
-       Forced co-op steps (COOPW.allow / allowN: the friend's world moved) are never held (one shared world). Bots: never held (no UI).
+       In a co-op room the turn is never held (one shared world, the room paces it): (a) is solo only. Bots: never held (no UI).
    (b) ONE ORDER for the new day: day title card (jne kitNewDay) → Tuần lục book (j87) → only after she CLOSES the book: «Tin trong cung» first →
        then the day's events, spread across the buổi by D13 (jspread, BAL.spread.cap per buổi) with the FIRST buổi of a new day capped at
        BAL.spread.dawnCap world events (owner: "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức") — never on top of the book.
@@ -16,7 +16,8 @@
    ===================================================================================================================================== */
 const DQ={want:null,t:0,mt:0,newsHold:0,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0}};
 function dqUi(){try{return !window.__bot&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
-function dqForced(){const c=window.COOPW;return !!(c&&(c.allow||c.allowN))}
+/* co-op room: the turn is never held (one shared world; the room's own night / week gates pace it) — (a) is solo only, (b) holds on every seat */
+function dqForced(){const c=window.COOPW;return !!(c&&(c.on||c.allow||c.allowN))}
 /* the REAL hidden state of an element (jspread lets game code read #modal as open during a buổi change) */
 const DQ_HID=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");
 function dqHidden(el){try{return DQ_HID&&DQ_HID.get?DQ_HID.get.call(el):el.hidden}catch(e){return true}}
