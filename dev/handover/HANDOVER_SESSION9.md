@@ -2830,3 +2830,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:47Z) OD 06:10Z: ALL 107 KP23 redraws back to old faceless style (keep-picks void); C order fixed by 116 06:11Z; MAIN 117 C line points to it.
 - (04:48Z) OD 06:15Z: selection = real contest (12 tú nữ, same formula, visible ranking via contest kit, top 4 kept, rest ban hoa incl. her) → SELSCENE-3 + whole-checklist law 1 scan table.
 - (04:49Z) OD 06:20Z: score = ONLY the 3 tests (HT/TH/HH); yard/lodging events → relations only → SELSCENE-3 (overwrites 05:50Z «events move it»).
+- (04:50Z) OD 06:25Z: tú nữ quarters ≠ a cung; HIST-TUNU-LODGE = session_01V1ZZGzvCy5giz8XdbL1X3c (sonnet, opened by 116, reports to 117). C lodging art (1) on HOLD until its recommendation; then 5-line summary to sếp + final C brief + SELSCENE-3 update; archive expert.
