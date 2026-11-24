@@ -3104,3 +3104,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:28Z) kit-fitfast kit-page diff 0 (iPad x,y,w,h; Fold x,w,h) → B review. KK21 next: kitOptInfo «!» hides Kèm/Bại/Mất (E 09:20Z); moment album spec missing → E ordered to file it.
 - (19:33Z) motion4 a03dcd56: A+B fixed; FAIL «???» in m1 card detail text → MD4 re-shoot; FLIGHT-UI to extend kitNoUnk to option/act card text sinks (follow-up sha).
 - (19:36Z) LC12: plain git push to main denied by its permission classifier → lands only via golive.sh --yes (+~12 min, quickcheck inside); onecore retry running. MAIN: after onecore, 4 flight fixes first; stack + parallel own-tests. flight-ui head 25037d3a (kitNoUnk on card text).
+- (19:38Z) kit-woodskin head 66bf8bb5 (KIT_PICK→KIT_PLAQUE name clash fix, kitDim.refresh) — RING-DESIGN-4 + MOTION-DESIGN-4 told. Still no LIVE before sếp's dim3 GO.
