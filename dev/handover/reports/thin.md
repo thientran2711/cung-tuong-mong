@@ -672,3 +672,28 @@ Notes for the engine/reviewer: all premise ids new (muoi_gia/tien/thi/hoi, cn_ch
 
 - NOT BLOCKING, for Foreman B (pre-existing on LIVE, not P6/P7 code): (a) j70.js «Tai mắt báo» card says «cần 2 để tố giác» in the header line and «cần 4 để tố giác» in the body for the same person (j70.js:234 vs thrLine70 / accNeed) — law 4, one number from two sources; (b) rv6 (j68.js:24) and so j68/j7c casts can pick the co-op friend as a scripted actor — same issue as fix 2, whole group, needs the owner-side decision/worker (not changed here, 33 call sites on LIVE); (c) content notes from ENGINE #4 (some j70 tells are scenes, not acts).
 - **VERDICT: PASS ff1773ba** (LIVE b7598e72 is its ancestor; fast-forwardable). Worktrees /home/user/wt/p6r1, p6r1-ho removed after push.
+
+## ROBOT-COOP
+PRIORITY #1 CHECK ('robot10 coop'): OD 2204–2205 | ledger 0 | claims CLAIMS L1365 (this seat) | main dev/measure/robot10.js (solo only) + robot10-in.js + dev/test/coop-bot.js + coop-lag.js | review/robot10-lag-rv (dev/test/lib/coop-lag-hooks.js, copied unchanged) | archive 0. Reused, nothing rebuilt.
+Lead: B ROBOT-10 CO-OP LEAD (opus). Branch review/robot10-coop @48d1d7e1 (from main 27240ccb). TEST-ONLY: dev/measure/robot10-coop.js (new), dev/test/lib/coop-lag-hooks.js (copy of robot10-lag-rv), dev/test/coop-bot.js (requirable: exports mk/STEP/BUOI/WORLD, its own run unchanged, WURL only from argv when run as a script), dev/measure/robot10-in.js (C.coop guard: no in-place deser in a live room, no solo soft-lock check). No game file, no index.html/sw.js.
+
+### Usage (runner sessions)
+```
+# own sparse worktree from origin/review/robot10-coop (or main once landed), then:
+python3 dev/build/assemble.py
+node dev/measure/robot10-coop.js <pairFrom> <pairTo> <kiếp> [out]        # out default dev/handover/robot
+#   env SEED=<n> (shifts the thân phận rotation: new SEED = new origin×road pairs) · SWAP=1 (iPad player Y hosts; default Fold player X hosts)
+#       ORIGINS=tt,dtq,… (default every origin the game has: tt dtq muoi cn nc td ch thd cnv pf bd) · PAR=1 · CAP=10800 s per seat-life (then «cap», not a bug)
+#       STUCK=240 s · RTW=4 weeks between save round-trips · REJOIN=6 (guest leaves + «Trở lại phòng» once per room) · WORKER=<url> (default LIVE)
+# run detached:  setsid nohup node dev/measure/robot10-coop.js 1 2 10 > run.log 2>&1 < /dev/null &
+```
+Output: `coop-<yyyymmdd-hhmm>-p<from>-<to>[-s].md` = THE bug file (robot10 format: Bugs one row per bug with pairs/hits/detail/repro save/screens, Lives table per seat-kiếp with ending + cause + max rank + years, LAG set table per room × game year (turn/action p95, sync KB max, KB/min, resend/min, long tasks, per device fold/ipad), Rooms table incl. rejoin ms) + same-name .json. Runners copy the .md (+ .json, saves/) to dev/handover/robot/ on the handover branch.
+Checks per pair: robot10-in.js in both real pages (one-core option audit, cổ-trang wording of cards/journal/endings, buổi lag, owner tally per life), JS errors per seat, stuck (no room week step 240 s → bug + trace + screens, fresh room for the rest), stat sanity each step, save→load→save in a network-less scratch page, world compare each week + NPC places / friend position / friend stats each buổi (coop-bot), LAG budget misses (play-perf-budget.json coop*) per game year, rejoin.
+Pair plan: pairs 1–20 × 10 kiếp, run once with SWAP=0 and once with SWAP=1 (= both seat orders). Player X walks the origins, Y is 3 origins on, roads rotate per kiếp. Each runner gets pair ranges, no overlap (e.g. runner k: pairs 2k-1..2k, one SWAP value).
+
+### Runtime (measured on this box, 4 CPU, LIVE Worker)
+- One pair = one browser, two real-render pages (+ scratch): CPU-bound (≈350–430 long tasks/min per page) → PAR=1 per 4-CPU runner (2 pairs per runner = run them one after the other).
+- ≈20–50 s per game week (median ≈25 s) → ≈15–25 min per game year. Solo lives run 1–11 game years (nc round), so one co-op kiếp ≈ 0.5–4 h (CAP 3 h). 10 kiếp per seat ≈ 10–25 h per pair, per seat order.
+- Fixes found while building (all harness): seeded Math.random repeats co-op ids across rooms/reloads → rooms stall (now unseeded; SEEDED=1 = repro only); a scratch page loading a co-op save joined the room as a third client (now no network); guest rejoin uses the coop-rejoin-stats backOn path («Chơi cùng bạn» → «Trở lại phòng»), measured 8.7 s.
+- Smoke (CAP 300 s lives, 1 pair): flow OK end to end (room, both lives, rebirth path, round-trips, rejoin, year cut, bug file). First findings for the fixer (not yet triaged): coop-pos «host sees guest at r3, guest is at r902» every buổi (coop-bot's old posDiff family), coop-stat friend Sủng/Sức one buổi late, LAG coopTurnP95 ≈22 s > 10 s, coopSyncKBMax 146 KB > 100, coopResendPerMin 16.8 > 12.
+- Full smoke 1 pair × 1 kiếp (default caps): running, result appended here.
