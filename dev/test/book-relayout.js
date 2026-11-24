@@ -11,7 +11,7 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,
   if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
   let release;const gate=new Promise(r=>release=r);let held=0;
   await ctx.route('**/img/'+FIG+'*',async r=>{held++;await gate;r.continue()});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
   await p.goto(isFile?'http://ctm.test/index.html':SRC+'index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;

@@ -6,7 +6,7 @@ const [,,URL,SZ,OUT,MODE,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
 (async()=>{const b=await chromium.launch();
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
  if(MODE==='before')await ctx.route(/\/img\/ACTS\.json/,r=>r.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:fs.readFileSync(OLD,'utf8')}));
- const p=await ctx.newPage();p.setDefaultTimeout(90000);const errs=[];
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(90000);const errs=[];
  p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text().slice(0,200))});
  await p.goto(URL,{waitUntil:'load'});await p.waitForTimeout(3000);
  const R={size:SZ,mode:MODE||'after'};

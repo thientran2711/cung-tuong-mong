@@ -6,7 +6,7 @@
      twice: one person counted at two places; offmap: record places with no spot on the map
    usage: node dev/test/ledger_shadows.js <page URL> [moments] [WxH] [origin]  → JSON summary */
 const {chromium}=require('playwright');const [,,URL,NM,SZ,ORIG]=process.argv;const N=+NM||30;const [W,H]=(SZ||'1180x820').split('x').map(Number);
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForTimeout(2500);
  await p.evaluate(o=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(o)window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()},ORIG||'');
  const rep=[];const agg={hidden:{},extra:{},twice:0,offmap:{},moments:0,sumShown:0,sumRec:0,bad:0};

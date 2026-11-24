@@ -3,7 +3,7 @@
 const {chromium}=require('./lib/pw-roulette');const [,,URL,TAG,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=[[755,1000],[1000,755],[1180,820],[1366,1024],[844,390]];
 (async()=>{const ctx=await chromium.launchPersistentContext(''+require("path").resolve(__dirname,"../../.ansung-prof")+'',{viewport:{width:1180,height:820},deviceScaleFactor:2,hasTouch:true});const b={close:()=>ctx.close()};
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push('console '+m.text().slice(0,300))});p.setDefaultTimeout(600000);
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push('console '+m.text().slice(0,300))});p.setDefaultTimeout(600000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:600000});
  for(let i=0;i<2400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
  await sleep(1500);

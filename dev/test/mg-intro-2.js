@@ -4,7 +4,7 @@
 const {chromium}=require('playwright');const path=require('path');
 const URL0=process.argv[2]||'index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const [VW,VH]=(process.argv[3]||'755x1000').split('x').map(Number);let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;S.rank=3;try{render()}catch(e){}
   const st=document.createElement('style');st.textContent='.kmov{display:none!important}';document.head.appendChild(st);try{if(window.KMQ)KMQ.length=0}catch(e){}});

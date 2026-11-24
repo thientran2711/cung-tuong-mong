@@ -38,7 +38,7 @@ const staticPass=()=>{const fs=require('fs'),path=require('path');const D=path.j
 const law4Pass=()=>{const R=require('./law4-typed.js').law4Typed();R.forEach(r=>console.log('LAW4 ',r.at,'«'+r.t+'»'));console.log(`static law4-typed: ${R.length} typed`);return R};
 if(process.argv.includes('--static-only')){const ST=staticPass();const L4=law4Pass();const c={};ST.forEach(x=>c[x.k]=(c[x.k]||0)+1);const bad=ST.filter(x=>['CHECK','RANGE','TYPED'].includes(x.k));bad.forEach(x=>console.log(x.k.padEnd(5),x.at,x.t));console.log('static raw «Sủng ±» sites: '+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · '));const nb=bad.length+L4.length;console.log(nb?'FAIL '+nb:'PASS');process.exit(nb?1:0)}
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
- const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});if(LOCAL)await serveDir(ctx,ARG);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});if(LOCAL)await serveDir(ctx,ARG);const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});
  await p.waitForFunction(()=>typeof start==='function'&&typeof PEND==='object'&&typeof kitParse==='function',null,{timeout:240000});await p.waitForTimeout(1500);

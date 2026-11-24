@@ -4,7 +4,7 @@
    Scans 2 game years x 3 tuần x 4 buổi (festival days included) on the schedule (S.menW / S.minW / S.where) AND on the stage (goTo each hc place).
    usage: node dev/test/men-forbidden.js <page URL>  → JSON {checked, bad:[...], table}; bad must be [] */
 const {chromium}=require('playwright');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-(async()=>{const b=await chromium.launch();const errs=[];const p=await b.newPage({viewport:{width:1180,height:820}});p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(600000);
+(async()=>{const b=await chromium.launch();const errs=[];const p=await b.newPage({viewport:{width:1180,height:820}});await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(600000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});
  for(let i=0;i<20;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')break;await sleep(1500)}
  const out=await p.evaluate(async()=>{window.__bot=1;window.__forceOrigin="thd";SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;await new Promise(r=>setTimeout(r,800));

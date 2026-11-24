@@ -5,7 +5,7 @@
    = the people met on arrival") holds with "arrive"; with "now" (owner 13:50Z one-moment counts) only the walk's khắc shift differs */
 const {chromium}=require('./lib/pw-roulette');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const out={};const errs=[];
- for(const o of ["thd","cnv"]){const p=await b.newPage({viewport:{width:1180,height:820}});p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
+ for(const o of ["thd","cnv"]){const p=await b.newPage({viewport:{width:1180,height:820}});await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});
   for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
   await sleep(1500);

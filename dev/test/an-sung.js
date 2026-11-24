@@ -12,7 +12,7 @@ async function skipLoader(p){for(let i=0;i<300;i++){const s=await p.evaluate(()=
 const VPS=(process.env.VPS||'755x1000x2,820x1180x2,1180x820x2,1366x1024x2,412x1058x2,390x844x3').split(',').map(s=>s.split('x').map(Number));
 (async()=>{const b=await chromium.launch();const R={};
  for(const [W,H,D] of VPS){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));const r=R[W+'x'+H]={};
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));const r=R[W+'x'+H]={};
   await p.goto(BASE+PAGE,{waitUntil:'domcontentloaded'});await skipLoader(p);await sleep(1200);
   await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;tmPlace(S,2);S.an=12;S.aw=1;render()});await sleep(2500);

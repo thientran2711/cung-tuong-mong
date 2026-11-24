@@ -6,7 +6,7 @@
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT,WK,SEED,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const WEEKS=+(WK||4);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true});
- const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[],bad=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(180000);const errs=[],bad=[];p.on('pageerror',e=>errs.push(e.message));
  p.on('response',r=>{if(r.status()>=400&&/\.webp|\.json/.test(r.url()))bad.push(r.status()+' '+r.url())});
  await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
  for(let i=0;i<300;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s)break;await sleep(500)}

@@ -4,7 +4,7 @@
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,GAME,OUT,SZ]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const errs=[];
- for(const s of (SZ||'755x1000,1180x820').split(',')){const [w,h]=s.split('x').map(Number);const pg=await b.newPage({viewport:{width:w,height:h}});pg.on('pageerror',e=>errs.push(s+' '+e.message.slice(0,160)));
+ for(const s of (SZ||'755x1000,1180x820').split(',')){const [w,h]=s.split('x').map(Number);const pg=await b.newPage({viewport:{width:w,height:h}});await require('./lib/veil').guard(pg);pg.on('pageerror',e=>errs.push(s+' '+e.message.slice(0,160)));
   await pg.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await pg.waitForTimeout(800);await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'domcontentloaded'});
   for(let i=0;i<200;i++){const ok=await pg.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return false}return typeof start==='function'&&!document.getElementById('kload')});if(ok)break;await pg.waitForTimeout(300)}
   await pg.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.buoi=0;S.month=5;S.tuan=1;

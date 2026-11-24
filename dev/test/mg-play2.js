@@ -20,7 +20,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{
  /* 1a the table equals the generator (python, offline) */
  let gen='';try{gen=execFileSync('python3',['-I',path.join(__dirname,'../art/mkfit/hdanchor.py'),'--check']).toString().trim();ok(/ OK$/.test(gen),'HD_ANC block = dev/art/mkfit/hdanchor.py output',gen)}catch(e){ok(false,'HD_ANC block = generator',String(e.stdout||e.message).trim())}
- const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH},deviceScaleFactor:DIR?2:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH},deviceScaleFactor:DIR?2:1});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
   const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}});

@@ -5,7 +5,7 @@
    cpu = CPU slow-down factor for the perf counter, e.g. 4 ≈ a phone like the Fold) */
 const {chromium}=require('playwright');const [,,URL0,NB,SZ,OFF,CPU]=process.argv;const N=+NB||48;const [W,H]=(SZ||'755x1000').split('x').map(Number);
 const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
  if(+CPU>1){const c=await p.context().newCDPSession(p);await c.send('Emulation.setCPUThrottlingRate',{rate:+CPU})}
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForTimeout(2500);
  await p.evaluate(off=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(off)window.__agOff=1;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()},OFF==='off');

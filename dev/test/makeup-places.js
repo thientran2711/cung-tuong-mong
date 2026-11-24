@@ -2,7 +2,7 @@
    usage: node dev/test/makeup-places.js <url> <WxH@dpr>  -> JSON rows {state, ctx, pic, imgW, faceW (px on the toilLodStep scale = layer width / 1.6), step, makeup, smudge}.
    Every face picture (por-/fig-) in each state is listed, with whether a makeup layer (img.kmkc / img.kmkl) or smudge layer (img.klk-smu) sits over it. Herself has makeup + smudge. */
 const {chromium}=require('playwright');const [,,URL,VP]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');
-(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(60000);
+(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(60000);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
