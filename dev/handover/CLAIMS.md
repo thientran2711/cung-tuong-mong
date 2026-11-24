@@ -1511,7 +1511,7 @@ rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | r
 | RV test-mrfoot SMALL (sonnet) of d521656c | review/test-mrfoot; reports/test-mrfoot.md | MAIN 122 | session_01V1ZZH3jimhL3hVZTZNqAJb | RUNNING | 24/11 12:33Z |
 | REVIEW E84r robot10-e-fix-5 BIG (opus; briefs/E84r-review-robot-fix5.md) of 6b96055a | review/robot10-e-fix-5-r; reports/robot10-fix5-review.md | FOREMAN E (child4) | session_01DgYSWoVjheqq11nzo7HMWF | DONE PASS 24f8c761 (merge d521656c+6b96055a) | 24/11 13:55Z |
 REMERGE servant-trust onto net-build c6c3ca76 (opus BIG; briefs/D-servant-trust-remerge.md) | review/servant-trust-rv | session_01D3E3NZurAt4CAaE8UhHYD7 | DONE 59ea20a8 | 24/11 13:35Z (Foreman D depth 4)
-rv promo-build-2 r2 (opus BIG; briefs/D-promo-build-2-review-r2.md; target f9cdc020) | review/promo-build-2-rv | session_01D3E3NZnFXh5e2NqrPJTpg8 | RUNNING | 24/11 13:55Z (Foreman D depth 4)
+rv promo-build-2 r2 (opus BIG; briefs/D-promo-build-2-review-r2.md; target f9cdc020) | review/promo-build-2-rv | session_01D3E3NZnFXh5e2NqrPJTpg8 | DONE PASS 70571e8a | 24/11 13:55Z (Foreman D depth 4)
 co-op runner U3b (pair 4 SWAP=0, split from U3) | review/robot10-coop 5a65a561 | session_01N1tNP4zcW21pE4pFvZ47QP | RUNNING | 2026-11-24T13:55Z (FOREMAN B)
 law1-audit-r1 re-merge c6c3ca76 | review/law1-audit-r1 | session_01N1tNP3tqT3TXv982ieVGqU | RUNNING | 2026-11-24T14:43Z (FOREMAN B)
 | REVIEW E85r LEAVE-PALACE re-merge on LIVE c6c3ca76 BIG (opus; briefs/E85r-remerge-leave-palace.md; ORDER MAIN 123 14:45Z) | review/leave-palace-r5; reports/leave-palace-review-r2.md | FOREMAN E (child4) | session_01DgYSWmzS4RRsmqyV6HEwXr | RUNNING | 24/11 14:55Z |
