@@ -64,7 +64,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   {const roads={};for(const k in ARC67){const d=ARC67[k];if(d.o==='rd')(roads[d.road]=roads[d.road]||[]).push(k)}const bad=[];let n=0;
    for(const r in roads){for(const k of roads[r].concat([r])){const K=cpKeyOf(k);n++;if(!K||!C[K[0]+'_t']||!C[K[0]+'_a']||C[K[0]+'_t'].n===C[K[0]+'_a'].n)bad.push(k)}}
    const nm=Object.keys(C).filter(k=>/^cp_.+_\d+_[ta]$/.test(k)).map(k=>C[k].n);ck(!bad.length&&n>=380&&new Set(nm).size===nm.length,`F1 every rdDef chapter + premise (${n}) has its own distinct good + bad pair ${bad.slice(0,5).join(',')}`)}
-  ck(!/chương đường|lần chương/.test(C.cp_tt_co_5_t.how(1)+C.cp_tt_co_4_a.how(1))&&/^Khép lại chương «Môn sinh của cha» trên đường «/.test(C.cp_tt_co_5_t.how(1)),'F5 chapter how text: «Khép lại chương «…» trên đường «…»»');
+  ck(!!C.cp_tt_co_5_t&&!!C.cp_tt_co_4_a&&!/chương đường|lần chương/.test(C.cp_tt_co_5_t.how(1)+C.cp_tt_co_4_a.how(1))&&/^Khép lại chương «Môn sinh của cha» trên đường «/.test(C.cp_tt_co_5_t.how(1)),'F5 chapter how text: «Khép lại chương «…» trên đường «…»»');
   const o=dhObj(S,'cp_tt_co_6_a');ck(o&&o.sh==='a'&&/kdh-shA/.test(kitTitlePlate(o)),'B1 bad title draws the ác tone plate');
   clr(v);v.dh={};try{nrEnd(ARC67.tt_oan_5,1,undefined,v)}catch(e){F.push('nrEnd threw '+e.message)}ck(v.dh.cp_tt_oan_5_t&&v.dh.cp_tt_oan_5_t.i>=0,'B1 NPC road chapter (nrEnd) → the same per-chapter title');
   try{nrEnd(ARC67.tt_oan,-1,undefined,v)}catch(e){F.push('nrEnd premise threw '+e.message)}ck(v.dh.cp_tt_oan_4_a&&v.dh.cp_tt_oan_4_a.i>=0,'F1 NPC road premise (nrEnd .4, lost) → its own bad title');
@@ -78,7 +78,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* B4 j70 */
   S.dh={};v.dh={};abandon70({a:v.id,t:'me',m:'poison',id:'t1',kt:[]},'exposed');ck(S.dh.mh_vach&&S.dh.mh_vach.i>=0,'B4 exposer → Vạch rõ gian tay');ck(v.dh.mh_doc_lo&&v.dh.mh_doc_lo.i>=0,'B4 exposed schemer → Bàn tay lộ dấu');
   v.dh={};abandon70({a:v.id,t:'me',m:'rumor',id:'t2',kt:[]},'exposed');ck(v.dh.mh_don_lo&&!/độc/.test(C.mh_don_lo.n),'F3 exposed rumour → a rumour name, never a poison word');
-  {const G=T2.MG70,bad=[];for(const m in M70){const g=G[m];if(!g){bad.push(m+':none');continue}for(const r of ['thoat','lo','nap']){const k=`mh_${g}_${r}`;if(!C[k]||(g!=='doc'&&/độc/.test(C[k].n+C[k].how(1))))bad.push(m+':'+k)}}
+  {const G=T2.MG70||{},bad=[];for(const m in M70){const g=G[m];if(!g){bad.push(m+':none');continue}for(const r of ['thoat','lo','nap']){const k=`mh_${g}_${r}`;if(!C[k]||(g!=='doc'&&/độc/.test(C[k].n+C[k].how(1))))bad.push(m+':'+k)}}
    ck(!bad.length,`F3 every M70 method (${Object.keys(M70).length}) → its group names; «độc» only in the poison group ${bad.join(',')}`)}
   S.dh={};try{frameExpose(v,S,'')}catch(e){}ck(S.dh.mh_vu_thoat&&!/độc/.test(C.mh_vu_thoat.n),'F3 a frame broken at once → «'+(C.mh_vu_thoat||{}).n+'» (group vu)');
   S.dh={};duc70(S,2,'báo tin cứu người');ck(S.dh.mh_bao&&S.dh.mh_bao.i>=0,'B4 warning → Báo tin cứu người');
@@ -87,10 +87,14 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   j7s().brb=S.turn;T2.cpMisc(S);ck(S.dh.lc_brb&&S.dh.lc_brb.i>=0,'B5 hush money → bad');
   ck(Object.keys(MF7).every(k=>DH_CAT['lc_'+k]),'B5 every MF7 family has its title');
   S.dh={};for(const k of ['cuuhoang','chepkinh','hoagiai','hoahoan','dichbenh'])cpMerit7(k+'_a');ck(['cuuhoang','chepkinh','hoagiai','hoahoan','dichbenh'].every(k=>S.dh[`lc_${k}_a`]&&C[`lc_${k}_a`].sh==='a'),'F4 every bad lập công way → its bad title');
-  const hw=['cp_tt_co_t','vn_inv_t','mh_vach','mh_doc_thoat','lc_cuute','lc_brb','lc_chepkinh_a'].map(k=>C[k].how(3)).join(' | ');ck(!/\(mưu hại\)|lần chương|chương đường|«[^»]*» một lần|Lập công «/.test(hw)&&/ba lần$/.test(C.lc_cuute.how(3)),'F5 counted how texts read naturally: '+hw.slice(0,160));
+  const hw=['cp_tt_co_t','vn_inv_t','mh_vach','mh_doc_thoat','lc_cuute','lc_brb','lc_chepkinh_a'].map(k=>C[k]?C[k].how(3):'MISSING '+k).join(' | ');ck(!/MISSING|\(mưu hại\)|lần chương|chương đường|«[^»]*» một lần|Lập công «/.test(hw)&&!!C.lc_cuute&&/ba lần$/.test(C.lc_cuute.how(3)),'F5 counted how texts read naturally: '+hw.slice(0,160));
   /* C old save */
   try{const j=JSON.parse(JSON.stringify(S));delete j.rep;delete j.dh;S=j;rpSync(S,true);dhSync(S,true);dhPanel();ck(true,'C old save (no rep / dh) syncs and the panel opens')}catch(e){F.push('C old save threw '+e.message)}
   try{const m=document.getElementById('modal');if(m)m.hidden=true;Q.length=0}catch(e){}
+  /* C2 a save from before FIX r1 (the per-road / per-kind / any-method keys) keeps its titles and the panel opens with them */
+  try{const a=[''];S.dh=Object.assign(S.dh||{},{cp_tt_co_t:{n:4,i:1,at:a},vn_pro_a:{n:1,i:0,at:a},mh_lo:{n:1,i:0,at:a}});dhSync(S,true);dhPanel();const m=document.querySelector('#modal:not([hidden])');const tx=m?m.textContent:'';
+   ck(/Con cờ giữ nước/.test(tx)&&/Bỏ mặc người cầu/.test(tx)&&/Bàn tay lộ dấu/.test(tx)&&!!C.cp_tt_co_t.old&&!/[0-9]/.test(C.cp_tt_co_t.how(4)),'C2 old-save titles (per road / per kind / any method) still listed, never given now');m&&(m.hidden=true);Q.length=0;
+   ['cp_tt_co_t','vn_pro_a','mh_lo'].forEach(k=>delete S.dh[k])}catch(e){F.push('C2 threw '+e.message)}
   /* D co-op */
   const cw=window.COOPW;window.COOPW={on:true,seat:'b'};clr(S);const w=liveRivals(true).filter(x=>!x.queen)[1];w.dh={};w.rep={};w.duc=90;w.danh=85;rpSync(w,true);ck(!has(w,'hien'),'D guest seat: NPC rules do not run');
   S.duc=90;S.danh=85;rpSync(S,true);ck(has(S,'hien'),'D her own seat earns hers');window.COOPW=cw;
