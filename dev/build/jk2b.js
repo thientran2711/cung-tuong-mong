@@ -191,7 +191,7 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
 
 /* ---------- 6. OPTION MODE "cost" — hidden outcomes for EVENT choices (owner 11/14, 11/15 14:30Z, KIT 28.6) ----------
    Every event choice (main / side stories, weekly events, festivals, NPC visits, dilemmas…): the option shows ONLY what it costs (Sức, khắc,
-   Bạc), its Cần and the kit ODDS METER of its real odds (owner 19/11 ~01:48Z; a certain option shows «Nắm chắc») — no Được / Mất / Kèm. An
+   Bạc), its Cần and the kit ODDS METER of its real odds (owner 19/11 ~01:48Z; a certain option shows NO meter, owner 24/11 ~04:25Z) — no Được / Mất / Kèm. An
    option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the kit HINT row (6b). The result card afterwards shows the true numbers. Active acts keep everything.
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
    `data-khide="1"`. Which items are events: `kitIsEventChoice` below. ---------- */
@@ -205,7 +205,7 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-
      1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (thường ổn / hên xui / dễ hỏng) and the failure.
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
-   kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
+   kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows NO meter (owner 24/11 ~04:25Z).
    An option may carry its own `hint` (string or fn(lv)); hints may never lie (an override must match the data). */
 const KIT_HINT_LADDER=new RegExp("(?:^|[\\s·>])("+KIT_ODDS_ALT+")(?=$|[\\s·<,.;:])");
 function kitHintLevel(){try{const t=S.tamco||0,m=eyes(S);const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
