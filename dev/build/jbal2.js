@@ -2054,3 +2054,23 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+
+/* LEAVE-THE-PALACE = ENDING (owner OD 24/11 ~06:05Z, review/leave-palace, jleave.js): every choice that takes her out of the palace ends the life;
+   the end card adds one varied «Về sau» passage decided by the PARTNER's real nết × her own state × the kind of leaving.
+   yrs[kind] = [min,max] years she still lives after leaving; kids[kind] = [min,max] children born after; cls = partner classes scored from his 3 nết
+   (BAL.net words; the highest score wins, ties keep the order of clsOrd); mod[cls] = y (years ×), k (children ±), w (cause weights ×).
+   suc: her Sức shifts the years (y × (sucA + Sức/sucD)); maxAge caps the age at death; old = from this age a death is «tuổi già». */
+BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
+ yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],other:[8,42]},
+ kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],other:[0,3]},
+ clsOrd:["chung","datinh","quyen","bao","lanh"],
+ cls:{chung:{"Ân cần":2,"Thật thà":2,"Trọng nghĩa":3,"Rộng lượng":1,"An phận":2,"Điềm tĩnh":1,"Thanh liêm":1},
+      datinh:{"Ham vui":3,"Vì mình":2,"Xu nịnh":1,"Nhiều chuyện":1,"Thực dụng":1,"Xảo quyệt":1},
+      quyen:{"Tham vọng":3,"Vì gia tộc":2,"Xảo quyệt":1,"Ham lợi":2},
+      bao:{"Nóng nảy":3,"Thù dai":2,"Cương trực":1},
+      lanh:{"Lạnh lùng":3,"Kín đáo":1,"Thực tế":1,"Ham học":1}},
+ mod:{chung:{y:1.15,k:1},datinh:{y:.9,k:0},quyen:{y:.85,k:0},bao:{y:.75,k:0},lanh:{y:1,k:-1},none:{y:1,k:0}},
+ /* cause-of-death weights (the pool picks one; class/kind rows multiply) */
+ cause:{gia:3,benh:3,sinh:1,sau:1,hai:.5,loan:1,dich:1},/* hai only with a partner's house (no partner → 0); gia only from age «old»; sinh only with children born, before birthAge */
+ causeK:{tron:{loan:3,dich:1.5},tron1:{loan:3,benh:1.5},dan:{benh:2,dich:2,loan:1.5},duoi:{benh:2.5,dich:2},tu:{sinh:0,sau:.5,benh:1.5},thiep:{hai:1.5,sau:1.5},vuong:{loan:1.5}},
+ causeC:{chung:{sau:.3,hai:0},datinh:{sau:3,hai:2},quyen:{hai:2.5,sau:1.5},bao:{hai:2,sau:2,benh:1.3},lanh:{sau:2.5}}};
