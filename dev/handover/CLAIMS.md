@@ -1438,7 +1438,7 @@ REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) |
 | THIN-P8 road-play helper (sonnet; splits rv 4YxeqtxE remaining roads) | review/thin-p8-r1 (no code); reports/thin.md | B | session_01N1tNP4b5Pe2Aq1vxpZPBcx | RUNNING | 24/11 07:12Z |
 | DLG WRITER W2 j72_b (sonnet; briefs/b-dlg-writer.md; lead 4b3uXPGS) | review/sideline-dlg content | B | session_01N1tNP6DMVNu32Gq6i9edUo | RUNNING | 24/11 07:14Z |
 | REVIEW E71r SCENT BIG (opus; briefs/E71r-review-scent.md) of de29c737 | review/scent(-r); reports/scent-review.md | FOREMAN E (child2) | session_01DgYSWo5b8sXNAmSRTfQ98P | RUNNING | 24/11 07:09Z |
-| REVIEW E72r LEAVE-PALACE BIG (opus; briefs/E72r-review-leave-palace.md) of 5ae10d0a | review/leave-palace(-r); reports/leave-palace-review.md | FOREMAN E (child2) | (opening) | RUNNING | 24/11 07:24Z |
+| REVIEW E72r LEAVE-PALACE BIG (opus; briefs/E72r-review-leave-palace.md) of 5ae10d0a | review/leave-palace-r 37a862be; reports/leave-palace-review.md | FOREMAN E (child2) | session_01DgYSWohKTYyJDyq6W1cKwu | DONE: FAIL 37a862be 3 items | 24/11 07:24Z |
 | DLG WRITER W1p+W3 (polish j72_a, then j72_old; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3Qa628fJpUw9rPCnS | RUNNING | 24/11 07:27Z |
 | SELSCENE-7 (opus; successor of SELSCENE-6; merge selscene-dramas + top up 60+/60+ + polish + OWNER MOCK + SSK) | review/selection-scene; reports/selection-scene.md | MAIN 119 | session_01V1ZZH4RpHLXeiVt1a4nctc | RUNNING | 24/11 07:37Z |
 | RING-DESIGN «Vòng người» mock (sonnet UI design; OD 24/11 ~07:32Z/~07:35Z real) | review/ring-design (mock only); reports/ring-design.md | MAIN 119 | session_01V1ZZH3CcWmndHofFV5TX3K | RUNNING | 24/11 07:37Z |
