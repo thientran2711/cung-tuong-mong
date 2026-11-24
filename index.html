@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"92cb3949+","t":"2026-11-24T01:57Z","c":"thin-p7: fold P7 festival seeds (fseeds_a/b: 91 stages, 80 complications, 49 prizes; validator 0 errors; ≥208 composed variants per festiva…","b":"ae82f708ed1e","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"c9d0187a+","t":"2026-11-24T02:10Z","c":"thin-p7: fold P7 festival seeds (fseeds_a/b: 91 stages, 80 complications, 49 prizes; validator 0 errors; ≥208 composed variants per festiva…","b":"b4ee2b072c4f","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32636,9 +32636,9 @@ const J70SEEDS=[
 if(typeof M70==="undefined")return;
 const J70C={};window.J70C_SEEDS=J70C;
 const Bj=()=>BAL.j70c;
-function tier(map,k,d){const B=Bj();return B&&B[map]&&B[map][k]!=null?B[map][k]:d}
+function tier(map,k,d){const T=Bj()[map];return T[k]!=null?T[k]:T[d]}/* law 4: an unknown tier falls back to a NAMED BAL tier, never a typed number */
 function route(sd){return{id:sd.id,n:sd.n,tl:(sd.tl||[]).slice(0,2),tlx:(sd.tlx||[]).slice(),pl:sd.pl||null,
- get vis(){return tier("vis",sd.vis,0)},get need(){return tier("need",sd.need,2)},get bac(){return tier("bac",String(sd.bac),0)},
+ get vis(){return tier("vis",sd.vis,"lo")},get need(){return tier("need",sd.need,"s")},get bac(){return tier("bac",String(sd.bac),"0")},
  acc:sd.acc||undefined,win:sd.win?1:undefined,gd:sd.gd,st:sd.st,obj:sd.obj||null,opp:sd.opp||null,cs:1}}
 const keyOf=M=>{for(const k in M70)if(M70[k]===M)return k;return null};
 /* fresh-first across lives for every route of the method (old and composed) */
@@ -32652,7 +32652,7 @@ function tellPair(m,r){const A=r.tl.concat(r.tlx||[]);if(A.length<=2)return null
  const one=L=>{const F=nrFresh(fam,L,i=>m+":"+r.id+":"+i);const i=nrPick(fam,F,x=>m+":"+r.id+":"+x);if(i!=null)nrMark(fam,m+":"+r.id+":"+i);return i};
  const a=one(idx);const b=one(idx.filter(i=>i!==a));return a==null||b==null?null:[a,b]}
 if(typeof newPlot70==="function"){const n0=newPlot70;newPlot70=function(a,t,m,rid,mo,opt){const p=n0.apply(this,arguments);try{if(p&&!p.end){const M=M70[p.m];const r=M&&M.R.find(x=>x.id===p.r);
-  if(r&&r.cs){if(r.tlx&&r.tlx.length)p.tv=tellPair(p.m,r)||undefined;if(r.obj){const z=j70();(z.ob=z.ob||[]).push({pl:p.id,r:r.id,name:r.obj.name,from:r.obj.from,trace:r.obj.trace,born:S.turn});if(z.ob.length>60)z.ob.splice(0,z.ob.length-60)}}}}catch(e){console.error("j70c plot",e)}return p}}
+  if(r&&r.cs){if(r.tlx&&r.tlx.length)p.tv=tellPair(p.m,r)||undefined;if(r.obj){const z=j70();(z.ob=z.ob||[]).push({pl:p.id,r:r.id,name:r.obj.name,from:r.obj.from,trace:r.obj.trace,born:S.turn});if(z.ob.length>Bj().obKeep)z.ob.splice(0,z.ob.length-Bj().obKeep)}}}}catch(e){console.error("j70c plot",e)}return p}}
 if(typeof tellOf70==="function"){const t0=tellOf70;tellOf70=function(p,i){try{if(p&&p.tv){const r=pr70(p);if(r&&r.cs){const A=r.tl.concat(r.tlx||[]);const s=A[p.tv[Math.min(i,1)]];
   if(s){const t=pt70(p);return s.replace(/nạn nhân/g,t?(t===S?"ngươi":t.name):"người khác")}}}}catch(e){}return t0.apply(this,arguments)}}
 /* the real object ends somewhere (law 6c): once the plot is carried out / cut / trapped, where it is now is said to whoever knew of it */
@@ -38246,8 +38246,8 @@ BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
 /* ORDER THIN P6 (j70c.js composed j70 routes): on = composed routes live; vis/need/bac = the route tiers (tell visibility, prep weeks, price — the same
-   ranges as the 51 hand-written routes); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
-BAL.j70c={on:true,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
+   ranges as the 51 hand-written routes); obKeep = object traces kept (S.j70.ob); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
+BAL.j70c={on:true,obKeep:60,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
 /* ORDER THIN P7 (j71c.js composed festivals): on = composed stages / complications / prizes live; fx[tier] = what ONE gain/loss step of a
    complication stance is worth (laws 2/3/4: seeds count steps; rel = the rival's thiện cảm); obKeep = object traces kept. */
 BAL.j71c={on:true,obKeep:60,
@@ -96072,7 +96072,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ae82f708ed1e";window.CTM_BUILD=BUILD;
+const BUILD="b4ee2b072c4f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

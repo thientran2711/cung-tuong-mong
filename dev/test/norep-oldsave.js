@@ -21,12 +21,14 @@ const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.s
  for(let s=1;s<=3;s++){names.push(await g.evaluate(s=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=s;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();
    ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});e68();const ids=E68.map(x=>x.id);for(let i=0;i<6;i++)e68Mark(ids[(i*7+s*3)%ids.length]+':'+(i%3));evHistMark('j72:t'+s);return S.name},s));
   await g.evaluate(BUOI);await g.evaluate(s=>localStorage.setItem(SK(s),JSON.stringify(ser())),s)}
- const oldH=await g.evaluate(()=>localStorage.getItem('ctm-e68h'));ok(errs.length===0,'old build: 3 lives played, '+errs.length+' errors');errs.length=0;
+ const oldH=await g.evaluate(()=>localStorage.getItem('ctm-e68h'));const oldNR=oldH?null:await g.evaluate(()=>localStorage.getItem('ctm-nr'));ok(errs.length===0,'old build: 3 lives played, '+errs.length+' errors');errs.length=0;
  await fetch(URL+'__ver/new');g=await open();
- const mig=await g.evaluate(()=>{const H=JSON.parse(localStorage.getItem('ctm-e68h'));const N=nrStore().H;
-  const past=(key,pre)=>{let n=0;for(const l of H.L.slice(1,6))if(l.some(k=>pre?k.indexOf(key+':')===0||k===key:k===key))n++;return n};
+ const mig=await g.evaluate(o=>{let H=JSON.parse(localStorage.getItem('ctm-e68h'));const N=nrStore().H;
+  /* LIVE already on jnorep (thin-p0 landed): the old build writes ctm-nr itself -> compare old ctm-nr (its j68 family) with the new store */
+  let pf='';if(!H&&o){const O=JSON.parse(o);H=O.H||O;pf='j68:'}
+  const past=(key,pre)=>{key=pf+key;let n=0;for(const l of H.L.slice(1,6))if(l.some(k=>pre?k.indexOf(key+':')===0||k===key:k===key))n++;return n};
   let diff=0,n=0;for(const t of E68){n++;if(past(t.id,true)!==nrSeen('j68',t.id,true))diff++;for(let v=0;v<3;v++){n++;if(past(t.id+':'+v)!==nrSeen('j68',t.id+':'+v))diff++}}
-  return{lives:N.L.length,oldLives:H.L.length,cur:N.cur===H.cur,keys:N.L.flat().length,oldKeys:H.L.flat().length,diff,n,j72:nrSeenK('j72:t1')}});
+  return{lives:N.L.length,oldLives:H.L.length,cur:N.cur===H.cur,keys:N.L.flat().length,oldKeys:H.L.flat().length,diff,n,j72:nrSeenK('j72:t1')}},oldNR);
  ok(mig.lives===mig.oldLives&&mig.cur&&mig.keys===mig.oldKeys,'ctm-nr = ctm-e68h: '+JSON.stringify(mig));ok(mig.diff===0,`j68 cross-life counts identical old vs new on ${mig.n} keys`);
  for(let s=3;s>=1;s--){const ld=await g.evaluate(s=>{const d=loadSlot(s);if(!d)return{ok:false};SLOT=s;document.getElementById('title').hidden=true;deser(d);try{deal()}catch(e){}
    ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});render();const L0=nrStore().H.L.length;e68Mark('gossipTea:9');

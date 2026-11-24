@@ -12,9 +12,9 @@
 if(typeof M70==="undefined")return;
 const J70C={};window.J70C_SEEDS=J70C;
 const Bj=()=>BAL.j70c;
-function tier(map,k,d){const B=Bj();return B&&B[map]&&B[map][k]!=null?B[map][k]:d}
+function tier(map,k,d){const T=Bj()[map];return T[k]!=null?T[k]:T[d]}/* law 4: an unknown tier falls back to a NAMED BAL tier, never a typed number */
 function route(sd){return{id:sd.id,n:sd.n,tl:(sd.tl||[]).slice(0,2),tlx:(sd.tlx||[]).slice(),pl:sd.pl||null,
- get vis(){return tier("vis",sd.vis,0)},get need(){return tier("need",sd.need,2)},get bac(){return tier("bac",String(sd.bac),0)},
+ get vis(){return tier("vis",sd.vis,"lo")},get need(){return tier("need",sd.need,"s")},get bac(){return tier("bac",String(sd.bac),"0")},
  acc:sd.acc||undefined,win:sd.win?1:undefined,gd:sd.gd,st:sd.st,obj:sd.obj||null,opp:sd.opp||null,cs:1}}
 const keyOf=M=>{for(const k in M70)if(M70[k]===M)return k;return null};
 /* fresh-first across lives for every route of the method (old and composed) */
@@ -28,7 +28,7 @@ function tellPair(m,r){const A=r.tl.concat(r.tlx||[]);if(A.length<=2)return null
  const one=L=>{const F=nrFresh(fam,L,i=>m+":"+r.id+":"+i);const i=nrPick(fam,F,x=>m+":"+r.id+":"+x);if(i!=null)nrMark(fam,m+":"+r.id+":"+i);return i};
  const a=one(idx);const b=one(idx.filter(i=>i!==a));return a==null||b==null?null:[a,b]}
 if(typeof newPlot70==="function"){const n0=newPlot70;newPlot70=function(a,t,m,rid,mo,opt){const p=n0.apply(this,arguments);try{if(p&&!p.end){const M=M70[p.m];const r=M&&M.R.find(x=>x.id===p.r);
-  if(r&&r.cs){if(r.tlx&&r.tlx.length)p.tv=tellPair(p.m,r)||undefined;if(r.obj){const z=j70();(z.ob=z.ob||[]).push({pl:p.id,r:r.id,name:r.obj.name,from:r.obj.from,trace:r.obj.trace,born:S.turn});if(z.ob.length>60)z.ob.splice(0,z.ob.length-60)}}}}catch(e){console.error("j70c plot",e)}return p}}
+  if(r&&r.cs){if(r.tlx&&r.tlx.length)p.tv=tellPair(p.m,r)||undefined;if(r.obj){const z=j70();(z.ob=z.ob||[]).push({pl:p.id,r:r.id,name:r.obj.name,from:r.obj.from,trace:r.obj.trace,born:S.turn});if(z.ob.length>Bj().obKeep)z.ob.splice(0,z.ob.length-Bj().obKeep)}}}}catch(e){console.error("j70c plot",e)}return p}}
 if(typeof tellOf70==="function"){const t0=tellOf70;tellOf70=function(p,i){try{if(p&&p.tv){const r=pr70(p);if(r&&r.cs){const A=r.tl.concat(r.tlx||[]);const s=A[p.tv[Math.min(i,1)]];
   if(s){const t=pt70(p);return s.replace(/nạn nhân/g,t?(t===S?"ngươi":t.name):"người khác")}}}}catch(e){}return t0.apply(this,arguments)}}
 /* the real object ends somewhere (law 6c): once the plot is carried out / cut / trapped, where it is now is said to whoever knew of it */
