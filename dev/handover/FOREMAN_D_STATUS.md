@@ -383,3 +383,4 @@ OPEN OWNER QUESTION (still unanswered; FOR MAIN 122 11:51Z, repeated 17:05Z/17:3
 OTHER FOLLOW-UPS (not started, need no seat now): net-build band-3 harm share ≤30 % target (was 43 %); servant-trust ring/vòng-nhóm UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
 Push recipe /home/user/wt/dpush2.sh is per-container (text: HANDOVER D depth 3 block; create /home/user/wt first — flock lock dir missing on a fresh container).
 Hourly trigger trig_015ehYNQjF7QrsBrN4NQQMnZ DELETED by depth 5 at rollover; child makes its own (:37).
+- (24/11 19:06Z) D depth 5 ROLLED OVER → **FOREMAN D (depth 6) = session_01D3E3NbTM2Si5jCqsafGv2S**. depth-5 hourly trigger deleted; remerge seat Na1itJyT told to report to depth 6; depth 5 stops.
