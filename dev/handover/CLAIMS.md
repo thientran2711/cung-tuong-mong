@@ -1558,7 +1558,7 @@ motion4 fixes (MAIN 3 FAILs) | review/motion-design-4 | session_01V1ZZH1Y318MQY7
 | REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | session_01UV1Szjz8ctXWggjwCu5NY3 | DONE PASS LAND READY e50af91a (FF from LIVE 502c48c9; pushed) | 24/11 20:08Z |
 selection-scene faults 2-11 + perf | review/selection-scene | session_01V1ZZH1gdgYpfYjzBmjLtyo | RUNNING | 2026-11-24T20:08Z (MAIN 127)
 | ROBOT-COOP FIXER #7 (opus; law1-maid-away gate, coop-tail N1–N3, save round-trip family) | review/law1-maid-away, review/robot-coop-tail, review/robot10-coop | B | session_01N1tNP3fqMhAjzz59xaXXqg | RUNNING | 24/11 20:28Z |
-save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | RUNNING | 24/11 20:58Z | FOREMAN E (child7)
+save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | SSK e573b9b8 (reports/save-growth.md) | 24/11 20:58Z | FOREMAN E (child7)
 | KIT REVIEW kit-woodskin r4 35d57ca + kit-album 716310c (sonnet) | review/kit-woodskin-r3, review/kit-album-r1 | B | session_01N1tNP5YUQmH9jDHwiUYY7g | RUNNING | 24/11 20:43Z |
 face-master03 Alluring (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-alluring.md | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Cold (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-cold.md | session_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:29Z | FOREMAN D
