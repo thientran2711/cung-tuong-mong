@@ -46,3 +46,13 @@ Result: no reader left out. Fixer's script: base e75c2715 **open 4** (its jkrel 
 
 ## Verdict
 **PASS 6b96055ac4a71ba4eb3b8259b00240f37cde2d21** (review/robot10-e-fix-5-r = same sha, main 178cac37 ancestor).
+
+## Addendum (Foreman E 14:09Z): merged LIVE d521656c (test-mrfoot) → **24f8c761b3ec9a917786a1af5c11769ca638b096**
+review/robot10-e-fix-5-r = merge of origin/main d521656c + 6b96055a, 0 conflicts; dev/build, index.html, sw.js identical to 6b96055a (only the 59 test drivers from test-mrfoot changed).
+| test on 24f8c761 | result |
+|---|---|
+| quickcheck --runs 5 | **PASS** 704 s · core gates PASS · old save ok · perf new/live render 233/225, tab 389/404, buổi 1537/1021 ms (within gate) |
+| r10e-roadman (road-man save, Fold + iPad) | **ALL OK** |
+| coop-e2e Fold host | **142/142** |
+| coop-e2e COOP_SWAP=1 (iPad host) | **142/142** |
+The earlier week-0 coop red was the old driver fault fixed by test-mrfoot. Final: **PASS 24f8c761b3ec9a917786a1af5c11769ca638b096**.
