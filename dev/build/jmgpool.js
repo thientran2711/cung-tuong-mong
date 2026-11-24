@@ -70,7 +70,8 @@ const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:
 function mgpItems(kind){if(MGP_C[kind])return MGP_C[kind];const L=MGP_GEN[kind]?MGP_GEN[kind]():[];if(L.length)MGP_C[kind]=L;return L}
 function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if(filt){const f=L.filter(filt);if(f.length)L=f}
  if(used&&used.length){const f=L.filter(x=>used.indexOf(x.id)<0);if(f.length)L=f}
- const wn=((typeof BAL==="object"&&BAL&&BAL.mgp)||{}).now,it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,L,x=>x.id,wn==null?null:x=>nrNow("mg:"+kind,x.id)?wn:1):null)||L[Math.floor(Math.random()*L.length)];if(used&&it)used.push(it.id);return it}
+ const F0=typeof nrFresh==="function"?nrFresh("mg:"+kind,L,x=>x.id):L,F1=typeof nrNow==="function"?F0.filter(x=>!nrNow("mg:"+kind,x.id)):F0,F=F1.length?F1:F0;/* fresh-first (reports/thin.md «## API» advice): items no past life saw and not yet shown this life; the weights of nrDraw take over when none is left */
+ const it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,F,x=>x.id):null)||F[Math.floor(Math.random()*F.length)];if(used&&it)used.push(it.id);return it}
 /* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
 const MGP_SKIN={};
 function mgpSkin(kind){const L=MGP_SKIN[kind]||[];if(!L.length)return"";try{return(typeof nrDraw==="function"?nrDraw("mgskin:"+kind,L):L[0])||""}catch(e){return""}}

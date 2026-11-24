@@ -1,7 +1,7 @@
 /* ORDER THIN P1 test: mini-game content pools (jmgpool) — size, shape, wording, art keys, difficulty, no-repeat measure. node dev/test/mg-pool.js [--measure] */
 const fs=require('fs'),vm=require('vm'),path=require('path');const B=path.join(__dirname,'../build/');
-const store={};const c={localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)}},window:{addEventListener(){}},BAL:{nr:{lives:6,w:.5,cap:1500},mgp:{min:40,now:.2}},Math,Date,JSON,S:{},console};
-vm.createContext(c);vm.runInContext(fs.readFileSync(B+'jnorep.js','utf8')+fs.readFileSync(B+'jmgpool.js','utf8')+';this.api={nrNow,mgpItems,mgpOne,mgpRng,mgpSkin,MGP_HAT,nrLife,nrSeen,nrDraw}',c);const A=c.api;
+const store={};const c={localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)}},window:{addEventListener(){}},BAL:{nr:{lives:6,w:.5,cap:1500},mgp:{min:40}},Math,Date,JSON,S:{},console};
+vm.createContext(c);vm.runInContext(fs.readFileSync(B+'jnorep.js','utf8')+fs.readFileSync(B+'jmgpool.js','utf8')+';this.api={nrNow,nrFresh,nrMark,mgpItems,mgpOne,mgpRng,mgpSkin,MGP_HAT,nrLife,nrSeen,nrDraw}',c);const A=c.api;
 /* the data tables the pools compose from (one source each): glyphs in jnwp, altar pieces in jnwq */
 const nwp=fs.readFileSync(B+'jnwp.js','utf8'),nwq=fs.readFileSync(B+'jnwq.js','utf8');
 const GL=nwp.match(/const NW_GLYPH=\{[\s\S]*?\]\]\]\};/)[0],LE=nwq.match(/const NWQ_LE=\[[^\]]*\];/)[0];vm.runInContext(GL+LE+';this.NWG=NW_GLYPH;this.LEO=NWQ_LE',c);

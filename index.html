@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4d545911+","t":"2026-11-23T23:54Z","c":"ORDER THIN P1: built index.html/sw.js + browser test mg-pool-play","b":"1ecb216cb8bc","h":[{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"a434c279+","t":"2026-11-23T23:56Z","c":"ORDER THIN P1 batch 2: tho (glyph x brush manner, +5 glyphs), le (object set x table layout), td_cong (petals x palette) pools through jnor…","b":"24446b2f248f","h":[{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25348,7 +25348,8 @@ const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:
 function mgpItems(kind){if(MGP_C[kind])return MGP_C[kind];const L=MGP_GEN[kind]?MGP_GEN[kind]():[];if(L.length)MGP_C[kind]=L;return L}
 function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if(filt){const f=L.filter(filt);if(f.length)L=f}
  if(used&&used.length){const f=L.filter(x=>used.indexOf(x.id)<0);if(f.length)L=f}
- const wn=((typeof BAL==="object"&&BAL&&BAL.mgp)||{}).now,it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,L,x=>x.id,wn==null?null:x=>nrNow("mg:"+kind,x.id)?wn:1):null)||L[Math.floor(Math.random()*L.length)];if(used&&it)used.push(it.id);return it}
+ const F0=typeof nrFresh==="function"?nrFresh("mg:"+kind,L,x=>x.id):L,F1=typeof nrNow==="function"?F0.filter(x=>!nrNow("mg:"+kind,x.id)):F0,F=F1.length?F1:F0;/* fresh-first (reports/thin.md «## API» advice): items no past life saw and not yet shown this life; the weights of nrDraw take over when none is left */
+ const it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,F,x=>x.id):null)||F[Math.floor(Math.random()*F.length)];if(used&&it)used.push(it.id);return it}
 /* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
 const MGP_SKIN={};
 function mgpSkin(kind){const L=MGP_SKIN[kind]||[];if(!L.length)return"";try{return(typeof nrDraw==="function"?nrDraw("mgskin:"+kind,L):L[0])||""}catch(e){return""}}
@@ -37981,8 +37982,8 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
-/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold; now = weight of an item already shown this life (test dev/test/mg-pool.js). */
-BAL.mgp={min:40,now:.2};/* now = weight of an item already shown in THIS life (past lives: BAL.nr.w each) */
+/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
+BAL.mgp={min:40};
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -94949,7 +94950,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1ecb216cb8bc";window.CTM_BUILD=BUILD;
+const BUILD="24446b2f248f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
