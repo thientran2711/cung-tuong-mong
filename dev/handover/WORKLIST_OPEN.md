@@ -27,3 +27,4 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 | building |
 | 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | mock by her 08:00 ET |
 | 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | mock by her 08:00 ET |
+| 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |

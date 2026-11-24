@@ -2935,3 +2935,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:45Z) LC10: ageband-r already LIVE (68799300); thin-p6 play tests PASS, quickcheck running.
 - (07:50Z) OWNER RULE ~08:08Z real: no pre-action reminders anywhere → RING-DESIGN corrected; KK18 audit ordered (report only).
 - (07:52Z) VEIL-1 SSK r4 850602bc (review/kit-screenveil): §59.1 stand-in kept + made readable as a person (opacity .92, breath .7; KIT §59.1 line); B reviewer told via FOREMAN_B_STATUS. Checked after VEIL-1's force-push warning: all 119 OD/HANDOVER/CLAIMS/WORKLIST rows intact.
+- (07:58Z) OWNER rows ~08:12Z (servant-talk suspicion rule → D BUILD) + ~08:14Z (no idle account; robot 2→1 day → F runs robot life runners + fixer; E/B hand F their queues). Worklist +1 (26: servant/etiquette relationship effects, D).
