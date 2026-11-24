@@ -17,6 +17,8 @@
        WORKER=<url> the co-op Worker (default the LIVE one, https://ctm-coop.victoria-tntt.workers.dev)
        CAP=10800  wall seconds per seat-life (then that life is ended by the harness: type «cap», listed apart, not a game bug)
        PCAP=0     wall seconds per pair (0 = none) · STUCK=240 s with no room week step = stuck (bug + fresh room for the rest)
+       FLUSH=4    write the .json + .md every N room weeks (also after every kiếp and on SIGTERM/INT/HUP; 0 = only those) · RESUME=<the run's .json>
+                  same args: finished pairs kept, a partial pair goes on from its kiếp count · NEGTRAP=1 names the writer of a stat that goes < 0
        RTW=4      weeks between save round-trips (each seat's save → load → save in a solo scratch page; 0 = off)
        REJOIN=6   room week at which the guest reloads once per room (rejoin time, LAG set; 0 = off)
  WHAT A PAIR DOES (reuses dev/test/coop-bot.js: mk / STEP / BUOI / WORLD, the shared coop-clear taps)
@@ -34,6 +36,9 @@
        device (fold = X, ipad = Y) and per game-year, rejoin ms; misses of dev/test/play-perf-budget.json «coop*» = lag bugs
  RESULTS JSON: {pairs:[{job, lives:[{seat,player,dev,tp:{origin,road},kiep,life (robot10 tally),bugs}], lag:{years:[…], run, rejoin}, bugs}]}
  */
+/* NEGTRAP=1 (fixer #2): a setter on S.bac / S.sung / S.danh / S.suc records the call stack the moment one goes below 0 → the 'number' bug detail names the writer */
+const NEGTRAP=()=>{window.__neg=[];setInterval(()=>{try{if(typeof S!=='object'||!S||S.__nt)return;Object.defineProperty(S,'__nt',{value:1,enumerable:false});
+ for(const k of ['bac','sung','danh','suc']){let v=S[k];Object.defineProperty(S,k,{enumerable:true,configurable:true,get(){return v},set(x){if(typeof x==='number'&&x<0&&!(v<0)){const st=new Error().stack.split('\n').slice(2,7).map(l=>l.trim().replace(/^at /,'').replace(/ \(.*:(\d+):\d+\)$/,':$1')).join(' < ');window.__neg.push(k+'='+x+' @ '+st);if(window.__neg.length>20)window.__neg.shift()}v=x}})}}catch(e){}},100)};
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),os=require('os');
 const M=__dirname,REPO=path.join(M,'..','..'),T=path.join(REPO,'dev','test');
 const CB=require(path.join(T,'coop-bot.js'));const {serve,BASE}=require(path.join(T,'coop-serve.js'));
@@ -42,7 +47,7 @@ const BUDGET=JSON.parse(fs.readFileSync(path.join(T,'play-perf-budget.json'),'ut
 const [PF,PT,KA,OUT0]=process.argv.slice(2);
 const OUT=path.resolve(OUT0||path.join(REPO,'dev','handover','robot'));
 const E=process.env;const SEED=+E.SEED||1,SWAP=E.SWAP==='1',PAR=+E.PAR||1,WURL=E.WORKER||CB.WURL,CAP=(+E.CAP||10800)*1e3,PCAP=(+E.PCAP||0)*1e3,
- STUCK=(+E.STUCK||240)*1e3,RTW=E.RTW==null?4:+E.RTW,REJ=E.REJOIN==null?6:+E.REJOIN;
+ STUCK=(+E.STUCK||240)*1e3,FL=E.FLUSH==null?4:+E.FLUSH,RTW=E.RTW==null?4:+E.RTW,REJ=E.REJOIN==null?6:+E.REJOIN;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
 const NOISE=/Failed to load resource|net::ERR_|favicon|navigator\.vibrate/;
 const DEVS={fold:[755,1000],ipad:[1180,820]};
@@ -62,7 +67,7 @@ function tpOf(R,O,n,l,who){const i=n-1+(SEED-1)*7,k=l-1;/* SEED shifts the whole
 /* ---- page helpers ---- */
 const TICK=()=>{const c=__co();const R=window.__r10;let life=null;if(R&&R.life){life=R.life;R.life=null;R.steps=[];R.maxR=-1;
   try{const z=v=>Array.isArray(v)?[]:v&&typeof v==='object'?Object.fromEntries(Object.keys(v).map(k=>[k,typeof v[k]==='number'?0:z(v[k])])):typeof v==='number'?0:v===null?null:v;for(const k in R.m)R.m[k]=k==='die'?null:z(R.m[k])}catch(e){}}
- let bad=[];if(typeof S!=='undefined'&&S&&!S.dead){for(const k of ['sung','danh','bac','suc','duc','sac','tai','tamco','th','hh','mat','an'])if(S[k]!==undefined&&(typeof S[k]!=='number'||isNaN(S[k])||(k!=='th'&&k!=='hh'&&S[k]<0)||S[k]>(k==='bac'?1e6:100)))bad.push(k+'='+S[k])}
+ let bad=[];if(typeof S!=='undefined'&&S&&!S.dead){for(const k of ['sung','danh','bac','suc','duc','sac','tai','tamco','th','hh','mat','an'])if(S[k]!==undefined&&(typeof S[k]!=='number'||isNaN(S[k])||(k!=='th'&&k!=='hh'&&S[k]<0)||S[k]>(k==='bac'?1e6:100)))bad.push(k+'='+S[k]+((window.__neg||[]).filter(x=>x.startsWith(k+'=')).slice(-1).map(x=>' · writer '+x)[0]||''))}
  return{life,bad,week:c.week,key:c.week+':'+(typeof S!=='undefined'&&S?S.buoi||0:'-'),dead:!!(typeof S!=='undefined'&&S&&S.dead),year:typeof S!=='undefined'&&S?S.year:null,
   frozen:c.frozen,waiting:c.waiting,world:c.world,seat:c.seat,origin:typeof S!=='undefined'&&S&&S.origin?S.origin.k:null}};
 const ONE=`(()=>{const k=(${TICK.toString()})();const t=(${CB.CLR.TAP.toString()})();if(t==='x')return{k,r:'x'};let r;try{r=(${CB.STEP.toString()})()}catch(e){r='err:'+e.message}return{k,r}})()`;
@@ -76,13 +81,19 @@ const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a
  try{quiet=true;deser(JSON.parse(s));quiet=false;const d=ser();delete d.at;const s2=JSON.stringify(d);return s2===s?'':(dp(JSON.parse(s),JSON.parse(s2),'save')||'')}catch(e){quiet=false;return 'throws: '+e.message}};
 
 /* ---- one pair (one room; a stuck room ends and the rest of the kiếp go on in a fresh room) ---- */
-async function pair(job,TP){const t0=Date.now();const bugs=new Map();const out={job,lives:[],lag:{years:[],rooms:[],rejoin:[]},rooms:0,t:{}};
+/* incremental save (fix #2, runners' containers get recycled): every pair in play is in LIVE; FLUSHF() writes the .json + .md of done AND live
+   pairs (live ones marked partial) after every kiếp, every FLUSH room weeks (default 4) and on SIGTERM/SIGINT/SIGHUP. RESUME=<old .json>: same tag,
+   finished pairs kept, a partial pair goes on from its kiếp count (lives, LAG rows, bugs carried over; the kiếp in play when it died is replayed). */
+const LIVE=new Map();let FLUSHF=()=>{};
+async function pair(job,TP,prev){const t0=Date.now();const bugs=new Map();const out={job,lives:[],lag:{years:[],rooms:[],rejoin:[]},rooms:0,t:{}};
+ if(prev){out.lives=prev.lives||[];out.lag=prev.lag||out.lag;out.rooms=prev.rooms||0;out.t.prev=(prev.t&&prev.t.total)||0;for(const b of prev.bugs||[])bugs.set(b.type+'|'+String(b.msg).slice(0,160),Object.assign({},b))}
+ out._bugs=bugs;out._t0=t0;LIVE.set(job.id,out);
  const bug=(type,msg,detail,extra)=>{const k=type+'|'+String(msg).slice(0,160);const x=bugs.get(k);if(x){x.n++;return x}const y=Object.assign({type,msg:String(msg).slice(0,300),detail:String(detail||'').slice(0,600),n:1,at:job.id},extra||{});bugs.set(k,y);return y};
- const P={X:{name:'X',dev:'fold',n:0,need:job.kiep},Y:{name:'Y',dev:'ipad',n:0,need:job.kiep}};
+ const P={X:{name:'X',dev:'fold',n:0,need:job.kiep},Y:{name:'Y',dev:'ipad',n:0,need:job.kiep}};for(const l of out.lives)if(P[l.player])P[l.player].n=Math.max(P[l.player].n,l.kiep|0);
  const tpNext=who=>tpOf(TP.R,TP.O,job.pair,Math.min(P[who].n+1,99),who);
  while((P.X.n<job.kiep||P.Y.n<job.kiep)&&!(PCAP&&Date.now()-t0>PCAP)){out.rooms++;const r=await room(job,TP,P,tpNext,bug,out).catch(e=>{bug('harness','room error: '+String(e.message).split('\n')[0],String(e.stack).slice(0,400));return 'err'});
   if(r==='err'&&out.rooms>=3&&!P.X.n&&!P.Y.n)break;if(out.rooms>job.kiep*3)break}
- out.bugs=[...bugs.values()];out.t.total=Date.now()-t0;return out}
+ LIVE.delete(job.id);out.bugs=[...bugs.values()];out.t.total=Date.now()-t0+(out.t.prev||0);delete out._bugs;delete out._t0;return out}
 
 async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
  const host=SWAP?P.Y:P.X,guest=SWAP?P.X:P.Y;let ret='ok';
@@ -90,7 +101,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
   for(const [pl,nm] of [[host,'A'],[guest,'B']]){const o=await CB.mk(b,nm,DEVS[pl.dev],WURL);o.pl=pl;pl.o=o;seat[nm]=o;
    /* SEEDED=1 only for a solo-like repro: a seeded Math.random repeats the co-op message / client ids across rooms and reloads → the room
       stalls (seen: idle 676 steps per week, rejoin never back) */
-   if(E.SEEDED==='1')await o.ctx.addInitScript(SEEDJS(hash(job.id+':'+pl.name+':'+out.rooms+':'+SEED)));await o.ctx.addInitScript(H.WSLOG);await o.ctx.addInitScript(PP.INIT);
+   if(E.SEEDED==='1')await o.ctx.addInitScript(SEEDJS(hash(job.id+':'+pl.name+':'+out.rooms+':'+SEED)));await o.ctx.addInitScript(H.WSLOG);if(E.NEGTRAP==='1')await o.ctx.addInitScript(NEGTRAP);await o.ctx.addInitScript(PP.INIT);
    o.lastBad='';o.press={};}
   const A=seat.A,B=seat.B;
   /* the scratch page (solo, no room) for the save round-trips */
@@ -130,7 +141,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
    for(const o of [A,B]){await o.p.evaluate(PP.RESET).catch(()=>{});await o.p.evaluate(()=>{window.__wsl.length=0}).catch(()=>{})}rm.yr={t:Date.now(),turns:[],year:null}};
   const lifeDone=async(o,life)=>{const pl=o.pl;pl.n++;const rec={seat:o===A?'host':'guest',player:pl.name,dev:pl.dev,tp:o.tp,kiep:pl.n,extra:pl.n>pl.need,life,room:code,ms:Date.now()-o.t0,week:await o.p.evaluate(()=>__co().week).catch(()=>null)};out.lives.push(rec);
    console.log(`  ${job.id} ${pl.name}(${rec.seat}, ${pl.dev}) kiếp ${pl.n}${rec.extra?' (extra)':''}: ${o.tp.origin}/${o.tp.road} → ${life&&life.id} [${life&&life.group}${life&&life.cause?': '+String(life.cause).slice(0,50):''}] · max ${life&&(life.maxRankN||life.maxRank)} · ${life&&life.years} y · ${(rec.ms/6e4).toFixed(1)} min`);
-   const tp=tpNext(pl.name);o.tp=tp;o.t0=Date.now();await o.p.evaluate(SETTP,tp).catch(()=>{})};
+   const tp=tpNext(pl.name);o.tp=tp;o.t0=Date.now();await o.p.evaluate(SETTP,tp).catch(()=>{});try{FLUSHF()}catch(e){console.error('flush',e.message)}};
   /* ---- play ---- */
   while(P.X.n<P.X.need||P.Y.n<P.Y.need){
    if(PCAP&&Date.now()-rm.t0>PCAP)break;
@@ -140,7 +151,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
    const res=await Promise.all([A,B].map(o=>o.p.evaluate(ONE).catch(e=>({k:{err:e.message},r:''}))));
    for(const [o,{k,r}] of [[A,res[0]],[B,res[1]]]){if(k.err){if(/closed|crash/i.test(k.err)){bug('crash','page closed / crashed ('+o.pl.dev+')',k.err);return 'err'}continue}
     o.k=k;if(k.life)await lifeDone(o,k.life);
-    for(const s of k.bad){const x=bug('number','stat out of range: '+s.replace(/=.*/,''),s+' · '+o.pl.dev+' '+(o===A?'host':'guest')+' week '+k.week);if(x.n===1)x.save=await o.p.evaluate(()=>window.__r10&&window.__r10.lastSave).catch(()=>null)}
+    for(const s of k.bad){const x=bug('number','stat out of range: '+s.replace(/=.*/s,''),s+' · '+o.pl.dev+' '+(o===A?'host':'guest')+' week '+k.week);if(x.n===1)x.save=await o.p.evaluate(()=>window.__r10&&window.__r10.lastSave).catch(()=>null)}
     /* her life is over the wall cap: the harness ends it (type cap, not a game finding) */
     if(!k.dead&&Date.now()-o.t0>CAP)await o.p.evaluate(()=>{try{die('Thử: robot hết giờ')}catch(e){}}).catch(()=>{});
     if(E.DBG){o.hist=o.hist||{};const hk=String(r).slice(0,24);o.hist[hk]=(o.hist[hk]||0)+1}
@@ -158,7 +169,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
       if((pa.fst&&pa.fst!==pb.mst)||(pb.fst&&pb.fst!==pa.mst)){rm.statLag++;bug('coop-stat','the friend\'s Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)',`buổi ${pa.key}: host sees guest ${pa.fst} (guest ${pb.mst}) · guest sees host ${pb.fst} (host ${pa.mst})`)}}}}
    /* a room week both have passed: world compare (coop-bot WORLD), year cut for the LAG set, save round-trip, rejoin */
    const wk=Math.min(A.k.week,B.k.week);
-   if(wk>wk0){wk0=wk;lastStep=Date.now();rm.weeks++;await sleep(300);
+   if(wk>wk0){wk0=wk;lastStep=Date.now();rm.weeks++;if(FL&&rm.weeks%FL===0)try{FLUSHF()}catch(e){console.error('flush',e.message)}await sleep(300);
     if(E.DBG){console.log('  week '+wk+' '+((Date.now()-(rm.wt||rm.t0))/1e3).toFixed(0)+' s · host '+JSON.stringify(A.hist)+' · guest '+JSON.stringify(B.hist));A.hist={};B.hist={};rm.wt=Date.now()}
     const [a,c]=[await A.p.evaluate(CB.WORLD).catch(()=>null),await B.p.evaluate(CB.WORLD).catch(()=>null)];
     if(a&&c&&!a.me.dead&&!c.me.dead){const d=[];if(String(a.date)!==String(c.date))d.push(['date differs',`${a.date} vs ${c.date}`]);if(String(a.emp)!==String(c.emp))d.push(['Emperor differs',`${a.emp} vs ${c.emp}`]);if(a.th!==c.th)d.push(['Thái hậu alive/dead differs','']);
@@ -198,21 +209,25 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
  const b=await chromium.launch();const R=await roads(b);await b.close();
  const O=(E.ORIGINS?E.ORIGINS.split(','):Object.keys(R)).filter(k=>R[k]);if(!O.length){console.error('no origin; the game has: '+Object.keys(R).join(' '));process.exit(2)}
  const TP={R,O};const K=+KA||1;const jobs=[];for(let n=+PF;n<=+(PT||PF);n++)jobs.push({pair:n,kiep:K,swap:SWAP,seed:SEED,id:`coop-p${String(n).padStart(2,'0')}${SWAP?'s':''}-S${SEED}`});
- const stamp=new Date().toISOString().slice(0,16).replace(/[-:]/g,'').replace('T','-');const tag=`coop-${stamp}-p${PF}-${PT||PF}${SWAP?'-s':''}`;
+ const stamp=new Date().toISOString().slice(0,16).replace(/[-:]/g,'').replace('T','-');let tag=`coop-${stamp}-p${PF}-${PT||PF}${SWAP?'-s':''}`;
+ const PREV=new Map();if(E.RESUME){const J=JSON.parse(fs.readFileSync(E.RESUME,'utf8'));tag=J.run.tag;for(const x of J.pairs||[])PREV.set(x.job.id,x);console.log('RESUME '+E.RESUME+': '+[...PREV.values()].map(x=>x.job.id+(x.partial?' partial ':' done ')+x.lives.length+' lives').join(' · '))}
  fs.mkdirSync(path.join(OUT,'saves'),{recursive:true});const T0=Date.now();
  console.log(`ROBOT-10 CO-OP pairs ${PF}-${PT||PF} · ${K} kiếp per seat · ${SWAP?'Y (iPad) hosts':'X (Fold) hosts'} · seed ${SEED} · ${PAR} parallel · origins ${O.join(' ')} · Worker ${WURL}`);
- const done=[];let k=0;const roomy=async()=>{for(let w=0;w<60&&os.freemem()<3e9;w++)await sleep(5000)};
- const save=()=>fs.writeFileSync(path.join(OUT,tag+'.json'),JSON.stringify({run:{tag,argv:process.argv.slice(2),seed:SEED,swap:SWAP,worker:WURL,origins:O},pairs:done.map(x=>Object.assign({},x,{bugs:x.bugs.map(b=>Object.assign({},b,{save:undefined}))}))},null,1));
+ const done=[];for(const j of jobs.slice()){const x=PREV.get(j.id);if(x&&!x.partial){done.push(x);jobs.splice(jobs.indexOf(j),1)}}const planned=jobs.length+done.length;let k=0;const roomy=async()=>{for(let w=0;w<60&&os.freemem()<3e9;w++)await sleep(5000)};
+ const parts=()=>done.concat([...LIVE.values()].map(o=>Object.assign({},o,{_bugs:undefined,_t0:undefined,partial:true,bugs:[...o._bugs.values()],t:{total:Date.now()-o._t0+(o.t.prev||0)}})));
+ const save=(ps)=>{const f=path.join(OUT,tag+'.json');fs.writeFileSync(f+'.tmp',JSON.stringify({run:{tag,argv:process.argv.slice(2),seed:SEED,swap:SWAP,worker:WURL,origins:O},pairs:ps.map(x=>Object.assign({},x,{bugs:x.bugs.map(b=>Object.assign({},b,{save:undefined}))}))},null,1));fs.renameSync(f+'.tmp',f)};
+ FLUSHF=()=>{const ps=parts();report(ps.slice(),{length:planned,0:{kiep:K}},tag,Date.now()-T0,true);save(ps)};/* report first: it names the repro saves (saveFile) the .json keeps */
+ for(const sg of ['SIGTERM','SIGINT','SIGHUP'])process.on(sg,()=>{try{FLUSHF();console.log('flushed on '+sg)}catch(e){console.error(e)}process.exit(130)});
  await Promise.all(Array.from({length:Math.min(PAR,jobs.length)},async(_,wi)=>{if(wi)await sleep(wi*20000);while(k<jobs.length){await roomy();const j=jobs[k++];let r;
-  try{r=await pair(j,TP)}catch(e){r={job:j,lives:[],lag:{years:[],rooms:[],rejoin:[]},bugs:[{type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],detail:String(e.stack).slice(0,300),n:1}],t:{total:0}}}
-  done.push(r);save();console.log(`${j.id}: ${r.lives.length} lives · ${r.bugs.length} bugs · ${(r.t.total/6e4).toFixed(1)} min`)}}));
- report(done,jobs,tag,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
+  try{r=await pair(j,TP,PREV.get(j.id))}catch(e){r={job:j,lives:[],lag:{years:[],rooms:[],rejoin:[]},bugs:[{type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],detail:String(e.stack).slice(0,300),n:1}],t:{total:0}}}
+  done.push(r);FLUSHF();console.log(`${j.id}: ${r.lives.length} lives · ${r.bugs.length} bugs · ${(r.t.total/6e4).toFixed(1)} min`)}}));
+ report(done,{length:planned,0:{kiep:K}},tag,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
 
-function report(done,jobs,tag,ms){done.sort((a,b)=>a.job.pair-b.job.pair);
+function report(done,jobs,tag,ms,quiet){done.sort((a,b)=>a.job.pair-b.job.pair);
  const all=new Map();for(const r of done)for(const b of r.bugs){const k=b.type+'|'+b.msg.replace(/\((host|guest)\)|\[(host|guest) (fold|ipad)\] /g,'');const x=all.get(k)||{type:b.type,msg:b.msg,pairs:[],n:0,ex:b};if(!x.pairs.includes(r.job.id))x.pairs.push(r.job.id);x.n+=b.n;all.set(k,x)}
  const ORDER=['crash','stuck','js','coop-world','coop-room','coop-rejoin','save','number','word','coop-where','coop-pos','coop-stat','lag','harness'];
  const bl=[...all.values()].sort((a,b)=>(ORDER.indexOf(a.type)+1||99)-(ORDER.indexOf(b.type)+1||99)||b.pairs.length-a.pairs.length);
- let i=0;const saveOf=x=>{if(!x.ex.save)return'';const f=path.join('saves',`${tag}-${String(++i).padStart(3,'0')}.json`);fs.writeFileSync(path.join(OUT,f),typeof x.ex.save==='string'?x.ex.save:JSON.stringify(x.ex.save));return f};
+ const saveOf=x=>{if(!x.ex.save)return x.ex.saveFile||'';const f=path.join('saves',`${tag}-${hash(x.type+'|'+x.msg).toString(36)}.json`);if(!fs.existsSync(path.join(OUT,f)))fs.writeFileSync(path.join(OUT,f),typeof x.ex.save==='string'?x.ex.save:JSON.stringify(x.ex.save));x.ex.saveFile=f;return f};/* stable name per bug: a flush rewrites the same file */
  const lives=done.flatMap(r=>r.lives.map(l=>Object.assign({pair:r.job.id},l)));
  const caps=lives.filter(l=>l.life&&/robot hết giờ/.test(l.life.fate||''));
  const yrs=done.flatMap(r=>r.lag.years.map(y=>Object.assign({pair:r.job.id},y)));
@@ -229,4 +244,4 @@ function report(done,jobs,tag,ms){done.sort((a,b)=>a.job.pair-b.job.pair);
   ...yrs.map(y=>{const m=y.metrics,f=y.dev.fold||{},p=y.dev.ipad||{};return`| ${y.pair} | ${y.room} | ${y.year}${y.final?' (end)':''} | ${y.min} | ${y.turns} | ${m.coopTurnP95} | ${m.coopActionP95} | ${m.coopSyncKBMax} | ${m.coopKBPerMin} | ${m.coopResendPerMin} | ${m.coopLongTasksPerMin} | ${m.coopLongTaskMax} | ${f.kbPerMin} · ${f.longTasksPerMin} | ${p.kbPerMin} · ${p.longTasksPerMin} |`}),'',
   '## Rooms','','| pair | room | host | weeks | buổi | min | turn p95 ms | NPC place diffs | friend-position diffs | friend-stat lags | rejoin ms |','|---|---|---|---|---|---|---|---|---|---|---|',
   ...done.flatMap(r=>r.lag.rooms.map(m=>`| ${r.job.id} | ${m.code} | ${m.host} | ${m.weeks} | ${m.buoi} | ${m.min} | ${m.turnP95} | ${m.whereDiff} | ${m.posDiff} | ${m.statLag} | ${(r.lag.rejoin.find(x=>x.room===m.code)||{ms:''}).ms} |`)),''].join('\n');
- const f=path.join(OUT,tag+'.md');fs.writeFileSync(f,md);console.log('bug file: '+f+' · '+bl.length+' distinct bugs')}
+ const f=path.join(OUT,tag+'.md');fs.writeFileSync(f,md);if(!quiet)console.log('bug file: '+f+' · '+bl.length+' distinct bugs')}
