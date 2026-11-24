@@ -152,8 +152,9 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
   if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
   const ak=evActorKey(m);
   const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(BAL.spread.dawnOpt)||BAL.spread.dawnOpt>=100);/* FLIGHT-DAYQ: BAL odds (was roll(50)); roll() caps at BAL.odds.hi, so >=100 = always; roll still drawn exactly as before (co-op seats draw in step) */
-  const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
-  if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
+  const other=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last);const block=other||atDayStart;
+  /* FLIGHT-DAYQ: a card held ONLY because it is the first buổi of a day is never dropped for a full hold (it moves to a later buổi; owner 24/11 (5)) */
+  if(block){Q.splice(i,1);i--;if((EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)||!other)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
   keepOpt=true}
  if(dry)return;
  const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
