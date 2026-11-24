@@ -9,7 +9,7 @@ const [,,OUT='/tmp/warm',DEV='fold']=process.argv;fs.mkdirSync(OUT,{recursive:tr
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const keys=g=>g.evaluate(async()=>(await (await caches.open('ctm-assets')).keys()).map(q=>q.url.replace(/^.*?(img\/|audio\/)/,'$1')));
 const ready=g=>g.waitForFunction(()=>typeof start==='function'&&window.KLOAD&&['done','all','skipped'].includes(KLOAD.phase)&&!document.getElementById('kload'),null,{timeout:600000});
-(async()=>{const srv=await D.serveRoot(process.env.ROOT);const b=await chromium.launch();const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'allow'});const p=await ctx.newPage();const R={};
+(async()=>{const srv=await D.serveRoot(process.env.ROOT);const b=await chromium.launch();const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'allow'});const p=await ctx.newPage();await require('./lib/veil').guard(p);const R={};
  let g=await D.openHost(p,srv.url);
  for(let k=0;k<40;k++){const ph=await g.evaluate(()=>window.KLOAD&&KLOAD.phase).catch(()=>null);if(ph==='ask'){await g.evaluate(()=>{const b=document.querySelector('[data-kl="web"]');if(b)b.click()});break}if(ph&&ph!=='check')break;await sleep(500)}
  await ready(g);await sleep(1500);

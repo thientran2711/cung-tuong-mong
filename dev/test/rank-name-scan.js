@@ -3,7 +3,7 @@
    full person names written WITHOUT their title (kitRankNamePaint dry run). Run twice in one page: paint OFF (before) and ON (after).
    Writes dev/review/rank-name-scan.md. usage: NODE_PATH=$(npm root -g) node dev/test/rank-name-scan.js <url> [turns=40] */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const path=require('path');const [,,URL,TN]=process.argv;
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1500);

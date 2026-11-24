@@ -8,7 +8,7 @@ async function skipLoader(p){for(let i=0;i<300;i++){const s=await p.evaluate(()=
   return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')return;await sleep(500)}}
 (async()=>{const b=await chromium.launch();
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,isMobile:W<1100});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});await skipLoader(p);await sleep(1500);
   await p.evaluate(()=>{try{kitReward=function(){}}catch(e){}window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await sleep(1500);
 const clearAll=async()=>{for(let i=0,quiet=0;i<30&&quiet<3;i++){const n=await p.evaluate(()=>{let h=0;const md=document.getElementById('modal');Q.length=0;if(md&&!md.hidden){md.hidden=true;h++}

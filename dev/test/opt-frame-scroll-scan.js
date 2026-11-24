@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];let ST=null;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DSF||1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;window.__rs=v=>{s=v};Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
-  const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitScrollCues==='function',null,{timeout:120000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});
   await p.waitForFunction(()=>typeof EVART!=='undefined'&&EVART&&EVART.categories,null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(2500);

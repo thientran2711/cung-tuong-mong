@@ -8,7 +8,7 @@
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME||'/usr/bin/google-chrome'});const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\//,r=>/127\.0\.0\.1|localhost/.test(r.request().url())?r.continue():r.abort());
- const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:0});await new Promise(r=>setTimeout(r,1500));
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;render()});
  const R=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const ov=document.getElementById('ov');const out=[];

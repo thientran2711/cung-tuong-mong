@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const fs=require('fs');const D=require('.
 const [,,OUT='/tmp/lp',DEVS='fold,ipadAir',MBPS='5']=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const srv=await D.serveRoot(process.env.ROOT);const b=await chromium.launch();const R={};
- for(const dev of DEVS.split(',')){const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:process.env.SW?'allow':'block'});const p=await ctx.newPage();const errs=[],e404=[];
+ for(const dev of DEVS.split(',')){const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:process.env.SW?'allow':'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[],e404=[];
   p.on('pageerror',e=>errs.push(e.message));p.on('response',r=>{if(r.status()===404)e404.push(r.url().split('/').slice(-2).join('/'))});
   let game=await D.openHost(p,srv.url);
   /* iPad / iPhone Safari: the choose-first notice (KIT 35.1) → play here */

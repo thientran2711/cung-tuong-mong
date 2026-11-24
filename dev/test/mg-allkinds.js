@@ -27,7 +27,7 @@ const OLD={nghe:{cross:6500},truyen:{lim:12000},mac:{lim:10000},thoico:{lim:8000
 /* the knob that must move toward HARDER as the gap d rises: +1 = the value grows when harder, −1 = it shrinks */
 const HARD={nghe:['cross',-1],truyen:['lim',-1],mac:['lim',-1],thoico:['lim',-1],thu_choi:['ms',-1],thu_tam:['k',1],tuoi:['f',-1]};
 (async()=>{const src=fs.readFileSync(path.resolve(URL0.replace(/^file:\/\//,'')),'utf8');
- const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const r=await p.evaluate(async({MG11,HARD})=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
   const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};

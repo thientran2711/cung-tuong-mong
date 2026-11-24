@@ -2,7 +2,7 @@
    usage: node dev/test/house-scan.js <url>   (run on main's build = before, on the branch build = after). Pictures are not loaded. */
 const {chromium}=require('./lib/pw-roulette');const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(Object.assign({args:['--disable-dev-shm-usage','--blink-settings=imagesEnabled=false']},px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{}));const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block',ignoreHTTPSErrors:true});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(240000);
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(240000);
  await p.goto(process.argv[2],{waitUntil:'domcontentloaded',timeout:240000});
  for(let i=0;i<200;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
  const r=await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=true;Q.length=0;

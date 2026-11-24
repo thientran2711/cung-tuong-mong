@@ -8,7 +8,7 @@ const HTML=process.argv[2]||'dev/index.html';
  const typed=(src.match(/SK=5\b|tính 5\/10|return 5\b|raw:5\b|catch\(e\)\{return 5\}/g)||[]);
  ok(!typed.length,'4 jpma: no typed quick value / fallback 5 left (SK=5, «tính 5/10», return 5, raw:5)',typed);
  const sites=(src.match(/quick:(pmQuick\(|QK\b)/g)||[]).length;ok(sites>=4,'4 every pm quick option reads pmQuick (Cùng chơi, NPC Cờ, live Cờ, live timed)',{sites});
- const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;window.kitNotice=undefined;window.ptOn=()=>false});
  const r=await p.evaluate(()=>{const o={bad:[],byR:{}};const kinds=["co","dan","ve","tho","hoa"].filter(k=>KG82_KIND[k]);

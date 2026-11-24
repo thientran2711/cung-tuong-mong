@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const a=process.argv.slice(2);const U=a[0];const VPS=(a.slice(1).length?a.slice(1):['755x1000','1180x820']).map(s=>s.split('x').map(Number));
 const PX=process.env.HTTPS_PROXY||'';let bad=0;
 (async()=>{const b=await chromium.launch({args:['--no-sandbox'],proxy:PX?{server:PX,bypass:'127.0.0.1,localhost'}:undefined});
- for(const [w,h] of VPS){const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:w<1100,ignoreHTTPSErrors:true,reducedMotion:'reduce'});const p=await ctx.newPage();
+ for(const [w,h] of VPS){const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:w<1100,ignoreHTTPSErrors:true,reducedMotion:'reduce'});const p=await ctx.newPage();await require('./lib/veil').guard(p);
   await p.goto(U,{timeout:180000,waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.querySelector('#title'),null,{timeout:180000});
   await p.evaluate(()=>{if(typeof kitRoulette==='function')kitRoulette=function(o){try{o&&o.done&&o.done()}catch(e){}};SLOT=1;$("title").hidden=true;start()});
   await p.waitForFunction(()=>document.querySelector('#modal .kpopts button'),null,{timeout:120000});await p.waitForTimeout(2500);

@@ -25,7 +25,7 @@ const HELP=`window.__sb3={W:t=>new Promise(r=>setTimeout(r,t)),
  texts(root){const L=[];const w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const p=n.parentElement;if(!p||/SCRIPT|STYLE/.test(p.tagName)||!n.nodeValue.trim())continue;if(!p.getClientRects().length)continue;L.push(n)}return L},
  itemNames(){const L=[];for(const k in IT)if(IT[k].n)L.push(IT[k].n);if(typeof WD_ITEMS==='object')for(const k in WD_ITEMS)if(WD_ITEMS[k].n)L.push(WD_ITEMS[k].n);return [...new Set(L.filter(n=>/ /.test(n)&&/^\\p{Lu}\\p{Ll}/u.test(n)))]}};`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,hasTouch:true,isMobile:W<1000});await cache(ctx);
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
  const OUT={vp:VP,checks:{},info:{}};const C=(k,L)=>{OUT.checks[k]=(OUT.checks[k]||[]).concat(L||[])};
  const shot=async n=>{if(SHOTS){fs.mkdirSync(SHOTS,{recursive:true});await p.screenshot({path:`${SHOTS}/sb3-${W}x${H}-${n}.jpg`,type:'jpeg',quality:55})}};
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});

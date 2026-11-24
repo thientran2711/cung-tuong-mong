@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,KNOWN,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
- const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  if(process.env.LOCAL_W)await p.route(/img\/kit\/frame-[a-z0-9-]+-w\.webp/,r=>{const n=r.request().url().split('/').pop();const f=process.env.LOCAL_W+'/'+n;fs.existsSync(f)?r.fulfill({status:200,contentType:'image/webp',body:fs.readFileSync(f)}):r.continue()});
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:60000}).catch(()=>console.error('nostart',errs));await p.waitForTimeout(2000);
