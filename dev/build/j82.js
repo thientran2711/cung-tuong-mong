@@ -121,7 +121,7 @@ function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefine
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
  else if(typeof pb==="function")KG82.backPre=pb;return d}
-function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
+function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.quit=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -156,10 +156,10 @@ const KG82_SKINS={};window.KG82_SKINS=KG82_SKINS;/* kind -> [{id,name,pal}] (the
 KG82.skin={id:"",name:"",pal:"son"};
 function kitMgSkinAdd(kind,id,o){o=o||{};if(!kind||!id||!/^[a-z0-9_]+$/.test(id))return null;const pal=KG82_PAL.includes(o.pal)?o.pal:"son";const L=KG82_SKINS[kind]||(KG82_SKINS[kind]=[]);
  let s=L.find(x=>x.id===id);if(!s){s={id};L.push(s)}s.name=o.name||"";s.pal=pal;return s}
-function kitMgSkinList(kind){return [{id:"",name:"",pal:"son"}].concat(KG82_SKINS[kind]||[])}
+function kitMgSkinList(kind){return [{id:"",name:"",pal:"son"}].concat(KG82_SKINS[kind]||KG82_SKINS[KG82_BOARDOF[kind]]||[])}
 /* sk = a skin object {id,pal} | an id of this kind | a palette word alone ("kim") | null (default) -> the resolved skin */
 function kitMgSkin(kind,sk){if(sk&&typeof sk==="object")return{id:/^[a-z0-9_]*$/.test(sk.id||"")?(sk.id||""):"",name:sk.name||"",pal:KG82_PAL.includes(sk.pal)?sk.pal:"son"};
- if(typeof sk==="string"&&sk){const f=(KG82_SKINS[kind]||[]).find(x=>x.id===sk);if(f)return{id:f.id,name:f.name,pal:f.pal};if(KG82_PAL.includes(sk))return{id:"",name:"",pal:sk}}
+ if(typeof sk==="string"&&sk){const f=(KG82_SKINS[kind]||KG82_SKINS[KG82_BOARDOF[kind]]||[]).find(x=>x.id===sk);if(f)return{id:f.id,name:f.name,pal:f.pal};if(KG82_PAL.includes(sk))return{id:"",name:"",pal:sk}}
  return{id:"",name:"",pal:"son"}}
 /* the file of picture n under the live skin (default art when no skin, or the skinned file is not on the CDN index) */
 function kg82SkinSrc(n,id){if(id==null)id=KG82.skin&&KG82.skin.id||"";const d=`img/kit/mg-${n}.webp`;if(!id)return d;
@@ -175,7 +175,9 @@ function kg82Img(n){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=K
 function kg82Ok(n){const i=kg82Img(n);return i.complete&&i.naturalWidth>0}
 /* contest board vs lesson room: KG82.ctx "thi" (startContest) | "hoc" (lessons, practice, works) */
 const KG82_HOC=["dan","co","tho","ve","mua","huong","theu","banh"];
-function kg82BgName(kind){return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
+/* KIT MG-SKIN board-of: a kind with no board painting of its own (kinh = chép kinh, may = may áo) is played on another kind's board; its skins ARE that board's skins (one table, read by kg82BgName + kitMgSkinList + kitMgSkin; KIT REQUEST «kinh / may board slot», Foreman F) */
+const KG82_BOARDOF={kinh:"ve",may:"ve"};window.KG82_BOARDOF=KG82_BOARDOF;
+function kg82BgName(kind){kind=KG82_BOARDOF[kind]||kind;return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
 /* cover-fit the board painting; ay = vertical anchor (1 = keep the bottom, where the play surface is); veil = soft wash for legibility */
 const KG82_BGC={};
 function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);
@@ -451,31 +453,27 @@ function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x
         caller's own clean-up for that back (jaudit works deck card: the card untaken); a caller with nothing charged sets backPre itself (jtd: its own
         «Thôi, để lúc khác · không tốn gì»); jaudit's pending cost for the unplayed game is dropped;
      1. KG82.back (a caller with nothing at stake, set right after kg82Open — Thử tay: back to the kind list, the kind not saved): the game closes, back() runs;
-        KG82.backAsk = the confirm lines asked first while a board is live (Thử tay: the rounds played of this kind are not kept);
+        (no confirm: owner OD 24/11 ~08:08Z «không có một lời nhắc nào về bất cứ hành động của tôi» — the rounds played of this kind are simply not kept);
      2. a result screen (jk4 kitOvBtn: #kg82ok / #kg92ok): presses it, the caller's own result applies (unchanged 32.10 behaviour); a screen whose
-        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it, no confirm;
-     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): a kit confirm «Bỏ cuộc?», then
+        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it at once;
+     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): NO confirm (OD 24/11 ~08:08Z), straight
         the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
         screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
-   KG82.quitAsk = the caller's own confirm lines when its lose result is not «0/10» (jtoil: Để mộc). Callers never draw their own back button;
-   kg82Close clears back / backAsk / quit / quitAsk / xdo. Test: node dev/test/mg-back.js. */
+   Callers never draw their own back button;
+   kg82Close clears back / quit / xdo. Test: node dev/test/mg-back.js. */
 function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
  const html=kitXHTML('data-kitx="kgback"',"Quay lại");if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}
  else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
  d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
-/* the confirm is the kit's (j79 kitConfirm on #modal); body.kg82cf (showModal rewrites #modal's own class) lifts it over the game layer #ov while it is open */
-function kg82Ask(lines,yes,onYes,title,no){if(typeof kitConfirm!=="function"){onYes();return}const B=document.body.classList,off=()=>B.remove("kg82cf");
- B.add("kg82cf");kitConfirm({title:title||(yes==="Bỏ cuộc"?"Bỏ cuộc?":"Quay lại?"),lines,yes,no:no||"Chơi tiếp",onYes:()=>{off();onYes()},onNo:off})}
 function kg82Back(){if(!kg82El())return;
  if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
   /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
   window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
- if(typeof KG82.back==="function"){const f=KG82.back,live=KG82.phase==="play"&&!KG82.tut&&KG82.run;
-  const go=()=>{kg82Close();try{f()}catch(e){console.error(e)}};if(live&&KG82.backAsk)kg82Ask(KG82.backAsk,"Quay lại",go);else go();return}
+ if(typeof KG82.back==="function"){const f=KG82.back;
+  kg82Close();try{f()}catch(e){console.error(e)}return}
  const ok=typeof kitOvBtn==="function"?kitOvBtn():null;if(ok){ok.click();return}
  if(typeof KG82.xdo==="function"){const f=KG82.xdo;f();return}
- const live=KG82.phase==="play"&&!KG82.tut&&typeof KG82.quit==="function";
- kg82Ask(KG82.quitAsk||[live?"Ván đang chơi dừng lại, tính như thua: 0/10 phần.":"Chưa chơi mà rời đi thì tính như bỏ cuộc: 0/10 phần.","Thưởng phạt theo đúng luật của việc này."],"Bỏ cuộc",kg82GiveUp)}
+ kg82GiveUp()}
 function kg82GiveUp(){const tb=document.getElementById("kgtback");if(KG82.tut&&tb)tb.click();
  if(KG82.phase==="play"&&typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
  const box=kg82Box(),go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&box.querySelector(KG82.ready.go)));
@@ -658,7 +656,6 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
-body.kg82cf #modal{z-index:40}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
 #kg82,#kg82 canvas,#kg82 button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}

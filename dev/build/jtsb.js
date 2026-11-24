@@ -132,7 +132,7 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
 
 /* the bully card (Giao / Không giao + more after the first time), both kinds: batnat (rank) and uyhiep (evidence, j78) */
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
- if(!want&&g<5&&!ev)return null;const o0=tsbBulO(a,S,ev);const nm=tsbNm(a);const hate=[];if((a.ghen||0)>=30)hate.push("ghen với ngươi");if(oan(a,S)>=15)hate.push("ôm oán ngươi");
+ if(!want&&g<5&&!ev)return null;const o0=tsbBulO(a,S,ev);const nm=tsbNm(a);const hate=[];if((a.ghen||0)>=30)hate.push("ghen với ngươi");if(oan(a,S)>=netTh(a,"oan"))hate.push("ôm oán ngươi");
  const what=want?`<b>${tsbItemN(want)}</b>${want.w?" (ngươi đang mặc)":""}`:`${g} lượng bạc`;
  const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md",data:typeof kitItemTap==="function"?kitItemTap({e:want}):""})}</div>`:"";
  const why=ev?`${tsbCap(nm)} nắm ${evG(a,S)} chứng cứ của ngươi, sai người đến nói: muốn chuyện yên thì nộp ${what}.`:`${tsbCap(nm)} cậy phẩm cao hơn ngươi${hate.length?` (nàng ${hate.join(", ")})`:""}, ${together(a,S)?"chặn ngươi giữa đường":"sai cung nữ đến tận cung ngươi"}, đòi ngươi nộp ${what}.`;
@@ -150,7 +150,7 @@ PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;
  return{t:`<p>${why}</p>${tile}${rep}`,o:O,stage:[a],headArt:tsbFitArt("hoi-lo"),title:ev?"Bị uy hiếp đòi của":"Bị ép nộp của"}};
 function tsbGiveBack(a){const L=(S.tsbLog||[]).filter(x=>x.how==="bị lấy"&&x.who===a.id&&!x.back);for(const x of L){const ix=(a.inv||[]).findIndex(e=>e.tsbFrom==="me"&&tsbItemN(e)===x.what);if(ix>=0){const e=a.inv.splice(ix,1)[0];delete e.tsbFrom;S.inv.push(e);x.back=1;return x.what}
   const m=String(x.what).match(/^(\d+) lượng/);if(m){const g=Math.min(+m[1],a.bac||0);ap(a,{bac:-g});apply({bac:g});x.back=1;return `${g} lượng bạc`}}return""}
-function tsbProtector(a){if(!S.thDead&&(S.th||0)>=40)return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=30&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
+function tsbProtector(a){if(!S.thDead&&(S.th||0)>=40)return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=netTh(v,"than")&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
 
 /* ---------------- 8. Ấn tượng đầu ---------------- */
 function tsbGrudge(v){/* only TRUE reasons, from the real numbers */const R0=[];const g=v.ghen||0,o=oan(v,S),f=aff(v,S);
@@ -173,7 +173,7 @@ PEND.tsbFirst=pp=>{if(!S)return null;const v=RV(pp.v);if(!v||!v.alive)return nul
  return{t:`<p>Lần đầu gặp ${nm}. ${say} ${act}</p><p class="past">Nhìn lời lẽ và thái độ thì nàng ${G.join(", ")}.</p>`,o:O,stage:[v],who:v,headArt:tsbFitArt("tham-hoi"),title:"Lần đầu gặp mặt"}};/* who: the speaker is HER (lines 2–3 showed the player's face) */
 /* NPCs: a newcomer meeting someone who already resents her gets the same cold first meeting (Danh / oán, no card) */
 (function(){if(typeof npcLearn!=="function")return;const n0=npcLearn;npcLearn=function(a,b){let first=false;try{first=b&&b!==S&&a&&a!==S&&!npcKnows(a,b)}catch(e){}const r=n0.apply(this,arguments);
- try{if(first&&(rivals||[]).includes(a)&&(rivals||[]).includes(b)&&(oan(a,b)>=15||aff(a,b)<=-15)){oanAdd(b,a,BAL.eff.jtsb.top);if(rkOf(a)>rkOf(b))ap(b,{danh:-1})}}catch(e){}return r}})();
+ try{if(first&&(rivals||[]).includes(a)&&(rivals||[]).includes(b)&&(oan(a,b)>=netTh(a,"oan")||aff(a,b)<=netTh(a,"ky"))){oanAdd(b,a,BAL.eff.jtsb.top);if(rkOf(a)>rkOf(b))ap(b,{danh:-1})}}catch(e){}return r}})();
 
 /* ---------------- 13. lửa do đèn nến / kẻ hầu lơ là: nguyên nhân thật, điềm báo trước ---------------- */
 function tsbFireBase(p){const se=typeof SEASON!=="undefined"?SEASON[S.month-1]:"";const dry=se==="Đông"||(S.wx&&(S.wx.k==="sun"||S.wx.k==="wind"));return dry?2.2:.8}
@@ -202,7 +202,7 @@ function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";/* the pet strip now sit
 /* ---------------- groups: she can do the same acts (person card), NPCs pick them by the same bands ---------------- */
 (function(){try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[1].push(k)};add("Hại nhỏ","batnat");add("Hại nhỏ","thaopet");add("Hại nặng","thathu");add("Hại nặng","phonghoa");
  if(!BANDS[1][2].includes("batnat"))BANDS[1][2].push("batnat","thaopet");if(!BANDS[2][2].includes("thathu"))BANDS[2][2].push("thathu","phonghoa")}catch(e){console.error("tsb groups",e)}})();
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!Array.isArray(O))return O;const b=bandOf(danger(v,t));const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!Array.isArray(O))return O;const b=bandVT(v,t);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
  const tr=traitsOf(v);const W={batnat:tr.includes("Kiêu ngạo")?1.6:.9,thaopet:.5,thathu:(t===S?effSac(S):effSac(t))>effSac(v)+10?1.3:.7,phonghoa:.6};
  for(const k in W){if(!allow.includes(k)||!ACT[k])continue;let ok=false;try{ok=ACT[k].ok(v,t)}catch(e){}if(ok){const w=W[k]*persW(v,k);if(w>0)O.push([k,w])}}}catch(e){}return O}})();
 
@@ -229,8 +229,8 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
   {n:"Đáp trả sắc sảo",fx:{},x:`${word(o)} · thành: Danh ${balSg(hi?BAL.eff.jtsb.danhDapHi:BAL.eff.jtsb.danhDap)} · kẻ hầu Thiện cảm ${balSg(BAL.eff.jtsb.loyalDap)} · hỏng: Danh ${balSg(BAL.eff.jtsb.danhDapFail)}${hi?` · Đức ${balSg(BAL.eff.jtsb.ducDapFail)}`:""} · kèm: nàng oán ngươi ${balSg(BAL.eff.jtsb.go_7)} · (${hi?"đáp vụng với người phẩm cao hơn thành ra hỗn; ":""}thành hay bại tùy Tâm cơ và Tài của ngươi)`,
    go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_7);v.tsbEasy=0;if(roll(o)){apply({danh:hi?BAL.eff.jtsb.danhDapHi:BAL.eff.jtsb.danhDap});tsbLoyal(BAL.eff.jtsb.loyalDap);log(`<span class="g">Ngươi đáp lại ${v.name} một câu sắc sảo; cung nhân đều phục.</span>`)}else{apply(hi?{danh:BAL.eff.jtsb.danhDapFail,duc:BAL.eff.jtsb.ducDapFail}:{danh:BAL.eff.jtsb.danhDapFail});log(`Ngươi đáp lại ${v.name} nhưng vụng lời, lại thành trò cười.`)}}}]}
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){let m=a0.apply(this,arguments);try{if(!m||!m.opts||!m.who||!m.who.w||m.who.w[0]!=="r")return m;let v=RV(m.who.w[1]);if(!v)return m;const h=String(m.h||"");
-  if(/mỉa mai/.test(h)){const e2=npwPick(liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined&&npw1Mot(x,S,"provoke")),x=>hostility(x,S));if(e2&&!tsbEasy(v)&&hostility(e2,S)>=hostility(v,S)){v=e2;m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
-  if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`thành: thiện cảm ${balSg(BAL.eff.jtsb.go_8)} · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi ${balSg(BAL.eff.jtsb.go_9)} (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,BAL.eff.jtsb.go_8);foes.forEach(x=>oanAdd(x,S,BAL.eff.jtsb.go_9))}},
+  if(/mỉa mai/.test(h)){const e2=npwPick(liveRivals(true).filter(x=>tsbEasy(x)&&bandVT(x,S)>=1&&!x.confined&&npw1Mot(x,S,"provoke")),x=>hostility(x,S));if(e2&&!tsbEasy(v)&&hostility(e2,S)>=hostility(v,S)){v=e2;m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
+  if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=netTh(x,"oan")||aff(x,v)<=netTh(x,"ky")));m.opts=[{n:"Nhận lời",fx:{},x:`thành: thiện cảm ${balSg(BAL.eff.jtsb.go_8)} · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi ${balSg(BAL.eff.jtsb.go_9)} (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,BAL.eff.jtsb.go_8);foes.forEach(x=>oanAdd(x,S,BAL.eff.jtsb.go_9))}},
     {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`thành: giữ sức, đứng ngoài chuyện riêng của nàng · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_10)}`,go:()=>relAdd(S,v,BAL.eff.jtsb.go_10)}];m.optLayout="rows";return m}
   if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`thành: nàng bớt oán ${balAb(BAL.eff.jtsb.go_11)} · thiện cảm ${balSg(BAL.eff.jtsb.go_12)} · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_11);relAdd(S,v,BAL.eff.jtsb.go_12)}},
     {n:"Lạnh lùng",fx:{},x:`thành: Danh ${balSg(BAL.eff.jtsb.danhGo_10)} (giữ uy, không để ai coi nhẹ) · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_13)} · nàng vẫn oán như cũ`,go:()=>{apply({danh:BAL.eff.jtsb.danhGo_10});relAdd(S,v,BAL.eff.jtsb.go_13)}}];m.optLayout="rows";return m}
