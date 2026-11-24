@@ -79,3 +79,59 @@ Co-op: NPC decisions run where they ran before (bcNpcAsk host-only palFix wrap; 
 **SẴN SÀNG KIỂM 0cf18edad63ac034b8e5f249c0aa9a62955092e5** (review/law1-audit)
 ## Act table (buttons, role × act) — re-run on LIVE
 (running; appended when done)
+
+## REVIEW r1 — PASS (BIG reviewer-lander session_01N1tNP2ZbYMtMYdedMue4Fk, opus, for Foreman B)
+PRIORITY #1 CHECK: reports/law1-audit.md first line | main dev/tools/role-parity-scan.js | review/law1-audit 0cf18eda | claims B (worker 2qbiASDh archived).
+START_CTX ≈ 4 % of 1M. Read: START_CORE (18 laws) + START_WORKER + START_REVIEWER, OD «(24/11 ~08:35Z, MAIN CHÍNH 116 chat) OWNER (verbatim)», briefs/b-law1-audit.md, this report.
+Branch review/law1-audit-r1 = 0cf18eda + merges of LIVE 35647d5e / 2308b425 / fd85907a / ac4790f0 + one reviewer fix. **PASS sha 18aca38902d8d936c3ce0189e5d1fd1ecf6792f7** (origin/main ac4790f0 is its ancestor → fast-forward).
+
+### (1) Gap table — honest and complete
+- Every family named in the order has a row (gifts given/received, likes/dislikes, per-nết thresholds, promotion routes, selection, endings/leaving/lãnh cung, knowledge/greeting/notices, ban cung, contests/mini-games, co-op, + wardrobe pawn). D / E / MAIN rows are only listed (OPEN or GAP with owner D/E/MAIN), nothing built for them.
+- Spot-checked in code, both directions (7 rows): (a) «Quà trúng sở ghét» GAP true — jdis.js:65-66 giveTo wrap fires only for `a===S`; (b) «Biết sở thích» GAP true — like knowledge lives only in S.likK (jdis.js:77) / mK, no NPC store; (c) Lãnh cung SAME true — jagacts3 p3Cold picks from coldActsOf(v) (HER cards); (d) Co-op ration GAP true — jagacts4.js:30/32 p4Lender / p4StealT skip `x.coop`; (e) contests SAME true — jmgt mgNpcRaw on the seat board, probe rank0 > rank6; (f) Ban cung «Tâu xin» SAME true — one bcAsk(p,…) for S and NPC (same odds / gains / losses); (g) Cầm cố GAP on LIVE true — LIVE wdMonth sold only (wdSell), no NPC pawn/redeem.
+- Note (not a fault): 4 rows are fixed text verdicts, not probes (Lãnh cung SAME, Co-op friend = a consort SAME, Tin báo EXEMPT, ngưỡng/promo/selection/leave OPEN) — each checked by hand above or owned by another lane.
+
+### (2) Laws on each B fix
+| fix | law 1 two-way | laws 2–3 equal value, gain+loss | law 4 BAL | law 6 real | law 7 / 9 wording, kit |
+|---|---|---|---|---|---|
+| Ban cung NPC «Nhận chỉ» | NPC now holds her «Nhận» (Đức +ok.ducTake) | her card unchanged; Nhận = gain-only (time cost), allowed | BAL.banCung.ok.ducTake | — | no new text / card |
+| Ban cung NPC humble ask by nết | NPC picks among HER 3 roads (humble / up / Nhận), same bcChoices + bcAsk | ask: gain Đức/Danh, loss Sủng/Danh + rival grudge (unchanged) | BAL.net.n.bcHumble, BAL.banCung.* | — | log line reuses bcAsk text |
+| NPC Cầm cố / Chuộc (j92) | wdPawn / wdRedeem / wdPawnMonth now for every consort | pawn: Bạc now, Bạc back to redeem, piece lost at expiry, leak Danh − | BAL.net.n.wdPawn, BAL.ag.why.wd.poor, WD | 6c: forfeited NPC piece goes to the item ledger market box (jil ilGuard wdPawnMonth → ilGone "pawn") — proven by the new test row | NPC leak → newsAdd text cổ trang, same as the sale text |
+| maid «Hầu bên cạnh chủ» | player maid now has it on her master's card when the master is away (NPC maid's asMisHome rule) | same SRVA.beside row (Chủ tin + / −) | SRVA.beside | — | existing option row (kit) |
+No new card / UI → no device shots needed (law 12 n/a). Note for a later job (not this branch, pre-existing): on her master's card the player maid keeps «Đấm lưng…» etc. when the master is away, while an NPC maid only gets them at home (jagstaff asOpts) — a small parity drift the act scan does not see (card vs place).
+
+### (4) Reviewer fix on review/law1-audit-r1 (e8a672b9)
+- j92 wdMonth: NPC pawn expiry and the NPC pawn/sell choice now run only in the world pass (`worldOn()`; co-op = host), like wdNpcRedeem already did. Before: the guest seat ran wdPawnMonth for every NPC copy → ilGuard could route an NPC piece into the GUEST's own item ledger (the coop dup family, jagwhy E44h T8). Her own expiry still runs on her seat.
+- dev/test/law1-audit.test.js: the NPC expiry row now also asserts law 6c (the forfeited piece is in S.il.box at "mkt", why "pawn"): bx0 0 → bx1 1.
+
+### (3) Tests — exact commands, output lines
+BARE head 0cf18eda (worktree /home/user/wt/l1r, dev/index.html assembled):
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `node dev/test/law1-audit.test.js index.html` → `law1-audit: 13/13 PASS`
+- `node dev/tools/role-parity-scan.js index.html --fam` → `LAW-1 FAMILIES: rows 22 · GAP 4 · D:Quà tặng/Có sở thích / sở ghét ; D:Quà tặng/Quà trúng sở ghét → mất thiện cảm ; D:Quà tặng/Biết sở thích người khác ; B:Co-op/Vay / lấy trộm khẩu phần`
+- `node dev/test/role-parity.test.js` → `ALL PASS` · `node dev/test/role-parity.test.js index.html` → `ALL PASS` (families: no new GAP row; open baseline ≤ 7 rows: 7; no NEW role-parity gap)
+- `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (299 names checked)` · `node dev/test/one-core-guard.js` → `PASS: one core …` (fails 0)
+- `node dev/test/coop-e2e.js <out>` → `142/142 passed` · `COOP_SWAP=1 node dev/test/coop-e2e.js <out>` → `142/142 passed`
+- `bash dev/tools/quickcheck.sh` → `QUICKCHECK PASS · 294 s · open 2028 ms · old save ok · perf (median of 3, new/live): render 282/286 ms, tab 626/617 ms, buổi 1765/1704 ms · core gates PASS`
+MERGED head 18aca389 (LIVE ac4790f0 merged; worktree /home/user/wt/l1m):
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` (incl. `PASS wd expiry for an NPC (piece kept by the ledger at the market, law 6c) {"bx0":0,"bx1":1}`) · with `index.html` → `law1-audit: 13/13 PASS`
+- `node dev/test/role-parity.test.js index.html` → `ok law-1 families: no new GAP row []` … `ALL PASS`; no-arg run → `ALL PASS` on b3d429b5 (LIVE fd85907a; ac4790f0 after it only touches the map: j27/j38/jres + map tests)
+- `node dev/tools/role-parity-scan.js index.html --fam` (b3d429b5) → same 22 rows · GAP 4 (3 D gift rows + parked co-op ration)
+- `node dev/test/undef-scan.js` → `PASS … (301 names checked)` · `node dev/test/one-core-guard.js` → `PASS: one core …`
+- `node dev/test/coop-e2e.js` → `142/142 passed` · `COOP_SWAP=1 …` (iPad hosts) → `142/142 passed`
+- `bash dev/tools/quickcheck.sh` → `QUICKCHECK PASS · 276 s · open 2254 ms · old save ok · perf (median of 3, new/live): render 314/288 ms, tab 692/720 ms, buổi 1683/1741 ms · core gates PASS` (old save from LIVE loads and plays a buổi)
+- Flake noted: one earlier quickcheck on 6806c899 failed G4 dialog-fixed (#54 title plate) + perf buổi 4021 ms under load; dialog-fixed re-run alone PASS on both LIVE fd85907a and the branch; later quickcheck runs PASS. One no-arg role-parity run hit «Target crashed» while two scans ran in parallel (memory); re-run alone ALL PASS.
+
+### (7) Open list after this branch (owner per row)
+| # | open item | owner |
+|---|---|---|
+| 1 | Gift rule for every giver/recipient (liked ↑ · neutral · disliked ↓) | D (order 07:21Z) |
+| 2 | Likes/dislikes for her, Thái hậu likes, servants, men | D |
+| 3 | NPCs learn and use others' likes (incl. hers) | D |
+| 4 | Per-nết thresholds | D (design waits for sếp) |
+| 5 | Promotion routes (đại lễ / sủng ái / truy phong) for her and NPCs | D (promo-redesign, waits for sếp) |
+| 6 | Own-choice leaving = ending; forced-removal severity ladder for NPCs too | E (E64b review/leave-palace) |
+| 7 | 12 tú nữ scored by the same 3 tests | MAIN (SELSCENE-4, review/selection-scene) |
+| 8 | Co-op: NPCs borrow/steal ration from the friend (cross-seat item request, drop x.coop skip in jagacts4) | B follow-up (parked: item-ledger protocol) |
+| 9 | Act-table «up» column timing rows (def_* ×4, staffHoi, rougeBorrow, cx:buy) | B (carried, SAME in every rank column) |
+| 10 | Player maid at an away master: «Đấm lưng / Xin thưởng / tiến cử» still shown (NPC maid: home only) | B (small parity follow-up, found in this review) |
+
+**LAND READY law1-audit-r1 18aca38902d8d936c3ce0189e5d1fd1ecf6792f7**
