@@ -6,3 +6,6 @@ REPORT: dev/handover/reports/<branch>.md on the handover branch; LAND READY «re
 ITEMS (owner 22:02Z items 2 + 6):
 (2) ĐIỂM TRANG MIRROR: her face must be there the moment the mini-game opens (decode before show / veil) — whole family of mini-game pictures (every mini-game scene image).
 (6) MYSTERY MINI-GAME after hỏi thăm / nương tựa: field of ✗/✓ circles with no explanation + «Làm luôn · không chơi: như thường» → EVERY mini-game first shows its kit intro (name, what to tap, what winning gives) like Điểm trang «LUẬT CHƠI»; the skip button says plainly what happens (e.g. «Bỏ qua — kết quả thường»); check ✗/✓ markers are real game pieces, not leftover debug.
+
+## ADD (MAIN 128, 22:15Z) — owner rule OD «24/11 ~22:14Z real»
+An unnamed person in any text = «một vị cung nữ / phi tần / thái giám» (or the visible rank title, e.g. «một vị Quý nhân»), NEVER «chưa quen biết». Read the OD row verbatim.

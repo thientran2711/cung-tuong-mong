@@ -8,3 +8,6 @@ ITEMS (owner 22:02Z items 3 + 4 + 5):
 (4) ETIQUETTE WORDING: rank decides who greets first — a lower rank (Đáp ứng) greets a Quý phi first; the Quý phi never «khẽ cúi chào ta»; whole family of greeting lines by rank (two-way law 1: she greets up, lower ranks greet her). Scan every greeting line, pick the right line by the two ranks.
 (5) REMOVE system-reasoning lines in story text like «Ta đã biết: đó là … Vì sao: … ngôi chỉ một người giữ, cả cung đều biết» — replace with real dialogue / good narration (cổ trang, VANPHONG); never system reasoning in story text. Whole family scan.
 NOT YOURS: item (1) visitor timing hold → FLIGHT-DAYQ (review/day-queue); do not touch jdayq.
+
+## ADD (MAIN 128, 22:15Z) — owner rule OD «24/11 ~22:14Z real»
+An unnamed person in any text = «một vị cung nữ / phi tần / thái giám» (or the visible rank title, e.g. «một vị Quý nhân»), NEVER «chưa quen biết». Read the OD row verbatim.

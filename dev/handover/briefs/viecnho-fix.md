@@ -17,3 +17,6 @@ Read OWNER_DECISIONS.md row «24/11 ~21:57Z real» (line ~2418) VERBATIM + LOOK 
 
 ## ADD 2 (MAIN 128, 24/11 ~22:02Z) — item 4, owner 22:00Z
 Read OD row «24/11 ~22:00Z real» VERBATIM + LOOK at refs/owner-2411-viecnho/v8-dudo-ta-hidden.jpg: on Dư đồ her «Ta đang ở đây» marker hides BEHIND the Vĩnh Hòa plaque. RULE: her marker is ALWAYS the top layer on every map (covering a plaque's words is fine). Whole map family (every map/area view that shows her marker): z-order fix + test (marker on top of every plaque at every place she can stand), Fold+iPad shots.
+
+## ADD (MAIN 128, 22:15Z) — owner rule OD «24/11 ~22:14Z real»
+An unnamed person in any text = «một vị cung nữ / phi tần / thái giám» (or the visible rank title, e.g. «một vị Quý nhân»), NEVER «chưa quen biết». Read the OD row verbatim.
