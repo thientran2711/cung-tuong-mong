@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/tmp/ledger_stage';const DEV=process.argv.slice(3).length?process.argv.slice(3):['fold','ipadAir','ipadPro','foldLand','iphone14'];
 (async()=>{fs.mkdirSync(OUT,{recursive:true});const srv=await D.serveRoot();const b=await chromium.launch();const res={};
- for(const dv of DEV)for(const o of ['thd','cnv']){const ctx=await D.newDeviceContext(b,dv);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ for(const dv of DEV)for(const o of ['thd','cnv']){const ctx=await D.newDeviceContext(b,dv);const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   const g=await D.openHost(p,srv.url);await p.waitForTimeout(1500);
   /* the first-visit download cover (kload): skip like dev/test/stage-counts.js */
   for(let i=0;i<240;i++){const s=await g.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"], #kload [data-kl="web"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await p.waitForTimeout(500)}

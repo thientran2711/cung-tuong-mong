@@ -2,7 +2,7 @@
    usage: node dev/test/khac-day-run.js <page url> <W>x<H> <outdir>  → JSON results + screenshots (act tab, sáng with 1 khắc left) */
 const {chromium}=require('./lib/pw-roulette');
 const [,,URL,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);
-(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'})).newPage();
+(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'})).newPage();await require('./lib/veil').guard(p);
  p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
  const fresh=()=>p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;

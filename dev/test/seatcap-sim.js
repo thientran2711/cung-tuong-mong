@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES='20',MON='120',MODE='idle',TRACE='1',L0='0']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
- const errs=[];const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(1200000);
+ const errs=[];const p=await ctx.newPage();await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(1200000);
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<200;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}
  const ORIG=['tt','dtq','th','muoi','nc','td','thd','cn','cnv'];const out=[];
  for(let L=+L0;L<+L0+(+LIVES);L++){const r=await p.evaluate(([L,MON,MODE,TRACE,ORIG])=>{const CAP=SEATCAP;const mx={},over={},hits=[];

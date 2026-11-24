@@ -2,7 +2,7 @@
    usage: node dev/test/cmaid-unit.js <url> <outdir> [WxH@dpr]. Prints JSON {checks}; exit 1 if a check fails or a page error. */
 const {chromium}=require('playwright');const [,,URL,OUT,VP='755x1000@2']=process.argv;const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});await ctx.route(/\.(mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(300000);await p.goto(URL,{waitUntil:'domcontentloaded'});
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(300000);await p.goto(URL,{waitUntil:'domcontentloaded'});
  for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]')||document.querySelector('#kload [data-kl="skip"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
  await sleep(800);
  const C=await p.evaluate(()=>{const C={};const go=o=>{window.__forceOrigin=o;SLOT=3;quiet=true;window.__nlInner=1;start();window.__nlInner=0;quiet=true};

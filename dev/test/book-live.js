@@ -4,7 +4,7 @@
 const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG,ROAD,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const SRV=ROAD==='srv';
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
- const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(SRV=>{SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();const srv=(typeof isSrv==='function'&&isSrv());if(srv===SRV)break}

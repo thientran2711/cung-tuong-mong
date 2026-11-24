@@ -11,7 +11,7 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
  for(const [w,h] of VPS){const tag=w+'x'+h;
   const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:w<1100,reducedMotion:'reduce'});await serve(ctx);
   await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome'),null,{timeout:90000});
   /* solo life in Sổ 1 */
   const life=async()=>{await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:60000});await p.evaluate(()=>{try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}})};

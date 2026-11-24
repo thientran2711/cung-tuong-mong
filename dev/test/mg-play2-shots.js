@@ -4,7 +4,7 @@ const {chromium}=require('playwright');const path=require('path');const fs=requi
 const [,,F='dev/index.html',DIR='shots',KS='hoadien,den,duho,hat,banh,tho,td_ngon']=process.argv;fs.mkdirSync(DIR,{recursive:true});
 const URL='file://'+path.resolve(F);const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();
- for(const [VW,VH] of [[755,1000],[1180,820]]){const p=await b.newPage({viewport:{width:VW,height:VH},deviceScaleFactor:2});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ for(const [VW,VH] of [[755,1000],[1180,820]]){const p=await b.newPage({viewport:{width:VW,height:VH},deviceScaleFactor:2});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await sleep(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}});
   await sleep(3000);

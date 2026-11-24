@@ -80,7 +80,7 @@ AA.scen=(n)=>{AA.fresh();
  used=0;S.buoi=n==="toi"?BUOI.length-1:0;render();AA.save()};
 })();`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  lg('load');await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(LIB);lg('lib');const out=fs.createWriteStream(OUT,{flags:'a'});
  const SCN=(SC||'dau,toi,cao,con,hau,hh').split(',');

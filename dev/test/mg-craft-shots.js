@@ -8,7 +8,7 @@ const kk=(A.find(a=>a.startsWith('--kinds='))||'').split('=')[1];
 const DEV=[['fold',755,1000],['ipad',1180,820]];
 const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
 (async()=>{const b=await chromium.launch();
- for(const [dn,w,h] of DEV){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:2});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ for(const [dn,w,h] of DEV){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:2});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;try{render()}catch(e){}});
   await p.waitForTimeout(2500);

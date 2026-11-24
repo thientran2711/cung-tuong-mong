@@ -47,7 +47,7 @@ async function runDevice(b,srv,dev){const R={device:dev,pageErrors:[]};
   if(r.serviceWorker()){if(phase==='online')st.netSW.set(k,(GRP.get(k)||[])[3]||'?');return}
   if(phase==='online')st.asked.set(k,(GRP.get(k)||[])[3]||'unlisted');if(s>=400)st.fail.set(phase+' '+k,s)});
  ctx.on('requestfailed',r=>{const k=keyOf(r.url());if(!k||/\.json$/.test(k)||r.serviceWorker())return;st.fail.set(phase+' '+k,r.failure()&&r.failure().errorText)});
- const p=await ctx.newPage();p.setDefaultTimeout(600000);p.on('pageerror',e=>R.pageErrors.push(phase+': '+e.message.slice(0,140)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(600000);p.on('pageerror',e=>R.pageErrors.push(phase+': '+e.message.slice(0,140)));
  const t0=Date.now();await p.goto(srv.url+'?khost=1',{waitUntil:'commit'});await p.waitForFunction(titleUp,null,{timeout:600000,polling:250});R.titleMs=Date.now()-t0;
  let game=D.gameFrame(p);R.klo=await game.evaluate(()=>({phase:KLOAD.phase,coreMB:+(KLOAD.core.total/1e6).toFixed(1),figMB:+(KLOAD.fig.total/1e6).toFixed(1),bg:KLOAD.fig.left,ctl:!!navigator.serviceWorker.controller,conn:!!navigator.connection,sd:!!(navigator.connection&&navigator.connection.saveData)}));
  const visited=[];R.lives=[];

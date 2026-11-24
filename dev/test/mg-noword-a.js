@@ -8,7 +8,7 @@ const URL0=pos[0]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:
 const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
 const KINDS=['dan','hat','co','dauho','ban','ve','hoa','theu','kim','mua','huong','doden','den','tat','ne'];
 const GW=60,longW=a=>(a||[]).some(t=>t.replace(/\s+«.*$/,'').length>GW);const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.addInitScript(()=>{window.__ct=null;const ok=t=>/^[^\p{L}]*$/u.test(t)||/^Gió (lặng|(ngược|xuôi) (nhẹ|vừa|mạnh))$/.test(t);/* owner 21/11: guide words that are needed stay (Đầu hồ wind line, dauho-lv5) */
   for(const f of['fillText','strokeText']){const o=CanvasRenderingContext2D.prototype[f];CanvasRenderingContext2D.prototype[f]=function(t){if(window.__ct&&!ok(String(t).trim()))window.__ct.add(String(t).trim());return o.apply(this,arguments)}}});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

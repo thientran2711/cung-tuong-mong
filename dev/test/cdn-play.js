@@ -14,7 +14,7 @@ const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScal
 (async()=>{const b=await chromium.launch();const R={size:SZ};
  /* 1. old save */
  await fetch(BASE+'__ver/old');
- {const c=await b.newContext(Object.assign({},opts,{serviceWorkers:'block'}));const p=await c.newPage();p.setDefaultTimeout(120000);
+ {const c=await b.newContext(Object.assign({},opts,{serviceWorkers:'block'}));const p=await c.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(120000);
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await sleep(3000);
   R.oldSave=await p.evaluate(()=>{try{SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{nlNew()}catch(e){}start();if(S.origin.k!=='cnv')break}Q.length=0;
    for(let i=0;i<5;i++){try{Q.length=0;endTurn()}catch(e){}Q.length=0}
@@ -26,7 +26,7 @@ const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScal
  /* 2. new build, fresh */
  const ctx=await b.newContext(Object.assign({},opts,{serviceWorkers:'allow'}));
  await ctx.addInitScript(ls=>{try{if(!localStorage.getItem('__seeded')){for(const k in ls)localStorage.setItem(k,ls[k]);localStorage.setItem('__seeded','1')}}catch(e){}},LS);
- const p=await ctx.newPage();p.setDefaultTimeout(120000);
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(120000);
  const errs=[],failed=[],bad=[],seen=new Map(),req={n:0,cdn:0,same:0};
  p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text().slice(0,200))});
  ctx.on('requestfailed',q=>{const u=q.url();if(/\/img\//.test(u))failed.push(u.replace(/^https?:\/\/[^/]+\//,'')+' '+(q.failure()||{}).errorText)});
@@ -85,7 +85,7 @@ const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScal
  /* 6. offline */
  if(OFF){R.sw=await p.evaluate(async()=>{if(!navigator.serviceWorker)return 'no sw';const r=await Promise.race([navigator.serviceWorker.ready.then(()=>'ready'),new Promise(r=>setTimeout(()=>r('timeout'),240000))]);
    const ks=await caches.keys();let n=0,cdn=0;for(const k of ks){const c=await caches.open(k);const q=await c.keys();n+=q.length;cdn+=q.filter(x=>x.url.includes('ctm-img.')).length}return{r,ctl:!!navigator.serviceWorker.controller,caches:ks,n,cdn}});
-  await ctx.setOffline(true);const q2=await ctx.newPage();const e2=[];q2.on('pageerror',e=>e2.push(e.message));
+  await ctx.setOffline(true);const q2=await ctx.newPage();await require('./lib/veil').guard(q2);const e2=[];q2.on('pageerror',e=>e2.push(e.message));
   await q2.goto(BASE,{waitUntil:'load'}).catch(e=>e2.push('goto '+e.message));await sleep(4000);
   await q2.waitForFunction(()=>!document.getElementById('kload'),null,{timeout:30000}).catch(()=>e2.push('kload still shown offline'));
   R.offline=await q2.evaluate(async()=>{const bt=document.querySelector('[data-load="2"]');if(bt)bt.click();await new Promise(r=>setTimeout(r,3000));
