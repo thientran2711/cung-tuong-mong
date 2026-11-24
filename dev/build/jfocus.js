@@ -5,7 +5,7 @@
    PURE DISPLAY: no game logic, no numbers of its own — counts / odds words / costs come in the data. Every knob is in KIT_FOC (like KIT_EMOSEAL).
    kitIdle  (K-FOCUS-1b): CSS-only idle life on every stage figure (breath / sway / rare head turn), per kind, off with reduced motion / «Cảnh động» off / Gọn.
    kitMoodSay(figEl,text,{seal}) (K-FOCUS-1b): ONE short rare bubble beside a figure's head.
-   API:  const F=kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose});  F.setGroup(k) · F.setGroups(G) · F.say(lines,{onDone}) · F.choices(list,onPick) · F.play({skip:{n,sub,onSkip},onBack}) · F.hud(mark,clock)
+   API:  const F=kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose});  F.setGroup(k) · F.setGroups(G) · F.say(lines,{onDone}) · F.choices(list,onPick) · F.play({skip:{n,sub,onSkip},onBack}) · F.intro({title,rows,go,sub,onGo}) · F.hud(mark,clock)
          · F.endPlay() · F.react({seal,line,deltas}) · F.close() (animated) · F.destroy() (instant) · F.figRect().
    groups:[{k,n,can,tot,acts:[{id,n,pic,word,ton,off,why,info}]}]  (info = §6.3 rows html shown by the «!» popover; why = reason shown when the act is off).
    Test: dev/test/kit-focus.js. */
@@ -49,7 +49,7 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
   if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}
   if(o.onAct)o.onAct(a.id)});
  el.addEventListener("click",e=>{if(F.opening&&e.target.closest(".kfoc"))F.skipOpen()},true);
- F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
+ F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.intro=oo=>intro(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
@@ -107,9 +107,18 @@ function choices(F,L,cb){sayLift(F,0);const box=F.q(".kfoc-say");box.hidden=true
 function playOn(F,oo){F.playing=true;F.playO=oo;const sw=F.q(".kfoc-skipw");sw.innerHTML="";sw.hidden=true;
   if(oo.skip){const k=oo.skip;sw.innerHTML=`<button type="button" class="kfoc-b kfoc-skip" aria-label="${esc([k.n,k.sub].filter(Boolean).join(" · "))}"><span class="kfoc-t"><b>${esc(k.n||"Làm luôn")}</b>${k.sub?`<small>${esc(k.sub)}</small>`:""}</span></button>`;sw.hidden=false;
    sw.firstChild.onclick=e=>{e.stopPropagation();try{if(k.onSkip)k.onSkip()}catch(x){}}}
-F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";
+F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";document.documentElement.classList.add("kfoc-playing");
  const x=F.q(".kfoc-x");x.classList.add("kfoc-back");x.textContent="◂";x.setAttribute("aria-label","Quay lại");x.title="Quay lại";return pl}
-function playOff(F){if(!F.playing)return;F.playing=false;F.playO=null;const sw=F.q(".kfoc-skipw");sw.hidden=true;sw.innerHTML="";if(F.saved&&!F.pick){F.saved=null;build(F)}const pl=F.q(".kfoc-play");pl.hidden=true;pl.innerHTML="";F.q(".kfoc-hud").hidden=true;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");F.tabs.hidden=false;F.plate.hidden=false;
+/* KIT §92.4 (review/kit-mg-intro) RULES CARD IN THE PLAY LAYER: F.intro({title,rows:[[label,text,cls]],go:"Sẵn sàng",sub:"bắt đầu chơi",onGo}) — call it right after F.play(): the same «Luật chơi · <title>» block the Điểm trang rules screen (kgReady, j82) shows
+   (kit heading .kpst + kit rows kg82Rows + kit button .kgr-go), centred in the focus view (the play layer itself is only the figure's width; the card is a child of the focus root, removed when the play ends), ONE-line title, closes itself on go. The skip button F.play({skip}) already gives («Bỏ qua · kết quả thường») stays on top. Private card frames are forbidden (OD:L491): every
+   mini-game that has a first «rules» screen on a figure calls this. Returns the card element (null when the layer is not up). */
+function intro(F,o){try{if(!F.playing)return null;const host=F.el;const old=host.querySelector(":scope > .kfoc-intro");if(old)old.remove();
+ const rows=(o.rows||[]).map(r=>[r[0],r[1],r[2]||"t"]);const rh=typeof kg82Rows==="function"?kg82Rows(rows):rows.map(r=>`<p><b>${esc(r[0])}</b> ${esc(r[1])}</p>`).join("");
+ const bc=typeof kg82Btn==="function"?kg82Btn(false):"kbtn";
+ const el=document.createElement("div");el.className="kgr kfoc-intro";
+ el.innerHTML=`<h4 class="kpst">Luật chơi · ${esc(o.title||"")}</h4>${rh}<button type="button" class="${bc} kgr-go kfoc-introgo">${esc(o.go||"Sẵn sàng")}${o.sub?`<small>${esc(o.sub)}</small>`:""}</button>`;
+ host.appendChild(el);const b=el.querySelector(".kfoc-introgo");b.onclick=e=>{e.stopPropagation();el.remove();try{if(o.onGo)o.onGo()}catch(x){console.error("kitFocus.intro",x)}};return el}catch(e){console.error("kitFocus.intro",e);return null}}
+function playOff(F){if(!F.playing)return;F.playing=false;F.playO=null;const sw=F.q(".kfoc-skipw");sw.hidden=true;sw.innerHTML="";if(F.saved&&!F.pick){F.saved=null;build(F)}const pl=F.q(".kfoc-play");pl.hidden=true;pl.innerHTML="";const ic=F.el.querySelector(":scope > .kfoc-intro");if(ic)ic.remove();document.documentElement.classList.remove("kfoc-playing");F.q(".kfoc-hud").hidden=true;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");F.tabs.hidden=false;F.plate.hidden=false;
  const x=F.q(".kfoc-x");x.classList.remove("kfoc-back");x.textContent="✕";x.setAttribute("aria-label","Lui");x.title="Lui"}
 function hud(F,mk,ck){const h=F.q(".kfoc-hud");h.hidden=false;try{if(mk!=null)kitGameMark(mk);if(ck!=null)kitGameClock(ck)}catch(e){}}
 function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoSeal.lean)kitEmoSeal.lean(F.img)}catch(e){}
@@ -124,7 +133,7 @@ function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();
  if(d){const T=(n,up)=>`translate(${d.dx*n}px,${d.dy*n-(up||0)}px) scale(${1+(d.s-1)*n})`;wa(F,F.img,[{transform:T(0),offset:0},{transform:T(.25,8),offset:.25},{transform:T(.5),offset:.5},{transform:T(.75,8),offset:.75},{transform:T(1),offset:1}],{duration:K.closeMs,delay:K.foldCloseMs*.5,easing:"cubic-bezier(.2,.7,.2,1)"})}
  wa(F,F.q(".kfoc-veil"),[{opacity:1},{opacity:0}],{duration:K.veilOutMs,delay:Math.max(0,K.closeMs-K.veilOutMs)});
  setTimeout(()=>destroy(F,1),K.closeMs+K.foldCloseMs*.5+40)}
-function destroy(F,fromClose){if(!F||F.gone)return;F.gone=true;F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
+function destroy(F,fromClose){if(!F||F.gone)return;F.gone=true;if(F.playing)document.documentElement.classList.remove("kfoc-playing");F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
 window.kitFocus={open,current:()=>CUR,reposition:()=>{if(CUR&&CUR.open){CUR.A=area();const A=CUR.A;CUR.el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;layout(CUR)}}};
 try{addEventListener("resize",()=>kitFocus.reposition())}catch(e){}
 
@@ -170,6 +179,11 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}
 .kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0;line-height:1.1}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.2em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal;overflow:hidden;max-height:2.2em}.kfoc-t small span{white-space:nowrap}.kfoc-b.kfoc-sub3 .kfoc-t small{max-height:3.3em}.kfoc-b.kfoc-sub3 .kfoc-t b{-webkit-line-clamp:1;max-height:1.1em}
 .kfoc-b.kfoc-hasi{padding-right:20px}
+.kfoc-intro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92%,460px);max-height:90%;z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);border:1px solid var(--gold,#b8892b);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.kfoc-intro.kgr{background:var(--k-card,#fffaf0)!important;opacity:1!important}
+.kfoc-intro .kpst{white-space:nowrap;margin:0}
+/* KIT §92.4: the fixed particle / weather / fx layers (z 9440-9470) never cover a rules card or the skip button: hidden while a kitFocus play layer is up (class on <html>, no :has() — it cost tab time) */
+html.kfoc-playing #kfxcv,html.kfoc-playing .kfx-fl,html.kfoc-playing .kfxk,html.kfoc-playing .kfrip{visibility:hidden!important}
 .kfoc-skipw{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:6}.kfoc-skipw .kfoc-skip{width:auto;min-width:150px;max-width:280px;padding:4px 18px;justify-content:center;text-align:center;background:#fff3c4}
 .kfoc-b .kfoc-i{position:absolute;top:-6px;right:-4px}
 .kfoc-b.kfoc-off{filter:grayscale(.85);opacity:.78}
@@ -201,3 +215,7 @@ html.kf-still #tokens .tok.fig img.kidl,.kf-off #tokens .tok.fig img.kidl{animat
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92",title:"kitFocus · gặp riêng một người trên sân khấu (khung focus + quạt nút trái/phải + bảng tên) · kitIdle · kitMoodSay",
  html:()=>`<div class="kitpg-row"><p>Mở bằng <code>kitFocus.open({p,fig,from,plate,groups,onAct,onClose})</code> trên sân khấu Dư đồ; nút chỉ có một cỡ mỗi chế độ (cao 64 Fold / 72 iPad), tab nhóm đặt trên đầu, «!» mở chi tiết. Không có mẫu tĩnh: xem <code>dev/test/kit-focus.js</code>.</p></div>`})}catch(e){}
 }catch(e){console.error("jfocus",e)}})();
+
+/* KIT §92.4 sample (kit page): the focus rules card, static */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92.4",title:"kitFocus.intro · thẻ «Luật chơi» trong màn Dư đồ focus (Sẵn sàng + Bỏ qua · kết quả thường)",where:"mọi trò tài nghệ chơi trên hình người trong màn focus (Vuốt, Chạm liên tục, Chạm đúng nhịp, Kéo, Giữ …): F.play({skip}) rồi F.intro({title,rows,onGo}); thẻ cùng kiểu «Luật chơi» của Điểm trang (kgReady); lớp hiệu ứng cố định ẩn khi đang chơi",
+ html:()=>`<div class="kgr kfoc-intro" style="position:static;transform:none;margin:0 auto"><h4 class="kpst">Luật chơi · Chạm đúng nhịp</h4>${typeof kg82Rows==="function"?kg82Rows([["Việc","Ôm đàn cho Nhụy phi","t"],["Chạm","Vòng khép dần quanh nàng: chạm đúng lúc vòng chuyển xanh, ba nhịp.","t"],["Được","Đúng nhịp càng nhiều càng thành.","t"]]):""}<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(false):"kbtn"} kgr-go">Sẵn sàng<small>bắt đầu chơi</small></button></div>`})}catch(e){}
