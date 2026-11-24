@@ -150,7 +150,8 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
    if(A.k.key===B.k.key&&A.k.key!==lastKey){const [pa,pb]=[await A.p.evaluate(CB.BUOI).catch(()=>null),await B.p.evaluate(CB.BUOI).catch(()=>null)];
     if(pa&&pb&&pa.key===pb.key&&pa.ready&&pb.ready){if(pend.key!==pa.key)pend={key:pa.key,t:Date.now()};
      const pd=[];if(pa.fpl&&pb.me&&pa.fpl!==pb.me)pd.push(`host sees guest at ${pa.fpl}, guest is at ${pb.me}`);if(pb.fpl&&pa.me&&pb.fpl!==pa.me)pd.push(`guest sees host at ${pb.fpl}, host is at ${pa.me}`);
-     if((pa.where===pb.where&&!pd.length)||Date.now()-pend.t>5000){
+     /* robot-coop-fix-1: the friend's live stats ride her pos relay (sent on each render, jcoopworld sendPos); wait for them too, so only a stat still wrong after 5 s counts (was: compared the instant places agreed → 'one buổi late' race) */
+     if((pa.where===pb.where&&!pd.length&&(!pa.fst||pa.fst===pb.mst)&&(!pb.fst||pb.fst===pa.mst))||Date.now()-pend.t>5000){
       lastKey=A.k.key;rm.cmp=(rm.cmp||0)+1;
       if(pa.where!==pb.where){rm.whereDiff++;bug('coop-where','NPC places differ between the two screens',`buổi ${pa.key} host-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] guest-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
       for(const x of pd){rm.posDiff++;bug('coop-pos','where one sees the friend ≠ where the friend is','buổi '+pa.key+' '+x)}

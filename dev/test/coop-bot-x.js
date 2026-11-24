@@ -47,7 +47,9 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
     const t=[...document.querySelectorAll('[data-tab="act"]')].find(x=>x.offsetParent!==null);if(t&&!window.__tabTried){window.__tabTried=1;t.click();return'tab'}}
   const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;window.__tabTried=0;window.__metThis=0;window.__hitThis=0;n.click();return'next'}return'idle'};
 /* per-buổi view: NPC whereabouts (from the shared state) + where each sees the other */
-const BUOI=()=>{const hm=x=>x==='home'?'r'+(COOPW.seat==='a'?901:902):x;if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);
+const BUOI=()=>{if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);
+  /* one place name on both pages (robot-coop-fix-1, same family as coop-bot.js) */
+  const ms=COOPW.seat==='a'?'a':'b',fs=ms==='a'?'b':'a';let fp=null;try{fp=f&&f.id!=null?palaceOf(f):null}catch(e){}const hm=x=>x==='home'?'H:'+ms:(fp&&x===fp?'H:'+fs:x);
   return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz')&&(COOPW.seat==='a'||COOPW.whereKey===c.week+':'+(S.buoi||0)),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
    fpl:f&&f.id!=null?hm(whereOf(f)):null,me:f&&f.id==null?null:hm(S.place||'home'),fst:f&&f.id!=null?[f.sung,f.danh,f.suc].join('/'):null,fk:f?k61St(f):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
 /* the world as this client sees it (only shared truth, no personal data) */
@@ -71,7 +73,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    const [pa,pb]=[await A.p.evaluate(BUOI).catch(()=>null),await B.p.evaluate(BUOI).catch(()=>null)];
    if(pa&&pb&&pa.key===pb.key&&pa.ready&&pb.ready&&pa.key!==lastKey){
      const pd=[];if(pa.fpl&&pb.me&&pa.fpl!==pb.me)pd.push(`A sees B at ${pa.fpl}, B is at ${pb.me}`);if(pb.fpl&&pa.me&&pb.fpl!==pa.me)pd.push(`B sees A at ${pb.fpl}, A is at ${pa.me}`);
-     const same=pa.where===pb.where&&!pd.length;
+     const same=pa.where===pb.where&&!pd.length&&(!pa.fst||pa.fst===pb.mst)&&(!pb.fst||pb.fst===pa.mst);/* robot-coop-fix-1: stats settle too */
      if(pend.key!==pa.key)pend={key:pa.key,t:Date.now()};
      if(same||Date.now()-pend.t>5000){lastKey=pa.key;buoiN++;
        if(pa.where!==pb.where){whereDiff++;if(whereDiff<=5)L(`buổi ${pa.key} NPC places differ: A-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] B-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
