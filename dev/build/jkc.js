@@ -101,7 +101,7 @@ try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. 
 /* r2-r1: "Ở nhà chờ tuyển tú" picked: the identity card shows her as she starts at home (Tiểu thư …, 18 tuổi, home Danh/Bạc caps of kcInit), not the palace rank */
 function kcCardHome(m){try{return !!(m&&m.nl&&S&&S.origin&&!S.srv&&!(typeof isSrv==="function"&&isSrv())&&kcPick()==="nha"&&kcOk(S.origin.k))}catch(e){return false}}
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const home=kcCardHome(m);let sv=null;
- if(home){sv=[S.age,S.danh,S.bac];S.age=18;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round((KCGTU[S.origin.k]||50)/2))}
+ if(home){sv=[S.age,S.danh,S.bac];S.age=BAL.ageMin;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round((KCGTU[S.origin.k]||50)/2))}
  try{b0.apply(this,arguments)}finally{if(sv){S.age=sv[0];S.danh=sv[1];S.bac=sv[2]}}
  try{if(home){const ti=$("mb")&&$("mb").querySelector(".kpidn .kti");if(ti)ti.textContent=kcTitle()}}catch(e){}
  try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP||!kcOk(S.origin.k))return;const mb=$("mb");if(!mb||mb.querySelector(".kkcp"))return;
@@ -133,7 +133,7 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",nmNew("f",{more:fam,avoidSur:new Set([sur])}),18+R(2),"consort",[],pick(["Ân cần","Khiêm nhường","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
  S.kc={v:2,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
  S.kgt=BAL.kc2.st.kc.kgt[0]+R(BAL.kc2.st.kc.kgt[1])+(k==="tt"||k==="ch"?BAL.kc2.st.kc.kgtBr[0]:k==="td"?BAL.kc2.st.kc.kgtBr[1]:0);S.kap=BAL.kc2.st.kc.kap[0]+R(BAL.kc2.st.kc.kap[1]);S.khm=Math.round((KCGTU[k]||50)*1.2);S.kld=0;S.kgtu=KCGTU[k]||50;
- S.age=18;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
+ S.age=BAL.ageMin;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
  if(S.maid){S.maid.kcTy=1}
  /* Thanh mai trúc mã (j96): his chapters already woven at start, or (by the same weights) now, before the palace */
  try{if(!S.tm96&&typeof tmRoll96==="function"&&tmRoll96(k)){const m=mkMan96(k);if(m){S.tm96={k,mid:m.id,h:60,sus:0,ev:0,rise:0,tok:0,v:1};const P=S.st&&S.st.ch&&S.st.ch.plan;
@@ -579,7 +579,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
  const L=[];for(const m of kcRivalsTT()){const raw=kcPhucMark(m);/* review/podium-wire: the same Phúc tuyển mark the podium showed (S.kc.tt.pod) */const sc=kcScore({sac:m.sac,tai:m.tai,duc:m.pduc,danh:m.danh,raw,pow:m.ppow==null?kcPow():m.ppow})+R(9)-4;
-  if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(18,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=pick(TRAITS)[0];v.net=netOf(m).slice();delete v.trong;if(m.danh)v.danh=m.danh;
+  if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(BAL.ageMin,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=pick(TRAITS)[0];v.net=netOf(m).slice();delete v.trong;if(m.danh)v.danh=m.danh;
    rivals.push(v);try{affAdd(v,S,Math.round(m.af/2))}catch(e){}try{k61Know(v,"người nhà",true,3)}catch(e){}m.pal=v.id;L.push(v)}catch(e){console.error(e)}}}
  try{palFix()}catch(e){}deal();
  const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. Ngươi vào cung, phong <b>${rk}</b>.</p>`+
@@ -692,9 +692,9 @@ function kcFigLoad(){try{fetch("img/FIGURES-kc.json",{cache:"no-cache"}).then(r=
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51","a65"];function kcBand(age){return ageBandIx(age)}
-function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
- let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
+function kcBand(age){return ageBandIx(age)}
+function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?BAL.ageMin:age);/* the band of her age, else the nearest one */
+ let b=null,bd=9;for(const f of L){const d=Math.abs(BAL.ageArt.indexOf(f.ageBand||BAL.ageArt[0])-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
 window.kcDressSrc=kcDressSrc;
 (function(){const g0=figFor;figFor=function(p,kind){try{if((isKc()||typeof NLP!=="undefined"&&NLP&&S&&S.kcPick==="nha"&&kcOk(S.origin.k))&&p){/* r2: the identity card shows the home dress once "Ở nhà" is picked */const who=p===S?S:typeof figWho==="function"?figWho(p):null;

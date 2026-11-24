@@ -331,15 +331,21 @@ function balAb(n){return String(Math.abs(n))}
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
 function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
-/* ONE CORE age bands (owner art rule OD:L567 + owner 19/11 ~00:50Z "nhân viên của mình bất kỳ ai cũng có 65 tuổi": 18–25 / 26–35 / 36–50 /
-   51–64 / 65+, for every woman of the pool at every rank/role; review/one-core-dup, art-wiring-1119): band i starts at ageBand[i-1].
-   Read by band4 + BAND4N labels (j35), pidBand (j66), kcBand (jkc), the elders' picture (jstaff) (before: 26/36/51 typed in each).
+/* ONE CORE age bands (owner 24/11 ~00:25Z "Cập nhật tuổi game là 18, 28, 39, 51, 64": 18–27 / 28–38 / 39–50 / 51–63 / 64+, for everyone,
+   every rank/role; review/ageband): ageMin = the first band and the youngest adult (owner OD:L104 18+; jage lifts every adult below it);
+   band i starts at ageBand[i-1] (band 0 at ageMin). ageArt[i] = the file tag of band i's painted art on the CDN (img/*-a18.webp …): a tag is
+   a FILE NAME, not an age; ageArtIx(tag) turns it back into its band, ageArtOf(age) gives the tag of an age.
+   Read by band4 + BAND4N labels + tagBand (j35), figAge (j39) / figDist (j66), the face pools (j17 bandKeys, j3 eunBand), the mama look of
+   a maid (j39, j60, j61, j88, j92), kcBand (jkc), the elders' picture (jstaff, jtut, jky), her own portrait (jimg), every adult-age check.
    figxTry = failed reads of img/FIGURES-x.json after which the Thái hậu's face is drawn without it (jfigx r2).
    figVar (art-wiring-1119) = how many colours of the t7/t8 dress a woman may wear (v0 + v1 + v2 painted); 1 = everyone in v0. */
-Object.assign(BAL,{ageBand:[26,36,51,65],figVar:3,figxTry:3});
+Object.assign(BAL,{ageMin:18,ageBand:[28,39,51,64],ageArt:["a18","a26","a36","a51","a65"],figVar:3,figxTry:3});
 function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
-/* the band labels players see ("18-25" … "65+"), from the same numbers */
-function ageBandName(i){const B=BAL.ageBand,lo=i?B[i-1]:18;return i>=B.length?lo+"+":lo+"-"+(B[i]-1)}
+/* the band of an art file tag ("a26" → 1; a bare number = that age's band; -1 = not a band tag) and the tag of an age */
+function ageArtIx(t){const s=String(t==null?"":t).toLowerCase().trim();const i=BAL.ageArt.indexOf(s);if(i>=0)return i;return /^\d+$/.test(s)?ageBandIx(+s):-1}
+function ageArtOf(a){return BAL.ageArt[Math.min(BAL.ageArt.length-1,ageBandIx(a))]}
+/* the band labels players see ("18-27" … "64+"), from the same numbers */
+function ageBandName(i){const B=BAL.ageBand,lo=i?B[i-1]:BAL.ageMin;return i>=B.length?lo+"+":lo+"-"+(B[i]-1)}
 if(typeof BAND4N!=="undefined"){BAND4N.length=0;for(let i=0;i<=BAL.ageBand.length;i++)BAND4N.push(ageBandName(i))}
 /* ===== ONE CORE duplicate-rule hunt part 2 (review/one-core-dup2): one key per concept that had typed copies in several modules =====
    quyLv  = the "quý" word ladder (thiện cảm) of VANPHONG:69 / owner OD:L247 (Ghét ≤ q0 · Không ưa < q1 · Bình thường ≤ q2 · Có cảm tình
@@ -370,9 +376,9 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
    oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
-   age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
+   (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});BAL.age.adult=18;
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for

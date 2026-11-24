@@ -37,8 +37,8 @@ function personRoleRank(p,hint){const out=(role,rank,extra)=>Object.assign({role
   if(typeof rivals!=="undefined"&&rivals.includes(p)){if(p.out)return out("cold","cold");return out("consort",p.queen?7:cl(p.rank||0,0,7))}
   if(typeof allKids==="function"&&allKids().some(([k])=>k===p)||(p.sex&&p.hp!=null&&/^(Hoàng tử|Công chúa)/.test(p.name||""))){const kid=(p.age||0)<13;
    return out(p.heir?"heir":p.sex==="m"?"prince":"princess",null,{kid,sex:kid?"k":p.sex==="m"?"m":"f"})}
-  if(S&&p===S.maid)return out((p.age||18)>=36||p.old?"mama":"maid",p.rk!=null?p.rk:BAL.srvRk.dai);
-  if(p.role==="maid")return out((p.age||18)>=36||p.old?"mama":"maid",p.rk==null?1:p.rk);
+  if(S&&p===S.maid)return out((p.age||BAL.ageMin)>=BAL.ageBand[1]||p.old?"mama":"maid",p.rk!=null?p.rk:BAL.srvRk.dai);
+  if(p.role==="maid")return out((p.age||BAL.ageMin)>=BAL.ageBand[1]||p.old?"mama":"maid",p.rk==null?1:p.rk);
   if(p.role==="eunuch")return out("eunuch",p.rk==null?1:p.rk);
   if(S&&S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)return k==="ty"?out("physician"):out("eunuch",k==="tq"?3:2)}
   if(S&&(S.men||[]).includes(p)){const rw=String(p.rw||"");return out(/thái y/i.test(rw)?"physician":/thị vệ/i.test(rw)?"guard":/vương gia/i.test(rw)?"royal":"man")}

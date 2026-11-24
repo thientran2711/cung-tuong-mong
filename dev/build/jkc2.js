@@ -143,8 +143,8 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
  S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
- if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
- else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=18;S.bac=Math.min(S.bac||0,60)}
+ if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,8)}
+ else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,60)}
  S.rank=0;S.sung=0;S.danh=Math.min(S.danh||0,d==="nc"?12:3);S.staff=[];S.place=kc2P(d==="dan"?"nha":"tam");S.pal=null;S.tonight=null;
  if(S.maid)S.maid.kcTy=1;
  kcWhere();Q=Q.filter(m=>m.nl);S.nightWhy=null;

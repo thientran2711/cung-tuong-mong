@@ -21,7 +21,7 @@ function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.qu
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
- d("age",18+R(8));d("sac",40+R(55));d("tai",30+R(50));d("tamco",Math.round((v.malice||40)/3)+R(20));d("duc",Math.max(5,65-Math.round((v.malice||40)/2))+R(15));
+ d("age",BAL.ageMin+R(8));d("sac",40+R(55));d("tai",30+R(50));d("tamco",Math.round((v.malice||40)/3)+R(20));d("duc",Math.max(5,65-Math.round((v.malice||40)/2))+R(15));
  if(typeof tmInstall==="function")tmInstall(v);/* 2f2: Tai mắt = her real placed spies, none at birth */d("danh",8+rank*8);d("bac",40+rank*20);d("suc",80);d("arts",{cam:R(3),ky:R(2),thi:R(3),hoa:R(2),vu:R(3),y:R(2)});d("artp",{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0});
  d("maid",{name:nmNew("maid"),loyal:50+R(31)});d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
  d("lastPromo",0);d("inv",[]);d("evm",{});d("rl",{});d("ro",{});d("oan",0);d("an",0);d("nightLog",[]);d("th",R(20)-5);d("hh",R(20)-5);d("schemes",0);d("hieu","");d("dress",null);d("asthma",R(7)===0);d("pray",0);d("fert",0);d("thu",0);
