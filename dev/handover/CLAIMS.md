@@ -1423,7 +1423,7 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | VEIL-1 screen-change veil (opus; owner bug OD 24/11 ~10:20Z) | review/kit-screenveil; reports/screenveil.md | MAIN 118 | session_01V1ZZH1kjVkiTZ88EUdo1U6 | RUNNING | 24/11 07:12Z |
 | SELSCENE-6 opening 3 days (opus; successor of SELSCENE-5) | review/selection-scene | MAIN 118 | session_01V1ZZH3MNrUmsbyK2EQz7Wt | RUNNING | 24/11 07:22Z |
-| E69 B-MOMENT #9 Khoảnh khắc chân dung (opus; briefs/E69-moment.md) | review/moment; reports/moment.md | FOREMAN E | session_01DgYSWpc3VRPoSDT4hF2V2H | RUNNING | 24/11 06:40Z |
+| E69 B-MOMENT #9 Khoảnh khắc chân dung (opus; briefs/E69-moment.md) | review/moment 5a504f92; reports/moment.md | FOREMAN E | session_01DgYSWpc3VRPoSDT4hF2V2H | SSK 5a504f92 | 24/11 07:40Z |
 PROMO BUILD part A kỳ sắc phong + special-exam/patron routes + PHÂN CUNG phanCungEdict (opus BIG; OD 24/11 ~09:20Z/~09:35Z/~09:50Z; briefs/D-promo-build-A.md) | review/promo-build | session_01D3E3NZySUEoGSM1U1L4WvJ | RUNNING | 24/11 06:50Z (Foreman D depth 1)
 NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02Z/06:41Z; briefs/D-net-thresholds.md) | reports/net-thresholds.md | session_01D3E3NZ3P5j3cm5nr2pybFY | DONE (archived) | 24/11 06:55Z (Foreman D depth 1)
 | LANDER LC10 (opus; successor of LC9) | reports/land-chain-10.md | MAIN 118 | session_01V1ZZH4w5vkbybCTwK1DkHR | RUNNING | 24/11 06:44Z |
