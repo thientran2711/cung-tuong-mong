@@ -506,3 +506,6 @@ DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5
 
 ## ENGINE P6
 - 01:3xZ 24/11 ENGINE #4 (opus, session_01N1tNP5RyEw6T1AADGb6c75). START_CTX ~3 % (used_tokens reads 0 → own estimate; roll at ~28 %, ceiling 60 %). Branch review/thin-p6 from thin-p0-r1 a76ba1e4 (thin-p2/p3/p4 not merged). «## API P6» published; engines + validators next (sha here when ready).
+
+## P6-SEEDS-D
+DONE 8eda1fbb j70seeds_b.md 38 routes: frame 5 plant 5 bribe 4 block 4 rumor 4 accuse 4 ksab 4 joint 4 huydung 4 (36 with real object) validator pending (own script: cost 2-3, tell length, no digits/odds words all pass)
