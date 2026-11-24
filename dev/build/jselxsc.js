@@ -150,9 +150,15 @@ const SELX_DTV="p:dtv";
    d.querySelectorAll(".kpm-row .kpm-rs").forEach(x=>{if(/^tốn:/.test(x.textContent))x.textContent=`tốn: ${selxNumW(BAL.walk.near)} khắc`});
    const sp=d.querySelector(`[data-go="kpm:${Z.at}"]`);if(sp)sp.classList.add("here");return d.innerHTML}catch(e){console.error(e)}}return f0.apply(this,arguments)});
  w("render",f0=>function(){const r=f0.apply(this,arguments);try{if(on()){const n=document.getElementById("next");if(n)n.disabled=true}}catch(e){}return r});
- window.addEventListener("click",e=>{try{if(!on()||Q.length)return;const b=e.target.closest("#panel [data-kpmback]");const t=e.target.closest("#tabs [data-tab]");
-  if(b||(t&&t.dataset.tab!=="go")){e.preventDefault();e.stopImmediatePropagation();window.__kpm=null;selxMapBack()}}catch(err){console.error(err)}},true)})();
-function selxMapBack(){try{tab="act"}catch(e){}const Z=S.selx2;if(Z&&Z.qHold){Q.push(...Z.qHold);Z.qHold=null}selxFree();try{showModal();render()}catch(e){}}
+ /* SELSCENE-9 (MAIN 121 ruling): the free card STAYS in Q under the map (state only: Q[0].selxMapUp) — hidden while the map is on screen, shown
+    again on return; so a save / co-op rebuild / any driver that reads Q never finds the days without their card */
+ const up=()=>{try{const m=Q[0];return !!(m&&m.selxMapUp&&on()&&window.__kpm&&window.__kpm.slot===SELX_DTV)}catch(e){return false}};
+ w("showModal",f0=>function(){try{const m=Q[0];if(m&&m.selxMapUp){if(up()){const M=document.getElementById("modal");if(M)M.hidden=true;return}delete m.selxMapUp}}catch(e){}return f0.apply(this,arguments)});
+ window.kpmBackHook=()=>{try{if(!up())return false;window.__kpm=null;selxMapBack();return true}catch(e){console.error(e);return false}};
+ window.addEventListener("click",e=>{try{if(!on()||(Q.length&&!up()))return;const t=e.target.closest("#tabs [data-tab]");
+  if(t&&t.dataset.tab!=="go"){e.preventDefault();e.stopImmediatePropagation();window.__kpm=null;selxMapBack()}}catch(err){console.error(err)}},true)})();
+/* back from the map: the card that opened it is dropped and her free card is made again where she now stands */
+function selxMapBack(){try{tab="act"}catch(e){}const Z=S.selx2;for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].selxMapUp)Q.splice(i,1);if(Z&&Z.qHold){Q.push(...Z.qHold);Z.qHold=null}selxFree();try{showModal();render()}catch(e){}}
 /* walk to a part: the walk price of the old menu (BAL.walk.near), then her free card there */
 function selxMapGo(part){const Z=S.selx2;if(!Z||!selxDaysOn())return;window.__kpm=null;if(part!==Z.at&&Z.days!==3){selxSpend(BAL.walk.near);Z.at=part}selxMapBack()}
 /* the free card: «Ra Dư đồ» in place of the «Sang …» rows (days 1–2) */
@@ -160,8 +166,31 @@ function selxMapGo(part){const Z=S.selx2;if(!Z||!selxDaysOn())return;window.__kp
   if(m&&m.pid==="selxD"&&m.opts&&Z.days!==3&&!window.__bot){const nm=[...BAL.selx.lodge.so,BAL.selx.lodge.sanh].map(x=>`Sang ${x[1]}`);const i=m.opts.findIndex(o=>nm.includes(o.n));
    m.opts=m.opts.filter(o=>!nm.includes(o.n));if(i>=0)m.opts.splice(i,0,selxO("Ra Dư đồ",()=>selxMapOpen(),{selxMap:1}))}}catch(e){console.error(e)}return r}})();
 /* «Ra Dư đồ» is a way out of the card, not a deed: no result card, no log line (the chooseM path would show «Ra Dư đồ — không đổi gì») */
-function selxMapOpen(){const Z=S.selx2;/* the cards waiting for after the edict («Mệnh truyện», «Nhập cung») step aside while she walks the map */
- Z.qHold=(Z.qHold||[]).concat(Q.splice(0));try{tab="go"}catch(e){}window.__kpm={slot:SELX_DTV,k:"dtv"};try{showModal();render()}catch(e){}}
+function selxMapOpen(){/* her free card stays first in Q, marked; showModal hides it while the map is up (MAIN 121) */
+ const m=Q[0];if(m&&m.pid==="selxD")m.selxMapUp=1;try{tab="go"}catch(e){}window.__kpm={slot:SELX_DTV,k:"dtv"};try{showModal();render()}catch(e){}}
 document.addEventListener("click",e=>{try{const b=e.target.closest("#modal button[data-m]");if(!b)return;const c=Q[0]&&Q[0].opts&&Q[0].opts[+b.dataset.m];if(!c||!c.selxMap)return;
  e.preventDefault();e.stopImmediatePropagation();selxMapOpen()}catch(err){console.error(err)}},true);
 try{Object.assign(window,{selxMapGo,selxMapBack})}catch(e){}
+/* ================= SELSCENE-9 (RV-SELX FAIL 3; law 6 b/c; OD 24/11 ~09:20Z phân cung after the sắc phong) =================
+   During the 3 days she is a tú nữ living in Dưỡng Tú viện: no residence, no personal maid, no palace deeds until the edict.
+   The stage = a place "dtv" (as j42 Tân Giả khố / jkc KCPL): name «Dưỡng Tú viện · <sở>», the painting of the part she stands in (SELX_ART),
+   the people = the girls of that part (selxHere; strangers stay §59.1 «Người lạ» through the stage's own token rule) + the ma ma at Tiền sảnh.
+   The Hành sự / Cung nhân tabs show the kit empty card (§37.2) instead of the palace deck / her staff. Solo and co-op alike (a seat's own screen). */
+(function(){const on=()=>{try{return !!(S&&!S.dead&&selxDaysOn())}catch(e){return false}};
+ const base=()=>{const p=placeOf;placeOf=function(k){if(k==="dtv"){const Z=S.selx2||{};return{k,n:`${BAL.selx.lodge.n} · ${selxSo(Z.at)||BAL.selx.lodge.sanh[1]}`,d:"",sc:"dtv"}}return p.apply(this,arguments)};window.placeOf=placeOf};
+ const visit=()=>{const Z=S.selx2;let ppl=[];try{ppl=selxHere().slice()}catch(e){}if(Z.at===BAL.selx.lodge.sanh[0]){try{const m=elderBy("gt");if(m&&!ppl.includes(m))ppl.push(m)}catch(e){}}
+  return{k:"dtv",people:ppl,talked:false,tk:{},msg:""}};
+ const art=()=>{try{const s=SELX_ART[S.selx2.at]||SELX_ART.rooms;if(typeof SCIMG==="object")SCIMG.dtv=String(s).replace(/^.*?\bimg\//,"").replace(/\.webp.*$/,"")}catch(e){}};
+ const wrap=()=>{base();
+  const r0=renderStage;renderStage=function(){if(!on())return r0.apply(this,arguments);const p=S.place;art();S.place="dtv";
+   try{return r0.apply(this,arguments)}finally{S.place=p}};window.renderStage=renderStage;
+  /* the people of the stage (tokens, counts, taps read curPeople at any time, also after the render): the girls of her part */
+  const c0=curPeople;curPeople=function(){return on()?visit().people:c0.apply(this,arguments)};window.curPeople=curPeople;
+  /* the «Về phòng» head button (her room) and anything keyed on the html class: no room yet */
+  const r1=render;render=function(){try{document.documentElement.classList.toggle("selxdays",on())}catch(e){}return r1.apply(this,arguments)};window.render=render;
+  const p0=renderPanel;renderPanel=function(){if(!on()||typeof tab==="undefined"||!["act","staff"].includes(tab))return p0.apply(this,arguments);
+   try{const el=document.getElementById("panel");el.innerHTML=kitEmpty(BAL.selx.lodge.n,tab==="act"?["Ba ngày tuyển tú, mọi việc theo lời ma ma.","Ngươi chưa có cung riêng; tới sắc phong mới được phân cung."]:["Tú nữ chưa có cung nhân hầu hạ.","Cung nữ được phân tới sau sắc phong."],{art:selxArt(S.selx2.at)||selxArt("rooms")});return}catch(e){console.error(e)}return p0.apply(this,arguments)};window.renderPanel=renderPanel};
+ /* her «Cung nhân» rail button (her own staff) has no place in Dưỡng Tú viện: hidden on the dtv stage only */
+ try{const st=document.createElement("style");st.textContent='.stage.sc-dtv [data-kgf="cn"],html.selxdays #k3room{display:none!important}';document.head.appendChild(st)}catch(e){}
+ /* outermost: after every other file has wrapped renderStage / renderPanel (the inner wrappers all see S.place "dtv") */
+ setTimeout(()=>{try{wrap()}catch(e){console.error(e)}},0)})();

@@ -13,11 +13,14 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
   for(let n=0;n<60&&Q.length;n++){const m=Q[0];const nm=(m.opts||[]).map(x=>x.n);if(nm.includes("Ra Dư đồ")){card=m;break}const c=nm.findIndex(s=>/Cất đồ|Theo|Tập thật kỹ|Quỳ|Nghe/.test(s));if(m.opts)chooseM(c<0?0:c);else closeModal();close()}
   o.found=!!card;o.noSang=card&&!card.opts.some(x=>/^Sang /.test(x.n));const q0=Q.length-1;document.querySelectorAll('#rtoast').forEach(x=>x.remove());
   showModal();const j=card.opts.findIndex(x=>x.n==="Ra Dư đồ");document.querySelector('#modal button[data-m="'+j+'"]').click();render();
-  o.tab=tab;o.Q=Q.length;o.toast=!!document.getElementById('rtoast');o.kpmv=!!document.querySelector('#panel .kpmv');o.rows=[...document.querySelectorAll('#panel .kpm-row')].map(x=>x.dataset.kpmpart);
+  o.tab=tab;o.Q=Q.length;o.kept=Q[0]===card&&!!card.selxMapUp;o.hid=document.getElementById('modal').hidden;o.toast=!!document.getElementById('rtoast');o.kpmv=!!document.querySelector('#panel .kpmv');o.rows=[...document.querySelectorAll('#panel .kpm-row')].map(x=>x.dataset.kpmpart);
   o.sel=(document.querySelector('#panel .kpm-row.sel')||{}).dataset;o.sel=o.sel&&o.sel.kpmpart;o.at=S.selx2.at;o.next=document.getElementById('next').disabled;
   const n=[...document.querySelectorAll('#panel .kpm-row')].reduce((a,x)=>a+(+((x.textContent.match(/(\d+) bóng/)||[])[1]||0)),0);o.count=n;o.all=1+selxAll().length;
   const kh=S.selx2.kh;const t=[...document.querySelectorAll('#panel .kpm-row')].find(x=>x.dataset.kpmpart!==S.selx2.at);const to=t.dataset.kpmpart;t.click();
-  o.moved=S.selx2.at===to;o.spent=kh-S.selx2.kh;o.walk=BAL.walk.near;o.back=Q[0]&&Q[0].pid==="selxD"&&tab==="act";o.restored=Q.length-1>=q0;return o});
+  o.moved=S.selx2.at===to;o.one=Q.filter(m=>m&&m.pid==='selxD').length===1;o.spent=kh-S.selx2.kh;o.walk=BAL.walk.near;o.back=Q[0]&&Q[0].pid==="selxD"&&tab==="act";o.restored=Q.length-1>=q0;
+  /* «‹ Dư đồ» on the map = back to her card (jpm kpmBackHook), never a map that re-opens itself */
+  {const c2=Q[0];const j2=c2.opts.findIndex(x=>x.n==="Ra Dư đồ");if(j2>=0){showModal();document.querySelector('#modal button[data-m="'+j2+'"]').click();render();const bk=document.querySelector('#panel [data-kpmback]');o.bk=!!bk;if(bk)bk.click();o.bkTab=tab;o.bkCard=Q[0]&&Q[0].pid==="selxD"&&!Q[0].selxMapUp&&!document.getElementById('modal').hidden;o.bkOne=Q.filter(m=>m&&m.pid==='selxD').length===1}}
+  return o});
  ok(r.found&&r.noSang,'free card: «Ra Dư đồ» replaces the «Sang …» rows',r);
  ok(r.tab==="go"&&r.kpmv&&r.rows.join()==="dong,tay,bac,sanh",'the Dư đồ opens on Dưỡng Tú viện level 2: Đông / Tây / Bắc sở + Tiền sảnh',r.rows);
  ok(!r.toast,'«Ra Dư đồ» raises no result card',r.toast);
@@ -26,5 +29,8 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
  ok(r.next,'«Sang buổi» stays shut during the 3 days',r.next);
  ok(r.moved&&r.spent===r.walk,'a part tap walks there for BAL.walk.near khắc',[r.moved,r.spent,r.walk]);
  ok(r.back&&r.restored,'her free card comes back there; the deferred cards are back in the queue',[r.back,r.restored]);
+ ok(r.kept&&r.hid,'the free card stays first in Q under the map (hidden while the map is up)',[r.kept,r.hid]);
+ ok(r.one,'after a walk there is ONE free card (the old one is dropped)',r.one);
+ ok(r.bk&&r.bkTab==="act"&&r.bkCard&&r.bkOne,'«‹ Dư đồ» brings her free card back (one card, shown)',[r.bk,r.bkTab,r.bkCard,r.bkOne]);
  ok(!errs.length,'no page errors',errs);
  console.log(bad?`${bad} FAIL`:'ALL PASS');await b.close();process.exit(bad?1:0)})();
