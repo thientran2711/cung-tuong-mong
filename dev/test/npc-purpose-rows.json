@@ -3442,7 +3442,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "affair exposed: death or lãnh cung (roll 50)",
-"done": "if(npcWhy(\"empMercy\",{p:S}))cold("
+"done": "if(npcWhy(\"empMercy\",{p})){if(me)return cold("
 }
 ]
 }
