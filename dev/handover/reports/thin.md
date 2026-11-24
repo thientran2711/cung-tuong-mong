@@ -1199,6 +1199,50 @@ No clamp mechanism found. Both seats adopt the ONE merged state whole (jcoopworl
 - statSet now also clamps bac ≥ 0 and apply clamps S.ghen / S.an when present: no caller passes bac / ghen / an to statSet; scan shows ghen/an sites 0…100 → no behaviour change found.
 - Game-wide typed 0/100 at the 863 sites remain (scan-guarded inside the table) — outside this branch.
 
+## REVIEW robot-coop-fix-2 r3 (BIG, opus; session_01N1tNP5GQ2J9RoWGbzfVreX; START_CTX ≈5 %) — PASS
+PRIORITY #1 CHECK ('robot-coop-fix-2 r3 / personRange gp ep / body sucCap / coop-range-identity'): OD 2204–2205 | main coop/worker/src/merge.js (no clamp), jcoopworld.js toCanon, jkh.js khFit/sucCap, jagstaff asSt/asAp | review/* robot-coop-fix-2-r3 71076b61 (this), robot-coop-fix-3 32121242, robot10-coop 6576e086 (harness), robot10-coop-saves cfcfd5de (9 co-op saves) | claims B fixer #6 4TkcdjyymdxPqwSj5 → #7 3fqMhAjzz59xaXXqg.
+Reviewed: review/robot-coop-fix-2-r3 **71076b61c17ee186662d72f586b6dce4cb92aa0f**. Newest origin/main at start AND at verdict = 502c48c9, already an ancestor (71076b61 = bbd98195 + LIVE 502c48c9, FF) → bare head = merged head; no fix-3 / other co-op work landed in between. Built with assemble.py: no tracked diff (ranges.gen.js regenerated identical).
+### r2 FAIL rows — status
+| r2 FAIL | check | result |
+|---|---|---|
+| 1 law 11 canonical gp/ep | range.test --table on canon shape: R[].ep[mp] 3→0,1 = **0** · gp 95→100,99 = **100** · gp 5→0,1 = **0** (r2: −2 / 104 / −4). BAL.personRange.map.gp = stat.ghen, ep = stat.ev (references, not typed); range.test asserts MAP.gp==STAT.ghen, MAP.ep==STAT.ev | FIXED |
+| 2 staff Sức / one rule both sides | Worker caps Sức ≤ sucCap only on BAL.personRange.body = W.R[] + P.*.S; game: every sucCap caller is S or a rival (j1 apply, j8 ap, j3/j42/j76 regen, jcmaid, jpet, jkh khFit monthly + on deser), staff never (jagstaff 0…100). Worker sucCap = jkh sucCap on 500 people (range.test). Staff row: 81 (age 59, cap 79) stays 81 | FIXED |
+| 2 identity guard | `coop-range-identity.js --seeds 7,11,23,41,99 --turns 120 <9 co-op saves>` and `--every`: 14 states, **1 rewrite: save …1bo6v9z W.R[] «Thôi Chỉ Lan».ro.902 −2→0** = an overflow the OLD (LIVE, no-clamp) Worker stored (no game site writes ro < 0: j9 oanAdd c(), j28 max 0, jcoopworld:798 cl 0,100) → the clamp repairing it is right, not a cut of a game value. Every other state 0. `--every --seeds 7,23 --turns 1500`: PASS 0 | FIXED (see note a) |
+| 3 scan renames + identity | scan reads `x.<map>[mp|pid|me()|fp()]=` in jcoop*.js: rl ro gp ep evm cev OK, where exempt (place). My grep of every `.<map>[<player id var>]=` in jcoop*.js: no other person map keyed by a player id | FIXED |
+| 4 coop-worker.yml paths | coop/worker/**, dev/build/jbalpr.js, jbal2.js, gen_coop_ranges.js; range.test in the deploy job | FIXED |
+### Planted regressions (scratch worktree rvplant, reverted)
+| plant | tool | result |
+|---|---|---|
+| delete `BAL.personRange.map.gp=…` + regen | coop-range-scan | `- gp: 2 sites … → MISSING` · COOP-RANGE FAIL · range.test AssertionError → **CAUGHT** |
+| new canonical map `r.xq[mp]=1` in jcoopworld.js:139 | coop-range-scan | `- xq: 1 sites → MISSING` · FAIL → **CAUGHT** |
+| jbalpr tin [0,99] without regen | gen --check / range.test | «ranges.gen.js is STALE vs BAL» both → **CAUGHT** |
+| body += "W.R[].staff[]" (staff get sucCap) + regen | coop-range-identity --every (2 co-op saves) | unplanted PASS 0 → planted FAIL 5: Nhâm Ngọc Hành 81→79, Lão Hỉ Tử 90→83, Lão Ninh Tử 100→77, Lão Lợi Tử 97→89, Tiểu Phong Tử 100→98 → **CAUGHT** |
+### Laws touched
+Law 4 ONE CORE: PASS (Worker table generated from jbalpr.js + BAL.kh; j8 ap / j1 apply / statSet read BAL.personRange, range.test greps no typed list; gen --check). Law 11: PASS (scan 48 fields, 863 sites, 0 wider; canonical renames; identity on played states). Law 6a/real numbers: bạc/Sủng no longer go below 0 after a merge (A/B). Laws 1–3, 5, 7–10, 12: no option / text / UI / art change in this branch (game diff = j1/j8 clamp reads BAL, behaviour-neutral; Worker merge) → not touched.
+### Ran (commands + outputs; worktree /home/user/wt/rv3 = 71076b61; local wrangler dev :8797 = branch coop/worker, :8798 = main 502c48c9 coop/worker)
+- `node dev/build/gen_coop_ranges.js` (no arg: rewrote, no diff) · `--check` «ranges.gen.js = BAL (personRange + kh)».
+- `cd coop/worker && npm test` → … thin ALL OK · range ok (exit 0) · `node test/range.test.mjs --table` all rows in range (table above) · `node test/ws.test.mjs http://127.0.0.1:8797` ALL OK · `node test/chat.test.mjs http://127.0.0.1:8797` ALL OK.
+- `node dev/tools/coop-range-scan.js` and `--all`: COOP-RANGE PASS · 48 table fields · 0 wider · 863 sites.
+- `COOP_SWAP=0 node dev/test/coop-e2e.js <out> http://127.0.0.1:8797` **142/142** · `COOP_SWAP=1 …` **142/142**.
+- Old client during deploy: LIVE main 502c48c9 game vs the NEW Worker :8797, COOP_SWAP=0 **142/142**, COOP_SWAP=1 **142/142** (no protocol change; the branch's game diff is behaviour-neutral so a mixed room is the same case).
+- `bash dev/tools/quickcheck.sh` ALONE: CORE GATES PASS · TIME-SPILL PASS · old save ok («Mộ Dung Mạn Sương», buổi ok, 0 errors) · perf median new/live render 249/311, tab 554/518, buổi 2070/1726, tasks>200 25/25 → **QUICKCHECK PASS** (no perf noise → --runs 6 not needed).
+### A/B (harness review/robot10-coop 6576e086 overlay on both sides; CAP 300 PCAP 1500 POSLOG NEGTRAP; 1 pair × 1 kiếp per round; fix2 = 71076b61 game + Worker :8797; main = 502c48c9 game + Worker :8798; fix2log = 71076b61 game + a copy of the branch Worker that logs every clamp write (:8796))
+| row (rounds hit) | fix2 (4) | fix2log (4) | main (4) | read |
+|---|---|---|---|---|
+| number: bạc / sung < 0 (incl. ARRIVED) | **0/4** | **0/4** | **3/4** (sung −19 w4 · bạc −19 ARRIVED · bạc −14 w4) | the fix holds (history 0/5 vs 1/5, 0/5 vs 3/10) |
+| friend Sủng/Danh (coop-stat + coop-world friend rows) | 1/4 (w7: each screen shows the friend with ITS OWN 0/30 vs 1/42) | 0/4 | 1/4 (coop-stat b0.2) | equal; not the clamp: see below |
+| stuck | 0/4 | 1/4 (night gate, see note c) | 0/4 | week-end stuck family (fix-4), not the clamp |
+| save round-trip | 1/4 (staff name) | 2/4 (S.suc 100→99; R.11.hue) | 1/4 (S.suc 100→99) | save round-trip family (queued), all sides |
+| coop-pos | 1/4 | 0/4 | 1/4 | fix-3 family |
+| coop-world consorts differ | 0/4 | 1/4 (guest-only 1001 Hách Chỉ Lan, w4) | 0/4 | list membership; the clamp never touches ids/arrays (note c) |
+| pageerror | 0 | 0 | 0 | — |
+**Clamp writes in live play (fix2log, 4 rounds, wrangler log `CLAMPW`): 6 writes, ALL overflow repairs**: P.b.S sung −5→0, bac −10→0, −9→0, −5→0, ro.901 −1→0, W.R[] ro.902 −2→0. No interior value, no staff, no Sức write → the friend-stat rows (interior numbers 30 vs 42) cannot come from the clamp; the r2 «clamp 1/5 vs main 0/5» friend doubt is closed (now 1/8 vs 1/4).
+### Notes (not blocking)
+a. coop-range-identity is a separate Playwright tool, not in npm test / CI (the scan prints its name). Its solo seeds stay in game year 1 even at --turns 1500 (endTurn loop does not reach a new year), so old-age bodies are covered only by co-op saves + the planted staff row. A later hardening: run it in quickcheck with a year-2+ save.
+b. LIVE rooms made by the old Worker hold stored overflows (e.g. ro.902 −2); the new Worker repairs them at the next merge of that person — expected.
+c. For fixer #7 / fix-4 (not this branch): new stuck dump fix2log r3 week 7 buổi 3: host nrdy 7 / ngo 7 / ngoW 7 / nfr 7, guest nrdy 7 / ngoW 7, both «Chờ hảo hữu…», sent 6, trace «night 7 f=true» repeating (guest + «pull f=true») — NOT the ngoW −1 cause fixer #5 found (both committed, gate still shut). Plus coop-world «consorts differ, guest-only 1001 Hách Chỉ Lan rank 0» at week 4. Files: /home/user/wt/rv3out/ab/fix2log/r3 (container-local).
+Verdict: **PASS 71076b61c17ee186662d72f586b6dce4cb92aa0f** (ancestor = origin/main 502c48c9). No CDN review folder used; scratch shots/runs outside git.
+
 ## REVIEW robot10-onecore
 PRIORITY #1 CHECK: OD:L1267 (one core), 18 laws (4 / 11 / 2 / 3) | main dev/test/choice-value-scan.js, dev/measure/robot10-in.js | review/robot10-onecore 4d063689 | claims B fixer #5 4vn55dxG. Reviewer = small sonnet session_01N1tNP58gRW5Kr3V1fXZBZN. Worktrees rv-bare (4d063689), rv-merged (newest LIVE), rv-revert (planted regression), rv-main.
 **Verdict: PASS + 1 small fix by the reviewer** — merged head `5d4f722fdc0490056c5a71e03f6a15c4b4d9fd69` (= 4d063689 + reviewer fix 12866d32 + LIVE 502c48c9), pushed review/robot10-onecore-rv.
