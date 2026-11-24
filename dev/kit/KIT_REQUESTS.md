@@ -135,3 +135,7 @@ Status: DONE (KK18 audit 24/11) — review/kit-sqopt 5917286b KIT §6.2c SQUARE 
 4. knoticeDir — directional notice chip at the stage edge (arrow toward the trouble); mock uses kitChip red + ‹ ›.
 5. Ân sủng column collapsible in crowd/ring mode (Fold floor drops to ~410 px).
 6. kitHereCount for the head-count chip over ALL pages (not the current page).
+
+## 24/11 robot10 E FIXER #5 (session_01DgYSWkYxbaSjuykrs5JW4Q, FOREMAN E child6) — KIT REQUEST: stage title line still cut at the 9 px floor (kitFitTitle / j59t)
+Robot R8 bd_hen c4 (2/10 lives, iPad 1180x820, «act» tab = place stage): `span.j59t` «Cung nữ thân tín tam đẳng» cut (scrollWidth > clientWidth with `white-space:nowrap; overflow:hidden`, j59.js:337). The kit's ONE shrink rule kitFitTitle (j59.js:53–54) steps the font down to a 9 px floor and then stops; on a crowded stage the token tag is narrower than that title at 9 px, so the end of the rank is clipped (the full text is only in the tag's `title` tooltip, which a touch player never sees).
+Ask the kit keeper to choose the kit rule for a title that does not fit at the floor (every stage tag + `.kscn-tag`, one rule): e.g. allow a 2nd line for the title only (name stays 1 line), or a kit short form of the long merged titles. Not changed by the fixer (KIT FIRST). FOR MAIN line in FOREMAN_E_STATUS.md.

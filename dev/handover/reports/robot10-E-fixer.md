@@ -307,3 +307,46 @@ Next for the successor: answer E81r on fix-3 r4 and the fix-5 reviewer if they F
 | review/leave-palace-r4 9aa54fa2 | 8d93c027 | none | identical | leave-palace 135/135 | 142/142 | 141/142 (1 FAIL S.fidUsed.50 A=undefined B=consort:c27 after week 1) → reruns below | PASS (render 208/195, tab 288/371, buổi 1657/2029 ms) |
 Bare main d521656c coop-e2e Fold host 142/142 (12:54Z, load 0.7) → the 11:42Z week-0 failure on 178cac37 is gone with test-mrfoot.
 leave-palace-r4 COOP_SWAP reruns: 142/142, 142/142 → 1 FAIL in 3 runs (S.fidUsed.50 A=undefined B=consort:c27, «same world on both seats», after week 1). Bare main d521656c COOP_SWAP: 142/142, 142/142 (0 in 2). dev/build of r4 = 8d93c027 (unchanged by the merge), so it is not a merge effect; 1/3 vs 0/2 does not prove flake or real — the leave-palace reviewer should judge if fidUsed is on its path.
+
+# FIXER #5 (successor) — session_01DgYSWkYxbaSjuykrs5JW4Q (FOREMAN E child6 session_01DgYSWm2QasYcAi4WDAWKaX) · depth 7
+PRIORITY #1 CHECK ('robot10-e-fix|lazy TIMEOUT|Sang ngày mới|j59t|fixer #5|spyQueen|selfLoop|fix-hadoc-loop|nfX'): OD 3 | ledger 0 | claims 8 | main 15 | review/* 10 (robot-fix-cnv(-2) F night stall harness; robot10-e-fix-1 null.queen; fix-hadoc-loop LIVE; fix-2 r3 lesson filter inside fix-5-r) | archive 0.
+START_CTX ≈ 4 % (1 M window; get_session reads 0) → rollover at 29 %, ceiling 60 %. LIVE = origin/main 8eceeef9.
+
+## 17. Triage — R8 (bd_tuyet 50 lives on 14ba8768 + main harness; bd_hen 50 lives: c1/c2 on 14ba8768 + fix-2 r1, c3–c5 on 9e89619a = LIVE fd85907a + fix-2 r3)
+| family (R8 rows) | verdict | owner / branch | proof |
+|---|---|---|---|
+| (a) lazy TIMEOUT rank 5–6: ring «spyQueen / dilemma» ×400, logs «Dò la: Thôi.» (bd_tuyet lazy-5, bd_hen c3 lazy-2 / lazy-5) | HARNESS | **E-FIX-6** (this) | robot10-in PERS.lazy takes the LAST option of every card; «Dò la» on the Hoàng hậu opens jtamco's road card (Làm như thường / Hao tâm cơ / Thuê người / **Thôi**) → «Thôi» → no time passes → sensibleStep chose spyQueen again: that option had no L label, so the 3-per-buổi ban never reached it. dev/test/r10e-selfloop.js on R8-cautious-3 (rank 6): before = TIMEOUT, after = moves on |
+| (a') skilled TIMEOUT ring «lesson» ×400 (bd_hen c1 skilled-1, fix-2 r1 harness) | HARNESS, fixed | E-FIX-2 r3 0673d1a1 (inside fix-5-r) | inpage6 lessonCands now has the j2 lesson() gate artPts<100 (r10e-lesson.js ok on this branch) |
+| (a'') speed TIMEOUT «Bày mưu ↔ Hạ độc / Hủy dung» ring dilemma ×400 (bd_tuyet speed-1, speed-4) | REAL, fixed LIVE | fix-hadoc-loop a8004db6 (jtamco/j70 «ROBOT-10 bug B»; not in 14ba8768, in LIVE) | no such row in c3–c5 (LIVE fd85907a base) |
+| (a''') TIMEOUT «Bỏ cuộc?» opts [] over a MƯU game (bd_tuyet random-2/3/4, speed-2) | HARNESS, fixed | E-FIX-2 kcfYes (inside fix-5-r) | old main harness on the bd_tuyet run |
+| (h) «forced road bd_tuyet not played» (speed-2) | HARNESS | E-FIX-6 (row text) | the life TIMEOUT'd on «Bỏ cuộc?» at buổi 0 (row a''') → never reached the road; robot10.js now says «life ended before its first buổi: TIMEOUT» instead of «road locked» |
+| (b) «Sang ngày mới» stuck after load, Fold (every file) | owned | **Foreman F** review/robot-fix-cnv 1f046fb7 / robot-fix-cnv-2 f78c695c (harness: the robot did not answer the flip scene / km-reward / kitFocus / #dawn; probe dev/test/r10-night-after-load.js, real stuck 0) — not on main yet | robot-fix-cnv.md §1 F2, §3, R1 «NOT REPRODUCED» |
+| (c) [fold] REAL page memory grows (c4 scholar-2: heap 64→84 MB, DOM 4.7k→31.6k over 1845 s) | owned | D robot10-lag (+ F r10-dom-census / r10-leak-path on robot-fix-cnv-2) | 1 life; bot-page mem rows = same owner |
+| (d) [ipad] act tab text cut span.j59t «Cung nữ thân tín tam đẳng» (c4, 2 lives) | REAL (kit rule) → **KIT REQUEST** | kit keeper (dev/kit/KIT_REQUESTS.md 24/11 robot10 E FIXER #5) + FOR MAIN | kitFitTitle (j59.js:53) stops at the 9 px floor; nowrap + overflow hidden (j59.js:337) then clips; no kit change by the fixer |
+| (e) CAP: no ending at wall cap 1800 s, ranks 3–7 (bd_tuyet 11, bd_hen ~20) | HARNESS cap (+ balance → robot10-reco) | robot10-reco (MAIN/owner) for rank reach / death age | lives alive at age 29–34, year 11–16, ~1 900–2 250 buổi; wall time = play ≈ 1 850 s of which UI checkpoints ≈ 1 000–1 200 s (buổi p50 ≈ 70 ms); endings ARE reached on the same road (deaths age 18–30, Xuất gia, ranks to Hoàng hậu). Not a game with no reachable ending |
+| (f) econ card TypeError null.queen (bd_tuyet cautious-3) | REAL, fixed on branch | robot10-e-fix-1 8f97171e (LAND READY, not on main: jstip:133 still rkName(SK.sup‖queenP()) on 8eceeef9) | — |
+| (g) stat out of range danh/duc/sac/tai = 101 (bd_tuyet; bd_hen c1/c2) | fixed LIVE | kframe-heir 35647d5 (j1 statSet clamp) | only the runs on 14ba8768; 0 rows in c3–c5 (LIVE fd85907a base) |
+| «Sủng ±n» vs applied sung (c1/c2) | harness false positive, fixed | fix-2 r3 (R8 report: gone on r3m) | — |
+| real-page TypeError «reading '1'» fold+ipad | REAL, fixed | robot10-e-fix-5-r 7876bf70 (LAND READY) | §15 |
+| save→load→save drift, tab lag, buổi > 1.5 s, mspot / kmrow overlap, text over text on go tab | owned | F robot-fix-cnv (save R2) / D nc-fix-3 · D robot10-lag · MAIN Dư đồ map lane | as §1 / §13 |
+| c4 lover-5 «Target page closed» | harness (runner) | — | one life, page closed by the box |
+
+## 18. E-FIX-6 «the bot re-chooses an act it declined / that was refused» (TEST-ONLY: dev/measure + dev/test) — review/robot10-e-fix-6
+Base: review/robot10-e-fix-5-r 7876bf70 (fix-2 r3 + fix-4 r2 + fix-5 harness, LAND READY) merged with LIVE origin/main 8eceeef9 (b69b0da6; conflicts only index.html/sw.js → rebuilt). Needs fix-5-r's harness (inpage6 kcfYes / lesson gate) — so it lands after / with fix-5-r.
+Fix (whole family, law 11): inpage6 sensibleStep labels EVERY option from its note("key") (after __persOpts, which reads !o.L) before the 3-per-buổi ban; a label that hits the ban is counted in window.__selfLoop and robot10.js prints ONE harness row «bot re-chose an act with no progress … dropped for that buổi» with the keys (so a real refusal stays visible). robot10.js «forced road not played» says when the life ended before its first buổi.
+Family scan dev/test/r10e-optlabel-scan.py (every option site in inpage6 + robot10-in / intn / instory hooks):
+| site | before (fix-5-r) | after |
+|---|---|---|
+| inpage6:104 spyQueen | no L → never banned (OPEN) | auto label n:spyQueen |
+| inpage6 charity / card / talk / lesson / selfStudy / virStudy / go | labelled | labelled |
+| robot10-in:37 rival acts, intn:31, instory:63/68/71 | labelled | labelled |
+| any future unlabelled option | OPEN | auto label |
+| open sites | 1 | 0 |
+Proof dev/test/r10e-selfloop.js (R8-cautious-3, rank 6, lazy persona, 450 sensible steps):
+| check | before (fix-5-r inpage6) | after |
+|---|---|---|
+| road cards opened | 201 | 123 |
+| result | TIMEOUT | no TIMEOUT, clock moved |
+| selfLoop | — | spyQueen ×40 buổi |
+| test | FAIL | ok |
+r10e-lesson.js (fix-2 r3 proof) on this branch: ok.
