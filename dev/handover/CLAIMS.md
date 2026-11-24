@@ -1520,7 +1520,7 @@ robot-coop-fix-2-r2 BIG review | review/robot-coop-fix-2-r2 | session_01N1tNP35V
 ROBOT-COOP FIXER #5 | review/robot-coop-fix-3, robot10-onecore, … | session_01N1tNP4vn55dxGBWKu7brhf | RUNNING | 2026-11-24T16:08Z (FOREMAN B)
 robot10-onecore SMALL review | review/robot10-onecore | session_01N1tNP58gRW5Kr3V1fXZBZN | RUNNING | 2026-11-24T16:52Z (FOREMAN B)
 REVIEW d-followups-1 (opus BIG; briefs/D-followups-1-review.md) | review/d-followups-1-rv | session_01D3E3NX5CughfPF92X2Mv3Z | PASS 563d336b (archived) | 24/11 17:00Z (Foreman D depth 5)
-| ROBOT FIXER cnv #3 (opus; successor of #2; R7 render-on drift bisect on r1+LIVE, R5 AGD.oc, R6 S.lost.at, R1, newlife-leak FAIL 2) | review/robot-fix-cnv-2 on f78c695c; reports/robot-fix-cnv.md | F | session_01UV1SziKNwwyvgm7Tp4E7AD | RUNNING | 24/11 17:15Z |
+| ROBOT FIXER cnv #3 (opus; successor of #2; R7 render-on drift bisect on r1+LIVE, R5 AGD.oc, R6 S.lost.at, R1, newlife-leak FAIL 2) | review/robot-fix-cnv-2 on f78c695c; reports/robot-fix-cnv.md | F | session_01UV1SziKNwwyvgm7Tp4E7AD | HANDOVER 80f49094 (R7 = timing noise + AGL deferred jobs; true-reload probe next); ARCHIVED | 24/11 17:15Z |
 robot10 E FIXER #5 (R8 families a–h, then R2/R5) | review/robot10-e-fix-6 4424f9dd SSK (TEST-ONLY harness); reports/robot10-E-fixer.md §17–§18 | session_01DgYSWkYxbaSjuykrs5JW4Q | SSK, on call | 24/11 17:40Z | owner FOREMAN E (child6)
 D REMERGE + LAND READY train (opus BIG; ORDER MAIN 125 16:31Z; servant-trust → promo-build-2 → law1-gifts → palace-distance → nc-fix-4 → kit-promo-hook; briefs/D-remerge-land.md) | review/<x>-rv | session_01D3E3Na1itJyTLYhXYvK1Zr | RUNNING | 24/11 17:39Z (Foreman D depth 5)
 kit-chain repair A (veil harness + dialogue-vn/daytitle/evframe-r2) | review/kit-dialogue-vn, kit-daytitle, kit-evframe | session_01N1tNP2vPgig2hQXhhcVq5J | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
@@ -1554,3 +1554,5 @@ ring4 fixes (MAIN 7 FAILs) | review/ring-design-4 | session_01V1ZZH2FGU6ipDh8a2Q
 | KIT REVIEW flight-mucluc-kit b021e429 + kit-tntile 8f23c937 (sonnet) | review/flight-mucluc-kit-r1, review/kit-tntile-r1 | B | session_01N1tNP337zrMPsvqFP2dyfa | RUNNING | 24/11 19:42Z |
 day-queue BIG review | review/day-queue | session_01V1ZZH1LA8QSoproNf1ie72 (opened by 125) | RUNNING | 2026-11-24T19:45Z
 motion4 fixes (MAIN 3 FAILs) | review/motion-design-4 | session_01V1ZZH1Y318MQY7unBNeZXG | RUNNING | 2026-11-24T19:49Z (MAIN 127)
+| ROBOT FIXER cnv #4 (opus; successor of #3; true-reload probe A/B f78c695c vs 80f49094, keep/revert jagent, S.tb trace, newlife-leak, merge LIVE, full gates) | review/robot-fix-cnv-2 on 80f49094; reports/robot-fix-cnv.md | F | (opening #4) | RUNNING | 24/11 20:08Z |
+| REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | (opening rev) | RUNNING | 24/11 20:08Z |
