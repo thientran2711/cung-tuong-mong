@@ -10,3 +10,11 @@ JOB = the reviewer's numbered FAIL list «### FAIL — numbered list for the bui
 5. Re-shoot the owner mock with the fixed selx-flow.js (Fold 755x1000 + iPad 1180x820 @2, 2× copies, mp4 of key beats), upload to CDN img/_review/selx8/ + index.html (media never in git), and MAIN checks every frame. Background at NORMAL brightness (OD 24/11 ~09:05Z real) — if the §95 dim is still the kit's, note it: KK18 owns that family, do not patch privately.
 Rules: kit parts only (law 9; missing → KIT REQUEST in dev/kit/KIT_REQUESTS.md + tell MAIN); every number from BAL (law 4); words per VANPHONG (law 7); strangers = §59.1 grey «Người lạ».
 DONE = SẴN SÀNG KIỂM <sha> line in reports/selection-scene.md (## FIX r1) + send_message to MAIN CHÍNH 121 session_01V1ZZH3Y1pnvf6EbatnuD4W (or the main named in HANDOVER_SESSION9.md tail). Roll over at START_CTX+25 % (ceiling 60 %): write your handover in the report, tell MAIN; MAIN opens the successor.
+
+## SUCCESSOR NOTE (MAIN 121, 24/11 ~09:55Z) — SELSCENE-9 continues from review/selection-scene 2d7e55da
+Read «## FIX r1 — SELSCENE-8» at the end of reports/selection-scene.md (on review/selection-scene) FIRST: done = co-op root (PEND.selxD resume), shared cohort selxRm host-only, quickcheck SETTLE walk, direct.js new rule.
+MAIN rulings for the open items:
+- quickcheck reroll: YES (09:42Z) — NEWLIFE/SETTLE rerolls a life ended at the selection (ban hoa), same idiom as the cung nữ reroll; no game bypass; reroll count logged + capped (≤5, then clear FAIL); noted in the report.
+- «Ra Dư đồ» co-op stick: KEEP THE FREE DAY CARD IN Q UNDER THE MAP (state only — the day card stays pending while the map is open and is shown again on return); do NOT change where the map opens from (that would change a working rule, law 16).
+- FAIL 3 stage: build the plan in the report (a «dtv» place like Tân Giả khố; no maid / no future residence / no palace deck during the 3 days, iPad right column too).
+Then: quickcheck runs, coop-e2e GREEN both seat orders (LOAD-COMPARE vs bare LIVE logged if the relay is loaded), mock re-shoot to CDN img/_review/selx8/ + index → SẴN SÀNG KIỂM to MAIN.
