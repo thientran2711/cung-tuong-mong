@@ -1242,3 +1242,4 @@ kit-mgskin review | review/kit-mgskin-r | session_01Rc5AsLG8CETU5oT3t3s98h | RUN
 | THIN P1b (sonnet): mini-game kinds dan co dauho ban doi doden theu mua chai hoadien co7 tc xa thq + MERGE lane (merges p1c, one SẴN SÀNG KIỂM) | review/thin-p1b; reports/thin.md «## P1b» | B | session_01N1tNP6BvAwirSLY2Xhryvj | RUNNING | 24/11 00:14Z |
 | THIN P1c (sonnet): every other remaining mini-game kind (sg_/thu_/tuoi/exam…; full 39-kind list first) | review/thin-p1c; reports/thin.md «## P1c» | B | session_01N1tNP43Y5prdNW2dvC5otW | RUNNING | 24/11 00:14Z |
 | REVIEW thin-p1 r1 (sonnet, BIG checklist) of review/thin-p1 b43fe174 (9 kinds; land after thin-p0) | review/thin-p1-r1; reports/thin.md «## REVIEW thin-p1 r1» | B | session_01N1tNP5XaLHAQvcsGkVxdj6 | RUNNING | 24/11 00:14Z |
+AGEBAND (owner 24/11 age bands 18/28/39/51/64) | review/ageband | Foreman E | ORDERED | 24/11 00:18Z (MAIN 114)

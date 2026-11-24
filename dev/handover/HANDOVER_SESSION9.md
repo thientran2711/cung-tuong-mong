@@ -2737,3 +2737,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:54Z) LANDED offline-all → LIVE 17835565 (deadline met). W5 HiB54y5c + rv JjPE1Lvb archived. sếp told how to use. GAP 7.
 - (00:14Z) KK14 MOCK-STAGE v3.2 4f978cdd (points 1–4 done) but still gold outlines → sent back for points 5–7 (OD 23:55Z) as v3.3; not shown to sếp. KIT §94 draft on review/kit-toilroom fc3a7000.
 - (00:18Z) LANDED know-notice → LIVE 16f5c1dc. KNOW-NOTICE JtW95DF2 + rv MzkmnYoW archived. GAP 6.
+- (00:18Z) OWNER age bands 18/28/39/51/64 (OD 00:25Z) → Foreman E ORDER AGEBAND (BIG, before TITLES2).
