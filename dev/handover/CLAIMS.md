@@ -1479,7 +1479,7 @@ SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z
 | REVIEW E78r robot10-e-fix-2 r2 SMALL (sonnet; briefs/E78r-review-robot-fix2-r2.md) of 145a1f54 | reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWoMwdxE3vbLg9RaC8a | DONE PASS 145a1f54 | 24/11 09:35Z |
 | REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | session_01DgYSWmgnAggZbjFVCTvkKj | DONE PASS 87f6480b; r3 PASS 8d93c027 (on LIVE 178cac37) | 24/11 09:40Z |
 kit-optinfo SMALL review | review/kit-optinfo-r1 | session_01N1tNP3WNbdFEbb19kfqAVR (owner B) | RUNNING | 24/11 09:44Z
-robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | RUNNING | 24/11 09:45Z
+robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | DONE PASS 15b5e1ff | 24/11 09:45Z
 | SELSCENE-9 (opus; successor of SELSCENE-8; briefs/M121-selscene-fix.md + SUCCESSOR NOTE) | review/selection-scene (from 2d7e55da); reports/selection-scene.md | MAIN 121 | session_01V1ZZH4SR1QdLaT7aXu5hUu | RUNNING | 24/11 09:56Z |
 rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | RUNNING | 24/11 09:57Z (Foreman D depth 2)
 | REVIEW E80r robot10-e-fix-2 r3 SMALL (sonnet; briefs/E80r-review-robot-fix2-r3.md) of 0673d1a1 | review/robot10-e-fix-2-r3m; reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWkoafyYG9Rp7ZDWTCf | DONE PASS 9e89619a92f29091bc1e40a5221d75cce768916a | 24/11 10:06Z |
