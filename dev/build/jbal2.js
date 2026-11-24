@@ -2037,6 +2037,12 @@ BAL.j72c={on:true,share:1,twist:.3,
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,an:3,rel:9,relb:9}},
  odds:{de:80,vua:60,kho:45},khac:{s:1,m:2,l:2},wait:{s:1,m:1,l:2},dl:{s:4,m:6,l:8},obKeep:60,
  need:{friend:10,feud:-10,poor:30,lo:45}};
+/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
+BAL.mgp={min:40};
+/* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
+BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
+/* ORDER THIN P1b (jmgpool_b.js): items per pooled test type of lane P1b (co and doi/doden: per group size / rows / round type) */
+BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq:130};
 /* ORDER THIN P2 (j7c.js composed intrigue): on = the family is live; share = its weekly-card weight as a multiple of one world card
    (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm
