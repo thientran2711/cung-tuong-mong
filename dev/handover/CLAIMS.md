@@ -1472,5 +1472,5 @@ PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams 
 kit-optfit SMALL review | review/kit-optfit-r1 | session_01N1tNP2kA3NCKySUjhemX3g (owner B) | RUNNING | 24/11 08:46Z
 | REVIEW E76r robot10-e-fix-1 8f97171e + fix-2 19183dca SMALL (sonnet; briefs/E76r-review-robot-fix12.md) | reports/robot10-fix12-review.md | FOREMAN E (child2) | session_01DgYSWnLbFuTTs6v74xqDYm | RUNNING | 24/11 08:50Z |
 | robot10 E FIXER #2 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md §3/HANDOVER) | review/robot10-e-fix-<n≥3>; reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWmqVHbtQnrFEo7E9r6 | RUNNING | 24/11 09:05Z |
-REVIEW net-build ed1be95a (opus BIG; briefs/D-net-build-review.md) | review/net-build-rv | (rv) | RUNNING | 24/11 09:12Z (Foreman D depth 1)
-SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z; briefs/D-servant-trust.md) | review/servant-trust | (st) | RUNNING | 24/11 09:12Z (Foreman D depth 1)
+REVIEW net-build ed1be95a (opus BIG; briefs/D-net-build-review.md) | review/net-build-rv | session_01D3E3NaqgB7naRGuobjMu4H | RUNNING | 24/11 09:12Z (Foreman D depth 1)
+SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z; briefs/D-servant-trust.md) | review/servant-trust | session_01D3E3NYMzUyzf9KBhvBCtFW | RUNNING | 24/11 09:12Z (Foreman D depth 1)
