@@ -47,7 +47,7 @@ function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{con
  L.sort((a,b)=>b.sc-a.sc||(+b.v.sac||0)-(+a.v.sac||0));L.forEach((x,i)=>{x.place=i+1;const r=selxResult(i+1);x.kept=r.kept;x.step=r.step});return L}
 function selxIntake(){const I=BAL.selx.intake;return I.min+R(I.max-I.min+1)}
 /* lodging plan: rooms of perRoom girls (her room first), beds of perBed (OD 24/11 ~05:35Z: 1 room, 2 beds, 2 girls per bed) */
-function selxRoomPlan(girls){const P=BAL.selx.room,L=[S,...(girls||[]).filter(v=>v!==S)],rooms=[];for(let i=0;i<L.length;i+=P.perRoom){const g=L.slice(i,i+P.perRoom);const beds=[];for(let j=0;j<g.length;j+=P.perBed)beds.push(g.slice(j,j+P.perBed));rooms.push({girls:g,beds})}return rooms}
+function selxRoomPlan(girls){const P=BAL.selx.room,L=[S,...(girls||[]).filter(v=>v!==S)],rooms=[];for(let i=0;i<L.length;i+=P.perRoom){const g=L.slice(i,i+P.perRoom);const beds=[];for(let j=0;j<g.length;j+=P.perBed)beds.push(g.slice(j,j+P.perBed));const V=(BAL.selx.lodge&&BAL.selx.lodge.vien)||[];const vi=V[rooms.length];rooms.push({girls:g,beds,vien:vi?vi[0]:"",vienN:vi?vi[1]:""})}return rooms}
 /* ban hoa epilogue by origin (VANPHONG: cổ trang, no numbers); the life ends alive outside the palace — no outside road (OD 24/11 ~05:40Z) */
 const SELX_EPI={tt:"Ngươi về lại phủ Tể tướng. Cha ngươi gả ngươi cho con nhà quan văn; ngươi sống yên ổn, chỉ thỉnh thoảng nhìn về phía cung thành.",
  td:"Ngươi về lại nhà tướng. Mấy năm sau ngươi theo chồng ra biên ải, không bao giờ trở lại kinh thành.",
@@ -77,9 +77,12 @@ const SELX_SELW="buổi hôm nay định ngươi được phong cao hơn, đúng
 function selxNpcOut(L){const Z=S.selx2;Z.out=Z.out||[];for(const x of L){if(x.v===S||x.v.__done)continue;x.v.__done=1;
   if(x.kept){x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});if(typeof roomFor!=="function"||roomFor("consort")){rivals.push(x.v);try{palFix()}catch(e){}}else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,kept:1})}
   else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,sc:x.sc,ban:1})}Z.girls=[]}
+/* DAY 1 (OD 24/11 ~07:05Z): the other tú nữ exist from the start of the selection — the same girls she lodges with, meets in the yard and competes with;
+   rooms in BAL.selx.lodge (Trữ Tú cung, one viện per room) by selxRoomPlan; stored as ids so a save holds one copy of each girl */
+function selxDay1(){const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;Z.girls=selxGirls();Z.rooms=selxRoomPlan(Z.girls).map(r=>({vien:r.vien,ids:r.girls.map(v=>v===S?"me":v.id),beds:r.beds.map(b=>b.map(v=>v===S?"me":v.id))}))}
 /* the visible ranking, like the hội thi results: the kit podium (j90 kitPodiumShow), score in «phần», kept / ban hoa under each name */
 function selxPodShow(L){if(typeof kitPodiumShow!=="function"||window.__bot||typeof document==="undefined")return null;
- return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"giữ thẻ bài":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:`Giữ ${BAL.selx.yard.kept} người điểm cao nhất`,next:"Tiếp"})}
+ return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"giữ thẻ bài":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:`Giữ ${BAL.selx.yard.kept} người điểm cao nhất`,next:"Tiếp",strangers:1/* STUB (MAIN 117 Q5, KIT REQUEST → KK16): being NAMED is not MEETING — a girl not greeted = grey «Người lạ», no cuMeet; the kit reads this flag when KIT READY */})}
 const SELX_WHY={up:"Hoàng thượng giữ thẻ bài; được phong cao hơn thân phận",eq:"Hoàng thượng giữ thẻ bài; được phong đúng thân phận",dn:"Hoàng thượng giữ thẻ bài, nhưng phong thấp hơn thân phận một bậc"};
 function selxSelDo(raw){const X=S.selx;const Z=S.selx2=S.selx2||{v:SELX_V};const t={art:X.art||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* a skipped round: everyone on her own best board kind, the same board for all */
  const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxContest(girls,{marks:{mini:raw},t});const me=L.find(x=>x.v===S);

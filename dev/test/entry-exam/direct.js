@@ -32,7 +32,12 @@ const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const s
     await sleep(500);R.res=await p.evaluate(()=>{const d=document.getElementById('kg82');return d?d.innerText.slice(0,200):''});
     await p.evaluate(()=>{const b=document.getElementById('kg82ok');if(b)b.click()});await sleep(1200)}}
   const st=await p.evaluate(()=>({top:S.origin.r||0,rank:S.rank,srv:!!S.srv,sel:S.selx,q:Q.map(m=>m.t),danh:S.danh,sung:S.sung,gloom:!!document.querySelector('.km-gloom')}));Object.assign(R,st);
-  if(o==='cnv'){if(!st.srv)f.push('not a maid')}else if(!(st.rank<=st.top&&st.rank>=Math.max(0,st.top-2)))f.push('rank '+st.rank);
+  /* SELSCENE (review/selection-scene, MAIN 117 Q7): a NEW life (S.selx2) runs the contest: kept → origin −1 / 0 / +1 within the cap (Tần, hòa thân Phi),
+     or ban hoa (the life ends; the entry-scene checks below do not apply). An OLD save (no S.selx2) keeps the old check [ceiling−2, ceiling]. */
+  const nw=await p.evaluate(()=>!!S.selx2);const capR=await p.evaluate(()=>typeof selxTop==='function'?selxTop():0);R.newRule=nw;R.ban=await p.evaluate(()=>!!S.dead);
+  if(o==='cnv'){if(!st.srv)f.push('not a maid')}else if(nw){if(R.ban){if(!/ban hoa/i.test(await p.evaluate(()=>S.fate||'')))f.push('dead without ban hoa')}else if(!(st.rank>=Math.max(0,st.top-1)&&st.rank<=Math.max(st.top,capR)))f.push('rank '+st.rank)}
+  else if(!(st.rank<=st.top&&st.rank>=Math.max(0,st.top-2)))f.push('rank '+st.rank);
+  if(R.ban){R.fail=f;R.errs=errs.slice(0,3);if(f.length||errs.length)bad++;out.push(R);await c.close();continue}
   if(st.gloom)f.push('demotion scene at entry');
   /* close cards up to Nhập cung, then its button → entry scene */
   for(let i=0;i<8;i++){const t=await p.evaluate(()=>Q[0]&&Q[0].t);if(!t)break;if(/^Nhập cung/.test(t)){R.card=await p.evaluate(()=>({btn:(document.getElementById('mclose')||{}).textContent,h:String(Q[0].h).replace(/<[^>]+>/g,'').slice(0,240)}));

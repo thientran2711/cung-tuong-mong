@@ -529,7 +529,7 @@ function kc2SelDo(raw){if(S.selx2&&S.origin.k!=="cnv"&&typeof selxSelDo==="funct
   log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
  try{kcSnapReset()}catch(e){}deal()}
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
- try{if(was&&S&&!S.dead&&!S.kc&&!S.selx&&kc2SelOn()){S.selx={};S.selx2={v:SELX_V};const d=mkP("kc2Sel",{});if(d){const m={t:"Tuyển chọn",h:d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}};const i=Q.findIndex(x=>/^Nhập cung/.test(x.t||""));if(i>=0)Q.splice(i,0,m);else Q.unshift(m);showModal();render()}}}catch(e){console.error("kc2Sel start",e)}return r}})();
+ try{if(was&&S&&!S.dead&&!S.kc&&!S.selx&&kc2SelOn()){S.selx={};S.selx2={v:SELX_V};try{if(S.origin.k!=="cnv"&&typeof selxDay1==="function")selxDay1()}catch(e){console.error("selx day1",e)}const d=mkP("kc2Sel",{});if(d){const m={t:"Tuyển chọn",h:d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}};const i=Q.findIndex(x=>/^Nhập cung/.test(x.t||""));if(i>=0)Q.splice(i,0,m);else Q.unshift(m);showModal();render()}}}catch(e){console.error("kc2Sel start",e)}return r}})();
 
 
 /* ---------- "Chờ" worth the palace years (owner 16/11 08:45Z, OD:L1288) ----------

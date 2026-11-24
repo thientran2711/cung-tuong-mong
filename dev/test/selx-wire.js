@@ -18,7 +18,7 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
   const close=()=>{try{document.querySelectorAll('.kmov,#kprevov,#kg82').forEach(x=>x.remove())}catch(e){}};
   const OR=ORIGINS.map(o=>o.k).filter(k=>k!=="cnv");
   for(const og of OR){for(const [lab,st,raw] of [["high",100,10],["mid",50,5],["low",0,0],["fourth",50,5]]){if(!life(og))continue;close();
-    const sel=Q.find(m=>m.pid==="kc2Sel");const r0=S.origin.r||0;const has2=!!S.selx2;
+    const sel=Q.find(m=>m.pid==="kc2Sel");if(lab==="high"){const Z=S.selx2||{};out.day1=out.day1||[];out.day1.push([og,(Z.girls||[]).length,(Z.rooms||[]).map(r=>r.vien+":"+r.ids.length).join(","),!!(Z.rooms&&Z.rooms[0].ids[0]==="me")])}const r0=S.origin.r||0;const has2=!!S.selx2;
     if(sel)out.txt.push([og,/phong tới|cho tới/.test(String(sel.h)),/cao hơn, đúng bậc/.test(String(sel.h))]);
     S.sac=S.tai=S.duc=st;S.selx.art="";S.selx.done=1;const nR=liveRivals(true).length;if(lab==="fourth")S.selx2.girls=selxGirls().map((v,i)=>Object.assign(v,{__sc:i<BAL.selx.yard.kept-1?999:-999}));/* three girls above her, the rest below: she is the last kept place */
     kc2SelDo(raw);const X=S.selx,Z=S.selx2||{};const row={og,lab,r0,has2,sc:X.sc,place:X.place,kept:X.kept,step:X.step,rank:S.rank,dead:!!S.dead,cap:selxHoaThan(og)?B.hoaThanCap:B.cap,fate:S.fate||"",why:X.why||""};
@@ -40,4 +40,6 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
  ok(r.txt.length&&r.txt.every(x=>!x[1]&&x[2]),`selection card: new words, no ceiling words ${JSON.stringify(r.txt.filter(x=>x[1]||!x[2]))}`);
  for(const x of r.old)ok(x.ok,`old save (${x.og}): ceiling rule kept, top ${x.top} → ${x.rank}`);
  ok(r.nc&&r.nc.selx2&&r.nc.rank===r.nc.want,`hòa thân home road on selxRank ${JSON.stringify(r.nc)}`);
+ ok(r.day1&&r.day1.every(x=>x[1]===BAL_N-1&&x[2]==="dong:4,tay:4,nam:4"&&x[3]),`day 1: the 11 other tú nữ exist from the start, 3 rooms of 4 in Trữ Tú cung (Đông / Tây / Nam viện), her room first ${JSON.stringify((r.day1||[]).slice(0,2))}`);
  ok(!errs.length,`no page errors ${JSON.stringify(errs.slice(0,3))}`);await b.close();console.log(bad?`FAILED ${bad}`:'ALL PASS');process.exit(bad?1:0)})();
+const BAL_N=12;/* BAL.selx.yard.n, mirrored for the node-side check; the page check reads BAL */
