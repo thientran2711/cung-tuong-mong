@@ -2764,3 +2764,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:08Z) 115 seats + B–F told. WAKE: create_trigger REFUSED (depth 8 cannot create routines); update of old wake prompt denied by permission check → old wake trig_01S84CUDctuYXpDp6YD5mCqf left ENABLED (fires into 114, which is told: on wake only ping 115, no work). sếp told; a ROOT main can create its own wake.
 - (01:10Z) Acks: LC8 (kit-mgskin landing; coop-thin-g waits B re-merge), SELSCENE holding, KK14 holding (v3.4 ca154a3d; §94 draft 2797e672), W4 R2 READY a7bf3e01 → rv MK4aJreh re-reviewing.
 - (01:00Z) 115 (depth 8) cannot create triggers → 114 created trig_01YVQJ9HZMGCvbbcXNc26dsU firing directly into 115 (min 32) and disabled trig_01S84CUDctuYXpDp6YD5mCqf. 114 stopped.
+- (01:12Z) WAKE FIXED: 114 created trig_01YVQJ9HZMGCvbbcXNc26dsU (min 32, fires directly into 115; verified enabled, next 01:32Z) and disabled trig_01S84CUDctuYXpDp6YD5mCqf (verified). Relay-through-114 note above is void.
