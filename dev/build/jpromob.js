@@ -15,7 +15,7 @@
        host she favours) and shows a kit panel (decree line + where + why); then() when it closes. The same rule places everyone at every later palFix;
        a promotion that changes her lodging shows the same panel.
    (4) kitPromoHook (jexam) reads pbNextKy: months to the next kỳ, its festival, ready, miss.
-   ĐẠI LỄ (design §4b) waits for sếp: BAL.promoR.dl.on = 0, nothing built.
+   (5) ĐẠI LỄ (son weight, pbDl): full conditions + Đức → direct decree; seats short → seat contest; others wait for the next kỳ.
    State: S.pb = {ky:{last, upto, at:{A:festKey}}, mt (mourning until A), thd, kn (A of the last kỳ notice), hr / hk (her rank / house at the last
    palFix)}; p.pbs = {sung:{n,at}, th:{key:1}, hh:{key:1}, q:[src…]}; p.ex.gx = the A where an unused special exam lapses. A = year·12 + month − 1. */
 
@@ -102,9 +102,43 @@ function pbTry(p){if(!pbCan(p))return"";const s=pbS(p),e=exS(p),A=pbA();
  return""}
 /* once a month (after the month turns): her own checks on every seat; the NPCs on solo / the co-op host only */
 function pbMonth(){if(!S||S.dead||!BAL.promoR)return"";pbKyUpdate();const P=pbSt();if(P.m===S.turn)return"";P.m=S.turn;let ev="";
+ try{ev+=pbDl()}catch(x){console.error("pbDl",x)}
  try{const t=pbTry(S);if(t)ev+=t}catch(x){console.error("pbMonth",x)}
  if(!pbGuest())for(const v of rivals.slice())try{pbTry(v)}catch(x){console.error("pbMonth",x)}
  return ev}
+
+/* ---------- ĐẠI LỄ (son weight; BAL.promoR.dl) ---------- */
+const PB_DL={dangco:"Đại lễ tân đế đăng cơ",laphau:"Đại lễ lập Hoàng hậu",thTho:"Đại lễ Thánh thọ Thái hậu",empTho:"Đại lễ Vạn thọ thánh đản",thaitu:"Đại lễ lập Thái tử"};
+function pbDlSt(){const P=pbSt();if(!P.dl||typeof P.dl!=="object")P.dl={last:null,seen:{}};return P.dl}
+/* which đại lễ falls in this month (world state only, same on both co-op seats); marks it seen */
+function pbDlWhich(){const B=BAL.promoR.dl,D=pbDlSt(),A=pbA(),F=typeof FEST!=="undefined"?FEST:{};const sn=D.seen;let k=null,w="";
+ const era=(S.emp&&S.emp.era)||"";if(sn.era==null)sn.era=(S.turn||0)>0?era:"";/* an old save keeps its reign as already celebrated */
+ if(sn.era!==era&&F.newyear&&S.month===+F.newyear.m){sn.era=era;k="dangco";w=`năm đầu niên hiệu ${era}`}
+ const q=typeof queenP==="function"?queenP():null,qk=q?(q===S?"me":String(q.id)):"";if(sn.q==null)sn.q=qk;else if(qk&&sn.q!==qk){sn.q=qk;if(!k){k="laphau";w=`${q===S?"ngươi":q.name} được lập làm Hoàng hậu`}}else if(!qk)sn.q="";
+ if(!k&&!S.thDead&&F.thanhtho&&S.month===+F.thanhtho.m&&B.thTho.includes(S.thAge)&&!sn["th"+S.thAge]){sn["th"+S.thAge]=1;k="thTho";w=`Thái hậu thọ ${S.thAge}`}
+ if(!k&&S.emp&&F.vantho&&S.month===+F.vantho.m&&B.empTho.includes(S.emp.age)&&!sn["e"+S.emp.age+era]){sn["e"+S.emp.age+era]=1;k="empTho";w=`Hoàng thượng thọ ${S.emp.age}`}
+ const hk=S.heir&&S.heir.k?String(S.heir.k.name||"")+":"+(S.heir.k.id||""):"";if(sn.h==null)sn.h=hk;else if(hk&&sn.h!==hk){sn.h=hk;if(!k){k="thaitu";w=`lập ${S.heir.k.name} làm Thái tử`}}
+ if(!k)return null;if(D.last!=null&&A-D.last<B.minGap)return{k,w,down:1};D.last=A;return{k,w}}
+/* full conditions of a đại lễ for one person (her and every NPC by the same rows) */
+function pbDlRows(p){const B=BAL.promoR.dl,to=rkOf(p)+1;const L=exBase(p).filter(x=>!/^Kỳ sắc phong/.test(x[1]));const d=B.duc[Math.min(B.duc.length-1,to)]||0;
+ if(d)L.push([(p.duc||0)>=d,`Đức ${Math.round(p.duc||0)} (cần ${d})`]);return L}
+function pbDlOk(p){return pbCan(p)&&!p.confined&&rkOf(p)+1<7&&pbDlRows(p).every(x=>x[0])}
+function pbDlCost(p){const B=BAL.promoR.dl,me=p===S;const n=Math.max(0,Math.min(p.bac||0,Math.round(B.bacM*(BAL.pay[Math.min(BAL.pay.length-1,rkOf(p))]||0))));if(n)ap(p,{bac:-n});
+ if(me){ghenAll(B.ghen,"ngươi được tấn phong dịp đại lễ");return `Lễ tạ ân dâng lên: Bạc −${n}. Lục cung ghen (ghen +${ghenN(B.ghen)}). `}
+ for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan);return ""}
+/* the đại lễ month (pbMonth): direct decrees, or a seat contest when seats are short; the kỳ of this month is replaced */
+function pbDl(){const B=BAL.promoR.dl;if(!B||!B.on)return"";const X=pbDlWhich();if(!X)return"";const A=pbA(),K=pbSt().ky,nm=PB_DL[X.k];
+ if(X.down){if(!K.at[A]){K.at[A]="dl:"+X.k}return `<b class="g">${nm}</b> (${X.w}): mới có đại lễ chưa lâu, năm nay chỉ mở kỳ sắc phong. `}
+ delete K.at[A];window.__pbDl=(window.__pbDl||0)+1;
+ const all=[S].concat(pbGuest()?[]:rivals.filter(v=>!v.coop));const ok=all.filter(p=>pbDlOk(p));const by={};for(const p of ok){const r=rkOf(p)+1;(by[r]=by[r]||[]).push(p)}
+ let ev=`<b class="g">${nm}</b> (${X.w}): Hoàng thượng ban ân chiếu khắp lục cung. Người đủ Sủng, Danh, Đức được tấn phong thẳng, không qua khảo hạch. `;let mine="";
+ for(const r in by){const L=by[r];const free=SEATCAP[r]==null?L.length:Math.max(0,SEATCAP[r]-holders(+r).length);
+  if(L.length<=free){for(const p of L){const t=exDirectUp(p,nm.toLowerCase(),{fx:p===S?1:0});const c=pbDlCost(p);if(p===S)mine+=t+c;else{ev+=t;try{newsAdd(p,"promo",t,true)}catch(x){}}window.__pbDlN=(window.__pbDlN||0)+1}}
+  else{for(const p of L){const e=exS(p);e.pass=true;e.dl=A}ev+=`Ghế ${RANKS[r].n} không đủ cho ${L.length} người đủ điều kiện (${L.map(p=>p===S?"ngươi":p.name).join(", ")}): phải tranh ghế. `}}
+ if(!mine&&!ok.includes(S)&&pbCan(S)){const miss=pbDlRows(S).filter(x=>!x[0]).map(x=>x[1]);const n=pbNextKy(A+1);mine=`Ngươi chưa đủ điều kiện (${miss[0]||""}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}): chờ kỳ sắc phong tới${n?` (${n.n}, còn ${n.A-A} tháng)`:""}. `}
+ return ev+mine}
+(function(){const n0=pbFestN;pbFestN=function(k){if(typeof k==="string"&&k.startsWith("dl:"))return PB_DL[k.slice(3)]||"Đại lễ";return n0(k)}})();
+window.pbDl=pbDl;window.pbDlWhich=pbDlWhich;window.pbDlOk=pbDlOk;
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=pbMonth()}catch(e){console.error("promo-build",e)}return ev}})();
 /* her kỳ notice: once per kỳ month, the festival + whether she may sit + when the next one is */
 function pbNotice(){if(!S||S.dead||S.out||rkOf(S)>=7||(typeof exSrv==="function"&&exSrv(S))||!exOn())return;pbKyUpdate();const P=pbSt(),A=pbA();

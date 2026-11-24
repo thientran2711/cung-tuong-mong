@@ -439,7 +439,12 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
      birth = special exams per birth (later sons and every daughter; the FIRST son = direct, PROMO_SRC.son1).
      cost (law 3): sungGhen = palace ghen at her favour exam (NPC: the others oán sungOan); thSung = Sủng − (Bệ hạ sees a Thái hậu person);
        hhOwe = nợ ân to the Hoàng hậu (j72 ledger; NPC: the others oán hhOan).
-   dl = ĐẠI LỄ (direct mass conferral, design §4b): NOT BUILT — waits for sếp's answer (direct only for those who meet Sủng + Danh?). on:0 keeps it off.
+   dl = ĐẠI LỄ (design §4b; OD 24/11 ~05:55Z «đều phải có điều kiện … sủng bao nhiêu, danh bao nhiêu … đức bao nhiêu»; Foreman D scope add 07:00Z):
+     a đại lễ month = son weight: every consort who MEETS the full conditions (every promoReqP row but the exam and the kỳ, + Đức ≥ duc[target rank])
+     is promoted DIRECTLY, no exam; more candidates than free seats of a rank → they all hold a passed exam and the seat contest (j34 fillSeats)
+     decides; the others wait for the next kỳ. Triggers: the first Tết of a reign (era), a new Hoàng hậu (the month after), the Thái hậu's round
+     birthdays thTho (Thánh thọ month), the Emperor's empTho (Vạn thọ month), a new Thái tử. Two đại lễ closer than minGap months → the later one is
+     an ordinary kỳ. Loss: lễ tạ ân Bạc bacM × BAL.pay[new rank] + palace ghen (NPC: others oán oan). on:0 switches it off.
    pc = PHÂN CUNG (jpal palFix host pick + the scene): score of a host h for a consort p = wE·sung'·standing' + wH·hh'·kind[h's tính tình] +
      wT·th'·(h's Thái hậu favour) − load × h's co-residents; x' = (x − mid) / span clamped to ±1; standing' = (palace standing / 3 + nearness to the
      Emperor's hall) − 1 (−1..1); kind = −2..2 per tính tình (÷2); a reason line names a royal when |x'| ≥ why. */
@@ -448,7 +453,7 @@ Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,do
   th:{cut:{tuai:40,phat:45,nghiem:60,quyen:62,danghi:68},def:55,life:1},
   hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
   birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4}},
- dl:{on:0,minGap:24,bacM:1,ghen:6},
+ dl:{on:1,minGap:24,bacM:1,ghen:6,oan:3,thTho:[50,60,70,80],empTho:[30,40,50,60],duc:[0,0,10,15,20,30,40,50]},
  pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
   kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
