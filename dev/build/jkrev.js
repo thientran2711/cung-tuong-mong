@@ -82,11 +82,16 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krev{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#fff3dc}
 .krevl{position:absolute;left:50%;top:75px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:krevBurst calc(var(--krise)*2) ease-out both,krevBreath 2.4s ease-in-out calc(var(--krise)*2) infinite}
+/* owner 24/11 flight bug #4 «to hơn nữa»: the item picture and its words of EVERY reveal (kitGain, each item of kitReward) are bigger: picture up to 340 px / 46 % of the page height (was 260 / 36 %), name 1.5rem, line under it 1rem; one size for all of them */
+body:has(.kfgain) .kmov:not(.kfgain),body:has(.kfgain) #modal:not([hidden]){visibility:hidden!important}/* ONE overlay at a time (owner 24/11 flight): while an item reveal is up, every other overlay / dialog is hidden (not removed: it comes back when the reveal closes), so nothing ghosts through the dim */
+.krev>.kitem-xl:not(.kitem-fr){--isz:min(340px,calc(46*var(--kvh,1dvh)))}
+.krevl{top:calc(var(--krevh,340px)*.5);width:min(460px,92vw);height:min(460px,92vw);margin:calc(min(460px,92vw)/-2) 0 0 calc(min(460px,92vw)/-2)}
+.krev{--krevh:min(340px,calc(46*var(--kvh,1dvh)))}
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
-.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
-.krevs{position:relative;font-size:.8rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
-.krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
+.krevn{position:relative;font-family:var(--display,serif);font-size:1.5rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
+.krevs{position:relative;font-size:1rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
+.krevf{position:relative;font-size:.9rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
 .krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
 @keyframes krevBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
