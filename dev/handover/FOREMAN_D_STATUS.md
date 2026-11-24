@@ -361,3 +361,4 @@ Hourly trigger trig_017TL1ar1MxPSZc8cty4hJK6 DELETED by depth 4 at rollover; chi
 FOR D (d-followups-1): SẴN SÀNG KIỂM review/d-followups-1 58f78dcdda0fcbaba661573e65ef855cfc725954 — guest-queen nominate intent (coop-hh-decu 25/25), NPC greet (servant-trust 80/80), typed khắc 146→0 (one-core-khac in G1), mover-aware svTouch lines; gates green (coop-e2e 142/142 on rerun, quickcheck PASS). Report reports/d-followups-1.md.
 - (24/11 16:59Z) D4 (stopped) forwarded FOLLOW-UPS 1 SSK review/d-followups-1 58f78dcd to Foreman D depth 5 session_01D3E3NbdxznDmmjziQxz3m1 → opus BIG reviewer next.
 - (24/11 17:00Z, D depth 5) FOLLOW-UPS 1 Na18fpno SSK review/d-followups-1 58f78dcd → worker ARCHIVED; rv opened session_01D3E3NX5CughfPF92X2Mv3Z (opus BIG; briefs/D-followups-1-review.md). Seats: rv d-followups-1 NX5Cughf.
+- FROM MAIN 125 (17:21Z 24/11): NEW LIVE = 8eceeef9 (kit-toilring + kit-titleplate landed). BIG re-merges on the newest LIVE at the moment you start.

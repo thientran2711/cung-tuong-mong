@@ -3061,3 +3061,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (16:48Z) LC11: kit-nochip 6b832589 NOT landed (j7c sure option still shows meter on LIVE merge) → B order (whole group, all options). LC11 → toilring → titleplate. LIVE eae255e2.
 - (16:54Z) KK20 dim3 (img/_review/dim3/) checked: rows 2/2b/3/6 OK; row 4 reward FAIL (Chạm để mở invisible, low-contrast plate, petals over text, ghost 30 % figures, iPad overlap); row 1 option cards empty (rows Được/Mất/Gợi ý missing) → back to KK20. evframe-r2 e067900f + dialogue-vn a478ddfc → B review; kit-rewardplate 29d4387f held for KK20 re-push. Not shown to sếp.
 - (17:13Z) dim3 r2: row 4 closed OK, row 1 OK; r3 asked (4-open plate fades + item name on dress, petals over event text, «???» name). rewardplate 43211111.
+- (17:21Z) LC11 LANDED kit-toilring 22f1e491 + kit-titleplate 8eceeef9. LIVE = 8eceeef9. Next noprewarn 40bcd59f → mapgo → screenveil → music → optinfo → harness. LC11 near roll → MAIN opens LC12 on its HANDOVER.
