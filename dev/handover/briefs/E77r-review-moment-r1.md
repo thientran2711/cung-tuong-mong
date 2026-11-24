@@ -1,0 +1,8 @@
+# E77r — BIG REVIEW review/moment-r 1d2189f3 (MOMENT FIX r1 of E75; PARKING #9 Khoảnh khắc chân dung, rules/data) — opus — Foreman E = session_01DgYSWorDW5KeoX9ahdEfda
+PRIORITY #1 CHECK ('khoảnh khắc chân dung moment review'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 | review/moment-r 1d2189f3 (E75 fix of E73r FAIL 5a504f92) | claims E69, E73r, E75 (done).
+Read first: briefs/E-common.md + START_CORE + START_WORKER + START_REVIEWER (all), dev/PARKING_LOT.md row #9 (owner words verbatim), reports/moment.md (whole, incl. ## FIX r1), reports/moment-review.md (E73r's 5 FAIL items), briefs/E73r-review-moment.md (the full first-review scope — apply ALL of it again, not only the 5 items).
+CHECK FIRST: each E73r item is truly fixed (1 hasen/haquat reachable through the real jmen schedule; 2 «Lót tay» equal value to «Ngồi cho vẽ» and the rumour risk shown on the card; 3 NPCs take the bribe road too; 4 no «undefined» log; 5 grade 2 from BAL, no typed number) + E75's perf fix. Then the whole 18-law review per E73r brief.
+KIT: E75 filed a KIT REQUEST (kitOptInfo «!» overlay hides Kèm/Bại/Mất rows game-wide). That is a LIVE kit bug for the kit keeper, not a fault of this branch (law 9) — but confirm the rumour risk IS in the option markup.
+GATES (yourself, on the branch merged with latest origin/main; name the merge sha): moment.test; bash dev/tools/quickcheck.sh; role-parity ×2; coop-e2e once; old-save load; Fold 755x1000@2 + iPad 1180x820@2 shots — LOOK.
+Small fixes on review/moment-r2 (from 1d2189f3); bigger faults → FAIL with a numbered list.
+Verdict: reports/moment-review-r2.md; CLAIMS row; send_message Foreman E «PASS <sha>» (LAND READY) or «FAIL <sha> <n items>» + same line in FOREMAN_E_STATUS.md. Rollover per E-common.

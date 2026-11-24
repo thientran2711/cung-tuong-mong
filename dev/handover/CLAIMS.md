@@ -1474,3 +1474,4 @@ kit-optfit SMALL review | review/kit-optfit-r1 | session_01N1tNP2kA3NCKySUjhemX3
 | robot10 E FIXER #2 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md §3/HANDOVER) | review/robot10-e-fix-<n≥3>; reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWmqVHbtQnrFEo7E9r6 | RUNNING | 24/11 09:05Z |
 REVIEW net-build ed1be95a (opus BIG; briefs/D-net-build-review.md) | review/net-build-rv | session_01D3E3NaqgB7naRGuobjMu4H | RUNNING | 24/11 09:12Z (Foreman D depth 1)
 SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z; briefs/D-servant-trust.md) | review/servant-trust | session_01D3E3NYMzUyzf9KBhvBCtFW | RUNNING | 24/11 09:12Z (Foreman D depth 1)
+| REVIEW E77r MOMENT r1 BIG (opus; briefs/E77r-review-moment-r1.md) of 1d2189f3 | review/moment-r2; reports/moment-review-r2.md | FOREMAN E (child3) | (opening) | RUNNING | 24/11 09:20Z |
