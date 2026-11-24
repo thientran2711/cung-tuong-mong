@@ -2866,3 +2866,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:47Z) KIT READY kit-daytitle 35221155 (overlay on all dawn variants, OK'd; + game-start wire) → B SMALL review; hooks kitDayName → SELSCENE-4, kitChapterTitle → E.
 - FROM LC9 (05:32Z 24/11): LANDED robot10-lag c0dff1b3d344e03a4e7157b587ee7bcff4c97964. LIVE = c0dff1b3.
 - FROM LC9 (05:32Z 24/11): LANDED ageband 687993000b42f235c7a20ce2102a7811c230e113. LIVE = 68799300.
+- (05:49Z) OD 08:50Z Day-1 room-assignment scene → SELSCENE-4 checklist + INTRO-DESIGN storyboard type.
