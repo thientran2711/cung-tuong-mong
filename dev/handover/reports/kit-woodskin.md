@@ -40,3 +40,26 @@ Heads: bare 09c4386c; merged = origin/main 502c48c9 is already its parent, so me
 4. NOT DONE (needs MAIN order): kitPick/kitDim call sites (kitFocus acts jdfv.js, #popw j6.js, jfocus) = game wiring, users RING-DESIGN-4 / MOTION-DESIGN-4. Not visible in the game yet.
 5. 412x1058: 1 kit part covered; 390x844: 3 + 1 plaque out — phone shells, reported not asserted.
 6. FIXED: test clears #dawn before shots + fails if dawn up; DIM fallback removed (BAL.kdim only). KIT §98.9.
+
+## REVIEW r2 (reviewer session_01N1tNP3y9AYuaXKRn7EAaz3, 11/24/2026)
+PRIORITY #1 CHECK: OD 0 | main none | review/* review/kit-woodskin ba0e0692 (brief said 66bf8bb5 = its PARENT; the r2 commit «band placed by cost…» is ba0e0692, so ba0e0692 was reviewed) | claims KK21.
+Heads: bare ba0e0692 (index.html/sw.js NOT BUILT: stale, no KIT_PLAQUE in it; quickcheck says «NOT BUILT»). Origin/main 502c48c9 is already an ancestor, so merged head = bare + built files = review/kit-woodskin-r2 e47e113e (pushed).
+**VERDICT: KIT FAIL kit-woodskin r2 -> KK22** (geometry rows fixed; law 9 row still open).
+
+## r1 FAIL rows re-checked
+1. Plaques/tabs over the stage right column (Ân sủng / Nguy hiểm chung): FIXED. Fold 755x1000 + iPad 1180x820 shots (DSF 2, stage visible, looked 3x): band sits below the panels / left of them, nothing on «Nguy hiểm chung» or the Ân sủng rows. Test now reports overObst 0 with 11-12 stage kit obstacles.
+2. Band laps neighbour's name tag: FIXED on both devices (nameplates «Đáp ứng …» / «Cung nữ thân tín…» clear, plaque 6 ends above them). Residual: iPad band still covers part of the OTHER person's body (test bodyOver 538-589 px²; not a face, not her tag).
+3. Plaque over the round corner button (Fold): FIXED (plaque 6 ends above the «+1» chip).
+4. LAW 9: **STILL OPEN.** `git grep -nE "kitPick\.|kitDim\." dev/build` outside jkpick.js = 0 call sites. Old person-interaction pickers all remain (jdfv.js kitFocus acts, #popw person card j6/jdf dfActs, jfocus choices). No reason / adoption order is written in KIT.md §98 or the code. Brief asks for real call sites or a listed reason -> FAIL. Fix: wire kitPick into the person focus view (replace the old act list) and kitDim on non-chosen people, OR write the reason + the adoption order in KIT.md §98 and tell the owner it is not in the game yet.
+5. 390x844: this run = «no stage figure» (test cannot open the scene; r1 saw «plaque outside stage 1»). 755/1180/412 ALL PASS. Secondary, noted.
+6. Shots under a veil: the TEST's own shots are STILL covered, now by a random event modal («Hội phối đồ: báo đề») instead of the dawn cover (both pick-a shots had the event dialog over the stage). dawn is cleared but #modal is not. Fix: hide/close #modal (and use dev/test/lib/veil.js V.guard) before each shot, assert the stage is visible. I re-shot with #modal hidden (scratch copy of the test) for the checks above.
+7. NEW: the branch head had a stale built index.html/sw.js (quickcheck «NOT BUILT»). Fixed by my commit e47e113e.
+
+## Tests (commands -> result)
+- `DSF=2 node dev/test/kit-pick.js file://…/index.html out` no args: 755x1000 ALL PASS, 1180x820 ALL PASS (also with #modal hidden).
+- args `755x1000,1180x820,412x1058,390x844`: 755/1180/412 ALL PASS; 390x844 FAIL «no stage figure».
+- `node dev/test/kit-focus.js` no args: 755x1000 PASS, 1180x820 PASS.
+- `DEV=fold|ipadAir node dev/test/place-stage-scan.js`: runs, rows emitted (no pass/fail line; its header usage names place-banner-scan).
+- `node dev/test/stage-rightcol.js`: Terminated by my 280 s timeout (r1 got a result; slow, not a branch fault as far as seen).
+- `bash dev/tools/quickcheck.sh` ALONE on ba0e0692 (+ local build): `QUICKCHECK PASS · 216 s · open 1843 ms · old save ok · perf (median of 3, new/live): render 236/240 ms, tab 471/428 ms, buổi 1350/1551 ms, tasks>200ms 26/22`; final line «FAIL · NOT BUILT» because the committed built files were stale (cause 7, fixed in e47e113e; same sources). Old save loads.
+- Law 11: kit parts touched = §98.1 plaque band, §98.2 title, §98.3 dim; band placement before = fixed side, laps right column/name tags; after = placed by cost with stage parts as hard obstacles, 0 overlaps on Fold + iPad.
