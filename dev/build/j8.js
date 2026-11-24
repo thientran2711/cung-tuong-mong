@@ -109,7 +109,7 @@ function tsMonth(p){const T=BAL.thatS,me=p===S;if(!p||(!me&&!p.alive)||p.out)ret
  return""}
 function tsMonthAll(){let ev="";try{ev+=tsMonth(S);for(const v of rivals)if(v&&v!==S&&v.alive&&!v.out)tsMonth(v)}catch(e){console.error("tsMonth",e)}return ev}
 /* treason-tier mercy: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung (her life ends: jleave «Về sau» dan; an NPC leaves the roster) */
-function dsDan(p,why){const w=String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"");
+function dsDan(p,why){let w=String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"");w=w.charAt(0).toLowerCase()+w.slice(1);
   if(p===S){over("Phế làm thứ dân",`${why.replace(/^Bị /,"Suýt bị ")}. Hoàng thượng nhân từ tha tội chết: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung.`,`Phế làm thứ dân vì ${w}`,true);return}
   p.alive=false;p.dan=1;if(p.queen)p.queen=false;const t=`${p.name}: ${w}. Hoàng thượng nhân từ tha tội chết, phế làm thứ dân, đuổi ra khỏi cung.`;log(`<span class="r">${t}</span>`);try{newsAdd(p,"demote",t,true)}catch(e){}}
 /* a proven crime (accusation with evidence) */

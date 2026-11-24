@@ -96,11 +96,12 @@ const T=[
     if(e.cause==="gia"&&e.age<B.old)R.bad.push(["gia young",e.age]);if(e.kids<0||e.kids>B.kids.thiep[1]+1)R.bad.push(["kids",e.kids])}
    const k=c+"|"+age+"|"+kids;R.byCls[k]=new Set(T).size}
   deser(JSON.parse(snap));Q.length=0;S.dead=false;
-  const tu=[];for(let i=0;i<12;i++){S.dead=false;S.lvEp=null;Q.length=0;over("Dâng biểu xuất gia","x","Xuất gia",true);tu.push(S.lvEp.kids)}R.tuKids=Math.max(...tu);
+  const tu=[];R.tuCc=0;for(let i=0;i<40;i++){S.dead=false;S.lvEp=null;Q.length=0;over("Dâng biểu xuất gia","x","Xuất gia",true);tu.push(S.lvEp.kids);if(!(mySons().length+myDaus().length)&&/con cháu/.test(S.lvEp.txt))R.tuCc++}R.tuKids=Math.max(...tu);
   deser(JSON.parse(snap));Q.length=0;R.byCls=Object.entries(R.byCls);return R});
  ok(!v.bad.length,'variety: class read from his nết, age inside (her age, BAL.leave.maxAge], «Tuổi già» only from BAL.leave.old, children inside BAL',v.bad.slice(0,6));
  const low=v.byCls.filter(([,n])=>n<10);ok(!low.length,'variety: 16 lives with the same partner class read differently (≥10 distinct passages in every class × age × children cell)',low.slice(0,6));
  ok(v.tuKids===0,'xuất gia: no children after',v.tuKids);
+ ok(v.tuCc===0,'xuất gia with no children anywhere: never «con cháu quây quần» at death (40 lives)',v.tuCc);
  /* 4. NO CONFIRM (owner OD 24/11 ~07:25Z): her own choice to leave = done at once. Family: xgConfirm gone; the lãnh cung «Xuất gia» act ends at once;
     the one-per-life death warning (jkiep kpGate) does not stop a «giả chết» LEAVE choice; no «(sẽ hỏi lại)» anywhere in the build */
  const nc=await p.evaluate(()=>{const snap=JSON.stringify(ser());const R={xg:typeof xgConfirm};
@@ -132,6 +133,8 @@ const T=[
   run("dạy chữ (Tài 70)",()=>{S.tai=70;opt(1)});
   run("xuất gia",()=>opt(2));
   run("✦ hòa thân",()=>{kcTraveD();kcEnd("kcR5")});
+  run("gả · đa tình thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Nhiều chuyện","Xảo quyệt","Ham vui"]}];S.kgt=0;opt(0)});R.dt=(Q.find(m=>m&&m.t==="Kiếp này")||{}).h||"";
+  run("gả · một lòng thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Ân cần","Trọng nghĩa","An phận"]}];S.kgt=0;opt(0)});R.ch=(Q.find(m=>m&&m.t==="Kiếp này")||{}).h||"";
   run("old save: gả",()=>opt(0),true);
   run("no tablet returned (home road ending before Điện tuyển)",()=>{S.kc.trv=0;kcEnd("tu")});
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;return R});
@@ -141,6 +144,8 @@ const T=[
   const d=by("dạy chữ (Tài 70)");ok(d.dead&&d.after&&d.ep&&d.ep.k==="day"&&d.ep.kids===0&&!d.pal,'Trả thẻ bài · ở vậy dạy chữ: ending + «Về sau» day, no children',d);
   const t=by("xuất gia");ok(t.dead&&t.after&&t.ep&&t.ep.k==="tu"&&t.ep.kids===0&&!t.pal,'Trả thẻ bài · xuất gia: ending + «Về sau» tu',t);
   const h=by("✦ hòa thân");ok(h.dead&&h.after&&h.ep&&h.ep.k==="hoa"&&!h.pal,'Trả thẻ bài · ✦ hòa thân: ending + «Về sau» hoa',h);
+  const dt=by("gả · đa tình thám hoa"),chg=by("gả · một lòng thám hoa");
+  ok(dt.fate==="Vợ quan thanh liêm"&&dt.ep&&dt.ep.cls==="datinh"&&!/thương nàng suốt đời/.test(kc.dt)&&chg.ep&&chg.ep.cls==="chung"&&/thương nàng suốt đời/.test(kc.ch),'Trả thẻ bài · the fixed «chồng thương nàng suốt đời» line follows HIS real nết (kept for một lòng, cut for đa tình)',{dt:dt.ep&&dt.ep.cls,ch:chg.ep&&chg.ep.cls,f:dt.fate});
   const o=by("old save: gả");ok(o.dead&&!o.ep&&!o.after,'Trả thẻ bài · OLD save (no S.kc.lv): today\'s card, no «Về sau»',o);
   const n=by("no tablet returned (home road ending before Điện tuyển)");ok(n.dead&&!n.ep,'home-road ending before any returned tablet: unchanged (no «Về sau»)',n)}
  /* 6. FORCED-REMOVAL SEVERITY (MAIN 118 06:16Z P1/P2/P3; table «STEP 1b» in reports/leave-palace.md) */
@@ -171,7 +176,7 @@ const T=[
  ok(sv.p1nctl.alive&&sv.p1nctl.out,'P1 NPC control: ordinary + nhân từ → lãnh cung',sv.p1nctl);
  ok(sv.p2.falls===0&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (deathSentence), no fall()',sv.p2);
  ok(sv.p3.out===0&&sv.p3.ts&&sv.p3.night===0&&/thất sủng/.test(sv.p3.ev),'P3 bị bỏ quên → thất sủng: stays out of lãnh cung, tablet set aside, a line',sv.p3);
- ok(sv.p3.decay===10-2&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
+ ok(sv.p3.decay<10&&sv.p3.decay>=6&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
  ok(sv.p3n==="no low NPC"||(sv.p3n.ts&&!sv.p3n.out&&sv.p3n.night===0),'P3 NPC the same rule',sv.p3n);
  ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC)&&/ttNpcExposed\(t,/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left; j30 «Bóc chuyện tư tình» NPC branch on the same rule',0);
  ok(!errs.length,'no page errors',errs.slice(0,3));

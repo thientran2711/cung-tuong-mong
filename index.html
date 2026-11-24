@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0568fc04+","t":"2026-11-24T05:44Z","c":"leave-palace: no confirm on own-choice leaving (xgConfirm gone, kpGate skips «giả chết»), Trả thẻ bài endings get «Về sau» for new lives","b":"0683bbc8d622","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
+window.CTM_BI={"s":"c7704762+","t":"2026-11-24T06:02Z","c":"npc-purpose rows: j8 deathSentence nhân từ line now carries the treason tier (MAIN 118 P1)","b":"54188749c173","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2401,7 +2401,7 @@ function tsMonth(p){const T=BAL.thatS,me=p===S;if(!p||(!me&&!p.alive)||p.out)ret
  return""}
 function tsMonthAll(){let ev="";try{ev+=tsMonth(S);for(const v of rivals)if(v&&v!==S&&v.alive&&!v.out)tsMonth(v)}catch(e){console.error("tsMonth",e)}return ev}
 /* treason-tier mercy: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung (her life ends: jleave «Về sau» dan; an NPC leaves the roster) */
-function dsDan(p,why){const w=String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"");
+function dsDan(p,why){let w=String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"");w=w.charAt(0).toLowerCase()+w.slice(1);
   if(p===S){over("Phế làm thứ dân",`${why.replace(/^Bị /,"Suýt bị ")}. Hoàng thượng nhân từ tha tội chết: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung.`,`Phế làm thứ dân vì ${w}`,true);return}
   p.alive=false;p.dan=1;if(p.queen)p.queen=false;const t=`${p.name}: ${w}. Hoàng thượng nhân từ tha tội chết, phế làm thứ dân, đuổi ra khỏi cung.`;log(`<span class="r">${t}</span>`);try{newsAdd(p,"demote",t,true)}catch(e){}}
 /* a proven crime (accusation with evidence) */
@@ -5894,9 +5894,11 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  const maxR=Math.max(S.rank,S.maxRank||0);
  /* LEAVE-THE-PALACE = ENDING (owner OD 24/11 ~06:05Z, jleave.js): a life that leaves the palace gets its «Về sau» — his nết × her state × how she left */
  let ep=null;try{ep=typeof lpvEpiFor==="function"?lpvEpiFor(h,t,fate,live):null}catch(e){console.error("lv",e)}
+ /* a life that ended at home before she ever entered (jkc tiểu thư road): no «Sống trong cung / Phẩm cao nhất / Con cái» rows — she had none of them */
+ const pre=!!(S.kc&&!S.kc.inPal);
  const epH=ep?`<div class="kpsec kend-after"><p><b>Về sau · ${ep.ti}.</b> ${ep.txt}</p></div>`:"";/* rows go into «Kiếp này» below (iPad 1180x820: the card must fit with no clip) */
  Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${epH}${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
-  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]].concat(ep?lpvRows(ep):[]))}</div>
+  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows((pre?[["Thân phận",`${S.name} · ${S.origin.n}`,"t"]]:[["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"]]).concat([[live?"Kết cục":"Chết vì",fate,"t"]]).concat(ep?lpvRows(ep):[]))}</div>
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
 /* the highest rank this life reached */
@@ -94125,7 +94127,7 @@ function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)r
  const left=(typeof mySons==="function"?mySons().length:0)+(typeof myDaus==="function"?myDaus().length:0);
  const P=[pk((kc&&LPV_OPEN_KC[k])||LPV_OPEN[k]||LPV_OPEN.other)];const MK=(kc&&LPV_MID_K_KC[k])||LPV_MID_K[k];
  if(MK)P.push(pk(MK));else if(m&&LPV_MID[cls])P.push(pk(LPV_MID[cls]));else P.push(pk(LPV_MID.none));
- if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));P.push(pk(LPV_DIE[cause]));
+ if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));{const D=LPV_DIE[cause],D2=(n||left)?D:D.filter(x=>!/con cháu/.test(x));P.push(pk(D2.length?D2:D))}/* no children anywhere → no «con cháu quây quần» */
  const ep={f:fate,k,ti:LPV_TITLE[k],m:m?m.name:"",net,cls,kids:n,age:a,cause,cl:LPV_CAUSE[cause],txt:P.filter(Boolean).map(x=>lpvFill(x,o)).join(" ")};
  S.lvEp=ep;return ep}
 window.lpvEpiFor=lpvEpiFor;
@@ -94164,6 +94166,8 @@ let LPV_KCS=null;
    if(K&&K.lv&&K.trv&&!K.inPal&&!S.dead&&k){let m=null;
     if(h==="Vợ Trạng nguyên")m=typeof kcTmMan==="function"?kcTmMan():null;
     else if((k==="hon"||k==="thiep")&&LPV_KCS&&LPV_KCS.n){m=LPV_KCS;m.name=m.name||m.n;m.short=m.n;m.sex="m";m.kind=m.kind||"man"}
+    /* the fixed kcMarry line must not contradict his REAL nết (law 6b): «chồng nàng thương nàng suốt đời» only for a một-lòng man */
+    if(m&&/thương nàng suốt đời/.test(t)&&lpvCls(lpvNet(m))!=="chung")t=String(t).replace(/, nhưng chồng nàng thương nàng suốt đời\./,".");
     lpvNext(k,m);alive=true}}catch(e){console.error("lpvKc",e)}
   return e0.call(this,h,t,fate,alive)}}})();
 /* ================= jend: kitEndScreen — THE ENDING SCREEN, full screen (KIT §91; owner marks #48 #50 #51, OD 21/11 ~03:56Z / ~04:03Z / ~04:06Z) =================
@@ -96229,7 +96233,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0683bbc8d622";window.CTM_BUILD=BUILD;
+const BUILD="54188749c173";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

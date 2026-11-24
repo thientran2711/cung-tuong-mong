@@ -106,7 +106,7 @@ function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)r
  const left=(typeof mySons==="function"?mySons().length:0)+(typeof myDaus==="function"?myDaus().length:0);
  const P=[pk((kc&&LPV_OPEN_KC[k])||LPV_OPEN[k]||LPV_OPEN.other)];const MK=(kc&&LPV_MID_K_KC[k])||LPV_MID_K[k];
  if(MK)P.push(pk(MK));else if(m&&LPV_MID[cls])P.push(pk(LPV_MID[cls]));else P.push(pk(LPV_MID.none));
- if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));P.push(pk(LPV_DIE[cause]));
+ if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));{const D=LPV_DIE[cause],D2=(n||left)?D:D.filter(x=>!/con cháu/.test(x));P.push(pk(D2.length?D2:D))}/* no children anywhere → no «con cháu quây quần» */
  const ep={f:fate,k,ti:LPV_TITLE[k],m:m?m.name:"",net,cls,kids:n,age:a,cause,cl:LPV_CAUSE[cause],txt:P.filter(Boolean).map(x=>lpvFill(x,o)).join(" ")};
  S.lvEp=ep;return ep}
 window.lpvEpiFor=lpvEpiFor;
@@ -145,5 +145,7 @@ let LPV_KCS=null;
    if(K&&K.lv&&K.trv&&!K.inPal&&!S.dead&&k){let m=null;
     if(h==="Vợ Trạng nguyên")m=typeof kcTmMan==="function"?kcTmMan():null;
     else if((k==="hon"||k==="thiep")&&LPV_KCS&&LPV_KCS.n){m=LPV_KCS;m.name=m.name||m.n;m.short=m.n;m.sex="m";m.kind=m.kind||"man"}
+    /* the fixed kcMarry line must not contradict his REAL nết (law 6b): «chồng nàng thương nàng suốt đời» only for a một-lòng man */
+    if(m&&/thương nàng suốt đời/.test(t)&&lpvCls(lpvNet(m))!=="chung")t=String(t).replace(/, nhưng chồng nàng thương nàng suốt đời\./,".");
     lpvNext(k,m);alive=true}}catch(e){console.error("lpvKc",e)}
   return e0.call(this,h,t,fate,alive)}}})();
