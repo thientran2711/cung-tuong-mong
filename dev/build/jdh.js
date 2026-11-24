@@ -163,9 +163,13 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
 function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
- if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
-window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+ if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
+/* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
+   picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
+const KDH_CAP_FS=["",".66rem",".6rem"];
+function kdhCapFit(c){try{const k=c&&c.querySelector(".kdh"),b=k&&k.querySelector("b");if(!b)return;for(const f of KDH_CAP_FS){k.style.fontSize=f;const lh=parseFloat(getComputedStyle(b).lineHeight)||12;if(b.getBoundingClientRect().height<=lh*2.4)break}}catch(e){}}
+window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 8px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap .kdh{padding-left:8px;padding-right:8px}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
