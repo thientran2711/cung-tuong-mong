@@ -202,7 +202,10 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  if(cap)bug('stuck','no ending within the wall cap ('+CAP/1e3+' s)','state '+JSON.stringify(st.state),{save:st.r.lastSave});
  if(res&&res.title==='TIMEOUT')bug('stuck','life stuck (inpage6 TIMEOUT'+(res.stuck?': no progress in one buổi':': 60000 steps')+')',(res.state||'')+' ring '+JSON.stringify(res.ring||[]),{save:st.r.lastSave});
  if(res&&res.title==='CRASH')bug('crash','bot step threw: '+res.fate,'',{save:st.r.lastSave});
- if(job.road&&!job.locked&&R.road!==job.road)bug('harness','forced road '+job.road+' not played (life got '+R.road+')','arcOk67 false at start? (road locked)');
+ /* E-FIX-6 (R8 bd_tuyet speed-2): a life that ended before its first buổi (TIMEOUT / CRASH at the entry cards) never reached the road — say so, not «road locked» */
+ if(job.road&&!job.locked&&R.road!==job.road)bug('harness','forced road '+job.road+' not played (life got '+R.road+')',res&&res.title&&!(st.r.buoi>0)?'life ended before its first buổi: '+res.title+' (see that row)':'arcOk67 false at start? (road locked)');
+ /* E-FIX-6: the bot re-chose one act 3× in a buổi with no time passing (it declined its own card, or the game refused it) — dropped for that buổi; listed so a real refusal stays visible */
+ {const L=Object.entries(st.x.selfLoop||{});if(L.length)bug('harness','bot re-chose an act with no progress (declined its own card / refused) — dropped for that buổi',L.sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,n])=>k+' ×'+n).join(' · '))}
  if(R.origin&&R.origin!==job.origin)bug('harness','forced origin '+job.origin+' not played (life got '+R.origin+')','');
  for(const s of (st.x.bad||[]))bug('number','stat out of range: '+s.replace(/ \w+$/,'').replace(/=.*/,''),s,{save:st.r.lastSave});
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);

@@ -127,8 +127,12 @@ function sensibleStep(){
   try{if(window.__xOpts)for(const o of window.__xOpts(N))opts.push(o)}catch(e){}/* danh-p1 intn.js: Tài nghệ options */
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
   try{if(window.__persOpts)window.__persOpts(opts,N)}catch(e){}/* robot10 personality: add / boost options */
+  /* E-FIX-6 (R8 lazy TIMEOUT «Dò la: Thôi» ×400): an option with no L label (spyQueen, lesson, every note("…") act) was never banned, so a bot that
+     picks an act and then declines its own card (lazy takes «Thôi» on the road card) or that the game refuses chose it again for ever in one buổi.
+     Every option gets a label from its note key (after __persOpts, which reads !o.L); the same 3-per-buổi ban as the labelled ones; window.__selfLoop counts it */
+  opts.forEach(o=>{if(!o.L){const m=/note\("([^"]+)"/.exec(String(o.f));o.L="n:"+(m?m[1]:String(o.f).slice(0,40))}});
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
-  if(op2.length&&op2[0].s>(window.__minS==null?0.35:window.__minS)){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
+  if(op2.length&&op2[0].s>(window.__minS==null?0.35:window.__minS)){if(op2[0].L){const n=window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;if(n===3&&op2[0].L.startsWith("n:")){const k=op2[0].L.slice(2)+(Q[0]?" ("+strip(Q[0].t||Q[0].title||"").slice(0,40)+")":"");window.__selfLoop=window.__selfLoop||{};window.__selfLoop[k]=(window.__selfLoop[k]||0)+1}}op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){if(window.__vtPump)window.__vtPump(5);/* run_rep.js virtual clock (vclock.js): game timers advance 5 ms per bot step */window.__iter++;window.__lifeIter++;
@@ -142,7 +146,7 @@ window.__bot={step:(mode,n)=>{
     try{if(modalStep(mode==="sens"))continue;
     if(S.dead)continue;
     if(mode==="rand")randomStep();else sensibleStep()}catch(e){window.__res.push({ex:JSON.parse(JSON.stringify(window.__exN||{})),origin:S.origin.k,rank:S.rank,maxRank:Math.max(window.__maxRank,S.rank),turns:S.turn,years:+(S.turn/12).toFixed(2),title:"CRASH",fate:"CRASH: "+String(e.message).slice(0,80)+" @"+(String(e.stack).split("\n")[1]||"").trim().slice(0,60),hhTurn:window.__hhTurn});window.__maxRank=0;window.__lifeIter=0;window.__hhTurn=null;window.__sucTrace=[];window.__acts={};Q=[];try{start()}catch(e2){}}}
-  return window.__res.length},extra:()=>({logc:window.__logc,bad:window.__bad.slice(0,30),badN:window.__bad.length,saveFail:window.__saveFail.slice(0,10),idle:window.__idle,buoi:window.__buoi})};
+  return window.__res.length},extra:()=>({logc:window.__logc,bad:window.__bad.slice(0,30),badN:window.__bad.length,saveFail:window.__saveFail.slice(0,10),selfLoop:window.__selfLoop||{},idle:window.__idle,buoi:window.__buoi})};
 })();
 /* sensible bot uses the j70 "Phòng bị" orders like a real player: a taster while pregnant, a guard on the palace, a record-keeper when there are hands (once a tuần; orders cost silver monthly as for anyone) */
 (function(){if(typeof ords70!=="function")return;let lastK="";const st0=window.__bot.step;window.__bot.step=function(mode,n){try{if(mode==="sens"&&!window.__noGuard&&S&&!S.dead&&!S.srv){const k=S.turn+"_"+S.tuan;if(k!==lastK){lastK=k;const L=ords70();
