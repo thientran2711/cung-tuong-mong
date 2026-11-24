@@ -1484,4 +1484,4 @@ robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZ
 rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | RUNNING | 24/11 09:57Z (Foreman D depth 2)
 | REVIEW E80r robot10-e-fix-2 r3 SMALL (sonnet; briefs/E80r-review-robot-fix2-r3.md) of 0673d1a1 | review/robot10-e-fix-2-r3m; reports/robot10-fix12-review.md | FOREMAN E (child3) | (opening E80r) | RUNNING | 24/11 10:06Z |
 | REVIEW E81r robot10-e-fix-3 BIG (opus; briefs/E81r-review-robot-fix3.md) of e1ee6041 | review/robot10-e-fix-3-r; reports/robot10-fix3-review.md | FOREMAN E (child3) | session_01DgYSWnaebLfT2YjJ9ZWjc8 | RUNNING | 24/11 10:06Z |
-| robot10 E FIXER #3 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md HANDOVER + ADDENDUM) | review/robot10-e-fix-3 (+ -4…); reports/robot10-E-fixer.md | FOREMAN E (child3) | (opening FIXER#3) | RUNNING | 24/11 10:10Z |
+| robot10 E FIXER #3 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md HANDOVER + ADDENDUM) | review/robot10-e-fix-3 (+ -4…); reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWogKvvnwna26yqXVT5 | RUNNING | 24/11 10:15Z |
