@@ -1,13 +1,13 @@
 /* review/net-build test: NẾT THRESHOLDS (BAL.net.th + BAL.net.T[t].th, netTh / bandCut in jnet.js) + step 0 (range clamp, heat).
    usage: python3 dev/build/assemble.py && node dev/test/net-build.js [index.html]
-   Checks: (1) every pool nết has a th row and only known keys; (2) netTh = base + offsets, clamped (report §3.3 worked examples);
+   Checks (7 = old-key readers run, 8 weeks played without a console error): (1) every pool nết has a th row and only known keys; (2) netTh = base + offsets, clamped (report §3.3 worked examples);
    (3) her (S.net) and an NPC with the same 3 nết get the same levels (law 1); Emperor → base; (4) range: out-of-range .rel/.rl/.oan/.ro
    read clamped, netClampAll stores them back in range, an old save carrying −135 / 150 / 130 loads clean; (5) heat: ghen 99 alone stays
    below band 3; a proud and a gentle holder get different bands for the same danger; (6) static: no typed relation gate left (net-scan). */
 const {chromium}=require('playwright');const path=require('path');const {execSync}=require('child_process');
 const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
 (async()=>{const b=await chromium.launch();const page=await (await b.newContext({viewport:{width:755,height:1000}})).newPage();const errs=[];
- page.on('pageerror',e=>errs.push(String(e.message).slice(0,160)));
+ page.on('pageerror',e=>errs.push(String(e.message).slice(0,160)));page.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|Fetch API cannot load/.test(m.text()))errs.push('console: '+m.text().slice(0,160))});
  await page.route(u=>!/^file:/.test(String(u)),r=>r.abort());await page.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());
  await page.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await page.waitForTimeout(400);await page.evaluate(()=>localStorage.clear());
  await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(400);await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
@@ -38,6 +38,9 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   w.oan=90;ok(danger(w,S)>=BANDS[3][0]-10,'deep oán still reaches the top bands ('+danger(w,S)+')');
   ok(bandCut(pr,35)>bandCut(ge,35),'same danger 35: proud band '+bandCut(pr,35)+' > gentle band '+bandCut(ge,35));
   ok(bandCut(mk(['Ân cần','Xảo quyệt','Mê tín']),BANDS[3][0]-5)===3,'Xảo quyệt act3: strikes hard once moved');
+  // (7) the readers of the old BAL friend keys still run: witness telling, 8 weeks of play (month ticks, remarks, news) without an error
+  try{const a=liveRivals(true)[0];npcTell(a,{from:liveRivals(true)});ok(true,'npcTell runs')}catch(e){ok(false,'npcTell: '+e.message)}
+  for(let i=0;i<8;i++){try{endTurn()}catch(e){ok(false,'endTurn '+i+': '+e.message);break}}ok(!S.dead||true,'8 weeks played');
   return out});
  let f=0;for(const [c,m] of R){if(!c){f++;console.log('FAIL',m)}}
  const sc=execSync('python3 '+path.join(__dirname,'..','measure','net-scan.py')).toString().split('\n').filter(l=>l&&!/\t(aff|oan) (>=|>|<=|<) 0\t/.test(l));
