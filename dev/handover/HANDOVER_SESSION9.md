@@ -2942,3 +2942,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:12Z) VEIL-1 reverted → SSK 469d7985 (= fe8f6e3d tree, §59.1 .55/.3). B reviewer told.
 - (08:15Z) OWNER ~08:30Z real: C works on as soon as art ends → E70 road dialogue scenes moved E → C (whole job).
 - FROM LC10 (07:42Z): LANDED thin-p6 fd85907a (all play + quickcheck + coop PASS). LIVE = fd85907a. Next: kit chain framefit → … → dialogue-vn, robot10-coop, parking-rank, coop-thin-g.
+- (08:20Z) OWNER ~08:40Z real: no-prewarn scope = only post-tap «choose again» confirms (KK18 part A only; part B/system/world warnings KEEP; OD ~08:08Z row overwritten in place). Never ask character-image matters until she orders character art. AI key: none found on either environment or repo → told her.
