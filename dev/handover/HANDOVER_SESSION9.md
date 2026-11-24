@@ -3100,3 +3100,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:16Z) tainghe v4 8f23c937 checked (Hạnh 4 acts fit Fold+iPad, no scroll) → GO LC12. All 4 ready flight fixes now in LC12 queue: mucluc b021e429 → sfx cce57071 → tainghe 8f23c937 → flight-ui 465d05a1. Open: OFFLINE-FAST, FLIGHT-DAYQ, FLIGHT-UI follow-ups.
 - (19:20Z) flight-ui v3 82100d6f checked (no ??? in prose — kitNoUnk at notice/log/dialog sinks; reveal hides other overlays) → GO LC12 (supersedes 465d05a1).
 - (19:22Z) KK21 kit-fitfast findings cdf6a7f2 (memo = 0 gain, reverted) → MAIN ruled: do (b) start at previous size + one verify fit, (c) cache P per dialog type, (a) decode-first ≤80 ms; gate rect diff 0 + before/after long tasks. Moment album after.
+- (19:25Z) KK21 KIT READY kit-fitfast c03add44 (b+c, sizes EQUIV 0 diffs 5 dialog kinds Fold+iPad) → B kit review after kit-page diff; SELSCENE-13 told to merge + re-run quickcheck long-task line.
