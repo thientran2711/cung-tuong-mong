@@ -1438,3 +1438,4 @@ REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) |
 | THIN-P8 road-play helper (sonnet; splits rv 4YxeqtxE remaining roads) | review/thin-p8-r1 (no code); reports/thin.md | B | session_01N1tNP4b5Pe2Aq1vxpZPBcx | RUNNING | 24/11 07:12Z |
 | DLG WRITER W2 j72_b (sonnet; briefs/b-dlg-writer.md; lead 4b3uXPGS) | review/sideline-dlg content | B | session_01N1tNP6DMVNu32Gq6i9edUo | RUNNING | 24/11 07:14Z |
 | REVIEW E71r SCENT BIG (opus; briefs/E71r-review-scent.md) of de29c737 | review/scent(-r); reports/scent-review.md | FOREMAN E (child2) | session_01DgYSWo5b8sXNAmSRTfQ98P | RUNNING | 24/11 07:09Z |
+| REVIEW E72r LEAVE-PALACE BIG (opus; briefs/E72r-review-leave-palace.md) of 5ae10d0a | review/leave-palace(-r); reports/leave-palace-review.md | FOREMAN E (child2) | (opening) | RUNNING | 24/11 07:24Z |
