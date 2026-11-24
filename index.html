@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e4670806+","t":"2026-11-23T23:58Z","c":"thin-p0-r1 review fixes: co-op thin guest (host running the friend's turn) never writes/rotates/reads the host's no-repeat store; BAL.nr th…","b":"0e785a18da79","h":[{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"}]};
+window.CTM_BI={"s":"a76ba1e4+","t":"2026-11-24T00:18Z","c":"thin-p0-r1 review fixes: co-op thin guest (host running the friend's turn) never writes/rotates/reads the host's no-repeat store; BAL.nr th…","b":"a4216d2fd648","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32376,6 +32376,56 @@ PEND.j70scar=pp=>{const s=S&&S.scar;if(!s)return null;const sc=scarOf(S);const o
 (function(){if(typeof IT!=="object")return;IT.ngocdungcao=Object.assign({},IT.ngocdungcao||{kd:"Thuốc",pr:0,tg:[]},{n:"Ngọc dung cao",d:`Thoa mặt: chữa hủy dung (lành không để sẹo, sớm 4 tuần); mặt lành thì Sắc ${balSg(BAL.eff.j70.sacUse)}`,use:{sac:BAL.eff.j70.sacUse}});
  const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(e&&e.k==="ngocdungcao"&&!e.h&&p.scar){const s=p.scar;p.inv.splice(ix,1);s.cure=1;s.pg=Math.min(s.need,(s.pg||0)+4);
    return `${NMc(p)} thoa Ngọc dung cao: vết thương trên mặt sẽ lành không để sẹo, sớm hơn 4 tuần (còn ${Math.max(0,s.need-s.pg)} tuần).`}return u0.apply(this,arguments)}})();
+/* j70sd: ORDER THIN P6 composed seeds (DATA ONLY). Built by dev/build/j70sd_build.py; empty until the writer files land. Do not hand-edit. */
+const J70SEEDS=[
+];
+/* ================= j70c: COMPOSED j70 ROUTES (ORDER THIN P6, owner OD 23/11 ~22:50Z; EVCAT §3 P6) =================
+   Seeds (data J70SEEDS in j70sd.js, built from dev/handover/content/thin/j70seeds*.md by dev/build/j70sd_build.py; schema reports/thin.md «## API P6»):
+   one seed = one more route of an existing method m (method × route × tell): its two tells (+ optional alternates), the place a tell is seen, the
+   price / prep time / visibility tiers (numbers BAL.j70c, law 4), the accomplice, the real object (law 6c), her guard and her cut.
+   At load every seed becomes ONE more entry of M70[m].R, so the whole j70 runtime plays it unchanged for every plotter (NPC→her, NPC→NPC,
+   her→NPC, law 1): pickRoute70 (price, wit, accomplice), tells, detection, guard/cut, execution, aftermath.
+   Cross-life (P0 jnorep, family "j70", key "<m>:<route>" = the raw key j70 already marks): every plotter now picks among the routes NOT met in a
+   past life first (nrFresh), the old 51 included; once all are met, the whole list as today.
+   Tell wordings: a seed with alternates draws its two tells per plot (family "j70t", key "<m>:<route>:<i>", fresh-first) and keeps them (p.tv).
+   The real object: the plot keeps {name, from, trace}; her people's report and the aftermath name where it really ends (S.j70.ob, personal list). */
+(function(){
+if(typeof M70==="undefined")return;
+const J70C={};window.J70C_SEEDS=J70C;
+const Bj=()=>BAL.j70c;
+function tier(map,k,d){const B=Bj();return B&&B[map]&&B[map][k]!=null?B[map][k]:d}
+function route(sd){return{id:sd.id,n:sd.n,tl:(sd.tl||[]).slice(0,2),tlx:(sd.tlx||[]).slice(),pl:sd.pl||null,
+ get vis(){return tier("vis",sd.vis,0)},get need(){return tier("need",sd.need,2)},get bac(){return tier("bac",String(sd.bac),0)},
+ acc:sd.acc||undefined,win:sd.win?1:undefined,gd:sd.gd,st:sd.st,obj:sd.obj||null,opp:sd.opp||null,cs:1}}
+const keyOf=M=>{for(const k in M70)if(M70[k]===M)return k;return null};
+/* fresh-first across lives for every route of the method (old and composed) */
+if(typeof pickRoute70==="function"){const p0=pickRoute70;pickRoute70=function(a,t,M){try{const m=keyOf(M);if(m&&BAL.j70c&&typeof nrFresh==="function"){
+  const R0=Bj().on?M.R:M.R.filter(r=>!r.cs);/* composed routes off: the hand-written ones only */
+  const F=nrFresh("j70",R0,r=>m+":"+r.id);if(F.length<R0.length){const r=p0.call(this,a,t,Object.assign({},M,{R:F}));if(r)return r}
+  if(R0.length<M.R.length)return p0.call(this,a,t,Object.assign({},M,{R:R0}))}}catch(e){console.error("j70c pick",e)}
+ return p0.apply(this,arguments)}}
+/* tell wording of a composed route: two of tl + tlx per plot, fresh-first (j70t) */
+function tellPair(m,r){const A=r.tl.concat(r.tlx||[]);if(A.length<=2)return null;const idx=A.map((_,i)=>i);const fam="j70t";
+ const one=L=>{const F=nrFresh(fam,L,i=>m+":"+r.id+":"+i);const i=nrPick(fam,F,x=>m+":"+r.id+":"+x);if(i!=null)nrMark(fam,m+":"+r.id+":"+i);return i};
+ const a=one(idx);const b=one(idx.filter(i=>i!==a));return a==null||b==null?null:[a,b]}
+if(typeof newPlot70==="function"){const n0=newPlot70;newPlot70=function(a,t,m,rid,mo,opt){const p=n0.apply(this,arguments);try{if(p&&!p.end){const M=M70[p.m];const r=M&&M.R.find(x=>x.id===p.r);
+  if(r&&r.cs){if(r.tlx&&r.tlx.length)p.tv=tellPair(p.m,r)||undefined;if(r.obj){const z=j70();(z.ob=z.ob||[]).push({pl:p.id,r:r.id,name:r.obj.name,from:r.obj.from,trace:r.obj.trace,born:S.turn});if(z.ob.length>60)z.ob.splice(0,z.ob.length-60)}}}}catch(e){console.error("j70c plot",e)}return p}}
+if(typeof tellOf70==="function"){const t0=tellOf70;tellOf70=function(p,i){try{if(p&&p.tv){const r=pr70(p);if(r&&r.cs){const A=r.tl.concat(r.tlx||[]);const s=A[p.tv[Math.min(i,1)]];
+  if(s){const t=pt70(p);return s.replace(/nạn nhân/g,t?(t===S?"ngươi":t.name):"người khác")}}}}catch(e){}return t0.apply(this,arguments)}}
+/* the real object ends somewhere (law 6c): once the plot is carried out / cut / trapped, where it is now is said to whoever knew of it */
+if(typeof exec70==="function"){const x0=exec70;exec70=function(p,opp){const r=x0.apply(this,arguments);try{const o=p&&j70cObj(p.id);
+  if(o&&p.end&&p.end!=="miss"&&(p.a==="me"||p.t==="me"||p.kn)){o.done=S.turn;log(`<i>${o.name} (${o.from}): ${o.trace}.</i>`)}}catch(e){}return r}}
+/* register */
+function j70cReg(sd){if(!sd||sd.type!=="route"||!sd.id||J70C[sd.id])return false;const M=M70[sd.m];if(!M||M.R.some(r=>r.id===sd.id))return false;
+ J70C[sd.id]=sd;M.R.push(route(sd));return true}/* loaded right after j70.js (inner to every later wrapper: jptime's timed deed, j95b, jtruth); BAL is read lazily */
+window.j70cReg=j70cReg;
+try{const L=(typeof J70SEEDS!=="undefined"&&Array.isArray(J70SEEDS))?J70SEEDS:[];for(const sd of L)j70cReg(sd)}catch(e){console.error("j70c",e)}
+/* the old counter keeps counting the hand-written routes only; composed ones apart (j70cCount) */
+{const c0=window.j70Count;if(typeof c0==="function")window.j70Count=function(){const r=c0.apply(this,arguments);try{r.types-=Object.values(M70).reduce((a,M)=>a+M.R.filter(x=>x.cs).length,0)}catch(e){}return r}}
+window.j70cCount=function(){const by={};for(const id in J70C){const m=J70C[id].m;by[m]=(by[m]||0)+1}return{routes:Object.keys(J70C).length,methods:by}};
+/* the object's trace (law 6c): where the real thing of a composed route ends, for the aftermath / Tai mắt */
+window.j70cObj=function(pid){try{const z=j70();return (z.ob||[]).find(o=>o.pl===pid)||null}catch(e){return null}};
+})();
 /* ================= j82 HỘI THI TÀI NGHỆ: real mini-games (owner 11/14) =================
    "Ta tự chơi, được 5 điểm, nhưng tài nghệ trong game cao nên được cộng thêm."
    API (window):
@@ -37918,6 +37968,17 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P6 (jworldc.js composed world reactions, owner OD 23/11 ~22:50Z; reports/thin.md «## API P6»): on = composed scenes live; npcMax = NPCs
+   in a seed's scope who choose a stance (the same 4 as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
+   seed met in a past life (fresh-first, on top of jnorep ×nr.w); obKeep = object traces kept; fx[tier] = what ONE gain/loss step is worth per key
+   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); npcCant = weight of a stance an NPC cannot pay (bạc). */
+BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
+/* ORDER THIN P6 (j70c.js composed j70 routes): on = composed routes live; vis/need/bac = the route tiers (tell visibility, prep weeks, price — the same
+   ranges as the 51 hand-written routes); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
+BAL.j70c={on:true,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -87486,6 +87547,122 @@ try{const K=typeof ACT!=="undefined"&&ACT.kframe;if(K&&K.f){const f0=K.f;K.f=fun
 /* NPC-PURPOSE G3 kind: who pins the theft on whom — the consort with the strongest grudge (≥ BAL.ag.why.g3.scape.min) against another */
 npwReg("g3scape",{who:()=>liveRivals(true).filter(v=>!v.out&&!v.confined),why:a=>{const L=liveRivals(true).filter(t=>t!==a&&!t.out);const t=npwPick(L,x=>hostility(a,x));
  const s=t?hostility(a,t):0;return t&&s>=BAL.ag.why.g3.scape.min?{s:Math.min(100,s),t,r:"oán "+npwNm(t)}:null}});
+/* jwsd: ORDER THIN P6 composed seeds (DATA ONLY). Built by dev/build/jwsd_build.py; empty until the writer files land. Do not hand-edit. */
+const JWSEEDS=[
+];
+/* ================= jworldc: COMPOSED WORLD REACTIONS (ORDER THIN P6, owner OD 23/11 ~22:50Z; EVCAT §3 P6) =================
+   Seeds (data JWSEEDS in jwsd.js, built from dev/handover/content/thin/wseeds*.md by dev/build/jwsd_build.py; schema reports/thin.md «## API P6»):
+   one seed = cause (the REAL cause tag `sub` of a window of kind k) × scope (who in the palace is hit and reacts) × reaction (4 equal-value stances).
+   The window itself is untouched (jworld/jworld2: real cause, length, effects on everyone through the gates); when a window of kind k opens (host),
+   one fitting seed is drawn through the shared no-repeat memory jnorep (family "wc:<k>", fresh-first across lives, never twice in one life), its
+   people are cast from the live roster INSIDE the scope, every NPC of the scope chooses one of the SAME 4 stances by mindPick (law 1 two-way: the
+   same step effects on her own stats), and she gets the scene as a second CENTER card of that window (after the kind's own card; one per player).
+   The end card adds who chose what. Numbers (law 4): one step = BAL.wc.fx[tier][key]; nothing typed here. Laws 2/3: Σgain == Σloss == tier steps
+   per stance (validator dev/test/wseeds_validate.py). Objects stay traceable (law 6c): S.wc.ob {sid,name,owner,trace,turn}.
+   The draw (w.x.c) lives in the shared window record S.wwin (host rolls, as every window field); her choice and traces are personal (S.wc). */
+(function(){
+const WX=window.WORLD_X;if(!WX)return;
+const {now,wErr,EVD,liveR,npcPick,mW,pid,byPid,wPresent}=WX;
+const host=()=>typeof worldOn!=="function"||worldOn();
+const WC={},WCI={};window.WC_SEEDS=WCI;
+const STAT=["sung","danh","bac","suc","mat","th","hh","duc","tamco","an"],NPCST=["sung","danh","bac","suc","duc","th"],NETK=new Set(["rv","sv"]);
+const XK={hoa:1,day:1,lap:1,hon:1,hau:1,tuyen:1};/* kinds whose window has its own person {X} */
+const Bc=()=>BAL.wc;
+function wc(){if(!S)return null;const j=S.wc=S.wc||{};j.ob=j.ob||[];j.sh=j.sh||{};j.ch=j.ch||{};return j}
+/* the REAL cause tag of a window (what the seed's `sub` must match) */
+function wcSub(w){const x=w.x||{},c=String(w.cause||"");switch(w.k){
+ case"tang":return x.why||"";case"away":return x.sub||"";case"hoa":return /^Sét/.test(c)?"storm":"lamp";case"dis":return x.sub||"";
+ case"tho":return x.who||"";case"day":return x.sex==="m"?"m":"f";case"hau":return x.sub||"";case"phat":return x.big?"big":"small";
+ case"cam":return /vu cổ/i.test(c)?"vuco":/ngoại thích/i.test(c)?"ngoai":/[Gg]iặc/.test(c)?"giac":"";default:return""}}
+/* the window's own person {X} */
+function wcXo(w){const x=w.x||{};try{if(w.k==="tuyen")return (x.n||[]).map(byPid).find(v=>v&&v.alive)||null;
+ const id=w.k==="hau"?x.to:x.who;return id==null?null:byPid(id)}catch(e){return null}}
+function kOf(r){const k=(r&&r.kind)||"rv";return k.indexOf("man:")===0?"man":k}
+function fit(o,r){if(!r||!NETK.has(kOf(r)))return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}const any=L=>!L||!L.length||L.some(n=>T.includes(n));return any(r["nết"])&&any(r["lòng"])}
+function needsOk(n){n=n||{};if(n.rank_min!=null&&(S.rank||0)<n.rank_min)return false;if(n.rank_max!=null&&(S.rank||0)>n.rank_max)return false;
+ if(n.month&&n.month.length&&!n.month.includes(S.month))return false;if(n.not_confined&&S.confined)return false;
+ if(n.kids_min!=null&&(S.kids||[]).filter(k=>k.alive).length<n.kids_min)return false;if(n.nights_min!=null&&(S.nights||0)<n.nights_min)return false;return true}
+const rkV=v=>{try{return rkOf(v)}catch(e){return v.rank||0}};
+/* the scope: the NPC consorts (or servants) the seed hits and who react */
+function wcScope(sd,w){const L=liveR().filter(v=>v&&v.alive&&!v.confined&&!v.out),H=Bc().rankHi;try{switch(sd.scope){
+ case"house":{const X=wcXo(w);if(!X||X===S||!X.alive)return null;let pal=null;try{pal=palaceOf(X)}catch(e){}return [X].concat(L.filter(v=>v!==X&&pal&&(()=>{try{return palaceOf(v)===pal}catch(e){return false}})()))}
+ case"hi":return L.filter(v=>rkV(v)>=H);case"lo":return L.filter(v=>rkV(v)<H);
+ case"near":{let pl=null;try{pl=EVD[w.k].place(w)}catch(e){}return pl?wPresent(pl):[]}
+ case"kids":return L.filter(v=>(v.kids||[]).some(k=>k&&k.alive));
+ case"srv":{const O=[];for(const v of L)for(const s of v.staff||[])if(s)O.push(s);return O}
+ default:return L}}catch(e){wErr("wc scope",e);return []}}
+/* cast one role (rv inside the scope; fixed people through A6 as j68) */
+function wcOne(r,name,P){const k=kOf(r);
+ if(k==="rv"){if(P.house&&name==="A"){const o=P.xo;return o&&o!==S&&o.alive&&fit(o,r)?o.id:null}
+  const pool=P.sl&&P.scope!=="srv"&&P.scope!=="all"?new Set(P.sl):null;return rv6(v=>(!pool||pool.has(v))&&fit(v,r)&&v!==P.oA);}
+ if(k==="sv"){const id=sv6(s=>fit(s,r)&&s!==P.oA);return id==null?null:id}
+ if(k==="kid"){const n=kid6(x=>x!==P.oA);return n==null?null:n}
+ if(k==="man"){const L=(S.men||[]).filter(m=>m.alive!==false&&m.rw===r.kind.slice(4)&&m!==P.oA);return L.length?pick(L).id:null}
+ return A6(k)?0:null}
+function wcCast(sd,w){const R=sd.roles||{},c={id:sd.id};const sl=wcScope(sd,w);if(sl==null)return null;
+ if(sd.scope!=="srv"&&sd.scope!=="all"&&!sl.length)return null;
+ const P={sl,scope:sd.scope,house:sd.scope==="house",xo:wcXo(w)};
+ if(XK[w.k]&&/\{X\}/.test(JSON.stringify(sd))&&!P.xo)return null;
+ if(R.A){const a=wcOne(R.A,"A",P);if(a==null)return null;c.a0=a;const Y=A6(kOf(R.A),a);if(!Y)return null;P.oA=Y.o}
+ if(R.B){const b=wcOne(R.B,"B",P);if(b==null)return null;c.a1=b;const Y=A6(kOf(R.B),b);if(!Y||Y.o===P.oA)return null}
+ const ob=sd.object;if(ob&&ob.owner==="X"&&!P.xo)return null;return c}
+function wcActors(sd,w,c){const R=sd.roles||{},X={};if(R.A){X.A=A6(kOf(R.A),c.a0);if(!X.A)return null}if(R.B){X.B=A6(kOf(R.B),c.a1);if(!X.B)return null}
+ const xo=wcXo(w);X.X=xo?{o:xo,n:xo===S?"ngươi":xo.name}:null;return X}
+function fill(t,sd,X){const o=sd.object;let s=String(t||"").replace(/\{O\}/g,o&&o.name?o.name:"").replace(/\{X\}/g,X.X?X.X.n:"");
+ try{return e68Fill(s,X)}catch(e){return s}}
+/* draw one seed for an opening window (host): fitting, not met this life, fresh-first across lives (P0 family wc:<k>) */
+function wcDraw(w){if(!BAL.wc||!Bc().on||!host())return null;const L=(WC[w.k]||[]);if(!L.length)return null;const sub=wcSub(w),fam="wc:"+w.k;
+ const C=L.filter(sd=>(!sd.sub||!sd.sub.length||sd.sub.includes(sub))&&needsOk(sd.needs)&&!nrNow(fam,sd.id));if(!C.length)return null;
+ const F=nrFresh(fam,C,x=>x.id);const tries=F.slice();
+ while(tries.length){const sd=nrPick(fam,tries,x=>x.id,x=>nrSeen(fam,x.id)>0?Bc().seen:1);if(!sd)break;tries.splice(tries.indexOf(sd),1);
+  const c=wcCast(sd,w);if(c){nrMark(fam,sd.id);return c}}
+ return null}
+function stepV(tier,k){const F=Bc().fx[tier]||Bc().fx.m;return F[k]||0}
+function val(m,tier,sign){const fx={};let A=0,B=0;for(const[k,n]of Object.entries(m||{})){
+ if(STAT.includes(k))fx[k]=(fx[k]||0)+n*stepV(tier,k)*sign;else if(k==="rel.A")A+=n*stepV(tier,"rel")*sign;else if(k==="rel.B")B+=n*stepV(tier,"rel")*sign}return{fx,A,B}}
+/* the NPC round: every NPC of the scope picks one of the same 4 stances (mindPick by the stance's npc tag), same steps on her own stats */
+function wcRound(sd,w,c){const tier=sd.tier||"m",r=c.r={};const X=wcActors(sd,w,c)||{};const oA=X.A&&X.A.o,oB=X.B&&X.B.o;
+ const xo=wcXo(w);const sl=(wcScope(sd,w)||[]).filter(v=>v!==oA&&v!==oB&&v!==S&&v!==xo);/* the window's own person is its subject, not a bystander */for(let i=sl.length-1;i>0;i--){const j=R(i+1);[sl[i],sl[j]]=[sl[j],sl[i]]}
+ const srv=sd.scope==="srv";const E=Object.entries(sd.stances||{});
+ for(const v of sl.slice(0,Bc().npcMax)){try{
+  const O=E.map(([id,st])=>{let wt=1;try{wt=srv?1:mW(v,st.npc)}catch(e){}const bc=(st.loss||{}).bac;if(!srv&&bc&&(v.bac||0)<bc*stepV(tier,"bac"))wt*=Bc().npcCant;return[id,Math.max(.01,wt)]});
+  const k=srv?pick(O)[0]:npcPick(v,O);if(!k)continue;(r[k]=r[k]||[]).push(srv?(v.name||""):pid(v));if(srv)continue;
+  const st=sd.stances[k];for(const[sg,m]of[[1,st.gain],[-1,st.loss]])for(const[key,n]of Object.entries(m||{})){
+   if(NPCST.includes(key)){const d=sg*n*stepV(tier,key);if(key==="duc"&&typeof ducAdd==="function")ducAdd(v,d,"thế sự");else ap(v,{[key]:d})}
+   else if(key==="rel.A"&&X.A&&X.A.k==="rv")affAdd(oA,v,sg*n*stepV(tier,"rel"));else if(key==="rel.B"&&X.B&&X.B.k==="rv")affAdd(oB,v,sg*n*stepV(tier,"rel"))}
+ }catch(e){wErr("wc round",e)}}return r}
+function wcTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=wc();const tr=fill(st.trace||o.trace,sd,X),nm=fill(o.name,sd,X);
+ const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="X"?(X.X?X.X.n:""):o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
+ j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>Bc().obKeep)j.ob.splice(0,j.ob.length-Bc().obKeep);return `${nm}: ${tr}.`}
+function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).map(([id,st])=>{
+ const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.A&&(g.A+l.A))rr.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
+ return c6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})})}
+function wcCard(w){const c=w.x&&w.x.c;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
+ if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
+ let nm="";try{nm=window.worldName(w)}catch(e){}
+ return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X)}}
+function wcEnd(w){const c=w.x&&w.x.c;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
+ const P=[];for(const[k,L]of Object.entries(c.r)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
+  const N=L.map(x=>sd.scope==="srv"?x:(()=>{const p=byPid(x);return p&&p!==S?p.name:null})()).filter(Boolean);if(N.length)P.push(`${N.join(", ")}: «${fill(st.text,sd,X)}»`)}
+ return P.length?` Trong cung khi ấy — ${P.join("; ")}.`:""}
+/* wire every kind (EVD is the ONE registry of jworld/jworld2) */
+const PEND=[];
+function wcWrap(k){const E=EVD[k];if(!E||E.__wc)return;E.__wc=1;
+ const s0=E.start;E.start=function(w){let t="",er=null;try{t=s0?s0.apply(this,arguments):""}catch(e){er=e}try{if(BAL.wc&&Bc().on&&host()){const c=wcDraw(w);if(c){w.x.c=c;wcRound(WCI[c.id],w,c);WCS.draw++}}}catch(e){wErr("wc start "+k,e)}if(er)throw er;return t};
+ const e0=E.end;E.end=function(w){const t=e0?e0.apply(this,arguments):"";let x="";try{x=wcEnd(w)}catch(e){wErr("wc end "+k,e)}return (t||"")+x};
+ const c0=E.card;E.card=function(w){const m=c0?c0.apply(this,arguments):null;try{if(w&&w.x&&w.x.c)PEND.push(w)}catch(e){}return m}}
+function flush(){if(!PEND.length||!S||S.dead)return;const j=wc();let n=0;for(const w of PEND.splice(0)){if(j.sh[w.id])continue;j.sh[w.id]=1;
+ let m=null;try{m=wcCard(w)}catch(e){wErr("wc card",e)}if(m){Q.push(m);n++;WCS.show++;try{nrMark("wc:"+w.k,w.x.c.id)}catch(e){}}}
+ try{const lo=((S.wwin&&S.wwin.seq)||0)-20;for(const i in j.sh)if(+i<lo)delete j.sh[i];for(const i in j.ch)if(+i<lo)delete j.ch[i]}catch(e){}
+ if(n&&$("modal").hidden)showModal()}
+const WCS={draw:0,show:0};window.WCS=WCS;
+{const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{flush()}catch(e){wErr("wc flush",e)}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(PEND.length&&!S.mg)flush()}catch(e){}return r}}
+function wcReg(sd){if(!sd||sd.type!=="wc"||!sd.id||WCI[sd.id]||!EVD[sd.k])return false;WCI[sd.id]=sd;(WC[sd.k]=WC[sd.k]||[]).push(sd);return true}
+try{const L=(typeof JWSEEDS!=="undefined"&&Array.isArray(JWSEEDS))?JWSEEDS:[];for(const sd of L)wcReg(sd);for(const k in EVD)wcWrap(k)}catch(e){console.error("jworldc",e)}
+window.wcCount=function(){const by={};for(const k in WC)by[k]=WC[k].length;return{seeds:Object.keys(WCI).length,kinds:by}};
+window.WC_X={wcReg,val,wcActors,wcSub,wcXo,wcScope,wcCast,wcDraw,wcRound,wcCard,wcEnd,flush,WC,PEND};
+})();
 /* ================= jdress: DRESS OFFENCES (owner 16/11 18:30Z, s20 chat; NPC agent law OD:L1386) =================
    Two offences, two acts, the same for her and for every NPC (same act, same odds oVP, same cooldown shape as jwd92b):
    · "Tố vượt phẩm" (ACT.vp, j92 wdAccuse, unchanged act): an item ABOVE the wearer's rank. Now also the visible jewellery rule
@@ -95089,7 +95266,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0e785a18da79";window.CTM_BUILD=BUILD;
+const BUILD="a4216d2fd648";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
