@@ -417,3 +417,4 @@ FOLLOW-UPS (no seat): net-build band-3 harm share ≤30 %; servant-trust ring UI
 Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 block). Hourly trigger trig_01KLKH1LbFcyuvwsr57xX7Fi DELETED at rollover; child makes its own (:37).
 - (24/11 21:37Z) D depth 6 ROLLED OVER → **FOREMAN D (depth 7) = session_01D3E3NXc34LyTqacBtXB6sj**. depth-6 trigger deleted; 6 face-master03 workers + idle remerge seat report to depth 7; depth 6 stops.
 - (24/11 21:45Z) **FOREMAN D = session_01D3E3NXc34LyTqacBtXB6sj; START_CTX ≈ 8 %; depth 7** (limit 8; roll line 33 %, ceiling 60 %). Took over from depth 6. Seats messaged (6 face-master03 + remerge seat); own hourly wake :37. last wake: 24/11 21:45Z
+- (24/11 21:48Z) D7: hourly trigger trig_015Hp9pBz79zzvRxtvSuQji5 (:37). LIVE still 502c48c9 → remerge seat stays idle. No face-master03 reports yet (workers started 21:29Z). last wake: 24/11 21:48Z
