@@ -28,3 +28,4 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 20 | TITLES2 (per-chapter titles) | E | fix r3 |
 | 21 | Parking lot rows still not built | E | audit + build |
 | 22 | THIN P4/P6/P8 roads content landing | B / LC9 | landing |
+| 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 | building |
