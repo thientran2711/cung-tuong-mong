@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"284b367b+","t":"2026-11-24T00:45Z","c":"THIN P2 shots script WIP (new-life entry flow not passed yet; see reports/thin.md handover)","b":"610b50bf52bf","h":[{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"1f34b6fb+","t":"2026-11-24T00:51Z","c":"review thin-p2 r1: proof step on the chứng cứ scale (BAL.j7c.fx.proof 1/1/2), proof shown under ĐƯỢC, rest from BAL only, 5 seed word/cost …","b":"0f34e748c033","h":[{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29352,12 +29352,12 @@ function kitActMini(a){const line=[a.odds||"",a.ton&&`tốn: ${a.ton}`,a.duoc&&`
 
 /* ---------- odds meter: 7 steps, red → amber → green, word beside, tap = whole ladder ---------- */
 /* KIT_ODDS lives in j0.js (ONE SOURCE) */
-const KIT_ODDS_TXT=["thường hỏng","hỏng nhiều hơn thành","hỏng nhỉnh hơn thành","nửa thành nửa hỏng","thành nhiều hơn hỏng","thường thành","gần như chắc thành"];
+const KIT_ODDS_TXT=["rất dễ hỏng","dễ hỏng hơn là ổn","hơi nghiêng về hỏng","hên xui, tùy duyên","hơi nghiêng về ổn","thường ổn, ít khi hỏng","rất vững vàng, ít khi hỏng"];/* owner 23/11 ~21:40Z: no ladder meaning reads as a promise (no «thành», no «chắc», no numbers) */
 const KIT_ODDS_COL=["#b8321f","#d0662a","#c99a1e","#a3a52a","#6f9a34","#3f8a43","#2d7a52"];
 function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:oddsLv(w);const i=KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()));return i}
 function kitOdds(w,o){o=o||{};const lv=kitOddsLv(w);const word=lv<0?(o.none||"Không có"):KIT_ODDS[lv];
- return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}${lv>=0?` — bậc ${lv+1}/7`:""}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
-function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
+ return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
+function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
 /* the existing odds chip (j19 oddsChip) now draws the meter, keeping .oc for old selectors */
 (function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=kitOddsNorm(w==null?"":w);if(!s)return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
  if(!k)return o0.apply(this,arguments);const rest=s.replace(k,"").replace(/^\s*·\s*/,"").trim();return kitOdds(k).replace('class="kodm"','class="kodm oc"')+(rest?` <span class="ef n">${rest}</span>`:"")}})();
@@ -29400,7 +29400,7 @@ const KIT_GLOSS={
  "Nội vụ phủ":"Nơi lo đồ dùng, kẻ hầu và việc vặt của hậu cung.",
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
- "Cơ hội":"Thang 7 bậc: "+KIT_ODDS.join(" < ")+"."};
+ "Cơ hội":"Thang cơ hội, từ thấp lên cao: "+KIT_ODDS.join(", ")+"."};
 /* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
 let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
@@ -41024,7 +41024,7 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-
    written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
    Clarity lv (kitHintLevel: her Tâm cơ / Tai mắt, BAL.hint*):
      0 vague — generic people ("bề trên", "đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
-     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (dễ thành / thành bại khó đoán / khó thành) and the failure.
+     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (thường ổn / hên xui / dễ hỏng) and the failure.
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
    kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
@@ -41118,7 +41118,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
   (od?win:sure).push([w,sg])}
  const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
  const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
- if(od&&lv>=1)parts.push(kitOddsIdx(od)>=5?"dễ thành":kitOddsIdx(od)<=2?"khó thành":"thành bại khó đoán");
+ if(od&&lv>=1)parts.push(kitOddsIdx(od)>=5?"thường ổn":kitOddsIdx(od)<=2?"dễ hỏng":"hên xui");
  if(bad.length)parts.push("nhưng "+bad.join(", "));
  const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
  if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}
@@ -58040,13 +58040,13 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
   const peer=bad&&!boss&&r.host&&r.host!=="th"&&r.host!=="emp";/* mocked / envied by a consort: she answers, she does not apologise (owner 17/11 06:30Z); a scolding from above keeps "Xin lỗi" */
   const opts=peer?[
     {n:"Cười cho qua",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta mỉm cười cho qua, như chẳng nghe thấy.")}},
-    {n:"Đáp lại khéo",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log(`Ta đáp lại khéo léo, ${nm} đỏ mặt, người nghe gật gù.`);else log("Ta đáp lại, không khí càng gượng.")}},
+    {n:"Đáp lại khéo",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, hên xui, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log(`Ta đáp lại khéo léo, ${nm} đỏ mặt, người nghe gật gù.`);else log("Ta đáp lại, không khí càng gượng.")}},
     {n:"Đáp trả gay gắt",fx:{},p:BAL.toil.harshWin,hideOut:true,hint:lv=>lv?`đáp thẳng thì ${nm} nể ta hơn hoặc oán ta hơn; nàng ta chắc kém quý ta đi, hỏng thì mất danh, mất đức`:"đáp thẳng, mất chút thiện cảm; có thể được nể, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"harsh"))log(`Ta đáp trả thẳng thừng; ${nm} cứng họng, không dám trêu nữa.`);else log(`Ta đáp trả gay gắt, ai nghe cũng chê ta nóng nảy.`)}},
     {n:"Im lặng lui đi",fx:{},hideOut:true,hint:"lặng lẽ rời đi, không đổi gì",risk:"an toàn",go:()=>{log("Ta im lặng quay đi, không đáp lời.")}}]
   :bad?[
     {n:"Xin lỗi",fx:{},hideOut:true,hint:lv=>`${them(lv)} nguôi giận phần nào`,risk:"an toàn",go:()=>{toilAns(S,r,"sorry");log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log("Ta đáp lại khéo léo, người nghe gật gù.");else log("Ta đáp lại, không khí càng gượng.")}}]
+    {n:"Đáp lại",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, hên xui, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log("Ta đáp lại khéo léo, người nghe gật gù.");else log("Ta đáp lại, không khí càng gượng.")}}]
    :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,hint:"nhận lời khen, không đổi gì",risk:"an toàn",go:()=>{}}];
   Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
  try{render()}catch(e){}}
@@ -58595,7 +58595,7 @@ function toilGiveCost(p){let st=30;try{st=BAL.pay[Math.min(7,rkOf(p||S))]||30}ca
 function toilGiveItem(cost){const R=toilRx();let best=null;try{(S.inv||[]).forEach((e,i)=>{const it=e&&IT[e.k];if(!it||e.h||e.w||e.t||e.wk||!(it.pr>0))return;if(econNo(S,e)||econGiver(e))return;const v=econPrice(S,e);if(v<cost*R.giveItemLo||v>cost*R.giveItemHi)return;
   const d=Math.abs(v-cost);if(!best||d<best.d)best={i,d,n:it.n,pr:v}})}catch(e){}return best}
 /* the kit's own hint wording (KIT §28.6 kitHint, level >= 1): the ladder word of the odds (word(), VANPHONG) folded the way kitHint folds it. Level 0 (vague) names no chance. */
-const toilOddsW=o=>{const w=word(o);return kitOddsIdx(w)>=5?"dễ thành":kitOddsIdx(w)<=2?"khó thành":"thành bại khó đoán"};
+const toilOddsW=o=>{const w=word(o);return kitOddsIdx(w)>=5?"thường ổn":kitOddsIdx(w)<=2?"dễ hỏng":"hên xui"};
 function toilHhOk(){try{return qOn()&&S.rank<7}catch(e){return false}}
 /* ---- ONE rule per answer for her and an NPC consort (AG-ALL-2e3: jagacts3 p3ToilAns / p3ToilPraise / p3ToilAsk run the same functions; p = who answers) ---- */
 function toilTellO(p,h){const R=toilRx();return cl(Math.round(R.tellBase+(p.hh||0)/R.tellHhDiv+(toilGrudgeOf(h,p)?R.grudgeTell:0)),R.tellMin,R.tellMax)}
@@ -62481,7 +62481,7 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
 window.evbDedup=evbDedup;
 /* the option's chance in words, from its own ladder word (what it shows elsewhere in the game) — never a number */
 function evbChance(o){const s=String((o&&(o.x||o.j67))||"")+" "+String((o&&o.n)||"");const w=(s.replace(/<[^>]+>/g,"").match(new RegExp("("+KIT_ODDS_ALT+")(?=\\s|·|$)"))||[])[1]||(o&&o.p!=null?word(o.p):"");
- const lv=w?kitOddsIdx(w):-1;return lv<0?"":lv<=2?"khó thành":lv===3?"thành bại khó đoán":lv===6?"gần như chắc thành":"dễ thành"}
+ const lv=w?kitOddsIdx(w):-1;return lv<0?"":lv<=2?"dễ hỏng":lv===3?"hên xui":lv===6?"rất vững, ít khi hỏng":"thường ổn"}
 /* how big the option's gain is: the sum of the positive numbers in its success part (fx + thành:) */
 function evbGain(o){let s=0;try{const f=Object.assign({},o.w||{});for(const v of Object.values(f))if(v>0)s+=v;const x=String(o.x||o.j67||"").replace(/<[^>]+>/g,"");const m=x.split(/hỏng:|kèm:/)[0];
  (m.match(/\+\s?\d+/g)||[]).forEach(n=>s+=+n.replace(/\D/g,""))}catch(e){}return s}
@@ -62700,7 +62700,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
   Q.push({t:"Lời ra tiếng vào",who,art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
+    {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, hên xui, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
      go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;
@@ -69973,7 +69973,7 @@ PEND.ge1=()=>{const s=geS();if(!s||s.done)return null;const who=geBond();
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 1 · Đi hay ở</b><br>Cuối con đường «${esc(C(s).n)}». Ngoảnh lại một đời trong cung, ngươi đứng trước hai ngã rẽ cuối cùng. Ngã thứ nhất: ở lại hay ra đi?`,o}};
 PEND.ge2=()=>{const s=geS();if(!s||s.done||s.r1==null)return null;
  const o=R2N.map((n,i)=>{let x="";if(GB().showOdds){const j=C(s).e.findIndex(e=>e[3]===s.r1&&e[4]===i);if(j>=0&&s.st[j]==="o"&&typeof oddsLv==="function"&&typeof KIT_ODDS!=="undefined")x=KIT_ODDS[Math.max(0,oddsLv(geOdds(s,j)))]}
-  return {n,fx:{},x,risk:"có rủi ro",hint:"thành bại khó đoán; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
+  return {n,fx:{},x,risk:"có rủi ro",hint:"hên xui; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 2 · Đối đãi thế nào</b><br>Ngươi đã chọn: «${R1N[s.r1]}». Còn lại một câu: với thiên hạ, với những người quanh mình, ngươi đối đãi thế nào?`,o}};
 /* ---------- resolve ---------- */
 function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null)s.r2=r2;geLive(s);const E=C(s).e,Bd=D(s);
@@ -95376,7 +95376,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="610b50bf52bf";window.CTM_BUILD=BUILD;
+const BUILD="0f34e748c033";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
