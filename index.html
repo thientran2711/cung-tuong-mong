@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d1d8ae9c","t":"2026-11-24T14:57Z","c":"E85r: jbal2 blank line between the leave and net blocks (dev/build delta vs LIVE = reviewed 8d93c027 vs 178cac37, line for line); site rebu…","b":"6aea3cc92138","h":[{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"}]};
+window.CTM_BI={"s":"6206fe86+","t":"2026-11-24T15:41Z","c":"E85r: jbal2 blank line between the leave and net blocks (dev/build delta vs LIVE = reviewed 8d93c027 vs 178cac37, line for line); site rebu…","b":"590421a58b14","h":[{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -45883,7 +45883,7 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>{x.classList.remove("k3long");const a=x.querySelector(":scope>.kaart");if(a&&a.dataset.k3t){a.style.removeProperty("flex");a.style.removeProperty("width");a.style.removeProperty("height");delete a.dataset.k3t}});
-  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.dataset.k3t="1"/* #49c: the height is the card height (kitOptTier), never a fixed 84 */}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight")/* KIT §6.2c: the picture keeps its tier square (kitOptTier); the old 62 px shrink is gone */}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
@@ -48389,7 +48389,7 @@ let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the d
 function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
 function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
 function kitOptGroup(b){const r=b.closest("#modal .dlg")||b.parentElement||document;return [...r.querySelectorAll(KIT_OPT_FIT_SEL)].filter(x=>x.querySelector(":scope > .kaart")&&x.querySelector(":scope > .kabody"))}
-function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
+function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;if(s&&x.matches("button.ka.kopt")&&!x.closest(".pc"))return;/* KIT §6.2c: a dialog option card's picture size = its tier (kitOptTier, jopic): the legacy fitters never set a width of their own */h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
  else{x.style.removeProperty("--kah");x.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));x.classList.remove("kasq")}}
 /* PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule): the group is a person card's act rows or a dialog with a figure column (.kpsubj / kdper):
    every card is ONE size (the tallest text sets it) and its picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of that height, 54..112 px;
@@ -68889,9 +68889,9 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
-const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
- for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
+const KIT_OPT={tiers:{S:{pw:60,ph:60,h:132},M:{pw:66,ph:66,h:104},L:{pw:84,ph:84,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
+const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts,html body .kscn-box{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
+ for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"],html body .kscn-box .opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
 html body #modal#modal button.ka.kopt.kopt:not(.kart){min-height:var(--ko-h,104px)!important;position:relative;box-sizing:border-box;align-items:center}
 html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:var(--k-card,#fffaf0)!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
@@ -68920,7 +68920,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
  band(pick[1]);
- bs.forEach(b=>{const a=b.querySelector(":scope > .kaart");if(a&&b.clientHeight>0)a.style.setProperty("height",b.clientHeight+"px","important")});/* #49c: the picture is as tall as its card (top to bottom) */
+ /* KIT §6.2c (owner 24/11, MAIN GO): the picture is a SQUARE of the tier (pw = ph), never stretched to the card height (the #49c fill rule is gone) */
  g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
@@ -68950,8 +68950,8 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
 #kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
-(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,88px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
-${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:auto!important;min-height:var(--ko-ph,88px)!important;align-self:stretch!important;margin-block:-6px!important}/* OD 21/11 ~04:00Z (#49c): the picture FILLS the card height (top to bottom), never a small box with a gap */
+(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,66px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
+${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:var(--ko-ph,66px)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}/* KIT §6.2c: SQUARE picture, one size per tier */
 ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:24px}/* OD 21/11 ~04:00Z (#49a): the odds word sits ON THE TITLE ROW, never its own row */
 ${O} .kat>.kan{line-height:1.15;text-align:left}/* one alignment for every card title (owner via MAIN 88: «Đeo ngay» left vs «Để sau» centred) */
 ${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
@@ -68965,7 +68965,7 @@ ${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
 ${O} .kfill .krl{opacity:.6}
 ${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
- st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
+ st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+"\n"+mk("html body .kscn-box button.ka.kart.kopt.kopt")+`
 /* KIT §6.2d TWO OPTION LAYOUTS + ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z): layout "1" = one long button per row, "2" = two-column grid, on phone AND iPad; tier S / M / L = ONE card size each (KIT_OPT.tiers) */
 ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
@@ -95332,6 +95332,7 @@ html.kf-still #tokens .tok.fig img.kidl,.kf-off #tokens .tok.fig img.kidl{animat
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92",title:"kitFocus · gặp riêng một người trên sân khấu (khung focus + quạt nút trái/phải + bảng tên) · kitIdle · kitMoodSay",
  html:()=>`<div class="kitpg-row"><p>Mở bằng <code>kitFocus.open({p,fig,from,plate,groups,onAct,onClose})</code> trên sân khấu Dư đồ; nút chỉ có một cỡ mỗi chế độ (cao 64 Fold / 72 iPad), tab nhóm đặt trên đầu, «!» mở chi tiết. Không có mẫu tĩnh: xem <code>dev/test/kit-focus.js</code>.</p></div>`})}catch(e){}
 }catch(e){console.error("jfocus",e)}})();
+const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture size (px); narrow = html.kpnarrow */
 /* ================= jkitsel: KIT §93 — scene layer «layout A» + name tag for a half-known person + sắc phong news row (KIT KEEPER #13, review/kit-selscene) =================
    Kit requests of SELSCENE (dev/kit/KIT_REQUESTS.md «23/11 SELSCENE» 1–4) and the event layout A the owner chose (OD 23/11 ~20:20Z/~20:22Z/~20:25Z/~20:27Z/~20:30Z,
    mock review/mock-stage m13 v3.1). PURE DISPLAY: no game logic, no numbers of its own; every knob in KIT_SCN.
@@ -95363,12 +95364,17 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-col>:not(.opts){flex:0 0 auto}
 .kscn-col>.opts{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
 .kscn-col>.opts>*{flex-shrink:0}
+.kscn-col>.opts{align-content:start!important;grid-auto-rows:max-content!important}/* KIT §6.2c: a card's height = its content / tier, never stretched to fill the box */
 .kscn-box.kscn-tl:before,.kscn-box.kscn-tl:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
 .kpl .kplt .kscn-rk{margin-left:6px}
 body.kscn-on .kemo-big{visibility:hidden!important}
 button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
+/* KIT §6.2c SQUARE OPTION (owner OD:L2076 + L1867, 24/11 SELSCENE-2): a frame with a PERSON on the left → its option buttons on the right take the SQUARE picture (ONE fixed size KIT_SQOPT.pic), height = content, never a tall empty card */
+button.ka.kbare.kbare{--kasq:${KIT_SQOPT.pic}px;--kaw:var(--kasq)!important;--kah:var(--kasq)!important;min-height:0!important;height:auto!important;padding:6px 10px 6px 6px!important;align-items:center!important}
+button.ka.kbare.kbare>.kaart{flex:0 0 var(--kasq)!important;width:var(--kasq)!important;height:var(--kasq)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}
+html.kpnarrow button.ka.kbare.kbare{--kasq:${KIT_SQOPT.narrow}px}
 .kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
@@ -98110,7 +98116,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6aea3cc92138";window.CTM_BUILD=BUILD;
+const BUILD="590421a58b14";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
