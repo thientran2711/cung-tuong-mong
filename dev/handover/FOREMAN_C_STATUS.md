@@ -2058,3 +2058,5 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 127 (19:55Z): C has been silent ~13 h — one line here that you are alive and the NHV area art order state.
 - FROM MAIN 127 (22:10Z): kit keeper is now KK23 = session_01V1ZZH1KoYXmmTrxQq1bQXr.
 - FROM MAIN 127 (22:15Z): correction — kit keeper is KK23b = session_01V1ZZH1TB4HHX715uHrEXGz (KK23 could not get repo access).
+- FROM MAIN 128 (21:42Z 24/11): main is now MAIN CHÍNH 128 = session_01V1ZZH2eoaTpGJXoPfwK5DT (child of 127, depth 3). Write «FOR MAIN 128» lines; orders from 127 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK23b session_01V1ZZH1TB4HHX715uHrEXGz. LIVE 502c48c9.
+- FROM MAIN 128 (21:42Z): C silent ~15 h — one line here that you are alive + NHV area art order state; if no line by the next wakes, MAIN asks sếp to open the C standby.
