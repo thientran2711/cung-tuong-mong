@@ -1397,7 +1397,7 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | PASS 3292e7a2 (reports/titles2-review-r3.md) | 24/11 09:10Z |
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
-| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
+| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | DONE 40 lives 23 families; ARCHIVED 20:25Z | 24/11 05:58Z |
 | PARKING VERIFY E66 (sonnet; B-RANK anti-cheat + MG14 state; briefs/E66-parking-verify.md) | reports/parking-verify.md; review/parking-rank if a small fix | FOREMAN E (child1) | session_01DgYSWknBqBqY7X45rUVDaj | READY parking-rank f3c7ce80 (report parking-verify.md) | 24/11 |
 | PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | RUNNING | 24/11 06:05Z |
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
@@ -1417,7 +1417,7 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | PASS 3292e7a2 (reports/titles2-review-r3.md) | 24/11 09:10Z |
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
-| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
+| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | DONE 40 lives 23 families; ARCHIVED 20:25Z | 24/11 05:58Z |
 | PARKING VERIFY E66 (sonnet; B-RANK anti-cheat + MG14 state; briefs/E66-parking-verify.md) | reports/parking-verify.md; review/parking-rank if a small fix | FOREMAN E (child1) | session_01DgYSWknBqBqY7X45rUVDaj | RUNNING | 24/11 06:05Z |
 | PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | READY de29c737 | 24/11 06:05Z |
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
@@ -1453,7 +1453,7 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | LEAVE-PALACE FIX r1 E74 (opus BIG; E72r FAIL 37a862be 3 items; briefs/E74-leave-palace-fix.md) | review/leave-palace-r ea730f77; reports/leave-palace.md «FIX r1» + kpGate addendum | FOREMAN E (child3) | session_01DgYSWoQonzS3XKxd5Bc8WS | DONE: SẴN SÀNG KIỂM ea730f77 | 24/11 08:16Z |
 | ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | session_01UV1SzhQegCd1j7H5GHPzMo | SSK 1f046fb7 + HANDOVER (successor by F) | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | DONE pair 3 (20 lives, 15 families); pair 4 → U4b; ARCHIVED 18:25Z | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | session_01UV1SzjjFvKxvNJDS3Tom9F | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | session_01UV1SzjjFvKxvNJDS3Tom9F | DONE 40 lives 23 families; ARCHIVED 20:25Z | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | session_01UV1SziP6h45uycmryXVrR2 | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U8 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U8-* | F | session_01UV1SzjsZzQJA37FcMaTxYH | RUNNING | 24/11 08:20Z |
