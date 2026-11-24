@@ -238,9 +238,8 @@ function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao
 function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
  let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
  if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
- if(!r&&title&&!/^Trong cung vừa qua$/.test(title))r=title;
- if(!r&&KA_WHYD[key])r=KA_WHYD[key][sg];
- return kaWhyClip(r||KA_WHYM)}
+ /* owner 24/11 ~21:57Z + BIG rv F1: a stat row says only «<stat> ±N»; a cause is printed ONLY when it is a real clause of the log that is NOT the card title (never the title, never a generic filler) */
+ void sg;if(!r)return"";const cl=kaWhyClip(r),tn=kaPlain(String(title||"")).toLowerCase(),cn=cl.toLowerCase();if(!cl||!tn||tn.includes(cn)||cn.includes(tn.split(":")[0].trim()))return"";return cl}
 /* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
 function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
  const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
@@ -257,11 +256,11 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da)}}}
- {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),[U.g.length===1&&U.d.get(U.g[0])?`thiện cảm ${kaN(U.d.get(U.g[0]))}`:"thiện cảm thêm"],[],""]);if(U.b.length)per.push([kitNameList(U.b),[],[U.b.length===1&&U.d.get(U.b[0])?`thiện cảm ${kaN(U.d.get(U.b[0]))}`:"thiện cảm bớt"],""])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m))}}}
+ {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaN(U.d.get(v)||1)}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaN(U.d.get(v)||-1)}`],""])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
-  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
+  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;

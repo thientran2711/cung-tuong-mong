@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d445cc9e+","t":"2026-11-24T22:54Z","c":"viecnho-fix: Kèm line no longer repeats the title as its cause","b":"f3cd6e48cfaa","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"b9865381+","t":"2026-11-24T23:16Z","c":"viecnho-fix: Kèm = one line per person, stamp never on text, lone Đang làm job has no picker strip","b":"b61f94a659b8","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29119,9 +29119,8 @@ function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao
 function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
  let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
  if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
- if(!r&&title&&!/^Trong cung vừa qua$/.test(title))r=title;
- if(!r&&KA_WHYD[key])r=KA_WHYD[key][sg];
- return kaWhyClip(r||KA_WHYM)}
+ /* owner 24/11 ~21:57Z + BIG rv F1: a stat row says only «<stat> ±N»; a cause is printed ONLY when it is a real clause of the log that is NOT the card title (never the title, never a generic filler) */
+ void sg;if(!r)return"";const cl=kaWhyClip(r),tn=kaPlain(String(title||"")).toLowerCase(),cn=cl.toLowerCase();if(!cl||!tn||tn.includes(cn)||cn.includes(tn.split(":")[0].trim()))return"";return cl}
 /* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
 function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
  const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
@@ -29138,11 +29137,11 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da)}}}
- {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),[U.g.length===1&&U.d.get(U.g[0])?`thiện cảm ${kaN(U.d.get(U.g[0]))}`:"thiện cảm thêm"],[],""]);if(U.b.length)per.push([kitNameList(U.b),[],[U.b.length===1&&U.d.get(U.b[0])?`thiện cảm ${kaN(U.d.get(U.b[0]))}`:"thiện cảm bớt"],""])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m))}}}
+ {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaN(U.d.get(v)||1)}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaN(U.d.get(v)||-1)}`],""])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
-  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
+  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;
@@ -97927,7 +97926,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f3cd6e48cfaa";window.CTM_BUILD=BUILD;
+const BUILD="b61f94a659b8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

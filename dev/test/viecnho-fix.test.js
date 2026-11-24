@@ -43,6 +43,13 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
  /* (3) Vì sao wording: every source of whyText, known / unknown name + nết */
  const p=await b.newPage({viewport:{width:755,height:1000}});await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;Q.length=0;try{$("modal").hidden=true}catch(e){}});
+ /* ALL rows of a real result popup (BẠI + THÀNH, self stats + maid + persons + strangers): «<stat> ±N», no a→b, no (±N), no row repeating the title (BIG rv F1) */
+ const rows=await p.evaluate(async()=>{window.__bot=0;const out=[];const vs=rivals.filter(r=>!r.queen);const u=vs[1];
+  for(const [title,ok] of [["Dâng canh khuya cho Thái hậu",false],["Chép kinh cầu phúc",true]]){Q.length=0;const bf=rsnap();
+   if(ok){S.sung=Math.min(100,S.sung+4);S.danh=(S.danh||0)+2;S.bac+=30;if(S.maid)S.maid.loyal=(S.maid.loyal||0)+3;window.k61Named=x=>x!==u;affAdd(u,S,6);affAdd(vs[0],S,5)}else{S.sung=Math.max(0,S.sung-5);S.bac-=20;oanAdd(u,S,9)}
+   resultShow(title,bf,ok);const t=document.getElementById('rtoast');out.push({title,ok,items:t?[...t.querySelectorAll('.kitem')].map(e=>e.textContent.replace(/\s+/g,' ').trim()):[]})}return out});
+ for(const r of rows){const bad=r.items.filter(t=>/\d+\s*→\s*\d+|\([+−-]\d+\)/.test(t)||t.toLowerCase().includes(r.title.toLowerCase().split(':')[0])||/chưa quen/.test(t));
+  ok(r.items.length>0&&bad.length===0,`result popup «${r.title}» (${r.ok?'THÀNH':'BẠI'}): ${r.items.length} rows all short, no a→b / (±N) / title copy [${r.items.join(' | ').slice(0,260)}]${bad.length?' BAD: '+bad.join(' | '):''}`)}
  /* the stamp sits on the card edge, never on words */
  const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,1500));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};const r=s.getBoundingClientRect();
   const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit}});
