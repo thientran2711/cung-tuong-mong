@@ -22219,6 +22219,7 @@
      "week": 76
     }
    ],
+   "lives": [],
    "lag": {
     "years": [
      {
@@ -22803,6 +22804,8 @@
       "t0": 1795508755264,
       "weeks": 252,
       "buoi": 992,
+      "weeks": 112,
+      "buoi": 412,
       "turns": [
        {
         "k0": "0:1",
@@ -27649,6 +27652,12 @@
        "t": 1795515751293,
        "turns": [],
        "year": 8
+       }
+      ],
+      "yr": {
+       "t": 1795511339858,
+       "turns": [],
+       "year": 4
       },
       "whereDiff": 0,
       "posDiff": 0,
@@ -28962,6 +28971,7 @@
       "posDiff": 0,
       "statLag": 0,
       "cmp": 311
+      "cmp": 463
      }
     ],
     "rejoin": [
@@ -28980,6 +28990,12 @@
    "rooms": 2,
    "t": {
     "total": 9079784
+     }
+    ]
+   },
+   "rooms": 1,
+   "t": {
+    "total": 2935911
    },
    "partial": true,
    "bugs": [
@@ -28988,6 +29004,7 @@
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
      "n": 81,
+     "n": 27,
      "at": "coop-p09s-S1",
      "saveFile": "saves/coop-20261124-0825-p9-10-s-ta5rfc.json"
     },
@@ -28996,6 +29013,7 @@
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.people.0.kind (text differs at char 0): «…srv» → «…elder»",
      "n": 82,
+     "n": 27,
      "at": "coop-p09s-S1"
     },
     {
@@ -29003,6 +29021,7 @@
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 25569 > 10000 · game year 1 · room KTQR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1003.5,\"upKB\":1519,\"dnKB\":933,\"posFlip\":null,\"resend\":21,\"resendBy\":{\"act\":18,\"pos\":1,\"where\":2},\"longTasksPerMin\":219.4,\"longTaskMax\":1352,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":991,\"upKB\":1055,\"dnKB\":1366,\"posFlip\":null,\"resend\":15,\"resendBy\":{\"act\":15},\"longTasksPerMin\":188.7,\"longTaskMax\":1037,\"errs\":0}}",
      "n": 11,
+     "n": 4,
      "at": "coop-p09s-S1"
     },
     {
@@ -29010,6 +29029,7 @@
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 205.5 > 100 · game year 1 · room KTQR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1003.5,\"upKB\":1519,\"dnKB\":933,\"posFlip\":null,\"resend\":21,\"resendBy\":{\"act\":18,\"pos\":1,\"where\":2},\"longTasksPerMin\":219.4,\"longTaskMax\":1352,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":991,\"upKB\":1055,\"dnKB\":1366,\"posFlip\":null,\"resend\":15,\"resendBy\":{\"act\":15},\"longTasksPerMin\":188.7,\"longTaskMax\":1037,\"errs\":0}}",
      "n": 11,
+     "n": 4,
      "at": "coop-p09s-S1"
     },
     {
@@ -29024,6 +29044,7 @@
      "msg": "world differs between the two screens: guest sees the friend's suc wrong (week end)",
      "detail": "week 200 · 100 vs 96 · origins dtq/cnv",
      "n": 1,
+     "n": 3,
      "at": "coop-p09s-S1"
     }
    ]

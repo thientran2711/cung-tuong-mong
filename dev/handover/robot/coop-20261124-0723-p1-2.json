@@ -21623,6 +21623,7 @@
      "week": 15
     }
    ],
+   "lives": [],
    "lag": {
     "years": [
      {
@@ -22157,6 +22158,8 @@
       "t0": 1795505024864,
       "weeks": 105,
       "buoi": 416,
+      "weeks": 18,
+      "buoi": 25,
       "turns": [
        {
         "k0": "0:1",
@@ -25134,6 +25137,10 @@
       ],
       "yr": {
        "t": 1795512829253,
+       }
+      ],
+      "yr": {
+       "t": 1795505617366,
        "turns": [],
        "year": 1
       },
@@ -25141,6 +25148,9 @@
       "posDiff": 13,
       "statLag": 1,
       "cmp": 59
+      "posDiff": 2,
+      "statLag": 0,
+      "cmp": 68
      }
     ],
     "rejoin": [
@@ -25169,6 +25179,12 @@
    "rooms": 5,
    "t": {
     "total": 8467385
+     }
+    ]
+   },
+   "rooms": 1,
+   "t": {
+    "total": 974112
    },
    "partial": true,
    "bugs": [
@@ -25177,6 +25193,7 @@
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 1.3 guest sees host at r2, host is at H:b",
      "n": 19,
+     "n": 2,
      "at": "coop-p01-S1"
     },
     {
@@ -25184,6 +25201,7 @@
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
      "n": 40,
+     "n": 4,
      "at": "coop-p01-S1",
      "saveFile": "saves/coop-20261124-0723-p1-2-ta5rfc.json"
     },
@@ -25192,6 +25210,7 @@
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.__chg: 1 → undefined",
      "n": 40,
+     "n": 4,
      "at": "coop-p01-S1"
     },
     {
@@ -25199,6 +25218,7 @@
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 104134 > 10000 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
      "n": 10,
+     "n": 1,
      "at": "coop-p01-S1"
     },
     {
@@ -25206,6 +25226,7 @@
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 172.3 > 100 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
      "n": 10,
+     "n": 1,
      "at": "coop-p01-S1"
     },
     {
@@ -25213,6 +25234,7 @@
      "msg": "co-op LAG budget miss: coopResendPerMin",
      "detail": "coopResendPerMin 21.3 > 12 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
      "n": 6,
+     "n": 1,
      "at": "coop-p01-S1"
     },
     {
@@ -25220,6 +25242,7 @@
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "11 of 22 buổi in game year 1",
      "n": 7,
+     "n": 1,
      "at": "coop-p01-S1"
     },
     {

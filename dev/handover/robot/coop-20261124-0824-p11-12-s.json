@@ -6310,6 +6310,8 @@
       "t0": 1795510129880,
       "weeks": 68,
       "buoi": 279,
+      "weeks": 40,
+      "buoi": 126,
       "turns": [
        {
         "k0": "0:1",
@@ -9913,6 +9915,17 @@
       "posDiff": 6,
       "statLag": 1,
       "cmp": 285
+       }
+      ],
+      "yr": {
+       "t": 1795511273197,
+       "turns": [],
+       "year": 2
+      },
+      "whereDiff": 0,
+      "posDiff": 9,
+      "statLag": 0,
+      "cmp": 157
      }
     ],
     "rejoin": [
@@ -9946,6 +9959,12 @@
    "rooms": 6,
    "t": {
     "total": 10243056
+     }
+    ]
+   },
+   "rooms": 2,
+   "t": {
+    "total": 2882861
    },
    "partial": true,
    "bugs": [
@@ -9954,6 +9973,7 @@
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
      "n": 55,
+     "n": 18,
      "at": "coop-p11s-S1",
      "saveFile": "saves/coop-20261124-0824-p11-12-s-ta5rfc.json"
     },
@@ -9962,6 +9982,7 @@
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.__chg: 1 → undefined",
      "n": 55,
+     "n": 18,
      "at": "coop-p11s-S1"
     },
     {
@@ -9969,6 +9990,7 @@
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 27011 > 10000 · game year 1 · room 4AQW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":953.6,\"upKB\":1708,\"dnKB\":707,\"posFlip\":null,\"resend\":23,\"resendBy\":{\"act\":21,\"where\":2},\"longTasksPerMin\":255.1,\"longTaskMax\":1110,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":900.2,\"upKB\":1124,\"dnKB\":1156,\"posFlip\":null,\"resend\":39,\"resendBy\":{\"act\":36,\"pos\":3},\"longTasksPerMin\":328.5,\"longTaskMax\":2230,\"errs\":0}}",
      "n": 14,
+     "n": 5,
      "at": "coop-p11s-S1"
     },
     {
@@ -9976,6 +9998,7 @@
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 172.3 > 100 · game year 1 · room 4AQW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":953.6,\"upKB\":1708,\"dnKB\":707,\"posFlip\":null,\"resend\":23,\"resendBy\":{\"act\":21,\"where\":2},\"longTasksPerMin\":255.1,\"longTaskMax\":1110,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":900.2,\"upKB\":1124,\"dnKB\":1156,\"posFlip\":null,\"resend\":39,\"resendBy\":{\"act\":36,\"pos\":3},\"longTasksPerMin\":328.5,\"longTaskMax\":2230,\"errs\":0}}",
      "n": 12,
+     "n": 5,
      "at": "coop-p11s-S1"
     },
     {
@@ -9983,6 +10006,7 @@
      "msg": "co-op LAG budget miss: coopResendPerMin",
      "detail": "coopResendPerMin 12.2 > 12 · game year 1 · room 4AQW · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":953.6,\"upKB\":1708,\"dnKB\":707,\"posFlip\":null,\"resend\":23,\"resendBy\":{\"act\":21,\"where\":2},\"longTasksPerMin\":255.1,\"longTaskMax\":1110,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":900.2,\"upKB\":1124,\"dnKB\":1156,\"posFlip\":null,\"resend\":39,\"resendBy\":{\"act\":36,\"pos\":3},\"longTasksPerMin\":328.5,\"longTaskMax\":2230,\"errs\":0}}",
      "n": 2,
+     "n": 1,
      "at": "coop-p11s-S1"
     },
     {
@@ -9990,6 +10014,7 @@
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "1 of 21 buổi in game year 1",
      "n": 13,
+     "n": 5,
      "at": "coop-p11s-S1"
     },
     {
@@ -9997,6 +10022,7 @@
      "msg": "stat out of range: bac",
      "detail": "bac=-19 · fold guest week 28",
      "n": 38,
+     "n": 14,
      "at": "coop-p11s-S1",
      "saveFile": "saves/coop-20261124-0824-p11-12-s-14hifwm.json"
     },
@@ -10005,6 +10031,7 @@
      "msg": "co-op room stuck: no room week step in 240 s",
      "detail": "host {\"buoi\":3,\"week\":39,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":38,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":39,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":38,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
      "n": 4,
+     "n": 1,
      "at": "coop-p11s-S1",
      "shots": [
       "shots/coop-p11s-S1-r1-host-stuck.png",
@@ -10039,6 +10066,7 @@
      "msg": "world differs between the two screens: consorts differ (id/name/rank/alive/out/kids)",
      "detail": "week 49 · host-only [] guest-only [1001:Độc Cô Mạn Ca:0:1:0:] · origins td/td",
      "n": 1,
+     "n": 9,
      "at": "coop-p11s-S1"
     }
    ]
