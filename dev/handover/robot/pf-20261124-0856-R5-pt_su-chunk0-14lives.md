@@ -1,3 +1,4 @@
+game sha 14ba876800413622b83814e8a8cdd848ac0ed241
 # ROBOT-10 interim pf · pt_su (R5) · 14 lives done (partial, run still going)
 
 ## Bugs (22 distinct)
