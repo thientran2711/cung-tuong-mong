@@ -3041,3 +3041,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:45Z) OWNER (123 chat ~15:40Z, OD row same time): Ngự Hoa Viên AREAS adopted as 2nd Dư đồ level; area PLAN first (RING-DESIGN-2), then C paints map + one scene per area (queued order in FOREMAN_C_STATUS; C silent → if still silent when the plan lands, route to C standby NX4Gc3Xc or ask sếp); 3 pickers mocked (she likes thẻ gỗ treo); animation REQUIRED, optimise until smooth.
 - (15:48Z) LC11 LANDED kit-sqopt d0ed42e4. LIVE = d0ed42e4. dialogue-vn in progress. law1 3d450d3d stale (on c6c3ca76) → B re-merge.
 - (15:50Z) kit-dialogue-vn 214c6b2c NOT landed (harness: picture-wait veil blocks taps) → order to B. LC11 moved on to kit-daytitle 3424b927.
+- (15:58Z) kit-daytitle 3424b927 NOT landed (same veil harness family) → B order extended. LC11 continues mgboardof → mgskin-wire → nochip → toilring.
