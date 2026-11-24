@@ -77,6 +77,9 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .kinv .kinvg>.kitem-slot>.kitb{border-radius:7px}
 .kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.kinv .kinvg>.kitem-slot[role=button]:focus-visible>.kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e));outline:none}
 .kinv .kinvg>.kitem-slot:focus{outline:none}
+/* KIT 94.1 (owner 24/11 ~04:25Z: no gold ring on the picker tab press): a press / tap on a kit item tab or slot shows NO gold ring, outline or sticky-hover glow (keyboard :focus-visible on the slot glow above stays); touch screens keep no :hover glow */
+.kinv [data-kinvtab],.kinv .kitem-slot{-webkit-tap-highlight-color:transparent}.kinv [data-kinvtab]:focus,.kinv [data-kinvtab]:active,.kinv [data-kinvtab]:focus-visible{outline:none!important;box-shadow:none!important}
+@media (hover:none){.kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.keq .kitem-slot[role=button]:hover>.kitb{filter:none}}
 .kpsubj.kpitem>.kitem{--isz:100%;width:100%}
 .dlg.kpanel .kinvacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:6px}
 `;document.head.appendChild(st)})();
