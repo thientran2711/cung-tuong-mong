@@ -1529,3 +1529,12 @@ kit-rewardplate r3 SMALL review | review/kit-rewardplate | session_01N1tNP5XkWFh
 | OFFLINE-FAST owner bug (offline-all slow start) | review/offline-fast; reports/offline-fast.md | MAIN 125 | session_01V1ZZH4kPEoVSax9ycpSYqp | RUNNING | 2026-11-24T17:57Z |
 figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep | session_01N1tNP3uvSYvemdLirWv32k | RUNNING | 2026-11-24T18:02Z (FOREMAN B)
 | ROBOT-COOP RUNNER U21 pair 20 SWAP=0 (split from U19, >12 h ETA) | dev/handover/robot/coop-U21-* | FOREMAN E (child6) | session_01DgYSWod3ynDXL9ci8U7XeX | RUNNING | 24/11 18:06Z |
+| FLIGHT-DAYQ new-day order (owner bug) | review/flight-dayq | MAIN 125 | session_01V1ZZH3gRpyiEtyMHxaDzFg | RUNNING | 2026-11-24T18:15Z |
+| FLIGHT-SOUND tap sound lag (owner bug) | review/flight-sound | MAIN 125 | session_01V1ZZH34SdfenLQsuEhLQgx | RUNNING | 2026-11-24T18:15Z |
+| FLIGHT-TAINGHE subject tiles (owner bug) | review/flight-tainghe | MAIN 125 | session_01V1ZZH2nvEPBnQaH95MZt8N | RUNNING | 2026-11-24T18:15Z |
+| FLIGHT-UI news/book/card (owner bug) | review/flight-ui | MAIN 125 | session_01V1ZZH2AqKTD4pMN7xGBN3C | RUNNING | 2026-11-24T18:15Z |
+| FLIGHT-MUCLUC chapter list (owner bug) | review/flight-mucluc | MAIN 125 | session_01V1ZZH1Rzd4b346U9eankkK | RUNNING | 2026-11-24T18:15Z |
+| KK21 kit keeper | review/kit-* | MAIN 125 | session_01V1ZZH4mC78eGamqCp84zzN | RUNNING | 2026-11-24T18:15Z |
+| RING-DESIGN-4 | review/ring-design-4 | MAIN 125 | session_01V1ZZH3w4Qe8y5BUHHuit3G | RUNNING | 2026-11-24T18:15Z |
+| MOTION-DESIGN-3 | review/motion-design-3 | MAIN 125 | session_01V1ZZH4AGe6TobJ6LfAciTy | RUNNING | 2026-11-24T18:15Z |
+| LC12 lander | main FF | MAIN 125 | session_01V1ZZH2p2x7oNCrRuTq7RjF | RUNNING | 2026-11-24T18:15Z |
