@@ -19,7 +19,10 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
    const o=await g.evaluate(id=>{Q.length=0;const M=$("modal");M.hidden=true;const fam=id.split(":")[0],sid=id.slice(fam.length+1);const sp=dlgsGet(id);
     const keep=(names,fn)=>{const sv=names.map(n=>window[n]);names.forEach(n=>{window[n]=()=>true});try{return fn()}finally{names.forEach((n,i)=>{window[n]=sv[i]})}};
     if(fam==="j72"){const T=T72I["c:"+sid]||T72I[sid];if(!T)return{err:"no template"};const sv={need:T.need,rf:T.rf,bf:T.bf};T.need=null;T.rf=null;T.bf=null;let x=null;
-     try{x=keep(["q72PlOk"],()=>{let y=null;for(let i=0;i<20&&!y;i++)y=q72Make(T);return y})}finally{Object.assign(T,sv)}if(!x)return{err:"cannot cast"};q72Offer(x,"")}
+     /* people a fresh life lacks (as j72c-play's forced cast): a consort in lãnh cung, a man of that role */
+     for(const sp of [T.r,T.b].filter(Boolean)){if(sp==='fallen'&&!rivals.some(v=>v.alive&&v.out)){const v=rivals.find(v=>v.alive&&!v.queen&&!v.out);if(v)v.out=true}
+      if(sp.indexOf('man:')===0){const rw=sp.slice(4);S.men=S.men||[];const nw=T.r===sp&&T.b===sp?2:1;while(S.men[0]&&S.men.filter(m=>m.alive!==false&&m.rw===rw).length<nw)S.men.push(Object.assign({},S.men[0],{id:'tm'+S.men.length,rw,alive:true}))}}
+     try{x=keep(["q72PlOk","j72cFit","j72cNeed"],()=>{let y=null;for(let i=0;i<40&&!y;i++)y=q72Make(T);return y})}finally{Object.assign(T,sv)}if(!x)return{err:"cannot cast"};q72Offer(x,"")}
     else if(fam==="j68"){const s=E68I["c:"+sid];if(!s)return{err:"no EV6"};/* the j95 actor gate may drop a card whose cast has no motive: cast again (≤8) */
      for(let t=0;t<8;t++){Q.length=0;const d=keep(["j68cFit","j68cNeed"],()=>{let y=null;for(let i=0;i<20&&!y;i++)y=e68Make(s);return y});if(!d)return{err:"cannot cast"};e68Push(d,s,true);showModal();if(Q[0]&&Q[0].dlg)break}}
     else if(fam==="j7"){j7cSeeds();const sd=J7I[sid];if(!sd)return{err:"no seed"};const R=liveRivals(true).filter(v=>v.alive&&!v.out);const c={};let i=0;for(const r in sd.roles){const kd=sd.roles[r].kind||"rv";c[r]=kd==="rv"?{k:"rv",id:R[i++].id}:{k:kd}}
