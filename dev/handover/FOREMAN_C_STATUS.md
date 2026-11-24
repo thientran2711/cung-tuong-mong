@@ -2025,3 +2025,4 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
   (KP23: follow MAIN 116 ORDER 06:11Z ONLY — ALL 107 redraws back to the old faceless style; 05:46Z keep-picks are VOID.)
   Look at every image; report here for MAIN 117; MAIN checks before sếp sees.
 - ORDER CORRECTION FROM MAIN 116 (24/11 06:11Z; OD row 24/11 ~06:10Z verbatim): sếp: «vẽ lại toàn bộ» — REDRAW ALL 107 KP23 redraws (not only bi-giang/ke-toi/them-loi-buoc-toi/vuong-gia; the 4 «keep new» picks are VOID) back to the OLD style: no visible faces (hidden / from behind / soft), CLOSE shots, correct hands/anatomy, only the Emperor in yellow. Pilot 4 first, look 3×, then the batch; MAIN 117 checks before sếp.
+- HOLD FROM MAIN 116 (24/11 06:50Z): sếp asked «vẽ lại 107 hình là sao, dữ vậy?» — PAUSE the KP23 full redraw (06:11Z order) until MAIN 117 relays her answer; no credits spent on it.
