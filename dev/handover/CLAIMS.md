@@ -1464,3 +1464,4 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | ROBOT-COOP RUNNER U13 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U13-* | F | session_01UV1SzmGJVups8vRB64UN9j | RUNNING | 24/11 08:20Z |
 PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams + Emperor-death mourning + Phân cung nit (opus BIG; briefs/D-promo-build-2.md) | review/promo-build-2 | (opening) | RUNNING | 24/11 08:40Z (Foreman D depth 1)
 | MOMENT FIX r1 E75 (opus BIG; E73r FAIL 5a504f92 5 items; briefs/E75-moment-fix.md) | review/moment-r | FOREMAN E (child2) | session_01DgYSWqADFR2kTet7NyTmeC | RUNNING | 24/11 08:37Z |
+PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams + Emperor-death mourning + Phân cung nit (opus BIG; briefs/D-promo-build-2.md) | review/promo-build-2 | session_01D3E3NYnT9a58st5Vj9RX4B | RUNNING | 24/11 08:40Z (Foreman D depth 1)
