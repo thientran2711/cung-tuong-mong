@@ -22,3 +22,13 @@ Fix list for KK22: (a) make the iPad pop-up really XL + 2 columns in the real `#
 KIT FAIL kit-tntile → KK22
 
 ~80% done / ~75% playable
+
+## REVIEW r2 (small kit reviewer TNTILE, 11/24/2026) — KIT FAIL (1 row)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main 0 | review/* 1 | archive 0 (brief hits only).
+Head: review/kit-tntile aaaa6a45a0b3db194156e10a6820517d37d24109 (already contains newest origin/main 502c48c9: `git merge origin/main` = Already up to date).
+Source fix itself WORKS (checked on a fresh build of the same head):
+- `bash dev/site/build_site.sh` → `M index.html`, `M sw.js` (committed files differ from a fresh build).
+- `node dev/test/kit-skillacts.js file:///home/user/wt/tn/index.html <out> 755x1000,1180x820` (fresh build) → `755x1000 ALL PASS` (pop w=470, 1 column) and `1180x820 ALL PASS` (pop w=860, cols=2, equal heights per ROW, e.g. [[147,147],[119,119]]).
+Row 1 (FAIL, blocking): index.html + sw.js on the branch are NOT rebuilt. Commit aaaa6a45 touches only dev/build/j79.js, jksize.js, dev/kit/KIT.md, dev/test/kit-skillacts.js; `git show origin/review/kit-tntile:index.html | grep -c 'dlg.querySelector(".ktn-pop"))return true'` = 0 and `grep -c 'no list-wide tallest height'` = 0. LIVE would serve the r1 behaviour (470 px / 1 column) — the same fault that failed flight-mucluc r2.
+Fix for KK23b: `bash dev/site/build_site.sh`, commit index.html + sw.js, re-push; then the test above must still pass against the COMMITTED index.html (run it on the committed file, not on a local build). Not re-run by me after that (no new sha yet); Quickcheck + non-vacuity run vs r1 head not done because the branch fails on row 1 (speed: owner flies 25/11).
+Rows 5–6 (KK follow-ups): not blocking, not checked.
