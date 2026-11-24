@@ -321,7 +321,7 @@ function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=
  $("toilrdy").addEventListener("click",()=>{box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:TOIL_HOW});
- if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
+ if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}try{const por=toilPor(),im=new Image();im.decoding="async";im.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;if(im.decode)im.decode().catch(()=>0)}catch(e){}/* warm her face (decode) while she reads the rules / picks the dress */
  TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilRules()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["shoe","Giày","giayhoa"]];
@@ -397,7 +397,7 @@ function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(
  return{bg:{x:ox,y:oy,s:S0},mx,my,rx,ry,img:{x:mx-fcx*s,y:my-fcy*s,w:IW*s,h:IH*s},T,fws:fw*s,ax:ax!=null}}
 function toilQuad(a,c,b,n){const L=[];for(let i=0;i<=n;i++){const t=i/n;L.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return L}
 function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
- const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
+ const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;/* owner 24/11 ~22:02Z: her face is IN the mirror the moment the board shows: the board stays veiled until the face is decoded (cap BAL.mgVeilMs) */{box.style.visibility="hidden";let o=0;const sh=()=>{if(o)return;o=1;box.style.visibility=""};Promise.race([face.decode?face.decode().catch(()=>0):new Promise(r=>{face.onload=face.onerror=r}),new Promise(r=>setTimeout(r,BAL.mgVeilMs||1500))]).then(sh,sh)}let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
  /* diemtrang-score (owner 16/11): NO guide lines. The hidden ideal is THIS face's own brows / cheekbones / mouth (img/mk-fit face points;
     a picture without points uses the measured average, BAL.toil.fb) — anchored per portrait, so the brow target is the painted brow itself */
  const file=String(por.src||"").split("?")[0].split("/").pop();let I,brows,cheeks,lips,lr,puffR,cpts;
